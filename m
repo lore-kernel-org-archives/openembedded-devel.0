@@ -1,198 +1,109 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AED11C27C53
-	for <webhook@archiver.kernel.org>; Fri,  7 Jun 2024 04:45:47 +0000 (UTC)
-Received: from mail-oa1-f41.google.com (mail-oa1-f41.google.com [209.85.160.41])
- by mx.groups.io with SMTP id smtpd.web10.34227.1717735537594869787
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD00EC41513
+	for <webhook@archiver.kernel.org>; Fri,  7 Jun 2024 05:06:37 +0000 (UTC)
+Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
+ by mx.groups.io with SMTP id smtpd.web11.34676.1717736795942003390
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 Jun 2024 21:45:37 -0700
+ Thu, 06 Jun 2024 22:06:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=bVthKW2q;
- spf=pass (domain: gmail.com, ip: 209.85.160.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f41.google.com with SMTP id 586e51a60fabf-2544465c9e2so705965fac.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 06 Jun 2024 21:45:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1717735537; x=1718340337; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=rE5moYI3xP5PeqxGbOsbhGZ5Oola8uGdO5VpQv100is=;
-        b=bVthKW2qfGdKKDZfQGbQlXxnNp8ovGbg0ygDaRxpGVgzNsV2OXMZEZlzscpll3zjcn
-         jXriGDFxkGmGDxbwlf56RMiAwcWRsxmuMWK6zJbrxi4j7tkqZNaMUWBFW3/CyqzkXn++
-         6bV1dOMzog/TTsw32r+YIMggiao15nIViPjrPYzgWXxeXMqMUWUTTZN1uPlCNcyXMwVn
-         uw52qwIDQSNCxSZQmKxDvY9CXlfdVDGenI8KN+XbHGhX4/LVtJt+xlcon1uDaL6pOCxH
-         k9i/8emNvHYmaZGajzz9HR7ZolwnhDghcpY524hKiB3ahXATyQKc2W39+KSVG564EO9Z
-         lVLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717735537; x=1718340337;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=rE5moYI3xP5PeqxGbOsbhGZ5Oola8uGdO5VpQv100is=;
-        b=GN9XqhtMyoMiVhOvVot54z5rqAu+pWzPYNvlIeDGDyaAsc2/fy4+794QLj7VSiZtkF
-         ywpTkU1Jl7O0zaEDW+N8LD4mWIAXyTIj+ZkSQzMPGjX+3imqNlgKG5aLJERCaFzguMzW
-         vFk8FA/g072+vuOEY8F3ox2NlaLYNL69/STTtFAaBN4zk4FXF++oRYp9pEW/JXI6xOU1
-         ojpvUusayDtQE5DjIM2wTRvn4d4FppuhaNt4ly6LYQvXTx2JMdupBI/21iT3b2w47IMI
-         NsmiVULbSF1a3aRZWos6uMf2TJpucvDTWOZ8D9HRhhSTSoBqtR4rWRsfM7OV+NMNKe0R
-         Sm4A==
-X-Gm-Message-State: AOJu0Yww87py67wUE+4ihshffRfkkM8Z3dqf7pNsIzCq8+QE2kSNFRZC
-	2NogAYkO74N0GSsPUZfRysXCiiRNT9KOS+OHxJQGczVpSw+fl4A4KCI6nRVpwtpjPcEbCX26gPy
-	oiVzZRY1TV/LoU2gO/rL5FmjAOuY=
-X-Google-Smtp-Source: AGHT+IGZgagvHWtyiYx0aQ0c3c3P4UzcHXQt0spwxS0HXgef8o32mr0+jqblqIFb8+6Fxx0LarOOu8hH83i1WHTN3Io=
-X-Received: by 2002:a05:6870:92c9:b0:254:7471:56b7 with SMTP id
- 586e51a60fabf-2547471bc13mr246448fac.11.1717735536613; Thu, 06 Jun 2024
- 21:45:36 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240529090223.1816443-1-dmitry.baryshkov@linaro.org>
- <CAMKF1sp=+ALCxj1fdNHQgj8eFrexnY8R=EmLp3GVGyvk0+gNTA@mail.gmail.com> <CALT56yMQkRzJGddGJS3P2wH-y87Uce-UNnEd8dADoxUX2bhyTA@mail.gmail.com>
-In-Reply-To: <CALT56yMQkRzJGddGJS3P2wH-y87Uce-UNnEd8dADoxUX2bhyTA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 6 Jun 2024 21:45:10 -0700
-Message-ID: <CAMKF1sq__=aPzdi4S1QD1dSKsOqE51dnoF_+x6NK8Ct7sWDZZA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] cabextract: add utility to extract Microsft
- cabinet files
-To: Dmitry Baryshkov <dbaryshkov@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, 
-	Armin Kuster <akuster808@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=cv+EOA6i;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1717736796; x=1749272796;
+  h=from:to:cc:subject:date:message-id;
+  bh=6n4vp+pYDCIc5k37fsXrt6AVGQFieiugT7PFss8yrV0=;
+  b=cv+EOA6iAknEzzSP7C+9iEeJ9G9nvXxgntOlas5R+7hI4fmMz5IObmZT
+   haapixjEG2CTLHAhXuRKDUWYImQq6mI0TZjRBvSq86/XzYfLMQRynayZT
+   X2QmCIEMAamTEgr+zfoDopDRoPpFkkQ8UGhyXCowGt1RNpktMmK8coQVk
+   GbdvHb/UbLCOgKchp0tyYoF6uM4EdMhSTgH+D9CTCHxc/1QUnMsE55Dwh
+   dRFNcPJrqDDUQcEbVRsKs1CTULVXes7r6Crpt8DL/8ZQzm8rCR8pOLYFt
+   6ShzPtrCxaXI1jazmetT8MjccZbXZTGub6jBaQfeyg8fECxH4lvhnTgV5
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11095"; a="149660951"
+X-IronPort-AV: E=Sophos;i="6.08,220,1712588400"; 
+   d="scan'208";a="149660951"
+Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
+  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jun 2024 14:06:33 +0900
+Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
+	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 19FACD6EEF
+	for <openembedded-devel@lists.openembedded.org>; Fri,  7 Jun 2024 14:06:31 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 53BD8D3F0C
+	for <openembedded-devel@lists.openembedded.org>; Fri,  7 Jun 2024 14:06:30 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id CEB8F347AA
+	for <openembedded-devel@lists.openembedded.org>; Fri,  7 Jun 2024 14:06:29 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 581001A000A;
+	Fri,  7 Jun 2024 13:06:29 +0800 (CST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH v2] libimobiledevice-glue: upgrade 1.0.0 -> 1.2.0
+Date: Fri,  7 Jun 2024 13:06:19 +0800
+Message-Id: <1717736780-20965-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28436.005
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28436.005
+X-TMASE-Result: 10--2.329300-10.000000
+X-TMASE-MatchedRID: QR1SVCCbVGSjz0nOeth/yUIIxwDaU5mrJ4cwIYL6Kufj+yfWw+4UlBwz
+	72zDzvkONscteyNb+fi61NiYskObR/XNEkgZOg/OfOaYwP8dcX4E9jhJ6ArePH0EjOOM/PN6gvO
+	xzjFAiwHUIKC2z1kBET6P3kAlvbW7HMPTw7mbdNED2WXLXdz+AdXLiEcLf+DIsrDwfHQQaK1yp+
+	gwY/4LBCL637QCIVpiAH/xyJs7whjnijZjTXdvV2gws6g0ewz2fS0Ip2eEHnyFh/DzryTTlvc8O
+	Jc7+0VJjoczmuoPCq1EZXE0PeW7fHK2uZbiolaf0nGcVHM5MoLA0nbv8xOBJzM+caLSjWrYftKk
+	UUwoHg/Wk7D3LPmdzPJnz0HvUKDPfIwoheZzkC0dJuEZuYbKVcUkrvIudlEZl07dDrsiYvyCLhF
+	TP3QRDAbYwClu/qh3
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 07 Jun 2024 04:45:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110758
+ <openembedded-devel@lists.openembedded.org>; Fri, 07 Jun 2024 05:06:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110759
 
-fails on riscv as well see
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-https://errors.yoctoproject.org/Errors/Details/785949/
+Changelog:
+============
+* socket: Use poll() - when available - instead of select()
+* socket: Allow NULL as address for socket_create() and socket_connect()
+* win32: Remove windows.h from public headers
+* Add version function to interface
+* Add helper code to deal with NSKeyedArchiver plist data
+* opack: Fixed 32bit buffer overflow
+* opack: Fix parsing of 32 and 64 bit packed values
+* socket: Make sure errno is always set on error, and always return a meaningful error code
 
-On Thu, May 30, 2024 at 9:53=E2=80=AFAM Dmitry Baryshkov <dbaryshkov@gmail.=
-com> wrote:
->
-> On Thu, 30 May 2024 at 18:10, Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > fails to build.
-> > https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/3893/=
-steps/14/logs/stdio
->
-> So, compiling to the host architecture works (bitbake
-> cabextract-native works), but cross-compiling to the host architecture
-> doesn't seem to work;
->
-> | /usr/src/debug/cabextract/1.11/src/cabextract.c:499:(.text.startup+0x10=
-3d):
-> undefined reference to `rpl_fnmatch'
->
-> This should be fixed by
-> https://lore.kernel.org/openembedded-core/20240530164355.3294714-1-dmitry=
-.baryshkov@linaro.org/
->
->
->
-> >
-> > On Wed, May 29, 2024 at 2:02=E2=80=AFAM Dmitry Baryshkov via
-> > lists.openembedded.org <dbaryshkov=3Dgmail.com@lists.openembedded.org>
-> > wrote:
-> > >
-> > > WoA firmware, fonts and some other useful files are being distributed=
- as
-> > > a Microsoft cabinet files. Add recipes for the cabextract utility, wh=
-ich
-> > > is used to extract such files.
-> > >
-> > > Cabextract can either use a bundled source tree for libmspack library=
- or
-> > > an externally provided library. Package the library separately in ord=
-er
-> > > to be able to share it with the meta-security layer.
-> > >
-> > > Cc: Armin Kuster <akuster808@gmail.com>
-> > > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-> > > ---
-> > >  .../cabextract/cabextract_1.11.bb              | 18 ++++++++++++++++=
-++
-> > >  .../cabextract/libmspack_0.11alpha.bb          | 16 ++++++++++++++++
-> > >  2 files changed, 34 insertions(+)
-> > >  create mode 100644 meta-oe/recipes-support/cabextract/cabextract_1.1=
-1.bb
-> > >  create mode 100644 meta-oe/recipes-support/cabextract/libmspack_0.11=
-alpha.bb
-> > >
-> > > diff --git a/meta-oe/recipes-support/cabextract/cabextract_1.11.bb b/=
-meta-oe/recipes-support/cabextract/cabextract_1.11.bb
-> > > new file mode 100644
-> > > index 000000000000..4d035eeee4b0
-> > > --- /dev/null
-> > > +++ b/meta-oe/recipes-support/cabextract/cabextract_1.11.bb
-> > > @@ -0,0 +1,18 @@
-> > > +SUMMARY =3D "Software for extracting Microsoft cabinet files"
-> > > +DESCRIPTION =3D "tool for extracting Microsoft cabinet files"
-> > > +HOMEPAGE =3D "http://www.cabextract.org.uk/"
-> > > +SECTION =3D "console/utils"
-> > > +
-> > > +LICENSE =3D "GPL-3.0-or-later"
-> > > +LIC_FILES_CHKSUM =3D "file://src/cabextract.c;beginline=3D4;endline=
-=3D11;md5=3Db0a10c6d3843f262114e7ecf91fc7e78"
-> > > +
-> > > +SRC_URI =3D "https://www.cabextract.org.uk/cabextract-${PV}.tar.gz"
-> > > +SRC_URI[sha256sum] =3D "b5546db1155e4c718ff3d4b278573604f30dd64c3c5b=
-fd4657cd089b823a3ac6"
-> > > +
-> > > +DEPENDS =3D "libmspack"
-> > > +
-> > > +EXTRA_OECONF =3D "--with-external-libmspack"
-> > > +
-> > > +inherit autotools pkgconfig
-> > > +
-> > > +BBCLASSEXTEND +=3D "native nativesdk"
-> > > diff --git a/meta-oe/recipes-support/cabextract/libmspack_0.11alpha.b=
-b b/meta-oe/recipes-support/cabextract/libmspack_0.11alpha.bb
-> > > new file mode 100644
-> > > index 000000000000..169a5f271be9
-> > > --- /dev/null
-> > > +++ b/meta-oe/recipes-support/cabextract/libmspack_0.11alpha.bb
-> > > @@ -0,0 +1,16 @@
-> > > +SUMMARY =3D "A library for Microsoft compression formats"
-> > > +DESCRIPTION =3D "The library provides compressors and decompressors,=
-\
-> > > +archivers and dearchivers for Microsoft compression formats: CAB, CH=
-M, WIM,\
-> > > +LIT, HLP, KWAJ and SZDD."
-> > > +HOMEPAGE =3D "http://www.cabextract.org.uk/libmspack/"
-> > > +SECTION =3D "lib"
-> > > +LICENSE =3D "LGPL-2.1-only"
-> > > +
-> > > +LIC_FILES_CHKSUM =3D "file://COPYING.LIB;md5=3D7fbc338309ac38fefcd64=
-b04bb903e34"
-> > > +
-> > > +SRC_URI =3D "https://www.cabextract.org.uk/libmspack/libmspack-${PV}=
-.tar.gz"
-> > > +SRC_URI[sha256sum] =3D "70dd1fb2f0aecc36791b71a1e1840e62173079eadaa0=
-81192d1c323a0eeea21b"
-> > > +
-> > > +inherit autotools
-> > > +
-> > > +BBCLASSEXTEND +=3D "native nativesdk"
-> > > --
-> > > 2.39.2
-> > >
-> > >
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > > Links: You receive all messages sent to this group.
-> > > View/Reply Online (#110609): https://lists.openembedded.org/g/openemb=
-edded-devel/message/110609
-> > > Mute This Topic: https://lists.openembedded.org/mt/106365503/1997914
-> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsu=
-b [raj.khem@gmail.com]
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > >
->
->
->
-> --
-> With best wishes
-> Dmitry
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ ...obiledevice-glue_git.bb => libimobiledevice-glue_1.2.0.bb} | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+ rename meta-oe/recipes-connectivity/libimobiledevice-glue/{libimobiledevice-glue_git.bb => libimobiledevice-glue_1.2.0.bb} (86%)
+
+diff --git a/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_git.bb b/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_1.2.0.bb
+similarity index 86%
+rename from meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_git.bb
+rename to meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_1.2.0.bb
+index d37c547c9..c9e9c90d7 100644
+--- a/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_git.bb
++++ b/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_1.2.0.bb
+@@ -8,9 +8,7 @@ HOMEPAGE = "http://www.libimobiledevice.org/"
+ 
+ DEPENDS = "libplist"
+ 
+-PV = "1.0.0+git"
+-
+-SRCREV = "114098d30e783fbb3def5c9b49427a86621cfcb1"
++SRCREV = "fde8946a3988790fd5d3f01fc0a1fd43609ab1d1"
+ SRC_URI = "git://github.com/libimobiledevice/libimobiledevice-glue;protocol=https;branch=master"
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.34.1
+
 
