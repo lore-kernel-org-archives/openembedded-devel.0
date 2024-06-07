@@ -2,8 +2,8 @@ Return-Path: <NewTimothyL@JohnDeere.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 826E7C27C53
-	for <webhook@archiver.kernel.org>; Fri,  7 Jun 2024 20:51:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A08FC27C55
+	for <webhook@archiver.kernel.org>; Fri,  7 Jun 2024 20:52:13 +0000 (UTC)
 Subject: devtool failing to build-image #error #oe
 To: openembedded-devel@lists.openembedded.org
 From: "Tim New" <NewTimothyL@JohnDeere.com>
@@ -11,16 +11,16 @@ X-Originating-Location: US (136.226.113.74)
 X-Originating-Platform: Windows Chrome 125
 User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Date: Fri, 07 Jun 2024 13:51:09 -0700
+Date: Fri, 07 Jun 2024 13:52:10 -0700
 Message-ID: <ZdH4.1717792934247982167.3fD4@lists.openembedded.org>
-X-Old-Date: Fri, 07 Jun 2024 13:42:14 -0700
+X-Old-Date: Fri, 07 Jun 2024 13:51:09 -0700
 Content-Type: multipart/alternative; boundary="zCA3AmZQNO70W039bUaa"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 07 Jun 2024 20:51:13 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 07 Jun 2024 20:52:13 -0000
 X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110770
-Message-ID: <20240607205109.KXZhd-hujP7BZwrO0ykYIPDwwPyOsibgobaDM4-uZyI@z>
+Message-ID: <20240607205210.vSfR59iMdCGZFJ6kUY1HWptVLn6K1Dl_KUxowwulf2U@z>
 
 --zCA3AmZQNO70W039bUaa
 Content-Type: text/plain; charset=UTF-8
@@ -60,8 +60,7 @@ l the directories in the mete-freescale layer are copied. I'm not sure why.
 This is what the meta-freescale layer has in my normal build. You can see t=
 he recipes-downgrade directory. The missing .bb recipe is included there.
 
-tn70742@wdx24n1rn3:~/Projects/OEMBSP/oem-ref-BSP/sources/meta-freescale$ ls=
- -ll
+tn70742@wdx24n1rn3:~/$ ls -ll
 total 140
 drwxrwxr-x 2 tn70742 tn70742 4096 Jun 5 12:17 classes
 drwxrwxr-x 3 tn70742 tn70742 4096 Jun 5 12:17 conf
@@ -180,45 +179,45 @@ u can see the recipes-downgrade directory. The missing .bb recipe is includ=
 ed there.&nbsp;</p>
 <p style=3D"color: #333f48; font-family: Arial, sans-serif; font-size: 16px=
 ; font-style: normal; font-weight: 300; text-align: left; background-color:=
- #ffffff;"><span style=3D"font-size: xx-small;">tn70742@wdx24n1rn3:~/Projec=
-ts/OEMBSP/oem-ref-BSP/sources/meta-freescale$ ls -ll</span><br /><span styl=
-e=3D"font-size: xx-small;">total 140</span><br /><span style=3D"font-size: =
-xx-small;">drwxrwxr-x 2 tn70742 tn70742 4096 Jun 5 12:17 classes</span><br =
-/><span style=3D"font-size: xx-small;">drwxrwxr-x 3 tn70742 tn70742 4096 Ju=
-n 5 12:17 conf</span><br /><span style=3D"font-size: xx-small;">-rw-rw-r-- =
-1 tn70742 tn70742 1035 Jun 5 12:17 COPYING.MIT</span><br /><span style=3D"f=
-ont-size: xx-small;">drwxrwxr-x 2 tn70742 tn70742 4096 Jun 5 12:17 custom-l=
-icenses</span><br /><span style=3D"font-size: xx-small;">drwxrwxr-x 13 tn70=
-742 tn70742 4096 Jun 5 12:17 dynamic-layers</span><br /><span style=3D"font=
--size: xx-small;">-rw-r--r-- 8 tn70742 tn70742 43342 Mar 9 2018 EULA</span>=
-<br /><span style=3D"font-size: xx-small;">-rw-rw-r-- 1 tn70742 tn70742 495=
- Jun 5 12:17 LICENSE</span><br /><span style=3D"font-size: xx-small;">-rw-r=
-w-r-- 1 tn70742 tn70742 1006 Jun 5 12:17 README</span><br /><span style=3D"=
-font-size: xx-small;">drwxrwxr-x 34 tn70742 tn70742 4096 Jun 5 12:17 recipe=
-s-bsp</span><br /><span style=3D"font-size: xx-small;">drwxrwxr-x 3 tn70742=
- tn70742 4096 Jun 5 12:17 recipes-connectivity</span><br /><span style=3D"f=
-ont-size: xx-small;">drwxrwxr-x 5 tn70742 tn70742 4096 Jun 5 12:17 recipes-=
-core</span><br /><span style=3D"font-size: xx-small;">drwxrwxr-x 8 tn70742 =
-tn70742 4096 Jun 5 12:17 recipes-devtools</span><br /><span style=3D"font-s=
-ize: xx-small;"><strong>drwxrwxr-x 3 tn70742 tn70742 4096 Jun 5 12:17 recip=
-es-downgrade</strong></span><br /><span style=3D"font-size: xx-small;">drwx=
-rwxr-x 6 tn70742 tn70742 4096 Jun 5 12:17 recipes-dpaa</span><br /><span st=
-yle=3D"font-size: xx-small;">drwxrwxr-x 8 tn70742 tn70742 4096 Jun 5 12:17 =
-recipes-dpaa2</span><br /><span style=3D"font-size: xx-small;">drwxrwxr-x 1=
-7 tn70742 tn70742 4096 Jun 5 12:17 recipes-extended</span><br /><span style=
-=3D"font-size: xx-small;">drwxrwxr-x 4 tn70742 tn70742 4096 Jun 5 12:17 rec=
-ipes-fsl</span><br /><span style=3D"font-size: xx-small;">drwxrwxr-x 22 tn7=
-0742 tn70742 4096 Jun 5 12:17 recipes-graphics</span><br /><span style=3D"f=
-ont-size: xx-small;">drwxrwxr-x 7 tn70742 tn70742 4096 Jun 5 12:17 recipes-=
-kernel</span><br /><span style=3D"font-size: xx-small;">drwxrwxr-x 14 tn707=
-42 tn70742 4096 Jun 5 12:17 recipes-multimedia</span><br /><span style=3D"f=
-ont-size: xx-small;">drwxrwxr-x 4 tn70742 tn70742 4096 Jun 5 12:17 recipes-=
-security</span><br /><span style=3D"font-size: xx-small;">drwxrwxr-x 3 tn70=
-742 tn70742 4096 Jun 5 12:17 recipes-support</span><br /><span style=3D"fon=
-t-size: xx-small;">drwxrwxr-x 2 tn70742 tn70742 4096 Jun 5 12:17 SCR</span>=
-<br /><span style=3D"font-size: xx-small;">drwxrwxr-x 2 tn70742 tn70742 409=
-6 Jun 5 12:17 scripts</span><br /><span style=3D"font-size: xx-small;">drwx=
-rwxr-x 2 tn70742 tn70742 4096 Jun 5 12:17 wic</span></p>
+ #ffffff;"><span style=3D"font-size: xx-small;">tn70742@wdx24n1rn3:~/$ ls -=
+ll</span><br /><span style=3D"font-size: xx-small;">total 140</span><br /><=
+span style=3D"font-size: xx-small;">drwxrwxr-x 2 tn70742 tn70742 4096 Jun 5=
+ 12:17 classes</span><br /><span style=3D"font-size: xx-small;">drwxrwxr-x =
+3 tn70742 tn70742 4096 Jun 5 12:17 conf</span><br /><span style=3D"font-siz=
+e: xx-small;">-rw-rw-r-- 1 tn70742 tn70742 1035 Jun 5 12:17 COPYING.MIT</sp=
+an><br /><span style=3D"font-size: xx-small;">drwxrwxr-x 2 tn70742 tn70742 =
+4096 Jun 5 12:17 custom-licenses</span><br /><span style=3D"font-size: xx-s=
+mall;">drwxrwxr-x 13 tn70742 tn70742 4096 Jun 5 12:17 dynamic-layers</span>=
+<br /><span style=3D"font-size: xx-small;">-rw-r--r-- 8 tn70742 tn70742 433=
+42 Mar 9 2018 EULA</span><br /><span style=3D"font-size: xx-small;">-rw-rw-=
+r-- 1 tn70742 tn70742 495 Jun 5 12:17 LICENSE</span><br /><span style=3D"fo=
+nt-size: xx-small;">-rw-rw-r-- 1 tn70742 tn70742 1006 Jun 5 12:17 README</s=
+pan><br /><span style=3D"font-size: xx-small;">drwxrwxr-x 34 tn70742 tn7074=
+2 4096 Jun 5 12:17 recipes-bsp</span><br /><span style=3D"font-size: xx-sma=
+ll;">drwxrwxr-x 3 tn70742 tn70742 4096 Jun 5 12:17 recipes-connectivity</sp=
+an><br /><span style=3D"font-size: xx-small;">drwxrwxr-x 5 tn70742 tn70742 =
+4096 Jun 5 12:17 recipes-core</span><br /><span style=3D"font-size: xx-smal=
+l;">drwxrwxr-x 8 tn70742 tn70742 4096 Jun 5 12:17 recipes-devtools</span><b=
+r /><span style=3D"font-size: xx-small;"><strong>drwxrwxr-x 3 tn70742 tn707=
+42 4096 Jun 5 12:17 recipes-downgrade</strong></span><br /><span style=3D"f=
+ont-size: xx-small;">drwxrwxr-x 6 tn70742 tn70742 4096 Jun 5 12:17 recipes-=
+dpaa</span><br /><span style=3D"font-size: xx-small;">drwxrwxr-x 8 tn70742 =
+tn70742 4096 Jun 5 12:17 recipes-dpaa2</span><br /><span style=3D"font-size=
+: xx-small;">drwxrwxr-x 17 tn70742 tn70742 4096 Jun 5 12:17 recipes-extende=
+d</span><br /><span style=3D"font-size: xx-small;">drwxrwxr-x 4 tn70742 tn7=
+0742 4096 Jun 5 12:17 recipes-fsl</span><br /><span style=3D"font-size: xx-=
+small;">drwxrwxr-x 22 tn70742 tn70742 4096 Jun 5 12:17 recipes-graphics</sp=
+an><br /><span style=3D"font-size: xx-small;">drwxrwxr-x 7 tn70742 tn70742 =
+4096 Jun 5 12:17 recipes-kernel</span><br /><span style=3D"font-size: xx-sm=
+all;">drwxrwxr-x 14 tn70742 tn70742 4096 Jun 5 12:17 recipes-multimedia</sp=
+an><br /><span style=3D"font-size: xx-small;">drwxrwxr-x 4 tn70742 tn70742 =
+4096 Jun 5 12:17 recipes-security</span><br /><span style=3D"font-size: xx-=
+small;">drwxrwxr-x 3 tn70742 tn70742 4096 Jun 5 12:17 recipes-support</span=
+><br /><span style=3D"font-size: xx-small;">drwxrwxr-x 2 tn70742 tn70742 40=
+96 Jun 5 12:17 SCR</span><br /><span style=3D"font-size: xx-small;">drwxrwx=
+r-x 2 tn70742 tn70742 4096 Jun 5 12:17 scripts</span><br /><span style=3D"f=
+ont-size: xx-small;">drwxrwxr-x 2 tn70742 tn70742 4096 Jun 5 12:17 wic</spa=
+n></p>
 <p style=3D"color: #333f48; font-family: Arial, sans-serif; font-size: 16px=
 ; font-style: normal; font-weight: 300; text-align: left; background-color:=
  #ffffff;">When I look at the equivalent directory in the sdk environement,=
