@@ -1,111 +1,65 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0972CC25B76
-	for <webhook@archiver.kernel.org>; Sat,  8 Jun 2024 22:24:00 +0000 (UTC)
-Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
- by mx.groups.io with SMTP id smtpd.web11.7344.1717885432922198285
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C0D6C27C53
+	for <webhook@archiver.kernel.org>; Sun,  9 Jun 2024 18:00:56 +0000 (UTC)
+Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
+ by mx.groups.io with SMTP id smtpd.web10.1870.1717956049702386111
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 08 Jun 2024 15:23:54 -0700
+ Sun, 09 Jun 2024 11:00:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=hO81y47G;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-20240608222349d57810120c3c0eba31-yceaxv@rts-flowmailer.siemens.com)
-Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 20240608222349d57810120c3c0eba31
-        for <openembedded-devel@lists.openembedded.org>;
-        Sun, 09 Jun 2024 00:23:50 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=eHPYsw9CDnI+ttHVTqdREQo9ga8hTm4jvtiyCWQG/94=;
- b=hO81y47GfFtmXi00yo5vabbAquO5lymFPF7yoqgaK9nXpEEosmIMD2LFn+V91eMEP7i8Vc
- U4YTVYuxz0ImRpcJYEAy2vMNB3h6WdbNVgk81g5llriDGLespfP//IeHewMl8z4oMyhMI2t5
- 28Hkp0DRtKCfOGUcd100gAMVWfB+c=;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
+Received: from fwd80.aul.t-online.de (fwd80.aul.t-online.de [10.223.144.106])
+	by mailout11.t-online.de (Postfix) with SMTP id D35343A48
+	for <openembedded-devel@lists.openembedded.org>; Sun,  9 Jun 2024 19:59:48 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.163.44.230]) by fwd80.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1sGMpW-2029k90; Sun, 9 Jun 2024 19:59:46 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-gnome][kirkstone][PATCH] gnome-shell: correct regression with glib-2.0 fix for CVE-2024-34397
-Date: Sun,  9 Jun 2024 00:22:49 +0200
-Message-Id: <20240608222249.52754-1-peter.marko@siemens.com>
+Subject: [meta-oe][PATCH] mozjs-115: update 115.8.0 -> 115.11.0
+Date: Sun,  9 Jun 2024 20:00:22 +0200
+Message-ID: <20240609180022.2842829-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
+X-TOI-EXPURGATEID: 150726::1717955986-45B96322-1AAAB5CB/0/0 CLEAN NORMAL
+X-TOI-MSGID: 2ee21e70-a29a-4706-afe9-1c5f40f1f6a1
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 08 Jun 2024 22:24:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110781
+ <openembedded-devel@lists.openembedded.org>; Sun, 09 Jun 2024 18:00:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110782
 
-From: Peter Marko <peter.marko@siemens.com>
-
-Backport fix to work with new glib-2.0.
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- ...orrect-expected-bus-name-for-streams.patch | 38 +++++++++++++++++++
- .../gnome-shell/gnome-shell_42.0.bb           |  1 +
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0002-screencast-Correct-expected-bus-name-for-streams.patch
+ .../mozjs/{mozjs-115_115.8.0.bb =3D> mozjs-115_115.11.0.bb}       | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/mozjs/{mozjs-115_115.8.0.bb =3D> mozjs-1=
+15_115.11.0.bb} (97%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0002-screencast-Correct-expected-bus-name-for-streams.patch b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0002-screencast-Correct-expected-bus-name-for-streams.patch
-new file mode 100644
-index 0000000000..a4178b87e0
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0002-screencast-Correct-expected-bus-name-for-streams.patch
-@@ -0,0 +1,38 @@
-+From 50a011a19dcc6997ea6173c07bb80b2d9888d363 Mon Sep 17 00:00:00 2001
-+From: Simon McVittie <smcv@debian.org>
-+Date: Mon, 6 May 2024 21:58:09 +0100
-+Subject: [PATCH] screencast: Correct expected bus name for streams
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Previously, this only worked because GDBusConnection was not filtering
-+signals by their sender correctly (GNOME/glib#3268).
-+
-+Thanks: Alicia Boya García
-+Signed-off-by: Simon McVittie <smcv@debian.org>
-+Part-of: <https://gitlab.gnome.org/GNOME/gnome-shell/-/merge_requests/3303>
-+
-+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/50a011a19dcc6997ea6173c07bb80b2d9888d363]
-+
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ js/dbusServices/screencast/screencastService.js | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/js/dbusServices/screencast/screencastService.js b/js/dbusServices/screencast/screencastService.js
-+index d664a51b083..0645811fa0a 100644
-+--- a/js/dbusServices/screencast/screencastService.js
-++++ b/js/dbusServices/screencast/screencastService.js
-+@@ -166,7 +166,7 @@ var Recorder = class {
-+             });
-+ 
-+         this._streamProxy = new ScreenCastStreamProxy(Gio.DBus.session,
-+-            'org.gnome.ScreenCast.Stream',
-++            'org.gnome.Mutter.ScreenCast',
-+             streamPath);
-+ 
-+         this._streamProxy.connectSignal('PipeWireStreamAdded',
-+-- 
-+2.30.2
-+
-diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_42.0.bb b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_42.0.bb
-index f54d966c73..b58058ed86 100644
---- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_42.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_42.0.bb
-@@ -33,6 +33,7 @@ REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
- 
- SRC_URI[archive.sha256sum] = "33d404fb3c93b9de42984f0110a2969d6a4a7247c27fe7f5e24c67ecfec75094"
- SRC_URI += "file://0001-Introduce-options-gjs_path-to-optionally-set-path-to.patch"
-+SRC_URI += "file://0002-screencast-Correct-expected-bus-name-for-streams.patch"
- 
- PACKAGECONFIG ??= "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
- PACKAGECONFIG[bluetooth] = ",,gnome-bluetooth"
--- 
-2.30.2
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-115_115.8.0.bb b/meta-o=
+e/recipes-extended/mozjs/mozjs-115_115.11.0.bb
+similarity index 97%
+rename from meta-oe/recipes-extended/mozjs/mozjs-115_115.8.0.bb
+rename to meta-oe/recipes-extended/mozjs/mozjs-115_115.11.0.bb
+index 1269795d2..b08828602 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-115_115.8.0.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs-115_115.11.0.bb
+@@ -17,7 +17,7 @@ SRC_URI =3D "https://archive.mozilla.org/pub/firefox/re=
+leases/${PV}esr/source/fire
+            file://0001-add-arm-to-list-of-mozinline.patch \
+            file://armv5.patch \
+            "
+-SRC_URI[sha256sum] =3D "af8086f23efc8492d286671f6035b1a915de6f4ed5c7897e=
+40be0e1cb6b895ea"
++SRC_URI[sha256sum] =3D "16be46f16a356a2b8bd3541805a24c8a2acf6f077cf8a658=
+59689685c26025e0"
+=20
+ S =3D "${WORKDIR}/firefox-${PV}"
+=20
+--=20
+2.45.1
 
 
