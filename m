@@ -1,178 +1,148 @@
-Return-Path: <zboszor@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA1C5C27C55
-	for <webhook@archiver.kernel.org>; Mon, 10 Jun 2024 17:59:32 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.web11.26400.1718042366804700115
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4361C27C55
+	for <webhook@archiver.kernel.org>; Mon, 10 Jun 2024 18:21:02 +0000 (UTC)
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web11.26965.1718043661550820875
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Jun 2024 10:59:27 -0700
+ Mon, 10 Jun 2024 11:21:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VOA0TPo5;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: zboszor@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4217990f997so20468695e9.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Jun 2024 10:59:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ced5/bQj;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-704090c11easo3433643b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Jun 2024 11:21:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1718042365; x=1718647165; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=lOz5V7JHie6yRf/y2CU+lbFQ3jb87VyFy2x/L2n5SjI=;
-        b=VOA0TPo5qaTaxnPUGK4Cvt3daI0rIGyPkO7HadlHEk5NtW09AlHu0HD5jG79hloTC/
-         OkPzFPNBtQkPzNd8n64/lhNPRMPORkkcfWzYj4mH4brlcjUCq/tXopkWDIdQGB8VtH0H
-         0K5OuXrU1IZTAELEOZzhtL7gaJD8lEJKjbx12ntTTvFEIkqWwED9I3eRx4S+oWmHUc9p
-         ZEigMmpx60NyffRNr19Ygt0dKFvPNpVPhHv50/SW/lwajdKg68LrRft+i3koQfewpjpk
-         7hG1dO8Rgi4luETV1FXkeE+mc6y65e4PeZrnh34oMbInOJUfZkV7yDgIWzQbOA7f9Axt
-         Vc+g==
+        d=gmail.com; s=20230601; t=1718043661; x=1718648461; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=D1xeo1/AbiMczR4rmua7htsEAROk3Wu70Px0H3VHwIQ=;
+        b=ced5/bQjyNbwS3ooRl0WrsZnV1uQW7oxBazURyNx4L/Tl7q4ooB0L05E2bU2DR8bgL
+         rX/Fkvf9fn8cIyTwtIBxTfarf76MgTGoTAAEqyGLzPaK6RkU8VvQTBYv4RVQS/QNL/ys
+         izvkBfmAZH/Bogs0Tuge9TXLe2VYp3GPgsmWC1n9bjWJanB4J4ciDZOu+pGixVNf1/wl
+         BjL0vUb0jSB75evguzzOaoDAD1jec3IwkQWhS7sA9cnAWupxTaDyOHCQQ6tCDcSi908v
+         rJTelOt8EJarrhfpsCJlbR9vIq3qFm18Jv7Tr/tt6n20aXwsotZg8MYDX0wJijC+Oumx
+         mCGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718042365; x=1718647165;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=lOz5V7JHie6yRf/y2CU+lbFQ3jb87VyFy2x/L2n5SjI=;
-        b=nMF9NIiKcFRHGjXauKt6nsu9xLfC+jrEw3Avl0dxYmlGbZO4iJ/QK9R8KXA3NaVzI7
-         HGlA8qKixehhU+JBlwgpwSTwENAETfiv6HRTPT1FugTxS8JqlA5bfbJbz5tJPtM6ZqdH
-         b6N1YzMNWKvkR+BbYfYv03oewUVeVg85/CEESlUCE1Xfj/Hj7Qles/mDI3xh19etCSkg
-         6YNrLji9MFW92iumYbUAG9Z5EgxYJQLGIsveaPNnifB9zUOroFhzOldVlDpBQ6IbYv4j
-         cWp+VvfEJRMdw7rSQIM40gYOOZ1dHSAz/WvdZGdai9/9LMTDNJh/cpjJHgZysJ+2Unu+
-         xcIQ==
-X-Gm-Message-State: AOJu0YwgpdKw7tJqWZci1uJHg5OWdYNPpNb00cVq6EIh0VX0VLNlsNUk
-	adXFYZPIkYJwMgODeJxG7Rf175BlZB3F+kWkZhkYKGInkyxTJ45a
-X-Google-Smtp-Source: AGHT+IE7x6RO9ERUBWaB/O6EkVo8XsYvPkW585+CfQRKvh/fWBfRhD1Lq3bHFM11mSF2+B1fQ7EIOg==
-X-Received: by 2002:a05:600c:3481:b0:421:8343:5a8 with SMTP id 5b1f17b1804b1-42183430f62mr40835465e9.38.1718042364925;
-        Mon, 10 Jun 2024 10:59:24 -0700 (PDT)
-Received: from [192.168.2.143] (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4218330c7bbsm58531475e9.35.2024.06.10.10.59.24
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 10 Jun 2024 10:59:24 -0700 (PDT)
-Message-ID: <29127de3-0cb0-45c7-8498-6a2ec9399b3a@gmail.com>
-Date: Mon, 10 Jun 2024 19:59:23 +0200
+        d=1e100.net; s=20230601; t=1718043661; x=1718648461;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=D1xeo1/AbiMczR4rmua7htsEAROk3Wu70Px0H3VHwIQ=;
+        b=cs+XTnDsIesos6az1KDB3VrlU1EeIBOw5uPBtV19hLEAnmmeTWyti89pqP/jx0jbXT
+         tusicCJFOy/JTPSkoKU+bZHXuplSFuvUhZnUER4SPTvBYGkCxM2GI6TJgIXCqbnxTfYM
+         8l6/kxxtRqYmf4RpAjitv0WvfR9MRTIqZq0YZ8DvXrJJ5A93JrDJmBSOd1VDPcNstaWY
+         AYr7D1Z5U6pjAmGXyKsrNIdg3ZTn/3O2xcdzCUHGzxKUHkfM/4958utMh3wrXQQ/lZ03
+         3ZahmNA64eAEKZ8egdTjApuW+4gcZs9hItK1ZiO5Ea6gFfNppC1qr3Fzwo+J2SNGPQxP
+         nyXw==
+X-Gm-Message-State: AOJu0YyLhX2oDtmHfw32QntXT7YcRIIBtyw2yCvBbTXh+WBB0j9HjOQW
+	v7Ut5ShD01A9CnQuSu4mH1o4Ke+BrDA/htfpO4d049+/RspAYosH9OJAfg==
+X-Google-Smtp-Source: AGHT+IGfjFVdEu8GCAFRQavgR4cnSlEhebRuN8RTVARosPqIPc/1ani23R/jzDk1z1I/WGIpX/qtaw==
+X-Received: by 2002:a05:6a00:14d2:b0:705:9f39:dd7a with SMTP id d2e1a72fcca58-7059f39e0ebmr2607484b3a.2.1718043660502;
+        Mon, 10 Jun 2024 11:21:00 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::9980])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-6e5ec82dd8asm4480506a12.33.2024.06.10.11.20.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 Jun 2024 11:21:00 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [meta-oe][PATCH] libgpiod-1.x: Disable ptests and fix build on musl
+Date: Mon, 10 Jun 2024 11:20:58 -0700
+Message-ID: <20240610182058.2286377-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-initramfs][PATCH] dracut: Drop an unnecessary patch
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <20240610102455.2252749-1-zboszor@gmail.com>
- <CAMKF1soUxJJPbw-_-+28pzv_KQOO=BU60_-kUs_TwCgAPe8A8g@mail.gmail.com>
-Content-Language: en-US
-From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@gmail.com>
-In-Reply-To: <CAMKF1soUxJJPbw-_-+28pzv_KQOO=BU60_-kUs_TwCgAPe8A8g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Jun 2024 17:59:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110799
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Jun 2024 18:21:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110800
 
-2024. 06. 10. 16:34 keltezéssel, Khem Raj írta:
->
->
-> On Mon, Jun 10, 2024 at 3:24 AM Zoltán Böszörményi <zboszor@gmail.com> wrote:
->
->     Dropped 0001-util.h-include-sys-reg.h-when-libc-glibc.patch
->     that's unnecessary for a long time now, because dracut
->     (since version 049) does not rely on __WORDSIZE.
->
->
-> Does this still build on musl without this patch
+libgpiod-1.x is still in use by some BSPs e.g.
+variscite SOMs, so we can not get rid of completely
+so give some time to move away from 1.x and disable
+ptests as they need older version of catch2 which is
+being removed
 
-It should. The patch description had this:
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+---
+ ...nclude-missing-libgen.h-for-basename.patch | 25 +++++++++++++++++++
+ .../libgpiod/libgpiod_1.6.4.bb                | 16 ++++++------
+ 2 files changed, 32 insertions(+), 9 deletions(-)
+ create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-1.x/0001-Include-missing-libgen.h-for-basename.patch
 
-"For musl libc it is required to include <sys/reg.h> to
-have __WORDSIZE defined to e.g. 32 for arm*-musl."
-
-Since this commit in version 049, dracut doesn't actually
-use __WORDSIZE:
-
-commit 838f22259a50e5f92429ecdd24b897c1128edc98
-Author: Alexander Tsoy <alexander@tsoy.me>
-Date:   Sun Sep 9 02:47:09 2018 +0300
-
-     install: avoid non-portable __WORDSIZE
-
-     Lets not unnecessarily rely on __WORDSIZE, which is not clearly specified
-     by any spec. Use explicit size comparisons if we're not interested in the
-     WORDSIZE, anyway.
-
-     Patch ported from systemd.
-     (commit 8507eb20b64010b26f23822cbf442bb0bf96511c)
-
-     Original-patch-by: Emil Renner Berthing <systemd@esmil.dk>
-     Bug: https://bugs.gentoo.org/602122
-
->
->
->     Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
->     ---
->      ....h-include-sys-reg.h-when-libc-glibc.patch | 35 -------------------
->      .../recipes-devtools/dracut/dracut_102.bb <http://dracut_102.bb>    |  1 -
->      2 files changed, 36 deletions(-)
->      delete mode 100644
->     meta-initramfs/recipes-devtools/dracut/dracut/0001-util.h-include-sys-reg.h-when-libc-glibc.patch
->
->     diff --git
->     a/meta-initramfs/recipes-devtools/dracut/dracut/0001-util.h-include-sys-reg.h-when-libc-glibc.patch
->     b/meta-initramfs/recipes-devtools/dracut/dracut/0001-util.h-include-sys-reg.h-when-libc-glibc.patch
->     deleted file mode 100644
->     index 68ec2b8fd..000000000
->     ---
->     a/meta-initramfs/recipes-devtools/dracut/dracut/0001-util.h-include-sys-reg.h-when-libc-glibc.patch
->     +++ /dev/null
->     @@ -1,35 +0,0 @@
->     -From 9f7740c4c2fda64029c23674e9858ce8bd4367df Mon Sep 17 00:00:00 2001
->     -From: Khem Raj <raj.khem@gmail.com>
->     -Date: Thu, 13 Jul 2017 17:14:05 -0700
->     -Subject: [PATCH] util.h: include <sys/reg.h> when libc != glibc
->     -
->     -For musl libc it is required to include <sys/reg.h> to
->     -have __WORDSIZE defined to e.g. 32 for arm*-musl.
->     -
->     -Taken from void-linux
->     -https://github.com/voidlinux/void-packages/blob/master/srcpkgs/dracut/patches/musl-__wordsize.patch
->     -
->     -Signed-off-by: Khem Raj <raj.khem@gmail.com>
->     ----
->     -Upstream-Status: Pending
->     -
->     - src/install/util.h | 3 +++
->     - 1 file changed, 3 insertions(+)
->     -
->     -diff --git a/src/install/util.h b/src/install/util.h
->     -index a6f9a184..82732913 100644
->     ---- a/src/install/util.h
->     -+++ b/src/install/util.h
->     -@@ -36,6 +36,9 @@
->     - #include <sys/stat.h>
->     - #include <dirent.h>
->     - #include <sys/resource.h>
->     -+#if !defined(__GLIBC__)
->     -+#include <sys/reg.h>
->     -+#endif
->     -
->     - #include "macro.h"
->     -
->     ---
->     -2.17.1
->     -
->     diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_102.bb
->     <http://dracut_102.bb> b/meta-initramfs/recipes-devtools/dracut/dracut_102.bb
->     <http://dracut_102.bb>
->     index 496380a0f..39ff265a3 100644
->     --- a/meta-initramfs/recipes-devtools/dracut/dracut_102.bb <http://dracut_102.bb>
->     +++ b/meta-initramfs/recipes-devtools/dracut/dracut_102.bb <http://dracut_102.bb>
->     @@ -9,7 +9,6 @@ PE = "1"
->
->      SRCREV = "1a8ee6e00bbe017717a5ef9e9bcfefb3b88f629e"
->      SRC_URI = "git://github.com/dracut-ng/dracut-ng.git;protocol=http;branch=main
->     <http://github.com/dracut-ng/dracut-ng.git;protocol=http;branch=main> \
->     -  file://0001-util.h-include-sys-reg.h-when-libc-glibc.patch \
->     file://0001-feat-dracut-install-split-ldd-command-arguments-for-.patch \
->                 "
->
->     -- 
->     2.45.2
->
-
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-1.x/0001-Include-missing-libgen.h-for-basename.patch b/meta-oe/recipes-support/libgpiod/libgpiod-1.x/0001-Include-missing-libgen.h-for-basename.patch
+new file mode 100644
+index 0000000000..4a250015ba
+--- /dev/null
++++ b/meta-oe/recipes-support/libgpiod/libgpiod-1.x/0001-Include-missing-libgen.h-for-basename.patch
+@@ -0,0 +1,25 @@
++From b0ea35260ded2fbd41af46f2f18a61fb783a35be Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 10 Jun 2024 11:09:31 -0700
++Subject: [PATCH] Include missing libgen.h for basename()
++
++This is an error with newer musl otherwise
++
++Upstream-Status: Inappropriate [ Code removed in upstream ]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ lib/core.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/lib/core.c b/lib/core.c
++index 35dcd8e..cf1d677 100644
++--- a/lib/core.c
+++++ b/lib/core.c
++@@ -10,6 +10,7 @@
++ #include <errno.h>
++ #include <fcntl.h>
++ #include <gpiod.h>
+++#include <libgen.h>
++ #include <limits.h>
++ #include <linux/gpio.h>
++ #include <poll.h>
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.4.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.4.bb
+index 111a5727ba..9eec936f17 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.4.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.4.bb
+@@ -3,12 +3,16 @@ require libgpiod.inc
+ LICENSE = "LGPL-2.1-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
+ 
++SRC_URI += "file://0001-Include-missing-libgen.h-for-basename.patch"
+ SRC_URI[sha256sum] = "7b146e12f28fbca3df7557f176eb778c5ccf952ca464698dba8a61b2e1e3f9b5"
+ 
+ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-1.x:"
+ 
+ inherit python3native
+ 
++# catch2 v2.x is no longer available
++PACKAGECONFIG:remove = "tests"
++
+ PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev glib-2.0 catch2"
+ PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3"
+ 
+@@ -32,14 +36,8 @@ RRECOMMENDS:${PN}-ptest += " \
+ "
+ RDEPENDS:${PN}-ptest += " \
+     python3-packaging \
+-    ${@bb.utils.contains('PTEST_ENABLED', '1', 'bats', '', d)} \
++    ${@bb.utils.contains('PACKAGECONFIG', 'tests', 'bats', '', d)} \
+ "
+ 
+-do_install_ptest:append() {
+-    install -m 0755 ${S}/tools/gpio-tools-test ${D}${PTEST_PATH}/tests/
+-    install -m 0755 ${S}/tools/gpio-tools-test.bats ${D}${PTEST_PATH}/tests/
+-
+-    if ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'true', 'false', d)}; then
+-        install -m 0755 ${S}/bindings/python/tests/gpiod_py_test.py ${D}${PTEST_PATH}/tests/
+-    fi
+-}
++deltask do_install_ptest
++deltask do_install_ptest_base
 
