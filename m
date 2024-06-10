@@ -1,132 +1,127 @@
-Return-Path: <zboszor@gmail.com>
+Return-Path: <kai.kang@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B99E5C27C55
-	for <webhook@archiver.kernel.org>; Mon, 10 Jun 2024 10:25:10 +0000 (UTC)
-Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com [209.85.208.169])
- by mx.groups.io with SMTP id smtpd.web11.16228.1718015101234530858
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E50EC27C55
+	for <webhook@archiver.kernel.org>; Mon, 10 Jun 2024 11:38:31 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.17275.1718019507323165453
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Jun 2024 03:25:01 -0700
+ Mon, 10 Jun 2024 04:38:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=OeEroz5T;
- spf=pass (domain: gmail.com, ip: 209.85.208.169, mailfrom: zboszor@gmail.com)
-Received: by mail-lj1-f169.google.com with SMTP id 38308e7fff4ca-2ebe40673d8so10226381fa.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Jun 2024 03:25:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1718015099; x=1718619899; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=k1xNxGjvNTGYS0UW9zzgSJBqJvqUCdyLI0VnZfhV8TM=;
-        b=OeEroz5Tj9PDyKtd92SCCl+rcgBhwiQ/k7HwYAh4UtaQWxblIUf3yZxCZbYcVs7QMa
-         7VwlIqfft9cuP5+PTEs9R9+cPJxTjituFntkmPoDN4O9hcysroSDsfrSqJ/jE39eIR8m
-         bzQ6poffU+OjLN5x3H/2j5kaIlEWtWT5ZMIfeQH7pioiEI/O3DXg6smhDalJoS3fM7WM
-         xq+0EiaOV1GeXM1uGED2jLhPbxoIZZksVbJyjgfh2WITTj69FQdFaC+0Lx6FILrkyr/w
-         A/My81WMBM/WtwCSHP9LaWHJvY6q6rqn+BQlJ5+5OpgTuoojfNX0qxTPaFf8FRP8F+Sa
-         T8Kw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718015099; x=1718619899;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=k1xNxGjvNTGYS0UW9zzgSJBqJvqUCdyLI0VnZfhV8TM=;
-        b=eHbqyPXztbM7Oxd8oFOS6szgQ2rVV/mDsuTxkGRkn1qGPEwP465Ml7tKhbdeJ+nDAR
-         nnLKYSXRAggxzQDrfGCrpNZWbtIJWGQAxBvYm+JKNNMcYDyix5hnZiQrj+FrU5g59Aqz
-         4YdA+lhEQ5Oe8TdbIi9ZgpnG7/87aoYLYfB1ojx/7y/IS4vgniKDRK5tBUVTZabmQYZ7
-         Ea+TFZq4otGOTvIXDjAnvY66VtKyGQLOYGFUsH08XiJS85icnJURs5JrkTwi1tkceANG
-         604QqvbBblFlnDNSnZDiVEqP98AaoXYIcFQfIXrMjnhzOZ+ZDNlCvSf2PuWiHlmTA51j
-         r2Yg==
-X-Gm-Message-State: AOJu0Yy8Sd/0//AR8wJp2ILkBkB1igMXRCSg/pDC3BPBS2Hyy2alEOCY
-	YGQ46SEtohgsm+IXsAMdGJ3xEOSK7bvm7hiD3/Y7LF38RNaA4DI8/2/uiSGY
-X-Google-Smtp-Source: AGHT+IEtmsQj4ziTCjEILgJHD00QJC7aoLGCFzMDmRSXRTP1fQaeCC0rQs4t49NL/OEQlVtcagrXdw==
-X-Received: by 2002:a05:651c:507:b0:2eb:df6d:6c36 with SMTP id 38308e7fff4ca-2ebdf6d6df8mr25994701fa.4.1718015098664;
-        Mon, 10 Jun 2024 03:24:58 -0700 (PDT)
-Received: from localhost.lan (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-35f1aed74cesm5264542f8f.112.2024.06.10.03.24.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Jun 2024 03:24:58 -0700 (PDT)
-From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Subject: [meta-initramfs][PATCH] dracut: Drop an unnecessary patch
-Date: Mon, 10 Jun 2024 12:24:55 +0200
-Message-ID: <20240610102455.2252749-1-zboszor@gmail.com>
-X-Mailer: git-send-email 2.45.2
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=68916c8570=kai.kang@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45A7pK1B003809
+	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Jun 2024 11:38:26 GMT
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ymcgwsjyn-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Jun 2024 11:38:26 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Mon, 10 Jun 2024 04:38:25 -0700
+Received: from pek-lpg-core4.wrs.com (128.224.153.44) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.39 via Frontend Transport; Mon, 10 Jun 2024 04:38:24 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-xfce][PATCH] xfwm4: fix gcc -Wincompatible-pointer-types
+Date: Mon, 10 Jun 2024 19:38:22 +0800
+Message-ID: <20240610113822.3231543-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: QBGS4GplFPMa4KJQH14QLqVhd98R0ufL
+X-Proofpoint-ORIG-GUID: QBGS4GplFPMa4KJQH14QLqVhd98R0ufL
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-06-10_02,2024-06-10_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
+ suspectscore=0 malwarescore=0 clxscore=1015 priorityscore=1501
+ phishscore=0 bulkscore=0 spamscore=0 mlxlogscore=883 lowpriorityscore=0
+ mlxscore=0 adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2405170001 definitions=main-2406100088
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Jun 2024 10:25:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110795
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Jun 2024 11:38:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110796
 
-Dropped 0001-util.h-include-sys-reg.h-when-libc-glibc.patch
-that's unnecessary for a long time now, because dracut
-(since version 049) does not rely on __WORDSIZE.
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
+Fix xfwm4 incompatible pointer type error with gcc option -Wincompatible-pointer-types:
+
+| ../../xfwm4-4.18.0/src/startup_notification.c:139:57: error: passing argument
+      2 of 'sn_startup_sequence_get_last_active_time' from incompatible pointer type
+      [-Wincompatible-pointer-types]
+|   139 |     sn_startup_sequence_get_last_active_time (sequence, &l_sec, &l_usec);
+|       |                                                         ^~~~~~
+|       |                                                         |
+|       |                                                         long int *
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- ....h-include-sys-reg.h-when-libc-glibc.patch | 35 -------------------
- .../recipes-devtools/dracut/dracut_102.bb     |  1 -
- 2 files changed, 36 deletions(-)
- delete mode 100644 meta-initramfs/recipes-devtools/dracut/dracut/0001-util.h-include-sys-reg.h-when-libc-glibc.patch
+ ...-fix-incompatible-pointer-type-error.patch | 34 +++++++++++++++++++
+ meta-xfce/recipes-xfce/xfwm4/xfwm4_4.18.0.bb  |  2 ++
+ 2 files changed, 36 insertions(+)
+ create mode 100644 meta-xfce/recipes-xfce/xfwm4/xfwm4/xfwm4-fix-incompatible-pointer-type-error.patch
 
-diff --git a/meta-initramfs/recipes-devtools/dracut/dracut/0001-util.h-include-sys-reg.h-when-libc-glibc.patch b/meta-initramfs/recipes-devtools/dracut/dracut/0001-util.h-include-sys-reg.h-when-libc-glibc.patch
-deleted file mode 100644
-index 68ec2b8fd..000000000
---- a/meta-initramfs/recipes-devtools/dracut/dracut/0001-util.h-include-sys-reg.h-when-libc-glibc.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From 9f7740c4c2fda64029c23674e9858ce8bd4367df Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 13 Jul 2017 17:14:05 -0700
--Subject: [PATCH] util.h: include <sys/reg.h> when libc != glibc
--
--For musl libc it is required to include <sys/reg.h> to
--have __WORDSIZE defined to e.g. 32 for arm*-musl.
--
--Taken from void-linux
--https://github.com/voidlinux/void-packages/blob/master/srcpkgs/dracut/patches/musl-__wordsize.patch
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
--Upstream-Status: Pending
--
-- src/install/util.h | 3 +++
-- 1 file changed, 3 insertions(+)
--
--diff --git a/src/install/util.h b/src/install/util.h
--index a6f9a184..82732913 100644
----- a/src/install/util.h
--+++ b/src/install/util.h
--@@ -36,6 +36,9 @@
-- #include <sys/stat.h>
-- #include <dirent.h>
-- #include <sys/resource.h>
--+#if !defined(__GLIBC__)
--+#include <sys/reg.h>
--+#endif
-- 
-- #include "macro.h"
-- 
---- 
--2.17.1
--
-diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_102.bb b/meta-initramfs/recipes-devtools/dracut/dracut_102.bb
-index 496380a0f..39ff265a3 100644
---- a/meta-initramfs/recipes-devtools/dracut/dracut_102.bb
-+++ b/meta-initramfs/recipes-devtools/dracut/dracut_102.bb
-@@ -9,7 +9,6 @@ PE = "1"
+diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4/xfwm4-fix-incompatible-pointer-type-error.patch b/meta-xfce/recipes-xfce/xfwm4/xfwm4/xfwm4-fix-incompatible-pointer-type-error.patch
+new file mode 100644
+index 000000000..eb8fa7c43
+--- /dev/null
++++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4/xfwm4-fix-incompatible-pointer-type-error.patch
+@@ -0,0 +1,34 @@
++Fix xfwm4 incompatible pointer type error:
++
++| ../../xfwm4-4.18.0/src/startup_notification.c:139:57: error: passing argument 2 of 'sn_startup_sequence_get_last_active_time' from incompatible pointer type [-Wincompatible-pointer-types]
++|   139 |     sn_startup_sequence_get_last_active_time (sequence, &l_sec, &l_usec);
++|       |                                                         ^~~~~~
++|       |                                                         |
++|       |                                                         long int *
++| In file included from .../usr/include/startup-notification-1.0/libsn/sn.h:32,
++|                  from ../../xfwm4-4.18.0/src/startup_notification.c:33:
++| .../usr/include/startup-notification-1.0/libsn/sn-monitor.h:84:79: note: expected 'time_t *' {aka 'long long int *'} but argument is of type 'long int *'
++|    84 |                                                            time_t            *tv_sec,
++|       |                                                            ~~~~~~~~~~~~~~~~~~~^~~~~~
++
++Upsteam-Status: Submitted [https://gitlab.xfce.org/xfce/xfwm4/-/issues/790]
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++
++---
++ src/startup_notification.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/startup_notification.c b/src/startup_notification.c
++index 2a08cad..05434ca 100644
++--- a/src/startup_notification.c
+++++ b/src/startup_notification.c
++@@ -136,7 +136,7 @@ sn_collect_timed_out_foreach (void *element, void *data)
++ 
++     sequence = element;
++     ctod = (CollectTimedOutData *) data;
++-    sn_startup_sequence_get_last_active_time (sequence, &l_sec, &l_usec);
+++    sn_startup_sequence_get_last_active_time (sequence, (time_t *)&l_sec, &l_usec);
++     tv_sec = l_sec; tv_usec = l_usec;
++ 
++     elapsed = ((double) ctod->now - (tv_sec * G_USEC_PER_SEC) - tv_usec)
+diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.18.0.bb b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.18.0.bb
+index 839f1c870..2770829e9 100644
+--- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.18.0.bb
++++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.18.0.bb
+@@ -8,6 +8,8 @@ inherit xfce update-alternatives features_check
  
- SRCREV = "1a8ee6e00bbe017717a5ef9e9bcfefb3b88f629e"
- SRC_URI = "git://github.com/dracut-ng/dracut-ng.git;protocol=http;branch=main \
--           file://0001-util.h-include-sys-reg.h-when-libc-glibc.patch \
-            file://0001-feat-dracut-install-split-ldd-command-arguments-for-.patch \
-            "
+ REQUIRED_DISTRO_FEATURES = "x11"
  
++SRC_URI += "file://xfwm4-fix-incompatible-pointer-type-error.patch"
++
+ SRC_URI[sha256sum] = "92cd1b889bb25cb4bc06c1c6736c238d96e79c1e706b9f77fad0a89d6e5fc13f"
+ 
+ PACKAGECONFIG ?= " \
 -- 
-2.45.2
+2.34.1
 
 
