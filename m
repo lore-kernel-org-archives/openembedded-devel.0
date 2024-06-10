@@ -1,142 +1,132 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <zboszor@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FCE9C27C55
-	for <webhook@archiver.kernel.org>; Mon, 10 Jun 2024 09:36:10 +0000 (UTC)
-Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
- by mx.groups.io with SMTP id smtpd.web11.15531.1718012169737705539
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B99E5C27C55
+	for <webhook@archiver.kernel.org>; Mon, 10 Jun 2024 10:25:10 +0000 (UTC)
+Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com [209.85.208.169])
+ by mx.groups.io with SMTP id smtpd.web11.16228.1718015101234530858
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Jun 2024 02:36:10 -0700
+ Mon, 10 Jun 2024 03:25:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
-Received: from fwd72.aul.t-online.de (fwd72.aul.t-online.de [10.223.144.98])
-	by mailout04.t-online.de (Postfix) with SMTP id 1C6A617CE0
-	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Jun 2024 11:36:07 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.163.42.224]) by fwd72.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1sGbRd-18P4M50; Mon, 10 Jun 2024 11:36:05 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OeEroz5T;
+ spf=pass (domain: gmail.com, ip: 209.85.208.169, mailfrom: zboszor@gmail.com)
+Received: by mail-lj1-f169.google.com with SMTP id 38308e7fff4ca-2ebe40673d8so10226381fa.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Jun 2024 03:25:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1718015099; x=1718619899; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=k1xNxGjvNTGYS0UW9zzgSJBqJvqUCdyLI0VnZfhV8TM=;
+        b=OeEroz5Tj9PDyKtd92SCCl+rcgBhwiQ/k7HwYAh4UtaQWxblIUf3yZxCZbYcVs7QMa
+         7VwlIqfft9cuP5+PTEs9R9+cPJxTjituFntkmPoDN4O9hcysroSDsfrSqJ/jE39eIR8m
+         bzQ6poffU+OjLN5x3H/2j5kaIlEWtWT5ZMIfeQH7pioiEI/O3DXg6smhDalJoS3fM7WM
+         xq+0EiaOV1GeXM1uGED2jLhPbxoIZZksVbJyjgfh2WITTj69FQdFaC+0Lx6FILrkyr/w
+         A/My81WMBM/WtwCSHP9LaWHJvY6q6rqn+BQlJ5+5OpgTuoojfNX0qxTPaFf8FRP8F+Sa
+         T8Kw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1718015099; x=1718619899;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=k1xNxGjvNTGYS0UW9zzgSJBqJvqUCdyLI0VnZfhV8TM=;
+        b=eHbqyPXztbM7Oxd8oFOS6szgQ2rVV/mDsuTxkGRkn1qGPEwP465Ml7tKhbdeJ+nDAR
+         nnLKYSXRAggxzQDrfGCrpNZWbtIJWGQAxBvYm+JKNNMcYDyix5hnZiQrj+FrU5g59Aqz
+         4YdA+lhEQ5Oe8TdbIi9ZgpnG7/87aoYLYfB1ojx/7y/IS4vgniKDRK5tBUVTZabmQYZ7
+         Ea+TFZq4otGOTvIXDjAnvY66VtKyGQLOYGFUsH08XiJS85icnJURs5JrkTwi1tkceANG
+         604QqvbBblFlnDNSnZDiVEqP98AaoXYIcFQfIXrMjnhzOZ+ZDNlCvSf2PuWiHlmTA51j
+         r2Yg==
+X-Gm-Message-State: AOJu0Yy8Sd/0//AR8wJp2ILkBkB1igMXRCSg/pDC3BPBS2Hyy2alEOCY
+	YGQ46SEtohgsm+IXsAMdGJ3xEOSK7bvm7hiD3/Y7LF38RNaA4DI8/2/uiSGY
+X-Google-Smtp-Source: AGHT+IEtmsQj4ziTCjEILgJHD00QJC7aoLGCFzMDmRSXRTP1fQaeCC0rQs4t49NL/OEQlVtcagrXdw==
+X-Received: by 2002:a05:651c:507:b0:2eb:df6d:6c36 with SMTP id 38308e7fff4ca-2ebdf6d6df8mr25994701fa.4.1718015098664;
+        Mon, 10 Jun 2024 03:24:58 -0700 (PDT)
+Received: from localhost.lan (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-35f1aed74cesm5264542f8f.112.2024.06.10.03.24.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 Jun 2024 03:24:58 -0700 (PDT)
+From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCHv2] replace libdbd-mysql-perl with dbd-mariadb
-Date: Mon, 10 Jun 2024 11:36:56 +0200
-Message-ID: <20240610093656.2610-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.45.1
+Cc: Khem Raj <raj.khem@gmail.com>,
+	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
+Subject: [meta-initramfs][PATCH] dracut: Drop an unnecessary patch
+Date: Mon, 10 Jun 2024 12:24:55 +0200
+Message-ID: <20240610102455.2252749-1-zboszor@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1718012165-C57F9D1D-827A24A1/0/0 CLEAN NORMAL
-X-TOI-MSGID: b6920fdd-0e78-43b5-9d3a-11e719809c30
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Jun 2024 09:36:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110794
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Jun 2024 10:25:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110795
 
-libdbd-mysql-perl is broken with mariadb/gcc14 and upstream does not supp=
-ort mariadb.
-[https://github.com/perl5-dbi/DBD-mysql/issues/430]
+Dropped 0001-util.h-include-sys-reg.h-when-libc-glibc.patch
+that's unnecessary for a long time now, because dracut
+(since version 049) does not rely on __WORDSIZE.
 
-Use the perl database driver that is provided by the mariadb project inst=
-ead.
-[https://mariadb.com/kb/en/perl-dbi]
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
 ---
- meta-oe/recipes-dbs/mysql/mariadb.inc         |  2 +-
- .../recipes-devtools/perl/dbd-mariadb_1.23.bb | 20 ++++++++++++++++
- .../perl/libdbd-mysql-perl_5.006.bb           | 24 -------------------
- 3 files changed, 21 insertions(+), 25 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/perl/dbd-mariadb_1.23.bb
- delete mode 100644 meta-oe/recipes-devtools/perl/libdbd-mysql-perl_5.006=
-.bb
+ ....h-include-sys-reg.h-when-libc-glibc.patch | 35 -------------------
+ .../recipes-devtools/dracut/dracut_102.bb     |  1 -
+ 2 files changed, 36 deletions(-)
+ delete mode 100644 meta-initramfs/recipes-devtools/dracut/dracut/0001-util.h-include-sys-reg.h-when-libc-glibc.patch
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/=
-mysql/mariadb.inc
-index 695965f7d..4bfa1c9ca 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -215,7 +215,7 @@ RDEPENDS:${PN}-client =3D "perl perl-module-getopt-lo=
-ng perl-module-file-temp \
- RDEPENDS:${PN}-server =3D "perl perl-module-getopt-long perl-module-data=
--dumper \
-     perl-module-file-basename perl-module-file-path perl-module-sys-host=
-name \
-     perl-module-file-copy perl-module-file-temp perl-module-posix \
--    ${PN}-client ${PN}-setupdb libdbi-perl libdbd-mysql-perl lzo"
-+    ${PN}-client ${PN}-setupdb libdbi-perl dbd-mariadb lzo"
- RDEPENDS:${PN}-leftovers =3D "perl perl-module-cwd perl-module-benchmark=
- perl-module-getopt-long \
-     perl-module-posix perl-module-data-dumper perl-module-sigtrap perl-m=
-odule-threads \
-     perl-module-threads-shared perl-module-io-socket perl-module-sys-hos=
-tname perl-module-file-copy \
-diff --git a/meta-oe/recipes-devtools/perl/dbd-mariadb_1.23.bb b/meta-oe/=
-recipes-devtools/perl/dbd-mariadb_1.23.bb
-new file mode 100644
-index 000000000..0eaf2137b
---- /dev/null
-+++ b/meta-oe/recipes-devtools/perl/dbd-mariadb_1.23.bb
-@@ -0,0 +1,20 @@
-+DESPCRIPTION =3D "DBD::MariaDB is the Perl5 Database Interface driver fo=
-r MariaDB and MySQL databases."
-+HOMEPAGE =3D "https://metacpan.org/dist/DBD-MariaDB"
-+LICENSE =3D "GPL-1.0-only"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dd0a06964340e5c0cde88b7af611f7=
-55c"
-+
-+DEPENDS =3D "libdbi-perl-native libdev-checklib-perl-native libmysqlclie=
-nt"
-+
-+SRC_URI =3D "${CPAN_MIRROR}/authors/id/P/PA/PALI/DBD-MariaDB-${PV}.tar.g=
-z"
-+SRC_URI[sha256sum] =3D "0d0c76c660ddd55570e48f3e2fdea8f621a69ac0ed48190e=
-8cfcafcb5e9b859d"
-+
-+RDEPENDS:${PN} =3D "libdbi-perl"
-+
-+S =3D "${WORKDIR}/DBD-MariaDB-${PV}"
-+
-+inherit cpan
-+
-+RDEPENDS:${PN}-ptest +=3D " \
-+	libtest-warnings-perl \
-+	perl-module-test-more \
-+"
-diff --git a/meta-oe/recipes-devtools/perl/libdbd-mysql-perl_5.006.bb b/m=
-eta-oe/recipes-devtools/perl/libdbd-mysql-perl_5.006.bb
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut/0001-util.h-include-sys-reg.h-when-libc-glibc.patch b/meta-initramfs/recipes-devtools/dracut/dracut/0001-util.h-include-sys-reg.h-when-libc-glibc.patch
 deleted file mode 100644
-index 919997914..000000000
---- a/meta-oe/recipes-devtools/perl/libdbd-mysql-perl_5.006.bb
+index 68ec2b8fd..000000000
+--- a/meta-initramfs/recipes-devtools/dracut/dracut/0001-util.h-include-sys-reg.h-when-libc-glibc.patch
 +++ /dev/null
-@@ -1,24 +0,0 @@
--SUMMARY =3D "A Perl DBI driver for MySQL"
--DESCRIPTION =3D "DBD::mysql is the Perl5 Database Interface driver for \
--the MySQL database. In other words: DBD::mysql is an interface between \
--the Perl programming language and the MySQL programming API that comes \
--with the MySQL relational database management system. Most functions \
--provided by this programming API are supported. Some rarely used \
--functions are missing, mainly because no-one ever requested them. \
--"
--HOMEPAGE =3D "https://github.com/perl5-dbi/DBD-mysql"
+@@ -1,35 +0,0 @@
+-From 9f7740c4c2fda64029c23674e9858ce8bd4367df Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Thu, 13 Jul 2017 17:14:05 -0700
+-Subject: [PATCH] util.h: include <sys/reg.h> when libc != glibc
 -
--SECTION =3D "libs"
--LICENSE =3D "Artistic-1.0 | GPL-1.0-or-later"
--DEPENDS +=3D "libdev-checklib-perl-native libdbi-perl-native libmysqlcli=
-ent"
+-For musl libc it is required to include <sys/reg.h> to
+-have __WORDSIZE defined to e.g. 32 for arm*-musl.
 -
--LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dd0a06964340e5c0cde88b7af611f7=
-55c"
+-Taken from void-linux
+-https://github.com/voidlinux/void-packages/blob/master/srcpkgs/dracut/patches/musl-__wordsize.patch
 -
--SRCREV =3D "9b5b70ea372f49fe9bc9e592dae3870596d1e3d6"
--SRC_URI =3D "git://github.com/perl5-dbi/DBD-mysql.git;protocol=3Dhttps;b=
-ranch=3Dmaster"
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+-Upstream-Status: Pending
 -
--S =3D "${WORKDIR}/git"
+- src/install/util.h | 3 +++
+- 1 file changed, 3 insertions(+)
 -
--inherit cpan
+-diff --git a/src/install/util.h b/src/install/util.h
+-index a6f9a184..82732913 100644
+---- a/src/install/util.h
+-+++ b/src/install/util.h
+-@@ -36,6 +36,9 @@
+- #include <sys/stat.h>
+- #include <dirent.h>
+- #include <sys/resource.h>
+-+#if !defined(__GLIBC__)
+-+#include <sys/reg.h>
+-+#endif
+- 
+- #include "macro.h"
+- 
+--- 
+-2.17.1
 -
--EXTRA_OEMAKE =3D ' CC=3D"${CC} -Wno-incompatible-pointer-types"'
---=20
-2.45.1
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_102.bb b/meta-initramfs/recipes-devtools/dracut/dracut_102.bb
+index 496380a0f..39ff265a3 100644
+--- a/meta-initramfs/recipes-devtools/dracut/dracut_102.bb
++++ b/meta-initramfs/recipes-devtools/dracut/dracut_102.bb
+@@ -9,7 +9,6 @@ PE = "1"
+ 
+ SRCREV = "1a8ee6e00bbe017717a5ef9e9bcfefb3b88f629e"
+ SRC_URI = "git://github.com/dracut-ng/dracut-ng.git;protocol=http;branch=main \
+-           file://0001-util.h-include-sys-reg.h-when-libc-glibc.patch \
+            file://0001-feat-dracut-install-split-ldd-command-arguments-for-.patch \
+            "
+ 
+-- 
+2.45.2
 
 
