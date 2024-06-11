@@ -1,732 +1,129 @@
-Return-Path: <rsangam@mvista.com>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 02BF0C25B76
-	for <webhook@archiver.kernel.org>; Tue, 11 Jun 2024 06:47:25 +0000 (UTC)
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
- by mx.groups.io with SMTP id smtpd.web11.3563.1718088444317928917
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 09612C25B76
+	for <webhook@archiver.kernel.org>; Tue, 11 Jun 2024 07:09:25 +0000 (UTC)
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web11.3813.1718089758465964151
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Jun 2024 23:47:24 -0700
+ Tue, 11 Jun 2024 00:09:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=ONC48TiH;
- spf=pass (domain: mvista.com, ip: 209.85.210.175, mailfrom: rsangam@mvista.com)
-Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-705959a2dfbso1420290b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Jun 2024 23:47:24 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=cR33EbOO;
+ spf=pass (domain: mvista.com, ip: 209.85.214.177, mailfrom: vanusuri@mvista.com)
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-1f68834bfdfso38970895ad.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Jun 2024 00:09:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1718088443; x=1718693243; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1718089757; x=1718694557; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=AVEKoCNlORV05sgEZksE+Kr6SsHTAxVvlwxhBv56qMI=;
-        b=ONC48TiHdfn7cT8XEPj/utiAHKz+yyvMvuSejwE4cGSAQYBF8HDKku42TDRUYlTLj7
-         omTUkPMd0u4TUyDfEUtSvWvbmvilfBJP+5dd+EW8USKx6A9d+JfON1ltWjA1WNMB1aJ1
-         Sj9sXc1cdwj408hpBtxl91JU/KGeZSKE6bCyg=
+        bh=yeLR3xNo8xQeXGwqjHA+315o0u7/DCXW6tr49mBNcUg=;
+        b=cR33EbOODnDPBGbSsCDsZDi9Q9wYaam1WedL98ioif96xg6BqwYL8SpFIAxiR65hz/
+         BZMI3RcEytI2vdTwDWgbLbC1/qL3tP6neK1ZSiRf1lDxmvlSYIr/mXmAJzTMbYLpyb6T
+         X0dLaC5D2/ttLR2u0fBnkekf8j38cFzTjXmRk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718088443; x=1718693243;
+        d=1e100.net; s=20230601; t=1718089757; x=1718694557;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=AVEKoCNlORV05sgEZksE+Kr6SsHTAxVvlwxhBv56qMI=;
-        b=wTSR8jwAxAKqybZ11MXFp/g+7J1IB35Hs/1IR0kHonTDKnFIx5bPCordw3W+zhbiqe
-         3S7dK3cnIWw731vsnAXQK65bNPXUDVuonv2ZSxHoynrzgzaFE72+byJ0Ej5COcikdeuv
-         xMmmLSejoU5zg7/mNA9d9Lk7IFlmb5AvJJoHZmy/VQXFRgd3Dn343pLfDemAxuraGhhM
-         WXi8HEQMqTePqIBJvvholNBGUQ7Ixs6EZMjTrESlDkd75HD0OQIxK2ri/oQubCZexaFb
-         f0ulZZjZSVFrP8p8gMjGUOJgHPWQFgZA6CWCimJV738V131+F5go1YskoQfUWShq5oeg
-         44ew==
-X-Gm-Message-State: AOJu0YxM3zUpETgnjKYoA7JdehWp+sXZKETMi35LnLxTvpRJYCo8xrGj
-	bpdy5jXB4MzZ+mYnpxckfTCbHeSOnwqG67YVmyeT2VDzwmH++LmNrqMvZ42Tcb6qGyptColJnLu
-	b
-X-Google-Smtp-Source: AGHT+IH7Qd1nD0WpRIuaZ6AQYf1dqGXGmJYRwpT2OQ5HQAA+Os5UIRBFqkDmv3WN4pXP9D1I2J8V5g==
-X-Received: by 2002:a05:6a00:2d89:b0:704:3580:8e16 with SMTP id d2e1a72fcca58-705a85ea881mr2942280b3a.17.1718088443064;
-        Mon, 10 Jun 2024 23:47:23 -0700 (PDT)
-Received: from MVIN00040.mvista.com ([49.207.200.132])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-70413dc54f7sm6310614b3a.196.2024.06.10.23.47.20
+        bh=yeLR3xNo8xQeXGwqjHA+315o0u7/DCXW6tr49mBNcUg=;
+        b=WH0MHqPsONbUT7uLj6TpNxZaPuCEQovPk4lMTUefjP17Ko1r2Co7UHIza/x7HTS+6b
+         165L1QnBh4wppqRY46eu+d7RwhAbwA5A0usBU1WR3m3mD1ehqs2upJ6bnjRbrk0BD7J8
+         GbDny0Ym0YCYiwGSOv/PYAnVY4CoXDcYgieoaN2zJDINn1kN5GlwbZTX+yUKuW8QXv3/
+         Kj/g+Z6BbA9Roa10But2TzbJN0cdoIck42C1ukDTMcuaqmfsZ9JmwXMTxVClcUBisLcF
+         /5mccZ58u4PUsZMujM0CbGR1SWatTnjsjuIeUDvlAuRLZfO7cIruv7u41h9qxSfcRAkD
+         RQeQ==
+X-Gm-Message-State: AOJu0YxthksUFg/OXColPLDOXV5yGCXmkHc+1wF4thRqR9+RnS0PZ7Ge
+	qxLTSFLPxrleiSn2D0HsaWJpwDP7myMtpyq8NA1nhILgJDPXw9+CxfoSM24zVC1taCHx0YP0zv1
+	t
+X-Google-Smtp-Source: AGHT+IE6+84IXhhlr99lDSIzHw/i1n+21pXrloZhAL3Owg5LWdXlOTMWn3+ASMvSVuVdJOWaDtTsRA==
+X-Received: by 2002:a17:902:e543:b0:1f6:673c:ff2f with SMTP id d9443c01a7336-1f6d03e0b85mr123671515ad.68.1718089756824;
+        Tue, 11 Jun 2024 00:09:16 -0700 (PDT)
+Received: from MVIN00020.mvista.com ([2401:4900:882c:a9c8:6203:d5d2:2fb9:c814])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1f714953b58sm31744765ad.109.2024.06.11.00.09.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Jun 2024 23:47:22 -0700 (PDT)
-From: Rohini Sangam <rsangam@mvista.com>
+        Tue, 11 Jun 2024 00:09:16 -0700 (PDT)
+From: vanusuri@mvista.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Rohini Sangam <rsangam@mvista.com>,
-	Siddharth Doshi <sdoshi@mvista.com>
-Subject: [meta-java][kirkstone][PATCH] openjdk-8: Security fix for CVE-2024-21094
-Date: Tue, 11 Jun 2024 12:17:13 +0530
-Message-Id: <20240611064713.33342-1-rsangam@mvista.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Vijay Anusuri <vanusuri@mvista.com>
+Subject: [meta-oe][master][scarthgap][PATCH] tipcutils: add systemd service file
+Date: Tue, 11 Jun 2024 12:38:57 +0530
+Message-Id: <20240611070857.825852-1-vanusuri@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 11 Jun 2024 06:47:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110817
+ <openembedded-devel@lists.openembedded.org>; Tue, 11 Jun 2024 07:09:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110818
 
-CVE fixed:
--CVE-2024-21094 OpenJDK: C2 compilation fails with "Exceeded _node_regs array" (8317507)
-Upstream-Status: Backport from https://github.com/openjdk/jdk8u/commit/43cb87550865a93c559c9e8eaa59fcb071301bd3
+From: Vijay Anusuri <vanusuri@mvista.com>
 
-Signed-off-by: Rohini Sangam <rsangam@mvista.com>
-Signed-off-by: Siddharth Doshi <sdoshi@mvista.com>
+Add systemd service file for tipcutils
+
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
- .../openjdk/openjdk-8-release-common.inc      |   1 +
- .../patches-openjdk-8/CVE-2024-21094.patch    | 637 ++++++++++++++++++
- 2 files changed, 638 insertions(+)
- create mode 100644 recipes-core/openjdk/patches-openjdk-8/CVE-2024-21094.patch
+ .../tipcutils/tipcutils/tipcutils.service            | 12 ++++++++++++
+ meta-oe/recipes-extended/tipcutils/tipcutils_git.bb  |  9 ++++++++-
+ 2 files changed, 20 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/tipcutils/tipcutils/tipcutils.service
 
-diff --git a/recipes-core/openjdk/openjdk-8-release-common.inc b/recipes-core/openjdk/openjdk-8-release-common.inc
-index ff8d96e..f71eb10 100644
---- a/recipes-core/openjdk/openjdk-8-release-common.inc
-+++ b/recipes-core/openjdk/openjdk-8-release-common.inc
-@@ -21,6 +21,7 @@ PATCHES_URI = "\
-     file://2007-jdk-no-genx11-in-headless.patch \
-     file://2008-jdk-no-unused-deps.patch \
-     file://2009-jdk-make-use-gcc-instead-of-ld-for-genSocketOptionRe.patch \
-+    file://CVE-2024-21094.patch \
- "
- HOTSPOT_UB_PATCH = "\
-     file://1001-hotspot-fix-crash-on-JNI_CreateJavaVM.patch \
-diff --git a/recipes-core/openjdk/patches-openjdk-8/CVE-2024-21094.patch b/recipes-core/openjdk/patches-openjdk-8/CVE-2024-21094.patch
+diff --git a/meta-oe/recipes-extended/tipcutils/tipcutils/tipcutils.service b/meta-oe/recipes-extended/tipcutils/tipcutils/tipcutils.service
 new file mode 100644
-index 0000000..1852bd7
+index 000000000..42bf6517e
 --- /dev/null
-+++ b/recipes-core/openjdk/patches-openjdk-8/CVE-2024-21094.patch
-@@ -0,0 +1,637 @@
-+From 43cb87550865a93c559c9e8eaa59fcb071301bd3 Mon Sep 17 00:00:00 2001
-+From: Martin Balao <mbalao@openjdk.org>
-+Date: Wed, 27 Mar 2024 03:21:25 +0000
-+Subject: [PATCH] CVE-2024-21094: 8317507: C2 compilation fails with "Exceeded _node_regs
-+ array"
++++ b/meta-oe/recipes-extended/tipcutils/tipcutils/tipcutils.service
+@@ -0,0 +1,12 @@
++[Unit]
++Description=Transparent Inter-Process Communication protocol
++After=syslog.target remote-fs.target
 +
-+Upstream-Status: Backport from https://github.com/openjdk/jdk8u/commit/43cb87550865a93c559c9e8eaa59fcb071301bd3
-+CVE: CVE-2024-21094
++[Service]
++Type=oneshot
++RemainAfterExit=yes
++ExecStart=modprobe tipc
++ExecStop=rmmod tipc
 +
-+Signed-off-by: Rohini Sangam <rsangam@mvista.com>
-+---
-+ .../hotspot/src/share/vm/adlc/output_c.cpp    |   2 +
-+ .../regalloc/TestNodeRegArrayOverflow.java    | 599 ++++++++++++++++++
-+ 2 files changed, 601 insertions(+)
-+ create mode 100644 hotspot/test/compiler/regalloc/TestNodeRegArrayOverflow.java
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb b/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
+index 596aa260e..335263009 100644
+--- a/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
++++ b/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
+@@ -3,6 +3,7 @@ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://tipclog/tipc.h;endline=35;md5=985b6ea8735818511d276c1b466cce98"
+ 
+ SRC_URI = "git://git.code.sf.net/p/tipc/tipcutils;branch=master \
++           file://tipcutils.service \
+            file://0001-include-sys-select.h-for-FD_-definitions.patch \
+            file://0002-replace-non-standard-uint-with-unsigned-int.patch \
+            file://0001-multicast_blast-tipcc-Fix-struct-type-for-TIPC_GROUP.patch \
+@@ -11,7 +12,7 @@ SRC_URI = "git://git.code.sf.net/p/tipc/tipcutils;branch=master \
+ SRCREV = "7ab2211b87414ba240b0b2e4af219c1057c9cf9a"
+ PV = "2.2.0+git"
+ 
+-inherit autotools pkgconfig
++inherit autotools pkgconfig systemd
+ 
+ DEPENDS += "libdaemon"
+ 
+@@ -41,8 +42,14 @@ do_install:append() {
+     install -d ${D}${sysconfdir}
+     cp -R --no-dereference --preserve=mode,links -v ${S}/scripts/etc/* ${D}${sysconfdir}/
+     chown -R root:root ${D}${sysconfdir}
++    if [ "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}" ]; then
++        install -d ${D}${systemd_unitdir}/system
++        install -m 0755 ${WORKDIR}/tipcutils.service ${D}/${systemd_unitdir}/system
++    fi
+ }
+ 
++SYSTEMD_SERVICE:${PN} = "tipcutils.service"
 +
-+diff --git a/hotspot/src/share/vm/adlc/output_c.cpp b/hotspot/src/share/vm/adlc/output_c.cpp
-+index 19916904..b85123b4 100644
-+--- a/hotspot/src/share/vm/adlc/output_c.cpp
-++++ b/hotspot/src/share/vm/adlc/output_c.cpp
-+@@ -3023,6 +3023,8 @@ static void define_fill_new_machnode(bool used, FILE *fp_cpp) {
-+     fprintf(fp_cpp, "    if( i != cisc_operand() ) \n");
-+     fprintf(fp_cpp, "      to[i] = _opnds[i]->clone(C);\n");
-+     fprintf(fp_cpp, "  }\n");
-++    fprintf(fp_cpp, "  // Do not increment node index counter, since node reuses my index\n");
-++    fprintf(fp_cpp, "  C->set_unique(C->unique() - 1);\n");
-+     fprintf(fp_cpp, "}\n");
-+   }
-+   fprintf(fp_cpp, "\n");
-+diff --git a/hotspot/test/compiler/regalloc/TestNodeRegArrayOverflow.java b/hotspot/test/compiler/regalloc/TestNodeRegArrayOverflow.java
-+new file mode 100644
-+index 00000000..281524cc
-+--- /dev/null
-++++ b/hotspot/test/compiler/regalloc/TestNodeRegArrayOverflow.java
-+@@ -0,0 +1,599 @@
-++/*
-++ * Copyright (c) 2023, Oracle and/or its affiliates. All rights reserved.
-++ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
-++ *
-++ * This code is free software; you can redistribute it and/or modify it
-++ * under the terms of the GNU General Public License version 2 only, as
-++ * published by the Free Software Foundation.
-++ *
-++ * This code is distributed in the hope that it will be useful, but WITHOUT
-++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
-++ * version 2 for more details (a copy is included in the LICENSE file that
-++ * accompanied this code).
-++ *
-++ * You should have received a copy of the GNU General Public License version
-++ * 2 along with this work; if not, write to the Free Software Foundation,
-++ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
-++ *
-++ * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
-++ * or visit www.oracle.com if you need additional information or have any
-++ * questions.
-++ */
-++
-++package compiler.regalloc;
-++
-++/**
-++ * @test
-++ * @bug 8317507
-++ * @summary Test that C2's PhaseRegAlloc::_node_regs (a post-register-allocation
-++ *          mapping from machine nodes to assigned registers) does not overflow
-++ *          in the face of a program with a high-density of CISC spilling
-++ *          candidate nodes.
-++ * @run main/othervm -Xcomp -XX:CompileOnly=compiler.regalloc.TestNodeRegArrayOverflow::testWithCompilerUnrolling
-++                     -XX:CompileCommand=dontinline,compiler.regalloc.TestNodeRegArrayOverflow::dontInline
-++                     compiler.regalloc.TestNodeRegArrayOverflow compiler
-++ * @run main/othervm -Xcomp -XX:CompileOnly=compiler.regalloc.TestNodeRegArrayOverflow::testWithManualUnrolling
-++                     -XX:CompileCommand=dontinline,compiler.regalloc.TestNodeRegArrayOverflow::dontInline
-++                     compiler.regalloc.TestNodeRegArrayOverflow manual
-++ */
-++
-++public class TestNodeRegArrayOverflow {
-++
-++    static int dontInline() {
-++        return 0;
-++    }
-++
-++    static float testWithCompilerUnrolling(float inc) {
-++        int i = 0, j = 0;
-++        // This non-inlined method call causes 'inc' to be spilled.
-++        float f = dontInline();
-++        // This two-level reduction loop is unrolled 512 times, which is
-++        // requested by the SLP-specific unrolling analysis, but not vectorized.
-++        // Because 'inc' is spilled, each of the unrolled AddF nodes is
-++        // CISC-spill converted (PhaseChaitin::fixup_spills()). Before the fix,
-++        // this causes the unique node index counter (Compile::_unique) to grow
-++        // beyond the size of the node register array
-++        // (PhaseRegAlloc::_node_regs), and leads to overflow when accessed for
-++        // nodes that are created later (e.g. during the peephole phase).
-++        while (i++ < 128) {
-++            for (j = 0; j < 16; j++) {
-++                f += inc;
-++            }
-++        }
-++        return f;
-++    }
-++
-++    // This test reproduces the same failure as 'testWithCompilerUnrolling'
-++    // without relying on loop transformations.
-++    static float testWithManualUnrolling(float inc) {
-++        int i = 0, j = 0;
-++        float f = dontInline();
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        f += inc;
-++        return f;
-++    }
-++
-++    public static void main(String[] args) {
-++        switch (args[0]) {
-++        case "compiler":
-++            testWithCompilerUnrolling(0);
-++            break;
-++        case "manual":
-++            testWithManualUnrolling(0);
-++            break;
-++        default:
-++            throw new IllegalArgumentException("Invalid mode: " + args[0]);
-++        }
-++    }
-++}
-+-- 
-+2.35.7
-+
+ PACKAGES += "${PN}-demos"
+ FILES:${PN}-dbg += "/opt/tipcutils/demos/*/.debug /opt/tipcutils/ptts/.debug"
+ FILES:${PN}-demos = "/opt/tipcutils/*"
 -- 
-2.34.1
+2.25.1
 
 
