@@ -2,60 +2,60 @@ Return-Path: <scott.murray@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF267C27C65
-	for <webhook@archiver.kernel.org>; Tue, 11 Jun 2024 18:43:03 +0000 (UTC)
-Received: from mail-ua1-f49.google.com (mail-ua1-f49.google.com [209.85.222.49])
- by mx.groups.io with SMTP id smtpd.web10.1946.1718131378839643286
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E6F95C27C78
+	for <webhook@archiver.kernel.org>; Tue, 11 Jun 2024 18:43:43 +0000 (UTC)
+Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
+ by mx.groups.io with SMTP id smtpd.web11.1915.1718131417218329743
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Jun 2024 11:42:59 -0700
+ Tue, 11 Jun 2024 11:43:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=qdzz534X;
- spf=pass (domain: konsulko.com, ip: 209.85.222.49, mailfrom: scott.murray@konsulko.com)
-Received: by mail-ua1-f49.google.com with SMTP id a1e0cc1a2514c-80b8d45e6b7so963866241.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Jun 2024 11:42:58 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=Hlz7uf9R;
+ spf=pass (domain: konsulko.com, ip: 209.85.222.174, mailfrom: scott.murray@konsulko.com)
+Received: by mail-qk1-f174.google.com with SMTP id af79cd13be357-7955f3d4516so12492385a.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Jun 2024 11:43:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1718131377; x=1718736177; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1718131416; x=1718736216; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=FX7MLh1x9JS2iHnqG/YTsV2OCIF7Pq220MwJbzaxQZA=;
-        b=qdzz534XZ7gla9mU4fSqzlqspiSSxqdpCtzAaJMo+GKGldgxpdIHi8T2vBA2D8mcxy
-         lAWhTRRGNS5r7B1v2kBdyva2Jtqh9Lqe46MgSY1ZDt7G826oYUJ55QvylJHOXRaOSX6Q
-         0F/d9YwmmalRnM3FmOkVC8CKyQfSJASrIuR28=
+        bh=lbWYtIR/TmscMQiusaedC66d6XdYC22X0B58T5qbD0U=;
+        b=Hlz7uf9RcVOSgJa5GVlyqyjlj2CUw0Gn4o1i8l6MDqYxU+Ry6uqQlTVO9JPD/5SePz
+         b29TFSV8UqNrsnUg0PcQMsRsB57E8LasMHfUKCLeeLOmuxctTDf84j5JIYHqUZBH035B
+         ymk3sO66kvBiNYZCpGC5VNNHU8YZzldLLrlmE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718131377; x=1718736177;
+        d=1e100.net; s=20230601; t=1718131416; x=1718736216;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=FX7MLh1x9JS2iHnqG/YTsV2OCIF7Pq220MwJbzaxQZA=;
-        b=a1RMi22cU6hR25o6QnGeBVJhY5GCNfw+DOsSE0NZSciJAx6FJCR2yjk4T4w7OwZaVd
-         4YH0Kr68ChDRetV6zC/hHntwrYKJCKaa3XodUFFfacS4IiGie8+OffmdsG9InURsQBi6
-         WdBakT32HVFBLNTLBO3+Zb/wXuHB/+i8HC0zf/2kxFnJ2gfmGpnH7QJ+WaoKew2onMCN
-         unI1hLjPZTR6b1lTOQWiCrUrFbTjlKAh5ECKmpJVgnldAntxxQsPfh0P0E2/66S2BIWb
-         4pjTrc2CejgMUPP21grqcvNCz/qKRC/mkBPNOKxbVPAAeLr2fiyxGNGPPGHnTswIDYEN
-         aQTw==
-X-Gm-Message-State: AOJu0Yw+r/Svq+cpxKbq5nr3C0KHlgwlRCs4MSghAQC8o93jV2XPUCkQ
-	RwcHZDY9w3EcjklJLTwFqYWMgRKvt2qZh6SSi2sR85r41i9k147PBPbMaFBRCvFHF4RHNYELHYj
-	S
-X-Google-Smtp-Source: AGHT+IEYa95fNDoGodMoGmiT9g1fdwpU00B2oIQA2skv9kdOynVipP+/9sGtj9fYmq29NeS0gD7O8A==
-X-Received: by 2002:a67:fbda:0:b0:47a:231a:3856 with SMTP id ada2fe7eead31-48c275deb29mr15158541137.16.1718131376961;
-        Tue, 11 Jun 2024 11:42:56 -0700 (PDT)
+        bh=lbWYtIR/TmscMQiusaedC66d6XdYC22X0B58T5qbD0U=;
+        b=gNyyRWtc7BGY5vZnnhTgZWrmDIi5vMYB+g74JG5FY/3jC8mrEPLPhxztIBOdHOwmKo
+         iuxYvI/nHoARb0kV7pzTP77cAXXuBxBEmVUNoLJ16CflsHepg6gbzoCHgxEcDQYidjtM
+         FMSX8cvFfN7i5vpiV+Hu+0iMun5ddBkyZY7iMefemib/q+XK9PlIQ+TKipAcLR4AJ++r
+         /wuwn0rjzpQv0KW0O1fj97Qrzeqld/n8XtYTRfxgGiPB3+20JAf07TlEP3A+rYeFHxNl
+         3guOfFi+N2DW72u5m6vZHMpbwF/ozW6jbnxKJUJCgdq0pUO/ntFXOwtB6FoSpnwnJahD
+         XMsg==
+X-Gm-Message-State: AOJu0YwVUZQOAPN6esN0ivK/Q5bbm1GKehL8StDITm80+VYWKgmlrBGB
+	HDfu27Z2Z+PhWKVt8dswUXXSgmVd6qx4ef5dpZi/jSrF2e2BA56pdDEaJqqe4xajJvVmYR0u23A
+	t
+X-Google-Smtp-Source: AGHT+IHALe8hkwdtpnh20UGw4B27S8kj2DCGq5jajLdxXy6IWzUalqwq+i9JhXAcIWGaXrrnarHdFw==
+X-Received: by 2002:ac8:7d91:0:b0:440:5f5c:2a4f with SMTP id d75a77b69052e-4413bf790f7mr72219751cf.33.1718131415570;
+        Tue, 11 Jun 2024 11:43:35 -0700 (PDT)
 Received: from ghidorah.spiteful.org (107-179-213-3.cpe.teksavvy.com. [107.179.213.3])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-7954e1be2a3sm386217985a.38.2024.06.11.11.42.56
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-440517524aesm37871551cf.76.2024.06.11.11.43.34
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 11 Jun 2024 11:42:56 -0700 (PDT)
+        Tue, 11 Jun 2024 11:43:35 -0700 (PDT)
 From: Scott Murray <scott.murray@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH] python3-grpcio: backport abseil-cpp RISC-V fix
-Date: Tue, 11 Jun 2024 14:42:53 -0400
-Message-ID: <20240611184253.1849357-1-scott.murray@konsulko.com>
+Subject: [meta-python][scarthgap][PATCH] python3-grpcio: backport abseil-cpp RISC-V fix
+Date: Tue, 11 Jun 2024 14:43:25 -0400
+Message-ID: <20240611184325.1849386-1-scott.murray@konsulko.com>
 X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 11 Jun 2024 18:43:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110832
+ <openembedded-devel@lists.openembedded.org>; Tue, 11 Jun 2024 18:43:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110833
 
 Backport upstream abseil-cpp fix[1] for SIGILL crash on RISC-V with
 6.6 and newer kernels.  The patch has been tweaked to apply on top
@@ -159,13 +159,13 @@ index 000000000..82f15f88c
 +2.44.0
 +
 diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb
-index 47f3b2ea2..59bfbf553 100644
+index 3148f6376..a62c076fe 100644
 --- a/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb
 +++ b/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb
-@@ -11,6 +11,7 @@ SRC_URI += "file://0001-Include-missing-cstdint-header.patch \
+@@ -9,6 +9,7 @@ DEPENDS += "python3-protobuf"
+ SRC_URI += "file://0001-Include-missing-cstdint-header.patch \
+            file://abseil-ppc-fixes.patch \
             file://0001-zlib-Include-unistd.h-for-open-close-C-APIs.patch \
-            file://0001-crypto-use-_Generic-only-if-defined-__cplusplus.patch;patchdir=third_party/boringssl-with-bazel/src/ \
-            file://0001-target.h-define-proper-macro-for-ppc-ppc64.patch \
 +           file://0001-PR-1644-unscaledcycleclock-remove-RISC-V-support.patch \
             "
  SRC_URI[sha256sum] = "c77618071d96b7a8be2c10701a98537823b9c65ba256c0b9067e0594cdbd954d"
