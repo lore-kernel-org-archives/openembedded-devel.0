@@ -1,83 +1,170 @@
-Return-Path: <brgl@bgdev.pl>
+Return-Path: <martin@geanix.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B2E8C25B76
-	for <webhook@archiver.kernel.org>; Tue, 11 Jun 2024 09:06:05 +0000 (UTC)
-Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com [209.85.208.174])
- by mx.groups.io with SMTP id smtpd.web10.5039.1718096763454298028
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5174C25B76
+	for <webhook@archiver.kernel.org>; Tue, 11 Jun 2024 09:09:05 +0000 (UTC)
+Received: from www530.your-server.de (www530.your-server.de [188.40.30.78])
+ by mx.groups.io with SMTP id smtpd.web10.5059.1718096937016269542
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Jun 2024 02:06:03 -0700
+ Tue, 11 Jun 2024 02:08:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=i9wrBhKj;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.208.174, mailfrom: brgl@bgdev.pl)
-Received: by mail-lj1-f174.google.com with SMTP id 38308e7fff4ca-2eaae2a6dc1so105796781fa.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Jun 2024 02:06:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1718096761; x=1718701561; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=syu8GdIow43PW8jlX/ry0XLdvhO5+aB0UEd50KR0Q1w=;
-        b=i9wrBhKjFHERUQFRyC9gi1OXm33z4Tb6h1/qXq/8Gn+ThOQwfmWH8cAAEGrPQsXES6
-         OILQRAoUz68/pW8RbQx+eEDzp/DS8IFe4ep2W5NT+5wn3DMQEyjj58CoIG/FtKhyH/G9
-         ekDH5IodmmTREEtOUJsL0QsOGuSzMN5ONRkaMxrZxMikjb7PIlEDyKwO2GqM835y4k3W
-         reSvzbUj2tgS1HBE6bUXYD2eD+9EjcHJedwjvsBGm+rdrBMl9B72qP1b43Etbu3YxeYl
-         AJ+c0qEB183RIGTXz5/kc440KF9HXoGF9mmw8o5wVZvoftcVzOEU6gKCIfgHVTrEwqnA
-         r0zg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718096761; x=1718701561;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=syu8GdIow43PW8jlX/ry0XLdvhO5+aB0UEd50KR0Q1w=;
-        b=pQzP20AqBjOXknxoP0EBzUg1sSm0rWx2gNV+pZqlFldtfT9dZ80OcRf67x5F18RA0k
-         0jrNb1hNnO5L+ayqsRTYw8UXNYvDJzsZ2r9IDm3ArddVbvJdSfkCMdzg9d6889QZ7znF
-         LC0FCgkPvnDfoDNO54k/rGSASS8DPADxuSRWgMqRnRthS8d+HnBIfY8eCkIkdKBqnVFM
-         j0SqNIaylINGQ2DmJgOhsXUENHSHrLP6aHfHIg3uGuc6lzONHZm138wwvmGye9KK902A
-         JADzW3xXOVQQi8DZI4m65kcF+ICtPWm8fSqeIMEanZ09T+rC42uP9ZO76jjAecbKiGyh
-         NP0w==
-X-Forwarded-Encrypted: i=1; AJvYcCVWmhMvbp08ZDafO0MRQfiBh21GAuXksEVvISy+1ixbHJe9aFoiMkg4mC8giQbOiqq//0byVoRfnnrFagB3vpF9o1xZWdqLwUOVGPhwFkpIdnxLkpSyBHrETA==
-X-Gm-Message-State: AOJu0YwhdwJYFzzUE4FQOMvV1gUvc2wibflr1dOKS08XD4Je8zuX4e6O
-	395zj5t9HdVSDuo/CYBbIgqrKhyQbQnVGhHHA3Sg4f7dFV3YwbUy/rniNgQSFprP2Y+VMQ6Igm4
-	gdHIZzbsOJd+LCZHL2GFaeXwudmhRHINaSaj4DA==
-X-Google-Smtp-Source: AGHT+IGAB7Bze1mrpvzaiIPCCiVoTSfvWClvG7cCd7YbuwhRRLEFJ1k3xRxJkbt3WMvQoVlEip5ygGT3f/QKu9VUzCM=
-X-Received: by 2002:a05:6512:31d0:b0:52c:8304:db31 with SMTP id
- 2adb3069b0e04-52c8304dce3mr6644176e87.27.1718096761454; Tue, 11 Jun 2024
- 02:06:01 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240611045820.490708-1-raj.khem@gmail.com> <17D7E2EF3123254A.5431@lists.openembedded.org>
-In-Reply-To: <17D7E2EF3123254A.5431@lists.openembedded.org>
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-Date: Tue, 11 Jun 2024 11:05:50 +0200
-Message-ID: <CAMRc=Me0yenAZFqy=q8NxqnR7VTZDzSXY9evSjkJHfPx1=j88w@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] libgpiod-1.x: Fix build on musl
-To: brgl@bgdev.pl
-Cc: raj.khem@gmail.com, openembedded-devel@lists.openembedded.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+ dkim=pass header.i=@geanix.com header.s=default2211 header.b=Baor/Q3J;
+ spf=pass (domain: geanix.com, ip: 188.40.30.78, mailfrom: martin@geanix.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=geanix.com;
+	s=default2211; h=MIME-Version:Content-Transfer-Encoding:Content-Type:
+	References:In-Reply-To:Date:To:From:Subject:Message-ID:Sender:Reply-To:Cc:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID;
+	bh=i0+peQO+Man3lxgo8drVbD75h8qld8DZP+NMhHiqcZ0=; b=Baor/Q3J5Z08fIrBqZTLait0GX
+	82CsTRZQxWtalBmtlWJVTTlasHmXx/S98hrV20ETyGStFcXMncpWzCRGAjPsVWhPhXO1FMLNQ+63r
+	d3YIXaCQOshuD7MldcwreUkMrWx/c7A2toWm1ACU9CWi3GdVUTTRkPs5QilNc8sA5BnrLcDJyClmv
+	FqLTWpTns8eOGjZByq6lvrIxoCr1tAU+SctiKAECNFye/15w0Ur3w13qQzT5L5ywoe1BDHf7Wbwrn
+	wacqluiNEvo4ZRF3yqPqcdjhuvFfMZkiXy7uP9BZZjkMVEWLhQh9STQckR/jFmTo+PD3O1K7vgXJ2
+	dUWH7zaA==;
+Received: from sslproxy02.your-server.de ([78.47.166.47])
+	by www530.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	(Exim 4.94.2)
+	(envelope-from <martin@geanix.com>)
+	id 1sGxUv-0004id-QJ; Tue, 11 Jun 2024 11:08:54 +0200
+Received: from [85.184.138.13] (helo=[192.168.8.223])
+	by sslproxy02.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <martin@geanix.com>)
+	id 1sGxUs-000OH5-2A;
+	Tue, 11 Jun 2024 11:08:54 +0200
+Message-ID: <a7f86b7f45c4becd011b034d028e3bf53cf0891a.camel@geanix.com>
+Subject: Re: [oe] [meta-oe][master][scarthgap][PATCH] tipcutils: add systemd
+ service file
+From: Martin =?ISO-8859-1?Q?Hundeb=F8ll?= <martin@geanix.com>
+To: vanusuri@mvista.com, openembedded-devel@lists.openembedded.org
+Date: Tue, 11 Jun 2024 11:08:53 +0200
+In-Reply-To: <20240611070857.825852-1-vanusuri@mvista.com>
+References: <20240611070857.825852-1-vanusuri@mvista.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.52.2 
+MIME-Version: 1.0
+X-Authenticated-Sender: martin@geanix.com
+X-Virus-Scanned: Clear (ClamAV 0.103.10/27302/Mon Jun 10 10:25:43 2024)
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 11 Jun 2024 09:06:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110824
+ <openembedded-devel@lists.openembedded.org>; Tue, 11 Jun 2024 09:09:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110825
 
-On Tue, Jun 11, 2024 at 9:35=E2=80=AFAM Bartosz Golaszewski via
-lists.openembedded.org <brgl=3Dbgdev.pl@lists.openembedded.org> wrote:
->
-> On Tue, Jun 11, 2024 at 6:58=E2=80=AFAM Khem Raj via lists.openembedded.o=
-rg
-> <raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
-> >
-> > get a patch backported to fix the build
-> >
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-> > ---
+Hi,
 
-I made a bug-fix release (v1.6.5) and sent an alternative that simply
-updates the package and disables the C++ tests.
+On Tue, 2024-06-11 at 12:38 +0530, Vijay Anusuri via
+lists.openembedded.org wrote:
+> From: Vijay Anusuri <vanusuri@mvista.com>
+>=20
+> Add systemd service file for tipcutils
+>=20
+> Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+> ---
+> =C2=A0.../tipcutils/tipcutils/tipcutils.service=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 12
+> ++++++++++++
+> =C2=A0meta-oe/recipes-extended/tipcutils/tipcutils_git.bb=C2=A0 |=C2=A0 9=
+ ++++++++-
+> =C2=A02 files changed, 20 insertions(+), 1 deletion(-)
+> =C2=A0create mode 100644 meta-oe/recipes-
+> extended/tipcutils/tipcutils/tipcutils.service
+>=20
+> diff --git a/meta-oe/recipes-
+> extended/tipcutils/tipcutils/tipcutils.service b/meta-oe/recipes-
+> extended/tipcutils/tipcutils/tipcutils.service
+> new file mode 100644
+> index 000000000..42bf6517e
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/tipcutils/tipcutils/tipcutils.service
+> @@ -0,0 +1,12 @@
+> +[Unit]
+> +Description=3DTransparent Inter-Process Communication protocol
+> +After=3Dsyslog.target remote-fs.target
+> +
+> +[Service]
+> +Type=3Doneshot
+> +RemainAfterExit=3Dyes
+> +ExecStart=3Dmodprobe tipc
+> +ExecStop=3Drmmod tipc
 
-Bart
+Wouldn't it be better to use modules-load.d instead:
+https://www.man7.org/linux/man-pages/man5/modules-load.d.5.html
+
+?
+
+// Martin
+
+> +
+> +[Install]
+> +WantedBy=3Dmulti-user.target
+> diff --git a/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
+> b/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
+> index 596aa260e..335263009 100644
+> --- a/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
+> +++ b/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
+> @@ -3,6 +3,7 @@ LICENSE =3D "GPL-2.0-only"
+> =C2=A0LIC_FILES_CHKSUM =3D
+> "file://tipclog/tipc.h;endline=3D35;md5=3D985b6ea8735818511d276c1b466cce9
+> 8"
+> =C2=A0
+> =C2=A0SRC_URI =3D "git://git.code.sf.net/p/tipc/tipcutils;branch=3Dmaster=
+ \
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 file://tipc=
+utils.service=C2=A0\
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
+> file://0001-include-sys-select.h-for-FD_-definitions.patch=C2=A0\
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
+> file://0002-replace-non-standard-uint-with-unsigned-int.patch=C2=A0\
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
+> file://0001-multicast_blast-tipcc-Fix-struct-type-for-TIPC_GROUP.patch
+> =C2=A0\
+> @@ -11,7 +12,7 @@ SRC_URI =3D
+> "git://git.code.sf.net/p/tipc/tipcutils;branch=3Dmaster \
+> =C2=A0SRCREV =3D "7ab2211b87414ba240b0b2e4af219c1057c9cf9a"
+> =C2=A0PV =3D "2.2.0+git"
+> =C2=A0
+> -inherit autotools pkgconfig
+> +inherit autotools pkgconfig systemd
+> =C2=A0
+> =C2=A0DEPENDS +=3D "libdaemon"
+> =C2=A0
+> @@ -41,8 +42,14 @@ do_install:append() {
+> =C2=A0=C2=A0=C2=A0=C2=A0 install -d ${D}${sysconfdir}
+> =C2=A0=C2=A0=C2=A0=C2=A0 cp -R --no-dereference --preserve=3Dmode,links -=
+v
+> ${S}/scripts/etc/* ${D}${sysconfdir}/
+> =C2=A0=C2=A0=C2=A0=C2=A0 chown -R root:root ${D}${sysconfdir}
+> +=C2=A0=C2=A0=C2=A0 if [ "${@bb.utils.filter('DISTRO_FEATURES', 'systemd'=
+, d)}" ];
+> then
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 install -d ${D}${systemd_unit=
+dir}/system
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 install -m 0755 ${WORKDIR}/ti=
+pcutils.service
+> ${D}/${systemd_unitdir}/system
+> +=C2=A0=C2=A0=C2=A0 fi
+> =C2=A0}
+> =C2=A0
+> +SYSTEMD_SERVICE:${PN} =3D "tipcutils.service"
+> +
+> =C2=A0PACKAGES +=3D "${PN}-demos"
+> =C2=A0FILES:${PN}-dbg +=3D "/opt/tipcutils/demos/*/.debug
+> /opt/tipcutils/ptts/.debug"
+> =C2=A0FILES:${PN}-demos =3D "/opt/tipcutils/*"
+>=20
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#110818):
+> https://lists.openembedded.org/g/openembedded-devel/message/110818
+> Mute This Topic: https://lists.openembedded.org/mt/106609163/3618414
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe:
+> https://lists.openembedded.org/g/openembedded-devel/unsub=C2=A0[
+> martin@geanix.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>=20
+
 
