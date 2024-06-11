@@ -1,83 +1,97 @@
-Return-Path: <alex.kanavin@gmail.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 89C14C25B76
-	for <webhook@archiver.kernel.org>; Tue, 11 Jun 2024 08:42:15 +0000 (UTC)
-Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
- by mx.groups.io with SMTP id smtpd.web10.4779.1718095333216639720
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B3EEC25B76
+	for <webhook@archiver.kernel.org>; Tue, 11 Jun 2024 09:04:35 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.web11.5041.1718096673803186344
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Jun 2024 01:42:13 -0700
+ Tue, 11 Jun 2024 02:04:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=S5H3eHDC;
- spf=pass (domain: gmail.com, ip: 209.85.167.52, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-52bc335e49aso1113997e87.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Jun 2024 01:42:12 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=tfnJ4Lm4;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.53, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-42198492353so6867045e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Jun 2024 02:04:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1718095331; x=1718700131; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=d0cwUuzA6wrrVBizyz1ZkEmj3pT9Z9zo50lShp8Djug=;
-        b=S5H3eHDCtFPEoIeCRH5MCv/X8Y/fc0i61rrOQpFwHHIf45F3nnRM3aaW1TStT9STRG
-         N4Qq2dvAGFcQ0PNIyVnL+lnybuAu+4sH9DiUbJwQ+wEvKj58gQJ9tzjtNN2QUdSD+6RQ
-         W6OuL2WkzscJzv204mFItVXbDvygSFDHHTyXYQi7Lqtju58K0uuRYqXR4FMoNCYiUSkk
-         0e0xWeDUrHwhmlEpwNSf3XyngeLd0IbmKDgR+NrLD9zFjGrM40tBtQM/MtK7Y0KGVUSs
-         GXJSUiNvI6l8c24V/NCl0W2wL48YRcEgPITLVXoa5F69m9hYat3nA8e7HRv1mgV8tPUw
-         +vkQ==
+        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1718096672; x=1718701472; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Dq+SNIZ/bsatwkZB9rLGAcfWqvSMZLbWSSNgNKqTlyQ=;
+        b=tfnJ4Lm45XsOBxt3wihsGl/4w+jQdj9eFE/mr/2XD6VN+oIF5p3pxrn7o3pZWtUJlh
+         ZuTMAyfviCGeZ7I2hSFXkpX854J/8aLaNnLEQtVCvtWex6HYDv6RKB9XVOAqALe0E2+6
+         dWxbeavm+bKL4UWJ0HsufvNOdVYByeE36OEzd2VsNp5PcaI5aH2Rq16NkE0993xBuZl2
+         6fLF0G9MlIF1IP6hPB0lEvnqecgMdMNa23tByXevm5yhWXsx+lzVhuLfLvD3l+jjZFqI
+         sMlPdaAcQRKMXeRMWvQwEdRXOrmNnDWe/33+y+B7J7CgqgZ0G2WCqU0QxduA7tXY2qL3
+         9hyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718095331; x=1718700131;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1718096672; x=1718701472;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=d0cwUuzA6wrrVBizyz1ZkEmj3pT9Z9zo50lShp8Djug=;
-        b=J/56gpK8ourIM3QBvKyDeAg5PKlqE0wjGmIqHQit1PdJz9YVCCsSRzKILETStlgvNV
-         xIUl7nhosljPPBsHTjTu+chGnTZTk1c2I91CmcBppeO7PzsC7a/yrOheM7FsE9lZh068
-         /YxKswfLPMTD/0kB/f9bxgg9UAeYgbPhQrfb6Yq8l/PF1yWsHKGyO3w1HoQyUksasYxb
-         Rm6s66kjukA2Ulns5J627KRku1NejrZFCLPqwXEItmxZ+nW2PMTD6sRoJyOGI37g0YYq
-         dPhT93l8iewcghTjxNg2jiFnb91DW+Qjltrv8a43GJPNmnVMYMPsTi3W3O4Frb2MvGok
-         AMQA==
-X-Gm-Message-State: AOJu0Yxvu9brRCyOi7ea8Umz8B21J/j5V/z2icNUhRXIDgqet/jjRISL
-	UkXIHCZg4/+BR1siYCU3MIVkm8M88PvAOsWKpATt8S4j0SaRID1+ey7RjzhcuSEEOhJlz3pcnn/
-	cC842vNyjkErdUuv+DYnlEEb2jB0=
-X-Google-Smtp-Source: AGHT+IGtuM7L9clnDY9qTEdTtXC5qm12SRFZLYSiRaOP1nItWbfdgirjHGSt3jWuruqRcC31oTkluslG3pVelbaFIQQ=
-X-Received: by 2002:a19:c20f:0:b0:52c:1297:9af with SMTP id
- 2adb3069b0e04-52c12970a0dmr5045523e87.60.1718095331069; Tue, 11 Jun 2024
- 01:42:11 -0700 (PDT)
+        bh=Dq+SNIZ/bsatwkZB9rLGAcfWqvSMZLbWSSNgNKqTlyQ=;
+        b=A9le17sBH6HWL+tKmGwg61VWhMmREYy1N65+d23yPeyxD5T9bWdJq8bPMgKgTNH3k7
+         efYbX8y42YwWaAJI5wDCLRStE63ULruRM/11QtVPdJwUsDYoDSfJFjcrk2YC4EK93vg2
+         BoQEAxElpmZkMOtPhRr8LPudLXwWMO2ECbA6lM+vBRPIpRX/d+DYUh1vLrSWx8OJtPn9
+         EQzMQ0BLphcD7Mi352xHel4Hlwpp2d3hylqJI4+uq8OSv7nDFoYY/G/C//ESz7pfkUWX
+         zN5che4KS4F1Jdb7bgZyuXlmyg2po6JYP52UoD1Pg4VofbRfU3tmUG76GSHxDiEvqIHG
+         qLsg==
+X-Forwarded-Encrypted: i=1; AJvYcCUwQ1PmZ+60ysrg8Mxvw4CrvjWhN0W6cQS8NWnvK6cY5Qd8BMWPTmR450APseiI+86FCUxwMd5UCT0Nsx4upoSuAOFg7EOP2y4WCPLQs3iNQCXW99SbYLmEuw==
+X-Gm-Message-State: AOJu0YwqqWRfWytAAMWNOI5/9Rl/4HkrrEb88qn7RyJwBRE2W+6NvoJ3
+	QUrRYnSz1WCzfXDNrxX59XKommO0VZdgVFQuRM8jhMYdRlOprsmHD7gjacu7u9k=
+X-Google-Smtp-Source: AGHT+IGYFwGdUoTpezvREqm8fxM67E9LjQpFrYIGyNnlSFnI/hXM1hq6lGq5iQvyeN7DQ6umICF8yw==
+X-Received: by 2002:a05:600c:138e:b0:421:565b:e71a with SMTP id 5b1f17b1804b1-421649eca88mr84452855e9.5.1718096672046;
+        Tue, 11 Jun 2024 02:04:32 -0700 (PDT)
+Received: from brgl-uxlite.home ([2a01:cb1d:75a:e000:38d:e428:e1bc:56b7])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-421dd8c3a9esm59166345e9.27.2024.06.11.02.04.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 11 Jun 2024 02:04:31 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [PATCH 1/2] libgpiod: update to v1.6.5
+Date: Tue, 11 Jun 2024 11:04:02 +0200
+Message-ID: <20240611090403.26474-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <CANNYZj9cu_TU0ZaNrcFYn0SkNaBU1_BaojyM0nBCeJzLJGXbvg@mail.gmail.com>
- <20363.1718094378871141577@lists.openembedded.org>
-In-Reply-To: <20363.1718094378871141577@lists.openembedded.org>
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Tue, 11 Jun 2024 10:41:59 +0200
-Message-ID: <CANNYZj9rfegU7e-zfjpJLbzUHUbnmh0e2wHEUNeZ70v+8pERjA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] tree broken source link
-To: egyszeregy@freemail.hu
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 11 Jun 2024 08:42:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110821
+ <openembedded-devel@lists.openembedded.org>; Tue, 11 Jun 2024 09:04:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110822
 
-I said that only about meta-xilinx. If you want things fixed in
-meta-openembedded, then please send a patch. Maintainers for meta-oe
-are unpaid volunteers and do not owe you a fix.
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-Alex
+This release contains a build fix for environments that require libgen.h
+to be included for basename() and don't pull it implicitly with any
+other header.
 
-On Tue, 11 Jun 2024 at 10:26, Livius via lists.openembedded.org
-<egyszeregy=freemail.hu@lists.openembedded.org> wrote:
->
-> You said it need to be reported and maintainer will solve it, i am not a maintainer for this. Now it is up to you to solve it, please do it.
-> A patch would be most welcome also from the real maintainers who have to care about it.
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#110820): https://lists.openembedded.org/g/openembedded-devel/message/110820
-> Mute This Topic: https://lists.openembedded.org/mt/106603732/1686489
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [alex.kanavin@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+---
+ .../libgpiod/{libgpiod_1.6.4.bb => libgpiod_1.6.5.bb}           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libgpiod/{libgpiod_1.6.4.bb => libgpiod_1.6.5.bb} (94%)
+
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.4.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
+similarity index 94%
+rename from meta-oe/recipes-support/libgpiod/libgpiod_1.6.4.bb
+rename to meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
+index 111a5727b..74b49a57b 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.4.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
+@@ -3,7 +3,7 @@ require libgpiod.inc
+ LICENSE = "LGPL-2.1-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
+ 
+-SRC_URI[sha256sum] = "7b146e12f28fbca3df7557f176eb778c5ccf952ca464698dba8a61b2e1e3f9b5"
++SRC_URI[sha256sum] = "ae280f697bf035a1fb780c9972e5c81d0d2712b7ab6124fb3fba24619daa72bc"
+ 
+ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-1.x:"
+ 
+-- 
+2.40.1
+
 
