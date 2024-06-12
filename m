@@ -1,187 +1,124 @@
-Return-Path: <dbaryshkov@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B34AEC27C53
-	for <webhook@archiver.kernel.org>; Wed, 12 Jun 2024 07:52:19 +0000 (UTC)
-Received: from mail-lj1-f176.google.com (mail-lj1-f176.google.com [209.85.208.176])
- by mx.groups.io with SMTP id smtpd.web11.5984.1718178737762060897
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E6DBC27C53
+	for <webhook@archiver.kernel.org>; Wed, 12 Jun 2024 19:50:37 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web10.3132.1718221830443916076
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Jun 2024 00:52:18 -0700
+ Wed, 12 Jun 2024 12:50:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=ZK4aYUQn;
- spf=pass (domain: linaro.org, ip: 209.85.208.176, mailfrom: dmitry.baryshkov@linaro.org)
-Received: by mail-lj1-f176.google.com with SMTP id 38308e7fff4ca-2e724bc46c4so71981211fa.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jun 2024 00:52:17 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Y4RD29i2;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-1f7274a453bso2544005ad.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jun 2024 12:50:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1718178736; x=1718783536; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1718221830; x=1718826630; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=cd4XPIyBgKHM9Mnh6A4CchEzVFKlKyI/uNfF4g+WJUI=;
-        b=ZK4aYUQnnGDv6+ylWrGe9Qi/uxAZp17GC+n4w3iMVB75gyW6Y4VztQ7+tlUipYk4lp
-         c3YZ7D+f6qtX2F/wCKYK90YIEqStG4AE05PH75OPek7HWr8r+Eq2Q20am/82twItx83e
-         E9BGpeXsDerN2uPumVcJ3TbxcCrMYQB+N5CRBg3weGSO4ea7EDJ0FpAGb/VYSarj0j63
-         lHd0/z5zBVXVXn+u2JAcoqv0guv8vDl7SIt1xK4DBq1yhbVsdopizPVVnO6K3MDssEWW
-         zOXFlOltmf/VbAyhwJqwv0KZgRXw4xXSzb5wmoUtv086CXFjpCId4Gj1bT5v7SYVjns8
-         52ZA==
+        bh=59KbvlAGCk59SgZcMhLXO/7z9osXPkot95UsytRugCs=;
+        b=Y4RD29i2pNlo+dH8Mrt0SBgdzGO0YjtebvLNO8kJlXyGvymvY9JqnJEjA+W3r0YaGU
+         1zL+QoESPD+mR1sQWWggj4xYt2tCr9b/+Qxv3NG02UKGK/kDr5xD7sUHC6nkV2uIJkS2
+         dDCL+p6+RZLnVoCURAlDu2aMUvxuXVdx8X+y+jP7IsukDX1q5vSflTt0J/rT7g/pyrpe
+         5QnfsrCze27fslDgrTI1vl91YPdbw/sOE1Mmz1VZSA29ue+Pr3VRbBiNaXzR/LtrtdVk
+         gH35Gsq3ifAIa6B1cwJ45OhhtezqcwcK2YKrW0mHwALHglSHT7U0xLNfNzgTmIq0QO4f
+         Fp5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718178736; x=1718783536;
+        d=1e100.net; s=20230601; t=1718221830; x=1718826630;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=cd4XPIyBgKHM9Mnh6A4CchEzVFKlKyI/uNfF4g+WJUI=;
-        b=cCUqusJhTTyenmr5roSU19V2RF4NQTS6hw2BphdEnlHbhgGuX/FMbpqbtDWdW2MDmb
-         Il2enSWV2y4cBK4UWBVUM83kM1rHhPnuF9lCzqeKyDk9zFj79tmiE+Kx2hs5iJqX4mVF
-         JR9I7Ipe9GNvzoV0xKKt0R4KEcT9P2v8+4xx6OFYdH5gOwKaitSiofdXSTg2So1nf41V
-         V/foZCictH7KW+RDS4zAKKDjR6DbVadGxUm3b5Vm0WR9vG8NV4dB2raXWPI4gw0kdvQ6
-         Djl5z7D3zo/3nMiJoVD6BUf/ZkgDAhVAOXQH7AB8lL7mPU0qdSltccdB5O5slMc6GWrn
-         tAMg==
-X-Gm-Message-State: AOJu0YxLkTEeUG0A/pdOSe5pKXUKgIGEIlAQgDd0OY+iYDbP+/Yvzwak
-	lgVolUDIiTw3mnrX5oy64yZhQuV20GHHwuJ0NBbPvREN3Gb0dfNIZxq1Sq0WO8LApnNL0EcC7VU
-	1hx8=
-X-Google-Smtp-Source: AGHT+IEMJh4t8unAQBFgkHPA1KErF8rObW+QPFkZ199su8+XkDo2A72WOZ0d/QrVIlf1TuxjMqMGBg==
-X-Received: by 2002:a05:651c:1713:b0:2eb:f423:a78 with SMTP id 38308e7fff4ca-2ebfc9ab3bemr4509311fa.51.1718178735586;
-        Wed, 12 Jun 2024 00:52:15 -0700 (PDT)
-Received: from umbar.unikie.fi ([192.130.178.91])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-2ebf8962b2esm3430771fa.126.2024.06.12.00.52.15
+        bh=59KbvlAGCk59SgZcMhLXO/7z9osXPkot95UsytRugCs=;
+        b=TL3TQRG9Tab+H3RXk4WhnQo2XnVwnXdGk77wj7ShXtXoDTya4Ejk/tr+cw6Q9XA02S
+         Lfy8/sOG511cHjEkdpq8OYAXJ77ptgXURS5if+aY6Kam1jNkxVBPryACJBThHv9seaxM
+         CXHf0RqxAO9AHIpcR5Tn6muhQbkJB7XFfZE1lJCjNmzVdmBXccxaTRwStHNqUQ5xlTQ9
+         U4nzmmuXgMdIY5coAD+N+UpYwlZJLU//l1ig3KFwysnfy72zMP6bUoLvbOIHLnGt4JLQ
+         Yvq7xfO6LBiiniDAHyeufrNv8JzFpDIR2PMhLrr83hDsOdMvVYlcvViP8WTeRznYfcwb
+         8uWQ==
+X-Gm-Message-State: AOJu0YzNUeGaNeHbtn5le6o1I7dQlCOZMUzfbETNeYsDOod8Kin0ltT5
+	7sI4+8LEzt7QL//Ejjd6GXUt9ZzJ2VRKIMhTVKUtfG33QU+8cWXS1fdlUQ==
+X-Google-Smtp-Source: AGHT+IGeC5/ZGQ7TAvoaOh1Wf9LcVE5Zrt8rPHVi1RyZU19gI/6sgv7ELjU4bL+JgtdT4L7vMScASA==
+X-Received: by 2002:a17:903:182:b0:1f6:e8ee:54a6 with SMTP id d9443c01a7336-1f83b7099eamr29555015ad.59.1718221829046;
+        Wed, 12 Jun 2024 12:50:29 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::9980])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1f83e17e815sm18517955ad.29.2024.06.12.12.50.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Jun 2024 00:52:15 -0700 (PDT)
-From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+        Wed, 12 Jun 2024 12:50:28 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Armin Kuster <akuster808@gmail.com>
-Subject: [meta-oe][PATCH v2] cabextract: add utility to extract Microsft cabinet files
-Date: Wed, 12 Jun 2024 10:52:14 +0300
-Message-Id: <20240612075214.2234052-1-dmitry.baryshkov@linaro.org>
-X-Mailer: git-send-email 2.39.2
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Tim Orling <ticotimo@gmail.com>
+Subject: [meta-python][PATCH] python3-pydantic-core: Fix build with python 3.12.4
+Date: Wed, 12 Jun 2024 12:50:26 -0700
+Message-ID: <20240612195026.3806547-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Jun 2024 07:52:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110882
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Jun 2024 19:50:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110883
 
-WoA firmware, fonts and some other useful files are being distributed as
-a Microsoft cabinet files. Add recipes for the cabextract utility, which
-is used to extract such files.
+This needs to be upgraded to 2.19+ but until then
+backport a fix to keep it building.
 
-Cabextract can either use a bundled source tree for libmspack library or
-an externally provided library. Package the library separately in order
-to be able to share it with the meta-security layer.
-
-Cc: Armin Kuster <akuster808@gmail.com>
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Tim Orling <ticotimo@gmail.com>
 ---
+ ...ate_self_schema-for-Python-3.12-1299.patch | 29 +++++++++++++++++++
+ .../python/python3-pydantic-core_2.16.3.bb    |  3 +-
+ 2 files changed, 31 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pydantic-core/0001-Fix-generate_self_schema-for-Python-3.12-1299.patch
 
-Changes since v1:
-- Added fnmatch.c patch to fix rpl_fnmatch-related build issues.
-
----
- .../cabextract/cabextract/fix-fnmatch.patch   | 40 +++++++++++++++++++
- .../cabextract/cabextract_1.11.bb             | 22 ++++++++++
- .../cabextract/libmspack_0.11alpha.bb         | 16 ++++++++
- 3 files changed, 78 insertions(+)
- create mode 100644 meta-oe/recipes-support/cabextract/cabextract/fix-fnmatch.patch
- create mode 100644 meta-oe/recipes-support/cabextract/cabextract_1.11.bb
- create mode 100644 meta-oe/recipes-support/cabextract/libmspack_0.11alpha.bb
-
-diff --git a/meta-oe/recipes-support/cabextract/cabextract/fix-fnmatch.patch b/meta-oe/recipes-support/cabextract/cabextract/fix-fnmatch.patch
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Fix-generate_self_schema-for-Python-3.12-1299.patch b/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Fix-generate_self_schema-for-Python-3.12-1299.patch
 new file mode 100644
-index 000000000000..bd486283b67d
+index 0000000000..f6aa18e303
 --- /dev/null
-+++ b/meta-oe/recipes-support/cabextract/cabextract/fix-fnmatch.patch
-@@ -0,0 +1,40 @@
-+From - Mon Jun 11 00:00:00 2024
-+From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-+Subject: [PATCH] Don't play with fnmatch.c replacement
++++ b/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Fix-generate_self_schema-for-Python-3.12-1299.patch
+@@ -0,0 +1,29 @@
++From 0dcca2ed6a83ebbc944ec8cbd2f67ffec8043461 Mon Sep 17 00:00:00 2001
++From: Jelle Zijlstra <jelle.zijlstra@gmail.com>
++Date: Wed, 22 May 2024 07:44:10 -0700
++Subject: [PATCH] Fix generate_self_schema for Python 3.12+ (#1299)
 +
-+Currently fnmatch.c, even if it is selected, conditionally disables compilation
-+of fnmatch() funciton even though the rest of the code expects to get it (e.g.
-+because Autoconf didn't detect the working implementation and enabled fnmatch.c
-+to replace it). Drop the extra conditionals, to fix Autoconf magic.
++Upstream-Status: Backport [https://github.com/pydantic/pydantic-core/commit/a7620419383a69bd2b28ab953c9a17f6ed35bb9a]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ generate_self_schema.py | 7 ++++++-
++ 1 file changed, 6 insertions(+), 1 deletion(-)
 +
-+Observed error:
-+
-+ld: src/cabextract.o: in function `process_cabinet':
-+/usr/src/debug/cabextract/1.11/src/cabextract.c:499:(.text.startup+0xf1c): undefined reference to `rpl_fnmatch'
-+collect2: error: ld returned 1 exit status
-+
-+Upstream-Status: Submitted [https://github.com/kyz/libmspack/pull/51]
-+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-+
-+Index: cabextract-1.11/fnmatch.c
-+===================================================================
-+--- cabextract-1.11.orig/fnmatch.c
-++++ cabextract-1.11/fnmatch.c
-+@@ -49,11 +49,6 @@ static const char rcsid[] =
-+    it is simpler to just do this in the source for each such file.
-+ */
++diff --git a/generate_self_schema.py b/generate_self_schema.py
++index 8d27247..109fca0 100644
++--- a/generate_self_schema.py
+++++ b/generate_self_schema.py
++@@ -189,7 +189,12 @@ def all_literal_values(type_: type[core_schema.Literal]) -> list[any]:
 + 
-+-#if defined (_LIBC) || !defined (__GNU_LIBRARY__)
-+-
-+-#if !defined(__GNU_LIBRARY__) && !defined(STDC_HEADERS)
-+-#endif
-+-
-+ /* Match STRING against the filename pattern PATTERN, returning zero if
-+    it matches, nonzero if not.  */
-+ int
-+@@ -216,5 +211,3 @@ int         flags;
-+ 
-+         return FNM_NOMATCH;
-+ }
-+-
-+-#endif /* _LIBC or not __GNU_LIBRARY__.  */
-diff --git a/meta-oe/recipes-support/cabextract/cabextract_1.11.bb b/meta-oe/recipes-support/cabextract/cabextract_1.11.bb
-new file mode 100644
-index 000000000000..0f06489ca978
---- /dev/null
-+++ b/meta-oe/recipes-support/cabextract/cabextract_1.11.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "Software for extracting Microsoft cabinet files"
-+DESCRIPTION = "tool for extracting Microsoft cabinet files"
-+HOMEPAGE = "http://www.cabextract.org.uk/"
-+SECTION = "console/utils"
-+
-+LICENSE = "GPL-3.0-or-later"
-+LIC_FILES_CHKSUM = "file://src/cabextract.c;beginline=4;endline=11;md5=b0a10c6d3843f262114e7ecf91fc7e78"
-+
-+SRC_URI = "\
-+    https://www.cabextract.org.uk/cabextract-${PV}.tar.gz \
-+    file://fix-fnmatch.patch \
-+"
-+
-+SRC_URI[sha256sum] = "b5546db1155e4c718ff3d4b278573604f30dd64c3c5bfd4657cd089b823a3ac6"
-+
-+DEPENDS = "libmspack"
-+
-+EXTRA_OECONF = "--with-external-libmspack"
-+
-+inherit autotools pkgconfig
-+
-+BBCLASSEXTEND += "native nativesdk"
-diff --git a/meta-oe/recipes-support/cabextract/libmspack_0.11alpha.bb b/meta-oe/recipes-support/cabextract/libmspack_0.11alpha.bb
-new file mode 100644
-index 000000000000..169a5f271be9
---- /dev/null
-+++ b/meta-oe/recipes-support/cabextract/libmspack_0.11alpha.bb
-@@ -0,0 +1,16 @@
-+SUMMARY = "A library for Microsoft compression formats"
-+DESCRIPTION = "The library provides compressors and decompressors,\
-+archivers and dearchivers for Microsoft compression formats: CAB, CHM, WIM,\
-+LIT, HLP, KWAJ and SZDD."
-+HOMEPAGE = "http://www.cabextract.org.uk/libmspack/"
-+SECTION = "lib"
-+LICENSE = "LGPL-2.1-only"
-+
-+LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=7fbc338309ac38fefcd64b04bb903e34"
-+
-+SRC_URI = "https://www.cabextract.org.uk/libmspack/libmspack-${PV}.tar.gz"
-+SRC_URI[sha256sum] = "70dd1fb2f0aecc36791b71a1e1840e62173079eadaa081192d1c323a0eeea21b"
-+
-+inherit autotools
-+
-+BBCLASSEXTEND += "native nativesdk"
--- 
-2.39.2
-
++ def eval_forward_ref(type_: Any) -> Any:
++     try:
++-        return type_._evaluate(core_schema.__dict__, None, set())
+++        try:
+++            # Python 3.12+
+++            return type_._evaluate(core_schema.__dict__, None, type_params=set(), recursive_guard=set())
+++        except TypeError:
+++            # Python 3.9+
+++            return type_._evaluate(core_schema.__dict__, None, set())
++     except TypeError:
++         # for Python 3.8
++         return type_._evaluate(core_schema.__dict__, None)
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb b/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
+index f510645222..c5ce1ff110 100644
+--- a/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
+@@ -8,7 +8,8 @@ HOMEPAGE = "https://github.com/pydantic/pydantic-core"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=ab599c188b4a314d2856b3a55030c75c"
+ 
+-SRC_URI += "file://0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch"
++SRC_URI += "file://0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch \
++            file://0001-Fix-generate_self_schema-for-Python-3.12-1299.patch"
+ SRC_URI[sha256sum] = "1cac689f80a3abab2d3c0048b29eea5751114054f032a941a32de4c852c59cad"
+ 
+ DEPENDS = "python3-maturin-native python3-typing-extensions"
 
