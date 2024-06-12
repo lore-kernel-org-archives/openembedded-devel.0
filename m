@@ -2,51 +2,51 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D53EBC2BD05
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3F5EC2BBCA
 	for <webhook@archiver.kernel.org>; Wed, 12 Jun 2024 02:58:46 +0000 (UTC)
-Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
- by mx.groups.io with SMTP id smtpd.web10.2433.1718161120283734111
+Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
+ by mx.groups.io with SMTP id smtpd.web10.2432.1718161119922720466
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 11 Jun 2024 19:58:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=I+q9X2KR;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=QW1hIMcC;
+ spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1718161120; x=1749697120;
+  t=1718161119; x=1749697119;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=k5xMOu/SHyZar9RGZD0PU/LRVmvn1vmhSsa4Qfxd8yM=;
-  b=I+q9X2KRIpE+d95sCh4hl5PDfZW0OH33gD9VgJycOZbfooieA+mK30Bh
-   hlD/hREERfFNV/7K6MYxGRxqVST7uiC1NbbmrXEEEXr2gGrcRue+fMJBu
-   Ddqcf+K6UO0THVz2ebsye85vGiaaS7jdepbsObEv86PaqjUzhJG5TBucx
-   ikwAAqTd4kJnW21CK0S7KLdd+Qidqh/5cpiV7WLPlnx9MVr/u3kJ9lXgd
-   m1MghedaAA3YI6Goi6dach4lIAASTbByXQ0BYnK1McT4fiZR4bQWSxQTl
-   u/CPNaEkF2szBgQ7wJCJrFIy77b7fuHm7tSG8wGrLC1rxoQTyeI2Ax9+h
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11100"; a="162766201"
+  bh=VVM5yS/zrCVks3caoTa7n7kGZOx1karkqhciAZB6tUc=;
+  b=QW1hIMcCb1BzhTGmlr+h2W4uCDDHQYO92Qh4LDyJrnKPP22XlC3UFio6
+   5/J3vDqU68KGoPgFcHptXwkyOnSHNbTHN/MJbbLzA15nNw5pJryxEq9gS
+   r7tlRVo1EFvFL/HSbvlT4aAcgmcR4wZmhqL2jP8HqgTU+emHi38sO1ksW
+   zewTBUuDI7lLq5P2xdjEmiJzMWbYRWxShnR54uARiYSi308FiCyBbz72Y
+   y0ffK6+Q7MXypy/VVx//XSXo0ogWRH3qGV0GUHgz/eHmZURrrhghIaw8f
+   O4PGZmp2b5r39PcJvqhPlpQlVI+kZteph5H1gPtPRErEeFZJNBQsGDyAF
+   A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11100"; a="150756295"
 X-IronPort-AV: E=Sophos;i="6.08,232,1712588400"; 
-   d="scan'208";a="162766201"
-Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Jun 2024 11:58:38 +0900
-Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id CDFC5D6EEF
+   d="scan'208";a="150756295"
+Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
+  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Jun 2024 11:58:37 +0900
+Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
+	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 32437CA1E5
 	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jun 2024 11:58:35 +0900 (JST)
-Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 2715CD50E4
-	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jun 2024 11:58:35 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 7D991D4BF3
+	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jun 2024 11:58:34 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id A5BCA20071A06
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 11764401E4
 	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jun 2024 11:58:34 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 530411A0002;
-	Wed, 12 Jun 2024 10:58:34 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id B03711A0002;
+	Wed, 12 Jun 2024 10:58:33 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 06/43] python3-email-validator: upgrade 2.1.0 -> 2.1.1
-Date: Wed, 12 Jun 2024 10:57:39 +0800
-Message-Id: <1718161096-29710-6-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 05/43] python3-coverage: upgrade 7.4.1 -> 7.5.3
+Date: Wed, 12 Jun 2024 10:57:38 +0800
+Message-Id: <1718161096-29710-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1718161096-29710-1-git-send-email-wangmy@fujitsu.com>
 References: <1718161096-29710-1-git-send-email-wangmy@fujitsu.com>
@@ -54,58 +54,49 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28448.004
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28448.004
-X-TMASE-Result: 10-2.703100-10.000000
-X-TMASE-MatchedRID: wbL0rUvz+3Cjz0nOeth/yUIIxwDaU5mrrOCEGIPhtwhKb99LaADG+i4X
-	epmu1hPL4ZFaJEETItUyNCoZMgfGSz13WcdbGR6Q9x3r/GuhvycxVUWGXs3C8y99T+uJIleRThV
-	BZmdE2ZNgS5OQQFvxzwnSzRYua45Af0ldgFoF/O78dMpK2wMYwkc1DwKoQo7YwLkNMQzGl5APn4
-	RjXbQDehab+AC2MJ3sBhQWw3lZ+IWXBXaJoB9JZxRFJJyf5BJe3QfwsVk0UbvqwGfCk7KUs/Vfq
-	qPH5AF6lgw48tnIJt+BIn5QUJOhg6im5AsNxzwAIiBlz6mzLOdVD/ejcKOFyCa2zpZcYRYlRhZy
-	dtFdQIPh6WeeVju5fIgeppQyntVe0v8srR3gjfRl7+AkHjVJOxuqkzsKv5+9ftwZ3X11IV0=
+X-TMASE-Result: 10--6.404000-10.000000
+X-TMASE-MatchedRID: R9NZgeCyXhKjz0nOeth/yUIIxwDaU5mrCZa9cSpBOblXy2/vm0e6zn3Y
+	vtP37IU4Awr1d1MD+nhwAo5WoLmIXQDNPxu11HXjP0HVIeixJdA3l2plwgrtWCD1HdXyqDnEvwU
+	evDt+uW6vBQc3bCgEsLJjQpIWhSuM6WZ8G/zxUhOeAiCmPx4NwGmRqNBHmBveVDC1CbuJXmMqtq
+	5d3cxkNUcIn3wCvI9YeiJHhbcJRXjuaaqF/20NHb+/ZgSPazETjtCwNWGbhoI=
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 12 Jun 2024 02:58:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110844
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110843
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-==========
-- Fixed typo 'marking' instead of 'marketing' in case-insensitive mailbox name list.
-- When DNS-based deliverability checks fail, in some cases exceptions are now
-  thrown with raise ... from for better nested exception tracking.
-- Fixed tests to work when no local resolver can be configured.
-- This project is now licensed under the Unlicense (instead of CC0).
-- Minor improvements to tests.
-- Minor improvements to code style.
-
-License-Update: Relicense under the Unlicense (instead of CC0)
+===========
+- Performance improvements for combining data files, especially when measuring
+  line coverage. A few different quadratic behaviors were eliminated.
+- Performance improvements for generating HTML reports, with a side benefit of
+  reducing memory use, closing issue 1791. Thanks to Daniel Diniz for helping to
+  diagnose the problem.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...il-validator_2.1.0.bb => python3-email-validator_2.1.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-email-validator_2.1.0.bb => python3-email-validator_2.1.1.bb} (59%)
+ .../{python3-coverage_7.4.1.bb => python3-coverage_7.5.3.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-coverage_7.4.1.bb => python3-coverage_7.5.3.bb} (84%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-email-validator_2.1.0.bb b/meta-python/recipes-devtools/python/python3-email-validator_2.1.1.bb
-similarity index 59%
-rename from meta-python/recipes-devtools/python/python3-email-validator_2.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-email-validator_2.1.1.bb
-index 7daf548cb..90a22e5a0 100644
---- a/meta-python/recipes-devtools/python/python3-email-validator_2.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-email-validator_2.1.1.bb
-@@ -1,9 +1,9 @@
- SUMMARY = "A robust email address syntax and deliverability validation library."
- SECTION = "devel/python"
- LICENSE = "CC0-1.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=65d3616852dbf7b1a6d4b53b00626032"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=2890aee62bd2a4c3197e2059016a397e"
+diff --git a/meta-python/recipes-devtools/python/python3-coverage_7.4.1.bb b/meta-python/recipes-devtools/python/python3-coverage_7.5.3.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-coverage_7.4.1.bb
+rename to meta-python/recipes-devtools/python/python3-coverage_7.5.3.bb
+index b3da5d571..0df341c54 100644
+--- a/meta-python/recipes-devtools/python/python3-coverage_7.4.1.bb
++++ b/meta-python/recipes-devtools/python/python3-coverage_7.5.3.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://coverage.readthedocs.io"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2ee41112a44fe7014dce33e26468ba93"
  
--SRC_URI[sha256sum] = "5f511cca8856bb03251d6292ba59e7f98978aae13fa5823ddd8bf885c56a6260"
-+SRC_URI[sha256sum] = "200a70680ba08904be6d1eef729205cc0d687634399a5924d842533efb824b84"
+-SRC_URI[sha256sum] = "1ed4b95480952b1a26d863e546fa5094564aa0065e1e5f0d4d0041f293251d04"
++SRC_URI[sha256sum] = "04aefca5190d1dc7a53a4c1a5a7f8568811306d7a8ee231c42fb69215571944f"
  
- PYPI_PACKAGE = "email_validator"
+ inherit pypi setuptools3
  
 -- 
 2.34.1
