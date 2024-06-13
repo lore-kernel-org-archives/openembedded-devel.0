@@ -1,133 +1,101 @@
-Return-Path: <kai.kang@windriver.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C5CACC27C53
-	for <webhook@archiver.kernel.org>; Thu, 13 Jun 2024 02:09:26 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.5500.1718244549997826876
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FFEBC41513
+	for <webhook@archiver.kernel.org>; Thu, 13 Jun 2024 03:43:50 +0000 (UTC)
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.web10.68.1718250223713798003
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Jun 2024 19:09:10 -0700
+ Wed, 12 Jun 2024 20:43:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=6894268cef=kai.kang@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45D1MG8u015033
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 02:09:09 GMT
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ymcgwvf9m-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 02:09:09 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Wed, 12 Jun 2024 19:09:07 -0700
-Received: from pek-lpg-core4.wrs.com (128.224.153.44) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.39 via Frontend Transport; Wed, 12 Jun 2024 19:09:07 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-xfce][PATCH v2] xfwm4: fix gcc -Wincompatible-pointer-types
-Date: Thu, 13 Jun 2024 10:09:05 +0800
-Message-ID: <20240613020905.220260-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: KhDsjS55LnJI7eou_jfzlyAR1d1-2Kp6
-X-Proofpoint-ORIG-GUID: KhDsjS55LnJI7eou_jfzlyAR1d1-2Kp6
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-12_12,2024-06-12_02,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
- suspectscore=0 malwarescore=0 clxscore=1015 priorityscore=1501
- phishscore=0 bulkscore=0 spamscore=0 mlxlogscore=882 lowpriorityscore=0
- mlxscore=0 adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.21.0-2405170001 definitions=main-2406130012
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=DYuorYos;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1718250223; x=1749786223;
+  h=from:to:cc:subject:date:message-id;
+  bh=rwhul6/SAMrDIx9Q3DovIzj2ROp1DE00CV2Srqa2wLs=;
+  b=DYuorYosTt3MvmNcrSsfD33QaCPig2mpSdPYw4Oe1PF2Vke2h8CSWRtA
+   xiTz2pIXh0CGcxejV4lHE5EbLWa7Iqx7PzZ7OqTQl4PTsqUhMwic1LBhc
+   pzY/rEpCAgLPILuS+Wv6hserYvDnt3cvdh11KKmdZPCb1ATLW8+IJ1ffc
+   ThvhvncyVi50CWK0qzS96cndbxLEs9iSN0hh1N9TF6wwTD1UhqTIxUvc8
+   friNCOEl/yejphqe2bCuErRgz0QOTAuWZuaBNG7uN7uAK+At8Fd27Mu9X
+   sfV4QGk8odf+CVsaAVR8OmQpBrEK6JvJwP/Hv+U9sjvBuxArfeUbWnm3z
+   g==;
+X-IronPort-AV: E=McAfee;i="6700,10204,11101"; a="151181749"
+X-IronPort-AV: E=Sophos;i="6.08,234,1712588400"; 
+   d="scan'208";a="151181749"
+Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jun 2024 12:43:40 +0900
+Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
+	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id CF2A9E4289
+	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 12:43:38 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 0FF27D3F06
+	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 12:43:38 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 8A09CE2B24
+	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 12:43:37 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 35F061A0002;
+	Thu, 13 Jun 2024 11:43:37 +0800 (CST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH 1/2] frr: use update-alternatives to solve conflicts with libsmi
+Date: Thu, 13 Jun 2024 11:43:24 +0800
+Message-Id: <1718250205-6029-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28450.004
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28450.004
+X-TMASE-Result: 10--4.636600-10.000000
+X-TMASE-MatchedRID: hVaMx/vKxVStxhXyTqc02bstbCLHbulS96ryTp77YeGysPB8dBBorXKn
+	6DBj/gsEIvrftAIhWmLy9zcRSkKatcFBoCgEV4LyfUkgDiuGxn9csgu/IQFPzpsoi2XrUn/J8m+
+	hzBStansfRoCwBzgRYidET58jp62S4js7mG3YW5ItSNW80Shhky1o7hQvlAixCfJpaH7oVpYJgH
+	jCEk47zqs9DqSdQJZ+iew6+Kl5qFaAGZtD6/YT456sx2/x840VS7+RMq/2CK6rA4c7UV2fQpvi2
+	PQO/FFQiz2ujrPVx9yEIU1NtMkm0Q==
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 02:09:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110885
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 03:43:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110886
 
-From: Kai Kang <kai.kang@windriver.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Fix xfwm4 incompatible pointer type error with gcc option -Wincompatible-pointer-types:
+Error: Transaction test error:
+  file /usr/share/yang/ietf-netconf-acm.yang conflicts between attempted installs of libsmi-yang-0.5.0-r0.aarch64 and frr-10.0-r0.aarch64
+  file /usr/share/yang/ietf-netconf-with-defaults.yang conflicts between attempted installs of libsmi-yang-0.5.0-r0.aarch64 and frr-10.0-r0.aarch64
+  file /usr/share/yang/ietf-netconf.yang conflicts between attempted installs of libsmi-yang-0.5.0-r0.aarch64 and frr-10.0-r0.aarch64
 
-| ../../xfwm4-4.18.0/src/startup_notification.c:139:57: error: passing argument
-      2 of 'sn_startup_sequence_get_last_active_time' from incompatible pointer type
-      [-Wincompatible-pointer-types]
-|   139 |     sn_startup_sequence_get_last_active_time (sequence, &l_sec, &l_usec);
-|       |                                                         ^~~~~~
-|       |                                                         |
-|       |                                                         long int *
+libsmi also uses the doc 'ietf-netconf-acm.yang ietf-netconf-with-defaults.yang ietf-netconf.yang'.
+libsmi has a priority of 50.
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
-v2:
-* fix typo and update Upstream-Status
+ meta-networking/recipes-protocols/frr/frr_10.0.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
- ...-fix-incompatible-pointer-type-error.patch | 38 +++++++++++++++++++
- meta-xfce/recipes-xfce/xfwm4/xfwm4_4.18.0.bb  |  2 +
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-xfce/recipes-xfce/xfwm4/xfwm4/xfwm4-fix-incompatible-pointer-type-error.patch
-
-diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4/xfwm4-fix-incompatible-pointer-type-error.patch b/meta-xfce/recipes-xfce/xfwm4/xfwm4/xfwm4-fix-incompatible-pointer-type-error.patch
-new file mode 100644
-index 000000000..3e2ffe234
---- /dev/null
-+++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4/xfwm4-fix-incompatible-pointer-type-error.patch
-@@ -0,0 +1,38 @@
-+Fix xfwm4 incompatible pointer type error:
-+
-+| ../../xfwm4-4.18.0/src/startup_notification.c:139:57: error: passing argument 2 of 'sn_startup_sequence_get_last_active_time' from incompatible pointer type [-Wincompatible-pointer-types]
-+|   139 |     sn_startup_sequence_get_last_active_time (sequence, &l_sec, &l_usec);
-+|       |                                                         ^~~~~~
-+|       |                                                         |
-+|       |                                                         long int *
-+| In file included from .../usr/include/startup-notification-1.0/libsn/sn.h:32,
-+|                  from ../../xfwm4-4.18.0/src/startup_notification.c:33:
-+| .../usr/include/startup-notification-1.0/libsn/sn-monitor.h:84:79: note: expected 'time_t *' {aka 'long long int *'} but argument is of type 'long int *'
-+|    84 |                                                            time_t            *tv_sec,
-+|       |                                                            ~~~~~~~~~~~~~~~~~~~^~~~~~
-+
-+It is caused by a patch of startup-notification in oe-core which is
-+backported from upstream mailllist and changes the signature of function
-+sn_startup_sequence_get_last_active_time().
-+
-+Upstream-Status: Inappropriate [oe-specific]
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+
-+---
-+ src/startup_notification.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/startup_notification.c b/src/startup_notification.c
-+index 2a08cad..05434ca 100644
-+--- a/src/startup_notification.c
-++++ b/src/startup_notification.c
-+@@ -136,7 +136,7 @@ sn_collect_timed_out_foreach (void *element, void *data)
-+ 
-+     sequence = element;
-+     ctod = (CollectTimedOutData *) data;
-+-    sn_startup_sequence_get_last_active_time (sequence, &l_sec, &l_usec);
-++    sn_startup_sequence_get_last_active_time (sequence, (time_t *)&l_sec, &l_usec);
-+     tv_sec = l_sec; tv_usec = l_usec;
-+ 
-+     elapsed = ((double) ctod->now - (tv_sec * G_USEC_PER_SEC) - tv_usec)
-diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.18.0.bb b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.18.0.bb
-index 839f1c870..2770829e9 100644
---- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.18.0.bb
-+++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.18.0.bb
-@@ -8,6 +8,8 @@ inherit xfce update-alternatives features_check
+diff --git a/meta-networking/recipes-protocols/frr/frr_10.0.bb b/meta-networking/recipes-protocols/frr/frr_10.0.bb
+index bdc359667..afd2c95a0 100644
+--- a/meta-networking/recipes-protocols/frr/frr_10.0.bb
++++ b/meta-networking/recipes-protocols/frr/frr_10.0.bb
+@@ -77,8 +77,11 @@ SYSTEMD_AUTO_ENABLE = "disable"
+ inherit update-alternatives multilib_script multilib_header
  
- REQUIRED_DISTRO_FEATURES = "x11"
- 
-+SRC_URI += "file://xfwm4-fix-incompatible-pointer-type-error.patch"
-+
- SRC_URI[sha256sum] = "92cd1b889bb25cb4bc06c1c6736c238d96e79c1e706b9f77fad0a89d6e5fc13f"
- 
- PACKAGECONFIG ?= " \
+ ALTERNATIVE_PRIORITY = "100"
+-ALTERNATIVE:${PN} = " ietf-interfaces "
++ALTERNATIVE:${PN} = " ietf-interfaces ietf-netconf-acm ietf-netconf-with-defaults ietf-netconf"
+ ALTERNATIVE_LINK_NAME[ietf-interfaces] = "${datadir}/yang/ietf-interfaces.yang"
++ALTERNATIVE_LINK_NAME[ietf-netconf-acm] = "${datadir}/yang/ietf-netconf-acm.yang"
++ALTERNATIVE_LINK_NAME[ietf-netconf-with-defaults] = "${datadir}/yang/ietf-netconf-with-defaults.yang"
++ALTERNATIVE_LINK_NAME[ietf-netconf] = "${datadir}/yang/ietf-netconf.yang"
+ do_compile:prepend () {
+    sed -i -e 's#${RECIPE_SYSROOT_NATIVE}##g' \
+           -e 's#${RECIPE_SYSROOT}##g' ${S}/lib/version.h
 -- 
 2.34.1
 
