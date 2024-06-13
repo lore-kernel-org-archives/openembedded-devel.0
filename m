@@ -2,61 +2,61 @@ Return-Path: <sdoshi@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75E43C27C4F
-	for <webhook@archiver.kernel.org>; Thu, 13 Jun 2024 14:45:54 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web10.10338.1718289950870623787
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94BD0C27C4F
+	for <webhook@archiver.kernel.org>; Thu, 13 Jun 2024 14:47:14 +0000 (UTC)
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+ by mx.groups.io with SMTP id smtpd.web10.10361.1718290033610310434
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Jun 2024 07:45:50 -0700
+ Thu, 13 Jun 2024 07:47:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=JLsbbQNA;
- spf=pass (domain: mvista.com, ip: 209.85.214.180, mailfrom: sdoshi@mvista.com)
-Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-1f6f38b1ab0so9360595ad.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 07:45:50 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=QwayX2V4;
+ spf=pass (domain: mvista.com, ip: 209.85.210.178, mailfrom: sdoshi@mvista.com)
+Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-6f6a045d476so920212b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 07:47:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1718289950; x=1718894750; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1718290033; x=1718894833; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=x/23iDN522yEP1rTPoh6KOWbD9GrAvSIERz/9vjhnXY=;
-        b=JLsbbQNAjCpI2GxisaILSFmfy1Z0qtqEPKr5kClZcGA75WZ1qnxOKjQTu+RS41LlVh
-         8p03nNjMZM/1wPXx4X/Enxx3kGlvHQqhtWFonoc/39mTHlFph3a4Ua74AP+HMLkmG3B5
-         s6BQeLC3b82iuTp1beYkaxUpttrjMZWs0YEZI=
+        bh=3Cp+xgzpn+uuvi++EQJuYR3vcqijq1vIL3qhfVmjKOE=;
+        b=QwayX2V4ft32LxKqSqDxiwrrUEjT8MFxA/40aZ3VEtYjUhWHYjFyZiJGJEul9+pj0J
+         Pqs/sMNTMBi7WD2i51Zj/NT7r/ehETGPvzfg9OMf8D7S/52xGqkqQR01c72fSRcr6NPK
+         I9eznJ1mhDhE0i/4UL9Bkv8HC8qo4i8jNExtM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718289950; x=1718894750;
+        d=1e100.net; s=20230601; t=1718290033; x=1718894833;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=x/23iDN522yEP1rTPoh6KOWbD9GrAvSIERz/9vjhnXY=;
-        b=C1EV4lrSHz8BDCgf1p0qr3WqGkUrtEQBnmSSJWGsBi2WJqKvjTSJiqe/LGG8iml5aU
-         0Oe6eqpEv6oPriCCYwPm4EkE42+MuEWrwSyfk9Xcr7HqgB1eUsd8OujEosZGhE4/+1Yf
-         dBG1h3DWqhz1AQlcbS52rXEzzqrFhz8rlwD6QFTPARJe9Oyjkqqr6IPS619SjC8TnVyo
-         QFbE6HFHR8FRVTtGEyLzgqgOOyMQygVDwAZuNL0bjxKGJfKWP7n6JZ4m7UPB2Sdab3td
-         ibmkj6YnDva8dLFGXq8mq5hypvUK9ZpemXH738LdHsEPptKcSKCNN2YTW0AlBydXM7TI
-         h0gQ==
-X-Gm-Message-State: AOJu0YxfYmUvYQwTrk8itY6Im948RwPaS2RJkPs9ururVJN5vsglhggO
-	0IJg937CQKT9TvPUbIjrXITA9oZyWMyvvYq7fzhH9XBbZvP84G4/R6A8ELhViISQ3dFQQlNvV8M
-	u
-X-Google-Smtp-Source: AGHT+IHhYukMVS5h6OqrPTRoLgVjI9BEVkK36hhsfTIorFoeuIenqmqtPE+CJjzj1LFazIZsQYTgVw==
-X-Received: by 2002:a17:902:e844:b0:1f7:317e:f4e0 with SMTP id d9443c01a7336-1f83b566164mr58891195ad.12.1718289949707;
-        Thu, 13 Jun 2024 07:45:49 -0700 (PDT)
+        bh=3Cp+xgzpn+uuvi++EQJuYR3vcqijq1vIL3qhfVmjKOE=;
+        b=cPqzZz1mLbRENd113Ei0VwjX0EPneaY9yFFTCd8HYDeWMWoSlWm/V84FyjqZjFhXN7
+         ZyjQorjNIB9Kr7MJVc4hZh97kQ92DgXY/BjPSBQEUsELYDqb3LET+aXyuicVYPBPyg/p
+         O5f+pf5XUsvU8K/e2vKjFmtwc61T2i0ZXhNEdRkmLhUnrAUvkYfmAt/s44nEdE93Sjlb
+         +srMuY2lY15Z5BLdwpsrynGdQ0mU311fJmiWIVDFvKI6PoLQ27DvOEhS0UJeDpCtbSCF
+         YUxOkKbzCAkaZLpQwN73SPl3QV8r3/ZE2hu6sb9aoazpzwZnwgISIv60Eif7R0oiFB5y
+         BFHg==
+X-Gm-Message-State: AOJu0YwYug+K0lo6XTo89ARI8VJsi8ieM6hHmKx4ZmYBEol28acyI2F9
+	Ql+t48XeAZ3j1y50oIvcoh4II9UrOVOgy+JDnU9AczXYDDDdP9bMHcIdJaMu5IlmPZSOMa0Zmqq
+	8
+X-Google-Smtp-Source: AGHT+IFxwL/sChx9y9U8G8P+hG05t7aOEkhK32dVmLlJo3Dfq6I4f0iDjhAhjorQYhT9q88d8QVVfA==
+X-Received: by 2002:a05:6a21:32a5:b0:1b8:a188:53da with SMTP id adf61e73a8af0-1bae7f0bb4bmr46061637.29.1718290032599;
+        Thu, 13 Jun 2024 07:47:12 -0700 (PDT)
 Received: from siddharth-latitude-3420.mvista.com ([157.32.45.16])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1f855e70777sm14822675ad.87.2024.06.13.07.45.46
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-6fede16af41sm1197629a12.33.2024.06.13.07.47.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Jun 2024 07:45:49 -0700 (PDT)
+        Thu, 13 Jun 2024 07:47:12 -0700 (PDT)
 From: Siddharth <sdoshi@mvista.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Siddharth Doshi <sdoshi@mvista.com>
-Subject: [meta-oe][kirkstone][PATCH] nano: Security fix for CVE-2024-5742
-Date: Thu, 13 Jun 2024 20:15:40 +0530
-Message-Id: <20240613144540.7223-1-sdoshi@mvista.com>
+Subject: [meta-oe][scarthgap][PATCH] nano: Security fix for CVE-2024-5742
+Date: Thu, 13 Jun 2024 20:17:01 +0530
+Message-Id: <20240613144701.7311-1-sdoshi@mvista.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 14:45:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110893
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 14:47:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110894
 
 From: Siddharth Doshi <sdoshi@mvista.com>
 
@@ -67,21 +67,22 @@ CVE-2024-5742 nano: running `chmod` and `chown` on the filename allows malicious
 
 Signed-off-by: Siddharth Doshi <sdoshi@mvista.com>
 ---
- .../nano/files/CVE-2024-5742.patch            | 100 ++++++++++++++++++
- meta-oe/recipes-support/nano/nano_6.2.bb      |   4 +-
- 2 files changed, 103 insertions(+), 1 deletion(-)
+ .../nano/files/CVE-2024-5742.patch            | 101 ++++++++++++++++++
+ meta-oe/recipes-support/nano/nano_7.2.bb      |   4 +-
+ 2 files changed, 104 insertions(+), 1 deletion(-)
  create mode 100644 meta-oe/recipes-support/nano/files/CVE-2024-5742.patch
 
 diff --git a/meta-oe/recipes-support/nano/files/CVE-2024-5742.patch b/meta-oe/recipes-support/nano/files/CVE-2024-5742.patch
 new file mode 100644
-index 000000000..64a395f2d
+index 000000000..f29b73c53
 --- /dev/null
 +++ b/meta-oe/recipes-support/nano/files/CVE-2024-5742.patch
-@@ -0,0 +1,100 @@
-+From 5e7a3c2e7e118c7f12d5dfda9f9140f638976aa2 Mon Sep 17 00:00:00 2001
+@@ -0,0 +1,101 @@
++From aad1439553de8ce0ef8815a65ac0732dc804507b Mon Sep 17 00:00:00 2001
 +From: Benno Schulenberg <bensberg@telfort.nl>
 +Date: Sun, 28 Apr 2024 10:51:52 +0200
-+Subject: files: run `chmod` and `chown` on the descriptor, not on the filename
++Subject: [PATCH] files: run `chmod` and `chown` on the descriptor, not on the
++ filename
 +
 +This closes a window of opportunity where the emergency file could be
 +replaced by a malicious symlink.
@@ -101,10 +102,10 @@ index 000000000..64a395f2d
 + 3 files changed, 14 insertions(+), 13 deletions(-)
 +
 +diff --git a/src/definitions.h b/src/definitions.h
-+index 2bdc782..e9d0de3 100644
++index 288f1ff..04614a3 100644
 +--- a/src/definitions.h
 ++++ b/src/definitions.h
-+@@ -277,7 +277,7 @@ typedef enum {
++@@ -283,7 +283,7 @@ typedef enum {
 + } message_type;
 + 
 + typedef enum {
@@ -114,7 +115,7 @@ index 000000000..64a395f2d
 + 
 + typedef enum {
 +diff --git a/src/files.c b/src/files.c
-+index 62cc8f2..c5527a6 100644
++index c6eadc1..88397d3 100644
 +--- a/src/files.c
 ++++ b/src/files.c
 +@@ -1760,6 +1760,8 @@ bool write_file(const char *name, FILE *thefile, bool normal,
@@ -134,7 +135,7 @@ index 000000000..64a395f2d
 + 
 + #ifndef NANO_TINY
 + 		block_sigwinch(TRUE);
-+@@ -1970,6 +1971,16 @@ bool write_file(const char *name, FILE *thefile, bool normal,
++@@ -1969,6 +1970,16 @@ bool write_file(const char *name, FILE *thefile, bool normal,
 + 		}
 + #endif
 + 
@@ -152,7 +153,7 @@ index 000000000..64a395f2d
 + 		statusline(ALERT, _("Error writing %s: %s"), realname, strerror(errno));
 + 
 +diff --git a/src/nano.c b/src/nano.c
-+index 04ecdbb..2ce3462 100644
++index c6db6dd..c8e5265 100644
 +--- a/src/nano.c
 ++++ b/src/nano.c
 +@@ -337,18 +337,8 @@ void emergency_save(const char *filename)
@@ -162,7 +163,7 @@ index 000000000..64a395f2d
 +-	else if (write_file(targetname, NULL, SPECIAL, OVERWRITE, NONOTES)) {
 ++	else if (write_file(targetname, NULL, SPECIAL, EMERGENCY, NONOTES))
 + 		fprintf(stderr, _("\nBuffer written to %s\n"), targetname);
-+-#ifndef NANO_TINY
++-#if !defined(NANO_TINY) && defined(HAVE_CHMOD) && defined(HAVE_CHOWN)
 +-		/* Try to chmod/chown the saved file to the values of the original file,
 +-		 * but ignore any failure as we are in a hurry to get out. */
 +-		if (openfile->statinfo) {
@@ -176,21 +177,21 @@ index 000000000..64a395f2d
 + 	free(targetname);
 + 	free(plainname);
 +-- 
-+2.35.7
++2.44.0
 +
-diff --git a/meta-oe/recipes-support/nano/nano_6.2.bb b/meta-oe/recipes-support/nano/nano_6.2.bb
-index 0be022467..10e74869c 100644
---- a/meta-oe/recipes-support/nano/nano_6.2.bb
-+++ b/meta-oe/recipes-support/nano/nano_6.2.bb
+diff --git a/meta-oe/recipes-support/nano/nano_7.2.bb b/meta-oe/recipes-support/nano/nano_7.2.bb
+index 0642287c9..73d46949d 100644
+--- a/meta-oe/recipes-support/nano/nano_7.2.bb
++++ b/meta-oe/recipes-support/nano/nano_7.2.bb
 @@ -12,7 +12,9 @@ RDEPENDS:${PN} = "ncurses-terminfo-base"
  
  PV_MAJOR = "${@d.getVar('PV').split('.')[0]}"
  
 -SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
 +SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz \
-+	   file://CVE-2024-5742.patch \
-+	  "
- SRC_URI[sha256sum] = "2bca1804bead6aaf4ad791f756e4749bb55ed860eec105a97fba864bc6a77cb3"
++           file://CVE-2024-5742.patch \
++          "
+ SRC_URI[sha256sum] = "86f3442768bd2873cec693f83cdf80b4b444ad3cc14760b74361474fc87a4526"
  
  UPSTREAM_CHECK_URI = "https://ftp.gnu.org/gnu/nano"
 -- 
