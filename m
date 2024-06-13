@@ -2,130 +2,84 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CBA8DC27C4F
-	for <webhook@archiver.kernel.org>; Thu, 13 Jun 2024 15:39:44 +0000 (UTC)
-Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
- by mx.groups.io with SMTP id smtpd.web10.11735.1718293179702932484
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1105AC41513
+	for <webhook@archiver.kernel.org>; Thu, 13 Jun 2024 23:55:53 +0000 (UTC)
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+ by mx.groups.io with SMTP id smtpd.web11.1447.1718322947919534460
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Jun 2024 08:39:39 -0700
+ Thu, 13 Jun 2024 16:55:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ctmdZqFN;
- spf=pass (domain: gmail.com, ip: 209.85.210.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f51.google.com with SMTP id 46e09a7af769-6f9fbec4fd9so678380a34.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 08:39:39 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JbxpNvEL;
+ spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-1f8395a530dso15001115ad.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 16:55:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1718293179; x=1718897979; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1718322947; x=1718927747; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=oifhWrRfaUd2vQSL9XfB3/rihfLsXHyVhNs5/dX4AOs=;
-        b=ctmdZqFNJDTzHhwcQ64OBmrypq4asACZYAqN5e+tAcOrcpCt7XA54gm+LhSzKobJUZ
-         AAZ1UUN8ceclWT266qoPGxMmUda/TEVr9OuneqyhW4ZxN9hnEt4U6L2LyNmvOvYgnKrp
-         GOPv0i0DYTcoulAFZ6utL5vMy1MuWr8eAPsMG3f9pd6HKfL5dnS5g3gMwk4agMYkeOSy
-         nalrYeo4tWhkJY7UwSAcxC+N0Gv4pl+vWDzoya4JRjFNFGOkokxkotokG/MwGWNy4017
-         PGGShsu5Xg57yB7o9CFR7F429kdFWSLpEdd63Dn0d4068U+BsneYLo1yvXqeRUEFd5hL
-         Nmog==
+        bh=iT0PXDPJVMPdORZHBQq0YfpBopT7S3nMr8ZyK7omhXo=;
+        b=JbxpNvELRrpJla77rXYOpoWcMf3ISsRm1TDlIGg0slkOKG3ObWjO1RB8uQ3GgkaVQb
+         F/qzolElzYQOh9tAEV5cEFtQ7Ru4yR1L4hV9zkD2+PHNq/MCm9kyhiymHVyq6C0rezax
+         G3nx8V6qzsdSY0iXo8TqFI4TebGBazLTDy30UVAGFXTDWrPustranHnmix21NKzHiEMv
+         H1VnN+ZJyAM/ocYs9zk77HctwmstGaRwz9Tdptr2X0NPojlMwsNW6Uw1xtgNhiaV7tu8
+         fSmnHMMqdK2qQrttbUjJn3iOZq7VkMgbuVtQkfiwtd5RxKhVPh89qpu6J2dRTJM/DLXi
+         V2lA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718293179; x=1718897979;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1718322947; x=1718927747;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=oifhWrRfaUd2vQSL9XfB3/rihfLsXHyVhNs5/dX4AOs=;
-        b=cAAEGXwWffxe3H7Yl4BlzBqkuCxY5WAIglBAO+Ct8E6hf+M34AisBSAAD+MPB7RgpO
-         0eNetqRsmAhBTrOPZdG9ieZLaWqZDq1MFbhA9P7OH5AsZChS4P9YQNIyUHXJD3rouKmg
-         XEkqMgHd5dGmFiccyCh/+IQLE6dqMKnL+PCwp9lZVfmxK5Lbv6RZXEg1QmIK/wRTXhF4
-         tR4pnUr0BUShMmzBb5gbncdXxXibdEXBsnHVOU8LLGXMWRksBnLqddbKWleAWcp0+8iX
-         fiGpr+/vXK5UBr0FV5CqcmV79aer4SjZKHmOaCrBSCgXzfzV5O9nIxESiqf1eznR25CS
-         QNZw==
-X-Gm-Message-State: AOJu0YwSKH1ePyXKn7NQJGaLm9f8QW6p3Iury/dQs8uVxOnDgTZElaJB
-	pBiKL+38yIM6mUOpVVk3IestRdxhtk4vCX0gGegAvCZvrDcoUPXJ3ch3sIRKRoP5F1KfOLg97OC
-	SGF/yc5Fbs/pL+D7Xp0u83DRZFX87BQf8
-X-Google-Smtp-Source: AGHT+IGNXgPfpmo1Y8e6vdUswddp1aJ3OzY021V6XkyeghUsLifckvUQGJ9UKXfXOV/+XbSQ3Gp4XNFb3KKIKjSMSf8=
-X-Received: by 2002:a05:6870:61cc:b0:254:b781:2f71 with SMTP id
- 586e51a60fabf-25514f1d238mr5444377fac.57.1718293178702; Thu, 13 Jun 2024
- 08:39:38 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240613084703.1858419-1-changqing.li@windriver.com>
-In-Reply-To: <20240613084703.1858419-1-changqing.li@windriver.com>
+        bh=iT0PXDPJVMPdORZHBQq0YfpBopT7S3nMr8ZyK7omhXo=;
+        b=QtIF3foO8aKJHmQwuYkbONslKjQ8jG25bgzxMsDp7nFR6heahsaLUX0YuMZEhlXZcl
+         lzzqJPWl+9Z+f31XYLuqQxBN0Ce3pnfdUy4HwRMWs/si/nCtNuRUAzqBo1GoZGYqyEZL
+         svBc4QrQv2Ds9W5tIIbJ//4F/cU++UlPunoxt78NJ+yIwkMI+J5CB0GgvocqcQQQv5tb
+         gOy3QbLcdae67Sg8RoSR8mV1x9VaP8daG1rW3Uv872eWs5JQihKVGXmc8xyvwmukoqdU
+         /mn6R7VJg9dTPy5iFdmVmmQfLMzSgm+Zwo0NMWoWmGYbzVsBCW8CZSPUv6ifEmer6Qn5
+         aKSw==
+X-Gm-Message-State: AOJu0YyWV98OTZhpzB9VSoJR68bskKe4vw41Sm6NE9IWj3yKJVr6L89A
+	m8rg5W8OFh9bhNImc3D2HyWw9h8szuMYopFPrJvCfuhu1N8+vBc3irtzkQ==
+X-Google-Smtp-Source: AGHT+IHyXUa1ldUO++tV8FRvscO+YIecGS6v0KWEWn7djFddLgz1MOU7wPwuG4aac50cc6eOzc5YbA==
+X-Received: by 2002:a17:903:2312:b0:1f7:3e19:6d9f with SMTP id d9443c01a7336-1f8626d2481mr13662705ad.19.1718322947087;
+        Thu, 13 Jun 2024 16:55:47 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::91d2])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1f855ee804fsm19951285ad.131.2024.06.13.16.55.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 13 Jun 2024 16:55:46 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 13 Jun 2024 08:39:11 -0700
-Message-ID: <CAMKF1sozZLs+7XkTZnmoxJmuSz+pqBcVaDn5-G3M2hv7Ak=L1Q@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] tnftp: Disable incompatible-pointer-types
- warning as error
-To: changqing.li@windriver.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH 2/2] aravis: Remove AUTHOR field
+Date: Thu, 13 Jun 2024 16:55:42 -0700
+Message-ID: <20240613235542.2996129-2-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20240613235542.2996129-1-raj.khem@gmail.com>
+References: <20240613235542.2996129-1-raj.khem@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 15:39:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110895
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 23:55:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110897
 
-On Thu, Jun 13, 2024 at 1:47=E2=80=AFAM Changqing Li via
-lists.openembedded.org
-<changqing.li=3Dwindriver.com@lists.openembedded.org> wrote:
->
-> From: Changqing Li <changqing.li@windriver.com>
->
-> Fix lib32-tnftp do_compile failure with gcc-14:
-> ../../tnftp-20230507/libedit/terminal.c:597:56: error: passing argument 2=
- of 'terminal_overwrite' from incompatible pointer type [-Wincompatible-poi=
-nter-types]
->   597 |                                 terminal_overwrite(el, &el->el_di=
-splay[
->       |                                                        ^~~~~~~~~~=
-~~~~~~
->       |                                                        |
->       |                                                        wint_t * {=
-aka unsigned int *}
->   598 |                                     el->el_cursor.v][el->el_curso=
-r.h],
->       |                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
-~~~~
-> ../../tnftp-20230507/libedit/refresh.c:114:38: error: initialization of '=
-wchar_t *' {aka 'long int *'} from incompatible pointer type 'wint_t *' {ak=
-a 'unsigned int *'} [-Wincompatible-pointer-types]
->   114 |                 wchar_t *firstline =3D el->el_vdisplay[0];
->
+this field has been removed from recipes
 
-there is a new release available
-https://ftp.netbsd.org/pub/NetBSD/misc/tnftp/tnftpd-20231001.tar.gz
-it might be good to upgrade it while here, and check if the issue is
-fixed upstream or not.
-secondly, it would be good to see if we can fix the problem or explain
-it what's going on.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-multimedia/recipes-multimedia/aravis/aravis_0.8.31.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-> Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> ---
->  meta-networking/recipes-support/tnftp/tnftp_20230507.bb | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/meta-networking/recipes-support/tnftp/tnftp_20230507.bb b/me=
-ta-networking/recipes-support/tnftp/tnftp_20230507.bb
-> index bdd9759f2..da4466794 100644
-> --- a/meta-networking/recipes-support/tnftp/tnftp_20230507.bb
-> +++ b/meta-networking/recipes-support/tnftp/tnftp_20230507.bb
-> @@ -36,3 +36,6 @@ PACKAGECONFIG ?=3D "openssl \
->  "
->  PACKAGECONFIG[openssl] =3D "--enable-ssl, --disable-ssl --with-ssl=3Dno,=
- openssl"
->  PACKAGECONFIG[ipv6] =3D "--enable-ipv6,--disable-ipv6,"
-> +
-> +#fix lib32-tnftp do_compile error with gcc-14
-> +CFLAGS +=3D "-Wno-error=3Dincompatible-pointer-types"
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#110889): https://lists.openembedded.org/g/openembedde=
-d-devel/message/110889
-> Mute This Topic: https://lists.openembedded.org/mt/106648104/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-multimedia/recipes-multimedia/aravis/aravis_0.8.31.bb b/meta-multimedia/recipes-multimedia/aravis/aravis_0.8.31.bb
+index a4386e809c..950ce25363 100644
+--- a/meta-multimedia/recipes-multimedia/aravis/aravis_0.8.31.bb
++++ b/meta-multimedia/recipes-multimedia/aravis/aravis_0.8.31.bb
+@@ -4,7 +4,6 @@ DESCRIPTION = "\
+     It currently implements the gigabit ethernet and USB3 protocols used by industrial cameras.\
+     It also provides a basic ethernet camera simulator and a simple video viewer.\
+ "
+-AUTHOR = "Emmanuel Pacaud"
+ HOMEPAGE = "https://github.com/AravisProject/aravis"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
