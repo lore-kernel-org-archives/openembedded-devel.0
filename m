@@ -1,84 +1,78 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <Pascal.Weisser.ext@karlstorz.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8188FC27C79
-	for <webhook@archiver.kernel.org>; Thu, 13 Jun 2024 08:47:11 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.3608.1718268427867286317
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4D39C27C75
+	for <webhook@archiver.kernel.org>; Thu, 13 Jun 2024 12:13:32 +0000 (UTC)
+Received: from mx07-0040c702.pphosted.com (mx07-0040c702.pphosted.com [205.220.184.135])
+ by mx.groups.io with SMTP id smtpd.web10.6988.1718280808845503249
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Jun 2024 01:47:08 -0700
+ Thu, 13 Jun 2024 05:13:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=6894e13dda=changqing.li@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45D7ovBU013202
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 08:47:07 GMT
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3yme964p2s-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 08:47:06 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Thu, 13 Jun 2024 01:47:05 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.39 via Frontend Transport; Thu, 13 Jun 2024 01:47:04 -0700
-From: <changqing.li@windriver.com>
+ dkim=pass header.i=@karlstorz.com header.s=S-DKIM-20210427 header.b=AaMOqmSH;
+ spf=pass (domain: karlstorz.com, ip: 205.220.184.135, mailfrom: pascal.weisser.ext@karlstorz.com)
+Received: from pps.filterd (m0267679.ppops.net [127.0.0.1])
+	by mx07-0040c702.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45D4l1nL031688
+	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 12:13:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=karlstorz.com;
+	 h=cc:content-transfer-encoding:content-type:date:from
+	:message-id:mime-version:subject:to; s=S-DKIM-20210427; bh=cuLi4
+	NcejwnUrl4u6JmUZUufU7V5SWEdgtVdhWhQpkI=; b=AaMOqmSH9tUN7gCfthFTB
+	BeUNoyfHZC0chAxYADAmBni4cl8L5cmkNqHYn1bPafZdFPyoP7LqXV+r66eVsEy8
+	iT2gL4Y2PlY9aP13yqCepKS6o+Bgb4XyW0JFJsuE+mLWwEnUlITHXo5blcfWVYGW
+	9U4YFUM6WrRMJsl+5h1GFc/x5tA40lx/e5VyJ3VuXqV8hsGq06ziL99ym8SsIrfZ
+	EP+96lq1swipwcR4k56JJBQjKxIaHI4bhbh9blKlwaFEOjqcV5fiSytBgwrgIsYw
+	6I/quDPiDwFR8nxOa+ewrOflP4dj39W+gTlmfI/ZrZQ7H9zklIWW8tSIT2psiqVc
+	Q==
+Received: from tut-ex23-pv.kstg.corp (62-134-76-232.business.static.de.bt.net [62.134.76.232])
+	by mx07-0040c702.pphosted.com (PPS) with ESMTPS id 3yq7nj2xhg-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 12:13:26 +0000 (GMT)
+Received: from TUT-EX20-PV.KSTG.corp (10.0.10.224) by TUT-EX23-PV.KSTG.corp
+ (10.0.10.227) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Thu, 13 Jun
+ 2024 14:13:26 +0200
+Received: from TUT-EX22-PV.KSTG.corp (10.0.10.226) by TUT-EX20-PV.KSTG.corp
+ (10.0.10.224) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Thu, 13 Jun
+ 2024 14:13:25 +0200
+Received: from tutn-bpfb5m3.kstg.corp (10.0.10.41) by
+ InternalSMTPRelay.KSTG.corp (10.0.10.226) with Microsoft SMTP Server id
+ 15.2.1544.9 via Frontend Transport; Thu, 13 Jun 2024 14:13:25 +0200
+From: "Weisser, Pascal" <pascal.weisser.ext@karlstorz.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][PATCH] tnftp: Disable incompatible-pointer-types warning as error
-Date: Thu, 13 Jun 2024 16:47:03 +0800
-Message-ID: <20240613084703.1858419-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.25.1
+CC: "Weisser, Pascal" <pascal.weisser.ext@karlstorz.com>
+Subject: [meta-oe][PATCH 0/2] libblockdev: Fix dependency issues.
+Date: Thu, 13 Jun 2024 14:12:58 +0200
+Message-ID: <20240613121300.156560-1-pascal.weisser.ext@karlstorz.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Proofpoint-GUID: qx5PQ3cbmD7gPqlrbCxuXsJkIT-vQwrZ
-X-Proofpoint-ORIG-GUID: qx5PQ3cbmD7gPqlrbCxuXsJkIT-vQwrZ
+X-Proofpoint-GUID: uWKFmoFiikBf0oIhOpuYPVwkh8JbOlhf
+X-Proofpoint-ORIG-GUID: uWKFmoFiikBf0oIhOpuYPVwkh8JbOlhf
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-13_01,2024-06-13_01,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- clxscore=1011 lowpriorityscore=0 adultscore=0 spamscore=0 suspectscore=0
- phishscore=0 impostorscore=0 mlxscore=0 mlxlogscore=730 bulkscore=0
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.21.0-2405170001 definitions=main-2406130061
+ definitions=2024-06-13_04,2024-06-13_02,2024-05-17_01
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 08:47:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110889
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 12:13:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110890
 
-From: Changqing Li <changqing.li@windriver.com>
+This branch adds some missing dependencies to libblockdev
+in order to fix the problems reported in the issue
+https://github.com/openembedded/meta-openembedded/issues/832.
 
-Fix lib32-tnftp do_compile failure with gcc-14:
-../../tnftp-20230507/libedit/terminal.c:597:56: error: passing argument 2 of 'terminal_overwrite' from incompatible pointer type [-Wincompatible-pointer-types]
-  597 |                                 terminal_overwrite(el, &el->el_display[
-      |                                                        ^~~~~~~~~~~~~~~~
-      |                                                        |
-      |                                                        wint_t * {aka unsigned int *}
-  598 |                                     el->el_cursor.v][el->el_cursor.h],
-      |                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-../../tnftp-20230507/libedit/refresh.c:114:38: error: initialization of 'wchar_t *' {aka 'long int *'} from incompatible pointer type 'wint_t *' {aka 'unsigned int *'} [-Wincompatible-pointer-types]
-  114 |                 wchar_t *firstline = el->el_vdisplay[0];
+Weisser, Pascal (2):
+  libblockdev: Add missing dependency on e2fsprogs to fs PACKAGECONFIG.
+  libblockdev: Add missing dependency on keyutils to crypto
+    PACKAGECONFIG.
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- meta-networking/recipes-support/tnftp/tnftp_20230507.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-support/tnftp/tnftp_20230507.bb b/meta-networking/recipes-support/tnftp/tnftp_20230507.bb
-index bdd9759f2..da4466794 100644
---- a/meta-networking/recipes-support/tnftp/tnftp_20230507.bb
-+++ b/meta-networking/recipes-support/tnftp/tnftp_20230507.bb
-@@ -36,3 +36,6 @@ PACKAGECONFIG ?= "openssl \
- "
- PACKAGECONFIG[openssl] = "--enable-ssl, --disable-ssl --with-ssl=no, openssl"
- PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
-+
-+#fix lib32-tnftp do_compile error with gcc-14
-+CFLAGS += "-Wno-error=incompatible-pointer-types"
 -- 
-2.25.1
+2.45.2
 
 
