@@ -1,105 +1,143 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <soumya.sambu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1EAE8C27C4F
-	for <webhook@archiver.kernel.org>; Thu, 13 Jun 2024 03:43:50 +0000 (UTC)
-Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
- by mx.groups.io with SMTP id smtpd.web11.61.1718250223918527780
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 07841C27C4F
+	for <webhook@archiver.kernel.org>; Thu, 13 Jun 2024 06:57:21 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.2319.1718261839245149635
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Jun 2024 20:43:44 -0700
+ Wed, 12 Jun 2024 23:57:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=n5Vs1IMk;
- spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1718250224; x=1749786224;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references;
-  bh=a6x/by2DwtX5HKfSpR6a+FRNpS0EWpu5E3BUAKrPw8k=;
-  b=n5Vs1IMkLaSssIgH5HWs2Qk232WKNTOTGZrfl7IJgfwHGTdmR5KEM+3r
-   yxm+SG7BHKde1oa+ug9Zbev2qd4T7CH3uqagizRI1wySJms3om10saUVL
-   Y42NJGUzIoKDxOWyyAM55a48j/0EEmQFRKwWnLFCd762H6L8yc2YTeiQg
-   uET2hIX4s0KgSNW8Q/rDABroc48tUj63EkNWPNGK77kbWd9992ZyOTewl
-   jDmIM5D47qY6XQ4EcegDPhQCsWvBq6uNczFRxUgFlYuiXneGGCWgK3zaL
-   JCaY9EDKfw6iX7QrChrECTuCCOHQXKX6UCmisdT73t6lUPUGUTkAqJ+Zd
-   Q==;
-X-IronPort-AV: E=McAfee;i="6700,10204,11101"; a="141953412"
-X-IronPort-AV: E=Sophos;i="6.08,234,1712588400"; 
-   d="scan'208";a="141953412"
-Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
-  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jun 2024 12:43:41 +0900
-Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id E9EC0DB3C1
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 12:43:38 +0900 (JST)
-Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 383FED50FB
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 12:43:38 +0900 (JST)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id BE5B92007CA9E
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 12:43:37 +0900 (JST)
-Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 696A81A000B;
-	Thu, 13 Jun 2024 11:43:37 +0800 (CST)
-From: wangmy@fujitsu.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 2/2] libsmi: use update-alternatives to solve conflicts with frr
-Date: Thu, 13 Jun 2024 11:43:25 +0800
-Message-Id: <1718250205-6029-2-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1718250205-6029-1-git-send-email-wangmy@fujitsu.com>
-References: <1718250205-6029-1-git-send-email-wangmy@fujitsu.com>
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28450.004
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28450.004
-X-TMASE-Result: 10--3.464600-10.000000
-X-TMASE-MatchedRID: 9CLtS+2vXX+txhXyTqc02bstbCLHbulS96ryTp77YeGysPB8dBBorXKn
-	6DBj/gsEIvrftAIhWmLy9zcRSkKatcwitucT3dE7s0T0PE+KHuV9LQinZ4QefCP/VFuTOXUTC5M
-	umjkcRzWOhzOa6g8KrRRyvgp0XmxWll9T1oRj7RBFehoJATHa0EJgxInRLtCsfrPjnbXxGLN1bq
-	V39JC3X9NV6vLbJvR2tcSX9kDeDBslQA8QWak6kR0m4Rm5hspVxSSu8i52URmXTt0OuyJi/IIuE
-	VM/dBEMBtjAKW7+qHc=
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=68949a4709=soumya.sambu@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45D60kf8024742
+	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jun 2024 23:57:18 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ymjk2cqx8-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Jun 2024 23:57:18 -0700 (PDT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Wed, 12 Jun 2024 23:57:16 -0700
+From: ssambu <soumya.sambu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][PATCH 1/1] unixodbc: Fix CVE-2024-1013
+Date: Thu, 13 Jun 2024 06:56:56 +0000
+Message-ID: <20240613065656.3893469-1-soumya.sambu@windriver.com>
+X-Mailer: git-send-email 2.40.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-ORIG-GUID: _NH83821r_BzpOMAG-4eqDbuOdtqItDT
+X-Proofpoint-GUID: _NH83821r_BzpOMAG-4eqDbuOdtqItDT
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-06-12_12,2024-06-13_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=999
+ impostorscore=0 mlxscore=0 spamscore=0 priorityscore=1501 malwarescore=0
+ phishscore=0 suspectscore=0 bulkscore=0 lowpriorityscore=0 clxscore=1015
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2405170001 definitions=main-2406130047
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 03:43:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110887
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 06:57:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110888
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Soumya Sambu <soumya.sambu@windriver.com>
 
-Error: Transaction test error:
-  file /usr/share/yang/ietf-netconf-acm.yang conflicts between attempted installs of libsmi-yang-0.5.0-r0.aarch64 and frr-10.0-r0.aarch64
-  file /usr/share/yang/ietf-netconf-with-defaults.yang conflicts between attempted installs of libsmi-yang-0.5.0-r0.aarch64 and frr-10.0-r0.aarch64
-  file /usr/share/yang/ietf-netconf.yang conflicts between attempted installs of libsmi-yang-0.5.0-r0.aarch64 and frr-10.0-r0.aarch64
+An out-of-bounds stack write flaw was found in unixODBC on 64-bit
+architectures where the caller has 4 bytes and callee writes 8 bytes.
+This issue may go unnoticed on little-endian architectures, while
+big-endian architectures can be broken.
 
-frr also uses the doc 'ietf-netconf-acm.yang ietf-netconf-with-defaults.yang ietf-netconf.yang'.
-frr has a priority of 100.
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2024-1013
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
 ---
- meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ .../unixodbc/files/CVE-2024-1013.patch        | 53 +++++++++++++++++++
+ .../unixodbc/unixodbc_2.3.12.bb               |  1 +
+ 2 files changed, 54 insertions(+)
+ create mode 100644 meta-oe/recipes-support/unixodbc/files/CVE-2024-1013.patch
 
-diff --git a/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb b/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
-index 73aeb5539..1f7442af0 100644
---- a/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
-+++ b/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
-@@ -18,8 +18,11 @@ DEPENDS += "bison-native flex-native wget-native gawk-native"
+diff --git a/meta-oe/recipes-support/unixodbc/files/CVE-2024-1013.patch b/meta-oe/recipes-support/unixodbc/files/CVE-2024-1013.patch
+new file mode 100644
+index 000000000..b9ad0b4a1
+--- /dev/null
++++ b/meta-oe/recipes-support/unixodbc/files/CVE-2024-1013.patch
+@@ -0,0 +1,53 @@
++From 45f501e1be2db6b017cc242c79bfb9de32b332a1 Mon Sep 17 00:00:00 2001
++From: Florian Weimer <fweimer@redhat.com>
++Date: Mon, 29 Jan 2024 08:27:29 +0100
++Subject: [PATCH] PostgreSQL driver: Fix incompatible pointer-to-integer types
++
++These result in out-of-bounds stack writes on 64-bit architectures
++(caller has 4 bytes, callee writes 8 bytes), and seem to have gone
++unnoticed on little-endian architectures (although big-endian
++architectures must be broken).
++
++This change is required to avoid a build failure with GCC 14.
++
++CVE: CVE-2024-1013
++
++Upstream-Status: Backport [https://github.com/lurcher/unixODBC/commit/45f501e1be2db6b017cc242c79bfb9de32b332a1]
++
++Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
++---
++ Drivers/Postgre7.1/info.c | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/Drivers/Postgre7.1/info.c b/Drivers/Postgre7.1/info.c
++index 63ac91f..2216ecd 100644
++--- a/Drivers/Postgre7.1/info.c
+++++ b/Drivers/Postgre7.1/info.c
++@@ -1779,14 +1779,14 @@ char *table_name;
++ char index_name[MAX_INFO_STRING];
++ short fields_vector[8];
++ char isunique[10], isclustered[10];
++-SDWORD index_name_len, fields_vector_len;
+++SQLLEN index_name_len, fields_vector_len;
++ TupleNode *row;
++ int i;
++ HSTMT hcol_stmt;
++ StatementClass *col_stmt, *indx_stmt;
++ char column_name[MAX_INFO_STRING], relhasrules[MAX_INFO_STRING];
++ char **column_names = 0;
++-Int4 column_name_len;
+++SQLLEN column_name_len;
++ int total_columns = 0;
++ char error = TRUE;
++ ConnInfo *ci;
++@@ -2136,7 +2136,7 @@ HSTMT htbl_stmt;
++ StatementClass *tbl_stmt;
++ char tables_query[STD_STATEMENT_LEN];
++ char attname[MAX_INFO_STRING];
++-SDWORD attname_len;
+++SQLLEN attname_len;
++ char pktab[MAX_TABLE_LEN + 1];
++ Int2 result_cols;
++
++--
++2.40.0
+diff --git a/meta-oe/recipes-support/unixodbc/unixodbc_2.3.12.bb b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.12.bb
+index 7819387c3..dfad833e0 100644
+--- a/meta-oe/recipes-support/unixodbc/unixodbc_2.3.12.bb
++++ b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.12.bb
+@@ -11,6 +11,7 @@ DEPENDS = "libtool readline"
+ SRC_URI = "https://www.unixodbc.org/unixODBC-${PV}.tar.gz \
+            file://do-not-use-libltdl-source-directory.patch \
+            file://0001-exe-Makefile.am-add-CROSS_LAUNCHER-to-run-odbc_confi.patch \
++           file://CVE-2024-1013.patch \
+ "
+ SRC_URI[sha256sum] = "f210501445ce21bf607ba51ef8c125e10e22dffdffec377646462df5f01915ec"
  
- inherit autotools-brokensep update-alternatives
- ALTERNATIVE_PRIORITY = "50"
--ALTERNATIVE:${PN}-yang = "ietf-interfaces "
-+ALTERNATIVE:${PN}-yang = " ietf-interfaces ietf-netconf-acm ietf-netconf-with-defaults ietf-netconf"
- ALTERNATIVE_LINK_NAME[ietf-interfaces] = "${datadir}/yang/ietf-interfaces.yang"
-+ALTERNATIVE_LINK_NAME[ietf-netconf-acm] = "${datadir}/yang/ietf-netconf-acm.yang"
-+ALTERNATIVE_LINK_NAME[ietf-netconf-with-defaults] = "${datadir}/yang/ietf-netconf-with-defaults.yang"
-+ALTERNATIVE_LINK_NAME[ietf-netconf] = "${datadir}/yang/ietf-netconf.yang"
- 
- EXTRA_OECONF:class-native = "ac_cv_path_SH=/bin/sh"
- EXTRA_OECONF:class-target = "ac_cv_path_SH=/bin/sh ac_cv_path_WGET=${bindir}/wget ac_cv_path_AWK=${bindir}/awk"
 -- 
-2.34.1
+2.40.0
 
 
