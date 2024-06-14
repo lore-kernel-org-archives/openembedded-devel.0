@@ -1,394 +1,445 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <tim.orling@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B4573C27C4F
-	for <webhook@archiver.kernel.org>; Fri, 14 Jun 2024 01:05:05 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.1029.1718327096546073923
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E56B7C27C4F
+	for <webhook@archiver.kernel.org>; Fri, 14 Jun 2024 01:56:25 +0000 (UTC)
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+ by mx.groups.io with SMTP id smtpd.web11.1848.1718330183015418094
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Jun 2024 18:04:56 -0700
+ Thu, 13 Jun 2024 18:56:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=6895a578d0=changqing.li@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45E0v7bI021349
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 18:04:56 -0700
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ymptg5kvh-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 18:04:55 -0700 (PDT)
-Received: from m0250809.ppops.net (m0250809.ppops.net [127.0.0.1])
-	by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 45E14tXv000348;
-	Thu, 13 Jun 2024 18:04:55 -0700
-Received: from nam04-bn8-obe.outbound.protection.outlook.com (mail-bn8nam04lp2047.outbound.protection.outlook.com [104.47.74.47])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ymptg5kvg-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 13 Jun 2024 18:04:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=V33hnr5MXjSgUmbwE63EOhU1FAFmGlsh7Ml0SMmzINtrZMemF+4YIkEJs7VeFXsLD98qwpfTfe92gIHh1GtQc41o4ixgfuzoCiaJpmqiizKpvPiRCsNGfBIsCFy4W5lTtlvPJscJ38Tnro1IkXbq0agQQ8p0lp3F+u24yRe8oWTspCF6zI0f+Xyh3otIJyHsObwQk+d2b61GDtiDByY68pXWv9j3Ns00l3Ex36wr2gtyXgnrr6DIi3sAHGYC8/Spmmu06QOU6GHlEPrg2wG1OjepSNNoClXg8pbiZ9ZTQgQCH9cFrDpvjtd5Iag9Zq0zEFQ6OtISAn8NPkjaZXXmxg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nYiOgvY0M0V1K/R0N4sG/U3lHbaplVXeUtyWZ4kx4mc=;
- b=PYovC/7OVVBn50BhQ3BnLtmDN9RAsstbn/ZrG72dTrpUMpzXfqLqyucpVL8vuCM8Z4Qf7gICnusIPGFn+oPmYUDjY8BFifvLcbJOAPH3vJdjrJ33nyib1K22lS6GEGD+QH6H3+0DPOVcwVnX/AmrIY3hoKAL2FYb6ydKbDmfl7bpJcbPfF1uP7J8dtImLp46EpVsZhXxOocIXijfUiQVZ1ew75oANKl6biA6NwVTHZPOcy+o5Bzi1E7P+gNdrepsmyemSuPsKXxzT2f+7m1sTzmmh0vdXt/QuFaL0laqpNAjd9FxHLmX7tTJSEvhYXSxfoahLdOH7KB+sVctfOiYCA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DS0PR11MB7312.namprd11.prod.outlook.com (2603:10b6:8:11f::18)
- by IA1PR11MB7756.namprd11.prod.outlook.com (2603:10b6:208:420::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.36; Fri, 14 Jun
- 2024 01:04:50 +0000
-Received: from DS0PR11MB7312.namprd11.prod.outlook.com
- ([fe80::8436:b2d3:31a9:1c8c]) by DS0PR11MB7312.namprd11.prod.outlook.com
- ([fe80::8436:b2d3:31a9:1c8c%4]) with mapi id 15.20.7677.024; Fri, 14 Jun 2024
- 01:04:50 +0000
-Content-Type: multipart/alternative;
- boundary="------------Nqba08S5P1DO0PydTBFFln4n"
-Message-ID: <e8e54688-f2e4-4d4b-9b87-2ba555b7d7af@windriver.com>
-Date: Fri, 14 Jun 2024 09:04:44 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-networking][PATCH] tnftp: Disable
- incompatible-pointer-types warning as error
-To: raj.khem@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-References: <20240613084703.1858419-1-changqing.li@windriver.com>
- <CAMKF1sozZLs+7XkTZnmoxJmuSz+pqBcVaDn5-G3M2hv7Ak=L1Q@mail.gmail.com>
-Content-Language: en-US
-From: Changqing Li <changqing.li@windriver.com>
-In-Reply-To: <CAMKF1sozZLs+7XkTZnmoxJmuSz+pqBcVaDn5-G3M2hv7Ak=L1Q@mail.gmail.com>
-X-ClientProxiedBy: TYCP286CA0342.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:400:38e::8) To DS0PR11MB7312.namprd11.prod.outlook.com
- (2603:10b6:8:11f::18)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=kx63+ar/;
+ spf=pass (domain: konsulko.com, ip: 209.85.215.175, mailfrom: tim.orling@konsulko.com)
+Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-6818eea9c3aso1332934a12.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Jun 2024 18:56:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1718330181; x=1718934981; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=+o5OhfaIq3Wnhe11vKH22r/MzNQLJRLezY6aa1pRvnQ=;
+        b=kx63+ar/hZ836TOf36M2DR5P/qvP66p5XVbAYYxiPlVnAUtGuT3FPLkIo8uSKoXcwo
+         W9sI4VtGACYPP7d4wdjbW+3YiyklEUmFDxmNXIKsps6mHnAxzuSGJvedcoAM1z/GLq9w
+         dRgGn3/nn82ww+KUktmOOkM0EMu9+oKQTmM6U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1718330181; x=1718934981;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=+o5OhfaIq3Wnhe11vKH22r/MzNQLJRLezY6aa1pRvnQ=;
+        b=LZI40IPq8OzU3RN6v75mjeAuCOz0qV5dVjaJtoLxgWaJNojoYe9xidJBXl4MRvRdbq
+         RKWDJkgg4A0On3kEQWancBjOw/nzgZ5Bg9lGt1l+QF1rEmo5upH71VSEWV/MV4VelVll
+         4zHBD0aY62d5cx75PbyL1+1yiRJlavngo/HKSuPByn8EOdWQ8/PHvR9R/KaqJTo+VWVV
+         xCB17b1IC0WfO7H4hC+Cn+ZMIKdSf/32Wx0Z73u73HraYCDWME7e/SiJHGRXE0UONi71
+         uyg5UVnTYjY1lNICr9eiYT3rmVN8lKrXu0A5ZLPB6pOCvbmivFOG8YrC89B+ZqBKTgJC
+         DnvQ==
+X-Gm-Message-State: AOJu0YwtlUwYSWtzcGr1w13UvKsu5YmwGZ3D4jCFmIjKJkITJRrPySn2
+	sisrQvH0M/h8rlI3dvXb5JSBMwdyKf0HSx/DSkSYi+2uSvAhSJRmWGqkhP7+oWxkRlIf4Vw2Mir
+	zayI=
+X-Google-Smtp-Source: AGHT+IFSSPHliDZTLQWFGjcy8q+XemlsrSafrOFartHrKH6HVgmg88az/Hhtu+jNVTvPvv9w7boyHA==
+X-Received: by 2002:a05:6a21:32a5:b0:1b4:c499:788d with SMTP id adf61e73a8af0-1bae7ec310cmr1734308637.15.1718330181207;
+        Thu, 13 Jun 2024 18:56:21 -0700 (PDT)
+Received: from localhost (c-98-232-159-17.hsd1.or.comcast.net. [98.232.159.17])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1f855e5618esm21066585ad.54.2024.06.13.18.56.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 13 Jun 2024 18:56:20 -0700 (PDT)
+From: tim.orling@konsulko.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Tim Orling <tim.orling@konsulko.com>
+Subject: [PATCH 1/2] python3-pydantic-core: upgrade 2.16.3 -> 2.19.0
+Date: Thu, 13 Jun 2024 18:55:49 -0700
+Message-ID: <20240614015550.2632671-2-tim.orling@konsulko.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR11MB7312:EE_|IA1PR11MB7756:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9d6122d6-6212-4869-78a0-08dc8c0dfdce
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230035|4022899004|1800799019|366011|376009;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?WS9HUG8rSldrTVd3NUk0UXRISXZwK1VRUWQvVE5Ld05yaml2K3VMeDE0cGJH?=
- =?utf-8?B?WHpqL3A3ZSttaTRLam1FVEhBK0M0bkJ4NDRxaUhrWGdDR0w2ZUdBYlFCZzZl?=
- =?utf-8?B?aXRxcUkxWkZWU2dUOXhHMUQya0ZUaVFrQlZtMWUrUGo5Ri91M0JQSGQ5R3dF?=
- =?utf-8?B?SlQ3dWpQaWw5b01qOEswODhpNlZIeC9SQWdRYUY4WThzVFhDektFSHlwdDRn?=
- =?utf-8?B?TmVzSHFoWkhubFlTT0hYSnM1a0cxclp2czY4NmFFZ3ZEM2twWDZBNGVOWDZu?=
- =?utf-8?B?V2p2MFVoeFhvckpXYjRMUnhlcms2NTRpaXpEY3M1RUJpbGJXU0JDUnlna1NF?=
- =?utf-8?B?eENsUHhoSW9VSW5SQTR2ajc0UFRiUGMwVHpSd0pZUUMxaUlDVmVEazJmMUZT?=
- =?utf-8?B?RUh3ZkRKMzR6Wmx3MXpvUzh2dkdvc2xoSWhvM1RnR3BmTlhaRjJPMHlCbDZX?=
- =?utf-8?B?SWRrUEpjTTJhLzZockdWVUJLYzQvdW0zSFNkeDhCVE41emhGTkNpZW10dzU2?=
- =?utf-8?B?RnVBTTFzeGswOTRTSVMwczBnR3dIMWJDK0RheUwxMkU2Ri9kbWlKRURGTDVX?=
- =?utf-8?B?QW16bG9nUUFqNXlZK3UrelBRcEx1akhoRm8zZ0xhMnlnQ0Izdy9uKy9JcGJR?=
- =?utf-8?B?ajhJQkxhWDBrUDllRHFTWnhYT09vbmNxOVJaMkpKbG5oOHFlUTJGYlBUcGx2?=
- =?utf-8?B?MmE0N2pVUGIvTnhnNmIwQS9uOVZhdWdTNVp1Nm5sYzAxc0NoN1BETWNpa1ZS?=
- =?utf-8?B?dTQ1b0Jpc0FOYUFEaWtrdDhVSm9rM2pZMlFlcER3bmpXZlRsYTJTS3NJczR4?=
- =?utf-8?B?a0RTdnl6QXlObDJiQ1M5UFdjNDljVWpubVJ1LzNqZzlWdFFKamRCVzdEb29p?=
- =?utf-8?B?bHgxWVk4c1VvQ1pQNlg4VzdyZll4QzVjWGNHTHpjRHRHYWRSQ1YrcG5URG5S?=
- =?utf-8?B?akY5NVBJcWpBODUxSkJIejdzcnZ0S2hxTmtMblhQbFpkM1o5YWVUMWpZNSs0?=
- =?utf-8?B?bHYzQ1drVnVNeFRlUDlQNFZuODBkY2tQREFIL0o3Z0dnMmhqVnEyVEk4WGs1?=
- =?utf-8?B?NnlOcC96Yld6aDQxT3NhSzhWUEE3Zk1kZEZudkRXOE4vT2Zpc2JnMFFzVGlW?=
- =?utf-8?B?OUlDMGxEWVd6S0JaaVV1dERGYzBTM2hNY1Bmb0ZPWXBWZVkvOHJQUjBiQmhm?=
- =?utf-8?B?aTl3eDRNY0EyeTh1ZzZ1cHpBZ2RDRDRZenlKVDBWWHZ2UUZ2NHZBLzZsNkUy?=
- =?utf-8?B?V0MrNkRQVXYweHRuWnpnd0R0KzNmZkNzaldrL29jNlZ5aTNFcW0wODB0RVhh?=
- =?utf-8?B?YkRDeFFFcDZLaVhWcTNUODBzbFNuVTJBRXdHOTRDWG9UQWc3V3hkdTFQV1dG?=
- =?utf-8?B?cDFPTUlqS0FSVGtGbFJVWlRLbFlOS0xOSTlHOXJGUmw0UVc1eFhLc3ZpUFdL?=
- =?utf-8?B?SjkrNzlEekQ4azVNaVV3ZythdGNIMWxQMDI1SnQvK0l4dXZNbStnc2FiaVBk?=
- =?utf-8?B?elJJcXg4TmJ5QjBrckpHY2ZTeW1WMi81UnM2R01nRFd5T2pZaXJhNEFhWnBX?=
- =?utf-8?B?NlNmZU1weEF3amZMYXdlWEtZcEJmVllvYUdFdXhoWXYzKzB3V28yVXNMQmJ0?=
- =?utf-8?B?dDNjcVVPSEdSZUp1QXRXNmdWVXFDSmw3SlZ5eFh5V2gvVFBsQkxhbW12cmZv?=
- =?utf-8?B?djFjQVNVR3dYWVZMai9ORVRGNTNERXNVSjROZnM0YkMzL3NwQnl6M3J3PT0=?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB7312.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230035)(4022899004)(1800799019)(366011)(376009);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?K1pybTJhbXRKVldrQWdDZUFld3o0cXhEUGw1TEFKdVo0Z08xd1gwWHBXRWtO?=
- =?utf-8?B?RUpuanhtSUFoRTVYMFpwRDM3aEc2OG4wcFBubmNGV2t4aFVTM1c3TnBhRzdK?=
- =?utf-8?B?WkMwTVNubnhCd1ZqVXM3bktqbzJHU2liOFRLU3ZxaGxqNkxFaUt0eUcwR1R6?=
- =?utf-8?B?b21IR3Jwd093SUMwMGkvQllESmNoQlZPVUNoRGxNK1k1WWYwNEZ4RFQ0SXVh?=
- =?utf-8?B?aU9EbHRJcXM4WkhEN3E1YlhpNjB2OGNrZlZrNFZzalBydmIyc1hXM1ZrQTRz?=
- =?utf-8?B?dExsbG4wdkVab1orL0pyYzRqaE9pejlESFhta1E3VUxMZ25xc3lUeWgwZmxa?=
- =?utf-8?B?MG5vaXB0YjFkeHMrdzdjdEFjd25uS0dOMWpaQzlhendkb29ZUndZZDR1RmdN?=
- =?utf-8?B?WmZPYTNpQm12TlNPdyt1bW1PZTU0YXB0OG1ZT2xzYisxLzhreTBjZCs5a1Rn?=
- =?utf-8?B?QlVKLy9wdFNLTys3N3pRNFlESGlheDlnM1RuY1NVUVpDVVh0NkFLSTNhY3lO?=
- =?utf-8?B?R3ZwcFI2TGQrU2pCbStzb3BldlB5T1p3aVNTS0w3LzVoczNnS29HdUV0S0E2?=
- =?utf-8?B?cDQyeWtvYW9BdlBaUmgwN1FUdS9XK3VZeFlob3pEN1NyaVFLVEkzdE9Beksr?=
- =?utf-8?B?eFFJbHZseGwxR2pDdXp0M3FKWjU3ZWQ1c1dLT3pKS1dYYTVCTjl3MlA1emJk?=
- =?utf-8?B?S1RPbHI3eWFnbDRUSk92em1JRHgrU0pCbG5yWkNpWkx2TVNrZU5sUWpZQnlB?=
- =?utf-8?B?KytxZFVoWUxLT09meEszLytJeGo3NmFnQjhOR1pReFBrcjMzVXRhRVhBdW1K?=
- =?utf-8?B?ZUpDUXhITnkxbWROQmN2UndieUkyZkV4aUJIOWJ5VU0wSjh3MDg2UjAxWmtI?=
- =?utf-8?B?dFZ0aEtZbDVJVUJ0VnVQbzQ1bmlSaFJMRm1BTGh5ZzBzRFd6bHhMOG55QkE5?=
- =?utf-8?B?OHB6N3BJVUhMTTd5a2dTLzRqLzhBL0FiZVMyaXFEYm93NXRNZTlXelI5dXg3?=
- =?utf-8?B?Qnp0Zm9YNTkvdUNDdzlEUklHeGdOUjJHamp0QmU3Q2xQakgzVTloZFhueW5O?=
- =?utf-8?B?QVBpamlQaE4weHJnQjQ0WGhVUHRKMyt0MlB0OEJkUm5GMXZwcmJhRk1Lc2Vr?=
- =?utf-8?B?YWJMRnU4Y04wMjc2ZUNnZUZHRHJXOEk5b0drdnhEc3Y5SlcyUXRWbnYwRE5X?=
- =?utf-8?B?YlFiSWdEamR6VTlmdGx2QjFJVjFSKzhrWUpJQk1VTnZYUTN1QW1JaDR6NVI2?=
- =?utf-8?B?ZDBERW52bVN4UVFQQUxUZGNlMGNpMVczUHkxSUFNMjc2VTlmNEhDcmgvRlF0?=
- =?utf-8?B?U2xSdDUrNzdFVWNPOWhDK1VKSkV6a2hrMWtwVDJSVjAyVDV3SkpFV2E3aExC?=
- =?utf-8?B?NUdSN2xGUkxOeXYvazNEVVE4RHY0ZHdIOVVFa3RYSkw0a2I0cnRLME8weUJ4?=
- =?utf-8?B?M21OZG5BVXRUQVllNk9xdE1JYWc3WVVyUUNEOXZLYm5iYkhhRVowK3NPSC9C?=
- =?utf-8?B?R1lVak04bW4yQnJUWmMwb1lxT3FtOGJ4ZVNvamRRbEVIV1BIRjF4aXJwZmZk?=
- =?utf-8?B?Y2N3QzJGbURGWVlBbEdnalM0ZWoxYXk0emJuODJjQ2IyL2JNdWxhV0pzQzQ2?=
- =?utf-8?B?ZENpQ09iUWNqZlpwdDhDWkg0a2ptTURjUk9vQnEvQVhBTzErbmZMbEtuMU81?=
- =?utf-8?B?V3ZpVTJsZXBLRHB6TWkwK2xRbTJSdFp5THdTRVA0SUprZFdiTDR2bWNSN0pO?=
- =?utf-8?B?Zk1NR1RCM29TdWJCdkhpREQzVW9mdTNDb2xWRys0ZksvL0dRSUM1bys4MHZy?=
- =?utf-8?B?NXBHQ3RqaG4yZnN0NWZaNUc1c01OSGQ3dkpmMHdERktKN0Q1T09odHNEMHlq?=
- =?utf-8?B?RzEvanV6RmdLcFRVekNjOHdIUStCdEN2d2RRRGVHWUx6am80cmxqVGRsd0hV?=
- =?utf-8?B?R3U3WDlIL0l3ejJoNG1SNmdzeHowMlNMRDFsTGFFTklnU01YK3EwQ01sQk9I?=
- =?utf-8?B?RzNoaUExQ3FlblBsV1ljVEREM2UrR2hhOVE5ZVFZV0ltZ2x4NVhYUnc3bjJE?=
- =?utf-8?B?UFgrTEtBM3RqMG1Gem1SYkVpblNKRUh0aFZPWEs0bExFOWJIMVQzaGFJVnRw?=
- =?utf-8?B?LzVCVW5KTTgwOWRLdEF3TTVDdGN2TG51TEduTGRSZC9GRGNnRzJsN2x1WEhN?=
- =?utf-8?B?Q1E9PQ==?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9d6122d6-6212-4869-78a0-08dc8c0dfdce
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB7312.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jun 2024 01:04:50.4346
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qsu1pUFfAGcHdYdXglnBTSL2bp8Hd89f7X8IdttRDVqmqsqhQ+8QH81OG6WIHHLRHbJ6UF4FjT98sQo1Z6kCfammPGZ3xqXuBdDw04GFHfE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR11MB7756
-X-Proofpoint-ORIG-GUID: ph604rHNGK_3DbOumezcgbaUMh4Eo2PX
-X-Proofpoint-GUID: xVHDtrhKxQ8U0si4R60ZnCLN369RSw2I
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-13_15,2024-06-13_02,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 lowpriorityscore=0
- clxscore=1015 malwarescore=0 priorityscore=1501 bulkscore=0 suspectscore=0
- adultscore=0 phishscore=0 mlxlogscore=999 impostorscore=0 spamscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.21.0-2405170001
- definitions=main-2406140003
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Jun 2024 01:05:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110898
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Jun 2024 01:56:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110899
 
---------------Nqba08S5P1DO0PydTBFFln4n
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 45E0v7bI021349
+From: Tim Orling <tim.orling@konsulko.com>
 
+* Refresh -crates.inc
+* Drop backported patch; merged upstream
+* Add python3-zoneinfo to RDEPENDS for ptest
 
-On 6/13/24 23:39, Khem Raj via lists.openembedded.org wrote:
-> CAUTION: This email comes from a non Wind River email account!
-> Do not click links or open attachments unless you recognize the sender =
-and know the content is safe.
->
-> On Thu, Jun 13, 2024 at 1:47=E2=80=AFAM Changqing Li via
-> lists.openembedded.org
-> <changqing.li=3Dwindriver.com@lists.openembedded.org>  wrote:
->> From: Changqing Li<changqing.li@windriver.com>
->>
->> Fix lib32-tnftp do_compile failure with gcc-14:
->> ../../tnftp-20230507/libedit/terminal.c:597:56: error: passing argumen=
-t 2 of 'terminal_overwrite' from incompatible pointer type [-Wincompatibl=
-e-pointer-types]
->>    597 |                                 terminal_overwrite(el, &el->e=
-l_display[
->>        |                                                        ^~~~~~=
-~~~~~~~~~~
->>        |                                                        |
->>        |                                                        wint_t=
- * {aka unsigned int *}
->>    598 |                                     el->el_cursor.v][el->el_c=
-ursor.h],
->>        |                                     ~~~~~~~~~~~~~~~~~~~~~~~~~=
-~~~~~~~~
->> ../../tnftp-20230507/libedit/refresh.c:114:38: error: initialization o=
-f 'wchar_t *' {aka 'long int *'} from incompatible pointer type 'wint_t *=
-' {aka 'unsigned int *'} [-Wincompatible-pointer-types]
->>    114 |                 wchar_t *firstline =3D el->el_vdisplay[0];
->>
-> there is a new release available
-> https://ftp.netbsd.org/pub/NetBSD/misc/tnftp/tnftpd-20231001.tar.gz
+Full commit log:
+https://github.com/pydantic/pydantic-core/compare/v2.16.3...v2.19.0
 
-This new release is for ftp daemon,=C2=A0 and this recipe is for ftp clie=
-nt,=C2=A0=20
-so no new release
-
-avaiable,=C2=A0 but I will check if we can fix the the problem or check i=
-f=20
-there is fix upstream.
-
-Thanks.
-
-//Changqing
-
-> it might be good to upgrade it while here, and check if the issue is
-> fixed upstream or not.
-> secondly, it would be good to see if we can fix the problem or explain
-> it what's going on.
->> Signed-off-by: Changqing Li<changqing.li@windriver.com>
->> ---
->>   meta-networking/recipes-support/tnftp/tnftp_20230507.bb | 3 +++
->>   1 file changed, 3 insertions(+)
->>
->> diff --git a/meta-networking/recipes-support/tnftp/tnftp_20230507.bb b=
-/meta-networking/recipes-support/tnftp/tnftp_20230507.bb
->> index bdd9759f2..da4466794 100644
->> --- a/meta-networking/recipes-support/tnftp/tnftp_20230507.bb
->> +++ b/meta-networking/recipes-support/tnftp/tnftp_20230507.bb
->> @@ -36,3 +36,6 @@ PACKAGECONFIG ?=3D "openssl \
->>   "
->>   PACKAGECONFIG[openssl] =3D "--enable-ssl, --disable-ssl --with-ssl=3D=
-no, openssl"
->>   PACKAGECONFIG[ipv6] =3D "--enable-ipv6,--disable-ipv6,"
->> +
->> +#fix lib32-tnftp do_compile error with gcc-14
->> +CFLAGS +=3D "-Wno-error=3Dincompatible-pointer-types"
->> --
->> 2.25.1
->>
->>
->>
->>
->>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#110895):https://lists.openembedded.org/g/openembed=
-ded-devel/message/110895
->> Mute This Topic:https://lists.openembedded.org/mt/106648104/3616873
->> Group Owner:openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe:https://lists.openembedded.org/g/openembedded-devel/unsub =
- [changqing.li@windriver.com]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
---------------Nqba08S5P1DO0PydTBFFln4n
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 45E0v7bI021349
-
-<!DOCTYPE html><html><head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">
-  </head>
-  <body text=3D"#000000" bgcolor=3D"#cceed0">
-    <p><br>
-    </p>
-    <div class=3D"moz-cite-prefix">On 6/13/24 23:39, Khem Raj via
-      lists.openembedded.org wrote:<br>
-    </div>
-    <blockquote type=3D"cite" cite=3D"mid:CAMKF1sozZLs+7XkTZnmoxJmuSz+pqB=
-cVaDn5-G3M2hv7Ak=3DL1Q@mail.gmail.com">
-      <pre class=3D"moz-quote-pre" wrap=3D"">CAUTION: This email comes fr=
-om a non Wind River email account!
-Do not click links or open attachments unless you recognize the sender an=
-d know the content is safe.
-
-On Thu, Jun 13, 2024 at 1:47=E2=80=AFAM Changqing Li via
-lists.openembedded.org
-<a class=3D"moz-txt-link-rfc2396E" href=3D"mailto:changqing.li=3Dwindrive=
-r.com@lists.openembedded.org">&lt;changqing.li=3Dwindriver.com@lists.open=
-embedded.org&gt;</a> wrote:
-</pre>
-      <blockquote type=3D"cite">
-        <pre class=3D"moz-quote-pre" wrap=3D"">
-From: Changqing Li <a class=3D"moz-txt-link-rfc2396E" href=3D"mailto:chan=
-gqing.li@windriver.com">&lt;changqing.li@windriver.com&gt;</a>
-
-Fix lib32-tnftp do_compile failure with gcc-14:
-../../tnftp-20230507/libedit/terminal.c:597:56: error: passing argument 2=
- of 'terminal_overwrite' from incompatible pointer type [-Wincompatible-p=
-ointer-types]
-  597 |                                 terminal_overwrite(el, &amp;el-&g=
-t;el_display[
-      |                                                        ^~~~~~~~~~=
-~~~~~~
-      |                                                        |
-      |                                                        wint_t * {=
-aka unsigned int *}
-  598 |                                     el-&gt;el_cursor.v][el-&gt;el=
-_cursor.h],
-      |                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
-~~~~
-../../tnftp-20230507/libedit/refresh.c:114:38: error: initialization of '=
-wchar_t *' {aka 'long int *'} from incompatible pointer type 'wint_t *' {=
-aka 'unsigned int *'} [-Wincompatible-pointer-types]
-  114 |                 wchar_t *firstline =3D el-&gt;el_vdisplay[0];
-
-</pre>
-      </blockquote>
-      <pre class=3D"moz-quote-pre" wrap=3D"">
-there is a new release available
-<a class=3D"moz-txt-link-freetext" href=3D"https://ftp.netbsd.org/pub/Net=
-BSD/misc/tnftp/tnftpd-20231001.tar.gz">https://ftp.netbsd.org/pub/NetBSD/=
-misc/tnftp/tnftpd-20231001.tar.gz</a></pre>
-    </blockquote>
-    <p>This new release is for ftp daemon,&nbsp; and this recipe is for f=
-tp
-      client,&nbsp; so no new release</p>
-    <p>avaiable,&nbsp; but I will check if we can fix the the problem or
-      check if there is fix upstream.</p>
-    <p>Thanks.</p>
-    <p>//Changqing<br>
-    </p>
-    <blockquote type=3D"cite" cite=3D"mid:CAMKF1sozZLs+7XkTZnmoxJmuSz+pqB=
-cVaDn5-G3M2hv7Ak=3DL1Q@mail.gmail.com">
-      <pre class=3D"moz-quote-pre" wrap=3D"">
-it might be good to upgrade it while here, and check if the issue is
-fixed upstream or not.
-secondly, it would be good to see if we can fix the problem or explain
-it what's going on.
-</pre>
-    </blockquote>
-    <blockquote type=3D"cite" cite=3D"mid:CAMKF1sozZLs+7XkTZnmoxJmuSz+pqB=
-cVaDn5-G3M2hv7Ak=3DL1Q@mail.gmail.com">
-      <pre class=3D"moz-quote-pre" wrap=3D"">
-</pre>
-      <blockquote type=3D"cite">
-        <pre class=3D"moz-quote-pre" wrap=3D"">Signed-off-by: Changqing L=
-i <a class=3D"moz-txt-link-rfc2396E" href=3D"mailto:changqing.li@windrive=
-r.com">&lt;changqing.li@windriver.com&gt;</a>
+Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ---
- meta-networking/recipes-support/tnftp/tnftp_20230507.bb | 3 +++
- 1 file changed, 3 insertions(+)
+Tested with meta-python-image-ptest-python3-pydantic-core on qemux86-64
 
-diff --git a/meta-networking/recipes-support/tnftp/tnftp_20230507.bb b/me=
-ta-networking/recipes-support/tnftp/tnftp_20230507.bb
-index bdd9759f2..da4466794 100644
---- a/meta-networking/recipes-support/tnftp/tnftp_20230507.bb
-+++ b/meta-networking/recipes-support/tnftp/tnftp_20230507.bb
-@@ -36,3 +36,6 @@ PACKAGECONFIG ?=3D &quot;openssl \
- &quot;
- PACKAGECONFIG[openssl] =3D &quot;--enable-ssl, --disable-ssl --with-ssl=3D=
-no, openssl&quot;
- PACKAGECONFIG[ipv6] =3D &quot;--enable-ipv6,--disable-ipv6,&quot;
-+
-+#fix lib32-tnftp do_compile error with gcc-14
-+CFLAGS +=3D &quot;-Wno-error=3Dincompatible-pointer-types&quot;
---
-2.25.1
+ .../python/python3-pydantic-core-crates.inc   |  92 +++++++------
+ ...-github.com-pyo3-pyo3-from-0.20.2-to.patch | 126 ------------------
+ ...6.3.bb => python3-pydantic-core_2.19.0.bb} |   4 +-
+ 3 files changed, 50 insertions(+), 172 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pydantic-core/0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch
+ rename meta-python/recipes-devtools/python/{python3-pydantic-core_2.16.3.bb => python3-pydantic-core_2.19.0.bb} (87%)
 
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core-crates.inc b/meta-python/recipes-devtools/python/python3-pydantic-core-crates.inc
+index dd2027948..f37077245 100644
+--- a/meta-python/recipes-devtools/python/python3-pydantic-core-crates.inc
++++ b/meta-python/recipes-devtools/python/python3-pydantic-core-crates.inc
+@@ -2,32 +2,30 @@
+ 
+ # from Cargo.lock
+ SRC_URI += " \
+-    crate://crates.io/ahash/0.8.7 \
++    crate://crates.io/ahash/0.8.10 \
+     crate://crates.io/aho-corasick/1.0.2 \
+-    crate://crates.io/allocator-api2/0.2.16 \
+     crate://crates.io/autocfg/1.1.0 \
+     crate://crates.io/base64/0.21.7 \
+     crate://crates.io/bitflags/1.3.2 \
++    crate://crates.io/bitvec/1.0.1 \
+     crate://crates.io/cc/1.0.79 \
+     crate://crates.io/cfg-if/1.0.0 \
+-    crate://crates.io/enum_dispatch/0.3.12 \
++    crate://crates.io/enum_dispatch/0.3.13 \
+     crate://crates.io/equivalent/1.0.1 \
+     crate://crates.io/form_urlencoded/1.2.1 \
++    crate://crates.io/funty/2.0.0 \
+     crate://crates.io/getrandom/0.2.10 \
+     crate://crates.io/hashbrown/0.14.3 \
+     crate://crates.io/heck/0.4.1 \
+     crate://crates.io/idna/0.5.0 \
+-    crate://crates.io/indexmap/2.0.0 \
++    crate://crates.io/indexmap/2.2.2 \
+     crate://crates.io/indoc/2.0.4 \
+     crate://crates.io/itoa/1.0.8 \
+-    crate://crates.io/jiter/0.0.6 \
+-    crate://crates.io/lexical-core/0.8.5 \
++    crate://crates.io/jiter/0.4.1 \
+     crate://crates.io/lexical-parse-float/0.8.5 \
+     crate://crates.io/lexical-parse-integer/0.8.6 \
+     crate://crates.io/lexical-util/0.8.5 \
+-    crate://crates.io/lexical-write-float/0.8.5 \
+-    crate://crates.io/lexical-write-integer/0.8.5 \
+-    crate://crates.io/libc/0.2.147 \
++    crate://crates.io/libc/0.2.155 \
+     crate://crates.io/lock_api/0.4.10 \
+     crate://crates.io/memchr/2.6.3 \
+     crate://crates.io/memoffset/0.9.0 \
+@@ -40,29 +38,32 @@ SRC_URI += " \
+     crate://crates.io/percent-encoding/2.3.1 \
+     crate://crates.io/portable-atomic/1.6.0 \
+     crate://crates.io/proc-macro2/1.0.76 \
+-    crate://crates.io/pyo3/0.20.3 \
+-    crate://crates.io/pyo3-build-config/0.20.3 \
+-    crate://crates.io/pyo3-ffi/0.20.3 \
+-    crate://crates.io/pyo3-macros/0.20.3 \
+-    crate://crates.io/pyo3-macros-backend/0.20.3 \
++    crate://crates.io/pyo3/0.21.2 \
++    crate://crates.io/pyo3-build-config/0.21.2 \
++    crate://crates.io/pyo3-ffi/0.21.2 \
++    crate://crates.io/pyo3-macros/0.21.2 \
++    crate://crates.io/pyo3-macros-backend/0.21.2 \
+     crate://crates.io/python3-dll-a/0.2.9 \
+     crate://crates.io/quote/1.0.35 \
++    crate://crates.io/radium/0.7.0 \
+     crate://crates.io/redox_syscall/0.3.5 \
+-    crate://crates.io/regex/1.10.2 \
+-    crate://crates.io/regex-automata/0.4.3 \
++    crate://crates.io/regex/1.10.4 \
++    crate://crates.io/regex-automata/0.4.5 \
+     crate://crates.io/regex-syntax/0.8.2 \
+     crate://crates.io/rustversion/1.0.13 \
+     crate://crates.io/ryu/1.0.14 \
+     crate://crates.io/scopeguard/1.1.0 \
+-    crate://crates.io/serde/1.0.195 \
+-    crate://crates.io/serde_derive/1.0.195 \
+-    crate://crates.io/serde_json/1.0.109 \
+-    crate://crates.io/smallvec/1.11.2 \
+-    crate://crates.io/speedate/0.13.0 \
++    crate://crates.io/serde/1.0.203 \
++    crate://crates.io/serde_derive/1.0.203 \
++    crate://crates.io/serde_json/1.0.116 \
++    crate://crates.io/smallvec/1.13.2 \
++    crate://crates.io/speedate/0.14.0 \
+     crate://crates.io/static_assertions/1.1.0 \
+     crate://crates.io/strum/0.25.0 \
+     crate://crates.io/strum_macros/0.25.3 \
++    crate://crates.io/strum_macros/0.26.1 \
+     crate://crates.io/syn/2.0.48 \
++    crate://crates.io/tap/1.0.1 \
+     crate://crates.io/target-lexicon/0.12.9 \
+     crate://crates.io/tinyvec/1.6.0 \
+     crate://crates.io/tinyvec_macros/0.1.1 \
+@@ -71,7 +72,7 @@ SRC_URI += " \
+     crate://crates.io/unicode-normalization/0.1.22 \
+     crate://crates.io/unindent/0.2.3 \
+     crate://crates.io/url/2.5.0 \
+-    crate://crates.io/uuid/1.6.1 \
++    crate://crates.io/uuid/1.8.0 \
+     crate://crates.io/version_check/0.9.4 \
+     crate://crates.io/wasi/0.11.0+wasi-snapshot-preview1 \
+     crate://crates.io/windows-targets/0.48.1 \
+@@ -82,36 +83,35 @@ SRC_URI += " \
+     crate://crates.io/windows_x86_64_gnu/0.48.0 \
+     crate://crates.io/windows_x86_64_gnullvm/0.48.0 \
+     crate://crates.io/windows_x86_64_msvc/0.48.0 \
++    crate://crates.io/wyz/0.5.1 \
+     crate://crates.io/zerocopy/0.7.32 \
+     crate://crates.io/zerocopy-derive/0.7.32 \
+ "
+ 
+-SRC_URI[ahash-0.8.7.sha256sum] = "77c3a9648d43b9cd48db467b3f87fdd6e146bcc88ab0180006cef2179fe11d01"
++SRC_URI[ahash-0.8.10.sha256sum] = "8b79b82693f705137f8fb9b37871d99e4f9a7df12b917eed79c3d3954830a60b"
+ SRC_URI[aho-corasick-1.0.2.sha256sum] = "43f6cb1bf222025340178f382c426f13757b2960e89779dfcb319c32542a5a41"
+-SRC_URI[allocator-api2-0.2.16.sha256sum] = "0942ffc6dcaadf03badf6e6a2d0228460359d5e34b57ccdc720b7382dfbd5ec5"
+ SRC_URI[autocfg-1.1.0.sha256sum] = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
+ SRC_URI[base64-0.21.7.sha256sum] = "9d297deb1925b89f2ccc13d7635fa0714f12c87adce1c75356b39ca9b7178567"
+ SRC_URI[bitflags-1.3.2.sha256sum] = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
++SRC_URI[bitvec-1.0.1.sha256sum] = "1bc2832c24239b0141d5674bb9174f9d68a8b5b3f2753311927c172ca46f7e9c"
+ SRC_URI[cc-1.0.79.sha256sum] = "50d30906286121d95be3d479533b458f87493b30a4b5f79a607db8f5d11aa91f"
+ SRC_URI[cfg-if-1.0.0.sha256sum] = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
+-SRC_URI[enum_dispatch-0.3.12.sha256sum] = "8f33313078bb8d4d05a2733a94ac4c2d8a0df9a2b84424ebf4f33bfc224a890e"
++SRC_URI[enum_dispatch-0.3.13.sha256sum] = "aa18ce2bc66555b3218614519ac839ddb759a7d6720732f979ef8d13be147ecd"
+ SRC_URI[equivalent-1.0.1.sha256sum] = "5443807d6dff69373d433ab9ef5378ad8df50ca6298caf15de6e52e24aaf54d5"
+ SRC_URI[form_urlencoded-1.2.1.sha256sum] = "e13624c2627564efccf4934284bdd98cbaa14e79b0b5a141218e507b3a823456"
++SRC_URI[funty-2.0.0.sha256sum] = "e6d5a32815ae3f33302d95fdcb2ce17862f8c65363dcfd29360480ba1001fc9c"
+ SRC_URI[getrandom-0.2.10.sha256sum] = "be4136b2a15dd319360be1c07d9933517ccf0be8f16bf62a3bee4f0d618df427"
+ SRC_URI[hashbrown-0.14.3.sha256sum] = "290f1a1d9242c78d09ce40a5e87e7554ee637af1351968159f4952f028f75604"
+ SRC_URI[heck-0.4.1.sha256sum] = "95505c38b4572b2d910cecb0281560f54b440a19336cbbcb27bf6ce6adc6f5a8"
+ SRC_URI[idna-0.5.0.sha256sum] = "634d9b1461af396cad843f47fdba5597a4f9e6ddd4bfb6ff5d85028c25cb12f6"
+-SRC_URI[indexmap-2.0.0.sha256sum] = "d5477fe2230a79769d8dc68e0eabf5437907c0457a5614a9e8dddb67f65eb65d"
++SRC_URI[indexmap-2.2.2.sha256sum] = "824b2ae422412366ba479e8111fd301f7b5faece8149317bb81925979a53f520"
+ SRC_URI[indoc-2.0.4.sha256sum] = "1e186cfbae8084e513daff4240b4797e342f988cecda4fb6c939150f96315fd8"
+ SRC_URI[itoa-1.0.8.sha256sum] = "62b02a5381cc465bd3041d84623d0fa3b66738b52b8e2fc3bab8ad63ab032f4a"
+-SRC_URI[jiter-0.0.6.sha256sum] = "87db066a99f69382be06d02313f8ce989996b53a04a8a70cfd1a6483a56227f7"
+-SRC_URI[lexical-core-0.8.5.sha256sum] = "2cde5de06e8d4c2faabc400238f9ae1c74d5412d03a7bd067645ccbc47070e46"
++SRC_URI[jiter-0.4.1.sha256sum] = "abbbbe1bad457e3cd5503af716aedc735e849505a0d2172c55a753ae1b127458"
+ SRC_URI[lexical-parse-float-0.8.5.sha256sum] = "683b3a5ebd0130b8fb52ba0bdc718cc56815b6a097e28ae5a6997d0ad17dc05f"
+ SRC_URI[lexical-parse-integer-0.8.6.sha256sum] = "6d0994485ed0c312f6d965766754ea177d07f9c00c9b82a5ee62ed5b47945ee9"
+ SRC_URI[lexical-util-0.8.5.sha256sum] = "5255b9ff16ff898710eb9eb63cb39248ea8a5bb036bea8085b1a767ff6c4e3fc"
+-SRC_URI[lexical-write-float-0.8.5.sha256sum] = "accabaa1c4581f05a3923d1b4cfd124c329352288b7b9da09e766b0668116862"
+-SRC_URI[lexical-write-integer-0.8.5.sha256sum] = "e1b6f3d1f4422866b68192d62f77bc5c700bee84f3069f2469d7bc8c77852446"
+-SRC_URI[libc-0.2.147.sha256sum] = "b4668fb0ea861c1df094127ac5f1da3409a82116a4ba74fca2e58ef927159bb3"
++SRC_URI[libc-0.2.155.sha256sum] = "97b3888a4aecf77e811145cadf6eef5901f4782c53886191b2f693f24761847c"
+ SRC_URI[lock_api-0.4.10.sha256sum] = "c1cc9717a20b1bb222f333e6a92fd32f7d8a18ddc5a3191a11af45dcbf4dcd16"
+ SRC_URI[memchr-2.6.3.sha256sum] = "8f232d6ef707e1956a43342693d2a31e72989554d58299d7a88738cc95b0d35c"
+ SRC_URI[memoffset-0.9.0.sha256sum] = "5a634b1c61a95585bd15607c6ab0c4e5b226e695ff2800ba0cdccddf208c406c"
+@@ -124,29 +124,32 @@ SRC_URI[parking_lot_core-0.9.8.sha256sum] = "93f00c865fe7cabf650081affecd3871070
+ SRC_URI[percent-encoding-2.3.1.sha256sum] = "e3148f5046208a5d56bcfc03053e3ca6334e51da8dfb19b6cdc8b306fae3283e"
+ SRC_URI[portable-atomic-1.6.0.sha256sum] = "7170ef9988bc169ba16dd36a7fa041e5c4cbeb6a35b76d4c03daded371eae7c0"
+ SRC_URI[proc-macro2-1.0.76.sha256sum] = "95fc56cda0b5c3325f5fbbd7ff9fda9e02bb00bb3dac51252d2f1bfa1cb8cc8c"
+-SRC_URI[pyo3-0.20.3.sha256sum] = "53bdbb96d49157e65d45cc287af5f32ffadd5f4761438b527b055fb0d4bb8233"
+-SRC_URI[pyo3-build-config-0.20.3.sha256sum] = "deaa5745de3f5231ce10517a1f5dd97d53e5a2fd77aa6b5842292085831d48d7"
+-SRC_URI[pyo3-ffi-0.20.3.sha256sum] = "62b42531d03e08d4ef1f6e85a2ed422eb678b8cd62b762e53891c05faf0d4afa"
+-SRC_URI[pyo3-macros-0.20.3.sha256sum] = "7305c720fa01b8055ec95e484a6eca7a83c841267f0dd5280f0c8b8551d2c158"
+-SRC_URI[pyo3-macros-backend-0.20.3.sha256sum] = "7c7e9b68bb9c3149c5b0cade5d07f953d6d125eb4337723c4ccdb665f1f96185"
++SRC_URI[pyo3-0.21.2.sha256sum] = "a5e00b96a521718e08e03b1a622f01c8a8deb50719335de3f60b3b3950f069d8"
++SRC_URI[pyo3-build-config-0.21.2.sha256sum] = "7883df5835fafdad87c0d888b266c8ec0f4c9ca48a5bed6bbb592e8dedee1b50"
++SRC_URI[pyo3-ffi-0.21.2.sha256sum] = "01be5843dc60b916ab4dad1dca6d20b9b4e6ddc8e15f50c47fe6d85f1fb97403"
++SRC_URI[pyo3-macros-0.21.2.sha256sum] = "77b34069fc0682e11b31dbd10321cbf94808394c56fd996796ce45217dfac53c"
++SRC_URI[pyo3-macros-backend-0.21.2.sha256sum] = "08260721f32db5e1a5beae69a55553f56b99bd0e1c3e6e0a5e8851a9d0f5a85c"
+ SRC_URI[python3-dll-a-0.2.9.sha256sum] = "d5f07cd4412be8fa09a721d40007c483981bbe072cd6a21f2e83e04ec8f8343f"
+ SRC_URI[quote-1.0.35.sha256sum] = "291ec9ab5efd934aaf503a6466c5d5251535d108ee747472c3977cc5acc868ef"
++SRC_URI[radium-0.7.0.sha256sum] = "dc33ff2d4973d518d823d61aa239014831e521c75da58e3df4840d3f47749d09"
+ SRC_URI[redox_syscall-0.3.5.sha256sum] = "567664f262709473930a4bf9e51bf2ebf3348f2e748ccc50dea20646858f8f29"
+-SRC_URI[regex-1.10.2.sha256sum] = "380b951a9c5e80ddfd6136919eef32310721aa4aacd4889a8d39124b026ab343"
+-SRC_URI[regex-automata-0.4.3.sha256sum] = "5f804c7828047e88b2d32e2d7fe5a105da8ee3264f01902f796c8e067dc2483f"
++SRC_URI[regex-1.10.4.sha256sum] = "c117dbdfde9c8308975b6a18d71f3f385c89461f7b3fb054288ecf2a2058ba4c"
++SRC_URI[regex-automata-0.4.5.sha256sum] = "5bb987efffd3c6d0d8f5f89510bb458559eab11e4f869acb20bf845e016259cd"
+ SRC_URI[regex-syntax-0.8.2.sha256sum] = "c08c74e62047bb2de4ff487b251e4a92e24f48745648451635cec7d591162d9f"
+ SRC_URI[rustversion-1.0.13.sha256sum] = "dc31bd9b61a32c31f9650d18add92aa83a49ba979c143eefd27fe7177b05bd5f"
+ SRC_URI[ryu-1.0.14.sha256sum] = "fe232bdf6be8c8de797b22184ee71118d63780ea42ac85b61d1baa6d3b782ae9"
+ SRC_URI[scopeguard-1.1.0.sha256sum] = "d29ab0c6d3fc0ee92fe66e2d99f700eab17a8d57d1c1d3b748380fb20baa78cd"
+-SRC_URI[serde-1.0.195.sha256sum] = "63261df402c67811e9ac6def069e4786148c4563f4b50fd4bf30aa370d626b02"
+-SRC_URI[serde_derive-1.0.195.sha256sum] = "46fe8f8603d81ba86327b23a2e9cdf49e1255fb94a4c5f297f6ee0547178ea2c"
+-SRC_URI[serde_json-1.0.109.sha256sum] = "cb0652c533506ad7a2e353cce269330d6afd8bdfb6d75e0ace5b35aacbd7b9e9"
+-SRC_URI[smallvec-1.11.2.sha256sum] = "4dccd0940a2dcdf68d092b8cbab7dc0ad8fa938bf95787e1b916b0e3d0e8e970"
+-SRC_URI[speedate-0.13.0.sha256sum] = "242f76c50fd18cbf098607090ade73a08d39cfd84ea835f3796a2c855223b19b"
++SRC_URI[serde-1.0.203.sha256sum] = "7253ab4de971e72fb7be983802300c30b5a7f0c2e56fab8abfc6a214307c0094"
++SRC_URI[serde_derive-1.0.203.sha256sum] = "500cbc0ebeb6f46627f50f3f5811ccf6bf00643be300b4c3eabc0ef55dc5b5ba"
++SRC_URI[serde_json-1.0.116.sha256sum] = "3e17db7126d17feb94eb3fad46bf1a96b034e8aacbc2e775fe81505f8b0b2813"
++SRC_URI[smallvec-1.13.2.sha256sum] = "3c5e1a9a646d36c3599cd173a41282daf47c44583ad367b8e6837255952e5c67"
++SRC_URI[speedate-0.14.0.sha256sum] = "c323c4e6fece5a5a1a2a7f726d243144cce9fbcfe3ce4d9f3c6ede726a2bc780"
+ SRC_URI[static_assertions-1.1.0.sha256sum] = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
+ SRC_URI[strum-0.25.0.sha256sum] = "290d54ea6f91c969195bdbcd7442c8c2a2ba87da8bf60a7ee86a235d4bc1e125"
+ SRC_URI[strum_macros-0.25.3.sha256sum] = "23dc1fa9ac9c169a78ba62f0b841814b7abae11bdd047b9c58f893439e309ea0"
++SRC_URI[strum_macros-0.26.1.sha256sum] = "7a3417fc93d76740d974a01654a09777cb500428cc874ca9f45edfe0c4d4cd18"
+ SRC_URI[syn-2.0.48.sha256sum] = "0f3531638e407dfc0814761abb7c00a5b54992b849452a0646b7f65c9f770f3f"
++SRC_URI[tap-1.0.1.sha256sum] = "55937e1799185b12863d447f42597ed69d9928686b8d88a1df17376a097d8369"
+ SRC_URI[target-lexicon-0.12.9.sha256sum] = "df8e77cb757a61f51b947ec4a7e3646efd825b73561db1c232a8ccb639e611a0"
+ SRC_URI[tinyvec-1.6.0.sha256sum] = "87cc5ceb3875bb20c2890005a4e226a4651264a5c75edb2421b52861a0a0cb50"
+ SRC_URI[tinyvec_macros-0.1.1.sha256sum] = "1f3ccbac311fea05f86f61904b462b55fb3df8837a366dfc601a0161d0532f20"
+@@ -155,7 +158,7 @@ SRC_URI[unicode-ident-1.0.10.sha256sum] = "22049a19f4a68748a168c0fc439f9516686aa
+ SRC_URI[unicode-normalization-0.1.22.sha256sum] = "5c5713f0fc4b5db668a2ac63cdb7bb4469d8c9fed047b1d0292cc7b0ce2ba921"
+ SRC_URI[unindent-0.2.3.sha256sum] = "c7de7d73e1754487cb58364ee906a499937a0dfabd86bcb980fa99ec8c8fa2ce"
+ SRC_URI[url-2.5.0.sha256sum] = "31e6302e3bb753d46e83516cae55ae196fc0c309407cf11ab35cc51a4c2a4633"
+-SRC_URI[uuid-1.6.1.sha256sum] = "5e395fcf16a7a3d8127ec99782007af141946b4795001f876d54fb0d55978560"
++SRC_URI[uuid-1.8.0.sha256sum] = "a183cf7feeba97b4dd1c0d46788634f6221d87fa961b305bed08c851829efcc0"
+ SRC_URI[version_check-0.9.4.sha256sum] = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
+ SRC_URI[wasi-0.11.0+wasi-snapshot-preview1.sha256sum] = "9c8d87e72b64a3b4db28d11ce29237c246188f4f51057d65a7eab63b7987e423"
+ SRC_URI[windows-targets-0.48.1.sha256sum] = "05d4b17490f70499f20b9e791dcf6a299785ce8af4d709018206dc5b4953e95f"
+@@ -166,5 +169,6 @@ SRC_URI[windows_i686_msvc-0.48.0.sha256sum] = "4542c6e364ce21bf45d69fdd2a8e455fa
+ SRC_URI[windows_x86_64_gnu-0.48.0.sha256sum] = "ca2b8a661f7628cbd23440e50b05d705db3686f894fc9580820623656af974b1"
+ SRC_URI[windows_x86_64_gnullvm-0.48.0.sha256sum] = "7896dbc1f41e08872e9d5e8f8baa8fdd2677f29468c4e156210174edc7f7b953"
+ SRC_URI[windows_x86_64_msvc-0.48.0.sha256sum] = "1a515f5799fe4961cb532f983ce2b23082366b898e52ffbce459c86f67c8378a"
++SRC_URI[wyz-0.5.1.sha256sum] = "05f360fc0b24296329c78fda852a1e9ae82de9cf7b27dae4b7f62f118f77b9ed"
+ SRC_URI[zerocopy-0.7.32.sha256sum] = "74d4d3961e53fa4c9a25a8637fc2bfaf2595b3d3ae34875568a5cf64787716be"
+ SRC_URI[zerocopy-derive-0.7.32.sha256sum] = "9ce1b18ccd8e73a9321186f97e46f9f04b778851177567b1975109d26a08d2a6"
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch b/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch
+deleted file mode 100644
+index 32777e1d0..000000000
+--- a/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch
++++ /dev/null
+@@ -1,126 +0,0 @@
+-From a5690f973384bf8cbf4deb3b83d822b7aaefbdd8 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 27 Feb 2024 11:00:46 -0800
+-Subject: [PATCH] Bumps [pyo3](https://github.com/pyo3/pyo3) from 0.20.2 to
+- 0.20.3.
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- Cargo.lock | 26 +++++++++++++++++---------
+- Cargo.toml |  2 +-
+- 2 files changed, 18 insertions(+), 10 deletions(-)
+-
+---- a/Cargo.lock
+-+++ b/Cargo.lock
+-@@ -322,6 +322,12 @@ source = "registry+https://github.com/ru
+- checksum = "e3148f5046208a5d56bcfc03053e3ca6334e51da8dfb19b6cdc8b306fae3283e"
+- 
+- [[package]]
+-+name = "portable-atomic"
+-+version = "1.6.0"
+-+source = "registry+https://github.com/rust-lang/crates.io-index"
+-+checksum = "7170ef9988bc169ba16dd36a7fa041e5c4cbeb6a35b76d4c03daded371eae7c0"
+-+
+-+[[package]]
+- name = "proc-macro2"
+- version = "1.0.76"
+- source = "registry+https://github.com/rust-lang/crates.io-index"
+-@@ -357,9 +363,9 @@ dependencies = [
+- 
+- [[package]]
+- name = "pyo3"
+--version = "0.20.2"
+-+version = "0.20.3"
+- source = "registry+https://github.com/rust-lang/crates.io-index"
+--checksum = "9a89dc7a5850d0e983be1ec2a463a171d20990487c3cfcd68b5363f1ee3d6fe0"
+-+checksum = "53bdbb96d49157e65d45cc287af5f32ffadd5f4761438b527b055fb0d4bb8233"
+- dependencies = [
+-  "cfg-if",
+-  "indoc",
+-@@ -367,6 +373,7 @@ dependencies = [
+-  "memoffset",
+-  "num-bigint",
+-  "parking_lot",
+-+ "portable-atomic",
+-  "pyo3-build-config",
+-  "pyo3-ffi",
+-  "pyo3-macros",
+-@@ -375,9 +382,9 @@ dependencies = [
+- 
+- [[package]]
+- name = "pyo3-build-config"
+--version = "0.20.2"
+-+version = "0.20.3"
+- source = "registry+https://github.com/rust-lang/crates.io-index"
+--checksum = "07426f0d8fe5a601f26293f300afd1a7b1ed5e78b2a705870c5f30893c5163be"
+-+checksum = "deaa5745de3f5231ce10517a1f5dd97d53e5a2fd77aa6b5842292085831d48d7"
+- dependencies = [
+-  "once_cell",
+-  "python3-dll-a",
+-@@ -386,9 +393,9 @@ dependencies = [
+- 
+- [[package]]
+- name = "pyo3-ffi"
+--version = "0.20.2"
+-+version = "0.20.3"
+- source = "registry+https://github.com/rust-lang/crates.io-index"
+--checksum = "dbb7dec17e17766b46bca4f1a4215a85006b4c2ecde122076c562dd058da6cf1"
+-+checksum = "62b42531d03e08d4ef1f6e85a2ed422eb678b8cd62b762e53891c05faf0d4afa"
+- dependencies = [
+-  "libc",
+-  "pyo3-build-config",
+-@@ -396,9 +403,9 @@ dependencies = [
+- 
+- [[package]]
+- name = "pyo3-macros"
+--version = "0.20.2"
+-+version = "0.20.3"
+- source = "registry+https://github.com/rust-lang/crates.io-index"
+--checksum = "05f738b4e40d50b5711957f142878cfa0f28e054aa0ebdfc3fd137a843f74ed3"
+-+checksum = "7305c720fa01b8055ec95e484a6eca7a83c841267f0dd5280f0c8b8551d2c158"
+- dependencies = [
+-  "proc-macro2",
+-  "pyo3-macros-backend",
+-@@ -408,12 +415,13 @@ dependencies = [
+- 
+- [[package]]
+- name = "pyo3-macros-backend"
+--version = "0.20.2"
+-+version = "0.20.3"
+- source = "registry+https://github.com/rust-lang/crates.io-index"
+--checksum = "0fc910d4851847827daf9d6cdd4a823fbdaab5b8818325c5e97a86da79e8881f"
+-+checksum = "7c7e9b68bb9c3149c5b0cade5d07f953d6d125eb4337723c4ccdb665f1f96185"
+- dependencies = [
+-  "heck",
+-  "proc-macro2",
+-+ "pyo3-build-config",
+-  "quote",
+-  "syn",
+- ]
+---- a/Cargo.toml
+-+++ b/Cargo.toml
+-@@ -26,7 +26,7 @@ include = [
+- ]
+- 
+- [dependencies]
+--pyo3 = { version = "0.20.2", features = ["generate-import-lib", "num-bigint"] }
+-+pyo3 = { version = "0.20.3", features = ["generate-import-lib", "num-bigint"] }
+- regex = "1.10.2"
+- strum = { version = "0.25.0", features = ["derive"] }
+- strum_macros = "0.25.3"
+-@@ -70,12 +70,12 @@ debug = true
+- strip = false
+- 
+- [dev-dependencies]
+--pyo3 = { version = "0.20.2", features = ["auto-initialize"] }
+-+pyo3 = { version = "0.20.3", features = ["auto-initialize"] }
+- 
+- [build-dependencies]
+- version_check = "0.9.4"
+- # used where logic has to be version/distribution specific, e.g. pypy
+--pyo3-build-config = { version = "0.20.2" }
+-+pyo3-build-config = { version = "0.20.3" }
+- 
+- [lints.clippy]
+- dbg_macro = "warn"
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb b/meta-python/recipes-devtools/python/python3-pydantic-core_2.19.0.bb
+similarity index 87%
+rename from meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
+rename to meta-python/recipes-devtools/python/python3-pydantic-core_2.19.0.bb
+index f51064522..6b8fed92a 100644
+--- a/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pydantic-core_2.19.0.bb
+@@ -8,8 +8,7 @@ HOMEPAGE = "https://github.com/pydantic/pydantic-core"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=ab599c188b4a314d2856b3a55030c75c"
+ 
+-SRC_URI += "file://0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch"
+-SRC_URI[sha256sum] = "1cac689f80a3abab2d3c0048b29eea5751114054f032a941a32de4c852c59cad"
++SRC_URI[sha256sum] = "9ad77f1aecedef233390eff7fd643fe652e5ac92b793329424c2a1d2e28c08d1"
+ 
+ DEPENDS = "python3-maturin-native python3-typing-extensions"
+ 
+@@ -33,6 +32,7 @@ RDEPENDS:${PN}-ptest += "\
+     python3-pytest-timeout \
+     python3-pytest-benchmark \
+     python3-unittest-automake-output \
++    python3-zoneinfo \
+ "
+ 
+ do_install_ptest() {
+-- 
+2.45.2
 
-
-
-</pre>
-        <br>
-        <fieldset class=3D"moz-mime-attachment-header"></fieldset>
-        <pre class=3D"moz-quote-pre" wrap=3D"">
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-Links: You receive all messages sent to this group.
-View/Reply Online (#110895): <a class=3D"moz-txt-link-freetext" href=3D"h=
-ttps://lists.openembedded.org/g/openembedded-devel/message/110895">https:=
-//lists.openembedded.org/g/openembedded-devel/message/110895</a>
-Mute This Topic: <a class=3D"moz-txt-link-freetext" href=3D"https://lists=
-.openembedded.org/mt/106648104/3616873">https://lists.openembedded.org/mt=
-/106648104/3616873</a>
-Group Owner: <a class=3D"moz-txt-link-abbreviated" href=3D"mailto:openemb=
-edded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.=
-openembedded.org</a>
-Unsubscribe: <a class=3D"moz-txt-link-freetext" href=3D"https://lists.ope=
-nembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/=
-g/openembedded-devel/unsub</a> [<a class=3D"moz-txt-link-abbreviated" hre=
-f=3D"mailto:changqing.li@windriver.com">changqing.li@windriver.com</a>]
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-
-</pre>
-      </blockquote>
-    </blockquote>
-  </body>
-</html>
-
---------------Nqba08S5P1DO0PydTBFFln4n--
 
