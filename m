@@ -2,61 +2,58 @@ Return-Path: <ninette@thehoodiefirm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B6A9C41513
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A363C27C6E
 	for <webhook@archiver.kernel.org>; Fri, 14 Jun 2024 11:19:39 +0000 (UTC)
-Received: from mail-ua1-f52.google.com (mail-ua1-f52.google.com [209.85.222.52])
- by mx.groups.io with SMTP id smtpd.web11.9209.1718363973528725802
+Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com [209.85.222.172])
+ by mx.groups.io with SMTP id smtpd.web10.9055.1718363969567043978
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Jun 2024 04:19:33 -0700
+ Fri, 14 Jun 2024 04:19:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@thehoodiefirm-com.20230601.gappssmtp.com header.s=20230601 header.b=a4JLBIj3;
- spf=neutral (domain: thehoodiefirm.com, ip: 209.85.222.52, mailfrom: ninette@thehoodiefirm.com)
-Received: by mail-ua1-f52.google.com with SMTP id a1e0cc1a2514c-80b9c393c8cso553053241.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jun 2024 04:19:33 -0700 (PDT)
+ dkim=pass header.i=@thehoodiefirm-com.20230601.gappssmtp.com header.s=20230601 header.b=QBpXJDrp;
+ spf=neutral (domain: thehoodiefirm.com, ip: 209.85.222.172, mailfrom: ninette@thehoodiefirm.com)
+Received: by mail-qk1-f172.google.com with SMTP id af79cd13be357-795ca45c54cso119558285a.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jun 2024 04:19:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thehoodiefirm-com.20230601.gappssmtp.com; s=20230601; t=1718363972; x=1718968772; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:reply-to:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=xA0dsHKCU9VNAoOdVyHx+XxpzBO60gjmbiYk2cz5xNU=;
-        b=a4JLBIj3rIWk3vUw07WB0ysqIlRwHEVHNva8/6upsJCz5LUhcPTTKZuZRTpd55JjO8
-         LGU5BDufuk9odgV6bTWUvIfYMOX83+RQk4+NAu5qCAEay6EvT6HLcscnFnpYfeeZZFk0
-         5HdlNjGdoJqD/rAuPGr2UVF1qlxtR1IAa94xjvsDxlm2+1TOcieHYc4uAPZo0cXqGum6
-         gmfLi917mH633GNGdYoSdHk/KaQk34rshkLuIlJ2ZqmOiv0CrO2KcMa28RP2dHIiJa0A
-         8R1lVpZky6g0YClnNkqeWlQ8uGJqqn+idomE9wtp3Sv9PIKugJ5L5q7FiqxWrLx6gSPy
-         9/oQ==
+        d=thehoodiefirm-com.20230601.gappssmtp.com; s=20230601; t=1718363968; x=1718968768; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:reply-to:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=jchrfrHkgSHF75kX4UYcT5vjQsPsUFfJCq0sTOX8dOY=;
+        b=QBpXJDrpu9bW2ATR2KAXFghtItmPjbcqlQpUi8FQz8EcDKU/em917zbWbL6UNeuw9U
+         3CLOMJIXmVqqYbLQArlrus+Dbmzzul7sLocHiBFRcjE0yzN/afTropdzMXPpbs4OYsYs
+         J/FSohIJjXx5P/Cr6DHtda2IMg8kGyLb1iaCktX4fXdPl9GUW8dtD0CcCVkjyYQcdQJk
+         eoXzARZpt+b93sH/ZloQRfSPlNNdcoJrtMXPDF+MeF5asK+rfLXIXOe3yxEDbvZemgwu
+         A79twR/GLdv26d5Kr9CYY1/Vkl49ZXdMN1V7XNLZfvDYJYGhdHgD15aNTm0CAsYERPz+
+         PnKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718363972; x=1718968772;
-        h=content-transfer-encoding:mime-version:reply-to:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=xA0dsHKCU9VNAoOdVyHx+XxpzBO60gjmbiYk2cz5xNU=;
-        b=kKnL99ymgvjhrshJBMylGM0noiwk8z1oTt6c35QNl3sRKIKUDbFZyfrQcabk/B9Umc
-         Pm3XsO/5gqUOz76ZPpYzLW0fPDQ+AWAEM4PF/7GpLbWpmw9vLZd4cR1+s1nyUqDsyO20
-         KL7MOswKxzLhCRdWg69TSMGHbUxGXvssGg1T5flIJxeFvIPgvvvEZ93gmmzW9WGlTYYX
-         66YhLZ30MWhbreGwmRVEcs+2WHn9KRHr5t9yryRbGNoyGdYsEM99bC6Zchjt8EJEhtUu
-         k3NiPxnLvRX6r1gktbfOL+1UVN3p0GUOEI2DsCFY3ORB+NrzN2u/N5M5NU3NiM3K64NO
-         Af2Q==
-X-Gm-Message-State: AOJu0YxDNvtPy7nwULjxyD0C2/B5N4wqY9ltOEFzNAgIMi6aTcwn73uW
-	Uw81zvuuppZ5tW1ackDBiOsX/0maNY8+U79DUa9g/hVBrg+U7HqDcdfmSV5LcIfcp2l0MWgZwgF
-	4HTV2sw==
-X-Google-Smtp-Source: AGHT+IE9pwOj3tQAtOhAOtzdVRLyrfATF/1d7+oEJbkuNdVvQm3efNTSK6C1mqmlvPV+XHRSS9NJeg==
-X-Received: by 2002:a05:6102:2333:b0:48d:c123:60b7 with SMTP id ada2fe7eead31-48dc123687cmr69579137.0.1718363972449;
-        Fri, 14 Jun 2024 04:19:32 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1718363968; x=1718968768;
+        h=content-transfer-encoding:mime-version:reply-to:message-id:date
+         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=jchrfrHkgSHF75kX4UYcT5vjQsPsUFfJCq0sTOX8dOY=;
+        b=NUj0HtrWDmL6iFxkeN9hCRLX88FtV1o7ePQwVgDtxhjznqSyixkxe+gJxTf5R6x/Wh
+         fFn+wEuzjwYIxKW/zmpRpKU2/vm+ZROFKfht2T08aTNCIVJSxdTIputOMQLNCrsISmRo
+         dIgHHr/d2jePe5Fw8Jb2RMRT0tvaayhbJtKtfKRLV/5LThLpbXZ+hMd+sqqStwvuxWVX
+         A6FW9AdcvTGyUpnnXclyCeazNMSInQwA/HiGwt62bOOj9YgQ11ewVcIoJmz8d3odmsVm
+         5ZMUu6mQiSfSDzW9JErq+uuiSqUKA8lRDX3eX2KL/Rb/1kC7bwbBHG6a+TLl9New9PXX
+         wA9Q==
+X-Gm-Message-State: AOJu0Yzh+2TXaF0xZIjznodKN1Aksk/1kNEg6U3Ks8a6QR7jE0BCfAnC
+	RWJV/NL7aCq3VGQQ+rNOzDgaNTurTd7glvJTubvaGF2990AP8rOx9BeP8fJeshNJ+xUmyE3dOEU
+	Eaq3KoA==
+X-Google-Smtp-Source: AGHT+IEK1gVTZ2NYXHS3ZKFyyO8/HpHJGxsaOvEzO+WY91RhWxZh6o6Q6mhwMqjF84+9nKWqAay8rQ==
+X-Received: by 2002:a05:620a:408b:b0:797:b67e:e84f with SMTP id af79cd13be357-798d242e126mr229562585a.37.1718363968320;
+        Fri, 14 Jun 2024 04:19:28 -0700 (PDT)
 Received: from Ninettes-MBP.home ([174.89.68.185])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-798aacb1e6dsm134668485a.13.2024.06.14.04.19.31
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-798aacb1e6dsm134668485a.13.2024.06.14.04.19.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Jun 2024 04:19:32 -0700 (PDT)
+        Fri, 14 Jun 2024 04:19:28 -0700 (PDT)
 From: Ninette Adhikari <ninette@thehoodiefirm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: engineering@neighbourhood.ie,
 	Ninette Adhikari <ninette@thehoodiefirm.com>
-Subject: [PATCH 1/1] smarty: Update status for CVE-2020-10375
-Date: Fri, 14 Jun 2024 07:19:11 -0400
-Message-ID: <20240614111911.46353-2-ninette@thehoodiefirm.com>
+Subject: [PATCH 0/1] smarty: Update status for CVE-2020-10375
+Date: Fri, 14 Jun 2024 07:19:10 -0400
+Message-ID: <20240614111911.46353-1-ninette@thehoodiefirm.com>
 X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240614111911.46353-1-ninette@thehoodiefirm.com>
-References: <20240614111911.46353-1-ninette@thehoodiefirm.com>
 Reply-To: engineering@neighbourhood.ie
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -64,28 +61,19 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Jun 2024 11:19:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110905
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110904
 
 The recipe used in the meta-openembedded is a different package compared to the one which has the CVE issue.
 Package used in meta-embedded: https://www.smarty.net/
 Package with CVE issue is from newmediacompany: https://www.smarty-online.de
 No action required.
 
-Signed-off-by: Ninette Adhikari <ninette@thehoodiefirm.com>
----
+Ninette Adhikari (1):
+  smarty: Update status for CVE-2020-10375
+
  meta-oe/recipes-support/smarty/smarty_4.4.1.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/smarty/smarty_4.4.1.bb b/meta-oe/recipes-support/smarty/smarty_4.4.1.bb
-index 1caa4cd1b..e0979bb5a 100644
---- a/meta-oe/recipes-support/smarty/smarty_4.4.1.bb
-+++ b/meta-oe/recipes-support/smarty/smarty_4.4.1.bb
-@@ -24,3 +24,5 @@ do_install() {
-         install -m 0644 ${S}/libs/sysplugins/*.php ${D}${datadir}/php/smarty3/libs/sysplugins/
- }
- FILES:${PN} = "${datadir}/php/smarty3/"
-+
-+CVE_STATUS[CVE-2020-10375] = "cpe-incorrect: The recipe used in the meta-openembedded is a different smarty package compared to the one which has the CVE issue."
 --
 2.44.0
 
