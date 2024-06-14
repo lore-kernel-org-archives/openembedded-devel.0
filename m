@@ -1,219 +1,304 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86BADC27C6E
-	for <webhook@archiver.kernel.org>; Fri, 14 Jun 2024 07:53:47 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.6407.1718351617392333655
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 049CEC27C6E
+	for <webhook@archiver.kernel.org>; Fri, 14 Jun 2024 09:25:47 +0000 (UTC)
+Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
+ by mx.groups.io with SMTP id smtpd.web10.7283.1718357141745009289
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Jun 2024 00:53:37 -0700
+ Fri, 14 Jun 2024 02:25:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=6895a578d0=changqing.li@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45E7BTZd026605
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jun 2024 00:53:37 -0700
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ymptg5uq6-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jun 2024 00:53:36 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Fri, 14 Jun 2024 00:53:35 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.39 via Frontend Transport; Fri, 14 Jun 2024 00:53:35 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][PATCH] tnftp: fix lib32-tnftp build failure with gcc-14
-Date: Fri, 14 Jun 2024 15:53:34 +0800
-Message-ID: <20240614075334.3571696-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=cmlStide;
+ spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1718357141; x=1749893141;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=FkDv3kLe8S5jYq86U6AB7z9xjqD81bjpqourc/U6mdQ=;
+  b=cmlStideuN9ihk6PfdDic/6DxvSpiyLGQ01pIzcc0RQNWf3cLFj/aIGN
+   Ar4W8GAcvBc1VHs+zIoAc5reTrknCt4STjurH5gF4jUwpt2VfL4tbFQR1
+   Re7YRcv1u+0mCeoSoVyTovnvFB9FZhvdzvs16g6BpukQALQafSTY0Ms3x
+   MjGkRpkvcAgGIpjJXqmemEneF0RvJnCVwAX9LQME8tSW7YrR2novbjprx
+   Nu5ZaSko2QuMyQmxYiH7oiDOn4BAYFQy3ATnYOBZ1Gh5THFauySvOL4aY
+   bLj6RT4WMeYZDiv2/XEzZMpqxN/2lkLIYXrMDOuQVbcHu6+r7Z4XMaOMj
+   Q==;
+X-IronPort-AV: E=McAfee;i="6700,10204,11102"; a="142270566"
+X-IronPort-AV: E=Sophos;i="6.08,237,1712588400"; 
+   d="scan'208";a="142270566"
+Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
+  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jun 2024 18:25:38 +0900
+Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
+	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 957C6C9160
+	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jun 2024 18:25:36 +0900 (JST)
+Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
+	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id B90E5D5498
+	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jun 2024 18:25:35 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 31C122008130E
+	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jun 2024 18:25:35 +0900 (JST)
+Received: from wangmy-QiTianM610-N000.g08.fujitsu.local (unknown [10.167.225.86])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id AA4FE1A000B;
+	Fri, 14 Jun 2024 17:25:34 +0800 (CST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-java] [PATCH] recipes: Start WORKDIR -> UNPACKDIR transition
+Date: Fri, 14 Jun 2024 14:24:09 -0400
+Message-Id: <20240614182409.3322840-1-wangmy@fujitsu.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: 92TFNt6d6jhKN6idCp6XciLcF4lyoTzB
-X-Proofpoint-GUID: 92TFNt6d6jhKN6idCp6XciLcF4lyoTzB
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-13_15,2024-06-13_02,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 lowpriorityscore=0
- clxscore=1015 malwarescore=0 priorityscore=1501 bulkscore=0 suspectscore=0
- adultscore=0 phishscore=0 mlxlogscore=999 impostorscore=0 spamscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.21.0-2405170001
- definitions=main-2406140054
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28452.006
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28452.006
+X-TMASE-Result: 10--11.187300-10.000000
+X-TMASE-MatchedRID: t3rvxuFr4chAJjQFQUSfYfLeH1FBnhK0CZa9cSpBObnAuQ0xDMaXkH4q
+	tYI9sRE/VA2jMht1uVzvBBHhCihMri5AMgfDcBcMs0T0PE+KHuVoF4uAn4kYJ1CedixYXzOrY87
+	NwWBxSvjMsgcjNXJTZIK0hPmT524+5VtV90uxxtfPmvnL2ai5IKqqvWsAC6cQeGHkpR2WBaJRdU
+	hI1NLdtONJFL7Gc6BHntw3k1sjPaeel3N+gDvB5+9VsdrlGzy3xMZq+YajS9b7s8CQBJM67pegO
+	xWL1ibsSQGPZ9M/BiOAMuqetGVetiKODC+qnmrBFpbjU3dJHnX6C0ePs7A07fyjtizU0rhj7GZH
+	qbd8/0LRmlQucheeDmKcFNibNE1k1SBXGo5R6wo=
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Jun 2024 07:53:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110902
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Jun 2024 09:25:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110903
 
-From: Changqing Li <changqing.li@windriver.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-lib32-tnftp do_compile failed with gcc-14:
-../../tnftp-20230507/libedit/terminal.c:597:56: error: passing argument 2 of 'terminal_overwrite' from incompatible pointer type [-Wincompatible-pointer-types]
-  597 |                                 terminal_overwrite(el, &el->el_display[
-      |                                                        ^~~~~~~~~~~~~~~~
-      |                                                        |
-      |                                                        wint_t * {aka unsigned int *}
-  598 |                                     el->el_cursor.v][el->el_cursor.h],
-      |                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-../../tnftp-20230507/libedit/refresh.c:114:38: error: initialization of 'wchar_t *' {aka 'long int *'} from incompatible pointer type 'wint_t *' {aka 'unsigned int *'} [-Wincompatible-pointer-types]
-  114 |                 wchar_t *firstline = el->el_vdisplay[0];
+Replace references of WORKDIR with UNPACKDIR where it makes sense to do so in preparation for changing the default value of UNPACKDIR.
 
-For 64bit system:
-wchar_t is defined as int
-wint_t is define as unsigned int
-
-For 32bit system:
-wchar_t is defined as long int
-wint_t is define as unsigned int
-
-In 64bit case, it works well, but in 32bit case, gcc will take it as
-incompatible, and report above error
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ease-conversions-between-wchar_t-and.patch | 77 +++++++++++++++++++
- ...ease-conversions-between-wchar_t-and.patch | 29 +++++++
- .../recipes-support/tnftp/tnftp_20230507.bb   |  2 +
- 3 files changed, 108 insertions(+)
- create mode 100644 meta-networking/recipes-support/tnftp/tnftp/0001-Add-casts-to-appease-conversions-between-wchar_t-and.patch
- create mode 100644 meta-networking/recipes-support/tnftp/tnftp/0002-Add-casts-to-appease-conversions-between-wchar_t-and.patch
+ recipes-core/ant/ant-native_1.8.1.bb                  | 4 ++--
+ recipes-core/antlr/antlr_2.7.7.bb                     | 4 ++--
+ recipes-core/cup/cup_0.10k.bb                         | 6 +++---
+ recipes-core/ecj/ecj-bootstrap-native.bb              | 2 +-
+ recipes-core/ecj/ecj-initial-native.bb                | 2 +-
+ recipes-core/ecj/libecj-bootstrap.inc                 | 2 +-
+ recipes-core/icedtea/icedtea7-native.inc              | 8 ++++----
+ recipes-core/jakarta-libs/avalon-framework-api_4.3.bb | 2 +-
+ recipes-core/jikes/jikes-initial-native.bb            | 2 +-
+ recipes-core/jlex/jlex_1.2.6.bb                       | 4 ++--
+ recipes-core/junit/junit4_4.3.1.bb                    | 2 +-
+ recipes-core/rhino/rhino_1.7r4.bb                     | 4 ++--
+ 12 files changed, 21 insertions(+), 21 deletions(-)
 
-diff --git a/meta-networking/recipes-support/tnftp/tnftp/0001-Add-casts-to-appease-conversions-between-wchar_t-and.patch b/meta-networking/recipes-support/tnftp/tnftp/0001-Add-casts-to-appease-conversions-between-wchar_t-and.patch
-new file mode 100644
-index 000000000..bbd6c7843
---- /dev/null
-+++ b/meta-networking/recipes-support/tnftp/tnftp/0001-Add-casts-to-appease-conversions-between-wchar_t-and.patch
-@@ -0,0 +1,77 @@
-+From 46477eb182af51b5da8299b295a6d61e566e3693 Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Fri, 14 Jun 2024 06:27:19 +0000
-+Subject: [PATCH] Add casts to appease conversions between wchar_t and wint_t
-+
-+Upstream-Status: Backport [http://cvsweb.netbsd.org/bsdweb.cgi/src/lib/libedit/refresh.c.diff?r1=1.57&r2=1.58&only_with_tag=MAIN&f=h]
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ libedit/refresh.c    | 16 +++++++++-------
-+ 1 file changed, 9 insertions(+), 7 deletions(-)
-+
-+diff --git a/libedit/refresh.c b/libedit/refresh.c
-+index 093f993..a6d4574 100644
-+--- a/libedit/refresh.c
-++++ b/libedit/refresh.c
-+@@ -111,7 +111,7 @@ re_nextline(EditLine *el)
-+ 	 */
-+ 	if (el->el_refresh.r_cursor.v + 1 >= el->el_terminal.t_size.v) {
-+ 		int i, lins = el->el_terminal.t_size.v;
-+-		wchar_t *firstline = el->el_vdisplay[0];
-++		wint_t *firstline = el->el_vdisplay[0];
-+ 
-+ 		for(i = 1; i < lins; i++)
-+ 			el->el_vdisplay[i - 1] = el->el_vdisplay[i];
-+@@ -340,7 +340,8 @@ re_refresh(EditLine *el)
-+ 	ELRE_DEBUG(1, (__F, "updating %d lines.\r\n", el->el_refresh.r_newcv));
-+ 	for (i = 0; i <= el->el_refresh.r_newcv; i++) {
-+ 		/* NOTE THAT re_update_line MAY CHANGE el_display[i] */
-+-		re_update_line(el, el->el_display[i], el->el_vdisplay[i], i);
-++		re_update_line(el, (wchar_t *)el->el_display[i],
-++				(wchar_t *)el->el_vdisplay[i], i);
-+ 
-+ 		/*
-+ 		 * Copy the new line to be the current one, and pad out with
-+@@ -349,8 +350,9 @@ re_refresh(EditLine *el)
-+ 		 * end of the screen line, it won't be a NUL or some old
-+ 		 * leftover stuff.
-+ 		 */
-+-		re__copy_and_pad(el->el_display[i], el->el_vdisplay[i],
-+-		    (size_t) el->el_terminal.t_size.h);
-++		re__copy_and_pad((wchar_t *)el->el_display[i], 
-++			(wchar_t *)el->el_vdisplay[i],
-++			(size_t) el->el_terminal.t_size.h);
-+ 	}
-+ 	ELRE_DEBUG(1, (__F,
-+ 	"\r\nel->el_refresh.r_cursor.v=%d,el->el_refresh.r_oldcv=%d i=%d\r\n",
-+@@ -361,7 +363,7 @@ re_refresh(EditLine *el)
-+ 			terminal_move_to_line(el, i);
-+ 			terminal_move_to_char(el, 0);
-+                         /* This wcslen should be safe even with MB_FILL_CHARs */
-+-			terminal_clear_EOL(el, (int) wcslen(el->el_display[i]));
-++			terminal_clear_EOL(el, (int) wcslen((const wchar_t *)el->el_display[i]));
-+ #ifdef DEBUG_REFRESH
-+ 			terminal_overwrite(el, L"C\b", 2);
-+ #endif /* DEBUG_REFRESH */
-+@@ -1097,7 +1099,7 @@ re_refresh_cursor(EditLine *el)
-+ static void
-+ re_fastputc(EditLine *el, wint_t c)
-+ {
-+-	wchar_t *lastline;
-++	wint_t *lastline;
-+ 	int w;
-+ 
-+ 	w = wcwidth(c);
-+@@ -1132,7 +1134,7 @@ re_fastputc(EditLine *el, wint_t c)
-+ 			el->el_cursor.v++;
-+ 			lastline = el->el_display[++el->el_refresh.r_oldcv];
-+ 		}
-+-		re__copy_and_pad(lastline, L"", (size_t)el->el_terminal.t_size.h);
-++		re__copy_and_pad((wchar_t *)lastline, L"", (size_t)el->el_terminal.t_size.h);
-+ 
-+ 		if (EL_HAS_AUTO_MARGINS) {
-+ 			if (EL_HAS_MAGIC_MARGINS) {
-+-- 
-+2.35.5
-+
-diff --git a/meta-networking/recipes-support/tnftp/tnftp/0002-Add-casts-to-appease-conversions-between-wchar_t-and.patch b/meta-networking/recipes-support/tnftp/tnftp/0002-Add-casts-to-appease-conversions-between-wchar_t-and.patch
-new file mode 100644
-index 000000000..c041d0a9d
---- /dev/null
-+++ b/meta-networking/recipes-support/tnftp/tnftp/0002-Add-casts-to-appease-conversions-between-wchar_t-and.patch
-@@ -0,0 +1,29 @@
-+From 5c8334f86d139de987c716a0d5acc0f40d8d3b7d Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Fri, 14 Jun 2024 06:38:37 +0000
-+Subject: [PATCH] Add casts to appease conversions between wchar_t and wint_t
-+
-+Upstream-Status: Backport [http://cvsweb.netbsd.org/bsdweb.cgi/src/lib/libedit/terminal.c.diff?r1=1.43&r2=1.44&only_with_tag=MAIN&f=h]
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ libedit/terminal.c | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/libedit/terminal.c b/libedit/terminal.c
-+index 19cee48..13f7bcd 100644
-+--- a/libedit/terminal.c
-++++ b/libedit/terminal.c
-+@@ -594,7 +594,8 @@ mc_again:
-+ 				 * NOTE THAT terminal_overwrite() WILL CHANGE
-+ 				 * el->el_cursor.h!!!
-+ 				 */
-+-				terminal_overwrite(el, &el->el_display[
-++				terminal_overwrite(el,
-++					(wchar_t *)&el->el_display[
-+ 				    el->el_cursor.v][el->el_cursor.h],
-+ 				    (size_t)(where - el->el_cursor.h));
-+ 
-+-- 
-+2.35.5
-+
-diff --git a/meta-networking/recipes-support/tnftp/tnftp_20230507.bb b/meta-networking/recipes-support/tnftp/tnftp_20230507.bb
-index bdd9759f2..4ab694fbb 100644
---- a/meta-networking/recipes-support/tnftp/tnftp_20230507.bb
-+++ b/meta-networking/recipes-support/tnftp/tnftp_20230507.bb
-@@ -16,6 +16,8 @@ DEPENDS = "ncurses"
+diff --git a/recipes-core/ant/ant-native_1.8.1.bb b/recipes-core/ant/ant-native_1.8.1.bb
+index 8814039..d44e663 100644
+--- a/recipes-core/ant/ant-native_1.8.1.bb
++++ b/recipes-core/ant/ant-native_1.8.1.bb
+@@ -54,12 +54,12 @@ do_compile() {
  
- SRC_URI = "https://ftp.netbsd.org/pub/NetBSD/misc/tnftp/${BPN}-${PV}.tar.gz \
-            file://0001-libedit-Include-missing-header-stdc-predef.h.patch \
-+           file://0001-Add-casts-to-appease-conversions-between-wchar_t-and.patch \
-+           file://0002-Add-casts-to-appease-conversions-between-wchar_t-and.patch \
- "
+   oe_makeclasspath cp -s ecj-bootstrap jsch bsf xalan2 xercesImpl resolver gnumail gnujaf bcel regexp log4j1.2 antlr oro junit jdepend commons-net commons-logging
+   cp=${STAGING_DATADIR_JAVA_NATIVE}/ant.jar:${STAGING_DATADIR}/classpath/tools.zip:$cp
+-  sed -i -e"s|@JAR_FILE@|$cp|" ${WORKDIR}/ant
++  sed -i -e"s|@JAR_FILE@|$cp|" ${UNPACKDIR}/ant
+ }
  
- inherit autotools update-alternatives pkgconfig
+ do_install:append() {
+ 	install -d ${D}${bindir}
+-	install -m 0755 ${WORKDIR}/ant ${D}${bindir}
++	install -m 0755 ${UNPACKDIR}/ant ${D}${bindir}
+ }
+ 
+ SRC_URI[md5sum] = "9e5960bd586d9425c46199cdd20a6fbc"
+diff --git a/recipes-core/antlr/antlr_2.7.7.bb b/recipes-core/antlr/antlr_2.7.7.bb
+index d744201..c585ca4 100644
+--- a/recipes-core/antlr/antlr_2.7.7.bb
++++ b/recipes-core/antlr/antlr_2.7.7.bb
+@@ -10,7 +10,7 @@ SRC_URI:append:class-native = " file://runantlr"
+ inherit java-library
+ 
+ do_configure:class-native() {
+-    sed -i -e"s|@JAR_FILE@|${STAGING_DATADIR_JAVA_NATIVE}/antlr.jar|" ${WORKDIR}/runantlr
++    sed -i -e"s|@JAR_FILE@|${STAGING_DATADIR_JAVA_NATIVE}/antlr.jar|" ${UNPACKDIR}/runantlr
+ }
+ 
+ do_compile() {
+@@ -23,7 +23,7 @@ do_compile() {
+ 
+ do_install:class-native() {
+     install -d ${D}${bindir}
+-    install -m 0755 ${WORKDIR}/runantlr ${D}${bindir}/
++    install -m 0755 ${UNPACKDIR}/runantlr ${D}${bindir}/
+ }
+ 
+ SRC_URI[md5sum] = "01cc9a2a454dd33dcd8c856ec89af090"
+diff --git a/recipes-core/cup/cup_0.10k.bb b/recipes-core/cup/cup_0.10k.bb
+index ce81453..ac69ff4 100644
+--- a/recipes-core/cup/cup_0.10k.bb
++++ b/recipes-core/cup/cup_0.10k.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "Lexical analyzer generator for Java"
+ AUTHOR = "Elliot Berk, A. Appel, C. Scott Ananian"
+ LICENSE = "CUP"
+-LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=2c9db91c00f38e52cfc8e67bafaa7c33"
++LIC_FILES_CHKSUM = "file://${UNPACKDIR}/LICENSE;md5=2c9db91c00f38e52cfc8e67bafaa7c33"
+ 
+ 
+ RDEPENDS:${PN} = "java2-runtime"
+@@ -21,7 +21,7 @@ do_configure() {
+ 		-e "s|OE_STAGING_BINDIR|${bindir}|" \
+ 		-e "s|OE_STAGING_DATADIR_JAVA|${data_java}|" \
+ 		-e "s|OE_CUP_JAR|${BP}.jar|" \
+-		${WORKDIR}/cup
++		${UNPACKDIR}/cup
+ }
+ 
+ do_compile() {
+@@ -34,7 +34,7 @@ do_compile() {
+ 
+ do_install:append() {
+ 	install -d ${D}${bindir}
+-	install -m 0755 ${WORKDIR}/cup ${D}${bindir}
++	install -m 0755 ${UNPACKDIR}/cup ${D}${bindir}
+ }
+ 
+ PACKAGES = "${PN}"
+diff --git a/recipes-core/ecj/ecj-bootstrap-native.bb b/recipes-core/ecj/ecj-bootstrap-native.bb
+index 874bd99..bf229ca 100644
+--- a/recipes-core/ecj/ecj-bootstrap-native.bb
++++ b/recipes-core/ecj/ecj-bootstrap-native.bb
+@@ -18,7 +18,7 @@ PROVIDES = "virtual/javac-native"
+ 
+ SRC_URI = "file://ecj.in"
+ 
+-S = "${WORKDIR}"
++S = "${UNPACKDIR}"
+ 
+ JAR = "ecj-bootstrap.jar"
+ 
+diff --git a/recipes-core/ecj/ecj-initial-native.bb b/recipes-core/ecj/ecj-initial-native.bb
+index d75b7a0..115f4a0 100644
+--- a/recipes-core/ecj/ecj-initial-native.bb
++++ b/recipes-core/ecj/ecj-initial-native.bb
+@@ -12,7 +12,7 @@ DEPENDS = "libecj-bootstrap-native"
+ 
+ SRC_URI = "file://ecj-initial.in"
+ 
+-S = "${WORKDIR}"
++S = "${UNPACKDIR}"
+ 
+ inherit native
+ 
+diff --git a/recipes-core/ecj/libecj-bootstrap.inc b/recipes-core/ecj/libecj-bootstrap.inc
+index 2f3cc97..25edbad 100644
+--- a/recipes-core/ecj/libecj-bootstrap.inc
++++ b/recipes-core/ecj/libecj-bootstrap.inc
+@@ -11,7 +11,7 @@ INC_PR = "r5"
+ 
+ inherit java native
+ 
+-S = "${WORKDIR}"
++S = "${UNPACKDIR}"
+ 
+ JAR = "ecj-bootstrap-${PV}.jar"
+ 
+diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
+index d6f8fd7..8bd404f 100644
+--- a/recipes-core/icedtea/icedtea7-native.inc
++++ b/recipes-core/icedtea/icedtea7-native.inc
+@@ -105,7 +105,7 @@ do_configure:prepend() {
+ 
+ 	# Automatically copy everything that starts with "icedtea" and ends with
+ 	# ".patch" into the patches directory.
+-	find ${WORKDIR} -maxdepth 1 -name "icedtea*.patch" -exec cp {} ${S}/patches \;
++	find ${UNPACKDIR} -maxdepth 1 -name "icedtea*.patch" -exec cp {} ${S}/patches \;
+ 
+ 	# Prepare JDK-like directory with Classpath' files which we can treat as a
+ 	# SYSTEM_GCJ_DIR afterwards.
+@@ -154,9 +154,9 @@ do_configure:append() {
+ 	${POST_CONFIGURE_CLEAN_X11}
+ 	oe_runmake patch-boot
+ 
+-	patch -p1 < ${WORKDIR}/jaxws_fix_NullPointerException.patch
+-	patch -p1 < ${WORKDIR}/sigsegv.patch
+-	patch -p1 < ${WORKDIR}/vframeArray_Fix_sigsegv.patch
++	patch -p1 < ${UNPACKDIR}/jaxws_fix_NullPointerException.patch
++	patch -p1 < ${UNPACKDIR}/sigsegv.patch
++	patch -p1 < ${UNPACKDIR}/vframeArray_Fix_sigsegv.patch
+ }
+ 
+ EXTRA_OEMAKE = ' \
+diff --git a/recipes-core/jakarta-libs/avalon-framework-api_4.3.bb b/recipes-core/jakarta-libs/avalon-framework-api_4.3.bb
+index 081cfe7..b03251f 100644
+--- a/recipes-core/jakarta-libs/avalon-framework-api_4.3.bb
++++ b/recipes-core/jakarta-libs/avalon-framework-api_4.3.bb
+@@ -15,7 +15,7 @@ do_compile() {
+   mkdir -p build
+ 
+ 	#	Allow reaching method definitions from logkit (stupid cyclic dependency).
+-	srcpath=src/java:${WORKDIR}/logkit-1.2.2-dev/src/java
++	srcpath=src/java:${UNPACKDIR}/logkit-1.2.2-dev/src/java
+ 
+   javac -encoding ISO-8859-1 -sourcepath $srcpath -d build `find src/java -name "*.java"`
+ 
+diff --git a/recipes-core/jikes/jikes-initial-native.bb b/recipes-core/jikes/jikes-initial-native.bb
+index 063525d..e9f5819 100644
+--- a/recipes-core/jikes/jikes-initial-native.bb
++++ b/recipes-core/jikes/jikes-initial-native.bb
+@@ -3,7 +3,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+ DEPENDS = "jikes-native classpath-initial-native"
+ 
+-S = "${WORKDIR}"
++S = "${UNPACKDIR}"
+ 
+ inherit native
+ 
+diff --git a/recipes-core/jlex/jlex_1.2.6.bb b/recipes-core/jlex/jlex_1.2.6.bb
+index 48ec357..8b2f14c 100644
+--- a/recipes-core/jlex/jlex_1.2.6.bb
++++ b/recipes-core/jlex/jlex_1.2.6.bb
+@@ -16,14 +16,14 @@ SRC_URI = "http://www.cs.princeton.edu/~appel/modern/java/JLex/Archive/${PV}/Mai
+            file://jlex \
+           "
+ 
+-S = "${WORKDIR}"
++S = "${UNPACKDIR}"
+ 
+ do_configure() {
+   sed -i \
+     -e "s|OE_STAGING_BINDIR|${bindir}|" \
+     -e "s|OE_STAGING_DATADIR_JAVA|${datadir_java}|" \
+     -e "s|OE_JLEX_JAR|${BP}.jar|" \
+-    ${WORKDIR}/jlex
++    ${UNPACKDIR}/jlex
+ }
+ 
+ do_compile() {
+diff --git a/recipes-core/junit/junit4_4.3.1.bb b/recipes-core/junit/junit4_4.3.1.bb
+index b2cd4d9..97e8f1b 100644
+--- a/recipes-core/junit/junit4_4.3.1.bb
++++ b/recipes-core/junit/junit4_4.3.1.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "http://www.junit.org"
+ 
+ SRC_URI = "http://downloads.sourceforge.net/junit/junit-${PV}-src.jar"
+ 
+-S = "${WORKDIR}"
++S = "${UNPACKDIR}"
+ 
+ inherit java-library
+ 
+diff --git a/recipes-core/rhino/rhino_1.7r4.bb b/recipes-core/rhino/rhino_1.7r4.bb
+index d645e8a..30b228d 100644
+--- a/recipes-core/rhino/rhino_1.7r4.bb
++++ b/recipes-core/rhino/rhino_1.7r4.bb
+@@ -43,6 +43,6 @@ do_compile() {
+ do_install:append() {
+ 	install -d ${D}${bindir}
+ 
+-	install -m 0755 ${WORKDIR}/rhino ${D}${bindir}
+-	install -m 0755 ${WORKDIR}/rhino-jsc ${D}${bindir}
++	install -m 0755 ${UNPACKDIR}/rhino ${D}${bindir}
++	install -m 0755 ${UNPACKDIR}/rhino-jsc ${D}${bindir}
+ }
 -- 
-2.25.1
+2.34.1
 
 
