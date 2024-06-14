@@ -2,66 +2,66 @@ Return-Path: <nikhilar2410@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F16FC27C6E
-	for <webhook@archiver.kernel.org>; Fri, 14 Jun 2024 14:01:20 +0000 (UTC)
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web10.12423.1718373670814610544
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 09825C27C77
+	for <webhook@archiver.kernel.org>; Fri, 14 Jun 2024 14:04:10 +0000 (UTC)
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
+ by mx.groups.io with SMTP id smtpd.web11.12566.1718373849528186682
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Jun 2024 07:01:10 -0700
+ Fri, 14 Jun 2024 07:04:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=D9z9bCti;
- spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: nikhilar2410@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-1f6559668e1so19501175ad.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jun 2024 07:01:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OGoeEE06;
+ spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: nikhilar2410@gmail.com)
+Received: by mail-pg1-f169.google.com with SMTP id 41be03b00d2f7-681953ad4f2so1780892a12.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Jun 2024 07:04:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1718373670; x=1718978470; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1718373848; x=1718978648; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
         bh=QRZrhH4SrEU6WXg5Hv3eKQl7QrsoFd4hO9+wZAfwbps=;
-        b=D9z9bCtid5NprA/6zivOj3GlxDX1eykOU4nLG2V/GtihbMl9KzfAKX0nI7Q+A4jpxT
-         WJemgckQrhwgQgHHt5h02i6oHa8hVMntWq1WVoywEcHWR53vrqoffaqv6/dF2K3rvLzM
-         oX4hIHm59G3QJzPt1Br14hnGGvMAEY2AAQ9b6bevZsFOct6vlnSLkE5K4qtDX5K7KjtS
-         YyrpTnkxZ06B3xwWxG7prCf+YEP6i2RTqYNZqilmu2nC272PwTQULQdS3pQs5aMqNJE4
-         IkW94Puya6t0l/NzVJXvukNW5y/P1DG4L58xPvIG7jQlINRGqJ6hGgxk/vw1U61Z7LHb
-         1D7Q==
+        b=OGoeEE06pmwKNMu1sYqFrXr+lGXgJ+LmCDh3sfBS7PNjU8ZRuvMIrhUaALWhusHwQw
+         QW2ugNs8qMis9uQg4WIWAG/lGnhNdRI67l4dqxV6kyAQxBKOkSVgBgC9imDp+90fSJDF
+         9+TG8Y0cZ61gfVDH1F1JA77mxZfxVqhDeXkBiow3ko48L5bo75gfdfBt8FI8CE9wW6Gm
+         ibNPNn/9ZC6YoXKkOo9BoEMq7esURQyhb8lomZlTBTHptGblGvjHczi4Dov7cn4/W1Nc
+         J56Y0gAO80QXKb2yEPNhp81TlhJnzjgsU/uRbCZ7miIBnMCUWUiincAdR3hQP77Fb4s6
+         1fRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718373670; x=1718978470;
+        d=1e100.net; s=20230601; t=1718373848; x=1718978648;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
         bh=QRZrhH4SrEU6WXg5Hv3eKQl7QrsoFd4hO9+wZAfwbps=;
-        b=IGvz52hwRPQBCJpio+0B/LbOLlnrbkKYFUqxpUu7zEXaGknuLOv6PMeZnbKlqNT1HB
-         tSPkqyG7/HUgc9rdZ+blCDW+VMEKn6ICTSQFVo+WEHVn03zCpKyFoP4LH7wFrWsaCNSv
-         qX1kMfG35kTfuR88CwrEvOsfisuPbc6y/g+kzTUYiSstbs8QIKgbB5EKZhbZfW7FAO3o
-         2IT8f99PVvwaxXCYj4IqISSJJaXcz7N+YpWyJQbIC0j/+fN+z6CdQHbSGsq/Bl9VbiJl
-         0ka8au3z8/kt2r8QB75En7kR5iM0KHwBLC6S7Beo3pwLwfK4wxSsZfbXrk6PUUpKWWnm
-         CE0w==
-X-Gm-Message-State: AOJu0Yx1SJQQsRsZXrUsaa9a1DxSTh7mBKk9Nr8Nw5oTjrLaQxWzEqNf
-	8IKAtLuGTOfMe3pgeMDmufhmq+FbqYiNIMPwh/n4/jNS1PhP7b2rDM+/wM4=
-X-Google-Smtp-Source: AGHT+IHKb6fuVNlUktFsafbdhGMRWbDV+n5MVkwlkIq04rz/dxTC7k/r6b/Kq+k3Qput+L4BKBjxTQ==
-X-Received: by 2002:a17:902:ead2:b0:1f7:2703:20b9 with SMTP id d9443c01a7336-1f8629fe882mr24455455ad.42.1718373667843;
-        Fri, 14 Jun 2024 07:01:07 -0700 (PDT)
+        b=Oe9bXvCH48UUmCW+MekaUazE7Pw/tY/RAsSBD0k372ieNSNBhTcVyWI7HJnzq0ZVJh
+         gzsMrRF+4Fo4VkVEs43RtWZGZ9/BjroqqcOyMHSS0XTrB8nSG8h11opXT4/08RiPDySI
+         zGNXTLlkeBNGCSo1fig3ePbnYEXr7Is7vaDBao28nJeCpP5u9QXl6Rj1niD9Fhbp0hi4
+         MnCq7pFfcWId5edCkUdS6snJK6kw6b36E/YIkfgxYY2tQiUe3DFOoU99yH0qziR1thZ7
+         fe3bkE2JT+4tJjuSHDsVw+Q3sKCvRkIYVlyfdrMEK9OAOCzCZuhZFkM7ze2lmuhUUNbk
+         vKLw==
+X-Gm-Message-State: AOJu0Yx6GQ/NB3GuOCdrrjcjquF0cSjG8RLn2RpN5CS6gW7BgEDxWLuC
+	UisneOP9ckHr1yzDwFDnSHNpl2HXejMWkzvW/Qj+fHZwRmM7yzZAMOU1TiU=
+X-Google-Smtp-Source: AGHT+IHlRG0BSZdr8RxmSu+Sjg0oEuWLSlPrOlWxFs1Jb8jDEcVYii58l9v5E6yYzWa+e0uJ8GxXEA==
+X-Received: by 2002:a17:902:ce8e:b0:1f7:42c6:50b9 with SMTP id d9443c01a7336-1f8625c1736mr33572385ad.6.1718373848319;
+        Fri, 14 Jun 2024 07:04:08 -0700 (PDT)
 Received: from L-17494.kpit.com ([103.146.224.252])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1f855f1ad10sm32330785ad.239.2024.06.14.07.01.05
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1f855f1a82csm32320805ad.240.2024.06.14.07.04.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Jun 2024 07:01:07 -0700 (PDT)
+        Fri, 14 Jun 2024 07:04:07 -0700 (PDT)
 From: Nikhil R <nikhilar2410@gmail.com>
 X-Google-Original-From: Nikhil R <nikhil.r@kpit.com>
 To: openembedded-devel@lists.openembedded.org,
 	bindu.bhabu@kpit.com
 Cc: Nikhil R <nikhil.r@kpit.com>,
 	Bhabu Bindu <bhabubindu@kpit.com>
-Subject: [oe][meta-oe][scarthgap][PATCH] giflib: upgrade to version 5.2.2
-Date: Fri, 14 Jun 2024 19:31:01 +0530
-Message-Id: <20240614140101.641467-1-nikhil.r@kpit.com>
+Subject: [oe][meta-oe][master][PATCH] giflib: upgrade to version 5.2.2
+Date: Fri, 14 Jun 2024 19:34:01 +0530
+Message-Id: <20240614140401.642187-1-nikhil.r@kpit.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Jun 2024 14:01:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110909
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Jun 2024 14:04:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110910
 
 Upgrade to latest version giflib v5.2.2.
 
