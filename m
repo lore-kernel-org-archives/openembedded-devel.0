@@ -1,111 +1,89 @@
-Return-Path: <sbabic@denx.de>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 81339C27C79
-	for <webhook@archiver.kernel.org>; Sun, 16 Jun 2024 13:06:57 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by mx.groups.io with SMTP id smtpd.web10.33589.1718543216160256302
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 27A3DC27C53
+	for <webhook@archiver.kernel.org>; Sun, 16 Jun 2024 15:15:28 +0000 (UTC)
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+ by mx.groups.io with SMTP id smtpd.web11.35712.1718550926499736751
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 16 Jun 2024 06:06:56 -0700
+ Sun, 16 Jun 2024 08:15:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@denx.de header.s=phobos-20191101 header.b=VXA5mm4w;
- spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: sbabic@denx.de)
-Received: from paperino.fritz.box (unknown [IPv6:2001:a61:5210:b101:5ae6:8b1f:db3e:99cc])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: sbabic@denx.de)
-	by phobos.denx.de (Postfix) with ESMTPSA id 1AF1D86EB5;
-	Sun, 16 Jun 2024 15:06:53 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1718543214;
-	bh=TuDsPd4PHsAta5eb5SFK/UgELl/frFO0TbJ5LZ3RcvA=;
-	h=From:To:Cc:Subject:Date:From;
-	b=VXA5mm4wH2j7VTRSQ1vavtQPpNfJOxS9tMrwkB/G2xpGGLJ7xN0t2MQUASd5qY7sJ
-	 o3yBxfEfyOyur34+kVsmw2I3b95aa14F4McshssQf3WO9NegllHt/TXsaNPHEA4kqg
-	 uyOSBwKaEUBeuVZOxmP7HoQz1TKkcMzULPeY5jF7KPaWVjJue0hK2cy+e9Fc5ycRqn
-	 Bluf27fSuvpJnjZIcAdpdg1N8x+/ay+eEYw8Kr1vBnhn4GpSxk0PkeHDnRkr/1GL/I
-	 AGSa/dFqwt/d6MBfGFRrNwghny9lFFTRGA0wz+C4CBM4nDzYjJWpjEj72tOyyWyW5C
-	 L24AAv7YuiFuA==
-From: Stefano Babic <sbabic@denx.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: Stefano Babic <sbabic@denx.de>,
-	Marek Vasut <marex@denx.de>
-Subject: [PATCH V2] lvgl: add gridnav to packageconfig
-Date: Sun, 16 Jun 2024 15:06:42 +0200
-Message-Id: <20240616130642.65873-1-sbabic@denx.de>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@smile.fr header.s=google header.b=sa7h0qaV;
+ spf=pass (domain: smile.fr, ip: 209.85.128.43, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-421757d217aso38168795e9.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Jun 2024 08:15:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=smile.fr; s=google; t=1718550924; x=1719155724; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:mime-version:from:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=45Br4ocajxOyiAz1At1Emj389Z3Utf4jn3Ci12SssaQ=;
+        b=sa7h0qaVqxzfUmKm5A28WORhcmSPwQLKF+8Jltt8JGwp6jepyhVeXvkHoEuNMcVzbn
+         fmjTgTjSeV5MxlOtOvOkiPSriTPY0QcWsjrbIEaI24/jSWtze+4FcfTPB4hTX3Mk/GiM
+         VwoPclD4LGr7cBD/ZODjtnbK+UOdGHSJZQXp0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1718550924; x=1719155724;
+        h=cc:to:subject:message-id:date:mime-version:from:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=45Br4ocajxOyiAz1At1Emj389Z3Utf4jn3Ci12SssaQ=;
+        b=pYocRszkysPkYZF+Q443rY291oXE6Shv8q1Ktaq9XDPJMqu/4zbGTMKfW7z1yyYGwB
+         caFH+DOF5N6RDpJKkJIDVXE+aMQtfZBw2OPrYUzg2hXAcDY6WP0UOHIOaC8bMk6zAggy
+         4ZyiwBprYFsJ+7CBBREI+8swcDqr06YAXPBOtP7WRdmkki4W8rVjdwBYZ9l7vBP7IOzN
+         HFawSV63Nk//S0ogAvPpjkc/7dAS8BFHJXxF0NKZ78XM4FQJD0Lvv54BwRhwiuiMy4JS
+         DG0GfoUgLX58cq7aluOWkaMyol7CT8cf+aAVfEU6EPnryIMzZs81+KL3nRlmIRfCb78d
+         h4vw==
+X-Gm-Message-State: AOJu0YyD4xtJ7wzXakkghXtqpBdZrN7BkduS0Zf2JppYlwt5kvXDNrt1
+	SX4pQBE2jNh+nm1IGXUr2M0yrTG/GEC/K9JQgBuM6l8+9DEOgjjc/MyLsyKUgtzNiYg2g9IwTGi
+	DWcb5rCzDoBiyRRQE5tT4ZT+Y1FrbfE3V+htMufE/bqp7pZrv
+X-Google-Smtp-Source: AGHT+IFi8YPhwUf10wThEA+80JtWZkefI2c2blIcEqkL8wbzZMMH8EBjY46vTaNfihZWTpmfI6F6v40C2tvIXtXjI9o=
+X-Received: by 2002:a5d:4b0b:0:b0:35f:1bc3:ae71 with SMTP id
+ ffacd0b85a97d-3607a78833dmr7119524f8f.63.1718550924373; Sun, 16 Jun 2024
+ 08:15:24 -0700 (PDT)
+Received: from 234945705956 named unknown by gmailapi.google.com with
+ HTTPREST; Sun, 16 Jun 2024 15:15:23 +0000
+From: Yoann Congal <yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
-Content-Transfer-Encoding: quoted-printable
+Date: Sun, 16 Jun 2024 15:15:23 +0000
+Message-ID: <CAMSfU+5FtW61-3MzQ00y_3V55eE3g9uQn+SGw=0JSahLJS34qQ@mail.gmail.com>
+Subject: [meta-oe][PATCH] packagegroup-meta-oe: replace libdbd-mysql-perl with dbd-mariadb
+To: openembedded-devel@lists.openembedded.org
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 16 Jun 2024 13:06:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110918
+ <openembedded-devel@lists.openembedded.org>; Sun, 16 Jun 2024 15:15:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110919
 
-Some packages require to activate LVGL_CONFIG_LV_USE_GRIDNAV, so let
-configure it.
+Update packagegroup-meta-oe-devtools following
+commit 0ec2b7aab2c5 ("replace libdbd-mysql-perl with dbd-mariadb")
 
-Signed-off-by: Stefano Babic <sbabic@denx.de>
-Reviewed-by: Marek Vasut <marex@denx.de>
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 ---
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Changes since V1:
-	- maintain list sorted
-	- fix QA warning due to missing PACKAGECONFIG[gridnav]
-
- meta-oe/recipes-graphics/lvgl/lv-conf.inc | 5 +++++
- 1 file changed, 5 insertions(+)
-
-diff --git a/meta-oe/recipes-graphics/lvgl/lv-conf.inc b/meta-oe/recipes-=
-graphics/lvgl/lv-conf.inc
-index 8fd3412c0..918601553 100644
---- a/meta-oe/recipes-graphics/lvgl/lv-conf.inc
-+++ b/meta-oe/recipes-graphics/lvgl/lv-conf.inc
-@@ -2,6 +2,7 @@ PACKAGECONFIG ??=3D "drm"
-=20
- PACKAGECONFIG[drm] =3D ",,libdrm"
- PACKAGECONFIG[fbdev] =3D ",,"
-+PACKAGECONFIG[gridnav] =3D ",,"
- PACKAGECONFIG[sdl] =3D ",,virtual/libsdl2 libsdl2-image"
-=20
- # Add libdrm include if drm is selected in PACKAGECONFIG
-@@ -14,6 +15,7 @@ LVGL_CONFIG_USE_EVDEV =3D "${@bb.utils.contains_any('PA=
-CKAGECONFIG', 'drm fbdev',
- LVGL_CONFIG_USE_FBDEV =3D "${@bb.utils.contains('PACKAGECONFIG', 'fbdev'=
-, '1', '0', d)}"
-=20
- LVGL_CONFIG_USE_SDL =3D "${@bb.utils.contains('PACKAGECONFIG', 'sdl', '1=
-', '0', d)}"
-+
- LVGL_CONFIG_SDL_FULLSCREEN ?=3D "0"
-=20
- LVGL_CONFIG_LV_MEM_CUSTOM ?=3D "0"
-@@ -26,6 +28,8 @@ LVGL_CONFIG_LV_LOG_PRINTF ?=3D "0"
-=20
- LVGL_CONFIG_LV_USE_FONT_COMPRESSED ?=3D "0"
-=20
-+LVGL_CONFIG_LV_USE_GRIDNAV =3D "${@bb.utils.contains('PACKAGECONFIG', 'g=
-ridnav', '1', '0', d)}"
-+
- LVGL_CONFIG_LV_THEME_DEFAULT_DARK ?=3D "0"
-=20
- DEBUG_BUILD ??=3D "0"
-@@ -70,6 +74,7 @@ do_configure:append() {
-         -e "s|^([[:space:]]*#define LV_LOG_PRINTF[[:space:]]).*|\1${LVGL=
-_CONFIG_LV_LOG_PRINTF}|" \
-         \
-         -e "s|^([[:space:]]*#define LV_USE_FONT_COMPRESSED[[:space:]]).*=
-|\1${LVGL_CONFIG_LV_USE_FONT_COMPRESSED}|" \
-+        -e "s|^([[:space:]]*#define LV_USE_GRIDNAV[[:space:]]).*|\1${LVG=
-L_CONFIG_LV_USE_GRIDNAV}|" \
-         -e "s|^([[:space:]]*#define LV_THEME_DEFAULT_DARK[[:space:]]).*|=
-\1${LVGL_CONFIG_LV_THEME_DEFAULT_DARK}|" \
-         \
-         -i "${S}/lv_conf.h"
---=20
-2.34.1
-
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 19242ba545..e31e45b851 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -243,6 +243,7 @@ RDEPENDS:packagegroup-meta-oe-devtools ="\
+     cloc \
+     icon-slicer \
+     cscope \
++    dbd-mariadb \
+     dmalloc \
+     ${@bb.utils.contains("PACKAGE_CLASSES", "package_rpm",
+"dnf-plugin-tui", "", d)} \
+     doxygen \
+@@ -287,7 +288,6 @@ RDEPENDS:packagegroup-meta-oe-devtools ="\
+     openocd \
+     pax-utils \
+     ipc-run \
+-    libdbd-mysql-perl \
+     libdbi-perl \
+     libdev-checklib-perl \
+     libio-pty-perl \
 
