@@ -1,108 +1,67 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DE00C2BA15
-	for <webhook@archiver.kernel.org>; Sun, 16 Jun 2024 15:34:28 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.web11.36047.1718552057949707293
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DB71C27C53
+	for <webhook@archiver.kernel.org>; Sun, 16 Jun 2024 19:15:59 +0000 (UTC)
+Received: from mta-65-228.siemens.flowmailer.net (mta-65-228.siemens.flowmailer.net [185.136.65.228])
+ by mx.groups.io with SMTP id smtpd.web11.40217.1718565354118144182
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 16 Jun 2024 08:34:18 -0700
+ Sun, 16 Jun 2024 12:15:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=aqJh22YC;
- spf=pass (domain: smile.fr, ip: 209.85.221.49, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-35f1e35156cso3195752f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Jun 2024 08:34:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1718552056; x=1719156856; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:mime-version:from:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=E+tTf6dapVtpM2C77v7SFQ5Q2i3+9dAnpZdBVtBB0Yk=;
-        b=aqJh22YC+oh3UsbaAbPL9aHBJ3n5YkaPCrC9DoVq1s6rYoXMXfQDDBFUlcChp3HuEd
-         oVfvtXkLDE46k+LWc8FGgTs/fMYuTzerjFbw5jHqtBuE1Jjy5hwcpOTC3h69mJcxFKgb
-         OFYPqFTuUVwO8oDtv/hjgcmvv9h05O8i27QGk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718552056; x=1719156856;
-        h=cc:to:subject:message-id:date:mime-version:from:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=E+tTf6dapVtpM2C77v7SFQ5Q2i3+9dAnpZdBVtBB0Yk=;
-        b=NEzDOlFyrlSS5i1V6iuvO4lfDBAy3JAfQji3vAg06gRMgH6t5vj6p19QqNs+soUH+Z
-         9gChJ2i35FzMGDZN072FCSRYr6t8J67kbRSs52h7KZ+JyQs2/b9DEdUt6tNhqpv6xuep
-         JFOz9Jk5GhLlWR0arPl19qYRpe52R+9LfXeXhKOzoYxlR6fzyCHQiMpTmcfuyEnmwYHC
-         ObrKMGaUSYrJ5Wsc6sSKeuXI9fxehLEGbt+1SnZl6M02bNkYe7OQTArR2qM+B4lIp2Tj
-         yS8SGvlXkf90p5lRfVn/N4SQK5A2bzPNTjXp8qNCr/X4vfXCm9B9+6cZMWYvXyehaV82
-         1uSQ==
-X-Gm-Message-State: AOJu0YxveuAy6zve/kEFcy+1wDANqvPH6q7j/vp9BtGUP6YmdMaowMlV
-	K89kk4W4GdznqRzM5l9uZnikf98tInHTeSysDQfAPXReE9gbVh43/lpQik31HfTFeA8fjrz09yZ
-	ICgwL6JnCASOBnDZ1KrSNkqhSNJqzxuxd75YcT1IkZWHGpS5G
-X-Google-Smtp-Source: AGHT+IE29pd5mKkQOSDStPp1sb87IeG3IFhjiZqFm929FY/9JTqhJ3g84+qXYA47YfPen+VeDsEQVzlujlGMKKEkEIQ=
-X-Received: by 2002:a5d:4247:0:b0:35f:1753:7159 with SMTP id
- ffacd0b85a97d-3607a7b60admr4925147f8f.19.1718552055908; Sun, 16 Jun 2024
- 08:34:15 -0700 (PDT)
-Received: from 234945705956 named unknown by gmailapi.google.com with
- HTTPREST; Sun, 16 Jun 2024 15:34:15 +0000
-From: Yoann Congal <yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.2
-MIME-Version: 1.0
-Date: Sun, 16 Jun 2024 15:34:15 +0000
-Message-ID: <CAMSfU+6nyrjcRKsD=K-okKXmFRGpGfouPVse1FvH7PQZfZcOpA@mail.gmail.com>
-Subject: [meta-oe][scarthgap][PATCH] libfido2: remove non-functional native
- and nativesdk BBCLASSEXTEND
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=k5bZFZAS;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.228, mailfrom: fm-256628-20240616191550de20c11b1b88410828-er83pg@rts-flowmailer.siemens.com)
+Received: by mta-65-228.siemens.flowmailer.net with ESMTPSA id 20240616191550de20c11b1b88410828
+        for <openembedded-devel@lists.openembedded.org>;
+        Sun, 16 Jun 2024 21:15:51 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=i5DSpNTgCyo+raQebm033jivHw5hnMdAJkNwcbVei28=;
+ b=k5bZFZASloiWLj1SAzriGEmmtuQEW94XW/JAQMmo+D0llkjExgCjvWgqyQlmL9i9+WRaUX
+ N/MY6WIAP2HzDn0bwOTLBwR+STorjattrDdvFRqhrvuThM7nO2rW/89hFR1tOZO+x93/4OQV
+ IP/ikEy2wagA1HOfvDQmloyJne1sg=;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>, Dan McGregor <dan.mcgregor@usask.ca>, 
-	Khem Raj <raj.khem@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-oe][PATCH] re2: rework solibs handling
+Date: Sun, 16 Jun 2024 21:15:02 +0200
+Message-Id: <20240616191502.855797-1-peter.marko@siemens.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 16 Jun 2024 15:34:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110920
+ <openembedded-devel@lists.openembedded.org>; Sun, 16 Jun 2024 19:15:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110921
 
-libfido2 depends on udev and libcbor which do not exist for native and
-nativesdk targets.
-Remove native & nativesdk from BBCLASSEXTEND to avoid hitting these in
-world/universe builds.
+From: Peter Marko <peter.marko@siemens.com>
 
-Fixes these warnings (as seen on AB[0]):
-  WARNING: Nothing PROVIDES 'nativesdk-udev' (but
-virtual:nativesdk:[...]/libfido2_1.14.0.bb DEPENDS on or otherwise
-requires it). Close matches:
-  WARNING: Nothing PROVIDES 'nativesdk-libcbor' (but
-virtual:nativesdk:[...]/libfido2_1.14.0.bb DEPENDS on or otherwise
-requires it). Close matches:
-  WARNING: Nothing PROVIDES 'libcbor-native' (but
-virtual:native:[...]/libfido2_1.14.0.bb DEPENDS on or otherwise
-requires it). Close matches:
-  WARNING: Nothing PROVIDES 'udev-native' (but
-virtual:native:[...]/libfido2_1.14.0.bb DEPENDS on or otherwise
-requires it). Close matches:
-  WARNING: Nothing RPROVIDES 'nativesdk-libfido2-dev' (but
-virtual:nativesdk:[...]/libfido2_1.14.0.bb RDEPENDS on or otherwise
-requires it)
-  WARNING: Nothing RPROVIDES 'nativesdk-libfido2' (but
-virtual:nativesdk:[...]/libfido2_1.14.0.bb RDEPENDS on or otherwise
-requires it)
+This is cleaner way how to package unversioned libraries
+which was suggested during review of the last commit.
 
-[0]: https://autobuilder.yoctoproject.org/typhoon/#/builders/156/builds/367/steps/12/logs/warnings
-
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
-Cc: Dan McGregor <dan.mcgregor@usask.ca>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 1a3d194eb3552eb948ca61dffcb9dbe2710f516b)
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- meta-oe/recipes-support/libfido2/libfido2_1.14.0.bb | 2 --
- 1 file changed, 2 deletions(-)
+ meta-oe/recipes-support/re2/re2_2024.03.01.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/libfido2/libfido2_1.14.0.bb
-b/meta-oe/recipes-support/libfido2/libfido2_1.14.0.bb
-index 08d3f4e84d..d453d0ab97 100644
---- a/meta-oe/recipes-support/libfido2/libfido2_1.14.0.bb
-+++ b/meta-oe/recipes-support/libfido2/libfido2_1.14.0.bb
-@@ -21,5 +21,3 @@ EXTRA_OECMAKE =
-"-DUDEV_RULES_DIR=${nonarch_base_libdir}/udev/rules.d -DBUILD_EX
- PACKAGE_BEFORE_PN = "${PN}-tools"
+diff --git a/meta-oe/recipes-support/re2/re2_2024.03.01.bb b/meta-oe/recipes-support/re2/re2_2024.03.01.bb
+index 6e5b32a945..76d6f0c7a9 100644
+--- a/meta-oe/recipes-support/re2/re2_2024.03.01.bb
++++ b/meta-oe/recipes-support/re2/re2_2024.03.01.bb
+@@ -32,7 +32,8 @@ do_install_ptest () {
+ }
+ 
+ # ignore .so in /usr/lib64
+-FILES:${PN} = "${libdir}"
++SOLIBS = ".so*"
++FILES_SOLIBSDEV = ""
+ INSANE_SKIP:${PN} += "dev-so"
+ 
+ # Don't include so files in dev package
+-- 
+2.30.2
 
- FILES:${PN}-tools = "${bindir}/fido2-*"
--
--BBCLASSEXTEND = "native nativesdk"
 
