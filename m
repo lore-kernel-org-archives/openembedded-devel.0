@@ -2,60 +2,62 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8207BC27C79
-	for <webhook@archiver.kernel.org>; Mon, 17 Jun 2024 12:22:55 +0000 (UTC)
-Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
- by mx.groups.io with SMTP id smtpd.web10.55361.1718626969148942260
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2EB92C2BA15
+	for <webhook@archiver.kernel.org>; Mon, 17 Jun 2024 13:19:26 +0000 (UTC)
+Received: from mail-yb1-f176.google.com (mail-yb1-f176.google.com [209.85.219.176])
+ by mx.groups.io with SMTP id smtpd.web11.56043.1718630361815378923
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Jun 2024 05:22:49 -0700
+ Mon, 17 Jun 2024 06:19:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=a+4KuJmC;
- spf=pass (domain: gmail.com, ip: 209.85.128.170, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-630daaec9c7so36719127b3.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Jun 2024 05:22:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=iDrtsY8T;
+ spf=pass (domain: gmail.com, ip: 209.85.219.176, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f176.google.com with SMTP id 3f1490d57ef6-dfa7fafa0c0so4083817276.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Jun 2024 06:19:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1718626968; x=1719231768; darn=lists.openembedded.org;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=W7fOrSzomLcFXfGOcFJpbeZMa1prOTvfmwccUBBk+VQ=;
-        b=a+4KuJmCzCHAldycjfNq/Vx0wxC1VSrlisZhUeI5WsDdJDQKo+0NlrMfUwt4syTkLW
-         +ZTgfPftDZKFsIWGSEVPltKqmWFE27Xvbbun7bG4IvJ3JWl9LRLmgmxn303VpvN5F/Oa
-         KlguxUCSHGcoZdqblew3NUJ3NPF29o5jxHWT7jkMY62Kg6P5BCfRBetxXVkqRbGBGu+8
-         fhJBOs0QEsfDNujGBaZxrvKL3/idCqTujew9uCpMjIkrtg86FO9y28rloqvSZEN7BY4y
-         bATsdR+MqTXuTk0lNCeAa2Zcw3vpCXtdDJMN+hE24M4YQn+9FfNPXtVg5BA0fJYDbz08
-         oWew==
+        d=gmail.com; s=20230601; t=1718630361; x=1719235161; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=bLQ/jfFlTdJgEnLgvYpOvhXLHAurFEZ7gUNESlAElj8=;
+        b=iDrtsY8TPa9fIJ01/JGTmxVK4rs6sCW6qYqin516TENcU2vOv8YmaA+NDVuQSS7nRY
+         5aL5yg6DBabsvjtYJjypG4dRFhl1xeSfyWrnKF2h8zltTmNy/UbDFIeMc0X+5VI7pbUA
+         WsYqi2Frscwzz0IaIc52WIWWNtCDWCYDRwNbC7q6W2iszjp9m2hZYXQMg9s1dXeZrhGX
+         YvehbZu+ldscR30hn0oQ+DoU/fFhe+pQTWUGxXVf/02rbz6PPmgGWdmznUJxIc44KqdV
+         7EjzPCLH7R4CYPT+3hZ36EyvKWgduP5xtKPneGncnngbzigHwjzH+hbuj/WGmokunOLM
+         K22w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718626968; x=1719231768;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=W7fOrSzomLcFXfGOcFJpbeZMa1prOTvfmwccUBBk+VQ=;
-        b=gnLTJuN3ViuHMB0Cd62K1ymJhFRUOmrwuI0fv5lvD8yXMAiC9PjQmyElKzzEXxLHua
-         krSRAr0H5k3NcbMaZswmg5I4bS8MMHfv+PiCrf3vFqYIXRVtplIFqt2IZq23KmkLmec5
-         ZpT51+URiMrTQtj5MfcLwbpy+mtdfjfdZ8sDXYmK0tgqTAJN0sW+EsNMhmPPRQ31X3q+
-         uhK9wLRFX5fc1gCL92/GmStvzBoa1CvZLU2VJEJPaoRC27LvdaCOj7r2P9xamoMoMoIt
-         +7YJ7qilPzeJVUqpB5tk14LpUAiSZzQCk7KITXR8DkqgMPFGrbE8FhSZL46Py0XcsPrO
-         49tQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUmulDuUoaVg6Mihc71wnm0zzv8O4HiBiLX11wSj0BGji4fALQ+xa0/JZJ2b63DT6riLzc6NY9Dzz14GHFOHTJAMULLVrvA+cEOTsdN7UzVVmkmPGHqVjf07w==
-X-Gm-Message-State: AOJu0Yxfe6DtQLL6f+ZwQRl+4K1g6kLLSUEPU6gIAj5Koh75qBNHcO/+
-	31FNTkXY6Z2Rr+KQMEhsM72b3bdCdYc0i82JVd6zWHDsME/TQcztbLhfYQ==
-X-Google-Smtp-Source: AGHT+IEV7JwoZ2OE/fj9I6D2LPCc2WVzFz9WQSVh1QbSbDnyJeWciJ5mUE6rG76I3UjUxhOFZsuNuQ==
-X-Received: by 2002:a81:84c7:0:b0:632:bcd1:233f with SMTP id 00721157ae682-632bcd1a44bmr84184857b3.43.1718626968218;
-        Mon, 17 Jun 2024 05:22:48 -0700 (PDT)
-Received: from ?IPV6:2600:1700:45dd:7000:b4e4:2c13:2414:65ba? ([2600:1700:45dd:7000:b4e4:2c13:2414:65ba])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6311a445eb1sm13928187b3.95.2024.06.17.05.22.47
+        d=1e100.net; s=20230601; t=1718630361; x=1719235161;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=bLQ/jfFlTdJgEnLgvYpOvhXLHAurFEZ7gUNESlAElj8=;
+        b=pk3PSeaWDa6fgqSWILvTE1rnD5rTvS3oupnXwSKqlbWZjquZiI8x7eLnRs1DLFkl2I
+         HL1X1VS+XgLvj43Y7kxorB+V4bxH0wJyAfFCHzhbFSVaX8GMzYKzxXS4iqFpYUC4H3er
+         VMl+LpoXXFt+oXhuTfnIo2B2vWRRO0dslRzeqMguw46zp4LW4cH+XqhxyvB8AyfVLuVX
+         m12Q0LV9CrX518rt0dxr3xwO6V62S/uo8uiKzmP6B54xXDZVM2dIWj73rz+YGC3i6vQH
+         i/5KYvGbQjGjTK9CJ08o6/ZX1gHzvxjf1oxw5zrQRG/ugBOARW/IvPAxWDd+7VEvGTqW
+         B5PA==
+X-Forwarded-Encrypted: i=1; AJvYcCU7Gahe7m/VQGr4vwHqagQwOLK7rWlS6a0gqpvKelL477X3X01SdyhdsukKlRcpdpcTQr7xHL5EIPHVDGS77VSRJY+Uf8RDworioeqRR08Rmc1uWSDFNzvtgQ==
+X-Gm-Message-State: AOJu0YyegCYAy80x9FXkwOQjQPm7NrcqwNppO6lQ8rAxFeJMqc0+l3nC
+	xQCsp5EF/R5ncBpaYMwA2PR7IA840J//Py9RZwPl0jj7i8Pbuns3
+X-Google-Smtp-Source: AGHT+IHwMhmI0CypnwVWeGoWQxzwaA+P+0ACSEHoW4DOKQupxL+Oxvu2szX+iYxzu8G+suVZV6mTxQ==
+X-Received: by 2002:a25:694c:0:b0:de5:8427:d66f with SMTP id 3f1490d57ef6-dff1380c9c7mr5994339276.4.1718630360721;
+        Mon, 17 Jun 2024 06:19:20 -0700 (PDT)
+Received: from ?IPV6:2600:1700:45dd:7000:be2b:da22:beb7:11ef? ([2600:1700:45dd:7000:be2b:da22:beb7:11ef])
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-dff048774basm1853129276.25.2024.06.17.06.19.20
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 17 Jun 2024 05:22:47 -0700 (PDT)
-Message-ID: <c7be294f-d3dd-4596-8fd0-76c4410c5778@gmail.com>
-Date: Mon, 17 Jun 2024 08:22:47 -0400
+        Mon, 17 Jun 2024 06:19:20 -0700 (PDT)
+Message-ID: <27bd2286-1de5-4359-bfc7-bc881f0c9c4e@gmail.com>
+Date: Mon, 17 Jun 2024 09:19:20 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][scarthgap][PATCH] hiredis: change ptest output
+ format
+To: peng.zhang1.cn@windriver.com, openembedded-devel@lists.openembedded.org
+References: <20240617050230.520417-1-peng.zhang1.cn@windriver.com>
 Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 From: akuster808 <akuster808@gmail.com>
-Subject: kirkstone merge request: June 17th
 Autocrypt: addr=akuster808@gmail.com; keydata=
  xsDNBGNNaZMBDAC6/Mhpw3EGOOTPtIpcUHT4lI974zN/QqccMPxH4oyBPRJbjVImYs9avXwV
  Ae9xoWKMM/vocEZWm6SOESZSGf+7l05Eo6MxU50cIQh0/bcOcdDAtFRDk4pZIL6X7vGzvFe6
@@ -90,52 +92,65 @@ Autocrypt: addr=akuster808@gmail.com; keydata=
  itDSpYIEGrZObj82rX1wvxf/ZQ8VXS+owIR2F4yeeqPH/CyrPA1ASdtt+Am28/dJ2krr72at
  J++uLxA0cein1kjcosFDpQscnDcPzohnGyyjgEd6VwelZboIS1jt4lIa1badtV+cWMGMgM8W
  ApZ86eOP
+In-Reply-To: <20240617050230.520417-1-peng.zhang1.cn@windriver.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 17 Jun 2024 12:22:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110940
+ <openembedded-devel@lists.openembedded.org>; Mon, 17 Jun 2024 13:19:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110941
 
-The following changes since commit 0560b848996a0feb410a8cd8ca07c60fe2f3b5bc:
 
-   ITS#10094 libldap/OpenSSL: fix setting ciphersuites (2024-05-28 
-06:17:26 -0400)
 
-are available in the Git repository at:
+On 6/17/24 1:02 AM, peng.zhang1.cn via lists.openembedded.org wrote:
+> From: Zhang Peng <peng.zhang1.cn@windriver.com>
+>
+> This change consolidates the output format of the ptest command
+> into a single common format.
+> The format selected is the automake "simple test" format:
+>      "result: testname"
 
-   https://git.openembedded.org/meta-openembedded kirkstone-next
+Doesn't this affect master as well?
 
-for you to fetch changes up to 8e297cdc841c6cad34097f00a6903ba25edfc153:
-
-   nginx: Remove obsolete patch (2024-06-02 15:16:32 -0400)
-
-----------------------------------------------------------------
-Archana Polampalli (3):
-       nodejs: fix CVE-2024-22019
-       nodejs: fix CVE-2024-22025
-       nodejs: fix CVE-2023-46809
-
-Jasper Orschulko (1):
-       nginx: Remove obsolete patch
-
-  meta-oe/recipes-devtools/nodejs/nodejs/CVE-2023-46809.patch     | 625 
-++++++++++++++++++++++++++++
-  meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22019.patch     | 556 
-+++++++++++++++++++++++++
-  meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22025.patch     | 148 
-+++++++
-  meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb               | 3 +
-  .../files/0001-HTTP-2-per-iteration-stream-handling-limit.patch | 92 ----
-  5 files changed, 1332 insertions(+), 92 deletions(-)
-  create mode 100644 
-meta-oe/recipes-devtools/nodejs/nodejs/CVE-2023-46809.patch
-  create mode 100644 
-meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22019.patch
-  create mode 100644 
-meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22025.patch
-  delete mode 100644 
-meta-webserver/recipes-httpd/nginx/files/0001-HTTP-2-per-iteration-stream-handling-limit.patch
+-armin
+> Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
+> ---
+>   .../recipes-extended/hiredis/hiredis/run-ptest  | 17 ++++++++++++++++-
+>   1 file changed, 16 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-extended/hiredis/hiredis/run-ptest b/meta-oe/recipes-extended/hiredis/hiredis/run-ptest
+> index 59b747dbd8..8d450b881f 100644
+> --- a/meta-oe/recipes-extended/hiredis/hiredis/run-ptest
+> +++ b/meta-oe/recipes-extended/hiredis/hiredis/run-ptest
+> @@ -1,3 +1,18 @@
+>   #!/bin/sh
+>   
+> -TEST_SSL=0 TEST_ASYNC=0 ./test.sh
+> +TEST_SSL=0 TEST_ASYNC=0 ./test.sh | sed -e 's/PASSED/PASS/g' -e 's/FAILED/FAIL/g' -e 's/SKIPPED/SKIP/g' | awk '
+> +{
+> +    if ($NF == "\033[0;32mPASS\033[0;0m" || $NF == "\033[0;31mFAIL\033[0;0m" || $NF == "\033[01;33mSKIP\033[0;0m") {
+> +        printf "%s: %s\n", $NF, $0
+> +    } else {
+> +        print
+> +    }
+> +}'| awk '{
+> +    if ($NF == "\033[0;32mPASS\033[0;0m" || $NF == "\033[0;31mFAIL\033[0;0m" || $NF == "\033[01;33mSKIP\033[0;0m") {
+> +        $NF = ""
+> +        print $0
+> +    } else {
+> +    print
+> +    }
+> +}' | awk '{gsub(/:/,"",$NF)}1'
+> +
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#110939): https://lists.openembedded.org/g/openembedded-devel/message/110939
+> Mute This Topic: https://lists.openembedded.org/mt/106715624/3616698
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
