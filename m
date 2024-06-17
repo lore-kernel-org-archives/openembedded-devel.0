@@ -1,263 +1,181 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <peng.zhang1.cn@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A20BC27C53
-	for <webhook@archiver.kernel.org>; Sun, 16 Jun 2024 21:31:00 +0000 (UTC)
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
- by mx.groups.io with SMTP id smtpd.web11.42816.1718573450933746082
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E397C27C77
+	for <webhook@archiver.kernel.org>; Mon, 17 Jun 2024 05:02:52 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.49518.1718600567533722593
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 16 Jun 2024 14:30:51 -0700
+ Sun, 16 Jun 2024 22:02:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KLKh7jTA;
- spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-35f1c490c13so4150993f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Jun 2024 14:30:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1718573449; x=1719178249; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=LC7NoF/sOhMdFHafgCiX0btSSnk0pW97AvdzmiCuIjI=;
-        b=KLKh7jTAQuh8y5Tli1/dmr2/p5IhgqNSyyascwNpkugn/8+9v+yhcYh/1JqMcYRrsg
-         MswttO4YvyE3/le/dJh9dhF9e50jX5N/d71ud4x65bk8muUcathnsieXrhaS/ppKQQS0
-         cWn9HrHzFxBL6FnQtIGO/E3QJfnxM0SqaeoRupWY0it+tVpjn7KTzl/x/DCPbp63Witn
-         ySxh2IRTD8NWjEal7xiTh+gxccbZzslLL6rZ+geY6YNqKlN1bJ77Y/cyLfMbLHonoTRp
-         cElh/WLo2R9btRZwMl/l42BIYVSvShEh83AJfL4bAhS7p4ux787fqY7dZQvIbd5BzZtC
-         SEYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718573449; x=1719178249;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=LC7NoF/sOhMdFHafgCiX0btSSnk0pW97AvdzmiCuIjI=;
-        b=Gf/h/J1OO4+PVJuVk1ddPkJVM4H2pAKgBMTxUgCN3p1MZoo9u1HSrhjqRHtTkHO+y8
-         EAROHPIA3LXE9BZl96eumPnD5LBaa7V3N/LeVqaqGlqVjULjZrd1pijAIkUQaudmvp50
-         bl/B5VPtnHsYpOVKv3ozw/YmBnD3NwZMrWxaF4e5VnAw4JGgYetUtlHFA4XqWXITOgPm
-         CdUPiQ4MGKqdhZcWsBb3pl+5GrQbwPEsq1dlfKYwemFEX7HDkHTPG5YJqB32wQ4ILr0W
-         xBHFo0ryZBy+fz5nZ/4dSggBZdEw/iGs16CKlsAshkREdqn3B/MWsqwWSJjHwEOR+CNI
-         3l8Q==
-X-Gm-Message-State: AOJu0YxtRNPyLRShwkloDBYLyOqAfksqqbitniXPpjX2+mn6Bevma/pA
-	umlqZ1Ba6Um7vUZwlgHn5apMFQwPHxYh+wCK/zqSlMMVuZckYF44S9Ka+UUK
-X-Google-Smtp-Source: AGHT+IHQLN9B4OyZRaxgioGQ17lJGb6nGbYZJnPZ66BDZn77tM0n8Vw/gFExZvRMWGzWp0w8VjwaOg==
-X-Received: by 2002:a5d:6c6a:0:b0:360:9701:a830 with SMTP id ffacd0b85a97d-3609701a8e6mr365817f8f.25.1718573448378;
-        Sun, 16 Jun 2024 14:30:48 -0700 (PDT)
-Received: from localhost.localdomain (ptr-fij45qxtdobqrxrcewr.18120a2.ip6.access.telenet.be. [2a02:1812:512:2c00:6021:e9a4:5aa0:257b])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3607509353csm10424513f8f.22.2024.06.16.14.30.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 16 Jun 2024 14:30:47 -0700 (PDT)
-From: Jan Vermaete <jan.vermaete@gmail.com>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=68984e9a8a=peng.zhang1.cn@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45H2ornX000659
+	for <openembedded-devel@lists.openembedded.org>; Sun, 16 Jun 2024 22:02:47 -0700
+Received: from nam04-dm6-obe.outbound.protection.outlook.com (mail-dm6nam04lp2040.outbound.protection.outlook.com [104.47.73.40])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ys682h8ft-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 16 Jun 2024 22:02:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=arn6fLyTLTzK18iMumShQcOsGvEvwRStrJyGjiA6Xy/cG3sg2b5wmI3YSN3y6blv9xey5ubatg0r/WG5G5G0PRoUvHlM2YpEHr+rFdbRgXWuwplM7l9QjiKwfpd+Yin+RR0NziwKH53FJQFZv6flPKZaqS2S2xvMaok/n6jxIqL0/4QXW6rWS6biIVyCfV54LFgj7leQ0BEWcPBOyVuZB3oDAZc8yyY8xByxtUNpTpDXLqjwP+9vwvl536yg8tKfyMytNOcnnRvCpCDGPT/crWWcLXaMzKCLN2FMuPxkdn99JRXGvKqL6+KDNYFeRKExRUf47pV0i3pG9YN+EB2XuQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=WgFVWbRWsghX4QVwyv/hrplOeoFMHbkAg3DIjSfeqEo=;
+ b=Cmm24tRR+luvn8XmNngU9B07+zD1f/SXO6y2AkGd1mTK9S+Nf2S0qZ9KLpOY5FVtH9aPmbdAh5AaoLQ4L1W8F1vQoNZwupE+TZ4+B4HkAMol9YQjTiy2POgkI1uwp2fgNDKZpwncSLZhEcDcIq98v3CBqkREre0E3s/ULDQiJtm6KrC51SS3mz+RPa2inDeZeu8EI1+tGf7h5BIsyKl8Jz5bwlK3+lPsb/Vf5Qs6MJIKUI1+Yqay6HsO6XIn55MxN5DaMuqPVhwVmPzZeQOv92Xe/igHysTg+80P6P3J3iRnNmghRaQtKWo86nhs2W7ypVt3ua9xtA01v/G4Op7xlw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from CH3PR11MB8562.namprd11.prod.outlook.com (2603:10b6:610:1b8::13)
+ by DS0PR11MB8717.namprd11.prod.outlook.com (2603:10b6:8:1ab::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.30; Mon, 17 Jun
+ 2024 05:02:43 +0000
+Received: from CH3PR11MB8562.namprd11.prod.outlook.com
+ ([fe80::24c6:f8fc:1afe:179f]) by CH3PR11MB8562.namprd11.prod.outlook.com
+ ([fe80::24c6:f8fc:1afe:179f%6]) with mapi id 15.20.7677.030; Mon, 17 Jun 2024
+ 05:02:42 +0000
+From: peng.zhang1.cn@windriver.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-python][PATCH v2] python3-typer: add new recipe
-Date: Sun, 16 Jun 2024 23:30:20 +0200
-Message-Id: <20240616213020.3637726-1-jan.vermaete@gmail.com>
-X-Mailer: git-send-email 2.39.2
-MIME-Version: 1.0
+Subject: [meta-oe][scarthgap][PATCH] hiredis: change ptest output format
+Date: Mon, 17 Jun 2024 13:02:30 +0800
+Message-ID: <20240617050230.520417-1-peng.zhang1.cn@windriver.com>
+X-Mailer: git-send-email 2.44.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SG2PR01CA0165.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:28::21) To CH3PR11MB8562.namprd11.prod.outlook.com
+ (2603:10b6:610:1b8::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH3PR11MB8562:EE_|DS0PR11MB8717:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4502f7c4-c497-48ef-57c4-08dc8e8ab7cc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230037|366013|1800799021|376011|52116011|38350700011;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?5S8MpeZJ8kZjI2OwscJ6swuy85j1dzg3C8D0WjgsImrT47X5hC5hlu/pfsWr?=
+ =?us-ascii?Q?EHZTRbo9ryaRCS6VkHxhBxxAU0AdAq/Qa9NwngLtBD5P0liu3EB8l0reh6T2?=
+ =?us-ascii?Q?S+GI+ko7hQ6RgjNEmT8cHFiFJbqYRpAzOWm3iKshrvP9sIeonC0f4he5cWS6?=
+ =?us-ascii?Q?YkIXt1NhOU31laTf85SGiKN9b+wUTJPOpowwzdbhPHdvTLK7Ftcie3L907iZ?=
+ =?us-ascii?Q?5I0VoIbt7crNfL710jtlt38vPwOm16i06hpsL9f3bqAMPe67XOcrdvGdhzLL?=
+ =?us-ascii?Q?etnRX3QFwUAAlzAGB6mCdFasz0TRvqg5Cu5rVETLhIgFUnR6olTZ+QkcbvVt?=
+ =?us-ascii?Q?r290M+1Yjua3+iQT/K6Cy8vzglRfgXwzG43R8mGDtGCfOrufNxn0MSkas1UJ?=
+ =?us-ascii?Q?15Kt01+S/Lm7iZd8p+BPsWUHk2NsalR/RpdFu+pNXw7Fo5mPOcm+t+WNlvZ2?=
+ =?us-ascii?Q?2pYWXjT0MPNDWM81iy89x6F+rTlv2xMAVnvf+Bl6tdzaHDjFPDDnZYzUnJsB?=
+ =?us-ascii?Q?6Y3qqCZDVr13LcCAGJEBeQ9jcbrLCKEsc8wdP2u0YBVQg+O0y0KxVzu9VlbX?=
+ =?us-ascii?Q?6ktAp8/ZaAOtzwJcdMyQTEVYQ6RFi/98v3BizQkYLGJ4m020TR6HP304zSij?=
+ =?us-ascii?Q?MfZyORe39ysdDpw/tb9TAXTaED1I3Cyt0VbmQJPeqX2E47r75hnbnrYBdPMU?=
+ =?us-ascii?Q?6fRRktRZj1TA1yBf6kO0TYAhf9GsMqW0E/JI0IlQcF5k1dTb7Z7rOl4/hV5o?=
+ =?us-ascii?Q?6sOw3NrD7xXWE4Zt7UyBpqbshzHzEFhsHz4HYJdWOGN6DpS2mcjc+KIhQZOa?=
+ =?us-ascii?Q?3UFCPJG28VB1w6C+awosQ6JG93as2vi4i7dqbz9txEtfwHNxjW/pJrWR3OF0?=
+ =?us-ascii?Q?ipC2Dzw7BACMPNkxxoeaTW4VmzNAG4B3IXqJHEV6LGn6C0kI3Kj54TJNpxvT?=
+ =?us-ascii?Q?eNVzErxhHcsOy/iOk5bTH+YIyz2PXdwAOv5komG3vIKOuW+4pEbPWJrHCUSN?=
+ =?us-ascii?Q?qy5G49OD0h/UEHz5uc0SaUlT3Xl7/NCi4P9M1dLH7uJaDW4I3jJRA/mdX9TS?=
+ =?us-ascii?Q?B1l2hgSn10TGCief7sDsFVebbTXGiAHdxT2A9dJpvpa6CiP2S520FqPfNK0V?=
+ =?us-ascii?Q?vJmoic1HwwmxVwD8KeAkUeya3Mulm2AfmFY6+8zRzgI7ztwlHyWUDx7fYLW5?=
+ =?us-ascii?Q?znQsmqkn2PAfamyuOel7mucViGqTGB9C5GtnxobYXMcpl2xxiCuiQZVgZDDT?=
+ =?us-ascii?Q?KypoWdBWoN5SHZkMAeq9j1p31lvHd24b3q2dHQa8cjDTg3/qD6hLglKk9rIl?=
+ =?us-ascii?Q?mI9mvfApgPD0FwNfeVvfXsO74c8rOak3UyqVrPSk23a38qsgYIwWhtw8Ycmp?=
+ =?us-ascii?Q?RvooUmM=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR11MB8562.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230037)(366013)(1800799021)(376011)(52116011)(38350700011);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?PddC6msDQy5QHEWetnW/5tFb9rcjPPCtGt6Qe6kf5wXNHjxNTwMynRoQYLdZ?=
+ =?us-ascii?Q?q6pYyU7bAvCLrr/rVLS4OkdtaMu9MsOQ8CdtLg3nr1yhcZ+BXDCfj+hgwRFT?=
+ =?us-ascii?Q?1DRJg+QIgkPi9EeSr+QzQ1YcpKPOSVQf5LjzH93LpFuKKtzycnOn7Y8cXBRY?=
+ =?us-ascii?Q?NcozaL/fPWjLZpb3ffOgEuNiALNq3gW2ZferZaIZu6yp5vd6bmgaXqAmE13N?=
+ =?us-ascii?Q?B1qEHW6l2IXOY7SWP4+zcpJBMcNbTy+d9OxgNoOKhiZN71Zo9WULoGH4TnDl?=
+ =?us-ascii?Q?0zkpzJYiqzwteczSDZk3Z8viib9u4ojJLRFjx3aNI9wnC3Dp+MYFXl1aZfvK?=
+ =?us-ascii?Q?zyglinO7a6xoWWEiv0Z+ARoXoN1JxrAXuifisps1YgVt1m+JBgj+gsLopmnb?=
+ =?us-ascii?Q?cN3cWLeFvYZ2R1jwUr73705xKjT7dJACT0dgWr+wE/bJBa4w/UVQEaUHYo5x?=
+ =?us-ascii?Q?ulIieKPEs/1G3DdelFFAgEiUKzRjOn3iJGO83LqUtEULv2KkT9RKeYRy8Ani?=
+ =?us-ascii?Q?hJV2YFnZFXrM2X2OscL8SFT2G2KfeukPrm5i4DPTn8eJRm72KVvqmWlqdqlk?=
+ =?us-ascii?Q?hxrzr0nzoWKb/H8+4G0bcPKh2uJdMYoU+4QGrt4lLD4x14Q22+1BLF2iGMD6?=
+ =?us-ascii?Q?ZxTZ5VBzFzvCLf41vnQPWJxl529ZrScyBQo+jtRxApRIfT6xPwFSkYztCFTP?=
+ =?us-ascii?Q?mntirKzKUa9usRKycRkgKLQuvzGvRT9uB6R3Qn5bfnTDXHFaiQ/gFQz7ASsL?=
+ =?us-ascii?Q?794Yf2JGH3PfXljE0eiW5SFB/GvFbTmi7y51QupBbYXNT+7ey3LP/1eVFt8T?=
+ =?us-ascii?Q?n5DlithKw3FtD5BjUjBEM7LhgGcLnxsVD70OPs9zy0jQRVU/ZcyM0idfzfpQ?=
+ =?us-ascii?Q?JgqjkrT7AqiC4PTnXDacuhEBSMtQPI7lJIP7uUEpx4ZixnQQblVJBRW4EilU?=
+ =?us-ascii?Q?1l1WVj11w2SnHXHtEpo0UwLnYkf3CHo0fXGUU7Z/SxZLqNPmdASWicQu8lLn?=
+ =?us-ascii?Q?3UUnhr0M7Tw5sATmrd2xGb1m9IDwMzesVWIS9NYohY3nGd46sE31xB1Iwbn3?=
+ =?us-ascii?Q?MvsPgGzZJ7ssTA9Ss+GeDrvzdWdoOGLmgDCaBJgwXjlclRK6v3gP2qkXwTtd?=
+ =?us-ascii?Q?rBgBV52TYE8GvAcpAR7xUpgPkWoXKfr5/eI7lhXJELkfqu1KI9u1mGYWicS/?=
+ =?us-ascii?Q?oeMjsp5dAOIdghCNrBmD7TPpMzBKAH2RHCKuURzYfHg4MPyV9Wy++jXIWngq?=
+ =?us-ascii?Q?aNQA61VQfPiR2zTaHWv/KyGm6Ho4gQwG6e9Jieb1Tk3WyUxMObsMJ8OZXrDK?=
+ =?us-ascii?Q?sYEPmADjwcnhVMzBF0ZUiqFkva5JpFITgGnMUViPL+WskK2m1UbeIXF+zSUZ?=
+ =?us-ascii?Q?tCZdCqIYHcfXFV4MIAXGlqLSB9tINjfGhr41JvJT01JH/V/IujaJYj/jj9XA?=
+ =?us-ascii?Q?9p2OtLrD9G3+Z42FDffSFnb/yyXhPbIOoCIOrAYbVxvH9VH3oq03jcxWlMXG?=
+ =?us-ascii?Q?9uVIE8+N5/SBVYV9198p2C7qHjmLH6141bNb8Ulj6WHhVCg0nluq2oEKijed?=
+ =?us-ascii?Q?nmLGZq9LDVch5M/gUNbTxkyKXHDEXVva0VqDzQKAq+ZjVcrMfSaiSx3yJTms?=
+ =?us-ascii?Q?5g=3D=3D?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4502f7c4-c497-48ef-57c4-08dc8e8ab7cc
+X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB8562.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2024 05:02:42.3240
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 2kTFbkGKjKiCWCJFfvf+bRGsayhOIC4Kgyp9UEyIvhFngjq23j0oVAUIfwIuuHZQUJH1AEol70WOgGn6J7e9UypygV6mdue7N1ZdP6QjCCE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR11MB8717
+X-Proofpoint-ORIG-GUID: MBmzpYzzPwaebuiXise-GYTJTQ0zz2jW
+X-Proofpoint-GUID: MBmzpYzzPwaebuiXise-GYTJTQ0zz2jW
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-06-17_04,2024-06-14_03,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=999
+ suspectscore=0 clxscore=1011 bulkscore=0 priorityscore=1501 spamscore=0
+ adultscore=0 malwarescore=0 impostorscore=0 lowpriorityscore=0 mlxscore=0
+ phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2405170001 definitions=main-2406170036
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 16 Jun 2024 21:31:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110938
+ <openembedded-devel@lists.openembedded.org>; Mon, 17 Jun 2024 05:02:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110939
 
-root@qemux86-64:~# ptest-runner python3-typer
-START: ptest-runner
-2024-06-16T21:26
-BEGIN: /usr/lib/python3-typer/ptest
-PASS: tests/test_ambiguous_params.py:test_split_annotations_from_typer_annotations_simple
-PASS: tests/test_ambiguous_params.py:test_forbid_default_value_in_annotated_argument
-PASS: tests/test_ambiguous_params.py:test_allow_options_to_have_names
-PASS: tests/test_ambiguous_params.py:test_forbid_annotated_param_and_default_param[Argument-ArgumentInfo]
-PASS: tests/test_ambiguous_params.py:test_forbid_annotated_param_and_default_param[Option-OptionInfo]
-PASS: tests/test_ambiguous_params.py:test_forbid_multiple_typer_params_in_annotated
-PASS: tests/test_ambiguous_params.py:test_allow_multiple_non_typer_params_in_annotated
-PASS: tests/test_ambiguous_params.py:test_forbid_default_factory_and_default_value_in_annotated[Argument-ArgumentInfo]
-PASS: tests/test_ambiguous_params.py:test_forbid_default_factory_and_default_value_in_annotated[Option-OptionInfo]
-PASS: tests/test_ambiguous_params.py:test_allow_default_factory_with_default_param[Argument]
-PASS: tests/test_ambiguous_params.py:test_allow_default_factory_with_default_param[Option]
-PASS: tests/test_ambiguous_params.py:test_forbid_default_and_default_factory_with_default_param[Argument-ArgumentInfo]
-PASS: tests/test_ambiguous_params.py:test_forbid_default_and_default_factory_with_default_param[Option-OptionInfo]
-PASS: tests/test_ambiguous_params.py:test_error_rendering[error0-`Argument` default value cannot be set in `Annotated` for 'my_argument'. Set the default value with `=` instead.]
-PASS: tests/test_ambiguous_params.py:test_error_rendering[error1-Cannot specify `Option` in `Annotated` and `Argument` as a default value together for 'my_argument']
-PASS: tests/test_ambiguous_params.py:test_error_rendering[error2-Cannot specify `Option` in `Annotated` and default value together for 'my_argument']
-PASS: tests/test_ambiguous_params.py:test_error_rendering[error3-Cannot specify `Argument` in `Annotated` and default value together for 'my_argument']
-PASS: tests/test_ambiguous_params.py:test_error_rendering[error4-Cannot specify multiple `Annotated` Typer arguments for 'my_argument']
-PASS: tests/test_ambiguous_params.py:test_error_rendering[error5-Cannot specify `default_factory` and a default value together for `Option`]
-PASS: tests/test_annotated.py:test_annotated_argument_with_default
-PASS: tests/test_annotated.py:test_annotated_argument_in_string_type_with_default
-PASS: tests/test_annotated.py:test_annotated_argument_with_default_factory
-PASS: tests/test_annotated.py:test_annotated_option_with_argname_doesnt_mutate_multiple_calls
-PASS: tests/test_cli/test_app_other_name.py:test_script_help
-PASS: tests/test_cli/test_app_other_name.py:test_script
-PASS: tests/test_cli/test_completion_run.py:test_script_completion_run
-PASS: tests/test_cli/test_doc.py:test_doc
-PASS: tests/test_cli/test_doc.py:test_doc_output
-PASS: tests/test_cli/test_doc.py:test_doc_title_output
-PASS: tests/test_cli/test_doc.py:test_doc_not_existing
-PASS: tests/test_cli/test_doc.py:test_doc_no_typer
-PASS: tests/test_cli/test_doc.py:test_doc_file_not_existing
-PASS: tests/test_cli/test_empty_script.py:test_script_help
-PASS: tests/test_cli/test_func_other_name.py:test_script
-PASS: tests/test_cli/test_help.py:test_script_help
-PASS: tests/test_cli/test_help.py:test_not_python
-PASS: tests/test_cli/test_multi_app.py:test_script_help
-PASS: tests/test_cli/test_multi_app.py:test_script_app_non_existent
-PASS: tests/test_cli/test_multi_app.py:test_script_sub
-PASS: tests/test_cli/test_multi_app.py:test_script_top
-PASS: tests/test_cli/test_multi_app.py:test_script_sub_hello
-PASS: tests/test_cli/test_multi_app.py:test_script_sub_bye
-PASS: tests/test_cli/test_multi_app_cli.py:test_script_help
-PASS: tests/test_cli/test_multi_app_cli.py:test_script_sub
-PASS: tests/test_cli/test_multi_app_cli.py:test_script_top
-PASS: tests/test_cli/test_multi_app_cli.py:test_script_sub_hello
-PASS: tests/test_cli/test_multi_app_cli.py:test_script_sub_bye
-PASS: tests/test_cli/test_multi_app_sub.py:test_script_help
-PASS: tests/test_cli/test_multi_app_sub.py:test_script
-PASS: tests/test_cli/test_multi_func.py:test_help
-PASS: tests/test_cli/test_multi_func.py:test_script
-PASS: tests/test_cli/test_multi_func.py:test_script_func_non_existent
-PASS: tests/test_cli/test_multi_func.py:test_script_func_not_function
-PASS: tests/test_cli/test_multi_func.py:test_script_func
-PASS: tests/test_cli/test_not_python.py:test_not_python
-PASS: tests/test_cli/test_sub.py:test_script_hello
-PASS: tests/test_cli/test_sub.py:test_script_hello_name
-PASS: tests/test_cli/test_sub.py:test_script_hello_name_formal
-PASS: tests/test_cli/test_sub.py:test_script_bye
-PASS: tests/test_cli/test_sub.py:test_script_bye_friend
-PASS: tests/test_cli/test_sub.py:test_script_help
-PASS: tests/test_cli/test_sub.py:test_not_python
-PASS: tests/test_cli/test_sub_completion.py:test_script_completion_run
-PASS: tests/test_cli/test_sub_help.py:test_script_help
-PASS: tests/test_cli/test_version.py:test_script_help
-PASS: tests/test_compat/test_option_get_help.py:test_hidden_option
-PASS: tests/test_compat/test_option_get_help.py:test_hidden_option_no_rich
-PASS: tests/test_compat/test_option_get_help.py:test_coverage_call
-PASS: tests/test_compat/test_option_get_help.py:test_completion
-PASS: tests/test_exit_errors.py:test_eoferror
-PASS: tests/test_exit_errors.py:test_oserror
-PASS: tests/test_exit_errors.py:test_oserror_no_epipe
-PASS: tests/test_others.py:test_help_from_info
-PASS: tests/test_others.py:test_defaults_from_info
-PASS: tests/test_others.py:test_too_many_parsers
-PASS: tests/test_others.py:test_valid_parser_permutations
-PASS: tests/test_others.py:test_install_invalid_shell
-PASS: tests/test_others.py:test_callback_too_many_parameters
-PASS: tests/test_others.py:test_callback_2_untyped_parameters
-PASS: tests/test_others.py:test_callback_3_untyped_parameters
-PASS: tests/test_others.py:test_completion_untyped_parameters
-PASS: tests/test_others.py:test_completion_untyped_parameters_different_order_correct_names
-PASS: tests/test_others.py:test_autocompletion_too_many_parameters
-PASS: tests/test_others.py:test_forward_references
-PASS: tests/test_others.py:test_context_settings_inheritance_single_command
-PASS: tests/test_others.py:test_split_opt
-PASS: tests/test_prog_name.py:test_custom_prog_name
-PASS: tests/test_rich_utils.py:test_rich_utils_click_rewrapp
-PASS: tests/test_rich_utils.py:test_rich_help_no_commands
-PASS: tests/test_tracebacks.py:test_traceback_no_rich
-PASS: tests/test_tracebacks.py:test_traceback_no_rich_short_disable
-PASS: tests/test_tracebacks.py:test_unmodified_traceback
-PASS: tests/test_type_conversion.py:test_optional
-PASS: tests/test_type_conversion.py:test_optional_tuple
-PASS: tests/test_type_conversion.py:test_no_type
-PASS: tests/test_type_conversion.py:test_list_parameters_convert_to_lists[List0]
-PASS: tests/test_type_conversion.py:test_list_parameters_convert_to_lists[List1]
-PASS: tests/test_type_conversion.py:test_list_parameters_convert_to_lists[List2]
-PASS: tests/test_type_conversion.py:test_tuple_parameter_elements_are_converted_recursively[Tuple0]
-PASS: tests/test_type_conversion.py:test_tuple_parameter_elements_are_converted_recursively[Tuple1]
-PASS: tests/test_type_conversion.py:test_tuple_parameter_elements_are_converted_recursively[Tuple2]
-PASS: tests/test_type_conversion.py:test_tuple_parameter_elements_are_converted_recursively[Tuple3]
-PASS: tests/test_type_conversion.py:test_tuple_parameter_elements_are_converted_recursively[Tuple4]
-PASS: tests/test_type_conversion.py:test_custom_parse
-PASS: tests/test_type_conversion.py:test_custom_click_type
-============================================================================
-Testsuite summary
-DURATION: 203
-END: /usr/lib/python3-typer/ptest
-2024-06-16T21:29
-STOP: ptest-runner
-TOTAL: 1 FAIL: 0
+From: Zhang Peng <peng.zhang1.cn@windriver.com>
 
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+This change consolidates the output format of the ptest command
+into a single common format.
+The format selected is the automake "simple test" format:
+    "result: testname"
+
+Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
 ---
- .../ptest-packagelists-meta-python.inc        |  1 +
- .../python/python3-typer/run-ptest            |  6 +++
- .../python/python3-typer_0.12.3.bb            | 41 +++++++++++++++++++
- 3 files changed, 48 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-typer/run-ptest
- create mode 100644 meta-python/recipes-devtools/python/python3-typer_0.12.3.bb
+ .../recipes-extended/hiredis/hiredis/run-ptest  | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-index bdcd658d9..56a5cf2f0 100644
---- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
-+++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-@@ -97,6 +97,7 @@ PTESTS_SLOW_META_PYTHON = "\
-     python3-pytest-localserver \
-     python3-scrypt \
-     python3-traitlets \
-+    python3-typer \
-     python3-yappi \
- "
+diff --git a/meta-oe/recipes-extended/hiredis/hiredis/run-ptest b/meta-oe/recipes-extended/hiredis/hiredis/run-ptest
+index 59b747dbd8..8d450b881f 100644
+--- a/meta-oe/recipes-extended/hiredis/hiredis/run-ptest
++++ b/meta-oe/recipes-extended/hiredis/hiredis/run-ptest
+@@ -1,3 +1,18 @@
+ #!/bin/sh
  
-diff --git a/meta-python/recipes-devtools/python/python3-typer/run-ptest b/meta-python/recipes-devtools/python/python3-typer/run-ptest
-new file mode 100644
-index 000000000..94b40789b
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-typer/run-ptest
-@@ -0,0 +1,6 @@
-+#!/bin/sh
-+
-+# Ignore the test_tutorial and test_completion.
-+# Because it needs the docs_src package what is not in Yocto.
-+# And the tests are not that useful for Yocto.
-+pytest --automake --ignore tests/test_tutorial --ignore tests/test_completion
-diff --git a/meta-python/recipes-devtools/python/python3-typer_0.12.3.bb b/meta-python/recipes-devtools/python/python3-typer_0.12.3.bb
-new file mode 100644
-index 000000000..cc8669c37
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-typer_0.12.3.bb
-@@ -0,0 +1,41 @@
-+SUMMARY = "Typer, build great CLIs. Easy to code. Based on Python type hints."
-+DESCRIPTION = "\
-+    Typer is a library for building CLI applications that users will love using and developers will love creating. Based on Python type hints. \
-+    It's also a command line tool to run scripts, automatically converting them to CLI applications. \
-+"
-+HOMEPAGE = "https://github.com/tiangolo/typer"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=173d405eb704b1499218013178722617"
-+
-+SRC_URI[sha256sum] = "49e73131481d804288ef62598d97a1ceef3058905aa536a1134f90891ba35482"
-+
-+inherit pypi python_setuptools_build_meta ptest
-+
-+DEPENDS += "\
-+    python3-pdm-backend-native \
-+    python3-pdm-native \
-+"
-+
-+SRC_URI:append = " \
-+    file://run-ptest \
-+"
-+
-+PYPI_PACKAGE = "typer"
-+
-+RDEPENDS:${PN} += "\
-+    python3-click \
-+    python3-shellingham \
-+"
-+
-+RDEPENDS:${PN}-ptest += "\
-+    python3-coverage \
-+    python3-pytest \
-+    python3-typing-extensions \
-+    python3-unittest-automake-output \
-+"
-+
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/tests
-+    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
+-TEST_SSL=0 TEST_ASYNC=0 ./test.sh
++TEST_SSL=0 TEST_ASYNC=0 ./test.sh | sed -e 's/PASSED/PASS/g' -e 's/FAILED/FAIL/g' -e 's/SKIPPED/SKIP/g' | awk '
++{
++    if ($NF == "\033[0;32mPASS\033[0;0m" || $NF == "\033[0;31mFAIL\033[0;0m" || $NF == "\033[01;33mSKIP\033[0;0m") {
++        printf "%s: %s\n", $NF, $0
++    } else {
++        print
++    }
++}'| awk '{
++    if ($NF == "\033[0;32mPASS\033[0;0m" || $NF == "\033[0;31mFAIL\033[0;0m" || $NF == "\033[01;33mSKIP\033[0;0m") {
++        $NF = ""
++        print $0
++    } else {
++    print
++    }       
++}' | awk '{gsub(/:/,"",$NF)}1'
 +
 -- 
-2.39.2
+2.44.0
 
 
