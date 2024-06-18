@@ -1,127 +1,181 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 02857C27C79
-	for <webhook@archiver.kernel.org>; Tue, 18 Jun 2024 01:25:10 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.75594.1718673907572339116
- for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Jun 2024 18:25:07 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EDBBCC27C79
+	for <webhook@archiver.kernel.org>; Tue, 18 Jun 2024 01:42:09 +0000 (UTC)
+Received: from mail-oo1-f43.google.com (mail-oo1-f43.google.com [209.85.161.43])
+ by mx.groups.io with SMTP id smtpd.web10.76413.1718674929544590295
+ for <Openembedded-devel@lists.openembedded.org>;
+ Mon, 17 Jun 2024 18:42:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=6899ef744a=changqing.li@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45HN0FeH026948
-	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Jun 2024 01:25:06 GMT
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ys1x6jc5c-6
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Jun 2024 01:25:06 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Mon, 17 Jun 2024 18:25:03 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.39 via Frontend Transport; Mon, 17 Jun 2024 18:25:02 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [scarthgap][meta-networking][PATCH] daq: fix incompatible pointer type error
-Date: Tue, 18 Jun 2024 09:25:02 +0800
-Message-ID: <20240618012502.1871197-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lmyfzi/q;
+ spf=pass (domain: gmail.com, ip: 209.85.161.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f43.google.com with SMTP id 006d021491bc7-5b9706c84e5so2849934eaf.1
+        for <Openembedded-devel@lists.openembedded.org>; Mon, 17 Jun 2024 18:42:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1718674929; x=1719279729; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=JW6y8E1GHAAdLBRsGZpUsY/Pjci6HvRiivOQBYOrypA=;
+        b=lmyfzi/qgYjlNU8VgZpo6ctn0TRrZLSlX+nmcszQsfIr+wu7C0bFCg5Py6N5bQOlxY
+         TjNCHTZWr1WA/vLKQjC9zAZPd1+IpknL9qPWuXpqJZ+8auQVV8lNyc0nq2rdY6irPAaP
+         Ke5vOH0kx6/rEKA8SKDVznaAwP1R8lFzF0s8WfQdGFIFjW4mqk78uCSSxbGm2xxlomOz
+         3Q10R35VfXw7YplSu6XTDCsV+kZ+TKCsr1hrBHJrlNVsOcsSS76y6QWaC8MGGws77Ymg
+         8EIdsJYUBIVNLvx1ODDz0+QW0eLguUfQVI7oZ5OWIO5xqgl2/dBdxDGkaYCXu8bd+EmY
+         y61g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1718674929; x=1719279729;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=JW6y8E1GHAAdLBRsGZpUsY/Pjci6HvRiivOQBYOrypA=;
+        b=ZBPtV2WQ6a/oKJKGlz9d2ZBPW4u0lcrozIsoc5hdxyZ/DEm6UPOHd7FdnP+uq5vjrU
+         KXd1Jnh3zlej4nj9VNo1L+gSBXE8aCI8twa8QL2QdSYdGr1+PzO/NtK9pu3kCOlCN8CV
+         BlOLkt7O0bquqKOCWEs+TtGfR71XDSo3QmvbACNBHH1yengUqQdvrXbd79jOqHpl3Ngt
+         Kz8PKNXZdIg8kezB6Rg69x9rJh1ngDtPZm4vyk10PEdlRtuew91f62uUozLJtDwqjki3
+         AN0726pV9poOdg6OPY2SAQ62az+5W2pyTospDlS9DcbNymXT/gBy47hCyeAPF8gV40QX
+         i6Pw==
+X-Gm-Message-State: AOJu0YzF5fCkx7GT75v+q2kYy99w3Z3caYkACQqhr/yjVtC7uH9q8G4G
+	S0bsdosIRDSFpCdrQnunWB/u3sIR5pqCPCTkgi17bRREK82Q992TG67QSFxOECwWZJlxawbE5YD
+	YP1iTVxLqP2al9LOuieS+Mj6swpk=
+X-Google-Smtp-Source: AGHT+IFdXC/z/pIyHAkGPWgQESyYK3nGDdnMnq59kbotQu5vTv3Ife2nAR0E7cctzCLA5b+0HCO8jv6NUuJi5LP6/o4=
+X-Received: by 2002:a05:6870:2187:b0:254:b24e:e351 with SMTP id
+ 586e51a60fabf-25842b8356cmr12181065fac.59.1718674928692; Mon, 17 Jun 2024
+ 18:42:08 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: OIyIbHq5RZ1U690kdahm7XCNackEXbSU
-X-Proofpoint-ORIG-GUID: OIyIbHq5RZ1U690kdahm7XCNackEXbSU
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-17_14,2024-06-17_01,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 phishscore=0
- bulkscore=0 adultscore=0 priorityscore=1501 clxscore=1015 mlxlogscore=999
- suspectscore=0 mlxscore=0 malwarescore=0 lowpriorityscore=0 spamscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.21.0-2405170001
- definitions=main-2406180009
+References: <20240618005203.2022725-1-rs@ti.com>
+In-Reply-To: <20240618005203.2022725-1-rs@ti.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 17 Jun 2024 18:41:57 -0700
+Message-ID: <CAMKF1spyT0tUjE8=ojmWNV+5Gz-QYrUUepoTKSRwoa2YNkqTtw@mail.gmail.com>
+Subject: Re: [meta-oe][master][PATCH] vulkan-cts: add workaround for createMeshShaderMiscTestsEXT
+To: rs@ti.com
+Cc: Openembedded-devel@lists.openembedded.org, afd@ti.com, denis@denix.org, 
+	detheridge@ti.com, reatmon@ti.com
+Content-Type: multipart/alternative; boundary="0000000000009bf461061b20307f"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Jun 2024 01:25:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110948
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Jun 2024 01:42:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110949
 
-From: Kai Kang <kai.kang@windriver.com>
+--0000000000009bf461061b20307f
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Fix incompatible pointer type error for daq:
+On Mon, Jun 17, 2024 at 5:52=E2=80=AFPM <rs@ti.com> wrote:
 
-| ../../daq-2.0.7/os-daq-modules/daq_nfq.c: In function 'SetPktHdr':
-| ../../daq-2.0.7/os-daq-modules/daq_nfq.c:394:37: error: passing argument 2
-   of 'nfq_get_payload' from incompatible pointer type [-Wincompatible-pointer-types]
-|   394 |     int len = nfq_get_payload(nfad, (char**)pkt);
-|       |                                     ^~~~~~~~~~~
-|       |                                     |
-|       |                                     char **
+> From: Randolph Sapp <rs@ti.com>
+>
+> Remove the CXX flag "-O2" for GCC 13 and 14. There's a bug with ARM GCC
+> that breaks the iteration of "types" in the createMeshShaderMiscTestsEXT
+> function. This issue is not present for clang or x86_64 GCC 14.
+>
+> It seems that the array is not initialized before the first iteration.
+> In testing this can result in a random value being used. This can
+> manifest in LINES type being processed twice, resulting in the following
+> error:
+>
+> FATAL ERROR: Failed to initialize dEQP: Test case with non-unique name
+> 'no_lines' added to group 'misc'.
+>
+> Signed-off-by: Randolph Sapp <rs@ti.com>
+> ---
+>  meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.7.3.bb | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.7.3.bb
+> b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.7.3.bb
+> index 1008a5fd4..7492fe9aa 100644
+> --- a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.7.3.bb
+> +++ b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.7.3.bb
+> @@ -23,6 +23,9 @@ SRC_URI +=3D
+> "file://0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.pat
+>
+>  TOOLCHAIN =3D "gcc"
+>
+> +# Workaround an optimization bug that breaks createMeshShaderMiscTestsEX=
+T
+> +OECMAKE_CXX_FLAGS:remove:toolchain-gcc =3D "-O2"
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-backport for build on host with gcc 14
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- .../recipes-connectivity/daq/daq_2.0.7.bb     |  1 +
- ...-fix-incompatible-pointer-type-error.patch | 31 +++++++++++++++++++
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/daq/files/daq-fix-incompatible-pointer-type-error.patch
+Let=E2=80=99s limit it to arm
+And gcc using the needed overrides
 
-diff --git a/meta-networking/recipes-connectivity/daq/daq_2.0.7.bb b/meta-networking/recipes-connectivity/daq/daq_2.0.7.bb
-index 66ad83f71..8cb4c04fa 100644
---- a/meta-networking/recipes-connectivity/daq/daq_2.0.7.bb
-+++ b/meta-networking/recipes-connectivity/daq/daq_2.0.7.bb
-@@ -11,6 +11,7 @@ DEPENDS = "libpcap libpcre libdnet bison-native libnetfilter-queue"
- SRC_URI = "http://fossies.org/linux/misc/daq-${PV}.tar.gz \
-            file://disable-run-test-program-while-cross-compiling.patch \
-            file://0001-correct-the-location-of-unistd.h.patch \
-+           file://daq-fix-incompatible-pointer-type-error.patch \
-            "
- SRC_URI[sha256sum] = "bdc4e5a24d1ea492c39ee213a63c55466a2e8114b6a9abed609927ae13a7705e"
- # these 2 create undeclared dependency on libdnet and libnetfilter-queue from meta-networking
-diff --git a/meta-networking/recipes-connectivity/daq/files/daq-fix-incompatible-pointer-type-error.patch b/meta-networking/recipes-connectivity/daq/files/daq-fix-incompatible-pointer-type-error.patch
-new file mode 100644
-index 000000000..ade3ec686
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/daq/files/daq-fix-incompatible-pointer-type-error.patch
-@@ -0,0 +1,31 @@
-+Fix daq incompatible pointer type error when gcc option
-+'-Wincompatible-pointer-types is set:
-+
-+| ../../daq-2.0.7/os-daq-modules/daq_nfq.c: In function 'SetPktHdr':
-+| ../../daq-2.0.7/os-daq-modules/daq_nfq.c:394:37: error: passing argument 2
-+   of 'nfq_get_payload' from incompatible pointer type [-Wincompatible-pointer-types]
-+|   394 |     int len = nfq_get_payload(nfad, (char**)pkt);
-+|       |                                     ^~~~~~~~~~~
-+|       |                                     |
-+|       |                                     char **
-+
-+Upstream-Status: Inactive-Upstream [lastrelease: 2019-03-09]
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+ os-daq-modules/daq_nfq.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/os-daq-modules/daq_nfq.c b/os-daq-modules/daq_nfq.c
-+index 4de94b6..a6de2f3 100644
-+--- a/os-daq-modules/daq_nfq.c
-++++ b/os-daq-modules/daq_nfq.c
-+@@ -391,7 +391,7 @@ static inline int SetPktHdr (
-+     DAQ_PktHdr_t* hdr,
-+     uint8_t** pkt
-+ ) {
-+-    int len = nfq_get_payload(nfad, (char**)pkt);
-++    int len = nfq_get_payload(nfad, (unsigned char**)pkt);
-+ 
-+     if ( len <= 0 )
-+         return -1;
--- 
-2.25.1
+>
+> +
+>  S =3D "${WORKDIR}/git"
+>
+>  REQUIRED_DISTRO_FEATURES =3D "vulkan"
+> --
+> 2.45.1
+>
+>
 
+--0000000000009bf461061b20307f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Mon, Jun 17, 2024 at 5:52=E2=80=AFPM &lt;<a href=3D"mail=
+to:rs@ti.com">rs@ti.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_=
+quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1=
+ex">From: Randolph Sapp &lt;<a href=3D"mailto:rs@ti.com" target=3D"_blank">=
+rs@ti.com</a>&gt;<br>
+<br>
+Remove the CXX flag &quot;-O2&quot; for GCC 13 and 14. There&#39;s a bug wi=
+th ARM GCC<br>
+that breaks the iteration of &quot;types&quot; in the createMeshShaderMiscT=
+estsEXT<br>
+function. This issue is not present for clang or x86_64 GCC 14.<br>
+<br>
+It seems that the array is not initialized before the first iteration.<br>
+In testing this can result in a random value being used. This can<br>
+manifest in LINES type being processed twice, resulting in the following<br=
+>
+error:<br>
+<br>
+FATAL ERROR: Failed to initialize dEQP: Test case with non-unique name<br>
+&#39;no_lines&#39; added to group &#39;misc&#39;.<br>
+<br>
+Signed-off-by: Randolph Sapp &lt;<a href=3D"mailto:rs@ti.com" target=3D"_bl=
+ank">rs@ti.com</a>&gt;<br>
+---<br>
+=C2=A0meta-oe/recipes-graphics/vk-gl-cts/<a href=3D"http://vulkan-cts_1.3.7=
+.3.bb" rel=3D"noreferrer" target=3D"_blank">vulkan-cts_1.3.7.3.bb</a> | 3 +=
+++<br>
+=C2=A01 file changed, 3 insertions(+)<br>
+<br>
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/<a href=3D"http://vulkan-ct=
+s_1.3.7.3.bb" rel=3D"noreferrer" target=3D"_blank">vulkan-cts_1.3.7.3.bb</a=
+> b/meta-oe/recipes-graphics/vk-gl-cts/<a href=3D"http://vulkan-cts_1.3.7.3=
+.bb" rel=3D"noreferrer" target=3D"_blank">vulkan-cts_1.3.7.3.bb</a><br>
+index 1008a5fd4..7492fe9aa 100644<br>
+--- a/meta-oe/recipes-graphics/vk-gl-cts/<a href=3D"http://vulkan-cts_1.3.7=
+.3.bb" rel=3D"noreferrer" target=3D"_blank">vulkan-cts_1.3.7.3.bb</a><br>
++++ b/meta-oe/recipes-graphics/vk-gl-cts/<a href=3D"http://vulkan-cts_1.3.7=
+.3.bb" rel=3D"noreferrer" target=3D"_blank">vulkan-cts_1.3.7.3.bb</a><br>
+@@ -23,6 +23,9 @@ SRC_URI +=3D &quot;file://0001-cmake-Define-WAYLAND_SCANN=
+ER-and-WAYLAND_PROTOCOLS_D.pat<br>
+<br>
+=C2=A0TOOLCHAIN =3D &quot;gcc&quot;<br>
+<br>
++# Workaround an optimization bug that breaks createMeshShaderMiscTestsEXT<=
+br>
++OECMAKE_CXX_FLAGS:remove:toolchain-gcc =3D &quot;-O2&quot;</blockquote><di=
+v dir=3D"auto"><br></div><div dir=3D"auto">Let=E2=80=99s limit it to arm</d=
+iv><div dir=3D"auto">And gcc using the needed overrides=C2=A0</div><blockqu=
+ote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc s=
+olid;padding-left:1ex" dir=3D"auto"><br>
++<br>
+=C2=A0S =3D &quot;${WORKDIR}/git&quot;<br>
+<br>
+=C2=A0REQUIRED_DISTRO_FEATURES =3D &quot;vulkan&quot;<br>
+-- <br>
+2.45.1<br>
+<br>
+</blockquote></div></div>
+
+--0000000000009bf461061b20307f--
 
