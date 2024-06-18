@@ -1,203 +1,98 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 05932C2BB85
-	for <webhook@archiver.kernel.org>; Tue, 18 Jun 2024 14:39:14 +0000 (UTC)
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
- by mx.groups.io with SMTP id smtpd.web10.88308.1718721547576768121
- for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Jun 2024 07:39:07 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F292FC27C4F
+	for <webhook@archiver.kernel.org>; Tue, 18 Jun 2024 18:18:07 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web11.1519.1718734681827310277
+ for <Openembedded-devel@lists.openembedded.org>;
+ Tue, 18 Jun 2024 11:18:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jhp9h8/T;
- spf=pass (domain: gmail.com, ip: 209.85.208.54, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-57cfe600cbeso841714a12.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Jun 2024 07:39:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1718721546; x=1719326346; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=Z9DYyNeUeso8qt+XrmBol1aAY6nfLvZcR8/G1b9urA0=;
-        b=jhp9h8/T8Iq7fTCWYeHealjD3QV5cZrlAKRIkvRs6wiUpPFOWnrYPgWCC411mD5Ypc
-         eD14hQg1BoxvqTnY9Mg1eFITpYURkyN/QeS3Uuncz6SPWCgPSSuvcZE1vXK+HORccenQ
-         TV+cXI8j5q8lvaOQBlAnQfZb4H3vtZQOJHy9vCAwQnVvDwjc02ItTNRHHl4PF0YED/GF
-         2DEgiNGclgPp4P4Y7SN9jZbHfAa6M85/PfH+ATHIV0xR6it5QmaXsUUs4oqw7Dm8drT6
-         TUuWObgTwYJpq2FRm8faNtdLpfncNqMs3tnazQ6/UlcjFq+xzODTDiwA57gaJnFFcLwk
-         kKyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718721546; x=1719326346;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=Z9DYyNeUeso8qt+XrmBol1aAY6nfLvZcR8/G1b9urA0=;
-        b=hAAVG/jN2jZShK3f6VY3sQDN7PIrFHmb+S/VweN2Fj1tYKU6se1VT+jUT8vUhmGGXW
-         qnAavryHH+8hyt1eWczvFI+cfdC4lYhZeUpElNa5zb+GzUvzzZXCt5GKxlZwWJli99AH
-         fnNaaYspIsrg1sW+TpUzIQkE/kCakL9L9KD0JvH9RNTGirzgs/PZikaDO/MVAQ85bZ8p
-         8SkrB94fcTp4wzVjjf7rR/a4gBxe+CSmKUWT54FuKY0jvTVKmVtfmufwq2Fefjlen8Fw
-         25i7ki+Pd3vJbApaslsZVid2+3PIfBlwH2AUDEkx4xkIqS4A2Xl6fpw8+GTqApNULkkm
-         lFrA==
-X-Gm-Message-State: AOJu0YyqHA0k3GdLzieO4gk4RA5ZXpCTEUaEBYIp/4AcwUV6D0xR3KDR
-	hhK78HdXpZiR7L0MN+UxJoZlBlVfsuG0gsOcCAoFIAS/ExnTxxH5buTtuSjeftwZdcmCZ9ojxEb
-	jj8nmVTM4OdMJ9ho59s/POfiyz1usRut5
-X-Google-Smtp-Source: AGHT+IFDdSGmdqBmKlYXa1t9H3IkS3W40FO6vjjtge7WrUIjeh6Tkqu5fo/cXqYp/lskEsO05vACKN3EQLsmUONcTqU=
-X-Received: by 2002:a17:907:c08a:b0:a6f:6960:5e18 with SMTP id
- a640c23a62f3a-a6f69605fc2mr813972466b.22.1718721545498; Tue, 18 Jun 2024
- 07:39:05 -0700 (PDT)
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=cQxRk+H3;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: rs@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 45IIHuvb104333;
+	Tue, 18 Jun 2024 13:17:56 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1718734676;
+	bh=ZYLOGqOtsrIsz4xVDC7IfZkF+ChqM6EVPDvSe59L0TM=;
+	h=From:To:CC:Subject:Date;
+	b=cQxRk+H3sGlZc1/qhyrgPiBDwXYEgXQLTbiQnDjkzEFOJ4Bn9M8KYoiZ2XiCGySnQ
+	 h+0NWFwwFQB6++ZUHmUMkMG6kyzYiE5w+bZzh7E27GNuOm6bkXO3J23Rw6W+l5VQVG
+	 euW7CjKD8YGWA0xbV9DYjBhQtb+5mR7F3dVZ2I08=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 45IIHuEZ070605
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 18 Jun 2024 13:17:56 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 18
+ Jun 2024 13:17:55 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 18 Jun 2024 13:17:56 -0500
+Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.144])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 45IIHtfc004993;
+	Tue, 18 Jun 2024 13:17:55 -0500
+From: <rs@ti.com>
+To: <raj.khem@gmail.com>
+CC: <Openembedded-devel@lists.openembedded.org>, <afd@ti.com>,
+        <denis@denix.org>, <reatmon@ti.com>, <detheridge@ti.com>
+Subject: [meta-oe][master][PATCHv2] vulkan-cts: add workaround for createMeshShaderMiscTestsEXT
+Date: Tue, 18 Jun 2024 13:17:45 -0500
+Message-ID: <20240618181745.3889828-1-rs@ti.com>
+X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Tue, 18 Jun 2024 07:38:52 -0700
-Message-ID: <CAK5yBb-HSXvzx7cynCqYNL5=AJsBt5FX1GMpitdrsiEeTdY6xw@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="0000000000002ff9dc061b2b0bb9"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Jun 2024 14:39:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110953
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Jun 2024 18:18:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110954
 
---0000000000002ff9dc061b2b0bb9
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Randolph Sapp <rs@ti.com>
 
-All,
+Remove the CXX flag "-O2" for GCC 13 and 14 on aarch64 platforms.
+There's a bug with ARM GCC that breaks the iteration of "types" in the
+createMeshShaderMiscTestsEXT function. This issue is not present for
+clang or x86_64 GCC 14.
 
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
+It seems that the array is not initialized before the first iteration.
+In testing this can result in a random value being used. This can
+manifest in LINES type being processed twice, resulting in the following
+error:
 
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
+FATAL ERROR: Failed to initialize dEQP: Test case with non-unique name
+'no_lines' added to group 'misc'.
 
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 417
-unassigned or newcomer bugs.
+Signed-off-by: Randolph Sapp <rs@ti.com>
+---
 
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.1=E2=80=9D, =E2=80=9C5.2", "5.99" and "Future=
-", the more
-pressing/urgent issues being in "5.1" and then =E2=80=9C5.2=E2=80=9D.
+v2: Apply this specifically to aarch64 platforms since armv7 doesn't seem to
+have this issue...
 
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
+ meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.7.3.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Thanks,
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.7.3.bb b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.7.3.bb
+index 1008a5fd4..78492e21b 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.7.3.bb
++++ b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.7.3.bb
+@@ -23,6 +23,9 @@ SRC_URI += "file://0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.pat
+ 
+ TOOLCHAIN = "gcc"
+ 
++# Workaround an optimization bug that breaks createMeshShaderMiscTestsEXT
++OECMAKE_CXX_FLAGS:remove:toolchain-gcc:aarch64 = "-O2"
++
+ S = "${WORKDIR}/git"
+ 
+ REQUIRED_DISTRO_FEATURES = "vulkan"
+-- 
+2.45.1
 
-
-
-*Stephen K. Jolley*
-
-*Yocto Project Program Manager*
-
-(    *Cell*:                (208) 244-4460
-
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
-
---0000000000002ff9dc061b2b0bb9
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><span style=3D"font-size:11pt;font-family:Calibri,Arial">A=
-ll,<br><br>The triage team is starting to try and collect up and classify b=
-ugs which a newcomer to the project would be able to work on in a way which=
- means people can find them. They&#39;re being listed on the triage page un=
-der the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/wiki/=
-Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage#New=
-comer_Bugs</a>  Also please review: <a href=3D"https://www.openembedded.org=
-/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.org/w=
-iki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugzilla =
-account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount.cgi"=
->https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The idea is=
- these bugs should be straight forward for a person to help work on who doe=
-sn&#39;t have deep experience with the project.  If anyone can help, please=
- take ownership of the bug and send patches!  If anyone needs help/advice t=
-here are people on irc who can likely do so, or some of the more experience=
-d contributors will likely be happy to help too.<br><br>Also, the triage te=
-am meets weekly and does its best to handle the bugs reported into the Bugz=
-illa. The number of people attending that meeting has fallen, as have the n=
-umber of people available to help fix bugs. One of the things we hear users=
- report is they don&#39;t know how to help. We (the triage team) are theref=
-ore going to start reporting out the currently 417 unassigned or newcomer b=
-ugs.<br><br>We&#39;re hoping people may be able to spare some time now and =
-again to help out with these.  Bugs are split into two types, &quot;true bu=
-gs&quot; where things don&#39;t work as they should and &quot;enhancements&=
-quot; which are features we&#39;d want to add to the system.  There are als=
-o roughly four different &quot;priority&quot; classes right now, =E2=80=9C5=
-.1=E2=80=9D, =E2=80=9C5.2&quot;, &quot;5.99&quot; and &quot;Future&quot;, t=
-he more pressing/urgent issues being in &quot;5.1&quot; and then =E2=80=9C5=
-.2=E2=80=9D.<br><br>Please review this link and if a bug is something you w=
-ould be able to help with either take ownership of the bug, or send me (<a =
-href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>) an e-m=
-ail with the bug number you would like and I will assign it to you (please =
-make sure you have a Bugzilla account).  The list is at: <a href=3D"https:/=
-/wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcomer_Bugs"=
->https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcom=
-er_Bugs</a></span><br><div dir=3D"ltr" class=3D"gmail_signature" data-smart=
-mail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p class=3D"MsoN=
-ormal" style=3D"background-image:initial;background-position:initial;backgr=
-ound-repeat:initial"><span style=3D"font-size:12pt;font-family:Arial,sans-s=
-erif">Thanks,<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
-
---0000000000002ff9dc061b2b0bb9--
 
