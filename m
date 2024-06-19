@@ -2,100 +2,94 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D736C27C53
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A0DFDC41513
 	for <webhook@archiver.kernel.org>; Wed, 19 Jun 2024 12:20:33 +0000 (UTC)
-Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
- by mx.groups.io with SMTP id smtpd.web10.19545.1718799627330535400
+Received: from mail-lj1-f182.google.com (mail-lj1-f182.google.com [209.85.208.182])
+ by mx.groups.io with SMTP id smtpd.web11.19292.1718799625282346320
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Jun 2024 05:20:27 -0700
+ Wed, 19 Jun 2024 05:20:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=W9UanZNE;
- spf=pass (domain: konsulko.com, ip: 209.85.167.43, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-52cc5d5179aso2050082e87.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Jun 2024 05:20:27 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=NcvkNEAB;
+ spf=pass (domain: konsulko.com, ip: 209.85.208.182, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-lj1-f182.google.com with SMTP id 38308e7fff4ca-2eaa89464a3so73929901fa.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Jun 2024 05:20:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1718799625; x=1719404425; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=UxXmqI72wwOJsMHXgI1Zj5K6BUtuWibykjv6GnHMaBk=;
-        b=W9UanZNE65xs34Yvt0fX6XsYHIBqqrwKNCzpOIWruQg21cDkK7Xv53eZ08mz/Lnniq
-         VLXymlzqVzi663uC8r7LHiaMS6WCMJ5ScisRkZWspS3/C8APmGyeW6ZI7KH56oo4DPFl
-         aluao8RQLfhEI7hXCTW7HTS5KtndsWosCrxIw=
+        d=konsulko.com; s=google; t=1718799623; x=1719404423; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=mO8RhMICDTBSUJjw6htdZRdGrvYJ1ZkCBO0/pPRlF3Y=;
+        b=NcvkNEAByRi+vOt8uGhCEtn4D+9tzD6uc1+Fs/vb40UeuECHb1XZL0tUbeYghYWldj
+         8KNwQpp38tTpQF/pN4Jc9ujTbrAcQMDxn834t0VhRqALojIx+4eze7QhXnQt1auAk4HJ
+         /SrI+VjaVT4U9EBC21+RTqcQZHI7Dqnx5IxdE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718799625; x=1719404425;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=UxXmqI72wwOJsMHXgI1Zj5K6BUtuWibykjv6GnHMaBk=;
-        b=EzbgmR5qo0hWevuQVrBpiomGZJnAMit+yJcy341ya2XpeRGj9DYCTD9udFvtz/inzX
-         Thw6yFOaQegTv3njcfwmfySYLzvkgl4hfjhn91gvELsyx20u/+KNUmAJnHBCWsZSapCY
-         yv6et8cCJmEZLcYZzWPbGH7BVVEDFfkyZWmpfQF3XmjRfFxk+bFtTWMDhprmqYma12A9
-         Eno9S6umN2ijLjoBunJSjXnEEI+AwF+jUy6LAdBYTGQQUGzMjO/n7AsCvWjExnB4YYZv
-         dPINqJ3eWiOTWUyPr/+h9TxQPBq/jhhgKLyiYtFxLQT9WV8tz8/2Mu5B1da3Y4lN4uFb
-         Xflg==
-X-Gm-Message-State: AOJu0YzWzM3LRN8OIM1w4zwOX/zl3gWGbEBWNDY2S4iCuO3TEKnC4MWP
-	GmshorxaQa5VlwKotEmt+tpCi+4VWKzc/mwlo5rYCr5p395qucUIP/xiz9iUl95B7Tv90sJgg0b
-	d
-X-Google-Smtp-Source: AGHT+IGJ7pEYLc752uXmMgQgx5tQy/+TuIVq7KOYOi9naga50fJRq4KgkNOOYI98QwCrP5PvSQwkig==
-X-Received: by 2002:a19:e01a:0:b0:52c:bd55:5b21 with SMTP id 2adb3069b0e04-52ccaa33e30mr1472300e87.24.1718799624961;
-        Wed, 19 Jun 2024 05:20:24 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1718799623; x=1719404423;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=mO8RhMICDTBSUJjw6htdZRdGrvYJ1ZkCBO0/pPRlF3Y=;
+        b=PZPGYJT+3mKBoZe4xbo92Tf/jc7RUBj9sNuxik4TwNUYSREPUBAeFBSD3XcuR5MG5g
+         edy3RJuIdmnc/O4TcHD09tHbsSZx3f+92M410crCR9t1O2yCnN+Ul87S12sOl93m7Hbm
+         LYBed+RyXzElwf4XirZjB/Pj9a2mvUNdcOn2MiI6p+SG+jdwWvjCjKhqA9LJwY1rdSDk
+         G59BVZp8kEQiMXgm8hCbdhVDFR4/eHGRPNgEF7uOSSnSqwdwi8DzEnGI1/pDo9BAZGA2
+         hYdzhHfodmFYwYRJq9UayCjCrEovTNhM8aS8H67QZnDHLuX/ZK8WwY98affUP0GboFeb
+         3+eQ==
+X-Gm-Message-State: AOJu0Yw/2TVv/XBN+i9r6Qe5cu99KLCXnCQEdVV2xeH6cVGyVI5TjLYT
+	Wfry8RB8MO5uQpa7GTQUG4E3IaRABzFo3yUihKE9+1sha3VKY/JENduKCuaoiXiRi3ExS9pnSi6
+	s
+X-Google-Smtp-Source: AGHT+IH0/fufOVNeRp/BKe/BomMGYYVwe1XSw6b7Q9Wg/+YCZF6br4s8ZPVySYJ0uqR1mEP/Nj1hrA==
+X-Received: by 2002:a2e:b0c9:0:b0:2eb:68d0:f1cc with SMTP id 38308e7fff4ca-2ec3cfe125emr16976101fa.43.1718799622830;
+        Wed, 19 Jun 2024 05:20:22 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-422874de62fsm266329885e9.38.2024.06.19.05.20.24
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-422874de62fsm266329885e9.38.2024.06.19.05.20.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Jun 2024 05:20:24 -0700 (PDT)
+        Wed, 19 Jun 2024 05:20:22 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-paho-mqtt: Upgrade 2.0.0 -> 2.1.0
-Date: Wed, 19 Jun 2024 15:20:19 +0300
-Message-Id: <20240619122019.529213-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-moteus: Upgrade 0.3.70 -> 0.3.71
+Date: Wed, 19 Jun 2024 15:20:17 +0300
+Message-Id: <20240619122019.529213-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240619122019.529213-1-leon.anavi@konsulko.com>
-References: <20240619122019.529213-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 19 Jun 2024 12:20:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110966
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110964
 
-Upgrade to release 2.1.0:
+Upgrade to release 0.3.71:
 
-- Make transition from 1.x to 2.x version smoother
-- Fix "protocol" property
-- Fix publish() a bytearray payload
-- Fix some type annotations
-- Fix loop_stop() not stopping thread when called from callback
-- Fix some documentation errors
-- Add support for Unix socket
-- Fix flaky test
+- Properly decode AksIM-2 warning and error bits
+- Make MA732 trimming for off-axis applications actually work
+- When encoders are no longer active, stop using them and
+  trigger a fault
+- Limit the commanded velocity to something physically achievable
+- Fault if a non-reducing gear ratio is configured without overriding
+- Default bemf_feedforward to 0.0, and fault if it is configured
+  non-zero without acceleration limits or override
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-paho-mqtt_2.0.0.bb => python3-paho-mqtt_2.1.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-paho-mqtt_2.0.0.bb => python3-paho-mqtt_2.1.0.bb} (80%)
+ .../{python3-moteus_0.3.70.bb => python3-moteus_0.3.71.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-moteus_0.3.70.bb => python3-moteus_0.3.71.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-paho-mqtt_2.0.0.bb b/meta-python/recipes-devtools/python/python3-paho-mqtt_2.1.0.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-paho-mqtt_2.0.0.bb
-rename to meta-python/recipes-devtools/python/python3-paho-mqtt_2.1.0.bb
-index e4cf77a13..0c3e6e926 100644
---- a/meta-python/recipes-devtools/python/python3-paho-mqtt_2.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-paho-mqtt_2.1.0.bb
-@@ -7,9 +7,9 @@ SRCNAME = "paho-mqtt"
+diff --git a/meta-python/recipes-devtools/python/python3-moteus_0.3.70.bb b/meta-python/recipes-devtools/python/python3-moteus_0.3.71.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-moteus_0.3.70.bb
+rename to meta-python/recipes-devtools/python/python3-moteus_0.3.71.bb
+index 7e77d8f7a..54c53afe4 100644
+--- a/meta-python/recipes-devtools/python/python3-moteus_0.3.70.bb
++++ b/meta-python/recipes-devtools/python/python3-moteus_0.3.71.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://setup.py;beginline=3;endline=9;md5=24025d3c660abfc62a
  
- inherit pypi python_hatchling python_setuptools_build_meta
+ inherit pypi setuptools3
  
--SRC_URI[sha256sum] = "13b205f29251e4f2c66a6c923c31fc4fd780561e03b2d775cff8e4f2915cf947"
-+SRC_URI[sha256sum] = "12d6e7511d4137555a3f6ea167ae846af2c7357b10bc6fa4f7c3968fc1723834"
+-SRC_URI[sha256sum] = "39e6e2689511c601dff62e502ca6c6ab91100f34b2ebbf52fcee241bf8bfed31"
++SRC_URI[sha256sum] = "7caa994ad7ed2b0a219b20e4a2e83b6bad01e549402c38a264f0d83d560d7908"
  
--PYPI_SRC_URI = "https://files.pythonhosted.org/packages/73/b7/a4df0f93bbdae237e16ba402752151eceee576cbe80c235a2475fbf81eea/paho_mqtt-${PV}.tar.gz"
-+PYPI_SRC_URI = "https://files.pythonhosted.org/packages/39/15/0a6214e76d4d32e7f663b109cf71fb22561c2be0f701d67f93950cd40542/paho_mqtt-${PV}.tar.gz"
- 
- S = "${WORKDIR}/paho_mqtt-${PV}"
+ S = "${WORKDIR}/moteus-${PV}"
  
 -- 
 2.39.2
