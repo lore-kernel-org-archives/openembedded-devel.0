@@ -1,229 +1,103 @@
-Return-Path: <mark.jonas@de.bosch.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EEF7BC27C53
-	for <webhook@archiver.kernel.org>; Wed, 19 Jun 2024 09:47:42 +0000 (UTC)
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com (EUR04-VI1-obe.outbound.protection.outlook.com [40.107.8.41])
- by mx.groups.io with SMTP id smtpd.web11.16803.1718790455634619531
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D736C27C53
+	for <webhook@archiver.kernel.org>; Wed, 19 Jun 2024 12:20:33 +0000 (UTC)
+Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
+ by mx.groups.io with SMTP id smtpd.web10.19545.1718799627330535400
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Jun 2024 02:47:36 -0700
+ Wed, 19 Jun 2024 05:20:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@de.bosch.com header.s=selector2 header.b=Nvdtosz9;
- spf=pass (domain: de.bosch.com, ip: 40.107.8.41, mailfrom: mark.jonas@de.bosch.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kUCyTvgq7gJb2M2+DXQvWmT4Ef4A3xGj/MMQhXc9DtFKcmLDLRRu9waK35qgfGPOVyblFxnyy+PQbVRmLF49yPVzn4rBA/JPlXid1NTRazcWB8WxV/QsXJRR5FcXXrTSX9f8DDdEWwOQENK77JhBRYy5bScKOoCyXbtjWyNDEkl7CeG0DGRZX4U1klc/KcOwpj/4c40538gxAOHkqRHDCZKk5ROtj1UEbxbX6dzd2hl63pJkgZuuTSGVwsymrPDQ6a4zPjhLyXWfQHBG8KVa5qpE9ZFKyiKId5KFPBHru8D+vnREFjaEw3KuZ+OplUEOyPZge6mYeKR2jE53Wo1bww==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EvD1srpvQWwz5mpx7OedKpKOn5CjPqxaDyYWgLaY9E0=;
- b=KhUG/DY6yfze+P1LeeUCicCN1N/AaDYr/16sIXZ32vAl5XwPfye2CMmqEIXnintmx7u2iBf/LM/bJT8GJskQRho4eEorvUlZojXcQKgexFmgURDimgb1UqAwLLkTntFixHSbQthJsPhmY/cs4BvpfQ8sGPnORaEk65073Vmym5HZzwzsxCDCYtnmS0Cp3rLqqqO7fI4867DnVmhna3YonhWgRw6k0ofIgLZVXL77jK7azkV+/FNfrppQECoocoz2erGznUpCX2pi1gpr8mqJRkh9HNFDU9rHAjiLpCg3i9k6xHB2ZLBaZoBz7RTwacKXLB0R8aFTkh41PiqWeCssyg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 139.15.153.205) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=de.bosch.com; dmarc=pass (p=reject sp=none pct=100) action=none
- header.from=de.bosch.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=de.bosch.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EvD1srpvQWwz5mpx7OedKpKOn5CjPqxaDyYWgLaY9E0=;
- b=Nvdtosz93Nkojk2arYi1RZrNdlxUWXEKnsyWKMy1zeATCY83QbzcbWAy2fpM5rEOjFlLaoNZgJbHZ8u6zx1j/l7aKyimMAOsbduL+trlN9y7O3Rp5GBP8swZLFM1kOliQxvF8L+0huz2c4vIib/RHIZFixTs1AVOinJwH8pdQFGrUG88p2HVEC65wd4BkxDaZd4jGoNz9Qe+j1ED21tDgUgctExmm8Zs3kxYVJlH2XjhAthw7ZnWYDgxClzooRZ/XjyTXpqR0DEXxxoNrpGVWFufCFxkYBGcLknf/PQ/wClMSEH+Wtxb/yaTAgo/vywO97ddVP2r6TOtQwiI/jSHLg==
-Received: from AM0PR04CA0073.eurprd04.prod.outlook.com (2603:10a6:208:be::14)
- by DB8PR10MB3957.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:165::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.31; Wed, 19 Jun
- 2024 09:47:30 +0000
-Received: from AM2PEPF0001C714.eurprd05.prod.outlook.com
- (2603:10a6:208:be:cafe::24) by AM0PR04CA0073.outlook.office365.com
- (2603:10a6:208:be::14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.32 via Frontend
- Transport; Wed, 19 Jun 2024 09:47:30 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 139.15.153.205)
- smtp.mailfrom=de.bosch.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=de.bosch.com;
-Received-SPF: Pass (protection.outlook.com: domain of de.bosch.com designates
- 139.15.153.205 as permitted sender) receiver=protection.outlook.com;
- client-ip=139.15.153.205; helo=eop.bosch-org.com; pr=C
-Received: from eop.bosch-org.com (139.15.153.205) by
- AM2PEPF0001C714.mail.protection.outlook.com (10.167.16.184) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7677.15 via Frontend Transport; Wed, 19 Jun 2024 09:47:29 +0000
-Received: from SI-EXCAS2001.de.bosch.com (10.139.217.202) by eop.bosch-org.com
- (139.15.153.205) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Wed, 19 Jun
- 2024 11:47:18 +0200
-Received: from GRB-C-0009M.ot.de.bosch.com (10.139.217.196) by
- SI-EXCAS2001.de.bosch.com (10.139.217.202) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.39; Wed, 19 Jun 2024 11:47:18 +0200
-From: <mark.jonas@de.bosch.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <raj.khem@gmail.com>, Ricardo Simoes <ricardo.simoes@pt.bosch.com>, "Mark
- Jonas" <mark.jonas@de.bosch.com>
-Subject: [meta-oe][PATCH] magic-enum: add recipe
-Date: Wed, 19 Jun 2024 11:45:46 +0200
-Message-ID: <20240619094547.30863-1-mark.jonas@de.bosch.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@konsulko.com header.s=google header.b=W9UanZNE;
+ spf=pass (domain: konsulko.com, ip: 209.85.167.43, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-52cc5d5179aso2050082e87.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Jun 2024 05:20:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1718799625; x=1719404425; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=UxXmqI72wwOJsMHXgI1Zj5K6BUtuWibykjv6GnHMaBk=;
+        b=W9UanZNE65xs34Yvt0fX6XsYHIBqqrwKNCzpOIWruQg21cDkK7Xv53eZ08mz/Lnniq
+         VLXymlzqVzi663uC8r7LHiaMS6WCMJ5ScisRkZWspS3/C8APmGyeW6ZI7KH56oo4DPFl
+         aluao8RQLfhEI7hXCTW7HTS5KtndsWosCrxIw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1718799625; x=1719404425;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=UxXmqI72wwOJsMHXgI1Zj5K6BUtuWibykjv6GnHMaBk=;
+        b=EzbgmR5qo0hWevuQVrBpiomGZJnAMit+yJcy341ya2XpeRGj9DYCTD9udFvtz/inzX
+         Thw6yFOaQegTv3njcfwmfySYLzvkgl4hfjhn91gvELsyx20u/+KNUmAJnHBCWsZSapCY
+         yv6et8cCJmEZLcYZzWPbGH7BVVEDFfkyZWmpfQF3XmjRfFxk+bFtTWMDhprmqYma12A9
+         Eno9S6umN2ijLjoBunJSjXnEEI+AwF+jUy6LAdBYTGQQUGzMjO/n7AsCvWjExnB4YYZv
+         dPINqJ3eWiOTWUyPr/+h9TxQPBq/jhhgKLyiYtFxLQT9WV8tz8/2Mu5B1da3Y4lN4uFb
+         Xflg==
+X-Gm-Message-State: AOJu0YzWzM3LRN8OIM1w4zwOX/zl3gWGbEBWNDY2S4iCuO3TEKnC4MWP
+	GmshorxaQa5VlwKotEmt+tpCi+4VWKzc/mwlo5rYCr5p395qucUIP/xiz9iUl95B7Tv90sJgg0b
+	d
+X-Google-Smtp-Source: AGHT+IGJ7pEYLc752uXmMgQgx5tQy/+TuIVq7KOYOi9naga50fJRq4KgkNOOYI98QwCrP5PvSQwkig==
+X-Received: by 2002:a19:e01a:0:b0:52c:bd55:5b21 with SMTP id 2adb3069b0e04-52ccaa33e30mr1472300e87.24.1718799624961;
+        Wed, 19 Jun 2024 05:20:24 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-422874de62fsm266329885e9.38.2024.06.19.05.20.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 19 Jun 2024 05:20:24 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-paho-mqtt: Upgrade 2.0.0 -> 2.1.0
+Date: Wed, 19 Jun 2024 15:20:19 +0300
+Message-Id: <20240619122019.529213-3-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240619122019.529213-1-leon.anavi@konsulko.com>
+References: <20240619122019.529213-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-Originating-IP: [10.139.217.196]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM2PEPF0001C714:EE_|DB8PR10MB3957:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5528d2e8-7ebf-477f-4700-08dc9044d5e1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230037|1800799021|36860700010|82310400023|376011;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?ILeQmA0pVuw5iHU2SWqF3S/wc4MDgvBnNckEtfgfGQ+Mwz67OOI3Jrswrs83?=
- =?us-ascii?Q?gw/hBSRGwRbC7mr7Za6k37HBz483nmPypaSlcNLD+o1rLT2xebKgc1COp5IV?=
- =?us-ascii?Q?GE2m61wY1jneuX6ZMM6sxoC0aI2GYqxC+7Q6z0myYRnMJsB+kRXqkNu0fJ1y?=
- =?us-ascii?Q?zG6xxd9W4JlV/JoRggAY39uzZArkhPs8HSTSyTV76Rm1j7rAboV4GnjY2a/x?=
- =?us-ascii?Q?0tBEwdC6NkXM3446F+EeJ7c7d57QOa18ip6/bWHAdiTS6FhmUye5mb69MnpF?=
- =?us-ascii?Q?FJJj49SlsEdL6fnHv2mIaCvkSD09MoVVyGkZ+fBM/KYjcyL2bkKKnONdoZaF?=
- =?us-ascii?Q?rMqCjZs7znFUuODJ+SGZsfFXeCXQ2mwEiaOsZ4ko8Z7rcJPO01GpstSd3Z7j?=
- =?us-ascii?Q?hResbbJq0jBtdbnwMtG3UKr4qoZKC0w+M7yLQnbujzu+C7oFVHRKglZJf9zf?=
- =?us-ascii?Q?MPdN0G6+/mJef3keJHdImL50TdxCqDc9eFDWmqt8YsltzmOYdgUsnmQvD9OC?=
- =?us-ascii?Q?c/qXqcEKCL4T9yH660Ki8VNKXljYhxN52DqgV3GCkDxX5Uo8Zh8LU63KItyr?=
- =?us-ascii?Q?Y5oAaBqARfN1Vv5X0+lW9fXedg4XpPR8xYVTG1nHNklMvKM46+DZUha91cMi?=
- =?us-ascii?Q?/jC8HKqzoUFaJxgiWICkObLj8e/Shgcy9sEk2iGmiileu42k2lhFIc1Asd3V?=
- =?us-ascii?Q?6pRmHj6d1+QK06O/j423fXJ/N+GNRen/Zp60M8FPi0/kGHEaYYa5kf7J9Ia9?=
- =?us-ascii?Q?4UwX+i9hfqPNzobAJkR/YSvcgh0V9L1nxEw8slJIzXpQKGPT4lKYcFC1HcgI?=
- =?us-ascii?Q?XduZjmGn162cPre9JQ5AOJwIBTxymrWrrlbMSF4wO7C3xHE6CsZKfzBibgu7?=
- =?us-ascii?Q?XROwnFAObZnw67G087niPrVCo7zrjiAvPdmkx3ZtIMc84VT4vmgXKfvEsChE?=
- =?us-ascii?Q?15hBDBCRi/1cmA3XSVD+bCfei+Ugk85Rb7/up8WwwYoZvnZ9GMcxIPsqfndb?=
- =?us-ascii?Q?fa7WTKwhlQTYzVwSknk5kwqt0F+4okvVzHfrDqd/IDFeRq6s0jSAgyZW6p2v?=
- =?us-ascii?Q?dT7b24cHC/8SyI9BzieDMKQgtoUc3Yew2IzT/DoHwAwuMRJu7gmFucF+670T?=
- =?us-ascii?Q?OVSR2zMWkKEDWXj11sZsAkl4SQ5HpMDdCXk/Ey9zV80cZ7levo1b2Iy3mKqh?=
- =?us-ascii?Q?ldszJlh5fC/LeT5jPCW4hId5PnGSc5t7JeVHGOz/LTXbk0yZaycsGyPPEha4?=
- =?us-ascii?Q?wUb200sEvnd2HxktQoMeZmAn9WkxT1S8tDvOa7+YkQrgmQEbygKG18xlJ+/6?=
- =?us-ascii?Q?UkRXnrAEnnPe2MVwUFtpkFLKFfV19KF6veHY2LBh8238pxu5EAn2gdYEjcNW?=
- =?us-ascii?Q?Zz+xQOA=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:139.15.153.205;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:eop.bosch-org.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230037)(1800799021)(36860700010)(82310400023)(376011);DIR:OUT;SFP:1101;
-X-OriginatorOrg: de.bosch.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2024 09:47:29.9628
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5528d2e8-7ebf-477f-4700-08dc9044d5e1
-X-MS-Exchange-CrossTenant-Id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=0ae51e19-07c8-4e4b-bb6d-648ee58410f4;Ip=[139.15.153.205];Helo=[eop.bosch-org.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AM2PEPF0001C714.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR10MB3957
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 19 Jun 2024 09:47:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110963
+ <openembedded-devel@lists.openembedded.org>; Wed, 19 Jun 2024 12:20:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110966
 
-From: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
+Upgrade to release 2.1.0:
 
-magic-enum is a header-only C++17 library provides static reflection
-for enums, works with any enum type without any macro or boilerplate
-code.
+- Make transition from 1.x to 2.x version smoother
+- Fix "protocol" property
+- Fix publish() a bytearray payload
+- Fix some type annotations
+- Fix loop_stop() not stopping thread when called from callback
+- Fix some documentation errors
+- Add support for Unix socket
+- Fix flaky test
 
-Signed-off-by: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
-Signed-off-by: Mark Jonas <mark.jonas@de.bosch.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../magic-enum/magic-enum/run-ptest           | 27 ++++++++++++
- .../magic-enum/magic-enum_0.9.5.bb            | 44 +++++++++++++++++++
- 2 files changed, 71 insertions(+)
- create mode 100644 meta-oe/recipes-extended/magic-enum/magic-enum/run-ptes=
-t
- create mode 100644 meta-oe/recipes-extended/magic-enum/magic-enum_0.9.5.bb
+ ...{python3-paho-mqtt_2.0.0.bb => python3-paho-mqtt_2.1.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-paho-mqtt_2.0.0.bb => python3-paho-mqtt_2.1.0.bb} (80%)
 
-diff --git a/meta-oe/recipes-extended/magic-enum/magic-enum/run-ptest b/met=
-a-oe/recipes-extended/magic-enum/magic-enum/run-ptest
-new file mode 100644
-index 000000000..865da9f69
---- /dev/null
-+++ b/meta-oe/recipes-extended/magic-enum/magic-enum/run-ptest
-@@ -0,0 +1,27 @@
-+#!/bin/sh
-+
-+# SPDX-FileCopyrightText: 2024 Bosch Sicherheitssysteme GmbH
-+#
-+# SPDX-License-Identifier: MIT
-+
-+fail_count=3D0
-+all_count=3D0
-+
-+for test_suite in tests/test_*
-+do
-+    if "./$test_suite"
-+    then
-+        echo "PASS: $test_suite"
-+    else
-+        echo "FAIL: $test_suite"
-+        fail_count=3D$((fail_count + 1))
-+    fi
-+    all_count=3D$((all_count + 1))
-+done
-+
-+if [ $fail_count -eq 0 ]
-+then
-+    echo "PASS: All $all_count tests passed"
-+else
-+    echo "FAIL: $fail_count of $all_count tests failed"
-+fi
-diff --git a/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.5.bb b/meta=
--oe/recipes-extended/magic-enum/magic-enum_0.9.5.bb
-new file mode 100644
-index 000000000..096f869c3
---- /dev/null
-+++ b/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.5.bb
-@@ -0,0 +1,44 @@
-+# SPDX-FileCopyrightText: 2024 Bosch Sicherheitssysteme GmbH
-+#
-+# SPDX-License-Identifier: MIT
-+
-+SUMMARY =3D "Static reflection for enums"
-+DESCRIPTION =3D "Header-only C++17 library provides static reflection for =
-enums, works \
-+with any enum type without any macro or boilerplate code."
-+BUGTRACKER =3D "https://github.com/Neargye/magic_enum/issues"
-+HOMEPAGE =3D "https://github.com/Neargye/magic_enum"
-+
-+LICENSE =3D "MIT"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Db15f48588464ec8ef87d2b560aad2ca=
-a"
-+
-+SRC_URI =3D " \
-+    git://github.com/Neargye/magic_enum.git;protocol=3Dhttps;branch=3Dmast=
-er \
-+    file://run-ptest \
-+"
-+
-+SRCREV =3D "e55b9b54d5cf61f8e117cafb17846d7d742dd3b4"
-+S =3D "${WORKDIR}/git"
-+
-+inherit cmake ptest
-+
-+EXTRA_OECMAKE =3D "\
-+    -DMAGIC_ENUM_OPT_BUILD_EXAMPLES=3DOFF \
-+"
-+
-+do_install_ptest () {
-+    install -d ${D}${PTEST_PATH}/tests
-+    install -m 0755 ${B}/test/test_* ${D}${PTEST_PATH}/tests
-+}
-+
-+# Add catkin and colcon (ROS build system) support
-+FILES:${PN}-dev +=3D "\
-+    ${datadir}/magic_enum/package.xml \
-+"
-+
-+# Header-only library
-+# ${PN} is empty so we need to tweak -dev and -dbg package dependencies
-+RDEPENDS:${PN}-dev =3D ""
-+RDEPENDS:${PN}-ptest =3D ""
-+RRECOMMENDS:${PN}-dbg =3D "${PN}-dev (=3D ${EXTENDPKGV})"
-+
-+BBCLASSEXTEND =3D "native nativesdk"
---=20
-2.34.1
+diff --git a/meta-python/recipes-devtools/python/python3-paho-mqtt_2.0.0.bb b/meta-python/recipes-devtools/python/python3-paho-mqtt_2.1.0.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-paho-mqtt_2.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-paho-mqtt_2.1.0.bb
+index e4cf77a13..0c3e6e926 100644
+--- a/meta-python/recipes-devtools/python/python3-paho-mqtt_2.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-paho-mqtt_2.1.0.bb
+@@ -7,9 +7,9 @@ SRCNAME = "paho-mqtt"
+ 
+ inherit pypi python_hatchling python_setuptools_build_meta
+ 
+-SRC_URI[sha256sum] = "13b205f29251e4f2c66a6c923c31fc4fd780561e03b2d775cff8e4f2915cf947"
++SRC_URI[sha256sum] = "12d6e7511d4137555a3f6ea167ae846af2c7357b10bc6fa4f7c3968fc1723834"
+ 
+-PYPI_SRC_URI = "https://files.pythonhosted.org/packages/73/b7/a4df0f93bbdae237e16ba402752151eceee576cbe80c235a2475fbf81eea/paho_mqtt-${PV}.tar.gz"
++PYPI_SRC_URI = "https://files.pythonhosted.org/packages/39/15/0a6214e76d4d32e7f663b109cf71fb22561c2be0f701d67f93950cd40542/paho_mqtt-${PV}.tar.gz"
+ 
+ S = "${WORKDIR}/paho_mqtt-${PV}"
+ 
+-- 
+2.39.2
 
 
