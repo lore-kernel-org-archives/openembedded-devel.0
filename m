@@ -1,103 +1,271 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CDDE5C2BA15
-	for <webhook@archiver.kernel.org>; Wed, 19 Jun 2024 08:45:01 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.web11.16073.1718786694995576600
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6E0DC27C53
+	for <webhook@archiver.kernel.org>; Wed, 19 Jun 2024 09:23:02 +0000 (UTC)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+ by mx.groups.io with SMTP id smtpd.web10.16738.1718788974262493062
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Jun 2024 01:44:55 -0700
+ Wed, 19 Jun 2024 02:22:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=JbMu79+K;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4218314a6c7so53852295e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Jun 2024 01:44:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hxrJD8ik;
+ spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-a6f09eaf420so756244166b.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Jun 2024 02:22:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1718786693; x=1719391493; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1718788972; x=1719393772; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=+ybMY2mgsdJEFBMfbxORhiax/EmhvMgLL2Q/TW1hrZs=;
-        b=JbMu79+K6I/M04GHrtdnF8+zdRUvq9FcvQFun2drBR+0NHFE+qRI/5OcZZKevUIvwy
-         QrYBUcOx5rrvsVBjDvlb1NEAil4M0yLc+0nX8Zz+oVZUXZRRX+jmuG+0molHrMbuPwKP
-         6qUajkYUBkmHLB4byu2dkL1ytGKfIngJaouqW27zvQn0S6db0Xf0UKm80jXzFXD3FIoQ
-         zfnmtqhY4XNhffkWvcb+ae/JdMmO4MIrjjrfhxaZSEGWZzLvSRGL8BlHmXFg4NJk4Fje
-         9DqnT+nUZob/gTJif3i/3jLsjxlChGWTreJ5k9MhC/gIa3OUT6x2ho79ClBEFA4nY3h2
-         aF0A==
+        bh=V8KFPJZ/HUHYgGuPk1S4QVIIZXUglYqRNockeQ/zURU=;
+        b=hxrJD8ikexlt0UuZH014HybDlMJWJ1pWBnd3rIPmJbQQz5RMunFU8LBuse9qmNOJ6B
+         9DHChpnkNkiT5bFMdcFjFKYu83pSavLqmG/Id/xzUGC22Icj1ZMLQvvVphSot5k/Tcn0
+         64SOeEd5VHn0pSXVGombdKY8pYhV81Gqjyhh9hwbvlquaq69U9G3skDHh1h0hpXGth5O
+         E5XvjQeWqqvpd4l432gpYdygGpNB7xo3gWK2qVjNyJxBYgbyBGkYPiMbXDObf+WjhK7p
+         1kj8BfwgFcYgsp6EBrav7tkGN2/OUOT+rj5D8HYonah0uwas7vBrZe/UMimrkZc8ZclE
+         Ln4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718786693; x=1719391493;
+        d=1e100.net; s=20230601; t=1718788972; x=1719393772;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=+ybMY2mgsdJEFBMfbxORhiax/EmhvMgLL2Q/TW1hrZs=;
-        b=DdLgtZYkmeBa5RW7iIPfIdaYKgbWdDdla/xfs1Lj8dIoSPMIHqjHLSRa/w1C6PcbeS
-         ALqDCwt7/Jtum2pDaO5rf6Y2JkrOyluGeMxTvCQOcsCN5QqvlZMVw4owWA/SrI5Muffx
-         WCaZJ27IcMHz9qfYB1MoymqVS2dKcwVj73xAe6AqPYFzsnvjvIW3GlxB8eDVZ7qNwA9D
-         IIk9CtAxaYzz7PV8V1wIvITTO95bhYJZ2DXWMH7ziWkFKPEIemX2LJAyg9JuWWn57Ii1
-         4GeAR/cR7M3fKRitJg+n3XAnVgOZKQYynoiWc3XilThZzowVlT93WnCIWMBVifqQHiby
-         4KeQ==
-X-Gm-Message-State: AOJu0Yy8Qk7AIp90+IglHVIEuNUnLeSPvY+dFuX+eWhGMvpgcePbNrUK
-	eLcbbdDCgS/QGdjVEThbCjM0KXT8QCoRfGgWiOLO9C6XYGyeGb5+bw5wrw==
-X-Google-Smtp-Source: AGHT+IE4pKf1DqyHst38t1/6Xp4reEseUP4aoX0mm17DEbyvo36Bs8f2dcamEdBYYtZoy5aLH/P7lA==
-X-Received: by 2002:a05:600c:22c9:b0:421:a575:99c9 with SMTP id 5b1f17b1804b1-42475180a22mr12205155e9.20.1718786693035;
-        Wed, 19 Jun 2024 01:44:53 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4246bddc59bsm82765335e9.5.2024.06.19.01.44.52
+        bh=V8KFPJZ/HUHYgGuPk1S4QVIIZXUglYqRNockeQ/zURU=;
+        b=gDKqBjYCp45CHZ60ARwRr+6ZNJA3WjoBmJ3b0VyGOhH2PDNMZYdsxGC/Tq8Kk0Ihvx
+         Pj/qBXnKcqG/eazH730k2YEHBXaTO7qLZ9lf1XGvDWuSm1KN7uohvZ6/tnGI/67eTbuj
+         LWkdL6Yesh7Zozrtf8o4tY/kpsfVYOLQLpn1Tgp1Q4UoNuXz63NeVh8RbXGUwTHmSxOb
+         +QA7EF++dULKHeTfb5WEyjEe83+MpydWqtErAILgMT3el7DqaiifCLO1Er9prMHqLkMc
+         fI1vuMiGMU6EM3290MEAOqYdm/RsbBQCCjm9M+1/MmCepqYHmmUyXe9L7GAyUTdgY9Xp
+         qFUw==
+X-Gm-Message-State: AOJu0Yz/OQ5XHH9tcp9VuVLP18WDOOlJQzSeMQBvw2oE6Jsh6yny/R+t
+	tK5/98q6HRhb6f0SjtnNMPn2XTXU08OZcgbKES6gOBrQxSIDCRxIaOM4LQ==
+X-Google-Smtp-Source: AGHT+IHbgV8IOEn+w2zyOpybjY8OU9pO17EkLDFLBIRt4OxlQ4UnBmb4fwFpoRl9TCc9hNTaif9ZpQ==
+X-Received: by 2002:a17:906:fe4d:b0:a6f:4b7d:599b with SMTP id a640c23a62f3a-a6fab64869dmr144131766b.33.1718788972372;
+        Wed, 19 Jun 2024 02:22:52 -0700 (PDT)
+Received: from Zen2.lab.linutronix.de. (drugstore.linutronix.de. [80.153.143.164])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-360750ad082sm16398708f8f.59.2024.06.19.02.22.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Jun 2024 01:44:52 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+        Wed, 19 Jun 2024 02:22:52 -0700 (PDT)
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+X-Google-Original-From: Alexander Kanavin <alex@linutronix.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] lvgl: install lv_conf.h in ${includedir}/${BPN}
-Date: Wed, 19 Jun 2024 10:44:42 +0200
-Message-ID: <20240619084442.68331-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.45.2
+Cc: Alexander Kanavin <alex@linutronix.de>
+Subject: [PATCH] libnewt: add from oe-core
+Date: Wed, 19 Jun 2024 11:22:48 +0200
+Message-Id: <20240619092248.2800247-1-alex@linutronix.de>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 19 Jun 2024 08:45:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110961
+ <openembedded-devel@lists.openembedded.org>; Wed, 19 Jun 2024 09:23:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110962
 
-* with multilib lib32-lvgl installs all headers except lv_conf.h into:
-  ${includedir}/lvgl only lv_conf.h ends in ${includedir}/lib32-lvgl/
-  which is wrong and not included in any includepaths:
-
-  $ cat lib32-lvgl/9.1.0/image/usr/lib32/pkgconfig/lvgl.pc
-  prefix="/usr"
-  includedir="${prefix}/include/lvgl"
-  libdir=${prefix}/lib
-
-  Name: lvgl
-  Description: Light and Versatile Graphics Library
-  URL: https://lvgl.io/
-  Version: 9.1.0
-  Cflags: -I${includedir}
-  Libs: -L${libdir} -llvgl
-
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ---
- meta-oe/recipes-graphics/lvgl/lvgl_9.1.0.bb | 7 +------
- 1 file changed, 1 insertion(+), 6 deletions(-)
+ .../0001-detect-gold-as-GNU-linker-too.patch  | 29 ++++++++++
+ ...tinfo-library-to-the-linking-librari.patch | 26 +++++++++
+ .../newt/files/cross_ar.patch                 | 56 +++++++++++++++++++
+ .../recipes-extended/newt/libnewt_0.52.24.bb  | 56 +++++++++++++++++++
+ 4 files changed, 167 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/newt/files/0001-detect-gold-as-GNU-linker-too.patch
+ create mode 100644 meta-oe/recipes-extended/newt/files/Makefile.in-Add-tinfo-library-to-the-linking-librari.patch
+ create mode 100644 meta-oe/recipes-extended/newt/files/cross_ar.patch
+ create mode 100644 meta-oe/recipes-extended/newt/libnewt_0.52.24.bb
 
-diff --git a/meta-oe/recipes-graphics/lvgl/lvgl_9.1.0.bb b/meta-oe/recipes-graphics/lvgl/lvgl_9.1.0.bb
-index 4435c40777..63c810d74d 100644
---- a/meta-oe/recipes-graphics/lvgl/lvgl_9.1.0.bb
-+++ b/meta-oe/recipes-graphics/lvgl/lvgl_9.1.0.bb
-@@ -24,10 +24,5 @@ S = "${WORKDIR}/git"
- require lv-conf.inc
- 
- do_install:append() {
--    install -d "${D}${includedir}/${PN}"
--    install -m 0644 "${S}/lv_conf.h" "${D}${includedir}/${PN}/lv_conf.h"
-+    install -m 0644 "${S}/lv_conf.h" "${D}${includedir}/${BPN}/lv_conf.h"
- }
--
--FILES:${PN}-dev += "\
--    ${includedir}/${PN}/ \
--    "
+diff --git a/meta-oe/recipes-extended/newt/files/0001-detect-gold-as-GNU-linker-too.patch b/meta-oe/recipes-extended/newt/files/0001-detect-gold-as-GNU-linker-too.patch
+new file mode 100644
+index 000000000..090ed5c1c
+--- /dev/null
++++ b/meta-oe/recipes-extended/newt/files/0001-detect-gold-as-GNU-linker-too.patch
+@@ -0,0 +1,29 @@
++From 08ba909500412611953aea0fa2fe0d8fe76b6e24 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Wed, 21 Sep 2016 21:14:40 +0200
++Subject: [PATCH] detect gold as GNU linker too
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Upstream-Status: Pending
++
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
++
++---
++ configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index 468c718..cd93f30 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -28,7 +28,7 @@ AC_CHECK_SIZEOF([void *])
++ AC_MSG_CHECKING([for GNU ld])
++ LD=$($CC -print-prog-name=ld 2>&5)
++ 
++-if test $($LD -v 2>&1 | $ac_cv_path_GREP -c "GNU ld") = 0; then
+++if test $($LD -v 2>&1 | $ac_cv_path_GREP -c "GNU ") = 0; then
++   # Not
++   GNU_LD=""
++   AC_MSG_RESULT([no])
+diff --git a/meta-oe/recipes-extended/newt/files/Makefile.in-Add-tinfo-library-to-the-linking-librari.patch b/meta-oe/recipes-extended/newt/files/Makefile.in-Add-tinfo-library-to-the-linking-librari.patch
+new file mode 100644
+index 000000000..bc55582fd
+--- /dev/null
++++ b/meta-oe/recipes-extended/newt/files/Makefile.in-Add-tinfo-library-to-the-linking-librari.patch
+@@ -0,0 +1,26 @@
++From fad40cfc18a42946a9a9e440c3434cd6b847ff9d Mon Sep 17 00:00:00 2001
++From: Otavio Salvador <otavio@ossystems.com.br>
++Date: Mon, 18 Jan 2016 17:05:19 +0000
++Subject: [PATCH] Makefile.in: Add tinfo library to the linking libraries
++Organization: O.S. Systems Software LTDA.
++
++Upstream-Status: Pending
++
++Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
++---
++ Makefile.in | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Makefile.in b/Makefile.in
++index a85d00f..98b85f9 100644
++--- a/Makefile.in
+++++ b/Makefile.in
++@@ -1,4 +1,4 @@
++-LIBS = -lslang @LIBS@
+++LIBS = -lslang -ltinfo @LIBS@
++ LIBTCL = @TCL_LIB_FLAG@
++ 
++ CC = @CC@
++-- 
++2.1.4
++
+diff --git a/meta-oe/recipes-extended/newt/files/cross_ar.patch b/meta-oe/recipes-extended/newt/files/cross_ar.patch
+new file mode 100644
+index 000000000..86cc0be1d
+--- /dev/null
++++ b/meta-oe/recipes-extended/newt/files/cross_ar.patch
+@@ -0,0 +1,56 @@
++Fix cross link using autoconf detected AR
++
++If building on 32bit host and creating 64bit libraries, the target
++package builds should not invoke the 32bit hosts's ar.  Specifically
++you will get an error message like:
++
++x86_64-linux-gcc    -m64 --sysroot=/opt/qemux86-64/tmp/sysroots/qemux86-64 -g -o test test.o libnewt.a -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -lslang
++libnewt.a: could not read symbols: Archive has no index; run ranlib to add one
++collect2: error: ld returned 1 exit status
++
++Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
++
++Upstream-Status: Pending
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ Makefile.in  | 3 ++-
++ configure.ac | 4 ++++
++ 2 files changed, 6 insertions(+), 1 deletion(-)
++
++Index: newt-0.52.20/Makefile.in
++===================================================================
++--- newt-0.52.20.orig/Makefile.in
+++++ newt-0.52.20/Makefile.in
++@@ -7,6 +7,7 @@ CFLAGS = @CFLAGS@
++ LDFLAGS = @LDFLAGS@
++ CPPFLAGS = -D_GNU_SOURCE @CPPFLAGS@
++ GNU_LD = @GNU_LD@
+++AR = @AR@
++ 
++ VERSION = @VERSION@
++ TAG = r$(subst .,-,$(VERSION))
++@@ -109,7 +110,7 @@ whiptcl.$(SOEXT): $(WHIPTCLOBJS) $(LIBNE
++ 	$(CC) -shared $(SHCFLAGS) $(LDFLAGS) -o whiptcl.$(SOEXT) $(WHIPTCLOBJS) -L. -lnewt  $(LIBTCL) -lpopt $(LIBS)
++ 
++ $(LIBNEWT): $(LIBOBJS)
++-	ar rv $@ $^
+++	$(AR) rv $@ $^
++ 
++ newt.o $(SHAREDDIR)/newt.o: newt.c Makefile
++ 
++Index: newt-0.52.20/configure.ac
++===================================================================
++--- newt-0.52.20.orig/configure.ac
+++++ newt-0.52.20/configure.ac
++@@ -15,6 +15,10 @@ AC_PROG_INSTALL
++ AC_PROG_LN_S
++ AC_PROG_GREP
++ AC_SYS_LARGEFILE
+++AN_MAKEVAR([AR], [AC_PROG_AR])
+++AN_PROGRAM([ar], [AC_PROG_AR])
+++AC_DEFUN([AC_PROG_AR], [AC_CHECK_TOOL(AR, ar, :)])
+++AC_PROG_AR
++ 
++ AC_CHECK_SIZEOF([long])
++ AC_CHECK_SIZEOF([long long])
+diff --git a/meta-oe/recipes-extended/newt/libnewt_0.52.24.bb b/meta-oe/recipes-extended/newt/libnewt_0.52.24.bb
+new file mode 100644
+index 000000000..1e39a1c5c
+--- /dev/null
++++ b/meta-oe/recipes-extended/newt/libnewt_0.52.24.bb
+@@ -0,0 +1,56 @@
++SUMMARY = "A library for text mode user interfaces"
++
++DESCRIPTION = "Newt is a programming library for color text mode, widget based user \
++interfaces.  Newt can be used to add stacked windows, entry widgets, \
++checkboxes, radio buttons, labels, plain text fields, scrollbars, \
++etc., to text mode user interfaces.  This package also contains the \
++shared library needed by programs built with newt, as well as a \
++/usr/bin/dialog replacement called whiptail.  Newt is based on the \
++slang library."
++
++HOMEPAGE = "https://releases.pagure.org/newt/"
++SECTION = "libs"
++
++LICENSE = "LGPL-2.0-only"
++LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
++
++# slang needs to be >= 2.2
++DEPENDS = "slang popt python3"
++
++SRC_URI = "https://releases.pagure.org/newt/newt-${PV}.tar.gz \
++           file://cross_ar.patch \
++           file://Makefile.in-Add-tinfo-library-to-the-linking-librari.patch \
++           file://0001-detect-gold-as-GNU-linker-too.patch \
++           "
++
++SRC_URI[sha256sum] = "5ded7e221f85f642521c49b1826c8de19845aa372baf5d630a51774b544fbdbb"
++
++S = "${WORKDIR}/newt-${PV}"
++
++inherit autotools-brokensep python3native python3-dir python3targetconfig
++
++EXTRA_OECONF = "--without-tcl --with-python"
++
++EXTRA_OEMAKE += "PYTHONVERS=${PYTHON_DIR}"
++
++CLEANBROKEN = "1"
++
++export CPPFLAGS
++
++PACKAGES:prepend = "whiptail ${PN}-python "
++
++RDEPENDS:${PN}-python += "python3-core"
++FILES:${PN}-python = "${PYTHON_SITEPACKAGES_DIR}/*"
++
++do_configure:prepend() {
++    sh autogen.sh
++}
++
++do_compile:prepend() {
++    # Make sure the recompile is OK
++    rm -f ${B}/.depend
++}
++
++FILES:whiptail = "${bindir}/whiptail"
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
-2.45.2
+2.39.2
 
 
