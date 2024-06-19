@@ -1,558 +1,165 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <Haixiao.Yan.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AAB0FC27C4F
-	for <webhook@archiver.kernel.org>; Wed, 19 Jun 2024 00:34:59 +0000 (UTC)
-Received: from mail-yw1-f171.google.com (mail-yw1-f171.google.com [209.85.128.171])
- by mx.groups.io with SMTP id smtpd.web10.9729.1718757289836758402
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83A37C27C53
+	for <webhook@archiver.kernel.org>; Wed, 19 Jun 2024 07:12:11 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.15035.1718781127470016929
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Jun 2024 17:34:50 -0700
+ Wed, 19 Jun 2024 00:12:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LVB+tc/Z;
- spf=pass (domain: gmail.com, ip: 209.85.128.171, mailfrom: ticotimo@gmail.com)
-Received: by mail-yw1-f171.google.com with SMTP id 00721157ae682-63127fc434aso50973127b3.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Jun 2024 17:34:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1718757289; x=1719362089; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=nv7fXcGvwNnYs0s32BOXZIqW6fkIBbNqI+eA6FVs/Zg=;
-        b=LVB+tc/Z08AgT+uemBfG9Cd35u94alZ1JCyVOHlomXujziGusBwQNs0gJpDJhu+etm
-         0PXMDZB1DSmgk6a0xILX0I36iEFX58SlCMsCm/VQHSjPaIgBeZ20qMDcoKN92jpt5OlK
-         haG3uWZit4RL7CZ3msRxC9Yx6bqCkhXyN4A2rv1qfQDVNpdZmyzykxoQomsCTm+ppPGB
-         xKnbjnENi8RLK7YSWFyNpQ9wNHtHHWYitl1wAkCCgHnqygNkXmdu5VaS9zkqXAVbsK5h
-         nqbYLI9nIOyOr3Jd2GCw6qKn0feIOramxJr1XnodULAAuEK943CdzdgY2Ziew860VWxr
-         KhUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718757289; x=1719362089;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=nv7fXcGvwNnYs0s32BOXZIqW6fkIBbNqI+eA6FVs/Zg=;
-        b=u4aOhsCL3++l3epVLgVXBOZ7s/uoHkDxYIw1ZUO5a+OMgz8xSxf9oL1tu/F0byGVV8
-         J8biL0CFGCEeYHEImEA2OURmXbKeNKpWhk0DgqEwiwA6uu4r9TWVDscBtqI+5W/yXKKB
-         Rs0ibpjeS/az4KhNtSGUmktxWByOsDRmittdQl4iZ1FMi5V3e3gus7DHIjGf24Oh/Yu4
-         WTaYuZsKYBaIgXA1q+RDWt9+aNV6pFc+1E/UJE0Ov3BoD6RLKHGRwVE+qEvwOv/u9tVp
-         epu2fB9B5yrjhcmKMJ7QVyKo15I4Sg1lpM96n3u5xZiAMTJK143geAZD11/jPlPnt6t1
-         bilg==
-X-Forwarded-Encrypted: i=1; AJvYcCXD+dBf0YdJl43amiwTtkmMalnDlPCbN7nHTwRfJZIW1ftNpDqQgex4yRmYZ+ryuf63QEnS0QTpHm3B+t6b/2lnQbIoX9jNAVRIPAOGQ2KIT9NBpQw5AfRyZQ==
-X-Gm-Message-State: AOJu0YxavCpUOw3ZpyjfyeMiF9DMAxPsypvf4CzdgFOF4JTeogdzsIVp
-	PuqRFRjJv6JoreD2niFQVWZIJi/tuTLUjXiSRUz3ljHX+98tTzOY5QUiEcFWm/iphVYsgPRPPFz
-	qcdOx028v9gqxTGGOTCTa6bmnlQY=
-X-Google-Smtp-Source: AGHT+IEhRWO8HMjiFsdj8v0l9N587ggHkhO3gE+yCi4uIO4UA4wtR97P5FZw2F1QmDnlhOuCdHWLgh4A3FJhiz+l/Oc=
-X-Received: by 2002:a81:f001:0:b0:615:10f8:124a with SMTP id
- 00721157ae682-63a8e0e3160mr12163647b3.29.1718757288732; Tue, 18 Jun 2024
- 17:34:48 -0700 (PDT)
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=6900432da4=haixiao.yan.cn@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45J5gBa9031850
+	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Jun 2024 07:12:06 GMT
+Received: from nam10-mw2-obe.outbound.protection.outlook.com (mail-mw2nam10lp2044.outbound.protection.outlook.com [104.47.55.44])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3yujbdra61-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Jun 2024 07:12:06 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=VzsracazS66Qp0vVQiIiN+jgXrJwRiaaImPdG5gzyL+5KaBhprHVvv7rcQJNNhQj7Kf4aY6uvU95PD/pHxfH07H4X6P3RxDr/jVO6H08NlDvrMOfx/SkVCuZ3gUM2f0Jeneje1cj5UiogNvccYqR0VdZxB/jgp5qMYDLW9od9vv5B+3H2rrJ0D/SxSH4IhaUPliPFJwuPti15ntGHRX5YO30WCXu06HpJgbB5o9ZULsA6SGVlq/utOMRwgsE42lxOGfByVTh+zaHl7RdNMCYTxbQMg/QtiEiN4ptHkvO1CFBp6BTMQ9dMc3r9zmwnMpCSBXLq7+TIrHpxHzotdpTLA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=58zmHd0bKMXQJJ0B/7kVcoM1VJUL4Vw+kd7j605IX5M=;
+ b=YolVYQxNJK1jZJG9wg/V0NRsQtd3VG550Lz+01EhZrkcfW0PL565DMj8qsUPFpNu397Zr2zLdaCwmJYdiajh/b13lMJprItvtnHiu1q+mZmj9R6sV11mO7bLuAqKRdsCe/cJUd3nstqB84QNJxVyRzFHalUYADzAbP5agSCwY0OCIiqMjc0x7pibcFnsXYO8CvK6P7iuTQdGH9fiLIJ09u7toMsI4bnBRHGIoCGvoOAcgc8+cP847ytAMVNiGxYzdpEVBKd1SBdin74EIVwh4V5aue95cgRuTBlfLgvxxIqbkyc41sH3P/QT6YkCoMvJoH8Uy5At9lAMvyRWN6qdnA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from IA1PR11MB6417.namprd11.prod.outlook.com (2603:10b6:208:3ab::13)
+ by SN7PR11MB7590.namprd11.prod.outlook.com (2603:10b6:806:348::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.19; Wed, 19 Jun
+ 2024 07:12:03 +0000
+Received: from IA1PR11MB6417.namprd11.prod.outlook.com
+ ([fe80::fe57:61ca:7119:ccf7]) by IA1PR11MB6417.namprd11.prod.outlook.com
+ ([fe80::fe57:61ca:7119:ccf7%4]) with mapi id 15.20.7677.030; Wed, 19 Jun 2024
+ 07:12:03 +0000
+From: haixiao.yan.cn@windriver.com
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][kirkstone][PATCH] python3-pyyaml-include: support native and nativesdk build
+Date: Wed, 19 Jun 2024 15:11:40 +0800
+Message-Id: <20240619071140.1908305-1-haixiao.yan.cn@windriver.com>
+X-Mailer: git-send-email 2.34.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SI2P153CA0035.APCP153.PROD.OUTLOOK.COM
+ (2603:1096:4:190::14) To IA1PR11MB6417.namprd11.prod.outlook.com
+ (2603:10b6:208:3ab::13)
 MIME-Version: 1.0
-References: <20240617191342.2360052-1-Randy.MacLeod@windriver.com>
- <CANx9H-DUPrkCGV9neBKQL+f-SkVyLzdooQnC2zt7BLPFA7bxwg@mail.gmail.com>
- <5f1edf15-1554-4d6d-a4cc-e1decd194da8@windriver.com> <7193adf3-3f0a-4579-b1c5-336a59f859e7@windriver.com>
-In-Reply-To: <7193adf3-3f0a-4579-b1c5-336a59f859e7@windriver.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Tue, 18 Jun 2024 17:34:37 -0700
-Message-ID: <CANx9H-B4KEib+yx=xMaSiC2iAbuLnGGqRNaZ526-xanPXqfG5A@mail.gmail.com>
-Subject: Re: [oe] [meta-python][scarthgap][PATCH] python3-pyyaml-include:
- support native and nativesdk build
-To: Randy MacLeod <randy.macleod@windriver.com>
-Cc: akuster808@gmail.com, openembedded-devel@lists.openembedded.org, 
-	Trevor Gamblin <tgamblin@baylibre.com>
-Content-Type: multipart/alternative; boundary="000000000000a6c6e0061b335dc4"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: IA1PR11MB6417:EE_|SN7PR11MB7590:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0a400783-38e6-41b1-8741-08dc902f1e6f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230037|52116011|376011|366013|1800799021|38350700011;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?ZePjaOSpEyjsbT2V5f8w25nAgiN7WD0cQvpK/pURFLLjDsN1QdA2NLfdRWBs?=
+ =?us-ascii?Q?QEOzU4RtCpKM0OOWon9I96lVumir9jeA/yJ5z4olFScZJmMRiqx3U7XMZijr?=
+ =?us-ascii?Q?AkQIsfgOjVCQB77pk3+w6a9L9j0F8fvM2mY/l6XB5F8Vvy+ku3Z4p/o2vM2u?=
+ =?us-ascii?Q?+3J6zivtOid2r7A+QimaWJ0yTIA5f3rFikP36XEx3iaDlxlgBfRZ8oRTQgU8?=
+ =?us-ascii?Q?JlE0NDij48TsrCytyctIki7XBkvnXZfwiCdKVjlKVCDKHvLJsleSbDV9ex7U?=
+ =?us-ascii?Q?mA6yHW+PVhezHk/TdNPYZXVVOgrQHUsx/tfDxW6WcJXFGzi4hJLnQOLHp3Sw?=
+ =?us-ascii?Q?33wpRlyOrYOJVBebY8iGmluAdObsEfRq31iVgR1c3TxhiRIjeyry1eUH+VPZ?=
+ =?us-ascii?Q?HNHj10Bcuh0U33A1a3YG0OXNKfohOMgfpZTJprjHx3rChqxRyfzDFYG8Qx8B?=
+ =?us-ascii?Q?2dXh8Ww3N8UgKlKD4zRCfJz3nbYTszr7Cpk/aX3ruQPlnnFjjELe9DErObGd?=
+ =?us-ascii?Q?Lh+Y3qz2463RSJq4/2lh9QItZNsrxdUHr1DnMbZnNewa3EQNAg4yCm5ogPqc?=
+ =?us-ascii?Q?6kAYXgU83CVqaVcxcCDjO/OPaq3Xcpsmb8ABRLNMvAcH5W8cS5QesYb2GkOt?=
+ =?us-ascii?Q?+W8AAIfs0HHdFGDJ+uU2K6+YVj+k0xTr4QGeKuHluc4K9IMNS7FEs+DatpSc?=
+ =?us-ascii?Q?fRTbpMPY3tCwFXyz2fAQML2IHYTKrazIb9jxpoZ7gFvVmAPSyUZ6feeDjzY4?=
+ =?us-ascii?Q?0rY0LmbhRVLea1dJJhs6tV5XkJYwG0p6CpyScjRvZKuYL/cqi1MTnvQIGfDq?=
+ =?us-ascii?Q?moGTIRhC2hLfFcByobP6Nw452h2CVXgs1LPUaVYJKek/NRQHtFB7fz5ISxY0?=
+ =?us-ascii?Q?1od4ld+V8Kq+2qyeMABnJC9Bg6RJfEGiSwIM2EVlUpkL10JuYBrTmEphyRfu?=
+ =?us-ascii?Q?ehAYscz/SVK3wOoEFLs46Hdin2p78/6Un3cMGQ9VIdXV31PNvcpsuVGGtFAM?=
+ =?us-ascii?Q?KtELDLAgKdtTBDm22SLmIsSKuaZsMXcUGtDyxCpFTYB95fQTvFuFPXiriQEA?=
+ =?us-ascii?Q?53CcEzcrBE1thNVjxDphxK4fG6jrp/eD7Em+rVfnu1DL6sJAetkDk95kF0xG?=
+ =?us-ascii?Q?7hXeG97GyuNpnjh+ZaV2tcv0HLz0hMOznD05DXb97UIox/knkNY57HgBWUIq?=
+ =?us-ascii?Q?Ulqno1UBN/2NYia0dG9j/oAhpxbaOas/Rrf3iYnwH5FNkz49lMwWUq5qsc1C?=
+ =?us-ascii?Q?/VGkvL39gq2Yz8RPc7gsk8GlPdMNORyNE5p1n6fYvxTZK+bZod/aa3YiMQxC?=
+ =?us-ascii?Q?mKbMrXJqH3Hm8RLt5ApKsyyTDgIBUDDntIeM4ALyupACGuT0Lw4D/Z5u+1zf?=
+ =?us-ascii?Q?ZGgv1cI=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA1PR11MB6417.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230037)(52116011)(376011)(366013)(1800799021)(38350700011);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?X1iS2bOKnwtSI4Y45cF2yM2XdCTk/X4ZOyDTDJlJuyc/w7iabT+yzdKBKd7i?=
+ =?us-ascii?Q?RYpI1cjWaXUFrFV+N1Qmey8hDz2xkaEujxmVpAWUe557wdcarK2moqrS9qxY?=
+ =?us-ascii?Q?sos7k5PDj2Qsde6pgNHqZfiFzByUg24f4zFekekkyjxWy8mqxw3I+uAKpIw2?=
+ =?us-ascii?Q?cCNjMDgms+PiJjLEfFPDi8gmM8HIWc/34HtscwTNIJNVo1tgru1f10WH8Awp?=
+ =?us-ascii?Q?tuu36NI654HfcOWRKviHIgAtHnAUHDW1WobR0oToxKxDDQBKg8wNYD/TG01P?=
+ =?us-ascii?Q?K8xhsb27dEelmmhdDs1hGfCKGaDKwflXzwJnReVuCJZkFhiGcV1ogjLlwXi8?=
+ =?us-ascii?Q?Tf7FTlUSFnXzVTO/jl06uPmuwjkLivYEZ9al8DFfrHp8cwLVUWduJ5MzHLil?=
+ =?us-ascii?Q?gqfNjocamuuOHRcJH1s6ouV0QIFHliDFn/bkrloTdBoiSKjj9rhvu8byxtG3?=
+ =?us-ascii?Q?GGv9x5hdEIfCyw/4plEP/kMpS6vucEHCHT5FnUpSqh/DymJJjJI2WwmoHTd1?=
+ =?us-ascii?Q?mraoUcrm8a5m+tqGC3lXCOlv6LZytGA5AcU+2ftV9wKngc2B4TpDSGJgI/Je?=
+ =?us-ascii?Q?le4hWuHqUbNHfI01vju/wCK6MsjmhWXuPu9Fh+IeMUoNXOeAYdAvx7Vb0TP4?=
+ =?us-ascii?Q?lhrPLKDY0/mUKoQl7wMZm7siI3fyBPrq7uv3AHB+nbloIGnV6iR28FAbE341?=
+ =?us-ascii?Q?pXJh6y1uPT8axykSlkXcWTsxpB47d1dzY7b7b4tEodWQOfczWMfz5q4oI0G6?=
+ =?us-ascii?Q?vLFl0OSihLtoQSGUkZK9DbROpGJjSjyP3+BlIMgtMlXQ+uUx1s0pQgCfGfDu?=
+ =?us-ascii?Q?GntD/J8d2i1Ahn0OJpIHUnjudVWpWXhZ5Z9j/jUGvG6tuGCkOa0CVRVd90Fl?=
+ =?us-ascii?Q?YLawnKLiewu6QnXe7+EUWpm4syLfYDHBf0cWFWH5YdOTLYdftNBqFqUs/rwZ?=
+ =?us-ascii?Q?vpPQh190gVk3qgTq/ET89SspO42tLt3ymiSjL5EUu5n87saCcXLR2My1lCZR?=
+ =?us-ascii?Q?ABCHmcjP7bYnwJYmzJztH9BF/31ljMkvRUMcrof2b+0UL6NLGDHjkUVcS/Lj?=
+ =?us-ascii?Q?Jc2uMHbkiTFR/pR6iL8ZKIpEYXhXiwhjdOGUkAQRHDuIHRzZGaCLPcYSoWOw?=
+ =?us-ascii?Q?QVPhXMaoKO/UU+8ZzqNKx2cnHZuELpPlV2n1pzbyPm8q7uhqsoxMhQplIQoc?=
+ =?us-ascii?Q?C3PWwZ7J75YizNUKdi+Cr591aRFoMWphr8x8UrJ0rk1lXQxT5LzFgIeESegU?=
+ =?us-ascii?Q?wanDZ5C9iFG2MuqGYlqJkVI/u9QTIWl5HS4//oIZARhA+R2cSsPVeE7GNhyN?=
+ =?us-ascii?Q?5LM2lzs4Vdt8i0PHrrN0P9Xn4bYgA/RzPl+jaBiSnsRcFByphsfKXYuY6L4i?=
+ =?us-ascii?Q?5gsmlftbirx/hLtRhBcS8sm5hCZRXi5iif8wdEQpw7OzOPaqOBjifuBU/up0?=
+ =?us-ascii?Q?NdhPxwaIr/htQf2o1SRAOlw44y8JednDDiyiyPbWdVB1TuiYyX2zzn4CafrR?=
+ =?us-ascii?Q?1AeHSqzeKiq4YPPVQJhj3ijery15F2d4aa+JwHYAuQfXcUBsA+I8b1VadbJH?=
+ =?us-ascii?Q?3pOZtdQkCaf4eBMCD5a/xn4AfV6ubaBJXDj+54jGEl/ZC2t1UIxHbszTYrOu?=
+ =?us-ascii?Q?HQ=3D=3D?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0a400783-38e6-41b1-8741-08dc902f1e6f
+X-MS-Exchange-CrossTenant-AuthSource: IA1PR11MB6417.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2024 07:12:03.1916
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 3GROGEXNzdqwGDkbySDnJrdRyl2fRXakB+xwM4melYvNsA9ASmtlPLTJ2DjmG5aACUeMGYymbjvR893j6xhdVIayETpBxZYnnG93LCiT+Ac=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR11MB7590
+X-Proofpoint-ORIG-GUID: sSZY71rUjDl0dKr3xuC6fUB9C4myFqx5
+X-Proofpoint-GUID: sSZY71rUjDl0dKr3xuC6fUB9C4myFqx5
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-06-19_02,2024-06-17_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ phishscore=0 mlxscore=0 mlxlogscore=964 clxscore=1011 spamscore=0
+ malwarescore=0 bulkscore=0 adultscore=0 lowpriorityscore=0 suspectscore=0
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2405170001 definitions=main-2406190051
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 19 Jun 2024 00:34:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110959
+ <openembedded-devel@lists.openembedded.org>; Wed, 19 Jun 2024 07:12:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110960
 
---000000000000a6c6e0061b335dc4
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
 
-On Tue, Jun 18, 2024 at 4:55=E2=80=AFPM Randy MacLeod <randy.macleod@windri=
-ver.com>
-wrote:
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 56e2e5df9bba23c431bed2fa7794d5cc86c08f2f)
+Signed-off-by: Haixiao Yan <haixiao.yan.cn@windriver.com>
+---
+ .../recipes-devtools/python/python3-pyyaml-include_1.4.1.bb     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> On 2024-06-17 9:22 p.m., Randy MacLeod wrote:
->
-> On 2024-06-17 7:36 p.m., Tim Orling wrote:
->
-> Master already has this, so it is a backport request.
->
-> Randy, I assume you verified both targets build without issue.
->
-> I did test on master but didn't for scarthgap since it would "obviously
-> work"!
->
-> Famous last words...
->
-> On my PopOS (ubu-22.04 - ish) host:
->
-> |
-> /media/rmacleod/gitter/rmacleod/src/distro/yocto/b/inc-nat/tmp/work/x86_6=
-4-linux/cmake-native/3.28.3/build/Bootstrap.cmk/cmake:
-> /media/rmacleod/gitter/rmacleod/src/distro/yocto/b/inc-nat/tmp/sysroots-u=
-ninative/x86_64-linux/usr/lib/libstdc++.so.6:
-> version `CXXABI_1.3.15' not found (required by
-> /media/rmacleod/gitter/rmacleod/src/distro/yocto/b/inc-nat/tmp/work/x86_6=
-4-linux/cmake-native/3.28.3/build/Bootstrap.cmk/cmake)
-> | ---------------------------------------------
-> | Error when bootstrapping CMake:
-> | Problem while running initial CMake
-> | ---------------------------------------------
-> | WARNING: exit code 11 from a shell command.
-> ERROR: Task
-> (/media/rmacleod/gitter/rmacleod/src/distro/yocto/poky.git/meta/recipes-d=
-evtools/cmake/cmake-native_3.28.3.bb:do_configure)
-> failed with exit code '1'
-> NOTE: Tasks Summary: Attempted 485 tasks of which 0 didn't need to be
-> rerun and 1 failed.
->
->
-> Summary:
->
-> 1. both native and nativesdk build fine when I remove a custom native
-> toolchain!
-> 2. The commit for master hasn't merged yet so I'll wait for that before
-> sending v2.
->
+diff --git a/meta-python/recipes-devtools/python/python3-pyyaml-include_1.4.1.bb b/meta-python/recipes-devtools/python/python3-pyyaml-include_1.4.1.bb
+index b60a0f9c8..7db86b96d 100644
+--- a/meta-python/recipes-devtools/python/python3-pyyaml-include_1.4.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pyyaml-include_1.4.1.bb
+@@ -25,4 +25,4 @@ RDEPENDS:${PN} += " \
+ RDEPENDS:${PN}-ptest += " \
+     python3-pytest \
+ "
+-
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.34.1
 
-Thank you for the due diligence. Makes sense to me.
-
-
->
-> Details for Tim with one question:
->
-> That -native build problem was due to having a custom gcc in /usr/local.
-> Oops!
->
-> python3-pyyaml-include-native builds fine using the distro's gcc :
->
-> =E2=9D=AF /usr/bin/gcc --version
-> gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
->
->
-> The nativesdk- python3-pyyaml-include build succeeds too but there was on=
-e
-> warning that I'm unsure about:
->
->    Building target platforms: x86_64_nativesdk-pokysdk-linux
->    Building for target x86_64_nativesdk-pokysdk-linux
->    Processing files:
-> nativesdk-python3-pyyaml-include-1.3.2-r0.x86_64_nativesdk
->    warning: Ignoring invalid regex
-> ^((${prefix}/=3DLIB=3D|usr/share)/pkgconfig/.*.pc|usr/bin/pkg-config)$
-> <----
->    Finding  Provides:
->    Finding  Requires(interp):
->    Finding  Requires(rpmlib):
->    ...
->
->
-> That happens when running rpmbuild... ah, here's the source:
->
-> =E2=9D=AF rg pkgconfig
-> /.../tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-python3-pyyaml-inc=
-lude/1.3.2/recipe-sysroot-native/usr/bin/../../usr/lib/rpm/fileattrs
->
-> /.../tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-python3-pyyaml-inc=
-lude/1.3.2/recipe-sysroot-native/usr/bin/../../usr/lib/rpm/fileattrs/pkgcon=
-fig.attr
-> 1:%__pkgconfig_provides    %{_rpmconfigdir}/pkgconfigdeps.sh --provides
-> 2:%__pkgconfig_requires    %{_rpmconfigdir}/pkgconfigdeps.sh --requires
-> 3:%__pkgconfig_path
-> ^((%{_libdir}|%{_datadir})/pkgconfig/.*\.pc|%{_bindir}/pkg-config)$
->
-> which is likely from rpm-native/usr/lib/rpm/fileattrs/pkgconfig.attr
->
-> and so not specific to this change it would seem.
->
-> We should still fix it, but the pkgconfig.attr line has been around in rp=
-m
-> for > 10 years.
->
-> Tim,
->
-> I'm out of time for today.
-> Is it easy for you to find out if this warning is something that works
-> well in Fedora but generates a warning in YP?
->
-
-Perhaps, I can run it in a container or VM. Maybe tgamblin is a better fit,
-since he still runs Fedora as his daily driver.
-CC: Trevor Gamblin
-
->
->
-> I don't usually worry about how rpm packaging works in detail so this was
-> fun and I got to use strace! ;-)
->
-
-Getting to the bottom of something that has been around for 10 years and
-not necessarily perfect yet is always fun.
-
->
->
-> ../Randy
->
->
-> I'll try that on a supported distro and re-submit adding a comment about
-> it being a backport.
-> I'm busy most of the week so it may be a while.
->
-> Thanks for asking Tim and sorry for the noise.
->
-> ../Randy
->
->
->
-> On Mon, Jun 17, 2024 at 12:13=E2=80=AFPM Randy MacLeod via lists.openembe=
-dded.org
-> <https://urldefense.com/v3/__http://lists.openembedded.org__;!!AjveYdw8Ev=
-Q!aw5nRqXmGOpTn-N6VdrwlGFDwCLEV6UZpm4RkeZQPm1ZwM19UTcOiQ_RMZ0yqELoYvkazy3jS=
-HZJsReCax2W-Q$>
-> <randy.macleod=3Dwindriver.com@lists.openembedded.org> wrote:
->
->> From: Randy MacLeod <Randy.MacLeod@windriver.com>
->>
->> Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>  .../recipes-devtools/python/python3-pyyaml-include_1.3.2.bb
->> <https://urldefense.com/v3/__http://python3-pyyaml-include_1.3.2.bb__;!!=
-AjveYdw8EvQ!aw5nRqXmGOpTn-N6VdrwlGFDwCLEV6UZpm4RkeZQPm1ZwM19UTcOiQ_RMZ0yqEL=
-oYvkazy3jSHZJsRdX0IWwxQ$>
->>    | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-python/recipes-devtools/python/
->> python3-pyyaml-include_1.3.2.bb
->> <https://urldefense.com/v3/__http://python3-pyyaml-include_1.3.2.bb__;!!=
-AjveYdw8EvQ!aw5nRqXmGOpTn-N6VdrwlGFDwCLEV6UZpm4RkeZQPm1ZwM19UTcOiQ_RMZ0yqEL=
-oYvkazy3jSHZJsRdX0IWwxQ$>
->> b/meta-python/recipes-devtools/python/python3-pyyaml-include_1.3.2.bb
->> <https://urldefense.com/v3/__http://python3-pyyaml-include_1.3.2.bb__;!!=
-AjveYdw8EvQ!aw5nRqXmGOpTn-N6VdrwlGFDwCLEV6UZpm4RkeZQPm1ZwM19UTcOiQ_RMZ0yqEL=
-oYvkazy3jSHZJsRdX0IWwxQ$>
->> index 3a5bd99a7..309d0ac59 100644
->> --- a/meta-python/recipes-devtools/python/python3-pyyaml-include_1.3.2.b=
-b
->> <https://urldefense.com/v3/__http://python3-pyyaml-include_1.3.2.bb__;!!=
-AjveYdw8EvQ!aw5nRqXmGOpTn-N6VdrwlGFDwCLEV6UZpm4RkeZQPm1ZwM19UTcOiQ_RMZ0yqEL=
-oYvkazy3jSHZJsRdX0IWwxQ$>
->> +++ b/meta-python/recipes-devtools/python/python3-pyyaml-include_1.3.2.b=
-b
->> <https://urldefense.com/v3/__http://python3-pyyaml-include_1.3.2.bb__;!!=
-AjveYdw8EvQ!aw5nRqXmGOpTn-N6VdrwlGFDwCLEV6UZpm4RkeZQPm1ZwM19UTcOiQ_RMZ0yqEL=
-oYvkazy3jSHZJsRdX0IWwxQ$>
->> @@ -26,4 +26,4 @@ RDEPENDS:${PN}-ptest +=3D " \
->>      python3-pytest \
->>      python3-unittest-automake-output \
->>  "
->> -
->> +BBCLASSEXTEND =3D "native nativesdk"
->> --
->> 2.34.1
->>
->>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#110943):
->> https://lists.openembedded.org/g/openembedded-devel/message/110943
->> <https://urldefense.com/v3/__https://lists.openembedded.org/g/openembedd=
-ed-devel/message/110943__;!!AjveYdw8EvQ!aw5nRqXmGOpTn-N6VdrwlGFDwCLEV6UZpm4=
-RkeZQPm1ZwM19UTcOiQ_RMZ0yqELoYvkazy3jSHZJsRdaJIdgGQ$>
->> Mute This Topic: https://lists.openembedded.org/mt/106727475/924729
->> <https://urldefense.com/v3/__https://lists.openembedded.org/mt/106727475=
-/924729__;!!AjveYdw8EvQ!aw5nRqXmGOpTn-N6VdrwlGFDwCLEV6UZpm4RkeZQPm1ZwM19UTc=
-OiQ_RMZ0yqELoYvkazy3jSHZJsRd-fviFOQ$>
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub
->> <https://urldefense.com/v3/__https://lists.openembedded.org/g/openembedd=
-ed-devel/unsub__;!!AjveYdw8EvQ!aw5nRqXmGOpTn-N6VdrwlGFDwCLEV6UZpm4RkeZQPm1Z=
-wM19UTcOiQ_RMZ0yqELoYvkazy3jSHZJsRd659LC0Q$>
->> [ticotimo@gmail.com]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
->>
-> --
-> # Randy MacLeod
-> # Wind River Linux
->
->
-> --
-> # Randy MacLeod
-> # Wind River Linux
->
->
-
---000000000000a6c6e0061b335dc4
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jun 18, 2024 at 4:55=E2=80=AF=
-PM Randy MacLeod &lt;<a href=3D"mailto:randy.macleod@windriver.com">randy.m=
-acleod@windriver.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quo=
-te" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204=
-);padding-left:1ex"><u></u>
-
- =20
-  <div>
-    <div>On 2024-06-17 9:22 p.m., Randy MacLeod
-      wrote:<br>
-    </div>
-    <blockquote type=3D"cite">
-     =20
-      <div>On 2024-06-17 7:36 p.m., Tim Orling
-        wrote:<br>
-      </div>
-      <blockquote type=3D"cite">
-       =20
-        <div dir=3D"auto">Master already has this, so it is a backport
-          request.</div>
-        <div dir=3D"auto"><br>
-        </div>
-        <div dir=3D"auto">Randy, I assume you verified both targets build
-          without issue.</div>
-      </blockquote>
-      I did test on master but didn&#39;t for scarthgap since it would
-      &quot;obviously work&quot;!<br>
-      <p>Famous last words...</p>
-      <p>On my PopOS (ubu-22.04 - ish) host:</p>
-      <p>|
-/media/rmacleod/gitter/rmacleod/src/distro/yocto/b/inc-nat/tmp/work/x86_64-=
-linux/cmake-native/3.28.3/build/Bootstrap.cmk/cmake:
-/media/rmacleod/gitter/rmacleod/src/distro/yocto/b/inc-nat/tmp/sysroots-uni=
-native/x86_64-linux/usr/lib/libstdc++.so.6:
-        version `CXXABI_1.3.15&#39; not found (required by
-/media/rmacleod/gitter/rmacleod/src/distro/yocto/b/inc-nat/tmp/work/x86_64-=
-linux/cmake-native/3.28.3/build/Bootstrap.cmk/cmake)<br>
-        | ---------------------------------------------<br>
-        | Error when bootstrapping CMake:<br>
-        | Problem while running initial CMake<br>
-        | ---------------------------------------------<br>
-        | WARNING: exit code 11 from a shell command.<br>
-        ERROR: Task
-(/media/rmacleod/gitter/rmacleod/src/distro/yocto/poky.git/meta/recipes-dev=
-tools/cmake/cmake-native_3.28.3.bb:do_configure)
-        failed with exit code &#39;1&#39;<br>
-        NOTE: Tasks Summary: Attempted 485 tasks of which 0 didn&#39;t need
-        to be rerun and 1 failed.<br>
-      </p>
-      <p><br>
-      </p>
-    </blockquote>
-    <p>Summary:</p>
-    <p>1. both native and nativesdk build fine when I remove a custom
-      native toolchain!<br>
-      2. The commit for master hasn&#39;t merged yet so I&#39;ll wait for t=
-hat
-      before sending v2.<br></p></div></blockquote><div><br></div><div>Than=
-k you for the due diligence. Makes sense to me.</div><div>=C2=A0</div><bloc=
-kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:=
-1px solid rgb(204,204,204);padding-left:1ex"><div><p>
-    </p>
-    <p><br>
-    </p>
-    <p>Details for Tim with one question:<br>
-      <br>
-    </p>
-    <p>That -native build problem was due to having a custom gcc in
-      /usr/local. Oops!<br>
-    </p>
-    <p>python3-pyyaml-include-native builds fine using the distro&#39;s gcc
-      :</p>
-    <p>=E2=9D=AF /usr/bin/gcc --version<br>
-      gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0<br>
-    </p>
-    <p><br>
-    </p>
-    <p>The nativesdk- python3-pyyaml-include build succeeds too but
-      there was one warning that I&#39;m unsure about:<br>
-      <br>
-      =C2=A0=C2=A0 Building target platforms: x86_64_nativesdk-pokysdk-linu=
-x<br>
-      =C2=A0=C2=A0 Building for target x86_64_nativesdk-pokysdk-linux<br>
-      =C2=A0=C2=A0 Processing files:
-      nativesdk-python3-pyyaml-include-1.3.2-r0.x86_64_nativesdk<br>
-      =C2=A0=C2=A0 warning: Ignoring invalid regex
-^((${prefix}/=3DLIB=3D|usr/share)/pkgconfig/.*.pc|usr/bin/pkg-config)$=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
-      &lt;----<br>
-      =C2=A0=C2=A0 Finding=C2=A0 Provides: <br>
-      =C2=A0=C2=A0 Finding=C2=A0 Requires(interp): <br>
-      =C2=A0=C2=A0 Finding=C2=A0 Requires(rpmlib): <br>
-      =C2=A0=C2=A0 ...</p>
-    <p><br>
-    </p>
-    <p>That happens when running rpmbuild... ah, here&#39;s the source:<br>
-    </p>
-    <p>=E2=9D=AF rg pkgconfig
-/.../tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-python3-pyyaml-inclu=
-de/1.3.2/recipe-sysroot-native/usr/bin/../../usr/lib/rpm/fileattrs<br>
-/.../tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-python3-pyyaml-inclu=
-de/1.3.2/recipe-sysroot-native/usr/bin/../../usr/lib/rpm/fileattrs/pkgconfi=
-g.attr<br>
-      1:%__pkgconfig_provides=C2=A0=C2=A0=C2=A0 %{_rpmconfigdir}/pkgconfigd=
-eps.sh
-      --provides<br>
-      2:%__pkgconfig_requires=C2=A0=C2=A0=C2=A0 %{_rpmconfigdir}/pkgconfigd=
-eps.sh
-      --requires<br>
-      3:%__pkgconfig_path=C2=A0=C2=A0=C2=A0
-      ^((%{_libdir}|%{_datadir})/pkgconfig/.*\.pc|%{_bindir}/pkg-config)$<b=
-r>
-      <br>
-    </p>
-    <p>which is likely from
-      rpm-native/usr/lib/rpm/fileattrs/pkgconfig.attr</p>
-    <p>and so not specific to this change it would seem.<br>
-      <br>
-      We should still fix it, but the pkgconfig.attr line has been
-      around in rpm for &gt; 10 years.<br>
-    </p>
-    <p>Tim,<br>
-    </p>
-    <p>I&#39;m out of time for today.<br>
-      Is it easy for you to find out if this warning is something that
-      works well in Fedora but generates a warning in YP?</p></div></blockq=
-uote><div><br></div><div>Perhaps, I can run it in a container or VM. Maybe =
-tgamblin=C2=A0is a better fit, since he still runs Fedora as his daily driv=
-er.</div><div>CC: Trevor Gamblin=C2=A0</div><blockquote class=3D"gmail_quot=
-e" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204)=
-;padding-left:1ex"><div>
-    <p><br>
-    </p>
-    <p><br>
-    </p>
-    <p>I don&#39;t usually worry about how rpm packaging works in detail so
-      this was fun and I got to use strace! ;-)</p></div></blockquote><div>=
-<br></div><div>Getting to the bottom of something that has been around for =
-10 years and not necessarily perfect yet is always fun.=C2=A0</div><blockqu=
-ote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px=
- solid rgb(204,204,204);padding-left:1ex"><div><p> <br>
-    </p>
-    <p><br>
-    </p>
-    <p>../Randy</p>
-    <p><br>
-    </p>
-    <blockquote type=3D"cite">
-      <p> </p>
-      <p>I&#39;ll try that on a supported distro and re-submit adding a
-        comment about it being a backport.<br>
-        I&#39;m busy most of the week so it may be a while.</p>
-      <p>Thanks for asking Tim and sorry for the noise.<br>
-      </p>
-      <p>../Randy<br>
-      </p>
-      <blockquote type=3D"cite">
-        <div dir=3D"auto"><br>
-        </div>
-        <div><br>
-          <div class=3D"gmail_quote">
-            <div dir=3D"ltr" class=3D"gmail_attr">On Mon, Jun 17, 2024 at
-              12:13=E2=80=AFPM Randy MacLeod via <a href=3D"https://urldefe=
-nse.com/v3/__http://lists.openembedded.org__;!!AjveYdw8EvQ!aw5nRqXmGOpTn-N6=
-VdrwlGFDwCLEV6UZpm4RkeZQPm1ZwM19UTcOiQ_RMZ0yqELoYvkazy3jSHZJsReCax2W-Q$" ta=
-rget=3D"_blank">lists.openembedded.org</a>
-              &lt;randy.macleod=3D<a href=3D"mailto:windriver.com@lists.ope=
-nembedded.org" target=3D"_blank">windriver.com@lists.openembedded.org</a>&g=
-t;
-              wrote:<br>
-            </div>
-            <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
-.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">From:
-              Randy MacLeod &lt;<a href=3D"mailto:Randy.MacLeod@windriver.c=
-om" target=3D"_blank">Randy.MacLeod@windriver.com</a>&gt;<br>
-              <br>
-              Signed-off-by: Randy MacLeod &lt;<a href=3D"mailto:Randy.MacL=
-eod@windriver.com" target=3D"_blank">Randy.MacLeod@windriver.com</a>&gt;<br=
->
-              Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.=
-com" target=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
-              ---<br>
-              =C2=A0.../recipes-devtools/python/<a href=3D"https://urldefen=
-se.com/v3/__http://python3-pyyaml-include_1.3.2.bb__;!!AjveYdw8EvQ!aw5nRqXm=
-GOpTn-N6VdrwlGFDwCLEV6UZpm4RkeZQPm1ZwM19UTcOiQ_RMZ0yqELoYvkazy3jSHZJsRdX0IW=
-wxQ$" rel=3D"noreferrer" target=3D"_blank">python3-pyyaml-include_1.3.2.bb<=
-/a>=C2=A0
-              =C2=A0 =C2=A0| 2 +-<br>
-              =C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-              <br>
-              diff --git a/meta-python/recipes-devtools/python/<a href=3D"h=
-ttps://urldefense.com/v3/__http://python3-pyyaml-include_1.3.2.bb__;!!AjveY=
-dw8EvQ!aw5nRqXmGOpTn-N6VdrwlGFDwCLEV6UZpm4RkeZQPm1ZwM19UTcOiQ_RMZ0yqELoYvka=
-zy3jSHZJsRdX0IWwxQ$" rel=3D"noreferrer" target=3D"_blank">python3-pyyaml-in=
-clude_1.3.2.bb</a>
-              b/meta-python/recipes-devtools/python/<a href=3D"https://urld=
-efense.com/v3/__http://python3-pyyaml-include_1.3.2.bb__;!!AjveYdw8EvQ!aw5n=
-RqXmGOpTn-N6VdrwlGFDwCLEV6UZpm4RkeZQPm1ZwM19UTcOiQ_RMZ0yqELoYvkazy3jSHZJsRd=
-X0IWwxQ$" rel=3D"noreferrer" target=3D"_blank">python3-pyyaml-include_1.3.2=
-.bb</a><br>
-              index 3a5bd99a7..309d0ac59 100644<br>
-              --- a/meta-python/recipes-devtools/python/<a href=3D"https://=
-urldefense.com/v3/__http://python3-pyyaml-include_1.3.2.bb__;!!AjveYdw8EvQ!=
-aw5nRqXmGOpTn-N6VdrwlGFDwCLEV6UZpm4RkeZQPm1ZwM19UTcOiQ_RMZ0yqELoYvkazy3jSHZ=
-JsRdX0IWwxQ$" rel=3D"noreferrer" target=3D"_blank">python3-pyyaml-include_1=
-.3.2.bb</a><br>
-              +++ b/meta-python/recipes-devtools/python/<a href=3D"https://=
-urldefense.com/v3/__http://python3-pyyaml-include_1.3.2.bb__;!!AjveYdw8EvQ!=
-aw5nRqXmGOpTn-N6VdrwlGFDwCLEV6UZpm4RkeZQPm1ZwM19UTcOiQ_RMZ0yqELoYvkazy3jSHZ=
-JsRdX0IWwxQ$" rel=3D"noreferrer" target=3D"_blank">python3-pyyaml-include_1=
-.3.2.bb</a><br>
-              @@ -26,4 +26,4 @@ RDEPENDS:${PN}-ptest +=3D &quot; \<br>
-              =C2=A0 =C2=A0 =C2=A0python3-pytest \<br>
-              =C2=A0 =C2=A0 =C2=A0python3-unittest-automake-output \<br>
-              =C2=A0&quot;<br>
-              -<br>
-              +BBCLASSEXTEND =3D &quot;native nativesdk&quot;<br>
-              -- <br>
-              2.34.1<br>
-              <br>
-              <br>
-              -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-              Links: You receive all messages sent to this group.<br>
-              View/Reply Online (#110943): <a href=3D"https://urldefense.co=
-m/v3/__https://lists.openembedded.org/g/openembedded-devel/message/110943__=
-;!!AjveYdw8EvQ!aw5nRqXmGOpTn-N6VdrwlGFDwCLEV6UZpm4RkeZQPm1ZwM19UTcOiQ_RMZ0y=
-qELoYvkazy3jSHZJsRdaJIdgGQ$" rel=3D"noreferrer" target=3D"_blank">https://l=
-ists.openembedded.org/g/openembedded-devel/message/110943</a><br>
-              Mute This Topic: <a href=3D"https://urldefense.com/v3/__https=
-://lists.openembedded.org/mt/106727475/924729__;!!AjveYdw8EvQ!aw5nRqXmGOpTn=
--N6VdrwlGFDwCLEV6UZpm4RkeZQPm1ZwM19UTcOiQ_RMZ0yqELoYvkazy3jSHZJsRd-fviFOQ$"=
- rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt/106=
-727475/924729</a><br>
-              Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lis=
-ts.openembedded.org" target=3D"_blank">openembedded-devel+owner@lists.opene=
-mbedded.org</a><br>
-              Unsubscribe: <a href=3D"https://urldefense.com/v3/__https://l=
-ists.openembedded.org/g/openembedded-devel/unsub__;!!AjveYdw8EvQ!aw5nRqXmGO=
-pTn-N6VdrwlGFDwCLEV6UZpm4RkeZQPm1ZwM19UTcOiQ_RMZ0yqELoYvkazy3jSHZJsRd659LC0=
-Q$" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/g/o=
-penembedded-devel/unsub</a>
-              [<a href=3D"mailto:ticotimo@gmail.com" target=3D"_blank">tico=
-timo@gmail.com</a>]<br>
-              -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-              <br>
-            </blockquote>
-          </div>
-        </div>
-      </blockquote>
-      <p><br>
-      </p>
-      <pre cols=3D"72">--=20
-# Randy MacLeod
-# Wind River Linux</pre>
-    </blockquote>
-    <p><br>
-    </p>
-    <pre cols=3D"72">--=20
-# Randy MacLeod
-# Wind River Linux</pre>
-  </div>
-
-</blockquote></div></div>
-
---000000000000a6c6e0061b335dc4--
 
