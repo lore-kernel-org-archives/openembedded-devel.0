@@ -1,131 +1,134 @@
-Return-Path: <ninette@thehoodiefirm.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BEFAC41513
-	for <webhook@archiver.kernel.org>; Thu, 20 Jun 2024 16:11:02 +0000 (UTC)
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com [209.85.222.193])
- by mx.groups.io with SMTP id smtpd.web11.51707.1718899854990483609
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 93AB3C27C79
+	for <webhook@archiver.kernel.org>; Thu, 20 Jun 2024 19:51:03 +0000 (UTC)
+Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com [209.85.210.42])
+ by mx.groups.io with SMTP id smtpd.web11.56780.1718913054343733416
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Jun 2024 09:10:55 -0700
+ Thu, 20 Jun 2024 12:50:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@thehoodiefirm-com.20230601.gappssmtp.com header.s=20230601 header.b=AC8EqNPl;
- spf=neutral (domain: thehoodiefirm.com, ip: 209.85.222.193, mailfrom: ninette@thehoodiefirm.com)
-Received: by mail-qk1-f193.google.com with SMTP id af79cd13be357-7955ddc6516so69788585a.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Jun 2024 09:10:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IkgeVpgX;
+ spf=pass (domain: gmail.com, ip: 209.85.210.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f42.google.com with SMTP id 46e09a7af769-6f8edde24b3so793076a34.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Jun 2024 12:50:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thehoodiefirm-com.20230601.gappssmtp.com; s=20230601; t=1718899854; x=1719504654; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:reply-to:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=/OGCV3qRp1DXq3OcJazwDy4RIIGu0tPtwPxG/EsvXzE=;
-        b=AC8EqNPl78+p8pVXtSSW8KZCZswYHH3nDxt/s99c1vbk1bqxZvF6QS/iMqL8LBocTD
-         UqCkaaKY/vyShDYs8IGGOVY4pbgpZ1/0Ngf1guZityOInipUxqTN9kc9/xTkb4YBod/o
-         SO8Z13INR59qkv2OJ3LjUKci7k+n7lHG0j1s9dSvYSigt2kA46rbvMnK2YiSK9xDK41V
-         +fCb1fY5RsPCFtr3DHttjl5Qt+9vqiJUNHWa9nn5X0gD7Wm6WFbh1y1O5yNUewwZCEJW
-         svM6MRn5qLx2YLcGRGPnlCd5LQK1JGJ+9eq8ld1watIPbaSD6+la7eE9g2M63XXHjRll
-         1uSQ==
+        d=gmail.com; s=20230601; t=1718913053; x=1719517853; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=kO1kSp7l7Blh4Or30mC1X+QREccWpfoXCRXkC6CGhe8=;
+        b=IkgeVpgXWJwPc2CJnEcH7wbZhnG5qu7uPIM0nOOcBJt4qENmEo1jC59OqtbBpVzABm
+         6eojF750D8dfSE1eod440yzSSKyIiPB5pTbLgNad3aWqqrN0iTz35k++MhaDQchk99Rb
+         FF+FX83dXoSaERtOK5VUueOI0xYWIC45sQhIWighVd7TfqmHgvFHor7/p3S63LZp3C1a
+         TCi4lSIAbNR6abjIFwqUPzd58UzAo9a8tEqS2ZVvRcvVI2uL+YMw1nSdsdv8wBpVGzG9
+         qGRqKwIuGBuLYy+Vrki/SRzcUiYDHb+3erIaSQxQ9X2S6SHPM8fpr5fomv6S0zIPYmy+
+         JViw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718899854; x=1719504654;
-        h=content-transfer-encoding:mime-version:reply-to:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=/OGCV3qRp1DXq3OcJazwDy4RIIGu0tPtwPxG/EsvXzE=;
-        b=tLvO9nPvQQM3zgX1ohKfGyhw8BMwMeEFV6sfxNrlOMxfm0sDNKDEjYELI/i+Nt6/3O
-         NPMevXxasntEJGeMcFeHZr6UCzx29fsf5hH5RvhLojMqOxw57FnSUlQsxqghUnQOixZB
-         KURxIOozUygId8U+C6ngKIs8aFa5yuE4BJ/mP78b7/TaDdwXgMXjcIItUzU3Ey2eV1NJ
-         75HMZRE9lk94FmKf0KqIDVmCmbXXbdWj5qvBUcmqvc8gLNBF2w7tL+RneBWeiQL2Uy41
-         x6k3w8z5jvPZGQ9i208EDa667RfWqsXXzUxW0r5Wg4kuhio8U8kv/9W6tr1tDqq3fYuw
-         ffkA==
-X-Gm-Message-State: AOJu0YwSstp67CqNSkSahrQ9c0QzxYq/nsdEAlaLni7tkxMEqYhdbTrC
-	Rbb5XhwAkCBnMH7OBDdWVtndGmtEVRDTfgrEimnMfbgUypYBplsWeGoOO8SE9BjFabGnTei4J4D
-	4Suz2Q6pOXq0=
-X-Google-Smtp-Source: AGHT+IFZNlY662osBbfZRdFb4lqLf2vpiXDGmfEfMooGN24PzH2D6xgs2HLrY0WbYYPy4XeKl1gK0w==
-X-Received: by 2002:a05:620a:44c1:b0:79b:b571:4bf7 with SMTP id af79cd13be357-79bb57151f9mr571899085a.21.1718899853980;
-        Thu, 20 Jun 2024 09:10:53 -0700 (PDT)
-Received: from localhost.localdomain (pool-173-35-206-140.cpe.net.cable.rogers.com. [173.35.206.140])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-79bad2bac97sm215739285a.123.2024.06.20.09.10.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Jun 2024 09:10:53 -0700 (PDT)
-From: Ninette Adhikari <ninette@thehoodiefirm.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: engineering@neighbourhood.ie,
-	Ninette Adhikari <ninette@thehoodiefirm.com>
-Subject: [PATCH 1/1] imagemagick: Update status for CVE
-Date: Thu, 20 Jun 2024 12:10:48 -0400
-Message-ID: <20240620161048.75491-2-ninette@thehoodiefirm.com>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240620161048.75491-1-ninette@thehoodiefirm.com>
-References: <20240620161048.75491-1-ninette@thehoodiefirm.com>
-Reply-To: engineering@neighbourhood.ie
+        d=1e100.net; s=20230601; t=1718913053; x=1719517853;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=kO1kSp7l7Blh4Or30mC1X+QREccWpfoXCRXkC6CGhe8=;
+        b=X3qPtn+AXZo/N/dwCabdtru73CnfWKNgj+qtPTE1W1a295GEmH3ffxpcjaFxoe0XYF
+         V3BYmC/9NL3/FUNGI7D6BtQFh8O+VLajWuy7jz9/+JrkEUKkKX85yTM1Pyp9vEQI3ecr
+         kzqlFf8riSeqAZX6boaD2ToclwaWVugctAN2IrcqzOB9N5ehLcofhcJ5burWndSQMLrv
+         aaoJT6Y2dd1g4nCBlqIhj3FBvhqqVcHaRTFd/ZjuMAvdpRlDD4JA68jqIKGejYNuFhCk
+         wCxhu7mFesnOHiphogvOpf869ABTJe/5tdXsA47lKB3TonAW7pZ4Gw/+0SJ5/sfcUG/R
+         uY/Q==
+X-Gm-Message-State: AOJu0YxX7YL4sDSI/fbLy9prKSTux7G6YoTzrO6V32ANASP04Hf67oMb
+	jzFNCsSE18EREUxa2Z41rnsAvlDsAufjX2LqzDJCBJ9eEEyJ3+aN2u1sDlecqboRmNyE9+cO656
+	ZGP4Xt+xMJXcY3dd1z/n0HbuRVv4=
+X-Google-Smtp-Source: AGHT+IG3ZmKm0DBy43z8Dc5N374DXMC9NdI1ztK81Kv2kCcReQbW09NBHlXv2dwLoyQNh+25cWex2VHAJY5UEwyrQKQ=
+X-Received: by 2002:a05:6870:829e:b0:259:80dc:13e2 with SMTP id
+ 586e51a60fabf-25c948eaddfmr7162225fac.11.1718913053455; Thu, 20 Jun 2024
+ 12:50:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240201072150.3751126-1-raj.khem@gmail.com> <2056.1718867175546392732@lists.openembedded.org>
+In-Reply-To: <2056.1718867175546392732@lists.openembedded.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 20 Jun 2024 12:50:26 -0700
+Message-ID: <CAMKF1srcoJfbLgX=C9bqMmRgkWNTo9OcFWOpqKCxeCgjUkUwiQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] bpftool: Add missing dep on elfutils-native
+To: chen_heyun@163.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 20 Jun 2024 16:11:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110982
+ <openembedded-devel@lists.openembedded.org>; Thu, 20 Jun 2024 19:51:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110983
 
-Update status for:
-CVE-2016-7532, CVE-2014-9822, CVE-2014-9823, CVE-2014-9824, CVE-2014-9825, CVE-2014-9826, CVE-2014-9827, CVE-2014-9828, CVE-2014-9829, CVE-2014-9830, CVE-2014-9831, CVE-2014-9848, CVE-2014-9852, CVE-2014-9853, CVE-2014-9854, CVE-2014-9907, CVE-2016-10062, CVE-2016-10144, CVE-2016-10145, CVE-2016-10146, CVE-2016-5118, CVE-2016-7513, CVE-2016-7514, CVE-2016-7515, CVE-2016-7516, CVE-2016-7517, CVE-2016-7518, CVE-2016-7519, CVE-2016-7520, CVE-2016-7521, CVE-2016-7522, CVE-2016-7523, CVE-2016-7524, CVE-2016-7525, CVE-2016-7526, CVE-2016-7527, CVE-2016-7528, CVE-2016-7529, CVE-2016-7530, CVE-2016-7533
+can you try changing it to
 
-CPE is incorrect, the current version (7.1.1) is not affected.
+HOSTCC=3D"'${BUILD_CC} ${BUILD_CFLAGS}'"
 
-Signed-off-by: Ninette Adhikari <ninette@thehoodiefirm.com>
----
- .../imagemagick/imagemagick_7.1.1.bb          | 41 +++++++++++++++++++
- 1 file changed, 41 insertions(+)
-
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-index 6ab8a61b9..51bc36e56 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-@@ -99,3 +99,44 @@ ALTERNATIVE_LINK_NAME[montage.1] = "${mandir}/man1/montage.1"
- ALTERNATIVE_TARGET[montage.1] = "${mandir}/man1/montage.im7.1"
- ALTERNATIVE_LINK_NAME[stream.1] = "${mandir}/man1/stream.1"
- ALTERNATIVE_TARGET[stream.1] = "${mandir}/man1/stream.im7.1"
-+
-+CVE_STATUS[CVE-2016-7532] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2014-9822] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2014-9823] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2014-9824] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2014-9825] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2014-9826] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2014-9827] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2014-9828] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2014-9829] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2014-9830] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2014-9831] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2014-9848] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2014-9852] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2014-9853] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2014-9854] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2014-9907] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2016-10062] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 7.0.1-10"
-+CVE_STATUS[CVE-2016-10144] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.7-1"
-+CVE_STATUS[CVE-2016-10145] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.7-1"
-+CVE_STATUS[CVE-2016-10146] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.6-8"
-+CVE_STATUS[CVE-2016-5118] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 7.0.1-7"
-+CVE_STATUS[CVE-2016-7513] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2016-7514] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 7.0.1-0"
-+CVE_STATUS[CVE-2016-7515] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2016-7516] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2016-7517] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2016-7518] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2016-7519] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2016-7520] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2016-7521] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2016-7522] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2016-7523] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2016-7524] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2016-7525] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2016-7526] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2016-7527] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2016-7528] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2016-7529] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2016-7530] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
-+CVE_STATUS[CVE-2016-7533] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
---
-2.44.0
-
+On Thu, Jun 20, 2024 at 12:06=E2=80=AFAM chenheyun via lists.openembedded.o=
+rg
+<chen_heyun=3D163.com@lists.openembedded.org> wrote:
+>
+> hi=EF=BC=8C
+>   this patch may be have some problem=E3=80=82
+>   bitbake bpftool=EF=BC=9A
+> chy@ubuntu:/home/sam/work/qemu-buildsystem/buildsystem3.0/build/qemuarm64=
+/tmp/work-shared/qemuarm64/kernel-source/tools/bpf/bpftool$ make -C /home/s=
+am/work/qemu-buildsystem/buildsystem3.0/buildsystem/source/kernel/linux-6.1=
+.83/tools/lib/bpf OUTPUT=3D/home/sam/work/qemu-buildsystem/buildsystem3.0/b=
+uild/qemuarm64/tmp/work/qemuarm64-poky-linux/bpftool/1.0-r0/bpftool-1.0/boo=
+tstrap/libbpf/  DESTDIR=3D/home/sam/work/qemu-buildsystem/buildsystem3.0/bu=
+ild/qemuarm64/tmp/work/qemuarm64-poky-linux/bpftool/1.0-r0/bpftool-1.0/boot=
+strap/libbpf prefix=3D  ARCH=3D CROSS_COMPILE=3D CC=3Dgcc  -isystem/home/sa=
+m/work/qemu-buildsystem/buildsystem3.0/build/qemuarm64/tmp/work/qemuarm64-p=
+oky-linux/bpftool/1.0-r0/recipe-sysroot-native/usr/include -O2 -pipe LD=3Dl=
+d AR=3Dar /home/sam/work/qemu-buildsystem/buildsystem3.0/build/qemuarm64/tm=
+p/work/qemuarm64-poky-linux/bpftool/1.0-r0/bpftool-1.0/bootstrap/libbpf/lib=
+bpf.a install_headers
+> make: invalid option -- 'y'
+> make: invalid option -- '/'
+>
+> i guss that=EF=BC=9A
+> HOSTCC=3D"${BUILD_CC} ${BUILD_CFLAGS}"
+> should be this=EF=BC=9A
+> HOSTCC=3D"${BUILD_CC}
+>
+> because=EF=BC=8CHOSTCC is used in =EF=BC=9A
+>
+> $(LIBBPF_BOOTSTRAP): $(wildcard $(BPF_DIR)/*.[ch] $(BPF_DIR)/Makefile) | =
+$(LIBBPF_BOOTSTRAP_OUTPUT)
+>     echo chy____________1___$(BPF_DIR) _______________________
+>     $(Q)$(MAKE) -C $(BPF_DIR) OUTPUT=3D$(LIBBPF_BOOTSTRAP_OUTPUT) \
+>         DESTDIR=3D$(LIBBPF_BOOTSTRAP_DESTDIR:/=3D) prefix=3D \
+>         ARCH=3D CROSS_COMPILE=3D CC=3D$(HOSTCC) LD=3D$(HOSTLD) AR=3D$(HOS=
+TAR) $@ install_headers
+>     echo chy____________2__________________________
+>
+> if HOSTCC=3D ${BUILD_CC} and  ${BUILD_CFLAGS}
+> it will be err in step make -C =EF=BC=9A
+>
+> make -C /home/sam/work/qemu-buildsystem/buildsystem3.0/buildsystem/source=
+/kernel/linux-6.1.83/tools/lib/bpf OUTPUT=3D/home/sam/work/qemu-buildsystem=
+/buildsystem3.0/build/qemuarm64/tmp/work/qemuarm64-poky-linux/bpftool/1.0-r=
+0/bpftool-1.0/bootstrap/libbpf/  DESTDIR=3D/home/sam/work/qemu-buildsystem/=
+buildsystem3.0/build/qemuarm64/tmp/work/qemuarm64-poky-linux/bpftool/1.0-r0=
+/bpftool-1.0/bootstrap/libbpf prefix=3D  ARCH=3D CROSS_COMPILE=3D CC=3Dgcc =
+ -isystem/home/sam/work/qemu-buildsystem/buildsystem3.0/build/qemuarm64/tmp=
+/work/qemuarm64-poky-linux/bpftool/1.0-r0/recipe-sysroot-native/usr/include=
+ -O2 -pipe LD=3Dld AR=3Dar /home/sam/work/qemu-buildsystem/buildsystem3.0/b=
+uild/qemuarm64/tmp/work/qemuarm64-poky-linux/bpftool/1.0-r0/bpftool-1.0/boo=
+tstrap/libbpf/libbpf.a install_headers
+>
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#110971): https://lists.openembedded.org/g/openembedde=
+d-devel/message/110971
+> Mute This Topic: https://lists.openembedded.org/mt/104092706/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
