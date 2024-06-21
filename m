@@ -1,170 +1,457 @@
-Return-Path: <yi.zhao@eng.windriver.com>
+Return-Path: <meenali.gupta@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 35122C41513
-	for <webhook@archiver.kernel.org>; Fri, 21 Jun 2024 02:11:55 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.64023.1718935911641187374
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 86E00C27C4F
+	for <webhook@archiver.kernel.org>; Fri, 21 Jun 2024 06:36:07 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.67002.1718951759937086644
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Jun 2024 19:11:51 -0700
+ Thu, 20 Jun 2024 23:35:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=69022a9133=yi.zhao@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45L0R3tj011121
-	for <openembedded-devel@lists.openembedded.org>; Fri, 21 Jun 2024 02:11:51 GMT
-Received: from nam02-sn1-obe.outbound.protection.outlook.com (mail-sn1nam02lp2040.outbound.protection.outlook.com [104.47.57.40])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3yvrmurcrn-2
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 21 Jun 2024 02:11:50 +0000 (GMT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=FOo7v/0Y2y4hBZ5R01wls62yCf+kUgb25tj5a7k7gAUMqD3hKUfbf/NwZwIYPCNk7Qobl2+vyFGRX0EW+fak5Kn5ctWA/RMb4Hu3aTqiJ28HKmaMr2ypMYdbTDJibBjl5uP6s10eZ17x8b4IMr7hDRIXOpLBhrxij6Mm8ACQ3mxPSXxu4ZNHe5Upfg09RDPcT6Vb7pYO+N2YBgoZNVmVsoT8u4vI+sFA+i9xchRNTTZRZtDWgb1nC2gBo1BueyT6EUQVfYf8AAnuVcdws4oJL00XZv2kE/BQ8Ic/EuxPKYnVXstB4NrbvCHF6/gtJ2SEfYTHRxMdLyzw4+09mORjNw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CNNJsOVmlr9zgjXixIcJovC96adIUFKZ8TAJgEI0pGU=;
- b=PVtdAeRRQyYo7rGX6Z0I9kZwimasjBDFT6F6ZKsJJiviQo+RZ4O40FQzCPLFp8L66tOUfiWfJHMD6UjCrOv4GROKtDNqqnHS7o5noB40KoOIY6UcKCjr9wE01Rjy11iPqEUEVY8dgfnqVwk7C4NS2GCS8KzWUHXeJXLokGbOqNdrmvaUfnK8dDXYz6UzFrOyYuCgw2NZDSvPvStqq5+HjGhbV0H2q8BkcSDdusRAZWjgXma8S0pPy4pxS9PzU+1QtIyWaQa8d/GB20hNOztyIBbQQgfGr+lB+5GQ19UyE+dSwtVv/xqLD3kJAzXj1X8KdC2uUfCmko7T8WZE6yRpDQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5) by
- PH7PR11MB6859.namprd11.prod.outlook.com (2603:10b6:510:1ef::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.19; Fri, 21 Jun
- 2024 02:11:49 +0000
-Received: from DS0PR11MB6399.namprd11.prod.outlook.com
- ([fe80::2b44:787c:e7ee:bfad]) by DS0PR11MB6399.namprd11.prod.outlook.com
- ([fe80::2b44:787c:e7ee:bfad%3]) with mapi id 15.20.7698.017; Fri, 21 Jun 2024
- 02:11:49 +0000
-From: Yi Zhao <yi.zhao@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH 2/2] samba: upgrade 4.19.6 -> 4.19.7
-Date: Fri, 21 Jun 2024 10:11:38 +0800
-Message-Id: <20240621021138.2377160-2-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240621021138.2377160-1-yi.zhao@windriver.com>
-References: <20240621021138.2377160-1-yi.zhao@windriver.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: TYCPR01CA0102.jpnprd01.prod.outlook.com
- (2603:1096:405:4::18) To DS0PR11MB6399.namprd11.prod.outlook.com
- (2603:10b6:8:c8::5)
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=6902708f5d=meenali.gupta@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45L3Ugpc016581
+	for <openembedded-devel@lists.openembedded.org>; Thu, 20 Jun 2024 23:35:59 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3yvrmr0j8y-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 20 Jun 2024 23:35:59 -0700 (PDT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Thu, 20 Jun 2024 23:35:57 -0700
+From: mgupta1 <meenali.gupta@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-openembedded][kirkstone][PATCH 1/1] openvpn: fix multiple CVEs
+Date: Fri, 21 Jun 2024 06:35:37 +0000
+Message-ID: <20240621063537.3887271-1-meenali.gupta@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|PH7PR11MB6859:EE_
-X-MS-Office365-Filtering-Correlation-Id: a55fe90d-7932-4905-ddd1-08dc9197825c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230037|52116011|366013|376011|1800799021|38350700011;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?bxgYNIV1nHhipMzklTLnNhoBtve54cz3RmWci33SiPye8r1td1avKYamkdM8?=
- =?us-ascii?Q?bvnRQetlZmoRm7nNjGIoglboO1rITpQx1ZBDzqU9y3+IFu8D2oYoGe38Bzty?=
- =?us-ascii?Q?IoJJryH/jZaM4knYrPtZvZWJO8iomk6YSl0AT19awPHl16teojhy8px1gjEn?=
- =?us-ascii?Q?ymrTwFSEZH/eav8Fax7PdFQGeK22aJJF6bNj3DK9E75TCZ7v8Smd0Ori0H0N?=
- =?us-ascii?Q?Fw/KKwYS5QX8gDtx921yltSSoRt40M8pqMgZk2fYzbp3TKi6zZ/0Z1leRw1a?=
- =?us-ascii?Q?DGfnRdmMS1AqXxNS2NgH0/dlZn8RMFlOBMW04tH6+e3hHYCdFRDbDZbgKnHP?=
- =?us-ascii?Q?bRiqa18o+VEhZEMTUdMsArSffywH1iVDz/urL9uIY9QHLA5dOnLtaXf0h1e9?=
- =?us-ascii?Q?/JB/40M844LGAO3+FD0NkypeIkrGofbkD3wnMwtcxT3/uEklRpv5djFnWehj?=
- =?us-ascii?Q?HGxB80S0FzSgcF/UM/YXRSnVFrrXQyckGTPxEXz8vTOR+oNby0bc6P7cFITl?=
- =?us-ascii?Q?6lGigkuH+LxEXnMTEXTUvSAZZ3sc343jWbKlbWmM1XqkH7VbqmF/H3CZXfz9?=
- =?us-ascii?Q?RpSm4aFjLwHd3yQGVvVkN+QS3awHDEi1TizHe0U+UJBJz+E+XXLi1EDtRS+c?=
- =?us-ascii?Q?f5WMx2HOlllCXZxhAbLW4En4B8QXc9E6acWGkce8ZaihL8aWc1KKy3PpduLZ?=
- =?us-ascii?Q?CdnrS6Qk1gqO2feEv9GKemRnVavjEGzM5cP8AL7zO+LgT1qG+ZCGL+8Wif1O?=
- =?us-ascii?Q?o5xlBMN/2x369DYwSuOkHJsV80kO+D91KH24lcibG7fkZtkozvXAO65YquIl?=
- =?us-ascii?Q?shThwrGCmLoTIRYaEd06Ac5hqbEwun+ynjGBlfLR+XvG2PKvwLoO92rUL69L?=
- =?us-ascii?Q?30b2yz3Ri83aXf0+m2cjjpfJnLemp+oyf8NAge3rFTb0c8P9GR90ACIwYxrH?=
- =?us-ascii?Q?SpekxplfuuNc2fSdo4jh9eise+xMYnOmFSt64VHySR/omhok5z7qJlOaXfGy?=
- =?us-ascii?Q?vhiF1JTYnAf3rfMYm6jo8qnu55frQkM66tez/gnj5qzQFw2GDoKt4X0VCDlM?=
- =?us-ascii?Q?qtGRIydWesDtKiL9H/CcfrA7uAy/Jk6iTmKPIXeR+EAn9uE6mCD0TpIGir2C?=
- =?us-ascii?Q?yd99A8mHwYRivGMRS995+virPoUNCFWdMxQKG9/tytffXYMW+wuUHxlA63eR?=
- =?us-ascii?Q?kZ4mdpIlFp/4/TLzMGQwsoyvNZb5P5j+c5dMipIUxexl8xgtAmx36EOjzTch?=
- =?us-ascii?Q?qsyp/MNEJ0g70wAjb1K0OxK+Fu162dlOoqqWS0SpHyr+QVAHaWIOcBqvrcsC?=
- =?us-ascii?Q?XbWK9HRrefHle+aR2rkNtnsi?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230037)(52116011)(366013)(376011)(1800799021)(38350700011);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?32KIEkc9Xn6IlZgpjXcfENYUgofgXSqWFSAV+9ZRYKLRQakTKDfhlTeRGoN3?=
- =?us-ascii?Q?V+J8du54MK/gWbxpqVV/yAEn408OalibofLsmTBL7lt2pGIXq3D9tf6EuUuI?=
- =?us-ascii?Q?aKQeTobsd6KyPwe/qoVJ9f37VZ7MzHUQRrEw3dLVUfckdrDM1Q4OaCvYADYn?=
- =?us-ascii?Q?PZiWf+WKYZDmUQdfF2ydTePQHhlVtDN3ikirknDmO45EcUYw7HowRoMDidqv?=
- =?us-ascii?Q?+l+BzRgPPdcsLLH2koOUWAiwrU05g2ldytZdZyfYCo/ydUkvo6srjubh4KN1?=
- =?us-ascii?Q?HMe95bSIn1plXxMcSL4BNxYoJEW/kG73H+e00iFHKPDbNzm37q+kNzYtD86Q?=
- =?us-ascii?Q?HzaNuQ9E0Javeevy/Yn2RhygecuBuzyH4ZIa4/QfA4Gw5sexoRtMXL5OQScG?=
- =?us-ascii?Q?S0HWt3RwTaMphBMes/GS9nD3yk5nQwhaUnAFJney7ldmGd8NNXndp6sECHll?=
- =?us-ascii?Q?zb80Y2DDEsTFm6Nxs+GTnDDWGiiK3maGlKe7HInXQ3zImkh20msBV1A8SO6M?=
- =?us-ascii?Q?HhedhR78x361keQ1eF9QoYl2BN+bEIfjWCCAiicK+2c7uZ7+hkD1Lqikvppl?=
- =?us-ascii?Q?9E4yzhjVz148z6z9XPY43zcKx4qlxPY2tJW1GQYhreZkIQ6+8MUHaX8u1GGo?=
- =?us-ascii?Q?FV49uq9zA0Lf6zD7v8SLma4Lxk8gHO78jeVtFPw5VXRGIyi5Ujjucil4w4YE?=
- =?us-ascii?Q?dV46HLy4UpcD3UoVlTyz0JFI3fC0n9dSgeu3nCGtXI1fwnYp6G5gcd6K3Tq3?=
- =?us-ascii?Q?cBqLNALYz/HMIsyj2jGTCJdIOHO/XCIRIgTn2Rf8hvL06uTluuD7tiMrI5wU?=
- =?us-ascii?Q?fYGxAaHYCJ0qjxfSgEVmgxSpnlOzyREgeImVgkD6VAsRx+69SrlchUxlPaMj?=
- =?us-ascii?Q?1EKQ6/TXA2HfSFW9VB1IC4Tp47yxPpmO73qGMcG+EIQsHInumOLpFq8FtE+F?=
- =?us-ascii?Q?kaoNPam+WxrIIK2dhrrSQA+ET99HT4nrqlwJgMOvb4q2FJd+hWxalEFxbDuJ?=
- =?us-ascii?Q?iRL/NxVcFJGHABIRI9rtsqslppwaP+wW8lGSDJaggUl7QwfhehEwc9YbIiZc?=
- =?us-ascii?Q?KbYCPXx6kp6J02X8bsdWScRtfDzX7YFvU0vwIDUV/tiaGyJ42iiojEBYKeVm?=
- =?us-ascii?Q?LYC0H6ZVyvKCVUhGLqRlGFWx9dDu0TdC+1Qq0WyBPOmmTdFvfU3TUnIIwnyu?=
- =?us-ascii?Q?zB6fW8f3nK1pR0wUappv8go58bMHnb9Vdld9/dymBJ0ifVQPSdsL+zOHEB1R?=
- =?us-ascii?Q?bGSrVW9D1wQaoTi8AQYdCMC8+AcTZS1HAql6wVMTXUrvNc4LL/Tu2B/YW7P5?=
- =?us-ascii?Q?WH2idlG8xca9RjIYgbGg02Vu8oM6ggnaaA9OFFQDutcKvZq25H0ZXhGQtpN1?=
- =?us-ascii?Q?0ydVm5ns7eDlEh0RlSgcHCUEhTx82O4wnA1g50uqfF/2E7pyEYNc0eBoRCIV?=
- =?us-ascii?Q?A11ixjfcXYUz1iikx7+l0UssxohE24eXtyWPfnIyYjTbeYUFYZsPlhm94bJE?=
- =?us-ascii?Q?4+YOO2WmEdp4yXYIGgcVrbrsvTssFAsySSAdPAPqhLdzD5RBFiLNNF9T/vyI?=
- =?us-ascii?Q?S0HXQne9tWT1+/jo19yifyApbCJyft9WdqHfRr6D?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a55fe90d-7932-4905-ddd1-08dc9197825c
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6399.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jun 2024 02:11:49.5414
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: wwOdnFXYjgUp97dCo1fZinVLwqNeDONjam3LI+rgH94vHjneWkvf8C7l3iOVdE/hUw/+QrwLUUoQWozg6kPB+g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB6859
-X-Proofpoint-GUID: SGribkv2CZ5mGW2EIfdJDigTpmdzPEkT
-X-Proofpoint-ORIG-GUID: SGribkv2CZ5mGW2EIfdJDigTpmdzPEkT
+Content-Type: text/plain; charset="UTF-8"
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: WLkciO8bj6PUbjEBoMk8J0uiL_IdesGL
+X-Proofpoint-ORIG-GUID: WLkciO8bj6PUbjEBoMk8J0uiL_IdesGL
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-20_12,2024-06-20_04,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 mlxlogscore=999
- impostorscore=0 malwarescore=0 adultscore=0 lowpriorityscore=0 mlxscore=0
- suspectscore=0 priorityscore=1501 phishscore=0 bulkscore=0 spamscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.21.0-2406140001
- definitions=main-2406210013
+ definitions=2024-06-21_01,2024-06-20_04,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ spamscore=0 phishscore=0 adultscore=0 mlxlogscore=999 suspectscore=0
+ impostorscore=0 malwarescore=0 mlxscore=0 clxscore=1011 lowpriorityscore=0
+ bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2406140001 definitions=main-2406210047
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 45L3Ugpc016581
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Jun 2024 02:11:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110985
+ <openembedded-devel@lists.openembedded.org>; Fri, 21 Jun 2024 06:36:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110986
 
-ChangeLog:
-https://www.samba.org/samba/history/samba-4.19.7.html
+From: Meenali Gupta <meenali.gupta@windriver.com>
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+CVE-2024-24974:
+Previously, the VPN tool=E2=80=99s Windows implementation allowed remote =
+access to
+its service pipe, posing a security risk. Using compromised credentials, =
+a
+threat actor could communicate with OpenVPN to orchestrate attacks.
+
+CVE-2024-27903:
+OpenVPN has mitigated the risk by restricting plugin load. Plugins can
+now only be loaded from the software=E2=80=99s install directory, the Win=
+dows
+system directory, and the plugin_dir directory under the software=E2=80=99=
+s installation.
+
+CVE-2024-27459:
+This vulnerability affects the interactive service component, potentially=
+ leading
+to local privilege escalation when triggered by an oversized message.To m=
+itigate
+this risk, the VPN solution now terminates connections upon detecting exc=
+essively
+large messages, preventing stack overflow exploits.
+
+References:
+https://openvpn.net/security-advisory/ovpnx-vulnerability-cve-2024-27903-=
+cve-2024-27459-cve-2024-24974/
+https://socradar.io/openvpn-fixed-multiple-vulnerabilities-on-windows/
+https://community.openvpn.net/openvpn/wiki/CVE-2024-27903
+https://community.openvpn.net/openvpn/wiki/CVE-2024-27459
+https://community.openvpn.net/openvpn/wiki/CVE-2024-24974
+
+Signed-off-by: Meenali Gupta <meenali.gupta@windriver.com>
 ---
- .../samba/{samba_4.19.6.bb => samba_4.19.7.bb}                  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/samba/{samba_4.19.6.bb => samba_4.19.7.bb} (99%)
+ .../openvpn/openvpn/CVE-2024-24974.patch      |  49 ++++++++
+ .../openvpn/openvpn/CVE-2024-27459.patch      |  99 +++++++++++++++
+ .../openvpn/openvpn/CVE-2024-27903.patch      | 119 ++++++++++++++++++
+ .../recipes-support/openvpn/openvpn_2.5.6.bb  |   6 +-
+ 4 files changed, 272 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/openvpn/openvpn/CVE-2=
+024-24974.patch
+ create mode 100644 meta-networking/recipes-support/openvpn/openvpn/CVE-2=
+024-27459.patch
+ create mode 100644 meta-networking/recipes-support/openvpn/openvpn/CVE-2=
+024-27903.patch
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.19.6.bb b/meta-networking/recipes-connectivity/samba/samba_4.19.7.bb
-similarity index 99%
-rename from meta-networking/recipes-connectivity/samba/samba_4.19.6.bb
-rename to meta-networking/recipes-connectivity/samba/samba_4.19.7.bb
-index 7bdcfd35c..796f1697f 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.19.6.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.19.7.bb
-@@ -31,7 +31,7 @@ SRC_URI:append:libc-musl = " \
-            file://samba-4.3.9-remove-getpwent_r.patch \
-            "
- 
--SRC_URI[sha256sum] = "653b52095554dbc223c63b96af5cdf9e98c3e048549c5f56143d3b33dce1cef1"
-+SRC_URI[sha256sum] = "2bbb800af2d6bc7b9c23e708cd58d008da3bfa6ef7e621d9ec8b53387efee445"
- 
- UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.19(\.\d+)+).tar.gz"
- 
--- 
-2.25.1
+diff --git a/meta-networking/recipes-support/openvpn/openvpn/CVE-2024-249=
+74.patch b/meta-networking/recipes-support/openvpn/openvpn/CVE-2024-24974=
+.patch
+new file mode 100644
+index 0000000000..b42b3040ef
+--- /dev/null
++++ b/meta-networking/recipes-support/openvpn/openvpn/CVE-2024-24974.patc=
+h
+@@ -0,0 +1,49 @@
++From 2c1de0f0803360c0a6408f754066bd3a6fb28237 Mon Sep 17 00:00:00 2001
++From: Lev Stipakov <lstipakov@gmail.com>
++Date: Tue, 19 Mar 2024 17:16:07 +0200
++Subject: [PATCH] interactive.c: disable remote access to the service pip=
+e
++
++Remote access to the service pipe is not needed and might
++be a potential attack vector.
++
++For example, if an attacker manages to get credentials for
++a user which is the member of "OpenVPN Administrators" group
++on a victim machine, an attacker might be able to communicate
++with the privileged interactive service on a victim machine
++and start openvpn processes remotely.
++
++CVE: 2024-24974
++
++Microsoft case number: 85925
++
++Reported-by: Vladimir Tokarev <vtokarev@microsoft.com>
++Change-Id: I8739c5f127e9ca0683fcdbd099dba9896ae46277
++Signed-off-by: Lev Stipakov <lev@openvpn.net>
++Acked-by: Heiko Hund <heiko@openvpn.net>
++Message-Id: <20240319151723.936-2-lev@openvpn.net>
++URL: https://www.mail-archive.com/openvpn-devel@lists.sourceforge.net/ms=
+g28419.html
++Signed-off-by: Gert Doering <gert@greenie.muc.de>
++
++CVE:CVE-2024-24974
++Upstream-Status: Backport [https://github.com/OpenVPN/openvpn/commit/2c1=
+de0f0803360c0a6408f754066bd3a6fb28237]
++
++Signed-off-by: Meenali Gupta <meenali.gupta@windriver.com>
++---
++ src/openvpnserv/interactive.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/openvpnserv/interactive.c b/src/openvpnserv/interactive=
+.c
++index 3b120ae..5e3ff12 100644
++--- a/src/openvpnserv/interactive.c
+++++ b/src/openvpnserv/interactive.c
++@@ -1994,7 +1994,7 @@ CreateClientPipeInstance(VOID)
++
++     openvpn_sntprintf(pipe_name, _countof(pipe_name), TEXT("\\\\.\\pipe=
+\\" PACKAGE "%s\\service"), service_instance);
++     pipe =3D CreateNamedPipe(pipe_name, flags,
++-                           PIPE_TYPE_MESSAGE | PIPE_READMODE_MESSAGE,
+++                           PIPE_TYPE_MESSAGE | PIPE_READMODE_MESSAGE | =
+PIPE_REJECT_REMOTE_CLIENTS,
++                            PIPE_UNLIMITED_INSTANCES, 1024, 1024, 0, NUL=
+L);
++     if (pipe =3D=3D INVALID_HANDLE_VALUE)
++     {
++--
++2.40.0
+diff --git a/meta-networking/recipes-support/openvpn/openvpn/CVE-2024-274=
+59.patch b/meta-networking/recipes-support/openvpn/openvpn/CVE-2024-27459=
+.patch
+new file mode 100644
+index 0000000000..d04eeb571d
+--- /dev/null
++++ b/meta-networking/recipes-support/openvpn/openvpn/CVE-2024-27459.patc=
+h
+@@ -0,0 +1,99 @@
++From 989b22cb6e007fd1addcfaf7d12f4fec9fbc9639 Mon Sep 17 00:00:00 2001
++From: Lev Stipakov <lstipakov@gmail.com>
++Date: Tue, 19 Mar 2024 17:27:11 +0200
++Subject: [PATCH] interactive.c: Fix potential stack overflow issue
++When reading message from the pipe, we first peek the pipe to get the si=
+ze
++of the message waiting to be read and then read the message. A compromis=
+ed
++OpenVPN process could send an excessively large message, which would res=
+ult
++in a stack-allocated message buffer overflow.
++
++To address this, we terminate the misbehaving process if the peeked mess=
+age
++size exceeds the maximum allowable size.
++
++CVE: 2024-27459
++Microsoft case number: 85932
++
++Reported-by: Vladimir Tokarev <vtokarev@microsoft.com>
++Change-Id: Ib5743cba0741ea11f9ee62c4978b2c6789b81ada
++Signed-off-by: Lev Stipakov <lev@openvpn.net>
++Acked-by: Heiko Hund <heiko@openvpn.net>
++Message-Id: <20240319152803.1801-2-lev@openvpn.net>
++URL: https://www.mail-archive.com/openvpn-devel@lists.sourceforge.net/ms=
+g28420.html
++Signed-off-by: Gert Doering <gert@greenie.muc.de>
++
++CVE:CVE-2024-27459
++Upstream-Status: Backport [https://github.com/OpenVPN/openvpn/commit/989=
+b22cb6e007fd1addcfaf7d12f4fec9fbc9639]
++
++Signed-off-by: Meenali Gupta <meenali.gupta@windriver.com>
++---
++ src/openvpnserv/interactive.c | 34 +++++++++++++++++++++-------------
++ 1 file changed, 21 insertions(+), 13 deletions(-)
++
++diff --git a/src/openvpnserv/interactive.c b/src/openvpnserv/interactive=
+.c
++index 5e3ff12..f613b99 100644
++--- a/src/openvpnserv/interactive.c
+++++ b/src/openvpnserv/interactive.c
++@@ -111,6 +111,18 @@ typedef struct {
++     HANDLE device;
++ } ring_buffer_handles_t;
++
+++typedef union {
+++    message_header_t header;
+++    address_message_t address;
+++    route_message_t route;
+++    flush_neighbors_message_t flush_neighbors;
+++    block_dns_message_t block_dns;
+++    dns_cfg_message_t dns;
+++    enable_dhcp_message_t dhcp;
+++    register_ring_buffers_message_t rrb;
+++    set_mtu_message_t mtu;
+++    wins_cfg_message_t wins;
+++} pipe_message_t;
++
++ static DWORD
++ AddListItem(list_item_t **pfirst, LPVOID data)
++@@ -1444,18 +1456,7 @@ static VOID
++ HandleMessage(HANDLE pipe, HANDLE ovpn_proc, ring_buffer_handles_t *rin=
+g_buffer_handles,
++               DWORD bytes, DWORD count, LPHANDLE events, undo_lists_t *=
+lists)
++ {
++-    DWORD read;
++-    union {
++-        message_header_t header;
++-        address_message_t address;
++-        route_message_t route;
++-        flush_neighbors_message_t flush_neighbors;
++-        block_dns_message_t block_dns;
++-        dns_cfg_message_t dns;
++-        enable_dhcp_message_t dhcp;
++-        register_ring_buffers_message_t rrb;
++-        set_mtu_message_t mtu;
++-    } msg;
+++    pipe_message_t msg;
++     ack_message_t ack =3D {
++         .header =3D {
++             .type =3D msg_acknowledgement,
++@@ -1465,7 +1466,7 @@ HandleMessage(HANDLE pipe, HANDLE ovpn_proc, ring_=
+buffer_handles_t *ring_buffer_
++         .error_number =3D ERROR_MESSAGE_DATA
++     };
++
++-    read =3D ReadPipeAsync(pipe, &msg, bytes, count, events);
+++    DWORD read =3D ReadPipeAsync(pipe, &msg, bytes, count, events);
++     if (read !=3D bytes || read < sizeof(msg.header) || read !=3D msg.h=
+eader.size)
++     {
++         goto out;
++@@ -1884,6 +1885,13 @@ RunOpenvpn(LPVOID p)
++             break;
++         }
++
+++	 if (bytes > sizeof(pipe_message_t))
+++        {
+++            /* process at the other side of the pipe is misbehaving, sh=
+ut it down */
+++            MsgToEventLog(MSG_FLAGS_ERROR, TEXT("OpenVPN process sent t=
+oo large payload length to the pipe (%lu bytes), it will be terminated"),=
+ bytes);
+++            break;
+++        }
+++
++         HandleMessage(ovpn_pipe, proc_info.hProcess, &ring_buffer_handl=
+es, bytes, 1, &exit_event, &undo_lists);
++     }
++
++--
++2.40.0
+diff --git a/meta-networking/recipes-support/openvpn/openvpn/CVE-2024-279=
+03.patch b/meta-networking/recipes-support/openvpn/openvpn/CVE-2024-27903=
+.patch
+new file mode 100644
+index 0000000000..d0726ab35c
+--- /dev/null
++++ b/meta-networking/recipes-support/openvpn/openvpn/CVE-2024-27903.patc=
+h
+@@ -0,0 +1,119 @@
++From aaea545d8a940f761898d736b68bcb067d503b1d Mon Sep 17 00:00:00 2001
++From: Lev Stipakov <lstipakov@gmail.com>
++Date: Tue, 19 Mar 2024 15:53:45 +0200
++Subject: [PATCH] win32: Enforce loading of plugins from a trusted direct=
+ory
++
++Currently, there's a risk associated with allowing plugins to be loaded =
+from
++any location. This update ensures plugins are only loaded from a trusted
++directory, which is either:
++
++    - HKLM\SOFTWARE\OpenVPN\plugin_dir (or if the key is missing,
++    then HKLM\SOFTWARE\OpenVPN, which is installation directory)
++
++    - System directory
++
++Loading from UNC paths is disallowed.
++
++Note: This change affects only Windows environments.
++
++CVE: 2024-27903
++
++Change-Id: I154a4aaad9242c9253a64312a14c5fd2ea95f40d
++Reported-by: Vladimir Tokarev <vtokarev@microsoft.com>
++Signed-off-by: Lev Stipakov <lev@openvpn.net>
++Acked-by: Selva Nair <selva.nair@gmail.com>
++Message-Id: <20240319135355.1279-2-lev@openvpn.net>
++URL: https://www.mail-archive.com/openvpn-devel@lists.sourceforge.net/ms=
+g28416.html
++Signed-off-by: Gert Doering <gert@greenie.muc.de>
++
++CVE:CVE-2024-27903
++Upstream-Status: Backport [https://github.com/OpenVPN/openvpn/commit/aae=
+a545d8a940f761898d736b68bcb067d503b1d]
++
++Signed-off-by: Meenali Gupta <meenali.gupta@windriver.com>
++---
++ src/openvpn/plugin.c | 18 +++++++++++++++---
++ src/openvpn/win32.c  | 21 +++++++++------------
++ 2 files changed, 24 insertions(+), 15 deletions(-)
++
++diff --git a/src/openvpn/plugin.c b/src/openvpn/plugin.c
++index ed5d7c0..f7315f4 100644
++--- a/src/openvpn/plugin.c
+++++ b/src/openvpn/plugin.c
++@@ -279,11 +279,23 @@ plugin_init_item(struct plugin *p, const struct pl=
+ugin_option *o)
++
++ #else  /* ifndef _WIN32 */
++
++-    rel =3D !platform_absolute_pathname(p->so_pathname);
++-    p->module =3D LoadLibraryW(wide_string(p->so_pathname, &gc));
+++    WCHAR *wpath =3D wide_string(p->so_pathname, &gc);
+++    WCHAR normalized_plugin_path[MAX_PATH] =3D {0};
+++    /* Normalize the plugin path, converting any relative paths to abso=
+lute paths. */
+++    if (!GetFullPathNameW(wpath, MAX_PATH, normalized_plugin_path, NULL=
+))
+++    {
+++        msg(M_ERR, "PLUGIN_INIT: could not load plugin DLL: %ls. Failed=
+ to normalize plugin path.", wpath);
+++    }
+++
+++    if (!plugin_in_trusted_dir(normalized_plugin_path))
+++    {
+++        msg(M_FATAL, "PLUGIN_INIT: could not load plugin DLL: %ls. The =
+DLL is not in a trusted directory.", normalized_plugin_path);
+++    }
+++
+++    p->module =3D LoadLibraryW(normalized_plugin_path);
++     if (!p->module)
++     {
++-        msg(M_ERR, "PLUGIN_INIT: could not load plugin DLL: %s", p->so_=
+pathname);
+++        msg(M_ERR, "PLUGIN_INIT: could not load plugin DLL: %ls", norma=
+lized_plugin_path);
++     }
++
++ #define PLUGIN_SYM(var, name, flags) dll_resolve_symbol(p->module, (voi=
+d *)&p->var, name, p->so_pathname, flags)
++diff --git a/src/openvpn/win32.c b/src/openvpn/win32.c
++index e91e742..1e61ffa 100644
++--- a/src/openvpn/win32.c
+++++ b/src/openvpn/win32.c
++@@ -1532,27 +1532,24 @@ openvpn_swprintf(wchar_t *const str, const size_=
+t size, const wchar_t *const for
++     return (len >=3D 0 && len < size);
++ }
++
++-static BOOL
++-get_install_path(WCHAR *path, DWORD size)
+++bool
+++get_openvpn_reg_value(const WCHAR *key, WCHAR *value, DWORD size)
++ {
++     WCHAR reg_path[256];
++-    HKEY key;
++-    BOOL res =3D FALSE;
+++    HKEY hkey;
++     openvpn_swprintf(reg_path, _countof(reg_path), L"SOFTWARE\\" PACKAG=
+E_NAME);
++
++-    LONG status =3D RegOpenKeyExW(HKEY_LOCAL_MACHINE, reg_path, 0, KEY_=
+READ, &key);
+++    LONG status =3D RegOpenKeyExW(HKEY_LOCAL_MACHINE, reg_path, 0, KEY_=
+READ, &hkey);
++     if (status !=3D ERROR_SUCCESS)
++     {
++-        return res;
+++        return false;
++     }
++
++-    /* The default value of REG_KEY is the install path */
++-    status =3D RegGetValueW(key, NULL, NULL, RRF_RT_REG_SZ, NULL, (LPBY=
+TE)path, &size);
++-    res =3D status =3D=3D ERROR_SUCCESS;
+++    status =3D RegGetValueW(hkey, NULL, key, RRF_RT_REG_SZ, NULL, (LPBY=
+TE)value, &size);
++
++-    RegCloseKey(key);
+++    RegCloseKey(hkey);
++
++-    return res;
+++    return status =3D=3D ERROR_SUCCESS;
++ }
++
++ static void
++@@ -1561,7 +1558,7 @@ set_openssl_env_vars()
++     const WCHAR *ssl_fallback_dir =3D L"C:\\Windows\\System32";
++
++     WCHAR install_path[MAX_PATH] =3D { 0 };
++-    if (!get_install_path(install_path, _countof(install_path)))
+++    if (!get_openvpn_reg_value(NULL, install_path, _countof(install_pat=
+h)))
++     {
++         /* if we cannot find installation path from the registry,
++          * use Windows directory as a fallback
++--
++2.40.0
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.5.6.bb b/m=
+eta-networking/recipes-support/openvpn/openvpn_2.5.6.bb
+index 828cd5033e..b5ee31078b 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.5.6.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.5.6.bb
+@@ -10,7 +10,11 @@ inherit autotools systemd update-rc.d
+ SRC_URI =3D "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz=
+ \
+            file://openvpn \
+            file://openvpn@.service \
+-           file://openvpn-volatile.conf"
++           file://openvpn-volatile.conf \
++           file://CVE-2024-24974.patch \
++           file://CVE-2024-27459.patch \
++           file://CVE-2024-27903.patch \
++           "
+=20
+ UPSTREAM_CHECK_URI =3D "https://openvpn.net/community-downloads"
+=20
+--=20
+2.40.0
 
 
