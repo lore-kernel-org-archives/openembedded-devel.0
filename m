@@ -1,94 +1,140 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E832C2BA1A
-	for <webhook@archiver.kernel.org>; Fri, 21 Jun 2024 11:35:10 +0000 (UTC)
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.web11.70784.1718969706542100462
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 43FDFC27C53
+	for <webhook@archiver.kernel.org>; Sat, 22 Jun 2024 04:40:05 +0000 (UTC)
+Received: from mail-oa1-f49.google.com (mail-oa1-f49.google.com [209.85.160.49])
+ by mx.groups.io with SMTP id smtpd.web10.91598.1719031196834059394
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Jun 2024 04:35:06 -0700
+ Fri, 21 Jun 2024 21:39:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=U12QrlwB;
- spf=pass (domain: konsulko.com, ip: 209.85.221.50, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-35f2c9e23d3so1921586f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Jun 2024 04:35:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZVbY+3dF;
+ spf=pass (domain: gmail.com, ip: 209.85.160.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f49.google.com with SMTP id 586e51a60fabf-254aec5a084so1435140fac.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Jun 2024 21:39:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1718969705; x=1719574505; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1719031196; x=1719635996; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=z9jpSYCsfStI+M71P/DwM+Hx3bQYXftoK0XcxH2V5po=;
-        b=U12QrlwBaIT6vmuX4EmW6ATnmNYujeNTl3AyoaYeol7PXpXP0BYg40VaqQCVmzYubs
-         y3e5e3HreY+KgY3b0FNG/QTXv2kwBueZhatxUR58UBji5gPAH6U2f7cl7Zc0ka+wW3NB
-         7+HmSGiUs8JmLKkYMsUvEvcJZqMywljbvxcaI=
+        bh=OKY3xYukqxcCq9zl6cj8wklJny4mtTLBLEzSP1nwLUI=;
+        b=ZVbY+3dF+XNKkrEr5pzZjmIbqIkeMHdlhrc+wIvB0xqcB/vRY4Lt4Jl/oECZiayut/
+         VeFt2V/Yfj9XRvEuOIvzivbFppDpQXnLVHYWSIFy6aL6WBzTCylgJm87SZpcOgvjARvo
+         r6slZt3MBwpZh+HS9xMS2aY3VxRH+RapOnq2fZRCdBKPQaSDtjtx6KeKZpGSCBeP9x9z
+         X9BQO8jENYs/sa+FuVyceB3+c0ipU+XxmSvJtDOeLWOrCYne5E1XpYqpoHnYpA7UkHZb
+         WVYYoCIZnUskrwhy2UTNelb2c3cgmVVT+gN93L6IWSmn3oh8/ZGYSR9sA6ny7xPGd0gu
+         Bf7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1718969705; x=1719574505;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1719031196; x=1719635996;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=z9jpSYCsfStI+M71P/DwM+Hx3bQYXftoK0XcxH2V5po=;
-        b=aaLJfloPDO7x47s34hUc++TLH8VWZGJMDSTeKj0/OQO+HmV0jCKoNds1oJydCtlVi7
-         FeW8Rf8tcujIWT0JFlOy1Gb7+4UV7mVB4DWUVDuIJISPMU15uH0JPNkcUb9r9K+WCKhl
-         tEOo96QRctLC+AK9eZi2b/Gc6j9Z3UjZKgFFN0dzrTBgd96w3bh+xWTLu+DPvVdKEVpp
-         VCJW2VO1YcrRH9HULMf3udrYJKQyLTGwuP+YRfmOQPJOY1ntwOPNMwJzGkImsw5AkcHQ
-         ocSQxSamAXhdPgGgK/RZek1ZLsQNC6hBcKs6Z5qf2eN06ZdXvsDmojOvsREpe2W142A0
-         cOqA==
-X-Gm-Message-State: AOJu0YzD3nv322G0ciVVwow2gqGTv23HLYUIzTDh44FR7sBqsi3e6gQu
-	vix18PkJtA+to6I0yDSjZl5NwHcl4H5TMFSrsJD4cJ+UAezP4U2/q4SkTCi51zCwrW3XBt3mAbD
-	E
-X-Google-Smtp-Source: AGHT+IHpI9FceaqL+SSrFy7gpmkeX7emiFxyTlkyN/FCtib8g3GfGh5WU+PHKUSdDvzhVROGsCjnwA==
-X-Received: by 2002:adf:8b5a:0:b0:362:e10f:5d58 with SMTP id ffacd0b85a97d-362e11ea05emr7595612f8f.27.1718969704764;
-        Fri, 21 Jun 2024 04:35:04 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3663a2f6d02sm1470662f8f.85.2024.06.21.04.35.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Jun 2024 04:35:04 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-cbor2: Upgrade 5.6.3 -> 5.6.4
-Date: Fri, 21 Jun 2024 14:34:58 +0300
-Message-Id: <20240621113459.2188274-4-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240621113459.2188274-1-leon.anavi@konsulko.com>
-References: <20240621113459.2188274-1-leon.anavi@konsulko.com>
+        bh=OKY3xYukqxcCq9zl6cj8wklJny4mtTLBLEzSP1nwLUI=;
+        b=kHHEz2T+J2qP4BbXZ+0ogg01S2JSgiPL3N1+NKEJ0r2F7kIxrsTk/G6SfMo6qFwwTG
+         mV5jYGsR9iW53Nhdygd9zpEFHpWN/dDxGg573H5EBQYhJ2cjdIm1/HPDB8kj6jNJaufg
+         fTd8KnhyZDN70Ww7oMGPpOBe+hahtcMuART3VxxqY+XaJgzToYX7rgZ7UrVLVmvAv39+
+         R6NlcrKCBwgP5TUxNKh3Pt3pv2TWuN+zBpS6nXFqQOmIXLz10eFNt80OXRdUUGFEVbNk
+         yjEXI5jO6eh8sNLJwG2r70qmNpC+eMzZ8y1gSfuUlkkUb3Uj8OVsGvLN4opBOJhOSnUU
+         NewA==
+X-Forwarded-Encrypted: i=1; AJvYcCVM401vJkXBEnuHy0hQnEEGfx87cynWenYWU9AAHCMzBfO6d8qdq9RLHQNI4gt64VRN/sF8EImEuOcgrErn3EXCUfV+b15/x/G9q4fNkwcmYHjbvlmp0uP5KQ==
+X-Gm-Message-State: AOJu0YwMoUU1r1pnpGYI4z1vkpQ6o1RNJ4RjpDUC6PZRi0tnoYEz0/tJ
+	qIt/AMIIdsPg5uF58iltnD+w2qbman+6emrsJWhR1gC4NPlVbXQFFgapMaeKfX9m8ErYRa+zAEL
+	wYnGDqUHtlN9wpsg1gGBdvvuYWYs=
+X-Google-Smtp-Source: AGHT+IHRkV6U5cmxrVw0CdlVcZt5py01GoiHD0FXp6Pk8r/N6PPb1EgNqKVoUDOowZ49Ufh3LEaKpGtrxeQJfnEFjIg=
+X-Received: by 2002:a05:6870:611e:b0:24c:ac7e:8a56 with SMTP id
+ 586e51a60fabf-25c94d72256mr10349825fac.57.1719031195926; Fri, 21 Jun 2024
+ 21:39:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240619122019.529213-1-leon.anavi@konsulko.com>
+ <20240619122019.529213-2-leon.anavi@konsulko.com> <CANx9H-CtguyHBiOX8TF-gk81FGx6-Ja_SbAC0kfhKOQR2Curcw@mail.gmail.com>
+In-Reply-To: <CANx9H-CtguyHBiOX8TF-gk81FGx6-Ja_SbAC0kfhKOQR2Curcw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 21 Jun 2024 21:39:29 -0700
+Message-ID: <CAMKF1so0KzW17+ek=PhGgOoUpFVK1O8S5CZY7QFBR8UiO7Z8+Q@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 2/3] python3-tornado: Upgrade 6.4 -> 6.4.1
+To: ticotimo@gmail.com
+Cc: leon.anavi@konsulko.com, openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Jun 2024 11:35:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110991
+ <openembedded-devel@lists.openembedded.org>; Sat, 22 Jun 2024 04:40:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110993
 
-Upgrade to release 5.6.4:
+On Wed, Jun 19, 2024 at 3:15=E2=80=AFPM Tim Orling via lists.openembedded.o=
+rg
+<ticotimo=3Dgmail.com@lists.openembedded.org> wrote:
+>
+> We should update to =E2=80=9Cinherit python_setuptools_build_meta=E2=80=
+=9D per
+> https://github.com/tornadoweb/tornado/blob/2a0e1d13b5222dca4388c0ec8a4bb7=
+4ea6fa4af2/pyproject.toml#L3
+>
 
-- Fixed compilation of C extension failing on GCC 14
-- Fixed compiler warnings when building C extension
+https://github.com/tornadoweb/tornado/commit/e71fb6e616e08838df55dddb494c96=
+a80454f812
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../python/{python3-cbor2_5.6.3.bb => python3-cbor2_5.6.4.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-cbor2_5.6.3.bb => python3-cbor2_5.6.4.bb} (89%)
+added the needed support for wheels, I think a followup to do this
+would be just fine
 
-diff --git a/meta-python/recipes-devtools/python/python3-cbor2_5.6.3.bb b/meta-python/recipes-devtools/python/python3-cbor2_5.6.4.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-cbor2_5.6.3.bb
-rename to meta-python/recipes-devtools/python/python3-cbor2_5.6.4.bb
-index c9c98b6fb..4033b985a 100644
---- a/meta-python/recipes-devtools/python/python3-cbor2_5.6.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-cbor2_5.6.4.bb
-@@ -4,7 +4,7 @@ DEPENDS +="python3-setuptools-scm-native"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
- 
--SRC_URI[sha256sum] = "e6f0ae2751c2d333a960e0807c0611494eb1245631a167965acbc100509455d3"
-+SRC_URI[sha256sum] = "1c533c50dde86bef1c6950602054a0ffa3c376e8b0e20c7b8f5b108793f6983e"
- 
- inherit pypi python_setuptools_build_meta ptest
- 
--- 
-2.39.2
-
+>
+> On Wed, Jun 19, 2024 at 5:20=E2=80=AFAM Leon Anavi via lists.openembedded=
+.org <leon.anavi=3Dkonsulko.com@lists.openembedded.org> wrote:
+>>
+>> Upgrade to version 6.4.1:
+>>
+>> - Parsing of the Transfer-Encoding header is now stricter.
+>> - Handling of whitespace in headers now matches the RFC more
+>>   closely. Only space and tab characters are treated as whitespace
+>>   and stripped from the beginning and end of header values.
+>> - tornado.curl_httpclient now prohibits carriage return and
+>>   linefeed headers in HTTP headers.
+>>
+>> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+>> ---
+>>  .../python/{python3-tornado_6.4.bb =3D> python3-tornado_6.4.1.bb} | 2 +=
+-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>  rename meta-python/recipes-devtools/python/{python3-tornado_6.4.bb =3D>=
+ python3-tornado_6.4.1.bb} (93%)
+>>
+>> diff --git a/meta-python/recipes-devtools/python/python3-tornado_6.4.bb =
+b/meta-python/recipes-devtools/python/python3-tornado_6.4.1.bb
+>> similarity index 93%
+>> rename from meta-python/recipes-devtools/python/python3-tornado_6.4.bb
+>> rename to meta-python/recipes-devtools/python/python3-tornado_6.4.1.bb
+>> index b01c1cec2..30b50f24f 100644
+>> --- a/meta-python/recipes-devtools/python/python3-tornado_6.4.bb
+>> +++ b/meta-python/recipes-devtools/python/python3-tornado_6.4.1.bb
+>> @@ -6,7 +6,7 @@ HOMEPAGE =3D "http://www.tornadoweb.org/en/stable/"
+>>  LICENSE =3D "Apache-2.0"
+>>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6=
+bd57"
+>>
+>> -SRC_URI[sha256sum] =3D "72291fa6e6bc84e626589f1c29d90a5a6d593ef5ae68052=
+ee2ef000dfd273dee"
+>> +SRC_URI[sha256sum] =3D "92d3ab53183d8c50f8204a51e6f91d18a15d5ef261e84d4=
+52800d4ff6fc504e9"
+>>
+>>  inherit pypi setuptools3
+>>
+>> --
+>> 2.39.2
+>>
+>>
+>>
+>>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#110968): https://lists.openembedded.org/g/openembedde=
+d-devel/message/110968
+> Mute This Topic: https://lists.openembedded.org/mt/106759044/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
