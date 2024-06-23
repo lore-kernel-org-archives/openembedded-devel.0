@@ -1,89 +1,92 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <egyszeregy@freemail.hu>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D0BF1C27C53
-	for <webhook@archiver.kernel.org>; Sat, 22 Jun 2024 06:33:55 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.web11.92683.1719038027254862188
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD359C27C4F
+	for <webhook@archiver.kernel.org>; Sun, 23 Jun 2024 17:03:35 +0000 (UTC)
+Received: from smtp-out.freemail.hu (smtp-out.freemail.hu [46.107.16.225])
+ by mx.groups.io with SMTP id smtpd.web11.121647.1719162204773873294
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Jun 2024 23:33:47 -0700
+ Sun, 23 Jun 2024 10:03:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Afw2e6oG;
- spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-364cdfdaf91so1943244f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Jun 2024 23:33:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1719038025; x=1719642825; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=7QlXFRtDCLLJbc6TXswLwtVsxY9ySZud1ftkwQSoRsU=;
-        b=Afw2e6oG0wnOCXQEMHGSbUDhBoWnOrA2waGTTQl/SBdobqdVOPoM4N5iMrLi/LqhVR
-         kI+8mAv2qASh2ICrYr7FikBbhhi+JHZAmXpCDi7QeLhjjX5Im8hS2WixddvkerZc34Vt
-         x5IVH/3rQjW+Xu+70VoM5SmEaM/gg/bsS9wQpJBXgMObNxMA4esSVnoEUn6QCFYfATLu
-         ZFA4a0H4VwiqsPrthII0/BlaH1/5lfFYLQsV0BnKiap8ZwmPaww5dr5IooDEFiyC/qUH
-         MXXx2nBnkkeWfDF4IZiwHsZ+Pm+PZSLCrYUDv+m1m6hXH3N41YHqcnCONL0mkdH5Wt8A
-         itpQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719038025; x=1719642825;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=7QlXFRtDCLLJbc6TXswLwtVsxY9ySZud1ftkwQSoRsU=;
-        b=Dhxvtn9fOPOVvGjU3U6bCupjZqikRn55tUb48ZKRDgchKh5DtAziwLBiPFUkiv5PH3
-         NWSQ2BxZvFbFvQ2nWSnWVDlHHeSmND1+ISlPbamwEJ4RjuotFLTymamAJ4zVMY5Ut2OS
-         CcVhDNuwUfNZDUGmzwYKbJL3LzVaKJ1QeVvkR08glU7LFbUqLkwGGCNiyyjQqNwIZue8
-         7Ribep6pwQBIqfE/JMLsZJqrKJ3MI7f+akd4Dh1WWZbr0gspWa0gJ2SwX1QyLU9Wknbd
-         CtDrLP40gHbmy0MNGy0Hw4WdLoleHOxWKnzs6Vispj2DJSkoDPqXw8Cvs8EQREoP6Tu0
-         jSUg==
-X-Gm-Message-State: AOJu0YwzkOe7oLVsVDMfga+TEhYZQuhRkTFZ0nhZQEjKhi7DymMT2QFu
-	Y7EO/4kdbOeanPwYMuoYTyjs/LWiu2dqlBm6TJqJktN85H71/aXDqhwqJg==
-X-Google-Smtp-Source: AGHT+IFWZlsjcZJAd+cN34beav/3bjtwdxY258+Kz3He4HAbtPUB7zvy+P5RwcqzIqfOqsyLp+Sofw==
-X-Received: by 2002:a05:6000:229:b0:363:b8fc:449b with SMTP id ffacd0b85a97d-363b8fc458emr6053685f8f.28.1719038025285;
-        Fri, 21 Jun 2024 23:33:45 -0700 (PDT)
-Received: from localhost.localdomain (78-20-160-86.access.telenet.be. [78.20.160.86])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-366389b8985sm3569976f8f.43.2024.06.21.23.33.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Jun 2024 23:33:44 -0700 (PDT)
-From: Jan Vermaete <jan.vermaete@gmail.com>
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@freemail.hu header.s=20181004 header.b=X8M//ZKU;
+ spf=pass (domain: freemail.hu, ip: 46.107.16.225, mailfrom: egyszeregy@freemail.hu)
+Received: from localhost.localdomain (catv-80-98-74-198.catv.fixed.vodafone.hu [80.98.74.198])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.freemail.hu (Postfix) with ESMTPSA id 4W6cqY5yWmz5xv;
+	Sun, 23 Jun 2024 19:03:21 +0200 (CEST)
+From: egyszeregy@freemail.hu
 To: openembedded-devel@lists.openembedded.org
-Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-python][PATCH] python3-protobuf: added python3-ctypes as RDEPENDS
-Date: Sat, 22 Jun 2024 08:31:36 +0200
-Message-Id: <20240622063136.159436-1-jan.vermaete@gmail.com>
-X-Mailer: git-send-email 2.39.2
+Cc: =?UTF-8?q?Benjamin=20Sz=C5=91ke?= <egyszeregy@freemail.hu>
+Subject: [meta-oe][master][scarthgap][PATCH] tree: fix broken links
+Date: Sun, 23 Jun 2024 19:03:11 +0200
+Message-ID: <20240623170311.1504-1-egyszeregy@freemail.hu>
+X-Mailer: git-send-email 2.45.2.windows.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1719162202;
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 22 Jun 2024 06:33:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110996
+ <openembedded-devel@lists.openembedded.org>; Sun, 23 Jun 2024 17:03:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110997
 
-  File "/usr/lib/python3.12/site-packages/google/protobuf/internal/type_checkers.py", line 25, in <module>
-    import ctypes
-ModuleNotFoundError: No module named 'ctypes'
+	s=20181004; d=freemail.hu;
 
-tested on qemu86-64
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding;
 
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+	l=1206; bh=Ke2TmVinFfnyAHgidfu7y+4I7YFV2foXJ+eca1cmPFA=;
+
+	b=X8M//ZKUnHER658jxg/M1OqFG7uE+IZuaawAiXUeQtQMSuU58rmuIqQx7+j8rBLT
+
+	7XzNDMlAO3VUEVze4WRcaWPfekHh2//UeO1avsoGVUEOY3YnVkNs2FcSIWqpV7njvKd
+
+	+oXtLpFNyeRAsN6LwbooCO9brrniBROd5/XfQUbzFP2BV27+upS7eNaRAXYI732qOve
+
+	FijTd2+uSohWJvjg01DVWhVsnEDZ0BOpAXe8og+k1vl2E4qgMkkRGXUbgTQjPZKJAgo
+
+	bO2Iy/rDiJvVd8vd7M+5uJwCqgS1VlLzQiv1evfZHN3xPK8k2cKFcuckNw7nny/ThI2
+
+	znfw1K3NZA==
+Content-Transfer-Encoding: quoted-printable
+
+From: Benjamin Sz=C5=91ke <egyszeregy@freemail.hu>
+
+New tarball location is:
+http://oldmanprogrammer.net/tar/tree/
+
+Homepage is:
+http://oldmanprogrammer.net/source.php?dir=3Dprojects/tree
+
+Signed-off-by: Benjamin Sz=C5=91ke <egyszeregy@freemail.hu>
 ---
- meta-python/recipes-devtools/python/python3-protobuf_4.25.3.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-support/tree/tree_2.1.1.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-protobuf_4.25.3.bb b/meta-python/recipes-devtools/python/python3-protobuf_4.25.3.bb
-index b9b03badd..9695880d0 100644
---- a/meta-python/recipes-devtools/python/python3-protobuf_4.25.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-protobuf_4.25.3.bb
-@@ -17,6 +17,7 @@ UPSTREAM_CHECK_REGEX = "protobuf/(?P<pver>\d+(\.\d+)+)/"
- DEPENDS += "protobuf"
- 
- RDEPENDS:${PN} += " \
-+    python3-ctypes \
-     python3-datetime \
-     python3-json \
-     python3-logging \
--- 
-2.39.2
+diff --git a/meta-oe/recipes-support/tree/tree_2.1.1.bb b/meta-oe/recipes=
+-support/tree/tree_2.1.1.bb
+index 0b6114960..1eaea6a22 100644
+--- a/meta-oe/recipes-support/tree/tree_2.1.1.bb
++++ b/meta-oe/recipes-support/tree/tree_2.1.1.bb
+@@ -1,10 +1,10 @@
+ SUMMARY =3D "A recursive directory listing command"
+-HOMEPAGE =3D "http://mama.indstate.edu/users/ice/tree/"
++HOMEPAGE =3D "https://oldmanprogrammer.net/source.php?dir=3Dprojects/tre=
+e"
+ SECTION =3D "console/utils"
+ LICENSE =3D "GPL-2.0-only"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D393a5ca445f6965873eca0259a17f=
+833"
+=20
+-SRC_URI =3D "http://mama.indstate.edu/users/ice/tree/src/${BP}.tgz"
++SRC_URI =3D "https://oldmanprogrammer.net/tar/tree/${BP}.tgz"
+ SRC_URI[sha256sum] =3D "d3c3d55f403af7c76556546325aa1eca90b918cbaaf6d3ab=
+60a49d8367ab90d5"
+=20
+ # tree's default CFLAGS for Linux
+--=20
+2.45.2.windows.1
 
 
