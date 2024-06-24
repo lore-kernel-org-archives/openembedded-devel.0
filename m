@@ -1,92 +1,84 @@
-Return-Path: <egyszeregy@freemail.hu>
+Return-Path: <soumya.sambu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CD359C27C4F
-	for <webhook@archiver.kernel.org>; Sun, 23 Jun 2024 17:03:35 +0000 (UTC)
-Received: from smtp-out.freemail.hu (smtp-out.freemail.hu [46.107.16.225])
- by mx.groups.io with SMTP id smtpd.web11.121647.1719162204773873294
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 508DAC27C4F
+	for <webhook@archiver.kernel.org>; Mon, 24 Jun 2024 02:27:28 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.131712.1719196044548914064
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Jun 2024 10:03:25 -0700
+ Sun, 23 Jun 2024 19:27:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@freemail.hu header.s=20181004 header.b=X8M//ZKU;
- spf=pass (domain: freemail.hu, ip: 46.107.16.225, mailfrom: egyszeregy@freemail.hu)
-Received: from localhost.localdomain (catv-80-98-74-198.catv.fixed.vodafone.hu [80.98.74.198])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.freemail.hu (Postfix) with ESMTPSA id 4W6cqY5yWmz5xv;
-	Sun, 23 Jun 2024 19:03:21 +0200 (CEST)
-From: egyszeregy@freemail.hu
-To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Benjamin=20Sz=C5=91ke?= <egyszeregy@freemail.hu>
-Subject: [meta-oe][master][scarthgap][PATCH] tree: fix broken links
-Date: Sun, 23 Jun 2024 19:03:11 +0200
-Message-ID: <20240623170311.1504-1-egyszeregy@freemail.hu>
-X-Mailer: git-send-email 2.45.2.windows.1
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=6905cb426c=soumya.sambu@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45O0xKSn020255
+	for <openembedded-devel@lists.openembedded.org>; Sun, 23 Jun 2024 19:27:24 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ywsvys37e-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 23 Jun 2024 19:27:24 -0700 (PDT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Sun, 23 Jun 2024 19:27:22 -0700
+From: ssambu <soumya.sambu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][PATCH 1/1] php: Upgrade to 8.2.20
+Date: Mon, 24 Jun 2024 02:26:52 +0000
+Message-ID: <20240624022652.3676090-1-soumya.sambu@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1719162202;
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: UlNoHrs9PZvyAQtLKDFCZ_jI0g1gH-5K
+X-Proofpoint-ORIG-GUID: UlNoHrs9PZvyAQtLKDFCZ_jI0g1gH-5K
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-06-24_01,2024-06-21_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 mlxscore=0
+ spamscore=0 bulkscore=0 phishscore=0 lowpriorityscore=0 malwarescore=0
+ mlxlogscore=999 clxscore=1015 priorityscore=1501 suspectscore=0
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2406140001 definitions=main-2406240018
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 23 Jun 2024 17:03:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110997
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Jun 2024 02:27:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110998
 
-	s=20181004; d=freemail.hu;
+From: Soumya Sambu <soumya.sambu@windriver.com>
 
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding;
+Includes fix for CVE-2024-5458 and other bugs
 
-	l=1206; bh=Ke2TmVinFfnyAHgidfu7y+4I7YFV2foXJ+eca1cmPFA=;
+Changelog:
+https://www.php.net/ChangeLog-8.php#PHP_8_2
 
-	b=X8M//ZKUnHER658jxg/M1OqFG7uE+IZuaawAiXUeQtQMSuU58rmuIqQx7+j8rBLT
-
-	7XzNDMlAO3VUEVze4WRcaWPfekHh2//UeO1avsoGVUEOY3YnVkNs2FcSIWqpV7njvKd
-
-	+oXtLpFNyeRAsN6LwbooCO9brrniBROd5/XfQUbzFP2BV27+upS7eNaRAXYI732qOve
-
-	FijTd2+uSohWJvjg01DVWhVsnEDZ0BOpAXe8og+k1vl2E4qgMkkRGXUbgTQjPZKJAgo
-
-	bO2Iy/rDiJvVd8vd7M+5uJwCqgS1VlLzQiv1evfZHN3xPK8k2cKFcuckNw7nny/ThI2
-
-	znfw1K3NZA==
-Content-Transfer-Encoding: quoted-printable
-
-From: Benjamin Sz=C5=91ke <egyszeregy@freemail.hu>
-
-New tarball location is:
-http://oldmanprogrammer.net/tar/tree/
-
-Homepage is:
-http://oldmanprogrammer.net/source.php?dir=3Dprojects/tree
-
-Signed-off-by: Benjamin Sz=C5=91ke <egyszeregy@freemail.hu>
+Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
 ---
- meta-oe/recipes-support/tree/tree_2.1.1.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-devtools/php/{php_8.2.18.bb => php_8.2.20.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/php/{php_8.2.18.bb => php_8.2.20.bb} (99%)
 
-diff --git a/meta-oe/recipes-support/tree/tree_2.1.1.bb b/meta-oe/recipes=
--support/tree/tree_2.1.1.bb
-index 0b6114960..1eaea6a22 100644
---- a/meta-oe/recipes-support/tree/tree_2.1.1.bb
-+++ b/meta-oe/recipes-support/tree/tree_2.1.1.bb
-@@ -1,10 +1,10 @@
- SUMMARY =3D "A recursive directory listing command"
--HOMEPAGE =3D "http://mama.indstate.edu/users/ice/tree/"
-+HOMEPAGE =3D "https://oldmanprogrammer.net/source.php?dir=3Dprojects/tre=
-e"
- SECTION =3D "console/utils"
- LICENSE =3D "GPL-2.0-only"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D393a5ca445f6965873eca0259a17f=
-833"
-=20
--SRC_URI =3D "http://mama.indstate.edu/users/ice/tree/src/${BP}.tgz"
-+SRC_URI =3D "https://oldmanprogrammer.net/tar/tree/${BP}.tgz"
- SRC_URI[sha256sum] =3D "d3c3d55f403af7c76556546325aa1eca90b918cbaaf6d3ab=
-60a49d8367ab90d5"
-=20
- # tree's default CFLAGS for Linux
---=20
-2.45.2.windows.1
+diff --git a/meta-oe/recipes-devtools/php/php_8.2.18.bb b/meta-oe/recipes-devtools/php/php_8.2.20.bb
+similarity index 99%
+rename from meta-oe/recipes-devtools/php/php_8.2.18.bb
+rename to meta-oe/recipes-devtools/php/php_8.2.20.bb
+index e662f6806..c3c51cd93 100644
+--- a/meta-oe/recipes-devtools/php/php_8.2.18.bb
++++ b/meta-oe/recipes-devtools/php/php_8.2.20.bb
+@@ -34,7 +34,7 @@ SRC_URI:append:class-target = " \
+           "
+ 
+ S = "${WORKDIR}/php-${PV}"
+-SRC_URI[sha256sum] = "ca0b07c254200320f518ac5b3df540a9cf14d866f3c93edc3013b52e06fac796"
++SRC_URI[sha256sum] = "5dec6fa61c7b9c47aa1d76666be651f2642ed2bcf6cd8638c57e3571ce2aac61"
+ 
+ CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
+ CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
+-- 
+2.40.0
 
 
