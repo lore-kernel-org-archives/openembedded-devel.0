@@ -1,230 +1,141 @@
-Return-Path: <mark.hatle@kernel.crashing.org>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A226C2BD09
-	for <webhook@archiver.kernel.org>; Mon, 24 Jun 2024 19:33:50 +0000 (UTC)
-Received: from gate.crashing.org (gate.crashing.org [63.228.1.57])
- by mx.groups.io with SMTP id smtpd.web11.151005.1719257624772720700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 975BBC2BD09
+	for <webhook@archiver.kernel.org>; Mon, 24 Jun 2024 19:55:10 +0000 (UTC)
+Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
+ by mx.groups.io with SMTP id smtpd.web10.151833.1719258902918568960
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Jun 2024 12:33:45 -0700
+ Mon, 24 Jun 2024 12:55:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: kernel.crashing.org, ip: 63.228.1.57, mailfrom: mark.hatle@kernel.crashing.org)
-Received: from kernel.crashing.org (70-99-78-136.nuveramail.net [70.99.78.136] (may be forged))
-	by gate.crashing.org (8.14.1/8.14.1) with ESMTP id 45OJWbgr025241;
-	Mon, 24 Jun 2024 14:32:38 -0500
-Received: from [192.168.2.236] ([192.168.2.236])
-	by kernel.crashing.org (8.14.7/8.14.7) with ESMTP id 45OJWa3q017440;
-	Mon, 24 Jun 2024 14:32:37 -0500
-Message-ID: <fbbf98b9-fefb-49fe-8b0c-ba0ef7d6ad49@kernel.crashing.org>
-Date: Mon, 24 Jun 2024 14:32:36 -0500
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
+Received: from fwd72.aul.t-online.de (fwd72.aul.t-online.de [10.223.144.98])
+	by mailout01.t-online.de (Postfix) with SMTP id 047922A0FE
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Jun 2024 21:55:01 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.154.160.37]) by fwd72.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1sLpmG-42rpLd0; Mon, 24 Jun 2024 21:55:00 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] exiv2: update 0.28.0 -> 0.28.2
+Date: Mon, 24 Jun 2024 21:55:53 +0200
+Message-ID: <20240624195553.107793-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe][master][scarthgap][meta-oe][PATCH] v4l-utils: Install media
- ctrl header and library files
-Content-Language: en-US
-From: Mark Hatle <mark.hatle@kernel.crashing.org>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-        neel.gandhi@amd.com, Mark Hatle <mark.hatle@amd.com>
-References: <2662af04-b171-4f5b-9010-2e9b1bad0431@kernel.crashing.org>
- <CAMKF1srMod9wgJMjfoQTWZY4tbfQ9oDoa9aGs=uO7fY7wOV21A@mail.gmail.com>
- <17DBFD48ACB3DC07.28936@lists.openembedded.org>
-In-Reply-To: <17DBFD48ACB3DC07.28936@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-TOI-EXPURGATEID: 150726::1719258900-C5FF8D1D-CD512542/0/0 CLEAN NORMAL
+X-TOI-MSGID: 8ef2b7f8-8b4a-4504-9da3-d2a5c1948c1f
 Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by gate.crashing.org id 45OJWbgr025241
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Jun 2024 19:33:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111006
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Jun 2024 19:55:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111007
 
-No idea what is going with my email.  But I pushed to a github repository=
-:
+- Remove outdated comment
+- Switch to git fetcher. Otherwise the official download location leads t=
+o:
+  WARNING: exiv2-0.28.2-r0 do_recipe_qa: QA Issue: exiv2: SRC_URI uses un=
+stable GitHub/GitLab
+  archives, convert recipe to use git protocol [src-uri-bad]
+- Remove reproducibility hack. Theres no buildpath leakage in exiv2Config=
+.cmake
+  anymore.
 
-https://github.com/mhatle/meta-openembedded.git mgh/master
+Changes from version 0.28.1 to 0.28.2
+-------------------------------------
 
-The specific commit:
+Release Notes:
 
-https://github.com/mhatle/meta-openembedded/commit/2323c8ec565b895d6e634d=
-43061039b4a0d41ff2
+* https://github.com/Exiv2/exiv2/issues/2914
+* https://github.com/Exiv2/exiv2/milestone/13?closed=3D1
 
-Thanks!  Sorry for the extra work.
+This release also fixes two low-severity security issues in quicktimevide=
+o.cpp:
 
---Mark
+* [CVE-2024-24826](https://github.com/Exiv2/exiv2/security/advisories/GHS=
+A-g9xm-7538-mq8w):
+  out-of-bounds read in QuickTimeVideo::NikonTagsDecoder.
+* [CVE-2024-25112](https://github.com/Exiv2/exiv2/security/advisories/GHS=
+A-crmj-qh74-2r36):
+  denial of service due to unbounded recursion in QuickTimeVideo::multipl=
+eEntriesDecoder.
 
-On 6/24/24 11:21 AM, Mark Hatle wrote:
-> What kind of error are you getting?  I just rebased and the system told=
- me there
-> were no differences.  Did it get munged by my email sending?
->=20
-> --Mark
->=20
-> On 6/24/24 11:02 AM, Khem Raj wrote:
->> Hi Mark
->>
->> This patch does not apply cleanly on master or master-next, please
->> rebase it on either of these branches and resend
->>
->> Thanks
->> -Khem
->>
->> On Mon, Jun 24, 2024 at 8:28=E2=80=AFAM Mark Hatle via lists.openembed=
-ded.org
->> <mark.hatle=3Dkernel.crashing.org@lists.openembedded.org> wrote:
->>>
->>> From: Neel Gandhi <neel.gandhi@amd.com>
->>>
->>> Commit 9389d63fdddcab400cb0b243b74d47bf665aba18 removed a previous pa=
-tch
->>> that caused the recipe to install the header and library files. Resto=
-re
->>> this behavior to the new meson based build system.
->>>
->>> Signed-off-by: Neel Gandhi <neel.gandhi@amd.com>
->>> Signed-off-by: Mark Hatle <mark.hatle@amd.com>
->>> Signed-off-by: Mark Hatle <mark.hatle@kernel.crashing.org>
->>> ---
->>>
->>> This is a resend, the first copy seems to have not been delivered to =
-the list?
->>>
->>> We would like to get this applied to both master and scarthgap.  Any =
-questions
->>> let me know.
->>>
->>>     ...l-media-ctl-header-and-library-files.patch | 78 ++++++++++++++=
-+++++
->>>     .../v4l2apps/v4l-utils_1.26.1.bb              |  1 +
->>>     2 files changed, 79 insertions(+)
->>>     create mode 100644
->>> meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-media-ctl-Install-=
-media-ctl-header-and-library-files.patch
->>>
->>> diff --git
->>> a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-media-ctl-Instal=
-l-media-ctl-header-and-library-files.patch
->>> b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-media-ctl-Instal=
-l-media-ctl-header-and-library-files.patch
->>> new file mode 100644
->>> index 000000000..6c946d8c4
->>> --- /dev/null
->>> +++
->>> b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-media-ctl-Instal=
-l-media-ctl-header-and-library-files.patch
->>> @@ -0,0 +1,78 @@
->>> +From 3867fcfa4389c7fa271705f1fd1d4bfb74bc1bd1 Mon Sep 17 00:00:00 20=
-01
->>> +From: Neel Gandhi <neel.gandhi@amd.com>
->>> +Date: Wed, 5 Jun 2024 13:51:36 +0530
->>> +Subject: [PATCH] media-ctl: Install media-ctl header and library fil=
-es
->>> +
->>> +Install mediactl and v4l2subdev header and library
->>> +files, which may be required by 3rd party applications
->>> +to populate and control v4l2subdev device node tree
->>> +
->>> +Install of these files was removed in upstream commit
->>> +0911dce53b08b0df3066be2c75f67e8a314d8729.
->>> +
->>> +Upstream-Status: Denied
->>> +
->>> +v4l-utils maintainers do not promise a stable API for this library, =
-and
->>> +do not currently have the time to do so. So exporting the API in thi=
-s
->>> +way is fine, as long as we understand that it will change and users =
-of
->>> +the API will need to adapt over time.
->>> +
->>> +Signed-off-by: Neel Gandhi <neel.gandhi@amd.com>
->>> +Signed-off-by: Mark Hatle <mark.hatle@amd.com>
->>> +---
->>> + utils/media-ctl/meson.build | 28 +++++++++++++++++++++-------
->>> + 1 file changed, 21 insertions(+), 7 deletions(-)
->>> +
->>> +diff --git a/utils/media-ctl/meson.build b/utils/media-ctl/meson.bui=
-ld
->>> +index 3a7b0c9a..40669b4c 100644
->>> +--- a/utils/media-ctl/meson.build
->>> ++++ b/utils/media-ctl/meson.build
->>> +@@ -3,14 +3,24 @@ libmediactl_sources =3D files(
->>> +     'mediactl-priv.h',
->>> + )
->>> + ++libmediactl_api =3D files(
->>> ++    'mediactl.h',
->>> ++    'v4l2subdev.h',
->>> ++)
->>> ++
->>> ++install_headers(libmediactl_api, subdir: 'mediactl')
->>> ++
->>> + libmediactl_deps =3D [
->>> +     dep_libudev,
->>> + ]
->>> + +-libmediactl =3D static_library('mediactl',
->>> +-                             libmediactl_sources,
->>> +-                             dependencies : libmediactl_deps,
->>> +-                             include_directories : v4l2_utils_incdi=
-r)
->>> ++libmediactl =3D library('mediactl',
->>> ++                      libmediactl_sources,
->>> ++                      soversion: '0',
->>> ++                      version: '0.0.0',
->>> ++                      install : true,
->>> ++                      dependencies : libmediactl_deps,
->>> ++                      include_directories : v4l2_utils_incdir)
->>> + + dep_libmediactl =3D declare_dependency(link_with : libmediactl)
->>> + +@@ -18,9 +28,13 @@ libv4l2subdev_sources =3D files('libv4l2subdev.=
-c')
->>> + libv4l2subdev_sources +=3D media_bus_format_names_h
->>> + libv4l2subdev_sources +=3D media_bus_format_codes_h
->>> + +-libv4l2subdev =3D static_library('v4l2subdev',
->>> +-                               libv4l2subdev_sources,
->>> +-                               include_directories : v4l2_utils_inc=
-dir)
->>> ++libv4l2subdev =3D library('v4l2subdev',
->>> ++                        libv4l2subdev_sources,
->>> ++                        soversion: '0',
->>> ++                        version: '0.0.0',
->>> ++                        install : true,
->>> ++                        dependencies : dep_libmediactl,
->>> ++                        include_directories : v4l2_utils_incdir)
->>> + + dep_libv4l2subdev =3D declare_dependency(link_with : libv4l2subde=
-v)
->>> + +-- +2.34.1
->>> +
->>> diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.26.1.bb
->>> b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.26.1.bb
->>> index 52759ef18..eb38d9713 100644
->>> --- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.26.1.bb
->>> +++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.26.1.bb
->>> @@ -28,6 +28,7 @@ PACKAGECONFIG[v4l2-tracer] =3D ",-Dv4l2-tracer=3Ddi=
-sabled,json-c"
->>>     SRC_URI =3D "\
->>>         git://git.linuxtv.org/v4l-utils.git;protocol=3Dhttps;branch=3D=
-stable-1.26 \
->>>         file://0001-keytable-meson-Restrict-the-installation-of-50-rc=
-_ke.patch \
->>> +    file://0001-media-ctl-Install-media-ctl-header-and-library-files=
-.patch \
->>>     "
->>>      SRCREV =3D "4aee01a027923cab1e40969f56f8ba58d3e6c0d1"
->>> --
->>> 2.39.3 (Apple Git-146)
->>>
->>>
->>>
->>>
->>>
->>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>> Links: You receive all messages sent to this group.
->>> View/Reply Online (#111004): https://lists.openembedded.org/g/openemb=
-edded-devel/message/111004
->>> Mute This Topic: https://lists.openembedded.org/mt/106851971/3616948
->>> Group Owner: openembedded-devel+owner@lists.openembedded.org
->>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsu=
-b [mark.hatle@kernel.crashing.org]
->>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>>
+These vulnerabilities are in a new feature (quicktime video) that was add=
+ed in version 0.28.0,
+so earlier versions of Exiv2 are not affected.
+
+Changes from version 0.28.0 to 0.28.1
+-------------------------------------
+
+Release Notes:
+https://github.com/Exiv2/exiv2/issues/2813
+
+This release also fixes [CVE-2023-44398](https://github.com/Exiv2/exiv2/s=
+ecurity/advisories/GHSA-hrw9-ggg3-3r4r),
+an out-of-bounds write in `BmffImage::brotliUncompress`. The vulnerabilit=
+y is in new code that was added in
+version 0.28.0, so earlier versions of Exiv2 are not affected.
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ meta-oe/recipes-support/exiv2/exiv2_0.28.0.bb | 19 -------------------
+ meta-oe/recipes-support/exiv2/exiv2_0.28.2.bb | 11 +++++++++++
+ 2 files changed, 11 insertions(+), 19 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/exiv2/exiv2_0.28.0.bb
+ create mode 100644 meta-oe/recipes-support/exiv2/exiv2_0.28.2.bb
+
+diff --git a/meta-oe/recipes-support/exiv2/exiv2_0.28.0.bb b/meta-oe/reci=
+pes-support/exiv2/exiv2_0.28.0.bb
+deleted file mode 100644
+index 958810cf7..000000000
+--- a/meta-oe/recipes-support/exiv2/exiv2_0.28.0.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-SUMMARY =3D "Exif, Iptc and XMP metadata manipulation library and tools"
+-LICENSE =3D "GPL-2.0-only"
+-LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D625f055f41728f84a8d7938acc35b=
+dc2"
+-
+-DEPENDS =3D "zlib expat brotli libinih"
+-
+-SRC_URI =3D "https://github.com/Exiv2/${BPN}/releases/download/v${PV}/${=
+BP}-Source.tar.gz"
+-SRC_URI[sha256sum] =3D "89af3b5ef7277753ef7a7b5374ae017c6b9e304db3b688f1=
+948e73e103491f3d"
+-# Once patch is obsolete (project should be aware due to PRs), dos2unix =
+can be removed either
+-# inherit dos2unix
+-S =3D "${WORKDIR}/${BP}-Source"
+-
+-inherit cmake gettext
+-
+-do_install:append:class-target() {
+-    # reproducibility: remove build host path
+-    sed -i ${D}${libdir}/cmake/exiv2/exiv2Config.cmake \
+-        -e 's:${STAGING_DIR_HOST}::g'
+-}
+diff --git a/meta-oe/recipes-support/exiv2/exiv2_0.28.2.bb b/meta-oe/reci=
+pes-support/exiv2/exiv2_0.28.2.bb
+new file mode 100644
+index 000000000..faae24799
+--- /dev/null
++++ b/meta-oe/recipes-support/exiv2/exiv2_0.28.2.bb
+@@ -0,0 +1,11 @@
++SUMMARY =3D "Exif, Iptc and XMP metadata manipulation library and tools"
++LICENSE =3D "GPL-2.0-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D625f055f41728f84a8d7938acc35b=
+dc2"
++
++DEPENDS =3D "zlib expat brotli libinih"
++
++SRC_URI =3D "git://github.com/Exiv2/exiv2.git;protocol=3Dhttps;branch=3D=
+0.28.x"
++SRCREV =3D "04207b9c39bf7b3b1a7144f7ed4e4f16b4f29ef6"
++S =3D "${WORKDIR}/git"
++
++inherit cmake gettext
+--=20
+2.45.1
+
 
