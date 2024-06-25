@@ -2,51 +2,51 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2158C31D97
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1E8EC3065F
 	for <webhook@archiver.kernel.org>; Tue, 25 Jun 2024 08:57:04 +0000 (UTC)
-Received: from esa11.hc1455-7.c3s2.iphmx.com (esa11.hc1455-7.c3s2.iphmx.com [207.54.90.137])
- by mx.groups.io with SMTP id smtpd.web10.167214.1719305816031357994
+Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
+ by mx.groups.io with SMTP id smtpd.web11.166844.1719305817793011588
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Jun 2024 01:56:56 -0700
+ Tue, 25 Jun 2024 01:56:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=BAegG4na;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.137, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=r5KfOzwt;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
   t=1719305817; x=1750841817;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=HH7BxxP88XC+LNL2e5bhS3MGJ86H/hUyPla/061sBV8=;
-  b=BAegG4na+9XNuzSf5CysviFUrUxXXvpSC/fEfOoouOCZGSyn04vKKL3P
-   0xyTbuUdxXBqLn0rwAISH6IzEIr48THIw1gmyaqCSWO1zFHxR1dYl+RT7
-   kT8u5m8t8q2Gs9f7TM6lhtDeJRVC8UAKew7n+OCw9dh1fTRn3+TqNLcx8
-   W4oj/tcl2/iGOAUhaZeIgbsMv9TbF/8Z2EZFx2zyM/3qSU74EZah5Xb9g
-   GqzDb5KrydJQA1bLrvJ/SmePMT9ib9RuF6u506kJ6YpLy5Gx+uBJR0sc6
-   uvButDB4l6hNfOKv+C4pDgxabdjsZ1hL8OD0mD3rsSVXwX1rvKSyYHBYy
-   Q==;
-X-IronPort-AV: E=McAfee;i="6700,10204,11113"; a="144297013"
+  bh=b6lLvU3F/N4jhnY5896o/QKGWa459U6vsIbxavwD9OE=;
+  b=r5KfOzwttKLaPP5FsrCewaVP736jySsuqVHsiqBYnmzWVhGzPcF8HrbW
+   ndrOpDAKGQB4Gv88lbSM9V+9LZCselJeTzm+rwWBeYjbIh8zH6s1k8IFc
+   R3vw5TTnEBmfk740gdF+QCsNx8VMZzq4sv6ss8eg2q9u3xzeG1JjIHtkA
+   00UaTZoHCDUkIkFd+WThVw4TLxyc9MQAqHFt+WPKoHDMYrvNlnBauzHzM
+   F3Di201GonR+anByMBoNroKZAf6faDP/wFvdkZDYjGT3aUF0gAl10QdsI
+   9bRyK4Y3opOuEwPjDpQ2+4OlxKxoIhkzs0modd+qw+P1gU8OsQLwRjQEN
+   g==;
+X-IronPort-AV: E=McAfee;i="6700,10204,11113"; a="164960028"
 X-IronPort-AV: E=Sophos;i="6.08,263,1712588400"; 
-   d="scan'208";a="144297013"
+   d="scan'208";a="164960028"
 Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
-  by esa11.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Jun 2024 17:56:55 +0900
-Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 9EA7FC9440
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Jun 2024 17:56:51 +0900 (JST)
+  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Jun 2024 17:56:54 +0900
+Received: from yto-m1.gw.nic.fujitsu.com (yto-nat-yto-m1.gw.nic.fujitsu.com [192.168.83.64])
+	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id B291EC9444
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Jun 2024 17:56:52 +0900 (JST)
 Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id D37A0D50E2
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Jun 2024 17:56:50 +0900 (JST)
+	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 088FCCFAB1
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Jun 2024 17:56:52 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 53DD52007CDE2
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Jun 2024 17:56:50 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 920992007CDC4
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Jun 2024 17:56:51 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 01CE91A0002;
-	Tue, 25 Jun 2024 16:56:49 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 3EE981A0002;
+	Tue, 25 Jun 2024 16:56:51 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 03/57] dialog: upgrade 1.3-20240307 -> 1.3-20240619
-Date: Tue, 25 Jun 2024 16:55:36 +0800
-Message-Id: <1719305790-11484-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 05/57] exiftool: upgrade 12.85 -> 12.87
+Date: Tue, 25 Jun 2024 16:55:38 +0800
+Message-Id: <1719305790-11484-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1719305790-11484-1-git-send-email-wangmy@fujitsu.com>
 References: <1719305790-11484-1-git-send-email-wangmy@fujitsu.com>
@@ -54,56 +54,73 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28478.003
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28478.003
-X-TMASE-Result: 10-3.095200-10.000000
-X-TMASE-MatchedRID: rofoCPeR2CGjz0nOeth/yUIIxwDaU5mrK0L6YMbmA3h4YeSlHZYFotyx
-	bsqlEfBsa+o/S6GsElCKk5DNU2OpWEiQ+g5qQg9HxqtsVI8KrJpUENBIMyKD0QfxTM57BPHD7v0
-	MlFSLfmlNDQmQ8bbzv+affHI8kAmikZmKVOLxy1I7Cl8sx4HBG/ioIsi7Sa0g3M41rVGynHcbSq
-	g5zWtByrtwD3BWnpPVModguxHirQsfE8yM4pjsDwtuKBGekqUpnH7sbImOEBR/TjabhKhVVX3Ra
-	XQIL8n0z245LdGELBQu7L5jE62gGApGIajd8TsGBIioqz5fEloOdT4XsIOLSnO7Hr5xbq7KUEd1
-	V2vue1bsfZ9V6Q6rCZgvUoiYqGrVm457vI8IG8B/Y4nFsBWAdD6Qrn3xh/cy
+X-TMASE-Result: 10--3.523100-10.000000
+X-TMASE-MatchedRID: Sudfee3ORQqjz0nOeth/yUIIxwDaU5mrn5nfR7I2dFNkmInFtzPDn3mZ
+	taEC/Mk8p3Z/y3zTL98OZjjua7Kv2L2xlZTrH0CoqE8Y3Eo2VXAJlr1xKkE5uXd17Y6gGqDCCeW
+	hs1FY/qVJRBY1Y/2gLBRzO3D5QAVJcXyA8CxIt6EdZEkR8Y/meVn4Ir4HFD2TEzBS/LIYH/cJuf
+	Ck+KONddEy/dcTW6Bf0XHbHXcuQtEaPxeMMHjQbjz6L+U/pejxVBDQSDMig9EH8UzOewTxw+79D
+	JRUi35pTQ0JkPG287/mn3xyPJAJokxAme6xi7HUOwpfLMeBwRvAQzqh8D4IY5soi2XrUn/Jn6Kd
+	MrRsL14qtq5d3cxkNdp7S6pz2tVNgMhBO6beZvs+gr7//bLnuoHrdCoeg1QPNwsCIfIqlO6o4Dh
+	vuLmy1I5wYLDLGlMOS+t4ZIC+OQzCv97/cfVzl5ltc/b1pfHmU8mdcvbI1h2S6jzjuXTm0MTMzI
+	CazP4UehYtaVdyxm8=
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 25 Jun 2024 08:57:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111015
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111018
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-============
-+ modify configure script to ease deprecation of libtool-bin package
-+ update dialog.map, dialog.sym for 2023/10/02 changes.
-+ improve dialog-config.in,
-  + suppressing several special cases of linker options, and
-  + adding support for --cflags-only-I, --cflags-only-other
-+ fix a few cppcheck warnings
-+ improvements to NLS configuration.
-+ add configure check for PIC vs PIE, needed for linking to libraries
-  which lack pkg-config scripts to specify LDFLAGS.
+==========
+- Added ability to write Google Container XMP tags (using the namespace prefix
+  'GContainer' to avoid conflict with the Google Device Container prefix)
+- Decode a few new tags for the Canon EOS R5
+- Decode battery information for the Pentax K-3 III
+- Decode RAFCompression from FujiFilm RAF images
+- Avoid reporting FileSize of 0 for pipes
+- Updated Geolocation databases from current geonames.org files
+- Skip over Matroska Cluster if necessary to read Tags if referenced in
+  SeekHead
+- Changed conversion for Matroska SeekID (now in hex with tag name in
+  brackets) and SeekPosition (now returns an absolute offset)
+- Fixed problem writing XMP-Device:EarthPos coordinates
+- Fixed typo in a value of Canon:DigitalLensOptimizer
+- Fixed decoding of Matroska VideoScanType
+- Fixed misleading error message when -o option was used to write to an
+  unsupported file type
+- Added a new value for a couple of Olympus tags
+- Improved handling of ID3 user-defined tags
+- Decode all JPEG segments from RICO box in Ricoh MOV videos
+- Decode a few new values for some tags written by Canon EOS R cameras
+- Patched some Olympus WB_RBLevels tags to allow 4 values to be written as per
+  some newer models
+- Fixed issue when writing IPTC date tags with a date/time value containing
+  subseconds with 4 or more digits
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../dialog/{dialog_1.3-20240307.bb => dialog_1.3-20240619.bb}   | 2 +-
+ .../perl/{exiftool_12.85.bb => exiftool_12.87.bb}               | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/dialog/{dialog_1.3-20240307.bb => dialog_1.3-20240619.bb} (92%)
+ rename meta-oe/recipes-devtools/perl/{exiftool_12.85.bb => exiftool_12.87.bb} (92%)
 
-diff --git a/meta-oe/recipes-extended/dialog/dialog_1.3-20240307.bb b/meta-oe/recipes-extended/dialog/dialog_1.3-20240619.bb
+diff --git a/meta-oe/recipes-devtools/perl/exiftool_12.85.bb b/meta-oe/recipes-devtools/perl/exiftool_12.87.bb
 similarity index 92%
-rename from meta-oe/recipes-extended/dialog/dialog_1.3-20240307.bb
-rename to meta-oe/recipes-extended/dialog/dialog_1.3-20240619.bb
-index a49717536..0fccce5e8 100644
---- a/meta-oe/recipes-extended/dialog/dialog_1.3-20240307.bb
-+++ b/meta-oe/recipes-extended/dialog/dialog_1.3-20240619.bb
-@@ -9,7 +9,7 @@ LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
+rename from meta-oe/recipes-devtools/perl/exiftool_12.85.bb
+rename to meta-oe/recipes-devtools/perl/exiftool_12.87.bb
+index 66e9a3b71..1f9bf7759 100644
+--- a/meta-oe/recipes-devtools/perl/exiftool_12.85.bb
++++ b/meta-oe/recipes-devtools/perl/exiftool_12.87.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://perl-Image-ExifTool.spec;beginline=5;endline=5;md5=ff
  
- SRC_URI = "https://invisible-mirror.net/archives/${BPN}/${BP}.tgz"
--SRC_URI[sha256sum] = "339d311c6abb240213426b99ad63565cbcb3e8641ef1989c033e945b754d34ef"
-+SRC_URI[sha256sum] = "5d8c4318963db3fd383525340276e0e05ee3dea9a6686c20779f5433b199547d"
+ inherit cpan
  
- # hardcoded here for use in dialog-static recipe
- S = "${WORKDIR}/dialog-${PV}"
+-SRCREV = "405674e0c477931b60b10a78828483ef54761385"
++SRCREV = "30e6ca0b462591262c6ac39f0261e6528262b142"
+ SRC_URI = "git://github.com/exiftool/exiftool;protocol=https;branch=master"
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.34.1
 
