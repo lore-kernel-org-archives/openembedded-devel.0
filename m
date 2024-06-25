@@ -2,51 +2,51 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 68860C3065D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60C5BC3065B
 	for <webhook@archiver.kernel.org>; Tue, 25 Jun 2024 08:57:15 +0000 (UTC)
-Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
- by mx.groups.io with SMTP id smtpd.web11.166851.1719305824894098677
+Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
+ by mx.groups.io with SMTP id smtpd.web10.167227.1719305832472912177
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Jun 2024 01:57:09 -0700
+ Tue, 25 Jun 2024 01:57:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=IWcrn3Dn;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=KNVvU2oA;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1719305828; x=1750841828;
+  t=1719305832; x=1750841832;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=5C9b56kSnsE7BIYgcgqDdsKpFcVunax2/Vpnd3WZkZk=;
-  b=IWcrn3DndIQYGE6Oq8+GX1moE/wo0v4LXdfZZXRbkM5fdwCMtzc5iWD8
-   4RSgcg9BpJw5VKedSHNyZHQ5fYi+S1+gmEIuJZPR9JeOhEYa1KtQbJz1I
-   P7ulNMKNJzP/ddgD+TXEITR6UZO+crwMw+3A72DtbwYh2qV1jfGsGqciX
-   +jBXgteVvb3/uh5n8QPgHgMtcFVIQzPF0SZT8wUrCXPiDwTzhdBWPrfkA
-   MXqHB02CE+OmGIqo1ZHlu4qioXDy8g8DI5FcMn32UZpST1xBPGMR6bFS0
-   drIVQDrni2eE5/D/kjmfeKc8WZbxLt4toYFz5spij7ByfWFm8d4XrvIeh
-   A==;
-X-IronPort-AV: E=McAfee;i="6700,10204,11113"; a="152868266"
+  bh=s2TsN3VCpgDYzU5TjJi025WVnOsqMrCA+jVOEOBFLME=;
+  b=KNVvU2oAVVX5/ZfYuH9bT4BxDpXfBF0YA0JF+rT7gSsL101C44T9+/qw
+   l9dF/EsU+aOs/UfbnlU2DKvP/L9/eweTcKxdcyWHu7TjOi8CD3FHS0QXw
+   Q521NXA8rSj+nLDtfjMk4JksXMAm+jFB26R4UpHo5dhK+M0kekhafez1u
+   amQm5Y5h6uBGc029HA0HhPvuvgx19kOhEQCBhLi/kE52WNW44hct3kgmS
+   G7DDip3OkcsgSk2r/feuHrX4fUexwGv0efRlD/zF4sMPpYSiHPXaS9+VF
+   TYYUoyUDJD2aO+oDwJrBTJ89W6nCIJZkKmVtB36KUMnnrXDuUPXSGOlAM
+   w==;
+X-IronPort-AV: E=McAfee;i="6700,10204,11113"; a="152254698"
 X-IronPort-AV: E=Sophos;i="6.08,263,1712588400"; 
-   d="scan'208";a="152868266"
-Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
-  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Jun 2024 17:57:07 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 0F6F3D424D
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Jun 2024 17:57:06 +0900 (JST)
-Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 4FFFEBF3D7
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Jun 2024 17:57:05 +0900 (JST)
+   d="scan'208";a="152254698"
+Received: from unknown (HELO oym-r1.gw.nic.fujitsu.com) ([210.162.30.89])
+  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Jun 2024 17:57:10 +0900
+Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
+	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 5C8FECC145
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Jun 2024 17:57:08 +0900 (JST)
+Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
+	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id AA997D772F
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Jun 2024 17:57:07 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id DC66FE2A0B
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Jun 2024 17:57:04 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 3A0992007CDC4
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Jun 2024 17:57:07 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 87B4A1A0002;
-	Tue, 25 Jun 2024 16:57:04 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id DA7041A000D;
+	Tue, 25 Jun 2024 16:57:06 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 20/57] opentelemetry-cpp: upgrade 1.15.0 -> 1.16.0
-Date: Tue, 25 Jun 2024 16:55:53 +0800
-Message-Id: <1719305790-11484-20-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 23/57] python3-argcomplete: upgrade 3.3.0 -> 3.4.0
+Date: Tue, 25 Jun 2024 16:55:56 +0800
+Message-Id: <1719305790-11484-23-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1719305790-11484-1-git-send-email-wangmy@fujitsu.com>
 References: <1719305790-11484-1-git-send-email-wangmy@fujitsu.com>
@@ -54,45 +54,48 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28478.003
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28478.003
-X-TMASE-Result: 10--0.662700-10.000000
-X-TMASE-MatchedRID: hsQjHHSArR6jz0nOeth/yUIIxwDaU5mr+KgiyLtJrSDxtY59xKFYFE89
-	3SeL1XuD4CtjYmQpb2kF1Ec/oUIRlVpCIuRr0RxKTuctSpiuWyU2ZWOmuJUS2WAN6i+va16ukWN
-	Ccn0XQOLn22EcSrQBnRIlVYCqhV5OHxPMjOKY7A+u65UDD0aDgsRB0bsfrpPIcSqbxBgG0w4ODs
-	gAm0UFJl+yjw/dVlfxp6dK/Ul3TfOrTTo8g2QAYebLKQeGJ5NFtxF2jGpYrRMZKkd+riMxyGohG
-	INOt7kqFPtjWu//JymCvqWrFsheUcLe0zBjeZrbFQOP52BRBXJMTsKj18q/fA==
+X-TMASE-Result: 10--0.977300-10.000000
+X-TMASE-MatchedRID: 4E21WKQgrFSjz0nOeth/yUIIxwDaU5mrmymA9BfmiWOU8ftiyKjZrdMj
+	jwb9QfV2CC8aAmGeO6lV00+whwxVQy/7QU2czuUNnVTWWiNp+v9uTKBinxl/umAN6i+va16uaRF
+	wDs8G7THi8zVgXoAltuJ5hXsnxp7jC24oEZ6SpSmcfuxsiY4QFLYI201aaGudx/pjVRra3VudWJ
+	3KbIcyEsaCNw8pPsQwTy+OnAUAqUMglRWlTZ64QKYAOaXjcDOGH+DbmGaz/uE+FrTvmZ0/I+x9n
+	1XpDqsJmC9SiJioatWbjnu8jwgbwH9jicWwFYB0PpCuffGH9zI=
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 25 Jun 2024 08:57:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111032
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111034
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog: https://github.com/open-telemetry/opentelemetry-cpp/releases/tag/v1.16.0
+Changelog:
+===========
+- No stdin for python calls from bash completion functions
+- Localize shell variable REPLY to avoid overwriting users' value
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...{opentelemetry-cpp_1.15.0.bb => opentelemetry-cpp_1.16.0.bb} | 2 +-
+ ...ython3-argcomplete_3.3.0.bb => python3-argcomplete_3.4.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/opentelemetry/{opentelemetry-cpp_1.15.0.bb => opentelemetry-cpp_1.16.0.bb} (95%)
+ rename meta-python/recipes-devtools/python/{python3-argcomplete_3.3.0.bb => python3-argcomplete_3.4.0.bb} (82%)
 
-diff --git a/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.15.0.bb b/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.16.0.bb
-similarity index 95%
-rename from meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.15.0.bb
-rename to meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.16.0.bb
-index 88033e58c..f559295db 100644
---- a/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.15.0.bb
-+++ b/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.16.0.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
- DEPENDS = "nlohmann-json"
+diff --git a/meta-python/recipes-devtools/python/python3-argcomplete_3.3.0.bb b/meta-python/recipes-devtools/python/python3-argcomplete_3.4.0.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-argcomplete_3.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-argcomplete_3.4.0.bb
+index d96861010..be3ded82b 100644
+--- a/meta-python/recipes-devtools/python/python3-argcomplete_3.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-argcomplete_3.4.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/kislyuk/argcomplete"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=2ee41112a44fe7014dce33e26468ba93"
  
- SRC_URI = "git://github.com/open-telemetry/opentelemetry-cpp.git;protocol=https;branch=main;"
--SRCREV = "054b0dc207c1f58e290d78cdaac5f314bc328b31"
-+SRCREV = "fd57e7aa23ffc352f62e504f34fd1c6b7b2ecac3"
+-SRC_URI[sha256sum] = "fd03ff4a5b9e6580569d34b273f741e85cd9e072f3feeeee3eba4891c70eda62"
++SRC_URI[sha256sum] = "c2abcdfe1be8ace47ba777d4fce319eb13bf8ad9dace8d085dcad6eded88057f"
  
- S = "${WORKDIR}/git"
- inherit cmake pkgconfig lib_package
+ PYPI_PACKAGE = "argcomplete"
+ 
 -- 
 2.34.1
 
