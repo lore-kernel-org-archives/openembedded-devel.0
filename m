@@ -1,220 +1,131 @@
-Return-Path: <hprajapati@mvista.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9EFCC2BBCA
-	for <webhook@archiver.kernel.org>; Tue, 25 Jun 2024 12:45:48 +0000 (UTC)
-Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
- by mx.groups.io with SMTP id smtpd.web10.171863.1719319541221420049
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE6FFC3064D
+	for <webhook@archiver.kernel.org>; Tue, 25 Jun 2024 15:37:09 +0000 (UTC)
+Received: from mail-oo1-f48.google.com (mail-oo1-f48.google.com [209.85.161.48])
+ by mx.groups.io with SMTP id smtpd.web10.176943.1719329827788468472
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Jun 2024 05:45:41 -0700
+ Tue, 25 Jun 2024 08:37:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=VD2kWzo0;
- spf=pass (domain: mvista.com, ip: 209.85.128.175, mailfrom: hprajapati@mvista.com)
-Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-632597a42b8so49027607b3.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Jun 2024 05:45:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nq40vbgc;
+ spf=pass (domain: gmail.com, ip: 209.85.161.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f48.google.com with SMTP id 006d021491bc7-5bb36de2171so2786548eaf.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Jun 2024 08:37:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1719319540; x=1719924340; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=yGQ7F7e+azSpQWObwMfJg5lC0QGU0A4zQQm+OlWmJ3o=;
-        b=VD2kWzo04hkQ8/MB8W4f3TTd+wScwjf8nkhMUJH5zSZ7hnkOl0BBDQaQ/kWwcqVH6b
-         peyEXAWOxfsJ49XhUlZTvotYgYsBPaX7CsIDSMT+KIgvS1LfyDf/ERvpSoYKcmvDePP+
-         sse+IzZSpVgvA8/lWhPYbG9CjEyYtm+dy291U=
+        d=gmail.com; s=20230601; t=1719329827; x=1719934627; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=OYB5LwBmH4XL+SPneHzsk692GafwrfySNxdHhdaJAp8=;
+        b=nq40vbgc7070cIkPM8cFR3M3wqpOxbYxIxy/LVYXejqt2ljBqbuV9wriP/FeQVz4y6
+         cud0UDXvp2g6DBhVH6fpKvw8HlOKCMTDqnJheQOdi4bUGxPvriWP8YkZ82FkPCIXlEd7
+         Tss56RG3Mh93cVXt+4B5HaQIL6LJ4pIE+YTsQGxkPAKzbtikc2qPh8d3WucOqRIDk2pe
+         K6cJ65Ap9x4wseJZv/aS2EgFwK0eB18VzOUfu3I6O0qST4+nWP9HzIRq+F0lsHysI1Of
+         SSJQKsTkv/n9B2L0YMKbyDov1vWTAJzkd1iagupts35rwB9KulauBKm/P76Mppdi6Ixc
+         wZFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719319540; x=1719924340;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=yGQ7F7e+azSpQWObwMfJg5lC0QGU0A4zQQm+OlWmJ3o=;
-        b=UJYd8c/fZol/j1oJWJxsidxAsTgXvFc4DRmHoVOl0EP04mkfPsq1OgOnhTd/6RKyf8
-         fLH81JMczMZqdnicdbBGFRL2ck9pSsl6l7D1L5uPsz1lzze+P0ODsTV/hb81zYywlrzs
-         EGt5fOWu4xx1hdhkQo1tXezQU6EG9iBjKzGmHL1Rtkngp9AuKh39QfPLWEcXQtnzzl1u
-         I+1qV9+i+inkRa9iDWlFFQRSrN9j8iRjQHkqwYdDLuFat/4mfkNVXEXnE5fj7Q6J1KBh
-         UObFD424pUfSCyyM9p3HXFW0q8C3PRQbk+Ennu6ClIpPRV/PWC3pT7Wg/5XYQKA2YCoS
-         OV6w==
-X-Gm-Message-State: AOJu0Yzw3aOdl1wY1RbL5ev50Hgvuc/NL4iivpPQ+zbPD4jTaMQagttB
-	ng+dS1stCiEmn7Nx8tKqjRXWyqQYKSffa1/x0sUFx6uxH1ctpmHH6SSIS/UbBhDAUSqBnRKdL/W
-	f
-X-Google-Smtp-Source: AGHT+IFKRew5xbAdq1ijLvgT5mEXOx/btMUmLNwbQL58hHZLPtEaBmKWwN+td3/w1c8kyc/Z9WVpBA==
-X-Received: by 2002:a0d:dc04:0:b0:627:dfbd:3175 with SMTP id 00721157ae682-643a9af821amr77225957b3.10.1719319540100;
-        Tue, 25 Jun 2024 05:45:40 -0700 (PDT)
-Received: from MVIN00016.mvista.com ([43.249.234.181])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-64538b3b934sm13082257b3.22.2024.06.25.05.45.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 25 Jun 2024 05:45:39 -0700 (PDT)
-From: Hitendra Prajapati <hprajapati@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-networking][scarthgap][PATCH] tcpdump: fix CVE-2024-2397
-Date: Tue, 25 Jun 2024 18:15:31 +0530
-Message-Id: <20240625124531.108254-1-hprajapati@mvista.com>
-X-Mailer: git-send-email 2.25.1
+        d=1e100.net; s=20230601; t=1719329827; x=1719934627;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=OYB5LwBmH4XL+SPneHzsk692GafwrfySNxdHhdaJAp8=;
+        b=w/ETwHgESEisDBJKJ1QFitLS9/VxVd+0sTqxhduuz0O0Oa5I4C2RXck/Z0t35HBfbC
+         UWyr+OKQDkWKwQYYW7His07QYMoCV5bMy43UeCXGTcLp6RMPmMGS1GIVWxCwsmWnJiCw
+         jLSO5vrRkUW54RZ+Um+Ur9zBA1YMcZhUCpDVwodB1zvDT4yx6kvw5n8Nvm5qEhj+U2aQ
+         iJ0yEqd8prmeQw+ZxsARsQqbci2b/vjLYP1oArbRebI/I8exZbZqNUccMrLatxJfxM6u
+         Qmpcdy5xFaquIQWiU7zE/ayUQPVcYDTFvPad9N3mlJ2MpGIsaZRUFZoikE7CNq8yUNtf
+         wi1Q==
+X-Gm-Message-State: AOJu0YxZ4NaK2qb1fnT9aP8G2rXNbifkQ5qdIs2gp66JQTVcmpWLb+7H
+	Ef98kzmQWn/EKlqOMTQtUDVNSdobInU7e6FdsG/4cHDmQemv6hJ9ELVZPprh1SZtsE2my5Pa+dD
+	Gt7nLpHARMvbtOMVgYy7fiwoN2hs=
+X-Google-Smtp-Source: AGHT+IGFdoOU/ZU7fnNH+aO2hDVonsvAjXSHI95XygdBbaTdb8JfqXaAlan6DbzbKb0oZEq3YtKcguMhzczTccpNq8I=
+X-Received: by 2002:a05:6870:2245:b0:254:a8d3:6fbb with SMTP id
+ 586e51a60fabf-25d06c123c9mr5016601fac.24.1719329826967; Tue, 25 Jun 2024
+ 08:37:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240625081259.1785605-1-peter.marko@siemens.com>
+In-Reply-To: <20240625081259.1785605-1-peter.marko@siemens.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 25 Jun 2024 08:36:40 -0700
+Message-ID: <CAMKF1sqAuENdwTOSwSwCM7uCkAjAKmC5eCbPzdu9GT71UFJEMw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][master][scarthgap][PATCH] cjson: fix buildpath warnings
+To: peter.marko@siemens.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Jun 2024 12:45:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111072
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Jun 2024 15:37:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111073
 
-Upstream-Status: Backport from https://github.com/the-tcpdump-group/tcpdump/commit/b9811ef5bb1b7d45a90e042f81f3aaf233c8bcb2
+It does not appy on master btw. I have to manually transplant it.
+Please look into the one in master-next
 
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
----
- .../tcpdump/tcpdump/CVE-2024-2397.patch       | 129 ++++++++++++++++++
- .../recipes-support/tcpdump/tcpdump_4.99.4.bb |   1 +
- 2 files changed, 130 insertions(+)
- create mode 100644 meta-networking/recipes-support/tcpdump/tcpdump/CVE-2024-2397.patch
-
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2024-2397.patch b/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2024-2397.patch
-new file mode 100644
-index 0000000000..69348030bb
---- /dev/null
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2024-2397.patch
-@@ -0,0 +1,129 @@
-+From b9811ef5bb1b7d45a90e042f81f3aaf233c8bcb2 Mon Sep 17 00:00:00 2001
-+From: Guy Harris <gharris@sonic.net>
-+Date: Tue, 12 Mar 2024 00:37:23 -0700
-+Subject: [PATCH] ppp: use the buffer stack for the de-escaping buffer.
-+
-+This both saves the buffer for freeing later and saves the packet
-+pointer and snapend to be restored when packet processing is complete,
-+even if an exception is thrown with longjmp.
-+
-+This means that the hex/ASCII printing in pretty_print_packet()
-+processes the packet data as captured or read from the savefile, rather
-+than as modified by the PPP printer, so that the bounds checking is
-+correct.
-+
-+That fixes CVE-2024-2397, which was caused by an exception being thrown
-+by the hex/ASCII printer (which should only happen if those routines are
-+called by a packet printer, not if they're called for the -X/-x/-A
-+flag), which jumps back to the setjmp() that surrounds the packet
-+printer.  Hilarity^Winfinite looping ensues.
-+
-+Also, restore ndo->ndo_packetp before calling the hex/ASCII printing
-+routine, in case nd_pop_all_packet_info() didn't restore it.
-+
-+Upstream-Status: Backport [https://github.com/the-tcpdump-group/tcpdump/commit/b9811ef5bb1b7d45a90e042f81f3aaf233c8bcb2]
-+CVE: CVE-2024-2397
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-+---
-+ print-ppp.c | 31 +++++++++++++++++--------------
-+ print.c     |  8 ++++++--
-+ 2 files changed, 23 insertions(+), 16 deletions(-)
-+
-+diff --git a/print-ppp.c b/print-ppp.c
-+index aba243d..e5ae064 100644
-+--- a/print-ppp.c
-++++ b/print-ppp.c
-+@@ -42,6 +42,8 @@
-+ #include <net/if_ppp.h>
-+ #endif
-+ 
-++#include <stdlib.h>
-++
-+ #include "netdissect.h"
-+ #include "extract.h"
-+ #include "addrtoname.h"
-+@@ -1363,7 +1365,6 @@ ppp_hdlc(netdissect_options *ndo,
-+ 	u_char *b, *t, c;
-+ 	const u_char *s;
-+ 	u_int i, proto;
-+-	const void *sb, *se;
-+ 
-+ 	if (caplen == 0)
-+ 		return;
-+@@ -1371,9 +1372,11 @@ ppp_hdlc(netdissect_options *ndo,
-+         if (length == 0)
-+                 return;
-+ 
-+-	b = (u_char *)nd_malloc(ndo, caplen);
-+-	if (b == NULL)
-+-		return;
-++	b = (u_char *)malloc(caplen);
-++	if (b == NULL) {
-++		(*ndo->ndo_error)(ndo, S_ERR_ND_MEM_ALLOC,
-++			"%s: malloc", __func__);
-++	}
-+ 
-+ 	/*
-+ 	 * Unescape all the data into a temporary, private, buffer.
-+@@ -1394,13 +1397,15 @@ ppp_hdlc(netdissect_options *ndo,
-+ 	}
-+ 
-+ 	/*
-+-	 * Change the end pointer, so bounds checks work.
-+-	 * Change the pointer to packet data to help debugging.
-++	 * Switch to the output buffer for dissection, and save it
-++	 * on the buffer stack so it can be freed; our caller must
-++	 * pop it when done.
-+ 	 */
-+-	sb = ndo->ndo_packetp;
-+-	se = ndo->ndo_snapend;
-+-	ndo->ndo_packetp = b;
-+-	ndo->ndo_snapend = t;
-++	if (!nd_push_buffer(ndo, b, b, (u_int)(t - b))) {
-++		free(b);
-++		(*ndo->ndo_error)(ndo, S_ERR_ND_MEM_ALLOC,
-++			"%s: can't push buffer on buffer stack", __func__);
-++	}
-+ 	length = ND_BYTES_AVAILABLE_AFTER(b);
-+ 
-+         /* now lets guess about the payload codepoint format */
-+@@ -1442,13 +1447,11 @@ ppp_hdlc(netdissect_options *ndo,
-+         }
-+ 
-+ cleanup:
-+-	ndo->ndo_packetp = sb;
-+-	ndo->ndo_snapend = se;
-++	nd_pop_packet_info(ndo);
-+         return;
-+ 
-+ trunc:
-+-	ndo->ndo_packetp = sb;
-+-	ndo->ndo_snapend = se;
-++	nd_pop_packet_info(ndo);
-+ 	nd_print_trunc(ndo);
-+ }
-+ 
-+diff --git a/print.c b/print.c
-+index 9c0ab86..33706b9 100644
-+--- a/print.c
-++++ b/print.c
-+@@ -431,10 +431,14 @@ pretty_print_packet(netdissect_options *ndo, const struct pcap_pkthdr *h,
-+ 	nd_pop_all_packet_info(ndo);
-+ 
-+ 	/*
-+-	 * Restore the original snapend, as a printer might have
-+-	 * changed it.
-++	 * Restore the originals snapend and packetp, as a printer
-++	 * might have changed them.
-++	 *
-++	 * XXX - nd_pop_all_packet_info() should have restored the
-++	 * original values, but, just in case....
-+ 	 */
-+ 	ndo->ndo_snapend = sp + h->caplen;
-++	ndo->ndo_packetp = sp;
-+ 	if (ndo->ndo_Xflag) {
-+ 		/*
-+ 		 * Print the raw packet data in hex and ASCII.
-+-- 
-+2.25.1
-+
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.99.4.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.99.4.bb
-index 803a9bb5f5..b05b832dd8 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump_4.99.4.bb
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.99.4.bb
-@@ -24,6 +24,7 @@ SRC_URI = " \
-     http://www.tcpdump.org/release/${BP}.tar.gz \
-     file://add-ptest.patch \
-     file://run-ptest \
-+    file://CVE-2024-2397.patch \
- "
- 
- SRC_URI[sha256sum] = "0232231bb2f29d6bf2426e70a08a7e0c63a0d59a9b44863b7f5e2357a6e49fea"
--- 
-2.25.1
-
+On Tue, Jun 25, 2024 at 1:14=E2=80=AFAM Peter Marko via lists.openembedded.=
+org
+<peter.marko=3Dsiemens.com@lists.openembedded.org> wrote:
+>
+> From: Peter Marko <peter.marko@siemens.com>
+>
+> Following warning occurs when building with ptests enabled:
+> WARNING: cjson-1.7.17-r0 do_package_qa: QA Issue: File /usr/lib/cjson/pte=
+st/CTestTestfile.cmake in package cjson-ptest contains reference to TMPDIR
+> File /usr/lib/cjson/ptest/tests/CTestTestfile.cmake in package cjson-ptes=
+t contains reference to TMPDIR
+> File /usr/lib/cjson/ptest/fuzzing/CTestTestfile.cmake in package cjson-pt=
+est contains reference to TMPDIR [buildpaths]
+>
+> The cmake files also contain full paths to original CMakeLists.txt file
+> in _BACKTRACE_TRIPLES property;
+> These are not needed for successful ptests as we don't install the
+> CMakeLists.txt files anyway.
+>
+> Signed-off-by: Peter Marko <peter.marko@siemens.com>
+> ---
+>  meta-oe/recipes-devtools/cjson/cjson_1.7.17.bb | 5 +++++
+>  1 file changed, 5 insertions(+)
+>
+> diff --git a/meta-oe/recipes-devtools/cjson/cjson_1.7.17.bb b/meta-oe/rec=
+ipes-devtools/cjson/cjson_1.7.17.bb
+> index 6c8934b342..ea74f1d680 100644
+> --- a/meta-oe/recipes-devtools/cjson/cjson_1.7.17.bb
+> +++ b/meta-oe/recipes-devtools/cjson/cjson_1.7.17.bb
+> @@ -24,6 +24,11 @@ do_install_ptest() {
+>          sed s#${B}#${PTEST_PATH}# ${B}/CTestTestfile.cmake > ${D}${PTEST=
+_PATH}/CTestTestfile.cmake
+>          sed s#${B}#${PTEST_PATH}# ${B}/tests/CTestTestfile.cmake > ${D}$=
+{PTEST_PATH}/tests/CTestTestfile.cmake
+>          sed s#${B}#${PTEST_PATH}# ${B}/fuzzing/CTestTestfile.cmake > ${D=
+}${PTEST_PATH}/fuzzing/CTestTestfile.cmake
+> +        # The cmake files also contain full paths to original CMakeLists=
+.txt file in _BACKTRACE_TRIPLES property;
+> +        # these are not needed for successful ptests as we don't install=
+ the CMakeLists.txt files anyway.
+> +        sed -i s#${S}#${PTEST_PATH}#g ${D}${PTEST_PATH}/CTestTestfile.cm=
+ake
+> +        sed -i s#${S}#${PTEST_PATH}#g ${D}${PTEST_PATH}/tests/CTestTestf=
+ile.cmake
+> +        sed -i s#${S}#${PTEST_PATH}#g ${D}${PTEST_PATH}/fuzzing/CTestTes=
+tfile.cmake
+>          # install test artifacts
+>          install ${B}/cJSON_test ${D}${PTEST_PATH}
+>          install ${B}/tests/cjson_add ${B}/tests/*_tests ${B}/tests/parse=
+_*  ${B}/tests/print_*  ${B}/tests/readme_examples ${D}${PTEST_PATH}/tests/
+> --
+> 2.30.2
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#111013): https://lists.openembedded.org/g/openembedde=
+d-devel/message/111013
+> Mute This Topic: https://lists.openembedded.org/mt/106866076/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
