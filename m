@@ -1,80 +1,88 @@
-Return-Path: <ninette@thehoodiefirm.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CCF4CC27C4F
-	for <webhook@archiver.kernel.org>; Wed, 26 Jun 2024 15:06:21 +0000 (UTC)
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web11.29431.1719414376132255655
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF82FC3064D
+	for <webhook@archiver.kernel.org>; Wed, 26 Jun 2024 15:36:41 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.web10.30217.1719416201342413249
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Jun 2024 08:06:16 -0700
+ Wed, 26 Jun 2024 08:36:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@thehoodiefirm-com.20230601.gappssmtp.com header.s=20230601 header.b=pU7HYwox;
- spf=neutral (domain: thehoodiefirm.com, ip: 209.85.210.179, mailfrom: ninette@thehoodiefirm.com)
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-706aab1b7ffso479446b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Jun 2024 08:06:16 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hdn4VAq4;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-367339bd00aso242702f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Jun 2024 08:36:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thehoodiefirm-com.20230601.gappssmtp.com; s=20230601; t=1719414375; x=1720019175; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:reply-to:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=p/XQ0diYUIoqhyBss3P2pLH+a8VgVpH/7TRKqtuaIsU=;
-        b=pU7HYwoxU/xdZN60pb15+mUz5fPJMxLNe0dbdLGQtKI+qBdnKb3Rq7hqflL9y/j2iZ
-         37MQaNmJSLilgHCb1TTq1v4YN6W5ISXG7fqN2P4iBfh7F/NWQIFrfb1OMXVnkjoTfvRb
-         ydj5o/vy86LlrC93ZuPZmg5n69kBC3yRyUnXhd3xLzsrip6h27HZMufTBxgPd12C78r2
-         KOJT3kclFWmInYrpAF2QV1lhRPgTVjbQGzZHn3ji4ahUFVhMvwXiVA8apPrXgE2QbMeU
-         MiNIg7/QWtBlX0a7iMZ/BwhSKxKINkC0E6El2NkbmXq4mc2ChMsvNWsK1UZzaLT5M0rW
-         XlHA==
+        d=gmail.com; s=20230601; t=1719416199; x=1720020999; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=9NDZqDHabH6AihSBnxkIKsqik2/6KJkA7UglfqXVcfU=;
+        b=hdn4VAq4f8/ifNOvvqYRMYO/nowLzuGs/hag50ieBtzIxbbYQF/takoWUz48zomigQ
+         EAY2zCI2Aibk/gwpyzdoylIBkvc8WHFlSpqELc0F6gKeLax4evG963TJsKfO6Y5rw+M8
+         uk0znM9+5Vwku1D/o9APYk69kJQKGit4v+dOq9WF2gRqsZM1cd18pjkESdoLWuTzCM6P
+         IdDd4GVp5jZJgVBZUWFXy/2F1xsaqtCBXSHuy33H7QkEW69DSg8FSWmS7CqAYPHfYo9i
+         mkJ7TqT/QIFOo+TGa/PN2lyOCu1fCzMcMgrsnQkGTg//YyiUKFv8MW0ZMm7fYxDJPZ93
+         nM4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719414375; x=1720019175;
-        h=content-transfer-encoding:mime-version:reply-to:message-id:date
-         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=p/XQ0diYUIoqhyBss3P2pLH+a8VgVpH/7TRKqtuaIsU=;
-        b=eAtvoybitQkRhZ2yrXWjLxi/tPJH6xABiTWBEG1us1s6vBaSBvRvbKZ1oPMsevstUP
-         IBe3v3OzSg5kMbio2gTx07suuaKi8YLxEG52LTV9SZm5TXkCQUbvAZHlxdfWC9vjkkvy
-         uY/9dWImsSG0RuyIE+F1uDvzEn8+noziXLdGP/G+nvGeJ4Eg8PYdKtWLzn2pV/53qkWr
-         5L26eL4gJKx2v7feohzCYDrjDVdpnooABqKfSEozyfF/LW988AQQWNP5sb7XEz1zgqz8
-         OJPeuHulkKVtFKdlzJw4xFLt+X+wlxocdsXDLyL36W1FIzWN0X6pp2ED5B6s0JA05UVf
-         xxwQ==
-X-Gm-Message-State: AOJu0Yx8bWBGirBjxNfGNE0bdJ1XWxhG7KJVOqfVitSkjkUDTQcHFANy
-	cvwkJ2Hb88V1LDl/jBC698gJlHQCHWHgjZL+dwtdAl5px9XK9RzcLQAWKQYKbQ+PQAvRD0MjGz+
-	v
-X-Google-Smtp-Source: AGHT+IH3cK66S9H02KmYc8IdufOr9WlWo8EK0c2KHvBXJrqO8YIPSr1No6VqpJ3BDNVKrSYA4tNDNg==
-X-Received: by 2002:aa7:9d92:0:b0:706:3514:2d6c with SMTP id d2e1a72fcca58-7067471c541mr10469320b3a.29.1719414375391;
-        Wed, 26 Jun 2024 08:06:15 -0700 (PDT)
-Received: from localhost.localdomain ([50.54.151.77])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7068e088e1esm5015143b3a.213.2024.06.26.08.06.14
+        d=1e100.net; s=20230601; t=1719416199; x=1720020999;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=9NDZqDHabH6AihSBnxkIKsqik2/6KJkA7UglfqXVcfU=;
+        b=LKn6Pn3LKTJqfENIcCjijnTY7AjV614NqDhOd6K18o8TnL1p+papsilm67GIyKNdGY
+         SF41ug9ldnczFhstNP83Dl3GrJ/A5iV3tadhgK2vvxr96PZQc/D4CU3DNZ36bEJ5SvLQ
+         MfviTGAh54JRe4R9pj+YSkMQrcRZ2Jku6RFLFcZ2/ujQVEzdjX86P8KuDjnRo1rBRBEj
+         7nMrjER1uUc951ia/0JMWMwH26ypQcIy+b7dOYfL2oqqiDR+xrfrj0z/HWIOV8CxZrsE
+         B9NK3V2H8z3cPASYeWxvGUGSi0wwB96fHbA7FqNoFpGpSGJGhsHciW8a873uOo0mBhth
+         928g==
+X-Gm-Message-State: AOJu0Yxlu+uamXWDL2OKOu3jrOCawurAI38UVpgqrmHzrBaH6yBzmCqi
+	TyUonfEehxzHNRa6za3bOkpxK++ulUFScTwcdmY7PtGW7Yo1xShz0ObxmDuH
+X-Google-Smtp-Source: AGHT+IHXloATmx8qPilVqNOiAXgirNe2XttTbUGwv0dhBVgF7HNZ7874BT5CQEvsqSbMeOxjs2jsNA==
+X-Received: by 2002:a05:6000:144e:b0:367:35fd:d3af with SMTP id ffacd0b85a97d-36735fdd7a0mr366854f8f.44.1719416199230;
+        Wed, 26 Jun 2024 08:36:39 -0700 (PDT)
+Received: from localhost.localdomain ([176.33.70.57])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-366389b85a2sm16107003f8f.42.2024.06.26.08.36.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Jun 2024 08:06:15 -0700 (PDT)
-From: Ninette Adhikari <ninette@thehoodiefirm.com>
+        Wed, 26 Jun 2024 08:36:38 -0700 (PDT)
+From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: engineering@neighbourhood.ie,
-	Ninette Adhikari <ninette@thehoodiefirm.com>
-Subject: [PATCH 0/1] apache2:apache2-native: CVE status update
-Date: Wed, 26 Jun 2024 08:06:11 -0700
-Message-ID: <20240626150612.29837-1-ninette@thehoodiefirm.com>
-X-Mailer: git-send-email 2.44.0
-Reply-To: engineering@neighbourhood.ie
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCH] hplip: Fix contains reference to TMPDIR [buildpaths] warning
+Date: Wed, 26 Jun 2024 18:36:26 +0300
+Message-Id: <20240626153626.2902794-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Jun 2024 15:06:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111107
+ <openembedded-devel@lists.openembedded.org>; Wed, 26 Jun 2024 15:36:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111109
 
-Update status for:
-CVE-2007-6421, CVE-2007-6422, CVE-2007-6423, CVE-2008-2168
+Make sure that the OE provided CFLAGS are passed to the compiler.
 
-CPE is incorrect, the current version (2.4.59) is not affected.
+WARNING: hplip-3.22.10-r0 do_package_qa: QA Issue: File /usr/lib/python3.12/site-packages/cupsext.so in package hplip contains reference to TMPDIR [buildpaths]
 
-Ninette Adhikari (1):
-  apache2:apache2-native: CVE status update
+Signed-off-by: alperak <alperyasinak1@gmail.com>
+---
+ meta-oe/recipes-extended/hplip/hplip_3.22.10.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- meta-webserver/recipes-httpd/apache2/apache2_2.4.59.bb | 5 +++++
- 1 file changed, 5 insertions(+)
-
---
-2.44.0
+diff --git a/meta-oe/recipes-extended/hplip/hplip_3.22.10.bb b/meta-oe/recipes-extended/hplip/hplip_3.22.10.bb
+index be420b483..991c69556 100644
+--- a/meta-oe/recipes-extended/hplip/hplip_3.22.10.bb
++++ b/meta-oe/recipes-extended/hplip/hplip_3.22.10.bb
+@@ -49,7 +49,7 @@ EXTRA_OECONF += "\
+         --with-cupsfilterdir=${libexecdir}/cups/filter \
+ "
+ 
+-EXTRA_OEMAKE = "rulessystemdir=${systemd_unitdir}/system/"
++EXTRA_OEMAKE = "CPPFLAGS='${CFLAGS}' rulessystemdir=${systemd_unitdir}/system/"
+ 
+ do_install:append() {
+     rm -rf ${D}${datadir}/hplip/upgrade.py
+-- 
+2.25.1
 
 
