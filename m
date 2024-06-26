@@ -1,88 +1,197 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF82FC3064D
-	for <webhook@archiver.kernel.org>; Wed, 26 Jun 2024 15:36:41 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.web10.30217.1719416201342413249
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E0D2C27C4F
+	for <webhook@archiver.kernel.org>; Wed, 26 Jun 2024 15:53:02 +0000 (UTC)
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com [209.85.167.47])
+ by mx.groups.io with SMTP id smtpd.web10.30684.1719417178488997327
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Jun 2024 08:36:41 -0700
+ Wed, 26 Jun 2024 08:52:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=hdn4VAq4;
- spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-367339bd00aso242702f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Jun 2024 08:36:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=KeCRC6dI;
+ spf=pass (domain: gmail.com, ip: 209.85.167.47, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-52ce6a9fd5cso3559238e87.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Jun 2024 08:52:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1719416199; x=1720020999; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=9NDZqDHabH6AihSBnxkIKsqik2/6KJkA7UglfqXVcfU=;
-        b=hdn4VAq4f8/ifNOvvqYRMYO/nowLzuGs/hag50ieBtzIxbbYQF/takoWUz48zomigQ
-         EAY2zCI2Aibk/gwpyzdoylIBkvc8WHFlSpqELc0F6gKeLax4evG963TJsKfO6Y5rw+M8
-         uk0znM9+5Vwku1D/o9APYk69kJQKGit4v+dOq9WF2gRqsZM1cd18pjkESdoLWuTzCM6P
-         IdDd4GVp5jZJgVBZUWFXy/2F1xsaqtCBXSHuy33H7QkEW69DSg8FSWmS7CqAYPHfYo9i
-         mkJ7TqT/QIFOo+TGa/PN2lyOCu1fCzMcMgrsnQkGTg//YyiUKFv8MW0ZMm7fYxDJPZ93
-         nM4Q==
+        d=gmail.com; s=20230601; t=1719417177; x=1720021977; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=HDAE3S4mRrZAGI6/UIjDM7YX1iZbzWPUqInml1pIBik=;
+        b=KeCRC6dIjIjZdLibYuOodO/xOCC9LxNUvH2gdO/u/6zB5kLuOPQ/v2zuW2UuSRXZ+Y
+         kS/7xiERvKSj1TroTvI2O+L4ZgeXaosAM7SVMW3ww7vZm6oBVLw+kvGjq7kE8B/aKE8U
+         K535/Z2kOp5Gmb40ky4v4mtDEPqtBoiihPu+Zxez7sq8kXjKCtSjZ/wIYjqNFECy2x09
+         C83/HS1cmx/tBcJ0T7F7hYB8h+Ow3zTOyadqA1QCZSftgnJ8eXFPM10x44hOUM3sIvpQ
+         RB00kqHDQ3kugd6LZ21s4GeRPKBBYLKRYVRXG8RPAKkDndGwTfU3H6q0L0Y2n3fUvVkN
+         oRcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719416199; x=1720020999;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=9NDZqDHabH6AihSBnxkIKsqik2/6KJkA7UglfqXVcfU=;
-        b=LKn6Pn3LKTJqfENIcCjijnTY7AjV614NqDhOd6K18o8TnL1p+papsilm67GIyKNdGY
-         SF41ug9ldnczFhstNP83Dl3GrJ/A5iV3tadhgK2vvxr96PZQc/D4CU3DNZ36bEJ5SvLQ
-         MfviTGAh54JRe4R9pj+YSkMQrcRZ2Jku6RFLFcZ2/ujQVEzdjX86P8KuDjnRo1rBRBEj
-         7nMrjER1uUc951ia/0JMWMwH26ypQcIy+b7dOYfL2oqqiDR+xrfrj0z/HWIOV8CxZrsE
-         B9NK3V2H8z3cPASYeWxvGUGSi0wwB96fHbA7FqNoFpGpSGJGhsHciW8a873uOo0mBhth
-         928g==
-X-Gm-Message-State: AOJu0Yxlu+uamXWDL2OKOu3jrOCawurAI38UVpgqrmHzrBaH6yBzmCqi
-	TyUonfEehxzHNRa6za3bOkpxK++ulUFScTwcdmY7PtGW7Yo1xShz0ObxmDuH
-X-Google-Smtp-Source: AGHT+IHXloATmx8qPilVqNOiAXgirNe2XttTbUGwv0dhBVgF7HNZ7874BT5CQEvsqSbMeOxjs2jsNA==
-X-Received: by 2002:a05:6000:144e:b0:367:35fd:d3af with SMTP id ffacd0b85a97d-36735fdd7a0mr366854f8f.44.1719416199230;
-        Wed, 26 Jun 2024 08:36:39 -0700 (PDT)
-Received: from localhost.localdomain ([176.33.70.57])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-366389b85a2sm16107003f8f.42.2024.06.26.08.36.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Jun 2024 08:36:38 -0700 (PDT)
-From: alperak <alperyasinak1@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCH] hplip: Fix contains reference to TMPDIR [buildpaths] warning
-Date: Wed, 26 Jun 2024 18:36:26 +0300
-Message-Id: <20240626153626.2902794-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        d=1e100.net; s=20230601; t=1719417177; x=1720021977;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=HDAE3S4mRrZAGI6/UIjDM7YX1iZbzWPUqInml1pIBik=;
+        b=AScTqWpxGANGZ3LUdJeF0BlV2EHc9qffV1XjgBFKDLEljSRNR927JHZ+y7npz3yZu7
+         xK6DJ0ru0RI2W810CCAraRchPBalZEzN8TJEXlRgBDIoAmGjpSkn96LNf/yuZRDGqvUk
+         e4zGc6j7hTMUsLPQaJnrgZClTLUgF8Ysg068GQ3UyMsR+EiOUPbxuq840MgjpLL/04uX
+         Ohljun/Xe6Be3uL7sqXjNRczBw4CGWzhIL/a9QZ69JNsK0cmhD6RGECl8YHHL4Etm4nj
+         XfItVaJuSBn2HF/pMISSWvwQbyVwbjvuoG75kY5k7VNorV780Lq68NF1RaH3JowWBUTd
+         HGDg==
+X-Gm-Message-State: AOJu0YzbjH1Oe/tTWk96ykmqebsqAlaSdd+yqWxCGuaxYhcxS0I3X9DJ
+	U2ORfPOEWAO//fYtyOQZNtxHsOhThcP9n6n7HHYPksaeOIaAA99v0zPDSpqY+m93xibe9VG2Foi
+	vXbXst7Y2OKWgqBt6A3WVadIh/K8=
+X-Google-Smtp-Source: AGHT+IGsK1ZsEQ8gOdB7FBiQxy8unAffY/rOEZeKzkQ+LbEPpKF/nMDt+HkiYcS5fmO65R3ipz7wN+60hBJGqIfI+vA=
+X-Received: by 2002:ac2:4c38:0:b0:52c:9bb3:6656 with SMTP id
+ 2adb3069b0e04-52ce185cfbcmr6812378e87.44.1719417176346; Wed, 26 Jun 2024
+ 08:52:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240619094547.30863-1-mark.jonas@de.bosch.com>
+In-Reply-To: <20240619094547.30863-1-mark.jonas@de.bosch.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 26 Jun 2024 17:52:42 +0200
+Message-ID: <CA+chaQfw=Uj30UAbC7m6eoN_0ZhzFYqoJKL1vdAkTZe13vukAg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] magic-enum: add recipe
+To: mark.jonas@de.bosch.com
+Cc: openembedded-devel@lists.openembedded.org, raj.khem@gmail.com, 
+	Ricardo Simoes <ricardo.simoes@pt.bosch.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Jun 2024 15:36:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111109
+ <openembedded-devel@lists.openembedded.org>; Wed, 26 Jun 2024 15:53:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111110
 
-Make sure that the OE provided CFLAGS are passed to the compiler.
+ptest seems to fail building
 
-WARNING: hplip-3.22.10-r0 do_package_qa: QA Issue: File /usr/lib/python3.12/site-packages/cupsext.so in package hplip contains reference to TMPDIR [buildpaths]
+lib32-magic-enum/0.9.5/git/test/test_containers.cpp:290:89: error:
+value computed is not used [-Werror=3Dunused-value]
+  290 |   magic_enum::containers::set color_set_not_const {Color::RED,
+Color::GREEN, Color::BLUE};
+      |
+                         ^
 
-Signed-off-by: alperak <alperyasinak1@gmail.com>
----
- meta-oe/recipes-extended/hplip/hplip_3.22.10.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-extended/hplip/hplip_3.22.10.bb b/meta-oe/recipes-extended/hplip/hplip_3.22.10.bb
-index be420b483..991c69556 100644
---- a/meta-oe/recipes-extended/hplip/hplip_3.22.10.bb
-+++ b/meta-oe/recipes-extended/hplip/hplip_3.22.10.bb
-@@ -49,7 +49,7 @@ EXTRA_OECONF += "\
-         --with-cupsfilterdir=${libexecdir}/cups/filter \
- "
- 
--EXTRA_OEMAKE = "rulessystemdir=${systemd_unitdir}/system/"
-+EXTRA_OEMAKE = "CPPFLAGS='${CFLAGS}' rulessystemdir=${systemd_unitdir}/system/"
- 
- do_install:append() {
-     rm -rf ${D}${datadir}/hplip/upgrade.py
--- 
-2.25.1
-
+On Wed, Jun 19, 2024 at 11:47=E2=80=AFAM Mark Jonas via lists.openembedded.=
+org
+<mark.jonas=3Dde.bosch.com@lists.openembedded.org> wrote:
+>
+> From: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
+>
+> magic-enum is a header-only C++17 library provides static reflection
+> for enums, works with any enum type without any macro or boilerplate
+> code.
+>
+> Signed-off-by: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
+> Signed-off-by: Mark Jonas <mark.jonas@de.bosch.com>
+> ---
+>  .../magic-enum/magic-enum/run-ptest           | 27 ++++++++++++
+>  .../magic-enum/magic-enum_0.9.5.bb            | 44 +++++++++++++++++++
+>  2 files changed, 71 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/magic-enum/magic-enum/run-pt=
+est
+>  create mode 100644 meta-oe/recipes-extended/magic-enum/magic-enum_0.9.5.=
+bb
+>
+> diff --git a/meta-oe/recipes-extended/magic-enum/magic-enum/run-ptest b/m=
+eta-oe/recipes-extended/magic-enum/magic-enum/run-ptest
+> new file mode 100644
+> index 000000000..865da9f69
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/magic-enum/magic-enum/run-ptest
+> @@ -0,0 +1,27 @@
+> +#!/bin/sh
+> +
+> +# SPDX-FileCopyrightText: 2024 Bosch Sicherheitssysteme GmbH
+> +#
+> +# SPDX-License-Identifier: MIT
+> +
+> +fail_count=3D0
+> +all_count=3D0
+> +
+> +for test_suite in tests/test_*
+> +do
+> +    if "./$test_suite"
+> +    then
+> +        echo "PASS: $test_suite"
+> +    else
+> +        echo "FAIL: $test_suite"
+> +        fail_count=3D$((fail_count + 1))
+> +    fi
+> +    all_count=3D$((all_count + 1))
+> +done
+> +
+> +if [ $fail_count -eq 0 ]
+> +then
+> +    echo "PASS: All $all_count tests passed"
+> +else
+> +    echo "FAIL: $fail_count of $all_count tests failed"
+> +fi
+> diff --git a/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.5.bb b/me=
+ta-oe/recipes-extended/magic-enum/magic-enum_0.9.5.bb
+> new file mode 100644
+> index 000000000..096f869c3
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.5.bb
+> @@ -0,0 +1,44 @@
+> +# SPDX-FileCopyrightText: 2024 Bosch Sicherheitssysteme GmbH
+> +#
+> +# SPDX-License-Identifier: MIT
+> +
+> +SUMMARY =3D "Static reflection for enums"
+> +DESCRIPTION =3D "Header-only C++17 library provides static reflection fo=
+r enums, works \
+> +with any enum type without any macro or boilerplate code."
+> +BUGTRACKER =3D "https://github.com/Neargye/magic_enum/issues"
+> +HOMEPAGE =3D "https://github.com/Neargye/magic_enum"
+> +
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Db15f48588464ec8ef87d2b560aad2=
+caa"
+> +
+> +SRC_URI =3D " \
+> +    git://github.com/Neargye/magic_enum.git;protocol=3Dhttps;branch=3Dma=
+ster \
+> +    file://run-ptest \
+> +"
+> +
+> +SRCREV =3D "e55b9b54d5cf61f8e117cafb17846d7d742dd3b4"
+> +S =3D "${WORKDIR}/git"
+> +
+> +inherit cmake ptest
+> +
+> +EXTRA_OECMAKE =3D "\
+> +    -DMAGIC_ENUM_OPT_BUILD_EXAMPLES=3DOFF \
+> +"
+> +
+> +do_install_ptest () {
+> +    install -d ${D}${PTEST_PATH}/tests
+> +    install -m 0755 ${B}/test/test_* ${D}${PTEST_PATH}/tests
+> +}
+> +
+> +# Add catkin and colcon (ROS build system) support
+> +FILES:${PN}-dev +=3D "\
+> +    ${datadir}/magic_enum/package.xml \
+> +"
+> +
+> +# Header-only library
+> +# ${PN} is empty so we need to tweak -dev and -dbg package dependencies
+> +RDEPENDS:${PN}-dev =3D ""
+> +RDEPENDS:${PN}-ptest =3D ""
+> +RRECOMMENDS:${PN}-dbg =3D "${PN}-dev (=3D ${EXTENDPKGV})"
+> +
+> +BBCLASSEXTEND =3D "native nativesdk"
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#110963): https://lists.openembedded.org/g/openembedde=
+d-devel/message/110963
+> Mute This Topic: https://lists.openembedded.org/mt/106757432/3617156
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
+artin.jansa@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
