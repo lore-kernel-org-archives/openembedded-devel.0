@@ -2,90 +2,76 @@ Return-Path: <ninette@thehoodiefirm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2DD6C41513
-	for <webhook@archiver.kernel.org>; Wed, 26 Jun 2024 14:36:41 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web10.28428.1719412595120206446
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AA0CDC27C4F
+	for <webhook@archiver.kernel.org>; Wed, 26 Jun 2024 14:42:01 +0000 (UTC)
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
+ by mx.groups.io with SMTP id smtpd.web11.28759.1719412915811410978
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Jun 2024 07:36:35 -0700
+ Wed, 26 Jun 2024 07:41:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@thehoodiefirm-com.20230601.gappssmtp.com header.s=20230601 header.b=UXpJGwiB;
- spf=neutral (domain: thehoodiefirm.com, ip: 209.85.214.170, mailfrom: ninette@thehoodiefirm.com)
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-1f9d9b57b90so45733195ad.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Jun 2024 07:36:35 -0700 (PDT)
+ dkim=pass header.i=@thehoodiefirm-com.20230601.gappssmtp.com header.s=20230601 header.b=RcJiy7O/;
+ spf=neutral (domain: thehoodiefirm.com, ip: 209.85.210.175, mailfrom: ninette@thehoodiefirm.com)
+Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-7066c9741b7so2971536b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Jun 2024 07:41:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thehoodiefirm-com.20230601.gappssmtp.com; s=20230601; t=1719412594; x=1720017394; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:reply-to:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=q/HWygh0szMbIBBCCuDILLnQCQ4nYKbHCaR9Eg/glKw=;
-        b=UXpJGwiBYkUC/gtb8E7L0DOzhvhgFOjIaziL7IzrhWwmGZn5l5v7Df0vNbLNzH+3DE
-         mht0Hq+YMxApcLCIMeK1IhKZvNxn5b2jFfrOpr6VTe0mThm9zSSlVu1bKCvAICMAkHts
-         U11VnmEw4+ehFpsI73SN+/x5fo76AeZTpbPaXIxPElEmm8ataoki1Bw5BbRg16vqOHYa
-         l6TwzlIrYq9zsQ4f/sPRsS1CSbRgLvUGCLCnHkn+m06zPirfhHtqA/7ZClsehdwAocOe
-         D8rYZ+WgZvY6eGgVMIwSLNyR82pMvB0kEwi2BMu/aYT7b4AoBVNjw5P7SGMo+lbzihZa
-         OZwg==
+        d=thehoodiefirm-com.20230601.gappssmtp.com; s=20230601; t=1719412915; x=1720017715; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:reply-to:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=lq2c5Za3VVyYpwj7MMiXN9K9RAq08D1cm1WySMkKyhY=;
+        b=RcJiy7O/Dcp2qiQ53NKccGZ0iTMF4e2VjfskTBDY9CcIz1Ghr0AAcumJm2klb+jKxE
+         MaeK1Qbk8jlbTLlUS9RkUdd4Ge20FHMy9S3oQTCwDMM2/4F8HXWeQm/x51yjtniN0cWf
+         GWdGRlXnjW32ERMd6vWYFUicAbokDA9v6/21W/vV0BCqsdFu++PKVq3q+L5XVGz0rtwd
+         b2V3NIAU/hngRzAZqduw9P0YSb+spSiGw4HPds63EmdedsZKOl2jt6egNmnCwGRMBIy9
+         6AZkmKnVna06+B/w1EkwHta386w2+eQB3+PaSstk0XAgRY0QlzoI2a7p1nQaFml1bOPb
+         eIDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719412594; x=1720017394;
-        h=content-transfer-encoding:mime-version:reply-to:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=q/HWygh0szMbIBBCCuDILLnQCQ4nYKbHCaR9Eg/glKw=;
-        b=ceSynnnNDh6wth5rngzYOZAgI4yE3yNvyYkzGRVp3dBNL6rdRxUV4intYjRKJbYX2J
-         IUm3rhYO2WKcYh17me/70gOU/FuK5Plod+C3QSHdYQw/BRYawURIXBPMQYhKyTY5Q4ly
-         No65D+wj6BVhEZ7SVMRAee2JBNHWHBMMPaiPb+JovvVdNHTD7EDcGkPnzbyqCKcEmktx
-         aR1d95foVaGLfd+PghYy97UwOunmBJYLKM9srekS0KGjAH44ZsLrlSFE/XgY6UXLwPD1
-         ATeyPDbcLS3uVFJhnEoDR2PLnJZrj+RGXZuwRX/Rs58x7+VaIk+Y3qEwFiQlhWpEzI8G
-         dLiw==
-X-Gm-Message-State: AOJu0YzJlyGnVRL0kjS4hvS4sO9/DLxw8c+qsLiA2Hb842VR8sj1fc3+
-	VWNH8SAYRV/zzwAwHzvX1+9goZWLOf2dC4mqHFLttUK476xgZ7SYiHyVrdQPrWJsY9RpUO3RSuQ
-	d
-X-Google-Smtp-Source: AGHT+IFUkh9BUpg5WsS6PmYnaluaUihaRyZ8NqFfHJEHOkA+6lkkjN/Yub19CH4gNopA/Lsx0CbErw==
-X-Received: by 2002:a17:902:e542:b0:1f9:ae6d:5697 with SMTP id d9443c01a7336-1fa23ee2607mr148760765ad.35.1719412594521;
-        Wed, 26 Jun 2024 07:36:34 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1719412915; x=1720017715;
+        h=content-transfer-encoding:mime-version:reply-to:message-id:date
+         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lq2c5Za3VVyYpwj7MMiXN9K9RAq08D1cm1WySMkKyhY=;
+        b=ufrO3Kxxb1hl9C9tm7uuEgrVDOhFjdRR07HuYwq9LVtK2S3ISF1TfWhhcuFmGEJkvt
+         gxwtsA2LUPIoeIBtgfhHdyDo4T61Zs86lU9qhUoxt21rCgnG4Q/svTiwg1cHIe7v3J2G
+         FBv8mNXMY+CqG0tnyCsd3Kowdu/pXuUHMqjeFU9MbSGJC9bFvI0HoGXnZUqTJv2QgHJS
+         zTtUv0DxGRlAaQqnBebvYt70PCQX9JXfWpJtFmrfzJLM+0uwoGpyUsv4U2eEdzRx/+0v
+         p4NHQxZ8mQngzVA/Zi6pfLMuAaMX6QvyruOEvRgZWSAr2EYUtYDF6CUyIC9hDlP46bfP
+         L8wA==
+X-Gm-Message-State: AOJu0YycNN91D/q6cnu4RlfMOdRDTjfx3DRoOqyLu5O9Dy9m2dtMH5zH
+	L+KyDT39VS2zWigHXEEV0+DZPQi+hWbhUd0UQKH57/3mEdGWLIapq0OvryW9FtHzOkZqipe7ZA+
+	8
+X-Google-Smtp-Source: AGHT+IEfANVQBumtq4VKo3ta1haIhMCcetkkDPoniI9uVTucdS/af9qt8zi1OVjhfIKDa/HPD2R/vQ==
+X-Received: by 2002:a05:6a20:4c29:b0:1bd:1e06:9dba with SMTP id adf61e73a8af0-1bd1e069e45mr4213935637.27.1719412915222;
+        Wed, 26 Jun 2024 07:41:55 -0700 (PDT)
 Received: from localhost.localdomain ([50.54.151.77])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1fa3229f936sm63871445ad.85.2024.06.26.07.36.33
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1f9eb328f57sm100373855ad.110.2024.06.26.07.41.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Jun 2024 07:36:34 -0700 (PDT)
+        Wed, 26 Jun 2024 07:41:54 -0700 (PDT)
 From: Ninette Adhikari <ninette@thehoodiefirm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: engineering@neighbourhood.ie,
 	Ninette Adhikari <ninette@thehoodiefirm.com>
-Subject: [PATCH 1/1] links: CVE status update for CVE-2008-3319
-Date: Wed, 26 Jun 2024 07:36:29 -0700
-Message-ID: <20240626143629.84191-2-ninette@thehoodiefirm.com>
+Subject: [PATCH 0/1] usrsctp: CVE status update for CVE-2019-20503
+Date: Wed, 26 Jun 2024 07:41:51 -0700
+Message-ID: <20240626144152.92432-1-ninette@thehoodiefirm.com>
 X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240626143629.84191-1-ninette@thehoodiefirm.com>
-References: <20240626143629.84191-1-ninette@thehoodiefirm.com>
 Reply-To: engineering@neighbourhood.ie
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Jun 2024 14:36:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111100
+ <openembedded-devel@lists.openembedded.org>; Wed, 26 Jun 2024 14:42:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111101
 
-The recipe used in the `meta-openembedded` is a different links package compared to the one which has the CVE issue.
-Package used in `meta-embedded`: twibright links http://links.twibright.com/download.php
-Package with CVE issue: Maian Links https://www.maianmedia.com/
+The current version (0.9.5.0) is not affected by the CVE which affects versions at least earlier than 0.9.4.0.
 
-Signed-off-by: Ninette Adhikari <ninette@thehoodiefirm.com>
----
- meta-oe/recipes-support/links/links_2.29.bb | 2 ++
- 1 file changed, 2 insertions(+)
+Ninette Adhikari (1):
+  usrsctp: CVE status update for CVE-2019-20503
 
-diff --git a/meta-oe/recipes-support/links/links_2.29.bb b/meta-oe/recipes-support/links/links_2.29.bb
-index e3a15d181..311d84e48 100644
---- a/meta-oe/recipes-support/links/links_2.29.bb
-+++ b/meta-oe/recipes-support/links/links_2.29.bb
-@@ -9,3 +9,5 @@ EXTRA_OECONF = "--enable-graphics \
-                 --without-directfb --without-pmshell --without-atheos \
-                 --without-x"
- SRC_URI[sha256sum] = "22aa96c0b38e1a6f8f7ed9d7a4167a47fc37246097759ef6059ecf8f9ead7998"
-+
-+CVE_STATUS[CVE-2008-3319] = "cpe-incorrect: The recipe used in the `meta-openembedded` is a different links package compared to the one which has the CVE issue."
--- 
+ meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
+
+--
 2.44.0
 
 
