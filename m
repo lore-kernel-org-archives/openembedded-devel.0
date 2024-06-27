@@ -1,1045 +1,306 @@
-Return-Path: <randy.macleod@windriver.com>
+Return-Path: <mark.jonas@de.bosch.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41A7FC30653
-	for <webhook@archiver.kernel.org>; Wed, 26 Jun 2024 21:00:40 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.381.1719435638835310056
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AF1BC3064D
+	for <webhook@archiver.kernel.org>; Thu, 27 Jun 2024 07:00:51 +0000 (UTC)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com (EUR02-AM0-obe.outbound.protection.outlook.com [40.107.247.50])
+ by mx.groups.io with SMTP id smtpd.web11.2254.1719471644451997126
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Jun 2024 14:00:38 -0700
+ Thu, 27 Jun 2024 00:00:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=6907e5632d=randy.macleod@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45Q6jS0x031526
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Jun 2024 14:00:38 -0700
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ywx4fv3qh-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Jun 2024 14:00:37 -0700 (PDT)
-Received: from m0250809.ppops.net (m0250809.ppops.net [127.0.0.1])
-	by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 45QL0bgT003190;
-	Wed, 26 Jun 2024 14:00:37 -0700
-Received: from nam10-bn7-obe.outbound.protection.outlook.com (mail-bn7nam10lp2040.outbound.protection.outlook.com [104.47.70.40])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ywx4fv3qf-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 26 Jun 2024 14:00:37 -0700 (PDT)
+ dkim=pass header.i=@de.bosch.com header.s=selector2 header.b=Lf2rIfyj;
+ spf=pass (domain: de.bosch.com, ip: 40.107.247.50, mailfrom: mark.jonas@de.bosch.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Wy8KGs/408V/CHhx4EE/yQ49ZALdbFqDAqOmZEIQMHK8/GRew+YKzTT77PC4Q7GfVjebYNQtjeJeaEr7SVYN8yHAXCtL8Lc+3CwjMcFLUsqehpHbvzkqy4n1UJMZDXmJcBweXR9OEpkg0aA+ghku1J2aJXM7oKjtSjLb1FSQTTT5U4WRGVDHFlweSlEexzlnfr5UCx1AHOsmKQiUnU/a5diITHdGpmorJn0ZtpSS19nkhXZCvMeYfTtaGiF/MgNrPFtV7kqzN4I0LLC2edJglfgWrp7sTc0TuwNEJPBXX70fEjlXd1sSd2gXAuAMjE5/zbrMJP6AQVJ1/xWuHeuD0A==
+ b=aXycn+Tcjehi6RgtoeLtDW+ZtO6BpoXcEO0rwx4p4ReZ0piZXbW42IE1LtB1nmmNDVUDNPG2oW82gTG4yVrCvMdntOgciM3Wbul2bTGum3ImTVnCWxps6MTMZReY+/tWY2UyymGdiEqKQ0pSPk8meuiigBDluTBBLtgMtHVFPlUZXZ2K1BfWbn12NoGJLyDygaxPa/JyG+jYFSymRKzOPj25aSh5Mho1SnQ5kNGYxrAtE71r07aY8d5b5RradL6VII6ZyFuutDlfEok++Uatb8y3iH1fZ5YxOLCppG9myLVGQwzGZjb4vTAutB4RYhl56WrXaq99qWDd26m7gespNA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=90L0rkWWjyWDk1wa2skyC4UIIlQV2+mkNNQVLqlHlXE=;
- b=YKeMS3nkv9CbKKJL/n7ZwVZexc1IcvNFmFalSU6wYz7bwFWuR0inpzLII2o8uTU3IswPdbce4GgevP6IgzazgKYZhxn1A7qibr5A4gUh97Ywq6hWDazNkB5/KvALdFXXH5yoqkZUgZZmImdHNdCLaxM6+aCuy4sd50rIfN5CaiPUSM6Y5MWGfnIgI6lNmR8jG+KLwI4qenmrEowDsZHcGToZkMttRK+AjWy4SoqdgHm4+V8Rhm2s9ROO4tBUYpusZmDFsxb9hN2m+JTbOk8ej3H5tSnEVmYIubqaRh+udMdkTX6Fujw5L9XciAhTVDTndCwuEKXTaU3sckr7GKTfeQ==
+ bh=9Pz5kRyPyfwCzFt2r4r24ZE/36TitDbFFyQw7LzC0cU=;
+ b=BoG4PXosQwnghAIskSaNVOPx16nrO+HRKqVBA1bV/ES3nk+9ujBmwbnXo3IQClCudmzqNpgW73q8CWmmtnh6I7FRthdXbdXKqpiJBN3QTlUcqvIOQi98pW8sR8FDYoFf2wUKN0dwwrEyFA3zmw4W8yAsut2FDjaStwE8JEOMhybD78v50mntInGt9h68A0fZqpFD0OzeDDqNWFrtg5LMbc9gwYb6GQhtkhzVLOr6++zhFHvkGFQm3QtrwhlVI4pmf6LthPconCOSZ+H1xFriPoC5C431MGzsLmyQJrFJW6EAYWYx6I05jdY5FJ+Q0IjO+CLkmYY03UkNbJawyVPFIA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from CH3PR11MB8496.namprd11.prod.outlook.com (2603:10b6:610:1ba::22)
- by CYXPR11MB8663.namprd11.prod.outlook.com (2603:10b6:930:da::21) with
+ smtp.mailfrom=de.bosch.com; dmarc=pass action=none header.from=de.bosch.com;
+ dkim=pass header.d=de.bosch.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=de.bosch.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9Pz5kRyPyfwCzFt2r4r24ZE/36TitDbFFyQw7LzC0cU=;
+ b=Lf2rIfyj7nq03POgZj4DYV2B7SkzDk8vV3JG22ewwxzXkom/vt3jBRK7/1njzbtjsE6DgKevl2TkV256BPUyYR13bVAx5JxTo6BKE47S94QXdNuquHaCU0FVmMfrdb81PxbOWu78qDObYt5nZ9f8hFTuF7leAbeJQBOxMrMOY5/3hxrNxih+0FDGbgkfpsesNQANqDWjqAGrtV8ICoIGM/zqJxKMHzeAL1uHqDGv6X7JUUg9+7ZDIMCjK+ktw+IeUEMcXxgx8D2y3AwHjZinrPeFnC9dTUiDEjUMmlcJ2gQ11REZ8on5ftu/QhYp+2FiYawziZMFH0oTWKLmG52n4g==
+Received: from DU0PR10MB7076.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:423::12)
+ by AS8PR10MB6819.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5b7::21) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.32; Wed, 26 Jun
- 2024 21:00:26 +0000
-Received: from CH3PR11MB8496.namprd11.prod.outlook.com
- ([fe80::cdc3:a646:2a93:9552]) by CH3PR11MB8496.namprd11.prod.outlook.com
- ([fe80::cdc3:a646:2a93:9552%6]) with mapi id 15.20.7698.025; Wed, 26 Jun 2024
- 21:00:26 +0000
-Content-Type: multipart/alternative;
- boundary="------------AuOtIQ5CwNjSQAc0oOhWmxXV"
-Message-ID: <c2ed1746-11e0-41ff-be93-19f0b00ed1d2@windriver.com>
-Date: Wed, 26 Jun 2024 17:00:24 -0400
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH] libee: remove recipe since libee is
- obsolete -- join the layer clean-up?
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <20240625162048.666209-1-Randy.MacLeod@windriver.com>
- <CAMKF1sqreoZ4rtcSL0ODP2Hn4uXRs8gMzQsg8dkOeUJh=tMF+g@mail.gmail.com>
-Content-Language: en-CA
-From: Randy MacLeod <randy.macleod@windriver.com>
-In-Reply-To: <CAMKF1sqreoZ4rtcSL0ODP2Hn4uXRs8gMzQsg8dkOeUJh=tMF+g@mail.gmail.com>
-X-ClientProxiedBy: YQBPR0101CA0248.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:c01:66::30) To CH3PR11MB8496.namprd11.prod.outlook.com
- (2603:10b6:610:1ba::22)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.32; Thu, 27 Jun
+ 2024 07:00:38 +0000
+Received: from DU0PR10MB7076.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::104a:4c1c:9bb3:3036]) by DU0PR10MB7076.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::104a:4c1c:9bb3:3036%3]) with mapi id 15.20.7698.033; Thu, 27 Jun 2024
+ 07:00:38 +0000
+From: "Jonas Mark (BT-FS/ENG1-GRB)" <mark.jonas@de.bosch.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, "raj.khem@gmail.com"
+	<raj.khem@gmail.com>, "Simoes Ricardo (BT-FS/ENG1.1-Ovr)"
+	<Ricardo.Simoes@pt.bosch.com>
+Subject: AW: [oe] [meta-oe][PATCH] magic-enum: add recipe
+Thread-Topic: [oe] [meta-oe][PATCH] magic-enum: add recipe
+Thread-Index: AQHax+DrDmeoypDluEmk8KEpGumI5rHbIvbA
+Date: Thu, 27 Jun 2024 07:00:38 +0000
+Message-ID: 
+ <DU0PR10MB7076A615B2317E23746D5ABFADD72@DU0PR10MB7076.EURPRD10.PROD.OUTLOOK.COM>
+References: <20240619094547.30863-1-mark.jonas@de.bosch.com>
+ <CA+chaQfw=Uj30UAbC7m6eoN_0ZhzFYqoJKL1vdAkTZe13vukAg@mail.gmail.com>
+In-Reply-To: 
+ <CA+chaQfw=Uj30UAbC7m6eoN_0ZhzFYqoJKL1vdAkTZe13vukAg@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=de.bosch.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DU0PR10MB7076:EE_|AS8PR10MB6819:EE_
+x-ms-office365-filtering-correlation-id: 44776b96-9dd0-4ffa-3500-08dc9676d9cc
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230040|366016|376014|4022899009|1800799024|38070700018;
+x-microsoft-antispam-message-info: 
+ =?utf-8?B?UThrNmJJYmxwYnRBOCs2ZWxtSVlwSEpXajNZbjNFcEErT3dyYlMvZUgwWkRo?=
+ =?utf-8?B?NHk1djNTK3hmK1E4ZjBnZHFRaEV2MElUeGg5ajZCeDRRckxzZ1lTZDJPTEpF?=
+ =?utf-8?B?NWFVQlhUSUV4UXRSRVFwa3BGTVN5M29sZFpZR3UwWjNSZE5wZmdGaFRVNnpR?=
+ =?utf-8?B?VnVPaU1RM0JmcTkxQ0tlYy9iVDF1cDhqcWxZYStnMFZyT1hBSlduNjJGRmRv?=
+ =?utf-8?B?VnYxaEhRcU9vTHVYS0RPVkdRaGNaNVJ0UW1DeUJMOTRXMUlMWjFYMlR3K1lw?=
+ =?utf-8?B?dWlHb3lXUTRRTUlpWlJkd2ZJY3g3dHBpb1U4dmJ4cVpSclhwSFl5TVNMbmps?=
+ =?utf-8?B?YndJQ2xQQjQvd1VxWEE1VEVhVlJrb1R0SnZIaVlYcEFpcENuRnRLR0VHdEpZ?=
+ =?utf-8?B?MGRKY0VEY0FvajAxbzYxQXJJd29vKzZ0RW1ZK0Z1TU10T0ErcU5jSy8zRG9S?=
+ =?utf-8?B?QnlVc3BwUU5kNDRZR0s4akd2Z2pxYndDM2RCVW9Vbk50cGNNSC9MWm5zL2Vz?=
+ =?utf-8?B?QlBuMnJRSmtvMEw2RmRQSnlYSVRZbE9aUXUxODNVdUFYL0R5ZFI5V09wMmp3?=
+ =?utf-8?B?MGh1Q2FidlhwQUc0ODlJbTRvNUFPbHNaRHFoSGhWZFdRWXdVZVVqUFNMSlk0?=
+ =?utf-8?B?dW5DcDNIUkdhWkFuQUJ6Qlo5Ri9QVFVtekljQ0lzQmdrU05mNzh5ZFpreEh3?=
+ =?utf-8?B?QTVSTFh0R1FlYzlUZktjd3VEUXRpRzRUck94WVBoUGtPOXl2OHY0OU9oek9n?=
+ =?utf-8?B?NXVmc2xtUHhHUitvVjNGcFBubjdDRTZFU1E2a0pHRkhBejhwRGJoRGNVTFdv?=
+ =?utf-8?B?cGtNdHVjMzFOaFF2WG1FaktpVnVZR2hONXNQMy9SUS9vSzg0NDRaa2ZUTmNW?=
+ =?utf-8?B?ZW1ocU41K0F0Zk1MRkk4ZHRjdUJCbnZ5dm9Qek0ydkhCQzFQendUOFpQSTZL?=
+ =?utf-8?B?RjZlbXV3QUtUbG9heWJtUXFKcXpmK0JSQ3BIR0JsS0V5VmRzcjV2aGYrLzYr?=
+ =?utf-8?B?RkRia0RPZnVJYXhkWVVMQXA5aHdwNU9STnl5d1ZxVDJwN3M1OVVPR2gxZDFq?=
+ =?utf-8?B?UGpDUU5ndnh3dnAxSGpldGZnMGR1Mjh3alBTQXJDZytPOFVEQk9JOVBjbTM1?=
+ =?utf-8?B?SWptQ1ZKcG96Y0RQZ0xKMjFlZFFEK1dhNHExK3hqc3dOL09kbGhVNytIbXhN?=
+ =?utf-8?B?NzJyL1NOSWFpN0lYanBkZXlpUjgxSTBFQjdpVW1UTC9ZbXJrQ1dnaEQrUTFu?=
+ =?utf-8?B?T2h3T20vOWtrUTFDejNiZzN3c0RkNk1SNkRwb0VrSVVxYU5CajI2VkFLOFZU?=
+ =?utf-8?B?bVp2UUhRNktReXlINmpWMFBhZVJrelh1aWNXK0g0bzFnNzEyM0l6Mmk2QWRh?=
+ =?utf-8?B?NkJYdm5mUXV1UEVtcWFHb1p6c3ZmREU0UG5sSlloYXdaKzc5WVF2Rzd0VnVz?=
+ =?utf-8?B?VWQrT0xRV2d1OXFBelkzWXgxT3ErSWx6UnZHalRmYU1ycEt2TC96dk92UG1M?=
+ =?utf-8?B?b2k0emVNcW9VVHFQTlVPT0YxN0trS3RvMzZxYU8yZ1QrOHhGQ0h0ckZya2RX?=
+ =?utf-8?B?Q0dqMm1YbzVxengxajdQNVNOU2J6MkZyejRrMEMrYkxDVDlIUGpJclJSL3VN?=
+ =?utf-8?B?dzJXVUtKVkY2bDBrb2pQbXVZMnVzeUxsMjVWQkNUY1U3enlKTUQvYlJuVHlC?=
+ =?utf-8?B?dkFOa1dNb0xsb2tpTGxUOGNxUXp4Uys0UVAzb2xndFg4RnZkcitnWFRLd3d5?=
+ =?utf-8?B?c0VWWmNXZU5sQVVLaXBtbi9icjZ2Mk1WVHZFQ0kydG4xK1hwVE9wcDRqN25E?=
+ =?utf-8?Q?e9UPDo2Jk4S6/78bfeK7Bwgwg58jleyDAr1io=3D?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU0PR10MB7076.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(4022899009)(1800799024)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?NjZock1MZnVERVJzQkw1dDJtbkNDWEJ2NWRFaWRMZGFCY3llNGFPbTgzdWw0?=
+ =?utf-8?B?OWJkdk5KWDY4NHgzR2xBdzEwb3gxTkNKaVpRS2lBemVtdWZBYVJmZ2thcWJO?=
+ =?utf-8?B?VU01RDF5QXNoM1JRM1hhMGdSdHdtdkhOUUxVTnBQaXZaVzBDZE5Pb1N6ZEl2?=
+ =?utf-8?B?elFua3FsQWdRSUJCa1gzazQ4SGN3eGxzNHpEOFZhZmQ3NVJxclM0UlNxd0Y3?=
+ =?utf-8?B?dkRTTjcyS3FPbW4vM21mN1dhN0FvVnFJcTlTT0FCNXFjdDJ5V1dGcC8wWTJU?=
+ =?utf-8?B?Z3B5bWh5RjNxc2N5TUlrcG5naFY1SHRoM2hyT205UG54ZEFBZkNaemdiYmt5?=
+ =?utf-8?B?NjN4RXRROWNJWDhodGEwdFJ6N0Z1V0dEUUQyTk5UNVk0MWxYcW85Y2VPQW5u?=
+ =?utf-8?B?c0R1RVN6cGVNdExNb2dFOHNvWWJucmZjQ3NBc3JqMjZqeWFVUkVMQjdlYnVw?=
+ =?utf-8?B?L1NSN3JVRVcwNDRPQnJCNFg1MTVKNEFTcEVheHhJR1RVcE5FWHNrbDZVY0dF?=
+ =?utf-8?B?V0ZIZ1Zpdit3cG9ZNzJ0ek5qWmVFSDlYSGFEeU13WnFTSnA3SXFINi8yK0Q0?=
+ =?utf-8?B?ejVlaVFMbElha1Jsa2NzdENvMmJjSStzcEp0aTNXelRveGZnTmVNQnB0YnhG?=
+ =?utf-8?B?OWY5VUVReVBrNHA0UWRSZjhKajlrc2J3VkM2RU83QWRjQW1vYmloOTU3aTdu?=
+ =?utf-8?B?a2ptQWs3U2ZTR2hpbWRDb3JtUEdORDVhY0NsdmxnTjF4WWJTR0J6QXpFb24x?=
+ =?utf-8?B?Z1RyaENyN2dLREVib1g5Y1QxUmcrYmExV0lDVGRxUktrRlhqTEpxMFJ4Y0VW?=
+ =?utf-8?B?Q05rR3RyUEZhVHptaUpaM255Q1ROMUY2bkM0SFcwVmN5Ujd0c0xLbjJvWUxw?=
+ =?utf-8?B?MXhxSVJXdzJ4QXZsRWZ6YXRQbnNvTlBIWHBsT1QraU5DTWMyVVJ0RlVqVk90?=
+ =?utf-8?B?dnF1Qk1pNjQwbVpNb3lkRWk0Z2dqSVNGc2NxS0YxbHNSb2pIdUZRaU1VaDN6?=
+ =?utf-8?B?SXpqMGpmYjNiM3doNjFXTUVtVDJmTDZZMXhnbU9BMUVOdmYyQ3VBWTBWVGdQ?=
+ =?utf-8?B?cnpqZnBSdUxJaUZ6R2RuUmplWnFNU3hLMzJnWnVXblhyc3JrR3dzVXFHNk5J?=
+ =?utf-8?B?K2lBTFNhME9Vekl0S1p3VVpKTnhFakZYWWtqb0dTd2N1dkE1aVRqUVBpZlFV?=
+ =?utf-8?B?S3BvaVhhbm14amdXOGxLWkJNcTRsRkRBMS9zSkE1Y3BjcnFXYk5PWjNGY1RJ?=
+ =?utf-8?B?KzU5RVdxbmtrRm55M3pnWnNUaXlxRlAzRHlBMGYwOWl4NnVleG5SOHdJTm9J?=
+ =?utf-8?B?RWdTNVNxYUpSK0RZbDlTMXRqWVdtTUgxYkZpY0I2R1E0Y05Jd2pJSE5NdzFx?=
+ =?utf-8?B?NHpKQlUxRkd5TkJocmJXdnJPYjBhZFFKUUZmcXVVc2RpTGNITnBIZFVlK2J2?=
+ =?utf-8?B?bjZ0R0ZBVHZmOWdRWkIvWVAzeW1Yc05UY2FxaUhoSityU1ZEZTU1b2R3Z09L?=
+ =?utf-8?B?MUxPN3Rua0I3MnE2K0tCRG1BQllFcFJndE9ZN0I3Y3Vqd09EK0NYYkRZRExp?=
+ =?utf-8?B?dENodjdKd3I3VlI5dzdWcjhCU0xjRWZIYlMwL2Y1MitmVGU4OEl4eFowQmJN?=
+ =?utf-8?B?cXlQcjRJYjVISzZmNGNRbnplbjE2SG9uVi9aMnQ3YW5XNWJIVlVESVpmcGV4?=
+ =?utf-8?B?RDRQRHRkb29vUkZYODJxMElFbkxBMERZa1c5N2VnNGhvNm9tKzhIVzhvS0Z4?=
+ =?utf-8?B?dGZkSFE0YmZKWTYwZnhCaFZPYjFVZ3ZRelNOckE1bjluVVdoaUxWOUNnMlda?=
+ =?utf-8?B?SVJtMFVrRnF2bEN4anN4M3pxY01yaDNsRkd2MlNXd2RZcWFwTXdkQUgyTkti?=
+ =?utf-8?B?ajRHUTc2MGR4UDE3ZW1mUWxvcDZjK21COVlDcDlwTzN5eGZ0clR4T2owdUg3?=
+ =?utf-8?B?TGszb1RwZm9LZ2VpU0prSGcxZGs0cnlQZVJJR1RsOEVBeUV2RTNnRzlwYVNx?=
+ =?utf-8?B?b2ZiOTRvRVdQQkNKWGdDVmt1aVlEcDhYWkM4c2tZenJuaDY5WDA3cnVwVGFv?=
+ =?utf-8?B?V2puQTZ2SnByR1M2SGM0MTZWNEdNTGJjMWp2dGdmWVJqbDRGemVISGQ5ekdG?=
+ =?utf-8?Q?JduU=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR11MB8496:EE_|CYXPR11MB8663:EE_
-X-MS-Office365-Filtering-Correlation-Id: da6e817c-e4c6-406f-151d-08dc962300d8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230038|1800799022|366014|376012|4022899007;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?bVRtRXpzZ1lqekZPRjhxckRCay8rbnZYNjBWeWdMb0ViZ1Ava1h1dkF1ZHp1?=
- =?utf-8?B?M3N0UysvMHFOc0RVdHZ6YTN5VmVuS3VCSmFSakFHVVhZeEZ1WndVNXZjSlNt?=
- =?utf-8?B?Y2kvVG4wVGgwRjAvR1Ayck5jQ09MVGFqMFpYMFdDenptRUYvZHNOYjdmYkh4?=
- =?utf-8?B?TjcxZk5sQ1Y0RlFCTGc5WkJXbEJiUU1PZGRleHRJRCtZa01kZmQwb3ZaeVBK?=
- =?utf-8?B?VXl3MEJ6a1Y3ek5FQnlGN21nZFc3Ky93YVpWODZJenREVnlEMG53RlR6OUNV?=
- =?utf-8?B?d2JtWUFHazd5SGFtZ0tYc3BSeitEMWJnYlk1M2loSWN5ZTJoVGJwdTZqWUZ4?=
- =?utf-8?B?SjVVR2lnQmtHY0cvZ1hWUCtaUDcwbFJLVmpFZTFHUVNLYi85R2tjSDVsdXJP?=
- =?utf-8?B?d01qeVY2MS9RYjNPWTBQaFlLZE1YR2IrS0JBb3dIcmRkZ2FnaVRLQzNtcldQ?=
- =?utf-8?B?aVBYWERoa1BtY1lFVHZMNXlhdHdNM005V05landVOG1tejlSYStQQ1g2UUVB?=
- =?utf-8?B?VEhqVUc4a0pNekxuSWdhUnJKSHBnQkNoUnZ0V201V2tNY2JnMVdTcUY5S1E5?=
- =?utf-8?B?S21hZUVYaVU3NGVpTk5NZWZNZ3cySW1xYzhreExHaTYyTENla0NYUFFGTHFk?=
- =?utf-8?B?VDRMM1drelpvbmFldEZ0R1BOSkkwVmg1bVkva1RFcUMyejR1WlJOV0JMaTNs?=
- =?utf-8?B?RTRQa0RmL2xUQ3BjU3RQVG9EemZFY3FQWTdwSTg0L1lQM1NqVS81OUFsajRO?=
- =?utf-8?B?amwzS0RDb04wbDFTckVKemxyTXRidVBEZyt1b1dXcE5BRVBQMm1LVDVTdjZY?=
- =?utf-8?B?aE5nNzFRMlpodTg5VDhtRnBKK2hqN2U3LzBaTmVrVmpWVHpRcnF2VTZzWFVv?=
- =?utf-8?B?blJsWjh4Q3hHTGVuRFNaem5lQko0QTJlU0MyOVVxT2x0ckY5K2VpY0hzQkVa?=
- =?utf-8?B?cFBmZ05Kb1ZSVHl1azhMcW1nS2ZYK3ZmU0ZBbWlWRzhSMVVYMnozdEV6R3hs?=
- =?utf-8?B?blFxempGMWlrQmJMaHZVRW40anArakVFMUpXWlNnMGdQekRtSTNnRG5Ub1hm?=
- =?utf-8?B?R0ZEOG5XU1Q4ZEZlNnFsY2RJeit1VVV3M3Bjb2NCYlJJUmlnWVUzclZIbThE?=
- =?utf-8?B?S0c0Q3pYYlByQXZSbEFOQ0RSZlpEL2JlVTlVVVFKZFBYekhhUkVDSlBsTFJ4?=
- =?utf-8?B?dVVwYzN5QXJLZ2hMaFllWE5MKzB1SzMyUVVyT1F1RVZvTkFSOEl3U0w1SnQz?=
- =?utf-8?B?T3lsaDBaT3Q5RXM5VnpqOXQraHNFZFJGM3lscjlBZmZXb0NUbGkwdVR6dzJ3?=
- =?utf-8?B?QkpNaWhlZEp3NWJKMXpnWnVIM2VtUWhud3Fqa1dDMXhTelBvL1lubEZkZ0Y2?=
- =?utf-8?B?UWpBMjNMTTFQNzQ5UnVXYTVjaDdxcno2YTl1KzdFNm1ON3VlQVhVM1RTUVJ6?=
- =?utf-8?B?UUU2cDhTa09HSWFHUXpaVXFFQVE4VXVtbFhCM2l2VWxzWWp3WnE2QVhMK3VG?=
- =?utf-8?B?YVhacW9Vb2pPaktsOXo2ZTkydk93OXRqMHdpcG5RREgvTzQxdjNHYmdKVjd4?=
- =?utf-8?B?bEEyVnBhais1R1hpZktER1p4WnZCdTdudlBrZk1xZVgrRTJ4K2M2T09ackRH?=
- =?utf-8?B?Wjd3ckNIbVUyRW80S0dYWkFtZDE1clZQZi8rTFRDeitLNlMzMEVWMXRlaFkv?=
- =?utf-8?B?dVFOQnE1TFFBWmFnUXMwM0VxTjFiWk5TNEI1b05jQU1ZTUhzM1VVOVJnPT0=?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR11MB8496.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230038)(1800799022)(366014)(376012)(4022899007);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?Wno4dmRjaG42eERvM3pNTzA3VjRSOFY5bFpwakRTVitsYmc0YndBTEtZeTc5?=
- =?utf-8?B?NkZHQ0x5QWtkMytURW40THpNOUlGVjNYZ3p3QXBVM3FsRlhrNXBJSmtLQkxJ?=
- =?utf-8?B?MHJocnF3L1ZYb2EwL0tyNmVzQXZQOUVkOVhUd1AwM1c0QkRFZkZsQTVCZUlX?=
- =?utf-8?B?MC9makR5ZVQ1SWVEd2MvdVAwSXRqTWxPaEkzSDREUXNUdFhDZ0d3aVQ1NUlU?=
- =?utf-8?B?QW5wZGhWTUFETG41c3BoOGR0T3pwL3ZWWFBnN1lBb0hPbGFJcDlSL2hxQmFw?=
- =?utf-8?B?eGlkUmZWTmNSV0xxSUIrTzZGYXhoa29PZGljOU5XSk9JNHo4ejlqN0tFaE5a?=
- =?utf-8?B?eDUwSTBuZ0YxMkp6VzVOc21GNUNLTjl4N3kvcGpoaEFKMHJWakFqSTY3cUVv?=
- =?utf-8?B?aU8vTTdpRWNlYkVkWXJieUlPajlEa2lwMms2cC9zT04vMjNoNzY5YUdCSHNT?=
- =?utf-8?B?TmdLVjhEaXFUcTZpYXFEeWg0eTJ3RkowbTJ4bkJ6MUxaMTVIMlc0MlZmV01G?=
- =?utf-8?B?OUc1OHJLTWI5Q29reFZyWldvZFF3d3dlSUdORnROTnFBbzlNazNRUTFUeDVo?=
- =?utf-8?B?QWdscHI3Z3RrK0ZMakVMN2JhalFkYTBrbVYwcm1WVEVvNVRhZEFuNTFvNkVi?=
- =?utf-8?B?Z2ZYbGdtMjBIdlZleUxHQVVlcDh4aThSMm9TMHBrSDE4NTVhVWQ3d2dDNXVl?=
- =?utf-8?B?YVVmZ2FHSS82MHZYdEo0QjVnRHpPVjczRXdWT3M0Rjh0YXh4SVFqaFR6UWgw?=
- =?utf-8?B?Q3pFN1IvdFp6YXhyUWZrVEFBQkM1UXdraHRDb2JKL1JIS243NkZzeXAvZVhr?=
- =?utf-8?B?ZjFLMHZBQ2JKZnNPdytnZmc2WngxSENSZEV6NUIyanBSOEFiSHNjUzhjekxI?=
- =?utf-8?B?elJKTkpIbVRlUmRWZ21NZE1USzRrWjBmZkFaUHhIeXRYRHU4Mzg3MVZIeGg5?=
- =?utf-8?B?QWxRdnVFd0xuUUtNYzk3VVlicFcyQVhRVWVXZGN0QmMxVEVVM2gyb1hVTWlF?=
- =?utf-8?B?a0x3c0drOWs4bWhxRXQ3ZzFBOTVBQ1JadWE1WmpLVDlMZ3I4RXd4eitON0NV?=
- =?utf-8?B?RDBLZ3pZYkUrM1RDRjkvMElCVnk2NVZ0MzJLb2p6TUpPNHBuS2pPWktqY0Vw?=
- =?utf-8?B?bENtSEdUWnFtR0IvQjJ0WFN6QzVpRUc2WVdZQ05ZYjBnNi96c0txUXVqaFAx?=
- =?utf-8?B?RlFCQUdmZ0YwTllBMFozeVVkNllmdmt4aHBFUkxYS0o2ejc4MDA5U0NzV0FO?=
- =?utf-8?B?dWtzRzVyd2xyb2RwTUFvNDh5YXNJM0NhSDBVc2oyWDZxMkppWlRUbUtKV3p5?=
- =?utf-8?B?KzVDUDQveTJ2MWhETm5aM0oxZmdLbm9Zbm9lZDBHekpHMGVncG9aYzdMMHlX?=
- =?utf-8?B?OU5PS0VwclRxN2F3RWdELzdXM1h1NG1EMXlYa1N6RFVLd05mTEJkTzBUZFZX?=
- =?utf-8?B?Zk1teXFuSUdpZkFYdXlwU0NlalRmNFZpSGxla1pYR0RlT0hHNDJIeEt2SzRM?=
- =?utf-8?B?dnpydHdxUFY4SUdFTW8vbHBGQTFkenlVUVVmSktDdnVFUXJEU2JPS2ZoRk5F?=
- =?utf-8?B?ckRxVm8xcnJlK1BJYWlCQytGcVp0ZkFEWlE1Q3FFK1ZtNlpRSWszcW90bkJC?=
- =?utf-8?B?ZVl4NlNUeFJmWit5YUpIbnZGU2ZZYXFjcXYvUzJlSm1VS1FtNjUzZGhmWUw0?=
- =?utf-8?B?Z1F1VzhISlEvTGxOaVdMRStmK2tscEdoZGlJWE5sQ2JrcFpkbjd0d3ZyK1JL?=
- =?utf-8?B?Y0lYTSsxTGJtRGxxeGNncXJsUGlRSGc4aDQ2MGNFQUk0OUF6K3JES2FQSmhT?=
- =?utf-8?B?amhibExPNW9FM0NPRE5KclZxTkYraW5IR0gxK0ZMNStRRWV5Nlc5NHpVM1gr?=
- =?utf-8?B?TnNYYmVvK3JBTGZaeVAzRTU1L0QrUGo5eXkzT1J4VVBjdHlzdmhMdnlDTHhF?=
- =?utf-8?B?c1VJQlR6Mkt3aEpTUTdaVFBpMFhYdjloQnY4eVJuMVJvTmZlMkwwQXF1OU1O?=
- =?utf-8?B?cWsyL0t1ZUFsUHFkZ041OHdwZERkY01aQ1NJL285anRZM3BuZ1plK3Z0c3h6?=
- =?utf-8?B?MHQranRoVVhiK091Z2NOMERPdGlGZTZTaVhUZUR3UXJBblVmbXNMLytIaWs5?=
- =?utf-8?B?R0lON09Lc2NTVStYRmUxNnlMNFZndVJjNENCaHNxSmI2OFlmcjNKLzU0TlB2?=
- =?utf-8?B?VUE9PQ==?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: da6e817c-e4c6-406f-151d-08dc962300d8
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB8496.namprd11.prod.outlook.com
+X-OriginatorOrg: de.bosch.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2024 21:00:26.3297
+X-MS-Exchange-CrossTenant-AuthSource: DU0PR10MB7076.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 44776b96-9dd0-4ffa-3500-08dc9676d9cc
+X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Jun 2024 07:00:38.3863
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PDP8bm9bwByAvP8UV4pcEDUiMKm6ykIxGPEiNXfqbq6EQZB4qIoR8imsU6PRbV/Y0YzxBhxAGaerx7IOIdiz8eahzjb1bTxIR8n8Iasz8iU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYXPR11MB8663
-X-Proofpoint-GUID: LIrJ2BhgH9OMw6ZfK6_9lbKqTcrsp9MF
-X-Proofpoint-ORIG-GUID: PjkcZeC_MF2izWVzZx7VlY0eLr6MSsrt
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-26_13,2024-06-25_01,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 suspectscore=0
- mlxlogscore=999 mlxscore=0 priorityscore=1501 lowpriorityscore=0
- clxscore=1015 phishscore=0 spamscore=0 impostorscore=0 adultscore=0
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.21.0-2406140001 definitions=main-2406260154
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: wirxRDwGk3dYY1/E2ycEPnywLAF/UcMRTRivEYsUnqOpeeCnsTweA7nku+wgkHbYFwTv5OIY7BtiMcfcegbI2g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB6819
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Jun 2024 21:00:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111116
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Jun 2024 07:00:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111117
 
---------------AuOtIQ5CwNjSQAc0oOhWmxXV
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 45Q6jS0x031526
-
-On 2024-06-25 12:52 p.m., Khem Raj wrote:
-> Thanks Randy, We need to find more such recipes and purge them
-
-
-Yes, I'll be working on that a bit over the coming weeks.
-In case anyone wants to join in the culling, err fun, below are the=20
-filters to look for old recipes
-along with comments on my plans for the older recipes in the meta-oe=20
-layer of the meta-openembedded repo.
-
-Removal summary for meta-oe layer:
-
-recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb
-recipes-devtools/json-spirit/json-spirit_4.08.bb
-recipes-extended/sblim-sfc-common/sblim-sfc-common_1.0.1.bb
-recipes-multimedia/xsp/xsp_1.0.0-8.bb
-
-Any objections?
-
-There isn't as much to remove as I hoped for.
-
-
-../Randy
-
-
-$ cd ../meta-openembedded.git
-
-$ for i in `ls -d meta-*`; do \
- =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cd $i; \
- =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 git ls-tree -r --name-only HEAD | rg bb$ =
-| while read filename; do \
- =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 echo "$(git log -=
-1 --format=3D"%ad" -- $filename) $filename"; \
-
- =C2=A0=C2=A0=C2=A0=C2=A0 done | \
- =C2=A0=C2=A0=C2=A0=C2=A0 cut -d" " -f 5- | sort -n | tee /tmp/$i.log; cd=
- -; \
-
-done
-
-$ egrep "^201|2020" /tmp/meta-* | Randy to add meta-oe comments
-
-/tmp/meta-filesystems.log:2020 recipes-support/physfs/physfs_3.0.2.bb
-/tmp/meta-gnome.log:2019 recipes-support/ibus/ibus-native.bb
-/tmp/meta-initramfs.log:2020=20
-recipes-core/images/initramfs-kexecboot-klibc-image.bb
-/tmp/meta-initramfs.log:2020 recipes-core/images/meta-initramfs-image.bb
-/tmp/meta-multimedia.log:2015=20
-recipes-multimedia/opencore-amr/vo-aacenc_0.1.3.bb
-/tmp/meta-multimedia.log:2015=20
-recipes-multimedia/opencore-amr/vo-amrwbenc_0.1.3.bb
-/tmp/meta-multimedia.log:2019 recipes-multimedia/juce/projucer_git.bb
-/tmp/meta-multimedia.log:2020 recipes-multimedia/opusfile/opusfile_0.12.b=
-b
-/tmp/meta-networking.log:2012 recipes-support/tunctl/tunctl_1.5.bb
-/tmp/meta-networking.log:2013=20
-recipes-support/libmemcached/libmemcached_1.0.7.bb
-/tmp/meta-networking.log:2016 recipes-support/ssmping/ssmping_0.9.1.bb
-/tmp/meta-networking.log:2017=20
-recipes-support/libmemcached/libmemcached_1.0.18.bb
-/tmp/meta-networking.log:2018 recipes-support/netcat/netcat-openbsd_1.195=
-.bb
-/tmp/meta-networking.log:2020=20
-recipes-support/libmaxminddb/libmaxminddb_1.4.3.bb
-
-Randy's meta-oe list of old packages and comments:
-
-# remove - queued
-/tmp/meta-oe.log:2015=20
-recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb
-
-# keep, update
-/tmp/meta-oe.log:2016 recipes-devtools/dmalloc/dmalloc_5.5.2.bb
-
-# keep update directfb2 ?
-/tmp/meta-oe.log:2016 recipes-graphics/directfb/directfb_1.7.7.bb
-
-# Update https://github.com/compuphase/minIni/tags
-/tmp/meta-oe.log:2016 recipes-support/minini/minini_1.2.b.bb
-
-# Keep? Need more analysis
-/tmp/meta-oe.log:2017 recipes-extended/libexecinfo/libexecinfo_1.1.bb
-
-# 4 hits:=20
-https://layers.openembedded.org/layerindex/branch/master/recipes/?q=3Ddep=
-ends%3Alibmng
-# update?
-/tmp/meta-oe.log:2017 recipes-graphics/libmng/libmng_2.0.3.bb
-
-# old, slow? -> remove
-/tmp/meta-oe.log:2018 recipes-devtools/json-spirit/json-spirit_4.08.bb
-
-# no users -> remove?
-/tmp/meta-oe.log:2018=20
-recipes-extended/sblim-sfc-common/sblim-sfc-common_1.0.1.bb
-
-# update to 1.1.1 from 20 months ago
-/tmp/meta-oe.log:2018 recipes-graphics/xorg-app/bdftopcf_1.1.bb
-
-
-# stable benchmark tool -> keep?
-/tmp/meta-oe.log:2019 recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
-
-# keep?
-/tmp/meta-oe.log:2019 recipes-core/emlog/kernel-module-emlog_git.bb
-
-# keep. layer on logging - maintained rsyslog dev
-/tmp/meta-oe.log:2019 recipes-extended/liblogging/liblogging_1.0.6.bb
-
-# library that uses Freetype2 to simplify rendering fonts in OpenGL=20
-applications.
-# 3 dependencies in other layers:=20
-https://layers.openembedded.org/layerindex/branch/master/recipes/?q=3Ddep=
-ends%3Aftgl
-#=C2=A0 so keep
-/tmp/meta-oe.log:2019 recipes-graphics/ftgl/ftgl_2.1.3-rc5.bb
-
-
-# remove: X Server Nokia 770 extensions library
-/tmp/meta-oe.log:2019 recipes-multimedia/xsp/xsp_1.0.0-8.bb
-
-# unchanged for > 10 years:=20
-https://repo.or.cz/libtar.git/shortlog/refs/heads/master
-# libreport depends on it so keep
-/tmp/meta-oe.log:2019 recipes-support/libtar/libtar_1.2.20.bb
-
-# I can't bring myself to remove the cscope recipe!
-/tmp/meta-oe.log:2020 recipes-devtools/cscope/cscope_15.9.bb
-
-# keep. upstream still active (2023): https://github.com/dynup/kpatch/tag=
-s
-/tmp/meta-oe.log:2020 recipes-kernel/kpatch/kpatch_git.bb
-
-# keep. upstream still maintained:=20
-https://gitlab.xiph.org/xiph/libopusenc/-/commits/master/?ref_type=3DHEAD=
-S
-/tmp/meta-oe.log:2020 recipes-multimedia/libopusenc/libopusenc_0.2.1.bb
-
-# keep. font.
-/tmp/meta-oe.log:2021 recipes-graphics/ttf-fonts/ttf-noto-emoji_20200916.=
-bb
-# keep. font.
-/tmp/meta-oe.log:2023 recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb
-
-
-/tmp/meta-python.log:2017=20
-recipes-devtools/python/python3-django-south_1.0.2.bb
-/tmp/meta-python.log:2017=20
-recipes-devtools/python/python3-flask-bootstrap_3.3.7.1.bb
-/tmp/meta-python.log:2017=20
-recipes-devtools/python/python3-flask-xstatic_0.0.1.bb
-/tmp/meta-python.log:2018=20
-recipes-devtools/python/python3-flask-sijax_0.4.1.bb
-/tmp/meta-python.log:2020 recipes-devtools/python/python3-asciitree_0.3.3=
-.bb
-/tmp/meta-python.log:2020 recipes-devtools/python/python3-docopt_0.6.2.bb
-/tmp/meta-python.log:2020=20
-recipes-devtools/python/python3-ipaddress_1.0.23.bb
-/tmp/meta-python.log:2020=20
-recipes-devtools/python/python3-keras-preprocessing_1.1.2.bb
-/tmp/meta-python.log:2020 recipes-devtools/python/python3-libconf_2.0.1.b=
-b
-/tmp/meta-python.log:2020=20
-recipes-devtools/python/python3-pathtools3_0.2.1.bb
-/tmp/meta-python.log:2020 recipes-devtools/python/python3-sijax_0.3.2.bb
-/tmp/meta-python.log:2020 recipes-devtools/python/python3-speaklater_1.3.=
-bb
-/tmp/meta-python.log:2020=20
-recipes-devtools/python/python3-tinyrecord_0.2.0.bb
-/tmp/meta-python.log:2020 recipes-devtools/python/python3-visitor_0.1.3.b=
-b
-/tmp/meta-webserver.log:2020 recipes-support/fcgiwrap/fcgiwrap_git.bb
-
-
-I'll continue with cleaning up old recipes in meta-oe so if someone wants=
- to
-look at the other layers, please reply here so that we don't have two=20
-people doing the
-same work.
-
-
-I already locally removed liblinebreak. It's unused but if people want=20
-it they should add libunibreak
-as I'll explain in my commit log.
-
-> On Tue, Jun 25, 2024 at 9:20=E2=80=AFAM Randy MacLeod via
-> lists.openembedded.org
-> <randy.macleod=3Dwindriver.com@lists.openembedded.org>  wrote:
->> From: Randy MacLeod<Randy.MacLeod@windriver.com>
->>
->> libee had been used by rsyslog but the library never relly panned out.
->>
->> It has been declared to be obsolete:
->>     Early versions of rsyslog and liblognorm used it for representing =
-structured content.
->>     However, this is long gone. We do not know of any other user. So l=
-ibee should be of
->>     no further interest and is provided here solely for historical rea=
-sons.
->> https://github.com/rsyslog/libee
->>
->> Also remove references to libee in:
->>     meta-oe/conf/include/ptest-packagelists-meta-oe.inc
->>     meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
->>
->> Signed-off-by: Randy MacLeod<Randy.MacLeod@windriver.com>
->> ---
->>   .../include/ptest-packagelists-meta-oe.inc    |  1 -
->>   .../packagegroups/packagegroup-meta-oe.bb     |  2 -
->>   meta-oe/recipes-support/libee/libee.inc       | 39 -----------------=
---
->>   meta-oe/recipes-support/libee/libee/ezapi1.sh | 14 -------
->>   .../libee/libee/libee-parallel-make.patch     | 20 ----------
->>   meta-oe/recipes-support/libee/libee/run-ptest |  3 --
->>   meta-oe/recipes-support/libee/libee_0.4.1.bb  |  4 --
->>   7 files changed, 83 deletions(-)
->>   delete mode 100644 meta-oe/recipes-support/libee/libee.inc
->>   delete mode 100755 meta-oe/recipes-support/libee/libee/ezapi1.sh
->>   delete mode 100644 meta-oe/recipes-support/libee/libee/libee-paralle=
-l-make.patch
->>   delete mode 100755 meta-oe/recipes-support/libee/libee/run-ptest
->>   delete mode 100644 meta-oe/recipes-support/libee/libee_0.4.1.bb
->>
->> diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/met=
-a-oe/conf/include/ptest-packagelists-meta-oe.inc
->> index eaa86c411..01bf975a1 100644
->> --- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
->> +++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
->> @@ -17,7 +17,6 @@ PTESTS_FAST_META_OE =3D "\
->>       jq \
->>       leveldb \
->>       libcereal \
->> -    libee \
->>       libgpiod \
->>       libio-pty-perl \
->>       libmanette \
->> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.b=
-b b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
->> index bc40f56b9..e11afcd4e 100644
->> --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
->> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
->> @@ -811,7 +811,6 @@ RDEPENDS:packagegroup-meta-oe-support =3D"\
->>       libcanberra \
->>       libssh \
->>       libssh2 \
->> -    libee \
->>       libusbgx-config \
->>       libusbgx \
->>       lockdev \
->> @@ -972,7 +971,6 @@ RDEPENDS:packagegroup-meta-oe-ptest-packages =3D "=
-\
->>       oprofile-ptest \
->>       libteam-ptest \
->>       uthash-ptest \
->> -    libee-ptest \
->>       poco-ptest \
->>       cmocka-ptest \
->>       minicoredumper-ptest \
->> diff --git a/meta-oe/recipes-support/libee/libee.inc b/meta-oe/recipes=
--support/libee/libee.inc
->> deleted file mode 100644
->> index 592109b95..000000000
->> --- a/meta-oe/recipes-support/libee/libee.inc
->> +++ /dev/null
->> @@ -1,39 +0,0 @@
->> -SUMMARY =3D "An Event Expression Library inspired by CEE"
->> -DESCRIPTION =3D "The core idea of libee is to provide a small \
->> -but hopefully convenient API layer above the CEE standard."
->> -
->> -HOMEPAGE =3D"http://www.libee.org"
->> -SECTION =3D "base"
->> -
->> -LICENSE =3D "LGPL-2.1-or-later"
->> -LIC_FILES_CHKSUM =3D"file://COPYING;md5=3D1c2687de35e36ba3b999136236a=
-66cd6"
->> -
->> -SRC_URI =3D"http://www.libee.org/download/files/download/${BPN}-${PV}=
-.tar.gz\ -=20
->> file://libee-parallel-make.patch \ - file://run-ptest \ -=20
->> file://ezapi1.sh \ -"
->> -
->> -inherit autotools ptest pkgconfig
->> -
->> -DEPENDS +=3D "libestr"
->> -
->> -PACKAGECONFIG ??=3D"${@bb.utils.contains('DISTRO_FEATURES', 'ptest', =
-'testbench', '', d)}"
->> -
->> -PACKAGECONFIG[debug] =3D "--enable-debug,--disable-debug,,"
->> -PACKAGECONFIG[testbench] =3D "--enable-testbench,--disable-testbench,=
-,"
->> -
->> -TESTDIR =3D "tests"
->> -
->> -# We presume the tests we are going to install so just build them dir=
-ectly.
->> -#
->> -do_compile_ptest() {
->> -    oe_runmake -C ${TESTDIR} genfile ezapi1
->> -}
->> -
->> -do_install_ptest() {
->> -    install -d ${D}${PTEST_PATH}
->> -    install -m 0755 ${B}/${TESTDIR}/genfile ${D}${PTEST_PATH}
->> -    install -m 0755 ${B}/${TESTDIR}/.libs/ezapi1 ${D}${PTEST_PATH}
->> -    install -m 0755 ${UNPACKDIR}/ezapi1.sh ${D}${PTEST_PATH}
->> -}
->> diff --git a/meta-oe/recipes-support/libee/libee/ezapi1.sh b/meta-oe/r=
-ecipes-support/libee/libee/ezapi1.sh
->> deleted file mode 100755
->> index e9db5e614..000000000
->> --- a/meta-oe/recipes-support/libee/libee/ezapi1.sh
->> +++ /dev/null
->> @@ -1,14 +0,0 @@
->> -#!/bin/sh
->> -#
->> -echo ----------------------------------------------------------------=
------------
->> -echo A very basic test for the event class
->> -echo ----------------------------------------------------------------=
------------
->> -rm -f infile
->> -./genfile 100 > infile
->> -./ezapi1 -iinfile
->> -if [ $? -ne 0 ] ; then
->> -   echo "FAIL: $0"
->> -   exit 1
->> -fi
->> -echo "PASS: $0"
->> -rm -f infile
->> diff --git a/meta-oe/recipes-support/libee/libee/libee-parallel-make.p=
-atch b/meta-oe/recipes-support/libee/libee/libee-parallel-make.patch
->> deleted file mode 100644
->> index 8bb23aafc..000000000
->> --- a/meta-oe/recipes-support/libee/libee/libee-parallel-make.patch
->> +++ /dev/null
->> @@ -1,20 +0,0 @@
->> -fix parallel compiling problem
->> -
->> -without specifying libee_convert_DEPENDENCIES =3D libee.la, libee_con=
-vert
->> -can't find libee.la when linking as libee is not generated yet.
->> -
->> -Upstream-Status: Pending
->> -
->> -Signed-off-by: Yao Zhao<yao.zhao@windriver.com>
->> ----
->> -diff --git a/src/Makefile.am b/src/Makefile.am
->> -index 08aaa9e..f0c78f7 100644
->> ---- a/src/Makefile.am
->> -+++ b/src/Makefile.am
->> -@@ -46,5 +46,6 @@ libee_la_LDFLAGS =3D -version-info 0:0:0
->> - libee_convert_SOURCES =3D convert.c
->> - libee_convert_CPPFLAGS =3D  -I$(top_srcdir) $(LIBEE_CFLAGS) $(LIBEST=
-R_CFLAGS) $(LIBXML2_CFLAGS)
->> - libee_convert_LDADD =3D $(LIBEE_LIBS) $(LIBXML2_LIBS) $(LIBESTR_LIBS=
-)
->> -+libee_convert_DEPENDENCIES =3D libee.la
->> -
->> - include_HEADERS =3D
->> diff --git a/meta-oe/recipes-support/libee/libee/run-ptest b/meta-oe/r=
-ecipes-support/libee/libee/run-ptest
->> deleted file mode 100755
->> index 3cb660764..000000000
->> --- a/meta-oe/recipes-support/libee/libee/run-ptest
->> +++ /dev/null
->> @@ -1,3 +0,0 @@
->> -#!/bin/sh
->> -#
->> -./ezapi1.sh
->> diff --git a/meta-oe/recipes-support/libee/libee_0.4.1.bb b/meta-oe/re=
-cipes-support/libee/libee_0.4.1.bb
->> deleted file mode 100644
->> index ef2c20db5..000000000
->> --- a/meta-oe/recipes-support/libee/libee_0.4.1.bb
->> +++ /dev/null
->> @@ -1,4 +0,0 @@
->> -require ${BPN}.inc
->> -
->> -SRC_URI[md5sum] =3D "7bbf4160876c12db6193c06e2badedb2"
->> -SRC_URI[sha256sum] =3D "c0dac01938593deee06c3d161e4eda4ecc0fd7317e132=
-1bd96e301aceb7fb027"
->> --
->> 2.34.1
->>
->>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#111077):https://lists.openembedded.org/g/openembed=
-ded-devel/message/111077
->> Mute This Topic:https://lists.openembedded.org/mt/106872902/1997914
->> Group Owner:openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe:https://lists.openembedded.org/g/openembedded-devel/unsub =
- [raj.khem@gmail.com]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
-
---=20
-# Randy MacLeod
-# Wind River Linux
-
---------------AuOtIQ5CwNjSQAc0oOhWmxXV
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 45Q6jS0x031526
-
-<!DOCTYPE html><html><head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">
-  </head>
-  <body>
-    <div class=3D"moz-cite-prefix">On 2024-06-25 12:52 p.m., Khem Raj
-      wrote:<br>
-    </div>
-    <blockquote type=3D"cite" cite=3D"mid:CAMKF1sqreoZ4rtcSL0ODP2Hn4uXRs8=
-gMzQsg8dkOeUJh=3DtMF+g@mail.gmail.com">
-      <pre class=3D"moz-quote-pre" wrap=3D"">Thanks Randy, We need to fin=
-d more such recipes and purge them</pre>
-    </blockquote>
-    <p><br>
-    </p>
-    <p>Yes, I'll be working on that a bit over the coming weeks.<br>
-      In case anyone wants to join in the culling, err fun, below are
-      the filters to look for old recipes<br>
-      along with comments on my plans for the older recipes in the
-      meta-oe layer of the meta-openembedded repo.</p>
-    <p>Removal summary for meta-oe layer:<br>
-    </p>
-    <p>recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb<br>
-      recipes-devtools/json-spirit/json-spirit_4.08.bb<br>
-      recipes-extended/sblim-sfc-common/sblim-sfc-common_1.0.1.bb<br>
-      recipes-multimedia/xsp/xsp_1.0.0-8.bb<br>
-      <br>
-      Any objections?<br>
-    </p>
-    <p>There isn't as much to remove as I hoped for.</p>
-    <p><br>
-    </p>
-    <p>../Randy<br>
-    </p>
-    <p><br>
-      $ cd ../meta-openembedded.git<br>
-      <br>
-      $ for i in `ls -d meta-*`; do \<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cd $i; \<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; git ls-tree -r --name-only HEAD | rg=
- bb$ | while read
-      filename; do \<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo &quot;$=
-(git log -1 --format=3D&quot;%ad&quot; -- $filename)
-      $filename&quot;; \</p>
-    <p>&nbsp;&nbsp;&nbsp;&nbsp; done | \<br>
-      &nbsp;&nbsp;&nbsp;&nbsp; cut -d&quot; &quot; -f 5- | sort -n | tee =
-/tmp/$i.log; cd -; \</p>
-    <p>done<br>
-    </p>
-    <p>$ egrep &quot;^201|2020&quot; /tmp/meta-* | Randy to add meta-oe c=
-omments<br>
-    </p>
-    <p>/tmp/meta-filesystems.log:2020
-      recipes-support/physfs/physfs_3.0.2.bb<br>
-      /tmp/meta-gnome.log:2019 recipes-support/ibus/ibus-native.bb<br>
-      /tmp/meta-initramfs.log:2020
-      recipes-core/images/initramfs-kexecboot-klibc-image.bb<br>
-      /tmp/meta-initramfs.log:2020
-      recipes-core/images/meta-initramfs-image.bb<br>
-      /tmp/meta-multimedia.log:2015
-      recipes-multimedia/opencore-amr/vo-aacenc_0.1.3.bb<br>
-      /tmp/meta-multimedia.log:2015
-      recipes-multimedia/opencore-amr/vo-amrwbenc_0.1.3.bb<br>
-      /tmp/meta-multimedia.log:2019
-      recipes-multimedia/juce/projucer_git.bb<br>
-      /tmp/meta-multimedia.log:2020
-      recipes-multimedia/opusfile/opusfile_0.12.bb<br>
-      /tmp/meta-networking.log:2012 recipes-support/tunctl/tunctl_1.5.bb<=
-br>
-      /tmp/meta-networking.log:2013
-      recipes-support/libmemcached/libmemcached_1.0.7.bb<br>
-      /tmp/meta-networking.log:2016
-      recipes-support/ssmping/ssmping_0.9.1.bb<br>
-      /tmp/meta-networking.log:2017
-      recipes-support/libmemcached/libmemcached_1.0.18.bb<br>
-      /tmp/meta-networking.log:2018
-      recipes-support/netcat/netcat-openbsd_1.195.bb<br>
-      /tmp/meta-networking.log:2020
-      recipes-support/libmaxminddb/libmaxminddb_1.4.3.bb</p>
-    <p>Randy's meta-oe list of old packages and comments:<br>
-      <br>
-      # remove - queued<br>
-      /tmp/meta-oe.log:2015
-      recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb<br>
-      <br>
-      # keep, update<br>
-      /tmp/meta-oe.log:2016 recipes-devtools/dmalloc/dmalloc_5.5.2.bb<br>
-      <br>
-      # keep update directfb2 ?<br>
-      /tmp/meta-oe.log:2016 recipes-graphics/directfb/directfb_1.7.7.bb&n=
-bsp;
-      <br>
-      <br>
-      # Update <a class=3D"moz-txt-link-freetext" href=3D"https://github.=
-com/compuphase/minIni/tags">https://github.com/compuphase/minIni/tags</a>=
-<br>
-      /tmp/meta-oe.log:2016 recipes-support/minini/minini_1.2.b.bb&nbsp;&=
-nbsp; <br>
-      <br>
-      # Keep? Need more analysis<br>
-      /tmp/meta-oe.log:2017
-      recipes-extended/libexecinfo/libexecinfo_1.1.bb <br>
-    </p>
-    <p># 4 hits:
-<a class=3D"moz-txt-link-freetext" href=3D"https://layers.openembedded.or=
-g/layerindex/branch/master/recipes/?q=3Ddepends%3Alibmng">https://layers.=
-openembedded.org/layerindex/branch/master/recipes/?q=3Ddepends%3Alibmng</=
-a><br>
-      # update?<br>
-      /tmp/meta-oe.log:2017 recipes-graphics/libmng/libmng_2.0.3.bb</p>
-    <p># old, slow? -&gt; remove<br>
-      /tmp/meta-oe.log:2018
-      recipes-devtools/json-spirit/json-spirit_4.08.bb<br>
-    </p>
-    <p># no users -&gt; remove?<br>
-      /tmp/meta-oe.log:2018
-      recipes-extended/sblim-sfc-common/sblim-sfc-common_1.0.1.bb<br>
-      <br>
-      # update to 1.1.1 from 20 months ago<br>
-      /tmp/meta-oe.log:2018 recipes-graphics/xorg-app/bdftopcf_1.1.bb</p>
-    <p><br>
-      # stable benchmark tool -&gt; keep?<br>
-      /tmp/meta-oe.log:2019
-      recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb<br>
-    </p>
-    <p># keep?<br>
-      /tmp/meta-oe.log:2019
-      recipes-core/emlog/kernel-module-emlog_git.bb<br>
-      <br>
-      # keep. layer on logging - maintained rsyslog dev<br>
-      /tmp/meta-oe.log:2019
-      recipes-extended/liblogging/liblogging_1.0.6.bb<br>
-      <br>
-      # library that uses Freetype2 to simplify rendering fonts in
-      OpenGL applications.<br>
-      # 3 dependencies in other layers:
-<a class=3D"moz-txt-link-freetext" href=3D"https://layers.openembedded.or=
-g/layerindex/branch/master/recipes/?q=3Ddepends%3Aftgl">https://layers.op=
-enembedded.org/layerindex/branch/master/recipes/?q=3Ddepends%3Aftgl</a><b=
-r>
-      #&nbsp; so keep<br>
-      /tmp/meta-oe.log:2019 recipes-graphics/ftgl/ftgl_2.1.3-rc5.bb</p>
-    <p><br>
-      # remove: X Server Nokia 770 extensions library<br>
-      /tmp/meta-oe.log:2019 recipes-multimedia/xsp/xsp_1.0.0-8.bb<br>
-      <br>
-      # unchanged for &gt; 10 years:
-      <a class=3D"moz-txt-link-freetext" href=3D"https://repo.or.cz/libta=
-r.git/shortlog/refs/heads/master">https://repo.or.cz/libtar.git/shortlog/=
-refs/heads/master</a><br>
-      # libreport depends on it so keep<br>
-      /tmp/meta-oe.log:2019 recipes-support/libtar/libtar_1.2.20.bb</p>
-    <p># I can't bring myself to remove the cscope recipe!<br>
-      /tmp/meta-oe.log:2020 recipes-devtools/cscope/cscope_15.9.bb</p>
-    <p># keep. upstream still active (2023):
-      <a class=3D"moz-txt-link-freetext" href=3D"https://github.com/dynup=
-/kpatch/tags">https://github.com/dynup/kpatch/tags</a><br>
-      /tmp/meta-oe.log:2020 recipes-kernel/kpatch/kpatch_git.bb</p>
-    <p># keep. upstream still maintained:
-      <a class=3D"moz-txt-link-freetext" href=3D"https://gitlab.xiph.org/=
-xiph/libopusenc/-/commits/master/?ref_type=3DHEADS">https://gitlab.xiph.o=
-rg/xiph/libopusenc/-/commits/master/?ref_type=3DHEADS</a><br>
-      /tmp/meta-oe.log:2020
-      recipes-multimedia/libopusenc/libopusenc_0.2.1.bb</p>
-    <p># keep. font.<br>
-      /tmp/meta-oe.log:2021
-      recipes-graphics/ttf-fonts/ttf-noto-emoji_20200916.bb<br>
-      # keep. font.<br>
-      /tmp/meta-oe.log:2023
-      recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb</p>
-    <p><br>
-    </p>
-    <p>/tmp/meta-python.log:2017
-      recipes-devtools/python/python3-django-south_1.0.2.bb<br>
-      /tmp/meta-python.log:2017
-      recipes-devtools/python/python3-flask-bootstrap_3.3.7.1.bb<br>
-      /tmp/meta-python.log:2017
-      recipes-devtools/python/python3-flask-xstatic_0.0.1.bb<br>
-      /tmp/meta-python.log:2018
-      recipes-devtools/python/python3-flask-sijax_0.4.1.bb<br>
-      /tmp/meta-python.log:2020
-      recipes-devtools/python/python3-asciitree_0.3.3.bb<br>
-      /tmp/meta-python.log:2020
-      recipes-devtools/python/python3-docopt_0.6.2.bb<br>
-      /tmp/meta-python.log:2020
-      recipes-devtools/python/python3-ipaddress_1.0.23.bb<br>
-      /tmp/meta-python.log:2020
-      recipes-devtools/python/python3-keras-preprocessing_1.1.2.bb<br>
-      /tmp/meta-python.log:2020
-      recipes-devtools/python/python3-libconf_2.0.1.bb<br>
-      /tmp/meta-python.log:2020
-      recipes-devtools/python/python3-pathtools3_0.2.1.bb<br>
-      /tmp/meta-python.log:2020
-      recipes-devtools/python/python3-sijax_0.3.2.bb<br>
-      /tmp/meta-python.log:2020
-      recipes-devtools/python/python3-speaklater_1.3.bb<br>
-      /tmp/meta-python.log:2020
-      recipes-devtools/python/python3-tinyrecord_0.2.0.bb<br>
-      /tmp/meta-python.log:2020
-      recipes-devtools/python/python3-visitor_0.1.3.bb<br>
-      /tmp/meta-webserver.log:2020
-      recipes-support/fcgiwrap/fcgiwrap_git.bb<br>
-    </p>
-    <p><br>
-    </p>
-    <p>I'll continue with cleaning up old recipes in meta-oe so if
-      someone wants to<br>
-      look at the other layers, please reply here so that we don't have
-      two people doing the<br>
-      same work.</p>
-    <p><br>
-    </p>
-    <p>I already locally removed liblinebreak. It's unused but if people
-      want it they should add libunibreak<br>
-      as I'll explain in my commit log.<br>
-    </p>
-    <span style=3D"white-space: pre-wrap">
-</span>
-    <blockquote type=3D"cite" cite=3D"mid:CAMKF1sqreoZ4rtcSL0ODP2Hn4uXRs8=
-gMzQsg8dkOeUJh=3DtMF+g@mail.gmail.com">
-      <pre class=3D"moz-quote-pre" wrap=3D"">
-On Tue, Jun 25, 2024 at 9:20=E2=80=AFAM Randy MacLeod via
-lists.openembedded.org
-<a class=3D"moz-txt-link-rfc2396E" href=3D"mailto:randy.macleod=3Dwindriv=
-er.com@lists.openembedded.org">&lt;randy.macleod=3Dwindriver.com@lists.op=
-enembedded.org&gt;</a> wrote:
-</pre>
-      <blockquote type=3D"cite">
-        <pre class=3D"moz-quote-pre" wrap=3D"">From: Randy MacLeod <a cla=
-ss=3D"moz-txt-link-rfc2396E" href=3D"mailto:Randy.MacLeod@windriver.com">=
-&lt;Randy.MacLeod@windriver.com&gt;</a>
-
-libee had been used by rsyslog but the library never relly panned out.
-
-It has been declared to be obsolete:
-   Early versions of rsyslog and liblognorm used it for representing stru=
-ctured content.
-   However, this is long gone. We do not know of any other user. So libee=
- should be of
-   no further interest and is provided here solely for historical reasons.
-<a class=3D"moz-txt-link-freetext" href=3D"https://github.com/rsyslog/lib=
-ee">https://github.com/rsyslog/libee</a>
-
-Also remove references to libee in:
-   meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-   meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-
-Signed-off-by: Randy MacLeod <a class=3D"moz-txt-link-rfc2396E" href=3D"m=
-ailto:Randy.MacLeod@windriver.com">&lt;Randy.MacLeod@windriver.com&gt;</a=
->
----
- .../include/ptest-packagelists-meta-oe.inc    |  1 -
- .../packagegroups/packagegroup-meta-oe.bb     |  2 -
- meta-oe/recipes-support/libee/libee.inc       | 39 -------------------
- meta-oe/recipes-support/libee/libee/ezapi1.sh | 14 -------
- .../libee/libee/libee-parallel-make.patch     | 20 ----------
- meta-oe/recipes-support/libee/libee/run-ptest |  3 --
- meta-oe/recipes-support/libee/libee_0.4.1.bb  |  4 --
- 7 files changed, 83 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libee/libee.inc
- delete mode 100755 meta-oe/recipes-support/libee/libee/ezapi1.sh
- delete mode 100644 meta-oe/recipes-support/libee/libee/libee-parallel-ma=
-ke.patch
- delete mode 100755 meta-oe/recipes-support/libee/libee/run-ptest
- delete mode 100644 meta-oe/recipes-support/libee/libee_0.4.1.bb
-
-diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-o=
-e/conf/include/ptest-packagelists-meta-oe.inc
-index eaa86c411..01bf975a1 100644
---- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-+++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-@@ -17,7 +17,6 @@ PTESTS_FAST_META_OE =3D &quot;\
-     jq \
-     leveldb \
-     libcereal \
--    libee \
-     libgpiod \
-     libio-pty-perl \
-     libmanette \
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b=
-/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index bc40f56b9..e11afcd4e 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -811,7 +811,6 @@ RDEPENDS:packagegroup-meta-oe-support =3D&quot;\
-     libcanberra \
-     libssh \
-     libssh2 \
--    libee \
-     libusbgx-config \
-     libusbgx \
-     lockdev \
-@@ -972,7 +971,6 @@ RDEPENDS:packagegroup-meta-oe-ptest-packages =3D &quo=
-t;\
-     oprofile-ptest \
-     libteam-ptest \
-     uthash-ptest \
--    libee-ptest \
-     poco-ptest \
-     cmocka-ptest \
-     minicoredumper-ptest \
-diff --git a/meta-oe/recipes-support/libee/libee.inc b/meta-oe/recipes-su=
-pport/libee/libee.inc
-deleted file mode 100644
-index 592109b95..000000000
---- a/meta-oe/recipes-support/libee/libee.inc
-+++ /dev/null
-@@ -1,39 +0,0 @@
--SUMMARY =3D &quot;An Event Expression Library inspired by CEE&quot;
--DESCRIPTION =3D &quot;The core idea of libee is to provide a small \
--but hopefully convenient API layer above the CEE standard.&quot;
--
--HOMEPAGE =3D <a class=3D"moz-txt-link-rfc2396E" href=3D"http://www.libee=
-.org">&quot;http://www.libee.org&quot;</a>
--SECTION =3D &quot;base&quot;
--
--LICENSE =3D &quot;LGPL-2.1-or-later&quot;
--LIC_FILES_CHKSUM =3D <a class=3D"moz-txt-link-rfc2396E" href=3D"file://C=
-OPYING;md5=3D1c2687de35e36ba3b999136236a66cd6">&quot;file://COPYING;md5=3D=
-1c2687de35e36ba3b999136236a66cd6&quot;</a>
--
--SRC_URI =3D <a class=3D"moz-txt-link-rfc2396E" href=3D"http://www.libee.=
-org/download/files/download/${BPN}-${PV}.tar.gz\-file://libee-parallel-ma=
-ke.patch\-file://run-ptest\-file://ezapi1.sh\-">&quot;http://www.libee.or=
-g/download/files/download/${BPN}-${PV}.tar.gz\
--           file://libee-parallel-make.patch \
--           file://run-ptest \
--           file://ezapi1.sh \
--&quot;</a>
--
--inherit autotools ptest pkgconfig
--
--DEPENDS +=3D &quot;libestr&quot;
--
--PACKAGECONFIG ??=3D <a class=3D"moz-txt-link-rfc2396E" href=3D"mailto:${=
-@bb.utils.contains('DISTRO_FEATURES','ptest','testbench','',d)}">&quot;${=
-@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'testbench', '', d)}&quot;=
-</a>
--
--PACKAGECONFIG[debug] =3D &quot;--enable-debug,--disable-debug,,&quot;
--PACKAGECONFIG[testbench] =3D &quot;--enable-testbench,--disable-testbenc=
-h,,&quot;
--
--TESTDIR =3D &quot;tests&quot;
--
--# We presume the tests we are going to install so just build them direct=
-ly.
--#
--do_compile_ptest() {
--    oe_runmake -C ${TESTDIR} genfile ezapi1
--}
--
--do_install_ptest() {
--    install -d ${D}${PTEST_PATH}
--    install -m 0755 ${B}/${TESTDIR}/genfile ${D}${PTEST_PATH}
--    install -m 0755 ${B}/${TESTDIR}/.libs/ezapi1 ${D}${PTEST_PATH}
--    install -m 0755 ${UNPACKDIR}/ezapi1.sh ${D}${PTEST_PATH}
--}
-diff --git a/meta-oe/recipes-support/libee/libee/ezapi1.sh b/meta-oe/reci=
-pes-support/libee/libee/ezapi1.sh
-deleted file mode 100755
-index e9db5e614..000000000
---- a/meta-oe/recipes-support/libee/libee/ezapi1.sh
-+++ /dev/null
-@@ -1,14 +0,0 @@
--#!/bin/sh
--#
--echo -------------------------------------------------------------------=
---------
--echo A very basic test for the event class
--echo -------------------------------------------------------------------=
---------
--rm -f infile
--./genfile 100 &gt; infile
--./ezapi1 -iinfile
--if [ $? -ne 0 ] ; then
--   echo &quot;FAIL: $0&quot;
--   exit 1
--fi
--echo &quot;PASS: $0&quot;
--rm -f infile
-diff --git a/meta-oe/recipes-support/libee/libee/libee-parallel-make.patc=
-h b/meta-oe/recipes-support/libee/libee/libee-parallel-make.patch
-deleted file mode 100644
-index 8bb23aafc..000000000
---- a/meta-oe/recipes-support/libee/libee/libee-parallel-make.patch
-+++ /dev/null
-@@ -1,20 +0,0 @@
--fix parallel compiling problem
--
--without specifying libee_convert_DEPENDENCIES =3D libee.la, libee_conver=
-t
--can't find libee.la when linking as libee is not generated yet.
--
--Upstream-Status: Pending
--
--Signed-off-by: Yao Zhao <a class=3D"moz-txt-link-rfc2396E" href=3D"mailt=
-o:yao.zhao@windriver.com">&lt;yao.zhao@windriver.com&gt;</a>
-----
--diff --git a/src/Makefile.am b/src/Makefile.am
--index 08aaa9e..f0c78f7 100644
----- a/src/Makefile.am
--+++ b/src/Makefile.am
--@@ -46,5 +46,6 @@ libee_la_LDFLAGS =3D -version-info 0:0:0
-- libee_convert_SOURCES =3D convert.c
-- libee_convert_CPPFLAGS =3D  -I$(top_srcdir) $(LIBEE_CFLAGS) $(LIBESTR_C=
-FLAGS) $(LIBXML2_CFLAGS)
-- libee_convert_LDADD =3D $(LIBEE_LIBS) $(LIBXML2_LIBS) $(LIBESTR_LIBS)
--+libee_convert_DEPENDENCIES =3D libee.la
--
-- include_HEADERS =3D
-diff --git a/meta-oe/recipes-support/libee/libee/run-ptest b/meta-oe/reci=
-pes-support/libee/libee/run-ptest
-deleted file mode 100755
-index 3cb660764..000000000
---- a/meta-oe/recipes-support/libee/libee/run-ptest
-+++ /dev/null
-@@ -1,3 +0,0 @@
--#!/bin/sh
--#
--./ezapi1.sh
-diff --git a/meta-oe/recipes-support/libee/libee_0.4.1.bb b/meta-oe/recip=
-es-support/libee/libee_0.4.1.bb
-deleted file mode 100644
-index ef2c20db5..000000000
---- a/meta-oe/recipes-support/libee/libee_0.4.1.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--require ${BPN}.inc
--
--SRC_URI[md5sum] =3D &quot;7bbf4160876c12db6193c06e2badedb2&quot;
--SRC_URI[sha256sum] =3D &quot;c0dac01938593deee06c3d161e4eda4ecc0fd7317e1=
-321bd96e301aceb7fb027&quot;
---
-2.34.1
-
-
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-Links: You receive all messages sent to this group.
-View/Reply Online (#111077): <a class=3D"moz-txt-link-freetext" href=3D"h=
-ttps://lists.openembedded.org/g/openembedded-devel/message/111077">https:=
-//lists.openembedded.org/g/openembedded-devel/message/111077</a>
-Mute This Topic: <a class=3D"moz-txt-link-freetext" href=3D"https://lists=
-.openembedded.org/mt/106872902/1997914">https://lists.openembedded.org/mt=
-/106872902/1997914</a>
-Group Owner: <a class=3D"moz-txt-link-abbreviated" href=3D"mailto:openemb=
-edded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.=
-openembedded.org</a>
-Unsubscribe: <a class=3D"moz-txt-link-freetext" href=3D"https://lists.ope=
-nembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/=
-g/openembedded-devel/unsub</a> [<a class=3D"moz-txt-link-abbreviated" hre=
-f=3D"mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>]
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-
-</pre>
-      </blockquote>
-    </blockquote>
-    <p><br>
-    </p>
-    <pre class=3D"moz-signature" cols=3D"72">--=20
-# Randy MacLeod
-# Wind River Linux</pre>
-  </body>
-</html>
-
---------------AuOtIQ5CwNjSQAc0oOhWmxXV--
+SGkgTWFydGluLA0KDQpUaGFuayB5b3UgZm9yIG1ha2luZyB1cyBhd2FyZSBvZiB0aGUgcHJvYmxl
+bSB3aGVuIGNvbXBpbGluZyB0aGUgcHRlc3QuIFdlIHdlcmUgYWJsZSB0byByZXByb2R1Y2UgdGhl
+IHByb2JsZW0gd2hlbiBjb21waWxpbmcgZm9yIHFlbXVhcm0uIFdlIHdlcmUgbm90IGFibGUgdG8g
+c3BvdCB0aGUgcHJvYmxlbSBvbiB0aGUgYXV0b2J1aWxkZXIuIEhvdyBkaWQgeW91IHRyaWdnZXIg
+dGhlIHByb2JsZW0/DQoNCldlIGxvb2tlZCBpbnRvIGl0IGFuZCBoYXZlIHRvIGFkbWl0IHRoYXQg
+d2UgY2Fubm90IGV4cGxhaW4gd2h5IGcrKyAxNC4xLjAgdHJpcHMgb3ZlciB0aGF0IGxpbmUuDQoN
+Ci0gSXQgaXMgcGVyZmVjdGx5IGxlZ2FsIEMrKyAxNy4NCi0gSXQgY29tcGlsZXMgd2l0aG91dCB0
+aGF0IHdhcm5pbmcgZXJyb3IgZm9yIG90aGVyIG1hY2hpbmVzLCBpLmUuIHFlbXV4ODYsIHFlbXV4
+ODYtNjQsIHFlbXVhcm02NC4NCi0gSXQgZG9lcyBub3QgYWN0IHVwIHdpdGggZysrIDExLjQgKEtp
+cmtzdG9uZSkgd2l0aCBxZW11YXJtLCBvdXIgb3duIE5YUCBpLk1YNiBtYWNoaW5lLCBvciBhbnkg
+b3RoZXIgbWFjaGluZSB3ZSB0cmllZC4NCg0KVGhlIHByb2JsZW0gY2FuIGJlIG1pdGlnYXRlZCBi
+eSByZXBsYWNpbmcgdGhlIG9mZmVuZGluZyBsaW5lDQoNCm1hZ2ljX2VudW06OmNvbnRhaW5lcnM6
+OnNldCBjb2xvcl9zZXRfbm90X2NvbnN0IHtDb2xvcjo6UkVELCBDb2xvcjo6R1JFRU4sIENvbG9y
+OjpCTFVFfTsNCg0Kd2l0aA0KDQptYWdpY19lbnVtOjpjb250YWluZXJzOjpzZXQgY29sb3Jfc2V0
+X25vdF9jb25zdCA9IHtDb2xvcjo6UkVELCBDb2xvcjo6R1JFRU4sIENvbG9yOjpCTFVFfTsNCg0K
+V2UgYXJlIHdvcmtpbmcgb24gc2VuZGluZyBhIHBhdGNoIGZvciB0aGUgcmVjaXBlIGNvbnRhaW5p
+bmcgYSBwYXRjaCBmb3IgbWFnaWNfZW51bSB0byB0aGUgT0UgbWFpbGluZyBsaXN0ICh0aGlzIG9u
+ZSkuDQoNCldlIGFscmVhZHkgZ290IGluIGNvbnRhY3Qgd2l0aCB0aGUgdXBzdHJlYW0gbWFnaWNf
+ZW51bSBwcm9qZWN0Lg0KDQpodHRwczovL2dpdGh1Yi5jb20vTmVhcmd5ZS9tYWdpY19lbnVtL2lz
+c3Vlcy8zNjINCg0KQ2hlZXJzLA0KTWFyaw0KDQoNCkJ1aWxkaW5nIFRlY2hub2xvZ2llcywgUGFu
+ZWwgU29mdHdhcmUgRmlyZSAoQlQtRklSL0VORzEtR3JiKQ0KQm9zY2ggU2ljaGVyaGVpdHNzeXN0
+ZW1lwqBHbWJIIHwgUG9zdGZhY2ggMTEgMTEgfCA4NTYyNiBHcmFzYnJ1bm4gfCBHRVJNQU5ZIHwg
+d3d3LmJvc2Noc2VjdXJpdHkuY29tDQoNClNpdHo6IFN0dXR0Z2FydCwgUmVnaXN0ZXJnZXJpY2h0
+OiBBbXRzZ2VyaWNodCBTdHV0dGdhcnQgSFJCIDIzMTE4DQpBdWZzaWNodHNyYXRzdm9yc2l0emVu
+ZGVyOiBGcmFuayBNZXllcjsgR2VzY2jDpGZ0c2bDvGhydW5nOiBUaG9tYXMgUXVhbnRlLCBQZXRl
+ciBMw7ZmZmxlciwgSGVucmlrIFNpZWdsZSwgUGV0ZXIgdm9uIFdhcnRlbmJlcmcNCg0KPiAtLS0t
+LVVyc3Byw7xuZ2xpY2hlIE5hY2hyaWNodC0tLS0tDQo+IFZvbjogTWFydGluIEphbnNhIDxtYXJ0
+aW4uamFuc2FAZ21haWwuY29tPg0KPiBHZXNlbmRldDogTWl0dHdvY2gsIDI2LiBKdW5pIDIwMjQg
+MTc6NTMNCj4gQW46IEpvbmFzIE1hcmsgKEJULUZTL0VORzEtR1JCKSA8bWFyay5qb25hc0BkZS5i
+b3NjaC5jb20+DQo+IENjOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9y
+ZzsgcmFqLmtoZW1AZ21haWwuY29tOw0KPiBTaW1vZXMgUmljYXJkbyAoQlQtRlMvRU5HMS4xLU92
+cikgPHJpY2FyZG8uc2ltb2VzQHB0LmJvc2NoLmNvbT4NCj4gQmV0cmVmZjogUmU6IFtvZV0gW21l
+dGEtb2VdW1BBVENIXSBtYWdpYy1lbnVtOiBhZGQgcmVjaXBlDQo+IA0KPiBwdGVzdCBzZWVtcyB0
+byBmYWlsIGJ1aWxkaW5nDQo+IA0KPiBsaWIzMi1tYWdpYy1lbnVtLzAuOS41L2dpdC90ZXN0L3Rl
+c3RfY29udGFpbmVycy5jcHA6MjkwOjg5OiBlcnJvcjoNCj4gdmFsdWUgY29tcHV0ZWQgaXMgbm90
+IHVzZWQgWy1XZXJyb3I9dW51c2VkLXZhbHVlXQ0KPiAgIDI5MCB8ICAgbWFnaWNfZW51bTo6Y29u
+dGFpbmVyczo6c2V0IGNvbG9yX3NldF9ub3RfY29uc3Qge0NvbG9yOjpSRUQsDQo+IENvbG9yOjpH
+UkVFTiwgQ29sb3I6OkJMVUV9Ow0KPiAgICAgICB8DQo+ICAgICAgICAgICAgICAgICAgICAgICAg
+ICBeDQo+IA0KPiBPbiBXZWQsIEp1biAxOSwgMjAyNCBhdCAxMTo0N+KAr0FNIE1hcmsgSm9uYXMg
+dmlhIGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPG1hcmsuam9uYXM9ZGUuYm9zY2guY29tQGxp
+c3RzLm9wZW5lbWJlZGRlZC5vcmc+IHdyb3RlOg0KPiA+DQo+ID4gRnJvbTogUmljYXJkbyBTaW1v
+ZXMgPHJpY2FyZG8uc2ltb2VzQHB0LmJvc2NoLmNvbT4NCj4gPg0KPiA+IG1hZ2ljLWVudW0gaXMg
+YSBoZWFkZXItb25seSBDKysxNyBsaWJyYXJ5IHByb3ZpZGVzIHN0YXRpYyByZWZsZWN0aW9uDQo+
+ID4gZm9yIGVudW1zLCB3b3JrcyB3aXRoIGFueSBlbnVtIHR5cGUgd2l0aG91dCBhbnkgbWFjcm8g
+b3IgYm9pbGVycGxhdGUNCj4gPiBjb2RlLg0KPiA+DQo+ID4gU2lnbmVkLW9mZi1ieTogUmljYXJk
+byBTaW1vZXMgPHJpY2FyZG8uc2ltb2VzQHB0LmJvc2NoLmNvbT4NCj4gPiBTaWduZWQtb2ZmLWJ5
+OiBNYXJrIEpvbmFzIDxtYXJrLmpvbmFzQGRlLmJvc2NoLmNvbT4NCj4gPiAtLS0NCj4gPiAgLi4u
+L21hZ2ljLWVudW0vbWFnaWMtZW51bS9ydW4tcHRlc3QgICAgICAgICAgIHwgMjcgKysrKysrKysr
+KysrDQo+ID4gIC4uLi9tYWdpYy1lbnVtL21hZ2ljLWVudW1fMC45LjUuYmIgICAgICAgICAgICB8
+IDQ0DQo+ICsrKysrKysrKysrKysrKysrKysNCj4gPiAgMiBmaWxlcyBjaGFuZ2VkLCA3MSBpbnNl
+cnRpb25zKCspDQo+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1l
+eHRlbmRlZC9tYWdpYy1lbnVtL21hZ2ljLWVudW0vcnVuLXB0ZXN0DQo+ID4gIGNyZWF0ZSBtb2Rl
+IDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9tYWdpYy1lbnVtL21hZ2ljLWVu
+dW1fMC45LjUuYmINCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5k
+ZWQvbWFnaWMtZW51bS9tYWdpYy1lbnVtL3J1bi0NCj4gcHRlc3QNCj4gPiBiL21ldGEtb2UvcmVj
+aXBlcy1leHRlbmRlZC9tYWdpYy1lbnVtL21hZ2ljLWVudW0vcnVuLXB0ZXN0DQo+ID4gbmV3IGZp
+bGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwMDAuLjg2NWRhOWY2OQ0KPiA+IC0tLSAv
+ZGV2L251bGwNCj4gPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvbWFnaWMtZW51bS9t
+YWdpYy1lbnVtL3J1bi1wdGVzdA0KPiA+IEBAIC0wLDAgKzEsMjcgQEANCj4gPiArIyEvYmluL3No
+DQo+ID4gKw0KPiA+ICsjIFNQRFgtRmlsZUNvcHlyaWdodFRleHQ6IDIwMjQgQm9zY2ggU2ljaGVy
+aGVpdHNzeXN0ZW1lIEdtYkggIyAjDQo+ID4gK1NQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBNSVQN
+Cj4gPiArDQo+ID4gK2ZhaWxfY291bnQ9MA0KPiA+ICthbGxfY291bnQ9MA0KPiA+ICsNCj4gPiAr
+Zm9yIHRlc3Rfc3VpdGUgaW4gdGVzdHMvdGVzdF8qDQo+ID4gK2RvDQo+ID4gKyAgICBpZiAiLi8k
+dGVzdF9zdWl0ZSINCj4gPiArICAgIHRoZW4NCj4gPiArICAgICAgICBlY2hvICJQQVNTOiAkdGVz
+dF9zdWl0ZSINCj4gPiArICAgIGVsc2UNCj4gPiArICAgICAgICBlY2hvICJGQUlMOiAkdGVzdF9z
+dWl0ZSINCj4gPiArICAgICAgICBmYWlsX2NvdW50PSQoKGZhaWxfY291bnQgKyAxKSkNCj4gPiAr
+ICAgIGZpDQo+ID4gKyAgICBhbGxfY291bnQ9JCgoYWxsX2NvdW50ICsgMSkpDQo+ID4gK2RvbmUN
+Cj4gPiArDQo+ID4gK2lmIFsgJGZhaWxfY291bnQgLWVxIDAgXQ0KPiA+ICt0aGVuDQo+ID4gKyAg
+ICBlY2hvICJQQVNTOiBBbGwgJGFsbF9jb3VudCB0ZXN0cyBwYXNzZWQiDQo+ID4gK2Vsc2UNCj4g
+PiArICAgIGVjaG8gIkZBSUw6ICRmYWlsX2NvdW50IG9mICRhbGxfY291bnQgdGVzdHMgZmFpbGVk
+Ig0KPiA+ICtmaQ0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvbWFn
+aWMtZW51bS9tYWdpYy1lbnVtXzAuOS41LmJiDQo+ID4gYi9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5k
+ZWQvbWFnaWMtZW51bS9tYWdpYy1lbnVtXzAuOS41LmJiDQo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2
+NDQNCj4gPiBpbmRleCAwMDAwMDAwMDAuLjA5NmY4NjljMw0KPiA+IC0tLSAvZGV2L251bGwNCj4g
+PiArKysgYi9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvbWFnaWMtZW51bS9tYWdpYy1lbnVtXzAu
+OS41LmJiDQo+ID4gQEAgLTAsMCArMSw0NCBAQA0KPiA+ICsjIFNQRFgtRmlsZUNvcHlyaWdodFRl
+eHQ6IDIwMjQgQm9zY2ggU2ljaGVyaGVpdHNzeXN0ZW1lIEdtYkggIyAjDQo+ID4gK1NQRFgtTGlj
+ZW5zZS1JZGVudGlmaWVyOiBNSVQNCj4gPiArDQo+ID4gK1NVTU1BUlkgPSAiU3RhdGljIHJlZmxl
+Y3Rpb24gZm9yIGVudW1zIg0KPiA+ICtERVNDUklQVElPTiA9ICJIZWFkZXItb25seSBDKysxNyBs
+aWJyYXJ5IHByb3ZpZGVzIHN0YXRpYyByZWZsZWN0aW9uDQo+ID4gK2ZvciBlbnVtcywgd29ya3Mg
+XCB3aXRoIGFueSBlbnVtIHR5cGUgd2l0aG91dCBhbnkgbWFjcm8gb3INCj4gYm9pbGVycGxhdGUg
+Y29kZS4iDQo+ID4gK0JVR1RSQUNLRVIgPQ0KPiAiaHR0cHM6Ly9ldXIwMy5zYWZlbGlua3MucHJv
+dGVjdGlvbi5vdXRsb29rLmNvbS8/dXJsPWh0dHBzJTNBJTJGJTJGZ2l0DQo+IGh1Yi5jb20lMkZO
+ZWFyZ3llJTJGbWFnaWNfZW51bSUyRmlzc3VlcyZkYXRhPTA1JTdDMDIlN0NtYXJrLmpvbmFzJTQw
+ZGUNCj4gLmJvc2NoLmNvbSU3QzMwYzcyNzdjNWFhNTRiMGZkNjdjMDhkYzk1ZjgwYzc5JTdDMGFl
+NTFlMTkwN2M4NGU0YmJiNmQ2NA0KPiA4ZWU1ODQxMGY0JTdDMCU3QzAlN0M2Mzg1NTAxMzk3OTQ5
+Njc3MzUlN0NVbmtub3duJTdDVFdGcGJHWnNiM2Q4ZXlKV0lqDQo+IG9pTUM0d0xqQXdNREFpTENK
+UUlqb2lWMmx1TXpJaUxDSkJUaUk2SWsxaGFXd2lMQ0pYVkNJNk1uMCUzRCU3QzAlN0MlN0MNCj4g
+JTdDJnNkYXRhPWRUUmNMMU9lUHh1cThyYkdleVI0U2dkQWprTEJlS1g3OWx3YVJuczlwbVElM0Qm
+cmVzZXJ2ZWQ9MCINCj4gPiArSE9NRVBBR0UgPQ0KPiAiaHR0cHM6Ly9ldXIwMy5zYWZlbGlua3Mu
+cHJvdGVjdGlvbi5vdXRsb29rLmNvbS8/dXJsPWh0dHBzJTNBJTJGJTJGZ2l0DQo+IGh1Yi5jb20l
+MkZOZWFyZ3llJTJGbWFnaWNfZW51bSZkYXRhPTA1JTdDMDIlN0NtYXJrLmpvbmFzJTQwZGUuYm9z
+Y2guY28NCj4gbSU3QzMwYzcyNzdjNWFhNTRiMGZkNjdjMDhkYzk1ZjgwYzc5JTdDMGFlNTFlMTkw
+N2M4NGU0YmJiNmQ2NDhlZTU4NDEwZg0KPiA0JTdDMCU3QzAlN0M2Mzg1NTAxMzk3OTQ5NzYzNjYl
+N0NVbmtub3duJTdDVFdGcGJHWnNiM2Q4ZXlKV0lqb2lNQzR3TGpBDQo+IHdNREFpTENKUUlqb2lW
+Mmx1TXpJaUxDSkJUaUk2SWsxaGFXd2lMQ0pYVkNJNk1uMCUzRCU3QzAlN0MlN0MlN0Mmc2RhdGEN
+Cj4gPTZHeUFodTJmUEhFMGpaeWFvaHB3TDYlMkZrUDcwZmx5N280QmZ4czlvUGREUSUzRCZyZXNl
+cnZlZD0wIg0KPiA+ICsNCj4gPiArTElDRU5TRSA9ICJNSVQiDQo+ID4gK0xJQ19GSUxFU19DSEtT
+VU0gPQ0KPiAiZmlsZTovL0xJQ0VOU0U7bWQ1PWIxNWY0ODU4ODQ2NGVjOGVmODdkMmI1NjBhYWQy
+Y2FhIg0KPiA+ICsNCj4gPiArU1JDX1VSSSA9ICIgXA0KPiA+ICsNCj4gZ2l0Oi8vZ2l0aHViLmNv
+bS9OZWFyZ3llL21hZ2ljX2VudW0uZ2l0O3Byb3RvY29sPWh0dHBzO2JyYW5jaD1tYXN0ZXIgXA0K
+PiA+ICsgICAgZmlsZTovL3J1bi1wdGVzdCBcDQo+ID4gKyINCj4gPiArDQo+ID4gK1NSQ1JFViA9
+ICJlNTViOWI1NGQ1Y2Y2MWY4ZTExN2NhZmIxNzg0NmQ3ZDc0MmRkM2I0Ig0KPiA+ICtTID0gIiR7
+V09SS0RJUn0vZ2l0Ig0KPiA+ICsNCj4gPiAraW5oZXJpdCBjbWFrZSBwdGVzdA0KPiA+ICsNCj4g
+PiArRVhUUkFfT0VDTUFLRSA9ICJcDQo+ID4gKyAgICAtRE1BR0lDX0VOVU1fT1BUX0JVSUxEX0VY
+QU1QTEVTPU9GRiBcICINCj4gPiArDQo+ID4gK2RvX2luc3RhbGxfcHRlc3QgKCkgew0KPiA+ICsg
+ICAgaW5zdGFsbCAtZCAke0R9JHtQVEVTVF9QQVRIfS90ZXN0cw0KPiA+ICsgICAgaW5zdGFsbCAt
+bSAwNzU1ICR7Qn0vdGVzdC90ZXN0XyogJHtEfSR7UFRFU1RfUEFUSH0vdGVzdHMgfQ0KPiA+ICsN
+Cj4gPiArIyBBZGQgY2F0a2luIGFuZCBjb2xjb24gKFJPUyBidWlsZCBzeXN0ZW0pIHN1cHBvcnQg
+RklMRVM6JHtQTn0tZGV2DQo+ICs9DQo+ID4gKyJcDQo+ID4gKyAgICAke2RhdGFkaXJ9L21hZ2lj
+X2VudW0vcGFja2FnZS54bWwgXCAiDQo+ID4gKw0KPiA+ICsjIEhlYWRlci1vbmx5IGxpYnJhcnkN
+Cj4gPiArIyAke1BOfSBpcyBlbXB0eSBzbyB3ZSBuZWVkIHRvIHR3ZWFrIC1kZXYgYW5kIC1kYmcg
+cGFja2FnZQ0KPiA+ICtkZXBlbmRlbmNpZXMgUkRFUEVORFM6JHtQTn0tZGV2ID0gIiINCj4gPiAr
+UkRFUEVORFM6JHtQTn0tcHRlc3QgPSAiIg0KPiA+ICtSUkVDT01NRU5EUzoke1BOfS1kYmcgPSAi
+JHtQTn0tZGV2ICg9ICR7RVhURU5EUEtHVn0pIg0KPiA+ICsNCj4gPiArQkJDTEFTU0VYVEVORCA9
+ICJuYXRpdmUgbmF0aXZlc2RrIg0KPiA+IC0tDQo+ID4gMi4zNC4xDQo+ID4NCj4gPg0KPiA+IC09
+LT0tPS09LT0tPS09LT0tPS09LT0tDQo+ID4gTGlua3M6IFlvdSByZWNlaXZlIGFsbCBtZXNzYWdl
+cyBzZW50IHRvIHRoaXMgZ3JvdXAuDQo+ID4gVmlldy9SZXBseSBPbmxpbmUgKCMxMTA5NjMpOg0K
+PiA+DQo+IGh0dHBzOi8vZXVyMDMuc2FmZWxpbmtzLnByb3RlY3Rpb24ub3V0bG9vay5jb20vP3Vy
+bD1odHRwcyUzQSUyRiUyRmxpc3QNCj4gPiBzLm9wZW5lbWJlZGRlZC5vcmclMkZnJTJGb3BlbmVt
+YmVkZGVkLQ0KPiBkZXZlbCUyRm1lc3NhZ2UlMkYxMTA5NjMmZGF0YT0wNQ0KPiA+DQo+ICU3QzAy
+JTdDbWFyay5qb25hcyU0MGRlLmJvc2NoLmNvbSU3QzMwYzcyNzdjNWFhNTRiMGZkNjdjMDhkYzk1
+ZjgwYzc5JTcNCj4gPg0KPiBDMGFlNTFlMTkwN2M4NGU0YmJiNmQ2NDhlZTU4NDEwZjQlN0MwJTdD
+MCU3QzYzODU1MDEzOTc5NDk4MTY5OCU3Q1Vua25vDQo+ID4NCj4gd24lN0NUV0ZwYkdac2IzZDhl
+eUpXSWpvaU1DNHdMakF3TURBaUxDSlFJam9pVjJsdU16SWlMQ0pCVGlJNklrMWhhV3dpTA0KPiA+
+DQo+IENKWFZDSTZNbjAlM0QlN0MwJTdDJTdDJTdDJnNkYXRhPWF4V1pUbSUyRmdWMDA4QVA2RGlC
+dEQxSzNDNldYakY2MXlzQWYNCj4gPiBiWXhDT0lNbyUzRCZyZXNlcnZlZD0wIE11dGUgVGhpcyBU
+b3BpYzoNCj4gPg0KPiBodHRwczovL2V1cjAzLnNhZmVsaW5rcy5wcm90ZWN0aW9uLm91dGxvb2su
+Y29tLz91cmw9aHR0cHMlM0ElMkYlMkZsaXN0DQo+ID4NCj4gcy5vcGVuZW1iZWRkZWQub3JnJTJG
+bXQlMkYxMDY3NTc0MzIlMkYzNjE3MTU2JmRhdGE9MDUlN0MwMiU3Q21hcmsuam9uYQ0KPiA+DQo+
+IHMlNDBkZS5ib3NjaC5jb20lN0MzMGM3Mjc3YzVhYTU0YjBmZDY3YzA4ZGM5NWY4MGM3OSU3QzBh
+ZTUxZTE5MDdjODRlNGINCj4gPg0KPiBiYjZkNjQ4ZWU1ODQxMGY0JTdDMCU3QzAlN0M2Mzg1NTAx
+Mzk3OTQ5ODU5NzAlN0NVbmtub3duJTdDVFdGcGJHWnNiM2Q4DQo+ID4NCj4gZXlKV0lqb2lNQzR3
+TGpBd01EQWlMQ0pRSWpvaVYybHVNeklpTENKQlRpSTZJazFoYVd3aUxDSlhWQ0k2TW4wJTNEJTdD
+MA0KPiA+DQo+ICU3QyU3QyU3QyZzZGF0YT16bWkzOFlJNGlpVSUyQnd1YUExT0VTeHpPYjJibE12
+SkV5anY5Yzdyc0gzdU0lM0QmcmVzZXINCj4gPiB2ZWQ9MCBHcm91cCBPd25lcjogb3BlbmVtYmVk
+ZGVkLWRldmVsK293bmVyQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBVbnN1YnNjcmliZToN
+Cj4gPg0KPiBodHRwczovL2V1cjAzLnNhZmVsaW5rcy5wcm90ZWN0aW9uLm91dGxvb2suY29tLz91
+cmw9aHR0cHMlM0ElMkYlMkZsaXN0DQo+ID4gcy5vcGVuZW1iZWRkZWQub3JnJTJGZyUyRm9wZW5l
+bWJlZGRlZC0NCj4gZGV2ZWwlMkZ1bnN1YiZkYXRhPTA1JTdDMDIlN0NtYXINCj4gPg0KPiBrLmpv
+bmFzJTQwZGUuYm9zY2guY29tJTdDMzBjNzI3N2M1YWE1NGIwZmQ2N2MwOGRjOTVmODBjNzklN0Mw
+YWU1MWUxOTA3DQo+ID4NCj4gYzg0ZTRiYmI2ZDY0OGVlNTg0MTBmNCU3QzAlN0MwJTdDNjM4NTUw
+MTM5Nzk0OTkwMDE0JTdDVW5rbm93biU3Q1RXRnBiRw0KPiA+DQo+IFpzYjNkOGV5SldJam9pTUM0
+d0xqQXdNREFpTENKUUlqb2lWMmx1TXpJaUxDSkJUaUk2SWsxaGFXd2lMQ0pYVkNJNk1uMCUNCj4g
+Pg0KPiAzRCU3QzAlN0MlN0MlN0Mmc2RhdGE9VUZsd0RGY2RtcUxIUkVPanNoYmh0TnJGSWtLMDdr
+OXdNVVZ0SXBNVHJzayUzRCZyDQo+ID4gZXNlcnZlZD0wIFttYXJ0aW4uamFuc2FAZ21haWwuY29t
+XQ0KPiA+IC09LT0tPS09LT0tPS09LT0tPS09LT0tDQo+ID4NCg==
 
