@@ -1,155 +1,170 @@
-Return-Path: <ceggers@arri.de>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BF64C2BD09
-	for <webhook@archiver.kernel.org>; Thu, 27 Jun 2024 08:53:22 +0000 (UTC)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com (EUR05-AM6-obe.outbound.protection.outlook.com [40.107.22.64])
- by mx.groups.io with SMTP id smtpd.web10.3601.1719478390045853903
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F92BC2BD09
+	for <webhook@archiver.kernel.org>; Thu, 27 Jun 2024 09:08:02 +0000 (UTC)
+Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
+ by mx.groups.io with SMTP id smtpd.web10.3778.1719479279909665396
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jun 2024 01:53:12 -0700
+ Thu, 27 Jun 2024 02:08:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@arri.de header.s=selector1 header.b=bx/0/lh4;
- spf=pass (domain: arri.de, ip: 40.107.22.64, mailfrom: ceggers@arri.de)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cK3L0uji/+lD6vV8/JiT22zPyOVzWGIGhjbuyQfaDdHmu6lQIjtC6rOKVIYAbawFs0mSSEX/arZPB+YqYMrDPJh49nQUfsISrATQwExG1H+wwNY7BPDmYSVXmkhPXvJhpvZCFqZkk7O8kC2I6S+3wTICgrmw3tkkhY3fqtOX0+f4bY0UlXQo3nLEl9lppC86k16RKqXbkQbpT//PWhp+orrbaznU4ymW9ZxofWa/pLwgIs6A5kZ4hWUwHJUQjLVI1d+D5gzHsfV+b12UZTcehihc5sNoAV8LG3G+UzOeVericxS40DsBjuV5+UfBgAwyy8MDyEPVGZOPF3Rom+4E2w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HmgWDMBPuhLbct+qVRpmaGsfPcjEGYa2Avvp/cd3vww=;
- b=m1P8TggmbvR/u9vN6UmMXmpdHgnBgbuwG5IdNkbcEtYNKoU6bdWXhWm0zHTqKM6ordBz8tQFeyXHYzynNYVn1Iv+jBeE1zH3BRCQmLh8oCCla5YewKT0PaC3IxIXiiEauwU+1P9fqDDbbpHdglaib3l2fHUt4VDBak209PaNDdqYDd+odoqOVAfLnPlx0fcGRQ2mcuMuk2IKUFwjyHqITdvM3Ypu3NF+WAWWGPUquS1ClZahM/CUjBgw15aE1t7AL94XIDJKhGK5Ijlh//+lOxeHi+kTuN6yZStqIt/g3ElvGRXwVVd8JS2Lf0xRH53xtLOI8pdpmnlh3WX180KYjg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 217.111.95.7) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arri.de;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=arri.de;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arri.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HmgWDMBPuhLbct+qVRpmaGsfPcjEGYa2Avvp/cd3vww=;
- b=bx/0/lh4dohWtwsu+K94/CiwdXAx72/nJAgqiKB0qHWgQZl0UdCbijo4Col1JySllPumvvCHIn0Hlk5NH5xkfwXojgPybTVWyeYfccEQs0KE27jD/JkWG0rWd6+MmxD6/7yWZGrrqspKfTDMtbBQb54Y2kMEpwWJd3ZqHrZk7XE=
-Received: from AM0PR01CA0157.eurprd01.prod.exchangelabs.com
- (2603:10a6:208:aa::26) by AM0PR07MB6434.eurprd07.prod.outlook.com
- (2603:10a6:20b:15e::11) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7719.25; Thu, 27 Jun
- 2024 08:53:06 +0000
-Received: from AM3PEPF0000A792.eurprd04.prod.outlook.com
- (2603:10a6:208:aa:cafe::ae) by AM0PR01CA0157.outlook.office365.com
- (2603:10a6:208:aa::26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7719.22 via Frontend
- Transport; Thu, 27 Jun 2024 08:53:06 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 217.111.95.7)
- smtp.mailfrom=arri.de; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=arri.de;
-Received-SPF: Fail (protection.outlook.com: domain of arri.de does not
- designate 217.111.95.7 as permitted sender) receiver=protection.outlook.com;
- client-ip=217.111.95.7; helo=mta.arri.de;
-Received: from mta.arri.de (217.111.95.7) by
- AM3PEPF0000A792.mail.protection.outlook.com (10.167.16.121) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7677.15 via Frontend Transport; Thu, 27 Jun 2024 08:53:06 +0000
-Received: from N9W6SW14.arri.de (10.30.4.242) by mta.arri.de (10.10.18.5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.34; Thu, 27 Jun
- 2024 10:53:05 +0200
-From: Christian Eggers <ceggers@arri.de>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Marek Vasut <marex@denx.de>, Christian Eggers <ceggers@arri.de>
-Subject: [meta-oe][PATCH 1/2] lvgl: fix version in shared library file name
-Date: Thu, 27 Jun 2024 10:52:55 +0200
-Message-ID: <20240627085256.21526-1-ceggers@arri.de>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-Originating-IP: [10.30.4.242]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM3PEPF0000A792:EE_|AM0PR07MB6434:EE_
-X-MS-Office365-Filtering-Correlation-Id: 00ee788b-2dd3-439f-45d6-08dc96868fb3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|82310400026|376014|36860700013|34020700016;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?J09YX3HwrST9og8RRMdwYPz2SnMvgBwOjv6nvX9dUi3WyWlyTOaHzM76kWly?=
- =?us-ascii?Q?bq/wjSJ4+HvIy9GTh/CtcTO+h6N5ByCH8X67EkZ4NQAL5+tfa6Jb2tIp9jYq?=
- =?us-ascii?Q?qhS0GHjZUinhlCRbG+P6/wnvup+IhcUz47Ih7NJvd5q4BDOO/JiPyBo6l53k?=
- =?us-ascii?Q?A1b5KgzZIRUdkIQl3rB5Zv708FfsSTNc0CWu6FAfh4EiB/XeTgD934HEV0y2?=
- =?us-ascii?Q?OUJhV1PTWXRr8mAWDLMYuPz7F79BmdIMAaGxkXeMHQwXxM4D5bsekL+SWT8u?=
- =?us-ascii?Q?sTjoqwDsr7U8KfnHsgIwFVCxNQPLnSUUSkZXhfNK4SvCPawx99GGD8UdE7nS?=
- =?us-ascii?Q?P1V6q5JHneCRzqnH7GYrLI1J4ey0Kgn1Z5ta0xR9f4/KJRRGwlIG6H77Iv6A?=
- =?us-ascii?Q?okl/Ev6pQQrjFl0jOjzzAEx0E2Ix87U+RBDT0peh3ITsRoXctaGyx2hJiYqR?=
- =?us-ascii?Q?noUZN07Qr2F+pJJn7TVUqEGycqcWBRRIR3L12V4V/fnvZk1VXYUeXOJG69Tq?=
- =?us-ascii?Q?YTPju7Yp1yZFp1N7e4+kvyOCXXOx5Sj0MNTSgi3L3qltVFtcI9B+JYopIdHr?=
- =?us-ascii?Q?LXzq7l1G/2KZCl4kSbTgiefQc+CSrSFcXGN92shg3n++1ZoC9Mt/TjbFwT0W?=
- =?us-ascii?Q?xcUhul4bD8mdCMapWPw/Uen4dSSWdJ00E3rpMMswQCxpHHAiQ4CtybNBEymQ?=
- =?us-ascii?Q?a8xsbeGgUAQvKfmXt+9KwliyOD4GN5iSaKADCbPhw64SDHvQbkaafEJPBiX7?=
- =?us-ascii?Q?yeGJlbuvkyNk82f6okHb/PgVgdJMhjGiNqBl6I9cMhgJ0jPY97kT+3HUVRMI?=
- =?us-ascii?Q?Row2lp+XD2wLlibvSbRD12jdrxJB6wlGjwSnKsjX/dl4iGaIJdE5QPst9sF/?=
- =?us-ascii?Q?iio3MTLQMptgM98FHH8zmDq6uIaySTYSOTB2Jt3ZtBIbd4EmJGsIoGDdRQqA?=
- =?us-ascii?Q?Udowij9XyRWYdjfBeVLqyal/mMBGacQnuThWKs7kpRqpsX9d8d5somVTbGuk?=
- =?us-ascii?Q?2gntnaexGn1tvGU2gH+3KkzfgIk87ZpDXgo6KULGByuW5srilyUrpt3oCy+/?=
- =?us-ascii?Q?QCdzHJWtZiCsg+UcHcD5VDeUAdqnW8ZxpDTjCZ3YuId8Wl47LdqtwvzvGLAH?=
- =?us-ascii?Q?CeAhDdOpqqBgYNe1txnkO9fJyESRskrtdVm/EvUXhVRK+n895u1A4NaQGmew?=
- =?us-ascii?Q?lBwnd0kV9wGhKlykd0jCXimSp7uQDVRJl1kni5pmSqTieazVwApY1lXcyGmA?=
- =?us-ascii?Q?E6lBufdsT7swObVX3eQpX9pMostZKsTOVynRFjL5ZE61QfIY9/oaE0uqFJ8M?=
- =?us-ascii?Q?bBAmk+R87MFMgBfum/9x740FWT7QS+ypZh3uXqgmHg5Jl6jkFDSHHW53V7sk?=
- =?us-ascii?Q?/QAxypLdX8VdNGDLhxFBOeWykB4T?=
-X-Forefront-Antispam-Report: 
-	CIP:217.111.95.7;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mta.arri.de;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013)(34020700016);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arri.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jun 2024 08:53:06.0130
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 00ee788b-2dd3-439f-45d6-08dc96868fb3
-X-MS-Exchange-CrossTenant-Id: e6a73a5a-614d-4c51-b3e3-53b660a9433a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e6a73a5a-614d-4c51-b3e3-53b660a9433a;Ip=[217.111.95.7];Helo=[mta.arri.de]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AM3PEPF0000A792.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR07MB6434
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=KLVn2Q1f;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1719479280; x=1751015280;
+  h=from:to:cc:subject:date:message-id;
+  bh=WJbDuiZCrYMljYm+Nb6X28miAQnIBdqCINtZGO6ieiI=;
+  b=KLVn2Q1fi5E2EflZdAMZRAnlfQDHu1zHnk3+1mGcEfBMYQ5QQ1ebHH1+
+   79ak+6FBWIJQym2z0ub+O8W73ox1TKvqUc1XiUTFHlu+wunu5gNsLVW4p
+   Rt3K2i6Mt9RT8KPLBt1Sms0YeKqvw0KznwhSSgOuoHED+rLknf6GKeFmW
+   cxtJSV+6m55XA15u4ehvFCwy+beLKey94UzoVS+SsAQv8qC8VNuiUFc5x
+   ZhgTw/y9AAnMc/g1A61A/V9NJjdActf8Ihw6ASwHNRSg6wAcaEFbO/XEx
+   UdFW1oHMZzlAp3UdAiaiVsBUJPHSMHfhdxeeBXUCvRhI6TW+mnI8ifSef
+   w==;
+X-IronPort-AV: E=McAfee;i="6700,10204,11115"; a="165095499"
+X-IronPort-AV: E=Sophos;i="6.08,269,1712588400"; 
+   d="scan'208";a="165095499"
+Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
+  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jun 2024 18:07:57 +0900
+Received: from yto-m1.gw.nic.fujitsu.com (yto-nat-yto-m1.gw.nic.fujitsu.com [192.168.83.64])
+	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id D7C2DD5A47
+	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Jun 2024 18:07:54 +0900 (JST)
+Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
+	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 1F84BD0AC9
+	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Jun 2024 18:07:54 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 9F2472007FAEF
+	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Jun 2024 18:07:53 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 2851C1A0002;
+	Thu, 27 Jun 2024 17:07:53 +0800 (CST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 1/2] sblim-sfcc: fix build failure with gcc-14
+Date: Thu, 27 Jun 2024 17:07:48 +0800
+Message-Id: <1719479269-11512-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28484.006
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28484.006
+X-TMASE-Result: 10--5.762200-10.000000
+X-TMASE-MatchedRID: e52ZkoJcYPYs0w7LCKZc9jo39wOA02LhCZa9cSpBObm+f7ap9DJaDe79
+	DJRUi35pWwhqFGcExMuaernOJKdgiK/Elphzpf1LEXjPIvKd74BSuvtBzlaEqDUvQN19brjgZng
+	ixNorteD4XJPAGTaiPNEqY6Wu67POIyXWEI5lke2zRPQ8T4oe5fambF/lwyYQWnq/tYmiZBDDMi
+	e/nY78fR8sC277STHTH6FmqkQO4spTqTvkr4no8CsIuzCLc2mNZUc2QJCkRg3GsuYyb68ajNzRL
+	TWypO1xGkCSv90XSDWAMuqetGVetr9k4V4N5ceA3QfwsVk0UbtuRXh7bFKB7oyk20IqTPXseE/h
+	i97MBuRh1awkNumtWNTspLhf3mBwHIV02d1rpG8=
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Jun 2024 08:53:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111119
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Jun 2024 09:08:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111121
 
-The version in the patch file needs to be updated.
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Fixes: 0c19e65a0969 ("lvgl: Update to 9.1.0")
-Signed-off-by: Christian Eggers <ceggers@arri.de>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../0007-fix-cmake-generate-versioned-shared-libraries.patch  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ ...e-pointer-type-error-with-gcc-option.patch | 72 +++++++++++++++++++
+ .../sblim-sfcc/sblim-sfcc_2.2.8.bb            |  1 +
+ 2 files changed, 73 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-incompatible-pointer-type-error-with-gcc-option.patch
 
-diff --git a/meta-oe/recipes-graphics/lvgl/files/0007-fix-cmake-generate-ve=
-rsioned-shared-libraries.patch b/meta-oe/recipes-graphics/lvgl/files/0007-f=
-ix-cmake-generate-versioned-shared-libraries.patch
-index 6997d84153ce..64468313a312 100644
---- a/meta-oe/recipes-graphics/lvgl/files/0007-fix-cmake-generate-versioned=
--shared-libraries.patch
-+++ b/meta-oe/recipes-graphics/lvgl/files/0007-fix-cmake-generate-versioned=
--shared-libraries.patch
-@@ -7,7 +7,7 @@ Add missing version suffix to shared libraries. Currently t=
-he filename of
- generated shared libraries is only liblvgl.so, which prevents coexistence
- of different versions of LVGL on the same system. Set VERSION and SOVERSIO=
-N
- to make cmake add the version suffix to generated shared libraries. That
--changes the filename to liblvgl.so.9.0.0 and includes symlink with major
-+changes the filename to liblvgl.so.9.1.0 and includes symlink with major
- ABI version, i.e. liblvgl.so.9 .
-=20
- Upstream-Status: Submitted [https://github.com/lvgl/lvgl/pull/5865]
-@@ -21,7 +21,7 @@ index 9800468eb..6f33f1cc8 100644
- --- a/env_support/cmake/custom.cmake
- +++ b/env_support/cmake/custom.cmake
- @@ -1,3 +1,6 @@
--+set(LVGL_VERSION "9.0.0")
-++set(LVGL_VERSION "9.1.0")
- +set(LVGL_SOVERSION "9")
- +
-  # Option to define LV_LVGL_H_INCLUDE_SIMPLE, default: ON
---=20
-2.43.0
+diff --git a/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-incompatible-pointer-type-error-with-gcc-option.patch b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-incompatible-pointer-type-error-with-gcc-option.patch
+new file mode 100644
+index 000000000..5e8f4fa0d
+--- /dev/null
++++ b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-incompatible-pointer-type-error-with-gcc-option.patch
+@@ -0,0 +1,72 @@
++From 5151163d6f4d4de0699d1e85c54fbe2cb5b55460 Mon Sep 17 00:00:00 2001
++From: Wang Mingyu <wangmy@fujitsu.com>
++Date: Thu, 27 Jun 2024 01:51:36 +0000
++Subject: Fix incompatible pointer type error with gcc option 
++ -Wincompatible-pointer-types
++
++| ../../sblim-sfcc-2.2.8/TEST/v2test_ec.c: In function 'main':
++| ../../sblim-sfcc-2.2.8/TEST/v2test_ec.c:86:31: error: passing argument 1 of 'showClass' from incompatible pointer type [-Wincompatible-pointer-types]
++|    86 |           showClass(data.value.cls);
++|       |                     ~~~~~~~~~~^~~~
++|       |                               |
++|       |                               CIMCClass * {aka struct _CIMCClass *}
++| In file included from ../../sblim-sfcc-2.2.8/TEST/v2test_ec.c:7:
++| ../../sblim-sfcc-2.2.8/TEST/show.h:9:34: note: expected 'CMPIConstClass *' {aka 'struct _CMPIConstClass *'} but argument is of type 'CIMCClass *' {aka 'struct _CIMCClass *'}
++|     9 | void showClass( CMPIConstClass * in_class );
++|       |                 ~~~~~~~~~~~~~~~~~^~~~~~~~
++
++| ../../sblim-sfcc-2.2.8/TEST/v2test_ein.c: In function 'main':
++| ../../sblim-sfcc-2.2.8/TEST/v2test_ein.c:96:36: error: passing argument 1 of 'showObjectPath' from incompatible pointer type [-Wincompatible-pointer-types]
++|    96 |           showObjectPath(data.value.ref);
++|       |                          ~~~~~~~~~~^~~~
++|       |                                    |
++|       |                                    CIMCObjectPath * {aka struct _CIMCObjectPath *}
++| In file included from ../../sblim-sfcc-2.2.8/TEST/v2test_ein.c:7:
++| ../../sblim-sfcc-2.2.8/TEST/show.h:7:39: note: expected 'CMPIObjectPath *' {aka 'struct _CMPIObjectPath *'} but argument is of type 'CIMCObjectPath *' {aka 'struct _CIMCObjectPath *'}
++|     7 | void showObjectPath( CMPIObjectPath * objectpath );
++|       |                      ~~~~~~~~~~~~~~~~~^~~~~~~~~~
++| make[2]: *** [Makefile:1110: v2test_ein.o] Error 1
++| make[2]: *** Waiting for unfinished jobs....
++| ../../sblim-sfcc-2.2.8/TEST/v2test_im.c: In function 'main':
++| ../../sblim-sfcc-2.2.8/TEST/v2test_im.c:82:40: warning: '%s' directive argument is null [-Wformat-overflow=]
++|    82 |     printf( "invokeMethod() rc=%d, msg=%s\n",
++|       |                                        ^~
++
++Upstream-Status: Backport
++[https://github.com/kkaempf/sblim-sfcc/commit/881fccbaf19e26cbef3da1bebe2b42b3a9de1147#diff-ad9eeee99837ead0f29c70cd5f3956178dc3d51bd79618affd53d72a31404d5f]
++
++Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
++---
++ TEST/v2test_ec.c  | 2 +-
++ TEST/v2test_ein.c | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/TEST/v2test_ec.c b/TEST/v2test_ec.c
++index 940ca57..72a93a5 100644
++--- a/TEST/v2test_ec.c
+++++ b/TEST/v2test_ec.c
++@@ -83,7 +83,7 @@ int main()
++        count = enm->ft->hasNext(enm, NULL) ;
++        while (count > 0) {
++           data = enm->ft->getNext(enm, NULL);
++-          showClass(data.value.cls);          
+++          showClass((CMPIConstClass *)data.value.cls);          
++           /*
++            * see if we have any more
++            */
++diff --git a/TEST/v2test_ein.c b/TEST/v2test_ein.c
++index ede95c1..c9d1152 100644
++--- a/TEST/v2test_ein.c
+++++ b/TEST/v2test_ein.c
++@@ -93,7 +93,7 @@ int count = 0;
++        	  
++           data = enm->ft->getNext(enm, NULL);
++ 
++-          showObjectPath(data.value.ref);
+++          showObjectPath((CMPIObjectPath *)data.value.ref);
++           /*
++            * see if we have any more
++            */
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb
+index c9d3ddd6b..7d5e1c4c2 100644
+--- a/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb
++++ b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb
+@@ -5,6 +5,7 @@ HOMEPAGE = "http://www.sblim.org"
+ SRC_URI = "http://netcologne.dl.sourceforge.net/project/sblim/${BPN}/${BPN}-${PV}.tar.bz2 \
+            file://0001-cimxml-Include-sys-select.h-for-fd_set.patch \
+            file://0001-Fix-implicit-function-declarations.patch \
++           file://0001-Fix-incompatible-pointer-type-error-with-gcc-option.patch \
+            "
+ 
+ SRC_URI[md5sum] = "0bac0dec19f17ec065b6c332a56d7bae"
+-- 
+2.34.1
 
 
