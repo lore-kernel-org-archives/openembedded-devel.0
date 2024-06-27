@@ -1,228 +1,324 @@
-Return-Path: <ross.burton@arm.com>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 97972C2BD09
-	for <webhook@archiver.kernel.org>; Thu, 27 Jun 2024 10:12:22 +0000 (UTC)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com (EUR05-DB8-obe.outbound.protection.outlook.com [40.107.20.73])
- by mx.groups.io with SMTP id smtpd.web11.4679.1719483135913340869
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DA240C30653
+	for <webhook@archiver.kernel.org>; Thu, 27 Jun 2024 11:34:32 +0000 (UTC)
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web11.5797.1719488063863679987
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jun 2024 03:12:16 -0700
+ Thu, 27 Jun 2024 04:34:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@arm.com header.s=selector1 header.b=kM6fZg5X;
- dkim=pass header.i=@arm.com header.s=selector1 header.b=kM6fZg5X;
- spf=pass (domain: arm.com, ip: 40.107.20.73, mailfrom: ross.burton@arm.com)
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
- b=G/9Gc09cAzmC9qpwAygDOUnN3/Iw5mZmY0J4jJLBybZa3ic38H0iIhWqYmj3XTVWWN5Ed6+CqPf0T8ULTI14mw6hCgvHg8xy95hv02pzNw4g5KA81YDolfXWCp5LlL+tOzspnLEohJbBDE2NNFkGltPy9KXx4KRXxcQJI3loKKQPL45WPzcI5krWKRFUHZ6/ZBLjrmzbVsQgg7yWDEUkf+HaQrIUpBXQeaunUEhl5e7ban4VbPf8bMKNmaZxRnBi4jyga1zOeWJc1KL7Pvx6ANxx8YSij9hniEdIvHkRg491XRpra50DI/NQarXh3c+p/W1H8cWAgXMGCLYtYhedfA==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CVl8n6fGH7KuI006PXlw+56cl2OcxIMsZGO2I1OxnnI=;
- b=D7MhL36Ve/hZ4w8emjY6njTfaIfgWuvWd/IL1ORp2ajsZEDg7MKE6xyYsvCAzQ3WZwBLw2LVzJcC6mexomgbqSiiUP7ytprAf1jPDEiNSS9m28ehminPB9/tF4gohs9bFR8gUNit9EwpUQY/Fz1XID1PkrL2UPo/LIvlwwfC90tczNt0ai1XiUofmLyeigLBRG2OToT7ommWSymk1nYFOIFkb9LJfhccj+GuKSeCwjdKqoe1DCT+zGv0r+pt0QkPWSnDS8OJw9M1iXnmnNfPjRZklStt1iGAimVhEP830986s8ZtW7capZiBPf4iWkRzbOfLDSoXIJ+HGIQYovoMQA==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 63.35.35.123) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CVl8n6fGH7KuI006PXlw+56cl2OcxIMsZGO2I1OxnnI=;
- b=kM6fZg5Xa5CKH4GOa7DstDcJTBF30JPoFRIIyQRR3KgQo+NON7TK6VGdZOBxCTx14zi/j4cERRfRozs2hCq9SCtN2L+40vTq8Kn3DCRMKS2FzgE4bx5Ai2G0HFC/cSyVhYbE47GtxMZ+3tyfi0Ym6/mquCkughiRf+R82kHo9tc=
-Received: from AS9PR04CA0036.eurprd04.prod.outlook.com (2603:10a6:20b:46a::29)
- by PAXPR08MB7366.eurprd08.prod.outlook.com (2603:10a6:102:227::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.32; Thu, 27 Jun
- 2024 10:12:11 +0000
-Received: from AMS0EPF0000019B.eurprd05.prod.outlook.com
- (2603:10a6:20b:46a:cafe::63) by AS9PR04CA0036.outlook.office365.com
- (2603:10a6:20b:46a::29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7719.22 via Frontend
- Transport; Thu, 27 Jun 2024 10:12:11 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
- pr=C
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- AMS0EPF0000019B.mail.protection.outlook.com (10.167.16.247) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.7677.15
- via Frontend Transport; Thu, 27 Jun 2024 10:12:10 +0000
-Received: ("Tessian outbound 1fca641c4c16:v357"); Thu, 27 Jun 2024 10:12:09 +0000
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: 19eb8195bef9695c
-X-CR-MTA-TID: 64aa7808
-Received: from 7a0fd5ef3d56.1
-	by 64aa7808-outbound-1.mta.getcheckrecipient.com id B76A603C-2C32-4112-9F93-DEF749FC466F.1;
-	Thu, 27 Jun 2024 10:12:03 +0000
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
-    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 7a0fd5ef3d56.1
-    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
-    Thu, 27 Jun 2024 10:12:03 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=dlVVMOHyf6ICqE7NrdUyRNML8FHyboQobGxBAPWQatQz/iMmdFJ/jtr9/bKNCy+lI4Df5k8W5UgDkTzseoar7BN3jijq1Gc/ojcnJQNsRXslb3GykGp/O+SjSx2VUsQthoEjxxAMNYeTashmQS8XoysO5fiRkt99i0UmDCEIcNrat75V4PYnHybbKMRiaJBTjgp0l3JesaQ5DFaV6+v2EVAbhUfGjCUgEYNp1YgbHJRMYZfiRT/0NwksrnXMYqAxBgjLBM0HHYDeyADD0KmxaZEmiNdVZ5HTyJTt7qg70sOyh2zN3D3kCGxfIDZ6ZM7jnyjc3alh8I/ooAqljH8LnA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CVl8n6fGH7KuI006PXlw+56cl2OcxIMsZGO2I1OxnnI=;
- b=NzKHazWr3pX2vFCMB/nCyrCM4hr7sARQ4vhczC/BmsoAfOAiFJCot1cQdXWFm6ZM/L8ql1HeTDdZIEQVllmAW5hY4EYpw1s6dEJ8MlFuzLV+mzZdX/DHBjfS/n30XW0qrT4pmi8MsExupAwlioZcHXn00KQALdMJmVhcJU5gzaY9L09l3dRvpWNSGFY24i3IU+dtAQHKXPhgdyBJco9h0O7+ylt/SEpwUpGEvc0bymjrQnALb/rSu3cZrCO8FTaUiXTkvR+qr5qDxBoDQ5Ve131/Upo1MqbAkeQQ1j/f5ZtEiVfmaHYf41YNF5DQ26+SvC4hb+5IId2latxIvJZAsA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CVl8n6fGH7KuI006PXlw+56cl2OcxIMsZGO2I1OxnnI=;
- b=kM6fZg5Xa5CKH4GOa7DstDcJTBF30JPoFRIIyQRR3KgQo+NON7TK6VGdZOBxCTx14zi/j4cERRfRozs2hCq9SCtN2L+40vTq8Kn3DCRMKS2FzgE4bx5Ai2G0HFC/cSyVhYbE47GtxMZ+3tyfi0Ym6/mquCkughiRf+R82kHo9tc=
-Received: from PA4PR08MB7411.eurprd08.prod.outlook.com (2603:10a6:102:2a3::12)
- by AM8PR08MB5684.eurprd08.prod.outlook.com (2603:10a6:20b:1dc::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.35; Thu, 27 Jun
- 2024 10:12:01 +0000
-Received: from PA4PR08MB7411.eurprd08.prod.outlook.com
- ([fe80::9206:40ba:ef7e:729e]) by PA4PR08MB7411.eurprd08.prod.outlook.com
- ([fe80::9206:40ba:ef7e:729e%4]) with mapi id 15.20.7698.033; Thu, 27 Jun 2024
- 10:12:01 +0000
-From: Ross Burton <Ross.Burton@arm.com>
-To: "joerg.sommer@navimatix.de" <joerg.sommer@navimatix.de>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] Should DISTRO_FEATURE ptest include ptest-runner
-Thread-Topic: [oe] Should DISTRO_FEATURE ptest include ptest-runner
-Thread-Index: AQHax+1/luxA7m9pDUerOTv9jIzHtLHbZP4A
-Date: Thu, 27 Jun 2024 10:12:01 +0000
-Message-ID: <45281F93-46C7-4E91-A0B0-EEB37FEA712B@arm.com>
-References: <x6gyiofwakvibrczp5awde7lihbxomhqslfn2izreb5wyxvbqi@hy5fd7bywmm5>
-In-Reply-To: <x6gyiofwakvibrczp5awde7lihbxomhqslfn2izreb5wyxvbqi@hy5fd7bywmm5>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: Apple Mail (2.3774.600.62)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic: 
-	PA4PR08MB7411:EE_|AM8PR08MB5684:EE_|AMS0EPF0000019B:EE_|PAXPR08MB7366:EE_
-X-MS-Office365-Filtering-Correlation-Id: d68e3ad6-df8f-4b0b-adf6-08dc96919b8e
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: 
- BCL:0;ARA:13230040|1800799024|376014|366016|38070700018;
-X-Microsoft-Antispam-Message-Info-Original: 
- =?utf-8?B?a3R5L1dwQ1pvTjNrbW5aaUVxVjlhWUY5WTlzQWtvSG5yVDR4cEFNQVFQQzNG?=
- =?utf-8?B?eCtqSVA1eVVOT1FPOFMrWnZuY0RzWnFyMWxoU1lLQjVoa081bW9PTlhjSHVm?=
- =?utf-8?B?Uk5MSHFCRFJsSDk1S1Aza28zRzkrVjFEV0ZQdndIZFFoMDloaVgvVS9YY2lV?=
- =?utf-8?B?T1JZNzVLZ3hNV2VlV1pueVVubjZKb0hvQ3ljdHBpTjdub3FlZTVYNXYrVXhW?=
- =?utf-8?B?SmZQbVpNaHFxa3RMeHVnNHVCd09MNWJBYk5HQ0VOUExFYUpZUTVmRHhBRHVC?=
- =?utf-8?B?QXZrc2Ewb0I3c0lxMFlyU0c2NDlpdVhBQStCNWVEVU9ZbHhkWVlpcEhTOU1Q?=
- =?utf-8?B?cTdPcldSQWpKK3I4SmQ5N25IUmNVQXN4eC9TaTduVDdoVXZ6YXBzS3JoSGth?=
- =?utf-8?B?aHQyZVAxM3ZKUTJ5R1g3Qi9aS09CbENENUdYRzNpN2lnbThrNGNHSzVCc3N3?=
- =?utf-8?B?SlJDU0hwQndCZGFjRmt0bzlkN0s1elB5K1FFRVpaZmlKemFhbGdIYnA4MHBx?=
- =?utf-8?B?clYwaWVBT1VqTjN2RVMwYm5vY3FnTHlXMmdLdTVKWE9hSVlLdWxBa1BzNUhl?=
- =?utf-8?B?b01hMWNDam5Qc3AyZktWK3hTRnQzSzFCdVFjNzV3Q3kwUlBUTUJIM1hYMnlD?=
- =?utf-8?B?RkVKMFFDcCtxZlhzM1BjSWVpUEhrcEl3UjVYejFIbGc5bTFVVzM0aHBXczBO?=
- =?utf-8?B?TlhkV2hOdk5MVnNldWgxaVh3a3JnZDNkK0JLaGRzOENmZC9pMVJ2aHdRRDRp?=
- =?utf-8?B?MWRWU0dxcTVGYW4vYnZqSWRFUmd2R2F2Z1ZQRXdvRVN2dnF2UWZ1UzU3cDJv?=
- =?utf-8?B?dll3RlZhVHpTVTVwL1hSNGR4S3N4citRbDBCWWRTZTVlOU1pRk9wVnhCU0Ur?=
- =?utf-8?B?K0VNdk5YSmQ1MzVXRDZrVmp3ZjZnV1VhZGljTFVHeElOeCtWb3JDaFZMMjI3?=
- =?utf-8?B?ZGdmMjY4cFRodFRkNFdzQmRKMjBGY3VrWHhEUkdMQlZaSm9NKzg4ak96M2pJ?=
- =?utf-8?B?TU1rVjRYZWE3TkZObXFFTFp3cGZYQ2s4eW5SN0MweTRoR1hWZS9UaERDekJS?=
- =?utf-8?B?N3IvWElEMFFxUGxuc1NCZmJmUHpZV1VqZWVOOENDQ1Y2bkZ1SktVN3ZsUEhL?=
- =?utf-8?B?azdKdlFSbmNXd1Z6NStNNVVLZVZGQVBSWithTlBkUTVkRWMycE1YOGNpZC82?=
- =?utf-8?B?N0lnT1JDa0NsZjNmVzJwS3dUN1dnZnYwUENiS1QxNExTRzlCUlJkeEk1ZjVv?=
- =?utf-8?B?bTkwQnNML3UzOCtBcWwvVzRLVXh2MllXQlk4TFd3Y3E4M0lqUGJYOHZxR24z?=
- =?utf-8?B?eW9RWWJwZ1RRQUg0eVNUME1PN21sVmc1b0c1NjhXZmpHcGU0WUVIY3I3V1pH?=
- =?utf-8?B?VkNqOVd3eGR2MWRJSWViK0FLbmNCQjVPdUN5NFl5K0ZjSElqS1drTWJYOWUw?=
- =?utf-8?B?a2tyMHMyVkYzQ2dyWGlqK0xobDcvTkoxQ1ErMWFjUXZzc0pLM3RlTldxZHht?=
- =?utf-8?B?eENpeU5xMEZETE5PUzBxcnFwTTA0aFNaL3MxbHQ3QnhDdnYwK3RvVUNpNEhR?=
- =?utf-8?B?Q0J0TzFTcy8xWEx1SnJGbjhRdlJUKzkzQzZtcm4yUS9adlRpb2UvbWNlTjd3?=
- =?utf-8?B?YmFrNkdSMHVsN2dxQjFqWVRwNnFxUFRRVkQ4UTFDdk5RMGxZdGQ1V0R6bTVs?=
- =?utf-8?B?MndicCthMlBxY1gxN1JFT0FZQUx5Wm1mSzRHVXBqK0dSK2wxeFpQSFYzNTBu?=
- =?utf-8?B?b1hBcFVKazdRQ2JVZ0NrSGhkU0xKcUpFbkt3czAzL1ZadUIwYkpTN3RieTRK?=
- =?utf-8?B?QmpLWkNFREJRTi80bnpybE04eDQ5Wk96NW02WEh4dDFxcVFCU0NWWnVMQ0xP?=
- =?utf-8?B?aW90VnQyMmFPMHI5LzRYNXRHMVppdXdoWVcxVG1jUzBiY1E9PQ==?=
-X-Forefront-Antispam-Report-Untrusted: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR08MB7411.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(38070700018);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <9B4EF17988BEBB4EB82E999FBDECF6E0@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ dkim=pass header.i=@mvista.com header.s=google header.b=Pze7X4r8;
+ spf=pass (domain: mvista.com, ip: 209.85.214.177, mailfrom: hprajapati@mvista.com)
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-1f4a5344ec7so12378195ad.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Jun 2024 04:34:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1719488063; x=1720092863; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=bcOTEhpYM/l0WkNJ/vfFw7a3GnHTNJTTJwps0wdMmys=;
+        b=Pze7X4r8Wb+U5pBVbDJhv95rWRzaaUcU+9Tv14FXbyl93sm9YvF92IjHhjgmg8dPY6
+         DhEJMdgvIB7LL+c26MYxLb0d1b+47t6u60hUFCLMNUC7LI9m/noBn5zTJVvNnmkkNqjk
+         QnRxJQLMV2nU28ddhGh6h0CwgumgawUjTgr9U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1719488063; x=1720092863;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=bcOTEhpYM/l0WkNJ/vfFw7a3GnHTNJTTJwps0wdMmys=;
+        b=OLwJcFv14a59vJ2xmUpNksFo3WpQHKYJ0VUNlua7VXZl08s8hYLAMT0jL/I/ZO0+uI
+         BNnQndJSztvgHQ1hV1/H3I/SXsFBu87ivRGhXDh0VKJSFClSiK/Okf4LBkg97RsrSK6Y
+         4KNh1oiyaIYqSZXfXfc4kA+uSeQjqmVGxBOxvqqpPtX0OZkG6WUBHQzVAqmyWGxf0oFR
+         V63gvSiLtSfC5WgacMLZtYXRcoNdfZvp5ac4i+bLKiiBZ2+1qXooE5Vf8byHTjrYsDqg
+         q3ZiCS2EuImlISGJKkvyIbqzpbcon3tL050zBOMeFh08LmSIbioKevjpaAGcP0RMhcy/
+         2Okw==
+X-Gm-Message-State: AOJu0YwT0Nut06TtZU+CfFYhF2By3R89wh8FUsPNYj7XpTYnMjm0rUaS
+	hjGrVM2ZkxqNcWTurfmmxZ1OLRvDeUUL5C/S4YGaFgJdjrcu8xjcnqUF8FTZh7pnxA8PIBsKjgA
+	o
+X-Google-Smtp-Source: AGHT+IEMW/+RO9cWNOxke3ngk7D+zrQpnaP4mqOW03D7WySBWyk0VmHrcgKM0xwjHZdBZoQQ4EpvRQ==
+X-Received: by 2002:a17:902:c411:b0:1f8:5230:e788 with SMTP id d9443c01a7336-1fa5e6a9ec6mr137694175ad.25.1719488062911;
+        Thu, 27 Jun 2024 04:34:22 -0700 (PDT)
+Received: from localhost.localdomain ([150.129.170.164])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1faac99939esm11226735ad.218.2024.06.27.04.34.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 27 Jun 2024 04:34:22 -0700 (PDT)
+From: Hitendra Prajapati <hprajapati@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-java][kirkstone)][PATCH] openjdk-8: Fix CVE-2022-40433
+Date: Thu, 27 Jun 2024 17:04:15 +0530
+Message-Id: <20240627113415.539591-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB5684
-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
- AMS0EPF0000019B.eurprd05.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 
-	0f660349-850a-4f64-82cc-08dc96919612
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|82310400026|35042699022|376014|36860700013;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?ZHUzSXJzTFNCRXdwS2M0a3Q1OVlqSUExYURCRktaYXpTc01iczRFME9QUUhj?=
- =?utf-8?B?a1p2b2ZHMHhxcmd2UFdzaXFWN2hEWlVPUXNoSFZWVWJoWnc0MzI5dmhYanJx?=
- =?utf-8?B?bnFRbnArdThmVGpBOWh0SFV3T1IrY0NLZExTWUNjNURNYWFRS3JrVlJ0Rlpa?=
- =?utf-8?B?bnFoUUMzdFM5OEFjOVorZ3hLOEdmeTJxdzdWenpiYXZkZU02REVGbWc3UUFX?=
- =?utf-8?B?ZjJxSm5udkgvSnFlMmJTSVZxeVk1Q1BBRE5ab09FWjVqS2pxUTNnek5zL0pP?=
- =?utf-8?B?V2ZweGhZLzh4UjJYNnR0aUxFQVpLV1dIN0ZSc1R3YjUzcFU5VDh0Tlh6MmZ0?=
- =?utf-8?B?cVM0bXhmOTk1dEJ6eHlDOEgzQ3hyUXBZOWVtbk9nb3dTR3A2TUd5US9wai9E?=
- =?utf-8?B?Y2JRMFRlbXAydGdTTHJUYjJSS2JnVGFiQkdlSWFWWnJIVUtpOUZmL0FhZmFz?=
- =?utf-8?B?RS9VSDRXQ0ovWjV6UWtUUTVLZUtNb0E0WUEvUFViY09NdU02d2NvRE52YjVM?=
- =?utf-8?B?STVIbjJQRElJOFRPdThQaHlodHUva2lFMDVDTVVCT1UvUk81b0haZFZXREpM?=
- =?utf-8?B?RFV3aHJvMEtJRHZkaW5sVm9tMkxKVUhvY2pzcTlBcEJhTU5mcHQya3FCVmx0?=
- =?utf-8?B?WXpZY09OZUhRSkYyL2RXZmFVU2Y4TGFHUGY5MWxNS1FCRUxuUllBVjNxMWdP?=
- =?utf-8?B?YWZha0VDVnNZd21RMWtzWGY4anNtVzg4VlA0NTFWNmtEOEJ1a3gwQy9ONmFy?=
- =?utf-8?B?SnB2eHBjZlBGdFp1dy9VWmNCdjRWU2cvODczU1JrWDd2RmF1RnNTMXhmSGVr?=
- =?utf-8?B?aGdPcUFmVEVLajlLcVd4TjljWHdVUlNoNFYrVDNBOHNTUTREbm5aSnF1aFUy?=
- =?utf-8?B?b002ZXIyS2NMSkNBTHNMMmNIOGhYZTFtK1VjOGxwR1ZqNFdQcDZYMUlpak5G?=
- =?utf-8?B?SUt2TU41UTEySkc4cHcraFRwUnFid3ZQcnFBV0VtcEdjSTlwNWZnYnN4ZzN4?=
- =?utf-8?B?ODI2SDdGK1kvWGVudmNpdnpPUGFBbVREdHRQalIwUUZSOHBoNGdHVVNucnNG?=
- =?utf-8?B?MlFtRkx2RkIxdEtudkppd3FNUStuVFJROWQ2M0poTVFNc2RYRE1Oc3lOQXZJ?=
- =?utf-8?B?WGYyTk5uKzZiTVRabU1rdEpJYnZXSDhyT0JXY3h5VUpmNzk5aDJyTWVwWGFj?=
- =?utf-8?B?cFBydDVZY2FIcjFxajFobGtNekVHcjBkRkVURHQxVG85a0ZNTlZQa3ZXRjNt?=
- =?utf-8?B?QkpENjJaOE5Ib1I5aG0rbjlJWHdVNEY2NmhHczNKL2tvOEI5clE0V3JXakZq?=
- =?utf-8?B?eFhBcWg1aktNaEJiQzRnWi96b0ZmMGNma3F4ODNSRS94d3UxZ00zZ2h5OXgw?=
- =?utf-8?B?WDdObHRlR1N5TWtwVmJDbXg4S2crYzFzWVVHWkZ6bm5nNmhUdks5SGk0R2Iv?=
- =?utf-8?B?K2hUQktvaUE5b3ZJSkxWUndONy9EWUN5SkxjNVVqZnlENVQwRXV0dXVHYndo?=
- =?utf-8?B?bC9ScE1VTXhLTUVnQTlIaWlpRW9aTVVQWE5NUU9qSVg1Zlc1NHVZYlFFSGlM?=
- =?utf-8?B?SmI2SlFCTXlzc09hOS8ycDE3cFZENzUrbHl0Q0lrUDRNUXBFQW5XdWFSSDk3?=
- =?utf-8?B?eFRGRFFUQ1pjL2JYSXBCMFhMRGREUmhSZFJBOTU5eXV6bEhyQlQxdmFKTmhC?=
- =?utf-8?B?dllsODNpV0JpR1EwWjhUeVJJUmZVdzJaSmprelVGdWUvbzU3bVpDcGNTNGtW?=
- =?utf-8?B?L1YxVDN2MDJPTzJHTGdYZWdCek5udW8wRDhoMUJMQ1hNVlhmMHhIWjdSR0lO?=
- =?utf-8?B?eTk3eHlJdlArdTBKUjFKL1hJMHpMbyt0TWJNK0ZLNlNZVzN0azdSTkFPb2dL?=
- =?utf-8?B?NzJvUHE5NEk2N0N5VER4QWVUZ2lzL280MUV3cmtwcDRER3diM0g1bVRCSWhL?=
- =?utf-8?Q?6Z39bbjCWjM8wUw0NNqnGG+EAistkJKZ?=
-X-Forefront-Antispam-Report: 
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(35042699022)(376014)(36860700013);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jun 2024 10:12:10.3542
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d68e3ad6-df8f-4b0b-adf6-08dc96919b8e
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AMS0EPF0000019B.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR08MB7366
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Jun 2024 10:12:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111123
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Jun 2024 11:34:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111124
 
-T24gMjYgSnVuIDIwMjQsIGF0IDE4OjIyLCBKw7ZyZyBTb21tZXIgdmlhIGxpc3RzLm9wZW5lbWJl
-ZGRlZC5vcmcgPGpvZXJnLnNvbW1lcj1uYXZpbWF0aXguZGVAbGlzdHMub3BlbmVtYmVkZGVkLm9y
-Zz4gd3JvdGU6DQo+IFNob3VsZCBwb2t5LmNvbmYgaW5jbHVkZSBzb21ldGhpbmcgbGlrZToNCj4g
-DQo+IEVYVFJBX0lNQUdFX0ZFQVRVUkVTICs9ICIke0BiYi51dGlscy5jb250YWlucygiRElTVFJP
-X0ZFQVRVUkVTIiwgInB0ZXN0IiwgIiBwdGVzdC1wa2dzIiwgIiIsIGQpfSINCg0KVGhhdCB3b3Vs
-ZCBtYWtlIGl0IGltcG9zc2libGUgdG8gYnVpbGQgd2l0aCBwdGVzdCBlbmFibGVkIGJ1dCBvbmx5
-IGhhdmUgdGhlIHBhY2thZ2VzIGluIHNlbGVjdGVkIGltYWdlcywgd2hpY2ggd2FzIGFuIGV4cGxp
-Y2l0IGRlc2lnbiBjaG9pY2UgaW4gaG93IHB0ZXN0IHdhcyBpbXBsZW1lbnRlZC4NCg0KPiBJTUFH
-RV9JTlNUQUxMICs9ICIke0BiYi51dGlscy5jb250YWlucygiRElTVFJPX0ZFQVRVUkVTIiwgInB0
-ZXN0IiwgIiBwdGVzdC1ydW5uZXIiLCAiIiwgZCl9DQoNClRoaXMgaXMgcmVkdW5kYW50LCBhcyBl
-dmVyeSBwdGVzdCBwYWNrYWdlIHJkZXBlbmRzIG9uIHB0ZXN0LXJ1bm5lci4NCg0KUm9zcw==
+Upstream-Status: Backport from https://github.com/openjdk/jdk8u/commit/961ab463974b7d05600b826303f9111c4f367a04
+
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+---
+ .../openjdk/openjdk-8-release-common.inc      |   1 +
+ .../patches-openjdk-8/CVE-2022-40433.patch    | 233 ++++++++++++++++++
+ 2 files changed, 234 insertions(+)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/CVE-2022-40433.patch
+
+diff --git a/recipes-core/openjdk/openjdk-8-release-common.inc b/recipes-core/openjdk/openjdk-8-release-common.inc
+index ff8d96e..c977c96 100644
+--- a/recipes-core/openjdk/openjdk-8-release-common.inc
++++ b/recipes-core/openjdk/openjdk-8-release-common.inc
+@@ -21,6 +21,7 @@ PATCHES_URI = "\
+     file://2007-jdk-no-genx11-in-headless.patch \
+     file://2008-jdk-no-unused-deps.patch \
+     file://2009-jdk-make-use-gcc-instead-of-ld-for-genSocketOptionRe.patch \
++    file://CVE-2022-40433.patch \
+ "
+ HOTSPOT_UB_PATCH = "\
+     file://1001-hotspot-fix-crash-on-JNI_CreateJavaVM.patch \
+diff --git a/recipes-core/openjdk/patches-openjdk-8/CVE-2022-40433.patch b/recipes-core/openjdk/patches-openjdk-8/CVE-2022-40433.patch
+new file mode 100644
+index 0000000..fcae4f4
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/CVE-2022-40433.patch
+@@ -0,0 +1,233 @@
++From 961ab463974b7d05600b826303f9111c4f367a04 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Ji=C5=99=C3=AD=20Van=C4=9Bk?= <jvanek@openjdk.org>
++Date: Mon, 25 Sep 2023 14:05:03 +0000
++Subject: [PATCH] 8283441: C2: segmentation fault in
++ ciMethodBlocks::make_block_at(int)
++
++Reviewed-by: mbalao
++Backport-of: 947869609ce6b74d4d28f79724b823d8781adbed
++
++Upstream-Status: Backport [https://github.com/openjdk/jdk8u/commit/961ab463974b7d05600b826303f9111c4f367a04]
++CVE: CVE-2022-40433
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++---
++ hotspot/src/share/vm/c1/c1_GraphBuilder.cpp   | 12 ++++--
++ hotspot/src/share/vm/ci/ciMethodBlocks.cpp    | 17 +++++---
++ .../src/share/vm/compiler/methodLiveness.cpp  |  9 ++--
++ hotspot/test/compiler/parsing/Custom.jasm     | 38 +++++++++++++++++
++ ...UnreachableBlockFallsThroughEndOfCode.java | 42 +++++++++++++++++++
++ 5 files changed, 106 insertions(+), 12 deletions(-)
++ create mode 100644 hotspot/test/compiler/parsing/Custom.jasm
++ create mode 100644 hotspot/test/compiler/parsing/UnreachableBlockFallsThroughEndOfCode.java
++
++diff --git a/hotspot/src/share/vm/c1/c1_GraphBuilder.cpp b/hotspot/src/share/vm/c1/c1_GraphBuilder.cpp
++index 99f1c510..6e3e4cc4 100644
++--- a/hotspot/src/share/vm/c1/c1_GraphBuilder.cpp
+++++ b/hotspot/src/share/vm/c1/c1_GraphBuilder.cpp
++@@ -206,8 +206,10 @@ void BlockListBuilder::handle_exceptions(BlockBegin* current, int cur_bci) {
++ }
++ 
++ void BlockListBuilder::handle_jsr(BlockBegin* current, int sr_bci, int next_bci) {
++-  // start a new block after jsr-bytecode and link this block into cfg
++-  make_block_at(next_bci, current);
+++  if (next_bci < method()->code_size()) {
+++    // start a new block after jsr-bytecode and link this block into cfg
+++    make_block_at(next_bci, current);
+++  }
++ 
++   // start a new block at the subroutine entry at mark it with special flag
++   BlockBegin* sr_block = make_block_at(sr_bci, current);
++@@ -227,6 +229,8 @@ void BlockListBuilder::set_leaders() {
++   // branch target and a modification of the successor lists.
++   BitMap bci_block_start = method()->bci_block_start();
++ 
+++  int end_bci = method()->code_size();
+++
++   ciBytecodeStream s(method());
++   while (s.next() != ciBytecodeStream::EOBC()) {
++     int cur_bci = s.cur_bci();
++@@ -297,7 +301,9 @@ void BlockListBuilder::set_leaders() {
++       case Bytecodes::_if_acmpne: // fall through
++       case Bytecodes::_ifnull:    // fall through
++       case Bytecodes::_ifnonnull:
++-        make_block_at(s.next_bci(), current);
+++        if (s.next_bci() < end_bci) {
+++          make_block_at(s.next_bci(), current);
+++        }
++         make_block_at(s.get_dest(), current);
++         current = NULL;
++         break;
++diff --git a/hotspot/src/share/vm/ci/ciMethodBlocks.cpp b/hotspot/src/share/vm/ci/ciMethodBlocks.cpp
++index 614e75dc..2285eb0a 100644
++--- a/hotspot/src/share/vm/ci/ciMethodBlocks.cpp
+++++ b/hotspot/src/share/vm/ci/ciMethodBlocks.cpp
++@@ -1,5 +1,5 @@
++ /*
++- * Copyright (c) 2006, 2011, Oracle and/or its affiliates. All rights reserved.
+++ * Copyright (c) 2006, 2022, Oracle and/or its affiliates. All rights reserved.
++  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
++  *
++  * This code is free software; you can redistribute it and/or modify it
++@@ -33,12 +33,13 @@
++ 
++ 
++ ciBlock *ciMethodBlocks::block_containing(int bci) {
+++  assert(bci >= 0 && bci < _code_size, "valid bytecode range");
++   ciBlock *blk = _bci_to_block[bci];
++   return blk;
++ }
++ 
++ bool ciMethodBlocks::is_block_start(int bci) {
++-  assert(bci >=0 && bci < _code_size, "valid bytecode range");
+++  assert(bci >= 0 && bci < _code_size, "valid bytecode range");
++   ciBlock *b = _bci_to_block[bci];
++   assert(b != NULL, "must have block for bytecode");
++   return b->start_bci() == bci;
++@@ -146,7 +147,9 @@ void ciMethodBlocks::do_analysis() {
++       case Bytecodes::_ifnonnull   :
++       {
++         cur_block->set_control_bci(bci);
++-        ciBlock *fall_through = make_block_at(s.next_bci());
+++        if (s.next_bci() < limit_bci) {
+++          ciBlock *fall_through = make_block_at(s.next_bci());
+++        }
++         int dest_bci = s.get_dest();
++         ciBlock *dest = make_block_at(dest_bci);
++         break;
++@@ -166,7 +169,9 @@ void ciMethodBlocks::do_analysis() {
++       case Bytecodes::_jsr         :
++       {
++         cur_block->set_control_bci(bci);
++-        ciBlock *ret = make_block_at(s.next_bci());
+++        if (s.next_bci() < limit_bci) {
+++          ciBlock *ret = make_block_at(s.next_bci());
+++        }
++         int dest_bci = s.get_dest();
++         ciBlock *dest = make_block_at(dest_bci);
++         break;
++@@ -224,7 +229,9 @@ void ciMethodBlocks::do_analysis() {
++       case Bytecodes::_jsr_w       :
++       {
++         cur_block->set_control_bci(bci);
++-        ciBlock *ret = make_block_at(s.next_bci());
+++        if (s.next_bci() < limit_bci) {
+++          ciBlock *ret = make_block_at(s.next_bci());
+++        }
++         int dest_bci = s.get_far_dest();
++         ciBlock *dest = make_block_at(dest_bci);
++         break;
++diff --git a/hotspot/src/share/vm/compiler/methodLiveness.cpp b/hotspot/src/share/vm/compiler/methodLiveness.cpp
++index eda1ab15..7fb496dc 100644
++--- a/hotspot/src/share/vm/compiler/methodLiveness.cpp
+++++ b/hotspot/src/share/vm/compiler/methodLiveness.cpp
++@@ -268,10 +268,11 @@ void MethodLiveness::init_basic_blocks() {
++       case Bytecodes::_ifnull:
++       case Bytecodes::_ifnonnull:
++         // Two way branch.  Set predecessors at each destination.
++-        dest = _block_map->at(bytes.next_bci());
++-        assert(dest != NULL, "must be a block immediately following this one.");
++-        dest->add_normal_predecessor(current_block);
++-
+++        if (bytes.next_bci() < method_len) {
+++          dest = _block_map->at(bytes.next_bci());
+++          assert(dest != NULL, "must be a block immediately following this one.");
+++          dest->add_normal_predecessor(current_block);
+++        }
++         dest = _block_map->at(bytes.get_dest());
++         assert(dest != NULL, "branch desination must start a block.");
++         dest->add_normal_predecessor(current_block);
++diff --git a/hotspot/test/compiler/parsing/Custom.jasm b/hotspot/test/compiler/parsing/Custom.jasm
++new file mode 100644
++index 00000000..73a2b1ff
++--- /dev/null
+++++ b/hotspot/test/compiler/parsing/Custom.jasm
++@@ -0,0 +1,38 @@
+++/*
+++ * Copyright (c) 2022, Oracle and/or its affiliates. All rights reserved.
+++ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+++ *
+++ * This code is free software; you can redistribute it and/or modify it
+++ * under the terms of the GNU General Public License version 2 only, as
+++ * published by the Free Software Foundation.
+++ *
+++ * This code is distributed in the hope that it will be useful, but WITHOUT
+++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+++ * version 2 for more details (a copy is included in the LICENSE file that
+++ * accompanied this code).
+++ *
+++ * You should have received a copy of the GNU General Public License version
+++ * 2 along with this work; if not, write to the Free Software Foundation,
+++ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+++ *
+++ * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+++ * or visit www.oracle.com if you need additional information or have any
+++ * questions.
+++ */
+++
+++package compiler/parsing;
+++
+++super public class Custom {
+++
+++    public static Method test:"(I)V" stack 2 locals 1 {
+++        return;
+++Loop:
+++        // Unreachable block
+++        iload_0;
+++        bipush        100;
+++        if_icmpge     Loop;
+++        // Falls through
+++    }
+++
+++}
++diff --git a/hotspot/test/compiler/parsing/UnreachableBlockFallsThroughEndOfCode.java b/hotspot/test/compiler/parsing/UnreachableBlockFallsThroughEndOfCode.java
++new file mode 100644
++index 00000000..9dfb488d
++--- /dev/null
+++++ b/hotspot/test/compiler/parsing/UnreachableBlockFallsThroughEndOfCode.java
++@@ -0,0 +1,42 @@
+++/*
+++ * Copyright (c) 2022, Oracle and/or its affiliates. All rights reserved.
+++ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+++ *
+++ * This code is free software; you can redistribute it and/or modify it
+++ * under the terms of the GNU General Public License version 2 only, as
+++ * published by the Free Software Foundation.
+++ *
+++ * This code is distributed in the hope that it will be useful, but WITHOUT
+++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+++ * version 2 for more details (a copy is included in the LICENSE file that
+++ * accompanied this code).
+++ *
+++ * You should have received a copy of the GNU General Public License version
+++ * 2 along with this work; if not, write to the Free Software Foundation,
+++ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+++ *
+++ * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+++ * or visit www.oracle.com if you need additional information or have any
+++ * questions.
+++ *
+++ */
+++
+++/*
+++ * @test UnreachableBlockFallsThroughEndOfCode.java
+++ * @bug 8283441
+++ * @compile Custom.jasm UnreachableBlockFallsThroughEndOfCode.java
+++ * @summary Compiling method that falls off the end of the code array
+++ * @run main/othervm -XX:TieredStopAtLevel=1 -Xbatch compiler.parsing.UnreachableBlockFallsThroughEndOfCode
+++ * @run main/othervm -XX:-TieredCompilation -Xbatch compiler.parsing.UnreachableBlockFallsThroughEndOfCode
+++ */
+++
+++package compiler.parsing;
+++
+++public class UnreachableBlockFallsThroughEndOfCode {
+++    public static void main(String[] strArr) {
+++        for (int i = 0; i < 20000; i++) {
+++            Custom.test(i);
+++        }
+++    }
+++}
++-- 
++2.25.1
++
+-- 
+2.25.1
+
 
