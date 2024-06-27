@@ -1,335 +1,262 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <ceggers@arri.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 81B98C2BD09
-	for <webhook@archiver.kernel.org>; Thu, 27 Jun 2024 08:06:11 +0000 (UTC)
-Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
- by mx.groups.io with SMTP id smtpd.web11.3122.1719475567099005238
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E63EC30653
+	for <webhook@archiver.kernel.org>; Thu, 27 Jun 2024 08:53:22 +0000 (UTC)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.41])
+ by mx.groups.io with SMTP id smtpd.web10.3603.1719478399464022868
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jun 2024 01:06:07 -0700
+ Thu, 27 Jun 2024 01:53:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=aIFEdQWL;
- spf=pass (domain: gmail.com, ip: 209.85.167.41, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-52cdf9f934fso5284710e87.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Jun 2024 01:06:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1719475565; x=1720080365; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=cUE3AVCn5/hbiYE/AtOL8ea2NPAab98ZakIdtcI2u3o=;
-        b=aIFEdQWLjLA5ipRH8jv5UKuzaJ5MzMw/FqkZ179JISsj8xxaMeu1UsI/dXRefKnkT4
-         /pTpQvsf0h9oJejDvAteNfoaCkuGpXL9g1L9Vqpu5SGrV5yOZLjqfEZTRfKFUelVbd7q
-         7U4HD9+3oPkD3dVkY6TRXjnxmBUUzRlQwaRgrcdcyYJ1xRhgYE8Jb2zNc1ncWaaNx+mQ
-         NuQnQKyGXxj0ha/evh3Ks8UALBWAUIhjDkMY2/6jM8W2vXWBPE7ialZZRI4dolJT80xb
-         0e0g0dvE+ICRfim2Ng0b6ejCWQcqJVUSjPDzO10immb4CwTRxg1RMCnaFmv407IDaYhn
-         8Nww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719475565; x=1720080365;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=cUE3AVCn5/hbiYE/AtOL8ea2NPAab98ZakIdtcI2u3o=;
-        b=bKgc3PGw3t9Q7fmuvqwf3Ao3OQw9Q+qWypfFoV3xaCCU+EBAZVsxsPwPl4c9lbWBIA
-         SEpW462xOZxxH9ob1tZIYKrHEWtXTVc0wAfDxC5XOWF0vuME7HiVAo+mX3IJgJY1oQdn
-         wpVOgf24Vd6DS5vf9PSyd8P6x4N/SHsn5VmZrjmX3NR3yBj+z5nK8xxQBhFL4su3qih9
-         jLVhMmDs+SsB5kjTFHsiwU2q5/p7Ru+MyakgEJeZOtVPpa0pF3dof/zxnbcOIVaxNcIZ
-         ed40UOJ6SwBOlvM1fY9P+q4TQQxAa8Z0pY+ZjKYKVoESbOmvMZ+gyNPskKrJuExERT40
-         zBCw==
-X-Gm-Message-State: AOJu0YzLyR09Dtyt/u8djj1rQX6u0p26OSokrWYeCxw0W8QdwIIWweyy
-	/98C+p78M4zFQb2sTTxzX79wpnUVP1eizyoEkCwN/41XE2K5pYdbDCADQH695+1/Oyp3BRDfket
-	8AMBwMIQNz0XrJBiH3seQyJ8Pnj8=
-X-Google-Smtp-Source: AGHT+IEonYkyJiG+TQ3d8yZWgSYKSBMcNjjcDTTaCiaZ/bvaCyXCoHnH7ud7rhrhKfNPf3CWiTGSbBymO33c7dTUwtQ=
-X-Received: by 2002:a05:6512:78f:b0:52b:bf8e:ffea with SMTP id
- 2adb3069b0e04-52ce064f62dmr7771086e87.40.1719475564894; Thu, 27 Jun 2024
- 01:06:04 -0700 (PDT)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@arri.de header.s=selector1 header.b=UxS+UW03;
+ spf=pass (domain: arri.de, ip: 40.107.21.41, mailfrom: ceggers@arri.de)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=IzPpX7js6m1r2/92zDB6osTSmVgM8Y8GNBIHzt1z7FlLwrK1GYhdpvG7EHdr1/emmwlWU/EUG8GSlA4piSLOXsNTV6KuzC8oxcPanXf0NDTC3miI1PeJcskBwvikXiX4+I8ix8Ly2OMgwqz0dq1Q9XqFlU13J5XVk5iEgltVtDBfpF0wvQvhU5AbGxADJkUQtRz3+S9m2jjsWuBZ56Aea6Zd86fMFIf390JZfxiw5ibv3iPbJqMLvWjxxBabbXY9qkUqtQiqr3by4I8O6bgpsd1rv/7G1b/7MGEygDncJlU07yRhCZj2hMEar0nDuoFhrxT1O6T6s8fgHC5HEZMhDA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=hefB+uB5HITsRc3BVIWRlupxqtN3x315hlblKC5EEjc=;
+ b=HWEhb5ZO5sB8SIz1uQE85G7B2JG7Px/qppzVTfskw+g0EAG4mZjet1iW+MNDOFBFhW8WdU8gh3Wp7d7CIsIN+motET4nCJwK7blmRHobNtmF7DYtUvSYaqUP+KZ7+SW9BvBV9Tl4oGDlKTPwatGMql4jNzRla3dJGgrFWhD10cc4dM0x3E2Ho4DPlZM4/N7cKb9WQBRrM6F+TDNT9Mu5S4J0wVAaPqFY+O1jRgg2N5HeRP1HxYr6oBzq3WeKsrZ6CVUFkC/Soswddr+3k1BkMLTueAKOfEY2OVlT3db5xmt/BjLCEgXx54czze9Bf949XPQP1jYt1Y+Eu4qZ8iqJSg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 217.111.95.7) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arri.de;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=arri.de;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arri.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hefB+uB5HITsRc3BVIWRlupxqtN3x315hlblKC5EEjc=;
+ b=UxS+UW03cyEkjvfgMrXLyskSkGeJmpitgiG9OfYQJZUSaVtpY1W4M92v+hhpwqbBnYyd0Zlm2IndRCpD7CuY/Ex1iaHTmHcrsth6NEc4vyuGxSr20Yie7dBFexaJp53wsadjcH7hC+hoLlfElr6pyvhLKvi14P8lRPpU+eolEKE=
+Received: from AM8P190CA0029.EURP190.PROD.OUTLOOK.COM (2603:10a6:20b:219::34)
+ by DU0PR07MB9313.eurprd07.prod.outlook.com (2603:10a6:10:44e::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7719.20; Thu, 27 Jun
+ 2024 08:53:13 +0000
+Received: from AM3PEPF0000A78D.eurprd04.prod.outlook.com
+ (2603:10a6:20b:219:cafe::27) by AM8P190CA0029.outlook.office365.com
+ (2603:10a6:20b:219::34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7719.22 via Frontend
+ Transport; Thu, 27 Jun 2024 08:53:12 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 217.111.95.7)
+ smtp.mailfrom=arri.de; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=arri.de;
+Received-SPF: Fail (protection.outlook.com: domain of arri.de does not
+ designate 217.111.95.7 as permitted sender) receiver=protection.outlook.com;
+ client-ip=217.111.95.7; helo=mta.arri.de;
+Received: from mta.arri.de (217.111.95.7) by
+ AM3PEPF0000A78D.mail.protection.outlook.com (10.167.16.116) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7677.15 via Frontend Transport; Thu, 27 Jun 2024 08:53:11 +0000
+Received: from N9W6SW14.arri.de (10.30.4.242) by mta.arri.de (10.10.18.5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.34; Thu, 27 Jun
+ 2024 10:53:11 +0200
+From: Christian Eggers <ceggers@arri.de>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Marek Vasut <marex@denx.de>, Christian Eggers <ceggers@arri.de>
+Subject: [meta-oe][PATCH 2/2] lvgl: update upstream-status of all patches
+Date: Thu, 27 Jun 2024 10:52:56 +0200
+Message-ID: <20240627085256.21526-2-ceggers@arri.de>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240627085256.21526-1-ceggers@arri.de>
+References: <20240627085256.21526-1-ceggers@arri.de>
 MIME-Version: 1.0
-References: <20240619094547.30863-1-mark.jonas@de.bosch.com>
- <CA+chaQfw=Uj30UAbC7m6eoN_0ZhzFYqoJKL1vdAkTZe13vukAg@mail.gmail.com> <DU0PR10MB7076A615B2317E23746D5ABFADD72@DU0PR10MB7076.EURPRD10.PROD.OUTLOOK.COM>
-In-Reply-To: <DU0PR10MB7076A615B2317E23746D5ABFADD72@DU0PR10MB7076.EURPRD10.PROD.OUTLOOK.COM>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 27 Jun 2024 10:05:50 +0200
-Message-ID: <CA+chaQeFm_xMLeHpvfM+ouUPZ0OhoOmQ1=NwSQmtoc3Z2SqzrQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] magic-enum: add recipe
-To: "Jonas Mark (BT-FS/ENG1-GRB)" <mark.jonas@de.bosch.com>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>, 
-	"raj.khem@gmail.com" <raj.khem@gmail.com>, 
-	"Simoes Ricardo (BT-FS/ENG1.1-Ovr)" <Ricardo.Simoes@pt.bosch.com>
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-Originating-IP: [10.30.4.242]
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM3PEPF0000A78D:EE_|DU0PR07MB9313:EE_
+X-MS-Office365-Filtering-Correlation-Id: 686399e8-26a0-474e-aba2-08dc968692e4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|82310400026|376014|36860700013|34020700016;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?r7c4at/1GnuwM26isnGbvg+Cz3aA9S8UifGI9yiOFJXdg5XOa2vFX++Y41yR?=
+ =?us-ascii?Q?MOEG01gBtPnIl3JkKsEt3DcYqk4WZUxjzdD1OGS/l91VXjoLlR/Lh74Jf5Y6?=
+ =?us-ascii?Q?bSc4dlafP5cBtNiTrT7FVK4ffS08+t9O26XRIIa/zTir7umis/fW5lNu6II7?=
+ =?us-ascii?Q?q65dCSlBIjIWWshPAAk5WgIVjwGd8u7LP1O0N5fnQggctq0CTLh2e921AcmT?=
+ =?us-ascii?Q?wKeOWbQVPaDI8ykqiUFXwVeMvqK6pedi1flStVFIqTpGxrYcVUfz38kTA4yV?=
+ =?us-ascii?Q?KhAxsOF5UkQrOiP4B41MrZ3WRFUhyyoOgBeEFLx0+lpgpaQFkQlthp37h7/C?=
+ =?us-ascii?Q?vCp0r+2NZ5dfWiJfLoH6ZABRzCEd7iN20h56pprfOvIAwM3rSe8IYgwxBRij?=
+ =?us-ascii?Q?IScVl+cxQ8lG3ZA/P3sVyPUNofysp+HrJBg03Qc7r8moZpFBBMOUmKqd1zsr?=
+ =?us-ascii?Q?12VVZqYluSQRbDlTPsAfLMyHdCk5Q/bs5mElO8UZmbgxThQIdmzRtpUZGFJv?=
+ =?us-ascii?Q?WvI6cJVhFY3PW5ujM+ttVeSRhzws6vbrRJ/mEKLJoZViDUf2dujQ+LriOlHb?=
+ =?us-ascii?Q?FMByR93jHFm2uyPYbllP7VxLw5NmPKCcoBYTROvgzwsKywqON6Nvyt0RfwJk?=
+ =?us-ascii?Q?Ey8YdDSJJmfjgeSNpKWY1DW5vE6qY0w4rqE9MAMHaLlYxl7brBVQAG6ho3Cf?=
+ =?us-ascii?Q?HwgFiIjdKQqmkROLFTgTYpU3FPLWktYeAB/EmWIDutwTxPXhPZ/nw19tWRln?=
+ =?us-ascii?Q?Kdc1zEhcWQV5iMJXQfFB/L0OmSP/rhDbI+y7RZ0F+jmZtLRYx73PlyotGBEv?=
+ =?us-ascii?Q?z7Q+SSBi/6239bTF0i4MIs/6ijne7gD+TOvWb1KKUhWAqpoVP/YVbmqAYda1?=
+ =?us-ascii?Q?pHvT8TW1fUMEodNF/pXxLHK4kbr6cABYbMZb9nQNiMJadLFmYheVzZqPmxxX?=
+ =?us-ascii?Q?keMXbMrbYmJ28TPws+VVdJYKOkYUNG0NbEaFc4jnkoRGkQW9LKzxQ60CygRN?=
+ =?us-ascii?Q?3KzXIXJ8Cq9jQJaS69wSNRdiqJsfaeJkht3BdHyjGWbuBQL+LNpZ4H0yjXL0?=
+ =?us-ascii?Q?kthW76NOFGaJ9kecLrQInX7bpKQ08Q/DhlW2XY2Ms1oVs0xIKhzOOSBsS3KK?=
+ =?us-ascii?Q?D+piFJcEPYz/UKtwMV1ubVoNotpI+s1Yk3emqJkhtOgphUTdOF46BUPL/dfD?=
+ =?us-ascii?Q?p4kdbtZlwfWkS/XCxrIqtLCve8e4y/vOIaobPFqXdKSOnyJ5dMe8mMucGQrM?=
+ =?us-ascii?Q?/hk51+GAaXTd+hET0pzTleRFBf1Nvvjw9DqoIBwlUX/r8lBtFrP4J4R03nNC?=
+ =?us-ascii?Q?GYtRzsFITLJ4Q3p4omtlXb/gQegXxYpe+h+8a+8dOnyavn4FjJ1jg8axEYEk?=
+ =?us-ascii?Q?d9DAYodc/x7rMpWMdaKgwYta0GQ2rAMFYM6vLsf+UZiobKlr8A=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:217.111.95.7;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mta.arri.de;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013)(34020700016);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arri.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jun 2024 08:53:11.3699
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 686399e8-26a0-474e-aba2-08dc968692e4
+X-MS-Exchange-CrossTenant-Id: e6a73a5a-614d-4c51-b3e3-53b660a9433a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e6a73a5a-614d-4c51-b3e3-53b660a9433a;Ip=[217.111.95.7];Helo=[mta.arri.de]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	AM3PEPF0000A78D.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR07MB9313
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Jun 2024 08:06:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111118
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Jun 2024 08:53:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111120
 
-> Thank you for making us aware of the problem when compiling the ptest. We=
- were able to reproduce the problem when compiling for qemuarm. We were not=
- able to spot the problem on the autobuilder. How did you trigger the probl=
-em?
+All patches have been integrated meanwhile and should appear in the next
+release.
 
-I've just seen new build failure in world build and it was indeed with
-32bit arm (from multilib builds).
-Thanks for looking into it quickly.
+Signed-off-by: Christian Eggers <ceggers@arri.de>
+---
+ ...2-fix-sdl-handle-both-LV_IMAGE_SRC_FILE-and-LV_IMAGE_S.patch | 2 +-
+ ...3-Make-fbdev-device-node-runtime-configurable-via-envi.patch | 2 +-
+ .../lvgl/files/0004-Factor-out-fbdev-initialization-code.patch  | 2 +-
+ .../lvgl/files/0005-Add-DRM-KMS-example-support.patch           | 2 +-
+ .../lvgl/files/0006-Add-SDL2-example-support.patch              | 2 +-
+ .../0007-fix-cmake-generate-versioned-shared-libraries.patch    | 2 +-
+ .../files/0008-fix-fbdev-set-resolution-prior-to-buffer.patch   | 2 +-
+ 7 files changed, 7 insertions(+), 7 deletions(-)
 
-> We looked into it and have to admit that we cannot explain why g++ 14.1.0=
- trips over that line.
+diff --git a/meta-oe/recipes-graphics/lvgl/files/0002-fix-sdl-handle-both-L=
+V_IMAGE_SRC_FILE-and-LV_IMAGE_S.patch b/meta-oe/recipes-graphics/lvgl/files=
+/0002-fix-sdl-handle-both-LV_IMAGE_SRC_FILE-and-LV_IMAGE_S.patch
+index bd619b15721d..0bfc3f3e79ec 100644
+--- a/meta-oe/recipes-graphics/lvgl/files/0002-fix-sdl-handle-both-LV_IMAGE=
+_SRC_FILE-and-LV_IMAGE_S.patch
++++ b/meta-oe/recipes-graphics/lvgl/files/0002-fix-sdl-handle-both-LV_IMAGE=
+_SRC_FILE-and-LV_IMAGE_S.patch
+@@ -10,7 +10,7 @@ the case, e.g. the lv_demo_fb uses encoded images which a=
+re of type
+ LV_IMAGE_SRC_VARIABLE and instead of filename, come with a buffer of
+ pixels. Handle the later using SDL_CreateRGBSurfaceFrom().
+=20
+-Upstream-Status: Submitted [https://github.com/lvgl/lvgl/pull/5852]
++Upstream-Status: Backport [b339e67581864b2fb6bb8897735a1e110c324ddc]
+ Signed-off-by: Marek Vasut <marex@denx.de>
+ ---
+  src/draw/sdl/lv_draw_sdl.c | 30 +++++++++++++++++++++++++++---
+diff --git a/meta-oe/recipes-graphics/lvgl/files/0003-Make-fbdev-device-nod=
+e-runtime-configurable-via-envi.patch b/meta-oe/recipes-graphics/lvgl/files=
+/0003-Make-fbdev-device-node-runtime-configurable-via-envi.patch
+index 73c01cb5906a..7e542bcfbc0b 100644
+--- a/meta-oe/recipes-graphics/lvgl/files/0003-Make-fbdev-device-node-runti=
+me-configurable-via-envi.patch
++++ b/meta-oe/recipes-graphics/lvgl/files/0003-Make-fbdev-device-node-runti=
+me-configurable-via-envi.patch
+@@ -9,7 +9,7 @@ case it is, use it as the video card file in lv_linux_fbdev=
+_set_file().
+ Otherwise fall back to /dev/fb0, i.e. the current behavior. This way,
+ it is possible to test LVGL on systems with multiple fbdev devices.
+=20
+-Upstream-Status: Submitted [https://github.com/lvgl/lv_port_linux_frame_bu=
+ffer/pull/47]
++Upstream-Status: Backport [a0f03515bd7417a0d100058b133c3e8d69be9451]
+ Signed-off-by: Marek Vasut <marex@denx.de>
+ ---
+  main.c | 8 +++++++-
+diff --git a/meta-oe/recipes-graphics/lvgl/files/0004-Factor-out-fbdev-init=
+ialization-code.patch b/meta-oe/recipes-graphics/lvgl/files/0004-Factor-out=
+-fbdev-initialization-code.patch
+index d24d150c066e..6843af0aabeb 100644
+--- a/meta-oe/recipes-graphics/lvgl/files/0004-Factor-out-fbdev-initializat=
+ion-code.patch
++++ b/meta-oe/recipes-graphics/lvgl/files/0004-Factor-out-fbdev-initializat=
+ion-code.patch
+@@ -8,7 +8,7 @@ around it, so it can be conditionally compiled in. This is =
+done in
+ preparation for addition of other backend initialization example
+ code.
+=20
+-Upstream-Status: Submitted [https://github.com/lvgl/lv_port_linux_frame_bu=
+ffer/pull/47]
++Upstream-Status: Backport [a0f03515bd7417a0d100058b133c3e8d69be9451]
+ Signed-off-by: Marek Vasut <marex@denx.de>
+ ---
+  main.c | 18 ++++++++++++++----
+diff --git a/meta-oe/recipes-graphics/lvgl/files/0005-Add-DRM-KMS-example-s=
+upport.patch b/meta-oe/recipes-graphics/lvgl/files/0005-Add-DRM-KMS-example=
+-support.patch
+index 9ee7a7f19dda..2d2c4c60f1ac 100644
+--- a/meta-oe/recipes-graphics/lvgl/files/0005-Add-DRM-KMS-example-support.=
+patch
++++ b/meta-oe/recipes-graphics/lvgl/files/0005-Add-DRM-KMS-example-support.=
+patch
+@@ -13,7 +13,7 @@ To use DRM/KMS support, adjust lv_conf.h as follows:
+ LV_USE_LINUX_FBDEV=3D0
+ LV_USE_LINUX_DRM=3D1
+=20
+-Upstream-Status: Submitted [https://github.com/lvgl/lv_port_linux_frame_bu=
+ffer/pull/47]
++Upstream-Status: Backport [a0f03515bd7417a0d100058b133c3e8d69be9451]
+ Signed-off-by: Marek Vasut <marex@denx.de>
+ ---
+  CMakeLists.txt | 5 ++++-
+diff --git a/meta-oe/recipes-graphics/lvgl/files/0006-Add-SDL2-example-supp=
+ort.patch b/meta-oe/recipes-graphics/lvgl/files/0006-Add-SDL2-example-suppo=
+rt.patch
+index 691ee80b59aa..cfb6c6e817c5 100644
+--- a/meta-oe/recipes-graphics/lvgl/files/0006-Add-SDL2-example-support.pat=
+ch
++++ b/meta-oe/recipes-graphics/lvgl/files/0006-Add-SDL2-example-support.pat=
+ch
+@@ -22,7 +22,7 @@ LV_USE_LINUX_FBDEV=3D0
+ LV_USE_LINUX_DRM=3D0
+ LV_USE_SDL=3D1
+=20
+-Upstream-Status: Submitted [https://github.com/lvgl/lv_port_linux_frame_bu=
+ffer/pull/47]
++Upstream-Status: Backport [a0f03515bd7417a0d100058b133c3e8d69be9451]
+ Signed-off-by: Marek Vasut <marex@denx.de>
+ ---
+  CMakeLists.txt | 6 +++++-
+diff --git a/meta-oe/recipes-graphics/lvgl/files/0007-fix-cmake-generate-ve=
+rsioned-shared-libraries.patch b/meta-oe/recipes-graphics/lvgl/files/0007-f=
+ix-cmake-generate-versioned-shared-libraries.patch
+index 64468313a312..f5d39396fc5c 100644
+--- a/meta-oe/recipes-graphics/lvgl/files/0007-fix-cmake-generate-versioned=
+-shared-libraries.patch
++++ b/meta-oe/recipes-graphics/lvgl/files/0007-fix-cmake-generate-versioned=
+-shared-libraries.patch
+@@ -10,7 +10,7 @@ to make cmake add the version suffix to generated shared =
+libraries. That
+ changes the filename to liblvgl.so.9.1.0 and includes symlink with major
+ ABI version, i.e. liblvgl.so.9 .
+=20
+-Upstream-Status: Submitted [https://github.com/lvgl/lvgl/pull/5865]
++Upstream-Status: Backport [2c469279f53f9dee63d71295c6058749bc87ce73]
+ Signed-off-by: Marek Vasut <marex@denx.de>
+ ---
+  env_support/cmake/custom.cmake | 11 +++++++++++
+diff --git a/meta-oe/recipes-graphics/lvgl/files/0008-fix-fbdev-set-resolut=
+ion-prior-to-buffer.patch b/meta-oe/recipes-graphics/lvgl/files/0008-fix-fb=
+dev-set-resolution-prior-to-buffer.patch
+index 449db53dfbf0..5cafb41d563f 100644
+--- a/meta-oe/recipes-graphics/lvgl/files/0008-fix-fbdev-set-resolution-pri=
+or-to-buffer.patch
++++ b/meta-oe/recipes-graphics/lvgl/files/0008-fix-fbdev-set-resolution-pri=
+or-to-buffer.patch
+@@ -6,7 +6,7 @@ Subject: [PATCH] fix(fbdev): set resolution prior to buffer
+ Otherwise it ends up with using the default value 800x480 and may fail
+ at lv_display_set_buffers due to incorrect resolution.
+=20
+-Upstream-Status: Submitted [https://github.com/lvgl/lvgl/pull/6004]
++Upstream-Status: Backport [29662d1c357c15135d076a2a924b9ef056c82120]
+ Signed-off-by: Jaeyoon Jung <jaeyoon.jung@lge.com>
+ ---
+=20
+--=20
+2.43.0
 
-Have you tried to compare preprocessed output from g++ from qemuarm
-and qemuarm64 to see if there is some strange difference? The code
-where color_set_not_const is used looks simple enough, but maybe some
-REQUIRE* macro expansion does more than it looks in
-https://github.com/search?q=3Drepo%3ANeargye%2Fmagic_enum+color_set_not_con=
-st&type=3Dcode
-
-Regards,
-
-On Thu, Jun 27, 2024 at 9:00=E2=80=AFAM Jonas Mark (BT-FS/ENG1-GRB)
-<mark.jonas@de.bosch.com> wrote:
->
-> Hi Martin,
->
-> Thank you for making us aware of the problem when compiling the ptest. We=
- were able to reproduce the problem when compiling for qemuarm. We were not=
- able to spot the problem on the autobuilder. How did you trigger the probl=
-em?
->
-> We looked into it and have to admit that we cannot explain why g++ 14.1.0=
- trips over that line.
->
-> - It is perfectly legal C++ 17.
-> - It compiles without that warning error for other machines, i.e. qemux86=
-, qemux86-64, qemuarm64.
-> - It does not act up with g++ 11.4 (Kirkstone) with qemuarm, our own NXP =
-i.MX6 machine, or any other machine we tried.
->
-> The problem can be mitigated by replacing the offending line
->
-> magic_enum::containers::set color_set_not_const {Color::RED, Color::GREEN=
-, Color::BLUE};
->
-> with
->
-> magic_enum::containers::set color_set_not_const =3D {Color::RED, Color::G=
-REEN, Color::BLUE};
->
-> We are working on sending a patch for the recipe containing a patch for m=
-agic_enum to the OE mailing list (this one).
->
-> We already got in contact with the upstream magic_enum project.
->
-> https://github.com/Neargye/magic_enum/issues/362
->
-> Cheers,
-> Mark
->
->
-> Building Technologies, Panel Software Fire (BT-FIR/ENG1-Grb)
-> Bosch Sicherheitssysteme GmbH | Postfach 11 11 | 85626 Grasbrunn | GERMAN=
-Y | www.boschsecurity.com
->
-> Sitz: Stuttgart, Registergericht: Amtsgericht Stuttgart HRB 23118
-> Aufsichtsratsvorsitzender: Frank Meyer; Gesch=C3=A4ftsf=C3=BChrung: Thoma=
-s Quante, Peter L=C3=B6ffler, Henrik Siegle, Peter von Wartenberg
->
-> > -----Urspr=C3=BCngliche Nachricht-----
-> > Von: Martin Jansa <martin.jansa@gmail.com>
-> > Gesendet: Mittwoch, 26. Juni 2024 17:53
-> > An: Jonas Mark (BT-FS/ENG1-GRB) <mark.jonas@de.bosch.com>
-> > Cc: openembedded-devel@lists.openembedded.org; raj.khem@gmail.com;
-> > Simoes Ricardo (BT-FS/ENG1.1-Ovr) <ricardo.simoes@pt.bosch.com>
-> > Betreff: Re: [oe] [meta-oe][PATCH] magic-enum: add recipe
-> >
-> > ptest seems to fail building
-> >
-> > lib32-magic-enum/0.9.5/git/test/test_containers.cpp:290:89: error:
-> > value computed is not used [-Werror=3Dunused-value]
-> >   290 |   magic_enum::containers::set color_set_not_const {Color::RED,
-> > Color::GREEN, Color::BLUE};
-> >       |
-> >                          ^
-> >
-> > On Wed, Jun 19, 2024 at 11:47=E2=80=AFAM Mark Jonas via lists.openembed=
-ded.org
-> > <mark.jonas=3Dde.bosch.com@lists.openembedded.org> wrote:
-> > >
-> > > From: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
-> > >
-> > > magic-enum is a header-only C++17 library provides static reflection
-> > > for enums, works with any enum type without any macro or boilerplate
-> > > code.
-> > >
-> > > Signed-off-by: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
-> > > Signed-off-by: Mark Jonas <mark.jonas@de.bosch.com>
-> > > ---
-> > >  .../magic-enum/magic-enum/run-ptest           | 27 ++++++++++++
-> > >  .../magic-enum/magic-enum_0.9.5.bb            | 44
-> > +++++++++++++++++++
-> > >  2 files changed, 71 insertions(+)
-> > >  create mode 100644
-> > > meta-oe/recipes-extended/magic-enum/magic-enum/run-ptest
-> > >  create mode 100644
-> > > meta-oe/recipes-extended/magic-enum/magic-enum_0.9.5.bb
-> > >
-> > > diff --git a/meta-oe/recipes-extended/magic-enum/magic-enum/run-
-> > ptest
-> > > b/meta-oe/recipes-extended/magic-enum/magic-enum/run-ptest
-> > > new file mode 100644
-> > > index 000000000..865da9f69
-> > > --- /dev/null
-> > > +++ b/meta-oe/recipes-extended/magic-enum/magic-enum/run-ptest
-> > > @@ -0,0 +1,27 @@
-> > > +#!/bin/sh
-> > > +
-> > > +# SPDX-FileCopyrightText: 2024 Bosch Sicherheitssysteme GmbH # #
-> > > +SPDX-License-Identifier: MIT
-> > > +
-> > > +fail_count=3D0
-> > > +all_count=3D0
-> > > +
-> > > +for test_suite in tests/test_*
-> > > +do
-> > > +    if "./$test_suite"
-> > > +    then
-> > > +        echo "PASS: $test_suite"
-> > > +    else
-> > > +        echo "FAIL: $test_suite"
-> > > +        fail_count=3D$((fail_count + 1))
-> > > +    fi
-> > > +    all_count=3D$((all_count + 1))
-> > > +done
-> > > +
-> > > +if [ $fail_count -eq 0 ]
-> > > +then
-> > > +    echo "PASS: All $all_count tests passed"
-> > > +else
-> > > +    echo "FAIL: $fail_count of $all_count tests failed"
-> > > +fi
-> > > diff --git a/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.5.bb
-> > > b/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.5.bb
-> > > new file mode 100644
-> > > index 000000000..096f869c3
-> > > --- /dev/null
-> > > +++ b/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.5.bb
-> > > @@ -0,0 +1,44 @@
-> > > +# SPDX-FileCopyrightText: 2024 Bosch Sicherheitssysteme GmbH # #
-> > > +SPDX-License-Identifier: MIT
-> > > +
-> > > +SUMMARY =3D "Static reflection for enums"
-> > > +DESCRIPTION =3D "Header-only C++17 library provides static reflectio=
-n
-> > > +for enums, works \ with any enum type without any macro or
-> > boilerplate code."
-> > > +BUGTRACKER =3D
-> > "https://eur03.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fgi=
-t
-> > hub.com%2FNeargye%2Fmagic_enum%2Fissues&data=3D05%7C02%7Cmark.jonas%40d=
-e
-> > .bosch.com%7C30c7277c5aa54b0fd67c08dc95f80c79%7C0ae51e1907c84e4bbb6d64
-> > 8ee58410f4%7C0%7C0%7C638550139794967735%7CUnknown%7CTWFpbGZsb3d8eyJWIj
-> > oiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C
-> > %7C&sdata=3DdTRcL1OePxuq8rbGeyR4SgdAjkLBeKX79lwaRns9pmQ%3D&reserved=3D0=
-"
-> > > +HOMEPAGE =3D
-> > "https://eur03.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fgi=
-t
-> > hub.com%2FNeargye%2Fmagic_enum&data=3D05%7C02%7Cmark.jonas%40de.bosch.c=
-o
-> > m%7C30c7277c5aa54b0fd67c08dc95f80c79%7C0ae51e1907c84e4bbb6d648ee58410f
-> > 4%7C0%7C0%7C638550139794976366%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjA
-> > wMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&sdata
-> > =3D6GyAhu2fPHE0jZyaohpwL6%2FkP70fly7o4Bfxs9oPdDQ%3D&reserved=3D0"
-> > > +
-> > > +LICENSE =3D "MIT"
-> > > +LIC_FILES_CHKSUM =3D
-> > "file://LICENSE;md5=3Db15f48588464ec8ef87d2b560aad2caa"
-> > > +
-> > > +SRC_URI =3D " \
-> > > +
-> > git://github.com/Neargye/magic_enum.git;protocol=3Dhttps;branch=3Dmaste=
-r \
-> > > +    file://run-ptest \
-> > > +"
-> > > +
-> > > +SRCREV =3D "e55b9b54d5cf61f8e117cafb17846d7d742dd3b4"
-> > > +S =3D "${WORKDIR}/git"
-> > > +
-> > > +inherit cmake ptest
-> > > +
-> > > +EXTRA_OECMAKE =3D "\
-> > > +    -DMAGIC_ENUM_OPT_BUILD_EXAMPLES=3DOFF \ "
-> > > +
-> > > +do_install_ptest () {
-> > > +    install -d ${D}${PTEST_PATH}/tests
-> > > +    install -m 0755 ${B}/test/test_* ${D}${PTEST_PATH}/tests }
-> > > +
-> > > +# Add catkin and colcon (ROS build system) support FILES:${PN}-dev
-> > +=3D
-> > > +"\
-> > > +    ${datadir}/magic_enum/package.xml \ "
-> > > +
-> > > +# Header-only library
-> > > +# ${PN} is empty so we need to tweak -dev and -dbg package
-> > > +dependencies RDEPENDS:${PN}-dev =3D ""
-> > > +RDEPENDS:${PN}-ptest =3D ""
-> > > +RRECOMMENDS:${PN}-dbg =3D "${PN}-dev (=3D ${EXTENDPKGV})"
-> > > +
-> > > +BBCLASSEXTEND =3D "native nativesdk"
-> > > --
-> > > 2.34.1
-> > >
-> > >
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > > Links: You receive all messages sent to this group.
-> > > View/Reply Online (#110963):
-> > >
-> > https://eur03.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Flis=
-t
-> > > s.openembedded.org%2Fg%2Fopenembedded-
-> > devel%2Fmessage%2F110963&data=3D05
-> > >
-> > %7C02%7Cmark.jonas%40de.bosch.com%7C30c7277c5aa54b0fd67c08dc95f80c79%7
-> > >
-> > C0ae51e1907c84e4bbb6d648ee58410f4%7C0%7C0%7C638550139794981698%7CUnkno
-> > >
-> > wn%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiL
-> > >
-> > CJXVCI6Mn0%3D%7C0%7C%7C%7C&sdata=3DaxWZTm%2FgV008AP6DiBtD1K3C6WXjF61ysA=
-f
-> > > bYxCOIMo%3D&reserved=3D0 Mute This Topic:
-> > >
-> > https://eur03.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Flis=
-t
-> > >
-> > s.openembedded.org%2Fmt%2F106757432%2F3617156&data=3D05%7C02%7Cmark.jon=
-a
-> > >
-> > s%40de.bosch.com%7C30c7277c5aa54b0fd67c08dc95f80c79%7C0ae51e1907c84e4b
-> > >
-> > bb6d648ee58410f4%7C0%7C0%7C638550139794985970%7CUnknown%7CTWFpbGZsb3d8
-> > >
-> > eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0
-> > >
-> > %7C%7C%7C&sdata=3Dzmi38YI4iiU%2BwuaA1OESxzOb2blMvJEyjv9c7rsH3uM%3D&rese=
-r
-> > > ved=3D0 Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > > Unsubscribe:
-> > >
-> > https://eur03.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Flis=
-t
-> > > s.openembedded.org%2Fg%2Fopenembedded-
-> > devel%2Funsub&data=3D05%7C02%7Cmar
-> > >
-> > k.jonas%40de.bosch.com%7C30c7277c5aa54b0fd67c08dc95f80c79%7C0ae51e1907
-> > >
-> > c84e4bbb6d648ee58410f4%7C0%7C0%7C638550139794990014%7CUnknown%7CTWFpbG
-> > >
-> > Zsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%
-> > >
-> > 3D%7C0%7C%7C%7C&sdata=3DUFlwDFcdmqLHREOjshbhtNrFIkK07k9wMUVtIpMTrsk%3D&=
-r
-> > > eserved=3D0 [martin.jansa@gmail.com]
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > >
 
