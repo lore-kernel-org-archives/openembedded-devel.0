@@ -1,56 +1,56 @@
-Return-Path: <gudni.m.g@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CB668C2BD09
-	for <webhook@archiver.kernel.org>; Thu, 27 Jun 2024 22:41:21 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.web10.5045.1719528080964076018
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D80D3C2BD09
+	for <webhook@archiver.kernel.org>; Thu, 27 Jun 2024 22:45:21 +0000 (UTC)
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.web11.5039.1719527990840734080
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jun 2024 15:41:21 -0700
+ Thu, 27 Jun 2024 15:39:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=l4hu/9G+;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: gudni.m.g@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4256742f67fso8340795e9.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Jun 2024 15:41:20 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OYhu86cy;
+ spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: gudni.m.g@gmail.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-424ad289949so22631135e9.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Jun 2024 15:39:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1719528079; x=1720132879; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1719527989; x=1720132789; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
         bh=Hi0WX1b7ZvmPl5wsp87N4fhJqzOMmACYY0F1O56PdnE=;
-        b=l4hu/9G+EPRXOINdgRZyDK6RmlE0UhsO1rn8e3FHmO+/Mz0xpDhgH/++h56nWHTgJa
-         ZUMpZjQFM3uUmuQoMtQI+1EqKCeetcITHFinm1teRWZIjVrdXdmxVYlMNW/fs0KNC6un
-         i0SDg30QzqwPx6AicVRsuPFiZX+AAjgPV4i05Kd6RifcmOiWVDhwFo8tQ4qu32KWf3+S
-         cEFeKpTkJE3j2md0th6m9riR6EdAXfZPDi1IFAi3fc4ys44/9rXz61b9r7wo64PLeNUI
-         jN+zblkWCQtVoWV+7XoORypfsCcE4CpckIrOy8OM41l+juEgxrDS69MZ5EUVIPDRT6w/
-         7BQA==
+        b=OYhu86cy4WnV6Ol6E6KdpdgJrPd1F+PyQjUcmh/nUmnfVXg626HqrxnKWBqBF9MUSB
+         XMqEQlFnzo6d2EEZAuq2se/Y0iEDKK0EvlpDJH53w/Rk3BdTvIbWj67gqmC8nRxQqMbR
+         RhqGwAESe4fNicWlaY9fwMYKRcExLzD/2WcntRNbSR69CuPne/7eNSkcR/WgjthlKdGS
+         aMZz8n0yQOWR/gjUew9xtoTBq9rl/OMtgoJLQAZ5OOLrX5ow6haDlvRUSdOBDdzqxwge
+         4ivcUNfcF0Qlo80MnzkxxwIKYWHWXCppOAkKwYAyMToUTmhCt0ZvD6iRrioVep61ZCVd
+         7SSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719528079; x=1720132879;
+        d=1e100.net; s=20230601; t=1719527989; x=1720132789;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
         bh=Hi0WX1b7ZvmPl5wsp87N4fhJqzOMmACYY0F1O56PdnE=;
-        b=SZd1ctWIWp54FUYRtaP3c8DDLG5va997yfLkLIqnSfePwSmWMvUx/Roh4JI78h7Szq
-         jYD5i5qoKXd69n7eBQMbC1wj+nssTiuk/jXeG+zl6kKVUbUr243jVc25qd/oBtl1Mi+M
-         ODWYqJL4GQ5csmJRtZ7iEKQ5A9UcDawY8raNu7DFaEJgtrofTE5BTuCHto9xwZDnKFZa
-         jyUM+8vm/YfFawUgdwHkGPtaUyru+O/PlZTKmjl5dRTvjKArxA64ASxDH52CftiuXtLz
-         CSOdnkxbRv1KZIFywyyHPBB7bWxZ5BvQfAWeNcuFXVxywf/eiOHvNlEmS+K0J7lxDe3+
-         9tYA==
-X-Gm-Message-State: AOJu0YyyFsb7CVK+MXkOMDYgBwK2P2GL1yjZVRMwKmqcbEeFGKZIKoka
-	ekp0bjpHoB0b+a0z8L7NKVyv0fEghOtlyvpV/IWnqtjnpQkW9Z28t3FKsQ==
-X-Google-Smtp-Source: AGHT+IGE2JnvHBCa73e3qvNM0tcsfHetSb7GpamDTyrtQr3HuPtccDYiTqvK0x1p/lr9gdq0rcjb0g==
-X-Received: by 2002:a05:600c:89a:b0:425:68f0:623c with SMTP id 5b1f17b1804b1-42568f063f4mr10337705e9.8.1719528078944;
-        Thu, 27 Jun 2024 15:41:18 -0700 (PDT)
+        b=BdFNcAeQXNxukMxv8XtV68QshjLgCJ0jGnC6vTjUrlspAZdhd3fP/90PYeFw85K55z
+         yxfLtSU1BUltqGeYvaXBpfQSfC124C4QICU9jxRLAyW3dcOrBsn0qh6L2ExQ5sMtCZK6
+         tv4NumTu54QXB5M9OstP6uaKNqkVZMgDATgf5C/UXFe0y7LjlAQ3le9Hd1XUhRYUZdFl
+         QdiIlXfdRMJMYIidJKw2Q5fzIKPJuDwMVSP+784KLr2XxIdCqTB1SDFrRZHVsJbeDwuw
+         wfdXwK5ci96IK5bpkzrta2MMiRsPZl5hPPAtdC6QCXavDvoSUndprv5u3iL2ZytYWXYV
+         B+Mw==
+X-Gm-Message-State: AOJu0YyhSrkDts017q42guaYS6ODNFWp/bGA3Rx2535qS5lzeiuCjcSB
+	ehUgqbEXLjqE0kNceGniyrUQmROS+8gdi19XcGyY4IRQPksiX+GYXCBiWg==
+X-Google-Smtp-Source: AGHT+IEGEIEB/74a+vpagtaxmoUf8uvychXUTln+1RIRpv2g1xaHruIvkycAWWIjH77ixutBVimrqg==
+X-Received: by 2002:a05:600c:2e87:b0:425:5e8b:af9a with SMTP id 5b1f17b1804b1-4255e8bb07fmr46116555e9.36.1719527988499;
+        Thu, 27 Jun 2024 15:39:48 -0700 (PDT)
 Received: from gudni-virtual-machine.localdomain ([81.15.100.92])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4256b064f16sm9719935e9.27.2024.06.27.15.41.18
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4256b068e93sm9741835e9.24.2024.06.27.15.39.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 27 Jun 2024 15:41:18 -0700 (PDT)
-From: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudni.m.g@gmail.com>
+        Thu, 27 Jun 2024 15:39:48 -0700 (PDT)
+From: =?UTF-8?B?R3XDsG5pIE3DoXIgR2lsYmVydA==?= <gudni.m.g@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudni.m.g@gmail.com>
 Subject: [meta-python][PATCH] python3-bleak: upgrade 0.21.1 -> 0.22.2
-Date: Thu, 27 Jun 2024 22:41:12 +0000
-Message-Id: <20240627224112.198171-1-gudni.m.g@gmail.com>
+Date: Thu, 27 Jun 2024 22:38:54 +0000
+Message-Id: <20240627223854.198062-1-gudni.m.g@gmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -58,8 +58,8 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Jun 2024 22:41:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111131
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Jun 2024 22:45:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111132
 
 Changes to the build:
 - Drop python3-async-timeout which is only required for Python 3.10 and older.
