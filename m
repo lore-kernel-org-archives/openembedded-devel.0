@@ -1,112 +1,143 @@
-Return-Path: <philip@balister.org>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D80D3C2BD09
-	for <webhook@archiver.kernel.org>; Thu, 27 Jun 2024 22:45:21 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.web11.5039.1719527990840734080
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83697C30653
+	for <webhook@archiver.kernel.org>; Fri, 28 Jun 2024 00:32:32 +0000 (UTC)
+Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
+ by mx.groups.io with SMTP id smtpd.web11.7073.1719534746471235147
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jun 2024 15:39:51 -0700
+ Thu, 27 Jun 2024 17:32:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=OYhu86cy;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: gudni.m.g@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-424ad289949so22631135e9.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Jun 2024 15:39:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1719527989; x=1720132789; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Hi0WX1b7ZvmPl5wsp87N4fhJqzOMmACYY0F1O56PdnE=;
-        b=OYhu86cy4WnV6Ol6E6KdpdgJrPd1F+PyQjUcmh/nUmnfVXg626HqrxnKWBqBF9MUSB
-         XMqEQlFnzo6d2EEZAuq2se/Y0iEDKK0EvlpDJH53w/Rk3BdTvIbWj67gqmC8nRxQqMbR
-         RhqGwAESe4fNicWlaY9fwMYKRcExLzD/2WcntRNbSR69CuPne/7eNSkcR/WgjthlKdGS
-         aMZz8n0yQOWR/gjUew9xtoTBq9rl/OMtgoJLQAZ5OOLrX5ow6haDlvRUSdOBDdzqxwge
-         4ivcUNfcF0Qlo80MnzkxxwIKYWHWXCppOAkKwYAyMToUTmhCt0ZvD6iRrioVep61ZCVd
-         7SSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719527989; x=1720132789;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Hi0WX1b7ZvmPl5wsp87N4fhJqzOMmACYY0F1O56PdnE=;
-        b=BdFNcAeQXNxukMxv8XtV68QshjLgCJ0jGnC6vTjUrlspAZdhd3fP/90PYeFw85K55z
-         yxfLtSU1BUltqGeYvaXBpfQSfC124C4QICU9jxRLAyW3dcOrBsn0qh6L2ExQ5sMtCZK6
-         tv4NumTu54QXB5M9OstP6uaKNqkVZMgDATgf5C/UXFe0y7LjlAQ3le9Hd1XUhRYUZdFl
-         QdiIlXfdRMJMYIidJKw2Q5fzIKPJuDwMVSP+784KLr2XxIdCqTB1SDFrRZHVsJbeDwuw
-         wfdXwK5ci96IK5bpkzrta2MMiRsPZl5hPPAtdC6QCXavDvoSUndprv5u3iL2ZytYWXYV
-         B+Mw==
-X-Gm-Message-State: AOJu0YyhSrkDts017q42guaYS6ODNFWp/bGA3Rx2535qS5lzeiuCjcSB
-	ehUgqbEXLjqE0kNceGniyrUQmROS+8gdi19XcGyY4IRQPksiX+GYXCBiWg==
-X-Google-Smtp-Source: AGHT+IEGEIEB/74a+vpagtaxmoUf8uvychXUTln+1RIRpv2g1xaHruIvkycAWWIjH77ixutBVimrqg==
-X-Received: by 2002:a05:600c:2e87:b0:425:5e8b:af9a with SMTP id 5b1f17b1804b1-4255e8bb07fmr46116555e9.36.1719527988499;
-        Thu, 27 Jun 2024 15:39:48 -0700 (PDT)
-Received: from gudni-virtual-machine.localdomain ([81.15.100.92])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4256b068e93sm9741835e9.24.2024.06.27.15.39.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 27 Jun 2024 15:39:48 -0700 (PDT)
-From: =?UTF-8?B?R3XDsG5pIE3DoXIgR2lsYmVydA==?= <gudni.m.g@gmail.com>
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=PxXwNRqd;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1719534746; x=1751070746;
+  h=from:to:cc:subject:date:message-id;
+  bh=B9ZT3wmv5guldOnCcxdcm28ON4sFDHRfXH+NHXWA0dw=;
+  b=PxXwNRqdS2gF7WxFieJ0e4dkF5pWYNsFNyRf4HenTD1SGn/P5KRIkEzn
+   /0lByi4qebIyaCUcgAWKhhnzNB1S4swUsljeA+sCScNy2pZlDZE9vpbQQ
+   DUP4vvd6rVYuQYzti8+I5QSrZ/l9r94LVdXPAkYjeIot188n/GeFXlVDs
+   GMLnz4WmFCq+hbpPUG6XpK3L9yGqHdfaQk2V+h8blAINPWPCy521Xhmcq
+   J8iq9f0pSIxCZYEscCV9gTrvEe8Q+Yfxng+i3mFXMKAFo3grnHHFtU7CE
+   Hz80icbrUQs5kyPIdANFs10MIN5xC7scnnaeZ20JYFf5t7nAEXWlXYSqe
+   g==;
+X-IronPort-AV: E=McAfee;i="6700,10204,11116"; a="165156159"
+X-IronPort-AV: E=Sophos;i="6.09,167,1716217200"; 
+   d="scan'208";a="165156159"
+Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
+  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Jun 2024 09:32:23 +0900
+Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
+	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id DA4B5D8001
+	for <openembedded-devel@lists.openembedded.org>; Fri, 28 Jun 2024 09:32:21 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 28559D53E3
+	for <openembedded-devel@lists.openembedded.org>; Fri, 28 Jun 2024 09:32:21 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id A2EDB6BF41
+	for <openembedded-devel@lists.openembedded.org>; Fri, 28 Jun 2024 09:32:20 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 4C4E61A000B;
+	Fri, 28 Jun 2024 08:32:20 +0800 (CST)
+From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudni.m.g@gmail.com>
-Subject: [meta-python][PATCH] python3-bleak: upgrade 0.21.1 -> 0.22.2
-Date: Thu, 27 Jun 2024 22:38:54 +0000
-Message-Id: <20240627223854.198062-1-gudni.m.g@gmail.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-perl] [PATCH] libcurses-perl: upgrade 1.41 -> 1.45
+Date: Fri, 28 Jun 2024 08:32:15 +0800
+Message-Id: <1719534735-16932-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28486.003
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28486.003
+X-TMASE-Result: 10--0.234900-10.000000
+X-TMASE-MatchedRID: EzAtoNUuirijz0nOeth/ycA1DjooimoM9avse85ISVrT+1Zj+w66+nYW
+	2eXId8+t88cLohcr5LBgRWLzgh5fxi5dDCvWgzCwP0HVIeixJdBr2qJoNIuCjYHowpO8uJQP2d8
+	mtRIRsUMppiuzBwGFPsYoh/qEF/tVoYY7KoErjW8ReM8i8p3vgP/Ukuwze0bG/rvCkqsgk0Fxwb
+	cSvw9PteLzNWBegCW2U9w4XVXDWCYLbigRnpKlKZx+7GyJjhAU0veVCPdon+DcnIOepukjcfkB8
+	Zds3YqqD8XmFoHzRp8wWdlpEGxGH8G9vWh0b/VxbhSFjflAOoBYZa4N7+2k0D8tktHKR+YY7H2f
+	VekOqwmYL1KImKhq1ZuOe7yPCBvAf2OJxbAVgHQ+kK598Yf3Mg==
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Jun 2024 22:45:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111132
+ <openembedded-devel@lists.openembedded.org>; Fri, 28 Jun 2024 00:32:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111133
 
-Changes to the build:
-- Drop python3-async-timeout which is only required for Python 3.10 and older.
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelogs:
-* https://github.com/hbldh/bleak/releases/tag/v0.22.2
-* https://github.com/hbldh/bleak/releases/tag/v0.22.1
-* https://github.com/hbldh/bleak/releases/tag/v0.22.0
+0001-testtyp.c-Use-proper-prototype-for-main-function.patch
+refreshed for 1.45
 
-Signed-off-by: Guðni Már Gilbert <gudni.m.g@gmail.com>
+Changelog:
+============
+- Correct wide character data types to fix compile failure.
+- Implement A_ITALIC
+- Fix missing file introduced in 1.42 that prevents all builds from working.
+- Add missing return type declarations so it works with modern C compilers.
+- Rename test.syms program to testsyms, because it is a more conventional
+  name format.
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-bleak_0.21.1.bb => python3-bleak_0.22.2.bb}  | 8 ++------
- 1 file changed, 2 insertions(+), 6 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-bleak_0.21.1.bb => python3-bleak_0.22.2.bb} (74%)
+ ...-Use-proper-prototype-for-main-function.patch | 16 +++++++---------
+ ...urses-perl_1.41.bb => libcurses-perl_1.45.bb} |  2 +-
+ 2 files changed, 8 insertions(+), 10 deletions(-)
+ rename meta-perl/recipes-perl/libcurses/{libcurses-perl_1.41.bb => libcurses-perl_1.45.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bleak_0.21.1.bb b/meta-python/recipes-devtools/python/python3-bleak_0.22.2.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python3-bleak_0.21.1.bb
-rename to meta-python/recipes-devtools/python/python3-bleak_0.22.2.bb
-index 96f3fcbcf..36a823a9b 100644
---- a/meta-python/recipes-devtools/python/python3-bleak_0.21.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-bleak_0.22.2.bb
-@@ -3,13 +3,10 @@ HOMEPAGE = "https://github.com/hbldh/bleak"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=bcbc2069a86cba1b5e47253679f66ed7"
+diff --git a/meta-perl/recipes-perl/libcurses/libcurses-perl/0001-testtyp.c-Use-proper-prototype-for-main-function.patch b/meta-perl/recipes-perl/libcurses/libcurses-perl/0001-testtyp.c-Use-proper-prototype-for-main-function.patch
+index ab5af3fa8..37c81d9b8 100644
+--- a/meta-perl/recipes-perl/libcurses/libcurses-perl/0001-testtyp.c-Use-proper-prototype-for-main-function.patch
++++ b/meta-perl/recipes-perl/libcurses/libcurses-perl/0001-testtyp.c-Use-proper-prototype-for-main-function.patch
+@@ -17,24 +17,22 @@ int
+ Upstream-Status: Pending
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+- testtyp.c | 5 +++--
+- 1 file changed, 3 insertions(+), 2 deletions(-)
++ testtyp.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
  
--SRCREV = "054b092e19c7a45d5ea07d8948022f54117fe5e8"
--PYPI_SRC_URI = "git://github.com/hbldh/bleak.git;protocol=https;branch=develop"
-+SRC_URI[sha256sum] = "09010c0f4bd843e7dcaa1652e1bfb2450ce690da08d4c6163f0723aaa986e9fe"
+ diff --git a/testtyp.c b/testtyp.c
+-index 949c3d4..4042f73 100644
++index 469cc48..6a48a77 100644
+ --- a/testtyp.c
+ +++ b/testtyp.c
+-@@ -7,7 +7,8 @@
+- #define _XOPEN_SOURCE_EXTENDED 1  /* We expect wide character functions */
+- 
++@@ -10,6 +10,7 @@
+  #include "c-config.h"
+--
++ 
++ int
+ -main() {
+-+int
+ +main(int argc, char *argv[]) {
+    typedef SYM c_sym_t;
+ +  return 0;
+  }
+ -- 
+-2.37.3
++2.34.1
  
- inherit pypi python_poetry_core ptest
+diff --git a/meta-perl/recipes-perl/libcurses/libcurses-perl_1.41.bb b/meta-perl/recipes-perl/libcurses/libcurses-perl_1.45.bb
+similarity index 92%
+rename from meta-perl/recipes-perl/libcurses/libcurses-perl_1.41.bb
+rename to meta-perl/recipes-perl/libcurses/libcurses-perl_1.45.bb
+index 421823d9c..7951e0ddb 100644
+--- a/meta-perl/recipes-perl/libcurses/libcurses-perl_1.41.bb
++++ b/meta-perl/recipes-perl/libcurses/libcurses-perl_1.45.bb
+@@ -12,7 +12,7 @@ SRC_URI = "http://www.cpan.org/authors/id/G/GI/GIRAFFED/Curses-${PV}.tar.gz \
+            file://0001-testtyp.c-Use-proper-prototype-for-main-function.patch \
+            "
  
--S = "${WORKDIR}/git"
--
- SRC_URI += " \
- 	file://run-ptest \
- "
-@@ -26,8 +23,7 @@ do_install_ptest() {
- }
+-SRC_URI[sha256sum] = "fb9efea8c7b5ed5f8ea5dee49d35252accfc05ee6e75cb9a37ab7c847cd261d7"
++SRC_URI[sha256sum] = "84221e0013a2d64a0bae6a32bb44b1ae5734d2cb0465fb89af3e3abd6e05aeb2"
  
- RDEPENDS:${PN} += " \
--	python3-core (>3.7) \
--	python3-async-timeout \
-+	python3-core (>3.8) \
- 	python3-dbus-fast \
- 	python3-xml \
- "
+ S = "${WORKDIR}/Curses-${PV}"
+ 
 -- 
 2.34.1
 
