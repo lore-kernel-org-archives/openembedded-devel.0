@@ -1,117 +1,152 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CBDA3C2BD09
-	for <webhook@archiver.kernel.org>; Mon,  1 Jul 2024 18:14:13 +0000 (UTC)
-Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
- by mx.groups.io with SMTP id smtpd.web10.4111.1719857645061915458
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D929CC3065D
+	for <webhook@archiver.kernel.org>; Mon,  1 Jul 2024 18:20:03 +0000 (UTC)
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.web11.585.1719849608599403118
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Jul 2024 11:14:05 -0700
+ Mon, 01 Jul 2024 09:00:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XzRmJo+J;
- spf=pass (domain: gmail.com, ip: 209.85.210.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f51.google.com with SMTP id 46e09a7af769-700d29bb4e2so1527383a34.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jul 2024 11:14:04 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=U2XhvmhP;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: semc.2042@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-2c9357a2647so1481378a91.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jul 2024 09:00:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1719857642; x=1720462442; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=3uNF2ym7nN+ScieeyZ97L7qSItFJFoQ8URwZ8yafDlY=;
-        b=XzRmJo+J7nMpzdrOci+FCGWuTmPKp4rS/5lLOwfpcTXVzfPL8H+7UUaCx1ocsXuBkH
-         ryTLMAiG2QahB3HqsVjvtEYF5Hp+Xnl/2Knu1gRBLgDE/tZDqq4FjDpmlz8sqJ2ziBnK
-         QlYAnRHiyPv77wqPhW38bB5MoVQbids/e4iGXGeXlWANWEwJXTEaXhWRYwEDKHSOCRAL
-         /49VMyeOw76yKU88CujheeAIli5zC4dZdojhPBQLGIM8ru0arefyBqAw/8ADlYEtmQmN
-         pKhF6MCtRuSOOwPnjrME5qKgzXNsEf3Vwb9PYI4iNbj5qqmdxwzYraoZAzNwd4LUg2Fd
-         lbUg==
+        d=gmail.com; s=20230601; t=1719849608; x=1720454408; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=2CMBvZ3zfPsSBe1FvJvgYMk2wOeycTFy85uxsm077WI=;
+        b=U2XhvmhPpLCSCM1G65s/YHIb61IJLbItLFuPndio7tfrTjpP6NnH7FxojIcjLgHGlH
+         CG2HV8yuvavJE001Biag9ZN0HRx6Rk7/mSPGHISkPqU/fr2BCaD8DYZCN/GvT9Cdsdve
+         FY1UHmJ/0EnRO1JapW/41wNRV+oDTOIUxQlvmZc4DM8vRRCG34fZC9zyZp9U7fAOyCAp
+         4odceaYw8yTnBSiO/mxoUDvBMgXgDxds9j6bmaWGFR0olE7kjEETvDy6KQjgK7Gn45bU
+         Su0q/p3J10EZFAe5rvDP+bKc9sUFmWFipM04LB2WCknons4iGZAGAOEdYNBNYXBnButH
+         wVZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719857642; x=1720462442;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1719849608; x=1720454408;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=3uNF2ym7nN+ScieeyZ97L7qSItFJFoQ8URwZ8yafDlY=;
-        b=EvX/v0vuWhrXtYsL1kLRDWL/9TDdgRwx36PaNBsjE87/0lndDD0Oe9lifnwShIDF9b
-         LDMgEcPxGLB0VYA7rA7pYLDZKM1FxRZu9PlpRSp0vLvrx7MAzGSbMoehuoDel66bF06h
-         JEBmiKa4Cmv0W2nsz4txArtGR6Wo5ZsE2rGywoUIKorPKbxjHqqWUqRCKcareh7W6wZW
-         UWyLibGCsguVKm+wojv9asHZI3NYmswu4cXfGEaAp4bCcNU55KvCenYLh3Z+Mp/LRb6I
-         1dngpmBaWpgUaxxOKYdNV3HRhpcEJcUtyHVZPBYADXt2QGGQkdxxtuswT/pNlA2zc2ce
-         eekA==
-X-Gm-Message-State: AOJu0YwQk4+gHM/duvrTlAOggMF4NWmRdWfG2tJ5oSzb1N9qqr6c95Ww
-	Y7rKh23EafNq/ef4Uo4NtQ+PKmtcDw7GepoV5IGKchCEDsWsYJQp1oVemdhNpfIiU6pwUivrR/V
-	4qyp9wIIo0DX9bAV0BAXK891SxmU=
-X-Google-Smtp-Source: AGHT+IHcTiY2vqXFwoee6mdiA7CXtx0XxbjU/CawcpKhIB12ApgSJbEXbY2sef3bnI1dVr0Qb8m0032ugfkBaut2tyI=
-X-Received: by 2002:a05:6870:2195:b0:24f:d202:8ba3 with SMTP id
- 586e51a60fabf-25db34a937emr4159940fac.11.1719857642212; Mon, 01 Jul 2024
- 11:14:02 -0700 (PDT)
+        bh=2CMBvZ3zfPsSBe1FvJvgYMk2wOeycTFy85uxsm077WI=;
+        b=rukxHQadt3xfb8BZV2ngLraXLkQCZWZiXwxxEsEA5ILz4fnapaiqYltaYXFDTeS6DB
+         n8/YKswRxyV9fI2iV49Ajc5cdco7iXqysGXrh9IatHc3ZywCP7UCNM8Sv6lsQEXDGgIx
+         2OF5hVZ8BkKQ3kTCO8A0m+PcxGDt+4EP9Ktk7vDbYbBnFuCfbuw/vrrUqLZuRMyVc/PK
+         4F4OBxp4Q5/J+3cJEYLbnXTg8BhaEafShMs62LZoIE7YInkL4K0DHakehoUnLiN19eIC
+         oApEHP4LwqA6qUrRGIIhpBkMQ7wQ9OczOdlPCr8XbXej/Ig++VI0RksBcf+/Ju0+b0MJ
+         80Zg==
+X-Gm-Message-State: AOJu0Yw3I4dHL33OSd6dgCMXUbTVNOzzNm+fEG8MWcp3d4g4OVlVdkLK
+	OH1gD+j6XEdYM+3hKHCVrRO7H0xPwo5qGFKWvWpn6FRuFKaGie/hdgDLuA==
+X-Google-Smtp-Source: AGHT+IFb+z5mc/H0a1YBugeDcwp6iw+trszGYc1iHSQTdNRkNRf1p8Ri38XUfpJWrWGeS5hwSkgDIQ==
+X-Received: by 2002:a17:90a:3e82:b0:2c3:e8b:e0f8 with SMTP id 98e67ed59e1d1-2c93d719abemr3064667a91.20.1719849607727;
+        Mon, 01 Jul 2024 09:00:07 -0700 (PDT)
+Received: from L-16522.kpit.com ([49.207.233.105])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2c91ce5469dsm6977785a91.23.2024.07.01.09.00.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 01 Jul 2024 09:00:07 -0700 (PDT)
+From: "rajmohan r" <semc.2042@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	semc.2042@gmail.com
+Cc: ranjitsinh.rathod@kpit.com
+Subject: [meta-networking][PATCH] unbound: Add ptest for unbound
+Date: Mon,  1 Jul 2024 21:29:57 +0530
+Message-Id: <20240701155957.596288-1-semc.2042@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240630124721.64234-1-f_l_k@t-online.de> <CAMKF1srwPHUtw3sAOtu80dx8FYGLODTwMwGzH4z-L0+-70hfyw@mail.gmail.com>
- <SJ0YFS.8BMPV3P7F4SC@t-online.de> <CAMKF1spH=h0FudqGDMfVkbVOOz3tggv5VWJMEgSAqsTL+J2MJw@mail.gmail.com>
- <HQGYFS.OCZ5W8J5KO0Q1@t-online.de>
-In-Reply-To: <HQGYFS.OCZ5W8J5KO0Q1@t-online.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 1 Jul 2024 11:13:51 -0700
-Message-ID: <CAMKF1sqHQCUHNBYJVbYx-0rfgzbyRZyC+BdKP1CyGVaRtsQX_Q@mail.gmail.com>
-Subject: Re: [oe] [meta-multimedia][PATCH 1/2] pipewire: update 1.0.7 -> 1.2.0
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000d412bc061c338fdb"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 01 Jul 2024 18:14:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111204
+ <openembedded-devel@lists.openembedded.org>; Mon, 01 Jul 2024 18:20:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111206
 
---000000000000d412bc061c338fdb
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Adapt the compile 'test' phony target from Makefile and deploy as
+ptest for unbound.
+All test are successful on a trial and took around >9min and <10min.
+Duration of ptest execution was 587 seconds on an average.
 
-On Mon, Jul 1, 2024 at 10:31=E2=80=AFAM Markus Volk <f_l_k@t-online.de> wro=
-te:
+Signed-off-by: rajmohan r <semc.2042@gmail.com>
+---
+ .../recipes-support/unbound/unbound/run-ptest | 17 ++++++++++++++
+ .../recipes-support/unbound/unbound_1.20.0.bb | 23 +++++++++++++++++--
+ 2 files changed, 38 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-support/unbound/unbound/run-ptest
 
-> On Mon, Jul 1 2024 at 07:58:28 AM -07:00:00, Khem Raj <raj.khem@gmail.com=
->
-> wrote:
->
-> riscv32/armv5/mips/ppc32 perhaps is all we care.
->
->
-> # Specify linking with -latomic on architectures missing 64bit atomics.
-> LDFLAGS +=3D "${@bb.utils.contains_any('TUNE_FEATURES', 'riscv32 armv5 mi=
-ps
-> ppc32 m32', '-latomic', '', d)}"
->
-> Would that be enough for now? According to my tests, it fixes the problem
-> for clang i686-poky-linux-musl.
->
+diff --git a/meta-networking/recipes-support/unbound/unbound/run-ptest b/meta-networking/recipes-support/unbound/unbound/run-ptest
+new file mode 100644
+index 000000000..433a687c6
+--- /dev/null
++++ b/meta-networking/recipes-support/unbound/unbound/run-ptest
+@@ -0,0 +1,17 @@
++#!/bin/sh
++
++cd tests || exit 1
++retVal=0
++./unittest
++./testbound -s
++for x in ./testdata/*.rpl; do
++	output="$(./testbound -p $x -o -vvvvv 2>&1)"
++        if test $? -eq 0; then
++                echo "$x :Pass"
++        else
++                echo "$output"
++                echo "$x :Fail"
++                retVal=1
++        fi
++done
++exit $retVal
+diff --git a/meta-networking/recipes-support/unbound/unbound_1.20.0.bb b/meta-networking/recipes-support/unbound/unbound_1.20.0.bb
+index fe0111f59..cb4ac04dd 100644
+--- a/meta-networking/recipes-support/unbound/unbound_1.20.0.bb
++++ b/meta-networking/recipes-support/unbound/unbound_1.20.0.bb
+@@ -9,10 +9,12 @@ SECTION = "net"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
+ 
+-SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=branch-1.20.0"
++SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=branch-1.20.0 \
++           file://run-ptest \
++          "
+ SRCREV = "b9525c5fd47ba481a29b90109017d2253beb105d"
+ 
+-inherit autotools pkgconfig systemd update-rc.d
++inherit autotools pkgconfig systemd update-rc.d ptest
+ 
+ DEPENDS = "openssl libtool-native bison-native expat"
+ RDEPENDS:${PN} = "bash openssl-bin daemonize"
+@@ -32,6 +34,10 @@ do_configure:append() {
+ 	sed -i -e 's#${RECIPE_SYSROOT}##g' ${B}/config.h
+ }
+ 
++do_compile:append() {
++        oe_runmake tests
++}
++
+ do_install:append() {
+ 	install -d ${D}${systemd_unitdir}/system
+ 	install -m 0644 ${B}/contrib/unbound.service ${D}${systemd_unitdir}/system
+@@ -40,6 +46,19 @@ do_install:append() {
+ 	install -m 0755 ${S}/contrib/unbound.init_yocto ${D}${sysconfdir}/init.d/unbound
+ }
+ 
++do_install_ptest() {
++        install -d ${D}${PTEST_PATH}/tests
++        install -d ${D}${PTEST_PATH}/tests/testdata
++
++        install -m 0544 ${B}/unittest ${D}${PTEST_PATH}/tests/
++        install -m 0544 ${B}/testbound ${D}${PTEST_PATH}/tests/
++        install -m 0664 ${S}/testdata/test_signatures* ${D}${PTEST_PATH}/tests/
++        install -m 0664 ${S}/testdata/test_sigs* ${D}${PTEST_PATH}/tests/
++        install -m 0664 ${S}/testdata/test_ds* ${D}${PTEST_PATH}/tests/
++        install -m 0664 ${S}/testdata/test_nsec3_hash* ${D}${PTEST_PATH}/tests/
++        install -m 0644 ${S}/testdata/*.rpl ${D}/${PTEST_PATH}/tests/testdata/
++}
++
+ SYSTEMD_SERVICE:${PN} = "${BPN}.service"
+ 
+ INITSCRIPT_NAME = "unbound"
+-- 
+2.34.1
 
-Yeah but maybe using arch overrides would be more familiar
-
->
-
---000000000000d412bc061c338fdb
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Mon, Jul 1, 2024 at 10:31=E2=80=AFAM Markus Volk &lt;<a =
-href=3D"mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt; wrote:<br></div=
-><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1=
-px #ccc solid;padding-left:1ex"><div id=3D"m_8490853544772660701geary-body"=
- dir=3D"auto">On Mon, Jul 1 2024 at 07:58:28 AM -07:00:00, Khem Raj &lt;<a =
-href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>=
-&gt; wrote:<br><blockquote type=3D"cite"><div style=3D"white-space:break-sp=
-aces">riscv32/armv5/mips/ppc32 perhaps is all we care.</div></blockquote><d=
-iv><br></div><div><div># Specify linking with -latomic on architectures mis=
-sing 64bit atomics.</div><div>LDFLAGS +=3D &quot;${@bb.utils.contains_any(&=
-#39;TUNE_FEATURES&#39;, &#39;riscv32 armv5 mips ppc32 m32&#39;, &#39;-latom=
-ic&#39;, &#39;&#39;, d)}&quot;</div></div><div><br></div><div>Would that be=
- enough for now? According to my tests, it fixes the problem for clang i686=
--poky-linux-musl.</div></div></blockquote><div dir=3D"auto"><br></div><div =
-dir=3D"auto">Yeah but maybe using arch overrides would be more familiar=C2=
-=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;borde=
-r-left:1px #ccc solid;padding-left:1ex"><div id=3D"m_8490853544772660701gea=
-ry-body" dir=3D"auto"><div dir=3D"auto"></div></div></blockquote></div></di=
-v>
-
---000000000000d412bc061c338fdb--
 
