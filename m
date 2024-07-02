@@ -2,61 +2,61 @@ Return-Path: <sdoshi@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BDA32C31D97
-	for <webhook@archiver.kernel.org>; Tue,  2 Jul 2024 18:08:40 +0000 (UTC)
-Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com [209.85.219.171])
- by mx.groups.io with SMTP id smtpd.web10.31329.1719943711845799352
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AB235C30658
+	for <webhook@archiver.kernel.org>; Tue,  2 Jul 2024 18:09:10 +0000 (UTC)
+Received: from mail-yb1-f170.google.com (mail-yb1-f170.google.com [209.85.219.170])
+ by mx.groups.io with SMTP id smtpd.web11.31837.1719943742381062597
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Jul 2024 11:08:31 -0700
+ Tue, 02 Jul 2024 11:09:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=gNdnyxjL;
- spf=pass (domain: mvista.com, ip: 209.85.219.171, mailfrom: sdoshi@mvista.com)
-Received: by mail-yb1-f171.google.com with SMTP id 3f1490d57ef6-dfef5980a69so5015456276.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Jul 2024 11:08:31 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=OvAH7J/i;
+ spf=pass (domain: mvista.com, ip: 209.85.219.170, mailfrom: sdoshi@mvista.com)
+Received: by mail-yb1-f170.google.com with SMTP id 3f1490d57ef6-dff1ccdc17bso4666490276.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Jul 2024 11:09:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1719943710; x=1720548510; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1719943741; x=1720548541; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=a0ANg9+bGciYhdVpopGLZ8VPtAUtshXNtaMRNKgNXPU=;
-        b=gNdnyxjLHYlNR4U5Y2semR65vwi5j2qc2RSFk5n/F50O5nWL2M/qbemN/JZ+y/RdoE
-         tltATZMfc5f3774E8iF3V9GsQyB4FYtK4V/n0GcOTY4FMLNmqu58BVknf311X2zMvP4l
-         GR2hVU25TZfRE0+VB7Tqf0ouiObKsfHP9KtcM=
+        bh=l+4ye4Km6ARtXLa3H9dFO3JSSZEwOXTU6maW2GKQ5F8=;
+        b=OvAH7J/iOFsT4WmDaiKAade82jGzsx6WyWUoBNQ2vgCJv1Jl+J6dCJbF75CTNpk1KR
+         0Cof+920lpwwewDoVmfmJZXgn9fJvtGjwfQ0jkLx6O9eRd3nDa37KQwDfDgTXQ7Iz82K
+         i3+JL3H+oM0pd6X+lyFVDrST/oYdHMOVaniMU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719943710; x=1720548510;
+        d=1e100.net; s=20230601; t=1719943741; x=1720548541;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=a0ANg9+bGciYhdVpopGLZ8VPtAUtshXNtaMRNKgNXPU=;
-        b=a2ZW0A35IQEOIFbupJSp60PSXCfoD588sqVg84TYKZz74m1ORQrw5zsyq7E5UtrsvR
-         XHQijZevwd1oeJRX4cbCcaN/OXiUV7stqlg5TiWYTBOVVdxnH40FKVS3LvaqqhMxVCcR
-         Tm9RaNMYB6Dvlflut+YhFdmENeOcX0vURui+/eFEC7QaKGcF7naUQO9531UfMnDUivSB
-         ThRJrDA45gf0/1GlsFeESoW95INWOvs/Gaz1dClu2smDQOL2OGF61mVUV9bOx1EwHBvA
-         FLE4BTGxX2i2a2GZfnG9kBxpsFkl7stqRWmDIYF/VNz3SDSMn0yqseufPbOpV1O1Q080
-         hpyg==
-X-Gm-Message-State: AOJu0YwjeajEcOV/uZHKht+GrjjX+KxDGlSsU8Y1QWBt7hANjWank8w7
-	xkFvvQgwYdkD2aDcCtMWbyse27cLFh2TfzOKjrVG2Xnbx/qdopWZI5JYgK4zVEyxGf1mI7lmlG/
-	d
-X-Google-Smtp-Source: AGHT+IFX0y3cMlkPNCVlBu4eKp8yHjMc3/49+u2waivcbHN/1AqUqPh+Y5JTKJ0YlBPtjM8V6crZZw==
-X-Received: by 2002:a05:6902:2ca:b0:e02:9b7b:8706 with SMTP id 3f1490d57ef6-e036eb76cc4mr9779300276.30.1719943710345;
-        Tue, 02 Jul 2024 11:08:30 -0700 (PDT)
+        bh=l+4ye4Km6ARtXLa3H9dFO3JSSZEwOXTU6maW2GKQ5F8=;
+        b=NVhxriC+5lHSZvb51Nid+vEmsztdZHmSkDUSVw7V1pRFh9I2LStElOod5JTQ8hb1Yt
+         T4YIRzOfNrJkv4epFInrYfn2KPZSwKStcjQxZm967dCmPC+aIQzckapoKWNlxp1d1SDu
+         FXPq1hV82XUIPyjVebGHo70f3ycw8MP0Bfi2i6O/viqXBOa312xxTVuh0TDP6ZWPQtuu
+         LAUCPX1M7ORlY0yFlJ9Z1WapFu4kjOPX5E8ruwiQKmWgrO6rrLmRXGBHKgXt2JlitEvM
+         S+8klFr6/zdPrVbAqpr5IN1AEocZFrwtmBkD0e/VD36xr9vVwovQcWpXAOax8bg62na0
+         PrwA==
+X-Gm-Message-State: AOJu0YywpZJsLD3ufCWb6Cu+ZaNzDoZboGeWHiJYjYo707YPNAeEXYZa
+	Lzl/DmCoXHJQoPGyafEuFYTKBkt+ooGqI6kXGP8YVSvxSC7QbtJX9nyGnc6qvJbNWmuxIaVYJpI
+	u
+X-Google-Smtp-Source: AGHT+IEQFSvWNbo/h+3tBAa1T1b7m8m9JpfMjTFOb40XjseYrZU5CK7yrOO+62kJvP8vvdDeUqJQHQ==
+X-Received: by 2002:a25:ab81:0:b0:e03:5d43:d43a with SMTP id 3f1490d57ef6-e036ec45466mr10480592276.42.1719943741296;
+        Tue, 02 Jul 2024 11:09:01 -0700 (PDT)
 Received: from siddharth-latitude-3420.mvista.com ([157.32.44.151])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e0353ea8e76sm1707896276.32.2024.07.02.11.08.27
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e039f69bd13sm261088276.19.2024.07.02.11.08.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Jul 2024 11:08:30 -0700 (PDT)
+        Tue, 02 Jul 2024 11:09:01 -0700 (PDT)
 From: Siddharth <sdoshi@mvista.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Siddharth Doshi <sdoshi@mvista.com>
-Subject: [meta-oe][scarthgap][PATCH] apache2: Upgrade 2.4.59 -> 2.4.60
-Date: Tue,  2 Jul 2024 23:38:18 +0530
-Message-Id: <20240702180818.94810-1-sdoshi@mvista.com>
+Subject: [meta-oe][kirkstone][PATCH] apache2: Upgrade 2.4.59 -> 2.4.60
+Date: Tue,  2 Jul 2024 23:38:49 +0530
+Message-Id: <20240702180849.94880-1-sdoshi@mvista.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Jul 2024 18:08:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111215
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 Jul 2024 18:09:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111216
 
 From: Siddharth Doshi <sdoshi@mvista.com>
 
@@ -84,7 +84,7 @@ diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.59.bb b/meta-webse
 similarity index 99%
 rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.59.bb
 rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.60.bb
-index b96e8b4e1..a0dc3d831 100644
+index 7740b4e33..2786d0e13 100644
 --- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.59.bb
 +++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.60.bb
 @@ -27,7 +27,7 @@ SRC_URI:append:class-target = " \
