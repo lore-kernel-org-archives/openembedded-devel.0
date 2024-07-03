@@ -1,147 +1,174 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ninette@neighbourhood.ie>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C052CC2BD09
-	for <webhook@archiver.kernel.org>; Wed,  3 Jul 2024 17:53:27 +0000 (UTC)
-Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com [209.85.161.42])
- by mx.groups.io with SMTP id smtpd.web11.57567.1720029198149944720
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3F49C30653
+	for <webhook@archiver.kernel.org>; Wed,  3 Jul 2024 18:10:27 +0000 (UTC)
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+ by mx.groups.io with SMTP id smtpd.web11.57937.1720030224354106579
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Jul 2024 10:53:18 -0700
+ Wed, 03 Jul 2024 11:10:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=DSEi03py;
- spf=pass (domain: gmail.com, ip: 209.85.161.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f42.google.com with SMTP id 006d021491bc7-5b97a9a9b4bso2251820eaf.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Jul 2024 10:53:18 -0700 (PDT)
+ dkim=pass header.i=@thehoodiefirm-com.20230601.gappssmtp.com header.s=20230601 header.b=ARYBPmId;
+ spf=neutral (domain: thehoodiefirm.com, ip: 209.85.208.50, mailfrom: ninette@thehoodiefirm.com)
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-58b0dddab63so4311307a12.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Jul 2024 11:10:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1720029197; x=1720633997; darn=lists.openembedded.org;
+        d=thehoodiefirm-com.20230601.gappssmtp.com; s=20230601; t=1720030223; x=1720635023; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=01RFGCSXrA2r2JFmFIfWyYR6ildje4SA1dMqKq/kM3A=;
-        b=DSEi03py8Yvt9Km1XGTULwE1IAFKzc1Zo6JBP+yA4gAILfrVcQIUjidRd38Io0zLyK
-         /M+RN771+5jPfXa0H9ak9K0sRTIQP9OYqv72iSS0aJmKP6AnSqX3ZIXq3lX1YgGPiQio
-         5FyP0uVwUVTpdwtIbpdQ/8y7g/27VXgBKttHLvHYxeGVBMRNXAcnmKWEBtg5nCGyCedi
-         eWVdVZyoguDZmIThjOhU/sQoshLYlrvA+FxGYkJbe7ZhFtLIfneY+oIg+pBBGJJkIuuG
-         i3OcFO0oX+WWRoZv7PNvdtE1GsmhsZjfafrO5kU6uXf8U4A2j3+OVHoVwO/OAZ/FRRob
-         84TA==
+        bh=qy++w0EvffpvOQ6PE/xT9+wPEMP3/cVYjScVrXa1XMQ=;
+        b=ARYBPmIdIotVkpkbH+AIeEhpX0bULJRC7rBLMLn9vm2lcNXAi+WfebHZJQ7HegxHiF
+         m8pCtYNsNSnG1duKP6vpNPBikqi3pNuzCg6ENsOg8q+KW3K0bSUxx4vuRrQ55tUwnrbH
+         0PvdUUaumDQOkfarME39AcOKt7enWwDufwJYedBkN0uWKZtDNQe/UbuAaw8Ule01WoRY
+         zv4MusnwHs2vrqvgJQ5PEp5QvtoFPp5J5I8pAN3aNayrqo7OuYNQ4p0/YSNkid4O7BY7
+         PYAi9jPl1Vjwcq2tf9DIkdkoTWDi+eLiCBdGorxIMXG2UWYFdu6dlYBld4fj29noMn0N
+         jQuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720029197; x=1720633997;
+        d=1e100.net; s=20230601; t=1720030223; x=1720635023;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=01RFGCSXrA2r2JFmFIfWyYR6ildje4SA1dMqKq/kM3A=;
-        b=uTy+sSksKVEygFvHLmjfp3C9tqSwfGGeI8QfDaaN99/cRKrnFv80R9McKoWVsIM/ff
-         +nhtsAxaOOAoKZEM8jlkILDdadnPZ7CrWCI5oh00uEMKDO9Hpb3euLstKLODjwWpO9qj
-         XOgYG5BZm4aFoL86Ct4N0NsrncAfL58rni5vqyh313O5GaCPnt0tu01yyZJoHQfvru8c
-         3MmmuiOh3j8YHeb6JmWqeR7z2WiqXXlPMx/bMzFjBJrnExh7aF7hptVUHt0DXo+lRFRy
-         gCJSNXkMPKztFpG6k3LzU0BFFVzOv1w7yAzqaxD1NEin24n1KVZnPJuIMmmOEQkIVx5V
-         /0UQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXYjQ1L/0MbGBabLCMJR1Iw4jPv6hahjACNHhynrktOMgukT1i1zhsljvY4hoJ3dP4Vmi6ezzh1dRU+R1qk/9zBNrBJW5ZscZ3DMsiTNpqS3iXYfPncWD+Nxw==
-X-Gm-Message-State: AOJu0Yyz1UlgOkJe9aSm/djP9tAuIY0B+/6I/GnIgbMy5UQs920MfeQT
-	3ifMIvneA9q9CWEeOoCLIwZe/V2TrjIj9cu1E4w/kzhbVcUPuPFJfMFPuU8fN2NBp1fheVPGUy1
-	28mP2XceR370A+m3vr6yc6ig4zkNVnw==
-X-Google-Smtp-Source: AGHT+IE1SOT3M/wtOU/yGURmocRkrj4+KFKTAwiQWmyRkNddI6/82Myd66nkX8cb4M23r2CdDZpf4RYddZSkw+HsJpI=
-X-Received: by 2002:a05:6871:58a8:b0:254:a613:1907 with SMTP id
- 586e51a60fabf-25db362e353mr10360486fac.56.1720029197163; Wed, 03 Jul 2024
- 10:53:17 -0700 (PDT)
+        bh=qy++w0EvffpvOQ6PE/xT9+wPEMP3/cVYjScVrXa1XMQ=;
+        b=E38/rKSKonb0yf7xtCmyTGIIxrBvMg99poji0R25/aFNpvOVw0unairZ/Hvz3CO2QY
+         CjDsdDwIM9aegJ0txDQjduhjFoXp8mbKkf/T13ILFMCWot90Amt8yVrxYcJnDRXV9qiW
+         I5pm4IziiYVvk8Z5Gl+JQr+B4BJrFN5jV7a/m3IT83WpL898J3AuFJMUCAJENniZ/RzH
+         +5xqWb9k37tp4nheepWHnR0vuMJdVfm0yHzB8/tlciwTsBRpZEVo2yOv93UewjeVSm9y
+         nKF03QSRqgEXqPebnZWTaF7SxOaiAakGCQvZhQJV6PMZ+adGH1qP/aI408hIdz0moqMK
+         Kj0A==
+X-Forwarded-Encrypted: i=1; AJvYcCUPzYM7pc3YHOOVntowgFPKlJ1KS+eoCLpb/LDe+FfR8wNhvyIwS9GHMukv0ORZEqHP776fObIVtS6iw9OlHeFcB8rOWWkgt+hIUkiliCi/dO9Mfl/gum0bDQ==
+X-Gm-Message-State: AOJu0Yy6gqXp+siTLJQprYfSBf5uwBpwmDCvOJhZ51LaRTI51Ibag69V
+	qwhjkHcC96bgYSM7rSU+xqj/oOc/uBZF+B3aDuatjq7nUTeBZP4kqIzpqfkpgVtPRV+c5LXmxlm
+	3M94xjvd5Nyf+TjnPhgHudW2aZtFmlRdHFSsZ+Q==
+X-Google-Smtp-Source: AGHT+IHKrcwWS8vyT00ldFe3TSfefxSTAniwi3EgxDhdyyabJkX+KcOYv2LVpcbp28pYXE4hdbxqKlbSu3/TJpjEiNI=
+X-Received: by 2002:a17:906:a51:b0:a77:b06d:180a with SMTP id
+ a640c23a62f3a-a77b06d201bmr21974566b.48.1720030222605; Wed, 03 Jul 2024
+ 11:10:22 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240703164042.20929-1-ninette@thehoodiefirm.com>
- <CAMKF1soc6CDz51w76z+jbK4Py-xRpjZJi48mksyJw1Y65teSAw@mail.gmail.com> <CAG1aeW1Q5QoWcNRUZGYLPpO0L7Q0jFErxEV260iQffPV=mfEPg@mail.gmail.com>
-In-Reply-To: <CAG1aeW1Q5QoWcNRUZGYLPpO0L7Q0jFErxEV260iQffPV=mfEPg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 3 Jul 2024 10:53:06 -0700
-Message-ID: <CAMKF1so9L9Y00Z_CgrdBhd_9QtgMX-nSCR4hsbUTax=eF1NDgg@mail.gmail.com>
+ <CAMKF1soc6CDz51w76z+jbK4Py-xRpjZJi48mksyJw1Y65teSAw@mail.gmail.com>
+ <CAG1aeW1Q5QoWcNRUZGYLPpO0L7Q0jFErxEV260iQffPV=mfEPg@mail.gmail.com> <CAMKF1so9L9Y00Z_CgrdBhd_9QtgMX-nSCR4hsbUTax=eF1NDgg@mail.gmail.com>
+In-Reply-To: <CAMKF1so9L9Y00Z_CgrdBhd_9QtgMX-nSCR4hsbUTax=eF1NDgg@mail.gmail.com>
+From: Ninette Adhikari <ninette@neighbourhood.ie>
+Date: Wed, 3 Jul 2024 11:10:11 -0700
+Message-ID: <CAG1aeW2+nEeB8A6viC0YUGx7J3wCHfxbDC5BGRn71OwiYwKCSA@mail.gmail.com>
 Subject: Re: [oe] [PATCH 0/1] apache2:apache2-native: CVE status update
-To: Ninette Adhikari <ninette@neighbourhood.ie>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: engineering@neighbourhood.ie, openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000004ce4a8061c5b8104"
+Content-Type: multipart/alternative; boundary="0000000000006bfc13061c5bbe7a"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 03 Jul 2024 17:53:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111239
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Jul 2024 18:10:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111240
 
---0000000000004ce4a8061c5b8104
+--0000000000006bfc13061c5bbe7a
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Please rebase it on latest master and see if it=E2=80=99s still needed
+I pulled the latest and I see the apache2 version is updated to 2.4.60. But
+the CVE list
+<https://autobuilder.yocto.io/pub/non-release/patchmetrics-meta-oe/cve-stat=
+us-master.txt>
+still has the following CVEs listed: CVE-2007-0450, CVE-2010-0425
+I'll send a new patch against the latest master branch to update status of
+the CVEs.
+Thanks!
+Ninette
 
-On Wed, Jul 3, 2024 at 10:44=E2=80=AFAM Ninette Adhikari <ninette@neighbour=
-hood.ie>
-wrote:
+On Wed, Jul 3, 2024 at 10:53=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wrote=
+:
 
-> Hi Khem,
-> This is meant for the 'master' branch. It is a status update for some CVE=
-s.
-> I'll make sure to include the branch name in the subject for future
-> patches. For this patch, do I need to resend it with an updated subject
-> line? Please let me know. Thanks so much!
+> Please rebase it on latest master and see if it=E2=80=99s still needed
 >
-> Ninette
+> On Wed, Jul 3, 2024 at 10:44=E2=80=AFAM Ninette Adhikari <ninette@neighbo=
+urhood.ie>
+> wrote:
 >
-> On Wed, Jul 3, 2024 at 9:49=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wrot=
-e:
->
->> which branch is it for ?
->> Please mark it accordingly in subject line see -
+>> Hi Khem,
+>> This is meant for the 'master' branch. It is a status update for some
+>> CVEs.
+>> I'll make sure to include the branch name in the subject for future
+>> patches. For this patch, do I need to resend it with an updated subject
+>> line? Please let me know. Thanks so much!
 >>
->> https://docs.yoctoproject.org/dev/contributor-guide/submit-changes.html#=
-submitting-changes-to-stable-release-branches
+>> Ninette
 >>
->> On Wed, Jul 3, 2024 at 9:40=E2=80=AFAM Ninette Adhikari via
->> lists.openembedded.org
->> <ninette=3Dthehoodiefirm.com@lists.openembedded.org> wrote:
->> >
->> > Update status for: CVE-2007-0450, CVE-2010-0425
->> >
->> > The current version (2.4.59) is not affected. It only applies for
->> Windows.
->> >
->> > Ninette Adhikari (1):
->> >   apache2:apache2-native: CVE status update
->> >
->> >  meta-webserver/recipes-httpd/apache2/apache2_2.4.59.bb | 2 ++
->> >  1 file changed, 2 insertions(+)
->> >
->> > --
->> > 2.44.0
->> >
->> >
->> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> > Links: You receive all messages sent to this group.
->> > View/Reply Online (#111229):
->> https://lists.openembedded.org/g/openembedded-devel/message/111229
->> > Mute This Topic: https://lists.openembedded.org/mt/107022825/1997914
->> > Group Owner: openembedded-devel+owner@lists.openembedded.org
->> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub
->> [raj.khem@gmail.com]
->> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> >
+>> On Wed, Jul 3, 2024 at 9:49=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wro=
+te:
 >>
->
+>>> which branch is it for ?
+>>> Please mark it accordingly in subject line see -
+>>>
+>>> https://docs.yoctoproject.org/dev/contributor-guide/submit-changes.html=
+#submitting-changes-to-stable-release-branches
+>>>
+>>> On Wed, Jul 3, 2024 at 9:40=E2=80=AFAM Ninette Adhikari via
+>>> lists.openembedded.org
+>>> <ninette=3Dthehoodiefirm.com@lists.openembedded.org> wrote:
+>>> >
+>>> > Update status for: CVE-2007-0450, CVE-2010-0425
+>>> >
+>>> > The current version (2.4.59) is not affected. It only applies for
+>>> Windows.
+>>> >
+>>> > Ninette Adhikari (1):
+>>> >   apache2:apache2-native: CVE status update
+>>> >
+>>> >  meta-webserver/recipes-httpd/apache2/apache2_2.4.59.bb | 2 ++
+>>> >  1 file changed, 2 insertions(+)
+>>> >
+>>> > --
+>>> > 2.44.0
+>>> >
+>>> >
+>>> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>> > Links: You receive all messages sent to this group.
+>>> > View/Reply Online (#111229):
+>>> https://lists.openembedded.org/g/openembedded-devel/message/111229
+>>> > Mute This Topic: https://lists.openembedded.org/mt/107022825/1997914
+>>> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+>>> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsu=
+b
+>>> [raj.khem@gmail.com]
+>>> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>> >
+>>>
+>>
 
---0000000000004ce4a8061c5b8104
+--0000000000006bfc13061c5bbe7a
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr"><div dir=3D"ltr"><div>I pulled the latest and I see the ap=
+ache2 version is updated to 2.4.60. But the <a href=3D"https://autobuilder.=
+yocto.io/pub/non-release/patchmetrics-meta-oe/cve-status-master.txt" target=
+=3D"_blank">CVE list</a> still has the following CVEs listed: CVE-2007-0450=
+, CVE-2010-0425<br></div><div>I&#39;ll send a new patch against the latest =
+master branch to update status of the CVEs.<br></div><div>Thanks!<br></div>=
+<div>Ninette<br> </div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr=
+" class=3D"gmail_attr">On Wed, Jul 3, 2024 at 10:53=E2=80=AFAM Khem Raj &lt=
+;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmail.com=
+</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
+0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=
 <div dir=3D"auto">Please rebase it on latest master and see if it=E2=80=99s=
  still needed=C2=A0</div><div><br><div class=3D"gmail_quote"><div dir=3D"lt=
 r" class=3D"gmail_attr">On Wed, Jul 3, 2024 at 10:44=E2=80=AFAM Ninette Adh=
-ikari &lt;<a href=3D"mailto:ninette@neighbourhood.ie">ninette@neighbourhood=
-.ie</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"marg=
-in:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><div dir=3D"ltr"=
-><div dir=3D"ltr"><div>Hi Khem,</div><div>This is meant for the &#39;master=
-&#39; branch. It is a status update for some CVEs.</div><div>I&#39;ll make =
-sure to include the branch name in the subject for future patches. For this=
- patch, do I need to resend it with an updated subject line? Please let me =
-know. Thanks so much!</div></div></div><div dir=3D"ltr"><div dir=3D"ltr"><d=
-iv><br></div><div>Ninette <br></div></div><br><div class=3D"gmail_quote"><d=
-iv dir=3D"ltr" class=3D"gmail_attr">On Wed, Jul 3, 2024 at 9:49=E2=80=AFAM =
-Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.kh=
-em@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" styl=
-e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
-g-left:1ex">which branch is it for ?<br>
+ikari &lt;<a href=3D"mailto:ninette@neighbourhood.ie" target=3D"_blank">nin=
+ette@neighbourhood.ie</a>&gt; wrote:<br></div><blockquote class=3D"gmail_qu=
+ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
+4);padding-left:1ex"><div dir=3D"ltr"><div dir=3D"ltr"><div>Hi Khem,</div><=
+div>This is meant for the &#39;master&#39; branch. It is a status update fo=
+r some CVEs.</div><div>I&#39;ll make sure to include the branch name in the=
+ subject for future patches. For this patch, do I need to resend it with an=
+ updated subject line? Please let me know. Thanks so much!</div></div></div=
+><div dir=3D"ltr"><div dir=3D"ltr"><div><br></div><div>Ninette <br></div></=
+div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On=
+ Wed, Jul 3, 2024 at 9:49=E2=80=AFAM Khem Raj &lt;<a href=3D"mailto:raj.khe=
+m@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>&gt; wrote:<br></div><=
+blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-l=
+eft:1px solid rgb(204,204,204);padding-left:1ex">which branch is it for ?<b=
+r>
 Please mark it accordingly in subject line see -<br>
 <a href=3D"https://docs.yoctoproject.org/dev/contributor-guide/submit-chang=
 es.html#submitting-changes-to-stable-release-branches" rel=3D"noreferrer" t=
@@ -192,6 +219,7 @@ d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com"=
 </blockquote></div>
 </div>
 </blockquote></div></div>
+</blockquote></div><br></div>
 
---0000000000004ce4a8061c5b8104--
+--0000000000006bfc13061c5bbe7a--
 
