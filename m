@@ -1,102 +1,178 @@
-Return-Path: <sdoshi@mvista.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AB235C30658
-	for <webhook@archiver.kernel.org>; Tue,  2 Jul 2024 18:09:10 +0000 (UTC)
-Received: from mail-yb1-f170.google.com (mail-yb1-f170.google.com [209.85.219.170])
- by mx.groups.io with SMTP id smtpd.web11.31837.1719943742381062597
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0D53C2BD09
+	for <webhook@archiver.kernel.org>; Wed,  3 Jul 2024 05:21:03 +0000 (UTC)
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
+ by mx.groups.io with SMTP id smtpd.web10.43772.1719984053677963876
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Jul 2024 11:09:02 -0700
+ Tue, 02 Jul 2024 22:20:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=OvAH7J/i;
- spf=pass (domain: mvista.com, ip: 209.85.219.170, mailfrom: sdoshi@mvista.com)
-Received: by mail-yb1-f170.google.com with SMTP id 3f1490d57ef6-dff1ccdc17bso4666490276.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Jul 2024 11:09:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SDtIU4wc;
+ spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-70af0684c2bso28437b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Jul 2024 22:20:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1719943741; x=1720548541; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1719984053; x=1720588853; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=l+4ye4Km6ARtXLa3H9dFO3JSSZEwOXTU6maW2GKQ5F8=;
-        b=OvAH7J/iOFsT4WmDaiKAade82jGzsx6WyWUoBNQ2vgCJv1Jl+J6dCJbF75CTNpk1KR
-         0Cof+920lpwwewDoVmfmJZXgn9fJvtGjwfQ0jkLx6O9eRd3nDa37KQwDfDgTXQ7Iz82K
-         i3+JL3H+oM0pd6X+lyFVDrST/oYdHMOVaniMU=
+        bh=PnfuBiIyD3511mg6EvFRloMbao1tnFhEqfvgP2nnw8k=;
+        b=SDtIU4wcZrqiZyS25x70UBSGDnUCiGgdNTURm0ugVGYypImpEHKaS9LTkmPYRCgYEn
+         kIVOxXbI5I7n8lyGVZMwAusdgEuHjc6N+UFyqZBCvrJEn4yZeici1fYsTjqFNADSPbZ+
+         BgubxOOVbugIdn3g8tLjbKM/4WLatYBUKXWWRpVeF93zng0OzfBwsiRlvL7NeOhu8aHp
+         KvIHyAoee/p1WWUctj17CsnFAkmMUw1ES1N7c6FICSz4XVyE4XCilUUEdpG5WXDvLvzH
+         JOLipr2nD1ZPZ8v1ugo01NRiqwb2fMZtrUdVmymRhTB+shhRBKGMMTVBV8slPJY6e9Vx
+         e/Hw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719943741; x=1720548541;
+        d=1e100.net; s=20230601; t=1719984053; x=1720588853;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=l+4ye4Km6ARtXLa3H9dFO3JSSZEwOXTU6maW2GKQ5F8=;
-        b=NVhxriC+5lHSZvb51Nid+vEmsztdZHmSkDUSVw7V1pRFh9I2LStElOod5JTQ8hb1Yt
-         T4YIRzOfNrJkv4epFInrYfn2KPZSwKStcjQxZm967dCmPC+aIQzckapoKWNlxp1d1SDu
-         FXPq1hV82XUIPyjVebGHo70f3ycw8MP0Bfi2i6O/viqXBOa312xxTVuh0TDP6ZWPQtuu
-         LAUCPX1M7ORlY0yFlJ9Z1WapFu4kjOPX5E8ruwiQKmWgrO6rrLmRXGBHKgXt2JlitEvM
-         S+8klFr6/zdPrVbAqpr5IN1AEocZFrwtmBkD0e/VD36xr9vVwovQcWpXAOax8bg62na0
-         PrwA==
-X-Gm-Message-State: AOJu0YywpZJsLD3ufCWb6Cu+ZaNzDoZboGeWHiJYjYo707YPNAeEXYZa
-	Lzl/DmCoXHJQoPGyafEuFYTKBkt+ooGqI6kXGP8YVSvxSC7QbtJX9nyGnc6qvJbNWmuxIaVYJpI
-	u
-X-Google-Smtp-Source: AGHT+IEQFSvWNbo/h+3tBAa1T1b7m8m9JpfMjTFOb40XjseYrZU5CK7yrOO+62kJvP8vvdDeUqJQHQ==
-X-Received: by 2002:a25:ab81:0:b0:e03:5d43:d43a with SMTP id 3f1490d57ef6-e036ec45466mr10480592276.42.1719943741296;
-        Tue, 02 Jul 2024 11:09:01 -0700 (PDT)
-Received: from siddharth-latitude-3420.mvista.com ([157.32.44.151])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e039f69bd13sm261088276.19.2024.07.02.11.08.58
+        bh=PnfuBiIyD3511mg6EvFRloMbao1tnFhEqfvgP2nnw8k=;
+        b=w+lvTjkhq2MQlcPnquDzmkVl6TGC5HSijAZdCTgMoFTWCWSlKNgF/093psQ7j66a2t
+         VW4rfHU30bmTHwGEA+G9OLm96FRZVt5mW3Ug6hbzsGiq3hhMYgrDv890j1Xm3PTBi36C
+         szcgspNz0tHMNDVXc8oCfhiuuGZ/M0jL9ItFEl7T9+55Q1PK4/xlPIsQ/EdBcta/jPfi
+         KjE/U56/l/YBOpNm5ablVpyP/SmIeuYQEqohhE1LwmZOPtwoeRQL4RPY/rkcLI4INaF7
+         GVgfIEaKyIygakwnTk3XD+aYrrHkDF3jdTQCblNPR0wI3q4dfuvYiq8gb8D2oTIVROCe
+         Goqw==
+X-Gm-Message-State: AOJu0YyDIPpl92z3BJjqU7ZlPVjYs/4c1cYe5h9MV4MT/MbKMTpUTzCb
+	wCVbSh4wwYpNb0GrjsnQYhqW3IWTtcaFOsWFA9qQPJnwjQdiwkuMZXlW8A==
+X-Google-Smtp-Source: AGHT+IEM2n9nU5gAHJ/Z5tQ5xgWCo/VkZivXx4vmUvddP0+IKpEDhF3CTYQkwZUw1TAgQMLtpxEF/Q==
+X-Received: by 2002:a05:6a21:33a8:b0:1be:c947:f17a with SMTP id adf61e73a8af0-1bef614081dmr11001411637.24.1719984052529;
+        Tue, 02 Jul 2024 22:20:52 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::9980])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1fac10e392asm93718515ad.78.2024.07.02.22.20.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Jul 2024 11:09:01 -0700 (PDT)
-From: Siddharth <sdoshi@mvista.com>
+        Tue, 02 Jul 2024 22:20:52 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Siddharth Doshi <sdoshi@mvista.com>
-Subject: [meta-oe][kirkstone][PATCH] apache2: Upgrade 2.4.59 -> 2.4.60
-Date: Tue,  2 Jul 2024 23:38:49 +0530
-Message-Id: <20240702180849.94880-1-sdoshi@mvista.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH 1/2] flite: Fix buld with clang fortify enabled distros
+Date: Tue,  2 Jul 2024 22:20:48 -0700
+Message-ID: <20240703052049.2661826-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Jul 2024 18:09:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111216
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Jul 2024 05:21:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111217
 
-From: Siddharth Doshi <sdoshi@mvista.com>
+This issue shows up with upcoming glibc-2.40+ where
+clang fortify support has been enhanced significantly.
 
-CVE's Fixed by upgrade:
-CVE-2024-36387 apache2/httpd: DoS by null pointer in websocket over HTTP/2
-CVE-2024-38472 apache2/httpd: UNC SSRF on WIndows
-CVE-2024-38473 apache2/httpd: Encoding problem in mod_proxy
-CVE-2024-38474 apache2/httpd: Substitution encoding issue in mod_rewrite
-CVE-2024-38475 apache2/httpd: Improper escaping of output in mod_rewrite
-CVE-2024-38476 apache2/httpd: Apache HTTP Server may use exploitable/malicious backend application output to run local handlers via internal redirect
-CVE-2024-38477 apache2/httpd: null pointer dereference in mod_proxy
-CVE-2024-39573 apache2/httpd: Potential SSRF in mod_rewrite
+Set CLEANBROKEN since it does not recover from a dirty tree
 
-Other Changes between 2.4.59 -> 2.4.60
-======================================
-https://github.com/apache/httpd/blob/2.4.60/CHANGES
-
-Signed-off-by: Siddharth Doshi <sdoshi@mvista.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../apache2/{apache2_2.4.59.bb => apache2_2.4.60.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.59.bb => apache2_2.4.60.bb} (99%)
+ ...001-Remove-defining-const-as-nothing.patch | 79 +++++++++++++++++++
+ .../recipes-multimedia/flite/flite_2.2.bb     |  3 +
+ 2 files changed, 82 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/flite/flite/0001-Remove-defining-const-as-nothing.patch
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.59.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.60.bb
-similarity index 99%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.59.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.60.bb
-index 7740b4e33..2786d0e13 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.59.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.60.bb
-@@ -27,7 +27,7 @@ SRC_URI:append:class-target = " \
-            "
+diff --git a/meta-multimedia/recipes-multimedia/flite/flite/0001-Remove-defining-const-as-nothing.patch b/meta-multimedia/recipes-multimedia/flite/flite/0001-Remove-defining-const-as-nothing.patch
+new file mode 100644
+index 0000000000..899ef26637
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/flite/flite/0001-Remove-defining-const-as-nothing.patch
+@@ -0,0 +1,79 @@
++From c71d844f5639ea447b9f795a4db5b5d43f0de814 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 2 Jul 2024 21:41:24 -0700
++Subject: [PATCH] Remove defining 'const' as nothing
++
++This is a hack to override constness of struct members
++however, with modern compiler like clang with fortified
++glibc ( 2.40+ ) headers this runs into compiler errors
++
++| /mnt/b/yoe/master/build/tmp/work/riscv64-yoe-linux/flite/2.2/recipe-sysroot/usr/include/bits/stdlib.h:38:54: error: pass_object_size attribute only applies to constant pointer arguments
++|    38 |                  __fortify_clang_overload_arg (char *, __restrict, __resolved)))
++|       |                                                                    ^
++| /mnt/b/yoe/master/build/tmp/work/riscv64-yoe-linux/flite/2.2/recipe-sysroot/usr/include/bits/stdlib.h:73:43: error: pass_object_size attribute only applies to constant pointer arguments
++|    73 |                  __fortify_clang_overload_arg (char *, ,__buf),
++|       |                                                         ^
++| /mnt/b/yoe/master/build/tmp/work/riscv64-yoe-linux/flite/2.2/recipe-sysroot/usr/include/bits/stdlib.h:91:55: error: pass_object_size attribute only applies to constant pointer arguments
++|    91 | __NTH (wctomb (__fortify_clang_overload_arg (char *, ,__s), wchar_t __wchar))
++|       |                                                       ^
++| /mnt/b/yoe/master/build/tmp/work/riscv64-yoe-linux/flite/2.2/recipe-sysroot/usr/include/bits/stdlib.h:129:71: error: pass_object_size attribute only applies to constant pointer arguments
++|   129 | __NTH (mbstowcs (__fortify_clang_overload_arg (wchar_t *, __restrict, __dst),
++|       |                                                                       ^
++| /mnt/b/yoe/master/build/tmp/work/riscv64-yoe-linux/flite/2.2/recipe-sysroot/usr/include/bits/stdlib.h:159:68: error: pass_object_size attribute only applies to constant pointer arguments
++|   159 | __NTH (wcstombs (__fortify_clang_overload_arg (char *, __restrict, __dst),
++|       |                                                                    ^
++| 5 errors generated.
++|
++
++Therefore take this out, instead cast away the 'const' qualifier where needed ( equilly dangerous )
++however limited to just this file instead of apply to all headers including system headers
++
++Upstream-Status: Submitted [https://github.com/festvox/flite/pull/112]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ tools/find_sts_main.c | 11 ++++-------
++ 1 file changed, 4 insertions(+), 7 deletions(-)
++
++diff --git a/tools/find_sts_main.c b/tools/find_sts_main.c
++index 3c94449..a5bf8ef 100644
++--- a/tools/find_sts_main.c
+++++ b/tools/find_sts_main.c
++@@ -41,9 +41,6 @@
++ #include <math.h>
++ #include <string.h>
++ 
++-/* To allow some normally const fields to manipulated during building */
++-#define const
++-
++ #include "cst_args.h"
++ #include "cst_wave.h"
++ #include "cst_track.h"
++@@ -132,16 +129,16 @@ cst_sts *find_sts(cst_wave *sig, cst_track *lpc)
++ 			lpc->frames[i],lpc->num_channels,
++ 			resd,
++ 			size);
++-	sts[i].size = size;
+++	*(int *)(&sts[i].size) = size;
++ 	sts[i].frame = cst_alloc(unsigned short,lpc->num_channels-1);
++ 	for (j=1; j < lpc->num_channels; j++)
++-	    sts[i].frame[j-1] = (unsigned short)
+++	    *(unsigned short *)(&sts[i].frame[j-1]) = (unsigned short)
++ 		(((lpc->frames[i][j]-lpc_min)/lpc_range)*65535);
++         if (cst_streq(residual_codec,"ulaw"))
++         {
++             sts[i].residual = cst_alloc(unsigned char,size);
++             for (j=0; j < size; j++)
++-                sts[i].residual[j] = cst_short_to_ulaw((short)resd[j]);
+++                *(unsigned char *)(&sts[i].residual[j]) = cst_short_to_ulaw((short)resd[j]);
++         }
++         else if (cst_streq(residual_codec,"g721"))
++         {
++@@ -189,7 +186,7 @@ cst_sts *find_sts(cst_wave *sig, cst_track *lpc)
++             {
++                 sts[i].residual = cst_alloc(unsigned char,size);
++                 for (j=0; j < size; j++)
++-                    sts[i].residual[j] = cst_short_to_ulaw((short)resd[j]);
+++                    *(unsigned char *)(&sts[i].residual[j]) = cst_short_to_ulaw((short)resd[j]);
++             } 
++             else /* Unvoiced frame */
++             {
+diff --git a/meta-multimedia/recipes-multimedia/flite/flite_2.2.bb b/meta-multimedia/recipes-multimedia/flite/flite_2.2.bb
+index 0a7680a8c4..bb9edfd5bf 100644
+--- a/meta-multimedia/recipes-multimedia/flite/flite_2.2.bb
++++ b/meta-multimedia/recipes-multimedia/flite/flite_2.2.bb
+@@ -9,6 +9,7 @@ inherit autotools-brokensep
+ DEPENDS += "alsa-lib chrpath-replacement-native"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
--SRC_URI[sha256sum] = "ec51501ec480284ff52f637258135d333230a7d229c3afa6f6c2f9040e321323"
-+SRC_URI[sha256sum] = "7b1ec7ec5635da7cb01550513215a90f8b2f52bb7c90cf3e97ede936d3e55b0f"
+ SRC_URI = "git://github.com/festvox/flite.git;protocol=https;branch=master"
++SRC_URI += "file://0001-Remove-defining-const-as-nothing.patch"
  
- S = "${WORKDIR}/httpd-${PV}"
+ SRCREV = "e9e2e37c329dbe98bfeb27a1828ef9a71fa84f88"
  
--- 
-2.34.1
-
+@@ -25,3 +26,5 @@ do_install:append() {
+ }
+ # | make[1]: *** No rule to make target 'flite_voice_list.c', needed by 'all'.  Stop.
+ PARALLEL_MAKE = ""
++
++CLEANBROKEN = "1"
 
