@@ -2,86 +2,93 @@ Return-Path: <ninette@thehoodiefirm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D0EA5C41513
-	for <webhook@archiver.kernel.org>; Wed,  3 Jul 2024 18:30:47 +0000 (UTC)
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.web11.58362.1720031446362588180
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C4C1C2BD09
+	for <webhook@archiver.kernel.org>; Wed,  3 Jul 2024 18:48:48 +0000 (UTC)
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+ by mx.groups.io with SMTP id smtpd.web10.58028.1720032522072145978
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Jul 2024 11:30:46 -0700
+ Wed, 03 Jul 2024 11:48:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@thehoodiefirm-com.20230601.gappssmtp.com header.s=20230601 header.b=dApv2Dwc;
- spf=neutral (domain: thehoodiefirm.com, ip: 209.85.215.171, mailfrom: ninette@thehoodiefirm.com)
-Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-6bce380eb9bso3394738a12.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Jul 2024 11:30:46 -0700 (PDT)
+ dkim=pass header.i=@thehoodiefirm-com.20230601.gappssmtp.com header.s=20230601 header.b=1Qj5r3D3;
+ spf=neutral (domain: thehoodiefirm.com, ip: 209.85.210.178, mailfrom: ninette@thehoodiefirm.com)
+Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-70af81e8439so380939b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Jul 2024 11:48:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thehoodiefirm-com.20230601.gappssmtp.com; s=20230601; t=1720031446; x=1720636246; darn=lists.openembedded.org;
+        d=thehoodiefirm-com.20230601.gappssmtp.com; s=20230601; t=1720032521; x=1720637321; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:reply-to:references
          :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to;
-        bh=OXLLVpNw8P3ZMHyXDMrzncTQvhSuynB9sq2cAoDJ6TI=;
-        b=dApv2Dwc3ggbwY5NbvBbr7+LopUD4MQJM5PPDRfKbURGFOYeOwV18BjwrhN/iRne6W
-         PKrRkKEEKRrbHp6SOOFlYYRLnfq8Tm8wRHIZOr2iNeOHcAV35M8q1KGZWc29qyLV0UTT
-         hpRniOGk7YNbmp7w5XK3ZyM/OIqPnAUVBDooepltdG+VNs+13RRhthtf/jJVy/9MD6iN
-         ebbqS3WpwFbOXxlr/mssUsvFzdal0K1PM53dJwOVGu7KEU31o36ZwG53RfhDWnUDD2uI
-         MZOHd7QQ4r7egzPDfpgkALPiTDWynGewdvL0MPjzVedmWHnnwYScjs7VA3ntQulNXKiV
-         xSEw==
+        bh=Yfk9d1n7CL8Ci0wJPqfzUDhEfKNulwyzAdQDQ2oHPQc=;
+        b=1Qj5r3D3L8eVFDXK0Vmvwy4Oe0LQuC9FjbzDCe/CRsIpbJFP31mABqK8O68cW/ciFy
+         R2eGaIl/il527QqvbjFxsTqLAKaK2SrAHS51ZuA5y2ngpZ8lGYFo2htkV7bJ+9ZpaYmd
+         SMSHVlPGHxFgyWpcmyLcPipheK+OB8xqZOt59P/q4KOzPAPMboUJGRZB8b864zWBvOxf
+         ZgucQ82DcjlgSyOnbIDG3gLW7m31iHjmZNiOgK7Ht5ZtrlvjNMyMMIxyGlDVU0J3aGNA
+         9HQB0qisr6+Y+VMzQsv7hHrjUA4ncQb+b2C//GwzQhaJdFxZry87pwcWSnCzZL9qWhgK
+         ZauA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720031446; x=1720636246;
+        d=1e100.net; s=20230601; t=1720032521; x=1720637321;
         h=content-transfer-encoding:mime-version:reply-to:references
          :in-reply-to:message-id:date:subject:cc:to:from:x-gm-message-state
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=OXLLVpNw8P3ZMHyXDMrzncTQvhSuynB9sq2cAoDJ6TI=;
-        b=wZFebaHOothDc9qi+NjBdhe7OHXGqraiMxLZ8+WE4WSWIuy85EyPkRsz81HdWx4n/Q
-         BAOTnnfcjqJYNrwvQ0PHv1YvfQ1PJ+TmiTL8htNBZhuwQGpjDo2ploDJYdLTmL7ASY/J
-         CI+h/9Vzp5KqsVC1hfqoRJPKlV9rSZGhCppMJ3tfUm8phpkSXKdAT1DBrt+OqZcIH1B3
-         x4AINvqjelh0zamHw8lh6RFtnxJhfbr/jpUPiNZKrj6DXH/ciBeVgVuLx6PuMB6sJOaG
-         AZGfoWBWmK5jwlcdhGZrFHKXftOs7XRU1hgxthD9d1XAZLturg3SolD1ISjmhrkEbpqs
-         jw4Q==
-X-Gm-Message-State: AOJu0Yxm2kEvjdx3g3GsnMzzvNshn1L6u/TIZqlrvQKLAdQN9k0Rp/3E
-	Lfmj1u7804Tu/pOs2RUQZUExey2SPaKjGf/y8GlTINpQNsOOxWx8Mh7RwhXUIm25ggEVc8WhHir
-	W
-X-Google-Smtp-Source: AGHT+IH9/4ycQd5Xbg4VEcpD23qVM4Z3Dm+OQVTag/Y4Y8X+rFP1++VAE4nP/FhWbFZW2U39csm4Cg==
-X-Received: by 2002:a05:6a20:8425:b0:1be:cfb:cdd1 with SMTP id adf61e73a8af0-1bef61ed43cmr16965865637.39.1720031445707;
-        Wed, 03 Jul 2024 11:30:45 -0700 (PDT)
+        bh=Yfk9d1n7CL8Ci0wJPqfzUDhEfKNulwyzAdQDQ2oHPQc=;
+        b=lQRf4x+4wZ3slLc85i8b6BAcazmee9e8PF5L4EhmrPebCnxfV+6J2zJ/7uXe3hbTBy
+         /KmpwVqsyG1D57JlAd1kC9mPxs1VGjEriqKCQICnrRFqzrlNaSCEInirfPIFAJdg5YFK
+         TcA1YJeg9JIP48Cu272NNMDXBN658k4WG11IBYqAV4Sm+ZUtCOv0h6kcKnRLOExN0e8g
+         WlMokj54QsRrvhpzIrDZBSIAhV+r40ewfq2BBh6gQ2CkLV3AA9anFUc51Hf5ZvLJN5ug
+         wumxZLa6SR8AFmFbLbSgumbaBSKDFeSEu8LP2hRgIvwVJIOj9413Upn6cEpVSC0lkhbJ
+         jtdw==
+X-Gm-Message-State: AOJu0YwLJCqW6K+7F3O+/T2v928iCCs/i6GHLQnRtZNARLDr0u3iEATH
+	ZSdJUSfP/o0tgR0+k9Nr/TEocooLfN4DAHw0/OHabw4wsv8Uxc8V65XkgOlKohqIuJVTPJY3Pl+
+	q
+X-Google-Smtp-Source: AGHT+IF2WlR8YqHejS083XI7lF0lvoSh/rnIkex400P40KI2Dnb4hywPrKqV2FaXwxf1fD/zPor2dA==
+X-Received: by 2002:a05:6a00:2292:b0:70a:f576:beeb with SMTP id d2e1a72fcca58-70af576c2b7mr2029749b3a.15.1720032521316;
+        Wed, 03 Jul 2024 11:48:41 -0700 (PDT)
 Received: from localhost.localdomain ([50.54.151.77])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-70803ecf652sm11082210b3a.99.2024.07.03.11.30.45
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-70801e53fa7sm10773256b3a.27.2024.07.03.11.48.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 Jul 2024 11:30:45 -0700 (PDT)
+        Wed, 03 Jul 2024 11:48:41 -0700 (PDT)
 From: Ninette Adhikari <ninette@thehoodiefirm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: engineering@neighbourhood.ie,
 	Ninette Adhikari <ninette@thehoodiefirm.com>
-Subject: [master][PATCH 1/1] monkey: Update status for CVE-2013-2183
-Date: Wed,  3 Jul 2024 11:30:41 -0700
-Message-ID: <20240703183041.8844-2-ninette@thehoodiefirm.com>
+Subject: [PATCH v2] apache2:apache2-native: Update CVE status
+Date: Wed,  3 Jul 2024 11:48:36 -0700
+Message-ID: <20240703184836.23299-1-ninette@thehoodiefirm.com>
 X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240703183041.8844-1-ninette@thehoodiefirm.com>
-References: <20240703183041.8844-1-ninette@thehoodiefirm.com>
+In-Reply-To: <CAG1aeW2+nEeB8A6viC0YUGx7J3wCHfxbDC5BGRn71OwiYwKCSA@mail.gmail.com>
+References: <CAG1aeW2+nEeB8A6viC0YUGx7J3wCHfxbDC5BGRn71OwiYwKCSA@mail.gmail.com>
 Reply-To: engineering@neighbourhood.ie
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 03 Jul 2024 18:30:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111246
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Jul 2024 18:48:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111247
 
-Current version (1.6.9) is not affected. Issue was addressed in version 1.3.0
+Update CVE status for: CVE-1999-0289, CVE-2007-0450, CVE-2010-0425
+
+The current version (2.4.6) is not affected. It only applies for Windows.
 
 Signed-off-by: Ninette Adhikari <ninette@thehoodiefirm.com>
 ---
- meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-webserver/recipes-httpd/apache2/apache2_2.4.60.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb b/meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb
-index 5bf6373a8..f10262366 100644
---- a/meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb
-+++ b/meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb
-@@ -90,3 +90,4 @@ CONFFILES:${PN} = "${sysconfdir}/monkey/monkey.conf \
-                    ${sysconfdir}/monkey/plugins/auth/monkey.users \
-                    "
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.60.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.60.bb
+index 48bb773dd..265313b3f 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.60.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.60.bb
+@@ -41,6 +41,9 @@ CVE_STATUS[CVE-2007-6421] = "cpe-incorrect: The current version (2.4.59) is not
+ CVE_STATUS[CVE-2007-6422] = "cpe-incorrect: The current version (2.4.59) is not affected by the CVE which affects versions from 2.2 (incl.) to 2.2.8 (excl.)"
+ CVE_STATUS[CVE-2007-6423] = "cpe-incorrect: The current version (2.4.59) is not affected by the CVE which affects versions from 2.2.x to 2.2.7-dev"
+ CVE_STATUS[CVE-2008-2168] = "cpe-incorrect: The current version (2.4.59) is not affected by the CVE which affects versions up to 2.2.6 (excl.)"
++CVE_STATUS[CVE-1999-0289] = "not-applicable-platform: The current version (2.4.6) is not affected. It only applies for Windows"
++CVE_STATUS[CVE-2007-0450] = "not-applicable-platform: The current version (2.4.6) is not affected. It only applies for Windows."
++CVE_STATUS[CVE-2010-0425] = "not-applicable-platform: The current version (2.4.6) is not affected. It only applies for Windows."
  
-+CVE_STATUS[CVE-2013-2183] = "cpe-incorrect: Current version (1.6.9) is not affected. Issue was addressed in version 1.3.0"
+ SSTATE_SCAN_FILES += "apxs config_vars.mk config.nice"
+ 
 -- 
 2.44.0
 
