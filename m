@@ -1,108 +1,90 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 088C5C3DA42
-	for <webhook@archiver.kernel.org>; Mon,  8 Jul 2024 15:34:09 +0000 (UTC)
-Received: from mail-oo1-f47.google.com (mail-oo1-f47.google.com [209.85.161.47])
- by mx.groups.io with SMTP id smtpd.web10.82925.1720452847651432560
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 733C8C3271E
+	for <webhook@archiver.kernel.org>; Mon,  8 Jul 2024 17:29:59 +0000 (UTC)
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.web11.85985.1720459787495420865
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Jul 2024 08:34:07 -0700
+ Mon, 08 Jul 2024 10:29:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mOemv+SE;
- spf=pass (domain: gmail.com, ip: 209.85.161.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f47.google.com with SMTP id 006d021491bc7-5c6775ea6a3so684653eaf.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Jul 2024 08:34:07 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=ZGcpyOHJ;
+ spf=pass (domain: smile.fr, ip: 209.85.221.45, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-367940c57ddso2741799f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Jul 2024 10:29:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1720452847; x=1721057647; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=/ve54W+tjUQgrLHF4IQpKCZyKT8KWBG20oWMoZ/xxcM=;
-        b=mOemv+SEC1m892AZQ12oUfJzVhxH7s1qqJRXh1B/r+RDXaBIxk6RDJKXBwrUG3RkWI
-         q9pNggS9hf6yQiVIZcNFqQtPe8bsBjaA+rp5NIxt/2lk9k44/gZwZFb7UsMV9BOZOIL1
-         qI/snHQQA3RZhtCsRtb8CR3H/zEPYj63jPPkSo+hvfIGTONYoPaZop+NKtJjluzAnc7p
-         JF2K701wnwfBaK9Rg044eQoosrNpvQXvs6XWdzm/Z5jVTWL+rg1uuCM464jlKbJKKbzM
-         sZSHuplFlJeUnitMvpGIj39FLN2G2FGfA/beiO77Ax6c/Qi3yLDGzpDnrGfbHAoH7XCs
-         WiDQ==
+        d=smile.fr; s=google; t=1720459785; x=1721064585; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=E17dd/FM7li7BFXfXe1X/Mnxe97SZJYlaYoKeL7EDJU=;
+        b=ZGcpyOHJay3SnlIk7/7TES5afSwmWY4Xbi4iPk3PBll2fHIhvLoYXBmvFl7iEtbGg+
+         cCfgwT0m/eajmxvDZ2wx2JEsowIUtKgG7GjeS7+OLefN+WCeQ+SqLI5u3dYk7eek6cpO
+         INZY6a4TwcFI1ggmyvxujjsWLXTZCHsDDcHjA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720452847; x=1721057647;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=/ve54W+tjUQgrLHF4IQpKCZyKT8KWBG20oWMoZ/xxcM=;
-        b=E48l/FJ9s4EybfhEEmBqOekaE8lflmSf8+GJIQTGQagUEgubvEBLe9aZkdBDgQA9qr
-         +wjfh2LV0XAZYkhRqdXujg2ha5wRuySVpfeB+idfrF+HrUdWgasu4g512RWKWugj1ekI
-         yVHbnzbjwvHWDL43XdZwKya2wryKCADVvbSmTlH/eTEbh8x1orJ2ITXUNmt/ibT0fQVU
-         +7emTJWUp0SwSwoZK/G7oC2UpB14BoEMHAVjagPmUo7IFd12vnUxGDog5ynONcFhFTNl
-         ZodjWCzF/3ivz4JX1XLU2WfIMuKq+MaRjD73mWvw+t62Atkcn/s1zRIzj375a3L6zSk/
-         nGKw==
-X-Gm-Message-State: AOJu0Yzsed/LSe6lxU5PuvNcrKU82gGq7YaV+ePxIhAQHeNs+VkT+sMf
-	zUiFvuD8ARchl7xp9qg7uatPpUHOtfvs0iXQpZWgQhLZ+9iKx/0r/q3GnCSK1WvmfiwxE74KBzo
-	WGBwwBSWsRZdsyzd6kc8lJsGN3a4=
-X-Google-Smtp-Source: AGHT+IEmV9U2rzMQUuuxVlLj/TIj8aNgvzbAaYiPL829dRw9krBBBCbOwZSgY29JxPYNHJJx3SE2DWAHNbwtBwiJygs=
-X-Received: by 2002:a05:6870:a119:b0:259:8cb3:db2e with SMTP id
- 586e51a60fabf-25e2bea68b9mr11416782fac.39.1720452846748; Mon, 08 Jul 2024
- 08:34:06 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1720459785; x=1721064585;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=E17dd/FM7li7BFXfXe1X/Mnxe97SZJYlaYoKeL7EDJU=;
+        b=hzadFSxomo4izwDhPcxQqCrXNx2tv9WfWMWrXnchpjAfUNeAuReKYnOQ4954r2vRFd
+         V9GduT0AOp+mnc2jO9Re28RHLefsnlM2FuY9V/VMNZ8Put3sbi99NYH4a9i2dU8NzKNh
+         ILrT+vhkQ8reLgQSiaWRYEDlXKImmvpwM8NUjcsKPjlMtCGdERFcvJY+wVzq9EwoV+MK
+         H7DWDclM2FnRLcRwQxuHrybdW9Z9op3ohl5LcOd5slKjhLv76MAg+9pKSrREX4c+oySi
+         HYKvhKIEVb/CnBCTjQrMSzhTbQOoveJsG3Hs9ITgeqrdNZT0vQacpSG4Mwkbxsbs1WBM
+         BRzw==
+X-Gm-Message-State: AOJu0Yy3631yktYZimpZVqSbJjscoztGIdPl4HE+kfy4dfWvbGXqiKMv
+	OeaKDH4nBIxP0A2jw5yGnjybqC+Bzl1XAxy3IBpaeO6rxUqGwYuXVP6PKCRNJ75oloiWjl7D3PF
+	i
+X-Google-Smtp-Source: AGHT+IEEohT78Z45ae035fNMm/IzWuHoLNrtnKIvyCoHLcSk0Zr+EGGPpOETpJlqD3zRqeknGPvu3w==
+X-Received: by 2002:adf:f288:0:b0:367:9851:4f22 with SMTP id ffacd0b85a97d-367ceadb1bamr145016f8f.58.1720459784942;
+        Mon, 08 Jul 2024 10:29:44 -0700 (PDT)
+Received: from P-ASN-ECS-830T8C3.numericable.fr ([89.159.1.53])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-367cdfab748sm309834f8f.111.2024.07.08.10.29.44
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 08 Jul 2024 10:29:44 -0700 (PDT)
+From: Yoann Congal <yoann.congal@smile.fr>
+To: openembedded-devel@lists.openembedded.org
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-python][PATCH] python3-redis: add an archive prefix to avoid clashing with redis
+Date: Mon,  8 Jul 2024 19:29:30 +0200
+Message-Id: <20240708172930.525707-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <CAMKF1sqg2o8ZRVQyUa6k7sbAN+Cbp5yniEgadPg4WaOnMhKqEQ@mail.gmail.com>
- <20240708093731.5742-1-alba@thehoodiefirm.com>
-In-Reply-To: <20240708093731.5742-1-alba@thehoodiefirm.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 8 Jul 2024 08:33:39 -0700
-Message-ID: <CAMKF1srD0K+BZ20ZmVrfK6bOrJaqvLf5zTjmbkoP1o0qdgc3Rw@mail.gmail.com>
-Subject: Re: [oe] [PATCH v2] yelp: fix unterminated string
-To: alba@thehoodiefirm.com
-Cc: openembedded-devel@lists.openembedded.org, engineering@neighbourhood.ie
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 08 Jul 2024 15:34:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111267
+ <openembedded-devel@lists.openembedded.org>; Mon, 08 Jul 2024 17:29:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111268
 
-This patch is marked as v2, which is right subject for sending an
-updated version to v1, however, the content of
-that patch is just the delta on top of v1,  whenever sending next
-version, send the whole series and patches which are reworked
-should have the new and old change squashed and sent, so we can
-maintain a clean history.
+From: Yoann Congal <yoann.congal@smile.fr>
 
-On Mon, Jul 8, 2024 at 3:27=E2=80=AFAM Alba Herrer=C3=ADas via
-lists.openembedded.org <alba=3Dthehoodiefirm.com@lists.openembedded.org>
-wrote:
->
-> Signed-off-by: Alba Herrerias <alba@thehoodiefirm.com>
-> ---
->  meta-gnome/recipes-gnome/yelp/yelp_42.2.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-gnome/recipes-gnome/yelp/yelp_42.2.bb b/meta-gnome/reci=
-pes-gnome/yelp/yelp_42.2.bb
-> index 69c421662..14986f265 100644
-> --- a/meta-gnome/recipes-gnome/yelp/yelp_42.2.bb
-> +++ b/meta-gnome/recipes-gnome/yelp/yelp_42.2.bb
-> @@ -40,4 +40,4 @@ FILES:${PN} +=3D " \
->
->  RDEPENDS:${PN} +=3D "yelp-xsl"
->
-> -CVE_STATUS[CVE-2008-3533] =3D "cpe-incorrect: The current version (42.2)=
- is not affected. Fixed in 2.24.
-> +CVE_STATUS[CVE-2008-3533] =3D "cpe-incorrect: The current version (42.2)=
- is not affected. Fixed in 2.24."
-> --
-> 2.40.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#111262): https://lists.openembedded.org/g/openembedde=
-d-devel/message/111262
-> Mute This Topic: https://lists.openembedded.org/mt/107100010/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+The new python3-redis_5.0.7 archive "redis-5.0.7.tar.gz" may clash with
+a very old redis-5.0.7 archive. It does on the autobuilder which kept
+its DL_DIR from this era and triggers a mirroring error[0].
+
+To fix this, add a "pypi-" prefix to the archive name of python3-redis.
+
+[0]:https://autobuilder.yoctoproject.org/typhoon/#/builders/156/builds/420/steps/17/logs/errors
+
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+---
+ meta-python/recipes-devtools/python/python3-redis_5.0.7.bb | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/meta-python/recipes-devtools/python/python3-redis_5.0.7.bb b/meta-python/recipes-devtools/python/python3-redis_5.0.7.bb
+index 8eb176c09e..950200ec5e 100644
+--- a/meta-python/recipes-devtools/python/python3-redis_5.0.7.bb
++++ b/meta-python/recipes-devtools/python/python3-redis_5.0.7.bb
+@@ -4,6 +4,9 @@ HOMEPAGE = "http://github.com/andymccurdy/redis-py"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=609ded3add9111c4c6e102f1d421d3f8"
+ 
++# Prefix archive to avoid clashing with the main redis archives
++PYPI_ARCHIVE_NAME_PREFIX="pypi-"
++
+ SRC_URI[sha256sum] = "8f611490b93c8109b50adc317b31bfd84fff31def3475b92e7e80bf39f48175b"
+ 
+ inherit pypi setuptools3
 
