@@ -2,63 +2,65 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C99D0C3271E
-	for <webhook@archiver.kernel.org>; Mon,  8 Jul 2024 12:26:37 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.web10.78456.1720441589219849512
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D8D8EC3271E
+	for <webhook@archiver.kernel.org>; Mon,  8 Jul 2024 12:29:47 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.web10.78510.1720441786557628463
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Jul 2024 05:26:29 -0700
+ Mon, 08 Jul 2024 05:29:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=l3jLaN9l;
- spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-367b6e5ffbfso1142273f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Jul 2024 05:26:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PO2gxp8s;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4257a390a4eso27349825e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Jul 2024 05:29:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1720441588; x=1721046388; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1720441785; x=1721046585; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
         bh=Oz8sn9L8J/TEKNmMKffAzLs44iAuZEBL5WgcxCyEOQU=;
-        b=l3jLaN9l6wO8Nngqo8r/c0dcITSUVowiF81CSPKIpU9hmUt7qhTIhboyHEO76TC//1
-         g7uR96ZvWjn5TeEpC7dWMzAZjlJJDoOGTKZ4GVo+xvyLTnwgPASzfJRZ5iMQmISS8SwN
-         7q/TGyyyCwvHlFVo9JI/dayvqDGQN1GvINnATc8vSFeSXBRb0AxW4sCFpPPlPaEloXBp
-         ChsqMQzKIu4p7ogfXAFUe6Vh4nkGvrHCR4ZJlf4B1Ql7Z7xlIwafoWtAk+Xoq1LXn1Ym
-         JuzBoKV7wTOQR+F1deSfB+OWPFDw9Qlwn6RwQXxSPSE4KpaQgfv3h0AYKo4u6gEbnDRO
-         g5Iw==
+        b=PO2gxp8sQR/mNaGmMLV4bvf2S97maeDoJq3zLpp2FCyvkxJpT5j6YHqEM3o1UlZuH0
+         cl91hn7aj870iQ6lqJsj84JQncSK0y9mIoqWL+0jpbJu/1BIZLTSpqA2lgEU4NM0/ZJO
+         e6mAlB71va0Vf5bksVddKQvruLx3j8Hi5ZP8Z+4cW0cFMQ9D5A9ykqUYEvaiw1pc6C3G
+         7ZvC5MsON577L0Sv5xziQimJL8BuyPSh1ryniLxmexVfgOczs4L6y4hiDghWoHfVz9FF
+         VZ7izaNDQlUbeuJRo4nJY6O03oADfKknCFc5lIctrnS2vt6bAXOrlxIFOQ2ebHlYfjvm
+         bjFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720441588; x=1721046388;
+        d=1e100.net; s=20230601; t=1720441785; x=1721046585;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
         bh=Oz8sn9L8J/TEKNmMKffAzLs44iAuZEBL5WgcxCyEOQU=;
-        b=Pds5+B3JbImZjlkRR9vS2vlhyP+qjGTmlPcbQV4NRohp7KB9PkVVLJIdKGAP0ZPo84
-         YYb2gZlOJ7L9HUfgbsrX1m3cvI8n40Vdn0/tVufhUJHnr7OaVCMlK2UkRtumQgL7LUYd
-         ywUiHEE2NGAr745HL0ic3VNp2+h+zh4s8eBaLmvy9WafGDvwQlcJE4NLSouE1oLbHv0d
-         WRDVPbsOY0W3KlCv80PSC44S8NiyVEt90sktmgt6DCF95v5yY8XGgzvXSGZi8xyH6his
-         snAFI2cpIL8wgm7sVf9EtrjajUY4nOs+NCwJXHm3Q/9ZvVll9et8ccxOdeoiC4n7vyLE
-         Drsw==
-X-Gm-Message-State: AOJu0YwYGGG4tHAWEt91ePRcthxkz7xBG9N2JfMHPJn93t3CrPk59O3L
-	kVSFDMK/y3gL1OuR/j0ZrWeizM4K3NdoUs/nmyop1IEXRs5efDwXK+8tDQ==
-X-Google-Smtp-Source: AGHT+IHuize5xgDcrGLRDajbivRAB280wO/rlHZQJ0GUIMf7A9AxATtr3QSyiCdBzJ03nMKc87N4MA==
-X-Received: by 2002:a5d:5045:0:b0:367:437f:177f with SMTP id ffacd0b85a97d-3679dd66ce7mr7607622f8f.55.1720441586752;
-        Mon, 08 Jul 2024 05:26:26 -0700 (PDT)
+        b=pfyR8M64o0UlfUPVv4aJ2Xsy8msp7kNzFNhSNw+u8Vkiek3kQriQmCoRlY2e0Q4SK+
+         ZbEQAwIiCY+rtCgecBVP7Qa63bxj7kWdaEY9WKgC9+Pt8o9GXzuMu820/Yo7aO6PpSb8
+         r0f+S5TDnXGVklg7kNb2lYEnVIvWG/vAoA7xmLHjouVdb+Q/QN1K6+KCZ2/m1eSKTU/D
+         dFQ/Lx2CGdL86O1BGp/hAuslMmLpscMdLiqMEyjrdsHK2I2Qbb0m0XfyZVM3du0SIk7a
+         e3frrcwshDGMk6qCO3aJG9TjUX8KZNFXYU2MVUH8J4o4f+YUYSNMkquxR2Z/YW8SC/op
+         QMcw==
+X-Gm-Message-State: AOJu0YzXGvoohbfSxLmz5juJPzxDuJACyg4UH6LwL2e9oVg9uUVybfSp
+	dXDkbvEKUyIjysqLcIor0uJW+BOB4KqS8XQmOMS8rHX6pzfKGvRovFzamA==
+X-Google-Smtp-Source: AGHT+IFG/UY01FBAoRP8wD+St/th1E8rmY/fg5Yta2kfARMAFm2KupCL9+PWmC0nEwsdrBgxWZxOiQ==
+X-Received: by 2002:a05:600c:22d8:b0:426:61f6:2e38 with SMTP id 5b1f17b1804b1-42661f62e9bmr36674975e9.35.1720441784743;
+        Mon, 08 Jul 2024 05:29:44 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3675a103d62sm27661778f8f.105.2024.07.08.05.26.26
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4264a2ca618sm163183095e9.29.2024.07.08.05.29.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 08 Jul 2024 05:26:26 -0700 (PDT)
+        Mon, 08 Jul 2024 05:29:44 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] giflib: fix build with gold and avoid imagemagick-native dependency
-Date: Mon,  8 Jul 2024 14:10:52 +0200
-Message-ID: <20240708121052.3509495-1-martin.jansa@gmail.com>
+Cc: Nikhil R <nikhil.r@kpit.com>,
+	Armin Kuster <akuster808@gmail.com>,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH] giflib: fix build with gold and avoid imagemagick-native dependency
+Date: Mon,  8 Jul 2024 14:29:46 +0200
+Message-ID: <20240708122946.4194073-1-martin.jansa@gmail.com>
 X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 08 Jul 2024 12:26:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111265
+ <openembedded-devel@lists.openembedded.org>; Mon, 08 Jul 2024 12:29:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111266
 
 * avoid imagemagick-native like upstream did in:
   https://sourceforge.net/p/giflib/code/ci/d54b45b0240d455bbaedee4be5203d2703e59967/
