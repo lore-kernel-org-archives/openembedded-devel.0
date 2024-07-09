@@ -2,66 +2,66 @@ Return-Path: <akash.hadke27@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 605FBC2BD09
-	for <webhook@archiver.kernel.org>; Tue,  9 Jul 2024 07:01:18 +0000 (UTC)
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.web11.7140.1720508477117499518
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 400BDC2BD09
+	for <webhook@archiver.kernel.org>; Tue,  9 Jul 2024 07:05:08 +0000 (UTC)
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.web11.7182.1720508707138893743
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jul 2024 00:01:17 -0700
+ Tue, 09 Jul 2024 00:05:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=O8CmI/TM;
- spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: akash.hadke27@gmail.com)
-Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-70b0116588cso341863b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jul 2024 00:01:17 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SA+54eti;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: akash.hadke27@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-2c98189a268so549596a91.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jul 2024 00:05:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1720508475; x=1721113275; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1720508705; x=1721113505; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
         bh=8c9fN7NRUcDEXB9gtvRRxOjcYoelvwzur9d0VofK4vU=;
-        b=O8CmI/TMsuKbC5/qGxQXW97QaAsxKZe89XndXhZKU8S92zYM7Ki/DFwPALaIaGyid6
-         N9DkfpupO+gZwytJsobAJpGWbKiNZGzSXj0wGligFcbm56uO0evcEgPofdamhBCtXBKT
-         Oo+0pZPznRapgYHcU5eN0mmJ2SdUgXtVbG2QO2XisUgZIOOp+7joTSkYGFmfwZK8vf9c
-         tmlNW605h82PPWPn1VX21lrvBtn3zwvsw881b5zpX9UwcO5QjzWOtwlrPEYc5DAD1co1
-         NYUG4gFGxsnBzDr2c99seu1HY7F4eNosiR2Zzn4/vtrTUZMEuqiEfLvLqrsFDYxApldK
-         9GAg==
+        b=SA+54etiIUc2yHEC5ITjhwtGypoj1kUxblT6aQX0x1A1amxsoD5EXAA1REea7OuYIa
+         2HDLZc61cgmYLcV0U3ZRB866h+OaDGj9DHNZeVaQAwKfK04fSlMEHm2pt2JEZhn0Jsf7
+         Yx6o0qCIPn9S3XEZ9UkIVvdCQc7EYPmnFscIr5tXPrJ3VNzjzwA416EE/bG9nk431bpt
+         W7iQfpxscfbR/5xevneZMX2mYRhiT0Qs0dsyFTwb7XlFxNosEpaSTi+G7mWmMxU0tPRS
+         F2sshsbLcyOb+KcK9VU4qkr4X4Y1B606USMka1uFrMbcCcV49fvgVtgsjZZj/3zAYhjj
+         wn9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720508475; x=1721113275;
+        d=1e100.net; s=20230601; t=1720508705; x=1721113505;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
         bh=8c9fN7NRUcDEXB9gtvRRxOjcYoelvwzur9d0VofK4vU=;
-        b=VNnQ7zwMlEGVv0baZp28GPZgrj6sN9dEFmsgMQMo15WR7y1F+FNjhZkCauiMxMCZvR
-         w85fYnrUDq4Jb6cJocJhWH/pXJgDHnHK8MVqPkzDxP45WHKqSl/38wDFpQGkOGpeQhbd
-         PR1H8LArngE5OP8h99cUF1ODqfOD4wT0ylyccauDfLh5k+9iMabc9Krt2TrulQV1j9wK
-         vVQYRifYWdFoMx8IKaIbpWmbpqXVq5JnWAIWchCO5g40myz+kIfzZhp5koQDDvzjcooO
-         5XCFVmvizKRMLgSLguhXruG9My9cxWZ/VI9wRLupBNGYJp9+JU6RFNVKGfHjpgWepLiz
-         +y/g==
-X-Gm-Message-State: AOJu0YwUFWv9u3lYeJs8ZLlE/cXRzmk8cAuwow51YtB5vWVdtpR10ZAs
-	gdCmkEWwpnqDTOhX1ZFTL3StQTEwudjpEVieMtLWp68EhB1NQ9lmL6jJ/g==
-X-Google-Smtp-Source: AGHT+IEaWbGoLHnVZCu4xBOLFe+lHSmUkIXjXZBc0GQU3TXYNkTiCaP1/jGJAAnowbcAzclnpMOr1Q==
-X-Received: by 2002:a05:6a00:218f:b0:704:173c:5111 with SMTP id d2e1a72fcca58-70b437520efmr1952674b3a.3.1720508475420;
-        Tue, 09 Jul 2024 00:01:15 -0700 (PDT)
+        b=rKLHAvSz0zZhiZxATAT8VjbrHT6OAI2w42IIizDqDBxS0jLson0PvaN7RTUXjUdCbk
+         ulvKUkHe0kJDpkOiLAbl2cENk0GUSbjDI1znl0RWrBujUoAX2Mvmpc2JVCYCAcGOryYd
+         sD1tv6AAqCe7FYPZQcKwYGvKxfLNV3j1EVNJ1TMDurymLuACmg+9/ObTTn8kBOAxEc6Q
+         he8epL7+KOVFOlsukyHB8fForAAHaTnKmT2ISxQD8BBgMZP3qfvhNCb5PRHrQmnzGODM
+         Xw74kv600XDPEX0zu1Y9DOZHSN8eI8buLxiWzwHZpSuMATA2/JZiG0Ya36gdUC6a8baA
+         fBJw==
+X-Gm-Message-State: AOJu0YwqMRHMzvgjSMs9QaMKnmYRYpxoj2MiCMgw8u1aUDYKdUjdLeQB
+	g1pCTb0h9Ht1+hzzEfGF/q2gtINHtVnxpdKH/DzO5sF5+EHU1qi6PA8ynQ==
+X-Google-Smtp-Source: AGHT+IHigLSUFEUsLe13S+Q/qjVhIsby9qM6re2M8oCvMR0rpA3LPo64vRGUxw5UwV+JEe7k/ZbCTg==
+X-Received: by 2002:a17:90b:3b45:b0:2c9:6920:d2b2 with SMTP id 98e67ed59e1d1-2ca35be111emr1964523a91.1.1720508705494;
+        Tue, 09 Jul 2024 00:05:05 -0700 (PDT)
 Received: from L-18010.kpit.com ([116.74.193.166])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-70b439b5585sm1040829b3a.188.2024.07.09.00.01.12
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2c99aa61e30sm9247504a91.45.2024.07.09.00.05.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 Jul 2024 00:01:14 -0700 (PDT)
+        Tue, 09 Jul 2024 00:05:05 -0700 (PDT)
 From: Akash Hadke <akash.hadke27@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: akash.hadke@kpit.com,
 	BINDU <bindudaniel1996@gmail.com>,
 	Ivan Stepic <Ivan.Stepic@bmw.de>,
 	Armin Kuster <akuster808@gmail.com>
-Subject: [oe][meta-oe][master][PATCH] flatbuffers: adapt for cross-compilation environments
-Date: Tue,  9 Jul 2024 12:30:59 +0530
-Message-Id: <20240709070059.179927-1-akash.hadke27@gmail.com>
+Subject: [oe][meta-oe][scarthgap][PATCH] flatbuffers: adapt for cross-compilation environments
+Date: Tue,  9 Jul 2024 12:34:56 +0530
+Message-Id: <20240709070456.181309-1-akash.hadke27@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 Jul 2024 07:01:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111277
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 Jul 2024 07:05:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111278
 
 From: BINDU <bindudaniel1996@gmail.com>
 
