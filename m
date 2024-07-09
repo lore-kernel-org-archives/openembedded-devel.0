@@ -1,236 +1,203 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <sjolley.yp.pm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F1BB8C3271E
-	for <webhook@archiver.kernel.org>; Tue,  9 Jul 2024 02:20:26 +0000 (UTC)
-Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com [209.85.210.53])
- by mx.groups.io with SMTP id smtpd.web11.3884.1720491621381976345
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24AD3C41513
+	for <webhook@archiver.kernel.org>; Tue,  9 Jul 2024 03:02:27 +0000 (UTC)
+Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
+ by mx.groups.io with SMTP id smtpd.web10.4488.1720494145283928695
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Jul 2024 19:20:21 -0700
+ Mon, 08 Jul 2024 20:02:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=apUZ+IZO;
- spf=pass (domain: gmail.com, ip: 209.85.210.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f53.google.com with SMTP id 46e09a7af769-7036f1f3434so773531a34.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Jul 2024 19:20:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Xq36bJTU;
+ spf=pass (domain: gmail.com, ip: 209.85.167.41, mailfrom: sjolley.yp.pm@gmail.com)
+Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-52ea929ea56so5461179e87.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Jul 2024 20:02:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1720491620; x=1721096420; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=p9e2R8XRfrKqn1yjPY6tDgv/VwFgNzuS+a5oeT569ac=;
-        b=apUZ+IZOL1F2Yp+ZL/DEbA6zBoinKbPCuXZ9g4oimO/fumAH4sQOHn/UpoVQgExLD4
-         hpcRgRcNZpe5aW6Vz3C6JShmUlCppZ4nYYxxyiv2nLgc9j9+umVq3J2ORn2x3eRPdI4p
-         yCtB7C5tr8kZPJseaJcdiZPvNKBbPLi2fUPeAuRMG6V0mGp82td1lmnV2H6/K7bSOLpg
-         WOl0wl5HKhWxrdVwuBdNu1GlQ8fODaJSm7yr3iSXPoKE4jYAW2q2JU7IQ9Rzhn6wvmKt
-         JO3rAAboFFKl0R+WliTGImijOLMyFKtyMfbB9cvwNkO5x/weg/TzFliZ2kufetrzAiJO
-         d0JA==
+        d=gmail.com; s=20230601; t=1720494143; x=1721098943; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=qvUdzh+NR3et7xQWu7kJ/Ksf5oDcQ5CzmJRARvgs2Jc=;
+        b=Xq36bJTUnXvA8oYjfCvTZ51B64SQZ0tdl9sVUXim8ToK4H44xkR+CrSD95Xw1j5ltv
+         YwShfj+iqe7b1+0d1JZ63eX9LJOyLOxPihHkE+pQ3Ej0VS5WMBzwUmHIofGvZpoiMavW
+         xsuo7WpxhmOdsDYHCk/1E6pJQIAax4diBA3VQlH6Kdu0T+NeK6mfRLKVosczbJloO0y8
+         BZvEWCO9HybyxIfTKYrhbv27mi0HNfyTfgIRBwEVXEdVrxIZAve1Jl6DHfIUC5BVQ3IC
+         1yEZ02jgtfAjcaGp/iWKJN04Ob7h7piDL1BpJH2r5o9phxPVAbMyojcbGpRYuYksYMD/
+         XmTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720491620; x=1721096420;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=p9e2R8XRfrKqn1yjPY6tDgv/VwFgNzuS+a5oeT569ac=;
-        b=qIxd2ny5RtwKZ+q6eQfeve+dX8Deo0UqRb98+WaXf2FPz0hZW62pUp6MyNlVgbJ7ug
-         RG9AW23dK/ItdZ3oZeKPI92Y2no8x4qEIFd5gdQZSmkX6bn6m8Qp2S8XBzeFDZpCXo9v
-         NyfUM1mXW3IrM6DeViuXA1YXxFyLCWC9vkRgiYOx4WiO39jCcSgATLS0lwFuhmySow6c
-         eleO4si1oTNQhJHZVq8yY9GLSgSBnkxNabzjdYF9sLFki/xfe4pbaPCphLQbGIUSgaWT
-         ldowLIYJ6+s2vPd07f0rsXDFzZzXuQUc/eH89+9N1Fh5nbo12IiVEEUt1gBfudHIY322
-         PTMQ==
-X-Gm-Message-State: AOJu0Yw5YhHt+gmp09n7mDdVXyNPLu+CxtlMeAOOIGIabfGlfIIA9vC9
-	WuDcpPTm1PlHjn1TRHNKY9r2iTpCLIMT9g2Nxo6ERwP5KW5uk3frgRf3BVPzMCZr9VLcahlw70/
-	ZJbYu3Pxi0l7Uy+/wROR2ijSzuLw=
-X-Google-Smtp-Source: AGHT+IEHkjqtIu3W0lG6aB/ILKrpJEpHvq3tpm7be2ZGY278sfGdu9ILiLgkhW7Mfl4SKy7qSyS1YSIPAEaRqR1svks=
-X-Received: by 2002:a05:6870:b52c:b0:24c:ac25:a107 with SMTP id
- 586e51a60fabf-25eaec8dde1mr1121766fac.57.1720491620326; Mon, 08 Jul 2024
- 19:20:20 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1720494143; x=1721098943;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=qvUdzh+NR3et7xQWu7kJ/Ksf5oDcQ5CzmJRARvgs2Jc=;
+        b=d0UYRyi3aDfHxksva7tiwR8hNxQhF7wI9Zdq/kF4Y90OvcfCqqIf7XPIWal2Swnn3s
+         vYZAEFigVCDF2v5F2lVgnCgo8RVpr3LDxig8F68SD33efKRPJBt373KzZXgiaDy0q1Ra
+         cC8/QN68Iee1+2jNdonZcFPpbba0qpjHE7GTGHhwXAZhy+9tIi2ZyI41gNzMAPHU7+cC
+         FLTb9s4OLUgpaMLyuXJDeBkh+C9oD1ewTK17/rLYgMmAtdzKFVBy5zfP0cbIsULVLgV5
+         kKihlR5I08Qsi2oFm3x/RTCA279ECpJmdNU7sC3EbIl6zqy3GKq0Sas+40GApOwlQ+Rf
+         8Yvg==
+X-Gm-Message-State: AOJu0YxQJK0agzBK8G1erZrBCueKenMJ8+yc3/USQrmRYOIzkqufLSiz
+	MX9k4c+JmpWnGFWESmEMpFlJEmCm8ZqYhMXChmXJ5QRWHZjUgv/8ixK3GkBtWR7dfo74tnyFCEz
+	b8CTDhAZgDC95Uso/ns+KM5nqm9Yw8JE8
+X-Google-Smtp-Source: AGHT+IEWgUWOpVYjLrmEqumR8wKSnQxZON2k2BMPY+bNL4nRa8TJ2iF+xc5HzFdWWhwveSpHRJ5T5XuYHAFDpEgBcXo=
+X-Received: by 2002:a05:6512:6c3:b0:52c:e10b:cb33 with SMTP id
+ 2adb3069b0e04-52eb99d2722mr814515e87.50.1720494142556; Mon, 08 Jul 2024
+ 20:02:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240709004123.1330033-1-jpuhlman@mvista.com> <CAMKF1srskTrmMq84r=Cb60yZnBkbDu_hL7eWc8CnHVqF1Vvcuw@mail.gmail.com>
- <ac4cf2fb-f54d-4c75-83dc-e0bc7619ec6b@mvista.com>
-In-Reply-To: <ac4cf2fb-f54d-4c75-83dc-e0bc7619ec6b@mvista.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 8 Jul 2024 19:20:08 -0700
-Message-ID: <CAMKF1spUGyrDXNmOgYJy3Q44+RwJgk1OGr36jJUoEpPJm81URg@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] net-snmp: Set ps flag value since
- it checks the host
-To: Jeremy Puhlman <jpuhlman@mvista.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000de6177061cc72ba4"
+From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
+Date: Mon, 8 Jul 2024 20:02:11 -0700
+Message-ID: <CAK5yBb_wK9KcPMPGa2J=5uOZRt+A06hxMt5MgQ=7gRoA4azHRQ@mail.gmail.com>
+Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
+To: openembedded-devel@lists.openembedded.org, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="000000000000349231061cc7c216"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 Jul 2024 02:20:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111274
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 Jul 2024 03:02:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111275
 
---000000000000de6177061cc72ba4
+--000000000000349231061cc7c216
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Jeremy
+All,
 
-So it seems only needed during build it seems ?
+The triage team is starting to try and collect up and classify bugs which a
+newcomer to the project would be able to work on in a way which means
+people can find them. They're being listed on the triage page under the
+appropriate heading:
+https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
+review:
+https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
+how to create a bugzilla account at:
+https://bugzilla.yoctoproject.org/createaccount.cgi
 
-On Mon, Jul 8, 2024 at 6:47=E2=80=AFPM Jeremy Puhlman <jpuhlman@mvista.com>=
- wrote:
+The idea is these bugs should be straight forward for a person to help work
+on who doesn't have deep experience with the project. If anyone can help,
+please take ownership of the bug and send patches! If anyone needs
+help/advice there are people on irc who can likely do so, or some of the
+more experienced contributors will likely be happy to help too.
 
->
->
-> On 7/8/2024 6:00 PM, Khem Raj wrote:
-> > On Mon, Jul 8, 2024 at 5:41=E2=80=AFPM Jeremy Puhlman via
-> > lists.openembedded.org <jpuhlman=3Dmvista.com@lists.openembedded.org>
-> > wrote:
-> >> From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
-> >>
-> >> The value the configure script uses is picked up
-> >> from the host machine ps, and there are cases when
-> >> the flag selection can be different. Which would
-> >> break reproducablity between builds on different
-> >> machines.
-> >>
-> >> Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
-> >> ---
-> >>   meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb | 1 +
-> >>   1 file changed, 1 insertion(+)
-> >>
-> >> diff --git a/meta-networking/recipes-protocols/net-snmp/
-> net-snmp_5.9.4.bb b/meta-networking/recipes-protocols/net-snmp/
-> net-snmp_5.9.4.bb
-> >> index 75b3d9e8c..989ec5413 100644
-> >> --- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb
-> >> +++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb
-> >> @@ -73,6 +73,7 @@ CACHED_CONFIGUREVARS =3D " \
-> >>       lt_cv_shlibpath_overrides_runpath=3Dyes \
-> >>       ac_cv_path_UNAMEPROG=3D${base_bindir}/uname \
-> >>       ac_cv_path_PSPROG=3D${base_bindir}/ps \
-> >> +    ac_cv_ps_flags=3D"-e" \
-> > While this change seems ok, I wonder if then we also need to ensure
-> > that procps provided ps utility is rdepend'ed upon too.
-> All the usage there is to see if snmpd is actually running. Any value
-> that works for all of them would be reasonable. I thought the
-> assumption was that busybox was always on the system and busybox ps
-> accepts -e with an output that should work. Probably
-> don't need the rdepend, If base busybox is still assumed.
->
-> >>       ac_cv_file__etc_printcap=3Dno \
-> >>       NETSNMP_CONFIGURE_OPTIONS=3D \
-> >>   "
-> >> --
-> >> 2.35.7
-> >>
-> >>
-> >> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >> Links: You receive all messages sent to this group.
-> >> View/Reply Online (#111270):
-> https://lists.openembedded.org/g/openembedded-devel/message/111270
-> >> Mute This Topic: https://lists.openembedded.org/mt/107114904/1997914
-> >> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> >> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub
-> [raj.khem@gmail.com]
-> >> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >>
->
-> --
-> Jeremy Puhlman
-> jpuhlman@mvista.com
->
->
+Also, the triage team meets weekly and does its best to handle the bugs
+reported into the Bugzilla. The number of people attending that meeting has
+fallen, as have the number of people available to help fix bugs. One of the
+things we hear users report is they don't know how to help. We (the triage
+team) are therefore going to start reporting out the currently 408
+unassigned or newcomer bugs.
 
---000000000000de6177061cc72ba4
+We're hoping people may be able to spare some time now and again to help
+out with these. Bugs are split into two types, "true bugs" where things
+don't work as they should and "enhancements" which are features we'd want
+to add to the system. There are also roughly four different "priority"
+classes right now, =E2=80=9C5.1=E2=80=9D, =E2=80=9C5.2", "5.99" and "Future=
+", the more
+pressing/urgent issues being in "5.1" and then =E2=80=9C5.2=E2=80=9D.
+
+Please review this link and if a bug is something you would be able to help
+with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
+an e-mail with the bug number you would like and I will assign it to you
+(please make sure you have a Bugzilla account). The list is at:
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs
+
+Thanks,
+
+
+
+*Stephen K. Jolley*
+
+*Yocto Project Program Manager*
+
+(    *Cell*:                (208) 244-4460
+
+* *Email*:                 *s
+<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
+*
+
+--000000000000349231061cc7c216
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"auto">Hi Jeremy</div><div dir=3D"auto"><br></div><div dir=3D"au=
-to">So it seems only needed during build it seems ?</div><div><br><div clas=
-s=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Jul 8, 2024=
- at 6:47=E2=80=AFPM Jeremy Puhlman &lt;<a href=3D"mailto:jpuhlman@mvista.co=
-m">jpuhlman@mvista.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_q=
-uote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1e=
-x"><br>
-<br>
-On 7/8/2024 6:00 PM, Khem Raj wrote:<br>
-&gt; On Mon, Jul 8, 2024 at 5:41=E2=80=AFPM Jeremy Puhlman via<br>
-&gt; <a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" target=3D=
-"_blank">lists.openembedded.org</a> &lt;jpuhlman=3D<a href=3D"mailto:mvista=
-.com@lists.openembedded.org" target=3D"_blank">mvista.com@lists.openembedde=
-d.org</a>&gt;<br>
-&gt; wrote:<br>
-&gt;&gt; From: &quot;Jeremy A. Puhlman&quot; &lt;<a href=3D"mailto:jpuhlman=
-@mvista.com" target=3D"_blank">jpuhlman@mvista.com</a>&gt;<br>
-&gt;&gt;<br>
-&gt;&gt; The value the configure script uses is picked up<br>
-&gt;&gt; from the host machine ps, and there are cases when<br>
-&gt;&gt; the flag selection can be different. Which would<br>
-&gt;&gt; break reproducablity between builds on different<br>
-&gt;&gt; machines.<br>
-&gt;&gt;<br>
-&gt;&gt; Signed-off-by: Jeremy A. Puhlman &lt;<a href=3D"mailto:jpuhlman@mv=
-ista.com" target=3D"_blank">jpuhlman@mvista.com</a>&gt;<br>
-&gt;&gt; ---<br>
-&gt;&gt;=C2=A0 =C2=A0meta-networking/recipes-protocols/net-snmp/<a href=3D"=
-http://net-snmp_5.9.4.bb" rel=3D"noreferrer" target=3D"_blank">net-snmp_5.9=
-.4.bb</a> | 1 +<br>
-&gt;&gt;=C2=A0 =C2=A01 file changed, 1 insertion(+)<br>
-&gt;&gt;<br>
-&gt;&gt; diff --git a/meta-networking/recipes-protocols/net-snmp/<a href=3D=
-"http://net-snmp_5.9.4.bb" rel=3D"noreferrer" target=3D"_blank">net-snmp_5.=
-9.4.bb</a> b/meta-networking/recipes-protocols/net-snmp/<a href=3D"http://n=
-et-snmp_5.9.4.bb" rel=3D"noreferrer" target=3D"_blank">net-snmp_5.9.4.bb</a=
-><br>
-&gt;&gt; index 75b3d9e8c..989ec5413 100644<br>
-&gt;&gt; --- a/meta-networking/recipes-protocols/net-snmp/<a href=3D"http:/=
-/net-snmp_5.9.4.bb" rel=3D"noreferrer" target=3D"_blank">net-snmp_5.9.4.bb<=
-/a><br>
-&gt;&gt; +++ b/meta-networking/recipes-protocols/net-snmp/<a href=3D"http:/=
-/net-snmp_5.9.4.bb" rel=3D"noreferrer" target=3D"_blank">net-snmp_5.9.4.bb<=
-/a><br>
-&gt;&gt; @@ -73,6 +73,7 @@ CACHED_CONFIGUREVARS =3D &quot; \<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0lt_cv_shlibpath_overrides_runpath=3Dyes =
-\<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0ac_cv_path_UNAMEPROG=3D${base_bindir}/un=
-ame \<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0ac_cv_path_PSPROG=3D${base_bindir}/ps \<=
-br>
-&gt;&gt; +=C2=A0 =C2=A0 ac_cv_ps_flags=3D&quot;-e&quot; \<br>
-&gt; While this change seems ok, I wonder if then we also need to ensure<br=
->
-&gt; that procps provided ps utility is rdepend&#39;ed upon too.<br>
-All the usage there is to see if snmpd is actually running. Any value <br>
-that works for all of them would be reasonable. I thought the<br>
-assumption was that busybox was always on the system and busybox ps <br>
-accepts -e with an output that should work. Probably<br>
-don&#39;t need the rdepend, If base busybox is still assumed.<br>
-<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0ac_cv_file__etc_printcap=3Dno \<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0NETSNMP_CONFIGURE_OPTIONS=3D \<br>
-&gt;&gt;=C2=A0 =C2=A0&quot;<br>
-&gt;&gt; --<br>
-&gt;&gt; 2.35.7<br>
-&gt;&gt;<br>
-&gt;&gt;<br>
-&gt;&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt;&gt; Links: You receive all messages sent to this group.<br>
-&gt;&gt; View/Reply Online (#111270): <a href=3D"https://lists.openembedded=
-.org/g/openembedded-devel/message/111270" rel=3D"noreferrer" target=3D"_bla=
-nk">https://lists.openembedded.org/g/openembedded-devel/message/111270</a><=
-br>
-&gt;&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/1071=
-14904/1997914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembed=
-ded.org/mt/107114904/1997914</a><br>
-&gt;&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.op=
-enembedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedd=
-ed.org</a><br>
-&gt;&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembed=
-ded-devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openemb=
-edded.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.=
-com" target=3D"_blank">raj.khem@gmail.com</a>]<br>
-&gt;&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt;&gt;<br>
-<br>
--- <br>
-Jeremy Puhlman<br>
-<a href=3D"mailto:jpuhlman@mvista.com" target=3D"_blank">jpuhlman@mvista.co=
-m</a><br>
-<br>
-</blockquote></div></div>
+<div dir=3D"ltr"><span style=3D"font-size:11pt;font-family:Calibri,Arial">A=
+ll,<br><br>The triage team is starting to try and collect up and classify b=
+ugs which a newcomer to the project would be able to work on in a way which=
+ means people can find them. They&#39;re being listed on the triage page un=
+der the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/wiki/=
+Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage#New=
+comer_Bugs</a>  Also please review: <a href=3D"https://www.openembedded.org=
+/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.org/w=
+iki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugzilla =
+account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount.cgi"=
+>https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The idea is=
+ these bugs should be straight forward for a person to help work on who doe=
+sn&#39;t have deep experience with the project.  If anyone can help, please=
+ take ownership of the bug and send patches!  If anyone needs help/advice t=
+here are people on irc who can likely do so, or some of the more experience=
+d contributors will likely be happy to help too.<br><br>Also, the triage te=
+am meets weekly and does its best to handle the bugs reported into the Bugz=
+illa. The number of people attending that meeting has fallen, as have the n=
+umber of people available to help fix bugs. One of the things we hear users=
+ report is they don&#39;t know how to help. We (the triage team) are theref=
+ore going to start reporting out the currently 408 unassigned or newcomer b=
+ugs.<br><br>We&#39;re hoping people may be able to spare some time now and =
+again to help out with these.  Bugs are split into two types, &quot;true bu=
+gs&quot; where things don&#39;t work as they should and &quot;enhancements&=
+quot; which are features we&#39;d want to add to the system.  There are als=
+o roughly four different &quot;priority&quot; classes right now, =E2=80=9C5=
+.1=E2=80=9D, =E2=80=9C5.2&quot;, &quot;5.99&quot; and &quot;Future&quot;, t=
+he more pressing/urgent issues being in &quot;5.1&quot; and then =E2=80=9C5=
+.2=E2=80=9D.<br><br>Please review this link and if a bug is something you w=
+ould be able to help with either take ownership of the bug, or send me (<a =
+href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>) an e-m=
+ail with the bug number you would like and I will assign it to you (please =
+make sure you have a Bugzilla account).  The list is at: <a href=3D"https:/=
+/wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcomer_Bugs"=
+>https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcom=
+er_Bugs</a></span><br><div dir=3D"ltr" class=3D"gmail_signature" data-smart=
+mail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p class=3D"MsoN=
+ormal" style=3D"background-image:initial;background-position:initial;backgr=
+ound-repeat:initial"><span style=3D"font-size:12pt;font-family:Arial,sans-s=
+erif">Thanks,<span></span></span></p>
 
---000000000000de6177061cc72ba4--
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
+ily:Arial,sans-serif">=C2=A0<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
+lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
+ont-family:Arial,sans-serif"><span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
+amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
+an></b></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
+&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
+<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
+:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
+s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
+-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
+><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
+/span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
+t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
+=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
+color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
+uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
+ lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
+erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
+phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
+.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
+u></p></div></div></div></div>
+
+--000000000000349231061cc7c216--
 
