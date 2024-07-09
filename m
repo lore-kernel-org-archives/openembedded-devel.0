@@ -1,385 +1,226 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <Qi.Chen@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36F21C2BD09
-	for <webhook@archiver.kernel.org>; Tue,  9 Jul 2024 07:20:48 +0000 (UTC)
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
- by mx.groups.io with SMTP id smtpd.web11.7319.1720509642031071959
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A601C3DA41
+	for <webhook@archiver.kernel.org>; Tue,  9 Jul 2024 08:16:58 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.7840.1720513008559554552
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jul 2024 00:20:42 -0700
+ Tue, 09 Jul 2024 01:16:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=MWNHoY/i;
- spf=pass (domain: smile.fr, ip: 209.85.221.52, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-367a183df54so2947602f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jul 2024 00:20:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1720509640; x=1721114440; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:organization:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=zE9F4U/9YOMYzznZE8ADtRItsv9PI9f7Hc5cbXUQt5w=;
-        b=MWNHoY/i1S/3nIHsvb4Pwcoj01ai9B2PygnxLyWsQv7wuiVGDlv2D+0DgaMALfEnjT
-         CmipCDJ9qBVwI/P52IBzr5zMRIfSBX/LK7kXo9PXqkdQasHmK+USriQBh2CofJH0VoNg
-         vDHOrB1aFXqybFbBm90p28n9A6oZpus7y3FTc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720509640; x=1721114440;
-        h=content-transfer-encoding:in-reply-to:organization:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=zE9F4U/9YOMYzznZE8ADtRItsv9PI9f7Hc5cbXUQt5w=;
-        b=UfBP2E98zMR0ERh+br5ozfT7oeTcnNmCVaVbzgHECy2ZZA6A8zX5S4u7QeaNC/3bjh
-         UOdVo8j8uoCxZTy0q/WbqUWYcomcAYyMfbz7GailI0gWBol+1G7CAmOKDE5Zhcg9E51t
-         0EzgLlrZLr4bMSNyoJpu3j3bMl0n54qdrjUqDSloNculMMq/pLmPwL/HlnaO3wWg0Y6d
-         bTV8sRnDn19LKhXTSG7cyXqPQPelhBE0Kf1FGy4tM6jpdic+BWf79S8efi7R7BqTDrFG
-         4BBZxDQjFZ7ynWDm2kvD1XsEoxvI3UTa7oAyTZOrVzOtlZHF2kYlxy8q1WeXX4jXCKvn
-         O2IQ==
-X-Gm-Message-State: AOJu0YyPD1vOeWUgnDDf5WdnMb11AL6ZTVC8iYdubO+JfgNihrMPWjpE
-	Kps39prNLgJ5mlv/zzMoKMPEXCMGJFD5njS6Xv7nj+FjCBNu0MNKHHVdYpqdigp4+N/ZmNTDj68
-	4
-X-Google-Smtp-Source: AGHT+IGNf8JUZ8P5ta0J4E+67eYz77EcmBzrcxcL6owaJ1jYH7J/8uRH73CAJgZSSMzetqBD9VqkHQ==
-X-Received: by 2002:a5d:564a:0:b0:367:8811:5e3c with SMTP id ffacd0b85a97d-367cea6b768mr1127376f8f.20.1720509639423;
-        Tue, 09 Jul 2024 00:20:39 -0700 (PDT)
-Received: from [192.168.0.22] ([89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-367cde84928sm1682420f8f.46.2024.07.09.00.20.39
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 09 Jul 2024 00:20:39 -0700 (PDT)
-Message-ID: <c1548b45-9545-4d78-9bd1-74a45cf61217@smile.fr>
-Date: Tue, 9 Jul 2024 09:20:38 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-oe][PATCH] pidgin: Upgrade to 2.14.13
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=792037c54b=qi.chen@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4694XCRP017879
+	for <openembedded-devel@lists.openembedded.org>; Tue, 9 Jul 2024 08:16:47 GMT
+Received: from nam12-dm6-obe.outbound.protection.outlook.com (mail-dm6nam12lp2168.outbound.protection.outlook.com [104.47.59.168])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 406u4x2hbe-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jul 2024 08:16:47 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=gZZSe2DJ/ZoidX12VVGhXxmE/GTENwHSYSzTC7pvJpIgUAnLkJrr1l116MssoKSK11Kk2Et/z6felc4PGx2qYsnnWERbqJVGQJYMDI/qptk+RGcRvfLX62Gb6Cc50eKlKwwSVvDoyBPj2zt/dgkTxnL466o6RWhVkODEdrxOHQpsamYmZ2efrZIMOkL62Ju98AVsZfVfqIUi8i/tbA+eKBWGy8zUOrkfsk3pDFkOBQynCBAWu/hxOfTmJF7Ru3BecRFWLmkpTQ3sx3+XaFFpTxT1M3vMhZ9GXZQP4URl9JF3GhpwxRf6rFcFF7gvFVf6TPRStMp87wQTCNsa99pmPQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3KoEVlAVRkev9Rs6pju6iNlgzssXy//9eI6T9q1dvxs=;
+ b=hIc61vL/aLttfcEVRx9wyvlCqyJGm7FQwZjzw4y2rWaeOhYPB6jWweoGjhhYX9vIT6MWfY8rj0QSwpWxxAJb+5exC9gExQrpnlgKegQYL+I4H00DK0F4dLsYOw1yGlOWlO2Hai8Rz2dFP5OdPMDvgm8Sgp2mGHRDejB3E3QVBmtSiNBg+j87+1TTkGvuIRnxScNIJfBMhN/CIct24kkcwVKj7Z/SdjYUSRhwMRR/y2IV3OlA9eOMcwSskFLbfczFo7vwmXracMCrBpxyv1aHM/Z2aByhHB4wlmi87VSA+ObEqcuhFV+MBsfUxb9uIJTGSj2RLRYM0/dNBvx5A7lMUw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from CO6PR11MB5602.namprd11.prod.outlook.com (2603:10b6:303:13a::5)
+ by CY8PR11MB6890.namprd11.prod.outlook.com (2603:10b6:930:5d::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.34; Tue, 9 Jul
+ 2024 08:16:44 +0000
+Received: from CO6PR11MB5602.namprd11.prod.outlook.com
+ ([fe80::a7e3:721d:9cec:6093]) by CO6PR11MB5602.namprd11.prod.outlook.com
+ ([fe80::a7e3:721d:9cec:6093%4]) with mapi id 15.20.7741.033; Tue, 9 Jul 2024
+ 08:16:43 +0000
+From: Qi.Chen@windriver.com
 To: openembedded-devel@lists.openembedded.org
-References: <20240708221801.876799-1-yoann.congal@smile.fr>
-Content-Language: en-US
-From: Yoann Congal <yoann.congal@smile.fr>
-Organization: Smile ECS
-In-Reply-To: <20240708221801.876799-1-yoann.congal@smile.fr>
-Content-Type: text/plain; charset=UTF-8
+Subject: [oe][meta-oe][scarthgap][PATCH] libdbd-mysql-perl: avoid invoking assert_lib at do_configure stage
+Date: Tue,  9 Jul 2024 01:16:31 -0700
+Message-Id: <20240709081631.458784-1-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 2.25.1
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SJ0P220CA0027.NAMP220.PROD.OUTLOOK.COM
+ (2603:10b6:a03:41b::18) To CO6PR11MB5602.namprd11.prod.outlook.com
+ (2603:10b6:303:13a::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO6PR11MB5602:EE_|CY8PR11MB6890:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8aebd2a2-5038-4107-7f92-08dc9fef77a0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|366016|52116014|376014|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?JlJBZhqsrFk3P2w6zCJMao3jasvLKFYXwDuD4Gw7NqUneyk2HptUEFughkhe?=
+ =?us-ascii?Q?5xmmjJgBQhhTGfXFL4RrtK9t++48kosVUHpNA/kzK5kLkQQRjxQKD58sEowD?=
+ =?us-ascii?Q?bhjRU50B0DexHmc+nfj5oNHOXfGBdZf0sCmE86THwWc1ih9O+WaRqY2IBg3U?=
+ =?us-ascii?Q?hwPE8lJhIgHBWhuoB0UXCgCH+6ROqT9VKUwOoHmR20ssFId6s2P7tKqsIIkz?=
+ =?us-ascii?Q?m3+TlKcttG3eb2gF791O1RtbG7rap3QlI2yj2iPrbX3Lu+AquwU06+0w+jZw?=
+ =?us-ascii?Q?lzP+lyJE9UIrzg4g4iVmSNgeLTP2diqxl+EAFMXbkkIfmvDxZEVmcnzLBLkU?=
+ =?us-ascii?Q?pdIaL5j6UrMJ8utRdDS67CuyN87pUGyTA9AT0Jn7Ob4FG0ADSMa0Tjzsvejm?=
+ =?us-ascii?Q?6qK1RhVk9OhHQ6xxl3cu4/yldglHlcUrAIsfZJegRDhPxypYuqKBJuV7rWAc?=
+ =?us-ascii?Q?Q+KsM/UxTFQO/Ps25OMtTnRFPC8TdHYvo750Un+sVFYnnwHjhO1EpLEsoD/Q?=
+ =?us-ascii?Q?o5tn6O1kPo87TmN8ZGg6WioAK6yH6/BbOrykMoIQZ6T13wW2o/hA/Z53pzt/?=
+ =?us-ascii?Q?PGn0l00jKeSIDuXg2eC3JkySLl9TazpQLY9M/yhglGuAaHxvmuDD/NZi778B?=
+ =?us-ascii?Q?+c6vPHF/JT5QwHZ4iZI13zeWsQL63fuvQ8g8ognoX8Qfiemg9VeHTtf6lmjG?=
+ =?us-ascii?Q?WZKFJydku4NpiSTcIEO40XePlN5pdO8WvyM86aZMomOeTeDPBeAgSTu9ITPI?=
+ =?us-ascii?Q?CNwY1LwokuzTWHiDGtGkxD0gKNCdSq/RZTe55ORpeEtrN+bZ7dbi3w0S0ZYV?=
+ =?us-ascii?Q?1J5OGnHzOuiW2431Z/4oiUijAeMJOubAt0EVNMm/ARYA2ZyCtNXBrH1V+DNA?=
+ =?us-ascii?Q?DX6EgxbHv+ElG0jIkk0xytBlqKbKsEJwUL8EDpqcXcMExKImFzNlgrOyUyqi?=
+ =?us-ascii?Q?FwQn/0iKpM4N+qV9Qtu6uYsrSZJMuBfafxof6XbobfNFWvvdnnjyPvaRrR2A?=
+ =?us-ascii?Q?t/ASGZZpDDNry7VSy3lnX++xCinHs5v/k8LVzXKh1Kg5cnz+iMkkJ3lSNB6b?=
+ =?us-ascii?Q?kXTJgJw8Pr7qMaiBRCyD1WDzYu4Y2qAYZDBOWLaEyvzK1tE7FcmQKlGs2xAM?=
+ =?us-ascii?Q?wO279ZkEFo/zgsaEOWJ5+DKsSpQLnrDRAKlfRyPSLtcysK4DDPvR46TDMt+o?=
+ =?us-ascii?Q?Vn7J8V7Xt7ScPQK+7Tmtt+KimmTo21tsoHXMrGn3soZFSscKfLn0Yg5sPpAt?=
+ =?us-ascii?Q?ycZ+Z6N4bUVTi1PdvHHwwOC3SVsCEe0bFhYx76eblbj4acYWI4DuLAHhD6j0?=
+ =?us-ascii?Q?P8RTyliYKibI6wlHwCEii4VgM5zF/IAiCG2QCJplAlwcYf+wJqd0wFSNVi7j?=
+ =?us-ascii?Q?Z0oMlirJobnz7apfNu5bJH3ha43CNytoCtfG6+3jjgthSTo3KQ=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO6PR11MB5602.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(52116014)(376014)(38350700014);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?02n/365dwcZicyuWIHKiwJfX17P+qMlsl/PHbjHxEwO8zPbsMZ1QzdnVfvkZ?=
+ =?us-ascii?Q?wVDZJRDu6LjpMoDG47aEQXcYjZTfKgfw0PHNxumwbkXGZ1l3kIHfUXjUjoHM?=
+ =?us-ascii?Q?S0XoGQ+HEEcVTrAgEJjYglbtKDMmq8IPEbah+THd98vCl7ITWliFk8ipsAc3?=
+ =?us-ascii?Q?V0dawkY0B5NM0ReIBfhtHFJy/MZaxQmsvvbtckcVX7lHTav/VaPhEdJ20kGU?=
+ =?us-ascii?Q?BlZky/Bik66W5yJj9Vq2gFyM90BMRg9XAtUGZ8YKvhQA+ErahDkumWiCXkKk?=
+ =?us-ascii?Q?GRzOBJF4bidctF25y07RV/BKxdHoOG5fIDfpfuU2s6QXypHZazK/aVaUOZFA?=
+ =?us-ascii?Q?P2Dh4jltV5H/mc3P86awKqYt8l7Wfls9sDP2ZUzVFYc/KN2O+6fexqGlzmue?=
+ =?us-ascii?Q?wqsq0e2xV6oPJvakIrUpfxLYaZ1d5dYhsQZtEvcCReKU7yYqdchN/lTUr4Wx?=
+ =?us-ascii?Q?Mcl84PwyMLF+RSlYm+vBs4AmnUNsPJ23fBMsWT5nJBWtn/fwSFDYfy3Fj0D7?=
+ =?us-ascii?Q?ygxWzd3Jmi1yjc9vb0mYbR4DibVvwjqEHfPanjUJjMYwJvf84AroMdKqmI+m?=
+ =?us-ascii?Q?7sxOyTFI1UXMiFgt1/RwQ+QNvo0d78eGF96mZ1n8sW9L/AlPf2Ke2LGsQDvD?=
+ =?us-ascii?Q?jRM3uCuAwnRV+jsrhx5m0rl/TrqnbVYcqPKh9Xy2Wl+8iUqGQnTUPW+qByEO?=
+ =?us-ascii?Q?5wCQFX1FcXh1r2TYsLVS8PSEaoFd1GAM9SuaPYYWws3rQzF8rsSTmd4fgKn4?=
+ =?us-ascii?Q?aOKB5pS3/moxQXw2FQclds9bF5BBhsbINnD4/Hp7T1eY1byGX1Fg/He+mEan?=
+ =?us-ascii?Q?KRFPYN+DtAKox/wMMV16T3mHfwgCmEnkvq8CDYHZqCOAk6KbS6jtfYH1ojoZ?=
+ =?us-ascii?Q?/EnjVSAg7LV0boSBkqyqT2le16F0zOKLcny7gESOnlFPiIEJX3M11fWUt8nD?=
+ =?us-ascii?Q?l8d/8ElreFEY8qZyFHPfta7z2NrP/Rf2Pl5yrC0MxL/cHaSiUacQp6s1VjeO?=
+ =?us-ascii?Q?8xUB1l04+fGFaNceRRMvokPezwChs3+twUD5KcQYDVlMzzJfMNKB5yBAElk6?=
+ =?us-ascii?Q?OThrLR5EsnVxfPu3zd6ktjZqpYLxP1VgoMOEXb+uNIjnO/eUmDkkCPfam0Tt?=
+ =?us-ascii?Q?KkETipka7z8noiFb6SOySvDdzkUe518vy6KKT0UZoUYlufCx4s4KDqpiOEwx?=
+ =?us-ascii?Q?5l8pydqJQdRpsP4FdM9zawjA4w1hGnyhJNaWr6nmU5rzLUcc00w7U1OOpD78?=
+ =?us-ascii?Q?4yb2LSYkTaPQTuaajXGFF/JPIrnBG8sEEsesQV7VW12nISKZk8UPuEYi1J74?=
+ =?us-ascii?Q?zlfffpwyG/XHX3vRtnw7hNMdA6MtzqTqDQbUMyCHa5dkQ/YWKuGhITdFw5DW?=
+ =?us-ascii?Q?01/faq6Fyy18suJYE8ngsxTPUYEVjPgwP3pKEE9WrUpZKQARtwOmFISzHtl0?=
+ =?us-ascii?Q?gZ8c+uNZOHCe+umYqlDZ6rzsbhPwdrB15mDo0vvzYvBfkmK1HXBrYTcnPbMx?=
+ =?us-ascii?Q?+/xA6TaiR7wJyw8MEnJEnL4oqKaVnIF24GWDHs68G/eTZpvnnNSkLGlVBa5U?=
+ =?us-ascii?Q?8SDavnhZAGI4bsfcL6B+4R5l69DJFvp1EaEXE9nHlZ5Qodr20DkwpFQTzn+b?=
+ =?us-ascii?Q?Ow=3D=3D?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8aebd2a2-5038-4107-7f92-08dc9fef77a0
+X-MS-Exchange-CrossTenant-AuthSource: CO6PR11MB5602.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jul 2024 08:16:43.4237
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 4366jufxQ6G+5e+9rk9ZG6Z16cvaPm4na5rpSzGjLtLFJWXzSvMlUX2XN0PxxyWxuVwUrzdfoqL/uQQKHULxjw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR11MB6890
+X-Proofpoint-ORIG-GUID: E8gufuW2uRKwmG4sQCFvUMjbbcI6KGAD
+X-Proofpoint-GUID: E8gufuW2uRKwmG4sQCFvUMjbbcI6KGAD
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-07-08_15,2024-07-08_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 adultscore=0
+ malwarescore=0 bulkscore=0 clxscore=1011 spamscore=0 mlxlogscore=999
+ priorityscore=1501 lowpriorityscore=0 suspectscore=0 phishscore=0
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2406140001 definitions=main-2407090053
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 Jul 2024 07:20:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111280
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 Jul 2024 08:16:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111281
 
+From: Chen Qi <Qi.Chen@windriver.com>
 
+The assert_lib from perl package will execute the generated binary.
+This is not suitable for cross compilation environment such as OE.
 
-Le 09/07/2024 à 00:18, Yoann Congal a écrit :
-> From: Yoann Congal <yoann.congal@smile.fr>
-> 
-> Upstream changelog: https://www.pidgin.im/ChangeLog
-> 
-> Recipe changes:
-> * Add a patch (in review) to support building on gcc-14
-> * Drop OE branding patch (code supporting this has disapeared or is
->   disabled)
-> * Remove vv and farsight2 PACKAGECONFIGs (depend on the removed
->   farsight2 recipe[0])
-> * Fixed an obvious reproducibility issue with TMPDIR in binary
-> 
-> [0]: https://git.openembedded.org/meta-openembedded/commit/?id=ec9e5ed06256ad92c818474cdb490dc0d3a0d0a3
-> 
-> Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
-> ---
->  ...or_gtkitemfactorycallbacks_on_gcc-14.patch | 177 ++++++++++++++++++
->  .../pidgin/pidgin/purple-OE-branding-25.patch |  26 ---
->  .../{pidgin_2.14.2.bb => pidgin_2.14.13.bb}   |  19 +-
->  3 files changed, 190 insertions(+), 32 deletions(-)
->  create mode 100644 meta-oe/recipes-support/pidgin/pidgin/fix_incompatible_pointer_types_for_gtkitemfactorycallbacks_on_gcc-14.patch
->  delete mode 100644 meta-oe/recipes-support/pidgin/pidgin/purple-OE-branding-25.patch
->  rename meta-oe/recipes-support/pidgin/{pidgin_2.14.2.bb => pidgin_2.14.13.bb} (89%)
-> 
-> diff --git a/meta-oe/recipes-support/pidgin/pidgin/fix_incompatible_pointer_types_for_gtkitemfactorycallbacks_on_gcc-14.patch b/meta-oe/recipes-support/pidgin/pidgin/fix_incompatible_pointer_types_for_gtkitemfactorycallbacks_on_gcc-14.patch
-> new file mode 100644
-> index 0000000000..b8e3d479fe
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/pidgin/pidgin/fix_incompatible_pointer_types_for_gtkitemfactorycallbacks_on_gcc-14.patch
-> @@ -0,0 +1,177 @@
-> +# HG changeset patch
-> +# User Yoann Congal <yoann.congal@smile.fr>
-> +# Date 1720270125 -7200
-> +#      Sat Jul 06 14:48:45 2024 +0200
-> +# Branch gcc-14-incompatible-pointer-types
-> +# Node ID 06721b86a5a8e6fb8163d9411a7778d2a0274b26
-> +# Parent  21a56db5f9987efb88d76ab26ee1eadf316f3d7d
-> +Fix incompatible pointer types for GtkItemFactoryCallbacks on gcc-14
-> +
-> +The GtkItemFactoryEntry struct callback is of type GtkItemFactoryCallbacks
-> +(aka void (*)(void)) but is initialised with GtkItemFactoryCallback1 types
-> +(aka void (*)(void *, guint,  GtkWidget *)).
-> +
-> +This is coherent with the gtk-2 documentation:
-> +> gtk_item_factory_create_items(..., GtkItemFactoryEntry *entries,...)
-> +>  entries : an array of GtkItemFactoryEntrys whose callback members must by of
-> +>  type GtkItemFactoryCallback1
-> +
-> +But, under gcc-14, the implicit cast from GtkItemFactoryCallback1 to
-> +GtkItemFactoryCallback triggers an incompatible-pointer-types error (See [0]).
-> +
-> +An exemple of this error:
-> +pidgin/gtkconv.c:3096:66: error: initialization of 'void (*)(void)' from incompatible pointer type 'void (*)(void *, guint,  GtkWidget *)' {aka 'void (*)(void *, unsigned int,  struct _GtkWidget *)'} [-Wincompatible-pointer-types]
-> + 3096 |         { N_("/Conversation/New Instant _Message..."), "<CTL>M", menu_new_conv_cb,
-> +      |                                                                  ^~~~~~~~~~~~~~~~
-> +pidgin/gtkconv.c:3096:66: note: (near initialization for 'menu_items[1].callback')
-> +
-> +To fix this, explicitely cast to GtkItemFactoryCallback where needed.
-> +
-> +Testing Done:
-> +Built with gcc-14, started and clicked on some affected menus
-> +
-> +[0]: https://gcc.gnu.org/gcc-14/porting_to.html#incompatible-pointer-types
-> +
-> +Upstream-Status: Submitted [https://reviews.imfreedom.org/r/3282/]
+In OE, if the libs are not available, the following do_compile task
+will just fail.
 
-This patch has been merged. This is now:
-  Upstream-Status: Backport [https://keep.imfreedom.org/pidgin/pidgin/rev/210f318db492]
+So we should avoid invoking assert_lib at do_configure stage to avoid
+error message like below in log.do_configure:
 
-v2 sent with this modification.
+  /usr/lib64/ld-linux-aarch64.so.1: No such file or directory
 
-> +Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
-> +
-> +diff --git a/pidgin/gtkblist.c b/pidgin/gtkblist.c
-> +--- a/pidgin/gtkblist.c
-> ++++ b/pidgin/gtkblist.c
-> +@@ -3624,11 +3624,11 @@ static GtkItemFactoryEntry blist_menu[] 
-> + 	{ N_("/Buddies/View User _Log..."), "<CTL>L", pidgin_dialogs_log, 0, "<Item>", NULL },
-> + 	{ "/Buddies/sep1", NULL, NULL, 0, "<Separator>", NULL },
-> + 	{ N_("/Buddies/Sh_ow"), NULL, NULL, 0, "<Branch>", NULL},
-> +-	{ N_("/Buddies/Show/_Offline Buddies"), NULL, pidgin_blist_edit_mode_cb, 1, "<CheckItem>", NULL },
-> +-	{ N_("/Buddies/Show/_Empty Groups"), NULL, pidgin_blist_show_empty_groups_cb, 1, "<CheckItem>", NULL },
-> +-	{ N_("/Buddies/Show/Buddy _Details"), NULL, pidgin_blist_buddy_details_cb, 1, "<CheckItem>", NULL },
-> +-	{ N_("/Buddies/Show/Idle _Times"), NULL, pidgin_blist_show_idle_time_cb, 1, "<CheckItem>", NULL },
-> +-	{ N_("/Buddies/Show/_Protocol Icons"), NULL, pidgin_blist_show_protocol_icons_cb, 1, "<CheckItem>", NULL },
-> ++	{ N_("/Buddies/Show/_Offline Buddies"), NULL, (GtkItemFactoryCallback)pidgin_blist_edit_mode_cb, 1, "<CheckItem>", NULL },
-> ++	{ N_("/Buddies/Show/_Empty Groups"), NULL, (GtkItemFactoryCallback)pidgin_blist_show_empty_groups_cb, 1, "<CheckItem>", NULL },
-> ++	{ N_("/Buddies/Show/Buddy _Details"), NULL, (GtkItemFactoryCallback)pidgin_blist_buddy_details_cb, 1, "<CheckItem>", NULL },
-> ++	{ N_("/Buddies/Show/Idle _Times"), NULL, (GtkItemFactoryCallback)pidgin_blist_show_idle_time_cb, 1, "<CheckItem>", NULL },
-> ++	{ N_("/Buddies/Show/_Protocol Icons"), NULL, (GtkItemFactoryCallback)pidgin_blist_show_protocol_icons_cb, 1, "<CheckItem>", NULL },
-> + 	{ N_("/Buddies/_Sort Buddies"), NULL, NULL, 0, "<Branch>", NULL },
-> + 	{ "/Buddies/sep2", NULL, NULL, 0, "<Separator>", NULL },
-> + 	{ N_("/Buddies/_Add Buddy..."), "<CTL>B", pidgin_blist_add_buddy_cb, 0, "<StockItem>", GTK_STOCK_ADD },
-> +@@ -3651,11 +3651,11 @@ static GtkItemFactoryEntry blist_menu[] 
-> + 	{ N_("/Tools/Pr_ivacy"), NULL, pidgin_privacy_dialog_show, 0, "<Item>", NULL },
-> + 	{ N_("/Tools/Set _Mood"), "<CTL>D", set_mood_show, 0, "<Item>", NULL },
-> + 	{ "/Tools/sep2", NULL, NULL, 0, "<Separator>", NULL },
-> +-	{ N_("/Tools/_File Transfers"), "<CTL>T", pidgin_xfer_dialog_show, 0, "<StockItem>", PIDGIN_STOCK_TOOLBAR_TRANSFER },
-> ++	{ N_("/Tools/_File Transfers"), "<CTL>T", (GtkItemFactoryCallback)pidgin_xfer_dialog_show, 0, "<StockItem>", PIDGIN_STOCK_TOOLBAR_TRANSFER },
-> + 	{ N_("/Tools/R_oom List"), NULL, pidgin_roomlist_dialog_show, 0, "<Item>", NULL },
-> + 	{ N_("/Tools/System _Log"), NULL, gtk_blist_show_systemlog_cb, 3, "<Item>", NULL },
-> + 	{ "/Tools/sep3", NULL, NULL, 0, "<Separator>", NULL },
-> +-	{ N_("/Tools/Mute _Sounds"), NULL, pidgin_blist_mute_sounds_cb, 0, "<CheckItem>", NULL },
-> ++	{ N_("/Tools/Mute _Sounds"), NULL, (GtkItemFactoryCallback)pidgin_blist_mute_sounds_cb, 0, "<CheckItem>", NULL },
-> + 	/* Help */
-> + 	{ N_("/_Help"), NULL, NULL, 0, "<Branch>", NULL },
-> + 	{ N_("/Help/Online _Help"), "F1", gtk_blist_show_onlinehelp_cb, 0, "<StockItem>", GTK_STOCK_HELP },
-> +diff --git a/pidgin/gtkconv.c b/pidgin/gtkconv.c
-> +--- a/pidgin/gtkconv.c
-> ++++ b/pidgin/gtkconv.c
-> +@@ -3093,76 +3093,76 @@ static GtkItemFactoryEntry menu_items[] 
-> + 	/* Conversation menu */
-> + 	{ N_("/_Conversation"), NULL, NULL, 0, "<Branch>", NULL },
-> + 
-> +-	{ N_("/Conversation/New Instant _Message..."), "<CTL>M", menu_new_conv_cb,
-> ++	{ N_("/Conversation/New Instant _Message..."), "<CTL>M", (GtkItemFactoryCallback)menu_new_conv_cb,
-> + 			0, "<StockItem>", PIDGIN_STOCK_TOOLBAR_MESSAGE_NEW },
-> +-	{ N_("/Conversation/Join a _Chat..."), NULL, menu_join_chat_cb,
-> ++	{ N_("/Conversation/Join a _Chat..."), NULL, (GtkItemFactoryCallback)menu_join_chat_cb,
-> + 			0, "<StockItem>", PIDGIN_STOCK_CHAT },
-> + 
-> + 	{ "/Conversation/sep0", NULL, NULL, 0, "<Separator>", NULL },
-> + 
-> +-	{ N_("/Conversation/_Find..."), NULL, menu_find_cb, 0,
-> ++	{ N_("/Conversation/_Find..."), NULL, (GtkItemFactoryCallback)menu_find_cb, 0,
-> + 			"<StockItem>", GTK_STOCK_FIND },
-> +-	{ N_("/Conversation/View _Log"), NULL, menu_view_log_cb, 0, "<Item>", NULL },
-> +-	{ N_("/Conversation/_Save As..."), NULL, menu_save_as_cb, 0,
-> ++	{ N_("/Conversation/View _Log"), NULL, (GtkItemFactoryCallback)menu_view_log_cb, 0, "<Item>", NULL },
-> ++	{ N_("/Conversation/_Save As..."), NULL, (GtkItemFactoryCallback)menu_save_as_cb, 0,
-> + 			"<StockItem>", GTK_STOCK_SAVE_AS },
-> +-	{ N_("/Conversation/Clea_r Scrollback"), "<CTL>L", menu_clear_cb, 0, "<StockItem>", GTK_STOCK_CLEAR },
-> ++	{ N_("/Conversation/Clea_r Scrollback"), "<CTL>L", (GtkItemFactoryCallback)menu_clear_cb, 0, "<StockItem>", GTK_STOCK_CLEAR },
-> + 
-> + 	{ "/Conversation/sep1", NULL, NULL, 0, "<Separator>", NULL },
-> + 
-> + #ifdef USE_VV
-> + 	{ N_("/Conversation/M_edia"), NULL, NULL, 0, "<Branch>", NULL },
-> + 
-> +-	{ N_("/Conversation/Media/_Audio Call"), NULL, menu_initiate_media_call_cb, 0,
-> ++	{ N_("/Conversation/Media/_Audio Call"), NULL, (GtkItemFactoryCallback)menu_initiate_media_call_cb, 0,
-> + 		"<StockItem>", PIDGIN_STOCK_TOOLBAR_AUDIO_CALL },
-> +-	{ N_("/Conversation/Media/_Video Call"), NULL, menu_initiate_media_call_cb, 1,
-> ++	{ N_("/Conversation/Media/_Video Call"), NULL, (GtkItemFactoryCallback)menu_initiate_media_call_cb, 1,
-> + 		"<StockItem>", PIDGIN_STOCK_TOOLBAR_VIDEO_CALL },
-> +-	{ N_("/Conversation/Media/Audio\\/Video _Call"), NULL, menu_initiate_media_call_cb, 2,
-> ++	{ N_("/Conversation/Media/Audio\\/Video _Call"), NULL, (GtkItemFactoryCallback)menu_initiate_media_call_cb, 2,
-> + 		"<StockItem>", PIDGIN_STOCK_TOOLBAR_VIDEO_CALL },
-> + #endif
-> + 
-> +-	{ N_("/Conversation/Se_nd File..."), NULL, menu_send_file_cb, 0, "<StockItem>", PIDGIN_STOCK_TOOLBAR_SEND_FILE },
-> +-	{ N_("/Conversation/Get _Attention"), NULL, menu_get_attention_cb, 0, "<StockItem>", PIDGIN_STOCK_TOOLBAR_SEND_ATTENTION },
-> +-	{ N_("/Conversation/Add Buddy _Pounce..."), NULL, menu_add_pounce_cb,
-> ++	{ N_("/Conversation/Se_nd File..."), NULL, (GtkItemFactoryCallback)menu_send_file_cb, 0, "<StockItem>", PIDGIN_STOCK_TOOLBAR_SEND_FILE },
-> ++	{ N_("/Conversation/Get _Attention"), NULL, (GtkItemFactoryCallback)menu_get_attention_cb, 0, "<StockItem>", PIDGIN_STOCK_TOOLBAR_SEND_ATTENTION },
-> ++	{ N_("/Conversation/Add Buddy _Pounce..."), NULL, (GtkItemFactoryCallback)menu_add_pounce_cb,
-> + 			0, "<Item>", NULL },
-> +-	{ N_("/Conversation/_Get Info"), "<CTL>O", menu_get_info_cb, 0,
-> ++	{ N_("/Conversation/_Get Info"), "<CTL>O", (GtkItemFactoryCallback)menu_get_info_cb, 0,
-> + 			"<StockItem>", PIDGIN_STOCK_TOOLBAR_USER_INFO },
-> +-	{ N_("/Conversation/In_vite..."), NULL, menu_invite_cb, 0,
-> ++	{ N_("/Conversation/In_vite..."), NULL, (GtkItemFactoryCallback)menu_invite_cb, 0,
-> + 			"<Item>", NULL },
-> + 	{ N_("/Conversation/M_ore"), NULL, NULL, 0, "<Branch>", NULL },
-> + 
-> + 	{ "/Conversation/sep2", NULL, NULL, 0, "<Separator>", NULL },
-> + 
-> +-	{ N_("/Conversation/Al_ias..."), NULL, menu_alias_cb, 0,
-> ++	{ N_("/Conversation/Al_ias..."), NULL, (GtkItemFactoryCallback)menu_alias_cb, 0,
-> + 			"<Item>", NULL },
-> +-	{ N_("/Conversation/_Block..."), NULL, menu_block_cb, 0,
-> ++	{ N_("/Conversation/_Block..."), NULL, (GtkItemFactoryCallback)menu_block_cb, 0,
-> + 			"<StockItem>", PIDGIN_STOCK_TOOLBAR_BLOCK },
-> +-	{ N_("/Conversation/_Unblock..."), NULL, menu_unblock_cb, 0,
-> ++	{ N_("/Conversation/_Unblock..."), NULL, (GtkItemFactoryCallback)menu_unblock_cb, 0,
-> + 			"<StockItem>", PIDGIN_STOCK_TOOLBAR_UNBLOCK },
-> +-	{ N_("/Conversation/_Add..."), NULL, menu_add_remove_cb, 0,
-> ++	{ N_("/Conversation/_Add..."), NULL, (GtkItemFactoryCallback)menu_add_remove_cb, 0,
-> + 			"<StockItem>", GTK_STOCK_ADD },
-> +-	{ N_("/Conversation/_Remove..."), NULL, menu_add_remove_cb, 0,
-> ++	{ N_("/Conversation/_Remove..."), NULL, (GtkItemFactoryCallback)menu_add_remove_cb, 0,
-> + 			"<StockItem>", GTK_STOCK_REMOVE },
-> + 
-> + 	{ "/Conversation/sep3", NULL, NULL, 0, "<Separator>", NULL },
-> + 
-> +-	{ N_("/Conversation/Insert Lin_k..."), NULL, menu_insert_link_cb, 0,
-> ++	{ N_("/Conversation/Insert Lin_k..."), NULL, (GtkItemFactoryCallback)menu_insert_link_cb, 0,
-> + 		"<StockItem>", PIDGIN_STOCK_TOOLBAR_INSERT_LINK },
-> +-	{ N_("/Conversation/Insert Imag_e..."), NULL, menu_insert_image_cb, 0,
-> ++	{ N_("/Conversation/Insert Imag_e..."), NULL, (GtkItemFactoryCallback)menu_insert_image_cb, 0,
-> + 		"<StockItem>", PIDGIN_STOCK_TOOLBAR_INSERT_IMAGE },
-> + 
-> + 	{ "/Conversation/sep4", NULL, NULL, 0, "<Separator>", NULL },
-> + 
-> + 
-> +-	{ N_("/Conversation/_Close"), NULL, menu_close_conv_cb, 0,
-> ++	{ N_("/Conversation/_Close"), NULL, (GtkItemFactoryCallback)menu_close_conv_cb, 0,
-> + 			"<StockItem>", GTK_STOCK_CLOSE },
-> + 
-> + 	/* Options */
-> + 	{ N_("/_Options"), NULL, NULL, 0, "<Branch>", NULL },
-> +-	{ N_("/Options/Enable _Logging"), NULL, menu_logging_cb, 0, "<CheckItem>", NULL },
-> +-	{ N_("/Options/Enable _Sounds"), NULL, menu_sounds_cb, 0, "<CheckItem>", NULL },
-> ++	{ N_("/Options/Enable _Logging"), NULL, (GtkItemFactoryCallback)menu_logging_cb, 0, "<CheckItem>", NULL },
-> ++	{ N_("/Options/Enable _Sounds"), NULL, (GtkItemFactoryCallback)menu_sounds_cb, 0, "<CheckItem>", NULL },
-> + 	{ "/Options/sep0", NULL, NULL, 0, "<Separator>", NULL },
-> +-	{ N_("/Options/Show Formatting _Toolbars"), NULL, menu_toolbar_cb, 0, "<CheckItem>", NULL },
-> +-	{ N_("/Options/Show Ti_mestamps"), NULL, menu_timestamps_cb, 0, "<CheckItem>", NULL },
-> ++	{ N_("/Options/Show Formatting _Toolbars"), NULL, (GtkItemFactoryCallback)menu_toolbar_cb, 0, "<CheckItem>", NULL },
-> ++	{ N_("/Options/Show Ti_mestamps"), NULL, (GtkItemFactoryCallback)menu_timestamps_cb, 0, "<CheckItem>", NULL },
-> + };
-> + 
-> + static const int menu_item_count =
-> diff --git a/meta-oe/recipes-support/pidgin/pidgin/purple-OE-branding-25.patch b/meta-oe/recipes-support/pidgin/pidgin/purple-OE-branding-25.patch
-> deleted file mode 100644
-> index 1c4daa9f67..0000000000
-> --- a/meta-oe/recipes-support/pidgin/pidgin/purple-OE-branding-25.patch
-> +++ /dev/null
-> @@ -1,26 +0,0 @@
-> -From 43e9db656431ffb22b429d5fca4ce3b4af21bc9e Mon Sep 17 00:00:00 2001
-> -From: Herrie <github.com@herrie.org>
-> -Date: Mon, 24 Jul 2017 21:30:16 +0200
-> -
-> ----
-> -Upstream-Status: Pending
-> -
-> - libpurple/protocols/irc/irc.h | 4 ++--
-> - 1 file changed, 2 insertions(+), 2 deletions(-)
-> -
-> -diff --git a/libpurple/protocols/irc/irc.h b/libpurple/protocols/irc/irc.h
-> -index 596ddaf..b70f3a9 100644
-> ---- a/libpurple/protocols/irc/irc.h
-> -+++ b/libpurple/protocols/irc/irc.h
-> -@@ -40,9 +40,9 @@
-> - 
-> - #define IRC_DEFAULT_CHARSET "UTF-8"
-> - #define IRC_DEFAULT_AUTODETECT FALSE
-> --#define IRC_DEFAULT_ALIAS "purple"
-> -+#define IRC_DEFAULT_ALIAS "OE-user"
-> - 
-> --#define IRC_DEFAULT_QUIT "Leaving."
-> -+#define IRC_DEFAULT_QUIT "Powered by OE: www.openembedded.org"
-> - 
-> - #define IRC_BUFSIZE_INCREMENT 1024
-> - #define IRC_MAX_BUFSIZE 16384
-> diff --git a/meta-oe/recipes-support/pidgin/pidgin_2.14.2.bb b/meta-oe/recipes-support/pidgin/pidgin_2.14.13.bb
-> similarity index 89%
-> rename from meta-oe/recipes-support/pidgin/pidgin_2.14.2.bb
-> rename to meta-oe/recipes-support/pidgin/pidgin_2.14.13.bb
-> index ae251b5a08..ac62863f5c 100644
-> --- a/meta-oe/recipes-support/pidgin/pidgin_2.14.2.bb
-> +++ b/meta-oe/recipes-support/pidgin/pidgin_2.14.13.bb
-> @@ -10,10 +10,10 @@ inherit autotools gettext pkgconfig gconf perlnative python3native
->  SRC_URI = "\
->      ${SOURCEFORGE_MIRROR}/pidgin/pidgin-${PV}.tar.bz2 \
->      file://sanitize-configure.ac.patch \
-> -    file://purple-OE-branding-25.patch \
-> +    file://fix_incompatible_pointer_types_for_gtkitemfactorycallbacks_on_gcc-14.patch \
->  "
->  
-> -SRC_URI[sha256sum] = "19654ad276b149646371fbdac21bc7620742f2975f7399fed0ffc1a18fbaf603"
-> +SRC_URI[sha256sum] = "120049dc8e17e09a2a7d256aff2191ff8491abb840c8c7eb319a161e2df16ba8"
->  
->  CVE_STATUS[CVE-2010-1624] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
->  CVE_STATUS[CVE-2011-3594] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
-> @@ -21,7 +21,6 @@ CVE_STATUS[CVE-2011-3594] = "fixed-version: The CPE in the NVD database doesn't
->  PACKAGECONFIG ??= "gnutls consoleui avahi dbus idn nss \
->      ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 gtk startup-notification', '', d)} \
->  "
-> -PACKAGECONFIG[farsight2] = "--enable-farstream,--disable-farstream,farsight2"
->  #  --disable-gstreamer     compile without GStreamer audio support
->  #  --disable-gstreamer-video
->  #                          compile without GStreamer 1.0 Video Overlay support
-> @@ -29,8 +28,7 @@ PACKAGECONFIG[farsight2] = "--enable-farstream,--disable-farstream,farsight2"
->  #                          compile without GStreamer 0.10 interface support
->  #  --with-gstreamer=<version>
->  #                          compile with GStreamer 0.10 or 1.0 interface
-> -PACKAGECONFIG[gstreamer] = "--enable-gstreamer,--disable-gstreamer,gstreamer"
-> -PACKAGECONFIG[vv] = "--enable-vv,--disable-vv,gstreamer"
-> +PACKAGECONFIG[gstreamer] = "--enable-gstreamer,--disable-gstreamer,gstreamer1.0"
->  PACKAGECONFIG[idn] = "--enable-idn,--disable-idn,libidn"
->  PACKAGECONFIG[gtk] = "--enable-gtkui,--disable-gtkui,gtk+"
->  PACKAGECONFIG[x11] = "--with-x=yes --x-includes=${STAGING_INCDIR} --x-libraries=${STAGING_LIBDIR},--with-x=no,virtual/libx11"
-> @@ -51,8 +49,17 @@ EXTRA_OECONF = " \
->      --disable-meanwhile \
->      --disable-nm \
->      --disable-screensaver \
-> +    --disable-farstream \
-> +    --disable-vv \
->  "
->  
-> +# CONFIG_ARGS is used to display build info. Replace full paths by reproducible
-> +# variables ($S, $WORKDIR)
-> +do_configure:append() {
-> +    sed -i -e "/CONFIG_ARGS/s|${S}|\$S|g" ${B}/config.h
-> +    sed -i -e "/CONFIG_ARGS/s|${WORKDIR}|\$WORKDIR|g" ${B}/config.h
-> +}
-> +
->  OE_LT_RPATH_ALLOW=":${libdir}/purple-2:"
->  OE_LT_RPATH_ALLOW[export]="1"
->  
-> @@ -73,7 +80,7 @@ FILES:finch          = "${bindir}/finch"
->  FILES:finch-dev      = "${libdir}/finch/*.la"
->  
->  FILES:${PN} = "${bindir} ${datadir}/${PN} ${libdir}/${PN}/*.so \
-> -           ${datadir}/applications"
-> +           ${datadir}/applications ${datadir}/metainfo"
->  RRECOMMENDS:${PN} = "${PN}-data libpurple-protocol-irc libpurple-protocol-xmpp"
->  
->  FILES:${PN}-data = "${datadir}/pixmaps ${datadir}/sounds ${datadir}/icons ${datadir}/appdata"
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+---
+ ...void-running-assert_lib-at-configure.patch | 40 +++++++++++++++++++
+ .../perl/libdbd-mysql-perl_4.050.bb           |  4 +-
+ 2 files changed, 43 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/perl/libdbd-mysql-perl/0001-Makefile.PL-avoid-running-assert_lib-at-configure.patch
 
+diff --git a/meta-oe/recipes-devtools/perl/libdbd-mysql-perl/0001-Makefile.PL-avoid-running-assert_lib-at-configure.patch b/meta-oe/recipes-devtools/perl/libdbd-mysql-perl/0001-Makefile.PL-avoid-running-assert_lib-at-configure.patch
+new file mode 100644
+index 0000000000..2e010931d6
+--- /dev/null
++++ b/meta-oe/recipes-devtools/perl/libdbd-mysql-perl/0001-Makefile.PL-avoid-running-assert_lib-at-configure.patch
+@@ -0,0 +1,40 @@
++From 577cdd6a571cfed506ec902b9021e60a2b854e4a Mon Sep 17 00:00:00 2001
++From: Chen Qi <Qi.Chen@windriver.com>
++Date: Sun, 7 Jul 2024 22:32:30 -0700
++Subject: [PATCH] Makefile.PL: avoid running assert_lib at configure
++
++The assert_lib will run the generated binary. When cross compiling,
++e.g., for qemuarm64, we'll see error like below:
++
++  /usr/lib64/ld-linux-aarch64.so.1: No such file or directory
++
++We should just skip library checking, because in OE, if these libs are
++not available, the do_compile process will fail anyway.
++
++Upstream-Status: Inappropriate [OE Specific]
++
++Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
++---
++ Makefile.PL | 6 +-----
++ 1 file changed, 1 insertion(+), 5 deletions(-)
++
++diff --git a/Makefile.PL b/Makefile.PL
++index a1b38f6..939cadc 100644
++--- a/Makefile.PL
+++++ b/Makefile.PL
++@@ -206,11 +206,7 @@ To change these settings, see 'perl Makefile.PL --help' and
++ MSG
++ 
++ print "Checking if libs are available for compiling...\n";
++-
++-assert_lib(
++-  LIBS => ($opt->{'embedded'} ? $opt->{'embedded'} : $opt->{libs}),
++-);
++-
+++print "Skip checking libs at configure stage as we are cross compiling.\n";
++ print "Looks good.\n\n";
++ 
++ sleep 1;
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.050.bb b/meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.050.bb
+index fc505fe1e8..99a9fcf628 100644
+--- a/meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.050.bb
++++ b/meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.050.bb
+@@ -15,7 +15,9 @@ DEPENDS += "libdev-checklib-perl-native libdbi-perl-native libmysqlclient"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d0a06964340e5c0cde88b7af611f755c"
+ 
+ SRCREV = "9b5b70ea372f49fe9bc9e592dae3870596d1e3d6"
+-SRC_URI = "git://github.com/perl5-dbi/DBD-mysql.git;protocol=https;branch=master"
++SRC_URI = "git://github.com/perl5-dbi/DBD-mysql.git;protocol=https;branch=master \
++           file://0001-Makefile.PL-avoid-running-assert_lib-at-configure.patch \
++           "
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
-Yoann Congal
-Smile ECS - Tech Expert
+2.25.1
+
 
