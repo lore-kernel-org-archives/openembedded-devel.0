@@ -1,192 +1,101 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D0FF1C41513
-	for <webhook@archiver.kernel.org>; Wed, 10 Jul 2024 07:10:27 +0000 (UTC)
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
- by mx.groups.io with SMTP id smtpd.web11.8366.1720595419830736647
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 35F86C3DA42
+	for <webhook@archiver.kernel.org>; Wed, 10 Jul 2024 08:23:58 +0000 (UTC)
+Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
+ by mx.groups.io with SMTP id smtpd.web10.9356.1720599835494209307
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jul 2024 00:10:20 -0700
+ Wed, 10 Jul 2024 01:23:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eLUIPOWo;
- spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-5957040e32aso1019262a12.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 00:10:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1720595418; x=1721200218; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=uoJLUHdg3/QM3IL+b/E/ARdBncDyNqRBq1Ht9hnVRcA=;
-        b=eLUIPOWouFPRNO+wvnB3B65RHItpzr2hyG8cHBnYihdC7YYl+Nbe62nXCME8eDOthT
-         81jH7sBWAt3cxGd+6ufIJPQX5ldBi4QPNK3FHbUYex5E6/VSVQYT8DyrT0O7hfnc0s0D
-         PpXF1pLIh00LDtkM2GnWKOmO2BftNO9xaJlzRvl4aWJxBF50ZvQzLHV4qQeRYGd5B4Pe
-         8I1UWAt7L/NQb9I4vCRwoJ4mS1v643rYciqN5G8pBgb+/2wwA6U9S0Ue17dQhTCcFOTH
-         t5V9Ccfds+ecR70DXFUIksXeOhG2E6tweNO2sC/a1VsyJbLE5/NodFsc9kvFz3PcXzYo
-         8W9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720595418; x=1721200218;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=uoJLUHdg3/QM3IL+b/E/ARdBncDyNqRBq1Ht9hnVRcA=;
-        b=CJZnhiAXDYWEAk2epF8OrZr22bC7OpGzXy21JY9hKRe0UmTsJvFd2HEGb+Aaek/sgK
-         SiudYubVeKYkaXr6pnG2fC6fkLZWY2bId7/bmbg5adMF8eWDGd0Erw37zFG2vL9pyA1P
-         x+hr9pAA+Lm1Q4WOx1NfHG+zKDe5rCF4cW/SeFA6521FkUfW5M2b/phPW1WBegsw+OH1
-         ABI88tX3RmvEmlW858DHGN7oyUGwuvOWQGOW4MdFgA0Qu+wJs3Q9p3F7cG/rUbM+N3zF
-         Dcq8AXpcGRmk3zoThJkLH8ZgoAIhxYZ9ZCtylZ9DuWxBvY+iXp2HEfcCL67cbKtRoKdk
-         S9Aw==
-X-Gm-Message-State: AOJu0YyKVGHwEEEPbrR4OJ+KJyvNo+wNCC3c6gI0lQj96PnBMtaLy9Kd
-	4lz/EPAJ+4pCVeBDTojhAcIeG2BHj7BFIvDcN8bzHAlwSOT+Zk97WZ74BQ==
-X-Google-Smtp-Source: AGHT+IH2mw+0i+dYZQRN7yLmenBm6CW0wTdjq187uDSF8wr45iW+TZkE+/OvE39DZ+n/KiicUYrnXw==
-X-Received: by 2002:a05:6402:134f:b0:58d:77e0:5c29 with SMTP id 4fb4d7f45d1cf-594bb181cb8mr3599000a12.10.1720595417901;
-        Wed, 10 Jul 2024 00:10:17 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-594bc7c8a39sm1908519a12.55.2024.07.10.00.10.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Jul 2024 00:10:17 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=YSEh5eq3;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1720599836; x=1752135836;
+  h=from:to:cc:subject:date:message-id;
+  bh=bJi1F73ChMK5sVLE8OEgo1Lpb0KvwpImxO1YqpVqdpU=;
+  b=YSEh5eq3CBMfe3h6M2hNTdqpSsHN8LGXvoOq4cuVa+nHQ5I03r17WLVy
+   ErJQbKeKO4PMrYo4dS2RXKK+WMjQIwqZK3nCMq/ernrcSNAyL2XMsV4IA
+   rrE3DeuZx+5Bvx6mtPVnIe+JQDLxCmSZwQVJFG9FrgDXXZUPNxpK+neOR
+   eDeB8D00uvk/rLSBNpPSA1Jhi3tx0TsW2YlOQ/K1yw2rhDNjthotLDnw9
+   1zsjcy5RZAZjqlgKI8FsgbC+f+yFBxv9KDPhEC5pjKeDHdclFSTo87qAW
+   caiZaMbnxxezioKZN2tCZoVEwo7nkJX2lKDuACs0kGCMWB9SR1E+QTlRU
+   g==;
+X-IronPort-AV: E=McAfee;i="6700,10204,11128"; a="165744929"
+X-IronPort-AV: E=Sophos;i="6.09,197,1716217200"; 
+   d="scan'208";a="165744929"
+Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
+  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Jul 2024 17:23:53 +0900
+Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
+	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 7D420DB3C2
+	for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 17:23:50 +0900 (JST)
+Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
+	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id B40FCD510E
+	for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 17:23:49 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 353FF20086123
+	for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 17:23:49 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id B93A41A000A;
+	Wed, 10 Jul 2024 16:23:48 +0800 (CST)
+From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][scarthgap][PATCH 1/2] giflib: fix build with gold and avoid imagemagick-native dependency
-Date: Wed, 10 Jul 2024 09:10:15 +0200
-Message-ID: <20240710071016.64569-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.45.2
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] fetchmail: disable rpath to  fix buildpaths warning.
+Date: Wed, 10 Jul 2024 16:23:36 +0800
+Message-Id: <1720599816-22915-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28520.006
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28520.006
+X-TMASE-Result: 10-1.260000-10.000000
+X-TMASE-MatchedRID: G+VdM6uSBxqFGhTClJy1Nu9kW9mxCQvtgf3FRZbpKzt4YeSlHZYFotN3
+	A9FjogGZjf84k1uW53hV00+whwxVQ6cUQ7z3S96iEXjPIvKd74Aytf6nW43O0KSIGrjDxszFo8W
+	MkQWv6iV3LAytsQR4e42j49Ftap9ExlblqLlYqXJDw+uK3sejJB9QgpzB9O/kgTnJKjNaykEbBU
+	W6PSXg3EQEv7DhYz3lY/x/jhGQ7Cvpl1i72UzkjQAGlfWuy44CHy3DV3uo14f+v9v52ZIoWjoAf
+	389xF3XFSk9HhUZnw7OGIWnws4LoyHWPYzouJUy
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 07:10:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111291
+ <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 08:23:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111293
 
-* avoid imagemagick-native like upstream did in:
-  https://sourceforge.net/p/giflib/code/ci/d54b45b0240d455bbaedee4be5203d2703e59967/
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+There was an error with the last modification to the buildpaths warning, which could cause segment error.
+
+fix the following warning about buildpath:
+  WARNING: fetchmail-6.4.38-r0 do_package_qa: QA Issue: File /usr/bin/fetchmail in package fetchmail contains reference to TMPDIR [buildpaths]
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...x_to_convert_binary_used_in_Makefile.patch | 42 -------------------
- ...Makefile-fix-typo-in-soname-argument.patch | 34 +++++++++++++++
- .../recipes-devtools/giflib/giflib_5.2.2.bb   |  8 ++--
- 3 files changed, 39 insertions(+), 45 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/giflib/files/add_suffix_to_convert_binary_used_in_Makefile.patch
- create mode 100644 meta-oe/recipes-devtools/giflib/giflib/0001-Makefile-fix-typo-in-soname-argument.patch
+ .../recipes-support/fetchmail/fetchmail_6.4.38.bb            | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/giflib/files/add_suffix_to_convert_binary_used_in_Makefile.patch b/meta-oe/recipes-devtools/giflib/files/add_suffix_to_convert_binary_used_in_Makefile.patch
-deleted file mode 100644
-index a01b28ac6d..0000000000
---- a/meta-oe/recipes-devtools/giflib/files/add_suffix_to_convert_binary_used_in_Makefile.patch
-+++ /dev/null
-@@ -1,42 +0,0 @@
--Subject: Modify binary name "convert" to "convert.im7"
--
--The change is needed to resolve the below compilation error
--after giflib version upgrade. Log data follows:
--| DEBUG: Executing shell function do_compile
--| NOTE: make -j 8
--| make -C doc
--| make[1]: Entering directory '../giflib/5.2.2/giflib-5.2.2/doc'
--| convert ../pic/gifgrid.gif -resize 50x50 giflib-logo.gif
--| make[1]: convert: No such file or directory
--| make[1]: *** [Makefile:46: giflib-logo.gif] Error 127
--| make[1]: Leaving directory '../giflib/5.2.2/giflib-5.2.2/doc'
--| make: *** [Makefile:93: all] Error 2
--| ERROR: oe_runmake failed
--
--Added dependency on ImageMagick which includes "convert" utility,
--to ensure availability of required tool during compilation process.
--
--This patch updates the binary name used in Makefile from
--"convert" to "convert.im7" for resizing the logo image used in HTML
--documentation as Imagemagick installs binary in this format.
--
--Below commits justify the cause of adding the suffix to binaries
--provided by ImageMagic package:
--https://git.openembedded.org/meta-openembedded/commit/meta-oe/recipes-support/imagemagick?id=dcbb49f707e7ad9bf755dd3275ffc442154b8144
--https://git.openembedded.org/meta-openembedded/commit/meta-oe/recipes-support/imagemagick?id=6e0c24e9b3f9d430dec57f61f8c12c74bca5375d
--
--Signed-off-by:   Bhabu Bindu <bhabubindu@kpit.com>
--Upstream-Status: Inappropriate [OE specific]
--
--===================================================================
----- a/doc/Makefile
--+++ b/doc/Makefile
--@@ -43,7 +43,7 @@
-- 
-- # Logo image file for HTML docs
-- giflib-logo.gif: ../pic/gifgrid.gif
---	convert $^ -resize 50x50 $@
--+	convert.im7 $^ -resize 50x50 $@
-- 
-- # Philosophical choice: the website gets the internal manual pages
-- allhtml: $(XMLALL:.xml=.html) giflib-logo.gif
-diff --git a/meta-oe/recipes-devtools/giflib/giflib/0001-Makefile-fix-typo-in-soname-argument.patch b/meta-oe/recipes-devtools/giflib/giflib/0001-Makefile-fix-typo-in-soname-argument.patch
-new file mode 100644
-index 0000000000..dc87ed60b9
---- /dev/null
-+++ b/meta-oe/recipes-devtools/giflib/giflib/0001-Makefile-fix-typo-in-soname-argument.patch
-@@ -0,0 +1,34 @@
-+From 7f0cd4b6b56183b0afbefd01425e5ebd2b8733b4 Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <martin.jansa@gmail.com>
-+Date: Mon, 8 Jul 2024 13:18:11 +0200
-+Subject: [PATCH] Makefile: fix typo in soname argument
-+
-+* introduced in:
-+  https://sourceforge.net/p/giflib/code/ci/b65c7ac2905c0842e7977a7b51d83af4486ca7b8/
-+  there is no LIBUTILMAJOR variable only LIBUTILSOMAJOR leading to:
-+
-+  ld: fatal error: -soname: must take a non-empty argument
-+  collect2: error: ld returned 1 exit status
-+
-+  with some linkers like GOLD
-+
-+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-+---
-+Upstream-Status: Submitted [https://sourceforge.net/p/giflib/code/merge-requests/17/]
-+
-+ Makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 87966a9..41b149e 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -109,7 +109,7 @@ $(LIBUTILSO): $(UOBJECTS) $(UHEADERS)
-+ ifeq ($(UNAME), Darwin)
-+ 	$(CC) $(CFLAGS) -dynamiclib -current_version $(LIBVER) $(OBJECTS) -o $(LIBUTILSO)
-+ else
-+-	$(CC) $(CFLAGS) -shared $(LDFLAGS) -Wl,-soname -Wl,$(LIBUTILMAJOR) -o $(LIBUTILSO) $(UOBJECTS)
-++	$(CC) $(CFLAGS) -shared $(LDFLAGS) -Wl,-soname -Wl,$(LIBUTILSOMAJOR) -o $(LIBUTILSO) $(UOBJECTS)
-+ endif
-+ 
-+ libutil.a: $(UOBJECTS) $(UHEADERS)
-diff --git a/meta-oe/recipes-devtools/giflib/giflib_5.2.2.bb b/meta-oe/recipes-devtools/giflib/giflib_5.2.2.bb
-index 7d8a175fe3..aa47f93095 100644
---- a/meta-oe/recipes-devtools/giflib/giflib_5.2.2.bb
-+++ b/meta-oe/recipes-devtools/giflib/giflib_5.2.2.bb
-@@ -5,14 +5,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ae11c61b04b2917be39b11f78d71519a"
+diff --git a/meta-networking/recipes-support/fetchmail/fetchmail_6.4.38.bb b/meta-networking/recipes-support/fetchmail/fetchmail_6.4.38.bb
+index 6cde94b20..cc23d5a34 100644
+--- a/meta-networking/recipes-support/fetchmail/fetchmail_6.4.38.bb
++++ b/meta-networking/recipes-support/fetchmail/fetchmail_6.4.38.bb
+@@ -16,13 +16,10 @@ SRC_URI[sha256sum] = "a6cb4ea863ac61d242ffb2db564a39123761578d3e40d71ce7b6f2905b
  
- CVE_PRODUCT = "giflib_project:giflib"
+ inherit autotools gettext pkgconfig python3-dir python3native
  
--DEPENDS = "xmlto-native imagemagick-native"
-+DEPENDS = "xmlto-native"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.gz \
--           file://add_suffix_to_convert_binary_used_in_Makefile.patch"
-+           https://sourceforge.net/p/giflib/code/ci/d54b45b0240d455bbaedee4be5203d2703e59967/tree/doc/giflib-logo.gif?format=raw;subdir=${BP}/doc;name=logo;downloadfilename=giflib-logo.gif \
-+           file://0001-Makefile-fix-typo-in-soname-argument.patch \
-+"
- 
-+SRC_URI[logo.sha256sum] = "1a54383986adad1521d00e003b4c482c27e8bc60690be944a1f3319c75abc2c9"
- SRC_URI[sha256sum] = "be7ffbd057cadebe2aa144542fd90c6838c6a083b5e8a9048b8ee3b66b29d5fb"
- 
+-EXTRA_OECONF = "--with-ssl=${STAGING_DIR_HOST}${prefix}"
 -
- do_install() {
-     # using autotools's default will end up in /usr/local
-     oe_runmake DESTDIR=${D} PREFIX=${prefix} LIBDIR=${libdir} install
+-INSANE_SKIP:${PN} = "already-stripped"
++EXTRA_OECONF = "--with-ssl=${STAGING_DIR_HOST}${prefix} --disable-rpath "
+ 
+ do_install:append() {
+     sed -i 's,${RECIPE_SYSROOT_NATIVE},,g' ${D}${bindir}/fetchmailconf
+-    sed -i 's,${RECIPE_SYSROOT},,g' ${D}${bindir}/fetchmail
+ }
+ 
+ PACKAGES =+ "fetchmail-python"
 -- 
-2.45.2
+2.34.1
 
 
