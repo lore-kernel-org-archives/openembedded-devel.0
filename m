@@ -1,172 +1,326 @@
-Return-Path: <ross.burton@arm.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CE15FC3DA41
-	for <webhook@archiver.kernel.org>; Wed, 10 Jul 2024 15:20:31 +0000 (UTC)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web10.17224.1720624825903400595
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77D3BC3DA41
+	for <webhook@archiver.kernel.org>; Wed, 10 Jul 2024 18:24:49 +0000 (UTC)
+Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
+ by mx.groups.io with SMTP id smtpd.web11.2228.1720635884539559879
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jul 2024 08:20:26 -0700
+ Wed, 10 Jul 2024 11:24:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6FDE6106F
-	for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 08:20:50 -0700 (PDT)
-Received: from cesw-amp-gbt-1s-m12830-04.oss.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id D117F3F766
-	for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 08:20:24 -0700 (PDT)
-From: Ross Burton <ross.burton@arm.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
+Received: from fwd70.aul.t-online.de (fwd70.aul.t-online.de [10.223.144.96])
+	by mailout04.t-online.de (Postfix) with SMTP id C1DD010A1D
+	for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 20:24:42 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.154.162.88]) by fwd70.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1sRbze-3zZn3h0; Wed, 10 Jul 2024 20:24:42 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] libabigail: refresh musl/fts patch
-Date: Wed, 10 Jul 2024 16:20:17 +0100
-Message-Id: <20240710152017.3187361-1-ross.burton@arm.com>
-X-Mailer: git-send-email 2.34.1
+Subject: [meta-oe][PATCH] libgee: backport patches to fix incompatible pointer types
+Date: Wed, 10 Jul 2024 20:25:45 +0200
+Message-ID: <20240710182545.2312308-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
+X-TOI-EXPURGATEID: 150726::1720635882-4F772D42-74104A85/0/0 CLEAN NORMAL
+X-TOI-MSGID: 91aaff17-d986-4d93-8b08-805fcbcf2ac1
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 15:20:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111303
+ <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 18:24:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111304
 
-This patch has now been sent upstream.
+This imports two upstream patches that fix vala so that it
+generates correct c code
 
-Signed-off-by: Ross Burton <ross.burton@arm.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../0001-Check-for-correct-fts-module.patch   | 90 +++++++++++++++----
- 1 file changed, 74 insertions(+), 16 deletions(-)
+ ...be8987e5eb1390b23ac531c971b202c2ef77.patch | 69 +++++++++++++++++++
+ ...6627f4fc96938b6015e05849867c472160a8.patch | 54 +++++++++++++++
+ .../recipes-devtools/libgee/libgee_0.20.6.bb  | 40 ++---------
+ 3 files changed, 127 insertions(+), 36 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/libgee/libgee/2f0bbe8987e5eb=
+1390b23ac531c971b202c2ef77.patch
+ create mode 100644 meta-oe/recipes-devtools/libgee/libgee/b33a6627f4fc96=
+938b6015e05849867c472160a8.patch
 
-diff --git a/meta-oe/recipes-devtools/libabigail/libabigail/0001-Check-fo=
-r-correct-fts-module.patch b/meta-oe/recipes-devtools/libabigail/libabiga=
-il/0001-Check-for-correct-fts-module.patch
-index 2a9388b766..7c500e0b54 100644
---- a/meta-oe/recipes-devtools/libabigail/libabigail/0001-Check-for-corre=
-ct-fts-module.patch
-+++ b/meta-oe/recipes-devtools/libabigail/libabigail/0001-Check-for-corre=
-ct-fts-module.patch
-@@ -1,33 +1,91 @@
--From b6af55e8ae120488abc83312fcd184d8352175eb Mon Sep 17 00:00:00 2001
-+From 0db4af09f1bf4456527b5f6ec60fc1305e770c4c Mon Sep 17 00:00:00 2001
- From: Ross Burton <ross.burton@arm.com>
--Date: Mon, 1 Jul 2024 10:53:45 +0000
--Subject: [PATCH] Check for correct fts module
-+Date: Tue, 9 Jul 2024 15:19:35 +0100
-+Subject: [PATCH] configure.ac: improve fts checks
-=20
--fts-standalone is a gentoo-specific name[1], every other distribution th=
-at
--uses this library has named it musl-fts.
-+The current code checks explicitly for musl and if so uses pkg-config to
-+find fts-standalone. This is suboptimal because musl may not be the only
-+libc to need a standalone fts implementation, and fts-standalone is an
-+old gentoo-specific name[1] so libabigail won't build on any other syste=
-m
-+against musl.
-=20
--[1] https://gitweb.gentoo.org/repo/gentoo.git/tree/sys-libs/fts-standalo=
-ne/fts-standalone-1.2.7.ebuild#n34
-+Instead, use AC_SEARCH_LIBS to look for fts_open in libc then libfts. Do
-+this before the check for behaviour just in case someone has a standalon=
-e
-+and broken implementation.  I assume that the standalone fts is installe=
-d
-+on the standard search path, which should be a fair assumption.
-=20
--Upstream-Status: Pending [discussing with libabigail and gentoo]
-+As we're not using pkg-config anymore the required link flags are now in
-+LIBS, so remove all instances of FTS_CFLAGS and FTS_LIBS.
+diff --git a/meta-oe/recipes-devtools/libgee/libgee/2f0bbe8987e5eb1390b23=
+ac531c971b202c2ef77.patch b/meta-oe/recipes-devtools/libgee/libgee/2f0bbe=
+8987e5eb1390b23ac531c971b202c2ef77.patch
+new file mode 100644
+index 000000000..017df4223
+--- /dev/null
++++ b/meta-oe/recipes-devtools/libgee/libgee/2f0bbe8987e5eb1390b23ac531c9=
+71b202c2ef77.patch
+@@ -0,0 +1,69 @@
++From 2f0bbe8987e5eb1390b23ac531c971b202c2ef77 Mon Sep 17 00:00:00 2001
++From: Rico Tzschichholz <ricotz@ubuntu.com>
++Date: Thu, 13 Apr 2023 23:43:03 +0200
++Subject: [PATCH] Implementations of "G List.get()" should use non-nullab=
+le
++ return as defined
 +
-+[1] https://gitweb.gentoo.org/repo/gentoo.git/commit/sys-libs/fts-standa=
-lone?id=3Da403fe6c61d1aaeecd58d521f3def2f6d3513449
++Upstream-Status: Backport
++---
++ gee/abstractlist.vala       | 2 +-
++ gee/concurrentlist.vala     | 2 +-
++ gee/readonlylist.vala       | 2 +-
++ gee/unrolledlinkedlist.vala | 2 +-
++ 4 files changed, 4 insertions(+), 4 deletions(-)
 +
-+Upstream-Status: Submitted [https://sourceware.org/pipermail/libabigail/=
-2024q3/005973.html]
- Signed-off-by: Ross Burton <ross.burton@arm.com>
- ---
-- configure.ac | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
-+ configure.ac      | 9 ++++-----
-+ src/Makefile.am   | 4 ++--
-+ tools/Makefile.am | 2 --
-+ 3 files changed, 6 insertions(+), 9 deletions(-)
-=20
- diff --git a/configure.ac b/configure.ac
--index d329490..5bad2ae 100644
-+index e118a9c0..0aff2ec2 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -295,10 +295,10 @@ AS_IF([test "x$ac_cv_bad_fts" =3D "xyes"],
-+@@ -281,6 +281,10 @@ fi
++diff --git a/gee/abstractlist.vala b/gee/abstractlist.vala
++index eeff984..1e55114 100644
++--- a/gee/abstractlist.vala
+++++ b/gee/abstractlist.vala
++@@ -39,7 +39,7 @@ public abstract class Gee.AbstractList<G> : Gee.Abstra=
+ctCollection<G>, List<G> {
++ 	/**
++ 	 * {@inheritDoc}
++ 	 */
++-	public abstract new G? get (int index);
+++	public abstract new G get (int index);
 +=20
-+ AC_SUBST(VISIBILITY_FLAGS)
++ 	/**
++ 	 * {@inheritDoc}
++diff --git a/gee/concurrentlist.vala b/gee/concurrentlist.vala
++index 6e511f1..583f827 100644
++--- a/gee/concurrentlist.vala
+++++ b/gee/concurrentlist.vala
++@@ -170,7 +170,7 @@ public class Gee.ConcurrentList<G> : AbstractList<G>=
+ {
++ 	/**
++ 	 * {@inheritDoc}
++ 	 */
++-	public override G? get (int index) {
+++	public override G get (int index) {
++ 		HazardPointer.Context ctx =3D new HazardPointer.Context ();
++ 		Utils.Misc.unused (ctx);
++ 		assert (index >=3D 0);
++diff --git a/gee/readonlylist.vala b/gee/readonlylist.vala
++index 8be3f27..c243d14 100644
++--- a/gee/readonlylist.vala
+++++ b/gee/readonlylist.vala
++@@ -74,7 +74,7 @@ internal class Gee.ReadOnlyList<G> : Gee.ReadOnlyColle=
+ction<G>, List<G> {
++ 	/**
++ 	 * {@inheritDoc}
++ 	 */
++-	public new G? get (int index) {
+++	public new G get (int index) {
++ 		return ((Gee.List<G>) _collection).get (index);
++ 	}
 +=20
-++# glibc and BSD include fts into their libc, but musl does not so check=
- if we
-++# need to explicitly link to the standalone musl-fts.
-++AC_SEARCH_LIBS([fts_open], [fts])
-++
-+ dnl Older glibc had a broken fts that didn't work with Large File Syste=
-ms.
-+ dnl We want the version that can handler LFS, but include workaround if=
- we
-+ dnl get a bad one. Add define to CFLAGS (not AC_DEFINE it) since we nee=
-d to
-+@@ -295,11 +299,6 @@ AS_IF([test "x$ac_cv_bad_fts" =3D "xyes"],
-        [CFLAGS=3D"$CFLAGS -DBAD_FTS=3D1",
-         CXXFLAGS=3D"$CXXFLAGS -DBAD_FTS=3D1"])
- =20
- -dnl On musl, we need to find fts-standalone
--+dnl On musl, we need to find the standalone fts library
-- AS_CASE(
--   [${host_os}], [*-musl*], [
-+-AS_CASE(
-+-  [${host_os}], [*-musl*], [
- -    PKG_CHECK_MODULES([FTS], [fts-standalone])
--+    PKG_CHECK_MODULES([FTS], [musl-fts])
-- ])
-+-])
- =20
-  dnl Check for dependency: libelf, libdw, libebl (elfutils)
-+ dnl Note that we need to use at least elfutils 0.159 but
-+diff --git a/src/Makefile.am b/src/Makefile.am
-+index 3044c136..1c98bf84 100644
-+--- a/src/Makefile.am
-++++ b/src/Makefile.am
-+@@ -52,12 +52,12 @@ if BTF_READER
-+ libabigail_la_SOURCES +=3D abg-btf-reader.cc
-+ endif
++diff --git a/gee/unrolledlinkedlist.vala b/gee/unrolledlinkedlist.vala
++index e36f88f..234d24d 100644
++--- a/gee/unrolledlinkedlist.vala
+++++ b/gee/unrolledlinkedlist.vala
++@@ -158,7 +158,7 @@ public class Gee.UnrolledLinkedList<G> : AbstractBid=
+irList<G>, Queue<G>, Deque<G
++ 		return new Iterator<G> (this);
++ 	}
 +=20
-+-libabigail_la_LIBADD =3D $(DEPS_LIBS) $(FTS_LIBS)
-++libabigail_la_LIBADD =3D $(DEPS_LIBS)
-+ libabigail_la_LDFLAGS =3D -lpthread -Wl,--as-needed -no-undefined -vers=
-ion-info $(LIBABIGAIL_SO_CURRENT):$(LIBABIGAIL_SO_REVISION):$(LIBABIGAIL_=
-SO_AGE)
++-	public override G? get (int index) {
+++	public override G get (int index) {
++ 		assert (index >=3D 0);
++ 		assert (index < this._size);
 +=20
-+ CUSTOM_MACROS =3D -DABIGAIL_ROOT_SYSTEM_LIBDIR=3D\"${libdir}\"
-+=20
-+ AM_CPPFLAGS=3D\
-+-$(CUSTOM_MACROS) $(DEPS_CPPFLAGS) $(FTS_CFLAGS) \
-++$(CUSTOM_MACROS) $(DEPS_CPPFLAGS) \
-+ -Wall -I$(abs_top_srcdir) -I$(abs_top_srcdir)/include \
-+ -I$(abs_top_builddir)/include -I$(abs_top_builddir)
-+diff --git a/tools/Makefile.am b/tools/Makefile.am
-+index cbb5ce10..ea2d300c 100644
-+--- a/tools/Makefile.am
-++++ b/tools/Makefile.am
-+@@ -41,8 +41,6 @@ abicompatdir =3D $(bindir)
-+=20
-+ abipkgdiff_SOURCES =3D abipkgdiff.cc
-+ abipkgdiffdir =3D $(bindir)
-+-abipkgdiff_CPPFLAGS =3D $(FTS_CFLAGS)
-+-abipkgdiff_LDADD =3D $(FTS_LIBS)
-+ abipkgdiff_LDFLAGS =3D $(abs_top_builddir)/src/libabigail.la -pthread
-+=20
-+ kmidiff_SOURCES =3D kmidiff.cc
 +--=20
-+2.34.1
++GitLab
 +
+diff --git a/meta-oe/recipes-devtools/libgee/libgee/b33a6627f4fc96938b601=
+5e05849867c472160a8.patch b/meta-oe/recipes-devtools/libgee/libgee/b33a66=
+27f4fc96938b6015e05849867c472160a8.patch
+new file mode 100644
+index 000000000..39d431d50
+--- /dev/null
++++ b/meta-oe/recipes-devtools/libgee/libgee/b33a6627f4fc96938b6015e05849=
+867c472160a8.patch
+@@ -0,0 +1,54 @@
++From b33a6627f4fc96938b6015e05849867c472160a8 Mon Sep 17 00:00:00 2001
++From: Rico Tzschichholz <ricotz@ubuntu.com>
++Date: Sat, 8 Apr 2023 22:39:35 +0200
++Subject: [PATCH] Add more missing generic type arguments
++
++Upstream-Status: Backport
++---
++ gee/hashmap.vala    | 2 +-
++ gee/hashset.vala    | 2 +-
++ gee/linkedlist.vala | 2 +-
++ 3 files changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/gee/hashmap.vala b/gee/hashmap.vala
++index a7bae9f..19e3980 100644
++--- a/gee/hashmap.vala
+++++ b/gee/hashmap.vala
++@@ -253,7 +253,7 @@ public class Gee.HashMap<K,V> : Gee.AbstractMap<K,V>=
+ {
++ 		for (int i =3D 0; i < _array_size; i++) {
++ 			Node<K,V> node =3D (owned) _nodes[i];
++ 			while (node !=3D null) {
++-				Node next =3D (owned) node.next;
+++				Node<K,V> next =3D (owned) node.next;
++ 				node.key =3D null;
++ 				node.value =3D null;
++ 				node =3D (owned) next;
++diff --git a/gee/hashset.vala b/gee/hashset.vala
++index ef6d5a2..bf05519 100644
++--- a/gee/hashset.vala
+++++ b/gee/hashset.vala
++@@ -210,7 +210,7 @@ public class Gee.HashSet<G> : AbstractSet<G> {
++ 		for (int i =3D 0; i < _array_size; i++) {
++ 			Node<G> node =3D (owned) _nodes[i];
++ 			while (node !=3D null) {
++-				Node next =3D (owned) node.next;
+++				Node<G> next =3D (owned) node.next;
++ 				node.key =3D null;
++ 				node =3D (owned) next;
++ 			}
++diff --git a/gee/linkedlist.vala b/gee/linkedlist.vala
++index aff36b9..976977f 100644
++--- a/gee/linkedlist.vala
+++++ b/gee/linkedlist.vala
++@@ -233,7 +233,7 @@ public class Gee.LinkedList<G> : AbstractBidirList<G=
+>, Queue<G>, Deque<G> {
++ 				n.next.prev =3D n;
++ 				this._head =3D (owned)n;
++ 			} else {
++-				weak Node prev =3D this._head;
+++				weak Node<G> prev =3D this._head;
++ 				for (int i =3D 0; i < index - 1; i++) {
++ 					prev =3D prev.next;
++ 				}
++--=20
++GitLab
++
+diff --git a/meta-oe/recipes-devtools/libgee/libgee_0.20.6.bb b/meta-oe/r=
+ecipes-devtools/libgee/libgee_0.20.6.bb
+index 7e2781bcb..14e8e9908 100644
+--- a/meta-oe/recipes-devtools/libgee/libgee_0.20.6.bb
++++ b/meta-oe/recipes-devtools/libgee/libgee_0.20.6.bb
+@@ -11,8 +11,6 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfbc093901857=
+fcd118f065f900982c24"
+ GNOMEBASEBUILDCLASS =3D "autotools"
+ inherit gnomebase vala gobject-introspection
+=20
+-CFLAGS +=3D "-Wno-incompatible-pointer-types"
+-
+ do_configure:prepend() {
+     MACROS=3D"libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 ltversio=
+n.m4"
+     for i in ${MACROS}; do
+@@ -20,39 +18,9 @@ do_configure:prepend() {
+     done
+ }
+=20
++SRC_URI +=3D " \
++	file://2f0bbe8987e5eb1390b23ac531c971b202c2ef77.patch \
++	file://b33a6627f4fc96938b6015e05849867c472160a8.patch \
++"
+ SRC_URI[archive.sha256sum] =3D "1bf834f5e10d60cc6124d74ed3c1dd38da646787=
+fbf7872220b8b4068e476d4d"
+=20
+-# http://errors.yoctoproject.org/Errors/Details/766884/
+-# libgee-0.20.6/gee/concurrentlist.c:1169:177: error: passing argument 4=
+ of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Win=
+compatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:1175:168: error: passing argument 4=
+ of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Win=
+compatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:2385:194: error: passing argument 4=
+ of 'gee_hazard_pointer_compare_and_exchange_pointer' from incompatible p=
+ointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:2438:177: error: passing argument 4=
+ of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Win=
+compatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:2460:168: error: passing argument 4=
+ of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Win=
+compatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:2469:177: error: passing argument 4=
+ of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Win=
+compatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:2481:185: error: passing argument 4=
+ of 'gee_hazard_pointer_compare_and_exchange_pointer' from incompatible p=
+ointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:2640:168: error: passing argument 4=
+ of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Win=
+compatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:2641:168: error: passing argument 4=
+ of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Win=
+compatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:2750:168: error: passing argument 4=
+ of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Win=
+compatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:469:168: error: passing argument 4 =
+of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Winc=
+ompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:514:168: error: passing argument 4 =
+of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Winc=
+ompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:713:168: error: passing argument 4 =
+of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Winc=
+ompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:3635:185: error: passing argument 4 =
+of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Winc=
+ompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:4950:201: error: passing argument 4 =
+of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Winc=
+ompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:5378:201: error: passing argument 4 =
+of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Winc=
+ompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:5428:226: error: passing argument 4 =
+of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Winc=
+ompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:5480:218: error: passing argument 4 =
+of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Winc=
+ompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:5530:238: error: passing argument 4 =
+of 'gee_hazard_pointer_compare_and_exchange_pointer' from incompatible po=
+inter type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:5532:234: error: passing argument 4 =
+of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Winc=
+ompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:5623:246: error: passing argument 4 =
+of 'gee_hazard_pointer_compare_and_exchange_pointer' from incompatible po=
+inter type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:5625:242: error: passing argument 4 =
+of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Winc=
+ompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:7088:194: error: passing argument 4 =
+of 'gee_hazard_pointer_compare_and_exchange_pointer' from incompatible po=
+inter type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:7157:177: error: passing argument 4 =
+of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Winc=
+ompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:7184:168: error: passing argument 4 =
+of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Winc=
+ompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:7198:177: error: passing argument 4 =
+of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Winc=
+ompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:7215:185: error: passing argument 4 =
+of 'gee_hazard_pointer_compare_and_exchange_pointer' from incompatible po=
+inter type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/hashmap.c:4089:30: error: assignment to 'gboolean (*=
+)(GeeMapIterator *)' {aka 'int (*)(struct _GeeMapIterator *)'} from incom=
+patible pointer type 'gboolean (*)(GeeHashMapNodeIterator *)' {aka 'int (=
+*)(struct _GeeHashMapNodeIterator *)'} [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/hazardpointer.c:430:134: error: passing argument 4 o=
+f 'gee_hazard_pointer_release_policy_swap' from incompatible pointer type=
+ [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/hazardpointer.c:430:171: error: passing argument 5 o=
+f 'gee_hazard_pointer_release_policy_swap' from incompatible pointer type=
+ [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/hazardpointer.c:434:134: error: passing argument 4 o=
+f 'gee_hazard_pointer_release_policy_swap' from incompatible pointer type=
+ [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/hazardpointer.c:434:171: error: passing argument 5 o=
+f 'gee_hazard_pointer_release_policy_swap' from incompatible pointer type=
+ [-Wincompatible-pointer-types]
+-CFLAGS +=3D "-Wno-error=3Dincompatible-pointer-types"
 --=20
-2.34.1
+2.45.1
 
 
