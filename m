@@ -1,215 +1,172 @@
-Return-Path: <tim.orling@konsulko.com>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AFBF0C3DA41
-	for <webhook@archiver.kernel.org>; Wed, 10 Jul 2024 15:15:01 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web11.17107.1720624495772648292
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE15FC3DA41
+	for <webhook@archiver.kernel.org>; Wed, 10 Jul 2024 15:20:31 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by mx.groups.io with SMTP id smtpd.web10.17224.1720624825903400595
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jul 2024 08:14:56 -0700
+ Wed, 10 Jul 2024 08:20:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=O0kDBn4G;
- spf=pass (domain: konsulko.com, ip: 209.85.218.48, mailfrom: tim.orling@konsulko.com)
-Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-a77bf336171so181040066b.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 08:14:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1720624494; x=1721229294; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=tUlkW/B7ot82PevMO+UPYTNj8AundloacA3EjCf2ubA=;
-        b=O0kDBn4GsJpQ8Yccp/hrWr7ZfN9C9YZe1bBNBJQOB3hVYIIRfcwp0yV41zzNzXEaAi
-         wgLDEPHGFo+dxyw06DRZWzIzlxW7VXetGls9iOYaCgH4ES11USkG36acqoDGLRHp2dgC
-         C0/TeLf53ujKzjO6x9g5o8yh8Ry/9QHrt8kwM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720624494; x=1721229294;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=tUlkW/B7ot82PevMO+UPYTNj8AundloacA3EjCf2ubA=;
-        b=FGgh82e1jPNZMY994CZP9I7h3x+7bXV4d/CKmz023zsHDs6XKoE9ZqMuq3TUHqsgYw
-         eR9PILrR0y0mMJ7IeNhkKARkGEcwiWT+qkQwTwGqWJO2blcyzeo7rs+tmXY3UNkke4uj
-         wUNcYTGdlKcxbs4DygbiXcQIkIEcf0OTLE5bpkAeZvtojPZf+wJoE2aW6JCnn41qes/T
-         ziN7OxB2/KblWAdrNKGgFOpODUk+XnjFmdZMLPIvlYgEDmx+QypiJynzEgBPvYi0masQ
-         x5nACZJyR/6Q5sldw9P8FarlQKpEA9OlezYHmZqV9+EIwwv7SeZ5MNPBboPGyCuDT1o/
-         QKRg==
-X-Forwarded-Encrypted: i=1; AJvYcCXhaovydzwE8RuDAQFqOYOIrp2rhS+1EI+qTXbQ5Jxft16FZaYWZ1gUklAA2iDziOl90kGDtZdlhXHmCaH9JRU46kLIniiIG9PZmrBJF/wDhgHm+ge5pFcDAg==
-X-Gm-Message-State: AOJu0YwQiWCLblQWxDOfc2pWDbCJDKNytHcyQsfXNH3KmCN6WqsZWFLT
-	/lV+uY5Q8Pg1G7Pj+zlS16lvNwvdJu1w4kSSqyGJjZRPYN8xCr4pfAF2Z2viugiu72NLZqnuwR8
-	bRhNW/LbwmVxt0G/8BGlQVCkxB2vPOwDvIMdSWw==
-X-Google-Smtp-Source: AGHT+IEnpHK40bjGSc7XP4b/DuMlOaOUVp/AZRwt8MPH2iGFxu5JtpObpSDIFfGbn3rPsfFDYF/8jTlX0XnQONz8I58=
-X-Received: by 2002:a17:906:1290:b0:a6f:5609:954f with SMTP id
- a640c23a62f3a-a780d22e1bdmr388346966b.12.1720624494125; Wed, 10 Jul 2024
- 08:14:54 -0700 (PDT)
+ dkim=none (message not signed); spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6FDE6106F
+	for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 08:20:50 -0700 (PDT)
+Received: from cesw-amp-gbt-1s-m12830-04.oss.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id D117F3F766
+	for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 08:20:24 -0700 (PDT)
+From: Ross Burton <ross.burton@arm.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] libabigail: refresh musl/fts patch
+Date: Wed, 10 Jul 2024 16:20:17 +0100
+Message-Id: <20240710152017.3187361-1-ross.burton@arm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240706180810.1707296-1-dev@g0hl1n.net> <26a61314-0aa1-4e5c-ac71-d0ece3591362@gmail.com>
- <w24ywr4aiiqxecb46semqmbw4ulstn4rz25mwbiurkwh4xzxva@oyphvy5wc7nj>
-In-Reply-To: <w24ywr4aiiqxecb46semqmbw4ulstn4rz25mwbiurkwh4xzxva@oyphvy5wc7nj>
-From: Tim Orling <tim.orling@konsulko.com>
-Date: Wed, 10 Jul 2024 08:14:42 -0700
-Message-ID: <CAOyo-87-wojy-WxNs98qWp9kev2Dpui-Nk8ffLzwWQbmsvpvjQ@mail.gmail.com>
-Subject: Re: [oe] [meta-python][scarthgap][PATCH] python3-pydantic-core:
- upgrade 2.16.3 -> 2.18.1
-To: Richard Leitner <dev@g0hl1n.net>
-Cc: akuster808 <akuster808@gmail.com>, openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000c3c2e9061ce61b1f"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 15:15:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111302
+ <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 15:20:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111303
 
---000000000000c3c2e9061ce61b1f
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+This patch has now been sent upstream.
 
-On Tue, Jul 9, 2024 at 5:54=E2=80=AFAM Richard Leitner <dev@g0hl1n.net> wro=
-te:
+Signed-off-by: Ross Burton <ross.burton@arm.com>
+---
+ .../0001-Check-for-correct-fts-module.patch   | 90 +++++++++++++++----
+ 1 file changed, 74 insertions(+), 16 deletions(-)
 
-> Hi Armin,
->
-> On Tue, Jul 09, 2024 at 08:12:06AM GMT, akuster808 wrote:
-> > Hello Richard,
-> >
-> > On 7/6/24 2:08 PM, Richard Leitner via lists.openembedded.org wrote:
-> > > The currently available python-3-pydantic v2.7.0 requires
-> > > python3-pydantic-core to be updated to v2.18.1.
-> > I don't see the updated or later version in master? Am I missing
-> something?
->
-> I found a series from Tim [1] which updates python3-pydantic and
-> python3-pydantic-core
-> to 2.7.4/1.9.0 for master.
-> As those are newer versions I didn't send this patch for master.
->
+diff --git a/meta-oe/recipes-devtools/libabigail/libabigail/0001-Check-fo=
+r-correct-fts-module.patch b/meta-oe/recipes-devtools/libabigail/libabiga=
+il/0001-Check-for-correct-fts-module.patch
+index 2a9388b766..7c500e0b54 100644
+--- a/meta-oe/recipes-devtools/libabigail/libabigail/0001-Check-for-corre=
+ct-fts-module.patch
++++ b/meta-oe/recipes-devtools/libabigail/libabigail/0001-Check-for-corre=
+ct-fts-module.patch
+@@ -1,33 +1,91 @@
+-From b6af55e8ae120488abc83312fcd184d8352175eb Mon Sep 17 00:00:00 2001
++From 0db4af09f1bf4456527b5f6ec60fc1305e770c4c Mon Sep 17 00:00:00 2001
+ From: Ross Burton <ross.burton@arm.com>
+-Date: Mon, 1 Jul 2024 10:53:45 +0000
+-Subject: [PATCH] Check for correct fts module
++Date: Tue, 9 Jul 2024 15:19:35 +0100
++Subject: [PATCH] configure.ac: improve fts checks
+=20
+-fts-standalone is a gentoo-specific name[1], every other distribution th=
+at
+-uses this library has named it musl-fts.
++The current code checks explicitly for musl and if so uses pkg-config to
++find fts-standalone. This is suboptimal because musl may not be the only
++libc to need a standalone fts implementation, and fts-standalone is an
++old gentoo-specific name[1] so libabigail won't build on any other syste=
+m
++against musl.
+=20
+-[1] https://gitweb.gentoo.org/repo/gentoo.git/tree/sys-libs/fts-standalo=
+ne/fts-standalone-1.2.7.ebuild#n34
++Instead, use AC_SEARCH_LIBS to look for fts_open in libc then libfts. Do
++this before the check for behaviour just in case someone has a standalon=
+e
++and broken implementation.  I assume that the standalone fts is installe=
+d
++on the standard search path, which should be a fair assumption.
+=20
+-Upstream-Status: Pending [discussing with libabigail and gentoo]
++As we're not using pkg-config anymore the required link flags are now in
++LIBS, so remove all instances of FTS_CFLAGS and FTS_LIBS.
++
++[1] https://gitweb.gentoo.org/repo/gentoo.git/commit/sys-libs/fts-standa=
+lone?id=3Da403fe6c61d1aaeecd58d521f3def2f6d3513449
++
++Upstream-Status: Submitted [https://sourceware.org/pipermail/libabigail/=
+2024q3/005973.html]
+ Signed-off-by: Ross Burton <ross.burton@arm.com>
+ ---
+- configure.ac | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
++ configure.ac      | 9 ++++-----
++ src/Makefile.am   | 4 ++--
++ tools/Makefile.am | 2 --
++ 3 files changed, 6 insertions(+), 9 deletions(-)
+=20
+ diff --git a/configure.ac b/configure.ac
+-index d329490..5bad2ae 100644
++index e118a9c0..0aff2ec2 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -295,10 +295,10 @@ AS_IF([test "x$ac_cv_bad_fts" =3D "xyes"],
++@@ -281,6 +281,10 @@ fi
++=20
++ AC_SUBST(VISIBILITY_FLAGS)
++=20
+++# glibc and BSD include fts into their libc, but musl does not so check=
+ if we
+++# need to explicitly link to the standalone musl-fts.
+++AC_SEARCH_LIBS([fts_open], [fts])
+++
++ dnl Older glibc had a broken fts that didn't work with Large File Syste=
+ms.
++ dnl We want the version that can handler LFS, but include workaround if=
+ we
++ dnl get a bad one. Add define to CFLAGS (not AC_DEFINE it) since we nee=
+d to
++@@ -295,11 +299,6 @@ AS_IF([test "x$ac_cv_bad_fts" =3D "xyes"],
+        [CFLAGS=3D"$CFLAGS -DBAD_FTS=3D1",
+         CXXFLAGS=3D"$CXXFLAGS -DBAD_FTS=3D1"])
+ =20
+ -dnl On musl, we need to find fts-standalone
+-+dnl On musl, we need to find the standalone fts library
+- AS_CASE(
+-   [${host_os}], [*-musl*], [
++-AS_CASE(
++-  [${host_os}], [*-musl*], [
+ -    PKG_CHECK_MODULES([FTS], [fts-standalone])
+-+    PKG_CHECK_MODULES([FTS], [musl-fts])
+- ])
++-])
+ =20
+  dnl Check for dependency: libelf, libdw, libebl (elfutils)
++ dnl Note that we need to use at least elfutils 0.159 but
++diff --git a/src/Makefile.am b/src/Makefile.am
++index 3044c136..1c98bf84 100644
++--- a/src/Makefile.am
+++++ b/src/Makefile.am
++@@ -52,12 +52,12 @@ if BTF_READER
++ libabigail_la_SOURCES +=3D abg-btf-reader.cc
++ endif
++=20
++-libabigail_la_LIBADD =3D $(DEPS_LIBS) $(FTS_LIBS)
+++libabigail_la_LIBADD =3D $(DEPS_LIBS)
++ libabigail_la_LDFLAGS =3D -lpthread -Wl,--as-needed -no-undefined -vers=
+ion-info $(LIBABIGAIL_SO_CURRENT):$(LIBABIGAIL_SO_REVISION):$(LIBABIGAIL_=
+SO_AGE)
++=20
++ CUSTOM_MACROS =3D -DABIGAIL_ROOT_SYSTEM_LIBDIR=3D\"${libdir}\"
++=20
++ AM_CPPFLAGS=3D\
++-$(CUSTOM_MACROS) $(DEPS_CPPFLAGS) $(FTS_CFLAGS) \
+++$(CUSTOM_MACROS) $(DEPS_CPPFLAGS) \
++ -Wall -I$(abs_top_srcdir) -I$(abs_top_srcdir)/include \
++ -I$(abs_top_builddir)/include -I$(abs_top_builddir)
++diff --git a/tools/Makefile.am b/tools/Makefile.am
++index cbb5ce10..ea2d300c 100644
++--- a/tools/Makefile.am
+++++ b/tools/Makefile.am
++@@ -41,8 +41,6 @@ abicompatdir =3D $(bindir)
++=20
++ abipkgdiff_SOURCES =3D abipkgdiff.cc
++ abipkgdiffdir =3D $(bindir)
++-abipkgdiff_CPPFLAGS =3D $(FTS_CFLAGS)
++-abipkgdiff_LDADD =3D $(FTS_LIBS)
++ abipkgdiff_LDFLAGS =3D $(abs_top_builddir)/src/libabigail.la -pthread
++=20
++ kmidiff_SOURCES =3D kmidiff.cc
++--=20
++2.34.1
++
+--=20
+2.34.1
 
-That series needed to be rebased, per khem. Just because it is on patchwork
-does not imply merging or correctness.
-During the rebase I discovered missing dependencies.
-
-Also, python3-pydantic-core has a QA warning about TMPDIR
- WARNING: python3-pydantic-core-2.19.0-r0 do_package_qa: QA Issue: File
-/usr/lib/python3.12/site-packages/pydantic_core/_
-pydantic_core.cpython-312-x86_64-linux-gnu.so in package
-python3-pydantic-core contains reference to TMPDIR [buildpaths]
-
-Which seems to be RUSTFLAGS being injected into the .so for some reason
-(where 14 is the .rodata section):
-readelf -p 14 pydantic_core/_pydantic_core.cpython-312-x86_64-linux-gnu.so
-
-<snip>
-  [   f7c]  i
-...skipping...
-
-model-fieldsdataclasstuplefrozensetdefinition-refdefinitionsUnknown schema
-type: "2.19.0a-alphab-beta__version__profile=3Drelease pgo=3D -L
-/srv/build/ttorling/workspace-upgrades/build/tmp/work/core2-64-poky-linux/p=
-ython3-pydantic-coas
-  [ 2ae09]  kwargs
-  [ 2ae10]  (args,
-kwargs=3DNone)ArgsKwargs(kwargssrc/argument_markers.rsCreating instances of
-"UndefinedType" is not supportednew()\n
-<snip>
-
-The above seems to be a backtrace from the schema generation script, but I
-haven't figured out yet how to troubleshoot further.
-
-Meanwhile, upstream has updated again.
-My working branch:
-https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Dtimo/python=
-3-pydantic-upgrade
-
-
-> Furthermore I wanted to fix the incorrect dependency first before
-> trying to update python3-pydantic for scarthgap (and therefore backport
-> Tims series).
->
-> So how should we proceed here? Should this patch be sent for master too?
-> Or should the series from Tim should be followed up for master?
->
-> regards;rl
->
-> >
-> > - Armin
-> >
->
-> [1] https://patchwork.yoctoproject.org/project/oe/list/?series=3D25615
->
-
---000000000000c3c2e9061ce61b1f
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jul 9, 2024 at 5:54=E2=80=AFA=
-M Richard Leitner &lt;<a href=3D"mailto:dev@g0hl1n.net">dev@g0hl1n.net</a>&=
-gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
-px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Hi Ar=
-min,<br>
-<br>
-On Tue, Jul 09, 2024 at 08:12:06AM GMT, akuster808 wrote:<br>
-&gt; Hello Richard,<br>
-&gt; <br>
-&gt; On 7/6/24 2:08 PM, Richard Leitner via <a href=3D"http://lists.openemb=
-edded.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.org</a> =
-wrote:<br>
-&gt; &gt; The currently available python-3-pydantic v2.7.0 requires<br>
-&gt; &gt; python3-pydantic-core to be updated to v2.18.1.<br>
-&gt; I don&#39;t see the updated or later version in master? Am I missing s=
-omething?<br>
-<br>
-I found a series from Tim [1] which updates python3-pydantic and python3-py=
-dantic-core<br>
-to 2.7.4/1.9.0 for master.<br>
-As those are newer versions I didn&#39;t send this patch for master.<br></b=
-lockquote><div><br></div><div>That series needed to be rebased, per khem. J=
-ust because it is on patchwork does not imply merging or correctness.</div>=
-<div>During the rebase I discovered missing dependencies.</div><div><br></d=
-iv><div>Also, python3-pydantic-core=C2=A0has a QA warning about TMPDIR</div=
-><div>=C2=A0WARNING: python3-pydantic-core-2.19.0-r0 do_package_qa: QA Issu=
-e: File /usr/lib/python3.12/site-packages/pydantic_core/_<a href=3D"http://=
-pydantic_core.cpython-312-x86_64-linux-gnu.so">pydantic_core.cpython-312-x8=
-6_64-linux-gnu.so</a> in package python3-pydantic-core contains reference t=
-o TMPDIR [buildpaths]</div><div><br></div><div>Which seems to be RUSTFLAGS =
-being injected into the .so for some reason (where 14 is the .rodata sectio=
-n):</div><div>readelf -p 14 pydantic_core/_<a href=3D"http://pydantic_core.=
-cpython-312-x86_64-linux-gnu.so">pydantic_core.cpython-312-x86_64-linux-gnu=
-.so</a></div><div><br></div><div>&lt;snip&gt;=C2=A0</div><div>=C2=A0 [ =C2=
-=A0 f7c] =C2=A0i<br>...skipping...<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 model-fieldsdataclasstuplefrozensetdefinition-refdefinitionsU=
-nknown schema type: &quot;2.19.0a-alphab-beta__version__profile=3Drelease p=
-go=3D -L /srv/build/ttorling/workspace-upgrades/build/tmp/work/core2-64-pok=
-y-linux/python3-pydantic-coas<br>=C2=A0 [ 2ae09] =C2=A0kwargs<br>=C2=A0 [ 2=
-ae10] =C2=A0(args, kwargs=3DNone)ArgsKwargs(kwargssrc/argument_markers.rsCr=
-eating instances of &quot;UndefinedType&quot; is not supportednew()\n<br></=
-div><div>&lt;snip&gt;</div><div><br></div><div>The above seems to be a back=
-trace from the schema generation script, but I haven&#39;t figured out=C2=
-=A0yet how to troubleshoot further.</div><div><br></div><div>Meanwhile, ups=
-tream has updated again.</div><div>My working branch:</div><div><a href=3D"=
-https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Dtimo/python=
-3-pydantic-upgrade">https://git.openembedded.org/meta-openembedded-contrib/=
-log/?h=3Dtimo/python3-pydantic-upgrade</a><br></div><div><br></div><blockqu=
-ote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px=
- solid rgb(204,204,204);padding-left:1ex">
-<br>
-Furthermore I wanted to fix the incorrect dependency first before<br>
-trying to update python3-pydantic for scarthgap (and therefore backport<br>
-Tims series).<br>
-<br>
-So how should we proceed here? Should this patch be sent for master too?<br=
->
-Or should the series from Tim should be followed up for master?<br>
-<br>
-regards;rl<br>
-<br>
-&gt; <br>
-&gt; - Armin<br>
-&gt; <br>
-<br>
-[1] <a href=3D"https://patchwork.yoctoproject.org/project/oe/list/?series=
-=3D25615" rel=3D"noreferrer" target=3D"_blank">https://patchwork.yoctoproje=
-ct.org/project/oe/list/?series=3D25615</a><br>
-</blockquote></div></div>
-
---000000000000c3c2e9061ce61b1f--
 
