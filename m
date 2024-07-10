@@ -1,326 +1,279 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <tim.orling@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 77D3BC3DA41
-	for <webhook@archiver.kernel.org>; Wed, 10 Jul 2024 18:24:49 +0000 (UTC)
-Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
- by mx.groups.io with SMTP id smtpd.web11.2228.1720635884539559879
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B5B52C3DA41
+	for <webhook@archiver.kernel.org>; Wed, 10 Jul 2024 19:10:19 +0000 (UTC)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.web11.3274.1720638615203189249
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jul 2024 11:24:44 -0700
+ Wed, 10 Jul 2024 12:10:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
-Received: from fwd70.aul.t-online.de (fwd70.aul.t-online.de [10.223.144.96])
-	by mailout04.t-online.de (Postfix) with SMTP id C1DD010A1D
-	for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 20:24:42 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.162.88]) by fwd70.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1sRbze-3zZn3h0; Wed, 10 Jul 2024 20:24:42 +0200
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] libgee: backport patches to fix incompatible pointer types
-Date: Wed, 10 Jul 2024 20:25:45 +0200
-Message-ID: <20240710182545.2312308-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.45.1
+ dkim=pass header.i=@konsulko.com header.s=google header.b=MAnyARVz;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.44, mailfrom: tim.orling@konsulko.com)
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-a77e6dd7f72so14445666b.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 12:10:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1720638613; x=1721243413; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=LvWqgzr09aazFKUGulUMGmqlgrr2YfppPg2YoilXbLE=;
+        b=MAnyARVzmig3dDBUGnrgOcJw95OTHoYh5AD4cXLexXE9vhz4nyDG9sPDpeFYgrizbi
+         1W1Bs7/Mmuxm6JrMqhZi98RCH//OaJFWtxl2VrXBy9Jl/KkPwxzZG7M4fMsCLAx6FgRb
+         wmDTfknySgHwaSnAksZPBOI0wcO/1npNa1SQM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1720638613; x=1721243413;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=LvWqgzr09aazFKUGulUMGmqlgrr2YfppPg2YoilXbLE=;
+        b=kXzrjONVxM1/KDKAYHX2DlBaxaZkLxe4cmD6fsPnVjtuCpTwOQHxW1584/Egkf31ca
+         fzaAWcObCihv4uRdskjRFtfXLNNafuWkM+5IhcyAkTKn7pb1Yn2D/awTAw7yEqgu2cbo
+         W33ywNWKD6/4szlX1NJhMuahRvqjICsk8YMxCnKfMAEKtLk3Er3wc5zACzcyJ10jc6Je
+         pyMYdf1hVJEWqQ+bPsBNE6HFiLE6hESvPAn6+4xWFRIyGfE5Yrk3SOfihhaDau90rcAc
+         HC+gbrNzEi4NCG1EiPFG9iUrlwhfcUnZKUkIV82lH1pJS2bLd5ntkbdHKu72A7UFi5yV
+         4nXA==
+X-Forwarded-Encrypted: i=1; AJvYcCXCcSdu+H75kEz4scNnJI2367QhMnGn3iH9LRM2Gu6xv02e9JBPl7frNPVtZwd80Xyo0gmI05JgBUXJgODzNu9aSK5i3qJEOAR9VsNP+S/qs1aGu9J7FHD7Zg==
+X-Gm-Message-State: AOJu0YyWf3IHXQ/zII1pg8NePf6XoSFscbjOMhY5IpOq2R6qOW0Gcktl
+	ka73I29oQk5Icw/1x1ehNKe6gkUcqBbNKW5NTPxng39nMFdS913OhwGOcmt0JqniS3LT0r981C7
+	0ZZ508jaEUr7GyDu8qMTiEExjORITE+lCrZt31A==
+X-Google-Smtp-Source: AGHT+IFRqN6rskAJxas3891dznPHk9PZrlKknQvciBYMIm34eRohENJUt49WTFm+fVczWt8f/LrrGCX05g8YZQrVvzo=
+X-Received: by 2002:a17:906:4c57:b0:a6f:ab9c:7778 with SMTP id
+ a640c23a62f3a-a780b6fd1e3mr422135166b.34.1720638613513; Wed, 10 Jul 2024
+ 12:10:13 -0700 (PDT)
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1720635882-4F772D42-74104A85/0/0 CLEAN NORMAL
-X-TOI-MSGID: 91aaff17-d986-4d93-8b08-805fcbcf2ac1
-Content-Transfer-Encoding: quoted-printable
+References: <20240706180810.1707296-1-dev@g0hl1n.net> <26a61314-0aa1-4e5c-ac71-d0ece3591362@gmail.com>
+ <w24ywr4aiiqxecb46semqmbw4ulstn4rz25mwbiurkwh4xzxva@oyphvy5wc7nj> <CAOyo-87-wojy-WxNs98qWp9kev2Dpui-Nk8ffLzwWQbmsvpvjQ@mail.gmail.com>
+In-Reply-To: <CAOyo-87-wojy-WxNs98qWp9kev2Dpui-Nk8ffLzwWQbmsvpvjQ@mail.gmail.com>
+From: Tim Orling <tim.orling@konsulko.com>
+Date: Wed, 10 Jul 2024 12:10:01 -0700
+Message-ID: <CAOyo-86Zds3bvy0GvmiBEDRignUn2Z509SkD7Lw1xZ-0Ky30bg@mail.gmail.com>
+Subject: Re: [oe] [meta-python][scarthgap][PATCH] python3-pydantic-core:
+ upgrade 2.16.3 -> 2.18.1
+To: Richard Leitner <dev@g0hl1n.net>
+Cc: akuster808 <akuster808@gmail.com>, openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000005883d2061ce965e6"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 18:24:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111304
+ <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 19:10:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111305
 
-This imports two upstream patches that fix vala so that it
-generates correct c code
+--0000000000005883d2061ce965e6
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- ...be8987e5eb1390b23ac531c971b202c2ef77.patch | 69 +++++++++++++++++++
- ...6627f4fc96938b6015e05849867c472160a8.patch | 54 +++++++++++++++
- .../recipes-devtools/libgee/libgee_0.20.6.bb  | 40 ++---------
- 3 files changed, 127 insertions(+), 36 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/libgee/libgee/2f0bbe8987e5eb=
-1390b23ac531c971b202c2ef77.patch
- create mode 100644 meta-oe/recipes-devtools/libgee/libgee/b33a6627f4fc96=
-938b6015e05849867c472160a8.patch
+On Wed, Jul 10, 2024 at 8:14=E2=80=AFAM Tim Orling <tim.orling@konsulko.com=
+> wrote:
 
-diff --git a/meta-oe/recipes-devtools/libgee/libgee/2f0bbe8987e5eb1390b23=
-ac531c971b202c2ef77.patch b/meta-oe/recipes-devtools/libgee/libgee/2f0bbe=
-8987e5eb1390b23ac531c971b202c2ef77.patch
-new file mode 100644
-index 000000000..017df4223
---- /dev/null
-+++ b/meta-oe/recipes-devtools/libgee/libgee/2f0bbe8987e5eb1390b23ac531c9=
-71b202c2ef77.patch
-@@ -0,0 +1,69 @@
-+From 2f0bbe8987e5eb1390b23ac531c971b202c2ef77 Mon Sep 17 00:00:00 2001
-+From: Rico Tzschichholz <ricotz@ubuntu.com>
-+Date: Thu, 13 Apr 2023 23:43:03 +0200
-+Subject: [PATCH] Implementations of "G List.get()" should use non-nullab=
-le
-+ return as defined
-+
-+Upstream-Status: Backport
-+---
-+ gee/abstractlist.vala       | 2 +-
-+ gee/concurrentlist.vala     | 2 +-
-+ gee/readonlylist.vala       | 2 +-
-+ gee/unrolledlinkedlist.vala | 2 +-
-+ 4 files changed, 4 insertions(+), 4 deletions(-)
-+
-+diff --git a/gee/abstractlist.vala b/gee/abstractlist.vala
-+index eeff984..1e55114 100644
-+--- a/gee/abstractlist.vala
-++++ b/gee/abstractlist.vala
-+@@ -39,7 +39,7 @@ public abstract class Gee.AbstractList<G> : Gee.Abstra=
-ctCollection<G>, List<G> {
-+ 	/**
-+ 	 * {@inheritDoc}
-+ 	 */
-+-	public abstract new G? get (int index);
-++	public abstract new G get (int index);
-+=20
-+ 	/**
-+ 	 * {@inheritDoc}
-+diff --git a/gee/concurrentlist.vala b/gee/concurrentlist.vala
-+index 6e511f1..583f827 100644
-+--- a/gee/concurrentlist.vala
-++++ b/gee/concurrentlist.vala
-+@@ -170,7 +170,7 @@ public class Gee.ConcurrentList<G> : AbstractList<G>=
- {
-+ 	/**
-+ 	 * {@inheritDoc}
-+ 	 */
-+-	public override G? get (int index) {
-++	public override G get (int index) {
-+ 		HazardPointer.Context ctx =3D new HazardPointer.Context ();
-+ 		Utils.Misc.unused (ctx);
-+ 		assert (index >=3D 0);
-+diff --git a/gee/readonlylist.vala b/gee/readonlylist.vala
-+index 8be3f27..c243d14 100644
-+--- a/gee/readonlylist.vala
-++++ b/gee/readonlylist.vala
-+@@ -74,7 +74,7 @@ internal class Gee.ReadOnlyList<G> : Gee.ReadOnlyColle=
-ction<G>, List<G> {
-+ 	/**
-+ 	 * {@inheritDoc}
-+ 	 */
-+-	public new G? get (int index) {
-++	public new G get (int index) {
-+ 		return ((Gee.List<G>) _collection).get (index);
-+ 	}
-+=20
-+diff --git a/gee/unrolledlinkedlist.vala b/gee/unrolledlinkedlist.vala
-+index e36f88f..234d24d 100644
-+--- a/gee/unrolledlinkedlist.vala
-++++ b/gee/unrolledlinkedlist.vala
-+@@ -158,7 +158,7 @@ public class Gee.UnrolledLinkedList<G> : AbstractBid=
-irList<G>, Queue<G>, Deque<G
-+ 		return new Iterator<G> (this);
-+ 	}
-+=20
-+-	public override G? get (int index) {
-++	public override G get (int index) {
-+ 		assert (index >=3D 0);
-+ 		assert (index < this._size);
-+=20
-+--=20
-+GitLab
-+
-diff --git a/meta-oe/recipes-devtools/libgee/libgee/b33a6627f4fc96938b601=
-5e05849867c472160a8.patch b/meta-oe/recipes-devtools/libgee/libgee/b33a66=
-27f4fc96938b6015e05849867c472160a8.patch
-new file mode 100644
-index 000000000..39d431d50
---- /dev/null
-+++ b/meta-oe/recipes-devtools/libgee/libgee/b33a6627f4fc96938b6015e05849=
-867c472160a8.patch
-@@ -0,0 +1,54 @@
-+From b33a6627f4fc96938b6015e05849867c472160a8 Mon Sep 17 00:00:00 2001
-+From: Rico Tzschichholz <ricotz@ubuntu.com>
-+Date: Sat, 8 Apr 2023 22:39:35 +0200
-+Subject: [PATCH] Add more missing generic type arguments
-+
-+Upstream-Status: Backport
-+---
-+ gee/hashmap.vala    | 2 +-
-+ gee/hashset.vala    | 2 +-
-+ gee/linkedlist.vala | 2 +-
-+ 3 files changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/gee/hashmap.vala b/gee/hashmap.vala
-+index a7bae9f..19e3980 100644
-+--- a/gee/hashmap.vala
-++++ b/gee/hashmap.vala
-+@@ -253,7 +253,7 @@ public class Gee.HashMap<K,V> : Gee.AbstractMap<K,V>=
- {
-+ 		for (int i =3D 0; i < _array_size; i++) {
-+ 			Node<K,V> node =3D (owned) _nodes[i];
-+ 			while (node !=3D null) {
-+-				Node next =3D (owned) node.next;
-++				Node<K,V> next =3D (owned) node.next;
-+ 				node.key =3D null;
-+ 				node.value =3D null;
-+ 				node =3D (owned) next;
-+diff --git a/gee/hashset.vala b/gee/hashset.vala
-+index ef6d5a2..bf05519 100644
-+--- a/gee/hashset.vala
-++++ b/gee/hashset.vala
-+@@ -210,7 +210,7 @@ public class Gee.HashSet<G> : AbstractSet<G> {
-+ 		for (int i =3D 0; i < _array_size; i++) {
-+ 			Node<G> node =3D (owned) _nodes[i];
-+ 			while (node !=3D null) {
-+-				Node next =3D (owned) node.next;
-++				Node<G> next =3D (owned) node.next;
-+ 				node.key =3D null;
-+ 				node =3D (owned) next;
-+ 			}
-+diff --git a/gee/linkedlist.vala b/gee/linkedlist.vala
-+index aff36b9..976977f 100644
-+--- a/gee/linkedlist.vala
-++++ b/gee/linkedlist.vala
-+@@ -233,7 +233,7 @@ public class Gee.LinkedList<G> : AbstractBidirList<G=
->, Queue<G>, Deque<G> {
-+ 				n.next.prev =3D n;
-+ 				this._head =3D (owned)n;
-+ 			} else {
-+-				weak Node prev =3D this._head;
-++				weak Node<G> prev =3D this._head;
-+ 				for (int i =3D 0; i < index - 1; i++) {
-+ 					prev =3D prev.next;
-+ 				}
-+--=20
-+GitLab
-+
-diff --git a/meta-oe/recipes-devtools/libgee/libgee_0.20.6.bb b/meta-oe/r=
-ecipes-devtools/libgee/libgee_0.20.6.bb
-index 7e2781bcb..14e8e9908 100644
---- a/meta-oe/recipes-devtools/libgee/libgee_0.20.6.bb
-+++ b/meta-oe/recipes-devtools/libgee/libgee_0.20.6.bb
-@@ -11,8 +11,6 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfbc093901857=
-fcd118f065f900982c24"
- GNOMEBASEBUILDCLASS =3D "autotools"
- inherit gnomebase vala gobject-introspection
-=20
--CFLAGS +=3D "-Wno-incompatible-pointer-types"
--
- do_configure:prepend() {
-     MACROS=3D"libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 ltversio=
-n.m4"
-     for i in ${MACROS}; do
-@@ -20,39 +18,9 @@ do_configure:prepend() {
-     done
- }
-=20
-+SRC_URI +=3D " \
-+	file://2f0bbe8987e5eb1390b23ac531c971b202c2ef77.patch \
-+	file://b33a6627f4fc96938b6015e05849867c472160a8.patch \
-+"
- SRC_URI[archive.sha256sum] =3D "1bf834f5e10d60cc6124d74ed3c1dd38da646787=
-fbf7872220b8b4068e476d4d"
-=20
--# http://errors.yoctoproject.org/Errors/Details/766884/
--# libgee-0.20.6/gee/concurrentlist.c:1169:177: error: passing argument 4=
- of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Win=
-compatible-pointer-types]
--# libgee-0.20.6/gee/concurrentlist.c:1175:168: error: passing argument 4=
- of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Win=
-compatible-pointer-types]
--# libgee-0.20.6/gee/concurrentlist.c:2385:194: error: passing argument 4=
- of 'gee_hazard_pointer_compare_and_exchange_pointer' from incompatible p=
-ointer type [-Wincompatible-pointer-types]
--# libgee-0.20.6/gee/concurrentlist.c:2438:177: error: passing argument 4=
- of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Win=
-compatible-pointer-types]
--# libgee-0.20.6/gee/concurrentlist.c:2460:168: error: passing argument 4=
- of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Win=
-compatible-pointer-types]
--# libgee-0.20.6/gee/concurrentlist.c:2469:177: error: passing argument 4=
- of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Win=
-compatible-pointer-types]
--# libgee-0.20.6/gee/concurrentlist.c:2481:185: error: passing argument 4=
- of 'gee_hazard_pointer_compare_and_exchange_pointer' from incompatible p=
-ointer type [-Wincompatible-pointer-types]
--# libgee-0.20.6/gee/concurrentlist.c:2640:168: error: passing argument 4=
- of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Win=
-compatible-pointer-types]
--# libgee-0.20.6/gee/concurrentlist.c:2641:168: error: passing argument 4=
- of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Win=
-compatible-pointer-types]
--# libgee-0.20.6/gee/concurrentlist.c:2750:168: error: passing argument 4=
- of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Win=
-compatible-pointer-types]
--# libgee-0.20.6/gee/concurrentlist.c:469:168: error: passing argument 4 =
-of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Winc=
-ompatible-pointer-types]
--# libgee-0.20.6/gee/concurrentlist.c:514:168: error: passing argument 4 =
-of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Winc=
-ompatible-pointer-types]
--# libgee-0.20.6/gee/concurrentlist.c:713:168: error: passing argument 4 =
-of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Winc=
-ompatible-pointer-types]
--# libgee-0.20.6/gee/concurrentset.c:3635:185: error: passing argument 4 =
-of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Winc=
-ompatible-pointer-types]
--# libgee-0.20.6/gee/concurrentset.c:4950:201: error: passing argument 4 =
-of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Winc=
-ompatible-pointer-types]
--# libgee-0.20.6/gee/concurrentset.c:5378:201: error: passing argument 4 =
-of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Winc=
-ompatible-pointer-types]
--# libgee-0.20.6/gee/concurrentset.c:5428:226: error: passing argument 4 =
-of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Winc=
-ompatible-pointer-types]
--# libgee-0.20.6/gee/concurrentset.c:5480:218: error: passing argument 4 =
-of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Winc=
-ompatible-pointer-types]
--# libgee-0.20.6/gee/concurrentset.c:5530:238: error: passing argument 4 =
-of 'gee_hazard_pointer_compare_and_exchange_pointer' from incompatible po=
-inter type [-Wincompatible-pointer-types]
--# libgee-0.20.6/gee/concurrentset.c:5532:234: error: passing argument 4 =
-of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Winc=
-ompatible-pointer-types]
--# libgee-0.20.6/gee/concurrentset.c:5623:246: error: passing argument 4 =
-of 'gee_hazard_pointer_compare_and_exchange_pointer' from incompatible po=
-inter type [-Wincompatible-pointer-types]
--# libgee-0.20.6/gee/concurrentset.c:5625:242: error: passing argument 4 =
-of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Winc=
-ompatible-pointer-types]
--# libgee-0.20.6/gee/concurrentset.c:7088:194: error: passing argument 4 =
-of 'gee_hazard_pointer_compare_and_exchange_pointer' from incompatible po=
-inter type [-Wincompatible-pointer-types]
--# libgee-0.20.6/gee/concurrentset.c:7157:177: error: passing argument 4 =
-of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Winc=
-ompatible-pointer-types]
--# libgee-0.20.6/gee/concurrentset.c:7184:168: error: passing argument 4 =
-of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Winc=
-ompatible-pointer-types]
--# libgee-0.20.6/gee/concurrentset.c:7198:177: error: passing argument 4 =
-of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Winc=
-ompatible-pointer-types]
--# libgee-0.20.6/gee/concurrentset.c:7215:185: error: passing argument 4 =
-of 'gee_hazard_pointer_compare_and_exchange_pointer' from incompatible po=
-inter type [-Wincompatible-pointer-types]
--# libgee-0.20.6/gee/hashmap.c:4089:30: error: assignment to 'gboolean (*=
-)(GeeMapIterator *)' {aka 'int (*)(struct _GeeMapIterator *)'} from incom=
-patible pointer type 'gboolean (*)(GeeHashMapNodeIterator *)' {aka 'int (=
-*)(struct _GeeHashMapNodeIterator *)'} [-Wincompatible-pointer-types]
--# libgee-0.20.6/gee/hazardpointer.c:430:134: error: passing argument 4 o=
-f 'gee_hazard_pointer_release_policy_swap' from incompatible pointer type=
- [-Wincompatible-pointer-types]
--# libgee-0.20.6/gee/hazardpointer.c:430:171: error: passing argument 5 o=
-f 'gee_hazard_pointer_release_policy_swap' from incompatible pointer type=
- [-Wincompatible-pointer-types]
--# libgee-0.20.6/gee/hazardpointer.c:434:134: error: passing argument 4 o=
-f 'gee_hazard_pointer_release_policy_swap' from incompatible pointer type=
- [-Wincompatible-pointer-types]
--# libgee-0.20.6/gee/hazardpointer.c:434:171: error: passing argument 5 o=
-f 'gee_hazard_pointer_release_policy_swap' from incompatible pointer type=
- [-Wincompatible-pointer-types]
--CFLAGS +=3D "-Wno-error=3Dincompatible-pointer-types"
---=20
-2.45.1
+>
+>
+> On Tue, Jul 9, 2024 at 5:54=E2=80=AFAM Richard Leitner <dev@g0hl1n.net> w=
+rote:
+>
+>> Hi Armin,
+>>
+>> On Tue, Jul 09, 2024 at 08:12:06AM GMT, akuster808 wrote:
+>> > Hello Richard,
+>> >
+>> > On 7/6/24 2:08 PM, Richard Leitner via lists.openembedded.org wrote:
+>> > > The currently available python-3-pydantic v2.7.0 requires
+>> > > python3-pydantic-core to be updated to v2.18.1.
+>>
+>
+I don't know what we want to do with scarthgap. Part of me thinks we should
+revert the 2.7.0 upgrade to one which is compatible with 2.16.3
+python3-pydantc-core. Part of me thinks upgrade python3-pydantic-core to
+2.18.1, but we won't have that in master. Right now, it appears to me that
+we need new recipes (python3-tzdata) in order to build 2.19.0 (I did not
+look at 2.18.x). Adding new recipes sounds against stable policy to me.
 
+
+
+> > I don't see the updated or later version in master? Am I missing
+>> something?
+>>
+>> I found a series from Tim [1] which updates python3-pydantic and
+>> python3-pydantic-core
+>> to 2.7.4/1.9.0 for master.
+>> As those are newer versions I didn't send this patch for master.
+>>
+>
+> That series needed to be rebased, per khem. Just because it is on
+> patchwork does not imply merging or correctness.
+> During the rebase I discovered missing dependencies.
+>
+> Also, python3-pydantic-core has a QA warning about TMPDIR
+>  WARNING: python3-pydantic-core-2.19.0-r0 do_package_qa: QA Issue: File
+> /usr/lib/python3.12/site-packages/pydantic_core/_
+> pydantic_core.cpython-312-x86_64-linux-gnu.so in package
+> python3-pydantic-core contains reference to TMPDIR [buildpaths]
+>
+> Which seems to be RUSTFLAGS being injected into the .so for some reason
+> (where 14 is the .rodata section):
+> readelf -p 14 pydantic_core/_pydantic_core.cpython-312-x86_64-linux-gnu.s=
+o
+>
+> <snip>
+>   [   f7c]  i
+> ...skipping...
+>
+> model-fieldsdataclasstuplefrozensetdefinition-refdefinitionsUnknown schem=
+a
+> type: "2.19.0a-alphab-beta__version__profile=3Drelease pgo=3D -L
+> /srv/build/ttorling/workspace-upgrades/build/tmp/work/core2-64-poky-linux=
+/python3-pydantic-coas
+>   [ 2ae09]  kwargs
+>   [ 2ae10]  (args,
+> kwargs=3DNone)ArgsKwargs(kwargssrc/argument_markers.rsCreating instances =
+of
+> "UndefinedType" is not supportednew()\n
+> <snip>
+>
+> The above seems to be a backtrace from the schema generation script, but =
+I
+> haven't figured out yet how to troubleshoot further.
+>
+
+Filed an issue upstream:
+https://github.com/pydantic/pydantic-core/issues/1365
+
+>
+> Meanwhile, upstream has updated again.
+> My working branch:
+>
+> https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Dtimo/pyth=
+on3-pydantic-upgrade
+>
+
+Found more ptest RDEPENDS missing for python3-pydantic. That branch
+currently passes ptests for:
+bitbake (-c testimage) meta-python-image-ptest-python3-pydantic-core
+bitbake (-c testimage) meta-python-image-ptest-python3-pydantic
+
+>
+>
+>
+>> Furthermore I wanted to fix the incorrect dependency first before
+>> trying to update python3-pydantic for scarthgap (and therefore backport
+>> Tims series).
+>>
+>> So how should we proceed here? Should this patch be sent for master too?
+>> Or should the series from Tim should be followed up for master?
+>>
+>> regards;rl
+>>
+>> >
+>> > - Armin
+>> >
+>>
+>> [1] https://patchwork.yoctoproject.org/project/oe/list/?series=3D25615
+>>
+>
+
+--0000000000005883d2061ce965e6
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Wed, Jul 10, 2024 at 8:14=E2=80=AF=
+AM Tim Orling &lt;<a href=3D"mailto:tim.orling@konsulko.com">tim.orling@kon=
+sulko.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex"><div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gm=
+ail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jul 9, 2024 at 5:5=
+4=E2=80=AFAM Richard Leitner &lt;<a href=3D"mailto:dev@g0hl1n.net" target=
+=3D"_blank">dev@g0hl1n.net</a>&gt; wrote:<br></div><blockquote class=3D"gma=
+il_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,2=
+04,204);padding-left:1ex">Hi Armin,<br>
+<br>
+On Tue, Jul 09, 2024 at 08:12:06AM GMT, akuster808 wrote:<br>
+&gt; Hello Richard,<br>
+&gt; <br>
+&gt; On 7/6/24 2:08 PM, Richard Leitner via <a href=3D"http://lists.openemb=
+edded.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.org</a> =
+wrote:<br>
+&gt; &gt; The currently available python-3-pydantic v2.7.0 requires<br>
+&gt; &gt; python3-pydantic-core to be updated to v2.18.1.<br></blockquote><=
+/div></div></blockquote><div><br></div><div>I don&#39;t know what we want t=
+o do with scarthgap. Part of me thinks we should revert the 2.7.0 upgrade t=
+o one which is compatible with 2.16.3 python3-pydantc-core. Part of me thin=
+ks upgrade python3-pydantic-core to 2.18.1, but we won&#39;t have that in m=
+aster. Right now, it appears to me that we need new recipes (python3-tzdata=
+) in order to build 2.19.0 (I did not look at 2.18.x). Adding new recipes s=
+ounds against stable policy to me.</div><div><br></div><div>=C2=A0</div><bl=
+ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
+t:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div class=
+=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
+0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+&gt; I don&#39;t see the updated or later version in master? Am I missing s=
+omething?<br>
+<br>
+I found a series from Tim [1] which updates python3-pydantic and python3-py=
+dantic-core<br>
+to 2.7.4/1.9.0 for master.<br>
+As those are newer versions I didn&#39;t send this patch for master.<br></b=
+lockquote><div><br></div><div>That series needed to be rebased, per khem. J=
+ust because it is on patchwork does not imply merging or correctness.</div>=
+<div>During the rebase I discovered missing dependencies.</div><div><br></d=
+iv><div>Also, python3-pydantic-core=C2=A0has a QA warning about TMPDIR</div=
+><div>=C2=A0WARNING: python3-pydantic-core-2.19.0-r0 do_package_qa: QA Issu=
+e: File /usr/lib/python3.12/site-packages/pydantic_core/_<a href=3D"http://=
+pydantic_core.cpython-312-x86_64-linux-gnu.so" target=3D"_blank">pydantic_c=
+ore.cpython-312-x86_64-linux-gnu.so</a> in package python3-pydantic-core co=
+ntains reference to TMPDIR [buildpaths]</div><div><br></div><div>Which seem=
+s to be RUSTFLAGS being injected into the .so for some reason (where 14 is =
+the .rodata section):</div><div>readelf -p 14 pydantic_core/_<a href=3D"htt=
+p://pydantic_core.cpython-312-x86_64-linux-gnu.so" target=3D"_blank">pydant=
+ic_core.cpython-312-x86_64-linux-gnu.so</a></div><div><br></div><div>&lt;sn=
+ip&gt;=C2=A0</div><div>=C2=A0 [ =C2=A0 f7c] =C2=A0i<br>...skipping...<br>=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 model-fieldsdataclasstuple=
+frozensetdefinition-refdefinitionsUnknown schema type: &quot;2.19.0a-alphab=
+-beta__version__profile=3Drelease pgo=3D -L /srv/build/ttorling/workspace-u=
+pgrades/build/tmp/work/core2-64-poky-linux/python3-pydantic-coas<br>=C2=A0 =
+[ 2ae09] =C2=A0kwargs<br>=C2=A0 [ 2ae10] =C2=A0(args, kwargs=3DNone)ArgsKwa=
+rgs(kwargssrc/argument_markers.rsCreating instances of &quot;UndefinedType&=
+quot; is not supportednew()\n<br></div><div>&lt;snip&gt;</div><div><br></di=
+v><div>The above seems to be a backtrace from the schema generation script,=
+ but I haven&#39;t figured out=C2=A0yet how to troubleshoot further.</div><=
+/div></div></blockquote><div><br></div><div>Filed an issue upstream:</div><=
+div><a href=3D"https://github.com/pydantic/pydantic-core/issues/1365">https=
+://github.com/pydantic/pydantic-core/issues/1365</a>=C2=A0</div><blockquote=
+ class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px so=
+lid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div class=3D"gmail=
+_quote"><div><br></div><div>Meanwhile, upstream has updated again.</div><di=
+v>My working branch:</div><div><a href=3D"https://git.openembedded.org/meta=
+-openembedded-contrib/log/?h=3Dtimo/python3-pydantic-upgrade" target=3D"_bl=
+ank">https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Dtimo/p=
+ython3-pydantic-upgrade</a></div></div></div></blockquote><div><br></div><d=
+iv>Found more ptest RDEPENDS missing for python3-pydantic. That branch curr=
+ently passes ptests=C2=A0for:</div>bitbake (-c testimage) meta-python-image=
+-ptest-python3-pydantic-core<br><div>bitbake (-c testimage) meta-python-ima=
+ge-ptest-python3-pydantic=C2=A0</div><blockquote class=3D"gmail_quote" styl=
+e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
+g-left:1ex"><div dir=3D"ltr"><div class=3D"gmail_quote"><div><br></div><div=
+><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.=
+8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+<br>
+Furthermore I wanted to fix the incorrect dependency first before<br>
+trying to update python3-pydantic for scarthgap (and therefore backport<br>
+Tims series).<br>
+<br>
+So how should we proceed here? Should this patch be sent for master too?<br=
+>
+Or should the series from Tim should be followed up for master?<br>
+<br>
+regards;rl<br>
+<br>
+&gt; <br>
+&gt; - Armin<br>
+&gt; <br>
+<br>
+[1] <a href=3D"https://patchwork.yoctoproject.org/project/oe/list/?series=
+=3D25615" rel=3D"noreferrer" target=3D"_blank">https://patchwork.yoctoproje=
+ct.org/project/oe/list/?series=3D25615</a><br>
+</blockquote></div></div>
+</blockquote></div></div>
+
+--0000000000005883d2061ce965e6--
 
