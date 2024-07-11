@@ -1,168 +1,591 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4662BC3DA41
-	for <webhook@archiver.kernel.org>; Thu, 11 Jul 2024 03:23:08 +0000 (UTC)
-Received: from mail-vs1-f49.google.com (mail-vs1-f49.google.com [209.85.217.49])
- by mx.groups.io with SMTP id smtpd.web10.3901.1720668182934484419
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 84F8FC3DA41
+	for <webhook@archiver.kernel.org>; Thu, 11 Jul 2024 10:15:40 +0000 (UTC)
+Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
+ by mx.groups.io with SMTP id smtpd.web11.8589.1720692936483886516
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jul 2024 20:23:03 -0700
+ Thu, 11 Jul 2024 03:15:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=f5jE8Bbe;
- spf=pass (domain: gmail.com, ip: 209.85.217.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-vs1-f49.google.com with SMTP id ada2fe7eead31-48fde3a2b17so149553137.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jul 2024 20:23:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1720668182; x=1721272982; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Jt0S5YHTnZdetKuPwVF8CSoxsq4okRk5J2E2LeQ4ltI=;
-        b=f5jE8BbeIYzyDkBqBGhofbOABr4mSCa2+TzPJ0yNjJwXCwkdstycKni1aapzdC0MaG
-         DefT3rT2FE3cj4wXfubWDkBs3SaJ6QK+vqnj0P2mfKZ6hqrlqeiqoZf0DBxk9PA+nrN6
-         8xwTrLWkxVWh9iUv2XZTmV8VwlLV/+O5sjZ3JXNjW+39sBf/Q9R4yy2AALKE+je74hwE
-         LX1WU/bFyQ5ATgf5NcQ3aVxokl6tNxNLaeze+h12P2GP/zpKu4gq8+PD08HaIMyc2cy6
-         CVNeoT8HPee+qU/ze1dHs/u7lt2PRkpzZkvQlxXWezoTNx5xzMEA96Ns396bGHx3bBmr
-         vmxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720668182; x=1721272982;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Jt0S5YHTnZdetKuPwVF8CSoxsq4okRk5J2E2LeQ4ltI=;
-        b=YeUxJJtoEOnSWzuZVhWlGMWZXV33fgXXnFzN3OSPxyH6bcbsWNbEm9v+bzDkcgJbuQ
-         UdAZTImGF7+wRs0ojP2eBGmxO8JN5qjpWfx6IiiPnONtaow/V3FiLY6FnaK9Rfwr0raT
-         OYMAbYbcvINz10U0LYd3vFhouiJ75YsPbCbwLMamZocU+NC66ZwZVPRXIKKu37iULutv
-         oOCAJDM6f3USVlmnDs8rNp5Aq6uV7LmWTmjX3kkACFOpFfY2nl1UpcEGZ1PHau6mOZGs
-         DS1Y+0Gj4ocVQARwgiQ+lNfrQKTZTcK0uBTVhddllFBMfTgjGUH+4IaJRHeW1uTEHBAF
-         pXiQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVjTvT0bRhBqp1s33MB7SR793LGoJ0ZPMAzP9N0LBtJC/+Gmvfw80xxu5lcaSoLMADb1E/hvI7qBogLvQWGKDsq9T+3D6ahCC3/XsZqm6l3ePthXHbEtj35MQ==
-X-Gm-Message-State: AOJu0YxRjTbmYa2v2/SdSDbaPIuv5v/+sgsx0dopv/xLwkAUVSAUlS8S
-	+UWZQdDzM7/tieSvHFV2I3Z9bJSU3coLa/i9c7aXIheEzES7WOlHlgQm0CHqIAwFyFdcyLVYszo
-	D0DsdqEResDDoq3b6qjpcC0acnng=
-X-Google-Smtp-Source: AGHT+IGQc8pVl9cat/mqq6uct8v+7rYHWsmZmskPOL6oVmx9wWw03LQ+ap6ZqLr0BYcdSX/x+cRGDeerb9TkE9LUVoQ=
-X-Received: by 2002:a05:6102:41ac:b0:48f:ea3c:268b with SMTP id
- ada2fe7eead31-490321b91c4mr8092131137.17.1720668181826; Wed, 10 Jul 2024
- 20:23:01 -0700 (PDT)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
+Received: from fwd81.aul.t-online.de (fwd81.aul.t-online.de [10.223.144.107])
+	by mailout04.t-online.de (Postfix) with SMTP id EAB139746;
+	Thu, 11 Jul 2024 12:15:34 +0200 (CEST)
+Received: from [192.168.178.67] ([84.163.42.238]) by fwd81.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1sRqpq-0Dx5rU0; Thu, 11 Jul 2024 12:15:34 +0200
+Date: Thu, 11 Jul 2024 12:16:40 +0200
+From: Markus Volk <f_l_k@t-online.de>
+Subject: Re: [oe] [meta-oe][PATCHv2] libgee: backport patches to fix
+ incompatible pointer types
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Message-Id: <S7FGGS.W71Q3A1NFNMG1@t-online.de>
+In-Reply-To: <17E0FAF3A54A1F10.24858@lists.openembedded.org>
+References: <17E0FAF3A54A1F10.24858@lists.openembedded.org>
+X-Mailer: geary/46.0
 MIME-Version: 1.0
-References: <CANgaEnLXUKjX-V65zJ3mhugd2f5CKJpBzvgLzPeaLvOPYoF9Kg@mail.gmail.com>
- <4272f43ca7ff59832c643c60cd1ecb4f0e78513a.camel@linuxfoundation.org>
-In-Reply-To: <4272f43ca7ff59832c643c60cd1ecb4f0e78513a.camel@linuxfoundation.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 10 Jul 2024 20:22:34 -0700
-Message-ID: <CAMKF1sqT_TxEiXGm=PkCXX-4K7w8rnvzubo0Vr1xvmNDn_RRJA@mail.gmail.com>
-Subject: Re: [oe] Reports for CVE triage
-To: richard.purdie@linuxfoundation.org
-Cc: jacoba@thehoodiefirm.com, openembedded-devel@lists.openembedded.org, 
-	Engineering <engineering@neighbourhood.ie>, Ross Burton <ross.burton@arm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/alternative; boundary="=-d+34HRbwXBfWl8mm0KeI"
+X-TOI-EXPURGATEID: 150726::1720692934-1EFFACAA-F5A402BF/0/0 CLEAN NORMAL
+X-TOI-MSGID: 3bf46939-d43d-4f67-ba09-8e27c1c3fdfb
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 11 Jul 2024 03:23:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111311
+ <openembedded-devel@lists.openembedded.org>; Thu, 11 Jul 2024 10:15:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111312
 
-On Wed, Jul 10, 2024 at 5:50=E2=80=AFAM Richard Purdie via
-lists.openembedded.org
-<richard.purdie=3Dlinuxfoundation.org@lists.openembedded.org> wrote:
->
-> Hi,
->
-> On Thu, 2024-07-04 at 11:02 +0200, Jacoba Brandner via lists.openembedded=
-.org wrote:
-> > This email contains a review of the remaining CVEs from the status
-> > list: https://autobuilder.yocto.io/pub/non-release/patchmetrics-meta-
-> > oe/cve-status-master.txt
-> > This work is done as part of "Milestones 3, 4, 5 and 6. Triage CVEs"
-> > as stated in the Scope of Work with Sovereign Tech Fund (STF)
-> > (https://www.sovereigntechfund.de/).
-> >
-> > The reports are saved as HTML files here:
-> > - Milestone 3: https://clients.neighbourhood.ie/yocto/81-120.html
-> > - Milestone 4: https://clients.neighbourhood.ie/yocto/121-160.html
-> > - Milestone 5: https://clients.neighbourhood.ie/yocto/161-200.html
-> > - Milestone 6: https://clients.neighbourhood.ie/yocto/201-221.html
-> >
-> > The reports contains a review of the CVEs including the following:
-> > - Package versions affected
-> > - Current package version on 'meta-openembedded'
-> > - Notes on how the CVE can be addressed
-> >
-> > Please note that for the CVEs marked as 'invalid', separate patch
-> > status updates have been sent to this mailing-
-> > list: openembedded-devel@lists.openembedded.org.
-> >
-> > The collection of all emails we've sent to NIST are saved
-> > here https://clients.neighbourhood.ie/yocto/NIST.html
-> >
-> > We can also provide this in any other format that might be convenient
-> > for you. Please let us know.
->
-> I had a look into this. Firstly, I wanted to say a huge thanks for
-> working through this, you're doing a great job! Getting the status of
-> CVEs sorted out, particularly the older ones makes a huge difference to
-> the clarity of the security situation of our codebase.
->
-> We can see the status of our codebase here:
->
-> https://autobuilder.yocto.io/pub/non-release/patchmetrics-meta-oe/
->
-> You can see we've gone from around 271 CVEs at the start to having 136
-> currently listed.
->
-> When I looked at the list of open CVEs, a few did catch my eye,
-> particularly the 24 still open against imagemagick.
+--=-d+34HRbwXBfWl8mm0KeI
+Content-Type: text/plain; charset=us-ascii; format=flowed
 
-This is pretty cool. Next in line is yasm with 20, and I think if we
-upgrade to latest
-master then most of the CVEs will be gone. I will take a look into it
-( time permits )
-. I implore our community to also review and provide feedback and/or patche=
-s.
+This patch must be removed as it does not fully resolve the issue. 
+Sorry for that. I thought I had tested enough, but I was wrong because
+the CFLAGS line to disable the "incompatible-pointer-types" error is 
+present twice in the recipe. One was added by:
+<https://git.openembedded.org/meta-openembedded/commit/?h=master-next&id=f0c767407d033e3f39ceeccc2f7e03a1ca7a6443>
+and the other by me
 
-Btw. the color coding for master and dunfell is same or atleast it
-looks like that to my
-eye, maybe we should just drop dunfell from the graphs now that its EOL
-
->
-> I can see many were already excluded in the recipe, based upon the CPE
-> needing an update and I appreciate you've sent emails to get the NVD
-> entry tweaked:
->
-> https://git.openembedded.org/meta-openembedded/tree/meta-oe/recipes-suppo=
-rt/imagemagick/imagemagick_7.1.1.bb
->
-> In your report for milestone 4, I see CVE-2014-9822 has a CPE sent for
-> it:
->
-> https://clients.neighbourhood.ie/yocto/121-160.html
->
-> but it is listed as being an open issue in the metadata. Was there a
-> reason we don't have the CVE_STATUS[CVE-2014-9822] set in the recipe?
->
-> There are a few others that are probably in a similar state to this.
->
-> I suspect there are a few details we need to tweak just to fully ensure
-> the reports reflect all the good work you've done?
->
-> Thanks again for the work though, there is some really great data here,
-> I just want to ensure our metrics fully reflect it.
->
-> Cheers,
->
-> Richard
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+On Thu, Jul 11 2024 at 12:36:25 AM +02:00:00, Markus Volk 
+<f_l_k@t-online.de> wrote:
+> This imports two upstream patches that fix vala so that it
+> generates correct c code
+> 
+> Signed-off-by: Markus Volk <f_l_k@t-online.de 
+> <mailto:f_l_k@t-online.de>>
+> ---
+>  ...be8987e5eb1390b23ac531c971b202c2ef77.patch | 69 
+> +++++++++++++++++++
+>  ...6627f4fc96938b6015e05849867c472160a8.patch | 54 +++++++++++++++
+>  .../recipes-devtools/libgee/libgee_0.20.6.bb  | 40 ++---------
+>  3 files changed, 127 insertions(+), 36 deletions(-)
+>  create mode 100644 
+> meta-oe/recipes-devtools/libgee/libgee/2f0bbe8987e5eb1390b23ac531c971b202c2ef77.patch
+>  create mode 100644 
+> meta-oe/recipes-devtools/libgee/libgee/b33a6627f4fc96938b6015e05849867c472160a8.patch
+> 
+> diff --git 
+> a/meta-oe/recipes-devtools/libgee/libgee/2f0bbe8987e5eb1390b23ac531c971b202c2ef77.patch 
+> b/meta-oe/recipes-devtools/libgee/libgee/2f0bbe8987e5eb1390b23ac531c971b202c2ef77.patch
+> new file mode 100644
+> index 000000000..a506391d1
+> --- /dev/null
+> +++ 
+> b/meta-oe/recipes-devtools/libgee/libgee/2f0bbe8987e5eb1390b23ac531c971b202c2ef77.patch
+> @@ -0,0 +1,69 @@
+> +From 2f0bbe8987e5eb1390b23ac531c971b202c2ef77 Mon Sep 17 00:00:00 
+> 2001
+> +From: Rico Tzschichholz <ricotz@ubuntu.com 
+> <mailto:ricotz@ubuntu.com>>
+> +Date: Thu, 13 Apr 2023 23:43:03 +0200
+> +Subject: [PATCH] Implementations of "G List.get()" should use 
+> non-nullable
+> + return as defined
+> +
+> +Upstream-Status: Backport 
+> [<https://gitlab.gnome.org/GNOME/libgee/-/commit/2f0bbe8987e5eb1390b23ac531c971b202c2ef77>]
+> +---
+> + gee/abstractlist.vala       | 2 +-
+> + gee/concurrentlist.vala     | 2 +-
+> + gee/readonlylist.vala       | 2 +-
+> + gee/unrolledlinkedlist.vala | 2 +-
+> + 4 files changed, 4 insertions(+), 4 deletions(-)
+> +
+> +diff --git a/gee/abstractlist.vala b/gee/abstractlist.vala
+> +index eeff984..1e55114 100644
+> +--- a/gee/abstractlist.vala
+> ++++ b/gee/abstractlist.vala
+> +@@ -39,7 +39,7 @@ public abstract class Gee.AbstractList<G> : 
+> Gee.AbstractCollection<G>, List<G> {
+> + 	/**
+> + 	 * {@inheritDoc}
+> + 	 */
+> +-	public abstract new G? get (int index);
+> ++	public abstract new G get (int index);
+> +
+> + 	/**
+> + 	 * {@inheritDoc}
+> +diff --git a/gee/concurrentlist.vala b/gee/concurrentlist.vala
+> +index 6e511f1..583f827 100644
+> +--- a/gee/concurrentlist.vala
+> ++++ b/gee/concurrentlist.vala
+> +@@ -170,7 +170,7 @@ public class Gee.ConcurrentList<G> : 
+> AbstractList<G> {
+> + 	/**
+> + 	 * {@inheritDoc}
+> + 	 */
+> +-	public override G? get (int index) {
+> ++	public override G get (int index) {
+> + 		HazardPointer.Context ctx = new HazardPointer.Context ();
+> + 		Utils.Misc.unused (ctx);
+> + 		assert (index >= 0);
+> +diff --git a/gee/readonlylist.vala b/gee/readonlylist.vala
+> +index 8be3f27..c243d14 100644
+> +--- a/gee/readonlylist.vala
+> ++++ b/gee/readonlylist.vala
+> +@@ -74,7 +74,7 @@ internal class Gee.ReadOnlyList<G> : 
+> Gee.ReadOnlyCollection<G>, List<G> {
+> + 	/**
+> + 	 * {@inheritDoc}
+> + 	 */
+> +-	public new G? get (int index) {
+> ++	public new G get (int index) {
+> + 		return ((Gee.List<G>) _collection).get (index);
+> + 	}
+> +
+> +diff --git a/gee/unrolledlinkedlist.vala 
+> b/gee/unrolledlinkedlist.vala
+> +index e36f88f..234d24d 100644
+> +--- a/gee/unrolledlinkedlist.vala
+> ++++ b/gee/unrolledlinkedlist.vala
+> +@@ -158,7 +158,7 @@ public class Gee.UnrolledLinkedList<G> : 
+> AbstractBidirList<G>, Queue<G>, Deque<G
+> + 		return new Iterator<G> (this);
+> + 	}
+> +
+> +-	public override G? get (int index) {
+> ++	public override G get (int index) {
+> + 		assert (index >= 0);
+> + 		assert (index < this._size);
+> +
+> +--
+> +GitLab
+> +
+> diff --git 
+> a/meta-oe/recipes-devtools/libgee/libgee/b33a6627f4fc96938b6015e05849867c472160a8.patch 
+> b/meta-oe/recipes-devtools/libgee/libgee/b33a6627f4fc96938b6015e05849867c472160a8.patch
+> new file mode 100644
+> index 000000000..6b65ebd1c
+> --- /dev/null
+> +++ 
+> b/meta-oe/recipes-devtools/libgee/libgee/b33a6627f4fc96938b6015e05849867c472160a8.patch
+> @@ -0,0 +1,54 @@
+> +From b33a6627f4fc96938b6015e05849867c472160a8 Mon Sep 17 00:00:00 
+> 2001
+> +From: Rico Tzschichholz <ricotz@ubuntu.com 
+> <mailto:ricotz@ubuntu.com>>
+> +Date: Sat, 8 Apr 2023 22:39:35 +0200
+> +Subject: [PATCH] Add more missing generic type arguments
+> +
+> +Upstream-Status: Backport 
+> [<https://gitlab.gnome.org/GNOME/libgee/-/commit/b33a6627f4fc96938b6015e05849867c472160a8>]
+> +---
+> + gee/hashmap.vala    | 2 +-
+> + gee/hashset.vala    | 2 +-
+> + gee/linkedlist.vala | 2 +-
+> + 3 files changed, 3 insertions(+), 3 deletions(-)
+> +
+> +diff --git a/gee/hashmap.vala b/gee/hashmap.vala
+> +index a7bae9f..19e3980 100644
+> +--- a/gee/hashmap.vala
+> ++++ b/gee/hashmap.vala
+> +@@ -253,7 +253,7 @@ public class Gee.HashMap<K,V> : 
+> Gee.AbstractMap<K,V> {
+> + 		for (int i = 0; i < _array_size; i++) {
+> + 			Node<K,V> node = (owned) _nodes[i];
+> + 			while (node != null) {
+> +-				Node next = (owned) node.next;
+> ++				Node<K,V> next = (owned) node.next;
+> + 				node.key = null;
+> + 				node.value = null;
+> + 				node = (owned) next;
+> +diff --git a/gee/hashset.vala b/gee/hashset.vala
+> +index ef6d5a2..bf05519 100644
+> +--- a/gee/hashset.vala
+> ++++ b/gee/hashset.vala
+> +@@ -210,7 +210,7 @@ public class Gee.HashSet<G> : AbstractSet<G> {
+> + 		for (int i = 0; i < _array_size; i++) {
+> + 			Node<G> node = (owned) _nodes[i];
+> + 			while (node != null) {
+> +-				Node next = (owned) node.next;
+> ++				Node<G> next = (owned) node.next;
+> + 				node.key = null;
+> + 				node = (owned) next;
+> + 			}
+> +diff --git a/gee/linkedlist.vala b/gee/linkedlist.vala
+> +index aff36b9..976977f 100644
+> +--- a/gee/linkedlist.vala
+> ++++ b/gee/linkedlist.vala
+> +@@ -233,7 +233,7 @@ public class Gee.LinkedList<G> : 
+> AbstractBidirList<G>, Queue<G>, Deque<G> {
+> + 				n.next.prev = n;
+> + 				this._head = (owned)n;
+> + 			} else {
+> +-				weak Node prev = this._head;
+> ++				weak Node<G> prev = this._head;
+> + 				for (int i = 0; i < index - 1; i++) {
+> + 					prev = prev.next;
+> + 				}
+> +--
+> +GitLab
+> +
+> diff --git a/meta-oe/recipes-devtools/libgee/libgee_0.20.6.bb 
+> b/meta-oe/recipes-devtools/libgee/libgee_0.20.6.bb
+> index 7e2781bcb..14e8e9908 100644
+> --- a/meta-oe/recipes-devtools/libgee/libgee_0.20.6.bb
+> +++ b/meta-oe/recipes-devtools/libgee/libgee_0.20.6.bb
+> @@ -11,8 +11,6 @@ LIC_FILES_CHKSUM = 
+> "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+>  GNOMEBASEBUILDCLASS = "autotools"
+>  inherit gnomebase vala gobject-introspection
+> 
+> -CFLAGS += "-Wno-incompatible-pointer-types"
+> -
+>  do_configure:prepend() {
+>      MACROS="libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 
+> ltversion.m4"
+>      for i in ${MACROS}; do
+> @@ -20,39 +18,9 @@ do_configure:prepend() {
+>      done
+>  }
+> 
+> +SRC_URI += " \
+> +	file://2f0bbe8987e5eb1390b23ac531c971b202c2ef77.patch 
+> <file://2f0bbe8987e5eb1390b23ac531c971b202c2ef77.patch/> \
+> +	file://b33a6627f4fc96938b6015e05849867c472160a8.patch 
+> <file://b33a6627f4fc96938b6015e05849867c472160a8.patch/> \
+> +"
+>  SRC_URI[archive.sha256sum] = 
+> "1bf834f5e10d60cc6124d74ed3c1dd38da646787fbf7872220b8b4068e476d4d"
+> 
+> -# <http://errors.yoctoproject.org/Errors/Details/766884/>
+> -# libgee-0.20.6/gee/concurrentlist.c:1169:177: error: passing 
+> argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentlist.c:1175:168: error: passing 
+> argument 4 of 'gee_hazard_pointer_set_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentlist.c:2385:194: error: passing 
+> argument 4 of 'gee_hazard_pointer_compare_and_exchange_pointer' from 
+> incompatible pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentlist.c:2438:177: error: passing 
+> argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentlist.c:2460:168: error: passing 
+> argument 4 of 'gee_hazard_pointer_set_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentlist.c:2469:177: error: passing 
+> argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentlist.c:2481:185: error: passing 
+> argument 4 of 'gee_hazard_pointer_compare_and_exchange_pointer' from 
+> incompatible pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentlist.c:2640:168: error: passing 
+> argument 4 of 'gee_hazard_pointer_set_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentlist.c:2641:168: error: passing 
+> argument 4 of 'gee_hazard_pointer_set_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentlist.c:2750:168: error: passing 
+> argument 4 of 'gee_hazard_pointer_set_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentlist.c:469:168: error: passing 
+> argument 4 of 'gee_hazard_pointer_set_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentlist.c:514:168: error: passing 
+> argument 4 of 'gee_hazard_pointer_set_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentlist.c:713:168: error: passing 
+> argument 4 of 'gee_hazard_pointer_set_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentset.c:3635:185: error: passing 
+> argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentset.c:4950:201: error: passing 
+> argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentset.c:5378:201: error: passing 
+> argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentset.c:5428:226: error: passing 
+> argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentset.c:5480:218: error: passing 
+> argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentset.c:5530:238: error: passing 
+> argument 4 of 'gee_hazard_pointer_compare_and_exchange_pointer' from 
+> incompatible pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentset.c:5532:234: error: passing 
+> argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentset.c:5623:246: error: passing 
+> argument 4 of 'gee_hazard_pointer_compare_and_exchange_pointer' from 
+> incompatible pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentset.c:5625:242: error: passing 
+> argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentset.c:7088:194: error: passing 
+> argument 4 of 'gee_hazard_pointer_compare_and_exchange_pointer' from 
+> incompatible pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentset.c:7157:177: error: passing 
+> argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentset.c:7184:168: error: passing 
+> argument 4 of 'gee_hazard_pointer_set_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentset.c:7198:177: error: passing 
+> argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/concurrentset.c:7215:185: error: passing 
+> argument 4 of 'gee_hazard_pointer_compare_and_exchange_pointer' from 
+> incompatible pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/hashmap.c:4089:30: error: assignment to 
+> 'gboolean (*)(GeeMapIterator *)' {aka 'int (*)(struct _GeeMapIterator 
+> *)'} from incompatible pointer type 'gboolean 
+> (*)(GeeHashMapNodeIterator *)' {aka 'int (*)(struct 
+> _GeeHashMapNodeIterator *)'} [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/hazardpointer.c:430:134: error: passing argument 
+> 4 of 'gee_hazard_pointer_release_policy_swap' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/hazardpointer.c:430:171: error: passing argument 
+> 5 of 'gee_hazard_pointer_release_policy_swap' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/hazardpointer.c:434:134: error: passing argument 
+> 4 of 'gee_hazard_pointer_release_policy_swap' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -# libgee-0.20.6/gee/hazardpointer.c:434:171: error: passing argument 
+> 5 of 'gee_hazard_pointer_release_policy_swap' from incompatible 
+> pointer type [-Wincompatible-pointer-types]
+> -CFLAGS += "-Wno-error=incompatible-pointer-types"
+> --
+> 2.45.1
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#111298): https://lists.openembedded.org/g/openembedde=
-d-devel/message/111298
-> Mute This Topic: https://lists.openembedded.org/mt/107034729/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+> View/Reply Online (#111309): 
+> <https://lists.openembedded.org/g/openembedded-devel/message/111309>
+> Mute This Topic: <https://lists.openembedded.org/mt/107152863/3618223>
+> Group Owner: openembedded-devel+owner@lists.openembedded.org 
+> <mailto:openembedded-devel+owner@lists.openembedded.org>
+> Unsubscribe: 
+> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
+> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
+
+
+--=-d+34HRbwXBfWl8mm0KeI
+Content-Type: text/html; charset=us-ascii
+
+<div id="geary-body" dir="auto"><div>This patch must be removed as it does not fully resolve the issue. Sorry for that. I thought I had tested enough, but I was wrong because&nbsp;</div><div>the CFLAGS line to disable the "incompatible-pointer-types" error is present twice in the recipe. One was added by:</div><div><a href="https://git.openembedded.org/meta-openembedded/commit/?h=master-next&amp;id=f0c767407d033e3f39ceeccc2f7e03a1ca7a6443">https://git.openembedded.org/meta-openembedded/commit/?h=master-next&amp;id=f0c767407d033e3f39ceeccc2f7e03a1ca7a6443</a></div><div>and the other by me</div></div><div id="geary-quote" dir="auto"><br>On Thu, Jul 11 2024 at 12:36:25 AM +02:00:00, Markus Volk &lt;f_l_k@t-online.de&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">This imports two upstream patches that fix vala so that it
+generates correct c code
+
+Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
+---
+ ...be8987e5eb1390b23ac531c971b202c2ef77.patch | 69 +++++++++++++++++++
+ ...6627f4fc96938b6015e05849867c472160a8.patch | 54 +++++++++++++++
+ .../recipes-devtools/libgee/libgee_0.20.6.bb  | 40 ++---------
+ 3 files changed, 127 insertions(+), 36 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/libgee/libgee/2f0bbe8987e5eb1390b23ac531c971b202c2ef77.patch
+ create mode 100644 meta-oe/recipes-devtools/libgee/libgee/b33a6627f4fc96938b6015e05849867c472160a8.patch
+
+diff --git a/meta-oe/recipes-devtools/libgee/libgee/2f0bbe8987e5eb1390b23ac531c971b202c2ef77.patch b/meta-oe/recipes-devtools/libgee/libgee/2f0bbe8987e5eb1390b23ac531c971b202c2ef77.patch
+new file mode 100644
+index 000000000..a506391d1
+--- /dev/null
++++ b/meta-oe/recipes-devtools/libgee/libgee/2f0bbe8987e5eb1390b23ac531c971b202c2ef77.patch
+@@ -0,0 +1,69 @@
++From 2f0bbe8987e5eb1390b23ac531c971b202c2ef77 Mon Sep 17 00:00:00 2001
++From: Rico Tzschichholz &lt;<a href="mailto:ricotz@ubuntu.com">ricotz@ubuntu.com</a>&gt;
++Date: Thu, 13 Apr 2023 23:43:03 +0200
++Subject: [PATCH] Implementations of "G List.get()" should use non-nullable
++ return as defined
++
++Upstream-Status: Backport [<a href="https://gitlab.gnome.org/GNOME/libgee/-/commit/2f0bbe8987e5eb1390b23ac531c971b202c2ef77">https://gitlab.gnome.org/GNOME/libgee/-/commit/2f0bbe8987e5eb1390b23ac531c971b202c2ef77</a>]
++---
++ gee/abstractlist.vala       | 2 +-
++ gee/concurrentlist.vala     | 2 +-
++ gee/readonlylist.vala       | 2 +-
++ gee/unrolledlinkedlist.vala | 2 +-
++ 4 files changed, 4 insertions(+), 4 deletions(-)
++
++diff --git a/gee/abstractlist.vala b/gee/abstractlist.vala
++index eeff984..1e55114 100644
++--- a/gee/abstractlist.vala
+++++ b/gee/abstractlist.vala
++@@ -39,7 +39,7 @@ public abstract class Gee.AbstractList&lt;G&gt; : Gee.AbstractCollection&lt;G&gt;, List&lt;G&gt; {
++ 	/**
++ 	 * {@inheritDoc}
++ 	 */
++-	public abstract new G? get (int index);
+++	public abstract new G get (int index);
++ 
++ 	/**
++ 	 * {@inheritDoc}
++diff --git a/gee/concurrentlist.vala b/gee/concurrentlist.vala
++index 6e511f1..583f827 100644
++--- a/gee/concurrentlist.vala
+++++ b/gee/concurrentlist.vala
++@@ -170,7 +170,7 @@ public class Gee.ConcurrentList&lt;G&gt; : AbstractList&lt;G&gt; {
++ 	/**
++ 	 * {@inheritDoc}
++ 	 */
++-	public override G? get (int index) {
+++	public override G get (int index) {
++ 		HazardPointer.Context ctx = new HazardPointer.Context ();
++ 		Utils.Misc.unused (ctx);
++ 		assert (index &gt;= 0);
++diff --git a/gee/readonlylist.vala b/gee/readonlylist.vala
++index 8be3f27..c243d14 100644
++--- a/gee/readonlylist.vala
+++++ b/gee/readonlylist.vala
++@@ -74,7 +74,7 @@ internal class Gee.ReadOnlyList&lt;G&gt; : Gee.ReadOnlyCollection&lt;G&gt;, List&lt;G&gt; {
++ 	/**
++ 	 * {@inheritDoc}
++ 	 */
++-	public new G? get (int index) {
+++	public new G get (int index) {
++ 		return ((Gee.List&lt;G&gt;) _collection).get (index);
++ 	}
++ 
++diff --git a/gee/unrolledlinkedlist.vala b/gee/unrolledlinkedlist.vala
++index e36f88f..234d24d 100644
++--- a/gee/unrolledlinkedlist.vala
+++++ b/gee/unrolledlinkedlist.vala
++@@ -158,7 +158,7 @@ public class Gee.UnrolledLinkedList&lt;G&gt; : AbstractBidirList&lt;G&gt;, Queue&lt;G&gt;, Deque&lt;G
++ 		return new Iterator&lt;G&gt; (this);
++ 	}
++ 
++-	public override G? get (int index) {
+++	public override G get (int index) {
++ 		assert (index &gt;= 0);
++ 		assert (index &lt; this._size);
++ 
++-- 
++GitLab
++
+diff --git a/meta-oe/recipes-devtools/libgee/libgee/b33a6627f4fc96938b6015e05849867c472160a8.patch b/meta-oe/recipes-devtools/libgee/libgee/b33a6627f4fc96938b6015e05849867c472160a8.patch
+new file mode 100644
+index 000000000..6b65ebd1c
+--- /dev/null
++++ b/meta-oe/recipes-devtools/libgee/libgee/b33a6627f4fc96938b6015e05849867c472160a8.patch
+@@ -0,0 +1,54 @@
++From b33a6627f4fc96938b6015e05849867c472160a8 Mon Sep 17 00:00:00 2001
++From: Rico Tzschichholz &lt;<a href="mailto:ricotz@ubuntu.com">ricotz@ubuntu.com</a>&gt;
++Date: Sat, 8 Apr 2023 22:39:35 +0200
++Subject: [PATCH] Add more missing generic type arguments
++
++Upstream-Status: Backport [<a href="https://gitlab.gnome.org/GNOME/libgee/-/commit/b33a6627f4fc96938b6015e05849867c472160a8">https://gitlab.gnome.org/GNOME/libgee/-/commit/b33a6627f4fc96938b6015e05849867c472160a8</a>]
++---
++ gee/hashmap.vala    | 2 +-
++ gee/hashset.vala    | 2 +-
++ gee/linkedlist.vala | 2 +-
++ 3 files changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/gee/hashmap.vala b/gee/hashmap.vala
++index a7bae9f..19e3980 100644
++--- a/gee/hashmap.vala
+++++ b/gee/hashmap.vala
++@@ -253,7 +253,7 @@ public class Gee.HashMap&lt;K,V&gt; : Gee.AbstractMap&lt;K,V&gt; {
++ 		for (int i = 0; i &lt; _array_size; i++) {
++ 			Node&lt;K,V&gt; node = (owned) _nodes[i];
++ 			while (node != null) {
++-				Node next = (owned) node.next;
+++				Node&lt;K,V&gt; next = (owned) node.next;
++ 				node.key = null;
++ 				node.value = null;
++ 				node = (owned) next;
++diff --git a/gee/hashset.vala b/gee/hashset.vala
++index ef6d5a2..bf05519 100644
++--- a/gee/hashset.vala
+++++ b/gee/hashset.vala
++@@ -210,7 +210,7 @@ public class Gee.HashSet&lt;G&gt; : AbstractSet&lt;G&gt; {
++ 		for (int i = 0; i &lt; _array_size; i++) {
++ 			Node&lt;G&gt; node = (owned) _nodes[i];
++ 			while (node != null) {
++-				Node next = (owned) node.next;
+++				Node&lt;G&gt; next = (owned) node.next;
++ 				node.key = null;
++ 				node = (owned) next;
++ 			}
++diff --git a/gee/linkedlist.vala b/gee/linkedlist.vala
++index aff36b9..976977f 100644
++--- a/gee/linkedlist.vala
+++++ b/gee/linkedlist.vala
++@@ -233,7 +233,7 @@ public class Gee.LinkedList&lt;G&gt; : AbstractBidirList&lt;G&gt;, Queue&lt;G&gt;, Deque&lt;G&gt; {
++ 				n.next.prev = n;
++ 				this._head = (owned)n;
++ 			} else {
++-				weak Node prev = this._head;
+++				weak Node&lt;G&gt; prev = this._head;
++ 				for (int i = 0; i &lt; index - 1; i++) {
++ 					prev = prev.next;
++ 				}
++-- 
++GitLab
++
+diff --git a/meta-oe/recipes-devtools/libgee/libgee_0.20.6.bb b/meta-oe/recipes-devtools/libgee/libgee_0.20.6.bb
+index 7e2781bcb..14e8e9908 100644
+--- a/meta-oe/recipes-devtools/libgee/libgee_0.20.6.bb
++++ b/meta-oe/recipes-devtools/libgee/libgee_0.20.6.bb
+@@ -11,8 +11,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+ GNOMEBASEBUILDCLASS = "autotools"
+ inherit gnomebase vala gobject-introspection
+ 
+-CFLAGS += "-Wno-incompatible-pointer-types"
+-
+ do_configure:prepend() {
+     MACROS="libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 ltversion.m4"
+     for i in ${MACROS}; do
+@@ -20,39 +18,9 @@ do_configure:prepend() {
+     done
+ }
+ 
++SRC_URI += " \
++	<a href="file://2f0bbe8987e5eb1390b23ac531c971b202c2ef77.patch">file://2f0bbe8987e5eb1390b23ac531c971b202c2ef77.patch</a> \
++	<a href="file://b33a6627f4fc96938b6015e05849867c472160a8.patch">file://b33a6627f4fc96938b6015e05849867c472160a8.patch</a> \
++"
+ SRC_URI[archive.sha256sum] = "1bf834f5e10d60cc6124d74ed3c1dd38da646787fbf7872220b8b4068e476d4d"
+ 
+-# <a href="http://errors.yoctoproject.org/Errors/Details/766884/">http://errors.yoctoproject.org/Errors/Details/766884/</a>
+-# libgee-0.20.6/gee/concurrentlist.c:1169:177: error: passing argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:1175:168: error: passing argument 4 of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:2385:194: error: passing argument 4 of 'gee_hazard_pointer_compare_and_exchange_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:2438:177: error: passing argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:2460:168: error: passing argument 4 of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:2469:177: error: passing argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:2481:185: error: passing argument 4 of 'gee_hazard_pointer_compare_and_exchange_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:2640:168: error: passing argument 4 of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:2641:168: error: passing argument 4 of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:2750:168: error: passing argument 4 of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:469:168: error: passing argument 4 of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:514:168: error: passing argument 4 of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentlist.c:713:168: error: passing argument 4 of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:3635:185: error: passing argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:4950:201: error: passing argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:5378:201: error: passing argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:5428:226: error: passing argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:5480:218: error: passing argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:5530:238: error: passing argument 4 of 'gee_hazard_pointer_compare_and_exchange_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:5532:234: error: passing argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:5623:246: error: passing argument 4 of 'gee_hazard_pointer_compare_and_exchange_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:5625:242: error: passing argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:7088:194: error: passing argument 4 of 'gee_hazard_pointer_compare_and_exchange_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:7157:177: error: passing argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:7184:168: error: passing argument 4 of 'gee_hazard_pointer_set_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:7198:177: error: passing argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/concurrentset.c:7215:185: error: passing argument 4 of 'gee_hazard_pointer_compare_and_exchange_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/hashmap.c:4089:30: error: assignment to 'gboolean (*)(GeeMapIterator *)' {aka 'int (*)(struct _GeeMapIterator *)'} from incompatible pointer type 'gboolean (*)(GeeHashMapNodeIterator *)' {aka 'int (*)(struct _GeeHashMapNodeIterator *)'} [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/hazardpointer.c:430:134: error: passing argument 4 of 'gee_hazard_pointer_release_policy_swap' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/hazardpointer.c:430:171: error: passing argument 5 of 'gee_hazard_pointer_release_policy_swap' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/hazardpointer.c:434:134: error: passing argument 4 of 'gee_hazard_pointer_release_policy_swap' from incompatible pointer type [-Wincompatible-pointer-types]
+-# libgee-0.20.6/gee/hazardpointer.c:434:171: error: passing argument 5 of 'gee_hazard_pointer_release_policy_swap' from incompatible pointer type [-Wincompatible-pointer-types]
+-CFLAGS += "-Wno-error=incompatible-pointer-types"
+<div>-- 
+</div>2.45.1
+
+</div><div class="plaintext" style="white-space: break-spaces;">
+-=-=-=-=-=-=-=-=-=-=-=-
+Links: You receive all messages sent to this group.
+View/Reply Online (#111309): <a href="https://lists.openembedded.org/g/openembedded-devel/message/111309">https://lists.openembedded.org/g/openembedded-devel/message/111309</a>
+Mute This Topic: <a href="https://lists.openembedded.org/mt/107152863/3618223">https://lists.openembedded.org/mt/107152863/3618223</a>
+Group Owner: <a href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
+Unsubscribe: <a href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
+-=-=-=-=-=-=-=-=-=-=-=-
+
+</div></blockquote></div>
+--=-d+34HRbwXBfWl8mm0KeI--
+
 
