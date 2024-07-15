@@ -1,97 +1,87 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <dbaryshkov@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 16934C3DA4B
-	for <webhook@archiver.kernel.org>; Mon, 15 Jul 2024 20:49:43 +0000 (UTC)
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
- by mx.groups.io with SMTP id smtpd.web11.2625.1721076580814709064
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97C05C3DA4B
+	for <webhook@archiver.kernel.org>; Mon, 15 Jul 2024 22:59:13 +0000 (UTC)
+Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com [209.85.167.46])
+ by mx.groups.io with SMTP id smtpd.web11.5406.1721084343761139801
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Jul 2024 13:49:41 -0700
+ Mon, 15 Jul 2024 15:59:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=DeVPY+P4;
- spf=pass (domain: smile.fr, ip: 209.85.221.45, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-367993463b8so2707855f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jul 2024 13:49:40 -0700 (PDT)
+ dkim=pass header.i=@linaro.org header.s=google header.b=M2aMZClL;
+ spf=pass (domain: linaro.org, ip: 209.85.167.46, mailfrom: dmitry.baryshkov@linaro.org)
+Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-52ea2f58448so6474963e87.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jul 2024 15:59:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1721076578; x=1721681378; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=YvVCEs5gykFqAEvgY/QYM8K+XaX5y3EUTc88PKG82ls=;
-        b=DeVPY+P4MtR7LcGIeAiXh4nEioNMcUoDtqLN07UqXNCB9/+boiRddovHAi879hyHmr
-         Nk9uTrTBsmD0wr+CyGemenxaduQIzIVjz5JaSH4JGhEBAQZnPmMgyq3LInizzuCHAeiX
-         65U+j4GaQ+EgxmXUSHPNXv1hHsKN0allSwAPY=
+        d=linaro.org; s=google; t=1721084342; x=1721689142; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=RKL8MXIGa8hGFgAb1UzRJPgQVl7y/2HE1Hdvu3YGaAE=;
+        b=M2aMZClLNTMYzpQvsCHndhqREMM2EQtIVCQoOGtT/lVIUOCFbNiWPuBv/OIZaRTkc4
+         P3M+saFcS3wQYCZdhmjWBZyUtTX8Jt6F0RbxRpStqMx7i20Tc9G1hpCR4KStrqerKL8b
+         QG/O2DpL1uWbtssOo/AqgQHhLDUfooTWm2dup0O1ZYGaC5Q8XJa/t9zi20aQ69UsbrUo
+         JiWeeb4IE1bbEzqV/pX/gQM3rCLz2AJYUH3D2kBL7ToS3MokCB7Czd8IWr98BMn7GbYj
+         XUB6dAzmrgflf/fTHERpt6FjGMLcM0apnI5A/tWnev+CERSU7wUgihkfu35PVvFu0DJ9
+         MGGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721076578; x=1721681378;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=YvVCEs5gykFqAEvgY/QYM8K+XaX5y3EUTc88PKG82ls=;
-        b=a02LkZdsXQOVnnsu2zOl+J7ZwViSVMkN+jI9NZUqtfVoCNmB5Nsx2iL5C7bnkXda+L
-         A2+qs8qDkCIVbT33bNu7/NIz5BobCC5Aylrzs1u4wtp00JhL8Igtt4+hMEF6CISE8rMS
-         BYqXokv5jF4AI1yF5iwfPwxupIWnBudlImmOWKfN6KoQEoWSiL7uU7mnZVpxNLDiuT+Y
-         0ovyP0dOQNKIwHrg8ups10ZPItte1UwdUulT6wzUIF9+VxWCD0VHW7NXHMpSPnna7r8j
-         PFql5dCqEEXWp9vETc+hcMziizr+t3Zt3DnNNaCc7KdD/oCGlePGXjWaA20xJp45QDI6
-         IRNQ==
-X-Gm-Message-State: AOJu0Ywpr6aF4mUAsOFVeV5xhs9rosvqewRldmG30+jCf+Pk/jV0blKY
-	qcPeP7tUqm8GWBXY3RJifLLxSqioKvQv7onJMK8bzZP69m9eHsQl5I1kl9/rnDLec9JoxD+Hf9N
-	hl70=
-X-Google-Smtp-Source: AGHT+IElRtPlqu7gcoa+3YsEhKUcB+8lkWQhBidaM8RvmCCRZJdyEjdMP57pBKRzEzWGBPUeiePJEg==
-X-Received: by 2002:a5d:574d:0:b0:367:8c64:d969 with SMTP id ffacd0b85a97d-368261446f0mr27609f8f.39.1721076578533;
-        Mon, 15 Jul 2024 13:49:38 -0700 (PDT)
-Received: from P-ASN-ECS-830T8C3.numericable.fr (53.1.159.89.rev.sfr.net. [89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3680daccd68sm7276842f8f.63.2024.07.15.13.49.37
+        d=1e100.net; s=20230601; t=1721084342; x=1721689142;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=RKL8MXIGa8hGFgAb1UzRJPgQVl7y/2HE1Hdvu3YGaAE=;
+        b=xD4dc+X/BtSqjO8BiEZgyZ+jML/pqc0xua9hoQnot3ztuNd1rW8cKCWbMbn34ZyTiu
+         2d+Ugbrv6Xi8AuWH8BQPaRUAsn3G4bCZtFu1i4+GWSSpqcLztJh+7BISlgJA94VosVZ/
+         7z3RJHfvHZ6IzO6U+CEdyBCBvfzb7tjd/4iyNlBVaN6XIS869kZw6Tz58eu1/GzzLDkT
+         Gd5k/LWnh0EvfU1B3Yi8oeKIhZvM8SZsmlP9KSAMbdYA3ix+M8W61OusETez1WpggAb2
+         1mClrKPN2sH8SDmnlaGZgmHvxHKneFetj+PPBHacsGus7DQjFn28GeQ0YZj4iBew0JsS
+         eR8g==
+X-Gm-Message-State: AOJu0YwfO7eiEphZhMu/HutS0oVtX0qR5cl5eF45i3jlmuei3AQUCwyk
+	HgbsIl0bccnuXdDZAYnKa80StSVXcus431V0ez7QN5erVw+4TQ6kbbEgXeeaQf8uTMST2YIMwYy
+	49vGRug==
+X-Google-Smtp-Source: AGHT+IF+Qcvk+E9e/PoTlhx4YoNo/XKmhvl7UXRH5Bgmpmg0U7+hNl0kYqDFCpd5PHXu+jFcEQDtYw==
+X-Received: by 2002:a05:6512:1382:b0:52c:890e:e8e7 with SMTP id 2adb3069b0e04-52edf02a9d4mr182065e87.50.1721084341616;
+        Mon, 15 Jul 2024 15:59:01 -0700 (PDT)
+Received: from umbar.unikie.fi ([192.130.178.91])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-52ed252d50csm989203e87.129.2024.07.15.15.59.01
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Jul 2024 13:49:38 -0700 (PDT)
-From: Yoann Congal <yoann.congal@smile.fr>
+        Mon, 15 Jul 2024 15:59:01 -0700 (PDT)
+From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>,
-	Alexandre Truong <alexandre.truong@smile.fr>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][scarthgap][PATCH] packagegroup-meta-oe: fix lvgl inclusion
-Date: Mon, 15 Jul 2024 22:49:13 +0200
-Message-Id: <20240715204913.2759019-1-yoann.congal@smile.fr>
+Subject: [meta-oe][PATCH] android-tools: make PN-adbd as a systemd package
+Date: Tue, 16 Jul 2024 01:59:00 +0300
+Message-Id: <20240715225900.3832758-1-dmitry.baryshkov@linaro.org>
 X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 Jul 2024 20:49:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111364
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Jul 2024 22:59:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111365
 
-From: Yoann Congal <yoann.congal@smile.fr>
+The android-tools package doesn't include the systemd units. Instead
+adbd unit is a part of the android-tools-adbd package. Set the
+SYSTEMD_PACKAGES variable accordingly.
 
-Since commit f7fedd156374 ("lvgl: Upgrade to LVGL 9 series"):
-* lv-drivers and lv-lib-png packages do not exist anymore
-* lvgl does not depend on "wayland" being in DISTRO_FEATURES
-
-This fixes these warnings (e.g. from AB[0]):
-  Nothing RPROVIDES 'lv-lib-png' (but [...]/packagegroup-meta-oe.bb RDEPENDS on or otherwise requires it)
-  Nothing RPROVIDES 'lv-drivers' (but [...]/packagegroup-meta-oe.bb RDEPENDS on or otherwise requires it)
-
-[0]: https://autobuilder.yoctoproject.org/typhoon/#/builders/156/builds/367/steps/12/logs/warnings
-
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
-Reviewed-by: Alexandre Truong <alexandre.truong@smile.fr>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit cda9ade9fb9662d11b6e956844db7c8202b9902b)
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 ---
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-devtool/android-tools/android-tools_29.0.6.r14.bb    | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 7544a9fbfa..71f74287c7 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -511,7 +511,7 @@ RDEPENDS:packagegroup-meta-oe-graphics ="\
-     libsdl2-net \
-     ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "libsdl2-ttf", "", d)} \
-     libsdl \
--    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "lv-drivers lvgl lv-lib-png", "", d)} \
-+    lvgl \
-     ttf-arphic-uming \
-     ttf-droid-sans ttf-droid-sans-mono ttf-droid-sans-fallback ttf-droid-sans-japanese ttf-droid-serif \
-     ttf-abyssinica \
+diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
+index 456c7400ef22..18068478f8c7 100644
+--- a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
++++ b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
+@@ -68,6 +68,7 @@ COMPATIBLE_HOST:powerpc64le = "(null)"
+ 
+ inherit systemd
+ 
++SYSTEMD_PACKAGES = "${PN}-adbd"
+ SYSTEMD_SERVICE:${PN}-adbd = "android-tools-adbd.service"
+ 
+ # Find libbsd headers during native builds
+-- 
+2.39.2
+
 
