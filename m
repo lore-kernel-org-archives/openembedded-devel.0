@@ -1,180 +1,287 @@
-Return-Path: <ceggers@arri.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 22A7BC3DA4B
-	for <webhook@archiver.kernel.org>; Mon, 15 Jul 2024 12:18:08 +0000 (UTC)
-Received: from EUR02-DB5-obe.outbound.protection.outlook.com (EUR02-DB5-obe.outbound.protection.outlook.com [40.107.249.70])
- by mx.groups.io with SMTP id smtpd.web10.36640.1721045880400478918
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00E92C3DA59
+	for <webhook@archiver.kernel.org>; Mon, 15 Jul 2024 14:18:29 +0000 (UTC)
+Received: from mail-oa1-f49.google.com (mail-oa1-f49.google.com [209.85.160.49])
+ by mx.groups.io with SMTP id smtpd.web11.39021.1721053106393850875
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Jul 2024 05:18:02 -0700
+ Mon, 15 Jul 2024 07:18:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@arri.de header.s=selector1 header.b=Dxyq4ar5;
- spf=pass (domain: arri.de, ip: 40.107.249.70, mailfrom: ceggers@arri.de)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WWAqIZomCfcJ8i1UF6PPDeHJaIYXEqTXNK7WCMU7ofo8YaSPXPr3wqTqLfmNPwPFBXAeMmsHeZ4T3dQNQbqL0rzNlLZJ+f/zlEM8a0y2tKR8CGytFfbJPD/lnsL80KD3lMceUoBTke5qGnmSiQJxExTsDoN4RvBfvDPAn88W4YOMe8h1OzJuDEXZyKtYvQJ16BOW6NiWo9fr38FQJ628ZSfjme8+5B6TqfrSxRSd8cHSiSbm39Kv3LPMjdNEas8TMKfl6bnQdi+1iNb+/dC1854e2rqQ6/hxl/E6PgZbK7dTx0QPRafF5SzRJvetdZcCOObqEBZirYkH8mdwfMS5BQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=niOk6tvzH7XXZROeAW/kp4SnSN+fr09/vIzMfdd1lYo=;
- b=TO8f08YJ9va6IXoCFUUcjJMAaIGzZMK52m1+WveWWODwkWg/GIlwLCvvoH6Wo5pDVDVOizcwt0js7ssxcJij0w1neW7qH6AO0TfNNY9Zp/vHHpJO1vpQO7Mu4N66B05mgkX2228SfDGWkCYgb52chB0zMZxJBactCtg08cdAMhCO/a1VlCL4royjoPbgkUJH0Lj60ZatjnVR/gT15StWYibU76o+MQmmor0SjULFeNn5dYyHsT+5ZQF9E0kD19bjIXCsbE8MOFKNT9UoQF1XW6GTuR38DVBAUIMP7/HCv2kNp0n3hB3YW71/iZECbnXhCPdvqF4Iv2i+tM85T1UepQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 217.111.95.7) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arri.de;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=arri.de;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arri.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=niOk6tvzH7XXZROeAW/kp4SnSN+fr09/vIzMfdd1lYo=;
- b=Dxyq4ar51val3+BT/MZV/bpbA7dfH+swul8B5orcs+wYL2494Z0b5MZ1JWf90ts+hiJ5BMMvw40qRu0F3X3hAmBZwKvchR26LqoAF7t/QTF78GQoSG3AUD6k5qujrZhSjDKB/MmS60spK1fCO5NXysPkUoHiigCs0rGHHh4uka0=
-Received: from DU2PR04CA0072.eurprd04.prod.outlook.com (2603:10a6:10:232::17)
- by DBAPR07MB6645.eurprd07.prod.outlook.com (2603:10a6:10:180::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.13; Mon, 15 Jul
- 2024 12:17:56 +0000
-Received: from DB3PEPF0000885C.eurprd02.prod.outlook.com
- (2603:10a6:10:232:cafe::32) by DU2PR04CA0072.outlook.office365.com
- (2603:10a6:10:232::17) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7762.28 via Frontend
- Transport; Mon, 15 Jul 2024 12:17:56 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 217.111.95.7)
- smtp.mailfrom=arri.de; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=arri.de;
-Received-SPF: Fail (protection.outlook.com: domain of arri.de does not
- designate 217.111.95.7 as permitted sender) receiver=protection.outlook.com;
- client-ip=217.111.95.7; helo=mta.arri.de;
-Received: from mta.arri.de (217.111.95.7) by
- DB3PEPF0000885C.mail.protection.outlook.com (10.167.242.7) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7784.11 via Frontend Transport; Mon, 15 Jul 2024 12:17:56 +0000
-Received: from N9W6SW14.arri.de (10.30.4.252) by mta.arri.de (10.10.18.5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.34; Mon, 15 Jul
- 2024 14:17:55 +0200
-From: Christian Eggers <ceggers@arri.de>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Christian Eggers <ceggers@arri.de>
-Subject: [meta-oe][RFC PATCH] include-what-you-use: new recipe
-Date: Mon, 15 Jul 2024 14:17:43 +0200
-Message-ID: <20240715121744.18888-1-ceggers@arri.de>
-X-Mailer: git-send-email 2.43.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=df9tlUaA;
+ spf=pass (domain: gmail.com, ip: 209.85.160.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f49.google.com with SMTP id 586e51a60fabf-25e076f79d5so2180136fac.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jul 2024 07:18:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1721053105; x=1721657905; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=1WlQ+cjACI8XPcnnG79lO5wYptGBQG1N31eh/IFQ3wI=;
+        b=df9tlUaA2n2gWsUZ495Nh4zQO3IuIcPDBRNoyVukjiHBMlsCegItw5o833Jxhi+lIa
+         ShyCKGTait3u4o/2jX4GNJMTKn9zBr/Wxanp0GY/xPzjCl/dhHKJMNgg0OeCVtD7zjmk
+         5ljaLuBNRosljuKHhhS8keTMtpqN+y6IZ3bAu75SlTrle/HGJ9ShgnKiE/kJ9Lh3NhyB
+         0+yE/pgbnbPgNeD8g8N9Hp5FjjxW+GR0+qJVjGHiNec/DSwUi8N2+AXpS9w+rjzSPmsL
+         ukX2242I0gPY8GB6uFtB4pZnLikHeSYbAyiAx4n7/MQPMLBNZCJ8ajz+EKIaYtHJmg1+
+         CXwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1721053105; x=1721657905;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=1WlQ+cjACI8XPcnnG79lO5wYptGBQG1N31eh/IFQ3wI=;
+        b=K+nTopZEIuak8g1ngn2YuwmQWCjk0fmkgzJlgOMYTfxJANoUvSemRJ7ucPdEbl3pN/
+         mCwxeooUjLD3TE7d9PYPDX0UhvSBYQt9ur5mvPxHPRqci+ouwDJRoDsWU+8Ec8RXp8NH
+         SuUHrep/LhT5Ox0PimQOEXjNRGLlE+x0XY1BTBabOlTvvLGxv9heoD7wrl0JW0b2TGUY
+         JJUJYIwMCIKcyLTXaI4iqZ5AD46A7g+E5BQvefSBP1u/V/cCaD6I6J4kTZoooQIN6m8O
+         xTdwfZeItqxTKJCLbZJ1QDA/bSzRRq8D5owHozVf1fcmpnjSx+aD1GAYYBbq+AT1kjlA
+         0z7A==
+X-Gm-Message-State: AOJu0YzOTgAzCD2NLVgfHEE3z85qTia6V9SVrtCvKHTp2G9WzoX44+Dc
+	bV2KiAwDxxuSRCyFxCq4K904mRj+3v9vrKz2Hc0pVU9gMyWQvrTAt9mvgr5zDO2bwZbZ0yF+4dk
+	a3EApJupkxEvIxo3KDnzGs8HThmc0F5+E
+X-Google-Smtp-Source: AGHT+IElHA2kBV4uY5QHMzpEWy+g4V45q5u8Bpds4hSV7QPetnQg2c3djOMw5e19JzlpWWZ0FyuztVCejjITL5f4HFs=
+X-Received: by 2002:a05:6871:54c:b0:25e:1ca6:6d09 with SMTP id
+ 586e51a60fabf-25eae76455amr16625336fac.8.1721053105440; Mon, 15 Jul 2024
+ 07:18:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-Originating-IP: [10.30.4.252]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB3PEPF0000885C:EE_|DBAPR07MB6645:EE_
-X-MS-Office365-Filtering-Correlation-Id: f91c3225-2f71-407e-7d91-08dca4c828d1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|376014|36860700013|1800799024;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?rlql8WkgNNOPQjVJWGtVus21ay/fW6fg5EYTuy3jmCB4jTNrRl3KZ45kgwW4?=
- =?us-ascii?Q?IXAS0gR1rwSm26Q9s32B1ABeTap83pRP0Sai/1xgTgEejf52yko7FERllLKL?=
- =?us-ascii?Q?OrZEEBknU+ZpUODjofOaonP3ycl86iJMyGSpgrEbiM10aPdLBUb6/Q1K4iLa?=
- =?us-ascii?Q?LH33TXsJgalupsPhQ7TAsrxjLOUxNkhghBMbkOkS8swbd9ElOoa04wcuB1/+?=
- =?us-ascii?Q?Byc9epcRcEzANkWqP6pFqZL3CoAWhMcB3iiC7JK/0ePM0ytyabyeC6rOEVG4?=
- =?us-ascii?Q?4DBrRZ3iq74qSgY8p1IKc1SNKAaEsxP9xbWjbzwRYYbBOWU793qLLyhpQn95?=
- =?us-ascii?Q?xSMJ5vfNigKGof6KnbwLBNQgsatDvHSOfsmbzeb2bciwfcebRWFIcLc4mgGN?=
- =?us-ascii?Q?uIrdahkWww7Pd1YyKgBzyeAxA8ltQC7Y+LRbEusfRUGoP45tRArczPH4cbwj?=
- =?us-ascii?Q?+kWG7Yhj1jUZVARDbrWekl6tFqCzAtkBPH1wIoIRJOjlYPe9cy4sRT9xaKaS?=
- =?us-ascii?Q?fMQmYd8kBMImh4SMjF6yvcPktXhR1zzHB+Bcj+uHsMAR2bKgRj4SfllQ/NIT?=
- =?us-ascii?Q?EzaBOQYdnkByPEhsbV65ODX34daxzDuHCWjGgE0/QDKnKlPmao57Ld+RkiIP?=
- =?us-ascii?Q?Qv+1npaywKhc7HQzyqqEOCX0qIog4NR2t5Oc91k+4cUDhhkwXS4nE+lL6wCU?=
- =?us-ascii?Q?gTy3hTDV+gt23KVsOc7haWZLagz9DcIFj+dA6CdGa8kz0zy/es3IK1cdnUyy?=
- =?us-ascii?Q?tLQ8z68mTgi2Foux7VLkbzw9zEMFtt8G+68wcvGT1YNGclExiAI2US42YzuV?=
- =?us-ascii?Q?WS8027ZrGwdNQMVUylGT5l2oTVfDnY6O28cg1oZbrow7JkdBSVR/WXjDfDLY?=
- =?us-ascii?Q?vKk+QO0z5EdhRLQ0imMtcuViG6QCrXRui5JYNqJc3J7JG0mg1n5qLZroVWU5?=
- =?us-ascii?Q?zECnoNeFW31L/OFnZJJjnU4WOv5zghgk/SPyWvTw3nI1cBksZz+7Kb2d158D?=
- =?us-ascii?Q?bCeJyUNATDFFpClIueaL3Lpv0Dc7rT0+4zZoD6PBbga0R3o8jEJqJjhmrsHA?=
- =?us-ascii?Q?97gOjdDqv5gNIojxkRbZzp/UKePs81o3N1/44DUc+UoSTVEkHaR3XUAIxwWO?=
- =?us-ascii?Q?FGFzwN+awgGSBMtc2lMM/aaDY4mIVfndYFfM6PBWx6Wxgc8+D2AFcdQ7ChTD?=
- =?us-ascii?Q?PUSQESRm3c1U84SmzMa49xxdW3KEliY7M6u1oJw2dPWtz67Ib1mLHToiZpbF?=
- =?us-ascii?Q?qwt1KRjDMIACPZYv4HWkGXZgo4ozLk+a4h3cgByPmuZP8r5dPsEtUCMl7QXW?=
- =?us-ascii?Q?F3/MHHx+goXMeIyQRR7vfP99O3urAxl8MailMxjAg6sL3nPfTO91vJy/r5Da?=
- =?us-ascii?Q?k73rUh+Uw2idBZgAzbwm6GqxkVPs?=
-X-Forefront-Antispam-Report: 
-	CIP:217.111.95.7;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mta.arri.de;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arri.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jul 2024 12:17:56.4375
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f91c3225-2f71-407e-7d91-08dca4c828d1
-X-MS-Exchange-CrossTenant-Id: e6a73a5a-614d-4c51-b3e3-53b660a9433a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e6a73a5a-614d-4c51-b3e3-53b660a9433a;Ip=[217.111.95.7];Helo=[mta.arri.de]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DB3PEPF0000885C.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR07MB6645
+References: <20240715121744.18888-1-ceggers@arri.de>
+In-Reply-To: <20240715121744.18888-1-ceggers@arri.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 15 Jul 2024 07:18:14 -0700
+Message-ID: <CAMKF1sp+OV9U8SbRqR=CvR8vxS0dsgCfWqp3ShGr5w2AcuG2-Q@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][RFC PATCH] include-what-you-use: new recipe
+To: ceggers@arri.de
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000fd4e5b061d49e67d"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 Jul 2024 12:18:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111360
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Jul 2024 14:18:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111361
 
-Based on proposal send previously here:
-https://lists.yoctoproject.org/g/yocto/topic/recipe_for/83279588
+--000000000000fd4e5b061d49e67d
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This recipe depends on meta-clang, so should it be added to that layer?
+On Mon, Jul 15, 2024 at 5:18=E2=80=AFAM Christian Eggers via lists.openembe=
+dded.org
+<ceggers=3Darri.de@lists.openembedded.org> wrote:
 
-Unfortunately the 'include-what-you-use' (iwyu) tool doesn't work yet.
-Although I have installed nativesdk-clang (via CLANGSDK =3D "1") and
-nativesdk-include-what-you-use packages, the C++ standard headers are
-not found:
+> Based on proposal send previously here:
+> https://lists.yoctoproject.org/g/yocto/topic/recipe_for/83279588
+>
+> This recipe depends on meta-clang, so should it be added to that layer?
+>
+> Unfortunately the 'include-what-you-use' (iwyu) tool doesn't work yet.
+> Although I have installed nativesdk-clang (via CLANGSDK =3D "1") and
+> nativesdk-include-what-you-use packages, the C++ standard headers are
+> not found:
+>
+> include-what-you-use
+> --sysroot=3D/opt/poky/5.0.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-m=
+usleabi
+> impl/Fdt.cpp
+> impl/Fdt.cpp:9:10: fatal error: 'cerrno' file not found
+>     9 | #include <cerrno>
+>       |          ^~~~~~~~
+>
+> As iwyu uses Clang and I have no experience working with it, this is
+> probably only a beginner mistake. Can Clang use the C++ headers provided
+> by libstdc++, or do I need to install further packages?
+>
 
+It can but it seems your SDK install might be missing any c++ runtime so
+check a simple program that includes say <iostream> header and try
+compiling it
+
+
+> Signed-off-by: Christian Eggers <ceggers@arri.de>
+> ---
+>  .../include-what-you-use_git.bb               | 22 +++++++++++++++++++
+>  1 file changed, 22 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/include-what-you-use/
+> include-what-you-use_git.bb
+>
+> diff --git a/meta-oe/recipes-devtools/include-what-you-use/
+> include-what-you-use_git.bb
+> b/meta-oe/recipes-devtools/include-what-you-use/
+> include-what-you-use_git.bb
+> new file mode 100644
+> index 000000000000..e7df6a834a34
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/include-what-you-use/
+> include-what-you-use_git.bb
+> @@ -0,0 +1,22 @@
+> +LICENSE =3D "NCSA"
+> +LIC_FILES_CHKSUM =3D
+> "file://LICENSE.TXT;md5=3D59d01ad98720f3c50d6a8a0ef3108c88 \
+> +
+> file://iwyu-check-license-header.py;md5=3D7bdb749831163fbe9232b3cb7186116=
+f"
+> +
+> +SRC_URI =3D "git://
+> github.com/include-what-you-use/include-what-you-use.git;protocol=3Dhttps=
+;branch=3Dclang_18
+> "
+> +
+> +PV =3D "0.22+git${SRCPV}"
+> +SRCREV =3D "377eaef70cdda47368939f4d9beabfabe3f628f0"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +DEPENDS =3D "clang"
+
+
+This means it needs to use clang as library to link to is that what it
+required or does it need clang as static compiler to build this package in
+which case you can do so by using TOOLCHAIN =3D =E2=80=9Cclang=E2=80=9D in =
+recipe
+
+
+> +
+> +inherit cmake python3native
+> +
+> +EXTRA_OECMAKE:append:class-nativesdk =3D " \
+> +       -DCMAKE_SKIP_RPATH:BOOL=3DON \
+> +       "
+> +
+> +FILES:${PN} +=3D "${datadir}/${BPN}"
+> +
+> +BBCLASSEXTEND =3D "nativesdk"
+> --
+> 2.44.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#111360):
+> https://lists.openembedded.org/g/openembedded-devel/message/111360
+> Mute This Topic: https://lists.openembedded.org/mt/107229738/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--000000000000fd4e5b061d49e67d
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Mon, Jul 15, 2024 at 5:18=E2=80=AFAM Christian Eggers vi=
+a <a href=3D"http://lists.openembedded.org">lists.openembedded.org</a> &lt;=
+ceggers=3D<a href=3D"mailto:arri.de@lists.openembedded.org">arri.de@lists.o=
+penembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" s=
+tyle=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">Base=
+d on proposal send previously here:<br>
+<a href=3D"https://lists.yoctoproject.org/g/yocto/topic/recipe_for/83279588=
+" rel=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/g/yoc=
+to/topic/recipe_for/83279588</a><br>
+<br>
+This recipe depends on meta-clang, so should it be added to that layer?<br>
+<br>
+Unfortunately the &#39;include-what-you-use&#39; (iwyu) tool doesn&#39;t wo=
+rk yet.<br>
+Although I have installed nativesdk-clang (via CLANGSDK =3D &quot;1&quot;) =
+and<br>
+nativesdk-include-what-you-use packages, the C++ standard headers are<br>
+not found:<br>
+<br>
 include-what-you-use --sysroot=3D/opt/poky/5.0.2/sysroots/cortexa7t2hf-neon=
--vfpv4-poky-linux-musleabi impl/Fdt.cpp
-impl/Fdt.cpp:9:10: fatal error: 'cerrno' file not found
-    9 | #include <cerrno>
-      |          ^~~~~~~~
+-vfpv4-poky-linux-musleabi impl/Fdt.cpp<br>
+impl/Fdt.cpp:9:10: fatal error: &#39;cerrno&#39; file not found<br>
+=C2=A0 =C2=A0 9 | #include &lt;cerrno&gt;<br>
+=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ^~~~~~~~<br>
+<br>
+As iwyu uses Clang and I have no experience working with it, this is<br>
+probably only a beginner mistake. Can Clang use the C++ headers provided<br=
+>
+by libstdc++, or do I need to install further packages?<br>
+</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">It can but it se=
+ems your SDK install might be missing any c++ runtime so check a simple pro=
+gram that includes say &lt;iostream&gt; header and try compiling it=C2=A0</=
+div><div dir=3D"auto"><br></div><blockquote class=3D"gmail_quote" style=3D"=
+margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><br>
+Signed-off-by: Christian Eggers &lt;<a href=3D"mailto:ceggers@arri.de" targ=
+et=3D"_blank">ceggers@arri.de</a>&gt;<br>
+---<br>
+=C2=A0.../<a href=3D"http://include-what-you-use_git.bb" rel=3D"noreferrer"=
+ target=3D"_blank">include-what-you-use_git.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 22 +++++++++++++++++++<br>
+=C2=A01 file changed, 22 insertions(+)<br>
+=C2=A0create mode 100644 meta-oe/recipes-devtools/include-what-you-use/<a h=
+ref=3D"http://include-what-you-use_git.bb" rel=3D"noreferrer" target=3D"_bl=
+ank">include-what-you-use_git.bb</a><br>
+<br>
+diff --git a/meta-oe/recipes-devtools/include-what-you-use/<a href=3D"http:=
+//include-what-you-use_git.bb" rel=3D"noreferrer" target=3D"_blank">include=
+-what-you-use_git.bb</a> b/meta-oe/recipes-devtools/include-what-you-use/<a=
+ href=3D"http://include-what-you-use_git.bb" rel=3D"noreferrer" target=3D"_=
+blank">include-what-you-use_git.bb</a><br>
+new file mode 100644<br>
+index 000000000000..e7df6a834a34<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-devtools/include-what-you-use/<a href=3D"http://inclu=
+de-what-you-use_git.bb" rel=3D"noreferrer" target=3D"_blank">include-what-y=
+ou-use_git.bb</a><br>
+@@ -0,0 +1,22 @@<br>
++LICENSE =3D &quot;NCSA&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE.TXT;md5=3D59d01ad98720f3c50d6a8a=
+0ef3108c88 \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file=
+://iwyu-check-license-header.py;md5=3D7bdb749831163fbe9232b3cb7186116f&quot=
+;<br>
++<br>
++SRC_URI =3D &quot;git://<a href=3D"http://github.com/include-what-you-use/=
+include-what-you-use.git;protocol=3Dhttps;branch=3Dclang_18" rel=3D"norefer=
+rer" target=3D"_blank">github.com/include-what-you-use/include-what-you-use=
+.git;protocol=3Dhttps;branch=3Dclang_18</a>&quot;<br>
++<br>
++PV =3D &quot;0.22+git${SRCPV}&quot;<br>
++SRCREV =3D &quot;377eaef70cdda47368939f4d9beabfabe3f628f0&quot;<br>
++<br>
++S =3D &quot;${WORKDIR}/git&quot;<br>
++<br>
++DEPENDS =3D &quot;clang&quot;</blockquote><div dir=3D"auto"><br></div><div=
+ dir=3D"auto">This means it needs to use clang as library to link to is tha=
+t what it required or does it need clang as static compiler to build this p=
+ackage in which case you can do so by using TOOLCHAIN =3D =E2=80=9Cclang=E2=
+=80=9D in recipe=C2=A0</div><div dir=3D"auto"><br></div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padd=
+ing-left:1ex" dir=3D"auto"><br>
++<br>
++inherit cmake python3native<br>
++<br>
++EXTRA_OECMAKE:append:class-nativesdk =3D &quot; \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0-DCMAKE_SKIP_RPATH:BOOL=3DON \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;<br>
++<br>
++FILES:${PN} +=3D &quot;${datadir}/${BPN}&quot;<br>
++<br>
++BBCLASSEXTEND =3D &quot;nativesdk&quot;<br>
+-- <br>
+2.44.1<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#111360): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/111360" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/111360</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/107229738/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/107229738/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
 
-As iwyu uses Clang and I have no experience working with it, this is
-probably only a beginner mistake. Can Clang use the C++ headers provided
-by libstdc++, or do I need to install further packages?
-
-Signed-off-by: Christian Eggers <ceggers@arri.de>
----
- .../include-what-you-use_git.bb               | 22 +++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/include-what-you-use/include-w=
-hat-you-use_git.bb
-
-diff --git a/meta-oe/recipes-devtools/include-what-you-use/include-what-you=
--use_git.bb b/meta-oe/recipes-devtools/include-what-you-use/include-what-yo=
-u-use_git.bb
-new file mode 100644
-index 000000000000..e7df6a834a34
---- /dev/null
-+++ b/meta-oe/recipes-devtools/include-what-you-use/include-what-you-use_gi=
-t.bb
-@@ -0,0 +1,22 @@
-+LICENSE =3D "NCSA"
-+LIC_FILES_CHKSUM =3D "file://LICENSE.TXT;md5=3D59d01ad98720f3c50d6a8a0ef31=
-08c88 \
-+                    file://iwyu-check-license-header.py;md5=3D7bdb74983116=
-3fbe9232b3cb7186116f"
-+
-+SRC_URI =3D "git://github.com/include-what-you-use/include-what-you-use.gi=
-t;protocol=3Dhttps;branch=3Dclang_18"
-+
-+PV =3D "0.22+git${SRCPV}"
-+SRCREV =3D "377eaef70cdda47368939f4d9beabfabe3f628f0"
-+
-+S =3D "${WORKDIR}/git"
-+
-+DEPENDS =3D "clang"
-+
-+inherit cmake python3native
-+
-+EXTRA_OECMAKE:append:class-nativesdk =3D " \
-+	-DCMAKE_SKIP_RPATH:BOOL=3DON \
-+	"
-+
-+FILES:${PN} +=3D "${datadir}/${BPN}"
-+
-+BBCLASSEXTEND =3D "nativesdk"
---=20
-2.44.1
-
+--000000000000fd4e5b061d49e67d--
 
