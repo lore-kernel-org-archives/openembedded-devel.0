@@ -2,108 +2,105 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A1D7C52D1E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9356BC52D73
 	for <webhook@archiver.kernel.org>; Mon, 15 Jul 2024 09:03:06 +0000 (UTC)
-Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
- by mx.groups.io with SMTP id smtpd.web11.33786.1721034178267353362
+Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
+ by mx.groups.io with SMTP id smtpd.web10.33826.1721034177807152453
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Jul 2024 02:02:59 -0700
+ Mon, 15 Jul 2024 02:02:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=bnll3/FU;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Oh+P/7Lc;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
   t=1721034178; x=1752570178;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=IEbc2d5PfsTOTLLzY2GRBnMSJ8F5YvbggHFeWfZ9ei8=;
-  b=bnll3/FUJB1wK/EUEmWdgSeJ/j7VfEKNupsh/jWFuA1laXYsL2AZQ6tb
-   QrA67vgYd4FH1fsddB2s4EKTFCx0IJGiclX8l2sgcnhsuFQrR5fCrR+hp
-   PhNlfGuFumGExiJG8C7E4+T94nhrfICG2N6mclM0Yb/KPhHrLTfGQn+pL
-   gHYvpC68a7uIOHx1QqofZAlouVnuuBBs1wH193sqgPt4+Inw4lqZD1CDl
-   etND1kyhqAQURHODlJA559Lw7ldKDoDuTg+UOGHgicWt0kbWwt4l64Kb2
-   GF5xo9g230mE7okilfaQ5RKOT6OqUBGMoBtG4049mhxdMmhw6wlysrM5d
-   w==;
-X-IronPort-AV: E=McAfee;i="6700,10204,11133"; a="145800154"
+  bh=VFhnJm2p98TFEOcvXGkF/QBZXpjMpkGHpE5PJPdOfJo=;
+  b=Oh+P/7LcJ28HIb9GWcuWZObylV5wlE7r8AbWVCdvw56u7hX5V6k3pVNM
+   RzE9h3IZMdxPF1zOQoVlKyTGn1712FgfJivDKcBbqMFI4hp99CU0wOEYn
+   +j4HmKsKicIphM0bC24CtSMcrFCASAuG8pp/zp6Da2lvLCuRPl7209rgC
+   PavZJt6rT+7KwIPjIuSDnkW54N2bXFbrfE0S1v6zP5YX7FKPo3Ov2pVFr
+   yAyFCNXuydE3zaxy0RRntWqsuj/zkkwaABoOhF12jW1nn6HGtxzX6iUM1
+   FvthJdmrByofyRfPsyC8PYUjsLd02XTosc3UXFw/dk3qgIf07uEm7fm9G
+   Q==;
+X-IronPort-AV: E=McAfee;i="6700,10204,11133"; a="168833502"
 X-IronPort-AV: E=Sophos;i="6.09,209,1716217200"; 
-   d="scan'208";a="145800154"
-Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
-  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Jul 2024 18:02:56 +0900
-Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
-	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 00AC1D5A47
-	for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jul 2024 18:02:55 +0900 (JST)
-Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 2F261D5042
-	for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jul 2024 18:02:54 +0900 (JST)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 5CDEC6BE53
+   d="scan'208";a="168833502"
+Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
+  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Jul 2024 18:02:56 +0900
+Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
+	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 2D131D8012
 	for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jul 2024 18:02:53 +0900 (JST)
+Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
+	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 6F912D4C1E
+	for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jul 2024 18:02:52 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 0006A20071A38
+	for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jul 2024 18:02:51 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 0DD2D1A000A;
-	Mon, 15 Jul 2024 17:02:53 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 9E2711A000A;
+	Mon, 15 Jul 2024 17:02:51 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 08/38] libass: upgrade 0.17.2 -> 0.17.3
-Date: Mon, 15 Jul 2024 17:02:01 +0800
-Message-Id: <1721034151-540-8-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH 04/38] gnome-keyring: upgrade 46.1 -> 46.2
+Date: Mon, 15 Jul 2024 17:01:57 +0800
+Message-Id: <1721034151-540-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1721034151-540-1-git-send-email-wangmy@fujitsu.com>
 References: <1721034151-540-1-git-send-email-wangmy@fujitsu.com>
 X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28530.005
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28530.006
 X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28530.005
-X-TMASE-Result: 10--1.161900-10.000000
-X-TMASE-MatchedRID: /gZnudouedqjz0nOeth/yUIIxwDaU5mrTfK5j0EZbyvhJ0c9eVIVcHWC
-	d6QvVzbeCqIlUwwPgexKtne3LfonHUPbYPqd/GaJuLt50vtxBA5a4WbtOovh4Y+FcgdQoKJ3vqn
-	FtM6Nq/L7tBxFpWhrycYoh/qEF/tVoYY7KoErjW8ReM8i8p3vgBCE2NlBjIjctE8mz+ry/JSsGH
-	K/YO0c/+LzNWBegCW2wgn7iDBesS0nRE+fI6etkpUpUMmuA6mulJscFS8C9FT+Fxd1rORfviR+/
-	DdJKkv75PqyAZc5sMa2CsiWQ2hth1Jb6nxy/xG35O1D3nL0F5zClsSulfut+Uu/kTKv9giuqwOH
-	O1Fdn0Kb4tj0DvxRUIs9ro6z1cfchCFNTbTJJtE=
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28530.006
+X-TMASE-Result: 10-0.436100-10.000000
+X-TMASE-MatchedRID: dhm/lGuWeZijz0nOeth/yUIIxwDaU5mrmZiw53dqSN+EmxOjZ1LZ2Xw6
+	H06bMgiv82jJesNrruFVF51vxLbfWe1a16oqp8B1/HTKStsDGMJHNQ8CqEKO2MC5DTEMxpeQ9v/
+	ESKTjvdBMg8WZSy71MFFxcTP+15E+vUxpsK1XD0s6N/cDgNNi4X0tCKdnhB58I/9UW5M5dRNp7q
+	EhmmPgy46HM5rqDwqtR8s1YuQHS1tP4/hAObDiufJpK+XNrTGNc6xG0yGWXopGMenoPXXrIMGRZ
+	k7qe0EajVTaGuQR/7eSxbfkvznQ0Ril94mGdEMYHSbhGbmGylXFJK7yLnZRGZdO3Q67ImL8gi4R
+	Uz90EQwG2MApbv6odw==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 15 Jul 2024 09:03:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111331
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111325
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-============
-* Fix 0.17.2 regression in the fontconfig fontprovider
-  leading to undesirable widths being chosen from large typographic families
-* Fix configure generated with slibtool-provided autoconf macros
-* Fix "make check" for shared-only builds
-* Constify some API parameters in a backwards-compatible manner
-* Add new ass_malloc and ass_free API functions
-* Tweak default optimization flags
-* Speed up parsing of events with very long override blocks
-* Improve handling of HarfBuzz-related failures
+=========
+* Don't use 'bool' as variable name
+* autogoo: replace AC_HELP_STRING with AS_HELP_STRING
+* Default "automatically unlock" checkbox to false
+* build: Fix distcheck with systemd unit
+* rpc-layer: Fix undefined reference to g_strlcpy
+* Updated translations
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libass/{libass_0.17.2.bb => libass_0.17.3.bb}               | 2 +-
+ .../{gnome-keyring_46.1.bb => gnome-keyring_46.2.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-multimedia/libass/{libass_0.17.2.bb => libass_0.17.3.bb} (94%)
+ rename meta-gnome/recipes-gnome/gnome-keyring/{gnome-keyring_46.1.bb => gnome-keyring_46.2.bb} (94%)
 
-diff --git a/meta-oe/recipes-multimedia/libass/libass_0.17.2.bb b/meta-oe/recipes-multimedia/libass/libass_0.17.3.bb
+diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_46.1.bb b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_46.2.bb
 similarity index 94%
-rename from meta-oe/recipes-multimedia/libass/libass_0.17.2.bb
-rename to meta-oe/recipes-multimedia/libass/libass_0.17.3.bb
-index e239d028e..3dd678f05 100644
---- a/meta-oe/recipes-multimedia/libass/libass_0.17.2.bb
-+++ b/meta-oe/recipes-multimedia/libass/libass_0.17.3.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a42532a0684420bdb15556c3cdd49a75"
- DEPENDS = "fontconfig freetype fribidi harfbuzz"
+rename from meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_46.1.bb
+rename to meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_46.2.bb
+index 8df3710e6..e17319908 100644
+--- a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_46.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_46.2.bb
+@@ -22,7 +22,7 @@ inherit gnomebase gsettings features_check gettext
  
- SRC_URI = "git://github.com/libass/libass.git;protocol=https;branch=master"
--SRCREV = "cbb48cc4f2f076300004b8b06a86bec55281d0c2"
-+SRCREV = "e46aedea0a0d17da4c4ef49d84b94a7994664ab5"
- S = "${WORKDIR}/git"
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
  
- inherit autotools pkgconfig
+-SRC_URI[archive.sha256sum] = "b1d3ae9132ff2f8b3f25a190790892968e3d0acf952a487e40f644a8550ce3f6"
++SRC_URI[archive.sha256sum] = "bf26c966b8a8b7f3285ecc8bb3e467b9c20f9535b94dc451c9c559ddcff61925"
+ SRC_URI += " \
+     file://0001-Set-paths-to-ssh-agent-and-ssh-add-by-configure-opti.patch \
+     file://musl.patch \
 -- 
 2.34.1
 
