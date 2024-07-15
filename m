@@ -1,124 +1,98 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 51DFBC3DA42
-	for <webhook@archiver.kernel.org>; Sun, 14 Jul 2024 19:06:21 +0000 (UTC)
-Received: from mail-oo1-f43.google.com (mail-oo1-f43.google.com [209.85.161.43])
- by mx.groups.io with SMTP id smtpd.web11.21875.1720983975411984455
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F766C3DA42
+	for <webhook@archiver.kernel.org>; Mon, 15 Jul 2024 02:04:23 +0000 (UTC)
+Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
+ by mx.groups.io with SMTP id smtpd.web11.28874.1721009054956472079
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Jul 2024 12:06:15 -0700
+ Sun, 14 Jul 2024 19:04:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LCw3VjNP;
- spf=pass (domain: gmail.com, ip: 209.85.161.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f43.google.com with SMTP id 006d021491bc7-5c66909738fso2041249eaf.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 14 Jul 2024 12:06:15 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=ahFf5/Eb;
+ spf=pass (domain: mvista.com, ip: 209.85.128.172, mailfrom: vanusuri@mvista.com)
+Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-64b05fab14eso36001547b3.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 14 Jul 2024 19:04:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1720983974; x=1721588774; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=FGyZjIeujQuya6gpNN380neOi/sDhgxp/OAbRs8kfnE=;
-        b=LCw3VjNPpb6ZDdlrQyMEJOtXaMejZ+mmoSfCRLI28vfH2GDujp6jZU2pBVul11zsxK
-         cPZAxHj+AyBMNrgPovNQY669zyb23y7h7X0cA8E0bbmwiJ1lXQBB1WIIi7aKPG3xe3WS
-         xIy1/g3AUYRuDtRdeecEala6tnwTCYsW7VID5u/0PmavKR7y210xKzmGb9OizFFo3BgL
-         a3KpmWb1XWbG7TnXfBH+VlcxaSf9gsFrkbY6Yemq5cDjqLxitFiutoDEzvMaGZQSiJy4
-         DcNiUU9EBaP8BC8ZoaEflt2ULWemC9kHUBSzO1CPzA7/sqXRXcPKdBPCA4R7hsuN+dNZ
-         ebvA==
+        d=mvista.com; s=google; t=1721009053; x=1721613853; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=3BjJ7bUwODFvY1BvsyoxWyS8RA5d5EEyoZozy6EZvuU=;
+        b=ahFf5/EbnLEpCDEnayQKd/jZDcyVf9Y1f6D0fz5otd9X8UzXFKIw3gpi+dtOyU9csS
+         5iU5vPd0frvWgO3ihTJzRxHFoUbBnhxyuietyTwejrpJ+6zbrg8Bb1FCkFI1M1OILSCJ
+         bNTxUpV8sUC1yFGcDpe1jpqYeCPX/VXaZ1mOM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720983974; x=1721588774;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=FGyZjIeujQuya6gpNN380neOi/sDhgxp/OAbRs8kfnE=;
-        b=VY/1a8EbHrh3sVG6Q0T3j1wl5QjIaEHYG3gg84fI1N8tnDsqDdXwoiXXdLUGPII9Jy
-         w/QlT1JMfEGjoDfsn+OYAN/ZWnb08h7IRvac8g0jbtS5od6WJp/171YHv7h2FZBb0eAv
-         FGQYVCY420W3Gw/6kjUaeG1z4+CAqjhv3RoPWKQ8xZIkdivBR8KIyi2aURa/iLBF3dnQ
-         xiAFEs1WVt0sviWJ+o3I/CdJxigScvQt9NI6SsK1v8dPJ6Em17ZntzKtw6SHDGcjXzGA
-         jIBIptUlPK8lTVZ2VQa73kK28RHvefu+mfuyZ+t9lyzU7yUkyxv/Rgrbho+tNGpkFOTR
-         aiFw==
-X-Gm-Message-State: AOJu0YzHi4U7QJbuEDZ7Vjl9Cx8wfFbGFTnLaSi4U81OWNSRptCIBto+
-	AfxXJ9ZN3F+CaV7UmPl0ToQpxx5ArpZ44uJKnQGxtILEBak7AGsz1VYTmjSyBffWe8C8eV2VbIA
-	NmWK/D6pcCbkZuXqZ+itNRmaO1nySySdudxQ=
-X-Google-Smtp-Source: AGHT+IEGIDMeI6247VE+fdC1BHmMlqZBk8st+zxgyCD/8rGHj1VjFyWTyMVtuItTcqPu+ehPUVfIN2h00Xlk3WAiZ+k=
-X-Received: by 2002:a05:687c:2bd0:b0:259:8371:513f with SMTP id
- 586e51a60fabf-26052960675mr3768632fac.21.1720983974427; Sun, 14 Jul 2024
- 12:06:14 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1721009053; x=1721613853;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=3BjJ7bUwODFvY1BvsyoxWyS8RA5d5EEyoZozy6EZvuU=;
+        b=LZ4zp3DqDDkspdriUI2iGHOubOu4TV5uYGBqQWyH/vWqA4rg8hKtllJjrmH3fMS8S+
+         UW8MnRReMHNPzwqCxKsCau8gpE2ehqjBJrz0lM0Ptz5K6BquO3OXJUC/ynEcyK5HWK/Y
+         TdoJb7Pvs7lcXIYEwb7gcAWarirb9U5vJ5C4FjAqLcw8R3lpjI9ul4Pg5OP0uPuocOq3
+         u8m6w1NESucZUI1PLT+9JugLc/mSSbHgY7lSzxGXsVVVZbz60b63ZKu7tZ8XXT/XEKoE
+         g1waVELoh4AwsxHG/+NyTVbI/vriUU0eczDXWhnlJvUwNgsoRXzLJONwwNUpsl9NZVHW
+         vh7Q==
+X-Gm-Message-State: AOJu0Yya/K0FMSNr6+lIksfjcKv3cWoXvgI7HCSgMmztZRsw2TqRirU9
+	McxB1veFwDuMBZVcZeEZU8bkrjbft1ckrhY319HbRb6k6D67Lbq5Ugoebx9ODhjMLG1+tvMzGcw
+	XGyQ=
+X-Google-Smtp-Source: AGHT+IEf2NSahkVe56dA5gj4s0KMMlKx7X/3ez74TPKNTjy6jQSLNW95ZrkUN880HWeKLbbs4OS7Kg==
+X-Received: by 2002:a05:690c:a87:b0:64a:4161:4f91 with SMTP id 00721157ae682-658eed5df43mr233586937b3.14.1721009053665;
+        Sun, 14 Jul 2024 19:04:13 -0700 (PDT)
+Received: from MVIN00020.mvista.com ([2405:201:c01c:7959:921e:41e9:3d39:7e28])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-65fc4450782sm6282647b3.107.2024.07.14.19.04.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 14 Jul 2024 19:04:13 -0700 (PDT)
+From: vanusuri@mvista.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Vijay Anusuri <vanusuri@mvista.com>
+Subject: [meta-networking][scarthgap][PATCH] wireshark: upgrade 4.2.4 -> 4.2.5
+Date: Mon, 15 Jul 2024 07:34:02 +0530
+Message-Id: <20240715020402.7663-1-vanusuri@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <fac02277-c377-4377-974b-0ec817b108f9@3mdeb.com> <CAMKF1srQFVzXoRQw4AGfAproReiJb2M_qASoaEFxkr6a8VBPZw@mail.gmail.com>
-In-Reply-To: <CAMKF1srQFVzXoRQw4AGfAproReiJb2M_qASoaEFxkr6a8VBPZw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 14 Jul 2024 12:05:48 -0700
-Message-ID: <CAMKF1srk4Rh28F9SatDbuEhQNOkOZH7nmu=SyzdywW3Hz1feyw@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH v2] meta-networking:
- recipes-support: miniocli: add
-To: daniil.klimuk@3mdeb.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 14 Jul 2024 19:06:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111320
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Jul 2024 02:04:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111321
 
-I applied it manually and it has further build issues.
+From: Vijay Anusuri <vanusuri@mvista.com>
 
-https://errors.yoctoproject.org/Errors/Details/790778/
+The following vulnerabilities have been fixed:
 
-On Wed, Jul 10, 2024 at 7:47=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wrote=
-:
->
-> still the patch is corrupted.
->
-> On Wed, Jul 10, 2024 at 7:32=E2=80=AFAM Danik via lists.openembedded.org
-> <daniil.klimuk=3D3mdeb.com@lists.openembedded.org> wrote:
-> >
-> > meta-networking: recipes-support: miniocli: add
-> >
-> > Adds CLI tool to manage MinIO S3 deployments.
-> >
-> > Signed-off-by: Daniil Klimuk <daniil.klimuk@3mdeb.com>
-> >
-> > diff --git a/meta-networking/recipes-support/miniocli/miniocli_git.bb
-> > b/meta-networking/recipes-support/miniocli/miniocli_git.bb
-> > new file mode 100644
-> > index 000000000000..5207acf9891c
-> > --- /dev/null
-> > +++ b/meta-networking/recipes-support/miniocli/miniocli_git.bb
-> > @@ -0,0 +1,20 @@
-> > +SUMMARY =3D "Simple and fast CLI tool to manage MinIO deployments."
-> > +HOMEPAGE =3D "https://min.io/docs/minio/linux/reference/minio-mc.html"
-> > +SECTION =3D "net"
-> > +
-> > +GO_IMPORT =3D "github.com/minio/mc"
-> > +
-> > +inherit go-mod
-> > +
-> > +LICENSE =3D "AGPL-3.0"
-> > +LIC_FILES_CHKSUM =3D
-> > "file://src/${GO_IMPORT}/LICENSE;md5=3Deb1e647870add0502f8f010b19de32af=
-"
-> > +
-> > +SRC_URI =3D "git://${GO_IMPORT};protocol=3Dhttps;branch=3Dmaster"
-> > +SRCREV =3D "e7c9a733c680fe62066d24e8718f81938b4f6606"
-> > +
-> > +FILES:${PN} +=3D "${bindir}/mc"
-> > +
-> > +# MinIO CLI depends on getent which is a part of glibc-utils.
-> > +RDEPENDS:${PN} =3D "glibc-utils"
-> > +# github.com/minio/mc has some Bash scripts.
-> > +RDEPENDS:${PN}-dev =3D "bash"
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#111300): https://lists.openembedded.org/g/openembed=
-ded-devel/message/111300
-> > Mute This Topic: https://lists.openembedded.org/mt/107143600/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[raj.khem@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
+    wnpa-sec-2024-07 MONGO and ZigBee TLV dissector infinite loops. Issue 19726. CVE-2024-4854.
+
+    wnpa-sec-2024-08 The editcap command line utility could crash when chopping bytes from the beginning of a packet. Issue 19724. CVE-2024-4853.
+
+    wnpa-sec-2024-09 The editcap command line utility could crash when injecting secrets while writing multiple files. Issue 19782. CVE-2024-4855.
+
+Release Notes: https://www.wireshark.org/docs/relnotes/wireshark-4.2.5.html
+
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+---
+ .../wireshark/{wireshark_4.2.4.bb => wireshark_4.2.5.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_4.2.4.bb => wireshark_4.2.5.bb} (97%)
+
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_4.2.4.bb b/meta-networking/recipes-support/wireshark/wireshark_4.2.5.bb
+similarity index 97%
+rename from meta-networking/recipes-support/wireshark/wireshark_4.2.4.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_4.2.5.bb
+index 95db2efc4..7cbe3e632 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_4.2.4.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_4.2.5.bb
+@@ -17,7 +17,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz \
+ 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+ 
+-SRC_URI[sha256sum] = "46bd0f4474337144b30816fb2d8f14e72a26d0391f24fe0b7b619acdcdad8c0c"
++SRC_URI[sha256sum] = "55e793ab87a9a73aac44336235c92cb76c52180c469b362ed3a54f26fbb1261f"
+ 
+ PE = "1"
+ 
+-- 
+2.25.1
+
 
