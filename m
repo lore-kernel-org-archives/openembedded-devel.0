@@ -1,67 +1,91 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <costamagna.gianfranco@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 268A2C3DA59
-	for <webhook@archiver.kernel.org>; Tue, 16 Jul 2024 12:45:40 +0000 (UTC)
-Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
- by mx.groups.io with SMTP id smtpd.web11.9841.1721133936685736595
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 327B2C3DA59
+	for <webhook@archiver.kernel.org>; Tue, 16 Jul 2024 12:56:30 +0000 (UTC)
+Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com [209.85.208.172])
+ by mx.groups.io with SMTP id smtpd.web10.10137.1721134582708692337
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Jul 2024 05:45:37 -0700
+ Tue, 16 Jul 2024 05:56:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
-Received: from fwd78.aul.t-online.de (fwd78.aul.t-online.de [10.223.144.104])
-	by mailout10.t-online.de (Postfix) with SMTP id 6A04231D46
-	for <openembedded-devel@lists.openembedded.org>; Tue, 16 Jul 2024 14:45:34 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.173.141]) by fwd78.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1sThYg-1sFYuX0; Tue, 16 Jul 2024 14:45:30 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=M8vSANdI;
+ spf=pass (domain: gmail.com, ip: 209.85.208.172, mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-lj1-f172.google.com with SMTP id 38308e7fff4ca-2eecb63de15so60581381fa.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Jul 2024 05:56:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1721134580; x=1721739380; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=kJfrO1QLLwmqolDlYX/ILzA+kuyxFlh9woIlowsx/P0=;
+        b=M8vSANdI+N17kxeVmpl0BZIpgMiD5+U1rkXd6OETtiviKkEmvZtk5LkTqKpdnHhXJa
+         3YyqbzTe+tZqMDmZbc4k32EENfJLLNO+JMIOTCAkU+a9NV6jxysus1l3vDFDIClRn2X/
+         0Hzum6KVfntVq2YwZJZn41vddMzAv0rtIlq9af4IiUyghrD3VxT6K3CnYOhuhbUPRxO/
+         cC8HWxkRe0RPjb/gTOkP1EMqfTpmSlXJ9X1sdjg/ZrjeFG5vdi6YQ7ATSKMZRfoq1GLI
+         rXUP2gJvoY8O+umWkw7HKihh1Xl1RL/+VB49/xQCAfyvS7Mo7lRJ14eIagmjs31yA4Sa
+         uifg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1721134580; x=1721739380;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=kJfrO1QLLwmqolDlYX/ILzA+kuyxFlh9woIlowsx/P0=;
+        b=R3HRELQwqy+KdVQsvjzDJevGOrtxzMh0wWIpiFB+z8twCdgeGqMGYVruWk4Wi9u7DM
+         ZlL5UX1WEPUZYvTkx8KhA874Mz+tuvr2Xsn2J9FXSW/EJhd06mxE6ZODpJVhJxryi596
+         mcdAv5IXDXNocj4q0GO1MJrwiJJ+DOAi4IXwklFDtJle8YcHZFW5lMKUpgTX38dnvvV0
+         P73xYwjvEfLMBgv+i+vu41HHwKxGIQGFjFTcPhfijiR1tGrWYgtC7bVtXEtS22WhMCpt
+         E13zc/ecVogjxI3NWW5jdSEk/oiRk04umJjGELraaXMgbRUAeLquE3Ih+MnaHwPM3XdF
+         DqqQ==
+X-Gm-Message-State: AOJu0Yz/fKOjAQnorSfETQt1cl3v+n17nTplvgkbsk4VcFNxfJerO36Y
+	bf+veHSOa5Kyajk+TAPjq88pYOarqg48WdixC1tRAjwqYbpnBGEx/ZZrfg==
+X-Google-Smtp-Source: AGHT+IEnXkeiCkfiqBVk57B9AHioSfwDI2SUBgVsGYE7wr6hTR3KrzUQzreVty4IiuaOe/wx5vIvbA==
+X-Received: by 2002:a2e:b55c:0:b0:2eb:ed3a:9c65 with SMTP id 38308e7fff4ca-2eef416ebd9mr14736231fa.15.1721134579698;
+        Tue, 16 Jul 2024 05:56:19 -0700 (PDT)
+Received: from Unimatrix08-Jammy.marelli.com (host-95-231-134-228.business.telecomitalia.it. [95.231.134.228])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3680daccbafsm8891838f8f.51.2024.07.16.05.56.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 16 Jul 2024 05:56:18 -0700 (PDT)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] nss: update 3.101 > 3.102
-Date: Tue, 16 Jul 2024 14:46:38 +0200
-Message-ID: <20240716124638.91446-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.45.1
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	Gianfranco Costamagna <locutusofborg@debian.org>
+Subject: [meta-oe][PATCH] vbxguestdrivers: upgrade 7.0.18 -> 7.0.20
+Date: Tue, 16 Jul 2024 14:56:17 +0200
+Message-Id: <20240716125617.1597303-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1721133930-1FFFCD4A-B5A305A2/0/0 CLEAN NORMAL
-X-TOI-MSGID: 30239fad-e51f-43e2-8161-e45b9728a717
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Jul 2024 12:45:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111373
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Jul 2024 12:56:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111374
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 ---
- meta-oe/recipes-support/nss/{nss_3.101.bb =3D> nss_3.102.bb} | 2 +-
+ .../{vboxguestdrivers_7.0.18.bb => vboxguestdrivers_7.0.20.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/nss/{nss_3.101.bb =3D> nss_3.102.bb} (99%=
-)
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_7.0.18.bb => vboxguestdrivers_7.0.20.bb} (97%)
 
-diff --git a/meta-oe/recipes-support/nss/nss_3.101.bb b/meta-oe/recipes-s=
-upport/nss/nss_3.102.bb
-similarity index 99%
-rename from meta-oe/recipes-support/nss/nss_3.101.bb
-rename to meta-oe/recipes-support/nss/nss_3.102.bb
-index 5a01efb7e..550507e02 100644
---- a/meta-oe/recipes-support/nss/nss_3.101.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.102.bb
-@@ -33,7 +33,7 @@ SRC_URI =3D "http://ftp.mozilla.org/pub/security/nss/re=
-leases/${VERSION_DIR}/src/$
-            file://nss-fix-nsinstall-build.patch \
-            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-c=
-ryp.patch \
-            "
--SRC_URI[sha256sum] =3D "859748f0b4b7bb51e7e600ae5a88ef4d71f93e6964b1beed=
-2727784dd9ed85e7"
-+SRC_URI[sha256sum] =3D "c29b03f24856db18a34fbcde737fcca6407c27b5f3f60bab=
-a5111460e6cb307b"
-=20
- UPSTREAM_CHECK_URI =3D "https://developer.mozilla.org/en-US/docs/Mozilla=
-/Projects/NSS/NSS_Releases"
- UPSTREAM_CHECK_REGEX =3D "NSS_(?P<pver>.+)_release_notes"
---=20
-2.45.1
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.18.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.20.bb
+similarity index 97%
+rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.18.bb
+rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.20.bb
+index 47f616e99..714814fba 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.18.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.20.bb
+@@ -15,7 +15,7 @@ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2
+     file://Makefile.utils \
+ "
+ 
+-SRC_URI[sha256sum] = "d999513533631674a024762668de999411d8197060c51e68c5faf0a2c0eea1a5"
++SRC_URI[sha256sum] = "5cf5979bef66ebab3fcd495796b215a940e8a07c469d4bc56d064de44222dd02"
+ 
+ S ?= "${WORKDIR}/vbox_module"
+ S:task-patch = "${WORKDIR}/${VBOX_NAME}"
+-- 
+2.34.1
 
 
