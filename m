@@ -1,253 +1,235 @@
-Return-Path: <ceggers@arri.de>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 46069C3DA49
-	for <webhook@archiver.kernel.org>; Tue, 16 Jul 2024 08:08:48 +0000 (UTC)
-Received: from EUR03-AM7-obe.outbound.protection.outlook.com (EUR03-AM7-obe.outbound.protection.outlook.com [40.107.105.57])
- by mx.groups.io with SMTP id smtpd.web11.5671.1721117319486803995
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3127BC3DA49
+	for <webhook@archiver.kernel.org>; Tue, 16 Jul 2024 09:06:19 +0000 (UTC)
+Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
+ by mx.groups.io with SMTP id smtpd.web11.6506.1721120773726256102
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Jul 2024 01:08:41 -0700
+ Tue, 16 Jul 2024 02:06:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@arri.de header.s=selector1 header.b=jt/YbsdV;
- spf=pass (domain: arri.de, ip: 40.107.105.57, mailfrom: ceggers@arri.de)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ssw/OIAjA5vgA1mtQgDGTml4HWt2qk06jlaRs5XKQrT69DTr6rPKvPjLv4/gi3ufQ/mkMDE2XmQBgziPd65i54LHifkLDYz0CqmVEBePlygBbBf6ITYmUpeOLQfHkm2BrnHQBL4o77Gbq/sr8MKX3l2ZQ+m/30rn9/QD8gmitIVwyXr5eVQrw+MH2r2n9h/DyVcucGhTmfEgJQKJj+rvkCTcmAt1qHbvST3AgEHnKsBocbUzxZLDXdjw8hb+TqHqP9qNhaOnPMKOkWqRYsx5BzP2mqUPH2KFjrFhgisUnlKW5NvcZP80zz4+q0bHRjCrsHN2c+MxaG7/2dgpGd6y1g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=W0wHMJlu59FB+nuzGkFYqfmElV9ldPASOknxcSqpSmk=;
- b=VOwAaIXHs9H1BNB+nZO8mQ0abSRVw0hFwYKGVzi9lYE2LoQC8gOMF6G2c7eYp5u8v88xPqc7PWYukz4quWWdqsi4a5QqgSNGGtNYC9uS/bIQk51vXyGWF2Y6or1ED0/Lylsvesh0dQ1q6+y5Fyfdl9C57vbbwasqK5zd7ZZ2aPuS4hI7jA6qVPpESa3ArjUgIslS2A+fmQSFxSOAW7IF/3J3eKzEEHitXIEjFQ71MphCPAR49ni1m8t0AtEfnfhfz8nzgzU3kml9x0aqVzKrFrUuIikkbP8rswZJrh3siGiyEF5rBhLf9GzpOtJXRpHQhZPi+Es0cmpetB8IUh4V0A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 217.111.95.7) smtp.rcpttodomain=gmail.com smtp.mailfrom=arri.de; dmarc=fail
- (p=none sp=none pct=100) action=none header.from=arri.de; dkim=none (message
- not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arri.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=W0wHMJlu59FB+nuzGkFYqfmElV9ldPASOknxcSqpSmk=;
- b=jt/YbsdVAEWfS1h369XAWX38T52wQGy6rGu2OOLZT0GUpEJITmdMNiFVo3uOplQEw3j4TjmTVi2Ee9zuS8f1gUjTv6m5SAwnmAhdJ8Ot8FR6+vKtiFFNP/w4gUuATMN1rZhv8L5EuhkvbiiRl7gZNaLVdvUS8v9UrM9eQZyDTBM=
-Received: from DB9PR02CA0012.eurprd02.prod.outlook.com (2603:10a6:10:1d9::17)
- by PAWPR07MB9466.eurprd07.prod.outlook.com (2603:10a6:102:363::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.10; Tue, 16 Jul
- 2024 08:08:35 +0000
-Received: from DB5PEPF00014B92.eurprd02.prod.outlook.com
- (2603:10a6:10:1d9:cafe::e) by DB9PR02CA0012.outlook.office365.com
- (2603:10a6:10:1d9::17) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7762.29 via Frontend
- Transport; Tue, 16 Jul 2024 08:08:35 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 217.111.95.7)
- smtp.mailfrom=arri.de; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=arri.de;
-Received-SPF: Fail (protection.outlook.com: domain of arri.de does not
- designate 217.111.95.7 as permitted sender) receiver=protection.outlook.com;
- client-ip=217.111.95.7; helo=mta.arri.de;
-Received: from mta.arri.de (217.111.95.7) by
- DB5PEPF00014B92.mail.protection.outlook.com (10.167.8.230) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7784.11 via Frontend Transport; Tue, 16 Jul 2024 08:08:35 +0000
-Received: from n9w6sw14.localnet (10.30.4.252) by mta.arri.de (10.10.18.5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.34; Tue, 16 Jul
- 2024 10:08:34 +0200
-From: Christian Eggers <ceggers@arri.de>
-To: Khem Raj <raj.khem@gmail.com>
-CC: <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe][RFC PATCH] include-what-you-use: new recipe
-Date: Tue, 16 Jul 2024 10:08:34 +0200
-Message-ID: <2532679.XAFRqVoOGU@n9w6sw14>
-Organization: Arnold & Richter Cine Technik GmbH & Co. Betriebs KG
-In-Reply-To: <CAMKF1sp+OV9U8SbRqR=CvR8vxS0dsgCfWqp3ShGr5w2AcuG2-Q@mail.gmail.com>
-References: <20240715121744.18888-1-ceggers@arri.de>
- <CAMKF1sp+OV9U8SbRqR=CvR8vxS0dsgCfWqp3ShGr5w2AcuG2-Q@mail.gmail.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
+Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
+	by mailout06.t-online.de (Postfix) with SMTP id 63FA92A0DF
+	for <openembedded-devel@lists.openembedded.org>; Tue, 16 Jul 2024 11:05:47 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.154.173.141]) by fwd86.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1sTe82-0zw7zV0; Tue, 16 Jul 2024 11:05:46 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-gnome][PATCH] geary: update 44.1 -> 46.0
+Date: Tue, 16 Jul 2024 11:06:55 +0200
+Message-ID: <20240716090655.1602506-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
+X-TOI-EXPURGATEID: 150726::1721120746-A9B32350-9284B7D1/0/0 CLEAN NORMAL
+X-TOI-MSGID: ceedd4aa-fb8d-4d84-a2d0-643cd6e28351
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-X-Originating-IP: [10.30.4.252]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB5PEPF00014B92:EE_|PAWPR07MB9466:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3c6ac019-7150-4282-4396-08dca56e7dd0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700013|1800799024|4022899009|376014|82310400026;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?ejJhS3hFRkRxL2lTazRRY1RKVWtNb2tJeHhtcVM3aUdQdTZOdFkxSDVyeTdR?=
- =?utf-8?B?QUVtYXpvdEt4NUlZRlp3OXAraFNEcEdybXdjYnV0NkZvd1JKOTN1UzhTaU9Z?=
- =?utf-8?B?dnVIWDI1Q3B2VU1hSXVxUFU3VE1CanJKMEx1Y1JTY2o5bkd2c3VBb09aeGt2?=
- =?utf-8?B?NXppc1FKQlAzS1FxcTh0Q0c4RnJMNVlsZjl3c3NiVG9EeEhEbmxUNWl6TXgv?=
- =?utf-8?B?MG16bWZKY1U2eXJCcE9IaHphSFdxVDBxME5lUDJXNDNBdkNTZ1VyTFNPR2tJ?=
- =?utf-8?B?U21McGlYZkExVTRUcUQ3UEhtVUNRUFdxVFQrRmpwMUJKU3dTODFZYjZvTXdz?=
- =?utf-8?B?ODJLa05ZNDgyamx5SkpobXZFYWlRS1RJZFhvbHJhVnRpdmJyL2ZnUXROa2U0?=
- =?utf-8?B?WWgrZWpudXhZaUlEYXdWN2xrZENiL3JFOUZRVGpqRGNiUFA4bzc3R3pPUjlD?=
- =?utf-8?B?MC8ySk5uc0h3U0ZRVExERUdNRTBoZndUMjZmS2RJZUpUWUxGME90aUh6QnRG?=
- =?utf-8?B?QW8zYXZLZDdUQk8xaFk0b0FQYXREcVZrRE1xdlJrMUdwZk1MeWVqbnJJNFY5?=
- =?utf-8?B?cms0RjdKT3F2K0JIWm80anh4REZZb2d3MEJwY1EyTWZqUjFtZ3Y3V0g1aFp4?=
- =?utf-8?B?ai9qZWFEamN3OGg3ckNZWW9PVDNIWUVnclhyRVVITWhzZGR1bWVOTXlzdG5q?=
- =?utf-8?B?MW1iWGNHWkdFU2V2MGNTT3ZwNS9HRVJHUDZ1T1h5Z0h6eFpKeWI4QlJzOVFq?=
- =?utf-8?B?S0pZZ0NLTUlYelc3SVJSTTdTbUsyeVVQOVlCQUtxNytYVWJFMTA5emR4d01Z?=
- =?utf-8?B?Q0RtUitMZVpEeVRJTEFhY2VITDlRUzMwNjB3REprOS9nOFFxczBDbmxUS3JE?=
- =?utf-8?B?dkViWGlaS3dVeEpGcG81VzdBQWQ1N0NDVy9tRUNDQVlNakJFekRNTnIyc2w2?=
- =?utf-8?B?QU00MXNBbHZFK1hvMHdZZEFqbldhdEI2WWxTSDZxUXZOVXlmTDF3RHU1UmIy?=
- =?utf-8?B?YnJLZWFpTEJkZU9Va0ZQVW9kbjJQeitzcEtpTUFDMlpuUXN2NGNVcityWmty?=
- =?utf-8?B?bkl0eHJqVkdRNVRCR1ZHK21wNTAyU2k4ZGdaWjZrMFd0QjFrYUVveVhoNDQy?=
- =?utf-8?B?SGNJMktESUNLNHRlSGNTTkRwMjVUS05SMkN4LytidkpRZ1NzRnRhR3pTbXlD?=
- =?utf-8?B?V3h0MnAvVlNUWlJTUTVyci9BeVA0MTFuOS9HazNRNXMyc2JLRnhSZFEzVnJz?=
- =?utf-8?B?UHVOL3FOVURWbkZpNzBxVkdaZEJCdFF3RUo3c3FsZXJ2OTFEN0gvc2ZvUUdS?=
- =?utf-8?B?TGtiMW9mQU5DTm1Ldk9sZjNJMDFjSVFwY2NVVXpkTXE5eXNyODRsSm5aSGZa?=
- =?utf-8?B?dGNjTkJjTm1JdCtOT2VMMllIa1RXZ3plS2ZrRTVtY3RtY0N1eEZLV3FJMDVQ?=
- =?utf-8?B?TCsxZm1jU2ttQ1Ywa3UrVi9GRTR0K2p2aHVZTHF2Myt6U0tqb0h6dDlPbG5t?=
- =?utf-8?B?OVpIbkt4QzY1b1VRcWY0Z0pHdm00NTZVOTR5N0toVXk4VXpTWjk5UGpRSVA0?=
- =?utf-8?B?SHBpWlZOWTlPN3NMdm44cDAvOTNJMXZ1RTc4b1l2SjRDSjhTNlV6ZE9vNStK?=
- =?utf-8?B?elg5b081VVVjanREVXVFckIxellZTVMzdXBDVnl4OTNEWHJYN1QzNktTLzNu?=
- =?utf-8?B?MFhZc05PNEJIY1hlUG13V0xzUnEzQ2FzSnltQTEzN0plV1Z0bUExSUNEZmU5?=
- =?utf-8?B?VUJHc0x3aGxMQTlkUUZ5STdGWnNrbEwrdmlYeXBVRHNLSlJkTlZQRDVkUVRv?=
- =?utf-8?B?REFicVNRVERFbW5SYWZTRVlmSHdOa1NQOHZQdmJ2dWN6ZDFxT1dVM0g3dkUw?=
- =?utf-8?Q?GMT02mXZ5v4Ff?=
-X-Forefront-Antispam-Report: 
-	CIP:217.111.95.7;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mta.arri.de;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(4022899009)(376014)(82310400026);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arri.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jul 2024 08:08:35.4773
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3c6ac019-7150-4282-4396-08dca56e7dd0
-X-MS-Exchange-CrossTenant-Id: e6a73a5a-614d-4c51-b3e3-53b660a9433a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e6a73a5a-614d-4c51-b3e3-53b660a9433a;Ip=[217.111.95.7];Helo=[mta.arri.de]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DB5PEPF00014B92.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR07MB9466
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Jul 2024 08:08:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111370
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Jul 2024 09:06:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111371
 
-On Monday, 15 July 2024, 16:18:14 CEST, Khem Raj wrote:
-> On Mon, Jul 15, 2024 at 5:18=E2=80=AFAM Christian Eggers via lists.openem=
-bedded.org
-> <ceggers=3Darri.de@lists.openembedded.org> wrote:
->=20
-> > Based on proposal send previously here:
-> > https://lists.yoctoproject.org/g/yocto/topic/recipe_for/83279588
-> >
-> > This recipe depends on meta-clang, so should it be added to that layer?
-> >
-> > Unfortunately the 'include-what-you-use' (iwyu) tool doesn't work yet.
-> > Although I have installed nativesdk-clang (via CLANGSDK =3D "1") and
-> > nativesdk-include-what-you-use packages, the C++ standard headers are
-> > not found:
-> >
-> > include-what-you-use
-> > --sysroot=3D/opt/poky/5.0.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux=
-=2Dmusleabi
-> > impl/Fdt.cpp
-> > impl/Fdt.cpp:9:10: fatal error: 'cerrno' file not found
-> >     9 | #include <cerrno>
-> >       |          ^~~~~~~~
-> >
-> > As iwyu uses Clang and I have no experience working with it, this is
-> > probably only a beginner mistake. Can Clang use the C++ headers provided
-> > by libstdc++, or do I need to install further packages?
-> >
->=20
-> It can but it seems your SDK install might be missing any c++ runtime so
-> check a simple program that includes say <iostream> header and try
-> compiling it
-My SDK definitely contains std:: C++ headers for target and nativesdk. But =
-the
-libstdc++ C++ headers are installed in GCC specific locations:
+- Remove 0001-meson-Use-PKG_CONFIG_SYSROOT_DIR-when-using-pkg-conf.patch
+  Using it pulls buildpath into the client library and thus breaks reprod=
+ucibility
+- Add a patch to fix more reproducibility issues
+- Add soup3 dependency
+- inherit gsettings
+- remove CFLAGS:append, tested to be working with clang 18.1.6 for x86_64=
+ musl
 
-/opt/poky/5.0.2/sysroots/x86_64-pokysdk-linux/usr/include/c++/13.3.0/
-/opt/poky/5.0.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-musleabi/usr/in=
-clude/c++/13.3.0
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ ...tion-client.vala-hardcode-some-paths.patch | 40 +++++++++++++++
+ ...NFIG_SYSROOT_DIR-when-using-pkg-conf.patch | 51 -------------------
+ .../geary/{geary_44.1.bb =3D> geary_46.0.bb}    | 11 ++--
+ 3 files changed, 44 insertions(+), 58 deletions(-)
+ create mode 100644 meta-gnome/recipes-connectivity/geary/geary/0001-appl=
+ication-client.vala-hardcode-some-paths.patch
+ delete mode 100644 meta-gnome/recipes-connectivity/geary/geary/0001-meso=
+n-Use-PKG_CONFIG_SYSROOT_DIR-when-using-pkg-conf.patch
+ rename meta-gnome/recipes-connectivity/geary/{geary_44.1.bb =3D> geary_4=
+6.0.bb} (68%)
 
-How can Clang know that the C++ headers are located in the (GCC specific) c=
-++/13.3.0
-sub directory?
-
-
->=20
->=20
-> > Signed-off-by: Christian Eggers <ceggers@arri.de>
-> > ---
-> >  .../include-what-you-use_git.bb               | 22 +++++++++++++++++++
-> >  1 file changed, 22 insertions(+)
-> >  create mode 100644 meta-oe/recipes-devtools/include-what-you-use/
-> > include-what-you-use_git.bb
-> >
-> > diff --git a/meta-oe/recipes-devtools/include-what-you-use/
-> > include-what-you-use_git.bb
-> > b/meta-oe/recipes-devtools/include-what-you-use/
-> > include-what-you-use_git.bb
-> > new file mode 100644
-> > index 000000000000..e7df6a834a34
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-devtools/include-what-you-use/
-> > include-what-you-use_git.bb
-> > @@ -0,0 +1,22 @@
-> > +LICENSE =3D "NCSA"
-> > +LIC_FILES_CHKSUM =3D
-> > "file://LICENSE.TXT;md5=3D59d01ad98720f3c50d6a8a0ef3108c88 \
-> > +
-> > file://iwyu-check-license-header.py;md5=3D7bdb749831163fbe9232b3cb71861=
-16f"
-> > +
-> > +SRC_URI =3D "git://
-> > github.com/include-what-you-use/include-what-you-use.git;protocol=3Dhtt=
-ps;branch=3Dclang_18
-> > "
-> > +
-> > +PV =3D "0.22+git${SRCPV}"
-> > +SRCREV =3D "377eaef70cdda47368939f4d9beabfabe3f628f0"
-> > +
-> > +S =3D "${WORKDIR}/git"
-> > +
-> > +DEPENDS =3D "clang"
->=20
->=20
-> This means it needs to use clang as library to link to is that what it
-> required or does it need clang as static compiler to build this package in
-> which case you can do so by using TOOLCHAIN =3D =E2=80=9Cclang=E2=80=9D i=
-n recipe
-I think that it builds fine with the GCC toolchain, at least it doesn't
-complain during build. Finally it links against libclang-cpp.so.18.1 and=20
-libLLVM.so.18.1, so using "DEPENDS" sounds correct for me.
-
-Although I haven't configured Clang to provide also llvm (as described here
-https://github.com/kraj/meta-clang?tab=3Dreadme-ov-file#providing-llvm),
-there is a nativesdk-clang-libllvm package after building nativesdk-clang.
->=20
->=20
-> > +
-> > +inherit cmake python3native
-> > +
-> > +EXTRA_OECMAKE:append:class-nativesdk =3D " \
-> > +       -DCMAKE_SKIP_RPATH:BOOL=3DON \
-> > +       "
-> > +
-> > +FILES:${PN} +=3D "${datadir}/${BPN}"
-> > +
-> > +BBCLASSEXTEND =3D "nativesdk"
-> > --
-> > 2.44.1
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#111360):
-> > https://lists.openembedded.org/g/openembedded-devel/message/111360
-> > Mute This Topic: https://lists.openembedded.org/mt/107229738/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> > raj.khem@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
-> >
->=20
-
-
-
+diff --git a/meta-gnome/recipes-connectivity/geary/geary/0001-application=
+-client.vala-hardcode-some-paths.patch b/meta-gnome/recipes-connectivity/=
+geary/geary/0001-application-client.vala-hardcode-some-paths.patch
+new file mode 100644
+index 000000000..8162e50d9
+--- /dev/null
++++ b/meta-gnome/recipes-connectivity/geary/geary/0001-application-client=
+.vala-hardcode-some-paths.patch
+@@ -0,0 +1,40 @@
++From 98243ca43e40116c22f7b867e32ad27ffd314505 Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Tue, 16 Jul 2024 07:30:09 +0200
++Subject: [PATCH] application-client.vala: hardcode some paths
++
++Otherwise the build values will be stored in the binary and used if gear=
+y was not installed
++https://gitlab.gnome.org/GNOME/geary/-/blob/main/src/client/application/=
+application-client.vala?ref_type=3Dheads#L798
++https://gitlab.gnome.org/GNOME/geary/-/blob/main/src/client/application/=
+application-client.vala?ref_type=3Dheads#L365
++
++This breaks reproducibility
++WARNING: geary-46.0-r0 do_package_qa: QA Issue: File /usr/lib/geary/libg=
+eary-client-46.0.so in package geary contains reference to TMPDIR [buildp=
+aths]
++WARNING: geary-46.0-r0 do_package_qa: QA Issue: File /usr/lib/geary/.deb=
+ug/libgeary-client-46.0.so in package geary-dbg contains reference to TMP=
+DIR [buildpaths]
++
++Upstream-Status: Inappropriate [oe-specific]
++
++Signed-off-by: Markus Volk <f_l_k@t-online.de>
++---
++ src/client/application/application-client.vala | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/src/client/application/application-client.vala b/src/client=
+/application/application-client.vala
++index 51d0f632e..acc53a65f 100644
++--- a/src/client/application/application-client.vala
+++++ b/src/client/application/application-client.vala
++@@ -39,9 +39,9 @@ public class Application.Client : Gtk.Application {
++=20
++     public const string VERSION =3D _VERSION;
++     public const string INSTALL_PREFIX =3D _INSTALL_PREFIX;
++-    public const string GSETTINGS_DIR =3D _GSETTINGS_DIR;
++-    public const string SOURCE_ROOT_DIR =3D _SOURCE_ROOT_DIR;
++-    public const string BUILD_ROOT_DIR =3D _BUILD_ROOT_DIR;
+++    public const string GSETTINGS_DIR =3D "/usr/share/applications";
+++    public const string SOURCE_ROOT_DIR =3D "/usr/src";
+++    public const string BUILD_ROOT_DIR =3D "/usr/src";
++=20
++     // keep these in sync with meson_options.txt
++     public const string PROFILE_RELEASE =3D "release";
++--=20
++2.45.2
++
+diff --git a/meta-gnome/recipes-connectivity/geary/geary/0001-meson-Use-P=
+KG_CONFIG_SYSROOT_DIR-when-using-pkg-conf.patch b/meta-gnome/recipes-conn=
+ectivity/geary/geary/0001-meson-Use-PKG_CONFIG_SYSROOT_DIR-when-using-pkg=
+-conf.patch
+deleted file mode 100644
+index 1e0640a66..000000000
+--- a/meta-gnome/recipes-connectivity/geary/geary/0001-meson-Use-PKG_CONF=
+IG_SYSROOT_DIR-when-using-pkg-conf.patch
++++ /dev/null
+@@ -1,51 +0,0 @@
+-From a300be5877f35379bb569313eec901bda9c8d762 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sun, 30 Apr 2023 22:08:39 -0700
+-Subject: [PATCH] meson: Use PKG_CONFIG_SYSROOT_DIR when using pkg-config
+-
+-OE cross-builds and absolute paths found by pkg-config points to
+-non-sysroot'ed locations which are not correct as they point into native
+-sysroot from build machine which is incorrect.
+-
+-Upstream-Status: Inappropriate [OE-specific]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- meson.build | 8 +++++---
+- 1 file changed, 5 insertions(+), 3 deletions(-)
+-
+-diff --git a/meson.build b/meson.build
+-index d563dd08..9b72aeb4 100644
+---- a/meson.build
+-+++ b/meson.build
+-@@ -38,6 +38,9 @@ metadata_dir =3D meson.project_source_root() / 'bindin=
+gs'/ 'metadata'
+- po_dir =3D meson.project_source_root() / 'po'
+- vapi_dir =3D meson.project_source_root() / 'bindings' / 'vapi'
+-=20
+-+# pkg-config sysroot location
+-+pkgconf_sysroot =3D run_command('python3', '-c', 'import os; print(os.e=
+nviron.get("PKG_CONFIG_SYSROOT_DIR"))').stdout().strip()
+-+
+- # Compiler configuration
+- add_project_arguments([
+-     # Make sure Meson can find custom VAPIs
+-@@ -120,7 +123,7 @@ icu_uc =3D declare_dependency(
+- if libunwind_dep.found()
+-   # We need to add native lib to the search path for these so Flatpak
+-   # builds can find it.
+--  unwind_lib =3D libunwind_dep.get_variable(pkgconfig: 'libdir')
+-+  unwind_lib =3D pkgconf_sysroot + libunwind_dep.get_variable(pkgconfig=
+: 'libdir')
+-   libunwind =3D declare_dependency(
+-      dependencies: [
+-        valac.find_library('libunwind', dirs: [vapi_dir, unwind_lib]),
+-@@ -207,8 +210,7 @@ vala_unit_proj =3D subproject(
+- vala_unit_dep =3D vala_unit_proj.get_variable('vala_unit_dep')
+-=20
+- # Language detection
+--
+--iso_codes_dir =3D iso_codes.get_variable(pkgconfig: 'prefix')/'share'/'=
+xml'/'iso-codes'
+-+iso_codes_dir =3D pkgconf_sysroot + iso_codes.get_variable(pkgconfig: '=
+prefix')/'share'/'xml'/'iso-codes'
+-=20
+- iso_639_xml =3D get_option('iso_639_xml')
+- if iso_639_xml =3D=3D ''
+---=20
+-2.40.1
+-
+diff --git a/meta-gnome/recipes-connectivity/geary/geary_44.1.bb b/meta-g=
+nome/recipes-connectivity/geary/geary_46.0.bb
+similarity index 68%
+rename from meta-gnome/recipes-connectivity/geary/geary_44.1.bb
+rename to meta-gnome/recipes-connectivity/geary/geary_46.0.bb
+index decae6b2c..d8d48ef51 100644
+--- a/meta-gnome/recipes-connectivity/geary/geary_44.1.bb
++++ b/meta-gnome/recipes-connectivity/geary/geary_46.0.bb
+@@ -23,6 +23,7 @@ DEPENDS =3D " \
+     libical \
+     libpeas \
+     libsecret \
++    libsoup \
+     libstemmer \
+     libxml2 \
+     sqlite3 \
+@@ -31,15 +32,15 @@ DEPENDS =3D " \
+=20
+ RDEPENDS:${PN} =3D "gnome-keyring"
+=20
+-inherit meson pkgconfig mime-xdg gtk-icon-cache gobject-introspection va=
+la features_check
++inherit meson pkgconfig mime-xdg gsettings gtk-icon-cache gobject-intros=
+pection vala features_check
+=20
+ SRC_URI =3D " \
+ 	git://github.com/GNOME/geary.git;nobranch=3D1;protocol=3Dhttps \
+-	file://0001-meson-Use-PKG_CONFIG_SYSROOT_DIR-when-using-pkg-conf.patch =
+\
++	file://0001-application-client.vala-hardcode-some-paths.patch \
+ "
+=20
+ S =3D "${WORKDIR}/git"
+-SRCREV =3D "37c378a563d5b1c269d57c34671edc940d1cd180"
++SRCREV =3D "46e93c0c0dafc381e8a308b1befb07e908121722"
+=20
+ ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
+ REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data opengl"
+@@ -52,10 +53,6 @@ PACKAGECONFIG[tnef] =3D "-Dtnef=3Denabled,-Dtnef=3Ddis=
+abled,libytnef"
+ PACKAGECONFIG[valadoc] =3D "-Dvaladoc=3Denabled,-Dvaladoc=3Ddisabled"
+=20
+ PACKAGECONFIG ??=3D ""
+-# rfc822/rfc822-message.c:2097:12: error: incompatible pointer to intege=
+r conversion returning 'void *' from a function with result type 'gboolea=
+n' (aka 'int') [-Wint-conversion]
+-#|                                 return NULL;
+-#|                                        ^~~~
+-CFLAGS:append:toolchain-clang =3D " -Wno-error=3Dint-conversion"
+=20
+ FILES:${PN} +=3D "${datadir}"
+=20
+--=20
+2.45.1
 
 
