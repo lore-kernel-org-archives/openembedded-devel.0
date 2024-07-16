@@ -1,203 +1,156 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ECF73C3DA49
-	for <webhook@archiver.kernel.org>; Tue, 16 Jul 2024 06:32:46 +0000 (UTC)
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
- by mx.groups.io with SMTP id smtpd.web11.4716.1721111563190251788
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D5C0C3DA59
+	for <webhook@archiver.kernel.org>; Tue, 16 Jul 2024 08:02:48 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.web11.5617.1721116964465321404
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Jul 2024 23:32:43 -0700
+ Tue, 16 Jul 2024 01:02:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=YwEcqWno;
- spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-767506e1136so3712848a12.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jul 2024 23:32:43 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=wlgQ5Fl6;
+ spf=pass (domain: smile.fr, ip: 209.85.128.45, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-427aeebaecdso11981975e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Jul 2024 01:02:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1721111562; x=1721716362; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=eGQGT8h8xpoYEApXnqNMrSN2Lge7LK3YNeHP9p4++rU=;
-        b=YwEcqWnokbfjNKDdxSapqJj8PSq0XCLo9HEDmDbkKtwzDRj9QtB9OCcmRemFrKxsKX
-         rPYdSqcfqnTXJFf0D1UTyRffwU6yboitWDPQ26ODrTdVQGqjDr1nCAS6gZ/U+8bKs6LU
-         yI2RhMT9XJialDXVyUFWji6qcstevbWiqtUq10RDArnGWRG7REvnk7IXPcu6K/XZqVBP
-         9cDpDSvFcYlcEdKAl0rs17wq4BFvHnRLCPeK/k3f7NgDqHKK4DExbG1KyWeXL7tTi3Ey
-         fVrBfJ/CqM1n/gd2imGxzGH5iUzI7Ak+xu8/cR95OMFypxTIDfnGMMVVs8QTfCu3DV8m
-         fPdQ==
+        d=smile.fr; s=google; t=1721116962; x=1721721762; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=jsn58VfSh4ncq2Euslyd+92UumcCyEtw02ueZEerqmI=;
+        b=wlgQ5Fl6txqLnZh5zuLkG+UYzgDNjbgk6HrGmUw1PfLhRNjzy4m3nHNA8yvDTpXNFT
+         vE/pV1a4nZZ5zxRlsSVqPH6sByimV4Lrfxe2nK5g5cYYlgdAfpT7P9tMhBF96argC4BE
+         lOB8wzNBIrz036mhEfLKUklL3MO09fMGSFrqY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721111562; x=1721716362;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=eGQGT8h8xpoYEApXnqNMrSN2Lge7LK3YNeHP9p4++rU=;
-        b=v2lURJrlShyvQccmY8Shwmy8kQmc/2PdCxA/EftyqwFMpTVLQTeEPUmFja6rHPRqAJ
-         8nn4PvUd1GdNMZMVez9JOjjqIo1f+R/MLYZktl75NcZyGnwe+E8IS3l84Qk354/Inbhl
-         hkF11RDYdysnOZQxa+86r4Y2FZ12ohESZ2Yp4xj6H2zCyeRIPCONT+7ux9FpAn5nyD9D
-         LWz8/khWlE3XPZJUc/I8gvoxM9HWfg8EuSwXeV1ICi/V0SpnKW3e0PnQhdm0J1ygpNvG
-         n431rsBGLatSM8/swfEyGE4R6XI5EkaqXdBNANO7aZ0qs1zLjmRtdHGViRxz2jTmMJs7
-         r5eg==
-X-Gm-Message-State: AOJu0YyutrWIalEFV9yzvz+B2FGjfVpWl+n4kBzAZ36sn3q4IiERQSAK
-	r/HvwK1SIFnnDWDtAfVzWgn3KuGSHvPInwKlQYxXEnjU+J4ezuMh72CrXgNQ07KVUnEd/EB2C8Z
-	EcEQnDAwv8iAFC9hYi6wds3L8VPSqNa8C
-X-Google-Smtp-Source: AGHT+IHiEMQulW7fV79Kxe9L8PlwlgN3FtJqlk/cVzQGXNBxbTk6mjke+zNl8C9EsCkrUi2iFuhEtH9CORq0Z0xy0Rc=
-X-Received: by 2002:a17:90a:f2c2:b0:2c2:d6ca:3960 with SMTP id
- 98e67ed59e1d1-2cb37e19cf5mr1544625a91.17.1721111562079; Mon, 15 Jul 2024
- 23:32:42 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1721116962; x=1721721762;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=jsn58VfSh4ncq2Euslyd+92UumcCyEtw02ueZEerqmI=;
+        b=iAl+oS21mZhOhepfc5GHFxs08Vof61RzwqF0MHykz2MSBJxVI4d3AnJ6NgVVFwapJU
+         CCrlK1BIdFrjOxvE07nvQBuq385p//k3f4OLrt14XXngpP2zyHw71xjul3UnKqVAVF75
+         fySvtL5pCp8cZX7jzYDkzCN8acyMJhRkO+NNKmCW0EAB9TX+AbqU4btFgXMDAGaMCk1q
+         hdNVvVc/EFCsESVAzJu1yVioYwQ1CvqPe2rMhGANLzpbzGMR3bYegCSFOPng06ShzPl1
+         e/JdImHUJN4TA4d3783oJgZVwqWRZuZr0dZXES3LB8DD6VCsDhj+4s3NNUkTN6SMtv1x
+         OAqg==
+X-Gm-Message-State: AOJu0YwJFLrfzXK7BqR7oX8NRv/jWgsa7E+yjUCUWXklfGaerbP2P8Lb
+	WUH9B3AcRErGLT2U7Vob2UpcaQfp3d0VFwP5HtwVnvUOTWCywPMP8AgKSEyhvqzYKdKr8Be+zGS
+	nB4A=
+X-Google-Smtp-Source: AGHT+IHx1ZcLr3v5xDu04QkkHQ633sjt1v2HPa82YZMUMcaonOq0Ic1yWH+aOQ34ioq0l+vr8kmreg==
+X-Received: by 2002:a05:600c:4fcc:b0:426:602d:a243 with SMTP id 5b1f17b1804b1-427ba642fe6mr8876865e9.16.1721116962059;
+        Tue, 16 Jul 2024 01:02:42 -0700 (PDT)
+Received: from P-ASN-ECS-830T8C3.numericable.fr (53.1.159.89.rev.sfr.net. [89.159.1.53])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3680db0481fsm8228290f8f.106.2024.07.16.01.02.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 16 Jul 2024 01:02:41 -0700 (PDT)
+From: Yoann Congal <yoann.congal@smile.fr>
+To: openembedded-devel@lists.openembedded.org
+Cc: Yoann Congal <yoann.congal@smile.fr>,
+	Alexandre Videgrain <alexandre.videgrain@smile.fr>,
+	Ludovic Jozeau <ludovic.jozeau@smile.fr>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH] openbox: fix crash on alt+tab with fullscreen app
+Date: Tue, 16 Jul 2024 10:02:29 +0200
+Message-Id: <20240716080229.2765098-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Mon, 15 Jul 2024 23:32:31 -0700
-Message-ID: <CAK5yBb-ZVwQZ7QnRg5dS6LfuvE64PkhX-0MT_eS636p8Cqvt0w@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="00000000000046d3df061d578306"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Jul 2024 06:32:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111368
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Jul 2024 08:02:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111369
 
---00000000000046d3df061d578306
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Alexandre Videgrain <alexandre.videgrain@smile.fr>
 
-All,
+Apply an openbox patch to openbox recipe to fix crashes on alt+tab with
+fullscreen app.
 
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
+Github issue: https://github.com/openembedded/meta-openembedded/issues/837
 
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
+Signed-off-by: Alexandre Videgrain <alexandre.videgrain@smile.fr>
+Suggested-by: Ludovic Jozeau <ludovic.jozeau@smile.fr>
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 85132c16210d1bdf83e8be5b3da4f430ce7b4b91)
+---
+ ...traversal-issue-in-client_calc_layer.patch | 56 +++++++++++++++++++
+ .../recipes-graphics/openbox/openbox_3.6.1.bb |  1 +
+ 2 files changed, 57 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/openbox/files/0001-Fix-list-traversal-issue-in-client_calc_layer.patch
 
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 410
-unassigned or newcomer bugs.
-
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.1=E2=80=9D, =E2=80=9C5.2", "5.99" and "Future=
-", the more
-pressing/urgent issues being in "5.1" and then =E2=80=9C5.2=E2=80=9D.
-
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
-
-Thanks,
-
-
-
-*Stephen K. Jolley*
-
-*Yocto Project Program Manager*
-
-(    *Cell*:                (208) 244-4460
-
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
-
---00000000000046d3df061d578306
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><span style=3D"font-size:11pt;font-family:Calibri,Arial">A=
-ll,<br><br>The triage team is starting to try and collect up and classify b=
-ugs which a newcomer to the project would be able to work on in a way which=
- means people can find them. They&#39;re being listed on the triage page un=
-der the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/wiki/=
-Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage#New=
-comer_Bugs</a>  Also please review: <a href=3D"https://www.openembedded.org=
-/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.org/w=
-iki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugzilla =
-account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount.cgi"=
->https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The idea is=
- these bugs should be straight forward for a person to help work on who doe=
-sn&#39;t have deep experience with the project.  If anyone can help, please=
- take ownership of the bug and send patches!  If anyone needs help/advice t=
-here are people on irc who can likely do so, or some of the more experience=
-d contributors will likely be happy to help too.<br><br>Also, the triage te=
-am meets weekly and does its best to handle the bugs reported into the Bugz=
-illa. The number of people attending that meeting has fallen, as have the n=
-umber of people available to help fix bugs. One of the things we hear users=
- report is they don&#39;t know how to help. We (the triage team) are theref=
-ore going to start reporting out the currently 410 unassigned or newcomer b=
-ugs.<br><br>We&#39;re hoping people may be able to spare some time now and =
-again to help out with these.  Bugs are split into two types, &quot;true bu=
-gs&quot; where things don&#39;t work as they should and &quot;enhancements&=
-quot; which are features we&#39;d want to add to the system.  There are als=
-o roughly four different &quot;priority&quot; classes right now, =E2=80=9C5=
-.1=E2=80=9D, =E2=80=9C5.2&quot;, &quot;5.99&quot; and &quot;Future&quot;, t=
-he more pressing/urgent issues being in &quot;5.1&quot; and then =E2=80=9C5=
-.2=E2=80=9D.<br><br>Please review this link and if a bug is something you w=
-ould be able to help with either take ownership of the bug, or send me (<a =
-href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>) an e-m=
-ail with the bug number you would like and I will assign it to you (please =
-make sure you have a Bugzilla account).  The list is at: <a href=3D"https:/=
-/wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcomer_Bugs"=
->https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcom=
-er_Bugs</a></span><br><div dir=3D"ltr" class=3D"gmail_signature" data-smart=
-mail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p class=3D"MsoN=
-ormal" style=3D"background-image:initial;background-position:initial;backgr=
-ound-repeat:initial"><span style=3D"font-size:12pt;font-family:Arial,sans-s=
-erif">Thanks,<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
-
---00000000000046d3df061d578306--
+diff --git a/meta-oe/recipes-graphics/openbox/files/0001-Fix-list-traversal-issue-in-client_calc_layer.patch b/meta-oe/recipes-graphics/openbox/files/0001-Fix-list-traversal-issue-in-client_calc_layer.patch
+new file mode 100644
+index 0000000000..8bc2b80f68
+--- /dev/null
++++ b/meta-oe/recipes-graphics/openbox/files/0001-Fix-list-traversal-issue-in-client_calc_layer.patch
+@@ -0,0 +1,56 @@
++From d41128e5a1002af41c976c8860f8299cfcd3cd72 Mon Sep 17 00:00:00 2001
++From: pldubouilh <pldubouilh@gmail.com>
++Date: Fri, 17 Mar 2023 18:23:47 +0100
++Subject: [PATCH] Fix list traversal issue in client_calc_layer
++
++The calls to client_calc_layer_internal can modify stacking_list, which
++can cause us to follow dangling ->next pointers (either by the pointer
++itself already being freed, or it pointing to a freed area). Avoid this
++by copying the list first, the goal is to visit every client in the list
++once so this should be fine.
++
++Upstream-Status: Backport [http://git.openbox.org/?p=mikachu/openbox.git;a=commit;h=d41128e5a1002af41c976c8860f8299cfcd3cd72]
++Signed-off-by: Alexandre Videgrain <alexandre.videgrain@smile.fr>
++---
++ openbox/client.c | 9 +++++++--
++ 1 file changed, 7 insertions(+), 2 deletions(-)
++
++diff --git a/openbox/client.c b/openbox/client.c
++index 7168b240..b8264587 100644
++--- a/openbox/client.c
+++++ b/openbox/client.c
++@@ -2742,9 +2742,12 @@ static void client_calc_layer_internal(ObClient *self)
++ void client_calc_layer(ObClient *self)
++ {
++     GList *it;
+++    /* the client_calc_layer_internal calls below modify stacking_list,
+++       so we have to make a copy to iterate over */
+++    GList *list = g_list_copy(stacking_list);
++ 
++     /* skip over stuff above fullscreen layer */
++-    for (it = stacking_list; it; it = g_list_next(it))
+++    for (it = list; it; it = g_list_next(it))
++         if (window_layer(it->data) <= OB_STACKING_LAYER_FULLSCREEN) break;
++ 
++     /* find the windows in the fullscreen layer, and mark them not-visited */
++@@ -2757,7 +2760,7 @@ void client_calc_layer(ObClient *self)
++     client_calc_layer_internal(self);
++ 
++     /* skip over stuff above fullscreen layer */
++-    for (it = stacking_list; it; it = g_list_next(it))
+++    for (it = list; it; it = g_list_next(it))
++         if (window_layer(it->data) <= OB_STACKING_LAYER_FULLSCREEN) break;
++ 
++     /* now recalc any windows in the fullscreen layer which have not
++@@ -2768,6 +2771,8 @@ void client_calc_layer(ObClient *self)
++                  !WINDOW_AS_CLIENT(it->data)->visited)
++             client_calc_layer_internal(it->data);
++     }
+++
+++    g_list_free(it);
++ }
++ 
++ gboolean client_should_show(ObClient *self)
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb b/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
+index 9a15077316..1851a84b97 100644
+--- a/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
++++ b/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
+@@ -8,6 +8,7 @@ SRC_URI = " \
+     http://icculus.org/openbox/releases/openbox-${PV}.tar.gz \
+     file://0001-Makefile.am-avoid-race-when-creating-autostart-direc.patch \
+     file://0001-openbox-xdg-autostart-convert-to-python3.patch \
++    file://0001-Fix-list-traversal-issue-in-client_calc_layer.patch \
+ "
+ 
+ SRC_URI[md5sum] = "b72794996c6a3ad94634727b95f9d204"
 
