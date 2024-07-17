@@ -1,154 +1,86 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <shin.matsunaga@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 235D4C3DA59
-	for <webhook@archiver.kernel.org>; Tue, 16 Jul 2024 15:43:01 +0000 (UTC)
-Received: from mail-oa1-f41.google.com (mail-oa1-f41.google.com [209.85.160.41])
- by mx.groups.io with SMTP id smtpd.web10.14191.1721144580189331465
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8CB71C3DA42
+	for <webhook@archiver.kernel.org>; Wed, 17 Jul 2024 06:39:22 +0000 (UTC)
+Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
+ by mx.groups.io with SMTP id smtpd.web11.9273.1721198360981047282
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Jul 2024 08:43:00 -0700
+ Tue, 16 Jul 2024 23:39:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Imnv6zuH;
- spf=pass (domain: gmail.com, ip: 209.85.160.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f41.google.com with SMTP id 586e51a60fabf-25cba5eea69so2853392fac.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Jul 2024 08:43:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1721144579; x=1721749379; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=80RSOOhislMH6XZKYOqrOS1mvCEee08mL8vKFzEMJIU=;
-        b=Imnv6zuHUhLOBLfwBz1APGd+OmPlzNGvnTzlel+L4wKUFh8d8FDy3rx9eU8L9a0K3U
-         en6kiuxILL+m61Vwohu3c4HA0U5TxX3oLkxa34o/YJfoqEgM5Z74ZWb6rayE2J/aY0z0
-         HO0v/kc4zBYLm2SzyODbzlTiHcuzjcQQGleULyGtTxh9r/A0If0WQr7zEliFSTTzcOFU
-         FzhYAcMfoxwjlq7CStcvUR9fXUZ4cF0tJZSeouFP30z1HrDAw7kaDLwDmjOfAWXkoL9x
-         hvonz6FFndk9/Qh6rHccaIHbphKJ24aHijPx8qNLdrtVkyGz4ahiloBcwa9jSnYFXeKb
-         qXng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721144579; x=1721749379;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=80RSOOhislMH6XZKYOqrOS1mvCEee08mL8vKFzEMJIU=;
-        b=kv4j7DxF3+Ihs+am83A3t3xeKJlFd5XldlidNFJ4UnVHT/p8BwI5vDwelYEpyPZHXD
-         A7Wa7gJJsGEZHK4issQCIpBySzLxQtXF77b5Vfezbslp5bX94uGx3PslvFnAA6QjVejq
-         9adqgFiNqlE7vDeegqF8RdpfK1HI6l9p639QEIN+rxVs7Zs5iqDp8mVtwuRFSNEURpCh
-         VqnjXXDUNo5P+TCt6/auNFT8JxMKAUXCIrkrBBlq7bI/xY0fLIZkbD02rvpHuD9wOSCD
-         RRMxcxEJoRqp8ccXo2NlVcbeHC3Zwm1XxQ7rKZwsLpailuyvw57Bd8ovPKIC6SisfLMV
-         c9yg==
-X-Gm-Message-State: AOJu0YxBToC69tP31+Waz2ZWzm3agesCSpjYr33pVW8rRYiYnm/mE6sZ
-	1p+sF2y+C2n5+xX1FM2KkOpgCyKiIrldoXNvJyezbl5BT5PKr7/x7ttCwbzHfhTScPDrAA5mTQk
-	xxSjn9dDF8uMKzD+++hcp+R25/FnBz0HNrzs=
-X-Google-Smtp-Source: AGHT+IEgjH+T3cS3Tk1gJ/eKHmEYdvSlGi3UZ3XMoKIlgW/wvoHK7TSrUfOcuy4yWo1Uv1GalFcqoiRrIDnIpOIQZdY=
-X-Received: by 2002:a05:6870:316:b0:254:8d79:d7b7 with SMTP id
- 586e51a60fabf-260bde26f4dmr2085043fac.26.1721144579255; Tue, 16 Jul 2024
- 08:42:59 -0700 (PDT)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=pRqiozIb;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: shin.matsunaga@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1721198361; x=1752734361;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=OWNJO5nnqNvD0x04HWyiN0/uVApd7E3vymtjr3qXUIQ=;
+  b=pRqiozIbdZ6OVoM2pZC4rJD/4kRNgJOxZ43d5TPdr494KSIK3CbK7Irw
+   Yz4fmtV5zHimg7WVqgIgjdLG/99yJlpsdzORR2tonCNKRe3FKIm1wXySz
+   IxUnFG33dXk04W3paWuKbUUL/wns50rueERcHuWirJxVd1DfxKbSBX3Hz
+   jgeUEIImB1O+jJbzFiNXVJL5kIBeH/89b4RMLIaoTpObnl7yVasAQJhCp
+   PpX+k5TR6k8zzGICyNfRFyBeXOb5PFZ+flFKCh2D+xl9usEVgrLQpMVJY
+   00vyK2OqNdkGBKsjypFUtr4fswdqjZ+r5shKruxnf12755PMBgft5datZ
+   Q==;
+X-IronPort-AV: E=McAfee;i="6700,10204,11135"; a="167529166"
+X-IronPort-AV: E=Sophos;i="6.09,213,1716217200"; 
+   d="scan'208";a="167529166"
+Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
+  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Jul 2024 15:39:18 +0900
+Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
+	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 6785ECA1ED
+	for <openembedded-devel@lists.openembedded.org>; Wed, 17 Jul 2024 15:39:16 +0900 (JST)
+Received: from storage.utsfd.cs.fujitsu.co.jp (storage.utsfd.cs.fujitsu.co.jp [10.118.252.123])
+	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id A762731AE4
+	for <openembedded-devel@lists.openembedded.org>; Wed, 17 Jul 2024 15:39:15 +0900 (JST)
+Received: by storage.utsfd.cs.fujitsu.co.jp (Postfix, from userid 1068)
+	id 65B3F1323A; Wed, 17 Jul 2024 15:39:15 +0900 (JST)
+From: Shinji Matsunaga <shin.matsunaga@fujitsu.com>
+To: raj.khem@gmail.com
+Cc: openembedded-devel@lists.openembedded.org,
+	shin.matsunaga@fujitsu.com,
+	Shunsuke Tokumoto <s-tokumoto@fujitsu.com>
+Subject: [PATCH 1/2] audit: Fix CVE_PRODUCT
+Date: Wed, 17 Jul 2024 15:39:12 +0900
+Message-Id: <20240717063912.18366-1-shin.matsunaga@fujitsu.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-References: <20240715121744.18888-1-ceggers@arri.de> <2532679.XAFRqVoOGU@n9w6sw14>
- <CAMKF1spu4fha8UzWVVU-dFQ84TsXHKKCfJxsQGHFnJgnxXAQPw@mail.gmail.com> <4907407.OV4Wx5bFTl@n9w6sw14>
-In-Reply-To: <4907407.OV4Wx5bFTl@n9w6sw14>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 16 Jul 2024 08:42:33 -0700
-Message-ID: <CAMKF1srofvxUUgGQqXBCxvLpTSkbK2puFamrL_U7Vmvb+BC6Dw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][RFC PATCH] include-what-you-use: new recipe
-To: Christian Eggers <ceggers@arri.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-TM-AS-GCONF: 00
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Jul 2024 15:43:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111377
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Jul 2024 06:39:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111378
 
-On Tue, Jul 16, 2024 at 7:57=E2=80=AFAM Christian Eggers <ceggers@arri.de> =
-wrote:
->
-> Hi Khem,
->
->
-> On Tuesday, 16 July 2024, 15:45:54 CEST, Khem Raj wrote:
-> > On Tue, Jul 16, 2024 at 1:08=E2=80=AFAM Christian Eggers <ceggers@arri.=
-de> wrote:
-> >
-> > > On Monday, 15 July 2024, 16:18:14 CEST, Khem Raj wrote:
-> > > > On Mon, Jul 15, 2024 at 5:18=E2=80=AFAM Christian Eggers via
-> > > lists.openembedded.org
-> > > > <ceggers=3Darri.de@lists.openembedded.org> wrote:
-> > > >
-> > > > > Based on proposal send previously here:
-> > > > > https://lists.yoctoproject.org/g/yocto/topic/recipe_for/83279588
-> > > > >
-> > > > > This recipe depends on meta-clang, so should it be added to that =
-layer?
-> > > > >
-> > > > > Unfortunately the 'include-what-you-use' (iwyu) tool doesn't work=
- yet.
-> > > > > Although I have installed nativesdk-clang (via CLANGSDK =3D "1") =
-and
-> > > > > nativesdk-include-what-you-use packages, the C++ standard headers=
- are
-> > > > > not found:
-> > > > >
-> > > > > include-what-you-use
-> > > > >
-> > > --sysroot=3D/opt/poky/5.0.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-lin=
-ux-musleabi
-> > > > > impl/Fdt.cpp
-> > > > > impl/Fdt.cpp:9:10: fatal error: 'cerrno' file not found
-> > > > >     9 | #include <cerrno>
-> > > > >       |          ^~~~~~~~
-> > > > >
-> > > > > As iwyu uses Clang and I have no experience working with it, this=
- is
-> > > > > probably only a beginner mistake. Can Clang use the C++ headers
-> > > provided
-> > > > > by libstdc++, or do I need to install further packages?
-> > > > >
-> > > >
-> > > > It can but it seems your SDK install might be missing any c++ runti=
-me so
-> > > > check a simple program that includes say <iostream> header and try
-> > > > compiling it
-> > > My SDK definitely contains std:: C++ headers for target and nativesdk=
-. But
-> > > the
-> > > libstdc++ C++ headers are installed in GCC specific locations:
-> > >
-> > > /opt/poky/5.0.2/sysroots/x86_64-pokysdk-linux/usr/include/c++/13.3.0/
-> > >
-> > > /opt/poky/5.0.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-musleabi/=
-usr/include/c++/13.3.0
-> > >
-> > > How can Clang know that the C++ headers are located in the (GCC speci=
-fic)
-> > > c++/13.3.0
-> > > sub directory?
-> >
-> >
-> > Try adding -stdlib=3Dlibstdc++ on clang cmdline
->
-> The following seems to work:
-> include-what-you-use \
->     -target arm-poky-linux-musleabi \
->     --sysroot /opt/poky/5.0.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux=
--musleabi \
->     -stdlib++-isystem /opt/poky/5.0.2/sysroots/cortexa7t2hf-neon-vfpv4-po=
-ky-linux-musleabi/usr/include/c++/13.3.0/arm-poky-linux-musleabi \
->     -stdlib++-isystem /opt/poky/5.0.2/sysroots/cortexa7t2hf-neon-vfpv4-po=
-ky-linux-musleabi/usr/include/c++/13.3.0  \
->     File.cpp
->
-> Is there a way to make this a little bit handier? I would like to avoid h=
-ard coding this into my CMake toolchain file.
->
+Fix "audit" set in CVE_PRODUCT to "linux:audit" to detect only vulnerabilities where the vendor is "linux".
 
-Hmm so -stdlib=3Dlibstdc++ does not work ?
+Currently, CVE_PRODUCT also detects vulnerabilities where the vendor is "visionsoft",
+which are unrelated to the "audit" in this recipe.
+https://www.opencve.io/cve?vendor=visionsoft&product=audit
 
-> regards,
-> Christian
->
->
->
+In addition, all the vulnerabilities currently detected in "audit" have the vendor of "visionsoft" or "linux".
+Therefore, fix "audit" set in CVE_PRODUCT to "linux:audit".
+
+Signed-off-by: Shinji Matsunaga <shin.matsunaga@fujitsu.com>
+Signed-off-by: Shunsuke Tokumoto <s-tokumoto@fujitsu.com>
+---
+ meta-oe/recipes-security/audit/audit_4.0.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/meta-oe/recipes-security/audit/audit_4.0.1.bb b/meta-oe/recipes-security/audit/audit_4.0.1.bb
+index c189cfea5..bd8f8cc31 100644
+--- a/meta-oe/recipes-security/audit/audit_4.0.1.bb
++++ b/meta-oe/recipes-security/audit/audit_4.0.1.bb
+@@ -101,3 +101,5 @@ do_install:append() {
+     # Create /var/spool/audit directory for audisp-remote
+     install -d -m 0700 ${D}${localstatedir}/spool/audit
+ }
++
++CVE_PRODUCT = "linux:audit"
+-- 
+2.25.1
+
 
