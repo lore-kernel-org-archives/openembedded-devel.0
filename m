@@ -1,147 +1,153 @@
-Return-Path: <rybczynska@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A984C3DA5D
-	for <webhook@archiver.kernel.org>; Wed, 17 Jul 2024 11:57:34 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web10.13481.1721217445395025620
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BEDD9C3DA42
+	for <webhook@archiver.kernel.org>; Wed, 17 Jul 2024 13:00:44 +0000 (UTC)
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
+ by mx.groups.io with SMTP id smtpd.web11.14504.1721221240544858944
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Jul 2024 04:57:25 -0700
+ Wed, 17 Jul 2024 06:00:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=G1IguX4r;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: rybczynska@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-1fbc09ef46aso49144845ad.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Jul 2024 04:57:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Di7wZ20J;
+ spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-651da7c1531so61301937b3.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Jul 2024 06:00:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1721217445; x=1721822245; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=um3lrAOF2Owda8kL9rx2q/tDiFRYLz5lVPdiI+8n/T8=;
-        b=G1IguX4rO48yM/XQ5kRViWh9+J+Z29JF9UtNfKW+JiQdtMNoytasULq4rg7a4vF6c2
-         VGib7gPBD3dSVS6OmiMdfY9DEQm0HpNxie7DXgj2K0UacuEyQ+6etLsVX5pRzhoD+Uh8
-         irI2E7nhTBuI+tLIPxjOWJBnh4Dl2BlYhxlGgcu/m9dtxd4jL8j5eLIO/oapjhQeI2gr
-         j0VHq95tjR0lEEgfiW25Np1z4SuIV3a8N6Q8ZC744mvGV4/PVfbOlECHeH1w42ZOnOgR
-         NkmbSGILTYWdjS8CELOHuocoJGSJhh1JogkUne8/OL+KO+wobsYXOBefP5Hhlea7H/BU
-         Ea1w==
+        d=gmail.com; s=20230601; t=1721221240; x=1721826040; darn=lists.openembedded.org;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=M79LX0XBKf58x5+NvA4GKMFNJyp6obHm3gKD7r5y3t4=;
+        b=Di7wZ20J0RXn4G61gHmaCeZhHErksO+kUXovp1hTvSu86/E4BaPPVmaVSyQq5lvLcn
+         Ein8x1Iu/HQTfaDWDuhF8aBdgP6fcVSsfwhtI7Z/TXWynm1v1gMG/7DuXGarvMASzw8w
+         AG0AFPFonHsGouT1i2zQVCStj1g3SVG5VI1Bt71Wyw0tj2lfpOtftbtQknvdgogQHWIH
+         JJqmm7fsPJKl7hR6TzlGyugjfpyleUoe0UMf1Eu9K1GNx5Ex7eQX5clC03eV7sWjigNN
+         x9ZG3xFkGbNNeKkZku0LDz8naNtLp6s9Xp4Hrzzt75MpqAGaxIF9WguxP5A6ixqJd1TC
+         3RcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721217445; x=1721822245;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=um3lrAOF2Owda8kL9rx2q/tDiFRYLz5lVPdiI+8n/T8=;
-        b=bCwAGbDZr3JXyreKNWL5Wg6nGHyBYtpmf8cGhhFoHnlWI9hPZDfE7oZpkxqvjyDuys
-         GFdN65cRvL2GUg+dcTYi9L0fTEqy2LzQBuftjEVIBjq1YIHT60audbeuE7Xts6pIjx6b
-         hilpvkndNIWWa3BKJjo76MgKWfs8kKCEmNUbm1eocJwCLm6KziBzT01sspZ7uKJKo8ml
-         byKMpOiKlni3fu3OVKXlsvfAcXnoI11tWZmDHIw1vSOCegXk+EQWpPSkbl34SPhST3zj
-         uuniWt1Y+rSWV7tWvKpLzOaRoLglA9IR/NPKMMmY4mqott2O5tuJnl62tfk/j8oSOYgF
-         20qQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVVtOR7QUN3U7t/7wx1JhhoZVK2ZbhnMU+oZrOX6mh+8w/O7NJfFng5UQ/l6rotfqOUxH+6BKauKrTbLtdBpFSeQzpoFHqInbFBcncSjaUep2/R8bmakk0dIw==
-X-Gm-Message-State: AOJu0YwDUMjD3dMMvdBzz2R+YVvchVUbhpB1s15NvH3kwowV2UnBzsKB
-	mafF6mY8cAj/VC5do5nfoeDtcwnJWMu3ZloFP01PimyGA+NbDdSX9caA/jD9dFDMMgUL6yxk5JW
-	ilQ97RW/eKjfKkYGbZjq1QCdVAqA=
-X-Google-Smtp-Source: AGHT+IFzauN6lTQ5X9xV3OSiu/jZstcZRV4+vGyjugQ9by53MUIw81Uu4dszvT3BEBV+ROjhd8wTqst9iOR1qSohUq0=
-X-Received: by 2002:a17:903:1247:b0:1f7:26f:9185 with SMTP id
- d9443c01a7336-1fc4e11fea9mr11383715ad.10.1721217444613; Wed, 17 Jul 2024
- 04:57:24 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1721221240; x=1721826040;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=M79LX0XBKf58x5+NvA4GKMFNJyp6obHm3gKD7r5y3t4=;
+        b=S9I5MG4UOmXJjbl82Ip8xhe/vOlHiJMFWBGnXXcNtg9kjg55m/2j7++aG9hg+BVVs0
+         197BdI+64EgriGK8H7KOcoR4gDM341vXgbWsbHqqLEVdQ3uOX/RYp+/Aw7bLpy2OEJjk
+         umJd4SCQi7IqfeIV8Tyajef4u7nLdRXRKrQiPPS5Ca8fGMhnS6F9o+4sK76rFBBResQU
+         Vty5PKiWLxhJO1Ev6ay1myybTyKGtsdxDxtV8ZgNSilvvWU7cdyMSmKTxJPuSJLALUFU
+         iccP2lGC+Cj/zsQ4ky7bqF37i20CfIHUp6xT1qGjClebkwx9KPzwG48m5klic2rOPeq1
+         CT4w==
+X-Forwarded-Encrypted: i=1; AJvYcCX6Vge3JWB4rRai6YWMYlKOF00ZvEWGfaDSTE1hk+UMD5Jj3DcOxamcjBuOTYhXwhqyfO4MV/cIA5dzVZvLoAlfoZBvJR8cZbP70YA9+lG3S9L662LmkWUStg==
+X-Gm-Message-State: AOJu0YzIX8xL1u5VpdYaWEP7mEr4TVaK9yAKRWNYAQ7L7O9rQL5QofT/
+	rEVZ1cIdlP8tJ1DpC9rjwEUJ7kjT9Hk402NepY5AA2TltAiX95ALff3Udg==
+X-Google-Smtp-Source: AGHT+IHKCcKwYGR0BLEU9kJ57pfU0CFhfPeQaFPxTJdjP4q94vPay1BYdrOuxcoOG5JlxnXR3EcCiA==
+X-Received: by 2002:a0d:fbc5:0:b0:615:b6f:ad35 with SMTP id 00721157ae682-664ff8da7f1mr17825417b3.33.1721221239647;
+        Wed, 17 Jul 2024 06:00:39 -0700 (PDT)
+Received: from ?IPV6:2600:1700:45dd:7000:cb37:bc34:634e:9201? ([2600:1700:45dd:7000:cb37:bc34:634e:9201])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-65fc2af3c77sm15251377b3.64.2024.07.17.06.00.39
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 17 Jul 2024 06:00:39 -0700 (PDT)
+Message-ID: <44e317f2-4858-4031-b95c-052d67ce3969@gmail.com>
+Date: Wed, 17 Jul 2024 09:00:38 -0400
 MIME-Version: 1.0
-References: <20240717063948.18385-1-shin.matsunaga@fujitsu.com>
-In-Reply-To: <20240717063948.18385-1-shin.matsunaga@fujitsu.com>
-From: Marta Rybczynska <rybczynska@gmail.com>
-Date: Wed, 17 Jul 2024 13:57:12 +0200
-Message-ID: <CAApg2=TuR+LmcZsop056LF41v+3ONTQpqxpq3+mhvx4F6VfSRg@mail.gmail.com>
-Subject: Re: [oe] [PATCH 2/2] audit: Add linux_audit to CVE_PRODUCT
-To: shin.matsunaga@fujitsu.com
-Cc: raj.khem@gmail.com, openembedded-devel@lists.openembedded.org, 
-	Shunsuke Tokumoto <s-tokumoto@fujitsu.com>
-Content-Type: multipart/alternative; boundary="0000000000005e1740061d702a58"
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Subject: scathgap merge request: July 17th
+Autocrypt: addr=akuster808@gmail.com; keydata=
+ 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
+ ApZ86eOP
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 Jul 2024 11:57:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111380
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Jul 2024 13:00:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111381
 
---0000000000005e1740061d702a58
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit 78a14731cf0cf38a19ff8bd0e9255b319afaf3a7:
 
-On Wed, Jul 17, 2024 at 8:39=E2=80=AFAM Matsunaga-Shinji via lists.openembe=
-dded.org
-<shin.matsunaga=3Dfujitsu.com@lists.openembedded.org> wrote:
+   php: Upgrade to 8.2.20 (2024-06-26 07:33:55 -0400)
 
-> linux_audit is also a valid CVE_PRODUCT for audit,
-> e.g., https://nvd.nist.gov/vuln/detail/CVE-2015-5186.
->
-> Signed-off-by: Shinji Matsunaga <shin.matsunaga@fujitsu.com>
-> Signed-off-by: Shunsuke Tokumoto <s-tokumoto@fujitsu.com>
-> ---
->  meta-oe/recipes-security/audit/audit_4.0.1.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-security/audit/audit_4.0.1.bb
-> b/meta-oe/recipes-security/audit/audit_4.0.1.bb
-> index bd8f8cc31..0b5857cbf 100644
-> --- a/meta-oe/recipes-security/audit/audit_4.0.1.bb
-> +++ b/meta-oe/recipes-security/audit/audit_4.0.1.bb
-> @@ -102,4 +102,4 @@ do_install:append() {
->      install -d -m 0700 ${D}${localstatedir}/spool/audit
->  }
->
-> -CVE_PRODUCT =3D "linux:audit"
-> +CVE_PRODUCT =3D "linux:audit linux_audit"
->
+are available in the Git repository at:
 
-Hello,
-I think it will be better to put linux_audit_project:linux_audit
+   https://git.openembedded.org/meta-openembedded scarthgap-next
 
-What do you think?
+for you to fetch changes up to 18f939a5fb37528a5415b05077ece383c346a119:
 
-Kind regards,
-Marta
+   libdbd-mysql-perl: avoid invoking assert_lib at do_configure stage 
+(2024-07-09 08:18:46 -0400)
 
---0000000000005e1740061d702a58
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+----------------------------------------------------------------
+BINDU (1):
+       flatbuffers: adapt for cross-compilation environments
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Wed, Jul 17, 2024 at 8:39=E2=80=AF=
-AM Matsunaga-Shinji via <a href=3D"http://lists.openembedded.org">lists.ope=
-nembedded.org</a> &lt;shin.matsunaga=3D<a href=3D"mailto:fujitsu.com@lists.=
-openembedded.org">fujitsu.com@lists.openembedded.org</a>&gt; wrote:<br></di=
-v><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;borde=
-r-left:1px solid rgb(204,204,204);padding-left:1ex">linux_audit is also a v=
-alid CVE_PRODUCT for audit,<br>
-e.g., <a href=3D"https://nvd.nist.gov/vuln/detail/CVE-2015-5186" rel=3D"nor=
-eferrer" target=3D"_blank">https://nvd.nist.gov/vuln/detail/CVE-2015-5186</=
-a>.<br>
-<br>
-Signed-off-by: Shinji Matsunaga &lt;<a href=3D"mailto:shin.matsunaga@fujits=
-u.com" target=3D"_blank">shin.matsunaga@fujitsu.com</a>&gt;<br>
-Signed-off-by: Shunsuke Tokumoto &lt;<a href=3D"mailto:s-tokumoto@fujitsu.c=
-om" target=3D"_blank">s-tokumoto@fujitsu.com</a>&gt;<br>
----<br>
-=C2=A0meta-oe/recipes-security/audit/<a href=3D"http://audit_4.0.1.bb" rel=
-=3D"noreferrer" target=3D"_blank">audit_4.0.1.bb</a> | 2 +-<br>
-=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-<br>
-diff --git a/meta-oe/recipes-security/audit/<a href=3D"http://audit_4.0.1.b=
-b" rel=3D"noreferrer" target=3D"_blank">audit_4.0.1.bb</a> b/meta-oe/recipe=
-s-security/audit/<a href=3D"http://audit_4.0.1.bb" rel=3D"noreferrer" targe=
-t=3D"_blank">audit_4.0.1.bb</a><br>
-index bd8f8cc31..0b5857cbf 100644<br>
---- a/meta-oe/recipes-security/audit/<a href=3D"http://audit_4.0.1.bb" rel=
-=3D"noreferrer" target=3D"_blank">audit_4.0.1.bb</a><br>
-+++ b/meta-oe/recipes-security/audit/<a href=3D"http://audit_4.0.1.bb" rel=
-=3D"noreferrer" target=3D"_blank">audit_4.0.1.bb</a><br>
-@@ -102,4 +102,4 @@ do_install:append() {<br>
-=C2=A0 =C2=A0 =C2=A0install -d -m 0700 ${D}${localstatedir}/spool/audit<br>
-=C2=A0}<br>
-<br>
--CVE_PRODUCT =3D &quot;linux:audit&quot;<br>
-+CVE_PRODUCT =3D &quot;linux:audit linux_audit&quot;<br></blockquote><div><=
-br></div><div>Hello,</div><div>I think it will be better to put linux_audit=
-_project:linux_audit</div><div><br></div><div>What do you think?</div><div>=
-<br></div><div>Kind regards,</div><div>Marta</div></div></div>
+Chen Qi (1):
+       libdbd-mysql-perl: avoid invoking assert_lib at do_configure stage
 
---0000000000005e1740061d702a58--
+Libo Chen (1):
+       thin-provisioning-tools: install missed thin_shrink and era_repair
+
+Randy MacLeod (1):
+       python3-pyyaml-include: support native and nativesdk build
+
+Siddharth Doshi (1):
+       apache2: Upgrade 2.4.59 -> 2.4.60
+
+Vijay Anusuri (1):
+       krb5: upgrade 1.21.2 -> 1.21.3
+
+Wentao Zhang (1):
+       meta-oe/conf/layer.conf: remove libbpf from NON_MULTILIB_RECIPES 
+for x86 and x86-64
+
+  meta-oe/conf/layer.conf                                         | 3 +++
+  .../krb5/{krb5_1.21.2.bb => krb5_1.21.3.bb} |  4 +--
+  meta-oe/recipes-devtools/flatbuffers/flatbuffers.bb             | 5 ++++
+  ...0001-Makefile.PL-avoid-running-assert_lib-at-configure.patch | 40 
++++++++++++++++++++++++++++++
+  meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.050.bb        | 4 ++-
+  .../thin-provisioning-tools/thin-provisioning-tools_1.0.12.bb   | 8 +++---
+  .../recipes-devtools/python/python3-pyyaml-include_1.3.2.bb     | 2 +-
+  .../apache2/{apache2_2.4.59.bb => apache2_2.4.60.bb} |  2 +-
+  8 files changed, 60 insertions(+), 8 deletions(-)
+  rename meta-oe/recipes-connectivity/krb5/{krb5_1.21.2.bb => 
+krb5_1.21.3.bb} (97%)
+  create mode 100644 
+meta-oe/recipes-devtools/perl/libdbd-mysql-perl/0001-Makefile.PL-avoid-running-assert_lib-at-configure.patch
+  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.59.bb => 
+apache2_2.4.60.bb} (99%)
 
