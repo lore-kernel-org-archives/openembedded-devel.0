@@ -1,187 +1,350 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <shin.matsunaga@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B991CC3DA60
-	for <webhook@archiver.kernel.org>; Thu, 18 Jul 2024 03:17:47 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.7325.1721272657742083712
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 23C10C3DA49
+	for <webhook@archiver.kernel.org>; Thu, 18 Jul 2024 04:38:18 +0000 (UTC)
+Received: from esa9.fujitsucc.c3s2.iphmx.com (esa9.fujitsucc.c3s2.iphmx.com [68.232.159.90])
+ by mx.groups.io with SMTP id smtpd.web11.8217.1721277487961314203
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Jul 2024 20:17:37 -0700
+ Wed, 17 Jul 2024 21:38:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=79293fe182=changqing.li@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 46I2UcTu032131
-	for <openembedded-devel@lists.openembedded.org>; Thu, 18 Jul 2024 03:17:37 GMT
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 40erhj034r-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 18 Jul 2024 03:17:36 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Wed, 17 Jul 2024 20:17:35 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.39 via Frontend Transport; Wed, 17 Jul 2024 20:17:34 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [scarthgap][meta-python][PATCH] python3-h5py: fix compile error with gcc 14
-Date: Thu, 18 Jul 2024 11:17:33 +0800
-Message-ID: <20240718031733.2868099-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@fujitsu.com header.s=fj1 header.b=LnoZFs+K;
+ spf=pass (domain: fujitsu.com, ip: 68.232.159.90, mailfrom: shin.matsunaga@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj1;
+  t=1721277488; x=1752813488;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:mime-version;
+  bh=5TUE/2NSGcu1UHnJBJ5Mt7SP/6iuHU0s2Gsf1Z/0tn0=;
+  b=LnoZFs+KMeDFPiU75Ps/x8cBZ722jR2WbJaGKUxCf+9Z4JEnz1a+E+5p
+   3YeZnToyVCP/6gwIHp29NdxHnz24a8mykhHsOHm9jTy/xmvRpAW4bS211
+   ZP901a7NYyDfO73Xn7mAIz8JP9ODTzvPlMyRwBq12bn/sPxsNSjwl5z6f
+   fj7pycZEIiXNcLWnOCPCQ/z/Vlviy0SH6sYvCRrjfn1KES77GnjPUOBkZ
+   HVKfVf1NtBExbtfqQA9B9fGryVEXMiBIvkRC0b+nkchWU9hTs0StGQ0H8
+   Lm6ik0dx3NRjU4Y5tf8gwiXXd+Lb20QY8OsBiemysSTZZhiRGOY3gIwVP
+   A==;
+X-IronPort-AV: E=McAfee;i="6700,10204,11136"; a="125611132"
+X-IronPort-AV: E=Sophos;i="6.09,216,1716217200"; 
+   d="scan'208,217";a="125611132"
+Received: from mail-japanwestazlp17010003.outbound.protection.outlook.com (HELO OS0P286CU011.outbound.protection.outlook.com) ([40.93.130.3])
+  by ob1.fujitsucc.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jul 2024 13:38:05 +0900
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=CtXSa2SSH+fbmGfo1JyZO86YfFBzT0s5wkSoywF/Lij2bVXB48s/QBI3uXX/PS8QEvZh2z/zvUgREgrxtHkmzUHTyOhpqGhc9F9NUVIDDTxGK4gK6rkX2vwojGuN9Ra4+J/ezeCQmYM6ac7WRnT9EVkXG/GNYFVra0D+7GuzaZ7WpX7rhicyLkMPW8HSJuRQj2ewJhCyipkmvqwvQRHirdfrxDKyIQCaaF0+Glh3ZTaDs7jVBz++2hS7j6JqmiJJ0bmJXwFlT4L1v2zoPQ57sLmYctKO/dLjKjVk7bjQiDfR3EnMPWIeLuHCG0JDwYlbpGPNolLyJvI9x3bzHxqP/w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5TUE/2NSGcu1UHnJBJ5Mt7SP/6iuHU0s2Gsf1Z/0tn0=;
+ b=QLuCVxDe0h0OByScwAzjZRTBGrxfbWXzbKvsgVJdSLnebAj79/QMTB8DCeZD2vhYG3yipeu4b9VXeeUOT9DYFHWXVQZLpmpoXfDxdxtfD+RCxtJhC5EYoBBsdDHh7TPivDIAyNXMUDt+fZ3aj0e9yUIlFu7uQl/4NCyxER9Jgrf/+WvBSHA5Kq6t3lSB5U/RSE3uXIUk3iKQIdp3kpBh+Y1sm/gqtHcwv+64YTJq9FgpF1uhT371BdFZu68bk0/bAewoR4uI4T1IchJ1jeC6/XPrwKrL/4WC1kZ/r1Cb6eZY5VPCZ3RU6zvrdynT8X1zmdO3R9LOksHn1WeMeUycFQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=fujitsu.com; dmarc=pass action=none header.from=fujitsu.com;
+ dkim=pass header.d=fujitsu.com; arc=none
+Received: from TY3PR01MB11788.jpnprd01.prod.outlook.com (2603:1096:400:407::5)
+ by TYWPR01MB9646.jpnprd01.prod.outlook.com (2603:1096:400:1a3::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.16; Thu, 18 Jul
+ 2024 04:38:01 +0000
+Received: from TY3PR01MB11788.jpnprd01.prod.outlook.com
+ ([fe80::8421:18fc:86b8:2b8]) by TY3PR01MB11788.jpnprd01.prod.outlook.com
+ ([fe80::8421:18fc:86b8:2b8%7]) with mapi id 15.20.7784.016; Thu, 18 Jul 2024
+ 04:38:01 +0000
+From: "Shinji Matsunaga (Fujitsu)" <shin.matsunaga@fujitsu.com>
+To: 'Marta Rybczynska' <rybczynska@gmail.com>
+CC: "raj.khem@gmail.com" <raj.khem@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, "Shunsuke Tokumoto (Fujitsu)"
+	<s-tokumoto@fujitsu.com>
+Subject: RE: [oe] [PATCH 2/2] audit: Add linux_audit to CVE_PRODUCT
+Thread-Topic: [oe] [PATCH 2/2] audit: Add linux_audit to CVE_PRODUCT
+Thread-Index: AQHa2BQjD+eWB6p+t06pyaEMX718b7H60MIAgAEWslA=
+Date: Thu, 18 Jul 2024 04:38:01 +0000
+Message-ID: 
+ <TY3PR01MB117885964FA803063255439C792AC2@TY3PR01MB11788.jpnprd01.prod.outlook.com>
+References: <20240717063948.18385-1-shin.matsunaga@fujitsu.com>
+ <CAApg2=TuR+LmcZsop056LF41v+3ONTQpqxpq3+mhvx4F6VfSRg@mail.gmail.com>
+In-Reply-To: 
+ <CAApg2=TuR+LmcZsop056LF41v+3ONTQpqxpq3+mhvx4F6VfSRg@mail.gmail.com>
+Accept-Language: ja-JP, en-US
+Content-Language: ja-JP
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+ =?utf-8?B?TVNJUF9MYWJlbF9hNzI5NWNjMS1kMjc5LTQyYWMtYWI0ZC0zYjBmNGZlY2Uw?=
+ =?utf-8?B?NTBfQWN0aW9uSWQ9YTM2NmUwN2UtZTgyOS00MGY3LWEzZWMtYzhmMGIwOWY2?=
+ =?utf-8?B?MzliO01TSVBfTGFiZWxfYTcyOTVjYzEtZDI3OS00MmFjLWFiNGQtM2IwZjRm?=
+ =?utf-8?B?ZWNlMDUwX0NvbnRlbnRCaXRzPTA7TVNJUF9MYWJlbF9hNzI5NWNjMS1kMjc5?=
+ =?utf-8?B?LTQyYWMtYWI0ZC0zYjBmNGZlY2UwNTBfRW5hYmxlZD10cnVlO01TSVBfTGFi?=
+ =?utf-8?B?ZWxfYTcyOTVjYzEtZDI3OS00MmFjLWFiNGQtM2IwZjRmZWNlMDUwX01ldGhv?=
+ =?utf-8?B?ZD1TdGFuZGFyZDtNU0lQX0xhYmVsX2E3Mjk1Y2MxLWQyNzktNDJhYy1hYjRk?=
+ =?utf-8?B?LTNiMGY0ZmVjZTA1MF9OYW1lPUZVSklUU1UtUkVTVFJJQ1RFROKAiztNU0lQ?=
+ =?utf-8?B?X0xhYmVsX2E3Mjk1Y2MxLWQyNzktNDJhYy1hYjRkLTNiMGY0ZmVjZTA1MF9T?=
+ =?utf-8?B?ZXREYXRlPTIwMjQtMDctMThUMDQ6MzQ6NDFaO01TSVBfTGFiZWxfYTcyOTVj?=
+ =?utf-8?B?YzEtZDI3OS00MmFjLWFiNGQtM2IwZjRmZWNlMDUwX1NpdGVJZD1hMTlmMTIx?=
+ =?utf-8?Q?d-81e1-4858-a9d8-736e267fd4c7;?=
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=fujitsu.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: TY3PR01MB11788:EE_|TYWPR01MB9646:EE_
+x-ms-office365-filtering-correlation-id: 2bd91dcd-ae80-430d-37fe-08dca6e3680d
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230040|1800799024|376014|366016|1580799027|38070700018;
+x-microsoft-antispam-message-info: 
+ =?utf-8?B?QWw1RTkrUmZsbFZYN1pXMlVpQ1NjSnNabDhMVVJMTmpRZzIyUnMwQTJEd2Uv?=
+ =?utf-8?B?ZlAwU2FqN2FmZVN3VS9qazRwalRjWllTMjBOTERzQTJOSEMzeGs3b05mUFV4?=
+ =?utf-8?B?NXNzOG1RZ2NMei9qSFU1U0dIKzBGdGIzb2RSc1dKRitQNnVlUTRvNzZwVW85?=
+ =?utf-8?B?S0xIWFhrYXRBbWxVbW9zSjdQWlhLNkw5bEtsVXRoeFVSU3NkTGIwUFNDbW4z?=
+ =?utf-8?B?Mmk3MUllOW55Q3BNUXM3bFl2WUFSbGtTNjdkWEhtVUUrK1ZqUWVOUDZoTDJs?=
+ =?utf-8?B?QlhkZlkyTnplUHc4YnI0bXJkMHVHSk9aSVVhUks0U2kzd0pCdHpXaVZzdTNu?=
+ =?utf-8?B?bU9maytiNVM0b0xLUEVWd01xb0IzRjFvOWdoa2pNeDZiM0I2RDZabEdLcytT?=
+ =?utf-8?B?VUppTWFrMjBHUEdJOFJ2Z0xZQ3dzK3FuZjl3VEQwMW1oN1B4RjNUblIwTkVx?=
+ =?utf-8?B?Z0RpWk1hRUJHa3hldWFxYzVaUm9sSGh5bmRLVXphK0NpYmlmL3M0citPTllv?=
+ =?utf-8?B?UFRnMjUrWHBvY0F6eWsrT09PVlJTbXVYQWpVbDNiNlUyT2RlN2tFaHNZSFA2?=
+ =?utf-8?B?UHZuaXBVQTlQTmZsU1NIN2MwWlYwTWhSYVpELyt0VG84K21IRm02OW01d2Fp?=
+ =?utf-8?B?WlJQTHFCQ1A3N08ycXlGOXJGMDFHTUNEb0x1M1AwOUUya012aUFQNjhLQXRC?=
+ =?utf-8?B?SW1IWiszWFVQOTh4eDVkNXVSM0ZTWXNVWXdqUENlSHdROFo5bS9IMStORTBk?=
+ =?utf-8?B?a1l6aUd0c0cvRWZYTmNMOVh2UEx5Z2lJK0o5RzBnZGRqUnNJK3pqT2Q0SjBo?=
+ =?utf-8?B?bUZXNkk4N1ZhVW4zRlVFM0FHWjZmK1dVTGZiTUlaQ3A5VFQwN0Evay8vYzZu?=
+ =?utf-8?B?bys4U0Jza0szRjRGcURScHJRYkl2NHpFNEdRMGJ3V3E4b0tLQng4OUdrdDJa?=
+ =?utf-8?B?TXd3NjR0NDRoT3FjQkg5T3ZYZmtJR0FYK1pWYjFSdGtrY3l4QzJoODNRcEg5?=
+ =?utf-8?B?V1VKMlkrTWdDOFRjMEYxZEhQY2E0MFFNbExoUzVad0p5YVh2L1VVN1FhS0Er?=
+ =?utf-8?B?U3ZnMmhvTXJPeFk5eGR2blBhMEg0Y05lOHk0dmN5dTVGZjAzdk9CR0kvT1JB?=
+ =?utf-8?B?VWlYK3lpUS9mOXhIcm9yTU94Z3FjU3doakFRKzZnRlI3RS94YUtVWVhYV2Zi?=
+ =?utf-8?B?ZEVpNXozZll1TnFHSmkwSFdFdDRTWEVnSnQycHQxQlNqdVgyTFljNVdyWUhB?=
+ =?utf-8?B?WmlreVZtY2hTOWdWZHo3VFl3bVdNVDJsTGxkWFZrNDNFTEtUaWt6N3JHOWgz?=
+ =?utf-8?B?YWh0bVI3b3Jjb01hUHdaY0Zreml5SW10cGZCZURmZ0ljczlQU0FBNlVRbVl1?=
+ =?utf-8?B?U0RWVXBxYkhDV3FzTUJkOWNVbElKRUc3VzY1eDF3MHYzZzZWeENxbU1lOFFI?=
+ =?utf-8?B?YkFXcGk1L0NwMU4xVFRXWnZEM2hraW9WcXJwYW1jRXdZenlTNC8rWHZ3djZX?=
+ =?utf-8?B?REMwZExhWG55d1VSTUtwSWowTUYwclA5eGVUU0pDbThmN29lcFMyNU1NVGdR?=
+ =?utf-8?B?V0JtUkNQL0twWGgxZUorQU9Dd0ZJMGxGaTFWQWJaOWJSdFIvdkx6NFBUdURI?=
+ =?utf-8?B?Njhlc1Q0TUtjSHVPVjZ6S2ZmYmlwc1IyenlZN0IvYUhaQWpoekdKODJWbE5E?=
+ =?utf-8?B?dW1UNVAxbHA0T0hkeDZnaEtScnVNdlZHU1N0THQvYmh3TGhLWElXRmFEYm5m?=
+ =?utf-8?B?Y09QUjZYbk4rRjVrc2V3MEJiNGRpTldkZERRR1pxYVVRU2NmOSthZUZjZldO?=
+ =?utf-8?Q?Q2fWAY2ST9q6ievrCzsWqpX1McbZC34HQJ4LE=3D?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:ja;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY3PR01MB11788.jpnprd01.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(1580799027)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?TzdBRG1JbkFmZVRpUVQ4dDRqbEV0SE9EVytIUnUxK3c2TjZpV2xzUnNTQUhv?=
+ =?utf-8?B?S1YyTkQzaVZpVXdGcjdoYTRCREloS3E1ZTJIVCs0Wkp6SXNrNzI0Q0p5TXAz?=
+ =?utf-8?B?c0R4Vi8wSm5INk9OUEh5bHlpeGlCWlVlcEJmRThYc3NCb1VSU3o0Z1FZakl5?=
+ =?utf-8?B?NnpSdFI4bGJXRi9Id0cyM01BcjRHTjlWU2kyNFhUWStMSjIyUDRCNFpVbExa?=
+ =?utf-8?B?MlBIc1U1djZxQUVEYXdNaVdTVnRoOEFpbVIxa09oSm5ya3NCYUxabFR4bWxu?=
+ =?utf-8?B?TTFDYW53RVNVVEtpcUdxdDQrek1HY24wSEpYWkNzQlo3V0tpZVdPdjZxRnVn?=
+ =?utf-8?B?dWs3amZhOUZjMTJJeHFrQnMzUnhFcnBpbmFsMzFiZVdSUEtvL2hDdGlTTDRR?=
+ =?utf-8?B?bzlzTnlLdVJvdVJxNXBJYXE4SjNEWXRxbFB2R3lxVS9Pd3lBZmdsMDZZVCsv?=
+ =?utf-8?B?bWxuTWpGTmpLWHV0anZ2L3lXVlhsYmZrbW9ORmh6VGpaQml2ak1ocGlmNkdK?=
+ =?utf-8?B?UGNFclkycTU2ejdDSS9OdW0xZW1panhOK0F6ejJ0WlpnMWhrbDh0VDJpTU00?=
+ =?utf-8?B?cWFiWWRrYVFXRzNURWNuR2EvRmRrRUNWY1VBeksveTBXaGhxd1dOcm0yT0pq?=
+ =?utf-8?B?VW1DMkJXNW11TVBOSDY5QjJsRWttYm5ZcCtCSkIzVkY4YWQzZ1U0dDMzMXo3?=
+ =?utf-8?B?S2k5Z3Q5emVuWlhuaHFRbWxZYXVpY2NIa2NSMmJrbzlCUWUraG5Ra0pHcEcw?=
+ =?utf-8?B?UnVqYXo3Um42TGlFZXJEN0tIWmdZZTBYRlc1NGMzNHIxVE1uT01CblpMNlk3?=
+ =?utf-8?B?VkVGN1V6MEdqMmlBWUsybEdGVWYzMjFFM2tNRHRkTVpHNXdMbGZsWTNLSFA4?=
+ =?utf-8?B?YzlEOTAxV1pDVmFxdnB5YXF0QW1vbUtRK0RBRVpPZXNsZDB0Z2lmQ2RZcDQ0?=
+ =?utf-8?B?T0M2QWl6eGcxRDUvZ3lyMTAwajlQeEkrM2FuU0dKaTVCaVh0THlDUUZjZkl5?=
+ =?utf-8?B?NEZEMHJrYUlaMi9FYzhCN0htOGo0RFZlcUdoTlFtNlYwaUw5TmRJVGJwNVhB?=
+ =?utf-8?B?cTlqUzFVZFF3WXpMcEx1a3RxZmJySENxdkZSc2R6T0pHSlZsNUNnQ09UTi9l?=
+ =?utf-8?B?WmJYMGpDMEtOTnFIZnVWTWMxL1dwTktja0l4U3JhVE5CNmJOSkF2eitOcUMx?=
+ =?utf-8?B?UEdMOXhqRElnZ0liRVcxL1c2a3Vzako2R3BhcWZOVG1iaisvNjhxOEJFYTBE?=
+ =?utf-8?B?a0VydTlCZ3pENGZtUEFNMWVxMWUvTkV3RWluWjB2SnhodWVTTjVoZlBpV002?=
+ =?utf-8?B?TEN4YTNJS3NXSFJDRWVtSVdFdktqOVhsbVBFNE5hd2txM1k3WFdpY3I1Z0Vq?=
+ =?utf-8?B?YzVPb1dqd0NBVmVoeHc0SlhBVDJ0cDJ3RTJXNG5WSzhoNEFoWVFIcFBla1lp?=
+ =?utf-8?B?eW5xb0dmMjUyZFVEQVE4NlZKTElIV1ZCaEJIZnk2Z1FCb2tLa1ZaSFRGaVlm?=
+ =?utf-8?B?NExCNWZFWUMxUzJMZ0FZbUtzQk1CVzZ6SXZ1em5FZmpyQXdlZ1VYQmhqYlVU?=
+ =?utf-8?B?ZFcrTHJhakVZNTVMcEc0UHcxWmxvYnlLRUFtZ2JHaFNFMUU0c3ZmYmdyUGxx?=
+ =?utf-8?B?c282NWNzd2wxMy82dU8yUlZVY0s1TDJjbkJadDVpeDFad3M4M043YmtlbERy?=
+ =?utf-8?B?MGdrUFE2ZWIxVzlEUDZnNnFKNUxSN29RdEYvcFYzc2tKUUJmOHE4Y3poTW5m?=
+ =?utf-8?B?cU1QTytPbnpaOW10NC8veFJTTTV3RW1pOFE3VmJQQmNyWW8xaWI1K2laa0lm?=
+ =?utf-8?B?TGRYeGVLRFlQZ1l6ek53dmI3ZXR6Sk9LeHJJRDZiSzJXWnBlSWk0OCtKZUhN?=
+ =?utf-8?B?aUR4cUFiWEMyRFhFcDRHNXd2YUZXdjlUMWlueG5WYTFxd0RkMmJhVGV1TXhZ?=
+ =?utf-8?B?WHFVMVVQYnpjWDdpUXBTNFl4THFlUGEzL2lUQVFaWEhHeEcyUUs5REREeWVY?=
+ =?utf-8?B?aFZRc1huRkhaWVltS2I0Y2lYajRwZm9sMVh2eElDeThjUk51bzJ2QWZEcVkv?=
+ =?utf-8?B?VC9pUitIOC9WUk9DRU9CdkZCSXQ1VFROelhsbDhPS3ViS3JiVXVPUllEcVd6?=
+ =?utf-8?B?WXFPbVpzSlNvUkVRWEtKcFZIL0VZelI3eVZWanJ4TzRJQXZNSHpmdXBHcTRU?=
+ =?utf-8?B?Vnc9PQ==?=
+Content-Type: multipart/alternative;
+	boundary="_000_TY3PR01MB117885964FA803063255439C792AC2TY3PR01MB11788jp_"
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-X-Proofpoint-ORIG-GUID: TzNpIXqD9E4Sy9roNerEVP_wldzKc7Yh
-X-Proofpoint-GUID: TzNpIXqD9E4Sy9roNerEVP_wldzKc7Yh
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-07-17_19,2024-07-17_02,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- adultscore=0 lowpriorityscore=0 mlxlogscore=999 clxscore=1011
- malwarescore=0 bulkscore=0 phishscore=0 impostorscore=0 spamscore=0
- suspectscore=0 mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.21.0-2407110000 definitions=main-2407180020
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 46I2UcTu032131
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 
+	pKK+XWipwzfy4+9upCWheAFlKDyKeq3KabKNCkTRgBEcFP/SEuoTWTueh1MTKYQrIXx5gUY+PUwKQML+q4ns90SAzvIMR6l/4pwftN/5s1xUIXeDvTgsc8We+ux5ezk4/2rteSTucaHZX6QZMyDt4vOUvtrMS3FzREQcwT1J8Sk9N4l5qvGvjIeviEyIJaNkEC05Q0egAz5p9yjJOebFwdI8oBuTjSezsNHc5LTfqsH4irMlrbG/YeaN5jyNZT3wxopCeo/b52IwvkvLQFl5aceja+FDdGWpFc3E6T+0ALxP7J/a6TPFcmF4o5AhJBYwMajnfFt0GXy+GLzFSC0oJccLW08380H2NM5kN3DUsCULRIbgI6Ay9OtBw0u7G8jCwvekCP0WYINg+5QzDsw5zwOpD7sX7/vlydJGIZjc/hMSz+3NykvmfqTcNe59kqwi9XH+oyy2OEyO6P1wE4FKlRpprbbXzPhUJbOS8kqQ/1RAoFB4FXEsPmcGce7WapFTIFd+3M5Afkydw7himgBQVphfrK1gpKHJwxnLga4IJPJPKgRCfk18YKjcWWGxpC7BXKoyVQJJV6tTCtHaJN24qM2/iswwMlJYk0+URFallIYUk01NY6ULC4Hsy2L7uaWL
+X-OriginatorOrg: fujitsu.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TY3PR01MB11788.jpnprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2bd91dcd-ae80-430d-37fe-08dca6e3680d
+X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Jul 2024 04:38:01.2639
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: a19f121d-81e1-4858-a9d8-736e267fd4c7
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 1I9nI/ZQ5a6/1gi6X4a+LENI9eOwIcIKh+SbDx/oVopRJHYi2ktW+N0f/cDDebvc/v4zwMD1zwJsrjCFVSsq/QrdBwdQstl570gxh5BXSgg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYWPR01MB9646
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Jul 2024 03:17:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111389
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Jul 2024 04:38:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111390
 
-From: Changqing Li <changqing.li@windriver.com>
+--_000_TY3PR01MB117885964FA803063255439C792AC2TY3PR01MB11788jp_
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Backport two patches to fix following compile error:
+SGVsbG8sDQpBcmUgbm90IHRoZXJlIGFueSB2dWxuZXJhYmlsaXRpZXMgd2hlcmUgdGhlIHZlbmRv
+ciBpcyBvdGhlciB0aGFuIGxpbnV4X2F1ZGl0X3Byb2plY3Q/DQoNCktpbmQgcmVnYXJkcywNClNo
+aW5qaQ0KRnJvbTogTWFydGEgUnliY3p5bnNrYSA8cnliY3p5bnNrYUBnbWFpbC5jb20+DQpTZW50
+OiBXZWRuZXNkYXksIEp1bHkgMTcsIDIwMjQgODo1NyBQTQ0KVG86IE1hdHN1bmFnYSwgU2hpbmpp
+L+advuawuCDmhY7lj7ggPHNoaW4ubWF0c3VuYWdhQGZ1aml0c3UuY29tPg0KQ2M6IHJhai5raGVt
+QGdtYWlsLmNvbTsgb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc7IFRv
+a3Vtb3RvLCBTaHVuc3VrZS/lvrPmnKwg5L+K5LuLIDxzLXRva3Vtb3RvQGZ1aml0c3UuY29tPg0K
+U3ViamVjdDogUmU6IFtvZV0gW1BBVENIIDIvMl0gYXVkaXQ6IEFkZCBsaW51eF9hdWRpdCB0byBD
+VkVfUFJPRFVDVA0KDQoNCg0KT24gV2VkLCBKdWwgMTcsIDIwMjQgYXQgODozOeKAr0FNIE1hdHN1
+bmFnYS1TaGluamkgdmlhIGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc8aHR0cDovL2xpc3RzLm9wZW5l
+bWJlZGRlZC5vcmc+IDxzaGluLm1hdHN1bmFnYT1mdWppdHN1LmNvbUBsaXN0cy5vcGVuZW1iZWRk
+ZWQub3JnPG1haWx0bzpmdWppdHN1LmNvbUBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPj4gd3JvdGU6
+DQpsaW51eF9hdWRpdCBpcyBhbHNvIGEgdmFsaWQgQ1ZFX1BST0RVQ1QgZm9yIGF1ZGl0LA0KZS5n
+LiwgaHR0cHM6Ly9udmQubmlzdC5nb3YvdnVsbi9kZXRhaWwvQ1ZFLTIwMTUtNTE4Ni4NCg0KU2ln
+bmVkLW9mZi1ieTogU2hpbmppIE1hdHN1bmFnYSA8c2hpbi5tYXRzdW5hZ2FAZnVqaXRzdS5jb208
+bWFpbHRvOnNoaW4ubWF0c3VuYWdhQGZ1aml0c3UuY29tPj4NClNpZ25lZC1vZmYtYnk6IFNodW5z
+dWtlIFRva3Vtb3RvIDxzLXRva3Vtb3RvQGZ1aml0c3UuY29tPG1haWx0bzpzLXRva3Vtb3RvQGZ1
+aml0c3UuY29tPj4NCi0tLQ0KIG1ldGEtb2UvcmVjaXBlcy1zZWN1cml0eS9hdWRpdC9hdWRpdF80
+LjAuMS5iYjxodHRwOi8vYXVkaXRfNC4wLjEuYmI+IHwgMiArLQ0KIDEgZmlsZSBjaGFuZ2VkLCAx
+IGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQ0KDQpkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNp
+cGVzLXNlY3VyaXR5L2F1ZGl0L2F1ZGl0XzQuMC4xLmJiPGh0dHA6Ly9hdWRpdF80LjAuMS5iYj4g
+Yi9tZXRhLW9lL3JlY2lwZXMtc2VjdXJpdHkvYXVkaXQvYXVkaXRfNC4wLjEuYmI8aHR0cDovL2F1
+ZGl0XzQuMC4xLmJiPg0KaW5kZXggYmQ4ZjhjYzMxLi4wYjU4NTdjYmYgMTAwNjQ0DQotLS0gYS9t
+ZXRhLW9lL3JlY2lwZXMtc2VjdXJpdHkvYXVkaXQvYXVkaXRfNC4wLjEuYmI8aHR0cDovL2F1ZGl0
+XzQuMC4xLmJiPg0KKysrIGIvbWV0YS1vZS9yZWNpcGVzLXNlY3VyaXR5L2F1ZGl0L2F1ZGl0XzQu
+MC4xLmJiPGh0dHA6Ly9hdWRpdF80LjAuMS5iYj4NCkBAIC0xMDIsNCArMTAyLDQgQEAgZG9faW5z
+dGFsbDphcHBlbmQoKSB7DQogICAgIGluc3RhbGwgLWQgLW0gMDcwMCAke0R9JHtsb2NhbHN0YXRl
+ZGlyfS9zcG9vbC9hdWRpdA0KIH0NCg0KLUNWRV9QUk9EVUNUID0gImxpbnV4OmF1ZGl0Ig0KK0NW
+RV9QUk9EVUNUID0gImxpbnV4OmF1ZGl0IGxpbnV4X2F1ZGl0Ig0KDQpIZWxsbywNCkkgdGhpbmsg
+aXQgd2lsbCBiZSBiZXR0ZXIgdG8gcHV0IGxpbnV4X2F1ZGl0X3Byb2plY3Q6bGludXhfYXVkaXQN
+Cg0KV2hhdCBkbyB5b3UgdGhpbms/DQoNCktpbmQgcmVnYXJkcywNCk1hcnRhDQo=
 
-h5py/h5l.c: In function =E2=80=98__pyx_pf_4h5py_3h5l_9LinkProxy_12get_val=
-=E2=80=99:
-h5py/h5l.c:8152:107: error: passing argument 4 of =E2=80=98__pyx_f_4h5py_=
-4defs_H5Lunpack_elink_val=E2=80=99 from incompatible pointer type [-Winco=
-mpatible-pointer-types]
- 8152 |       __pyx_t_2 =3D __pyx_f_4h5py_4defs_H5Lunpack_elink_val(__pyx=
-_v_buf, __pyx_v_buf_size, (&__pyx_v_wtf), (&__pyx_v_ext_file_name), (&__p=
-yx_v_ext_obj_name)); if (unlikely(__pyx_t_2 =3D=3D ((herr_t)((herr_t)-1L)=
-))) __PYX_ERR(1, 187, __pyx_L5_error)
-      |                                                                  =
-                                        ~^~~~~~~~~~~~~~~~~~~~~~~
-      |                                                                  =
-                                         |
-      |
+--_000_TY3PR01MB117885964FA803063255439C792AC2TY3PR01MB11788jp_
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- ...001-Use-libc.stdint-instead-of-numpy.patch | 27 +++++++++++++++++++
- ...ast-arguments-to-H5Lunpack_elink_val.patch | 27 +++++++++++++++++++
- .../python/python3-h5py_3.10.0.bb             |  5 +++-
- 3 files changed, 58 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-h5py/0001=
--Use-libc.stdint-instead-of-numpy.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-h5py/0002=
--Properly-cast-arguments-to-H5Lunpack_elink_val.patch
+PGh0bWwgeG1sbnM6dj0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp2bWwiIHhtbG5zOm89InVy
+bjpzY2hlbWFzLW1pY3Jvc29mdC1jb206b2ZmaWNlOm9mZmljZSIgeG1sbnM6dz0idXJuOnNjaGVt
+YXMtbWljcm9zb2Z0LWNvbTpvZmZpY2U6d29yZCIgeG1sbnM6bT0iaHR0cDovL3NjaGVtYXMubWlj
+cm9zb2Z0LmNvbS9vZmZpY2UvMjAwNC8xMi9vbW1sIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
+VFIvUkVDLWh0bWw0MCI+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIg
+Y29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxtZXRhIG5hbWU9IkdlbmVyYXRv
+ciIgY29udGVudD0iTWljcm9zb2Z0IFdvcmQgMTUgKGZpbHRlcmVkIG1lZGl1bSkiPg0KPHN0eWxl
+PjwhLS0NCi8qIEZvbnQgRGVmaW5pdGlvbnMgKi8NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6
+IkNhbWJyaWEgTWF0aCI7DQoJcGFub3NlLTE6MiA0IDUgMyA1IDQgNiAzIDIgNDt9DQpAZm9udC1m
+YWNlDQoJe2ZvbnQtZmFtaWx5Oua4uOOCtOOCt+ODg+OCrzsNCglwYW5vc2UtMToyIDExIDQgMCAw
+IDAgMCAwIDAgMDt9DQpAZm9udC1mYWNlDQoJe2ZvbnQtZmFtaWx5OkNhbGlicmk7DQoJcGFub3Nl
+LTE6MiAxNSA1IDIgMiAyIDQgMyAyIDQ7fQ0KQGZvbnQtZmFjZQ0KCXtmb250LWZhbWlseToi77yt
+77yzIO+8sOOCtOOCt+ODg+OCryI7DQoJcGFub3NlLTE6MiAxMSA2IDAgNyAyIDUgOCAyIDQ7fQ0K
+QGZvbnQtZmFjZQ0KCXtmb250LWZhbWlseToiXEDmuLjjgrTjgrfjg4Pjgq8iOw0KCXBhbm9zZS0x
+OjIgMTEgNCAwIDAgMCAwIDAgMCAwO30NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6IlxA77yt
+77yzIO+8sOOCtOOCt+ODg+OCryI7fQ0KLyogU3R5bGUgRGVmaW5pdGlvbnMgKi8NCnAuTXNvTm9y
+bWFsLCBsaS5Nc29Ob3JtYWwsIGRpdi5Nc29Ob3JtYWwNCgl7bWFyZ2luOjBtbTsNCglmb250LXNp
+emU6MTIuMHB0Ow0KCWZvbnQtZmFtaWx5OiLvvK3vvLMg77yw44K044K344OD44KvIjt9DQphOmxp
+bmssIHNwYW4uTXNvSHlwZXJsaW5rDQoJe21zby1zdHlsZS1wcmlvcml0eTo5OTsNCgljb2xvcjpi
+bHVlOw0KCXRleHQtZGVjb3JhdGlvbjp1bmRlcmxpbmU7fQ0Kc3Bhbi4xOA0KCXttc28tc3R5bGUt
+dHlwZTpwZXJzb25hbC1yZXBseTsNCglmb250LWZhbWlseTrmuLjjgrTjgrfjg4Pjgq87DQoJY29s
+b3I6d2luZG93dGV4dDt9DQouTXNvQ2hwRGVmYXVsdA0KCXttc28tc3R5bGUtdHlwZTpleHBvcnQt
+b25seTsNCgltc28tbGlnYXR1cmVzOm5vbmU7fQ0KQHBhZ2UgV29yZFNlY3Rpb24xDQoJe3NpemU6
+NjEyLjBwdCA3OTIuMHB0Ow0KCW1hcmdpbjo5OS4yNXB0IDMwLjBtbSAzMC4wbW0gMzAuMG1tO30N
+CmRpdi5Xb3JkU2VjdGlvbjENCgl7cGFnZTpXb3JkU2VjdGlvbjE7fQ0KLS0+PC9zdHlsZT48IS0t
+W2lmIGd0ZSBtc28gOV0+PHhtbD4NCjxvOnNoYXBlZGVmYXVsdHMgdjpleHQ9ImVkaXQiIHNwaWRt
+YXg9IjEwMjYiPg0KPHY6dGV4dGJveCBpbnNldD0iNS44NXB0LC43cHQsNS44NXB0LC43cHQiIC8+
+DQo8L286c2hhcGVkZWZhdWx0cz48L3htbD48IVtlbmRpZl0tLT48IS0tW2lmIGd0ZSBtc28gOV0+
+PHhtbD4NCjxvOnNoYXBlbGF5b3V0IHY6ZXh0PSJlZGl0Ij4NCjxvOmlkbWFwIHY6ZXh0PSJlZGl0
+IiBkYXRhPSIxIiAvPg0KPC9vOnNoYXBlbGF5b3V0PjwveG1sPjwhW2VuZGlmXS0tPg0KPC9oZWFk
+Pg0KPGJvZHkgbGFuZz0iSkEiIGxpbms9ImJsdWUiIHZsaW5rPSJwdXJwbGUiIHN0eWxlPSJ3b3Jk
+LXdyYXA6YnJlYWstd29yZCI+DQo8ZGl2IGNsYXNzPSJXb3JkU2VjdGlvbjEiPg0KPHAgY2xhc3M9
+Ik1zb05vcm1hbCI+PHNwYW4gbGFuZz0iRU4tVVMiIHN0eWxlPSJmb250LXNpemU6MTEuMHB0O2Zv
+bnQtZmFtaWx5Oua4uOOCtOOCt+ODg+OCryI+SGVsbG8sDQo8bzpwPjwvbzpwPjwvc3Bhbj48L3A+
+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBsYW5nPSJFTi1VUyIgc3R5bGU9ImZvbnQtc2l6
+ZToxMS4wcHQ7Zm9udC1mYW1pbHk65ri444K044K344OD44KvIj5BcmUgbm90IHRoZXJlIGFueSB2
+dWxuZXJhYmlsaXRpZXMgd2hlcmUgdGhlIHZlbmRvciBpcyBvdGhlciB0aGFuIGxpbnV4X2F1ZGl0
+X3Byb2plY3Q/PC9zcGFuPjxzcGFuIGxhbmc9IkVOLVVTIj4NCjxvOnA+PC9vOnA+PC9zcGFuPjwv
+cD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIGxhbmc9IkVOLVVTIj48bzpwPiZuYnNwOzwv
+bzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBsYW5nPSJFTi1VUyIg
+c3R5bGU9ImZvbnQtc2l6ZToxMS4wcHQ7Zm9udC1mYW1pbHk65ri444K044K344OD44KvIj5LaW5k
+IHJlZ2FyZHMsPG86cD48L286cD48L3NwYW4+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNw
+YW4gbGFuZz0iRU4tVVMiIHN0eWxlPSJmb250LXNpemU6MTEuMHB0O2ZvbnQtZmFtaWx5Oua4uOOC
+tOOCt+ODg+OCryI+U2hpbmppPG86cD48L286cD48L3NwYW4+PC9wPg0KPGRpdiBzdHlsZT0iYm9y
+ZGVyOm5vbmU7Ym9yZGVyLXRvcDpzb2xpZCAjRTFFMUUxIDEuMHB0O3BhZGRpbmc6My4wcHQgMG1t
+IDBtbSAwbW0iPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PGI+PHNwYW4gbGFuZz0iRU4tVVMiIHN0
+eWxlPSJmb250LXNpemU6MTEuMHB0O2ZvbnQtZmFtaWx5OiZxdW90O0NhbGlicmkmcXVvdDssc2Fu
+cy1zZXJpZiI+RnJvbTo8L3NwYW4+PC9iPjxzcGFuIGxhbmc9IkVOLVVTIiBzdHlsZT0iZm9udC1z
+aXplOjExLjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LHNhbnMtc2VyaWYiPiBN
+YXJ0YSBSeWJjenluc2thICZsdDtyeWJjenluc2thQGdtYWlsLmNvbSZndDsNCjxicj4NCjxiPlNl
+bnQ6PC9iPiBXZWRuZXNkYXksIEp1bHkgMTcsIDIwMjQgODo1NyBQTTxicj4NCjxiPlRvOjwvYj4g
+TWF0c3VuYWdhLCBTaGluamkvPC9zcGFuPjxzcGFuIHN0eWxlPSJmb250LXNpemU6MTEuMHB0Ij7m
+nb7msLg8L3NwYW4+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZToxMS4wcHQ7Zm9udC1mYW1pbHk6JnF1
+b3Q7Q2FsaWJyaSZxdW90OyxzYW5zLXNlcmlmIj4NCjwvc3Bhbj48c3BhbiBzdHlsZT0iZm9udC1z
+aXplOjExLjBwdCI+5oWO5Y+4PC9zcGFuPjxzcGFuIGxhbmc9IkVOLVVTIiBzdHlsZT0iZm9udC1z
+aXplOjExLjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LHNhbnMtc2VyaWYiPiAm
+bHQ7c2hpbi5tYXRzdW5hZ2FAZnVqaXRzdS5jb20mZ3Q7PGJyPg0KPGI+Q2M6PC9iPiByYWoua2hl
+bUBnbWFpbC5jb207IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnOyBU
+b2t1bW90bywgU2h1bnN1a2UvPC9zcGFuPjxzcGFuIHN0eWxlPSJmb250LXNpemU6MTEuMHB0Ij7l
+vrPmnKw8L3NwYW4+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZToxMS4wcHQ7Zm9udC1mYW1pbHk6JnF1
+b3Q7Q2FsaWJyaSZxdW90OyxzYW5zLXNlcmlmIj4NCjwvc3Bhbj48c3BhbiBzdHlsZT0iZm9udC1z
+aXplOjExLjBwdCI+5L+K5LuLPC9zcGFuPjxzcGFuIGxhbmc9IkVOLVVTIiBzdHlsZT0iZm9udC1z
+aXplOjExLjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LHNhbnMtc2VyaWYiPiAm
+bHQ7cy10b2t1bW90b0BmdWppdHN1LmNvbSZndDs8YnI+DQo8Yj5TdWJqZWN0OjwvYj4gUmU6IFtv
+ZV0gW1BBVENIIDIvMl0gYXVkaXQ6IEFkZCBsaW51eF9hdWRpdCB0byBDVkVfUFJPRFVDVDxvOnA+
+PC9vOnA+PC9zcGFuPjwvcD4NCjwvZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gbGFu
+Zz0iRU4tVVMiPjxvOnA+Jm5ic3A7PC9vOnA+PC9zcGFuPjwvcD4NCjxkaXY+DQo8ZGl2Pg0KPHAg
+Y2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gbGFuZz0iRU4tVVMiPjxvOnA+Jm5ic3A7PC9vOnA+PC9z
+cGFuPjwvcD4NCjwvZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gbGFuZz0iRU4tVVMi
+PjxvOnA+Jm5ic3A7PC9vOnA+PC9zcGFuPjwvcD4NCjxkaXY+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1z
+b05vcm1hbCI+PHNwYW4gbGFuZz0iRU4tVVMiPk9uIFdlZCwgSnVsIDE3LCAyMDI0IGF0IDg6Mzk8
+L3NwYW4+PHNwYW4gbGFuZz0iRU4tVVMiIHN0eWxlPSJmb250LWZhbWlseTomcXVvdDtDYW1icmlh
+IE1hdGgmcXVvdDssc2VyaWYiPuKArzwvc3Bhbj48c3BhbiBsYW5nPSJFTi1VUyI+QU0gTWF0c3Vu
+YWdhLVNoaW5qaSB2aWENCjxhIGhyZWY9Imh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnIj5s
+aXN0cy5vcGVuZW1iZWRkZWQub3JnPC9hPiAmbHQ7c2hpbi5tYXRzdW5hZ2E9PGEgaHJlZj0ibWFp
+bHRvOmZ1aml0c3UuY29tQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmciPmZ1aml0c3UuY29tQGxpc3Rz
+Lm9wZW5lbWJlZGRlZC5vcmc8L2E+Jmd0OyB3cm90ZTo8bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8
+L2Rpdj4NCjxibG9ja3F1b3RlIHN0eWxlPSJib3JkZXI6bm9uZTtib3JkZXItbGVmdDpzb2xpZCAj
+Q0NDQ0NDIDEuMHB0O3BhZGRpbmc6MG1tIDBtbSAwbW0gNi4wcHQ7bWFyZ2luLWxlZnQ6NC44cHQ7
+bWFyZ2luLXJpZ2h0OjBtbSI+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBsYW5nPSJFTi1V
+UyI+bGludXhfYXVkaXQgaXMgYWxzbyBhIHZhbGlkIENWRV9QUk9EVUNUIGZvciBhdWRpdCw8YnI+
+DQplLmcuLCA8YSBocmVmPSJodHRwczovL252ZC5uaXN0Lmdvdi92dWxuL2RldGFpbC9DVkUtMjAx
+NS01MTg2IiB0YXJnZXQ9Il9ibGFuayI+aHR0cHM6Ly9udmQubmlzdC5nb3YvdnVsbi9kZXRhaWwv
+Q1ZFLTIwMTUtNTE4NjwvYT4uPGJyPg0KPGJyPg0KU2lnbmVkLW9mZi1ieTogU2hpbmppIE1hdHN1
+bmFnYSAmbHQ7PGEgaHJlZj0ibWFpbHRvOnNoaW4ubWF0c3VuYWdhQGZ1aml0c3UuY29tIiB0YXJn
+ZXQ9Il9ibGFuayI+c2hpbi5tYXRzdW5hZ2FAZnVqaXRzdS5jb208L2E+Jmd0Ozxicj4NClNpZ25l
+ZC1vZmYtYnk6IFNodW5zdWtlIFRva3Vtb3RvICZsdDs8YSBocmVmPSJtYWlsdG86cy10b2t1bW90
+b0BmdWppdHN1LmNvbSIgdGFyZ2V0PSJfYmxhbmsiPnMtdG9rdW1vdG9AZnVqaXRzdS5jb208L2E+
+Jmd0Ozxicj4NCi0tLTxicj4NCiZuYnNwO21ldGEtb2UvcmVjaXBlcy1zZWN1cml0eS9hdWRpdC88
+YSBocmVmPSJodHRwOi8vYXVkaXRfNC4wLjEuYmIiIHRhcmdldD0iX2JsYW5rIj5hdWRpdF80LjAu
+MS5iYjwvYT4gfCAyICstPGJyPg0KJm5ic3A7MSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCsp
+LCAxIGRlbGV0aW9uKC0pPGJyPg0KPGJyPg0KZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1z
+ZWN1cml0eS9hdWRpdC88YSBocmVmPSJodHRwOi8vYXVkaXRfNC4wLjEuYmIiIHRhcmdldD0iX2Js
+YW5rIj5hdWRpdF80LjAuMS5iYjwvYT4gYi9tZXRhLW9lL3JlY2lwZXMtc2VjdXJpdHkvYXVkaXQv
+PGEgaHJlZj0iaHR0cDovL2F1ZGl0XzQuMC4xLmJiIiB0YXJnZXQ9Il9ibGFuayI+YXVkaXRfNC4w
+LjEuYmI8L2E+PGJyPg0KaW5kZXggYmQ4ZjhjYzMxLi4wYjU4NTdjYmYgMTAwNjQ0PGJyPg0KLS0t
+IGEvbWV0YS1vZS9yZWNpcGVzLXNlY3VyaXR5L2F1ZGl0LzxhIGhyZWY9Imh0dHA6Ly9hdWRpdF80
+LjAuMS5iYiIgdGFyZ2V0PSJfYmxhbmsiPmF1ZGl0XzQuMC4xLmJiPC9hPjxicj4NCisrKyBiL21l
+dGEtb2UvcmVjaXBlcy1zZWN1cml0eS9hdWRpdC88YSBocmVmPSJodHRwOi8vYXVkaXRfNC4wLjEu
+YmIiIHRhcmdldD0iX2JsYW5rIj5hdWRpdF80LjAuMS5iYjwvYT48YnI+DQpAQCAtMTAyLDQgKzEw
+Miw0IEBAIGRvX2luc3RhbGw6YXBwZW5kKCkgezxicj4NCiZuYnNwOyAmbmJzcDsgJm5ic3A7aW5z
+dGFsbCAtZCAtbSAwNzAwICR7RH0ke2xvY2Fsc3RhdGVkaXJ9L3Nwb29sL2F1ZGl0PGJyPg0KJm5i
+c3A7fTxicj4NCjxicj4NCi1DVkVfUFJPRFVDVCA9ICZxdW90O2xpbnV4OmF1ZGl0JnF1b3Q7PGJy
+Pg0KK0NWRV9QUk9EVUNUID0gJnF1b3Q7bGludXg6YXVkaXQgbGludXhfYXVkaXQmcXVvdDs8bzpw
+PjwvbzpwPjwvc3Bhbj48L3A+DQo8L2Jsb2NrcXVvdGU+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05v
+cm1hbCI+PHNwYW4gbGFuZz0iRU4tVVMiPjxvOnA+Jm5ic3A7PC9vOnA+PC9zcGFuPjwvcD4NCjwv
+ZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIGxhbmc9IkVOLVVTIj5IZWxs
+byw8bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBjbGFzcz0iTXNvTm9y
+bWFsIj48c3BhbiBsYW5nPSJFTi1VUyI+SSB0aGluayBpdCB3aWxsIGJlIGJldHRlciB0byBwdXQg
+bGludXhfYXVkaXRfcHJvamVjdDpsaW51eF9hdWRpdDxvOnA+PC9vOnA+PC9zcGFuPjwvcD4NCjwv
+ZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIGxhbmc9IkVOLVVTIj48bzpw
+PiZuYnNwOzwvbzpwPjwvc3Bhbj48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBjbGFzcz0iTXNvTm9y
+bWFsIj48c3BhbiBsYW5nPSJFTi1VUyI+V2hhdCBkbyB5b3UgdGhpbms/PG86cD48L286cD48L3Nw
+YW4+PC9wPg0KPC9kaXY+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gbGFuZz0i
+RU4tVVMiPjxvOnA+Jm5ic3A7PC9vOnA+PC9zcGFuPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNs
+YXNzPSJNc29Ob3JtYWwiPjxzcGFuIGxhbmc9IkVOLVVTIj5LaW5kIHJlZ2FyZHMsPG86cD48L286
+cD48L3NwYW4+PC9wPg0KPC9kaXY+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4g
+bGFuZz0iRU4tVVMiPk1hcnRhPG86cD48L286cD48L3NwYW4+PC9wPg0KPC9kaXY+DQo8L2Rpdj4N
+CjwvZGl2Pg0KPC9kaXY+DQo8L2JvZHk+DQo8L2h0bWw+DQo=
 
-diff --git a/meta-python/recipes-devtools/python/python3-h5py/0001-Use-li=
-bc.stdint-instead-of-numpy.patch b/meta-python/recipes-devtools/python/py=
-thon3-h5py/0001-Use-libc.stdint-instead-of-numpy.patch
-new file mode 100644
-index 000000000..3c55fa697
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-h5py/0001-Use-libc.stdi=
-nt-instead-of-numpy.patch
-@@ -0,0 +1,27 @@
-+From 434e1bf4ab9fa53ec1293cde86f4dbec6784e50f Mon Sep 17 00:00:00 2001
-+From: Orion Poplawski <orion@nwra.com>
-+Date: Thu, 22 Feb 2024 08:41:17 -0700
-+Subject: [PATCH 1/2] Use libc.stdint instead of numpy
-+
-+Upstream-Status: Backport [https://github.com/h5py/h5py/pull/2382/commit=
-s/387a22b8c1513800c0401f496b4ed512c1639798]
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ h5py/api_types_ext.pxd                   | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/h5py/api_types_ext.pxd b/h5py/api_types_ext.pxd
-+index 91acb128..55a239f5 100644
-+--- a/h5py/api_types_ext.pxd
-++++ b/h5py/api_types_ext.pxd
-+@@ -20,7 +20,7 @@ from libc.string cimport strlen, strchr, strcpy, strnc=
-py, strcmp,\
-+ ctypedef long size_t
-+ from libc.time cimport time_t
-+=20
-+-from numpy cimport int8_t, uint8_t, int16_t, uint16_t, int32_t, uint32_=
-t, int64_t, uint64_t
-++from libc.stdint cimport int8_t, uint8_t, int16_t, uint16_t, int32_t, u=
-int32_t, int64_t, uint64_t
-+=20
-+ IF UNAME_SYSNAME !=3D "Windows":
-+     cdef extern from "unistd.h":
-+--=20
-+2.25.1
-+
-diff --git a/meta-python/recipes-devtools/python/python3-h5py/0002-Proper=
-ly-cast-arguments-to-H5Lunpack_elink_val.patch b/meta-python/recipes-devt=
-ools/python/python3-h5py/0002-Properly-cast-arguments-to-H5Lunpack_elink_=
-val.patch
-new file mode 100644
-index 000000000..0f77f745a
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-h5py/0002-Properly-cast=
--arguments-to-H5Lunpack_elink_val.patch
-@@ -0,0 +1,27 @@
-+From 9ed4f80fd482e135119086fb2015ca97dce306ae Mon Sep 17 00:00:00 2001
-+From: Orion Poplawski <orion@nwra.com>
-+Date: Thu, 15 Feb 2024 20:47:50 -0700
-+Subject: [PATCH 2/2] Properly cast arguments to H5Lunpack_elink_val
-+
-+Upstream-Status: Backport [https://github.com/h5py/h5py/pull/2380/commit=
-s/704e13ac83b42898514610c4df9f32f367e767e4]
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ h5py/h5l.pyx         | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/h5py/h5l.pyx b/h5py/h5l.pyx
-+index 60b252fa..af725bdb 100644
-+--- a/h5py/h5l.pyx
-++++ b/h5py/h5l.pyx
-+@@ -184,7 +184,7 @@ cdef class LinkProxy:
-+             if info.type =3D=3D H5L_TYPE_SOFT:
-+                 py_retval =3D buf
-+             else:
-+-                H5Lunpack_elink_val(buf, buf_size, &wtf, &ext_file_name=
-, &ext_obj_name)
-++                H5Lunpack_elink_val(buf, buf_size, &wtf, <const char **=
->&ext_file_name, <const char **>&ext_obj_name)
-+                 py_retval =3D (bytes(ext_file_name), bytes(ext_obj_name=
-))
-+         finally:
-+             efree(buf)
-+--=20
-+2.25.1
-+
-diff --git a/meta-python/recipes-devtools/python/python3-h5py_3.10.0.bb b=
-/meta-python/recipes-devtools/python/python3-h5py_3.10.0.bb
-index 8a9158525..d557a8188 100644
---- a/meta-python/recipes-devtools/python/python3-h5py_3.10.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-h5py_3.10.0.bb
-@@ -7,7 +7,10 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D113251d71fb03=
-84712c719b567261c5c"
- SRC_URI[sha256sum] =3D "d93adc48ceeb33347eb24a634fb787efc7ae4644e6ea4ba7=
-33d099605045c049"
-=20
- SRC_URI +=3D "file://0001-setup_build.py-avoid-absolute-path.patch \
--            file://0001-Fix-Cython-3-compatibility.patch"
-+            file://0001-Fix-Cython-3-compatibility.patch \
-+            file://0001-Use-libc.stdint-instead-of-numpy.patch \
-+            file://0002-Properly-cast-arguments-to-H5Lunpack_elink_val.p=
-atch \
-+"
-=20
- inherit pkgconfig pypi setuptools3
-=20
---=20
-2.25.1
-
+--_000_TY3PR01MB117885964FA803063255439C792AC2TY3PR01MB11788jp_--
 
