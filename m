@@ -1,92 +1,175 @@
-Return-Path: <alba@thehoodiefirm.com>
+Return-Path: <dev@g0hl1n.net>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 301B5C3DA49
-	for <webhook@archiver.kernel.org>; Thu, 18 Jul 2024 10:31:20 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.web11.12208.1721298675907888906
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24BC4C3DA6F
+	for <webhook@archiver.kernel.org>; Thu, 18 Jul 2024 14:49:42 +0000 (UTC)
+Received: from out-189.mta0.migadu.com (out-189.mta0.migadu.com [91.218.175.189])
+ by mx.groups.io with SMTP id smtpd.web11.16964.1721314178036830052
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Jul 2024 03:31:16 -0700
+ Thu, 18 Jul 2024 07:49:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@thehoodiefirm-com.20230601.gappssmtp.com header.s=20230601 header.b=pTBvIeY+;
- spf=neutral (domain: thehoodiefirm.com, ip: 209.85.128.52, mailfrom: alba@thehoodiefirm.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4267300145eso1385295e9.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Jul 2024 03:31:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thehoodiefirm-com.20230601.gappssmtp.com; s=20230601; t=1721298674; x=1721903474; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:reply-to:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=XgeDUuQVmqWlP9V1E894ABLqTXPCzwWF9IaN4lnUwGM=;
-        b=pTBvIeY+2tMHiU+SKnvqnM+tlxNnqEIoupH89o786/EzWK/1kyNyJ6EqYiRqgEuW6y
-         CxY4Zgq8mTOm7Lgnmi2V2uZVz/KMJu0lpv1iZ0smv8YTxn+KNUEOi66Y2oLTo2LPYkgy
-         N6nOQeneeizbBjMLyQARoZ7z3yQLHrr3ZdRkBfwzGxbjNRf7pJhyA5Yznkf/y/r8vjr1
-         fNlMUUwl3sICHVJvkzCjmZveVjz24nTBMXZPrCWWWZq3+A6ZGKoXsY9DgHpqnO2aEh0+
-         PaEKiQ4iQdj2aeGqwJvVwRhzjADCpQfO+DftcRmhADjNdGVYiMSo6CRhLcDKFcN3XzKT
-         cH1g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721298674; x=1721903474;
-        h=content-transfer-encoding:mime-version:reply-to:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=XgeDUuQVmqWlP9V1E894ABLqTXPCzwWF9IaN4lnUwGM=;
-        b=DXZZ2Zd626V8XS5JxYra/48WmxuW0XINyeH5RXbRQrB3U6nX7G8R2V0Nszmkk8eiQ9
-         e2uIxe+nCTUjRcK5QG5Orz+9psuq4Na0rFRxoHRnqtkWGe3h2aEY9GJcLmlbGbBKTpmP
-         CIu4/sSsQFi639VAqpsSNLZU6a/pdmwLIO0sHCwFHuBO7HYIuoq4A8DqyyMT5v8bn31t
-         qk5Fg/4sQH3oXVemEUapjqyeIQTrFISvCxpW9jbdTFjZMSu/aGzwPA4Q8yARSymCIAOo
-         2Pxq/dH5NpJQI9J3+r+6twQgJiXCnE5d63Cv1Ze1+Cz1aWky53OycvfSQavqSBF13ZBX
-         8wrg==
-X-Gm-Message-State: AOJu0YxLsDv8scvctyr+wRV8LLeJmq3ElR3XV6eT7YvwKVMKtK5kR6NQ
-	Ta9ZhYb9mIN1R8UJdVWAtZQI+NCSS06m2QbIexIsPeZKWUffqsdASXaJECLgr/98o2WFr/Ncffk
-	eKa0=
-X-Google-Smtp-Source: AGHT+IHLPeNvfTmPmkomENqJ6Z/MAYXMHTnR2rZhwmoR55/lGsiqqXzgPnpQGAplu1+CLrSrhI1/8A==
-X-Received: by 2002:a5d:5987:0:b0:368:69d:5acf with SMTP id ffacd0b85a97d-3683173029bmr4218776f8f.42.1721298673648;
-        Thu, 18 Jul 2024 03:31:13 -0700 (PDT)
-Received: from localhost.localdomain (20.red-83-57-108.dynamicip.rima-tde.net. [83.57.108.20])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3685834365asm1096739f8f.64.2024.07.18.03.31.12
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Thu, 18 Jul 2024 03:31:13 -0700 (PDT)
-From: Alba Herrerias <alba@thehoodiefirm.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: engineering@neighbourhood.ie,
-	Ninette Adhikari <ninette@thehoodiefirm.com>
-Subject: [master][PATCH 1/1] yelp: CVE status update for CVE-2008-3533
-Date: Thu, 18 Jul 2024 11:29:49 +0100
-Message-Id: <20240718102949.6841-2-alba@thehoodiefirm.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240718102949.6841-1-alba@thehoodiefirm.com>
-References: <CAMKF1srD0K+BZ20ZmVrfK6bOrJaqvLf5zTjmbkoP1o0qdgc3Rw@mail.gmail.com>
- <20240718102949.6841-1-alba@thehoodiefirm.com>
-Reply-To: engineering@neighbourhood.ie
+ dkim=fail reason="dkim: body hash did not verify" header.i=@g0hl1n.net header.s=key1 header.b=Fg5GhbxS;
+ spf=pass (domain: g0hl1n.net, ip: 91.218.175.189, mailfrom: dev@g0hl1n.net)
+X-Envelope-To: tim.orling@konsulko.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=g0hl1n.net; s=key1;
+	t=1721314174;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=1lcaKa+PwGYWmZtOsLMykLX6/x1h44jfY+hQyvhgxwo=;
+	b=Fg5GhbxSfo/TXRDZKeTLPANB+GUxrKH5oudgp3M1E83he8gAJlB9eRxSLkOAh+jZAFlndi
+	MP9rFIy8pPvkF+jYq/Do/p7chYKwzl633ptXSjsCfHUmXUXYZb+igw+zzazE/jNLLJG0PM
+	x9grEWGLECD/65V5avLy6QV2txRFbzA=
+X-Envelope-To: akuster808@gmail.com
+X-Envelope-To: openembedded-devel@lists.openembedded.org
+Date: Thu, 18 Jul 2024 16:49:30 +0200
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Richard Leitner <dev@g0hl1n.net>
+To: Tim Orling <tim.orling@konsulko.com>
+Cc: akuster808 <akuster808@gmail.com>, 
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [meta-python][scarthgap][PATCH] python3-pydantic-core:
+ upgrade 2.16.3 -> 2.18.1
+Message-ID: <lhsjaroyl6ivizrhqd6dmwtibvcgjynf756u5o6turi7aqxzb6@cdl46qnvnn4t>
+References: <20240706180810.1707296-1-dev@g0hl1n.net>
+ <26a61314-0aa1-4e5c-ac71-d0ece3591362@gmail.com>
+ <w24ywr4aiiqxecb46semqmbw4ulstn4rz25mwbiurkwh4xzxva@oyphvy5wc7nj>
+ <CAOyo-87-wojy-WxNs98qWp9kev2Dpui-Nk8ffLzwWQbmsvpvjQ@mail.gmail.com>
+ <CAOyo-86Zds3bvy0GvmiBEDRignUn2Z509SkD7Lw1xZ-0Ky30bg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <CAOyo-86Zds3bvy0GvmiBEDRignUn2Z509SkD7Lw1xZ-0Ky30bg@mail.gmail.com>
+X-Migadu-Flow: FLOW_OUT
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Jul 2024 10:31:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111398
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Jul 2024 14:49:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111399
 
-From: Ninette Adhikari <ninette@thehoodiefirm.com>
+Hi Tim, Hi Armin,
 
-The current version (42.2) is not affected. Fixed in 2.24
+sorry for the late response, just came back from vacation.
 
-Signed-off-by: Ninette Adhikari <ninette@thehoodiefirm.com>
----
- meta-gnome/recipes-gnome/yelp/yelp_42.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
+On Wed, Jul 10, 2024 at 12:10:01PM GMT, Tim Orling wrote:
+> On Wed, Jul 10, 2024 at 8:14=E2=80=AFAM Tim Orling <tim.orling@konsulko=
+.com> wrote:
+> > On Tue, Jul 9, 2024 at 5:54=E2=80=AFAM Richard Leitner <dev@g0hl1n.ne=
+t> wrote:
+> >
+> >> Hi Armin,
+> >>
+> >> On Tue, Jul 09, 2024 at 08:12:06AM GMT, akuster808 wrote:
+> >> > Hello Richard,
+> >> >
+> >> > On 7/6/24 2:08 PM, Richard Leitner via lists.openembedded.org wrot=
+e:
+> >> > > The currently available python-3-pydantic v2.7.0 requires
+> >> > > python3-pydantic-core to be updated to v2.18.1.
+> >>
+> >
+> I don't know what we want to do with scarthgap. Part of me thinks we sh=
+ould
+> revert the 2.7.0 upgrade to one which is compatible with 2.16.3
+> python3-pydantc-core. Part of me thinks upgrade python3-pydantic-core t=
+o
+> 2.18.1, but we won't have that in master. Right now, it appears to me t=
+hat
+> we need new recipes (python3-tzdata) in order to build 2.19.0 (I did no=
+t
+> look at 2.18.x). Adding new recipes sounds against stable policy to me.
 
-diff --git a/meta-gnome/recipes-gnome/yelp/yelp_42.2.bb b/meta-gnome/recipes-gnome/yelp/yelp_42.2.bb
-index 1b3ded021..69c421662 100644
---- a/meta-gnome/recipes-gnome/yelp/yelp_42.2.bb
-+++ b/meta-gnome/recipes-gnome/yelp/yelp_42.2.bb
-@@ -39,3 +39,5 @@ FILES:${PN} += " \
- "
- 
- RDEPENDS:${PN} += "yelp-xsl"
-+
-+CVE_STATUS[CVE-2008-3533] = "cpe-incorrect: The current version (42.2) is not affected. Fixed in 2.24."
--- 
-2.44.0
+Tbh it wasn't clear to me why the pydantic (not -core) update to 2.7.0
+was accepted at all (for scarthgap) as it bumps the minor version. Is
+this sane/desired? ... Even after reading "Stable/LTS Patch Acceptance
+Policies" by YP [1] this isn't completely clear to me (does OE have a
+own policy on this?.
+
+For the update (2.16.3 to 2.18.1) there isn't anythin in the
+pyproject.toml diff which results in dependency changes.
+So IMHO this should be safe.
+
+Nonetheless applying this patch to scarthgap definitely breaks the
+"backport only"/"master first" principle. So maybe downgrading is the
+"policy friendly" approach?
+
+>=20
+> > > I don't see the updated or later version in master? Am I missing
+> >> something?
+> >>
+> >> I found a series from Tim [1] which updates python3-pydantic and
+> >> python3-pydantic-core
+> >> to 2.7.4/1.9.0 for master.
+> >> As those are newer versions I didn't send this patch for master.
+> >>
+> >
+> > That series needed to be rebased, per khem. Just because it is on
+> > patchwork does not imply merging or correctness.
+> > During the rebase I discovered missing dependencies.
+
+Thanks for the clarification. Next time I will follow up the already
+existing series first.
+
+> >
+> > Also, python3-pydantic-core has a QA warning about TMPDIR
+> >  WARNING: python3-pydantic-core-2.19.0-r0 do_package_qa: QA Issue: Fi=
+le
+> > /usr/lib/python3.12/site-packages/pydantic_core/_
+> > pydantic_core.cpython-312-x86_64-linux-gnu.so in package
+> > python3-pydantic-core contains reference to TMPDIR [buildpaths]
+> >
+> > Which seems to be RUSTFLAGS being injected into the .so for some reas=
+on
+> > (where 14 is the .rodata section):
+> > readelf -p 14 pydantic_core/_pydantic_core.cpython-312-x86_64-linux-g=
+nu.so
+> >
+> > <snip>
+> >   [   f7c]  i
+> > ...skipping...
+> >
+> > model-fieldsdataclasstuplefrozensetdefinition-refdefinitionsUnknown s=
+chema
+> > type: "2.19.0a-alphab-beta__version__profile=3Drelease pgo=3D -L
+> > /srv/build/ttorling/workspace-upgrades/build/tmp/work/core2-64-poky-l=
+inux/python3-pydantic-coas
+> >   [ 2ae09]  kwargs
+> >   [ 2ae10]  (args,
+> > kwargs=3DNone)ArgsKwargs(kwargssrc/argument_markers.rsCreating instan=
+ces of
+> > "UndefinedType" is not supportednew()\n
+> > <snip>
+> >
+> > The above seems to be a backtrace from the schema generation script, =
+but I
+> > haven't figured out yet how to troubleshoot further.
+> >
+>=20
+> Filed an issue upstream:
+> https://github.com/pydantic/pydantic-core/issues/1365
+>=20
+> >
+> > Meanwhile, upstream has updated again.
+> > My working branch:
+> >
+> > https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Dtimo/=
+python3-pydantic-upgrade
+> >
+>=20
+> Found more ptest RDEPENDS missing for python3-pydantic. That branch
+> currently passes ptests for:
+> bitbake (-c testimage) meta-python-image-ptest-python3-pydantic-core
+> bitbake (-c testimage) meta-python-image-ptest-python3-pydantic
+>=20
+
+Do you got failing ptests for scarthgap (with this patch applied) too?
+Or did you just tested master?
+
+[1] https://wiki.yoctoproject.org/wiki/Stable_Release_and_LTS
+
+Thanks & regards;rl
 
 
