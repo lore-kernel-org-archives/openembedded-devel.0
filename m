@@ -2,363 +2,419 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4764AC3DA5D
-	for <webhook@archiver.kernel.org>; Fri, 19 Jul 2024 15:57:46 +0000 (UTC)
-Received: from mail-ot1-f54.google.com (mail-ot1-f54.google.com [209.85.210.54])
- by mx.groups.io with SMTP id smtpd.web11.21916.1721404665055312653
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5387FC3DA59
+	for <webhook@archiver.kernel.org>; Fri, 19 Jul 2024 23:19:13 +0000 (UTC)
+Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com [209.85.167.176])
+ by mx.groups.io with SMTP id smtpd.web11.1785.1721431143340534584
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Jul 2024 08:57:45 -0700
+ Fri, 19 Jul 2024 16:19:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=e5QofHSa;
- spf=pass (domain: gmail.com, ip: 209.85.210.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f54.google.com with SMTP id 46e09a7af769-70388567d24so1048208a34.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Jul 2024 08:57:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GAbBrall;
+ spf=pass (domain: gmail.com, ip: 209.85.167.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f176.google.com with SMTP id 5614622812f47-3d9da46ca13so1310683b6e.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Jul 2024 16:19:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1721404664; x=1722009464; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1721431142; x=1722035942; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=aWxNKAjhJJV+EMso1ZvpmDon+DyEhZzapIZAfGwdfco=;
-        b=e5QofHSak2Dic6m8q/lImSqUBsZei4weVZBOgFE6NeBkZfMF416SjDXPIfluV7Rf/O
-         lSZj+wJgY2GM+MrOXhrElS5o3VOj1VGFwFc7GwEdMWB5QfOZ6SlR8Hpq8iPeII1RJgKX
-         ViWIT85aH3StebIN0kjEeIbAYr9fvFH7V41My5KaIGGKoCDRFQGHSkbH4W+UXziMs1nj
-         5qolWwwqnW3axCE1uNFAc/j467a5wJSVw+pS9EmDzUvXS9iWhUrpAoiDxX2RG6gf+mFo
-         W9rs1OmE/gUzxUUMfClpCt296FxGqH/mZk9Mfpn7Sargk9N7ee0OJfZO/13U2f8LNmwq
-         hqpg==
+        bh=RpvMCj5BS2u9+kIsHeNe16CbR4u/lAyNnOdAeVh7vIs=;
+        b=GAbBrallVH/ColCZSBdZsU/7qeve3izm0nZ5FyAd0yddEdxiXTAZXTqZh2Xr1+1D/v
+         1g2auiSAIMrlB2k8IDZkGUkaq2HAiNc2mgjYs85XTEmoH/iAXDqxSUa0SLAroISw0i4y
+         bvvoTL4pWkb+YDxHZsx9ofntruwWLvGyRYAVXrkh/NF24t2bfDwozvnw/A+VqdBC+Zc5
+         XHVObKJDze85Jt01FrtIINh4gbsSEs1VeO0rjSiKfFwTHQluqQfIhjRiQDTIpy3i0Ab6
+         29i27Lzf1AA1n4tWWvQFKw/zILJpgTtF913oTxfwSt4edbbcIbcM9/9i7eYo67XJuQxi
+         jqsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721404664; x=1722009464;
+        d=1e100.net; s=20230601; t=1721431142; x=1722035942;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=aWxNKAjhJJV+EMso1ZvpmDon+DyEhZzapIZAfGwdfco=;
-        b=KPTEI8XzL4JWcCYKCy2tR0JyYXYSCCKBfT5w8YQErLPLpCHZ8PiTzxRFa4njuoEL0o
-         DGSl5Bg8ayDPx19ul3KKd0ScW5u1dKJNBv+Hi+upA1kgWO3u6jeLKy4rripgMzcFtMUI
-         NiAB42kL2jPXzYV3VyBjYAeiPUmlrAxXVbu94duTo+6+YeWj29f/nNsZTHXHb0Ha6Qz0
-         Ow86vhwZ1fuyy9ybGZR6yjQLx4biRE7SuZsj4L5ovwtIIxGuQbHnGxRx3WxDq0QB0A9D
-         y59V+21xLLoH79uBwEqTE7r34cwWOKEYn/mYlEJyYEvDxcZxSVM5sDSeV346cEgc5aKi
-         8pZQ==
-X-Gm-Message-State: AOJu0YzCXPghEj7bOPBPan95OiTl2Vum4+ch/9c26PbjSz5dGPiyZQxo
-	jUpBofcl7xdFzD6s4zgLI/hlnWXhsmid/3TW65gf/Nomuw9CUWjJc2KCIivqXxVtRONgMEBQBuw
-	J0s4OOHfh7y2LArEPdTTjdpCgszCJtj2k
-X-Google-Smtp-Source: AGHT+IFO7SffW+hTHB/YY/kz0dQPD5qVrbUeIkyrF1jF0QMPJIYSMz6rLLt+HKtvgg2qJRkqDAmgJqsh43k2i2zjXmE=
-X-Received: by 2002:a05:6870:4723:b0:250:7dba:9501 with SMTP id
- 586e51a60fabf-2612169af82mr162909fac.41.1721404664016; Fri, 19 Jul 2024
- 08:57:44 -0700 (PDT)
+        bh=RpvMCj5BS2u9+kIsHeNe16CbR4u/lAyNnOdAeVh7vIs=;
+        b=vxYfJNFy3cUTE5Gg+XEFui3IqPsvICFb9mhdDqgxwHRQhIf3qul7+zA+YyLlQj/YsH
+         D5SVrdgELo8Jupch9FmZtAl5zcksyd7xLKcK13Zf+Bw+14TnjJc8nwQahZ8OmUxEGs/T
+         1+thlJUQwXspnCyet0seqSR4AmrKMSTGmUc1XXBGZdHPhuc2omLblfVbzkvsbQUxeDf8
+         PtDov/wcKelmCpzt6dDnaehgaNOO1LFB3larrnXVlKJIlAQG1IIQDdj77l2N7I5Z3v8g
+         Rb6ZkBWC+mEuT2B692dq8fEViSQ9AzrX+fUtXK577Rtdhrl6n7tndpMsms9udYPLN2lh
+         2EDA==
+X-Forwarded-Encrypted: i=1; AJvYcCWi1tZODDkdqRoMwDOtCxQLUmmRysKX0CGG4lSuB53gDpnIV0CgYSyvETB2LmknIr0NypWE0S19KEzCigkWMd5RcuEmhuQGMhkEW8iWpoPGFXXFUpMYVixHuw==
+X-Gm-Message-State: AOJu0Yyyu7kubV0SDsgxSshttTdMMTgc+14F03TMqm56Gy4An5V/0lqj
+	eNsqWlLKJNJUQjyt2PmH/4C8usE79n4h6K4W+LWYQ8A90PP4mKn7w53ftEI1UHOa3+ZJv6EmN6a
+	yvgvBvox03PD8F+RzG3w08i9LRlmj+NpJ
+X-Google-Smtp-Source: AGHT+IHCRfuwdlDOIqzDHif/a/gQaGOQcAjp+JiiscoUZub9ChMgzF1M6spL0eqlotYeBPiZ+4hfaZTy16s4FGeA4wE=
+X-Received: by 2002:a05:6870:c084:b0:261:f42:291a with SMTP id
+ 586e51a60fabf-2638defcb38mr17622fac.26.1721431142229; Fri, 19 Jul 2024
+ 16:19:02 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240715121744.18888-1-ceggers@arri.de> <4907407.OV4Wx5bFTl@n9w6sw14>
- <CAMKF1srofvxUUgGQqXBCxvLpTSkbK2puFamrL_U7Vmvb+BC6Dw@mail.gmail.com> <3479754.LZWGnKmheA@n9w6sw14>
-In-Reply-To: <3479754.LZWGnKmheA@n9w6sw14>
+References: <20240719151141.477978-1-tymoteusz.burak@3mdeb.com>
+In-Reply-To: <20240719151141.477978-1-tymoteusz.burak@3mdeb.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 19 Jul 2024 08:57:31 -0700
-Message-ID: <CAMKF1spw_7xLOuKRv5+YRL+u4aU6ZhmS1F3Bf17jECL2Hcnu0g@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][RFC PATCH] include-what-you-use: new recipe
-To: Christian Eggers <ceggers@arri.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000837fd1061d9bc182"
+Date: Fri, 19 Jul 2024 16:18:51 -0700
+Message-ID: <CAMKF1sr-OBq+10Hu47GLDk2woQ3n9eMBi6HGu5zshnxh_8=StA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] dediprog-flasher: Add recipe
+To: tymoteusz.burak@3mdeb.com
+Cc: maciej.pijanowski@3mdeb.com, openembedded-devel@lists.openembedded.org, 
+	piotr.krol@3mdeb.com
+Content-Type: multipart/alternative; boundary="000000000000bcf066061da1eb5a"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 19 Jul 2024 15:57:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111418
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 Jul 2024 23:19:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111419
 
---000000000000837fd1061d9bc182
+--000000000000bcf066061da1eb5a
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jul 19, 2024 at 7:10=E2=80=AFAM Christian Eggers <ceggers@arri.de> =
-wrote:
+Thanks for the patch a few comments inline below
 
-> Hi Khem,
+On Fri, Jul 19, 2024 at 8:12=E2=80=AFAM Tymoteusz Burak via lists.openembed=
+ded.org
+<tymoteusz.burak=3D3mdeb.com@lists.openembedded.org> wrote:
+
+> ---
+>  ...01-add-support-for-cross-compilation.patch | 21 +++++++++++++
+>  .../0002-Makefile-remove-stripping.patch      | 30 +++++++++++++++++++
+>  .../dediprog-flasher_1.14.20.bb               | 25 ++++++++++++++++
+>  3 files changed, 76 insertions(+)
+>  create mode 100644
+> meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher/0001-add-support-fo=
+r-cross-compilation.patch
+>  create mode 100644
+> meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher/0002-Makefile-remov=
+e-stripping.patch
+>  create mode 100644 meta-oe/recipes-bsp/dediprog-flasher/
+> dediprog-flasher_1.14.20.bb
 >
-> sorry for the delay.
->
-> On Tuesday, 16 July 2024, 17:42:33 CEST, Khem Raj wrote:
-> > On Tue, Jul 16, 2024 at 7:57=E2=80=AFAM Christian Eggers <ceggers@arri.=
-de>
-> wrote:
-> > >
-> > > Hi Khem,
-> > >
-> > >
-> > > On Tuesday, 16 July 2024, 15:45:54 CEST, Khem Raj wrote:
-> > > > On Tue, Jul 16, 2024 at 1:08=E2=80=AFAM Christian Eggers <ceggers@a=
-rri.de>
-> wrote:
-> > > >
-> > > > > On Monday, 15 July 2024, 16:18:14 CEST, Khem Raj wrote:
-> > > > > > On Mon, Jul 15, 2024 at 5:18=E2=80=AFAM Christian Eggers via
-> > > > > lists.openembedded.org
-> > > > > > <ceggers=3Darri.de@lists.openembedded.org> wrote:
-> > > > > >
-> > > > > > > Based on proposal send previously here:
-> > > > > > >
-> https://lists.yoctoproject.org/g/yocto/topic/recipe_for/83279588
-> > > > > > >
-> > > > > > > This recipe depends on meta-clang, so should it be added to
-> that layer?
-> > > > > > >
-> > > > > > > Unfortunately the 'include-what-you-use' (iwyu) tool doesn't
-> work yet.
-> > > > > > > Although I have installed nativesdk-clang (via CLANGSDK =3D "=
-1")
-> and
-> > > > > > > nativesdk-include-what-you-use packages, the C++ standard
-> headers are
-> > > > > > > not found:
-> > > > > > >
-> > > > > > > include-what-you-use
-> > > > > > >
-> > > > >
-> --sysroot=3D/opt/poky/5.0.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-m=
-usleabi
-> > > > > > > impl/Fdt.cpp
-> > > > > > > impl/Fdt.cpp:9:10: fatal error: 'cerrno' file not found
-> > > > > > >     9 | #include <cerrno>
-> > > > > > >       |          ^~~~~~~~
-> > > > > > >
-> > > > > > > As iwyu uses Clang and I have no experience working with it,
-> this is
-> > > > > > > probably only a beginner mistake. Can Clang use the C++ heade=
-rs
-> > > > > provided
-> > > > > > > by libstdc++, or do I need to install further packages?
-> > > > > > >
-> > > > > >
-> > > > > > It can but it seems your SDK install might be missing any c++
-> runtime so
-> > > > > > check a simple program that includes say <iostream> header and
-> try
-> > > > > > compiling it
-> > > > > My SDK definitely contains std:: C++ headers for target and
-> nativesdk. But
-> > > > > the
-> > > > > libstdc++ C++ headers are installed in GCC specific locations:
-> > > > >
-> > > > >
-> /opt/poky/5.0.2/sysroots/x86_64-pokysdk-linux/usr/include/c++/13.3.0/
-> > > > >
-> > > > >
-> /opt/poky/5.0.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-musleabi/usr/=
-include/c++/13.3.0
-> > > > >
-> > > > > How can Clang know that the C++ headers are located in the (GCC
-> specific)
-> > > > > c++/13.3.0
-> > > > > sub directory?
-> > > >
-> > > >
-> > > > Try adding -stdlib=3Dlibstdc++ on clang cmdline
-> > >
-> > > The following seems to work:
-> > > include-what-you-use \
-> > >     -target arm-poky-linux-musleabi \
-> > >     --sysroot
-> /opt/poky/5.0.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-musleabi \
-> > >     -stdlib++-isystem
-> /opt/poky/5.0.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-musleabi/usr/=
-include/c++/13.3.0/arm-poky-linux-musleabi
-> \
-> > >     -stdlib++-isystem
-> /opt/poky/5.0.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-musleabi/usr/=
-include/c++/13.3.0
-> \
-> > >     File.cpp
-> > >
-> > > Is there a way to make this a little bit handier? I would like to
-> avoid hard coding this into my CMake toolchain file.
-> > >
-> >
-> > Hmm so -stdlib=3Dlibstdc++ does not work ?
->
-> I cannot reproduce what exactly went wrong, but now the following works
-> fine:
->
-> include-what-you-use -target arm-poky-linux-musleabi --sysroot
-> /opt/poky/5.0.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-musleabi
-> test.cpp
-> include-what-you-use -target x86_64-pokysdk-linux --sysroot
-> /opt/orbiter-tiny/5.0.2/sysroots/x86_64-pokysdk-linux test.cpp
->
-> So neither '-stdlib=3Dlibstdc++' nor '-stdlib++-isystem' is required anym=
-ore.
->
-> I was also able to integrate this into a CMake project (built with the
-> SDK) by adding the following to my toolchain file:
->
-> set(CMAKE_C_INCLUDE_WHAT_YOU_USE
-> include-what-you-use;-target;arm-poky-linux-musleabi;--sysroot;$ENV{SDKTA=
-RGETSYSROOT})
-> set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE
-> include-what-you-use;-target;arm-poky-linux-musleabi;--sysroot;$ENV{SDKTA=
-RGETSYSROOT})
->
-> The IWYU tool states itself as "experimental software", so the output
-> better should be interpreted by a human. I've tested with an existing
-> code base and got many valuable hints for missing/superfluous
-> #include statements. The results are quite good for std:: C/C++
-> headers, but other libraries like Boost need further improvements.
->
-> Can this recipe be added to meta-clang (due to it's dependencies to
-> libclang/libllvm)?
->
->
-Yes send a pr to meta-clang
+> diff --git
+> a/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher/0001-add-support-=
+for-cross-compilation.patch
+> b/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher/0001-add-support-=
+for-cross-compilation.patch
+> new file mode 100644
+> index 000000000000..fbc0f5a18e1d
+> --- /dev/null
+> +++
+> b/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher/0001-add-support-=
+for-cross-compilation.patch
+> @@ -0,0 +1,21 @@
+> +Author: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+> +Date:   Fri Jul 5 16:39:13 2024 +0200
+> +Upstream-Status: Submitted [
+> https://github.com/DediProgSW/SF100Linux/pull/86]
+> +
+> +    Makefile: allow overriding CC
+> +
+> +    Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+> +
+> +diff --git a/Makefile b/Makefile
+> +index 139e5c0c3c3c..226303a6921e 100644
+> +--- a/Makefile
+> ++++ b/Makefile
+> +@@ -12,7 +12,7 @@ endif
+> + endif
+> +
+> + PROGRAM =3D dpcmd
+> +-CC      =3D gcc
+> ++CC     ?=3D gcc
+> + PREFIX ?=3D /usr/local
+> +
+> + PKG_CONFIG ?=3D pkg-config
+> diff --git
+> a/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher/0002-Makefile-rem=
+ove-stripping.patch
+> b/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher/0002-Makefile-rem=
+ove-stripping.patch
+> new file mode 100644
+> index 000000000000..5e7d7fc5fe89
+> --- /dev/null
+> +++
+> b/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher/0002-Makefile-rem=
+ove-stripping.patch
+> @@ -0,0 +1,30 @@
+> +From 96d8849c3c482f21ad04f1dad45bf59f453e43d6 Mon Sep 17 00:00:00 2001
+> +From: Tymoteusz Burak <tymoteusz.burak@3mdeb.com>
+> +Date: Mon, 8 Jul 2024 10:58:45 +0000
+> +Subject: [PATCH] Makefile: remove stripping
+> +Upstream-Status: Inappropriate [oe specific]
+> +
+> +This patch modifies the install process to disable stripping of binaries
+> by the
+> +Makefile and allow the stripping to be handled by bitbake to integrate
+> +it seamlessly into the bitbake workflow.
+> +
+> + Signed-off-by: Tymoteusz Burak <tymoteusz.burak@3mdeb.com>
+> +---
+> + Makefile | 1 -
+> + 1 file changed, 1 deletion(-)
+> +
+> +diff --git a/Makefile b/Makefile
+> +index 139e5c0..aa6eba5 100644
+> +--- a/Makefile
+> ++++ b/Makefile
+> +@@ -58,7 +58,6 @@ install: $(PROGRAM)
+> +       [ $(shell id -u) -eq 0 ] || (echo "Error: install needs root
+> privileges" && false)
+> +       install -v -o 0 -g 0 -m 755 -d $(DESTDIR)$(PREFIX)/bin
+> $(DESTDIR)$(PREFIX)/share/DediProg
+> +       echo -n "install: " && install -v -o 0 -g 0 -m 0755 $(PROGRAM)
+> $(DESTDIR)$(PREFIX)/bin/$(PROGRAM)
+> +-      strip $(DESTDIR)$(PREFIX)/bin/$(PROGRAM)
+
+
+Can we turn this into a conditional make step which is skipped when the
+given make variable is set something like NOSTRIP=3D1 that way this patch c=
+an
+be upstreamed and we do not have to carry it here forever
 
 >
+> +       install -v -o 0 -g 0 -m 755 -d $(DESTDIR)$(PREFIX)/share/DediProg
+> +       echo -n "install: " && install -v -o 0 -g 0 -m 0644
+> ChipInfoDb.dedicfg $(DESTDIR)$(PREFIX)/share/DediProg/ChipInfoDb.dedicfg
+> +       install -v -o 0 -g 0 -m 755 -d $(DESTDIR)/etc/udev/rules.d
+> +--
+> +2.30.2
+> +
+> diff --git a/meta-oe/recipes-bsp/dediprog-flasher/
+> dediprog-flasher_1.14.20.bb b/meta-oe/recipes-bsp/dediprog-flasher/
+> dediprog-flasher_1.14.20.bb
+> new file mode 100644
+> index 000000000000..5d0e4e856f82
+> --- /dev/null
+> +++ b/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher_1.14.20.bb
+> @@ -0,0 +1,25 @@
+> +DESCRIPTION =3D "Linux software for Dediprog SF100 and SF600 SPI flash
+> programmers"
+> +SECTION =3D "devel"
+> +LICENSE =3D "GPL-2.0-or-later"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Da23a74b3f4caf9616230789d94217=
+acb"
+> +
+> +DEPENDS =3D "libusb"
+> +
+> +SRCREV =3D "e691f2d432144e3dbc82e9e0eea1ebaed4f3becf"
+> +SRC_URI =3D " \
+> +    git://
+> github.com/DediProgSW/SF100Linux.git;protocol=3Dhttps;branch=3Dmaster \
+> +    file://0001-add-support-for-cross-compilation.patch \
+> +    file://0002-Makefile-remove-stripping.patch \
+> +    "
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +do_install () {
+> +    oe_runmake DESTDIR=3D${D} PREFIX=3D/usr install
+
+
+Let=E2=80=99s use bitbake variable prefix instead of hardcoding /usr here
+
 >
+> +}
+> +
+> +FILES:${PN} +=3D " \
+> +    ${datadir}/DediProg \
+> +"
+> +
+> +inherit pkgconfig
+> --
+> 2.45.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#111417):
+> https://lists.openembedded.org/g/openembedded-devel/message/111417
+> Mute This Topic: https://lists.openembedded.org/mt/107436605/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 >
 
---000000000000837fd1061d9bc182
+--000000000000bcf066061da1eb5a
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Fri, Jul 19, 2024 at 7:10=E2=80=AFAM Christian Eggers &l=
-t;<a href=3D"mailto:ceggers@arri.de">ceggers@arri.de</a>&gt; wrote:<br></di=
-v><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:=
-1px #ccc solid;padding-left:1ex">Hi Khem,<br>
+<div dir=3D"auto">Thanks for the patch a few comments inline below=C2=A0</d=
+iv><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr=
+">On Fri, Jul 19, 2024 at 8:12=E2=80=AFAM Tymoteusz Burak via <a href=3D"ht=
+tp://lists.openembedded.org">lists.openembedded.org</a> &lt;tymoteusz.burak=
+=3D<a href=3D"mailto:3mdeb.com@lists.openembedded.org">3mdeb.com@lists.open=
+embedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" styl=
+e=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">---<br>
+=C2=A0...01-add-support-for-cross-compilation.patch | 21 +++++++++++++<br>
+=C2=A0.../0002-Makefile-remove-stripping.patch=C2=A0 =C2=A0 =C2=A0 | 30 +++=
+++++++++++++++++<br>
+=C2=A0.../<a href=3D"http://dediprog-flasher_1.14.20.bb" rel=3D"noreferrer"=
+ target=3D"_blank">dediprog-flasher_1.14.20.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 25 ++++++++++++++++<br>
+=C2=A03 files changed, 76 insertions(+)<br>
+=C2=A0create mode 100644 meta-oe/recipes-bsp/dediprog-flasher/dediprog-flas=
+her/0001-add-support-for-cross-compilation.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-bsp/dediprog-flasher/dediprog-flas=
+her/0002-Makefile-remove-stripping.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-bsp/dediprog-flasher/<a href=3D"ht=
+tp://dediprog-flasher_1.14.20.bb" rel=3D"noreferrer" target=3D"_blank">dedi=
+prog-flasher_1.14.20.bb</a><br>
 <br>
-sorry for the delay.<br>
+diff --git a/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher/0001-add=
+-support-for-cross-compilation.patch b/meta-oe/recipes-bsp/dediprog-flasher=
+/dediprog-flasher/0001-add-support-for-cross-compilation.patch<br>
+new file mode 100644<br>
+index 000000000000..fbc0f5a18e1d<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher/0001-add-suppor=
+t-for-cross-compilation.patch<br>
+@@ -0,0 +1,21 @@<br>
++Author: Maciej Pijanowski &lt;<a href=3D"mailto:maciej.pijanowski@3mdeb.co=
+m" target=3D"_blank">maciej.pijanowski@3mdeb.com</a>&gt;<br>
++Date:=C2=A0 =C2=A0Fri Jul 5 16:39:13 2024 +0200<br>
++Upstream-Status: Submitted [<a href=3D"https://github.com/DediProgSW/SF100=
+Linux/pull/86" rel=3D"noreferrer" target=3D"_blank">https://github.com/Dedi=
+ProgSW/SF100Linux/pull/86</a>]<br>
++<br>
++=C2=A0 =C2=A0 Makefile: allow overriding CC<br>
++=C2=A0 =C2=A0 <br>
++=C2=A0 =C2=A0 Signed-off-by: Maciej Pijanowski &lt;<a href=3D"mailto:macie=
+j.pijanowski@3mdeb.com" target=3D"_blank">maciej.pijanowski@3mdeb.com</a>&g=
+t;<br>
++<br>
++diff --git a/Makefile b/Makefile<br>
++index 139e5c0c3c3c..226303a6921e 100644<br>
++--- a/Makefile<br>
+++++ b/Makefile<br>
++@@ -12,7 +12,7 @@ endif<br>
++ endif<br>
++ <br>
++ PROGRAM =3D dpcmd<br>
++-CC=C2=A0 =C2=A0 =C2=A0 =3D gcc<br>
+++CC=C2=A0 =C2=A0 =C2=A0?=3D gcc<br>
++ PREFIX ?=3D /usr/local<br>
++ <br>
++ PKG_CONFIG ?=3D pkg-config<br>
+diff --git a/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher/0002-Mak=
+efile-remove-stripping.patch b/meta-oe/recipes-bsp/dediprog-flasher/dedipro=
+g-flasher/0002-Makefile-remove-stripping.patch<br>
+new file mode 100644<br>
+index 000000000000..5e7d7fc5fe89<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher/0002-Makefile-r=
+emove-stripping.patch<br>
+@@ -0,0 +1,30 @@<br>
++From 96d8849c3c482f21ad04f1dad45bf59f453e43d6 Mon Sep 17 00:00:00 2001<br>
++From: Tymoteusz Burak &lt;<a href=3D"mailto:tymoteusz.burak@3mdeb.com" tar=
+get=3D"_blank">tymoteusz.burak@3mdeb.com</a>&gt;<br>
++Date: Mon, 8 Jul 2024 10:58:45 +0000<br>
++Subject: [PATCH] Makefile: remove stripping<br>
++Upstream-Status: Inappropriate [oe specific]<br>
++<br>
++This patch modifies the install process to disable stripping of binaries b=
+y the<br>
++Makefile and allow the stripping to be handled by bitbake to integrate<br>
++it seamlessly into the bitbake workflow.<br>
++<br>
++ Signed-off-by: Tymoteusz Burak &lt;<a href=3D"mailto:tymoteusz.burak@3mde=
+b.com" target=3D"_blank">tymoteusz.burak@3mdeb.com</a>&gt;<br>
++---<br>
++ Makefile | 1 -<br>
++ 1 file changed, 1 deletion(-)<br>
++<br>
++diff --git a/Makefile b/Makefile<br>
++index 139e5c0..aa6eba5 100644<br>
++--- a/Makefile<br>
+++++ b/Makefile<br>
++@@ -58,7 +58,6 @@ install: $(PROGRAM)<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0[ $(shell id -u) -eq 0 ] || (echo &quot;Error: =
+install needs root privileges&quot; &amp;&amp; false)<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0install -v -o 0 -g 0 -m 755 -d $(DESTDIR)$(PREF=
+IX)/bin $(DESTDIR)$(PREFIX)/share/DediProg<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0echo -n &quot;install: &quot; &amp;&amp; instal=
+l -v -o 0 -g 0 -m 0755 $(PROGRAM) $(DESTDIR)$(PREFIX)/bin/$(PROGRAM)<br>
++-=C2=A0 =C2=A0 =C2=A0 strip $(DESTDIR)$(PREFIX)/bin/$(PROGRAM)</blockquote=
+><div dir=3D"auto"><br></div><div dir=3D"auto">Can we turn this into a cond=
+itional make step which is skipped when the given make variable is set some=
+thing like NOSTRIP=3D1 that way this patch can be upstreamed and we do not =
+have to carry it here forever=C2=A0</div><blockquote class=3D"gmail_quote" =
+style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex" dir=
+=3D"auto"><br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0install -v -o 0 -g 0 -m 755 -d $(DESTDIR)$(PREF=
+IX)/share/DediProg<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0echo -n &quot;install: &quot; &amp;&amp; instal=
+l -v -o 0 -g 0 -m 0644 ChipInfoDb.dedicfg $(DESTDIR)$(PREFIX)/share/DediPro=
+g/ChipInfoDb.dedicfg<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0install -v -o 0 -g 0 -m 755 -d $(DESTDIR)/etc/u=
+dev/rules.d<br>
++-- <br>
++2.30.2<br>
++<br>
+diff --git a/meta-oe/recipes-bsp/dediprog-flasher/<a href=3D"http://dedipro=
+g-flasher_1.14.20.bb" rel=3D"noreferrer" target=3D"_blank">dediprog-flasher=
+_1.14.20.bb</a> b/meta-oe/recipes-bsp/dediprog-flasher/<a href=3D"http://de=
+diprog-flasher_1.14.20.bb" rel=3D"noreferrer" target=3D"_blank">dediprog-fl=
+asher_1.14.20.bb</a><br>
+new file mode 100644<br>
+index 000000000000..5d0e4e856f82<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-bsp/dediprog-flasher/<a href=3D"http://dediprog-flash=
+er_1.14.20.bb" rel=3D"noreferrer" target=3D"_blank">dediprog-flasher_1.14.2=
+0.bb</a><br>
+@@ -0,0 +1,25 @@<br>
++DESCRIPTION =3D &quot;Linux software for Dediprog SF100 and SF600 SPI flas=
+h programmers&quot;<br>
++SECTION =3D &quot;devel&quot;<br>
++LICENSE =3D &quot;GPL-2.0-or-later&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Da23a74b3f4caf9616230789d94=
+217acb&quot;<br>
++<br>
++DEPENDS =3D &quot;libusb&quot;<br>
++<br>
++SRCREV =3D &quot;e691f2d432144e3dbc82e9e0eea1ebaed4f3becf&quot;<br>
++SRC_URI =3D &quot; \<br>
++=C2=A0 =C2=A0 git://<a href=3D"http://github.com/DediProgSW/SF100Linux.git=
+;protocol=3Dhttps;branch=3Dmaster" rel=3D"noreferrer" target=3D"_blank">git=
+hub.com/DediProgSW/SF100Linux.git;protocol=3Dhttps;branch=3Dmaster</a> \<br=
+>
++=C2=A0 =C2=A0 file://0001-add-support-for-cross-compilation.patch \<br>
++=C2=A0 =C2=A0 file://0002-Makefile-remove-stripping.patch \<br>
++=C2=A0 =C2=A0 &quot;<br>
++<br>
++S =3D &quot;${WORKDIR}/git&quot;<br>
++<br>
++do_install () {<br>
++=C2=A0 =C2=A0 oe_runmake DESTDIR=3D${D} PREFIX=3D/usr install</blockquote>=
+<div dir=3D"auto"><br></div><div dir=3D"auto">Let=E2=80=99s use bitbake var=
+iable prefix instead of hardcoding /usr here=C2=A0</div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padd=
+ing-left:1ex" dir=3D"auto"><br>
++}<br>
++<br>
++FILES:${PN} +=3D &quot; \<br>
++=C2=A0 =C2=A0 ${datadir}/DediProg \<br>
++&quot;<br>
++<br>
++inherit pkgconfig<br>
+-- <br>
+2.45.1<br>
 <br>
-On Tuesday, 16 July 2024, 17:42:33 CEST, Khem Raj wrote:<br>
-&gt; On Tue, Jul 16, 2024 at 7:57=E2=80=AFAM Christian Eggers &lt;<a href=
-=3D"mailto:ceggers@arri.de" target=3D"_blank">ceggers@arri.de</a>&gt; wrote=
-:<br>
-&gt; &gt;<br>
-&gt; &gt; Hi Khem,<br>
-&gt; &gt;<br>
-&gt; &gt;<br>
-&gt; &gt; On Tuesday, 16 July 2024, 15:45:54 CEST, Khem Raj wrote:<br>
-&gt; &gt; &gt; On Tue, Jul 16, 2024 at 1:08=E2=80=AFAM Christian Eggers &lt=
-;<a href=3D"mailto:ceggers@arri.de" target=3D"_blank">ceggers@arri.de</a>&g=
-t; wrote:<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; On Monday, 15 July 2024, 16:18:14 CEST, Khem Raj wrote:=
 <br>
-&gt; &gt; &gt; &gt; &gt; On Mon, Jul 15, 2024 at 5:18=E2=80=AFAM Christian =
-Eggers via<br>
-&gt; &gt; &gt; &gt; <a href=3D"http://lists.openembedded.org" rel=3D"norefe=
-rrer" target=3D"_blank">lists.openembedded.org</a><br>
-&gt; &gt; &gt; &gt; &gt; &lt;ceggers=3D<a href=3D"mailto:arri.de@lists.open=
-embedded.org" target=3D"_blank">arri.de@lists.openembedded.org</a>&gt; wrot=
-e:<br>
-&gt; &gt; &gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; &gt; &gt; Based on proposal send previously here:<br>
-&gt; &gt; &gt; &gt; &gt; &gt; <a href=3D"https://lists.yoctoproject.org/g/y=
-octo/topic/recipe_for/83279588" rel=3D"noreferrer" target=3D"_blank">https:=
-//lists.yoctoproject.org/g/yocto/topic/recipe_for/83279588</a><br>
-&gt; &gt; &gt; &gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; &gt; &gt; This recipe depends on meta-clang, so should =
-it be added to that layer?<br>
-&gt; &gt; &gt; &gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; &gt; &gt; Unfortunately the &#39;include-what-you-use&#=
-39; (iwyu) tool doesn&#39;t work yet.<br>
-&gt; &gt; &gt; &gt; &gt; &gt; Although I have installed nativesdk-clang (vi=
-a CLANGSDK =3D &quot;1&quot;) and<br>
-&gt; &gt; &gt; &gt; &gt; &gt; nativesdk-include-what-you-use packages, the =
-C++ standard headers are<br>
-&gt; &gt; &gt; &gt; &gt; &gt; not found:<br>
-&gt; &gt; &gt; &gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; &gt; &gt; include-what-you-use<br>
-&gt; &gt; &gt; &gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; --sysroot=3D/opt/poky/5.0.2/sysroots/cortexa7t2hf-neon-=
-vfpv4-poky-linux-musleabi<br>
-&gt; &gt; &gt; &gt; &gt; &gt; impl/Fdt.cpp<br>
-&gt; &gt; &gt; &gt; &gt; &gt; impl/Fdt.cpp:9:10: fatal error: &#39;cerrno&#=
-39; file not found<br>
-&gt; &gt; &gt; &gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A09 | #include &lt;cerrno&gt=
-;<br>
-&gt; &gt; &gt; &gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 ^~~~~~~~<br>
-&gt; &gt; &gt; &gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; &gt; &gt; As iwyu uses Clang and I have no experience w=
-orking with it, this is<br>
-&gt; &gt; &gt; &gt; &gt; &gt; probably only a beginner mistake. Can Clang u=
-se the C++ headers<br>
-&gt; &gt; &gt; &gt; provided<br>
-&gt; &gt; &gt; &gt; &gt; &gt; by libstdc++, or do I need to install further=
- packages?<br>
-&gt; &gt; &gt; &gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; &gt; It can but it seems your SDK install might be miss=
-ing any c++ runtime so<br>
-&gt; &gt; &gt; &gt; &gt; check a simple program that includes say &lt;iostr=
-eam&gt; header and try<br>
-&gt; &gt; &gt; &gt; &gt; compiling it<br>
-&gt; &gt; &gt; &gt; My SDK definitely contains std:: C++ headers for target=
- and nativesdk. But<br>
-&gt; &gt; &gt; &gt; the<br>
-&gt; &gt; &gt; &gt; libstdc++ C++ headers are installed in GCC specific loc=
-ations:<br>
-&gt; &gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; /opt/poky/5.0.2/sysroots/x86_64-pokysdk-linux/usr/inclu=
-de/c++/13.3.0/<br>
-&gt; &gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; /opt/poky/5.0.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-l=
-inux-musleabi/usr/include/c++/13.3.0<br>
-&gt; &gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; How can Clang know that the C++ headers are located in =
-the (GCC specific)<br>
-&gt; &gt; &gt; &gt; c++/13.3.0<br>
-&gt; &gt; &gt; &gt; sub directory?<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; Try adding -stdlib=3Dlibstdc++ on clang cmdline<br>
-&gt; &gt;<br>
-&gt; &gt; The following seems to work:<br>
-&gt; &gt; include-what-you-use \<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0-target arm-poky-linux-musleabi \<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0--sysroot /opt/poky/5.0.2/sysroots/cortexa7t2h=
-f-neon-vfpv4-poky-linux-musleabi \<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0-stdlib++-isystem /opt/poky/5.0.2/sysroots/cor=
-texa7t2hf-neon-vfpv4-poky-linux-musleabi/usr/include/c++/13.3.0/arm-poky-li=
-nux-musleabi \<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0-stdlib++-isystem /opt/poky/5.0.2/sysroots/cor=
-texa7t2hf-neon-vfpv4-poky-linux-musleabi/usr/include/c++/13.3.0=C2=A0 \<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0File.cpp<br>
-&gt; &gt;<br>
-&gt; &gt; Is there a way to make this a little bit handier? I would like to=
- avoid hard coding this into my CMake toolchain file.<br>
-&gt; &gt;<br>
-&gt; <br>
-&gt; Hmm so -stdlib=3Dlibstdc++ does not work ?<br>
-<br>
-I cannot reproduce what exactly went wrong, but now the following works fin=
-e:<br>
-<br>
-include-what-you-use -target arm-poky-linux-musleabi --sysroot /opt/poky/5.=
-0.2/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-musleabi test.cpp<br>
-include-what-you-use -target x86_64-pokysdk-linux --sysroot /opt/orbiter-ti=
-ny/5.0.2/sysroots/x86_64-pokysdk-linux test.cpp<br>
-<br>
-So neither &#39;-stdlib=3Dlibstdc++&#39; nor &#39;-stdlib++-isystem&#39; is=
- required anymore.<br>
-<br>
-I was also able to integrate this into a CMake project (built with the SDK)=
- by adding the following to my toolchain file:<br>
-<br>
-set(CMAKE_C_INCLUDE_WHAT_YOU_USE include-what-you-use;-target;arm-poky-linu=
-x-musleabi;--sysroot;$ENV{SDKTARGETSYSROOT})<br>
-set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE include-what-you-use;-target;arm-poky-li=
-nux-musleabi;--sysroot;$ENV{SDKTARGETSYSROOT})<br>
-<br>
-The IWYU tool states itself as &quot;experimental software&quot;, so the ou=
-tput<br>
-better should be interpreted by a human. I&#39;ve tested with an existing<b=
-r>
-code base and got many valuable hints for missing/superfluous<br>
-#include statements. The results are quite good for std:: C/C++<br>
-headers, but other libraries like Boost need further improvements.<br>
-<br>
-Can this recipe be added to meta-clang (due to it&#39;s dependencies to lib=
-clang/libllvm)?<br>
-<br>
-</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Yes send a pr to=
- meta-clang=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0 =
-0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><br>
-<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#111417): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/111417" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/111417</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/107436605/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/107436605/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 <br>
 </blockquote></div></div>
 
---000000000000837fd1061d9bc182--
+--000000000000bcf066061da1eb5a--
 
