@@ -1,126 +1,165 @@
-Return-Path: <ppjadhav456@gmail.com>
+Return-Path: <clopez@igalia.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 728FBC3DA49
-	for <webhook@archiver.kernel.org>; Thu, 25 Jul 2024 13:49:27 +0000 (UTC)
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
- by mx.groups.io with SMTP id smtpd.web10.36611.1721915360283169213
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 96A00C3DA5D
+	for <webhook@archiver.kernel.org>; Thu, 25 Jul 2024 13:54:17 +0000 (UTC)
+Received: from fanzine2.igalia.com (fanzine2.igalia.com [178.60.130.6])
+ by mx.groups.io with SMTP id smtpd.web11.36925.1721915648815506370
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Jul 2024 06:49:20 -0700
+ Thu, 25 Jul 2024 06:54:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=fBbA9mh4;
- spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: ppjadhav456@gmail.com)
-Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-7a1d48e0a5fso633456a12.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jul 2024 06:49:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1721915359; x=1722520159; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=1P6zyE6uBv/YsldKKpNxFt8CE6GQNiGjtE0ufmC6BbY=;
-        b=fBbA9mh4oP0cOydYvKZ3iMU3+7J2SOED2+zgS94rq+d9xmPrPDO5JdEnBJf2W66YHZ
-         06w73UTGcBNi0PsLFLQlt+vFOFAUsmuBilN6ZlKcMLmk5N7N7MT2FI8NSTtqjDNzDiBz
-         r0XLZjy2XLX81EtGcOWnFJT13jOIpHQuZtnxrZcWLkJFvUZ7DzrTCBcudqF20YbcUym7
-         JZTNJpBTdF+elMz1DW5b3DkYqRR+Dil2NaF2ZNUAMawHUmJrzD0/kzxDfIV9ZqJTGWxK
-         Un6R6B+9lxs6IZWpz6C1rjLB/fONgPkOX6C9Xuo1S3yz5r+jpQ/xf0AaIXNT39+3mDpd
-         HYdA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721915359; x=1722520159;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=1P6zyE6uBv/YsldKKpNxFt8CE6GQNiGjtE0ufmC6BbY=;
-        b=lKmfPmnZ9D3PpwMdKH2qQb1FNWQglu6qGiqoMlxQueStrsrido6eryKyhsS53YWPbd
-         +BOLgbPvvOlWij89VQAkWkEn1x7H1ErN3kGyrUgQ4uD9uMQbluV2Ab827T3bAic0IgC0
-         bK2RVgBsMMnxBhsqaYZKw6gyM19NVDdZWu1qt+T8P9MpnO6RfH3biUcTfpaEIEYQ+xZZ
-         XHAqUBUg1MweHtfk0AqDpYJQ9gkxpraxps6UvI0P1cXyaFjfYP0wLJJeUNmwuz2bsE7X
-         XphMKKXij2ItmUKDbzvnyUnRl67tU3p5y4OS8MR01Cs1jb+58bcwhFLakZrkjhZcXTHl
-         zccw==
-X-Gm-Message-State: AOJu0YxyxTnVxZ/OIXJGZVwWtPrM5tFeFAh/mJ9NA3w/auXIyye0ps2a
-	EnNaObxOb51FgWu4pKkxx2eLwEBrSbkBMqZTir5bxKUO+aqHWpmzMyiDuiRm
-X-Google-Smtp-Source: AGHT+IEuepMVuyPcI3rMZLUjCm7BXfDBsbMdR93RQ7UPJC47gRuLfdV0P/zF/jgFw8L0/lAcUT3s7A==
-X-Received: by 2002:a05:6a20:3950:b0:1c3:b61c:57ed with SMTP id adf61e73a8af0-1c472c5e7c9mr3986639637.35.1721915359326;
-        Thu, 25 Jul 2024 06:49:19 -0700 (PDT)
-Received: from localhost.localdomain ([43.231.237.183])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1fed7f1cc38sm14229525ad.200.2024.07.25.06.49.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Jul 2024 06:49:18 -0700 (PDT)
-From: Poonam Jadhav <ppjadhav456@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	poonam.jadhav@kpit.com
-Cc: ranjitsinh.rathod@kpit.com,
-	Poonam Jadhav <ppjadhav456@gmail.com>
-Subject: [meta-networking][scarthgap][PATCH] tcpreplay: Fix CVE-2023-4256
-Date: Thu, 25 Jul 2024 19:19:05 +0530
-Message-Id: <20240725134905.57341-1-ppjadhav456@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@igalia.com header.s=20170329 header.b=FextFZg3;
+ spf=pass (domain: igalia.com, ip: 178.60.130.6, mailfrom: clopez@igalia.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+	To:From:Sender:Reply-To:Cc:Content-Type:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=5rl2hJn8dRqTfjqVzh+uDAmJCwEW2VyL3d/qt2HIbW0=; b=FextFZg3au9TDPfonqmWECbeOy
+	/FSAFOLyiG0im0THCdBs4VCW+8+CCqLhjYPTN9NwG5s4pM2XLf2zJ0cTM0MvuVLUYTxv4phulrUwt
+	tST3ipQLd/5g8uuUmD6jXAb89741D7i9XpvPlHl1zeqcjJpREk+miw91S2W70uZCeAzAKZ7why0K6
+	FPSVlc21HeWIcoyeQhB0G5I44foVQNHTaxzf/8tludJqRbpsBS4tM7oFOaH3dXcxshX5OkU6+Y0Ks
+	kvlwK8+YLct0brObHaQ+9CI59oM0a0wh2SQtckBGCCAeoN4w8LER7Xzm7fEuZS3YlLSxBByoZ2U/6
+	NXJfkpyg==;
+Received: from 141.90.219.87.dynamic.jazztel.es ([87.219.90.141] helo=trinity.bot.igalia.com)
+	by fanzine2.igalia.com with esmtpsa 
+	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+	id 1sWyv0-001wLz-06
+	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Jul 2024 15:54:06 +0200
+From: Carlos Alberto Lopez Perez <clopez@igalia.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-gnome][PATCH] sysprof: upgrade 3.44.0 -> 3.48.0
+Date: Thu, 25 Jul 2024 15:54:05 +0200
+Message-Id: <20240725135405.303969-1-clopez@igalia.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 25 Jul 2024 13:49:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111435
+ <openembedded-devel@lists.openembedded.org>; Thu, 25 Jul 2024 13:54:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111436
 
-Add patch to fix tcpreplay CVE-2023-4256
-dlt_jnpr_ether_cleanup: check config before cleanup
-Links:
-https://github.com/appneta/tcpreplay/pull/851
-https://github.com/appneta/tcpreplay/issues/813#issuecomment-2245557093
+* 3.48.0 is currently the last stable version
+* The GUI now uses GTK4 instead of GTK3
+* A new CLI program sysprof-agent is now available
+* libsysprof can be built without polkit support
 
-Signed-off-by: Poonam Jadhav <poonam.jadhav@kpit.com>
+Signed-off-by: Carlos Alberto Lopez Perez <clopez@igalia.com>
 ---
- .../tcpreplay/tcpreplay/CVE-2023-4256.patch   | 27 +++++++++++++++++++
- .../tcpreplay/tcpreplay_4.4.4.bb              |  1 +
- 2 files changed, 28 insertions(+)
- create mode 100644 meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-4256.patch
+ ...libunwind-instead-of-libunwind-gener.patch | 12 +++----
+ ...oke-the-commands-to-update-the-icon-.patch | 32 +++++++++++++++++++
+ .../{sysprof_3.44.0.bb => sysprof_3.48.0.bb}  | 19 +++++++----
+ 3 files changed, 50 insertions(+), 13 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/sysprof/sysprof/0002-meson-Do-not-invoke-the-commands-to-update-the-icon-.patch
+ rename meta-gnome/recipes-gnome/sysprof/{sysprof_3.44.0.bb => sysprof_3.48.0.bb} (71%)
 
-diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-4256.patch b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-4256.patch
+diff --git a/meta-gnome/recipes-gnome/sysprof/sysprof/0001-meson-Check-for-libunwind-instead-of-libunwind-gener.patch b/meta-gnome/recipes-gnome/sysprof/sysprof/0001-meson-Check-for-libunwind-instead-of-libunwind-gener.patch
+index dc702a0e37..1082fe4ffc 100644
+--- a/meta-gnome/recipes-gnome/sysprof/sysprof/0001-meson-Check-for-libunwind-instead-of-libunwind-gener.patch
++++ b/meta-gnome/recipes-gnome/sysprof/sysprof/0001-meson-Check-for-libunwind-instead-of-libunwind-gener.patch
+@@ -13,15 +13,15 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/meson.build b/meson.build
+-index 2835782..0fdb39a 100644
++index 3d3d8b5..4a1963d 100644
+ --- a/meson.build
+ +++ b/meson.build
+-@@ -81,7 +81,7 @@ config_h.set10('HAVE_POLKIT_AGENT', polkit_agent_dep.found())
+- config_h.set10('HAVE_POLKIT', polkit_dep.found())
+- 
++@@ -96,7 +96,7 @@ config_h.set10('HAVE_POLKIT', polkit_dep.found())
+  if get_option('libunwind')
+--  libunwind_dep = dependency('libunwind-generic')
+-+  libunwind_dep = dependency('libunwind')
++   # Force libunwind usage if it's specified to avoid back compiles
++   # and backtrace() showing up in builds
++-  libunwind_dep = dependency('libunwind-generic', required: true)
+++  libunwind_dep = dependency('libunwind', required: true)
+    config_h.set('ENABLE_LIBUNWIND', libunwind_dep.found())
+    config_h.set('HAVE_UNW_SET_CACHE_SIZE', libunwind_dep.found() and cc.has_header_symbol('libunwind.h', 'unw_set_cache_size', dependencies: [libunwind_dep]))
+  endif
+diff --git a/meta-gnome/recipes-gnome/sysprof/sysprof/0002-meson-Do-not-invoke-the-commands-to-update-the-icon-.patch b/meta-gnome/recipes-gnome/sysprof/sysprof/0002-meson-Do-not-invoke-the-commands-to-update-the-icon-.patch
 new file mode 100644
-index 000000000..2e4eee025
+index 0000000000..998c20c657
 --- /dev/null
-+++ b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-4256.patch
-@@ -0,0 +1,27 @@
-+From 62bc10d4f1d2c9e2833ef2898fb0170e9300a9dd Mon Sep 17 00:00:00 2001
-+From: Marsman1996 <lqliuyuwei@outlook.com>
-+Date: Tue, 2 Apr 2024 17:29:21 +0800
-+Subject: [PATCH] dlt_jnpr_ether_cleanup: check config before cleanup
++++ b/meta-gnome/recipes-gnome/sysprof/sysprof/0002-meson-Do-not-invoke-the-commands-to-update-the-icon-.patch
+@@ -0,0 +1,32 @@
++From 9ad120283f4b61b97da67f18a95bb3b4f1e8a3b9 Mon Sep 17 00:00:00 2001
++From: Carlos Alberto Lopez Perez <clopez@igalia.com>
++Date: Wed, 24 Jul 2024 15:51:05 +0100
++Subject: [PATCH] meson: Do not invoke the commands to update the icon caches
++ when cross-building
 +
-+CVE: CVE-2023-4256
-+Upstream-Status: Backport [https://github.com/appneta/tcpreplay/pull/851]
-+Signed-off-by: Poonam Jadhav <poonam.jadhav@kpit.com>
++This does not have any useful efect when cross-building and it requires
++the cross-builder environment to have gtk4-native built in order to invoke
++gtk-update-icon-cache program.
++
++Upstream-Status: Pending
++Signed-off-by: Carlos Alberto Lopez Perez <clopez@igalia.com>
 +---
-+ src/tcpedit/plugins/dlt_jnpr_ether/jnpr_ether.c | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
++ meson.build | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/tcpedit/plugins/dlt_jnpr_ether/jnpr_ether.c b/src/tcpedit/plugins/dlt_jnpr_ether/jnpr_ether.c
-+index c53ec297..9642a2c2 100644
-+--- a/src/tcpedit/plugins/dlt_jnpr_ether/jnpr_ether.c
-++++ b/src/tcpedit/plugins/dlt_jnpr_ether/jnpr_ether.c
-+@@ -164,8 +164,9 @@ dlt_jnpr_ether_cleanup(tcpeditdlt_t *ctx)
-+         jnpr_ether_config_t *config;
++diff --git a/meson.build b/meson.build
++index 3d3d8b5..da622f1 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -250,7 +250,7 @@ configure_file(
++   configuration: config_h
++ )
 + 
-+         config = (jnpr_ether_config_t *)ctx->encoder->config;
-+-        if (config->subctx != NULL)
-++        if (config != NULL && config->subctx != NULL) {
-+             tcpedit_dlt_cleanup(config->subctx);
-++        }
-+         safe_free(plugin->config);
-+         plugin->config = NULL;
-+         plugin->config_size = 0;
-diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
-index 26de40a65..16cff2f0e 100644
---- a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
-+++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
-@@ -11,6 +11,7 @@ SRC_URI = "https://github.com/appneta/${BPN}/releases/download/v${PV}/${BP}.tar.
-     file://0001-libopts.m4-set-POSIX_SHELL-to-bin-sh.patch \
-     file://0001-configure.ac-unify-search-dirs-for-pcap-and-add-lib3.patch \
-     file://0001-configure.ac-do-not-run-conftest-in-case-of-cross-co.patch \
-+    file://CVE-2023-4256.patch \
++-if get_option('gtk') and gnome.found()
+++if get_option('gtk') and gnome.found() and not meson.is_cross_build()
++   gnome.post_install(
++       gtk_update_icon_cache: true,
++     update_desktop_database: true
++-- 
++2.39.2
++
+diff --git a/meta-gnome/recipes-gnome/sysprof/sysprof_3.44.0.bb b/meta-gnome/recipes-gnome/sysprof/sysprof_3.48.0.bb
+similarity index 71%
+rename from meta-gnome/recipes-gnome/sysprof/sysprof_3.44.0.bb
+rename to meta-gnome/recipes-gnome/sysprof/sysprof_3.48.0.bb
+index 3523bad3e2..bf4ee7a73e 100644
+--- a/meta-gnome/recipes-gnome/sysprof/sysprof_3.44.0.bb
++++ b/meta-gnome/recipes-gnome/sysprof/sysprof_3.48.0.bb
+@@ -14,19 +14,24 @@ DEPENDS += " \
+     json-glib \
  "
  
- SRC_URI[sha256sum] = "44f18fb6d3470ecaf77a51b901a119dae16da5be4d4140ffbb2785e37ad6d4bf"
+-SRC_URI += "file://0001-meson-Check-for-libunwind-instead-of-libunwind-gener.patch"
+-SRC_URI[archive.sha256sum] = "ab5d9f5b71973b3088d58a1bfdf1dc23c39a02f5fce4e5e9c73e034b178b005b"
++SRC_URI += "file://0001-meson-Check-for-libunwind-instead-of-libunwind-gener.patch \
++            file://0002-meson-Do-not-invoke-the-commands-to-update-the-icon-.patch "
++SRC_URI[archive.sha256sum] = "07d9081a66cf2fb52753f48ff2b85ada75c60ff1bc1af1bd14d8aeb627972168"
+ 
+-PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'sysprofd libsysprof', '', d)} \
++PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'sysprofd', '', d)} \
+                   ${@bb.utils.contains_any('DISTRO_FEATURES', '${GTK3DISTROFEATURES}', 'gtk', '', d)} \
+-                  libunwind"
++                  agent \
++                  libsysprof \
++                  libunwind \
++                  "
+ # nongnu libunwind needs porting to RV32
+ PACKAGECONFIG:remove:riscv32 = "libunwind"
+ 
+-PACKAGECONFIG[gtk] = "-Denable_gtk=true,-Denable_gtk=false,gtk+3 libdazzle"
+-PACKAGECONFIG[sysprofd] = "-Dwith_sysprofd=bundled,-Dwith_sysprofd=none,polkit"
+-PACKAGECONFIG[libsysprof] = "-Dlibsysprof=true,-Dlibsysprof=false,polkit"
++PACKAGECONFIG[gtk] = "-Dgtk=true,-Dgtk=false,gtk4 libadwaita"
++PACKAGECONFIG[sysprofd] = "-Dsysprofd=bundled,-Dsysprofd=none,polkit"
++PACKAGECONFIG[libsysprof] = "-Dlibsysprof=true,-Dlibsysprof=false,json-glib"
+ PACKAGECONFIG[libunwind] = "-Dlibunwind=true,-Dlibunwind=false,libunwind"
++PACKAGECONFIG[agent] = "-Dagent=true,-Dagent=false,"
+ 
+ EXTRA_OEMESON += "-Dsystemdunitdir=${systemd_unitdir}/system"
+ 
 -- 
-2.25.1
+2.39.2
 
 
