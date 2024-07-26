@@ -1,92 +1,139 @@
-Return-Path: <mikko.rapeli@linaro.org>
+Return-Path: <soumya.sambu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 26405C3DA49
-	for <webhook@archiver.kernel.org>; Fri, 26 Jul 2024 09:41:58 +0000 (UTC)
-Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
- by mx.groups.io with SMTP id smtpd.web11.57887.1721986914508397232
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D8076C3DA7F
+	for <webhook@archiver.kernel.org>; Fri, 26 Jul 2024 12:04:48 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.59899.1721995486180143361
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Jul 2024 02:41:54 -0700
+ Fri, 26 Jul 2024 05:04:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=d0MtBymB;
- spf=pass (domain: linaro.org, ip: 209.85.167.45, mailfrom: mikko.rapeli@linaro.org)
-Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-52f01613acbso1098008e87.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Jul 2024 02:41:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1721986913; x=1722591713; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=0R0CiXVjskXMubmg3l4Ku4oX+AzXXNj9SKjsHb1avwU=;
-        b=d0MtBymBIEkOs0XtvLy840Kht1VMk8YnX7ECToErb6zmOtfVzfmIC5G2Ke03Re22Wa
-         7nKkd3kT+rwdzXb9R7JaKmDSiBjTDXQu/MPR+AWOJzI2Y3LUu2AAGkuKL8vrzcB850ur
-         UsOnbQHOzsUdevN20pkuHbtLi4ED25eLvZufJ8PGk2q2raA4jSY/NZ66AY4Du5C87nSq
-         4czBw6MwUV/Fu0wuzyDoggcPuoBA6idKw/5QDXuWpesII+n42NhfvYaOIoa40CyNxh9n
-         yl3nd/gg8W3DSM091yOaljzAAW9ww5Jcbb0qI2HH0rSDRJSzGlMSmuod3uofcHzub8Tk
-         5jPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721986913; x=1722591713;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=0R0CiXVjskXMubmg3l4Ku4oX+AzXXNj9SKjsHb1avwU=;
-        b=XG2wvcTd+Yx1XwaXLcPJU19fxqI87jkc+v2l5ibT1rAxZ2fejEjUdpfSS4s3uW5rwd
-         0vngMQ7gl6IUIXWVlGe6l9MLqa/XSRTt8zAZnF+3Rg1uofVXMfV+tDYGIeEt/jV1Oi5g
-         d7vnKirGJTMm/tCcuOAS1FCe1+lWccIoe+s0OdUChsR9OkXGZ40rxSAtYVuhaYCpVAgj
-         dnhU0y8LnYOWUwKaerULMcgmDM6JJ5TSd/4LVvnpgh2K0aIQM6+9Nw9BVg9DPKVjVnZm
-         mP/Vremgm7T2pPFLZDTC6r50WyfupQ68kYYlT01llgvEFjFpaU1KE8hERUxPwgsoQ2yJ
-         cGXQ==
-X-Gm-Message-State: AOJu0YxK5k5VRPy8syrGenvXHrs3O0vVJln2zlJ/4U723cYEZuO4m++q
-	agGqC1wUJ4GNzbrecYZ0HLoyIDmprMFGOX0kO+VzKha7tyehuVEwWmbhUJ/51UPTFI4OgN7XQ8b
-	4
-X-Google-Smtp-Source: AGHT+IE44LTBIZ6ZR0dBUofmg/CtUcLvyHjjj1g/T1Ks/SzH2xPGkOg5OgpWKjGG79KloI7GCQSPlQ==
-X-Received: by 2002:a05:6512:ea1:b0:52f:c24b:175b with SMTP id 2adb3069b0e04-52fcf943855mr2167009e87.27.1721986912645;
-        Fri, 26 Jul 2024 02:41:52 -0700 (PDT)
-Received: from localhost.localdomain (drt4d6yyyyyyyyyyyyhlt-3.rev.dnainternet.fi. [2001:14ba:7430:3d00::193])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-52fd5c090fesm453733e87.131.2024.07.26.02.41.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 26 Jul 2024 02:41:52 -0700 (PDT)
-From: Mikko Rapeli <mikko.rapeli@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: Mikko Rapeli <mikko.rapeli@linaro.org>
-Subject: [meta-gnome][PATCH 2/3] gcab: ignore buildpaths error from sources
-Date: Fri, 26 Jul 2024 12:41:13 +0300
-Message-ID: <20240726094114.13263-2-mikko.rapeli@linaro.org>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240726094114.13263-1-mikko.rapeli@linaro.org>
-References: <20240726094114.13263-1-mikko.rapeli@linaro.org>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=793772edd4=soumya.sambu@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 46QAh1Rl016493
+	for <openembedded-devel@lists.openembedded.org>; Fri, 26 Jul 2024 12:04:45 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 40kcfe1jw1-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 26 Jul 2024 12:04:45 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Fri, 26 Jul 2024 05:04:42 -0700
+From: ssambu <soumya.sambu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][scarthgap][PATCH 1/1] python3-sqlparse: Fix CVE-2024-4340
+Date: Fri, 26 Jul 2024 12:04:24 +0000
+Message-ID: <20240726120424.1936108-1-soumya.sambu@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: 48cAtSHs1z8rS5f4c3esdCc_uQr6sFrJ
+X-Proofpoint-ORIG-GUID: 48cAtSHs1z8rS5f4c3esdCc_uQr6sFrJ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-07-26_10,2024-07-26_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 mlxscore=0
+ priorityscore=1501 clxscore=1011 suspectscore=0 phishscore=0
+ impostorscore=0 adultscore=0 mlxlogscore=888 spamscore=0
+ lowpriorityscore=0 malwarescore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.21.0-2407110000 definitions=main-2407260081
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 26 Jul 2024 09:41:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111439
+ <openembedded-devel@lists.openembedded.org>; Fri, 26 Jul 2024 12:04:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111441
 
-gcab-src has some meson generated files which embed
-absolute paths from build environment. meson seems
-ot do this on purpose to fix other issues.
+From: Soumya Sambu <soumya.sambu@windriver.com>
 
-Ignored those issues for now.
+Passing a heavily nested list to sqlparse.parse() leads to a Denial
+of Service due to RecursionError.
 
-Signed-off-by: Mikko Rapeli <mikko.rapeli@linaro.org>
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2024-4340
+
+Upstream-patch:
+https://github.com/andialbrecht/sqlparse/commit/b4a39d9850969b4e1d6940d32094ee0b42a2cf03
+
+Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
 ---
- meta-oe/recipes-gnome/gcab/gcab_1.6.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../python3-sqlparse/CVE-2024-4340.patch      | 48 +++++++++++++++++++
+ .../python/python3-sqlparse_0.4.4.bb          |  1 +
+ 2 files changed, 49 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-sqlparse/CVE-2024-4340.patch
 
-diff --git a/meta-oe/recipes-gnome/gcab/gcab_1.6.bb b/meta-oe/recipes-gnome/gcab/gcab_1.6.bb
-index 4278fc945..49c64f0ba 100644
---- a/meta-oe/recipes-gnome/gcab/gcab_1.6.bb
-+++ b/meta-oe/recipes-gnome/gcab/gcab_1.6.bb
-@@ -22,3 +22,6 @@ PACKAGECONFIG[nls] = "-Dnls=true,-Dnls=false"
- PACKAGECONFIG[tests] = "-Dtests=true -Dinstalled_tests=true,-Dtests=false -Dinstalled_tests=false"
- 
- BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python3-sqlparse/CVE-2024-4340.patch b/meta-python/recipes-devtools/python/python3-sqlparse/CVE-2024-4340.patch
+new file mode 100644
+index 000000000..670904071
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-sqlparse/CVE-2024-4340.patch
+@@ -0,0 +1,48 @@
++From b4a39d9850969b4e1d6940d32094ee0b42a2cf03 Mon Sep 17 00:00:00 2001
++From: Andi Albrecht <albrecht.andi@gmail.com>
++Date: Sat, 13 Apr 2024 13:59:00 +0200
++Subject: [PATCH] Raise SQLParseError instead of RecursionError.
 +
-+# meson embeds absolute paths to generated files on purpose
-+INSANE_SKIP:gcab-src += "buildpaths"
++CVE: CVE-2024-4340
++
++Upstream-Status: Backport [https://github.com/andialbrecht/sqlparse/commit/b4a39d9850969b4e1d6940d32094ee0b42a2cf03]
++
++Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
++---
++ sqlparse/sql.py | 14 +++++++++-----
++ 1 file changed, 9 insertions(+), 5 deletions(-)
++
++diff --git a/sqlparse/sql.py b/sqlparse/sql.py
++index 1ccfbdb..2090621 100644
++--- a/sqlparse/sql.py
+++++ b/sqlparse/sql.py
++@@ -10,6 +10,7 @@
++ import re
++
++ from sqlparse import tokens as T
+++from sqlparse.exceptions import SQLParseError
++ from sqlparse.utils import imt, remove_quotes
++
++
++@@ -209,11 +210,14 @@ class TokenList(Token):
++
++         This method is recursively called for all child tokens.
++         """
++-        for token in self.tokens:
++-            if token.is_group:
++-                yield from token.flatten()
++-            else:
++-                yield token
+++        try:
+++            for token in self.tokens:
+++                if token.is_group:
+++                    yield from token.flatten()
+++                else:
+++                    yield token
+++        except RecursionError as err:
+++            raise SQLParseError('Maximum recursion depth exceeded') from err
++
++     def get_sublists(self):
++         for token in self.tokens:
++--
++2.25.1
+diff --git a/meta-python/recipes-devtools/python/python3-sqlparse_0.4.4.bb b/meta-python/recipes-devtools/python/python3-sqlparse_0.4.4.bb
+index c04971ee8..fa633026c 100644
+--- a/meta-python/recipes-devtools/python/python3-sqlparse_0.4.4.bb
++++ b/meta-python/recipes-devtools/python/python3-sqlparse_0.4.4.bb
+@@ -5,6 +5,7 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=2b136f573f5386001ea3b7b9016222fc"
+ 
+ SRC_URI += "file://0001-sqlparse-change-shebang-to-python3.patch \
++            file://CVE-2024-4340.patch \
+             file://run-ptest \
+ 	    "
+ 
 -- 
-2.34.1
+2.25.1
 
 
