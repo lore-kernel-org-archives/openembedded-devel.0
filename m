@@ -1,83 +1,92 @@
-Return-Path: <quaresma.jose@gmail.com>
+Return-Path: <tim.orling@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AFB8DC3DA49
-	for <webhook@archiver.kernel.org>; Fri, 26 Jul 2024 16:45:20 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.web11.65916.1722012313870068487
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97159C3DA4A
+	for <webhook@archiver.kernel.org>; Sat, 27 Jul 2024 15:38:43 +0000 (UTC)
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
+ by mx.groups.io with SMTP id smtpd.web11.18717.1722094716388114680
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Jul 2024 09:45:14 -0700
+ Sat, 27 Jul 2024 08:38:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MaMwaafG;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: quaresma.jose@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4266b1f1b21so17638835e9.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Jul 2024 09:45:13 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=JiJD3d/j;
+ spf=pass (domain: konsulko.com, ip: 209.85.214.182, mailfrom: tim.orling@konsulko.com)
+Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-1fc569440e1so14966035ad.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 27 Jul 2024 08:38:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1722012312; x=1722617112; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1722094715; x=1722699515; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=tCz5Lt5negpohH0VzzkUEEHIaDdqABbrh58BX/4vqe4=;
-        b=MaMwaafGTfmMd9G6bq7A2wLQ61U+wvAgarhzwU/9yjy8GVx6GHRTUdNhmX9uolvgMq
-         tMJ3hH2kTuNNC1sY5hW6ziBOA2eCR2D5p/lXSa2ZaXAGBQikXTilFr53+d473+CSMq8+
-         eNIfcpDmavmmNKnoL9s6xR68LhXVBbwgZo5oeEX3iugditbjHX+EGZAw9aDyGZMLhxKb
-         sZIbDJQL49+Qmn+mAtpzSb+Ytx5DMHohyOAQ21lZMX4uF3yh0dv1cfG4TFE7ZZU5n9kS
-         bhn2lRQG08HgQEzCuvQ6ixlVuTq7tGamTDIuS7s4vibh4pHbQ/X+kaBcuIXA+N1csTcq
-         mLvg==
+        bh=gCLaQMaJWjzgTss4fzOacxxfCpF9db3bknUK9pgHTp0=;
+        b=JiJD3d/jqiPUIPb2O/9xO1dTMe6S/RL8sxp7hhIpOh4u7WAfO5g6Mn7XDDyBN+dXE3
+         bpmkJPgo1pssXoOY1tW90rXNzN0fthpxOjEl3tDmjsofNPOHSKPDTK5j9HbCLS/yqOl1
+         6qCco6G+saSHVgR+/LMBlzG6/yvZtFI+APNJY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722012312; x=1722617112;
+        d=1e100.net; s=20230601; t=1722094715; x=1722699515;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=tCz5Lt5negpohH0VzzkUEEHIaDdqABbrh58BX/4vqe4=;
-        b=uOi/fmJB4igNIAgxGh/kQRlipyXvIJv3biL6v+gqM+J9I75g7Bnh2+7uRP69gbEfp1
-         Ao3S1K55S7OtvuaTt2hcA2Wgd1ZHoRynwyEv5HAfNJ5wOvoNZQpZJraGoTsjepF4lf5C
-         eaqRdVB7UMPFoeI33Vscm/Jp+WyNXamihIq876PFg/TOlsB52OgKpj40hAdd5Dx5uNAH
-         a6xx7LB0SdQSoqw27j7FnF+D1XaM5J5EmPbKmumrWhlb4+5rKe9QGSwgLtofQzCg9voL
-         9F8A4pGcCDKGXQvPL2VoxhXBVu+Cg3kV5Ou0Azk5zUmU9vVjnKI3SfrV8bRaM97Kwx5n
-         mK1w==
-X-Gm-Message-State: AOJu0YwOJZNTVYru52n5mLcTGE9ISTGOv4i7apKU6ZJvgHkDPZfHA5bn
-	NdMfrZ2LP5djY3XI/cvtYpTWkAV5+MF5dcrKZKXS+v+4SIGkRxfs1eRPAQ==
-X-Google-Smtp-Source: AGHT+IFDWQeNQhESaihdpOZP+JswvdfhYfvZMO2VKqdCtrjYPVfxf9ZAwfjRI1YrK2/vwTQQEgbDAw==
-X-Received: by 2002:a05:600c:46c6:b0:426:525d:ce3d with SMTP id 5b1f17b1804b1-42811e42195mr1126365e9.33.1722012311794;
-        Fri, 26 Jul 2024 09:45:11 -0700 (PDT)
-Received: from toster.lan (bl15-243-112.dsl.telepac.pt. [188.80.243.112])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-42808473208sm68666195e9.42.2024.07.26.09.45.11
+        bh=gCLaQMaJWjzgTss4fzOacxxfCpF9db3bknUK9pgHTp0=;
+        b=A8YqbWrAsLKKhvZcsI2YeFwu9CNDWgjkymMzfIV3wx1gGqcJ473jsBwDNWO4Lvl1QB
+         bkPbYI3619AwlzwotUDQoXqVRKFxgrL0lV6KprFWgPYYT3dvs/aRaGpS2Ekr5AaDoivL
+         xI0L1J4e9FvGIDRXnVtUFMmLiQankHp4PNsXabGUpF+3Yjzi/ZLF/YLtNfncUSuge+3m
+         vy9ICUHFlDm/f2DvvmpACdH9fSttnm291XWWeVXSa6G7ittFnko7BR/RRjzX/hVl/uhD
+         1RUMIWC3FW3zmNU+X5bq3PV1wc7jEmQ92U6iEj31Q6H17OjXrTQ2Vdwn/73yyW0tO6e4
+         aa4w==
+X-Gm-Message-State: AOJu0YwNL0HV/jTxe1iONvD3Dwoz6mEWjw+VLDP+5VRhM7wh3GDZKNU9
+	tr0rSxYCPZM9J8Hq4l5PxddUo2xb9AzD9AQP872a3tZX1lKS9CuM6ElzWp0QZUSiLXPfXD86Nz8
+	VxKc=
+X-Google-Smtp-Source: AGHT+IHCwo+ldO7k9HjdIl1En/hipcAITMi+qm3U2ilp2U2fO45pYClaTY3YiKtVt9Q5fKZobJwiwA==
+X-Received: by 2002:a17:902:e885:b0:1fb:9b91:d7c9 with SMTP id d9443c01a7336-1ff047e4399mr31554225ad.4.1722094715270;
+        Sat, 27 Jul 2024 08:38:35 -0700 (PDT)
+Received: from localhost (c-98-232-159-17.hsd1.or.comcast.net. [98.232.159.17])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1fed7f671e8sm52107355ad.228.2024.07.27.08.38.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 26 Jul 2024 09:45:11 -0700 (PDT)
-From: Jose Quaresma <quaresma.jose@gmail.com>
-X-Google-Original-From: Jose Quaresma <jose.quaresma@foundries.io>
+        Sat, 27 Jul 2024 08:38:34 -0700 (PDT)
+From: tim.orling@konsulko.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Jose Quaresma <jose.quaresma@foundries.io>
-Subject: [oe][meta-oe][PATCH] composefs: the srcrev hash was the release tag
-Date: Fri, 26 Jul 2024 17:45:07 +0100
-Message-ID: <20240726164507.1731632-1-jose.quaresma@foundries.io>
+Cc: Tim Orling <tim.orling@konsulko.com>
+Subject: [meta-python][PATCH] python3-configobj: switch to PEP-517 build backend
+Date: Sat, 27 Jul 2024 08:38:11 -0700
+Message-ID: <20240727153810.502757-2-tim.orling@konsulko.com>
 X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 26 Jul 2024 16:45:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111444
+ <openembedded-devel@lists.openembedded.org>; Sat, 27 Jul 2024 15:38:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111445
 
-Signed-off-by: Jose Quaresma <jose.quaresma@foundries.io>
+From: Tim Orling <tim.orling@konsulko.com>
+
+The project has a proper pyproject.toml which declares the
+setuptools.build.meta PEP-517 backend.
+
+Fixes:
+WARNING: python3-configobj-5.0.8-r0 do_check_backend:
+         QA Issue: inherits setuptools3
+         but has pyproject.toml with setuptools.build_meta,
+		 use the correct class [pep517-backend]
+
+Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ---
- meta-oe/recipes-support/composefs/composefs_1.0.4.bb | 1 -
- 1 file changed, 1 deletion(-)
+ meta-python/recipes-devtools/python/python3-configobj_5.0.8.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/composefs/composefs_1.0.4.bb b/meta-oe/recipes-support/composefs/composefs_1.0.4.bb
-index aaf33b40e..7b934e4ea 100644
---- a/meta-oe/recipes-support/composefs/composefs_1.0.4.bb
-+++ b/meta-oe/recipes-support/composefs/composefs_1.0.4.bb
-@@ -13,7 +13,6 @@ LIC_FILES_CHKSUM = "\
-     file://LICENSE.Apache-2.0;md5=3b83ef96387f14655fc854ddc3c6bd57 \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-configobj_5.0.8.bb b/meta-python/recipes-devtools/python/python3-configobj_5.0.8.bb
+index 8dc706fdfd..96e579c78d 100644
+--- a/meta-python/recipes-devtools/python/python3-configobj_5.0.8.bb
++++ b/meta-python/recipes-devtools/python/python3-configobj_5.0.8.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3d6f99b84d9a94610c62e48fa2e59e72"
+ PYPI_PACKAGE = "configobj"
+ SRC_URI[sha256sum] = "6f704434a07dc4f4dc7c9a745172c1cad449feb548febd9f7fe362629c627a97"
  
--PV .= "+git${SRCPV}"
- SRCREV = "7623e4dc89f62ada5724d4e41d0a16d2671312f5"
- SRC_URI = "git://github.com/containers/composefs.git;protocol=https;branch=main"
+-inherit pypi setuptools3
++inherit pypi python_setuptools_build_meta
  
+ RDEPENDS:${PN} += " \
+     python3-pprint \
 -- 
 2.45.2
 
