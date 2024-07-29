@@ -1,94 +1,73 @@
-Return-Path: <dev@g0hl1n.net>
+Return-Path: <csokas.bence@prolan.hu>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ED51CC3DA61
-	for <webhook@archiver.kernel.org>; Mon, 29 Jul 2024 11:07:15 +0000 (UTC)
-Received: from out-178.mta0.migadu.com (out-178.mta0.migadu.com [91.218.175.178])
- by mx.groups.io with SMTP id smtpd.web11.53825.1722251226495969902
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D750C3DA4A
+	for <webhook@archiver.kernel.org>; Mon, 29 Jul 2024 11:54:36 +0000 (UTC)
+Received: from fw2.prolan.hu (fw2.prolan.hu [193.68.50.107])
+ by mx.groups.io with SMTP id smtpd.web11.54476.1722254074274129060
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Jul 2024 04:07:07 -0700
+ Mon, 29 Jul 2024 04:54:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@g0hl1n.net header.s=key1 header.b=tMQ3JDCU;
- spf=pass (domain: g0hl1n.net, ip: 91.218.175.178, mailfrom: dev@g0hl1n.net)
-Date: Mon, 29 Jul 2024 13:07:00 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=g0hl1n.net; s=key1;
-	t=1722251224;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=dB4/0A3ISV02Nd+dPkzVLxjChqeaCmP1EQ2+jF94ucg=;
-	b=tMQ3JDCUNssCXU7c7pNofcmKQfOdPuIAvtC4ovhVnR+SP0qae4naf0r+FPmKXtWH8gYmT2
-	0wBuD34HgkXGm5QlrTI8Bb8rpnghwl77pidgmgRKRo7VOFxmgCV4ZhTAwYB0wscV1WG5RY
-	cAaMR6p5wjIa3ShkaSCoKmOQUgQlxQQ=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Richard Leitner <dev@g0hl1n.net>
-To: Tim Orling <tim.orling@konsulko.com>
-Cc: akuster808 <akuster808@gmail.com>, 
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-python][scarthgap][PATCH] python3-pydantic-core:
- upgrade 2.16.3 -> 2.18.1
-Message-ID: <deurtntaw6lr4jmfgn5ugtzrgb33ql5hndroqafp6q5o74zefd@3gc5rd42xlmh>
-References: <20240706180810.1707296-1-dev@g0hl1n.net>
- <26a61314-0aa1-4e5c-ac71-d0ece3591362@gmail.com>
- <w24ywr4aiiqxecb46semqmbw4ulstn4rz25mwbiurkwh4xzxva@oyphvy5wc7nj>
- <CAOyo-87-wojy-WxNs98qWp9kev2Dpui-Nk8ffLzwWQbmsvpvjQ@mail.gmail.com>
- <CAOyo-86Zds3bvy0GvmiBEDRignUn2Z509SkD7Lw1xZ-0Ky30bg@mail.gmail.com>
- <lhsjaroyl6ivizrhqd6dmwtibvcgjynf756u5o6turi7aqxzb6@cdl46qnvnn4t>
- <CAOyo-87sBZUxfGGzK2zio2kBkRCZYrExjYcGNSnNZyRMf3EnaQ@mail.gmail.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@prolan.hu header.s=mail header.b=Ze1xozKT;
+ spf=pass (domain: prolan.hu, ip: 193.68.50.107, mailfrom: csokas.bence@prolan.hu)
+Received: from proxmox-mailgw.intranet.prolan.hu (localhost.localdomain [127.0.0.1])
+	by proxmox-mailgw.intranet.prolan.hu (Proxmox) with ESMTP id E6E43A09FE
+	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Jul 2024 13:54:30 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prolan.hu; h=cc
+	:cc:content-transfer-encoding:content-type:content-type:date
+	:from:from:message-id:mime-version:reply-to:subject:subject:to
+	:to; s=mail; bh=VeEWNu7+QtfiyhsvpgNS0AvIeg3WKwLwKvM6Bz0CeSk=; b=
+	Ze1xozKTqGkWMojdde6bzQh4X9yAiU7JeZ5hdFVp0niaPZRCpqQ8ZekkXkV+M19y
+	4wYpp4mKmqdOSq3jZBDDXaCY6RAu5PBwYWSBiE3olfSsODCM11GV2jxoGR2h6QZz
+	89He9JgSghKIE62Rd1cUcgDQhPRGwtI0jV0CtUSYrgkWhpbhGxOI9ECGuo5Ngkpf
+	PQuCgcIB/b3hmnjVHfSBtm5sTD35nmk+CumeE38OzY/UvmsgXTTTpFdH/uI/kkfM
+	CwSJcjXzdEk74+P2+9xB0te3GgrM4jD51Z7pByUSG1WkmG7m6D/hA5f8XKaBIaky
+	WDPkaXdkxVKJlucnRXD2VKc6XGuvmMO5XGu3T3a9fmRwOpHQ1nY22dmMVwVbpjlJ
+	TkplvY20/kgXcr2UGKv8JA+mbf2Vb2cYoYGBv34cKwiizN9twk47srtvQLIL0H55
+	JVaCdgQ1982nguDkxapBM8HFTgZq5Hq/4nQUsixudqCy2YX2/kzChzVEoqsC4C8H
+	IyV2PcLQc7JyeRcvPEwiL3dIaQSrPAvToqqHC4RXaxK3dpKgqm0Ari+Aj50O3W+w
+	hdoPaYtzdxwHUMxG77ckkIxwc/nCgwmOSrQupvkVqqApHiGnJmv/acfBjljcjW3M
+	pmhjvVZPYYfDqI1Abj1PHEvXhEJ/47oR16kMuvdQhC0=
+From: =?UTF-8?q?Cs=C3=B3k=C3=A1s=2C=20Bence?= <csokas.bence@prolan.hu>
+To: <openembedded-devel@lists.openembedded.org>
+CC: =?UTF-8?q?Cs=C3=B3k=C3=A1s=2C=20Bence?= <csokas.bence@prolan.hu>
+Subject: [meta-oe][kirkstone][PATCH 0/2] Fix PHP-FPM
+Date: Mon, 29 Jul 2024 13:51:20 +0200
+Message-ID: <20240729115120.1375412-1-csokas.bence@prolan.hu>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <CAOyo-87sBZUxfGGzK2zio2kBkRCZYrExjYcGNSnNZyRMf3EnaQ@mail.gmail.com>
-X-Migadu-Flow: FLOW_OUT
+Content-Type: text/plain; charset="UTF-8"
+X-ESET-AS: R=OK;S=0;OP=CALC;TIME=1722254070;VERSION=7975;MC=1811511808;ID=216796;TRN=0;CRV=0;IPC=;SP=0;SIPS=0;PI=3;F=0
+X-ESET-Antispam: OK
+X-EsetResult: clean, is OK
+X-EsetId: 37303A2980D94854667467
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 29 Jul 2024 11:07:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111453
+ <openembedded-devel@lists.openembedded.org>; Mon, 29 Jul 2024 11:54:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111454
 
-On Thu, Jul 18, 2024 at 08:27:50AM GMT, Tim Orling wrote:
-> On Thu, Jul 18, 2024 at 7:49=E2=80=AFAM Richard Leitner <dev@g0hl1n.net=
-> wrote:
-> > On Wed, Jul 10, 2024 at 12:10:01PM GMT, Tim Orling wrote:
-> > > On Wed, Jul 10, 2024 at 8:14=E2=80=AFAM Tim Orling <tim.orling@kons=
-ulko.com>
-> > wrote:
-> > > > On Tue, Jul 9, 2024 at 5:54=E2=80=AFAM Richard Leitner <dev@g0hl1=
-n.net> wrote:
-> > > >> On Tue, Jul 09, 2024 at 08:12:06AM GMT, akuster808 wrote:
-> > > >> > Hello Richard,
-> > > >> >
-> > > >> > On 7/6/24 2:08 PM, Richard Leitner via lists.openembedded.org
-> > wrote:
-> > > >> > > The currently available python-3-pydantic v2.7.0 requires
-> > > >> > > python3-pydantic-core to be updated to v2.18.1.
-> > <snip>
-> > Do you got failing ptests for scarthgap (with this patch applied) too=
-?
-> > Or did you just tested master?
-> >
->=20
-> I won't try any stable branches until I get it fully functional on mast=
-er.
-> The challenge is time and the fact that Rust is injecting TMPDIR into t=
-he
-> .so
-> Given that master now makes [build-paths] QA WARNING an ERROR, we need =
-to
-> fix this.
+PHP-FPM is broken in kirkstone when using systemd.
+The following two commits had to be cherry-picked:
 
-True. So will you follow up on the pydantic/core update for
-master as soon as there is a fix for this issue?
+Upstream-Commit: e0035d6e51b2
+Upstream-Commit: 4cefe0196f7a
+Related: #822 [on GitHub]
 
-How to proceed with scarthgap? As we are definitely shipping
-non-compatible versions of pydantic/pydantic-core currently.
+Emil Kronborg (1):
+  php-fpm: fix systemd
 
->=20
-> I suspect, but have not proven, that it was already a problem with the
-> original python3-pydantic-core before any of these upgrades.
+Wang Mingyu (1):
+  php: Fix install conflict when enable multilib.
 
-...
+ .../recipes-devtools/php/php/php-fpm.service  | 57 +++++++++++++++++--
+ meta-oe/recipes-devtools/php/php_8.1.29.bb    | 25 +++++---
+ 2 files changed, 70 insertions(+), 12 deletions(-)
+
+--=20
+2.34.1
+
+
 
