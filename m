@@ -1,166 +1,223 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E35E8C3DA64
-	for <webhook@archiver.kernel.org>; Sun, 28 Jul 2024 16:38:27 +0000 (UTC)
-Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
- by mx.groups.io with SMTP id smtpd.web10.37728.1722184706990421820
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D985AC3DA61
+	for <webhook@archiver.kernel.org>; Mon, 29 Jul 2024 10:49:25 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.53618.1722250158753583965
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Jul 2024 09:38:27 -0700
+ Mon, 29 Jul 2024 03:49:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=H8GwJjqu;
- spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-67b709024bfso11000987b3.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Jul 2024 09:38:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1722184706; x=1722789506; darn=lists.openembedded.org;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=FC87plAp/S732/Xg7sSyRLdvcYj5IXBOtzoMjctIZdQ=;
-        b=H8GwJjquxPTmjh3I+NpawxRilyVfDSEZp4zCyFnX9ntNQirCvcZLWDz+LRzzs5zYQR
-         Fe9TqzQQEWeUDajD6o/r9fMeAQypY5apDWkoEidnix9OLzXuRncqQsfiJBR/IqSblNXA
-         Q0o5BN8oZLRaxVxmTFiu8JG1awVT+5tqqJPvuI97hYx9qh4jmagtovPdU1w3DLThGAmQ
-         4+jj+zSD0AwpoN+sTDL5EdAUwnCCZob47vBWrlro0xLJojiDvaB/uPCp2YcvtasLeOHM
-         ENaYOhenL19KthvXz8U5gZm9yrxhnICr2J38j4kdatVOypF2WGzgnXWxd1u91TuShDdG
-         5Xyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722184706; x=1722789506;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=FC87plAp/S732/Xg7sSyRLdvcYj5IXBOtzoMjctIZdQ=;
-        b=o/IZ/1ahIAsf8eorNk3hmAEg0U5UrsgIbG+aOMbrbw+qBj7Fvi1lmLm+tR3TU2pyfS
-         N5jVfXD53nO6NmlPp+DhvAvZGQiR/iKes5xdX/ahM6u3zQqZSbRbDy7LC6dhb0M03C9g
-         cAVlVFqCzLi8IqgvYBTFJtfPF/S2tNl2nAmxGifJICyQlkNRqsJZGTjQCBuWP9QtufDD
-         FqMOMtcNf8w5ltQrpDsIovjKl2Cp219OADAnr8qRPfwKm9CI9mmzAQat+V75ZfUPbstk
-         EJE6IaG32OeqsEc/X5DXRbO3a1M8c66qC082JvWTzmnP+BltC+OPa+39Vat9kOdPK+nx
-         jJ9Q==
-X-Forwarded-Encrypted: i=1; AJvYcCWikPLpz+gt3zuMv+uewdmDENYaZXFvhGFUUscIFX03oEPqxA/xMjU0REvfv6xIP5Gp12EN0Q40UPv+9Zjfz3Uaz0r39QVuh9gPJYC+JXF3L7GWFcaQaaGtyQ==
-X-Gm-Message-State: AOJu0YxQwvYEanPyzvimLyREjSQYggbvGkFgvZPMDnaaGdZ63ERTEk/j
-	nhpMP9st/V1+beYeJCqBMC/hh7TC8L3BsVKKdQxBXccOuJr+ZCVp
-X-Google-Smtp-Source: AGHT+IEIAsIA6IHZbunzY8qk7lQjEj7XWya7vFXvelHvKghI0OJMRM1I1Ua1hha1D18642H5D4lySQ==
-X-Received: by 2002:a81:9145:0:b0:660:56fb:7f00 with SMTP id 00721157ae682-67a0adc957bmr43952617b3.46.1722184705947;
-        Sun, 28 Jul 2024 09:38:25 -0700 (PDT)
-Received: from ?IPV6:2600:1700:45dd:7000:30bb:405a:cac7:4461? ([2600:1700:45dd:7000:30bb:405a:cac7:4461])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6756bab4d1csm16930067b3.125.2024.07.28.09.38.25
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 28 Jul 2024 09:38:25 -0700 (PDT)
-Message-ID: <a372049d-8ded-4723-ad78-74568c42e845@gmail.com>
-Date: Sun, 28 Jul 2024 12:38:25 -0400
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=89408abb87=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 46T5sE92005770
+	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Jul 2024 10:49:18 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 40mp3x9nx6-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Jul 2024 10:49:17 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Mon, 29 Jul 2024 03:49:15 -0700
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][scarthgap][PATCH 1/1] graphviz: fix CVE-2023-46045
+Date: Mon, 29 Jul 2024 10:48:56 +0000
+Message-ID: <20240729104856.1955362-1-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: scarthgap merge request: July 28th
-Autocrypt: addr=akuster808@gmail.com; keydata=
- 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
- ApZ86eOP
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: xTLHrXmPcGRRG484qPe-ZikJxw0eY4Q1
+X-Proofpoint-ORIG-GUID: xTLHrXmPcGRRG484qPe-ZikJxw0eY4Q1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-07-29_09,2024-07-26_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 mlxlogscore=999
+ impostorscore=0 malwarescore=0 mlxscore=0 priorityscore=1501
+ suspectscore=0 lowpriorityscore=0 phishscore=0 clxscore=1011 adultscore=0
+ spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2407110000 definitions=main-2407290073
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 28 Jul 2024 16:38:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111451
+ <openembedded-devel@lists.openembedded.org>; Mon, 29 Jul 2024 10:49:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111452
 
-The following changes since commit 18f939a5fb37528a5415b05077ece383c346a119:
+From: Yogita Urade <yogita.urade@windriver.com>
 
-   libdbd-mysql-perl: avoid invoking assert_lib at do_configure stage 
-(2024-07-09 08:18:46 -0400)
+Graphviz 2.36 before 10.0.0 has an out-of-bounds read via a
+crafted config6a file. NOTE: exploitability may be uncommon
+because this file is typically owned by root.
 
-are available in the Git repository at:
+CVE-2023-46045-0003.patch is the CVE fix and CVE-2023-46045-0001.patch,
+CVE-2023-46045-0002.patch are dependent commits to fix the CVE.
 
-   https://git.openembedded.org/meta-openembedded scarthgap-next
+Reference:
+https://nvd.nist.gov/vuln/detail/CVE-2023-46045
 
-for you to fetch changes up to 80e01188fa822d87d301ee71973c462d7a865493:
+Upstream patches:
+https://gitlab.com/graphviz/graphviz/-/commit/361f274ca901c3c476697a6404662d95f4dd43cb
+https://gitlab.com/graphviz/graphviz/-/commit/3f31704cafd7da3e86bb2861accf5e90c973e62a
+https://gitlab.com/graphviz/graphviz/-/commit/a95f977f5d809915ec4b14836d2b5b7f5e74881e
 
-   nftables: change ptest output format (2024-07-23 15:24:57 -0400)
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+---
+ .../graphviz/CVE-2023-46045-0001.patch        | 37 ++++++++++++++++++
+ .../graphviz/CVE-2023-46045-0002.patch        | 38 +++++++++++++++++++
+ .../graphviz/CVE-2023-46045-0003.patch        | 33 ++++++++++++++++
+ .../graphviz/graphviz_8.1.0.bb                |  3 ++
+ 4 files changed, 111 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-0001.patch
+ create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-0002.patch
+ create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-0003.patch
 
-----------------------------------------------------------------
-Alexandre Videgrain (1):
-       openbox: fix crash on alt+tab with fullscreen app
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-0001.patch b/meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-0001.patch
+new file mode 100644
+index 000000000..7b177370d
+--- /dev/null
++++ b/meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-0001.patch
+@@ -0,0 +1,37 @@
++From 361f274ca901c3c476697a6404662d95f4dd43cb Mon Sep 17 00:00:00 2001
++From: Matthew Fernandez <matthew.fernandez@gmail.com>
++Date: Wed, 24 Jul 2024 13:19:03 +0800
++Subject: [PATCH] gvc gvconfig_plugin_install_from_config: more tightly scope
++ 'gv_api'
++
++CVE: CVE-2023-46045
++Upstream-Status: Backport [https://gitlab.com/graphviz/graphviz/-/commit/361f274ca901c3c476697a6404662d95f4dd43cb]
++
++Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
++---
++ lib/gvc/gvconfig.c | 3 +--
++ 1 file changed, 1 insertion(+), 2 deletions(-)
++
++diff --git a/lib/gvc/gvconfig.c b/lib/gvc/gvconfig.c
++index d03de09..2f31b98 100644
++--- a/lib/gvc/gvconfig.c
+++++ b/lib/gvc/gvconfig.c
++@@ -174,7 +174,6 @@ static int gvconfig_plugin_install_from_config(GVC_t * gvc, char *s)
++ {
++     char *package_path, *name, *api;
++     const char *type;
++-    api_t gv_api;
++     int quality;
++     int nest = 0;
++     gvplugin_package_t *package;
++@@ -189,7 +188,7 @@ static int gvconfig_plugin_install_from_config(GVC_t * gvc, char *s)
++         package = gvplugin_package_record(gvc, package_path, name);
++	do {
++	    api = token(&nest, &s);
++-	    gv_api = gvplugin_api(api);
+++	    const api_t gv_api = gvplugin_api(api);
++	    do {
++		if (nest == 2) {
++		    type = token(&nest, &s);
++--
++2.25.1
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-0002.patch b/meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-0002.patch
+new file mode 100644
+index 000000000..fbab10bb3
+--- /dev/null
++++ b/meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-0002.patch
+@@ -0,0 +1,38 @@
++From 3f31704cafd7da3e86bb2861accf5e90c973e62a Mon Sep 17 00:00:00 2001
++From: Matthew Fernandez <matthew.fernandez@gmail.com>
++Date: Wed, 24 Jul 2024 13:39:39 +0800
++Subject: [PATCH] gvc gvconfig_plugin_install_from_config: more tightly scope
++ 'api'
++
++CVE: CVE-2023-46045
++Upstream-Status: Backport [https://gitlab.com/graphviz/graphviz/-/commit/3f31704cafd7da3e86bb2861accf5e90c973e62a]
++
++Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
++---
++ lib/gvc/gvconfig.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/lib/gvc/gvconfig.c b/lib/gvc/gvconfig.c
++index 2f31b98..ea0d81b 100644
++--- a/lib/gvc/gvconfig.c
+++++ b/lib/gvc/gvconfig.c
++@@ -172,7 +172,7 @@ static char *token(int *nest, char **tokens)
++
++ static int gvconfig_plugin_install_from_config(GVC_t * gvc, char *s)
++ {
++-    char *package_path, *name, *api;
+++    char *package_path, *name;
++     const char *type;
++     int quality;
++     int nest = 0;
++@@ -187,7 +187,7 @@ static int gvconfig_plugin_install_from_config(GVC_t * gvc, char *s)
++	    name = "x";
++         package = gvplugin_package_record(gvc, package_path, name);
++	do {
++-	    api = token(&nest, &s);
+++	    const char *api = token(&nest, &s);
++	    const api_t gv_api = gvplugin_api(api);
++	    do {
++		if (nest == 2) {
++--
++2.25.1
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-0003.patch b/meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-0003.patch
+new file mode 100644
+index 000000000..372f44efe
+--- /dev/null
++++ b/meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-0003.patch
+@@ -0,0 +1,33 @@
++From a95f977f5d809915ec4b14836d2b5b7f5e74881e Mon Sep 17 00:00:00 2001
++From: Matthew Fernandez <matthew.fernandez@gmail.com>
++Date: Wed, 24 Jul 2024 15:02:06 +0800
++Subject: [PATCH] gvc: detect plugin installation failure and display an error
++
++Gitlab: fixes #2441
++Reported-by: GJDuck
++
++CVE: CVE-2023-46045
++Upstream-Status: Backport [https://gitlab.com/graphviz/graphviz/-/commit/a95f977f5d809915ec4b14836d2b5b7f5e74881e]
++
++Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
++---
++ lib/gvc/gvconfig.c | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/lib/gvc/gvconfig.c b/lib/gvc/gvconfig.c
++index ea0d81b..1eccc70 100644
++--- a/lib/gvc/gvconfig.c
+++++ b/lib/gvc/gvconfig.c
++@@ -189,6 +189,10 @@ static int gvconfig_plugin_install_from_config(GVC_t * gvc, char *s)
++	do {
++	    const char *api = token(&nest, &s);
++	    const api_t gv_api = gvplugin_api(api);
+++	    if (gv_api == (api_t)-1) {
+++		agerr(AGERR, "config error: %s %s not found\n", package_path, api);
+++		return 0;
+++	    }
++	    do {
++		if (nest == 2) {
++		    type = token(&nest, &s);
++--
++2.25.1
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb b/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb
+index 2700142e5..b3f02148b 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb
++++ b/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb
+@@ -20,6 +20,9 @@ inherit autotools-brokensep pkgconfig gettext qemu
+ 
+ SRC_URI = "https://gitlab.com/api/v4/projects/4207231/packages/generic/${BPN}-releases/${PV}/${BP}.tar.xz \
+            file://0001-Autotools-fix-do-not-put-prefix-based-paths-in-compi.patch \
++           file://CVE-2023-46045-0001.patch \
++           file://CVE-2023-46045-0002.patch \
++           file://CVE-2023-46045-0003.patch \
+            "
+ # Use native mkdefs
+ SRC_URI:append:class-target = "\
+-- 
+2.40.0
 
-Jiaying Song (2):
-       rrdtool: Fix do_populate_sysroot QA issues
-       nftables: change ptest output format
-
-Martin Jansa (2):
-       bolt: package systemd_system_unitdir correctly
-       giflib: fix build with gold and avoid imagemagick-native dependency
-
-Neel Gandhi (1):
-       v4l-utils: Install media ctrl header and library files
-
-Randolph Sapp (1):
-       opencl-clhpp: add native and nativesdk
-
-Vijay Anusuri (1):
-       wireshark: upgrade 4.2.4 -> 4.2.5
-
-Yoann Congal (1):
-       packagegroup-meta-oe: fix lvgl inclusion
-
-  meta-networking/recipes-filter/nftables/nftables/run-ptest      | 8 ++-
-  .../wireshark/{wireshark_4.2.4.bb => wireshark_4.2.5.bb} |  2 +-
-  meta-oe/recipes-bsp/bolt/bolt_0.9.6.bb                          | 4 +-
-  meta-oe/recipes-core/opencl/opencl-clhpp_git.bb                 | 2 +
-  meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb      | 2 +-
-  .../files/add_suffix_to_convert_binary_used_in_Makefile.patch   | 42 
-----------------
-  .../giflib/0001-Makefile-fix-typo-in-soname-argument.patch      | 34 
-+++++++++++++
-  meta-oe/recipes-devtools/giflib/giflib_5.2.2.bb                 | 8 +--
-  meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb               | 5 ++
-  .../0001-Fix-list-traversal-issue-in-client_calc_layer.patch    | 56 
-+++++++++++++++++++++
-  meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb               | 1 +
-  ...1-media-ctl-Install-media-ctl-header-and-library-files.patch | 78 
-+++++++++++++++++++++++++++++
-  meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.26.1.bb         | 1 +
-  13 files changed, 192 insertions(+), 51 deletions(-)
-  rename meta-networking/recipes-support/wireshark/{wireshark_4.2.4.bb 
-=> wireshark_4.2.5.bb} (97%)
-  delete mode 100644 
-meta-oe/recipes-devtools/giflib/files/add_suffix_to_convert_binary_used_in_Makefile.patch
-  create mode 100644 
-meta-oe/recipes-devtools/giflib/giflib/0001-Makefile-fix-typo-in-soname-argument.patch
-  create mode 100644 
-meta-oe/recipes-graphics/openbox/files/0001-Fix-list-traversal-issue-in-client_calc_layer.patch
-  create mode 100644 
-meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-media-ctl-Install-media-ctl-header-and-library-files.patc
 
