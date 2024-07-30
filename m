@@ -1,203 +1,210 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <quaresma.jose@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7FBCC3DA49
-	for <webhook@archiver.kernel.org>; Tue, 30 Jul 2024 05:11:57 +0000 (UTC)
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.web11.11457.1722316313108727649
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 646BAC3DA49
+	for <webhook@archiver.kernel.org>; Tue, 30 Jul 2024 10:19:19 +0000 (UTC)
+Received: from mail-ua1-f41.google.com (mail-ua1-f41.google.com [209.85.222.41])
+ by mx.groups.io with SMTP id smtpd.web10.14417.1722334755069599860
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Jul 2024 22:11:53 -0700
+ Tue, 30 Jul 2024 03:19:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=SuNqcOpy;
- spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-7b396521ff6so62793a12.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Jul 2024 22:11:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=W2VMzOZ9;
+ spf=pass (domain: gmail.com, ip: 209.85.222.41, mailfrom: quaresma.jose@gmail.com)
+Received: by mail-ua1-f41.google.com with SMTP id a1e0cc1a2514c-824ae03efbfso878538241.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jul 2024 03:19:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1722316312; x=1722921112; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=YL1gtsccwD2pAdkSE3VC09mXPpgCcK1gzyt4Ey86lcg=;
-        b=SuNqcOpyqxSxQeCJ8oA1oTb6SOdPZ/OlCp6llfTHREwpiOjFHE6zNXtVe47RDcgXnP
-         WqkWvRaA4hwgql+ZNOokkQxdEGcOoMLzUDzJx9tXbR56K/PeC/wPiz/zKe5zjw7Qefd4
-         J+Zxwd5Gcv8NzFUvzZrdsAc3p4Y+Pqaew/spiRqR1XmzoozDR9ka5bJKeLtlmN03UDXP
-         gqHRzLwbVUOo90ihOi5kwUz/pD/y9p3xJe/FxZ8M+ntUU3+Ci1qbiWHQAviAsYXiE+r5
-         ErTWSqOYo656txyRfRS3m0VrhdAATEnzGRwFNu1Bw1z66uw7aYYpGND86wFEN+ZId+bb
-         ul5g==
+        d=gmail.com; s=20230601; t=1722334754; x=1722939554; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=uOt/Qjr+xEjysmUxix4dNFPXRypFdQPA0XJSJUeNiKE=;
+        b=W2VMzOZ9zHXD/2RapbQrTaE0NkePVEIbW3AsZ3LnZpTL8Xe9U8VriYOynKVCVeWBFC
+         Qp96cHTd3Ed2Vr96JnAkddAKrHtDW2e4CMbfM4BU5wJ4npFHrlGObwtEfUTo6wKNkWNR
+         QM5wtxfB+zMOxNLhETA5AHgAUBHZyaBw+cFFGz9EgavAmcKzRsVs8IZXYNn48zwwGuUu
+         HS1tkW1EJw6JUHLz4wp3nxWiRSztC/oeIBXORJS2DOXxAd37AUyCDYf+P64G3uyHb6Sr
+         xcORA1DunHzYD0ZJh8GMrwCPvPqo5KeM2JjrmtF5eIq8XVuKdFnDW+909FgU67B4GbaV
+         qdjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722316312; x=1722921112;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=YL1gtsccwD2pAdkSE3VC09mXPpgCcK1gzyt4Ey86lcg=;
-        b=U9Bz9CgE7JC7rBG0pofzTikEN/sPtls0/pj07ehEyM2UDYewTvyJt8y+syHvfdSYKl
-         OgTzyTjRDpt/ZSj54cEw9YKJYPwVrbEsFu0X0NxX7TR2E7C1iXRXfU6jMgbW5rVoXhsW
-         HxyqIG9EwmdhlhoOmly/Sm1ms6WeAeVRkpLPmxAw7DsZfEuFlkVmLKM0XCEsVkETypaF
-         xl4cjQLcdiRZ+6a0Kl824Fp9X4mOJHFWoidb22r0zI/71NVzzMF9JjSQnKYKSBzChK2g
-         plC5e046RZKVuULIyzy7WY0Qpz4VPIOpNhcvZv7hytyukOzwR0tBxnIw1Q0Ky/+yn5v4
-         Lm7g==
-X-Gm-Message-State: AOJu0YwNHUlCKuUG8NM7B6FBPiFvIliqif2Wm3R/NosS9/Pl3pPsu9yc
-	CHX3NTJKzgn/PLO+6vu3wUBYQAfUo1eGhFPs34PaypKNHkkUZ/kOZdMm5Z7QFJHe3JtSTIv/Z5C
-	f3op9fSvbr8ft8iaazgTD63wnhVurq5kB
-X-Google-Smtp-Source: AGHT+IHwF5QZ0T9Aw5S2Z5CRakRv+/ABf43iIhD6YRzdhiv5hd6BL5HqskdeSGIwlszjOT/nzgcNQfY19EeWsGu1e8s=
-X-Received: by 2002:a05:6a20:a121:b0:1c0:bf35:ef61 with SMTP id
- adf61e73a8af0-1c4a117805fmr13391942637.2.1722316311975; Mon, 29 Jul 2024
- 22:11:51 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1722334754; x=1722939554;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=uOt/Qjr+xEjysmUxix4dNFPXRypFdQPA0XJSJUeNiKE=;
+        b=uMO3yQbL/gFIzvMyg0NFnctuuwBz7MIA5YxueG3uxQo9tp6qfVpfrNu7sq2fcmSXn0
+         stMtAUHZDMRpA+zIeidBscliwJiLQd7S8a5CyZvkuNt+M3PhrYbZ4NrL5NVZFotVas7/
+         zAPg8wh8re6SJKEqmAQBqz+zdwU0ijHrLRKZ32yGc12iF20FEXTpQB32dEs0bFJZlJ+y
+         /Z5kYYSGhoBhbuCaaQ8YvRBFWqtzWSllyUiOZsycky/QnOLerrJD5WbOJAuGO35+U3Ik
+         D1sy8SmDWPNacpvg2dH2pUhNJnnFGBLlW7HkBwTCEuDu80WkWQld0QOvPJ7ShT7nVfyW
+         Z+bg==
+X-Gm-Message-State: AOJu0YxKSf19n3CVqzlBfhjIXlPVHFZhDrNgnkN0nFdUBVp2AlrRPLEt
+	5RJWu9oPGA1+fFBWpMAyYrTrEsUBgfj3mODrubSmXepRABBmGD+3s1SkVbu1pyDxrizcXYZi1OZ
+	jZnCgfiEf1lM2/Y9o5kO984ZQllk=
+X-Google-Smtp-Source: AGHT+IFHJHV8Yvs3Ko4z7pmfG/AyxVMds1FLdNMX0k+aZoODsGn8n5kpYkUhetCiIMndUNgjFDnxf0fUYBlDe1W62js=
+X-Received: by 2002:a05:6102:512c:b0:48f:df86:dba with SMTP id
+ ada2fe7eead31-493fa15fa58mr11598097137.5.1722334753843; Tue, 30 Jul 2024
+ 03:19:13 -0700 (PDT)
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Mon, 29 Jul 2024 22:11:40 -0700
-Message-ID: <CAK5yBb_W2aqMpqe97GSh1UPJtAAqD6xH9vX5bLNnTbFcdQVpug@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="000000000000f7610b061e7003e6"
+References: <20240729182532.432091-1-przemyslaw.zegan@gmail.com>
+In-Reply-To: <20240729182532.432091-1-przemyslaw.zegan@gmail.com>
+From: Jose Quaresma <quaresma.jose@gmail.com>
+Date: Tue, 30 Jul 2024 11:19:02 +0100
+Message-ID: <CANPvuRk-ty2q93DyYhke9iAK+1MU5AUk6h4Qj4AdGpdpyEwPnw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe,scarthgap][PATCH] libftdi: Fix missing ftdi_eeprom
+To: przemyslaw.zegan@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000002ff295061e744f80"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 30 Jul 2024 05:11:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111476
+ <openembedded-devel@lists.openembedded.org>; Tue, 30 Jul 2024 10:19:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111477
 
---000000000000f7610b061e7003e6
+--0000000000002ff295061e744f80
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-All,
+Przemyslaw Zegan via lists.openembedded.org <przemyslaw.zegan=3D
+gmail.com@lists.openembedded.org> escreveu (segunda, 29/07/2024 =C3=A0(s) 1=
+9:25):
 
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
+> Due to the incorrect subpackage name, the ftdi_eeprom does not placed in
+> the generated image. This patch fixes it.
+>
 
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
-
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 408
-unassigned or newcomer bugs.
-
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.1=E2=80=9D, =E2=80=9C5.2", "5.99" and "Future=
-", the more
-pressing/urgent issues being in "5.1" and then =E2=80=9C5.2=E2=80=9D.
-
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
-
-Thanks,
+What is the package name you are using to install the ftdi_eeprom on the
+image?
+Should be the 'ftdi-eeprom' package
 
 
+>
+> Signed-off-by: Przemyslaw Zegan <przemyslaw.zegan@gmail.com>
+> ---
+>  meta-oe/recipes-support/libftdi/libftdi_1.5.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-support/libftdi/libftdi_1.5.bb
+> b/meta-oe/recipes-support/libftdi/libftdi_1.5.bb
+> index eae1c02f0..ed989a311 100644
+> --- a/meta-oe/recipes-support/libftdi/libftdi_1.5.bb
+> +++ b/meta-oe/recipes-support/libftdi/libftdi_1.5.bb
+> @@ -36,5 +36,5 @@ BBCLASSEXTEND =3D "native nativesdk"
+>
+>  PACKAGES =3D+ "${PN}-python ftdi-eeprom"
+>
 
-*Stephen K. Jolley*
+Above the packages provided by this recipe are 'libftdi', 'libftdi--python'
+and 'ftdi-eeprom'.
 
-*Yocto Project Program Manager*
 
-(    *Cell*:                (208) 244-4460
+>
+> -FILES:ftdi-eeprom =3D "${bindir}/ftdi_eeprom"
+> +FILES:${PN}-ftdi-eeprom =3D "${bindir}/ftdi_eeprom"
+>
 
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
+This package 'libftdi-ftdi-eeprom' doesn't exist and with this patch you
+are making it install the ftdi_eeprom
+on the default 'libftdi' package.
 
---000000000000f7610b061e7003e6
+Jose
+
+ FILES:${PN}-python =3D "${PYTHON_SITEPACKAGES_DIR}/"
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#111474):
+> https://lists.openembedded.org/g/openembedded-devel/message/111474
+> Mute This Topic: https://lists.openembedded.org/mt/107614478/5052612
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> quaresma.jose@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--=20
+Best regards,
+
+Jos=C3=A9 Quaresma
+
+--0000000000002ff295061e744f80
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><span style=3D"font-size:11pt;font-family:Calibri,Arial">A=
-ll,<br><br>The triage team is starting to try and collect up and classify b=
-ugs which a newcomer to the project would be able to work on in a way which=
- means people can find them. They&#39;re being listed on the triage page un=
-der the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/wiki/=
-Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage#New=
-comer_Bugs</a>  Also please review: <a href=3D"https://www.openembedded.org=
-/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.org/w=
-iki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugzilla =
-account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount.cgi"=
->https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The idea is=
- these bugs should be straight forward for a person to help work on who doe=
-sn&#39;t have deep experience with the project.  If anyone can help, please=
- take ownership of the bug and send patches!  If anyone needs help/advice t=
-here are people on irc who can likely do so, or some of the more experience=
-d contributors will likely be happy to help too.<br><br>Also, the triage te=
-am meets weekly and does its best to handle the bugs reported into the Bugz=
-illa. The number of people attending that meeting has fallen, as have the n=
-umber of people available to help fix bugs. One of the things we hear users=
- report is they don&#39;t know how to help. We (the triage team) are theref=
-ore going to start reporting out the currently 408 unassigned or newcomer b=
-ugs.<br><br>We&#39;re hoping people may be able to spare some time now and =
-again to help out with these.  Bugs are split into two types, &quot;true bu=
-gs&quot; where things don&#39;t work as they should and &quot;enhancements&=
-quot; which are features we&#39;d want to add to the system.  There are als=
-o roughly four different &quot;priority&quot; classes right now, =E2=80=9C5=
-.1=E2=80=9D, =E2=80=9C5.2&quot;, &quot;5.99&quot; and &quot;Future&quot;, t=
-he more pressing/urgent issues being in &quot;5.1&quot; and then =E2=80=9C5=
-.2=E2=80=9D.<br><br>Please review this link and if a bug is something you w=
-ould be able to help with either take ownership of the bug, or send me (<a =
-href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>) an e-m=
-ail with the bug number you would like and I will assign it to you (please =
-make sure you have a Bugzilla account).  The list is at: <a href=3D"https:/=
-/wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcomer_Bugs"=
->https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcom=
-er_Bugs</a></span><br><div dir=3D"ltr" class=3D"gmail_signature" data-smart=
-mail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p class=3D"MsoN=
-ormal" style=3D"background-image:initial;background-position:initial;backgr=
-ound-repeat:initial"><span style=3D"font-size:12pt;font-family:Arial,sans-s=
-erif">Thanks,<span></span></span></p>
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">Przemyslaw Zegan via <a href=3D"http:=
+//lists.openembedded.org">lists.openembedded.org</a> &lt;przemyslaw.zegan=
+=3D<a href=3D"mailto:gmail.com@lists.openembedded.org">gmail.com@lists.open=
+embedded.org</a>&gt; escreveu (segunda, 29/07/2024 =C3=A0(s) 19:25):<br></d=
+iv><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bord=
+er-left:1px solid rgb(204,204,204);padding-left:1ex">Due to the incorrect s=
+ubpackage name, the ftdi_eeprom does not placed in the generated image. Thi=
+s patch fixes it.<br></blockquote><div><br></div><div>What is the package n=
+ame you are using to install the ftdi_eeprom on the image?</div><div>Should=
+ be the &#39;ftdi-eeprom&#39; package<br></div><div>=C2=A0</div><blockquote=
+ class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px so=
+lid rgb(204,204,204);padding-left:1ex">
+<br>
+Signed-off-by: Przemyslaw Zegan &lt;<a href=3D"mailto:przemyslaw.zegan@gmai=
+l.com" target=3D"_blank">przemyslaw.zegan@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0meta-oe/recipes-support/libftdi/<a href=3D"http://libftdi_1.5.bb" rel=
+=3D"noreferrer" target=3D"_blank">libftdi_1.5.bb</a> | 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+<br>
+diff --git a/meta-oe/recipes-support/libftdi/<a href=3D"http://libftdi_1.5.=
+bb" rel=3D"noreferrer" target=3D"_blank">libftdi_1.5.bb</a> b/meta-oe/recip=
+es-support/libftdi/<a href=3D"http://libftdi_1.5.bb" rel=3D"noreferrer" tar=
+get=3D"_blank">libftdi_1.5.bb</a><br>
+index eae1c02f0..ed989a311 100644<br>
+--- a/meta-oe/recipes-support/libftdi/<a href=3D"http://libftdi_1.5.bb" rel=
+=3D"noreferrer" target=3D"_blank">libftdi_1.5.bb</a><br>
++++ b/meta-oe/recipes-support/libftdi/<a href=3D"http://libftdi_1.5.bb" rel=
+=3D"noreferrer" target=3D"_blank">libftdi_1.5.bb</a><br>
+@@ -36,5 +36,5 @@ BBCLASSEXTEND =3D &quot;native nativesdk&quot;<br>
+<br>
+=C2=A0PACKAGES =3D+ &quot;${PN}-python ftdi-eeprom&quot;<br></blockquote><d=
+iv><br></div><div>Above the packages provided by this recipe are &#39;libft=
+di&#39;, &#39;libftdi--python&#39; and &#39;ftdi-eeprom&#39;.</div><div>=C2=
+=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+<br>
+-FILES:ftdi-eeprom =3D &quot;${bindir}/ftdi_eeprom&quot;<br>
++FILES:${PN}-ftdi-eeprom =3D &quot;${bindir}/ftdi_eeprom&quot;<br></blockqu=
+ote><div><br></div><div>This package &#39;libftdi-ftdi-eeprom&#39; doesn&#3=
+9;t=C2=A0exist and with this patch=C2=A0you are making it install the ftdi_=
+eeprom</div><div>on the default &#39;libftdi&#39; package.</div><div>=C2=A0=
+</div><div>Jose</div><div><br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">
+=C2=A0FILES:${PN}-python =3D &quot;${PYTHON_SITEPACKAGES_DIR}/&quot;<br>
+-- <br>
+2.34.1<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#111474): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/111474" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/111474</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/107614478/505=
+2612" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/107614478/5052612</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:quaresma.jose@gmail.com"=
+ target=3D"_blank">quaresma.jose@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div><br clear=3D"all"><div><br></div><span class=3D"gmail_si=
+gnature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><d=
+iv dir=3D"ltr">Best regards,<div><br>Jos=C3=A9 Quaresma</div></div></div></=
+div>
 
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
-
---000000000000f7610b061e7003e6--
+--0000000000002ff295061e744f80--
 
