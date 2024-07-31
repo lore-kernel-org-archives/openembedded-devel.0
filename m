@@ -1,95 +1,93 @@
-Return-Path: <debrabander@gmail.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD8BBC3DA64
-	for <webhook@archiver.kernel.org>; Wed, 31 Jul 2024 08:07:26 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web11.38274.1722413241902258449
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68661C3DA7F
+	for <webhook@archiver.kernel.org>; Wed, 31 Jul 2024 10:00:57 +0000 (UTC)
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web10.39271.1722420051809340106
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 Jul 2024 01:07:22 -0700
+ Wed, 31 Jul 2024 03:00:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=JX3PQ6DS;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: debrabander@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-a7d89bb07e7so200505166b.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 31 Jul 2024 01:07:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Bl7sECPj;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-a7abf92f57bso715838466b.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 Jul 2024 03:00:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1722413240; x=1723018040; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=VvggP1gfdyz5G4eYwvZA1yubehpFtwMiqdHUVbnI8PQ=;
-        b=JX3PQ6DSkQMrBQHyhR+vMarwJwHkI37LATF1RAjFZKyHz3vdoJP4tvsZsF0Ve8ew5M
-         VLY2dkWScO2TZP8k6tKHgKKLnBBS/gO/nnH8ZsEKkjx3CG/tX38OxjiWZQbtkURUY1Ha
-         UPxsbe296ccUhUh6ssaTh/FEBgAi1SNGm80jOyto2RWXSIBBX/amZUnjsuzbUEM1V1Zu
-         ZWJDyiILLADyRiTvKF09M7WCe30haJihQ/r5rqA7YOHMqwernE0vSZv0J6fRoWB1/Pdh
-         w0Cj2dhkzRzIy75ql85H2W5cXTl8BXf3YGZdAFhr1XYq6t+/ufAtmvrp6pOimTIwpSn2
-         XlUg==
+        d=gmail.com; s=20230601; t=1722420050; x=1723024850; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=dBG3igAh5B9GhSF/0HLZpK4sIsgxrFIvuYvcYMDRVYo=;
+        b=Bl7sECPjDkCC3xwbgwyltmmWuCyaIwAm75UzFDuT9PdrRhQSsElZ0Onszpvcc/H6n0
+         fd9CcByweyoGKePz0DaFZBHGR+A00iRI6QUmFCkyPrVg1akT3Kkco3qnqvNgnJTO96QC
+         c6p3DUMskLEHoNHq5Ty3bhg2mhmgDxNexXZxw3PDjMaSe8tYJ4sDy9ehSHUBSQWQHM0U
+         Sxkl8U6uSs+6pbRbjbk95ZST7MZygWzWjpUSIR+SebOn0xVtGGuczXs6phEk/wQqRTBg
+         gCTy63VJiaaooOcH81wiiIEeYWpuTkGfb21cEGy1ILeevPv3Cnlb6UCTLfzaHl1UiJyU
+         kpyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722413240; x=1723018040;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=VvggP1gfdyz5G4eYwvZA1yubehpFtwMiqdHUVbnI8PQ=;
-        b=luEVUNVJ3cR/dD72qykSwus7yRUNimWfLSSxoMNcPnCmCadq8RFsqS6Fh2DLyx1pix
-         uF9R8Tv/B8fqDsfK8ZhZTix7b2gDj1mLtEJJCRLEPT4rU2TelrsjTOCuanLReLZyp1G6
-         r5LW5wxMia4KrJ0kf861wNrcYWLBq5/2EaQxeDRPnX5Ox9runG9BJJ0nk5WIJHN654Eh
-         sdS9NbXVpjJSxBI7HPQIYIjg26n8GYVXPb1j5hTvN6LPDGpplowGuHkazs6l/hbElHKU
-         jaPkDNBedISk7ALA09uObu/TIOLOEYOaxwApQPlT7CGhxsCkfT9dA0JiHU8/fbHxKfdh
-         lhCg==
-X-Forwarded-Encrypted: i=1; AJvYcCVeLRTyt3Oo6Ul3xdI/GgU/pebH12hfGO6xb68NANqsnZPY606W3xLguXLW7KO0uW8WJm9T5M6QgRXIA2afJaRxLmgZFkI0CUGzVQXdhYYgvp80lNKVXzhMxA==
-X-Gm-Message-State: AOJu0YxWiRJsg/0GNwjfXMI7qrQk+zbR0cg7XMAdMqowyqFc/hXgaW5H
-	rTClSdy3smM3SZmp4kMkctz+mLDO/V5BQ+Wzf+CsW/LSG+e5Edxv
-X-Google-Smtp-Source: AGHT+IGTtsrnIgVyUl8uqwFz6dDBrsSga8Q2L+TRk4W8YhfgEjb+9/eErtG784mBClHH/QnkMFp8KA==
-X-Received: by 2002:a17:906:da8e:b0:a7a:aa35:409a with SMTP id a640c23a62f3a-a7d401cd9acmr949364666b.68.1722413239714;
-        Wed, 31 Jul 2024 01:07:19 -0700 (PDT)
-Received: from win95.FOX.local ([89.205.136.153])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a7acad91005sm742179666b.173.2024.07.31.01.07.18
+        d=1e100.net; s=20230601; t=1722420050; x=1723024850;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=dBG3igAh5B9GhSF/0HLZpK4sIsgxrFIvuYvcYMDRVYo=;
+        b=KRyae/c/RoNBeHwE6MIIF99uUNHTxizEqYboyKO6oi4v0qK06zhvgA6XeAKj4R/RQF
+         xAlv2DWfuB+8EVGajyLHQKArClnWq6gCmXmtz8hYecd8UW58NgkEVeNj6+doPQ+/CIK/
+         NectfwFAdCPhWziTKX0BJ2/4Fhr7mGH0f/BGMQLGobTEVJ/OgB7zWp8OFFpkECDnJXFA
+         KlhoHqf+5IBFvyr/PtXveE9HKIsB6012KtYH2fnTyb+KtLTvVOdUlo4pHw3PT1i8UERo
+         vvri3yhYMPaDYM49Ct4VuMP7TqeiJnU274ic7TbEVNUI/e2kv3HE1RF2PeYVgoP78vf5
+         kp6w==
+X-Gm-Message-State: AOJu0YxWZHI5k5v8SIVArH5BUgp8LyyzrSGHyx5/KsXk/co1qkngRlW1
+	S3psmku7CYFI7kbJ9Gg7SylLurbfMdrp0dB8Uq9TJ0OwO7cxBawK24SJNqDk
+X-Google-Smtp-Source: AGHT+IHFMTb0ZhzRjThMdCQSkTNofn7sveIHRMpP/fhWO+4o6zK2XGT9M51azMvl5s3YtgB0ioQ/7g==
+X-Received: by 2002:a17:906:d260:b0:a7a:aa35:408c with SMTP id a640c23a62f3a-a7d3ff55b80mr1001166566b.8.1722420047805;
+        Wed, 31 Jul 2024 03:00:47 -0700 (PDT)
+Received: from localhost.localdomain ([176.33.65.192])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a7acab52d46sm743869066b.80.2024.07.31.03.00.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 31 Jul 2024 01:07:19 -0700 (PDT)
-From: Frank de Brabander <debrabander@gmail.com>
-To: dev@g0hl1n.net
-Cc: akuster808@gmail.com,
-	debrabander@gmail.com,
-	openembedded-devel@lists.openembedded.org,
-	tim.orling@konsulko.com
-Subject: Re: [oe] [meta-python][scarthgap][PATCH] python3-pydantic-core: upgrade 2.16.3 -> 2.18.1
-Date: Wed, 31 Jul 2024 10:07:16 +0200
-Message-Id: <20240731080716.1205-1-debrabander@gmail.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <gf7b52p53drjd6yb3ldr7gmki7gzwc7mzkjque6qdp2wrswm7u@akaiwyp6pxqj>
-References: <gf7b52p53drjd6yb3ldr7gmki7gzwc7mzkjque6qdp2wrswm7u@akaiwyp6pxqj>
+        Wed, 31 Jul 2024 03:00:47 -0700 (PDT)
+From: alperak <alperyasinak1@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-networking][PATCH] tayga: Fix contains reference to TMPDIR [buildpaths] warning
+Date: Wed, 31 Jul 2024 13:00:37 +0300
+Message-Id: <20240731100037.63887-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 31 Jul 2024 08:07:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111484
+ <openembedded-devel@lists.openembedded.org>; Wed, 31 Jul 2024 10:00:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111485
 
-I was unaware of this discussion when I created the fix for master.
-Note that I've silenced the TMPDIR QA message, this still needs a
-proper fix in master as well.
+WARNING: tayga-0.9.2-r0 do_package_qa: QA Issue: File /usr/sbin/.debug/tayga in package tayga-dbg contains reference to TMPDIR [buildpaths]
 
-This indeed needs to be fixed in scarthgap as well, since the
-incompatible versions do break some code. My two cents for the available
-options:
+Make sure that the OE provided CFLAGS are passed to the compiler.
 
- - Revert pydantic upgrade (from 2.7.0 back to 2.6.4)
- - Update pydantic-core to 2.18.1
- - Use master (pydantic 2.7.3 and pydantic-core 2.18.4)
+Signed-off-by: alperak <alperyasinak1@gmail.com>
+---
+ meta-networking/recipes-connectivity/tayga/tayga_0.9.2.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Would only downgrade if this is the *only* allowed option according to
-the LTS branch policy. Version 2.7.x includes new features compared to
-2.6.4. Removing these with a downgrade would violate the LTS patch policy
-of not merging "ABI/API breakage".
+diff --git a/meta-networking/recipes-connectivity/tayga/tayga_0.9.2.bb b/meta-networking/recipes-connectivity/tayga/tayga_0.9.2.bb
+index f6b58559d..f36435c8e 100644
+--- a/meta-networking/recipes-connectivity/tayga/tayga_0.9.2.bb
++++ b/meta-networking/recipes-connectivity/tayga/tayga_0.9.2.bb
+@@ -12,6 +12,8 @@ SRC_URI[sha256sum] = "2b1f7927a9d2dcff9095aff3c271924b052ccfd2faca9588b277431a44
+ SYSTEMD_PACKAGES = "${PN}"
+ SYSTEMD_SERVICE:${PN} = "tayga.service"
+ 
++EXTRA_OEMAKE += "CFLAGS='${CFLAGS}'"
++
+ do_install:append() {
+   install -m 0644 ${UNPACKDIR}/tayga.conf ${D}${sysconfdir}/tayga.conf
+   install -d ${D}${systemd_unitdir}/system/
+@@ -19,3 +21,4 @@ do_install:append() {
+ }
+ 
+ inherit autotools systemd
++
+-- 
+2.25.1
 
-Option 2 or 3 are my preferred choices and they fall within the
-"fixes for bugs" category of the LTS patch policy. Option 2 is the smallest
-change to fix the problem, but option 3 includes some additional upstream
-fixes with the update from 2.7.0 to 2.7.3.
-
-
-Regards,
-Frank
 
