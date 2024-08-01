@@ -1,87 +1,102 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DE63CC3DA4A
-	for <webhook@archiver.kernel.org>; Thu,  1 Aug 2024 09:16:15 +0000 (UTC)
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
- by mx.groups.io with SMTP id smtpd.web10.64019.1722503771309298745
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 11F82C3DA64
+	for <webhook@archiver.kernel.org>; Thu,  1 Aug 2024 12:39:27 +0000 (UTC)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.web11.67080.1722515964955948225
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Aug 2024 02:16:11 -0700
+ Thu, 01 Aug 2024 05:39:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KcRRR6K1;
- spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-a7a8a4f21aeso889683866b.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Aug 2024 02:16:11 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=T/xzvTMV;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.52, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4281d812d3eso48283095e9.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Aug 2024 05:39:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1722503769; x=1723108569; darn=lists.openembedded.org;
+        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1722515963; x=1723120763; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=iu6p9UGqn4V9/H06aSVq9Roke3n9gTU/07fQ2DW6tkM=;
-        b=KcRRR6K1WCXcA/SI4Thesx5m0DGBAKszhhWhqVUnL7XISB4a0VALyt4Rp8yhIjPqIc
-         CBwrJldl99RWAM/rDGRsLLoojeT5dXdAODQsc0t0aCbGnN4rG2Kmq315EVnsYC07WogZ
-         em8z/ak/ioed68F02J/Y3ML+D3rZfsZ9YB7y5O6t+RZb7ktOt+gPzVo+MlNaNyx9OK3v
-         9FqLd8gBdVhyaYjKnSQdj5vyQsewJfAjQsf+vBmJ6LHQCS6jyBcNCfKcl3ZOfUvng3T7
-         HWP3Cewmuu22dqC+w/ljy7jEgnW/K2bJPvLoIdG/vIIAxBoBKJZNuLDRyfU0w0Ygfqnu
-         LdPg==
+        bh=Tg3c7ngfVcl4x9lhpbq6H30OwLD853qfSAJiKP0q3+s=;
+        b=T/xzvTMVrXIRK8vSVDM77M5bN7lOgHOa7U3zR5hGDQik6ySrSsa+vwp+3p8G7c9cFe
+         u5k9dtTEZKXt/hVeKOdG675EJ4oEvvA4mwIiZauF5vxyKSaY+b7ShoayHnb8lqi4pGRe
+         7QJqRHOhxAT5cSHWSxl1s+qrP5/Km3/DvEdrOlBYW3rTyZ3gttiLcFO6nxovW529yMDk
+         PPpc60hm1OiK5DRMOoEWa3sJGRdeiMa+uFddcZ8xN4AIl5ojE1NwDjd4kxgNdOtPhDyx
+         BWv1LNUGVktfj9uWM5n3rM/3D/qm5ZY4pUpNTd0JTpTVWULiTLghNkvnt8ZooozCoAZ1
+         RhyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722503769; x=1723108569;
+        d=1e100.net; s=20230601; t=1722515963; x=1723120763;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=iu6p9UGqn4V9/H06aSVq9Roke3n9gTU/07fQ2DW6tkM=;
-        b=iH//8uo40xRez87x+zsqVhpBm1hCu8SvGZWfvyK3cFclu/367v0Kt2Zq+ddhATscP/
-         vGvZthjrjJrAOCqMSPTk19BvRwo+JekT9GfZPxxiTUAKV9bCtSQuLqfvmcHsum5qWEh0
-         dwlMU2e+vsBjk0uMVTJwlpnwIz23YGG0iduQNcLA8HOY+ibu0EbD5ZDM/mwjOXmfZ9zX
-         4dXNU1KPxFRXzwnDvgVhI77F6IWdfiTsSlMctz+A2mmeVduknoVpqcxHAsE/lXudwCTv
-         OFuw4E2nSzW+kEVzPDWTieYQd+YKs9jJcnrWffoqEuIvi3b3nw7sk9SiQzvkAlWe7AH6
-         ofEw==
-X-Gm-Message-State: AOJu0YzmecE38Xht9NtgduXhteKdlTzCu5Trwb7uKT5LO2vD+Or12ZGj
-	aQm5OeM/JvSxvZRQottljOE1kmZu4q0fR3Qs14OiKvF8do+8gg8zkFWMFxJK
-X-Google-Smtp-Source: AGHT+IE4+l+pag1/hroMvqSgBVvoMTsB/V8TroJnelEvVmCoGIs5IO2P55V9tyOkiKwwyMZUg8DI5w==
-X-Received: by 2002:a17:907:60ce:b0:a71:40d4:b1d7 with SMTP id a640c23a62f3a-a7daf667cdcmr142795966b.56.1722503768782;
-        Thu, 01 Aug 2024 02:16:08 -0700 (PDT)
-Received: from localhost.localdomain ([176.33.65.192])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a7acab52c95sm869701066b.76.2024.08.01.02.16.07
+        bh=Tg3c7ngfVcl4x9lhpbq6H30OwLD853qfSAJiKP0q3+s=;
+        b=DMsgvEIE6EAo/q1Xmn6qtyQe+y0fC1YrPOacua7BGvvI+2qhw44X2/uSIPzYURxrVa
+         9ums/bcMh2vzxYb/wOrre/Cao0o47ID+BSsOFgYEBVkWBb6SSBGTedr7gPadx+FHbxY+
+         ghkocLuTAzEdMQzenidB2Y+BT90DarrEf9iyT75x0e0SPaGVVklUfsov2Srl8LzXBly4
+         JftaHMw1Csz6Y6NsZxmGhv7BZA2wmOrjB1LswVzBCeZRBcKTHBNXshfliqYkMhQwOAbC
+         dgoIpnlZ1SxHJtln1Jgw3mX+rRt36TMXwbm0yoEleaTiXFm8HDBAbXqs9Ph6hhk9UQhq
+         puoQ==
+X-Forwarded-Encrypted: i=1; AJvYcCX9iIzeKspPLylwCkyg8GiDHehkdU1jysJ8CbnWIWnLQ2AZHz1lyxStp8m9q6b4xZMhZfPWXjOCNqYcig2VZt+DjOw7uGW2Tvuk4hPWUlbgZxcQA65J3hoLJw==
+X-Gm-Message-State: AOJu0YzTpO9nmFdh9LYwTOmAuJ8UAr6FVb+dAQFzDDnbRNK+FNN2C4Vy
+	jcTnWXzFhWxykUaM6YN6J/mMiFXZ78jyRijbBMqra6PBzdFw4Dg1QbA5UB9B5os=
+X-Google-Smtp-Source: AGHT+IEllbqqeGlGUhJN87r2E3ikM32c5dx+4zPbWBbw9hMhf3xgSfTht7s2PsffRZ8LOq7SZzJISA==
+X-Received: by 2002:a05:600c:5009:b0:428:111a:193 with SMTP id 5b1f17b1804b1-428e5860cd2mr5466585e9.37.1722515962693;
+        Thu, 01 Aug 2024 05:39:22 -0700 (PDT)
+Received: from brgl-uxlite.home ([2a01:cb1d:dc:7e00:9895:bf13:f4de:f316])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4282bb223f6sm57650315e9.45.2024.08.01.05.39.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Aug 2024 02:16:08 -0700 (PDT)
-From: alperak <alperyasinak1@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCH] etcd-cpp-apiv3: Fix contains reference to TMPDIR [buildpaths] warning
-Date: Thu,  1 Aug 2024 12:16:02 +0300
-Message-Id: <20240801091602.56943-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        Thu, 01 Aug 2024 05:39:22 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [meta-oe][PATCH 1/2] libgpiod: update v2.1.2 -> v2.1.3
+Date: Thu,  1 Aug 2024 14:39:18 +0200
+Message-ID: <20240801123919.124678-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 01 Aug 2024 09:16:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111491
+ <openembedded-devel@lists.openembedded.org>; Thu, 01 Aug 2024 12:39:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111492
 
-WARNING: etcd-cpp-apiv3-0.15.4-r0 do_package_qa: QA Issue: File /usr/lib/cmake/etcd-cpp-api/etcd-targets.cmake in package etcd-cpp-apiv3-dev contains reference to TMPDIR [buildpaths]
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-Signed-off-by: alperak <alperyasinak1@gmail.com>
+Bug fixes:
+- fix C++ tests with recent kernels which introduced stricter reconfigure
+  behavior
+- fix a use-after-free bug in python bindings
+- fix passing the event clock property to line requests in python bindings
+- fix a memory leak in tools
+- make sure the string buffers in line-info and chip-info are big enough to not
+  truncate the strings they hold below the size accepted by the kernel
+
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 ---
- meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.15.4.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ .../libgpiod/{libgpiod_2.1.2.bb => libgpiod_2.1.3.bb}           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libgpiod/{libgpiod_2.1.2.bb => libgpiod_2.1.3.bb} (94%)
 
-diff --git a/meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.15.4.bb b/meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.15.4.bb
-index 88a8ba346..7b7e3bc7a 100644
---- a/meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.15.4.bb
-+++ b/meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.15.4.bb
-@@ -19,5 +19,9 @@ S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.1.2.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.1.3.bb
+similarity index 94%
+rename from meta-oe/recipes-support/libgpiod/libgpiod_2.1.2.bb
+rename to meta-oe/recipes-support/libgpiod/libgpiod_2.1.3.bb
+index b4665c156..6130371e4 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_2.1.2.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.1.3.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = " \
+ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-2.x:"
  
- EXTRA_OECONF += "-DCPPREST_EXCLUDE_WEBSOCKETS=ON"
+ SRC_URI += "file://0001-bindings-cxx-Migrate-C-tests-to-use-Catch2-v3.patch"
+-SRC_URI[sha256sum] = "7a148a5a7d1c97a1abb40474b9a392b6edd7a42fe077dfd7ff42cfba24308548"
++SRC_URI[sha256sum] = "2be4c0b03e995d236c0e476e14aeb475d7b431dd1439609b6d65c540f91eaf58"
  
-+do_install:append() {
-+	sed -i -e 's#${RECIPE_SYSROOT}##g' ${D}${libdir}/cmake/etcd-cpp-api/etcd-targets.cmake
-+}
-+
- SOLIBS = ".so"
- FILES_SOLIBSDEV = ""
+ # Enable all project features for ptest
+ PACKAGECONFIG[tests] = "--enable-tests --enable-tools --enable-bindings-cxx --enable-gpioset-interactive,--disable-tests,kmod util-linux glib-2.0 catch2 libedit"
 -- 
-2.25.1
+2.43.0
 
 
