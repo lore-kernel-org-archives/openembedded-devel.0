@@ -2,60 +2,64 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A5752C3DA4A
-	for <webhook@archiver.kernel.org>; Sat,  3 Aug 2024 15:46:33 +0000 (UTC)
-Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
- by mx.groups.io with SMTP id smtpd.web11.10771.1722699986099323629
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0869BC3DA4A
+	for <webhook@archiver.kernel.org>; Sat,  3 Aug 2024 16:19:53 +0000 (UTC)
+Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
+ by mx.groups.io with SMTP id smtpd.web11.11414.1722701989087076561
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 03 Aug 2024 08:46:26 -0700
+ Sat, 03 Aug 2024 09:19:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=AhnQ6JYf;
- spf=pass (domain: gmail.com, ip: 209.85.128.181, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-64b417e1511so76057367b3.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 03 Aug 2024 08:46:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=e888NnuN;
+ spf=pass (domain: gmail.com, ip: 209.85.128.180, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-66108213e88so76130727b3.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 03 Aug 2024 09:19:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1722699985; x=1723304785; darn=lists.openembedded.org;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=8Kj4GIsFJstJCTtY6LmW+mwIis6cBct9u/l4C40gFgs=;
-        b=AhnQ6JYfAjvVTAasd8DGvGN5nvDAVw3rsVafi/k8c9F3iisrWJ7e2QErFCm8rU/Jk7
-         Sm4MXmykMap9QL5mz7kZrW1Rx1S0SdYreD7glkSw+qzxGmX2LzAxuLsVAbdS3nGyAJbd
-         7qXt7p9NGO3BQygd74219N2UF9Ggp9SasMJZ5FdsMTU2KhmDjwAKUKiMbDW95R1U5++x
-         szvxpSvMnelColq+KDqCZpXo6vCx4UBQ1oIbA2gqGGzInzH04S04cfwzLp/zBXak5+N5
-         WjuJsPZG4GD18rTHHTHxJNPcbAX45Zb2FdhZwXuli8K2KhEw5iMBhR5EewrdjHvo5i9l
-         8pZw==
+        d=gmail.com; s=20230601; t=1722701988; x=1723306788; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=8adtBfeCVtpl6PUs4ChhoUFEBrdm6tAc9/NK7Jh7UYg=;
+        b=e888NnuNa+cJ6Vmu3ozapvupE0WiZTNZrvLSeFTwrAvoTzvc6OyH/N/BLNeQ+JSs/X
+         d65SNW3zLut0l0d1gI0E5VgqXh7e21vZLjY4Dj31Wrdwpjv5inV2O/A3sGmMa51DYoWj
+         73yRxoYACbsdd7fZ3gRipiT1keYC5zyubIIfon2zzbdj8KlTfrRmtVGxIgUU9L/MUes5
+         m498CDCUwI8lbRJEaO5BDMixd6NhTfK10ePUY9a2F0e6ctLCvVG/C0jI4hGaD2fTPyJf
+         QR7QhL+7UqqLl5G2KofWMd+f2LgYn7mpBDyLI4izVfiqP1yxrI+dZBiEc93pvOnmlX4E
+         igPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722699985; x=1723304785;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=8Kj4GIsFJstJCTtY6LmW+mwIis6cBct9u/l4C40gFgs=;
-        b=wkLfqmxk1qpkg+7N31Shy+yo0SB1hJQQ65897Jv5RGuCFcjU0gFCOkRWAW1XfM7ArD
-         Cer4P5IS4YB+SzO8Pz8THLpqPbVdcL5W4Yp005PZleCL26NAxamFah6EkdVm3OL5lB0n
-         uN7QWodOOX5/ZwBkkePfsMvj2xTykB6+UTJuV5YdEh+sQ3wMKjwhB3askpAK0WeET74a
-         ZJNrIjZrBa1Kn6PteQkgyaULjcvXRkJCDocUJOb4W7CtR2IO2cXMibf46TYwNyLyC5Nx
-         XWvwgCe+M0mEWey3q+5L8VUJ9k1zAbmgpsZMeekooPMKvwe/WKfAv9dTM2o1M1tiD6TQ
-         BX3w==
-X-Forwarded-Encrypted: i=1; AJvYcCUyYVFWFC4IHGx7WnfU+6l7z1/8dfJ7/U3BajenwJp5uliBeTpuaPBTIvGtQV7nJgtcuU76fd5/vM9IgieIVpBkVst9jv9yQJWbW5KaVl06qt9CGBYQDAZeGg==
-X-Gm-Message-State: AOJu0YwJESeJl6W7R0SUIQr9yD6g99zaikUwVlqaB1piPK+0Rq54kO9k
-	5N4Zm8Qy6o2/hnMUiawf01PbNDk+X49SyNw3gIvCZl/VJRittXgm
-X-Google-Smtp-Source: AGHT+IGyvSw1iWcv5uZ+VM5wJAZMdvR+Wcr/tuIw6CP00jBmj3Qr1NNShk0jeN0yDV9sx9JGJWz8Iw==
-X-Received: by 2002:a0d:da44:0:b0:64a:91b7:e8da with SMTP id 00721157ae682-689637059ebmr68927077b3.35.1722699985019;
-        Sat, 03 Aug 2024 08:46:25 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1722701988; x=1723306788;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=8adtBfeCVtpl6PUs4ChhoUFEBrdm6tAc9/NK7Jh7UYg=;
+        b=D1igd4ZtfpKxDYbrV+Y/6oCjuwnx1rElXVxPeYR8xdg7Qc3TS/NaNGUjcqmAt23puf
+         cndEQQzj92ydUsmMFcVBT+oDH4sZLZV1C+OKqx/9o7IbztxnymIXgUsxonQhIHPCVRNz
+         DqkXesafCsK3pjcSJxAfSK6xWurar9f1kY/2weyJ+ZOd0lxgkJvxbxZnpTlR6WAWwwpX
+         +Mgsx+qwzvJW3OPCWHpAM/w4WKi4bfizsDJY8NRMau6s6DD1sbcP2WKVODxMgIdE509w
+         3WpsYWZ24XSwCH1v7k91wPPsk16rsGE+3+ZOQxH2mAM54srNT/TZ/+o/h86OvSvldpgv
+         V8ag==
+X-Forwarded-Encrypted: i=1; AJvYcCXJvhV1WvCGWbb0bjVjr4Z033xp6M1dkQusvWKc59SQZ1v4u5JBHAWJZ+pvxcL8+Jo6Kg/0GCKEGCDeTLZoHZ4t93Z91mGJzAniwsrWxjanRCUqBAR3XygAuQ==
+X-Gm-Message-State: AOJu0YwmCBzWNy16B86OWLuT4lxxfgc8cRzjmRjea4BNjyKZCglHHcPU
+	BoCO8JRrLVQvyw7ceO2e33mRHYklS/AnWdkuFhdrDsqmPUQ1xs8C
+X-Google-Smtp-Source: AGHT+IE3CS1XXc90gh/fDLK/z5/aq0BDtdTX1d45ZgRqvykrxS0wXuvfwIBmusFHKxrizFmRkusnPw==
+X-Received: by 2002:a0d:fd42:0:b0:64a:e7ec:f3d with SMTP id 00721157ae682-689601af310mr66264577b3.18.1722701988032;
+        Sat, 03 Aug 2024 09:19:48 -0700 (PDT)
 Received: from ?IPV6:2600:1700:45dd:7000:233c:fb4:252a:b2a5? ([2600:1700:45dd:7000:233c:fb4:252a:b2a5])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-68a12d0ffb4sm6117757b3.99.2024.08.03.08.46.24
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-68a14156d13sm6180137b3.144.2024.08.03.09.19.47
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 03 Aug 2024 08:46:24 -0700 (PDT)
-Message-ID: <174ac545-63e3-442e-9009-f106b59303a0@gmail.com>
-Date: Sat, 3 Aug 2024 11:46:24 -0400
+        Sat, 03 Aug 2024 09:19:47 -0700 (PDT)
+Message-ID: <9cee10e7-5443-4a9f-b491-71209ae168e5@gmail.com>
+Date: Sat, 3 Aug 2024 12:19:47 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [oe][meta-oe][scarthgap][PATCH 2/7] composefs: move from
+ meta-filesystems to meta-oe layer
+To: quaresma.jose@gmail.com, openembedded-devel@lists.openembedded.org
+Cc: Jose Quaresma <jose.quaresma@foundries.io>, Khem Raj <raj.khem@gmail.com>
+References: <20240729170910.2670446-1-jose.quaresma@foundries.io>
+ <20240729170910.2670446-2-jose.quaresma@foundries.io>
 Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 From: akuster808 <akuster808@gmail.com>
-Subject: Kirkstone merge request Aug 3rd
 Autocrypt: addr=akuster808@gmail.com; keydata=
  xsDNBGNNaZMBDAC6/Mhpw3EGOOTPtIpcUHT4lI974zN/QqccMPxH4oyBPRJbjVImYs9avXwV
  Ae9xoWKMM/vocEZWm6SOESZSGf+7l05Eo6MxU50cIQh0/bcOcdDAtFRDk4pZIL6X7vGzvFe6
@@ -90,57 +94,54 @@ Autocrypt: addr=akuster808@gmail.com; keydata=
  itDSpYIEGrZObj82rX1wvxf/ZQ8VXS+owIR2F4yeeqPH/CyrPA1ASdtt+Am28/dJ2krr72at
  J++uLxA0cein1kjcosFDpQscnDcPzohnGyyjgEd6VwelZboIS1jt4lIa1badtV+cWMGMgM8W
  ApZ86eOP
+In-Reply-To: <20240729170910.2670446-2-jose.quaresma@foundries.io>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 03 Aug 2024 15:46:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111502
+ <openembedded-devel@lists.openembedded.org>; Sat, 03 Aug 2024 16:19:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111503
 
-The following changes since commit 4052c97dc83d0c88fc277d6fc1815e0699020daa:
 
-   xfce4-panel-profiles:fix tar error (2024-07-17 20:10:27 -0400)
 
-are available in the Git repository at:
+On 7/29/24 1:09 PM, Jose Quaresma via lists.openembedded.org wrote:
+> From: Jose Quaresma <quaresma.jose@gmail.com>
+>
+> We can make this more widely available as we don't
+> depend anymore on fuse3.
 
-   https://git.openembedded.org/meta-openembedded kirkstone-next
+Moving recipes between layers is outside the scope of a stable release.
 
-for you to fetch changes up to 52ecd66835dcfd8b4e55c9cb6325908ccea6a4e7:
-
-   nss: fix failed test of nss. (2024-07-30 09:45:11 -0400)
-
-----------------------------------------------------------------
-Emil Kronborg (1):
-       php-fpm: fix systemd
-
-Haixiao Yan (1):
-       nss: fix failed test of nss.
-
-Poonam Jadhav (1):
-       tcpreplay: Fix CVE-2023-4256
-
-Wang Mingyu (1):
-       php: Fix install conflict when enable multilib.
-
-Wentao Zhang (1):
-       nss: fix failed test of nss.
-
-  meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-4256.patch |  27 ++++++++++++++
-  meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb |   4 ++-
-  meta-oe/recipes-devtools/php/php/php-fpm.service |  57 
-+++++++++++++++++++++++++++---
-  meta-oe/recipes-devtools/php/php_8.1.29.bb |  25 +++++++++----
-  .../nss/0001-Bug-1750624-Pin-validation-date-for-PayPalEE-test-ce.patch |  64 ++++++++++++++++++++++++++++++++++
-  .../nss/nss/regenerate_NameConstrain_test_certificates.tar.gz | Bin 0 
--> 10734 bytes
-  meta-oe/recipes-support/nss/nss_3.74.bb |   2 ++
-  7 files changed, 166 insertions(+), 13 deletions(-)
-  create mode 100644 
-meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-4256.patch
-  create mode 100644 
-meta-oe/recipes-support/nss/nss/0001-Bug-1750624-Pin-validation-date-for-PayPalEE-test-ce.patch
-  create mode 100644 
-meta-oe/recipes-support/nss/nss/regenerate_NameConstrain_test_certificates.tar.gz
+- armin
+>
+> Signed-off-by: Jose Quaresma <jose.quaresma@foundries.io>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> (cherry picked from commit dfae2972b4905bd9a423642641d4921334f844fb)
+> Signed-off-by: Jose Quaresma <jose.quaresma@foundries.io>
+> ---
+>   .../recipes-support/composefs/composefs_1.0.3.bb                  | 0
+>   ...001-musl-basename-use-portable-implementation-for-basena.patch | 0
+>   2 files changed, 0 insertions(+), 0 deletions(-)
+>   rename {meta-filesystems => meta-oe}/recipes-support/composefs/composefs_1.0.3.bb (100%)
+>   rename {meta-filesystems => meta-oe}/recipes-support/composefs/files/0001-musl-basename-use-portable-implementation-for-basena.patch (100%)
+>
+> diff --git a/meta-filesystems/recipes-support/composefs/composefs_1.0.3.bb b/meta-oe/recipes-support/composefs/composefs_1.0.3.bb
+> similarity index 100%
+> rename from meta-filesystems/recipes-support/composefs/composefs_1.0.3.bb
+> rename to meta-oe/recipes-support/composefs/composefs_1.0.3.bb
+> diff --git a/meta-filesystems/recipes-support/composefs/files/0001-musl-basename-use-portable-implementation-for-basena.patch b/meta-oe/recipes-support/composefs/files/0001-musl-basename-use-portable-implementation-for-basena.patch
+> similarity index 100%
+> rename from meta-filesystems/recipes-support/composefs/files/0001-musl-basename-use-portable-implementation-for-basena.patch
+> rename to meta-oe/recipes-support/composefs/files/0001-musl-basename-use-portable-implementation-for-basena.patch
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#111466): https://lists.openembedded.org/g/openembedded-devel/message/111466
+> Mute This Topic: https://lists.openembedded.org/mt/107612971/3616698
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
