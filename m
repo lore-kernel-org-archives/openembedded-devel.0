@@ -1,134 +1,85 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 18A54C52D70
-	for <webhook@archiver.kernel.org>; Sat,  3 Aug 2024 17:06:04 +0000 (UTC)
-Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
- by mx.groups.io with SMTP id smtpd.web11.12259.1722704763583986405
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68292C3DA7F
+	for <webhook@archiver.kernel.org>; Sun,  4 Aug 2024 20:04:33 +0000 (UTC)
+Received: from mta-64-228.siemens.flowmailer.net (mta-64-228.siemens.flowmailer.net [185.136.64.228])
+ by mx.groups.io with SMTP id smtpd.web11.33092.1722801868088366194
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 03 Aug 2024 10:06:03 -0700
+ Sun, 04 Aug 2024 13:04:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XWtam+6b;
- spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-690ad83d4d7so557617b3.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 03 Aug 2024 10:06:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1722704763; x=1723309563; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=mj8vFz/pyixXaawXvS0UW5icU1ruZzUdog92jSiiHCw=;
-        b=XWtam+6bNyB8k5gFF+99FOqpNuYnC1ou6aUR3ZLChyK0g7b+XoSE1vXss1aEmoyMvY
-         BKdYAJO4jJcnLCgyTGKrxD7kvO4Ec6pq9VNAFutdBYgLNyFw+ObrrISVRxjZtKZf1qHu
-         F0pkzkUmSqo92NocgzYKgG7C0bIhqrCst8M//lKWRW6j4yhe949sx2ea7889OtS/hcUW
-         Oj2l4BVpJnuRKNxAY8UapL3rGDlayKo6l6jYF92Ik+0YssNafGDRpEhrYTwvM1WPGquH
-         LaBqfdbKuL2tqjbyrLR882skB2ahC3i5l5qIOQeXUBjk5iaXnNJ3LUUX0H/qBs2Oz1hz
-         AjpQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722704763; x=1723309563;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=mj8vFz/pyixXaawXvS0UW5icU1ruZzUdog92jSiiHCw=;
-        b=kV54fgHUjBA+yT19Vgeb3T8hXyqlPJcTmQH8VyNO7YsQdlPUf5RaFwMSmokBaLX4sM
-         olqUQneeDc8m3eBNrBSINBQdo9n1cmLTqO+XHz3rO/3AbVF6v6MZCX5/thOR6LMv0rAs
-         7bTmuFhJ6gGVfuC4QEGCkSlAf8nk75RC/e01+9SAYJp49ttAh+Qy876JBrs0WAYyUVTf
-         SzqoGo5wLREh65asCMn5LI+9iYOWCIHMNJp9uWMhqGNs/uQ8V2vV0OmAdjva29ef5bQu
-         qiGhcK4TJKf0hJhKzmIFjA22h0DTTXgYVGzuaGGG1K5SH/Be38mj0nWdI78p5Vo2uQPd
-         7qkA==
-X-Gm-Message-State: AOJu0Yw7S9BQIKVtk6AiXRtodAP7KB7UPbcLEiCx6bYpIldYXK0K3RZo
-	bz/XQof+Te+pJUzoDYwg5B1Qn8qCR+goUANxVz+kOh+C4l7bIXDV0A9ryg==
-X-Google-Smtp-Source: AGHT+IHE99Pxjvev0/5H5jrt+cE1d6My5SJC/CK+TzAk295fQ3jIWFiCYbGkUffOsBQVY8bASC4zSA==
-X-Received: by 2002:a5b:b4f:0:b0:e0b:122c:46b6 with SMTP id 3f1490d57ef6-e0bde50eb7cmr7438468276.53.1722704762620;
-        Sat, 03 Aug 2024 10:06:02 -0700 (PDT)
-Received: from keaua.attlocal.net ([2600:1700:45dd:7000:233c:fb4:252a:b2a5])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e0be530434esm634024276.5.2024.08.03.10.06.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Aug 2024 10:06:02 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=QJWI37Xe;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-256628-20240804200424aea44d610715b35f46-5pv2ci@rts-flowmailer.siemens.com)
+Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 20240804200424aea44d610715b35f46
+        for <openembedded-devel@lists.openembedded.org>;
+        Sun, 04 Aug 2024 22:04:25 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=g2nj8epyQcdVZFl+F68Rs+LU6qANnJlLm+o+THbaeXQ=;
+ b=QJWI37XeTZbWrJVjSRBDcxuGBEWv2nxAXetHzD8UNRc1F2I3N8tUcV93coKDWsUEz1hcrN
+ ia8mvnVz4I43tFArHCRbY9ywkEtsTDLmWH1+f3xDUeCFro/5D2WbKOQ/BjE6JC0oPbVzNl7H
+ jHaTH5HdPRjW2TeOuWSc7hyUxSFQEGDJ40T/GAVn3pZ+h5n1F4XSmpiIsn+Sp49Dm4XykQeA
+ LypdoAdYpn+f+S2mvPQKuabBu7lLFG17wEPDUl8PVxjKRs/+a/q5R6wCuExteyOCbmghsIB+
+ Sd/zNGkBGcUgiLOzIKEHRFx8smnBjn/VbbwrKKmm7XN7fJkljFNb8tjQ==;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Tim Orling <ticotimo@gmail.com>
-Subject: [meta-oe][scarthgap][PATCH 1/1] python3-pydantic-core: Fix build with python 3.12.4
-Date: Sat,  3 Aug 2024 13:06:01 -0400
-Message-Id: <20240803170601.2119579-2-akuster808@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240803170601.2119579-1-akuster808@gmail.com>
-References: <20240803170601.2119579-1-akuster808@gmail.com>
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-networking][PATCH] squid: Upgrade to 6.10
+Date: Sun,  4 Aug 2024 22:03:36 +0200
+Message-Id: <20240804200336.268419-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 03 Aug 2024 17:06:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111506
+ <openembedded-devel@lists.openembedded.org>; Sun, 04 Aug 2024 20:04:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111507
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Peter Marko <peter.marko@siemens.com>
 
-This needs to be upgraded to 2.19+ but until then
-backport a fix to keep it building.
+Solves CVE-2024-37894
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Tim Orling <ticotimo@gmail.com>
-(cherry picked from commit 39d164f0c33d24f40e676aac152dfe50f2c00695)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- ...ate_self_schema-for-Python-3.12-1299.patch | 29 +++++++++++++++++++
- .../python/python3-pydantic-core_2.16.3.bb    |  3 +-
- 2 files changed, 31 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-pydantic-core/0001-Fix-generate_self_schema-for-Python-3.12-1299.patch
+ .../recipes-daemons/squid/files/Skip-AC_RUN_IFELSE-tests.patch  | 2 +-
+ .../recipes-daemons/squid/{squid_6.9.bb => squid_6.10.bb}       | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-daemons/squid/{squid_6.9.bb => squid_6.10.bb} (98%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Fix-generate_self_schema-for-Python-3.12-1299.patch b/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Fix-generate_self_schema-for-Python-3.12-1299.patch
-new file mode 100644
-index 0000000000..f6aa18e303
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Fix-generate_self_schema-for-Python-3.12-1299.patch
-@@ -0,0 +1,29 @@
-+From 0dcca2ed6a83ebbc944ec8cbd2f67ffec8043461 Mon Sep 17 00:00:00 2001
-+From: Jelle Zijlstra <jelle.zijlstra@gmail.com>
-+Date: Wed, 22 May 2024 07:44:10 -0700
-+Subject: [PATCH] Fix generate_self_schema for Python 3.12+ (#1299)
-+
-+Upstream-Status: Backport [https://github.com/pydantic/pydantic-core/commit/a7620419383a69bd2b28ab953c9a17f6ed35bb9a]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ generate_self_schema.py | 7 ++++++-
-+ 1 file changed, 6 insertions(+), 1 deletion(-)
-+
-+diff --git a/generate_self_schema.py b/generate_self_schema.py
-+index 8d27247..109fca0 100644
-+--- a/generate_self_schema.py
-++++ b/generate_self_schema.py
-+@@ -189,7 +189,12 @@ def all_literal_values(type_: type[core_schema.Literal]) -> list[any]:
-+ 
-+ def eval_forward_ref(type_: Any) -> Any:
-+     try:
-+-        return type_._evaluate(core_schema.__dict__, None, set())
-++        try:
-++            # Python 3.12+
-++            return type_._evaluate(core_schema.__dict__, None, type_params=set(), recursive_guard=set())
-++        except TypeError:
-++            # Python 3.9+
-++            return type_._evaluate(core_schema.__dict__, None, set())
-+     except TypeError:
-+         # for Python 3.8
-+         return type_._evaluate(core_schema.__dict__, None)
-diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb b/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
-index faa291ea6d..455df8e4e3 100644
---- a/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
-@@ -8,7 +8,8 @@ HOMEPAGE = "https://github.com/pydantic/pydantic-core"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=ab599c188b4a314d2856b3a55030c75c"
+diff --git a/meta-networking/recipes-daemons/squid/files/Skip-AC_RUN_IFELSE-tests.patch b/meta-networking/recipes-daemons/squid/files/Skip-AC_RUN_IFELSE-tests.patch
+index e0d002c68c..489850e3bd 100644
+--- a/meta-networking/recipes-daemons/squid/files/Skip-AC_RUN_IFELSE-tests.patch
++++ b/meta-networking/recipes-daemons/squid/files/Skip-AC_RUN_IFELSE-tests.patch
+@@ -37,7 +37,7 @@ Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+    ])
+ --- a/acinclude/lib-checks.m4
+ +++ b/acinclude/lib-checks.m4
+-@@ -205,7 +205,9 @@ AC_DEFUN([SQUID_CHECK_OPENSSL_CONST_SSL_
++@@ -205,7 +205,9 @@ AC_DEFUN([SQUID_CHECK_OPENSSL_CONST_SSL_METHOD],[
+    [
+     AC_MSG_RESULT([no])
+    ],
+diff --git a/meta-networking/recipes-daemons/squid/squid_6.9.bb b/meta-networking/recipes-daemons/squid/squid_6.10.bb
+similarity index 98%
+rename from meta-networking/recipes-daemons/squid/squid_6.9.bb
+rename to meta-networking/recipes-daemons/squid/squid_6.10.bb
+index f670a776eb..984209ad21 100644
+--- a/meta-networking/recipes-daemons/squid/squid_6.9.bb
++++ b/meta-networking/recipes-daemons/squid/squid_6.10.bb
+@@ -22,7 +22,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.xz \
+            file://squid.nm \
+            "
  
--SRC_URI += "file://0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch"
-+SRC_URI += "file://0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch \
-+            file://0001-Fix-generate_self_schema-for-Python-3.12-1299.patch"
- SRC_URI[sha256sum] = "1cac689f80a3abab2d3c0048b29eea5751114054f032a941a32de4c852c59cad"
+-SRC_URI[sha256sum] = "1ad72d46e1cb556e9561214f0fb181adb87c7c47927ef69bc8acd68a03f61882"
++SRC_URI[sha256sum] = "0b07b187e723f04770dd25beb89aec12030a158696aa8892d87c8b26853408a7"
  
- DEPENDS = "python3-maturin-native python3-typing-extensions"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://errors/COPYRIGHT;md5=d324bc1f9447d1d1588d75b22a678dc4 \
 -- 
-2.34.1
+2.30.2
 
 
