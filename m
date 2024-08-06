@@ -2,55 +2,55 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C3CCC3DA64
-	for <webhook@archiver.kernel.org>; Tue,  6 Aug 2024 15:06:31 +0000 (UTC)
-Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
- by mx.groups.io with SMTP id smtpd.web11.9708.1722956786485615398
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1403FC3DA64
+	for <webhook@archiver.kernel.org>; Tue,  6 Aug 2024 15:06:51 +0000 (UTC)
+Received: from mail-oo1-f47.google.com (mail-oo1-f47.google.com [209.85.161.47])
+ by mx.groups.io with SMTP id smtpd.web11.9714.1722956809488047667
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Aug 2024 08:06:26 -0700
+ Tue, 06 Aug 2024 08:06:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=hYtiyZ+0;
- spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-26827ec5235so376001fac.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Aug 2024 08:06:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=c9JaUfit;
+ spf=pass (domain: gmail.com, ip: 209.85.161.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f47.google.com with SMTP id 006d021491bc7-5c6661bca43so384165eaf.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Aug 2024 08:06:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1722956786; x=1723561586; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1722956809; x=1723561609; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=juBMqujSMMNAYsjx8NT3YpGXLOllqCe9WAyxrhFzLGc=;
-        b=hYtiyZ+0z+hcCZSUM9iGOO/xgmE3uYeCR0QLKToki+vhNa9R3ja85Fx42qgkb4aiQh
-         kftJ6Xw3HBlJgELU5t5B5ISgBI8OciWhOtWiRnv36DwW8DSZIE0iOfStfOfJvnin6Uxz
-         FEuyiUXeXkKnQcoilX0yHJIQjCX01Uq4ad3fnff2R+BLd1CcO6y2+AEqI0y2/F3rnxvC
-         phBgB59UTty0gLm6vzXCFucTV357kfyjGDbEjzErm/mKbEHBXBjU6rgW9jjuqZ5h9FHU
-         0PQWE5hDVivlDw1tZm7GpLSAaDhzOuHxQceaHv1HTfLqbf6pjcN3B8jfBO2mchNtBCQB
-         EIvw==
+        bh=SajJDlR8nqd2y2j1OkoGjOoslxB/JJ6FsjY5phEIHgc=;
+        b=c9JaUfitCltSlVoOXXeB+ir7W+iyImhqu59J/1ibrRsKGgjjAwjapkCFQGkHILlKI9
+         Z3X1cMQg/yjUHtlcHY1b3EtWLnJMaKzmJBDZ5rn2gAsDLNslBmVKNXPS0syP+ahVf4AI
+         W2vuBbSJU2DdlYSc8WTf/U1WffS2wY7O6TYG4aUgJbZUONfMZHgMs9E7HxEYMX4v1CwT
+         xFiSF/1VM6Y/kluyORC7RcIYeZ8OKD7/Dn3GFRK5y17GePfdakIa7wiiPrlYC1V87Z+Q
+         zrn6CIPHNpWWQ+7u86vyV/fRo4KF2GLa3upaxH38NHZvJvhHVmjI6gpwEq7tJUlfqS18
+         +7Gg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722956786; x=1723561586;
+        d=1e100.net; s=20230601; t=1722956809; x=1723561609;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=juBMqujSMMNAYsjx8NT3YpGXLOllqCe9WAyxrhFzLGc=;
-        b=bPLodAIc38eHXwsJj0p6OqjWR1/i338OIFAermeipWNVYTgTHcIuTR5ek4/0w9eNmF
-         WlJg9VljUphVZk8KN+ldF9xbRKELLzMQx/QveVjMf6bBjuv/ixtQqX9a/1eifxIKuNWs
-         a0hNybdZTODbcWrKw3KBDz8sSbWd1qkOAIXtxjLk+iANcvApTdHeKtQhVduq0aLDFFkZ
-         hZg5JlYsYdAZSuQB1eMP9GpqJFgCGyMXhva2V8pzkTOLJ+MVIsbkbIjkNATkOUNcp0Vf
-         Q1sLwxh/VNIfsyDju4dD0D9/yE4KKw9hsJJK3BUBSdiqg3d2ltLya4QxXC2nNmr1DTuZ
-         Wjug==
-X-Gm-Message-State: AOJu0YyFAcCJhIpQJAIJwZzblzLaGaMCQieJYiEQgAW6db6wOz2pWs8G
-	832Uyi7TmJjlVkCk2hQC3IcPDJgG+o5frKpHkcogDnjX3Kd6lke81uclPSs4bHLGelz21FX0GzF
-	AaFeEf4iVMnuKLiXjm8AHSiH4nWE=
-X-Google-Smtp-Source: AGHT+IEIfJP7xRyG3fsvlDI2peGBkue1MqKGbWTpz3/gwgywxxpW9H8xfMv9fj68nIA20nnaL1D/+GW7hYe/c/4Z0P4=
-X-Received: by 2002:a05:6871:5d3:b0:260:71c4:f33a with SMTP id
- 586e51a60fabf-26891ea94cfmr19488898fac.39.1722956785576; Tue, 06 Aug 2024
- 08:06:25 -0700 (PDT)
+        bh=SajJDlR8nqd2y2j1OkoGjOoslxB/JJ6FsjY5phEIHgc=;
+        b=P/nWcGqf4ypYy57WYQWYJ3xk/0tTEcYwqvZfNbcx1jYcqwrC6NPSE2EKxHxyuZfX3Y
+         IwxsRCGZRS0mp8d+bp1RS0cGnojZfE4HDHrvtdWYzc5/J0duBuoCAAjzI/7hY9hqfcIP
+         8YuLlbVUTpBj2NZSKKO1/uX9lw3G2rDvND5Thv+lxrOS5NCVg/Q5L5sC9BNwMG3kPzdR
+         Fq51PORp5/M3GG9/cKhypZJDWZLpcLeMkmdNBICqXGQiKiFxwapegWmooqr65zritUln
+         85uUoelbGW7wlLI8O/puAWgXvWsTODi8/Qz4aoVngL3Kk4LjP8XGiaLjZKaspxy6++6/
+         Ktfg==
+X-Gm-Message-State: AOJu0Yzh5SLXOxfiFWaX8mXQvv4xxEeozm9aU4edMa3u2DHwricpLp/f
+	cnpY2jPP9RQbzqqwYhDZx5QNIbK6pO8RujypHId7jAW/BUVvDmLVGZqoDB4FUAiW207d1No1kNC
+	28ziwVUoosyWxxOlvHkI+/CzeWjtpDczG
+X-Google-Smtp-Source: AGHT+IE3mF59Ns6x2Oxjpoz2Sc3shTTehzzwjb3swv1nXAuIOxU/kFG3K6yGcyjIeZGD0QAPL4VzQapLVwGzQwv3yuE=
+X-Received: by 2002:a05:6870:b61b:b0:254:a753:d1c0 with SMTP id
+ 586e51a60fabf-26891ece96fmr19351777fac.48.1722956808792; Tue, 06 Aug 2024
+ 08:06:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <94a40b8b-36f1-4af0-a452-f3c8f58ec389@gmail.com>
-In-Reply-To: <94a40b8b-36f1-4af0-a452-f3c8f58ec389@gmail.com>
+References: <174ac545-63e3-442e-9009-f106b59303a0@gmail.com>
+In-Reply-To: <174ac545-63e3-442e-9009-f106b59303a0@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 6 Aug 2024 08:05:59 -0700
-Message-ID: <CAMKF1sr=34CMzY8TaZv17iwG=LDdF4D-dmaPyBWFtSXvFnS2Fw@mail.gmail.com>
-Subject: Re: scarthgap merge request: Aug 6th
+Date: Tue, 6 Aug 2024 08:06:23 -0700
+Message-ID: <CAMKF1srV8c8jfHXbcPEkddg7vS1Y+J7e3-8yX62VXt29FtQTfg@mail.gmail.com>
+Subject: Re: Kirkstone merge request Aug 3rd
 To: akuster808 <akuster808@gmail.com>
 Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
@@ -58,122 +58,62 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 Aug 2024 15:06:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111584
+ <openembedded-devel@lists.openembedded.org>; Tue, 06 Aug 2024 15:06:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111585
 
-merged now, thanks Armin
+it is now merged, thanks Armin
 
-On Tue, Aug 6, 2024 at 5:09=E2=80=AFAM akuster808 <akuster808@gmail.com> wr=
+On Sat, Aug 3, 2024 at 8:46=E2=80=AFAM akuster808 <akuster808@gmail.com> wr=
 ote:
 >
-> The following changes since commit 80e01188fa822d87d301ee71973c462d7a8654=
-93:
+> The following changes since commit 4052c97dc83d0c88fc277d6fc1815e0699020d=
+aa:
 >
->    nftables: change ptest output format (2024-07-23 15:24:57 -0400)
+>    xfce4-panel-profiles:fix tar error (2024-07-17 20:10:27 -0400)
 >
 > are available in the Git repository at:
 >
->    https://git.openembedded.org/meta-openembedded scarthgap-next
+>    https://git.openembedded.org/meta-openembedded kirkstone-next
 >
-> for you to fetch changes up to 2338409efc51cf2022ff5610a9fb689251706e2b:
+> for you to fetch changes up to 52ecd66835dcfd8b4e55c9cb6325908ccea6a4e7:
 >
->    python3-pydantic-core: Fix build with python 3.12.4 (2024-08-03
-> 12:25:17 -0400)
+>    nss: fix failed test of nss. (2024-07-30 09:45:11 -0400)
 >
 > ----------------------------------------------------------------
-> Barry Grussling (1):
->        postgresql: Break perl RDEPENDS
+> Emil Kronborg (1):
+>        php-fpm: fix systemd
 >
-> Benjamin Sz=C5=91ke (1):
->        tree: fix broken links
->
-> Chen Qi (1):
->        python3-protobuf: remove useless and problematic .pth file
->
-> Etienne Cordonnier (2):
->        uutils-coreutils: upgrade 0.0.25 -> 0.0.26
->        uutils-coreutils: upgrade 0.0.26 -> 0.0.27
->
-> Khem Raj (1):
->        python3-pydantic-core: Fix build with python 3.12.4
+> Haixiao Yan (1):
+>        nss: fix failed test of nss.
 >
 > Poonam Jadhav (1):
 >        tcpreplay: Fix CVE-2023-4256
 >
-> Siddharth Doshi (1):
->        apache2: Upgrade 2.4.60 -> 2.4.62
->
-> Soumya Sambu (2):
->        python3-sqlparse: Fix CVE-2024-4340
->        python3-werkzeug: upgrade 3.0.1 -> 3.0.3
->
 > Wang Mingyu (1):
->        python3-email-validator: upgrade 2.1.0 -> 2.1.1
+>        php: Fix install conflict when enable multilib.
 >
-> Yogita Urade (2):
->        graphviz: fix CVE-2023-46045
->        hdf5: upgrade to 1.14.4
+> Wentao Zhang (1):
+>        nss: fix failed test of nss.
 >
-> Zhang Peng (1):
->        hiredis: remove ANSI color from ptest result
->
->   .../recipes-support/tcpreplay/tcpreplay/CVE-2023-4256.patch     | 27 ++=
-+
->   meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb    | 1 +
->   .../recipes-core/uutils-coreutils/uutils-coreutils-crates.inc   | 288
-> +++++++++++++++++-----------
->   .../{uutils-coreutils_0.0.25.bb =3D> uutils-coreutils_0.0.27.bb} |   2 =
-+-
->   meta-oe/recipes-dbs/postgresql/postgresql.inc                   | 10 +-
->   meta-oe/recipes-extended/hiredis/hiredis/run-ptest              | 12 +-
->   .../graphviz/graphviz/CVE-2023-46045-0001.patch                 | 37 ++=
-++
->   .../graphviz/graphviz/CVE-2023-46045-0002.patch                 | 38 ++=
-++
->   .../graphviz/graphviz/CVE-2023-46045-0003.patch                 | 33 ++=
-++
->   meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb             | 3 +
->   .../hdf5/files/0001-cmake-remove-build-flags.patch              | 41 +-=
---
->   .../recipes-support/hdf5/{hdf5_1.14.2.bb =3D> hdf5_1.14.4-3.bb} |  13 +=
--
->   meta-oe/recipes-support/tree/tree_2.1.1.bb                      | 4 +-
->   ...mail-validator_2.1.0.bb =3D> python3-email-validator_2.1.1.bb} |   4=
- +-
->   meta-python/recipes-devtools/python/python3-protobuf_4.25.3.bb  | 8 +
->   .../0001-Fix-generate_self_schema-for-Python-3.12-1299.patch    | 29 ++=
-+
->   .../recipes-devtools/python/python3-pydantic-core_2.16.3.bb     | 3 +-
->   .../python/python3-sqlparse/CVE-2024-4340.patch                 | 48 ++=
-+++
->   meta-python/recipes-devtools/python/python3-sqlparse_0.4.4.bb   | 1 +
->   .../{python3-werkzeug_3.0.1.bb =3D> python3-werkzeug_3.0.3.bb} |   4 +-
->   .../apache2/{apache2_2.4.60.bb =3D> apache2_2.4.62.bb} |   2 +-
->   21 files changed, 437 insertions(+), 171 deletions(-)
+>   meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-4256.patch=
+ |  27 ++++++++++++++
+>   meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb |   4 ++-
+>   meta-oe/recipes-devtools/php/php/php-fpm.service |  57
+> +++++++++++++++++++++++++++---
+>   meta-oe/recipes-devtools/php/php_8.1.29.bb |  25 +++++++++----
+>   .../nss/0001-Bug-1750624-Pin-validation-date-for-PayPalEE-test-ce.patch=
+ |  64 ++++++++++++++++++++++++++++++++++
+>   .../nss/nss/regenerate_NameConstrain_test_certificates.tar.gz | Bin 0
+> -> 10734 bytes
+>   meta-oe/recipes-support/nss/nss_3.74.bb |   2 ++
+>   7 files changed, 166 insertions(+), 13 deletions(-)
 >   create mode 100644
 > meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-4256.patch
->   rename
-> meta-oe/recipes-core/uutils-coreutils/{uutils-coreutils_0.0.25.bb =3D>
-> uutils-coreutils_0.0.27.bb} (98%)
 >   create mode 100644
-> meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-0001.patch
+> meta-oe/recipes-support/nss/nss/0001-Bug-1750624-Pin-validation-date-for-=
+PayPalEE-test-ce.patch
 >   create mode 100644
-> meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-0002.patch
->   create mode 100644
-> meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-0003.patch
->   rename meta-oe/recipes-support/hdf5/{hdf5_1.14.2.bb =3D>
-> hdf5_1.14.4-3.bb} (84%)
->   rename
-> meta-python/recipes-devtools/python/{python3-email-validator_2.1.0.bb =3D=
+> meta-oe/recipes-support/nss/nss/regenerate_NameConstrain_test_certificate=
+s.tar.gz
 >
-> python3-email-validator_2.1.1.bb} (59%)
->   create mode 100644
-> meta-python/recipes-devtools/python/python3-pydantic-core/0001-Fix-genera=
-te_self_schema-for-Python-3.12-1299.patch
->   create mode 100644
-> meta-python/recipes-devtools/python/python3-sqlparse/CVE-2024-4340.patch
->   rename meta-python/recipes-devtools/python/{python3-werkzeug_3.0.1.bb
-> =3D> python3-werkzeug_3.0.3.bb} (83%)
->   rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.60.bb =3D>
-> apache2_2.4.62.bb} (99%)
 
