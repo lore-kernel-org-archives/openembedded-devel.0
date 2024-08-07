@@ -1,123 +1,187 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2956FC3DA7F
-	for <webhook@archiver.kernel.org>; Wed,  7 Aug 2024 17:40:11 +0000 (UTC)
-Received: from mail-oi1-f171.google.com (mail-oi1-f171.google.com [209.85.167.171])
- by mx.groups.io with SMTP id smtpd.web10.39643.1723052402278422613
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 639CFC52D7B
+	for <webhook@archiver.kernel.org>; Wed,  7 Aug 2024 18:02:21 +0000 (UTC)
+Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
+ by mx.groups.io with SMTP id smtpd.web10.40123.1723053735741466188
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Aug 2024 10:40:02 -0700
+ Wed, 07 Aug 2024 11:02:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=YGV93aSq;
- spf=pass (domain: gmail.com, ip: 209.85.167.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f171.google.com with SMTP id 5614622812f47-3db35ec5688so97435b6e.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Aug 2024 10:40:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1723052401; x=1723657201; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=cNQo6RNNc12/tV7FDDg6U6r9mtUYveXhukh+k2YLTZU=;
-        b=YGV93aSqPRQPE23kti+3+TwIe7/Y1RQsqUMxknJ9mCpN/8kmTesKPavtGydDDPPFji
-         tNORRWAtFtvdlJKNUigLwCXp0U42PzSXb+TdHmDfh2BK9IQgEk2Hm4z4fVJvofwSFOen
-         QDmM/E+tY+Embm0AEz10L7jH/o/t1tBmB07fhJql30GhACdwExBGTBP12PlJrf6AP5xV
-         CtSI2LsdUCVlxfro6IX7yXpV4ComeHQP8hXFZvW0fcJvRa4sjOTsJhv1ZiS1xjxzxkQE
-         PkROBayr1iFUpsfeY3OLuDLgCHmK3q+guhYmHoP7tNjxG6D5fr48FIIQ76tm9Rmu5nJn
-         rhIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723052401; x=1723657201;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=cNQo6RNNc12/tV7FDDg6U6r9mtUYveXhukh+k2YLTZU=;
-        b=vlYBTFo+X2UrpSeNCHiap8YukpesCc+wSGDoBEPcr2J2kW+0etzifH5REyCdhak7S6
-         kMFnXvEsKsFtghx3F3OhaeldpfhXN0K4dw0UdoqUR7hsTOTcK8uL/vPocWvoHnbWbu86
-         gGqGdjRqdviKz97D9gHj8u37BQWU9FIb2oFnQpl1oX4ytegwDuHPii7Xmvg0bySZfhgR
-         no1GECppjAiAqba1n0BrlmNnk784Pc5KPfz2j59v5v/auC36X7Aes4KP6M2T+E09G2Ae
-         aK13YImIf37HGgPc2xZD/Z0k1GBA2Ey/SpvokNxyExurxt4uxZiRksMMmbRFbKM0fR92
-         8U7g==
-X-Gm-Message-State: AOJu0YwUTg/jhhoWnV3MBrXURj5Iylp3UiCAy1WsCpURp0RnGTLiBkgK
-	86vZ0g84Ozuld/fh5/pcgsTM+wygtUli06vUKJGDd+H9Z0jSMHg/UGFQZeMUB/svJ7VDD0BwMW+
-	HhUXrIl0c3vuy+oWrXADcADCbZtA=
-X-Google-Smtp-Source: AGHT+IEpyg6h+3oeBNe6tzR2o6oMAgaIDruEYPcBJ08yJXvmXvOdUvPQDHPdpvomwDqz45kAUGfiRBmy9QayNKlXTbQ=
-X-Received: by 2002:a05:6808:1384:b0:3d9:3b17:f752 with SMTP id
- 5614622812f47-3db5581636emr25873731b6e.26.1723052401476; Wed, 07 Aug 2024
- 10:40:01 -0700 (PDT)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
+Received: from fwd71.aul.t-online.de (fwd71.aul.t-online.de [10.223.144.97])
+	by mailout06.t-online.de (Postfix) with SMTP id F1BDA2BA50;
+	Wed,  7 Aug 2024 20:02:13 +0200 (CEST)
+Received: from [192.168.178.67] ([84.163.32.204]) by fwd71.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1sbkzF-45S8rQ0; Wed, 7 Aug 2024 20:02:13 +0200
+Date: Wed, 07 Aug 2024 20:03:38 +0200
+From: Markus Volk <f_l_k@t-online.de>
+Subject: Re: [oe] [meta-networking][PATCH] blueman: skip buildpath error
+To: ChenQi <Qi.Chen@windriver.com>
+Cc: Markus Volk <f_l_k@t-online.de>, openembedded-devel@lists.openembedded.org
+Message-Id: <2U0VHS.ECO92WQ25WHG2@t-online.de>
+In-Reply-To: <2c1328fb-9fc6-6d9b-dbc5-eef93a874037@windriver.com>
+References: <20240806203423.993216-1-f_l_k@t-online.de>
+	<2c1328fb-9fc6-6d9b-dbc5-eef93a874037@windriver.com>
+X-Mailer: geary/46.0
 MIME-Version: 1.0
-References: <20240807131419.150841-1-alperyasinak1@gmail.com>
-In-Reply-To: <20240807131419.150841-1-alperyasinak1@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 7 Aug 2024 10:39:35 -0700
-Message-ID: <CAMKF1spi8-TBQ-R98yZcxJcgHXB+-wGP3pcT_SLHBDyfs3emWQ@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCHv2] python3-qrcode: switch to PEP-517
- build backend
-To: alperyasinak1@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/alternative; boundary="=-GhXyW5EaYmUu4NkbLIEO"
+X-TOI-EXPURGATEID: 150726::1723053733-D77EE06B-FFB562AB/0/0 CLEAN NORMAL
+X-TOI-MSGID: 4fd30ece-481a-45f0-91f9-996f65e349fe
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 07 Aug 2024 17:40:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111636
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 Aug 2024 18:02:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111637
 
-Thanks for all the patches for fixing this PEP-517 build issues. It
-would be good if you sent them as a single series instead of
-individual patches, this would help us maintainers who use tools to
-get patches from
-mailing list using b4 etc.
+--=-GhXyW5EaYmUu4NkbLIEO
+Content-Type: text/plain; charset=us-ascii; format=flowed
 
-On Wed, Aug 7, 2024 at 6:14=E2=80=AFAM Alper Ak via lists.openembedded.org
-<alperyasinak1=3Dgmail.com@lists.openembedded.org> wrote:
->
-> The project has a proper pyproject.toml which declares the setuptools.bui=
-ld.meta PEP-517 backend.
->
-> Fix:
->
-> WARNING: python3-qrcode-7.4.2-r0 do_check_backend: QA Issue: inherits set=
-uptools3 but has pyproject.toml with setuptools.build_meta, use the correct=
- class [pep517-backend]
->
-> Signed-off-by: alperak <alperyasinak1@gmail.com>
-> ---
->  Misspelled subject in v1.
->
->  meta-python/recipes-devtools/python/python3-qrcode_7.4.2.bb | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-qrcode_7.4.2.bb =
-b/meta-python/recipes-devtools/python/python3-qrcode_7.4.2.bb
-> index 204f4ecee..49cf62860 100644
-> --- a/meta-python/recipes-devtools/python/python3-qrcode_7.4.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-qrcode_7.4.2.bb
-> @@ -3,10 +3,9 @@ SECTION =3D "devel/python"
->  LICENSE =3D "MIT"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4b802d2a65df4626623c79757f486=
-af9"
->
-> -PYPI_PACKAGE =3D "qrcode"
->  SRC_URI[sha256sum] =3D "9dd969454827e127dbd93696b20747239e6d540e082937c9=
-0f14ac95b30f5845"
->
-> -inherit pypi setuptools3
-> +inherit pypi python_setuptools_build_meta
->
->  RDEPENDS:${PN} =3D " \
->      python3-six \
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#111634): https://lists.openembedded.org/g/openembedde=
-d-devel/message/111634
-> Mute This Topic: https://lists.openembedded.org/mt/107768607/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+I'm not absolutely sure either. But what happens is what is described 
+here:
+<https://github.com/cython/cython/issues/5949>
+
+cython creates a variable in _blueman.c that stores the path where the 
+blueman module was built:
+static const char __pyx_k_home_flk_poky_build_hypr_tmp_wo[] = 
+"/home/flk/poky/build-hypr/tmp/work/corei7-64-poky-linux/blueman/2.4.3/git/module/_blueman.pyx";
+
+So to me it looked like quite a similar issue. Infirit from blueman 
+team also has no idea, why this is happening
+<https://github.com/blueman-project/blueman/pull/2435>
+
+
+On Wed, Aug 7 2024 at 04:28:34 PM +08:00:00, ChenQi 
+<Qi.Chen@windriver.com> wrote:
+> INSANE_SKIP is usually set on a per-package basis.
+> e.g.,
+> meta/recipes-support/vim/vim.inc:INSANE_SKIP:${PN}-tools = 
+> "file-rdeps"
+> 
+> And following the link you provide, it does look like a blueman 
+> issue, because otherwise all projects using cython will have the same 
+> problem. I'm not sure about it though.
+> 
+> Regards,
+> Qi
+> 
+> 
+> On 8/7/24 04:34, Markus Volk wrote:
+>> Blueman has compiled the buildpath into _blueman.so.
+>> The underlying issue is related to the cython compiler, so theres 
+>> nothing
+>> that can be done from the blueman side.
+>> [<https://github.com/cython/cython/issues/5949>]
+>> 
+>> Disable the buildpath error to keep blueman usable until the problem 
+>> is fixed.
+>> ---
+>>   meta-networking/recipes-connectivity/blueman/blueman_2.3.5.bb | 2 
+>> ++
+>>   1 file changed, 2 insertions(+)
+>> 
+>> diff --git 
+>> a/meta-networking/recipes-connectivity/blueman/blueman_2.3.5.bb 
+>> b/meta-networking/recipes-connectivity/blueman/blueman_2.3.5.bb
+>> index 0374d23f0..afb97ee28 100644
+>> --- a/meta-networking/recipes-connectivity/blueman/blueman_2.3.5.bb
+>> +++ b/meta-networking/recipes-connectivity/blueman/blueman_2.3.5.bb
+>> @@ -86,3 +86,5 @@ do_install:append() {
+>>           chmod 700 ${D}/${datadir}/polkit-1/rules.d
+>>           chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
+>>   }
+>> +
+>> +INSANE_SKIP = "buildpaths"
+>> 
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#111598): 
+>> <https://lists.openembedded.org/g/openembedded-devel/message/111598>
+>> Mute This Topic: 
+>> <https://lists.openembedded.org/mt/107758090/7304865>
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org 
+>> <mailto:openembedded-devel+owner@lists.openembedded.org>
+>> Unsubscribe: 
+>> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
+>> [Qi.Chen@eng.windriver.com <mailto:Qi.Chen@eng.windriver.com>]
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>> 
+> 
+
+
+--=-GhXyW5EaYmUu4NkbLIEO
+Content-Type: text/html; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+
+<div id=3D"geary-body" dir=3D"auto"><div><div>I'm not absolutely sure eithe=
+r. But what happens is what is described here:</div><div><a href=3D"https:/=
+/github.com/cython/cython/issues/5949">https://github.com/cython/cython/iss=
+ues/5949</a></div><div><br></div><div>cython creates a variable in _blueman=
+.c that stores the path where the blueman module was built:</div><div>stati=
+c const char __pyx_k_home_flk_poky_build_hypr_tmp_wo[] =3D "/home/flk/poky/=
+build-hypr/tmp/work/corei7-64-poky-linux/blueman/2.4.3/git/module/_blueman.=
+pyx";</div><div><br></div><div>So to me it looked like quite a similar issu=
+e. Infirit from blueman team also has no idea, why this is happening</div><=
+div><a href=3D"https://github.com/blueman-project/blueman/pull/2435">https:=
+//github.com/blueman-project/blueman/pull/2435</a></div></div><div><br></di=
+v></div><div id=3D"geary-quote" dir=3D"auto"><br>On Wed, Aug 7 2024 at 04:2=
+8:34 PM +08:00:00, ChenQi &lt;Qi.Chen@windriver.com&gt; wrote:<br><blockquo=
+te type=3D"cite"><div class=3D"plaintext" style=3D"white-space: break-space=
+s;">INSANE_SKIP is usually set on a per-package basis.
+e.g.,
+meta/recipes-support/vim/vim.inc:INSANE_SKIP:${PN}-tools =3D "file-rdeps"
+
+And following the link you provide, it does look like a blueman issue, beca=
+use otherwise all projects using cython will have the same problem. I'm not=
+ sure about it though.
+
+Regards,
+Qi
+
+
+On 8/7/24 04:34, Markus Volk wrote:
+<blockquote>Blueman has compiled the buildpath into _blueman.so.
+The underlying issue is related to the cython compiler, so theres nothing
+that can be done from the blueman side.
+[<a href=3D"https://github.com/cython/cython/issues/5949">https://github.co=
+m/cython/cython/issues/5949</a>]
+
+Disable the buildpath error to keep blueman usable until the problem is fix=
+ed.
+---
+  meta-networking/recipes-connectivity/blueman/blueman_2.3.5.bb | 2 ++
+  1 file changed, 2 insertions(+)
+
+diff --git a/meta-networking/recipes-connectivity/blueman/blueman_2.3.5.bb =
+b/meta-networking/recipes-connectivity/blueman/blueman_2.3.5.bb
+index 0374d23f0..afb97ee28 100644
+--- a/meta-networking/recipes-connectivity/blueman/blueman_2.3.5.bb
++++ b/meta-networking/recipes-connectivity/blueman/blueman_2.3.5.bb
+@@ -86,3 +86,5 @@ do_install:append() {
+          chmod 700 ${D}/${datadir}/polkit-1/rules.d
+          chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
+  }
++
++INSANE_SKIP =3D "buildpaths"
+
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+Links: You receive all messages sent to this group.
+View/Reply Online (#111598): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/111598">https://lists.openembedded.org/g/openembed=
+ded-devel/message/111598</a>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/107758090/730=
+4865">https://lists.openembedded.org/mt/107758090/7304865</a>
+Group Owner: <a href=3D"mailto:openembedded-devel+owner@lists.openembedded.=
+org">openembedded-devel+owner@lists.openembedded.org</a>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a h=
+ref=3D"mailto:Qi.Chen@eng.windriver.com">Qi.Chen@eng.windriver.com</a>]
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+
+</blockquote>
+</div></blockquote></div>
+--=-GhXyW5EaYmUu4NkbLIEO--
+
 
