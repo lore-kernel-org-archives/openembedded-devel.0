@@ -1,318 +1,148 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8429AC49EA1
-	for <webhook@archiver.kernel.org>; Tue,  6 Aug 2024 21:50:14 +0000 (UTC)
-Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
- by mx.groups.io with SMTP id smtpd.web10.19077.1722981011827427997
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 860ECC52D6F
+	for <webhook@archiver.kernel.org>; Wed,  7 Aug 2024 01:22:25 +0000 (UTC)
+Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
+ by mx.groups.io with SMTP id smtpd.web10.22997.1722993742472347386
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Aug 2024 14:50:12 -0700
+ Tue, 06 Aug 2024 18:22:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
-Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
-	by mailout04.t-online.de (Postfix) with SMTP id 45994148B5
-	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Aug 2024 23:50:07 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.163.35.121]) by fwd86.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1sbS4D-1B2xVJ0; Tue, 6 Aug 2024 23:50:05 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=NE1uusNo;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1722993743; x=1754529743;
+  h=from:to:cc:subject:date:message-id;
+  bh=yFzwNqcITBOExwNSY6t3NySFEz8L2hbMhZBgGpssn9U=;
+  b=NE1uusNo7cNZtn6p1soUqbxjdfjvr8kMyFjKl3LLU7ASW4qrG6j78jIO
+   QRBH8SzhEIGn6B0U5R91dhHQXbC+lc+Uph7A84BgA3YX2oNU9iI2AUDQK
+   UKkxgad9yrHGArYiop1TT3fJ8lstxRfh/3W/04mUf+UpdgzrN0kYCetQv
+   Wim5VOtnYpjozwsDc35kqMNSBZzAU+6+LrAQChtF7q7JyPsPaTYRN97bD
+   4J/G8mduRetMMymtUzI6L/nmk9oo9bePQdP+IioTs/jFiqsI0AL9QS4J5
+   YXA4Dk1MrF2+qzW0H5DkKsENxiD3zYPSyH/7QHSfEyzs3oUIKvtZBYG+6
+   g==;
+X-CSE-ConnectionGUID: N3o6m5kYRSWGekDDrVGCHg==
+X-CSE-MsgGUID: kaYNGoX7RauE5VbW6Vkmsw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11156"; a="170031833"
+X-IronPort-AV: E=Sophos;i="6.09,268,1716217200"; 
+   d="scan'208";a="170031833"
+Received: from unknown (HELO oym-r1.gw.nic.fujitsu.com) ([210.162.30.89])
+  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Aug 2024 10:22:20 +0900
+Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
+	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 04C21D29E1
+	for <openembedded-devel@lists.openembedded.org>; Wed,  7 Aug 2024 10:22:18 +0900 (JST)
+Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
+	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 5BCEBBF495
+	for <openembedded-devel@lists.openembedded.org>; Wed,  7 Aug 2024 10:22:17 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id E85D520086307
+	for <openembedded-devel@lists.openembedded.org>; Wed,  7 Aug 2024 10:22:16 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 6D0171A0002;
+	Wed,  7 Aug 2024 09:22:16 +0800 (CST)
+From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] blueman: update 2.3.5 -> 2.4.3
-Date: Tue,  6 Aug 2024 23:51:26 +0200
-Message-ID: <20240806215126.3938-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.45.2
-MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1722981005-067FBEE0-B8E57207/0/0 CLEAN NORMAL
-X-TOI-MSGID: 01b36931-078e-4127-9ee4-ee6996ebae96
-Content-Transfer-Encoding: quoted-printable
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH v2] hostapd: upgrade 2.10 -> 2.11
+Date: Wed,  7 Aug 2024 09:22:04 +0800
+Message-Id: <1722993725-6061-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28580.003
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28580.003
+X-TMASE-Result: 10--25.095700-10.000000
+X-TMASE-MatchedRID: OIStEy/X03Cjz0nOeth/ySAWHOR37+ATpxAd6mi1Ga2UO40qHXu8fWnX
+	UUBQ4UsQA+jzQdHPVib/OnYGesGMoFdvtTbdcIRVe98LrotgpVSX10IS8HM4/xcL2nROEpDhwRq
+	QfbgaJhe9492ei9lo7dIq66o1vYO6qPsnDqCMYYK55gHWZJfOv7TrV2IG143XxFOmU6TUrNbT6Z
+	/7gOjQOMEbViSldjyYVNQgAsHni+CwYF3neS0luirLqyE6Ur/j31WgqCdyNNmynk7TnYzMusRFw
+	efYldWwgExzV+J9XRgpG7TeLn9NOh/7O97RfsNrx7L94BGnWsRUENBIMyKD0QfxTM57BPHD7v0M
+	lFSLfmlNDQmQ8bbzv+affHI8kAmih2EU0vzIu2/FVAV8vDjN/99WrDP4LKdpXjbObVmL4wkfF7U
+	3vuk4UxeNByEqkiuq184oKeilRNTpZnwb/PFSE54CIKY/Hg3Am4n49vyf9XEvM/mydp5vVCq2rl
+	3dzGQ1DBbGvtcMofyUTGVAhB5EbQ==
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 Aug 2024 21:50:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111599
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 Aug 2024 01:22:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111600
 
-Remove 0001-meson-add-pythoninstalldir-option.patch. It was fixed by:
-[https://github.com/blueman-project/blueman/pull/1700]
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Remove 0001-Search-for-cython3.patch. It was fixed by:
-[https://github.com/blueman-project/blueman/blob/2682501e313831ed20ea3a80=
-9036e84bdb449fc7/module/meson.build#L1]
+License-Update: Copyright updated to 2024.
 
-Remove 0001-meson-add-pythoninstalldir-option.patch. Not quite sure about=
- this one,
-but even without this patch there are no issues to enable bluetooth on my=
- side
+Changelog:
+===========
+* Wi-Fi Easy Connect
+  - add support for DPP release 3
+  - allow Configurator parameters to be provided during config exchange
+* HE/IEEE 802.11ax/Wi-Fi 6
+  - various fixes
+* EHT/IEEE 802.11be/Wi-Fi 7
+  - add preliminary support
+* SAE: add support for fetching the password from a RADIUS server
+* support OpenSSL 3.0 API changes
+* support background radar detection and CAC with some additional
+  drivers
+* support RADIUS ACL/PSK check during 4-way handshake (wpa_psk_radius=3)
+* EAP-SIM/AKA: support IMSI privacy
+* improve 4-way handshake operations
+  - use Secure=1 in message 3 during PTK rekeying
+* OCV: do not check Frequency Segment 1 Channel Number for 160 MHz cases
+  to avoid interoperability issues
+* support new SAE AKM suites with variable length keys
+* support new AKM for 802.1X/EAP with SHA384
+* extend PASN support for secure ranging
+* FT: Use SHA256 to derive PMKID for AKM 00-0F-AC:3 (FT-EAP)
+  - this is based on additional details being added in the IEEE 802.11
+    standard
+  - the new implementation is not backwards compatible
+* improved ACS to cover additional channel types/bandwidths
+* extended Multiple BSSID support
+* fix beacon protection with FT protocol (incorrect BIGTK was provided)
+* support unsynchronized service discovery (USD)
+* add preliminary support for RADIUS/TLS
+* add support for explicit SSID protection in 4-way handshake
+  (a mitigation for CVE-2023-52424; disabled by default for now, can be
+  enabled with ssid_protection=1)
+* fix SAE H2E rejected groups validation to avoid downgrade attacks
+* use stricter validation for some RADIUS messages
+* a large number of other fixes, cleanup, and extensions
 
-Dont add polkit rule. It is now added by default.
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../blueman/0001-Search-for-cython3.patch     | 24 -------
- ...01-meson-add-pythoninstalldir-option.patch | 50 -------------
- .../0002-fix-fail-to-enable-bluetooth.patch   | 72 -------------------
- .../{blueman_2.3.5.bb =3D> blueman_2.4.3.bb}    | 28 +-------
- 4 files changed, 3 insertions(+), 171 deletions(-)
- delete mode 100644 meta-networking/recipes-connectivity/blueman/blueman/=
-0001-Search-for-cython3.patch
- delete mode 100644 meta-networking/recipes-connectivity/blueman/blueman/=
-0001-meson-add-pythoninstalldir-option.patch
- delete mode 100644 meta-networking/recipes-connectivity/blueman/blueman/=
-0002-fix-fail-to-enable-bluetooth.patch
- rename meta-networking/recipes-connectivity/blueman/{blueman_2.3.5.bb =3D=
-> blueman_2.4.3.bb} (71%)
+ .../hostapd/{hostapd_2.10.bb => hostapd_2.11.bb}              | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/hostapd/{hostapd_2.10.bb => hostapd_2.11.bb} (91%)
 
-diff --git a/meta-networking/recipes-connectivity/blueman/blueman/0001-Se=
-arch-for-cython3.patch b/meta-networking/recipes-connectivity/blueman/blu=
-eman/0001-Search-for-cython3.patch
-deleted file mode 100644
-index 913566dce..000000000
---- a/meta-networking/recipes-connectivity/blueman/blueman/0001-Search-fo=
-r-cython3.patch
-+++ /dev/null
-@@ -1,24 +0,0 @@
--Subject: [PATCH] Search for cython3
--MIME-Version: 1.0
--Content-Type: text/plain; charset=3DUTF-8
--Content-Transfer-Encoding: 8bit
--
--Upstream-Status: Inappropriate
--
--Signed-off-by: Markus Volk <f_l_k@gmx.net>
-----
-- meson.build | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
----- a/module/meson.build        2022-02-10 08:49:35.000000000 +0100
--+++ b/module/meson.build        2022-03-29 12:58:03.456193737 +0200
--@@ -1,4 +1,4 @@
---cython =3D find_program('cython', required: true)
--+cython =3D find_program('cython3', required: true)
--=20
-- blueman_c =3D custom_target(
--     'blueman_c',
--
----=20
--2.14.3
--
-diff --git a/meta-networking/recipes-connectivity/blueman/blueman/0001-me=
-son-add-pythoninstalldir-option.patch b/meta-networking/recipes-connectiv=
-ity/blueman/blueman/0001-meson-add-pythoninstalldir-option.patch
-deleted file mode 100644
-index cc448b4ff..000000000
---- a/meta-networking/recipes-connectivity/blueman/blueman/0001-meson-add=
--pythoninstalldir-option.patch
-+++ /dev/null
-@@ -1,50 +0,0 @@
--From 37f24a9bd62f0a8f3e37eaddd33f2f0c9d3aaa0a Mon Sep 17 00:00:00 2001
--From: Chen Qi <Qi.Chen@windriver.com>
--Date: Fri, 1 Apr 2022 23:12:17 -0700
--Subject: [PATCH] meson: add pythoninstalldir option
--
--In case of cross build, using host python to determine the python
--site-packages directory for target is not feasible, add a new option
--pythoninstalldir to fix the issue.
--
--Upstream-Status: Submitted [https://github.com/blueman-project/blueman/p=
-ull/1699]
--
--Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-----
-- meson.build       | 7 ++++++-
-- meson_options.txt | 1 +
-- 2 files changed, 7 insertions(+), 1 deletion(-)
--
--diff --git a/meson.build b/meson.build
--index e12d0ce6..e84457a5 100644
----- a/meson.build
--+++ b/meson.build
--@@ -26,7 +26,12 @@ pkgdatadir =3D join_paths([prefix, get_option('datadi=
-r'), package_name])
-- bindir =3D join_paths([prefix, get_option('bindir')])
-- libexecdir =3D join_paths([prefix, get_option('libexecdir')])
-- schemadir =3D join_paths(['share', 'glib-2.0', 'schemas'])
---pythondir =3D pyinstall.get_install_dir()
--+pythoninstalldir =3D get_option('pythoninstalldir')
--+if pythoninstalldir !=3D ''
--+    pythondir =3D join_paths([prefix, pythoninstalldir])
--+else
--+    pythondir =3D join_paths([prefix, python.sysconfig_path('purelib')]=
-)
--+endif
--=20
-- if get_option('policykit')
--     have_polkit =3D 'True'
--diff --git a/meson_options.txt b/meson_options.txt
--index 177d9ab8..3e397d8e 100644
----- a/meson_options.txt
--+++ b/meson_options.txt
--@@ -2,6 +2,7 @@ option('runtime_deps_check', type: 'boolean', value: tru=
-e, description: 'Disable
-- option('dhcp-config-path', type: 'string', value: '/etc/dhcp3/dhcpd.con=
-f', description: 'Set dhcp3 server configuration path')
-- option('policykit', type: 'boolean', value: true, description: 'Enable =
-policykit support')
-- option('pulseaudio', type: 'boolean', value: true, description: 'Enable=
- PulseAudio support')
--+option('pythoninstalldir', type: 'string', description: 'Path to python=
- site-packages dir relative to ${prefix}')
-- option('systemdsystemunitdir', type: 'string', description: 'Path to sy=
-stemd system unit dir relative to ${prefix}')
-- option('systemduserunitdir', type: 'string', description: 'Path to syst=
-emd user unit dir relative to ${prefix}')
-- option('sendto-plugins', type: 'array', choices: ['Caja', 'Nemo', 'Naut=
-ilus'], value: ['Caja', 'Nemo', 'Nautilus'], description: 'Install sendto=
- plugins for various filemanagers')
----=20
--2.34.1
--
-diff --git a/meta-networking/recipes-connectivity/blueman/blueman/0002-fi=
-x-fail-to-enable-bluetooth.patch b/meta-networking/recipes-connectivity/b=
-lueman/blueman/0002-fix-fail-to-enable-bluetooth.patch
-deleted file mode 100644
-index 282d82137..000000000
---- a/meta-networking/recipes-connectivity/blueman/blueman/0002-fix-fail-=
-to-enable-bluetooth.patch
-+++ /dev/null
-@@ -1,72 +0,0 @@
--Fix fail to enable bluetooth issue
--
--When launch blueman-manager while bluetooth is disable, it may fails
--with error:
--
--  Failed to enable bluetooth
--
--Because when get bluetooth status right after change its status, the
--status may not be updated that plugin applet/KillSwitch.py sets the
--bluetooth status via method of another dbus service which doesn't return
--immediately.
--
--Provides a new dbus method for PowerManager which checks whether dbus
--method SetBluetoothStatus() has finished. Then it makes sure to get
--right bluetooth status.
--
--Upstream-Status: Inappropriate
--Send to upstream but not accepted:
--https://github.com/blueman-project/blueman/pull/1121
--
--Signed-off-by: Kai Kang <kai.kang@windriver.com>
-----
-- blueman/Functions.py                   | 10 ++++++++++
-- blueman/plugins/applet/PowerManager.py |  4 ++++
-- 2 files changed, 14 insertions(+)
--
--diff --git a/blueman/Functions.py b/blueman/Functions.py
--index 3917f42..b4d5eae 100644
----- a/blueman/Functions.py
--+++ b/blueman/Functions.py
--@@ -80,6 +80,16 @@ def check_bluetooth_status(message: str, exitfunc: Ca=
-llable[[], Any]) -> None:
--             return
--=20
--     applet.SetBluetoothStatus('(b)', True)
--+
--+    timeout =3D time.time() + 10
--+    while applet.GetRequestStatus():
--+        time.sleep(0.1)
--+        if time.time() > timeout:
--+            # timeout 5s has been set in applet/PowerManager.py
--+            # so it should NOT reach timeout here
--+            logging.warning('Should NOT reach timeout.')
--+            break
--+
--     if not applet.GetBluetoothStatus():
--         print('Failed to enable bluetooth')
--         exitfunc()
--diff --git a/blueman/plugins/applet/PowerManager.py b/blueman/plugins/ap=
-plet/PowerManager.py
--index c2f7bc3..bf6c99f 100644
----- a/blueman/plugins/applet/PowerManager.py
--+++ b/blueman/plugins/applet/PowerManager.py
--@@ -63,6 +63,7 @@ class PowerManager(AppletPlugin, StatusIconProvider):
--         self._add_dbus_signal("BluetoothStatusChanged", "b")
--         self._add_dbus_method("SetBluetoothStatus", ("b",), "", self.re=
-quest_power_state)
--         self._add_dbus_method("GetBluetoothStatus", (), "b", self.get_b=
-luetooth_status)
--+        self._add_dbus_method("GetRequestStatus", (), "b", self.get_req=
-uest_status)
--=20
--     def on_unload(self) -> None:
--         self.parent.Plugins.Menu.unregister(self)
--@@ -196,6 +197,9 @@ class PowerManager(AppletPlugin, StatusIconProvider)=
-:
--     def get_bluetooth_status(self) -> bool:
--         return self.current_state
--=20
--+    def get_request_status(self):
--+        return self.request_in_progress
--+
--     def on_adapter_property_changed(self, _path: str, key: str, value: =
-Any) -> None:
--         if key =3D=3D "Powered":
--             if value and not self.current_state:
----=20
--2.31.1
--
-diff --git a/meta-networking/recipes-connectivity/blueman/blueman_2.3.5.b=
-b b/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb
-similarity index 71%
-rename from meta-networking/recipes-connectivity/blueman/blueman_2.3.5.bb
-rename to meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb
-index afb97ee28..f5c3518ea 100644
---- a/meta-networking/recipes-connectivity/blueman/blueman_2.3.5.bb
-+++ b/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb
-@@ -8,16 +8,11 @@ inherit meson gettext systemd gsettings pkgconfig pytho=
-n3native gtk-icon-cache u
-=20
- REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
-=20
--SRC_URI =3D " \
--    git://github.com/blueman-project/blueman.git;protocol=3Dhttps;branch=
-=3D2-3-stable \
--    file://0001-Search-for-cython3.patch \
--    file://0002-fix-fail-to-enable-bluetooth.patch \
--    file://0001-meson-add-pythoninstalldir-option.patch \
--"
-+SRC_URI =3D "git://github.com/blueman-project/blueman.git;protocol=3Dhtt=
-ps;branch=3D2-4-stable"
- S =3D "${WORKDIR}/git"
--SRCREV =3D "c85e7afb8d6547d4c35b7b639124de8e999c3650"
-+SRCREV =3D "7bcf919ad6ac0ee9a8c66b18b0ca98af877d4c8f"
-=20
--EXTRA_OEMESON =3D "-Druntime_deps_check=3Dfalse -Dpythoninstalldir=3D${@=
-noprefix('PYTHON_SITEPACKAGES_DIR', d)}"
-+EXTRA_OEMESON =3D "-Druntime_deps_check=3Dfalse"
-=20
- SYSTEMD_SERVICE:${PN} =3D "${BPN}-mechanism.service"
- SYSTEMD_AUTO_ENABLE:${PN} =3D "disable"
-@@ -61,23 +56,6 @@ do_install:append() {
-                                               ${D}${bindir}/blueman-tray
- }
-=20
--do_install:append() {
--    install -d ${D}${datadir}/polkit-1/rules.d
--    cat >${D}${datadir}/polkit-1/rules.d/51-blueman.rules <<EOF
--/* Allow users in wheel group to use blueman feature requiring root with=
-out authentication */
--polkit.addRule(function(action, subject) {
--    if ((action.id =3D=3D "org.blueman.network.setup" ||
--         action.id =3D=3D "org.blueman.dhcp.client" ||
--         action.id =3D=3D "org.blueman.rfkill.setstate" ||
--         action.id =3D=3D "org.blueman.pppd.pppconnect") &&
--        subject.isInGroup("wheel")) {
--
--        return polkit.Result.YES;
--    }
--});
--EOF
--}
--
- USERADD_PACKAGES =3D "${PN}"
- USERADD_PARAM:${PN} =3D "--system --no-create-home --user-group --home-d=
-ir ${sysconfdir}/polkit-1 --shell /bin/nologin polkitd"
-=20
---=20
-2.45.2
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.10.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb
+similarity index 91%
+rename from meta-oe/recipes-connectivity/hostapd/hostapd_2.10.bb
+rename to meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb
+index 44683bf73..693afe6c5 100644
+--- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.10.bb
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb
+@@ -2,7 +2,7 @@ SUMMARY = "User space daemon for extended IEEE 802.11 management"
+ HOMEPAGE = "http://w1.fi/hostapd/"
+ SECTION = "kernel/userland"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://hostapd/README;beginline=5;endline=47;md5=aa03b8bd6216d1a7ca01fd4b89863073"
++LIC_FILES_CHKSUM = "file://hostapd/README;beginline=5;endline=47;md5=8e2c69e491b28390f9de0df1f64ebd6d"
+ 
+ DEPENDS = "libnl openssl"
+ 
+@@ -14,7 +14,7 @@ SRC_URI = " \
+ "
+ 
+ 
+-SRC_URI[sha256sum] = "206e7c799b678572c2e3d12030238784bc4a9f82323b0156b4c9466f1498915d"
++SRC_URI[sha256sum] = "2b3facb632fd4f65e32f4bf82a76b4b72c501f995a4f62e330219fe7aed1747a"
+ 
+ inherit update-rc.d systemd pkgconfig features_check
+ 
+-- 
+2.34.1
 
 
