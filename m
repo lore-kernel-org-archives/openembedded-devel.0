@@ -2,94 +2,93 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A5ACFC52D6F
-	for <webhook@archiver.kernel.org>; Wed,  7 Aug 2024 11:14:48 +0000 (UTC)
-Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com [209.85.208.180])
- by mx.groups.io with SMTP id smtpd.web11.30998.1723029279299668816
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C9A45C52D6F
+	for <webhook@archiver.kernel.org>; Wed,  7 Aug 2024 11:19:08 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.web11.31052.1723029527643503635
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Aug 2024 04:14:39 -0700
+ Wed, 07 Aug 2024 04:18:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=BfDM8DFP;
- spf=pass (domain: gmail.com, ip: 209.85.208.180, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lj1-f180.google.com with SMTP id 38308e7fff4ca-2f1870c355cso17608631fa.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Aug 2024 04:14:39 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fM1up9Rt;
+ spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-428e3129851so11357525e9.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Aug 2024 04:18:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1723029277; x=1723634077; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1723029526; x=1723634326; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=/fQrB/ltNY+zdDKa5C0JPtXo5mIevWs//2iViU9IKyc=;
-        b=BfDM8DFP+7ZzmrM2GhPv6DisfR2BgUjXY2AcINgo99JntLrmmUFp53RuWBseM948hu
-         E53am97EfWaq4a4P24LHpR43r0QahLSD7mC977w7NmdC19HyDMRo0y3CjOlxB/GVP3EA
-         rIjJSc1Q8w5xIE/paZFmJUfYNboTZVFTA2OYX1Fl99zt8MyYmHedl0wlGoba3VQDqCHv
-         W7gnL62cRop7BbBAQT+ae3tKpYnIbt6F0H6iljzOr5dQSwg7alzFKHBCwEcsWCxMEWUk
-         xZOQvGthKlU8e0wwzq4IyW19iXqDFDp4eY63vvKhoRWMWmOeW3FwzlAj6DfFPivbn0w4
-         reJA==
+        bh=AE0Rj7ov3MGY/YWG5STL5JxWFW2FsQNItugVTQ7CVPY=;
+        b=fM1up9RtDOxRD7ApJsKUCJN9El8bKVtzSLHOEDs9ntZTqqqhEWLdjTVzgq8aiZOei2
+         5qzw1KItxF2QFiKT1mjWm106rwvbPXdfZnkoIKUqj89B/Fje46J8WGls3qfAzWD8QQlN
+         8kKZvP4NIXoCU9ADzMVxFBkEddVZ3Kiw6OS0JSJIY3MDdzhufAbA5xfVS9GZri4W+EHA
+         t3F1G3X810jANq+4D889O8MGOQDdC2/NFhh33cOtwovM5EPBXIjvIVGTlG9s5n3JyRbq
+         mcB5S2iKciRwebVQzZ6rpcgQsLg+2ECSRKH/FMS1VDOxms1yvvLwodBOf0r9+LqP1xxC
+         +pMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723029277; x=1723634077;
+        d=1e100.net; s=20230601; t=1723029526; x=1723634326;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=/fQrB/ltNY+zdDKa5C0JPtXo5mIevWs//2iViU9IKyc=;
-        b=THSKbhVW/nz0n762zweKoN4ty8d/Pz6ISXv8TYOTSkPmwdp3upUMagg/jgmHGsiqG8
-         BvNj/mrdhv9PLPsd5fYGuHQB5YY1EeeaAhF43H0cpi0O8rJSon4q7nyui7Xdvkb8v+sW
-         GEMQP03dtpBZCGDzk918ednQmwsT1QcykfLt3XG0IZUeGBSVTk0uiKoHXKrTKj9MT+F8
-         sU/CIo+p4i54rL/3u1ZFRfF143Wi1ZsgVZi38swLketoAOXtvMbIAvKhOXbZnApCt+uW
-         bKyAZH7H2pS9H9YibyNY1SugtC9cbd80dzfZjp04P3WBmmi42i5djac2xv397+fPOfJM
-         Ee3w==
-X-Gm-Message-State: AOJu0YxSxggxABPVAv2DAGx0qEcRWWko0m5uF6qqlkErWXoGIk2iiyAy
-	DBCi6PoGDVm8bONUnmPlhjmrTFjohD2+Y2mMKUQuM/ArFRAHVkBKY+PmxgvP
-X-Google-Smtp-Source: AGHT+IF8gFN8Uu51GYXU76cXOSTJuNORg+HxpvdlROyLQ7rdB8rvEeR0tIepHgIaen5x1S29IfdspA==
-X-Received: by 2002:a2e:8e98:0:b0:2ef:24a9:a75d with SMTP id 38308e7fff4ca-2f15aa95c7dmr116204611fa.14.1723029276570;
-        Wed, 07 Aug 2024 04:14:36 -0700 (PDT)
+        bh=AE0Rj7ov3MGY/YWG5STL5JxWFW2FsQNItugVTQ7CVPY=;
+        b=VIe4/sXOXeNtrn051wtbzfOJ6QuT6QP6GWjbHCrIG40x7h8MwzWfMWMr2D96sJkm8a
+         sdgd0/lrPk+cBCNcz51SMzWzJOJ6HI7/jpaubUR38tpgZispx4TTUaKsk8cbNgghn2M5
+         DFuy39Vaq7QS+MnTnDVf3b2Y7jAcyaTo2+EvlWhzszFSqbbqoY9thilC8OIUSYQwQgh4
+         1q6jJR7xGrWuX1bZQehe80oYQxNKe2OsnsHGeXvHmRtxQMhWO0+waYXGGkW5lLs2agmY
+         bnG49caeOqPoShxJCg4E+qWTOk+RhtXnL4Rk+KRijhfirLVaB/AGtmn2MByndQTG8pDN
+         5Edw==
+X-Gm-Message-State: AOJu0YwKv/Dh5OFvDyUizD7yqRKTpaUINdBurNoumqRuniFm2+TjawoG
+	dgBUrIhw0XCK8sDVSmnaEuJ+oAk6BmPIcjRoDuY9TOvmBF5U27VXlw3GYXfM
+X-Google-Smtp-Source: AGHT+IGozxMB+16CC0erztD8Gz3Xv03kgT0urE+2heINiFl1ME7gwTPnrc1qgY7M9kWNMBPPRB0snw==
+X-Received: by 2002:a05:600c:1552:b0:426:6822:861 with SMTP id 5b1f17b1804b1-428e6b925c7mr118916585e9.36.1723029525312;
+        Wed, 07 Aug 2024 04:18:45 -0700 (PDT)
 Received: from localhost.localdomain ([176.33.65.192])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-429059622f1sm24279595e9.7.2024.08.07.04.14.35
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-36bbd0597b2sm15645104f8f.81.2024.08.07.04.18.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Aug 2024 04:14:36 -0700 (PDT)
+        Wed, 07 Aug 2024 04:18:44 -0700 (PDT)
 From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-python][PATCH] python3-dbus-fast: switch to PEP-517 build backend
-Date: Wed,  7 Aug 2024 14:14:32 +0300
-Message-Id: <20240807111432.55020-1-alperyasinak1@gmail.com>
+Subject: [meta-python][PATCH] python3-brotli: switch to PEP-517 build backend
+Date: Wed,  7 Aug 2024 14:18:42 +0300
+Message-Id: <20240807111842.57452-1-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 07 Aug 2024 11:14:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111611
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 Aug 2024 11:19:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111612
 
-The project has a proper pyproject.toml which declares the poetry.core.masonry.api PEP-517 backend.
+The project has a proper pyproject.toml which declares the setuptools.build.meta PEP-517 backend.
 
 Fix:
 
-WARNING: python3-dbus-fast-2.22.1-r0 do_check_backend: QA Issue: inherits setuptools3 but has pyproject.toml with poetry.core.masonry.api, use the correct class [pep517-backend]
+WARNING: python3-brotli-1.1.0-r0 do_check_backend: QA Issue: inherits setuptools3 but has pyproject.toml with setuptools.build_meta, use the correct class [pep517-backend]
 
 Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- .../recipes-devtools/python/python3-dbus-fast_2.22.1.bb   | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python3-brotli_1.1.0.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-dbus-fast_2.22.1.bb b/meta-python/recipes-devtools/python/python3-dbus-fast_2.22.1.bb
-index 882b7f6cb..c705b1700 100644
---- a/meta-python/recipes-devtools/python/python3-dbus-fast_2.22.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-dbus-fast_2.22.1.bb
-@@ -7,7 +7,13 @@ SRC_URI[sha256sum] = "aa75dfb5bc7ba42f53391ae503ca5a21bd133e74ebb09965013ba23bdf
+diff --git a/meta-python/recipes-devtools/python/python3-brotli_1.1.0.bb b/meta-python/recipes-devtools/python/python3-brotli_1.1.0.bb
+index 678f12b73..542c8640d 100644
+--- a/meta-python/recipes-devtools/python/python3-brotli_1.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-brotli_1.1.0.bb
+@@ -8,10 +8,10 @@ PYPI_PACKAGE = "Brotli"
  
- PYPI_PACKAGE = "dbus_fast"
+ SRC_URI[sha256sum] = "81de08ac11bcb85841e440c13611c00b67d3bf82698314928d0b676362546724"
  
 -inherit pypi setuptools3
-+inherit pypi python_poetry_core
-+
-+DEPENDS += " \
-+	python3-setuptools-native \
-+	python3-wheel-native \
-+	python3-cython-native \
-+	"
++inherit pypi python_setuptools_build_meta
  
- RDEPENDS:${PN} += " \
-     python3-core (>=3.7) \
+-RDEPENDS:${PN} = "\
+-  python3-cffi \
++RDEPENDS:${PN} += " \
++	python3-cffi \
+ "
+ 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.25.1
 
