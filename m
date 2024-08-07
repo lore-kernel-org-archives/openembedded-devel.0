@@ -2,87 +2,90 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7030BC52D6F
-	for <webhook@archiver.kernel.org>; Wed,  7 Aug 2024 10:49:28 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web11.30648.1723027762713543826
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 79C83C52D6F
+	for <webhook@archiver.kernel.org>; Wed,  7 Aug 2024 11:01:08 +0000 (UTC)
+Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com [209.85.208.177])
+ by mx.groups.io with SMTP id smtpd.web10.30636.1723028461123317652
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Aug 2024 03:49:23 -0700
+ Wed, 07 Aug 2024 04:01:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=B7qsKxBU;
- spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4280ca0791bso11167185e9.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Aug 2024 03:49:22 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=EspkP7SB;
+ spf=pass (domain: gmail.com, ip: 209.85.208.177, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-lj1-f177.google.com with SMTP id 38308e7fff4ca-2ef27bfd15bso16921031fa.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Aug 2024 04:01:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1723027761; x=1723632561; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1723028459; x=1723633259; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ZJVL6dMGBdw9hNlxgyCq6CWw9p6R0B+g1IK4yxTBYRM=;
-        b=B7qsKxBUIJH+RX//lWfhkhoA1yKxJXfNlGGg2ATun0CsZzM5Tm43XntOtdAbq7rVU8
-         xX+43wq/H1E7gcU4M8D6PsHP16i7qOjWtkaBqb4herdANtcgO/lnTsic5DwnIVusbecF
-         e739GgZUo7+/SbK9R7OGi9v7aNwLhyIjmqCCG9retL7UIgnvCpts5LVxBopJPgitFuk0
-         r6e8OT95B0CVftFDObNUGkXW+SDXwBbXJEaxMRMYrPN6FASVi3fBmLxDW9+ehFsCBSvh
-         JyDhwtgnmFxxTgW9eWdL1nFKMa0f/EB+AbfacqCLuYM/JlJHfJ82kvvIXsJwyw13mwoN
-         t86Q==
+        bh=hmqASQT8Bb6CzCeAgpMwGSJM4tHMiiCxA5Inn7WTnNk=;
+        b=EspkP7SBMG7kDmf4P3sNsbYhbEI3/bxMYzMMjvKV0nQw1NB0lhCPQMbACTyBnaiFdk
+         yLuvYKi4jJEdelIg9EJNDQAsNiazbHFlO5HOSKQuTEWAoAOWlTxRWOKJ2P6XBN9Q4mZY
+         9anphtu9mkO0q3qVvhGwWOlLMhqG5qrRqgV26Vw/3QLpiyVNjPGRLcLcaFaOI1eXVdLb
+         /EV+Q9So76y4bIh5xNNZF9EkXMpwFzsvkQ4LhOBzxJm3csRHdI8eerTty2A2d/iwkR1p
+         dzCKcghrSNzyLQTQDoflZOW3QsUW/WMR3W1Na0428KPirFvXjgD2HTaAf/vnoRZ77Tr4
+         yoAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723027761; x=1723632561;
+        d=1e100.net; s=20230601; t=1723028459; x=1723633259;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ZJVL6dMGBdw9hNlxgyCq6CWw9p6R0B+g1IK4yxTBYRM=;
-        b=Nn994BSgl3ai1tHNoKWc14Q0vnE1r2epCS5dw2/pq6z7D3UlZPvQk0yXmkCujOocVn
-         faoANdRpEtKw76koV5kkTGI5fSHLsgIAsawezFy/qmBrq48ujWGTZ2E0tGLKIYBP8UZG
-         cbgrkV0+/Bq7SB/9YZr0sFJghtRncRk/qpkKqHPNzfHJJvOq3QbhPsdN8hjqOQTOA7t2
-         b/iKRRsauSZf5XBTc1eO3tid3T0VGu4r8ZiuCWPp5t9uGnF7f69RObzthcqkMjTPrQbA
-         ryESRvYdUI5CyBvSQcnJj1vduHE+wCYeAGDkqKhiub9j14pLs8rTSgtTl+It1eEymY0x
-         ARkA==
-X-Gm-Message-State: AOJu0YzTkgAUbTKDl/Nbpl+PbrSSjhIRh6ZMqh6O5FCrXLiZ2N1T7uOW
-	98D6mv9ch8dNdHThKQ7h+TKHcXccqyoX0SANCJ+31Xz84yLINj9xjozEfWh+
-X-Google-Smtp-Source: AGHT+IFk2Xkbbj5zcm93crNzw3sBD04gECqEjmUDUUM9RhAO6iGg1W/Rj5znuZ7YiOsZ2cKHfM1yLg==
-X-Received: by 2002:adf:e6c7:0:b0:368:6f19:cbf5 with SMTP id ffacd0b85a97d-36bbc0ffb40mr12013227f8f.31.1723027270458;
-        Wed, 07 Aug 2024 03:41:10 -0700 (PDT)
+        bh=hmqASQT8Bb6CzCeAgpMwGSJM4tHMiiCxA5Inn7WTnNk=;
+        b=UWjb+2ZsIfmRhDS+wEPrOOVmLjh6awKyBxrT7BfZ5NPa6JNJbZR+WlOhYxfeqG5ydw
+         Dcuv598XQhM36BvheuqT70umVSY9/gSUU8rFdrp/0bR9ggaMBU9MWk6g94DUaDH/1aNa
+         svwS0jb2bbmZhzta2PujVKOTLDn0ASdnYjfmHxLeTwRbK9qgJAhPSNUQrluhqlr9xV/m
+         6z5w6/3pD2HhUrgLd81ebuwnjdFkpTdBSiMww0s5BoFwgP7Sh8Sxbfjp5p4Rmold45Mp
+         3A5HNc60DWfuyzjvYMS8FfY6DXVk5Ffu/876yiZEK39I3P5Kds/bXvdJcgOHnu0mFcoA
+         pY8Q==
+X-Gm-Message-State: AOJu0YwZdzJwOwTw1OMeIQ+0fPHtOUtOZPTR/7w3Ju7TI8DtZUq9z4WL
+	+YiUuxgJyMPjW/Kp+jau2t2vPKkjqDvGAlMSGa8qP8lXNm8XsTvepRVnN2OE
+X-Google-Smtp-Source: AGHT+IHHawx7tbckTHYU+A8xKT0c0BLMvB7eugGp4bgLDvCGOlc3xRqgldTn0CuZhm4ksEpRx2heig==
+X-Received: by 2002:a2e:8046:0:b0:2ee:7c12:7b36 with SMTP id 38308e7fff4ca-2f15aaacc1dmr125721311fa.19.1723028458508;
+        Wed, 07 Aug 2024 04:00:58 -0700 (PDT)
 Received: from localhost.localdomain ([176.33.65.192])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-36bbcf1dfc3sm15521681f8f.31.2024.08.07.03.41.09
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-42905991434sm23955255e9.30.2024.08.07.04.00.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Aug 2024 03:41:09 -0700 (PDT)
+        Wed, 07 Aug 2024 04:00:57 -0700 (PDT)
 From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-python][PATCH] python3-classes: switch to PEP-517 build backend
-Date: Wed,  7 Aug 2024 13:41:03 +0300
-Message-Id: <20240807104103.13523-1-alperyasinak1@gmail.com>
+Subject: [meta-python][PATCH] python3-eventlet: switch to PEP-517 build backend
+Date: Wed,  7 Aug 2024 14:00:53 +0300
+Message-Id: <20240807110053.48550-1-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 07 Aug 2024 10:49:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111608
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 Aug 2024 11:01:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111609
 
-The project has a proper pyproject.toml which declares the poetry.core.masonry.api PEP-517 backend.
+The project has a proper pyproject.toml which declares the hatchling.build PEP-517 backend.
 
 Fix:
 
-WARNING: python3-classes-0.4.1-r0 do_check_backend: QA Issue: inherits setuptools3 but has pyproject.toml with poetry.core.masonry.api, use the correct class [pep517-backend]
+WARNING: python3-eventlet-0.36.1-r0 do_check_backend: QA Issue: inherits setuptools3 but has pyproject.toml with hatchling.build, use the correct class [pep517-backend]
 
 Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-classes_0.4.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-devtools/python/python3-eventlet_0.36.1.bb        | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-classes_0.4.1.bb b/meta-python/recipes-devtools/python/python3-classes_0.4.1.bb
-index d9240e138..8daf82481 100644
---- a/meta-python/recipes-devtools/python/python3-classes_0.4.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-classes_0.4.1.bb
-@@ -5,6 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=155fbcc756c8ae5265d252d23e20908f"
+diff --git a/meta-python/recipes-devtools/python/python3-eventlet_0.36.1.bb b/meta-python/recipes-devtools/python/python3-eventlet_0.36.1.bb
+index f70099ab9..b521162d2 100644
+--- a/meta-python/recipes-devtools/python/python3-eventlet_0.36.1.bb
++++ b/meta-python/recipes-devtools/python/python3-eventlet_0.36.1.bb
+@@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=56472ad6de4caf50e05332a34b66e778"
  
- SRC_URI[sha256sum] = "4de4fdd6c5c38607bbd8ad76703d7cc4dbe007cfa78e8ef1f62fc6ac55303e23"
+ SRC_URI[sha256sum] = "d227fe76a63d9e6a6cef53beb8ad0b2dc40a5e7737c801f4b474cfae1db07bc5"
  
 -inherit pypi setuptools3
-+inherit pypi python_poetry_core
++inherit pypi python_hatchling
++
++DEPENDS += "python3-hatch-vcs-native"
  
- RDEPENDS:${PN} += "python3-typing-extensions"
+ RDEPENDS:${PN} += " \
+ 	python3-dnspython \
 -- 
 2.25.1
 
