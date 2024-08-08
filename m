@@ -1,199 +1,169 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 10CD9C3DA4A
-	for <webhook@archiver.kernel.org>; Thu,  8 Aug 2024 13:45:18 +0000 (UTC)
-Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
- by mx.groups.io with SMTP id smtpd.web11.60380.1723124713397940153
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56B1DC52D6F
+	for <webhook@archiver.kernel.org>; Thu,  8 Aug 2024 14:39:18 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.web11.61649.1723127955365371859
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Aug 2024 06:45:13 -0700
+ Thu, 08 Aug 2024 07:39:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ens2MpHs;
- spf=pass (domain: gmail.com, ip: 209.85.167.52, mailfrom: ticotimo@gmail.com)
-Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-52f04b3cb33so2073382e87.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 06:45:13 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=2E8tTXns;
+ spf=pass (domain: smile.fr, ip: 209.85.221.51, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-3684eb5be64so588551f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 07:39:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1723124711; x=1723729511; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
+        d=smile.fr; s=google; t=1723127954; x=1723732754; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:references:in-reply-to
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=hYOQQ5YujzcPoBUhw0AjwY7d4/8grNKLtszpgOXlBvU=;
-        b=Ens2MpHsKvgOzWSeavmyAh1/Vj02QUzKlHEZd20o/bwf3wQEW09j71/Dx0vgRk+0IZ
-         P3XElvab6wcH8jccEC3AnRw6eHY6IzCc1Df6RHvqDVpFmJKOHngczU5XqzOA2pmyILaK
-         A+hTcsld5icNexirnmmW333FjEG7O0LZlDTFaMHfbFMS8YY7NOrCuNfbNo77E6BjFf7U
-         Bpg7XpjAsIroywBSwJc5JRipF4c6/34E+5IizdNSdjcFjvhEKsqWqDUerrWVrmyKODYk
-         rvtJ347SJYyi6K912j+4n0FIh8vUkJlxa/bC7h8A0oefX9xXGKNzTHWXCzzBqGuys3uK
-         xJRw==
+        bh=hIHEsHjhv+sK8CGhU+KC+uDSAOlMXyCJjH+uoNakV/I=;
+        b=2E8tTXns8WfIMOT/B9cJBcYkBhgeHyhwW4IvZPghkaM/O1Ckcmz2iPi7wDoh0hw2D9
+         n63YaSFjGE9GkGamVlthRZoHMmebPqWx+KhdGR+NcJ4EIa6ne6cfkcZCTSLVsEZvhei5
+         oTH00z88Sp826/CLqlYwIG88/0rjTjf1IZSRM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723124711; x=1723729511;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
+        d=1e100.net; s=20230601; t=1723127954; x=1723732754;
+        h=cc:to:subject:message-id:date:from:references:in-reply-to
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=hYOQQ5YujzcPoBUhw0AjwY7d4/8grNKLtszpgOXlBvU=;
-        b=WvcYFxtLF08elIT1a2gp87Jmdc92Bgygn5t4VoP0saiDMxQfYEJn9zdam8R4KMbEHd
-         cLL8nbnEQv45tB/KS8g/17UeK5/os0FqMqdONJrR6Au/oYpuP6qfWTfBF1khhuLqcZtl
-         R6AInvu47ENQK8ijHL90YmkjIlKLSvyQcH1NkIjW5si4k015Z8G1s6J8iJm8Hb3QXAbV
-         KwmOn/lYv2aPBRSaahWHBSf0p1ifl5TRm7UE9wrGjTk6ZhfViewfFIs8IroM0USBwVJy
-         Vw4Dnys/xgVJakihbizC4gQyh6PfMspKEwdgMeKtbQHTvLwZvkwv4z1xLD2K5qGKGy2G
-         2/Qg==
-X-Forwarded-Encrypted: i=1; AJvYcCV7BT6dCkIOk1pf2mhg8v4u5Xps1KQxS8+XKbC2ANhoIGRygduN/oxAYuC3IREKmjoqR79DIuO3KFcGY239RfQ5L/zG3/krq1Ec4oQus6v1fG8JP/s5Qt5sEA==
-X-Gm-Message-State: AOJu0YzD0LwiejvYq7DrGWSV55w8eZ8uZbmtZvrLhoqH/Jr7s1E7YsEv
-	kknT5Qj+WttW+o2/afSXSQd/6DqtvI960bBr4GpTsgwLCl11KuDEP/TRVCrtlakxLJm03uC+MOJ
-	hfSePCBrd24a4NGDn8SWVZT7pVOs=
-X-Google-Smtp-Source: AGHT+IHEvg3Gw3Ppr+/0krwon7ezNEqlFbOLslyJRSvKU6bLWf5VBVfFUn4k8xCpezYdVOt/24az5yd/nc4Afn1+RO4=
-X-Received: by 2002:a05:6512:4006:b0:52c:df55:e110 with SMTP id
- 2adb3069b0e04-530e5812439mr1748368e87.12.1723124711046; Thu, 08 Aug 2024
- 06:45:11 -0700 (PDT)
+        bh=hIHEsHjhv+sK8CGhU+KC+uDSAOlMXyCJjH+uoNakV/I=;
+        b=d9V/aXrzsFLL43AbmbXHz8ibduZpMCUJs6c5P5bw5KGX5R47cloO/PL9SZ4e6DjSJZ
+         9mCEcFnrtLMXDRr7Rgi5bs6VM6+FDcV9KYJMK6pO6n+VZH1BWPsWhhoP2wNvr+nQeASd
+         P60hzpTp0yvtRJIPwMRtbBCOntfa8lS7ki15UOdIwPOfrtShgALLJUfVh/WtPmZjhTNs
+         djLPf/8stWzCISKN2kfOtmoFM/VO7Xrct5OJ6/++fiAmnC4VFm56gv55ndk3y+zHZqNg
+         Vz/+MnroZMcMEvoyP8WHQXthErJGNGSdV6/gOT97MTlCTcKvhPIiNY4A83sMacQftKrP
+         eHmg==
+X-Gm-Message-State: AOJu0YyaMGkSFR5UOBCCA3kMIUalC2IlxDmaCZfmGv9qAnLbHwdknsVB
+	/VfFs8y6H40fjZwEQdhuJlTCZ1RzsZNwoZhYTTmnqV8Ad1JGldkaDndmvTKK8VZxqxXkBsPppIP
+	gyrSuXTADxbCUcizEycMHe5367KY1CqSbsFs++A==
+X-Google-Smtp-Source: AGHT+IF7G6mesCU/kxf2xpEjjAjdp5sTcjI7CcN+Cs6Gf01vUwmTBsR0gmWhzNtrZFfc4aV9xa9qdLbq5a6Z1akKptk=
+X-Received: by 2002:a5d:514e:0:b0:36b:3384:40e5 with SMTP id
+ ffacd0b85a97d-36d274db699mr1357787f8f.24.1723127953353; Thu, 08 Aug 2024
+ 07:39:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240808094358.1236-1-debrabander@gmail.com> <17E9C48593EBEAD1.19172@lists.openembedded.org>
-In-Reply-To: <17E9C48593EBEAD1.19172@lists.openembedded.org>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Thu, 8 Aug 2024 06:44:58 -0700
-Message-ID: <CANx9H-BT0hVD3NGAPKU1-Cuz-i9rqNVbX+857f7z1z4iF3amiQ@mail.gmail.com>
-Subject: Re: [oe] [meta-python][master][PATCH] python3-pydantic-core: add
- missing RDEPENDS for ptest
-To: ticotimo@gmail.com
-Cc: debrabander@gmail.com, openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000004e4559061f2c3c77"
+Received: by 2002:a5d:42c5:0:b0:363:69dd:ac36 with HTTP; Thu, 8 Aug 2024
+ 07:39:12 -0700 (PDT)
+In-Reply-To: <20240808101402.24626-1-alperyasinak1@gmail.com>
+References: <20240808101402.24626-1-alperyasinak1@gmail.com>
+From: Yoann Congal <yoann.congal@smile.fr>
+Date: Thu, 8 Aug 2024 16:39:12 +0200
+Message-ID: <CAMSfU+5QtYgjPCvN3M6AQm8PvNArEOFGZidq-yxxd+MNN-fmTg@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-reedsolo: fix versioning
+To: "alperyasinak1@gmail.com" <alperyasinak1@gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000900a8a061f2cfd87"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 13:45:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111663
+ <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 14:39:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111665
 
---0000000000004e4559061f2c3c77
+--000000000000900a8a061f2cfd87
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Also, I believe this requires python3-tzdata which we do not yet have a
-recipe for (I have one ready in this staged series).
-
-On Thu, Aug 8, 2024 at 6:40=E2=80=AFAM Tim Orling via lists.openembedded.or=
-g
-<ticotimo=3Dgmail.com@lists.openembedded.org> wrote:
-
-> I'm in the middle of an upgrade to python3-pydantic and
-> python3-pydantic-core. I'd prefer we hold of on this one so I can keep my
-> tree clean and get this out the door.
+Le jeudi 8 ao=C3=BBt 2024, Alper Ak via lists.openembedded.org <alperyasina=
+k1=3D
+gmail.com@lists.openembedded.org> a =C3=A9crit :
+> The latest release version 1.7.0.
 >
-> On Thu, Aug 8, 2024 at 2:44=E2=80=AFAM Frank de Brabander via
-> lists.openembedded.org <debrabander=3Dgmail.com@lists.openembedded.org>
-> wrote:
+> https://pypi.org/project/reedsolo/#description
+> https://github.com/tomerfiliba-org/reedsolomon/releases
 >
->> ---
->>  .../recipes-devtools/python/python3-pydantic-core_2.18.4.bb     | 2 ++
->>  1 file changed, 2 insertions(+)
->>
->> diff --git a/meta-python/recipes-devtools/python/
->> python3-pydantic-core_2.18.4.bb b/meta-python/recipes-devtools/python/
->> python3-pydantic-core_2.18.4.bb
->> index 0ab1873a0..37a4440ca 100644
->> --- a/meta-python/recipes-devtools/python/python3-pydantic-core_2.18.4.b=
-b
->> +++ b/meta-python/recipes-devtools/python/python3-pydantic-core_2.18.4.b=
-b
->> @@ -37,6 +37,8 @@ RDEPENDS:${PN}-ptest +=3D "\
->>      python3-pytest-timeout \
->>      python3-pytest-benchmark \
->>      python3-unittest-automake-output \
->> +    python3-zoneinfo \
->> +    tzdata \
->>  "
->>
->>  do_install_ptest() {
->> --
->> 2.39.2
->>
->>
->>
->>
->>
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#111662):
-> https://lists.openembedded.org/g/openembedded-devel/message/111662
-> Mute This Topic: https://lists.openembedded.org/mt/107786709/924729
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> ticotimo@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Signed-off-by: alperak <alperyasinak1@gmail.com>
+> ---
+>  .../{python3-reedsolo_2.0.13.bb =3D> python3-reedsolo_1.7.0.bb}   | 2 +-
+
+Hi,
+
+I haven't looked at what the correct PV should be, but don't we need to
+increase PE when PV decrease like this?
+
+Thanks!
+
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-python/recipes-devtools/python3-reedsolo/{
+python3-reedsolo_2.0.13.bb =3D> python3-reedsolo_1.7.0.bb} (75%)
+>
+> diff --git a/meta-python/recipes-devtools/python3-reedsolo/
+python3-reedsolo_2.0.13.bb b/meta-python/recipes-devtools/python3-reedsolo/
+python3-reedsolo_1.7.0.bb
+> similarity index 75%
+> rename from meta-python/recipes-devtools/python3-reedsolo/
+python3-reedsolo_2.0.13.bb
+> rename to meta-python/recipes-devtools/python3-reedsolo/
+python3-reedsolo_1.7.0.bb
+> index bb5b973d8..b6c40921c 100644
+> --- a/meta-python/recipes-devtools/python3-reedsolo/
+python3-reedsolo_2.0.13.bb
+> +++ b/meta-python/recipes-devtools/python3-reedsolo/
+python3-reedsolo_1.7.0.bb
+> @@ -3,7 +3,7 @@ HOMEPAGE =3D "https://github.com/tomerfiliba/reedsolomon"
+>  LICENSE =3D "MIT-0 | Unlicense"
+>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dffde61aeb8917e70e0257e0a4b6d1=
+03c"
+>
+> -SRC_URI[sha256sum] =3D
+"71b4121c6860a55899435c552051a19d5f023c50358be4b1c0fa0c6e2f4ac717"
+> +SRC_URI[sha256sum] =3D
+"c1359f02742751afe0f1c0de9f0772cc113835aa2855d2db420ea24393c87732"
+>
+>  inherit pypi setuptools3
+>
+> --
+> 2.25.1
 >
 >
 
---0000000000004e4559061f2c3c77
+--=20
+Yoann Congal
+Smile ECS - Tech expert
+
+--000000000000900a8a061f2cfd87
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div>Also, I believe this requires python3-tzdata which we=
- do not yet have a recipe for (I have one ready in this staged series).</di=
-v><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On T=
-hu, Aug 8, 2024 at 6:40=E2=80=AFAM Tim Orling via <a href=3D"http://lists.o=
-penembedded.org">lists.openembedded.org</a> &lt;ticotimo=3D<a href=3D"mailt=
-o:gmail.com@lists.openembedded.org">gmail.com@lists.openembedded.org</a>&gt=
-; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
- 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div di=
-r=3D"ltr">I&#39;m in the middle of an upgrade to python3-pydantic and pytho=
-n3-pydantic-core. I&#39;d prefer we hold of on this one so I can keep my tr=
-ee clean and get this out the door.</div><br><div class=3D"gmail_quote"><di=
-v dir=3D"ltr" class=3D"gmail_attr">On Thu, Aug 8, 2024 at 2:44=E2=80=AFAM F=
-rank de Brabander via <a href=3D"http://lists.openembedded.org" target=3D"_=
-blank">lists.openembedded.org</a> &lt;debrabander=3D<a href=3D"mailto:gmail=
-.com@lists.openembedded.org" target=3D"_blank">gmail.com@lists.openembedded=
-.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"mar=
-gin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1=
-ex">---<br>
-=C2=A0.../recipes-devtools/python/<a href=3D"http://python3-pydantic-core_2=
-.18.4.bb" rel=3D"noreferrer" target=3D"_blank">python3-pydantic-core_2.18.4=
-.bb</a>=C2=A0 =C2=A0 =C2=A0| 2 ++<br>
-=C2=A01 file changed, 2 insertions(+)<br>
-<br>
-diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
-pydantic-core_2.18.4.bb" rel=3D"noreferrer" target=3D"_blank">python3-pydan=
-tic-core_2.18.4.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"htt=
-p://python3-pydantic-core_2.18.4.bb" rel=3D"noreferrer" target=3D"_blank">p=
-ython3-pydantic-core_2.18.4.bb</a><br>
-index 0ab1873a0..37a4440ca 100644<br>
---- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-pydanti=
-c-core_2.18.4.bb" rel=3D"noreferrer" target=3D"_blank">python3-pydantic-cor=
-e_2.18.4.bb</a><br>
-+++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-pydanti=
-c-core_2.18.4.bb" rel=3D"noreferrer" target=3D"_blank">python3-pydantic-cor=
-e_2.18.4.bb</a><br>
-@@ -37,6 +37,8 @@ RDEPENDS:${PN}-ptest +=3D &quot;\<br>
-=C2=A0 =C2=A0 =C2=A0python3-pytest-timeout \<br>
-=C2=A0 =C2=A0 =C2=A0python3-pytest-benchmark \<br>
-=C2=A0 =C2=A0 =C2=A0python3-unittest-automake-output \<br>
-+=C2=A0 =C2=A0 python3-zoneinfo \<br>
-+=C2=A0 =C2=A0 tzdata \<br>
-=C2=A0&quot;<br>
-<br>
-=C2=A0do_install_ptest() {<br>
--- <br>
-2.39.2<br>
-<br>
-<br>
-<br>
-<br>
-</blockquote></div>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#111662): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/111662" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/111662</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/107786709/924=
-729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/107786709/924729</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
-et=3D"_blank">ticotimo@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
+<br><br>Le jeudi 8 ao=C3=BBt 2024, Alper Ak via <a href=3D"http://lists.ope=
+nembedded.org">lists.openembedded.org</a> &lt;alperyasinak1=3D<a href=3D"ma=
+ilto:gmail.com@lists.openembedded.org">gmail.com@lists.openembedded.org</a>=
+&gt; a =C3=A9crit=C2=A0:<br>&gt; The latest release version 1.7.0.<br>&gt;<=
+br>&gt; <a href=3D"https://pypi.org/project/reedsolo/#description">https://=
+pypi.org/project/reedsolo/#description</a><br>&gt; <a href=3D"https://githu=
+b.com/tomerfiliba-org/reedsolomon/releases">https://github.com/tomerfiliba-=
+org/reedsolomon/releases</a><br>&gt;<br>&gt; Signed-off-by: alperak &lt;<a =
+href=3D"mailto:alperyasinak1@gmail.com">alperyasinak1@gmail.com</a>&gt;<br>=
+&gt; ---<br>&gt; =C2=A0.../{<a href=3D"http://python3-reedsolo_2.0.13.bb">p=
+ython3-reedsolo_2.0.13.bb</a> =3D&gt; <a href=3D"http://python3-reedsolo_1.=
+7.0.bb">python3-reedsolo_1.7.0.bb</a>}=C2=A0 =C2=A0| 2 +-<br><br>Hi,<br><br=
+>I haven&#39;t looked at what the correct PV should be, but don&#39;t we ne=
+ed to increase PE when PV decrease like this? <br><br>Thanks!<br><br>&gt; =
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>&gt; =C2=A0rename me=
+ta-python/recipes-devtools/python3-reedsolo/{<a href=3D"http://python3-reed=
+solo_2.0.13.bb">python3-reedsolo_2.0.13.bb</a> =3D&gt; <a href=3D"http://py=
+thon3-reedsolo_1.7.0.bb">python3-reedsolo_1.7.0.bb</a>} (75%)<br>&gt;<br>&g=
+t; diff --git a/meta-python/recipes-devtools/python3-reedsolo/<a href=3D"ht=
+tp://python3-reedsolo_2.0.13.bb">python3-reedsolo_2.0.13.bb</a> b/meta-pyth=
+on/recipes-devtools/python3-reedsolo/<a href=3D"http://python3-reedsolo_1.7=
+.0.bb">python3-reedsolo_1.7.0.bb</a><br>&gt; similarity index 75%<br>&gt; r=
+ename from meta-python/recipes-devtools/python3-reedsolo/<a href=3D"http://=
+python3-reedsolo_2.0.13.bb">python3-reedsolo_2.0.13.bb</a><br>&gt; rename t=
+o meta-python/recipes-devtools/python3-reedsolo/<a href=3D"http://python3-r=
+eedsolo_1.7.0.bb">python3-reedsolo_1.7.0.bb</a><br>&gt; index bb5b973d8..b6=
+c40921c 100644<br>&gt; --- a/meta-python/recipes-devtools/python3-reedsolo/=
+<a href=3D"http://python3-reedsolo_2.0.13.bb">python3-reedsolo_2.0.13.bb</a=
+><br>&gt; +++ b/meta-python/recipes-devtools/python3-reedsolo/<a href=3D"ht=
+tp://python3-reedsolo_1.7.0.bb">python3-reedsolo_1.7.0.bb</a><br>&gt; @@ -3=
+,7 +3,7 @@ HOMEPAGE =3D &quot;<a href=3D"https://github.com/tomerfiliba/ree=
+dsolomon">https://github.com/tomerfiliba/reedsolomon</a>&quot;<br>&gt; =C2=
+=A0LICENSE =3D &quot;MIT-0 | Unlicense&quot;<br>&gt; =C2=A0LIC_FILES_CHKSUM=
+ =3D &quot;file://LICENSE;md5=3Dffde61aeb8917e70e0257e0a4b6d103c&quot;<br>&=
+gt;<br>&gt; -SRC_URI[sha256sum] =3D &quot;71b4121c6860a55899435c552051a19d5=
+f023c50358be4b1c0fa0c6e2f4ac717&quot;<br>&gt; +SRC_URI[sha256sum] =3D &quot=
+;c1359f02742751afe0f1c0de9f0772cc113835aa2855d2db420ea24393c87732&quot;<br>=
+&gt;<br>&gt; =C2=A0inherit pypi setuptools3<br>&gt; =C2=A0<br>&gt; --<br>&g=
+t; 2.25.1<br>&gt;<br>&gt;<br><br>-- <br><div dir=3D"ltr"><font face=3D"Rale=
+way, regular">Yoann Congal</font><div><font face=3D"Raleway, regular">Smile=
+ ECS - Tech expert<br></font></div></div><br>
 
---0000000000004e4559061f2c3c77--
+--000000000000900a8a061f2cfd87--
 
