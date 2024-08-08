@@ -1,127 +1,106 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <twoerner@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 83582C3DA4A
-	for <webhook@archiver.kernel.org>; Thu,  8 Aug 2024 12:23:17 +0000 (UTC)
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com [209.85.167.50])
- by mx.groups.io with SMTP id smtpd.web11.58568.1723119789960395106
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C41A6C52D6F
+	for <webhook@archiver.kernel.org>; Thu,  8 Aug 2024 12:47:27 +0000 (UTC)
+Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com [209.85.167.176])
+ by mx.groups.io with SMTP id smtpd.web11.59017.1723121239146315130
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Aug 2024 05:23:10 -0700
+ Thu, 08 Aug 2024 05:47:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=IBqsvffM;
- spf=pass (domain: konsulko.com, ip: 209.85.167.50, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-lf1-f50.google.com with SMTP id 2adb3069b0e04-52f024f468bso978320e87.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 05:23:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XnqFSecP;
+ spf=pass (domain: gmail.com, ip: 209.85.167.176, mailfrom: twoerner@gmail.com)
+Received: by mail-oi1-f176.google.com with SMTP id 5614622812f47-3db23a60850so646773b6e.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 05:47:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1723119788; x=1723724588; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=j7mbu9v9UwRwvXip8qz6ls8ihvgQE4hDm8Wpoz3EHOg=;
-        b=IBqsvffM5FWiF11h0NeuNHmxJr14AqLKzjwK6w+gDl8FWeWo1Q+RGYVAUZYH8r3IuN
-         VuscDM7R8K6e1+yAo1+XYCiaByK1iTBxsV9s8ol0uj5cut0/J9ixKAKnd7TXZGPpFbDT
-         NVuZmPVsJQhjnu0z4b0ogkrV7b1gmY2dfd0YE=
+        d=gmail.com; s=20230601; t=1723121238; x=1723726038; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=F6Qwdcr4zPTkWVvvtzzkJgdgyb2n15ZxFOTDcKjVxNE=;
+        b=XnqFSecPPK9ifJzuj4BANIbllw8ZPxLeI9t2evJhuNm+cGUUHKW5lo5msBNK/7LJyC
+         KJ4f3/tn7p1Guu9MtA/j7HCDBDlcH8PFx6u1rV6W1JWb2iHf/XMkR8X/ZOdEZ4mJNz8X
+         Z3hISfPYKbVqz+lJ8pP1k/v/aPf0hLl2oyXMLy4wDLh0buCa2zEDmHsz05Ha74tt+M44
+         xU7/GYX/zrSiH9a9ST+uhxx5AOWs0WZiqFNj1Fhpwr0hmXaRT888fWQiSC0VY9/wKqDI
+         1F1R4v5uPDIqdhc9Vxlxl1DI1gtl2ckG/M+qoYMUE07C3WXDATsByvXmyAI0VpKOc86L
+         CgAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723119788; x=1723724588;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=j7mbu9v9UwRwvXip8qz6ls8ihvgQE4hDm8Wpoz3EHOg=;
-        b=c6THePhwOcQoYCLn99S+XHKCEA443gxthsE/TKC34g2Vvl4MYz5A+SP90Krcw9muNZ
-         YH1r+kV3ETJJghScKlAQpoVzbfh9Pi52bNQgHB7MC13mbfbEoMiuAr5BDXaL5jaLLh8Z
-         OiShR/VF+BZmcX15YiEPtf/U++NzUToRgXu3/shnVzfynTtLH46z7JU/2RPeYodxxIPx
-         BHmj/x9NU51Eg7ozgh0fx73M4H94onp55xyKNBtgJNFaQ822nXbfpe8yz0t3Q8S3gTIr
-         Dy/JMIq0Gvt7PLo2YpVpVSDr4P1ClrLCl/kXLVuw4d6meVqAd39S4//mtxsbiVOG5xdX
-         bw9Q==
-X-Gm-Message-State: AOJu0Yy6nBB/vDEKAUo0Aj2LVMqsGp2ds6+M+0/K9LJ9C7NdfL/2g38O
-	nITWW2KK+hL+Ez2AMux3Rp2n/K1+VVC09gYXOKlS06b/XZ5p0CyljVvY3p0/Up4MkWVZ5Y/3LPz
-	G
-X-Google-Smtp-Source: AGHT+IH0AWcZiZBxaGaqctMn0P6ig+zpzUfuJQjJuHUMsvsKhnpN7oviwdD0sN/fVseUgM1SQum1rA==
-X-Received: by 2002:a05:6512:1593:b0:52e:a008:8f55 with SMTP id 2adb3069b0e04-530e5891b62mr1206420e87.41.1723119787789;
-        Thu, 08 Aug 2024 05:23:07 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a7dc9ec886esm736135366b.203.2024.08.08.05.23.07
+        d=1e100.net; s=20230601; t=1723121238; x=1723726038;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=F6Qwdcr4zPTkWVvvtzzkJgdgyb2n15ZxFOTDcKjVxNE=;
+        b=BWX2rQ8P6cerXCe75471NK5EpSbXAWQuPW7BOO7LhB2jIlpe8Y4aWLy0kK2G+wj5l3
+         bVwtONdAhiAvHzWcL4vSNg5BqpshMXHZoYJf+PSJncURRg1TAUbwPWf8LWZKcjR7VD3z
+         p47x81ANLbbuTFR5EzreYuXbALH5XfqZXGXy4jAv1jCoP/slrlR/V/2Ed0MTAe0ope/S
+         USU7qLDp3ecWweaOMTMhllDLen04pwYmhNzIFjutSM1uR2i38PH8K8pNBeCMlRA7TpP7
+         1rm4UtVAG6XpQiidwuhddNLYHNySlVf/+10TibZOxyXHEMUUZOMtHsCcXNDmc0Bhtdx9
+         afAA==
+X-Gm-Message-State: AOJu0Ywc5sp/Ca0yCSx0yPndGRxb9ZXfUEmYRE9XAYofteJGqqVzq9aw
+	cKE51S8OKUJtRkAK+Y7o52kDSPfnREVjx7CHEGxEB6KoRTvaPvx+CS9LqA==
+X-Google-Smtp-Source: AGHT+IFtuhK5Ig4/vTvobx8aIXdHvxDWtt6B40Hz8ArVgdp+AXGWC2Ur0ZbY0rhkENFTUme6HU69Wg==
+X-Received: by 2002:a05:6808:2022:b0:3d9:ddce:ed31 with SMTP id 5614622812f47-3dc3b45e6e4mr1763045b6e.45.1723121237612;
+        Thu, 08 Aug 2024 05:47:17 -0700 (PDT)
+Received: from localhost.localdomain (pppoe-209-91-167-254.vianet.ca. [209.91.167.254])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-451c86fb16asm12856921cf.13.2024.08.08.05.47.16
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Aug 2024 05:23:07 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Thu, 08 Aug 2024 05:47:16 -0700 (PDT)
+From: Trevor Woerner <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 6/6] python3-pymongo: Upgrade 4.7.3 -> 4.8.0
-Date: Thu,  8 Aug 2024 15:23:01 +0300
-Message-Id: <20240808122301.2271346-6-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240808122301.2271346-1-leon.anavi@konsulko.com>
-References: <20240808122301.2271346-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH] =?UTF-8?q?python3-matplotlib-inline:=20updat?= =?UTF-8?q?e=200.1.6=20=E2=86=92=200.1.7=20plus=20fixes?=
+Date: Thu,  8 Aug 2024 08:46:56 -0400
+Message-ID: <20240808124656.3877-1-twoerner@gmail.com>
+X-Mailer: git-send-email 2.44.0.501.g19981daefd7c
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 12:23:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111659
+ <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 12:47:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111660
 
-Upgrade to release 4.8.0:
+Update to the latest upstream released version.
 
-- The handshake metadata for "os.name" on Windows has been
-  simplified to "Windows" to improve import time.
-- The repr of bson.binary.Binary is now redacted when the subtype
-  is SENSITIVE_SUBTYPE(8).
-- Secure Software Development Life Cycle automation for release
-  process.
-- GitHub Releases now include a Software Bill of Materials, and
-  signature files corresponding to the distribution files released
-  on PyPI.
-- Fixed a bug in change streams where both startAtOperationTime and
-  resumeToken could be added to a retry attempt, which caused the
-  retry to fail.
-- Fallback to stdlib ssl module when pyopenssl import fails with
-  AttributeError.
-- Improved performance of MongoClient operations, especially when
-  many operations are being run concurrently.
+Add a PYPI_PACKAGE entry to the recipe. Otherwise, during final image
+assembly, an error similar to the following would occur due to the fact
+the yocto package name (which includes dashes) differs from the download
+filename (which includes underscores). NOTE: this would happen with all
+package types, not just ipk:
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+	ERROR: core-image-base-1.0-r0 do_rootfs: Unable to install packages. Command '/scratch/trevor/oe/builds/jupyter/jupyter-rockchip/scarthgap/build/tmp-glibc/work/rock_5a-oe-linux/core-image-base/1.0/recipe-sysroot-native/usr/bin/opkg --volatile-cache -f /scratch/trevor/oe/builds/jupyter/jupyter-rockchip/scarthgap/build/tmp-glibc/work/rock_5a-oe-linux/core-image-base/1.0/opkg.conf -t /scratch/trevor/oe/builds/jupyter/jupyter-rockchip/scarthgap/build/tmp-glibc/work/rock_5a-oe-linux/core-image-base/1.0/temp/ipktemp/ -o /scratch/trevor/oe/builds/jupyter/jupyter-rockchip/scarthgap/build/tmp-glibc/work/rock_5a-oe-linux/core-image-base/1.0/rootfs --force_postinstall --prefer-arch-to-version  <package list including python3-matplotlib-inline...> returned 255:
+	* opkg_solver_install: No candidates to install python3-matplotlib-inline (null)!
+
+Add additional devtool-discovered information:
+- update the build mechanism to include python_setuptools_build_meta
+- add the RDEPENDS
+
+Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
- ...thon3-pymongo_4.7.3.bb => python3-pymongo_4.8.0.bb} | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pymongo_4.7.3.bb => python3-pymongo_4.8.0.bb} (76%)
+ ...-inline_0.1.6.bb => python3-matplotlib-inline_0.1.7.bb} | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-matplotlib-inline_0.1.6.bb => python3-matplotlib-inline_0.1.7.bb} (50%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pymongo_4.7.3.bb b/meta-python/recipes-devtools/python/python3-pymongo_4.8.0.bb
-similarity index 76%
-rename from meta-python/recipes-devtools/python/python3-pymongo_4.7.3.bb
-rename to meta-python/recipes-devtools/python/python3-pymongo_4.8.0.bb
-index baaf3847a..fcce456d8 100644
---- a/meta-python/recipes-devtools/python/python3-pymongo_4.7.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymongo_4.8.0.bb
-@@ -8,14 +8,18 @@ HOMEPAGE = "http://github.com/mongodb/mongo-python-driver"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+diff --git a/meta-python/recipes-devtools/python/python3-matplotlib-inline_0.1.6.bb b/meta-python/recipes-devtools/python/python3-matplotlib-inline_0.1.7.bb
+similarity index 50%
+rename from meta-python/recipes-devtools/python/python3-matplotlib-inline_0.1.6.bb
+rename to meta-python/recipes-devtools/python/python3-matplotlib-inline_0.1.7.bb
+index 13210b906045..335565643aaa 100644
+--- a/meta-python/recipes-devtools/python/python3-matplotlib-inline_0.1.6.bb
++++ b/meta-python/recipes-devtools/python/python3-matplotlib-inline_0.1.7.bb
+@@ -3,6 +3,9 @@ HOMEPAGE = "https://pypi.org/project/matplotlib-inline/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d4692a0eb42ca54892399db2cb35e61e"
  
--SRC_URI[sha256sum] = "6354a66b228f2cd399be7429685fb68e07f19110a3679782ecb4fdb68da03831"
-+SRC_URI[sha256sum] = "454f2295875744dc70f1881e4b2eb99cdad008a33574bc8aaf120530f66c0cde"
+-SRC_URI[sha256sum] = "f887e5f10ba98e8d2b150ddcf4702c1e5f8b3a20005eb0f74bfdbd360ee6f304"
++SRC_URI[sha256sum] = "8423b23ec666be3d16e16b60bdd8ac4e86e840ebd1dd11a30b9f117f2fa0ab90"
  
--inherit pypi python_setuptools_build_meta
-+inherit pypi python_setuptools_build_meta python_hatchling
- 
- PACKAGES =+ "python3-bson"
- 
- FILES:python3-bson = "${PYTHON_SITEPACKAGES_DIR}/bson/*"
- 
-+DEPENDS += " \
-+     python3-hatch-requirements-txt-native \
-+"
+-inherit pypi
++PYPI_PACKAGE = "matplotlib_inline"
++inherit pypi python_setuptools_build_meta
 +
- RDEPENDS:python3-bson += " \
-      python3-datetime \
-      python3-json \
-@@ -27,4 +31,6 @@ RDEPENDS:python3-bson += " \
- RDEPENDS:${PN} += " \
-     python3-bson \
-     python3-pprint \
-+    python3-difflib \
-+    python3-logging \
- "
++RDEPENDS:${PN} = "python3-traitlets"
 -- 
-2.39.2
+2.44.0.501.g19981daefd7c
 
 
