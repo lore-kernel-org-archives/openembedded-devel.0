@@ -1,93 +1,94 @@
-Return-Path: <mattwood2000@gmail.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 69EFBC3DA4A
-	for <webhook@archiver.kernel.org>; Thu,  8 Aug 2024 16:56:39 +0000 (UTC)
-Received: from mail-yb1-f172.google.com (mail-yb1-f172.google.com [209.85.219.172])
- by mx.groups.io with SMTP id smtpd.web10.65077.1723136196083826527
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F0A89C3DA4A
+	for <webhook@archiver.kernel.org>; Thu,  8 Aug 2024 18:18:09 +0000 (UTC)
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.web11.66957.1723141079818161986
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Aug 2024 09:56:36 -0700
+ Thu, 08 Aug 2024 11:18:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jIOLic82;
- spf=pass (domain: gmail.com, ip: 209.85.219.172, mailfrom: mattwood2000@gmail.com)
-Received: by mail-yb1-f172.google.com with SMTP id 3f1490d57ef6-e0bfd14aff7so1017730276.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 09:56:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=BpyP2qQc;
+ spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-3686b554cfcso625333f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 11:17:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1723136195; x=1723740995; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=SvTEnpowzULif4/ZTpKmjcDWmcisg9SwgI9CFdgJeYs=;
-        b=jIOLic824vmkNxbx19K4e3QlSusl0rD3RhcdjL7tFnxeRZd4ubK4ap0R1ICu8oPjHU
-         +tbmwyaywv61Pum3uz8Ir8dLCG4Lz/G6KAzr3lPSCSNLJq9a7b18QErWLCvVvMyGvZ0H
-         ekQ/1JH86P+gzg2mVWMMV6NMiIBzxVK5l04iriSGOvi5yiLH0hzVwQfO14ugesg1lqZy
-         +Y+2E5ZI8ZeojSznkgqdQ9kMbU7/MgTtESC0DPWVWdRQsUS+YoK+OtDbc9IgXsw9Gv/K
-         HaoS4beGgdc3h9aZEf5BbBxZTA7YAJimklo+62RA1OZJW1fdMY051PNbiPulXYQQ4Oge
-         LqXA==
+        d=gmail.com; s=20230601; t=1723141077; x=1723745877; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=V7cq6uFGy7M+vVg5ewEI/xgnXEKM5szPdQ1chVWcpsU=;
+        b=BpyP2qQckSmOrPuY3sF1WDpY43tEYLTWd90ZGZKBcioIov8ak9xdycqeQn3I13bgX5
+         ydG5Uagznke2WFPrSdP+mF17IxVAvgATHqaffjW7ZuY3KscghcRpIrcntkifgJLa/Re0
+         /13fEA4O2Ctc/YB3KB3Z6u8VP/hH9bTRie7ZXKK9gZIghJ1ggaZJkDctEIJ5iM6+Y95Q
+         mQGtFJ6BlwCKCtW7ntZAUu26rPvmeIKePeqP4Ym/6ogsF7WqS1NrQZPFKtrQBLDEELPv
+         p7IZb7Enf4kJSgVcY8aUEYWOKrz5PIgbJfWHjurbLB2Vir86dgCKtbl7lHcdIxyZQcIv
+         Xuqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723136195; x=1723740995;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=SvTEnpowzULif4/ZTpKmjcDWmcisg9SwgI9CFdgJeYs=;
-        b=he0Rxjk0B/FUUVzPlKmgr2HAmCBWCytT3PrEjTgWo08ElE3JqtTRybDKBgetj2EcWM
-         MFIo9+4+AaIm0/8Tvmd2Z36xD+DVmtE8CuKRNJs979KuGn4wN7zEemStuxWshntWrjeL
-         BvKZ6wbAkP64amyvT7cXUHN/tTTfcq2KMUyWYtddS4K+wyRk5jWYpxhmux+MpD8KEB94
-         y/chFwys/9ztbF7QCoAzINjz26pTCvOkoFiejBvWiiTqvz7TT/hN1lkDVgtjpK56z8wJ
-         t/VEqk966tv6ykLoLimy5Uj/RXIrHsWPZMTu9pG73fV6l3XJSM1Wda5ppFcZOqwBh6K7
-         Fzbg==
-X-Gm-Message-State: AOJu0YzpPKvWki0ijHv9c44lSgWAiu+nMDFfHlVfjEeU6IpHElw+0efV
-	8zt0Z3zC5UVahOuzN7jyMEJY91qrWhWGKN/ziAmDBaZmfkDGYc9ieVmitsaHtKM2KVfM3sbrYLm
-	+JCA2xWLqW1PINTJJ1cg556KyPgsCW2KK
-X-Google-Smtp-Source: AGHT+IFbTaJSYjYQbjKjujWRbeTVSgShRHTdaE1VK2dLGfvWhMTTWORU1i6Fl2W0bzDcihbxA14P0cfd0ZjNJJrPZaI=
-X-Received: by 2002:a05:6902:1ac4:b0:e0b:b2d6:f528 with SMTP id
- 3f1490d57ef6-e0e9dbb22dfmr2424267276.38.1723136195027; Thu, 08 Aug 2024
- 09:56:35 -0700 (PDT)
-MIME-Version: 1.0
-From: mattwood2000@gmail.com
-Date: Thu, 8 Aug 2024 12:56:24 -0400
-Message-ID: <CADjezmY=7diF1SSniqsPh=k=GVuGzFLF-LMzhD2pPkQ=jdpjWA@mail.gmail.com>
-Subject: [meta-networking] ot-br-posix build fails with OTBR_WEB=ON
+        d=1e100.net; s=20230601; t=1723141077; x=1723745877;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=V7cq6uFGy7M+vVg5ewEI/xgnXEKM5szPdQ1chVWcpsU=;
+        b=DJG31nrsnH7c3n8BKEkSIIX/NIl3eq5yQRvORK+ckvtYbipbfQ92wl4hHR2+leNqAn
+         oTSK1dt5rX/MF4RdPotByFTR3K1DdX0gZJQN++L4UU2h2WLJkikG2UukiYJDSgq9cXEs
+         n/0YLPL/h233cC5veWsBsQf0+UJxycqoaOQz45W1vTxQLrDdj16jI0SBBKhU0Uv7Ps7S
+         IkXdlfK7jw39YsCzRzPMEvJF5ra+aoZSl2djoEbBYalfzBQM2Jpf5hLcU1hfRZRFyoBO
+         tltC7CfLiDJPpRhhPORy28zZJRgc7POKPQ+6+YAVkEdgni+M//OYrFmU1u5u9vREAgSx
+         933w==
+X-Gm-Message-State: AOJu0YxNQzI3cCiYtfZJp56XwwtP7FK9n7484atOLsRbCeclWXmoxMtd
+	q42KKwdCnATggNnyDTxVACPSwyqqtBKI6YqOT6/V24L17yCZzJFhXNzuy3N8
+X-Google-Smtp-Source: AGHT+IE3o2RGECj3kL3otEQiPXOOww4+DOCofcyziNu2b4j8n6IPoZmh2PV4rmxMmf3gNVMM64tSyQ==
+X-Received: by 2002:a5d:4604:0:b0:368:4da7:5c35 with SMTP id ffacd0b85a97d-36d274ee46bmr1733910f8f.30.1723141077265;
+        Thu, 08 Aug 2024 11:17:57 -0700 (PDT)
+Received: from localhost.localdomain ([176.33.65.192])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-36d2718030bsm2707865f8f.50.2024.08.08.11.17.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 08 Aug 2024 11:17:56 -0700 (PDT)
+From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000cdf269061f2ee8dc"
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-python][PATCH] python3-reedsolo: upgrade 2.0.13 -> 2.1.0b1
+Date: Thu,  8 Aug 2024 21:17:53 +0300
+Message-Id: <20240808181753.10036-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 16:56:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111679
+ <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 18:18:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111680
 
---000000000000cdf269061f2ee8dc
-Content-Type: text/plain; charset="UTF-8"
+Full changelog since last stable release:
 
-Hi all,
+https://github.com/tomerfiliba-org/reedsolomon/compare/v1.7.0...v2.1.0b1
 
-I'm trying to get the ot-br-posix recipe to build with the Web UI enabled.
-On both kirkstone and scarthgap the build will timeout and fail with an npm
-error reason: getaddrinfo ENOTFOUND registry.npmjs.org.
+Signed-off-by: alperak <alperyasinak1@gmail.com>
+---
+ ...{python3-reedsolo_2.0.13.bb => python3-reedsolo_2.1.0b1.bb} | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python3-reedsolo/{python3-reedsolo_2.0.13.bb => python3-reedsolo_2.1.0b1.bb} (68%)
 
-I am not behind a proxy and have tried various things like clearing and
-verify the cache, adding the packages from the recipe to the cache, etc.
-but the timeout and error still happens.
+diff --git a/meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_2.0.13.bb b/meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_2.1.0b1.bb
+similarity index 68%
+rename from meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_2.0.13.bb
+rename to meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_2.1.0b1.bb
+index bb5b973d8..bd2b59d36 100644
+--- a/meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_2.0.13.bb
++++ b/meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_2.1.0b1.bb
+@@ -3,8 +3,9 @@ HOMEPAGE = "https://github.com/tomerfiliba/reedsolomon"
+ LICENSE = "MIT-0 | Unlicense"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=ffde61aeb8917e70e0257e0a4b6d103c"
+ 
+-SRC_URI[sha256sum] = "71b4121c6860a55899435c552051a19d5f023c50358be4b1c0fa0c6e2f4ac717"
++SRC_URI[sha256sum] = "e11528d63e75461d45b86c23f9db8260303d6ab6cae075fa9eddb44527ad8ece"
+ 
+ inherit pypi setuptools3
+ 
++DEPENDS += "python3-cython-native"
+ RDEPENDS:${PN} += "python3-core"
+-- 
+2.25.1
 
-Does anyone have any ideas what would be causing this issue?
-
-Building without the web UI works just fine.
-
-Thanks, Matt
-
---000000000000cdf269061f2ee8dc
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hi all,</div><div><br></div><div>I&#39;m trying to ge=
-t the ot-br-posix recipe to build with the Web UI enabled.=C2=A0 On both ki=
-rkstone and scarthgap the build will timeout and fail with an npm error rea=
-son: getaddrinfo ENOTFOUND <a href=3D"http://registry.npmjs.org">registry.n=
-pmjs.org</a>.</div><div><br></div><div>I am not behind a proxy and have tri=
-ed various things like clearing and verify the cache, adding the packages f=
-rom the recipe to the cache, etc. but the timeout and error still happens.<=
-/div><div><br></div><div>Does anyone have any ideas what would be causing t=
-his issue?</div><div><br></div><div>Building without the web UI works just =
-fine.</div><div><br></div><div>Thanks, Matt<br></div></div>
-
---000000000000cdf269061f2ee8dc--
 
