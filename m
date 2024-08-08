@@ -1,239 +1,241 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5755CC52D7B
-	for <webhook@archiver.kernel.org>; Thu,  8 Aug 2024 16:43:19 +0000 (UTC)
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com [209.85.167.50])
- by mx.groups.io with SMTP id smtpd.web11.64752.1723135398462882483
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60FF3C3DA4A
+	for <webhook@archiver.kernel.org>; Thu,  8 Aug 2024 16:45:29 +0000 (UTC)
+Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com [209.85.161.42])
+ by mx.groups.io with SMTP id smtpd.web11.64828.1723135521494019795
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Aug 2024 09:43:18 -0700
+ Thu, 08 Aug 2024 09:45:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=R/4sw88P;
- spf=pass (domain: gmail.com, ip: 209.85.167.50, mailfrom: ticotimo@gmail.com)
-Received: by mail-lf1-f50.google.com with SMTP id 2adb3069b0e04-52f025ab3a7so1503992e87.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 09:43:18 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TBIBxTdB;
+ spf=pass (domain: gmail.com, ip: 209.85.161.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f42.google.com with SMTP id 006d021491bc7-5d5b22f97b7so889616eaf.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 09:45:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1723135396; x=1723740196; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1723135521; x=1723740321; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=lQT6sdz41cRGRS+IYtvslIjr4g8AH02QaclGQ54dUsQ=;
-        b=R/4sw88PBd+5MGksaceELYHiJYqa6Ln2ZQEZ7wjMlyM8IU+WPSqeNIYAlFKb8GauUK
-         /y68vFUdJfXZ0yiQoN+ogKhgOM/Iyyu1NE3LaEFATzQQ5a2MyWPLWNgiyCeZ2zDfc+Gd
-         3neG0axdLUxgw7mJlFBdeUE2RqZHycSN62lxSNMxJMQee6IplA2FzU377Thx5RonmdNk
-         omlcgl67rOnmwEfUvpnmtWDv+PsS7Nm+7o8+Z3OaX/MjYOUixacSN9/d063GqswX3YeF
-         x0c/zv9LW8ILmVjCivoNJi/PdjgJ0VxjgT/kxwcWa8UzOuihaYvyQk7qYg1H7eklO9tg
-         SWRg==
+        bh=etTzGEDGr0SpZlS07wcN7auynr3jwadzLzaIMRuLOZY=;
+        b=TBIBxTdBOZhUTRgr3ktE+rq/mYqCy6HpIRVmlQKq+8h/Bbfv4JJMYnkpMd1jdx7D7v
+         zwEK5PNA+Xf0BgJdzP9uBi50g93q+48A0gqb7FzkEKUIe7DoPdb7lzqDEPN6rujLKKrj
+         YBsrqqrMEvoI8H2enXJnVy4XKX6Lv9cjsenGR11sqUmhEWtAMk1zTGnDbbl0Ot+oyplg
+         gCx0Rgc6QFuYowdO8kx1FpGiMSFDac/BX0Fq/ZvbAva+rmclcrPJ70Dr6LbIE5FApdvR
+         Vfo+C+JECxzTdmoEUVSsaBA8j+uoT1m2BTSskidJbHuEqFUBmECADicfelui+Q0NBT3J
+         38cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723135396; x=1723740196;
+        d=1e100.net; s=20230601; t=1723135521; x=1723740321;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=lQT6sdz41cRGRS+IYtvslIjr4g8AH02QaclGQ54dUsQ=;
-        b=SwjQxcywsoeeL8vux8V6m45M2yBjseVg7tsr3ViPEutUlgE3SPxcVpJF6cSUHhoCwt
-         06VkZFiOBkQqpNpbwb0hkb0g82n/Nbkf2MZP9xj3T+jHBrOJ+e52uRAFyPqACdUS3RWU
-         VXxgaL9P0z5tsPIYOePxSuRByY6/w0e5nRtPuiKZHFpecKGeQOiBcLQOvL4CKyQuLpG7
-         EITdJrSPd3C3vhkvuP0Vrqv3E7pHkD2I+9nN+3uBKzrEYBlwPxvKTYZsHejFWzhczi+7
-         Fhmkgxqf5zQbz9sewkGB74R8VA2iSv/rYmu+vaeEoe0jN3bsIDhJGGFehQtaNZCm3aFb
-         sa9w==
-X-Gm-Message-State: AOJu0YyUBOjdJs1+ILfRgBcOnFyKDYJN1RzEGc/JC1XXGwiArMeSrzcs
-	V7jh96AcHw3nldJwn/QlP+Kx7GH1v8mmvl8+RKGQQxctr1diDRF2kToLGsjxQGeZX1CIllcFw85
-	wFlMphv024rM/yb65OcImifNtGQM=
-X-Google-Smtp-Source: AGHT+IGZkqmuURfYQe4Qf+UtW3P0p07M0/WfYGwLmNrMa3svVwYrv8KIrxztQwXEdvYR0LF13q82R5zD+L4HaSt7wx4=
-X-Received: by 2002:a05:6512:3e07:b0:52f:ca2b:1d33 with SMTP id
- 2adb3069b0e04-530e586f943mr1961987e87.20.1723135396045; Thu, 08 Aug 2024
- 09:43:16 -0700 (PDT)
+        bh=etTzGEDGr0SpZlS07wcN7auynr3jwadzLzaIMRuLOZY=;
+        b=G0y4l0qZUiTYjYitnZvHM2um14LXcH0oAhJLsnZz90j+aVFS3XOJW9n3Zms8Rv1VfX
+         OcDd/Fl2JeNZUAdtByVPjuKwU+ffjKR6VywO8IT3b+fXX0jT1QcfBnwh5trkiicrCFkZ
+         VTV7vYMx+WzjqIUQWu6K8g3YNiYYKzNd55YaDOvMXMDNOrbIs5HHL/tRyAwDoE/EVmYe
+         SuwvrfQy8VxzHxVyR5Mux+c45Qqq0UziRbTSgkQijHti51BF5IGZvv+F8n5TRUEdOdn+
+         +q/PyOlGNH7UphwfGxknJ77Psmw+B2dEUDgXXLKIjPd0GHCsLOMxZTAJaUCMBgn85WAZ
+         yvhQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVSZf3ainI5vzP5ktFJUe47PYuDfO7KGFQU1MABGOiyxZyd0bvISGw5GUR50owBAUJVHHUNC1sS2q7ofz5JO3hgnDA=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YwfXLBF/2h6+7d01WF3Qesaq3vnfMe4HnOka2OEEp3teZiE8ALP
+	ITZmnvPCz0STuQcRC85eOIbIvobr/I57/HM4La/817lCZyMGbkZ8HAMxkV9xITjAEQibgOBfvmT
+	r32VbIiSZCL6gfodkPHG7b9Tezks=
+X-Google-Smtp-Source: AGHT+IHYbkvJFXHhUm1yYLtE3YldAAvhSeWFP4VUmMSiGympfTRot5Qoqg+JxZmhoIhxau31dYVmBXgBLWcAib4s8PU=
+X-Received: by 2002:a05:6820:4d07:b0:5c4:e036:e383 with SMTP id
+ 006d021491bc7-5d855bebee2mr3233742eaf.8.1723135520729; Thu, 08 Aug 2024
+ 09:45:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <CANx9H-BT0hVD3NGAPKU1-Cuz-i9rqNVbX+857f7z1z4iF3amiQ@mail.gmail.com>
- <E687FC6E-DB9A-420E-9DE4-B92C4CB04726@gmail.com>
-In-Reply-To: <E687FC6E-DB9A-420E-9DE4-B92C4CB04726@gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Thu, 8 Aug 2024 09:43:03 -0700
-Message-ID: <CANx9H-CPA+u4NpYxjo+R3Bz5bjydkh+O4CODOMA-D-b+581N7A@mail.gmail.com>
-Subject: Re: [oe] [meta-python][master][PATCH] python3-pydantic-core: add
- missing RDEPENDS for ptest
-To: Frank de Brabander <debrabander@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000002e6a2c061f2eb90a"
+References: <4453e069-6679-42ae-b3bb-cdd223bf9da1@gmail.com>
+ <547021D2-496C-4944-BCDA-438EBD0B42E0@gmail.com> <CAMKF1srA8cZigcRuK6mecudctEjtv+NJQtBbqpZMirWdMRzujQ@mail.gmail.com>
+ <sewubxpvgxzg52shb7erornf3llh7u4zuvpifiqz3hg53ekelw@axibx56xtnae>
+In-Reply-To: <sewubxpvgxzg52shb7erornf3llh7u4zuvpifiqz3hg53ekelw@axibx56xtnae>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 8 Aug 2024 09:45:09 -0700
+Message-ID: <CAMKF1spUQBUtq3miZ20aCRQFxEsigGSqkBujC61HwvWG6360OQ@mail.gmail.com>
+Subject: Re: [oe] [meta-python][scarthgap][PATCH] python3-pydantic-core:
+ upgrade 2.16.3 -> 2.18.1
+To: Richard Leitner <dev@g0hl1n.net>
+Cc: debrabander@gmail.com, akuster808 <akuster808@gmail.com>, 
+	openembedded-devel@lists.openembedded.org, tim.orling@konsulko.com
+Content-Type: multipart/alternative; boundary="0000000000009cf186061f2ec0a5"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 16:43:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111676
+ <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 16:45:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111677
 
---0000000000002e6a2c061f2eb90a
+--0000000000009cf186061f2ec0a5
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 8, 2024 at 7:16=E2=80=AFAM Frank de Brabander <debrabander@gmai=
-l.com>
-wrote:
+On Thu, Aug 8, 2024 at 12:44=E2=80=AFAM Richard Leitner <dev@g0hl1n.net> wr=
+ote:
+
+> On Tue, Aug 06, 2024 at 01:09:10PM GMT, Khem Raj wrote:
+> > On Mon, Aug 5, 2024 at 12:08=E2=80=AFAM Frank de Brabander via
+> > lists.openembedded.org <debrabander=3Dgmail.com@lists.openembedded.org>
+> > wrote:
+> > >
+> > >
+> > >
+> > > > Op 3 aug 2024 om 18:51 heeft akuster808 <akuster808@gmail.com> het
+> volgende geschreven:
+> > > >
+> > > > =EF=BB=BF
+> > > >
+> > > >> On 7/31/24 4:07 AM, Frank de Brabander wrote:
+> > > >> I was unaware of this discussion when I created the fix for master=
+.
+> > > >> Note that I've silenced the TMPDIR QA message, this still needs a
+> > > >> proper fix in master as well.
+> > > >>
+> > > >> This indeed needs to be fixed in scarthgap as well, since the
+> > > >> incompatible versions do break some code. My two cents for the
+> available
+> > > >> options:
+> > > >>
+> > > >>  - Revert pydantic upgrade (from 2.7.0 back to 2.6.4)
+> > > >>  - Update pydantic-core to 2.18.1
+> > > >>  - Use master (pydantic 2.7.3 and pydantic-core 2.18.4)
+> > > >>
+> > > >> Would only downgrade if this is the *only* allowed option accordin=
+g
+> to
+> > > >> the LTS branch policy. Version 2.7.x includes new features compare=
+d
+> to
+> > > >> 2.6.4. Removing these with a downgrade would violate the LTS patch
+> policy
+> > > >> of not merging "ABI/API breakage".
+> > > >
+> > > > We have had this type of situation with a pkg (A) update in master
+> and then new lts was branched. We found out other later additional pkgs
+> needed to updated to work with pkg (A). pydantic update was in Master
+> before scarthgap was branched.
+> > > >>
+> > > >> Option 2 or 3 are my preferred choices and they fall within the
+> > > >> "fixes for bugs" category of the LTS patch policy. Option 2 is the
+> smallest
+> > > >> change to fix the problem, but option 3 includes some additional
+> upstream
+> > > >> fixes with the update from 2.7.0 to 2.7.3.
+> > > >
+> > > > Master should be failing so if Master gets a revert of pydantic bac=
+k
+> to 2.6.4, then Scarthgap will follow. Is this an option? - Armin
+> > >
+> > > As far as I know master works now, so a revert would make no sense in
+> that case.
+> >
+> > Hi Armin
+> >
+> > scarthgap is relatively new and I think I would be in favor of making
+> > an exception for this one case.
+>
+> Hi Khem,
+> thanks. Sounds good to me.
+>
+> Do you prefer going to the same pydantic{,-core} version as master,
+> or stick with 2.7.0 and update only pydantic-core to 2.18.1?.
+>
+
+Best is to use the one that will work in tandem well if that would be newer
+one from master than we might have to bring that too
 
 >
-> Don=E2=80=99t think that python3-tzdata is needed. It will first look for=
- system
-> wide tzdata, python3-tzdata is a fallback option that can be used if tzda=
-ta
-> is missing. Running ptest resulted in PASS after this change.
+> regards;rl
 >
 
-Ah. That will help with my conundrum about fixing scarthgap.
-I'll add this patch into my scarthgap series, that I am working on next.
-
-
->
-> On 8 Aug 2024, at 15:45, Tim Orling <ticotimo@gmail.com> wrote:
->
-> =EF=BB=BF
-> Also, I believe this requires python3-tzdata which we do not yet have a
-> recipe for (I have one ready in this staged series).
->
-> On Thu, Aug 8, 2024 at 6:40=E2=80=AFAM Tim Orling via lists.openembedded.=
-org
-> <ticotimo=3Dgmail.com@lists.openembedded.org> wrote:
->
->> I'm in the middle of an upgrade to python3-pydantic and
->> python3-pydantic-core. I'd prefer we hold of on this one so I can keep m=
-y
->> tree clean and get this out the door.
->>
->> On Thu, Aug 8, 2024 at 2:44=E2=80=AFAM Frank de Brabander via
->> lists.openembedded.org <debrabander=3Dgmail.com@lists.openembedded.org>
->> wrote:
->>
->>> ---
->>>  .../recipes-devtools/python/python3-pydantic-core_2.18.4.bb     | 2 ++
->>>  1 file changed, 2 insertions(+)
->>>
->>> diff --git a/meta-python/recipes-devtools/python/
->>> python3-pydantic-core_2.18.4.bb b/meta-python/recipes-devtools/python/
->>> python3-pydantic-core_2.18.4.bb
->>> index 0ab1873a0..37a4440ca 100644
->>> --- a/meta-python/recipes-devtools/python/
->>> python3-pydantic-core_2.18.4.bb
->>> +++ b/meta-python/recipes-devtools/python/
->>> python3-pydantic-core_2.18.4.bb
->>> @@ -37,6 +37,8 @@ RDEPENDS:${PN}-ptest +=3D "\
->>>      python3-pytest-timeout \
->>>      python3-pytest-benchmark \
->>>      python3-unittest-automake-output \
->>> +    python3-zoneinfo \
->>> +    tzdata \
->>>  "
->>>
->>>  do_install_ptest() {
->>> --
->>> 2.39.2
->>>
->>>
->>>
->>>
->>>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#111662):
->> https://lists.openembedded.org/g/openembedded-devel/message/111662
->> Mute This Topic: https://lists.openembedded.org/mt/107786709/924729
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
->> ticotimo@gmail.com]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
->>
-
---0000000000002e6a2c061f2eb90a
+--0000000000009cf186061f2ec0a5
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Thu, Aug 8, 2024 at 7:16=E2=80=AFA=
-M Frank de Brabander &lt;<a href=3D"mailto:debrabander@gmail.com">debraband=
-er@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" styl=
-e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
-g-left:1ex"><div dir=3D"auto"><br id=3D"m_-4923017762053865655lineBreakAtBe=
-ginningOfSignature"><div dir=3D"ltr">Don=E2=80=99t think that python3-tzdat=
-a is needed. It will first look for system wide tzdata, python3-tzdata is a=
- fallback option that can be used if tzdata is missing. Running ptest resul=
-ted in PASS after this change.</div></div></blockquote><div><br></div><div>=
-Ah. That will help with my conundrum about fixing scarthgap.<br>I&#39;ll ad=
-d this patch into my scarthgap series, that I am working on next.</div><div=
->=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px =
-0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"=
-auto"><div dir=3D"ltr"><br><blockquote type=3D"cite">On 8 Aug 2024, at 15:4=
-5, Tim Orling &lt;<a href=3D"mailto:ticotimo@gmail.com" target=3D"_blank">t=
-icotimo@gmail.com</a>&gt; wrote:<br><br></blockquote></div><blockquote type=
-=3D"cite"><div dir=3D"ltr">=EF=BB=BF<div dir=3D"ltr"><div>Also, I believe t=
-his requires python3-tzdata which we do not yet have a recipe for (I have o=
-ne ready in this staged series).</div><br><div class=3D"gmail_quote"><div d=
-ir=3D"ltr" class=3D"gmail_attr">On Thu, Aug 8, 2024 at 6:40=E2=80=AFAM Tim =
-Orling via <a href=3D"http://lists.openembedded.org" target=3D"_blank">list=
-s.openembedded.org</a> &lt;ticotimo=3D<a href=3D"mailto:gmail.com@lists.ope=
-nembedded.org" target=3D"_blank">gmail.com@lists.openembedded.org</a>&gt; w=
-rote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0p=
-x 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=
-=3D"ltr">I&#39;m in the middle of an upgrade to python3-pydantic and python=
-3-pydantic-core. I&#39;d prefer we hold of on this one so I can keep my tre=
-e clean and get this out the door.</div><br><div class=3D"gmail_quote"><div=
- dir=3D"ltr" class=3D"gmail_attr">On Thu, Aug 8, 2024 at 2:44=E2=80=AFAM Fr=
-ank de Brabander via <a href=3D"http://lists.openembedded.org" target=3D"_b=
-lank">lists.openembedded.org</a> &lt;debrabander=3D<a href=3D"mailto:gmail.=
-com@lists.openembedded.org" target=3D"_blank">gmail.com@lists.openembedded.=
-org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"marg=
-in:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1e=
-x">---<br>
-=C2=A0.../recipes-devtools/python/<a href=3D"http://python3-pydantic-core_2=
-.18.4.bb" rel=3D"noreferrer" target=3D"_blank">python3-pydantic-core_2.18.4=
-.bb</a>=C2=A0 =C2=A0 =C2=A0| 2 ++<br>
-=C2=A01 file changed, 2 insertions(+)<br>
+<div dir=3D"auto"><br></div><div><br><div class=3D"gmail_quote"><div dir=3D=
+"ltr" class=3D"gmail_attr">On Thu, Aug 8, 2024 at 12:44=E2=80=AFAM Richard =
+Leitner &lt;<a href=3D"mailto:dev@g0hl1n.net">dev@g0hl1n.net</a>&gt; wrote:=
+<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bord=
+er-left:1px #ccc solid;padding-left:1ex">On Tue, Aug 06, 2024 at 01:09:10PM=
+ GMT, Khem Raj wrote:<br>
+&gt; On Mon, Aug 5, 2024 at 12:08=E2=80=AFAM Frank de Brabander via<br>
+&gt; <a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" target=3D=
+"_blank">lists.openembedded.org</a> &lt;debrabander=3D<a href=3D"mailto:gma=
+il.com@lists.openembedded.org" target=3D"_blank">gmail.com@lists.openembedd=
+ed.org</a>&gt;<br>
+&gt; wrote:<br>
+&gt; &gt;<br>
+&gt; &gt;<br>
+&gt; &gt;<br>
+&gt; &gt; &gt; Op 3 aug 2024 om 18:51 heeft akuster808 &lt;<a href=3D"mailt=
+o:akuster808@gmail.com" target=3D"_blank">akuster808@gmail.com</a>&gt; het =
+volgende geschreven:<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; =EF=BB=BF<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt;&gt; On 7/31/24 4:07 AM, Frank de Brabander wrote:<br>
+&gt; &gt; &gt;&gt; I was unaware of this discussion when I created the fix =
+for master.<br>
+&gt; &gt; &gt;&gt; Note that I&#39;ve silenced the TMPDIR QA message, this =
+still needs a<br>
+&gt; &gt; &gt;&gt; proper fix in master as well.<br>
+&gt; &gt; &gt;&gt;<br>
+&gt; &gt; &gt;&gt; This indeed needs to be fixed in scarthgap as well, sinc=
+e the<br>
+&gt; &gt; &gt;&gt; incompatible versions do break some code. My two cents f=
+or the available<br>
+&gt; &gt; &gt;&gt; options:<br>
+&gt; &gt; &gt;&gt;<br>
+&gt; &gt; &gt;&gt;=C2=A0 - Revert pydantic upgrade (from 2.7.0 back to 2.6.=
+4)<br>
+&gt; &gt; &gt;&gt;=C2=A0 - Update pydantic-core to 2.18.1<br>
+&gt; &gt; &gt;&gt;=C2=A0 - Use master (pydantic 2.7.3 and pydantic-core 2.1=
+8.4)<br>
+&gt; &gt; &gt;&gt;<br>
+&gt; &gt; &gt;&gt; Would only downgrade if this is the *only* allowed optio=
+n according to<br>
+&gt; &gt; &gt;&gt; the LTS branch policy. Version 2.7.x includes new featur=
+es compared to<br>
+&gt; &gt; &gt;&gt; 2.6.4. Removing these with a downgrade would violate the=
+ LTS patch policy<br>
+&gt; &gt; &gt;&gt; of not merging &quot;ABI/API breakage&quot;.<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; We have had this type of situation with a pkg (A) update in =
+master and then new lts was branched. We found out other later additional p=
+kgs needed to updated to work with pkg (A). pydantic update was in Master b=
+efore scarthgap was branched.<br>
+&gt; &gt; &gt;&gt;<br>
+&gt; &gt; &gt;&gt; Option 2 or 3 are my preferred choices and they fall wit=
+hin the<br>
+&gt; &gt; &gt;&gt; &quot;fixes for bugs&quot; category of the LTS patch pol=
+icy. Option 2 is the smallest<br>
+&gt; &gt; &gt;&gt; change to fix the problem, but option 3 includes some ad=
+ditional upstream<br>
+&gt; &gt; &gt;&gt; fixes with the update from 2.7.0 to 2.7.3.<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; Master should be failing so if Master gets a revert of pydan=
+tic back to 2.6.4, then Scarthgap will follow. Is this an option? - Armin<b=
+r>
+&gt; &gt;<br>
+&gt; &gt; As far as I know master works now, so a revert would make no sens=
+e in that case.<br>
+&gt; <br>
+&gt; Hi Armin<br>
+&gt; <br>
+&gt; scarthgap is relatively new and I think I would be in favor of making<=
+br>
+&gt; an exception for this one case.<br>
 <br>
-diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
-pydantic-core_2.18.4.bb" rel=3D"noreferrer" target=3D"_blank">python3-pydan=
-tic-core_2.18.4.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"htt=
-p://python3-pydantic-core_2.18.4.bb" rel=3D"noreferrer" target=3D"_blank">p=
-ython3-pydantic-core_2.18.4.bb</a><br>
-index 0ab1873a0..37a4440ca 100644<br>
---- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-pydanti=
-c-core_2.18.4.bb" rel=3D"noreferrer" target=3D"_blank">python3-pydantic-cor=
-e_2.18.4.bb</a><br>
-+++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-pydanti=
-c-core_2.18.4.bb" rel=3D"noreferrer" target=3D"_blank">python3-pydantic-cor=
-e_2.18.4.bb</a><br>
-@@ -37,6 +37,8 @@ RDEPENDS:${PN}-ptest +=3D &quot;\<br>
-=C2=A0 =C2=A0 =C2=A0python3-pytest-timeout \<br>
-=C2=A0 =C2=A0 =C2=A0python3-pytest-benchmark \<br>
-=C2=A0 =C2=A0 =C2=A0python3-unittest-automake-output \<br>
-+=C2=A0 =C2=A0 python3-zoneinfo \<br>
-+=C2=A0 =C2=A0 tzdata \<br>
-=C2=A0&quot;<br>
+Hi Khem,<br>
+thanks. Sounds good to me.<br>
 <br>
-=C2=A0do_install_ptest() {<br>
--- <br>
-2.39.2<br>
-<br>
-<br>
-<br>
-<br>
-</blockquote></div>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#111662): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/111662" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/111662</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/107786709/924=
-729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/107786709/924729</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
-et=3D"_blank">ticotimo@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
+Do you prefer going to the same pydantic{,-core} version as master,<br>
+or stick with 2.7.0 and update only pydantic-core to 2.18.1?.<br>
+</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Best is to use t=
+he one that will work in tandem well if that would be newer one from master=
+ than we might have to bring that too=C2=A0</div><blockquote class=3D"gmail=
+_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:=
+1ex"><br>
+regards;rl<br>
 </blockquote></div></div>
-</div></blockquote></div></blockquote></div></div>
 
---0000000000002e6a2c061f2eb90a--
+--0000000000009cf186061f2ec0a5--
 
