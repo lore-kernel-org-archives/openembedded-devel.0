@@ -2,54 +2,54 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A5B2C52D73
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A57AC52D6F
 	for <webhook@archiver.kernel.org>; Thu,  8 Aug 2024 12:23:17 +0000 (UTC)
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
- by mx.groups.io with SMTP id smtpd.web11.58566.1723119788415253862
+Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
+ by mx.groups.io with SMTP id smtpd.web11.58565.1723119787810204611
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 08 Aug 2024 05:23:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=tVmOjA5l;
- spf=pass (domain: konsulko.com, ip: 209.85.208.46, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-5af51684d52so1078756a12.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 05:23:08 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=MUuKFzmZ;
+ spf=pass (domain: konsulko.com, ip: 209.85.167.53, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-52efdf02d13so1664253e87.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 05:23:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=konsulko.com; s=google; t=1723119786; x=1723724586; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=J+xJJfJ8gyOG9MTYssiuslSojoIsHXzq567lZFntCTU=;
-        b=tVmOjA5llWOt7HdQ13rJTmDriN00zsMzcXvi9MYbUmXnvD0ZuwdpzeYJNhTIsEv38x
-         ovdaREy0D7y0AOfqi1RkhVmjsWo+UM/XOb8MU2J4d0gYpDIyf0/SDEazBbKQX0T046jb
-         R7pGxK40vNRc27befqSaYyh8mkuzi8E55QWSs=
+        bh=MVAxxFCbsZA1VYoNaMu4KEO5DLwuo+mXB0dx38RmMIA=;
+        b=MUuKFzmZCCqORklo/a7dlfbx+1ICDW2ujZw6G8V0kTDz/o3LPxEtfar+kbhRnxBCY6
+         o4QmWztWZeqe1X28F0l3cEeFHUPWKsRVmiO9XOdgtfsXuZlQyvllcEO2sYrsbk/GhXhM
+         34Xk6jXPPIUBQQiJ4XsHx8dborjUdTgNsKVWE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1723119786; x=1723724586;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=J+xJJfJ8gyOG9MTYssiuslSojoIsHXzq567lZFntCTU=;
-        b=BtGwa9LB6iIbFx1yKlMLY2e4t0/9F4c29ctI3E3AgRygDqG2VnAn5iQTolK8V2XjcF
-         kyOzwyGEzJyxeuRt7uJBJEPTI3tk/5ktfj3j5YajwN+KnJmi1E9IoOJ+7N6t0hkvYopS
-         ceX78JyfoKTrwAdM+Jd6/KJ+EsxXX7f3OVb+IqwhGJbz2JRW0AuIKzHwoOOaFMtTGDAG
-         Y+NJ9FeMHKtyunUIIcqfq7B6xCrcBjoTNhUD4Aw2kc6dP3IM9QrkMlcmMcvdT0LALBMQ
-         fWwYTdG1kj3vAnON/e4Tz+mwC8QSWg9gnXejm2I+Auc1TVMC9SpKt5V9Vuv+oVZwBC4n
-         ErQw==
-X-Gm-Message-State: AOJu0Yymd17ezbVAzCzc5tKUR3vLCSGjvX0ROgAXefdDSQOEr5GuS0bV
-	u7lV7Sj6lwy84fKsu3ArYqKwGZajPGVZMY494fQ3I3sOOx1CNYgs/U6fAa8eFZl3O8JKzY5ej9G
-	X
-X-Google-Smtp-Source: AGHT+IE5aMsuTZmioXu372Z61FSAWtVA9oYIOx8qZDlA8v/TBgx9y0OQm84T4aSxeHQNl1sW0XcirA==
-X-Received: by 2002:a17:907:f767:b0:a6f:4fc8:266b with SMTP id a640c23a62f3a-a8090c21fdemr110963666b.3.1723119786272;
-        Thu, 08 Aug 2024 05:23:06 -0700 (PDT)
+        bh=MVAxxFCbsZA1VYoNaMu4KEO5DLwuo+mXB0dx38RmMIA=;
+        b=tNId/O7+Fkms3s1SmzpdZVG1z/g4Vl2szob2O4uISpuZHaTA3Z2kJJu8ZqN3exD3Mc
+         QcJ2a/ebGkWemm4Anmkka3s7tz1fPRhm1rZMqD8dVGRSqIvfnR3zmp+ptuOf3nORffBt
+         qklFnJENxjuTUaGGVHAk3wABDTTy3nycIWKOE2+cbDBlIBTzsxjBIkcfGnYWJQeheqC7
+         Fae0eTQow0udK2SGtwKU5/sSDnfzAvih0Oe5s+utVXzrwl3a07en7LtaVZQ8GyHVjRoU
+         STGBKE7uThFixv/SdG+8ihZfZsuq2BTCy/UD1SLMit/K8/eAhgXtgIClvT8dxGkRVvq6
+         fHeA==
+X-Gm-Message-State: AOJu0YwO30fK61JlFE2Y1k/UIh2ilMjeXXEpG+COtSc/Xc2F4eYSuMNO
+	KHWs0mj21nIaUvTIAmiFwRoAKYDkdXqc6miQDEjF1m51KJ1nzbNuwGaLbzly4NoI3ZAVy1oKccw
+	F
+X-Google-Smtp-Source: AGHT+IGvYU5UX5SNrZea5En7TczH0+hDJEZrDqO9YGnC++ofkosj0qmeTEpC7XiCN4TVTufsrlDwAA==
+X-Received: by 2002:a05:6512:220a:b0:52e:73f5:b7c4 with SMTP id 2adb3069b0e04-530e5876b25mr1723328e87.37.1723119785499;
+        Thu, 08 Aug 2024 05:23:05 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a7dc9ec886esm736135366b.203.2024.08.08.05.23.05
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a7dc9ec886esm736135366b.203.2024.08.08.05.23.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Thu, 08 Aug 2024 05:23:05 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/6] python3-aiohttp: Upgrade 3.10.0 -> 3.10.1
-Date: Thu,  8 Aug 2024 15:22:59 +0300
-Message-Id: <20240808122301.2271346-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/6] coverage: Upgrade 7.6.0 -> 7.6.1
+Date: Thu,  8 Aug 2024 15:22:58 +0300
+Message-Id: <20240808122301.2271346-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240808122301.2271346-1-leon.anavi@konsulko.com>
 References: <20240808122301.2271346-1-leon.anavi@konsulko.com>
@@ -59,38 +59,38 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 12:23:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111657
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111656
 
-Upgrade to release 3.10.1:
+Upgrade to release 7.6.1:
 
-- Fixed WebSocket server heartbeat timeout logic to terminate
-  :py:meth:~aiohttp.ClientWebSocketResponse.receive and return
-  :py:class:~aiohttp.ServerTimeoutError
-- Fixed url dispatcher index not matching when a variable is
-  preceded by a fixed string after a slash
+- Fix: coverage used to fail when measuring code using
+  runpy.run_path <python:runpy.run_path> with a Path
+  <python:pathlib.Path> argument. This is now fixed.
+- Fix: backslashes preceding a multi-line backslashed string could
+  confuse the HTML report. This is now fixed.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-aiohttp_3.10.0.bb => python3-aiohttp_3.10.1.bb}    | 2 +-
+ .../{python3-coverage_7.6.0.bb => python3-coverage_7.6.1.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-aiohttp_3.10.0.bb => python3-aiohttp_3.10.1.bb} (86%)
+ rename meta-python/recipes-devtools/python/{python3-coverage_7.6.0.bb => python3-coverage_7.6.1.bb} (84%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.10.0.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.10.1.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-aiohttp_3.10.0.bb
-rename to meta-python/recipes-devtools/python/python3-aiohttp_3.10.1.bb
-index 68494a05d..f9f007d08 100644
---- a/meta-python/recipes-devtools/python/python3-aiohttp_3.10.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.10.1.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/aio-libs/aiohttp"
+diff --git a/meta-python/recipes-devtools/python/python3-coverage_7.6.0.bb b/meta-python/recipes-devtools/python/python3-coverage_7.6.1.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-coverage_7.6.0.bb
+rename to meta-python/recipes-devtools/python/python3-coverage_7.6.1.bb
+index 5901d9993..7749158f5 100644
+--- a/meta-python/recipes-devtools/python/python3-coverage_7.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-coverage_7.6.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://coverage.readthedocs.io"
  LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=748073912af33aa59430d3702aa32d41"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2ee41112a44fe7014dce33e26468ba93"
  
--SRC_URI[sha256sum] = "e8dd7da2609303e3574c95b0ec9f1fd49647ef29b94701a2862cceae76382e1d"
-+SRC_URI[sha256sum] = "8b0d058e4e425d3b45e8ec70d49b402f4d6b21041e674798b1f91ba027c73f28"
+-SRC_URI[sha256sum] = "289cc803fa1dc901f84701ac10c9ee873619320f2f9aff38794db4a4a0268d51"
++SRC_URI[sha256sum] = "953510dfb7b12ab69d20135a0662397f077c59b1e6379a768e97c59d852ee51d"
  
- PYPI_PACKAGE = "aiohttp"
- inherit python_setuptools_build_meta pypi
+ inherit pypi python_setuptools_build_meta
+ 
 -- 
 2.39.2
 
