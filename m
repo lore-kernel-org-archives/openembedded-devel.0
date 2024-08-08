@@ -1,106 +1,232 @@
-Return-Path: <twoerner@gmail.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C41A6C52D6F
-	for <webhook@archiver.kernel.org>; Thu,  8 Aug 2024 12:47:27 +0000 (UTC)
-Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com [209.85.167.176])
- by mx.groups.io with SMTP id smtpd.web11.59017.1723121239146315130
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA7E7C52D6F
+	for <webhook@archiver.kernel.org>; Thu,  8 Aug 2024 13:01:17 +0000 (UTC)
+Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
+ by mx.groups.io with SMTP id smtpd.web10.59265.1723122075611101516
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Aug 2024 05:47:19 -0700
+ Thu, 08 Aug 2024 06:01:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XnqFSecP;
- spf=pass (domain: gmail.com, ip: 209.85.167.176, mailfrom: twoerner@gmail.com)
-Received: by mail-oi1-f176.google.com with SMTP id 5614622812f47-3db23a60850so646773b6e.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 05:47:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dYlKp0pg;
+ spf=pass (domain: gmail.com, ip: 209.85.128.181, mailfrom: ticotimo@gmail.com)
+Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-66108213e88so9078907b3.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 06:01:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1723121238; x=1723726038; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=F6Qwdcr4zPTkWVvvtzzkJgdgyb2n15ZxFOTDcKjVxNE=;
-        b=XnqFSecPPK9ifJzuj4BANIbllw8ZPxLeI9t2evJhuNm+cGUUHKW5lo5msBNK/7LJyC
-         KJ4f3/tn7p1Guu9MtA/j7HCDBDlcH8PFx6u1rV6W1JWb2iHf/XMkR8X/ZOdEZ4mJNz8X
-         Z3hISfPYKbVqz+lJ8pP1k/v/aPf0hLl2oyXMLy4wDLh0buCa2zEDmHsz05Ha74tt+M44
-         xU7/GYX/zrSiH9a9ST+uhxx5AOWs0WZiqFNj1Fhpwr0hmXaRT888fWQiSC0VY9/wKqDI
-         1F1R4v5uPDIqdhc9Vxlxl1DI1gtl2ckG/M+qoYMUE07C3WXDATsByvXmyAI0VpKOc86L
-         CgAQ==
+        d=gmail.com; s=20230601; t=1723122075; x=1723726875; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=WQfPjgGwQyx0qpg/eMyY+G94ywbJKQrqsZkoH118rno=;
+        b=dYlKp0pgXgWlqH+r9pfd6tjZOvd+KuqGgy4yJH7yBo9CFS7rdYc6UvufjaQJpDSLOI
+         kdnlJCsgjaUEXadJ70tQVyuVnJG/o4Fo3Jg7iWagN0Mify5YYUTklIFfK23XKythXabr
+         4pxfGn+r6ZFlf4o+Vb6fazhg7yyV2NJBAWEmQi021fb7kID8Wqs6MwiJz51a50/T2E9V
+         D99PrJncn4NH0LAWbA//KVv/CuB03HLxoQGo+ZmoyeRv5F2Bq6uZEaHbzl7vr2hkLwkT
+         IrSHaa4vzmYnUyr4FhZ6Guwa3vyw+Xs5oKqRVuK7ol71SlO2PKfk6mdq18L5nE+wGf+1
+         pv7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723121238; x=1723726038;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=F6Qwdcr4zPTkWVvvtzzkJgdgyb2n15ZxFOTDcKjVxNE=;
-        b=BWX2rQ8P6cerXCe75471NK5EpSbXAWQuPW7BOO7LhB2jIlpe8Y4aWLy0kK2G+wj5l3
-         bVwtONdAhiAvHzWcL4vSNg5BqpshMXHZoYJf+PSJncURRg1TAUbwPWf8LWZKcjR7VD3z
-         p47x81ANLbbuTFR5EzreYuXbALH5XfqZXGXy4jAv1jCoP/slrlR/V/2Ed0MTAe0ope/S
-         USU7qLDp3ecWweaOMTMhllDLen04pwYmhNzIFjutSM1uR2i38PH8K8pNBeCMlRA7TpP7
-         1rm4UtVAG6XpQiidwuhddNLYHNySlVf/+10TibZOxyXHEMUUZOMtHsCcXNDmc0Bhtdx9
-         afAA==
-X-Gm-Message-State: AOJu0Ywc5sp/Ca0yCSx0yPndGRxb9ZXfUEmYRE9XAYofteJGqqVzq9aw
-	cKE51S8OKUJtRkAK+Y7o52kDSPfnREVjx7CHEGxEB6KoRTvaPvx+CS9LqA==
-X-Google-Smtp-Source: AGHT+IFtuhK5Ig4/vTvobx8aIXdHvxDWtt6B40Hz8ArVgdp+AXGWC2Ur0ZbY0rhkENFTUme6HU69Wg==
-X-Received: by 2002:a05:6808:2022:b0:3d9:ddce:ed31 with SMTP id 5614622812f47-3dc3b45e6e4mr1763045b6e.45.1723121237612;
-        Thu, 08 Aug 2024 05:47:17 -0700 (PDT)
-Received: from localhost.localdomain (pppoe-209-91-167-254.vianet.ca. [209.91.167.254])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-451c86fb16asm12856921cf.13.2024.08.08.05.47.16
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Aug 2024 05:47:16 -0700 (PDT)
-From: Trevor Woerner <twoerner@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH] =?UTF-8?q?python3-matplotlib-inline:=20updat?= =?UTF-8?q?e=200.1.6=20=E2=86=92=200.1.7=20plus=20fixes?=
-Date: Thu,  8 Aug 2024 08:46:56 -0400
-Message-ID: <20240808124656.3877-1-twoerner@gmail.com>
-X-Mailer: git-send-email 2.44.0.501.g19981daefd7c
+        d=1e100.net; s=20230601; t=1723122075; x=1723726875;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=WQfPjgGwQyx0qpg/eMyY+G94ywbJKQrqsZkoH118rno=;
+        b=c8ZAUa5WHqR10S5VpU859OuHgpsZmxgd/4h7RZPfBADO1ZdZbSbyr4UnLGxCwmnW76
+         j0p7IVX+7V77NzGQyHCwARpdYbHmCBtcqqKBDPXTXJAS0w4Ks3ddZKiBk7xCuq4ktxiy
+         q7OMHd9wXQqL0zAdnVq39QSayV3/p5jNqTpyUsguHzhaurn7BB8tVnAkUkxWvnivPd/h
+         oq0b8pt/ABa6xM8wR0+aAW0JDjkN7TA498YytpIgAO7ks3eOmBeZ2He+TLFza6anIVbR
+         hqG9ZHAQuEVsvLsdx+SFxIFzGjZ04BwGAHbkuFyfFUsWVuvu5fsLB7vgL6hzjCuQWtgi
+         sgVw==
+X-Gm-Message-State: AOJu0Yyo4rL1X0f28N53J2nbSEoS+P1Hfgh7gwSMNdEo1GVjBjmTyYvq
+	bTmPZi5Wj0IfBeSN4XB+sp+rOWaJLfk9BM7T81U+mJxxrJt76ijRTshHQlLqpnXfV3hIpCf53xM
+	I3g8P1aawRuh1mKWGBVAqrR+NrfM=
+X-Google-Smtp-Source: AGHT+IHOOaNyqqk91XE/kPuFEWZXfiWWJgmkDRyAJzhZFshOVrBfI2oRs5HhPJ30rOqICjnSSnPEWbMCvDk85wkeBIM=
+X-Received: by 2002:a05:690c:385:b0:627:d23a:4505 with SMTP id
+ 00721157ae682-69bf744c76amr22601637b3.3.1723122074422; Thu, 08 Aug 2024
+ 06:01:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20240808122301.2271346-1-leon.anavi@konsulko.com>
+In-Reply-To: <20240808122301.2271346-1-leon.anavi@konsulko.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Thu, 8 Aug 2024 06:01:03 -0700
+Message-ID: <CANx9H-D05BFfAUU3+x+4gF_fUfQyW_4+d1VOdsOtwqBNeAquMA@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 1/6] python3-pydantic: Upgrade 2.7.3 -> 2.8.2
+To: leon.anavi@konsulko.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000002694b6061f2b9fe0"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 12:47:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111660
+ <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 13:01:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111661
 
-Update to the latest upstream released version.
+--0000000000002694b6061f2b9fe0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Add a PYPI_PACKAGE entry to the recipe. Otherwise, during final image
-assembly, an error similar to the following would occur due to the fact
-the yocto package name (which includes dashes) differs from the download
-filename (which includes underscores). NOTE: this would happen with all
-package types, not just ipk:
+Please hold off on this one, it requires a newer python3-pydantic-core that
+I am working on now.
 
-	ERROR: core-image-base-1.0-r0 do_rootfs: Unable to install packages. Command '/scratch/trevor/oe/builds/jupyter/jupyter-rockchip/scarthgap/build/tmp-glibc/work/rock_5a-oe-linux/core-image-base/1.0/recipe-sysroot-native/usr/bin/opkg --volatile-cache -f /scratch/trevor/oe/builds/jupyter/jupyter-rockchip/scarthgap/build/tmp-glibc/work/rock_5a-oe-linux/core-image-base/1.0/opkg.conf -t /scratch/trevor/oe/builds/jupyter/jupyter-rockchip/scarthgap/build/tmp-glibc/work/rock_5a-oe-linux/core-image-base/1.0/temp/ipktemp/ -o /scratch/trevor/oe/builds/jupyter/jupyter-rockchip/scarthgap/build/tmp-glibc/work/rock_5a-oe-linux/core-image-base/1.0/rootfs --force_postinstall --prefer-arch-to-version  <package list including python3-matplotlib-inline...> returned 255:
-	* opkg_solver_install: No candidates to install python3-matplotlib-inline (null)!
+On Thu, Aug 8, 2024 at 5:23=E2=80=AFAM Leon Anavi via lists.openembedded.or=
+g
+<leon.anavi=3Dkonsulko.com@lists.openembedded.org> wrote:
 
-Add additional devtool-discovered information:
-- update the build mechanism to include python_setuptools_build_meta
-- add the RDEPENDS
+> Upgrade to version 2.8.2:
+>
+> - Fix issue with assertion caused by pluggable schema
+> - Fix breaking change in to_snake from v2.7 -> v2.8
+> - Fix list constraint json schema application
+> - Support time duration more than 23
+> - Fix millisecond fraction being handled with the wrong scale
+> - Handle negative fractional durations correctly
+> - Update citation version automatically with new releases
+> - Add support for Python 3.13
+> - Experimental: support defer_build for TypeAdapter
+> - Implement deprecated field in json schema
+> - Experimental: Add pipeline API
+> - Add support for programmatic title generation
+> - Implement fail_fast feature
+> - Add ser_json_inf_nan=3D'strings' mode to produce valid JSON
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> ---
+>  .../{python3-pydantic_2.7.3.bb =3D> python3-pydantic_2.8.2.bb}    | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-python/recipes-devtools/python/{python3-pydantic_2.7.3.bb =
+=3D>
+> python3-pydantic_2.8.2.bb} (95%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-pydantic_2.7.3.b=
+b
+> b/meta-python/recipes-devtools/python/python3-pydantic_2.8.2.bb
+> similarity index 95%
+> rename from meta-python/recipes-devtools/python/python3-pydantic_2.7.3.bb
+> rename to meta-python/recipes-devtools/python/python3-pydantic_2.8.2.bb
+> index 423fe7673..fb1e7b3ac 100644
+> --- a/meta-python/recipes-devtools/python/python3-pydantic_2.7.3.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pydantic_2.8.2.bb
+> @@ -11,7 +11,7 @@ LIC_FILES_CHKSUM =3D
+> "file://LICENSE;md5=3D09280955509d1c4ca14bae02f21d49a6"
+>
+>  inherit pypi python_hatchling
+>
+> -SRC_URI[sha256sum] =3D
+> "c46c76a40bb1296728d7a8b99aa73dd70a48c3510111ff290034f860c99c419e"
+> +SRC_URI[sha256sum] =3D
+> "6f62c13d067b0755ad1c21a34bdd06c0c12625a22b0fc09c6b149816604f7c2a"
+>
+>  DEPENDS +=3D "python3-hatch-fancy-pypi-readme-native"
+>
+> --
+> 2.39.2
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#111654):
+> https://lists.openembedded.org/g/openembedded-devel/message/111654
+> Mute This Topic: https://lists.openembedded.org/mt/107788297/924729
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> ticotimo@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
----
- ...-inline_0.1.6.bb => python3-matplotlib-inline_0.1.7.bb} | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-matplotlib-inline_0.1.6.bb => python3-matplotlib-inline_0.1.7.bb} (50%)
+--0000000000002694b6061f2b9fe0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-python/recipes-devtools/python/python3-matplotlib-inline_0.1.6.bb b/meta-python/recipes-devtools/python/python3-matplotlib-inline_0.1.7.bb
-similarity index 50%
-rename from meta-python/recipes-devtools/python/python3-matplotlib-inline_0.1.6.bb
-rename to meta-python/recipes-devtools/python/python3-matplotlib-inline_0.1.7.bb
-index 13210b906045..335565643aaa 100644
---- a/meta-python/recipes-devtools/python/python3-matplotlib-inline_0.1.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-matplotlib-inline_0.1.7.bb
-@@ -3,6 +3,9 @@ HOMEPAGE = "https://pypi.org/project/matplotlib-inline/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d4692a0eb42ca54892399db2cb35e61e"
- 
--SRC_URI[sha256sum] = "f887e5f10ba98e8d2b150ddcf4702c1e5f8b3a20005eb0f74bfdbd360ee6f304"
-+SRC_URI[sha256sum] = "8423b23ec666be3d16e16b60bdd8ac4e86e840ebd1dd11a30b9f117f2fa0ab90"
- 
--inherit pypi
-+PYPI_PACKAGE = "matplotlib_inline"
-+inherit pypi python_setuptools_build_meta
-+
-+RDEPENDS:${PN} = "python3-traitlets"
--- 
-2.44.0.501.g19981daefd7c
+<div dir=3D"auto">Please hold off on this one, it requires a newer python3-=
+pydantic-core that I am working on now.</div><div><br><div class=3D"gmail_q=
+uote"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Aug 8, 2024 at 5:23=E2=
+=80=AFAM Leon Anavi via <a href=3D"http://lists.openembedded.org">lists.ope=
+nembedded.org</a> &lt;leon.anavi=3D<a href=3D"mailto:konsulko.com@lists.ope=
+nembedded.org">konsulko.com@lists.openembedded.org</a>&gt; wrote:<br></div>=
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left-width:1px;border-left-style:solid;padding-left:1ex;border-left-color:r=
+gb(204,204,204)">Upgrade to version 2.8.2:<br>
+<br>
+- Fix issue with assertion caused by pluggable schema<br>
+- Fix breaking change in to_snake from v2.7 -&gt; v2.8<br>
+- Fix list constraint json schema application<br>
+- Support time duration more than 23<br>
+- Fix millisecond fraction being handled with the wrong scale<br>
+- Handle negative fractional durations correctly<br>
+- Update citation version automatically with new releases<br>
+- Add support for Python 3.13<br>
+- Experimental: support defer_build for TypeAdapter<br>
+- Implement deprecated field in json schema<br>
+- Experimental: Add pipeline API<br>
+- Add support for programmatic title generation<br>
+- Implement fail_fast feature<br>
+- Add ser_json_inf_nan=3D&#39;strings&#39; mode to produce valid JSON<br>
+<br>
+Signed-off-by: Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com" ta=
+rget=3D"_blank">leon.anavi@konsulko.com</a>&gt;<br>
+---<br>
+=C2=A0.../{<a href=3D"http://python3-pydantic_2.7.3.bb" rel=3D"noreferrer" =
+target=3D"_blank">python3-pydantic_2.7.3.bb</a> =3D&gt; <a href=3D"http://p=
+ython3-pydantic_2.8.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-pyda=
+ntic_2.8.2.bb</a>}=C2=A0 =C2=A0 | 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python3=
+-pydantic_2.7.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-pydantic_2=
+.7.3.bb</a> =3D&gt; <a href=3D"http://python3-pydantic_2.8.2.bb" rel=3D"nor=
+eferrer" target=3D"_blank">python3-pydantic_2.8.2.bb</a>} (95%)<br>
+<br>
+diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
+pydantic_2.7.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-pydantic_2.=
+7.3.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
+pydantic_2.8.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-pydantic_2.=
+8.2.bb</a><br>
+similarity index 95%<br>
+rename from meta-python/recipes-devtools/python/<a href=3D"http://python3-p=
+ydantic_2.7.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-pydantic_2.7=
+.3.bb</a><br>
+rename to meta-python/recipes-devtools/python/<a href=3D"http://python3-pyd=
+antic_2.8.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-pydantic_2.8.2=
+.bb</a><br>
+index 423fe7673..fb1e7b3ac 100644<br>
+--- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-pydanti=
+c_2.7.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-pydantic_2.7.3.bb<=
+/a><br>
++++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-pydanti=
+c_2.8.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-pydantic_2.8.2.bb<=
+/a><br>
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D092809555=
+09d1c4ca14bae02f21d49a6&quot;<br>
+<br>
+=C2=A0inherit pypi python_hatchling<br>
+<br>
+-SRC_URI[sha256sum] =3D &quot;c46c76a40bb1296728d7a8b99aa73dd70a48c3510111f=
+f290034f860c99c419e&quot;<br>
++SRC_URI[sha256sum] =3D &quot;6f62c13d067b0755ad1c21a34bdd06c0c12625a22b0fc=
+09c6b149816604f7c2a&quot;<br>
+<br>
+=C2=A0DEPENDS +=3D &quot;python3-hatch-fancy-pypi-readme-native&quot;<br>
+<br>
+-- <br>
+2.39.2<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#111654): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/111654" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/111654</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/107788297/924=
+729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/107788297/924729</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
+et=3D"_blank">ticotimo@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
 
+--0000000000002694b6061f2b9fe0--
 
