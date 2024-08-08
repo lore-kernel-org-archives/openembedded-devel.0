@@ -1,113 +1,90 @@
-Return-Path: <dev@g0hl1n.net>
+Return-Path: <alexander.stein@ew.tq-group.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C40CC3DA4A
-	for <webhook@archiver.kernel.org>; Thu,  8 Aug 2024 07:44:36 +0000 (UTC)
-Received: from out-178.mta0.migadu.com (out-178.mta0.migadu.com [91.218.175.178])
- by mx.groups.io with SMTP id smtpd.web11.54577.1723103067127434283
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 176D3C52D73
+	for <webhook@archiver.kernel.org>; Thu,  8 Aug 2024 08:06:46 +0000 (UTC)
+Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
+ by mx.groups.io with SMTP id smtpd.web10.54811.1723104391256854965
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Aug 2024 00:44:27 -0700
+ Thu, 08 Aug 2024 01:06:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@g0hl1n.net header.s=key1 header.b=SB/ETC6N;
- spf=pass (domain: g0hl1n.net, ip: 91.218.175.178, mailfrom: dev@g0hl1n.net)
-Date: Thu, 8 Aug 2024 09:44:21 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=g0hl1n.net; s=key1;
-	t=1723103064;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=l+/x9JJMiJRHExDIUbfkQIbUf+/fWMlbJqiD0xLk7Ls=;
-	b=SB/ETC6NQ1C6UJ7qPBqOseF/Ooo+crY6CR33oTpBHIZmV6pn/L+mmxLcc462JVt+Jghr/c
-	xliqSlj7ePcM0XL0KWQ0lKtV4izDGfq3MpOZzw1GfU7iZp8SZHXb0833GvKb0tlAHDtS6O
-	1f8PDNX0AjUjYThU8tHY10LxVr0BAb8=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Richard Leitner <dev@g0hl1n.net>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: debrabander@gmail.com, akuster808 <akuster808@gmail.com>, 
-	openembedded-devel@lists.openembedded.org, tim.orling@konsulko.com
-Subject: Re: [oe] [meta-python][scarthgap][PATCH] python3-pydantic-core:
- upgrade 2.16.3 -> 2.18.1
-Message-ID: <sewubxpvgxzg52shb7erornf3llh7u4zuvpifiqz3hg53ekelw@axibx56xtnae>
-References: <4453e069-6679-42ae-b3bb-cdd223bf9da1@gmail.com>
- <547021D2-496C-4944-BCDA-438EBD0B42E0@gmail.com>
- <CAMKF1srA8cZigcRuK6mecudctEjtv+NJQtBbqpZMirWdMRzujQ@mail.gmail.com>
+ dkim=pass header.i=@tq-group.com header.s=key1 header.b=VG9xHZZf;
+ dkim=fail reason="dkim: no key for signature: lookup dkim._domainkey.ew.tq-group.com on 100.100.100.100:53: no such host" header.i=@ew.tq-group.com header.s=dkim header.b=EkO/eQ65;
+ spf=pass (domain: ew.tq-group.com, ip: 93.104.207.81, mailfrom: alexander.stein@ew.tq-group.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
+  t=1723104391; x=1754640391;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=NVkM6GqAf+1L8iPuGywmZr/4JDTTZqC1BzFyDOsy1y8=;
+  b=VG9xHZZfh8KR1ONnZMYwR2rchiC51a2pugCRmDBeTUJKTaR1DLhytmE3
+   ZfrxxoqRY4chv1/CQ2Sxx3xow92lRlRtSQMOY6tp6rmAWSK+MDzhxEBgX
+   FmpPKpoQt1c+aBV7X1HBLxLJ11vXkR1/Hy5Fq2jIW0HaiS2RrWZpuDPiv
+   eMjgZUJkLm/SXfFUDrmezic4WmClUmxJ/j/Mn209wojXshb7bsQaL5JFf
+   NPmUJl2JS+a9Ng8b5fhYmlDVSbpe5jorc7FhHUgX/LQl17jGw+8h/cFW8
+   WFYTnj+/UYwDcScobEdY3+3qMCN2DOPz0ym/VM3Gr4FQNKj8tiAiQsGPI
+   g==;
+X-CSE-ConnectionGUID: dIRxNxlHQ6eDBeDMmlEasA==
+X-CSE-MsgGUID: Sj22zsh7R9eAcnFoj2dazQ==
+X-IronPort-AV: E=Sophos;i="6.09,272,1716242400"; 
+   d="scan'208";a="38308676"
+Received: from vmailcow01.tq-net.de ([10.150.86.48])
+  by mx1.tq-group.com with ESMTP; 08 Aug 2024 10:06:29 +0200
+X-CheckPoint: {66B47C85-18-CFE9415D-C7159436}
+X-MAIL-CPID: 39ACF37932048BC8775907C2D6B0D171_1
+X-Control-Analysis: str=0001.0A782F27.66B47C85.00AF,ss=1,re=0.000,recu=0.000,reip=0.000,cl=1,cld=1,fgs=0
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 12AA9160BC4;
+	Thu,  8 Aug 2024 10:06:24 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ew.tq-group.com;
+	s=dkim; t=1723104385; h=from:subject:date:message-id:to:cc:mime-version:
+	 content-transfer-encoding; bh=NVkM6GqAf+1L8iPuGywmZr/4JDTTZqC1BzFyDOsy1y8=;
+	b=EkO/eQ65rLDq3zynYryFBTW8Mv8tteadphle72diG9AuUapUP0Ier4JcBjyq2cJSvkHNyg
+	Zbsz4XvUMnHC6h4W9G12qy76S1W9WoEJ2alt2Vq2Ipfiy2C0AORZE5jV2T8eaqL4cYVADv
+	fsQkedvI2Pb4TKoAV5xbAUtM7jsqUW9zfy8j6PwkwTslKesy35/iF5HCysEHxqkzUa9wuo
+	h1zSLPOAr2r8R7Om1hAxYY5xklfgRlsS8Kj0TQQovJBqvPSkvDw0FsUpHuAr6OEJhuCM5Q
+	pW+s76EzUOsYT1hM5ozn4ozXwlVWUVfzLkSS2b/OKAgtB7PIpKTdspkIiz/adw==
+From: Alexander Stein <alexander.stein@ew.tq-group.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alexander Stein <alexander.stein@ew.tq-group.com>
+Subject: [oe][meta-oe 1/1] luajit: Fix host development package
+Date: Thu,  8 Aug 2024 10:06:18 +0200
+Message-Id: <20240808080618.373849-1-alexander.stein@ew.tq-group.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <CAMKF1srA8cZigcRuK6mecudctEjtv+NJQtBbqpZMirWdMRzujQ@mail.gmail.com>
-X-Migadu-Flow: FLOW_OUT
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 07:44:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111646
+ <openembedded-devel@lists.openembedded.org>; Thu, 08 Aug 2024 08:06:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111647
 
-On Tue, Aug 06, 2024 at 01:09:10PM GMT, Khem Raj wrote:
-> On Mon, Aug 5, 2024 at 12:08=E2=80=AFAM Frank de Brabander via
-> lists.openembedded.org <debrabander=3Dgmail.com@lists.openembedded.org>
-> wrote:
-> >
-> >
-> >
-> > > Op 3 aug 2024 om 18:51 heeft akuster808 <akuster808@gmail.com> het =
-volgende geschreven:
-> > >
-> > > =EF=BB=BF
-> > >
-> > >> On 7/31/24 4:07 AM, Frank de Brabander wrote:
-> > >> I was unaware of this discussion when I created the fix for master=
-.
-> > >> Note that I've silenced the TMPDIR QA message, this still needs a
-> > >> proper fix in master as well.
-> > >>
-> > >> This indeed needs to be fixed in scarthgap as well, since the
-> > >> incompatible versions do break some code. My two cents for the ava=
-ilable
-> > >> options:
-> > >>
-> > >>  - Revert pydantic upgrade (from 2.7.0 back to 2.6.4)
-> > >>  - Update pydantic-core to 2.18.1
-> > >>  - Use master (pydantic 2.7.3 and pydantic-core 2.18.4)
-> > >>
-> > >> Would only downgrade if this is the *only* allowed option accordin=
-g to
-> > >> the LTS branch policy. Version 2.7.x includes new features compare=
-d to
-> > >> 2.6.4. Removing these with a downgrade would violate the LTS patch=
- policy
-> > >> of not merging "ABI/API breakage".
-> > >
-> > > We have had this type of situation with a pkg (A) update in master =
-and then new lts was branched. We found out other later additional pkgs n=
-eeded to updated to work with pkg (A). pydantic update was in Master befo=
-re scarthgap was branched.
-> > >>
-> > >> Option 2 or 3 are my preferred choices and they fall within the
-> > >> "fixes for bugs" category of the LTS patch policy. Option 2 is the=
- smallest
-> > >> change to fix the problem, but option 3 includes some additional u=
-pstream
-> > >> fixes with the update from 2.7.0 to 2.7.3.
-> > >
-> > > Master should be failing so if Master gets a revert of pydantic bac=
-k to 2.6.4, then Scarthgap will follow. Is this an option? - Armin
-> >
-> > As far as I know master works now, so a revert would make no sense in=
- that case.
->=20
-> Hi Armin
->=20
-> scarthgap is relatively new and I think I would be in favor of making
-> an exception for this one case.
+The 32 Bit host development package needed is libc6-dev:i386, not
+libc6-dev-i386.
 
-Hi Khem,
-thanks. Sounds good to me.
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+---
+At least on my Ubuntu 22.04 the package libc6-dev-i386 was not enough
+as /usr/include/i386-linux-gnu/bits/errno.h was missing.
 
-Do you prefer going to the same pydantic{,-core} version as master,
-or stick with 2.7.0 and update only pydantic-core to 2.18.1?.
+ meta-oe/recipes-devtools/luajit/luajit_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-regards;rl
+diff --git a/meta-oe/recipes-devtools/luajit/luajit_git.bb b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+index 240271d41..418921754 100644
+--- a/meta-oe/recipes-devtools/luajit/luajit_git.bb
++++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+@@ -21,7 +21,7 @@ BBCLASSEXTEND = "native"
+ # Host luajit needs to be compiled with the same pointer size
+ # If you want to cross-compile to any 32 bit target on an x64 OS,
+ # you need to install the multilib development package (e.g.
+-# libc6-dev-i386 on Debian/Ubuntu) and build a 32 bit host part
++# libc6-dev:i386 on Debian/Ubuntu) and build a 32 bit host part
+ # (HOST_CC="gcc -m32").
+ BUILD_CC_ARCH:append = " ${@['-m32',''][d.getVar('SITEINFO_BITS') != '32']}"
+ 
+-- 
+2.34.1
+
 
