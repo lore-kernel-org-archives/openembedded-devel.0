@@ -2,54 +2,54 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E291C52D73
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D68AC3DA4A
 	for <webhook@archiver.kernel.org>; Fri,  9 Aug 2024 08:52:54 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
- by mx.groups.io with SMTP id smtpd.web11.79760.1723193564749031472
+Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com [209.85.167.46])
+ by mx.groups.io with SMTP id smtpd.web11.79759.1723193564711092298
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 09 Aug 2024 01:52:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=css6/wiW;
- spf=pass (domain: konsulko.com, ip: 209.85.218.47, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-a7a8553db90so229504066b.2
+ dkim=pass header.i=@konsulko.com header.s=google header.b=BaxZsZ+a;
+ spf=pass (domain: konsulko.com, ip: 209.85.167.46, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-52f04b3cb33so3887357e87.0
         for <openembedded-devel@lists.openembedded.org>; Fri, 09 Aug 2024 01:52:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1723193563; x=1723798363; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1723193562; x=1723798362; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=EgfFx1lzCV2+pLGDVxjfVxd3jTri5zTWSLG5xGFyC/M=;
-        b=css6/wiWMGzRZX1v2wSqfzKS8QOVPT1abw2F3Fbt3O6GvOqdb4Crc8N5KeXcGF/J13
-         Et5/a4uq90qDi0MnK+2sm5Qc6vcqOB4FQOuzWE4jlwHsVqOvGN8my2CjFt5aCUWOw5L/
-         LwMFORx6fcoQkuFFFukfGwem7ooFrukVAdJA4=
+        bh=AJz8cqBnLP8/NgC9ho5yK1eSlM5x8QawgUf3QGocrNI=;
+        b=BaxZsZ+aywEzrddp0butZJQazvkAzl7RCWjrPODIKDJS++7WNk41YLRScWoya+yN6m
+         KhPHjMBLy2ueMvYok0rI8TxOVcaY4Ph3WaPFJ8EEPvS9IoHOvR1HkCwt85WT5Wfcf8lL
+         wL3ansYYw8kwnq/eSA38jeU0DVhw0eF4zvlos=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723193563; x=1723798363;
+        d=1e100.net; s=20230601; t=1723193562; x=1723798362;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=EgfFx1lzCV2+pLGDVxjfVxd3jTri5zTWSLG5xGFyC/M=;
-        b=Jrvxb/k3knnYIRh6XLE1GaXFvtSW2mqSfDf+kUXV54DeWsQWHgi7qYxhpFYENQw8sZ
-         95imrGf59LF6zO+agNTxlAHB8fUzGrLIey9KaSHRcATMlOvfBODKUKu1Fr/cTQQZ+JO6
-         e6etq22aBjh3HMYaBx2mvQPNIrb2JMhSKYD2rs7TQFZHNE7q3hCIdhiGN8GqZOdeq1er
-         HUxHriTTV46BslNvNMuntWlHx1WyZmxs0be8ha8YXGC0RObC9pqO8ClFYQOu7aMaRBYZ
-         VItfhr1UZvCY+2EiyNpknVKXjboHF1EOqv+Xs2i98Vl1aDYRCzNnY74w6CXng/oyY2xC
-         Uecg==
-X-Gm-Message-State: AOJu0Yx613Ni0Tg/96HsRbHMp4WTb8Ayeav7GF2KXYIa15iqcFnvJbjw
-	ar3zxpIDja3mZ9C5Oo7NGXy/Q4JoUyorJeil8UOTAG6RZQ85uYMCVg3ifdSvREhXIrrK+Gvw3QH
-	z
-X-Google-Smtp-Source: AGHT+IFWrkBn5m4tpOrTQ8Me3UoiFmbyNqG1jaV6K2krA96CejQ32YYOzZnyryFgXhRMsmiBALRFOQ==
-X-Received: by 2002:a17:907:f764:b0:a77:c583:4f78 with SMTP id a640c23a62f3a-a80aa5eb15dmr70795066b.39.1723193562827;
+        bh=AJz8cqBnLP8/NgC9ho5yK1eSlM5x8QawgUf3QGocrNI=;
+        b=Qhuq/ilh6/5gxSOUnA3i+C/kGbT3edenPb84ItTyiJjHaekjeaPC/Kmi9CxsEIUSEn
+         /lpq4v3NfM9ByWozG+HoM5mWD4FXdYYx1CQYt7zk78qb/MPjkNYqLmV6Fh8hhrQhmE17
+         u1qrdIXJQO/tC6hk93l3B8EuNTqBx2WZX6aaqiDQ20qnEdNibegMhYhT1xjwXRXYDBWg
+         JDlYW1mOEknOcsreacLcS50r5iMuQ5K1mYn40paii6KjN8EdFVz484uWDgfRgTW4yNCL
+         WqMcURz4uC/L9X26CHbk5jJ590IjhJ59eNn14EYbFwm0PBZn+3xxgquiw6+fjcX8PBPY
+         ibCw==
+X-Gm-Message-State: AOJu0YxCEa6XjmjP3kai3whVvjtdwxRjasCI/c6Gg0G/xm1nMRaxGIev
+	uPiz8wnzTpyE76VOXOsu7tD3xjDCEaF1JrD47zFIuviBFJSMajK/YLVODcU/ard4f3s+k98Yb60
+	4
+X-Google-Smtp-Source: AGHT+IFxg27wj3XZABSWT/V6LUKor7HkrtRkBl6mFeRCWws5d3R2rkf/fC60wlADohIra/pT3vOg+Q==
+X-Received: by 2002:a05:6512:2309:b0:52c:deb9:904b with SMTP id 2adb3069b0e04-530ee9ec018mr870870e87.38.1723193562077;
         Fri, 09 Aug 2024 01:52:42 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a7dc9bc3c4fsm823286366b.33.2024.08.09.01.52.42
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a7dc9bc3c4fsm823286366b.33.2024.08.09.01.52.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Aug 2024 01:52:42 -0700 (PDT)
+        Fri, 09 Aug 2024 01:52:41 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/6] python3-argcomplete: switch to PEP-517 build backend
-Date: Fri,  9 Aug 2024 11:52:35 +0300
-Message-Id: <20240809085236.1828180-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/6] python3-qface: Upgrade 2.0.10 -> 2.0.11
+Date: Fri,  9 Aug 2024 11:52:34 +0300
+Message-Id: <20240809085236.1828180-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240809085236.1828180-1-leon.anavi@konsulko.com>
 References: <20240809085236.1828180-1-leon.anavi@konsulko.com>
@@ -59,38 +59,34 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 09 Aug 2024 08:52:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111688
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111689
 
-The project has a proper pyproject.toml which declares the
-setuptools.build.meta PEP-517 backend.
+Upgrade to release 2.0.11:
 
-Fixes:
-WARNING: python3-argcomplete-3.4.0-r0 do_check_backend: QA Issue:
-inherits setuptools3 but has pyproject.toml with
-setuptools.build_meta, use the correct class [pep517-backend]
+- More pathlib related fixes
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python3-argcomplete_3.4.0.bb    | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ .../python/{python3-qface_2.0.10.bb => python3-qface_2.0.11.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-qface_2.0.10.bb => python3-qface_2.0.11.bb} (85%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-argcomplete_3.4.0.bb b/meta-python/recipes-devtools/python/python3-argcomplete_3.4.0.bb
-index be3ded82b..90def16a6 100644
---- a/meta-python/recipes-devtools/python/python3-argcomplete_3.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-argcomplete_3.4.0.bb
-@@ -7,7 +7,11 @@ SRC_URI[sha256sum] = "c2abcdfe1be8ace47ba777d4fce319eb13bf8ad9dace8d085dcad6eded
+diff --git a/meta-python/recipes-devtools/python/python3-qface_2.0.10.bb b/meta-python/recipes-devtools/python/python3-qface_2.0.11.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-qface_2.0.10.bb
+rename to meta-python/recipes-devtools/python/python3-qface_2.0.11.bb
+index 9190c9a63..9ecaf5698 100644
+--- a/meta-python/recipes-devtools/python/python3-qface_2.0.10.bb
++++ b/meta-python/recipes-devtools/python/python3-qface_2.0.11.bb
+@@ -2,7 +2,7 @@ SUMMARY = "A generator framework based on a common modern IDL"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=eee61e10a40b0e3045ee5965bcd9a8b5"
  
- PYPI_PACKAGE = "argcomplete"
+-SRC_URI[sha256sum] = "8606fbade67c3c0afe8ed5bbe860e7ffcd523ce0568c3f9dbe9f04503542f3cf"
++SRC_URI[sha256sum] = "b55c239f3ae7e23c5c8434f38901c5bcacb6afd17e88e37934b46e44558df295"
  
--inherit pypi setuptools3
-+inherit pypi python_setuptools_build_meta
-+
-+DEPENDS += " \
-+    python3-setuptools-scm-native \
-+"
+ inherit pypi setuptools3
  
- RDEPENDS:${PN} += "\
-     python3-core \
 -- 
 2.39.2
 
