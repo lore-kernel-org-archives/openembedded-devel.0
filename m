@@ -1,136 +1,90 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E51DCC3DA4A
-	for <webhook@archiver.kernel.org>; Fri,  9 Aug 2024 16:08:56 +0000 (UTC)
-Received: from mail-oo1-f53.google.com (mail-oo1-f53.google.com [209.85.161.53])
- by mx.groups.io with SMTP id smtpd.web10.87639.1723219734777458696
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18AFEC52D7C
+	for <webhook@archiver.kernel.org>; Fri,  9 Aug 2024 16:32:17 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.web11.88278.1723221135045177556
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Aug 2024 09:08:54 -0700
+ Fri, 09 Aug 2024 09:32:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=AHdfk8qn;
- spf=pass (domain: gmail.com, ip: 209.85.161.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f53.google.com with SMTP id 006d021491bc7-5c661e75ff6so1394562eaf.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Aug 2024 09:08:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=EMnGdB4Q;
+ spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-36bd70f6522so1193915f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Aug 2024 09:32:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1723219734; x=1723824534; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=dGZbXxRw7hVHhe2HilcJRZuPRxp+c+grcgyB36dxIh4=;
-        b=AHdfk8qn7UuchwUz9aMnjjKJLNqxTZS9W2mLSUUQk819xn+r9PKxVPk+yCx0WzLmbd
-         W+jWycpz5lDnIrZIzPaZq+5PpgMomUPYA28cBPRMoToGYEG7D3IpzhaGqvR2cJCbsfZP
-         hTHdsOBF2YSGbdQ7kIwqvYzSRLL1kqPZd2mt6UeedQI2+/Tj3pKcKbDtU5Amtao03xgN
-         E9utjvAkKTDENS+FvtSOuy9KWaCQa6CIameLHpja2QGL/B1MFHZYvTA9lF9wBRCKZSfF
-         a7FZZ1zWXVctrGocQepNbUHYaVQO0A+b9wZPTGQwooksvWYRV6dtuB44lA5EEKy5/VTZ
-         8RFA==
+        d=gmail.com; s=20230601; t=1723221133; x=1723825933; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=iFiSQMJHI43oqNyM1bAf/PL4uDDcDnsyq+Tkj0NRVrc=;
+        b=EMnGdB4QKnafuu/GvzPbeNTEJQ8mnFiManICEQF+/JSzWpR2jLsAgna1OSlgXEHjv3
+         558KYLTkgGKDgSGo78aeJb3MG9tRRIWa0F9AmPapDTN2kAVsskpBH2LsqZphOKqAp6TH
+         Fq7S+YeSAbYvIlqe0cMcDwIu8fAK0V+BMOKHY7OY3SxxZUz3/G19ggkXXBdx3ELtQKEl
+         zK9CpQ0njFn3sdIBFWiJkme+t4kKuK1kh4W4POAk6RazZGqAsTF3cmxoJbtcwecHh0bE
+         v4K1IjZqjUzUfe8H91nSRt3Z4KAJwji08YozXnEIhwDEOwOT2dNVqrAHReaJigrDWMKr
+         GcWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723219734; x=1723824534;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=dGZbXxRw7hVHhe2HilcJRZuPRxp+c+grcgyB36dxIh4=;
-        b=lGg4ZMKfm9Dyc+66boET1y42uES1RiK9cwUb/uu7xJTf/oF1GR/J9OUIG0GIcPmG/z
-         FKD4XoeEYWmGrQLKeXyrvnW5WgtCweO7R6GyGxtgunRZSYd/yaWQGA8wMnBP1/COzKGZ
-         JziVW8tLC1gvW1I8slAmMf6lWYY0mDgbxv9n2RZWc8lpwiXsurbVu7gGGN6LGYhIXodT
-         cS742npWDMlPQ8tRs4UTnx4hCqlKbKv06v2s0MzJpWiOTwMAKs1K/5A0F0ytNcySzNJA
-         nUIqPddoXO6IIVMe39UEllvVp9Ar9Ep/nuaTVjxfwkDw6mMusF5mpMI5AZ6D0nQzSR6b
-         wneA==
-X-Gm-Message-State: AOJu0YwVcfw595FDWnk5IZKYdo/M2wIPV6/iejoPG1NY3KQoWOVYDSLe
-	zS7FevKU9ZvlBgca7MMewSUI8rbVOkgdKRjVzFlrNVKMCqOi6iG9Bm4oW99KbKGpNTjPdPAu2bU
-	1KHgo3DVYHsiw00P7N/vCY0bU3zaWcoY/vV8=
-X-Google-Smtp-Source: AGHT+IGAUDDkhn3aAiz3DTR+xprnqGdnzyIiKwhHstj3oEGf+zq8jOFcrM7kw6GIlVJJM5AxAqkSim/yczHtsvJ00V0=
-X-Received: by 2002:a05:6820:1b82:b0:5d8:e69:846f with SMTP id
- 006d021491bc7-5d87df14155mr2222031eaf.8.1723219733981; Fri, 09 Aug 2024
- 09:08:53 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1723221133; x=1723825933;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=iFiSQMJHI43oqNyM1bAf/PL4uDDcDnsyq+Tkj0NRVrc=;
+        b=tj0GxK7nzrFf6Qxz0Ez0rASQ+BKB5Xka/RLptOascChaThewgMBqZfsDfpu0gh651D
+         p+Zy32UR2CKZ5ZXvmEp9LhZAkxt+wOh40mtMO8v8pYmaI103n+5M+KWAJPGJBIPI0k0u
+         Bj1Insfg6seqQFrmUxaIWts6W/8UwDV+9vjHmmFBy9uuVtZibOKR79Bt/CFrUEyYyawa
+         +NAC6QNObB79hdeA3Aea1dWZBsStIb7wRU/I7zPpJPobOU/ovY5y/vtT7QpnJ4uY81SF
+         5XsyYxpeSSJuiqVegtbuOK4HCDTadp2do6N5dXhjaZieHpVZugo/mf12QroU/4aepQqH
+         Ii/Q==
+X-Gm-Message-State: AOJu0YxMBJWIomJvaE+/iwgfsO5eM70WXm3WRgjeZAAg9+41ll5jfsTZ
+	8/N/fLovY0aBtNujqSVi1B/GaDgazJcrzBH2TBE/RomcptujCtAS/Gyh1nen
+X-Google-Smtp-Source: AGHT+IFbAPdHL9r6pxq1QXHbwPwSSieLqBZ1vIWLUdhA7ESB+7mUAeaNRGU+pW3/Gr+OuE07Nyy9GA==
+X-Received: by 2002:adf:eaca:0:b0:368:4e38:8a0e with SMTP id ffacd0b85a97d-36d5ede922amr1491814f8f.36.1723221132971;
+        Fri, 09 Aug 2024 09:32:12 -0700 (PDT)
+Received: from localhost.localdomain ([176.33.65.192])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-36d2716bf49sm5789123f8f.25.2024.08.09.09.32.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 09 Aug 2024 09:32:12 -0700 (PDT)
+From: alperak <alperyasinak1@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-python][PATCH 01/12] python3-service-identity: switch to PEP-517 build backend
+Date: Fri,  9 Aug 2024 19:30:50 +0300
+Message-Id: <20240809163101.8416-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20240807124748.126211-1-alperyasinak1@gmail.com>
-In-Reply-To: <20240807124748.126211-1-alperyasinak1@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 9 Aug 2024 09:08:28 -0700
-Message-ID: <CAMKF1srJ1+TVbifjSi7_WRadAkTdanAqWqXXN_NvUtPRVgzG1Q@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-daemon: switch to PEP-517 build backend
-To: alperyasinak1@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 09 Aug 2024 16:08:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111711
+ <openembedded-devel@lists.openembedded.org>; Fri, 09 Aug 2024 16:32:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111712
 
-it fails to compile see
+The project has a proper pyproject.toml which declares the setuptools.build.meta PEP-517 backend.
 
-https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/4025/step=
-s/15/logs/stdio
+Fix:
 
-On Wed, Aug 7, 2024 at 5:47=E2=80=AFAM Alper Ak via lists.openembedded.org
-<alperyasinak1=3Dgmail.com@lists.openembedded.org> wrote:
->
-> The project has a proper pyproject.toml which declares the setuptools.bui=
-ld.meta PEP-517 backend.
->
-> Fix:
->
-> WARNING: python3-daemon-3.0.1-r0 do_check_backend: QA Issue: inherits set=
-uptools3 but has pyproject.toml with setuptools.build_meta, use the correct=
- class [pep517-backend]
->
-> Signed-off-by: alperak <alperyasinak1@gmail.com>
-> ---
->  .../python/python3-daemon_3.0.1.bb             | 18 +++++++++---------
->  1 file changed, 9 insertions(+), 9 deletions(-)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-daemon_3.0.1.bb =
-b/meta-python/recipes-devtools/python/python3-daemon_3.0.1.bb
-> index 715d3bf12..4cdbff0ee 100644
-> --- a/meta-python/recipes-devtools/python/python3-daemon_3.0.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-daemon_3.0.1.bb
-> @@ -1,18 +1,18 @@
->  DESCRIPTION =3D "Library to implement a well-behaved Unix daemon process=
-"
->  HOMEPAGE =3D "https://pagure.io/python-daemon/"
->  SECTION =3D "devel/python"
-> -
-> -DEPENDS +=3D "python3-docutils-native"
-> -RDEPENDS:${PN} =3D "python3-docutils \
-> -                  python3-lockfile (>=3D 0.10) \
-> -                  python3-resource \
-> -"
-> -
->  LICENSE =3D "Apache-2.0 & GPL-3.0-only"
->  LIC_FILES_CHKSUM =3D "file://README;md5=3Da3a94c615dc969a70525f1eebbacf2=
-35"
->
-> -inherit pypi setuptools3
-> +PYPI_PACKAGE =3D "python-daemon"
-> +
-> +inherit pypi python_setuptools_build_meta
->
->  SRC_URI[sha256sum] =3D "6c57452372f7eaff40934a1c03ad1826bf5e793558e87fef=
-49131e6464b4dae5"
->
-> -PYPI_PACKAGE =3D "python-daemon"
-> +DEPENDS +=3D "python3-docutils-native"
-> +
-> +RDEPENDS:${PN} =3D "python3-docutils \
-> +                  python3-lockfile (>=3D 0.10) \
-> +                  python3-resource \
-> +"
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#111629): https://lists.openembedded.org/g/openembedde=
-d-devel/message/111629
-> Mute This Topic: https://lists.openembedded.org/mt/107768088/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+WARNING: python3-service-identity-21.1.0-r0 do_check_backend: QA Issue: inherits setuptools3 but has pyproject.toml with setuptools.build_meta, use the correct class [pep517-backend]
+
+Signed-off-by: alperak <alperyasinak1@gmail.com>
+---
+ .../recipes-devtools/python/python3-service-identity_21.1.0.bb  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-python/recipes-devtools/python/python3-service-identity_21.1.0.bb b/meta-python/recipes-devtools/python/python3-service-identity_21.1.0.bb
+index 006fae290..267bbea13 100644
+--- a/meta-python/recipes-devtools/python/python3-service-identity_21.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-service-identity_21.1.0.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8a0f079f4e6a215d6bd6f9d97cab4d5f"
+ SRC_URI[md5sum] = "5e5c195d8fcedc72f9068be2ad9b5a13"
+ SRC_URI[sha256sum] = "6e6c6086ca271dc11b033d17c3a8bea9f24ebff920c587da090afc9519419d34"
+ 
+-inherit pypi setuptools3 ptest
++inherit pypi python_setuptools_build_meta ptest
+ 
+ SRC_URI += " \
+ 	file://run-ptest \
+-- 
+2.25.1
+
 
