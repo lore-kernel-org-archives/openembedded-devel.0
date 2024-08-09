@@ -2,108 +2,90 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CD22C52D73
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B935C3DA4A
 	for <webhook@archiver.kernel.org>; Fri,  9 Aug 2024 08:52:44 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web10.79829.1723193562184372177
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.web11.79757.1723193562358681199
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 09 Aug 2024 01:52:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=Ez1sZ+he;
- spf=pass (domain: konsulko.com, ip: 209.85.218.53, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-a7aa4bf4d1eso226884666b.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Aug 2024 01:52:41 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=dKLE8qFY;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.44, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-a728f74c23dso207191466b.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Aug 2024 01:52:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=konsulko.com; s=google; t=1723193560; x=1723798360; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ZXx/2O0pCnVYvmnps9qsAdUCXjFD1t2iUQdk4CXmaqs=;
-        b=Ez1sZ+he+Wln1wkx8EJ36QIjI0FbNjhxN35Ndo2ei78BIpJ4cKXLSeMDK2DSlvm4th
-         ttqIaQjxMFnB1KcZNfXbcEuHFUSh/mRvhrawi2jDjEOEtTWcUyVA17rplTfzq1lxChk+
-         SV0716RrTM+E4ulqenTOm7/8GyXq3Gz3fOk60=
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=JPLbhL9BuG2PxhFwH/L7ymrJeV3PUGoEsy6/V+MA6eo=;
+        b=dKLE8qFYPaQfKHq3J8HFexw5jdEkYz2+NlpIFMdyqn9bfiiK4PJ5VSfYgGAHZDHw6N
+         Bjgmr+ex5nQZAQXiPzTFMeZn2KVTNVuInxys4yFZy+V79QAs/ET3pBMdl6KaTNNTGkyk
+         ADUeGUWzo4vB7crK0umbNDMPsgRvgsXBGbNXM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1723193560; x=1723798360;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ZXx/2O0pCnVYvmnps9qsAdUCXjFD1t2iUQdk4CXmaqs=;
-        b=YXHSJk4wD0vakJa9DYefxOF9sG62F330v8B+Clyy4UY4JqaBgJzw/0gSJazxUqjeGV
-         +4IvdbkXEuWCvBrMtxMtCKccoEsuFqsY2nMVZS1oJKfNo7kIrh+HexaZpyYvaCDyLYWg
-         BzY/U+LwXBJrzRrRukPd4qBEeVQQRi4Xq+5IejCt4p7e/TCd+vsF4zb7O0+upeWJtj+1
-         0XfUEPdORplz4KtlmB4bO1V/xphiOELWkTdnl0Ypj9sSXP8+19WdU6nzQmTDUitDagW1
-         POOYu2peJMIVQJm/1PSQOCeIXebW2KtFGrs3Zq9K0owkUqmAdrtsx3IhWEF2RPvbfiVO
-         jUzw==
-X-Gm-Message-State: AOJu0Ywg6QZK9sOtlaOwrJJPfES4sqzaAJANZjgZoQbYN8dPcbsDGF+h
-	+IjkitGBdhK79WMs3Oqd6QHelUqZGwLIH7cdJ9XAG4nYapgDXumzXvANj3/RJOAKAa1JRaPnBpW
-	p
-X-Google-Smtp-Source: AGHT+IF8sytQ/pb0zNULe++IIEyZM82R0aSo+iA8vG7m1dlCtwBnrWWQ181w2/TlsuXqFDPaGh3oqw==
-X-Received: by 2002:a17:907:96a6:b0:a7a:a06b:eebe with SMTP id a640c23a62f3a-a80aa55b7camr74582066b.9.1723193559739;
-        Fri, 09 Aug 2024 01:52:39 -0700 (PDT)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=JPLbhL9BuG2PxhFwH/L7ymrJeV3PUGoEsy6/V+MA6eo=;
+        b=Bm28F+m9HTKm8PAJrNUOuwJEhZesx2a5ExUIQSBmA83/XqN3yXHJTck9vkTGx2csq9
+         9fpJ3QeFbvjcJRT3aSGQkMU854gRmUp/sC2TbEc8TJOLtCNMWBt6bWMXVl8QxHaJogK5
+         YgGAoEZhH2eGGqY39QNeJesTcm0DUT+DIfVDwymAhKPaEsocauz1qF+Ls97/FsA5yps0
+         JikLyEbwmZpx0i6Ku9tX1NVPOSEe/dK8q3sbRxBwIm9FEkaz6tWzoHs1qvHAoDOhQOCz
+         aetfKgfN6l0ByVFmaRWn7LqB8JvOSyVVGyMAHjCaZjxhe7OwXG9Y+iB6dBB8cHEjFC5f
+         wITw==
+X-Gm-Message-State: AOJu0Yyp9fnS5Yk78VCTVkjg9ulNsT7TDuP0IZstKB51cBv+sRgFnyFz
+	uojMsTH6E7y8udXz7DCwM2pVEU+NV5Ee8D4Rn8bWasdFem+mLvJLzqplx7w/J0Pushv0YVgTpvs
+	g
+X-Google-Smtp-Source: AGHT+IFnFCJreoG34VAY8AyuuirMFwtAPJS8YKVTflcmIr5anq22MhHH7b4D6rbzvZu3tP9JHV+TTA==
+X-Received: by 2002:a17:907:7ba0:b0:a7a:c083:8579 with SMTP id a640c23a62f3a-a80aa675c71mr62414966b.62.1723193560444;
+        Fri, 09 Aug 2024 01:52:40 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
         by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a7dc9bc3c4fsm823286366b.33.2024.08.09.01.52.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Aug 2024 01:52:39 -0700 (PDT)
+        Fri, 09 Aug 2024 01:52:40 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/6] python3-itsdangerous: Upgrade 2.1.2 -> 2.2.0
-Date: Fri,  9 Aug 2024 11:52:31 +0300
-Message-Id: <20240809085236.1828180-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/6] python3-sniffio: witch to PEP-517 build backend
+Date: Fri,  9 Aug 2024 11:52:32 +0300
+Message-Id: <20240809085236.1828180-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240809085236.1828180-1-leon.anavi@konsulko.com>
+References: <20240809085236.1828180-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 09 Aug 2024 08:52:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111685
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111686
 
-Upgrade to release 2.2.0:
+The project has a proper pyproject.toml which declares the
+setuptools.build.meta PEP-517 backend.
 
-- Drop support for Python 3.7
-- Use modern packaging metadata with pyproject.toml instead of
-  setup.cfg
-- Use flit_core instead of setuptools as build backend
-- Deprecate the __version__ attribute. Use feature detection, or
-  importlib.metadata.version("itsdangerous"), instead.
-- Serializer and the return type of dumps is generic for type
-  checking. By default it is Serializer[str] and dumps returns a
-  str. If a different serializer argument is given, it will try to
-  infer the return type of its dumps method.
-- The default hashlib.sha1 may not be available in FIPS builds.
-  Don't access it at import time so the developer has time to
-  change the default.
-
-License-Update: Renamed from LICENSE.rst to LICENSE.txt
+Fixes:
+WARNING: python3-sniffio-1.3.1-r0 do_check_backend: QA Issue:
+inherits setuptools3 but has pyproject.toml with
+setuptools.build_meta, use the correct class [pep517-backend]
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...-itsdangerous_2.1.2.bb => python3-itsdangerous_2.2.0.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-itsdangerous_2.1.2.bb => python3-itsdangerous_2.2.0.bb} (62%)
+ meta-python/recipes-devtools/python/python3-sniffio_1.3.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-itsdangerous_2.1.2.bb b/meta-python/recipes-devtools/python/python3-itsdangerous_2.2.0.bb
-similarity index 62%
-rename from meta-python/recipes-devtools/python/python3-itsdangerous_2.1.2.bb
-rename to meta-python/recipes-devtools/python/python3-itsdangerous_2.2.0.bb
-index 5af1d594b..f4d8d5296 100644
---- a/meta-python/recipes-devtools/python/python3-itsdangerous_2.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-itsdangerous_2.2.0.bb
-@@ -1,11 +1,11 @@
- SUMMARY = "Various helpers to pass trusted data to untrusted environments and back."
- HOMEPAGE = "http://github.com/mitsuhiko/itsdangerous"
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=4cda9a0ebd516714f360b0e9418cfb37"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4cda9a0ebd516714f360b0e9418cfb37"
- 
--SRC_URI[sha256sum] = "5dbbc68b317e5e42f327f9021763545dc3fc3bfe22e6deb96aaf1fc38874156a"
-+SRC_URI[sha256sum] = "e0050c0b7da1eea53ffaf149c0cfbb5c6e2e2b69c4bef22c81fa6eb73e5f6173"
+diff --git a/meta-python/recipes-devtools/python/python3-sniffio_1.3.0.bb b/meta-python/recipes-devtools/python/python3-sniffio_1.3.0.bb
+index 448ac34f5..746e4185d 100644
+--- a/meta-python/recipes-devtools/python/python3-sniffio_1.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-sniffio_1.3.0.bb
+@@ -7,6 +7,6 @@ LIC_FILES_CHKSUM = "\
+     file://LICENSE.APACHE2;md5=3b83ef96387f14655fc854ddc3c6bd57 \
+ "
  
 -inherit pypi setuptools3
 +inherit pypi python_setuptools_build_meta
  
- CLEANBROKEN = "1"
- 
+ SRC_URI[sha256sum] = "e60305c5e5d314f5389259b7f22aaa33d8f7dee49763119234af3755c55b9101"
 -- 
 2.39.2
 
