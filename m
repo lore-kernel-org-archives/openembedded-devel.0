@@ -2,56 +2,56 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AC0E1C3DA4A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AC117C52D7C
 	for <webhook@archiver.kernel.org>; Fri,  9 Aug 2024 15:49:16 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.web11.87204.1723218550821966261
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.web11.87201.1723218547472349296
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Aug 2024 08:49:11 -0700
+ Fri, 09 Aug 2024 08:49:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=U4Ofi/Zt;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-428243f928cso14957415e9.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Aug 2024 08:49:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nKh0YrzI;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4280ca0791bso16037575e9.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Aug 2024 08:49:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1723218549; x=1723823349; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1723218545; x=1723823345; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=/gluzN/cTJyYHDHtW04Hxq33HyHceABm/rL+czDCVAs=;
-        b=U4Ofi/ZtYoSJKrsrDjuhw9lrURNddbepjfQIuaX6wvRBQWpxhVfecJh/T7qsMaqvHW
-         9KTj2y/Jh/0SgTs3Pvd/840RI/6SI5RJfEZLd+wlsl7W7WanQRksdZe4Vjtjewr0GnhH
-         0YI9Wcz/G5MbOCQf3bGnJ3G7Piy5zmazkTXW4xSekfSwycq+CVccd81tT4eZMmmp1zo0
-         CGfcUoq3ohC6FL+vDVi2BtFizQVEvztPDWtTH7cHZk1tE0Kg1HOrY5Rdw/cxpPgsWrC1
-         3B5hmMNdYxs/TAK4/k5NV5QPqa86gcfOUiy4kAlGqJQmm23X8kYu3XDhztPVD/8ayVJN
-         OWSw==
+        bh=O6vCjeVs7Fqea8LJ44Gl1fHatOGCEOgUaiwipOuQ2Xs=;
+        b=nKh0YrzIx/mANCYAnRRijwklSkeasqsvEskeZZyFRy1iYG3O93+5E5xLPSMZ7wTu5m
+         NaZQOeEpp5kNMnz29jSOo5LLyTa5xHb3Vf2x/r+0stPj1ajG070rUv6fbkw4RXe7kTwp
+         xtofjJPfpf2cEIN1PYvuBSsFu8YQXBEta8pCTUjGMvPy8AXqx1ZKMDyv+uLHpxWcLpd7
+         1XAtL2PiKGwWH7QuxZ6Wj2fF3PCoLh02Ko8+WWF4wNx3Rt0m6KHe6DwaT4EEjq4LE5kD
+         QYybJiMLQowX6pZw7qiOj99aCjnvn6/lcPWT9JWm9l2wmCqwTZQSGOJUzwOXPtlCtf0B
+         S4fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723218549; x=1723823349;
+        d=1e100.net; s=20230601; t=1723218545; x=1723823345;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=/gluzN/cTJyYHDHtW04Hxq33HyHceABm/rL+czDCVAs=;
-        b=ObJkGd7InHtPnIsdWnmgxDaPSRTH8YvEUgW+WYFI8Y/dlgkisNjSXxmwlcekz5mFRe
-         U091OhkpCt2pdMBff4IGQLfz//K0ZaPFSLLriKiWA573v2HqK4xZfegtH1fpVJvaZLUZ
-         ow0EjS6Pjl+QV78fCyFhxIKsYR+SqUM1Upt4Vyjo62fRGbtBZpWq73hgkSAlLxA/9VZM
-         43PHO/aSkysPbZdlocLCC/zDCdPD/hjuPJp3FYYGODjvpizpUV7w0kHWEnWIhZdBPQBB
-         zW5LNZwq1JOKxJ4w68JSk7HHfp45g9ZNHxSAL+7Q5D/nZjENOY6ZqkzB7seESRr/sYMC
-         d39g==
-X-Gm-Message-State: AOJu0YyU2mo1w4xfdDlHohTD2KpoOoORtkCxapPsde7I/5efEJ4bCDgL
-	az1HVi63BbmGXaiC2Rrd1wONkfR6PNmXfIUw/miYSiPICoQAUEGd/nNPZPyk
-X-Google-Smtp-Source: AGHT+IFqPDRgC7YDtctG/Svw6WAHvY4e2ZmTC++98Fu1gsXyLbPPn6C55CJypaSzcdabtn8LBgoqpg==
-X-Received: by 2002:a05:600c:1c89:b0:426:6416:aa73 with SMTP id 5b1f17b1804b1-429c3a19cc7mr12749255e9.12.1723218548677;
-        Fri, 09 Aug 2024 08:49:08 -0700 (PDT)
+        bh=O6vCjeVs7Fqea8LJ44Gl1fHatOGCEOgUaiwipOuQ2Xs=;
+        b=ZI8SOfZXWoQZvSFSOyjlTjHm4UZbADK3x/AGre4/2YAtDFudhfkc9kGtyTjrkNUcL+
+         hrDNtKB6EPsPi+3ML61HX/LInWhryEIMtHAv+jfNAA8sg9axeCINqbF2JMyW6Lbs/8+8
+         mtuKKdj4pWMaKsofV+62qQ0m2S5TQ56cUn5a8JkK/+2/3o7mBV2bhRz5Eaqwj7E9o4dl
+         BEC4aGKfzRGRpJQlPcKvifMp4sEIx6WlYYe55ur1JNJv/u2Rskrjk1h8TU7+UlI4YJCB
+         Xx15umvel3PMI0ZEIMCIEaEd9iOxJPngvMsq66YNHWkClwIiqiGMSvUd6G1arr3e6quY
+         oozQ==
+X-Gm-Message-State: AOJu0YzATCCDx9hLGlJN9qSa/Dp3/amcvj1XLuWbXCnEwCy2Ue2wlCKV
+	cdD2CfMSFDOajOpv9vBxxP1kYgs8P0f6R1FEp6GUsyLBeqd9hRyrMs2OUe0z
+X-Google-Smtp-Source: AGHT+IFlDn3/L4zEieCJ5qwNNRrDjKL1doKuEkA9x0uLVq8B91FcSakrY6cPT8sNNeaqRrDVKoxEJA==
+X-Received: by 2002:a05:600c:4eca:b0:428:2502:75b5 with SMTP id 5b1f17b1804b1-429c3a1c462mr14800605e9.11.1723218545383;
+        Fri, 09 Aug 2024 08:49:05 -0700 (PDT)
 Received: from localhost.localdomain ([176.33.65.192])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4290c738eb4sm81195555e9.14.2024.08.09.08.49.07
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4290c738eb4sm81195555e9.14.2024.08.09.08.49.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Aug 2024 08:49:08 -0700 (PDT)
+        Fri, 09 Aug 2024 08:49:04 -0700 (PDT)
 From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-python][PATCH 13/13] python3-gevent: switch to PEP-517 build backend
-Date: Fri,  9 Aug 2024 18:48:30 +0300
-Message-Id: <20240809154830.14927-13-alperyasinak1@gmail.com>
+Subject: [meta-python][PATCH 11/13] python3-django: switch to PEP-517 build backend
+Date: Fri,  9 Aug 2024 18:48:28 +0300
+Message-Id: <20240809154830.14927-11-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240809154830.14927-1-alperyasinak1@gmail.com>
 References: <20240809154830.14927-1-alperyasinak1@gmail.com>
@@ -61,41 +61,30 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 09 Aug 2024 15:49:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111709
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111707
 
 The project has a proper pyproject.toml which declares the setuptools.build.meta PEP-517 backend.
 
 Fix:
 
-WARNING: python3-gevent-24.2.1-r0 do_check_backend: QA Issue: inherits setuptools3 but has pyproject.toml with setuptools.build_meta, use the correct class [pep517-backend]
+WARNING: python3-django-5.0.6-r0 do_check_backend: QA Issue: inherits setuptools3 but has pyproject.toml with setuptools.build_meta, use the correct class [pep517-backend]
 
 Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-gevent_24.2.1.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-python/recipes-devtools/python/python3-django_5.0.6.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-gevent_24.2.1.bb b/meta-python/recipes-devtools/python/python3-gevent_24.2.1.bb
-index 806e09391..e44972178 100644
---- a/meta-python/recipes-devtools/python/python3-gevent_24.2.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-gevent_24.2.1.bb
-@@ -4,7 +4,7 @@ a high-level synchronous API on top of the libevent event loop."
- HOMEPAGE = "http://www.gevent.org"
- LICENSE = "MIT & Python-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=4de99aac27b470c29c6c309e0c279b65"
--DEPENDS += "python3-greenlet libev libuv c-ares python3-cython-native"
-+DEPENDS += "python3-greenlet-native python3-greenlet libev libuv python3-cython-native python3-cffi-native"
+diff --git a/meta-python/recipes-devtools/python/python3-django_5.0.6.bb b/meta-python/recipes-devtools/python/python3-django_5.0.6.bb
+index 69b25742d..513032876 100644
+--- a/meta-python/recipes-devtools/python/python3-django_5.0.6.bb
++++ b/meta-python/recipes-devtools/python/python3-django_5.0.6.bb
+@@ -1,5 +1,5 @@
+ require python-django.inc
+-inherit setuptools3
++inherit python_setuptools_build_meta
  
- RDEPENDS:${PN} = "python3-greenlet \
- 		  python3-mime \
-@@ -18,7 +18,7 @@ SRC_URI += "file://0001-_setuputils.py-Do-not-add-sys_inc_dir.patch \
+ SRC_URI[sha256sum] = "ff1b61005004e476e0aeea47c7f79b85864c70124030e95146315396f1e7951f"
  
- SRC_URI[sha256sum] = "432fc76f680acf7cf188c2ee0f5d3ab73b63c1f03114c7cd8a34cebbe5aa2056"
- 
--inherit pypi setuptools3
-+inherit pypi python_setuptools_build_meta
- 
- # Don't embed libraries, link to the system provided libs instead
- export GEVENTSETUP_EMBED_CARES = "0"
 -- 
 2.25.1
 
