@@ -2,64 +2,61 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A6C69C3DA7F
-	for <webhook@archiver.kernel.org>; Sat, 10 Aug 2024 15:07:19 +0000 (UTC)
-Received: from mail-yw1-f171.google.com (mail-yw1-f171.google.com [209.85.128.171])
- by mx.groups.io with SMTP id smtpd.web11.7436.1723302434323154344
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD294C3DA4A
+	for <webhook@archiver.kernel.org>; Sat, 10 Aug 2024 15:10:39 +0000 (UTC)
+Received: from mail-yb1-f176.google.com (mail-yb1-f176.google.com [209.85.219.176])
+ by mx.groups.io with SMTP id smtpd.web11.7492.1723302637339263217
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 10 Aug 2024 08:07:14 -0700
+ Sat, 10 Aug 2024 08:10:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eks8+Lo7;
- spf=pass (domain: gmail.com, ip: 209.85.128.171, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f171.google.com with SMTP id 00721157ae682-6a4778dad26so595197b3.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 10 Aug 2024 08:07:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=eKMZ9e81;
+ spf=pass (domain: gmail.com, ip: 209.85.219.176, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f176.google.com with SMTP id 3f1490d57ef6-e0857a11862so2953310276.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 10 Aug 2024 08:10:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1723302433; x=1723907233; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1723302636; x=1723907436; darn=lists.openembedded.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=3E/83DzRUH1JzoUNVj3CoXISpgGI/L13i+g29v5t6+g=;
-        b=eks8+Lo7XzawQnaRWYlLRuoAyHDWAkYWT5dX7jgmoAk8aM7uLpZsYkizEFfxGjmyeb
-         g4ViYbfmOqmDgybGV/FEiRloS7IvQMroMI5GGTmtE0KN1heOs6VWFb3eJXleQmljpd9B
-         6deVrx3eEY8j10DjY+AxQbpHUiM3McDyQga27wbpcNTBmzWbZUiLweoeTUs1Bwy3epPD
-         t0vQDQPHoFxMjmViO55Gi1tKLeKsvTumkDS0eaLuYKIwxoyLAFkyIEKa3AeCQMVccoVv
-         ea+9JbfjxpmXVfRFN+4JXpP6dGPEjWwilBTOJtdyn4AGi0d10nyw9/PK/li/tbm/Kb3/
-         p37A==
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=UWJh35PDe2AzYxI12mupJrHDYEAF1duYRbN1meVb9EM=;
+        b=eKMZ9e817Ewdmu+XtAu2rEJoLHz8hJpmlrL62JqW81bOF+V+YQqqh8lhC2YUqpUxIf
+         fTRG/D2BwXNiUR3itkOXixNwweEuaLy81OZIVv6S8IT01QN8wvjJi1w2E5imzmrL4ejz
+         j7gK+jkyjGjvI6YdJQxR8M6CKu/SI2yf80ezuApGg4pU4OD/kl8vBX/8M3krk/WXBdI3
+         WbZAh38n3BWZOloeMKhLXnKLh0op2vtsdkHsZC4JA9QJT4J14EDWDD6LPw4Ww3R5rCV7
+         zEtrfpBq7pNQXysDDIhK74d9uSiTki1+pS2iBX6iOB+MclT7OTZOi4SsIPUbIEzu1sOa
+         LTaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723302433; x=1723907233;
+        d=1e100.net; s=20230601; t=1723302636; x=1723907436;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3E/83DzRUH1JzoUNVj3CoXISpgGI/L13i+g29v5t6+g=;
-        b=OTBJBexU7DRHDPqX0mzNuRSzfT6LQRokTmOJR+OtYJyyLuf7RV1UJKsSFzmxeL0ehp
-         2Qa4UBOTPRZhy5umU9LbLvdSZumYo06unWExncxZdm54c4/sBewvvffkfOR69tosYsrs
-         OC5ANrDt/zALFuHF1QoTdV4asMf6ijPNPWXa5hHaTUPqb+YBVVzpQED7CG/JtcHp05Vj
-         Ki7P9hcVLOAgN8I+swDDzJ5sALTilHuPRn1gdosYTtb1tbrPnQ3Cklb6uAbeA0WX1YZT
-         IW9Y/6TMdqw2NGX9QT4t0Sx/jxfTsrU09WYb00tyCis+B62n0xsMwSQ9AXTqOtwWr87j
-         j2bA==
-X-Forwarded-Encrypted: i=1; AJvYcCVoJGc52is6nmDvYAF2DLKzEMIHv4OikQ1St9OGXLINNPh/S0YCfEj11PBt2hjqW6GqqSPlJXXysej47Gzl6XislwxC1vJnXYQKJUFWwHc2v8+LhjizuoKhrQ==
-X-Gm-Message-State: AOJu0YzMpw2d7MkeQQg/oNPl5H7NTFwca1QOEBszAgOvwyNWf7XAqPwH
-	BWp0uMexJvjka1+BwXA7pP8Zsz12GVzrh5DCvYdzfmfP00+uFajz
-X-Google-Smtp-Source: AGHT+IGdiHnW0aQ3llzaE/EHAqEk/ObDhDuXlCxsohQkhKrwO6xGAxdfJ90fjpxCdbI7q0+ORKGD+g==
-X-Received: by 2002:a05:690c:fcf:b0:64a:5ff5:73ef with SMTP id 00721157ae682-69ebf27e74bmr66907127b3.0.1723302433408;
-        Sat, 10 Aug 2024 08:07:13 -0700 (PDT)
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=UWJh35PDe2AzYxI12mupJrHDYEAF1duYRbN1meVb9EM=;
+        b=T38tf6Fc+8xbWk3ijmAPZfY5ysydJkWGmZHosPMrwLsG+MCnxhi/REyvwD/xaheFFB
+         1JhsHD4CkhWWcY2omkBJ7jAMti/WA+1AY86TSvxBo+4NQuSYgaVtQPoQFvV5KZZRwaJo
+         DzmDxl3bIst6mOPhM0YBC95uPdtuuMTllBB8XUxM1s7MI1N1lWxoxH0oTYFTdYLjib/U
+         Kue8ZOeHn8f7HmK2eXAxerhMRlRDToGprm9TodKrqIxo90QuPZscLp/9VR590PYP8DMH
+         yyAbN+yr+9zBQ5tiAeJ81T1euOzV66iOtHtrm39A7GMoqucA/saR4ymoER/+Wk0KaoMb
+         +mLw==
+X-Forwarded-Encrypted: i=1; AJvYcCWM6zwDVJv+VmoAamTpIcMl7ZVdN0RFCUAac8VpTTfPiQKSvsV1MDVnJnRu3a1ZF3D/DCVfxhnxzuDGovt/CuYczJBc0ZE1AaIw+YhAHWMF7pFcnl+jk/gNvA==
+X-Gm-Message-State: AOJu0YxXx5tNK6DsNw+EBzk30dLK3zAEU2g8CcIk/d9EINNAacM2m+G4
+	05Fa5iVOlYr/ntMvASxEaXuC3llKnU9xN5Gje3bGLLOqstXimFCW
+X-Google-Smtp-Source: AGHT+IEpr+N9gov/I5nsqISDyYiqIVY5b8CusGjl6BFMjMFSe/4bc/ymOGLlpZcf1RieU98gpABNGw==
+X-Received: by 2002:a05:6902:1021:b0:e0b:c297:8a23 with SMTP id 3f1490d57ef6-e0eb9a7c3d0mr4755727276.43.1723302636314;
+        Sat, 10 Aug 2024 08:10:36 -0700 (PDT)
 Received: from ?IPV6:2600:1700:45dd:7000:ad:eb2b:7538:7504? ([2600:1700:45dd:7000:ad:eb2b:7538:7504])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6a0a068ba99sm2759167b3.39.2024.08.10.08.07.12
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e0ec8ca637asm373136276.59.2024.08.10.08.10.35
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 10 Aug 2024 08:07:12 -0700 (PDT)
-Message-ID: <e1585a38-36cf-4b3e-8ebb-ab669432ee0b@gmail.com>
-Date: Sat, 10 Aug 2024 11:07:12 -0400
+        Sat, 10 Aug 2024 08:10:35 -0700 (PDT)
+Message-ID: <e1cf744b-c090-4ac4-ae1a-e24fbf175dc6@gmail.com>
+Date: Sat, 10 Aug 2024 11:10:35 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-python][scarthgap][PATCH] python3-pydantic-core:
- upgrade 2.16.3 -> 2.18.1
-To: Khem Raj <raj.khem@gmail.com>, debrabander@gmail.com
-Cc: dev@g0hl1n.net, openembedded-devel@lists.openembedded.org,
- tim.orling@konsulko.com
-References: <4453e069-6679-42ae-b3bb-cdd223bf9da1@gmail.com>
- <547021D2-496C-4944-BCDA-438EBD0B42E0@gmail.com>
- <CAMKF1srA8cZigcRuK6mecudctEjtv+NJQtBbqpZMirWdMRzujQ@mail.gmail.com>
+Subject: Re: [oe][scarthgap][master][PATCH] rocksdb: Add an option to set
+ static library
+To: nikhil.r@kpit.com, openembedded-devel@lists.openembedded.org,
+ bindu.bhabu@kpit.com
+References: <20240809110619.25499-1-nikhil.r@kpit.com>
 Content-Language: en-US
 From: akuster808 <akuster808@gmail.com>
 Autocrypt: addr=akuster808@gmail.com; keydata=
@@ -96,70 +93,147 @@ Autocrypt: addr=akuster808@gmail.com; keydata=
  itDSpYIEGrZObj82rX1wvxf/ZQ8VXS+owIR2F4yeeqPH/CyrPA1ASdtt+Am28/dJ2krr72at
  J++uLxA0cein1kjcosFDpQscnDcPzohnGyyjgEd6VwelZboIS1jt4lIa1badtV+cWMGMgM8W
  ApZ86eOP
-In-Reply-To: <CAMKF1srA8cZigcRuK6mecudctEjtv+NJQtBbqpZMirWdMRzujQ@mail.gmail.com>
+In-Reply-To: <20240809110619.25499-1-nikhil.r@kpit.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 10 Aug 2024 15:07:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111736
+ <openembedded-devel@lists.openembedded.org>; Sat, 10 Aug 2024 15:10:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111737
 
 
 
-On 8/6/24 4:09 PM, Khem Raj wrote:
-> On Mon, Aug 5, 2024 at 12:08 AM Frank de Brabander via
-> lists.openembedded.org <debrabander=gmail.com@lists.openembedded.org>
-> wrote:
->>
->>
->>> Op 3 aug 2024 om 18:51 heeft akuster808 <akuster808@gmail.com> het volgende geschreven:
->>>
->>> ﻿
->>>
->>>> On 7/31/24 4:07 AM, Frank de Brabander wrote:
->>>> I was unaware of this discussion when I created the fix for master.
->>>> Note that I've silenced the TMPDIR QA message, this still needs a
->>>> proper fix in master as well.
->>>>
->>>> This indeed needs to be fixed in scarthgap as well, since the
->>>> incompatible versions do break some code. My two cents for the available
->>>> options:
->>>>
->>>>   - Revert pydantic upgrade (from 2.7.0 back to 2.6.4)
->>>>   - Update pydantic-core to 2.18.1
->>>>   - Use master (pydantic 2.7.3 and pydantic-core 2.18.4)
->>>>
->>>> Would only downgrade if this is the *only* allowed option according to
->>>> the LTS branch policy. Version 2.7.x includes new features compared to
->>>> 2.6.4. Removing these with a downgrade would violate the LTS patch policy
->>>> of not merging "ABI/API breakage".
->>> We have had this type of situation with a pkg (A) update in master and then new lts was branched. We found out other later additional pkgs needed to updated to work with pkg (A). pydantic update was in Master before scarthgap was branched.
->>>> Option 2 or 3 are my preferred choices and they fall within the
->>>> "fixes for bugs" category of the LTS patch policy. Option 2 is the smallest
->>>> change to fix the problem, but option 3 includes some additional upstream
->>>> fixes with the update from 2.7.0 to 2.7.3.
->>> Master should be failing so if Master gets a revert of pydantic back to 2.6.4, then Scarthgap will follow. Is this an option? - Armin
->> As far as I know master works now, so a revert would make no sense in that case.
-> Hi Armin
+On 8/9/24 7:06 AM, Nikhil via lists.openembedded.org wrote:
+> Modify the CMakeLists.txt to add an Option for
+> STATIC target import, as available for shared library.
 >
-> scarthgap is relatively new and I think I would be in favor of making
-> an exception for this one case.
-
-Well since scarthgap got the pydantic update before release, updating 
-pydantic-core is reasonable. I see Tim is working on the update and will 
-wait for him to request a merge. BR, Armin
+> Link: https://github.com/facebook/rocksdb/pull/12890
 >
->>>>
->>>> Regards,
->>>> Frank
->> -=-=-=-=-=-=-=-=-=-=-=-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#111509): https://lists.openembedded.org/g/openembedded-devel/message/111509
->> Mute This Topic: https://lists.openembedded.org/mt/107073841/1997914
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
->> -=-=-=-=-=-=-=-=-=-=-=-
->>
+> Configure static library default to switched off
+> as shared libraries are sufficient in most cases.
+
+I believe Master will need this change first.
+
+- armin
+>
+> Signed-off-by: Bhabu Bindu <bindu.bhabu@kpit.com>
+> ---
+>   .../files/static_library_as_option.patch      | 72 +++++++++++++++++++
+>   meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb  |  2 +
+>   2 files changed, 74 insertions(+)
+>   create mode 100644 meta-oe/recipes-dbs/rocksdb/files/static_library_as_option.patch
+>
+> diff --git a/meta-oe/recipes-dbs/rocksdb/files/static_library_as_option.patch b/meta-oe/recipes-dbs/rocksdb/files/static_library_as_option.patch
+> new file mode 100644
+> index 000000000..58914bd22
+> --- /dev/null
+> +++ b/meta-oe/recipes-dbs/rocksdb/files/static_library_as_option.patch
+> @@ -0,0 +1,72 @@
+> +From 285d306494bde3e9c24c8cd6fea1eb380a304d03 Mon Sep 17 00:00:00 2001
+> +From: Bindu-Bhabu <bindudaniel1996@gmail.com>
+> +Date: Fri, 26 Jul 2024 15:14:45 +0530
+> +Subject: Add option to CMake for building static libraries
+> +
+> +ROCKSDB creates a STATIC library target reference by default.
+> +Modify the cmake so that the STATIC library is also an option
+> +just like creating a SHARED library and set default to ON.
+> +
+> +Upstream-Status: Accepted
+> +Link: https://github.com/facebook/rocksdb/pull/12890
+> +
+> +Signed-off-by: Nisha Parrakat <nisha.m.parrakat@bmw.de>
+> +Signed-off-by: Bindu Bhabu <bhabu.bindu@kpit.com>
+> +---
+> + CMakeLists.txt | 29 +++++++++++++++++------------
+> + 1 file changed, 17 insertions(+), 12 deletions(-)
+> +
+> +diff --git a/CMakeLists.txt b/CMakeLists.txt
+> +index 93b884dd9c1..2ca925d505c 100644
+> +--- a/CMakeLists.txt
+> ++++ b/CMakeLists.txt
+> +@@ -98,6 +98,7 @@ if (WITH_WINDOWS_UTF8_FILENAMES)
+> +   add_definitions(-DROCKSDB_WINDOWS_UTF8_FILENAMES)
+> + endif()
+> + option(ROCKSDB_BUILD_SHARED "Build shared versions of the RocksDB libraries" ON)
+> ++option(ROCKSDB_BUILD_STATIC "Build static versions of the RocksDB libraries" ON)
+> +
+> + if( NOT DEFINED CMAKE_CXX_STANDARD )
+> +   set(CMAKE_CXX_STANDARD 17)
+> +@@ -1139,11 +1140,13 @@ string(REGEX REPLACE "[^0-9: /-]+" "" GIT_DATE "${GIT_DATE}")
+> + set(BUILD_VERSION_CC ${CMAKE_BINARY_DIR}/build_version.cc)
+> + configure_file(util/build_version.cc.in ${BUILD_VERSION_CC} @ONLY)
+> +
+> +-add_library(${ROCKSDB_STATIC_LIB} STATIC ${SOURCES} ${BUILD_VERSION_CC})
+> +-target_include_directories(${ROCKSDB_STATIC_LIB} PUBLIC
+> +-  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>)
+> +-target_link_libraries(${ROCKSDB_STATIC_LIB} PRIVATE
+> +-  ${THIRDPARTY_LIBS} ${SYSTEM_LIBS})
+> ++if(ROCKSDB_BUILD_STATIC)
+> ++  add_library(${ROCKSDB_STATIC_LIB} STATIC ${SOURCES} ${BUILD_VERSION_CC})
+> ++  target_include_directories(${ROCKSDB_STATIC_LIB} PUBLIC
+> ++    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>)
+> ++  target_link_libraries(${ROCKSDB_STATIC_LIB} PRIVATE
+> ++    ${THIRDPARTY_LIBS} ${SYSTEM_LIBS})
+> ++endif()
+> +
+> + if(ROCKSDB_BUILD_SHARED)
+> +   add_library(${ROCKSDB_SHARED_LIB} SHARED ${SOURCES} ${BUILD_VERSION_CC})
+> +@@ -1238,13 +1241,15 @@ if(NOT WIN32 OR ROCKSDB_INSTALL_ON_WINDOWS)
+> +
+> +   install(DIRECTORY "${PROJECT_SOURCE_DIR}/cmake/modules" COMPONENT devel DESTINATION ${package_config_destination})
+> +
+> +-  install(
+> +-    TARGETS ${ROCKSDB_STATIC_LIB}
+> +-    EXPORT RocksDBTargets
+> +-    COMPONENT devel
+> +-    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+> +-    INCLUDES DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+> +-  )
+> ++  if(ROCKSDB_BUILD_STATIC)
+> ++    install(
+> ++      TARGETS ${ROCKSDB_STATIC_LIB}
+> ++      EXPORT RocksDBTargets
+> ++      COMPONENT devel
+> ++      ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+> ++      INCLUDES DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+> ++    )
+> ++  endif()
+> +
+> +   if(ROCKSDB_BUILD_SHARED)
+> +     install(
+> diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb
+> index 444351dbb..fae54fdba 100644
+> --- a/meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb
+> +++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb
+> @@ -17,6 +17,7 @@ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH};protocol=htt
+>              file://0005-Implement-timer-implementation-for-mips-platform.patch \
+>              file://0006-Implement-timer-for-arm-v6.patch \
+>              file://0007-Fix-declaration-scope-of-LE_LOAD32-in-crc32c.patch \
+> +           file://static_library_as_option.patch \
+>             "
+>
+>   SRC_URI:append:riscv32 = " file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
+> @@ -43,6 +44,7 @@ EXTRA_OECMAKE = "\
+>       -DWITH_BENCHMARK_TOOLS=OFF \
+>       -DWITH_TOOLS=OFF \
+>       -DFAIL_ON_WARNINGS=OFF \
+> +    -DROCKSDB_BUILD_STATIC=OFF \
+>   "
+>
+>   CXXFLAGS += "${@bb.utils.contains('SELECTED_OPTIMIZATION', '-Og', '-DXXH_NO_INLINE_HINTS', '', d)}"
+> --
+> 2.25.1
+>
+> This message contains information that may be privileged or confidential and is the property of the KPIT Technologies Ltd. It is intended only for the person to whom it is addressed. If you are not the intended recipient, you are not authorized to read, print, retain copy, disseminate, distribute, or use this message or any part thereof. If you receive this message in error, please notify the sender immediately and delete all copies of this message. KPIT Technologies Ltd. does not accept any liability for virus infected mails.
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#111692): https://lists.openembedded.org/g/openembedded-devel/message/111692
+> Mute This Topic: https://lists.openembedded.org/mt/107805972/3616698
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
