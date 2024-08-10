@@ -1,152 +1,220 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2790BC3DA7F
-	for <webhook@archiver.kernel.org>; Sat, 10 Aug 2024 15:41:10 +0000 (UTC)
-Received: from mail-yb1-f172.google.com (mail-yb1-f172.google.com [209.85.219.172])
- by mx.groups.io with SMTP id smtpd.web10.7885.1723304462868036756
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F855C3DA7F
+	for <webhook@archiver.kernel.org>; Sat, 10 Aug 2024 22:57:22 +0000 (UTC)
+Received: from mail-ot1-f43.google.com (mail-ot1-f43.google.com [209.85.210.43])
+ by mx.groups.io with SMTP id smtpd.web10.15076.1723330633437124773
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 10 Aug 2024 08:41:03 -0700
+ Sat, 10 Aug 2024 15:57:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GIo9TFwr;
- spf=pass (domain: gmail.com, ip: 209.85.219.172, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f172.google.com with SMTP id 3f1490d57ef6-e0bf677e0feso3128262276.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 10 Aug 2024 08:41:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NjQ8DPSf;
+ spf=pass (domain: gmail.com, ip: 209.85.210.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f43.google.com with SMTP id 46e09a7af769-709340bd54dso1429499a34.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 10 Aug 2024 15:57:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1723304462; x=1723909262; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=qdBi2i0vCyyHxQ2wrbDi6WX2mvbqcY62qK/5a6e19aw=;
-        b=GIo9TFwrdFXogCpZBw3L+oNL3jpnd6EDUUwRquwRrg80OYCnEI2WnP/St9bpb3yqX2
-         PC/wc/vUg0i9xNAw4ejyorNfVORljlF9Kkiwtric7f5uKDqXk9kUZ8gBIgk3ocb6Hx1M
-         wll4bnw1PXQ2OX65BOP4TP4i7+7O7+WenuXjQKO853i6GiDVr+gml+VMI6OXtcjJQ6Va
-         Xl2Fw9q2ENk2xc1o7sJpI9SLl52SXdJtY6OgCs+RWe09lQe6551fXx2OPkkqQs61khPy
-         8pwWMQHFU5eoj3vNr4iY9ZUwICxQ+VQs6MBE5vuSaAlEYFU1rwwu5yck0J9KRlCp+Mer
-         Q6vQ==
+        d=gmail.com; s=20230601; t=1723330633; x=1723935433; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=nrdixN9WQxHJU2WwVgwCMcS/Jc4b+l0gRggz4Tt/cSM=;
+        b=NjQ8DPSfZvvXV80ADCdRWV0NFQCmP41NMkqYEjPhOko8ZXb1a7TZszYrQcfshTFVLP
+         yRr2lHR4OhxQeqt6ixOz2G1LhU1cvM54PtFvFBz1Qq1/1c/I63EwWylraCbLBRAsHN/r
+         atMeZirKvP+x0mVaD0W29uaFu9YgPJVewNM782ynjms78toMM/UJZGagn8eLzGaOJUDX
+         PON6DCmA+SQWtjicrGRDd9NlnRDS+wY4XNX3hQJlhYtQ8Dx8YDH1R9hPK5LzftLzIU0q
+         wzx6doJF9sqATkopjxl4BUpo/RvWej5iLYVhLbNis4v9olbBXgjtfKmI6Vvl7zhV3so2
+         07sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723304462; x=1723909262;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=qdBi2i0vCyyHxQ2wrbDi6WX2mvbqcY62qK/5a6e19aw=;
-        b=PwMF25kKr9x+mWjlVGXsRXa2/Fx0HKE0QyZnFUhSRq6Z5hslAQ4aZoYDn0UNn+mKWx
-         pc6sppw91lo8i2niuE57RnWGFNw6tQQ2qz9K4Ss3dBOCEiWRu1gwhm+cbteEPKqbGm9K
-         OuyB29tGvESC7BHz/Wx31A43YPjvZMiJo/RSzDOlMOj382b+Rr4bs/DlmIz+OX5ZHdid
-         4U5JyMKLG5ZH5lpWb48/nvXJiASIXLdJsxZpRnAPa/82tyMD7l9Ig808Cj65ndWwPTlD
-         FrXJ2WxeLH16x9pxFI3C4hgqhDgpuptjpzh9JDpGyCh+YDDWBTUdFkAkJjjfB4itJq54
-         RXtg==
-X-Gm-Message-State: AOJu0YwB0RWBeLrvL1OuMPkTow4L5ozEZVLxXnmKJyTTOktjGDrIS59B
-	PcJskhkhgrsxNfhn1StRixycCG7dGUd8v0yVQR2ZhVpcLlQOBnOKizOkaQ==
-X-Google-Smtp-Source: AGHT+IFfPk8Ltk5jepMFru006aABjOpnGLBmmQAKh/is3Qbb3rUtrgQP7g/6LQEsOrVOIRRDL72g+Q==
-X-Received: by 2002:a05:6902:1704:b0:e0b:5b37:d0c9 with SMTP id 3f1490d57ef6-e0eb9944700mr5643812276.14.1723304461829;
-        Sat, 10 Aug 2024 08:41:01 -0700 (PDT)
-Received: from keaua.attlocal.net ([2600:1700:45dd:7000:ad:eb2b:7538:7504])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e0ec8c78df6sm384671276.48.2024.08.10.08.41.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 10 Aug 2024 08:41:01 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][scarthgap][PATCH] pkcs11-provider: backport a fix for build with gcc-14
-Date: Sat, 10 Aug 2024 11:41:00 -0400
-Message-Id: <20240810154100.900690-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.34.1
+        d=1e100.net; s=20230601; t=1723330633; x=1723935433;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=nrdixN9WQxHJU2WwVgwCMcS/Jc4b+l0gRggz4Tt/cSM=;
+        b=fY7fSfGJx/o5fS1w1aZfHqjBWXfHzvGFv81dH188Avl7HRvkAi/CwYgvUvmyC7dFTL
+         0jlVQg0wT06Q4jB8TE+TVpu/xpApRH/ogGwyCMIRC5ovvvYlazGvnwy317zAZUtuG7Pg
+         1zHpVMaTLCW8NJM0yUeVl3un80pO0LBBPpR4plzPGy6Qkv0VFubV6nkdokcG61WM2mLo
+         7a6NowynoYtRlyp0qRs6nd3/Im+6lol8V+yRsP29TUUzRGptpWhgLix6GgLvTYYAtFD9
+         lII9q5kp2BsHRuX/GQJMY0xA9obt59HRIPJijxcZKhfRKIUpmRutpZ60l0QkttmH1H2E
+         0rsg==
+X-Gm-Message-State: AOJu0YzdW4hHaqMaUdYGaeu6l+lvZ9rrNsyQlY1OtA2tdvUhEfoZhtJJ
+	QdHmYPiuvTm5xNII/O8F0l/c5KReIsdCqybwRIP5kaeXt4eG+7V26c3vxDC1N9i9UsYEu4QW9Aa
+	aeVxPI2b8P1MGwGBBp3X53S+YXyU=
+X-Google-Smtp-Source: AGHT+IHOaCxRHhBfoK+IB0crP5UjQCzX1eDVBu7KJlZIRnNm6mymEd/nKKdcJRAl4PMA6zoI9DNfdinE3txCBDlWGik=
+X-Received: by 2002:a05:6830:710d:b0:70b:3ee2:b55e with SMTP id
+ 46e09a7af769-70b50a9803dmr4109052a34.3.1723330632535; Sat, 10 Aug 2024
+ 15:57:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240809110247.24607-1-nikhil.r@kpit.com>
+In-Reply-To: <20240809110247.24607-1-nikhil.r@kpit.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 10 Aug 2024 15:56:46 -0700
+Message-ID: <CAMKF1soP5c3fNd2QHsJFcojhs0AEjyW1-HqjjXMgL-rU2nMSOw@mail.gmail.com>
+Subject: Re: [oe][kirkstone][PATCH] rocksdb: Add an option to set static library
+To: nikhil.r@kpit.com
+Cc: openembedded-devel@lists.openembedded.org, bindu.bhabu@kpit.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 10 Aug 2024 15:41:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111751
+ <openembedded-devel@lists.openembedded.org>; Sat, 10 Aug 2024 22:57:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111752
 
-From: Martin Jansa <martin.jansa@gmail.com>
+On Fri, Aug 9, 2024 at 4:03=E2=80=AFAM Nikhil via lists.openembedded.org
+<nikhil.r=3Dkpit.com@lists.openembedded.org> wrote:
+>
+> Modify the CMakeLists.txt to add an Option for
+> STATIC target, as available for shared library.
+>
+> Link: https://github.com/facebook/rocksdb/pull/12890
+>
+> Configure static library default to switched off
+> as shared libraries are sufficient in most cases.
+>
+> Signed-off-by: Bhabu Bindu <bindu.bhabu@kpit.com>
+> ---
+>  .../files/static_library_as_option.patch      | 68 +++++++++++++++++++
+>  meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb |  2 +
+>  2 files changed, 70 insertions(+)
+>  create mode 100644 meta-oe/recipes-dbs/rocksdb/files/static_library_as_o=
+ption.patch
+>
+> diff --git a/meta-oe/recipes-dbs/rocksdb/files/static_library_as_option.p=
+atch b/meta-oe/recipes-dbs/rocksdb/files/static_library_as_option.patch
+> new file mode 100644
+> index 000000000..4162d1154
+> --- /dev/null
+> +++ b/meta-oe/recipes-dbs/rocksdb/files/static_library_as_option.patch
+> @@ -0,0 +1,68 @@
+> +From 285d306494bde3e9c24c8cd6fea1eb380a304d03 Mon Sep 17 00:00:00 2001
+> +From: Bindu-Bhabu <bindudaniel1996@gmail.com>
+> +Date: Fri, 26 Jul 2024 15:14:45 +0530
+> +Subject: Add option to CMake for building static libraries
+> +
+> +ROCKSDB creates a STATIC library target reference by default.
+> +Modify the cmake so that the STATIC library is also an option
+> +just like creating a SHARED library.
+> +
+> +Upstream-Status:Accepted
+> +Link: https://github.com/facebook/rocksdb/pull/12890
 
-* fails only with 32bit MACHINEs, e.g. full log from qemux86:
-  http://errors.yoctoproject.org/Errors/Details/790494/
+This is wrongly formatted, it should be something like
+Upstream-Status: Submitted [https://github.com/facebook/rocksdb/pull/12890]
 
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 23777ac6dd8920fc7ffa02fb829b30e0da3af19b)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- ...001-Fix-types-for-old-32-bit-systems.patch | 49 +++++++++++++++++++
- .../pkcs11-provider/pkcs11-provider_0.3.bb    |  4 +-
- 2 files changed, 52 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/pkcs11-provider/pkcs11-provider/0001-Fix-types-for-old-32-bit-systems.patch
+for more info on patch status spec -
+https://docs.yoctoproject.org/contributor-guide/recipe-style-guide.html#pat=
+ch-upstream-status
 
-diff --git a/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider/0001-Fix-types-for-old-32-bit-systems.patch b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider/0001-Fix-types-for-old-32-bit-systems.patch
-new file mode 100644
-index 0000000000..189a0e21b3
---- /dev/null
-+++ b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider/0001-Fix-types-for-old-32-bit-systems.patch
-@@ -0,0 +1,49 @@
-+From 088f038de633b5de777fb0f95cd9598f320151f6 Mon Sep 17 00:00:00 2001
-+From: Simo Sorce <simo@redhat.com>
-+Date: Wed, 5 Jun 2024 11:22:35 -0400
-+Subject: [PATCH] Fix types for old 32 bit systems
-+
-+On x86 CK_ULONG and size_t have different sizes, ensure we use
-+compatible types on our helper functions.
-+
-+Signed-off-by: Simo Sorce <simo@redhat.com>
-+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-+---
-+Upstream-Status: Backport [https://github.com/latchset/pkcs11-provider/commit/9fa16b7fd398b62f06cb10892fe93dc574d67399]
-+
-+ src/asymmetric_cipher.c | 4 ++--
-+ src/util.h              | 2 +-
-+ 2 files changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/asymmetric_cipher.c b/src/asymmetric_cipher.c
-+index 4d87b1c..3256fd2 100644
-+--- a/src/asymmetric_cipher.c
-++++ b/src/asymmetric_cipher.c
-+@@ -251,12 +251,12 @@ static int p11prov_rsaenc_decrypt_init(void *ctx, void *provkey,
-+ static int
-+ p11prov_tls_constant_time_depadding(struct p11prov_rsaenc_ctx *encctx,
-+                                     unsigned char *out, unsigned char *buf,
-+-                                    size_t *out_size, CK_ULONG *ret_cond)
-++                                    CK_ULONG *out_size, CK_ULONG *ret_cond)
-+ {
-+     unsigned char randbuf[SSL_MAX_MASTER_KEY_LENGTH];
-+     CK_ULONG ver_cond = 0;
-+     CK_ULONG cond = 0;
-+-    size_t length = SSL_MAX_MASTER_KEY_LENGTH;
-++    CK_ULONG length = SSL_MAX_MASTER_KEY_LENGTH;
-+     int err;
-+ 
-+     /* always generate a random buffer, to constant_time swap in
-+diff --git a/src/util.h b/src/util.h
-+index bcbc2db..1b24666 100644
-+--- a/src/util.h
-++++ b/src/util.h
-+@@ -120,7 +120,7 @@ static inline int constant_select_int(CK_ULONG cond, int a, int b)
-+     return (int)((A & mask) | (B & ~mask));
-+ }
-+ 
-+-static inline void constant_select_buf(CK_ULONG cond, size_t size,
-++static inline void constant_select_buf(CK_ULONG cond, CK_ULONG size,
-+                                        unsigned char *dst, unsigned char *a,
-+                                        unsigned char *b)
-+ {
-diff --git a/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_0.3.bb b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_0.3.bb
-index 816ee967c1..daf0c2137d 100644
---- a/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_0.3.bb
-+++ b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_0.3.bb
-@@ -18,7 +18,9 @@ DEPENDS = "\
- 
- SRCREV = "58040b4e32975cc1d7f39e424ee7b0097cd11311"
- 
--SRC_URI = "git://github.com/latchset/${BPN}.git;branch=main;protocol=https"
-+SRC_URI = "git://github.com/latchset/${BPN}.git;branch=main;protocol=https \
-+    file://0001-Fix-types-for-old-32-bit-systems.patch \
-+"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.34.1
+always test your patches with the branch they are intended for before sendi=
+ng.
 
+> +
+> +Signed-off-by: Nisha Parrakat <nisha.m.parrakat@bmw.de>
+> +Signed-off-by: Bindu Bhabu <bhabu.bindu@kpit.com>
+> +---
+> + CMakeLists.txt | 29 +++++++++++++++++------------
+> + 1 file changed, 17 insertions(+), 12 deletions(-)
+> +
+> +diff --git a/CMakeLists.txt b/CMakeLists.txt
+> +index 93b884dd9c1..2ca925d505c 100644
+> +--- a/CMakeLists.txt
+> ++++ b/CMakeLists.txt
+> +@@ -919,6 +919,7 @@ set(ROCKSDB_STATIC_LIB rocksdb${ARTIFACT
+> + set(ROCKSDB_SHARED_LIB rocksdb-shared${ARTIFACT_SUFFIX})
+> +
+> + option(ROCKSDB_BUILD_SHARED "Build shared versions of the RocksDB libra=
+ries" ON)
+> ++option(ROCKSDB_BUILD_STATIC "Build static versions of the RocksDB libra=
+ries" ON)
+> +
+> + option(WITH_LIBRADOS "Build with librados" OFF)
+> + if(WITH_LIBRADOS)
+> +@@ -938,9 +939,11 @@ else()
+> +   endif()
+> + endif()
+> +
+> +-add_library(${ROCKSDB_STATIC_LIB} STATIC ${SOURCES} ${BUILD_VERSION_CC}=
+)
+> +-target_link_libraries(${ROCKSDB_STATIC_LIB} PRIVATE
+> +-  ${THIRDPARTY_LIBS} ${SYSTEM_LIBS})
+> ++if(ROCKSDB_BUILD_STATIC)
+> ++  add_library(${ROCKSDB_STATIC_LIB} STATIC ${SOURCES} ${BUILD_VERSION_C=
+C})
+> ++  target_link_libraries(${ROCKSDB_STATIC_LIB} PRIVATE
+> ++    ${THIRDPARTY_LIBS} ${SYSTEM_LIBS})
+> ++endif()
+> +
+> + if(ROCKSDB_BUILD_SHARED)
+> +   add_library(${ROCKSDB_SHARED_LIB} SHARED ${SOURCES} ${BUILD_VERSION_C=
+C})
+> +@@ -1238,13 +1241,15 @@ if(NOT WIN32 OR ROCKSDB_INSTALL_ON_WINDOWS)
+> +
+> +   install(DIRECTORY "${PROJECT_SOURCE_DIR}/cmake/modules" COMPONENT dev=
+el DESTINATION ${package_config_destination})
+> +
+> +-  install(
+> +-    TARGETS ${ROCKSDB_STATIC_LIB}
+> +-    EXPORT RocksDBTargets
+> +-    COMPONENT devel
+> +-    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+> +-    INCLUDES DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+> +-  )
+> ++  if(ROCKSDB_BUILD_STATIC)
+> ++    install(
+> ++      TARGETS ${ROCKSDB_STATIC_LIB}
+> ++      EXPORT RocksDBTargets
+> ++      COMPONENT devel
+> ++      ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+> ++      INCLUDES DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+> ++    )
+> ++  endif()
+> +
+> +   if(ROCKSDB_BUILD_SHARED)
+> +     install(
+> diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb b/meta-oe/reci=
+pes-dbs/rocksdb/rocksdb_6.20.3.bb
+> index 2ad2d38a5..4acf93439 100644
+> --- a/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
+> +++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
+> @@ -18,6 +18,7 @@ SRC_URI =3D "git://github.com/facebook/${BPN}.git;branc=
+h=3D${SRCBRANCH};protocol=3Dhtt
+>             file://ppc64.patch \
+>             file://mips.patch \
+>             file://arm.patch \
+> +           file://static_library_as_option.patch \
+>            "
+>
+>  SRC_URI:append:riscv32 =3D " file://0001-replace-old-sync-with-new-atomi=
+c-builtin-equivalents.patch"
+> @@ -44,6 +45,7 @@ EXTRA_OECMAKE =3D "\
+>      -DWITH_BENCHMARK_TOOLS=3DOFF \
+>      -DWITH_TOOLS=3DOFF \
+>      -DFAIL_ON_WARNINGS=3DOFF \
+> +    -DROCKSDB_BUILD_STATIC=3DOFF \
+>  "
+>
+>  do_install:append() {
+> --
+> 2.25.1
+>
+> This message contains information that may be privileged or confidential =
+and is the property of the KPIT Technologies Ltd. It is intended only for t=
+he person to whom it is addressed. If you are not the intended recipient, y=
+ou are not authorized to read, print, retain copy, disseminate, distribute,=
+ or use this message or any part thereof. If you receive this message in er=
+ror, please notify the sender immediately and delete all copies of this mes=
+sage. KPIT Technologies Ltd. does not accept any liability for virus infect=
+ed mails.
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#111691): https://lists.openembedded.org/g/openembedde=
+d-devel/message/111691
+> Mute This Topic: https://lists.openembedded.org/mt/107805957/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
