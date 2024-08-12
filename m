@@ -1,155 +1,329 @@
-Return-Path: <peter.kjellerstedt@axis.com>
+Return-Path: <randy.macleod@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 51478C52D7C
-	for <webhook@archiver.kernel.org>; Mon, 12 Aug 2024 20:09:27 +0000 (UTC)
-Received: from AS8PR04CU009.outbound.protection.outlook.com (AS8PR04CU009.outbound.protection.outlook.com [52.101.70.37])
- by mx.groups.io with SMTP id smtpd.web11.56156.1723493357392757236
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 329EAC3DA7F
+	for <webhook@archiver.kernel.org>; Mon, 12 Aug 2024 21:10:28 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.57774.1723497022032605281
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Aug 2024 13:09:17 -0700
+ Mon, 12 Aug 2024 14:10:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=LohkLs4y;
- spf=pass (domain: axis.com, ip: 52.101.70.37, mailfrom: peter.kjellerstedt@axis.com)
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=8954c110e7=randy.macleod@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 47CHekQG001818
+	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Aug 2024 21:10:21 GMT
+Received: from nam12-mw2-obe.outbound.protection.outlook.com (mail-mw2nam12lp2048.outbound.protection.outlook.com [104.47.66.48])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 40wy6528uh-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Aug 2024 21:10:21 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UvN4wRaLdWk5Kup4AFF2Pfr/u1Gpb3gvGXlrX2cnGrFXr2OTURnFKWRJICUlgeqaLJ6+PWtziVpouFk8GHCD8QBIle1nni7MdDHdFElVZoMoYZw21FPTpz3HWikGXA588MLwGsAUaNHPTCZajVvr/yGyZsgLyfGJOOSJ0P5qPxesTxvjgE4IOwp5rTZFRH0kq8zGTTcKpf16hIHmvHMR74d084ePq0qIsb/0/Dburs92YBK7enmVKee+paa/V7qW9hTpDD/7JYhBdW0C1bVJQEDGR3pYfkREvGSQBusDO5O6Kqm6fGtbdxPdbmrgCrYKuq+7FrGLpTfcl1InSPpz6g==
+ b=fVq9q2hN67fB8byfuZHKz5uHwrXeKjd7MJES+Ht20vODuNJ2p1I0sozqyYTKYV33iyur2oRFNBNkAZFsxGWx75MbgycUjnyGf2yGRBSBRw6DJHUuYOG7+lwvt6Wcpa0LLgfUt6cVTWHnanb+RYHrcTPHUL6POGjZVAMTWsPR8aBT3LGsE4r0eMLktpddpc/z/lpM4Bga1DaV7Ql65fISjIcjGkyBt/uCsjIk62xESHm2XuglDIdBER3eag6knLKjDSJIwTXzEEye34aaggXcELv2Z00JKqyLh9OnrL+ZRgPElAmd7d+ETgh/8I2KkAbsGS8FlycwozDNVGXS6ySEGQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jbOCjzLX1h2ueH1PLkZWaLfjZk3B9Vzmp0+wl5dRAaU=;
- b=uxDfTNokq8lckckRgdOlqeW0UXVFKJvZugSQAuZ0uGl9FhjHAroaFuzwOKTruqCF7qpSaVcip3lAn0oy3Nq/sdWUQd81KcFDfkiX4S1NJfO9d/Ftgv6RRuYAYlDxEZ1yXukLt+dSnTPAfzZ6rat/6tkc4fijG/BaRtXOSvRSdt7tN+p9TvDTWn5ZLwg0p/YZeatHpYippOXygkozhOVZum11vY3KrITjCVUZq9Frkzn39GT+pn2srkM1ByKlFP03faT91+Ee1bjeYrVgzaF4eOiuDOvXHlVxIMZ6UuHyj8PvxeAUxejC6JEFM4uqkDGBI5PQFRHzHzivR4J+yyXEfQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
- header.from=axis.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jbOCjzLX1h2ueH1PLkZWaLfjZk3B9Vzmp0+wl5dRAaU=;
- b=LohkLs4yLP2WFo3ERTlNQ0Q26KuuBnCZdQSeAR2mZKm4D+fkZeOcRZNSQjT5qCGEmzsoL8uizSxlthHFuAaKja1VVqhryziBU/D2Nu07W79s2oJsDx2ebnRARaozzv+pirANR2oiATyIrAuReMCDCECmrd0LJW4UZhNZTEm4clA=
-Received: from AS9PR04CA0146.eurprd04.prod.outlook.com (2603:10a6:20b:48a::19)
- by GV2PR02MB9421.eurprd02.prod.outlook.com (2603:10a6:150:d5::16) with
+ bh=MC3eaNYZYDz8DoKGrQpvkkprMJqb2Bh3/wvCenOBV3o=;
+ b=OgbwA9Wtpv65WKrukJ5841RFZXI2QMWxJedoYwRzJ8pBImJZ+rcz/vZgc5OUkMFOD7fjVDZcyT42GySl2N4dW2krb+xX16KqMH+4PJd5HPcCKOaozX/5MVt7Bjp6mZCG0eDyxSuWgdj5eX6hPlKdW6QCVTciQFwxxpl39GMd1ISpRZzo+AFMAnj7Z8N9ZHS7dDb4i3lnujnizjM/JlQJTyvDnqdO5jreVuijkcJ/v0WJA/Ot73MKtkiYuG3OTnYJcB8rJ5FGdSCC+tOQOWvB21jjhUTnkr46HgDBqjk7cFud8yQKU4ybYgPnXG+Yla2w4I8H1aqBfVeWlVoXqysMtw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from CH3PR11MB8496.namprd11.prod.outlook.com (2603:10b6:610:1ba::22)
+ by DM4PR11MB5312.namprd11.prod.outlook.com (2603:10b6:5:393::8) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7849.19; Mon, 12 Aug
- 2024 20:09:11 +0000
-Received: from AM1PEPF000252DA.eurprd07.prod.outlook.com
- (2603:10a6:20b:48a:cafe::1f) by AS9PR04CA0146.outlook.office365.com
- (2603:10a6:20b:48a::19) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7849.22 via Frontend
- Transport; Mon, 12 Aug 2024 20:09:11 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
- smtp.mailfrom=axis.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=axis.com;
-Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
- 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
- client-ip=195.60.68.100; helo=mail.axis.com; pr=C
-Received: from mail.axis.com (195.60.68.100) by
- AM1PEPF000252DA.mail.protection.outlook.com (10.167.16.52) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7849.8 via Frontend Transport; Mon, 12 Aug 2024 20:09:11 +0000
-Received: from se-mail02w.axis.com (10.20.40.8) by se-mail02w.axis.com
- (10.20.40.8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 12 Aug
- 2024 22:09:08 +0200
-Received: from se-intmail01x.se.axis.com (10.0.5.60) by se-mail02w.axis.com
- (10.20.40.8) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Mon, 12 Aug 2024 22:09:08 +0200
-Received: from saur (saur.se.axis.com [10.92.3.10])
-	by se-intmail01x.se.axis.com (Postfix) with ESMTP id 5E4DA31F
-	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Aug 2024 22:09:08 +0200 (CEST)
-Received: from saur.se.axis.com (localhost [127.0.0.1])
-	by saur (8.17.1/8.15.2) with ESMTPS id 47CK98Nj3077968
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Aug 2024 22:09:08 +0200
-Received: (from pkj@localhost)
-	by saur.se.axis.com (8.17.1/8.17.1/Submit) id 47CK98HZ3077967
-	for openembedded-devel@lists.openembedded.org; Mon, 12 Aug 2024 22:09:08 +0200
-From: Peter Kjellerstedt <pkj@axis.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [scarthgap][meta-oe][PATCH 3/3] libjs-jquery-icheck: Correct LIC_FILES_CHKSUM
-Date: Mon, 12 Aug 2024 22:08:54 +0200
-Message-ID: <20240812200854.3077901-4-pkj@axis.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240812200854.3077901-1-pkj@axis.com>
-References: <20240812200854.3077901-1-pkj@axis.com>
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7828.33; Mon, 12 Aug
+ 2024 21:10:15 +0000
+Received: from CH3PR11MB8496.namprd11.prod.outlook.com
+ ([fe80::cdc3:a646:2a93:9552]) by CH3PR11MB8496.namprd11.prod.outlook.com
+ ([fe80::cdc3:a646:2a93:9552%6]) with mapi id 15.20.7828.023; Mon, 12 Aug 2024
+ 21:10:15 +0000
+Content-Type: multipart/alternative;
+ boundary="------------WFrERjyigIxUeJF2YRiqL07C"
+Message-ID: <d9727b04-11aa-40db-91ae-e5f387fe30ee@windriver.com>
+Date: Mon, 12 Aug 2024 17:10:13 -0400
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH] liblinebreak: remove obsolete library
+To: openembedded-devel@lists.openembedded.org
+References: <17EB126C55268C5F.10903@lists.openembedded.org>
+Content-Language: en-CA
+From: Randy MacLeod <randy.macleod@windriver.com>
+In-Reply-To: <17EB126C55268C5F.10903@lists.openembedded.org>
+X-ClientProxiedBy: YQBPR0101CA0209.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:c01:67::9) To CH3PR11MB8496.namprd11.prod.outlook.com
+ (2603:10b6:610:1ba::22)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM1PEPF000252DA:EE_|GV2PR02MB9421:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2b44d068-09d5-41ca-3437-08dcbb0aa189
+X-MS-TrafficTypeDiagnostic: CH3PR11MB8496:EE_|DM4PR11MB5312:EE_
+X-MS-Office365-Filtering-Correlation-Id: a4aa0929-a916-4d3d-ea00-08dcbb132925
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700013|376014|82310400026|1800799024;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|4022899009|366016|1800799024|376014;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?eh1e8PG8eUEYjJ9idAaJPRjKVgNtfCEvauj8771EnnHy/wkEKEFEJIW29G2S?=
- =?us-ascii?Q?4R/dYSIsjIVO6nIjc7nKfRFRG7HH+scTQy1o1e81LPOf23MniujUJJkzyTgq?=
- =?us-ascii?Q?IAUsd64Acd8laCbyaC3lNSu9yifx3M+E2cA606sQaGajQDBcJ0SauTt3EQSJ?=
- =?us-ascii?Q?xdlQrUY9692J5WhbBktwMU0XSpswSfgsMnXUd4x9jVYk9cwdxQAc7do6BOze?=
- =?us-ascii?Q?dHFS5w0fYo7aMnnnJbHJ4tVApyLslABp2wJFzDE1vmo4piShXVC/cw2bWh8F?=
- =?us-ascii?Q?HxVJ4QtvewEO7W8lLa1o9uAfe5gSzTid07ThcaRkM+xIPECAazEl32ozmRua?=
- =?us-ascii?Q?pANTIeK5olhezGG+a10DWfuMnLwGW+N0Yh5HbiBBiu3DYOb+BhuvAUIgMfsq?=
- =?us-ascii?Q?JRH5Gr9N5UjpSxjmUbqDVwctGPIN9pgN9spQZj40eF0faPeQR+4HoBbiqi6h?=
- =?us-ascii?Q?vDnqm5xUVn9SAVIcGFNM2GLBQZljXvcovuCBbVxX9GxhM63hKH2KZlmJZgup?=
- =?us-ascii?Q?u2VQUs2pml/sH4mn5QAVaJiXH/35B2x+miGr5x1v0jFnAbZW+oP5iPdw1jlS?=
- =?us-ascii?Q?G8tSFXX+dCTbRzPcBHonjOAya1MEykJEInc+OtaunuBesCIFqpzdLOFOUTxy?=
- =?us-ascii?Q?ZPNHpFgV3NyvK3aCBZKEazB6AaNPvw/058wV2lqJxGGbmRwr50tEg5M/KB6V?=
- =?us-ascii?Q?4NwHoaf9FlWdBMHY5X97Tbc+flEzIWKzDXLUN5NinOXRzM2hqZISyFh5c4hL?=
- =?us-ascii?Q?1UBWlPlP6fP9ct2r8yqeWuQsdwgfhsXS/lIjTZWO+9zcKsncRVepvsjpwFQO?=
- =?us-ascii?Q?afziIky0PsEsK7szVMh51q5GbM7yu+DvuQ9mRw+CoeieDuTZGMEB68cRsF+9?=
- =?us-ascii?Q?Fa9i0IsR/uNWrBupIFLLDaiJDraMjB4CYHlspLyqLrA7nMqPBhaBYjyf+7xX?=
- =?us-ascii?Q?P4lCkHWfurerzJu/LpXNqlC6JLkR2MjjV2R/s2KYiQ9SOMUs8s4+82obuwBX?=
- =?us-ascii?Q?vucXag74XJNXjTCxY8WaG9/A1FioH11rGnMNMGZJ25xjopLQlq+izLwr63GG?=
- =?us-ascii?Q?IXKvDj8HYY8wYHRA3LLe1Q5xYZ0YYYH64JVLPz/W7lNplFeewECjbdKcmDt+?=
- =?us-ascii?Q?0hH4X8ocqrviH/m8cVmvTEyOsejkyTiRKhNew8QQyvPjbfOsi9Gou2md3iWr?=
- =?us-ascii?Q?qd9lfNgVC8quQcF2qn0WMLPhXJjVJA5l5xobB6w86mbqXkjDxtSb/Y6x0RCO?=
- =?us-ascii?Q?dXmNotc8h+m1Lad2AFVUoIVQanY44RXOdFL4Qb4s5VdlXiLBsvLV3SXNfyMn?=
- =?us-ascii?Q?9RnNr1NpN33skjY+mOZlyKkKMv0CSdJ8W8yLVueAXFGS1PmMC9D366h6OCiu?=
- =?us-ascii?Q?v5ZI6XB3J8AP0Zcd7jFV9JAqHnLy?=
+	=?utf-8?B?bE1zaGFzeGZhVjZpd2hyS3dCUXVtcUJ5QzRUZXFhTElRWDVsRWphTTdtYjNV?=
+ =?utf-8?B?Q3VIdDhMVXZqUHNSZXptaWJCUlg5TGpCd2hjV2c4YXBUS1F6aG9zV3hDTHBr?=
+ =?utf-8?B?WlZKb3BsdXpURGlGQ0oxNVBKbDhYdFNkdnFseTYyMnhhWHBHS1pXb0pNMVdl?=
+ =?utf-8?B?OElIVnFQcHhwNHVyM1JBeGRzK1h2OUZEc1lNVzdacTh1V2ppYnl3cS8yR2hy?=
+ =?utf-8?B?UEZodEpFREg2ZkEzQ053SjVjVlVSbHVHSWp5bW9pRE5HZ2FyanRrR0x4aDFX?=
+ =?utf-8?B?SG80WHg4UlZVSURJSWo1RENqSXJjTW4xZ3hlVGhLOE1tMGQ3YXFZcngzanJj?=
+ =?utf-8?B?amJtaktsc1NYdVNHRnR3NGxUQi9RRm1sL1RZU1E1OW9ISVA4RytoVnQyTnBm?=
+ =?utf-8?B?Sk10L2xTL3FoSWl6Yml5Z1BRbVpwMHpVVFE2bndTQ0hqSjcvbHZnb1A3Unl6?=
+ =?utf-8?B?SEJTelRKZGoxU3I5UVJUamZhUFdwUnBqVFZONDFjeTUzQkx3NWlFVzZ3UG1H?=
+ =?utf-8?B?MjUvZ0FuZ210aHZhSzVyQzFFMExaamhqclQ4ajNmVC95VUhIMVhIMzBEYUMv?=
+ =?utf-8?B?WmNCUlJUUGlHdXUwZ003endZS3BheTJXWnZ3NHdqN2pJQ1V1d2tZUDJEUlRO?=
+ =?utf-8?B?bjdBVEprRE5kN29wOURaMWV3bGJlbjRIL3hCaWZ0dlc5a3JORUFKT052NDR3?=
+ =?utf-8?B?VHFiSlIvcVV6dUh4K29pUnRaRnpMcnQycXlxbUFYallKdDZ5b0E4UWZTRnI5?=
+ =?utf-8?B?WDkxMVFuTmZ5ZFNFTkxtUENNaDNRbGR1R0hyZ0VOYk9id3plVkR5VjJmVFNL?=
+ =?utf-8?B?enlLa0N6Q0htKzVLUitWMWRvdmJZSXpNdXVUd3I3REtJSW8vQ3BYZzljbXBM?=
+ =?utf-8?B?dWltY2RnbEkzV0VjeS9xZW9rMGZRdDdTU21ORTdTeHV1OUV3bDhUd3RSbTEv?=
+ =?utf-8?B?TkxsREZmMG84ckp3N0ZIQ051NGpRZ3c3QW9Va291WVdia2RzNFdHQXgySXRq?=
+ =?utf-8?B?d0Q5dFcxUU1xUjRSdU94SGw1Yk1CMWpHT1JKazVyV2IwZkxpSUdyRC9rREtT?=
+ =?utf-8?B?cmhVdDVjTG02UEo4WEhzL3ZDVEdEeW1ScUZaOWNyWlFteXF3a0x1N3pBZHhV?=
+ =?utf-8?B?VlRpRFhrNFF3dFcrN3pFNFgwR1U0RGFjQ2QvOEhOSEJSeEZNM2c4Ry9UNFJO?=
+ =?utf-8?B?TitUaklDcjdEQW1Na3VRRjlIdEl0MW5uRXNOUXlYT2N2QzA2aFFKSFI1b3hZ?=
+ =?utf-8?B?U1VKc1gzQ1FDKy82MDdYcDArem14M01aWUVzTjJnODZQVE0wVUpDN3RRUXZx?=
+ =?utf-8?B?dGNCVjVCVEtveUl6MVk4MzA3TFlUMkI2cnJDM2luQVlucFpFSXQxLzBjdEM3?=
+ =?utf-8?B?RUtQcTVMVGVBcGVxa2RMSEowdGdZTitJb3pSODRrQk11NWpLcmtXWkxBZmZE?=
+ =?utf-8?B?dzBoSnNsVzUwUHZCQ0xxelpzM3czMGNZNDFKTFlvNDlWOFBrRDQ3RXR6c2Qw?=
+ =?utf-8?B?TnhlQXpyT0dZcGdhSGRuejlUcTdLUHVTbXJBRENvNWkvRkUrckhjK2Zzcmxy?=
+ =?utf-8?B?U1NURFpUeVpoaW1TN0s4Q2tTTFlMSXFkb3c2NnR0WklUTE1sajhJZWoxYVlG?=
+ =?utf-8?B?bTZPZGh1SjJ0SUloTEhBakM3SEVuSG1BTzFwbHZyU3JWbjhjUGJrMktzS3BT?=
+ =?utf-8?B?UzIweGxKM2hTUzBSRHdxYWVTU0MyY1FZRmZaOTBuRTl2bVREcFdpZmdMVEI4?=
+ =?utf-8?Q?hnMh93/a4RgCWkExaUtv/jU/VcxQiuzF/K0EQ+5?=
 X-Forefront-Antispam-Report: 
-	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024);DIR:OUT;SFP:1101;
-X-OriginatorOrg: axis.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Aug 2024 20:09:11.3489
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR11MB8496.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(4022899009)(366016)(1800799024)(376014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?cWRqdW5CZFg3VlRzeDlYVC85eVRqSW5IM0tQV1llRm43OTBUN05JMzVYL2Rk?=
+ =?utf-8?B?K2FSZ3pjeHFRRUhYUHBBTzdOSFNQdWhDekY0SUorVUJEQ1J5U0VqaGdHeEFj?=
+ =?utf-8?B?Q21RYVNIS2FTTWFCdjJWMWVOYUtNZUtCVzBIRGUxQ3hWNUx2RUdGRzVEMmg4?=
+ =?utf-8?B?Zk53OWlrVkM2bzlwemRUdjJ1bFV3V0R4ZW9Bb1dtanNCYzg5RGdsYkNYeHhL?=
+ =?utf-8?B?c1pHd3IveXlTQ0xvTWI2MVVZRWliU2dpTE5LaldSYjRXNENUVm5PS0VySDc2?=
+ =?utf-8?B?OUUzZFJpWUZFR0NCR1dqMDdreXJMejlCT3dLQ0dJS3lkN3ZlOVZudTZUOWVr?=
+ =?utf-8?B?empoSmxTRGtBVTB2R0Zvc2F0azlxRkk2TDF6WGNRVy9xSXc2MFpWQ2NySk9l?=
+ =?utf-8?B?OG54bmlIQkg3UEoyVjYzTE9ZdTMvOU9PckVVNFNGQzdoTmZNTXRyWDljMFBs?=
+ =?utf-8?B?MFJpb2pvRnlPNHlpN3R4RUFvTklzVWhLSi93bFFjeS9ydWFqRzVDbHFMQVNk?=
+ =?utf-8?B?d0MrdTdXVy9hQmR6bklxVVNqZk1TUFNQODdMcmVZU2NHUVBWTHkvU203a2VY?=
+ =?utf-8?B?bmgyb1RaSGE2bWNuWW5LNXBmeTVkaGViVzNIc0JWVCtBSi9NVVBMMUdKdUtU?=
+ =?utf-8?B?ODdtd3pKbTZ1ZU9qZVBPTGJpRSsvMHQ0cVVzRzJwTzllbWpGVDNDdiszT2RW?=
+ =?utf-8?B?VW9aWjA5bnhsTkNsd3ZJdEthb2pZcFpkTjB2TGNWVnVRMmNuNDdUS2IxOUxW?=
+ =?utf-8?B?SjBJRXppbjkxSDFwMmZ0MmdGUkNSOUo4amxHdktQemNxNXFraXczRTIvQ2dP?=
+ =?utf-8?B?bzNFeVZXUktVZjNjbmNheVhxZzZES2p0R1JNNEZrWWFXK3lrVmQwUDJMUmZa?=
+ =?utf-8?B?Sy8ySnRVcEZISTIxenc4UEN6UzFMbVpPUWZYdFJwNGtNWVdUcTNlNUx0cUdE?=
+ =?utf-8?B?NnRSNU9xekhHT1IxdXVkeXBpSFNlRllxOWpRWVBzSFRtNWFvaEYydk03YkZz?=
+ =?utf-8?B?MmFlMTgwdk5VZHp2VkJCMVJ1VE9lZisxdDdkQThlaEMyQ294dnVrdDFwY3g0?=
+ =?utf-8?B?UDlIYm84S1o1UlREbmhBSkxBZzFhSGFzSlFQZ1FISWtORGV1V0wwcTZHcW1C?=
+ =?utf-8?B?OUVtM2ZSTnhxMk9WQzZRcmhJbU1lQWMwVFBHMnM4UkhqbmF1UG83NXYyaVdH?=
+ =?utf-8?B?bmdkaUJoZlZWMFJxQUdjTzJrSXZzdEplU1kvZGYxZWFxOUo0R2pQTDFoWFAz?=
+ =?utf-8?B?U2FpZkM4TkpaK21Ia01rWkNmY2V0c2ZTeUlnWjhFQVFLVGloUVRQY2Q3Z1M4?=
+ =?utf-8?B?b3MxNzFKQXNuZjM5aVowaE1pVUFFUm0wRjdIa0V1YWdVYml2WnRnaXBuNWZq?=
+ =?utf-8?B?TUNKT0ZKUnlBUWFaRGpVV2t6WmlHSDBWQ3Jka0lNY2Q0dWVUNktqVW5WSDVX?=
+ =?utf-8?B?LytTTDV0SEJ1cjl0OFpzQUVRL0g0WEJmazJRYlJQZHhOL1A5V0cwUkJlOHgx?=
+ =?utf-8?B?c2gxaXlaTmpyRHh3R0NEUWR0SlJRcTZDaUdlWkIwTEtOWjBBWkg3R1pOV3A2?=
+ =?utf-8?B?aVVxeU5xVmxhS1BKYi9oQU5BU1NRYzFZaENkU0thV0ltUHhhSWt6TzRva1JL?=
+ =?utf-8?B?S00wQyszSTlqTUlTTWxDUVhyTkUwNkx2YU1NT28zeDhvMGw2NWEvODhLcnFV?=
+ =?utf-8?B?Ymw4Q09EOXBzcWVPSTZoY3l0NVhoUWlDTEFtalZ6NERTNEhVaXBIbGs4V3Y2?=
+ =?utf-8?B?ZUVJTE5USlgrekVXV0JPRjBNcGZKbzJzK3Z6bGFaUXBpVTd6L0ovMEJvUGh5?=
+ =?utf-8?B?L1JRSTZjaGNLeUlmbjFBTU5Gd1YrQ0ZaYldKRTNjK1lob2d6TmNiMUFXQkVk?=
+ =?utf-8?B?a3JKMnpIQXZWcER4NGNnZm4zbEV3R2hEVUZYYXdxRjViRWswNTlBMHdwYm12?=
+ =?utf-8?B?SmM1TVc5bE5UeXFXSnF1bStQSHJKSE9PU09XaUw5eEo3Y0NLN1FvK1dqcFp2?=
+ =?utf-8?B?d2JTSFRxcHJPSlF3ZnJ4TDJoejJlZThhQXFyNlY5VmgrZDRGVVZaMGdzbG0y?=
+ =?utf-8?B?bGtaRldYSzZLN0JTeG44ZjhkWnFlUEhlM2J5STFpanFPb0dqZUF0SEQ0U1pJ?=
+ =?utf-8?B?ZHdJY01UVmF3enNrV2VIVitqdkFJK3JzMzEyZnhvbHNNeWNaSE5hQU11bkxO?=
+ =?utf-8?B?cXc9PQ==?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a4aa0929-a916-4d3d-ea00-08dcbb132925
+X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB8496.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Aug 2024 21:10:14.9867
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2b44d068-09d5-41ca-3437-08dcbb0aa189
-X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AM1PEPF000252DA.eurprd07.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR02MB9421
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Z7Hmd7ylwHoxxyVGGA+Kp5yaZC+7UJ/nPR02/jeuTxAJKStDVVP9Ka2Z3wBv+gZY1y6srH4h1A6POR4zmCqvBcRT8N9N/tz+lYqLPRi3zVI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR11MB5312
+X-Proofpoint-ORIG-GUID: FhiZOfa0feReWIW8zIUoIQtbtJlMeeyi
+X-Proofpoint-GUID: FhiZOfa0feReWIW8zIUoIQtbtJlMeeyi
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-08-12_12,2024-08-12_02,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 clxscore=1015
+ lowpriorityscore=0 bulkscore=0 mlxscore=0 priorityscore=1501
+ suspectscore=0 mlxlogscore=999 impostorscore=0 phishscore=0 adultscore=0
+ malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2407110000 definitions=main-2408120156
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 12 Aug 2024 20:09:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111780
+ <openembedded-devel@lists.openembedded.org>; Mon, 12 Aug 2024 21:10:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111781
 
-Only include the lines from icheck.js that cover the copyright and the
-license text.
+--------------WFrERjyigIxUeJF2YRiqL07C
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-License-Update: Only include the relevant parts of icheck.js
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+On 2024-08-12 3:38 p.m., Randy MacLeod via lists.openembedded.org wrote:
+> From: Randy MacLeod<Randy.MacLeod@windriver.com>
+>
+> liblinebreak has no users in meta-oe or in the layer index:
+>     https://layers.openembedded.org/layerindex/branch/master/recipes/?q=depends%3Aliblinebreak
+> so remove it.
+>
+> The upstream is has not been maintained for some time:
+>     https://vimgadgets.sourceforge.net/liblinebreak/
+> and they say that liblinebreak has been superceded by libunibreak,
+> an equivalent library that works in more languages:
+>     https://vimgadgets.sourceforge.net/libunibreak/
+>
+> Since there are no users of liblinebreak, libunibreak was not packaged.
+>
+> Signed-off-by: Randy MacLeod<Randy.MacLeod@windriver.com>
+> ---
+>   .../packagegroups/packagegroup-meta-oe.bb          |  1 -
+>   .../liblinebreak/liblinebreak_1.2.bb               | 14 --------------
+
+Oops, I forgot to update. Drop this, v2 coming.
+
+../Randy
+
+>   2 files changed, 15 deletions(-)
+>   delete mode 100644 meta-oe/recipes-support/liblinebreak/liblinebreak_1.2.bb
+>
+> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> index e11afcd4e..f9b3e742a 100644
+> --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> @@ -816,7 +816,6 @@ RDEPENDS:packagegroup-meta-oe-support ="\
+>       lockdev \
+>       logwarn \
+>       libjs-sizzle \
+> -    liblinebreak \
+>       mailcap \
+>       liboauth \
+>       mg \
+> diff --git a/meta-oe/recipes-support/liblinebreak/liblinebreak_1.2.bb b/meta-oe/recipes-support/liblinebreak/liblinebreak_1.2.bb
+> deleted file mode 100644
+> index 539b58bc5..000000000
+> --- a/meta-oe/recipes-support/liblinebreak/liblinebreak_1.2.bb
+> +++ /dev/null
+> @@ -1,14 +0,0 @@
+> -DESCRIPTION = "Liblinebreak is an implementation of the line breaking algorithm as described in Unicode 5.1.0 Standard Annex 14, Revision 22"
+> -HOMEPAGE ="http://vimgadgets.sourceforge.net/liblinebreak/"
+> -SECTION = "libs"
+> -LICENSE = "Zlib"
+> -LIC_FILES_CHKSUM ="file://LICENCE;md5=3715191da62bafb5cfc4ff36195b2ec3"
+> -
+> -SRC_URI = "${SOURCEFORGE_MIRROR}/project/vimgadgets/liblinebreak/${PV}/liblinebreak-${PV}.tar.gz"
+> -SRC_URI[md5sum] = "d18039259001ccb24b5dd4648c49c5ad"
+> -SRC_URI[sha256sum] = "9efcb0cb1afc75ad1e92d2b2dbf4d9c77b072d6656c5f1a150af8b718d0c7b76"
+> -
+> -UPSTREAM_CHECK_URI ="https://sourceforge.net/projects/vimgadgets/files/liblinebreak/"
+> -UPSTREAM_CHECK_REGEX = "${BPN}/(?P<pver>\d+(\.\d+)+)"
+> -
+> -inherit autotools
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#111776):https://lists.openembedded.org/g/openembedded-devel/message/111776
+> Mute This Topic:https://lists.openembedded.org/mt/107863665/3616765
+> Group Owner:openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe:https://lists.openembedded.org/g/openembedded-devel/unsub [randy.macleod@windriver.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
+
+-- 
+# Randy MacLeod
+# Wind River Linux
+
+--------------WFrERjyigIxUeJF2YRiqL07C
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html><html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <div class="moz-cite-prefix">On 2024-08-12 3:38 p.m., Randy MacLeod
+      via lists.openembedded.org wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:17EB126C55268C5F.10903@lists.openembedded.org">
+      <pre wrap="" class="moz-quote-pre">From: Randy MacLeod <a class="moz-txt-link-rfc2396E" href="mailto:Randy.MacLeod@windriver.com">&lt;Randy.MacLeod@windriver.com&gt;</a>
+
+liblinebreak has no users in meta-oe or in the layer index:
+   <a class="moz-txt-link-freetext" href="https://layers.openembedded.org/layerindex/branch/master/recipes/?q=depends%3Aliblinebreak">https://layers.openembedded.org/layerindex/branch/master/recipes/?q=depends%3Aliblinebreak</a>
+so remove it.
+
+The upstream is has not been maintained for some time:
+   <a class="moz-txt-link-freetext" href="https://vimgadgets.sourceforge.net/liblinebreak/">https://vimgadgets.sourceforge.net/liblinebreak/</a>
+and they say that liblinebreak has been superceded by libunibreak,
+an equivalent library that works in more languages:
+   <a class="moz-txt-link-freetext" href="https://vimgadgets.sourceforge.net/libunibreak/">https://vimgadgets.sourceforge.net/libunibreak/</a>
+
+Since there are no users of liblinebreak, libunibreak was not packaged.
+
+Signed-off-by: Randy MacLeod <a class="moz-txt-link-rfc2396E" href="mailto:Randy.MacLeod@windriver.com">&lt;Randy.MacLeod@windriver.com&gt;</a>
 ---
- meta-oe/recipes-support/libjs/libjs-jquery-icheck_1.0.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../packagegroups/packagegroup-meta-oe.bb          |  1 -
+ .../liblinebreak/liblinebreak_1.2.bb               | 14 --------------</pre>
+    </blockquote>
+    <p>Oops, I forgot to update. Drop this, v2 coming.</p>
+    <p>../Randy<br>
+    </p>
+    <blockquote type="cite" cite="mid:17EB126C55268C5F.10903@lists.openembedded.org">
+      <pre wrap="" class="moz-quote-pre">
+ 2 files changed, 15 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/liblinebreak/liblinebreak_1.2.bb
 
-diff --git a/meta-oe/recipes-support/libjs/libjs-jquery-icheck_1.0.3.bb b/m=
-eta-oe/recipes-support/libjs/libjs-jquery-icheck_1.0.3.bb
-index 31c3534b8..63dfc6fa7 100644
---- a/meta-oe/recipes-support/libjs/libjs-jquery-icheck_1.0.3.bb
-+++ b/meta-oe/recipes-support/libjs/libjs-jquery-icheck_1.0.3.bb
-@@ -3,7 +3,7 @@ SECTION =3D "console/network"
- HOMEPAGE =3D "http://fronteed.com/iCheck"
-=20
- LICENSE =3D "MIT"
--LIC_FILES_CHKSUM =3D "file://icheck.js;start_line=3D1;end_line=3D8;md5=3D4=
-04078d7de9f05ed64d364274f790055"
-+LIC_FILES_CHKSUM =3D "file://icheck.js;beginline=3D6;endline=3D7;md5=3Dea2=
-5eee37fc3b14403e215bfe13564bc"
-=20
- SRC_URI =3D "git://github.com/fronteed/icheck.git;protocol=3Dhttps;branch=
-=3D${PV}"
-=20
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index e11afcd4e..f9b3e742a 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -816,7 +816,6 @@ RDEPENDS:packagegroup-meta-oe-support =&quot;\
+     lockdev \
+     logwarn \
+     libjs-sizzle \
+-    liblinebreak \
+     mailcap \
+     liboauth \
+     mg \
+diff --git a/meta-oe/recipes-support/liblinebreak/liblinebreak_1.2.bb b/meta-oe/recipes-support/liblinebreak/liblinebreak_1.2.bb
+deleted file mode 100644
+index 539b58bc5..000000000
+--- a/meta-oe/recipes-support/liblinebreak/liblinebreak_1.2.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-DESCRIPTION = &quot;Liblinebreak is an implementation of the line breaking algorithm as described in Unicode 5.1.0 Standard Annex 14, Revision 22&quot;
+-HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://vimgadgets.sourceforge.net/liblinebreak/">&quot;http://vimgadgets.sourceforge.net/liblinebreak/&quot;</a>
+-SECTION = &quot;libs&quot;
+-LICENSE = &quot;Zlib&quot;
+-LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENCE;md5=3715191da62bafb5cfc4ff36195b2ec3">&quot;file://LICENCE;md5=3715191da62bafb5cfc4ff36195b2ec3&quot;</a>
+-
+-SRC_URI = &quot;${SOURCEFORGE_MIRROR}/project/vimgadgets/liblinebreak/${PV}/liblinebreak-${PV}.tar.gz&quot;
+-SRC_URI[md5sum] = &quot;d18039259001ccb24b5dd4648c49c5ad&quot;
+-SRC_URI[sha256sum] = &quot;9efcb0cb1afc75ad1e92d2b2dbf4d9c77b072d6656c5f1a150af8b718d0c7b76&quot;
+-
+-UPSTREAM_CHECK_URI = <a class="moz-txt-link-rfc2396E" href="https://sourceforge.net/projects/vimgadgets/files/liblinebreak/">&quot;https://sourceforge.net/projects/vimgadgets/files/liblinebreak/&quot;</a>
+-UPSTREAM_CHECK_REGEX = &quot;${BPN}/(?P&lt;pver&gt;\d+(\.\d+)+)&quot;
+-
+-inherit autotools
+</pre>
+      <br>
+      <fieldset class="moz-mime-attachment-header"></fieldset>
+      <pre wrap="" class="moz-quote-pre">-=-=-=-=-=-=-=-=-=-=-=-
+Links: You receive all messages sent to this group.
+View/Reply Online (#111776): <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/g/openembedded-devel/message/111776">https://lists.openembedded.org/g/openembedded-devel/message/111776</a>
+Mute This Topic: <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/mt/107863665/3616765">https://lists.openembedded.org/mt/107863665/3616765</a>
+Group Owner: <a class="moz-txt-link-abbreviated" href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
+Unsubscribe: <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a class="moz-txt-link-abbreviated" href="mailto:randy.macleod@windriver.com">randy.macleod@windriver.com</a>]
+-=-=-=-=-=-=-=-=-=-=-=-
+
+</pre>
+    </blockquote>
+    <p><br>
+    </p>
+    <pre class="moz-signature" cols="72">-- 
+# Randy MacLeod
+# Wind River Linux</pre>
+  </body>
+</html>
+
+--------------WFrERjyigIxUeJF2YRiqL07C--
 
