@@ -2,54 +2,54 @@ Return-Path: <tim.orling@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 469B2C52D7C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 44EBEC52D7B
 	for <webhook@archiver.kernel.org>; Mon, 12 Aug 2024 03:28:51 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.web11.38432.1723433327669754092
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web10.38304.1723433323384089548
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 11 Aug 2024 20:28:47 -0700
+ Sun, 11 Aug 2024 20:28:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=RixBQCD3;
- spf=pass (domain: konsulko.com, ip: 209.85.216.48, mailfrom: tim.orling@konsulko.com)
-Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-2d1e3381cb1so1831606a91.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 11 Aug 2024 20:28:47 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=ldeczt7Z;
+ spf=pass (domain: konsulko.com, ip: 209.85.210.174, mailfrom: tim.orling@konsulko.com)
+Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-7104f93a20eso3280684b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 11 Aug 2024 20:28:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1723433327; x=1724038127; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1723433322; x=1724038122; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=hEeHG4pucjel8x7Lu27av00Fr2GsLTvpcQR3e/BESGQ=;
-        b=RixBQCD3woK51WoQqRzmlZCC7WDcD8OQwMlS6v3bWAZnNUy+4f5ShfI+mXVt53xaLj
-         pZjH6fAJ5V8j4Hd54Q4oLM1A5Lq7dTVzq+EB4CaGj4iRUYyHlPa6lgD1K6KNPQGjYnkT
-         54R2TiCrPcYbCZzb6KW9EQArvDj1l8vpPbTzY=
+        bh=G/GHY9wQP0j60OTHRguhLulCGYFkkAbo25GvhVhKBVs=;
+        b=ldeczt7Zff+Sz4Xjt92Aw2Alyqy2DJF7Zm1YnYow5DY6zvucsJUa0k4/cpX06sqKZL
+         xB9yl+fggasLWd+X/SdgTdHNS6uaCflxIhQB1IBNU92wN0rSMcVGJ/BZ0oHhyVXEPoxH
+         IIXJlI9l0NuLTOSK456ECO7iU/tHIGOy2CGDU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723433327; x=1724038127;
+        d=1e100.net; s=20230601; t=1723433322; x=1724038122;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=hEeHG4pucjel8x7Lu27av00Fr2GsLTvpcQR3e/BESGQ=;
-        b=Vjf/fwjvcAlR4llVbtI/SCTfpb25pJWCAF+e/c92KfXfUqWGuxVoX3jYzJLgVMeHvR
-         IJ0Psjy30dMInb/xJFbMh249XYOXqCtm4KiCxCFvf8mqf9wVveYUSdL8VUvzOVHGZQw4
-         WvUaVs7kj3ie0WCC0RsSPRckKeXG+Sj4YY1M4OCB8vJSxp+n+vLldSV9r4/SGYYPh1CM
-         VcDR1PS4p4UhAq45fcIBPA+lpYPOGgXOTsdYEm+/3IAgotavONat5odvASCa92hjh3MB
-         yNaC8HEwcYMwH3xrn4gBk+gQXeNZyIgdfJymnpnJNsfxx2446D6fO9QHKhavgy94LPxq
-         5avA==
-X-Gm-Message-State: AOJu0YyxJQGlOpNUS0s+ZzMz2cxG7WNvzbTfNPWxwF9Bcjl+zlnYZU3S
-	zYGaauP8sJDrk2Wgo0NyrEVKAmHxpyxogt/xQbjpjMXPoOi5WeyLcc5UrNKXglQ9b/1XbNEJJCs
-	fmt4=
-X-Google-Smtp-Source: AGHT+IGYLXoKUxO9yAtcExr5Pgu3sFB3AzVEgl990YgyBktQ5tmPU5Pc5v/1PokDQ77s6oaghy2PIQ==
-X-Received: by 2002:a17:90a:3044:b0:2d1:c806:2be9 with SMTP id 98e67ed59e1d1-2d1e805092dmr8628183a91.28.1723433326632;
-        Sun, 11 Aug 2024 20:28:46 -0700 (PDT)
+        bh=G/GHY9wQP0j60OTHRguhLulCGYFkkAbo25GvhVhKBVs=;
+        b=C6OwcqOBY1iWjxuJZ+gnqAV4E8sghAl78BFF8ePW0xfat6QOrEa74ZJzQ2aPD+1GOB
+         BaWD5OaIL8yIO1FMYQNCc6Bc0k1aTTrzeDJurRuW3FamUCRqrcm3oiMXhFy9TOszP+dT
+         ypJM11vVCYVMyVHWfkzTMZ5W0VppcRTUYWhEofLbjGbRUnqGsZorxd6ri7Z0a3KCct/U
+         9osOwqIAeg0yI7bC2aBsB8GEz/vDcbvsTNnGY6WKsjbbZLhNOW4NtcMZNWll75OSVp57
+         cz04JK70yMN1RJTSHC5NY1rXB8XGhEiT/da7KZ3WF3nd1E7GstdUcK447Bh6+usOLPku
+         vArQ==
+X-Gm-Message-State: AOJu0Yw35iD2n3X4C4nEjaiVzlqkdu+fhfv8ZwhRmTNgqqNfURqydM3W
+	61+vUfh0qGFRDHxkb7PLaF26c0WlmsQOw01uRCaoHAIum0UneXpGKKpamJJDh9jMytHPlXrtVpC
+	mpHo=
+X-Google-Smtp-Source: AGHT+IE1L8Y7nz2WaiBkxcDv5lGXZZYQbdcr2skvi07BlsdyATTz1lp8M5vIjDfPDk0F6PYB+/AYSQ==
+X-Received: by 2002:a05:6a00:3e14:b0:70d:1b17:3c5e with SMTP id d2e1a72fcca58-710dc6c5917mr10024787b3a.6.1723433322066;
+        Sun, 11 Aug 2024 20:28:42 -0700 (PDT)
 Received: from localhost (c-98-232-159-17.hsd1.or.comcast.net. [98.232.159.17])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2d1c9c5e053sm7128215a91.2.2024.08.11.20.28.45
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-710e5874deasm3116307b3a.17.2024.08.11.20.28.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 11 Aug 2024 20:28:46 -0700 (PDT)
+        Sun, 11 Aug 2024 20:28:41 -0700 (PDT)
 From: tim.orling@konsulko.com
 To: openembedded-devel@lists.openembedded.org,
 	akuster808@gmail.com
-Subject: [scarthgap][meta-python][PATCH 5/6] python3-pydantic-core: fix TMPDIR path reference
-Date: Sun, 11 Aug 2024 20:28:13 -0700
-Message-ID: <ffc854c54dfdb39cbd7b972b13098e2407c0e9ac.1723432397.git.tim.orling@konsulko.com>
+Subject: [scarthgap][meta-python][PATCH 3/6] python3-pydantic-core: fix incompatible version
+Date: Sun, 11 Aug 2024 20:28:11 -0700
+Message-ID: <eac1c83ac65b72f3469a3f875cd0cf1b9a2a5d6d.1723432397.git.tim.orling@konsulko.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <cover.1723432397.git.tim.orling@konsulko.com>
 References: <cover.1723432397.git.tim.orling@konsulko.com>
@@ -59,104 +59,496 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 12 Aug 2024 03:28:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111763
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111761
 
 From: Frank de Brabander <debrabander@gmail.com>
 
-Backport a new upstream fix to remove the TMPDIR
-reference from the rust code.
+The recipe for pydantic currently is at version 2.7.3. This
+project specifies in its pyproject.toml that it depends on
+pydantic-core version 2.18.4. Because an older 2.16.3 version
+of pydantic-core was used now, a simple bit of code will break.
+
+  from enum import Enum
+  from pydantic import BaseModel
+
+  class Color(str, Enum):
+      RED = "RED"
+      BLUE = "BLUE"
+
+  class Car(BaseModel):
+      color: Color
+
+  print(Car(color=Color.RED))
+
+This will upgrade the python3-pydantic-core recipe to make it
+compatible with python3-pydantic, so that the above snippet of
+code will no longer fail.
+
+Two patches are removed, these backports are now included in the
+upstream code. A new patch is added to set the required rust
+compiler from 1.76 to 1.75. Version 1.76 is not actually needed.
+
+File python3-pydantic-core-crates.inc is regenerated by running
+'bitbake -c update_crates python3-pydantic-core'.
+
+The recipes RDEPENDS now includes python3-compression. The pydantic
+schema validator imports 'importlib.metadata' which wants to import
+'zipfile'.
+
+The buildpaths QA check is skipped. This should be fixed at some
+point, but it was already failing before this change.
 
 Signed-off-by: Frank de Brabander <debrabander@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-We've seen TMPDIR [build-paths] contamination in the
-built pydantic_core/_pydantic_core.cpython-*-*-linux-gnu.so
-
-See discussion upstream in:
-https://github.com/pydantic/pydantic-core/issues/1365
-
-Backport fix from:
-https://github.com/pydantic/pydantic-core/commit/e07c41b3bad75948201a2201387225694c2fb501
-
-Similar to Styhead 6f0a41130c0dcf80e22f6f3fd93d39369c235693, but for 2.18.4
+Backport from Styhead bee8b9bbc48e5ee9a4b67aed09027e62143eb34c as part of the overall scarthgap fix
+Fix typo in python3-pydantic version, it was 2.7.3 not 2.7.2
 Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ---
- ...Dont-embed-RUSTFLAGS-in-final-binary.patch | 47 +++++++++++++++++++
- .../python/python3-pydantic-core_2.18.4.bb    |  4 +-
- 2 files changed, 49 insertions(+), 2 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-pydantic-core/0002-Dont-embed-RUSTFLAGS-in-final-binary.patch
+ .../python/python3-pydantic-core-crates.inc   |  88 ++++++------
+ ...-github.com-pyo3-pyo3-from-0.20.2-to.patch | 126 ------------------
+ ...ate_self_schema-for-Python-3.12-1299.patch |  29 ----
+ ...sion-from-1.76-to-1.75-in-Cargo.toml.patch |  29 ++++
+ ...6.3.bb => python3-pydantic-core_2.18.4.bb} |  11 +-
+ 5 files changed, 82 insertions(+), 201 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pydantic-core/0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pydantic-core/0001-Fix-generate_self_schema-for-Python-3.12-1299.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-pydantic-core/0001-Set-rust-version-from-1.76-to-1.75-in-Cargo.toml.patch
+ rename meta-python/recipes-devtools/python/{python3-pydantic-core_2.16.3.bb => python3-pydantic-core_2.18.4.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core/0002-Dont-embed-RUSTFLAGS-in-final-binary.patch b/meta-python/recipes-devtools/python/python3-pydantic-core/0002-Dont-embed-RUSTFLAGS-in-final-binary.patch
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core-crates.inc b/meta-python/recipes-devtools/python/python3-pydantic-core-crates.inc
+index dd2027948c..c6b30bc677 100644
+--- a/meta-python/recipes-devtools/python/python3-pydantic-core-crates.inc
++++ b/meta-python/recipes-devtools/python/python3-pydantic-core-crates.inc
+@@ -2,31 +2,29 @@
+ 
+ # from Cargo.lock
+ SRC_URI += " \
+-    crate://crates.io/ahash/0.8.7 \
++    crate://crates.io/ahash/0.8.10 \
+     crate://crates.io/aho-corasick/1.0.2 \
+-    crate://crates.io/allocator-api2/0.2.16 \
+     crate://crates.io/autocfg/1.1.0 \
+     crate://crates.io/base64/0.21.7 \
+     crate://crates.io/bitflags/1.3.2 \
++    crate://crates.io/bitvec/1.0.1 \
+     crate://crates.io/cc/1.0.79 \
+     crate://crates.io/cfg-if/1.0.0 \
+-    crate://crates.io/enum_dispatch/0.3.12 \
++    crate://crates.io/enum_dispatch/0.3.13 \
+     crate://crates.io/equivalent/1.0.1 \
+     crate://crates.io/form_urlencoded/1.2.1 \
++    crate://crates.io/funty/2.0.0 \
+     crate://crates.io/getrandom/0.2.10 \
+     crate://crates.io/hashbrown/0.14.3 \
+     crate://crates.io/heck/0.4.1 \
+     crate://crates.io/idna/0.5.0 \
+-    crate://crates.io/indexmap/2.0.0 \
++    crate://crates.io/indexmap/2.2.2 \
+     crate://crates.io/indoc/2.0.4 \
+     crate://crates.io/itoa/1.0.8 \
+-    crate://crates.io/jiter/0.0.6 \
+-    crate://crates.io/lexical-core/0.8.5 \
++    crate://crates.io/jiter/0.4.1 \
+     crate://crates.io/lexical-parse-float/0.8.5 \
+     crate://crates.io/lexical-parse-integer/0.8.6 \
+     crate://crates.io/lexical-util/0.8.5 \
+-    crate://crates.io/lexical-write-float/0.8.5 \
+-    crate://crates.io/lexical-write-integer/0.8.5 \
+     crate://crates.io/libc/0.2.147 \
+     crate://crates.io/lock_api/0.4.10 \
+     crate://crates.io/memchr/2.6.3 \
+@@ -40,29 +38,32 @@ SRC_URI += " \
+     crate://crates.io/percent-encoding/2.3.1 \
+     crate://crates.io/portable-atomic/1.6.0 \
+     crate://crates.io/proc-macro2/1.0.76 \
+-    crate://crates.io/pyo3/0.20.3 \
+-    crate://crates.io/pyo3-build-config/0.20.3 \
+-    crate://crates.io/pyo3-ffi/0.20.3 \
+-    crate://crates.io/pyo3-macros/0.20.3 \
+-    crate://crates.io/pyo3-macros-backend/0.20.3 \
++    crate://crates.io/pyo3/0.21.2 \
++    crate://crates.io/pyo3-build-config/0.21.2 \
++    crate://crates.io/pyo3-ffi/0.21.2 \
++    crate://crates.io/pyo3-macros/0.21.2 \
++    crate://crates.io/pyo3-macros-backend/0.21.2 \
+     crate://crates.io/python3-dll-a/0.2.9 \
+     crate://crates.io/quote/1.0.35 \
++    crate://crates.io/radium/0.7.0 \
+     crate://crates.io/redox_syscall/0.3.5 \
+-    crate://crates.io/regex/1.10.2 \
+-    crate://crates.io/regex-automata/0.4.3 \
++    crate://crates.io/regex/1.10.4 \
++    crate://crates.io/regex-automata/0.4.5 \
+     crate://crates.io/regex-syntax/0.8.2 \
+     crate://crates.io/rustversion/1.0.13 \
+     crate://crates.io/ryu/1.0.14 \
+     crate://crates.io/scopeguard/1.1.0 \
+-    crate://crates.io/serde/1.0.195 \
+-    crate://crates.io/serde_derive/1.0.195 \
+-    crate://crates.io/serde_json/1.0.109 \
+-    crate://crates.io/smallvec/1.11.2 \
+-    crate://crates.io/speedate/0.13.0 \
++    crate://crates.io/serde/1.0.203 \
++    crate://crates.io/serde_derive/1.0.203 \
++    crate://crates.io/serde_json/1.0.116 \
++    crate://crates.io/smallvec/1.13.2 \
++    crate://crates.io/speedate/0.14.0 \
+     crate://crates.io/static_assertions/1.1.0 \
+     crate://crates.io/strum/0.25.0 \
+     crate://crates.io/strum_macros/0.25.3 \
++    crate://crates.io/strum_macros/0.26.1 \
+     crate://crates.io/syn/2.0.48 \
++    crate://crates.io/tap/1.0.1 \
+     crate://crates.io/target-lexicon/0.12.9 \
+     crate://crates.io/tinyvec/1.6.0 \
+     crate://crates.io/tinyvec_macros/0.1.1 \
+@@ -71,7 +72,7 @@ SRC_URI += " \
+     crate://crates.io/unicode-normalization/0.1.22 \
+     crate://crates.io/unindent/0.2.3 \
+     crate://crates.io/url/2.5.0 \
+-    crate://crates.io/uuid/1.6.1 \
++    crate://crates.io/uuid/1.8.0 \
+     crate://crates.io/version_check/0.9.4 \
+     crate://crates.io/wasi/0.11.0+wasi-snapshot-preview1 \
+     crate://crates.io/windows-targets/0.48.1 \
+@@ -82,35 +83,34 @@ SRC_URI += " \
+     crate://crates.io/windows_x86_64_gnu/0.48.0 \
+     crate://crates.io/windows_x86_64_gnullvm/0.48.0 \
+     crate://crates.io/windows_x86_64_msvc/0.48.0 \
++    crate://crates.io/wyz/0.5.1 \
+     crate://crates.io/zerocopy/0.7.32 \
+     crate://crates.io/zerocopy-derive/0.7.32 \
+ "
+ 
+-SRC_URI[ahash-0.8.7.sha256sum] = "77c3a9648d43b9cd48db467b3f87fdd6e146bcc88ab0180006cef2179fe11d01"
++SRC_URI[ahash-0.8.10.sha256sum] = "8b79b82693f705137f8fb9b37871d99e4f9a7df12b917eed79c3d3954830a60b"
+ SRC_URI[aho-corasick-1.0.2.sha256sum] = "43f6cb1bf222025340178f382c426f13757b2960e89779dfcb319c32542a5a41"
+-SRC_URI[allocator-api2-0.2.16.sha256sum] = "0942ffc6dcaadf03badf6e6a2d0228460359d5e34b57ccdc720b7382dfbd5ec5"
+ SRC_URI[autocfg-1.1.0.sha256sum] = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
+ SRC_URI[base64-0.21.7.sha256sum] = "9d297deb1925b89f2ccc13d7635fa0714f12c87adce1c75356b39ca9b7178567"
+ SRC_URI[bitflags-1.3.2.sha256sum] = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
++SRC_URI[bitvec-1.0.1.sha256sum] = "1bc2832c24239b0141d5674bb9174f9d68a8b5b3f2753311927c172ca46f7e9c"
+ SRC_URI[cc-1.0.79.sha256sum] = "50d30906286121d95be3d479533b458f87493b30a4b5f79a607db8f5d11aa91f"
+ SRC_URI[cfg-if-1.0.0.sha256sum] = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
+-SRC_URI[enum_dispatch-0.3.12.sha256sum] = "8f33313078bb8d4d05a2733a94ac4c2d8a0df9a2b84424ebf4f33bfc224a890e"
++SRC_URI[enum_dispatch-0.3.13.sha256sum] = "aa18ce2bc66555b3218614519ac839ddb759a7d6720732f979ef8d13be147ecd"
+ SRC_URI[equivalent-1.0.1.sha256sum] = "5443807d6dff69373d433ab9ef5378ad8df50ca6298caf15de6e52e24aaf54d5"
+ SRC_URI[form_urlencoded-1.2.1.sha256sum] = "e13624c2627564efccf4934284bdd98cbaa14e79b0b5a141218e507b3a823456"
++SRC_URI[funty-2.0.0.sha256sum] = "e6d5a32815ae3f33302d95fdcb2ce17862f8c65363dcfd29360480ba1001fc9c"
+ SRC_URI[getrandom-0.2.10.sha256sum] = "be4136b2a15dd319360be1c07d9933517ccf0be8f16bf62a3bee4f0d618df427"
+ SRC_URI[hashbrown-0.14.3.sha256sum] = "290f1a1d9242c78d09ce40a5e87e7554ee637af1351968159f4952f028f75604"
+ SRC_URI[heck-0.4.1.sha256sum] = "95505c38b4572b2d910cecb0281560f54b440a19336cbbcb27bf6ce6adc6f5a8"
+ SRC_URI[idna-0.5.0.sha256sum] = "634d9b1461af396cad843f47fdba5597a4f9e6ddd4bfb6ff5d85028c25cb12f6"
+-SRC_URI[indexmap-2.0.0.sha256sum] = "d5477fe2230a79769d8dc68e0eabf5437907c0457a5614a9e8dddb67f65eb65d"
++SRC_URI[indexmap-2.2.2.sha256sum] = "824b2ae422412366ba479e8111fd301f7b5faece8149317bb81925979a53f520"
+ SRC_URI[indoc-2.0.4.sha256sum] = "1e186cfbae8084e513daff4240b4797e342f988cecda4fb6c939150f96315fd8"
+ SRC_URI[itoa-1.0.8.sha256sum] = "62b02a5381cc465bd3041d84623d0fa3b66738b52b8e2fc3bab8ad63ab032f4a"
+-SRC_URI[jiter-0.0.6.sha256sum] = "87db066a99f69382be06d02313f8ce989996b53a04a8a70cfd1a6483a56227f7"
+-SRC_URI[lexical-core-0.8.5.sha256sum] = "2cde5de06e8d4c2faabc400238f9ae1c74d5412d03a7bd067645ccbc47070e46"
++SRC_URI[jiter-0.4.1.sha256sum] = "abbbbe1bad457e3cd5503af716aedc735e849505a0d2172c55a753ae1b127458"
+ SRC_URI[lexical-parse-float-0.8.5.sha256sum] = "683b3a5ebd0130b8fb52ba0bdc718cc56815b6a097e28ae5a6997d0ad17dc05f"
+ SRC_URI[lexical-parse-integer-0.8.6.sha256sum] = "6d0994485ed0c312f6d965766754ea177d07f9c00c9b82a5ee62ed5b47945ee9"
+ SRC_URI[lexical-util-0.8.5.sha256sum] = "5255b9ff16ff898710eb9eb63cb39248ea8a5bb036bea8085b1a767ff6c4e3fc"
+-SRC_URI[lexical-write-float-0.8.5.sha256sum] = "accabaa1c4581f05a3923d1b4cfd124c329352288b7b9da09e766b0668116862"
+-SRC_URI[lexical-write-integer-0.8.5.sha256sum] = "e1b6f3d1f4422866b68192d62f77bc5c700bee84f3069f2469d7bc8c77852446"
+ SRC_URI[libc-0.2.147.sha256sum] = "b4668fb0ea861c1df094127ac5f1da3409a82116a4ba74fca2e58ef927159bb3"
+ SRC_URI[lock_api-0.4.10.sha256sum] = "c1cc9717a20b1bb222f333e6a92fd32f7d8a18ddc5a3191a11af45dcbf4dcd16"
+ SRC_URI[memchr-2.6.3.sha256sum] = "8f232d6ef707e1956a43342693d2a31e72989554d58299d7a88738cc95b0d35c"
+@@ -124,29 +124,32 @@ SRC_URI[parking_lot_core-0.9.8.sha256sum] = "93f00c865fe7cabf650081affecd3871070
+ SRC_URI[percent-encoding-2.3.1.sha256sum] = "e3148f5046208a5d56bcfc03053e3ca6334e51da8dfb19b6cdc8b306fae3283e"
+ SRC_URI[portable-atomic-1.6.0.sha256sum] = "7170ef9988bc169ba16dd36a7fa041e5c4cbeb6a35b76d4c03daded371eae7c0"
+ SRC_URI[proc-macro2-1.0.76.sha256sum] = "95fc56cda0b5c3325f5fbbd7ff9fda9e02bb00bb3dac51252d2f1bfa1cb8cc8c"
+-SRC_URI[pyo3-0.20.3.sha256sum] = "53bdbb96d49157e65d45cc287af5f32ffadd5f4761438b527b055fb0d4bb8233"
+-SRC_URI[pyo3-build-config-0.20.3.sha256sum] = "deaa5745de3f5231ce10517a1f5dd97d53e5a2fd77aa6b5842292085831d48d7"
+-SRC_URI[pyo3-ffi-0.20.3.sha256sum] = "62b42531d03e08d4ef1f6e85a2ed422eb678b8cd62b762e53891c05faf0d4afa"
+-SRC_URI[pyo3-macros-0.20.3.sha256sum] = "7305c720fa01b8055ec95e484a6eca7a83c841267f0dd5280f0c8b8551d2c158"
+-SRC_URI[pyo3-macros-backend-0.20.3.sha256sum] = "7c7e9b68bb9c3149c5b0cade5d07f953d6d125eb4337723c4ccdb665f1f96185"
++SRC_URI[pyo3-0.21.2.sha256sum] = "a5e00b96a521718e08e03b1a622f01c8a8deb50719335de3f60b3b3950f069d8"
++SRC_URI[pyo3-build-config-0.21.2.sha256sum] = "7883df5835fafdad87c0d888b266c8ec0f4c9ca48a5bed6bbb592e8dedee1b50"
++SRC_URI[pyo3-ffi-0.21.2.sha256sum] = "01be5843dc60b916ab4dad1dca6d20b9b4e6ddc8e15f50c47fe6d85f1fb97403"
++SRC_URI[pyo3-macros-0.21.2.sha256sum] = "77b34069fc0682e11b31dbd10321cbf94808394c56fd996796ce45217dfac53c"
++SRC_URI[pyo3-macros-backend-0.21.2.sha256sum] = "08260721f32db5e1a5beae69a55553f56b99bd0e1c3e6e0a5e8851a9d0f5a85c"
+ SRC_URI[python3-dll-a-0.2.9.sha256sum] = "d5f07cd4412be8fa09a721d40007c483981bbe072cd6a21f2e83e04ec8f8343f"
+ SRC_URI[quote-1.0.35.sha256sum] = "291ec9ab5efd934aaf503a6466c5d5251535d108ee747472c3977cc5acc868ef"
++SRC_URI[radium-0.7.0.sha256sum] = "dc33ff2d4973d518d823d61aa239014831e521c75da58e3df4840d3f47749d09"
+ SRC_URI[redox_syscall-0.3.5.sha256sum] = "567664f262709473930a4bf9e51bf2ebf3348f2e748ccc50dea20646858f8f29"
+-SRC_URI[regex-1.10.2.sha256sum] = "380b951a9c5e80ddfd6136919eef32310721aa4aacd4889a8d39124b026ab343"
+-SRC_URI[regex-automata-0.4.3.sha256sum] = "5f804c7828047e88b2d32e2d7fe5a105da8ee3264f01902f796c8e067dc2483f"
++SRC_URI[regex-1.10.4.sha256sum] = "c117dbdfde9c8308975b6a18d71f3f385c89461f7b3fb054288ecf2a2058ba4c"
++SRC_URI[regex-automata-0.4.5.sha256sum] = "5bb987efffd3c6d0d8f5f89510bb458559eab11e4f869acb20bf845e016259cd"
+ SRC_URI[regex-syntax-0.8.2.sha256sum] = "c08c74e62047bb2de4ff487b251e4a92e24f48745648451635cec7d591162d9f"
+ SRC_URI[rustversion-1.0.13.sha256sum] = "dc31bd9b61a32c31f9650d18add92aa83a49ba979c143eefd27fe7177b05bd5f"
+ SRC_URI[ryu-1.0.14.sha256sum] = "fe232bdf6be8c8de797b22184ee71118d63780ea42ac85b61d1baa6d3b782ae9"
+ SRC_URI[scopeguard-1.1.0.sha256sum] = "d29ab0c6d3fc0ee92fe66e2d99f700eab17a8d57d1c1d3b748380fb20baa78cd"
+-SRC_URI[serde-1.0.195.sha256sum] = "63261df402c67811e9ac6def069e4786148c4563f4b50fd4bf30aa370d626b02"
+-SRC_URI[serde_derive-1.0.195.sha256sum] = "46fe8f8603d81ba86327b23a2e9cdf49e1255fb94a4c5f297f6ee0547178ea2c"
+-SRC_URI[serde_json-1.0.109.sha256sum] = "cb0652c533506ad7a2e353cce269330d6afd8bdfb6d75e0ace5b35aacbd7b9e9"
+-SRC_URI[smallvec-1.11.2.sha256sum] = "4dccd0940a2dcdf68d092b8cbab7dc0ad8fa938bf95787e1b916b0e3d0e8e970"
+-SRC_URI[speedate-0.13.0.sha256sum] = "242f76c50fd18cbf098607090ade73a08d39cfd84ea835f3796a2c855223b19b"
++SRC_URI[serde-1.0.203.sha256sum] = "7253ab4de971e72fb7be983802300c30b5a7f0c2e56fab8abfc6a214307c0094"
++SRC_URI[serde_derive-1.0.203.sha256sum] = "500cbc0ebeb6f46627f50f3f5811ccf6bf00643be300b4c3eabc0ef55dc5b5ba"
++SRC_URI[serde_json-1.0.116.sha256sum] = "3e17db7126d17feb94eb3fad46bf1a96b034e8aacbc2e775fe81505f8b0b2813"
++SRC_URI[smallvec-1.13.2.sha256sum] = "3c5e1a9a646d36c3599cd173a41282daf47c44583ad367b8e6837255952e5c67"
++SRC_URI[speedate-0.14.0.sha256sum] = "c323c4e6fece5a5a1a2a7f726d243144cce9fbcfe3ce4d9f3c6ede726a2bc780"
+ SRC_URI[static_assertions-1.1.0.sha256sum] = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
+ SRC_URI[strum-0.25.0.sha256sum] = "290d54ea6f91c969195bdbcd7442c8c2a2ba87da8bf60a7ee86a235d4bc1e125"
+ SRC_URI[strum_macros-0.25.3.sha256sum] = "23dc1fa9ac9c169a78ba62f0b841814b7abae11bdd047b9c58f893439e309ea0"
++SRC_URI[strum_macros-0.26.1.sha256sum] = "7a3417fc93d76740d974a01654a09777cb500428cc874ca9f45edfe0c4d4cd18"
+ SRC_URI[syn-2.0.48.sha256sum] = "0f3531638e407dfc0814761abb7c00a5b54992b849452a0646b7f65c9f770f3f"
++SRC_URI[tap-1.0.1.sha256sum] = "55937e1799185b12863d447f42597ed69d9928686b8d88a1df17376a097d8369"
+ SRC_URI[target-lexicon-0.12.9.sha256sum] = "df8e77cb757a61f51b947ec4a7e3646efd825b73561db1c232a8ccb639e611a0"
+ SRC_URI[tinyvec-1.6.0.sha256sum] = "87cc5ceb3875bb20c2890005a4e226a4651264a5c75edb2421b52861a0a0cb50"
+ SRC_URI[tinyvec_macros-0.1.1.sha256sum] = "1f3ccbac311fea05f86f61904b462b55fb3df8837a366dfc601a0161d0532f20"
+@@ -155,7 +158,7 @@ SRC_URI[unicode-ident-1.0.10.sha256sum] = "22049a19f4a68748a168c0fc439f9516686aa
+ SRC_URI[unicode-normalization-0.1.22.sha256sum] = "5c5713f0fc4b5db668a2ac63cdb7bb4469d8c9fed047b1d0292cc7b0ce2ba921"
+ SRC_URI[unindent-0.2.3.sha256sum] = "c7de7d73e1754487cb58364ee906a499937a0dfabd86bcb980fa99ec8c8fa2ce"
+ SRC_URI[url-2.5.0.sha256sum] = "31e6302e3bb753d46e83516cae55ae196fc0c309407cf11ab35cc51a4c2a4633"
+-SRC_URI[uuid-1.6.1.sha256sum] = "5e395fcf16a7a3d8127ec99782007af141946b4795001f876d54fb0d55978560"
++SRC_URI[uuid-1.8.0.sha256sum] = "a183cf7feeba97b4dd1c0d46788634f6221d87fa961b305bed08c851829efcc0"
+ SRC_URI[version_check-0.9.4.sha256sum] = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
+ SRC_URI[wasi-0.11.0+wasi-snapshot-preview1.sha256sum] = "9c8d87e72b64a3b4db28d11ce29237c246188f4f51057d65a7eab63b7987e423"
+ SRC_URI[windows-targets-0.48.1.sha256sum] = "05d4b17490f70499f20b9e791dcf6a299785ce8af4d709018206dc5b4953e95f"
+@@ -166,5 +169,6 @@ SRC_URI[windows_i686_msvc-0.48.0.sha256sum] = "4542c6e364ce21bf45d69fdd2a8e455fa
+ SRC_URI[windows_x86_64_gnu-0.48.0.sha256sum] = "ca2b8a661f7628cbd23440e50b05d705db3686f894fc9580820623656af974b1"
+ SRC_URI[windows_x86_64_gnullvm-0.48.0.sha256sum] = "7896dbc1f41e08872e9d5e8f8baa8fdd2677f29468c4e156210174edc7f7b953"
+ SRC_URI[windows_x86_64_msvc-0.48.0.sha256sum] = "1a515f5799fe4961cb532f983ce2b23082366b898e52ffbce459c86f67c8378a"
++SRC_URI[wyz-0.5.1.sha256sum] = "05f360fc0b24296329c78fda852a1e9ae82de9cf7b27dae4b7f62f118f77b9ed"
+ SRC_URI[zerocopy-0.7.32.sha256sum] = "74d4d3961e53fa4c9a25a8637fc2bfaf2595b3d3ae34875568a5cf64787716be"
+ SRC_URI[zerocopy-derive-0.7.32.sha256sum] = "9ce1b18ccd8e73a9321186f97e46f9f04b778851177567b1975109d26a08d2a6"
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch b/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch
+deleted file mode 100644
+index 32777e1d03..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch
++++ /dev/null
+@@ -1,126 +0,0 @@
+-From a5690f973384bf8cbf4deb3b83d822b7aaefbdd8 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 27 Feb 2024 11:00:46 -0800
+-Subject: [PATCH] Bumps [pyo3](https://github.com/pyo3/pyo3) from 0.20.2 to
+- 0.20.3.
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- Cargo.lock | 26 +++++++++++++++++---------
+- Cargo.toml |  2 +-
+- 2 files changed, 18 insertions(+), 10 deletions(-)
+-
+---- a/Cargo.lock
+-+++ b/Cargo.lock
+-@@ -322,6 +322,12 @@ source = "registry+https://github.com/ru
+- checksum = "e3148f5046208a5d56bcfc03053e3ca6334e51da8dfb19b6cdc8b306fae3283e"
+- 
+- [[package]]
+-+name = "portable-atomic"
+-+version = "1.6.0"
+-+source = "registry+https://github.com/rust-lang/crates.io-index"
+-+checksum = "7170ef9988bc169ba16dd36a7fa041e5c4cbeb6a35b76d4c03daded371eae7c0"
+-+
+-+[[package]]
+- name = "proc-macro2"
+- version = "1.0.76"
+- source = "registry+https://github.com/rust-lang/crates.io-index"
+-@@ -357,9 +363,9 @@ dependencies = [
+- 
+- [[package]]
+- name = "pyo3"
+--version = "0.20.2"
+-+version = "0.20.3"
+- source = "registry+https://github.com/rust-lang/crates.io-index"
+--checksum = "9a89dc7a5850d0e983be1ec2a463a171d20990487c3cfcd68b5363f1ee3d6fe0"
+-+checksum = "53bdbb96d49157e65d45cc287af5f32ffadd5f4761438b527b055fb0d4bb8233"
+- dependencies = [
+-  "cfg-if",
+-  "indoc",
+-@@ -367,6 +373,7 @@ dependencies = [
+-  "memoffset",
+-  "num-bigint",
+-  "parking_lot",
+-+ "portable-atomic",
+-  "pyo3-build-config",
+-  "pyo3-ffi",
+-  "pyo3-macros",
+-@@ -375,9 +382,9 @@ dependencies = [
+- 
+- [[package]]
+- name = "pyo3-build-config"
+--version = "0.20.2"
+-+version = "0.20.3"
+- source = "registry+https://github.com/rust-lang/crates.io-index"
+--checksum = "07426f0d8fe5a601f26293f300afd1a7b1ed5e78b2a705870c5f30893c5163be"
+-+checksum = "deaa5745de3f5231ce10517a1f5dd97d53e5a2fd77aa6b5842292085831d48d7"
+- dependencies = [
+-  "once_cell",
+-  "python3-dll-a",
+-@@ -386,9 +393,9 @@ dependencies = [
+- 
+- [[package]]
+- name = "pyo3-ffi"
+--version = "0.20.2"
+-+version = "0.20.3"
+- source = "registry+https://github.com/rust-lang/crates.io-index"
+--checksum = "dbb7dec17e17766b46bca4f1a4215a85006b4c2ecde122076c562dd058da6cf1"
+-+checksum = "62b42531d03e08d4ef1f6e85a2ed422eb678b8cd62b762e53891c05faf0d4afa"
+- dependencies = [
+-  "libc",
+-  "pyo3-build-config",
+-@@ -396,9 +403,9 @@ dependencies = [
+- 
+- [[package]]
+- name = "pyo3-macros"
+--version = "0.20.2"
+-+version = "0.20.3"
+- source = "registry+https://github.com/rust-lang/crates.io-index"
+--checksum = "05f738b4e40d50b5711957f142878cfa0f28e054aa0ebdfc3fd137a843f74ed3"
+-+checksum = "7305c720fa01b8055ec95e484a6eca7a83c841267f0dd5280f0c8b8551d2c158"
+- dependencies = [
+-  "proc-macro2",
+-  "pyo3-macros-backend",
+-@@ -408,12 +415,13 @@ dependencies = [
+- 
+- [[package]]
+- name = "pyo3-macros-backend"
+--version = "0.20.2"
+-+version = "0.20.3"
+- source = "registry+https://github.com/rust-lang/crates.io-index"
+--checksum = "0fc910d4851847827daf9d6cdd4a823fbdaab5b8818325c5e97a86da79e8881f"
+-+checksum = "7c7e9b68bb9c3149c5b0cade5d07f953d6d125eb4337723c4ccdb665f1f96185"
+- dependencies = [
+-  "heck",
+-  "proc-macro2",
+-+ "pyo3-build-config",
+-  "quote",
+-  "syn",
+- ]
+---- a/Cargo.toml
+-+++ b/Cargo.toml
+-@@ -26,7 +26,7 @@ include = [
+- ]
+- 
+- [dependencies]
+--pyo3 = { version = "0.20.2", features = ["generate-import-lib", "num-bigint"] }
+-+pyo3 = { version = "0.20.3", features = ["generate-import-lib", "num-bigint"] }
+- regex = "1.10.2"
+- strum = { version = "0.25.0", features = ["derive"] }
+- strum_macros = "0.25.3"
+-@@ -70,12 +70,12 @@ debug = true
+- strip = false
+- 
+- [dev-dependencies]
+--pyo3 = { version = "0.20.2", features = ["auto-initialize"] }
+-+pyo3 = { version = "0.20.3", features = ["auto-initialize"] }
+- 
+- [build-dependencies]
+- version_check = "0.9.4"
+- # used where logic has to be version/distribution specific, e.g. pypy
+--pyo3-build-config = { version = "0.20.2" }
+-+pyo3-build-config = { version = "0.20.3" }
+- 
+- [lints.clippy]
+- dbg_macro = "warn"
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Fix-generate_self_schema-for-Python-3.12-1299.patch b/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Fix-generate_self_schema-for-Python-3.12-1299.patch
+deleted file mode 100644
+index f6aa18e303..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Fix-generate_self_schema-for-Python-3.12-1299.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 0dcca2ed6a83ebbc944ec8cbd2f67ffec8043461 Mon Sep 17 00:00:00 2001
+-From: Jelle Zijlstra <jelle.zijlstra@gmail.com>
+-Date: Wed, 22 May 2024 07:44:10 -0700
+-Subject: [PATCH] Fix generate_self_schema for Python 3.12+ (#1299)
+-
+-Upstream-Status: Backport [https://github.com/pydantic/pydantic-core/commit/a7620419383a69bd2b28ab953c9a17f6ed35bb9a]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- generate_self_schema.py | 7 ++++++-
+- 1 file changed, 6 insertions(+), 1 deletion(-)
+-
+-diff --git a/generate_self_schema.py b/generate_self_schema.py
+-index 8d27247..109fca0 100644
+---- a/generate_self_schema.py
+-+++ b/generate_self_schema.py
+-@@ -189,7 +189,12 @@ def all_literal_values(type_: type[core_schema.Literal]) -> list[any]:
+- 
+- def eval_forward_ref(type_: Any) -> Any:
+-     try:
+--        return type_._evaluate(core_schema.__dict__, None, set())
+-+        try:
+-+            # Python 3.12+
+-+            return type_._evaluate(core_schema.__dict__, None, type_params=set(), recursive_guard=set())
+-+        except TypeError:
+-+            # Python 3.9+
+-+            return type_._evaluate(core_schema.__dict__, None, set())
+-     except TypeError:
+-         # for Python 3.8
+-         return type_._evaluate(core_schema.__dict__, None)
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Set-rust-version-from-1.76-to-1.75-in-Cargo.toml.patch b/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Set-rust-version-from-1.76-to-1.75-in-Cargo.toml.patch
 new file mode 100644
-index 0000000000..1c195e294b
+index 0000000000..c4e6f2f6ab
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pydantic-core/0002-Dont-embed-RUSTFLAGS-in-final-binary.patch
-@@ -0,0 +1,47 @@
-+From b3282b301096253a11b1f887f915d0a2a2183597 Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Set-rust-version-from-1.76-to-1.75-in-Cargo.toml.patch
+@@ -0,0 +1,29 @@
++From 6e1852228a2aa38cc76b9a968bba6b603efa5b28 Mon Sep 17 00:00:00 2001
 +From: Frank de Brabander <debrabander@gmail.com>
-+Date: Thu, 8 Aug 2024 08:04:48 +0200
-+Subject: [PATCH] Dont embed RUSTFLAGS in final binary
++Date: Thu, 25 Jul 2024 13:50:44 +0200
++Subject: [PATCH] Set rust version from 1.76 to 1.75 in Cargo.toml
 +
-+Upstream-Status: Backport [https://github.com/pydantic/pydantic-core/commit/e07c41b3bad75948201a2201387225694c2fb501]
++Current openembedded-core uses 1.75 and this packages doesn't actually
++require a newer version.
++
++Upstream-Status: Inappropriate
 +---
-+ build.rs   | 9 +++++++++
-+ src/lib.rs | 5 ++++-
-+ 2 files changed, 13 insertions(+), 1 deletion(-)
++ Cargo.toml | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/build.rs b/build.rs
-+index 7f59e1f..7fe6490 100644
-+--- a/build.rs
-++++ b/build.rs
-+@@ -35,6 +35,15 @@ fn main() {
-+     if let Some(true) = version_check::supports_feature("coverage_attribute") {
-+         println!("cargo:rustc-cfg=has_coverage_attribute");
-+     }
-++
-++    if std::env::var("RUSTFLAGS")
-++        .unwrap_or_default()
-++        .contains("-Cprofile-use=")
-++    {
-++        println!("cargo:rustc-cfg=specified_profile_use");
-++    }
-++    println!("cargo:rustc-check-cfg=cfg(specified_profile_use)");
-++
-+     generate_self_schema();
-+     println!("cargo:rustc-env=PROFILE={}", std::env::var("PROFILE").unwrap());
-+ }
-+diff --git a/src/lib.rs b/src/lib.rs
-+index d55e836..206a7a1 100644
-+--- a/src/lib.rs
-++++ b/src/lib.rs
-+@@ -111,7 +111,10 @@ pub fn build_info() -> String {
-+     format!(
-+         "profile={} pgo={}",
-+         env!("PROFILE"),
-+-        option_env!("RUSTFLAGS").unwrap_or("").contains("-Cprofile-use="),
-++        // We use a `cfg!` here not `env!`/`option_env!` as those would
-++        // embed `RUSTFLAGS` into the generated binary which causes problems
-++        // with reproducable builds.
-++        cfg!(specified_profile_use),
-+     )
-+ }
++diff --git a/Cargo.toml b/Cargo.toml
++index 8f0ea44..10b277c 100644
++--- a/Cargo.toml
+++++ b/Cargo.toml
++@@ -24,7 +24,7 @@ include = [
++     "!tests/.pytest_cache",
++     "!*.so",
++ ]
++-rust-version = "1.76"
+++rust-version = "1.75"
 + 
-diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core_2.18.4.bb b/meta-python/recipes-devtools/python/python3-pydantic-core_2.18.4.bb
-index cd8ebf9c07..58afc6cd1c 100644
---- a/meta-python/recipes-devtools/python/python3-pydantic-core_2.18.4.bb
++ [dependencies]
++ pyo3 = { version = "0.21.2", features = ["generate-import-lib", "num-bigint"] }
++-- 
++2.39.2
++
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb b/meta-python/recipes-devtools/python/python3-pydantic-core_2.18.4.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
+rename to meta-python/recipes-devtools/python/python3-pydantic-core_2.18.4.bb
+index 455df8e4e3..cd8ebf9c07 100644
+--- a/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
 +++ b/meta-python/recipes-devtools/python/python3-pydantic-core_2.18.4.bb
-@@ -8,7 +8,8 @@ HOMEPAGE = "https://github.com/pydantic/pydantic-core"
+@@ -8,9 +8,8 @@ HOMEPAGE = "https://github.com/pydantic/pydantic-core"
  LICENSE = "MIT"
  LIC_FILES_CHKSUM = "file://LICENSE;md5=ab599c188b4a314d2856b3a55030c75c"
  
--SRC_URI += "file://0001-Set-rust-version-from-1.76-to-1.75-in-Cargo.toml.patch"
-+SRC_URI += "file://0001-Set-rust-version-from-1.76-to-1.75-in-Cargo.toml.patch \
-+            file://0002-Dont-embed-RUSTFLAGS-in-final-binary.patch"
- SRC_URI[sha256sum] = "ec3beeada09ff865c344ff3bc2f427f5e6c26401cc6113d77e372c3fdac73864"
+-SRC_URI += "file://0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch \
+-            file://0001-Fix-generate_self_schema-for-Python-3.12-1299.patch"
+-SRC_URI[sha256sum] = "1cac689f80a3abab2d3c0048b29eea5751114054f032a941a32de4c852c59cad"
++SRC_URI += "file://0001-Set-rust-version-from-1.76-to-1.75-in-Cargo.toml.patch"
++SRC_URI[sha256sum] = "ec3beeada09ff865c344ff3bc2f427f5e6c26401cc6113d77e372c3fdac73864"
  
  DEPENDS = "python3-maturin-native python3-typing-extensions"
-@@ -25,7 +26,6 @@ RDEPENDS:${PN} += " \
- "
+ 
+@@ -20,9 +19,13 @@ inherit pypi cargo-update-recipe-crates python_maturin
+ 
+ PYPI_PACKAGE = "pydantic_core"
+ 
+-RDEPENDS:${PN} += "python3-typing-extensions"
++RDEPENDS:${PN} += " \
++    python3-compression \
++    python3-typing-extensions \
++"
  
  INSANE_SKIP:${PN} = "already-stripped"
--INSANE_SKIP:${PN} += "buildpaths"
++INSANE_SKIP:${PN} += "buildpaths"
  
  inherit ptest
  SRC_URI += "file://run-ptest"
