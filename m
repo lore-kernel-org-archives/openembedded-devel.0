@@ -1,90 +1,115 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <esben@geanix.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8433AC52D7B
-	for <webhook@archiver.kernel.org>; Tue, 13 Aug 2024 08:33:21 +0000 (UTC)
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
- by mx.groups.io with SMTP id smtpd.web11.67337.1723537994307838578
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97CA1C52D7C
+	for <webhook@archiver.kernel.org>; Tue, 13 Aug 2024 08:49:31 +0000 (UTC)
+Received: from www530.your-server.de (www530.your-server.de [188.40.30.78])
+ by mx.groups.io with SMTP id smtpd.web11.67566.1723538966553529908
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Aug 2024 01:33:14 -0700
+ Tue, 13 Aug 2024 01:49:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=FBOC/hiC;
- spf=pass (domain: konsulko.com, ip: 209.85.218.54, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-a7ac469e4c4so836671366b.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Aug 2024 01:33:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1723537992; x=1724142792; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=4TvGNM6BGvQKNBHp8gMbDZa3S+9hGZaoYKA4k0TTnzE=;
-        b=FBOC/hiCXj/Tv/wuhFZImooSoEFwpAWH2+mdnbdkKJVM8/RboH8qsN1dfLvFOaNnN4
-         RfxL6NK2+cEN3PoJ/RMWubvlBSWcT4Msp6usEa7C9PFRG1xUqr3W2JTEV8Z/vHAycPE4
-         Tw0bXph6AgkgZFrbLR61Y2emoDFCUpfg6lIOg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723537992; x=1724142792;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=4TvGNM6BGvQKNBHp8gMbDZa3S+9hGZaoYKA4k0TTnzE=;
-        b=sV8ZibT1GFPRBjIEKeXNl/thgmRHDDaOi4dC6GsZ3eUWoeus66jiufXgQGMrGuyeye
-         i1uFWIUmjahXFBnb5QnisUILrz+7uzIrnwMGCYhWX5UH+nqBgd16YXwsqz1+YpnhRtJS
-         cyzlTeBENJXgqwrnkPdSxL/ZLNV9H0SSjda0EyACDUHFxrPqutNWalodn6h6P6frR5zm
-         dIXrZQextz8NZrBtRq8DyKAOuv9MDGyC6np49vTBcnJm31ZqMXZP0o9bz4ekos0oqD/6
-         2fAlEMHF8JleoRLu3P9ew8CML8ja88l9YnwNQVd8JnhTMInsLxnqjMmNlrzz7CV7IXd5
-         dcVA==
-X-Gm-Message-State: AOJu0YyY3efULabI2NQVC7QFu9Tbi7us3ii4Nc+t9PBpr5+ubDfCHBBc
-	hkDXM2oxV47LHVWDZYvBkc9TxkFLDB4eiofb+ujv6u+0GSNQjbu1EbnTKXEZtqHSuSDGfXssgp5
-	f
-X-Google-Smtp-Source: AGHT+IGieSD6fWlrmX/C+9MEO1Tg5j8rzmBWCwGo7CtOl9NkKcn6jAazJ+Xk7siSb/6YMck4MLc+bA==
-X-Received: by 2002:a17:907:d93:b0:a77:ca3b:996c with SMTP id a640c23a62f3a-a80f0b2dc4fmr208674966b.16.1723537991889;
-        Tue, 13 Aug 2024 01:33:11 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a80f4150226sm49202966b.182.2024.08.13.01.33.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Aug 2024 01:33:11 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/2] python3-imageio: Upgrade 2.34.2 -> 2.35.0
-Date: Tue, 13 Aug 2024 11:33:08 +0300
-Message-Id: <20240813083309.3661502-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.2
+ dkim=pass header.i=@geanix.com header.s=default2211 header.b=BuACnTTm;
+ spf=pass (domain: geanix.com, ip: 188.40.30.78, mailfrom: esben@geanix.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=geanix.com;
+	s=default2211; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
+	Message-ID:Date:References:In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID;
+	bh=zuliQ8L0/UX92vmE3/uTRrMd3WIm3+lXKKAMH/EHmx0=; b=BuACnTTmOR2PCuE0EyosIMsZGe
+	eJE40zkwon45Lp5cC4Z5V2ERcw4IWW+1O/UFpFCMRGAxhL3RAeOFoneZzLkh0R1EsI/3eNHhVgrDX
+	+r0LeIO57mEr0DLRNoxpi7bpKoRa7tDsm4yAoyb7EuN7RyEJsqKuije4WU9uWEc8ABQ+vFzmeOtHr
+	kR+ZgWObx+FxzmSOct6XKGE1p0emROXw/rLE/71gU8UBmzU/mUyMzTZ65Nery1Or4HHru9UI/At3w
+	H5+jBzs6kinQXhfASATUHVzmNgSMx9PU55stHNXjo8eHjB0hlK+sI7KqKm7B94hthbnM4XPE8+uo9
+	4yv4P4xg==;
+Received: from sslproxy04.your-server.de ([78.46.152.42])
+	by www530.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	(Exim 4.94.2)
+	(envelope-from <esben@geanix.com>)
+	id 1sdnDX-0009gJ-T2; Tue, 13 Aug 2024 10:49:24 +0200
+Received: from [185.17.218.86] (helo=localhost)
+	by sslproxy04.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <esben@geanix.com>)
+	id 1sdnDY-000BIu-0m;
+	Tue, 13 Aug 2024 10:49:23 +0200
+From: Esben Haabendal <esben@geanix.com>
+To: "Khem Raj" <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [PATCH] netplan: add missing runtime dependencies
+In-Reply-To: <CAMKF1sqEsOQ7F_MYJjah5STHfF-vEHrijELcAuJYnOHw9ApyAQ@mail.gmail.com>
+	(Khem Raj's message of "Mon, 12 Aug 2024 11:51:34 -0700")
+References: <92f616b010f11891d2814eb526aded1e5dcaac3d.1723456138.git.esben@geanix.com>
+	<CAMKF1sqEsOQ7F_MYJjah5STHfF-vEHrijELcAuJYnOHw9ApyAQ@mail.gmail.com>
+Date: Tue, 13 Aug 2024 10:49:23 +0200
+Message-ID: <874j7oq030.fsf@geanix.com>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Authenticated-Sender: esben@geanix.com
+X-Virus-Scanned: Clear (ClamAV 0.103.10/27365/Mon Aug 12 10:41:53 2024)
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 13 Aug 2024 08:33:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111788
+ <openembedded-devel@lists.openembedded.org>; Tue, 13 Aug 2024 08:49:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111790
 
-Upgrade to release 2.35.0:
+"Khem Raj" <raj.khem@gmail.com> writes:
 
-- Ensure video stream is closed when closing the pyAV plugin
+> sadly this did not apply directly on master, but it is needed on
+> master so I have to massage it a bit. Please check master-next and see
+> if all is ok.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../{python3-imageio_2.34.2.bb => python3-imageio_2.35.0.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-imageio_2.34.2.bb => python3-imageio_2.35.0.bb} (81%)
+Looking fine, thanks.
 
-diff --git a/meta-python/recipes-devtools/python/python3-imageio_2.34.2.bb b/meta-python/recipes-devtools/python/python3-imageio_2.35.0.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-imageio_2.34.2.bb
-rename to meta-python/recipes-devtools/python/python3-imageio_2.35.0.bb
-index 5fd08f3bd..92c659e73 100644
---- a/meta-python/recipes-devtools/python/python3-imageio_2.34.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-imageio_2.35.0.bb
-@@ -5,7 +5,7 @@ SECTION = "devel/python"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=24cb9a367a9e641b459a01c4d15256ba"
- 
--SRC_URI[sha256sum] = "5c0c0ee8faa018a1c42f649b90395dd4d3bb6187c09053a0cd6f1fdd51bbff5e"
-+SRC_URI[sha256sum] = "e88f759803d2968e19a55fa8372e9fbe12967a8598fe042d8719ca46d03f4256"
- 
- inherit pypi setuptools3
- 
--- 
-2.39.2
+/Esben
 
+>
+> On Mon, Aug 12, 2024 at 2:52=E2=80=AFAM Esben Haabendal via
+> lists.openembedded.org <esben=3Dgeanix.com@lists.openembedded.org>
+> wrote:
+>>
+>> The json module is used in several cli commands.
+>>
+>> The fcntl module is used in terminal input handling.
+>>
+>> Signed-off-by: Esben Haabendal <esben@geanix.com>
+>> ---
+>>  .../meta-python/recipes-connectivity/netplan/netplan_1.0.bb      | 1 +
+>>  1 file changed, 1 insertion(+)
+>>
+>> diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/net=
+plan/netplan_1.0.bb b/meta-oe/dynamic-layers/meta-python/recipes-connectivi=
+ty/netplan/netplan_1.0.bb
+>> index 229414718c06..cf8d6d19e711 100644
+>> --- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/ne=
+tplan_1.0.bb
+>> +++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/ne=
+tplan_1.0.bb
+>> @@ -34,6 +34,7 @@ EXTRA_OEMESON =3D "-Dunit_testing=3Dfalse"
+>>
+>>  RDEPENDS:${PN} =3D "python3-core python3-netifaces python3-pyyaml \
+>>                    python3-dbus python3-rich python3-cffi \
+>> +                  python3-json python3-fcntl \
+>>                    util-linux-libuuid libnetplan \
+>>                   "
+>>
+>> --
+>> 2.45.2
+>>
+>>
+>>=20
+>>
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#111775): https://lists.openembedded.org/g/openembedde=
+d-devel/message/111775
+> Mute This Topic: https://lists.openembedded.org/mt/107853740/6239652
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [e=
+sben@geanix.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 
