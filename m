@@ -2,56 +2,55 @@ Return-Path: <scott.murray@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 910AEC531DD
-	for <webhook@archiver.kernel.org>; Tue, 13 Aug 2024 16:40:34 +0000 (UTC)
-Received: from mail-ot1-f54.google.com (mail-ot1-f54.google.com [209.85.210.54])
- by mx.groups.io with SMTP id smtpd.web11.76908.1723567231261410804
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F516C52D7C
+	for <webhook@archiver.kernel.org>; Tue, 13 Aug 2024 16:40:44 +0000 (UTC)
+Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com [209.85.160.181])
+ by mx.groups.io with SMTP id smtpd.web11.76909.1723567234157632766
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Aug 2024 09:40:31 -0700
+ Tue, 13 Aug 2024 09:40:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=CijBfOYR;
- spf=pass (domain: konsulko.com, ip: 209.85.210.54, mailfrom: scott.murray@konsulko.com)
-Received: by mail-ot1-f54.google.com with SMTP id 46e09a7af769-7093d565310so4085126a34.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Aug 2024 09:40:31 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=pPqroZUX;
+ spf=pass (domain: konsulko.com, ip: 209.85.160.181, mailfrom: scott.murray@konsulko.com)
+Received: by mail-qt1-f181.google.com with SMTP id d75a77b69052e-44febbc323fso31903931cf.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Aug 2024 09:40:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1723567230; x=1724172030; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1723567233; x=1724172033; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=yOZLJTvCGIipk/HV3mTmp/RlKuDg+kmRlI4rZeDUZBo=;
-        b=CijBfOYR4koyw32nUQrF2ancvG0EVSyJD6R250GNFaWRfXtVJ/GqJr5bMnmbY9qKGX
-         2dNtQesSOPx76BlJBxguYWi2AtWS8HjVSK4PgNy8bxppo4mp2RqXPkIGij/n/KB/g8MK
-         xjcuBX/xouj+eRGbSf7nbgQK8//NgSWouJG5Q=
+        bh=w30T2bkbmaFmRd+e3ATGeNWwu5vSmFLHDPj8/aD7zGU=;
+        b=pPqroZUXEPXhrm7IZfAl08kwXPX9szM3O6UTylzIyi1SINb1XddELn7iqI1Q3FDlnn
+         9vQb6DmZDqADL7O6Pfx036sdnWLEy8stukPqaj+CZ7m8mUbz3rKyFFzYn8OXhfOvVCKa
+         VqslKYzeq69CuWtoJIz1s9Em1JWRhSvNw+ds8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723567230; x=1724172030;
+        d=1e100.net; s=20230601; t=1723567233; x=1724172033;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=yOZLJTvCGIipk/HV3mTmp/RlKuDg+kmRlI4rZeDUZBo=;
-        b=XxwMnViwOIhFdR2HyrzMw9gr//RJBgeaepKnwB5Tq+oUzNcQLUo/zDf4zqwe+uJuSu
-         mrAHPxhMsEIiDY6fk21dqotzxcANmUPOm+8pcbjJcEO+P4LXS/QXpR/TFuWK9983d7Y4
-         NL/ojs4XTF1dN2PQOytZ9oHLk+hrRKcQq+LF9BFPUiXLhnxyqBTORwLIK5Wz+hVR6VRb
-         uigLRcaPKQwdypCki6nWd0EYc70ccnO4Vj5bFvJIutaTCJWWSMMZRILuzZjSTJimACvi
-         J+DO9v6NRNQGGtSrx4Bx7C8spcDjcZHySdZAK9PbzflA8J6oNx8XvEKE/i2LdpwCRwF/
-         zixA==
-X-Gm-Message-State: AOJu0YzdK/PSsZfRoAP4d6e0+Q0c2ZfPdAExLI2sUdxdk1vUTDp4d1Ey
-	pP6PxWLS27FLSmIIatv1fN7ReEzhouz1Ct2PGTdjFayzQaxp7R7GXVliIoFtnzWZdkv2Q5HcQI0
-	U
-X-Google-Smtp-Source: AGHT+IH4sNWIH1VInZB12M4350d7lPmKOXpKx1wftcVKE/NK30eTkdHYbNobiJGv6sYFDZntFEyuAg==
-X-Received: by 2002:a05:6358:60c7:b0:1ac:62de:6c16 with SMTP id e5c5f4694b2df-1b1aab572e8mr2899355d.8.1723567229874;
-        Tue, 13 Aug 2024 09:40:29 -0700 (PDT)
+        bh=w30T2bkbmaFmRd+e3ATGeNWwu5vSmFLHDPj8/aD7zGU=;
+        b=AFgwANB2Cd/9l4amh/mWdAvfAFl0ID2a2/uG66EkiHyhVWDoE3BsUgk4MX18V5emAh
+         uGo0MRZdvBHZMf8Vl253/MpBg/thgE7yyDjxN7Pgoy8xZkxJoMTMrHw0bgNf40/KY/xo
+         UUpBpVHdNRnrZPmV80aHdb26/D+47Z0slD0ylayi5+UmZWLjF/h0wAgE6y2INqKRCH5U
+         u4eQhAJqn8dVZhrYrGIKaa5N6vR/1DJVe0T3hyYhtm1WH80PV0ri/jXqjAVfwNpbq6N+
+         8HLWW1iHS28WJ4/gfrNX56zYn6dosIqcXIIuhhPaS4UVZSXj+rmAXamizkDwKbpvEKM9
+         s2Ug==
+X-Gm-Message-State: AOJu0Yw3cF+bi/JTa8cS9Si11vtXMaRe4Q3kZMiwFc2oP7MI/f84NrKI
+	LTEn8BpMaIZHEH4tfdggfBJPuGjCiu87XIRQLVrXL5BJp2qi9/PiHhyz3R4tP/gTYo+5wtq8NhY
+	M
+X-Google-Smtp-Source: AGHT+IHfrPqZib4rKPGg4dU3/ybQFfa2Q2InCkqypMQDwZjEwVhgxIB7RTVnDwjlUZVQZglgstYk+Q==
+X-Received: by 2002:a05:620a:4085:b0:79f:5d5:1bc1 with SMTP id af79cd13be357-7a4ee409a9amr14384085a.58.1723567232814;
+        Tue, 13 Aug 2024 09:40:32 -0700 (PDT)
 Received: from ghidorah.spiteful.org (107-179-213-3.cpe.teksavvy.com. [107.179.213.3])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-7a4c7e01fb5sm353705185a.99.2024.08.13.09.40.29
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-7a4c7e01fb5sm353705185a.99.2024.08.13.09.40.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Aug 2024 09:40:29 -0700 (PDT)
+        Tue, 13 Aug 2024 09:40:32 -0700 (PDT)
 From: Scott Murray <scott.murray@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Scott Murray <scott.murray@konsulko.com>
-Subject: [meta-python][scarthgap][PATCH v2 1/2] python3-grpcio: Fix build with gcc-14
-Date: Tue, 13 Aug 2024 12:39:54 -0400
-Message-ID: <20240813163955.1683925-2-scott.murray@konsulko.com>
+Cc: Scott Murray <scott.murray@konsulko.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][scarthgap][PATCH v2 2/2] python3-grpcio: backport abseil-cpp RISC-V fix
+Date: Tue, 13 Aug 2024 12:39:55 -0400
+Message-ID: <20240813163955.1683925-3-scott.murray@konsulko.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240813163955.1683925-1-scott.murray@konsulko.com>
 References: <20240813163955.1683925-1-scott.murray@konsulko.com>
@@ -60,157 +59,125 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 13 Aug 2024 16:40:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111794
+ <openembedded-devel@lists.openembedded.org>; Tue, 13 Aug 2024 16:40:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111795
 
-From: Martin Jansa <martin.jansa@gmail.com>
+Backport upstream abseil-cpp fix[1] for SIGILL crash on RISC-V with
+6.6 and newer kernels.  The patch has been tweaked to apply on top
+of the existing patch stack to the vendored copy of abseil-cpp.
 
-* crypto: use _Generic only if !defined(__cplusplus)
+[1]: https://github.com/abseil/abseil-cpp/commit/7335a36d
 
-* fixes build with gcc-14 which has __builtin_addc and __builtin_subc
-  with gcc-13 it was already using the #else branch because of missing builtins
+(cherry-picked from 080287ebe1f6958088871194f8ae5674edd41589)
 
-* fixes
-  https://github.com/grpc/grpc/issues/35945
-  http://errors.yoctoproject.org/Errors/Details/766916/
-
-* _Generic was introduced in boringssl with:
-  https://boringssl.googlesource.com/boringssl/+/70ca6bc24be103dabd68e448cd3af29b929b771d%5E%21/#F4
-
-* but e.g. third_party/boringssl-with-bazel/src/ssl/d1_both.cc includes
-  this internal.h and from the .cc extension gcc will process it as C++
-  where _Generic isn't available, causing:
-
-In file included from third_party/boringssl-with-bazel/src/ssl/d1_both.cc:125:
-third_party/boringssl-with-bazel/src/ssl/../crypto/internal.h: In function 'uint32_t CRYPTO_addc_u32(uint32_t, uint32_t, uint32_t, uint32_t*)':
-third_party/boringssl-with-bazel/src/ssl/../crypto/internal.h:1159:7: error: expected primary-expression before 'unsigned'
- 1159 |       unsigned: __builtin_addc,                     \
-      |       ^~~~~~~~
-third_party/boringssl-with-bazel/src/ssl/../crypto/internal.h:1166:10: note: in expansion of macro 'CRYPTO_GENERIC_ADDC'
- 1166 |   return CRYPTO_GENERIC_ADDC(x, y, carry, out_carry);
-      |          ^~~~~~~~~~~~~~~~~~~
-third_party/boringssl-with-bazel/src/ssl/../crypto/internal.h:1160:7: error: expected primary-expression before 'unsigned'
- 1160 |       unsigned long: __builtin_addcl,               \
-      |       ^~~~~~~~
-third_party/boringssl-with-bazel/src/ssl/../crypto/internal.h:1166:10: note: in expansion of macro 'CRYPTO_GENERIC_ADDC'
- 1166 |   return CRYPTO_GENERIC_ADDC(x, y, carry, out_carry);
-      |          ^~~~~~~~~~~~~~~~~~~
-third_party/boringssl-with-bazel/src/ssl/../crypto/internal.h:1161:7: error: expected primary-expression before 'unsigned'
- 1161 |       unsigned long long: __builtin_addcll))((x), (y), (carry), (out_carry))
-      |       ^~~~~~~~
-third_party/boringssl-with-bazel/src/ssl/../crypto/internal.h:1166:10: note: in expansion of macro 'CRYPTO_GENERIC_ADDC'
- 1166 |   return CRYPTO_GENERIC_ADDC(x, y, carry, out_carry);
-      |          ^~~~~~~~~~~~~~~~~~~
-third_party/boringssl-with-bazel/src/ssl/../crypto/internal.h:1158:4: error: '_Generic' was not declared in this scope
- 1158 |   (_Generic((x),                                    \
-      |    ^~~~~~~~
-third_party/boringssl-with-bazel/src/ssl/../crypto/internal.h:1166:10: note: in expansion of macro 'CRYPTO_GENERIC_ADDC'
- 1166 |   return CRYPTO_GENERIC_ADDC(x, y, carry, out_carry);
-      |          ^~~~~~~~~~~~~~~~~~~
-
-(cherry picked from commit 5778e32eae201072c5dc37c9db67dc1848ffb9de)
-
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Scott Murray <scott.murray@konsulko.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ..._Generic-only-if-defined-__cplusplus.patch | 74 +++++++++++++++++++
+ ...aledcycleclock-remove-RISC-V-support.patch | 82 +++++++++++++++++++
  .../python/python3-grpcio_1.62.2.bb           |  1 +
- 2 files changed, 75 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-grpcio/0001-crypto-use-_Generic-only-if-defined-__cplusplus.patch
+ 2 files changed, 83 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-grpcio/0001-PR-1644-unscaledcycleclock-remove-RISC-V-support.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio/0001-crypto-use-_Generic-only-if-defined-__cplusplus.patch b/meta-python/recipes-devtools/python/python3-grpcio/0001-crypto-use-_Generic-only-if-defined-__cplusplus.patch
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio/0001-PR-1644-unscaledcycleclock-remove-RISC-V-support.patch b/meta-python/recipes-devtools/python/python3-grpcio/0001-PR-1644-unscaledcycleclock-remove-RISC-V-support.patch
 new file mode 100644
-index 000000000..d830d9228
+index 000000000..82f15f88c
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-grpcio/0001-crypto-use-_Generic-only-if-defined-__cplusplus.patch
-@@ -0,0 +1,74 @@
-+From 3359a87a71307336100b84e66b69bad385cd3cfc Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <martin.jansa@gmail.com>
-+Date: Mon, 6 May 2024 01:36:39 +0200
-+Subject: [PATCH] crypto: use _Generic only if !defined(__cplusplus)
++++ b/meta-python/recipes-devtools/python/python3-grpcio/0001-PR-1644-unscaledcycleclock-remove-RISC-V-support.patch
+@@ -0,0 +1,82 @@
++From 7335a36d0b5c1c597566f9aa3f458a5b6817c3b4 Mon Sep 17 00:00:00 2001
++From: aurel32 <aurelien@aurel32.net>
++Date: Fri, 22 Mar 2024 14:21:13 -0700
++Subject: [PATCH] PR #1644: unscaledcycleclock: remove RISC-V support
 +
-+* fixes build with gcc-14 which has __builtin_addc and __builtin_subc
-+  with gcc-13 it was already using the #else branch because of missing builtins
++Imported from GitHub PR https://github.com/abseil/abseil-cpp/pull/1644
 +
-+* fixes
-+  https://github.com/grpc/grpc/issues/35945
++Starting with Linux 6.6 [1], RDCYCLE is a privileged instruction on RISC-V and can't be used directly from userland. There is a sysctl option to change that as a transition period, but it will eventually disappear.
 +
-+* _Generic was introduced in boringssl with:
-+  https://boringssl.googlesource.com/boringssl/+/70ca6bc24be103dabd68e448cd3af29b929b771d%5E%21/#F4
++The RDTIME instruction is another less accurate alternative, however its frequency varies from board to board, and there is currently now way to get its frequency from userland [2].
 +
-+* but e.g. third_party/boringssl-with-bazel/src/ssl/d1_both.cc includes
-+  this internal.h and from the .cc extension gcc will process it as C++
-+  where _Generic isn't available, causing:
++Therefore this patch just removes the code for unscaledcycleclock on RISC-V. Without processor specific implementation, abseil relies on std::chrono::steady_clock::now().time_since_epoch() which is basically a wrapper around clock_gettime (CLOCK_MONOTONIC), which in turns use __vdso_clock_gettime(). On RISC-V this VDSO is just a wrapper around RDTIME correctly scaled to use nanoseconds units.
 +
-+In file included from third_party/boringssl-with-bazel/src/ssl/d1_both.cc:125:
-+third_party/boringssl-with-bazel/src/ssl/../crypto/internal.h: In function 'uint32_t CRYPTO_addc_u32(uint32_t, uint32_t, uint32_t, uint32_t*)':
-+third_party/boringssl-with-bazel/src/ssl/../crypto/internal.h:1159:7: error: expected primary-expression before 'unsigned'
-+ 1159 |       unsigned: __builtin_addc,                     \
-+      |       ^~~~~~~~
-+third_party/boringssl-with-bazel/src/ssl/../crypto/internal.h:1166:10: note: in expansion of macro 'CRYPTO_GENERIC_ADDC'
-+ 1166 |   return CRYPTO_GENERIC_ADDC(x, y, carry, out_carry);
-+      |          ^~~~~~~~~~~~~~~~~~~
-+third_party/boringssl-with-bazel/src/ssl/../crypto/internal.h:1160:7: error: expected primary-expression before 'unsigned'
-+ 1160 |       unsigned long: __builtin_addcl,               \
-+      |       ^~~~~~~~
-+third_party/boringssl-with-bazel/src/ssl/../crypto/internal.h:1166:10: note: in expansion of macro 'CRYPTO_GENERIC_ADDC'
-+ 1166 |   return CRYPTO_GENERIC_ADDC(x, y, carry, out_carry);
-+      |          ^~~~~~~~~~~~~~~~~~~
-+third_party/boringssl-with-bazel/src/ssl/../crypto/internal.h:1161:7: error: expected primary-expression before 'unsigned'
-+ 1161 |       unsigned long long: __builtin_addcll))((x), (y), (carry), (out_carry))
-+      |       ^~~~~~~~
-+third_party/boringssl-with-bazel/src/ssl/../crypto/internal.h:1166:10: note: in expansion of macro 'CRYPTO_GENERIC_ADDC'
-+ 1166 |   return CRYPTO_GENERIC_ADDC(x, y, carry, out_carry);
-+      |          ^~~~~~~~~~~~~~~~~~~
-+third_party/boringssl-with-bazel/src/ssl/../crypto/internal.h:1158:4: error: '_Generic' was not declared in this scope
-+ 1158 |   (_Generic((x),                                    \
-+      |    ^~~~~~~~
-+third_party/boringssl-with-bazel/src/ssl/../crypto/internal.h:1166:10: note: in expansion of macro 'CRYPTO_GENERIC_ADDC'
-+ 1166 |   return CRYPTO_GENERIC_ADDC(x, y, carry, out_carry);
-+      |          ^~~~~~~~~~~~~~~~~~~
++This fixes the testsuite on riscv64, tested on a VisionFive 2 board.
 +
-+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
++[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=cc4c07c89aada16229084eeb93895c95b7eabaa3
++[2] https://github.com/abseil/abseil-cpp/pull/1631
++Merge 43356a2548cfde76e164d446cb69004b488c6a71 into 76f8011beabdaee872b5fde7546e02407b220cb1
++
++Merging this change closes #1644
++
++COPYBARA_INTEGRATE_REVIEW=https://github.com/abseil/abseil-cpp/pull/1644 from aurel32:rv64-no-unscaledcycleclock 43356a2548cfde76e164d446cb69004b488c6a71
++PiperOrigin-RevId: 618286262
++Change-Id: Ie4120a727e7d0bb185df6e06ea145c780ebe6652
++
++Upstream-Status: Backport [https://github.com/abseil/abseil-cpp/commit/7335a36d]
++[Adapted to apply on top of meta-oe's patch stack]
++Signed-off-by: Scott Murray <scott.murray@konsulko.com>
 +---
-+Upstream-Status: Submitted [https://boringssl-review.googlesource.com/c/boringssl/+/68227 crypto: use _Generic only if !defined(__cplusplus)]
++ .../absl/base/internal/unscaledcycleclock.cc         | 12 ------------
++ .../absl/base/internal/unscaledcycleclock_config.h   |  5 ++---
++ 2 files changed, 2 insertions(+), 15 deletions(-)
 +
-+ crypto/internal.h | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++diff --git a/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock.cc b/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock.cc
++index f11fecb..103b4f6 100644
++--- a/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock.cc
+++++ b/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock.cc
++@@ -121,18 +121,6 @@ double UnscaledCycleClock::Frequency() {
++   return aarch64_timer_frequency;
++ }
++ 
++-#elif defined(__riscv)
++-
++-int64_t UnscaledCycleClock::Now() {
++-  int64_t virtual_timer_value;
++-  asm volatile("rdcycle %0" : "=r"(virtual_timer_value));
++-  return virtual_timer_value;
++-}
++-
++-double UnscaledCycleClock::Frequency() {
++-  return base_internal::NominalCPUFrequency();
++-}
++-
++ #elif defined(_M_IX86) || defined(_M_X64)
++ 
++ #pragma intrinsic(__rdtsc)
++diff --git a/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock_config.h b/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock_config.h
++index 5e232c1..83552fc 100644
++--- a/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock_config.h
+++++ b/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock_config.h
++@@ -22,7 +22,6 @@
++ // The following platforms have an implementation of a hardware counter.
++ #if defined(__i386__) || defined(__x86_64__) || defined(__aarch64__) || \
++     ((defined(__powerpc__) || defined(__ppc__)) && defined(__GLIBC__)) || \
++-    defined(__riscv) ||     \
++     defined(_M_IX86) || (defined(_M_X64) && !defined(_M_ARM64EC))
++ #define ABSL_HAVE_UNSCALED_CYCLECLOCK_IMPLEMENTATION 1
++ #else
++@@ -54,8 +53,8 @@
++ #if ABSL_USE_UNSCALED_CYCLECLOCK
++ // This macro can be used to test if UnscaledCycleClock::Frequency()
++ // is NominalCPUFrequency() on a particular platform.
++-#if (defined(__i386__) || defined(__x86_64__) || defined(__riscv) || \
++-     defined(_M_IX86) || defined(_M_X64))
+++#if (defined(__i386__) || defined(__x86_64__) || defined(_M_IX86) || \
+++     defined(_M_X64))
++ #define ABSL_INTERNAL_UNSCALED_CYCLECLOCK_FREQUENCY_IS_CPU_FREQUENCY
++ #endif
++ #endif
++-- 
++2.44.0
 +
-+diff --git a/crypto/internal.h b/crypto/internal.h
-+index a77102d76..30d6826dd 100644
-+--- a/crypto/internal.h
-++++ b/crypto/internal.h
-+@@ -1176,7 +1176,7 @@ static inline uint64_t CRYPTO_rotr_u64(uint64_t value, int shift) {
-+ 
-+ // CRYPTO_addc_* returns |x + y + carry|, and sets |*out_carry| to the carry
-+ // bit. |carry| must be zero or one.
-+-#if OPENSSL_HAS_BUILTIN(__builtin_addc)
-++#if OPENSSL_HAS_BUILTIN(__builtin_addc) && !defined(__cplusplus)
-+ 
-+ #define CRYPTO_GENERIC_ADDC(x, y, carry, out_carry) \
-+   (_Generic((x),                                    \
-+@@ -1228,7 +1228,7 @@ static inline uint64_t CRYPTO_addc_u64(uint64_t x, uint64_t y, uint64_t carry,
-+ 
-+ // CRYPTO_subc_* returns |x - y - borrow|, and sets |*out_borrow| to the borrow
-+ // bit. |borrow| must be zero or one.
-+-#if OPENSSL_HAS_BUILTIN(__builtin_subc)
-++#if OPENSSL_HAS_BUILTIN(__builtin_subc) && !defined(__cplusplus)
-+ 
-+ #define CRYPTO_GENERIC_SUBC(x, y, borrow, out_borrow) \
-+   (_Generic((x),                                      \
 diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb
-index 80a4d04e6..47f3b2ea2 100644
+index 47f3b2ea2..59bfbf553 100644
 --- a/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb
 +++ b/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb
-@@ -9,6 +9,7 @@ DEPENDS += "python3-protobuf"
- SRC_URI += "file://0001-Include-missing-cstdint-header.patch \
-            file://abseil-ppc-fixes.patch \
+@@ -11,6 +11,7 @@ SRC_URI += "file://0001-Include-missing-cstdint-header.patch \
             file://0001-zlib-Include-unistd.h-for-open-close-C-APIs.patch \
-+           file://0001-crypto-use-_Generic-only-if-defined-__cplusplus.patch;patchdir=third_party/boringssl-with-bazel/src/ \
+            file://0001-crypto-use-_Generic-only-if-defined-__cplusplus.patch;patchdir=third_party/boringssl-with-bazel/src/ \
             file://0001-target.h-define-proper-macro-for-ppc-ppc64.patch \
++           file://0001-PR-1644-unscaledcycleclock-remove-RISC-V-support.patch \
             "
  SRC_URI[sha256sum] = "c77618071d96b7a8be2c10701a98537823b9c65ba256c0b9067e0594cdbd954d"
+ 
 -- 
 2.45.2
 
