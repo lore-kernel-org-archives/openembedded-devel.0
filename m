@@ -1,74 +1,298 @@
-Return-Path: <debrabander@gmail.com>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 39FE1C3DA4A
-	for <webhook@archiver.kernel.org>; Wed, 14 Aug 2024 04:08:28 +0000 (UTC)
-Received: from mail-lj1-f179.google.com (mail-lj1-f179.google.com [209.85.208.179])
- by mx.groups.io with SMTP id smtpd.web10.90340.1723608501649243411
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8992BC52D7D
+	for <webhook@archiver.kernel.org>; Wed, 14 Aug 2024 05:16:48 +0000 (UTC)
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.web10.91044.1723612599690045667
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Aug 2024 21:08:22 -0700
+ Tue, 13 Aug 2024 22:16:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=X+rrHPMR;
- spf=pass (domain: gmail.com, ip: 209.85.208.179, mailfrom: debrabander@gmail.com)
-Received: by mail-lj1-f179.google.com with SMTP id 38308e7fff4ca-2ef27bfd15bso68228021fa.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Aug 2024 21:08:21 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=WyjzExDk;
+ spf=pass (domain: mvista.com, ip: 209.85.210.179, mailfrom: hprajapati@mvista.com)
+Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-70d399da0b5so5120407b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Aug 2024 22:16:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1723608500; x=1724213300; darn=lists.openembedded.org;
-        h=to:in-reply-to:cc:references:message-id:date:subject:mime-version
-         :from:content-transfer-encoding:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=O51FQgeiE1XUtz2xuBPjFuCgWxImGi8FpaVnA0C1WoI=;
-        b=X+rrHPMRh8MCNTq9NpoSm/iyUD7+0pKaBhsaWVkCguYkkLw+NiMEWqQRXTWbkuqQ2y
-         tlaGOlVMAirgDFn/axIvs6c2MOFDSCmY8+8ioVQ6DAbSlBkRG75Odmbixv8kA8uvJiyV
-         80UPvtPEtLoExPsEJWvoJZIQjJPfXaE/tnc0iGK4s+GDyubUIWYEnA5xaS3Y0w8pCUVo
-         ZUK61KYNXi8MwHBMdJPninY8m0XdhibXNDDKIrGZzXEr/JzFgIkmqJBpMB1wSYdWQQAu
-         XrkNdVucSOFKih7H/SUqzpUJSsdImKpZ+bf7tgMMDFeu2bWRlfsLOu3HHSD4RE7DR225
-         oGww==
+        d=mvista.com; s=google; t=1723612599; x=1724217399; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=3/2i8YHv6o7n3GOB6L+SWNQymXK8bdSmuwTq99PRY9k=;
+        b=WyjzExDk9Xrv6dK3Z12EOekHao1hm2q2MVp7DRZpwYPq19FjceEyseUFnTOrR+U+ek
+         tb2/eebhu+MapkEqOLIE1qVKfgJbUxZ3YIbxm9lzRa6SBC4lbWnd6fMuJkpVbAf+7Ava
+         BJ0kpKX5H/VQ/++18euSRzNmpFuenwW7g5V44=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723608500; x=1724213300;
-        h=to:in-reply-to:cc:references:message-id:date:subject:mime-version
-         :from:content-transfer-encoding:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=O51FQgeiE1XUtz2xuBPjFuCgWxImGi8FpaVnA0C1WoI=;
-        b=TPBtPKkbU4KK67YNF1zqMM4CImXhrjMuZGa5oicJSQq68BjO2P0IGVn8ytPQx0AXMv
-         0B7364/lXC7RD1LIOUq15cgvThtBfgiDNA0LM+N1Jt7DJKgX+gHHo0c190CFXI8aUTTA
-         3PTRaXlyxqI5iLHBtbYP4GPiZJWQp7tacEv3ZW2+zPrTDxdVCoR4vNrJevBvFqVtd4MA
-         E+lR3YhvJvhc39JVOoYFpt53QmX/Aq1g0xRKtLywKaJW+ufsY34E7auYlrBrzRgromsP
-         VkxG82Z0NAaG0NDTYKzlfeICN5bbUGC95dJ47SDlnXywO8SZMbKMEFtqC2CMtAH8a5kj
-         t1ew==
-X-Forwarded-Encrypted: i=1; AJvYcCWSG4M9b9GQcu+ihleiTaaZD0UfVZde2C/nl4CZxLAQQC4Ev7pDCoVDsHolV0wZjhVmcVr/uSXFkY0E+nffmLbTgXdZQrsZCoNQ7FJNPN7j5px/zbdSKEmCNQ==
-X-Gm-Message-State: AOJu0Yz+OWhSbUv6ZBzmfNMYZ4odWgKMs+Ar9aOnw5a092pKFOx4mShd
-	s8lkMTVh7p7RpuENfUXynQjKqDDluaBW9o4dTMB+JAt2v+a2P1yJ
-X-Google-Smtp-Source: AGHT+IEADp1CFDZvWHlW1T9a22YA76Wyz8PNRKsvFALg7VAqmnlcjCBy7KdCc3SddLi6SxsuYwJYkw==
-X-Received: by 2002:a2e:b890:0:b0:2ef:2bb4:45d with SMTP id 38308e7fff4ca-2f3aa1a3c2amr9224641fa.9.1723608499420;
-        Tue, 13 Aug 2024 21:08:19 -0700 (PDT)
-Received: from smtpclient.apple (148-156-172-081.dynamic.caiway.nl. [81.172.156.148])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a80f414e0fdsm122937166b.161.2024.08.13.21.08.18
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 13 Aug 2024 21:08:18 -0700 (PDT)
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-From: Frank de Brabander <debrabander@gmail.com>
-Mime-Version: 1.0 (1.0)
-Subject: Re: [oe] [meta-python][scarthgap][PATCH] python3-pydantic-core: upgrade 2.16.3 -> 2.18.1
-Date: Wed, 14 Aug 2024 06:08:05 +0200
-Message-Id: <C09FA63B-2B46-4B0C-9D72-25AAF014935A@gmail.com>
-References: <CANx9H-BtPB4RwF1RZB4mc_oV0wzRnicM3TYCw0cvtCGMBzfY=g@mail.gmail.com>
-Cc: akuster808@gmail.com, Khem Raj <raj.khem@gmail.com>, dev@g0hl1n.net,
- openembedded-devel@lists.openembedded.org, tim.orling@konsulko.com
-In-Reply-To: <CANx9H-BtPB4RwF1RZB4mc_oV0wzRnicM3TYCw0cvtCGMBzfY=g@mail.gmail.com>
-To: Tim Orling <ticotimo@gmail.com>
-X-Mailer: iPad Mail (21F90)
+        d=1e100.net; s=20230601; t=1723612599; x=1724217399;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=3/2i8YHv6o7n3GOB6L+SWNQymXK8bdSmuwTq99PRY9k=;
+        b=OD2Z3f6ZG4f/EKDRuLBH2LNW+Ygw5UjlORdCi1QnxXgNbgLWuqP/TZfhByxbH8gmhI
+         SUIZCTzjWC+cj0V7TP/EjyEDm/K8/3oLoyMccHb7AAJ3Lr8JonWBDQYyQsAXr+WgwfCc
+         KsVfNDEbRXJmNblNhSi5G5xfH4ggfgaZ6XaXMEVnWHhfOaqI4495sIkPO1BY/D1gOO0H
+         LhfcshLK5EMoGH3/GsbRG5I+nbu8k4gYv8f/GvBH3deih4YwhX2vyS9Lcfe+3TUJU5b3
+         1IkHrpKUY7hOrb687PKEwwgwJ61+rErOqcYN/d21wOi1tyS96wMmaxrLCZn1pH9HNX9i
+         FksA==
+X-Gm-Message-State: AOJu0YySYtPqoCV/qtBGnO9uPnO7Grn4HQG5SpcNblZnKgpdjfnLQfHr
+	Nj0Sd1kWyeocwsJGjh4lmUB2ES8Fl07sXZ76pqSoKzJ/6Tw58CpGazvdzmBujbeDQBQLlGQn4hR
+	V
+X-Google-Smtp-Source: AGHT+IEhOTGe3nhaifJovlbOzPPaVPyAEitdHtCgDPuKiPkvjMXr3Ab9Spsbb+ZOwYwp09yXG3YaQg==
+X-Received: by 2002:a05:6a00:181d:b0:70e:9383:e166 with SMTP id d2e1a72fcca58-712673eda81mr2297174b3a.29.1723612598809;
+        Tue, 13 Aug 2024 22:16:38 -0700 (PDT)
+Received: from MVIN00016.mvista.com ([150.129.170.247])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-710e5a7e30bsm6781962b3a.145.2024.08.13.22.16.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 13 Aug 2024 22:16:38 -0700 (PDT)
+From: Hitendra Prajapati <hprajapati@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-oe][kirkstone][PATCH] krb5: fix CVE-2024-26458 and CVE-2024-26461
+Date: Wed, 14 Aug 2024 10:46:20 +0530
+Message-Id: <20240814051620.5726-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Aug 2024 04:08:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111796
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Aug 2024 05:16:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111797
 
-So now that master is updated, what are the ideas for fixing the incompatibi=
-lity issues with pydantic amd pydantic-core for the scarthgap branch?
+Upstream-Status: Backport from https://github.com/krb5/krb5/commit/c5f9c816107f70139de11b38aa02db2f1774ee0d
 
-Regards,
-Frank=
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+---
+ .../krb5/CVE-2024-26458_CVE-2024-26461.patch  | 207 ++++++++++++++++++
+ .../recipes-connectivity/krb5/krb5_1.17.2.bb  |   1 +
+ 2 files changed, 208 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/CVE-2024-26458_CVE-2024-26461.patch
+
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5/CVE-2024-26458_CVE-2024-26461.patch b/meta-oe/recipes-connectivity/krb5/krb5/CVE-2024-26458_CVE-2024-26461.patch
+new file mode 100644
+index 0000000000..10e6a92f46
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/krb5/krb5/CVE-2024-26458_CVE-2024-26461.patch
+@@ -0,0 +1,207 @@
++From c5f9c816107f70139de11b38aa02db2f1774ee0d Mon Sep 17 00:00:00 2001
++From: Greg Hudson <ghudson@mit.edu>
++Date: Tue, 5 Mar 2024 19:53:07 -0500
++Subject: [PATCH] Fix two unlikely memory leaks
++
++In gss_krb5int_make_seal_token_v3(), one of the bounds checks (which
++could probably never be triggered) leaks plain.data.  Fix this leak
++and use current practices for cleanup throughout the function.
++
++In xmt_rmtcallres() (unused within the tree and likely elsewhere),
++store port_ptr into crp->port_ptr as soon as it is allocated;
++otherwise it could leak if the subsequent xdr_u_int32() operation
++fails.
++
++Upstream-Status: Backport [https://github.com/krb5/krb5/commit/c5f9c816107f70139de11b38aa02db2f1774ee0d]
++CVE: CVE-2024-26458 CVE-2024-26461
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++---
++ src/lib/gssapi/krb5/k5sealv3.c | 56 +++++++++++++++-------------------
++ src/lib/rpc/pmap_rmt.c         |  9 +++---
++ 2 files changed, 29 insertions(+), 36 deletions(-)
++
++diff --git a/src/lib/gssapi/krb5/k5sealv3.c b/src/lib/gssapi/krb5/k5sealv3.c
++index 48fc508..606fa6d 100644
++--- a/src/lib/gssapi/krb5/k5sealv3.c
+++++ b/src/lib/gssapi/krb5/k5sealv3.c
++@@ -65,7 +65,7 @@ gss_krb5int_make_seal_token_v3 (krb5_context context,
++                                 int conf_req_flag, int toktype)
++ {
++     size_t bufsize = 16;
++-    unsigned char *outbuf = 0;
+++    unsigned char *outbuf = NULL;
++     krb5_error_code err;
++     int key_usage;
++     unsigned char acceptor_flag;
++@@ -75,9 +75,13 @@ gss_krb5int_make_seal_token_v3 (krb5_context context,
++ #endif
++     size_t ec;
++     unsigned short tok_id;
++-    krb5_checksum sum;
+++    krb5_checksum sum = { 0 };
++     krb5_key key;
++     krb5_cksumtype cksumtype;
+++    krb5_data plain = empty_data();
+++
+++    token->value = NULL;
+++    token->length = 0;
++ 
++     acceptor_flag = ctx->initiate ? 0 : FLAG_SENDER_IS_ACCEPTOR;
++     key_usage = (toktype == KG_TOK_WRAP_MSG
++@@ -107,14 +111,15 @@ gss_krb5int_make_seal_token_v3 (krb5_context context,
++ #endif
++ 
++     if (toktype == KG_TOK_WRAP_MSG && conf_req_flag) {
++-        krb5_data plain;
++         krb5_enc_data cipher;
++         size_t ec_max;
++         size_t encrypt_size;
++ 
++         /* 300: Adds some slop.  */
++-        if (SIZE_MAX - 300 < message->length)
++-            return ENOMEM;
+++        if (SIZE_MAX - 300 < message->length) {
+++            err = ENOMEM;
+++            goto cleanup;
+++        }
++         ec_max = SIZE_MAX - message->length - 300;
++         if (ec_max > 0xffff)
++             ec_max = 0xffff;
++@@ -126,20 +131,20 @@ gss_krb5int_make_seal_token_v3 (krb5_context context,
++ #endif
++         err = alloc_data(&plain, message->length + 16 + ec);
++         if (err)
++-            return err;
+++            goto cleanup;
++ 
++         /* Get size of ciphertext.  */
++         encrypt_size = krb5_encrypt_size(plain.length, key->keyblock.enctype);
++         if (encrypt_size > SIZE_MAX / 2) {
++             err = ENOMEM;
++-            goto error;
+++            goto cleanup;
++         }
++         bufsize = 16 + encrypt_size;
++         /* Allocate space for header plus encrypted data.  */
++         outbuf = gssalloc_malloc(bufsize);
++         if (outbuf == NULL) {
++-            free(plain.data);
++-            return ENOMEM;
+++            err = ENOMEM;
+++            goto cleanup;
++         }
++ 
++         /* TOK_ID */
++@@ -165,11 +170,8 @@ gss_krb5int_make_seal_token_v3 (krb5_context context,
++         cipher.ciphertext.length = bufsize - 16;
++         cipher.enctype = key->keyblock.enctype;
++         err = krb5_k_encrypt(context, key, key_usage, 0, &plain, &cipher);
++-        zap(plain.data, plain.length);
++-        free(plain.data);
++-        plain.data = 0;
++         if (err)
++-            goto error;
+++            goto cleanup;
++ 
++         /* Now that we know we're returning a valid token....  */
++         ctx->seq_send++;
++@@ -182,7 +184,6 @@ gss_krb5int_make_seal_token_v3 (krb5_context context,
++         /* If the rotate fails, don't worry about it.  */
++ #endif
++     } else if (toktype == KG_TOK_WRAP_MSG && !conf_req_flag) {
++-        krb5_data plain;
++         size_t cksumsize;
++ 
++         /* Here, message is the application-supplied data; message2 is
++@@ -194,21 +195,19 @@ gss_krb5int_make_seal_token_v3 (krb5_context context,
++     wrap_with_checksum:
++         err = alloc_data(&plain, message->length + 16);
++         if (err)
++-            return err;
+++            goto cleanup;
++ 
++         err = krb5_c_checksum_length(context, cksumtype, &cksumsize);
++         if (err)
++-            goto error;
+++            goto cleanup;
++ 
++         assert(cksumsize <= 0xffff);
++ 
++         bufsize = 16 + message2->length + cksumsize;
++         outbuf = gssalloc_malloc(bufsize);
++         if (outbuf == NULL) {
++-            free(plain.data);
++-            plain.data = 0;
++             err = ENOMEM;
++-            goto error;
+++            goto cleanup;
++         }
++ 
++         /* TOK_ID */
++@@ -240,23 +239,15 @@ gss_krb5int_make_seal_token_v3 (krb5_context context,
++         if (message2->length)
++             memcpy(outbuf + 16, message2->value, message2->length);
++ 
++-        sum.contents = outbuf + 16 + message2->length;
++-        sum.length = cksumsize;
++-
++         err = krb5_k_make_checksum(context, cksumtype, key,
++                                    key_usage, &plain, &sum);
++-        zap(plain.data, plain.length);
++-        free(plain.data);
++-        plain.data = 0;
++         if (err) {
++             zap(outbuf,bufsize);
++-            goto error;
+++            goto cleanup;
++         }
++         if (sum.length != cksumsize)
++             abort();
++         memcpy(outbuf + 16 + message2->length, sum.contents, cksumsize);
++-        krb5_free_checksum_contents(context, &sum);
++-        sum.contents = 0;
++         /* Now that we know we're actually generating the token...  */
++         ctx->seq_send++;
++ 
++@@ -286,12 +277,13 @@ gss_krb5int_make_seal_token_v3 (krb5_context context,
++ 
++     token->value = outbuf;
++     token->length = bufsize;
++-    return 0;
+++    outbuf = NULL;
+++    err = 0;
++ 
++-error:
+++cleanup:
+++    krb5_free_checksum_contents(context, &sum);
+++    zapfree(plain.data, plain.length);
++     gssalloc_free(outbuf);
++-    token->value = NULL;
++-    token->length = 0;
++     return err;
++ }
++ 
++diff --git a/src/lib/rpc/pmap_rmt.c b/src/lib/rpc/pmap_rmt.c
++index 8c7e30c..0748af3 100644
++--- a/src/lib/rpc/pmap_rmt.c
+++++ b/src/lib/rpc/pmap_rmt.c
++@@ -160,11 +160,12 @@ xdr_rmtcallres(
++ 	caddr_t port_ptr;
++ 
++ 	port_ptr = (caddr_t)(void *)crp->port_ptr;
++-	if (xdr_reference(xdrs, &port_ptr, sizeof (uint32_t),
++-	    xdr_u_int32) && xdr_u_int32(xdrs, &crp->resultslen)) {
++-		crp->port_ptr = (uint32_t *)(void *)port_ptr;
+++	if (!xdr_reference(xdrs, &port_ptr, sizeof (uint32_t),
+++			   (xdrproc_t)xdr_u_int32))
+++		return (FALSE);
+++	crp->port_ptr = (uint32_t *)(void *)port_ptr;
+++	if (xdr_u_int32(xdrs, &crp->resultslen))
++ 		return ((*(crp->xdr_results))(xdrs, crp->results_ptr));
++-	}
++ 	return (FALSE);
++ }
++ 
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb
+index ef256179fe..4c86bd94f5 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb
+@@ -36,6 +36,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
+            file://CVE-2023-36054.patch;striplevel=2 \
+            file://CVE-2024-37370_37371-pre1.patch;striplevel=2 \
+            file://CVE-2024-37370_37371.patch;striplevel=2 \
++           file://CVE-2024-26458_CVE-2024-26461.patch;striplevel=2 \
+ "
+ SRC_URI[md5sum] = "aa4337fffa3b61f22dbd0167f708818f"
+ SRC_URI[sha256sum] = "1a4bba94df92f6d39a197a10687653e8bfbc9a2076e129f6eb92766974f86134"
+-- 
+2.25.1
+
 
