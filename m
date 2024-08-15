@@ -2,99 +2,105 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E838C531DD
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76371C52D7F
 	for <webhook@archiver.kernel.org>; Thu, 15 Aug 2024 06:31:07 +0000 (UTC)
-Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com [209.85.167.42])
- by mx.groups.io with SMTP id smtpd.web10.117290.1723703461950219501
+Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com [209.85.208.177])
+ by mx.groups.io with SMTP id smtpd.web10.117289.1723703460480323965
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Aug 2024 23:31:02 -0700
+ Wed, 14 Aug 2024 23:31:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=HbwwlAUQ;
- spf=pass (domain: konsulko.com, ip: 209.85.167.42, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-lf1-f42.google.com with SMTP id 2adb3069b0e04-52ed741fe46so629291e87.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Aug 2024 23:31:01 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=YPMRacUQ;
+ spf=pass (domain: konsulko.com, ip: 209.85.208.177, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-lj1-f177.google.com with SMTP id 38308e7fff4ca-2ef27bfd15bso7542251fa.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Aug 2024 23:31:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1723703460; x=1724308260; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=uNZmB8JeL5BUwkZdsWGFVmhs63EvGCFctUq1BvMgR3c=;
-        b=HbwwlAUQUpqu/Rn8Sl3kt7ea78e0BSLkjYEJYR2QlotYA6f8XqH4o3+SFDKp1DJVv+
-         sn5g8RPMl57iZc7vuPp5cwX/J3KQ48/QLGUtDFxRW1ijCIw3uUzD4XLd4yYHliD9wCv2
-         kLnPI+9GUsJenHjRgx6YZIfUJFTozCD9cK1Jo=
+        d=konsulko.com; s=google; t=1723703458; x=1724308258; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=y2T/aRM4vGdDznv6knLxrF9FmgV2QMCT2NDSvqBJ1hc=;
+        b=YPMRacUQUy4dXgZC6Sk+THH4USZgXNbMJLQqKyrShnyyV/EOZZvLTQQGSr2MHJLI2S
+         tZJDD7+duaAFoTAsHIAYWIbMtlm5BBhX4YFVQkq0rTfJV4v9XpxsoyNtDHRvvchICWc9
+         nn4xyQ4COL/piiDCDwGRbO5K9CPWyDGzAl0ks=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723703460; x=1724308260;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=uNZmB8JeL5BUwkZdsWGFVmhs63EvGCFctUq1BvMgR3c=;
-        b=rLj0SC8XJV0J5WKvxMmhwdtZ+fjJs27/JCJiykmgQ5QRAltTxT7GQ1z7AfjUMmVs42
-         VkeCUWAHcwSm8BVSVIfDqjWrN9ztY1tp9NX+wo1EabP4DqGvKWouj8i7LnoYAdy4cUsj
-         6xQ6vEA0GA78EvzhVZuZfDg3Er2PJKvRvkqsCtGA0uQF3gpI2Dx6IDp72WQA2CFtKrAg
-         SYuR9gC0XSHh0YAU+fZnoXj433n52olfuwJIXibrrzreKgVQpqasUIUjzk8ldLFNrKvf
-         diuzTO0cs5y74JgnaxNv7SYCSjdrsAEGsBSdgk47fnkQdBItPjvQJUbh5APQ6oKNd3Yb
-         QEvA==
-X-Gm-Message-State: AOJu0YzU6Ey8mmVTHnMMOF9vjEPHqvBeGcdv5XiJExI2uG8q55VsHZRQ
-	h7E/j5KtcmU27hINTm+fpRgLsIVcNn2DZqOqHeESk8WSTQ9Wh9CX/8Ys/3VB4xbuwlfLr9kR6SI
-	M
-X-Google-Smtp-Source: AGHT+IEBrC2ZhgW6i6jectxR+iwx9v4ByilJqledoEJorOqXHcM0z9Q1bUVIH9qT3tpN4hFFgy8PfA==
-X-Received: by 2002:a05:6512:39cb:b0:530:e228:77ae with SMTP id 2adb3069b0e04-532edbad7a7mr3401701e87.40.1723703459371;
-        Wed, 14 Aug 2024 23:30:59 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1723703458; x=1724308258;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=y2T/aRM4vGdDznv6knLxrF9FmgV2QMCT2NDSvqBJ1hc=;
+        b=o8YpG7p7P3jPA2tIc/Qak5ccfeA/KiwKH8eUzGvkyWqd25H4iRTY7+p4amXeAXo/dX
+         /ztYTBEIGPVmMvXpiDaeBURx7AOSfvuNIrqHkEx8kvrgrDdAxM28lf1y1iEIaOJKUYp9
+         Ywad76P9P/nrZxzJsIFhSoj/BB9x0124RaZ5U4IayjSu3JFs3xUhhLD2HhuXsLDpiwit
+         QWMnzaUk0sT1i6zcKmIqSVMTXtWxC1xG+FiQ0nZVn1VKZ8Wtl61eSBmuYwENnTOo/h4s
+         nHxKjQkXiMqQcQWJvOItH4OUbrf7JzTcxwmjzpogGCqewVyXHJcs/7IQMjfJqVk+QQEl
+         OL9g==
+X-Gm-Message-State: AOJu0Yw+p3PUg7iAckvtHu9rYzyb2I3VfDLmFwy1BFirfqMzhyqr6X2L
+	Az7DsNmjk+Xw+tHwLQyIUHhGlpJnGnI4udSQ6qFJ4R8D9dklGyVT3RR3FnZBREvgTRh1kbp4frG
+	0
+X-Google-Smtp-Source: AGHT+IFptiM0g1EAqfhqvDgAKwjkilklK/jamcCjdtbbSrhdny2Eblw2BsAAcPL4L7W8rLpXs+PQ7A==
+X-Received: by 2002:a2e:8706:0:b0:2ef:2b44:9977 with SMTP id 38308e7fff4ca-2f3aa1bdb36mr29204651fa.18.1723703457818;
+        Wed, 14 Aug 2024 23:30:57 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3718985a286sm707174f8f.54.2024.08.14.23.30.58
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3718985a286sm707174f8f.54.2024.08.14.23.30.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Aug 2024 23:30:59 -0700 (PDT)
+        Wed, 14 Aug 2024 23:30:57 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-astroid: Upgrade 3.2.4 -> 3.3.2
-Date: Thu, 15 Aug 2024 09:30:55 +0300
-Message-Id: <20240815063055.2088675-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-dirty-equals: Upgrade 0.7.1 -> 0.8.0
+Date: Thu, 15 Aug 2024 09:30:53 +0300
+Message-Id: <20240815063055.2088675-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240815063055.2088675-1-leon.anavi@konsulko.com>
-References: <20240815063055.2088675-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 15 Aug 2024 06:31:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111820
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111818
 
-Upgrade to release 3.3.2:
+Upgrade to release 0.8.0:
 
-- Restore support for soft-deprecated members of the typing module
-  with python 3.13.
-- Fix a crash introduced in 3.3.0 involving invalid format strings.
-- Add support for Python 3.13.
-- Remove support for Python 3.8 (and constants PY38, PY39_PLUS,
-  and PYPY_7_3_11_PLUS).
-- Add the __annotations__ attribute to the ClassDef object model.
-- Implement inference for JoinedStr and FormattedValue
-- Add support for ssl.OP_LEGACY_SERVER_CONNECT (new in Python 3.12)
+- set requires-python to 3.8
+- use zoneinfo instead of pytz where possible
+- No need to call datetime.replace for utc_now
+- Patch pprint to make pytest diffs nicer for big objects
+- uprev test, lint and docs dependencies
+- Support Python 3.13
+- Uprev version
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-astroid_3.2.4.bb => python3-astroid_3.3.2.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-astroid_3.2.4.bb => python3-astroid_3.3.2.bb} (90%)
+ ...rty-equals_0.7.1.bb => python3-dirty-equals_0.8.0.bb} | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-dirty-equals_0.7.1.bb => python3-dirty-equals_0.8.0.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-astroid_3.2.4.bb b/meta-python/recipes-devtools/python/python3-astroid_3.3.2.bb
-similarity index 90%
-rename from meta-python/recipes-devtools/python/python3-astroid_3.2.4.bb
-rename to meta-python/recipes-devtools/python/python3-astroid_3.3.2.bb
-index 056b37279..e5f05bd0e 100644
---- a/meta-python/recipes-devtools/python/python3-astroid_3.2.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-astroid_3.3.2.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
- LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
+diff --git a/meta-python/recipes-devtools/python/python3-dirty-equals_0.7.1.bb b/meta-python/recipes-devtools/python/python3-dirty-equals_0.8.0.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-dirty-equals_0.7.1.bb
+rename to meta-python/recipes-devtools/python/python3-dirty-equals_0.8.0.bb
+index ea9303b17..584d787a7 100644
+--- a/meta-python/recipes-devtools/python/python3-dirty-equals_0.7.1.bb
++++ b/meta-python/recipes-devtools/python/python3-dirty-equals_0.8.0.bb
+@@ -10,7 +10,7 @@ HOMEPAGE = "https://github.com/samuelcolvin/dirty-equals"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=ab599c188b4a314d2856b3a55030c75c"
  
--SRC_URI[sha256sum] = "0e14202810b30da1b735827f78f5157be2bbd4a7a59b7707ca0bfc2fb4c0063a"
-+SRC_URI[sha256sum] = "99e9b5b602cbb005434084309213d6af32bf7a9b743c836749168b8e2b330cbd"
+-SRC_URI[sha256sum] = "a580513f3285e93656a770a04e428f8bfc513848877bf278282dbfbb907fdbb4"
++SRC_URI[sha256sum] = "798db3b9481b9a5024c0e520946507676ed2f0c65317d3e95bdce1a01657cf60"
  
- inherit pypi python_setuptools_build_meta
+ S = "${WORKDIR}/dirty_equals-${PV}"
  
+@@ -18,4 +18,9 @@ inherit pypi python_hatchling
+ 
+ PYPI_PACKAGE = "dirty_equals"
+ 
+-RDEPENDS:${PN} += "python3-pytz"
++RDEPENDS:${PN} += " \
++    python3-pytz \
++    python3-core \
++    python3-json \
++    python3-netclient \
++"
 -- 
 2.39.2
 
