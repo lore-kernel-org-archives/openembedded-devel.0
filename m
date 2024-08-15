@@ -2,88 +2,164 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9BA9FC52D7F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C588FC531DF
 	for <webhook@archiver.kernel.org>; Thu, 15 Aug 2024 04:45:36 +0000 (UTC)
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web10.116211.1723697129496312843
+Received: from mail-il1-f175.google.com (mail-il1-f175.google.com [209.85.166.175])
+ by mx.groups.io with SMTP id smtpd.web10.116216.1723697136156562610
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Aug 2024 21:45:29 -0700
+ Wed, 14 Aug 2024 21:45:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Aabitrai;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-70d25b5b6b0so448378b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Aug 2024 21:45:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hoE2Z9Q6;
+ spf=pass (domain: gmail.com, ip: 209.85.166.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-il1-f175.google.com with SMTP id e9e14a558f8ab-39b37b63834so2533545ab.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Aug 2024 21:45:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1723697128; x=1724301928; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=DUcYrvX2UI7vQOY9kUgiqYhMlLfisTwIGEySxOvtZ7Q=;
-        b=AabitraizaUS1edFxLHBhn4hGZIxB+dXuVoyHFOOs0VG7F+2RcGzsL8XtBHqmubw8s
-         OGI459Ll0fWF4LT87GZ5/oqQ68t3IEvs4xm1Bc+ZU7RpJ7BzCM7J649zFc61eTE+Uklv
-         FEB1oxZaxqjE80D9gwJeP1vHNvrItUbM/55OXeXD1kLxbvMpntX4yRuyDSH8NMzpcYY7
-         4JN1BLTwzNHdu5xBIHT9vwh4BTwkAlOunb3UEoNhWNqLGy5j8zzB3v0Te9M98aa8JLS3
-         GQJpd8vdTCz4c9TtF3YaK61mGJvcHQqj3SgFmUvqGmyJMm5e1pkrb+Cr8cscVUI/MKtL
-         GOzQ==
+        d=gmail.com; s=20230601; t=1723697135; x=1724301935; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=LhsYm6LmfMWsCtjEB3XaMk9i4DH/vX3tJY+jIO1Lgio=;
+        b=hoE2Z9Q6nyPoLm0pYYrP/mPyt2kwtzQuqUPNBRi/X5sy+2RNTjgjUSZG9sFyi7J8Mw
+         tnx3Nw5kc1VYjSTAlhH83uLrtY/9CrMLYxlVzeJSvmvzNcJxAvr2pvWOg2+ZwXQ1jI+E
+         zrAyg5eWGyeDNW8+hdlb57Zz8M75rUOz7uWohnGBcE1UVltoxZ7Qb48j88uv6znLdBjr
+         C6oQdYvDldh7pJvEPYTkrhs1w3rR1bkOe9bjxS0bsrls/UyKJquh9T1xCmEZRj9/t8Jp
+         mnErXQ9ymwjZQ+O2MKdsmWQRlBBYZ2m431HYWIFO/2s+lyZbV8xh7LuQaK7VQdDDDPU6
+         MZfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723697128; x=1724301928;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=DUcYrvX2UI7vQOY9kUgiqYhMlLfisTwIGEySxOvtZ7Q=;
-        b=PaodY5dMPv8wJsXCemuVUMY3XhvG4P5UEyDZcGnm9n0tjTLP1tQEu22Cnwt8hZbkCc
-         tmBdqtFDxOxK94VATxlGcR5fODrISvSyWtZ7N9jW14bDt3JD6PKOeifEyMK9D7koGMaJ
-         3Fi1fqeM8Tce6ZLAO2B8Y+CS7g3uB8fs3RAatzykpdZaJjGy5yK46oNR7A9XNHV0bqYZ
-         z9k3NYK0WMGJudWYuzrGM2lKFuCQ2XT/UAyZJLhiV1xt7xj1R9MxihgH9Nis9mIFQAbL
-         l/HfGZrbXeLiG18PJQ+XR2s3C8qSSU8GNXDdtGwvhFWuzC3xwOeoDVxlzdwImN1ojoP+
-         P4MA==
-X-Gm-Message-State: AOJu0YxgeWOpQBzsBe4pyZWB/iaYddYs3jQMg1RSOW0DBTXBmzoeGRUP
-	M6oTy0IE5iCUqmxzKu6VGo5lg6wpuDmu2OBQnT+ZoXoeJGKyyOWdZYsR9Q==
-X-Google-Smtp-Source: AGHT+IEQK26x0wW6UL57BVaZEK8J3Wn7RtA1zVhWJ5wS8/YTSS+RZYei7Ddt/Gr9FtsY2kssE4qflQ==
-X-Received: by 2002:a05:6a00:2da4:b0:70d:2cf6:5f4 with SMTP id d2e1a72fcca58-71267407145mr6589830b3a.25.1723697128420;
-        Wed, 14 Aug 2024 21:45:28 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1723697135; x=1724301935;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=LhsYm6LmfMWsCtjEB3XaMk9i4DH/vX3tJY+jIO1Lgio=;
+        b=gBR8k7npmDvP48kwUgXu2Cu0ozw+EVM+wc8l9A9Q32ok5ZHWm8OlCih/wApJHmbaYX
+         639yIzU7YY9q1k5j8n3IC4vxar6J0eVhJU29VFAPp3/Pt/kLF5yBOwGvTFIAh/z6jotH
+         fiyzoHXbXxzb8RY2T613LFlrCOZBnapK050XUJDgYIWo26nQbwzfwBzj8AaC6+WXSwcU
+         /Tr4SgRlx/TsPazxrNsE72i1vkW7LTY86jFa+WKlCPuERSVjyU9Q84nIkhYtNp2KpvcP
+         tkuKP62wwi6zn0eXXOR/4QWSW6q5N7w8zGYRhXtmjWsQexSZBnkj3Lu/n0D33S82U6Ef
+         P9TA==
+X-Gm-Message-State: AOJu0YxZxAr6+0NesDm1If9hbvKcSqNBaPT3JlL+1Ibkw45fpfKN1Krr
+	bME/BhAeQab6MbOOPFy4CBrHzwKqaR5OLykwRRBJP3TPZjwnBbbGn9BnSQ==
+X-Google-Smtp-Source: AGHT+IHENHJMTFclVrQ4MrFqW0rAj0Nh6dnyKco/acFRyAhxxMkpGSrSwvDjDztmTM1yNOKzv2YpDw==
+X-Received: by 2002:a05:6e02:1567:b0:39a:e814:b926 with SMTP id e9e14a558f8ab-39d12461591mr66905325ab.16.1723697135050;
+        Wed, 14 Aug 2024 21:45:35 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::e55d])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-7c6b6357a86sm316856a12.58.2024.08.14.21.45.27
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-7c6b6357a86sm316856a12.58.2024.08.14.21.45.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Aug 2024 21:45:27 -0700 (PDT)
+        Wed, 14 Aug 2024 21:45:34 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/9] glibmm: Upgrade to 2.66.7 release
-Date: Wed, 14 Aug 2024 21:45:15 -0700
-Message-ID: <20240815044523.1030831-1-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 7/9] freediameter: Fix buildpaths QA error
+Date: Wed, 14 Aug 2024 21:45:21 -0700
+Message-ID: <20240815044523.1030831-7-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.46.0
+In-Reply-To: <20240815044523.1030831-1-raj.khem@gmail.com>
+References: <20240815044523.1030831-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 15 Aug 2024 04:45:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111809
-
-Changes are here [1]
-
-[1] https://gitlab.gnome.org/GNOME/glibmm/-/commit/a33c12cb694a46f97fe46372e6a97a22bbcd601f#9f621eb5fd3bcb2fa5c7bd228c9b1ad42edc46c8
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111815
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../glib-2.0/{glibmm_2.66.2.bb => glibmm_2.66.7.bb}             | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-core/glib-2.0/{glibmm_2.66.2.bb => glibmm_2.66.7.bb} (90%)
+ ...lags-for-carrying-user-specified-par.patch | 39 +++++++++++++++++++
+ .../freediameter/freediameter_1.5.0.bb        |  9 +++--
+ 2 files changed, 44 insertions(+), 4 deletions(-)
+ create mode 100644 meta-networking/recipes-protocols/freediameter/files/0001-bison-flex-Add-flags-for-carrying-user-specified-par.patch
 
-diff --git a/meta-oe/recipes-core/glib-2.0/glibmm_2.66.2.bb b/meta-oe/recipes-core/glib-2.0/glibmm_2.66.7.bb
-similarity index 90%
-rename from meta-oe/recipes-core/glib-2.0/glibmm_2.66.2.bb
-rename to meta-oe/recipes-core/glib-2.0/glibmm_2.66.7.bb
-index c78dd55ca6..4651938499 100644
---- a/meta-oe/recipes-core/glib-2.0/glibmm_2.66.2.bb
-+++ b/meta-oe/recipes-core/glib-2.0/glibmm_2.66.7.bb
-@@ -12,7 +12,7 @@ inherit gnomebase
+diff --git a/meta-networking/recipes-protocols/freediameter/files/0001-bison-flex-Add-flags-for-carrying-user-specified-par.patch b/meta-networking/recipes-protocols/freediameter/files/0001-bison-flex-Add-flags-for-carrying-user-specified-par.patch
+new file mode 100644
+index 0000000000..98ba4d5283
+--- /dev/null
++++ b/meta-networking/recipes-protocols/freediameter/files/0001-bison-flex-Add-flags-for-carrying-user-specified-par.patch
+@@ -0,0 +1,39 @@
++From fa6227d92725af5ae17b8435c0d50d92ff7a575c Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 14 Aug 2024 19:32:25 -0700
++Subject: [PATCH] bison/flex: Add flags for carrying user specified parameters
++
++This helps in passing cmdline to flex and bison e.g. to remove lines
++from generated output to avoid absolute paths
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ cmake/Modules/CMakeUserUseBison.cmake | 1 +
++ cmake/Modules/CMakeUserUseFlex.cmake  | 1 +
++ 2 files changed, 2 insertions(+)
++
++diff --git a/cmake/Modules/CMakeUserUseBison.cmake b/cmake/Modules/CMakeUserUseBison.cmake
++index 9257545..b61bd0e 100644
++--- a/cmake/Modules/CMakeUserUseBison.cmake
+++++ b/cmake/Modules/CMakeUserUseBison.cmake
++@@ -52,6 +52,7 @@ IF(BISON_EXECUTABLE)
++        OUTPUT "${OUTFILE}" "${HEADER}"
++        COMMAND "${BISON_EXECUTABLE}"
++        ARGS "--name-prefix=${PREFIX}"
+++       "${BISON_TARGET_ARG_COMPILE_FLAGS}"
++        "--defines"
++        "--output-file=${OUTFILE}"
++        "${CMAKE_CURRENT_SOURCE_DIR}/${FILENAME}"
++diff --git a/cmake/Modules/CMakeUserUseFlex.cmake b/cmake/Modules/CMakeUserUseFlex.cmake
++index 7d0394f..1221dca 100644
++--- a/cmake/Modules/CMakeUserUseFlex.cmake
+++++ b/cmake/Modules/CMakeUserUseFlex.cmake
++@@ -39,6 +39,7 @@ IF(FLEX_EXECUTABLE)
++       OUTPUT "${OUTFILE}"
++       COMMAND "${FLEX_EXECUTABLE}"
++       ARGS "-P${PREFIX}"
+++      "${FLEX_TARGET_ARG_COMPILE_FLAGS}"
++       "-o${OUTFILE}"
++       "${CMAKE_CURRENT_SOURCE_DIR}/${FILENAME}"
++       DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/${FILENAME}")
+diff --git a/meta-networking/recipes-protocols/freediameter/freediameter_1.5.0.bb b/meta-networking/recipes-protocols/freediameter/freediameter_1.5.0.bb
+index c7c329a5d4..cf50a92afb 100644
+--- a/meta-networking/recipes-protocols/freediameter/freediameter_1.5.0.bb
++++ b/meta-networking/recipes-protocols/freediameter/freediameter_1.5.0.bb
+@@ -7,7 +7,7 @@ Accounting needs."
  
- SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
+ HOMEPAGE = "http://www.freediameter.net"
  
--SRC_URI[archive.sha256sum] = "b2a4cd7b9ae987794cbb5a1becc10cecb65182b9bb841868625d6bbb123edb1d"
-+SRC_URI[archive.sha256sum] = "fe02c1e5f5825940d82b56b6ec31a12c06c05c1583cfe62f934d0763e1e542b3"
+-DEPENDS = "flex bison cmake-native libgcrypt gnutls libidn2 lksctp-tools virtual/kernel bison-native"
++DEPENDS = "flex-native bison-native cmake-native libgcrypt gnutls libidn2 lksctp-tools virtual/kernel bison-native"
  
- FILES:${PN} = "${libdir}/lib*.so.*"
- FILES:${PN}-dev += "${datadir}/glibmm-* ${libdir}/glibmm-2.4/include/ ${libdir}/glibmm-2.4/proc/ ${libdir}/giomm-2.4/include/"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+@@ -23,6 +23,7 @@ SRC_URI = "git://github.com/freeDiameter/freeDiameter;protocol=https;branch=mast
+     file://freeDiameter.conf \
+     file://install_test.patch \
+     file://0001-tests-use-EXTENSIONS_DIR.patch \
++    file://0001-bison-flex-Add-flags-for-carrying-user-specified-par.patch \
+     "
+ 
+ S = "${WORKDIR}/git"
+@@ -49,6 +50,8 @@ EXTRA_OECMAKE = " \
+     -DEXTENSIONS_DIR:PATH=${libdir}/${fd_pkgname} \
+     -DINSTALL_TEST_SUFFIX:PATH=${PTEST_PATH}-tests \
+     -DCMAKE_SKIP_RPATH:BOOL=ON \
++    -DFLEX_TARGET_ARG_COMPILE_FLAGS='--noline' \
++    -DBISON_TARGET_ARG_COMPILE_FLAGS='--no-lines' \
+ "
+ # INSTALL_LIBRARY_SUFFIX is relative to CMAKE_INSTALL_PREFIX
+ # specify it on cmd line will fix the SET bug in CMakeList.txt
+@@ -107,15 +110,13 @@ EOF
+     # create self cert
+     openssl req -x509 -config ${STAGING_DIR_NATIVE}/etc/ssl/openssl.cnf -newkey rsa:4096 -sha256 -nodes -out ${D}${sysconfdir}/freeDiameter/${FD_PEM} -keyout ${D}${sysconfdir}/freeDiameter/${FD_KEY} -days 3650 -subj '/CN=${FD_HOSTNAME}.${FD_REALM}'
+     openssl dhparam -out ${D}${sysconfdir}/freeDiameter/${FD_DH_PEM} 1024
+-
+-    find ${B} \( -name "*.c" -o -name "*.h" \) -exec sed -i -e 's#${UNPACKDIR}##g' {} \;
+ }
+ 
+ do_install_ptest() {
+     mv ${D}${PTEST_PATH}-tests/* ${D}${PTEST_PATH}/
+     rmdir ${D}${PTEST_PATH}-tests
+     install -m 0644 ${B}/tests/CTestTestfile.cmake ${D}${PTEST_PATH}/
+-    sed -i -e 's#${UNPACKDIR}##g' ${D}${PTEST_PATH}/CTestTestfile.cmake
++    sed -i -e 's#${WORKDIR}##g' ${D}${PTEST_PATH}/CTestTestfile.cmake
+     sed -i "/^set_tests_properties/d" ${D}${PTEST_PATH}/CTestTestfile.cmake
+ }
+ 
 
