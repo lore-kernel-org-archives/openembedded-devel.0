@@ -1,320 +1,220 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 69C1AC3DA7F
-	for <webhook@archiver.kernel.org>; Thu, 15 Aug 2024 09:17:58 +0000 (UTC)
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
- by mx.groups.io with SMTP id smtpd.web10.118901.1723713461567005680
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 45AA1C3DA7F
+	for <webhook@archiver.kernel.org>; Thu, 15 Aug 2024 12:04:29 +0000 (UTC)
+Received: from mail-yw1-f171.google.com (mail-yw1-f171.google.com [209.85.128.171])
+ by mx.groups.io with SMTP id smtpd.web11.121593.1723723462089415659
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Aug 2024 02:17:41 -0700
+ Thu, 15 Aug 2024 05:04:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=psLymQdY;
- spf=pass (domain: konsulko.com, ip: 209.85.208.49, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-5bb477e3a6dso888419a12.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Aug 2024 02:17:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NfIqtXdr;
+ spf=pass (domain: gmail.com, ip: 209.85.128.171, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f171.google.com with SMTP id 00721157ae682-64b417e1511so8522347b3.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Aug 2024 05:04:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1723713460; x=1724318260; darn=lists.openembedded.org;
-        h=in-reply-to:from:content-language:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=M6g8/VIYs3kHThQ0W+9zh44uTEh0Tgfpz0u5eUUrv4E=;
-        b=psLymQdY9aj1IgtikI+ydOjGu0lLxlPoNtLLMZLEfF6LetlQA7afrxGQnX7G9UNSa8
-         iJSuKh7JT01XxxKwNNI9BuQDptKp4RVTLAGHRyAv0UEGpHGcQADl1sa1Kak8D+Ac4+Ta
-         iSdsd49QOIqvfPdEp4y6KxaeVdcc+Dbr4usws=
+        d=gmail.com; s=20230601; t=1723723461; x=1724328261; darn=lists.openembedded.org;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=HrqTZCiyMaQ5srIYSqlRTs16XTEQZZ7W5dwOU3QiKSA=;
+        b=NfIqtXdrBgK3RE8CiRMjUfMzb/TIet4DJr7MKDE/+J1eCGx6YH33cWogEdz86PQL7/
+         KmByYYlhCPwaQXJNVftG/U7dsL8vQNlDlTaPJ7voiixk0eXL17NwsYojDeOuIPTUjaI0
+         Mq0Bh3q9zxZCmkxNwm1sg8N1oxLoYMFNU9zIz1XLPMVbwWyEzrOk9XCx9F5lKQQ7rLv4
+         JVr+9y94yCuEOISlc3CwVq7uoeCaMq8Zs6jHSU2z+7y4EY4kKF6cTd0mT9HdT0D2tUr/
+         5ulGFtTRpX4QRxgw/GdZgMSrL3MIsmeUGQBXLue/5d3dLOsKFXxUfkjneeGsw1E43uXU
+         VUsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723713460; x=1724318260;
-        h=in-reply-to:from:content-language:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=M6g8/VIYs3kHThQ0W+9zh44uTEh0Tgfpz0u5eUUrv4E=;
-        b=wTTgfCeppLFWuvmfMhjcBYIElun5faX6pCg3r3jMClWietZH7oEUDUgNIBpCNYShQC
-         q5yt++uljka+g20UfAThjddH/DNyJAGj6qHXBIHNFM4YGZdklaI5EEpyeV1COQQipevK
-         iZp1LEhNYJCWs46+XLx78b6duXCnf8XNdTWqrc0Y55UzbMWhAPQqRybwQ+7tpsrA95yt
-         xIsPbkwbo6KL6mtyVIviewgFw+xzksNIlACOYBKPgTffAjxcSxqK0nzdVpjXOF2VAVow
-         XWr2bCPs9E9scs8o7MudbLgsr2ZMIUNeApdPeKVHuzeUm6beC+2ISNzf583wDFOBD5UU
-         FPRw==
-X-Gm-Message-State: AOJu0YzSHt1S+E1qWZKuz9dPaJ6KmUaS9zRewrxNPnYVClboTgKflDho
-	y3Eiro/nsZ9iBHjq8T8glbPogxBZ+PxDQT/FSvOzlKq6zxklqBLVisA4hfKaHMk=
-X-Google-Smtp-Source: AGHT+IFQIbJr95ENIldHRUjtSj6YhkpmexWQWFWVQEisxAT1jZzY2rZxm9gbeMa2dc6ZrLUxAUTOtQ==
-X-Received: by 2002:a50:cc4c:0:b0:5be:ae21:33a8 with SMTP id 4fb4d7f45d1cf-5beae213573mr2090530a12.2.1723713459536;
-        Thu, 15 Aug 2024 02:17:39 -0700 (PDT)
-Received: from [192.168.5.161] ([46.55.231.62])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5bebbbe2734sm640761a12.2.2024.08.15.02.17.38
+        d=1e100.net; s=20230601; t=1723723461; x=1724328261;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=HrqTZCiyMaQ5srIYSqlRTs16XTEQZZ7W5dwOU3QiKSA=;
+        b=BMmCSqNry16IZJ36P/zBcg6ZAXkvrOTdMmaM0Lzffrn14+BjbDt5QqzlMRcQBTBWMD
+         zOcOKk7SbrJ3q8lzruMw1j5Nph7OM1kj8hTKsFuKIFKGiU/uwi62LmccjPNnnq4CpN3V
+         +T/BZUMZqATkCp1RsXql//zAej9rlyfNuI24XyDEsVnppwbrnAGL9zbCFqVtU2Bo8WmJ
+         a5TFWa7ipUdVG+caaKkRg3RxU20OH3+ZOyxlIEz1sqEFe15vqq1FTMUogDx/4abGlCZS
+         UTzLC2OIkrh5YS6dX0M67g5LvIaDnJbzhUz0BgZTWMqe8UHYJ0zAaAcCNd+Em0jFM5tE
+         u1Xw==
+X-Forwarded-Encrypted: i=1; AJvYcCW255T2r12+xQy6F5Hl0W2X67lQktKggxuqAFpASlzJ2gXoKFcdnQAhLCra6vHqJvttSANLHaUPTUBBzJdn+t8Qxdo6OkMBbRQjerMF18btXdnsZ2/XvXt2VA==
+X-Gm-Message-State: AOJu0YyX0x3nJmD6BnqKrf6adhOEaxzsvSQaKmpAzhfmm7ODSDEKMoXC
+	SluovFMyyNjZrsZZYapXkQ52uCEnM7ZSFQxdt5CitWWIIdK8YcdU0HvAuQ==
+X-Google-Smtp-Source: AGHT+IGE5cvmKq8Gp7pbhUimmSnb0AhKv7HZ8RaUU3Mzv/hmkiHl1GZtEH+Hb6bZv5sYs/9z1gfrMg==
+X-Received: by 2002:a05:690c:d90:b0:69d:e911:88c3 with SMTP id 00721157ae682-6ac99517db9mr71936167b3.29.1723723460911;
+        Thu, 15 Aug 2024 05:04:20 -0700 (PDT)
+Received: from ?IPV6:2600:1700:45dd:7000:2e25:7600:d68b:4c69? ([2600:1700:45dd:7000:2e25:7600:d68b:4c69])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6af9d91ccabsm2160277b3.127.2024.08.15.05.04.20
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 15 Aug 2024 02:17:39 -0700 (PDT)
-Content-Type: multipart/alternative;
- boundary="------------cVqVzTdNKi1cHmkBlu1WNoEg"
-Message-ID: <59c7125c-487a-49b4-bba2-61fd40f6e6f1@konsulko.com>
-Date: Thu, 15 Aug 2024 12:17:37 +0300
+        Thu, 15 Aug 2024 05:04:20 -0700 (PDT)
+Message-ID: <141465e9-8d41-46a0-b95a-0c50f1def2ba@gmail.com>
+Date: Thu, 15 Aug 2024 08:04:20 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-python][PATCH 3/3] python3-fastjsonschema: Upgrade
- 2.18.0 -> 2.20.0
-To: Tim Orling <ticotimo@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <20240814115435.808089-1-leon.anavi@konsulko.com>
- <20240814115435.808089-3-leon.anavi@konsulko.com>
- <CANx9H-C0d3GXgyZrfc_S1MgHK76fKUT792Js==VUyPwZoLnvpQ@mail.gmail.com>
 Content-Language: en-US
-From: Leon Anavi <leon.anavi@konsulko.com>
-In-Reply-To: <CANx9H-C0d3GXgyZrfc_S1MgHK76fKUT792Js==VUyPwZoLnvpQ@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Subject: scarthgap merge request: Aug 15th
+Autocrypt: addr=akuster808@gmail.com; keydata=
+ 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
+ ApZ86eOP
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 15 Aug 2024 09:17:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111821
+ <openembedded-devel@lists.openembedded.org>; Thu, 15 Aug 2024 12:04:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111822
 
-This is a multi-part message in MIME format.
---------------cVqVzTdNKi1cHmkBlu1WNoEg
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+The following changes since commit 2338409efc51cf2022ff5610a9fb689251706e2b:
 
-Hi Tim,
+   python3-pydantic-core: Fix build with python 3.12.4 (2024-08-03 
+12:25:17 -0400)
 
-On 15.08.24 г. 4:59 ч., Tim Orling wrote:
-> Did you double check the tests are included in the sdist tarball? That 
-> is why it was git fetcher.
+are available in the Git repository at:
 
-Yes, fastjsonschema-2.20.0.tar.gz includes directory "tests".
->
-> In other words did you build meta-Python-image-ptest-python3-fastjson 
-> and run -c testimage?
-No, but I tested manually with core-image-minimal that includes 
-python3-fastjsonschema.
+   https://git.openembedded.org/meta-openembedded scarthgap-next
 
-Best regards,
-Leon
+for you to fetch changes up to 64c481d017c1b5b5eae619a367a5e8fa00f1b156:
 
->
-> On Wed, Aug 14, 2024 at 4:54 AM Leon Anavi via lists.openembedded.org 
-> <http://lists.openembedded.org> 
-> <leon.anavi=konsulko.com@lists.openembedded.org> wrote:
->
->     Upgrade to release 2.20.0. Added validations at compile time:
->
->     - required must have unique items
->     - checking if schema is not allowing required items (item is
->       required, but is not listed in properties)
->
->     Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
->     ---
->      ...jsonschema_2.18.0.bb <http://jsonschema_2.18.0.bb> =>
->     python3-fastjsonschema_2.20.0.bb
->     <http://python3-fastjsonschema_2.20.0.bb>} | 5 +----
->      1 file changed, 1 insertion(+), 4 deletions(-)
->      rename
->     meta-python/recipes-devtools/python/{python3-fastjsonschema_2.18.0.bb
->     <http://python3-fastjsonschema_2.18.0.bb> =>
->     python3-fastjsonschema_2.20.0.bb
->     <http://python3-fastjsonschema_2.20.0.bb>} (84%)
->
->     diff --git
->     a/meta-python/recipes-devtools/python/python3-fastjsonschema_2.18.0.bb
->     <http://python3-fastjsonschema_2.18.0.bb>
->     b/meta-python/recipes-devtools/python/python3-fastjsonschema_2.20.0.bb
->     <http://python3-fastjsonschema_2.20.0.bb>
->     similarity index 84%
->     rename from
->     meta-python/recipes-devtools/python/python3-fastjsonschema_2.18.0.bb
->     <http://python3-fastjsonschema_2.18.0.bb>
->     rename to
->     meta-python/recipes-devtools/python/python3-fastjsonschema_2.20.0.bb
->     <http://python3-fastjsonschema_2.20.0.bb>
->     index b2e969c5c..0524a73b6 100644
->     ---
->     a/meta-python/recipes-devtools/python/python3-fastjsonschema_2.18.0.bb
->     <http://python3-fastjsonschema_2.18.0.bb>
->     +++
->     b/meta-python/recipes-devtools/python/python3-fastjsonschema_2.20.0.bb
->     <http://python3-fastjsonschema_2.20.0.bb>
->     @@ -6,15 +6,12 @@ HOMEPAGE =
->     "https://github.com/seznam/python-fastjsonschema"
->      LICENSE = "BSD-3-Clause"
->      LIC_FILES_CHKSUM =
->     "file://LICENSE;md5=18950e8362b69c0c617b42b8bd8e7532"
->
->     -SRCREV = "756540088687cda351390f687b92e602feaa7dc6"
->     -PYPI_SRC_URI =
->     "git://github.com/horejsek/python-fastjsonschema;protocol=https;branch=master
->     <http://github.com/horejsek/python-fastjsonschema;protocol=https;branch=master>"
->     +SRC_URI[sha256sum] =
->     "3d48fc5300ee96f5d116f10fe6f28d938e6008f59a6a025c2649475b87f76a23"
->
->      SRC_URI += "file://run-ptest"
->
->      inherit ptest pypi setuptools3
->
->     -S = "${WORKDIR}/git"
->     -
->      do_install_ptest() {
->             install -d ${D}${PTEST_PATH}/tests
->             cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
->     -- 
->     2.39.2
->
->
->     -=-=-=-=-=-=-=-=-=-=-=-
->     Links: You receive all messages sent to this group.
->     View/Reply Online (#111803):
->     https://lists.openembedded.org/g/openembedded-devel/message/111803
->     Mute This Topic: https://lists.openembedded.org/mt/107893158/924729
->     Group Owner: openembedded-devel+owner@lists.openembedded.org
->     <mailto:openembedded-devel%2Bowner@lists.openembedded.org>
->     Unsubscribe:
->     https://lists.openembedded.org/g/openembedded-devel/unsub
->     [ticotimo@gmail.com]
->     -=-=-=-=-=-=-=-=-=-=-=-
->
---------------cVqVzTdNKi1cHmkBlu1WNoEg
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+   libjs-jquery-icheck: Correct LIC_FILES_CHKSUM (2024-08-14 10:19:55 -0400)
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p>Hi Tim,<br>
-    </p>
-    <div class="moz-cite-prefix">On 15.08.24 г. 4:59 ч., Tim Orling
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:CANx9H-C0d3GXgyZrfc_S1MgHK76fKUT792Js==VUyPwZoLnvpQ@mail.gmail.com">
-      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-      <div dir="auto">Did you double check the tests are included in the
-        sdist tarball? That is why it was git fetcher.</div>
-    </blockquote>
-    <br>
-    Yes, fastjsonschema-2.20.0.tar.gz includes directory "tests".<br>
-    <blockquote type="cite"
-cite="mid:CANx9H-C0d3GXgyZrfc_S1MgHK76fKUT792Js==VUyPwZoLnvpQ@mail.gmail.com">
-      <div dir="auto"><br>
-      </div>
-      <div dir="auto">In other words did you build
-        meta-Python-image-ptest-python3-fastjson and run -c testimage?</div>
-    </blockquote>
-    No, but I tested manually with core-image-minimal that includes
-    python3-fastjsonschema.<br>
-    <br>
-    Best regards,<br>
-    Leon<br>
-    <br>
-    <blockquote type="cite"
-cite="mid:CANx9H-C0d3GXgyZrfc_S1MgHK76fKUT792Js==VUyPwZoLnvpQ@mail.gmail.com">
-      <div><br>
-        <div class="gmail_quote">
-          <div dir="ltr" class="gmail_attr">On Wed, Aug 14, 2024 at
-            4:54 AM Leon Anavi via <a
-              href="http://lists.openembedded.org"
-              moz-do-not-send="true">lists.openembedded.org</a>
-            &lt;leon.anavi=<a
-              href="mailto:konsulko.com@lists.openembedded.org"
-              moz-do-not-send="true" class="moz-txt-link-freetext">konsulko.com@lists.openembedded.org</a>&gt;
-            wrote:<br>
-          </div>
-          <blockquote class="gmail_quote"
-style="margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;padding-left:1ex;border-left-color:rgb(204,204,204)">Upgrade
-            to release 2.20.0. Added validations at compile time:<br>
-            <br>
-            - required must have unique items<br>
-            - checking if schema is not allowing required items (item is<br>
-              required, but is not listed in properties)<br>
-            <br>
-            Signed-off-by: Leon Anavi &lt;<a
-              href="mailto:leon.anavi@konsulko.com" target="_blank"
-              moz-do-not-send="true" class="moz-txt-link-freetext">leon.anavi@konsulko.com</a>&gt;<br>
-            ---<br>
-             ...<a href="http://jsonschema_2.18.0.bb" rel="noreferrer"
-              target="_blank" moz-do-not-send="true">jsonschema_2.18.0.bb</a>
-            =&gt; <a href="http://python3-fastjsonschema_2.20.0.bb"
-              rel="noreferrer" target="_blank" moz-do-not-send="true">python3-fastjsonschema_2.20.0.bb</a>}
-            | 5 +----<br>
-             1 file changed, 1 insertion(+), 4 deletions(-)<br>
-             rename meta-python/recipes-devtools/python/{<a
-              href="http://python3-fastjsonschema_2.18.0.bb"
-              rel="noreferrer" target="_blank" moz-do-not-send="true">python3-fastjsonschema_2.18.0.bb</a>
-            =&gt; <a href="http://python3-fastjsonschema_2.20.0.bb"
-              rel="noreferrer" target="_blank" moz-do-not-send="true">python3-fastjsonschema_2.20.0.bb</a>}
-            (84%)<br>
-            <br>
-            diff --git a/meta-python/recipes-devtools/python/<a
-              href="http://python3-fastjsonschema_2.18.0.bb"
-              rel="noreferrer" target="_blank" moz-do-not-send="true">python3-fastjsonschema_2.18.0.bb</a>
-            b/meta-python/recipes-devtools/python/<a
-              href="http://python3-fastjsonschema_2.20.0.bb"
-              rel="noreferrer" target="_blank" moz-do-not-send="true">python3-fastjsonschema_2.20.0.bb</a><br>
-            similarity index 84%<br>
-            rename from meta-python/recipes-devtools/python/<a
-              href="http://python3-fastjsonschema_2.18.0.bb"
-              rel="noreferrer" target="_blank" moz-do-not-send="true">python3-fastjsonschema_2.18.0.bb</a><br>
-            rename to meta-python/recipes-devtools/python/<a
-              href="http://python3-fastjsonschema_2.20.0.bb"
-              rel="noreferrer" target="_blank" moz-do-not-send="true">python3-fastjsonschema_2.20.0.bb</a><br>
-            index b2e969c5c..0524a73b6 100644<br>
-            --- a/meta-python/recipes-devtools/python/<a
-              href="http://python3-fastjsonschema_2.18.0.bb"
-              rel="noreferrer" target="_blank" moz-do-not-send="true">python3-fastjsonschema_2.18.0.bb</a><br>
-            +++ b/meta-python/recipes-devtools/python/<a
-              href="http://python3-fastjsonschema_2.20.0.bb"
-              rel="noreferrer" target="_blank" moz-do-not-send="true">python3-fastjsonschema_2.20.0.bb</a><br>
-            @@ -6,15 +6,12 @@ HOMEPAGE = "<a
-              href="https://github.com/seznam/python-fastjsonschema"
-              rel="noreferrer" target="_blank" moz-do-not-send="true"
-              class="moz-txt-link-freetext">https://github.com/seznam/python-fastjsonschema</a>"<br>
-             LICENSE = "BSD-3-Clause"<br>
-             LIC_FILES_CHKSUM =
-            <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=18950e8362b69c0c617b42b8bd8e7532">"file://LICENSE;md5=18950e8362b69c0c617b42b8bd8e7532"</a><br>
-            <br>
-            -SRCREV = "756540088687cda351390f687b92e602feaa7dc6"<br>
-            -PYPI_SRC_URI = "git://<a
-href="http://github.com/horejsek/python-fastjsonschema;protocol=https;branch=master"
-              rel="noreferrer" target="_blank" moz-do-not-send="true">github.com/horejsek/python-fastjsonschema;protocol=https;branch=master</a>"<br>
-            +SRC_URI[sha256sum] =
-            "3d48fc5300ee96f5d116f10fe6f28d938e6008f59a6a025c2649475b87f76a23"<br>
-            <br>
-             SRC_URI += <a class="moz-txt-link-rfc2396E" href="file://run-ptest">"file://run-ptest"</a><br>
-            <br>
-             inherit ptest pypi setuptools3<br>
-            <br>
-            -S = "${WORKDIR}/git"<br>
-            -<br>
-             do_install_ptest() {<br>
-                    install -d ${D}${PTEST_PATH}/tests<br>
-                    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/<br>
-            -- <br>
-            2.39.2<br>
-            <br>
-            <br>
-            -=-=-=-=-=-=-=-=-=-=-=-<br>
-            Links: You receive all messages sent to this group.<br>
-            View/Reply Online (#111803): <a
-href="https://lists.openembedded.org/g/openembedded-devel/message/111803"
-              rel="noreferrer" target="_blank" moz-do-not-send="true"
-              class="moz-txt-link-freetext">https://lists.openembedded.org/g/openembedded-devel/message/111803</a><br>
-            Mute This Topic: <a
-              href="https://lists.openembedded.org/mt/107893158/924729"
-              rel="noreferrer" target="_blank" moz-do-not-send="true"
-              class="moz-txt-link-freetext">https://lists.openembedded.org/mt/107893158/924729</a><br>
-            Group Owner: <a
-href="mailto:openembedded-devel%2Bowner@lists.openembedded.org"
-              target="_blank" moz-do-not-send="true">openembedded-devel+owner@lists.openembedded.org</a><br>
-            Unsubscribe: <a
-href="https://lists.openembedded.org/g/openembedded-devel/unsub"
-              rel="noreferrer" target="_blank" moz-do-not-send="true"
-              class="moz-txt-link-freetext">https://lists.openembedded.org/g/openembedded-devel/unsub</a>
-            [<a href="mailto:ticotimo@gmail.com" target="_blank"
-              moz-do-not-send="true" class="moz-txt-link-freetext">ticotimo@gmail.com</a>]<br>
-            -=-=-=-=-=-=-=-=-=-=-=-<br>
-            <br>
-          </blockquote>
-        </div>
-      </div>
-    </blockquote>
-  </body>
-</html>
+----------------------------------------------------------------
+Changqing Li (2):
+       pavucontrol: update SRC_URI
+       libatasmart: Update SRC_URI
 
---------------cVqVzTdNKi1cHmkBlu1WNoEg--
+Frank de Brabander (3):
+       python3-pydantic-core: fix incompatible version
+       python3-pydantic-core: fix TMPDIR path reference
+       python3-pydantic-core: add missing RDEPENDS for ptest
+
+J. S. (1):
+       znc: Fix buildpaths QA errors
+
+Khem Raj (2):
+       log4cpp: Fix buildpaths QA error
+       python3-pydantic: Upgrade to 2.7.3
+
+Markus Volk (1):
+       exiv2: update 0.28.0 -> 0.28.2
+
+Mikko Rapeli (3):
+       fwupd: skip buildpaths errors
+       gcab: ignore buildpaths error from sources
+       libjcat: skip buildpaths check
+
+Ninette Adhikari (3):
+       imagemagick: Update status for CVE
+       imagemagick: Update status for CVE
+       imagemagick: Update status for CVE
+
+Peter Kjellerstedt (3):
+       hostapd: Support running "devtool modify hostapd"
+       hostapd: Only include the relevant parts from README in 
+LIC_FILES_CHKSUM
+       libjs-jquery-icheck: Correct LIC_FILES_CHKSUM
+
+Scott Murray (2):
+       python3-grpcio: Fix build with gcc-14
+       python3-grpcio: backport abseil-cpp RISC-V fix
+
+Tim Orling (1):
+       python3-pydantic: upgrade 2.7.3 -> 2.7.4
+
+Wang Mingyu (1):
+       python3-pydantic: upgrade 2.7.0 -> 2.7.1
+
+alperak (4):
+       tayga: Fix contains reference to TMPDIR [buildpaths] warning
+       etcd-cpp-apiv3: Fix contains reference to TMPDIR [buildpaths] warning
+       exiv2: Upgrade 0.28.2 to 0.28.3 for CVE fix
+       jsonrpc: Fix contains reference to TMPDIR [buildpaths] warning
+
+  meta-networking/recipes-connectivity/tayga/tayga_0.9.2.bb       | 3 +
+  meta-networking/recipes-irc/znc/znc_1.8.2.bb                    | 1 +
+  meta-oe/recipes-bsp/fwupd/fwupd_1.9.18.bb                       | 2 +
+  meta-oe/recipes-connectivity/hostapd/hostapd_2.10.bb            | 15 ++--
+  meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.4.1.bb               | 4 +
+  meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.15.3.bb          | 4 +
+  meta-oe/recipes-gnome/gcab/gcab_1.6.bb                          | 3 +
+  meta-oe/recipes-gnome/libjcat/libjcat_0.2.1.bb                  | 2 +
+  meta-oe/recipes-multimedia/pulseaudio/pavucontrol_5.0.bb        | 2 +-
+  meta-oe/recipes-support/exiv2/exiv2_0.28.0.bb                   | 19 -----
+  meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb                   | 11 +++
+  meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb        | 70 
+++++++++++++++++
+  meta-oe/recipes-support/libatasmart/libatasmart_0.19.bb         | 2 +-
+  meta-oe/recipes-support/libjs/libjs-jquery-icheck_1.0.3.bb      | 2 +-
+  meta-oe/recipes-support/log4cpp/log4cpp_1.1.4.bb                | 4 +
+  .../0001-PR-1644-unscaledcycleclock-remove-RISC-V-support.patch | 82 
+++++++++++++++++++
+  .../0001-crypto-use-_Generic-only-if-defined-__cplusplus.patch  | 74 
+++++++++++++++++
+  meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb    | 2 +
+  .../recipes-devtools/python/python3-pydantic-core-crates.inc    | 88 
++++++++++----------
+  ...1-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch | 126 
+----------------------------
+  .../0001-Fix-generate_self_schema-for-Python-3.12-1299.patch    | 29 
+-------
+  .../0001-Set-rust-version-from-1.76-to-1.75-in-Cargo.toml.patch | 29 
++++++++
+  .../0002-Dont-embed-RUSTFLAGS-in-final-binary.patch             | 47 
++++++++++++
+  ...-pydantic-core_2.16.3.bb => python3-pydantic-core_2.18.4.bb} |  13 ++-
+  .../{python3-pydantic_2.7.0.bb => python3-pydantic_2.7.4.bb} |   2 +-
+  25 files changed, 403 insertions(+), 233 deletions(-)
+  delete mode 100644 meta-oe/recipes-support/exiv2/exiv2_0.28.0.bb
+  create mode 100644 meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb
+  create mode 100644 
+meta-python/recipes-devtools/python/python3-grpcio/0001-PR-1644-unscaledcycleclock-remove-RISC-V-support.patch
+  create mode 100644 
+meta-python/recipes-devtools/python/python3-grpcio/0001-crypto-use-_Generic-only-if-defined-__cplusplus.patch
+  delete mode 100644 
+meta-python/recipes-devtools/python/python3-pydantic-core/0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch
+  delete mode 100644 
+meta-python/recipes-devtools/python/python3-pydantic-core/0001-Fix-generate_self_schema-for-Python-3.12-1299.patch
+  create mode 100644 
+meta-python/recipes-devtools/python/python3-pydantic-core/0001-Set-rust-version-from-1.76-to-1.75-in-Cargo.toml.patch
+  create mode 100644 
+meta-python/recipes-devtools/python/python3-pydantic-core/0002-Dont-embed-RUSTFLAGS-in-final-binary.patch
+  rename 
+meta-python/recipes-devtools/python/{python3-pydantic-core_2.16.3.bb => 
+python3-pydantic-core_2.18.4.bb} (80%)
+  rename meta-python/recipes-devtools/python/{python3-pydantic_2.7.0.bb 
+=> python3-pydantic_2.7.4.bb} (95%)
+t
 
