@@ -1,133 +1,101 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C9539C52D7F
-	for <webhook@archiver.kernel.org>; Thu, 15 Aug 2024 04:45:46 +0000 (UTC)
-Received: from mail-ot1-f43.google.com (mail-ot1-f43.google.com [209.85.210.43])
- by mx.groups.io with SMTP id smtpd.web10.116218.1723697138042250308
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E838C531DD
+	for <webhook@archiver.kernel.org>; Thu, 15 Aug 2024 06:31:07 +0000 (UTC)
+Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com [209.85.167.42])
+ by mx.groups.io with SMTP id smtpd.web10.117290.1723703461950219501
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Aug 2024 21:45:38 -0700
+ Wed, 14 Aug 2024 23:31:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=hqvn+gYY;
- spf=pass (domain: gmail.com, ip: 209.85.210.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f43.google.com with SMTP id 46e09a7af769-704466b19c4so318092a34.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Aug 2024 21:45:37 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=HbwwlAUQ;
+ spf=pass (domain: konsulko.com, ip: 209.85.167.42, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-lf1-f42.google.com with SMTP id 2adb3069b0e04-52ed741fe46so629291e87.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Aug 2024 23:31:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1723697137; x=1724301937; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1723703460; x=1724308260; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=RunKbqlgvHc6nG4MfXMzXYcrZFxy/vgt+nQv5bA2S/U=;
-        b=hqvn+gYYCxbxCxucnEGe/53ND90NttrG6NKu9yP396TF983xfxwhUix6NGv0/+InkM
-         HoIkcwKb3ntLET3hbSTMHtknalOmPOUA/MfFugoDHG04keimRudHGJ1zTiQeO910hD3l
-         kqKGKo6mtsqOC1L6CPuZ3nz5gbM4ji2QjNekFVhEQPZYGjNIkOZAWr1jtIj3hHAYSSkk
-         HMAacZwqXA7KS7PpdJeceXFAipt8hB2/bjl3jav6dM0Tea/xJJlaK4HuN22Z/PINkKEE
-         RV6RI4FHZ6frFA32LF0He52X/aOZKNdSdETQK456n0SV1lRf1EKz9svwHSGBqn/qcDO8
-         FTPQ==
+        bh=uNZmB8JeL5BUwkZdsWGFVmhs63EvGCFctUq1BvMgR3c=;
+        b=HbwwlAUQUpqu/Rn8Sl3kt7ea78e0BSLkjYEJYR2QlotYA6f8XqH4o3+SFDKp1DJVv+
+         sn5g8RPMl57iZc7vuPp5cwX/J3KQ48/QLGUtDFxRW1ijCIw3uUzD4XLd4yYHliD9wCv2
+         kLnPI+9GUsJenHjRgx6YZIfUJFTozCD9cK1Jo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723697137; x=1724301937;
+        d=1e100.net; s=20230601; t=1723703460; x=1724308260;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=RunKbqlgvHc6nG4MfXMzXYcrZFxy/vgt+nQv5bA2S/U=;
-        b=W6LJsTdvMBmRUtSwg+TK5ihK3Z5LqOknVFFjJT+NgJcFtQCnte0rACEP6Gj15ll2pa
-         Y2Yjx0H7l6NGeTz3Nl1QiEvh8nTfCXQqMYv9wJ16f1NWSCZ2oqL6ako5otH326+QzcdC
-         qpmdjqsVPTQfPs2nsI2uWm1YBtoPRGVTxtVEa+9fkn5UfXFur4aaiySUBY21SjuYATIW
-         ZSRYCu38+It/hc/Ji2fm3kbpQFsdYawyzvE3wWz+QiJASZSDPyhxnzlPR0Q2Vhjs5Eg6
-         Maj4YpOg2DdxuBbFyiUBiEoYP4GKBes2QjFM8pyt7XvKIM4YrxcAnqPwwVIeqI16YY8o
-         NPCQ==
-X-Gm-Message-State: AOJu0Yw0pYLj1PjHRTQ0oOqUz34cR/6Wk3u7hxCdLaSiNqPW1Ih/FhcO
-	XEj/ZZyVHt8mh1bo1sdBOdAtEax4zNpnNIFe833vMsbkuqaakEljnKql1Q==
-X-Google-Smtp-Source: AGHT+IHapfoSIiHcxfos7kIeWiEMVBsbug/1ov41D3+akqeKlvlZTKlxFiIlV7nWtx6EaO3K1kOWZA==
-X-Received: by 2002:a05:6830:2b09:b0:709:4735:6dc1 with SMTP id 46e09a7af769-70c9d9c1043mr6465472a34.6.1723697136895;
-        Wed, 14 Aug 2024 21:45:36 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::e55d])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-7c6b6357a86sm316856a12.58.2024.08.14.21.45.36
+        bh=uNZmB8JeL5BUwkZdsWGFVmhs63EvGCFctUq1BvMgR3c=;
+        b=rLj0SC8XJV0J5WKvxMmhwdtZ+fjJs27/JCJiykmgQ5QRAltTxT7GQ1z7AfjUMmVs42
+         VkeCUWAHcwSm8BVSVIfDqjWrN9ztY1tp9NX+wo1EabP4DqGvKWouj8i7LnoYAdy4cUsj
+         6xQ6vEA0GA78EvzhVZuZfDg3Er2PJKvRvkqsCtGA0uQF3gpI2Dx6IDp72WQA2CFtKrAg
+         SYuR9gC0XSHh0YAU+fZnoXj433n52olfuwJIXibrrzreKgVQpqasUIUjzk8ldLFNrKvf
+         diuzTO0cs5y74JgnaxNv7SYCSjdrsAEGsBSdgk47fnkQdBItPjvQJUbh5APQ6oKNd3Yb
+         QEvA==
+X-Gm-Message-State: AOJu0YzU6Ey8mmVTHnMMOF9vjEPHqvBeGcdv5XiJExI2uG8q55VsHZRQ
+	h7E/j5KtcmU27hINTm+fpRgLsIVcNn2DZqOqHeESk8WSTQ9Wh9CX/8Ys/3VB4xbuwlfLr9kR6SI
+	M
+X-Google-Smtp-Source: AGHT+IEBrC2ZhgW6i6jectxR+iwx9v4ByilJqledoEJorOqXHcM0z9Q1bUVIH9qT3tpN4hFFgy8PfA==
+X-Received: by 2002:a05:6512:39cb:b0:530:e228:77ae with SMTP id 2adb3069b0e04-532edbad7a7mr3401701e87.40.1723703459371;
+        Wed, 14 Aug 2024 23:30:59 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3718985a286sm707174f8f.54.2024.08.14.23.30.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Aug 2024 21:45:36 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Wed, 14 Aug 2024 23:30:59 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Markus Volk <f_l_k@t-online.de>
-Subject: [meta-networking][PATCH 9/9] blueman: Fix buildpathe issue with cython generated code
-Date: Wed, 14 Aug 2024 21:45:23 -0700
-Message-ID: <20240815044523.1030831-9-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20240815044523.1030831-1-raj.khem@gmail.com>
-References: <20240815044523.1030831-1-raj.khem@gmail.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-astroid: Upgrade 3.2.4 -> 3.3.2
+Date: Thu, 15 Aug 2024 09:30:55 +0300
+Message-Id: <20240815063055.2088675-3-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240815063055.2088675-1-leon.anavi@konsulko.com>
+References: <20240815063055.2088675-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 15 Aug 2024 04:45:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111817
+ <openembedded-devel@lists.openembedded.org>; Thu, 15 Aug 2024 06:31:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111820
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Markus Volk <f_l_k@t-online.de>
+Upgrade to release 3.3.2:
+
+- Restore support for soft-deprecated members of the typing module
+  with python 3.13.
+- Fix a crash introduced in 3.3.0 involving invalid format strings.
+- Add support for Python 3.13.
+- Remove support for Python 3.8 (and constants PY38, PY39_PLUS,
+  and PYPY_7_3_11_PLUS).
+- Add the __annotations__ attribute to the ClassDef object model.
+- Implement inference for JoinedStr and FormattedValue
+- Add support for ssl.OP_LEGACY_SERVER_CONNECT (new in Python 3.12)
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...n-DO-not-emit-absolute-path-when-S-B.patch | 38 +++++++++++++++++++
- .../blueman/blueman_2.4.3.bb                  |  3 +-
- 2 files changed, 40 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-connectivity/blueman/blueman/0001-meson-DO-not-emit-absolute-path-when-S-B.patch
+ .../{python3-astroid_3.2.4.bb => python3-astroid_3.3.2.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-astroid_3.2.4.bb => python3-astroid_3.3.2.bb} (90%)
 
-diff --git a/meta-networking/recipes-connectivity/blueman/blueman/0001-meson-DO-not-emit-absolute-path-when-S-B.patch b/meta-networking/recipes-connectivity/blueman/blueman/0001-meson-DO-not-emit-absolute-path-when-S-B.patch
-new file mode 100644
-index 0000000000..10f89a124c
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/blueman/blueman/0001-meson-DO-not-emit-absolute-path-when-S-B.patch
-@@ -0,0 +1,38 @@
-+From 18af739fd96960bbc8c5db5dd290d2f9134cd347 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 14 Aug 2024 21:26:24 -0700
-+Subject: [PATCH] meson: DO not emit absolute path when S != B
-+
-+build systems like OE build outside sourcetree in such cases it works
-+ok but cython resolves the input file to absolute path and that gets
-+emitted into genetate _blueman.c as module name, renders the build
-+non-reproducible, wish cython had a better way to handle this but there
-+is not, therefore tweak the meson build rule to account for specifying
-+workdir to cython which will search the inputs correctly, and use
-+meson's build_root to emit the output into build dir. This ensures that
-+it becomes independent of source or build directories and cython does
-+not generate the absolute paths into generate C code.
-+
-+See cython discussion on [1]
-+
-+[1] https://github.com/cython/cython/issues/5949
-+
-+Upstream-Status: Submitted [https://github.com/blueman-project/blueman/pull/2461]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ module/meson.build | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/module/meson.build b/module/meson.build
-+index 096ad7c8..e3d96f17 100644
-+--- a/module/meson.build
-++++ b/module/meson.build
-+@@ -4,7 +4,7 @@ blueman_c = custom_target(
-+     'blueman_c',
-+     output: '_blueman.c',
-+     input: '_blueman.pyx',
-+-    command: [cython, '--output-file', '@OUTPUT@', '@INPUT@'])
-++    command: [cython, '-w', meson.source_root(), '--output-file', meson.build_root() + '/' + '@OUTPUT@', '@INPUT@'])
-+ 
-+ sources = [
-+     blueman_c,
-diff --git a/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb b/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb
-index df2a226f0a..c2bb4d24c6 100644
---- a/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb
-+++ b/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb
-@@ -8,7 +8,8 @@ inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon-cache u
+diff --git a/meta-python/recipes-devtools/python/python3-astroid_3.2.4.bb b/meta-python/recipes-devtools/python/python3-astroid_3.3.2.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-astroid_3.2.4.bb
+rename to meta-python/recipes-devtools/python/python3-astroid_3.3.2.bb
+index 056b37279..e5f05bd0e 100644
+--- a/meta-python/recipes-devtools/python/python3-astroid_3.2.4.bb
++++ b/meta-python/recipes-devtools/python/python3-astroid_3.3.2.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
  
- REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+-SRC_URI[sha256sum] = "0e14202810b30da1b735827f78f5157be2bbd4a7a59b7707ca0bfc2fb4c0063a"
++SRC_URI[sha256sum] = "99e9b5b602cbb005434084309213d6af32bf7a9b743c836749168b8e2b330cbd"
  
--SRC_URI = "git://github.com/blueman-project/blueman.git;protocol=https;branch=2-4-stable"
-+SRC_URI = "git://github.com/blueman-project/blueman.git;protocol=https;branch=2-4-stable \
-+           file://0001-meson-DO-not-emit-absolute-path-when-S-B.patch"
- S = "${WORKDIR}/git"
- SRCREV = "7bcf919ad6ac0ee9a8c66b18b0ca98af877d4c8f"
+ inherit pypi python_setuptools_build_meta
  
+-- 
+2.39.2
+
 
