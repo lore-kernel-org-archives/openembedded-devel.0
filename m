@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2680C5320D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2013C5320F
 	for <webhook@archiver.kernel.org>; Thu, 15 Aug 2024 04:45:36 +0000 (UTC)
-Received: from mail-oo1-f51.google.com (mail-oo1-f51.google.com [209.85.161.51])
- by mx.groups.io with SMTP id smtpd.web10.116212.1723697130751225233
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web11.116367.1723697131558662096
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Aug 2024 21:45:30 -0700
+ Wed, 14 Aug 2024 21:45:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ltCJhyuv;
- spf=pass (domain: gmail.com, ip: 209.85.161.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f51.google.com with SMTP id 006d021491bc7-5d5b1e33fa8so345770eaf.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Aug 2024 21:45:30 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YaPQ4Gkp;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-7b0c9bbddb4so432835a12.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Aug 2024 21:45:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1723697130; x=1724301930; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1723697131; x=1724301931; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=sixEQj2tNTvQcGs9bJDpii0NMthUt6E5ZGzEVDXnTSs=;
-        b=ltCJhyuv+/By0FQW0NaFsDmXFyrTDOwSdp+Or6KaJY4nzt2UjuZtOW6MXopCX+kAyc
-         GhddTM6kR/TLEMMRLz2lU0SWoenMx4bCxUZHaBVp4Y0fQ2+3Ny7187UUKECtGWFrWHhC
-         7h+VOhMt+IE0TNspuo9WbLcSoEmPQck+0jUJKIHfIKFVG1i9ckw533EpXDypoV4HKBy7
-         LbdJdEicmhITb4CCJFeMZn7pC7B4ezTjNqE9uoOpbFhtY/Uh5nv9E0gpJ5h6VHug00ag
-         fNdPf/Ad8ifkCql91nWVfMFvmItT7RrrKos4jiuzLYwTpixF3bTNlfk2zAztnqRiIGdM
-         dXKQ==
+        bh=JgkR4Z2Hwn9ZFyasbszyj7Jh872r1lnF5MkDORQx7mY=;
+        b=YaPQ4GkpieF9VZ25a23ppA7IHhgs8sKD92/bewNT0AdHFAAier1zz9pQt2tmdhK3pa
+         lGA44OT9+DQVfXi5/mPTEpBOJWwmTcFc/+t71MEI9cTK8SKGS4VDDl/Kg3q2zpUDX4mC
+         d6mS6eoJoLp2E3MDIwllYk7wZFhEIVJsTYpqfHJJlgVtSv6UDBGVBI0ZEdvBuAxoXw31
+         artqeIRS9m3OmK45FPpTnhDxUsyCgzXmggflVhYfEcyzdsAyzStWWNrKcb0OTMi0LaQ2
+         UyA3Cr6Wns0MZqacxqcIJNVTLeAyc173xsQEpx1VyJWK2PeWCNLsicqxWJhRKYikbqKU
+         b+VA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723697130; x=1724301930;
+        d=1e100.net; s=20230601; t=1723697131; x=1724301931;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=sixEQj2tNTvQcGs9bJDpii0NMthUt6E5ZGzEVDXnTSs=;
-        b=YHVIgjmEhr8jfa4lwJAWIK6FqzpXB9YxyOmfKGx3XwTKEap5se9ZBVhIgcXlpQDU1Y
-         QWwUUP6aEPG7TpY3l3P/yy6DIBxrgnKpcwwpgJJ6MSgqGeTSsHPByA7kdvhRRmyovE8B
-         Ko1nHbUvHs8IvXtDk5oZHKhZJO9nElpLp1Y6smwStqUXpZRxp9xWp3lqlXkq+jBM2HGY
-         rLSj7Luh3YueRWnlaRd3euxJ5u41O7ZJKnZXSxp7xJAwZ/IBtMRXjSyt9I1356Gvlif+
-         6txTHE039VfqboaQu6ijW13MnOIcO/KVMRH1kwaeqxgGcrZwG0LBfOo8RVXy55M3Vtek
-         2emw==
-X-Gm-Message-State: AOJu0YxtHB9r3zv7IYhWVbPZCVh1iWgZr24aWWpCpfDOzbOTL0ZeI8k2
-	LFsJiHGZwC1OerdbfTYKmYkr+GoppxU9ZYcs7z8au/SE1MuL1T5GiZOjDQ==
-X-Google-Smtp-Source: AGHT+IFvQvZfNlvgf0MCVdl9QOXvV4aydWxjFgp7jHyWz/pOpdM6Y5mjfFNWGGoyLgwghPK2M2kMdw==
-X-Received: by 2002:a05:6820:1c8d:b0:5d6:c77:fb85 with SMTP id 006d021491bc7-5da7c47f6dbmr6456265eaf.0.1723697129825;
-        Wed, 14 Aug 2024 21:45:29 -0700 (PDT)
+        bh=JgkR4Z2Hwn9ZFyasbszyj7Jh872r1lnF5MkDORQx7mY=;
+        b=hK9S6MH/WMQMEsXoYuUYGR0OgBaSK/9U2XT3QOS1zgpfXvsE9mg2RpWUsVjXulTS7z
+         kccpLoGr+WktoeHb5md4bX6STJAGhIC2nXUclBEU257DMHEys5m3ljLNwXbJHvbAECxk
+         xdhlVR11Rl7HwaP6JLGAU6Xoovk4prqebDuhrRndm9E1u9AbaMhWKIFCNGu4cZnoFWH5
+         Ryn9HAWfGn6P5sKJ2+os/OfFvXiU7tFJCTV/V+Bif/MJNw8N3izXPXnLkEzngMA63jUg
+         at0sw0yxzGKoyWRV7j8UgYn9u/cRz80AxY8nDptMFJdlJtgqaLJlh2GIq+aS/bryLSXd
+         UTCA==
+X-Gm-Message-State: AOJu0Yx1XG9G2CpNTkC2+Yx7yBQLQiWopN2lXsb+oPN9MgGjDoerSChW
+	cLKgIWrUX9PUkQUnGcBsxYTWgdoA1wVETM1yrgheKKHj/sTs6GOr2jGf5A==
+X-Google-Smtp-Source: AGHT+IEJA5a44ci2BhJ0VYuwIAnd/igvmsUSonS2CH6++SLZrSelAsGAcqrWRZSsWOB6tSC9OVu+IQ==
+X-Received: by 2002:a05:6a20:d488:b0:1c2:8eb7:19cd with SMTP id adf61e73a8af0-1c8eaf800ffmr6728388637.42.1723697130681;
+        Wed, 14 Aug 2024 21:45:30 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::e55d])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-7c6b6357a86sm316856a12.58.2024.08.14.21.45.28
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-7c6b6357a86sm316856a12.58.2024.08.14.21.45.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Aug 2024 21:45:28 -0700 (PDT)
+        Wed, 14 Aug 2024 21:45:30 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/9] transmission: Upgrade to 4.0.6 release
-Date: Wed, 14 Aug 2024 21:45:16 -0700
-Message-ID: <20240815044523.1030831-2-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 3/9] wolfssl: Add packageconfig for reproducible build
+Date: Wed, 14 Aug 2024 21:45:17 -0700
+Message-ID: <20240815044523.1030831-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20240815044523.1030831-1-raj.khem@gmail.com>
 References: <20240815044523.1030831-1-raj.khem@gmail.com>
@@ -61,42 +61,28 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 15 Aug 2024 04:45:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111810
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111811
 
-Use external libpsl, this also avoids hardcoded buildpaths which
-gets into binaries due to inplace vendored libpsl
+Make this option turned on by default
+
+Fixes
+WARNING: wolfssl-5.7.2-r0 do_package_qa: QA Issue: File /usr/lib/libwolfssl.so.42.2.0 in package wolfssl contains reference to TMPDIR [buildpaths]
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../{transmission_4.0.5.bb => transmission_4.0.6.bb}        | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-connectivity/transmission/{transmission_4.0.5.bb => transmission_4.0.6.bb} (93%)
+ meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-connectivity/transmission/transmission_4.0.5.bb b/meta-oe/recipes-connectivity/transmission/transmission_4.0.6.bb
-similarity index 93%
-rename from meta-oe/recipes-connectivity/transmission/transmission_4.0.5.bb
-rename to meta-oe/recipes-connectivity/transmission/transmission_4.0.6.bb
-index b9ed3d925d..7b68cb0613 100644
---- a/meta-oe/recipes-connectivity/transmission/transmission_4.0.5.bb
-+++ b/meta-oe/recipes-connectivity/transmission/transmission_4.0.6.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://transmissionbt.com/"
- LICENSE = "MIT & GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=ba8199e739948e198310093de27175fa"
+diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb
+index d45f1f69d0..009434d96a 100644
+--- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb
++++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb
+@@ -19,4 +19,7 @@ S = "${WORKDIR}/git"
  
--DEPENDS = "curl libevent gnutls openssl libtool intltool-native glib-2.0-native"
-+DEPENDS = "curl libevent libpsl gnutls openssl libtool intltool-native glib-2.0-native"
- RDEPENDS:${PN}-web = "${PN}"
+ inherit autotools
  
- SRC_URI = " \
-@@ -12,8 +12,8 @@ SRC_URI = " \
- 	file://transmission-daemon \
- "
- 
--# Transmission release 4.0.5
--SRCREV = "a6fe2a64aa7eca089f96006cf082a12f0cde937f"
-+# Transmission release 4.0.6
-+SRCREV = "38c164933e9f77c110b48fe745861c3b98e3d83e"
- 
- S = "${WORKDIR}/git"
- 
++PACKAGECONFIG ?= "reproducible-build"
++
++PACKAGECONFIG[reproducible-build] = "--enable-reproducible-build,--disable-reproducible-build,"
+ BBCLASSEXTEND += "native nativesdk"
 
