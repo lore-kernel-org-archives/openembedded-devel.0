@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BAAF0C5320E
-	for <webhook@archiver.kernel.org>; Fri, 16 Aug 2024 06:19:22 +0000 (UTC)
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.web11.142239.1723789161973488120
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A51B5C531DF
+	for <webhook@archiver.kernel.org>; Fri, 16 Aug 2024 06:19:32 +0000 (UTC)
+Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com [209.85.210.53])
+ by mx.groups.io with SMTP id smtpd.web10.142136.1723789164303856170
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Aug 2024 23:19:22 -0700
+ Thu, 15 Aug 2024 23:19:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Q62dwTqC;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-710cad5778fso1427772b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Aug 2024 23:19:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Y/8LGRdy;
+ spf=pass (domain: gmail.com, ip: 209.85.210.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f53.google.com with SMTP id 46e09a7af769-70968db52d0so1784288a34.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Aug 2024 23:19:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1723789161; x=1724393961; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1723789163; x=1724393963; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=aPTqltY352ru/htW3E3l3vpmKRKm0JFUlO4DO4NzT58=;
-        b=Q62dwTqCWPUgdkaY0hnvd5waM3vP275y0nTWFHd6s264I3E6v86E0Xv0wND/57QoLQ
-         fpwZkp/1IV4lcRSTkjN4kt7p6jtfWcZ6pVgPLSOtOpO6VsdPViIagHugnNSG03zLT9p/
-         PZpDGK7Wg5vq9t2lRFnhvkTmlOBCpnSU+JXHeONw6GE2DkpjJOf06H/jcX0FZy2JzOK3
-         RdAqPEcBFGifPGwfHVx/FXJLEKYuMGXzZQ3gOr0QCAYdQS+Hvc+Cli+W+psuxToKvcln
-         1/59emTAjlTDM4PWJ4tAmDzOMXCfssw8IyMLiArHVwc5XMkZucTtJvZaJd+sVKo1EmG/
-         ZnFQ==
+        bh=WBBqZ+a7r24gd0k5peNwnrbKBM+kxmZ2JHfWueO4SZc=;
+        b=Y/8LGRdyDGiFOd0AslBrPvug9+ZP7rRFm7f0qh9OHHXIfJMQv/FdoHFmo+BAVZyFwU
+         q121YXLHG51y8UopkAfA51PwzDRWIDyq7MJKBYEh/d0J8PR5ZjTPGPqnnEs9THHJJugD
+         MH4pf0jloN0jhBdUJeCHWVDTtHVuyOA4LW8UA2CXk2eKK4oUOQXFD6rQcEjRcXd+5aH0
+         WV9f7yaS0ZUSWE8ITrN/F0DaAxGkjSnKK5YeLih6ypwAPCclSZm+Nn96/+wOUygcLLBM
+         YiBV3SxZmm0BdEgXmfmMQETSRcaWc8cJfLGt9/w0Cu4vcZ8ebQHkytl8n9Q5wJXcx8Gr
+         YAiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1723789161; x=1724393961;
+        d=1e100.net; s=20230601; t=1723789163; x=1724393963;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=aPTqltY352ru/htW3E3l3vpmKRKm0JFUlO4DO4NzT58=;
-        b=ocsSgwkVN80XcWT5Zu+8AzJ2pgsBb1L+jTy6roPjOU8q869N/8XCAo6aEPh7WtqYoH
-         uc5/c0VRvcG3dg+bI4oz8R1axGay3X43O4CHWArXjmLSSt/FMVGFde8P3qPD1B0Xis+g
-         c25mQs3qCdlrhtaSsII4MD2k3X5XEi3q8BA8bNzXlcc8kWp4hMPZnJsW94miMCS+ulmf
-         /JwFI4WRW7ycxrlbAiEEk8eYt2lPePQ6eLr/Jh7n0x9k1KSnpFlkuJVkWegnvcFoGL2Y
-         m6uDtudvUyiPkHM/4Qpng11nZu991Ruxo5olM6q8IG6bLby1tHlzc402eaVMG/UqSpT3
-         U3Hw==
-X-Gm-Message-State: AOJu0YyNBpn7MqSGmCWbARoB0YsuEAcR8M22wc1zSB9iH6VS0A/m5iaK
-	wbUfrQ3BN110cGKiD6Fps+hD4cghgIhkftSX2kLaRrFv4Cr+JaOv3eARzA==
-X-Google-Smtp-Source: AGHT+IGklTWBUSmnsnM8dXu0Xe1V5SahjJk8+w3GJXok8ygW1w3jgpZvQpK1v4oInNh4a2vUOU7rqA==
-X-Received: by 2002:a05:6a00:3d01:b0:710:58ef:1746 with SMTP id d2e1a72fcca58-713c4b8f7fcmr2657656b3a.0.1723789161193;
-        Thu, 15 Aug 2024 23:19:21 -0700 (PDT)
+        bh=WBBqZ+a7r24gd0k5peNwnrbKBM+kxmZ2JHfWueO4SZc=;
+        b=bCPedKY9kdzrrUoUkxC0xV7B2HQNETurP2HSTqzCxA5YtWMQWHhfTSxTQbxg8k5knR
+         4H6Dv6dG4o/c7EoemXjJAnrfc7zk95s5mmcSJ88GIsP1aFJfYPEJBiWEdKshgxQ81uaV
+         2MJBVeNUjcbOBSOiou9jO8nb7i14bGOVLxweHGPX+97SIrWP9adM5ZVXXg6iiP5XbBxp
+         JCG/Moc1bBpA99E3JRxEwuJxqt+t+gayTiD2hTtgm1gNfvD1FQOgnvXUQVf8hZrRcML0
+         RDXBkVGOzN7jBKns3N+2Pher4h0WM28qvwRFdfkm/dG30BgOAzEaAw37mXWRyU1SQClD
+         zavA==
+X-Gm-Message-State: AOJu0YykJB2E1N+w0u87ePQaDqjweiZmCyZFL+5NNQ1zrTL+6v/JyBho
+	FksvEjappdsLKivmbV3++X/mEIHf87BUXbqZMlAUa2N9CwvhTgWYcE635g==
+X-Google-Smtp-Source: AGHT+IGTJ6/oZ6mn27qvVv5aHR//1k5VBBOHsSMbR8w+LTT5DWkJWCBJf51JgFILxsRK9/eFpTXPPw==
+X-Received: by 2002:a05:6359:a396:b0:1aa:c73d:5a98 with SMTP id e5c5f4694b2df-1b393310aaamr234841555d.26.1723789163139;
+        Thu, 15 Aug 2024 23:19:23 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::4c22])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7127af1be5asm2022940b3a.176.2024.08.15.23.19.20
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7127af1be5asm2022940b3a.176.2024.08.15.23.19.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Aug 2024 23:19:20 -0700 (PDT)
+        Thu, 15 Aug 2024 23:19:22 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 4/6] ndisc: Remove buildpaths from binaries
-Date: Thu, 15 Aug 2024 23:19:13 -0700
-Message-ID: <20240816061915.2095711-4-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 6/6] keepalived: Make build reproducible
+Date: Thu, 15 Aug 2024 23:19:15 -0700
+Message-ID: <20240816061915.2095711-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20240816061915.2095711-1-raj.khem@gmail.com>
 References: <20240816061915.2095711-1-raj.khem@gmail.com>
@@ -60,31 +60,72 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 16 Aug 2024 06:19:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111832
-
-configure emits its arguments into binaries via PACKAGE_CONFIGURE_INVOCATION
-therefore edit the paths from this in generated config.h before it gets into
-binaries.
+ <openembedded-devel@lists.openembedded.org>; Fri, 16 Aug 2024 06:19:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111834
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ ...not-emit-compiler-flags-into-object-.patch | 29 +++++++++++++++++++
+ .../keepalived/keepalived_2.2.8.bb            |  5 ++++
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/keepalived/keepalived/0001-configure.ac-Do-not-emit-compiler-flags-into-object-.patch
 
-diff --git a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb
-index a827e7f42a..fb00b83516 100644
---- a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb
-+++ b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb
-@@ -27,6 +27,10 @@ do_configure:prepend() {
-     ${S}/autogen.sh
- }
+diff --git a/meta-networking/recipes-daemons/keepalived/keepalived/0001-configure.ac-Do-not-emit-compiler-flags-into-object-.patch b/meta-networking/recipes-daemons/keepalived/keepalived/0001-configure.ac-Do-not-emit-compiler-flags-into-object-.patch
+new file mode 100644
+index 0000000000..1f9f8b30b1
+--- /dev/null
++++ b/meta-networking/recipes-daemons/keepalived/keepalived/0001-configure.ac-Do-not-emit-compiler-flags-into-object-.patch
+@@ -0,0 +1,29 @@
++From 5b1b04356f3efc08ae279cafc6ee86df11f10c9a Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 15 Aug 2024 23:13:02 -0700
++Subject: [PATCH] configure.ac: Do not emit compiler flags into object files
++
++They contain options which have absolute paths in them e.g. --sysroot
++therefore do not record them and make build reproducible
++
++Upstream-Status: Inappropriate [OE-Specific]
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ configure.ac | 3 +--
++ 1 file changed, 1 insertion(+), 2 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index fae16f1..677b94a 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -904,8 +904,7 @@ if test "$enable_hardening" != no; then
++ 	  "-Wp,-D_FORTIFY_SOURCE=2" \
++ 	  "-fexceptions" \
++ 	  "-fstack-protector-strong" \
++-	  "--param=ssp-buffer-size=4" \
++-	  "-grecord-gcc-switches"
+++	  "--param=ssp-buffer-size=4"
++   do
++     AC_MSG_CHECKING([for $FLAG support])
++     CFLAGS="$CFLAGS $FLAG"
+diff --git a/meta-networking/recipes-daemons/keepalived/keepalived_2.2.8.bb b/meta-networking/recipes-daemons/keepalived/keepalived_2.2.8.bb
+index 85f4a6aa59..c4d59d3caa 100644
+--- a/meta-networking/recipes-daemons/keepalived/keepalived_2.2.8.bb
++++ b/meta-networking/recipes-daemons/keepalived/keepalived_2.2.8.bb
+@@ -11,6 +11,7 @@ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ SRC_URI = "http://www.keepalived.org/software/${BP}.tar.gz \
++           file://0001-configure.ac-Do-not-emit-compiler-flags-into-object-.patch \
+            "
+ SRC_URI[sha256sum] = "85882eb62974f395d4c631be990a41a839594a7e62fbfebcb5649a937a7a1bb6"
+ UPSTREAM_CHECK_URI = "https://github.com/acassen/keepalived/releases"
+@@ -30,6 +31,10 @@ EXTRA_OEMAKE = "initdir=${sysconfdir}/init.d"
+ 
+ export EXTRA_CFLAGS = "${CFLAGS}"
  
 +do_configure:append() {
-+    sed -i -e 's|${WORKDIR}|<scrubbed>|g' ${B}/config.h
++    sed -i -e 's|${WORKDIR}|<scrubbed>|g' ${B}/lib/config.h
 +}
 +
- do_install:append () {
-     rm -rf ${D}${localstatedir}
-     # Enable SUID bit for applications that need it
+ do_install:append() {
+     if [ -f ${D}${sysconfdir}/init.d/${BPN} ]; then
+         chmod 0755 ${D}${sysconfdir}/init.d/${BPN}
 
