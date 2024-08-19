@@ -2,64 +2,64 @@ Return-Path: <adrian.freihofer@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 04264C3DA4A
-	for <webhook@archiver.kernel.org>; Mon, 19 Aug 2024 08:41:36 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.web10.206025.1724056895398562288
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10445C52D7C
+	for <webhook@archiver.kernel.org>; Mon, 19 Aug 2024 08:45:36 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.web10.206060.1724057130710357345
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Aug 2024 01:41:35 -0700
+ Mon, 19 Aug 2024 01:45:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lUsxzBiO;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: adrian.freihofer@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-42808071810so32201085e9.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Aug 2024 01:41:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CSpJpai8;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: adrian.freihofer@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-42809d6e719so33793085e9.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Aug 2024 01:45:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1724056893; x=1724661693; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1724057128; x=1724661928; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=5iMM+se+hAwVLA4N3687yRXacSKOq1UI/KY9/a7l6nI=;
-        b=lUsxzBiOp7FDacdtzZdg72iL1S5BpUX8mpK8TbIiIgN2qXV94FP6x2POU1ifOJJlGG
-         Ai8szMrTcWVVXOzytfutODlWjbct64J809OFkEFwMfjKCpglm/t6/faixIn+fXZbMoAb
-         F2MzeQKMVHc5wf1rqlvwPb4bWbBHQCZXlfzj+Rc/aAiBqbZSTycljYvFVBlgjc5VAC+b
-         bfyEB+u9eK8vHMiZCKdMwZw4rpUQjZR3G0V9F8/RU+b5Umvtbqv71PMSGGOv6DxlAEwc
-         c8/kiSbF6UDkjv1y0trR4KmMDNBOscLeH2nDxmNOM4Km5cS0UCGPfE/KGhuaA2POWRue
-         HicA==
+        bh=8zU+TpSa8RmwXcOwuwGz5sIt53LrzSdx9F7Swemdmb0=;
+        b=CSpJpai8Xl8kgO/JaGuIIww0nWYHF/oeCq1z39lX+dc23Od3kotDfjGbjDrDRk77SX
+         qT4ChMtD9PIwU+xM8il9hD0YdKCnrWUPwIhl0qu6hclVqcSzzySEV0NAvR9Q8Ax8oOwv
+         utFIBjP9RGGPvAzRZcXry1fhrVIF551l/SECePfO9ZlE6+aWi55CuXtUJi1/2DS3lIeL
+         fO/sYeKtPoXsdKspnOezLOslkjEWUKz0oa1U3vAE3tGdUUAC/Qqxv9oAnDO/qu/Pu4HP
+         Eat5b9JBpfl0FdKHF+BVfKB04TP/rfTPVHR9f6EIEPXtDP1e35Uh7f0awzoL+3mbR66S
+         WtsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724056893; x=1724661693;
+        d=1e100.net; s=20230601; t=1724057128; x=1724661928;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=5iMM+se+hAwVLA4N3687yRXacSKOq1UI/KY9/a7l6nI=;
-        b=tBhkZmw8PrpOse5Wv/KWUOwPO7+2CxADSM/8DlB9mVG6Z0YcNXhZCoCzZYeLWhpubK
-         9969s4FlKgympyyjW3XYpff827FEkRTBUWeKXa9tNJTJfsrcGb1wStmLSxpHkY7ii89p
-         hmIMcGg4f+NZ6O1Iuij/KU9vVN4LkNmsP0vxHEJDJ65dOslMVkj6yPDAyTdXwWrJt+Fs
-         hkxHov7CjqP4E4EY0ZfTdbMwfJ9uDACZTnyi/I8Xsa3XqiHHovn8lCFDbUDrWoyGuTuJ
-         WhMbhuf3jnbGbGAn9DKC5UwUGDtYBQTfld/wyvyPMkSNDVlg0h1LsuD+VftA60COGy+U
-         4XgQ==
-X-Gm-Message-State: AOJu0YyvSQSlOGL9icYTCHT+qmz1wpolwm7w5YfMR541l6o+pakYYRDF
-	o/wxsWDqnlnCmNflfXHOKbVJhbAJ1P+Bx/IRGhmwGS6wfFSszI/2qvVRVA==
-X-Google-Smtp-Source: AGHT+IHSp96k4bdV7EdhEsob+PxjkI7kB5Ir30XeTKxyYdRdsMMoyvqwx2OH1GQdAFhVUyilQ4hR6w==
-X-Received: by 2002:a05:6000:14c:b0:368:7f4f:9ead with SMTP id ffacd0b85a97d-37194315d69mr7257111f8f.7.1724056892878;
-        Mon, 19 Aug 2024 01:41:32 -0700 (PDT)
+        bh=8zU+TpSa8RmwXcOwuwGz5sIt53LrzSdx9F7Swemdmb0=;
+        b=qtteQd+zm7A7blAc1DYvYGww+FuX4THu1P+rTyirKYrxtyu+8xC2I/oTMTa67ztYVE
+         euPhCHbbR+GHF/pm034EFiHHdHiCSGiBxIdVU3qoEBiMK8NjQULfdHDBL2jFLtpZXz7I
+         P0syaechxZdnXuV8fGZWCa9/7U6KxlKYU9Ymkquwf9X9jjrNPoHHDfhBxRKz1UNhHVex
+         sdysDojO8+N2+TsPNFoY2VGpar5YTpBpw6CAvIL1nX2101t9IO3Rx8BGk17t+Fu6gkBQ
+         6GKwVcwisZV9CfSKn2RCg4vb2WcM3LrSGavS0fLElLky58riwYbXLzu35sCdbLFce0/V
+         kVpQ==
+X-Gm-Message-State: AOJu0Yw6SEkgwoRqyMjAXqb4DYClaYn7d28tJiWh5OqBbQuUaRTxovAL
+	BDw2Ei4c+23DG9AUoCsDsNXHawcDgrVLUG9yl5GDYskfHNazHHzirWKUVQ==
+X-Google-Smtp-Source: AGHT+IEDxb65AbjNZ6xizQT95xmyz7zNd77wjMtbIHVcbtj/IQjmMnRoU+2WZ56z4i2s/FsygqW5lQ==
+X-Received: by 2002:a05:600c:4683:b0:428:1694:bd8c with SMTP id 5b1f17b1804b1-42aa8276727mr37447705e9.37.1724057128231;
+        Mon, 19 Aug 2024 01:45:28 -0700 (PDT)
 Received: from af-t14s.fritz.box (212-51-147-160.fiber7.init7.net. [212.51.147.160])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3718983a2eesm9880202f8f.19.2024.08.19.01.41.32
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-429d780ba5dsm209920715e9.0.2024.08.19.01.45.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Aug 2024 01:41:32 -0700 (PDT)
+        Mon, 19 Aug 2024 01:45:27 -0700 (PDT)
 From: Adrian Freihofer <adrian.freihofer@gmail.com>
 X-Google-Original-From: Adrian Freihofer <adrian.freihofer@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Adrian Freihofer <adrian.freihofer@siemens.com>
-Subject: [meta-oe][PATCH] networkmanager: remove modemmanager rdepends
-Date: Mon, 19 Aug 2024 10:41:18 +0200
-Message-ID: <20240819084118.392393-1-adrian.freihofer@siemens.com>
+Subject: [meta-oe][scarthgap][PATCH] networkmanager: remove modemmanager rdepends
+Date: Mon, 19 Aug 2024 10:45:25 +0200
+Message-ID: <20240819084525.393699-1-adrian.freihofer@siemens.com>
 X-Mailer: git-send-email 2.46.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Aug 2024 08:41:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111846
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Aug 2024 08:45:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111847
 
 This reverts commit: 5edb8335dc46450fd6bcdbb3fcf55336b32bd422
 
@@ -82,14 +82,14 @@ specific needs.
 
 Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
 ---
- .../networkmanager/networkmanager_1.48.6.bb                     | 2 +-
+ .../networkmanager/networkmanager_1.46.0.bb                     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.48.6.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.48.6.bb
-index 215f5a424..e9284a29b 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.48.6.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.48.6.bb
-@@ -102,7 +102,7 @@ PACKAGECONFIG[polkit] = "-Dpolkit=true,-Dpolkit=false,polkit"
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.46.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.46.0.bb
+index 8184fcf1a..1b4003df1 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.46.0.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.46.0.bb
+@@ -99,7 +99,7 @@ PACKAGECONFIG[polkit] = "-Dpolkit=true,-Dpolkit=false,polkit"
  PACKAGECONFIG[bluez5] = "-Dbluez5_dun=true,-Dbluez5_dun=false,bluez5"
  # consolekit is not picked by shlibs, so add it to RDEPENDS too
  PACKAGECONFIG[consolekit] = "-Dsession_tracking_consolekit=true,-Dsession_tracking_consolekit=false,consolekit,consolekit"
