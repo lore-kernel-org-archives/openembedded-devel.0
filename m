@@ -2,195 +2,408 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D1EAC3DA4A
-	for <webhook@archiver.kernel.org>; Mon, 19 Aug 2024 15:36:28 +0000 (UTC)
-Received: from mail-oo1-f43.google.com (mail-oo1-f43.google.com [209.85.161.43])
- by mx.groups.io with SMTP id smtpd.web10.213563.1724081780195231078
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94838C52D6F
+	for <webhook@archiver.kernel.org>; Mon, 19 Aug 2024 16:05:48 +0000 (UTC)
+Received: from mail-oo1-f54.google.com (mail-oo1-f54.google.com [209.85.161.54])
+ by mx.groups.io with SMTP id smtpd.web11.214657.1724083546485820637
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Aug 2024 08:36:20 -0700
+ Mon, 19 Aug 2024 09:05:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=k4dm9Aby;
- spf=pass (domain: gmail.com, ip: 209.85.161.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f43.google.com with SMTP id 006d021491bc7-5d5c324267aso2633297eaf.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Aug 2024 08:36:20 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZONOUQqH;
+ spf=pass (domain: gmail.com, ip: 209.85.161.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f54.google.com with SMTP id 006d021491bc7-5d5d077c60aso2490850eaf.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Aug 2024 09:05:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1724081779; x=1724686579; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=ew4XnmyitvlxscbulTiCQ7Nc49tzd3PBRApb/WJjJVQ=;
-        b=k4dm9Abyy7BILdG568fbpSIiNPPdjTtJKzpIxFNKBTgUtzA9bvGr3tFIPJYrGCU5EZ
-         h75P0qY1vck86B/Xppd1wsmNniMI0re5fVhpOo0Xt+psMdKtyDeSe6GcCIHNzbdxMELx
-         3UMH1h/ujo92KcRZ1yDuRYSIvI3rcRvx+F+YK4XkkWE4sQZTJ0qy7tE8QwXFg3DV3JOg
-         pEJ59E4h5Lw4yAZ/llKX6VYvlNnw7MKNLmKpuQlnSwZ8+ILfNk7iA4L0XLiCdUiOzzfO
-         AXZ48fcsv2QuAliYWLV4kh2CEeLMxKfE78ZredPog+TSVTrjuYZ31bqhxh6XYeVUfCtR
-         xnMA==
+        d=gmail.com; s=20230601; t=1724083546; x=1724688346; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=QaJai+2u4t2ViE19WlxO+qFeYxWP/ZHByFNB1xjTMNU=;
+        b=ZONOUQqHPtKMiilBG1uh1WG9beKSCaDnp8OQVWZWl2bdkQ8dmlqiJFeDqIjtdK2fwa
+         NOc85vt2l212m1K3GwMC+0YhnrlGAxr8sbmxWKkIXaMF3XRBUvdAd3qCwgVdQPj2ocA5
+         UQcC2+hURzxiO6R8gQytySKaGg+izaqLZfumlwIxyt8zU8BPjuW9mCab/seQfvx4Ibrd
+         nNUDOOmhQ5P1uylL0a1ehHYiq1UWU8h0dXh2vOUoqvOY53kFqbKby3TIPeCHKXAACaF0
+         LQwbOPW9KjAXhpaXhBqOY7M0ThxfRZ4u/HN26Ui/fhFGzCBCSEpsOYkstiRcZc4F5LR0
+         WgcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724081779; x=1724686579;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ew4XnmyitvlxscbulTiCQ7Nc49tzd3PBRApb/WJjJVQ=;
-        b=R0/e74PkKiEow7j6xRhFQJQdhytnc0jx/9Q6jWjDMW3T0EsWeFgH0hwqxcZpc6RsV8
-         yBhI3l9805bQaSfb/FGD/6dBpFv2oStxf6Ukcd2ZXyAUchSlr3jsLhvSA+YvkCPzWVoT
-         rmATj3fwUocYw2HlR8w5LbJxSdO7M9HahqgJbG5odX0Yz3/d4IkBUKQFkZzFDJhy3TO5
-         gjWlVqxO40d0drvvIvfn+yQTHkTkNKT2N5DPxyx68bTTQKy85aEqxhUKFYor3d9hp4x0
-         RK90gbvqKhV+l2NHxH340Fuj8fBFuh/8KgbWB/KaD+t8ClM8jRNa9gRss/9RavzM6G+9
-         BlHA==
-X-Gm-Message-State: AOJu0YyLYgUP/QG2cWJNhXKz9rdMBNIDlQk4T88udhwRE1GjnceuciNy
-	3OoPUK/6Q1+iXJIMSglRoYY/4zix0ICIpUHjRqK22oxaYiVzdT4akQk65jR7mo7gx7LSrDR7uUY
-	k8333H3NiKbnaKmkDQ5aeJav7R+YwhA==
-X-Google-Smtp-Source: AGHT+IEnzJmPxhgf0Y5MZfgnea9BDSOo8rllA+0d8wvR2WDCcMoXp/Vbfy2u6psKbFrzLuDc7wx4AP2TqZanM9mGDNg=
+        d=1e100.net; s=20230601; t=1724083546; x=1724688346;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=QaJai+2u4t2ViE19WlxO+qFeYxWP/ZHByFNB1xjTMNU=;
+        b=MkVx37KK1QCmfnvN0xNEYdV8e3BbGqgV9B/LwKY0p5Ag7/6mDPPINWnSm+70zh5WYl
+         EJ2+pHihZsCTgV3G7alIubaTDuI4YJ39RyY3XdjHWo1dAoQYSby56YcdBQXB8YDL5TS+
+         rcCUJMxgm77yJiQNGy/JS2kAqg/+/FaPrixd0h0f/4xDncd+kdC+VOsSSiiF3Ym374XZ
+         NxJYuCjpuqYSjftpnsnnaZeS1x5WIWoktaN9/lH1vKHXmos5yorf6A5WSL0yzgUV3wco
+         xeCaH5R5cRowRYGs8c4n1sc7kYLZ4+j6hYfCYuajUWr9w1HG8KQF/fla5W4p7HNtjE6H
+         +dTw==
+X-Gm-Message-State: AOJu0YwXf5u9bEWnajucnyJPYzfaIQpCqrMOe7XnVNczMHZiaG19X+Vd
+	6PKIjr7rwkCYLFCa7U7roVtnXsl6f03ZKebHt6YQSXrJwATQU+FhmNSJW57w4OuwmknxXy262GH
+	LU1TjUmTxOwOwwV7hgNAMQs0LMHwMUg==
+X-Google-Smtp-Source: AGHT+IHNnNfdV7qJdLkU/+TYRazviFCWK6nmXypnyRQ1ICJFpPkAV7zoJ0DOGHgGugtC2jOoFa0ybQGgq0HmjK40EFs=
 X-Received: by 2002:a05:6820:1c85:b0:5c9:d9db:6a51 with SMTP id
- 006d021491bc7-5da97d412cbmr13595124eaf.0.1724081779485; Mon, 19 Aug 2024
- 08:36:19 -0700 (PDT)
+ 006d021491bc7-5da97d412cbmr13718448eaf.0.1724083545546; Mon, 19 Aug 2024
+ 09:05:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240818225620.2226473-1-raj.khem@gmail.com> <20240818225620.2226473-2-raj.khem@gmail.com>
- <DB5PR02MB10213E8A744BD7731C1DD7591EF8C2@DB5PR02MB10213.eurprd02.prod.outlook.com>
-In-Reply-To: <DB5PR02MB10213E8A744BD7731C1DD7591EF8C2@DB5PR02MB10213.eurprd02.prod.outlook.com>
+References: <20240819022906.999604-1-hongxu.jia@windriver.com>
+In-Reply-To: <20240819022906.999604-1-hongxu.jia@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 19 Aug 2024 08:36:08 -0700
-Message-ID: <CAMKF1soBMmrqeX5PWqSoAv_b09Wn7=HRapKu9BfHzs0vzd+nUA@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH 2/5] fwknop: Specify target
- locations of gpg and wget
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="00000000000007b55606200b12ec"
+Date: Mon, 19 Aug 2024 09:05:19 -0700
+Message-ID: <CAMKF1sqjP5f3KWZUi-=Y+ueH1iVahdLHmU4Ww47-pnYv6o_U=A@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] nodejs: support cross compile without qemu
+ user conditionally
+To: hongxu.jia@eng.windriver.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Aug 2024 15:36:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111852
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Aug 2024 16:05:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111853
 
---00000000000007b55606200b12ec
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Aug 19, 2024 at 8:33=E2=80=AFAM Peter Kjellerstedt <
-peter.kjellerstedt@axis.com> wrote:
-
-> > -----Original Message-----
-> > From: openembedded-devel@lists.openembedded.org <
-> openembedded-devel@lists.openembedded.org> On Behalf Of Khem Raj
-> > Sent: den 19 augusti 2024 00:56
-> > To: openembedded-devel@lists.openembedded.org
-> > Cc: Khem Raj <raj.khem@gmail.com>
-> > Subject: [oe] [meta-networking][PATCH 2/5] fwknop: Specify target
-> locations of gpg and wget
-> >
-> > This fixes emitting buildpaths into binary and also
-> > fixes the issue where these tools wont exist on
-> > the paths they were found on build machine
-> >
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > ---
-> >  meta-networking/recipes-support/fwknop/fwknop_2.6.11.bb | 4 +++-
-> >  1 file changed, 3 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/meta-networking/recipes-support/fwknop/fwknop_2.6.11.bb
-> b/meta-networking/recipes-support/fwknop/fwknop_2.6.11.bb
-> > index c9f9596eb4..0e7998b6dc 100644
-> > --- a/meta-networking/recipes-support/fwknop/fwknop_2.6.11.bb
-> > +++ b/meta-networking/recipes-support/fwknop/fwknop_2.6.11.bb
-> > @@ -12,7 +12,9 @@ SRC_URI[sha256sum] =3D
-> "a4ec7c22dd90dd684f9f7b96d3a901c4131ec8c7a3b9db26d0428513f6
-> >
-> >  DEPENDS =3D "libpcap gpgme"
-> >
-> > -EXTRA_OECONF =3D " --with-iptables=3D${sbindir}/iptables"
-> > +EXTRA_OECONF =3D "--with-iptables=3D${sbindir}/iptables \
-> > +                             --with-gpg=3D${bindir}/gpg \
-> > +                             --with-wget=3D${base_bindir}/wget"
+On Sun, Aug 18, 2024 at 7:29=E2=80=AFPM hongxu via lists.openembedded.org
+<hongxu.jia=3Deng.windriver.com@lists.openembedded.org> wrote:
 >
-> Do you happen to have tabs configured to be four spaces wide?
-> Please use spaces instead for alignment since the above looks
-> weird with 8-character tabs.
+> Due to the scope of supported BSPs by qemu-user is limited, such
+> as a segment fault on armv9 after qemu apply commit [target/arm:
+> Convert LDAPR/STLR (imm) to decodetree][1]
+> ```
+> |tmp-glibc/work/neoversen2-crypto-wrs-linux/nodejs/20.5.1/node-v20.5.1/ou=
+t/
+> Release/v8-qemu-wrapper.sh: line 7: 3179613 Segmentation fault      (core=
+ dumped)
+> PSEUDO_UNLOAD=3D1 qemu-aarch64 -r 5.15 -L tmp-glibc/work/neoversen2-crypt=
+o-wrs-linux/
+> nodejs/20.5.1/recipe-sysroot -E LD_LIBRARY_PATH=3Dtmp-glibc/work/neoverse=
+n2-crypto-wrs-linux/
+> nodejs/20.5.1/recipe-sysroot/usr/lib64:tmp-glibc/work/neoversen2-crypto-w=
+rs-linux/
+> nodejs/20.5.1/recipe-sysroot/usr/lib64 "$@"
+> ```
+>
+> Upstream nodejs have cross compile support, but it needs host and target
+> have same bit width (e.g. a x86_64 host targeting arrch64 to produce a
+> 64-bit binary). So:
+> 1. If host and target have different bit width, build with QEMU user as u=
+sual;
+>
+> 2. If host and target have same bit width, enable notejs cross compile su=
+pport:
+> - The build tools of nodejs is GYP[2], set CC_host, CFLAGS_host,
+>   CXX_host, CXXFLAGS_host, LDFLAGS_host, AR_host for host build
+>   which is separated with target build [3]
+> - Add missing native packages to fix library missing on host build
+> - Rework libatomic.patch, explicitly link to libatomic for clang
+>   conditionally
 
-
-It was a different editor than usual thanks for noting
-
+Does this mean that upstream has stopped supporting 32bit hosts ?
+if so, than I would follow the suite and disable building for 32bit machine=
+s
+nodejs build in OE is quite unwieldy and this just makes it a bit
+more. Is there a way
+to improve qemu-user ? and why does riscv64 not work with existing
+mechanism. if it is new
+then separate that out into a different patch.
 
 >
-> >
-> >  do_configure:prepend () {
-> >       install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess
-> ${S}/config
+> BTW, enable riscv64 build
 >
-> //Peter
+> [1] https://github.com/qemu/qemu/commit/2521b6073b7b4b505533a941d4f9600f7=
+585dc78
+> [2] https://github.com/nodejs/node-gyp
+> [3] https://github.com/nodejs/node-gyp/blob/main/gyp/docs/UserDocumentati=
+on.md#cross-compiling
+>
+> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> ---
+>  .../nodejs/nodejs/libatomic.patch             | 86 +++++++++++++++----
+>  .../recipes-devtools/nodejs/nodejs_20.16.0.bb | 81 ++++++++++-------
+>  2 files changed, 121 insertions(+), 46 deletions(-)
+>
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/libatomic.patch b/met=
+a-oe/recipes-devtools/nodejs/nodejs/libatomic.patch
+> index cb0237309..bc51f99d8 100644
+> --- a/meta-oe/recipes-devtools/nodejs/nodejs/libatomic.patch
+> +++ b/meta-oe/recipes-devtools/nodejs/nodejs/libatomic.patch
+> @@ -1,21 +1,77 @@
+> -Link mksnapshot with libatomic on x86
+> +From 15e751e4b79475fb34e4b32a3ca54119b20c564a Mon Sep 17 00:00:00 2001
+> +From: Hongxu Jia <hongxu.jia@windriver.com>
+> +Date: Sat, 17 Aug 2024 21:33:18 +0800
+> +Subject: [PATCH] link libatomic for clang conditionally
+>
+> -Clang-12 on x86 emits atomic builtins
+> +Clang emits atomic builtin, explicitly link libatomic conditionally:
+> +- For target build, always link -latomic for clang as usual
+> +- For host build, if host and target have same bit width, cross compilin=
+g
+> +  is enabled, and host toolchain is gcc which does not link -latomic;
+> +  if host and target have different bit width, no cross compiling,
+> +  host build is the same with target build that requires to link
+> +  -latomic;
+>
+> -Fixes
+> -| module-compiler.cc:(.text._ZN2v88internal4wasm12_GLOBAL__N_123ExecuteC=
+ompilationUnitsERKSt10shared_ptrINS2_22BackgroundCompileTokenEEPNS0_8Counte=
+rsEiNS2_19CompileBaselineOnlyE+0x558): un
+> -defined reference to `__atomic_load'
+> +Fix:
+> +|tmp-glibc/work/core2-64-wrs-linux/nodejs/20.13.0/node-v20.13.0/out/Rele=
+ase/node_js2c: error while loading shared libraries: libatomic.so.1: cannot=
+ open shared object file: No such file or directory
+>
+> -Upstream-Status: Pending
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +Upstream-Status: Inappropriate [OE specific]
+>
+> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> +---
+> + node.gyp                 | 13 ++++++++++++-
+> + tools/v8_gypfiles/v8.gyp | 15 ++++++++++++---
+> + 2 files changed, 24 insertions(+), 4 deletions(-)
+> +
+> +diff --git a/node.gyp b/node.gyp
+> +index b425f443..f296f35c 100644
+> +--- a/node.gyp
+> ++++ b/node.gyp
+> +@@ -487,7 +487,18 @@
+> +         ],
+> +       }],
+> +       ['OS =3D=3D "linux" and llvm_version !=3D "0.0"', {
+> +-        'libraries': ['-latomic'],
+> ++        'target_conditions': [
+> ++           ['_toolset=3D=3D"host"', {
+> ++             'conditions': [
+> ++               ['"<!(echo $HOST_AND_TARGET_SAME_WIDTH)"=3D=3D"0"', {
+> ++                 'libraries': ['-latomic'],
+> ++               }],
+> ++             ],
+> ++           }],
+> ++           ['_toolset=3D=3D"target"', {
+> ++             'libraries': ['-latomic'],
+> ++           }],
+> ++        ],
+> +       }],
+> +     ],
+> +   },
+> +diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
+> +index b23263cf..dcabf4ca 100644
+>  --- a/tools/v8_gypfiles/v8.gyp
+>  +++ b/tools/v8_gypfiles/v8.gyp
+> -@@ -1436,6 +1436,7 @@
+> -     {
+> -       'target_name': 'mksnapshot',
+> -       'type': 'executable',
+> -+      'libraries': [ '-latomic' ],
+> -       'dependencies': [
+> -         'v8_base_without_compiler',
+> -         'v8_compiler_for_mksnapshot',
+> +@@ -1100,9 +1100,18 @@
+> +         # Platforms that don't have Compare-And-Swap (CAS) support need=
+ to link atomic library
+> +         # to implement atomic memory access
+> +         ['v8_current_cpu in ["mips64", "mips64el", "ppc", "arm", "riscv=
+64", "loong64"]', {
+> +-          'link_settings': {
+> +-            'libraries': ['-latomic', ],
+> +-          },
+> ++          'target_conditions': [
+> ++             ['_toolset=3D=3D"host"', {
+> ++               'conditions': [
+> ++                 ['"<!(echo $HOST_AND_TARGET_SAME_WIDTH)"=3D=3D"0"', {
+> ++                   'libraries': ['-latomic'],
+> ++                 }],
+> ++               ],
+> ++             }],
+> ++             ['_toolset=3D=3D"target"', {
+> ++               'libraries': ['-latomic', ],
+> ++             }],
+> ++           ],
+> +         }],
+> +       ],
+> +     },  # v8_base_without_compiler
+> +--
+> +2.35.5
+> +
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_20.16.0.bb b/meta-oe/=
+recipes-devtools/nodejs/nodejs_20.16.0.bb
+> index fe7121156..34ec8ad80 100644
+> --- a/meta-oe/recipes-devtools/nodejs/nodejs_20.16.0.bb
+> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.16.0.bb
+> @@ -5,17 +5,16 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dcef54676c547=
+a5bbab44aa8be3be9ef7"
+>
+>  CVE_PRODUCT =3D "nodejs node.js"
+>
+> -DEPENDS =3D "openssl file-replacement-native python3-packaging-native"
+> +DEPENDS =3D "openssl openssl-native file-replacement-native python3-pack=
+aging-native"
+>  DEPENDS:append:class-target =3D " qemu-native"
+>  DEPENDS:append:class-native =3D " c-ares-native"
+>
+> -inherit pkgconfig python3native qemu ptest
+> +inherit pkgconfig python3native qemu ptest siteinfo
+>
+>  COMPATIBLE_MACHINE:armv4 =3D "(!.*armv4).*"
+>  COMPATIBLE_MACHINE:armv5 =3D "(!.*armv5).*"
+>  COMPATIBLE_MACHINE:mips64 =3D "(!.*mips64).*"
+>
+> -COMPATIBLE_HOST:riscv64 =3D "null"
+>  COMPATIBLE_HOST:riscv32 =3D "null"
+>  COMPATIBLE_HOST:powerpc =3D "null"
+>
+> @@ -24,15 +23,12 @@ SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV=
+}.tar.xz \
+>             file://0004-v8-don-t-override-ARM-CFLAGS.patch \
+>             file://system-c-ares.patch \
+>             file://0001-liftoff-Correct-function-signatures.patch \
+> +           file://libatomic.patch \
+>             file://run-ptest \
+>             "
+> -
+>  SRC_URI:append:class-target =3D " \
+>             file://0001-Using-native-binaries.patch \
+>             "
+> -SRC_URI:append:toolchain-clang:x86 =3D " \
+> -           file://libatomic.patch \
+> -           "
+>  SRC_URI:append:toolchain-clang:powerpc64le =3D " \
+>             file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
+>             "
+> @@ -66,28 +62,14 @@ ARCHFLAGS ?=3D ""
+>
+>  PACKAGECONFIG ??=3D "ares brotli icu zlib"
+>
+> -PACKAGECONFIG[ares] =3D "--shared-cares,,c-ares"
+> -PACKAGECONFIG[brotli] =3D "--shared-brotli,,brotli"
+> -PACKAGECONFIG[icu] =3D "--with-intl=3Dsystem-icu,--without-intl,icu"
+> +PACKAGECONFIG[ares] =3D "--shared-cares,,c-ares c-ares-native"
+> +PACKAGECONFIG[brotli] =3D "--shared-brotli,,brotli brotli-native"
+> +PACKAGECONFIG[icu] =3D "--with-intl=3Dsystem-icu,--without-intl,icu icu-=
+native"
+>  PACKAGECONFIG[libuv] =3D "--shared-libuv,,libuv"
+>  PACKAGECONFIG[nghttp2] =3D "--shared-nghttp2,,nghttp2"
+>  PACKAGECONFIG[shared] =3D "--shared"
+>  PACKAGECONFIG[zlib] =3D "--shared-zlib,,zlib"
+>
+> -# We don't want to cross-compile during target compile,
+> -# and we need to use the right flags during host compile,
+> -# too.
+> -EXTRA_OEMAKE =3D "\
+> -    CC.host=3D'${CC} -pie -fPIE' \
+> -    CFLAGS.host=3D'${CPPFLAGS} ${CFLAGS}' \
+> -    CXX.host=3D'${CXX} -pie -fPIE' \
+> -    CXXFLAGS.host=3D'${CPPFLAGS} ${CXXFLAGS}' \
+> -    LDFLAGS.host=3D'${LDFLAGS}' \
+> -    AR.host=3D'${AR}' \
+> -    \
+> -    builddir_name=3D./ \
+> -"
+> -
+>  EXTRANATIVEPATH +=3D "file-native"
+>
+>  python prune_sources() {
+> @@ -110,9 +92,11 @@ do_unpack[postfuncs] +=3D "prune_sources"
+>  # V8's JIT infrastructure requires binaries such as mksnapshot and
+>  # mkpeephole to be run in the host during the build. However, these
+>  # binaries must have the same bit-width as the target (e.g. a x86_64
+> -# host targeting ARMv6 needs to produce a 32-bit binary). Instead of
+> -# depending on a third Yocto toolchain, we just build those binaries
+> -# for the target and run them on the host with QEMU.
+> +# host targeting ARMv6 needs to produce a 32-bit binary).
+> +# 1. If host and target have the different bit width, run those
+> +#    binaries for the target and run them on the host with QEMU.
+> +# 2. If host and target have the same bit width, enable upstream
+> +#    cross crompile support and no QEMU
+>  python do_create_v8_qemu_wrapper () {
+>      """Creates a small wrapper that invokes QEMU to run some target V8 b=
+inaries
+>      on the host."""
+> @@ -120,6 +104,10 @@ python do_create_v8_qemu_wrapper () {
+>                      d.expand('${STAGING_DIR_HOST}${base_libdir}')]
+>      qemu_cmd =3D qemu_wrapper_cmdline(d, d.getVar('STAGING_DIR_HOST'),
+>                                      qemu_libdirs)
+> +
+> +    if d.getVar("HOST_AND_TARGET_SAME_WIDTH") =3D=3D "1":
+> +        qemu_cmd =3D ""
+> +
+>      wrapper_path =3D d.expand('${B}/v8-qemu-wrapper.sh')
+>      with open(wrapper_path, 'w') as wrapper_file:
+>          wrapper_file.write("""#!/bin/sh
+> @@ -138,6 +126,14 @@ addtask create_v8_qemu_wrapper after do_configure be=
+fore do_compile
+>
+>  LDFLAGS:append:x86 =3D " -latomic"
+>
+> +export CC_host
+> +export CFLAGS_host
+> +export CXX_host
+> +export CXXFLAGS_host
+> +export LDFLAGS_host
+> +export AR_host
+> +export HOST_AND_TARGET_SAME_WIDTH
+> +
+>  CROSS_FLAGS =3D "--cross-compiling"
+>  CROSS_FLAGS:class-native =3D "--no-cross-compiling"
+>
+> @@ -179,8 +175,31 @@ RDEPENDS:${PN}-npm =3D "bash python3-core python3-sh=
+ell python3-datetime \
+>  PACKAGES =3D+ "${PN}-systemtap"
+>  FILES:${PN}-systemtap =3D "${datadir}/systemtap"
+>
+> -BBCLASSEXTEND =3D "native"
+> +python __anonymous () {
+> +    # 32 bit target and 64 bit host (x86-64 or aarch64) have different b=
+it width
+> +    if d.getVar("SITEINFO_BITS") =3D=3D "32" and "64" in d.getVar("BUILD=
+_ARCH"):
+> +        d.setVar("HOST_AND_TARGET_SAME_WIDTH", "0")
+> +    else:
+> +        d.setVar("HOST_AND_TARGET_SAME_WIDTH", "1")
+> +
+> +    if d.getVar("HOST_AND_TARGET_SAME_WIDTH") =3D=3D "0":
+> +        # We don't want to cross-compile during target compile,
+> +        # and we need to use the right flags during host compile,
+> +        # too.
+> +        d.setVar("CC_host", d.getVar("CC") + " -pie -fPIE")
+> +        d.setVar("CFLAGS_host", d.getVar("CFLAGS"))
+> +        d.setVar("CXX_host", d.getVar("CXX") + " -pie -fPIE")
+> +        d.setVar("CXXFLAGS_host", d.getVar("CXXFLAGS"))
+> +        d.setVar("LDFLAGS_host", d.getVar("LDFLAGS"))
+> +        d.setVar("AR_host", d.getVar("AR"))
+> +    elif d.getVar("HOST_AND_TARGET_SAME_WIDTH") =3D=3D "1":
+> +        # Enable upstream cross crompile support
+> +        d.setVar("CC_host", d.getVar("BUILD_CC"))
+> +        d.setVar("CFLAGS_host", d.getVar("BUILD_CFLAGS"))
+> +        d.setVar("CXX_host", d.getVar("BUILD_CXX"))
+> +        d.setVar("CXXFLAGS_host", d.getVar("BUILD_CXXFLAGS"))
+> +        d.setVar("LDFLAGS_host", d.getVar("BUILD_LDFLAGS"))
+> +        d.setVar("AR_host", d.getVar("BUILD_AR"))
+> +}
+>
+> -# http://errors.yoctoproject.org/Errors/Details/766923/
+> -# TOPDIR/tmp-glibc/work/core2-64-oe-linux/nodejs/20.12.2/node-v20.12.2/o=
+ut/Release/v8-qemu-wrapper.sh: line 7: 252447 Illegal instruction     (core=
+ dumped) PSEUDO_UNLOAD=3D1 qemu-x86_64 -r 5.15 -cpu Nehalem,check=3Dfalse -=
+L TOPDIR/tmp-glibc/work/core2-64-oe-linux/nodejs/20.12.2/recipe-sysroot -E =
+LD_LIBRARY_PATH=3DTOPDIR/tmp-glibc/work/core2-64-oe-linux/nodejs/20.12.2/re=
+cipe-sysroot/usr/lib:TOPDIR/tmp-glibc/work/core2-64-oe-linux/nodejs/20.12.2=
+/recipe-sysroot/usr/lib "$@"
+> -# TODO: Fix with gcc-14
+> +BBCLASSEXTEND =3D "native"
+> --
+> 2.27.0
 >
 >
-
---00000000000007b55606200b12ec
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Mon, Aug 19, 2024 at 8:33=E2=80=AFAM Peter Kjellerstedt =
-&lt;<a href=3D"mailto:peter.kjellerstedt@axis.com">peter.kjellerstedt@axis.=
-com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"marg=
-in:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">&gt; -----Origin=
-al Message-----<br>
-&gt; From: <a href=3D"mailto:openembedded-devel@lists.openembedded.org" tar=
-get=3D"_blank">openembedded-devel@lists.openembedded.org</a> &lt;<a href=3D=
-"mailto:openembedded-devel@lists.openembedded.org" target=3D"_blank">openem=
-bedded-devel@lists.openembedded.org</a>&gt; On Behalf Of Khem Raj<br>
-&gt; Sent: den 19 augusti 2024 00:56<br>
-&gt; To: <a href=3D"mailto:openembedded-devel@lists.openembedded.org" targe=
-t=3D"_blank">openembedded-devel@lists.openembedded.org</a><br>
-&gt; Cc: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blan=
-k">raj.khem@gmail.com</a>&gt;<br>
-&gt; Subject: [oe] [meta-networking][PATCH 2/5] fwknop: Specify target loca=
-tions of gpg and wget<br>
-&gt; <br>
-&gt; This fixes emitting buildpaths into binary and also<br>
-&gt; fixes the issue where these tools wont exist on<br>
-&gt; the paths they were found on build machine<br>
-&gt; <br>
-&gt; Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 meta-networking/recipes-support/fwknop/<a href=3D"http://fwknop_=
-2.6.11.bb" rel=3D"noreferrer" target=3D"_blank">fwknop_2.6.11.bb</a> | 4 ++=
-+-<br>
-&gt;=C2=A0 1 file changed, 3 insertions(+), 1 deletion(-)<br>
-&gt; <br>
-&gt; diff --git a/meta-networking/recipes-support/fwknop/<a href=3D"http://=
-fwknop_2.6.11.bb" rel=3D"noreferrer" target=3D"_blank">fwknop_2.6.11.bb</a>=
- b/meta-networking/recipes-support/fwknop/<a href=3D"http://fwknop_2.6.11.b=
-b" rel=3D"noreferrer" target=3D"_blank">fwknop_2.6.11.bb</a><br>
-&gt; index c9f9596eb4..0e7998b6dc 100644<br>
-&gt; --- a/meta-networking/recipes-support/fwknop/<a href=3D"http://fwknop_=
-2.6.11.bb" rel=3D"noreferrer" target=3D"_blank">fwknop_2.6.11.bb</a><br>
-&gt; +++ b/meta-networking/recipes-support/fwknop/<a href=3D"http://fwknop_=
-2.6.11.bb" rel=3D"noreferrer" target=3D"_blank">fwknop_2.6.11.bb</a><br>
-&gt; @@ -12,7 +12,9 @@ SRC_URI[sha256sum] =3D &quot;a4ec7c22dd90dd684f9f7b9=
-6d3a901c4131ec8c7a3b9db26d0428513f6<br>
-&gt; <br>
-&gt;=C2=A0 DEPENDS =3D &quot;libpcap gpgme&quot;<br>
-&gt; <br>
-&gt; -EXTRA_OECONF =3D &quot; --with-iptables=3D${sbindir}/iptables&quot;<b=
-r>
-&gt; +EXTRA_OECONF =3D &quot;--with-iptables=3D${sbindir}/iptables \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0--with-gpg=3D${bindir}/gpg \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0--with-wget=3D${base_bindir}/wget&quot;<=
-br>
-<br>
-Do you happen to have tabs configured to be four spaces wide?<br>
-Please use spaces instead for alignment since the above looks <br>
-weird with 8-character tabs.</blockquote><div dir=3D"auto"><br></div><div d=
-ir=3D"auto">It was a different editor than usual thanks for noting</div><di=
-v dir=3D"auto"><br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
-0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex" dir=3D"auto"><br>
-<br>
-&gt; <br>
-&gt;=C2=A0 do_configure:prepend () {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0install -m 0755 ${STAGING_DATADIR_NATIVE}/gn=
-u-config/config.guess ${S}/config<br>
-<br>
-//Peter<br>
-<br>
-</blockquote></div></div>
-
---00000000000007b55606200b12ec--
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#111844): https://lists.openembedded.org/g/openembedde=
+d-devel/message/111844
+> Mute This Topic: https://lists.openembedded.org/mt/107974157/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
