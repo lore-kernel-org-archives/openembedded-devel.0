@@ -1,365 +1,183 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2589AC3DA4A
-	for <webhook@archiver.kernel.org>; Mon, 19 Aug 2024 15:22:38 +0000 (UTC)
-Received: from mail-oo1-f45.google.com (mail-oo1-f45.google.com [209.85.161.45])
- by mx.groups.io with SMTP id smtpd.web11.213500.1724080954914002655
- for <Openembedded-devel@lists.openembedded.org>;
- Mon, 19 Aug 2024 08:22:35 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53963C52D6F
+	for <webhook@archiver.kernel.org>; Mon, 19 Aug 2024 15:33:38 +0000 (UTC)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com (EUR05-DB8-obe.outbound.protection.outlook.com [40.107.20.40])
+ by mx.groups.io with SMTP id smtpd.web11.213836.1724081616201422370
+ for <openembedded-devel@lists.openembedded.org>;
+ Mon, 19 Aug 2024 08:33:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=g6OIUunc;
- spf=pass (domain: gmail.com, ip: 209.85.161.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f45.google.com with SMTP id 006d021491bc7-5d5b1e33fa8so2793277eaf.3
-        for <Openembedded-devel@lists.openembedded.org>; Mon, 19 Aug 2024 08:22:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1724080954; x=1724685754; darn=lists.openembedded.org;
-        h=content-transfer-encoding:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=vjdsP26QjABpXXKXmh2skCNw3l2pFCHZaigAjZeilVI=;
-        b=g6OIUunc/xBS+31I+FrQwpVj4oYMp+zGzRMtq09XiskJkfmIm1TgG5H/EAu+1PSfYR
-         n2lVi2UQJ9SOwdjRIH0OBRY4qXV5MG8DDM/q4mUjlmQOltIomuFd/KuOEBYJMKZyX0xo
-         6okyLerR2l4HV536PrArre86MCMWthnR0tBWf11td/JmPgWeVYISozHAfPMWlRYNCAN1
-         GaR0P7RhNEKm2BPo65hWN82NBnzUsTa6h2Dsude4TXkmfZF7210UvCglAWShWCiRjIJS
-         4WbjNrymN+wOWITeahyzVSS28x3SgRG33T1uwltWzrv6z0kaIhb6XuRFSd0JBxSvGycv
-         AlSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724080954; x=1724685754;
-        h=content-transfer-encoding:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=vjdsP26QjABpXXKXmh2skCNw3l2pFCHZaigAjZeilVI=;
-        b=usAC7GHxQfXSMmel3FIsLgyl6ovHaNlLV8xr82B6tCJYPHM88E1i0iaSTdwI6pMvtN
-         l8ZMpYs1pg2TmXKtHSmFgzk0Sc8+IRdIXzpMWdxNHebxyGGbi7h8encpzopTxbk1wHdN
-         z5irNyV4hdu2Jhow8sZon+lOeBk4e4m8MsgH6IPRIuFeDcJDJgV5Ed9cvOEUMdOHm8QU
-         n1xRQbLynRyW3SDg8su6tJyWqWxrkX91RP1GFWX2E3zavcWoIPVF3ODEua/KZhpajlXe
-         FaJoX/+4CL4gJHl+pWZAepZ572jL2D9GBmqZi0S32d5JO/xUAugEZu1S7RLQrZ2D48V8
-         LXsA==
-X-Gm-Message-State: AOJu0Ywx6ceUCXVyh6318f4po0H3e6a6A2an0NwP87FnVkodVM5pp84C
-	+Rcn65Ugt4O8RW4u8qlwF+IwIM4o3pDZPbdKlXeiJ6HXthmpRuoFB8mpGah2+xTIbDC4BQuyX5w
-	iFgLKNJewN9V7ETBlyKhvRuZQ0GMqLlUB
-X-Google-Smtp-Source: AGHT+IH72i4d+oN+GF/Y3dY+lE4XXvjcLaJX17ywB3iEWjA6oTpHc2wx2Dz+Npm+4nP/5uLdK5WUkZxblFLjRbkomo0=
-X-Received: by 2002:a05:6820:1c8c:b0:5d6:c77:fb85 with SMTP id
- 006d021491bc7-5da97d1f98amr12422722eaf.0.1724080953780; Mon, 19 Aug 2024
- 08:22:33 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAMKF1soNow9XQXcspm2w7JAXROmU8OTzxwj1tLNYWRPoyUduNQ@mail.gmail.com>
- <CAMKF1sqQyA2VQkjRK0bsTVM-yMoax8hJzLhqt02jxLL_3geZSg@mail.gmail.com>
- <CAMKF1srUeY0dJj2YL9JDfzSfArQOsyjin1BBWXhOtdcZkPDV4w@mail.gmail.com> <CAMKF1srfwg4yN=9A1HMboHQV8u2pW26GQWw0WQDZi=8oaGtRtA@mail.gmail.com>
-In-Reply-To: <CAMKF1srfwg4yN=9A1HMboHQV8u2pW26GQWw0WQDZi=8oaGtRtA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 19 Aug 2024 08:22:07 -0700
-Message-ID: <CAMKF1so3TN9bYa80d9gvKBPFZkGD6UTVDzk+p1fSgqCiCNMTmg@mail.gmail.com>
-Subject: Re: Buildpaths QA error list
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+ dkim=pass header.i=@axis.com header.s=selector1 header.b=e7uXTEGS;
+ spf=pass (domain: axis.com, ip: 40.107.20.40, mailfrom: peter.kjellerstedt@axis.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=cVYyyV9qiutppNskNbfj1qEhWOhbhGhFCwyT4ZTJ+myJ05/nmCqtU+eD/4LTiMYR8oZP/Wu6jV04c2o+3e6IEwmVdeuEAOmtBdypbnQVThyedeAU61yVxAmI5LfEKtAwMDWlhm0+Kniu2HNL5mjk4Ea7/IskFrx1Ds1bJMwxAu+aq8JvTmkb/BueIqD/KRCZbhXKcDP+waWoB68lVKSo+Wzxz2UaEXscv/mJDOf4/e4dq8i8Kbud5zMtMW7ytx+AMsQ4VWbX2AoyGMbbRNWMzMitRfhPTZoLjxsGSp1HE4I70eLleW6S7A0D93umBeVDapWNdb5GQGeWN82vXVoIMQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=pif4oCs/SdhJpT11iAByaZw/Chu0HpvwbWam9Eng0fM=;
+ b=e/rlDwhvaaqCBUyMxJe2ZwzgdW8OUggofzQPy+yTqWKx1vy0gUp854+heplkQ0NQ4h9plrgiSiuO/rvMz+tW7kLgouWGybpDV10s7Bh2zIUO2uzi/DZtu2wrIFY58vchOGEY452KIYvx/CFKilzoo5+TuW2KmMoG5avsBm9VALI4FUvPzwlnGUloJcQWJXfne+XiUS52Rb0XMm5uPMOKVuhf8pQhk+gNHJspk5PpKTwPerOHzCeBLfMYhuGQCNxwOsp5f3rcASFZyIoq1wjdJAuPzOHW8piky1z25XmQDAsBE6MMJFxSGeTIr/ghsDUjflLIAVsXM8Z4SqwPz7RvVA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=axis.com; dmarc=pass action=none header.from=axis.com;
+ dkim=pass header.d=axis.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=pif4oCs/SdhJpT11iAByaZw/Chu0HpvwbWam9Eng0fM=;
+ b=e7uXTEGScI6xqc+XVw34f4i3Zirft8WgpUNo3//boYOtXbDPQiJWRBTnB5eo12Z/BrMgcG/g74+ZO16ydFoehEyn+fHoT//AzQxUhcm2hZwlL8fObQiOE6lXLd9dso0rS3Yr0a5x+nEYGj00m1AFtSHQwHCT3LKXIvyjomM9dD0=
+Received: from DB5PR02MB10213.eurprd02.prod.outlook.com (2603:10a6:10:4a8::17)
+ by AM7PR02MB5896.eurprd02.prod.outlook.com (2603:10a6:20b:10c::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7875.21; Mon, 19 Aug
+ 2024 15:33:32 +0000
+Received: from DB5PR02MB10213.eurprd02.prod.outlook.com
+ ([fe80::1bee:3174:a078:5af9]) by DB5PR02MB10213.eurprd02.prod.outlook.com
+ ([fe80::1bee:3174:a078:5af9%4]) with mapi id 15.20.7875.019; Mon, 19 Aug 2024
+ 15:33:32 +0000
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Khem Raj <raj.khem@gmail.com>, "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] [meta-networking][PATCH 2/5] fwknop: Specify target
+ locations of gpg and wget
+Thread-Topic: [oe] [meta-networking][PATCH 2/5] fwknop: Specify target
+ locations of gpg and wget
+Thread-Index: AQHa8cHgfHDRtKEYTkyNKSogAcg48rIutc9w
+Date: Mon, 19 Aug 2024 15:33:32 +0000
+Message-ID: 
+ <DB5PR02MB10213E8A744BD7731C1DD7591EF8C2@DB5PR02MB10213.eurprd02.prod.outlook.com>
+References: <20240818225620.2226473-1-raj.khem@gmail.com>
+ <20240818225620.2226473-2-raj.khem@gmail.com>
+In-Reply-To: <20240818225620.2226473-2-raj.khem@gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=axis.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB5PR02MB10213:EE_|AM7PR02MB5896:EE_
+x-ms-office365-filtering-correlation-id: 977cf057-08fe-47ce-851c-08dcc0644849
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|376014|1800799024|366016|38070700018;
+x-microsoft-antispam-message-info: 
+ =?us-ascii?Q?TQd8EubR8//s/URwygcglNDZcnAIFaYYOtAE4peSX9FuGrsu0hjcSnjejLz2?=
+ =?us-ascii?Q?JCxKuI9IPRss/UuS2oQuEprpx8zpO7FVm/E5rkkGq3WtuUSpKVwOYUU2TwtO?=
+ =?us-ascii?Q?J8WbxSzt/zgCKSbELBdFJ2lhiBJbvMO4gQtic1kloO97cFDrY/vMEMvwDvF/?=
+ =?us-ascii?Q?sGrV9dQLfUBOLoY0hQ9xhEOuiy56SufscwJxi+o6Hx1PAGa023P5NmpIPL+7?=
+ =?us-ascii?Q?lIIwbmyknGKS9dtIARaXojRm7Q/hSWptjFWIgaDjLJ2bsCGOReQauNkkZIFp?=
+ =?us-ascii?Q?qQz4swcnfphRXqHbF58unP15ngGV23hVOUb+Y/sraAviVTgRFZH8DKR3IFTJ?=
+ =?us-ascii?Q?hvxafCjkZFvQhWxCGYjMBUWEGMSpxxlQrIUVXYqdicHmU9Wx3w5Xaf1uzSvJ?=
+ =?us-ascii?Q?ysn5WGSwISI/35vOSKp1Wpk0dpWm0KB0oj/z/omxvMmmOPTmEyWgnbQYMNYw?=
+ =?us-ascii?Q?HV0oA2hQq3Iu5sGsQ+BeHhJbjMEdN6Lub2lhiP1X2qMBZMa+58xYYwRhioqy?=
+ =?us-ascii?Q?Tgf695Zw9Ry280HHRLSnL9vnoykIuEtX5FbIkXb3yWgzC7XETEh2tVvscQ0d?=
+ =?us-ascii?Q?isc1xqkf2/FTV2LF8JPIHvdcQe3ubLacYUaOeLjKzPZJqKm7wRMDEn/Q6kuP?=
+ =?us-ascii?Q?YBzkf/WubpueMfc7YUCEPxn9svshSzwYG3AKnf5oRum/ArDd4ghbAMVRXIg/?=
+ =?us-ascii?Q?C2LagOryfo/XBZXtItmbi1fdhpim7cHWoL9i1Ysr15+CddqrVGUsfkPzoNFW?=
+ =?us-ascii?Q?GaOuRSauZVpz0b/fghFwbOkKGB37CGxexaTw8ZQxy4KRh6t01uKIPpZ5or5U?=
+ =?us-ascii?Q?xTnKQijU1G2S35UNa5UW3BDf8p/7btmIU1Hyupbvnu/ud6Z1MA9h9yQ7hhxb?=
+ =?us-ascii?Q?d9egg+iFrXol1OsKPjA1SCmU1bA1Bxffg2AHWazOX19n4hLzodHEVcoFe97K?=
+ =?us-ascii?Q?c8X8miw2nSYkYJHqN3sHEBJGbF0fM1gS/0wopcIbMk25MMOB33jWWjCj6tlg?=
+ =?us-ascii?Q?T1jjuzOGou4+pQMSLZxdMsCMAEp7IGCCn5PL4rfwfoagnog8DopYIUGtCvXU?=
+ =?us-ascii?Q?4d4TwPppWGePEYEGNjRrIQ9OaJTp9rKfl9ABhzs5UvOg/uzHBcH8NmIoG6I+?=
+ =?us-ascii?Q?daz/RHNNelAb9TWEW3/PEchMMSVZtU2kT35htL/DNqHSNz0EoRdM1YvQ1E0j?=
+ =?us-ascii?Q?FQ9KZMY+NAXypWrOYmaKiBAfNvQ2+c1XVLXOIDJCFRDgL3xaVg+3CXCGf1zB?=
+ =?us-ascii?Q?e2Ntgj2uHqzzBi//ZJL6rFKJzkeQdeQLKNnzYeqwumOnJ0oxF9t3Ec2J32xx?=
+ =?us-ascii?Q?Xu4Y64UhdPaaKNbYoOMsFPWzvE/tO7k6jejXWDrxfM55mJbA5jWEm2zOIWTm?=
+ =?us-ascii?Q?QVFLiDruZx6Bj16kWMVDPpu2rJHzopDmJc3C20EjV2S0ZQOWkA=3D=3D?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB5PR02MB10213.eurprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?us-ascii?Q?yKiDI/hWAxdqVuSXKdpEGjZsDmceSw2zjlgl/IUUFCeobd1sRhHvYdkpC2Xg?=
+ =?us-ascii?Q?HdaOqu+oLLh2d5yiQzYdeOtTKBgBoc8PM4vSQ52dZ8OpmF2Ktu75QkDP862d?=
+ =?us-ascii?Q?8QKOpQO8xWNZUXd8XJk+C0QzX47RbJ7JCL7i0yi9ZTsibBX/KKRZuycTJS6F?=
+ =?us-ascii?Q?NqZY5TYlwb1S4xsZfV7pW2hbjFsj8APldxkmq+vQA0+3GidlwM4ygww1RtxV?=
+ =?us-ascii?Q?d9etan3gypuNxSSzxFbbkGWae5NE4VxSEmqGWJYdFiV1/+4McXzw8YETI3cw?=
+ =?us-ascii?Q?gt11nEiVuFQxr6Vi6WDkYaxqyyw7XvBsPhO7nzUlGUWI2L6Fr56kbeLu9Ela?=
+ =?us-ascii?Q?KkbNq3lodVuJzYlA+vbKjUgf0BCnsavMjuiRIGQrAysjRsB1E+WbaRkscsSc?=
+ =?us-ascii?Q?B88fjlsh4a2Y8Sa8P/EU2K5HNBYPrrFENUOc3POJbJu+V05+fAC5Dk2Yi6EF?=
+ =?us-ascii?Q?APQP0yn7IFkb7r5HC0GvJarDJpgQe269IPXRCwJr1+DZuaL7zM40344YI+9Q?=
+ =?us-ascii?Q?PdbCIAPD5W1qPJIC1GrXVSs4ldQ+TMAoLNgQNsJXqaVhI9uQ7L4XXGCKxXGx?=
+ =?us-ascii?Q?2a7Ob9HSlWr70quk3Mw6xjrOtzhxilctxelgg9pVTp17jTM7VAjk6iyDiK9H?=
+ =?us-ascii?Q?6MGDwO88U7J5eV+A8GqsPl7bXYPEILqmAr/izQAN0UBQ6fBS8D0kdQgQa46n?=
+ =?us-ascii?Q?71kMfWMQmjp1eAU3UbNirHQ+2TboOH2bVCMdN15ON9gdUz9zEqFFKiOCMUoF?=
+ =?us-ascii?Q?LM2DlR3kukWl5F35ql3rhdIlJX/XUjkpS1vPmVtiB/jcwfIvMuYkohIaqw9L?=
+ =?us-ascii?Q?49ru36V6AVpQTgW9IywSq9rZBWXec/GGiSo+zc7uayOrP9flQwKwqOWjXmuQ?=
+ =?us-ascii?Q?AAGW7OKx4iTeVElznt3IJv6+VAzXxQ47z4XEiGehi9K34jnJPqWQjbhKwFb1?=
+ =?us-ascii?Q?DoTUJ7Zt62CYmbrX3a1FVNPiAlejarYpLp0C+wTYGx5E3c1Hf0Ud0aNqwcEJ?=
+ =?us-ascii?Q?wkUiv82OnJdwKlIvjNc6SYIzG8mkNBVd6uRVVII7UvJmL2Yf1VWKk6Qugu+o?=
+ =?us-ascii?Q?Y32PRfyYHOPs+dq9Sx02Swri+ba9LG04TAEDSFG2qr67ntS/6e5zYrzm8JWO?=
+ =?us-ascii?Q?Tj1ZvJdGcSGOcP3aSz00QhT0+C/E1aEaj4bEDl6CtINsO2qLUrmbjsdnkC/4?=
+ =?us-ascii?Q?IZkZ8PtlkTNiKw0UnDHU3lBaudrkfeBRrzUIZM2trNcb5x3l539u0ph//r+Q?=
+ =?us-ascii?Q?np9tq3a7hsc7CEHYmyh+5TMUyXLLLmBuXxxIpuDShFHI3ashsbBt6ayhtFMr?=
+ =?us-ascii?Q?YbwtVqLgEWJc8u19uGrTLE3IrODdAeeMgR/BpSNyh7PAJcOed1sfi1EXXd6k?=
+ =?us-ascii?Q?uiv8L4uFimVKtDCcmaTjU0m1NoNdanCbdGo+ji4xH9vEF4DgohAl4WWS6J48?=
+ =?us-ascii?Q?7nlgQIMNRYiaIz+I5bsIFvmkrPbPsmJWxE6pcYahWqQhGygGNhJ1E4TzJdC3?=
+ =?us-ascii?Q?xutweZePkHYLB0mirhuvc0vcWc76DSnzSuBupn+WLJ8bltl86WE+C5VpZc1r?=
+ =?us-ascii?Q?FKr76VdoJYFohGGDYqo=3D?=
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: axis.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB5PR02MB10213.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 977cf057-08fe-47ce-851c-08dcc0644849
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Aug 2024 15:33:32.1564
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 78703d3c-b907-432f-b066-88f7af9ca3af
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: y8v8drczd/xerx9r/enwjfOEnAMEE9b6frWsAgC2iVpGC9TvWX+p8pcY1ihHsUQx
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR02MB5896
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Aug 2024 15:22:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111850
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Aug 2024 15:33:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111851
 
-We are left with following recipes to fix
+> -----Original Message-----
+> From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists=
+.openembedded.org> On Behalf Of Khem Raj
+> Sent: den 19 augusti 2024 00:56
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Khem Raj <raj.khem@gmail.com>
+> Subject: [oe] [meta-networking][PATCH 2/5] fwknop: Specify target locatio=
+ns of gpg and wget
+>=20
+> This fixes emitting buildpaths into binary and also
+> fixes the issue where these tools wont exist on
+> the paths they were found on build machine
+>=20
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-networking/recipes-support/fwknop/fwknop_2.6.11.bb | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/meta-networking/recipes-support/fwknop/fwknop_2.6.11.bb b/me=
+ta-networking/recipes-support/fwknop/fwknop_2.6.11.bb
+> index c9f9596eb4..0e7998b6dc 100644
+> --- a/meta-networking/recipes-support/fwknop/fwknop_2.6.11.bb
+> +++ b/meta-networking/recipes-support/fwknop/fwknop_2.6.11.bb
+> @@ -12,7 +12,9 @@ SRC_URI[sha256sum] =3D "a4ec7c22dd90dd684f9f7b96d3a901c=
+4131ec8c7a3b9db26d0428513f6
+>=20
+>  DEPENDS =3D "libpcap gpgme"
+>=20
+> -EXTRA_OECONF =3D " --with-iptables=3D${sbindir}/iptables"
+> +EXTRA_OECONF =3D "--with-iptables=3D${sbindir}/iptables \
+> +				--with-gpg=3D${bindir}/gpg \
+> +				--with-wget=3D${base_bindir}/wget"
 
-Summary: 4 tasks failed:
-  /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/reci=
-pes-graphics/libyui/libyui-ncurses_4.6.2.bb:do_package_qa
-  /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-python/=
-recipes-devtools/python/python3-pycocotools_2.0.8.bb:do_package_qa
-  /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/reci=
-pes-extended/fluentbit/fluentbit_1.9.9.bb:do_package_qa
-  /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-python/=
-recipes-devtools/python/python3-pyproj_3.6.1.bb:do_package_qa
+Do you happen to have tabs configured to be four spaces wide?
+Please use spaces instead for alignment since the above looks=20
+weird with 8-character tabs.
 
+>=20
+>  do_configure:prepend () {
+>  	install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}/=
+config
 
-python3-pycocotools will get fixed once numpy 2.x upgrade merges into
-master in oe-core. libyui-ncurses seems to happen only on gcc and
-works ok with clang
-so no idea what's going on. pyproj uses cython to generate .c sources
-and that has encoded absolute paths so its probably fixable. I am
-planning to mark
-libyui-ncurses and fluentbit recipes for deletion and hopefully fix
-for pyproj is doable if not that will also go out. which will clean
-the world builds w.r.t. reproducibility
-issues.
+//Peter
 
-On Fri, Aug 9, 2024 at 8:43=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wrote:
->
-> Here is updated list which is down to 22 now
->
-> Summary: 22 tasks failed:
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-netwo=
-rking/recipes-protocols/freediameter/freediameter_1.5.0.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-files=
-ystems/recipes-utils/e2tools/e2tools_git.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/re=
-cipes-graphics/libyui/libyui-ncurses_4.2.3.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-pytho=
-n/recipes-devtools/python/python3-kivy_2.3.0.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/re=
-cipes-extended/fluentbit/fluentbit_1.9.9.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-netwo=
-rking/recipes-connectivity/openthread/ot-br-posix_git.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-pytho=
-n/recipes-devtools/python/python3-pycocotools_2.0.8.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/re=
-cipes-connectivity/transmission/transmission_4.0.5.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/re=
-cipes-crypto/botan/botan_3.5.0.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/re=
-cipes-support/sharutils/sharutils_4.15.2.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-netwo=
-rking/recipes-support/ndisc6/ndisc6_1.0.8.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-pytho=
-n/recipes-devtools/python/python3-pyproj_3.6.1.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-netwo=
-rking/recipes-daemons/ippool/ippool_1.3.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/re=
-cipes-graphics/fvwm/fvwm_2.7.0.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-netwo=
-rking/recipes-support/fwknop/fwknop_2.6.10.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-netwo=
-rking/recipes-connectivity/blueman/blueman_2.4.3.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/re=
-cipes-extended/lprng/lprng_3.8.C.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-netwo=
-rking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-netwo=
-rking/recipes-daemons/keepalived/keepalived_2.2.8.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-files=
-ystems/recipes-filesystems/zfs/zfs_2.2.2.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/re=
-cipes-graphics/libforms/libforms_1.2.5pre1.bb:do_package_qa
->   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-netwo=
-rking/recipes-daemons/proftpd/proftpd_1.3.7c.bb:do_package_qa
->
->
-> On Wed, Jul 31, 2024 at 8:20=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wro=
-te:
-> >
-> > We now have 25 recipes left, keep the patches coming
-> >
-> > Summary: 25 tasks failed:
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-net=
-working/recipes-protocols/freediameter/freediameter_1.5.0.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-fil=
-esystems/recipes-utils/e2tools/e2tools_git.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/=
-recipes-graphics/libyui/libyui-ncurses_4.2.3.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-net=
-working/recipes-connectivity/openthread/ot-br-posix_git.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/=
-recipes-extended/fluentbit/fluentbit_1.9.9.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/=
-recipes-extended/etcd/etcd-cpp-apiv3_0.15.4.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/=
-recipes-connectivity/transmission/transmission_4.0.5.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-pyt=
-hon/recipes-devtools/python/python3-pycocotools_2.0.8.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-pyt=
-hon/recipes-devtools/python/python3-pyproj_3.6.1.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/=
-recipes-extended/lprng/lprng_3.8.C.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/=
-recipes-graphics/fvwm/fvwm_2.7.0.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-fil=
-esystems/recipes-filesystems/zfs/zfs_2.2.2.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-pyt=
-hon/recipes-devtools/python/python3-kivy_2.3.0.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/=
-recipes-support/sharutils/sharutils_4.15.2.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-net=
-working/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/=
-recipes-graphics/libforms/libforms_1.2.5pre1.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-net=
-working/recipes-daemons/proftpd/proftpd_1.3.7c.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/=
-recipes-crypto/botan/botan_3.5.0.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-net=
-working/recipes-daemons/keepalived/keepalived_2.2.8.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/=
-recipes-devtools/perfetto/perfetto.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-net=
-working/recipes-connectivity/tayga/tayga_0.9.2.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-net=
-working/recipes-daemons/ippool/ippool_1.3.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-net=
-working/recipes-support/fwknop/fwknop_2.6.10.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-net=
-working/recipes-support/ndisc6/ndisc6_1.0.8.bb:do_package_qa
-> >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-net=
-working/recipes-connectivity/blueman/blueman_2.3.5.bb:do_package_qa
-> > Summary: There were 67 ERROR messages, returning a non-zero exit code.
-> >
-> > On Sat, Jul 27, 2024 at 10:20=E2=80=AFAM Khem Raj <raj.khem@gmail.com> =
-wrote:
-> > >
-> > > Thanks for patches so far, we have made some improvements and now dow=
-n to < 30
-> > >
-> > > Summary: 29 tasks failed:
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-protocols/freediameter/freediameter_1.5.0.bb:do_package_q=
-a
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-f=
-ilesystems/recipes-utils/e2tools/e2tools_git.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-graphics/libyui/libyui-ncurses_4.2.3.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-extended/fluentbit/fluentbit_1.9.9.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-connectivity/openthread/ot-br-posix_git.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-extended/etcd/etcd-cpp-apiv3_0.15.4.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-p=
-ython/recipes-devtools/python/python3-pyproj_3.6.1.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-p=
-ython/recipes-devtools/python/python3-kivy_2.3.0.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-p=
-ython/recipes-devtools/python/python3-pycocotools_2.0.8.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-connectivity/transmission/transmission_4.0.5.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-support/sharutils/sharutils_4.15.2.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-daemons/ippool/ippool_1.3.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-graphics/fvwm/fvwm_2.7.0.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-devtools/perfetto/perfetto.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-extended/libwmf/libwmf_0.2.8.4.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-daemons/keepalived/keepalived_2.2.8.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-support/log4cpp/log4cpp_1.1.4.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-irc/znc/znc_1.8.2.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-connectivity/tayga/tayga_0.9.2.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-devtools/ldns/ldns_1.8.3.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-connectivity/blueman/blueman_2.3.5.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-graphics/libforms/libforms_1.2.5pre1.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-support/ndisc6/ndisc6_1.0.8.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-crypto/botan/botan_3.5.0.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-support/fwknop/fwknop_2.6.10.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-daemons/proftpd/proftpd_1.3.7c.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-extended/lprng/lprng_3.8.C.bb:do_package_qa
-> > >   /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-f=
-ilesystems/recipes-filesystems/zfs/zfs_2.2.2.bb:do_package_qa
-> > > Summary: There were 75 ERROR messages, returning a non-zero exit code=
-.
-> > >
-> > > On Wed, Jul 24, 2024 at 11:51=E2=80=AFAM Khem Raj <raj.khem@gmail.com=
-> wrote:
-> > > >
-> > > > Hi all
-> > > >
-> > > > Recently buildpaths QA warning has been promoted to be a QA error. =
-This
-> > > > means some warnings in meta-openembedded layers has become build fa=
-ilures
-> > > > below is the list of failures if any of these recipes is important =
-to
-> > > > you, please consider fixing it. I will mark the remaining recipes
-> > > > disabled via SKIP_RECIPE
-> > > > and they will remain so until someone fixes them. My plan is to cle=
-ar
-> > > > world build
-> > > > as quickly as I can.
-> > > >
-> > > > Summary: 37 tasks failed:
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-gnome/gcab/gcab_1.6.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-protocols/freediameter/freediameter_1.5.0.bb:do_package_q=
-a
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-f=
-ilesystems/recipes-utils/e2tools/e2tools_git.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-bsp/fwupd/fwupd_1.9.18.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-gnome/libjcat/libjcat_0.2.1.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-p=
-ython/recipes-devtools/python/python3-pydantic-core_2.16.3.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-graphics/libyui/libyui-ncurses_4.2.3.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-connectivity/openthread/ot-br-posix_git.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-extended/etcd/etcd-cpp-apiv3_0.15.4.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-connectivity/transmission/transmission_4.0.5.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-extended/fluentbit/fluentbit_1.9.9.bb:do_package_qa
-> > > > virtual:native:/home/pokybuild/yocto-worker/meta-oe/build/meta-open=
-embedded/meta-oe/recipes-support/uim/uim_1.8.9.bb:do_compile
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-daemons/keepalived/keepalived_2.2.8.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-crypto/botan/botan_3.5.0.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-graphics/libforms/libforms_1.2.5pre1.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-p=
-ython/recipes-devtools/python/python3-kivy_2.3.0.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-connectivity/blueman/blueman_2.3.5.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-support/ndisc6/ndisc6_1.0.8.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-daemons/ippool/ippool_1.3.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-support/ckermit/ckermit_302.bb:do_compile
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-support/sharutils/sharutils_4.15.2.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-support/procmail/procmail_3.22.bb:do_configure
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-extended/libwmf/libwmf_0.2.8.4.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-p=
-ython/recipes-devtools/python/python3-pycocotools_2.0.8.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-extended/lprng/lprng_3.8.C.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-connectivity/tayga/tayga_0.9.2.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-f=
-ilesystems/recipes-filesystems/zfs/zfs_2.2.2.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-p=
-ython/recipes-devtools/python/python3-pyproj_3.6.1.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-graphics/fvwm/fvwm_2.7.0.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-daemons/proftpd/proftpd_1.3.7c.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-support/enca/enca_1.19.bb:do_compile
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-devtools/perfetto/perfetto.bb:do_compile
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-devtools/ldns/ldns_1.8.3.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
-e/recipes-support/log4cpp/log4cpp_1.1.4.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-irc/znc/znc_1.8.2.bb:do_package_qa
-> > > > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
-etworking/recipes-support/fwknop/fwknop_2.6.10.bb:do_package_qa
-> > > >
-> > > >
-> > > > Thank you
-> > > > -Khem
 
