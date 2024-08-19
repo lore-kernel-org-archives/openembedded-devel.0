@@ -2,116 +2,131 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DDB03C3DA4A
-	for <webhook@archiver.kernel.org>; Mon, 19 Aug 2024 11:14:46 +0000 (UTC)
-Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
- by mx.groups.io with SMTP id smtpd.web11.208197.1724066077938879554
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3378BC3DA4A
+	for <webhook@archiver.kernel.org>; Mon, 19 Aug 2024 11:54:57 +0000 (UTC)
+Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
+ by mx.groups.io with SMTP id smtpd.web10.208483.1724068496297152967
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Aug 2024 04:14:38 -0700
+ Mon, 19 Aug 2024 04:54:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=D60HPzK5;
- spf=pass (domain: gmail.com, ip: 209.85.167.54, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-530e062217eso5561007e87.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Aug 2024 04:14:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OU7QfcEG;
+ spf=pass (domain: gmail.com, ip: 209.85.167.53, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-52efa16aad9so5306523e87.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Aug 2024 04:54:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1724066076; x=1724670876; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=pStsKIkx888bMd9M/R3Uu8ydVknDkc4AKBahqIEf6ck=;
-        b=D60HPzK5zCUOvrCL6fV38CsLzqOfdsw44Jy6feQRV7teUNV29GshaXTedChP+uyb9P
-         EywIc3IfDjMf1jHUIf1I/woo/J76DeRLMZnHOzzdJt7LsvzuvF81nehOLyQ+vkICj0Sj
-         TSzgquqvArx/MzQTmG8ccGGaZFnc9r71HibVfIyjFgHlagP++R5HJtsdqpV1wTIuUxN9
-         GqnRsmoN1Qhx0o9N9MnOFxafPbYI5oFYykV6ly1K2+eeEPEYaYZizKLPI60AtTK5e2U1
-         KVV+VuTGpFmJl+JyexL0lOy8WihGUGwFQy09PDXQB7kjO1RWzwCOvblVMQUvaaKVir1z
-         ZMiA==
+        d=gmail.com; s=20230601; t=1724068494; x=1724673294; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=0tveDxTay5LNFeSQqIyWb13FEx1uSUyh9b29wXUrhso=;
+        b=OU7QfcEGJmWejuL9pJtMVg2r3lGBEieTu2trFIUlvmst0+qBuD3gTonA9JbajcIzrL
+         Z4r6ylg10nXkF+cwPHz9rdOGD5wWezHF8mTai/txIhGnNwJK05YFLZA69jfDlV/ergz9
+         6OWB/iiuAdwiIAgjZZECYGJvgGZmlvZb3FXgkrosP+5Q8CFvl2p0w3GuNuGh6VKlu/ix
+         57pjF37pas6mZffg14JMtC5IggN0BAmCYQX6guFW90Azeynk3rUz6seGrcNtAhWeKzcR
+         HlN31P6CeE0PmckWTBGoie9jOAuvmEVjfX2qO/6sv+6zqxQs7eo9Qv3tisZjrTFOAJ6Y
+         cWjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724066076; x=1724670876;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=pStsKIkx888bMd9M/R3Uu8ydVknDkc4AKBahqIEf6ck=;
-        b=wgZ7Ij/oQeRSbg4ZjYYOBad5OWZRfYvbeZJT6zi2NAtsHrBtt9M7n1Widzf/+7iWJu
-         hp32646X7MhBxpfulk4ohwui8VMqGyWhIUoBr7CG0J9bHkIjv9oS4gArAnnp+pt5Ffk4
-         yNje+nDH9t15aGlPT75zSRSKNY3/6B7nI6VV+vk3JBy8XR/Os1cxxa2EIpnrLc0b6GlS
-         WE/6nAsFd5kbXyjcqRZOWnBYNVH2AxBAUqRA/q5/NSCXoaRKl8FU+Z3SecFUcJCy/Efk
-         FF4N/s5hIZU9LAij7YNny6dgxtUAHsYcdb5LEb7Vcp5XmY1PpBHoJqqvtejXv39E9GwS
-         Tctg==
-X-Gm-Message-State: AOJu0YzmPwbcxgeVgHILl/AbWu8vHo6VCs7Zrr6jmKF/3WmO/8sVgXY3
-	CHyXLPHtpwvDm6e6ydYUGopBeNQA0f66EtXVLnWVSEUX8VpAwyjTYJwQkNpLiPKs+kRyVNOpv5D
-	xrk3LXv09+4erqgeCF33GW9a4YQJGSHRB
-X-Google-Smtp-Source: AGHT+IE8iXM1qLhOs+PPSyGFhT4ksJebLegZyeNJyt7Bmtm8pv6PyNIjtYbcTgCqHO9vD+7geUxLWozC4VMNjlaH2Tc=
-X-Received: by 2002:a05:6512:39c8:b0:52f:cd03:a813 with SMTP id
- 2adb3069b0e04-5331c6e94bamr7390002e87.54.1724066075303; Mon, 19 Aug 2024
- 04:14:35 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240808191119.158166-1-alperyasinak1@gmail.com>
-In-Reply-To: <20240808191119.158166-1-alperyasinak1@gmail.com>
+        d=1e100.net; s=20230601; t=1724068494; x=1724673294;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=0tveDxTay5LNFeSQqIyWb13FEx1uSUyh9b29wXUrhso=;
+        b=T2YkUIZjvZuKCEzaGpdTsYTgR7TT/MK11Tam4o10osDwdSW6zTEH1dIR8e+yuYKezT
+         /laJo63cE4qmJQ1IaflO2ayCtqB0LI2VUwGUD+2mbyn3qo6Vkr+PpCCj6xPXi/pIq0Gr
+         4/sT5G8U/ewf55+TROm6C6OTOmQ7O0EkCHqaATRkd14RyrBaLY1tet7Ii20xBuvGp0Dk
+         IGTVPPXTs39x5S7J01hS9vnmsonRiJ+FkP7Xq/11BtCIES3rt0H8kKjTYv4jYpULhtoz
+         qNUH5/kXiQCytQ6svbybovlW+mS5IEl7EEs7lMMKGMWeuf/9eQl+KwiiGQkhc8Co5chu
+         mlNA==
+X-Gm-Message-State: AOJu0YyzyUe8rRoc9vGY4mi8J0ABTnBRPwKGcTYEAFC0V97GdU10Ab2e
+	nCLK/BfqKOajtsM9Iiah07zkUx6Hw8YIFX9G01B2a1WhMvXKU6QPyqskww==
+X-Google-Smtp-Source: AGHT+IFRK6e4k2MOX0J9ox/a2sxQ2lDwSrJBu79BMRcSqblA4JCx9qcm86MBdvNeZY/KJ9ldOAVCPQ==
+X-Received: by 2002:a05:6512:138e:b0:52c:d80e:55a5 with SMTP id 2adb3069b0e04-5331c6e23e6mr6586612e87.41.1724068493602;
+        Mon, 19 Aug 2024 04:54:53 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a8383947799sm632064666b.177.2024.08.19.04.54.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 19 Aug 2024 04:54:53 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 19 Aug 2024 13:14:15 +0200
-Message-ID: <CA+chaQcJnco=qYqvhyrVHJ_5O99rJbM8NuqkvvAAWca5Rjx+ow@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] blueman: Fix do_package QA issue
-To: alperyasinak1@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: alperyasinak1@gmail.com,
+	f_l_k@t-online.de,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] blueman: fix installation paths
+Date: Mon, 19 Aug 2024 13:54:42 +0200
+Message-ID: <20240819115442.3212142-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.46.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Aug 2024 11:14:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111848
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Aug 2024 11:54:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111849
 
-Doesn't this just hide the issue that the systemd service file is
-installed in wrong directory?
+* pass systemdsystemunitdir and systemduserunitdir to set correct directories
+  instead of using libdir from:
+  meson.build:systemd_base_path = join_paths(libdir, 'systemd')
+  which is wrong e.g. with multilib where libdir might be /usr/lib64 instead of
+  usr/lib used in ${nonarch_base_libdir} which is used by systemd_* variables:
 
-with current master I'm seeing:
-ERROR: Didn't find service unit 'blueman-mechanism.service', specified
-in SYSTEMD_SERVICE:blueman.
+  export systemd_system_unitdir="/usr/lib/systemd/system"
+  export systemd_user_unitdir="/usr/lib/systemd/user"
 
-On Thu, Aug 8, 2024 at 9:11=E2=80=AFPM Alper Ak via lists.openembedded.org
-<alperyasinak1=3Dgmail.com@lists.openembedded.org> wrote:
->
-> ERROR: blueman-2.4.3-r0 do_package: QA Issue: blueman: Files/directories =
-were installed but not shipped in any package:
->   /usr/lib/systemd/system
->   /usr/lib/systemd/system/blueman-mechanism.service
-> Please set FILES such that these items are packaged. Alternatively if the=
-y are unneeded, avoid installing them or delete them within do_install.
-> blueman: 2 installed and not shipped files. [installed-vs-shipped]
-> ERROR: blueman-2.4.3-r0 do_package: Fatal QA errors were found, failing t=
-ask.
->
-> Signed-off-by: alperak <alperyasinak1@gmail.com>
-> ---
->  meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.b=
-b b/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb
-> index 5aa3b2bd5..df2a226f0 100644
-> --- a/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb
-> +++ b/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb
-> @@ -40,6 +40,7 @@ FILES:${PN} +=3D " \
->      ${datadir} \
->      ${systemd_user_unitdir} \
->      ${PYTHON_SITEPACKAGES_DIR} \
-> +    ${prefix}${systemd_system_unitdir} \
->  "
->
->  # In code, path to python is a variable that is replaced with path to na=
-tive version of it
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#111682): https://lists.openembedded.org/g/openembedde=
-d-devel/message/111682
-> Mute This Topic: https://lists.openembedded.org/mt/107795994/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+  fixes:
+  ERROR: Didn't find service unit 'blueman-mechanism.service', specified in SYSTEMD_SERVICE:blueman.
+
+* inherit python3targetconfig to install into right python site-packages
+  without this it installs into
+  /usr/lib/python3.12/site-packages/
+  instead of /usr/lib64/python3.12/site-packages set in PYTHON_SITEPACKAGES_DIR
+  variable used in FILES, causing
+  blueman: 295 installed and not shipped files. [installed-vs-shipped]
+
+  # $PYTHON_SITEPACKAGES_DIR
+  #   set oe-core/meta/classes-recipe/python3-dir.bbclass:11
+  #     "${libdir}/${PYTHON_DIR}/site-packages"
+  PYTHON_SITEPACKAGES_DIR="/usr/lib64/python3.12/site-packages"
+
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+---
+ .../recipes-connectivity/blueman/blueman_2.4.3.bb        | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb b/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb
+index c2bb4d24c6..42e20cc9ed 100644
+--- a/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb
++++ b/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+ DEPENDS = "gtk+3 glib-2.0 bluez5 python3-pygobject python3-cython-native"
+ 
+-inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon-cache useradd features_check
++inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon-cache useradd features_check python3targetconfig
+ 
+ REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+ 
+@@ -13,7 +13,10 @@ SRC_URI = "git://github.com/blueman-project/blueman.git;protocol=https;branch=2-
+ S = "${WORKDIR}/git"
+ SRCREV = "7bcf919ad6ac0ee9a8c66b18b0ca98af877d4c8f"
+ 
+-EXTRA_OEMESON = "-Druntime_deps_check=false"
++EXTRA_OEMESON = "-Druntime_deps_check=false \
++    -Dsystemdsystemunitdir=${systemd_system_unitdir} \
++    -Dsystemduserunitdir=${systemd_user_unitdir} \
++"
+ 
+ SYSTEMD_SERVICE:${PN} = "${BPN}-mechanism.service"
+ SYSTEMD_AUTO_ENABLE:${PN} = "disable"
+@@ -40,8 +43,8 @@ PACKAGECONFIG[polkit] = "-Dpolicykit=true,-Dpolicykit=false"
+ FILES:${PN} += " \
+     ${datadir} \
+     ${systemd_user_unitdir} \
++    ${systemd_system_unitdir} \
+     ${PYTHON_SITEPACKAGES_DIR} \
+-    ${prefix}${systemd_system_unitdir} \
+ "
+ 
+ # In code, path to python is a variable that is replaced with path to native version of it
+-- 
+2.46.0
+
 
