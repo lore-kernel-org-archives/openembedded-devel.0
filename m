@@ -2,138 +2,140 @@ Return-Path: <joerg.sommer@navimatix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 646C3C5320E
-	for <webhook@archiver.kernel.org>; Tue, 20 Aug 2024 07:07:19 +0000 (UTC)
-Received: from EUR03-VI1-obe.outbound.protection.outlook.com (EUR03-VI1-obe.outbound.protection.outlook.com [40.107.103.109])
- by mx.groups.io with SMTP id smtpd.web10.12914.1724137631585265277
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AA907C5320E
+	for <webhook@archiver.kernel.org>; Tue, 20 Aug 2024 07:46:19 +0000 (UTC)
+Received: from AS8PR04CU009.outbound.protection.outlook.com (AS8PR04CU009.outbound.protection.outlook.com [52.101.70.105])
+ by mx.groups.io with SMTP id smtpd.web11.13399.1724139970739074512
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Aug 2024 00:07:12 -0700
+ Tue, 20 Aug 2024 00:46:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=RtX+qRLO;
- spf=pass (domain: navimatix.de, ip: 40.107.103.109, mailfrom: joerg.sommer@navimatix.de)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=sBfz81h6;
+ spf=pass (domain: navimatix.de, ip: 52.101.70.105, mailfrom: joerg.sommer@navimatix.de)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=h0vltWRCDbdV1jK5+7FIYmC9YrGXjhC2tl0SPL4MxFQdiVtSWnGTsHLBpTDjXKRx102z/3vxNQh7tZ8aLQfL3Q0JSnNvPh36lRKojjLfkceoU41oiV5GFm+XO9tHzZBfov9k8OQQcbSPwiKgGax4ZfSTyN5Jh/Fg7oJDTYo+3vvJd12galw1KFGxw24835zNDrNKuqswg/68hPI9J0L4l0yJvvHaTkEr9NhZs8eMYlIK/zsdNdbfRo6iuDjWUwIIZLQINgWEU0MD1545xypVPvyVLDyQQzkv8cgOhx2WTQjutPeL9THbiq800GiKq0Jw/Z/iHIsEcGewS3bUoYDzYQ==
+ b=X4dUlnhyq7+liOZkmmgb/3wWBJdTpWVeudgs6A/Yfx9s7o4gDRleoF4Vwi1hsjZ33EUw1Z9N9rP1fUrh/Abx7pU5SDTGMFhNMaxIgi9lQOVgPMd4oIGwKyV3yZS/L4FpMkX8hDTOX1aB64jOBWyxISlbb530Nb+F4NGeZqtgFQWxNv6zaQv/3EDd2M1QPJlxp+au2NAjB8FQXrSzlIjNRxXvuRii5y3GJH4LVabNkDRy7t8AC/O8dXH6W0+C7Z6zYHMvKijA+LQH2LX+sv+crEoq5d8vszeGKHxJAJyOOyftNT+m5dG/pFc3K7fPx7JTJvoMnFHIMd5VUjSnufyjzQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=h/lABjzyRJo0aH8KyQIWRCcXAMPn+JoQcmmoKoFJg2k=;
- b=IMuuEjwQE+A2uOGyl/Mtf9rnJVcT7VJrHQJuLPV5pFKQqc7+JYWRKOyZr451SHgOAG8i7oTAaXGODH+px+auFCFHRCmNYfl8t8gaU0BVcw4dGGZ5y8JHj9zMXaxbNBy1wQOukycloWWYQ0U5sKK6rOZNzWhDkm2Rb0XOybXW4BvDDafV9dwbMhWxE/ajQayFv6C8P496iZJgvPC8VchMCLBRiGyHzv1SDzHFttyrONXCifPzIc3Pl1/r6ROfiM4L2ktT9ykHdP7IUm4zVaGOmS6kIevKTjcNqWSGV4Fh5V5doeXqzroEvTKgmT2HG3f4ROILodvDu+4leqP0TYdveA==
+ bh=tNe/DK2jNwirsxU/72th43ac+6zk7i/EiaE6sbtUNBk=;
+ b=lpN0wF2agaYGiRkd4ipgOr6YPOLp4eBs3BQ7WAlt1B8GP9E/jXhzShqXOrarl3IwuIE1HqhAn86HM/25abLGgC4d2pelbdY+RdVH/nT3JwLgiNaSkS4XQXf0850bn1icD+fqPIPoF/LMlOHMFXDgoFMPCABnCj2ZHcaBcbR8YTnJpZNd479RDrUHCNy3efGKbXnScxHV9L0O+yPgf+PbpoOHstWYtOqwG7kAn7mo/HLkVhvyCsldD7k82yCl1vhh9ZJGYD+8AwhNzcMgt1d2ZTNle14cjxeLAdddVCcNzlp3K3x57+5ok2VEPH/NaqmL6oQ5QaHYR4SbIQBTesV6OQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
  dkim=pass header.d=navimatix.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=h/lABjzyRJo0aH8KyQIWRCcXAMPn+JoQcmmoKoFJg2k=;
- b=RtX+qRLO3t9DkfSNeD9+XnIQ8HDl18uQzMNLOo0BI/rk5rzdlhO2+cOWtwM9ZWW4QBuRLiqeKbxx4R7rIZdt8Wj7davs/OycD/71NF8pXnQUEglX/Li78n7/qnI05FR+pPtavFSnJcFbcIlPpRG8K3HnP6zPCLlxeAttWeiKT2w=
+ bh=tNe/DK2jNwirsxU/72th43ac+6zk7i/EiaE6sbtUNBk=;
+ b=sBfz81h6CO0BsIf5lFAzpWkz8kmnwkplp1hqJUC3SmUEdmsa2cm/Q03o0oPqg5NomBgQwyXcY+ue4IMkOM7wBfFE1LdXaf1Gzo0qRtoCX1tNzG2eYXA+a89Sj0Ss4Vq1CD/tGBKZQDuM6jmqAQoPtMJ/l0i5B5DuSJ1LHwyQ3BQ=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=navimatix.de;
 Received: from DU2PR01MB8293.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:2d4::5) by PR3PR01MB6987.eurprd01.prod.exchangelabs.com
- (2603:10a6:102:73::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7897.16; Tue, 20 Aug
- 2024 07:07:07 +0000
+ (2603:10a6:10:2d4::5) by DBAPR01MB6710.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:188::20) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7875.25; Tue, 20 Aug
+ 2024 07:46:06 +0000
 Received: from DU2PR01MB8293.eurprd01.prod.exchangelabs.com
  ([fe80::d520:1b9e:a30e:69a7]) by DU2PR01MB8293.eurprd01.prod.exchangelabs.com
  ([fe80::d520:1b9e:a30e:69a7%4]) with mapi id 15.20.7897.014; Tue, 20 Aug 2024
- 07:07:06 +0000
-Date: Tue, 20 Aug 2024 09:07:05 +0200
+ 07:46:06 +0000
+Date: Tue, 20 Aug 2024 09:46:04 +0200
 From: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
 To: openembedded-devel@lists.openembedded.org, joerg.sommer@navimatix.de
 CC: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
-Subject: [PATCH] gpsd: upgrade 3.24 -> 3.25; new gpsd-snmp
-Message-ID: <e488f05abd2ed28e88c8e82fb7f74dbcb441c6a5.1724137623.git.joerg.sommer@navimatix.de>
+Subject: [PATCH v2] gpsd: upgrade 3.24 -> 3.25; new gpsd-snmp
+Message-ID: <97f4ddbad67c532f329c8b2368e1c150cf97d593.1724139964.git.joerg.sommer@navimatix.de>
 X-Mailer: git-send-email 2.34.1
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: BE0P281CA0020.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:14::7) To DU2PR01MB8293.eurprd01.prod.exchangelabs.com
+X-ClientProxiedBy: BE1P281CA0429.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:81::24) To DU2PR01MB8293.eurprd01.prod.exchangelabs.com
  (2603:10a6:10:2d4::5)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR01MB8293:EE_|PR3PR01MB6987:EE_
-X-MS-Office365-Filtering-Correlation-Id: b04de73d-11b1-431f-5cb1-08dcc0e6b390
+X-MS-TrafficTypeDiagnostic: DU2PR01MB8293:EE_|DBAPR01MB6710:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7bc928e4-a4e9-41f6-200d-08dcc0ec25cb
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?iBJlE0kQSN3suvVQiZ0TEXaJ2twXRQIVajQAyuRUT9SnwRQLUIaRcm8/F+Uj?=
- =?us-ascii?Q?hG3LAGXF5muKDCgz49Vt/ayWvHWWgeUV51qkgJAP7tCkNkzYVZE5aRhZBGkA?=
- =?us-ascii?Q?6gPUREkr5cMV9ImXLbaXCe6TKB2XKvETV2BUkNuCCGcTaej5ljWgaCO1FIL1?=
- =?us-ascii?Q?B/5S6dVT15zkdklr9w6YkZ/LbpC+zdM0HCV5kQx9Ev/+M2PWNn1+8iZfV5MU?=
- =?us-ascii?Q?q2fbsyEW9vcgSG4JJ4otoD4xGjuHDgOotItWQBDERCC4cTSA26DH1khMmnSH?=
- =?us-ascii?Q?7ehCVnCcdCuc+36gFttGmzfEdfCMh+NwDZ8tbhJwLE074qkNdZvIadYUwqzz?=
- =?us-ascii?Q?NaDydmwi4pZXjREeSx2zU1KzjDnsT8FoufOE8t7qK/jw9WEzckSGReWaNhbo?=
- =?us-ascii?Q?nhYjxYXuubBjGPI5+lpfq8WBRODnzw7joNJkAq4kcF3urEyUNv2WDEoSK4Yb?=
- =?us-ascii?Q?sUWhoiIPVThlLkOI9yMIhtkqZv71o4mlEbqa4+Y8YcwWC/wAL7y8omnFJD1o?=
- =?us-ascii?Q?R6bXzbxS+fxTKx4skg/xEqlw20A4JFhWdbMee1xnPRLwP8cKsi5A5fTyoXfa?=
- =?us-ascii?Q?5dc3FGxK0F0ZS6528omhJuIFqH87Ohm/7mTQz5LFlPZgnq+sSeEKDJ0atUZZ?=
- =?us-ascii?Q?xe+5M31FiDjXt2bPTwKoW5h0yWEcpHWF3bPLnlzhsVMhmjZBWZ2Djzxx1Ieo?=
- =?us-ascii?Q?HNRBKxCjZezUVhSYg86aY88bM/m/re2+1ziYGfCN08wVFIlLjMFhQRWV7Gxs?=
- =?us-ascii?Q?GGcyZPOycrCak9DqPG3Dtsg+MCck9rrXOc3HnuSupB8aoZp4EMA02o73SipC?=
- =?us-ascii?Q?29i+Afw9esK9bBA/+5h8QgI8vq1XfnLb1+2ENgs5Hgdm5emYHRDTxnwnSc3D?=
- =?us-ascii?Q?ESANSQejum0BRlSGNhbaRozOtoSEzlfxzQ32fIIkP93Y5OCqfj+qXSH+RKpk?=
- =?us-ascii?Q?GyuWNFKjZsQTFprZFXT4EZG/SXU8lqdrP3wAPDPJOWWukcEaLHfYjO1VvWQt?=
- =?us-ascii?Q?OZPOO7URVnhQtI/x8urtilE/wuyEAtYhmToJJa6QIZSCaHCY+sWKyqO6LzUc?=
- =?us-ascii?Q?x+QOpvL09gYrIQApFNNX4rFStmo9BPYZlFWJsenJQowodu6Ml5Dwk2nrR8IX?=
- =?us-ascii?Q?XwBLJodqqtcGPL/WDjuifjOw64xoIUy6jTx5onEd7gTXuu86aEKVeCO9Qp7L?=
- =?us-ascii?Q?83l+k8m7MYw+w7S9YoknOqLNKsdgnOcgxfa/qAgMT+VgN/V69sXspu4VURKi?=
- =?us-ascii?Q?61jIiNdv3HtNavk8Ow5vPpJKQAt/gGDUSjpSTAGxVeML9IFEDS6qUF8TMWOd?=
- =?us-ascii?Q?vgvr4liGiRqvUi8ymsHRSgkzxBxi9lTiRa5jjsFjLpwysg=3D=3D?=
+	=?us-ascii?Q?S7tw68HcJgEoKvB0YNtpNInHGfKO27IhPZyRLD7CWHX7RpDb/c5eofDFgLY3?=
+ =?us-ascii?Q?CzGnmL4wOa9aXYorQnDb4j+e6RSfBRSMnlamf7JNFg+9uxKVOaaGVJIg8P29?=
+ =?us-ascii?Q?05KtDrNOR6ot1nsGxnMMXMZqb0p6yM8nkQ/BSfv7aLjivd8Jeo+Q8QxDKICY?=
+ =?us-ascii?Q?WD+6zYbDkjgBLP3gSHcNzX63/9EsdIHuIAY8iLuZVBpuxWZIIKE8YqDIePax?=
+ =?us-ascii?Q?aNISJNH9dHHRZ6G8AvA/k0uinyaQ0qjkPlqa3UWtpXFUw3b/pfE8YvsJoCVn?=
+ =?us-ascii?Q?W4PZD/VZCAIRbj2E/2ajImSO3oQL20yEtMwW6gG/AqarGpb0xdbODLXWCB8P?=
+ =?us-ascii?Q?gARcir0lczT3OqFnFjHz+qApUDX0TodGeziDM94EbA9rpP97HtYI+buwbkst?=
+ =?us-ascii?Q?eBIRddWPY8+R/gN30byYjpuyZ4bH2EV6Min/Oce84JVEIMcPVDfnlxEZ/Afh?=
+ =?us-ascii?Q?qOVGjx+5sQfLf6HZyGjBJhEjkJ6T2hMRHR3MJDnMPLYyKaft5ZvdbASDKI8G?=
+ =?us-ascii?Q?bEUQJ1rK4B3XiKIPRhTSUmWs3K2c/vPaiIe1mmsQ3lIH0w6C0lc1N0wsxf8U?=
+ =?us-ascii?Q?ori1YI1V1zfL38+qSre8tTzb81akYb4zkxbmY9Y+bhGX0z8Jy0PE9nIgzWQs?=
+ =?us-ascii?Q?8DwWCVpraMuUhAyYh9HcqPbHNbHq3r6Ktk7NQbJGfu7YAdYjv1qYEub4OrPc?=
+ =?us-ascii?Q?fr71zr1c4tIBnjkOL7zlLKKRQh9+D/Amb+po0Eu+y7lDOERsGVGa/fbq0ZE8?=
+ =?us-ascii?Q?PpNAxGk6vpmFpdjMre0W1Hn+djTSQ9oSlwE/iEyA1nP0vVX6QlNg117VmM+d?=
+ =?us-ascii?Q?fCfFV6u1UXLCXcsCJeSrPsQ4Jf06/sjxJOyBYn1rFlebsaM0Fg6bkJWTNRR5?=
+ =?us-ascii?Q?ZrWs33uIvESM7d2XahIEW8dGfOlTMcMchLdx1OopbbCFhr+NCKj54tUBX0OV?=
+ =?us-ascii?Q?YxdxknJYiOa05mFiFIPIL1XWwb9ybYARce2fSK6BUmHCDI2Wt+6WOMD79Exh?=
+ =?us-ascii?Q?GjvFsrV9yNUNeGdmdRN6kEa19DUt3u22/1zMuAbHgXP7Ob+tvAnbhEUmIXI1?=
+ =?us-ascii?Q?0B88JHoxOvAn5cYm505KKqlB9zeOcKa8eE8u5qLunNPln3hqDpGaldsIHvcU?=
+ =?us-ascii?Q?DOdfcKYhYp1MndQEzJ8EBZHHf5gmsSh/sR2euFQK1pjVoJwYMC/r7h6W8kue?=
+ =?us-ascii?Q?RerMEGhLAWadTNk7xz7tbgQ1g1j/68ANjqoSbI0GE0PtaZI8sRT4AYYsbjC3?=
+ =?us-ascii?Q?MWrTreTr5SmeAh7pavMhch8qyzVHaaiYBraWUZNVRK1cBT+GHmhZ4o2AI7tD?=
+ =?us-ascii?Q?Jz9zxeWzg4AU26yOPUrKvkjxHjR4cTWBZGI+LJaXkS4z/Q=3D=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR01MB8293.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR01MB8293.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?aHg2H9nBHbDfeMdaga+M6YoUYnayjwQHfccAbLgzV8MfJOdVi1T+7iy3B0gd?=
- =?us-ascii?Q?s5v7kkPcJ7HW/NkrLbglv351wiUR/vWwsk63u436X3h0VpJkLNsf1X3WTt6+?=
- =?us-ascii?Q?0ZsCQ2UHrTKtKZGhc8lGtkw1Y0MJBZKeYQpOhQXXw62xkb8jNwAXxhd3GkP+?=
- =?us-ascii?Q?4r33HuIFf82+lJiVG9Ik40SAg5/Nzzv4avyhPVwJKOBkdPfjQbmXH10yncTP?=
- =?us-ascii?Q?JQu91MlJG9Smm1pMz5aoG42du40iN66JjICSM1Qdca0P9RqMytTZYaj11R3Y?=
- =?us-ascii?Q?IZahSn6wndjTaVIh8SZ73puya9AwQ4EYagHnQk/V+UdA3beeS+VgqmpbOPFH?=
- =?us-ascii?Q?DnLR+RMOAXwOUURHSHTox/sJKAFqbNiGaN/eLBGLyxk0kuPBSSxRKChZTIvE?=
- =?us-ascii?Q?N0jnA4R6I0Ko/lDJFyWqGPM5pa58N+j5sB5lDfMwZqvr0gPnzBRfwiXXONWZ?=
- =?us-ascii?Q?HA+K6iLDzhfOPJ3Wha9V8tnw2FNN6GyYQhVukUb39D2PHtSiFzsTZb8RHdOe?=
- =?us-ascii?Q?OmaE6mR/kGweLdEmev5NwZB/zKazM8nQSG6CS8mOhr8vxhLRf2rcofA3aWBv?=
- =?us-ascii?Q?J+YhyPy/FS6as90WcCT4SP0SC3WW8d/ulfNOwGzPPf5OjKfdo5tOgapTc5zi?=
- =?us-ascii?Q?0wObSghEYKF2/Aor2ISvVAYBV+T0295fjscmIiptqFWN4ixb9030g7i0XXXy?=
- =?us-ascii?Q?irEzm9qJFCJgbbWEIEoB+7ynHL7uFRKTa1t9BRb+ly+zerlnQid7ZP/5oH8c?=
- =?us-ascii?Q?VYpPeU7ftjuuRSOUqWo3LWfheYfGtqDJjCEW6kosmb+omlTUOOA+P3cIQBRc?=
- =?us-ascii?Q?H2c8DixJgqQwa5SOX0ZvznAECUyUBuyBJ5uEkGvLhHH/jRmkMExhkzD2Mb+5?=
- =?us-ascii?Q?qUgcj8tX0PLYvHiUoYgdEhvzFaZ/vJSVcIoCxN0jfDtZgMHm7zJzsx+oBVzj?=
- =?us-ascii?Q?eGSOhaYoK1CPZSnlxTFwJik+t+cpZ5Fwj9PU003fkDbte8NGoxhzLSCMQ6BG?=
- =?us-ascii?Q?1i63WC6d+LYX7AOpr1Ts9qGUg8DlUuF338nUx5b9uGk3ZK6dtbdzh0WB+HKS?=
- =?us-ascii?Q?XSbk1834Jr36kkeVtx8YoEMxI1S23cd87GhEO1ZZSEQJMAA3pJI+eD6e8kU/?=
- =?us-ascii?Q?jltKWsp+F07F33hSLPjxWNsnOHztol/JL/+zKlKbwpuM3j+x8xa1E+d3UqJw?=
- =?us-ascii?Q?FFNFDjxPLc/QNg6OVwtM8MYL0QefQyqwQH4QcPfK9LTrLRFwW9a/mwRTDU/w?=
- =?us-ascii?Q?cfxO+cNQXcscdLHi97ZN4xzCyKS74hyR87VFESNtAi1mGKyemgGaA+okjYU+?=
- =?us-ascii?Q?SPGQKm50ON1scU0E30dZbHNesrn3YPFuaUPR1YS35gfyp3NMT7qVUM6jPCHv?=
- =?us-ascii?Q?I45Z6emyVLzieET4NmvAmfJVrN3QKLJxvpRtGNGGSqN8vCfWj/e0AdUw31jJ?=
- =?us-ascii?Q?RkdDsjkYTgm0aozKmO8fa0+vj3Q8hwiZb+mUbypqU2vAIEl0knxVpp1xkfsh?=
- =?us-ascii?Q?gchJ/ZzlnNEiiWFwYZvt8hqSkS/IoLRKToK5laa/3210f1+X6/tCu8n+yjtY?=
- =?us-ascii?Q?HOBYXKfMBGPUxD9w++zqVI29xDpg0FkWdjZ40Pidw0zDJSGCvpUhuvz+Vven?=
- =?us-ascii?Q?og=3D=3D?=
+	=?us-ascii?Q?g5r2JpUFnbn+8nKiKIQFfoB1x223MnweBq3k1IgjVQ4u37b7s2kDi25E3+Yr?=
+ =?us-ascii?Q?XH3KubndXyalQcoOrjOiOwue0nCo40cVpH73zZsnyG7/kGSmn0XsY9JjYYko?=
+ =?us-ascii?Q?EeNhCIr8X+9RSvrH1iTx0nyWqjP6A6YCXngEb9+Ls9wk7rJZCF0X9LEFSSjU?=
+ =?us-ascii?Q?OBgGnrWaLhQk9tyBCojlrexdZf2qLmuFWEFd138ssiDpOWeOmDeo6cme9amg?=
+ =?us-ascii?Q?EYbMD0aRzHR4ym+jbJiXwp8BDI1rkWmCUT6Mn5frvgnHPYP1Y16y9YNQ3Ia2?=
+ =?us-ascii?Q?CXd0/vre1UaBP348g8qN8/7YAz1cboy4mLQ7w98tfjXgwzH+Qo5+0WaF//xR?=
+ =?us-ascii?Q?kGRA8skNPVbDFjcAVOOEgt1XZK0TumtQUq5juIYbzwa56At/12CC+yLjLbNA?=
+ =?us-ascii?Q?XX2mwl5SN0Z0PYhoHBiggRIbJBrDZd+17PupYZfeIKlpVwOhdRzShsnRpxVH?=
+ =?us-ascii?Q?7+HSsSiyFO+mGbahCcI79Q3O/mwj8u3JcMBZNFYy9nvCMWvejE4XSnbU8gwg?=
+ =?us-ascii?Q?/3LJ5ezOeKUs9lhuebM5FNdITVzW7P6VU2+RvXwyjciWjOV9o4W+lS87AVJD?=
+ =?us-ascii?Q?LPAUztE//gh9eQumNnFsTf7SsEOQrb4sodpgYJxZ7F9MKp+WShPyJrtzWoF4?=
+ =?us-ascii?Q?dbutXAaddoeltT5UUQZIe7UHJ/ht5UfSQsl3v26ijzXI3Vjoy0h3mtvvXWOC?=
+ =?us-ascii?Q?DVQxgwzTlIB3J6D08xV4bmk6L37UrHHlsnvGZzvn0xMXkw4azQD1OTjivi7F?=
+ =?us-ascii?Q?L7F5AideSXdgymDHb252HZuuS9CMeK8qPAXgmRAAqBeYEM5uURUXlImLytJc?=
+ =?us-ascii?Q?FhoHCtQdFYJrDTO3tePEUD1GkPcBrU9h4peKr7meM6V8igF1jhrpmCjNHgmA?=
+ =?us-ascii?Q?x92LqmyqXtQN15ITKEE6Xgnw+QPg74xiQpN6YO2SpXYP/Pu7uEAJbOR1o1uu?=
+ =?us-ascii?Q?4T6xbqqbnVShbcJkUSPsIeJJTdWvGpsFaOJ/YoFE8rtjQAU0c0/Qtbr++5vA?=
+ =?us-ascii?Q?0YtD7kqHCadKENBL5X6obgVC1BO77tp3VrIxZBy7sijPKZpgNh2iJ7wwPk3h?=
+ =?us-ascii?Q?Q4lM3Td4EJT7TVBAUV4RTYhHN7aviMHdiXcvtyMCragMg17zLUWbM1RCbZ/2?=
+ =?us-ascii?Q?r9h4qRRjCaf8Xtu3equCTdNCEtU2S4IaXen/O9/XzypofP9+eXYPGw4VHoBC?=
+ =?us-ascii?Q?Rsc/uowfKOyTSj7jfQFBl3yUJ6cTKLpqcfmZ4HX1S37tluBi+J1LLub0ATl4?=
+ =?us-ascii?Q?UjGMQHI28nmkT9vqBHEEDKt/C3cqdMLu511h6vEREB7BnboB5snMDLaRqOrD?=
+ =?us-ascii?Q?Dhf8g+ZxhXrKrAWq9faTzA6ZwtCtlmlMWBDVEtFpGzdR5lfSn6Hs2x13r9F7?=
+ =?us-ascii?Q?c1Xors+QN2DgRH8GaOmJGzE99XilHRT1Kb1sEy9vdYyz7fL2fScDwFmmxKDm?=
+ =?us-ascii?Q?S4Pf4VoZaLDB35TkviYoAMK4xWUdnpDtQaffqWvaNZ4xM8iLNgpmSQYa38+e?=
+ =?us-ascii?Q?Qiw6/qbtDIdfibsntb8xt7HylSDiFfGzUud/Y0vXb7bag6B9Cd6QXMB/WARr?=
+ =?us-ascii?Q?/o61YMm3f0ouoRE2wE31JQko9RagTrp6ETxcCm073J4Syz43iz8W/iQijYlm?=
+ =?us-ascii?Q?Hg=3D=3D?=
 X-OriginatorOrg: navimatix.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: b04de73d-11b1-431f-5cb1-08dcc0e6b390
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7bc928e4-a4e9-41f6-200d-08dcc0ec25cb
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR01MB8293.eurprd01.prod.exchangelabs.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Aug 2024 07:07:06.8359
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Aug 2024 07:46:05.9500
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zG+v1DdnMHDBGqqfhIoA1faGNe+cnh84Hqzweqz5bCf5xl4J29Y550LLin1ofyUAZe3FcoQnW5L6g5q+rSQYHtqsqFu5JhlfM/Gk0SpaEu4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR01MB6987
+X-MS-Exchange-CrossTenant-UserPrincipalName: jKdbETIbrOuQSFQSIwpewMQVJRQJ6o89VLDQ/06YNsy47Ua3HQ8ZuroGJfyC3b/Mk8AsIVo9L9KvdzXCQdQnODwg0Vx1GXNQfpyoJ4oi0QE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR01MB6710
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 20 Aug 2024 07:07:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111864
+ <openembedded-devel@lists.openembedded.org>; Tue, 20 Aug 2024 07:46:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111865
 
 From: J=F6rg Sommer <joerg.sommer@navimatix.de>
 
 This new version installs /usr/share/snmp/mibs/gpsd/GPSD-MIB which is
 packaged in a new package gpsd-snmp.
+
+Signed-off-by: J=F6rg Sommer <joerg.sommer@navimatix.de>
 ---
  .../recipes-navigation/gpsd/{gpsd_3.24.bb =3D> gpsd_3.25.bb} | 7 +++++--
  1 file changed, 5 insertions(+), 2 deletions(-)
