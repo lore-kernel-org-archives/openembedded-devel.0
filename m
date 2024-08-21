@@ -2,62 +2,61 @@ Return-Path: <asharma@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 18E43C52D6F
-	for <webhook@archiver.kernel.org>; Wed, 21 Aug 2024 06:53:02 +0000 (UTC)
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
- by mx.groups.io with SMTP id smtpd.web11.14247.1724223173178343871
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 20025C52D6F
+	for <webhook@archiver.kernel.org>; Wed, 21 Aug 2024 06:59:22 +0000 (UTC)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.web11.14539.1724223555676556349
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Aug 2024 23:52:53 -0700
+ Tue, 20 Aug 2024 23:59:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=XnNBDsK1;
- spf=pass (domain: mvista.com, ip: 209.85.214.182, mailfrom: asharma@mvista.com)
-Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-2021c08b95cso3506925ad.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Aug 2024 23:52:53 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=Wvkanmaf;
+ spf=pass (domain: mvista.com, ip: 209.85.214.178, mailfrom: asharma@mvista.com)
+Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-201fba05363so43814455ad.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Aug 2024 23:59:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1724223172; x=1724827972; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1724223555; x=1724828355; darn=lists.openembedded.org;
         h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=sOG+s+X/HfDXYh9daPfFIjj9ILffM7RAQbLYvJAl9m0=;
-        b=XnNBDsK12ZcIEA9/Ft2Eal180PIauypgIA0YKTb+iJs4CR1Z4QkEViVs/lGdEDcNYb
-         IXxDhIS6DFvBtvbrvY2MCMk8U5YzopJQgVSCQRkS5BYQjV2dYhTrF2usglpzvXqYUBVD
-         72897Xhz0KzTYzwX6DqtZU+hm6zlU/sMT97yQ=
+        bh=4Pk35z+XgAmDg4IGE5BJgzRl53+w5xvFgeCQX1LDY74=;
+        b=WvkanmafgGC7w23skY5zNlaj1EonBmZOhQrtuioKDB72Uw/JTppcivLfAzQfNpITuh
+         uzpXSkwAEUuqop1b7aRE6EhX4YGESFBvKS4yUkPVxbeUaWzxAqTfI8qV1+mCju+QAGZg
+         XUMU5JtTpVG1bgu3C4bXCpglytNGXhaaUlrAM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724223172; x=1724827972;
+        d=1e100.net; s=20230601; t=1724223555; x=1724828355;
         h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=sOG+s+X/HfDXYh9daPfFIjj9ILffM7RAQbLYvJAl9m0=;
-        b=bmY9hcF+Xi/HFnlQpuJVr8eiA5HYM9PqWyWBAuP3sfDcoYF2k/o40qLc8qY9HLDiRJ
-         18+wqcmcxOpVt3BRSd9jV0wCQGiul/dFbuvL5RbJ/dZ9s7ERbfjFux9UBaJ9h/+jzqCW
-         re5uRMdHF/Kh1WLxSsoHJMhj6vQHgIPA75l1AGjvPNAxKdxu1oezfOxP6gerpenfbn5U
-         m9NmnJGJgm+nyjz53QFLHQ1pw7N8xFc7q2zWYtEBzADLb2R1GH5m5d5DDD9wHKnZ+bRb
-         qqF1norMueKfXMLHZlx9VujKg13YFlM1JwDAO/HElEPf0vld7t5cpFQZs4J31Vc3unD0
-         Ezug==
-X-Gm-Message-State: AOJu0Yxr6WTY166pfh12JO3k/uWI5pZt1g8K3KwlShKqVck6zkxx4KPy
-	WofdvkPKG2oKsi5P2/9qKu3WOGqu6mGz4jqEnxfvaPY6jLsD5VEz2xhfWQtRGN0p6sc8t/NLZ7x
-	3
-X-Google-Smtp-Source: AGHT+IEG84AQS1uk3OZn4FEVJAv4+gKvQ96uekFyMmh/VsHAMytqmp1bfTmwXVosZFhOIQx25gfmCg==
-X-Received: by 2002:a17:902:da8a:b0:1fd:9c2d:2f14 with SMTP id d9443c01a7336-203680881c9mr16785705ad.32.1724223172057;
-        Tue, 20 Aug 2024 23:52:52 -0700 (PDT)
-Received: from asharma-Latitude-3400 ([2402:3a80:4399:96ec:718d:1c5e:b08f:49f7])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-201ffb8f0d6sm79599395ad.28.2024.08.20.23.52.49
+        bh=4Pk35z+XgAmDg4IGE5BJgzRl53+w5xvFgeCQX1LDY74=;
+        b=YPepFb4WVh5EDL5l0OrvLKJBWWdTs6AuRtFrtONfDyLHZcPou111u8JkJ5YYJVAHTf
+         dS3j7QyjF9x8+EbgH5fuIGYZzyhFVBcHpTaBmzV9wzr4XkOIiP18EakSMMhA02YJ9k3/
+         jtTvyEbDIj1m8ZSzgn3so43icvB4S+q+pYHQbwBaxdZWG8bTjjgXYAtN2n3+UCb9RuRI
+         dvdVxEGZWNeQ8GL82Pn1wUbhmvQw9o+kVXWol5OetFR19QH+Gf6lhlR70gNAL8vQrReM
+         vrjCmutcSzeSqag3/1q0dDdRzssXj3x4pDIEIzVuq8VUvR8s//lVYE3TBlx/slvlSNYq
+         cJxA==
+X-Gm-Message-State: AOJu0YyxkmTBb5P4eguxS+u1wtWJfrpDvJCsLvmArE5V2mzE5QbyR++a
+	Qp0Yl+gXXgtR1HeT1w/ag2hiLntVEfMD1ZpTZTWIEQxjtyEpVLlfDhgAreLqYEE1miCd7Wib4h6
+	u
+X-Google-Smtp-Source: AGHT+IE9hdjbnSqAwyzHqdxjd+0LO9bsQgnEfNevByQuc/xmhyu4tnQWVIDzdz658CnlmFnvKCAKeg==
+X-Received: by 2002:a17:903:1d2:b0:202:4712:e838 with SMTP id d9443c01a7336-20367c0ff42mr11758335ad.14.1724223554546;
+        Tue, 20 Aug 2024 23:59:14 -0700 (PDT)
+Received: from asharma-Latitude-3400 ([42.108.26.43])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-201f039e09csm87654975ad.244.2024.08.20.23.59.11
         (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
-        Tue, 20 Aug 2024 23:52:51 -0700 (PDT)
-Received: by asharma-Latitude-3400 (sSMTP sendmail emulation); Wed, 21 Aug 2024 12:22:45 +0530
+        Tue, 20 Aug 2024 23:59:14 -0700 (PDT)
+Received: by asharma-Latitude-3400 (sSMTP sendmail emulation); Wed, 21 Aug 2024 12:29:07 +0530
 From: Ashish Sharma <asharma@mvista.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Ashish Sharma <asharma@mvista.com>
-Subject: [oe][meta-webserver][kirkstone][PATCH] nginx: Backport fix for CVE-2024-7347
-Date: Wed, 21 Aug 2024 12:22:43 +0530
-Message-Id: <20240821065243.6534-1-asharma@mvista.com>
+Subject: [oe][meta-webserver][scarthgap][PATCH V2] nginx: Backport fix for CVE-2024-7347
+Date: Wed, 21 Aug 2024 12:29:06 +0530
+Message-Id: <20240821065906.7509-1-asharma@mvista.com>
 X-Mailer: git-send-email 2.17.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 21 Aug 2024 06:53:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111878
+ <openembedded-devel@lists.openembedded.org>; Wed, 21 Aug 2024 06:59:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111879
 
-Upstream-Status: Backport [https://github.com/nginx/nginx/commit/88955b1044ef38315b77ad1a509d63631a790a0f &
-https://github.com/nginx/nginx/commit/7362d01658b61184108c21278443910da68f93b4]
+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/88955b1044ef38315b77ad1a509d63631a790a0f and https://github.com/nginx/nginx/commit/7362d01658b61184108c21278443910da68f93b4]
 
 Signed-off-by: Ashish Sharma <asharma@mvista.com>
 ---
@@ -70,7 +69,7 @@ Signed-off-by: Ashish Sharma <asharma@mvista.com>
 
 diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2024-7347-1.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2024-7347-1.patch
 new file mode 100644
-index 000000000..23723d63d
+index 0000000000..23723d63d4
 --- /dev/null
 +++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2024-7347-1.patch
 @@ -0,0 +1,34 @@
@@ -110,7 +109,7 @@ index 000000000..23723d63d
 +                        "samples:%uD, id:%uD",
 diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2024-7347-2.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2024-7347-2.patch
 new file mode 100644
-index 000000000..5b8d08a1e
+index 0000000000..5b8d08a1e1
 --- /dev/null
 +++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2024-7347-2.patch
 @@ -0,0 +1,52 @@
@@ -167,13 +166,13 @@ index 000000000..5b8d08a1e
 +     if (start_sample > n) {
 +         ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
 diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
-index 9cbe35a13..4e744de27 100644
+index 83ae90c40c..926db19443 100644
 --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
 +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-@@ -24,6 +24,8 @@ SRC_URI = " \
+@@ -23,6 +23,8 @@ SRC_URI = " \
+     file://nginx.service \
      file://nginx-fix-pidfile.patch \
      file://0001-configure-libxslt-conf.patch \
-     file://CVE-2023-44487.patch \
 +    file://CVE-2024-7347-1.patch \
 +    file://CVE-2024-7347-2.patch \
  "
