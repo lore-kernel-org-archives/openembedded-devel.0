@@ -1,254 +1,466 @@
-Return-Path: <joerg.sommer@navimatix.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A065CC531DC
-	for <webhook@archiver.kernel.org>; Fri, 23 Aug 2024 05:37:10 +0000 (UTC)
-Received: from AM0PR83CU005.outbound.protection.outlook.com (AM0PR83CU005.outbound.protection.outlook.com [52.101.69.135])
- by mx.groups.io with SMTP id smtpd.web11.9858.1724391427740118179
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AF218C52D7C
+	for <webhook@archiver.kernel.org>; Fri, 23 Aug 2024 05:40:00 +0000 (UTC)
+Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
+ by mx.groups.io with SMTP id smtpd.web11.9874.1724391591541638033
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Aug 2024 22:37:09 -0700
+ Thu, 22 Aug 2024 22:39:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=Jv4296O0;
- spf=pass (domain: navimatix.de, ip: 52.101.69.135, mailfrom: joerg.sommer@navimatix.de)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=N/eAMrpn4szjvZtWdnMhJ+3JR9UhWtd5giVWtIvT/9y2DW7dk67PXu2joVxDNDnNgNagtq1+Qk+uOGZURBu4wV/XAVigDIBhbunfss8v80m9sU49eH4Kcit5qQwDU8sUAK6tN5G/JHHe6PV8NjQ0UR6QgelSu2EzrTPxhLtueCiTA92K7p/p6DosWjarLOfETj8XK2Xqv7qpzCZgwjEyOySvjC4sKSed94VsJv+ixsrWpfCzEK2roaZ28aR02tFabWkI1jzb3e+JOrIEPxeu0UD62nVNJW3Ox+20pfcbmi5fdo3Pw3X9JAQ1ORNcqnyUHq2p7tJe8w53B9pAVU3fbA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KbTk0wE+v30ZKWxvG9xBrxNO+hKFNRUrlzqAAa92Qug=;
- b=JvDa2+BGOpucEnJVwGkH1GkYqisXvG11UDgNBzJZhZ6Ee5HHim3GGxUQZ/CMxgDfjx86adRFjcrH5xGz0rIqBUGD4zWQXUxuGIBpuzn0M0zk1ApK2RkKoac0TLZ7ggoKEIoTZECRQLd1j6lDClUKL432bBlBZxqoKBaJxrET0jQoocpBK3EyT/AIYJG+5skQyYs1roX3dUj5jI+bpXnXJacWuZ3kV9x9HdRnyzvdLhQzrvlfB8hiICarkHlMeO5fOILnYHKEa+pc/X3V9VrVb3hgJlpNiufdzXjAw9nkOxdte9XAeTOoUrdutofOATRD0bxkDI0pvF3ZFDFYt8ejxg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
- dkim=pass header.d=navimatix.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KbTk0wE+v30ZKWxvG9xBrxNO+hKFNRUrlzqAAa92Qug=;
- b=Jv4296O0KrbRO9E0cPSps2ykPnYsA3G/e10KjEKij7BJHzpqEsgyyZGaz01thSz8a1IG4mwGDyp0NkxIbDMD2yy7eepJFm8bfd6W1CGfcJG72ZhaPXRCMA1KitTT2u0J/LJavRt5AduUnye9anSUNykcGHSScBOjkdwGlIwqG+I=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=navimatix.de;
-Received: from DU2PR01MB8293.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:2d4::5) by DU4PR01MB11169.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:58b::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7875.21; Fri, 23 Aug
- 2024 05:37:04 +0000
-Received: from DU2PR01MB8293.eurprd01.prod.exchangelabs.com
- ([fe80::d520:1b9e:a30e:69a7]) by DU2PR01MB8293.eurprd01.prod.exchangelabs.com
- ([fe80::d520:1b9e:a30e:69a7%4]) with mapi id 15.20.7897.014; Fri, 23 Aug 2024
- 05:37:03 +0000
-Date: Fri, 23 Aug 2024 07:37:02 +0200
-From: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
-To: openembedded-devel@lists.openembedded.org, joerg.sommer@navimatix.de
-CC: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
-Subject: [PATCH] bluealsa: upgrade 4.0.0+git -> 4.3.0
-Message-ID: <88b75d895a22439a271d83df9e66c7dc2a1e75e6.1724391421.git.joerg.sommer@navimatix.de>
-X-Mailer: git-send-email 2.34.1
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: BE1P281CA0312.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:85::6) To DU2PR01MB8293.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:2d4::5)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bXcW3Vpx;
+ spf=pass (domain: gmail.com, ip: 209.85.161.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f49.google.com with SMTP id 006d021491bc7-5d5c8c1006eso1148416eaf.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Aug 2024 22:39:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1724391591; x=1724996391; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ahHDAd9yyqGp4lujzC0Xl2b081oqN1FE3zeNMDOY8gU=;
+        b=bXcW3Vpxlq3niMu6tmFuqhu2f3dIYgmgu4Ws8hyj++54ORUxTw7VxlmwkIL7PQCV+V
+         Me90hlLi6xwThZ5Nv819TEl/Vj2ORwDRMJPX6pDsb6o16IYytndaDDjxIzRWMfe2djZH
+         GX0r7SZ4qlT9II+MPO4O2q7cqrXjTWKT9dGUDqoLqjbXvilGLDAtMyafabuQghFMfgQ4
+         9HE2eLxTjz5A46DIbu2H8PbiB5J/nxrO2x7rq1ZKb8QzuMm0nNiMuiuM/CQGVmylHsoE
+         iWm5BT86kJOYEx49I35u0Ih3H47xbygD9yix8PcbfWdBsF9QA5OmjGx/WnONDX41jzUX
+         8Q6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1724391591; x=1724996391;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ahHDAd9yyqGp4lujzC0Xl2b081oqN1FE3zeNMDOY8gU=;
+        b=Me3kW2M4OlrVpJhNQrieq1qr2jll5jj+bYFP1DXb3MjkS7pq2BoUqLVhtk4+55BY3O
+         YrpcveNbOc5y4IaEAQYp441dlxrglVI0HsMLnYZCLHMHqjQnYKNold/N42fl8NLS//NH
+         oea5eUSeq0dXc39rSFLQjKt2Z9Z8O6+/sqfbRugFqqw3wtbzJ+2eBCk9porX7BJ2KhmP
+         5vbaDDYHfT/7Lm8VUTLSLSTWdIVUOG7Wz/tnrYQje5zaEuNBtGUfvCXBxeIK05bQ64Rs
+         0w+OZ2CXJ+eiSWe6vUIpgaQSCuZOn/PidEy6ruP1KTAqLo3RqVgiRFwvf7TemGWJnFcE
+         wYkg==
+X-Gm-Message-State: AOJu0YzN5pU1OaCnT+jMwU/nV9S/i/93LKUYxHMa41wk1+2wqCOD3yIX
+	f9t/xDHpHukuNhaWVj571vn6lnItbxo364vuMthAiigah0eGjiMjDQ7xsf3YEmFDpq4cNLyI2K9
+	IPsQojEQMtyeMOck4hVjrWp6zPTA=
+X-Google-Smtp-Source: AGHT+IG+dgXM4CZFvg2lYIuOhgFkgaM+Ityu7dFK/P2xBtrSWKX7WHjoXdSfsoW7aHdJknPxLE17Nw0ARsVpu7ScShI=
+X-Received: by 2002:a05:6820:62a:b0:5dc:9ac7:25f3 with SMTP id
+ 006d021491bc7-5dcc6206e99mr1053122eaf.4.1724391590305; Thu, 22 Aug 2024
+ 22:39:50 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR01MB8293:EE_|DU4PR01MB11169:EE_
-X-MS-Office365-Filtering-Correlation-Id: d4422124-df03-44cd-04da-08dcc3359e60
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?OVMHrxx8ihHCniD3M/q8twQD9jGGQGCSkzs66M2fYW1Fn9Khr+zLoaCuOA4J?=
- =?us-ascii?Q?bwS/rO0aBb9kT83Iw1bar5fzWjlHeyiIcbctFFBYKG4S0NOgIbjagNlFxUq8?=
- =?us-ascii?Q?6qVT2LGojg63o5aDV89EaK0xhIRBjuSHRek901mkDihhEE29T2pNbSGcpQc1?=
- =?us-ascii?Q?D9J1811ryv2/fVViAZGE3VEl9PrmzJDpbKS+MgzvTHHkZaFPQdLnYP57Qd0n?=
- =?us-ascii?Q?mjjqg/NNiDGSs1AJjUbu+wjtMTYQQfiHlNyVIexG/2uG+9XlFQ8f/rk9uHwo?=
- =?us-ascii?Q?wqVCCN4GbZnOT/TRy9AV9O1pbjTVVLRbpeYq4f67G4Pmg/qdtfjwN55KOPS9?=
- =?us-ascii?Q?Ejd6OtEZQNJV4S+JuHTNtMHq2F33WJPMoqoAPxaz/Pv+7b7jNHFU5lX9WHLc?=
- =?us-ascii?Q?PagKTt70NuMm7itvb5mspgnwbsW1LJqNDqOrusis/xzpYL3pilxYHBkcessF?=
- =?us-ascii?Q?DlNc8mjMcdmqvWQ2sy+n2v8v1BfA7bMrL27/mVzzDixpC4+brxHjjg37RGgP?=
- =?us-ascii?Q?2ltDrYE2bArNAbKix8zYQB7BXRFhJh3bFeljgf/iRTXPi6QklElsC2Yg4luD?=
- =?us-ascii?Q?fiHc+4BDe4zN3D1IxPp6sWQkhFwaoIQ5R4ShfVVdlHUTpefOI/tsThTbSJEX?=
- =?us-ascii?Q?8Nf1hApQWiFNEtyG8eQT2xouiO4YRpikZBI5p4g7+iKP/EkjzjftDxKTE1T5?=
- =?us-ascii?Q?nAK2zoFDUbxC+A3cWrx7q1WOjgdrFGzvkNytZ4bAuYfsKGt6yZ8tWX2IJeb1?=
- =?us-ascii?Q?nAlqrGAnTs2Wr432RvZGoL6Vd8YBhLdp9BzTY8G2hKPC3Puth6w+6B6dmG+w?=
- =?us-ascii?Q?DsKKdbn2vTxYa5bhyTkDZTgkW203h5XNe5W8HmGlE2YLdSz+YLQQrLTuWatP?=
- =?us-ascii?Q?wfeDvB+GENbLX3vyJXyBE8k5nY6KLxKbG3mxq87xkmj8k2+QJa5SvSCmDqgH?=
- =?us-ascii?Q?C9RzyjODjKj5q1tVhKHMHW9YICiCmaYsgpBFgnW7UchM0aejAOvW5CT6S0Dm?=
- =?us-ascii?Q?tbLssfdIw9P3TfgXoyDlUZbewIeoOkRjnVp+9dQKhDm3M1kn2kX0vKhM1SmX?=
- =?us-ascii?Q?M+LdRI+v6mvJtiJwitmxgOgCj4mt/jHGhy4RX1VzmENgCY9U/SHqC4I8LP1J?=
- =?us-ascii?Q?Sc2WDu8B0jAoRIb7ypWNzzWSyoQxMPiWXGdtryi4pgcsZCQ1GNystXmnd1UV?=
- =?us-ascii?Q?P9Hd9zvIlRguwBac0znkU83WoReCpBwBsOZc0DGlMzRMD3Xm8bShrcYd/pOU?=
- =?us-ascii?Q?vs2XKX4rtoPo+SoT035iMQUxIvx9vr6I4cVLN2PQrTVV7taxMdt56a+WkamE?=
- =?us-ascii?Q?tBo=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR01MB8293.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?ztQhrmqL19r7QSWwguqa4yYJwp8GTIa/nBNARR6lBg2C0DWd7qZ0uE22Vaf8?=
- =?us-ascii?Q?hokAzzH6YkB3xqPl6Ke8DAeSDzNay6lNw0ZkEpPp8zJoAWHaLZepCyisb0we?=
- =?us-ascii?Q?0SlmJ4YrgTbFrj2AxJr8z1byI8rraCC0sYVDqOJftpfNvvZQ7Q4BWIU2ylTY?=
- =?us-ascii?Q?KQl4rpwVR9HjmBZqfMfF4UIOkAQ+YrAIbvLczHB1n5NdU2WWPju3gstGAe5l?=
- =?us-ascii?Q?w3zI8fh7Qx+p/OMziVDRB0V9L84bc5sL6VQt4vlywm1jP/DjKkRZJ0BGNuM6?=
- =?us-ascii?Q?1Yg695jAajRaP8Wd1XPw7wQ50sWoYDe30ExxIwXsUm8O1UBp7nWogCiDQ3zc?=
- =?us-ascii?Q?YN1dF0aszWjOHG34qQCjNXQr2aAI1EfpSjJyirvMn83qv5Snaje3TLyKchuU?=
- =?us-ascii?Q?xd/CtOrDHbFKTt/NoAcseXV4SiG8HdJU1XGFvFMxO7WdO67ik8BE4b+ozsDZ?=
- =?us-ascii?Q?sryq0HJtlPDGZszG9SI9bdGlD+jZCgQ3eLg2m4ABBTI3Z911q39reLAmqB7y?=
- =?us-ascii?Q?vjvlqL/0KF9lZaBU2fHM9oazluLTqB/A/WHZjWO7GiawEWrXEaorZU/KEkZm?=
- =?us-ascii?Q?vCJZdmOXqxCZZkCFhESBd20h3/gwMw9FuJ+eiIOpZ83D2u4NOuSEuCKZCExu?=
- =?us-ascii?Q?FN7NbSdHfHObC7dzv+FgsepuUGiu3xUGD1+YseMZXsMXxU9yHi3L2NDCrc63?=
- =?us-ascii?Q?gp6JDg/OwCMO7d/bS0lm7OnJurg96Oc1XRR6Jff7qtJQXLfY7INY72ZZ+QnJ?=
- =?us-ascii?Q?AzjTPC9nHNUu9sqIxBl+ERubUdjgVJHPwalhkyBJZ967P2JwNkGkAP5tnma+?=
- =?us-ascii?Q?U9uw/WkkIwftzJn8wLcmRBr2wO4GnDPd2pJmWE6ihfDA/Gm6UNMmwk9w4bJq?=
- =?us-ascii?Q?GcRia9yN0Pms0NW4EpZOzI40ELW01+OtVggln7LbodpnXG4+A2CNVSJgP1bx?=
- =?us-ascii?Q?TSHGroMvTFAmFWN2hgh+nwSFWun8LJAefcoLxI8g3oifKV35E6L2XJJqe3CU?=
- =?us-ascii?Q?QOWhdkX0xYP8v1ixFSxVXkdjbLf8WoFpqXNljn/lySeutKYvsDjaQpuFH1a7?=
- =?us-ascii?Q?ZPVZKp1q0kQag4iEjwnwh1PI0yYByXJjnY1/kd0zfbEulAy1Q2rmXSBQCS9w?=
- =?us-ascii?Q?qLNhFQctxhFEZKLpLjtlrF74zAbFV73u/5cLNHDObpjQaCl/OqcshoJJvlyo?=
- =?us-ascii?Q?798pXWtLrEH11g5wqKddCt1NJectCLXRE+RjbE5TPSPzB5fQn7l91Une8iMT?=
- =?us-ascii?Q?BuVkIKa3C9NKsPz7t/kjVRntHqNocrjlsRfWejFVZn0xV5dj5nxBh4aF5YQL?=
- =?us-ascii?Q?8oVNqsgdtcHrYbdHaZyzqxpPIa1twExA+lH97aZ9cWuG598YDCDXnrBPjpe+?=
- =?us-ascii?Q?5I/jvqc1Ci+3VMXJOfefAs8DYiclVQ2HanWlT2OQSLLWlPlMVivjnndosimB?=
- =?us-ascii?Q?WNOo5VxC5L1Wnd7GCSiwaBPf23nxxXMohKYNQ2482oBYIZxUJvjXPnzCphs2?=
- =?us-ascii?Q?Ow2/Ugz4kjt/pDsOW0mcVAGbfh5LgBnMUn4pa9gcycdvdfHGGD9ypI/R6hyq?=
- =?us-ascii?Q?kHX7tMRFLyspcm5bWhbOC1sQV2jcvWHniWHrm4JH5cYvUcXd8dR8DoKD038u?=
- =?us-ascii?Q?bA=3D=3D?=
-X-OriginatorOrg: navimatix.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: d4422124-df03-44cd-04da-08dcc3359e60
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR01MB8293.eurprd01.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Aug 2024 05:37:03.8923
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: IVTcKy9VlaY+tZDb3d/c/7Wob5+GDWJKOCkidX0uja7mRWU5X+5Ja3hSze92oB2S+mj1W0iSmq8DUDqLTFPiSCSlc59e+a7Jd7NNReQGrDM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR01MB11169
+References: <18cbb26e53adb423c71a7f74b130cf1f84ac098d.1724345484.git.joerg.sommer@navimatix.de>
+In-Reply-To: <18cbb26e53adb423c71a7f74b130cf1f84ac098d.1724345484.git.joerg.sommer@navimatix.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 22 Aug 2024 22:39:24 -0700
+Message-ID: <CAMKF1srsr8SsvXvY59Z0d8zow2igZY-SFhMp+33PN-gPYO+m3w@mail.gmail.com>
+Subject: Re: [oe] [PATCH] zsh: update 5.8 -> 5.9
+To: joerg.sommer@navimatix.de
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 23 Aug 2024 05:37:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111909
+ <openembedded-devel@lists.openembedded.org>; Fri, 23 Aug 2024 05:40:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111910
 
-From: J=F6rg Sommer <joerg.sommer@navimatix.de>
+runs into build QA issues
 
-The change in the license file was the update of the year in the copyright
-line.
+ERROR: zsh-5.9-r0 do_package_qa: QA Issue:
+/usr/share/zsh/5.9/functions/test-repo-git-rebase-merge contained in
+package zsh requires /usr/local/bin/zsh, but no providers found in
+RDEPENDS:zsh? [file-rdeps]
 
-glib-2.0-native and python3-packaging-native (with python3native) is
-required to have gdbus-codegen at build time.
+Perhaps this testcase needs to change where its expecting z-shell
 
-Signed-off-by: J=F6rg Sommer <joerg.sommer@navimatix.de>
----
- .../{bluealsa_git.bb =3D> bluealsa_4.3.0.bb}    | 36 ++++++++++++-------
- 1 file changed, 24 insertions(+), 12 deletions(-)
- rename meta-multimedia/recipes-multimedia/bluealsa/{bluealsa_git.bb =3D> b=
-luealsa_4.3.0.bb} (67%)
-
-diff --git a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb b/=
-meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb
-similarity index 67%
-rename from meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
-rename to meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb
-index 5007c88ff..ba43b4378 100644
---- a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
-+++ b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb
-@@ -1,22 +1,30 @@
- SUMMARY =3D "Bluetooth Audio ALSA Backend"
-+DESCRIPTION =3D "\
-+    BlueALSA is a replacement for BlueZ >=3D 5, with which one can achieve=
- the \
-+    same Bluetooth audio profile support as with PulseAudio, but with fewe=
-r \
-+    dependencies and at a lower level in the software stack. It is designe=
-d \
-+    specifically for use on small, low-powered, dedicated audio or audio/v=
-isual \
-+    systems where the high-level audio management features of PulseAudio o=
-r \
-+    PipeWire are not required. \
-+"
- HOMEPAGE =3D "https://github.com/Arkq/bluez-alsa"
-+BUGTRACKER =3D "https://github.com/arkq/bluez-alsa/issues"
- SECTION =3D "libs"
-=20
- LICENSE =3D "MIT"
--LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D8449a4f133a93f6254b496d4fb476e8=
-3"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D143bc4e73f39cc5e89d6e096ac0315b=
-a"
-+
-+DEPENDS +=3D "alsa-lib bluez5 dbus glib-2.0-native python3-packaging-nativ=
-e sbc"
-=20
- SRC_URI =3D "git://github.com/Arkq/bluez-alsa.git;protocol=3Dhttps;branch=
-=3Dmaster"
-=20
--SRCREV =3D "dd05a1baa261b94da9ba977b5e3392c8b4dc7a5e"
--PV =3D "4.0.0+git"
-+SRCREV =3D "959573c2cccef5cf074f5b2fa7941abbd699c5f4"
-=20
--S  =3D "${WORKDIR}/git"
--
--DEPENDS +=3D "alsa-lib bluez5 dbus glib-2.0 sbc"
-+S =3D "${WORKDIR}/git"
-=20
- PACKAGECONFIG ??=3D "aplay cli hcitop ${@bb.utils.filter('DISTRO_FEATURES'=
-, 'systemd', d)}"
--PACKAGECONFIG[a2dpconf]  =3D "--enable-a2dpconf,--disable-a2dpconf"
--PACKAGECONFIG[aac]  =3D "--enable-aac,--disable-aac,fdk-aac"
-+PACKAGECONFIG[a2dpconf] =3D "--enable-a2dpconf,--disable-a2dpconf"
-+PACKAGECONFIG[aac] =3D "--enable-aac,--disable-aac,fdk-aac"
- PACKAGECONFIG[aplay] =3D "--enable-aplay,--disable-aplay"
- PACKAGECONFIG[cli] =3D "--enable-cli,--disable-cli"
- PACKAGECONFIG[coverage] =3D "--with-coverage,--without-coverage,lcov-nativ=
-e"
-@@ -25,8 +33,10 @@ PACKAGECONFIG[debug-time] =3D "--enable-debug-time,--dis=
-able-debug-time"
- PACKAGECONFIG[faststream] =3D "--enable-faststream,--disable-faststream"
- PACKAGECONFIG[hcitop] =3D "--enable-hcitop,--disable-hcitop,libbsd ncurses=
-"
- PACKAGECONFIG[libunwind] =3D "--with-libunwind,--without-libunwind,libunwi=
-nd"
-+PACKAGECONFIG[midi] =3D "--enable-midi,--disable-midi"
- PACKAGECONFIG[mp3lame] =3D "--enable-mp3lame,--disable-mp3lame,lame"
- PACKAGECONFIG[mpg123] =3D "--enable-mpg123,--disable-mpg123,mpg123,mpg123"
-+PACKAGECONFIG[msbc] =3D "--enable-msbc,--disable-msbc,spandsp"
- PACKAGECONFIG[ofono] =3D "--enable-ofono,--disable-ofono,ofono"
- PACKAGECONFIG[payloadcheck] =3D "--enable-payloadcheck,--disable-payloadch=
-eck"
- PACKAGECONFIG[rfcomm] =3D "--enable-rfcomm,--disable-rfcomm"
-@@ -35,9 +45,10 @@ PACKAGECONFIG[systemd] =3D "--enable-systemd --with-syst=
-emdsystemunitdir=3D${systemd
- PACKAGECONFIG[test] =3D "--enable-test,--disable-test,libcheck libsndfile1=
-"
- PACKAGECONFIG[upower] =3D "--enable-upower,--disable-upower,,upower"
-=20
--inherit autotools pkgconfig systemd
-+inherit autotools pkgconfig python3native systemd
-=20
--EXTRA_OECONF =3D " \
-+# These proprietary codecs are not available in Yocto
-+EXTRA_OECONF =3D "\
-     --disable-aptx \
-     --disable-lc3plus \
-     --disable-ldac \
-@@ -45,11 +56,12 @@ EXTRA_OECONF =3D " \
- "
-=20
- PACKAGE_BEFORE_PN =3D "${PN}-aplay"
--RRECOMMENDS:${PN} =3D "${PN}-aplay"
-=20
--FILES:${PN}-aplay =3D "${bindir}/bluealsa-aplay"
-+FILES:${PN}-aplay +=3D "${bindir}/bluealsa-aplay"
- FILES:${PN} +=3D "${libdir}/alsa-lib/*"
-=20
-+RRECOMMENDS:${PN} =3D "${PN}-aplay"
-+
- SYSTEMD_PACKAGES +=3D "${PN}-aplay"
- SYSTEMD_SERVICE:${PN} =3D "bluealsa.service"
- SYSTEMD_SERVICE:${PN}-aplay =3D "bluealsa-aplay.service"
---=20
-2.34.1
-
+On Thu, Aug 22, 2024 at 9:51=E2=80=AFAM J=C3=B6rg Sommer via lists.openembe=
+dded.org
+<joerg.sommer=3Dnavimatix.de@lists.openembedded.org> wrote:
+>
+> From: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
+>
+> The patches for CVE-2021-45444 were applied upstream on 2022-02-12.
+>
+> Signed-off-by: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
+> ---
+>  .../zsh/zsh/CVE-2021-45444_1.patch            |  60 --------
+>  .../zsh/zsh/CVE-2021-45444_2.patch            | 140 ------------------
+>  .../zsh/zsh/CVE-2021-45444_3.patch            |  77 ----------
+>  .../zsh/{zsh_5.8.bb =3D> zsh_5.9.bb}            |   8 +-
+>  4 files changed, 2 insertions(+), 283 deletions(-)
+>  delete mode 100644 meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_1.patch
+>  delete mode 100644 meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_2.patch
+>  delete mode 100644 meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_3.patch
+>  rename meta-oe/recipes-shells/zsh/{zsh_5.8.bb =3D> zsh_5.9.bb} (88%)
+>
+> diff --git a/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_1.patch b/meta=
+-oe/recipes-shells/zsh/zsh/CVE-2021-45444_1.patch
+> deleted file mode 100644
+> index fb8fa3427..000000000
+> --- a/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_1.patch
+> +++ /dev/null
+> @@ -1,60 +0,0 @@
+> -Origin: commit c187154f47697cdbf822c2f9d714d570ed4a0fd1
+> -From: Oliver Kiddle <opk@zsh.org>
+> -Date: Wed, 15 Dec 2021 01:56:40 +0100
+> -Subject: [PATCH 1/9] security/41: Don't perform PROMPT_SUBST evaluation =
+on
+> - %F/%K arguments
+> -
+> -Mitigates CVE-2021-45444
+> -
+> -https://salsa.debian.org/debian/zsh/-/raw/debian/5.8-6+deb11u1/debian/pa=
+tches/cherry-pick-CVE-2021-45444_1.patch?inline=3Dfalse
+> -Upstream-Status: Backport
+> -CVE: CVE-2021-45444
+> -Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
+> ----
+> - ChangeLog    |  5 +++++
+> - Src/prompt.c | 10 ++++++++++
+> - 2 files changed, 15 insertions(+)
+> -
+> -diff --git a/ChangeLog b/ChangeLog
+> -index 8d7dfc169..eb248ec06 100644
+> ---- a/ChangeLog
+> -+++ b/ChangeLog
+> -@@ -1,3 +1,8 @@
+> -+2022-01-27  dana  <dana@dana.is>
+> -+
+> -+      * Oliver Kiddle: security/41: Src/prompt.c: Prevent recursive
+> -+      PROMPT_SUBST
+> -+
+> - 2020-02-14  dana  <dana@dana.is>
+> -
+> -       * unposted: Config/version.mk: Update for 5.8
+> -diff --git a/Src/prompt.c b/Src/prompt.c
+> -index b65bfb86b..91e21c8e9 100644
+> ---- a/Src/prompt.c
+> -+++ b/Src/prompt.c
+> -@@ -244,6 +244,12 @@ parsecolorchar(zattr arg, int is_fg)
+> -       bv->fm +=3D 2; /* skip over F{ */
+> -       if ((ep =3D strchr(bv->fm, '}'))) {
+> -           char oc =3D *ep, *col, *coll;
+> -+          int ops =3D opts[PROMPTSUBST], opb =3D opts[PROMPTBANG];
+> -+          int opp =3D opts[PROMPTPERCENT];
+> -+
+> -+          opts[PROMPTPERCENT] =3D 1;
+> -+          opts[PROMPTSUBST] =3D opts[PROMPTBANG] =3D 0;
+> -+
+> -           *ep =3D '\0';
+> -           /* expand the contents of the argument so you can use
+> -            * %v for example */
+> -@@ -252,6 +258,10 @@ parsecolorchar(zattr arg, int is_fg)
+> -           arg =3D match_colour((const char **)&coll, is_fg, 0);
+> -           free(col);
+> -           bv->fm =3D ep;
+> -+
+> -+          opts[PROMPTSUBST] =3D ops;
+> -+          opts[PROMPTBANG] =3D opb;
+> -+          opts[PROMPTPERCENT] =3D opp;
+> -       } else {
+> -           arg =3D match_colour((const char **)&bv->fm, is_fg, 0);
+> -           if (*bv->fm !=3D '}')
+> ---
+> -2.34.1
+> diff --git a/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_2.patch b/meta=
+-oe/recipes-shells/zsh/zsh/CVE-2021-45444_2.patch
+> deleted file mode 100644
+> index e5b6d7cdc..000000000
+> --- a/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_2.patch
+> +++ /dev/null
+> @@ -1,140 +0,0 @@
+> -From 8a4d65ef6d0023ab9b238529410afb433553d2fa Mon Sep 17 00:00:00 2001
+> -From: Marc Cornell=C3=A0 <hello@mcornella.com>
+> -Date: Mon, 24 Jan 2022 09:43:28 +0100
+> -Subject: [PATCH 2/9] security/89: Add patch which can optionally be used=
+ to
+> - work around CVE-2021-45444 in VCS_Info
+> -Comment: Updated to use the same file name without blanks as actually
+> - used in the final 5.8.1 release.
+> -
+> -
+> -https://salsa.debian.org/debian/zsh/-/blob/debian/5.8-6+deb11u1/debian/p=
+atches/cherry-pick-CVE-2021-45444_2.patch
+> -Upstream-Status: Backport
+> -CVE: CVE-2021-45444
+> -Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
+> ----
+> - ChangeLog                                    |  5 +
+> - Etc/CVE-2021-45444-VCS_Info-workaround.patch | 98 ++++++++++++++++++++
+> - 2 files changed, 103 insertions(+)
+> - create mode 100644 Etc/CVE-2021-45444-VCS_Info-workaround.patch
+> -
+> -diff --git a/ChangeLog b/ChangeLog
+> -index eb248ec06..9a05a09e1 100644
+> ---- a/ChangeLog
+> -+++ b/ChangeLog
+> -@@ -1,5 +1,10 @@
+> - 2022-01-27  dana  <dana@dana.is>
+> -
+> -+      * Marc Cornell=C3=A0: security/89:
+> -+      Etc/CVE-2021-45444-VCS_Info-workaround.patch: Add patch which
+> -+      can optionally be used to work around recursive PROMPT_SUBST
+> -+      issue in VCS_Info
+> -+
+> -       * Oliver Kiddle: security/41: Src/prompt.c: Prevent recursive
+> -       PROMPT_SUBST
+> -
+> -diff --git a/Etc/CVE-2021-45444-VCS_Info-workaround.patch b/Etc/CVE-2021=
+-45444-VCS_Info-workaround.patch
+> -new file mode 100644
+> -index 000000000..13e54be77
+> ---- /dev/null
+> -+++ b/Etc/CVE-2021-45444-VCS_Info-workaround.patch
+> -@@ -0,0 +1,98 @@
+> -+From 972887bbe5eb6a00e5f0e73781d6d73bfdcafb93 Mon Sep 17 00:00:00 2001
+> -+From: =3D?UTF-8?q?Marc=3D20Cornell=3DC3=3DA0?=3D <hello@mcornella.com>
+> -+Date: Mon, 24 Jan 2022 09:43:28 +0100
+> -+Subject: [PATCH] security/89: Partially work around CVE-2021-45444 in V=
+CS_Info
+> -+MIME-Version: 1.0
+> -+Content-Type: text/plain; charset=3DUTF-8
+> -+Content-Transfer-Encoding: 8bit
+> -+
+> -+This patch is a partial, VCS_Info-specific work-around for CVE-2021-454=
+44,
+> -+which is mitigated in the shell itself in 5.8.1 and later versions. It =
+is
+> -+offered for users who are concerned about an exploit but are unable to =
+update
+> -+their binaries to receive the complete fix.
+> -+
+> -+The patch works around the vulnerability by pre-escaping values substit=
+uted
+> -+into format strings in VCS_Info. Please note that this may break some u=
+ser
+> -+configurations that rely on those values being un-escaped (which is why=
+ it was
+> -+not included directly in 5.8.1). It may be possible to limit this break=
+age by
+> -+adjusting exactly which ones are pre-escaped, but of course this may le=
+ave
+> -+them vulnerable again.
+> -+
+> -+If applying the patch to the file system is inconvenient or not possibl=
+e, the
+> -+following script can be used to idempotently patch the relevant functio=
+n
+> -+running in memory (and thus must be re-run when the shell is restarted)=
+:
+> -+
+> -+
+> -+# Impacted versions go from v5.0.3 to v5.8 (v5.8.1 is the first patched=
+ version)
+> -+autoload -Uz is-at-least
+> -+if is-at-least 5.8.1 || ! is-at-least 5.0.3; then
+> -+  return
+> -+fi
+> -+
+> -+# Quote necessary $hook_com[<field>] items just before they are used
+> -+# in the line "VCS_INFO_hook 'post-backend'" of the VCS_INFO_formats
+> -+# function, where <field> is:
+> -+#
+> -+#   base:       the full path of the repository's root directory.
+> -+#   base-name:  the name of the repository's root directory.
+> -+#   branch:     the name of the currently checked out branch.
+> -+#   revision:   an identifier of the currently checked out revision.
+> -+#   subdir:     the path of the current directory relative to the
+> -+#               repository's root directory.
+> -+#   misc:       a string that may contain anything the vcs_info backend=
+ wants.
+> -+#
+> -+# This patch %-quotes these fields previous to their use in vcs_info ho=
+oks and
+> -+# the zformat call and, eventually, when they get expanded in the promp=
+t.
+> -+# It's important to quote these here, and not later after hooks have mo=
+dified the
+> -+# fields, because then we could be quoting % characters from valid prom=
+pt sequences,
+> -+# like %F{color}, %B, etc.
+> -+#
+> -+#  32   =E2=94=82 hook_com[subdir]=3D"$(VCS_INFO_reposub ${hook_com[bas=
+e]})"
+> -+#  33   =E2=94=82 hook_com[subdir_orig]=3D"${hook_com[subdir]}"
+> -+#  34   =E2=94=82
+> -+#  35 + =E2=94=82 for tmp in base base-name branch misc revision subdir=
+; do
+> -+#  36 + =E2=94=82     hook_com[$tmp]=3D"${hook_com[$tmp]//\%/%%}"
+> -+#  37 + =E2=94=82 done
+> -+#  38 + =E2=94=82
+> -+#  39   =E2=94=82 VCS_INFO_hook 'post-backend'
+> -+#
+> -+# This is especially important so that no command substitution is perfo=
+rmed
+> -+# due to malicious input as a consequence of CVE-2021-45444, which affe=
+cts
+> -+# zsh versions from 5.0.3 to 5.8.
+> -+#
+> -+autoload -Uz +X regexp-replace VCS_INFO_formats
+> -+
+> -+# We use $tmp here because it's already a local variable in VCS_INFO_fo=
+rmats
+> -+typeset PATCH=3D'for tmp (base base-name branch misc revision subdir) h=
+ook_com[$tmp]=3D"${hook_com[$tmp]//\%/%%}"'
+> -+# Unique string to avoid reapplying the patch if this code gets called =
+twice
+> -+typeset PATCH_ID=3Dvcs_info-patch-9b9840f2-91e5-4471-af84-9e9a0dc68c1b
+> -+# Only patch the VCS_INFO_formats function if not already patched
+> -+if [[ "$functions[VCS_INFO_formats]" !=3D *$PATCH_ID* ]]; then
+> -+  regexp-replace 'functions[VCS_INFO_formats]' \
+> -+    "VCS_INFO_hook 'post-backend'" \
+> -+    ': ${PATCH_ID}; ${PATCH}; ${MATCH}'
+> -+fi
+> -+unset PATCH PATCH_ID
+> -+
+> -+
+> -+---
+> -+ Functions/VCS_Info/VCS_INFO_formats | 4 ++++
+> -+ 1 file changed, 4 insertions(+)
+> -+
+> -+diff --git a/Functions/VCS_Info/VCS_INFO_formats b/Functions/VCS_Info/V=
+CS_INFO_formats
+> -+index e0e1dc738..4d88e28b6 100644
+> -+--- a/Functions/VCS_Info/VCS_INFO_formats
+> -++++ b/Functions/VCS_Info/VCS_INFO_formats
+> -+@@ -32,6 +32,10 @@ hook_com[base-name_orig]=3D"${hook_com[base_name]}"
+> -+ hook_com[subdir]=3D"$(VCS_INFO_reposub ${hook_com[base]})"
+> -+ hook_com[subdir_orig]=3D"${hook_com[subdir]}"
+> -+
+> -++for tmp in base base-name branch misc revision subdir; do
+> -++    hook_com[$tmp]=3D"${hook_com[$tmp]//\%/%%}"
+> -++done
+> -++
+> -+ VCS_INFO_hook 'post-backend'
+> -+
+> -+ ## description (for backend authors):
+> -+--
+> -+2.34.1
+> ---
+> -2.34.1
+> diff --git a/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_3.patch b/meta=
+-oe/recipes-shells/zsh/zsh/CVE-2021-45444_3.patch
+> deleted file mode 100644
+> index adfc00ae5..000000000
+> --- a/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_3.patch
+> +++ /dev/null
+> @@ -1,77 +0,0 @@
+> -From 4abf2fc193fc2f3e680deecbf81289a7b02e245b Mon Sep 17 00:00:00 2001
+> -From: dana <dana@dana.is>
+> -Date: Tue, 21 Dec 2021 13:13:33 -0600
+> -Subject: [PATCH 3/9] CVE-2021-45444: Update NEWS/README
+> -
+> -https://salsa.debian.org/debian/zsh/-/blob/debian/5.8-6+deb11u1/debian/p=
+atches/cherry-pick-CVE-2021-45444_3.patch
+> -Upstream-Status: Backport
+> -CVE: CVE-2021-45444
+> -Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
+> ----
+> - ChangeLog |  2 ++
+> - NEWS      | 20 ++++++++++++++++++++
+> - README    |  6 ++++++
+> - 3 files changed, 28 insertions(+)
+> -
+> -diff --git a/ChangeLog b/ChangeLog
+> -index 9a05a09e1..93b0bc337 100644
+> ---- a/ChangeLog
+> -+++ b/ChangeLog
+> -@@ -1,5 +1,7 @@
+> - 2022-01-27  dana  <dana@dana.is>
+> -
+> -+      * CVE-2021-45444: NEWS, README: Document preceding two changes
+> -+
+> -       * Marc Cornell=C3=A0: security/89:
+> -       Etc/CVE-2021-45444-VCS_Info-workaround.patch: Add patch which
+> -       can optionally be used to work around recursive PROMPT_SUBST
+> -diff --git a/NEWS b/NEWS
+> -index 964e1633f..d34b3f79e 100644
+> ---- a/NEWS
+> -+++ b/NEWS
+> -@@ -4,6 +4,26 @@ CHANGES FROM PREVIOUS VERSIONS OF ZSH
+> -
+> - Note also the list of incompatibilities in the README file.
+> -
+> -+Changes since 5.8
+> -+-----------------
+> -+
+> -+CVE-2021-45444: Some prompt expansion sequences, such as %F, support
+> -+'arguments' which are themselves expanded in case they contain colour
+> -+values, etc. This additional expansion would trigger PROMPT_SUBST
+> -+evaluation, if enabled. This could be abused to execute code the user
+> -+didn't expect. e.g., given a certain prompt configuration, an attacker
+> -+could trick a user into executing arbitrary code by having them check
+> -+out a Git branch with a specially crafted name.
+> -+
+> -+This is fixed in the shell itself by no longer performing PROMPT_SUBST
+> -+evaluation on these prompt-expansion arguments.
+> -+
+> -+Users who are concerned about an exploit but unable to update their
+> -+binaries may apply the partial work-around described in the file
+> -+'Etc/CVE-2021-45444 VCS_Info workaround.patch' included with the shell
+> -+source. [ Reported by RyotaK <security@ryotak.me>. Additional thanks to
+> -+Marc Cornell=C3=A0 <hello@mcornella.com>. ]
+> -+
+> - Changes since 5.7.1-test-3
+> - --------------------------
+> -
+> -diff --git a/README b/README
+> -index 7f1dd5f92..c9e994ab3 100644
+> ---- a/README
+> -+++ b/README
+> -@@ -31,6 +31,12 @@ Zsh is a shell with lots of features.  For a list of =
+some of these, see the
+> - file FEATURES, and for the latest changes see NEWS.  For more
+> - details, see the documentation.
+> -
+> -+Incompatibilities since 5.8
+> -+---------------------------
+> -+
+> -+PROMPT_SUBST expansion is no longer performed on arguments to prompt-
+> -+expansion sequences such as %F.
+> -+
+> - Incompatibilities since 5.7.1
+> - -----------------------------
+> -
+> ---
+> -2.34.1
+> diff --git a/meta-oe/recipes-shells/zsh/zsh_5.8.bb b/meta-oe/recipes-shel=
+ls/zsh/zsh_5.9.bb
+> similarity index 88%
+> rename from meta-oe/recipes-shells/zsh/zsh_5.8.bb
+> rename to meta-oe/recipes-shells/zsh/zsh_5.9.bb
+> index 7602ff9f6..036a200ca 100644
+> --- a/meta-oe/recipes-shells/zsh/zsh_5.8.bb
+> +++ b/meta-oe/recipes-shells/zsh/zsh_5.9.bb
+> @@ -10,12 +10,8 @@ LIC_FILES_CHKSUM =3D "file://LICENCE;md5=3D1a4c4cda3e8=
+096d2fd483ff2f4514fec"
+>
+>  DEPENDS =3D "ncurses bison-native libcap libpcre gdbm groff-native"
+>
+> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/5.8/${BP}.tar.x=
+z \
+> -       file://CVE-2021-45444_1.patch \
+> -       file://CVE-2021-45444_2.patch \
+> -       file://CVE-2021-45444_3.patch \
+> -       "
+> -SRC_URI[sha256sum] =3D "dcc4b54cc5565670a65581760261c163d720991f0d06486d=
+a61f8d839b52de27"
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar=
+.xz"
+> +SRC_URI[sha256sum] =3D "9b8d1ecedd5b5e81fbf1918e876752a7dd948e05c1a0dba1=
+0ab863842d45acd5"
+>
+>  inherit autotools-brokensep gettext update-alternatives manpages
+>
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#111905): https://lists.openembedded.org/g/openembedde=
+d-devel/message/111905
+> Mute This Topic: https://lists.openembedded.org/mt/108041468/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
