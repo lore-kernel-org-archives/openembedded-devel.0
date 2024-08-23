@@ -1,466 +1,306 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AF218C52D7C
-	for <webhook@archiver.kernel.org>; Fri, 23 Aug 2024 05:40:00 +0000 (UTC)
-Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
- by mx.groups.io with SMTP id smtpd.web11.9874.1724391591541638033
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F3F41C52D7C
+	for <webhook@archiver.kernel.org>; Fri, 23 Aug 2024 06:46:30 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.10777.1724395586739660047
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Aug 2024 22:39:51 -0700
+ Thu, 22 Aug 2024 23:46:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=bXcW3Vpx;
- spf=pass (domain: gmail.com, ip: 209.85.161.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f49.google.com with SMTP id 006d021491bc7-5d5c8c1006eso1148416eaf.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Aug 2024 22:39:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1724391591; x=1724996391; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ahHDAd9yyqGp4lujzC0Xl2b081oqN1FE3zeNMDOY8gU=;
-        b=bXcW3Vpxlq3niMu6tmFuqhu2f3dIYgmgu4Ws8hyj++54ORUxTw7VxlmwkIL7PQCV+V
-         Me90hlLi6xwThZ5Nv819TEl/Vj2ORwDRMJPX6pDsb6o16IYytndaDDjxIzRWMfe2djZH
-         GX0r7SZ4qlT9II+MPO4O2q7cqrXjTWKT9dGUDqoLqjbXvilGLDAtMyafabuQghFMfgQ4
-         9HE2eLxTjz5A46DIbu2H8PbiB5J/nxrO2x7rq1ZKb8QzuMm0nNiMuiuM/CQGVmylHsoE
-         iWm5BT86kJOYEx49I35u0Ih3H47xbygD9yix8PcbfWdBsF9QA5OmjGx/WnONDX41jzUX
-         8Q6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724391591; x=1724996391;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ahHDAd9yyqGp4lujzC0Xl2b081oqN1FE3zeNMDOY8gU=;
-        b=Me3kW2M4OlrVpJhNQrieq1qr2jll5jj+bYFP1DXb3MjkS7pq2BoUqLVhtk4+55BY3O
-         YrpcveNbOc5y4IaEAQYp441dlxrglVI0HsMLnYZCLHMHqjQnYKNold/N42fl8NLS//NH
-         oea5eUSeq0dXc39rSFLQjKt2Z9Z8O6+/sqfbRugFqqw3wtbzJ+2eBCk9porX7BJ2KhmP
-         5vbaDDYHfT/7Lm8VUTLSLSTWdIVUOG7Wz/tnrYQje5zaEuNBtGUfvCXBxeIK05bQ64Rs
-         0w+OZ2CXJ+eiSWe6vUIpgaQSCuZOn/PidEy6ruP1KTAqLo3RqVgiRFwvf7TemGWJnFcE
-         wYkg==
-X-Gm-Message-State: AOJu0YzN5pU1OaCnT+jMwU/nV9S/i/93LKUYxHMa41wk1+2wqCOD3yIX
-	f9t/xDHpHukuNhaWVj571vn6lnItbxo364vuMthAiigah0eGjiMjDQ7xsf3YEmFDpq4cNLyI2K9
-	IPsQojEQMtyeMOck4hVjrWp6zPTA=
-X-Google-Smtp-Source: AGHT+IG+dgXM4CZFvg2lYIuOhgFkgaM+Ityu7dFK/P2xBtrSWKX7WHjoXdSfsoW7aHdJknPxLE17Nw0ARsVpu7ScShI=
-X-Received: by 2002:a05:6820:62a:b0:5dc:9ac7:25f3 with SMTP id
- 006d021491bc7-5dcc6206e99mr1053122eaf.4.1724391590305; Thu, 22 Aug 2024
- 22:39:50 -0700 (PDT)
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=89651bc72e=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 47N5EZF9030073
+	for <openembedded-devel@lists.openembedded.org>; Fri, 23 Aug 2024 06:46:26 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 412ju6x7av-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 23 Aug 2024 06:46:25 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Thu, 22 Aug 2024 23:46:23 -0700
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][master][scarthgap][PATCH 1/1] krb5: fix CVE-2024-26458 and CVE-2024-26461
+Date: Fri, 23 Aug 2024 06:46:03 +0000
+Message-ID: <20240823064603.671901-1-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-References: <18cbb26e53adb423c71a7f74b130cf1f84ac098d.1724345484.git.joerg.sommer@navimatix.de>
-In-Reply-To: <18cbb26e53adb423c71a7f74b130cf1f84ac098d.1724345484.git.joerg.sommer@navimatix.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 22 Aug 2024 22:39:24 -0700
-Message-ID: <CAMKF1srsr8SsvXvY59Z0d8zow2igZY-SFhMp+33PN-gPYO+m3w@mail.gmail.com>
-Subject: Re: [oe] [PATCH] zsh: update 5.8 -> 5.9
-To: joerg.sommer@navimatix.de
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-ORIG-GUID: MTSMskrPW27Skohy-fY3uFHG9Pog0TXi
+X-Authority-Analysis: v=2.4 cv=VdWlP0p9 c=1 sm=1 tr=0 ts=66c83041 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=JhMfiyDoiLEA:10 a=HCiNrPZc1L8A:10 a=yoJbH4e0A30A:10 a=t7CeM3EgAAAA:8 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8
+ a=Gz7s5_CCAAAA:8 a=u0VBE2UhgT_kSXmcRp8A:9 a=FdTzh2GWekK77mhwV6Dw:22 a=96-UuAdfYG6OSYlHWuPe:22
+X-Proofpoint-GUID: MTSMskrPW27Skohy-fY3uFHG9Pog0TXi
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-08-23_04,2024-08-22_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 phishscore=0
+ spamscore=0 malwarescore=0 impostorscore=0 mlxscore=0 suspectscore=0
+ mlxlogscore=999 lowpriorityscore=0 bulkscore=0 priorityscore=1501
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2407110000 definitions=main-2408230047
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 23 Aug 2024 05:40:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111910
+ <openembedded-devel@lists.openembedded.org>; Fri, 23 Aug 2024 06:46:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111911
 
-runs into build QA issues
+From: Yogita Urade <yogita.urade@windriver.com>
 
-ERROR: zsh-5.9-r0 do_package_qa: QA Issue:
-/usr/share/zsh/5.9/functions/test-repo-git-rebase-merge contained in
-package zsh requires /usr/local/bin/zsh, but no providers found in
-RDEPENDS:zsh? [file-rdeps]
+CVE-2024-26458:
+Kerberos 5 (aka krb5) 1.21.2 contains a memory leak in
+/krb5/src/lib/rpc/pmap_rmt.c.
 
-Perhaps this testcase needs to change where its expecting z-shell
+CVE-2024-26461:
+Kerberos 5 (aka krb5) 1.21.2 contains a memory leak
+vulnerability in /krb5/src/lib/gssapi/krb5/k5sealv3.c.
 
-On Thu, Aug 22, 2024 at 9:51=E2=80=AFAM J=C3=B6rg Sommer via lists.openembe=
-dded.org
-<joerg.sommer=3Dnavimatix.de@lists.openembedded.org> wrote:
->
-> From: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
->
-> The patches for CVE-2021-45444 were applied upstream on 2022-02-12.
->
-> Signed-off-by: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
-> ---
->  .../zsh/zsh/CVE-2021-45444_1.patch            |  60 --------
->  .../zsh/zsh/CVE-2021-45444_2.patch            | 140 ------------------
->  .../zsh/zsh/CVE-2021-45444_3.patch            |  77 ----------
->  .../zsh/{zsh_5.8.bb =3D> zsh_5.9.bb}            |   8 +-
->  4 files changed, 2 insertions(+), 283 deletions(-)
->  delete mode 100644 meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_1.patch
->  delete mode 100644 meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_2.patch
->  delete mode 100644 meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_3.patch
->  rename meta-oe/recipes-shells/zsh/{zsh_5.8.bb =3D> zsh_5.9.bb} (88%)
->
-> diff --git a/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_1.patch b/meta=
--oe/recipes-shells/zsh/zsh/CVE-2021-45444_1.patch
-> deleted file mode 100644
-> index fb8fa3427..000000000
-> --- a/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_1.patch
-> +++ /dev/null
-> @@ -1,60 +0,0 @@
-> -Origin: commit c187154f47697cdbf822c2f9d714d570ed4a0fd1
-> -From: Oliver Kiddle <opk@zsh.org>
-> -Date: Wed, 15 Dec 2021 01:56:40 +0100
-> -Subject: [PATCH 1/9] security/41: Don't perform PROMPT_SUBST evaluation =
-on
-> - %F/%K arguments
-> -
-> -Mitigates CVE-2021-45444
-> -
-> -https://salsa.debian.org/debian/zsh/-/raw/debian/5.8-6+deb11u1/debian/pa=
-tches/cherry-pick-CVE-2021-45444_1.patch?inline=3Dfalse
-> -Upstream-Status: Backport
-> -CVE: CVE-2021-45444
-> -Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
-> ----
-> - ChangeLog    |  5 +++++
-> - Src/prompt.c | 10 ++++++++++
-> - 2 files changed, 15 insertions(+)
-> -
-> -diff --git a/ChangeLog b/ChangeLog
-> -index 8d7dfc169..eb248ec06 100644
-> ---- a/ChangeLog
-> -+++ b/ChangeLog
-> -@@ -1,3 +1,8 @@
-> -+2022-01-27  dana  <dana@dana.is>
-> -+
-> -+      * Oliver Kiddle: security/41: Src/prompt.c: Prevent recursive
-> -+      PROMPT_SUBST
-> -+
-> - 2020-02-14  dana  <dana@dana.is>
-> -
-> -       * unposted: Config/version.mk: Update for 5.8
-> -diff --git a/Src/prompt.c b/Src/prompt.c
-> -index b65bfb86b..91e21c8e9 100644
-> ---- a/Src/prompt.c
-> -+++ b/Src/prompt.c
-> -@@ -244,6 +244,12 @@ parsecolorchar(zattr arg, int is_fg)
-> -       bv->fm +=3D 2; /* skip over F{ */
-> -       if ((ep =3D strchr(bv->fm, '}'))) {
-> -           char oc =3D *ep, *col, *coll;
-> -+          int ops =3D opts[PROMPTSUBST], opb =3D opts[PROMPTBANG];
-> -+          int opp =3D opts[PROMPTPERCENT];
-> -+
-> -+          opts[PROMPTPERCENT] =3D 1;
-> -+          opts[PROMPTSUBST] =3D opts[PROMPTBANG] =3D 0;
-> -+
-> -           *ep =3D '\0';
-> -           /* expand the contents of the argument so you can use
-> -            * %v for example */
-> -@@ -252,6 +258,10 @@ parsecolorchar(zattr arg, int is_fg)
-> -           arg =3D match_colour((const char **)&coll, is_fg, 0);
-> -           free(col);
-> -           bv->fm =3D ep;
-> -+
-> -+          opts[PROMPTSUBST] =3D ops;
-> -+          opts[PROMPTBANG] =3D opb;
-> -+          opts[PROMPTPERCENT] =3D opp;
-> -       } else {
-> -           arg =3D match_colour((const char **)&bv->fm, is_fg, 0);
-> -           if (*bv->fm !=3D '}')
-> ---
-> -2.34.1
-> diff --git a/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_2.patch b/meta=
--oe/recipes-shells/zsh/zsh/CVE-2021-45444_2.patch
-> deleted file mode 100644
-> index e5b6d7cdc..000000000
-> --- a/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_2.patch
-> +++ /dev/null
-> @@ -1,140 +0,0 @@
-> -From 8a4d65ef6d0023ab9b238529410afb433553d2fa Mon Sep 17 00:00:00 2001
-> -From: Marc Cornell=C3=A0 <hello@mcornella.com>
-> -Date: Mon, 24 Jan 2022 09:43:28 +0100
-> -Subject: [PATCH 2/9] security/89: Add patch which can optionally be used=
- to
-> - work around CVE-2021-45444 in VCS_Info
-> -Comment: Updated to use the same file name without blanks as actually
-> - used in the final 5.8.1 release.
-> -
-> -
-> -https://salsa.debian.org/debian/zsh/-/blob/debian/5.8-6+deb11u1/debian/p=
-atches/cherry-pick-CVE-2021-45444_2.patch
-> -Upstream-Status: Backport
-> -CVE: CVE-2021-45444
-> -Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
-> ----
-> - ChangeLog                                    |  5 +
-> - Etc/CVE-2021-45444-VCS_Info-workaround.patch | 98 ++++++++++++++++++++
-> - 2 files changed, 103 insertions(+)
-> - create mode 100644 Etc/CVE-2021-45444-VCS_Info-workaround.patch
-> -
-> -diff --git a/ChangeLog b/ChangeLog
-> -index eb248ec06..9a05a09e1 100644
-> ---- a/ChangeLog
-> -+++ b/ChangeLog
-> -@@ -1,5 +1,10 @@
-> - 2022-01-27  dana  <dana@dana.is>
-> -
-> -+      * Marc Cornell=C3=A0: security/89:
-> -+      Etc/CVE-2021-45444-VCS_Info-workaround.patch: Add patch which
-> -+      can optionally be used to work around recursive PROMPT_SUBST
-> -+      issue in VCS_Info
-> -+
-> -       * Oliver Kiddle: security/41: Src/prompt.c: Prevent recursive
-> -       PROMPT_SUBST
-> -
-> -diff --git a/Etc/CVE-2021-45444-VCS_Info-workaround.patch b/Etc/CVE-2021=
--45444-VCS_Info-workaround.patch
-> -new file mode 100644
-> -index 000000000..13e54be77
-> ---- /dev/null
-> -+++ b/Etc/CVE-2021-45444-VCS_Info-workaround.patch
-> -@@ -0,0 +1,98 @@
-> -+From 972887bbe5eb6a00e5f0e73781d6d73bfdcafb93 Mon Sep 17 00:00:00 2001
-> -+From: =3D?UTF-8?q?Marc=3D20Cornell=3DC3=3DA0?=3D <hello@mcornella.com>
-> -+Date: Mon, 24 Jan 2022 09:43:28 +0100
-> -+Subject: [PATCH] security/89: Partially work around CVE-2021-45444 in V=
-CS_Info
-> -+MIME-Version: 1.0
-> -+Content-Type: text/plain; charset=3DUTF-8
-> -+Content-Transfer-Encoding: 8bit
-> -+
-> -+This patch is a partial, VCS_Info-specific work-around for CVE-2021-454=
-44,
-> -+which is mitigated in the shell itself in 5.8.1 and later versions. It =
-is
-> -+offered for users who are concerned about an exploit but are unable to =
-update
-> -+their binaries to receive the complete fix.
-> -+
-> -+The patch works around the vulnerability by pre-escaping values substit=
-uted
-> -+into format strings in VCS_Info. Please note that this may break some u=
-ser
-> -+configurations that rely on those values being un-escaped (which is why=
- it was
-> -+not included directly in 5.8.1). It may be possible to limit this break=
-age by
-> -+adjusting exactly which ones are pre-escaped, but of course this may le=
-ave
-> -+them vulnerable again.
-> -+
-> -+If applying the patch to the file system is inconvenient or not possibl=
-e, the
-> -+following script can be used to idempotently patch the relevant functio=
-n
-> -+running in memory (and thus must be re-run when the shell is restarted)=
-:
-> -+
-> -+
-> -+# Impacted versions go from v5.0.3 to v5.8 (v5.8.1 is the first patched=
- version)
-> -+autoload -Uz is-at-least
-> -+if is-at-least 5.8.1 || ! is-at-least 5.0.3; then
-> -+  return
-> -+fi
-> -+
-> -+# Quote necessary $hook_com[<field>] items just before they are used
-> -+# in the line "VCS_INFO_hook 'post-backend'" of the VCS_INFO_formats
-> -+# function, where <field> is:
-> -+#
-> -+#   base:       the full path of the repository's root directory.
-> -+#   base-name:  the name of the repository's root directory.
-> -+#   branch:     the name of the currently checked out branch.
-> -+#   revision:   an identifier of the currently checked out revision.
-> -+#   subdir:     the path of the current directory relative to the
-> -+#               repository's root directory.
-> -+#   misc:       a string that may contain anything the vcs_info backend=
- wants.
-> -+#
-> -+# This patch %-quotes these fields previous to their use in vcs_info ho=
-oks and
-> -+# the zformat call and, eventually, when they get expanded in the promp=
-t.
-> -+# It's important to quote these here, and not later after hooks have mo=
-dified the
-> -+# fields, because then we could be quoting % characters from valid prom=
-pt sequences,
-> -+# like %F{color}, %B, etc.
-> -+#
-> -+#  32   =E2=94=82 hook_com[subdir]=3D"$(VCS_INFO_reposub ${hook_com[bas=
-e]})"
-> -+#  33   =E2=94=82 hook_com[subdir_orig]=3D"${hook_com[subdir]}"
-> -+#  34   =E2=94=82
-> -+#  35 + =E2=94=82 for tmp in base base-name branch misc revision subdir=
-; do
-> -+#  36 + =E2=94=82     hook_com[$tmp]=3D"${hook_com[$tmp]//\%/%%}"
-> -+#  37 + =E2=94=82 done
-> -+#  38 + =E2=94=82
-> -+#  39   =E2=94=82 VCS_INFO_hook 'post-backend'
-> -+#
-> -+# This is especially important so that no command substitution is perfo=
-rmed
-> -+# due to malicious input as a consequence of CVE-2021-45444, which affe=
-cts
-> -+# zsh versions from 5.0.3 to 5.8.
-> -+#
-> -+autoload -Uz +X regexp-replace VCS_INFO_formats
-> -+
-> -+# We use $tmp here because it's already a local variable in VCS_INFO_fo=
-rmats
-> -+typeset PATCH=3D'for tmp (base base-name branch misc revision subdir) h=
-ook_com[$tmp]=3D"${hook_com[$tmp]//\%/%%}"'
-> -+# Unique string to avoid reapplying the patch if this code gets called =
-twice
-> -+typeset PATCH_ID=3Dvcs_info-patch-9b9840f2-91e5-4471-af84-9e9a0dc68c1b
-> -+# Only patch the VCS_INFO_formats function if not already patched
-> -+if [[ "$functions[VCS_INFO_formats]" !=3D *$PATCH_ID* ]]; then
-> -+  regexp-replace 'functions[VCS_INFO_formats]' \
-> -+    "VCS_INFO_hook 'post-backend'" \
-> -+    ': ${PATCH_ID}; ${PATCH}; ${MATCH}'
-> -+fi
-> -+unset PATCH PATCH_ID
-> -+
-> -+
-> -+---
-> -+ Functions/VCS_Info/VCS_INFO_formats | 4 ++++
-> -+ 1 file changed, 4 insertions(+)
-> -+
-> -+diff --git a/Functions/VCS_Info/VCS_INFO_formats b/Functions/VCS_Info/V=
-CS_INFO_formats
-> -+index e0e1dc738..4d88e28b6 100644
-> -+--- a/Functions/VCS_Info/VCS_INFO_formats
-> -++++ b/Functions/VCS_Info/VCS_INFO_formats
-> -+@@ -32,6 +32,10 @@ hook_com[base-name_orig]=3D"${hook_com[base_name]}"
-> -+ hook_com[subdir]=3D"$(VCS_INFO_reposub ${hook_com[base]})"
-> -+ hook_com[subdir_orig]=3D"${hook_com[subdir]}"
-> -+
-> -++for tmp in base base-name branch misc revision subdir; do
-> -++    hook_com[$tmp]=3D"${hook_com[$tmp]//\%/%%}"
-> -++done
-> -++
-> -+ VCS_INFO_hook 'post-backend'
-> -+
-> -+ ## description (for backend authors):
-> -+--
-> -+2.34.1
-> ---
-> -2.34.1
-> diff --git a/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_3.patch b/meta=
--oe/recipes-shells/zsh/zsh/CVE-2021-45444_3.patch
-> deleted file mode 100644
-> index adfc00ae5..000000000
-> --- a/meta-oe/recipes-shells/zsh/zsh/CVE-2021-45444_3.patch
-> +++ /dev/null
-> @@ -1,77 +0,0 @@
-> -From 4abf2fc193fc2f3e680deecbf81289a7b02e245b Mon Sep 17 00:00:00 2001
-> -From: dana <dana@dana.is>
-> -Date: Tue, 21 Dec 2021 13:13:33 -0600
-> -Subject: [PATCH 3/9] CVE-2021-45444: Update NEWS/README
-> -
-> -https://salsa.debian.org/debian/zsh/-/blob/debian/5.8-6+deb11u1/debian/p=
-atches/cherry-pick-CVE-2021-45444_3.patch
-> -Upstream-Status: Backport
-> -CVE: CVE-2021-45444
-> -Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
-> ----
-> - ChangeLog |  2 ++
-> - NEWS      | 20 ++++++++++++++++++++
-> - README    |  6 ++++++
-> - 3 files changed, 28 insertions(+)
-> -
-> -diff --git a/ChangeLog b/ChangeLog
-> -index 9a05a09e1..93b0bc337 100644
-> ---- a/ChangeLog
-> -+++ b/ChangeLog
-> -@@ -1,5 +1,7 @@
-> - 2022-01-27  dana  <dana@dana.is>
-> -
-> -+      * CVE-2021-45444: NEWS, README: Document preceding two changes
-> -+
-> -       * Marc Cornell=C3=A0: security/89:
-> -       Etc/CVE-2021-45444-VCS_Info-workaround.patch: Add patch which
-> -       can optionally be used to work around recursive PROMPT_SUBST
-> -diff --git a/NEWS b/NEWS
-> -index 964e1633f..d34b3f79e 100644
-> ---- a/NEWS
-> -+++ b/NEWS
-> -@@ -4,6 +4,26 @@ CHANGES FROM PREVIOUS VERSIONS OF ZSH
-> -
-> - Note also the list of incompatibilities in the README file.
-> -
-> -+Changes since 5.8
-> -+-----------------
-> -+
-> -+CVE-2021-45444: Some prompt expansion sequences, such as %F, support
-> -+'arguments' which are themselves expanded in case they contain colour
-> -+values, etc. This additional expansion would trigger PROMPT_SUBST
-> -+evaluation, if enabled. This could be abused to execute code the user
-> -+didn't expect. e.g., given a certain prompt configuration, an attacker
-> -+could trick a user into executing arbitrary code by having them check
-> -+out a Git branch with a specially crafted name.
-> -+
-> -+This is fixed in the shell itself by no longer performing PROMPT_SUBST
-> -+evaluation on these prompt-expansion arguments.
-> -+
-> -+Users who are concerned about an exploit but unable to update their
-> -+binaries may apply the partial work-around described in the file
-> -+'Etc/CVE-2021-45444 VCS_Info workaround.patch' included with the shell
-> -+source. [ Reported by RyotaK <security@ryotak.me>. Additional thanks to
-> -+Marc Cornell=C3=A0 <hello@mcornella.com>. ]
-> -+
-> - Changes since 5.7.1-test-3
-> - --------------------------
-> -
-> -diff --git a/README b/README
-> -index 7f1dd5f92..c9e994ab3 100644
-> ---- a/README
-> -+++ b/README
-> -@@ -31,6 +31,12 @@ Zsh is a shell with lots of features.  For a list of =
-some of these, see the
-> - file FEATURES, and for the latest changes see NEWS.  For more
-> - details, see the documentation.
-> -
-> -+Incompatibilities since 5.8
-> -+---------------------------
-> -+
-> -+PROMPT_SUBST expansion is no longer performed on arguments to prompt-
-> -+expansion sequences such as %F.
-> -+
-> - Incompatibilities since 5.7.1
-> - -----------------------------
-> -
-> ---
-> -2.34.1
-> diff --git a/meta-oe/recipes-shells/zsh/zsh_5.8.bb b/meta-oe/recipes-shel=
-ls/zsh/zsh_5.9.bb
-> similarity index 88%
-> rename from meta-oe/recipes-shells/zsh/zsh_5.8.bb
-> rename to meta-oe/recipes-shells/zsh/zsh_5.9.bb
-> index 7602ff9f6..036a200ca 100644
-> --- a/meta-oe/recipes-shells/zsh/zsh_5.8.bb
-> +++ b/meta-oe/recipes-shells/zsh/zsh_5.9.bb
-> @@ -10,12 +10,8 @@ LIC_FILES_CHKSUM =3D "file://LICENCE;md5=3D1a4c4cda3e8=
-096d2fd483ff2f4514fec"
->
->  DEPENDS =3D "ncurses bison-native libcap libpcre gdbm groff-native"
->
-> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/5.8/${BP}.tar.x=
-z \
-> -       file://CVE-2021-45444_1.patch \
-> -       file://CVE-2021-45444_2.patch \
-> -       file://CVE-2021-45444_3.patch \
-> -       "
-> -SRC_URI[sha256sum] =3D "dcc4b54cc5565670a65581760261c163d720991f0d06486d=
-a61f8d839b52de27"
-> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar=
-.xz"
-> +SRC_URI[sha256sum] =3D "9b8d1ecedd5b5e81fbf1918e876752a7dd948e05c1a0dba1=
-0ab863842d45acd5"
->
->  inherit autotools-brokensep gettext update-alternatives manpages
->
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#111905): https://lists.openembedded.org/g/openembedde=
-d-devel/message/111905
-> Mute This Topic: https://lists.openembedded.org/mt/108041468/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2024-26458
+https://nvd.nist.gov/vuln/detail/CVE-2024-26461
+
+Upstream Patch:
+https://github.com/krb5/krb5/commit/c5f9c816107f70139de11b38aa02db2f1774ee0d
+
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+---
+ .../krb5/CVE-2024-26458_CVE-2024-26461.patch  | 207 ++++++++++++++++++
+ .../recipes-connectivity/krb5/krb5_1.21.3.bb  |   1 +
+ 2 files changed, 208 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/CVE-2024-26458_CVE-2024-26461.patch
+
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5/CVE-2024-26458_CVE-2024-26461.patch b/meta-oe/recipes-connectivity/krb5/krb5/CVE-2024-26458_CVE-2024-26461.patch
+new file mode 100644
+index 000000000..46eb6aa96
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/krb5/krb5/CVE-2024-26458_CVE-2024-26461.patch
+@@ -0,0 +1,207 @@
++From c5f9c816107f70139de11b38aa02db2f1774ee0d Mon Sep 17 00:00:00 2001
++From: Greg Hudson <ghudson@mit.edu>
++Date: Tue, 5 Mar 2024 19:53:07 -0500
++Subject: [PATCH] Fix two unlikely memory leaks
++
++In gss_krb5int_make_seal_token_v3(), one of the bounds checks (which
++could probably never be triggered) leaks plain.data.  Fix this leak
++and use current practices for cleanup throughout the function.
++
++In xmt_rmtcallres() (unused within the tree and likely elsewhere),
++store port_ptr into crp->port_ptr as soon as it is allocated;
++otherwise it could leak if the subsequent xdr_u_int32() operation
++fails.
++
++CVE: CVE-2024-26458 CVE-2024-26461
++Upstream-Status: Backport [https://github.com/krb5/krb5/commit/c5f9c816107f70139de11b38aa02db2f1774ee0d]
++
++Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
++---
++ src/lib/gssapi/krb5/k5sealv3.c | 56 +++++++++++++++-------------------
++ src/lib/rpc/pmap_rmt.c         |  9 +++---
++ 2 files changed, 29 insertions(+), 36 deletions(-)
++
++diff --git a/src/lib/gssapi/krb5/k5sealv3.c b/src/lib/gssapi/krb5/k5sealv3.c
++index 1fcbdfb..d3210c1 100644
++--- a/src/lib/gssapi/krb5/k5sealv3.c
+++++ b/src/lib/gssapi/krb5/k5sealv3.c
++@@ -65,7 +65,7 @@ gss_krb5int_make_seal_token_v3 (krb5_context context,
++                                 int conf_req_flag, int toktype)
++ {
++     size_t bufsize = 16;
++-    unsigned char *outbuf = 0;
+++    unsigned char *outbuf = NULL;
++     krb5_error_code err;
++     int key_usage;
++     unsigned char acceptor_flag;
++@@ -75,9 +75,13 @@ gss_krb5int_make_seal_token_v3 (krb5_context context,
++ #endif
++     size_t ec;
++     unsigned short tok_id;
++-    krb5_checksum sum;
+++    krb5_checksum sum = { 0 };
++     krb5_key key;
++     krb5_cksumtype cksumtype;
+++    krb5_data plain = empty_data();
+++
+++    token->value = NULL;
+++    token->length = 0;
++
++     acceptor_flag = ctx->initiate ? 0 : FLAG_SENDER_IS_ACCEPTOR;
++     key_usage = (toktype == KG_TOK_WRAP_MSG
++@@ -107,14 +111,15 @@ gss_krb5int_make_seal_token_v3 (krb5_context context,
++ #endif
++
++     if (toktype == KG_TOK_WRAP_MSG && conf_req_flag) {
++-        krb5_data plain;
++         krb5_enc_data cipher;
++         size_t ec_max;
++         size_t encrypt_size;
++
++         /* 300: Adds some slop.  */
++-        if (SIZE_MAX - 300 < message->length)
++-            return ENOMEM;
+++        if (SIZE_MAX - 300 < message->length) {
+++            err = ENOMEM;
+++            goto cleanup;
+++        }
++         ec_max = SIZE_MAX - message->length - 300;
++         if (ec_max > 0xffff)
++             ec_max = 0xffff;
++@@ -126,20 +131,20 @@ gss_krb5int_make_seal_token_v3 (krb5_context context,
++ #endif
++         err = alloc_data(&plain, message->length + 16 + ec);
++         if (err)
++-            return err;
+++            goto cleanup;
++
++         /* Get size of ciphertext.  */
++         encrypt_size = krb5_encrypt_size(plain.length, key->keyblock.enctype);
++         if (encrypt_size > SIZE_MAX / 2) {
++             err = ENOMEM;
++-            goto error;
+++            goto cleanup;
++         }
++         bufsize = 16 + encrypt_size;
++         /* Allocate space for header plus encrypted data.  */
++         outbuf = gssalloc_malloc(bufsize);
++         if (outbuf == NULL) {
++-            free(plain.data);
++-            return ENOMEM;
+++            err = ENOMEM;
+++            goto cleanup;
++         }
++
++         /* TOK_ID */
++@@ -164,11 +169,8 @@ gss_krb5int_make_seal_token_v3 (krb5_context context,
++         cipher.ciphertext.length = bufsize - 16;
++         cipher.enctype = key->keyblock.enctype;
++         err = krb5_k_encrypt(context, key, key_usage, 0, &plain, &cipher);
++-        zap(plain.data, plain.length);
++-        free(plain.data);
++-        plain.data = 0;
++         if (err)
++-            goto error;
+++            goto cleanup;
++
++         /* Now that we know we're returning a valid token....  */
++         ctx->seq_send++;
++@@ -181,7 +183,6 @@ gss_krb5int_make_seal_token_v3 (krb5_context context,
++         /* If the rotate fails, don't worry about it.  */
++ #endif
++     } else if (toktype == KG_TOK_WRAP_MSG && !conf_req_flag) {
++-        krb5_data plain;
++         size_t cksumsize;
++
++         /* Here, message is the application-supplied data; message2 is
++@@ -193,21 +194,19 @@ gss_krb5int_make_seal_token_v3 (krb5_context context,
++     wrap_with_checksum:
++         err = alloc_data(&plain, message->length + 16);
++         if (err)
++-            return err;
+++            goto cleanup;
++
++         err = krb5_c_checksum_length(context, cksumtype, &cksumsize);
++         if (err)
++-            goto error;
+++            goto cleanup;
++
++         assert(cksumsize <= 0xffff);
++
++         bufsize = 16 + message2->length + cksumsize;
++         outbuf = gssalloc_malloc(bufsize);
++         if (outbuf == NULL) {
++-            free(plain.data);
++-            plain.data = 0;
++             err = ENOMEM;
++-            goto error;
+++            goto cleanup;
++         }
++
++         /* TOK_ID */
++@@ -239,23 +238,15 @@ gss_krb5int_make_seal_token_v3 (krb5_context context,
++         if (message2->length)
++             memcpy(outbuf + 16, message2->value, message2->length);
++
++-        sum.contents = outbuf + 16 + message2->length;
++-        sum.length = cksumsize;
++-
++         err = krb5_k_make_checksum(context, cksumtype, key,
++                                    key_usage, &plain, &sum);
++-        zap(plain.data, plain.length);
++-        free(plain.data);
++-        plain.data = 0;
++         if (err) {
++             zap(outbuf,bufsize);
++-            goto error;
+++            goto cleanup;
++         }
++         if (sum.length != cksumsize)
++             abort();
++         memcpy(outbuf + 16 + message2->length, sum.contents, cksumsize);
++-        krb5_free_checksum_contents(context, &sum);
++-        sum.contents = 0;
++         /* Now that we know we're actually generating the token...  */
++         ctx->seq_send++;
++
++@@ -285,12 +276,13 @@ gss_krb5int_make_seal_token_v3 (krb5_context context,
++
++     token->value = outbuf;
++     token->length = bufsize;
++-    return 0;
+++    outbuf = NULL;
+++    err = 0;
++
++-error:
+++cleanup:
+++    krb5_free_checksum_contents(context, &sum);
+++    zapfree(plain.data, plain.length);
++     gssalloc_free(outbuf);
++-    token->value = NULL;
++-    token->length = 0;
++     return err;
++ }
++
++diff --git a/src/lib/rpc/pmap_rmt.c b/src/lib/rpc/pmap_rmt.c
++index 8c7e30c..522cb20 100644
++--- a/src/lib/rpc/pmap_rmt.c
+++++ b/src/lib/rpc/pmap_rmt.c
++@@ -160,11 +160,12 @@ xdr_rmtcallres(
++	caddr_t port_ptr;
++
++	port_ptr = (caddr_t)(void *)crp->port_ptr;
++-	if (xdr_reference(xdrs, &port_ptr, sizeof (uint32_t),
++-	    xdr_u_int32) && xdr_u_int32(xdrs, &crp->resultslen)) {
++-		crp->port_ptr = (uint32_t *)(void *)port_ptr;
+++        if (!xdr_reference(xdrs, &port_ptr, sizeof (uint32_t),
+++			   (xdrproc_t)xdr_u_int32))
+++		return (FALSE);
+++	crp->port_ptr = (uint32_t *)(void *)port_ptr;
+++	if (xdr_u_int32(xdrs, &crp->resultslen))
++		return ((*(crp->xdr_results))(xdrs, crp->results_ptr));
++-	}
++	return (FALSE);
++ }
++
++--
++2.40.0
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.21.3.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.21.3.bb
+index c482472ff..748918132 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.21.3.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.21.3.bb
+@@ -28,6 +28,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
+            file://etc/default/krb5-admin-server \
+            file://krb5-kdc.service \
+            file://krb5-admin-server.service \
++           file://CVE-2024-26458_CVE-2024-26461.patch;striplevel=2 \
+ "
+ 
+ SRC_URI[sha256sum] = "b7a4cd5ead67fb08b980b21abd150ff7217e85ea320c9ed0c6dadd304840ad35"
+-- 
+2.40.0
+
 
