@@ -2,87 +2,117 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A440C5472D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 170E2C52D6F
 	for <webhook@archiver.kernel.org>; Sat, 24 Aug 2024 17:12:57 +0000 (UTC)
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.web11.16960.1724519571386014065
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web11.16959.1724519570346614670
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 24 Aug 2024 10:12:51 -0700
+ Sat, 24 Aug 2024 10:12:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jD5JiHOO;
- spf=pass (domain: gmail.com, ip: 209.85.215.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id 41be03b00d2f7-7cb3db0932cso2227468a12.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Aug 2024 10:12:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OQbXoNEK;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-1fec34f94abso29118525ad.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Aug 2024 10:12:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1724519570; x=1725124370; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=l4ijIYU8STmzhI32gZj0a1IU1ao7uiQ42C4ZvyOtYfM=;
-        b=jD5JiHOO76YSmo2Hw9fQycqMVUK+cS5jTtKRBKEmdYHWM6Z/NK4xhZmjEBdSMLBPEy
-         raR/NHHScacuxrxE8b4Nn30lxguo6u1ytTqlpbFyACijugSkNhA1RQ/GeRpYUUVaBgs5
-         0/IWl/sMSKXy7n3UFgq1qXs2vFU9D3F4Ud81BD597ZQ/V0lENXAMJ6KgQ1wiS9p2VsYO
-         w3sHosAR1q+OvcXZCdcd49jwE4GX6XQIgfDSzQ+krzjcHah+eRhfKcb6SWgTL2gVxH/z
-         CTsivAu8scU2BLwT821i73e0HzVqbB5rDClCWfEfEWXjJAuZg3hLLev/D1sbL2EZq2+4
-         aoXg==
+        d=gmail.com; s=20230601; t=1724519569; x=1725124369; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=4PHNzQ+RVOaCQB609G2b7kkbc41FHZl8Qi3brSKOpKg=;
+        b=OQbXoNEKa6r/IINjnKzJC6CeGxfD3jdoAHcf+LiGettgQhw9aFbOgG4t9ros9RcLNB
+         rhPZ2sUOP4Hopz3uSWcrCx1pgEamJg/DntgKFI7vsiOlsrZVsR5NDEfeN5UQagpE8Mbz
+         O0mnWIIksgLrKoh/2oI18hMYZ02gLhO66JZdIVvYGeGl4K41ZuxFIfMzhXBxn0hJbTsB
+         DnSt/nI2A/u3OXEMPNkYxuhljNDwXnI9uNch5yeTwqXKbIsMmyJuOJy4bEkPF2DmLMCV
+         +ukWWHNbryalDN7bbA/EWfF5r9xJyqwVIPHW8BBDibA236lJwNMv8uMWjIKQbNeKHqMd
+         yc3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724519570; x=1725124370;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=l4ijIYU8STmzhI32gZj0a1IU1ao7uiQ42C4ZvyOtYfM=;
-        b=mSMqZjSCV/XVrTqxDkqGdI+uQmqkFGT9uWhY35no4MemRhDF964vSB9tOfsp5WoQQ+
-         Nfni63Y1zg49gzuO3eQjxth3ykBp0Hqb3Df91SVeS7JIStsZc75dOrwaRs9NaWys9GHO
-         wM/kcJVm0sQqecNfuLiaDEAU9zm+BQSsjQ7zNNjIye5dc4SRNYr29EokYnMKJPpevF8b
-         D3Oxja/IZBUZ2ed6OEetXQoJViFmxyItBX8AXPs+XWcnzD72e5UcmMm0qzwklWQYXNRT
-         o9e1tNogJjKEsPQFggq/nxDpL2LW/JegkfHXVTnamrM1tDdVfoa6qShqNc0aqklZDo0r
-         hRWg==
-X-Gm-Message-State: AOJu0Yzdxao4l1kx0cHXA3B7TgVOu7EZhUZcjpCcwYzT6Tw6r+GgIh+b
-	701aWaAF9cT0yapAeVfV7vEWI0B0RPChks8LZs5/WurIrlVCOnPQ675eFw==
-X-Google-Smtp-Source: AGHT+IHeJngQGMylm8qz4NsvSaWx2YgK3CwkxbfMhG8NAA8sfljjs/GDrCohI8Gqoc2R2XuT06jFPA==
-X-Received: by 2002:a17:903:1c6:b0:202:100f:7b9b with SMTP id d9443c01a7336-2039e4ca62amr72184895ad.35.1724519570410;
-        Sat, 24 Aug 2024 10:12:50 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:9d80:4380::77e7])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2038560dfd1sm44250405ad.206.2024.08.24.10.12.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        d=1e100.net; s=20230601; t=1724519569; x=1725124369;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=4PHNzQ+RVOaCQB609G2b7kkbc41FHZl8Qi3brSKOpKg=;
+        b=TRD0YWI5IjLFZdc1OW5D9Qb7tkz1wG52FZzJf6CPVZHwWQ4G5+0XjO1PY4LEeBZ/vS
+         MYBlk0vADdjDVsfNDCQleNP4LSjszZYO0EmQ6RiQAjRmmuDDv5tpc92/fPPaEflou+Cm
+         h2b5zH2BHcNLoTXKR0sNt8opnK8Dwu/XiIT1TjpUKV+PxvXIxrir8rO3AwfZa7X5pSdR
+         XC+wfMXytmZ51TrAAFyLRLTyf5jlgcbOTHZBQvRgVNXILi2aqJeC1uXSNNh6bDSp62KL
+         vlV5ueqZDA68WtJvctrhpyMDP6+6s9T0/PfAjh/H33opojek8IgDtjRjHe1p1h+SNjZ3
+         PVYQ==
+X-Gm-Message-State: AOJu0YwskBqDDQfv6uxGaIyf+puecmXo2fUGnrfdBg9P2yMYkJbM+aKA
+	Y8lJeyEPjIplbbcN3kvS8G/cy02KJKMsaOPPaUWGkZeejmjkWvthQawIKw==
+X-Google-Smtp-Source: AGHT+IEzkKdowLgpkUo8iIJCOX3CQeeH2/GDeWbgQ26M/sYm/+CjI9vILlQ3StoY5A3wUmCq9uHKOQ==
+X-Received: by 2002:a17:902:ec8e:b0:201:f6e6:c7cf with SMTP id d9443c01a7336-2039e4ef0c1mr70429005ad.45.1724519569180;
         Sat, 24 Aug 2024 10:12:49 -0700 (PDT)
+Received: from apollo.localdomain ([2601:646:9d80:4380::77e7])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2038560dfd1sm44250405ad.206.2024.08.24.10.12.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 24 Aug 2024 10:12:48 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 2/2] python3-pycocotools: Remove absolute paths from comments
-Date: Sat, 24 Aug 2024 10:12:46 -0700
-Message-ID: <20240824171246.1359812-2-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 1/2] python3-pycocotools: Downgrade numpy version needed to 1.x
+Date: Sat, 24 Aug 2024 10:12:45 -0700
+Message-ID: <20240824171246.1359812-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20240824171246.1359812-1-raj.khem@gmail.com>
-References: <20240824171246.1359812-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 24 Aug 2024 17:12:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111920
+ <openembedded-devel@lists.openembedded.org>; Sat, 24 Aug 2024 17:12:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111919
 
-_mask.c is generated by cython and encodes sourcepaths into
-comments which are absolute. Edit them out.
-
-Fixes buildpaths QA errors
+This is needed for it to build with PEP-517 backend, older backend
+ignored the version
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-devtools/python/python3-pycocotools_2.0.8.bb      | 4 ++++
- 1 file changed, 4 insertions(+)
+ ...01-downgrade-numpy-version-to-1.26.4.patch | 26 +++++++++++++++++++
+ .../python/python3-pycocotools_2.0.8.bb       |  2 ++
+ 2 files changed, 28 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pycocotools/0001-downgrade-numpy-version-to-1.26.4.patch
 
+diff --git a/meta-python/recipes-devtools/python/python3-pycocotools/0001-downgrade-numpy-version-to-1.26.4.patch b/meta-python/recipes-devtools/python/python3-pycocotools/0001-downgrade-numpy-version-to-1.26.4.patch
+new file mode 100644
+index 0000000000..cd3e462ddf
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pycocotools/0001-downgrade-numpy-version-to-1.26.4.patch
+@@ -0,0 +1,26 @@
++From 7222a8b9b6e05b89116ca14644aa8db79eecd3c6 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 24 Aug 2024 00:19:23 -0700
++Subject: [PATCH] downgrade numpy version to 1.26.4+
++
++We can drop it when OE-core upgrades numpy to 2.x
++
++Upstream-Status: Inappropriate [OE workaround]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ pyproject.toml | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/pyproject.toml b/pyproject.toml
++index 1bfbd91..cbee520 100644
++--- a/pyproject.toml
+++++ b/pyproject.toml
++@@ -1,7 +1,7 @@
++ [build-system]
++ requires = [
++     "cython>=0.27.3",
++-    "numpy>=2.0.0rc1",
+++    "numpy>=1.26.4",
++     "setuptools>=43.0.0",
++     "wheel",
++ ]
 diff --git a/meta-python/recipes-devtools/python/python3-pycocotools_2.0.8.bb b/meta-python/recipes-devtools/python/python3-pycocotools_2.0.8.bb
-index 7226f0fb81..4d4251316c 100644
+index 47c750104e..7226f0fb81 100644
 --- a/meta-python/recipes-devtools/python/python3-pycocotools_2.0.8.bb
 +++ b/meta-python/recipes-devtools/python/python3-pycocotools_2.0.8.bb
-@@ -11,3 +11,7 @@ SRC_URI[sha256sum] = "8f2bcedb786ba26c367a3680f9c4eb5b2ad9dccb2b34eaeb205e0a021e
+@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://pycocotools/coco.py;beginline=45;endline=45;md5=12cb5
+ 
+ inherit pypi python_setuptools_build_meta
+ 
++SRC_URI += "file://0001-downgrade-numpy-version-to-1.26.4.patch"
++
+ SRC_URI[sha256sum] = "8f2bcedb786ba26c367a3680f9c4eb5b2ad9dccb2b34eaeb205e0a021e1dfb8d"
  
  DEPENDS = "python3-cython-native python3-numpy-native virtual/crypt"
- RDEPENDS:${PN} = "python3-matplotlib python3-pillow python3-profile"
-+
-+do_compile:append() {
-+    sed -i -e "/BEGIN: Cython Metadata/,/END: Cython Metadata/d" ${B}/pycocotools/_mask.c
-+}
 
