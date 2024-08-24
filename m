@@ -1,216 +1,149 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <joerg.sommer@navimatix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 733D4C52D6F
-	for <webhook@archiver.kernel.org>; Sat, 24 Aug 2024 05:39:53 +0000 (UTC)
-Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
- by mx.groups.io with SMTP id smtpd.web10.8033.1724477965248793405
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8510CC52D6F
+	for <webhook@archiver.kernel.org>; Sat, 24 Aug 2024 09:08:04 +0000 (UTC)
+Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.66.96])
+ by mx.groups.io with SMTP id smtpd.web11.9681.1724490478835462939
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Aug 2024 22:39:25 -0700
+ Sat, 24 Aug 2024 02:07:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=fJ5Dwgc1;
- spf=pass (domain: gmail.com, ip: 209.85.161.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f49.google.com with SMTP id 006d021491bc7-5d5e1c86b83so2117036eaf.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Aug 2024 22:39:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1724477964; x=1725082764; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=6no8eNS/T3m8QeQZ7tHhKHWxggXkHiN0l7zf+lnwFaE=;
-        b=fJ5Dwgc1YYidY9EI8W5YrrHnAj36Qs8uvgCfejSWBPBHAepEwOtvvKtvzgsSiqk1gu
-         2X5mV8nTavwbixeleDzYrfUKf2W+93uEB3bRAJuc4vWujuJYkjIhxQG+U6RACnUhLR/y
-         rHeF00mcijJQiXib23Qpjg0tyWbXr1SQJm/qKeHhnxbf891jC/QTOl7YhxlC1NBezVcB
-         /7sMfrjeYgtJPVChbjpoBoQCyg3DFTJwnWN5khQFGZAYb2L2EgFNqIVesAoEkqRIFwaS
-         J/1RY6zd2eqJSSzw6F00DGQKG/9yMhfg25k5PdeUJBecQVjVDxW2NooZhSl/GbSHtPGg
-         Vhew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724477964; x=1725082764;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=6no8eNS/T3m8QeQZ7tHhKHWxggXkHiN0l7zf+lnwFaE=;
-        b=WLse2P6pCFef6WTtQKLPOr15oF/SsNL6zLNauQrIpf+pndL4zYuEVhUI9lkzZGg7JK
-         Js2jZ5o6x9DvRGGjVUrHqwKmpDAKTNCsP26TxWQbHl0bmh7VVlxVraF32nOJhQ0R5CDg
-         DbdOvLONTi5EriD/8r2bweM5t66TNiwZnVQQN4OlOZr2SDXO4BwpAxNu8qdeNoSOF9oT
-         9JdmpzIWGOBFeLWjQ4JnqmqxU8ILYRT1cgSDLASzzRH/6E3V3pEH3VmwWAzHjbfCXL2e
-         26EsTwaciBVpxkP/L5lbSAOW7gN90p9HGybT4Drs3x5SsCE9fEn+HgH4vObmMd9PsBEE
-         trUw==
-X-Gm-Message-State: AOJu0Yyj7ZRL4GKLbH1tHXY0Nw5K0Ad/Uo+NebonWG3Ajf4BNZQ2HfIw
-	EFZ0kC3N5GE+5zA5fMDpBmKtk3rjeTm14tm4WSJHJrK9u2vAexqa9s4RW7BF5kNIQsvsin8RI69
-	/Vc3gBjcHbkNBrJKtMHFL8NAI/meBy4yf
-X-Google-Smtp-Source: AGHT+IG5ojhSW6eC+hZ+w3q7o4Y1x4naR03Zq71hPyiW738CBnDjob9xQFNxfF/Kf3VR6mw8XafV1kg84IO4snmfdUE=
-X-Received: by 2002:a05:6820:2220:b0:5da:a4a7:8f5a with SMTP id
- 006d021491bc7-5dcc61b52d4mr5063541eaf.4.1724477964245; Fri, 23 Aug 2024
- 22:39:24 -0700 (PDT)
-MIME-Version: 1.0
-References: <88b75d895a22439a271d83df9e66c7dc2a1e75e6.1724391421.git.joerg.sommer@navimatix.de>
-In-Reply-To: <88b75d895a22439a271d83df9e66c7dc2a1e75e6.1724391421.git.joerg.sommer@navimatix.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 23 Aug 2024 22:38:57 -0700
-Message-ID: <CAMKF1soF+xff2H3HZhAa=f9yUN-r7=MkdagH6vC8OEy6-WAm2g@mail.gmail.com>
-Subject: Re: [oe] [PATCH] bluealsa: upgrade 4.0.0+git -> 4.3.0
-To: joerg.sommer@navimatix.de
+ dkim=pass header.i=@navimatix.de header.s=selector1 header.b=ash7Z6HB;
+ spf=pass (domain: navimatix.de, ip: 52.101.66.96, mailfrom: joerg.sommer@navimatix.de)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=pVCXL/hHemEGuvLQbzCBvuCPYNARReRRIwjDWA7BLOx84VNNne03KB6RxgsL1vM8nhpPJChEVN71+XCXPJL7OdDv1T7UvQYlIYTSYFdh+6FIRt5Q3KCH+lSYEUHI8MFSTGF2AdXldjispAwtP5uGJCQkUMk+Wx2AeZBGHewX9+xODnj59/bRAnOxDF7bWXkHGbEiUYAE5MswEO2vuE5FnBecUvy99TuwnrcM9QrwcjWLMjzocRsqDTejzfuJXhj5BHsqK4m3nYdSnpGGYVrGpBw88HlDXNep3mcffUhpOp3RGdBgCYFmHrvv6KZh1JQthdn1Gfs4TRGUCH8SYfHiBA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2oRqFdsvfs1rD3/gXIf51MUyrv/xm7DGSMDqA+ZyO/8=;
+ b=LN5N/CCy0rBGqO1k8iJhiWI8pAZ4aIQ1FDg65Tw5usVC2omVHuSJKGAQ/L66hDtqRdOqDm765le8l4ag+YbiRUbyTgYclolKdAVbUtkeOt4dtyP/YJ+S6Enf+uIGhdwrJYhBcaKdH8jxm6WL/W2lYtmY8MFg6lwIqe4j994uPkRRgOd35WZdgoipdgrS1XlSUrfJmqnTvyNNMZpHG/80TqAytYfmYLtpGu9sE7XukbyJeTcO2wxmGXz9VeYwSy/230lwVcvOze2Dq7dvGFvsskU1qA5Z9ATmZ292eM0PvcE1Ouz5StHseVQGQGeGUQbEaBa3+2IwK+zYJt4jHdu8Aw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
+ dkim=pass header.d=navimatix.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2oRqFdsvfs1rD3/gXIf51MUyrv/xm7DGSMDqA+ZyO/8=;
+ b=ash7Z6HB9Is33jzL9CIgN9cRdtdqcTe7BGKLIPs2VnKYMrM7DxA5NRONQlmMkA75X8r7G4VJWkQsxo25Vr+YDdXUmNSbsMpCF0RKDPnRDcuKLb74hNVZGva7SUvh/L9nkXquy0gQcybt0B0ViaWjkzEFeUn10hZPtdfCpjJhdsA=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=navimatix.de;
+Received: from DU2PR01MB8293.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:2d4::5) by VI2PR01MB11216.eurprd01.prod.exchangelabs.com
+ (2603:10a6:800:277::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7897.19; Sat, 24 Aug
+ 2024 09:07:54 +0000
+Received: from DU2PR01MB8293.eurprd01.prod.exchangelabs.com
+ ([fe80::d520:1b9e:a30e:69a7]) by DU2PR01MB8293.eurprd01.prod.exchangelabs.com
+ ([fe80::d520:1b9e:a30e:69a7%4]) with mapi id 15.20.7897.021; Sat, 24 Aug 2024
+ 09:07:54 +0000
+Date: Sat, 24 Aug 2024 11:07:52 +0200
+From: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [oe] [PATCH] bluealsa: upgrade 4.0.0+git -> 4.3.0
+Message-ID: <a6ov7dgu6ds23bnhw4dypkuas7llkkfzqisek24w3se7zgmx4v@khhmju2xaecf>
+References: <88b75d895a22439a271d83df9e66c7dc2a1e75e6.1724391421.git.joerg.sommer@navimatix.de>
+ <CAMKF1soF+xff2H3HZhAa=f9yUN-r7=MkdagH6vC8OEy6-WAm2g@mail.gmail.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAMKF1soF+xff2H3HZhAa=f9yUN-r7=MkdagH6vC8OEy6-WAm2g@mail.gmail.com>
+X-ClientProxiedBy: BE1P281CA0117.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:7b::13) To DU2PR01MB8293.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:2d4::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR01MB8293:EE_|VI2PR01MB11216:EE_
+X-MS-Office365-Filtering-Correlation-Id: 97157462-502b-4c9d-61df-08dcc41c3d06
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?G7U0o7MnAD+oBnBz+Y0BQnNb6gtQcejrPbIr5SipVOgKH9b+QMg8fGNsJwWi?=
+ =?us-ascii?Q?nIhjVaQtRjYTMkheP5Ed9ncKIOyI0Gxxws6rjEtwTlorxIADIu/bvNieQ/DA?=
+ =?us-ascii?Q?1xZ3aPC/wvCkkEaGrcJPbHsR/bYTHofluHnzUhIkV+V1uoH1Q1hOxbdBOwua?=
+ =?us-ascii?Q?ThJ7GTCql1h8aJamD9gN5sdbjY0ZNVZTdjAylZzryQDh0fdKn3Piv9DYxDZk?=
+ =?us-ascii?Q?JCA4SeRfLOpg8bhpU2MM2h3iDNGilleIjqDArMLFc5nv8WhW1+WQqZ98ToZn?=
+ =?us-ascii?Q?EZnN8m0hiYvkrZV2jF/Q4mDnoX1oliiOIXBVwmzhJbc06R/g9aHVTri3/kgS?=
+ =?us-ascii?Q?SCpVv2rqnAybfwd0WcRn10T2tLAvk3nKWtHoMd6qldMfq5b0SEDWr7AAJlg5?=
+ =?us-ascii?Q?9dpuw+413P706YrSAgrluH8b0QOtcJOlav6CVgIqM/Ts8IFc3zqb+ehPCGb/?=
+ =?us-ascii?Q?NJNtGpa0JHvV24jvYdOf0OYxosOd715u1euYuEYUeubG1bXkmtbe5+6W9Z1J?=
+ =?us-ascii?Q?5K+9YwNdNbmgJIsyFEohXWw80PihGEUWO+rJ4Ua3lqYqyH61ec6kkihk5Pv0?=
+ =?us-ascii?Q?iwgtiHjIyqb9Pvg9Ofqz5ScTWw0Kodfg6NvbguWsAUWnlBdkYjQu+E4fXs7D?=
+ =?us-ascii?Q?bHap1zOZBEYUyuQtmwOBvgt0qfRVTOScJEne3uDSJSLAXn4kAWYe6cuuruvl?=
+ =?us-ascii?Q?SeCTVer6ReikauSHYfGE//Lb40rrdL8/eXVh584K5h+NB9MXFxAjyyq5om3b?=
+ =?us-ascii?Q?Om3twS2emNi4iiaaY6X8+zljctSMHQnYlixONzewfezUF2BavrT9s9KQSvLl?=
+ =?us-ascii?Q?8l+O2505pBQ8nYvrG+vfFnIMtcw+yiESdjMBF6nHBKZn3BM+CxJtLsXuUiz4?=
+ =?us-ascii?Q?cHKS12TL642TuwwIVufJXPMFBSguCl/CO4oQgTMdfudxLb5L17gSK4YtheE6?=
+ =?us-ascii?Q?2spEyCf5kE/5VirpMfbkNI9PdAOlXkrAodldQweQ1pqpbZLotWsgdnQnTmAh?=
+ =?us-ascii?Q?wL6B0gqC8poggnJ7+XkqFJ3JJIQN9rpEaolS3YKtZiCKukmQQ3hkKNSoZN7P?=
+ =?us-ascii?Q?oDlgfv5XqwD4IF+2rMQjCnp58HHi37S4gkfjS0m6+bfZOXODzMHqmP1pgduq?=
+ =?us-ascii?Q?6hOw0Vj67WJPBn4dZaoVjXeaW2J26hWeBHMke2b12gmb6nmkozeIy3nQas/N?=
+ =?us-ascii?Q?DwuCmaYIGF3tuWfSWSmuj5X4erDFYgqv8a4RkyVVsBC9qvLsdeELY+i7Z2Og?=
+ =?us-ascii?Q?4G9ctNS5vj5pbqm00Frlcka5osawEV3t3c9OA7cLTQFrjdcmxYpPmvrL8rm9?=
+ =?us-ascii?Q?BVYGeRRsUBrzvUuqY83/U0iYVIhi6tJQbxf9ht2vTH3pKg=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR01MB8293.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?Emba7VseSjiF/Kd94baLhlEPptEnL1sQN4T0Bgh5HiPAUCFfhT1cYj+EEf6w?=
+ =?us-ascii?Q?7Y5d214G9dFpWe1CXGk1kvTK8STtk1Drab/tUx4OjNfbMPeZGbRi0pf6BA2B?=
+ =?us-ascii?Q?wSEOWkIMYGkThzsRqeCfqRX0QAW/NvqeEAh92oOaRIKaC7BpTeB3i1AG8rlS?=
+ =?us-ascii?Q?4Hf7HohzwY+5PeRl1fqQ4wvSfe6zPSqBxL2gWuwpg2Xh3ZVn74U4/dqYoote?=
+ =?us-ascii?Q?y9nHd1ANVZQpf1ilzPcYYeyoc2VSheMbc2Wl4m7kpdbrRItWM3twLBQ+rBSo?=
+ =?us-ascii?Q?lViC7tuwxCApC83sv0hCVBEDokVs5QTxi/OcX3ubCItPIaqo29rwu9F3+j6j?=
+ =?us-ascii?Q?bTUffWt7D3KRLxhS8ZAIuJwyEfMcUYDydHADdaklMTHmob3E7r5xJayvzFEF?=
+ =?us-ascii?Q?RAhMf1gzSAACummjdIVWN/sR1ztvh+dcJV2vXyxV5adcIOn6ZFs2O+mVnmAw?=
+ =?us-ascii?Q?Nde186wPWYdRn9KSX4ei+ukU/QTXXDlyRN2qmEhjfIDECMYLmmB9kCTXABX+?=
+ =?us-ascii?Q?CKuWcubd2KxyA0ZRUMPN1u3fmHfZwnhKgEceHbU/smGhAN9h87kpuV8fFYMF?=
+ =?us-ascii?Q?2Qj7egfsOvr6odxcHz/5CR5gL/3Tel1Mssr02SJ9dllsMzMxWlkBZtt9Mg+R?=
+ =?us-ascii?Q?fhqA4xACpLW61lCDzIOMEcJXJTchpCjtDihSMebZcl5vCm9i+8KKvptabsbx?=
+ =?us-ascii?Q?hLmu+J34tG9fJqmlXKsjXluUI+TXrAwOLUnnR1CSMbG+xwXVzu52nqHUUn1B?=
+ =?us-ascii?Q?w4R+djJjNRT94FfmBG6/+JNiDZCxCE6iX0UWd3WuEdISEAc14ypPLNsaMIPQ?=
+ =?us-ascii?Q?FsYJfBm99xN+W6umRiyaU/AO4orkqW+SCcuJnV6/t7qkvV9ZcBHrKBRwVuZ7?=
+ =?us-ascii?Q?q7UpBDCSB7RzzxL02rh6bz8u7qE7FOL6L7pKzypqUrTi/mNGx1vqJdQmclWV?=
+ =?us-ascii?Q?eCDVgKaPBQhjxeccGDTZiiAchb8l1CdrNtmwG0pmy4AqYHy++VeZJ45ma7A6?=
+ =?us-ascii?Q?gr6UM268hwbGWL1yArEhlZfDZxPZ/envvnTsZwM8htvkTjYRpAjRo6tTmQjN?=
+ =?us-ascii?Q?kIZBbUREkY0xLqSG+vdUAxJYgXcQ6+ajgMwOWJcKT6ASqQkZv23wXW+UjC/o?=
+ =?us-ascii?Q?rDyV8KLMlTKsv4Q64Om5b4nXvV2t/CI2Xj2oem/qgcCRTc/QJ4IeF09ULtzt?=
+ =?us-ascii?Q?nmQmrffm//op4ZzUyOeLWjRFubiIRMzEdDSjGvA/BwLJSmGFZxcl2o3pwq0+?=
+ =?us-ascii?Q?aA8wDAK1km0U5KmRtspqVfX3CTE+z9AGN583AYq17788Y7LHhHv7kYZyGJZv?=
+ =?us-ascii?Q?VEgDm0Ij1mF0sLWHd6G97mzj6AOFZH5Pa39gFGig8ORWNPVp1jsjf+OlZyli?=
+ =?us-ascii?Q?yKHGJuMN5B6zbkFklKJQM6iZzeW5D/YfKbnxwU9KBUutynujaVEMuA2tCrAg?=
+ =?us-ascii?Q?oJA5QMtD8QqoFGk4oxLYBNIzCO1/0xdCfbjdQJ99CiuvXPUscOCAiHmHt0xZ?=
+ =?us-ascii?Q?XqkQifKfHSx6qeoNA3ltl42bmH5DMbSi1xKmWyZP2f3tBBP7V7g3dIh1IiIr?=
+ =?us-ascii?Q?atxFmQBA+oXcyHRsY0JhZcmr5mMhL1+lT7CE9ReZnhgn2EGmJM0OAqqRkbRS?=
+ =?us-ascii?Q?OQ=3D=3D?=
+X-OriginatorOrg: navimatix.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 97157462-502b-4c9d-61df-08dcc41c3d06
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR01MB8293.eurprd01.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2024 09:07:54.3227
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: WE2Yy5Sfw3TffRXllNPdgp3CkTP6dX2Fi/o/74efgaPjXDur3lg6c87UtJHlyP0L2H/uiFWoFgTisxL1flBz78EA1X96peAzaU20iQsuTow=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI2PR01MB11216
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 24 Aug 2024 05:39:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111917
+ <openembedded-devel@lists.openembedded.org>; Sat, 24 Aug 2024 09:08:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111918
 
-This resulted in
-ERROR: bluealsa-4.3.0-r0 do_package: QA Issue: bluealsa:
-Files/directories were installed but not shipped in any package:
-  /usr/share
-  /usr/share/dbus-1
-  /usr/share/dbus-1/system.d
-  /usr/share/dbus-1/system.d/bluealsa.conf
-Please set FILES such that these items are packaged. Alternatively if
-they are unneeded, avoid installing them
+Khem Raj schrieb am Fr 23. Aug, 22:38 (GMT):
+> This resulted in
+> ERROR: bluealsa-4.3.0-r0 do_package: QA Issue: bluealsa:
+> Files/directories were installed but not shipped in any package:
+>   /usr/share
+>   /usr/share/dbus-1
+>   /usr/share/dbus-1/system.d
+>   /usr/share/dbus-1/system.d/bluealsa.conf
+> Please set FILES such that these items are packaged. Alternatively if
+> they are unneeded, avoid installing them
+> 
+> I have appended a patchlet to the original patch please check it in
+> master-next and see if all is ok.
 
-I have appended a patchlet to the original patch please check it in
-master-next and see if all is ok.
-
-
-On Thu, Aug 22, 2024 at 10:37=E2=80=AFPM J=C3=B6rg Sommer via
-lists.openembedded.org
-<joerg.sommer=3Dnavimatix.de@lists.openembedded.org> wrote:
->
-> From: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
->
-> The change in the license file was the update of the year in the copyrigh=
-t
-> line.
->
-> glib-2.0-native and python3-packaging-native (with python3native) is
-> required to have gdbus-codegen at build time.
->
-> Signed-off-by: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
-> ---
->  .../{bluealsa_git.bb =3D> bluealsa_4.3.0.bb}    | 36 ++++++++++++-------
->  1 file changed, 24 insertions(+), 12 deletions(-)
->  rename meta-multimedia/recipes-multimedia/bluealsa/{bluealsa_git.bb =3D>=
- bluealsa_4.3.0.bb} (67%)
->
-> diff --git a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb =
-b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb
-> similarity index 67%
-> rename from meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
-> rename to meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb
-> index 5007c88ff..ba43b4378 100644
-> --- a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
-> +++ b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb
-> @@ -1,22 +1,30 @@
->  SUMMARY =3D "Bluetooth Audio ALSA Backend"
-> +DESCRIPTION =3D "\
-> +    BlueALSA is a replacement for BlueZ >=3D 5, with which one can achie=
-ve the \
-> +    same Bluetooth audio profile support as with PulseAudio, but with fe=
-wer \
-> +    dependencies and at a lower level in the software stack. It is desig=
-ned \
-> +    specifically for use on small, low-powered, dedicated audio or audio=
-/visual \
-> +    systems where the high-level audio management features of PulseAudio=
- or \
-> +    PipeWire are not required. \
-> +"
->  HOMEPAGE =3D "https://github.com/Arkq/bluez-alsa"
-> +BUGTRACKER =3D "https://github.com/arkq/bluez-alsa/issues"
->  SECTION =3D "libs"
->
->  LICENSE =3D "MIT"
-> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D8449a4f133a93f6254b496d4fb476=
-e83"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D143bc4e73f39cc5e89d6e096ac031=
-5ba"
-> +
-> +DEPENDS +=3D "alsa-lib bluez5 dbus glib-2.0-native python3-packaging-nat=
-ive sbc"
->
->  SRC_URI =3D "git://github.com/Arkq/bluez-alsa.git;protocol=3Dhttps;branc=
-h=3Dmaster"
->
-> -SRCREV =3D "dd05a1baa261b94da9ba977b5e3392c8b4dc7a5e"
-> -PV =3D "4.0.0+git"
-> +SRCREV =3D "959573c2cccef5cf074f5b2fa7941abbd699c5f4"
->
-> -S  =3D "${WORKDIR}/git"
-> -
-> -DEPENDS +=3D "alsa-lib bluez5 dbus glib-2.0 sbc"
-> +S =3D "${WORKDIR}/git"
->
->  PACKAGECONFIG ??=3D "aplay cli hcitop ${@bb.utils.filter('DISTRO_FEATURE=
-S', 'systemd', d)}"
-> -PACKAGECONFIG[a2dpconf]  =3D "--enable-a2dpconf,--disable-a2dpconf"
-> -PACKAGECONFIG[aac]  =3D "--enable-aac,--disable-aac,fdk-aac"
-> +PACKAGECONFIG[a2dpconf] =3D "--enable-a2dpconf,--disable-a2dpconf"
-> +PACKAGECONFIG[aac] =3D "--enable-aac,--disable-aac,fdk-aac"
->  PACKAGECONFIG[aplay] =3D "--enable-aplay,--disable-aplay"
->  PACKAGECONFIG[cli] =3D "--enable-cli,--disable-cli"
->  PACKAGECONFIG[coverage] =3D "--with-coverage,--without-coverage,lcov-nat=
-ive"
-> @@ -25,8 +33,10 @@ PACKAGECONFIG[debug-time] =3D "--enable-debug-time,--d=
-isable-debug-time"
->  PACKAGECONFIG[faststream] =3D "--enable-faststream,--disable-faststream"
->  PACKAGECONFIG[hcitop] =3D "--enable-hcitop,--disable-hcitop,libbsd ncurs=
-es"
->  PACKAGECONFIG[libunwind] =3D "--with-libunwind,--without-libunwind,libun=
-wind"
-> +PACKAGECONFIG[midi] =3D "--enable-midi,--disable-midi"
->  PACKAGECONFIG[mp3lame] =3D "--enable-mp3lame,--disable-mp3lame,lame"
->  PACKAGECONFIG[mpg123] =3D "--enable-mpg123,--disable-mpg123,mpg123,mpg12=
-3"
-> +PACKAGECONFIG[msbc] =3D "--enable-msbc,--disable-msbc,spandsp"
->  PACKAGECONFIG[ofono] =3D "--enable-ofono,--disable-ofono,ofono"
->  PACKAGECONFIG[payloadcheck] =3D "--enable-payloadcheck,--disable-payload=
-check"
->  PACKAGECONFIG[rfcomm] =3D "--enable-rfcomm,--disable-rfcomm"
-> @@ -35,9 +45,10 @@ PACKAGECONFIG[systemd] =3D "--enable-systemd --with-sy=
-stemdsystemunitdir=3D${systemd
->  PACKAGECONFIG[test] =3D "--enable-test,--disable-test,libcheck libsndfil=
-e1"
->  PACKAGECONFIG[upower] =3D "--enable-upower,--disable-upower,,upower"
->
-> -inherit autotools pkgconfig systemd
-> +inherit autotools pkgconfig python3native systemd
->
-> -EXTRA_OECONF =3D " \
-> +# These proprietary codecs are not available in Yocto
-> +EXTRA_OECONF =3D "\
->      --disable-aptx \
->      --disable-lc3plus \
->      --disable-ldac \
-> @@ -45,11 +56,12 @@ EXTRA_OECONF =3D " \
->  "
->
->  PACKAGE_BEFORE_PN =3D "${PN}-aplay"
-> -RRECOMMENDS:${PN} =3D "${PN}-aplay"
->
-> -FILES:${PN}-aplay =3D "${bindir}/bluealsa-aplay"
-> +FILES:${PN}-aplay +=3D "${bindir}/bluealsa-aplay"
->  FILES:${PN} +=3D "${libdir}/alsa-lib/*"
->
-> +RRECOMMENDS:${PN} =3D "${PN}-aplay"
-> +
->  SYSTEMD_PACKAGES +=3D "${PN}-aplay"
->  SYSTEMD_SERVICE:${PN} =3D "bluealsa.service"
->  SYSTEMD_SERVICE:${PN}-aplay =3D "bluealsa-aplay.service"
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#111909): https://lists.openembedded.org/g/openembedde=
-d-devel/message/111909
-> Mute This Topic: https://lists.openembedded.org/mt/108051676/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Yes, it looks fine. Thanks for it!
 
