@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A34D9C5472E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BBC8BC54731
 	for <webhook@archiver.kernel.org>; Sat, 24 Aug 2024 22:45:58 +0000 (UTC)
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
- by mx.groups.io with SMTP id smtpd.web11.22411.1724539550645797958
+Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
+ by mx.groups.io with SMTP id smtpd.web11.22412.1724539553432702015
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 24 Aug 2024 15:45:50 -0700
+ Sat, 24 Aug 2024 15:45:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NIztwCWU;
- spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-7142448aaf9so2138448b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Aug 2024 15:45:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=UvXzObxM;
+ spf=pass (domain: gmail.com, ip: 209.85.160.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-27020fca39aso2600723fac.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Aug 2024 15:45:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1724539550; x=1725144350; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1724539552; x=1725144352; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=FJ0Sj4tSJwbtP2maom/FO85lfuMAx0V4rbXXLTVn7F0=;
-        b=NIztwCWUJSsH4cZ/fw0lWRqq53EM4qcCGDuReT27w0n5zxx/zKzD4E5ST9pUbUeyNa
-         J3uAQLBM9J1+fosjKQn5KHPO8+hq8KlRgc6gZI18p24WIFKBirq9wOFeJ24c8S/uUW5+
-         f7SDwlJa1RzF2WSJSs9gFoYEkp1fNmsMJ0OxbIva/C3exTfPAHJZR3ChuUfoNgRg4GhB
-         t69VOG29fFzYVeL1FSqHytbKPSAFq/MfXSJgCvZ1DiVQxP5CPkjZVMK6x0xEf3RlwWL5
-         5ei8PZMBtkc/eZm/9muhnW6iwkR+xsnQ1Mw2+imK8BMFG2rm6HJZfXKHJivqeAttQp+5
-         jl9g==
+        bh=fbywF+byI6SLBJ4wegLOiKSC5rY9Et7vYk6aHSI3lzk=;
+        b=UvXzObxMuspDnKkZNCi/Yok7UJBF9fhMkZux2PPnkorcSnDChHDsnIpa4DKoAY1rPd
+         3rKS6wDkRhDflJSukywHTYhKBzDhiBk5fFDv+SQnmmgobIvSfJ8DxjfeOoBAxrsB7r+m
+         o0iulOrrXxebEsebmUdvJsaCLJ4HxGZXHby+TJPTJfcN6eKPpu+13MaMnu/SzYoU86j7
+         U2fF/mYbqsQeF4pw3TOfwyN83uOE/nl9YPeTGpMZDyCoi272tt3ecOckgkn+DGuW5OPy
+         DwfCoWTy5wY3r4kjpjt3UCbyOv8HgVadyAAGahgfTwwNozeLLOEzzgoflyaMjcjOmQSq
+         3Fmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724539550; x=1725144350;
+        d=1e100.net; s=20230601; t=1724539552; x=1725144352;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=FJ0Sj4tSJwbtP2maom/FO85lfuMAx0V4rbXXLTVn7F0=;
-        b=eB7l7qYmuUvtqasEtacuFXse5PeOMElOtRn2eoli3tQeX8eNgUYvWhV2D/7kw79YS3
-         dYRyihj8sikJLMYeFvwK+mGgjgTk7vwOGwBElzVdHyr/CmG7aN0iUx8Mb0FZ3QjTUxdP
-         HTiW25ZYftJBVXzv5Qa5IRCy9An8wAiwp0dnZv/wzI44h+i5DmDjR5VGNHby/fJ/wbsh
-         2wo6XN9qKWRA7lDUEpGD8CssUpGKi7tqO1EU5LkwC6vsSBaNUaXyeBj3p6DssoyEp/8V
-         9MbL7dw3CzDW81d2BZRMBXIgrfSj4UTalXHMU+H2bkV9/BY/S82CtAn0p/9189dERn24
-         v47Q==
-X-Gm-Message-State: AOJu0Yzbiv52cz6xcnE7dtLAS18hX2CM7kWbX+qiz8uMNhNcTpi42acV
-	1fJ0aHzM9qCHk6j7U3scVplTrpNxppqxgRXlkvD54yUXLi1ZkTqeo5WAjA==
-X-Google-Smtp-Source: AGHT+IEOdavB7hTOtx5zos0N2+ZuQ1U6BSsz3RT3I2BHLUl9PJSVXd4cP20OVoWUdXE9LGOB+K5aJg==
-X-Received: by 2002:a05:6a00:8d46:b0:70e:cf99:adc7 with SMTP id d2e1a72fcca58-7143170e1d0mr16054145b3a.3.1724539549603;
-        Sat, 24 Aug 2024 15:45:49 -0700 (PDT)
+        bh=fbywF+byI6SLBJ4wegLOiKSC5rY9Et7vYk6aHSI3lzk=;
+        b=bVrLF4fdpQZGSj3ut7XxNZ24J9u75aCsv7Yd8Z2hhKzLFFHank1N1RUNXjCc+THLln
+         dfWsoc1G2Eqneq9hjZMCRQSRX1j3/oESptkVGIECWVT0YwaOqq1pP04Il2nmUMlldu5D
+         UETCqzgHzrTJjpJilyqbSN39Xh/yUeeGLA50EEmSg0KCKD0E5Y4DW6BsTeufdjWgnNUL
+         GUwr5a8HnsN36SlkCe+bg3Y51NeeRozPzs8kdsFwlaa3zS2K7U3QdJk+LxFbo+dj7TF2
+         kMozRIBuRx+q14XYArNoIPYAahVe2Fs/gAJqcd3Dbd4npBVdAomIyLyOLvaR43mJd5AJ
+         xc1g==
+X-Gm-Message-State: AOJu0Yz/4jOKa5ShY5GhZ75vhPWuJ1CsCWtN3uI7lHVJujXGbmlwgrKZ
+	4V73+tlranQY/7ACUo1eRRMX45QygQd3hU8w4oE/dihXGnli0td2HXSwcA==
+X-Google-Smtp-Source: AGHT+IH4O1HEZk4koNXGvcdWmhLiE7GOJPW9rOE0AhyQrWViZ+gJ7+tKr0inSiuNLdc/dqrsQU+umw==
+X-Received: by 2002:a05:6358:5328:b0:1ac:f5dc:5163 with SMTP id e5c5f4694b2df-1b5c3b5ab4emr697898055d.29.1724539552271;
+        Sat, 24 Aug 2024 15:45:52 -0700 (PDT)
 Received: from apollo.localdomain ([2601:646:9d80:4380::77e7])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-714343388a1sm4914817b3a.184.2024.08.24.15.45.48
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-714343388a1sm4914817b3a.184.2024.08.24.15.45.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 24 Aug 2024 15:45:48 -0700 (PDT)
+        Sat, 24 Aug 2024 15:45:51 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH 2/4] libgsf: Fix build with libxml2 2.13+
-Date: Sat, 24 Aug 2024 15:45:43 -0700
-Message-ID: <20240824224545.1944956-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 4/4] libblockdev: Fix build with latest e2fsprogs
+Date: Sat, 24 Aug 2024 15:45:45 -0700
+Message-ID: <20240824224545.1944956-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20240824224545.1944956-1-raj.khem@gmail.com>
 References: <20240824224545.1944956-1-raj.khem@gmail.com>
@@ -61,138 +61,123 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 24 Aug 2024 22:45:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111923
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111925
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...lation-attempt-fixes-for-libxml-2.13.patch | 105 ++++++++++++++++++
- .../recipes-gnome/libgsf/libgsf_1.14.52.bb    |   3 +-
- 2 files changed, 107 insertions(+), 1 deletion(-)
- create mode 100644 meta-gnome/recipes-gnome/libgsf/libgsf/0001-Compilation-attempt-fixes-for-libxml-2.13.patch
+ ...0001-libext2fs-unused-parameters-fix.patch | 92 +++++++++++++++++++
+ .../libblockdev/libblockdev_3.1.1.bb          |  1 +
+ 2 files changed, 93 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/libblockdev/files/0001-libext2fs-unused-parameters-fix.patch
 
-diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf/0001-Compilation-attempt-fixes-for-libxml-2.13.patch b/meta-gnome/recipes-gnome/libgsf/libgsf/0001-Compilation-attempt-fixes-for-libxml-2.13.patch
+diff --git a/meta-oe/recipes-extended/libblockdev/files/0001-libext2fs-unused-parameters-fix.patch b/meta-oe/recipes-extended/libblockdev/files/0001-libext2fs-unused-parameters-fix.patch
 new file mode 100644
-index 0000000000..08ff51205a
+index 0000000000..8129c1e2a7
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/libgsf/libgsf/0001-Compilation-attempt-fixes-for-libxml-2.13.patch
-@@ -0,0 +1,105 @@
-+From 4a84e9857d83f684bf53d616942a393ce558a328 Mon Sep 17 00:00:00 2001
-+From: Morten Welinder <terra@gnome.org>
-+Date: Wed, 3 Jul 2024 19:18:15 -0400
-+Subject: [PATCH] Compilation: attempt fixes for libxml 2.13
++++ b/meta-oe/recipes-extended/libblockdev/files/0001-libext2fs-unused-parameters-fix.patch
+@@ -0,0 +1,92 @@
++From 3aad8d471201da4125bd03d7a6921707461fe182 Mon Sep 17 00:00:00 2001
++From: Vojtech Trefny <vtrefny@redhat.com>
++Date: Fri, 7 Jun 2024 10:06:22 +0200
++Subject: [PATCH 1/3] fs: Ignore unused-parameter warning in the FS plugin
 +
-+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/libgsf/-/commit/5d4bb55095d3d6ef793c1908a88504183e28644c]
++There are some unused parameters in the libext2fs header which
++together with Wall and Werror means the plugin compilation fails.
++As a workaround we'll disable the unused-parameter warning for
++now.
++
++Fixes: #1026
++
++Taken from Fedora
++
++Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac         |  1 +
-+ gsf/gsf-input-http.c | 19 +++++++++++++++++++
-+ 2 files changed, 20 insertions(+)
 +
-+diff --git a/configure.ac b/configure.ac
-+index fceb776..7c2f946 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -238,6 +238,7 @@ AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <glib/gstdio.h>]], [[(void)g_chown("/
-+ 		AC_MSG_RESULT(yes)],
-+ 	       [AC_MSG_RESULT(no)])
-+ AC_CHECK_FUNCS(g_date_time_new_from_iso8601 g_date_time_format_iso8601)
-++AC_CHECK_FUNCS(xmlNanoHTTPOpen xmlNanoHTTPClose)
-+ CFLAGS=$SAVE_CFLAGS
-+ LIBS=$SAVE_LIBS
++---
++ src/plugins/fs/Makefile.am | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/plugins/fs/Makefile.am b/src/plugins/fs/Makefile.am
++index 7d4849c0..00474d5a 100644
++--- a/src/plugins/fs/Makefile.am
+++++ b/src/plugins/fs/Makefile.am
++@@ -2,7 +2,7 @@ AUTOMAKE_OPTIONS = subdir-objects
 + 
-+diff --git a/gsf/gsf-input-http.c b/gsf/gsf-input-http.c
-+index bdde3c8..03f4045 100644
-+--- a/gsf/gsf-input-http.c
-++++ b/gsf/gsf-input-http.c
-+@@ -23,7 +23,10 @@
-+ #include <gsf/gsf-input-http.h>
-+ #include <gsf/gsf.h>
++ lib_LTLIBRARIES = libbd_fs.la
 + 
-++#ifdef HAVE_XMLNANOHTTPOPEN
-++// It's going away, so make it conditional
-+ #include <libxml/nanohttp.h>
-++#endif
++-libbd_fs_la_CFLAGS   = $(GLIB_CFLAGS) $(GIO_CFLAGS) $(BLKID_CFLAGS) $(MOUNT_CFLAGS) $(UUID_CFLAGS) $(EXT2FS_CFLAGS) -Wall -Wextra -Werror
+++libbd_fs_la_CFLAGS   = $(GLIB_CFLAGS) $(GIO_CFLAGS) $(BLKID_CFLAGS) $(MOUNT_CFLAGS) $(UUID_CFLAGS) $(EXT2FS_CFLAGS) -Wall -Wextra -Werror -Wno-unused-parameter
++ libbd_fs_la_LIBADD   = ${builddir}/../../utils/libbd_utils.la $(GLIB_LIBS) $(GIO_LIBS) $(BLKID_LIBS) $(MOUNT_LIBS) $(UUID_LIBS) $(EXT2FS_LIBS)
++ libbd_fs_la_LDFLAGS	 = -L${srcdir}/../../utils/ -version-info 3:0:0 -Wl,--no-undefined -export-symbols-regex '^bd_.*'
++ libbd_fs_la_CPPFLAGS = -I${builddir}/../../../include/ -I${srcdir}/../
++-- 
++2.45.2
++
++
++From da5c14f3e2f83c8c40203897154ee2b788782792 Mon Sep 17 00:00:00 2001
++From: Vojtech Trefny <vtrefny@redhat.com>
++Date: Fri, 7 Jun 2024 15:21:09 +0200
++Subject: [PATCH 2/3] fs: Ignore shift-count-overflow warning in FS plugin
++
++The warning happens in the libext2fs header.
++---
++ src/plugins/fs/Makefile.am | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/plugins/fs/Makefile.am b/src/plugins/fs/Makefile.am
++index 00474d5a..42e1c777 100644
++--- a/src/plugins/fs/Makefile.am
+++++ b/src/plugins/fs/Makefile.am
++@@ -2,7 +2,7 @@ AUTOMAKE_OPTIONS = subdir-objects
 + 
-+ struct _GsfInputHTTP {
-+         GsfInput input;
-+@@ -74,7 +77,9 @@ gsf_input_http_finalize (GObject *obj_input)
-+ 	input->content_type = NULL;
++ lib_LTLIBRARIES = libbd_fs.la
 + 
-+         if (input->ctx) {
-++#ifdef HAVE_XMLNANOHTTPCLOSE
-+                 xmlNanoHTTPClose ((gpointer) input->ctx);
-++#endif
-+                 input->ctx = NULL;
-+         }
++-libbd_fs_la_CFLAGS   = $(GLIB_CFLAGS) $(GIO_CFLAGS) $(BLKID_CFLAGS) $(MOUNT_CFLAGS) $(UUID_CFLAGS) $(EXT2FS_CFLAGS) -Wall -Wextra -Werror -Wno-unused-parameter
+++libbd_fs_la_CFLAGS   = $(GLIB_CFLAGS) $(GIO_CFLAGS) $(BLKID_CFLAGS) $(MOUNT_CFLAGS) $(UUID_CFLAGS) $(EXT2FS_CFLAGS) -Wall -Wextra -Werror -Wno-unused-parameter -Wno-shift-count-overflow
++ libbd_fs_la_LIBADD   = ${builddir}/../../utils/libbd_utils.la $(GLIB_LIBS) $(GIO_LIBS) $(BLKID_LIBS) $(MOUNT_LIBS) $(UUID_LIBS) $(EXT2FS_LIBS)
++ libbd_fs_la_LDFLAGS	 = -L${srcdir}/../../utils/ -version-info 3:0:0 -Wl,--no-undefined -export-symbols-regex '^bd_.*'
++ libbd_fs_la_CPPFLAGS = -I${builddir}/../../../include/ -I${srcdir}/../
++-- 
++2.45.2
++
++
++From 90ceb4b52fbda34673fe5303da84b9a902187503 Mon Sep 17 00:00:00 2001
++From: Vojtech Trefny <vtrefny@redhat.com>
++Date: Wed, 12 Jun 2024 15:34:02 +0200
++Subject: [PATCH 3/3] fs: Fix ignoring errors from libext2fs
++
++Follow-up for #1028, we still want to show the warning and not
++completely supress it.
++---
++ src/plugins/fs/Makefile.am | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/plugins/fs/Makefile.am b/src/plugins/fs/Makefile.am
++index 42e1c777..1ee256f0 100644
++--- a/src/plugins/fs/Makefile.am
+++++ b/src/plugins/fs/Makefile.am
++@@ -2,7 +2,7 @@ AUTOMAKE_OPTIONS = subdir-objects
 + 
-+@@ -215,6 +220,7 @@ gsf_input_http_get_content_type (GsfInputHTTP *input)
-+         return content_type;
-+ }
++ lib_LTLIBRARIES = libbd_fs.la
 + 
-++#ifdef HAVE_XMLNANOHTTPOPEN
-+ static GsfInput *
-+ make_local_copy (gpointer *ctx)
-+ {
-+@@ -254,6 +260,7 @@ make_local_copy (gpointer *ctx)
-+ 
-+ 	return copy;
-+ }
-++#endif
-+ 
-+ /**
-+  * gsf_input_http_new:
-+@@ -265,6 +272,7 @@ make_local_copy (gpointer *ctx)
-+ GsfInput *
-+ gsf_input_http_new (gchar const * url, GError **error G_GNUC_UNUSED)
-+ {
-++#ifdef HAVE_XMLNANOHTTPOPEN
-+         GObject *obj;
-+ 	GsfInput *input;
-+         gpointer ctx;
-+@@ -293,6 +301,10 @@ gsf_input_http_new (gchar const * url, GError **error G_GNUC_UNUSED)
-+         GSF_INPUT_HTTP (obj)->ctx = ctx;
-+ 
-+         return GSF_INPUT (obj);
-++#else
-++        g_return_val_if_fail(url != NULL, NULL);
-++	return NULL;
-++#endif
-+ }
-+ 
-+ static GsfInput *
-+@@ -304,6 +316,7 @@ gsf_input_http_dup (GsfInput *src, GError **err)
-+ static guint8 const *
-+ gsf_input_http_read (GsfInput *input, size_t num_bytes, guint8 *buffer)
-+ {
-++#ifdef HAVE_XMLNANOHTTPOPEN
-+         int nread;
-+         size_t total_read;
-+         gpointer ctx = GSF_INPUT_HTTP (input)->ctx;
-+@@ -324,6 +337,12 @@ gsf_input_http_read (GsfInput *input, size_t num_bytes, guint8 *buffer)
-+                         return NULL;
-+         }
-+         return buffer;
-++#else
-++	(void)input;
-++	(void)num_bytes;
-++	(void)buffer;
-++	return NULL;
-++#endif
-+ }
-+ 
-+ static gboolean
-diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.52.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.52.bb
-index 7e1842b1ac..97cbbe450c 100644
---- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.52.bb
-+++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.52.bb
-@@ -10,7 +10,8 @@ GNOMEBASEBUILDCLASS = "autotools"
- inherit gnomebase gobject-introspection gettext gtk-doc
++-libbd_fs_la_CFLAGS   = $(GLIB_CFLAGS) $(GIO_CFLAGS) $(BLKID_CFLAGS) $(MOUNT_CFLAGS) $(UUID_CFLAGS) $(EXT2FS_CFLAGS) -Wall -Wextra -Werror -Wno-unused-parameter -Wno-shift-count-overflow
+++libbd_fs_la_CFLAGS   = $(GLIB_CFLAGS) $(GIO_CFLAGS) $(BLKID_CFLAGS) $(MOUNT_CFLAGS) $(UUID_CFLAGS) $(EXT2FS_CFLAGS) -Wall -Wextra -Werror -Wno-error=unused-parameter -Wno-error=shift-count-overflow
++ libbd_fs_la_LIBADD   = ${builddir}/../../utils/libbd_utils.la $(GLIB_LIBS) $(GIO_LIBS) $(BLKID_LIBS) $(MOUNT_LIBS) $(UUID_LIBS) $(EXT2FS_LIBS)
++ libbd_fs_la_LDFLAGS	 = -L${srcdir}/../../utils/ -version-info 3:0:0 -Wl,--no-undefined -export-symbols-regex '^bd_.*'
++ libbd_fs_la_CPPFLAGS = -I${builddir}/../../../include/ -I${srcdir}/../
++-- 
++2.45.2
++
+diff --git a/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb b/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb
+index fb778005ff..a42e09d336 100644
+--- a/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb
++++ b/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb
+@@ -14,6 +14,7 @@ DEPENDS = "autoconf-archive-native glib-2.0 kmod udev libnvme"
  
- SRC_URI[archive.sha256sum] = "9181c914b9fac0e05d6bcaa34c7b552fe5fc0961d3c9f8c01ccc381fb084bcf0"
--SRC_URI += "file://0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch"
-+SRC_URI += "file://0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch \
-+            file://0001-Compilation-attempt-fixes-for-libxml-2.13.patch"
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[gdk-pixbuf] = "--with-gdk-pixbuf,--without-gdk-pixbuf,gdk-pixbuf"
+ SRC_URI = "git://github.com/storaged-project/libblockdev;branch=3.1.x-devel;protocol=https \
+            file://0001-fix-pythondir-for-multilib-when-cross-compiling.patch \
++           file://0001-libext2fs-unused-parameters-fix.patch \
+            "
+ SRCREV = "68aaff5556afe26be749c29a2b7cbd714dce3050"
+ S = "${WORKDIR}/git"
 
