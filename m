@@ -2,62 +2,60 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D86DC5320E
-	for <webhook@archiver.kernel.org>; Sun, 25 Aug 2024 19:24:45 +0000 (UTC)
-Received: from mail-yb1-f174.google.com (mail-yb1-f174.google.com [209.85.219.174])
- by mx.groups.io with SMTP id smtpd.web10.38004.1724613883074039281
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 16AC9C5320E
+	for <webhook@archiver.kernel.org>; Sun, 25 Aug 2024 20:52:16 +0000 (UTC)
+Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
+ by mx.groups.io with SMTP id smtpd.web11.39145.1724619133042857728
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 25 Aug 2024 12:24:43 -0700
+ Sun, 25 Aug 2024 13:52:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=et5sJ4Vi;
- spf=pass (domain: gmail.com, ip: 209.85.219.174, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f174.google.com with SMTP id 3f1490d57ef6-e0875f1e9edso3452667276.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Aug 2024 12:24:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=njCgyf5T;
+ spf=pass (domain: gmail.com, ip: 209.85.128.180, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-6c91f9fb0d7so11157257b3.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 25 Aug 2024 13:52:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1724613882; x=1725218682; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=iQesB+F2Op9wjawrjGj48A6mxy4oWffpMy45z8d8UlM=;
-        b=et5sJ4VijQCTIRezMU9b5YgtZ0zPxfEuqjsuDShwPXAuqJpF8GKIQNzvx6z/PfGdsA
-         A60letcaUZ8UFkMJdKGbmgmD212Bv0uK5YHXnqFN0w6dbl6JfA3mm5vVtGPCY0QR7bKD
-         tgiJ20hnTp4/4hoB1vDL8rVQfeAcd03Hm3jHEwzRl0dMvC63cDZpxhu8/RebF8uzbrWf
-         CMsW4m8QhkmimIadRwpFTwQLMQe5MtiDn9Hu3q4VxkKvGPxnFtswHrgasPXpzKeD61wV
-         kLgKsQmMHl0KSdovH7A3j7bQYVDOT0a5jGUxCCJYioMzaAX1ctL0YDn44LFvMPP3zTbR
-         6xQQ==
+        d=gmail.com; s=20230601; t=1724619132; x=1725223932; darn=lists.openembedded.org;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=6MFsfvUE5x9qXN+uaRsi8xvzcziahfzw4eS2C8lvPok=;
+        b=njCgyf5TrZ+wfQ4bR2F7NkUJYiBMOmE83H/Loi1IM0aA+fSS5oXvoCDJBYOWgZ6/3R
+         T2Z98yTaLSqVq9g4nJaLnhe7Ymhy4nTB8GD+SOciW1wdz1AC1LBkci0jc2n+67Ou8nq7
+         qIeHyrqFkDbfg38icR/UVv1V/BBgA1sTYPtqZh9Nyf/je6GXGQSHxgaqC6iE+LM6IPkU
+         uaJfF8QbeVbzqJGFDAXBwTwZ4d+RuE1woodJxjfnvOho4coOIkkBFV62XD5XJSBa7mb6
+         6B3sCn002YVuvXp2CASzcJxWDhXSAZM2qhZKhuWrfVonaaIBJmeyucA70T0YhP8+1Ipj
+         fhBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724613882; x=1725218682;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=iQesB+F2Op9wjawrjGj48A6mxy4oWffpMy45z8d8UlM=;
-        b=EYHc92C24LU38szLW3EjXf+PPhdCsN5QjPuhyF7NeN9R52KdQtUIBUAlPHuaqVZJnJ
-         U/wZCC6uuxoEKp+2fUNTbiiuA4ruDUaTcQakqMVvjnPQcaZ3yhMWr4L4J4WVkmkXYdNP
-         5VF+NqEPIFDDPmYxOPiRYAolp9K7TXnjyDmFMHhV6IHX/QA8cFeBCC33Y9Z8Aa1JYlpU
-         8c2qfK9VQncCoVMDxTW/VDxyykfkHbCqFGs+srkpymBXZLfxAVAQTwxFuvP0hPoMnZ48
-         MIgwqlBYNS4yp15dGcRxBlmHHBz04oyMfwdcwIQ9OjdL4pNU3Ot5AI0DuZk1OJ/wDPXl
-         nixA==
-X-Forwarded-Encrypted: i=1; AJvYcCXWLKXLhZBlUKVWk1nCyk1T7i41RjKIWM1ifkJMK+jg8qDPSzkdf7EpQ0VtRR3iHhU9jWKya6XJvBONs65Uv5U186c=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YxBegpPRO3xWevVQpHeBRxdqPNjI/JhWoAM3nz8pLLzuh4e+6Yy
-	Z9LJbfEM6SVouZDYjPOjhOXlmsozMSeMQTiaw8jaJWHgfWCFetQZgBjlIw==
-X-Google-Smtp-Source: AGHT+IH8poO9ksr65aDpqPwE/Lel5puheNbDniMc8tgpMQVAdMgmqCNEyr4lVfz1140zfFTc8/ik6g==
-X-Received: by 2002:a05:6902:188a:b0:e13:e58b:1a32 with SMTP id 3f1490d57ef6-e17a83bfc45mr11173494276.2.1724613882079;
-        Sun, 25 Aug 2024 12:24:42 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1724619132; x=1725223932;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=6MFsfvUE5x9qXN+uaRsi8xvzcziahfzw4eS2C8lvPok=;
+        b=YP0LSd3Bax4Eoi9Qt5ql2/dnlcBaUINWIC1T1P9xYbs0KbQ90sDdKo95N/ojk5GRaC
+         s5KzFmaiu1Y4TVh9VEjKyIO81vf1T1nYElMrPjPUS/d2/qAXbZmy+htxEtrd6xg2bZa5
+         EXiskxDCh5bStDxBrkzN9ZRkxC2sd/Vw1wXDlyUXYFvUZrFjLSGT2hCNmRsPnGZcKl5X
+         0/AbuSYHMiwxPmEGFdv+DAr9esj1TtgdMFFuOzZECrkO0ICgiW5gK/BMA18K9ltEEea0
+         95DTFaNzVMYRfcAcrBNz4BBtosHz+6/ShTvIGK5Xwl2vKnFz+n34c60CMiZtlTM7J1bz
+         N8uQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWvCzFc6NB60WfVGMJMskcYTLFXINem56mQ6XG3DJ48brBRXDXGMnXataPnXa2zzXjQSuKdUICvfy26ODVOGa0jT/g=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yy5GyduC50+rKi9cu+1cWAd9VbMFr3bbKsBZ4g/ivqHtlUPpM33
+	Dl0bj2xI5hWwDjY6HtfzXnP+pd/NwGgmJtnZaqQWlLojhf4o0IgE
+X-Google-Smtp-Source: AGHT+IG1yfAtvokbm815U4cQ14Av2wknvwtTFMYMWzFu+1jGOI2o2BousN6+x1XMPBdm0kVkRUq0Ag==
+X-Received: by 2002:a05:690c:39a:b0:650:a1cb:b122 with SMTP id 00721157ae682-6c6263eb75cmr101678597b3.27.1724619132102;
+        Sun, 25 Aug 2024 13:52:12 -0700 (PDT)
 Received: from ?IPV6:2600:1700:45dd:7000:b8b:c77f:717d:1c6? ([2600:1700:45dd:7000:b8b:c77f:717d:1c6])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e178e4636besm1698290276.16.2024.08.25.12.24.41
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6c39e6eae12sm12790917b3.142.2024.08.25.13.52.11
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 25 Aug 2024 12:24:41 -0700 (PDT)
-Message-ID: <b66d3acf-773b-4a8d-9f75-356cd1e3dded@gmail.com>
-Date: Sun, 25 Aug 2024 15:24:41 -0400
+        Sun, 25 Aug 2024 13:52:11 -0700 (PDT)
+Message-ID: <38e13100-d14c-4b90-87a9-e181e7d3690c@gmail.com>
+Date: Sun, 25 Aug 2024 16:52:10 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][scarthgap][PATCH] mariadb: File conflicts for
- multilib
-To: guocai.he.cn@windriver.com, openembedded-devel@lists.openembedded.org
-References: <20240822015200.2788239-1-guocai.he.cn@windriver.com>
 Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 From: akuster808 <akuster808@gmail.com>
+Subject: scarthgap merge request: Aug 25
 Autocrypt: addr=akuster808@gmail.com; keydata=
  xsDNBGNNaZMBDAC6/Mhpw3EGOOTPtIpcUHT4lI974zN/QqccMPxH4oyBPRJbjVImYs9avXwV
  Ae9xoWKMM/vocEZWm6SOESZSGf+7l05Eo6MxU50cIQh0/bcOcdDAtFRDk4pZIL6X7vGzvFe6
@@ -92,66 +90,95 @@ Autocrypt: addr=akuster808@gmail.com; keydata=
  itDSpYIEGrZObj82rX1wvxf/ZQ8VXS+owIR2F4yeeqPH/CyrPA1ASdtt+Am28/dJ2krr72at
  J++uLxA0cein1kjcosFDpQscnDcPzohnGyyjgEd6VwelZboIS1jt4lIa1badtV+cWMGMgM8W
  ApZ86eOP
-In-Reply-To: <20240822015200.2788239-1-guocai.he.cn@windriver.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 25 Aug 2024 19:24:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111938
+ <openembedded-devel@lists.openembedded.org>; Sun, 25 Aug 2024 20:52:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111939
 
+The following changes since commit 64c481d017c1b5b5eae619a367a5e8fa00f1b156:
 
+   libjs-jquery-icheck: Correct LIC_FILES_CHKSUM (2024-08-14 10:19:55 -0400)
 
-On 8/21/24 9:52 PM, guocai he via lists.openembedded.org wrote:
-> From: Guocai He <guocai.he.cn@windriver.com>
->
-> File conflicts between attempted installs of mariadb and lib32-mariadb
+are available in the Git repository at:
 
-do these changes need to go into Master first?
+   https://git.openembedded.org/meta-openembedded scarthgap-next
 
-- armin
->
-> Signed-off-by: Guocai He <guocai.he.cn@windriver.com>
-> ---
->   meta-oe/recipes-dbs/mysql/mariadb.inc | 7 +++++--
->   1 file changed, 5 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-> index 51dd4e8d4..32a6022ba 100644
-> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-> @@ -33,10 +33,12 @@ UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/tags"
->   
->   BINCONFIG_GLOB = "mysql_config"
->   
-> -inherit cmake gettext binconfig update-rc.d systemd multilib_script pkgconfig
-> +inherit cmake gettext binconfig update-rc.d systemd multilib_script multilib_header pkgconfig
->   
->   MULTILIB_SCRIPTS = "${PN}-server:${bindir}/mariadbd-safe \
-> -                    ${PN}-setupdb:${bindir}/mariadb-install-db"
-> +                    ${PN}-setupdb:${bindir}/mariadb-install-db \
-> +                    libmysqlclient-dev:${bindir}/mysql_config \
-> +                    "
->   
->   INITSCRIPT_PACKAGES = "${PN}-server ${PN}-setupdb"
->   INITSCRIPT_NAME:${PN}-server = "mysqld"
-> @@ -160,6 +162,7 @@ mariadb_sysroot_preprocess () {
->   
->   do_install() {
->       oe_runmake 'DESTDIR=${D}' install
-> +    oe_multilib_header mysql/mariadb_version.h mysql/server/my_config.h mysql/server/private/config.h
->   
->       install -d ${D}/${sysconfdir}/init.d
->       install -m 0644 ${UNPACKDIR}/my.cnf ${D}/${sysconfdir}/
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#111898): https://lists.openembedded.org/g/openembedded-devel/message/111898
-> Mute This Topic: https://lists.openembedded.org/mt/108031502/3616698
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+for you to fetch changes up to 1235dd4ed4a57e67683c045ad76b6a0f9e896b45:
+
+   python3-twisted: Fix CVE-2024-41671 (2024-08-25 15:15:10 -0400)
+
+----------------------------------------------------------------
+Adrian Freihofer (1):
+       networkmanager: remove modemmanager rdepends
+
+Ashish Sharma (1):
+       nginx: Backport fix for CVE-2024-7347
+
+Esben Haabendal (1):
+       netplan: add missing runtime dependencies
+
+Peter Marko (2):
+       libndp: Patch CVE-2024-5564
+       squid: patch CVE-2024-37894
+
+Soumya Sambu (2):
+       gtk+: Fix CVE-2024-6655
+       python3-twisted: Fix CVE-2024-41671
+
+Wang Mingyu (1):
+       cjson: upgrade 1.7.17 -> 1.7.18
+
+Yogita Urade (2):
+       poppler: CVE-2024-6239
+       krb5: fix CVE-2024-26458 and CVE-2024-26461
+
+  .../networkmanager/networkmanager_1.46.0.bb |    2 +-
+  .../recipes-daemons/squid/files/CVE-2024-37894.patch            | 36 +
+  meta-networking/recipes-daemons/squid/squid_6.9.bb |    1 +
+  .../meta-python/recipes-connectivity/netplan/netplan_1.0.bb |    1 +
+  .../krb5/krb5/CVE-2024-26458_CVE-2024-26461.patch               | 207 
++++++
+  meta-oe/recipes-connectivity/krb5/krb5_1.21.3.bb |    1 +
+  meta-oe/recipes-connectivity/libndp/libndp/CVE-2024-5564.patch  | 48 +
+  meta-oe/recipes-connectivity/libndp/libndp_1.8.bb |    1 +
+  .../recipes-devtools/cjson/{cjson_1.7.17.bb => cjson_1.7.18.bb} |    2 +-
+  meta-oe/recipes-gnome/gtk+/gtk+/CVE-2024-6655.patch             | 40 +
+  meta-oe/recipes-gnome/gtk+/gtk+_2.24.33.bb |    1 +
+  .../recipes-support/poppler/poppler/CVE-2024-6239-0001.patch    | 1275 
++++++++++++++++++++++++++++
+  .../recipes-support/poppler/poppler/CVE-2024-6239-0002.patch    | 111 +++
+  meta-oe/recipes-support/poppler/poppler_23.04.0.bb |    2 +
+  .../python/python3-twisted/CVE-2024-41671-0001.patch            | 89 ++
+  .../python/python3-twisted/CVE-2024-41671-0002.patch            | 251 
+++++++
+  meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb |    5 +
+  meta-webserver/recipes-httpd/nginx/files/CVE-2024-7347-1.patch  | 34 +
+  meta-webserver/recipes-httpd/nginx/files/CVE-2024-7347-2.patch  | 52 ++
+  meta-webserver/recipes-httpd/nginx/nginx.inc |    2 +
+  20 files changed, 2159 insertions(+), 2 deletions(-)
+  create mode 100644 
+meta-networking/recipes-daemons/squid/files/CVE-2024-37894.patch
+  create mode 100644 
+meta-oe/recipes-connectivity/krb5/krb5/CVE-2024-26458_CVE-2024-26461.patch
+  create mode 100644 
+meta-oe/recipes-connectivity/libndp/libndp/CVE-2024-5564.patch
+  rename meta-oe/recipes-devtools/cjson/{cjson_1.7.17.bb => 
+cjson_1.7.18.bb} (97%)
+  create mode 100644 meta-oe/recipes-gnome/gtk+/gtk+/CVE-2024-6655.patch
+  create mode 100644 
+meta-oe/recipes-support/poppler/poppler/CVE-2024-6239-0001.patch
+  create mode 100644 
+meta-oe/recipes-support/poppler/poppler/CVE-2024-6239-0002.patch
+  create mode 100644 
+meta-python/recipes-devtools/python/python3-twisted/CVE-2024-41671-0001.patch
+  create mode 100644 
+meta-python/recipes-devtools/python/python3-twisted/CVE-2024-41671-0002.patch
+  create mode 100644 
+meta-webserver/recipes-httpd/nginx/files/CVE-2024-7347-1.patch
+  create mode 100644 
+meta-webserver/recipes-httpd/nginx/files/CVE-2024-7347-2.patch
 
 
