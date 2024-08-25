@@ -2,179 +2,263 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BB67CC52D6F
-	for <webhook@archiver.kernel.org>; Sat, 24 Aug 2024 22:45:58 +0000 (UTC)
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.web10.22630.1724539551935670718
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56D68C52D6F
+	for <webhook@archiver.kernel.org>; Sun, 25 Aug 2024 00:11:59 +0000 (UTC)
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.web11.23578.1724544715685023428
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 24 Aug 2024 15:45:51 -0700
+ Sat, 24 Aug 2024 17:11:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kwK7X4b4;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-714287e4083so2804493b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Aug 2024 15:45:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bhmvLWTM;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2020ac89cabso28401625ad.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Aug 2024 17:11:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1724539551; x=1725144351; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=rA5D6s5NC8KWD8wnGzdy+6jwj26QV7//tpl05VFTIdo=;
-        b=kwK7X4b4PbtmnfAYAI+KBUEjw6oVvLuP/AXxCzOj8UMtNp7zmG6dwV8CbL2MNbn5S5
-         rIiFq4LvAjqhTFMCTsZaNYhq+ZrCypEprMSK/niwlSPeyYhXLKmjZ7FBlDIEEiUvEqCY
-         aemdPDJTFWJsbJXAEEL/VDBaygl34vLrtDyD89cdC8bB43So7w/C9RRH3MTWaLWBPYwK
-         7CPIPSLOPpv4Qo4yKui7ta6+ujhz6OvMw9Jo4ijpssQvozVNYuI0jaIky4B1JsJXT/Sa
-         0ajlJIFe1EmS097UcMBfjtVF/Tv6g32Food/HwVz+odd10XkMMGlB6RnZRl1sx2K9F24
-         Sh/w==
+        d=gmail.com; s=20230601; t=1724544715; x=1725149515; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=0mDiuYpKmRdpWienwwafzeJuqUMoZjyGQRLCCm93kUE=;
+        b=bhmvLWTMOOhg3qP4NlEJcIzs/2o3I7vHj5TcSG+Y1ecIota+1JcvEJZePEAWlsDqYC
+         wwze46x4WKWLpcfCdi939FQpkMuxPG1exm3NuCOkLMM5lMiUe6o8M78uP2FgTaCnJPzc
+         R6kjw4vmQBcwrJUJeXEFJxDQTJVTJNvvbzpO5nbaFHniP0p9eYWy6oIhVaqc9kVSVntQ
+         Fb5xgHTuXkGC+f4EGoWqneuqBOneowmwHrEJP1DALjdFw59gwaQi9jQI64zRgDUNmZ7V
+         f0TDZkz/jwXU8jDR/J0lsB7h1ef9vYma5Xt/lYnHikL44bAHCHJKD2Gin3w9rVqf6FS3
+         6gvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724539551; x=1725144351;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=rA5D6s5NC8KWD8wnGzdy+6jwj26QV7//tpl05VFTIdo=;
-        b=mvPFR2nHm9bMhLvIODy1cVYY1IaV2H20vFmxdmlxH2LeaF1vQYZYWTXPrryufB3zra
-         CAat3BT+1ZwhlS36qJ4tc9/PywN5dYprGMyeud5TD9jNDrEw/mSWEcDiJLO2FE2+9gTA
-         QjljDyQu6LIpE6/QgtXWzTJxhY5tGOGbAXz5bkOkP8fNVV8JDY25hbNCQ9StrQxmJAhH
-         J1qeTVkoo9EdjneLBXBtYYPsmQnh1S2tZIg38EV3fmA9PZ8Qx39nO83dH24HiD8eEbLO
-         0vNZ7NuDj1Za9vtSFN7w/l34oZd8ZAfqxteJNg6ZtkWc2ZL4t3b2NZyuXE6IsmM6H9c6
-         RCqg==
-X-Gm-Message-State: AOJu0YwL0vO6lh9Qk9YHY2oJ4Vmbz02I8xoGbci0lvAQrITUtDofqmn8
-	1AxWhrpb+xhI76I509qOpcRy4ecq2VkBOkmCt/2JIjhnqaQHKnvTD8a7yw==
-X-Google-Smtp-Source: AGHT+IGUD9IPU9Pb48a5dScZVEdl6heELt2LGCV3LNP9cs5l/p+NBrToEEucjhoyoxYqj+5F317eEg==
-X-Received: by 2002:a05:6a21:4610:b0:1c4:ba7c:741c with SMTP id adf61e73a8af0-1cc8b4affb6mr6710150637.21.1724539550868;
-        Sat, 24 Aug 2024 15:45:50 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1724544715; x=1725149515;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=0mDiuYpKmRdpWienwwafzeJuqUMoZjyGQRLCCm93kUE=;
+        b=XQKLHMrY/Hyqm8OJm1T9DMYC2/SrAteEvSmE7B7dd7EPhyk5l1ISw8tUrnXAO+ggiF
+         p6Rqr7W35dsLeHEfX0PzUwOodRj/tA08kJXvB0klu4IMkKGcXl9YWfJB2Cw9jJ9IFJqF
+         CWT8rhGfQZfyiHQnEQ3IEVFpdHT8ulH+x+i7A9OuY3Cchmivr19sniGv5dnvkkhZA8hS
+         mVIGXitzMO6+fRsxd80zvqdh54iM59r2d9C/F+hnEl5DTVFczJgjC5cKAilaAn3J/jWD
+         KstXHKeDqpLZ/bCMZNCN1AiDLKBmyyLr0hff4KsQUuXIZC+hkJesC1KslgszXxN8d2L3
+         FLbg==
+X-Gm-Message-State: AOJu0YyZxX12ikKVrNLOlsjARalDbTN+Z/QSDyeKTrLnj9myWivH4lJS
+	K76ZoHzqXALgdiTcdY0PG6Bkv/hB6oQ9rk0rMGY6/3DhJTQ5N8wd6mVrdA==
+X-Google-Smtp-Source: AGHT+IEqY3ziyQRa0jSt9ZkdfqiWdnmVU6Ha8RWAa8J7NMG7/M9KkxY25gq1BsowBIkhaEqYOAbQCA==
+X-Received: by 2002:a17:903:2305:b0:1fb:3e8c:95a6 with SMTP id d9443c01a7336-2039e4e855amr87131155ad.40.1724544714645;
+        Sat, 24 Aug 2024 17:11:54 -0700 (PDT)
 Received: from apollo.localdomain ([2601:646:9d80:4380::77e7])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-714343388a1sm4914817b3a.184.2024.08.24.15.45.49
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-20385bdca50sm46861675ad.245.2024.08.24.17.11.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 24 Aug 2024 15:45:50 -0700 (PDT)
+        Sat, 24 Aug 2024 17:11:54 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/4] libspatialite: Upgrade to 5.1
-Date: Sat, 24 Aug 2024 15:45:44 -0700
-Message-ID: <20240824224545.1944956-3-raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH] bluealsa: Fix build on musl
+Date: Sat, 24 Aug 2024 17:11:52 -0700
+Message-ID: <20240825001152.2758217-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20240824224545.1944956-1-raj.khem@gmail.com>
-References: <20240824224545.1944956-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 24 Aug 2024 22:45:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111924
-
-- Drop the libtool patch its already fixed in this version
-- Add a patch to support libxml2 2.13+
+ <openembedded-devel@lists.openembedded.org>; Sun, 25 Aug 2024 00:11:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111926
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...oHTTPCleanup-with-LIBXML_HTTP_ENABLE.patch | 29 +++++++++++++++++++
- .../libspatialite/libspatialite_macros.patch  | 14 ---------
- .../libspatialite_pkgconfig.patch             | 12 ++++----
- ...ialite_5.0.1.bb => libspatialite_5.1.0.bb} |  5 ++--
- 4 files changed, 37 insertions(+), 23 deletions(-)
- create mode 100644 meta-oe/recipes-navigation/libspatialite/libspatialite/0001-wfs-Cover-xmlNanoHTTPCleanup-with-LIBXML_HTTP_ENABLE.patch
- delete mode 100644 meta-oe/recipes-navigation/libspatialite/libspatialite/libspatialite_macros.patch
- rename meta-oe/recipes-navigation/libspatialite/{libspatialite_5.0.1.bb => libspatialite_5.1.0.bb} (82%)
+ ...asename-implementation-from-glib-2.0.patch | 174 ++++++++++++++++++
+ .../bluealsa/bluealsa_4.3.0.bb                |   3 +-
+ 2 files changed, 176 insertions(+), 1 deletion(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/bluealsa/bluealsa/0001-Use-basename-implementation-from-glib-2.0.patch
 
-diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite/0001-wfs-Cover-xmlNanoHTTPCleanup-with-LIBXML_HTTP_ENABLE.patch b/meta-oe/recipes-navigation/libspatialite/libspatialite/0001-wfs-Cover-xmlNanoHTTPCleanup-with-LIBXML_HTTP_ENABLE.patch
+diff --git a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa/0001-Use-basename-implementation-from-glib-2.0.patch b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa/0001-Use-basename-implementation-from-glib-2.0.patch
 new file mode 100644
-index 0000000000..daef7fab49
+index 0000000000..546f82884b
 --- /dev/null
-+++ b/meta-oe/recipes-navigation/libspatialite/libspatialite/0001-wfs-Cover-xmlNanoHTTPCleanup-with-LIBXML_HTTP_ENABLE.patch
-@@ -0,0 +1,29 @@
-+From 406e841b3e011e1090f23dba12b12cdd9ec4707e Mon Sep 17 00:00:00 2001
++++ b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa/0001-Use-basename-implementation-from-glib-2.0.patch
+@@ -0,0 +1,174 @@
++From ebf62deb8422f5ac8e057c24ab10f6dcd50f28dd Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 24 Aug 2024 15:19:35 -0700
-+Subject: [PATCH] wfs: Cover xmlNanoHTTPCleanup with LIBXML_HTTP_ENABLED
++Date: Sat, 24 Aug 2024 17:02:05 -0700
++Subject: [PATCH] Use basename implementation from glib-2.0
 +
-+libxml2 has deprecated internal http support [1]
++This is portable across various platforms and system C libraries e.g.
++basename differs between glibc and musl, where glibc provides a GNU
++implementation and POSIX version, and musl provides posix version only
++and Newer version of musl have removed prototype for basename in string.h [1]
++which caused build failures with gcc-14 on musl systems.
 +
-+[1] https://www.gaia-gis.it/fossil/libspatialite/tktview?name=7c452740fe
++g_path_get_basename() is implemented in glib-2.0 and is portable across
++these systems. It allocates a new string for the returned value which
++should be free'd by user, however, all our usecases here are in main()
++functions, so technically we are not going to leak any memory.
 +
-+Upstream-Status: Pending
++[1] https://git.musl-libc.org/cgit/musl/commit/?id=725e17ed6dff4d0cd22487bb64470881e86a92e7
++
++Upstream-Status: Submitted [https://github.com/arkq/bluez-alsa/pull/726]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/wfs/wfs_in.c | 2 ++
-+ 1 file changed, 2 insertions(+)
++ src/main.c               | 3 +--
++ test/mock/mock.c         | 2 +-
++ utils/aplay/Makefile.am  | 2 ++
++ utils/aplay/aplay.c      | 3 ++-
++ utils/cli/Makefile.am    | 2 ++
++ utils/cli/cli.c          | 3 ++-
++ utils/rfcomm/Makefile.am | 2 ++
++ utils/rfcomm/rfcomm.c    | 3 ++-
++ 8 files changed, 14 insertions(+), 6 deletions(-)
 +
-+diff --git a/src/wfs/wfs_in.c b/src/wfs/wfs_in.c
-+index 1cfe39d..41ad2ab 100644
-+--- a/src/wfs/wfs_in.c
-++++ b/src/wfs/wfs_in.c
-+@@ -4638,7 +4638,9 @@ SPATIALITE_DECLARE void
-+ reset_wfs_http_connection (void)
-+ {
-+ /* Resets the libxml2 "nano HTTP": useful when changing the HTTP_PROXY settings */
-++#ifdef LIBXML_HTTP_ENABLED
-+     xmlNanoHTTPCleanup ();
-++#endif
-+ }
++diff --git a/src/main.c b/src/main.c
++index 96a66ae..be94845 100644
++--- a/src/main.c
+++++ b/src/main.c
++@@ -276,8 +276,7 @@ int main(int argc, char **argv) {
++ 			syslog = true;
++ 			break;
++ 		}
++-
++-	log_open(basename(argv[0]), syslog);
+++	log_open(g_path_get_basename(argv[0]), syslog);
 + 
-+ #else /* LIBXML2 isn't enabled */
-diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite/libspatialite_macros.patch b/meta-oe/recipes-navigation/libspatialite/libspatialite/libspatialite_macros.patch
-deleted file mode 100644
-index 6f1c165f58..0000000000
---- a/meta-oe/recipes-navigation/libspatialite/libspatialite/libspatialite_macros.patch
-+++ /dev/null
-@@ -1,14 +0,0 @@
--Upstream-Status: Pending
--
--diff -rupN --no-dereference libspatialite-5.0.1/configure.ac libspatialite-5.0.1-new/configure.ac
----- libspatialite-5.0.1/configure.ac	2021-03-08 08:57:18.748858216 +0100
--+++ libspatialite-5.0.1-new/configure.ac	2021-03-08 08:57:18.751858215 +0100
--@@ -96,7 +96,7 @@ AC_PROG_INSTALL
-- AC_PROG_LN_S
-- AC_PROG_MAKE_SET
-- AC_LIBTOOL_WIN32_DLL
---AC_PROG_LIBTOOL
--+LT_INIT
-- 
-- # Checks for typedefs, structures, and compiler characteristics.
-- AC_C_CONST
-diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite/libspatialite_pkgconfig.patch b/meta-oe/recipes-navigation/libspatialite/libspatialite/libspatialite_pkgconfig.patch
-index de6e50a58d..4b381eda88 100644
---- a/meta-oe/recipes-navigation/libspatialite/libspatialite/libspatialite_pkgconfig.patch
-+++ b/meta-oe/recipes-navigation/libspatialite/libspatialite/libspatialite_pkgconfig.patch
-@@ -1,13 +1,13 @@
- Upstream-Status: Pending
++ 	if (ba_config_init() != 0) {
++ 		error("Couldn't initialize bluealsa config");
++diff --git a/test/mock/mock.c b/test/mock/mock.c
++index 947211a..177d3e8 100644
++--- a/test/mock/mock.c
+++++ b/test/mock/mock.c
++@@ -256,7 +256,7 @@ int main(int argc, char *argv[]) {
++ 			return EXIT_FAILURE;
++ 		}
++ 
++-	log_open(basename(argv[0]), false);
+++	log_open(g_path_get_basename(argv[0]), false);
++ 	assert(ba_config_init() == 0);
++ 
++ 	/* Add BT address to the HCI filter to test filtering logic. */
++diff --git a/utils/aplay/Makefile.am b/utils/aplay/Makefile.am
++index 570a4c7..3df0d96 100644
++--- a/utils/aplay/Makefile.am
+++++ b/utils/aplay/Makefile.am
++@@ -22,12 +22,14 @@ bluealsa_aplay_CFLAGS = \
++ 	@ALSA_CFLAGS@ \
++ 	@BLUEZ_CFLAGS@ \
++ 	@DBUS1_CFLAGS@ \
+++	@GLIB2_CFLAGS@ \
++ 	@LIBUNWIND_CFLAGS@
++ 
++ bluealsa_aplay_LDADD = \
++ 	@ALSA_LIBS@ \
++ 	@BLUEZ_LIBS@ \
++ 	@DBUS1_LIBS@ \
+++	@GLIB2_LIBS@ \
++ 	@LIBUNWIND_LIBS@
++ 
++ endif
++diff --git a/utils/aplay/aplay.c b/utils/aplay/aplay.c
++index 3de7790..cb48520 100644
++--- a/utils/aplay/aplay.c
+++++ b/utils/aplay/aplay.c
++@@ -32,6 +32,7 @@
++ #include <alsa/asoundlib.h>
++ #include <bluetooth/bluetooth.h>
++ #include <dbus/dbus.h>
+++#include <glib.h>
++ 
++ #include "shared/dbus-client.h"
++ #include "shared/dbus-client-pcm.h"
++@@ -1105,7 +1106,7 @@ int main(int argc, char *argv[]) {
++ 			break;
++ 		}
++ 
++-	log_open(basename(argv[0]), syslog);
+++	log_open(g_path_get_basename(argv[0]), syslog);
++ 	dbus_threads_init_default();
++ 
++ 	/* parse options */
++diff --git a/utils/cli/Makefile.am b/utils/cli/Makefile.am
++index 9d99a35..8c5783e 100644
++--- a/utils/cli/Makefile.am
+++++ b/utils/cli/Makefile.am
++@@ -27,10 +27,12 @@ bluealsa_cli_SOURCES = \
++ bluealsa_cli_CFLAGS = \
++ 	-I$(top_srcdir)/src \
++ 	@DBUS1_CFLAGS@ \
+++	@GLIB2_CFLAGS@ \
++ 	@LIBUNWIND_CFLAGS@
++ 
++ bluealsa_cli_LDADD = \
++ 	@DBUS1_LIBS@ \
+++	@GLIB2_LIBS@ \
++ 	@LIBUNWIND_LIBS@
++ 
++ endif
++diff --git a/utils/cli/cli.c b/utils/cli/cli.c
++index aeeabe5..83765ab 100644
++--- a/utils/cli/cli.c
+++++ b/utils/cli/cli.c
++@@ -22,6 +22,7 @@
++ #include <strings.h>
++ #include <sys/param.h>
++ 
+++#include <glib.h>
++ #include <dbus/dbus.h>
++ 
++ #include "cli.h"
++@@ -414,7 +415,7 @@ int main(int argc, char *argv[]) {
++ 		}
++ 	}
++ 
++-	log_open(basename(argv[0]), false);
+++	log_open(g_path_get_basename(argv[0]), false);
++ 	dbus_threads_init_default();
++ 
++ 	DBusError err = DBUS_ERROR_INIT;
++diff --git a/utils/rfcomm/Makefile.am b/utils/rfcomm/Makefile.am
++index 907df1a..2a5f915 100644
++--- a/utils/rfcomm/Makefile.am
+++++ b/utils/rfcomm/Makefile.am
++@@ -16,10 +16,12 @@ bluealsa_rfcomm_CFLAGS = \
++ 	-I$(top_srcdir)/src \
++ 	@BLUEZ_CFLAGS@ \
++ 	@DBUS1_CFLAGS@ \
+++	@GLIB2_CFLAGS@ \
++ 	@LIBUNWIND_CFLAGS@
++ 
++ bluealsa_rfcomm_LDADD = \
++ 	@DBUS1_LIBS@ \
+++	@GLIB2_LIBS@ \
++ 	@LIBUNWIND_LIBS@ \
++ 	-lreadline
++ 
++diff --git a/utils/rfcomm/rfcomm.c b/utils/rfcomm/rfcomm.c
++index d01f081..abc2130 100644
++--- a/utils/rfcomm/rfcomm.c
+++++ b/utils/rfcomm/rfcomm.c
++@@ -25,6 +25,7 @@
++ 
++ #include <bluetooth/bluetooth.h>
++ #include <dbus/dbus.h>
+++#include <glib.h>
++ #include <readline/readline.h>
++ #include <readline/history.h>
++ 
++@@ -134,7 +135,7 @@ int main(int argc, char *argv[]) {
++ 
++ 	char dbus_ba_service[32] = BLUEALSA_SERVICE;
++ 
++-	log_open(basename(argv[0]), false);
+++	log_open(g_path_get_basename(argv[0]), false);
++ 
++ 	while ((opt = getopt_long(argc, argv, opts, longopts, NULL)) != -1)
++ 		switch (opt) {
+diff --git a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb
+index 419d6e8d22..f089e036e3 100644
+--- a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb
++++ b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb
+@@ -16,7 +16,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=143bc4e73f39cc5e89d6e096ac0315ba"
  
--diff -rupN libspatialite-5.0.1/spatialite.pc.in libspatialite-5.0.1-new/spatialite.pc.in
----- libspatialite-5.0.1/spatialite.pc.in	2021-02-07 16:53:46.000000000 +0100
--+++ libspatialite-5.0.1-new/spatialite.pc.in	2021-02-10 09:54:09.647552994 +0100
--@@ -8,5 +8,6 @@ includedir=@includedir@
-+--- a/spatialite.pc.in
-++++ b/spatialite.pc.in
-+@@ -8,5 +8,7 @@ includedir=@includedir@
-  Name: spatialite
-  Description: Spatial SQL database engine based on SQLite
-  Version: @VERSION@
---Libs: -L${libdir} -lspatialite @LIBS@ @LIBXML2_LIBS@ -lm
--+Libs.private: -L${libdir} @LIBS@ @LIBXML2_LIBS@ -lm
-+-Libs: -L${libdir} -lspatialite @LIBS@ @LIBXML2_LIBS@ @SQLITE3_LIBS@ -lm
-++Libs.private: -L${libdir} @LIBS@ @LIBXML2_LIBS@ @SQLITE3_LIBS@ -lm
- +Libs: -L${libdir} -lspatialite
-++
-  Cflags: -I${includedir}
-diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite_5.0.1.bb b/meta-oe/recipes-navigation/libspatialite/libspatialite_5.1.0.bb
-similarity index 82%
-rename from meta-oe/recipes-navigation/libspatialite/libspatialite_5.0.1.bb
-rename to meta-oe/recipes-navigation/libspatialite/libspatialite_5.1.0.bb
-index f46b1083e1..0fe0bb1197 100644
---- a/meta-oe/recipes-navigation/libspatialite/libspatialite_5.0.1.bb
-+++ b/meta-oe/recipes-navigation/libspatialite/libspatialite_5.1.0.bb
-@@ -8,11 +8,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0e92e1a36cc384b60f5b31dde0bdd39e"
+ DEPENDS += "alsa-lib bluez5 dbus glib-2.0-native python3-packaging-native sbc"
  
- SRC_URI = "http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-${PV}.tar.gz \
-            file://libspatialite_geos.patch \
--           file://libspatialite_macros.patch \
-            file://libspatialite_pkgconfig.patch \
-+           file://0001-wfs-Cover-xmlNanoHTTPCleanup-with-LIBXML_HTTP_ENABLE.patch \
- "
--
--SRC_URI[sha256sum] = "eecbc94311c78012d059ebc0fae86ea5ef6eecb13303e6e82b3753c1b3409e98"
-+SRC_URI[sha256sum] = "43be2dd349daffe016dd1400c5d11285828c22fea35ca5109f21f3ed50605080"
+-SRC_URI = "git://github.com/Arkq/bluez-alsa.git;protocol=https;branch=master"
++SRC_URI = "git://github.com/Arkq/bluez-alsa.git;protocol=https;branch=master \
++           file://0001-Use-basename-implementation-from-glib-2.0.patch"
  
- inherit autotools-brokensep pkgconfig
+ SRCREV = "959573c2cccef5cf074f5b2fa7941abbd699c5f4"
  
 
