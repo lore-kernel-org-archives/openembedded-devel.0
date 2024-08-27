@@ -2,131 +2,115 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4EE70C54734
-	for <webhook@archiver.kernel.org>; Tue, 27 Aug 2024 13:40:23 +0000 (UTC)
-Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
- by mx.groups.io with SMTP id smtpd.web11.78011.1724766019783040228
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 116A4C54734
+	for <webhook@archiver.kernel.org>; Tue, 27 Aug 2024 13:44:33 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.web10.78790.1724766266138506423
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Aug 2024 06:40:20 -0700
+ Tue, 27 Aug 2024 06:44:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Zvcpvi4P;
- spf=pass (domain: gmail.com, ip: 209.85.167.41, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-53345dcd377so7339779e87.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Aug 2024 06:40:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bYebXYhA;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-428119da952so49118615e9.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Aug 2024 06:44:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1724766018; x=1725370818; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=2UQPZbDmcKdHVpPq+G7WcojJHWqGCK/UKOV2cCrjsII=;
-        b=Zvcpvi4PxeIOJ/714MIHrdBsy1NZB5cFZehbw0uWHhqT3vCGEcEj67r9iN+C5GkqQp
-         lwTSZ6pqJLQJPGiiFitiCjPtyRhzicU8o/U2kFgbpmeOsnxDJMuw0BlOWVdyrRH6cNB3
-         UGoif0kB9EQOSIsEMq9lZz6l/FRKJS2Kgly7mItP7WfgobDGwyWctIpGRx5Bc8rvykZN
-         gRooJ8pnbHHK5vanu/RrR2ihDR5kwLuaQ3ksde5VtlVaH4W8+RvmjRVdKPALub9ZD6It
-         Qpm81/+nEHjDpBrRIhUUP0opvg+dHHn5HmBl476220yOjjEBkskJmNt5RbSQBB8uk0Sj
-         EsFg==
+        d=gmail.com; s=20230601; t=1724766264; x=1725371064; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=VhODa63cgEK4jFeJYSYT3xDbaStrd9l4tltw4eb3s5I=;
+        b=bYebXYhA8DTegbpIU937xLet7go9IlCC3a2uXpMrEDT7MiL4XTTfWCkGHuDxwrCcUL
+         wg7KD2f08V9RkfbZlw1ahGMdUjXM9d9kPJeRKGzq8u/iUB+Krg4VUAd9/Bb/S1lSgNAG
+         TgV6v7Lx8qymRLI8zMxvvJq6qAgSSNzhDkh8mdolRkFHBd6ItS+8ea5rXdNBfIj2Cpmf
+         0DEPvcvratEtk1tiNLRBSNYAgFeyFaNwqAiC4b8XGu1mf4dpBG+nowEc4F2b4mPaLGVT
+         Bz7QU4L43U3kp2fgmVStvnhHkIsV+Svy0eVq02ukPzxIFnxbgCm6L/9ASR9eCYID2fAN
+         EViA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724766018; x=1725370818;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=2UQPZbDmcKdHVpPq+G7WcojJHWqGCK/UKOV2cCrjsII=;
-        b=Y+MN/2Cp5YsrIqqqqVPGNaS4cUoCL55aYaugPS1ch42BNAmYfrB9IP0tH9tUSeTgp1
-         wZloz1DpKFEBV6CtGhtone2GczRtARWoFmumLS121L3y3dgNH8m5D0rD/BtJEm5H1jKC
-         j83eguHsU0OcnDKne/Jt30r47Qedse47OI2yRa8SC2Gy+lL37osvD0q5S68h95xCf/W9
-         SBZA1HNXBNGEnghc8L4IbwiAo0lKE9fOtGIschwvtvSaFtpqD2F1lHkjhkPJ0DkDVUcb
-         Pv3hTZAtN7PGvuv7BsDN8WwMTTna5qKyDxas8EF5+mPfcT8syYNr9EXZ57QTgYTQmqaS
-         zulQ==
-X-Gm-Message-State: AOJu0YzqgOcLVuz/jCYrCFdXN/XiY4IVsGONMtUv+NuW6sFi9Nd2lSEX
-	Ei00TEVWZoRdsrqzDhZBNCz4dzXYfjeUCZ853mbb6duQz4AljaaBpCWd8h9lsHntDbWECFZ/Q7A
-	+1zZ3C+wf+hVOCcQfA4NHn20EDnE=
-X-Google-Smtp-Source: AGHT+IG46oJFJVucvQPGsM2u/d+xJnKpwf8/x3dahaCCYeSyV92Ljz4l6fKYxzvOYyet+G8tJGy53PgrWkeUepUhI5I=
-X-Received: by 2002:a05:6512:b0b:b0:533:4b38:3983 with SMTP id
- 2adb3069b0e04-53438773dd4mr7468372e87.20.1724766017082; Tue, 27 Aug 2024
- 06:40:17 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240822123031.1156755-1-thomas.perrot@bootlin.com>
-In-Reply-To: <20240822123031.1156755-1-thomas.perrot@bootlin.com>
+        d=1e100.net; s=20230601; t=1724766264; x=1725371064;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=VhODa63cgEK4jFeJYSYT3xDbaStrd9l4tltw4eb3s5I=;
+        b=jvU7Knnra3f1yPH6fahxsNeNW02rwfb82S1vQWnh8Oke/xNzCMFZhtsShE1ALcVBAY
+         XyNsFxdKmvPPMXeQ5UrzCuMezcAo8saUhk3Nu1krR0hT1DRF5O9nRsa0qlZ75BA06UZZ
+         JJFuqCwGKsyO7Jzf95ZyJoxCbNowEIga477ZfMsQk9tlslUsaXNFxDWuEj3xLJ1dfkiS
+         UEPc+Kn5tcVAF+8APCc/ZdIfs5Ua+iW7qY3BGUSXo/wKkZUjsF2o8YsGD1O36TFy4+3B
+         2mfOMLfjJxek2D58HlOCIIp2ZqYa4/3uEwYPZrgebIxjOeS1eLq9v6xTtUxaFzjTQO3x
+         2E3Q==
+X-Gm-Message-State: AOJu0YzHylUcMYs3kAXMa4Xs6KMfOu4AAsyxb3h1ovnD2LvUos3Iw1o4
+	VaSQZKVNjqfadl23NabE9+Sj/RaWiM/jAdTYW3/0+I6MxOhrhXMPx1T+RQ==
+X-Google-Smtp-Source: AGHT+IFxqF45wBUjII6OWhZr3zSb0LJ1TnnJp3WWdrVv64y2Cvi+LHF0PzSCID0pO5BTJiLzdU2QHQ==
+X-Received: by 2002:a05:600c:a4b:b0:426:6edb:7e14 with SMTP id 5b1f17b1804b1-42acca00b7cmr84860915e9.35.1724766263948;
+        Tue, 27 Aug 2024 06:44:23 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-42ac517f9basm185248255e9.39.2024.08.27.06.44.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 27 Aug 2024 06:44:23 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 27 Aug 2024 15:40:04 +0200
-Message-ID: <CA+chaQe8TZDhMbOJo=SMc7kNg2WKW=mcakdhPmghsskxt5CAww@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] vdpauinfo: add recipe
-To: thomas.perrot@bootlin.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] vdpauinfo: require x11 in DISTRO_FEATURES
+Date: Tue, 27 Aug 2024 15:44:17 +0200
+Message-ID: <20240827134417.4022710-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.46.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 27 Aug 2024 13:40:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111976
+ <openembedded-devel@lists.openembedded.org>; Tue, 27 Aug 2024 13:44:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111977
 
-As this depends on libvdpau and libvdpau has:
+It depends on libvdpau and libvdpau has:
 inherit features_check
-REQUIRED_DISTRO_FEATURES =3D "x11"
+REQUIRED_DISTRO_FEATURES = "x11"
+
+since:
+commit 0055684612edddae0f041e984c8497c5e5b32e74
+Author: Armin Kuster <akuster808@gmail.com>
+Date:   Tue Mar 6 17:27:30 2018 -0800
+Subject: libvdpau: only include when x11 in DISTRO_FEATURES
 
 the same restriction should be repeated here to avoid:
-ERROR: Nothing PROVIDES 'libvdpau' (but
-meta-oe/meta-oe/recipes-graphics/vdpau/vdpauinfo_1.5.bb DEPENDS on or
-otherwise requires it)
-libvdpau was skipped: missing required distro feature 'x11' (not in
-DISTRO_FEATURES)
+ERROR: Nothing PROVIDES 'libvdpau' (but meta-oe/meta-oe/recipes-graphics/vdpau/vdpauinfo_1.5.bb DEPENDS on or otherwise requires it)
+libvdpau was skipped: missing required distro feature 'x11' (not in DISTRO_FEATURES)
 
-Will send the fix shortly.
+Also add it to packagegroup-meta-oe and fix libvdpau there.
 
-On Thu, Aug 22, 2024 at 2:30=E2=80=AFPM Thomas Perrot via
-lists.openembedded.org
-<thomas.perrot=3Dbootlin.com@lists.openembedded.org> wrote:
->
-> From: Thomas Perrot <thomas.perrot@bootlin.com>
->
-> vdpauinfo is a command-line tool that can query the capabilities
-> of the system's VDPAU implementation.
->
-> Signed-off-by: Thomas Perrot <thomas.perrot@bootlin.com>
-> ---
->  meta-oe/recipes-graphics/vdpau/vdpauinfo_1.5.bb | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/vdpau/vdpauinfo_1.5.bb
->
-> diff --git a/meta-oe/recipes-graphics/vdpau/vdpauinfo_1.5.bb b/meta-oe/re=
-cipes-graphics/vdpau/vdpauinfo_1.5.bb
-> new file mode 100644
-> index 000000000000..99afe745079f
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/vdpau/vdpauinfo_1.5.bb
-> @@ -0,0 +1,16 @@
-> +DESCRIPTION =3D "Tool to query the capabilities of a VDPAU implementatio=
-n"
-> +HOMEPAGE =3D "https://gitlab.freedesktop.org/vdpau/vdpauinfo"
-> +
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D5b6e110c362fe46168199f3490e52=
-c3c"
-> +
-> +DEPENDS =3D "libvdpau"
-> +
-> +RDEPENDS:${PN} =3D "libvdpau"
-> +
-> +SRCREV =3D "d3c5bd63bf8878d59b22d618d2bb5116db392d28"
-> +SRC_URI =3D "git://anongit.freedesktop.org/vdpau/vdpauinfo;branch=3Dmast=
-er"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit autotools pkgconfig
-> --
-> 2.46.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#111904): https://lists.openembedded.org/g/openembedde=
-d-devel/message/111904
-> Mute This Topic: https://lists.openembedded.org/mt/108036779/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+---
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 2 +-
+ meta-oe/recipes-graphics/vdpau/vdpauinfo_1.5.bb            | 4 ++++
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index d6d8cfd32b..71fb1c2ac8 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -606,7 +606,7 @@ RDEPENDS:packagegroup-meta-oe-graphics ="\
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11 pam", "tigervnc", "", d)} \
+     tslib \
+     unclutter-xfixes \
+-    libvdpau \
++    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libvdpau vdpauinfo", "", d)} \
+     xcursorgen \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11 pam", "xscreensaver", "", d)} \
+     yad \
+diff --git a/meta-oe/recipes-graphics/vdpau/vdpauinfo_1.5.bb b/meta-oe/recipes-graphics/vdpau/vdpauinfo_1.5.bb
+index 99afe74507..3f44e537a4 100644
+--- a/meta-oe/recipes-graphics/vdpau/vdpauinfo_1.5.bb
++++ b/meta-oe/recipes-graphics/vdpau/vdpauinfo_1.5.bb
+@@ -6,6 +6,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5b6e110c362fe46168199f3490e52c3c"
+ 
+ DEPENDS = "libvdpau"
+ 
++# libvdpau is available only with x11
++inherit features_check
++REQUIRED_DISTRO_FEATURES = "x11"
++
+ RDEPENDS:${PN} = "libvdpau"
+ 
+ SRCREV = "d3c5bd63bf8878d59b22d618d2bb5116db392d28"
+-- 
+2.46.0
+
 
