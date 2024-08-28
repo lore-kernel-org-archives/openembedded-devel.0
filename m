@@ -2,53 +2,53 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F81AC5472D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F826C5474A
 	for <webhook@archiver.kernel.org>; Wed, 28 Aug 2024 08:25:51 +0000 (UTC)
-Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
- by mx.groups.io with SMTP id smtpd.web11.8726.1724833550442503744
+Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
+ by mx.groups.io with SMTP id smtpd.web10.8718.1724833538730307556
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 28 Aug 2024 01:25:50 -0700
+ Wed, 28 Aug 2024 01:25:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=ObgHZ7CB;
- spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=fc18uUK/;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1724833550; x=1756369550;
+  t=1724833541; x=1756369541;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=pDnLcrVjqx7qgFm1wskgqK+GfwfvvWiwjyPjZP2j8sE=;
-  b=ObgHZ7CBE9Is5N7axGLvmTDrzdUtPftp2b//5JKEWPROqcTaDxvJQ3c9
-   qxi8LiK2/knfPHxvT7TKeVwBE6MeAZyf59DGe5LX4B3+Z//71vK8tvYWX
-   KvuJYNgEHN4EbuLOjsy9lOgt0BcA1bLgJK43qRA1m+yQWzqKJU5sbjtyg
-   FSVV6Pf8gtKY+/4kqkxjmn4RDg7xwxmlP9bIltuYBq1DykejrbwV1mBvk
-   9RPML7vz71s49ULJzkXw6RhnKUj7zaUHU9Q/SPaIfp/zllUj5vO6n0MGS
-   R4Rr2RHrSuZhAyLUTi6+yndHe1hhFYxaun87Z14vgzuLs+FjyuGFmbMHK
-   A==;
-X-CSE-ConnectionGUID: A9OPNljVSjCLHWNqq9CC8A==
-X-CSE-MsgGUID: 8gDNrzstQs2wjx00CqmX2w==
-X-IronPort-AV: E=McAfee;i="6700,10204,11177"; a="150902401"
+  bh=BwZb0z+atDVrlFvLFWDDS9AQzh5ZeMM6zAfPPjRQChk=;
+  b=fc18uUK/sMVlRnYM9Ld3r+k9Ir0PIiLaziOTYerC0WgQn4a4PZJh9+mY
+   MrFIyZM1W2ZPuMkHw8n5cM5xh3Ts5Jw7VDJjZ/Lx65L1gmwb3EW47q2Fl
+   SB9N3aBPX/sWTetGiiSBLbcy73U8fCphodoX1Mqy2sCye5mFe2VLh3zag
+   UN7SvDOAZ/KbAsfaYf7BLKhUfKdFcQaStWlMaFpLtixTJebsA6FKDJ4qT
+   VU+7wvviLyixmlwnYhiBYaAVDGZXAtBjq0nosD4F0IKh/2jd3b7zYJhps
+   DjhMpF6/0oB60bYvhZm5FnjQ56jMPJ4HTZj+zWhj5NQAEFak6zNk6xBDm
+   Q==;
+X-CSE-ConnectionGUID: L11iXA3DTrSgMWHb/uQhgA==
+X-CSE-MsgGUID: PHLLoUwmRBGgmJ7eSshneg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11177"; a="171913173"
 X-IronPort-AV: E=Sophos;i="6.10,182,1719846000"; 
-   d="scan'208";a="150902401"
-Received: from unknown (HELO oym-r1.gw.nic.fujitsu.com) ([210.162.30.89])
-  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Aug 2024 17:25:48 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 0234BD2ABF
-	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Aug 2024 17:25:46 +0900 (JST)
+   d="scan'208";a="171913173"
+Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
+  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Aug 2024 17:25:39 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 88FC5C9322
+	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Aug 2024 17:25:37 +0900 (JST)
 Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 4FA2CBF4AA
-	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Aug 2024 17:25:45 +0900 (JST)
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id DA3B5F30C
+	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Aug 2024 17:25:31 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id D823420079DEA
-	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Aug 2024 17:25:44 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 6701420079DEA
+	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Aug 2024 17:25:31 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.161.161])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 820CA1A0002;
-	Wed, 28 Aug 2024 16:25:44 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 0F5631A0002;
+	Wed, 28 Aug 2024 16:25:31 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 24/46] python3-gunicorn: upgrade 22.0.0 -> 23.0.0
-Date: Wed, 28 Aug 2024 16:25:02 +0800
-Message-Id: <1724833525-2162-23-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 03/46] fwupd: upgrade 1.9.22 -> 1.9.24
+Date: Wed, 28 Aug 2024 16:24:42 +0800
+Message-Id: <1724833525-2162-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1724833525-2162-1-git-send-email-wangmy@fujitsu.com>
 References: <1724833525-2162-1-git-send-email-wangmy@fujitsu.com>
@@ -56,61 +56,57 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28624.006
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28624.006
-X-TMASE-Result: 10-3.286000-10.000000
-X-TMASE-MatchedRID: 6IstDyeExSCjz0nOeth/yUIIxwDaU5mrG24YVeuZGmOpTkI0HK8zpcr9
-	4vyfQs+ZXppxnSmnssDd+dXlft5oG6qkg+o+yGWuEGOqXTRZcB8BGSO+Oopk6l3V0cSSKu6fkrI
-	9/WPu3jfX1u63/F4Cq0zgn4zIF3hL9xWd9ZideuiBDL96LgyuMV7OZ6hrwwnztjC7onS6zuUwV1
-	2/6ktut9PTUDa8SKRWDcq+tTLukTptF6/n498MP/LeH1FBnhK0wTlc9CcHMZdH8jOVX4Ixtn8UJ
-	sHf0X9zgZBEjCNOXeLrixWWWJYrHx8TzIzimOwPah1zjX08EkLEQdG7H66TyHEqm8QYBtMOyl5z
-	kXGSAeE+EzhRX0hd5cW9ILMXXFOic2wNYUY2AZIhX01zpXXJrnas3nESrKxM84BgeE0m6UVEQF5
-	BWwWFJJMBqo43qfOdgr6lqxbIXlHC3tMwY3ma2xUDj+dgUQVyTE7Co9fKv3w=
+X-TMASE-Result: 10--10.757600-10.000000
+X-TMASE-MatchedRID: 51ABSdwnBXSjz0nOeth/yUIIxwDaU5mrF4r8H5YrEqyjY8EXdBUdHyMO
+	uGtF4L1EuH0SzH4JWPZ+WcygkXcYpTyDV8RhnfzbvsqgbJ/olIOycrvYxo9KpwResZ2uR6Xu7v0
+	MlFSLfmmiJGJGoluOFgFd21k9Z8naL/tBTZzO5Q0D2WXLXdz+AfioIsi7Sa0gdcdCrrMF5JTOb4
+	onyN9S3cY+qr/xXRlltz9kIuTkBq6vvxILmKK/HBRFJJyf5BJeZVXUb4KTaXv6C0ePs7A07V9vM
+	TaVNFNzIKoBlnI8yGMb1ffABXGZklU1q3q2TUEi5sIj7tJYClE=
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 28 Aug 2024 08:25:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112002
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/111987
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-===========
-- minor docs fixes
-- worker_class parameter accepts a class
-- fix deadlock if request terminated during chunked parsing
-- permit receiving Transfer-Encodings: compress, deflate, gzip
-- permit Transfer-Encoding headers specifying multiple encodings. note: no parameters, still
-- sdist generation now explicitly excludes sphinx build folder
-- decode bytes-typed status (as can be passed by gevent) as utf-8 instead of raising TypeError
-- raise correct Exception when encounting invalid chunked requests
-- the SCRIPT_NAME and PATH_INFO headers, when received from allowed forwarders, are no longer restricted for containing an underscore
-- include IPv6 loopback address [::1] in default for forwarded_allow_ips and proxy_allow_ips
-- refuse requests where the uri field is empty
-- refuse requests with invalid CR/LR/NUL in heade field values
-- remove temporary --tolerate-dangerous-framing switch from 22.0
+=========
+Bugfix:
+---------
+- Add support for capsule on disk for Dell systems
+- Do not re-use the connection cache to fix Redfish BMC restart
+- Exclude known recovery partitions when choosing an ESP volume
+- Fix the VLI usb3 private flag registration
+
+Add suppoert:
+-------------
+- More Mediatek scaler devices
+- Parade USB hubs
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-gunicorn_22.0.0.bb => python3-gunicorn_23.0.0.bb}  | 2 +-
+ meta-oe/recipes-bsp/fwupd/{fwupd_1.9.22.bb => fwupd_1.9.24.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-gunicorn_22.0.0.bb => python3-gunicorn_23.0.0.bb} (85%)
+ rename meta-oe/recipes-bsp/fwupd/{fwupd_1.9.22.bb => fwupd_1.9.24.bb} (98%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-gunicorn_22.0.0.bb b/meta-python/recipes-devtools/python/python3-gunicorn_23.0.0.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-gunicorn_22.0.0.bb
-rename to meta-python/recipes-devtools/python/python3-gunicorn_23.0.0.bb
-index e9ad084d4..8d825c865 100644
---- a/meta-python/recipes-devtools/python/python3-gunicorn_22.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-gunicorn_23.0.0.bb
-@@ -3,7 +3,7 @@ SUMMARY = "WSGI HTTP Server for UNIX"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5b70a8b30792a916f50dc96123e61ddf"
+diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.9.22.bb b/meta-oe/recipes-bsp/fwupd/fwupd_1.9.24.bb
+similarity index 98%
+rename from meta-oe/recipes-bsp/fwupd/fwupd_1.9.22.bb
+rename to meta-oe/recipes-bsp/fwupd/fwupd_1.9.24.bb
+index d9059daa5..8b66084b7 100644
+--- a/meta-oe/recipes-bsp/fwupd/fwupd_1.9.22.bb
++++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.9.24.bb
+@@ -6,7 +6,7 @@ DEPENDS = "glib-2.0 libxmlb json-glib libjcat gcab vala-native python3-jinja2-na
  
--SRC_URI[sha256sum] = "4a0b436239ff76fb33f11c07a16482c521a7e09c1ce3cc293c2330afe01bec63"
-+SRC_URI[sha256sum] = "f014447a0101dc57e294f6c18ca6b40227a4c90e9bdb586042628030cba004ec"
+ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
+            file://run-ptest"
+-SRC_URI[sha256sum] = "13fe8f3c0feb25234bb0013c16440f1e7905ec1f24e89dfebb4d5c6fadaf5ae1"
++SRC_URI[sha256sum] = "12f560b35dbed981fde8cf774c6d1f2e658a157d3a63d6c439bf418dbcc44b4c"
  
- inherit pypi python_setuptools_build_meta ptest
- 
+ UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 -- 
 2.34.1
 
