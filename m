@@ -1,171 +1,215 @@
-Return-Path: <alexandre.truong@smile.fr>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B8FCC83F2F
-	for <webhook@archiver.kernel.org>; Thu, 29 Aug 2024 16:21:06 +0000 (UTC)
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
- by mx.groups.io with SMTP id smtpd.web10.23573.1724948463336080876
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B115C87FC3
+	for <webhook@archiver.kernel.org>; Thu, 29 Aug 2024 16:36:46 +0000 (UTC)
+Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com [209.85.160.53])
+ by mx.groups.io with SMTP id smtpd.web11.24243.1724949401262652087
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Aug 2024 09:21:03 -0700
+ Thu, 29 Aug 2024 09:36:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=2gnkBdyX;
- spf=pass (domain: smile.fr, ip: 209.85.221.52, mailfrom: alexandre.truong@smile.fr)
-Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-3718acbc87fso507133f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Aug 2024 09:21:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Fw4aFPFA;
+ spf=pass (domain: gmail.com, ip: 209.85.160.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f53.google.com with SMTP id 586e51a60fabf-2701a521f63so510711fac.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Aug 2024 09:36:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1724948462; x=1725553262; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=1417iHfAsksaScvKvXCXBdNMpo4U4hTv1s5FcTNNFmw=;
-        b=2gnkBdyXHgy2qKdpovjGeoiGULUCQ+51c2+T7O/xkMlXGBRPaNAaMhgT3Dfl5h6HqG
-         RRgsWLtMRN61Qse0oPsppUUKUjzBtcZLwZDrAGjrZHIoOcasEuphc6BSKPVXl4DXCmi/
-         E8yrvZnkQEv4NzuuI9mefG75g8dDsamuaP01c=
+        d=gmail.com; s=20230601; t=1724949400; x=1725554200; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=hDCJE9iXd6XqdYTk6jR37clZOgQHTJJt86G1Zdq3PB0=;
+        b=Fw4aFPFABFxT5WrkGS93Zq7OxTpu1wzwXpR4WoS6Vq1C1w9HW+VG1PajyyAhFVK/pg
+         WkFU5+62MH0KvI7/D3u2IKPQn3/PjZxFr0U7I3Y3xWhQnls3SmQysBdqf4DNKDHDuQ+X
+         WeCiUOublTcrT5Db3sUzdpyLsv+T9LZdzgh5oJWOiCeoJIygrvmbeb5D9vq2tfz32Pv6
+         28sSpH0GzhM222hHagdicGGhPOvUeeEM2azTBcWHsrN4TFSMBbKUiUnIkm2LU16D/jL5
+         SSrhJErBBCfhylqzYFVLnQ+4ge6Y/Crf1byFjU4ssJtW66NM4zlACNGRnL4MaWv1Monj
+         KWjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1724948462; x=1725553262;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=1417iHfAsksaScvKvXCXBdNMpo4U4hTv1s5FcTNNFmw=;
-        b=gZJR2PkwLwawdult5Ui2VVguelCv2QAWOqfqn79iUOYnZI63UQb9UFdQkvBahMr+b9
-         9O9UI7rwdzQHnu3L2/UFQLQq+770euAtCUU5UBTHU+PfPdwDfcN2bhQdgjfXKN2eeNPc
-         obLsfNH1RIbyoFIKgzW/jgdy3kIhEJ75Icap6Gkt/zYFSuIdOUvYHcTxaNn1qcrsuH07
-         n42hjhDQEg8F12mIo2oZhjRkYsUgm09ageMP5zgA2hK+I//1SlCG2DgahXyVLVKKARQi
-         Th9UgtcUypzk3AR2Ugd0v29yyNkMpzbHrQgBjMG/L7M9W6cqwocKGbK9kSyL6Lce4FWz
-         X6XQ==
-X-Gm-Message-State: AOJu0YyNn2QsPWwgzz9WpxxGCGvHCpzIwIIUZ29+GyPw7dQfv8GQzj5H
-	P+eQqGOTmFzQS9nL318lvKDCqSHZ4dORu9pv7NFXPL+znCgB/6qh88BMa+BDNwUGid+g+pny7aL
-	j
-X-Google-Smtp-Source: AGHT+IHlq8TknmJfS/JOfizefL+Wr6wYKFsL4hlECpLvhyD2SO7DVZCEnPl9wHvdnvo/IcZrYB9/AA==
-X-Received: by 2002:a05:6000:1569:b0:36b:3384:40e5 with SMTP id ffacd0b85a97d-3749b5486f4mr2943282f8f.24.1724948461454;
-        Thu, 29 Aug 2024 09:21:01 -0700 (PDT)
-Received: from P-ASN-MOON.idf.intranet (static-css-ccs-204145.business.bouyguestelecom.com. [176.157.204.145])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3749ef7e933sm1787047f8f.87.2024.08.29.09.21.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Aug 2024 09:21:00 -0700 (PDT)
-From: alexandre.truong@smile.fr
-To: openembedded-devel@lists.openembedded.org
-Cc: Alexandre Truong <alexandre.truong@smile.fr>,
-	Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-oe][PATCH] pegtl: add ptest support
-Date: Thu, 29 Aug 2024 18:20:46 +0200
-Message-Id: <20240829162046.49426-1-alexandre.truong@smile.fr>
-X-Mailer: git-send-email 2.34.1
+        d=1e100.net; s=20230601; t=1724949400; x=1725554200;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=hDCJE9iXd6XqdYTk6jR37clZOgQHTJJt86G1Zdq3PB0=;
+        b=e5ITTT5TgQaOV0mNmShs2RfPBhuAg6hN9YTQuItAvNAy7MVR/s92dP3z/ScDZfpx3D
+         AzZtdomkHu1Y/D2/VHnWb4zwK3XjGdLh64qYwjwnWOaWtZfL1E5oNL1rc1hlVr96ztYU
+         EutC+PfNW3opPburcJ4vDJGogoDAblivTNtl+79O+P5+x/0/b+3BBBtOB9KrbgW6P59a
+         rQjNesBi3kscT3t0uBi6BOa9n6W4m4hG0epX682GrS240kUnjNhSz+JvgR6T+B/i2RC5
+         YI+OzHilJsyb4pPU2BHfkFPUWJXQ7e9eFl0fttzBc4EWdZ4t2+ZC5kKAa9o2r8NIUFkA
+         E8nA==
+X-Gm-Message-State: AOJu0YwJH86zdvKqJTV7c+YAHHKqggMqZhGBFFPU/y6mAtIVGUnu0hzS
+	jCRfQJ9MiiPiEM5eDfcPGmUIWYIC07qpQiNu3Fj9p2Tu0Qi9cadp6jq+x+Jvx9H1G4rHsm9s+yg
+	vno6gqS5oPBtSpOm6EFyhm75EhTU=
+X-Google-Smtp-Source: AGHT+IFDY66/GAeqGpbS7mlSNpBKvVDKIaR1zldPfNdLWpxvQyRKxuJd3L/8D2XD5he4IgottD6M89E+hBN+LJQdl6w=
+X-Received: by 2002:a05:6871:149:b0:261:23f6:78d with SMTP id
+ 586e51a60fabf-2779031b5f7mr3790150fac.41.1724949400428; Thu, 29 Aug 2024
+ 09:36:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240829162046.49426-1-alexandre.truong@smile.fr>
+In-Reply-To: <20240829162046.49426-1-alexandre.truong@smile.fr>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 29 Aug 2024 09:36:14 -0700
+Message-ID: <CAMKF1sobQkKho_g5ZBXG+qESxf-8bhsyqgfv=uBSh6mG_8hV+g@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] pegtl: add ptest support
+To: alexandre.truong@smile.fr
+Cc: openembedded-devel@lists.openembedded.org, 
+	Yoann Congal <yoann.congal@smile.fr>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 29 Aug 2024 16:21:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112035
+ <openembedded-devel@lists.openembedded.org>; Thu, 29 Aug 2024 16:36:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112036
 
-From: Alexandre Truong <alexandre.truong@smile.fr>
+Thanks for adding to ptests, it's quite an important part of the project
+Its not clear if the test was run on recipe specific ptest image or
+part of some larger general purpose image.
 
-Test added to the fast-list.
+e.g. for MACHINE=3Dqemux86-64
 
-Result of ptest-runner:
+bitbake meta-oe-image-ptest-pegtl
 
-root@qemux86-64:~# ptest-runner pegtl
-START: ptest-runner
-2024-08-29T13:57
-BEGIN: /usr/lib/pegtl/ptest
-PASS: src/test/pegtl/pegtl-test-action_enable
-PASS: src/test/pegtl/pegtl-test-action_match
-PASS: src/test/pegtl/pegtl-test-actions_one
-[...]
-PASS: src/test/pegtl/pegtl-test-utf8_general
-PASS: src/test/pegtl/pegtl-test-visit
-PASS: All 128 tests passed
-DURATION: 4
-END: /usr/lib/pegtl/ptest
-2024-08-29T13:57
-STOP: ptest-runner
-TOTAL: 1 FAIL: 0
+would build it and
 
-NB: two tests are being skipped with a exception raised as support is disabled
+bitbake meta-oe-image-ptest-pegtl -ctestimage
 
-Exception support disabled, skipping test...
-PASS: src/test/pegtl/pegtl-test-internal_file_mapper
-Exception support disabled, skipping test...
-PASS: src/test/pegtl/pegtl-test-internal_file_opener
+would run it.
 
-Signed-off-by: Alexandre Truong <alexandre.truong@smile.fr>
-Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
----
- .../include/ptest-packagelists-meta-oe.inc    |  1 +
- .../recipes-extended/pegtl/pegtl/run-ptest    | 23 +++++++++++++++++++
- meta-oe/recipes-extended/pegtl/pegtl_3.2.7.bb | 15 ++++++++++--
- 3 files changed, 37 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-extended/pegtl/pegtl/run-ptest
+This is to ensure that recipe includes all the needed rdeps for ptests to r=
+un
 
-diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-index 01bf975a15..0ea43f5972 100644
---- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-+++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-@@ -33,6 +33,7 @@ PTESTS_FAST_META_OE = "\
-     nodejs \
-     onig \
-     oprofile \
-+    pegtl \
-     protobuf \
-     pv \
-     python3-pefile \
-diff --git a/meta-oe/recipes-extended/pegtl/pegtl/run-ptest b/meta-oe/recipes-extended/pegtl/pegtl/run-ptest
-new file mode 100644
-index 0000000000..e819628c9f
---- /dev/null
-+++ b/meta-oe/recipes-extended/pegtl/pegtl/run-ptest
-@@ -0,0 +1,23 @@
-+#!/bin/sh
-+
-+fail_count=0
-+all_count=0
-+
-+for test_suite in src/test/pegtl/pegtl-test-*
-+do
-+    if "./$test_suite"
-+    then
-+        echo "PASS: $test_suite"
-+    else
-+        echo "FAIL: $test_suite"
-+        fail_count=$((fail_count + 1))
-+    fi
-+    all_count=$((all_count + 1))
-+done
-+
-+if [ $fail_count -eq 0 ]
-+then
-+    echo "PASS: All $all_count tests passed"
-+else
-+    echo "FAIL: $fail_count of $all_count tests failed"
-+fi
-diff --git a/meta-oe/recipes-extended/pegtl/pegtl_3.2.7.bb b/meta-oe/recipes-extended/pegtl/pegtl_3.2.7.bb
-index 237828dbfc..2e32e3e788 100644
---- a/meta-oe/recipes-extended/pegtl/pegtl_3.2.7.bb
-+++ b/meta-oe/recipes-extended/pegtl/pegtl_3.2.7.bb
-@@ -3,11 +3,22 @@ HOMEPAGE="https://github.com/taocpp/PEGTL"
- LICENSE="MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=dccf35ef30bf912bb07b01d469965293"
- 
--SRC_URI = "git://github.com/taocpp/PEGTL.git;protocol=https;branch=3.x"
-+SRC_URI = " \
-+	git://github.com/taocpp/PEGTL.git;protocol=https;branch=3.x \
-+	file://run-ptest \
-+"
-+
- SRCREV = "cf639f7f4ee125f68e1ccfba8d99ebc0de57b9fe"
- 
--inherit cmake
-+inherit cmake ptest
- 
- S = "${WORKDIR}/git"
- 
-+do_install_ptest () {
-+    install -d ${D}${PTEST_PATH}/src/test/pegtl/data
-+    install -m 0755 ${B}/src/test/pegtl/pegtl-test-* ${D}${PTEST_PATH}/src/test/pegtl
-+    install ${S}/src/test/pegtl/file_*.txt ${D}${PTEST_PATH}/src/test/pegtl
-+    install ${S}/src/test/pegtl/data/*.json ${D}${PTEST_PATH}/src/test/pegtl/data
-+}
-+
- CXXFLAGS += " -Wno-error=type-limits"
+On Thu, Aug 29, 2024 at 9:21=E2=80=AFAM Alexandre Truong via
+lists.openembedded.org
+<alexandre.truong=3Dsmile.fr@lists.openembedded.org> wrote:
+>
+> From: Alexandre Truong <alexandre.truong@smile.fr>
+>
+> Test added to the fast-list.
+>
+> Result of ptest-runner:
+>
+> root@qemux86-64:~# ptest-runner pegtl
+> START: ptest-runner
+> 2024-08-29T13:57
+> BEGIN: /usr/lib/pegtl/ptest
+> PASS: src/test/pegtl/pegtl-test-action_enable
+> PASS: src/test/pegtl/pegtl-test-action_match
+> PASS: src/test/pegtl/pegtl-test-actions_one
+> [...]
+> PASS: src/test/pegtl/pegtl-test-utf8_general
+> PASS: src/test/pegtl/pegtl-test-visit
+> PASS: All 128 tests passed
+> DURATION: 4
+> END: /usr/lib/pegtl/ptest
+> 2024-08-29T13:57
+> STOP: ptest-runner
+> TOTAL: 1 FAIL: 0
+>
+> NB: two tests are being skipped with a exception raised as support is dis=
+abled
+>
+> Exception support disabled, skipping test...
+> PASS: src/test/pegtl/pegtl-test-internal_file_mapper
+> Exception support disabled, skipping test...
+> PASS: src/test/pegtl/pegtl-test-internal_file_opener
+>
+> Signed-off-by: Alexandre Truong <alexandre.truong@smile.fr>
+> Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
+> ---
+>  .../include/ptest-packagelists-meta-oe.inc    |  1 +
+>  .../recipes-extended/pegtl/pegtl/run-ptest    | 23 +++++++++++++++++++
+>  meta-oe/recipes-extended/pegtl/pegtl_3.2.7.bb | 15 ++++++++++--
+>  3 files changed, 37 insertions(+), 2 deletions(-)
+>  create mode 100644 meta-oe/recipes-extended/pegtl/pegtl/run-ptest
+>
+> diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-o=
+e/conf/include/ptest-packagelists-meta-oe.inc
+> index 01bf975a15..0ea43f5972 100644
+> --- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+> +++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+> @@ -33,6 +33,7 @@ PTESTS_FAST_META_OE =3D "\
+>      nodejs \
+>      onig \
+>      oprofile \
+> +    pegtl \
+>      protobuf \
+>      pv \
+>      python3-pefile \
+> diff --git a/meta-oe/recipes-extended/pegtl/pegtl/run-ptest b/meta-oe/rec=
+ipes-extended/pegtl/pegtl/run-ptest
+> new file mode 100644
+> index 0000000000..e819628c9f
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/pegtl/pegtl/run-ptest
+> @@ -0,0 +1,23 @@
+> +#!/bin/sh
+> +
+> +fail_count=3D0
+> +all_count=3D0
+> +
+> +for test_suite in src/test/pegtl/pegtl-test-*
+> +do
+> +    if "./$test_suite"
+> +    then
+> +        echo "PASS: $test_suite"
+> +    else
+> +        echo "FAIL: $test_suite"
+> +        fail_count=3D$((fail_count + 1))
+> +    fi
+> +    all_count=3D$((all_count + 1))
+> +done
+> +
+> +if [ $fail_count -eq 0 ]
+> +then
+> +    echo "PASS: All $all_count tests passed"
+> +else
+> +    echo "FAIL: $fail_count of $all_count tests failed"
+> +fi
+> diff --git a/meta-oe/recipes-extended/pegtl/pegtl_3.2.7.bb b/meta-oe/reci=
+pes-extended/pegtl/pegtl_3.2.7.bb
+> index 237828dbfc..2e32e3e788 100644
+> --- a/meta-oe/recipes-extended/pegtl/pegtl_3.2.7.bb
+> +++ b/meta-oe/recipes-extended/pegtl/pegtl_3.2.7.bb
+> @@ -3,11 +3,22 @@ HOMEPAGE=3D"https://github.com/taocpp/PEGTL"
+>  LICENSE=3D"MIT"
+>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddccf35ef30bf912bb07b01d469965=
+293"
+>
+> -SRC_URI =3D "git://github.com/taocpp/PEGTL.git;protocol=3Dhttps;branch=
+=3D3.x"
+> +SRC_URI =3D " \
+> +       git://github.com/taocpp/PEGTL.git;protocol=3Dhttps;branch=3D3.x \
+> +       file://run-ptest \
+> +"
+> +
+>  SRCREV =3D "cf639f7f4ee125f68e1ccfba8d99ebc0de57b9fe"
+>
+> -inherit cmake
+> +inherit cmake ptest
+>
+>  S =3D "${WORKDIR}/git"
+>
+> +do_install_ptest () {
+> +    install -d ${D}${PTEST_PATH}/src/test/pegtl/data
+> +    install -m 0755 ${B}/src/test/pegtl/pegtl-test-* ${D}${PTEST_PATH}/s=
+rc/test/pegtl
+> +    install ${S}/src/test/pegtl/file_*.txt ${D}${PTEST_PATH}/src/test/pe=
+gtl
+> +    install ${S}/src/test/pegtl/data/*.json ${D}${PTEST_PATH}/src/test/p=
+egtl/data
+> +}
+> +
+>  CXXFLAGS +=3D " -Wno-error=3Dtype-limits"
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#112035): https://lists.openembedded.org/g/openembedde=
+d-devel/message/112035
+> Mute This Topic: https://lists.openembedded.org/mt/108164523/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
