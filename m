@@ -2,85 +2,137 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5133ECA0EF5
-	for <webhook@archiver.kernel.org>; Fri, 30 Aug 2024 08:41:57 +0000 (UTC)
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
- by mx.groups.io with SMTP id smtpd.web11.8393.1725007308935175770
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D87FCA0EF6
+	for <webhook@archiver.kernel.org>; Fri, 30 Aug 2024 08:52:27 +0000 (UTC)
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web11.8524.1725007938424890318
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Aug 2024 01:41:49 -0700
+ Fri, 30 Aug 2024 01:52:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dcQzhB/Q;
- spf=pass (domain: gmail.com, ip: 209.85.208.43, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-58ef19aa69dso1459953a12.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Aug 2024 01:41:48 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jI07S9qr;
+ spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-a867a564911so189633166b.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Aug 2024 01:52:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1725007307; x=1725612107; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1725007936; x=1725612736; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=YrlSJ6ClxFBIAfstDZVgAd0u0dKu+wtsbdzjCapNDYw=;
-        b=dcQzhB/Q2FAtBN0V/2tLubWWj5Ly2Z4YDWZwUeNBwXycMSLKJFZ1onN5YKe/FCAg4I
-         qYgML6ok+nxBeXNKvns/qtyGOI9a9KCWelMj2dMdGuKATyPNqyV46Em5w8TH2VWSQ4mc
-         A1HdvnXqi3CmQpkNadKKZs/4EH1TdTNY3U2zPVvwWnNR9GqDYDy1fworIVqurkTU5tx+
-         f5mNaTW914+433SSaFF291IWl4G4BNYkPgGYB/HpMGCx5UV/hpiawUD6Hl8HS5N5piOP
-         4Dyli6tIB9fiplOx6aHRIGQFAm7q+Xf9jwXFdLzMTuW1ZSPMxgJDiu58sxgEaUy4vZPd
-         Yamw==
+        bh=X4IGNtknzoItpPdy3MhAl7yaCfq106JyVYMIOcFm3Zg=;
+        b=jI07S9qrSyefdvWTCvUDNeuJFpEc7g059kQaElwwk1ABxXbhJ6poKarbfXzetZ9hOK
+         2JxCQ3ss+M5XtDZXKrQpUUbySDUnnZRlRZ+o9RS8PMB+S/jziG7Hj5lU8f2mibnnruNV
+         s2cqj6iT0H0AQxirJKkI+5f9eXVgDVKraMWg7r0xCu5vU6qJbb6j50vEQPIbz4cxxx/O
+         7pHfjBrVNUM5ezRzIBsKJwYK10EGIHysUGhIvC5eOtwL5vk/qrFaFHwBCpPpdnda+nXI
+         oPVBaSvcAJg2a685QHIbB3Zod3E4rQ+OsjkBO6NjJPZFKVmRyn3Zgj563UB2+WrYqvqq
+         niKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725007307; x=1725612107;
+        d=1e100.net; s=20230601; t=1725007936; x=1725612736;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=YrlSJ6ClxFBIAfstDZVgAd0u0dKu+wtsbdzjCapNDYw=;
-        b=kcA54xsbwgbQym9Y0q+IsvgOLqRcK7aHCDVPZNmwQ1HCt++/r3TPMoDwgxv/y0DD+H
-         WiPAyZb7S2ai85VIxCasRJrs02l5w0epJPsoShASkJZD3OYYhaZ/VnA1+BL0xHrINAmD
-         lYF/PAQvMKdYHH7gCvebmfjntQohc4VnwArRvTXoA14HsRz8a5hNH4jTFcm5dzBQsQ1p
-         815Y9sqrhDdHw1MTceyUefPaIr+YPRm3nKtETrwr5b5hMX6CR5i0x6uDt9NIFvzLnaQS
-         wXoBlh0bxetgoRdKFwbSMz0AdmL7NZ8dUHC+EAHbsyXhMtO6dSSzJHqJl/WZQgl+opOn
-         +tQg==
-X-Gm-Message-State: AOJu0YyR6A1NdsscJfEtk+oSYsoYM8S/+Y//yuhr1aYdcH2n9CZV74F4
-	cDYTNblS8R4knt9mBXi4gWLRkQ7T5PUjdthwlNUK5OyO4GdyY8KMqMZlFw==
-X-Google-Smtp-Source: AGHT+IHeKCTJRpPQXVq0/oFefFLyVUH55eDXZsHmeYFXJ+4yoplbryLfGT2XEg18iR4bn6zknzI7cA==
-X-Received: by 2002:a05:6402:280a:b0:5be:eb9b:b72a with SMTP id 4fb4d7f45d1cf-5c21ed3811emr4687414a12.6.1725007306608;
-        Fri, 30 Aug 2024 01:41:46 -0700 (PDT)
+        bh=X4IGNtknzoItpPdy3MhAl7yaCfq106JyVYMIOcFm3Zg=;
+        b=pUzi/2GpyFHDDzqp8JKfySzbee0pfp1GKDSkTHPugl12ZRhw5pIoJ9LemhPwVbuKF+
+         KcTOkxteEAHjvj4nTk2172eqnhNEtl3HD0Xu7FmjCOW2n1a8uLjnyKHmI3YA9XW4qhca
+         E65xolqpMvC9waOlt0NWbsoHOAkPTcAJqbg4ECneBadiWKj05IXLOhxOZJrZ5Jaub804
+         wNiCOZxUc+KjgSJeythcOReIfZE2JFqGfD5WDtd1Tl2dO2Kwp1t8HpimorpQapibvOpi
+         TuPKVo+fttAM8GUKTQa7C178ME1hzLjMk/G5D9s/Mu3mWlPZyIXGOQ3lC7t9FVvG+0nR
+         EXVQ==
+X-Gm-Message-State: AOJu0Yx4rL9bStS11E3nC2WbJiKZHl7vLb0NtPyhR/nXturQfDTWjs85
+	pBDNzG/2xrAwWz8EycZxLIlVtmcUep2vP0NNQflshdgfnRHLIE8veKJaUA==
+X-Google-Smtp-Source: AGHT+IHF9Ntaeed91x+X6I+OSjh/Hk+v6WIQba1ZMcVH1QqAZAxtI/nXGMu8ckYsh872QwXZ3piFQw==
+X-Received: by 2002:a17:907:7ba1:b0:a7a:97ca:3059 with SMTP id a640c23a62f3a-a897f8e2ef7mr432741466b.34.1725007935953;
+        Fri, 30 Aug 2024 01:52:15 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5c226c7cfdasm1687596a12.58.2024.08.30.01.41.46
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a8989008c8dsm188615966b.46.2024.08.30.01.52.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 30 Aug 2024 01:41:46 -0700 (PDT)
+        Fri, 30 Aug 2024 01:52:15 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] gpm: fix buildpaths QA issue
-Date: Fri, 30 Aug 2024 10:41:39 +0200
-Message-ID: <20240830084139.2931958-1-martin.jansa@gmail.com>
+Cc: mikko.rapeli@linaro.org,
+	akuster808@gmail.com,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][RFC][PATCH] gcab: fix buildpaths QA issue
+Date: Fri, 30 Aug 2024 10:52:09 +0200
+Message-ID: <20240830085209.2944457-1-martin.jansa@gmail.com>
 X-Mailer: git-send-email 2.46.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 30 Aug 2024 08:41:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112051
+ <openembedded-devel@lists.openembedded.org>; Fri, 30 Aug 2024 08:52:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112052
 
 Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- meta-oe/recipes-support/gpm/gpm_git.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+RFC: sending as a RFC because Mikko claimed that meson generates the full path by purpose
 
-diff --git a/meta-oe/recipes-support/gpm/gpm_git.bb b/meta-oe/recipes-support/gpm/gpm_git.bb
-index 25e5414a35..a066488649 100644
---- a/meta-oe/recipes-support/gpm/gpm_git.bb
-+++ b/meta-oe/recipes-support/gpm/gpm_git.bb
-@@ -24,6 +24,10 @@ inherit autotools-brokensep update-rc.d systemd texinfo
- INITSCRIPT_NAME = "gpm"
- INITSCRIPT_PARAMS = "defaults"
- 
-+# Avoid line statements with bison/yacc
-+# ERROR: lib32-gpm-1.99.7+gite82d1a653ca94aa4ed12441424da6ce780b1e530-r0 do_package_qa: QA Issue: File /usr/src/debug/lib32-gpm/1.99.7+gite82d1a653ca94aa4ed12441424da6ce780b1e530/src/prog/gpm-root.c in package lib32-gpm-src contains reference to TMPDIR [buildpaths]
-+EXTRA_OEMAKE = "YFLAGS='-l'"
+ ...mplate-include-basename-instead-of-f.patch | 37 +++++++++++++++++++
+ meta-oe/recipes-gnome/gcab/gcab_1.6.bb        |  6 +--
+ 2 files changed, 38 insertions(+), 5 deletions(-)
+ create mode 100644 meta-oe/recipes-gnome/gcab/gcab/0001-gcab-enums.c.etemplate-include-basename-instead-of-f.patch
+
+diff --git a/meta-oe/recipes-gnome/gcab/gcab/0001-gcab-enums.c.etemplate-include-basename-instead-of-f.patch b/meta-oe/recipes-gnome/gcab/gcab/0001-gcab-enums.c.etemplate-include-basename-instead-of-f.patch
+new file mode 100644
+index 0000000000..dd6ae1b427
+--- /dev/null
++++ b/meta-oe/recipes-gnome/gcab/gcab/0001-gcab-enums.c.etemplate-include-basename-instead-of-f.patch
+@@ -0,0 +1,37 @@
++From 6fa1b6d3f72caf6d0cf61752b522dc19fb9933b7 Mon Sep 17 00:00:00 2001
++From: Martin Jansa <martin.jansa@gmail.com>
++Date: Fri, 30 Aug 2024 10:44:17 +0200
++Subject: [PATCH] gcab-enums.c.etemplate: include @basename@ instead of full
++ path from @filename@
 +
- do_configure:prepend() {
-     (cd ${S};./autogen.sh;cd -)
- }
--- 
-2.46.0
-
++* fixes:
++  ERROR: QA Issue: File /usr/src/debug/gcab/1.6/libgcab/gcab-enums.c in package gcab-src contains reference to TMPDIR [buildpaths]
++
++lib32-gcab/1.6/package $ grep -R styhead .
++./usr/src/debug/lib32-gcab/1.6/libgcab/gcab-enums.c:#include "WORKDIR/build/../gcab-1.6/libgcab/gcab-file.h"
++./usr/src/debug/lib32-gcab/1.6/libgcab/gcab-enums.c:#include "WORKDIR/build/../gcab-1.6/libgcab/gcab-folder.h"
++
++glib-mkenum supports also @basename@ since 2.22 which would avoid this QA issue
++  @filename@            name of current input file
++  @basename@            base name of the current input file (Since: 2.22)
++
++Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
++---
++Upstream-Status: Pending
++
++ libgcab/gcab-enums.c.etemplate | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/libgcab/gcab-enums.c.etemplate b/libgcab/gcab-enums.c.etemplate
++index 194b1e0..2e85824 100644
++--- a/libgcab/gcab-enums.c.etemplate
+++++ b/libgcab/gcab-enums.c.etemplate
++@@ -21,7 +21,7 @@
++ /*** END file-header ***/
++ 
++ /*** BEGIN file-production ***/
++-#include "@filename@"
+++#include "@basename@"
++ /*** END file-production ***/
++ 
++ 
+diff --git a/meta-oe/recipes-gnome/gcab/gcab_1.6.bb b/meta-oe/recipes-gnome/gcab/gcab_1.6.bb
+index 0d9410b4d5..503d25271f 100644
+--- a/meta-oe/recipes-gnome/gcab/gcab_1.6.bb
++++ b/meta-oe/recipes-gnome/gcab/gcab_1.6.bb
+@@ -7,6 +7,7 @@ DEPENDS = "glib-2.0"
+ 
+ SRC_URI = "\
+     ${GNOME_MIRROR}/gcab/${PV}/gcab-${PV}.tar.xz \
++    file://0001-gcab-enums.c.etemplate-include-basename-instead-of-f.patch \
+     file://run-ptest \
+ "
+ SRC_URI[sha256sum] = "2f0c9615577c4126909e251f9de0626c3ee7a152376c15b5544df10fc87e560b"
+@@ -22,8 +23,3 @@ PACKAGECONFIG[nls] = "-Dnls=true,-Dnls=false"
+ PACKAGECONFIG[tests] = "-Dtests=true -Dinstalled_tests=true,-Dtests=false -Dinstalled_tests=false"
+ 
+ BBCLASSEXTEND = "native"
+-
+-# meson embeds absolute paths to generated files on purpose
+-# ERROR: QA Issue: File /usr/src/debug/gcab/1.6/libgcab/gcab-enums.c in package gcab-src contains reference to TMPDIR [buildpaths]
+-ERROR_QA:remove = "buildpaths"
+-WARN_QA:append = " buildpaths"
 
