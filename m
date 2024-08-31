@@ -1,92 +1,82 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B141CA101B
-	for <webhook@archiver.kernel.org>; Fri, 30 Aug 2024 22:13:41 +0000 (UTC)
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com [209.85.128.68])
- by mx.groups.io with SMTP id smtpd.web11.3509.1725056013944729545
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B5082CD13DA
+	for <webhook@archiver.kernel.org>; Sat, 31 Aug 2024 15:41:38 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web10.7564.1725118897981326186
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Aug 2024 15:13:34 -0700
+ Sat, 31 Aug 2024 08:41:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=EGoyS/8b;
- spf=pass (domain: smile.fr, ip: 209.85.128.68, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f68.google.com with SMTP id 5b1f17b1804b1-42bbc70caa4so8644795e9.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Aug 2024 15:13:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1725056012; x=1725660812; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ByjgvAjdgomV4ltufL+cewgr6SK/FIs0RprI3BhyhHo=;
-        b=EGoyS/8bZU4TS+Z6nP/EIwzv5zSpuVpjl2LsqY0oOQawz94v6djtmkFUHhp58knocq
-         U0EiVdA/wZ2I8ofO4qxlJjms4lc96kBMT7YM4DYz5v5KbjSVAaAYAkBUDfCmYjkQ5ExL
-         kKXQ4DmJXP45oif9vXz0h4b6KK8W2OGnbA1U8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725056012; x=1725660812;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ByjgvAjdgomV4ltufL+cewgr6SK/FIs0RprI3BhyhHo=;
-        b=tO2BjzoS/EY8CfyoOwTj3pUh/I+ed8gBR/uEq5w2fLdZ/agahXJfyWBuemC58dUqAr
-         PZJKueotn+LByndARSoaJhTHvkxR55teIzo+PMFoQwpX3PouXOTN5fYPfNsT+Qi10b0+
-         eQlEaR3Ktrac5zhCsWz2sl3s3mlhgFOiGgYIcnn/9W9ct3M4ROaJ5Izz+YkE48+25x9q
-         2r8reOioiL+02Os6yAIhQTaDhlHZhSZYGPdJQk5EjeQPSZGMVR3fCeYxGBQ3dRlNFnpD
-         q+QyiqD0a8gP7o55ZGtkk4YKnxJB2YaKwf7wMY0IFNIFbBKeG/ntzwIeNol+CfnAQph6
-         /UpQ==
-X-Gm-Message-State: AOJu0Yw+Jephv06sPwK9MOQWq2uan/DIWJC2xoCARXfxxkiNUjJBd+jk
-	QEV5GBJoBUSr7O7VhaKsHA41E2Wk9cpEYIzenqL8V3KnmsicY/bu7u+niyQdtcb1/0TMQIdhuXg
-	dYge5zA==
-X-Google-Smtp-Source: AGHT+IFKwNZvWDMpZnMHpHFaoiKPyalFpAZRk5dKhteZ5aPmwX4UmVsJJIUzO1y9uNQoQLtSDMtROw==
-X-Received: by 2002:a05:600c:354b:b0:42b:afa7:804e with SMTP id 5b1f17b1804b1-42bb01ae418mr57513345e9.3.1725056011564;
-        Fri, 30 Aug 2024 15:13:31 -0700 (PDT)
-Received: from P-ASN-ECS-830T8C3.local (53.1.159.89.rev.sfr.net. [89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-42bb6df100csm57825945e9.20.2024.08.30.15.13.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 30 Aug 2024 15:13:31 -0700 (PDT)
-From: Yoann Congal <yoann.congal@smile.fr>
-To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-initramfs][PATCH] klibc: fix debug pkgs reproducibility
-Date: Sat, 31 Aug 2024 00:13:03 +0200
-Message-Id: <20240830221302.1429274-1-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.2
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=tkhqp2aU;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47VFfadU002861;
+	Sat, 31 Aug 2024 10:41:36 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1725118896;
+	bh=HQUIV4879llcPl/QmygE6ApuJQP7Rv+pg/bBCkwxPNI=;
+	h=Date:Subject:To:References:From:In-Reply-To;
+	b=tkhqp2aUC6qxOOOH/bFfz+mrOIiphiXD/KorEkvsln5wlKdiKQQpzWYp8NZn+brxz
+	 n9tFP+qzUeyRKvcBqYC/OmqceItfFFaqOEt1veGyJtk611FTyhu5gKY1udFYl1COfv
+	 /uOY3b/ldtQ5KGg3GBhc7OsO7+nR65zSei6AOY0c=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47VFfauQ011907
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Sat, 31 Aug 2024 10:41:36 -0500
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 31
+ Aug 2024 10:41:36 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Sat, 31 Aug 2024 10:41:36 -0500
+Received: from [10.249.36.103] ([10.249.36.103])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47VFfaRT109614;
+	Sat, 31 Aug 2024 10:41:36 -0500
+Message-ID: <8c7ff1e0-6ef0-49e0-901f-7a5f94aead69@ti.com>
+Date: Sat, 31 Aug 2024 10:41:36 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH 5/8] mpv: Upgrade to 0.38.0 release
+To: Khem Raj <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
+References: <20240830035827.406391-1-raj.khem@gmail.com>
+ <20240830035827.406391-5-raj.khem@gmail.com>
+ <17F08A6E249C2A38.19027@lists.openembedded.org>
+Content-Language: en-US
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <17F08A6E249C2A38.19027@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 30 Aug 2024 22:13:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112059
+ <openembedded-devel@lists.openembedded.org>; Sat, 31 Aug 2024 15:41:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112060
 
-From: Yoann Congal <yoann.congal@smile.fr>
 
-Debug packages of klibc-based recipe contains reference to TMPDIR and
-fail to build since "buildpaths" is a ERROR_QA: For example, from [0]:
-stdio: ERROR: kexec-tools-klibc-2.0.18+git-r0 do_package_qa: QA Issue: File /usr/sbin/.debug/kexec in package kexec-tools-klibc-dbg contains reference to TMPDIR
-stdio: ERROR: kexecboot-klibc-0.6+git-r0 do_package_qa: QA Issue: File /usr/bin/.debug/kexecboot in package kexecboot-klibc-dbg contains reference to TMPDIR [buildpaths]
-stdio: ERROR: ubi-utils-klibc-2.0.2-r0 do_package_qa: QA Issue: File /usr/sbin/.debug/ubirename in package ubi-utils-klibc-dbg contains reference to TMPDIR
 
-Fix this by adding DEBUG_PREFIX_MAP to the klibc build CFLAGS to rewrite
-these paths in a reproducible way.
+On 8/30/2024 10:14 AM, Ryan Eatmon via lists.openembedded.org wrote:
+> 
+> 
 
-[0]: https://autobuilder.yoctoproject.org/typhoon/#/builders/155/builds/40
+> 
+>> +PACKAGECONFIG[x11] = "-Dx11=enabled,-Dx11=diabled,virtual/libx11 xsp 
+>> libxv libxscrnsaver libxinerama libxpresent libxext"
+> 
+> Mispelling on "diabled", should be "disabled".
+> 
 
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
----
- meta-initramfs/classes/klibc.bbclass | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Well... since the patch has already made it to master I'll send a new 
+patch that fixes this spelling mistake.
 
-diff --git a/meta-initramfs/classes/klibc.bbclass b/meta-initramfs/classes/klibc.bbclass
-index 202d132d94..ca50a3d431 100644
---- a/meta-initramfs/classes/klibc.bbclass
-+++ b/meta-initramfs/classes/klibc.bbclass
-@@ -9,7 +9,7 @@ CC:append:armv7ve = " ${@' -mfloat-abi=${TUNE_CCARGS_MFLOAT}' if (d.getVar('TUNE
- CC:append:armv7a = " ${@' -mfloat-abi=${TUNE_CCARGS_MFLOAT}' if (d.getVar('TUNE_CCARGS_MFLOAT') != '') else ''}"
- 
- # klcc uses own optimizations by default. See klcc(1) man file.
--export CFLAGS="${TUNE_CCARGS}"
-+export CFLAGS="${TUNE_CCARGS} ${DEBUG_PREFIX_MAP}"
- export CPPFLAGS="${TUNE_CCARGS}"
- export LDFLAGS="${TUNE_CCARGS}"
- 
+
+
+-- 
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
