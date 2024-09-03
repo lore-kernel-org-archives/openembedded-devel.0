@@ -1,210 +1,203 @@
-Return-Path: <soumya.sambu@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 73042CD342D
-	for <webhook@archiver.kernel.org>; Tue,  3 Sep 2024 12:53:10 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.22558.1725367986887428589
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CFB69CD3437
+	for <webhook@archiver.kernel.org>; Tue,  3 Sep 2024 14:04:30 +0000 (UTC)
+Received: from mail-oo1-f53.google.com (mail-oo1-f53.google.com [209.85.161.53])
+ by mx.groups.io with SMTP id smtpd.web10.24032.1725372261162443978
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Sep 2024 05:53:07 -0700
+ Tue, 03 Sep 2024 07:04:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=99761bc802=soumya.sambu@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 483507i4015477
-	for <openembedded-devel@lists.openembedded.org>; Tue, 3 Sep 2024 12:53:06 GMT
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 41brd1b0b7-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 03 Sep 2024 12:53:05 +0000 (GMT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Tue, 3 Sep 2024 05:53:04 -0700
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.39 via Frontend Transport; Tue, 3 Sep 2024 05:53:03 -0700
-From: ssambu <soumya.sambu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][scarthgap][PATCH 1/1] python3-flask-cors: Fix CVE-2024-6221
-Date: Tue, 3 Sep 2024 12:52:59 +0000
-Message-ID: <20240903125259.1364819-1-soumya.sambu@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PXNFaiqG;
+ spf=pass (domain: gmail.com, ip: 209.85.161.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f53.google.com with SMTP id 006d021491bc7-5df9343b5b8so3456703eaf.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Sep 2024 07:04:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1725372260; x=1725977060; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=9XHNK/9Ea+v0FrTezUUcCliax7mpVnX0A2OvZjzViS0=;
+        b=PXNFaiqG3DYPZKDIf4gHldyhaiWcemESBcs6X/038afS22xHIhgUlYLErVqYFwMEvi
+         eWEIlYICp3jUinecWFmTAPKHkqGTvPhpKpni1x2c7XYxH/UxzyXDVWrqIzn6V4Bdl1eR
+         EKjlXqHe2sY3Poh1ThbezDOq/wtXMgaKArbuuP37HqWi817V8f0L1uuQOAZVeaooJmMp
+         WO2dnQeUWznGTidPsnh5WS/EH67H0iY9zRTmkGb//CUwVR46yaD2OUhbc2jdLwI9/VSX
+         y6v2dAL7hWWXqidqceVee473YsRejisKFosTEPZOsvjREgQO/Ir8gD/4cbOFhs1SNIWo
+         2RyQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1725372260; x=1725977060;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=9XHNK/9Ea+v0FrTezUUcCliax7mpVnX0A2OvZjzViS0=;
+        b=S4NwrAf71NO34OfhIsnKSA5cG0DyWbr7cUIfyG+gZzZ/04sHTzQkfTKt8xYtAq1ygr
+         zuhe+njdkkhxOv+/EbWaBCBIHS8Y4iPh0N/+M1MoqCs7Gz/vU/6RfSwFB/meRlpf5psb
+         UrBCDDRtNtzxLhafyRo8pHSoQBr4RCh1nMWOMMClbIrWchxHi/rpg5kUxsj230qkarbf
+         WagLZYUZhDKXFU6zJxjqwsXW+M3BUHmCuzOse2s5vuRhfT+7fVFHRmpPdft975VRxcJm
+         HfGnzk3lkye/jyUj2kGhvkTOODVRE1U11JLRHBaVdGaVG9dNvrGANIaD9c1kqCuOX+ol
+         pBWQ==
+X-Gm-Message-State: AOJu0YxXHGCVR9qq9hrOvAHX19sYrg07k4l1+h6vgTzQXlqCXX1uJSE0
+	UWSfMKtKpdzz8urdyC0DDRokBvQHII1x/7W/9rg8TJC04T60xVFGwk5vDefek4dxyFqgkDZgq7t
+	PQqYnkTSYVgWpSanu342/prlahJM=
+X-Google-Smtp-Source: AGHT+IFCntDghRVFGVMU3ZK9PM8DsG7yV9iUYB61jMM79eA6FMWtyrF2kTJiPanlLp7kyGQ5k3KMVWHWpNNibeqE3z8=
+X-Received: by 2002:a05:6870:330c:b0:261:19a6:41ae with SMTP id
+ 586e51a60fabf-27810c181a6mr3706435fac.30.1725372260122; Tue, 03 Sep 2024
+ 07:04:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: ZSpYuZTQQtED-RE604bYv4XFKBKCE3zD
-X-Authority-Analysis: v=2.4 cv=Qdk0vdbv c=1 sm=1 tr=0 ts=66d706b1 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=EaEq8P2WXUwA:10 a=t7CeM3EgAAAA:8 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8 a=pGLkceISAAAA:8 a=SSmOFEACAAAA:8
- a=RZnEGdTo56iCx8orGTAA:9 a=lqcHg5cX4UMA:10 a=ImwWUX5h3JJ3gRE9moBe:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: ZSpYuZTQQtED-RE604bYv4XFKBKCE3zD
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-02_06,2024-09-03_01,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 adultscore=0
- phishscore=0 impostorscore=0 mlxlogscore=999 malwarescore=0
- lowpriorityscore=0 suspectscore=0 spamscore=0 bulkscore=0 clxscore=1015
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.21.0-2407110000 definitions=main-2409030104
+References: <20240903045247.275642-1-changqing.li@windriver.com>
+In-Reply-To: <20240903045247.275642-1-changqing.li@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 3 Sep 2024 07:03:53 -0700
+Message-ID: <CAMKF1sreQCYaJfH7iWN3-QF1i_c2gHgmB5ORiUw3d4BoofZEHA@mail.gmail.com>
+Subject: Re: [oe] [scarthgap][PATCH] mariadb: fix runtime failure on riscv
+To: changqing.li@windriver.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 03 Sep 2024 12:53:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112079
+ <openembedded-devel@lists.openembedded.org>; Tue, 03 Sep 2024 14:04:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112080
 
-From: Soumya Sambu <soumya.sambu@windriver.com>
+do we need this on master as well ? if so please rebase on master-next
+or master
 
-A vulnerability in corydolphin/flask-cors version 4.0.1 allows the
-`Access-Control-Allow-Private-Network` CORS header to be set to true
-by default, without any configuration option. This behavior can expose
-private network resources to unauthorized external access, leading to
-significant security risks such as data breaches, unauthorized access
-to sensitive information, and potential network intrusions.
-
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2024-6221
-
-Upsteam-Patch:
-https://github.com/corydolphin/flask-cors/commit/7ae310c56ac30e0b94fb42129aa377bf633256ec
-
-Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
----
- .../python3-flask-cors/CVE-2024-6221.patch    | 110 ++++++++++++++++++
- .../python/python3-flask-cors_4.0.0.bb        |   4 +
- 2 files changed, 114 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-flask-cors/CVE-2024-6221.patch
-
-diff --git a/meta-python/recipes-devtools/python/python3-flask-cors/CVE-2024-6221.patch b/meta-python/recipes-devtools/python/python3-flask-cors/CVE-2024-6221.patch
-new file mode 100644
-index 000000000..9049b2ffe
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-flask-cors/CVE-2024-6221.patch
-@@ -0,0 +1,110 @@
-+From 7ae310c56ac30e0b94fb42129aa377bf633256ec Mon Sep 17 00:00:00 2001
-+From: Adriano Sela Aviles <adriano.selaviles@gmail.com>
-+Date: Fri, 30 Aug 2024 12:14:31 -0400
-+Subject: [PATCH] Backwards Compatible Fix for CVE-2024-6221 (#363)
-+
-+CVE: CVE-2024-6221
-+
-+Upstream-Status: Backport [https://github.com/corydolphin/flask-cors/commit/7ae310c56ac30e0b94fb42129aa377bf633256ec]
-+
-+Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
-+---
-+ docs/configuration.rst  | 14 ++++++++++++++
-+ flask_cors/core.py      |  8 +++++---
-+ flask_cors/extension.py | 16 ++++++++++++++++
-+ 3 files changed, 35 insertions(+), 3 deletions(-)
-+
-+diff --git a/docs/configuration.rst b/docs/configuration.rst
-+index 91282d3..c750cf4 100644
-+--- a/docs/configuration.rst
-++++ b/docs/configuration.rst
-+@@ -23,6 +23,19 @@ CORS_ALLOW_HEADERS (:py:class:`~typing.List` or :py:class:`str`)
-+    Headers to accept from the client.
-+    Headers in the :http:header:`Access-Control-Request-Headers` request header (usually part of the preflight OPTIONS request) matching headers in this list will be included in the :http:header:`Access-Control-Allow-Headers` response header.
-+
-++CORS_ALLOW_PRIVATE_NETWORK (:py:class:`bool`)
-++   If True, the response header :http:header:`Access-Control-Allow-Private-Network`
-++   will be set with the value 'true' whenever the request header
-++   :http:header:`Access-Control-Request-Private-Network` has a value 'true'.
-++
-++   If False, the reponse header :http:header:`Access-Control-Allow-Private-Network`
-++   will be set with the value 'false' whenever the request header
-++   :http:header:`Access-Control-Request-Private-Network` has a value of 'true'.
-++
-++   If the request header :http:header:`Access-Control-Request-Private-Network` is
-++   not present or has a value other than 'true', the response header
-++   :http:header:`Access-Control-Allow-Private-Network` will not be set.
-++
-+ CORS_ALWAYS_SEND (:py:class:`bool`)
-+    Usually, if a request doesn't include an :http:header:`Origin` header, the client did not request CORS.
-+    This means we can ignore this request.
-+@@ -83,6 +96,7 @@ Default values
-+ ~~~~~~~~~~~~~~
-+
-+ * CORS_ALLOW_HEADERS: "*"
-++* CORS_ALLOW_PRIVATE_NETWORK: True
-+ * CORS_ALWAYS_SEND: True
-+ * CORS_AUTOMATIC_OPTIONS: True
-+ * CORS_EXPOSE_HEADERS: None
-+diff --git a/flask_cors/core.py b/flask_cors/core.py
-+index 5358036..bd011f4 100644
-+--- a/flask_cors/core.py
-++++ b/flask_cors/core.py
-+@@ -36,7 +36,7 @@ CONFIG_OPTIONS = ['CORS_ORIGINS', 'CORS_METHODS', 'CORS_ALLOW_HEADERS',
-+                   'CORS_MAX_AGE', 'CORS_SEND_WILDCARD',
-+                   'CORS_AUTOMATIC_OPTIONS', 'CORS_VARY_HEADER',
-+                   'CORS_RESOURCES', 'CORS_INTERCEPT_EXCEPTIONS',
-+-                  'CORS_ALWAYS_SEND']
-++                  'CORS_ALWAYS_SEND', 'CORS_ALLOW_PRIVATE_NETWORK']
-+ # Attribute added to request object by decorator to indicate that CORS
-+ # was evaluated, in case the decorator and extension are both applied
-+ # to a view.
-+@@ -56,7 +56,8 @@ DEFAULT_OPTIONS = dict(origins='*',
-+                        vary_header=True,
-+                        resources=r'/*',
-+                        intercept_exceptions=True,
-+-                       always_send=True)
-++                       always_send=True,
-++                       allow_private_network=True)
-+
-+
-+ def parse_resources(resources):
-+@@ -186,7 +187,8 @@ def get_cors_headers(options, request_headers, request_method):
-+
-+     if ACL_REQUEST_HEADER_PRIVATE_NETWORK in request_headers \
-+             and request_headers.get(ACL_REQUEST_HEADER_PRIVATE_NETWORK) == 'true':
-+-        headers[ACL_RESPONSE_PRIVATE_NETWORK] = 'true'
-++        allow_private_network = 'true' if options.get('allow_private_network') else 'false'
-++        headers[ACL_RESPONSE_PRIVATE_NETWORK] = allow_private_network
-+
-+     # This is a preflight request
-+     # http://www.w3.org/TR/cors/#resource-preflight-requests
-+diff --git a/flask_cors/extension.py b/flask_cors/extension.py
-+index c00cbff..694953f 100644
-+--- a/flask_cors/extension.py
-++++ b/flask_cors/extension.py
-+@@ -136,6 +136,22 @@ class CORS(object):
-+
-+         Default : True
-+     :type vary_header: bool
-++
-++    :param allow_private_network:
-++        If True, the response header `Access-Control-Allow-Private-Network`
-++        will be set with the value 'true' whenever the request header
-++        `Access-Control-Request-Private-Network` has a value 'true'.
-++
-++        If False, the reponse header `Access-Control-Allow-Private-Network`
-++        will be set with the value 'false' whenever the request header
-++        `Access-Control-Request-Private-Network` has a value of 'true'.
-++
-++        If the request header `Access-Control-Request-Private-Network` is
-++        not present or has a value other than 'true', the response header
-++        `Access-Control-Allow-Private-Network` will not be set.
-++
-++        Default : True
-++    :type allow_private_network: bool
-+     """
-+
-+     def __init__(self, app=None, **kwargs):
-+--
-+2.40.0
-diff --git a/meta-python/recipes-devtools/python/python3-flask-cors_4.0.0.bb b/meta-python/recipes-devtools/python/python3-flask-cors_4.0.0.bb
-index 1d0d86b4e..77b51c551 100644
---- a/meta-python/recipes-devtools/python/python3-flask-cors_4.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask-cors_4.0.0.bb
-@@ -9,6 +9,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=118fecaa576ab51c1520f95e98db61ce"
- 
- PYPI_PACKAGE = "Flask-Cors"
- 
-+SRC_URI += " \
-+        file://CVE-2024-6221.patch \
-+"
-+
- SRC_URI[sha256sum] = "f268522fcb2f73e2ecdde1ef45e2fd5c71cc48fe03cffb4b441c6d1b40684eb0"
- 
- inherit pypi setuptools3
--- 
-2.40.0
-
+On Mon, Sep 2, 2024 at 9:52=E2=80=AFPM Changqing Li via lists.openembedded.=
+org
+<changqing.li=3Dwindriver.com@lists.openembedded.org> wrote:
+>
+> From: Changqing Li <changqing.li@windriver.com>
+>
+> Starting with Linux 6.6, RDCYCLE is a privileged instruction on RISC-V
+> and can't be used directly from userland. This causes 'systemctl start
+> mysqld.service' failed with error:
+> [ 1456.918172] mariadbd[12115]: unhandled signal 4 code 0x1 at 0x00005555=
+8689d134 in mariadbd[555585bfa000+14a7000]
+> [ 1456.921772] CPU: 1 PID: 12115 Comm: mariadbd Not tainted 6.6.43-yocto-=
+standard #1
+> [ 1456.922327] Hardware name: riscv-virtio,qemu (DT)
+> [ 1456.923045] epc : 000055558689d134 ra : 000055558620ea48 sp : 00007fff=
+dc487770
+> [ 1456.923525]  gp : 00005555872ec400 tp : 00007fff89560780 t0 : 00005555=
+87be32e8
+> [ 1456.923951]  t1 : 0000555586886042 t2 : 000000002d6a89f0 s0 : 00007fff=
+dc4877b0
+>
+> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> ---
+>  meta-oe/recipes-dbs/mysql/mariadb.inc         |  1 +
+>  ...RISC-V-use-RDTIME-instead-of-RDCYCLE.patch | 66 +++++++++++++++++++
+>  2 files changed, 67 insertions(+)
+>  create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-RISC-V-use-RDT=
+IME-instead-of-RDCYCLE.patch
+>
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/=
+mysql/mariadb.inc
+> index 33da32fb2..124a49ff9 100644
+> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
+> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+> @@ -25,6 +25,7 @@ SRC_URI =3D "https://archive.mariadb.org/${BP}/source/$=
+{BP}.tar.gz \
+>             file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
+>             file://0001-Remove-the-compile_time_assert-lines.patch \
+>             file://0001-MDEV-33439-Fix-build-with-libxml2-2.12.patch \
+> +           file://0001-RISC-V-use-RDTIME-instead-of-RDCYCLE.patch \
+>            "
+>  SRC_URI:append:libc-musl =3D " file://ppc-remove-glibc-dep.patch"
+>  SRC_URI[sha256sum] =3D "5239a245ed90517e96396605cd01ccd8f73cd7442d1b3076=
+b6ffe258110e5157"
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-RISC-V-use-RDTIME-ins=
+tead-of-RDCYCLE.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-RISC-V-use-R=
+DTIME-instead-of-RDCYCLE.patch
+> new file mode 100644
+> index 000000000..25a2c399c
+> --- /dev/null
+> +++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-RISC-V-use-RDTIME-instead-of=
+-RDCYCLE.patch
+> @@ -0,0 +1,66 @@
+> +From 342f0dd9b4f9fc49dcb589cd98933ea330de55d8 Mon Sep 17 00:00:00 2001
+> +From: Aurelien Jarno <aurelien@aurel32.net>
+> +Date: Thu, 4 Jan 2024 11:30:34 +0100
+> +Subject: [PATCH] RISC-V: use RDTIME instead of RDCYCLE
+> +
+> +Starting with Linux 6.6 [1], RDCYCLE is a privileged instruction on
+> +RISC-V and can't be used directly from userland. There is a sysctl
+> +option to change that as a transition period, but it will eventually
+> +disappear.
+> +
+> +Use RDTIME instead, which while less accurate has the advantage of being
+> +synchronized between CPU (and thus monotonic) and of constant frequency.
+> +
+> +[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/c=
+ommit/?id=3Dcc4c07c89aada16229084eeb93895c95b7eabaa3
+> +
+> +Upstream-Status: Backport [https://github.com/MariaDB/server/commit/656f=
+8867720efc1b4dd0969319f35a3e1a2a005e]
+> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> +---
+> + include/my_rdtsc.h | 12 ++++++------
+> + 1 file changed, 6 insertions(+), 6 deletions(-)
+> +
+> +diff --git a/include/my_rdtsc.h b/include/my_rdtsc.h
+> +index 8b9b0046bc0..21e44847d9a 100644
+> +--- a/include/my_rdtsc.h
+> ++++ b/include/my_rdtsc.h
+> +@@ -111,7 +111,7 @@ C_MODE_START
+> +   On AARCH64, we use the generic timer base register. We override clang
+> +   implementation for aarch64 as it access a PMU register which is not
+> +   guaranteed to be active.
+> +-  On RISC-V, we use the rdcycle instruction to read from mcycle registe=
+r.
+> ++  On RISC-V, we use the rdtime instruction to read from mtime register.
+> +
+> +   Sadly, we have nothing for the Digital Alpha, MIPS, Motorola m68k,
+> +   HP PA-RISC or other non-mainstream (or obsolete) processors.
+> +@@ -211,15 +211,15 @@ static inline ulonglong my_timer_cycles(void)
+> +   }
+> + #elif defined(__riscv)
+> +   #define MY_TIMER_ROUTINE_CYCLES MY_TIMER_ROUTINE_RISCV
+> +-  /* Use RDCYCLE (and RDCYCLEH on riscv32) */
+> ++  /* Use RDTIME (and RDTIMEH on riscv32) */
+> +   {
+> + # if __riscv_xlen =3D=3D 32
+> +     ulong result_lo, result_hi0, result_hi1;
+> +     /* Implemented in assembly because Clang insisted on branching. */
+> +     __asm __volatile__(
+> +-        "rdcycleh %0\n"
+> +-        "rdcycle %1\n"
+> +-        "rdcycleh %2\n"
+> ++        "rdtimeh %0\n"
+> ++        "rdtime %1\n"
+> ++        "rdtimeh %2\n"
+> +         "sub %0, %0, %2\n"
+> +         "seqz %0, %0\n"
+> +         "sub %0, zero, %0\n"
+> +@@ -228,7 +228,7 @@ static inline ulonglong my_timer_cycles(void)
+> +     return (static_cast<ulonglong>(result_hi1) << 32) | result_lo;
+> + # else
+> +     ulonglong result;
+> +-    __asm __volatile__("rdcycle %0" : "=3Dr"(result));
+> ++    __asm __volatile__("rdtime %0" : "=3Dr"(result));
+> +     return result;
+> +   }
+> + # endif
+> +--
+> +2.25.1
+> +
+> --
+> 2.46.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#112078): https://lists.openembedded.org/g/openembedde=
+d-devel/message/112078
+> Mute This Topic: https://lists.openembedded.org/mt/108240112/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
