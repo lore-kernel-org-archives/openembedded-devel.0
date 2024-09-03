@@ -1,203 +1,197 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8093ACD13CF
-	for <webhook@archiver.kernel.org>; Mon,  2 Sep 2024 21:20:24 +0000 (UTC)
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
- by mx.groups.io with SMTP id smtpd.web11.9355.1725312018353318735
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D8C30CA0ED3
+	for <webhook@archiver.kernel.org>; Tue,  3 Sep 2024 01:24:55 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.13537.1725326689288849799
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Sep 2024 14:20:18 -0700
+ Mon, 02 Sep 2024 18:24:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=b7RGCcJm;
- spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-714186ce2f2so3757610b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Sep 2024 14:20:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1725312017; x=1725916817; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=vmreOKWNuHIGNwT8iZouBXPHlmSj5Bx9J6DSd9UPuPE=;
-        b=b7RGCcJmtpIBZXZZei2wClQata1U9Wxhy/HLMO3h92RLoQdKMyf4iGcJZcJ31fa4lo
-         Q5Kcp8LQHe/ifhogIlDEUVDNrCDVLQy0Ocq44vWvUANS6bZ8CWkq5bROD6fAA5c2IFgV
-         q4OrBH0cCL18E9GFjHR1ES7m4E4kcnxDSom4OrrlYPwHue+BiCWfUIws80veF4KKKExD
-         +JJD7TvTJJKTkQDd610u4s774KDNvCN5J6u0OW/nblI/5fYVyYpRvPgU1Icdx0ThNsRc
-         U+qPpXMHtwAnmrNpOTFzAGcSjRkJ3MN3wEMJkLZ+wy8AZd4Dz8LCqi1oeSf927gBDVpT
-         HlRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725312017; x=1725916817;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=vmreOKWNuHIGNwT8iZouBXPHlmSj5Bx9J6DSd9UPuPE=;
-        b=VSqbe/oQ78gjJAWTIQcVT3RYSEOqYehVXiDMDgNwu/8h49qw5+uSLj90bSXQGuClGa
-         oXSo58XIGlit1LoiyfuFzfg4TGz5hNVQ116FzJX57w8eXBNHrLoR0YVmg6NmXDFiBAy9
-         fjtWq+v+rSy9CSGFVrPP0SG9Via2arrr90vOvftU3RDAaaoNBIxKTe2YTB/cIyzPqzZt
-         C3fG0+ABG2JR5nguFx7rE5QblUK98Gv/TIjEY43JvvqN8VUwFdztxmSGPqV+lnn0RWlq
-         UKiCpWRQhQjbMAjE7+hxrgWENkKA0mxYkaM39/7kPMRW5lMGKv3ixwr5c/9e2Vg5BNO1
-         13Mw==
-X-Gm-Message-State: AOJu0YxIq7fdaykaJne9Trrx5XVF69f4CtLaUrjlee0qv+fKCHTLPp6T
-	DhjvW7vPGf4NZK83etWzFp1qwf4xKv4CIyPSxU/auBN0WsX1XmClVvpbGjdL6Bf5jmDb2wVWP7e
-	z35yhUdbV1+rxzKhxtJ/6MK2ugvYJzyG4
-X-Google-Smtp-Source: AGHT+IG4YAhvlOTWib69KacjtxJI9ByXvKFYLAwtLu1fDbb7NyM9CnfXezLKQyPpbdM8f/IYJxn4o0Ch3Tu7DxCFfoo=
-X-Received: by 2002:a05:6a20:9e49:b0:1ca:edd5:9254 with SMTP id
- adf61e73a8af0-1cce100b937mr13511684637.16.1725312017266; Mon, 02 Sep 2024
- 14:20:17 -0700 (PDT)
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=99768ab3d4=changqing.li@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4830j26u003766
+	for <openembedded-devel@lists.openembedded.org>; Tue, 3 Sep 2024 01:24:48 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 41brd1afrt-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 03 Sep 2024 01:24:48 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Mon, 2 Sep 2024 18:24:47 -0700
+Received: from pek-lpg-core2.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.39 via Frontend Transport; Mon, 2 Sep 2024 18:24:46 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] libdbi-perl: upgrade 1.643 -> 1.644
+Date: Tue, 3 Sep 2024 09:24:45 +0800
+Message-ID: <20240903012445.645317-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.46.0
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Mon, 2 Sep 2024 14:20:06 -0700
-Message-ID: <CAK5yBb-oyOcX8OCJseWqgj3YkiAyMwNmOCPLL7gkD5n+oWM5SA@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="000000000000ea8289062129818b"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: k5U-IGBb5NnCrrshDj0HQaQBpOEXyBPk
+X-Authority-Analysis: v=2.4 cv=Qdk0vdbv c=1 sm=1 tr=0 ts=66d66560 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=EaEq8P2WXUwA:10 a=t7CeM3EgAAAA:8 a=wyjpycHzAAAA:8 a=THEJL9P3AAAA:8 a=NEAV23lmAAAA:8 a=xNf9USuDAAAA:8 a=_ctWjzdLAAAA:8
+ a=eNcD7ojaAAAA:8 a=QSrlfhvblDVj6QQTTYgA:9 a=FdTzh2GWekK77mhwV6Dw:22 a=ROKTiUA5NBresHysc1Cf:22 a=9kzSNeRF1Bqm7BFd3Yff:22 a=WoGCsytTnHKj16XvecxK:22 a=rRYMMicksRHQPzyJ67jW:22
+X-Proofpoint-ORIG-GUID: k5U-IGBb5NnCrrshDj0HQaQBpOEXyBPk
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-02_06,2024-09-02_01,2024-09-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 adultscore=0
+ phishscore=0 impostorscore=0 mlxlogscore=999 malwarescore=0
+ lowpriorityscore=0 suspectscore=0 spamscore=0 bulkscore=0 clxscore=1015
+ priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2407110000 definitions=main-2409030009
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Sep 2024 21:20:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112076
+ <openembedded-devel@lists.openembedded.org>; Tue, 03 Sep 2024 01:24:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112077
 
---000000000000ea8289062129818b
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Changqing Li <changqing.li@windriver.com>
 
-All,
+* License-Update: Update years
+* Remove CVE-2014-10402.patch since it is not need for this version,
+refer [1]
+* Backport a patch
 
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
+[1] https://metacpan.org/dist/DBI/view/Changes#Changes-in-DBI-1.632-9th-Nov-2014
 
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ ...uilding-on-Fedora-40-with-GCC-14.2.1.patch | 28 ++++++++++
+ .../perl/libdbi-perl/CVE-2014-10402.patch     | 56 -------------------
+ ...dbi-perl_1.643.bb => libdbi-perl_1.644.bb} |  9 ++-
+ 3 files changed, 32 insertions(+), 61 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/0001-Fix-building-on-Fedora-40-with-GCC-14.2.1.patch
+ delete mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2014-10402.patch
+ rename meta-oe/recipes-devtools/perl/{libdbi-perl_1.643.bb => libdbi-perl_1.644.bb} (83%)
 
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 409
-unassigned or newcomer bugs.
+diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl/0001-Fix-building-on-Fedora-40-with-GCC-14.2.1.patch b/meta-oe/recipes-devtools/perl/libdbi-perl/0001-Fix-building-on-Fedora-40-with-GCC-14.2.1.patch
+new file mode 100644
+index 000000000..f29d6c4d8
+--- /dev/null
++++ b/meta-oe/recipes-devtools/perl/libdbi-perl/0001-Fix-building-on-Fedora-40-with-GCC-14.2.1.patch
+@@ -0,0 +1,28 @@
++From dc970a868a4c2d7e2051b533e0a3588ef1d35530 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Dani=C3=ABl=20van=20Eeden?= <git@myname.nl>
++Date: Mon, 26 Aug 2024 10:17:01 +0200
++Subject: [PATCH] Fix building on Fedora 40 with GCC 14.2.1
++
++Upstream-Status: Backport [https://github.com/perl5-dbi/dbi/commit/d6e2bf13ac6043f5b0a9a147805b4915bd70e631]
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ DBI.xs | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/DBI.xs b/DBI.xs
++index 747e341..9b1d136 100644
++--- a/DBI.xs
+++++ b/DBI.xs
++@@ -1106,7 +1106,7 @@ dbih_inner(pTHX_ SV *orv, const char *what)
++     if (!SvMAGICAL(ohv)) {
++         if (!what)
++             return NULL;
++-        if (!hv_fetch(ohv,"_NO_DESTRUCT_WARN",17,0))
+++        if (!hv_fetch((HV*)ohv,"_NO_DESTRUCT_WARN",17,0))
++ 	    sv_dump(orv);
++         croak("%s handle %s is not a DBI handle (has no magic)",
++                 what, neatsvpv(orv,0));
++-- 
++2.46.0
++
+diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2014-10402.patch b/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2014-10402.patch
+deleted file mode 100644
+index b41bbe0a5..000000000
+--- a/meta-oe/recipes-devtools/perl/libdbi-perl/CVE-2014-10402.patch
++++ /dev/null
+@@ -1,56 +0,0 @@
+-Backport patch to fix CVE-2014-10402.
+-
+-CVE: CVE-2014-10402
+-Upstream-Status: Backport [https://github.com/rehsack/dbi/commit/19d0fb1]
+-
+-Ref:
+-https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=972180#12
+-
+-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+-
+-
+-From 19d0fb169eed475e1c053e99036b8668625cfa94 Mon Sep 17 00:00:00 2001
+-From: Jens Rehsack <sno@netbsd.org>
+-Date: Tue, 6 Oct 2020 10:22:17 +0200
+-Subject: [PATCH] lib/DBD/File.pm: fix CVE-2014-10401
+-
+-Dig into the root cause of RT#99508 - which resulted in CVE-2014-10401 - and
+-figure out that DBI->parse_dsn is the wrong helper to parse our attributes in
+-DSN, since in DBD::dr::connect only the "dbname" remains from DSN which causes
+-parse_dsn to bailout.
+-
+-Parsing on our own similar to parse_dsn shows the way out.
+-
+-Signed-off-by: Jens Rehsack <sno@netbsd.org>
+----
+- lib/DBD/File.pm | 7 +++++--
+- 1 file changed, 5 insertions(+), 2 deletions(-)
+-
+-diff --git a/lib/DBD/File.pm b/lib/DBD/File.pm
+-index fb14e9a..f55076f 100644
+---- a/lib/DBD/File.pm
+-+++ b/lib/DBD/File.pm
+-@@ -109,7 +109,11 @@ sub connect
+-     # We do not (yet) care about conflicting attributes here
+-     # my $dbh = DBI->connect ("dbi:CSV:f_dir=test", undef, undef, { f_dir => "text" });
+-     # will test here that both test and text should exist
+--    if (my $attr_hash = (DBI->parse_dsn ($dbname))[3]) {
+-+    #
+-+    # Parsing on our own similar to parse_dsn to find attributes in 'dbname' parameter.
+-+    if ($dbname) {
+-+	my @attrs = split /;/ => $dbname;
+-+	my $attr_hash = { map { split /\s*=>?\s*|\s*,\s*/, $_} @attrs };
+- 	if (defined $attr_hash->{f_dir} && ! -d $attr_hash->{f_dir}) {
+- 	    my $msg = "No such directory '$attr_hash->{f_dir}";
+- 	    $drh->set_err (2, $msg);
+-@@ -120,7 +124,6 @@ sub connect
+-     if ($attr and defined $attr->{f_dir} && ! -d $attr->{f_dir}) {
+- 	my $msg = "No such directory '$attr->{f_dir}";
+- 	$drh->set_err (2, $msg);
+--	$attr->{RaiseError} and croak $msg;
+- 	return;
+- 	}
+- 
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb b/meta-oe/recipes-devtools/perl/libdbi-perl_1.644.bb
+similarity index 83%
+rename from meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb
+rename to meta-oe/recipes-devtools/perl/libdbi-perl_1.644.bb
+index 1fee83a8f..7f6c9059d 100644
+--- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb
++++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.644.bb
+@@ -7,13 +7,12 @@ database interface independent of the actual database being used. \
+ HOMEPAGE = "http://search.cpan.org/dist/DBI/"
+ SECTION = "libs"
+ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=10982c7148e0a012c0fd80534522f5c5"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=8097b88c6165f0d43949441e6ea581cd"
+ 
+-SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz \
+-           file://CVE-2014-10402.patch \
++SRC_URI = "https://cpan.metacpan.org/authors/id/H/HM/HMBRAND/DBI-${PV}.tar.gz \
++           file://0001-Fix-building-on-Fedora-40-with-GCC-14.2.1.patch \
+            "
+-SRC_URI[md5sum] = "352f80b1e23769c116082a90905d7398"
+-SRC_URI[sha256sum] = "8a2b993db560a2c373c174ee976a51027dd780ec766ae17620c20393d2e836fa"
++SRC_URI[sha256sum] = "2297b99de09e67086640b590699e0e982fb469da63a93fe28dc14782db7a53c8"
+ 
+ S = "${WORKDIR}/DBI-${PV}"
+ 
+-- 
+2.46.0
 
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.1=E2=80=9D, =E2=80=9C5.2", "5.99" and "Future=
-", the more
-pressing/urgent issues being in "5.1" and then =E2=80=9C5.2=E2=80=9D.
-
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
-
-Thanks,
-
-
-
-*Stephen K. Jolley*
-
-*Yocto Project Program Manager*
-
-(    *Cell*:                (208) 244-4460
-
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
-
---000000000000ea8289062129818b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><span style=3D"font-size:11pt;font-family:Calibri,Arial">A=
-ll,<br><br>The triage team is starting to try and collect up and classify b=
-ugs which a newcomer to the project would be able to work on in a way which=
- means people can find them. They&#39;re being listed on the triage page un=
-der the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/wiki/=
-Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage#New=
-comer_Bugs</a>  Also please review: <a href=3D"https://www.openembedded.org=
-/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.org/w=
-iki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugzilla =
-account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount.cgi"=
->https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The idea is=
- these bugs should be straight forward for a person to help work on who doe=
-sn&#39;t have deep experience with the project.  If anyone can help, please=
- take ownership of the bug and send patches!  If anyone needs help/advice t=
-here are people on irc who can likely do so, or some of the more experience=
-d contributors will likely be happy to help too.<br><br>Also, the triage te=
-am meets weekly and does its best to handle the bugs reported into the Bugz=
-illa. The number of people attending that meeting has fallen, as have the n=
-umber of people available to help fix bugs. One of the things we hear users=
- report is they don&#39;t know how to help. We (the triage team) are theref=
-ore going to start reporting out the currently 409 unassigned or newcomer b=
-ugs.<br><br>We&#39;re hoping people may be able to spare some time now and =
-again to help out with these.  Bugs are split into two types, &quot;true bu=
-gs&quot; where things don&#39;t work as they should and &quot;enhancements&=
-quot; which are features we&#39;d want to add to the system.  There are als=
-o roughly four different &quot;priority&quot; classes right now, =E2=80=9C5=
-.1=E2=80=9D, =E2=80=9C5.2&quot;, &quot;5.99&quot; and &quot;Future&quot;, t=
-he more pressing/urgent issues being in &quot;5.1&quot; and then =E2=80=9C5=
-.2=E2=80=9D.<br><br>Please review this link and if a bug is something you w=
-ould be able to help with either take ownership of the bug, or send me (<a =
-href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>) an e-m=
-ail with the bug number you would like and I will assign it to you (please =
-make sure you have a Bugzilla account).  The list is at: <a href=3D"https:/=
-/wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcomer_Bugs"=
->https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcom=
-er_Bugs</a></span><br><div dir=3D"ltr" class=3D"gmail_signature" data-smart=
-mail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p class=3D"MsoN=
-ormal" style=3D"background-image:initial;background-position:initial;backgr=
-ound-repeat:initial"><span style=3D"font-size:12pt;font-family:Arial,sans-s=
-erif">Thanks,<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
-
---000000000000ea8289062129818b--
 
