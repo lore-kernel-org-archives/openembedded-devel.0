@@ -1,103 +1,105 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <jsbronder@cold-front.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F084ACD5BC5
-	for <webhook@archiver.kernel.org>; Thu,  5 Sep 2024 12:52:37 +0000 (UTC)
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com [209.85.128.67])
- by mx.groups.io with SMTP id smtpd.web11.8502.1725540751717560414
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3764CE7A84
+	for <webhook@archiver.kernel.org>; Thu,  5 Sep 2024 18:55:29 +0000 (UTC)
+Received: from fhigh3-smtp.messagingengine.com (fhigh3-smtp.messagingengine.com [103.168.172.154])
+ by mx.groups.io with SMTP id smtpd.web11.17641.1725562528338591317
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Sep 2024 05:52:32 -0700
+ Thu, 05 Sep 2024 11:55:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=FL5BR0HI;
- spf=pass (domain: smile.fr, ip: 209.85.128.67, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f67.google.com with SMTP id 5b1f17b1804b1-428e0d18666so5838995e9.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Sep 2024 05:52:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1725540750; x=1726145550; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YXaqx1C1tHc3TPyZp5l2vwfoXHvfpyl0LAvmO/OV5x4=;
-        b=FL5BR0HIaaV6jjJGHIMvyUTo8805sz4ZL0qUFQgXhXjeQO2GGMHWPczVpK7HnnewnI
-         zLHzgsQClwyWXEVSIefiIl6pi+Ae718hl71k1SwHWak7jeh+cilxdUOYBGimzSCRfe9r
-         Klg7wL1+3jlaVoxGytiZYW8Vl9xfHWAuMu07k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725540750; x=1726145550;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=YXaqx1C1tHc3TPyZp5l2vwfoXHvfpyl0LAvmO/OV5x4=;
-        b=RWu8knCvsC5nRwAxMWT/HiPU1SSyTlAAXGU9conx8s8Vz0ehoHYIcC3+kx14VDKHZk
-         G4qML2dlUeK2RfayMmVuoBF/3g4/zhkIkpdlfNktSJocQ3RJYUaSkL5XZDQ8PWOhfFc1
-         bepeItZr2m4iLl3racd+ZLoqJQedB5LEGTAbOuYVkTN9EecE2poti9xz4DGa43K9ARNe
-         azDaeBSKJ8gmSOjF52MkDqwZZcqeVEmZih+jAWsUqx+TnjvhZyt7VE1ceW9VvY6kV0R+
-         G1TTwyAKv7W+GOgh+n16LLduyp/L8ipSjnXz8XsdyB76TKTTCPRCF7zmhrLTr3fzrzmA
-         FuGA==
-X-Gm-Message-State: AOJu0YzaglbBlF7iO8a4yQuE0w/xwfYXT+B+TiqemnIEniKWUxZ/kouF
-	sxceni7X6gNCGSu0Fsg1/3VNtUe8hsNpNXz2kv/K3OhRozZH6aK8vB4Tn7xyALibrbXLGIQskt/
-	2MBbT/g==
-X-Google-Smtp-Source: AGHT+IGze/Y749XGDZufGkkEFLq+BHWiLUuf9T4LsnTyTCSObV/PRj/Zwudm/BM40M/vNupCktTz1w==
-X-Received: by 2002:a05:600c:5494:b0:426:5dd0:a1e4 with SMTP id 5b1f17b1804b1-42bbb20568fmr144494775e9.8.1725540749525;
-        Thu, 05 Sep 2024 05:52:29 -0700 (PDT)
-Received: from P-ASN-ECS-830T8C3.idf.intranet (static-css-ccs-204145.business.bouyguestelecom.com. [176.157.204.145])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-42bb6df100csm231692265e9.20.2024.09.05.05.52.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Sep 2024 05:52:29 -0700 (PDT)
-From: Yoann Congal <yoann.congal@smile.fr>
+ dkim=pass header.i=@cold-front.org header.s=fm2 header.b=Evmhu7l8;
+ dkim=pass header.i=@messagingengine.com header.s=fm1 header.b=f6084ucC;
+ spf=pass (domain: cold-front.org, ip: 103.168.172.154, mailfrom: jsbronder@cold-front.org)
+Received: from phl-compute-02.internal (phl-compute-02.phl.internal [10.202.2.42])
+	by mailfhigh.phl.internal (Postfix) with ESMTP id 6628A11401E9;
+	Thu,  5 Sep 2024 14:55:27 -0400 (EDT)
+Received: from phl-mailfrontend-02 ([10.202.2.163])
+  by phl-compute-02.internal (MEProxy); Thu, 05 Sep 2024 14:55:27 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
+	 h=cc:cc:content-transfer-encoding:content-type:date:date:from
+	:from:in-reply-to:message-id:mime-version:reply-to:subject
+	:subject:to:to; s=fm2; t=1725562527; x=1725648927; bh=uEMisur/CQ
+	zHtPyPofOhSmGy9fPsPDo0yPsVHlwXhNM=; b=Evmhu7l8WtdVwrOyUbahIYUuuF
+	mRu7lWQ+IvH/HD61e7J4uhXfj8T4z07q5bQKvJV4u9vt5BQ/E0f5vBkpHpdb2udO
+	C6Rby2cY8wELFzfckhrLhBLvPdz4admqnphZtoy5mSSWYmgh01l9KymIepUcFQNO
+	ek4fXpsR2rczMN3T8qC0CpQ0sDS26gpvfa66kfFb/coeNFXzhL6QgWXZvXncuzOl
+	5WBzfKqsI7ItABgJl5iaIsQr9nUtsEdzW1ZkWEI6F1k54myeEiMQ+I5Dwk0pprRB
+	b3cg5uCaY2gsEyQ9P/Jeyl37APeDHYLhojDQ3pt0qbg5sbX5STSvxtiBVt8w==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:message-id:mime-version:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+	fm1; t=1725562527; x=1725648927; bh=uEMisur/CQzHtPyPofOhSmGy9fPs
+	PDo0yPsVHlwXhNM=; b=f6084ucC7Uof4pkNVxGl8rs5YQo66XSwnIFtfXksJch+
+	4hY7F+BHH1dBKTxfFajwybwShuY2LHsl2mrX3jhofR2aVjLmJ9JnSqVA+dYEiBD/
+	VBk3ijJIv3F9c0RrhHLqY+qCGwK7kE7a5BMydQ2cGDnTkoraaxvJEThvtGvc1FYo
+	Knckuyet+OPjMEzMDMNQ+pbQ0izBPJxTEL6ehFOT4cVLbcSQn420sAHsh8nnuQkU
+	jmZU4KyFEo+XRDCWPI6IsYo0edAum/zofrTzXMfDJcxwUfzLTCBH35lNDBJ1hMG3
+	7WdhronM3xvNd2eIhuPRjdrymwBL1jDkVlTHHhkD/Q==
+X-ME-Sender: <xms:n_7ZZnyfJ9nbn-zEcIqZRgVmGWDcucw3-edaN0QHPrto5fEV5H4zHw>
+    <xme:n_7ZZvRrbuW9roYfH4kxl_B6S3Ohx3zcz8-HgkR2cm9HBdFKlJR7fmQBNzDwjSGOT
+    6fGM6473E4XoAnUag>
+X-ME-Received: <xmr:n_7ZZhWHUfnq17KRq4LpOCxNHLJUtMZrfUR05jeztBVKLmKG4hIrGjXoKQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrudehledgudeftdcutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpggftfghnshhusghstghrihgsvgdp
+    uffrtefokffrpgfnqfghnecuuegrihhlohhuthemuceftddtnecunecujfgurhephffvve
+    fufffkofgggfestdekredtredttdenucfhrhhomheplfhushhtihhnuceurhhonhguvghr
+    uceojhhssghrohhnuggvrhestgholhguqdhfrhhonhhtrdhorhhgqeenucggtffrrghtth
+    gvrhhnpedugffhvdekueehudduudfhueeiieekgeeflefhgfefjeegleehjefhfedtleeh
+    geenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjsh
+    gsrhhonhguvghrsegtohhlugdqfhhrohhnthdrohhrghdpnhgspghrtghpthhtohepvddp
+    mhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvg
+    hvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdprhgtphhtthhopehj
+    shgsrhhonhguvghrsegtohhlugdqfhhrohhnthdrohhrgh
+X-ME-Proxy: <xmx:n_7ZZhjOUmle_EikLGe--6QU7_9G1FX7Z5A1AseyNiGy9df6-zZtfw>
+    <xmx:n_7ZZpAUz0fjiemLWgGdtosonUqXwTEUbkDIzGUB7YZ6tai9ZDodpg>
+    <xmx:n_7ZZqK9S_WGOI_4vRwpYd4_se0X44odDWpQyXzl_QtkcCBL9Yz8fA>
+    <xmx:n_7ZZoDblD2lu0wKWFpxnr4zgb-Wb-ybK3m6aDfG8O0kMSHdfy5OKA>
+    <xmx:n_7ZZsMjEgUKz4qnxhIrPkEZHP6yz2FETGL2ZNpohvw0bu9qzjMT2q_U>
+Feedback-ID: iea0042cb:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 5 Sep 2024 14:55:26 -0400 (EDT)
+From: Justin Bronder <jsbronder@cold-front.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-oe][PATCH v3 2/2] polkit: fix build on sysvinit
-Date: Thu,  5 Sep 2024 14:52:21 +0200
-Message-Id: <20240905125221.2758495-2-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240905125221.2758495-1-yoann.congal@smile.fr>
-References: <20240905125221.2758495-1-yoann.congal@smile.fr>
+Cc: Justin Bronder <jsbronder@cold-front.org>
+Subject: [meta-python][PATCH] python3-xmodem: replace hardcoded /usr with ${prefix}
+Date: Thu,  5 Sep 2024 14:55:25 -0400
+Message-ID: <20240905185525.1544233-1-jsbronder@cold-front.org>
+X-Mailer: git-send-email 2.46.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Sep 2024 12:52:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112106
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Sep 2024 18:55:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112107
 
-From: Yoann Congal <yoann.congal@smile.fr>
+Without this the native recipe cannot be built.
 
-Polkit unconditionally installs a systemd service, remove it in
-do_install() on SysVinit systems to avoid "installed but not packaged
-file" error.
-
-Fixes this error:
-ERROR: polkit-125-r0 do_package: QA Issue: polkit: Files/directories were installed but not shipped in any package:
-  /usr/lib/systemd
-  /usr/lib/systemd/system
-  /usr/lib/systemd/system/polkit.service
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-polkit: 3 installed and not shipped files. [installed-vs-shipped]
-ERROR: polkit-125-r0 do_package: Fatal QA errors were found, failing task.
-
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
 ---
-v1->v3: no change
----
- meta-oe/recipes-extended/polkit/polkit_125.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+ meta-python/recipes-devtools/python/python3-xmodem_0.4.7.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/polkit/polkit_125.bb b/meta-oe/recipes-extended/polkit/polkit_125.bb
-index 2405ed6034..a67aaf908f 100644
---- a/meta-oe/recipes-extended/polkit/polkit_125.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_125.bb
-@@ -55,6 +55,12 @@ do_install:append() {
- 		chmod 700 ${D}/${sysconfdir}/polkit-1/rules.d
- 		chown polkitd:root ${D}/${sysconfdir}/polkit-1/rules.d
- 	fi
-+
-+	# Polkit unconditionally installs a systemd service, remove it on SysVinit
-+	# systems to avoid "installed but not packaged file" error.
-+	if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-+		rm -r ${D}${libdir}/systemd
-+	fi
+diff --git a/meta-python/recipes-devtools/python/python3-xmodem_0.4.7.bb b/meta-python/recipes-devtools/python/python3-xmodem_0.4.7.bb
+index c1ad6a2a8..e41afb56c 100644
+--- a/meta-python/recipes-devtools/python/python3-xmodem_0.4.7.bb
++++ b/meta-python/recipes-devtools/python/python3-xmodem_0.4.7.bb
+@@ -9,8 +9,8 @@ inherit pypi setuptools3
+ 
+ do_install:append() {
+     install -d ${D}${docdir}/${PN}
+-    mv ${D}/usr/doc/* ${D}${docdir}/${PN}/
+-    rmdir ${D}/usr/doc
++    mv ${D}${prefix}/doc/* ${D}${docdir}/${PN}/
++    rmdir ${D}${prefix}/doc
  }
  
- FILES:${PN} += " \
+ RDEPENDS:${PN} += " \
+-- 
+2.46.0
+
 
