@@ -2,121 +2,161 @@ Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 34045CD5BAA
-	for <webhook@archiver.kernel.org>; Thu,  5 Sep 2024 11:46:17 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web11.7313.1725536769503916437
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE132CD5BC4
+	for <webhook@archiver.kernel.org>; Thu,  5 Sep 2024 12:52:37 +0000 (UTC)
+Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com [209.85.128.66])
+ by mx.groups.io with SMTP id smtpd.web11.8501.1725540751557417481
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Sep 2024 04:46:09 -0700
+ Thu, 05 Sep 2024 05:52:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=wB6rZg22;
- spf=pass (domain: smile.fr, ip: 209.85.128.49, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-42bbffe38e6so5121385e9.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Sep 2024 04:46:09 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=MU56l5hK;
+ spf=pass (domain: smile.fr, ip: 209.85.128.66, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f66.google.com with SMTP id 5b1f17b1804b1-428e0d18666so5838945e9.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Sep 2024 05:52:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1725536768; x=1726141568; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=32fUY69BYC8buB8NSNFBqqqlo61idxnmFcbMy6XnBAA=;
-        b=wB6rZg22SCkwpEzgcYvsKKTKoMJnm6jGbkQ1rznh3nnIOsa3DbB3aDLo4UPxmHq2pe
-         5Dtagua3NCCiwG1AFDQApJPbnc9DmjknnJAY7HVB5fBuPlkyQ+TZqctY9v+EnhqvtTqJ
-         1ksRAJNjeV3dMwsb7LC8iI4ieEYHAp5J3lWP8=
+        d=smile.fr; s=google; t=1725540750; x=1726145550; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=BKRZwdXx62hHSJMiU7/p7qJUQJId9Kl/qBO4hs+ynCs=;
+        b=MU56l5hKraFCb6VOJaDqClWP04oVlZN3UupwC4bBJPu0jHVgICN3dX1lgnKpxcQE+y
+         p2mhXSjUTpclZMD1DUM5HaZZPp56KN5i0xZjHz+qGmEIjj+tDzuXM8NSI/IMTuquMgmC
+         4uFRN0HTqvNSLhg2Dxpe/kQH7VDB5JlO3qsMg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725536768; x=1726141568;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1725540750; x=1726145550;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=32fUY69BYC8buB8NSNFBqqqlo61idxnmFcbMy6XnBAA=;
-        b=oTezhENVyb9lHu3tQRhZZO0chDOP8DCh24WI7Mw3SnoCGBe4lCOTpXvmW35tgElCe7
-         pEm9gSUUX3DRzSW94SIGHA27uLC1Op44Ey37SFumg5g4srfSvvXDbIsVQlGCavJNBajM
-         Tmnjha6yfBWAGN+DW9HGYdqX5aBioA6zzfF2y5QC7hu4Ry08/GWUIRoHo0clfpbF/4PG
-         lgqJWaxioHfl0P20KdfSEQaLOtHncmqWLDOJevaiWL9WHe/co2973oTtNRKzL3xe3Sgh
-         lXZoX3xp1H0/L3T29ZM8RL5SLODlshxpdfXpYRa0Dj05+yGE+8r0YfdYC50e5d7FvOn6
-         4s6Q==
-X-Gm-Message-State: AOJu0YyYl3pSZvR4NQAuBd/nOWZWErZuCY1twwxIavNrvR79a2oYR0xX
-	WWcdBpJeyoRD59Mz0tZP32qMWETIRLzdHP0iyzesVZ1YDHNdteRDrhJHKs423UhkOldHXTGDyPK
-	HUhDyqEpTTukERbEidlQqcCVSRs7OCnu+8nd1TQ==
-X-Google-Smtp-Source: AGHT+IElZdXIWEUz56cBZGFR9DRaYqrwiYZ3ZnCt3Ni/GPuoYzrDVxHHa2249FPJPJq/0yp05gUxQbytyEbJFRVY2uY=
-X-Received: by 2002:a05:6000:223:b0:374:d1dd:1cc1 with SMTP id
- ffacd0b85a97d-374d1dd1e44mr6438573f8f.2.1725536767135; Thu, 05 Sep 2024
- 04:46:07 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240905093005.2731956-1-yoann.congal@smile.fr>
- <CANNYZj8WR11Cm+Chio-FeS-tpS3Ydi=MTM1ivVTuNXZ6eXktLw@mail.gmail.com>
- <CAMSfU+6NAhDtNwYgGXibbR7u1cVTE7snm3+2yAunmHYUxAEAtA@mail.gmail.com> <CANNYZj9M-foBdCVoJ3hpUiNEbA2aD_Pa20Hb--ALMJAOqf=vhg@mail.gmail.com>
-In-Reply-To: <CANNYZj9M-foBdCVoJ3hpUiNEbA2aD_Pa20Hb--ALMJAOqf=vhg@mail.gmail.com>
+        bh=BKRZwdXx62hHSJMiU7/p7qJUQJId9Kl/qBO4hs+ynCs=;
+        b=HVljxitamah607B7hIcaTvRAW4pWhMAxHBsGdeAhC4WzzlQe3ytuEpbCG3PVOnR7Rc
+         JRI2mcHGo+8twjx37zVLX3EoNTPbR1p0zc8jLy23hhq9jah1ULhbxWc72Lp9Tq2fpxZ0
+         WnaVGtt37uV4U5KTkW+FIZfQl+9JdveX3SBCdNclcKuSl8dl3k5kDL9b4V03JJeCVYAR
+         7KwscojGBNYVSOaqOOEmvXMcWcT1UTbpEkJmOexHNhpy8T4mxFItbEI3Jil0ArfJQdgJ
+         xfZGW5cmzfVlHg4iuY+RlUlN6/uteRUAgi97TU2+ZI4b5hTMKtB4fYt56jctWUGq3Dwk
+         V6Hg==
+X-Gm-Message-State: AOJu0YyRuyuWwVlYtUPxGOlSQsHNJ9DzPBSxaSCHP8HbPtFrLMvbD5M2
+	XUXozcjnjpvremFI3QT5/jAw999Ptwx0BW2sX6d/vWQEuJqFqngPPHNV+Zd++GyWNOYjbfk+wts
+	1ofa6Tg==
+X-Google-Smtp-Source: AGHT+IFZfvyYdDwZgknA/F3/GPtc7ArVm6mVS+J5is/SssTJdgm6sT+dNrUVUM35n3pz+//RN9qcfA==
+X-Received: by 2002:a05:600c:1c9e:b0:426:61af:e1d6 with SMTP id 5b1f17b1804b1-42bbb44023emr145647395e9.29.1725540749021;
+        Thu, 05 Sep 2024 05:52:29 -0700 (PDT)
+Received: from P-ASN-ECS-830T8C3.idf.intranet (static-css-ccs-204145.business.bouyguestelecom.com. [176.157.204.145])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-42bb6df100csm231692265e9.20.2024.09.05.05.52.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 05 Sep 2024 05:52:28 -0700 (PDT)
 From: Yoann Congal <yoann.congal@smile.fr>
-Date: Thu, 5 Sep 2024 13:45:41 +0200
-Message-ID: <CAMSfU+473OC5H5SehEtwBTRLzvAo7nJPDGgUAF0swER_wV8uBQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2 1/2] polkit: Switch PAM files to common-*
-To: Alexander Kanavin <alex.kanavin@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000000d6d9d06215dd63e"
+To: openembedded-devel@lists.openembedded.org
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-oe][PATCH v3 1/2] polkit: Switch PAM files to common-*
+Date: Thu,  5 Sep 2024 14:52:20 +0200
+Message-Id: <20240905125221.2758495-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Sep 2024 11:46:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112104
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Sep 2024 12:52:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112105
 
---0000000000000d6d9d06215dd63e
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Yoann Congal <yoann.congal@smile.fr>
 
-Le jeu. 5 sept. 2024 =C3=A0 13:36, Alexander Kanavin <alex.kanavin@gmail.co=
-m> a
-=C3=A9crit :
+Add a new OS option to polkit meson: "openembedded" and use this to
+set PAM include to common-* which matches OE-Core libpam.
 
-> On Thu, 5 Sept 2024 at 13:07, Yoann Congal <yoann.congal@smile.fr> wrote:
-> > You mean submit the patch in v1 upstream?
-> > https://lists.openembedded.org/g/openembedded-devel/message/112093
-> >
-> > Why not! I'll do it, let's see what upstream says.
->
-> Yes - another possibility is to convince them to define an option
-> named 'generic', so we don't run the risk of future suse-specific
-> changes getting in the way and causing regressions.
->
-> I definitely prefer v1 patch, if it's sent usptream.
->
+This also may fix a non-reproducibility since polkit meson system tried
+to detect the host (compiling) OS and changed PAM config from the
+detected value.
 
-Submitted here: https://github.com/polkit-org/polkit/pull/497 :)
+Fixes: https://github.com/openembedded/meta-openembedded/issues/860
 
-I'll send a v3 with the Upstream-Status: Submitted
---=20
-Yoann Congal
-Smile ECS - Tech expert
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+---
+v1->v2: removed patch and switch to the preexisting "Suse" OS config.
+v2->v3: readded patch and updated Upstream-Status to Submitted
+---
+ ...pport-openembedded-OS-for-PAM-config.patch | 48 +++++++++++++++++++
+ meta-oe/recipes-extended/polkit/polkit_125.bb |  8 +++-
+ 2 files changed, 55 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/polkit/files/meson-build-Support-openembedded-OS-for-PAM-config.patch
 
---0000000000000d6d9d06215dd63e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">Le=C2=A0jeu. 5 sept. 2024 =C3=A0=C2=A013:=
-36, Alexander Kanavin &lt;<a href=3D"mailto:alex.kanavin@gmail.com">alex.ka=
-navin@gmail.com</a>&gt; a =C3=A9crit=C2=A0:</div><div class=3D"gmail_quote"=
-><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border=
--left:1px solid rgb(204,204,204);padding-left:1ex">On Thu, 5 Sept 2024 at 1=
-3:07, Yoann Congal &lt;<a href=3D"mailto:yoann.congal@smile.fr" target=3D"_=
-blank">yoann.congal@smile.fr</a>&gt; wrote:<br>
-&gt; You mean submit the patch in v1 upstream?<br>
-&gt; <a href=3D"https://lists.openembedded.org/g/openembedded-devel/message=
-/112093" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.or=
-g/g/openembedded-devel/message/112093</a><br>
-&gt;<br>
-&gt; Why not! I&#39;ll do it, let&#39;s see what upstream says.<br>
-<br>
-Yes - another possibility is to convince them to define an option<br>
-named &#39;generic&#39;, so we don&#39;t run the risk of future suse-specif=
-ic<br>
-changes getting in the way and causing regressions.<br>
-<br>
-I definitely prefer v1 patch, if it&#39;s sent usptream.<br></blockquote><d=
-iv><br></div><div>Submitted here: <a href=3D"https://github.com/polkit-org/=
-polkit/pull/497">https://github.com/polkit-org/polkit/pull/497</a> :)</div>=
-<div><br></div><div>I&#39;ll send a v3 with the Upstream-Status: Submitted<=
-br></div></div><span class=3D"gmail_signature_prefix">-- </span><br><div di=
-r=3D"ltr" class=3D"gmail_signature"><div dir=3D"ltr"><font face=3D"Raleway,=
- regular">Yoann Congal</font><div><font face=3D"Raleway, regular">Smile ECS=
- - Tech expert<br></font></div></div></div></div>
-
---0000000000000d6d9d06215dd63e--
+diff --git a/meta-oe/recipes-extended/polkit/files/meson-build-Support-openembedded-OS-for-PAM-config.patch b/meta-oe/recipes-extended/polkit/files/meson-build-Support-openembedded-OS-for-PAM-config.patch
+new file mode 100644
+index 0000000000..cc396dfa3b
+--- /dev/null
++++ b/meta-oe/recipes-extended/polkit/files/meson-build-Support-openembedded-OS-for-PAM-config.patch
+@@ -0,0 +1,48 @@
++From 7c89b88f0f81ad220d08d69d212c14c6eeefb647 Mon Sep 17 00:00:00 2001
++From: Yoann Congal <yoann.congal@smile.fr>
++Date: Tue, 3 Sep 2024 12:17:42 +0200
++Subject: [PATCH] meson.build: Support "openembedded" OS for PAM config
++
++In Openembedded, same as Suse/Solaris: PAM files are common-*:
++* PAM_FILE_INCLUDE_AUTH: common-auth
++* PAM_FILE_INCLUDE_ACCOUNT: common-account
++* PAM_FILE_INCLUDE_PASSWORD: common-password
++* PAM_FILE_INCLUDE_SESSION: common-session
++See OE-Core libpam recipe.
++
++NB: This is also the same config as Debian but its not mentioned in the
++code.
++
++Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
++Upstream-Status: Submitted [https://github.com/polkit-org/polkit/pull/497]
++---
++ meson.build       | 2 +-
++ meson_options.txt | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/meson.build b/meson.build
++index 302c189..a55f2d6 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -311,7 +311,7 @@ endif
++ 
++ pam_include = get_option('pam_include')
++ if pam_include == ''
++-  if ['suse', 'solaris'].contains(os_type)
+++  if ['suse', 'solaris', 'openembedded'].contains(os_type)
++     pam_conf = {
++       'PAM_FILE_INCLUDE_AUTH': 'common-auth',
++       'PAM_FILE_INCLUDE_ACCOUNT': 'common-account',
++diff --git a/meson_options.txt b/meson_options.txt
++index c2e4a6c..14d7a50 100644
++--- a/meson_options.txt
+++++ b/meson_options.txt
++@@ -6,7 +6,7 @@ option('polkitd_user', type: 'string', value: 'polkitd', description: 'User for
++ option('polkitd_uid', type: 'string', value: '-', description: 'Fixed UID for user running polkitd (polkitd)')
++ 
++ option('authfw', type: 'combo', choices: ['pam', 'shadow', 'bsdauth'], value: 'pam', description: 'Authentication framework (pam/shadow)')
++-option('os_type', type: 'combo', choices: ['redhat', 'suse', 'gentoo', 'pardus', 'solaris', 'netbsd', 'lfs', ''], value: '', description: 'distribution or OS')
+++option('os_type', type: 'combo', choices: ['redhat', 'suse', 'gentoo', 'pardus', 'solaris', 'netbsd', 'lfs', 'openembedded', ''], value: '', description: 'distribution or OS')
++ 
++ option('pam_include', type: 'string', value: '', description: 'pam file to include')
++ option('pam_module_dir', type: 'string', value: '', description: 'directory to install PAM security module')
+diff --git a/meta-oe/recipes-extended/polkit/polkit_125.bb b/meta-oe/recipes-extended/polkit/polkit_125.bb
+index fe1ee467c3..2405ed6034 100644
+--- a/meta-oe/recipes-extended/polkit/polkit_125.bb
++++ b/meta-oe/recipes-extended/polkit/polkit_125.bb
+@@ -5,7 +5,9 @@ LICENSE = "LGPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=155db86cdbafa7532b41f390409283eb"
+ BUGTRACKER = "https://github.com/polkit-org/polkit/issues"
+ 
+-SRC_URI = "git://github.com/polkit-org/polkit.git;protocol=https;branch=main"
++SRC_URI = "git://github.com/polkit-org/polkit.git;protocol=https;branch=main \
++           file://meson-build-Support-openembedded-OS-for-PAM-config.patch \
++           "
+ 
+ S = "${WORKDIR}/git"
+ SRCREV = "112752c12da812a163dac67d7f675b60de8f7d7b"
+@@ -16,6 +18,10 @@ inherit meson pkgconfig useradd systemd gettext gobject-introspection features_c
+ 
+ REQUIRED_DISTRO_FEATURES = "polkit"
+ 
++# Prevent meson.build to try to autodetect host OS (which could lead to
++# non-reproducibility)
++EXTRA_OEMESON = "-Dos_type=openembedded"
++
+ PACKAGECONFIG = " \
+ 	${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)} \
+ 	${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', 'consolekit', d)} \
 
