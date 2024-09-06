@@ -2,295 +2,1720 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DD6CBCE7AB2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DEF1ACE7AB3
 	for <webhook@archiver.kernel.org>; Fri,  6 Sep 2024 04:56:32 +0000 (UTC)
-Received: from mail-oo1-f48.google.com (mail-oo1-f48.google.com [209.85.161.48])
- by mx.groups.io with SMTP id smtpd.web11.28071.1725598586986990897
+Received: from mail-oo1-f41.google.com (mail-oo1-f41.google.com [209.85.161.41])
+ by mx.groups.io with SMTP id smtpd.web10.28344.1725598586999610296
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 05 Sep 2024 21:56:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=apvvTB4A;
- spf=pass (domain: gmail.com, ip: 209.85.161.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f48.google.com with SMTP id 006d021491bc7-5dca9cc71b2so997647eaf.2
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lQHXH1oN;
+ spf=pass (domain: gmail.com, ip: 209.85.161.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f41.google.com with SMTP id 006d021491bc7-5df9c34c890so1044349eaf.1
         for <openembedded-devel@lists.openembedded.org>; Thu, 05 Sep 2024 21:56:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1725598585; x=1726203385; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=0qn/2zVH56Q1K0d9P6KcCqVLbpjPiEvbrylMfSvC6m0=;
-        b=apvvTB4AVwf+CHZ7qdwYeIo7budTQAVxELh1xoPMenoBsHWJOjCRWNyV/y2IPwVNC7
-         55lo2ZWl6KZ9j1K1Z39LGGFeSELay7PX5l9so0Dv4Y8NzuZxgTA1WKIBycBpxEbF3GzK
-         IzAWUFXX9sfTLFJVeZRFaKL2fa87KnPqpbl37VDT1sT4dMeoRJv0iGbxBfuGL3d+vFvM
-         v4qtFV+aSVSc869k1o3fFzYgbqoEtAdcitmPmazxFt689jyVSrZD39JhSMr5wHZZwjsb
-         8fbQf0TnAgWkuBxWVkIO3Kz0ocOrohSWHsoMDclGvY80p75NNGZQErcJsajEwTzTmGP1
-         /lDA==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=krGMuol3L4DrQ20kLBpXjQS73szMbmPUMfljMQIbjZA=;
+        b=lQHXH1oNzYfbfCf1gJRJU8bqxOj04HIgTy5PHfm+obrVd894Eqh7xqbrLEc+oCJVq5
+         xCmKCpaFzARtHmQ7bVa6Kw68PgOU4PRgwqTaqnrXfb6hTH1boQSX3XKgykxVQxlQs+g0
+         Gy8W80nQWbBFBRB6H/XrV8KPJcMLcn9ZWA/moJ31W5Vz6Zz+ZYA+4bJAo18G+s8pFfHi
+         7h46+/1Ga6tpmGYhPTdtd/LFH7LXpZxYkFQ+SiwDiszy4fO0BU5lNCiHcOHIRRSi+4n/
+         ynzSQNwXQPcxeiunGJah6XVjWqF1sKSMJBD62HbUgajkejOYgicj4V1IFZ59lgtLtCL0
+         K+aQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1725598585; x=1726203385;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=0qn/2zVH56Q1K0d9P6KcCqVLbpjPiEvbrylMfSvC6m0=;
-        b=U1aUFEdl2MrVQElQmXMHo7vqIbRErN+bcbxPZ0xl6BYqMmMF0XeXxbQsoL1WW7jzEc
-         oQjlJs8TyF3N4OE59dG9opDTXGT+S7H93dr24yfy5XCGZXqEhuia2OJNJv8asBMh7Q4c
-         ZDxu7q3Wqvdqb/VJw/s5gffyZSOqUFsseu8rq7SkAyLJVTdTzGkHEkLj6OyiSox3GWQp
-         7uBSLy8bxwIYfjNzFh8oI5RJYTd0jQBobxqo1uXIrk7FfjOyDwIn//aYCMs8eu++wpKE
-         WgkXsfdXB8LTcaCAP8WD7Bwp5L1+KC8B5Bz4hxYoThx/uzP5Huge14m1FHkFZ6WT0n05
-         sfgw==
-X-Gm-Message-State: AOJu0YywggU5COsflOpqFiwQZEAatRpW7XJb8NzHAtOGqL2TK35FGB0F
-	iEc91lRRni5PgeH7I53gjGY/+1KWN9/wnNZMSmtyHoVsD9pjWjAY4PulWgGc
-X-Google-Smtp-Source: AGHT+IG1Fc3zAQe5xIPeOAdLTgi8azlGV3407gFeaJvNI8De3gG2c9InTBFzrw0K3FHBNUAk6zDXGQ==
-X-Received: by 2002:a05:6870:d696:b0:24f:c31a:5c29 with SMTP id 586e51a60fabf-2779035c2c7mr28715700fac.43.1725598585167;
-        Thu, 05 Sep 2024 21:56:25 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::2696])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7177858be84sm4024723b3a.110.2024.09.05.21.56.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=krGMuol3L4DrQ20kLBpXjQS73szMbmPUMfljMQIbjZA=;
+        b=mTvptbuQR0P34E8eyetIIERIaSWMi/aNLt9rtq91bUHa94K9GABc2E/7j71oVw1o6o
+         wwSVl4QnpHhQG8zZVoNQLpf4HX4dkIWPHje+5d68OmHfCs/OeH1XJCSdmVB1NmIyDvw+
+         y5xZj43M05vMrxsIUE+PL4h4PSrfy6zYbi1r06suGEMAYUZgpUjCjH4xHU3jZ2hDKXzl
+         N5N8xf2rlbwm5kW6wpsuHgVLambvyN0AxBGc/jYi7+XBODXnHRqlHS+upWLe5XWZDvlA
+         kDfFFFJ0trKR5lqhy6IYhs644fEALYcMcMKps6J+QtHpYiZfDHd0cP7AhkGLK/DA+ssK
+         fFYQ==
+X-Gm-Message-State: AOJu0YxHapvNeYK3ZmWKXVv/fF6sYyv9IIJpCntbRBrPuLbT9oVe26N1
+	4PuhVL5M14yw4SLsKP/4qIl5573ocdlq2LoHQb03U6hmNtOZYyA/6521CHpU
+X-Google-Smtp-Source: AGHT+IElE8v+mTOIkuXi/dB0SHOVN3VBfJkUOsUe2KRvxaVEo72PWrfF/9E8oB4R+rHFUYri5djVWA==
+X-Received: by 2002:a05:6870:b50b:b0:277:f2a6:8f94 with SMTP id 586e51a60fabf-277f2a69146mr19116323fac.33.1725598584253;
         Thu, 05 Sep 2024 21:56:24 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::2696])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7177858be84sm4024723b3a.110.2024.09.05.21.56.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 05 Sep 2024 21:56:23 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] nodejs: Fix build with libc++ 19
-Date: Thu,  5 Sep 2024 21:56:18 -0700
-Message-ID: <20240906045620.1511585-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/2] poppler: Upgrade to 24.09.0 release
+Date: Thu,  5 Sep 2024 21:56:17 -0700
+Message-ID: <20240906045620.1511585-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20240906045620.1511585-1-raj.khem@gmail.com>
-References: <20240906045620.1511585-1-raj.khem@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 06 Sep 2024 04:56:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112108
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112109
 
-As noted in the libc++ 19 release notes [1], std::char_traits<> is now
-only provided for char, char8_t, char16_t, char32_t and wchar_t, and any
-instantiation for other types will fail.
-
-This causes nodejs-20 to fail to compile with clang 19 and libc++ 19,
-resulting in errors similar to:
-
-    /usr/include/c++/v1/string:820:42: error: implicit instantiation of undefined template 'std::char_traits<unsigned short>'
-      820 |   static_assert(is_same<_CharT, typename traits_type::char_type>::value,
-          |                                          ^
-    ../deps/v8/src/inspector/string-16.h:114:28: note: in instantiation of template class 'std::basic_string<unsigned short>' requested here
-      114 |   std::basic_string<UChar> m_impl;
-          |                            ^
-    /usr/include/c++/v1/__fwd/string.h:23:29: note: template is declared here
-       23 | struct _LIBCPP_TEMPLATE_VIS char_traits;
-          |                             ^
-
-Upstream v8 has fixed this in commit 182d9c05e78 [2], so add it as a
-backported patch, until the next version of node is released.
-
-[1] https://libcxx.llvm.org/ReleaseNotes/19.html#deprecations-and-removals
-[2] https://chromium.googlesource.com/v8/v8.git/+/182d9c05e78
+Drop backported patches
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../nodejs/nodejs/182d9c05e78.patch           | 182 ++++++++++++++++++
- .../recipes-devtools/nodejs/nodejs_20.17.0.bb |   1 +
- 2 files changed, 183 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/182d9c05e78.patch
+ .../0001-cmake-Do-not-use-isystem.patch       |   40 +-
+ .../poppler/poppler/CVE-2023-34872.patch      |   46 -
+ .../poppler/poppler/CVE-2024-6239-0001.patch  | 1275 -----------------
+ .../poppler/poppler/CVE-2024-6239-0002.patch  |  111 --
+ .../poppler/poppler/jpeg-stdio.patch          |   41 -
+ ...{poppler_23.04.0.bb => poppler_24.09.0.bb} |    8 +-
+ 6 files changed, 17 insertions(+), 1504 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2023-34872.patch
+ delete mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2024-6239-0001.patch
+ delete mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2024-6239-0002.patch
+ delete mode 100644 meta-oe/recipes-support/poppler/poppler/jpeg-stdio.patch
+ rename meta-oe/recipes-support/poppler/{poppler_23.04.0.bb => poppler_24.09.0.bb} (90%)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/182d9c05e78.patch b/meta-oe/recipes-devtools/nodejs/nodejs/182d9c05e78.patch
-new file mode 100644
-index 0000000000..689512cb64
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/182d9c05e78.patch
-@@ -0,0 +1,182 @@
-+From 182d9c05e78b1ddb1cb8242cd3628a7855a0336f Mon Sep 17 00:00:00 2001
-+From: Andrey Kosyakov <caseq@chromium.org>
-+Date: Thu, 17 Aug 2023 13:50:11 -0700
-+Subject: [PATCH] Define UChar as char16_t
-+
-+We used to have UChar defined as uint16_t which does not go along
-+with STL these days if you try to have an std::basic_string<> of it,
-+as there are no standard std::char_traits<> specialization for uint16_t.
-+
-+This switches UChar to char16_t where practical, introducing a few
-+compatibility shims to keep CL size small, as (1) this would likely
-+have to be back-ported and (2) crdtp extensively uses uint16_t for
-+wide chars.
-+
-+Bug: b:296390693
-+Change-Id: I66a32d8f0050915225b187de56896c26dd76163d
-+Reviewed-on: https://chromium-review.googlesource.com/c/v8/v8/+/4789966
-+Reviewed-by: Jaroslav Sevcik <jarin@chromium.org>
-+Commit-Queue: Jaroslav Sevcik <jarin@chromium.org>
-+Auto-Submit: Andrey Kosyakov <caseq@chromium.org>
-+Cr-Commit-Position: refs/heads/main@{#89559}
-+
-+Upstream-Status: Backport [https://chromium-review.googlesource.com/c/v8/v8/+/4789966]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/inspector/string-16.cc                             |  8 +++++++-
-+ src/inspector/string-16.h                              | 10 ++++++++--
-+ src/inspector/v8-string-conversions.cc                 |  6 +++---
-+ src/inspector/v8-string-conversions.h                  |  6 ++++--
-+ .../inspector_protocol/crdtp/test_platform_v8.cc       |  9 ++++++---
-+ 5 files changed, 28 insertions(+), 11 deletions(-)
-+
-+--- a/deps/v8/src/inspector/string-16.cc
-++++ b/deps/v8/src/inspector/string-16.cc
-+@@ -27,7 +27,7 @@ bool isSpaceOrNewLine(UChar c) {
-+   return isASCII(c) && c <= ' ' && (c == ' ' || (c <= 0xD && c >= 0x9));
-+ }
-+ 
-+-int64_t charactersToInteger(const UChar* characters, size_t length,
-++int64_t charactersToInteger(const uint16_t* characters, size_t length,
-+                             bool* ok = nullptr) {
-+   std::vector<char> buffer;
-+   buffer.reserve(length + 1);
-+@@ -50,6 +50,8 @@ int64_t charactersToInteger(const UChar*
-+ 
-+ String16::String16(const UChar* characters, size_t size)
-+     : m_impl(characters, size) {}
-++String16::String16(const uint16_t* characters, size_t size)
-++    : m_impl(reinterpret_cast<const UChar*>(characters), size) {}
-+ 
-+ String16::String16(const UChar* characters) : m_impl(characters) {}
-+ 
-+@@ -241,6 +243,10 @@ String16 String16::fromUTF16LE(const UCh
-+ #endif  // V8_TARGET_BIG_ENDIAN
-+ }
-+ 
-++String16 String16::fromUTF16LE(const uint16_t* stringStart, size_t length) {
-++  return fromUTF16LE(reinterpret_cast<const UChar*>(stringStart), length);
-++}
+diff --git a/meta-oe/recipes-support/poppler/poppler/0001-cmake-Do-not-use-isystem.patch b/meta-oe/recipes-support/poppler/poppler/0001-cmake-Do-not-use-isystem.patch
+index adbe82263f..ab2fbf7d9b 100644
+--- a/meta-oe/recipes-support/poppler/poppler/0001-cmake-Do-not-use-isystem.patch
++++ b/meta-oe/recipes-support/poppler/poppler/0001-cmake-Do-not-use-isystem.patch
+@@ -40,11 +40,9 @@ Upstream-Status: Pending
+  utils/CMakeLists.txt   | 10 +++++-----
+  6 files changed, 16 insertions(+), 16 deletions(-)
+ 
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index c6c757c..5f1c540 100644
+ --- a/CMakeLists.txt
+ +++ b/CMakeLists.txt
+-@@ -603,10 +603,10 @@ add_library(poppler ${poppler_SRCS})
++@@ -628,10 +628,10 @@ add_library(poppler ${poppler_SRCS} ${LI
+  if (OpenJPEG_FOUND)
+    # check if we can remove this when we depend on newer openjpeg versions, 2.5 seems fixed
+    # target openjp2 may lack interface include directories
+@@ -56,9 +54,7 @@ index c6c757c..5f1c540 100644
+ +  target_include_directories(poppler  PRIVATE ${LCMS2_INCLUDE_DIR})
+  endif()
+  generate_export_header(poppler BASE_NAME poppler-private EXPORT_FILE_NAME "${CMAKE_CURRENT_BINARY_DIR}/poppler_private_export.h")
+- set_target_properties(poppler PROPERTIES VERSION 127.0.0 SOVERSION 127)
+-diff --git a/glib/CMakeLists.txt b/glib/CMakeLists.txt
+-index 52e8687..08ab39a 100644
++ set_target_properties(poppler PROPERTIES
+ --- a/glib/CMakeLists.txt
+ +++ b/glib/CMakeLists.txt
+ @@ -4,7 +4,7 @@ include_directories(
+@@ -66,7 +62,7 @@ index 52e8687..08ab39a 100644
+  
+  include_directories(
+ -  SYSTEM
+-+  
 ++
-+ std::string String16::utf8() const {
-+   return UTF16ToUTF8(m_impl.data(), m_impl.size());
-+ }
-+--- a/deps/v8/src/inspector/string-16.h
-++++ b/deps/v8/src/inspector/string-16.h
-+@@ -6,6 +6,7 @@
-+ #define V8_INSPECTOR_STRING_16_H_
-+ 
-+ #include <stdint.h>
-++#include <uchar.h>
-+ 
-+ #include <cctype>
-+ #include <climits>
-+@@ -17,7 +18,7 @@
-+ 
-+ namespace v8_inspector {
-+ 
-+-using UChar = uint16_t;
-++using UChar = char16_t;
-+ 
-+ class String16 {
-+  public:
-+@@ -27,6 +28,7 @@ class String16 {
-+   String16(const String16&) V8_NOEXCEPT = default;
-+   String16(String16&&) V8_NOEXCEPT = default;
-+   String16(const UChar* characters, size_t size);
-++  String16(const uint16_t* characters, size_t size);
-+   V8_EXPORT String16(const UChar* characters);
-+   V8_EXPORT String16(const char* characters);
-+   String16(const char* characters, size_t size);
-+@@ -48,7 +50,9 @@ class String16 {
-+   int toInteger(bool* ok = nullptr) const;
-+   std::pair<size_t, size_t> getTrimmedOffsetAndLength() const;
-+   String16 stripWhiteSpace() const;
-+-  const UChar* characters16() const { return m_impl.c_str(); }
-++  const uint16_t* characters16() const {
-++    return reinterpret_cast<const uint16_t*>(m_impl.c_str());
-++  }
-+   size_t length() const { return m_impl.length(); }
-+   bool isEmpty() const { return !m_impl.length(); }
-+   UChar operator[](size_t index) const { return m_impl[index]; }
-+@@ -78,6 +82,8 @@ class String16 {
-+   // On Big endian architectures, byte order needs to be flipped.
-+   V8_EXPORT static String16 fromUTF16LE(const UChar* stringStart,
-+                                         size_t length);
-++  V8_EXPORT static String16 fromUTF16LE(const uint16_t* stringStart,
-++                                        size_t length);
-+ 
-+   std::size_t hash() const {
-+     if (!hash_code) {
-+--- a/deps/v8/src/inspector/v8-string-conversions.cc
-++++ b/deps/v8/src/inspector/v8-string-conversions.cc
-+@@ -12,7 +12,7 @@
-+ 
-+ namespace v8_inspector {
-+ namespace {
-+-using UChar = uint16_t;
-++using UChar = char16_t;
-+ using UChar32 = uint32_t;
-+ 
-+ bool isASCII(UChar c) { return !(c & ~0x7F); }
-+@@ -386,7 +386,7 @@ std::string UTF16ToUTF8(const UChar* str
-+ 
-+ std::basic_string<UChar> UTF8ToUTF16(const char* stringStart, size_t length) {
-+   if (!stringStart || !length) return std::basic_string<UChar>();
-+-  std::vector<uint16_t> buffer(length);
-++  std::vector<UChar> buffer(length);
-+   UChar* bufferStart = buffer.data();
-+ 
-+   UChar* bufferCurrent = bufferStart;
-+@@ -395,7 +395,7 @@ std::basic_string<UChar> UTF8ToUTF16(con
-+                          reinterpret_cast<const char*>(stringStart + length),
-+                          &bufferCurrent, bufferCurrent + buffer.size(), nullptr,
-+                          true) != conversionOK)
-+-    return std::basic_string<uint16_t>();
-++    return std::basic_string<UChar>();
-+   size_t utf16Length = bufferCurrent - bufferStart;
-+   return std::basic_string<UChar>(bufferStart, bufferStart + utf16Length);
-+ }
-+--- a/deps/v8/src/inspector/v8-string-conversions.h
-++++ b/deps/v8/src/inspector/v8-string-conversions.h
-+@@ -5,14 +5,16 @@
-+ #ifndef V8_INSPECTOR_V8_STRING_CONVERSIONS_H_
-+ #define V8_INSPECTOR_V8_STRING_CONVERSIONS_H_
-+ 
-++#include <uchar.h>
-++
-+ #include <cstdint>
-+ #include <string>
-+ 
-+ // Conversion routines between UT8 and UTF16, used by string-16.{h,cc}. You may
-+ // want to use string-16.h directly rather than these.
-+ namespace v8_inspector {
-+-std::basic_string<uint16_t> UTF8ToUTF16(const char* stringStart, size_t length);
-+-std::string UTF16ToUTF8(const uint16_t* stringStart, size_t length);
-++std::basic_string<char16_t> UTF8ToUTF16(const char* stringStart, size_t length);
-++std::string UTF16ToUTF8(const char16_t* stringStart, size_t length);
-+ }  // namespace v8_inspector
-+ 
-+ #endif  // V8_INSPECTOR_V8_STRING_CONVERSIONS_H_
-+--- a/deps/v8/third_party/inspector_protocol/crdtp/test_platform_v8.cc
-++++ b/deps/v8/third_party/inspector_protocol/crdtp/test_platform_v8.cc
-+@@ -11,13 +11,16 @@
-+ namespace v8_crdtp {
-+ 
-+ std::string UTF16ToUTF8(span<uint16_t> in) {
-+-  return v8_inspector::UTF16ToUTF8(in.data(), in.size());
-++  return v8_inspector::UTF16ToUTF8(reinterpret_cast<const char16_t*>(in.data()),
-++                                   in.size());
-+ }
-+ 
-+ std::vector<uint16_t> UTF8ToUTF16(span<uint8_t> in) {
-+-  std::basic_string<uint16_t> utf16 = v8_inspector::UTF8ToUTF16(
-++  std::basic_string<char16_t> utf16 = v8_inspector::UTF8ToUTF16(
-+       reinterpret_cast<const char*>(in.data()), in.size());
-+-  return std::vector<uint16_t>(utf16.begin(), utf16.end());
-++  return std::vector<uint16_t>(
-++      reinterpret_cast<const uint16_t*>(utf16.data()),
-++      reinterpret_cast<const uint16_t*>(utf16.data()) + utf16.size());
-+ }
-+ 
-+ }  // namespace v8_crdtp
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_20.17.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_20.17.0.bb
-index fee2eeaf9e..38e5ca9ff1 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_20.17.0.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.17.0.bb
-@@ -25,6 +25,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://system-c-ares.patch \
-            file://0001-liftoff-Correct-function-signatures.patch \
-            file://libatomic.patch \
-+           file://182d9c05e78.patch \
-            file://run-ptest \
+    ${GLIB2_INCLUDE_DIRS}
+    ${CAIRO_INCLUDE_DIRS}
+  )
+@@ -78,9 +74,7 @@ index 52e8687..08ab39a 100644
+ +target_include_directories(poppler-glib  PRIVATE ${CAIRO_INCLUDE_DIRS})
+  install(TARGETS poppler-glib RUNTIME DESTINATION bin LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  
+- install(FILES
+-diff --git a/qt5/src/CMakeLists.txt b/qt5/src/CMakeLists.txt
+-index 5db3a6c..f242d29 100644
++ if (ENABLE_NSS3)
+ --- a/qt5/src/CMakeLists.txt
+ +++ b/qt5/src/CMakeLists.txt
+ @@ -45,11 +45,11 @@ if(MINGW AND BUILD_SHARED_LIBS)
+@@ -97,8 +91,6 @@ index 5db3a6c..f242d29 100644
+  endif()
+  install(TARGETS poppler-qt5 RUNTIME DESTINATION bin LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  
+-diff --git a/qt6/src/CMakeLists.txt b/qt6/src/CMakeLists.txt
+-index cd91975..6c42e12 100644
+ --- a/qt6/src/CMakeLists.txt
+ +++ b/qt6/src/CMakeLists.txt
+ @@ -45,11 +45,11 @@ if(MINGW AND BUILD_SHARED_LIBS)
+@@ -115,8 +107,6 @@ index cd91975..6c42e12 100644
+  endif()
+  install(TARGETS poppler-qt6 RUNTIME DESTINATION bin LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  
+-diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
+-index afa1352..9bd3b9a 100644
+ --- a/test/CMakeLists.txt
+ +++ b/test/CMakeLists.txt
+ @@ -23,7 +23,7 @@ if (GTK_FOUND)
+@@ -146,11 +136,9 @@ index afa1352..9bd3b9a 100644
+    endif ()
+  endif ()
+  
+-diff --git a/utils/CMakeLists.txt b/utils/CMakeLists.txt
+-index 1c3ebcb..bc1840a 100644
+ --- a/utils/CMakeLists.txt
+ +++ b/utils/CMakeLists.txt
+-@@ -16,7 +16,7 @@ add_executable(pdftoppm ${pdftoppm_SOURCES})
++@@ -18,7 +18,7 @@ add_executable(pdftoppm ${pdftoppm_SOURC
+  target_link_libraries(pdftoppm ${common_libs})
+  if(LCMS2_FOUND)
+    target_link_libraries(pdftoppm ${LCMS2_LIBRARIES})
+@@ -159,7 +147,7 @@ index 1c3ebcb..bc1840a 100644
+  endif()
+  install(TARGETS pdftoppm DESTINATION bin)
+  install(FILES pdftoppm.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
+-@@ -37,10 +37,10 @@ if (HAVE_CAIRO)
++@@ -39,10 +39,10 @@ if (HAVE_CAIRO)
+    add_definitions(${CAIRO_CFLAGS})
+    add_executable(pdftocairo ${pdftocairo_SOURCES})
+    target_link_libraries(pdftocairo ${CAIRO_LIBRARIES} Freetype::Freetype ${common_libs})
+@@ -172,16 +160,16 @@ index 1c3ebcb..bc1840a 100644
+    endif()
+    install(TARGETS pdftocairo DESTINATION bin)
+    install(FILES pdftocairo.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
+-@@ -99,7 +99,7 @@ if (ENABLE_NSS3)
+-     pdfsig.cc
+-   )
++@@ -109,7 +109,7 @@ if (ENABLE_SIGNATURES)
+    add_executable(pdfsig ${pdfsig_SOURCES})
+--  target_include_directories(pdfsig SYSTEM PRIVATE ${NSS3_INCLUDE_DIRS})
+-+  target_include_directories(pdfsig  PRIVATE ${NSS3_INCLUDE_DIRS})
+    target_link_libraries(pdfsig ${common_libs})
+-   install(TARGETS pdfsig DESTINATION bin)
+-   install(FILES pdfsig.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
+-@@ -114,7 +114,7 @@ add_executable(pdftops ${pdftops_SOURCES})
++   if (ENABLE_NSS3)
++-    target_include_directories(pdfsig SYSTEM PRIVATE ${NSS3_INCLUDE_DIRS})
+++    target_include_directories(pdfsig PRIVATE ${NSS3_INCLUDE_DIRS})
++   endif()
++   if (Intl_FOUND)
++     target_link_libraries(pdfsig Intl::Intl)
++@@ -127,7 +127,7 @@ add_executable(pdftops ${pdftops_SOURCES
+  target_link_libraries(pdftops ${common_libs})
+  if(LCMS2_FOUND)
+    target_link_libraries(pdftops ${LCMS2_LIBRARIES})
+diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2023-34872.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2023-34872.patch
+deleted file mode 100644
+index cc942fad77..0000000000
+--- a/meta-oe/recipes-support/poppler/poppler/CVE-2023-34872.patch
++++ /dev/null
+@@ -1,46 +0,0 @@
+-From 591235c8b6c65a2eee88991b9ae73490fd9afdfe Mon Sep 17 00:00:00 2001
+-From: Albert Astals Cid <aacid@kde.org>
+-Date: Fri, 18 Aug 2023 11:36:06 +0000
+-Subject: [PATCH] OutlineItem::open: Fix crash on malformed files
+-
+-Fixes #1399
+-
+-CVE: CVE-2023-34872
+-
+-Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/591235c8b6c65a2eee88991b9ae73490fd9afdfe]
+-
+-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+----
+- poppler/Outline.cc | 10 +++++++---
+- 1 file changed, 7 insertions(+), 3 deletions(-)
+-
+-diff --git a/poppler/Outline.cc b/poppler/Outline.cc
+-index cbb6cb4..4c68be9 100644
+---- a/poppler/Outline.cc
+-+++ b/poppler/Outline.cc
+-@@ -14,7 +14,7 @@
+- // under GPL version 2 or later
+- //
+- // Copyright (C) 2005 Marco Pesenti Gritti <mpg@redhat.com>
+--// Copyright (C) 2008, 2016-2019, 2021 Albert Astals Cid <aacid@kde.org>
+-+// Copyright (C) 2008, 2016-2019, 2021, 2023 Albert Astals Cid <aacid@kde.org>
+- // Copyright (C) 2009 Nick Jones <nick.jones@network-box.com>
+- // Copyright (C) 2016 Jason Crain <jason@aquaticape.us>
+- // Copyright (C) 2017 Adrian Johnson <ajohnson@redneon.com>
+-@@ -483,8 +483,12 @@ void OutlineItem::open()
+- {
+-     if (!kids) {
+-         Object itemDict = xref->fetch(ref);
+--        const Object &firstRef = itemDict.dictLookupNF("First");
+--        kids = readItemList(this, &firstRef, xref, doc);
+-+        if (itemDict.isDict()) {
+-+            const Object &firstRef = itemDict.dictLookupNF("First");
+-+            kids = readItemList(this, &firstRef, xref, doc);
+-+        } else {
+-+            kids = new std::vector<OutlineItem *>();
+-+        }
+-     }
+- }
+-
+---
+-2.35.5
+diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2024-6239-0001.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2024-6239-0001.patch
+deleted file mode 100644
+index 9994ce785b..0000000000
+--- a/meta-oe/recipes-support/poppler/poppler/CVE-2024-6239-0001.patch
++++ /dev/null
+@@ -1,1275 +0,0 @@
+-From fc1c711cb5f769546c6b31cc688bf0ee7f0c1dbc Mon Sep 17 00:00:00 2001
+-From: Sune Vuorela <sune@vuorela.dk>
+-Date: Thu, 1 Feb 2024 19:11:03 +0000
+-Subject: [PATCH] More unicode vectors; fewer raw pointers
+-
+-CVE: CVE-2024-6239
+-Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/fc1c711cb5f769546c6b31cc688bf0ee7f0c1dbc]
+-
+-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+----
+- cpp/poppler-toc.cpp                  |   5 +-
+- glib/poppler-document.cc             |   3 +-
+- poppler/CharCodeToUnicode.cc         | 113 +++++++++------------------
+- poppler/CharCodeToUnicode.h          |  12 ++-
+- poppler/DateInfo.cc                  |  10 +--
+- poppler/JSInfo.cc                    |   9 +--
+- poppler/Outline.cc                   |  12 +--
+- poppler/Outline.h                    |   7 +-
+- poppler/TextOutputDev.cc             |   8 +-
+- poppler/UTF.cc                       |  78 ++++++++----------
+- poppler/UTF.h                        |  11 ++-
+- qt5/src/poppler-outline.cc           |   2 +-
+- qt5/src/poppler-private.cc           |  13 ++-
+- qt5/src/poppler-private.h            |   1 +
+- qt5/tests/check_internal_outline.cpp |   6 +-
+- qt5/tests/check_utf_conversion.cpp   |  24 +++---
+- qt6/src/poppler-outline.cc           |   2 +-
+- qt6/src/poppler-private.cc           |   5 ++
+- qt6/src/poppler-private.h            |   1 +
+- qt6/tests/check_internal_outline.cpp |   6 +-
+- qt6/tests/check_utf_conversion.cpp   |  24 +++---
+- utils/HtmlFonts.cc                   |   4 +-
+- utils/HtmlFonts.h                    |   2 +-
+- utils/HtmlOutputDev.cc               |  38 ++++-----
+- utils/HtmlOutputDev.h                |   2 +-
+- utils/pdfinfo.cc                     |   8 +-
+- utils/pdfsig.cc                      |   8 +-
+- utils/pdftohtml.cc                   |  25 +++---
+- 28 files changed, 183 insertions(+), 256 deletions(-)
+-
+-diff --git a/cpp/poppler-toc.cpp b/cpp/poppler-toc.cpp
+-index c79abde..ed3a983 100644
+---- a/cpp/poppler-toc.cpp
+-+++ b/cpp/poppler-toc.cpp
+-@@ -61,9 +61,8 @@ toc_item_private::~toc_item_private()
+- 
+- void toc_item_private::load(const OutlineItem *item)
+- {
+--    const Unicode *title_unicode = item->getTitle();
+--    const int title_length = item->getTitleLength();
+--    title = detail::unicode_to_ustring(title_unicode, title_length);
+-+    const std::vector<Unicode> &title_unicode = item->getTitle();
+-+    title = detail::unicode_to_ustring(title_unicode.data(), title_unicode.size());
+-     is_open = item->isOpen();
+- }
+- 
+-diff --git a/glib/poppler-document.cc b/glib/poppler-document.cc
+-index 7505a6f..fdfefdc 100644
+---- a/glib/poppler-document.cc
+-+++ b/glib/poppler-document.cc
+-@@ -2772,7 +2772,8 @@ PopplerAction *poppler_index_iter_get_action(PopplerIndexIter *iter)
+-     item = (*iter->items)[iter->index];
+-     link_action = item->getAction();
+- 
+--    title = unicode_to_char(item->getTitle(), item->getTitleLength());
+-+    const std::vector<Unicode> &itemTitle = item->getTitle();
+-+    title = unicode_to_char(itemTitle.data(), itemTitle.size());
+- 
+-     action = _poppler_action_new(iter->document, link_action, title);
+-     g_free(title);
+-diff --git a/poppler/CharCodeToUnicode.cc b/poppler/CharCodeToUnicode.cc
+-index cd00937..d9ef019 100644
+---- a/poppler/CharCodeToUnicode.cc
+-+++ b/poppler/CharCodeToUnicode.cc
+-@@ -38,6 +38,7 @@
+- 
+- #include <cstdio>
+- #include <cstring>
+-+#include <functional>
+- #include "goo/glibc.h"
+- #include "goo/gmem.h"
+- #include "goo/gfile.h"
+-@@ -51,13 +52,6 @@
+- 
+- //------------------------------------------------------------------------
+- 
+--struct CharCodeToUnicodeString
+--{
+--    CharCode c;
+--    Unicode *u;
+--    int len;
+--};
+--
+- //------------------------------------------------------------------------
+- 
+- static int getCharFromString(void *data)
+-@@ -162,7 +156,7 @@ CharCodeToUnicode *CharCodeToUnicode::parseCIDToUnicode(const char *fileName, co
+-     }
+-     fclose(f);
+- 
+--    ctu = new CharCodeToUnicode(collection->toStr(), mapA, mapLenA, true, nullptr, 0, 0);
+-+    ctu = new CharCodeToUnicode(collection->toStr(), mapA, mapLenA, true, {});
+-     gfree(mapA);
+-     return ctu;
+- }
+-@@ -171,8 +165,7 @@ CharCodeToUnicode *CharCodeToUnicode::parseUnicodeToUnicode(const GooString *fil
+- {
+-     FILE *f;
+-     Unicode *mapA;
+--    CharCodeToUnicodeString *sMapA;
+--    CharCode size, oldSize, len, sMapSizeA, sMapLenA;
+-+    CharCode size, oldSize, len;
+-     char buf[256];
+-     char *tok;
+-     Unicode u0;
+-@@ -192,8 +185,7 @@ CharCodeToUnicode *CharCodeToUnicode::parseUnicodeToUnicode(const GooString *fil
+-     mapA = (Unicode *)gmallocn(size, sizeof(Unicode));
+-     memset(mapA, 0, size * sizeof(Unicode));
+-     len = 0;
+--    sMapA = nullptr;
+--    sMapSizeA = sMapLenA = 0;
+-+    std::vector<CharCodeToUnicodeString> sMapA;
+- 
+-     line = 0;
+-     while (getLine(buf, sizeof(buf), f)) {
+-@@ -230,17 +222,12 @@ CharCodeToUnicode *CharCodeToUnicode::parseUnicodeToUnicode(const GooString *fil
+-             mapA[u0] = uBuf[0];
+-         } else {
+-             mapA[u0] = 0;
+--            if (sMapLenA == sMapSizeA) {
+--                sMapSizeA += 16;
+--                sMapA = (CharCodeToUnicodeString *)greallocn(sMapA, sMapSizeA, sizeof(CharCodeToUnicodeString));
+--            }
+--            sMapA[sMapLenA].c = u0;
+--            sMapA[sMapLenA].u = (Unicode *)gmallocn(n, sizeof(Unicode));
+-+            std::vector<Unicode> u;
+-+            u.reserve(n);
+-             for (i = 0; i < n; ++i) {
+--                sMapA[sMapLenA].u[i] = uBuf[i];
+-+                u.push_back(uBuf[i]);
+-             }
+--            sMapA[sMapLenA].len = n;
+--            ++sMapLenA;
+-+            sMapA.push_back({ u0, std::move(u) });
+-         }
+-         if (u0 >= len) {
+-             len = u0 + 1;
+-@@ -248,7 +235,7 @@ CharCodeToUnicode *CharCodeToUnicode::parseUnicodeToUnicode(const GooString *fil
+-     }
+-     fclose(f);
+- 
+--    ctu = new CharCodeToUnicode(fileName->toStr(), mapA, len, true, sMapA, sMapLenA, sMapSizeA);
+-+    ctu = new CharCodeToUnicode(fileName->toStr(), mapA, len, true, std::move(sMapA));
+-     gfree(mapA);
+-     gfree(uBuf);
+-     return ctu;
+-@@ -256,7 +243,7 @@ CharCodeToUnicode *CharCodeToUnicode::parseUnicodeToUnicode(const GooString *fil
+- 
+- CharCodeToUnicode *CharCodeToUnicode::make8BitToUnicode(Unicode *toUnicode)
+- {
+--    return new CharCodeToUnicode({}, toUnicode, 256, true, nullptr, 0, 0);
+-+    return new CharCodeToUnicode({}, toUnicode, 256, true, {});
+- }
+- 
+- CharCodeToUnicode *CharCodeToUnicode::parseCMap(const GooString *buf, int nBits)
+-@@ -512,25 +499,18 @@ void CharCodeToUnicode::addMapping(CharCode code, char *uStr, int n, int offset)
+-             map[code] = 0xfffd;
+-         }
+-     } else {
+--        if (sMapLen >= sMapSize) {
+--            sMapSize = sMapSize + 16;
+--            sMap = (CharCodeToUnicodeString *)greallocn(sMap, sMapSize, sizeof(CharCodeToUnicodeString));
+--        }
+-         map[code] = 0;
+--        sMap[sMapLen].c = code;
+-         int utf16Len = n / 4;
+--        Unicode *utf16 = (Unicode *)gmallocn(utf16Len, sizeof(Unicode));
+-+        std::vector<Unicode> utf16(utf16Len);
+-+        utf16.resize(utf16Len);
+-         for (j = 0; j < utf16Len; ++j) {
+-             if (!parseHex(uStr + j * 4, 4, &utf16[j])) {
+--                gfree(utf16);
+-                 error(errSyntaxWarning, -1, "Illegal entry in ToUnicode CMap");
+-                 return;
+-             }
+-         }
+-         utf16[utf16Len - 1] += offset;
+--        sMap[sMapLen].len = UTF16toUCS4(utf16, utf16Len, &sMap[sMapLen].u);
+--        gfree(utf16);
+--        ++sMapLen;
+-+        sMap.push_back({ code, UTF16toUCS4(utf16.data(), utf16.size()) });
+-     }
+- }
+- 
+-@@ -561,8 +541,6 @@ CharCodeToUnicode::CharCodeToUnicode()
+- {
+-     map = nullptr;
+-     mapLen = 0;
+--    sMap = nullptr;
+--    sMapLen = sMapSize = 0;
+-     refCnt = 1;
+-     isIdentity = false;
+- }
+-@@ -576,13 +554,11 @@ CharCodeToUnicode::CharCodeToUnicode(const std::optional<std::string> &tagA) : t
+-     for (i = 0; i < mapLen; ++i) {
+-         map[i] = 0;
+-     }
+--    sMap = nullptr;
+--    sMapLen = sMapSize = 0;
+-     refCnt = 1;
+-     isIdentity = false;
+- }
+- 
+--CharCodeToUnicode::CharCodeToUnicode(const std::optional<std::string> &tagA, Unicode *mapA, CharCode mapLenA, bool copyMap, CharCodeToUnicodeString *sMapA, int sMapLenA, int sMapSizeA) : tag(tagA)
+-+CharCodeToUnicode::CharCodeToUnicode(const std::optional<std::string> &tagA, Unicode *mapA, CharCode mapLenA, bool copyMap, std::vector<CharCodeToUnicodeString> &&sMapA) : tag(tagA)
+- {
+-     mapLen = mapLenA;
+-     if (copyMap) {
+-@@ -591,9 +567,7 @@ CharCodeToUnicode::CharCodeToUnicode(const std::optional<std::string> &tagA, Uni
+-     } else {
+-         map = mapA;
+-     }
+--    sMap = sMapA;
+--    sMapLen = sMapLenA;
+--    sMapSize = sMapSizeA;
+-+    sMap = std::move(sMapA);
+-     refCnt = 1;
+-     isIdentity = false;
+- }
+-@@ -601,12 +575,6 @@ CharCodeToUnicode::CharCodeToUnicode(const std::optional<std::string> &tagA, Uni
+- CharCodeToUnicode::~CharCodeToUnicode()
+- {
+-     gfree(map);
+--    if (sMap) {
+--        for (int i = 0; i < sMapLen; ++i) {
+--            gfree(sMap[i].u);
+--        }
+--        gfree(sMap);
+--    }
+- }
+- 
+- void CharCodeToUnicode::incRefCnt()
+-@@ -628,7 +596,8 @@ bool CharCodeToUnicode::match(const GooString *tagA)
+- 
+- void CharCodeToUnicode::setMapping(CharCode c, Unicode *u, int len)
+- {
+--    int i, j;
+-+    size_t i;
+-+    int j;
+- 
+-     if (!map || isIdentity) {
+-         return;
+-@@ -636,28 +605,26 @@ void CharCodeToUnicode::setMapping(CharCode c, Unicode *u, int len)
+-     if (len == 1) {
+-         map[c] = u[0];
+-     } else {
+--        for (i = 0; i < sMapLen; ++i) {
+-+        std::optional<std::reference_wrapper<CharCodeToUnicodeString>> element;
+-+        for (i = 0; i < sMap.size(); ++i) {
+-             if (sMap[i].c == c) {
+--                gfree(sMap[i].u);
+-+                sMap[i].u.clear();
+-+                element = std::ref(sMap[i]);
+-                 break;
+-             }
+-         }
+--        if (i == sMapLen) {
+--            if (sMapLen == sMapSize) {
+--                sMapSize += 8;
+--                sMap = (CharCodeToUnicodeString *)greallocn(sMap, sMapSize, sizeof(CharCodeToUnicodeString));
+--            }
+--            ++sMapLen;
+-+        if (!element) {
+-+            sMap.emplace_back(CharCodeToUnicodeString { c, {} });
+-+            element = std::ref(sMap.back());
+-         }
+-         map[c] = 0;
+--        sMap[i].c = c;
+--        sMap[i].len = len;
+--        sMap[i].u = (Unicode *)gmallocn(len, sizeof(Unicode));
+-+        element->get().c = c;
+-+        element->get().u.reserve(len);
+-         for (j = 0; j < len; ++j) {
+-             if (UnicodeIsValid(u[j])) {
+--                sMap[i].u[j] = u[j];
+-+                element->get().u.push_back(u[j]);
+-             } else {
+--                sMap[i].u[j] = 0xfffd;
+-+                element->get().u.push_back(0xfffd);
+-             }
+-         }
+-     }
+-@@ -665,8 +632,6 @@ void CharCodeToUnicode::setMapping(CharCode c, Unicode *u, int len)
+- 
+- int CharCodeToUnicode::mapToUnicode(CharCode c, Unicode const **u) const
+- {
+--    int i;
+--
+-     if (isIdentity) {
+-         map[0] = (Unicode)c;
+-         *u = map;
+-@@ -679,10 +644,10 @@ int CharCodeToUnicode::mapToUnicode(CharCode c, Unicode const **u) const
+-         *u = &map[c];
+-         return 1;
+-     }
+--    for (i = sMapLen - 1; i >= 0; --i) { // in reverse so CMap takes precedence
+--        if (sMap[i].c == c) {
+--            *u = sMap[i].u;
+--            return sMap[i].len;
+-+    for (auto i = sMap.size(); i > 0; --i) { // in reverse so CMap takes precedence
+-+        if (sMap[i - 1].c == c) {
+-+            *u = sMap[i - 1].u.data();
+-+            return sMap[i - 1].u.size();
+-         }
+-     }
+-     return 0;
+-@@ -704,24 +669,24 @@ int CharCodeToUnicode::mapToCharCode(const Unicode *u, CharCode *c, int usize) c
+-         }
+-         *c = 'x';
+-     } else {
+--        int i, j;
+-+        size_t j;
+-         // for each entry in the sMap
+--        for (i = 0; i < sMapLen; i++) {
+-+        for (const auto &element : sMap) {
+-             // if the entry's unicode length isn't the same are usize, the strings
+-             // are obviously different
+--            if (sMap[i].len != usize) {
+-+            if (element.u.size() != size_t(usize)) {
+-                 continue;
+-             }
+-             // compare the string char by char
+--            for (j = 0; j < sMap[i].len; j++) {
+--                if (sMap[i].u[j] != u[j]) {
+-+            for (j = 0; j < element.u.size(); j++) {
+-+                if (element.u[j] != u[j]) {
+-                     break;
+-                 }
+-             }
+- 
+-             // we have the same strings
+--            if (j == sMap[i].len) {
+--                *c = sMap[i].c;
+-+            if (j == element.u.size()) {
+-+                *c = element.c;
+-                 return 1;
+-             }
+-         }
+-diff --git a/poppler/CharCodeToUnicode.h b/poppler/CharCodeToUnicode.h
+-index 596d44d..9aa2571 100644
+---- a/poppler/CharCodeToUnicode.h
+-+++ b/poppler/CharCodeToUnicode.h
+-@@ -33,11 +33,11 @@
+- 
+- #include <atomic>
+- #include <optional>
+-+#include <vector>
+- 
+- #include "poppler-config.h"
+- #include "CharTypes.h"
+- 
+--struct CharCodeToUnicodeString;
+- class GooString;
+- 
+- //------------------------------------------------------------------------
+-@@ -100,18 +100,22 @@ public:
+-     CharCode getLength() const { return mapLen; }
+- 
+- private:
+-+    struct CharCodeToUnicodeString
+-+    {
+-+        CharCode c;
+-+        std::vector<Unicode> u;
+-+    };
+-     bool parseCMap1(int (*getCharFunc)(void *), void *data, int nBits);
+-     void addMapping(CharCode code, char *uStr, int n, int offset);
+-     void addMappingInt(CharCode code, Unicode u);
+-     CharCodeToUnicode();
+-     explicit CharCodeToUnicode(const std::optional<std::string> &tagA);
+--    CharCodeToUnicode(const std::optional<std::string> &tagA, Unicode *mapA, CharCode mapLenA, bool copyMap, CharCodeToUnicodeString *sMapA, int sMapLenA, int sMapSizeA);
+-+    CharCodeToUnicode(const std::optional<std::string> &tagA, Unicode *mapA, CharCode mapLenA, bool copyMap, std::vector<CharCodeToUnicodeString> &&sMapA);
+- 
+-     const std::optional<std::string> tag;
+-     Unicode *map;
+-     CharCode mapLen;
+--    CharCodeToUnicodeString *sMap;
+--    int sMapLen, sMapSize;
+-+    std::vector<CharCodeToUnicodeString> sMap;
+-     std::atomic_int refCnt;
+-     bool isIdentity;
+- };
+-diff --git a/poppler/DateInfo.cc b/poppler/DateInfo.cc
+-index cdba4ab..28474de 100644
+---- a/poppler/DateInfo.cc
+-+++ b/poppler/DateInfo.cc
+-@@ -36,16 +36,14 @@
+- /* See PDF Reference 1.3, Section 3.8.2 for PDF Date representation */
+- bool parseDateString(const GooString *date, int *year, int *month, int *day, int *hour, int *minute, int *second, char *tz, int *tzHour, int *tzMinute)
+- {
+--    Unicode *u;
+--    int len = TextStringToUCS4(date->toStr(), &u);
+-+    std::vector<Unicode> u = TextStringToUCS4(date->toStr());
+-     GooString s;
+--    for (int i = 0; i < len; i++) {
+-+    for (auto &c : u) {
+-         // Ignore any non ASCII characters
+--        if (u[i] < 128) {
+--            s.append(u[i]);
+-+        if (c < 128) {
+-+            s.append(c);
+-         }
+-     }
+--    gfree(u);
+-     const char *dateString = s.c_str();
+- 
+-     if (strlen(dateString) < 2) {
+-diff --git a/poppler/JSInfo.cc b/poppler/JSInfo.cc
+-index 29fa707..eaef33e 100644
+---- a/poppler/JSInfo.cc
+-+++ b/poppler/JSInfo.cc
+-@@ -38,20 +38,17 @@ JSInfo::~JSInfo() { }
+- 
+- void JSInfo::printJS(const GooString *js)
+- {
+--    Unicode *u = nullptr;
+-     char buf[8];
+--    int i, n, len;
+- 
+-     if (!js || !js->c_str()) {
+-         return;
+-     }
+- 
+--    len = TextStringToUCS4(js->toStr(), &u);
+--    for (i = 0; i < len; i++) {
+--        n = uniMap->mapUnicode(u[i], buf, sizeof(buf));
+-+    std::vector<Unicode> u = TextStringToUCS4(js->toStr());
+-+    for (auto &c : u) {
+-+        int n = uniMap->mapUnicode(c, buf, sizeof(buf));
+-         fwrite(buf, 1, n, file);
+-     }
+--    gfree(u);
+- }
+- 
+- void JSInfo::scanLinkAction(LinkAction *link, const char *action)
+-diff --git a/poppler/Outline.cc b/poppler/Outline.cc
+-index 4c68be9..086c104 100644
+---- a/poppler/Outline.cc
+-+++ b/poppler/Outline.cc
+-@@ -407,15 +407,12 @@ OutlineItem::OutlineItem(const Dict *dict, Ref refA, OutlineItem *parentA, XRef
+-     parent = parentA;
+-     xref = xrefA;
+-     doc = docA;
+--    title = nullptr;
+-     kids = nullptr;
+- 
+-     obj1 = dict->lookup("Title");
+-     if (obj1.isString()) {
+-         const GooString *s = obj1.getString();
+--        titleLen = TextStringToUCS4(s->toStr(), &title);
+--    } else {
+--        titleLen = 0;
+-+        title = TextStringToUCS4(s->toStr());
+-     }
+- 
+-     obj1 = dict->lookup("Dest");
+-@@ -446,9 +443,6 @@ OutlineItem::~OutlineItem()
+-         delete kids;
+-         kids = nullptr;
+-     }
+--    if (title) {
+--        gfree(title);
+--    }
+- }
+- 
+- std::vector<OutlineItem *> *OutlineItem::readItemList(OutlineItem *parent, const Object *firstItemRef, XRef *xrefA, PDFDoc *docA)
+-@@ -494,11 +488,9 @@ void OutlineItem::open()
+- 
+- void OutlineItem::setTitle(const std::string &titleA)
+- {
+--    gfree(title);
+--
+-     Object dict = xref->fetch(ref);
+-     GooString *g = new GooString(titleA);
+--    titleLen = TextStringToUCS4(g->toStr(), &title);
+-+    title = TextStringToUCS4(g->toStr());
+-     dict.dictSet("Title", Object(g));
+-     xref->setModifiedObject(&dict, ref);
+- }
+-diff --git a/poppler/Outline.h b/poppler/Outline.h
+-index a301604..af431f6 100644
+---- a/poppler/Outline.h
+-+++ b/poppler/Outline.h
+-@@ -27,6 +27,7 @@
+- #define OUTLINE_H
+- 
+- #include <memory>
+-+#include <vector>
+- #include "Object.h"
+- #include "CharTypes.h"
+- #include "poppler_private_export.h"
+-@@ -91,9 +92,8 @@ public:
+-     OutlineItem(const OutlineItem &) = delete;
+-     OutlineItem &operator=(const OutlineItem &) = delete;
+-     static std::vector<OutlineItem *> *readItemList(OutlineItem *parent, const Object *firstItemRef, XRef *xrefA, PDFDoc *docA);
+--    const Unicode *getTitle() const { return title; }
+-+    const std::vector<Unicode> &getTitle() const { return title; }
+-     void setTitle(const std::string &titleA);
+--    int getTitleLength() const { return titleLen; }
+-     bool setPageDest(int i);
+-     // OutlineItem keeps the ownership of the action
+-     const LinkAction *getAction() const { return action.get(); }
+-@@ -112,8 +112,7 @@ private:
+-     OutlineItem *parent;
+-     PDFDoc *doc;
+-     XRef *xref;
+--    Unicode *title;
+--    int titleLen;
+-+    std::vector<Unicode> title;
+-     std::unique_ptr<LinkAction> action;
+-     bool startsOpen;
+-     std::vector<OutlineItem *> *kids; // nullptr if this item is closed or has no kids
+-diff --git a/poppler/TextOutputDev.cc b/poppler/TextOutputDev.cc
+-index 06fc307..ee11fcb 100644
+---- a/poppler/TextOutputDev.cc
+-+++ b/poppler/TextOutputDev.cc
+-@@ -5668,15 +5668,11 @@ void ActualText::end(const GfxState *state)
+-     // extents of all the glyphs inside the span
+- 
+-     if (actualTextNBytes) {
+--        Unicode *uni = nullptr;
+--        int length;
+--
+-         // now that we have the position info for all of the text inside
+-         // the marked content span, we feed the "ActualText" back through
+-         // text->addChar()
+--        length = TextStringToUCS4(actualText->toStr(), &uni);
+--        text->addChar(state, actualTextX0, actualTextY0, actualTextX1 - actualTextX0, actualTextY1 - actualTextY0, 0, actualTextNBytes, uni, length);
+--        gfree(uni);
+-+        std::vector<Unicode> uni = TextStringToUCS4(actualText->toStr());
+-+        text->addChar(state, actualTextX0, actualTextY0, actualTextX1 - actualTextX0, actualTextY1 - actualTextY0, 0, actualTextNBytes, uni.data(), uni.size());
+-     }
+- 
+-     delete actualText;
+-diff --git a/poppler/UTF.cc b/poppler/UTF.cc
+-index 9b1bf95..eb542eb 100644
+---- a/poppler/UTF.cc
+-+++ b/poppler/UTF.cc
+-@@ -42,65 +42,52 @@ bool UnicodeIsValid(Unicode ucs4)
+-     return (ucs4 < 0x110000) && ((ucs4 & 0xfffff800) != 0xd800) && (ucs4 < 0xfdd0 || ucs4 > 0xfdef) && ((ucs4 & 0xfffe) != 0xfffe);
+- }
+- 
+--int UTF16toUCS4(const Unicode *utf16, int utf16Len, Unicode **ucs4_out)
+-+std::vector<Unicode> UTF16toUCS4(const Unicode *utf16, int utf16Len)
+- {
+--    int i, n, len;
+--    Unicode *u;
+--
+-     // count characters
+--    len = 0;
+--    for (i = 0; i < utf16Len; i++) {
+-+    int len = 0;
+-+    for (int i = 0; i < utf16Len; i++) {
+-         if (utf16[i] >= 0xd800 && utf16[i] < 0xdc00 && i + 1 < utf16Len && utf16[i + 1] >= 0xdc00 && utf16[i + 1] < 0xe000) {
+-             i++; /* surrogate pair */
+-         }
+-         len++;
+-     }
+--    if (ucs4_out == nullptr) {
+--        return len;
+--    }
+--
+--    u = (Unicode *)gmallocn(len, sizeof(Unicode));
+--    n = 0;
+-+    std::vector<Unicode> u;
+-+    u.reserve(len);
+-     // convert string
+--    for (i = 0; i < utf16Len; i++) {
+-+    for (int i = 0; i < utf16Len; i++) {
+-         if (utf16[i] >= 0xd800 && utf16[i] < 0xdc00) { /* surrogate pair */
+-             if (i + 1 < utf16Len && utf16[i + 1] >= 0xdc00 && utf16[i + 1] < 0xe000) {
+-                 /* next code is a low surrogate */
+--                u[n] = (((utf16[i] & 0x3ff) << 10) | (utf16[i + 1] & 0x3ff)) + 0x10000;
+-+                u.push_back((((utf16[i] & 0x3ff) << 10) | (utf16[i + 1] & 0x3ff)) + 0x10000);
+-                 ++i;
+-             } else {
+-                 /* missing low surrogate
+-                    replace it with REPLACEMENT CHARACTER (U+FFFD) */
+--                u[n] = 0xfffd;
+-+                u.push_back(0xfffd);
+-             }
+-         } else if (utf16[i] >= 0xdc00 && utf16[i] < 0xe000) {
+-             /* invalid low surrogate
+-                replace it with REPLACEMENT CHARACTER (U+FFFD) */
+--            u[n] = 0xfffd;
+-+            u.push_back(0xfffd);
+-         } else {
+--            u[n] = utf16[i];
+-+            u.push_back(utf16[i]);
+-         }
+--        if (!UnicodeIsValid(u[n])) {
+--            u[n] = 0xfffd;
+-+        if (!UnicodeIsValid(u.back())) {
+-+            u.back() = 0xfffd;
+-         }
+--        n++;
+-     }
+--    *ucs4_out = u;
+--    return len;
+-+    return u;
+- }
+- 
+--int TextStringToUCS4(const std::string &textStr, Unicode **ucs4)
+-+std::vector<Unicode> TextStringToUCS4(const std::string &textStr)
+- {
+--    int i, len;
+--    const char *s;
+--    Unicode *u;
+-     bool isUnicode, isUnicodeLE;
+- 
+--    len = textStr.size();
+--    s = textStr.c_str();
+-+    int len = textStr.size();
+-+    const std::string &s = textStr;
+-     if (len == 0) {
+--        *ucs4 = nullptr;
+--        return 0;
+-+        return {};
+-     }
+- 
+-     if (GooString::hasUnicodeMarker(textStr)) {
+-@@ -115,30 +102,30 @@ int TextStringToUCS4(const std::string &textStr, Unicode **ucs4)
+-     }
+- 
+-     if (isUnicode || isUnicodeLE) {
+--        Unicode *utf16;
+-         len = len / 2 - 1;
+-         if (len > 0) {
+--            utf16 = new Unicode[len];
+--            for (i = 0; i < len; i++) {
+-+            std::vector<Unicode> utf16;
+-+            utf16.reserve(len);
+-+            for (int i = 0; i < len; i++) {
+-                 if (isUnicode) {
+--                    utf16[i] = (s[2 + i * 2] & 0xff) << 8 | (s[3 + i * 2] & 0xff);
+-+                    utf16.push_back((s[2 + i * 2] & 0xff) << 8 | (s[3 + i * 2] & 0xff));
+-                 } else { // UnicodeLE
+--                    utf16[i] = (s[3 + i * 2] & 0xff) << 8 | (s[2 + i * 2] & 0xff);
+-+                    utf16.push_back((s[3 + i * 2] & 0xff) << 8 | (s[2 + i * 2] & 0xff));
+-                 }
+-             }
+--            len = UTF16toUCS4(utf16, len, &u);
+--            delete[] utf16;
+-+            return UTF16toUCS4(utf16.data(), utf16.size());
+-+
+-         } else {
+--            u = nullptr;
+-+            return {};
+-         }
+-     } else {
+--        u = (Unicode *)gmallocn(len, sizeof(Unicode));
+--        for (i = 0; i < len; i++) {
+--            u[i] = pdfDocEncoding[s[i] & 0xff];
+-+        std::vector<Unicode> u;
+-+        u.reserve(len);
+-+        for (int i = 0; i < len; i++) {
+-+            u.push_back(pdfDocEncoding[s[i] & 0xff]);
+-         }
+-+        return u;
+-     }
+--    *ucs4 = u;
+--    return len;
+- }
+- 
+- bool UnicodeIsWhitespace(Unicode ucs4)
+-@@ -549,7 +536,10 @@ void unicodeToAscii7(const Unicode *in, int len, Unicode **ucs4_out, int *out_le
+-         }
+-     }
+- 
+--    *out_len = TextStringToUCS4(str, ucs4_out);
+-+    std::vector<Unicode> ucs4 = TextStringToUCS4(str);
+-+    *out_len = ucs4.size();
+-+    *ucs4_out = (Unicode *)gmallocn(ucs4.size(), sizeof(Unicode));
+-+    memcpy(*ucs4_out, ucs4.data(), ucs4.size() * sizeof(Unicode));
+- 
+-     if (indices) {
+-         idx[k] = in_idx[len];
+-diff --git a/poppler/UTF.h b/poppler/UTF.h
+-index 626c686..bfc5f65 100644
+---- a/poppler/UTF.h
+-+++ b/poppler/UTF.h
+-@@ -19,6 +19,7 @@
+- #include <cstdint>
+- #include <climits>
+- #include <memory>
+-+#include <vector>
+- 
+- #include "goo/GooString.h"
+- #include "CharTypes.h"
+-@@ -27,16 +28,14 @@
+- // Convert a UTF-16 string to a UCS-4
+- //   utf16      - utf16 bytes
+- //   utf16_len  - number of UTF-16 characters
+--//   ucs4_out   - if not NULL, allocates and returns UCS-4 string. Free with gfree.
+- //   returns number of UCS-4 characters
+--int UTF16toUCS4(const Unicode *utf16, int utf16Len, Unicode **ucs4_out);
+-+std::vector<Unicode> UTF16toUCS4(const Unicode *utf16, int utf16Len);
+- 
+- // Convert a PDF Text String to UCS-4
+- //   s          - PDF text string
+--//   ucs4       - if the number of UCS-4 characters is > 0, allocates and
+--//                returns UCS-4 string. Free with gfree.
+--//   returns number of UCS-4 characters
+--int POPPLER_PRIVATE_EXPORT TextStringToUCS4(const std::string &textStr, Unicode **ucs4);
+-+//   returns UCS-4 characters
+-+// Convert a PDF text string to UCS-4
+-+std::vector<Unicode> POPPLER_PRIVATE_EXPORT TextStringToUCS4(const std::string &textStr);
+- 
+- // check if UCS-4 character is valid
+- bool UnicodeIsValid(Unicode ucs4);
+-diff --git a/qt5/src/poppler-outline.cc b/qt5/src/poppler-outline.cc
+-index 5ff7e37..2f6ef2d 100644
+---- a/qt5/src/poppler-outline.cc
+-+++ b/qt5/src/poppler-outline.cc
+-@@ -78,7 +78,7 @@ QString OutlineItem::name() const
+- 
+-     if (name.isEmpty()) {
+-         if (const ::OutlineItem *data = m_data->data) {
+--            name = unicodeToQString(data->getTitle(), data->getTitleLength());
+-+            name = unicodeToQString(data->getTitle());
+-         }
+-     }
+- 
+-diff --git a/qt5/src/poppler-private.cc b/qt5/src/poppler-private.cc
+-index 228d8e8..54df79f 100644
+---- a/qt5/src/poppler-private.cc
+-+++ b/qt5/src/poppler-private.cc
+-@@ -94,6 +94,11 @@ QString unicodeToQString(const Unicode *u, int len)
+-     return QString::fromUtf8(convertedStr.c_str(), convertedStr.getLength());
+- }
+- 
+-+QString unicodeToQString(const std::vector<Unicode> &u)
+-+{
+-+    return unicodeToQString(u.data(), u.size());
+-+}
+-+
+- QString UnicodeParsedString(const GooString *s1)
+- {
+-     return (s1) ? UnicodeParsedString(s1->toStr()) : QString();
+-@@ -266,13 +271,7 @@ void DocumentData::addTocChildren(QDomDocument *docSyn, QDomNode *parent, const
+-         // iterate over every object in 'items'
+- 
+-         // 1. create element using outlineItem's title as tagName
+--        QString name;
+--        const Unicode *uniChar = outlineItem->getTitle();
+--        int titleLength = outlineItem->getTitleLength();
+--        name = unicodeToQString(uniChar, titleLength);
+--        if (name.isEmpty()) {
+--            continue;
+--        }
+-+        QString name = unicodeToQString(outlineItem->getTitle());
+- 
+-         QDomElement item = docSyn->createElement(name);
+-         parent->appendChild(item);
+-diff --git a/qt5/src/poppler-private.h b/qt5/src/poppler-private.h
+-index 39dfb6b..bba5bd7 100644
+---- a/qt5/src/poppler-private.h
+-+++ b/qt5/src/poppler-private.h
+-@@ -73,6 +73,7 @@ namespace Poppler {
+- 
+- /* borrowed from kpdf */
+- POPPLER_QT5_EXPORT QString unicodeToQString(const Unicode *u, int len);
+-+POPPLER_QT5_EXPORT QString unicodeToQString(const std::vector<Unicode> &u);
+- 
+- POPPLER_QT5_EXPORT QString UnicodeParsedString(const GooString *s1);
+- 
+-diff --git a/qt5/tests/check_internal_outline.cpp b/qt5/tests/check_internal_outline.cpp
+-index c12b604..5db6bf4 100644
+---- a/qt5/tests/check_internal_outline.cpp
+-+++ b/qt5/tests/check_internal_outline.cpp
+-@@ -56,10 +56,10 @@ void TestInternalOutline::testCreateOutline()
+- 
+- static std::string getTitle(const OutlineItem *item)
+- {
+--    const Unicode *u = item->getTitle();
+-+    std::vector<Unicode> u = item->getTitle();
+-     std::string s;
+--    for (int i = 0; i < item->getTitleLength(); i++) {
+--        s.append(1, (char)u[i]);
+-+    for (auto &c : u) {
+-+        s.append(1, (char)(c));
+-     }
+-     return s;
+- }
+-diff --git a/qt5/tests/check_utf_conversion.cpp b/qt5/tests/check_utf_conversion.cpp
+-index 73c684e..b00f080 100644
+---- a/qt5/tests/check_utf_conversion.cpp
+-+++ b/qt5/tests/check_utf_conversion.cpp
+-@@ -133,16 +133,13 @@ void TestUTFConversion::testUnicodeToAscii7()
+-     // malloc() always returns 8-byte aligned memory addresses.
+-     GooString *goo = Poppler::QStringToUnicodeGooString(QString::fromUtf8("®©©©©©©©©©©©©©©©©©©©©")); // clazy:exclude=qstring-allocations
+- 
+--    Unicode *in;
+--    const int in_len = TextStringToUCS4(goo->toStr(), &in);
+-+    const std::vector<Unicode> in = TextStringToUCS4(goo->toStr());
+- 
+-     delete goo;
+- 
+-     int in_norm_len;
+-     int *in_norm_idx;
+--    Unicode *in_norm = unicodeNormalizeNFKC(in, in_len, &in_norm_len, &in_norm_idx, true);
+--
+--    free(in);
+-+    Unicode *in_norm = unicodeNormalizeNFKC(in.data(), in.size(), &in_norm_len, &in_norm_idx, true);
+- 
+-     Unicode *out;
+-     int out_len;
+-@@ -174,25 +171,24 @@ void TestUTFConversion::testUnicodeLittleEndian()
+-     // Let's assert both GooString's are different
+-     QVERIFY(GooUTF16LE != GooUTF16BE);
+- 
+--    Unicode *UCS4fromLE, *UCS4fromBE;
+--    const int len1 = TextStringToUCS4(GooUTF16LE, &UCS4fromLE);
+--    const int len2 = TextStringToUCS4(GooUTF16BE, &UCS4fromBE);
+-+    const std::vector<Unicode> UCS4fromLE = TextStringToUCS4(GooUTF16LE);
+-+    const std::vector<Unicode> UCS4fromBE = TextStringToUCS4(GooUTF16BE);
+- 
+-     // len is 4 because TextStringToUCS4() removes the two leading Byte Order Mark (BOM) code points
+--    QCOMPARE(len1, len2);
+--    QCOMPARE(len1, 4);
+-+    QCOMPARE(UCS4fromLE.size(), UCS4fromBE.size());
+-+    QCOMPARE(UCS4fromLE.size(), 4);
+- 
+-     // Check that now after conversion, UCS4fromLE and UCS4fromBE are now the same
+--    for (int i = 0; i < len1; i++) {
+-+    for (size_t i = 0; i < UCS4fromLE.size(); i++) {
+-         QCOMPARE(UCS4fromLE[i], UCS4fromBE[i]);
+-     }
+- 
+-     const QString expected = QString::fromUtf8("HI!☑"); // clazy:exclude=qstring-allocations
+- 
+-     // Do some final verifications, checking the strings to be "HI!"
+--    QVERIFY(*UCS4fromLE == *UCS4fromBE);
+--    QVERIFY(compare(UCS4fromLE, expected.utf16(), len1));
+--    QVERIFY(compare(UCS4fromBE, expected.utf16(), len1));
+-+    QVERIFY(UCS4fromLE == UCS4fromBE);
+-+    QVERIFY(compare(UCS4fromLE.data(), expected.utf16(), UCS4fromLE.size()));
+-+    QVERIFY(compare(UCS4fromBE.data(), expected.utf16(), UCS4fromLE.size()));
+- }
+- 
+- QTEST_GUILESS_MAIN(TestUTFConversion)
+-diff --git a/qt6/src/poppler-outline.cc b/qt6/src/poppler-outline.cc
+-index f5ba2a9..2bc0d30 100644
+---- a/qt6/src/poppler-outline.cc
+-+++ b/qt6/src/poppler-outline.cc
+-@@ -78,7 +78,7 @@ QString OutlineItem::name() const
+- 
+-     if (name.isEmpty()) {
+-         if (const ::OutlineItem *data = m_data->data) {
+--            name = unicodeToQString(data->getTitle(), data->getTitleLength());
+-+            name = unicodeToQString(data->getTitle());
+-         }
+-     }
+- 
+-diff --git a/qt6/src/poppler-private.cc b/qt6/src/poppler-private.cc
+-index 91d1725..2cb2396 100644
+---- a/qt6/src/poppler-private.cc
+-+++ b/qt6/src/poppler-private.cc
+-@@ -94,6 +94,11 @@ QString unicodeToQString(const Unicode *u, int len)
+-     return QString::fromUtf8(convertedStr.c_str(), convertedStr.getLength());
+- }
+- 
+-+QString unicodeToQString(const std::vector<Unicode> &u)
+-+{
+-+    return unicodeToQString(u.data(), u.size());
+-+}
+-+
+- QString UnicodeParsedString(const GooString *s1)
+- {
+-     return (s1) ? UnicodeParsedString(s1->toStr()) : QString();
+-diff --git a/qt6/src/poppler-private.h b/qt6/src/poppler-private.h
+-index d1f7335..a3117a6 100644
+---- a/qt6/src/poppler-private.h
+-+++ b/qt6/src/poppler-private.h
+-@@ -72,6 +72,7 @@ namespace Poppler {
+- 
+- /* borrowed from kpdf */
+- POPPLER_QT6_EXPORT QString unicodeToQString(const Unicode *u, int len);
+-+POPPLER_QT6_EXPORT QString unicodeToQString(const std::vector<Unicode> &u);
+- 
+- POPPLER_QT6_EXPORT QString UnicodeParsedString(const GooString *s1);
+- 
+-diff --git a/qt6/tests/check_internal_outline.cpp b/qt6/tests/check_internal_outline.cpp
+-index c12b604..d23e773 100644
+---- a/qt6/tests/check_internal_outline.cpp
+-+++ b/qt6/tests/check_internal_outline.cpp
+-@@ -56,10 +56,10 @@ void TestInternalOutline::testCreateOutline()
+- 
+- static std::string getTitle(const OutlineItem *item)
+- {
+--    const Unicode *u = item->getTitle();
+-+    const std::vector<Unicode> &u = item->getTitle();
+-     std::string s;
+--    for (int i = 0; i < item->getTitleLength(); i++) {
+--        s.append(1, (char)u[i]);
+-+    for (const auto &c : u) {
+-+        s.append(1, (char)(c));
+-     }
+-     return s;
+- }
+-diff --git a/qt6/tests/check_utf_conversion.cpp b/qt6/tests/check_utf_conversion.cpp
+-index 2cac758..e7f35ea 100644
+---- a/qt6/tests/check_utf_conversion.cpp
+-+++ b/qt6/tests/check_utf_conversion.cpp
+-@@ -131,16 +131,13 @@ void TestUTFConversion::testUnicodeToAscii7()
+-     // malloc() always returns 8-byte aligned memory addresses.
+-     GooString *goo = Poppler::QStringToUnicodeGooString(QString::fromUtf8("®©©©©©©©©©©©©©©©©©©©©")); // clazy:exclude=qstring-allocations
+- 
+--    Unicode *in;
+--    const int in_len = TextStringToUCS4(goo->toStr(), &in);
+-+    const std::vector<Unicode> in = TextStringToUCS4(goo->toStr());
+- 
+-     delete goo;
+- 
+-     int in_norm_len;
+-     int *in_norm_idx;
+--    Unicode *in_norm = unicodeNormalizeNFKC(in, in_len, &in_norm_len, &in_norm_idx, true);
+--
+--    free(in);
+-+    Unicode *in_norm = unicodeNormalizeNFKC(in.data(), in.size(), &in_norm_len, &in_norm_idx, true);
+- 
+-     Unicode *out;
+-     int out_len;
+-@@ -172,25 +169,24 @@ void TestUTFConversion::testUnicodeLittleEndian()
+-     // Let's assert both GooString's are different
+-     QVERIFY(GooUTF16LE != GooUTF16BE);
+- 
+--    Unicode *UCS4fromLE, *UCS4fromBE;
+--    const int len1 = TextStringToUCS4(GooUTF16LE, &UCS4fromLE);
+--    const int len2 = TextStringToUCS4(GooUTF16BE, &UCS4fromBE);
+-+    const std::vector<Unicode> UCS4fromLE = TextStringToUCS4(GooUTF16LE);
+-+    const std::vector<Unicode> UCS4fromBE = TextStringToUCS4(GooUTF16BE);
+- 
+-     // len is 4 because TextStringToUCS4() removes the two leading Byte Order Mark (BOM) code points
+--    QCOMPARE(len1, len2);
+--    QCOMPARE(len1, 4);
+-+    QCOMPARE(UCS4fromLE.size(), UCS4fromBE.size());
+-+    QCOMPARE(UCS4fromLE.size(), 4);
+- 
+-     // Check that now after conversion, UCS4fromLE and UCS4fromBE are now the same
+--    for (int i = 0; i < len1; i++) {
+-+    for (size_t i = 0; i < UCS4fromLE.size(); i++) {
+-         QCOMPARE(UCS4fromLE[i], UCS4fromBE[i]);
+-     }
+- 
+-     const QString expected = QStringLiteral("HI!☑");
+- 
+-     // Do some final verifications, checking the strings to be "HI!"
+--    QVERIFY(*UCS4fromLE == *UCS4fromBE);
+--    QVERIFY(compare(UCS4fromLE, expected.utf16(), len1));
+--    QVERIFY(compare(UCS4fromBE, expected.utf16(), len1));
+-+    QVERIFY(UCS4fromLE == UCS4fromBE);
+-+    QVERIFY(compare(UCS4fromLE.data(), expected.utf16(), UCS4fromLE.size()));
+-+    QVERIFY(compare(UCS4fromBE.data(), expected.utf16(), UCS4fromBE.size()));
+- }
+- 
+- QTEST_GUILESS_MAIN(TestUTFConversion)
+-diff --git a/utils/HtmlFonts.cc b/utils/HtmlFonts.cc
+-index ca7d4a4..9f25621 100644
+---- a/utils/HtmlFonts.cc
+-+++ b/utils/HtmlFonts.cc
+-@@ -230,9 +230,9 @@ GooString *HtmlFont::getFullName()
+- }
+- 
+- // this method if plain wrong todo
+--GooString *HtmlFont::HtmlFilter(const Unicode *u, int uLen)
+-+std::unique_ptr<GooString> HtmlFont::HtmlFilter(const Unicode *u, int uLen)
+- {
+--    GooString *tmp = new GooString();
+-+    auto tmp = std::make_unique<GooString>();
+-     const UnicodeMap *uMap;
+-     char buf[8];
+-     int n;
+-diff --git a/utils/HtmlFonts.h b/utils/HtmlFonts.h
+-index ca4ae54..74cdca0 100644
+---- a/utils/HtmlFonts.h
+-+++ b/utils/HtmlFonts.h
+-@@ -104,7 +104,7 @@ public:
+-     }
+-     const double *getRotMat() const { return rotSkewMat; }
+-     GooString *getFontName();
+--    static GooString *HtmlFilter(const Unicode *u, int uLen); // char* s);
+-+    static std::unique_ptr<GooString> HtmlFilter(const Unicode *u, int uLen); // char* s);
+-     bool isEqual(const HtmlFont &x) const;
+-     bool isEqualIgnoreBold(const HtmlFont &x) const;
+-     void print() const { printf("font: %s (%s) %d %s%s\n", FontName->c_str(), familyName.c_str(), size, bold ? "bold " : "", italic ? "italic " : ""); };
+-diff --git a/utils/HtmlOutputDev.cc b/utils/HtmlOutputDev.cc
+-index 2611e06..b45a5ff 100644
+---- a/utils/HtmlOutputDev.cc
+-+++ b/utils/HtmlOutputDev.cc
+-@@ -124,11 +124,11 @@ static bool debug = false;
+- 
+- #if 0
+- static GooString* Dirname(GooString* str){
+--  
+-+
+-   char *p=str->c_str();
+-   int len=str->getLength();
+-   for (int i=len-1;i>=0;i--)
+--    if (*(p+i)==SLASH) 
+-+    if (*(p+i)==SLASH)
+-       return new GooString(p,i+1);
+-   return new GooString();
+- }
+-@@ -219,14 +219,13 @@ HtmlString::HtmlString(GfxState *state, double fontSize, HtmlFontAccu *_fonts) :
+-     len = size = 0;
+-     yxNext = nullptr;
+-     xyNext = nullptr;
+--    htext = new GooString();
+-+    htext = std::make_unique<GooString>();
+-     dir = textDirUnknown;
+- }
+- 
+- HtmlString::~HtmlString()
+- {
+-     gfree(text);
+--    delete htext;
+-     gfree(xRight);
+- }
+- 
+-@@ -345,7 +344,6 @@ void HtmlPage::beginString(GfxState *state, const GooString *s)
+- void HtmlPage::conv()
+- {
+-     for (HtmlString *tmp = yxStrings; tmp; tmp = tmp->yxNext) {
+--        delete tmp->htext;
+-         tmp->htext = HtmlFont::HtmlFilter(tmp->text, tmp->len);
+- 
+-         size_t linkIndex = 0;
+-@@ -641,7 +639,7 @@ void HtmlPage::coalesce()
+-             bool finish_a = switch_links && hlink1 != nullptr;
+-             bool finish_italic = hfont1->isItalic() && (!hfont2->isItalic() || finish_a);
+-             bool finish_bold = hfont1->isBold() && (!hfont2->isBold() || finish_a || finish_italic);
+--            CloseTags(str1->htext, finish_a, finish_italic, finish_bold);
+-+            CloseTags(str1->htext.get(), finish_a, finish_italic, finish_bold);
+-             if (switch_links && hlink2 != nullptr) {
+-                 GooString *ls = hlink2->getLinkStart();
+-                 str1->htext->append(ls);
+-@@ -654,7 +652,7 @@ void HtmlPage::coalesce()
+-                 str1->htext->append("<b>", 3);
+-             }
+- 
+--            str1->htext->append(str2->htext);
+-+            str1->htext->append(str2->htext.get());
+-             // str1 now contains href for link of str2 (if it is defined)
+-             str1->link = str2->link;
+-             hfont1 = hfont2;
+-@@ -671,7 +669,7 @@ void HtmlPage::coalesce()
+-             bool finish_a = str1->getLink() != nullptr;
+-             bool finish_bold = hfont1->isBold();
+-             bool finish_italic = hfont1->isItalic();
+--            CloseTags(str1->htext, finish_a, finish_italic, finish_bold);
+-+            CloseTags(str1->htext.get(), finish_a, finish_italic, finish_bold);
+- 
+-             str1->xMin = curX;
+-             str1->yMin = curY;
+-@@ -698,14 +696,14 @@ void HtmlPage::coalesce()
+-     bool finish_bold = hfont1->isBold();
+-     bool finish_italic = hfont1->isItalic();
+-     bool finish_a = str1->getLink() != nullptr;
+--    CloseTags(str1->htext, finish_a, finish_italic, finish_bold);
+-+    CloseTags(str1->htext.get(), finish_a, finish_italic, finish_bold);
+- 
+- #if 0 //~ for debugging
+-   for (str1 = yxStrings; str1; str1 = str1->yxNext) {
+-     printf("x=%3d..%3d  y=%3d..%3d  size=%2d ",
+- 	   (int)str1->xMin, (int)str1->xMax, (int)str1->yMin, (int)str1->yMax,
+- 	   (int)(str1->yMax - str1->yMin));
+--    printf("'%s'\n", str1->htext->c_str());  
+-+    printf("'%s'\n", str1->htext->c_str());
+-   }
+-   printf("\n------------------------------------------------------------\n\n");
+- #endif
+-@@ -1225,10 +1223,10 @@ void HtmlOutputDev::startPage(int pageNumA, GfxState *state, XRef *xref)
+- 	exit(1);
+-       }
+-       delete fname;
+--    // if(state->getRotation()!=0) 
+-+    // if(state->getRotation()!=0)
+-     //  fprintf(tin,"ROTATE=%d rotate %d neg %d neg translate\n",state->getRotation(),state->getX1(),-state->getY1());
+--    // else 
+--      fprintf(tin,"ROTATE=%d neg %d neg translate\n",state->getX1(),state->getY1());  
+-+    // else
+-+      fprintf(tin,"ROTATE=%d neg %d neg translate\n",state->getX1(),state->getY1());
+-     }
+-   }
+- #endif
+-@@ -1723,10 +1721,11 @@ bool HtmlOutputDev::newHtmlOutlineLevel(FILE *output, const std::vector<OutlineI
+-     fputs("<ul>\n", output);
+- 
+-     for (OutlineItem *item : *outlines) {
+--        GooString *titleStr = HtmlFont::HtmlFilter(item->getTitle(), item->getTitleLength());
+-+        const auto &title = item->getTitle();
+-+        std::unique_ptr<GooString> titleStr = HtmlFont::HtmlFilter(title.data(), title.size());
+- 
+-         GooString *linkName = nullptr;
+--        ;
+-+
+-         const int itemPage = getOutlinePageNum(item);
+-         if (itemPage > 0) {
+-             /*		complex		simple
+-@@ -1753,12 +1752,13 @@ bool HtmlOutputDev::newHtmlOutlineLevel(FILE *output, const std::vector<OutlineI
+-         if (linkName) {
+-             fprintf(output, "<a href=\"%s\">", linkName->c_str());
+-         }
+--        fputs(titleStr->c_str(), output);
+-+        if (titleStr) {
+-+            fputs(titleStr->c_str(), output);
+-+        }
+-         if (linkName) {
+-             fputs("</a>", output);
+-             delete linkName;
+-         }
+--        delete titleStr;
+-         atLeastOne = true;
+- 
+-         item->open();
+-@@ -1778,14 +1778,14 @@ void HtmlOutputDev::newXmlOutlineLevel(FILE *output, const std::vector<OutlineIt
+-     fputs("<outline>\n", output);
+- 
+-     for (OutlineItem *item : *outlines) {
+--        GooString *titleStr = HtmlFont::HtmlFilter(item->getTitle(), item->getTitleLength());
+-+        const std::vector<Unicode> &title = item->getTitle();
+-+        auto titleStr = HtmlFont::HtmlFilter(title.data(), title.size());
+-         const int itemPage = getOutlinePageNum(item);
+-         if (itemPage > 0) {
+-             fprintf(output, "<item page=\"%d\">%s</item>\n", itemPage, titleStr->c_str());
+-         } else {
+-             fprintf(output, "<item>%s</item>\n", titleStr->c_str());
+-         }
+--        delete titleStr;
+- 
+-         item->open();
+-         if (item->hasKids() && item->getKids()) {
+-diff --git a/utils/HtmlOutputDev.h b/utils/HtmlOutputDev.h
+-index c7b08d1..e490eff 100644
+---- a/utils/HtmlOutputDev.h
+-+++ b/utils/HtmlOutputDev.h
+-@@ -95,7 +95,7 @@ private:
+-     HtmlString *yxNext; // next string in y-major order
+-     HtmlString *xyNext; // next string in x-major order
+-     int fontpos;
+--    GooString *htext;
+-+    std::unique_ptr<GooString> htext;
+-     int len; // length of text and xRight
+-     int size; // size of text and xRight arrays
+-     UnicodeTextDirection dir; // direction (left to right/right to left)
+-diff --git a/utils/pdfinfo.cc b/utils/pdfinfo.cc
+-index 1f4ca79..2057d22 100644
+---- a/utils/pdfinfo.cc
+-+++ b/utils/pdfinfo.cc
+-@@ -114,14 +114,12 @@ static const ArgDesc argDesc[] = { { "-f", argInt, &firstPage, 0, "first page to
+- 
+- static void printTextString(const GooString *s, const UnicodeMap *uMap)
+- {
+--    Unicode *u;
+-     char buf[8];
+--    int len = TextStringToUCS4(s->toStr(), &u);
+--    for (int i = 0; i < len; i++) {
+--        int n = uMap->mapUnicode(u[i], buf, sizeof(buf));
+-+    std::vector<Unicode> u = TextStringToUCS4(s->toStr());
+-+    for (const auto &c : u) {
+-+        int n = uMap->mapUnicode(c, buf, sizeof(buf));
+-         fwrite(buf, 1, n, stdout);
+-     }
+--    gfree(u);
+- }
+- 
+- static void printUCS4String(const Unicode *u, int len, const UnicodeMap *uMap)
+-diff --git a/utils/pdfsig.cc b/utils/pdfsig.cc
+-index 490795f..e15a360 100644
+---- a/utils/pdfsig.cc
+-+++ b/utils/pdfsig.cc
+-@@ -224,16 +224,14 @@ static std::string TextStringToUTF8(const std::string &str)
+- {
+-     const UnicodeMap *utf8Map = globalParams->getUtf8Map();
+- 
+--    Unicode *u;
+--    const int len = TextStringToUCS4(str, &u);
+-+    std::vector<Unicode> u = TextStringToUCS4(str);
+- 
+-     std::string convertedStr;
+--    for (int i = 0; i < len; ++i) {
+-+    for (auto &c : u) {
+-         char buf[8];
+--        const int n = utf8Map->mapUnicode(u[i], buf, sizeof(buf));
+-+        const int n = utf8Map->mapUnicode(c, buf, sizeof(buf));
+-         convertedStr.append(buf, n);
+-     }
+--    gfree(u);
+- 
+-     return convertedStr;
+- }
+-diff --git a/utils/pdftohtml.cc b/utils/pdftohtml.cc
+-index 97b141a..d7c0889 100644
+---- a/utils/pdftohtml.cc
+-+++ b/utils/pdftohtml.cc
+-@@ -99,7 +99,7 @@ static char ownerPassword[33] = "";
+- static char userPassword[33] = "";
+- static bool printVersion = false;
+- 
+--static GooString *getInfoString(Dict *infoDict, const char *key);
+-+static std::unique_ptr<GooString> getInfoString(Dict *infoDict, const char *key);
+- static GooString *getInfoDate(Dict *infoDict, const char *key);
+- 
+- static char textEncName[128] = "";
+-@@ -158,8 +158,11 @@ int main(int argc, char *argv[])
+- {
+-     std::unique_ptr<PDFDoc> doc;
+-     GooString *fileName = nullptr;
+--    GooString *docTitle = nullptr;
+--    GooString *author = nullptr, *keywords = nullptr, *subject = nullptr, *date = nullptr;
+-+    std::unique_ptr<GooString> docTitle;
+-+    std::unique_ptr<GooString> author;
+-+    std::unique_ptr<GooString> keywords;
+-+    std::unique_ptr<GooString> subject;
+-+    GooString *date = nullptr;
+-     GooString *htmlFileName = nullptr;
+-     HtmlOutputDev *htmlOut = nullptr;
+-     SplashOutputDev *splashOut = nullptr;
+-@@ -317,7 +320,7 @@ int main(int argc, char *argv[])
+-         }
+-     }
+-     if (!docTitle) {
+--        docTitle = new GooString(htmlFileName);
+-+        docTitle = std::make_unique<GooString>(htmlFileName);
+-     }
+- 
+-     if (!singleHtml) {
+-@@ -330,16 +333,6 @@ int main(int argc, char *argv[])
+-     // write text file
+-     htmlOut = new HtmlOutputDev(doc->getCatalog(), htmlFileName->c_str(), docTitle->c_str(), author ? author->c_str() : nullptr, keywords ? keywords->c_str() : nullptr, subject ? subject->c_str() : nullptr, date ? date->c_str() : nullptr,
+-                                 rawOrder, firstPage, doOutline);
+--    delete docTitle;
+--    if (author) {
+--        delete author;
+--    }
+--    if (keywords) {
+--        delete keywords;
+--    }
+--    if (subject) {
+--        delete subject;
+--    }
+-     if (date) {
+-         delete date;
+-     }
+-@@ -397,7 +390,7 @@ error:
+-     return exit_status;
+- }
+- 
+--static GooString *getInfoString(Dict *infoDict, const char *key)
+-+static std::unique_ptr<GooString> getInfoString(Dict *infoDict, const char *key)
+- {
+-     Object obj;
+-     // Raw value as read from PDF (may be in pdfDocEncoding or UCS2)
+-@@ -406,7 +399,7 @@ static GooString *getInfoString(Dict *infoDict, const char *key)
+-     Unicode *unicodeString;
+-     int unicodeLength;
+-     // Value HTML escaped and converted to desired encoding
+--    GooString *encodedString = nullptr;
+-+    std::unique_ptr<GooString> encodedString;
+-     // Is rawString UCS2 (as opposed to pdfDocEncoding)
+-     bool isUnicode;
+- 
+--- 
+-2.40.0
+-
+diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2024-6239-0002.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2024-6239-0002.patch
+deleted file mode 100644
+index cb9ef4237c..0000000000
+--- a/meta-oe/recipes-support/poppler/poppler/CVE-2024-6239-0002.patch
++++ /dev/null
+@@ -1,111 +0,0 @@
+-From 0554731052d1a97745cb179ab0d45620589dd9c4 Mon Sep 17 00:00:00 2001
+-From: Albert Astals Cid <aacid@kde.org>
+-Date: Fri, 17 Jun 2024 00:54:55 +0200
+-Subject: [PATCH] pdfinfo: Fix crash in broken documents when using -dests
+-
+-CVE: CVE-2024-6239
+-Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/0554731052d1a97745cb179ab0d45620589dd9c4]
+-
+-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+----
+- utils/pdfinfo.cc | 35 +++++++++++++++--------------------
+- 1 file changed, 15 insertions(+), 20 deletions(-)
+-
+-diff --git a/utils/pdfinfo.cc b/utils/pdfinfo.cc
+-index 2057d22..5f96b41 100644
+---- a/utils/pdfinfo.cc
+-+++ b/utils/pdfinfo.cc
+-@@ -15,7 +15,7 @@
+- // under GPL version 2 or later
+- //
+- // Copyright (C) 2006 Dom Lachowicz <cinamod@hotmail.com>
+--// Copyright (C) 2007-2010, 2012, 2016-2022 Albert Astals Cid <aacid@kde.org>
+-+// Copyright (C) 2007-2010, 2012, 2016-2022, 2024 Albert Astals Cid <aacid@kde.org>
+- // Copyright (C) 2010 Hib Eris <hib@hiberis.nl>
+- // Copyright (C) 2011 Vittal Aithal <vittal.aithal@cognidox.com>
+- // Copyright (C) 2012, 2013, 2016-2018, 2021 Adrian Johnson <ajohnson@redneon.com>
+-@@ -112,16 +112,21 @@ static const ArgDesc argDesc[] = { { "-f", argInt, &firstPage, 0, "first page to
+-                                    { "-?", argFlag, &printHelp, 0, "print usage information" },
+-                                    {} };
+-
+--static void printTextString(const GooString *s, const UnicodeMap *uMap)
+-+static void printStdTextString(const std::string &s, const UnicodeMap *uMap)
+- {
+-     char buf[8];
+--    std::vector<Unicode> u = TextStringToUCS4(s->toStr());
+-+    const std::vector<Unicode> u = TextStringToUCS4(s);
+-     for (const auto &c : u) {
+-         int n = uMap->mapUnicode(c, buf, sizeof(buf));
+-         fwrite(buf, 1, n, stdout);
+-     }
+- }
+-
+-+static void printTextString(const GooString *s, const UnicodeMap *uMap)
+-+{
+-+    printStdTextString(s->toStr(), uMap);
+-+}
+-+
+- static void printUCS4String(const Unicode *u, int len, const UnicodeMap *uMap)
+- {
+-     char buf[8];
+-@@ -293,11 +298,6 @@ static void printStruct(const StructElement *element, unsigned indent)
+-     }
+- }
+-
+--struct GooStringCompare
+--{
+--    bool operator()(GooString *lhs, GooString *rhs) const { return lhs->cmp(const_cast<GooString *>(rhs)) < 0; }
+--};
+--
+- static void printLinkDest(const std::unique_ptr<LinkDest> &dest)
+- {
+-     GooString s;
+-@@ -368,29 +368,25 @@ static void printLinkDest(const std::unique_ptr<LinkDest> &dest)
+-
+- static void printDestinations(PDFDoc *doc, const UnicodeMap *uMap)
+- {
+--    std::map<Ref, std::map<GooString *, std::unique_ptr<LinkDest>, GooStringCompare>> map;
+-+    std::map<Ref, std::map<std::string, std::unique_ptr<LinkDest>>> map;
+-
+-     int numDests = doc->getCatalog()->numDestNameTree();
+-     for (int i = 0; i < numDests; i++) {
+--        GooString *name = new GooString(doc->getCatalog()->getDestNameTreeName(i));
+-+        const GooString *name = doc->getCatalog()->getDestNameTreeName(i);
+-         std::unique_ptr<LinkDest> dest = doc->getCatalog()->getDestNameTreeDest(i);
+--        if (dest && dest->isPageRef()) {
+-+        if (name && dest && dest->isPageRef()) {
+-             Ref pageRef = dest->getPageRef();
+--            map[pageRef].insert(std::make_pair(name, std::move(dest)));
+--        } else {
+--            delete name;
+-+            map[pageRef].insert(std::make_pair(name->toStr(), std::move(dest)));
+-         }
+-     }
+-
+-     numDests = doc->getCatalog()->numDests();
+-     for (int i = 0; i < numDests; i++) {
+--        GooString *name = new GooString(doc->getCatalog()->getDestsName(i));
+-+        const char *name = doc->getCatalog()->getDestsName(i);
+-         std::unique_ptr<LinkDest> dest = doc->getCatalog()->getDestsDest(i);
+--        if (dest && dest->isPageRef()) {
+-+        if (name && dest && dest->isPageRef()) {
+-             Ref pageRef = dest->getPageRef();
+-             map[pageRef].insert(std::make_pair(name, std::move(dest)));
+--        } else {
+--            delete name;
+-         }
+-     }
+-
+-@@ -404,9 +400,8 @@ static void printDestinations(PDFDoc *doc, const UnicodeMap *uMap)
+-                     printf("%4d ", i);
+-                     printLinkDest(it.second);
+-                     printf(" \"");
+--                    printTextString(it.first, uMap);
+-+                    printStdTextString(it.first, uMap);
+-                     printf("\"\n");
+--                    delete it.first;
+-                 }
+-             }
+-         }
+---
+-2.40.0
+diff --git a/meta-oe/recipes-support/poppler/poppler/jpeg-stdio.patch b/meta-oe/recipes-support/poppler/poppler/jpeg-stdio.patch
+deleted file mode 100644
+index 70ba1cf123..0000000000
+--- a/meta-oe/recipes-support/poppler/poppler/jpeg-stdio.patch
++++ /dev/null
+@@ -1,41 +0,0 @@
+-From 2986f06c7cc9d64a506ebe861b8bf38f73386e86 Mon Sep 17 00:00:00 2001
+-From: Jordan Abrahams-Whitehead <ajordanr@google.com>
+-Date: Tue, 16 May 2023 18:52:19 +0000
+-Subject: [PATCH] Add missing #include <cstdio> prior to jpeglib.h
+-
+-Fixes #1398
+-
+-Upstream-Status: Backport
+-Signed-off-by: Ross Burton <ross.burton@arm.com>
+----
+- goo/JpegWriter.cc              | 2 +-
+- poppler/ImageEmbeddingUtils.cc | 1 +
+- 2 files changed, 2 insertions(+), 1 deletion(-)
+-
+-diff --git a/goo/JpegWriter.cc b/goo/JpegWriter.cc
+-index ca69fd055..566ee38f8 100644
+---- a/goo/JpegWriter.cc
+-+++ b/goo/JpegWriter.cc
+-@@ -23,7 +23,7 @@
+- #ifdef ENABLE_LIBJPEG
+- 
+- #    include "poppler/Error.h"
+--
+-+#    include <cstdio>
+- extern "C" {
+- #    include <jpeglib.h>
+- }
+-diff --git a/poppler/ImageEmbeddingUtils.cc b/poppler/ImageEmbeddingUtils.cc
+-index 0c13fe968..07b9dfb62 100644
+---- a/poppler/ImageEmbeddingUtils.cc
+-+++ b/poppler/ImageEmbeddingUtils.cc
+-@@ -14,6 +14,7 @@
+- 
+- #include <memory>
+- #ifdef ENABLE_LIBJPEG
+-+#    include <cstdio>
+- extern "C" {
+- #    include <jpeglib.h>
+- }
+--- 
+-GitLab
+diff --git a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb b/meta-oe/recipes-support/poppler/poppler_24.09.0.bb
+similarity index 90%
+rename from meta-oe/recipes-support/poppler/poppler_23.04.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_24.09.0.bb
+index e57760d853..920d13f0f6 100644
+--- a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_24.09.0.bb
+@@ -7,12 +7,8 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://0001-Do-not-overwrite-all-our-build-flags.patch \
+            file://basename-include.patch \
+            file://0001-cmake-Do-not-use-isystem.patch \
+-           file://jpeg-stdio.patch \
+-           file://CVE-2023-34872.patch \
+-           file://CVE-2024-6239-0001.patch \
+-           file://CVE-2024-6239-0002.patch \
             "
- SRC_URI:append:class-target = " \
+-SRC_URI[sha256sum] = "b6d893dc7dcd4138b9e9df59a13c59695e50e80dc5c2cacee0674670693951a1"
++SRC_URI[sha256sum] = "ebd857987e2395608c69fdc44009692d5906f13b612c5280beff65a0b75dc255"
+ 
+ DEPENDS = "fontconfig zlib cairo lcms glib-2.0 glib-2.0-native"
+ 
+@@ -27,6 +23,8 @@ PACKAGECONFIG[openjpeg] = "-DENABLE_LIBOPENJPEG=openjpeg2,-DENABLE_LIBOPENJPEG=n
+ PACKAGECONFIG[qt5] = "-DENABLE_QT5=ON,-DENABLE_QT5=OFF,qtbase qttools-native"
+ PACKAGECONFIG[nss] = "-DWITH_NSS3=ON,-DWITH_NSS3=OFF,nss"
+ PACKAGECONFIG[splash] = "-DENABLE_SPLASH=ON -DENABLE_BOOST=ON,-DENABLE_SPLASH=OFF -DENABLE_BOOST=OFF,boost"
++PACKAGECONFIG[gpgme] = "-DENABLE_GPGME=ON,-DENABLE_GPGME=OFF,gpgme"
++PACKAGECONFIG[qt6] = "-DENABLE_QT6=ON,-DENABLE_QT6=OFF,qtbase"
+ 
+ # surprise - did not expect this to work :)
+ inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
 
