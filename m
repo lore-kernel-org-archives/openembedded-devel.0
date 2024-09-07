@@ -1,155 +1,123 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <otavio.salvador@ossystems.com.br>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F06ABEB64CC
-	for <webhook@archiver.kernel.org>; Sat,  7 Sep 2024 15:44:38 +0000 (UTC)
-Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com [209.85.208.171])
- by mx.groups.io with SMTP id smtpd.web10.10235.1725723874333290300
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42982EB64CA
+	for <webhook@archiver.kernel.org>; Sat,  7 Sep 2024 16:41:19 +0000 (UTC)
+Received: from mail-yb1-f182.google.com (mail-yb1-f182.google.com [209.85.219.182])
+ by mx.groups.io with SMTP id smtpd.web11.11441.1725727275096573165
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 07 Sep 2024 08:44:34 -0700
+ Sat, 07 Sep 2024 09:41:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=D3CX0aaf;
- spf=pass (domain: gmail.com, ip: 209.85.208.171, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lj1-f171.google.com with SMTP id 38308e7fff4ca-2f75f116d11so2859711fa.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Sep 2024 08:44:34 -0700 (PDT)
+ dkim=pass header.i=@ossystems-com-br.20230601.gappssmtp.com header.s=20230601 header.b=spJq99jr;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.219.182, mailfrom: otavio.salvador@ossystems.com.br)
+Received: by mail-yb1-f182.google.com with SMTP id 3f1490d57ef6-e05f25fb96eso3316401276.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Sep 2024 09:41:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1725723872; x=1726328672; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=r+t9TOjsyt2/UhE35yCKVOgehiBpFUZGxC16rrkedVI=;
-        b=D3CX0aafU/6HjRRYjt4QP3URurQfuPuX+IYgDTTeRYUf5w3fBgbxivsrkvOr0cXxU7
-         jOHwVNPXYfJNsN4UlnVFwZgGnFr+Vn6a6uKxApzcwPVsYpv2JC9sZq7WbaFVvC56vCMd
-         mjU1IbJQYRz/uXJitRiykb08OmSDJ+t2eO333nTnw3UeT+dTXHrkyjYeLxGiU0NV38ME
-         Jnofn0uITam9ut79G32c3A4t9rCc5TSj2U3/d/kNCKthUG/FCt+cD/7b851rD+kqM8BF
-         zGnRxISKdTd78SFvtWu/vaKM9LSJr0L2I72ga8lOceSFvgF+U1cL/1AM51QM+9ibt7iO
-         6yaA==
+        d=ossystems-com-br.20230601.gappssmtp.com; s=20230601; t=1725727274; x=1726332074; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:in-reply-to:references:mime-version
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=lJWEsvhrcU0WsmHtJXE9dZkeIxA2dcl3W7bmNF48QD8=;
+        b=spJq99jrS2ayHODAAu+LLrZye2aL4v5gQuIV8x/bEEAdXO45btmxvZItd3lEUfIK1o
+         /N5+OGielcPS0UTI3fsnA6qeOdPuJ4Wy3r7SA5gXN3Bba2gMcfNfKfa3focERDRzx5Uk
+         8dqigPB1DE7eI7YJWFp7G2h0AZLc1H2MzfFZU2wAkc60PMPEMuhF/qg37kgwlxldfaDU
+         X330PihvGvSQnBi5BTy44wz9XvKOzqLOVf9RjdcaxIxsm+t7MqM0jSr+iguZEB2dO4Wj
+         AVA/eQelzlVz+34ryiSVecgF9kdxOtYiQIXFA/mJ6pKXRwIEHkDJ7sgnfQfs9Z6EVOGv
+         oifw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725723872; x=1726328672;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=r+t9TOjsyt2/UhE35yCKVOgehiBpFUZGxC16rrkedVI=;
-        b=b1raJdMg34LjeJ+PRzgS/q0TzDuWWuk7IFFBlBLemzR27zpNrOQo/QfIy5BI9Cceyq
-         Nmw8kKs+PNHKI6EhKtuVpyc7t3lrth+HVYyGuUbLy4iILZlrnzdxp0bQ/9Wsp+zEGxMR
-         kOJ34swGfEK3OJ9kNDt39F2hhX6vMuEZ1S2N1lgV9jZPPi/DCx3OztRtP/Y2/Z2VQU2W
-         vwc/UqBy6L4NR2O/v3KCctMsL+WCCaR1/CQ+gTtWWEYGGChHqZu/XcnuZ3+ItDU6h8Ta
-         LwrK8QLmZgCVFocFjTMAgkFoqB+witSf/AyVthY0qRhzeBqEu1wKP2ctt7ATtJQJOrjj
-         Vd4g==
-X-Forwarded-Encrypted: i=1; AJvYcCXLLEjfnMkIdeZ0CtZidiETRBNhE9hnHQEgBb0APKDYSB2nb1fWRJrm06CYtkESwIpsfRhleNe4w15J1hTKkfQk8CI=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzHHRlanudGpLyX+c2TF8tbUIzWhP9K2Er6cAUxu53qpkToEWwU
-	UZxLp8apqA+xgWJuc5427vQr3DHvgF55z6PpUvfxjfi8qYnjAIdSn1RpQt8mJ0jOVM/F9rtTQh7
-	s6Ku5ZeujHH1l1Ni4VLxwtiQd4dk=
-X-Google-Smtp-Source: AGHT+IF4NXY8NMwrxzwttS+WxpNKBhLSZQ/gnUvd6juNgVcmGpXTINl0hOwWxu+ljaYI4B8BKOc8srG3MYnM6Sbo49Y=
-X-Received: by 2002:a2e:a983:0:b0:2f4:f22c:53d5 with SMTP id
- 38308e7fff4ca-2f751eaef5dmr47334961fa.8.1725723871462; Sat, 07 Sep 2024
- 08:44:31 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1725727274; x=1726332074;
+        h=cc:to:subject:message-id:date:in-reply-to:references:mime-version
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=lJWEsvhrcU0WsmHtJXE9dZkeIxA2dcl3W7bmNF48QD8=;
+        b=AhoP6FjhbiNSufdUJISPjTpVGORRKI3NyDnw3+RESQ46oqu2uivaj1CCdbGrsVJwxf
+         fyssUvTs0W5rw+JIz3Xd/llqPe89EEYbT9ibAQbLh6JnWfhEBBx4iblzZ0l6dT9IqNUq
+         Ne4wo4qI6UqJ83jb/ds+liB3bor2RKMBSWpFj4/PT+XAYjprz1q0/g+XKGPS0h3Pbk1L
+         +hmX2OR9abz1aRqERynxfmkr+pYU3OighLvDaXd4/oDz4rHyJ415zNPyb3ITNqXAvWuc
+         yprGcTx8Tld/xnxgpPHx5S64DqW7rCe7kRAtGyJpboCPdMq43VJ/mmwikLebx61DHQB7
+         dagg==
+X-Gm-Message-State: AOJu0YzQ0l/YnRQyPWX+rJQdDjCQWLryY0ZSw4OZFDtvEttSxtBrUKQT
+	edIocxnWgRjdsQU2T8Bnf63spM+P173Bw+aWHOMffl/zIOJ8Mkk5jTOdEBCfQI2MLKmNqfJyA2Y
+	jEj0=
+X-Google-Smtp-Source: AGHT+IHn2ZG80OH4V86ft/IUSlJNGp0KCdfMRHGksW/O+mIMLbgOQAfL8VQKFUwmkGutFoMFV+gsUw==
+X-Received: by 2002:a05:6902:2e09:b0:e11:6348:5d86 with SMTP id 3f1490d57ef6-e1d348753aamr6827435276.11.1725727273444;
+        Sat, 07 Sep 2024 09:41:13 -0700 (PDT)
+Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com. [209.85.128.172])
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e1d4b2cf2a0sm281529276.8.2024.09.07.09.41.12
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 07 Sep 2024 09:41:13 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-6b47ff8a59aso29734657b3.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Sep 2024 09:41:12 -0700 (PDT)
+X-Received: by 2002:a05:690c:dc6:b0:6b8:ae1e:2593 with SMTP id
+ 00721157ae682-6db44d6c73bmr81451507b3.8.1725727272464; Sat, 07 Sep 2024
+ 09:41:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240907083446.80928-1-f_l_k@t-online.de> <CAMKF1sqt1BZt_frP-rbPVFzKz4QCo9LrTFVxHsRR9Kp1MjE+qA@mail.gmail.com>
-In-Reply-To: <CAMKF1sqt1BZt_frP-rbPVFzKz4QCo9LrTFVxHsRR9Kp1MjE+qA@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 7 Sep 2024 17:44:19 +0200
-Message-ID: <CA+chaQdHMh6W920EHbHvE4UfrfDAacWS6C_4X8gsU=mahrkFAQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] iwd: use internal ell
-To: raj.khem@gmail.com
-Cc: f_l_k@t-online.de, openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20240906184711.3654693-1-festevam@gmail.com>
+In-Reply-To: <20240906184711.3654693-1-festevam@gmail.com>
+Date: Sat, 7 Sep 2024 13:40:59 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKo_vwb=zGw5m6hCdyN+q+uNwFSaKYUhnuKj1uCp1DBuMg@mail.gmail.com>
+Message-ID: <CAP9ODKo_vwb=zGw5m6hCdyN+q+uNwFSaKYUhnuKj1uCp1DBuMg@mail.gmail.com>
+Subject: Re: [PATCH] imx-cst: Add recipe
+To: Fabio Estevam <festevam@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, otavio@ossystems.com.br, 
+	Fabio Estevam <festevam@denx.de>
+Content-Type: multipart/alternative; boundary="0000000000000e060c06218a31e2"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 07 Sep 2024 15:44:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112115
+ <openembedded-devel@lists.openembedded.org>; Sat, 07 Sep 2024 16:41:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112116
 
-At least ofono in oe-core is using ell by default
-https://git.openembedded.org/openembedded-core/tree/meta/recipes-connectivi=
-ty/ofono/ofono_2.10.bb
+--0000000000000e060c06218a31e2
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-explicitly the external on (from oe-core) since
-https://git.openembedded.org/openembedded-core/commit/meta/recipes-connecti=
-vity/ofono?id=3D3683f524dc60325b3f3b1bc3a32e70a41064ae03
+Em sex., 6 de set. de 2024 =C3=A0s 15:47, Fabio Estevam <festevam@gmail.com=
+>
+escreveu:
 
-On Sat, Sep 7, 2024 at 5:24=E2=80=AFPM Khem Raj via lists.openembedded.org
-<raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
+> From: Fabio Estevam <festevam@denx.de>
 >
-> On Sat, Sep 7, 2024 at 1:33=E2=80=AFAM Markus Volk via lists.openembedded=
-.org
-> <f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
-> >
-> > iwd and ell need to be updated in sync. This is regularly neglected.
-> > Also the fact that they reside in different layers compicates the updat=
-e process.
-> >
+> Add a recipe for the i.MX CST (Code Signing Tool) version 3.4.0.
 >
-> yes this has happened in past as well.
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
 >
-> > Beside iwd, there are not a lot of consumers for ell.
-> >
->
-> if this is the case then, I would like to suggest that either iwd moves t=
-o core
-> or ell moves out of core into meta-oe next to iwd. I think ideally it
-> can be deleted
-> but there might be other consumers of ell outside of meta-openembedded
-> layers and core
->
-> > Building with internal ell makes iwd updates easier
-> >
->
-> Building with internal ell is fine if its not generating duplicate
-> copies of ell artifacts. Can you confirm what happens when
-> switching between internal and external ell ?
->
-> > Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> > ---
-> >  meta-oe/recipes-connectivity/iwd/iwd_2.20.bb | 4 +---
-> >  1 file changed, 1 insertion(+), 3 deletions(-)
-> >
-> > diff --git a/meta-oe/recipes-connectivity/iwd/iwd_2.20.bb b/meta-oe/rec=
-ipes-connectivity/iwd/iwd_2.20.bb
-> > index ffdab0260..16d900ddc 100644
-> > --- a/meta-oe/recipes-connectivity/iwd/iwd_2.20.bb
-> > +++ b/meta-oe/recipes-connectivity/iwd/iwd_2.20.bb
-> > @@ -3,7 +3,7 @@ HOMEPAGE =3D "https://iwd.wiki.kernel.org/"
-> >  LICENSE =3D "LGPL-2.1-only"
-> >  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfb504b67c50331fc78734fed90f=
-b0e09"
-> >
-> > -DEPENDS =3D "ell"
-> > +DEPENDS =3D "dbus"
-> >
-> >  SRC_URI =3D "https://www.kernel.org/pub/linux/network/wireless/${BP}.t=
-ar.xz \
-> >             file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-=
-for-e.patch \
-> > @@ -24,8 +24,6 @@ PACKAGECONFIG[wired] =3D "--enable-wired,--disable-wi=
-red"
-> >  PACKAGECONFIG[ofono] =3D "--enable-ofono,--disable-ofono"
-> >  PACKAGECONFIG[systemd] =3D "--with-systemd-unitdir=3D${systemd_system_=
-unitdir},--disable-systemd-service,systemd"
-> >
-> > -EXTRA_OECONF =3D "--enable-external-ell"
-> > -
-> >  SYSTEMD_SERVICE:${PN} =3D " \
-> >      iwd.service \
-> >      ${@bb.utils.contains('PACKAGECONFIG', 'wired', 'ead.service', '', =
-d)} \
-> > --
-> > 2.46.0
-> >
-> >
-> >
-> >
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#112114): https://lists.openembedded.org/g/openembedde=
-d-devel/message/112114
-> Mute This Topic: https://lists.openembedded.org/mt/108319324/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+
+Thanks for sending the recipe. Once this patch is applied, please send a
+pull request to remove that from our layer.
+
+--=20
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9 9981-7854
+
+--0000000000000e060c06218a31e2
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">Em sex., 6 de set. de 2024 =C3=A0s 15=
+:47, Fabio Estevam &lt;<a href=3D"mailto:festevam@gmail.com">festevam@gmail=
+.com</a>&gt; escreveu:<br></div><blockquote class=3D"gmail_quote" style=3D"=
+margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-lef=
+t:1ex">From: Fabio Estevam &lt;<a href=3D"mailto:festevam@denx.de" target=
+=3D"_blank">festevam@denx.de</a>&gt;<br>
+<br>
+Add a recipe for the i.MX CST (Code Signing Tool) version 3.4.0.<br>
+<br>
+Signed-off-by: Fabio Estevam &lt;<a href=3D"mailto:festevam@denx.de" target=
+=3D"_blank">festevam@denx.de</a>&gt;<br></blockquote><div><br></div><div>Th=
+anks for sending the recipe. Once this patch is applied, please send a pull=
+ request to remove that from our layer.</div><div>=C2=A0</div></div><span c=
+lass=3D"gmail_signature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gma=
+il_signature"><div dir=3D"ltr">Otavio Salvador =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 O.S. =
+Systems<br><a href=3D"http://www.ossystems.com.br" target=3D"_blank">http:/=
+/www.ossystems.com.br</a> =C2=A0 =C2=A0 =C2=A0 =C2=A0<a href=3D"http://code=
+.ossystems.com.br" target=3D"_blank">http://code.ossystems.com.br</a><br>Mo=
+bile: +55 (53) 9 9981-7854</div></div></div>
+
+--0000000000000e060c06218a31e2--
 
