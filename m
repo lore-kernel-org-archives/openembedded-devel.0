@@ -1,123 +1,70 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 42982EB64CA
-	for <webhook@archiver.kernel.org>; Sat,  7 Sep 2024 16:41:19 +0000 (UTC)
-Received: from mail-yb1-f182.google.com (mail-yb1-f182.google.com [209.85.219.182])
- by mx.groups.io with SMTP id smtpd.web11.11441.1725727275096573165
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7C0BEB64CF
+	for <webhook@archiver.kernel.org>; Sat,  7 Sep 2024 18:22:29 +0000 (UTC)
+Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
+ by mx.groups.io with SMTP id smtpd.web11.13539.1725733343281226239
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 07 Sep 2024 09:41:15 -0700
+ Sat, 07 Sep 2024 11:22:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20230601.gappssmtp.com header.s=20230601 header.b=spJq99jr;
- spf=pass (domain: ossystems.com.br, ip: 209.85.219.182, mailfrom: otavio.salvador@ossystems.com.br)
-Received: by mail-yb1-f182.google.com with SMTP id 3f1490d57ef6-e05f25fb96eso3316401276.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Sep 2024 09:41:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ossystems-com-br.20230601.gappssmtp.com; s=20230601; t=1725727274; x=1726332074; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:in-reply-to:references:mime-version
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=lJWEsvhrcU0WsmHtJXE9dZkeIxA2dcl3W7bmNF48QD8=;
-        b=spJq99jrS2ayHODAAu+LLrZye2aL4v5gQuIV8x/bEEAdXO45btmxvZItd3lEUfIK1o
-         /N5+OGielcPS0UTI3fsnA6qeOdPuJ4Wy3r7SA5gXN3Bba2gMcfNfKfa3focERDRzx5Uk
-         8dqigPB1DE7eI7YJWFp7G2h0AZLc1H2MzfFZU2wAkc60PMPEMuhF/qg37kgwlxldfaDU
-         X330PihvGvSQnBi5BTy44wz9XvKOzqLOVf9RjdcaxIxsm+t7MqM0jSr+iguZEB2dO4Wj
-         AVA/eQelzlVz+34ryiSVecgF9kdxOtYiQIXFA/mJ6pKXRwIEHkDJ7sgnfQfs9Z6EVOGv
-         oifw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725727274; x=1726332074;
-        h=cc:to:subject:message-id:date:in-reply-to:references:mime-version
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=lJWEsvhrcU0WsmHtJXE9dZkeIxA2dcl3W7bmNF48QD8=;
-        b=AhoP6FjhbiNSufdUJISPjTpVGORRKI3NyDnw3+RESQ46oqu2uivaj1CCdbGrsVJwxf
-         fyssUvTs0W5rw+JIz3Xd/llqPe89EEYbT9ibAQbLh6JnWfhEBBx4iblzZ0l6dT9IqNUq
-         Ne4wo4qI6UqJ83jb/ds+liB3bor2RKMBSWpFj4/PT+XAYjprz1q0/g+XKGPS0h3Pbk1L
-         +hmX2OR9abz1aRqERynxfmkr+pYU3OighLvDaXd4/oDz4rHyJ415zNPyb3ITNqXAvWuc
-         yprGcTx8Tld/xnxgpPHx5S64DqW7rCe7kRAtGyJpboCPdMq43VJ/mmwikLebx61DHQB7
-         dagg==
-X-Gm-Message-State: AOJu0YzQ0l/YnRQyPWX+rJQdDjCQWLryY0ZSw4OZFDtvEttSxtBrUKQT
-	edIocxnWgRjdsQU2T8Bnf63spM+P173Bw+aWHOMffl/zIOJ8Mkk5jTOdEBCfQI2MLKmNqfJyA2Y
-	jEj0=
-X-Google-Smtp-Source: AGHT+IHn2ZG80OH4V86ft/IUSlJNGp0KCdfMRHGksW/O+mIMLbgOQAfL8VQKFUwmkGutFoMFV+gsUw==
-X-Received: by 2002:a05:6902:2e09:b0:e11:6348:5d86 with SMTP id 3f1490d57ef6-e1d348753aamr6827435276.11.1725727273444;
-        Sat, 07 Sep 2024 09:41:13 -0700 (PDT)
-Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com. [209.85.128.172])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e1d4b2cf2a0sm281529276.8.2024.09.07.09.41.12
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 07 Sep 2024 09:41:13 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-6b47ff8a59aso29734657b3.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Sep 2024 09:41:12 -0700 (PDT)
-X-Received: by 2002:a05:690c:dc6:b0:6b8:ae1e:2593 with SMTP id
- 00721157ae682-6db44d6c73bmr81451507b3.8.1725727272464; Sat, 07 Sep 2024
- 09:41:12 -0700 (PDT)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
+Received: from fwd79.aul.t-online.de (fwd79.aul.t-online.de [10.223.144.105])
+	by mailout01.t-online.de (Postfix) with SMTP id 5B77C2CB19;
+	Sat,  7 Sep 2024 20:22:21 +0200 (CEST)
+Received: from [192.168.178.67] ([84.163.32.86]) by fwd79.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1sn04i-0vq2ng0; Sat, 7 Sep 2024 20:22:20 +0200
+Date: Sat, 07 Sep 2024 20:23:51 +0200
+From: Markus Volk <f_l_k@t-online.de>
+Subject: Re: [oe] [meta-oe][PATCH] iwd: use internal ell
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: raj.khem@gmail.com, openembedded-devel@lists.openembedded.org
+Message-Id: <RFGGJS.TVMQIX4IAUA23@t-online.de>
+In-Reply-To: <CA+chaQdHMh6W920EHbHvE4UfrfDAacWS6C_4X8gsU=mahrkFAQ@mail.gmail.com>
+References: <20240907083446.80928-1-f_l_k@t-online.de>
+	<CAMKF1sqt1BZt_frP-rbPVFzKz4QCo9LrTFVxHsRR9Kp1MjE+qA@mail.gmail.com>
+	<CA+chaQdHMh6W920EHbHvE4UfrfDAacWS6C_4X8gsU=mahrkFAQ@mail.gmail.com>
+X-Mailer: geary/46.0
 MIME-Version: 1.0
-References: <20240906184711.3654693-1-festevam@gmail.com>
-In-Reply-To: <20240906184711.3654693-1-festevam@gmail.com>
-Date: Sat, 7 Sep 2024 13:40:59 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKo_vwb=zGw5m6hCdyN+q+uNwFSaKYUhnuKj1uCp1DBuMg@mail.gmail.com>
-Message-ID: <CAP9ODKo_vwb=zGw5m6hCdyN+q+uNwFSaKYUhnuKj1uCp1DBuMg@mail.gmail.com>
-Subject: Re: [PATCH] imx-cst: Add recipe
-To: Fabio Estevam <festevam@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, otavio@ossystems.com.br, 
-	Fabio Estevam <festevam@denx.de>
-Content-Type: multipart/alternative; boundary="0000000000000e060c06218a31e2"
+Content-Type: multipart/alternative; boundary="=-106a6wLmpjz5vcWNHBzX"
+X-TOI-EXPURGATEID: 150726::1725733340-717F85C5-F25FC9A2/0/0 CLEAN NORMAL
+X-TOI-MSGID: e3af3bdc-7499-472e-9785-cbe18bb78fa6
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 07 Sep 2024 16:41:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112116
+ <openembedded-devel@lists.openembedded.org>; Sat, 07 Sep 2024 18:22:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112117
 
---0000000000000e060c06218a31e2
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+--=-106a6wLmpjz5vcWNHBzX
+Content-Type: text/plain; charset=us-ascii; format=flowed
 
-Em sex., 6 de set. de 2024 =C3=A0s 15:47, Fabio Estevam <festevam@gmail.com=
->
-escreveu:
+On Sat, Sep 7 2024 at 05:44:19 PM +02:00:00, Martin Jansa 
+<martin.jansa@gmail.com> wrote:
+> explicitly the external on (from oe-core) since
+> <https://git.openembedded.org/openembedded-core/commit/meta/recipes-connectivity/ofono?id=3683f524dc60325b3f3b1bc3a32e70a41064ae03>
 
-> From: Fabio Estevam <festevam@denx.de>
->
-> Add a recipe for the i.MX CST (Code Signing Tool) version 3.4.0.
->
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
->
+Understand. I also know that bluez5 uses ell when PACKAGECONFIG is 
+enabled for either mesh or btpclient. But that's not the default. So 
+for consistency, maybe it would be good to keep it external for all 
+three?
 
-Thanks for sending the recipe. Once this patch is applied, please send a
-pull request to remove that from our layer.
+I'm not sure about this change either, but wanted to bring it up for 
+discussion because it always feels a bit like groundhog day with 
+iwd/ell.
 
---=20
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9 9981-7854
+I'm not that familiar with investigating sstate cache reuse issues. I'm 
+willing to learn more about it, but right now I don't know what exact 
+files I would need to compare, or is there something like a tool that 
+can be used for this purpose?
 
---0000000000000e060c06218a31e2
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">Em sex., 6 de set. de 2024 =C3=A0s 15=
-:47, Fabio Estevam &lt;<a href=3D"mailto:festevam@gmail.com">festevam@gmail=
-.com</a>&gt; escreveu:<br></div><blockquote class=3D"gmail_quote" style=3D"=
-margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-lef=
-t:1ex">From: Fabio Estevam &lt;<a href=3D"mailto:festevam@denx.de" target=
-=3D"_blank">festevam@denx.de</a>&gt;<br>
-<br>
-Add a recipe for the i.MX CST (Code Signing Tool) version 3.4.0.<br>
-<br>
-Signed-off-by: Fabio Estevam &lt;<a href=3D"mailto:festevam@denx.de" target=
-=3D"_blank">festevam@denx.de</a>&gt;<br></blockquote><div><br></div><div>Th=
-anks for sending the recipe. Once this patch is applied, please send a pull=
- request to remove that from our layer.</div><div>=C2=A0</div></div><span c=
-lass=3D"gmail_signature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gma=
-il_signature"><div dir=3D"ltr">Otavio Salvador =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 O.S. =
-Systems<br><a href=3D"http://www.ossystems.com.br" target=3D"_blank">http:/=
-/www.ossystems.com.br</a> =C2=A0 =C2=A0 =C2=A0 =C2=A0<a href=3D"http://code=
-.ossystems.com.br" target=3D"_blank">http://code.ossystems.com.br</a><br>Mo=
-bile: +55 (53) 9 9981-7854</div></div></div>
+--=-106a6wLmpjz5vcWNHBzX
+Content-Type: text/html; charset=us-ascii
 
---0000000000000e060c06218a31e2--
+<div id="geary-body" dir="auto">On Sat, Sep 7 2024 at 05:44:19 PM +02:00:00, Martin Jansa &lt;martin.jansa@gmail.com&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">explicitly the external on (from oe-core) since
+<a href="https://git.openembedded.org/openembedded-core/commit/meta/recipes-connectivity/ofono?id=3683f524dc60325b3f3b1bc3a32e70a41064ae03">https://git.openembedded.org/openembedded-core/commit/meta/recipes-connectivity/ofono?id=3683f524dc60325b3f3b1bc3a32e70a41064ae03</a></div></blockquote><div><br></div><div><div>Understand. I also know that bluez5 uses ell when PACKAGECONFIG is enabled for either mesh or btpclient. But that's not the default. So for consistency, maybe it would be good to keep it external for all three?</div><div><br></div><div>I'm not sure about this change either, but wanted to bring it up for discussion because it always feels a bit like groundhog day with iwd/ell.</div><div><br></div><div>I'm not that familiar with investigating sstate cache reuse issues. I'm willing to learn more about it, but right now I don't know what exact files I would need to compare, or is there something like a tool that can be used for this purpose?</div></div></div>
+--=-106a6wLmpjz5vcWNHBzX--
+
 
