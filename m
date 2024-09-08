@@ -2,52 +2,50 @@ Return-Path: <niko.mauno@vaisala.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 808AEEB64DE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FBCFCD4F4C
 	for <webhook@archiver.kernel.org>; Sun,  8 Sep 2024 17:12:27 +0000 (UTC)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com (EUR05-AM6-obe.outbound.protection.outlook.com [40.107.22.98])
- by mx.groups.io with SMTP id smtpd.web10.34230.1725815545368516852
+Received: from EUR03-AM7-obe.outbound.protection.outlook.com (EUR03-AM7-obe.outbound.protection.outlook.com [40.107.105.93])
+ by mx.groups.io with SMTP id smtpd.web10.34227.1725815542543955204
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 08 Sep 2024 10:12:27 -0700
+ Sun, 08 Sep 2024 10:12:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=FOE40p6u;
- spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 40.107.22.98, mailfrom: niko.mauno@vaisala.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=JTguEXDg;
+ spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 40.107.105.93, mailfrom: niko.mauno@vaisala.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FHw8aeJ8jxmyiUesVM5ck1FqDuUKHOL5jpxJaz/cqZunCAfYaoWFbxY8o6w8ZosTGdY5E81UNlq+3xId7nE2s2tAvUuHFAnyiCnjoohUIILNHHGobYXV3O5IX6Ot7Bejp6B8FfCMtq4PK+nXQdiNXkAgt9kPOVcU6c47Qiwwpuipu+O2rbpz+KSvMDnBGGxu32ktsWUEbuUzxnwbice3HdqQ1MZuk050j1KXoI+oPUgkYfO3gBNXaDEheYFV0/Rj0a+Z+P/7tikX/Wk4/AzZN9MyAydoqVMcg6Mkzh57Lp9+kW2qy2s+dUr3Tc3GwYCMcJFEguOaMbUR51ph32rxHw==
+ b=YA6hyozwZ5UTu554gy5idnN0fEDmyVmrYXxMJuTI/FVJjGuWzaLgZhN6dDVB83G346jih6EgaQ6JLmLwDsDZRotPBHEIaCjS9x1v4tSS+/QO95mDxWctg/4ycFUtiiIFOpDsIMphMo0090uTBHhjnMSldQ3iaN0aEIXCHfUYGuVX4W80j9dky07FlbpR2UkCJ9AZMkmhyoaLcW+dhmRqfAe1WeKRvoai9TbOlbCylcMOvFzrcDqHxdeNxNLzWVE0xGvFbhRoirkzfEiyngobz76t4ox4777IhrtYy0E+ABhgDJ2GR886474o3Cc5TkOnIsvdUW2cqYQgkfYsYH1hiA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XOZTxY17wbij/XXPb+ZRh2OzJ4pNjt3wZRQmcPipi80=;
- b=cbqgTsAHdsEf2QQFG4orHPJGHwmMHNshJo3m8ennTIVRxv0C7g4nPW9nAe7udZyoFCCR+8dwVOfcwBFn4lTXtwvQzXGMAokiNZRPxDOAO+E4iIHM/KUHrL7oR3VCw+3ulRIhhU9SLh8KzuSuS8MFbutHLEX9n8lEIykYcIvRIS2J698cIH+L1KHBJ34j0Kdv7V2XNi5uGcLuvQn0/l20J3KnEpJ0dBtwoNBG0oNiydElJSp8coo8yxeYpZGeLIgfTXv/EAhh6ii+xJk5xGb2rJXI+kvZlU0MPNYQ0Ch3tqVAwzctc9YC1/Z1Zs+dwZD7whwb4YT6w1117PBrRg7S+Q==
+ bh=HBsQemifxGJsQBcCkTI98e/yiE+VpMYWJmwf47FHNkA=;
+ b=S0wJ26uu+JTSwalL92sC7E7aKAa6JZIxVV810PRRDhLkECo5EmHBMQ5m+8Io8Hx6Z7EuVrACU2Dvn/qFzjk4uaZjFjaZi+Ntoj2A/fxFB2BR7YyVUpf8cTZPImNT6jgGNjRE/qKT514NZGZNZpl5tFh0jgfccFccWk6f/fGM9N/Y8yd2tEf3idDdZcGI515e/3JzCiuGYtoZ+6ftoWLeqGW4az1wQfEBS24OZUF20o7XYJ/ZINAFy9pqjgjEDuM0Y+8ymALN/LpJZl16yuZ9bABENjmTvkVUKtVV+BQRcr9ErxIbcxaqzRJR4zH1hDABrCKPbBe61Z3yL5Ty/S6hhg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
  dkim=pass header.d=vaisala.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XOZTxY17wbij/XXPb+ZRh2OzJ4pNjt3wZRQmcPipi80=;
- b=FOE40p6u+mjSV3QV9Mq/q2eYlLKDrOjVDksEMi6rrhJV31GspZ3fPIQGhZkzyofL9ET6HcDeNe3fKBvf5V6gAcvv55wPCSFt+M6Beib3uGPgnT8oM7V3t2/qx/Tik9OxUKlEQeVRBuYbpLmEWs0qvedsr5VAGJdElCDR0UU/kWQ/TG4JA7H7123vXazuVRMi5Bc4lztbwR72zWHUnjo1yxQAcfu0phvV5YmaPGf/MpxERgTnARgm+ZU3UerJYo0GUkSMiPJqkSNV0w8Enak2VHRVQZ2GUW8CRqLtcJiwR2/uJCP9kLteQy4r88bFi4QfLb8Pam3Gj1HiQ/VLhtw/nA==
+ bh=HBsQemifxGJsQBcCkTI98e/yiE+VpMYWJmwf47FHNkA=;
+ b=JTguEXDggcAE/YbVXjsV5gorMYdnaFKyrs3hJTpVIn+K3SIL9k1cFroHNpXgT20tmVJnL66eE8sZ55BqWe9yMdfz7JIbmBctD2nzPfRuuEZ1NZh+j6PDdYjFi8rZiZAUAPI5HwvzaZvqi3VppwjNoCnBGwo7hrlNpe1ZH7ovNjpjz1Fr8t/vIYGDvXB45W/v3Sxb7fwOKN1TqFxTyYwAQrqGZLqjEupl2YFQ373+JBL3KDT6qGLxdIRQCHcMkVEjL+5SRLpgSNAWbWBGDL+8lXDJz1XJ6p9Ngb73NnIUfvSpM9UszVcBcVaVCmIMfPfEJrIFdhGm6URc44+0xs6hng==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vaisala.com;
 Received: from AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
- by GVXPR06MB9098.eurprd06.prod.outlook.com (2603:10a6:150:1b1::13) with
+ by GVXPR06MB8606.eurprd06.prod.outlook.com (2603:10a6:150:111::5) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.23; Sun, 8 Sep
- 2024 17:12:21 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.28; Sun, 8 Sep
+ 2024 17:12:18 +0000
 Received: from AS4PR06MB8447.eurprd06.prod.outlook.com
  ([fe80::af93:b150:b886:b2bc]) by AS4PR06MB8447.eurprd06.prod.outlook.com
  ([fe80::af93:b150:b886:b2bc%4]) with mapi id 15.20.7939.022; Sun, 8 Sep 2024
- 17:12:21 +0000
+ 17:12:18 +0000
 From: Niko Mauno <niko.mauno@vaisala.com>
 To: openembedded-devel@lists.openembedded.org
 CC: akuster808@gmail.com,
 	Niko Mauno <niko.mauno@vaisala.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][kirkstone][PATCH 09/13] python3-fann2: Fix LICENSE
-Date: Sun,  8 Sep 2024 17:11:37 +0000
-Message-ID: <20240908171141.99382-9-niko.mauno@vaisala.com>
+Subject: [meta-python][kirkstone][PATCH 01/13] python3-pybind11: Fix LICENSE
+Date: Sun,  8 Sep 2024 17:11:29 +0000
+Message-ID: <20240908171141.99382-1-niko.mauno@vaisala.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240908171141.99382-1-niko.mauno@vaisala.com>
-References: <20240908171141.99382-1-niko.mauno@vaisala.com>
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 X-ClientProxiedBy: GV3PEPF00002BA4.SWEP280.PROD.OUTLOOK.COM
@@ -55,113 +53,109 @@ X-ClientProxiedBy: GV3PEPF00002BA4.SWEP280.PROD.OUTLOOK.COM
  (2603:10a6:20b:4e2::11)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|GVXPR06MB9098:EE_
-X-MS-Office365-Filtering-Correlation-Id: 74b9af2d-820d-44bb-66a8-08dcd0296684
+X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|GVXPR06MB8606:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9cd91414-7ba9-456b-bd8c-08dcd0296480
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|1800799024|376014|52116014|38350700014;
+	BCL:0;ARA:13230040|1800799024|52116014|376014|366016|38350700014;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?C33efHpNVDFifreg7cRXkDAK7cXBhlD7/sbOPw5AYhDx4kFKRWyabQun8jSA?=
- =?us-ascii?Q?T450kaxSc298cgcuHV1v7MF1ZMK8S23JKfHEsHra+g3yWYMrORWgIIV3dVIE?=
- =?us-ascii?Q?dvK09mhOJXiqBrGFU6ttVJAkrT0ff6xYQHXWtJ/h1Kqhge1k9p9DlMJerwzv?=
- =?us-ascii?Q?lPVzO8gKekcf7RMumUH9zyzVSMON9RKyoFf0JYwWKlPMRXLsvnSQxH9b2a1n?=
- =?us-ascii?Q?G4XR5yOqqDvM3Jhe/QDZH8i6j+oZK+f9eUV2TRDkY0gbmH98t/YrFtIJbue4?=
- =?us-ascii?Q?NFV+A0h1XxPlbXdqklRvOSZVVSHPBzHBPwm2HkCf9S6xBJkrkIeOP0VdPfED?=
- =?us-ascii?Q?5ipBpIqMOlWk9duqfPKEGO+T1Vuft07BWtZ2iTHZmYyTGggqQYt1p0E4f7ht?=
- =?us-ascii?Q?zOrs1SZdbQn5LDAlgPpr7AMY5jXBTZrW1c+p1sZTCu7t8uAYxsLF7dgBWOwi?=
- =?us-ascii?Q?v18zUP51AZ6vhwq6tBTMgOuSnFqymXYYXQZdl/DrHaJDXMpiNpaJrt/qc2ut?=
- =?us-ascii?Q?r8wa8roK0g3NHABkpOBM+a8z8WbK0RxYrx9OUa2LXQ2DTQC6A5AlOsfDvjgb?=
- =?us-ascii?Q?ItnaS7gZH0Z4w2pNMiU1wpuZmN4Byx+Lqd6VR0jkN5s2MSvH357IaKRVHGEC?=
- =?us-ascii?Q?+m7IMaWrkj4vuaVPcPqwADGGWpwFnmctrcmTYQ8fLi38fGsKm1t78gXkglkX?=
- =?us-ascii?Q?5RBUZItGfzvN0zVq7DAe0IomcKlzHdOGppKw98lLzvELrZL6RcCXQ+T0P2Gf?=
- =?us-ascii?Q?fwdfCS9HaedkoK5kUwCf7Ku4ZlIkvMbB65B0Il6QMlVZ9EpeuML8dTtkw6Gn?=
- =?us-ascii?Q?fXysR7DHPMyizfKMNvsEi2Fo2z7xTjDHusyeViiaBfCbbPANAcI8PH/dN9ZJ?=
- =?us-ascii?Q?obb2ODVoLg+5XbMOSyaf9Ehar24IsOhzuNVWjSKLWgYdEL2Nzo6jvkT7P4j5?=
- =?us-ascii?Q?eh1gH16kjdIGgkdeti8tOSiBVyKRGWhPibnpchpMAWl5bEUOykmo0E6sw3g2?=
- =?us-ascii?Q?idBYMjp2jksyMWz2Uqs/xAxVFCK+zPV2dToVoSAaFbg+56dDuoyvLZhCd8OD?=
- =?us-ascii?Q?3iHjerNzj6QBCzbTuMiG5gzmt9D67H4M71790ACX8cdM/8dBSJTA3RTsD38B?=
- =?us-ascii?Q?W83F5UkWoFd0QxGNMsx365vKBC4FI/IN78bgaNxwgkRX5RMRLD30DuQC899m?=
- =?us-ascii?Q?3dbZeFIC7x3t61bcyLSSHpw7C4sFXa5jvxFqpWDxnwqO5MylTRRTkYjdryNO?=
- =?us-ascii?Q?yOeOrOFXXBCi4RbPbSK39wXnojdqmghs2IEJ5iZ7zSM9nUPFX072Duab6gtX?=
- =?us-ascii?Q?SWoZKFyqDY5xHwv3goLc24NkGGadwSefP81rAjGiIAbU/OOhNcWw0SuzDp1o?=
- =?us-ascii?Q?qy/pd7U=3D?=
+	=?us-ascii?Q?tEcmpkp9G6lFaMKm/nuuzh0C6XYQs25LXQ9TH9k8DjMhxBEjAGYixzqoQwPF?=
+ =?us-ascii?Q?ml6cCU+MHAtVRDRLwr8Dbo2pGUuZFpqGhNPHW3KsdSDuV/F9E2M+as1qxpzg?=
+ =?us-ascii?Q?uGSd/Li/xBYs8xLlifMlV4pEOarxT7zv5J8vjqSL1vci02O/wFFQI30dQK5r?=
+ =?us-ascii?Q?euaIyJT0rV48spiHFGTVXoHdmn6+6fYEx/IVPLq2r0XoMsVpwKV6jQoKoL55?=
+ =?us-ascii?Q?7Xvn05I5lvtBM0PegdYTtqbRvfZZ37+RcrF7gYq+yes96yVwpMPodRe3wywo?=
+ =?us-ascii?Q?TprHLo0eYpYGJgGzvfOET+AncPjE/BYR4KSvAMU6H9vxBS3ECHkGEUiAQf44?=
+ =?us-ascii?Q?xJsxoN08eK5lm81qavxV9W5TCd17Y0gVg+qpxGQUrET5S2OGFES1uOk9cLiI?=
+ =?us-ascii?Q?Qme+udyE6s0T45iw2hwOY1U0IdAtLf+BhfqSZvbtuTQ6FWoZjQYTt1iKI35q?=
+ =?us-ascii?Q?I/Am3g2fjh4lwNBHHZLpCTJsSYTzcMD8dO5GxyvyvmEM3AXaKO5YbCt/1r/D?=
+ =?us-ascii?Q?5MFDzv5udiVLr5kSYUw5udK69z/u3eROaI8ZNDRy/RJzAsLtf63fgVNnwBgn?=
+ =?us-ascii?Q?wlc4pNmoTzgHYaZ6EMLqDi/o941DQH2uYBUHw+TAlptBI4JWJ3GR5SBPTzWH?=
+ =?us-ascii?Q?uYDeKB4lsb7wHvVEqhpLM1nJ0iaUd9YYmAf8e3CUh70+nROPOE1HO9sa1mlT?=
+ =?us-ascii?Q?izAL45n8iaVpcta/ZI0LlMj6KO2PzwoEOMWF+LEKQqRQaykEKJ15jdovvYxD?=
+ =?us-ascii?Q?Mmm/tcry5FWI1Od37rYuyw6mzrsR/84g+6lF76C6pDE7isQuRyZa+GwmxfQJ?=
+ =?us-ascii?Q?A9Hz0YRpZL0dWFv5A1PXMTOWSYuwGhw55Xrxn30/40wTVHkMFzOmdOqCOQMn?=
+ =?us-ascii?Q?CO11jWjMuJXhIW3IZ3xcYGLO4DYUKzROcrDSx3ilQsiVEy6o5t2Ua6ZbZB9l?=
+ =?us-ascii?Q?k5KZ8GntM7e1FB5sDCzQ6glbCWrTxCItJJPe99OnhP0/0Nc5FL3lEPR+ZZJi?=
+ =?us-ascii?Q?1+7JXru4SiFHGAMg/dzpybytoHZ2+l5qoi3GSSxIkseq2jQEBiRmGe8lnoce?=
+ =?us-ascii?Q?p399+892ZbUG9sttWfXn7O/kiwprrq8Xz/P7us+zq3bq5oDZfgc/X3FCSo7/?=
+ =?us-ascii?Q?6dqIqXfDYJYg7cvuteujWwl4VkGgT/Hvawg2U4+GoSFGDm8rdsLsK70IFx/Y?=
+ =?us-ascii?Q?HvyaQ+XdlgiJ6AzIBUXn5KCZwIQVBn5NkHcNCnOzaiRC2fncVrR6ttGcKop0?=
+ =?us-ascii?Q?yqW9n07UY6+OEOAeUojlTmLcE/ysT5HxKR7Ll4+OydxPzGGbohxaI4YBD1EW?=
+ =?us-ascii?Q?uhzfgdge7IB6A2s/NPmF2jWRBR3wGtPeY4LOfOrgP1WCqsejd3Hy+C73FgXs?=
+ =?us-ascii?Q?3DdEc8Pe0NKnXkDiOt/DHVWRPeTFgwmdG+wzs9sxEaJeDuUusw=3D=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(52116014)(38350700014);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(52116014)(376014)(366016)(38350700014);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?pPQTPX/iEr9eiicr03rira/fELblrAvzd6itfwY6VzF33UepEY1Db+4HY1Uh?=
- =?us-ascii?Q?/ifZuWVkY598ZQa7tkQZ3ERUOr4HojUE2S4xtH5z+F8X4L/JhBYLc+pC4gd2?=
- =?us-ascii?Q?B/dpzAj3RDeepl15OKrkGjLBrv8uNobrDumCIEJiHwLeZ4HBM5gBWGQNyOlX?=
- =?us-ascii?Q?6gkOpIOP2nusKRGjkx8EcWsrfhwfMC37vo0/s46LG0lJImyEFsDJb8Uf+XPe?=
- =?us-ascii?Q?OE6DZ0gqDFAVo2cWZawlaC+jPZ9IBIC86mDmmun/zr9so0UtpAy3rp4bAMgL?=
- =?us-ascii?Q?SNR37HrM65tg0UyLVfB6OAA6UYIK6aoUXfgH5L23JjLvWuYXl11szn3Dq/rK?=
- =?us-ascii?Q?Hp7JKSpSYfuSJwtelzkF4PWw0Q1dOnG4fj9a7MXESDxur88dPOQCPhqMe68T?=
- =?us-ascii?Q?lqBI9FnPJIizHkA57BX2vNIW4OEe7isFGNuoZ1API87VWSqXz1ugDxqujiQF?=
- =?us-ascii?Q?JX0oNkcfEMF8A2O0Xq40UkiBqd11hSHbfwXQQxFuluDsGF3RRF1rg2yiLE/A?=
- =?us-ascii?Q?SlbAofZ+AhN1OThPz60l/YQEWZqbwUT/P5tGFqALyp76r8M2G7qQxDVACRKV?=
- =?us-ascii?Q?lJ55vI8HT95+HxQDhCyEJBXIdZ+/1zQv+YaCiDqnDQIHfa576fV6cCkU8spW?=
- =?us-ascii?Q?ymPvPUPX9yvIFqPkdS7gvgmW84202k5aHdtmH8VeSHMJwM0uqo8yyiloJ6hs?=
- =?us-ascii?Q?ZqnviJGNn09wPVLwbz3/eet1tHAyUnGPB4JeaMEXBTVmAdeQ7D/KUli3/qbK?=
- =?us-ascii?Q?y+LcAYEi9mnrXP/bNbd37xNez7egRe4+GhAQJN9Bc65+Xk29f94ByNx/JbTu?=
- =?us-ascii?Q?9KRwpyZvnbtwa5OYJJ2zS2CG9Md2+6mJZvHgGBT9Pnzict5L0bbiv4/BloEy?=
- =?us-ascii?Q?KBV79EP3z0gxZCznrkeFc25ExpbqCIdgjCgHVkGlxMLg1uYSeyOKH8fnhjFD?=
- =?us-ascii?Q?4mJQjBHr4GwgqtVoXMu2vUKcqvUoemPfTPCKgYb/JZwKJIWJB5qiVvIbe1Gy?=
- =?us-ascii?Q?mFBQEst4ErKKcZVKb4R57wV2EAxUKrrTvxj8cYnfgtNjKgs3xFHdWY6HXlfD?=
- =?us-ascii?Q?8gAEuLSklyIjJrA+9jsPmL1Sm2empfteji0nFFSwzCjQh3xays5CAPxOxdAE?=
- =?us-ascii?Q?FRzqHT/K5/M8VUCG7S3HjD+BZW43JWJ7H6wSkOAbMhhyZzb6WF26RY6O1pUv?=
- =?us-ascii?Q?D8OE4oYFCzjP942cdMjucoZsCv9dbjL1exljBnNC3wlXoILx6Mh5zGaHdtd6?=
- =?us-ascii?Q?ZV88akP0qJutdJFAm4EQpk9RYNAskOJoqqWdSruMNfmTWsCP2GBFLLaxmpa6?=
- =?us-ascii?Q?W86UmKbwGapkmvf0DUvUTF+D5KpIgd2sse1DUwGFv9JCgI3tzIEDC5A2iqxM?=
- =?us-ascii?Q?ZYItAJgIwS1Xg1/O0PAliBMgZoRF+oUa7EuKv+3pfxuC1UkFqoWxErvX/hSK?=
- =?us-ascii?Q?Mn/JZpeGyP1P/pCFV+Yxe4Nsva68flSpMumMnSarTpDI8QUHw3Lm/FxjvgJD?=
- =?us-ascii?Q?v9B0pnPrI/fRFWtLSYtIWO4rsW2surc5/Me274w4u3FdwJbaBS0dWUfVnBAl?=
- =?us-ascii?Q?hhkXGnhoqy+LM09tjD8SdWEtw9Q5wE2linaUX97r4h9Pekil71BzK3abRtX9?=
- =?us-ascii?Q?9g=3D=3D?=
+	=?us-ascii?Q?ID64czRhDpgIhKw3jpLOK2MiuVkL8ORoDfVH5heOX8GVXA7nDcivULkIkcsE?=
+ =?us-ascii?Q?+ZSIjQB3BpQ6+6wo3Xa5iS5BfoBS4XS+8lcj7X0LSUDdzaVaOSoKgJEIc40T?=
+ =?us-ascii?Q?mNCzIUdZw0taOb6jOZa9NOs5XNLl0YXfToLbuVlRSHyN3ZHhuhWjhW7sWvPa?=
+ =?us-ascii?Q?cUwIyMy4zxADIhCxVt4WDxHZ4fRUab//A4JBX7FvZV7Kn9ULPdAYQW+8nFOP?=
+ =?us-ascii?Q?4Xqk1vZeoRJVQUaTu4S3IfqhneRU1I/U3aXQVOQFRDZuhBWmZVQXFUKNt2yg?=
+ =?us-ascii?Q?OlvKZsgc4UthLJtILFdoZLQH/p/OQbEDffh3JAvUZvu4i68FFVO3teJ9ScFM?=
+ =?us-ascii?Q?tlZM54mprEEmfYhUxmnnz1SI48Jqy9JrIXquNzVR3v/zZJ4PGmkGGTXIrI1Q?=
+ =?us-ascii?Q?8HMnCjNDiUIr8l+ey7JWl8teQHoNOf20UFrRY72k6Ei3VE19bsnuoh481Xfg?=
+ =?us-ascii?Q?UQMhuq7oAraVByKnkpGgjXsw/SUmUiDCV+IsEWawNTUW5rBHYnv8dro4p6Bf?=
+ =?us-ascii?Q?8Ea9WsQL3CeyqmhrMhupxkKgh8wFwuecuUeYQdqc5Tnmq3W6NOhk1fev6/TW?=
+ =?us-ascii?Q?DQqPON1XbDzkQn/lkxhvYA51NpmFqJfcXwI0XeM3BbooZ/g0AHldGUQCqY7z?=
+ =?us-ascii?Q?woAty/5BGeGB2MP6Bs6DKSpa8tdjmijqLjPHaC1FOnj38pWuI1yEdMJc8Ew/?=
+ =?us-ascii?Q?g+1M4ok9C5UyJotTlMRc13aWt3HjGkBxa1xvReG2RaViFuJaYrraEqmQ83qn?=
+ =?us-ascii?Q?YhV9l4IrBL7HwPqVOu/+BMUl8r2vd/2eDlKlvcICdLeH1TU0gPBMWvWOqjrp?=
+ =?us-ascii?Q?H6cn19EwAH9J4IS12D3owTt0KtLtDOw9KKulvTjXSEQJgC/lUEO3QtV3F9Bj?=
+ =?us-ascii?Q?yiy76u2NlRliwS4uWtt7nRm9eiBqwKOfqYzZfKBhbrCTJKcQ+QHQ00R9ftIP?=
+ =?us-ascii?Q?g9BzWmnGuNmvAlj1N7GHrR93zeMLAd86kxKs07K7/2q68suxTgTx7DBd3UeD?=
+ =?us-ascii?Q?6yQCwplV0X9+LNRN4cYZWrsN2yRKLBSWSQHGEZAE5ZdN5RGfht/5+GppQXgI?=
+ =?us-ascii?Q?+bZXKhrmpM87cpO98O/AVqWe5IXdk9KZZsOtqmhFBWjEZdWug+MQScMlsVxO?=
+ =?us-ascii?Q?kl01Xw8dgxz/AgHz+g2PQsRPe70BgHlOfnefJJXtquE9SeV8hvcLdjamiw74?=
+ =?us-ascii?Q?3Aqua/xw8jN9CQyXVgQMDT1oUFlOLn1RRkk+pg6GD6dP79wH9CiPvlibGYHv?=
+ =?us-ascii?Q?aAy8nJEBB7dUCqxbQKMQQQvuZKYb9WlrgyfWNJzd0kYiSR6fUjcznBKcmU7R?=
+ =?us-ascii?Q?J80Xul76Hq88V+AOfHNYFCzbm5/TJLGKRy6pfFALWMZOujT2B8f7jptstHfl?=
+ =?us-ascii?Q?e+QEx2tjbRDKvHzdwQzbyU2WkeyAMggrSBBpllvnlRuv8WfeJHVR9Zvu7kFD?=
+ =?us-ascii?Q?IpcNazFWEyuF0LdEdrbR53aoUs+aoSCBFXgD7YiuLcPPnEIyfaHJa6eQzPs4?=
+ =?us-ascii?Q?AQk3jHSFkm+m5UmfXRVcUbaW85b73mDIZhy5BZU4x7d1+FCcgKvvXcIEPQrw?=
+ =?us-ascii?Q?AdrvErCEbKw0vDPzfkgd9N62T5Ry3ME0YXw53iLT/AUZ2UmWAhGiIh4u1u8p?=
+ =?us-ascii?Q?NA=3D=3D?=
 X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 74b9af2d-820d-44bb-66a8-08dcd0296684
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9cd91414-7ba9-456b-bd8c-08dcd0296480
 X-MS-Exchange-CrossTenant-AuthSource: AS4PR06MB8447.eurprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2024 17:12:21.3531
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2024 17:12:17.9539
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: a+xUyzbXcrvtfn4sNs9Qtdzaf8To1tzfi4gxiOhY/08JxY0QsZVd/tzaG3Nb4Zjh4bAwW6rVHBVXGpuPq8hrGQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR06MB9098
+X-MS-Exchange-CrossTenant-UserPrincipalName: 12AR4zDAVKyvsvpGZfMljcT2dKV+7LaOQR1RWf4ujXJUintnktWaj9Sehca1jC0hdOa7p5YDgit8ilxhIKHXUg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR06MB8606
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 08 Sep 2024 17:12:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112170
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112162
 
-According to
-https://github.com/FutureLinkCorporation/fann2/tree/1.1.2?tab=3Dreadme-ov-f=
-ile#license
-and https://github.com/FutureLinkCorporation/fann2/blob/1.1.2/LICENSE
-this project is subject to LGPL-2.1-only license.
+The repositorys LICENSE file contains BSD-3-Clause license text, so
+update the relevant recipe information field to match.
 
 Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-pybind11_2.8.1.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb b/m=
-eta-python/recipes-devtools/python/python3-fann2_1.1.2.bb
-index 2fbc27713..2099d791d 100644
---- a/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pybind11_2.8.1.bb =
+b/meta-python/recipes-devtools/python/python3-pybind11_2.8.1.bb
+index 4d94e2033..4da693d4b 100644
+--- a/meta-python/recipes-devtools/python/python3-pybind11_2.8.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pybind11_2.8.1.bb
 @@ -1,6 +1,6 @@
- SUMMARY =3D "Python bindings for Fast Artificial Neural Networks 2.2.0 (FA=
-NN >=3D 2.2.0)"
- SECTION =3D "devel/python"
--LICENSE =3D "LGPL-2.0-only"
-+LICENSE =3D "LGPL-2.1-only"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dc73b943dc75f6f65e007c56ac6515c8=
+ SUMMARY =3D "Seamless operability between C++11 and Python"
+ HOMEPAGE =3D "https://github.com/wjakob/pybind11"
+-LICENSE =3D "BSD-2-Clause"
++LICENSE =3D "BSD-3-Clause"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D774f65abd8a7fe3124be2cdf766cd06=
 f"
 =20
- SRC_URI[md5sum] =3D "0b85b418018746d63ed66b55465697a9"
+ DEPENDS =3D "boost"
 --=20
 2.39.2
 
