@@ -1,514 +1,172 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <niko.mauno@vaisala.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1F79E6FE49
-	for <webhook@archiver.kernel.org>; Sun,  8 Sep 2024 14:24:05 +0000 (UTC)
-Received: from mail-oo1-f43.google.com (mail-oo1-f43.google.com [209.85.161.43])
- by mx.groups.io with SMTP id smtpd.web10.31017.1725805436559943678
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E456CD4F4C
+	for <webhook@archiver.kernel.org>; Sun,  8 Sep 2024 15:34:36 +0000 (UTC)
+Received: from EUR03-DBA-obe.outbound.protection.outlook.com (EUR03-DBA-obe.outbound.protection.outlook.com [40.107.104.100])
+ by mx.groups.io with SMTP id smtpd.web11.32164.1725809673142184746
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 08 Sep 2024 07:23:56 -0700
+ Sun, 08 Sep 2024 08:34:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=SuPf3JqV;
- spf=pass (domain: gmail.com, ip: 209.85.161.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f43.google.com with SMTP id 006d021491bc7-5e1b35030aeso1371515eaf.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Sep 2024 07:23:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1725805436; x=1726410236; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=JyJ+h4zfgueHU5a24B35ZT41HFP9W530kRoNNvTqH9w=;
-        b=SuPf3JqVE5Cu6ADwPOz+uV7PbCancwTcqKV9OUZCBaXrXrH8KoQ2Slg05EfyKJOB1f
-         dkWSGegp9Sy8gOM1zQnzDfIHqEOESHOlsK7Tl6QCKtHn3p/G8XEdpJknsTtZZnDTnGX8
-         SdE3HcLQxqRjdHSgknpOTPkUt4g70e9FwYtow8UPSc6x/yt/Li4x41/6w6yBpRBkO/t7
-         ci9W3LAwXAIuIayXdcXGEF/jy4k4Xm/fkmCOeJE9p/M/ogurt3PguZmBFj+pf6Plobsu
-         k9s9mHE9N7Wa5PKhPNFy75hwaSe3B2ljtMqyh2ApB1SG2YvPhE1U32c8qUWJ/FGbrSYw
-         yJng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725805436; x=1726410236;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=JyJ+h4zfgueHU5a24B35ZT41HFP9W530kRoNNvTqH9w=;
-        b=lK60GSWy+UaCeZMhfWWbdY81AYlK+XISdl5AB999oSjlPdgLLEDQWKFZqVCwMl8/jO
-         7B1+PcQLyimfvmKwF/M4jaI1jnEIMjBeEGF66bUv+/9fMfUg1C5taTVEn3oUMirXBc5C
-         tMWqUjy4rw9/ojOEkTelALoj8cIlhzS2K0cc38YRJXzpE1WPZAfeuiCxlMaPSmNSvK1s
-         R3KxvCcN7ChakcGzV1jfAhF0qGsxvDIv4WJWXsn2RfKVsngrmhlnasAke6yWQhGjBOIx
-         N/V04+LA4jvQsEl6E20TSYUnuUOJUvo9iONu81J015zzL0uq6COtXh7xM6smYVpIsBh/
-         0tSg==
-X-Gm-Message-State: AOJu0YwbEkKpoMuLi6auDpIgNwIgSQ3jkWVjHe80VzypaBHbKgM6Okx8
-	DiBp5LPm0uu9bcE/2Qe8gzJ+bxAVve/Kxm5UiQyYc1qpC0UvNsZmGAe0awuo6MbA9wiWyNCHjZW
-	7zGAcwbOoTWE2itmF6hzIYWkOtfg=
-X-Google-Smtp-Source: AGHT+IF1f9cQUqH0t8dybQRL4VYlDXLbxONxcC5sgKtjRosyAnqRb+cducc7r/Iuym2381RhJIv7NRFLlvz6CNQm7xE=
-X-Received: by 2002:a05:6820:16a3:b0:5c4:68b8:e27f with SMTP id
- 006d021491bc7-5e1a9d2332bmr9059160eaf.6.1725805435668; Sun, 08 Sep 2024
- 07:23:55 -0700 (PDT)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=n0WmULml;
+ spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 40.107.104.100, mailfrom: niko.mauno@vaisala.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=O8k9KyRuw9mXkj7x74GOYPwMdPRIZJOwSTLlRKcA2O970/mfhM1pqw6bfeUKJ+R78Fjs1ZnyRWyWSECFjS1u34OlmAddDcpKPUKyiYG+aCJo4ui4W5+4oZwpLW0KVK8T1CfNBTe3Ui+YclUvIWR7YVjdsmNB+APQMZ8VIPB+Yr2fdwRwQcSPHtG5sdOQsAVgtud6jUdGDP658VnKUCOs0DqAR1m0FzvJ6PbEo171sukYGZKhHv8CWIXAM+R0yUhhaYZBP2eWT88gLa3hILAajUQ0o4OAzjs/t+UhjVChSAYJh2HbYGEWOH0ELH2mCm5j9EA5kyEznAJAud1Hc4TcBQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0obSQrxPyqNEh8LuSwvNFAgEU4wHhs7EE+rw4rNlLPk=;
+ b=YQpVd8plINOUk5MddLQQuBm3F8FLK4QQTQF8fhWsxYj+vF7uGIWIAJ2p14nuScS7R+hxafYTqy1aNu24VotlY+e5eMgWejG4ig1ZnAE762ANxEd3uJpoenakc/IB/2pfaN8/XgKYlNgF1RFRcKuKbKw8nwaJde8K7hWZ/MilYaw5/mKfZKv+ZCQf96dw3182zkQBhGRCuwsAFrhHfmRulyq33FLG1+eCwh+rUUGkBZtBjTsaNUwcon88mHj9HlAz7K8F6nYxwEmsJ/4aE5DtCq3bWw2fz7l6aR8/MQKc5RJc1o9xtCyDa9QgCtS694UKUuPVthgter2oLxMx+NOESw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
+ dkim=pass header.d=vaisala.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0obSQrxPyqNEh8LuSwvNFAgEU4wHhs7EE+rw4rNlLPk=;
+ b=n0WmULml1LlqIpEVxzj/VKfzoGdJXeP4ljB2toLBV+tsqiR2bWXTsBS14t3EM24eeLCWqwRBKaxRhRTDJHlMyu2ZkMu1GRXw3K0zQ2lBnPmnzFLWL5XfzJQ3pyU9x+1gl3zjSgPqjje1bZ9M0yKNUfWon7NRzhZy+9kTNrDaHtjV/L3qEuO/S1LuSkzVSKw6Qbs2WGSJiyk6A7WXtCMb12tRfuPIMkPG6kb8ryR6XHzS0p20TVcGPM2om6Sfed8G2peOr4ml5pKvm7rb3Jm/ZaKicxt87E2z+XYnRefxTXc2xc1DvlG3uYgRD4UZPfFKFyh7enc39o/Vbewc/lF1Nw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vaisala.com;
+Received: from AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
+ by DBAPR06MB7095.eurprd06.prod.outlook.com (2603:10a6:10:1a2::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.22; Sun, 8 Sep
+ 2024 15:34:31 +0000
+Received: from AS4PR06MB8447.eurprd06.prod.outlook.com
+ ([fe80::af93:b150:b886:b2bc]) by AS4PR06MB8447.eurprd06.prod.outlook.com
+ ([fe80::af93:b150:b886:b2bc%4]) with mapi id 15.20.7939.022; Sun, 8 Sep 2024
+ 15:34:31 +0000
+From: Niko Mauno <niko.mauno@vaisala.com>
+To: openembedded-devel@lists.openembedded.org
+CC: akuster808@gmail.com,
+	Niko Mauno <niko.mauno@vaisala.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][scarthgap][PATCHv4 05/19] python3-email-validator: Fix LICENSE
+Date: Sun,  8 Sep 2024 15:33:54 +0000
+Message-ID: <20240908153408.4114753-5-niko.mauno@vaisala.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240908153408.4114753-1-niko.mauno@vaisala.com>
+References: <20240908153408.4114753-1-niko.mauno@vaisala.com>
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-ClientProxiedBy: GV3P280CA0011.SWEP280.PROD.OUTLOOK.COM (2603:10a6:150:b::7)
+ To AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
 MIME-Version: 1.0
-References: <20240902162710.1284914-1-martin.jansa@gmail.com>
- <17F17A4E8C380788.17352@lists.openembedded.org> <CA+chaQcOfZrNWvVF5q+1otfTfif8k0Tie_2V-0wcsshBNBfB8A@mail.gmail.com>
-In-Reply-To: <CA+chaQcOfZrNWvVF5q+1otfTfif8k0Tie_2V-0wcsshBNBfB8A@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 8 Sep 2024 07:23:45 -0700
-Message-ID: <CAMKF1so0zOeuE-xuXAVPLinEto1A=pkB=ty9BPY0gVZRA2dD4A@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] python3-matplotlib: add native RSS to
- -fmacro-prefix-map to fix buildpaths QA
-To: martin.jansa@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000f1cffd06219c63de"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|DBAPR06MB7095:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4fe4a592-0419-4733-04b2-08dcd01bbbb8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|376014|52116014|366016|1800799024|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?jmGT+C39fu09yy7ZLhPWD+FTYO+Ve1pWHteS8EDRzYn628zTv/GWnVuj5DMG?=
+ =?us-ascii?Q?gb31Dub6x2hebbsRj2zf56ZT+5/tfpCXGp0VdtPQC5nNIr/fXxGFMzSP2fmp?=
+ =?us-ascii?Q?5S9gslqsWx+TcbpxdGvXVloeLXaAFlKmars3EsGx2X81rpD5eR8Wur2aJHwO?=
+ =?us-ascii?Q?WPCJWpKZTxr542i3ZJHMnl7EQvb3H6Z+5K2tCnWKX3pNBOHk+HuA1bEERMYp?=
+ =?us-ascii?Q?pQEwTaQ/i882FpO5dQnd3TbJTIFpB9AsKG9dCIWXpgMqUZfGOjYHXYXwZQzo?=
+ =?us-ascii?Q?4Ff61k5m/soQV7myAI4cnDETXgPkMYK0E0NtjrxRdefu5KKnsoHicOTeMkO0?=
+ =?us-ascii?Q?e3iv6aYR0ig9EwOqmqlUR9YeOyhyXd9atyDN76UllFJ3X+iSkG9cYcdb3SbO?=
+ =?us-ascii?Q?IgtB817FwhpGjN1sJnxCZF3tIwszGadU9weuXJPK6mQJNoykKRj5lbSOzbnm?=
+ =?us-ascii?Q?AASTeV9j89memSJ5+XxUOn+LPEinQYstiy86E4GJ+dm2gjKX8u5Eu8JqCOWh?=
+ =?us-ascii?Q?kipQdNoVbgq5e7BDDD1vj5HhlFSM4f2M14guGhXe9qCxxuNcDN3P8ov5VW01?=
+ =?us-ascii?Q?aUK7zUR47ifIYNZyUoeXDyjuqoCyLbPCoOBYPXuMD9CNtCJYGR+qkC51tuxJ?=
+ =?us-ascii?Q?MfistYWx51erujJLHzyqjdrwbe3lUyHr5T8Y/rxOrALPnY9RcX0rNeSWrGkm?=
+ =?us-ascii?Q?VKZZBspb2iV4Ed7k25Z5cxGEyPU9LyZD8WKaw5hvhD1VRhYdoAxxRAZYYS3i?=
+ =?us-ascii?Q?1dYZ/bqWY6TYr4V9I+KJSbNWoBdkze9+mBWze4Cw4esRgpoT0Zk6lNa9cEhm?=
+ =?us-ascii?Q?NK2iNn6dVgHWlDRbEr+leSrHfjg1o/93Ojj9j3drjbMF6SqObJHFzQCNq92k?=
+ =?us-ascii?Q?/S4rjr6grUxbIP6eCc2jQlh1vcUGXT8ymx+iZ9sbf3FcnKrmpl3mtZq65g2W?=
+ =?us-ascii?Q?zhX46ui4iwTht+Snu6zDANDklF4w+10m6rNbkG38sDOCC5KOc3SkwvKsrt/6?=
+ =?us-ascii?Q?FGsCmn5DKIzjpaL0MUuGvwflIufzpR6whBcpzNGl2JjLL//Ln39ykVV0kbbn?=
+ =?us-ascii?Q?kn8vF4sDNxY/nKTEwblBNXFqS7XZTdcskxILwt+2+cUR8ZTTrD9qW575r9Yp?=
+ =?us-ascii?Q?JYAlWxuvv9Npn/J8teQ+oq9hH+K2T7n4zchLf2E+qPun0jaF58llqwX244JD?=
+ =?us-ascii?Q?6vOr7eWost+27LGWle6/Oo7Y/XEWT9EcdHxinWlkkN1vdwk7I1uJ/gEGwc+x?=
+ =?us-ascii?Q?iP2xpRKYzPml5ZdrEJY7cEEX/QX1rdYtGUxP7GDaqXvEeosHpNWdBpAfXaCD?=
+ =?us-ascii?Q?myBxGuqAXwjzbTYxb/FERCQGwggbVbUkvq51xbCcGDLBEgd1iiKLMUGjzYTU?=
+ =?us-ascii?Q?g7vwNspeocCYMot8sX7Erg55FS1zPPHQ0od1GHHr57URVBrgkA=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(52116014)(366016)(1800799024)(38350700014);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?IN7YQ+e15BbP/dTxPdVmeavogdidcm4j3aFdYM/kzaAPA5gdoKcgNBciwqeS?=
+ =?us-ascii?Q?UoK4HfFKl0oJO/oSJNIqfANPomxFkHonGjCl4qFrDxetVXAURUohN9U1Mrub?=
+ =?us-ascii?Q?6uXsdNoDNy8oKCMiveW3jbpq7RBn3B+zWHhfAWT65iZDpgoOneF2k/lNIvAz?=
+ =?us-ascii?Q?10AVoc87HQmVVER7j+sjSas26WSf1Pw4GUoA0RthWEWgXMjoQLwB6ITfdHgo?=
+ =?us-ascii?Q?E9WSHD7M9XBmyRNf+T0/B8b+3XAw86Rp8BA82tOnMQ+kPj2khPiImYjxELYh?=
+ =?us-ascii?Q?1B9MGzB0qXOV+uJygXXkPphLgzNTO1c/XZT5ggpPnN4g1AD1Ekx2f0AoLhQS?=
+ =?us-ascii?Q?VBFLoe3MvfV9lRKR0CTtyYcxonhfww1O1IRgaBrCglLZmErNteCvGaTG7guN?=
+ =?us-ascii?Q?+LT3jo/cG27lPT224gqVEc+9oheQSFypbTEy6T+tY108cwvodIxWP/2yEAy9?=
+ =?us-ascii?Q?JBE2/BM2eaH1E4zSfNNT+iL3PliYSK9LDCFPPPoXVXfhpwFtB1WbhQ08TELF?=
+ =?us-ascii?Q?3Cx2OtaECToRER70XGX9U4luItCy0nduSSL4xMGWNgZnSY152AaNMsxVd7A3?=
+ =?us-ascii?Q?AazhAOLj4fFSiWHMR9hIgMWq8qixW2xoXr7yb2bY9V7PbRv+1WNpVTxjOQ+Z?=
+ =?us-ascii?Q?hnctpNGS3t2PII0YOTJYDuEVwQLA8/2w2bIwRKeQeF7xHgXZzy4Ul3uT1gjB?=
+ =?us-ascii?Q?qW6OoaAuB5bvsz99KsHf0m/mIwM0HI6l0V5bhQbIQvjZ0FPgiyezRoI6R/oG?=
+ =?us-ascii?Q?79aZ4qErWe4gFWWC+OmjTc1eTVE91qXUaCCOvzWj4Vrl2d1TX/DIHdqb6ED3?=
+ =?us-ascii?Q?7S+lSH+/H77rRG95P2r8QPxOFl6vKZQ+qcxYp+dNncnUWYM3DVlkdIDoKDHh?=
+ =?us-ascii?Q?Ty3d3loweGcp6PjUV7uA3cOs2SE/x/F/WlbRRfu5kcQOIsD+Sb5ge9YoPBWF?=
+ =?us-ascii?Q?OU8/Rab1opxWyWdQ60C13TT1aTibH76SvA4E7I0UfJ0LSeViQZLklHpTUnjP?=
+ =?us-ascii?Q?vSiCtHdEB8UlgvbzmJda1CAQJ6IStwn/8p8UjLyX8yaO7X3arDL6gOzLIGJf?=
+ =?us-ascii?Q?MbAhrDUVa/B3XA/t9Q5NMssTM+AGV15W6e3Vxy6eSOYisRM7StX3pUxG4RQ0?=
+ =?us-ascii?Q?BTo51rmCTeN3YeUYwoJTfR6kfp4Ym/4gURfMkTxVvYbUomfx/ZNvg6LaoLW1?=
+ =?us-ascii?Q?XPgUSPFFBIRnNLYiOHv3fCxH/LpzLA+mHHJtqocG/qg4WOcAKV3OtkPFnQV4?=
+ =?us-ascii?Q?eFoeOoqRCFJF6dhDBueKP1ysj6e9u3cJzkkOdDuaM8xjW6tScCXd/CrbmnpL?=
+ =?us-ascii?Q?zh+WV2CqDqUQ6BLmQIqEl4Td2vw/ktdRGJzOYREsNXJ0p6PGOFTbeaKP8ex9?=
+ =?us-ascii?Q?l/I6+m2Oa5SivbNfP8jfQ+D5MRtseM4S8/swGtqvdu0Ym/mA3El9WsO/3PIn?=
+ =?us-ascii?Q?cq2mkS+SI/fwv730QvwrasXjkCKJwhxAMIsE1bU3bT3mlnmI/1+Cz5U7Je6J?=
+ =?us-ascii?Q?ITI+fMMfXbMS8hk/7SRb8ia+i7s0ViAxJMg7MUhKTy2SaKDLqBG+DAam+kJm?=
+ =?us-ascii?Q?9fKQR+FDZs4Vn/9ptZ3eXlroEtUvubdppAg4Y8qOuOmfbb+cqdSCz8LH1WK4?=
+ =?us-ascii?Q?qA=3D=3D?=
+X-OriginatorOrg: vaisala.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4fe4a592-0419-4733-04b2-08dcd01bbbb8
+X-MS-Exchange-CrossTenant-AuthSource: AS4PR06MB8447.eurprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2024 15:34:31.3465
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: S+hFVMjR4ABS5EUCnGR/Bgq98QUdYU7Y/kIZ+PwanPOgSVRPvgDamqXpDJJXNV74AFqZvwDMd6eySLQtyI8+dA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR06MB7095
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 08 Sep 2024 14:24:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112140
+ <openembedded-devel@lists.openembedded.org>; Sun, 08 Sep 2024 15:34:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112144
 
---000000000000f1cffd06219c63de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Both https://pypi.org/project/email-validator/ and
+https://github.com/JoshData/python-email-validator/blob/v2.1.1/LICENSE
+declare this project is subject to 'Unlicense'.
 
-On Sun, Sep 8, 2024 at 12:35=E2=80=AFAM Martin Jansa via lists.openembedded=
-.org
-<martin.jansa=3Dgmail.com@lists.openembedded.org> wrote:
+For additional reference, see upstream commit
+https://github.com/JoshData/python-email-validator/commit/5d72f53412821189e=
+bc826100fb2a673530c5ac6
+("Relicense under the Unlicense (instead of CC0)")
 
-> Khem: please drop this one from master-next
->
-> It was added in the default DEBUG_PREFIX_MAP in oe-core now.
+Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-devtools/python/python3-email-validator_2.1.1.bb    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/meta-python/recipes-devtools/python/python3-email-validator_2.=
+1.1.bb b/meta-python/recipes-devtools/python/python3-email-validator_2.1.1.=
+bb
+index 90a22e5a0..746d56d18 100644
+--- a/meta-python/recipes-devtools/python/python3-email-validator_2.1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-email-validator_2.1.1.bb
+@@ -1,6 +1,6 @@
+ SUMMARY =3D "A robust email address syntax and deliverability validation l=
+ibrary."
+ SECTION =3D "devel/python"
+-LICENSE =3D "CC0-1.0"
++LICENSE =3D "Unlicense"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2890aee62bd2a4c3197e2059016a397=
+e"
+=20
+ SRC_URI[sha256sum] =3D "200a70680ba08904be6d1eef729205cc0d687634399a5924d8=
+42533efb824b84"
+--=20
+2.39.2
 
-Yes thanks I was adding it for testing a local issue I was seeing with
-clang. Thanks for letting me know regardless
-
-
->
-> On Mon, Sep 2, 2024 at 6:30=E2=80=AFPM Martin Jansa via lists.openembedde=
-d.org
-> <martin.jansa=3Dgmail.com@lists.openembedded.org> wrote:
-> >
-> > This is related RFC patch just sent to oe-core ML:
-> > https://lists.openembedded.org/g/openembedded-core/message/204110
-> >
-> > On Mon, Sep 2, 2024 at 6:27=E2=80=AFPM Martin Jansa <martin.jansa@gmail=
-.com>
-> wrote:
-> > >
-> > > * fixes:
-> > >   ERROR: lib32-python3-matplotlib-3.7.2-r0 do_package_qa: QA Issue:
-> File /usr/lib/python3.12/site-packages/matplotlib/_
-> tri.cpython-312-i386-linux-gnu.so in package lib32-python3-matplotlib
-> contains reference to TMPDIR [buildpaths]
-> > >
-> > > * there is native RSS already but only in -fdebug-prefix-map
-> > >
-> > > * it fails only with multilib where target RSS isn't substring of
-> native RSS
-> > >
-> > > * comparing _tri.cpython-312-*-linux-gnu.so cmdline for regular x86-6=
-4
-> and lib32-python3-matplotlib i586 build shows:
-> > >
-> > >
-> --fmacro-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/=
-python3-matplotlib/3.7.2/matplotlib-3.7.2=3D/usr/src/debug/python3-matplotl=
-ib/3.7.2
-> \
-> > >
-> --fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/=
-python3-matplotlib/3.7.2/matplotlib-3.7.2=3D/usr/src/debug/python3-matplotl=
-ib/3.7.2
-> \
-> > >
-> --fmacro-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/=
-python3-matplotlib/3.7.2/matplotlib-3.7.2=3D/usr/src/debug/python3-matplotl=
-ib/3.7.2
-> \
-> > >
-> --fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/=
-python3-matplotlib/3.7.2/matplotlib-3.7.2=3D/usr/src/debug/python3-matplotl=
-ib/3.7.2
-> \
-> > >
-> --fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/=
-python3-matplotlib/3.7.2/recipe-sysroot=3D
-> \
-> > >
-> --fmacro-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/=
-python3-matplotlib/3.7.2/recipe-sysroot=3D
-> \
-> > >
-> --fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/=
-python3-matplotlib/3.7.2/recipe-sysroot-native=3D
-> \
-> > >
-> +-fmacro-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/i586-oemllib32-lin=
-ux/lib32-python3-matplotlib/3.7.2/matplotlib-3.7.2=3D/usr/src/debug/lib32-p=
-ython3-matplotlib/3.7.2
-> \
-> > >
-> +-fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/i586-oemllib32-lin=
-ux/lib32-python3-matplotlib/3.7.2/matplotlib-3.7.2=3D/usr/src/debug/lib32-p=
-ython3-matplotlib/3.7.2
-> \
-> > >
-> +-fmacro-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/i586-oemllib32-lin=
-ux/lib32-python3-matplotlib/3.7.2/matplotlib-3.7.2=3D/usr/src/debug/lib32-p=
-ython3-matplotlib/3.7.2
-> \
-> > >
-> +-fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/i586-oemllib32-lin=
-ux/lib32-python3-matplotlib/3.7.2/matplotlib-3.7.2=3D/usr/src/debug/lib32-p=
-ython3-matplotlib/3.7.2
-> \
-> > >
-> +-fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/i586-oemllib32-lin=
-ux/lib32-python3-matplotlib/3.7.2/lib32-recipe-sysroot=3D
-> \
-> > >
-> +-fmacro-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/i586-oemllib32-lin=
-ux/lib32-python3-matplotlib/3.7.2/lib32-recipe-sysroot=3D
-> \
-> > >
-> +-fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/i586-oemllib32-lin=
-ux/lib32-python3-matplotlib/3.7.2/recipe-sysroot-native=3D
-> \
-> > >
-> > > * the buildpaths are header files from native pybind11
-> (Pybind11Extension)
-> > >
-> https://github.com/pybind/pybind11/blob/master/pybind11/setup_helpers.py#=
-L89
-> > >
-> > > $ strings package/usr/lib/python3.12/site-packages/matplotlib/_
-> tri.cpython-312-i386-linux-gnu.so | grep oemllib32
-> > >
-> /OE/build/oe-core/tmp-glibc/work/i586-oemllib32-linux/lib32-python3-matpl=
-otlib/3.7.2/recipe-sysroot-native/usr/lib/python3.12/site-packages/pybind11=
-/include/pybind11/detail/../detail/common.h
-> > >
-> /OE/build/oe-core/tmp-glibc/work/i586-oemllib32-linux/lib32-python3-matpl=
-otlib/3.7.2/recipe-sysroot-native/usr/lib/python3.12/site-packages/pybind11=
-/include/pybind11/detail/../detail/../pytypes.h
-> > >
-> /OE/build/oe-core/tmp-glibc/work/i586-oemllib32-linux/lib32-python3-matpl=
-otlib/3.7.2/recipe-sysroot-native/usr/lib/python3.12/site-packages/pybind11=
-/include/pybind11/detail/class.h
-> > >
-> /OE/build/oe-core/tmp-glibc/work/i586-oemllib32-linux/lib32-python3-matpl=
-otlib/3.7.2/recipe-sysroot-native/usr/lib/python3.12/site-packages/pybind11=
-/include/pybind11/detail/../detail/type_caster_base.h
-> > >
-> /OE/build/oe-core/tmp-glibc/work/i586-oemllib32-linux/lib32-python3-matpl=
-otlib/3.7.2/recipe-sysroot-native/usr/lib/python3.12/site-packages/pybind11=
-/include/pybind11/pybind11.h
-> > >
-> /OE/build/oe-core/tmp-glibc/work/i586-oemllib32-linux/lib32-python3-matpl=
-otlib/3.7.2/recipe-sysroot-native/usr/lib/python3.12/site-packages/pybind11=
-/include/pybind11/gil.h
-> > >
-> /OE/build/oe-core/tmp-glibc/work/i586-oemllib32-linux/lib32-python3-matpl=
-otlib/3.7.2/recipe-sysroot-native/usr/lib/python3.12/site-packages/pybind11=
-/include/pybind11/gil_safe_call_once.h
-> > >
-> > > * I'm not familiar enough with pybind11 to find a way how to configur=
-e
-> it to
-> > >   use correct include dir, the issue already exists in regular x86-64
-> dir, but
-> > >   not caught by buildpaths, because, the:
-> > >
->  -fmacro-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/=
-python3-matplotlib/3.7.2/recipe-sysroot=3D
-> > >   is enought to mangle the hardcoded paths (leaving only '-native')
-> like this:
-> > >
-> > > strings
-> ../3.7.2-x86-64/package/usr/lib64/python3.12/site-packages/matplotlib/_
-> tri.cpython-312-x86_64-linux-gnu.so | grep pybind11/include/pybind11
-> > >
-> -native/usr/lib/python3.12/site-packages/pybind11/include/pybind11/detail=
-/common.h
-> > >
-> -native/usr/lib/python3.12/site-packages/pybind11/include/pybind11/pytype=
-s.h
-> > >
-> -native/usr/lib/python3.12/site-packages/pybind11/include/pybind11/detail=
-/class.h
-> > >
-> -native/usr/lib/python3.12/site-packages/pybind11/include/pybind11/detail=
-/type_caster_base.h
-> > >
-> -native/usr/lib/python3.12/site-packages/pybind11/include/pybind11/pybind=
-11.h
-> > >
-> -native/usr/lib/python3.12/site-packages/pybind11/include/pybind11/gil.h
-> > >
-> -native/usr/lib/python3.12/site-packages/pybind11/include/pybind11/gil_sa=
-fe_call_once.h
-> > >
-> > > * there is also:
-> > >   WARNING: lib32-python3-matplotlib-3.7.2-r0 do_check_backend: QA
-> Issue: inherits setuptools3 but has pyproject.toml with
-> setuptools.build_meta, use the correct class [pep517-backend]
-> > >   but just changing the inherit doesn't work in this case, I'll leave
-> that
-> > >   to someone actually using python3-matplotlib
-> > >
-> > > Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-> > > ---
-> > >  .../recipes-devtools/python/python3-matplotlib_3.7.2.bb      | 5
-> +++++
-> > >  1 file changed, 5 insertions(+)
-> > >
-> > > diff --git a/meta-python/recipes-devtools/python/
-> python3-matplotlib_3.7.2.bb b/meta-python/recipes-devtools/python/
-> python3-matplotlib_3.7.2.bb
-> > > index 72c369100a..2886060a9e 100644
-> > > --- a/meta-python/recipes-devtools/python/python3-matplotlib_3.7.2.bb
-> > > +++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.7.2.bb
-> > > @@ -68,3 +68,8 @@ do_compile:prepend() {
-> > >  }
-> > >
-> > >  BBCLASSEXTEND =3D "native"
-> > > +
-> > > +# otherwise pybind11 paths from STAGING_DIR_NATIVE end in _
-> tri.cpython-312-i386-linux-gnu.so
-> > > +# when STAGING_DIR_NATIVE doesn't start with STAGING_DIR_HOST (e.g.
-> for lib32-python3-matplotlib)
-> > > +# http://errors.yoctoproject.org/Errors/Details/801217/
-> > > +DEBUG_PREFIX_MAP:append =3D " -fmacro-prefix-map=3D${STAGING_DIR_NAT=
-IVE}=3D"
-> > > --
-> > > 2.46.0
-> > >
-> >
-> >
-> >
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#112124):
-> https://lists.openembedded.org/g/openembedded-devel/message/112124
-> Mute This Topic: https://lists.openembedded.org/mt/108229723/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---000000000000f1cffd06219c63de
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Sun, Sep 8, 2024 at 12:35=E2=80=AFAM Martin Jansa via <a=
- href=3D"http://lists.openembedded.org">lists.openembedded.org</a> &lt;mart=
-in.jansa=3D<a href=3D"mailto:gmail.com@lists.openembedded.org">gmail.com@li=
-sts.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quo=
-te" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"=
->Khem: please drop this one from master-next<br>
-<br>
-It was added in the default DEBUG_PREFIX_MAP in oe-core now.</blockquote><d=
-iv dir=3D"auto"><br></div><div dir=3D"auto">Yes thanks I was adding it for =
-testing a local issue I was seeing with clang. Thanks for letting me know r=
-egardless=C2=A0</div><div dir=3D"auto"><br></div><blockquote class=3D"gmail=
-_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:=
-1ex" dir=3D"auto"><br>
-<br>
-On Mon, Sep 2, 2024 at 6:30=E2=80=AFPM Martin Jansa via <a href=3D"http://l=
-ists.openembedded.org" rel=3D"noreferrer" target=3D"_blank">lists.openembed=
-ded.org</a><br>
-&lt;martin.jansa=3D<a href=3D"mailto:gmail.com@lists.openembedded.org" targ=
-et=3D"_blank">gmail.com@lists.openembedded.org</a>&gt; wrote:<br>
-&gt;<br>
-&gt; This is related RFC patch just sent to oe-core ML:<br>
-&gt; <a href=3D"https://lists.openembedded.org/g/openembedded-core/message/=
-204110" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-core/message/204110</a><br>
-&gt;<br>
-&gt; On Mon, Sep 2, 2024 at 6:27=E2=80=AFPM Martin Jansa &lt;<a href=3D"mai=
-lto:martin.jansa@gmail.com" target=3D"_blank">martin.jansa@gmail.com</a>&gt=
-; wrote:<br>
-&gt; &gt;<br>
-&gt; &gt; * fixes:<br>
-&gt; &gt;=C2=A0 =C2=A0ERROR: lib32-python3-matplotlib-3.7.2-r0 do_package_q=
-a: QA Issue: File /usr/lib/python3.12/site-packages/matplotlib/_<a href=3D"=
-http://tri.cpython-312-i386-linux-gnu.so" rel=3D"noreferrer" target=3D"_bla=
-nk">tri.cpython-312-i386-linux-gnu.so</a> in package lib32-python3-matplotl=
-ib contains reference to TMPDIR [buildpaths]<br>
-&gt; &gt;<br>
-&gt; &gt; * there is native RSS already but only in -fdebug-prefix-map<br>
-&gt; &gt;<br>
-&gt; &gt; * it fails only with multilib where target RSS isn&#39;t substrin=
-g of native RSS<br>
-&gt; &gt;<br>
-&gt; &gt; * comparing _tri.cpython-312-*-linux-gnu.so cmdline for regular x=
-86-64 and lib32-python3-matplotlib i586 build shows:<br>
-&gt; &gt;<br>
-&gt; &gt; --fmacro-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-o=
-e-linux/python3-matplotlib/3.7.2/matplotlib-3.7.2=3D/usr/src/debug/python3-=
-matplotlib/3.7.2 \<br>
-&gt; &gt; --fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-o=
-e-linux/python3-matplotlib/3.7.2/matplotlib-3.7.2=3D/usr/src/debug/python3-=
-matplotlib/3.7.2 \<br>
-&gt; &gt; --fmacro-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-o=
-e-linux/python3-matplotlib/3.7.2/matplotlib-3.7.2=3D/usr/src/debug/python3-=
-matplotlib/3.7.2 \<br>
-&gt; &gt; --fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-o=
-e-linux/python3-matplotlib/3.7.2/matplotlib-3.7.2=3D/usr/src/debug/python3-=
-matplotlib/3.7.2 \<br>
-&gt; &gt; --fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-o=
-e-linux/python3-matplotlib/3.7.2/recipe-sysroot=3D \<br>
-&gt; &gt; --fmacro-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-o=
-e-linux/python3-matplotlib/3.7.2/recipe-sysroot=3D \<br>
-&gt; &gt; --fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/core2-64-o=
-e-linux/python3-matplotlib/3.7.2/recipe-sysroot-native=3D \<br>
-&gt; &gt; +-fmacro-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/i586-oemll=
-ib32-linux/lib32-python3-matplotlib/3.7.2/matplotlib-3.7.2=3D/usr/src/debug=
-/lib32-python3-matplotlib/3.7.2 \<br>
-&gt; &gt; +-fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/i586-oemll=
-ib32-linux/lib32-python3-matplotlib/3.7.2/matplotlib-3.7.2=3D/usr/src/debug=
-/lib32-python3-matplotlib/3.7.2 \<br>
-&gt; &gt; +-fmacro-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/i586-oemll=
-ib32-linux/lib32-python3-matplotlib/3.7.2/matplotlib-3.7.2=3D/usr/src/debug=
-/lib32-python3-matplotlib/3.7.2 \<br>
-&gt; &gt; +-fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/i586-oemll=
-ib32-linux/lib32-python3-matplotlib/3.7.2/matplotlib-3.7.2=3D/usr/src/debug=
-/lib32-python3-matplotlib/3.7.2 \<br>
-&gt; &gt; +-fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/i586-oemll=
-ib32-linux/lib32-python3-matplotlib/3.7.2/lib32-recipe-sysroot=3D \<br>
-&gt; &gt; +-fmacro-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/i586-oemll=
-ib32-linux/lib32-python3-matplotlib/3.7.2/lib32-recipe-sysroot=3D \<br>
-&gt; &gt; +-fdebug-prefix-map=3D/OE/build/oe-core/tmp-glibc/work/i586-oemll=
-ib32-linux/lib32-python3-matplotlib/3.7.2/recipe-sysroot-native=3D \<br>
-&gt; &gt;<br>
-&gt; &gt; * the buildpaths are header files from native pybind11 (Pybind11E=
-xtension)<br>
-&gt; &gt;=C2=A0 =C2=A0<a href=3D"https://github.com/pybind/pybind11/blob/ma=
-ster/pybind11/setup_helpers.py#L89" rel=3D"noreferrer" target=3D"_blank">ht=
-tps://github.com/pybind/pybind11/blob/master/pybind11/setup_helpers.py#L89<=
-/a><br>
-&gt; &gt;<br>
-&gt; &gt; $ strings package/usr/lib/python3.12/site-packages/matplotlib/_<a=
- href=3D"http://tri.cpython-312-i386-linux-gnu.so" rel=3D"noreferrer" targe=
-t=3D"_blank">tri.cpython-312-i386-linux-gnu.so</a> | grep oemllib32<br>
-&gt; &gt; /OE/build/oe-core/tmp-glibc/work/i586-oemllib32-linux/lib32-pytho=
-n3-matplotlib/3.7.2/recipe-sysroot-native/usr/lib/python3.12/site-packages/=
-pybind11/include/pybind11/detail/../detail/common.h<br>
-&gt; &gt; /OE/build/oe-core/tmp-glibc/work/i586-oemllib32-linux/lib32-pytho=
-n3-matplotlib/3.7.2/recipe-sysroot-native/usr/lib/python3.12/site-packages/=
-pybind11/include/pybind11/detail/../detail/../pytypes.h<br>
-&gt; &gt; /OE/build/oe-core/tmp-glibc/work/i586-oemllib32-linux/lib32-pytho=
-n3-matplotlib/3.7.2/recipe-sysroot-native/usr/lib/python3.12/site-packages/=
-pybind11/include/pybind11/detail/class.h<br>
-&gt; &gt; /OE/build/oe-core/tmp-glibc/work/i586-oemllib32-linux/lib32-pytho=
-n3-matplotlib/3.7.2/recipe-sysroot-native/usr/lib/python3.12/site-packages/=
-pybind11/include/pybind11/detail/../detail/type_caster_base.h<br>
-&gt; &gt; /OE/build/oe-core/tmp-glibc/work/i586-oemllib32-linux/lib32-pytho=
-n3-matplotlib/3.7.2/recipe-sysroot-native/usr/lib/python3.12/site-packages/=
-pybind11/include/pybind11/pybind11.h<br>
-&gt; &gt; /OE/build/oe-core/tmp-glibc/work/i586-oemllib32-linux/lib32-pytho=
-n3-matplotlib/3.7.2/recipe-sysroot-native/usr/lib/python3.12/site-packages/=
-pybind11/include/pybind11/gil.h<br>
-&gt; &gt; /OE/build/oe-core/tmp-glibc/work/i586-oemllib32-linux/lib32-pytho=
-n3-matplotlib/3.7.2/recipe-sysroot-native/usr/lib/python3.12/site-packages/=
-pybind11/include/pybind11/gil_safe_call_once.h<br>
-&gt; &gt;<br>
-&gt; &gt; * I&#39;m not familiar enough with pybind11 to find a way how to =
-configure it to<br>
-&gt; &gt;=C2=A0 =C2=A0use correct include dir, the issue already exists in =
-regular x86-64 dir, but<br>
-&gt; &gt;=C2=A0 =C2=A0not caught by buildpaths, because, the:<br>
-&gt; &gt;=C2=A0 =C2=A0-fmacro-prefix-map=3D/OE/build/oe-core/tmp-glibc/work=
-/core2-64-oe-linux/python3-matplotlib/3.7.2/recipe-sysroot=3D<br>
-&gt; &gt;=C2=A0 =C2=A0is enought to mangle the hardcoded paths (leaving onl=
-y &#39;-native&#39;) like this:<br>
-&gt; &gt;<br>
-&gt; &gt; strings ../3.7.2-x86-64/package/usr/lib64/python3.12/site-package=
-s/matplotlib/_<a href=3D"http://tri.cpython-312-x86_64-linux-gnu.so" rel=3D=
-"noreferrer" target=3D"_blank">tri.cpython-312-x86_64-linux-gnu.so</a> | gr=
-ep pybind11/include/pybind11<br>
-&gt; &gt; -native/usr/lib/python3.12/site-packages/pybind11/include/pybind1=
-1/detail/common.h<br>
-&gt; &gt; -native/usr/lib/python3.12/site-packages/pybind11/include/pybind1=
-1/pytypes.h<br>
-&gt; &gt; -native/usr/lib/python3.12/site-packages/pybind11/include/pybind1=
-1/detail/class.h<br>
-&gt; &gt; -native/usr/lib/python3.12/site-packages/pybind11/include/pybind1=
-1/detail/type_caster_base.h<br>
-&gt; &gt; -native/usr/lib/python3.12/site-packages/pybind11/include/pybind1=
-1/pybind11.h<br>
-&gt; &gt; -native/usr/lib/python3.12/site-packages/pybind11/include/pybind1=
-1/gil.h<br>
-&gt; &gt; -native/usr/lib/python3.12/site-packages/pybind11/include/pybind1=
-1/gil_safe_call_once.h<br>
-&gt; &gt;<br>
-&gt; &gt; * there is also:<br>
-&gt; &gt;=C2=A0 =C2=A0WARNING: lib32-python3-matplotlib-3.7.2-r0 do_check_b=
-ackend: QA Issue: inherits setuptools3 but has pyproject.toml with setuptoo=
-ls.build_meta, use the correct class [pep517-backend]<br>
-&gt; &gt;=C2=A0 =C2=A0but just changing the inherit doesn&#39;t work in thi=
-s case, I&#39;ll leave that<br>
-&gt; &gt;=C2=A0 =C2=A0to someone actually using python3-matplotlib<br>
-&gt; &gt;<br>
-&gt; &gt; Signed-off-by: Martin Jansa &lt;<a href=3D"mailto:martin.jansa@gm=
-ail.com" target=3D"_blank">martin.jansa@gmail.com</a>&gt;<br>
-&gt; &gt; ---<br>
-&gt; &gt;=C2=A0 .../recipes-devtools/python/<a href=3D"http://python3-matpl=
-otlib_3.7.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-matplotlib_3.7=
-.2.bb</a>=C2=A0 =C2=A0 =C2=A0 | 5 +++++<br>
-&gt; &gt;=C2=A0 1 file changed, 5 insertions(+)<br>
-&gt; &gt;<br>
-&gt; &gt; diff --git a/meta-python/recipes-devtools/python/<a href=3D"http:=
-//python3-matplotlib_3.7.2.bb" rel=3D"noreferrer" target=3D"_blank">python3=
--matplotlib_3.7.2.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"h=
-ttp://python3-matplotlib_3.7.2.bb" rel=3D"noreferrer" target=3D"_blank">pyt=
-hon3-matplotlib_3.7.2.bb</a><br>
-&gt; &gt; index 72c369100a..2886060a9e 100644<br>
-&gt; &gt; --- a/meta-python/recipes-devtools/python/<a href=3D"http://pytho=
-n3-matplotlib_3.7.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-matplo=
-tlib_3.7.2.bb</a><br>
-&gt; &gt; +++ b/meta-python/recipes-devtools/python/<a href=3D"http://pytho=
-n3-matplotlib_3.7.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-matplo=
-tlib_3.7.2.bb</a><br>
-&gt; &gt; @@ -68,3 +68,8 @@ do_compile:prepend() {<br>
-&gt; &gt;=C2=A0 }<br>
-&gt; &gt;<br>
-&gt; &gt;=C2=A0 BBCLASSEXTEND =3D &quot;native&quot;<br>
-&gt; &gt; +<br>
-&gt; &gt; +# otherwise pybind11 paths from STAGING_DIR_NATIVE end in _<a hr=
-ef=3D"http://tri.cpython-312-i386-linux-gnu.so" rel=3D"noreferrer" target=
-=3D"_blank">tri.cpython-312-i386-linux-gnu.so</a><br>
-&gt; &gt; +# when STAGING_DIR_NATIVE doesn&#39;t start with STAGING_DIR_HOS=
-T (e.g. for lib32-python3-matplotlib)<br>
-&gt; &gt; +# <a href=3D"http://errors.yoctoproject.org/Errors/Details/80121=
-7/" rel=3D"noreferrer" target=3D"_blank">http://errors.yoctoproject.org/Err=
-ors/Details/801217/</a><br>
-&gt; &gt; +DEBUG_PREFIX_MAP:append =3D &quot; -fmacro-prefix-map=3D${STAGIN=
-G_DIR_NATIVE}=3D&quot;<br>
-&gt; &gt; --<br>
-&gt; &gt; 2.46.0<br>
-&gt; &gt;<br>
-&gt;<br>
-&gt; <br>
-&gt;<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#112124): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/112124" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/112124</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/108229723/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/108229723/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---000000000000f1cffd06219c63de--
 
