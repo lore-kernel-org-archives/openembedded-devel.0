@@ -1,151 +1,109 @@
-Return-Path: <festevam@gmail.com>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B709CD4F4C
-	for <webhook@archiver.kernel.org>; Mon,  9 Sep 2024 00:29:40 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web11.42309.1725841777914782027
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EEDA8ECE579
+	for <webhook@archiver.kernel.org>; Mon,  9 Sep 2024 09:36:22 +0000 (UTC)
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.web10.49036.1725874575591563797
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 08 Sep 2024 17:29:37 -0700
+ Mon, 09 Sep 2024 02:36:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=frWZkj0O;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: festevam@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-206bd1c6ccdso33606465ad.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Sep 2024 17:29:37 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=XA3IJv8h;
+ spf=pass (domain: mvista.com, ip: 209.85.215.182, mailfrom: vanusuri@mvista.com)
+Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-7d7a9200947so1106180a12.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Sep 2024 02:36:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1725841776; x=1726446576; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1725874574; x=1726479374; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ZmmxFrQaVxaq8oc652zXjfcxeh3dkqm+8oW7KVc8I90=;
-        b=frWZkj0OcAr7oCYKHirQ8eqT/BViZPpBEafuxpJUSQt3cxR955/9ergGdUxgKMRHHi
-         vHBanSZ/CMroeH/iqpRMHZbYN7JIBLhvo2Aa3coy7kibbBm9e1Pmd8xWg5v37jyH6T20
-         FDlsOkGqx+lTn6DW9Q7Mr48eemqfG3fTHhtuoSkphJAysf38O5hmtnPXgVQtbWKfRZr1
-         LyN/Dodxpe8Gz2RELZRNxIAUp+6RAlwor3tHnFwx6F91HZdCdcD9WPO+AcGzeLnaTC3Q
-         JHJECUxvMk5GcDY3rSI33t4AJrs2SgBHVzRvj1CfXRFuBqyv5t/v4o87opxzFLo+PX+5
-         ttPw==
+        bh=E6rUHeJUmpSNJlM4he8OMpDhGRoi1d23URk/nsE0w/Q=;
+        b=XA3IJv8hVlvT9ZeVtHRfPxB1kVdJBKBYYuxo2xMiXtuXoH29UqAMJhd5EUMdiSxyAu
+         Kfx6at+z/KFjFawNvm2yVW2A06GZegibslrgp3NMTshIeYqWo5vKmeH+2bfeT/U/aluQ
+         HBuvlt/nQE3HcMeg4NPw14/jy4TDqfVnhjTwY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725841776; x=1726446576;
+        d=1e100.net; s=20230601; t=1725874574; x=1726479374;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ZmmxFrQaVxaq8oc652zXjfcxeh3dkqm+8oW7KVc8I90=;
-        b=jfLoy1Y1TarzV2PUa2mqppCta9ygMRNSyzwfj56zhSPh2wrQWK7prK/SFr321ftI5r
-         pnKlDEayu2JndVw/XcnKhkZjBU1HCQ9ONX9eG8I3JZiq17OhV8qzsPRomWRUmo2jOwOD
-         Bcvw0CSJrHZxrbgo1wu3NClEmZ0YZhDkDqo1zMxweFiibbW3taWDelCzx3ajrTpcBX5C
-         5fGgCFRXkfIUiiiNHsGKv2ksjQNmzdomznHjvy7LyUSk1DIimiYDlkp7eREz0MkyNJrn
-         3tXMvNmc+Qd1eJgZtlK7N1gd6ZXpn80oWGORc6HbPrf/q4IJbjJCgtAIt1ZX1B22s+4R
-         OwgQ==
-X-Gm-Message-State: AOJu0YzQesI5MaHt5O+Q/3zxKgSAJnCRc0T1d6tgdng1QKYEgoonKufb
-	W+vu9Ky7nQjha3FQx9CpnSjTYJmuFVBIGI1QeHrDjNnivtE1xrlVXaEvfg==
-X-Google-Smtp-Source: AGHT+IHmcFHyt9pKhf1EREpCdbfoC4YG6VEZQCBpecM8mddyqpaDam6YW/flVqP9rgHQt594EnJniA==
-X-Received: by 2002:a17:902:e811:b0:202:2b3e:28d0 with SMTP id d9443c01a7336-206f049d483mr76250655ad.8.1725841775892;
-        Sun, 08 Sep 2024 17:29:35 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:524d:76fe:68f:aaa1])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-20710e34f7esm24169195ad.115.2024.09.08.17.29.33
+        bh=E6rUHeJUmpSNJlM4he8OMpDhGRoi1d23URk/nsE0w/Q=;
+        b=pqyXkSuYrrUxUm8eHn/TNtQiZdMVRGrFqHpC0tOSJ29WFfTwVjingkW6Qrwm5B8Cwk
+         EAsjZM1FEd+HBFxI2wPGi2lUnl+9Hc/Fm1dOhIKV3fnYPyXHUVTMDwTHzOSuIdMrtotC
+         iTr6d5N8Gf2o32VQ1qYgb9WW+vAyacvOh13/AsOfnNNhPt1Fz/VWYqZMdQRn9aUS0Yi/
+         M7i9+AFEyAwIGYUMm2SrjSo9IpYOP++ACmBw1JpEqeJyLeiFbzEKilSyU/QbJZ9XKGCA
+         ZJN1c6+NSoMotRoOboNYHlOj4JcJsMspfIkfMdGLviT2vHardgWdas6sG881zE4o7rYs
+         6FXQ==
+X-Gm-Message-State: AOJu0YxftnhEGVd0u1y4OdSUbBcF0yfzujpT3hW+zWRJZ8jkzSftNOA0
+	ua0CeM9V6/Eph/8OcMGb1dUGrY27w5Psmq46zmjheoLV9MHImEKsasTLecpqO/vyIyiZUYu02nQ
+	1xJk=
+X-Google-Smtp-Source: AGHT+IH+VEbqJboIIUN5bk66OB9oYCIvmG5Gs23qj/8eSZKpTmWpZvtqt5iIgUZJ429RX7qUvZr7lA==
+X-Received: by 2002:a05:6a20:2d14:b0:1c6:ba9c:5d7b with SMTP id adf61e73a8af0-1cf1d0f98b5mr8952221637.23.1725874574314;
+        Mon, 09 Sep 2024 02:36:14 -0700 (PDT)
+Received: from MVIN00020.mvista.com ([2401:4900:882e:b9ce:88d4:7210:1e5:80e2])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-20710e34094sm30448735ad.100.2024.09.09.02.36.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 08 Sep 2024 17:29:35 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
+        Mon, 09 Sep 2024 02:36:13 -0700 (PDT)
+From: vanusuri@mvista.com
 To: openembedded-devel@lists.openembedded.org
-Cc: raj.khem@gmail.com,
-	otavio@ossystems.com.br,
-	Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v2] imx-cst: Add recipe
-Date: Sun,  8 Sep 2024 21:29:29 -0300
-Message-Id: <20240909002929.269148-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Vijay Anusuri <vanusuri@mvista.com>
+Subject: [oe][meta-networking][master][PATCH] wireshark: upgrade 4.2.6 -> 4.2.7
+Date: Mon,  9 Sep 2024 15:06:03 +0530
+Message-Id: <20240909093603.2216935-1-vanusuri@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 Sep 2024 00:29:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112175
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 Sep 2024 09:36:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112176
 
-From: Fabio Estevam <festevam@denx.de>
+From: Vijay Anusuri <vanusuri@mvista.com>
 
-Add a recipe for the i.MX CST (Code Signing Tool) version 3.4.0.
+Bug Fixes
 
-The Code Signing Tool is used for secure boot implementation on
-i.MX devices.
+The following vulnerability has been fixed:
 
-Example on how to use the CST tool to sign U-Boot on i.MX5/i.MX6/i.MX7:
+    wnpa-sec-2024-11 NTLMSSP dissector crash. Issue 19943. CVE-2024-8250.
 
-https://source.denx.de/u-boot/u-boot/-/blob/master/doc/imx/habv4/guides/mx6_mx7_secure_boot.txt
+The following bugs have been fixed:
 
-Example on how to use the CST tool to sign U-Boot on i.MX8M:
+    Fuzz job issue: fuzz-2024-01-31-7745.pcap. Issue 19627.
 
-https://source.denx.de/u-boot/u-boot/-/blob/master/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+    OSS-Fuzz 70534: wireshark:fuzzshark_ip_proto-udp: Stack-overflow in dissect_cbor_main_type. Issue 19935.
 
-Multiple layers include the imx-cst package and offer their version of
-the recipes:
+    SOME/IP Protocol heuristic dissector fails to parse. Issue 19670.
 
-- meta-freescale
-- meta-secure-imx
-- meta-phytec
+    6loWPAN: Page Number Field Incorrect Registration. Issue 19934.
 
-and probably more.
+    PacketBB incorrectly reports "Malformed Packet" Issue 19972.
 
-The idea of having imx-cst in meta-oe is to centralize and maintain
-the efforts in a single location.
+Release Notes:
+https://www.wireshark.org/docs/relnotes/wireshark-4.2.7.html
 
-Move the existing imx-cst recipe from meta-freescale recipe to meta-oe.
-
-Signed-off-by: Fabio Estevam <festevam@denx.de>
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
-Changes since v1:
-- Improve the commit log. (Khem)
+ .../wireshark/{wireshark_4.2.6.bb => wireshark_4.2.7.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_4.2.6.bb => wireshark_4.2.7.bb} (97%)
 
- .../recipes-support/imx-cst/imx-cst_3.4.0.bb  | 39 +++++++++++++++++++
- 1 file changed, 39 insertions(+)
- create mode 100644 meta-oe/recipes-support/imx-cst/imx-cst_3.4.0.bb
-
-diff --git a/meta-oe/recipes-support/imx-cst/imx-cst_3.4.0.bb b/meta-oe/recipes-support/imx-cst/imx-cst_3.4.0.bb
-new file mode 100644
-index 000000000..b558ce619
---- /dev/null
-+++ b/meta-oe/recipes-support/imx-cst/imx-cst_3.4.0.bb
-@@ -0,0 +1,39 @@
-+SUMMARY = "i.MX code signing tool"
-+DESCRIPTION = "Code signing support that integrates the HABv4 and AHAB library for i.MX processors"
-+LICENSE = "BSD-3-Clause & Apache-2.0"
-+
-+LIC_FILES_CHKSUM = "\
-+    file://LICENSE.bsd3;md5=14aba05f9fa6c25527297c8aac95fcf6 \
-+    file://LICENSE.hidapi;md5=e0ea014f523f64f0adb13409055ee59e \
-+    file://LICENSE.openssl;md5=3441526b1df5cc01d812c7dfc218cea6 \
-+"
-+
-+DEPENDS = "byacc-native flex-native openssl"
-+
-+# debian: 3.4.0+dfsg-2
-+DEBIAN_PGK_NAME = "imx-code-signing-tool"
-+DEBIAN_PGK_VERSION = "${PV}+dfsg"
-+
-+SRC_URI = "\
-+    ${DEBIAN_MIRROR}/main/i/${DEBIAN_PGK_NAME}/${DEBIAN_PGK_NAME}_${DEBIAN_PGK_VERSION}.orig.tar.xz \
-+"
-+
-+SRC_URI[sha256sum] = "52ee3cee3bc500a42095f73c4584e223b4b9d2dfc1cd3e5df965c5952eba8c8d"
-+
-+S = "${WORKDIR}/${DEBIAN_PGK_NAME}-${DEBIAN_PGK_VERSION}"
-+
-+EXTRA_OEMAKE = 'CC="${CC}" LD="${CC}" AR="${AR}" OBJCOPY="${OBJCOPY}"'
-+
-+do_compile() {
-+    oe_runmake -C code/obj.linux64 OSTYPE=linux64 ENCRYPTION=yes COPTIONS="${CFLAGS} ${CPPFLAGS}" LDOPTIONS="${LDFLAGS}"
-+    oe_runmake -C add-ons/hab_csf_parser COPTS="${CFLAGS} ${CPPFLAGS} ${LDFLAGS}"
-+}
-+
-+do_install () {
-+    install -d ${D}${bindir}
-+    install -m 755 ${S}/code/obj.linux64/cst ${D}${bindir}/
-+    install -m 755 ${S}/code/obj.linux64/srktool ${D}${bindir}
-+    install -m 755 ${S}/add-ons/hab_csf_parser/csf_parser ${D}${bindir}
-+}
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_4.2.6.bb b/meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb
+similarity index 97%
+rename from meta-networking/recipes-support/wireshark/wireshark_4.2.6.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb
+index 246264040..b80710683 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_4.2.6.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb
+@@ -17,7 +17,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz \
+ 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+ 
+-SRC_URI[sha256sum] = "5ec6028df29068d889c98489bf194a884b00831106fea1e921fea3c65f2003f5"
++SRC_URI[sha256sum] = "2c5de08e19081bd666a2ce3f052c023274d06acaabc5d667a3c3051a9c618f86"
+ 
+ PE = "1"
+ 
 -- 
-2.34.1
+2.25.1
 
 
