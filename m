@@ -1,96 +1,675 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <asharma@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AE4CECE579
-	for <webhook@archiver.kernel.org>; Mon,  9 Sep 2024 11:17:53 +0000 (UTC)
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.web10.50554.1725880669142465719
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E55DECE57A
+	for <webhook@archiver.kernel.org>; Mon,  9 Sep 2024 15:01:45 +0000 (UTC)
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.web10.55274.1725894097309671339
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Sep 2024 04:17:49 -0700
+ Mon, 09 Sep 2024 08:01:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=Kr/2izIa;
- spf=pass (domain: mvista.com, ip: 209.85.210.170, mailfrom: vanusuri@mvista.com)
-Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-718d6ad6050so2155591b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Sep 2024 04:17:49 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=CMhv6tWd;
+ spf=pass (domain: mvista.com, ip: 209.85.216.49, mailfrom: asharma@mvista.com)
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-2d8abac30ddso3431683a91.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Sep 2024 08:01:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1725880668; x=1726485468; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1725894096; x=1726498896; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=EHVjDP+efFfA8Ey4JkXqdalcy3husgRTroE5Zz3r2i8=;
-        b=Kr/2izIaW5LniHmDajEjgRaBi0vCKQQIr7NwXrz7V0yczH1UUgcoaUK4bcUKT+l2BX
-         aSqAwNX9f9e/ATI64K5SSzhA4Ee37Ykhy4xxOAFmGxkotiHMkTY09k7EwFXNS+guYLHn
-         BKeewN5XSwyYsWKJ6aid/ACb/9kknQPCgEaVk=
+        bh=QB4p8PdU7SCr88bkPVHE3BvGZ5MBVlaLFBE3CS3PuE0=;
+        b=CMhv6tWdf7S87NR0wn7OI+Zci2fWQNDBoRHcby2Yy6J/LFNqC+fQmJr3woUntfXJ8A
+         zbLzKcnaweXGes4qG7wdTWd1h6PP6R7BMLr0UcBWn9XQ3+yKuvTwNPPvNCTRhtD1BGXs
+         A5Z/SjPdaDRzmPWeUMltUZK5WNUWIX0dMARAA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725880668; x=1726485468;
+        d=1e100.net; s=20230601; t=1725894096; x=1726498896;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=EHVjDP+efFfA8Ey4JkXqdalcy3husgRTroE5Zz3r2i8=;
-        b=m1xAWzmA0nd5AD/xtg35Lrz84oMly3lISH2/13BCXJ9Ebj+FzfKrEMNQktmMd32RRz
-         1AJ8hEfqUJZ4CR32NXg1+uJiRoiM+uHcpcUNg+mdjutY7KtIOk/ykhFXkhysf4rzh5mL
-         eTFPP2Og5fNChYbsVch27klzinPniKFdl+ZElKtZyU3ZeYWJiQOeYVRkw2WvuSMO60RA
-         wXPxRYNBajmeYL+CcOvgzYuyHc4t85MsUc92qDZhubCUlvQNJoMuxQucZ8vBL9dEXMwN
-         SEs3PUfT5sZs2WBTPYAREr9BP8vfV8fuu4ptFSWPIC/OtmScpP9hEwhGzLJNi0tXMY/8
-         +IlQ==
-X-Gm-Message-State: AOJu0YxTmYi7WXj+H46RW1k/sGWiWVv7MVP12rhgU8JKxkRS2oU1ntT+
-	xDFh23EW0KEMDOe5P2KNomcKzgvRbUzoFkVukc+8fLZtK4IovX29JMDrwTtkXtP67RG7HKWWdaL
-	95sI=
-X-Google-Smtp-Source: AGHT+IHIXmsg9awf6cGRX8fwWShRN8cLDja5ycTA34ZddsU2xH+U9TNaNyr9nxoEbWSa2PT/bLkzyg==
-X-Received: by 2002:a05:6a00:85a2:b0:70d:2796:bce8 with SMTP id d2e1a72fcca58-718d5f3370cmr11311382b3a.20.1725880667766;
-        Mon, 09 Sep 2024 04:17:47 -0700 (PDT)
-Received: from localhost.localdomain ([2401:4900:882d:5ef:644c:7a2b:cd09:2eb1])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-718e58965c8sm3440190b3a.15.2024.09.09.04.17.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Sep 2024 04:17:46 -0700 (PDT)
-From: vanusuri@mvista.com
+        bh=QB4p8PdU7SCr88bkPVHE3BvGZ5MBVlaLFBE3CS3PuE0=;
+        b=XhVU9grHR9VeqK61nZEddv3y+RmqC1uSEPhjkh8YSqPysei3rEBAHQz+HRfjlFAiqn
+         BqjYQOE/Xm3gvxwo6LxQ3DMksKoEHTDp5EfPWUXEUDVPb9KB7LXIKXb4Q9GzJA0LLXGn
+         xFqC05WgjD57R6RX0NvhQe3U0aXf0jl5D1y5Mo0NW8xEm558hqrG7yitmY28dBCoRtfQ
+         zufNlYE6TReC9uMA8W2MRB2hT6dHjdExniUs8jXue1f2iZdUzXaifOXiL+TNgoI79FOV
+         ZoZmKNoNKfVD5HTWK/wk4JwaWiFDuITCMPEp/DSfrGAt91L+NdWnEkHtgEar2Q5Yidbo
+         1wZw==
+X-Gm-Message-State: AOJu0YxdQMULT/JV/Wdo/hfiMCLfWHyuRHbKqQsuwHFKs/Pf3wOqClpo
+	pXnnKAHECLULQCDD7A6WUd6tWvCFjeRzejPS8DTRyqIIF9OqjrLDPlWfEe40Gb81h+qUUWwGnM6
+	Dd34=
+X-Google-Smtp-Source: AGHT+IGCP1b0kbHq+1kTo8RPoLIoiMrHtsmqObhR817LEQRNVQSY6DgZtplJue5HElWOHrpzkNZiaQ==
+X-Received: by 2002:a17:90a:df13:b0:2d8:7561:db71 with SMTP id 98e67ed59e1d1-2dad50e86ebmr9594585a91.25.1725894096030;
+        Mon, 09 Sep 2024 08:01:36 -0700 (PDT)
+Received: from asharma-Latitude-3400 ([2401:4900:1c68:a206:f4b2:fbd0:f10d:f5d8])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2dadc07617csm6749735a91.32.2024.09.09.08.01.33
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Mon, 09 Sep 2024 08:01:35 -0700 (PDT)
+Received: by asharma-Latitude-3400 (sSMTP sendmail emulation); Mon, 09 Sep 2024 20:31:30 +0530
+From: Ashish Sharma <asharma@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-networking][scarthgap][PATCH] wireshark: upgrade 4.2.5 -> 4.2.7
-Date: Mon,  9 Sep 2024 16:47:36 +0530
-Message-Id: <20240909111736.2253599-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Ashish Sharma <asharma@mvista.com>
+Subject: [oe][meta-oe][scarthgap][PATCH] postgresql: Backport fix for CVE-2024-7348
+Date: Mon,  9 Sep 2024 20:31:27 +0530
+Message-ID: <20240909150127.12365-1-asharma@mvista.com>
+X-Mailer: git-send-email 2.44.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 Sep 2024 11:17:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112177
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 Sep 2024 15:01:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112178
 
-From: Vijay Anusuri <vanusuri@mvista.com>
+Upstream-Status: Backport []https://git.postgresql.org/gitweb/?p=postgresql.git;a=commitdiff;h=79c7a7e29695a32fef2e65682be224b8d61ec972
 
-CVE's fixed by upgrade:
-CVE-2024-8250
-
-Other Changes between 4.2.5 -> 4.2.7
-======================================
-https://www.wireshark.org/docs/relnotes/wireshark-4.2.7.html
-https://www.wireshark.org/docs/relnotes/wireshark-4.2.6.html
-
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+Signed-off-by: Ashish Sharma <asharma@mvista.com>
 ---
- .../wireshark/{wireshark_4.2.5.bb => wireshark_4.2.7.bb}        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_4.2.5.bb => wireshark_4.2.7.bb} (97%)
+ .../postgresql/files/CVE-2024-7348.patch      | 583 ++++++++++++++++++
+ .../recipes-dbs/postgresql/postgresql_16.3.bb |   1 +
+ 2 files changed, 584 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2024-7348.patch
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_4.2.5.bb b/meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb
-similarity index 97%
-rename from meta-networking/recipes-support/wireshark/wireshark_4.2.5.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb
-index 7cbe3e632..b80710683 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_4.2.5.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb
-@@ -17,7 +17,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz \
+diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2024-7348.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2024-7348.patch
+new file mode 100644
+index 0000000000..10c2fa3efe
+--- /dev/null
++++ b/meta-oe/recipes-dbs/postgresql/files/CVE-2024-7348.patch
+@@ -0,0 +1,583 @@
++From 6aba85a4b0a0e60126cc7c598b3e010e272516ec Mon Sep 17 00:00:00 2001
++From: Masahiko Sawada <msawada@postgresql.org>
++Date: Mon, 5 Aug 2024 06:05:28 -0700
++Subject: [PATCH] Restrict accesses to non-system views and foreign tables
++ during pg_dump.
++
++When pg_dump retrieves the list of database objects and performs the
++data dump, there was possibility that objects are replaced with others
++of the same name, such as views, and access them. This vulnerability
++could result in code execution with superuser privileges during the
++pg_dump process.
++
++This issue can arise when dumping data of sequences, foreign
++tables (only 13 or later), or tables registered with a WHERE clause in
++the extension configuration table.
++
++To address this, pg_dump now utilizes the newly introduced
++restrict_nonsystem_relation_kind GUC parameter to restrict the
++accesses to non-system views and foreign tables during the dump
++process. This new GUC parameter is added to back branches too, but
++these changes do not require cluster recreation.
++
++Back-patch to all supported branches.
++
++Reviewed-by: Noah Misch
++Security: CVE-2024-7348
++Backpatch-through: 12
++
++Upstream-Status: Backport from [https://git.postgresql.org/gitweb/?p=postgresql.git;a=commitdiff;h=79c7a7e29695a32fef2e65682be224b8d61ec972]
++CVE: CVE-2024-7348
++Signed-off-by: Ashish Sharma <asharma@mvista.com>
++
++ .../postgres_fdw/expected/postgres_fdw.out    | 11 ++++
++ contrib/postgres_fdw/sql/postgres_fdw.sql     |  8 +++
++ doc/src/sgml/config.sgml                      | 17 +++++
++ doc/src/sgml/ref/pg_dump.sgml                 |  8 +++
++ src/backend/foreign/foreign.c                 | 10 +++
++ src/backend/optimizer/plan/createplan.c       | 13 ++++
++ src/backend/optimizer/util/plancat.c          | 12 ++++
++ src/backend/rewrite/rewriteHandler.c          | 17 +++++
++ src/backend/tcop/postgres.c                   | 64 +++++++++++++++++++
++ src/backend/utils/misc/guc_tables.c           | 12 ++++
++ src/bin/pg_dump/pg_dump.c                     | 47 ++++++++++++++
++ src/include/tcop/tcopprot.h                   |  6 ++
++ src/include/utils/guc_hooks.h                 |  3 +
++ src/test/regress/expected/create_view.out     | 19 +++++-
++ src/test/regress/sql/create_view.sql          |  9 +++
++ 15 files changed, 255 insertions(+), 1 deletion(-)
++
++diff --git a/contrib/postgres_fdw/expected/postgres_fdw.out b/contrib/postgres_fdw/expected/postgres_fdw.out
++index a6fd3f6ff0..9b7a7eed05 100644
++--- a/contrib/postgres_fdw/expected/postgres_fdw.out
+++++ b/contrib/postgres_fdw/expected/postgres_fdw.out
++@@ -637,6 +637,17 @@ EXPLAIN (VERBOSE, COSTS OFF) SELECT * FROM ft_empty ORDER BY c1;
++    Remote SQL: SELECT c1, c2 FROM public.loct_empty ORDER BY c1 ASC NULLS LAST
++ (3 rows)
++ 
+++-- test restriction on non-system foreign tables.
+++SET restrict_nonsystem_relation_kind TO 'foreign-table';
+++SELECT * from ft1 where c1 < 1; -- ERROR
+++ERROR:  access to non-system foreign table is restricted
+++INSERT INTO ft1 (c1) VALUES (1); -- ERROR
+++ERROR:  access to non-system foreign table is restricted
+++DELETE FROM ft1 WHERE c1 = 1; -- ERROR
+++ERROR:  access to non-system foreign table is restricted
+++TRUNCATE ft1; -- ERROR
+++ERROR:  access to non-system foreign table is restricted
+++RESET restrict_nonsystem_relation_kind;
++ -- ===================================================================
++ -- WHERE with remotely-executable conditions
++ -- ===================================================================
++diff --git a/contrib/postgres_fdw/sql/postgres_fdw.sql b/contrib/postgres_fdw/sql/postgres_fdw.sql
++index 1c1dedd991..80cc3f9d8e 100644
++--- a/contrib/postgres_fdw/sql/postgres_fdw.sql
+++++ b/contrib/postgres_fdw/sql/postgres_fdw.sql
++@@ -327,6 +327,14 @@ DELETE FROM loct_empty;
++ ANALYZE ft_empty;
++ EXPLAIN (VERBOSE, COSTS OFF) SELECT * FROM ft_empty ORDER BY c1;
++ 
+++-- test restriction on non-system foreign tables.
+++SET restrict_nonsystem_relation_kind TO 'foreign-table';
+++SELECT * from ft1 where c1 < 1; -- ERROR
+++INSERT INTO ft1 (c1) VALUES (1); -- ERROR
+++DELETE FROM ft1 WHERE c1 = 1; -- ERROR
+++TRUNCATE ft1; -- ERROR
+++RESET restrict_nonsystem_relation_kind;
+++
++ -- ===================================================================
++ -- WHERE with remotely-executable conditions
++ -- ===================================================================
++diff --git a/doc/src/sgml/config.sgml b/doc/src/sgml/config.sgml
++index e8c5d2a3b7..69c4bc614f 100644
++--- a/doc/src/sgml/config.sgml
+++++ b/doc/src/sgml/config.sgml
++@@ -9564,6 +9564,23 @@ SET XML OPTION { DOCUMENT | CONTENT };
++       </listitem>
++      </varlistentry>
++ 
+++     <varlistentry id="guc-restrict-nonsystem-relation-kind" xreflabel="restrict_nonsystem_relation_kind">
+++      <term><varname>restrict_nonsystem_relation_kind</varname> (<type>string</type>)
+++      <indexterm>
+++       <primary><varname>restrict_nonsystem_relation_kind</varname></primary>
+++       <secondary>configuration parameter</secondary>
+++     </indexterm>
+++     </term>
+++     <listitem>
+++      <para>
+++       This variable specifies relation kind to which access is restricted.
+++       It contains a comma-separated list of relation kind.  Currently, the
+++       supported relation kinds are <literal>view</literal> and
+++       <literal>foreign-table</literal>.
+++      </para>
+++     </listitem>
+++     </varlistentry>
+++
++      </variablelist>
++     </sect2>
++      <sect2 id="runtime-config-client-format">
++diff --git a/doc/src/sgml/ref/pg_dump.sgml b/doc/src/sgml/ref/pg_dump.sgml
++index 7ff5d04c73..b879c30c18 100644
++--- a/doc/src/sgml/ref/pg_dump.sgml
+++++ b/doc/src/sgml/ref/pg_dump.sgml
++@@ -868,6 +868,14 @@ PostgreSQL documentation
++         The only exception is that an empty pattern is disallowed.
++        </para>
++ 
+++       <note>
+++        <para>
+++         Using wildcards in <option>--include-foreign-data</option> may result
+++         in access to unexpected foreign servers. Also, to use this option securely,
+++         make sure that the named server must have a trusted owner.
+++        </para>
+++       </note>
+++
++        <note>
++         <para>
++          When <option>--include-foreign-data</option> is specified,
++diff --git a/src/backend/foreign/foreign.c b/src/backend/foreign/foreign.c
++index ca3ad55b62..7335838af3 100644
++--- a/src/backend/foreign/foreign.c
+++++ b/src/backend/foreign/foreign.c
++@@ -23,6 +23,7 @@
++ #include "funcapi.h"
++ #include "lib/stringinfo.h"
++ #include "miscadmin.h"
+++#include "tcop/tcopprot.h"
++ #include "utils/builtins.h"
++ #include "utils/memutils.h"
++ #include "utils/rel.h"
++@@ -323,6 +324,15 @@ GetFdwRoutine(Oid fdwhandler)
++ 	Datum		datum;
++ 	FdwRoutine *routine;
++ 
+++	/* Check if the access to foreign tables is restricted */
+++	if (unlikely((restrict_nonsystem_relation_kind & RESTRICT_RELKIND_FOREIGN_TABLE) != 0))
+++	{
+++		/* there must not be built-in FDW handler  */
+++		ereport(ERROR,
+++				(errcode(ERRCODE_OBJECT_NOT_IN_PREREQUISITE_STATE),
+++				 errmsg("access to non-system foreign table is restricted")));
+++	}
+++
++ 	datum = OidFunctionCall0(fdwhandler);
++ 	routine = (FdwRoutine *) DatumGetPointer(datum);
++ 
++diff --git a/src/backend/optimizer/plan/createplan.c b/src/backend/optimizer/plan/createplan.c
++index 4bb38160b3..974c50b29f 100644
++--- a/src/backend/optimizer/plan/createplan.c
+++++ b/src/backend/optimizer/plan/createplan.c
++@@ -40,6 +40,7 @@
++ #include "parser/parse_clause.h"
++ #include "parser/parsetree.h"
++ #include "partitioning/partprune.h"
+++#include "tcop/tcopprot.h"
++ #include "utils/lsyscache.h"
++ 
++ 
++@@ -7090,7 +7091,19 @@ make_modifytable(PlannerInfo *root, Plan *subplan,
++ 
++ 			if (rte->rtekind == RTE_RELATION &&
++ 				rte->relkind == RELKIND_FOREIGN_TABLE)
+++			{
+++				/* Check if the access to foreign tables is restricted */
+++				if (unlikely((restrict_nonsystem_relation_kind & RESTRICT_RELKIND_FOREIGN_TABLE) != 0))
+++				{
+++					/* there must not be built-in foreign tables */
+++					Assert(rte->relid >= FirstNormalObjectId);
+++					ereport(ERROR,
+++							(errcode(ERRCODE_OBJECT_NOT_IN_PREREQUISITE_STATE),
+++							 errmsg("access to non-system foreign table is restricted")));
+++				}
+++
++ 				fdwroutine = GetFdwRoutineByRelId(rte->relid);
+++			}
++ 			else
++ 				fdwroutine = NULL;
++ 		}
++diff --git a/src/backend/optimizer/util/plancat.c b/src/backend/optimizer/util/plancat.c
++index 07c4ba384a..1a3045479f 100644
++--- a/src/backend/optimizer/util/plancat.c
+++++ b/src/backend/optimizer/util/plancat.c
++@@ -47,6 +47,7 @@
++ #include "rewrite/rewriteManip.h"
++ #include "statistics/statistics.h"
++ #include "storage/bufmgr.h"
+++#include "tcop/tcopprot.h"
++ #include "utils/builtins.h"
++ #include "utils/lsyscache.h"
++ #include "utils/partcache.h"
++@@ -500,6 +501,17 @@ get_relation_info(PlannerInfo *root, Oid relationObjectId, bool inhparent,
++ 	/* Grab foreign-table info using the relcache, while we have it */
++ 	if (relation->rd_rel->relkind == RELKIND_FOREIGN_TABLE)
++ 	{
+++		/* Check if the access to foreign tables is restricted */
+++		if (unlikely((restrict_nonsystem_relation_kind & RESTRICT_RELKIND_FOREIGN_TABLE) != 0))
+++		{
+++			/* there must not be built-in foreign tables */
+++			Assert(RelationGetRelid(relation) >= FirstNormalObjectId);
+++
+++			ereport(ERROR,
+++					(errcode(ERRCODE_OBJECT_NOT_IN_PREREQUISITE_STATE),
+++					 errmsg("access to non-system foreign table is restricted")));
+++		}
+++
++ 		rel->serverid = GetForeignServerIdByRelId(RelationGetRelid(relation));
++ 		rel->fdwroutine = GetFdwRoutineForRelation(relation, true);
++ 	}
++diff --git a/src/backend/rewrite/rewriteHandler.c b/src/backend/rewrite/rewriteHandler.c
++index 6cef936f82..9cd96fd17e 100644
++--- a/src/backend/rewrite/rewriteHandler.c
+++++ b/src/backend/rewrite/rewriteHandler.c
++@@ -41,6 +41,7 @@
++ #include "rewrite/rewriteManip.h"
++ #include "rewrite/rewriteSearchCycle.h"
++ #include "rewrite/rowsecurity.h"
+++#include "tcop/tcopprot.h"
++ #include "utils/builtins.h"
++ #include "utils/lsyscache.h"
++ #include "utils/rel.h"
++@@ -1740,6 +1741,14 @@ ApplyRetrieveRule(Query *parsetree,
++ 	if (rule->qual != NULL)
++ 		elog(ERROR, "cannot handle qualified ON SELECT rule");
++ 
+++	/* Check if the expansion of non-system views are restricted */
+++	if (unlikely((restrict_nonsystem_relation_kind & RESTRICT_RELKIND_VIEW) != 0 &&
+++				 RelationGetRelid(relation) >= FirstNormalObjectId))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_OBJECT_NOT_IN_PREREQUISITE_STATE),
+++				 errmsg("access to non-system view \"%s\" is restricted",
+++						RelationGetRelationName(relation))));
+++
++ 	if (rt_index == parsetree->resultRelation)
++ 	{
++ 		/*
++@@ -3104,6 +3113,14 @@
++ 		}
++ 	}
++ 
+++	/* Check if the expansion of non-system views are restricted */
+++	if (unlikely((restrict_nonsystem_relation_kind & RESTRICT_RELKIND_VIEW) != 0 &&
+++				 RelationGetRelid(view) >= FirstNormalObjectId))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_OBJECT_NOT_IN_PREREQUISITE_STATE),
+++				 errmsg("access to non-system view \"%s\" is restricted",
+++						RelationGetRelationName(view))));
+++	
++ 	/*
++ 	 * For INSERT/UPDATE the modified columns must all be updatable. Note that
++ 	 * we get the modified columns from the query's targetlist, not from the
++diff --git a/src/backend/tcop/postgres.c b/src/backend/tcop/postgres.c
++index 36cc99ec9c..e7d486ca2f 100644
++--- a/src/backend/tcop/postgres.c
+++++ b/src/backend/tcop/postgres.c
++@@ -77,6 +77,7 @@
++ #include "utils/snapmgr.h"
++ #include "utils/timeout.h"
++ #include "utils/timestamp.h"
+++#include "utils/varlena.h"
++ 
++ /* ----------------
++  *		global variables
++@@ -101,6 +102,9 @@ int			PostAuthDelay = 0;
++ /* Time between checks that the client is still connected. */
++ int			client_connection_check_interval = 0;
++ 
+++/* flags for non-system relation kinds to restrict use */
+++int			restrict_nonsystem_relation_kind;
+++
++ /* ----------------
++  *		private typedefs etc
++  * ----------------
++@@ -3628,6 +3632,66 @@ check_log_stats(bool *newval, void **extra, GucSource source)
++ 	return true;
++ }
++ 
+++/*
+++ * GUC check_hook for restrict_nonsystem_relation_kind
+++ */
+++bool
+++check_restrict_nonsystem_relation_kind(char **newval, void **extra, GucSource source)
+++{
+++	char	   *rawstring;
+++	List	   *elemlist;
+++	ListCell   *l;
+++	int			flags = 0;
+++
+++	/* Need a modifiable copy of string */
+++	rawstring = pstrdup(*newval);
+++
+++	if (!SplitIdentifierString(rawstring, ',', &elemlist))
+++	{
+++		/* syntax error in list */
+++		GUC_check_errdetail("List syntax is invalid.");
+++		pfree(rawstring);
+++		list_free(elemlist);
+++		return false;
+++	}
+++
+++	foreach(l, elemlist)
+++	{
+++		char	   *tok = (char *) lfirst(l);
+++
+++		if (pg_strcasecmp(tok, "view") == 0)
+++			flags |= RESTRICT_RELKIND_VIEW;
+++		else if (pg_strcasecmp(tok, "foreign-table") == 0)
+++			flags |= RESTRICT_RELKIND_FOREIGN_TABLE;
+++		else
+++		{
+++			GUC_check_errdetail("Unrecognized key word: \"%s\".", tok);
+++			pfree(rawstring);
+++			list_free(elemlist);
+++			return false;
+++		}
+++	}
+++
+++	pfree(rawstring);
+++	list_free(elemlist);
+++
+++	/* Save the flags in *extra, for use by the assign function */
+++	*extra = guc_malloc(ERROR, sizeof(int));
+++	*((int *) *extra) = flags;
+++
+++	return true;
+++}
+++
+++/*
+++ * GUC assign_hook for restrict_nonsystem_relation_kind
+++ */
+++void
+++assign_restrict_nonsystem_relation_kind(const char *newval, void *extra)
+++{
+++	int		   *flags = (int *) extra;
+++
+++	restrict_nonsystem_relation_kind = *flags;
+++}
++ 
++ /*
++  * set_debug_options --- apply "-d N" command line option
++diff --git a/src/backend/utils/misc/guc_tables.c b/src/backend/utils/misc/guc_tables.c
++index b078b934a7..a515ecde97 100644
++--- a/src/backend/utils/misc/guc_tables.c
+++++ b/src/backend/utils/misc/guc_tables.c
++@@ -564,6 +564,7 @@ static char *server_encoding_string;
++ static char *server_version_string;
++ static int	server_version_num;
++ static char *debug_io_direct_string;
+++static char *restrict_nonsystem_relation_kind_string;
++ 
++ #ifdef HAVE_SYSLOG
++ #define	DEFAULT_SYSLOG_FACILITY LOG_LOCAL0
++@@ -4549,6 +4550,17 @@ struct config_string ConfigureNamesString[] =
++ 		check_debug_io_direct, assign_debug_io_direct, NULL
++ 	},
++ 
+++	{
+++		{"restrict_nonsystem_relation_kind", PGC_USERSET, CLIENT_CONN_STATEMENT,
+++			gettext_noop("Sets relation kinds of non-system relation to restrict use"),
+++			NULL,
+++			GUC_LIST_INPUT | GUC_NOT_IN_SAMPLE
+++		},
+++		&restrict_nonsystem_relation_kind_string,
+++		"",
+++		check_restrict_nonsystem_relation_kind, assign_restrict_nonsystem_relation_kind, NULL
+++	},
+++
++ 	/* End-of-list marker */
++ 	{
++ 		{NULL, 0, 0, NULL, NULL}, NULL, NULL, NULL, NULL, NULL
++diff --git a/src/bin/pg_dump/pg_dump.c b/src/bin/pg_dump/pg_dump.c
++index 300fe071fc..1694ff55f8 100644
++--- a/src/bin/pg_dump/pg_dump.c
+++++ b/src/bin/pg_dump/pg_dump.c
++@@ -324,6 +324,7 @@ static bool nonemptyReloptions(const char *reloptions);
++ static void appendReloptionsArrayAH(PQExpBuffer buffer, const char *reloptions,
++ 									const char *prefix, Archive *fout);
++ static char *get_synchronized_snapshot(Archive *fout);
+++static void set_restrict_relation_kind(Archive *AH, const char *value);
++ static void setupDumpWorker(Archive *AH);
++ static TableInfo *getRootTableInfo(const TableInfo *tbinfo);
++ static bool forcePartitionRootLoad(const TableInfo *tbinfo);
++@@ -1252,6 +1253,13 @@ setup_connection(Archive *AH, const char *dumpencoding,
++ 			ExecuteSqlStatement(AH, "SET row_security = off");
++ 	}
++ 
+++	/*
+++	 * For security reasons, we restrict the expansion of non-system views and
+++	 * access to foreign tables during the pg_dump process. This restriction
+++	 * is adjusted when dumping foreign table data.
+++	 */
+++	set_restrict_relation_kind(AH, "view, foreign-table");
+++
++ 	/*
++ 	 * Initialize prepared-query state to "nothing prepared".  We do this here
++ 	 * so that a parallel dump worker will have its own state.
++@@ -2114,6 +2122,10 @@ dumpTableData_copy(Archive *fout, const void *dcontext)
++ 	 */
++ 	if (tdinfo->filtercond || tbinfo->relkind == RELKIND_FOREIGN_TABLE)
++ 	{
+++		/* Temporary allows to access to foreign tables to dump data */
+++		if (tbinfo->relkind == RELKIND_FOREIGN_TABLE)
+++			set_restrict_relation_kind(fout, "view");
+++
++ 		appendPQExpBufferStr(q, "COPY (SELECT ");
++ 		/* klugery to get rid of parens in column list */
++ 		if (strlen(column_list) > 2)
++@@ -2225,6 +2237,11 @@ dumpTableData_copy(Archive *fout, const void *dcontext)
++ 					   classname);
++ 
++ 	destroyPQExpBuffer(q);
+++
+++	/* Revert back the setting */
+++	if (tbinfo->relkind == RELKIND_FOREIGN_TABLE)
+++		set_restrict_relation_kind(fout, "view, foreign-table");
+++
++ 	return 1;
++ }
++ 
++@@ -2251,6 +2268,10 @@ dumpTableData_insert(Archive *fout, const void *dcontext)
++ 	int			rows_per_statement = dopt->dump_inserts;
++ 	int			rows_this_statement = 0;
++ 
+++	/* Temporary allows to access to foreign tables to dump data */
+++	if (tbinfo->relkind == RELKIND_FOREIGN_TABLE)
+++		set_restrict_relation_kind(fout, "view");
+++
++ 	/*
++ 	 * If we're going to emit INSERTs with column names, the most efficient
++ 	 * way to deal with generated columns is to exclude them entirely.  For
++@@ -2490,6 +2511,10 @@ dumpTableData_insert(Archive *fout, const void *dcontext)
++ 		destroyPQExpBuffer(insertStmt);
++ 	free(attgenerated);
++ 
+++	/* Revert back the setting */
+++	if (tbinfo->relkind == RELKIND_FOREIGN_TABLE)
+++		set_restrict_relation_kind(fout, "view, foreign-table");
+++
++ 	return 1;
++ }
++ 
++@@ -4590,6 +4615,28 @@ is_superuser(Archive *fout)
++ 	return false;
++ }
++ 
+++/*
+++ * Set the given value to restrict_nonsystem_relation_kind value. Since
+++ * restrict_nonsystem_relation_kind is introduced in minor version releases,
+++ * the setting query is effective only where available.
+++ */
+++static void
+++set_restrict_relation_kind(Archive *AH, const char *value)
+++{
+++	PQExpBuffer query = createPQExpBuffer();
+++	PGresult   *res;
+++
+++	appendPQExpBuffer(query,
+++					  "SELECT set_config(name, '%s', false) "
+++					  "FROM pg_settings "
+++					  "WHERE name = 'restrict_nonsystem_relation_kind'",
+++					  value);
+++	res = ExecuteSqlQuery(AH, query->data, PGRES_TUPLES_OK);
+++
+++	PQclear(res);
+++	destroyPQExpBuffer(query);
+++}
+++
++ /*
++  * getSubscriptions
++  *	  get information about subscriptions
++diff --git a/src/include/tcop/tcopprot.h b/src/include/tcop/tcopprot.h
++index abd7b4fff3..e529e9f06c 100644
++--- a/src/include/tcop/tcopprot.h
+++++ b/src/include/tcop/tcopprot.h
++@@ -43,6 +43,12 @@ typedef enum
++ 
++ extern PGDLLIMPORT int log_statement;
++ 
+++/* Flags for restrict_nonsystem_relation_kind value */
+++#define RESTRICT_RELKIND_VIEW			0x01
+++#define RESTRICT_RELKIND_FOREIGN_TABLE	0x02
+++
+++extern PGDLLIMPORT int restrict_nonsystem_relation_kind;
+++
++ extern List *pg_parse_query(const char *query_string);
++ extern List *pg_rewrite_query(Query *query);
++ extern List *pg_analyze_and_rewrite_fixedparams(RawStmt *parsetree,
++diff --git a/src/include/utils/guc_hooks.h b/src/include/utils/guc_hooks.h
++index 952293a1c3..0ea33fede9 100644
++--- a/src/include/utils/guc_hooks.h
+++++ b/src/include/utils/guc_hooks.h
++@@ -118,6 +118,9 @@ extern void assign_recovery_target_xid(const char *newval, void *extra);
++ extern bool check_role(char **newval, void **extra, GucSource source);
++ extern void assign_role(const char *newval, void *extra);
++ extern const char *show_role(void);
+++extern bool check_restrict_nonsystem_relation_kind(char **newval, void **extra,
+++												   GucSource source);
+++extern void assign_restrict_nonsystem_relation_kind(const char *newval, void *extra);
++ extern bool check_search_path(char **newval, void **extra, GucSource source);
++ extern void assign_search_path(const char *newval, void *extra);
++ extern bool check_session_authorization(char **newval, void **extra, GucSource source);
++diff --git a/src/test/regress/expected/create_view.out b/src/test/regress/expected/create_view.out
++index 61825ef7d4..f3f8c7b5a2 100644
++--- a/src/test/regress/expected/create_view.out
+++++ b/src/test/regress/expected/create_view.out
++@@ -2202,6 +2202,21 @@ select pg_get_viewdef('tt26v', true);
++     FROM ( VALUES (1,2,3)) v(x, y, z);
++ (1 row)
++ 
+++-- test restriction on non-system view expansion.
+++create table tt27v_tbl (a int);
+++create view tt27v as select a from tt27v_tbl;
+++set restrict_nonsystem_relation_kind to 'view';
+++select a from tt27v where a > 0; -- Error
+++ERROR:  access to non-system view "tt27v" is restricted
+++insert into tt27v values (1); -- Error
+++ERROR:  access to non-system view "tt27v" is restricted
+++select viewname from pg_views where viewname = 'tt27v'; -- Ok to access a system view.
+++ viewname 
+++----------
+++ tt27v
+++(1 row)
+++
+++reset restrict_nonsystem_relation_kind;
++ -- clean up all the random objects we made above
++ DROP SCHEMA temp_view_test CASCADE;
++ NOTICE:  drop cascades to 27 other objects
++@@ -2233,7 +2248,7 @@ drop cascades to view aliased_view_2
++ drop cascades to view aliased_view_3
++ drop cascades to view aliased_view_4
++ DROP SCHEMA testviewschm2 CASCADE;
++-NOTICE:  drop cascades to 77 other objects
+++NOTICE:  drop cascades to 79 other objects
++ DETAIL:  drop cascades to table t1
++ drop cascades to view temporal1
++ drop cascades to view temporal2
++@@ -2311,3 +2326,5 @@ drop cascades to view tt23v
++ drop cascades to view tt24v
++ drop cascades to view tt25v
++ drop cascades to view tt26v
+++drop cascades to table tt27v_tbl
+++drop cascades to view tt27v
++diff --git a/src/test/regress/sql/create_view.sql b/src/test/regress/sql/create_view.sql
++index 8838a40f7a..3a78be1b0c 100644
++--- a/src/test/regress/sql/create_view.sql
+++++ b/src/test/regress/sql/create_view.sql
++@@ -813,6 +813,15 @@ select x + y + z as c1,
++ from (values(1,2,3)) v(x,y,z);
++ select pg_get_viewdef('tt26v', true);
++ 
+++-- test restriction on non-system view expansion.
+++create table tt27v_tbl (a int);
+++create view tt27v as select a from tt27v_tbl;
+++set restrict_nonsystem_relation_kind to 'view';
+++select a from tt27v where a > 0; -- Error
+++insert into tt27v values (1); -- Error
+++select viewname from pg_views where viewname = 'tt27v'; -- Ok to access a system view.
+++reset restrict_nonsystem_relation_kind;
+++
++ -- clean up all the random objects we made above
++ DROP SCHEMA temp_view_test CASCADE;
++ DROP SCHEMA testviewschm2 CASCADE;
++-- 
++2.30.2
++
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_16.3.bb b/meta-oe/recipes-dbs/postgresql/postgresql_16.3.bb
+index 6df719cd98..31f427503b 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_16.3.bb
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_16.3.bb
+@@ -9,6 +9,7 @@ SRC_URI += "\
+    file://0003-configure.ac-bypass-autoconf-2.69-version-check.patch \
+    file://0004-config_info.c-not-expose-build-info.patch \
+    file://0005-postgresql-fix-ptest-failure-of-sysviews.patch \
++   file://CVE-2024-7348.patch \
+ "
  
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
- 
--SRC_URI[sha256sum] = "55e793ab87a9a73aac44336235c92cb76c52180c469b362ed3a54f26fbb1261f"
-+SRC_URI[sha256sum] = "2c5de08e19081bd666a2ce3f052c023274d06acaabc5d667a3c3051a9c618f86"
- 
- PE = "1"
- 
+ SRC_URI[sha256sum] = "331963d5d3dc4caf4216a049fa40b66d6bcb8c730615859411b9518764e60585"
 -- 
-2.25.1
+2.44.1
 
 
