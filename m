@@ -2,160 +2,145 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C6C6ECE579
-	for <webhook@archiver.kernel.org>; Mon,  9 Sep 2024 15:04:35 +0000 (UTC)
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.web11.55431.1725894268533466999
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B727ECE579
+	for <webhook@archiver.kernel.org>; Mon,  9 Sep 2024 17:44:56 +0000 (UTC)
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.web11.2399.1725903890036603361
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Sep 2024 08:04:28 -0700
+ Mon, 09 Sep 2024 10:44:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Y8HTxDJ2;
- spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-7cd8d2731d1so2989255a12.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Sep 2024 08:04:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=VAlc18nT;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-2d8fa2ca5b1so3299086a91.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Sep 2024 10:44:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1725894268; x=1726499068; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=jT1IJ0AVj26C0pxtkqlS4nSX47k6oUrRT1sExpMT4Ug=;
-        b=Y8HTxDJ2juIUVIG6QuXEAv7xdIixQsK1OD59l6yZonEKW4l8zes6SmII1f0g7yXqgD
-         BpmallY0hGq79PjOXxlBe866ndFU6Wfc4EALJqKRYFIfw8FuMrjbWidIdUejc+zi+3B/
-         Fy7oUAHQ1dMHAQeOXVRvYNK+eY1zuoFiS9+ubPdxxpKXqaDbIijm/MAPGjui752b+pke
-         qYAnfA2GQvIc19jnZR2Bcq8ilKTndtJcCXEbiBYJlUajUtdJNss+rltkr7qJyRwir3HL
-         dBl4PIM187ldJocfJHv6KCnFsQC4/z7U+/8Vl/KHX5XNgStptPzrMAardJJgSg9ZmFyO
-         +eEA==
+        d=gmail.com; s=20230601; t=1725903889; x=1726508689; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=P//0cwBmaiKL8XzbzawxwSSCEkFoY9nzjSu/6Q0EerQ=;
+        b=VAlc18nTaxwUcfS5ScnE02pb11O+NIqQBXuDRC3J5zBY8xn6/LPL7GWJ1C50lUlCHI
+         qeLwkP9j1G5S9nuR4Ylzp+DbjHeCvVoZv+gKVjAGYDt/df9RrqpJlo2q9/ch78BepH4T
+         klpyHAr6oqhGTaVlyl4fiue2NQsOoIb5n3gHonM7YxuRytEp06EqdZaYLQ7Z2UiNZBSf
+         MQgdyepikwI8S4tQbYS/ywpQcl9/b/VhlD0iwR7WhS8CsyIE8IZ5EOiJ/5Qu+q86QU4C
+         WizmmnbbFYUa6XNlU785jZ/VLGtHHPHn5AmUhgdrZKwNDnTlIF3aG56WK0JE7uKTFTi2
+         ARNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725894268; x=1726499068;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=jT1IJ0AVj26C0pxtkqlS4nSX47k6oUrRT1sExpMT4Ug=;
-        b=nRAwyCEwivpY8UcxC45lkkNw0xTWXOMIpsUz2z+y42TGN6IHrzaVtsTOeQsL5Wd2T4
-         z9I/9uKjHYmVkciD4k54Xwp7SjiXJftaZCOZ9q/wK1B4ONDfjMFeZu7IVBvFJxflXYPe
-         vC03fF29Z3eS/PFppJ8sIqLfOKyOlym3Yo70b6I35GG3XOan3JvwcN0eJOhY5t696aPg
-         Tj6ZQi9VBRCFElKHDsYSuOwDUbpB+XXZcCz1/PIwMU78SzaCMzWqG4HFcl/sfFKbtpxf
-         iPebjZzHpiylwKu5t8zgkQDfH8ARZV3nyCmd92WywC/o+aWlc/upEGDCM+8r9MX3V+G+
-         d4Jw==
-X-Gm-Message-State: AOJu0YyrcjM+gWtNopfbWyV3P4BrzQ4pd2VaiQJIPpzpSKmcHNFRZ7EN
-	FcgPh6yXKEkRS3ubjntfgWD2okxPZp8KNUP3akWXxCfrywfoy2jTA5KAYUs2
-X-Google-Smtp-Source: AGHT+IHfbtzQ6tmmA/GrzOJZNL8nsZQBubNCvgyV5Mvxsi2eX7XrCfodxl/Sk4gqC5QZGpyWkKnAEQ==
-X-Received: by 2002:a05:6a20:2d1f:b0:1cf:46ef:463b with SMTP id adf61e73a8af0-1cf46ef4832mr2171084637.3.1725894267657;
-        Mon, 09 Sep 2024 08:04:27 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1725903889; x=1726508689;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=P//0cwBmaiKL8XzbzawxwSSCEkFoY9nzjSu/6Q0EerQ=;
+        b=xIHDwRde9bQNlE5XVr2rAN8yygsFUmBCPLUMt+9hqBihjKJ6nbkwNH8ZVN5xkgvlPp
+         1TU1+DkjKYN3bBiHznEB5TQdbEVr3K0pMZmNwhyzLXFlGv4XESKNkq4VY9Kh/kXLJJ3p
+         /2xpE9czZ1d9JBIahy/oMFTjVruBBXs5ciHXFjHIDpU1KljQQNJwsGtZzp8OpyCKYk/o
+         FZ/knxbdtA/qIRDyHjYoR6rgBiwW2bUDoJvWYHZcNSvLLajczSxSsygNjgoYnmTbegtl
+         RTQMDiNMTnDXV/Dk5+SGslb/VrgEtHS9aAjRaVpw13UOc5c4jEl4pDTckL9qGRcx4cVk
+         +pfA==
+X-Gm-Message-State: AOJu0YyHAHCR0citz7jEuu39+QzIonIGuNihJQ0G7Uopss2S3X3YEXpL
+	jUp1J0EUphO7iGGWE5Uds0g/W4Zq3eF8xKCUSKoz7VCeAeo8sUDVlf4750Zd
+X-Google-Smtp-Source: AGHT+IG0JcR5NnS/Cua2JJkO755Xn0O3XoUJfD9svp+sbTHpDxSsbO/Rz4uyHmdNRA3f+q8UKNmySQ==
+X-Received: by 2002:a17:90b:1d92:b0:2da:905a:d88a with SMTP id 98e67ed59e1d1-2dad5011d4fmr11554259a91.21.1725903889089;
+        Mon, 09 Sep 2024 10:44:49 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::4cdb])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-7d825ba6b4dsm4063182a12.94.2024.09.09.08.04.27
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2dadc134909sm6950677a91.57.2024.09.09.10.44.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Sep 2024 08:04:27 -0700 (PDT)
+        Mon, 09 Sep 2024 10:44:48 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/3] freeipmi: Add recipe
-Date: Mon,  9 Sep 2024 08:04:23 -0700
-Message-ID: <20240909150423.4157986-3-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] opentelemetry-cpp: Fix build with clang-19
+Date: Mon,  9 Sep 2024 10:44:46 -0700
+Message-ID: <20240909174446.608901-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20240909150423.4157986-1-raj.khem@gmail.com>
-References: <20240909150423.4157986-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 Sep 2024 15:04:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112181
-
-Its needed bt netdata 1.47+
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 Sep 2024 17:44:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112182
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Fix-undeclared-function-errors.patch | 48 +++++++++++++++++++
- .../freeipmi/freeipmi_1.6.14.bb               | 25 ++++++++++
- 2 files changed, 73 insertions(+)
- create mode 100644 meta-oe/recipes-support/freeipmi/freeipmi/0001-Fix-undeclared-function-errors.patch
- create mode 100644 meta-oe/recipes-support/freeipmi/freeipmi_1.6.14.bb
+ .../0001-Fix-build-with-clang-19.patch        | 56 +++++++++++++++++++
+ .../opentelemetry/opentelemetry-cpp_1.16.1.bb |  3 +-
+ 2 files changed, 58 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/opentelemetry/opentelemetry-cpp/0001-Fix-build-with-clang-19.patch
 
-diff --git a/meta-oe/recipes-support/freeipmi/freeipmi/0001-Fix-undeclared-function-errors.patch b/meta-oe/recipes-support/freeipmi/freeipmi/0001-Fix-undeclared-function-errors.patch
+diff --git a/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp/0001-Fix-build-with-clang-19.patch b/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp/0001-Fix-build-with-clang-19.patch
 new file mode 100644
-index 0000000000..5055679b72
+index 0000000000..2651eb6a72
 --- /dev/null
-+++ b/meta-oe/recipes-support/freeipmi/freeipmi/0001-Fix-undeclared-function-errors.patch
-@@ -0,0 +1,48 @@
-+From 3018aa9822c680663ebd19542bcd757dc9baf20a Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 8 Sep 2024 20:16:49 -0700
-+Subject: [PATCH] Fix undeclared function errors
++++ b/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp/0001-Fix-build-with-clang-19.patch
+@@ -0,0 +1,56 @@
++From 1a5b4035e4cb75b87c716b4ebd5ffe32cd604c6e Mon Sep 17 00:00:00 2001
++From: "Sergey A. Osokin" <osa@FreeBSD.org.ru>
++Date: Sun, 8 Sep 2024 17:14:25 -0400
++Subject: [PATCH] Fix build with clang 19
 +
-+e.g.
++Please see https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=281359
++for details.
 +
-+ipmi-sel-string-supermicro-x10dimm-common.c:87:14: error: call to undeclared function 'sel_string_output_supermicro_dimm_event_d
-+    |    87 |   if ((ret = sel_string_output_supermicro_dimm_event_data2_event_data3 (ctx,
-+
-+Upstream-Status: Submitted [https://lists.gnu.org/archive/html/freeipmi-devel/2024-07/msg00000.html]
-+
++Upstream-Status: Submitted [https://github.com/open-telemetry/opentelemetry-cpp/pull/3055]
++Credit:	Dimitry Andric <dim@FreeBSD.org>
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ ipmi-sensors/ipmi-sensors-oem-intel.c               | 1 +
-+ libfreeipmi/sel/ipmi-sel-string-supermicro-common.h | 9 +++++++++
-+ 2 files changed, 10 insertions(+)
++ api/include/opentelemetry/logs/event_logger.h       | 2 +-
++ api/include/opentelemetry/logs/logger.h             | 2 +-
++ api/include/opentelemetry/logs/logger_type_traits.h | 2 +-
++ 3 files changed, 3 insertions(+), 3 deletions(-)
 +
-+diff --git a/ipmi-sensors/ipmi-sensors-oem-intel.c b/ipmi-sensors/ipmi-sensors-oem-intel.c
-+index 5e0f373..872a730 100644
-+--- a/ipmi-sensors/ipmi-sensors-oem-intel.c
-++++ b/ipmi-sensors/ipmi-sensors-oem-intel.c
-+@@ -36,6 +36,7 @@
-+ #include "ipmi-sensors-oem-intel-s2600jf.h"
-+ #include "ipmi-sensors-oem-intel-quanta-qssc-s4r.h"
-+ #include "ipmi-sensors-oem-intel-node-manager.h"
-++#include "ipmi-sensors-oem-intel-s2600wp.h"
++diff --git a/api/include/opentelemetry/logs/event_logger.h b/api/include/opentelemetry/logs/event_logger.h
++index b5c94a70..5892e041 100644
++--- a/api/include/opentelemetry/logs/event_logger.h
+++++ b/api/include/opentelemetry/logs/event_logger.h
++@@ -66,7 +66,7 @@ class EventLogger
++     nostd::unique_ptr<LogRecord> log_record = delegate_logger->CreateLogRecord();
 + 
-+ #include "freeipmi-portability.h"
-+ #include "pstdout.h"
-+diff --git a/libfreeipmi/sel/ipmi-sel-string-supermicro-common.h b/libfreeipmi/sel/ipmi-sel-string-supermicro-common.h
-+index 5785f2b..9e29bd6 100644
-+--- a/libfreeipmi/sel/ipmi-sel-string-supermicro-common.h
-++++ b/libfreeipmi/sel/ipmi-sel-string-supermicro-common.h
-+@@ -39,4 +39,13 @@ int sel_string_output_supermicro_overheat_event_data1_class_oem (ipmi_sel_ctx_t
-+                                                                  unsigned int *wlen,
-+                                                                  struct ipmi_sel_system_event_record_data *system_event_record_data);
++     IgnoreTraitResult(
++-        detail::LogRecordSetterTrait<typename std::decay<ArgumentType>::type>::template Set(
+++        detail::LogRecordSetterTrait<typename std::decay<ArgumentType>::type>::template Set<>(
++             log_record.get(), std::forward<ArgumentType>(args))...);
 + 
-++int sel_string_output_supermicro_dimm_event_data2_event_data3 (ipmi_sel_ctx_t ctx,
-++                                                               struct ipmi_sel_entry *sel_entry,
-++                                                               uint8_t sel_record_type,
-++                                                               char *buf,
-++                                                               unsigned int buflen,
-++                                                               unsigned int flags,
-++                                                               unsigned int *wlen,
-++                                                               struct ipmi_sel_system_event_record_data *system_event_record_data,
-++                                                               int *oem_rv);
-+ #endif /* IPMI_SEL_STRING_SUPERMICRO_COMMON_H */
-diff --git a/meta-oe/recipes-support/freeipmi/freeipmi_1.6.14.bb b/meta-oe/recipes-support/freeipmi/freeipmi_1.6.14.bb
-new file mode 100644
-index 0000000000..6117ca05b7
---- /dev/null
-+++ b/meta-oe/recipes-support/freeipmi/freeipmi_1.6.14.bb
-@@ -0,0 +1,25 @@
-+LICENSE = "GPL-3.0-only"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://COPYING.ZRESEARCH;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://COPYING.bmc-watchdog;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://COPYING.ipmi-dcmi;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://COPYING.ipmi-fru;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://COPYING.ipmiconsole;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://COPYING.ipmidetect;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://COPYING.ipmimonitoring;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://COPYING.ipmiping;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://COPYING.ipmipower;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://COPYING.ipmiseld;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://COPYING.pstdout;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://COPYING.sunbmc;md5=c03f21cd76ff5caba6b890d1213cbfbb"
-+
-+SRC_URI = "${GNU_MIRROR}/freeipmi/freeipmi-${PV}.tar.gz \
-+           file://0001-Fix-undeclared-function-errors.patch"
-+SRC_URI[sha256sum] = "1a3dac5c76b7ccc4d4f86aa12b8ef9b212baef7489bf05e899b89abb7e14edb5"
-+
-+DEPENDS = "libgcrypt"
-+
-+inherit pkgconfig autotools
-+
-+EXTRA_OECONF = "--without-random-device"
-+
++     EmitEvent(event_name, std::move(log_record));
++diff --git a/api/include/opentelemetry/logs/logger.h b/api/include/opentelemetry/logs/logger.h
++index dc09a0c2..19da3942 100644
++--- a/api/include/opentelemetry/logs/logger.h
+++++ b/api/include/opentelemetry/logs/logger.h
++@@ -73,7 +73,7 @@ class Logger
++     }
++ 
++     IgnoreTraitResult(
++-        detail::LogRecordSetterTrait<typename std::decay<ArgumentType>::type>::template Set(
+++        detail::LogRecordSetterTrait<typename std::decay<ArgumentType>::type>::template Set<>(
++             log_record.get(), std::forward<ArgumentType>(args))...);
++ 
++     EmitLogRecord(std::move(log_record));
++diff --git a/api/include/opentelemetry/logs/logger_type_traits.h b/api/include/opentelemetry/logs/logger_type_traits.h
++index 48613513..f140a545 100644
++--- a/api/include/opentelemetry/logs/logger_type_traits.h
+++++ b/api/include/opentelemetry/logs/logger_type_traits.h
++@@ -166,7 +166,7 @@ struct LogRecordSetterTrait
++                 * = nullptr>
++   inline static LogRecord *Set(LogRecord *log_record, ArgumentType &&arg) noexcept
++   {
++-    return LogRecordSetterTrait<common::KeyValueIterable>::template Set(
+++    return LogRecordSetterTrait<common::KeyValueIterable>::template Set<>(
++         log_record, std::forward<ArgumentType>(arg));
++   }
++ 
+diff --git a/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.16.1.bb b/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.16.1.bb
+index a52e7aef63..c7004cc78d 100644
+--- a/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.16.1.bb
++++ b/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.16.1.bb
+@@ -8,7 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+ 
+ DEPENDS = "nlohmann-json"
+ 
+-SRC_URI = "git://github.com/open-telemetry/opentelemetry-cpp.git;protocol=https;branch=main;"
++SRC_URI = "git://github.com/open-telemetry/opentelemetry-cpp.git;protocol=https;branch=main \
++           file://0001-Fix-build-with-clang-19.patch"
+ SRCREV = "baecbb95bd63df53e0af16e87bc683967962c5f8"
+ 
+ S = "${WORKDIR}/git"
 
