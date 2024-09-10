@@ -1,109 +1,109 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ACED2EDE9A3
-	for <webhook@archiver.kernel.org>; Tue, 10 Sep 2024 09:03:43 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.web11.18336.1725959012835706305
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E32BECE57A
+	for <webhook@archiver.kernel.org>; Tue, 10 Sep 2024 13:47:55 +0000 (UTC)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+ by mx.groups.io with SMTP id smtpd.web11.22193.1725972585625778503
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Sep 2024 02:03:33 -0700
+ Tue, 10 Sep 2024 05:49:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=nTd/LgNp;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1725959012; x=1757495012;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references;
-  bh=EVhHneWr7bs9IENum00MC+iq4TyzGHTCTxjFHmyrn9A=;
-  b=nTd/LgNpCLF0/qVSBSeGFPyHxNq1+K5gLvruxloRuAfLzg7tumq4de7q
-   bZ+CDWiio+d5H6SQXew8QlljosOX5xOHYD02JkL7if4wQu/Mfvf8Iu76F
-   j7opbBOmuw88mXixsSGmYeB6C78lmuRIsEuFczE3RoQEM8YoG4Zb41y8w
-   XkHe24cENppZD8BH4+Wryr9gbtpX+4SMNnNComQtGjoHxwi/OhvctsviI
-   88UcbRd2YrfXWu0qoVER9jmJQ/NHHRCXPwXRcfBOO8Cz5h6HGA5HkLRUY
-   DS6fwHq0IoWbTYLZ1GSAL2PsOEuUE5akXBXe+vZCWH3h8qZwrTX/23mWl
-   Q==;
-X-CSE-ConnectionGUID: AuVV1ahSSGiyj4yicAH2hA==
-X-CSE-MsgGUID: asXKR8dJQC2X/rn1VWEAVg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11190"; a="173393773"
-X-IronPort-AV: E=Sophos;i="6.10,216,1719846000"; 
-   d="scan'208";a="173393773"
-Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Sep 2024 18:03:30 +0900
-Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
-	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 9A8B416B900
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Sep 2024 18:03:28 +0900 (JST)
-Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id DF719D3F0F
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Sep 2024 18:03:27 +0900 (JST)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 68170200894AD
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Sep 2024 18:03:27 +0900 (JST)
-Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 1BC871A01E9;
-	Tue, 10 Sep 2024 17:03:27 +0800 (CST)
-From: wangmy@fujitsu.com
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XYT48ply;
+ spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: tolvupostur@gmail.com)
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-3780c8d689aso3449480f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Sep 2024 05:49:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1725972584; x=1726577384; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=kZzk41QRbuoMXIuyoJEfU1bEbZKF4doA6VnY0gqu/Is=;
+        b=XYT48plycMhH8cwBeMGbwlfI3yPg6aeRZc9uL49V5ekyZBMk96ktIZj1SY76TseSDt
+         aH25qW9MypdtYep8Fr1YVs/TeJ+D3/OSbW5scMUWL0IC8BW9DMO5GQgoI219d0wXfMuO
+         6BarbMuJSQZKe2JsfgRmEb5KRsNTiJS8X634u2gSrYvyhiu8snd7UqNuWpCkNMh7h5gp
+         e84ckfC54/6E167CGwfIul2a2KJ/P2OqRB9phjmcciyFP+XxYf0TPqVjgJRs/fEhH0pV
+         QhD8l09fg5RxpYNdStLx9fk7uO0/hVGqkxLiUi3JAC2wm2C4LHYdgKXRRpgTLnxAmJ3z
+         fqEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1725972584; x=1726577384;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=kZzk41QRbuoMXIuyoJEfU1bEbZKF4doA6VnY0gqu/Is=;
+        b=gWUqcc25TNBufV4+OXa/9078pqyAtTjebvGE6KrZ33SJprcYKwC+ZO57e8pkd+LCZR
+         gWwz7LlV1Mq4SftX76H6m1UDEEJkAp+DLM369WtVf5SaUINcQLUsnNwEFAAXSybEWPtM
+         piRxNujyufaQJ/8zoBMfKcM0QXNQ97tFVPSflvKI6YVEy82tRxg0mzFrKCYUidkIWsQZ
+         mTmQoz4qpvxqdy054FIixfdxf9a9Q5VCkp+U23KlV1hBYggsWht78LRrFe+rTh5JCAvs
+         uRyRb2y21qd7H1J++Yw3mHQpwZDwh3dd3xH5mwF+ElUFCKRQxmWWjQMO3DoMMULVAn2R
+         xJNA==
+X-Gm-Message-State: AOJu0Yw/1i2bsflU7wukewCZnlDLY6tc05g7xw8wudPg+IFuuD9aFoxu
+	pHjd3SBGfBRfkFdvaeVeSNG3Tw4zSVU88p0dCItZuDHlrmSRlMWiBPhn+umbJDo=
+X-Google-Smtp-Source: AGHT+IENKh/njCXpGdmbCYNfPz9sR1dVOLfyEi1zMMCjfQA7Bcb9RszoVf8BFQwgLZKqTuAVbq64rw==
+X-Received: by 2002:adf:cd8b:0:b0:374:c621:3d67 with SMTP id ffacd0b85a97d-378895db8f5mr7908687f8f.24.1725972582885;
+        Tue, 10 Sep 2024 05:49:42 -0700 (PDT)
+Received: from vision3-sde.. ([213.255.218.135])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3789564b02asm8964642f8f.4.2024.09.10.05.49.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 10 Sep 2024 05:49:42 -0700 (PDT)
+From: "Einar Gunnarsson" <tolvupostur@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 23/42] python3-parse-type: upgrade 0.6.2 -> 0.6.3
-Date: Tue, 10 Sep 2024 17:02:51 +0800
-Message-Id: <1725958990-5719-23-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1725958990-5719-1-git-send-email-wangmy@fujitsu.com>
-References: <1725958990-5719-1-git-send-email-wangmy@fujitsu.com>
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28654.006
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28654.006
-X-TMASE-Result: 10--3.035100-10.000000
-X-TMASE-MatchedRID: /gZnudouedqjz0nOeth/yUIIxwDaU5mrMoS2PLq1B75M+b8yxBqvAz9w
-	6ansMmYs1joxU3t+0uRbfyRJXs6anwWR61Hf0UjEqhcdnP91eXFUENBIMyKD0QfxTM57BPHD7v0
-	MlFSLfmlNDQmQ8bbzv+affHI8kAmis1RWeqLGIw65x7uAXGEprfOd2ImQcUyEW1EpqtJXzRujxY
-	yRBa/qJXcsDK2xBHh7jaPj0W1qn0TGVuWouVipctsKZH+lkYX8gCiK22OEA9pR7gJug5BK0y4LG
-	5+VGf8IDzeeAXKfVhelpC5XxRtt1Glaz8/jhPLyoGpwtvYwVORo5N95uUyEdP6/2/nZkihaOgB/
-	fz3EXdcVKT0eFRmfDs4YhafCzgujIdY9jOi4lTI=
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+Cc: Einar Jon Gunnarsson <tolvupostur@gmail.com>
+Subject: [PATCH] yavta: Update to kernel 6.8
+Date: Tue, 10 Sep 2024 12:49:36 +0000
+Message-Id: <20240910124936.21220-1-tolvupostur@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Sep 2024 09:03:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112209
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Sep 2024 13:47:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112229
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+Additional changes:
+Use https protocol for git fetch
+Build with meson
 
-Changelog:
-===========
-- UPDATE: parse_type/parse.py
-- Copy structured test suite to "tests/parse_tests/"
-- Copy structured test suite to "tests/parse_tests_with_parse_type"
-- REMOVE: tests/test_parse.py
-- README: Fix compact display of BADGES (was using multi-line)
-- CI: Add support for Python 3.12
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Einar Jon Gunnarsson <tolvupostur@gmail.com>
 ---
- ...{python3-parse-type_0.6.2.bb => python3-parse-type_0.6.3.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-parse-type_0.6.2.bb => python3-parse-type_0.6.3.bb} (86%)
+ .../recipes-multimedia/v4l2apps/yavta_git.bb   | 18 +++---------------
+ 1 file changed, 3 insertions(+), 15 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-parse-type_0.6.2.bb b/meta-python/recipes-devtools/python/python3-parse-type_0.6.3.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-parse-type_0.6.2.bb
-rename to meta-python/recipes-devtools/python/python3-parse-type_0.6.3.bb
-index 4c5efa185..db9d52cdc 100644
---- a/meta-python/recipes-devtools/python/python3-parse-type_0.6.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-parse-type_0.6.3.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/jenisys/parse_type"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=2e469278ace89c246d52505acc39c3da"
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/yavta_git.bb b/meta-oe/recipes-multimedia/v4l2apps/yavta_git.bb
+index c4f31c033..db00c67b1 100644
+--- a/meta-oe/recipes-multimedia/v4l2apps/yavta_git.bb
++++ b/meta-oe/recipes-multimedia/v4l2apps/yavta_git.bb
+@@ -2,9 +2,9 @@ SUMMARY = "Yet Another V4L2 Test Application"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe"
  
--SRC_URI[sha256sum] = "79b1f2497060d0928bc46016793f1fca1057c4aacdf15ef876aa48d75a73a355"
-+SRC_URI[sha256sum] = "8e99d2f52fab2f0f1f3d68ba9d026060140bf0e53680aada0111fb27b2f0e93a"
- SRC_URI += " \
-     file://run-ptest \
- "
+-SRC_URI = "git://git.ideasonboard.org/yavta.git;branch=master \
++SRC_URI = "git://git.ideasonboard.org/yavta.git;branch=master;protocol=https \
+           "
+-SRCREV = "65f740aa1758531fd810339bc1b7d1d33666e28a"
++SRCREV = "323facd1d5bd6251eec70dd5c1484a12ce01202a"
+ 
+ PV = "0.0"
+ S = "${WORKDIR}/git"
+@@ -12,16 +12,4 @@ S = "${WORKDIR}/git"
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-EXTRA_OEMAKE = "-e MAKEFLAGS="
+-
+-# The yavta sources include copies of the headers required to build in the
+-# include directory.  The Makefile uses CFLAGS to include these, but since
+-# we override the CFLAGS then we need to add this include path back in.
+-CFLAGS += "-I${S}/include"
+-
+-do_install() {
+-    install -d ${D}${bindir}
+-    install -m 0755 yavta ${D}${bindir}
+-}
+-
+-
++inherit meson
 -- 
-2.34.1
+2.43.5
 
 
