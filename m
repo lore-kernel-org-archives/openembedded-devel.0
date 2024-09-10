@@ -2,103 +2,94 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8469CECE58B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83375ECE564
 	for <webhook@archiver.kernel.org>; Tue, 10 Sep 2024 09:03:31 +0000 (UTC)
-Received: from esa11.hc1455-7.c3s2.iphmx.com (esa11.hc1455-7.c3s2.iphmx.com [207.54.90.137])
- by mx.groups.io with SMTP id smtpd.web10.18592.1725959007143197041
+Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
+ by mx.groups.io with SMTP id smtpd.web11.18329.1725959003028888389
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Sep 2024 02:03:30 -0700
+ Tue, 10 Sep 2024 02:03:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=TQLeN0LT;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.137, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=HPLP3Ksf;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1725959010; x=1757495010;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references;
-  bh=IF6DIo87bFaXxCKsVcSrKUXap+Y7GtloSRBP8/Mgt00=;
-  b=TQLeN0LTYvJmzF9xCg99SazZvAmxjBwSTqwl8gtTx+0QhjPjko/g81Rz
-   i8T1PBTNmLl9x4l3/56KRAjeAHm5ggmOm2mnWABJqJnPfexV/iEmyPV9j
-   XQrUc0TSMMOPha7H+P11w2ZbbEs5nG1emua2jAuSvo18bbFoBRk462yKv
-   VOHpA9XH0Op/b9m+EDtqj0z3efM84JQoddskYIYLpoOga0w8jdjpwX6gY
-   lLFkh39gYm2oMfi7z/GjYcLU4REjtJPLJQ9hnLPWzW+Ws+9jJb6XPWjSJ
-   3aaSX46T6WdwSW+Zyd9IxtkWI6kGgzspEWCURB6KrbVY46AFaL22pLcHs
-   A==;
-X-CSE-ConnectionGUID: I17Y/vXySOqkpBjy6X+rOw==
-X-CSE-MsgGUID: pHU00cl6TcGT1qswTQRppw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11190"; a="152689874"
+  t=1725959003; x=1757495003;
+  h=from:to:cc:subject:date:message-id;
+  bh=lg6zvgQQund+nfojYmYU20o9Hxt5FOs73UPGy3Dfz3k=;
+  b=HPLP3KsfXI650UaNivD2D8+7AEXOoXXWkRwEsCNilTtsHeYkQv3AlAaG
+   sDB4gM499r4bOZVEB1jX0B0SfEcEX1KT+Ag65jlRFECRIES4XZRbL1E04
+   XbRri22f6AkZ3cxwFo9Q4PESw6igEQEiGg+RMzY4FKWOTBFQhiz2Do1yT
+   4O42HzYJ+2UFpeN652htsq0hgeFFJUBsvxtwF+pnM+XoHotAXxbhpmIu2
+   1GGnmjJ8YOef2iMNXU8bxRsElobMj6T0kMPVpRyShuqcWTZFutiOJz7af
+   de6RdYkI1g2Zyp39hhwdyZmSinbKp7x6NEFpJQL99kDt/diNRr/l2lqqf
+   Q==;
+X-CSE-ConnectionGUID: fLBF2Q+HQJOlJFg6DxxyDQ==
+X-CSE-MsgGUID: 7QYVeV0WQJWKTu+9OFWu+Q==
+X-IronPort-AV: E=McAfee;i="6700,10204,11190"; a="172474615"
 X-IronPort-AV: E=Sophos;i="6.10,216,1719846000"; 
-   d="scan'208";a="152689874"
-Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
-  by esa11.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Sep 2024 18:03:29 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 7210DD4258
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Sep 2024 18:03:27 +0900 (JST)
+   d="scan'208";a="172474615"
+Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
+  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Sep 2024 18:03:20 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 31AAEE8522
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Sep 2024 18:03:18 +0900 (JST)
 Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id A9E07BF49D
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Sep 2024 18:03:26 +0900 (JST)
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 71A7C10353
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Sep 2024 18:03:17 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 432E46BE52
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Sep 2024 18:03:26 +0900 (JST)
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id EFC916BE52
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Sep 2024 18:03:16 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id EBC491A01E9;
-	Tue, 10 Sep 2024 17:03:25 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 7DCF11A000B;
+	Tue, 10 Sep 2024 17:03:16 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 20/42] python3-httpx: upgrade 0.27.0 -> 0.27.2
-Date: Tue, 10 Sep 2024 17:02:48 +0800
-Message-Id: <1725958990-5719-20-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 01/42] ctags: upgrade 6.1.20240825.0 -> 6.1.20240908.0
+Date: Tue, 10 Sep 2024 17:02:29 +0800
+Message-Id: <1725958990-5719-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1725958990-5719-1-git-send-email-wangmy@fujitsu.com>
-References: <1725958990-5719-1-git-send-email-wangmy@fujitsu.com>
 X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28654.006
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28654.006
-X-TMASE-Result: 10--0.442700-10.000000
-X-TMASE-MatchedRID: 6e3s/u+cBDSjz0nOeth/yUIIxwDaU5mriEijTR9ZREmU8ftiyKjZrdMj
-	jwb9QfV2CC8aAmGeO6lV00+whwxVQy/7QU2czuUNuce7gFxhKa3zndiJkHFMhCnXcc+9Khfko8W
-	MkQWv6iV3LAytsQR4e42j49Ftap9ExlblqLlYqXK2dUhdL7eA71U1KLoI32ARYVjlEF0DPOtxzp
-	Ur+fKe19bh5Buo7P34cAZ1oEWZZmXHNCZ+NYc20SwXU0F0T0COuPXh2yJqxpP+v9v52ZIoWjoAf
-	389xF3XFSk9HhUZnw7OGIWnws4LoyHWPYzouJUy
+X-TMASE-Result: 10-1.026400-10.000000
+X-TMASE-MatchedRID: pFlEBMmIVU6jz0nOeth/yQPZZctd3P4B1cuIRwt/4MiysPB8dBBorXKn
+	6DBj/gsEIvrftAIhWmJ6eYPYGCVgy3gcxJAgqZ0ZaDCzqDR7DPZ9LQinZ4QefCP/VFuTOXUTPvB
+	STRncWKuOhzOa6g8Krf6xT0R2N79X9xFrQZZk+DiB/JUiBnVLLzzIL9puNk3dCsqOHvFClMB9Da
+	euj7o923wXHGsI2l8Myu92Y8BKQ0z8U++rz5HoRR0m4Rm5hspVxSSu8i52URmXTt0OuyJi/IIuE
+	VM/dBEMBtjAKW7+qHc=
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 10 Sep 2024 09:03:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112205
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112187
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-==========
-- Reintroduced supposedly-private URLTypes shortcut.
-- Support for zstd content decoding using the python zstandard package is added.
-  Installable using httpx[zstd].
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../python/{python3-httpx_0.27.0.bb => python3-httpx_0.27.2.bb} | 2 +-
+ .../ctags/{ctags_6.1.20240825.0.bb => ctags_6.1.20240908.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-httpx_0.27.0.bb => python3-httpx_0.27.2.bb} (90%)
+ rename meta-oe/recipes-devtools/ctags/{ctags_6.1.20240825.0.bb => ctags_6.1.20240908.0.bb} (95%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-httpx_0.27.0.bb b/meta-python/recipes-devtools/python/python3-httpx_0.27.2.bb
-similarity index 90%
-rename from meta-python/recipes-devtools/python/python3-httpx_0.27.0.bb
-rename to meta-python/recipes-devtools/python/python3-httpx_0.27.2.bb
-index e4d3cbeee..e4e1eeea7 100644
---- a/meta-python/recipes-devtools/python/python3-httpx_0.27.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-httpx_0.27.2.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=c624803bdf6fc1c4ce39f5ae11d7bd05"
+diff --git a/meta-oe/recipes-devtools/ctags/ctags_6.1.20240825.0.bb b/meta-oe/recipes-devtools/ctags/ctags_6.1.20240908.0.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/ctags/ctags_6.1.20240825.0.bb
+rename to meta-oe/recipes-devtools/ctags/ctags_6.1.20240908.0.bb
+index 88b5f9fa1..01e7e5e3f 100644
+--- a/meta-oe/recipes-devtools/ctags/ctags_6.1.20240825.0.bb
++++ b/meta-oe/recipes-devtools/ctags/ctags_6.1.20240908.0.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
- inherit pypi python_hatchling
+ inherit autotools-brokensep pkgconfig manpages
  
--SRC_URI[sha256sum] = "a0cb88a46f32dc874e04ee956e4c2764aba2aa228f650b06788ba6bda2962ab5"
-+SRC_URI[sha256sum] = "f7c2be1d2f3c3c3160d441802406b206c2b76f5947b11115e6df10c6c65e66c2"
+-SRCREV = "a7b07d75535163f45331ca910245ad4b516379fa"
++SRCREV = "0a2ad188848b75f56bb2af33bcf556bd7cf422ed"
+ SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https"
  
- DEPENDS += "\
-     python3-hatch-fancy-pypi-readme-native \
+ S = "${WORKDIR}/git"
 -- 
 2.34.1
 
