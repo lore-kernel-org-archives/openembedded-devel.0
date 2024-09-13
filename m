@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7508EEEEC39
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6635DEEEC31
 	for <webhook@archiver.kernel.org>; Fri, 13 Sep 2024 06:21:08 +0000 (UTC)
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.web11.67588.1726208459243086172
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.web10.67534.1726208459883115728
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 12 Sep 2024 23:20:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PYrIMLMk;
- spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-205659dc63aso19082535ad.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OtjqbAZP;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-205909af9b5so5253675ad.3
         for <openembedded-devel@lists.openembedded.org>; Thu, 12 Sep 2024 23:20:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1726208458; x=1726813258; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1726208459; x=1726813259; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=SYJe+eJ8OHSpcXRxYuzgSo8fXSv+LxihpxE7xAgJFa0=;
-        b=PYrIMLMkQP3/dVBF+RFreeEXgeHRZ9a3GycQZz996Q0XXiwy+WXCuMx/K9nyPCKRG+
-         UL4KfnuSb0qX4Q2LWprNfE7ghFmB1ECoOivVmWuG0gAfSpGzqwWlOLs2XfWte6EEp0tG
-         Nz+W7qQR81uRwzvj2BUvLvdgKO1W3oL7w6Xy84Jx3BMv5E99i3U1aMWN0Xt1rf1TUAK/
-         c+SjM7r+Ix0GaFeEWMPiyRJmgeFiI/tFYt1valh6Yv+Jqcic6uydiwDkSjJ92wfWHAhH
-         iFT3Oij175zpWkuXb0rJ0D8ydlXdZ/ybtk0PcHDehKJwF6aCD2NnoQrwOHikgxeR3VfQ
-         856w==
+        bh=YcGdNSgCqguruTgNebLSZjVDI2BxUZ/3Cs0qnqY/mIc=;
+        b=OtjqbAZPJ7brzWV70Z+OwL1amp7604jw5kVYB/w7Cxp1EVhaElPh70U9r59k+l1BiK
+         cy7wPyHG5jdo6leMghB3ThopT0AIviqlvMlN9+KB6EqacQ3x/K00+h5LUwj1AE+0Z7dB
+         ZDwmaikvXIaTV6ejtbnj7qeKv27LB0ktR+0sc1XlTyOmuEY/HREUQKRpSykdjgO3gsX8
+         IpBy29Gk5SAOp3vSwHfQ7FKi+2eCGYuduSfPQJURxkeR1DCjPMhhHCDZDBUkvJA0rfNU
+         TQBMemF7KOqaAGx8qtAh8S9PAOgLzDOmP8z1EAwLzPas2yIid2RL+kNtTT2+7aVyfgcs
+         Yqaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726208458; x=1726813258;
+        d=1e100.net; s=20230601; t=1726208459; x=1726813259;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=SYJe+eJ8OHSpcXRxYuzgSo8fXSv+LxihpxE7xAgJFa0=;
-        b=gEDjhho4X/OfQEIXZzMJrEQt+gI1LrKrg++gJTWw++jxEJTSO/lJEzuUH5AECTVBM+
-         4Ts2i5gPflqWnDFon/kCbmVCnwgxrx1rizJuu0SSV2rMRwt5vFf7v8ZSJ95TMlTUi/9Z
-         ZCQgNxBUTNxoVBbmvmCHVW1xtI13p3Kgb7xG5h8pBx55u2SNNTlknigvyfqyOL4Muhov
-         4w5JHDZPt2MxFLc4GDTmsEAkDSIRrvRtnzztl2pCAeKEzKJy0I136EHUBUyoJIySgdBT
-         iw2wijrqyXxx9tj9P6QC6pYAN1Ep3qPgIoEMN4tmuxDSrbK6ljE366MCgvtHqpBYz2xX
-         oTzA==
-X-Gm-Message-State: AOJu0YwnFtCiX7PErBrogRKzTn+JhR8L3mDmpqOgDl2dofIut9mfJrb5
-	eMNvDm3R2uFbQomPJtlPq71bmaR1uFF8S7DAna9xjEkc5kzJpmSC+ctOYP8O
-X-Google-Smtp-Source: AGHT+IEOJ2GINE0C79SZK0TaQoImZ8pLEbLDI/r34TJ7bkoNCCWBm04FkW7BpocPLpmhUbEX+x46TQ==
-X-Received: by 2002:a17:902:f70d:b0:207:1842:8c5c with SMTP id d9443c01a7336-2076e4614c3mr94858245ad.46.1726208458204;
-        Thu, 12 Sep 2024 23:20:58 -0700 (PDT)
+        bh=YcGdNSgCqguruTgNebLSZjVDI2BxUZ/3Cs0qnqY/mIc=;
+        b=f/KckHNSaW5FxdqcyLzYMVaihh8Sl4CiMX4rTeoUCftAVo1HeYZzXfSlGbtAu6EMrd
+         nNDi0gkcRscleckidu1OpgiRDjgvroEh52msC2Iq0irnCjJjKThh4asYbegfngjljVTn
+         9JDbAxuU4zmfSJrsSYSSzitHG64b/7Jjz1aAEIxBxW8NunzA2gnoEgoT9NfhQRTLUl6f
+         +30nNCkf/EeAkECiONHc1VNU3CD0O2AMt3KSrJrUxsIIiynpudapHFDqwgwcpSL3LmoN
+         TZZDQusLQC17DhnsNlaMeFftzx/Ko4qQ9sOMeRJvzkJ3W00zABotxXXdwnlVXSboY0PI
+         KIVg==
+X-Gm-Message-State: AOJu0YxzO4hKvVyxgftB5LNV5yviRWYGCXPiIGoaKLwPmRFd7+L/nYKS
+	/GzcuZCaZeDPBewCcUHOr70LtCFtHqfH7lubt2ReKFJ3ZCcGr9ewPzHEA9kg
+X-Google-Smtp-Source: AGHT+IH4l6Ji9WKfs5eoTyYfAfvfWNeXgYgJlh33VA7csfxkNcEAGFHV+GCLiB+yXb40Zru93dr5XQ==
+X-Received: by 2002:a17:903:228c:b0:203:a11a:30c8 with SMTP id d9443c01a7336-20782a69ed6mr24346585ad.43.1726208459039;
+        Thu, 12 Sep 2024 23:20:59 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::c5d8])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2076afdd0edsm22401795ad.170.2024.09.12.23.20.57
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2076afdd0edsm22401795ad.170.2024.09.12.23.20.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Sep 2024 23:20:57 -0700 (PDT)
+        Thu, 12 Sep 2024 23:20:58 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 06/10] python3-fsspec: Add recipe
-Date: Thu, 12 Sep 2024 23:20:46 -0700
-Message-ID: <20240913062050.2597921-6-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 07/10] ptest-packagelists-meta-python: Add python3-fsspec to fast test list
+Date: Thu, 12 Sep 2024 23:20:47 -0700
+Message-ID: <20240913062050.2597921-7-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20240913062050.2597921-1-raj.khem@gmail.com>
 References: <20240913062050.2597921-1-raj.khem@gmail.com>
@@ -61,40 +61,23 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 13 Sep 2024 06:21:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112265
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112266
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../python/python3-fsspec_2024.9.0.bb         | 22 +++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-fsspec_2024.9.0.bb
+ meta-python/conf/include/ptest-packagelists-meta-python.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-fsspec_2024.9.0.bb b/meta-python/recipes-devtools/python/python3-fsspec_2024.9.0.bb
-new file mode 100644
-index 0000000000..49ca4b3e93
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-fsspec_2024.9.0.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "A specification that python filesystems should adhere to."
-+HOMEPAGE = "https://github.com/fsspec/filesystem_spec"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b38a11bf4dcdfc66307f8515ce1fbaa6"
-+
-+DEPENDS = "python3-hatch-vcs-native python3-hatchling-native"
-+SRC_URI[sha256sum] = "4b0afb90c2f21832df142f292649035d80b421f60a9e1c027802e5a0da2b04e8"
-+
-+inherit pypi python_hatchling ptest
-+
-+PYPI_PACKAGE = "fsspec"
-+
-+RDEPENDS:${PN}-ptest += "\
-+	python3-pytest \
-+	python3-pytest-mock \
-+	python3-pytest-asyncio \
-+	python3-pytest-cov \
-+	python3-pytest-benchmark \
-+	python3-aiohttp \
-+	python3-numpy \
-+	python3-requests \
-+"
+diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+index aa918aa89c..92e64908b1 100644
+--- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
++++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+@@ -24,6 +24,7 @@ PTESTS_FAST_META_PYTHON = "\
+     python3-flexcache \
+     python3-flexparser \
+     python3-freezegun \
++    python3-fsspec \
+     python3-geojson \
+     python3-google-auth-oauthlib \
+     python3-gpiod \
 
