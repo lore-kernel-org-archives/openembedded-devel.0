@@ -2,64 +2,64 @@ Return-Path: <fathi.boudra@linaro.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A73DEFA3735
-	for <webhook@archiver.kernel.org>; Fri, 13 Sep 2024 09:20:39 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.web10.69485.1726219231350356458
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87783FA3737
+	for <webhook@archiver.kernel.org>; Fri, 13 Sep 2024 09:23:19 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.web11.69444.1726219389556481951
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Sep 2024 02:20:31 -0700
+ Fri, 13 Sep 2024 02:23:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=sV3I9iQN;
- spf=pass (domain: linaro.org, ip: 209.85.221.53, mailfrom: fathi.boudra@linaro.org)
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-374c1963cb6so1318090f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Sep 2024 02:20:31 -0700 (PDT)
+ dkim=pass header.i=@linaro.org header.s=google header.b=mD7pf2yW;
+ spf=pass (domain: linaro.org, ip: 209.85.128.51, mailfrom: fathi.boudra@linaro.org)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-42cde6b5094so15387065e9.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Sep 2024 02:23:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1726219229; x=1726824029; darn=lists.openembedded.org;
+        d=linaro.org; s=google; t=1726219388; x=1726824188; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=5K/U0GeTUZ36MnLciKPgjC+4Tspjcsu+PTpZ9YUUedE=;
-        b=sV3I9iQNjxuNuA1P3VDHrVrDfew5bNo+WSLOF1xfapUvDkFlxU/q70r+ZSlJuFtCFy
-         4kKwr4Yw6RpDM00u/AdKlaHgJPI8cF/MVopSJvARixfnfKHZNEs6DZZGp3H+T5adqyJS
-         UPmkocVwhhC8oi58RXVq6CD+uk5HtZ/WewkJc9U5Hg9KfYCHl4JVWK4ncTaOvubnredZ
-         U+QZe6qoUttcoJfqrGZuE/IZdHGik4fhLT02DIvLrZY+gdCFPMS+lSIQO6EJ5NYTZf36
-         Di3MSSpAj7VhTlumJ66/7UjwEy7J8fJkQL46svnR5v4zp6mjbKCEH1IaEUgC7gGwbWOz
-         avUA==
+        bh=Nko5nGz0Iva967SKiD36xlrKgaZjqAawNSGX73dsKgI=;
+        b=mD7pf2yWjBp4uCZqKulUkuWv5o4OUkdsAPJGGJSNo5IkjyfLwKdP9i24Cx3mhZmaMW
+         8zj4ssatRc1tLTOTb8gJIiV2avWi8dtRC0RDhsYo95rni5ttiItFu54jV9WcwWCpKLXz
+         VjyusdKHTV4AqLeUFkDIvD/JmauruOym5QlCzsuyjLLRjf64tmTUTXaClXiDcrDik2wW
+         lm1tOOsQnD49EPjvsYUCJgOm/ymi4XFrqiQyRLOPnkKlMaE/BpWtlEQ3dte2njjI/XAV
+         o3t5RQZ8Qq6I0xZliP4b0kwIIEKRJpvN4HxHK8qkD7xWKPzEPoSnqBIhuGNJthR55e8h
+         p9rA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726219229; x=1726824029;
+        d=1e100.net; s=20230601; t=1726219388; x=1726824188;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=5K/U0GeTUZ36MnLciKPgjC+4Tspjcsu+PTpZ9YUUedE=;
-        b=gGhiVbYGv62bFxMWayibXZkge9Q5T0hqZIK02/Ros2wtHJtS5U5wL4NbHnVY096EK4
-         vfwmw2rGthBvxoIjesnDjqmAZQqEC8YXNz20utwaUPqEqYm8fmXoCFbcJ9FE5WWdiKcq
-         BEd70+Tu1qjeas08KQ+zcBOsJh2x7EcqhrDYkDJuM5DH55irJ5NICMAKTY7FHkySbLWw
-         YLkpy8OL1tr9u0wPEpM0S1gAPY/TEQq9+YJ+5xcj9utxEALOoC/SEcy9cdSppAr4B0nj
-         E2xsNW1GqXv3fxC5EGAwXDcptAWzbILKmNIAhwamAFFVdZVvo5MBGqEbOb4MUkuwzmXM
-         R21w==
-X-Gm-Message-State: AOJu0YzPtgO8QoxUBlboxjsJpudgrdGNjMV+YWTNGTIRbplTvVGwKc1o
-	Y1zoPfcpLqCGpJv7C0/DfdrdAtb+GqH/dGwnmiCd72R3MkvWFFLLUw1N9pl/XxokFuZ9vLUhSYM
-	Mro0=
-X-Google-Smtp-Source: AGHT+IE40TFJM9rdBRbi28qmlnDZUDH0bOQ4RAngaG8ao4G3R0RL4OdOANJmakJV07ZybSjZCsTbHQ==
-X-Received: by 2002:adf:8bd3:0:b0:374:c1c5:859e with SMTP id ffacd0b85a97d-378c2d5b2d7mr3034009f8f.42.1726219228902;
-        Fri, 13 Sep 2024 02:20:28 -0700 (PDT)
+        bh=Nko5nGz0Iva967SKiD36xlrKgaZjqAawNSGX73dsKgI=;
+        b=TlWfDinOrYydNGnBcXJFuYViyMq5nMdifPm/L4K6sAO0UI5O9aco2gPtwP6xRIhT7C
+         21RKDq2H6j0cSdliQ6pYNbyrISVDzbXTEG48fXUx2SqvhxFKyz0eWtCq6vas7m28Hc1f
+         lpsOKoEq2OdMaG3cu+Z/jvw6PC7twJy4kr6IOXC6CcDRGWnnsD7UnhVVrWqw3XmBL/8m
+         Bj9tHwsw/LVm9e2COai3pBHqGNPq318kh0WmChXsZeNZbDUFIhsVT9A3ZMU+brXdM4zx
+         Guciaw95YBAQdfPs6FZARz+fDz4BKJ4jGxxHwOmE1P6qTHYgB/57GIn0qvD0j+nw254S
+         xycg==
+X-Gm-Message-State: AOJu0Yxg0xsiSEByJ/D15PWdEjSjm0VQS6rD5U09OAU9Xq1HGAd0vnZp
+	OrjF/YvIQTxhAmzhoxK+FW+r3zrqeQVRCY+dPGpw9+bGX5LQLBdiIZi99j6ZbgtDdLi/s+M+aYc
+	M2ZI=
+X-Google-Smtp-Source: AGHT+IHTOq5ae8Dcr4ya2uXpzj9nFMlNiziv/4UNY8bnGd612g+qaQHTZ0MTibajLxeUO18s/kNiKA==
+X-Received: by 2002:a05:600c:4f51:b0:42c:b80e:5e50 with SMTP id 5b1f17b1804b1-42cdb487cfemr43368295e9.0.1726219387477;
+        Fri, 13 Sep 2024 02:23:07 -0700 (PDT)
 Received: from corsair.. (88-169-167-85.subs.proxad.net. [88.169.167.85])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-37895665632sm16197129f8f.37.2024.09.13.02.20.28
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-42d9b05a67fsm17773365e9.2.2024.09.13.02.23.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Sep 2024 02:20:28 -0700 (PDT)
+        Fri, 13 Sep 2024 02:23:06 -0700 (PDT)
 From: Fathi Boudra <fathi.boudra@linaro.org>
 To: openembedded-devel@lists.openembedded.org
 Cc: Fathi Boudra <fathi.boudra@linaro.org>
-Subject: [meta-python][PATCH] python3-django: upgrade 4.2.11 -> 4.2.16
-Date: Fri, 13 Sep 2024 11:20:14 +0200
-Message-ID: <20240913092014.1730695-1-fathi.boudra@linaro.org>
+Subject: [oe][meta-python][PATCH] python3-django: upgrade 5.0.6 -> 5.0.9
+Date: Fri, 13 Sep 2024 11:23:04 +0200
+Message-ID: <20240913092304.1760666-1-fathi.boudra@linaro.org>
 X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 13 Sep 2024 09:20:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112271
+ <openembedded-devel@lists.openembedded.org>; Fri, 13 Sep 2024 09:23:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112272
 
 CVE-2024-45230: Potential denial-of-service vulnerability in
 django.utils.html.urlize()
@@ -122,38 +122,28 @@ To mitigate this vulnerability, the language code provided to
 get_supported_language_variant() is now parsed up to a maximum length of
 500 characters.
 
-Fixed a crash in Django 4.2 when validating email max line lengths with content
-decoded using the surrogateescape error handling scheme (#35361)
-
 Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
 ---
- .../{python3-django_4.2.11.bb => python3-django_4.2.16.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-django_4.2.11.bb => python3-django_4.2.16.bb} (63%)
+ .../python/{python3-django_5.0.6.bb => python3-django_5.0.9.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-django_5.0.6.bb => python3-django_5.0.9.bb} (60%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.11.bb b/meta-python/recipes-devtools/python/python3-django_4.2.16.bb
-similarity index 63%
-rename from meta-python/recipes-devtools/python/python3-django_4.2.11.bb
-rename to meta-python/recipes-devtools/python/python3-django_4.2.16.bb
-index 0642b7e7c..9254e8b00 100644
---- a/meta-python/recipes-devtools/python/python3-django_4.2.11.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_4.2.16.bb
+diff --git a/meta-python/recipes-devtools/python/python3-django_5.0.6.bb b/meta-python/recipes-devtools/python/python3-django_5.0.9.bb
+similarity index 60%
+rename from meta-python/recipes-devtools/python/python3-django_5.0.6.bb
+rename to meta-python/recipes-devtools/python/python3-django_5.0.9.bb
+index 513032876..b3fb301ed 100644
+--- a/meta-python/recipes-devtools/python/python3-django_5.0.6.bb
++++ b/meta-python/recipes-devtools/python/python3-django_5.0.9.bb
 @@ -1,7 +1,7 @@
  require python-django.inc
- inherit setuptools3
+ inherit python_setuptools_build_meta
  
--SRC_URI[sha256sum] = "6e6ff3db2d8dd0c986b4eec8554c8e4f919b5c1ff62a5b4390c17aff2ed6e5c4"
-+SRC_URI[sha256sum] = "6f1616c2786c408ce86ab7e10f792b8f15742f7b7b7460243929cb371e7f1dad"
+-SRC_URI[sha256sum] = "ff1b61005004e476e0aeea47c7f79b85864c70124030e95146315396f1e7951f"
++SRC_URI[sha256sum] = "6333870d342329b60174da3a60dbd302e533f3b0bb0971516750e974a99b5a39"
  
  RDEPENDS:${PN} += "\
      python3-sqlparse \
-@@ -10,5 +10,5 @@ RDEPENDS:${PN} += "\
- 
- # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
- # default. To build the 4.x branch, 
--# PREFERRED_VERSION_python3-django = "4.2.11" can be added to local.conf
-+# PREFERRED_VERSION_python3-django = "4.2.16" can be added to local.conf
- DEFAULT_PREFERENCE = "-1"
 -- 
 2.45.2
 
