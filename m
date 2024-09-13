@@ -1,147 +1,123 @@
-Return-Path: <dbaryshkov@gmail.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CFDF1FA373D
-	for <webhook@archiver.kernel.org>; Fri, 13 Sep 2024 10:17:39 +0000 (UTC)
-Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
- by mx.groups.io with SMTP id smtpd.web10.70295.1726222650980400040
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C815FFA3754
+	for <webhook@archiver.kernel.org>; Fri, 13 Sep 2024 13:25:40 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ by mx.groups.io with SMTP id smtpd.web10.73423.1726233932529558903
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Sep 2024 03:17:31 -0700
+ Fri, 13 Sep 2024 06:25:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=vr2dACH/;
- spf=pass (domain: linaro.org, ip: 209.85.167.54, mailfrom: dmitry.baryshkov@linaro.org)
-Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5365b71a6bdso933674e87.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Sep 2024 03:17:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1726222649; x=1726827449; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=IebuvlOij7HTcwa/d5WoEeZZaRWue5TZbaCmmAvnbjA=;
-        b=vr2dACH/I3R3v9iA9cdUIglGKLBiuKXi1AoNxAd89ubchD/2HmAp0vSAH1Q6GTVpEL
-         OfT4M7UqEphH8RfLPM+9ZtuEB4MWlANEU48v13VB5VZubV3a84+/lPejJccX+BBmO/LD
-         O5DoYx6BSVLGL55JQOX4avnd5QPKlJnH8PLuC/nc/PrQbsZyA1RrREvCClptb2crNVws
-         GGk5QdFMxRv9+NOJ0ucAGSpcK15jCsednxvcTAzvZco6QEwAYFgNbu62RQcQYGwsQaw/
-         DvH1gJag9xpxcvAtV4ynyHpci0ZmwcHfWqEsxdCNe5AfwTyGSltbaFzvbh+ZbsXuDTcU
-         egwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726222649; x=1726827449;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=IebuvlOij7HTcwa/d5WoEeZZaRWue5TZbaCmmAvnbjA=;
-        b=kTEJL/sWBF176IRgM+Th5wgfLsCmvtLK0QmAOmMtB6oIxjcRrm4RyLZqJQOKFasBB+
-         ITdT8AN94Wen4aWrVPf3qEqmDzPflqv2NQrv7+GOmG08Y15B2x6orT1N2cmBZCrICfkN
-         fst0sdnvK+dwGUq6RDv/cntAnSmo94agl2mnZIXkm2hs/8Kk787bVngGcoLrKabuJN/7
-         N0NYXI8T1Zs//uXcVH6uixwEpCYRNggVyBtK4fNaAK1ghtuFDciG9e5ZeGuAwPUKQgUw
-         RN4NQ10Aa9a1I1AW7xk63g3fhj0ArBuE2Za3Bn/HbZerqXn4vQBKLkiF4xfc6xBQB4PE
-         iabw==
-X-Gm-Message-State: AOJu0YyG91wsjwit7qQfaxC16raTwiu2rQFv0RCVB5iu04UVcd3QJcS6
-	1KEaRZOdEM5mWzEEiQ+a3LNCMptBfiYOzRNM3cuY3suvgvV3T9tEcUy3txlT6hNuF5BuccKgpNz
-	j
-X-Google-Smtp-Source: AGHT+IHo9PI/dQlB61ha+j4k0EpyF94VYH+86EYL0IhRLNVbsua/zrNk7jEqDYQ1JdWvHpC3WLvvVA==
-X-Received: by 2002:a05:6512:3c8a:b0:535:d4e9:28bf with SMTP id 2adb3069b0e04-5367ff24b05mr1336496e87.46.1726222647841;
-        Fri, 13 Sep 2024 03:17:27 -0700 (PDT)
-Received: from umbar.unikie.fi ([192.130.178.90])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5365f86fef9sm2212222e87.83.2024.09.13.03.17.27
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Sep 2024 03:17:27 -0700 (PDT)
-From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] gpsd: apply patch to fix gpsd building on Musl
-Date: Fri, 13 Sep 2024 13:17:26 +0300
-Message-Id: <20240913101726.128004-1-dmitry.baryshkov@linaro.org>
-X-Mailer: git-send-email 2.39.2
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=ilCYtlSo;
+ spf=pass (domain: ti.com, ip: 198.47.23.248, mailfrom: reatmon@ti.com)
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 48DDPVQ2023645;
+	Fri, 13 Sep 2024 08:25:31 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1726233931;
+	bh=QqBBuyrcZJR6fQX+UjwhjyAXWv0a5AXJvByixvT2WHE=;
+	h=Date:Subject:To:References:From:In-Reply-To;
+	b=ilCYtlSoYMo2g84yYSnrwqK+ZJHIAdEn/6lFtdkJTx9ABUF6rgxb17eFLu2JtxUwt
+	 8fVqsJPDsBdhSzq2BceQIEzUnY++jD3Kkh2RZR5K+ujbY1eUKnPHE/P/BAOuk4B10O
+	 ulALj41+iJcbW2Ayn5vi2qdc+WMXwvDAS5vItFyY=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 48DDPVZD041423;
+	Fri, 13 Sep 2024 08:25:31 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 13
+ Sep 2024 08:25:30 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 13 Sep 2024 08:25:31 -0500
+Received: from [10.249.34.164] ([10.249.34.164])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 48DDPUDC018965;
+	Fri, 13 Sep 2024 08:25:30 -0500
+Message-ID: <c501aa82-8069-48ce-abb2-6c6ab7a86bb1@ti.com>
+Date: Fri, 13 Sep 2024 08:25:30 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [PATCH] yavta: Update to kernel 6.8
+To: Einar Gunnarsson <tolvupostur@gmail.com>,
+        <openembedded-devel@lists.openembedded.org>
+References: <20240910124936.21220-1-tolvupostur@gmail.com>
+Content-Language: en-US
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <20240910124936.21220-1-tolvupostur@gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 13 Sep 2024 10:17:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112273
+ <openembedded-devel@lists.openembedded.org>; Fri, 13 Sep 2024 13:25:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112274
 
-Import the patch from pending MR to fix the way flags are being handled
-by SConsript. Otherwise CXXFLAGS being added to CCFLAGS, masking test
-results because of the -fvisibility-inlines-hidden warning turning into
-error.
 
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
----
- .../gpsd/gpsd/fix-pps_strerror_r.patch        | 51 +++++++++++++++++++
- meta-oe/recipes-navigation/gpsd/gpsd_3.25.bb  |  1 +
- 2 files changed, 52 insertions(+)
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/fix-pps_strerror_r.patch
+I'm seeing build failures on 32bit platforms with this new version.  Can 
+anyone verify?
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd/fix-pps_strerror_r.patch b/meta-oe/recipes-navigation/gpsd/gpsd/fix-pps_strerror_r.patch
-new file mode 100644
-index 000000000000..8942b39524c2
---- /dev/null
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd/fix-pps_strerror_r.patch
-@@ -0,0 +1,51 @@
-+From c72a489e2eb13296c7b514b7341033114abf430a Mon Sep 17 00:00:00 2001
-+From: Miroslav Lichvar <mlichvar@redhat.com>
-+Date: Mon, 22 Apr 2024 11:31:24 +0200
-+Subject: [PATCH 1/2] SConscript: provide variable names to MergeFlags
-+
-+If the scons MergeFlags() function is provided with a list of
-+compiler/linker options, it needs to guess what options belong where. If
-+it doesn't recognize an option, it is silently ignored. There are also
-+ambiguous options that could be both in CFLAGS and LINKFLAGS (e.g. -spec).
-+
-+Provide MergeFlags() with a dict instead of list to avoid the guesswork
-+in order to pass all options, even if some are not recognized by scons.
-+Switch LDFLAGS to LINKFLAGS for better compatibility with existing
-+scripts.
-+
-+Upstream-Status: Submitted [https://gitlab.com/gpsd/gpsd/-/merge_requests/406]
-+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-+
-+---
-+ SConscript | 11 ++++++-----
-+ 1 file changed, 6 insertions(+), 5 deletions(-)
-+
-+diff --git a/SConscript b/SConscript
-+index dab481654..ee90d87c4 100644
-+--- a/SConscript
-++++ b/SConscript
-+@@ -585,8 +585,8 @@ env['SC_PYTHON'] = sys.executable  # Path to SCons Python
-+ # explicitly quote them or (better yet) use the "=" form of GNU option
-+ # settings.
-+ #
-+-# Scons also uses different internal names than most other build-systems.
-+-# So we rely on MergeFlags/ParseFlags to do the right thing for us.
-++# Scons also uses different internal names than most other build-systems,
-++# e.g. it uses LINKFLAGS instead of LDFLAGS.
-+ #
-+ # scons uses gcc, or clang, to link. Thus LDFLAGS does not serve its
-+ # traditional function of providing arguments to ln. LDFLAGS set in the
-+@@ -618,7 +618,10 @@ for i in ["ARFLAGS",
-+           "SHLINKFLAGS",
-+           ]:
-+     if i in os.environ:
-+-        env.MergeFlags(Split(os.getenv(i)))
-++        t = i
-++        if t == "LDFLAGS":
-++            t = "LINKFLAGS"
-++        env.MergeFlags({t: Split(os.getenv(i))})
-+ 
-+ 
-+ # Keep scan-build options in the environment
-+-- 
-+GitLab
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.25.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.25.bb
-index 3d817172e226..f893ac359b5d 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.25.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.25.bb
-@@ -7,6 +7,7 @@ PROVIDES = "virtual/gpsd"
- 
- SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-            file://gpsd.init \
-+           file://fix-pps_strerror_r.patch \
-            "
- SRC_URI[sha256sum] = "b368b6a305e3f7a6382d23a0cbfc1d78923060b6b7f54cf7987a73c7b4a9afc2"
- 
+
+On 9/10/2024 7:49 AM, Einar Gunnarsson wrote:
+> Additional changes:
+> Use https protocol for git fetch
+> Build with meson
+> 
+> Signed-off-by: Einar Jon Gunnarsson <tolvupostur@gmail.com>
+> ---
+>   .../recipes-multimedia/v4l2apps/yavta_git.bb   | 18 +++---------------
+>   1 file changed, 3 insertions(+), 15 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-multimedia/v4l2apps/yavta_git.bb b/meta-oe/recipes-multimedia/v4l2apps/yavta_git.bb
+> index c4f31c033..db00c67b1 100644
+> --- a/meta-oe/recipes-multimedia/v4l2apps/yavta_git.bb
+> +++ b/meta-oe/recipes-multimedia/v4l2apps/yavta_git.bb
+> @@ -2,9 +2,9 @@ SUMMARY = "Yet Another V4L2 Test Application"
+>   LICENSE = "GPL-2.0-only"
+>   LIC_FILES_CHKSUM = "file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe"
+>   
+> -SRC_URI = "git://git.ideasonboard.org/yavta.git;branch=master \
+> +SRC_URI = "git://git.ideasonboard.org/yavta.git;branch=master;protocol=https \
+>             "
+> -SRCREV = "65f740aa1758531fd810339bc1b7d1d33666e28a"
+> +SRCREV = "323facd1d5bd6251eec70dd5c1484a12ce01202a"
+>   
+>   PV = "0.0"
+>   S = "${WORKDIR}/git"
+> @@ -12,16 +12,4 @@ S = "${WORKDIR}/git"
+>   # Upstream repo does not tag
+>   UPSTREAM_CHECK_COMMITS = "1"
+>   
+> -EXTRA_OEMAKE = "-e MAKEFLAGS="
+> -
+> -# The yavta sources include copies of the headers required to build in the
+> -# include directory.  The Makefile uses CFLAGS to include these, but since
+> -# we override the CFLAGS then we need to add this include path back in.
+> -CFLAGS += "-I${S}/include"
+> -
+> -do_install() {
+> -    install -d ${D}${bindir}
+> -    install -m 0755 yavta ${D}${bindir}
+> -}
+> -
+> -
+> +inherit meson
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#112229): https://lists.openembedded.org/g/openembedded-devel/message/112229
+> Mute This Topic: https://lists.openembedded.org/mt/108374819/6551054
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [reatmon@ti.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
+
 -- 
-2.39.2
-
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
