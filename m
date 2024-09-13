@@ -2,83 +2,81 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53757EEEC2A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5655CEEEC2B
 	for <webhook@archiver.kernel.org>; Fri, 13 Sep 2024 06:20:58 +0000 (UTC)
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web10.67531.1726208455058882480
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web10.67530.1726208454147801695
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Sep 2024 23:20:55 -0700
+ Thu, 12 Sep 2024 23:20:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=JztCetXx;
- spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2055136b612so23450595ad.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Sep 2024 23:20:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NlX2LY7P;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-20551e2f1f8so5883165ad.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Sep 2024 23:20:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1726208454; x=1726813254; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=JTP7QbY9x+eNreiNPTI3uc5EwNsgBdQxJNgBi2HTQ8g=;
-        b=JztCetXxFR1JXOsYoN0OS4ogiP7Noetd7HL2FneAU0drmYb0iep/vU6SX3YIUbiUKi
-         jKUL5IXpiZSF1smjcb61M6cDujClp0PK8T4E4J7n7V6oqAsQVOgo0lIG9DF1baCh1tBx
-         TK1KCsCqbn6Y15R+BiRcp4fMHYEv14nmqYdJOnEuDx7EpjO3evQ0AkeO58p91MrRCbb+
-         p7cdvWCMy4Gf2ng/gshO9fmlMJUgirzQanLJNzLk4pGxFCsHn4j/w2U4P3Pe5s0Vt6sG
-         2DvfcRTJk6lDgwJiPwtgK1/QkYTMPCue3SD1/QXYMO3Iv3SCI0BE3VZRIhflgzuhoIzf
-         d8Zw==
+        d=gmail.com; s=20230601; t=1726208453; x=1726813253; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=3hPJ+w4zGiGqdMYCxuwRZAuVFcRpSLgxC0Y0kmQePkA=;
+        b=NlX2LY7PISISVGU7IJHsb7jxFIJj0SpZy6K1H6E0MB+B4V03bckSl1GIyElDjHkZPt
+         kr2h8ywsDW1fVCcnNYM3qM8XmeJIPcwDU1y66e4C3eH6AMtK9hU+BNqqCl5K50lOF7T6
+         WDqGO1iBMPeLiMYV8u/WOAv2Ct+kCY0/GMgkeGOnJO5/88if3tDW/0pbnDpmhagLXrfY
+         caYbRoxBw9EUiFARvpo6t0BCbd1mIqsLiNErNeGFBT7GkqEkvx4G00cKRu7Q562TB7X4
+         EF1axX1sS5s/3QHFsf0A4Uv/ppAvKi3vK0VqMylk3Lx2asHtj5FVH2yM7pVOZLhwPBe4
+         ZSjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726208454; x=1726813254;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=JTP7QbY9x+eNreiNPTI3uc5EwNsgBdQxJNgBi2HTQ8g=;
-        b=sxWb7kexM0Sg+99ZvhEau2SnSnx6jz4UgW3djRh3pKEC+HlnzD/yRO7jdp+SIhJKc1
-         aygKbo9AELJfcBQXaLB9Gs0DSQxUucaJPKA3FGB4wMoQYsPLwzupkcuOKqtBB/mOC1r6
-         67H8CpuiTUAdklIWaYiAuSGvkoik2zxR8pIrwylSReMPUtB2SDqY80Hy22uv8/6cOZtb
-         a5eVmvmHXKhjL5QArOHI1blCnO7Igdpqmjc0+2K45GMDHM/Ub/+MhMUhkMgnLIXxq6Yj
-         PgutRqOnJd/Q0Bv9kgQ9f95k8LfptfC+Hs8WLQxwonPX1leGFtVGbKPYIdvprLm3/h89
-         2KPA==
-X-Gm-Message-State: AOJu0Yx4CtaIIMqnjK63XqqoYXmXOofihgpLGOGTwQG24l7nU+P2q87p
-	RTL7ontxwwjq9SY7UAUTzK3lFMbcGH9DFx+EhRNujxXjPVs3s1bUEU1cDlzI
-X-Google-Smtp-Source: AGHT+IHyKHD5Tg2xUcjejz+fjOZmkm29WaOS4L1lEh+HEcquNJAEwNt7kCUNbhWtrIZEmwP61iLQvA==
-X-Received: by 2002:a17:902:e88a:b0:203:a030:d0a1 with SMTP id d9443c01a7336-2076e447cfbmr77936825ad.58.1726208454183;
-        Thu, 12 Sep 2024 23:20:54 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::c5d8])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2076afdd0edsm22401795ad.170.2024.09.12.23.20.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        d=1e100.net; s=20230601; t=1726208453; x=1726813253;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=3hPJ+w4zGiGqdMYCxuwRZAuVFcRpSLgxC0Y0kmQePkA=;
+        b=W8SbLoRwBAjaBVFVtvV0caI3ceeZ/hGvVTl//9niJt49GMEXjS0V780GstLnLZL3iw
+         7JXJyxDngwbqiyKMlyRjg0Hrz4VNf4LzqW03/J+zqHG9T/6bilT9dkAIbDYzputOlqd+
+         GL+oxJQvM/mddfvpkh4bseoyFR8Nd4fWawyFXjXL9RvNUVBfYBmVZLiOsd0hB7h5Js/a
+         8ipv1L2jGFamOb0EuBzPW2jiWp2jyzasuWdhQy0b13fiSaShtrYKbcvHL/zobfYapLh0
+         EhyXZIHBYn8GFD574WurDAYIR+xmVfDSVZ7naiHYOVR/QhvdwSTutarXIRK7+OZd922E
+         K8jg==
+X-Gm-Message-State: AOJu0YweZYdPl1WD0ryVU+FhqAdMo8qbAOb9V3G1r+zqyqj/0hLdGuhW
+	IxpPgArkuc1Tdxarx6MNEUjdR4cYh5k5heH34ZqEclJCwMz04/36v1RCoIbw
+X-Google-Smtp-Source: AGHT+IHsIVinzfUSZkkGuplE8aj6mozCZqDK0xAE4b+rs2/y7EzNGWjxarzqUhHNGqqAgdYh3uqQbQ==
+X-Received: by 2002:a17:902:854b:b0:207:3a4a:de43 with SMTP id d9443c01a7336-207825346f7mr19320235ad.34.1726208453159;
         Thu, 12 Sep 2024 23:20:53 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::c5d8])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2076afdd0edsm22401795ad.170.2024.09.12.23.20.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 12 Sep 2024 23:20:52 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 02/10] python3-serpent: Fix typo attr -> attrs
-Date: Thu, 12 Sep 2024 23:20:42 -0700
-Message-ID: <20240913062050.2597921-2-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Subject: [meta-oe][PATCH 01/10] paho-mqtt-cpp: Use system paho-mqtt-c
+Date: Thu, 12 Sep 2024 23:20:41 -0700
+Message-ID: <20240913062050.2597921-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20240913062050.2597921-1-raj.khem@gmail.com>
-References: <20240913062050.2597921-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 13 Sep 2024 06:20:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112261
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112260
+
+It was an overisight during upgrade
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
- meta-python/recipes-devtools/python/python3-serpent_1.41.bb | 2 +-
+ .../recipes-connectivity/paho-mqtt-cpp/paho-mqtt-cpp_1.4.1.bb   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-serpent_1.41.bb b/meta-python/recipes-devtools/python/python3-serpent_1.41.bb
-index f3cf80a375..9265081fd0 100644
---- a/meta-python/recipes-devtools/python/python3-serpent_1.41.bb
-+++ b/meta-python/recipes-devtools/python/python3-serpent_1.41.bb
-@@ -11,7 +11,7 @@ SRC_URI += " \
- "
- # python3-misc for timeit.py
- RDEPENDS:${PN}-ptest += " \
--    python3-attr \
-+    python3-attrs \
-     python3-misc \
-     python3-pytest \
-     python3-pytz \
+diff --git a/meta-oe/recipes-connectivity/paho-mqtt-cpp/paho-mqtt-cpp_1.4.1.bb b/meta-oe/recipes-connectivity/paho-mqtt-cpp/paho-mqtt-cpp_1.4.1.bb
+index d2fbc3a34c..6f2efcda50 100644
+--- a/meta-oe/recipes-connectivity/paho-mqtt-cpp/paho-mqtt-cpp_1.4.1.bb
++++ b/meta-oe/recipes-connectivity/paho-mqtt-cpp/paho-mqtt-cpp_1.4.1.bb
+@@ -22,4 +22,4 @@ S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+-EXTRA_OECMAKE += "-DPAHO_WITH_SSL=ON -DPAHO_WITH_MQTT_C=ON -DPAHO_BUILD_EXAMPLES=OFF"
++EXTRA_OECMAKE += "-DPAHO_WITH_SSL=ON -DPAHO_BUILD_EXAMPLES=OFF"
 
