@@ -1,88 +1,92 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C5328C02191
-	for <webhook@archiver.kernel.org>; Sat, 14 Sep 2024 11:13:07 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.web10.93748.1726312373742218728
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8982CC0219D
+	for <webhook@archiver.kernel.org>; Sat, 14 Sep 2024 14:36:38 +0000 (UTC)
+Received: from mail-lf1-f68.google.com (mail-lf1-f68.google.com [209.85.167.68])
+ by mx.groups.io with SMTP id smtpd.web10.96514.1726324591668294414
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Sep 2024 04:12:54 -0700
+ Sat, 14 Sep 2024 07:36:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=C7ZYfAL1;
- spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-378c16a4d3eso1796713f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Sep 2024 04:12:53 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=JuPsp/yd;
+ spf=pass (domain: smile.fr, ip: 209.85.167.68, mailfrom: yoann.congal@smile.fr)
+Received: by mail-lf1-f68.google.com with SMTP id 2adb3069b0e04-536584f6c84so3999109e87.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Sep 2024 07:36:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1726312372; x=1726917172; darn=lists.openembedded.org;
+        d=smile.fr; s=google; t=1726324589; x=1726929389; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=HcjHzDfyap1U8aY2FZB2Ckk/Wsjfi+eOKzlF/pxPEoE=;
-        b=C7ZYfAL1nG9grOQZaxEIozF9GrpfH+Id69JRMUPfQDWP1jQN9h9MshLQB9wJ5vb+5M
-         +WrKA60+d9FtrV3q4+zj+USw4h4bNfE4YgVX3zmhvgxYtqIwfj9+e47N2VfIrWsRG8zI
-         FzQ05nCoIk06M08BqD9LcDjOSC3N1Bybmw27YW2ugV9pBJcFp0rQy09pGZGTU7QLl0Ex
-         gHNaFxYTlwL5DvEfLdv6W1jS3dJbblrtsnm/kkBIGUWgHpEsD65eeczjBZq8+vyGLxeH
-         6FZ3H5hDQpYF3KUG/I4akgi5+uJ4WqYAzcaq5tK227OTbHjpnFyrSoyTNKTn2bePSagG
-         sNmg==
+        bh=2jtrORoDOWuhoBRUj1cu1GTC3yo34MN+r0BahVsvEIc=;
+        b=JuPsp/ydnAGJAkKmGymr5EbRxGATY34O9PMtL2JllRdY3cnLOne9tb+BphMWHQP21T
+         mmjKJKDc993ZVWpiOeGGqr/7VoVKt1cyuh+h6p9+7DIpGVbG0UzxwXgvje+QnRL8tbrD
+         G+W9QwOQdlWVlxEK4yquNj5vKXu2/RB9Mu1d4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726312372; x=1726917172;
+        d=1e100.net; s=20230601; t=1726324589; x=1726929389;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=HcjHzDfyap1U8aY2FZB2Ckk/Wsjfi+eOKzlF/pxPEoE=;
-        b=E6MtdI4vBGV2me0SA5eut0YwOaZk5m92CHv8e6Wt6fAblsXLROgDfygdsmpTx0uXh7
-         yVpKO4qb0fgSCvwJdx1RrPP682DPIx45ul5CxXCb6C/O9HvIeox18sEkTNwfUA191LnN
-         GgbQrH2bTd7tQQgREIVJQl9d0H0q9GQv2QI0oazopO1+Buam0KIk3I+tTEnZHeXla6yB
-         jWjCLfoHP44qtDdlM2FRf6btiPLd20joKdnL/sG7+aKVQ+YpShCnUCeXdBkAYl6L1vvg
-         HDgdFB6oz+pFWQhSVVfGGlx9Ey0a8qlg/5lRpYgxm9FW9eXUhosXIP5W9b3vcHda1vR/
-         Vt9g==
-X-Gm-Message-State: AOJu0YweVKPk6kVuHwh6KeTX3jfXlhKkevkT/61ok8JXXscf0vWS8U8C
-	T0iGTB8KFV+gb0uP/RG+qr+mt/0uR539ooua7sixurXTWznFDs8UZUI9AIOl
-X-Google-Smtp-Source: AGHT+IGKmzTW+KOnbquacT8EKhDytoDybuh+t1c6uH46kGMQlBbEr8djmbf855pqm4GwWcBnZi/TMA==
-X-Received: by 2002:adf:f24c:0:b0:374:c7f8:3d50 with SMTP id ffacd0b85a97d-378d6253af9mr4645257f8f.58.1726312370829;
-        Sat, 14 Sep 2024 04:12:50 -0700 (PDT)
-Received: from localhost.localdomain (ptr-fij45qxtdobqrxrcewr.18120a2.ip6.access.telenet.be. [2a02:1812:512:2c00:6021:e9a4:5aa0:257b])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-378e73e81a5sm1485442f8f.34.2024.09.14.04.12.49
+        bh=2jtrORoDOWuhoBRUj1cu1GTC3yo34MN+r0BahVsvEIc=;
+        b=QN+f2C7wfBn7audf0w5N0dTsHac44AFgg7eyWm07/5HeBnnR38C9JzZuHYzswdqyeL
+         U4coDGJeZPv+VjUE3u9EE9+jMRHjcyk9ekNxB9tKcLOPij2vKrXnQyz0wiJkgR2mP7uD
+         0bnp6vo9UwnKq4BRyr2Cc0C0OvzGwqNrP8FhBMfi40HnrwFDhg0RvbS5XQvWr71De893
+         LswO25DjBsQdRN+P5SnKkK7wbQo6pUK67gUpeH7xv0f3LTzorWMoYtZ2AEG4Pi+ByJoQ
+         /qUROA2JS2GLQsbRteK/pvBlhXgbiA7b1ugR2zzICXn2LK18WNHxCQ9NyvEbCVyR5Wy+
+         sicg==
+X-Gm-Message-State: AOJu0YzWWsbBoHdmNi/8BkpKcxuDMDX4emr4PNwiHCVJ/oKxz9eh6/Yd
+	FUWe8HRYST3bmt6ExCCISHQt64UwKuKnTxx+14AtP81x64G1vSR52WdQbA9zSM54Y+SygvPOge3
+	9pXM/gA==
+X-Google-Smtp-Source: AGHT+IEcDfTH0GYkyJq2tQuwDuBiplBwRlQtXqWBdpWXyhCgfJ83gNa7eAlJ5oerqIWxQDelkRRKgQ==
+X-Received: by 2002:a05:6512:a90:b0:52e:8b15:7c55 with SMTP id 2adb3069b0e04-53678fce6eemr5082588e87.27.1726324588488;
+        Sat, 14 Sep 2024 07:36:28 -0700 (PDT)
+Received: from P-ASN-ECS-830T8C3.local (53.1.159.89.rev.sfr.net. [89.159.1.53])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-536870966c9sm273261e87.149.2024.09.14.07.36.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Sep 2024 04:12:50 -0700 (PDT)
-From: Jan Vermaete <jan.vermaete@gmail.com>
+        Sat, 14 Sep 2024 07:36:27 -0700 (PDT)
+From: Yoann Congal <yoann.congal@smile.fr>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-webserver] netdata: version bump 1.47.0 -> 1.47.1
-Date: Sat, 14 Sep 2024 13:12:43 +0200
-Message-Id: <20240914111243.2530714-1-jan.vermaete@gmail.com>
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-python][PATCH] non-repro-meta-python: exclude packages that failed previously
+Date: Sat, 14 Sep 2024 16:35:57 +0200
+Message-Id: <20240914143557.2211085-1-yoann.congal@smile.fr>
 X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 14 Sep 2024 11:13:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112285
+ <openembedded-devel@lists.openembedded.org>; Sat, 14 Sep 2024 14:36:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112286
 
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+From: Yoann Congal <yoann.congal@smile.fr>
+
+Those are the non-reproducible packages from:
+https://autobuilder.yoctoproject.org/typhoon/#/builders/155/builds/43
+
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 ---
- .../netdata/{netdata_1.47.0.bb => netdata_1.47.1.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-webadmin/netdata/{netdata_1.47.0.bb => netdata_1.47.1.bb} (97%)
+ meta-python/conf/include/non-repro-meta-python.inc | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_1.47.0.bb b/meta-webserver/recipes-webadmin/netdata/netdata_1.47.1.bb
-similarity index 97%
-rename from meta-webserver/recipes-webadmin/netdata/netdata_1.47.0.bb
-rename to meta-webserver/recipes-webadmin/netdata/netdata_1.47.1.bb
-index 9fa322b74..e134c06b0 100644
---- a/meta-webserver/recipes-webadmin/netdata/netdata_1.47.0.bb
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata_1.47.1.bb
-@@ -13,7 +13,7 @@ SRC_URI = "\
-     file://netdata.service \
-     file://netdata-volatiles.conf \
- "
--SRC_URI[sha256sum] = "6735222ffcff941508b92c8edddc26fbcd719b15880be4911d77fbfd9dbd9a1d"
-+SRC_URI[sha256sum] = "fb970a4b571ffd542b7d24220ef806a4c1b56c535e0f549a9978860a9f1dcc9c"
- 
- UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/tags"
- UPSTREAM_CHECK_REGEX = "${BPN}/releases/tag/v(?P<pver>\d+(?:\.\d+)*)"
--- 
-2.39.2
-
+diff --git a/meta-python/conf/include/non-repro-meta-python.inc b/meta-python/conf/include/non-repro-meta-python.inc
+index 629dc4aa04..64dc69ed55 100755
+--- a/meta-python/conf/include/non-repro-meta-python.inc
++++ b/meta-python/conf/include/non-repro-meta-python.inc
+@@ -1,6 +1,8 @@
+ # List of known non-reproducible package of the meta-python layer
+ # Please keep this list sorted
+ KNOWN_NON_REPRO_META_PYTHON = " \
++    python3-evdev \
++    python3-evdev-dbg \
+     python3-evdev-src \
+     python3-frozenlist \
+     python3-frozenlist-dbg \
+@@ -8,6 +10,7 @@ KNOWN_NON_REPRO_META_PYTHON = " \
+     python3-pandas \
+     python3-pandas-dbg \
+     python3-pandas-src \
++    python3-pybind11-json-dev \
+     python3-pycocotools-src \
+     python3-pydantic-core \
+     python3-pynacl \
 
