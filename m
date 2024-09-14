@@ -1,107 +1,88 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A1FDC0218F
-	for <webhook@archiver.kernel.org>; Sat, 14 Sep 2024 09:55:07 +0000 (UTC)
-Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
- by mx.groups.io with SMTP id smtpd.web10.93023.1726307703576141654
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5328C02191
+	for <webhook@archiver.kernel.org>; Sat, 14 Sep 2024 11:13:07 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.web10.93748.1726312373742218728
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Sep 2024 02:55:03 -0700
+ Sat, 14 Sep 2024 04:12:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
-Received: from fwd85.aul.t-online.de (fwd85.aul.t-online.de [10.223.144.111])
-	by mailout01.t-online.de (Postfix) with SMTP id B07132A6D8
-	for <openembedded-devel@lists.openembedded.org>; Sat, 14 Sep 2024 11:55:01 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.163.32.195]) by fwd85.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1spPUb-1PjyXB0; Sat, 14 Sep 2024 11:55:01 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=C7ZYfAL1;
+ spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: jan.vermaete@gmail.com)
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-378c16a4d3eso1796713f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Sep 2024 04:12:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1726312372; x=1726917172; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=HcjHzDfyap1U8aY2FZB2Ckk/Wsjfi+eOKzlF/pxPEoE=;
+        b=C7ZYfAL1nG9grOQZaxEIozF9GrpfH+Id69JRMUPfQDWP1jQN9h9MshLQB9wJ5vb+5M
+         +WrKA60+d9FtrV3q4+zj+USw4h4bNfE4YgVX3zmhvgxYtqIwfj9+e47N2VfIrWsRG8zI
+         FzQ05nCoIk06M08BqD9LcDjOSC3N1Bybmw27YW2ugV9pBJcFp0rQy09pGZGTU7QLl0Ex
+         gHNaFxYTlwL5DvEfLdv6W1jS3dJbblrtsnm/kkBIGUWgHpEsD65eeczjBZq8+vyGLxeH
+         6FZ3H5hDQpYF3KUG/I4akgi5+uJ4WqYAzcaq5tK227OTbHjpnFyrSoyTNKTn2bePSagG
+         sNmg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1726312372; x=1726917172;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=HcjHzDfyap1U8aY2FZB2Ckk/Wsjfi+eOKzlF/pxPEoE=;
+        b=E6MtdI4vBGV2me0SA5eut0YwOaZk5m92CHv8e6Wt6fAblsXLROgDfygdsmpTx0uXh7
+         yVpKO4qb0fgSCvwJdx1RrPP682DPIx45ul5CxXCb6C/O9HvIeox18sEkTNwfUA191LnN
+         GgbQrH2bTd7tQQgREIVJQl9d0H0q9GQv2QI0oazopO1+Buam0KIk3I+tTEnZHeXla6yB
+         jWjCLfoHP44qtDdlM2FRf6btiPLd20joKdnL/sG7+aKVQ+YpShCnUCeXdBkAYl6L1vvg
+         HDgdFB6oz+pFWQhSVVfGGlx9Ey0a8qlg/5lRpYgxm9FW9eXUhosXIP5W9b3vcHda1vR/
+         Vt9g==
+X-Gm-Message-State: AOJu0YweVKPk6kVuHwh6KeTX3jfXlhKkevkT/61ok8JXXscf0vWS8U8C
+	T0iGTB8KFV+gb0uP/RG+qr+mt/0uR539ooua7sixurXTWznFDs8UZUI9AIOl
+X-Google-Smtp-Source: AGHT+IGKmzTW+KOnbquacT8EKhDytoDybuh+t1c6uH46kGMQlBbEr8djmbf855pqm4GwWcBnZi/TMA==
+X-Received: by 2002:adf:f24c:0:b0:374:c7f8:3d50 with SMTP id ffacd0b85a97d-378d6253af9mr4645257f8f.58.1726312370829;
+        Sat, 14 Sep 2024 04:12:50 -0700 (PDT)
+Received: from localhost.localdomain (ptr-fij45qxtdobqrxrcewr.18120a2.ip6.access.telenet.be. [2a02:1812:512:2c00:6021:e9a4:5aa0:257b])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-378e73e81a5sm1485442f8f.34.2024.09.14.04.12.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 14 Sep 2024 04:12:50 -0700 (PDT)
+From: Jan Vermaete <jan.vermaete@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] wireplumber: update 0.5.5. -> 0.5.6
-Date: Sat, 14 Sep 2024 11:56:39 +0200
-Message-ID: <20240914095639.1772369-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.46.0
+Cc: Jan Vermaete <jan.vermaete@gmail.com>
+Subject: [meta-webserver] netdata: version bump 1.47.0 -> 1.47.1
+Date: Sat, 14 Sep 2024 13:12:43 +0200
+Message-Id: <20240914111243.2530714-1-jan.vermaete@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1726307701-4E7FB83E-2B72F869/0/0 CLEAN NORMAL
-X-TOI-MSGID: 84724380-d0f2-4f1e-8fc3-23e447a147aa
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 14 Sep 2024 09:55:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112284
+ <openembedded-devel@lists.openembedded.org>; Sat, 14 Sep 2024 11:13:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112285
 
-WirePlumber 0.5.6
-~~~~~~~~~~~~~~~~~
-
-Additions:
-
-  - Implemented before/after dependencies for components, to ensure corre=
-ct
-    load order in custom configurations (#600)
-
-  - Implemented profile inheritance in the configuration file. This allow=
-s
-    profiles to inherit all the feature specifications of other profiles,=
- which
-    is useful to avoid copying long lists of features just to make small =
-changes
-
-  - Added multi-instance configuration profiles, tested and documented th=
-em
-
-  - Added a ``main-systemwide`` profile, which is now the default for ins=
-tances
-    started via the system-wide systemd service and disables features tha=
-t
-    depend on the user session (#608)
-
-  - Added a ``wp_core_connect_fd`` method, which allows making a connecti=
-on to
-    PipeWire via an existing open socket (useful for portal-based connect=
-ions)
-
-Fixes:
-
-  - The Bluetooth auto-switch script now uses the common event source obj=
-ect
-    managers, which should improve its stability (!663)
-
-  - Fix an issue where switching between Bluetooth profiles would tempora=
-rily
-    link active audio streams to the internal speakers (!655)
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
 ---
- .../wireplumber/{wireplumber_0.5.5.bb =3D> wireplumber_0.5.6.bb}  | 2 +-
+ .../netdata/{netdata_1.47.0.bb => netdata_1.47.1.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/wireplumber/{wireplumber_0.5.5=
-.bb =3D> wireplumber_0.5.6.bb} (99%)
+ rename meta-webserver/recipes-webadmin/netdata/{netdata_1.47.0.bb => netdata_1.47.1.bb} (97%)
 
-diff --git a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0=
-.5.5.bb b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.=
-6.bb
-similarity index 99%
-rename from meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.=
-5.5.bb
-rename to meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.=
-6.bb
-index 437a71c23..7c308bd48 100644
---- a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.5.bb
-+++ b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.6.bb
-@@ -10,7 +10,7 @@ DEPENDS =3D "glib-2.0 glib-2.0-native lua pipewire \
-     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data"=
-, "python3-native python3-lxml-native doxygen-native", "", d)} \
+diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_1.47.0.bb b/meta-webserver/recipes-webadmin/netdata/netdata_1.47.1.bb
+similarity index 97%
+rename from meta-webserver/recipes-webadmin/netdata/netdata_1.47.0.bb
+rename to meta-webserver/recipes-webadmin/netdata/netdata_1.47.1.bb
+index 9fa322b74..e134c06b0 100644
+--- a/meta-webserver/recipes-webadmin/netdata/netdata_1.47.0.bb
++++ b/meta-webserver/recipes-webadmin/netdata/netdata_1.47.1.bb
+@@ -13,7 +13,7 @@ SRC_URI = "\
+     file://netdata.service \
+     file://netdata-volatiles.conf \
  "
-=20
--SRCREV =3D "43e939c0e3c71ff0e6cc384cef901a50237f8144"
-+SRCREV =3D "141b2d5d3f793e20f94421c554d8d9c51143ce0d"
- SRC_URI =3D " \
-     git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=3Dmaste=
-r;protocol=3Dhttps \
-     file://90-OE-disable-session-dbus-dependent-features.lua \
---=20
-2.46.0
+-SRC_URI[sha256sum] = "6735222ffcff941508b92c8edddc26fbcd719b15880be4911d77fbfd9dbd9a1d"
++SRC_URI[sha256sum] = "fb970a4b571ffd542b7d24220ef806a4c1b56c535e0f549a9978860a9f1dcc9c"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/tags"
+ UPSTREAM_CHECK_REGEX = "${BPN}/releases/tag/v(?P<pver>\d+(?:\.\d+)*)"
+-- 
+2.39.2
 
 
