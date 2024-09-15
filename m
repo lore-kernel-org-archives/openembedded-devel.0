@@ -2,117 +2,117 @@ Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1CB81C3ABA2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25501C3ABA0
 	for <webhook@archiver.kernel.org>; Sun, 15 Sep 2024 17:53:24 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web11.119303.1726422795376464824
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.web11.119305.1726422798038386892
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Sep 2024 10:53:15 -0700
+ Sun, 15 Sep 2024 10:53:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=K76ixsqn;
- spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-42cba8340beso29387315e9.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Sep 2024 10:53:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NHDY09f8;
+ spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: jan.vermaete@gmail.com)
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-378e5d4a80eso1189719f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Sep 2024 10:53:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1726422793; x=1727027593; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=BbpfvpfMIVfkUDHoXZHv4ZeKuzkCE57NYk3YBYHWPxc=;
-        b=K76ixsqnZJ8WmZQCBVS9DM8EAyP/F4xN/xSW3maMl6DB0Xje9d9YJX/tD2bZrtMK9X
-         7jfDKoMs7c1/tQkmbU1L3Y8I8nUAaYMoVV7kVnMSguRaHd8b3HDgR9U+V5HzuKeWW1ZL
-         cFTYax2beT2qDMMIRSbFW/mL53xzXlQBQMLcbJhz/VTDMY86EDQF/9bL9Q6rER6NRHsI
-         OTkNpXBlXZfWbzmWuI5HW1fQYpbhtOrdUDy8uf/mZNikcwVOARSd2K8uk40zKIZZ7jTh
-         ym7sKQ/3sFTVpBkHNIBICdhYfDmu15vlx82y6smIPD2aXCullCFoB7+NCJlvT63FOl14
-         seSg==
+        d=gmail.com; s=20230601; t=1726422796; x=1727027596; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=VWEPefkAS1bf9Cr6tJ+pFls/UG8b1bLaEK2FOL+w/4o=;
+        b=NHDY09f8JtLDPk74szn6XNGQok5JZVGzAocBPo3PFRs/RSvkmfBjf3rJoBb2IN9xOH
+         0xFPII/2Y5zG2vxMXi2GW19+l5F8vmPIsRCowNyVx7a3dZGZYO0Hj1RI4zPtkVXwRMw7
+         lrhNQ3XII8FlH62Y1kTPwEwwkZVNYfvnClJbLnbw7IuQBLfvl0M0dpdJuwH+2cbwsBlJ
+         JdNwF/zzQ2aX5kGCTDXO0CQpb6pRkaid9Cjbz72Qkrpf9WznFhSbeK4THywfvoZK2/jt
+         GslVGJHU3OsA5BDiW3j4ofU254ar7/jsYWA01NWe8FZY3ECssrjVjSuqLg6g3f7xBYBR
+         6iiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726422793; x=1727027593;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=BbpfvpfMIVfkUDHoXZHv4ZeKuzkCE57NYk3YBYHWPxc=;
-        b=Rvj7DlBHGvhElKdt98GP5CXXoLs3kqgrUmJruQRPO7ADLSfJGQMAG0kyOj2uowb5iP
-         Gk4O5kWQa7F2qEld+Z53nYmbS+r+43byg1YxXofeeNaDt3U0TiPDOJhPlu8eOVmowkSe
-         NF8VS/bxHrtWD5eitoS0O5qcV4YlZHXqjWHVUmY7wBowr76AQA8TdYDGx9kP8hMbSK5q
-         IBkkY/iyKEIgQ0//yTObLGICK+hj0DEm9nLXG6pIUlVf68XiFCcbjXegMIP985ny2+Az
-         1yOIzlKernXltJC37FVIHPfdbFAr+AXoVJA8eF7ZWBVNmh3JmWNpBVtKwI6QFcWjHzId
-         Hnsg==
-X-Gm-Message-State: AOJu0YwxfGICAe4q3xT2cEPmMo5lHhFhSV/5LVXItbdZcr3HLNhFlzVn
-	kowycC1J0ANkSprdvsn5DJCwsVQzhOA17QvKfLFffsppMd6QeFpfQZMTKA==
-X-Google-Smtp-Source: AGHT+IGxP6Gfj3ySBQGwUpg5U0neZpjNRAmTzLDUqP18b0S5HCT+KSYnH81HjmICdF/F4U1QM3HirA==
-X-Received: by 2002:a05:6000:20c3:b0:378:c6d5:e2b3 with SMTP id ffacd0b85a97d-378c6d5e608mr7840046f8f.23.1726422792567;
-        Sun, 15 Sep 2024 10:53:12 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1726422796; x=1727027596;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=VWEPefkAS1bf9Cr6tJ+pFls/UG8b1bLaEK2FOL+w/4o=;
+        b=oLp6XiixloHh2HWG6AIZAde7ydHorR13uOxLjy7IKxLX9dnc8t4T/LTZnlQzFfmi7H
+         3SLjKvpk69nIyzNKc9AN254W1UXA4W07wPxNUiSFyC84BQQZRk2DsK6kTxdgNqv4hDk/
+         yKPNl7tjNwkBD7Le5ybnBLzgAyRtXNBQMBqUutXZ6OrfRYBdjSFoZ/cMC0UlnY1KL0Ci
+         VT8/GWzIzeYLsvlP+ElCmRmma2iVan388BH25S8ChxQXynBawU1CxrBAmScJ3fXHOFg4
+         OTNMjFVgiicj+a7ENdSgSK9FUmBeYfpMf+ZZKRWWIK+jOSduUlGf5j7+xI/SpWlH0IYt
+         dKeg==
+X-Gm-Message-State: AOJu0YzSZNR2+XX9BAwdw0tllR9rO3xGAkdAMMmTs1RZMoWEsP4tcXap
+	/u5V/MkjRGm7Ck2nqQva73VivlSLo1GLxk/aVgZeaHzLJKL2LJR18luBxg==
+X-Google-Smtp-Source: AGHT+IFWSNNIyQPhSlHkgOfvfS6lZ9IhVg2uwwqbkFq03kh5LQc/vViqKApv1+o2G55QohFJIj440Q==
+X-Received: by 2002:adf:cd8e:0:b0:366:eade:bfbb with SMTP id ffacd0b85a97d-378c2d4c76dmr7572523f8f.46.1726422795347;
+        Sun, 15 Sep 2024 10:53:15 -0700 (PDT)
 Received: from localhost.localdomain (ptr-fij45qxtdobqrxrcewr.18120a2.ip6.access.telenet.be. [2a02:1812:512:2c00:6021:e9a4:5aa0:257b])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-42da242736bsm53897005e9.40.2024.09.15.10.53.11
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-42da242736bsm53897005e9.40.2024.09.15.10.53.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Sep 2024 10:53:11 -0700 (PDT)
+        Sun, 15 Sep 2024 10:53:15 -0700 (PDT)
 From: Jan Vermaete <jan.vermaete@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [PATCH 0/1] RFC: some issues with go?
-Date: Sun, 15 Sep 2024 19:53:04 +0200
-Message-Id: <20240915175305.3390769-1-jan.vermaete@gmail.com>
+Subject: [PATCH 1/1] netdata: enable Go-based plugins
+Date: Sun, 15 Sep 2024 19:53:05 +0200
+Message-Id: <20240915175305.3390769-2-jan.vermaete@gmail.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240915175305.3390769-1-jan.vermaete@gmail.com>
+References: <20240915175305.3390769-1-jan.vermaete@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 15 Sep 2024 17:53:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112309
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112310
 
-Could someone review this patch that enables the Go-based plugins of Netdata?
+Default enabled because netdata is transforming the plugins from Python to Go rapidly.
 
-I tested it in QEMU with the Go example package enable locally.
-
-I have this error when building the image (with Kas)
-----------------------------------------------------
-
- NOTE: Executing Tasks
- NOTE: Tasks Summary: Attempted 5371 tasks of which 5341 didn't need to be rerun and all succeeded.
- NOTE: Writing buildhistory
- NOTE: Writing buildhistory took: 2 seconds
- Exception ignored in: <function SetupHome.__del__ at 0x7fe2f82682c0>
- Traceback (most recent call last):
-   File "/usr/local/lib/python3.11/dist-packages/kas/libcmds.py", line 166, in __del__
-     shutil.rmtree(self.tmpdirname)
-   File "/usr/lib/python3.11/shutil.py", line 732, in rmtree
-     _rmtree_safe_fd(fd, path, onerror)
-   File "/usr/lib/python3.11/shutil.py", line 660, in _rmtree_safe_fd
-     _rmtree_safe_fd(dirfd, fullname, onerror)
-   File "/usr/lib/python3.11/shutil.py", line 660, in _rmtree_safe_fd
-     _rmtree_safe_fd(dirfd, fullname, onerror)
-   File "/usr/lib/python3.11/shutil.py", line 660, in _rmtree_safe_fd
-     _rmtree_safe_fd(dirfd, fullname, onerror)
-   [Previous line repeated 2 more times]
-   File "/usr/lib/python3.11/shutil.py", line 683, in _rmtree_safe_fd
-     onerror(os.unlink, fullname, sys.exc_info())
-   File "/usr/lib/python3.11/shutil.py", line 681, in _rmtree_safe_fd
-     os.unlink(entry.name, dir_fd=topfd)
- PermissionError: [Errno 13] Permission denied: 'rounder_example_test.go'
-
-Workaround for network access
------------------------------
-
-I there a way to avoid the 'do_compile[network] = "1"'.  It seems to be
-needed to fetch the Go packages specified in the go.mod file.
-
-
-INSAGE_SKIP
------------
-
-How to avoid the QA error/warning `already-stripped`?
-
-  ERROR: netdata-1.47.1-r0 do_package: QA Issue: File '/usr/libexec/netdata/plugins.d/go.d.plugin' from netdata was already stripped, this will prevent future debugging! [already-stripped]
-  ERROR: netdata-1.47.1-r0 do_package: Fatal QA errors were found, failing task.
-
-
-
-Jan Vermaete (1):
-  netdata: enable Go-based plugins
-
+Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+---
  .../recipes-webadmin/netdata/netdata_1.47.1.bb  | 17 +++++++++++++++--
  1 file changed, 15 insertions(+), 2 deletions(-)
 
+diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_1.47.1.bb b/meta-webserver/recipes-webadmin/netdata/netdata_1.47.1.bb
+index e134c06b0..7d922dbca 100644
+--- a/meta-webserver/recipes-webadmin/netdata/netdata_1.47.1.bb
++++ b/meta-webserver/recipes-webadmin/netdata/netdata_1.47.1.bb
+@@ -7,6 +7,17 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
+ 
+ DEPENDS += "json-c libuv libyaml util-linux zlib lz4"
+ 
++GO_ROOT = "${STAGING_LIBDIR}/go"
++export GO_ROOT
++#export GOPROXY = "https://proxy.golang.org,direct"
++
++# Workaround for network access issue during compile step
++# this needs to be fixed in the recipes buildsystem to move
++# this such that it can be accomplished during do_fetch task
++do_compile[network] = "1"
++
++INSANE_SKIP:${PN} += "already-stripped buildpaths"
++
+ SRC_URI = "\
+     https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz \
+     file://netdata.conf \
+@@ -42,7 +53,7 @@ SYSTEMD_AUTO_ENABLE:${PN} = "enable"
+ USERADD_PACKAGES = "${PN}"
+ USERADD_PARAM:${PN} = "--system --no-create-home --home-dir ${localstatedir}/run/netdata --user-group netdata"
+ 
+-PACKAGECONFIG ??= "openssl freeipmi ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
++PACKAGECONFIG ??= "openssl freeipmi ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} go"
+ PACKAGECONFIG[brotli] = ",,brotli"
+ PACKAGECONFIG[cloud] = "-DENABLE_CLOUD=ON,-DENABLE_CLOUD=OFF,"
+ PACKAGECONFIG[openssl] = "-DENABLE_OPENSSL=ON,-DENABLE_OPENSSL=OFF,openssl"
+@@ -53,8 +64,10 @@ PACKAGECONFIG[xenstat] = "-DENABLE_PLUGIN_XENSTAT=ON,-DENABLE_PLUGIN_XENSTAT=OFF
+ PACKAGECONFIG[cups] = "-DENABLE_PLUGIN_CUPS=ON,-DENABLE_PLUGIN_CUPS=OFF,cups"
+ PACKAGECONFIG[systemd] = "-DENABLE_PLUGIN_SYSTEMD_JOURNAL=ON,-DENABLE_PLUGIN_SYSTEMD_JOURNAL=OFF,systemd"
+ 
++PACKAGECONFIG[go] = "-DENABLE_PLUGIN_GO=ON,-DENABLE_PLUGIN_GO=OFF,go-native"
++
+ # ebpf doesn't compile (or detect) the cross compilation well
+-EXTRA_OECMAKE += "-DENABLE_PLUGIN_EBPF=OFF -DENABLE_PLUGIN_GO=OFF \
++EXTRA_OECMAKE += "-DENABLE_PLUGIN_EBPF=OFF \
+                   -DENABLE_ACLK=OFF -DENABLE_EXPORTER_PROMETHEUS_REMOTE_WRITE=OFF -DCMAKE_INSTALL_PREFIX='${base_prefix}'"
+ 
+ do_install:append() {
 -- 
 2.39.2
 
