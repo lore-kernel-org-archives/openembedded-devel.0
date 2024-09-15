@@ -1,119 +1,87 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 25501C3ABA0
-	for <webhook@archiver.kernel.org>; Sun, 15 Sep 2024 17:53:24 +0000 (UTC)
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.web11.119305.1726422798038386892
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92CBBC3ABA4
+	for <webhook@archiver.kernel.org>; Sun, 15 Sep 2024 19:37:14 +0000 (UTC)
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.web11.121154.1726429032380608939
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Sep 2024 10:53:18 -0700
+ Sun, 15 Sep 2024 12:37:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NHDY09f8;
- spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-378e5d4a80eso1189719f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Sep 2024 10:53:17 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Dza7WHHs;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-1fee6435a34so32336145ad.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Sep 2024 12:37:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1726422796; x=1727027596; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=VWEPefkAS1bf9Cr6tJ+pFls/UG8b1bLaEK2FOL+w/4o=;
-        b=NHDY09f8JtLDPk74szn6XNGQok5JZVGzAocBPo3PFRs/RSvkmfBjf3rJoBb2IN9xOH
-         0xFPII/2Y5zG2vxMXi2GW19+l5F8vmPIsRCowNyVx7a3dZGZYO0Hj1RI4zPtkVXwRMw7
-         lrhNQ3XII8FlH62Y1kTPwEwwkZVNYfvnClJbLnbw7IuQBLfvl0M0dpdJuwH+2cbwsBlJ
-         JdNwF/zzQ2aX5kGCTDXO0CQpb6pRkaid9Cjbz72Qkrpf9WznFhSbeK4THywfvoZK2/jt
-         GslVGJHU3OsA5BDiW3j4ofU254ar7/jsYWA01NWe8FZY3ECssrjVjSuqLg6g3f7xBYBR
-         6iiQ==
+        d=gmail.com; s=20230601; t=1726429031; x=1727033831; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=aRt3y1GRrbZnCOJoJEnwUNdBrisrNATOggRK9GEc8VY=;
+        b=Dza7WHHsMMlftPTZ+rKRWj3IneIw4Am2w80j6OT0OzHsmUV4EQZE/ECUv64UqPzLtG
+         H72+cMauMY8S4Zf9mopklt6i8b+6ED0vT7ushigSaTBPwdvVHrThZWnmtRW+a8LqfbLz
+         KQfY0VpDzHhw1HQKgKE2qRURZ4oQFc1P7EEF+AkfDnOlh6Kjfb4WfI4/cQppl8mnOt8J
+         7JfY8XO2v7LlbjaE/RIxuwpc444g3EdjB0DCqBFqq6waEWHHh8FFeLbSBlLfehIUWr97
+         3KO+UhSYV6NxXAdOx4TmVrlCvWKYAau+E0su2n9hOXy4/BFMaoKPdpYhV9i6pus3OHK+
+         0PHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726422796; x=1727027596;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=VWEPefkAS1bf9Cr6tJ+pFls/UG8b1bLaEK2FOL+w/4o=;
-        b=oLp6XiixloHh2HWG6AIZAde7ydHorR13uOxLjy7IKxLX9dnc8t4T/LTZnlQzFfmi7H
-         3SLjKvpk69nIyzNKc9AN254W1UXA4W07wPxNUiSFyC84BQQZRk2DsK6kTxdgNqv4hDk/
-         yKPNl7tjNwkBD7Le5ybnBLzgAyRtXNBQMBqUutXZ6OrfRYBdjSFoZ/cMC0UlnY1KL0Ci
-         VT8/GWzIzeYLsvlP+ElCmRmma2iVan388BH25S8ChxQXynBawU1CxrBAmScJ3fXHOFg4
-         OTNMjFVgiicj+a7ENdSgSK9FUmBeYfpMf+ZZKRWWIK+jOSduUlGf5j7+xI/SpWlH0IYt
-         dKeg==
-X-Gm-Message-State: AOJu0YzSZNR2+XX9BAwdw0tllR9rO3xGAkdAMMmTs1RZMoWEsP4tcXap
-	/u5V/MkjRGm7Ck2nqQva73VivlSLo1GLxk/aVgZeaHzLJKL2LJR18luBxg==
-X-Google-Smtp-Source: AGHT+IFWSNNIyQPhSlHkgOfvfS6lZ9IhVg2uwwqbkFq03kh5LQc/vViqKApv1+o2G55QohFJIj440Q==
-X-Received: by 2002:adf:cd8e:0:b0:366:eade:bfbb with SMTP id ffacd0b85a97d-378c2d4c76dmr7572523f8f.46.1726422795347;
-        Sun, 15 Sep 2024 10:53:15 -0700 (PDT)
-Received: from localhost.localdomain (ptr-fij45qxtdobqrxrcewr.18120a2.ip6.access.telenet.be. [2a02:1812:512:2c00:6021:e9a4:5aa0:257b])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-42da242736bsm53897005e9.40.2024.09.15.10.53.14
+        d=1e100.net; s=20230601; t=1726429031; x=1727033831;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=aRt3y1GRrbZnCOJoJEnwUNdBrisrNATOggRK9GEc8VY=;
+        b=D4+07nSMV1Rn25Fbo3VTdkb3cAOC/O4Cq7jCW1RkmzEVgJ4Sj2kxu+wauEt7+1cQYY
+         XeSS63lB0ltzWeWPUHk2Tf1ap9BB+qcd9+qvjl465x8DtojPfinYTaNs0vT6J06adimG
+         t7m3ibrrQeOH+sm0taIvu6mmBTCvbsG7QmLZ4wAyAm4y5d4CZ+m4y0+8BzR5zh80xw36
+         byFuZ8U80u9uGIIFjGhrbkBVJkfgXobKO9FkL8+Wi80T6dXyfUuxd/kZFm7Ox844zw7i
+         Zv2moTpbYFwfg8glRJ/RqfwSVDDS8VWomN4UmBdcrKAGGTJzwwL4l3dcf71QrlrWd2ir
+         ebkg==
+X-Gm-Message-State: AOJu0YyeoXPlJI3mrg1pWAhH8DatAokhzR782iISQDyGDPiobxST2PoS
+	C8/35gHsCAzAImVdQ03GUEYAAOxFtm/ybMlSE8wB0xj5SazL4EOsivg3StRo
+X-Google-Smtp-Source: AGHT+IE7Os8tyQOHaF4zdWl46ZvEBjjJRHXL4PouU/qO7i5byc9PLP4iNhPYFQrFeURfwHhZnI42XA==
+X-Received: by 2002:a17:902:c404:b0:205:7180:bb59 with SMTP id d9443c01a7336-2076e35e998mr174651675ad.21.1726429031358;
+        Sun, 15 Sep 2024 12:37:11 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::9c53])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-207947364d5sm24688795ad.282.2024.09.15.12.37.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Sep 2024 10:53:15 -0700 (PDT)
-From: Jan Vermaete <jan.vermaete@gmail.com>
+        Sun, 15 Sep 2024 12:37:10 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [PATCH 1/1] netdata: enable Go-based plugins
-Date: Sun, 15 Sep 2024 19:53:05 +0200
-Message-Id: <20240915175305.3390769-2-jan.vermaete@gmail.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240915175305.3390769-1-jan.vermaete@gmail.com>
-References: <20240915175305.3390769-1-jan.vermaete@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH 1/4] python3-pillow: Add missing rdep on py3-compile for ptests
+Date: Sun, 15 Sep 2024 12:37:06 -0700
+Message-ID: <20240915193709.1131399-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.46.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 15 Sep 2024 17:53:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112310
+ <openembedded-devel@lists.openembedded.org>; Sun, 15 Sep 2024 19:37:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112311
 
-Default enabled because netdata is transforming the plugins from Python to Go rapidly.
-
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-webadmin/netdata/netdata_1.47.1.bb  | 17 +++++++++++++++--
- 1 file changed, 15 insertions(+), 2 deletions(-)
+ meta-python/recipes-devtools/python/python3-pillow_10.4.0.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_1.47.1.bb b/meta-webserver/recipes-webadmin/netdata/netdata_1.47.1.bb
-index e134c06b0..7d922dbca 100644
---- a/meta-webserver/recipes-webadmin/netdata/netdata_1.47.1.bb
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata_1.47.1.bb
-@@ -7,6 +7,17 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
- 
- DEPENDS += "json-c libuv libyaml util-linux zlib lz4"
- 
-+GO_ROOT = "${STAGING_LIBDIR}/go"
-+export GO_ROOT
-+#export GOPROXY = "https://proxy.golang.org,direct"
-+
-+# Workaround for network access issue during compile step
-+# this needs to be fixed in the recipes buildsystem to move
-+# this such that it can be accomplished during do_fetch task
-+do_compile[network] = "1"
-+
-+INSANE_SKIP:${PN} += "already-stripped buildpaths"
-+
- SRC_URI = "\
-     https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz \
-     file://netdata.conf \
-@@ -42,7 +53,7 @@ SYSTEMD_AUTO_ENABLE:${PN} = "enable"
- USERADD_PACKAGES = "${PN}"
- USERADD_PARAM:${PN} = "--system --no-create-home --home-dir ${localstatedir}/run/netdata --user-group netdata"
- 
--PACKAGECONFIG ??= "openssl freeipmi ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-+PACKAGECONFIG ??= "openssl freeipmi ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} go"
- PACKAGECONFIG[brotli] = ",,brotli"
- PACKAGECONFIG[cloud] = "-DENABLE_CLOUD=ON,-DENABLE_CLOUD=OFF,"
- PACKAGECONFIG[openssl] = "-DENABLE_OPENSSL=ON,-DENABLE_OPENSSL=OFF,openssl"
-@@ -53,8 +64,10 @@ PACKAGECONFIG[xenstat] = "-DENABLE_PLUGIN_XENSTAT=ON,-DENABLE_PLUGIN_XENSTAT=OFF
- PACKAGECONFIG[cups] = "-DENABLE_PLUGIN_CUPS=ON,-DENABLE_PLUGIN_CUPS=OFF,cups"
- PACKAGECONFIG[systemd] = "-DENABLE_PLUGIN_SYSTEMD_JOURNAL=ON,-DENABLE_PLUGIN_SYSTEMD_JOURNAL=OFF,systemd"
- 
-+PACKAGECONFIG[go] = "-DENABLE_PLUGIN_GO=ON,-DENABLE_PLUGIN_GO=OFF,go-native"
-+
- # ebpf doesn't compile (or detect) the cross compilation well
--EXTRA_OECMAKE += "-DENABLE_PLUGIN_EBPF=OFF -DENABLE_PLUGIN_GO=OFF \
-+EXTRA_OECMAKE += "-DENABLE_PLUGIN_EBPF=OFF \
-                   -DENABLE_ACLK=OFF -DENABLE_EXPORTER_PROMETHEUS_REMOTE_WRITE=OFF -DCMAKE_INSTALL_PREFIX='${base_prefix}'"
- 
- do_install:append() {
--- 
-2.39.2
-
+diff --git a/meta-python/recipes-devtools/python/python3-pillow_10.4.0.bb b/meta-python/recipes-devtools/python/python3-pillow_10.4.0.bb
+index 2a9d9217f6..a9cb903ac1 100644
+--- a/meta-python/recipes-devtools/python/python3-pillow_10.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pillow_10.4.0.bb
+@@ -41,12 +41,13 @@ RDEPENDS:${PN} += " \
+     python3-numbers \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxcb', '', d)} \
+ "
+-
++# python3-compile for filecmp module
+ RDEPENDS:${PN}-ptest += " \
+     bash \
+     ghostscript \
+     jpeg-tools \
+     libwebp \
++    python3-compile \
+     python3-core \
+     python3-image \
+     python3-mmap \
 
