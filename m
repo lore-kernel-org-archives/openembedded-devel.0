@@ -2,66 +2,68 @@ Return-Path: <fathi.boudra@linaro.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F1ED4CAC58C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0061ECAC58D
 	for <webhook@archiver.kernel.org>; Tue, 17 Sep 2024 15:54:09 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.web10.24250.1726588445398462992
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.web10.24251.1726588446518540903
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Sep 2024 08:54:05 -0700
+ Tue, 17 Sep 2024 08:54:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=ljjxhzgc;
- spf=pass (domain: linaro.org, ip: 209.85.128.41, mailfrom: fathi.boudra@linaro.org)
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-42cb0f28bfbso50085805e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Sep 2024 08:54:05 -0700 (PDT)
+ dkim=pass header.i=@linaro.org header.s=google header.b=DpRqGs+6;
+ spf=pass (domain: linaro.org, ip: 209.85.221.47, mailfrom: fathi.boudra@linaro.org)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-378f600e090so1432219f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Sep 2024 08:54:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1726588443; x=1727193243; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=aY1UTHnErk4lmiiPqCRbyDTSffcWAoVU/we4Z3pmd08=;
-        b=ljjxhzgczdBjuWCQYAUBsrm/Ntt3WFQMDx8WpeoaiX/JkdmxlWjAZ05AsEfK5ykhTr
-         ym0Z57JBsyWv7b+SCF6ZK9mcv6KKyFZyjXL27ZbI3kPjHcHlIv5OzIpKYzCph2WWm1M7
-         ZWXj9jZfEf78tNWRgRzdlY9cCfQuH9uMGqR2wK73yaQ+ZW3CYwIv/3uLLM3XSFGPWuHr
-         5S3tOPFPpsvyZaYEQGcFBS1PMQARkXmZ0Gff/FBqHtA+IvTCHpSrjDqOkgKbz6G2Vw86
-         vDv60DA8PofXE0CT3byapcd+62NX2ttoq10+KV/XitcqaCTbSKULcPXKpVxDBEWKiqBi
-         DEww==
+        d=linaro.org; s=google; t=1726588444; x=1727193244; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=llKbWR0F7PirPe4usVnFCuIrrnFI5PsuiGaX7VTo5dQ=;
+        b=DpRqGs+6q0N/AMWVYsdIQkFOsAN4pB1kg28KBFQKLr9/yp8JCYyHa8/ISEM+1yYzpZ
+         ef3ypWfqeJOUpNF91c9YkJQPJfQcAmQdaO4XxGND9i/ZyKctCLxEk68Nb+xfFyrcnuoH
+         pZgUJDsWQzZ/TI0TY/IjgY6Jn64CIMuMMH3e4/I0XOOTPxvDw8JAxfJAGI9vBarEx7Fh
+         zcNJtjPc6RBKMSHsvj+jBY9iclBchpBrHfAneYWoW3cTB3XvskAVZz9x1k0WZHU15kbb
+         GNKQaaPLdyhPtk6dSBcdDbDmbgJRwwoSBO9YsDyumwMeg6Ds3zkFa1bUuxIXaqcp5V3F
+         fV/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726588443; x=1727193243;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=aY1UTHnErk4lmiiPqCRbyDTSffcWAoVU/we4Z3pmd08=;
-        b=DWaye8fAJ+y73j1r6cpGrUPqb8ByztuCw5eeSOzJs6h8+aT9pIT2yRBoWmbBTnrym7
-         oKaqF/mHtRRBTCmYMhGn0arU2l3i9sTgEoESusDGEMUu8SpYFKLWu7xTawlWa5dv3U3l
-         TeSnetcOmTtbQ9uWtpRES6i4Y5j6RkqPm+uwEoJLh34I/UWfXcSmBoEHzLG4ydVzUdZy
-         CmbfWAFgVh0Lwr6dLxxuAk6vugHvuKLgQNqXjc4aZSm46HiU73kvDJOKs0yEk1Ay8NRk
-         4CKYJp1FnT6+xFfp/dyYfDzjdQ3XjigzYlLrfYexycOt1AzLtS3TTwK470AXNIpkU0L/
-         Y01g==
-X-Gm-Message-State: AOJu0YxxuKCa7tR7hyEagWOEmJKvBSWVlxjufys7k5ia+V+C5DQ90yWG
-	fWWxRMbdO+uf3kJ/s+FETt2+XY3ArvmkTiW/AqfmEOXsuMLSUn3dhrQMFh8FB+f8bKnOSJN+SSo
-	CpKA=
-X-Google-Smtp-Source: AGHT+IEGXiBFrjW6QQ5EKVxHJknYXBsHzagZ/XrqACLb1jPNktj7JVSSqFnQEwhRWCszSkmEAGsP1g==
-X-Received: by 2002:a05:600c:45cc:b0:42c:bfd6:9d4d with SMTP id 5b1f17b1804b1-42cdb4e6aafmr140981165e9.2.1726588443323;
-        Tue, 17 Sep 2024 08:54:03 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1726588444; x=1727193244;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=llKbWR0F7PirPe4usVnFCuIrrnFI5PsuiGaX7VTo5dQ=;
+        b=iPttiS3WWVCOmmypDbLFl6x3yPO6q4eowoT8daFipUtTWedd0t9f6vw/q4UDoQwOVf
+         7Wf/a76aPs0uxzy85SjT5AFaq3Mha73O3I2IjTKODmxGT8/7vaK4zUP1MnnNk9LsliI9
+         0kQ6xUS8RVXPjtueS7Q4bor9sFaN3kVGyhyrOU0f5jZ/obflv2RRSJbehLrhJCM2L/lI
+         vpPBhDmnrJRiF5nyLdA4mE5L9xcPNV85BaJ7F9xqnkhDr95na3+SDbpm1lDXYShnHxrH
+         Wb4b8xlsfeqDhbKny0s4CupwDEPaKcPm1+ASNooDOyOsfmGvBVoTDXL5Vd/Zj7QDLHgJ
+         7uKw==
+X-Gm-Message-State: AOJu0YzxTyQII36CYiCGJ0b6xhhWj4X6q5GKEOjzQ4XL5XP9QYskMK/X
+	vx/TwaGIjSV6X49VY1lAwVLplleGYnYhtBRl+y/xLdTynDnzCrvudU8us/9OTAVAR16C/xz9LK/
+	vLuY=
+X-Google-Smtp-Source: AGHT+IHoB4SrlukmJHW7MgWGN9TlkNoI0dB6lczJGyiu2H+/GNdXcIMzjklwCnz4E+Tp4UrcHbtGyw==
+X-Received: by 2002:adf:a456:0:b0:374:d259:647f with SMTP id ffacd0b85a97d-378c2d0529cmr11473307f8f.34.1726588444490;
+        Tue, 17 Sep 2024 08:54:04 -0700 (PDT)
 Received: from corsair.. (88-169-167-85.subs.proxad.net. [88.169.167.85])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-378e71ed099sm9981329f8f.5.2024.09.17.08.54.02
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-378e71ed099sm9981329f8f.5.2024.09.17.08.54.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Sep 2024 08:54:02 -0700 (PDT)
+        Tue, 17 Sep 2024 08:54:03 -0700 (PDT)
 From: Fathi Boudra <fathi.boudra@linaro.org>
 To: openembedded-devel@lists.openembedded.org
 Cc: steve@sakoman.com,
-	Fathi Boudra <fathi.boudra@linaro.org>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [oe][scarthgap][PATCH 1/2] python3-django: upgrade 4.2.11 -> 4.2.16
-Date: Tue, 17 Sep 2024 17:53:55 +0200
-Message-ID: <20240917155356.203981-1-fathi.boudra@linaro.org>
+	Fathi Boudra <fathi.boudra@linaro.org>
+Subject: [oe][scarthgap][PATCH 2/2] python3-django: upgrade 5.0.4 -> 5.0.9
+Date: Tue, 17 Sep 2024 17:53:56 +0200
+Message-ID: <20240917155356.203981-2-fathi.boudra@linaro.org>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20240917155356.203981-1-fathi.boudra@linaro.org>
+References: <20240917155356.203981-1-fathi.boudra@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 17 Sep 2024 15:54:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112344
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112345
 
 CVE-2024-45230: Potential denial-of-service vulnerability in
 django.utils.html.urlize()
@@ -124,39 +126,28 @@ To mitigate this vulnerability, the language code provided to
 get_supported_language_variant() is now parsed up to a maximum length of
 500 characters.
 
-Fixed a crash in Django 4.2 when validating email max line lengths with content
-decoded using the surrogateescape error handling scheme (#35361)
-
 Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../{python3-django_4.2.11.bb => python3-django_4.2.16.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-django_4.2.11.bb => python3-django_4.2.16.bb} (63%)
+ .../python/{python3-django_5.0.4.bb => python3-django_5.0.9.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-django_5.0.4.bb => python3-django_5.0.9.bb} (56%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.11.bb b/meta-python/recipes-devtools/python/python3-django_4.2.16.bb
-similarity index 63%
-rename from meta-python/recipes-devtools/python/python3-django_4.2.11.bb
-rename to meta-python/recipes-devtools/python/python3-django_4.2.16.bb
-index 0642b7e7c..9254e8b00 100644
---- a/meta-python/recipes-devtools/python/python3-django_4.2.11.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_4.2.16.bb
+diff --git a/meta-python/recipes-devtools/python/python3-django_5.0.4.bb b/meta-python/recipes-devtools/python/python3-django_5.0.9.bb
+similarity index 56%
+rename from meta-python/recipes-devtools/python/python3-django_5.0.4.bb
+rename to meta-python/recipes-devtools/python/python3-django_5.0.9.bb
+index 3139ed468..60e9c592b 100644
+--- a/meta-python/recipes-devtools/python/python3-django_5.0.4.bb
++++ b/meta-python/recipes-devtools/python/python3-django_5.0.9.bb
 @@ -1,7 +1,7 @@
  require python-django.inc
  inherit setuptools3
  
--SRC_URI[sha256sum] = "6e6ff3db2d8dd0c986b4eec8554c8e4f919b5c1ff62a5b4390c17aff2ed6e5c4"
-+SRC_URI[sha256sum] = "6f1616c2786c408ce86ab7e10f792b8f15742f7b7b7460243929cb371e7f1dad"
+-SRC_URI[sha256sum] = "4bd01a8c830bb77a8a3b0e7d8b25b887e536ad17a81ba2dce5476135c73312bd"
++SRC_URI[sha256sum] = "6333870d342329b60174da3a60dbd302e533f3b0bb0971516750e974a99b5a39"
  
  RDEPENDS:${PN} += "\
      python3-sqlparse \
-@@ -10,5 +10,5 @@ RDEPENDS:${PN} += "\
- 
- # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
- # default. To build the 4.x branch, 
--# PREFERRED_VERSION_python3-django = "4.2.11" can be added to local.conf
-+# PREFERRED_VERSION_python3-django = "4.2.16" can be added to local.conf
- DEFAULT_PREFERENCE = "-1"
 -- 
 2.45.2
 
