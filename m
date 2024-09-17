@@ -1,144 +1,93 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DDD67C3ABDB
-	for <webhook@archiver.kernel.org>; Tue, 17 Sep 2024 06:04:46 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web10.14876.1726553078896872214
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B947CC35FF8
+	for <webhook@archiver.kernel.org>; Tue, 17 Sep 2024 08:50:57 +0000 (UTC)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+ by mx.groups.io with SMTP id smtpd.web10.16585.1726563054669222134
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Sep 2024 23:04:38 -0700
+ Tue, 17 Sep 2024 01:50:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=g5caFaxL;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-205722ba00cso43508355ad.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Sep 2024 23:04:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hl0Zk6Ue;
+ spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-a8d0d82e76aso894293866b.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Sep 2024 01:50:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1726553078; x=1727157878; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=oBZRX9lNFNCqmA291lcwUinSEtE+5VptrzUKN26H/n0=;
-        b=g5caFaxL7Cty/2K/vPeu1x/fTSGm6wp3tSMeBvTOPG+FlHyJfMjH2xp0BntW9t/i7S
-         nN5fVdFPa6mrY+ea/q3JD+78R5sGdOQeYoOC9BzGaGFQibHrmd5MuOwRNGomY+985CK8
-         3TkdOUPnXbZLTLQPlnouPyQk+LmWxIZs31k3j/2DsuHb/SGM5cFBdHOZPMhBile5vN5L
-         FrqjU3N/DyWVN+La0Inr2ocDd7JYElCzm5cXaYfonOkS3FXT9Bw+8WSGAB2fpatl0waE
-         L7PkeJfugD43yQfrv7iWwqa/XOA/6wgjX+CtT3kLlSpyxwMBVAfCE5dS5pgsLr732G6A
-         wEwA==
+        d=gmail.com; s=20230601; t=1726563052; x=1727167852; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=kCEXmJvJ9txqUUepWrArQ9CuC9Mxc4zKfem7WZicgWw=;
+        b=hl0Zk6UeBCFtN7+37i8jbXT0kerL8zoTuaYRAoC/lwEYdPXZIu+HiHUXvXMYljjVVU
+         ZXWsPSjryTjqoZ9kda/KKazFhHaUjpp8SDZ+KJ2II4Tqbi9SpSM+kLGF0CP1NEmaJlZ2
+         C16EOcfxtxu5NP76zorAKyq1zMZ0E9LZ8wT+tXmi3HDaoXs+m1Oda4Z8hsBmqa3E0B02
+         zfYCJktEKIgBZxyH92dkomkKybhPNa4pNtMZ6Di65A10n86wzmR+dtTbBdUyL7kwZdrE
+         nh9qAXacs6ucljAfPTBxKM2kyK2VJRq4Wl7mCOfOdNDn/gczKQUyUUVgROSCzjFLiRH9
+         qzVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726553078; x=1727157878;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=oBZRX9lNFNCqmA291lcwUinSEtE+5VptrzUKN26H/n0=;
-        b=a3zmUijqLEJGL50tpW9ykDAcK6x47fF66FmnWts1KE89c8ins7pQsHZF/m5U7VkSWC
-         Gb6cCC4I1bE0ucOaGFsIFLwmz8OW6cM4ASUe2u7BWlzSXXPpgZVZJ+8O3EOD5rUSYyQm
-         KZwaZSXDX5cKC2roksLBk00UoHMwc5XbxLqdOYbiNM17mK4vdiTa28qhQ7ci3KTv9PR/
-         79avDTw7YTjeqsEf63TqJwOdwFyDXDTAnQSZB+jsfcnzsYfRbP4sudlq6943QwySDvQM
-         FmBTQLX4hH/Dswgej+H409MXMmzPes/Kk/m8uwXZh/GdJktYqHF/GLDbxO75drV+f64B
-         1tUQ==
-X-Gm-Message-State: AOJu0YwBxPzBGDQYvsxChpHp019nD0y9utA8TgHhi0NDXz/y/TxvtgLh
-	dVxP/McZYEkPsCn0qwIz4xoSHPtQkWB+5bR8u2ThSwCvSOrjyl776sUKggQt
-X-Google-Smtp-Source: AGHT+IGJH39/hM7ffKYfoB0aJvlMq4txxfQmwbPseWlGykqt+eKZmrJEIOKgm7Aj39Nwh3YdVW5kwg==
-X-Received: by 2002:a17:902:ce8f:b0:205:5f35:80b6 with SMTP id d9443c01a7336-2076e4f6247mr259086885ad.61.1726553078083;
-        Mon, 16 Sep 2024 23:04:38 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::7379])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2079475df17sm44294645ad.298.2024.09.16.23.04.37
+        d=1e100.net; s=20230601; t=1726563052; x=1727167852;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=kCEXmJvJ9txqUUepWrArQ9CuC9Mxc4zKfem7WZicgWw=;
+        b=YqqP5alnBB5jd4BfYUXpsZ90H4/qsvLz2qf5N3DEcgydfSaIF+FOWMXg13cS2Rvyqd
+         pe921z2TKrSmNuuR3qVI5cbfXbSb+Bc85JKVvra5DEIt3BrKYe8w8HOpOLeGeNfepzDJ
+         KS2Nz2B5NnP984xL8shIfwoo/m1KLMTm8W0+FiegYdN15CAmTw1cDk7mtxNQdcStF+nI
+         gSyscqvl3HQ09tCQ6zj6s4v8t8NJxSecS0dsgpXG6PH9h0WSdBIV/amPuhcFvoHczZ2k
+         AVFOUycsXT9blEy+t9vyROTSCFc3ndoWM8Natv+hq5H4BRSp71VxwQOlNgxg/Vxl0qKK
+         eoUw==
+X-Gm-Message-State: AOJu0YxCBDrER3kmhG9GVZ9KdDvDnRPr1I4S0zwObJ/o9mMp6DRcLegw
+	Lw8w/jzmCrjR1TrJKhwVJGnNkPhlKxOyT4sSFk9np0KReBXyzmlHKXbQUtU7
+X-Google-Smtp-Source: AGHT+IGRa0rhXMurpXD7iUTORllFpAby1U0fQFl0TTDZ27YS7aPi+O9uGIDbejFtqjK8LFiA05XsEA==
+X-Received: by 2002:a17:906:f5a7:b0:a86:a56a:3596 with SMTP id a640c23a62f3a-a9029678cbemr2047365166b.60.1726563052017;
+        Tue, 17 Sep 2024 01:50:52 -0700 (PDT)
+Received: from localhost.localdomain ([176.33.71.248])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a90610f451csm417842466b.58.2024.09.17.01.50.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Sep 2024 23:04:37 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Tue, 17 Sep 2024 01:50:51 -0700 (PDT)
+From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-webserver][PATCH 12/12] netdata: Add checks for 64-bit atomic builtins
-Date: Mon, 16 Sep 2024 23:04:24 -0700
-Message-ID: <20240917060424.1692067-12-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.46.1
-In-Reply-To: <20240917060424.1692067-1-raj.khem@gmail.com>
-References: <20240917060424.1692067-1-raj.khem@gmail.com>
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-python][PATCH] python3-msgpack: upgrade 1.0.8 -> 1.1.0
+Date: Tue, 17 Sep 2024 11:50:43 +0300
+Message-Id: <20240917085043.405793-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Sep 2024 06:04:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112338
+ <openembedded-devel@lists.openembedded.org>; Tue, 17 Sep 2024 08:50:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112339
 
-This helps in passing correct flags to h2o module compilation
+Full Changelog: https://github.com/msgpack/msgpack-python/compare/v1.0.8...v1.1.0
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- ...-Add-check-for-64bit-builtin-atomics.patch | 51 +++++++++++++++++++
- .../netdata/netdata_1.47.1.bb                 |  1 +
- 2 files changed, 52 insertions(+)
- create mode 100644 meta-webserver/recipes-webadmin/netdata/netdata/0001-cmake-Add-check-for-64bit-builtin-atomics.patch
+ .../{python3-msgpack_1.0.8.bb => python3-msgpack_1.1.0.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-msgpack_1.0.8.bb => python3-msgpack_1.1.0.bb} (76%)
 
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata/0001-cmake-Add-check-for-64bit-builtin-atomics.patch b/meta-webserver/recipes-webadmin/netdata/netdata/0001-cmake-Add-check-for-64bit-builtin-atomics.patch
-new file mode 100644
-index 0000000000..d8ad69ceca
---- /dev/null
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata/0001-cmake-Add-check-for-64bit-builtin-atomics.patch
-@@ -0,0 +1,51 @@
-+From 1e8fbb6da4e5ee44fe24c078aae1930d759f0ba3 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 17 Sep 2024 05:29:13 +0000
-+Subject: [PATCH] cmake: Add check for 64bit builtin atomics
-+
-+Compilers for some architectures e.g. RISCV32 do not have 64bit atomics
-+therefore, its important to deduce that and use it to pass right flags to
-+compiler to use them, e.g. h2o module
-+
-+Fixes
-+nection.c.o): in function `h2o_create_connection':
-+| /usr/src/debug/netdata/1.47.1/src/web/server/h2o/libh2o/include/h2o.h:1917:(.text.create_conn+0x5e): undefined reference to `__sync_add_and_fetch_8'
-+| collect2: error: ld returned 1 exit status
-+
-+Upstream-Status: Submitted [https://github.com/netdata/netdata/pull/18565]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ CMakeLists.txt | 13 +++++++++++++
-+ 1 file changed, 13 insertions(+)
-+
-+Index: netdata-v1.47.1/CMakeLists.txt
-+===================================================================
-+--- netdata-v1.47.1.orig/CMakeLists.txt
-++++ netdata-v1.47.1/CMakeLists.txt
-+@@ -448,6 +448,15 @@ int main() {
-+ }
-+ " HAVE_BUILTIN_ATOMICS)
-+ 
-++check_cxx_source_compiles("
-++#include <stdint.h>
-++int main(void) {
-++        uint64_t a;
-++        __sync_add_and_fetch(&a, 1);
-++        return 0;
-++}
-++" ARCH_SUPPORTS_64BIT_ATOMICS)
-++
-+ check_c_source_compiles("
-+ void my_printf(char const *s, ...) __attribute__((format(gnu_printf, 1, 2)));
-+ int main() { return 0; }
-+@@ -523,6 +532,10 @@ if(OS_FREEBSD OR OS_MACOS)
-+         set(HAVE_BUILTIN_ATOMICS True)
-+ endif()
-+ 
-++if (ENABLE_H2O AND NOT ARCH_SUPPORTS_64BIT_ATOMICS)
-++       set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DH2O_NO_64BIT_ATOMICS")
-++endif (NOT ARCH_SUPPORTS_64BIT_ATOMICS)
-++
-+ # openssl/crypto
-+ set(ENABLE_OPENSSL True)
-+ pkg_check_modules(TLS IMPORTED_TARGET openssl)
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_1.47.1.bb b/meta-webserver/recipes-webadmin/netdata/netdata_1.47.1.bb
-index e134c06b06..5b38d401cd 100644
---- a/meta-webserver/recipes-webadmin/netdata/netdata_1.47.1.bb
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata_1.47.1.bb
-@@ -9,6 +9,7 @@ DEPENDS += "json-c libuv libyaml util-linux zlib lz4"
+diff --git a/meta-python/recipes-devtools/python/python3-msgpack_1.0.8.bb b/meta-python/recipes-devtools/python/python3-msgpack_1.1.0.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-msgpack_1.0.8.bb
+rename to meta-python/recipes-devtools/python/python3-msgpack_1.1.0.bb
+index a000737f4..eb04dc2e0 100644
+--- a/meta-python/recipes-devtools/python/python3-msgpack_1.0.8.bb
++++ b/meta-python/recipes-devtools/python/python3-msgpack_1.1.0.bb
+@@ -2,9 +2,9 @@ SUMMARY = "MessagePack (de)serializer"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=cd9523181d9d4fbf7ffca52eaa2a5751"
  
- SRC_URI = "\
-     https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz \
-+    file://0001-cmake-Add-check-for-64bit-builtin-atomics.patch \
-     file://netdata.conf \
-     file://netdata.service \
-     file://netdata-volatiles.conf \
+-inherit pypi setuptools3 ptest
++inherit pypi python_setuptools_build_meta ptest
+ 
+-SRC_URI[sha256sum] = "95c02b0e27e706e48d0e5426d1710ca78e0f0628d6e89d5b5a5b91a5f12274f3"
++SRC_URI[sha256sum] = "dd432ccc2c72b914e4cb77afce64aab761c1137cc698be3984eee260bcb2896e"
+ 
+ RDEPENDS:${PN}:class-target += "\
+     python3-io \
+-- 
+2.25.1
+
 
