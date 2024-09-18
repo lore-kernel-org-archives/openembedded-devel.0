@@ -1,100 +1,133 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A58C2CAC5AC
-	for <webhook@archiver.kernel.org>; Tue, 17 Sep 2024 22:32:33 +0000 (UTC)
-Received: from mta-65-228.siemens.flowmailer.net (mta-65-228.siemens.flowmailer.net [185.136.65.228])
- by mx.groups.io with SMTP id smtpd.web10.2719.1726612343965877615
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F390CAC5B8
+	for <webhook@archiver.kernel.org>; Wed, 18 Sep 2024 04:44:05 +0000 (UTC)
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web11.8427.1726634638027840896
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Sep 2024 15:32:24 -0700
+ Tue, 17 Sep 2024 21:43:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=VQLEWHSw;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.228, mailfrom: fm-256628-202409172232214d8abeb8d3314a9feb-4geuat@rts-flowmailer.siemens.com)
-Received: by mta-65-228.siemens.flowmailer.net with ESMTPSA id 202409172232214d8abeb8d3314a9feb
-        for <openembedded-devel@lists.openembedded.org>;
-        Wed, 18 Sep 2024 00:32:22 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=26gDBpJUvIICak4ezOGdjzEatTSdNuzoAkUxw0gGN0Y=;
- b=VQLEWHSwbBXH+VyTHCgV4oUsXqf8UEnWa42EzQecv2huWk25RtshSjKikPA12WMMy2HdCS
- Zuc6Nh5dlG1dPrhHhTIoEJdc0as8MK2ZVfDn0Eyqz6zD1gpzy4YiDTgi9nM9hgUaANx79HXG
- faM/xr91nQUVs0+JvG05in07GraUwIxVMbKxrt0RikCGzCLvOxycksoarP4433EtE3c4HS8J
- F3F0YaWWnSSSagDZKl8VjdejGsOpSiOH4cO37l5W9AZ5QCrrRyBsq0WDoIL6whpg0GVlQ/kQ
- qtwYlTbmsLOcdOUniKRSQp0rbWo2FU2+9fH0Mb8rEDRmzjZ2bNCmxIEQ==;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TLYSO3hs;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-2d889207d1aso4384203a91.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Sep 2024 21:43:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1726634637; x=1727239437; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=0/qmGCjxHBQhxuzRw/HK2cpc5aIsY5RZ9SLHjjiIHEo=;
+        b=TLYSO3hsUd6UlXLF26x0n5aujORlhuhfZbaTy8cfMs536WGMaf6qMSUJudPc5/j034
+         Qan81S4KSmaB5UpL/w7mZcqLClNsjaboRgqy5XQaItibKpWQ4IPf1AZaU+AFYeDePR+A
+         WtIvaNy+nOIrz96LuPPlftLtcmm28sIpr3fQshsk0ajr39osXNHPrgqn/gQulhbx5jtt
+         kw8OpxjJaAxgFqHTHq/SMbld1Piw/z9ZMKJeDg3K6uUC9/I6QaTk3nPKaOeOVkBKXJoU
+         gWBiX5SQHfazPNxn6FRMP610mOCAZdCaw1CnkLzL+WenHUDB6V/2viwtm1TFWb8fEIDv
+         E0PQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1726634637; x=1727239437;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=0/qmGCjxHBQhxuzRw/HK2cpc5aIsY5RZ9SLHjjiIHEo=;
+        b=fmoUs9Z0QkrZpQjUA/zQf9fRU78wNWkbUQEe+G1ndaXbdYSa9/VZGzSaDiaMQeRt0O
+         lmCiaWs1iAQ7SdkwFzkOKLzlPVrkfOulWTW6QH7Q7+jda9tUr0I4FG8X3Q9JuYDtnISq
+         YrZfgGnaPq2BiBmx9HSJYa3X5OzSw72vRQ8ckpzK8isA+L9uDz1Q92yqg680qbynetgb
+         nviiT38waiYTmB2MjYlekHbm7968mXUBVK9yyJduEfh7Yz1uhoF/QKZr3yA/7PVUmAGv
+         YHzvVTkM+P1fdIP7lneyiywnfqyRyIqgz1SnvVPxND8XkEL9WNwTZ+rZ+LNklnacWbBY
+         9n5g==
+X-Gm-Message-State: AOJu0Ywqggah1ZwUBhVKBuXd/sOKmmLqlUn8cUzIFnwp54HUAC+lygtl
+	q1WIC2Oh0FY6LdPiIAoqrpc5vhS0DZIbpX2yw9o8bVzNHTC4WxZc/fmDBlZK
+X-Google-Smtp-Source: AGHT+IH4UvAJ5spjX1YM9NYi8/fIi8D/8SoJXmAvBX5KNXt/u5zCepZDUE/FNlQxJ2v9/wA8HqYiZw==
+X-Received: by 2002:a17:90a:62c7:b0:2da:936c:e5ad with SMTP id 98e67ed59e1d1-2dba00827a3mr25656266a91.33.1726634637052;
+        Tue, 17 Sep 2024 21:43:57 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::c3c8])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2dd60919b66sm422086a91.45.2024.09.17.21.43.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 17 Sep 2024 21:43:56 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH 2/2] nginx: Upgrade mainline 1.25.3 -> 1.27.1
-Date: Wed, 18 Sep 2024 00:30:59 +0200
-Message-Id: <20240917223059.1570530-2-peter.marko@siemens.com>
-In-Reply-To: <20240917223059.1570530-1-peter.marko@siemens.com>
-References: <20240917223059.1570530-1-peter.marko@siemens.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] kernel-selftest: Fix build on 32bit arches with 64bit time_t
+Date: Tue, 17 Sep 2024 21:43:54 -0700
+Message-ID: <20240918044354.779502-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.46.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Sep 2024 22:32:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112354
+ <openembedded-devel@lists.openembedded.org>; Wed, 18 Sep 2024 04:44:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112355
 
-From: Peter Marko <peter.marko@siemens.com>
+Fix warning where S is expected to exist before do_configure
 
-Solves:
-* CVE-2024-7347
-* CVE-2024-24989
-* CVE-2024-24990
-* CVE-2024-31079
-* CVE-2024-32760
-* CVE-2024-34161
-* CVE-2024-35200
-
-License-Update: copyright year refreshed
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-webserver/recipes-httpd/nginx/nginx_1.25.3.bb | 10 ----------
- meta-webserver/recipes-httpd/nginx/nginx_1.27.1.bb | 10 ++++++++++
- 2 files changed, 10 insertions(+), 10 deletions(-)
- delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.25.3.bb
- create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.27.1.bb
+ .../kernel-selftest/kernel-selftest.bb        |  3 ++
+ ...-Fix-clock_adjtime-for-newer-32-bit-.patch | 34 +++++++++++++++++++
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-selftests-timers-Fix-clock_adjtime-for-newer-32-bit-.patch
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.25.3.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.25.3.bb
-deleted file mode 100644
-index d0371dd3cc..0000000000
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.25.3.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require nginx.inc
--
--# 1.24.x branch is the current stable branch, the recommended default
--# 1.25.x is the current mainline branches containing all new features
--DEFAULT_PREFERENCE = "-1"
--
--LIC_FILES_CHKSUM = "file://LICENSE;md5=79ad2eb837299421c4435dedc8897b3d"
--
--SRC_URI[sha256sum] = "64c5b975ca287939e828303fa857d22f142b251f17808dfe41733512d9cded86"
--
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.27.1.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.27.1.bb
+diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+index 3f57ef3bfd..889fe3e22d 100644
+--- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
++++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+@@ -12,6 +12,7 @@ SRC_URI:append:libc-musl = "\
+                       "
+ SRC_URI += "file://run-ptest \
+             file://COPYING \
++            file://0001-selftests-timers-Fix-clock_adjtime-for-newer-32-bit-.patch \
+             "
+ 
+ # now we just test bpf and vm
+@@ -149,6 +150,8 @@ remove_unrelated() {
+     fi
+ }
+ 
++do_configure[dirs] = "${S}"
++
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ INHIBIT_PACKAGE_DEBUG_SPLIT="1"
+diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-selftests-timers-Fix-clock_adjtime-for-newer-32-bit-.patch b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-selftests-timers-Fix-clock_adjtime-for-newer-32-bit-.patch
 new file mode 100644
-index 0000000000..5927ecab02
+index 0000000000..bf5525c361
 --- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.27.1.bb
-@@ -0,0 +1,10 @@
-+require nginx.inc
++++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-selftests-timers-Fix-clock_adjtime-for-newer-32-bit-.patch
+@@ -0,0 +1,34 @@
++From 34021e84d03e2becb88e6c28e8e4867e82a81da5 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 17 Sep 2024 17:40:03 -0700
++Subject: [PATCH] selftests: timers: Fix clock_adjtime for newer 32-bit arches
 +
-+# 1.26.x branch is the current stable branch, the recommended default
-+# 1.27.x is the current mainline branches containing all new features
-+DEFAULT_PREFERENCE = "-1"
++Newer 32-bit architectures e.g. riscv32 are using 64-bit time_t
++from get go, they have not wired __NR_clock_adjtime at all
++valid-adjtimex testcase fails to compile on such architectures.
++if this condition is found then use 64-bit adjtime syscall
 +
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=a6547d7e5628787ee2a9c5a3480eb628"
++Upstream-Status: Submitted [https://patchwork.kernel.org/project/linux-kselftest/patch/20240918004731.3295870-1-raj.khem@gmail.com/]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Cc: John Stultz <jstultz@google.com>
++Cc: Shuah Khan <shuah@kernel.org>
++---
++ tools/testing/selftests/timers/valid-adjtimex.c | 4 ++++
++ 1 file changed, 4 insertions(+)
 +
-+SRC_URI[sha256sum] = "bd7ba68a6ce1ea3768b771c7e2ab4955a59fb1b1ae8d554fedb6c2304104bdfc"
-+
--- 
-2.30.2
-
++diff --git a/tools/testing/selftests/timers/valid-adjtimex.c b/tools/testing/selftests/timers/valid-adjtimex.c
++index d500884801d8..ff4ff8b1d127 100644
++--- a/tools/testing/selftests/timers/valid-adjtimex.c
+++++ b/tools/testing/selftests/timers/valid-adjtimex.c
++@@ -39,7 +39,11 @@
++ #include <sys/syscall.h>
++ int clock_adjtime(clockid_t id, struct timex *tx)
++ {
+++#if !defined(__NR_clock_adjtime) && defined(__NR_clock_adjtime64)
+++	return syscall(__NR_clock_adjtime64, id, tx);
+++#else
++ 	return syscall(__NR_clock_adjtime, id, tx);
+++#endif
++ }
++ 
++ 
 
