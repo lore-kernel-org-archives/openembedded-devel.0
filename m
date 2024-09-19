@@ -2,53 +2,53 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 26E29CDD57B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 38953CCD186
 	for <webhook@archiver.kernel.org>; Thu, 19 Sep 2024 03:32:39 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.web11.11425.1726716751774462316
+Received: from esa11.hc1455-7.c3s2.iphmx.com (esa11.hc1455-7.c3s2.iphmx.com [207.54.90.137])
+ by mx.groups.io with SMTP id smtpd.web10.11273.1726716752775097297
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Sep 2024 20:32:36 -0700
+ Wed, 18 Sep 2024 20:32:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=s81nXIep;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=KVfJMfjh;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.137, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1726716755; x=1758252755;
+  t=1726716753; x=1758252753;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=vVEtgX3e+rosvMXqJ/LrxLxOwJsQCiKCk4SLmrxwDkM=;
-  b=s81nXIepxb/EEmzR7LciK1W4BMcvtrsiE+7+kKEvJSN6boCmbLUGJC72
-   17lv4jhcMpcn9hHpnUCHYeJ6AXBnzjT/k/UdFZbsTtkLMIuTHRkKNsj+n
-   FUaLSPL879XrOTEn+hjAd0wMsM9wVwy4xtUyPhFGflACZLp2m/RTCR73Q
-   E+ZkYx1PnDK84cYypL/TnMiI9a7nlLUmStRmMaHpi//XV2ivsT8dTt2JR
-   hWiR7f894AhnWNi9xG2ayufE3eZnn9VJ2v6HVwVYRYw4RhK4f2Ladnv2G
-   BaqTms2csCzqxFdKIEPu9T2G0+B7sSqZGeqBfdaCOvXQP3j/r/Z4/0J3P
-   A==;
-X-CSE-ConnectionGUID: jPuiBeyWQ1i/vmucqLsnkQ==
-X-CSE-MsgGUID: jcgVmgR0Q/iV7mzlAV6U3Q==
-X-IronPort-AV: E=McAfee;i="6700,10204,11199"; a="174296131"
+  bh=jOGYvXn7wJLulx/Ev4pPQ3TrZr+Pi8/gHrukdx3728o=;
+  b=KVfJMfjhk1iTKx+XAm6G+j6bL1zDDuUUduJWqgf+82tZI3+vjuWVr+O3
+   gzUxtI4xWb8hT2pnXmvLNEh70RURwpp7+zM4ElByPkl0jltPq71+pamo8
+   RI7o5DcG+PxMGouqfVLQp1+zMM0Sbxh04yLzl0soUUKK0znW12or6HQpu
+   hhr9DOi9FzKe09CykX39z15LMVJQKx2pgDP9edk/gJLsd9w6e+TIJ0WBY
+   q4WSdJbAPprbHmYebjD/tJY9upy9flSvLrga4/XrEkr8uWkACcI+wyApD
+   RZzFqLmgAMAJMSuQOwTbcQDQOwjTfOW3Mil51eLv9JZJlKs+A4Q6fTKSD
+   Q==;
+X-CSE-ConnectionGUID: s6+LQf1rRWGeIKRazWZjFQ==
+X-CSE-MsgGUID: fe1/ALapTlGlyxKw7nco3Q==
+X-IronPort-AV: E=McAfee;i="6700,10204,11199"; a="153578161"
 X-IronPort-AV: E=Sophos;i="6.10,240,1719846000"; 
-   d="scan'208";a="174296131"
-Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Sep 2024 12:32:34 +0900
+   d="scan'208";a="153578161"
+Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
+  by esa11.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Sep 2024 12:32:30 +0900
 Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 6155ADB3C9
-	for <openembedded-devel@lists.openembedded.org>; Thu, 19 Sep 2024 12:32:32 +0900 (JST)
+	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 4205BC3F94
+	for <openembedded-devel@lists.openembedded.org>; Thu, 19 Sep 2024 12:32:28 +0900 (JST)
 Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 79DC9D5104
-	for <openembedded-devel@lists.openembedded.org>; Thu, 19 Sep 2024 12:32:31 +0900 (JST)
+	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 731FAD5101
+	for <openembedded-devel@lists.openembedded.org>; Thu, 19 Sep 2024 12:32:27 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id EE7AE228921
-	for <openembedded-devel@lists.openembedded.org>; Thu, 19 Sep 2024 12:32:30 +0900 (JST)
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id AD76A21FC6A
+	for <openembedded-devel@lists.openembedded.org>; Thu, 19 Sep 2024 12:32:26 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 98F811A000A;
-	Thu, 19 Sep 2024 11:32:30 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 549C91A000A;
+	Thu, 19 Sep 2024 11:32:26 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 10/28] python3-filelock: upgrade 3.16.0 -> 3.16.1
-Date: Thu, 19 Sep 2024 11:31:55 +0800
-Message-Id: <1726716733-14548-10-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH 04/28] gnome-chess: upgrade 46.0 -> 47.0
+Date: Thu, 19 Sep 2024 11:31:49 +0800
+Message-Id: <1726716733-14548-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1726716733-14548-1-git-send-email-wangmy@fujitsu.com>
 References: <1726716733-14548-1-git-send-email-wangmy@fujitsu.com>
@@ -56,46 +56,60 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28672.004
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28672.004
-X-TMASE-Result: 10-1.473700-10.000000
-X-TMASE-MatchedRID: 6e3s/u+cBDSjz0nOeth/yUIIxwDaU5mrVBDQSDMig9EH8UzOewTxw+79
-	DJRUi35pTQ0JkPG287/mn3xyPJAJorNUVnqixiMOMKPrF7dK57MQhNjZQYyI3AdVRmAIzhtAo8W
-	MkQWv6iV3LAytsQR4e42j49Ftap9ExlblqLlYqXJb1aXG9drHOIDeTpC9EQGUyBJXyOI7RuZ5Th
-	yd0SXLn9ZH1z57u9dZwZSyl908KMSJtjzXFIx+KwCDHr8VE+TyFOwMvVsf0Lr+v9v52ZIoWjoAf
-	389xF3XFSk9HhUZnw7OGIWnws4LoyHWPYzouJUy
+X-TMASE-Result: 10-6.866800-10.000000
+X-TMASE-MatchedRID: QR1SVCCbVGSjz0nOeth/yUIIxwDaU5mrYdBG+bhhiNROKZLuSzNY+5+P
+	zso+yUXY82jJesNrruFAfBvgYUYxapWy30f5VTURSCtgxgcsrMqDlzqjqTcX3pTx+2LIqNmt0yO
+	PBv1B9XYILxoCYZ47qVXTT7CHDFVDL/tBTZzO5Q1oMLOoNHsM9vWr7HvOSElaDx4wSHMr22riX9
+	nrUjM1ufGDBiEemao1BnXnPNo172BneCYBwlNklrnHu4BcYSmtfS0Ip2eEHnwj/1Rbkzl1E2nuo
+	SGaY+DLjoczmuoPCq1GNLJ2uwjQ3SONCZHEYVEkXg5r2O8GEkJCZGAl7eHSbfspmOcE2uXnXGdm
+	wZ/YzobpzTFzjpuHhA6JXIN8RBk2C2xuPqOT6El+3BndfXUhXQ==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 19 Sep 2024 03:32:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112372
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112365
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
- CI improvements
+===========
+- Fix appdata screenshot URL
+- Updated translations
+- Use modern libadwaita widgetry
+- Fix incorrect shortcuts on shortcuts help dialog
+- Change First/Last history shortcuts to Up/Down key
+- Miscellaneous code modernization and improvements
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-filelock_3.16.0.bb => python3-filelock_3.16.1.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-filelock_3.16.0.bb => python3-filelock_3.16.1.bb} (87%)
+ .../gnome-chess/{gnome-chess_46.0.bb => gnome-chess_47.0.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-gnome/recipes-gnome/gnome-chess/{gnome-chess_46.0.bb => gnome-chess_47.0.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-filelock_3.16.0.bb b/meta-python/recipes-devtools/python/python3-filelock_3.16.1.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-filelock_3.16.0.bb
-rename to meta-python/recipes-devtools/python/python3-filelock_3.16.1.bb
-index 0aac54a15..abafa1245 100644
---- a/meta-python/recipes-devtools/python/python3-filelock_3.16.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-filelock_3.16.1.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "https://py-filelock.readthedocs.io/"
- LICENSE = "Unlicense"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=911690f51af322440237a253d695d19f"
+diff --git a/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_46.0.bb b/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_47.0.bb
+similarity index 92%
+rename from meta-gnome/recipes-gnome/gnome-chess/gnome-chess_46.0.bb
+rename to meta-gnome/recipes-gnome/gnome-chess/gnome-chess_47.0.bb
+index bb53b58df..e3365f618 100644
+--- a/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_46.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_47.0.bb
+@@ -22,13 +22,13 @@ DEPENDS = " \
  
--SRC_URI[sha256sum] = "81de9eb8453c769b63369f87f11131a7ab04e367f8d97ad39dc230daa07e3bec"
-+SRC_URI[sha256sum] = "c249fbfcd5db47e5e2d6d62198e565475ee65e4831e2561c8e313fa7eb961435"
+ RRECOMMENDS:${PN}  = "gnuchess"
  
- BBCLASSEXTEND = "native nativesdk"
- inherit pypi python_hatchling
+-SRC_URI = "git://github.com/GNOME/gnome-chess.git;protocol=https;branch=master"
++SRC_URI = "git://github.com/GNOME/gnome-chess.git;protocol=https;branch=main"
+ 
+ inherit meson pkgconfig gobject-introspection gtk-icon-cache vala features_check mime-xdg gsettings
+ 
+ GIR_MESON_OPTION = ""
+ 
+ S = "${WORKDIR}/git"
+-SRCREV = "c3625ee59ab3acfd7566ef04300b15ddbadaaac3"
++SRCREV = "91476257c2404945bfa30238c38391343bf4737b"
+ 
+ FILES:${PN} += "${datadir}"
 -- 
 2.34.1
 
