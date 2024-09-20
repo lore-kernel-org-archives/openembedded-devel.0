@@ -1,102 +1,162 @@
-Return-Path: <quic_ptak@quicinc.com>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B810CF58C6
-	for <webhook@archiver.kernel.org>; Fri, 20 Sep 2024 04:00:57 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.web11.10335.1726804853299271936
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EA7FCF58CD
+	for <webhook@archiver.kernel.org>; Fri, 20 Sep 2024 05:38:37 +0000 (UTC)
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.web11.11426.1726810714753683909
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Sep 2024 21:00:53 -0700
+ Thu, 19 Sep 2024 22:38:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@quicinc.com header.s=qcppdkim1 header.b=gpiTM0B9;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qualcomm.com, ip: 205.220.168.131, mailfrom: ptak@qualcomm.com)
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 48JJ3v0S011589
-	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Sep 2024 04:00:52 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=ThXzMHFD7ZlWEESXMIFv5AQDSSpNelbweCk
-	5PuMZ4ms=; b=gpiTM0B9rhgxvNooehGU2JCoSLnh3im2lIe37MFA0bL1SzLUNwQ
-	BYIu5/hSHIuhkj4m6JYNxADVXvTTtl5CSCuQpyOZ1veTfjULqveVo+MRVH/ST1w3
-	KiS+FJI+xmKXLkUW6eBuywXMfXFbKYuB9kAW6RGa6wUhy0oLQyLU3TzUMZpj0QFg
-	kT6nHaURaYlc3CBtNAZHEYuNYfMGRtoqyttdLvbkOeV7lmQCKXS0fnVW/CbxuiJy
-	pRcJHCDyu/WGJ4lcdXCSEHY39gQzyokdX2X50CrJglfIIo291q9T4tz4G2nJyh7j
-	WH2JJEDw0DLkm9WLP4a10oQe7/b8yvAG09g==
-Received: from apblrppmta02.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 41n4gd7h11-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Sep 2024 04:00:52 +0000 (GMT)
-Received: from pps.filterd (APBLRPPMTA02.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA02.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTP id 48K3xsSm014154
-	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Sep 2024 04:00:48 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTPS id 41n3jmptt0-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Sep 2024 04:00:48 +0000
-Received: from APBLRPPMTA02.qualcomm.com (APBLRPPMTA02.qualcomm.com [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 48K40lMv015205
-	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Sep 2024 04:00:47 GMT
-Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-ptak-hyd.qualcomm.com [10.213.96.58])
-	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTPS id 48K40lbb015204
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 20 Sep 2024 04:00:47 +0000
-Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 2387883)
-	id BC57058A; Fri, 20 Sep 2024 09:30:46 +0530 (+0530)
-From: ptak <quic_ptak@quicinc.com>
+ dkim=pass header.i=@mvista.com header.s=google header.b=OSovLLYM;
+ spf=pass (domain: mvista.com, ip: 209.85.216.51, mailfrom: hprajapati@mvista.com)
+Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-2d8abac30ddso1497055a91.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Sep 2024 22:38:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1726810714; x=1727415514; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=0Qusd3tFiJzwdO+SYllsuzu0/7/s/JfAMQm0wMO4Wyg=;
+        b=OSovLLYMeCEBTq8v917IWdNsU0bcLs7S4AP55oZbpCTc+7pbq4UQIAJzOJGYWxwNJS
+         VzKrvML6WkJcUYtLo/vYHR/BcUoblhhjFJ7dlFQWlT9cro4f8CGun0kX9gstGiIIj6ql
+         YPYOx5Sx7XR4PQiQUL9Pvs9zwpVNHsKar5bAQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1726810714; x=1727415514;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=0Qusd3tFiJzwdO+SYllsuzu0/7/s/JfAMQm0wMO4Wyg=;
+        b=Gp1s1+Jt2sjv7u13AXFEyWJ8LxTRRKqPHQ9e0EjB8wfDaNiYnB0G/QxoahUl2E/0DH
+         be5eS8xi4yL32qdUGj4Lj7jbgcHAImz7bISkDbthkjBnTAD93R1t6RFx7AdUhhRo7Avb
+         I14AOrZco9AgfMQvEOB+nF4b+BBzFbgHDw8lAobb92fKAaOvy5c1VqPkix0DIbRKMN5S
+         Yg45Ww+AhOmO/eNZCOulqKSosmRrgzWqN+9kgVeBIAINzldWPubD2CR0/B5mosEgf20Y
+         Gt/oY0ER3KAk+2WrFcIt37fdiPpgep56XKDHJ6nY4AlGXKrWFa/D2rFP5aO5VI1vcwKt
+         ojAg==
+X-Gm-Message-State: AOJu0YyXXCDPDzbGTDdrPXa5JLOaffehMfn8xs+8sHF9BQzqJzlXhlUI
+	oSn7oCDz2aPz1D43LrIBS/BpYI0Mz+8JqmuSqLAD6hNTkb/zoCB8mturMjeyw2im5eC6N7lvxzR
+	V
+X-Google-Smtp-Source: AGHT+IF9aF12CylvLew1VPGqXQE8JbFcjzt+3bzrnMTwWHUr9VXpFnI2hzOwE34JMUQOE4juJMJvnA==
+X-Received: by 2002:a17:90b:4c05:b0:2d8:8681:44ba with SMTP id 98e67ed59e1d1-2dd7f3e4699mr2354637a91.15.1726810713877;
+        Thu, 19 Sep 2024 22:38:33 -0700 (PDT)
+Received: from MVIN00016.mvista.com ([103.250.136.150])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2dd7f95b31fsm889999a91.51.2024.09.19.22.38.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 19 Sep 2024 22:38:33 -0700 (PDT)
+From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: quic_sssanjee@quicinc.com, quic_vkaruchu@quicinc.com,
-        ptak <quic_ptak@quicinc.com>
-Subject: [meta-oe][PATCH] opencv: upgrade 4.9.0 -> 4.10.0
-Date: Fri, 20 Sep 2024 09:30:41 +0530
-Message-Id: <20240920040041.1153435-1-quic_ptak@quicinc.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-networking][scarthgap][PATCH] tgt: fix CVE-2024-45751
+Date: Fri, 20 Sep 2024 11:08:25 +0530
+Message-Id: <20240920053825.154315-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-ORIG-GUID: rr4KYEkN5FG3Y-HFlXQcWr4rJEMTuM0e
-X-Proofpoint-GUID: rr4KYEkN5FG3Y-HFlXQcWr4rJEMTuM0e
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 suspectscore=0
- bulkscore=0 clxscore=1011 spamscore=0 adultscore=0 lowpriorityscore=0
- mlxlogscore=784 impostorscore=0 mlxscore=0 priorityscore=1501 phishscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2408220000
- definitions=main-2409200026
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 20 Sep 2024 04:00:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112391
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Sep 2024 05:38:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112392
 
+Upstream-Status: Backport from https://github.com/fujita/tgt/commit/abd8e0d987ab56013d360077202bf2aca20a42dd
+
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
- .../opencv/{opencv_4.9.0.bb => opencv_4.10.0.bb}              | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/opencv/{opencv_4.9.0.bb => opencv_4.10.0.bb} (98%)
+ .../tgt/files/CVE-2024-45751.patch            | 71 +++++++++++++++++++
+ .../recipes-extended/tgt/tgt_1.0.90.bb        |  1 +
+ 2 files changed, 72 insertions(+)
+ create mode 100644 meta-networking/recipes-extended/tgt/files/CVE-2024-45751.patch
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_4.9.0.bb b/meta-oe/recipes-support/opencv/opencv_4.10.0.bb
-similarity index 98%
-rename from meta-oe/recipes-support/opencv/opencv_4.9.0.bb
-rename to meta-oe/recipes-support/opencv/opencv_4.10.0.bb
-index 1a873ddef..07bdb37b7 100644
---- a/meta-oe/recipes-support/opencv/opencv_4.9.0.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_4.10.0.bb
-@@ -10,8 +10,8 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
- 
- DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
- 
--SRCREV_opencv = "dad8af6b17f8e60d7b95a1203a1b4d22f56574cf"
--SRCREV_contrib = "c7602a8f74205e44389bd6a4e8d727d32e7e27b4"
-+SRCREV_opencv = "a7d942b681c5edd0cc27407d8e4d3dbf36c7a40e"
-+SRCREV_contrib = "1aab1f34815a58a5a63aee6d510fe234129754a2"
- SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
- SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
- SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
+diff --git a/meta-networking/recipes-extended/tgt/files/CVE-2024-45751.patch b/meta-networking/recipes-extended/tgt/files/CVE-2024-45751.patch
+new file mode 100644
+index 0000000000..2de9ae9b28
+--- /dev/null
++++ b/meta-networking/recipes-extended/tgt/files/CVE-2024-45751.patch
+@@ -0,0 +1,71 @@
++From abd8e0d987ab56013d360077202bf2aca20a42dd Mon Sep 17 00:00:00 2001
++From: Richard Weinberger <richard@nod.at>
++Date: Tue, 3 Sep 2024 16:14:58 +0200
++Subject: [PATCH] chap: Use proper entropy source
++
++The challenge sent to the initiator is based on a poor
++source of randomness, it uses rand() without seeding it by srand().
++So the glibc PRNG is always seeded with 1 and as a consequence the
++sequence of challenges is always the same.
++
++An attacker which is able to monitor network traffic can apply a replay
++attack to bypass the CHAP authentication.  All the attacker has to do
++is waiting for the server or the service to restart and replay with a
++previously record CHAP session which fits into the sequence.
++
++To overcome the issue, use getrandom() to query the kernel random
++number generator.
++Also always send a challenge of length CHAP_CHALLENGE_MAX, there is no
++benefit in sending a variable length challenge.
++
++Signed-off-by: Richard Weinberger <richard@nod.at>
++
++Upstream-Status: Backport [https://github.com/fujita/tgt/commit/abd8e0d987ab56013d360077202bf2aca20a42dd]
++CVE: CVE-2024-45751
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++---
++ usr/iscsi/chap.c | 12 +++++-------
++ 1 file changed, 5 insertions(+), 7 deletions(-)
++
++diff --git a/usr/iscsi/chap.c b/usr/iscsi/chap.c
++index aa0fc67..b89ecab 100644
++--- a/usr/iscsi/chap.c
+++++ b/usr/iscsi/chap.c
++@@ -28,6 +28,7 @@
++ #include <stdio.h>
++ #include <stdlib.h>
++ #include <string.h>
+++#include <sys/random.h>
++ 
++ #include "iscsid.h"
++ #include "tgtd.h"
++@@ -359,22 +360,19 @@ static int chap_initiator_auth_create_challenge(struct iscsi_connection *conn)
++ 	sprintf(text, "%u", (unsigned char)conn->auth.chap.id);
++ 	text_key_add(conn, "CHAP_I", text);
++ 
++-	/*
++-	 * FIXME: does a random challenge length provide any benefits security-
++-	 * wise, or should we rather always use the max. allowed length of
++-	 * 1024 for the (unencoded) challenge?
++-	 */
++-	conn->auth.chap.challenge_size = (rand() % (CHAP_CHALLENGE_MAX / 2)) + CHAP_CHALLENGE_MAX / 2;
+++	conn->auth.chap.challenge_size = CHAP_CHALLENGE_MAX;
++ 
++ 	conn->auth.chap.challenge = malloc(conn->auth.chap.challenge_size);
++ 	if (!conn->auth.chap.challenge)
++ 		return CHAP_TARGET_ERROR;
++ 
+++	if (getrandom(conn->auth.chap.challenge, conn->auth.chap.challenge_size, 0) != conn->auth.chap.challenge_size)
+++		return CHAP_TARGET_ERROR;
+++
++ 	p = text;
++ 	strcpy(p, "0x");
++ 	p += 2;
++ 	for (i = 0; i < conn->auth.chap.challenge_size; i++) {
++-		conn->auth.chap.challenge[i] = rand();
++ 		sprintf(p, "%.2hhx", conn->auth.chap.challenge[i]);
++ 		p += 2;
++ 	}
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-extended/tgt/tgt_1.0.90.bb b/meta-networking/recipes-extended/tgt/tgt_1.0.90.bb
+index 35995f7876..f70f77f540 100644
+--- a/meta-networking/recipes-extended/tgt/tgt_1.0.90.bb
++++ b/meta-networking/recipes-extended/tgt/tgt_1.0.90.bb
+@@ -11,6 +11,7 @@ SRC_URI = "git://github.com/fujita/tgt.git;branch=master;protocol=https \
+         file://0001-usr-Makefile-WARNING-fix.patch \
+         file://usr-Makefile-apply-LDFLAGS-to-all-executables.patch \
+         file://musl-__wordsize.patch \
++        file://CVE-2024-45751.patch \
+ "
+ SRC_URI += "file://tgtd.init \
+             file://tgtd.service \
 -- 
-2.34.1
+2.25.1
 
 
