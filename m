@@ -1,161 +1,97 @@
-Return-Path: <hprajapati@mvista.com>
+Return-Path: <quic_raghuvar@quicinc.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EA7FCF58CD
-	for <webhook@archiver.kernel.org>; Fri, 20 Sep 2024 05:38:37 +0000 (UTC)
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web11.11426.1726810714753683909
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A89CCF58DA
+	for <webhook@archiver.kernel.org>; Fri, 20 Sep 2024 06:58:48 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.web11.12254.1726815523649133986
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Sep 2024 22:38:34 -0700
+ Thu, 19 Sep 2024 23:58:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=OSovLLYM;
- spf=pass (domain: mvista.com, ip: 209.85.216.51, mailfrom: hprajapati@mvista.com)
-Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-2d8abac30ddso1497055a91.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Sep 2024 22:38:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1726810714; x=1727415514; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=0Qusd3tFiJzwdO+SYllsuzu0/7/s/JfAMQm0wMO4Wyg=;
-        b=OSovLLYMeCEBTq8v917IWdNsU0bcLs7S4AP55oZbpCTc+7pbq4UQIAJzOJGYWxwNJS
-         VzKrvML6WkJcUYtLo/vYHR/BcUoblhhjFJ7dlFQWlT9cro4f8CGun0kX9gstGiIIj6ql
-         YPYOx5Sx7XR4PQiQUL9Pvs9zwpVNHsKar5bAQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1726810714; x=1727415514;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=0Qusd3tFiJzwdO+SYllsuzu0/7/s/JfAMQm0wMO4Wyg=;
-        b=Gp1s1+Jt2sjv7u13AXFEyWJ8LxTRRKqPHQ9e0EjB8wfDaNiYnB0G/QxoahUl2E/0DH
-         be5eS8xi4yL32qdUGj4Lj7jbgcHAImz7bISkDbthkjBnTAD93R1t6RFx7AdUhhRo7Avb
-         I14AOrZco9AgfMQvEOB+nF4b+BBzFbgHDw8lAobb92fKAaOvy5c1VqPkix0DIbRKMN5S
-         Yg45Ww+AhOmO/eNZCOulqKSosmRrgzWqN+9kgVeBIAINzldWPubD2CR0/B5mosEgf20Y
-         Gt/oY0ER3KAk+2WrFcIt37fdiPpgep56XKDHJ6nY4AlGXKrWFa/D2rFP5aO5VI1vcwKt
-         ojAg==
-X-Gm-Message-State: AOJu0YyXXCDPDzbGTDdrPXa5JLOaffehMfn8xs+8sHF9BQzqJzlXhlUI
-	oSn7oCDz2aPz1D43LrIBS/BpYI0Mz+8JqmuSqLAD6hNTkb/zoCB8mturMjeyw2im5eC6N7lvxzR
-	V
-X-Google-Smtp-Source: AGHT+IF9aF12CylvLew1VPGqXQE8JbFcjzt+3bzrnMTwWHUr9VXpFnI2hzOwE34JMUQOE4juJMJvnA==
-X-Received: by 2002:a17:90b:4c05:b0:2d8:8681:44ba with SMTP id 98e67ed59e1d1-2dd7f3e4699mr2354637a91.15.1726810713877;
-        Thu, 19 Sep 2024 22:38:33 -0700 (PDT)
-Received: from MVIN00016.mvista.com ([103.250.136.150])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2dd7f95b31fsm889999a91.51.2024.09.19.22.38.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Sep 2024 22:38:33 -0700 (PDT)
-From: Hitendra Prajapati <hprajapati@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-networking][scarthgap][PATCH] tgt: fix CVE-2024-45751
-Date: Fri, 20 Sep 2024 11:08:25 +0530
-Message-Id: <20240920053825.154315-1-hprajapati@mvista.com>
+ dkim=pass header.i=@quicinc.com header.s=qcppdkim1 header.b=dtaqKfuD;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: quicinc.com, ip: 205.220.180.131, mailfrom: quic_raghuvar@quicinc.com)
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 48JJ4EeI018700;
+	Fri, 20 Sep 2024 06:58:41 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=d4spSZZEmgMVrzSQjV2KJZ
+	iYBadgAedkTFiUoxHZ1ds=; b=dtaqKfuDXG+2O6UNlxZNO9q/j14Y09Eufgn8i8
+	uyYBH5hgBEx8V8Ra4QanYONcgY91OFIyjA/sJDp+P9hrEkp0iQlEuN2t5/6Rx0sQ
+	dLC2Otleoz6EHYwOwB97oztkn4YsD8J8XtAZzeEfAhGwnib3NhdiTSoiOsoQo1RX
+	ckBkqI6jzuKKu8ezBVbRwx8KVsAbwYVpL9Klb8mUtYl7r6SbhLg8opRKMAK4kzv5
+	rjXEjWjBQPm93DotGWanwyT4dWR6zeIen1j1B7LjGltm+J4YUaaxahW8A+LyVLly
+	D3cMx+LmuyAu9lzT79livmzZKeTRo9Esw76RkySEz8f+bRyg==
+Received: from nasanppmta04.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 41n4j704nn-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 20 Sep 2024 06:58:41 +0000 (GMT)
+Received: from nasanex01a.na.qualcomm.com (nasanex01a.na.qualcomm.com [10.52.223.231])
+	by NASANPPMTA04.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 48K6wdLq025176
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 20 Sep 2024 06:58:39 GMT
+Received: from hyd-e160-a01-2-03.qualcomm.com (10.80.80.8) by
+ nasanex01a.na.qualcomm.com (10.52.223.231) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Thu, 19 Sep 2024 23:58:37 -0700
+From: Raghuvarya S <quic_raghuvar@quicinc.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Raghuvarya S <quic_raghuvar@quicinc.com>, Khem Raj <raj.khem@gmail.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Subject: [PATCH] android-tools-adbd.service: Update ConditionPathExists to /etc
+Date: Fri, 20 Sep 2024 12:28:23 +0530
+Message-ID: <20240920065823.260243-1-quic_raghuvar@quicinc.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nasanex01a.na.qualcomm.com (10.52.223.231)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-ORIG-GUID: 0_JmK7b3nSyzrTAGJPM4HmCt2baBDTi7
+X-Proofpoint-GUID: 0_JmK7b3nSyzrTAGJPM4HmCt2baBDTi7
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 mlxlogscore=800
+ mlxscore=0 malwarescore=0 bulkscore=0 priorityscore=1501 clxscore=1011
+ adultscore=0 suspectscore=0 lowpriorityscore=0 spamscore=0 impostorscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2408220000
+ definitions=main-2409200047
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 20 Sep 2024 05:38:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112392
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Sep 2024 06:58:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112393
 
-Upstream-Status: Backport from https://github.com/fujita/tgt/commit/abd8e0d987ab56013d360077202bf2aca20a42dd
+To ensure android-tools-adbd.service starts at boot, the path
+for ConditionPathExists must be present at build time. /etc is
+more suitable for build-time files than /var, which is for
+runtime files. Changed ConditionPathExists from
+/var/usb-debugging-enabled to /etc/usb-debugging-enabled
 
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+CC: Khem Raj <raj.khem@gmail.com>
+CC: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Signed-off-by: Raghuvarya S <quic_raghuvar@quicinc.com>
 ---
- .../tgt/files/CVE-2024-45751.patch            | 71 +++++++++++++++++++
- .../recipes-extended/tgt/tgt_1.0.90.bb        |  1 +
- 2 files changed, 72 insertions(+)
- create mode 100644 meta-networking/recipes-extended/tgt/files/CVE-2024-45751.patch
+ .../android-tools/android-tools/android-tools-adbd.service      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-extended/tgt/files/CVE-2024-45751.patch b/meta-networking/recipes-extended/tgt/files/CVE-2024-45751.patch
-new file mode 100644
-index 0000000000..2de9ae9b28
---- /dev/null
-+++ b/meta-networking/recipes-extended/tgt/files/CVE-2024-45751.patch
-@@ -0,0 +1,71 @@
-+From abd8e0d987ab56013d360077202bf2aca20a42dd Mon Sep 17 00:00:00 2001
-+From: Richard Weinberger <richard@nod.at>
-+Date: Tue, 3 Sep 2024 16:14:58 +0200
-+Subject: [PATCH] chap: Use proper entropy source
-+
-+The challenge sent to the initiator is based on a poor
-+source of randomness, it uses rand() without seeding it by srand().
-+So the glibc PRNG is always seeded with 1 and as a consequence the
-+sequence of challenges is always the same.
-+
-+An attacker which is able to monitor network traffic can apply a replay
-+attack to bypass the CHAP authentication.  All the attacker has to do
-+is waiting for the server or the service to restart and replay with a
-+previously record CHAP session which fits into the sequence.
-+
-+To overcome the issue, use getrandom() to query the kernel random
-+number generator.
-+Also always send a challenge of length CHAP_CHALLENGE_MAX, there is no
-+benefit in sending a variable length challenge.
-+
-+Signed-off-by: Richard Weinberger <richard@nod.at>
-+
-+Upstream-Status: Backport [https://github.com/fujita/tgt/commit/abd8e0d987ab56013d360077202bf2aca20a42dd]
-+CVE: CVE-2024-45751
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-+---
-+ usr/iscsi/chap.c | 12 +++++-------
-+ 1 file changed, 5 insertions(+), 7 deletions(-)
-+
-+diff --git a/usr/iscsi/chap.c b/usr/iscsi/chap.c
-+index aa0fc67..b89ecab 100644
-+--- a/usr/iscsi/chap.c
-++++ b/usr/iscsi/chap.c
-+@@ -28,6 +28,7 @@
-+ #include <stdio.h>
-+ #include <stdlib.h>
-+ #include <string.h>
-++#include <sys/random.h>
-+ 
-+ #include "iscsid.h"
-+ #include "tgtd.h"
-+@@ -359,22 +360,19 @@ static int chap_initiator_auth_create_challenge(struct iscsi_connection *conn)
-+ 	sprintf(text, "%u", (unsigned char)conn->auth.chap.id);
-+ 	text_key_add(conn, "CHAP_I", text);
-+ 
-+-	/*
-+-	 * FIXME: does a random challenge length provide any benefits security-
-+-	 * wise, or should we rather always use the max. allowed length of
-+-	 * 1024 for the (unencoded) challenge?
-+-	 */
-+-	conn->auth.chap.challenge_size = (rand() % (CHAP_CHALLENGE_MAX / 2)) + CHAP_CHALLENGE_MAX / 2;
-++	conn->auth.chap.challenge_size = CHAP_CHALLENGE_MAX;
-+ 
-+ 	conn->auth.chap.challenge = malloc(conn->auth.chap.challenge_size);
-+ 	if (!conn->auth.chap.challenge)
-+ 		return CHAP_TARGET_ERROR;
-+ 
-++	if (getrandom(conn->auth.chap.challenge, conn->auth.chap.challenge_size, 0) != conn->auth.chap.challenge_size)
-++		return CHAP_TARGET_ERROR;
-++
-+ 	p = text;
-+ 	strcpy(p, "0x");
-+ 	p += 2;
-+ 	for (i = 0; i < conn->auth.chap.challenge_size; i++) {
-+-		conn->auth.chap.challenge[i] = rand();
-+ 		sprintf(p, "%.2hhx", conn->auth.chap.challenge[i]);
-+ 		p += 2;
-+ 	}
-+-- 
-+2.25.1
-+
-diff --git a/meta-networking/recipes-extended/tgt/tgt_1.0.90.bb b/meta-networking/recipes-extended/tgt/tgt_1.0.90.bb
-index 35995f7876..f70f77f540 100644
---- a/meta-networking/recipes-extended/tgt/tgt_1.0.90.bb
-+++ b/meta-networking/recipes-extended/tgt/tgt_1.0.90.bb
-@@ -11,6 +11,7 @@ SRC_URI = "git://github.com/fujita/tgt.git;branch=master;protocol=https \
-         file://0001-usr-Makefile-WARNING-fix.patch \
-         file://usr-Makefile-apply-LDFLAGS-to-all-executables.patch \
-         file://musl-__wordsize.patch \
-+        file://CVE-2024-45751.patch \
- "
- SRC_URI += "file://tgtd.init \
-             file://tgtd.service \
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service b/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service
+index ddf8d7f74..b6661f2e3 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service
++++ b/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service
+@@ -1,6 +1,6 @@
+ [Unit]
+ Description=Android Debug Bridge
+-ConditionPathExists=/var/usb-debugging-enabled
++ConditionPathExists=/etc/usb-debugging-enabled
+ Before=android-system.service
+ 
+ [Service]
 -- 
 2.25.1
 
