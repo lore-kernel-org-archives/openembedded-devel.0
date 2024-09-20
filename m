@@ -1,101 +1,101 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <quic_ptak@quicinc.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1217CE8D56
-	for <webhook@archiver.kernel.org>; Thu, 19 Sep 2024 03:32:49 +0000 (UTC)
-Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
- by mx.groups.io with SMTP id smtpd.web11.11431.1726716761383500340
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B810CF58C6
+	for <webhook@archiver.kernel.org>; Fri, 20 Sep 2024 04:00:57 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.web11.10335.1726804853299271936
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Sep 2024 20:32:41 -0700
+ Thu, 19 Sep 2024 21:00:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=kETBf9SF;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1726716762; x=1758252762;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references;
-  bh=keXZcHO3b3JEGAZ/L9PQF/4IIy2VawRPce8Qjd7/1f0=;
-  b=kETBf9SFa/F+mQoqdVaBWYFdI+RQLVMMja581ncg3OeWRHMo3pyalrPK
-   e/T5/bVBVH9S+fHYhRVCMwT4XqfiOpT1M0oeEUyDOghvEzaNsgWMlXGr8
-   ehA47M76o8jU51WoqwEBh+hytkk5WxPNxrfQBgyjLzhZ/YAKsIvTpkcCE
-   apYho4TMwTB7zDZj3cuaq6vwMvwpULUJ6ATi9y65V/xckjVpqAhrqe+bQ
-   qjDwCZrr6fPUSeQ+PAmzElBndS9ENY4Mtg7LOuHHZE2dhJ4pTxN0IP2fm
-   LguGiebrztvipamUyqbrCX6fzICmQR0GOOlKwokoAlVMEmNTb+unjy7JW
-   g==;
-X-CSE-ConnectionGUID: vyTrFh4YSUme48M3dYSN3g==
-X-CSE-MsgGUID: GgEjyLJNSEWipdSWZfg+TQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11199"; a="174102938"
-X-IronPort-AV: E=Sophos;i="6.10,240,1719846000"; 
-   d="scan'208";a="174102938"
-Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
-  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Sep 2024 12:32:39 +0900
-Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id F079AD4F54
-	for <openembedded-devel@lists.openembedded.org>; Thu, 19 Sep 2024 12:32:36 +0900 (JST)
-Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 26F5CD510C
-	for <openembedded-devel@lists.openembedded.org>; Thu, 19 Sep 2024 12:32:36 +0900 (JST)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id B4DF720086EB0
-	for <openembedded-devel@lists.openembedded.org>; Thu, 19 Sep 2024 12:32:35 +0900 (JST)
-Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 6185F1A01E9;
-	Thu, 19 Sep 2024 11:32:35 +0800 (CST)
-From: wangmy@fujitsu.com
+ dkim=pass header.i=@quicinc.com header.s=qcppdkim1 header.b=gpiTM0B9;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qualcomm.com, ip: 205.220.168.131, mailfrom: ptak@qualcomm.com)
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 48JJ3v0S011589
+	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Sep 2024 04:00:52 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=ThXzMHFD7ZlWEESXMIFv5AQDSSpNelbweCk
+	5PuMZ4ms=; b=gpiTM0B9rhgxvNooehGU2JCoSLnh3im2lIe37MFA0bL1SzLUNwQ
+	BYIu5/hSHIuhkj4m6JYNxADVXvTTtl5CSCuQpyOZ1veTfjULqveVo+MRVH/ST1w3
+	KiS+FJI+xmKXLkUW6eBuywXMfXFbKYuB9kAW6RGa6wUhy0oLQyLU3TzUMZpj0QFg
+	kT6nHaURaYlc3CBtNAZHEYuNYfMGRtoqyttdLvbkOeV7lmQCKXS0fnVW/CbxuiJy
+	pRcJHCDyu/WGJ4lcdXCSEHY39gQzyokdX2X50CrJglfIIo291q9T4tz4G2nJyh7j
+	WH2JJEDw0DLkm9WLP4a10oQe7/b8yvAG09g==
+Received: from apblrppmta02.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 41n4gd7h11-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Sep 2024 04:00:52 +0000 (GMT)
+Received: from pps.filterd (APBLRPPMTA02.qualcomm.com [127.0.0.1])
+	by APBLRPPMTA02.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTP id 48K3xsSm014154
+	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Sep 2024 04:00:48 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTPS id 41n3jmptt0-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Sep 2024 04:00:48 +0000
+Received: from APBLRPPMTA02.qualcomm.com (APBLRPPMTA02.qualcomm.com [127.0.0.1])
+	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 48K40lMv015205
+	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Sep 2024 04:00:47 GMT
+Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-ptak-hyd.qualcomm.com [10.213.96.58])
+	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTPS id 48K40lbb015204
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 20 Sep 2024 04:00:47 +0000
+Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 2387883)
+	id BC57058A; Fri, 20 Sep 2024 09:30:46 +0530 (+0530)
+From: ptak <quic_ptak@quicinc.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 20/28] python3-regex: upgrade 2024.7.24 -> 2024.9.11
-Date: Thu, 19 Sep 2024 11:32:05 +0800
-Message-Id: <1726716733-14548-20-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1726716733-14548-1-git-send-email-wangmy@fujitsu.com>
-References: <1726716733-14548-1-git-send-email-wangmy@fujitsu.com>
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28672.004
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28672.004
-X-TMASE-Result: 10-0.313400-10.000000
-X-TMASE-MatchedRID: 7cZymtcOvx2jz0nOeth/yUIIxwDaU5mrSc4iQ7VD4M2U8ftiyKjZrdMj
-	jwb9QfV2CC8aAmGeO6lV00+whwxVQy/7QU2czuUNuce7gFxhKa2YkAyCbA7KV5soi2XrUn/J8m+
-	hzBStantdY+ZoWiLImydET58jp62ShlKDpxNznwpUCjJdiJ1tvk0wDBwXD5Typs3jFZTq47zh57
-	8DPUvoJa/Cul+Z2+naoBgym6qXgk2IJAf8abiRRQyDPsEkdmwCS7+RMq/2CK6rA4c7UV2fQpvi2
-	PQO/FFQiz2ujrPVx9yEIU1NtMkm0Q==
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+Cc: quic_sssanjee@quicinc.com, quic_vkaruchu@quicinc.com,
+        ptak <quic_ptak@quicinc.com>
+Subject: [meta-oe][PATCH] opencv: upgrade 4.9.0 -> 4.10.0
+Date: Fri, 20 Sep 2024 09:30:41 +0530
+Message-Id: <20240920040041.1153435-1-quic_ptak@quicinc.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-ORIG-GUID: rr4KYEkN5FG3Y-HFlXQcWr4rJEMTuM0e
+X-Proofpoint-GUID: rr4KYEkN5FG3Y-HFlXQcWr4rJEMTuM0e
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 suspectscore=0
+ bulkscore=0 clxscore=1011 spamscore=0 adultscore=0 lowpriorityscore=0
+ mlxlogscore=784 impostorscore=0 mlxscore=0 priorityscore=1501 phishscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2408220000
+ definitions=main-2409200026
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 Sep 2024 03:32:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112379
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Sep 2024 04:00:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112391
 
-From: Wang Mingyu <wangmy@fujitsu.com>
-
-Changelog:
- Updated to Unicode 16.0.0.
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-regex_2024.7.24.bb => python3-regex_2024.9.11.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-regex_2024.7.24.bb => python3-regex_2024.9.11.bb} (80%)
+ .../opencv/{opencv_4.9.0.bb => opencv_4.10.0.bb}              | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/opencv/{opencv_4.9.0.bb => opencv_4.10.0.bb} (98%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-regex_2024.7.24.bb b/meta-python/recipes-devtools/python/python3-regex_2024.9.11.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-regex_2024.7.24.bb
-rename to meta-python/recipes-devtools/python/python3-regex_2024.9.11.bb
-index b6e09fc83..8fbae0cdc 100644
---- a/meta-python/recipes-devtools/python/python3-regex_2024.7.24.bb
-+++ b/meta-python/recipes-devtools/python/python3-regex_2024.9.11.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7b5751ddd6b643203c31ff873051d069"
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.9.0.bb b/meta-oe/recipes-support/opencv/opencv_4.10.0.bb
+similarity index 98%
+rename from meta-oe/recipes-support/opencv/opencv_4.9.0.bb
+rename to meta-oe/recipes-support/opencv/opencv_4.10.0.bb
+index 1a873ddef..07bdb37b7 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.9.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.10.0.bb
+@@ -10,8 +10,8 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
  
- inherit pypi python_setuptools_build_meta
+ DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
  
--SRC_URI[sha256sum] = "9cfd009eed1a46b27c14039ad5bbc5e71b6367c5b2e6d5f5da0ea91600817506"
-+SRC_URI[sha256sum] = "6c188c307e8433bcb63dc1915022deb553b4203a70722fc542c363bf120a01fd"
- 
- RDEPENDS:${PN} += " \
- 	python3-stringold \
+-SRCREV_opencv = "dad8af6b17f8e60d7b95a1203a1b4d22f56574cf"
+-SRCREV_contrib = "c7602a8f74205e44389bd6a4e8d727d32e7e27b4"
++SRCREV_opencv = "a7d942b681c5edd0cc27407d8e4d3dbf36c7a40e"
++SRCREV_contrib = "1aab1f34815a58a5a63aee6d510fe234129754a2"
+ SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
+ SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
+ SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
 -- 
 2.34.1
 
