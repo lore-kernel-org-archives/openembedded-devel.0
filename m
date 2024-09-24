@@ -1,203 +1,125 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8298CF9C6B
-	for <webhook@archiver.kernel.org>; Tue, 24 Sep 2024 03:42:40 +0000 (UTC)
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
- by mx.groups.io with SMTP id smtpd.web11.5718.1727149354043793123
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3977CF9C6B
+	for <webhook@archiver.kernel.org>; Tue, 24 Sep 2024 03:43:50 +0000 (UTC)
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web11.5727.1727149422841542305
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Sep 2024 20:42:34 -0700
+ Mon, 23 Sep 2024 20:43:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Qi5L5UgG;
- spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-71afb729f24so258134b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Sep 2024 20:42:34 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Shn7E2Ll;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-2d8a54f1250so3304000a91.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Sep 2024 20:43:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1727149353; x=1727754153; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=sYSqg5ITvwFhJh5uwSXWFnKzREPJZP9NAGvWspbS25o=;
-        b=Qi5L5UgGinggZk5kYrsnsDrQTrodV/HGh8iqp1gQBTSUX1kRVnOoXhKV6efYnZZzlD
-         jN0i1p8X+nYDwP7O8yIcnSOMEyoRSVcOt3J6nSlAKW0T7880BN6slDTaOq+Fpn4q1dEt
-         kus71r81xXlYthVn/4cd/5b6xDrVFwlKZEqPpvm/tJzOg7MTmifhNXRBD+qfPqaddpxL
-         n1O7SsGrh4HZrAlQGftZfFtOvwS9YX035RenKR7wHst+BavRp8PcDmb4F+KsPhnPJ2Fi
-         wUP6nFBhJF2SWD0/esCgg3V51upF2uOEMF6WuSqRQXyrVapXBnQ1UEfchzVuKUeNYjMl
-         aoDA==
+        d=gmail.com; s=20230601; t=1727149422; x=1727754222; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=HV+DGs5tLoOSkXTcWSTsbsff8i3tWbzGnWktSy6cFpg=;
+        b=Shn7E2Lln0JAycYPjlD2QXd/BQajPKswn/7U0wBWmcnl7LDIbpF49C9mbp6hxpLU/1
+         5wCCmFOhvqX8nFtSY74KDIxjtN/TRPOYQ1sE7UNj22U9GQq9/im+tOFpponlSJSOT83S
+         rbg7mRqo+lp2CwGwcRAH4d5tUF8V55aoz6JSj5V6grcVzYLfr57DSwKTctSSf7BuKGzW
+         RqXDh1nzLII/MLVB6SMOD+kPKGITAeT4Hg2AmIb8aw4TS2D2hlBoCPESqtPscNRNaEJC
+         8toY8YWJ6fz53W4mygSzrz3ohQFYQZvQcRlcvW00W4LjO1+VktYKVEOf9wrhl6KuSIfH
+         x+7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727149353; x=1727754153;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=sYSqg5ITvwFhJh5uwSXWFnKzREPJZP9NAGvWspbS25o=;
-        b=CpOFCMCukFnAS0aMHa5WhLHV/2rgVYTbe8IRL480SsTngHZPSCBBOV5uyMs/DZRjYD
-         xqmOySNrA1vBY01PlzUxrKBPyKaF+X0gCho/b8QEUorLNt+tSmqyW3xzyjiBlzqGCEeO
-         z2MjTOXrGP6JO38rsCbe7721mCtGRpsi5CsMS7irNdKzISibC1+fKuL2k2P6R66n0h7T
-         KNQW4C0AgFYF/sfu2Es9i6n8c4nftURwuAUWj8jQHBmBgIWoAg28MQgR/jH6VI80vdd0
-         5uLqvvv+SHx3BFHvzk4RunUY9/NtEa/Vpi1RXJ/Y5bq1Hh3/I1MTtsb2aKK8iSjItBVL
-         fypw==
-X-Gm-Message-State: AOJu0YwR4Jht9LsWayKPtbaGfJ4D7OjgWMJGSikKC+YuM1WiiLzptj+D
-	mmqdB8LwqgzwVzNrb+REWna5HD+XyQIuYFvudMUl3nYtE9uVWnJD0zN3wXhzBF6lkcGPsvpVjic
-	ZvuBaGclrwQYd+mDqufv4YJXOU714NpVy
-X-Google-Smtp-Source: AGHT+IGsOM+gNnwrqmTk0EKMQxr1PiE/V69FFQCufNsVMBOutAhWwwvTBZEpLXQw0iaty1O/bACkWKVjUAsZwgm/bM0=
-X-Received: by 2002:a05:6a00:2e15:b0:714:2482:ab3c with SMTP id
- d2e1a72fcca58-7199cd79277mr20657876b3a.7.1727149353092; Mon, 23 Sep 2024
- 20:42:33 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1727149422; x=1727754222;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=HV+DGs5tLoOSkXTcWSTsbsff8i3tWbzGnWktSy6cFpg=;
+        b=dXs74bsz37is0nS/pHa55uDYxppTxWteECiZdzYwsfRAshLfvsGRwuNIJ6SxhcBmZ8
+         mKRCRcgbEDr39KKXwQnokslwP1Huq6pRV25M9HLjBXDnjkc9nb5e9XEmeK1gvsCRKa8P
+         GYY6mLVq3NaJ5Tj9s4+OhLNLjRLsn9Un0pDL4tFvGhYe9GmKWqYsWcME5foryIhejwjb
+         2Z7RYhdvjSXXh+fPjpbmGLi2GynIBhnDOg6cmG4V6Jig82EJ+aCuwehH9v5kXUv2mqir
+         795WLy5hwR4hbwHjuXlA3JOeqdYx0J6sH55fHSrKrMAgv9iH33LOFHfWa7XK2LETzC+d
+         IDEA==
+X-Gm-Message-State: AOJu0YxFZD0d0WzxXOtziLWNotWQLNHmfxvVo6Vx4zq9c6NZm12Pvm/l
+	5AMV44GL8SiL0QuCC5/9Q5/Vtt1vsorxj1PF5w4xrQBM949JwjYUniYfbzNG
+X-Google-Smtp-Source: AGHT+IGMLE9kKpqgH6YhWBaBDOts/DSW1TnTSE6EB5wTwgGF8aYUEPqd7dpZZ8/Kf3dlYR+7exlnig==
+X-Received: by 2002:a17:90b:953:b0:2d3:da82:28e0 with SMTP id 98e67ed59e1d1-2dd80c13cdcmr14434865a91.9.1727149422006;
+        Mon, 23 Sep 2024 20:43:42 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::e660])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2e0590070b1sm392522a91.42.2024.09.23.20.43.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 23 Sep 2024 20:43:41 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Markus Volk <f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH] gnome-console: Fix build with musl
+Date: Mon, 23 Sep 2024 20:43:39 -0700
+Message-ID: <20240924034339.2533347-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.46.1
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Mon, 23 Sep 2024 20:42:21 -0700
-Message-ID: <CAK5yBb9C1MhmWRpG-Am1-JnuDmnhG=rCGQ5kHwGFeNyLGtq9uA@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="000000000000aa4f730622d54b6b"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 Sep 2024 03:42:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112466
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Sep 2024 03:43:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112467
 
---000000000000aa4f730622d54b6b
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Markus Volk <f_l_k@t-online.de>
+---
+ .../0001-include-locale.h-for-setlocale.patch | 34 +++++++++++++++++++
+ .../gnome-console/gnome-console_47.0.bb       |  2 +-
+ 2 files changed, 35 insertions(+), 1 deletion(-)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-console/gnome-console/0001-include-locale.h-for-setlocale.patch
 
-All,
-
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
-
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
-
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 410
-unassigned or newcomer bugs.
-
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.1=E2=80=9D, =E2=80=9C5.2", "5.99" and "Future=
-", the more
-pressing/urgent issues being in "5.1" and then =E2=80=9C5.2=E2=80=9D.
-
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
-
-Thanks,
-
-
-
-*Stephen K. Jolley*
-
-*Yocto Project Program Manager*
-
-(    *Cell*:                (208) 244-4460
-
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
-
---000000000000aa4f730622d54b6b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><span style=3D"font-size:11pt;font-family:Calibri,Arial">A=
-ll,<br><br>The triage team is starting to try and collect up and classify b=
-ugs which a newcomer to the project would be able to work on in a way which=
- means people can find them. They&#39;re being listed on the triage page un=
-der the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/wiki/=
-Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage#New=
-comer_Bugs</a>  Also please review: <a href=3D"https://www.openembedded.org=
-/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.org/w=
-iki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugzilla =
-account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount.cgi"=
->https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The idea is=
- these bugs should be straight forward for a person to help work on who doe=
-sn&#39;t have deep experience with the project.  If anyone can help, please=
- take ownership of the bug and send patches!  If anyone needs help/advice t=
-here are people on irc who can likely do so, or some of the more experience=
-d contributors will likely be happy to help too.<br><br>Also, the triage te=
-am meets weekly and does its best to handle the bugs reported into the Bugz=
-illa. The number of people attending that meeting has fallen, as have the n=
-umber of people available to help fix bugs. One of the things we hear users=
- report is they don&#39;t know how to help. We (the triage team) are theref=
-ore going to start reporting out the currently 410 unassigned or newcomer b=
-ugs.<br><br>We&#39;re hoping people may be able to spare some time now and =
-again to help out with these.  Bugs are split into two types, &quot;true bu=
-gs&quot; where things don&#39;t work as they should and &quot;enhancements&=
-quot; which are features we&#39;d want to add to the system.  There are als=
-o roughly four different &quot;priority&quot; classes right now, =E2=80=9C5=
-.1=E2=80=9D, =E2=80=9C5.2&quot;, &quot;5.99&quot; and &quot;Future&quot;, t=
-he more pressing/urgent issues being in &quot;5.1&quot; and then =E2=80=9C5=
-.2=E2=80=9D.<br><br>Please review this link and if a bug is something you w=
-ould be able to help with either take ownership of the bug, or send me (<a =
-href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>) an e-m=
-ail with the bug number you would like and I will assign it to you (please =
-make sure you have a Bugzilla account).  The list is at: <a href=3D"https:/=
-/wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcomer_Bugs"=
->https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcom=
-er_Bugs</a></span><br><div dir=3D"ltr" class=3D"gmail_signature" data-smart=
-mail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p class=3D"MsoN=
-ormal" style=3D"background-image:initial;background-position:initial;backgr=
-ound-repeat:initial"><span style=3D"font-size:12pt;font-family:Arial,sans-s=
-erif">Thanks,<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
-
---000000000000aa4f730622d54b6b--
+diff --git a/meta-gnome/recipes-gnome/gnome-console/gnome-console/0001-include-locale.h-for-setlocale.patch b/meta-gnome/recipes-gnome/gnome-console/gnome-console/0001-include-locale.h-for-setlocale.patch
+new file mode 100644
+index 0000000000..28f26476ce
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-console/gnome-console/0001-include-locale.h-for-setlocale.patch
+@@ -0,0 +1,34 @@
++From e72f6da3d509561b75e223667a0380772e7bd48a Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 23 Sep 2024 20:38:09 -0700
++Subject: [PATCH] include locale.h for setlocale()
++
++This issue is surfaced on systems+clang
++
++Fixes
++../gnome-console-47.0/src/main.c:29:3: error: call to undeclared function 'setlocale'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
++   29 |   setlocale (LC_ALL, "");
++      |   ^
++../gnome-console-47.0/src/main.c:29:14: error: use of undeclared identifier 'LC_ALL'
++   29 |   setlocale (LC_ALL, "");
++      |              ^
++
++Upstream-Status: Submitted [https://gitlab.gnome.org/GNOME/console/-/merge_requests/171]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/main.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/main.c b/src/main.c
++index af9c5a5..5d16160 100644
++--- a/src/main.c
+++++ b/src/main.c
++@@ -17,7 +17,7 @@
++  */
++ 
++ #include <glib/gi18n.h>
++-
+++#include <locale.h>
++ #include <kgx.h>
++ 
++ int
+diff --git a/meta-gnome/recipes-gnome/gnome-console/gnome-console_47.0.bb b/meta-gnome/recipes-gnome/gnome-console/gnome-console_47.0.bb
+index 922b0576e1..8785ca013c 100644
+--- a/meta-gnome/recipes-gnome/gnome-console/gnome-console_47.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-console/gnome-console_47.0.bb
+@@ -17,7 +17,7 @@ DEPENDS = " \
+     pcre2 \
+     vte \
+ "
+-
++SRC_URI += "file://0001-include-locale.h-for-setlocale.patch"
+ SRC_URI[archive.sha256sum] = "487ec0de0a24f12ef6f778e4aee98d744a9dcc921c9e7df98b2d9f410b00ef52"
+ 
+ PACKAGECONFIG ?= ""
 
