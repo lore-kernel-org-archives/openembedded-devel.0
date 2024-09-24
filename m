@@ -1,203 +1,99 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <quic_raghuvar@quicinc.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 30154CF9C6B
-	for <webhook@archiver.kernel.org>; Tue, 24 Sep 2024 05:28:21 +0000 (UTC)
-Received: from mail-oo1-f41.google.com (mail-oo1-f41.google.com [209.85.161.41])
- by mx.groups.io with SMTP id smtpd.web11.7010.1727155693117883729
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B1311CF9C71
+	for <webhook@archiver.kernel.org>; Tue, 24 Sep 2024 06:36:11 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.web10.7805.1727159767460884756
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Sep 2024 22:28:13 -0700
+ Mon, 23 Sep 2024 23:36:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=IDHbjCFG;
- spf=pass (domain: gmail.com, ip: 209.85.161.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f41.google.com with SMTP id 006d021491bc7-5e1b50fea4bso2940661eaf.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Sep 2024 22:28:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1727155692; x=1727760492; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=wVU/0ddP5wqDOW7luAUwP8gGHePueScRtKo7R1ED+gg=;
-        b=IDHbjCFGkpig3FZwvQXaN0ifLImMRtyZEbcI7LxWsq98iCZQieSep8+q33NgGHYjgE
-         JMSVVAraQ4OvVIyNVOIhNrrAkgP9VQtlDnED6kJKezblvQmG6fBG6oEoepLkA/qs62eL
-         9PSsO2h6MzeliUFOHbhBgS2SZeg7P++wCm/lVUWu3oUoVOiE2hUFLhYHAKC6K9HKoIAN
-         Iwvu0bnuN1xzv1+9NEjKOapxeejbMmFxse1yfC26lDU147rfWL0Dk5ZGwstbMIkOiekD
-         Xjd55QmgvMRJ3Y+vSUvQgVHviek40xJuFZWh//u+98VjmtOIGNsYagmIok1ghLcce0pC
-         hchw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727155692; x=1727760492;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=wVU/0ddP5wqDOW7luAUwP8gGHePueScRtKo7R1ED+gg=;
-        b=wexwq6Ul2Zr2ShbSzw0njbMxrAFU1RbeZa10DpiROH0jH8C2mSXEYQf9ZwLKpnuzXc
-         72fBGQsLS45JkGotlGtQM8JGcgADscDBL7PycoW3hNUJZP2MGpXYqq2vhrxspDmQt42y
-         1KBZA80s9Bp249Bm8MsOFCvkXbNH7BaTKPPaXnAT7qwyE0aKKYNojPpv4w5/G0ADFKWa
-         1NVTFy9RaPsNLeLXYws21OoEi/Z2cGmp2BPP7x+2Mmkb9fC9nbvP703Vj8MreIPB7Jue
-         A3hd29X3FJQPsdyrIXDFVUWRbzvXaS05uNqD/QvCIa7RcAPSVU5RyXc9Lcgoz3mWBjEq
-         hAPw==
-X-Gm-Message-State: AOJu0YxlRqXDmD8kT9Kt9rC4+ZzX0Z18C5UGYMkUeJt0VGDMaOwFIeFG
-	fVxTBCWVI4VFbsClTyuZ6HmJY8Fqg4qPE0eXZ0cn6+DkRxKLN6jEJdQNiFxNOQKLFKxTZpK7Sm8
-	UuKPExI+lDP1G7LD/zfZkWG4ZoRY=
-X-Google-Smtp-Source: AGHT+IExnisKZWJUBQlfYBr0I93zVc1UuSod8sI+f6XWzGaZSA9kSw70FSVfXY1JWnxy08SjY5Q5/0MEsCBmvmWZ1zM=
-X-Received: by 2002:a05:6820:551:b0:5e5:b882:fd94 with SMTP id
- 006d021491bc7-5e5b882ff8bmr820196eaf.7.1727155692202; Mon, 23 Sep 2024
- 22:28:12 -0700 (PDT)
+ dkim=pass header.i=@quicinc.com header.s=qcppdkim1 header.b=jt/RBccz;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: quicinc.com, ip: 205.220.180.131, mailfrom: quic_raghuvar@quicinc.com)
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 48O0610V021829;
+	Tue, 24 Sep 2024 06:36:05 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=ZGPvbJpCa/8MpyZEEtG80e
+	t6PsNNLKB+Sif0gQe3p4M=; b=jt/RBccziptHealvN05kPxO1H2Yb6uBf4FQVPs
+	MsYNpgE9oOoKJt6jdpXoe2BDFM7Wm6r4sx0Bei6js1/7cdEQlsSOGt1qP4gcCC3f
+	JmrWQsGMvi4qFU/4ZP/cD8ulj3PKHbvJ5LLUvo7JrgFEhyTUHb2EmWLf5OpXvZev
+	1bXYe5F/MJWet9XHqSbTs5TkLXgpgJC81qvJ5dmXadHr4x8tDbIR+ULLQXsgXSZ9
+	4mn+WyEZ2lCSYIOc0205QCUdziXtonnyspoFZTwaJT2UwBybB/2Fmp8dq3/CbfKZ
+	FMuYpJx7+Hg0FotpxNIsFj5IY5Hmb33qMBsfufqiZ4+U7X5g==
+Received: from nasanppmta03.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 41snqyffwf-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 24 Sep 2024 06:36:05 +0000 (GMT)
+Received: from nasanex01a.na.qualcomm.com (nasanex01a.na.qualcomm.com [10.52.223.231])
+	by NASANPPMTA03.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 48O6a43S010991
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 24 Sep 2024 06:36:04 GMT
+Received: from hyd-e160-a01-2-03.qualcomm.com (10.80.80.8) by
+ nasanex01a.na.qualcomm.com (10.52.223.231) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Mon, 23 Sep 2024 23:36:02 -0700
+From: Raghuvarya S <quic_raghuvar@quicinc.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Raghuvarya S <quic_raghuvar@quicinc.com>, Khem Raj <raj.khem@gmail.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Subject: [meta-oe][scarthgap][PATCH 1/3] android-tools-adbd.service: Update ConditionPathExists to /etc
+Date: Tue, 24 Sep 2024 12:02:28 +0530
+Message-ID: <20240924063229.2309109-1-quic_raghuvar@quicinc.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20240924051709.1651709-1-mingli.yu@windriver.com>
-In-Reply-To: <20240924051709.1651709-1-mingli.yu@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 23 Sep 2024 22:27:46 -0700
-Message-ID: <CAMKF1sq7w_FWfwK-3BEM2PQpHDZWE1ee8nix999XeL1CHuFQmQ@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-setproctitle: Add new recipe
-To: mingli.yu@eng.windriver.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nasanex01a.na.qualcomm.com (10.52.223.231)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-GUID: 4uSQ3dWlmCKGGhFLSs8Omv_-DVtTdt00
+X-Proofpoint-ORIG-GUID: 4uSQ3dWlmCKGGhFLSs8Omv_-DVtTdt00
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ impostorscore=0 adultscore=0 bulkscore=0 phishscore=0 mlxlogscore=833
+ spamscore=0 lowpriorityscore=0 clxscore=1015 mlxscore=0 malwarescore=0
+ suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2408220000 definitions=main-2409240044
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 Sep 2024 05:28:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112469
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Sep 2024 06:36:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112470
 
-On Mon, Sep 23, 2024 at 10:17=E2=80=AFPM Yu, Mingli via lists.openembedded.=
-org
-<mingli.yu=3Deng.windriver.com@lists.openembedded.org> wrote:
->
-> From: Mingli Yu <mingli.yu@windriver.com>
->
-> A Python module to customize the process title.
->  # ./run-ptest
-> PASS: tests/module_test.py:test_no_import_side_effect
-> PASS: tests/module_test.py:test_version
-> PASS: tests/module_test.py:test_c_extension_built
-> PASS: tests/setproctitle_test.py:test_runner
-> PASS: tests/setproctitle_test.py:test_init_getproctitle
-> PASS: tests/setproctitle_test.py:test_setproctitle
-> SKIP: tests/setproctitle_test.py:test_setproctitle_darwin # SKIP Mac only=
- test
-> PASS: tests/setproctitle_test.py:test_prctl
-> PASS: tests/setproctitle_test.py:test_getproctitle
-> PASS: tests/setproctitle_test.py:test_kwarg
-> PASS: tests/setproctitle_test.py:test_environ
-> PASS: tests/setproctitle_test.py:test_issue_8
-> PASS: tests/setproctitle_test.py:test_large_cmdline
-> PASS: tests/setproctitle_test.py:test_weird_args
-> PASS: tests/setproctitle_test.py:test_weird_path
-> PASS: tests/setproctitle_test.py:test_embedded
-> PASS: tests/setproctitle_test.py:test_embedded_many_args
-> PASS: tests/setproctitle_test.py:test_noenv
-> PASS: tests/setproctitle_test.py:test_large_env
-> PASS: tests/setproctitle_test.py:test_clear_segfault
-> PASS: tests/setproctitle_test.py:test_fork_segfault
-> PASS: tests/setproctitle_test.py:test_thread_fork_segfault
-> PASS: tests/setthreadtitle_test.py:test_thread_title_unchanged
-> PASS: tests/setthreadtitle_test.py:test_set_thread_title
-> PASS: tests/setthreadtitle_test.py:test_set_threads_title
-> SKIP: tests/test_win32.py:test_setproctitle # SKIP Windows only test
-> SKIP: tests/test_win32.py:test_setthreadtitle # SKIP Windows only test
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D
-> Testsuite summary
->  # TOTAL: 27
->  # PASS: 24
->  # SKIP: 3
->  # XFAIL: 0
->  # FAIL: 0
->  # XPASS: 0
->  # ERROR: 0
->
+To ensure android-tools-adbd.service starts at boot, the path
+for ConditionPathExists must be present at build time. /etc is
+more suitable for build-time files than /var, which is for
+runtime files. Changed ConditionPathExists from
+/var/usb-debugging-enabled to /etc/usb-debugging-enabled
 
-Thanks for adding ptests along,
+Backport-of: 8106cfe769aa ("android-tools-adbd.service: Change /var to /etc in ConditionPathExists")
+CC: Khem Raj <raj.khem@gmail.com>
+CC: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Signed-off-by: Raghuvarya S <quic_raghuvar@quicinc.com>
+---
+ .../android-tools/android-tools/android-tools-adbd.service      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-> ---
->  .../ptest-packagelists-meta-python.inc        |  1 +
->  .../python/python3-setproctitle/run-ptest     |  4 +++
->  .../python/python3-setproctitle_1.3.3.bb      | 28 +++++++++++++++++++
->  3 files changed, 33 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python3-setprocti=
-tle/run-ptest
->  create mode 100644 meta-python/recipes-devtools/python/python3-setprocti=
-tle_1.3.3.bb
->
-> diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc =
-b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-> index 92e64908b..e500843e8 100644
-> --- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
-> +++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-> @@ -67,6 +67,7 @@ PTESTS_FAST_META_PYTHON =3D "\
->      python3-semver \
->      python3-serpent \
->      python3-service-identity \
-> +    python3-setproctitle \
->      python3-simpleeval \
->      python3-smpplib \
->      python3-soupsieve \
-> diff --git a/meta-python/recipes-devtools/python/python3-setproctitle/run=
--ptest b/meta-python/recipes-devtools/python/python3-setproctitle/run-ptest
-> new file mode 100644
-> index 000000000..e29e57ee3
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-setproctitle/run-ptest
-> @@ -0,0 +1,4 @@
-> +#!/bin/sh
-> +
-> +# https://github.com/dvarrazzo/py-setproctitle/issues/141
-> +pytest --automake -k 'not test_unicode'
-> diff --git a/meta-python/recipes-devtools/python/python3-setproctitle_1.3=
-.3.bb b/meta-python/recipes-devtools/python/python3-setproctitle_1.3.3.bb
-> new file mode 100644
-> index 000000000..dcae6b468
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-setproctitle_1.3.3.bb
-> @@ -0,0 +1,28 @@
-> +SUMMARY =3D "A Python module to customize the process title"
-> +DESCRIPTION =3D "The setproctitle module allows a process to change its =
-\
-> +title (as displayed by system tools such as ps, top or MacOS Activity \
-> +Monitor)."
-> +HOMEPAGE =3D "https://github.com/dvarrazzo/py-setproctitle"
-> +BUGTRACKER =3D "https://github.com/dvarrazzo/py-setproctitle/issues"
-> +LICENSE =3D "BSD-3-Clause"
-> +LIC_FILES_CHKSUM =3D "file://COPYRIGHT;md5=3D86d2d41b5f4f023f43466f8cb7a=
-debaa"
-> +
-> +inherit pypi setuptools3 ptest
-> +
-> +SRC_URI[sha256sum] =3D "c913e151e7ea01567837ff037a23ca8740192880198b7fbb=
-90b16d181607caae"
-> +
-> +SRC_URI +=3D " \
-> +    file://run-ptest \
-> +"
-> +
-> +RDEPENDS:${PN}-ptest +=3D "\
-> +    python3-pytest \
-> +    python3-unittest-automake-output \
-> +"
-> +
-> +do_install_ptest() {
-> +    install -d ${D}${PTEST_PATH}/tests
-> +    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-> +}
-> +
-> +BBCLASSEXTEND =3D "native nativesdk"
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#112468): https://lists.openembedded.org/g/openembedde=
-d-devel/message/112468
-> Mute This Topic: https://lists.openembedded.org/mt/108623524/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service b/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service
+index ddf8d7f74..b6661f2e3 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service
++++ b/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service
+@@ -1,6 +1,6 @@
+ [Unit]
+ Description=Android Debug Bridge
+-ConditionPathExists=/var/usb-debugging-enabled
++ConditionPathExists=/etc/usb-debugging-enabled
+ Before=android-system.service
+ 
+ [Service]
+-- 
+2.25.1
+
 
