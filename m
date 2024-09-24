@@ -1,86 +1,85 @@
-Return-Path: <shin.matsunaga@fujitsu.com>
+Return-Path: <dbaryshkov@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 73641CF9C6B
-	for <webhook@archiver.kernel.org>; Tue, 24 Sep 2024 06:38:51 +0000 (UTC)
-Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
- by mx.groups.io with SMTP id smtpd.web10.7826.1727159922833839202
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A3385CF9C6B
+	for <webhook@archiver.kernel.org>; Tue, 24 Sep 2024 06:46:31 +0000 (UTC)
+Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
+ by mx.groups.io with SMTP id smtpd.web10.7918.1727160390022685441
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Sep 2024 23:38:43 -0700
+ Mon, 23 Sep 2024 23:46:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=kk7wiNyu;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: shin.matsunaga@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1727159923; x=1758695923;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=ZFa7c4iwjIzIzIc+chupnaL8JnpH+NY+UyP3gevM1PU=;
-  b=kk7wiNyunTHS6pO9FCZsleO+HxCbKDAjqQNe6TZ/J1UdvuZk7X7hDkM1
-   y5oB+jxzUL4Uj1f7ht4tyH7dgHQagZSpkjpZ5RSqeb+sqhvswlQxE/Yo2
-   11RSeXdufL4sOvsuhxcy+ucTTJAUmS3Tqz19kICBiAXhKZ7cAIgzSR+q4
-   +KWC6Il4tLKLDexZ2XKIYLJcIOxFP24JYmOiaLhu7i6w/J+zwrLn5WfH4
-   JSrrCw+2eODC9KRYLOWMpEqQ+Nd3SWjpcxkrwlLh4oN43eCShpafuBw0T
-   YseMudz2H1uzK7c6FbQBAj7oDRn07sqb8OaJ+26LZ7k1Tj4UZjvQFwVzz
-   g==;
-X-CSE-ConnectionGUID: yU6/cnxHQvCVVIGZFAkPWA==
-X-CSE-MsgGUID: BcHesverQ9+sE5xXTmQYZQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11204"; a="161950603"
-X-IronPort-AV: E=Sophos;i="6.10,253,1719846000"; 
-   d="scan'208";a="161950603"
-Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
-  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Sep 2024 15:38:38 +0900
-Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
-	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 0BDC6DAD30
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Sep 2024 15:38:36 +0900 (JST)
-Received: from storage.utsfd.cs.fujitsu.co.jp (storage.utsfd.cs.fujitsu.co.jp [10.118.252.123])
-	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 4EF1AD5046
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Sep 2024 15:38:35 +0900 (JST)
-Received: by storage.utsfd.cs.fujitsu.co.jp (Postfix, from userid 1068)
-	id 0961FAAFA; Tue, 24 Sep 2024 15:38:34 +0900 (JST)
-From: Shinji Matsunaga <shin.matsunaga@fujitsu.com>
-To: raj.khem@gmail.com
-Cc: openembedded-devel@lists.openembedded.org,
-	shin.matsunaga@fujitsu.com
-Subject: [PATCH] audit: Fix CVE_PRODUCT
-Date: Tue, 24 Sep 2024 15:38:32 +0900
-Message-Id: <20240924063832.18058-1-shin.matsunaga@fujitsu.com>
-X-Mailer: git-send-email 2.35.3
+ dkim=pass header.i=@linaro.org header.s=google header.b=ZoHc+5lj;
+ spf=pass (domain: linaro.org, ip: 209.85.128.174, mailfrom: dmitry.baryshkov@linaro.org)
+Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-6de14e0f050so38683337b3.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Sep 2024 23:46:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1727160389; x=1727765189; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=EqlTvrrw5unQOiqfuT8QWWzLwSLeNDlzTLMfBRbzftg=;
+        b=ZoHc+5ljFDrsjfLtCiIY0Zero3IUqjIMANjX8VslTA7/DIca7xf03zamg1G+YXnhIB
+         fB/w/NAU743n5N3HfpXD+TvI7XV/gGncHDV0iQNaX84Qp8a0eoRhAnQBoJTLG9cOr7Uc
+         H3dM0iuYFBVwQeuxkz2awNTfiEj5BbsykOs6I4Lmp4sJIhWx5zKVoqArR1g1vIUdWD5h
+         oxUpzDxI7QEFpNV+JFlm/rFzixuQmH0BKD85IPtIsZ7RmvZH+bDgsBy19Qjc2TExzv1K
+         bwETKHAO7FUnwlvp6pk8FxQOhn4dH6NG6rLK6P38YGh8qmEI1tE7E2DORqjq1YoktvKe
+         KiuQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1727160389; x=1727765189;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=EqlTvrrw5unQOiqfuT8QWWzLwSLeNDlzTLMfBRbzftg=;
+        b=vSZgbOzvYuCX0eCgTXAaUHVS0auGQ8ZxmEgnN74rJA8U5YxCgSCydo6bVjqq/OG+aq
+         WnoZAm2kJsZjLPw1BfKFfJ+wBgR2276ksc4wuhVt+vIvlLuhcUdCXe6C+/FKbph0JLnN
+         cbigRehRpI1PTAfzhxurFJaaYPIXurXZO35LV1nJu86L1OkeLH86XEPs5b7TiRD5iiUe
+         5uVeT5Ec+Q7sGOJ5gq8o7KGaI8TTycvgeI0b7kt01bdBJuG/TKm/llVlN26KOowy0xUO
+         zBODOSH4ScwRh4ejqWSMs5gMMIie4mQkbYM5QNpvjCEtBgzLK8knI1oAqseP+NI8RaXn
+         kDRA==
+X-Gm-Message-State: AOJu0YzWK80Vioq8+OPogRYsQbGLJtI8J8B4gv6ZiGxVNQSefl4HFEm8
+	P8Ke+y7Vd1ULOH4Aucak7auMNkKvp/jx203qQ+avVTyMnS9JJr8i3LjM+ckvPrpbMsh7DluQXuq
+	VmqZZ4OpEae6B6VJHM/8DVhY/JvyAMBP6Jf9BFg==
+X-Google-Smtp-Source: AGHT+IF4nS6wkg5s9GTSfgoBgSUa6ePBCAqmzhOPI4/ONXjC3B1c5ByUjAUgOLEt/xYtvQITghdifHywwCDuRRiIXkw=
+X-Received: by 2002:a05:690c:48c4:b0:6db:a7d3:6410 with SMTP id
+ 00721157ae682-6dfeefe5f02mr123652847b3.44.1727160389153; Mon, 23 Sep 2024
+ 23:46:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
+References: <20240924063229.2309109-1-quic_raghuvar@quicinc.com>
+In-Reply-To: <20240924063229.2309109-1-quic_raghuvar@quicinc.com>
+From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Date: Tue, 24 Sep 2024 08:46:18 +0200
+Message-ID: <CAA8EJpq=RbpZRMhLanTD1_r_DOfXcLgdqr+kM0AjVL2_KSuThw@mail.gmail.com>
+Subject: Re: [meta-oe][scarthgap][PATCH 1/3] android-tools-adbd.service:
+ Update ConditionPathExists to /etc
+To: Raghuvarya S <quic_raghuvar@quicinc.com>
+Cc: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 Sep 2024 06:38:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112473
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Sep 2024 06:46:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112474
 
-Fix "audit" set in CVE_PRODUCT to "linux:audit" to detect only vulnerabilities where the vendor is "linux".
+On Tue, 24 Sept 2024 at 08:36, Raghuvarya S <quic_raghuvar@quicinc.com> wrote:
+>
+> To ensure android-tools-adbd.service starts at boot, the path
+> for ConditionPathExists must be present at build time. /etc is
+> more suitable for build-time files than /var, which is for
+> runtime files. Changed ConditionPathExists from
+> /var/usb-debugging-enabled to /etc/usb-debugging-enabled
+>
+> Backport-of: 8106cfe769aa ("android-tools-adbd.service: Change /var to /etc in ConditionPathExists")
+> CC: Khem Raj <raj.khem@gmail.com>
+> CC: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+> Signed-off-by: Raghuvarya S <quic_raghuvar@quicinc.com>
+> ---
+>  .../android-tools/android-tools/android-tools-adbd.service      | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Currently, CVE_PRODUCT also detects vulnerabilities where the vendor is "visionsoft",
-which are unrelated to the "audit" in this recipe.
-https://www.opencve.io/cve?vendor=visionsoft&product=audit
+For the series:
+Acked-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 
-In addition, all the vulnerabilities currently detected in "audit" have the vendor of "visionsoft" or "linux".
-Therefore, fix "audit" set in CVE_PRODUCT to "linux:audit".
-
-Signed-off-by: Shinji Matsunaga <shin.matsunaga@fujitsu.com>
----
- meta-oe/recipes-security/audit/audit_4.0.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/meta-oe/recipes-security/audit/audit_4.0.2.bb b/meta-oe/recipes-security/audit/audit_4.0.2.bb
-index d6742c9eb..6bb8a2c70 100644
---- a/meta-oe/recipes-security/audit/audit_4.0.2.bb
-+++ b/meta-oe/recipes-security/audit/audit_4.0.2.bb
-@@ -99,3 +99,5 @@ do_install:append() {
-     # Create /var/spool/audit directory for audisp-remote
-     install -d -m 0700 ${D}${localstatedir}/spool/audit
- }
-+
-+CVE_PRODUCT = "linux:audit"
 -- 
-2.46.1
-
+With best wishes
+Dmitry
 
