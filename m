@@ -1,256 +1,141 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 605F7CCF9E4
-	for <webhook@archiver.kernel.org>; Wed, 25 Sep 2024 15:16:48 +0000 (UTC)
-Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
- by mx.groups.io with SMTP id smtpd.web10.18794.1727277401520834857
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A61B0CCFA01
+	for <webhook@archiver.kernel.org>; Wed, 25 Sep 2024 21:43:01 +0000 (UTC)
+Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
+ by mx.groups.io with SMTP id smtpd.web10.28503.1727300575522736748
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Sep 2024 08:16:41 -0700
+ Wed, 25 Sep 2024 14:42:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cRuY+9ND;
- spf=pass (domain: gmail.com, ip: 209.85.161.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f49.google.com with SMTP id 006d021491bc7-5e1b72fc5f3so3625260eaf.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Sep 2024 08:16:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=VoE1Uv2e;
+ spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: schonm@gmail.com)
+Received: by mail-ot1-f48.google.com with SMTP id 46e09a7af769-7124395ca86so141469a34.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Sep 2024 14:42:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1727277401; x=1727882201; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=dYQgozjX3jMhASkPR8VzUi9QVsFv8zWgmZ+PNcJoVD4=;
-        b=cRuY+9ND43ectdauPK/6BKEXLeFN87m5zVM5yPdn/kK6Mczm1ljmhnBlpzvK8+pTLN
-         8EHqPuexOBAx44KP293lfR6k68CRc4e7/ghfYXHscCIHD7iqz29HVLV+5m8wAztsgusR
-         DxRNDbblUHNhwRo0pDfTqUfccTgfjyUDG4sgNnAVF+e146OXxIvZf8MN+xR3cfvhbfFa
-         Af/IV3NHR8licTb9Zwy/eeKQAly+HlRb768eDNvbWZjQuXhCAA6lz71Tsp/Vl4KPfWls
-         ZMXnINANyeTM8RhsfEpnuZruUNlPPR81z+03cWF8Kon9vEBEq+/rCWVcaCc/tERjYLQ+
-         m3FQ==
+        d=gmail.com; s=20230601; t=1727300574; x=1727905374; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=3NCsHJvTdaAwbTzpk2duswNJFoEF0laRMDwDjjq333E=;
+        b=VoE1Uv2eVnjkZMVnbBEJaF2R9be22spj+mc0APhm9HOoWUGwddcxPVBRF/BZiy3QWO
+         X7Rwc0DDJBSt5sT2SAtvPA/W+kwGK+srWor+gM7SBIzPIwXw8S05US33200G2Yp/IENL
+         DaMSRuhaZ/DJ5XZ0YaT35CxD5fNkzhfVtvXuhhj6ZjvjC8od2SL0rxHeMFNE9B3HDwRc
+         gVW9aGiSPNr3D7WKmYBh+PmIyLEuQ5qm5kdzg3g+enU7DfJ5WxhVTd33ji9dJ7zkglGB
+         fAlcLqNrSZRvdbHV2aA9QfGsOmloKP4HFETBvEsZ0kmu8GbV7kpnHnrAE54og5mg/FPG
+         bPxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727277401; x=1727882201;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=dYQgozjX3jMhASkPR8VzUi9QVsFv8zWgmZ+PNcJoVD4=;
-        b=IGJkJMVSWN6/g+6SEOsRzks2JtFHVzBs7LOcdv/pBwPRxzHCAF0BPnaTQZ8vmFzr+0
-         F6lBTbBTkWhNt5OkfnBDuT3MnLlkrwvfxJdO7GoL0LIESeUzllbYJWpIwe39LgTh+0+A
-         pHQv3ZlAb89OYjsyLPtPQOafyi6m6ZvzRilZX/GNhfPMigQWrs05uFhsyJKzWpGaSoc/
-         0CMWelDVIxGf3CSlPkGf2IphfQZS8xYEUmoOzIz7h7wy621UFzD7xGoCVC9lu+aC+2kt
-         uJwGiAFg/M2h1UvvBY/icDfKyUdDr5d4Bgm5v7q4AGGfqp5FNc4+oYT0HQaV5flHy9Ns
-         00Jg==
-X-Gm-Message-State: AOJu0Yz6f4OqsHgZwf0WbHgcsMu/Ul3QhTiqvXz5uuVdBsuebPDTN6gd
-	IP6D0UNq1vZORkidyebV6TEAFO0NaUuR4/6ogQeFMD8IKs8YkjzivX29K+y/wSf2UEYuDt0MkLN
-	Zv8WtF8ivN9Y3cUjvVMiAde2P9HoZx5/u
-X-Google-Smtp-Source: AGHT+IEjfPJ45PQ2/t+exhwjaQO0QVczc7WvqgmjGtIZTgONbhpSs4PCVc1QRkEV6zDumKN1d+ePxnpgILQmpJA2cXs=
-X-Received: by 2002:a05:6820:1b0b:b0:5e5:c0a0:2b53 with SMTP id
- 006d021491bc7-5e5c68fab27mr2205480eaf.0.1727277400754; Wed, 25 Sep 2024
- 08:16:40 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1727300574; x=1727905374;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=3NCsHJvTdaAwbTzpk2duswNJFoEF0laRMDwDjjq333E=;
+        b=Ky5CKBebQT32lwJ3XeDp1WoQvuG+JJLXSJi0iV/5CHe7SnZ94wrB03xhYbCQOHyq8+
+         H1q2dJwSh3KmGe7buVw8MOE8UqHDS/UdKFAH2qrXLAVNpMkwHM6XKA/LBuUmHJxou9vw
+         3bas9BTXMMYcDmXDzp7TKa8AGD0mrut9HSTiKTT91jW3csFvG6G5lCArm7590yLngyah
+         4IDa7UwcnuyoQ8asxarBedBVzvBSNpqHQu8NLWz5kwiyDiGdcgRlXtKMwk79BouZlf9u
+         DRtd/yhLwLBOZI9QLD/6NDO5LQedVpElDiKEwsv30y2qfD84KZ96evADCf+UmG3f62HD
+         Xidw==
+X-Gm-Message-State: AOJu0YxkdwQEsWzKk2quteQgXs/SFE3nlpGAiAAvrjqmHHqSxmURC+ML
+	f3UuaDycGUsTxxqsXUufrTYYieOIErLyrIqy3SulNj/jhkl1GJnDoPt0tZMCnBplPTpX2l+Mjqz
+	Y628kfIprdNXuWMahTYX2OnAObNq3Cd0l
+X-Google-Smtp-Source: AGHT+IGO6ucBO5M3wbWHVIXF2lTDYhNfFk41iiVV0iK7yqC5zFalWJtjVcFpEYutCuXVG2buMT0HxHDY71noHq+QkF8=
+X-Received: by 2002:a05:6830:3894:b0:70c:9c46:b83d with SMTP id
+ 46e09a7af769-713c7e22dbbmr5128236a34.25.1727300574234; Wed, 25 Sep 2024
+ 14:42:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240925095224.1383106-1-yogesh.tyagi@intel.com>
- <CAMKF1srzWN1U9MOS3V9qArjCtbZ3o57TkTYraZut8mBo=-yB5A@mail.gmail.com> <SJ0PR11MB58671054576E0E99C5C1CAAC8C692@SJ0PR11MB5867.namprd11.prod.outlook.com>
-In-Reply-To: <SJ0PR11MB58671054576E0E99C5C1CAAC8C692@SJ0PR11MB5867.namprd11.prod.outlook.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 25 Sep 2024 08:16:15 -0700
-Message-ID: <CAMKF1spyhxZAFptex1DSv7f2g9=XO6fkOqoeMDWzXdOA03-SzA@mail.gmail.com>
-Subject: Re: [oe] [scarthgap][PATCH] tbb-native: Fix build with gcc-13
-To: "Tyagi, Yogesh" <yogesh.tyagi@intel.com>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: "J. S." <schonm@gmail.com>
+Date: Wed, 25 Sep 2024 17:42:43 -0400
+Message-ID: <CABTo8gBOnxS__v3sywpuqUadqQRd_9OYLSVy=3ZM97Wo8UKung@mail.gmail.com>
+Subject: [meta-oe][PATCH] syslog-ng: upgrade 4.6.0 -> 4.7.0
+To: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/mixed; boundary="00000000000025e5020622f881ff"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 25 Sep 2024 15:16:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112500
+ <openembedded-devel@lists.openembedded.org>; Wed, 25 Sep 2024 21:43:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112501
 
-On Wed, Sep 25, 2024 at 8:13=E2=80=AFAM Tyagi, Yogesh <yogesh.tyagi@intel.c=
-om> wrote:
->
->
->
-> > -----Original Message-----
-> > From: Khem Raj <raj.khem@gmail.com>
-> > Sent: Wednesday, September 25, 2024 8:41 PM
-> > To: Tyagi, Yogesh <yogesh.tyagi@intel.com>
-> > Cc: openembedded-devel@lists.openembedded.org
-> > Subject: Re: [oe] [scarthgap][PATCH] tbb-native: Fix build with gcc-13
-> >
-> > do we need this on master as well ?
->
-> tbb-native is building fine on master.
+--00000000000025e5020622f881ff
+Content-Type: text/plain; charset="UTF-8"
 
-Thanks for confirming.
+Please find attached a patch to upgrade syslong-ng from version 4.6.0 to  4.7.0.
 
->
-> >
-> > On Wed, Sep 25, 2024 at 2:52=E2=80=AFAM Yogesh Tyagi via lists.openembe=
-dded.org
-> > <yogesh.tyagi=3Dintel.com@lists.openembedded.org>
-> > wrote:
-> > >
-> > > * Fixes following stringop-overflow warning with gcc-13:
-> > >
-> > > In file included from /usr/include/c++/13/atomic:41,
-> > >                  from /poky/build/tmp/work/x86_64-linux/tbb-
-> > native/2021.11.0/git/src/tbb/../../include/oneapi/tbb/detail/_utils.h:2=
-2,
-> > >                  from /poky/build/tmp/work/x86_64-linux/tbb-
-> > native/2021.11.0/git/src/tbb/task_dispatcher.h:20,
-> > >                  from /poky/build/tmp/work/x86_64-linux/tbb-
-> > native/2021.11.0/git/src/tbb/arena.cpp:17:
-> > > In member function =E2=80=98void std::__atomic_base<_IntTp>::store(__=
-int_type,
-> > std::memory_order) [with _ITp =3D bool]=E2=80=99,
-> > >     inlined from =E2=80=98void std::atomic<bool>::store(bool, std::me=
-mory_order)=E2=80=99 at
-> > /usr/include/c++/13/atomic:104:20,
-> > >     inlined from =E2=80=98void
-> > tbb::detail::r1::concurrent_monitor_base<Context>::notify_one_relaxed()=
- [with
-> > Context =3D long unsigned int]=E2=80=99 at /poky/build/tmp/work/x86_64-=
-linux/tbb-
-> > native/2021.11.0/git/src/tbb/concurrent_monitor.h:293:53:
-> > > /usr/include/c++/13/bits/atomic_base.h:481:25: error: =E2=80=98void
-> > __atomic_store_1(volatile void*, unsigned char, int)=E2=80=99 writing 1=
- byte into a region
-> > of size 0 overflows the destination [-Werror=3Dstringop-overflow=3D]
-> > >   481 |         __atomic_store_n(&_M_i, __i, int(__m));
-> > >       |         ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~
-> > > compilation terminated due to -Wfatal-errors.
-> > > cc1plus: all warnings being treated as errors
-> > >
-> > > (cherry picked from commit e131071769ee3df51b56b053ba6bfa06ae9eff25)
-> > >
-> > > Signed-off-by: Yogesh Tyagi <yogesh.tyagi@intel.com>
-> > > ---
-> > >  ...suppress-new-GCC-12-13-warnings-1192.patch | 57
-> > > +++++++++++++++++++  meta-oe/recipes-support/tbb/tbb_2021.11.0.bb  |
-> > > 1 +
-> > >  2 files changed, 58 insertions(+)
-> > >  create mode 100644
-> > > meta-oe/recipes-support/tbb/tbb/0001-Fix-suppress-new-GCC-12-13-warni=
-n
-> > > gs-1192.patch
-> > >
-> > > diff --git
-> > > a/meta-oe/recipes-support/tbb/tbb/0001-Fix-suppress-new-GCC-12-13-war=
-n
-> > > ings-1192.patch
-> > > b/meta-oe/recipes-support/tbb/tbb/0001-Fix-suppress-new-GCC-12-13-war=
-n
-> > > ings-1192.patch
-> > > new file mode 100644
-> > > index 0000000000..489f011b84
-> > > --- /dev/null
-> > > +++ b/meta-oe/recipes-support/tbb/tbb/0001-Fix-suppress-new-GCC-12-13=
--
-> > > +++ warnings-1192.patch
-> > > @@ -0,0 +1,57 @@
-> > > +From e131071769ee3df51b56b053ba6bfa06ae9eff25 Mon Sep 17 00:00:00
-> > > +2001
-> > > +From: Dmitri Mokhov <dmitri.n.mokhov@intel.com>
-> > > +Date: Mon, 11 Sep 2023 10:35:07 -0500
-> > > +Subject: [PATCH] Fix/suppress new GCC 12/13 warnings (#1192)
-> > > +
-> > > +Upstream-Status: Backport
-> > > +[https://github.com/oneapi-
-> > src/oneTBB/commit/e131071769ee3df51b56b053
-> > > +ba6bfa06ae9eff25]
-> > > +Signed-off-by: Dmitri Mokhov <dmitri.n.mokhov@intel.com>
-> > > +---
-> > > + .../oneapi/tbb/detail/_concurrent_unordered_base.h   |  2 +-
-> > > + src/tbb/concurrent_monitor.h                         | 12 +++++++++=
-++-
-> > > + 2 files changed, 12 insertions(+), 2 deletions(-)
-> > > +
-> > > +diff --git a/include/oneapi/tbb/detail/_concurrent_unordered_base.h
-> > > +b/include/oneapi/tbb/detail/_concurrent_unordered_base.h
-> > > +index ade91c33..40829208 100644
-> > > +--- a/include/oneapi/tbb/detail/_concurrent_unordered_base.h
-> > > ++++ b/include/oneapi/tbb/detail/_concurrent_unordered_base.h
-> > > +@@ -921,7 +921,7 @@ private:
-> > > +             node_allocator_traits::deallocate(dummy_node_allocator,=
- node, 1);
-> > > +         } else {
-> > > +             // GCC 11.1 issues a warning here that incorrect destru=
-ctor might be
-> > called for dummy_nodes
-> > > +-            #if (__TBB_GCC_VERSION >=3D 110100 && __TBB_GCC_VERSION=
- <
-> > 130000 ) && !__clang__ && !__INTEL_COMPILER
-> > > ++            #if (__TBB_GCC_VERSION >=3D 110100 && __TBB_GCC_VERSION=
- <
-> > > ++ 140000 ) && !__clang__ && !__INTEL_COMPILER
-> > > +             volatile
-> > > +             #endif
-> > > +             value_node_ptr val_node =3D
-> > > +static_cast<value_node_ptr>(node);
-> > > +diff --git a/src/tbb/concurrent_monitor.h
-> > > +b/src/tbb/concurrent_monitor.h index 3d20ef5b..3e5c4beb 100644
-> > > +--- a/src/tbb/concurrent_monitor.h
-> > > ++++ b/src/tbb/concurrent_monitor.h
-> > > +@@ -1,5 +1,5 @@
-> > > + /*
-> > > +-    Copyright (c) 2005-2021 Intel Corporation
-> > > ++    Copyright (c) 2005-2023 Intel Corporation
-> > > +
-> > > +     Licensed under the Apache License, Version 2.0 (the "License");
-> > > +     you may not use this file except in compliance with the License=
-.
-> > > +@@ -290,7 +290,17 @@ public:
-> > > +             n =3D my_waitset.front();
-> > > +             if (n !=3D end) {
-> > > +                 my_waitset.remove(*n);
-> > > ++
-> > > ++// GCC 12.x-13.x issues a warning here that
-> > > ++to_wait_node(n)->my_is_in_list might have size 0, since n is // a
-> > > ++base_node pointer. (This cannot happen, because only wait_node
-> > > ++pointers are added to my_waitset.) #if (__TBB_GCC_VERSION >=3D 1201=
-00
-> > > ++&& __TBB_GCC_VERSION < 140000 ) && !__clang__ &&
-> > !__INTEL_COMPILER #pragma GCC diagnostic push #pragma GCC diagnostic
-> > ignored "-Wstringop-overflow"
-> > > ++#endif
-> > > +                 to_wait_node(n)->my_is_in_list.store(false,
-> > > + std::memory_order_relaxed);
-> > > ++#if (__TBB_GCC_VERSION >=3D 120100 && __TBB_GCC_VERSION < 140000 )
-> > &&
-> > > ++!__clang__ && !__INTEL_COMPILER #pragma GCC diagnostic pop #endif
-> > > +             }
-> > > +         }
-> > > +
-> > > +--
-> > > +2.43.0
-> > > +
-> > > diff --git a/meta-oe/recipes-support/tbb/tbb_2021.11.0.bb
-> > > b/meta-oe/recipes-support/tbb/tbb_2021.11.0.bb
-> > > index f834726bd6..318cd87643 100644
-> > > --- a/meta-oe/recipes-support/tbb/tbb_2021.11.0.bb
-> > > +++ b/meta-oe/recipes-support/tbb/tbb_2021.11.0.bb
-> > > @@ -16,6 +16,7 @@ BRANCH =3D "onetbb_2021"
-> > >  SRCREV =3D "8b829acc65569019edb896c5150d427f288e8aba"
-> > >  SRC_URI =3D "git://github.com/oneapi-
-> > src/oneTBB.git;protocol=3Dhttps;branch=3D${BRANCH} \
-> > >
-> > > file://0001-hwloc_detection.cmake-remove-cross-compiation-check.patch
-> > > \
-> > > +
-> > > + file://0001-Fix-suppress-new-GCC-12-13-warnings-1192.patch \
-> > >  "
-> > >  S =3D "${WORKDIR}/git"
-> > >
-> > > --
-> > > 2.43.0
-> > >
-> > >
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > > Links: You receive all messages sent to this group.
-> > > View/Reply Online (#112495):
-> > > https://lists.openembedded.org/g/openembedded-devel/message/112495
-> > > Mute This Topic: https://lists.openembedded.org/mt/108644971/1997914
-> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsu=
-b
-> > > [raj.khem@gmail.com]
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > >
+Thank you,
+Jason Schonberg
+
+--00000000000025e5020622f881ff
+Content-Type: text/x-patch; charset="US-ASCII"; name="syslog-ng-upgrade-4.6.0-4.7.0.patch"
+Content-Disposition: attachment; 
+	filename="syslog-ng-upgrade-4.6.0-4.7.0.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_m1ie4a330>
+X-Attachment-Id: f_m1ie4a330
+
+Y29tbWl0IDRiNjFkNDhlOGU5N2I0MjhlMTQ1NDQxMDU4ZGM1ZGU3YmJjZjE4YzMKQXV0aG9yOiBK
+YXNvbiBTY2hvbmJlcmcgPHNjaG9ubUBnbWFpbC5jb20+CkRhdGU6ICAgV2VkIFNlcCAyNSAxNToy
+NTo0NCAyMDI0IC0wNDAwCgogICAgc3lzbG9nLW5nOiB1cGdyYWRlIDQuNi4wIC0+IDQuNy4wCiAg
+ICAKICAgIENoYW5nZWxvZyA6CiAgICBodHRwczovL2dpdGh1Yi5jb20vc3lzbG9nLW5nL3N5c2xv
+Zy1uZy9yZWxlYXNlcy90YWcvc3lzbG9nLW5nLTQuNy4wCiAgICAKICAgIERyb3BwZWQgcGF0Y2gg
+LSBtZXJnZWQgaW4gdGhpcyB2ZXJzaW9uIDoKICAgICAqIDAwMDEtbWFjcm9zLWd1YXJkLWlwdjYt
+Y29kZS13aXRoLVNZU0xPR19OR19FTkFCTEVfSVBWNi5wYXRjaAogICAgCiAgICBOZXcganNvbi1j
+IGRlcGVuZGVuY3kgZml4ZXMgY29uZmlndXJlIGZhaWx1cmUuCiAgICAKICAgIFNpZ25lZC1vZmYt
+Ynk6IEphc29uIFNjaG9uYmVyZyA8c2Nob25tQGdtYWlsLmNvbT4KCmRpZmYgLS1naXQgYS9tZXRh
+LW9lL3JlY2lwZXMtc3VwcG9ydC9zeXNsb2ctbmcvZmlsZXMvMDAwMS1tYWNyb3MtZ3VhcmQtaXB2
+Ni1jb2RlLXdpdGgtU1lTTE9HX05HX0VOQUJMRV9JUFY2LnBhdGNoIGIvbWV0YS1vZS9yZWNpcGVz
+LXN1cHBvcnQvc3lzbG9nLW5nL2ZpbGVzLzAwMDEtbWFjcm9zLWd1YXJkLWlwdjYtY29kZS13aXRo
+LVNZU0xPR19OR19FTkFCTEVfSVBWNi5wYXRjaApkZWxldGVkIGZpbGUgbW9kZSAxMDA2NDQKaW5k
+ZXggZjIxYWQ1ZDcwLi4wMDAwMDAwMDAKLS0tIGEvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvc3lz
+bG9nLW5nL2ZpbGVzLzAwMDEtbWFjcm9zLWd1YXJkLWlwdjYtY29kZS13aXRoLVNZU0xPR19OR19F
+TkFCTEVfSVBWNi5wYXRjaAorKysgL2Rldi9udWxsCkBAIC0xLDQwICswLDAgQEAKLUZyb20gODk2
+ZDc3ZGQ5NDliNTJkNmVhNTc5OGU1YTAzOGJhOTdkNmI4MDJiZSBNb24gU2VwIDE3IDAwOjAwOjAw
+IDIwMDEKLUZyb206IFBldGVyIE1hcmtvIDxwZXRlci5tYXJrb0BzaWVtZW5zLmNvbT4KLURhdGU6
+IFRodSwgNCBBcHIgMjAyNCAxNTo0NDoxOCArMDIwMAotU3ViamVjdDogW1BBVENIXSBtYWNyb3M6
+IGd1YXJkIGlwdjYgY29kZSB3aXRoIFNZU0xPR19OR19FTkFCTEVfSVBWNgotCi1XaXRoIGlwdjYg
+ZGlzYWJsZWQsIHRoZXJlIGFyZSBsaW5raW5nIGVycm9ycyBjdXJyZW50bHkuCi1UaGlzIGZpeGVz
+IGl0IGJ5IG5vdCB1c2luZyB0aGUgc3ltYm9scyB3aGVuIElQdjYgaXMgZGlzYWJsZWQuCi0KLVNv
+bHZlcyAjNDgxMCB3aXRoIG15IGNvbmZpZyBvcHRpb25zCi1odHRwczovL2dpdGh1Yi5jb20vb3Bl
+bmVtYmVkZGVkL21ldGEtb3BlbmVtYmVkZGVkL2Jsb2IvMjQ4N2U2NWVlMzg0MmI2YWUwYzdhMjYy
+ODk4NWJlNjE4OWVkOWViZi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9zeXNsb2ctbmcvc3lzbG9n
+LW5nXzQuNi4wLmJiCi0KLVVwc3RyZWFtLVN0YXR1czogU3VibWl0dGVkIFtodHRwczovL2dpdGh1
+Yi5jb20vc3lzbG9nLW5nL3N5c2xvZy1uZy9wdWxsLzQ4ODBdCi0KLVNpZ25lZC1vZmYtYnk6IFBl
+dGVyIE1hcmtvIDxwZXRlci5tYXJrb0BzaWVtZW5zLmNvbT4KLS0tLQotIGxpYi90ZW1wbGF0ZS9t
+YWNyb3MuYyB8IDIgKysKLSAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspCi0KLWRpZmYg
+LS1naXQgYS9saWIvdGVtcGxhdGUvbWFjcm9zLmMgYi9saWIvdGVtcGxhdGUvbWFjcm9zLmMKLWlu
+ZGV4IDU0MTQyNzA2Yy4uZmNiODM2MzdmIDEwMDY0NAotLS0tIGEvbGliL3RlbXBsYXRlL21hY3Jv
+cy5jCi0rKysgYi9saWIvdGVtcGxhdGUvbWFjcm9zLmMKLUBAIC0yNzcsMTIgKzI3NywxNCBAQCBf
+Z2V0X29yaWdpbmF0aW5nX2lwX3Byb3RvY29sKGNvbnN0IExvZ01lc3NhZ2UgKm1zZykKLSAgICAg
+cmV0dXJuIDA7Ci0gICBpZiAoZ19zb2NrYWRkcl9pbmV0X2NoZWNrKG1zZy0+c2FkZHIpKQotICAg
+ICByZXR1cm4gNDsKLSsjaWYgU1lTTE9HX05HX0VOQUJMRV9JUFY2Ci0gICBpZiAoZ19zb2NrYWRk
+cl9pbmV0Nl9jaGVjayhtc2ctPnNhZGRyKSkKLSAgICAgewotICAgICAgIGlmIChnX3NvY2thZGRy
+X2luZXQ2X2lzX3Y0X21hcHBlZChtc2ctPnNhZGRyKSkKLSAgICAgICAgIHJldHVybiA0OwotICAg
+ICAgIHJldHVybiA2OwotICAgICB9Ci0rI2VuZGlmCi0gICByZXR1cm4gMDsKLSB9Ci0gCi0tLSAK
+LTIuMzAuMgotCmRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9zeXNsb2ctbmcv
+c3lzbG9nLW5nXzQuNi4wLmJiIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvc3lzbG9nLW5nL3N5
+c2xvZy1uZ180LjcuMC5iYgpzaW1pbGFyaXR5IGluZGV4IDk3JQpyZW5hbWUgZnJvbSBtZXRhLW9l
+L3JlY2lwZXMtc3VwcG9ydC9zeXNsb2ctbmcvc3lzbG9nLW5nXzQuNi4wLmJiCnJlbmFtZSB0byBt
+ZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9zeXNsb2ctbmcvc3lzbG9nLW5nXzQuNy4wLmJiCmluZGV4
+IGFiNGE4ZDE4Mi4uNTg4YTM4MTI2IDEwMDY0NAotLS0gYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9y
+dC9zeXNsb2ctbmcvc3lzbG9nLW5nXzQuNi4wLmJiCisrKyBiL21ldGEtb2UvcmVjaXBlcy1zdXBw
+b3J0L3N5c2xvZy1uZy9zeXNsb2ctbmdfNC43LjAuYmIKQEAgLTEzLDcgKzEzLDcgQEAgTElDRU5T
+RSA9ICJHUEwtMi4wLW9ubHkgJiBMR1BMLTIuMS1vbmx5IgogTElDX0ZJTEVTX0NIS1NVTSA9ICJm
+aWxlOi8vQ09QWUlORzttZDU9OTI0OTU4Y2VmYzlmN2RlM2UwYjgxODgzMmI4YTFjZWMiCiAKICMg
+dXRpbC1saW51eCBhZGRlZCB0byBnZXQgbGlidXVpZAotREVQRU5EUyA9ICJsaWJwY3JlIGZsZXgg
+Z2xpYi0yLjAgb3BlbnNzbCB1dGlsLWxpbnV4IGJpc29uLW5hdGl2ZSBjdXJsIgorREVQRU5EUyA9
+ICJsaWJwY3JlIGZsZXggZ2xpYi0yLjAgb3BlbnNzbCB1dGlsLWxpbnV4IGJpc29uLW5hdGl2ZSBj
+dXJsIGpzb24tYyIKIAogU1JDX1VSSSA9ICJodHRwczovL2dpdGh1Yi5jb20vYmFsYWJpdC9zeXNs
+b2ctbmcvcmVsZWFzZXMvZG93bmxvYWQvJHtCUH0vJHtCUH0udGFyLmd6IFwKICAgICAgICAgICAg
+ZmlsZTovL3N5c2xvZy1uZy5jb25mLnN5c3RlbWQgXApAQCAtMjMsMTEgKzIzLDEwIEBAIFNSQ19V
+UkkgPSAiaHR0cHM6Ly9naXRodWIuY29tL2JhbGFiaXQvc3lzbG9nLW5nL3JlbGVhc2VzL2Rvd25s
+b2FkLyR7QlB9LyR7QlB9LnRhCiAgICAgICAgICAgIGZpbGU6Ly9zeXNsb2ctbmctdG1wLmNvbmYg
+XAogICAgICAgICAgICBmaWxlOi8vc3lzbG9nLW5nLnNlcnZpY2UtdGhlLXN5c2xvZy1uZy1zZXJ2
+aWNlLnBhdGNoIFwKICAgICAgICAgICAgZmlsZTovLzAwMDEtRml4LWJ1aWxkcGF0aHMtd2Fybmlu
+Zy5wYXRjaCBcCi0gICAgICAgICAgIGZpbGU6Ly8wMDAxLW1hY3Jvcy1ndWFyZC1pcHY2LWNvZGUt
+d2l0aC1TWVNMT0dfTkdfRU5BQkxFX0lQVjYucGF0Y2ggXAogIgogU1JDX1VSSTphcHBlbmQ6cG93
+ZXJwYzY0bGUgPSAiIGZpbGU6Ly8wMDAxLXBsdWdpbi5jLXdvcmthcm91bmQtcG93ZXJwYzY0bGUt
+c2VnZmF1bHRzLWVycm9yLnBhdGNoIgogCi1TUkNfVVJJW3NoYTI1NnN1bV0gPSAiYjY5ZTMzNjBk
+ZmI5NmE3NTRhNGUxY2JlYWQ0ZGFlZjM3MTI4YjExNTJhMjM1NzIzNTZkYjRhYjY0YTQ3NWQ0ZiIK
+K1NSQ19VUklbc2hhMjU2c3VtXSA9ICJiNjAxMjY1MzYyYzYzM2EyNWYyNmM0OTdhN2U1NzU5Mjcz
+OWQ1YTU4M2I3OTYzYjcyMmZmNThmMDFiODUzNTA2IgogCiBVUFNUUkVBTV9DSEVDS19VUkkgPSAi
+aHR0cHM6Ly9naXRodWIuY29tL2JhbGFiaXQvc3lzbG9nLW5nL3JlbGVhc2VzIgogCg==
+--00000000000025e5020622f881ff--
 
