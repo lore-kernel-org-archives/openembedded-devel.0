@@ -1,86 +1,124 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <vincent.prince.fr@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B0BADCCFA13
-	for <webhook@archiver.kernel.org>; Thu, 26 Sep 2024 09:40:15 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.web10.38614.1727343606814600762
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8784CCFA13
+	for <webhook@archiver.kernel.org>; Thu, 26 Sep 2024 09:49:15 +0000 (UTC)
+Received: from mail-yb1-f182.google.com (mail-yb1-f182.google.com [209.85.219.182])
+ by mx.groups.io with SMTP id smtpd.web10.38708.1727344153823991994
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Sep 2024 02:40:07 -0700
+ Thu, 26 Sep 2024 02:49:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=jyhix4PY;
- spf=pass (domain: smile.fr, ip: 209.85.128.44, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-42ca4e0299eso6303865e9.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Sep 2024 02:40:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=grWX0eAP;
+ spf=pass (domain: gmail.com, ip: 209.85.219.182, mailfrom: vincent.prince.fr@gmail.com)
+Received: by mail-yb1-f182.google.com with SMTP id 3f1490d57ef6-e116d2f5f7fso1504419276.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Sep 2024 02:49:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1727343605; x=1727948405; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=2NZcEZEM51waj+/nVV2vaPOi4PVBuhI63/l/mJcTkTA=;
-        b=jyhix4PYfdGS2ggTx2fLux+FKBIJWFCcI6s2win5qc+444hQbIQw5zIXwmPf+GroM6
-         DbAkm140ec3CawLRn/+2GYtG/HpRCg6PbPW5QiyV48Nzh+35b9seZCEjf38X1lzFKU+f
-         qys1EfdFu0usy0MpNKlB1Hry2KKCSHrZ4jmVs=
+        d=gmail.com; s=20230601; t=1727344153; x=1727948953; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=zUYMlUQsD3WaVKwqo0B1HlkJWrytqT4GzY/cZoQ4dLo=;
+        b=grWX0eAP04OmaO89YSBYUOlH9nt/c1O3Kq4A+ciq2IY1fSCAQM/wi8e8UIiHRlFRE6
+         tffgzqtaAEbrXts7lBO4LlXULsXaNZpEW+fURp5G12ARVepa1Ydmlm6CgXImOu2qIgo5
+         AtX+TCU6d1WRtxtYbiOsNt5RHSCsGzW/m9ydLIy/1UnnIJnHgSXqmY903RlB+90FNB4Y
+         78jCI+1fKjgNXGpKqvKB0NbvpAQdQ+BGOI042qPvGdSziCtKSpFwEuOqDRFvG4XQlJRD
+         G1su+UR/mw0OKLpGS+ruXvMzmiUUFEpYiv3jtimtoV8kAgGvGxR71c+qefrEFtYPFIB8
+         eOeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727343605; x=1727948405;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=2NZcEZEM51waj+/nVV2vaPOi4PVBuhI63/l/mJcTkTA=;
-        b=nb4hbVGMJvUBLJ1rGsjZZJSLttCj5ylFQ/JYf5VsaqMAkfIWASLX2wMAbUWAcC+hYU
-         6pw+V+X9QM5tSuFqnldncMGRYhoHenqSYpBHYnejesO4Gu4SJFf8TR8ud3D2UDY5SUob
-         /5tZHFfJpyLn6yMCMYihlySb2XmWCD3iCD59/yhFA3eYzUQ17CQ5kgECuWTgBFgp+O0+
-         0ucMfZ+yQeUBv/4iqWgZGl88Y2iUyEMiWTGVneolO9m1Bl4nbByq/RajCt32unSwrXk2
-         wAOoTHRTG2Afpr3y9Vma7Mr5gKlbBwft6juDW3PGYKH+sllTEe/TT+JYdtV77bEbEDJu
-         XDAg==
-X-Gm-Message-State: AOJu0YzprUi/vsWskqIx92mYJg9MSQaUkATCYvpno52MKih9DlY37klX
-	1ypdOZXZKsMX6KO2vyNytpZXqEDQQZlafUs6N1M1KKvj1QMRcRxXcZ+vfqXniqg8/+T9wu3JcEL
-	M
-X-Google-Smtp-Source: AGHT+IE5UMxyLYaL0iOfAkilS/GGCaqgG0u+e30alg2ChxYphmNSJOvLFg0uOkZFMBfRA/IzAeRIIg==
-X-Received: by 2002:a05:600c:3d05:b0:42c:de2f:da27 with SMTP id 5b1f17b1804b1-42e9610381bmr38383915e9.2.1727343604901;
-        Thu, 26 Sep 2024 02:40:04 -0700 (PDT)
-Received: from P-ASN-ECS-830T8C3.idf.intranet (static-css-ccs-204145.business.bouyguestelecom.com. [176.157.204.145])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-37ccd4a0e34sm2000412f8f.91.2024.09.26.02.40.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Sep 2024 02:40:04 -0700 (PDT)
-From: Yoann Congal <yoann.congal@smile.fr>
-To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-oe][PATCH v2] polkit: Update Upstream-Status of a merged patch
-Date: Thu, 26 Sep 2024 11:39:55 +0200
-Message-Id: <20240926093955.3740217-1-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.5
+        d=1e100.net; s=20230601; t=1727344153; x=1727948953;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=zUYMlUQsD3WaVKwqo0B1HlkJWrytqT4GzY/cZoQ4dLo=;
+        b=VC2YcebXVpTZfEvor0+Ce4aXbKzso4rDzg7hOdloEZtyv4UDnVcthv50Dt1P+y/GMT
+         kHPvjjiJJjv6+7q29ZXQ5SZQIRYfPCHfWoGln0i11kcAWxd1ALgSqaX1bqmn+Y5F9tSv
+         CvpyMzTO7+GKLkxySutGKxGDi+Badk663trzKbZjd90dZ1nvJMEdN632/vtePknfbtew
+         7o3oshfKF5Y0LcbH1XWmn7b0VtkGPdZUVtPfJTZPxLgrbUzBdHdFHAZxew5H39cDXYgO
+         rj4Azavz+L6dtdyss27k2EKwx6H5930vUSJztHz3Y7CUruEq+8xPLiZEQ/HkC9g4JSBI
+         3CQg==
+X-Gm-Message-State: AOJu0YyaoXPEzZlZINmLdcQDstKo0zdmzNPya+MK9OJ03DYZCGD6ApwH
+	sPU82pjpOqGrrpaCzEctLBn6jQBhqZBkE0IBZQ7VpLxPm9LKM4as5+dm05IxKFG0gotFMvYiMMH
+	F+PAUBX5oAge008f+3Ip8wg184Rs=
+X-Google-Smtp-Source: AGHT+IFhnhLgef9VTYzdYUwKC4yKf92Sx3dMHs7NaO+tcaMf6Kqn+zVKEsralPyuOdJdr964usOmK+zlrurMkc6NxVw=
+X-Received: by 2002:a05:6902:118d:b0:e22:4f5a:6882 with SMTP id
+ 3f1490d57ef6-e25ca9976ebmr1633756276.25.1727344153015; Thu, 26 Sep 2024
+ 02:49:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240925144556.1451584-1-dmitry.baryshkov@linaro.org>
+In-Reply-To: <20240925144556.1451584-1-dmitry.baryshkov@linaro.org>
+From: Vincent Prince <vincent.prince.fr@gmail.com>
+Date: Thu, 26 Sep 2024 11:49:02 +0200
+Message-ID: <CAB2nKc_d33JRj7kLQju6SdB9OnnE37E82baQoj2nVPirsqnFOQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][scarthgap][PATCH] libdevmapper: Inherit nopackages
+To: dbaryshkov@gmail.com
+Cc: openembedded-devel@lists.openembedded.org, 
+	Peter Kjellerstedt <pkj@axis.com>, Peter Kjellerstedt <peter.kjellerstedt@axis.com>, 
+	Khem Raj <raj.khem@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Sep 2024 09:40:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112514
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 Sep 2024 09:49:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112515
 
-From: Yoann Congal <yoann.congal@smile.fr>
+Hello all,
 
-https://github.com/polkit-org/polkit/pull/497 was merged as
-https://github.com/polkit-org/polkit/commit/1d4f7f4d9f3d74fb2649c96faa8677416c1aefc2
+Any update on this backport patch? :)
 
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
----
-v1->v2: removed duplicated Upstream-Status
----
- .../meson-build-Support-openembedded-OS-for-PAM-config.patch    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Best regards,
+Vincent
 
-diff --git a/meta-oe/recipes-extended/polkit/files/meson-build-Support-openembedded-OS-for-PAM-config.patch b/meta-oe/recipes-extended/polkit/files/meson-build-Support-openembedded-OS-for-PAM-config.patch
-index cc396dfa3b..445f2fbdb0 100644
---- a/meta-oe/recipes-extended/polkit/files/meson-build-Support-openembedded-OS-for-PAM-config.patch
-+++ b/meta-oe/recipes-extended/polkit/files/meson-build-Support-openembedded-OS-for-PAM-config.patch
-@@ -14,7 +14,7 @@ NB: This is also the same config as Debian but its not mentioned in the
- code.
- 
- Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
--Upstream-Status: Submitted [https://github.com/polkit-org/polkit/pull/497]
-+Upstream-Status: Backport [https://github.com/polkit-org/polkit/commit/1d4f7f4d9f3d74fb2649c96faa8677416c1aefc2]
- ---
-  meson.build       | 2 +-
-  meson_options.txt | 2 +-
+Le mer. 25 sept. 2024 =C3=A0 16:46, Dmitry Baryshkov via
+lists.openembedded.org <dbaryshkov=3Dgmail.com@lists.openembedded.org> a
+=C3=A9crit :
+>
+> From: Peter Kjellerstedt <pkj@axis.com>
+>
+> This fixes errors from buildhistory changes where packages-split would
+> be empty.
+>
+> Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> (cherry picked from commit 90f96e053ad3eefa7693d9748efdfbfa72d7dcfd)
+> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+> ---
+>
+> The oe-core got commit c9e2a8fa2f03 ("buildhistory: Simplify intercept
+> call sites and drop SSTATEPOSTINSTFUNC usage") backported to the
+> scarthgap branch. Backport the fix for libdevmapper too.
+>
+> ---
+>  meta-oe/recipes-support/lvm2/libdevmapper_2.03.22.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-oe/recipes-support/lvm2/libdevmapper_2.03.22.bb b/meta-=
+oe/recipes-support/lvm2/libdevmapper_2.03.22.bb
+> index be558ce1d218..3b4439c3ae06 100644
+> --- a/meta-oe/recipes-support/lvm2/libdevmapper_2.03.22.bb
+> +++ b/meta-oe/recipes-support/lvm2/libdevmapper_2.03.22.bb
+> @@ -5,6 +5,8 @@ require lvm2.inc
+>
+>  DEPENDS +=3D "autoconf-archive-native"
+>
+> +inherit nopackages
+> +
+>  TARGET_CC_ARCH +=3D "${LDFLAGS}"
+>
+>  do_install() {
+> --
+> 2.39.5
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#112496): https://lists.openembedded.org/g/openembedde=
+d-devel/message/112496
+> Mute This Topic: https://lists.openembedded.org/mt/108648856/3616779
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [v=
+incent.prince.fr@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
