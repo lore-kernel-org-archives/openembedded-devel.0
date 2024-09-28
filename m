@@ -1,114 +1,169 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 13713CF6493
-	for <webhook@archiver.kernel.org>; Sat, 28 Sep 2024 00:28:11 +0000 (UTC)
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web10.5078.1727483272375694191
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C84C4CF6497
+	for <webhook@archiver.kernel.org>; Sat, 28 Sep 2024 09:34:13 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.10467.1727516051887774597
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Sep 2024 17:27:52 -0700
+ Sat, 28 Sep 2024 02:34:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=OEAtMwOM;
- spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-20b01da232aso19799435ad.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Sep 2024 17:27:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1727483271; x=1728088071; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=SFYCXXl6rV20CF0LtGAitWzGx9PGapiKmp8XiRB6MLY=;
-        b=OEAtMwOM7rtvzLyXMQWRivIRgLhjlWp2bHf02i1bUloob3nqOBH761Km/5HMalK0s5
-         2WJM1LMVFOv2zRwRMFE/kcWE/Bn8sb0AYP8QgwhHsp7W4hbhPY6s7ZGRnA/N+Mjz0J4B
-         O4QT9bQDbcVYbkD4WyVScUja+hayJQKduqSWh8PTm1LHxmm2Apd86hSgL1SEMjNvKSvu
-         jUj828N8oLuDNsuNxqJhbeM9y6Fe48Dpv06tcm12xJbsTesUAxwDRN31zpWMxXAFeK0M
-         AOo94TJ1v7FK03W/JnLVY3WvUMWSTOeQTUKnbO3cSD1OibswEOY2EaamMmqRRuPsCCLi
-         5puA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727483271; x=1728088071;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=SFYCXXl6rV20CF0LtGAitWzGx9PGapiKmp8XiRB6MLY=;
-        b=aG28m+EHsbCU8DIxsqyUTrz/F7My833iCfVlSgQyVNE2yamU+TJLVviXjA1xzBbZEu
-         sXKlOOos2oxTt9Oxh7CHO3qRxF/6WGWl/Lt6ecPOEX8QGVzKh7KzTxlhW1T5w5Vs1IOx
-         KP4pSfA0YoXYFh+atrI7ZQMpSS2+HLeFk5wcmwVKAUQO66Cn2mBYw2rLgJUhDyOsQDD1
-         bz7HJ5DJX/cKqR/B4u8bqoJJ0pmLaoGmwFrJ/XbtIrbc3452IEKQ3Dm2jJbXefTvcYR0
-         rz0yHGOw56jM2jz91NN3w/E8vY8Th9CT8JwMDYwXECllQ1YOaayRE8Byxr8Vk7zPPiGy
-         8xvQ==
-X-Gm-Message-State: AOJu0Yz7iFaS/1f1tFy4qELG+Ak/yNH+P8T9UvXOf178S6pxKmzNesm4
-	HlURSLIRDXNtQF2Zs9+17JeQb9DAIR3aXxr+e5Qc3DGte5PdbW6nWhV+KA==
-X-Google-Smtp-Source: AGHT+IE533Q+5RdanuXeGmmBlKbmJcypSiQTYkVpTSd7YdMGiuTtdAwvNpHFyiEaTbh/xXglqEiY0Q==
-X-Received: by 2002:a17:903:24e:b0:20b:db4:d913 with SMTP id d9443c01a7336-20b365f4b2amr81726985ad.11.1727483271346;
-        Fri, 27 Sep 2024 17:27:51 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::caca])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-20b37d5ef7fsm18667405ad.22.2024.09.27.17.27.50
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Sep 2024 17:27:51 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=900161c346=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 48S9YBxK002547;
+	Sat, 28 Sep 2024 09:34:11 GMT
+Received: from nam11-co1-obe.outbound.protection.outlook.com (mail-co1nam11lp2169.outbound.protection.outlook.com [104.47.56.169])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 41x8s889j8-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sat, 28 Sep 2024 09:34:10 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=H0JWc5YUAUeVkpXc7U62gOh8YYa3SHLqeYA3yE90Djb8+M4pPMkShPKuIQeo8CRooRhkve6WOe4x021/SUQbY047E7qrBYhzeqMg/wZzySiWVxeM+iqvuTN+hjXulGWt/Jokr6JezAGMuQZ4z8wpvQYqD74b+plmbJi8E6iNDUBVnmernjqB/096SYGZccpl1mqhViz0+xvzWV7fX0IWiyDphyNKNO8+rLd8AyQ6kNrR3C3CF1Y1Fb/t9h6mrf2pArPjpL4bnCQqoS00O1CF+xV+QG90e8OF0bH0tppX/zPZ6sEGWKDWcn23Hkw7cb453swtluUVa+GhLI0EiLptng==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Sz7eEj3YCssm+osY63HVWfHJJ1cFuLB/1XPGhWVXLlY=;
+ b=eWRwrj98MqqmzJf/LxqQ8BQGo+hfLFDSU0XmDK1ZBShnDeDyqW6c9HELwttVEh54nvTDg9XLNn+dRpV0KpRR8HdBDvxQjjFNTgix86kv/EEP9KraCC0CNKZrmQA7zPn3lYzTl5Emk1mxWF9BiyGLp22XmTjHfe+lg4br/L6AqBIZfln462tezsE50hkW6UwDHj3Bhl42zrR2a2QCi21LtoOp8cfi1YA3LlqvP72mhP3BrJx8UrTi3FPxIlhCGhtj5HVtRUR9UAGePg52OLhYRPiKagDuIzkwqSJkYjBQndj0lMwZ4D2ZvHgLrK+0pwZAKrGW348BSacLOPvNDbtg2w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5) by
+ SA1PR11MB5876.namprd11.prod.outlook.com (2603:10b6:806:22a::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.31; Sat, 28 Sep
+ 2024 09:34:07 +0000
+Received: from DS0PR11MB6399.namprd11.prod.outlook.com
+ ([fe80::2b44:787c:e7ee:bfad]) by DS0PR11MB6399.namprd11.prod.outlook.com
+ ([fe80::2b44:787c:e7ee:bfad%5]) with mapi id 15.20.7982.022; Sat, 28 Sep 2024
+ 09:34:07 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] mariadb: Fix build with clang-20/trunk
-Date: Fri, 27 Sep 2024 17:27:49 -0700
-Message-ID: <20240928002749.3755339-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.46.2
-MIME-Version: 1.0
+Subject: [meta-oe][PATCH 2/6] gnulib: upgrade 202401 -> 202407
+Date: Sat, 28 Sep 2024 17:33:52 +0800
+Message-Id: <20240928093356.3992191-2-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240928093356.3992191-1-yi.zhao@windriver.com>
+References: <20240928093356.3992191-1-yi.zhao@windriver.com>
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TYWPR01CA0003.jpnprd01.prod.outlook.com
+ (2603:1096:400:a9::8) To DS0PR11MB6399.namprd11.prod.outlook.com
+ (2603:10b6:8:c8::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|SA1PR11MB5876:EE_
+X-MS-Office365-Filtering-Correlation-Id: af7e5107-1d26-48ef-b301-08dcdfa0b344
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|52116014|376014|366016|1800799024|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?IwFBz7AjGqg4fYyFt5nfDfIdzkCDT9rBDfdY2dAKK6oGWZrPwNAGikp3IniW?=
+ =?us-ascii?Q?UOY8VtiREWrNyRNd9xGt9EFiw8GXSFokzLEGVeN7Y0ucs1jIyY+YAiJe0F1S?=
+ =?us-ascii?Q?d9MK018tzj9QXzvFTY0plyeZe/pcTgfCa0jLmFnVyIFshF2pmRTwAksG71PJ?=
+ =?us-ascii?Q?OY2IEaduENeX6+jzIfSwd0iMDzkR39N4/Jr1KuDgg+Um742MvRf0wjsVGhx+?=
+ =?us-ascii?Q?LUy+IYncFP+m+WhzhOmTul0zV1WPCpabxQ91iygs7yYnqqBfYZYHoG4XldeA?=
+ =?us-ascii?Q?arfq1+9nKbZBpNebVMuA/Q/p+ofvfKyz/MyYCUuqK8qxPWHpUjnOMsSURjHh?=
+ =?us-ascii?Q?Pu/SG/zwWus+Lh+hpdjjTZp9RWHiWChi7cXypqWBrCYDo8qiBk+IsRDyP1KR?=
+ =?us-ascii?Q?fG0GxpW6XoAtgD4FFj/5Bki4HknxxacWFxYZ/og5YzBOMHTL+yRQtp+r38u5?=
+ =?us-ascii?Q?HDursyfgaZU3TYNd1lmxBojeJXSSa3TTO3uiwEMgJb5b0jwpQX3ScPsCJQz9?=
+ =?us-ascii?Q?jguphzMlsz4EUl3txuRbjaWuHpfqAtXTvuJXYb3DD/SToQV4mK3D1xk1qZnd?=
+ =?us-ascii?Q?Ms/ZRyx221LBeezUx0Z2w2zLre6ruVYmDlnTGquFaFOeg69o2tgpRgZvHu8Q?=
+ =?us-ascii?Q?FQcoteHp+in4KNb98gH5T9qZIibOFm05x1EpO2fY1OiHVkn9de0O05FZ3jx/?=
+ =?us-ascii?Q?vd+qEqm9vX73FfiOs6E2lLnseGKizxPZTft6bRbGH2gFhInnd/z/Po0mboSC?=
+ =?us-ascii?Q?7hy034AsI+/zFk/7UljFkgphLdOhxaFutK0487b+5AdRNNGWiquibYICM5St?=
+ =?us-ascii?Q?BT+fFxx9TN0NQCovnFVFM8CFpzGWsEzk/FlInehmUMQuwSR0DVT+c1MsvqT+?=
+ =?us-ascii?Q?HUaG+w2APch3xBOWwGOo5Lkl/wAENbVnKCeEIbdu0gSqIdf6koqYLknj04Hu?=
+ =?us-ascii?Q?0+ZfTDIoCYg3Z8WE4qVhBSOkLPEP4CPViadsnMyv1LA4yfCCzn6wPOX+F+GH?=
+ =?us-ascii?Q?wfwsmIPWRGc4Qpykvzy5ixYEuwsq0WR2SIhGiikBhVqodGx0/t6DpA9OE4Xq?=
+ =?us-ascii?Q?LFeirlprynmWpsrPKPmOZxf0i4LozrwfaK2MdQFaWFzv+SSLxD8tRpJoiPzg?=
+ =?us-ascii?Q?Pcpl6fExbtagbDCVlAldYF9y0i9vqGvTWi7pOhOxGaBO8Vx4dEDLypbleH21?=
+ =?us-ascii?Q?kNu2jlBIrsVq4hGSpKMeHEBIptlfoLxZzt9dzWumgVtU6hBh3ium0FbLPDjn?=
+ =?us-ascii?Q?tmPc47yd1AmlB/3txowdypsH9k6D7K3Q5j/NDFfPe5dK5ptBjAfs325EmZQ3?=
+ =?us-ascii?Q?kNo1tRwMDXGHEb9KyxCAQZsLwgUSiU/HS/JsaJEx9HrQ1Q=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(52116014)(376014)(366016)(1800799024)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?Fl+PBhTNCbfFGfKWXz7pFPhkQPw/CkjR3yNRL4kiBPLY7zZlyr8WOhcndr/h?=
+ =?us-ascii?Q?xt6Q+LbMo1rVYrUnygB04XbqUJm5tXm9goRsolKQ7DN1kMTWg0Z/ZVSB15+X?=
+ =?us-ascii?Q?u4L0W3TTD1KU2PzHOJTTSwwDJizzjDzYZy0O1Iv+9/y8XvdMzPkwQ+874b/W?=
+ =?us-ascii?Q?hDqKeS8JW6srySTw1vj6j6qmCDdclX4sKb220S1615piUnGIlNv3eYBj3eC3?=
+ =?us-ascii?Q?ErFn3gUOVadsxjIW69ZynpduNqWJKPKP5XxNodfYsjIWGpV3jUrP3ZMkurx2?=
+ =?us-ascii?Q?YrNHj4fHG7d3ZPOwtBYuF8QrNfCRHxQW2dxVel9KvCzcvj7Kbq84LZ0stuFw?=
+ =?us-ascii?Q?0Zj2JMIqhChS2a1MbLWjJj+LKQ/05afQR2o0yFU5g/K9A3ApSyzqkXMgKFlq?=
+ =?us-ascii?Q?/32ulpEsWTt2BwdJPx1FemQsUX8qlwSK4F/tc1OFlWhYr4XojFWAaskH4+Id?=
+ =?us-ascii?Q?UZEhgsX+fihm/hyOEyDDxZtigDraN0d3VuKFN7gOAwD3FKbqDRmm0BfcoyWY?=
+ =?us-ascii?Q?P4XyPrzOzV7gZJbmG0+Zl2wD31GARrN1+BPVXg+EWUWrBphLDcYpuqcp3vqm?=
+ =?us-ascii?Q?Ic55Dcjr5oQhbNKOeWsCs43eUvBhbH9ydeqXKdG6mp11/fKn7ZVml+dSjtJf?=
+ =?us-ascii?Q?mXL5wt7NIVq6JlaSnL2jN2UWwrBVV6ntClv+/ayB/FeCb4mD7LIu8J0jxipB?=
+ =?us-ascii?Q?cNpR8su27vz6pQkDMaVQIHhcPCm+G3wIB8nTFtJe3hoNMxAxr1ZC7msuzRCo?=
+ =?us-ascii?Q?nqcvCrl8BTverhIOdfrnRrabslQwBrRdVmCREFjbmqJDa3sgi+c0mQt4f1Vq?=
+ =?us-ascii?Q?ZBjXf9sPvP4Z77SZAlUIJIKlDZf+PhvxKLkidHcIylr2e//0uTNmwINCDAok?=
+ =?us-ascii?Q?YmHyx0fmE3xzT3evTEypr3H+g7q/irlP55FLOFYQoo1DIgqPckdgOsw5am07?=
+ =?us-ascii?Q?FpVHoEHd0rfh/BwZvEcKo2Tk5Ml0Tvg9XMuLJcygY5cZjtacD+cp3lnZDYZT?=
+ =?us-ascii?Q?UfN6slMlRt3oeCofhZ9GHw0WmlQhK13b2ZzY1LDWKPPBmXVLB5R7VoKsUyav?=
+ =?us-ascii?Q?MP7JDFGsiAThuiMvgGjZ6STZL/Nd4tPPrHB63daPqU5pJlM+/EWc7tFrbEek?=
+ =?us-ascii?Q?PgRCo0Gl40yBdlnq+nF/hrJkUrxkle1eJRQP6APO6SO53DTD4zLhFZXDMYRs?=
+ =?us-ascii?Q?blL+OWguHmK8Tg27zQkXDbSkwIwM9WnTVwPP9PaRYVya9kb7z0xcU7E4PVwj?=
+ =?us-ascii?Q?U2tf6OvkmQ+pheSdSkzqTIzl8lFfEoXGXadX9kavVkR3GW1MmEK/gdWkwpuS?=
+ =?us-ascii?Q?+FHAmfliRT/lipillJ16LOLg5NTfZvmTOSWSpkZAe7oj8oNoGoB9czunvRmz?=
+ =?us-ascii?Q?niH1x0jHrI6T4bVqmWpaAutlu1YpPMc2qPqYBEUx7zVxsEZIrJOT1gERemtN?=
+ =?us-ascii?Q?nn8XOuqNkSSofT/d5YeOe7NRYdTcZ0YrDb3BLdXwVRhSj4Zk+jZ4P0EDytr6?=
+ =?us-ascii?Q?NocaIBE39hFe1YjPLA/GENO2I6mNlZqrNfQ1JnCTCNVkSonyHegiAr13/arX?=
+ =?us-ascii?Q?ZfVTincOIvWFaanIY/+N6cHOQqxdcKNgeE3v07Ua?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: af7e5107-1d26-48ef-b301-08dcdfa0b344
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6399.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2024 09:34:07.7722
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ztVVq69LThyDwcQ4oYnjldRKHeby+F3OFZAeuWjPZRO4qNCrkV1ipdxlqkI3kMGaACeIwx4u3YQHEIzXN8avaA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR11MB5876
+X-Authority-Analysis: v=2.4 cv=VaulP0p9 c=1 sm=1 tr=0 ts=66f7cd92 cx=c_pps a=MPHjzrODTC1L994aNYq1fw==:117 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=EaEq8P2WXUwA:10 a=bRTqI5nwn0kA:10 a=t7CeM3EgAAAA:8 a=mDV3o1hIAAAA:8 a=yk4_Bq1XnfGXVRKrWggA:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: prBkcKkzKphovnqOrr6DnmIMXGo8AZit
+X-Proofpoint-ORIG-GUID: prBkcKkzKphovnqOrr6DnmIMXGo8AZit
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-28_04,2024-09-27_01,2024-09-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
+ mlxlogscore=939 suspectscore=0 clxscore=1015 mlxscore=0 impostorscore=0
+ bulkscore=0 phishscore=0 malwarescore=0 spamscore=0 adultscore=0
+ priorityscore=1501 classifier=spam authscore=0 adjust=0 reason=mlx
+ scancount=1 engine=8.21.0-2408220000 definitions=main-2409280070
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 28 Sep 2024 00:28:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112533
+ <openembedded-devel@lists.openembedded.org>; Sat, 28 Sep 2024 09:34:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112534
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- meta-oe/recipes-dbs/mysql/mariadb.inc         |  1 +
- ...ction-as-deleter-prototype-in-unique.patch | 26 +++++++++++++++++++
- 2 files changed, 27 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-Use-a-lambda-function-as-deleter-prototype-in-unique.patch
+ .../gnulib/{gnulib_202401.bb => gnulib_202407.bb}               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/gnulib/{gnulib_202401.bb => gnulib_202407.bb} (95%)
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index ae6581ec71..39c9f4c9d5 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -23,6 +23,7 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
-            file://0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
-            file://lfs64.patch \
-            file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
-+           file://0001-Use-a-lambda-function-as-deleter-prototype-in-unique.patch \
-           "
- SRC_URI:append:libc-musl = " file://ppc-remove-glibc-dep.patch"
- SRC_URI[sha256sum] = "0a00180864cd016187c986faab8010de23a117b9a75f91d6456421f894e48d20"
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-Use-a-lambda-function-as-deleter-prototype-in-unique.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-Use-a-lambda-function-as-deleter-prototype-in-unique.patch
-new file mode 100644
-index 0000000000..416b17ba23
---- /dev/null
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-Use-a-lambda-function-as-deleter-prototype-in-unique.patch
-@@ -0,0 +1,26 @@
-+From 713c21880e25108bf0703433432acca58377cc7b Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 27 Sep 2024 11:55:53 -0700
-+Subject: [PATCH] Use a lambda function as deleter prototype in unique_ptr
-+
-+Fixes build with clang/libc++ 20+
-+
-+Upstream-Status: Submitted [https://jira.mariadb.org/browse/MDEV-35040]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ extra/mariabackup/backup_copy.cc | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/extra/mariabackup/backup_copy.cc b/extra/mariabackup/backup_copy.cc
-+index a328f5e0ec7..2ab04b78bce 100644
-+--- a/extra/mariabackup/backup_copy.cc
-++++ b/extra/mariabackup/backup_copy.cc
-+@@ -1641,7 +1641,7 @@ is_aria_log_dir_file(const datadir_node_t &node)
-+ bool
-+ copy_back_aria_logs(const char *dstdir)
-+ {
-+-  std::unique_ptr<ds_ctxt_t, void (&)(ds_ctxt_t*)>
-++  std::unique_ptr<ds_ctxt_t, std::function<void(ds_ctxt_t*)>>
-+     ds_ctxt_aria_log_dir_path(ds_create(dstdir, DS_TYPE_LOCAL), ds_destroy);
-+ 
-+   datadir_node_t node;
+diff --git a/meta-oe/recipes-support/gnulib/gnulib_202401.bb b/meta-oe/recipes-support/gnulib/gnulib_202407.bb
+similarity index 95%
+rename from meta-oe/recipes-support/gnulib/gnulib_202401.bb
+rename to meta-oe/recipes-support/gnulib/gnulib_202407.bb
+index 41675d358..6a8e9d222 100644
+--- a/meta-oe/recipes-support/gnulib/gnulib_202401.bb
++++ b/meta-oe/recipes-support/gnulib/gnulib_202407.bb
+@@ -11,7 +11,7 @@ SECTION = "devel"
+ LICENSE = "LGPL-2.0-or-later"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=56a22a6e5bcce45e2c8ac184f81412b5"
+-SRCREV = "c99c8d491850dc3a6e0b8604a2729d8bc5c0eff1"
++SRCREV = "02ba2f41c6e88f1c0ef2f90e042dd0b0e44997dc"
+ 
+ SRC_URI = "git://git.savannah.gnu.org/git/gnulib.git;branch=stable-${PV};protocol=https \
+ "
+-- 
+2.25.1
+
 
