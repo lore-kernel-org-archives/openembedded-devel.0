@@ -2,113 +2,95 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 61300CF6495
-	for <webhook@archiver.kernel.org>; Sun, 29 Sep 2024 16:59:33 +0000 (UTC)
-Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
- by mx.groups.io with SMTP id smtpd.web11.36010.1727629164360465802
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 38A48CF6497
+	for <webhook@archiver.kernel.org>; Sun, 29 Sep 2024 19:57:14 +0000 (UTC)
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web11.39304.1727639832649229946
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 29 Sep 2024 09:59:24 -0700
+ Sun, 29 Sep 2024 12:57:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZsuURIGa;
- spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f175.google.com with SMTP id 5614622812f47-3e2a1049688so1721409b6e.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Sep 2024 09:59:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FPImXmCr;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-20afdad26f5so47482815ad.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Sep 2024 12:57:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1727629163; x=1728233963; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Ybr5hqhIbl6TG/fvSiChKyZXHCr8A+Hsyht3BtVssRY=;
-        b=ZsuURIGaEFWypOU3tKdwjFABGWJwuEgyUdcsgD29u9DfCINEiLXzWSBj6a/9ueYBIO
-         uwkBk1yeOOWMW+VebOjdUZ1pgKrTsvCO5MSuNiDZgLC5WU+S7VBLwbEmoQMrbr1kl3UT
-         UgZxfHQtwXd6pM3OfCf5m6rD9cJjkx0D9Y6qx9g6AJ5ZvR7xnvuIEZwwviFSxbniU6vD
-         LGj0/3QFnOhldzTQqkAI3lQv6s+1tekjlfTYvKveXJMYS32BHzmbdgN3gWZrYJohUyVT
-         B/vY1anAkflPUS0OQ/YaqbTl8daA+zRyII4pbfbigI2eRfifRnIzsXrYuqQTit2ibz4k
-         kF9Q==
+        d=gmail.com; s=20230601; t=1727639831; x=1728244631; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=c+bQiFNEIaXIXvd6HLLZD+NghVdAK1jVpj/3L3c/IjE=;
+        b=FPImXmCrDewH97x+Ag/6ftymEWltRQ87ry2hA2/t721YEjHEkSkrjzdNhTAVughnnu
+         OhuTWvbo8wa+QrbcOV4GCcro8z+6iCz+YeuUzQs9VOqq9s3I0x/ScOX74HP5P+siYLt7
+         vleX8DB02slXYFWpCtlni2e3U1GHRKRUSAxWM3gpDqhPmHnFAB8O8dAfVxeQkJAB0GNC
+         DGsMK4HoLk7wB0DJ8GqqkE9VsYxaHEmysA1aEZ2Bz9a8jBZlVREoEKTrZKb0lXSzwp9+
+         sCsHFy82x6GSUzR70MTk0PgRbz9Jy8Wgg84LVgq5PLzqmFDktW6XS24VLcQr/5kjVGz/
+         QrGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727629163; x=1728233963;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Ybr5hqhIbl6TG/fvSiChKyZXHCr8A+Hsyht3BtVssRY=;
-        b=Ovn9tXmRTJcBuCYyp8v8zwzgUWSc8AXF0t50T3I2db3VWJ6voO7MvrIjpkBFf/zqco
-         83lr/9zbpOk9xWFUxdtDNFs5L5reHCYcXgF9KtXjKaBucvXc4eEfP2+cqy0LmfZkW7FS
-         Bja9YDIr48zQpXAaIE9+vgkf/Ua5+j96gAUwBou3GFmn4l7cFVSEbgWqg94Jz0LPzRei
-         xkt8QfO0YTk2iUBa+TyC39uCkiSvd2JXOc56LZfCuPmRbOj/toqNEjvOVS6rZu3LedZI
-         uRFNCdKZrjz5wYDxFDjHrLoVXCS/fqoeXA9Nr7zoS0Q9cbTPdM4P3B0i8ZKBcTZs4UIg
-         GTNw==
-X-Gm-Message-State: AOJu0Yx8lKV/Dczurizk2yATahyW1IyGUSpIDCxGBxDCZVSxEWlELjrm
-	JAqWs1EJAYQNZ0wl6jjVKXtVvbwrhEI+9lOsLn/yo09XHZIGIPvrsTbljetNY1s3+Xw7pVETr2L
-	9ZV85iGjGX5+PnUmtV+DazkZnCMI=
-X-Google-Smtp-Source: AGHT+IHLEDphoV2PPZ/JXijxZpalkXa+dcYgq1B1rie3YwoOYgwhhNDd8bxbZyYqPIK51VeqDNGfKq3tv0KjkBs06Y0=
-X-Received: by 2002:a05:6870:e9a8:b0:261:19a6:41ae with SMTP id
- 586e51a60fabf-28710bb5427mr5924617fac.30.1727629163228; Sun, 29 Sep 2024
- 09:59:23 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240928093356.3992191-1-yi.zhao@windriver.com> <20240928093356.3992191-2-yi.zhao@windriver.com>
-In-Reply-To: <20240928093356.3992191-2-yi.zhao@windriver.com>
+        d=1e100.net; s=20230601; t=1727639831; x=1728244631;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=c+bQiFNEIaXIXvd6HLLZD+NghVdAK1jVpj/3L3c/IjE=;
+        b=dYB+03nv5jKy59wqZ3gc168nur8dewtCqmW/o+G1WJDtWAz8EhZBLNpUg99joA2MK9
+         olTiKql2skcA/Lle8O1RRIAZQt5koMXkbreFn2jpPcME6JsX/2pVBUtUIeCPI0l82in2
+         CgwH7ovTgYDPF/ZUQ2jyj9GF249eE0JOykYE97+MvNZvsjBvPTL+pyj86FSJMTY/LTEC
+         z9TmkieLJeVLbJ1Ci8xDk17jwetsqzMzd8g/OFCfgHrAQ78Jmis6if6Tl8m/q+zlIwwo
+         s00Geac35AQNmtgfyAVywtrJ5fFr1t0fgHVjieQgnKv/+gsQa3P9ybOzl9j5lKyIjMZi
+         UA0A==
+X-Gm-Message-State: AOJu0YwBpZm1EVsw/YLUNY+tpaWQtZLAuJH7oows9he2195tQe/QuHwb
+	eGSTuH54s5EcwQodKgFce3MTrM3bg/bVultqxge7YSt0dPpQhOG3rOTGEQ==
+X-Google-Smtp-Source: AGHT+IHFcxfsZ1npKElVFiSJcpEbRYcyJMpvWsygTCkxsM6iPZoO1eZWHDv3hhs5BpO6SONpXvAI9Q==
+X-Received: by 2002:a17:90b:810:b0:2e0:8bad:6ea4 with SMTP id 98e67ed59e1d1-2e0b8ebee27mr11557063a91.29.1727639831341;
+        Sun, 29 Sep 2024 12:57:11 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::ae14])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2e0b6c74071sm6335984a91.18.2024.09.29.12.57.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 29 Sep 2024 12:57:10 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 29 Sep 2024 09:58:56 -0700
-Message-ID: <CAMKF1soXMN6d+JceM2DPQ7LXfP0FTpafU8YO=OxHGmwsuXnAZA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 2/6] gnulib: upgrade 202401 -> 202407
-To: yi.zhao@eng.windriver.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] python3-scapy: Upgrade to 2.6.0 release
+Date: Sun, 29 Sep 2024 12:57:08 -0700
+Message-ID: <20240929195708.3151070-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.46.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 29 Sep 2024 16:59:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112556
+ <openembedded-devel@lists.openembedded.org>; Sun, 29 Sep 2024 19:57:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112557
 
-This patch causes netcf to break -
-https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/4182/step=
-s/14/logs/stdio
-netcf can be removed these days, if we can remove it from libvirt as
-dependency, libvirt has already removed it as a needed
-packaged few years ago. I will accept a removal.
+Switch to PEP-517 build backend
 
-On Sat, Sep 28, 2024 at 2:34=E2=80=AFAM Yi Zhao via lists.openembedded.org
-<yi.zhao=3Deng.windriver.com@lists.openembedded.org> wrote:
->
-> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> ---
->  .../gnulib/{gnulib_202401.bb =3D> gnulib_202407.bb}               | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-oe/recipes-support/gnulib/{gnulib_202401.bb =3D> gnulib_2024=
-07.bb} (95%)
->
-> diff --git a/meta-oe/recipes-support/gnulib/gnulib_202401.bb b/meta-oe/re=
-cipes-support/gnulib/gnulib_202407.bb
-> similarity index 95%
-> rename from meta-oe/recipes-support/gnulib/gnulib_202401.bb
-> rename to meta-oe/recipes-support/gnulib/gnulib_202407.bb
-> index 41675d358..6a8e9d222 100644
-> --- a/meta-oe/recipes-support/gnulib/gnulib_202401.bb
-> +++ b/meta-oe/recipes-support/gnulib/gnulib_202407.bb
-> @@ -11,7 +11,7 @@ SECTION =3D "devel"
->  LICENSE =3D "LGPL-2.0-or-later"
->
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D56a22a6e5bcce45e2c8ac184f8141=
-2b5"
-> -SRCREV =3D "c99c8d491850dc3a6e0b8604a2729d8bc5c0eff1"
-> +SRCREV =3D "02ba2f41c6e88f1c0ef2f90e042dd0b0e44997dc"
->
->  SRC_URI =3D "git://git.savannah.gnu.org/git/gnulib.git;branch=3Dstable-$=
-{PV};protocol=3Dhttps \
->  "
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#112534): https://lists.openembedded.org/g/openembedde=
-d-devel/message/112534
-> Mute This Topic: https://lists.openembedded.org/mt/108701369/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../python/{python3-scapy_2.5.0.bb => python3-scapy_2.6.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-devtools/python/{python3-scapy_2.5.0.bb => python3-scapy_2.6.0.bb} (95%)
+
+diff --git a/meta-networking/recipes-devtools/python/python3-scapy_2.5.0.bb b/meta-networking/recipes-devtools/python/python3-scapy_2.6.0.bb
+similarity index 95%
+rename from meta-networking/recipes-devtools/python/python3-scapy_2.5.0.bb
+rename to meta-networking/recipes-devtools/python/python3-scapy_2.6.0.bb
+index d57cb977e4..ba21c46055 100644
+--- a/meta-networking/recipes-devtools/python/python3-scapy_2.5.0.bb
++++ b/meta-networking/recipes-devtools/python/python3-scapy_2.6.0.bb
+@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ # If you want ptest support, use the git repo
+ # UTscapy does not exist in the pypi pkg
+ #
+-SRCREV = "0474c37bf1d147c969173d52ab3ac76d2404d981"
++SRCREV = "f7a64114b35fd8ee63ce07290f8a2dffd52b215f"
+ SRC_URI = "git://github.com/secdev/scapy.git;branch=master;protocol=https \
+            file://run-ptest"
+ 
+@@ -24,7 +24,7 @@ S = "${WORKDIR}/git"
+ 
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-inherit setuptools3 ptest
++inherit python_setuptools_build_meta ptest
+ 
+ do_install:append() {
+         mv ${D}${bindir}/scapy ${D}${bindir}/scapy3
 
