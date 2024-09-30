@@ -2,277 +2,211 @@ Return-Path: <niko.mauno@vaisala.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BC4D5CE8373
-	for <webhook@archiver.kernel.org>; Mon, 30 Sep 2024 16:26:22 +0000 (UTC)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.106])
- by mx.groups.io with SMTP id smtpd.web10.59036.1727713570740389019
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1E47CE8372
+	for <webhook@archiver.kernel.org>; Mon, 30 Sep 2024 16:29:02 +0000 (UTC)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com (EUR05-AM6-obe.outbound.protection.outlook.com [40.107.22.130])
+ by mx.groups.io with SMTP id smtpd.web11.59601.1727713738383524773
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 Sep 2024 09:26:13 -0700
+ Mon, 30 Sep 2024 09:28:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@vaisala.com header.s=selector1 header.b=kAvyTlwN;
- spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 40.107.21.106, mailfrom: niko.mauno@vaisala.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=rC4HerGz;
+ spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 40.107.22.130, mailfrom: niko.mauno@vaisala.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pGGwZY7QzcyAwPC2+HPY+GVJLZC1ZPkHkFXbmKW67HLPqvx57hl6+Hs0DzOfjsCjq1M5WnJo4jQ9KXo2a04uYi8fuAZy3CYnLsV/KY/gRKoGeMHmHCW9PxPxvanVaFG4sPvt3z9/OgEim42y4LoDVZHz0+lsQ3xdd2ESUszQgpfFgVoMEkeFthxaeapBIl1CzzrTZ9SbBvy+h22acoyPmuxkdONTfQGqdz0Jee1YASq/hY9CYulk6AE1aSY5AYWDcAGTDy9sSIPDMp7TVEPeuqMOVc25wZDKemFfX+67+fhy50LoCJ6bh5bB1ddJ/8fCXNrZ7R26O5QAaFa9GWrLlQ==
+ b=kvDS51lS8zoQqLP2+xeQ21WiqQSnRpEK8UdIxCCfMjKQnwl1c1EVS3ajMuW38TQut3nVwoSn9NiROls13TqIAuDZgXpeq9RnXeHbf23MlgrDFF+jZ4CAytyjtVnlNxk272fswmyQDanrz4jBozUkUI9Xu+RJP3hduedqDZAJhEllj7sRLA4LRK1CZ77+HfUR0poRERQ9LNKZPC4Pboj5iGnj9YduFejwVq+3q/Y6gj06TUF2Q0zBqi4YbXWfkuc79PDcgHOrIpaZnLMwoJYnsstWh0JcYKeNU83mjnMVod8yJsfaAONm5vxup23ny7m7yLYj078cdA2pdtEq3Dw+GA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SnmMC0Kl0E/NUc4Njj32WfLC7oaHXJ/7FbVg/y4Og7g=;
- b=h8wxdmnhakQRUHOtcOsCqxvgWEM69jEh1bNiN6FPnsC/pl55z/o59wSYHo6Z3Yjw7Zsm9hbLM9DX2NDLaYnLAggAQMsl0nr5Iia1El2D/UFD/ukXcXyaRVngn3efWjockYw9WfJ3UPAmICDNcMUounvQoiZMMUopPbzVJ+QUMYr6+2SXAFcBfVbgtIXTvyXc6yIquub3I4ENuc06dmpL8wg/SmZlmgGk1BP+jDNYbdf5zazjKxSbDdPU6GmrMYR36+Y50WYZihJVhrteixzw/6Lj9VLuKhsfhxAGYpRWMK4ka6yUIVkOLn5ZqOBjGeeQSV9Mt1WQA+ACWLOaCU6XXg==
+ bh=YTxTycX3EqK9p2pD1dH2kwOzZfiZMy+SEBHULSfCq2w=;
+ b=XP9K3pevhkzk02gjEeUXQs2P+OBZQBCFO0ykXsIg5aGJv7yAmM8VguMi/suT+FHCJ8WyD3zblIrXuE0dH2imPKw1MHg097bKpugUm7cRcJpI5vT+XUepZuHb/lnGtyBG+EZLjLj0IoBFRqOJ9R35lOSRc7hYOnZgeIZAFg59KICWtEg4zclKobkMYlu3l3mQa/KYWBtTwaNFo/E6SM3KpkWVbccTtYmI11/h98QAx0mXVNPclKi3oBW8faF90mpWTQX+njoqQozL4cquJBqYkO+zDt6T6Mmb8llmHIE10tX3i/gWItZDzWRmfrp7e0q9C7XAFxuG0I26EaadI3pb5Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
  dkim=pass header.d=vaisala.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SnmMC0Kl0E/NUc4Njj32WfLC7oaHXJ/7FbVg/y4Og7g=;
- b=kAvyTlwN6meLUUQ+4usNeDIPO/rKQvkrGU6RuXYQ2Oa0DTYu9lbgRAdGn4ll7Uyl2QhCtXtXPfQzlEQKRVWVDd6gWOtNp4tcr1uDxPJI+obuMpe7+8tJ9Q/zuKfNq4e7qUxWZLNpULBsDYoh8DZO/6ZlkEEp+WFnzJ3Fu4muLl470TpXl3Ksxmmh/t6L3hp8+qtFR7CNRP+9AN5iNpd6zaBNIo8v7bjdKyEhRXDc24RRCHUWKpD5EzXu2q5OyNS2EZRUgut/ceETbgse9sQzO0VyJWW6r8euUMxbtXbsUsIRGjxUuss9Yos5SDSEI1LZLCjq41IdzGCGOuLB+eZtJA==
+ bh=YTxTycX3EqK9p2pD1dH2kwOzZfiZMy+SEBHULSfCq2w=;
+ b=rC4HerGziw86ha7xPAmf1Fhgq30kigZPa/yaddMvLF3yrewEp+Eg4GfWTXOj39PwDjjjSOvCDjva2kn2oLQRpXqdbELaQ24LDTP2weq2YIFyBuIJM44WW0MWLSEqBtLg/bm3Kd1456eU2ixAFn2Do6oFITHqeuLR8OhomMrFAuYXr3vqZii/Xdlz4+vXL6wTU28OtK+ru94iGKO8trWDtNXyNBfljH44Nz6lkPlxXNoYifwz8GG5Mloy+z4xJgEN1Zde9Ul4l1Cc2zx0QIQ8ibifacm8YXNm+2ymgoWy2NTXvYmaN6cSnpLX5W3VAfOCC4muN1DDGt9JL3/tItOaoA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vaisala.com;
 Received: from AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
  by DB8PR06MB6426.eurprd06.prod.outlook.com (2603:10a6:10:12a::10) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.26; Mon, 30 Sep
- 2024 16:26:05 +0000
+ 2024 16:28:54 +0000
 Received: from AS4PR06MB8447.eurprd06.prod.outlook.com
  ([fe80::af93:b150:b886:b2bc]) by AS4PR06MB8447.eurprd06.prod.outlook.com
  ([fe80::af93:b150:b886:b2bc%6]) with mapi id 15.20.8005.024; Mon, 30 Sep 2024
- 16:26:05 +0000
+ 16:28:54 +0000
+Message-ID: <1cd00a33-a0db-41af-bd9c-1a567626265d@vaisala.com>
+Date: Mon, 30 Sep 2024 19:28:53 +0300
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-oe][PATCH 1/4] mysql-python: Remove obsolete recipe
+To: Khem Raj <raj.khem@gmail.com>
+CC: openembedded-devel@lists.openembedded.org
+References: <20240930120524.2051403-1-niko.mauno@vaisala.com>
+ <CAMKF1sp_0-6Ep9av_PMS37EfDxKz4vA7UswcY4nPbgPzTjLd+Q@mail.gmail.com>
+ <5853cef6-3edf-4614-9b0e-fd572b6286d4@vaisala.com>
+ <CAMKF1soMOpdvsV7gf7c82YdFaV6UvGHX1hznRifPiu0qnf_vhQ@mail.gmail.com>
+Content-Language: en-US
 From: Niko Mauno <niko.mauno@vaisala.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: raj.khem@gmail.com,
-	Niko Mauno <niko.mauno@vaisala.com>
-Subject: [meta-oe][PATCHv2 1/4] mysql-python: Remove obsolete recipe
-Date: Mon, 30 Sep 2024 16:25:29 +0000
-Message-Id: <20240930162532.4064184-1-niko.mauno@vaisala.com>
-X-Mailer: git-send-email 2.39.2
+In-Reply-To: <CAMKF1soMOpdvsV7gf7c82YdFaV6UvGHX1hznRifPiu0qnf_vhQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-ClientProxiedBy: AM0PR05CA0083.eurprd05.prod.outlook.com
- (2603:10a6:208:136::23) To AS4PR06MB8447.eurprd06.prod.outlook.com
+X-ClientProxiedBy: AM0PR04CA0119.eurprd04.prod.outlook.com
+ (2603:10a6:208:55::24) To AS4PR06MB8447.eurprd06.prod.outlook.com
  (2603:10a6:20b:4e2::11)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|DB8PR06MB6426:EE_
-X-MS-Office365-Filtering-Correlation-Id: d06001e9-02ea-4753-3c6c-08dce16c9553
+X-MS-Office365-Filtering-Correlation-Id: f95b5526-e2ca-4962-6dbd-08dce16cfa13
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|52116014|376014|1800799024|38350700014;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?Ze2E7sFHCmZA+kLqfsV9kl7oz0flHKA0khqabUmU915oXC2K5YsD6rOdPMBl?=
- =?us-ascii?Q?iYZhHeNxkAEjaR63TmzcGQhMaiBi1IK0YqMotbfZn024WSJSO1kTzAJE5q5b?=
- =?us-ascii?Q?r92d9TJJzIczAZmrCar+DxdD1F6GhXMvs/gkWBgG8obHEROdL9nQKJvoTVsL?=
- =?us-ascii?Q?f4eORkLg7edckzSCNsjeAvJUzfuNR/KCtUTKT6jJl6UhzjHs5/aPOe4biEon?=
- =?us-ascii?Q?enBYfhrMCN8y9ZnkqltI1nK9Zc0vnA6tGSp1l4AsEEDabQdhIMsnVqytzUjP?=
- =?us-ascii?Q?A9QKb1ZYqvnd+iBARCfou8IDQZF0tyaDCjrbhZ80LeePMVY7+mcHlVgl5Yj5?=
- =?us-ascii?Q?eNdXGKCRiU+8cu4ZaVxDeVALWxyKF/cpg9MikyIFdF4z+pOM9XD+wCtcRsQc?=
- =?us-ascii?Q?1qtrJCMEJxZw75YnGvfA+bsZjKsv91CsGL4GzCD3X7rkXRq3FIt8LizUPlZj?=
- =?us-ascii?Q?Z4ReKLUFMqS9/NBepdRt/U+Af5xmY0ltd0Qu0OJc06+IZPYo1AYr2q+5ynk7?=
- =?us-ascii?Q?zxVND4ul30b/kP3jdjodfuzxKSqNqbRDpcMiCclbsOwqcdqU5dqPD3KaWT9F?=
- =?us-ascii?Q?j8//XlwZTnIyBJEYDG2ZoK35X91OynyPGV/04haqnkOo1VfVeJrsRiCXtgoW?=
- =?us-ascii?Q?gn63Fex0tvCUwhNq/JXIx7MKuJBzp8GvfZ/7lX27HCeb8crbmqOgTpJd2TIz?=
- =?us-ascii?Q?BVNqmYsW/jM+toFeXGqzy3U6IvzoT1YJ+ax4gXF2mKz/QpSCOVDYK91hKzX0?=
- =?us-ascii?Q?65UQ8kdAewJVnQ9ZKAFA2nyl7dTcqnKLFDNHZCfH607W2poiIFR2e+pMvaQ/?=
- =?us-ascii?Q?x01OJFh+pNCsOFbawVJvWb1KAUCrdN4ut5FWQZu77+BVe/udtJLs1mvZi/De?=
- =?us-ascii?Q?inH6jvK65bdh5ugrfyzpgspJo9NfTCJPlZNpRq/2+AMWq8U9vZ2f3xriDXpP?=
- =?us-ascii?Q?dVq39ptHJ6jRdjlKPEnhr1RhmMJ07+pK6x8qH5bjHaSey5qOHEvSNArtJglR?=
- =?us-ascii?Q?EnhCe35XrvOwBuyVMLEFmFnsMpZZX+2+3Kecc4VXEt1b+fya+SLd3HzKCCVM?=
- =?us-ascii?Q?sKJB1fNKpupoRT+bh94YEhdXS/5eC7L3m2lM9VkC2wIZw61SnJspg5AEHGm7?=
- =?us-ascii?Q?qSnlXUs81zohjLp7L7QWS71ouJF58HTOS4BsARJ2XeEihyr5Eytvg7gLy/5T?=
- =?us-ascii?Q?As/Zq1GvviSWvnscchJLB9XVYyAV934qtcO1C266bSS4snucId5Zw3I079qU?=
- =?us-ascii?Q?dhgBkEfgRVPc7aQ6rLnrKOfTxXFpFbIHfY5HwAJRNw=3D=3D?=
+	=?us-ascii?Q?7965JR/Des1kahodsgoCQDresK+DanzzreyvhBka28WeDdMbM8kH2qp3+eRu?=
+ =?us-ascii?Q?odldTUwwEVM4iAAKyFjnA0sFdzQNxdFmnfJEM9QWITBSREVqZEfqweIxGgSk?=
+ =?us-ascii?Q?Djo3QC5MsNFYtWegVttJEbCi45NVuvQKYT9TAVn8e/vKcdGMWQJgNloOvqBI?=
+ =?us-ascii?Q?50d7GK7L5oRaxxGXsBcU88jOsD5eWIMmghFeHOo4HoVxcNzfUqtHc8rhVs9T?=
+ =?us-ascii?Q?pikNEntAg1UFONM59Ub0EhSJtn6X67x6DZKollaOv5RIaraxBMPITpYsJBlH?=
+ =?us-ascii?Q?2FBO3h3pdMfLtnXX128WiXnV7Nveh92qP140wAGz0rE9o6ke8G6kuiG8Gx9H?=
+ =?us-ascii?Q?B+Z7pwb7f26B4J1+6eYWCM+JlrZ8szhSEPTqlSVNXDfNaKrzeBnmDsYM9d4t?=
+ =?us-ascii?Q?OUhEj6mqaAgmCvby7C8acENbdThdJhzbs6U6Ek+Y9KASDC1w5eFnUFXNAf2Q?=
+ =?us-ascii?Q?V3gDzohkzOqaiGldGzGnqqOdZhIwqUDtT2WevO6aukER/rui4eOTF1byDYu6?=
+ =?us-ascii?Q?blmfA3I/OzCtNUWcZ65TLNrO8wmmbOj0WuP3sEplmsnzL1hSfNVC0BBNsJlB?=
+ =?us-ascii?Q?4cc6Azm6TPac+1560c9lFFAr807tZJoQ/fGLsZawRK8mJVlOifxqqTfmeZUf?=
+ =?us-ascii?Q?mlonhnhv0e9FsTC6bUIxPIO0ZhvRwDyjYk3hS+NmCqLzv8n0j1GMz461DWJq?=
+ =?us-ascii?Q?v00CutjYLh95dYX+b4FOigWmEnUcBMsisZzDxKcaSmX7GNNyBrLTyLt58eHc?=
+ =?us-ascii?Q?zUYNNPqpV+LWuYbHdQbeuZfHuVepBIP17lGWjiy6iJq/CVaU1fwFICmFkK5J?=
+ =?us-ascii?Q?BBM0xJbGOEOUdSyVxF/u+MBX75EbJgR6LjXiGnPrwhXe9HhvfIsfT09fWUci?=
+ =?us-ascii?Q?Alr1yjEZViDAuho53mpCUkK4gLVD+TqpVuCCxScNhmqKwQyVMwlyJbPeMbWW?=
+ =?us-ascii?Q?IcaAkApVgTlMwNJqKfh7fSK0OAIcbIetsUoMutyFE2lJuPUey4+sY5kl/EI3?=
+ =?us-ascii?Q?lhSGqIFAG6aJ0zZ8YYwtDzx0cMT1blcNQLvxiZyDDK6ctMKUD3gvvvA9Ngk9?=
+ =?us-ascii?Q?JQK2zf6XT+ckHuMLHcvmXDbWPOETi8miT//3k0YLLA9hVuCduCTN/nMubqxo?=
+ =?us-ascii?Q?LX348VbKWypGoY7fmhHg8UwkG7N/gEsOqhYHCxqbXz5IZv72RGqdGsfDYKDz?=
+ =?us-ascii?Q?U183QQqnb+W6ejeXAwqgoDDfB/M5KTbbVvdKNA=3D=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(52116014)(376014)(1800799024)(38350700014);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?i/CKQkTgHO3ReJNEqgmcEQplfP0fNrylkr4/16q5p9DeeQZy5bPmxq3k7BnR?=
- =?us-ascii?Q?zYUBlg7Jt80RJ1dQhlnBgkpgEmqv0vp3vU5E326HeRuzRTFqUAWoKqi6yY31?=
- =?us-ascii?Q?2UqJTSYqN4RDVstk0u1UZf5WWaoenIArnE2gqmawXgj7ws0yf9MazgAQkl6N?=
- =?us-ascii?Q?Bdq9PYsvSPBgv7Ag7goL57NfnSf1KmNJvsVCLy1Fgc9qgM7KYgJJU+jeXd7h?=
- =?us-ascii?Q?HW48AyVZRNMiyzuvIg4qcEu+SvYJ58pjwOD5wBf+06bOOXDHUTT9sNHkr2UI?=
- =?us-ascii?Q?KBkq7DTfM3mljpSlm/KEq0qeJUef9T+u+LqSD9ScAg19heOUjeqjejTMWsvo?=
- =?us-ascii?Q?KovdCg6x9r5l8u4FhHZ4R8oNTD2l4Xd+qowNGNvZI/GGgZEnqapoJH4ex5ux?=
- =?us-ascii?Q?l6hdl9ki5xrac50lD8seoxK1bryZ6r2/HUFXV+0yqAIS1Xj+7GAzKsDA//Pa?=
- =?us-ascii?Q?t2KEyvI78932ovtuO/A+B2Q7YM5ZBkgYjFKGyseGXPhbvPJhw9cAQ3NrCcLJ?=
- =?us-ascii?Q?tla+SjJ3psts7S3Suy234yPdey4IBhEJneC753C83VwEgVRdUYz5/F4YcvIl?=
- =?us-ascii?Q?0S2/JzZJVZqNUkmjfLSbtAZ7yc8t/b+OSo1iC3SIy2HOEQM7Rk+nmjSGRUp9?=
- =?us-ascii?Q?iBYc/tYXxA9+QPfk7fz9r9npvMVZsKcQgGvYhL0E6dOiBA/r8rAZu6vxhuvO?=
- =?us-ascii?Q?XXMwmj6qkTFtd+/nIA7jcdnWsaDM9CLlVklEYSN3Em6lIA5Q1vngMj2r6/7p?=
- =?us-ascii?Q?UTSSxAhshnEgtG5ZE5INPEy4RgncPHZ6uALEPR58Lxc8nXQRMfbEfmGcbs5Z?=
- =?us-ascii?Q?9MCL2Jtbmcyc3wsqsa0cZ2A37Ap/lQloDiP0kU6lBsxz8MXSZlLg2xO53ECf?=
- =?us-ascii?Q?LjNJmis1RhDyDGrxRBWJWFGdMr8qPWRF251uhbVoTXB6SKRQarIMJqe+dYI8?=
- =?us-ascii?Q?XAMq+d/WHH7iasgk0s8EC1ocH/mjjo8KtdWTZOtB/KEVkn+7I5zbEmO+bQYR?=
- =?us-ascii?Q?fQ4i+o03mfv7ti+stoSRsCrqMkEGqoQUzl0pt2tyzXpyPg6eR3ZisW4Ut/Rc?=
- =?us-ascii?Q?Dkg3pGe+/FIcG8z9g6sbvQf0EDatmtmfKw7CbAV5OuQ31jKC5/nlXf4YE98S?=
- =?us-ascii?Q?OJu9rLi7Ud/RgqNNZWVYmh/aOfc8m8kYofqmTTxJ2QHz8TJUGb9v4ctSII6q?=
- =?us-ascii?Q?rOfRU7hDhyl/Oveukt4284op2YIFeSYHMFoJ7xZb2P0Wn7Opw8d1KpUA5i6u?=
- =?us-ascii?Q?b8je+9AwxQXx4KxoaX+DYQPrWfLeZFDXs0gNSHY8Yy6vO3R1evIj8rocw6dw?=
- =?us-ascii?Q?2tQeVl3znLGUg3CDfP/74xuioiAPL+Z7wX50Rs+lLbszNdVCh9e4IJTvERPh?=
- =?us-ascii?Q?82RnxTD/Nl6KVpY5DAcVtrg/AI3ZSkD9KdENYgJ+TsuO4AwaM069EfR/IcQo?=
- =?us-ascii?Q?J1SGLPatibEFAVlQaAHz8elNIMR27+0EqjgM+MuzuYmShJiCPN9PnkliuiCt?=
- =?us-ascii?Q?p6sKREt96T6XXk8G/qPwtMGf+mqkwDisSQdEvg1VORJgSDYIMOG9R2Ss7kW6?=
- =?us-ascii?Q?NLYvRvHDpbs4a/pn33FtutlQKnODGuml29YAEz+8klYffZMd1qSqeAj7jmjk?=
- =?us-ascii?Q?mw=3D=3D?=
+	=?us-ascii?Q?4X5/VZc+7K/IhFGtoLxlhJS1ssHdu8rcID3544hI45PqUYcAWzgx3EZruJUu?=
+ =?us-ascii?Q?m+q1oRw8ARujoTmx9QshY/Gm3st+saV6m8Zg1qvbyut7bJZ7GmdSR2UB8VdL?=
+ =?us-ascii?Q?wgbevQmbR33AGeDGe6/PMKc1sm7XH+1POfhoOBT0nENsi+j5KCoGe4P3Jo5z?=
+ =?us-ascii?Q?3UvxNnKYXxoW8thK+CFpGS7vK4/hB20y+VlJkVi13Cix6JTB6AG+mG3I5Y/s?=
+ =?us-ascii?Q?cymB05u+iP84M6ksn9NqqE2F3i6ae+aZ4FgeFWD7bSxdjkMJZZmRFB8/PKun?=
+ =?us-ascii?Q?WLFllODYoJR2fOGi6xzhrimr/J4Cp81cDpbexrGCNaU/dk7DgQRd643J4RZp?=
+ =?us-ascii?Q?7PShR5O+u51MpOFtPiOPTmljuA3H9yLWgLYIgSIFUzbP0OdZC6t4i7Rk26XH?=
+ =?us-ascii?Q?C3ZEfC63rMX5QYofhkP4J9A1qLx9pxdTG5EPoCrF3BdXwwAFRcRVTQVQxVAJ?=
+ =?us-ascii?Q?35V24m0b3GQdw3OvCgedh3TxPkbVnvKmUbUp2auo/rbAXnUEitru7slVyLUf?=
+ =?us-ascii?Q?dpC9kcrxjgDZBOq/Bk87F1hprURFotRsXaKQbAQtXqIW9CdFNz0j06lLe/J9?=
+ =?us-ascii?Q?qZWiK9b/06c50ltqN1ztRv5QZDqZwxClzluzjxYZJ5sFnKN0dQGRiMXDYMTH?=
+ =?us-ascii?Q?AnrbWNkbEOsJX/Nqs6K50/+JQKXxh6vUYiAgiXiMotEYT63yV+W7/2fXJc2q?=
+ =?us-ascii?Q?t7TByGozFy2QBvlWgrVKVdRb/gE3IP2RkAGaXOd9G0CSMs6kG4hc0WWurZlD?=
+ =?us-ascii?Q?XcTfBXZwRla8S6KAlvPxiV3l6Ri3EAAygdXyegPFsFJ4Nz7Q6pHqx1NHnhJU?=
+ =?us-ascii?Q?dGkyRtVnyNirKWmFiwgRjz3sCuo0v7V+uX52a9Np8y/1bzyRh3O6a9fOITwo?=
+ =?us-ascii?Q?E6lgrCXe6+zOM7VxNaWYLi4b7gIJHa/AOW0RA1t6SQLKcAzdaed5JRzBVI+z?=
+ =?us-ascii?Q?5RWuArQUist9OI8oyG2Hf9Y17miI+F1CkgN3yrTfqD2f0g6jrVJMElxTltRZ?=
+ =?us-ascii?Q?g7ZPRAwuptF3o/GfjpI1LpGZfEISDbil7KtkxVkO1xFyiKvno5qDey/qMOf3?=
+ =?us-ascii?Q?A6946b7kFOfd33Zn+fPOvCHN2C64sgllsS3MyNew9s6cXdHaaMyv0NFNs8LX?=
+ =?us-ascii?Q?64wGmWalxPwzQCcur9m37e6HnESMVSsn4z1Elg069DD6Yeu1/JFB31jWi852?=
+ =?us-ascii?Q?JjP8Y21ECPH+dwGrSAh6r44r/J7OLYG7yvq2xEIxon3uujlF6rZN4m7kQ9al?=
+ =?us-ascii?Q?gB40Qkdb1n5q7ffHBMZ/mUtV7EpMgtvy6hKjPz1lmHeMWfx2CQqT3en8DTyn?=
+ =?us-ascii?Q?C6zR08MiubjKW3XJwdkMdj5KTeKzJsqwhigRxcE+tNdk56SSJZyfKVHEcJQv?=
+ =?us-ascii?Q?K2ecDbTLxu/+TtK698OALhdcAE07tKH3nl4/osvUHYqKbxh8fFfdDrLTuCFn?=
+ =?us-ascii?Q?W4rSWYbO6UpxQlqd2ophxRA4r5sx5GzxzkMfr1q64txsFxkrAeG9Ppb/k9XA?=
+ =?us-ascii?Q?nOqktk8bg64Tdpc4J6aaslKatviv/+R3DLOnbJxddT3QIqJBmqV7aUgJ0Zte?=
+ =?us-ascii?Q?AVsOUxY+ESfhhkkYI830kFlwDHzZ0gr2SZTFwHskiX0b0lnPyV+bKU/CUQfC?=
+ =?us-ascii?Q?8Q=3D=3D?=
 X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d06001e9-02ea-4753-3c6c-08dce16c9553
+X-MS-Exchange-CrossTenant-Network-Message-Id: f95b5526-e2ca-4962-6dbd-08dce16cfa13
 X-MS-Exchange-CrossTenant-AuthSource: AS4PR06MB8447.eurprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2024 16:26:05.8723
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2024 16:28:54.8819
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: guEl9Ywgb9Set0JzG0dif7D/d/1oJJZx2O/quyHns877tekkrWx/UnqVCWpRvReOsbhw2tqjgwUoiuEXLb+CLA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: nUu10FxCWNCHDGsiuV0nqensIK2IEP1F+LB6SBQGdnzyRrwpCCzdaV8Fv1I4t7/xM+t0hlSJj+SSjmrxtGOrGA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR06MB6426
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 30 Sep 2024 16:26:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112610
+ <openembedded-devel@lists.openembedded.org>; Mon, 30 Sep 2024 16:29:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112613
 
-This recipe depends on meta-python2, master branch of which has not
-been updated sine February 2022, see
-https://git.openembedded.org/meta-python2/log/?h=3Dmaster
+Thanks, submitted v2 of the four patch series to meta-oe.
+-Niko
 
-Also, master branch of the associated source code repository has not
-been updated since January 2014, see
-https://github.com/farcepest/MySQLdb1/commits/master/
-
-Thus, remove the obsolete recipe, along with associated packagegroup
-declarations/references.
-
-Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
----
- .../packagegroups/packagegroup-meta-oe.bb     |  6 ----
- ...ompilation-with-MariaDB-with-10.3.13.patch | 34 -------------------
- .../recipes-dbs/mysql/mysql-python_1.2.5.bb   | 26 --------------
- 3 files changed, 66 deletions(-)
- delete mode 100644 meta-oe/recipes-dbs/mysql/mysql-python/0001-_mysql.c-fi=
-x-compilation-with-MariaDB-with-10.3.13.patch
- delete mode 100644 meta-oe/recipes-dbs/mysql/mysql-python_1.2.5.bb
-
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/m=
-eta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 6f31283fb..9523e78dd 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -13,7 +13,6 @@ PACKAGES =3D "\
-     packagegroup-meta-oe-crypto \
-     packagegroup-meta-oe-bsp \
-     packagegroup-meta-oe-dbs \
--    packagegroup-meta-oe-dbs-python2 \
-     packagegroup-meta-oe-devtools \
-     packagegroup-meta-oe-extended \
-     packagegroup-meta-oe-extended-python2 \
-@@ -40,7 +39,6 @@ RDEPENDS:packagegroup-meta-oe =3D "\
-     packagegroup-meta-oe-core \
-     packagegroup-meta-oe-crypto \
-     packagegroup-meta-oe-dbs \
--    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "packagegro=
-up-meta-oe-dbs-python2", "", d)} \
-     packagegroup-meta-oe-devtools \
-     packagegroup-meta-oe-extended \
-     ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "packagegro=
-up-meta-oe-extended-python2", "", d)} \
-@@ -225,10 +223,6 @@ RDEPENDS:packagegroup-meta-oe-dbs =3D"\
- "
- RDEPENDS:packagegroup-meta-oe-dbs:remove:libc-musl:powerpc =3D "rocksdb"
-=20
--RDEPENDS:packagegroup-meta-oe-dbs-python2 =3D"\
--    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", bb.utils.co=
-ntains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', 'mysql-python', '', d), "", =
-d)} \
--"
--
- RDEPENDS:packagegroup-meta-oe-devtools =3D"\
-     abseil-cpp \
-     apitrace \
-diff --git a/meta-oe/recipes-dbs/mysql/mysql-python/0001-_mysql.c-fix-compi=
-lation-with-MariaDB-with-10.3.13.patch b/meta-oe/recipes-dbs/mysql/mysql-py=
-thon/0001-_mysql.c-fix-compilation-with-MariaDB-with-10.3.13.patch
-deleted file mode 100644
-index 173241ea5..000000000
---- a/meta-oe/recipes-dbs/mysql/mysql-python/0001-_mysql.c-fix-compilation-=
+On 30.9.2024 19.14, Khem Raj wrote:
+> Rebase your series then on master next and resend
+>=20
+> On Mon, Sep 30, 2024 at 8:34=E2=80=AFAM Niko Mauno <niko.mauno@vaisala.co=
+m=20
+> <mailto:niko.mauno@vaisala.com>> wrote:
+>=20
+>     On 30.9.2024 17.56, Khem Raj wrote:
+>      > Thanks for the cleanup, it would be cool to shed some more perhaps=
+. I
+>      > had to resolve merge conflicts to get this staged into master-next=
+,
+>      > please check if all is ok on master-next
+>=20
+>     Hi Khem, glad if I can help.
+>=20
+>     To me the following three commits currently seem to be in good shape =
+in
+>     master-next:
+>      =C2=A0 - "lio-utils: Remove obsolete recipe"
+>      =C2=A0 - "telepathy-idle: Remove obsolete recipe"
+>      =C2=A0 - "cherokee: Remove obsolete recipe"
+>=20
+>     Unfortunately with two commits I noticed some issues, which I will tr=
+y
+>     to detail below:
+>=20
+>      =C2=A0 - "openlmi-tools: Remove obsolete recipe" commit in master-ne=
+xt
+>     currently removes only the RDEPENDS line in
+>     meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+>     <http://packagegroup-meta-oe.bb/
+>     remove also two more lines in that file which reference
+>     'packagegroup-meta-oe-extended-python2'. Furthermore, it doesn't remo=
+ve
+>     meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
+>     <http://openlmi-tools_0.10.5.bb/
+>=20
+>     Please see
+>     https://git.openembedded.org/meta-openembedded/commit/?h=3Dmaster-nex=
+t&id=3D7b178cf9ea8fe2683741f75ebc220f0f70cb45f8 <https://git.openembedded.o=
+rg/meta-openembedded/commit/?h=3Dmaster-next&id=3D7b178cf9ea8fe2683741f75eb=
+c220f0f70cb45f8
+>     vs.
+>     https://patchwork.yoctoproject.org/project/oe/patch/20240930120524.20=
+51403-4-niko.mauno@vaisala.com/ <https://patchwork.yoctoproject.org/project=
+/oe/patch/20240930120524.2051403-4-niko.mauno@vaisala.com/
+>=20
+>      =C2=A0 - "mysql-python: Remove obsolete recipe" commit in master-nex=
+t
+>     currently removes only the recipe files
+>     meta-oe/recipes-dbs/mysql/mysql-python/0001-_mysql.c-fix-compilation-=
 with-MariaDB-with-10.3.13.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From 45436592aa64308b2ab46f84c6107c6d7de0a3ec Mon Sep 17 00:00:00 2001
--From: Mingli Yu <mingli.yu@windriver.com>
--Date: Wed, 6 Mar 2019 00:16:17 -0800
--Subject: [PATCH] _mysql.c: fix compilation with MariaDB 10.3.13
--
--Use standard API function MYSQL_OPT_RECONNECT
--instead of direct modification of internal structures
--which does not work for MariaDB.
--
--Upstream-Status: Pending
--
--Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-----
-- _mysql.c | 9 ++++++++-
-- 1 file changed, 8 insertions(+), 1 deletion(-)
--
----- a/_mysql.c
--+++ b/_mysql.c
--@@ -2002,7 +2002,14 @@ _mysql_ConnectionObject_ping(
-- 	int r, reconnect =3D -1;=0D
-- 	if (!PyArg_ParseTuple(args, "|I", &reconnect)) return NULL;=0D
-- 	check_connection(self);=0D
---	if ( reconnect !=3D -1 ) self->connection.reconnect =3D reconnect;=0D
--+	if ( reconnect !=3D -1 ) {=0D
--+#if MYSQL_VERSION_ID >=3D 50013=0D
--+		my_bool recon =3D reconnect;=0D
--+		mysql_options(&self->connection, MYSQL_OPT_RECONNECT, &recon);=0D
--+#else=0D
--+		self->connection.reconnect =3D reconnect;=0D
--+#endif=0D
--+        }=0D
-- 	Py_BEGIN_ALLOW_THREADS=0D
-- 	r =3D mysql_ping(&(self->connection));=0D
-- 	Py_END_ALLOW_THREADS=0D
-diff --git a/meta-oe/recipes-dbs/mysql/mysql-python_1.2.5.bb b/meta-oe/reci=
-pes-dbs/mysql/mysql-python_1.2.5.bb
-deleted file mode 100644
-index 15f6b6fb9..000000000
---- a/meta-oe/recipes-dbs/mysql/mysql-python_1.2.5.bb
-+++ /dev/null
-@@ -1,26 +0,0 @@
--SUMMARY =3D "Python interface to MySQL"
--HOMEPAGE =3D "https://github.com/farcepest/MySQLdb1"
--SECTION =3D "devel/python"
--LICENSE =3D "GPL-2.0-only"
--LIC_FILES_CHKSUM =3D "file://GPL-2.0;md5=3Db234ee4d69f5fce4486a80fdaf4a426=
-3"
--
--DEPENDS =3D "mysql5"
--
--SRCNAME =3D "MySQL-python"
--
--SRC_URI =3D "https://pypi.python.org/packages/source/M/${SRCNAME}/${SRCNAM=
-E}-${PV}.zip \
--           file://0001-_mysql.c-fix-compilation-with-MariaDB-with-10.3.13.=
-patch \
--"
--SRC_URI[md5sum] =3D "654f75b302db6ed8dc5a898c625e030c"
--SRC_URI[sha256sum] =3D "811040b647e5d5686f84db415efd697e6250008b112b6909ba=
-77ac059e140c74"
--
--S =3D "${WORKDIR}/${SRCNAME}-${PV}"
--
--SKIP_RECIPE[mysql-python] ?=3D "${@bb.utils.contains('I_SWEAR_TO_MIGRATE_T=
-O_PYTHON3', 'yes', '', 'python2 is out of support for long time, read https=
-://www.python.org/doc/sunset-python-2/ https://python3statement.org/ and if=
- you really have to temporarily use this, then set I_SWEAR_TO_MIGRATE_TO_PY=
-THON3 to "yes"', d)}"
--
--inherit ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "setupt=
-ools", "", d)}
--
--python() {
--    if 'meta-python2' not in d.getVar('BBFILE_COLLECTIONS').split():
--        raise bb.parse.SkipRecipe('Requires meta-python2 to be present.')
--}
---=20
-2.39.2
-
+>     and meta-oe/recipes-dbs/mysql/mysql-python_1.2.5.bb
+>     <http://mysql-python_1.2.5.bb/
+>     it doesn't remove the two lines referencing
+>     'packagegroup-meta-oe-dbs-python2', nor the
+>     RDEPENDS:packagegroup-meta-oe-dbs-python2 declaration in
+>     meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+>     <http://packagegroup-meta-oe.bb/
+>=20
+>     Please see
+>     https://git.openembedded.org/meta-openembedded/commit/?h=3Dmaster-nex=
+t&id=3D1a5d5087f66ad3cea99473223971aab9391ffc94 <https://git.openembedded.o=
+rg/meta-openembedded/commit/?h=3Dmaster-next&id=3D1a5d5087f66ad3cea99473223=
+971aab9391ffc94
+>     vs.
+>     https://patchwork.yoctoproject.org/project/oe/patch/20240930120524.20=
+51403-1-niko.mauno@vaisala.com/ <https://patchwork.yoctoproject.org/project=
+/oe/patch/20240930120524.2051403-1-niko.mauno@vaisala.com/
+>=20
+>     Kind regards, Niko
+>=20
 
