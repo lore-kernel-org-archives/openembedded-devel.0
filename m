@@ -2,53 +2,53 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 499E3CF64A3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5EC66CF64A4
 	for <webhook@archiver.kernel.org>; Mon, 30 Sep 2024 07:44:09 +0000 (UTC)
-Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
- by mx.groups.io with SMTP id smtpd.web10.48964.1727682244698533539
+Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
+ by mx.groups.io with SMTP id smtpd.web11.49311.1727682245224444877
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 Sep 2024 00:44:05 -0700
+ Mon, 30 Sep 2024 00:44:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=K984lSBr;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=QnecDaro;
+ spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1727682245; x=1759218245;
+  t=1727682248; x=1759218248;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=pDS2s9O7StcXutCjtGJAq1KR6l9Ayww4HO1Mip7Emm4=;
-  b=K984lSBreOTuTKYKymMeuzWY1AMpnVtADIiMgr9FVLK7F47sfOvQqAjF
-   U96cciNn5X2ZgX01tOk/koAaxR/Xn2D/sKkQvc/jWTeuKp44oaPY4Jal0
-   Pbzrc/5Z0HvB2aVWnkaQ0wn7wJsKkKyZ8h+rR6SEHanxQdam1RCJKGM2Z
-   cF5+GioTjB71KNGP9bCPfxFktib3LCJOLg7+StkoUx5eO0UB9FOI/Oz6G
-   lTM+t0miGD8r1lm7dwh4Iq8kZzKTdyK00Nvq/uIBQK2cTb8oBMQ+Yr8zZ
-   zOZm2pm/cc5lcNfpJaqz6G3jeRbpYUklPoHDvyev32Z0K80gJovUOEc3u
-   g==;
-X-CSE-ConnectionGUID: czdfUPd2TiOpQYQ384cDrw==
-X-CSE-MsgGUID: ka8ycfIvSeyd7ePVg6He0A==
-X-IronPort-AV: E=McAfee;i="6700,10204,11210"; a="175268024"
+  bh=gxZZ6iVG2PZ3AliS3/kJIp9MBWm4oFTYucSn+Hfrwrw=;
+  b=QnecDarosqQYwbRvRssFjoDqTDJNtDrSVkWXeSRssZEBkWjUeOFqd1G6
+   8eu0TfFZMa4sptYBGcThxd+z7ErDhCtJLr8WxLs2eMqMOf0zccPd/BD+P
+   Efb747sr+lN85O0mYdjhNlhq1NLnZaf4ZigO+9USIxUajg1vRRO0dILHD
+   1CSbua8ZUODwp34FELZUBtPrCDgCtzoJjBZ1mZNOTGI3I/n40jysVrLGE
+   N/MLUCyAZ+fmysBPJLXudVSjqNlshCjAlfQrKBlkVljirT20wHpwg/hWe
+   uEihrmyvBnn/tMCzu6AYhkjoTU9bTZWKzxwYjyz5HFlznAM0IRIUCgrMS
+   Q==;
+X-CSE-ConnectionGUID: Dp0pSvACSUaih0tLpJ/36g==
+X-CSE-MsgGUID: HYadOjSpRCewXAIYh8TdLw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11210"; a="154209974"
 X-IronPort-AV: E=Sophos;i="6.11,165,1725289200"; 
-   d="scan'208";a="175268024"
-Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
-  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Sep 2024 16:44:02 +0900
-Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
-	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 89FC6D8014
-	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Sep 2024 16:44:00 +0900 (JST)
+   d="scan'208";a="154209974"
+Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
+  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Sep 2024 16:44:06 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id A20B9D4F54
+	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Sep 2024 16:44:04 +0900 (JST)
 Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id CFFB1D7726
-	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Sep 2024 16:43:59 +0900 (JST)
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id D78DDD39C8
+	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Sep 2024 16:44:03 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 68CC42007B716
-	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Sep 2024 16:43:59 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 6F7742007B716
+	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Sep 2024 16:44:03 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 1B5CA1A000A;
-	Mon, 30 Sep 2024 15:43:59 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 1E9681A000A;
+	Mon, 30 Sep 2024 15:44:03 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 32/40] python3-thrift: upgrade 0.20.0 -> 0.21.0
-Date: Mon, 30 Sep 2024 15:42:57 +0800
-Message-Id: <1727682185-12664-32-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 37/40] python3-yarl: upgrade 1.11.1 -> 1.13.1
+Date: Mon, 30 Sep 2024 15:43:02 +0800
+Message-Id: <1727682185-12664-37-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1727682185-12664-1-git-send-email-wangmy@fujitsu.com>
 References: <1727682185-12664-1-git-send-email-wangmy@fujitsu.com>
@@ -56,45 +56,54 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28696.005
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28696.005
-X-TMASE-Result: 10-0.435700-10.000000
-X-TMASE-MatchedRID: 4E21WKQgrFSjz0nOeth/yUIIxwDaU5mr+KgiyLtJrSA6HV5wETgDxb6p
-	xbTOjavy+7QcRaVoa8nGKIf6hBf7VaGGOyqBK41vEXjPIvKd74AJlr1xKkE5uYMNZlevXKUzaRF
-	wDs8G7THi8zVgXoAltuJ5hXsnxp7jC24oEZ6SpSmcfuxsiY4QFLzoXijh4ubPWRGHewRhzkAb2u
-	HqIKJMSl8qZX5W5obCSsXzOnjgP4oDGXizRzzES5Xu78/AVM9tMGRfLcpvs6z5/hQG07Advux9n
-	1XpDqsJmC9SiJioatWbjnu8jwgbwH9jicWwFYB0PpCuffGH9zI=
+X-TMASE-Result: 10--3.577200-10.000000
+X-TMASE-MatchedRID: /gZnudouedqjz0nOeth/yUIIxwDaU5mrSExHL6o3BeCF7G1bHV1SIRNh
+	u03caeD7z9YXdGTB0gPVeptTRKjYpWlPvrjnIT0ZA9lly13c/gHVy4hHC3/gyLKw8Hx0EGitcqf
+	oMGP+CwQi+t+0AiFaYgB/8cibO8IY5gZGm/RVVHG5x7uAXGEprfOd2ImQcUyEW1EpqtJXzRujxY
+	yRBa/qJShNCXvA0fw+jaPj0W1qn0TGVuWouVipctw47CkWtQ47F9gfOSa/HgOoIlSauJrjXSFEM
+	LoaVcyHFvKwf+EUdQgiLwcgK2ALkTbYrXtrCNFgNK6j1AWdg2o2JeFlgl8Z2f6/2/nZkihaOgB/
+	fz3EXdcVKT0eFRmfDs4YhafCzgujIdY9jOi4lTI=
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 30 Sep 2024 07:44:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112592
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112596
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
- https://github.com/apache/thrift/blob/master/CHANGES.md
+============
+-Added :attr:~yarl.URL.path_safe to be able to fetch the path without %2F and %25 decoded
+-Restore decoding %2F (/) in URL.path
+-Improved performance of processing paths
+-Added :attr:~yarl.URL.host_subcomponent which returns the :rfc:3986#section-3.2.2 host subcomponent
+-Started rejecting ASCII hostnames with invalid characters. For host strings that
+-look like authority strings, the exception message includes advice on what to do instead
+-Fixed IPv6 addresses missing brackets when the :class:~yarl.URL was converted to a string
+-Improved performance of calling :py:meth:~yarl.URL.build with authority
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-thrift_0.20.0.bb => python3-thrift_0.21.0.bb}      | 2 +-
+ .../python/{python3-yarl_1.11.1.bb => python3-yarl_1.13.1.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-connectivity/python-thrift/{python3-thrift_0.20.0.bb => python3-thrift_0.21.0.bb} (85%)
+ rename meta-python/recipes-devtools/python/{python3-yarl_1.11.1.bb => python3-yarl_1.13.1.bb} (88%)
 
-diff --git a/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.20.0.bb b/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.21.0.bb
-similarity index 85%
-rename from meta-python/recipes-connectivity/python-thrift/python3-thrift_0.20.0.bb
-rename to meta-python/recipes-connectivity/python-thrift/python3-thrift_0.21.0.bb
-index 6a0a66aef..6a22f2170 100644
---- a/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.20.0.bb
-+++ b/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.21.0.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Python bindings for the Apache Thrift RPC system"
+diff --git a/meta-python/recipes-devtools/python/python3-yarl_1.11.1.bb b/meta-python/recipes-devtools/python/python3-yarl_1.13.1.bb
+similarity index 88%
+rename from meta-python/recipes-devtools/python/python3-yarl_1.11.1.bb
+rename to meta-python/recipes-devtools/python/python3-yarl_1.13.1.bb
+index 37d77b718..16708fd1f 100644
+--- a/meta-python/recipes-devtools/python/python3-yarl_1.11.1.bb
++++ b/meta-python/recipes-devtools/python/python3-yarl_1.13.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/aio-libs/yarl/"
  LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=7145f7cdd263359b62d342a02f005515"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
--SRC_URI[sha256sum] = "4dd662eadf6b8aebe8a41729527bd69adf6ceaa2a8681cbef64d1273b3e8feba"
-+SRC_URI[sha256sum] = "5e6f7c50f936ebfa23e924229afc95eb219f8c8e5a83202dd4a391244803e402"
+-SRC_URI[sha256sum] = "1bb2d9e212fb7449b8fb73bc461b51eaa17cc8430b4a87d87be7b25052d92f53"
++SRC_URI[sha256sum] = "ec8cfe2295f3e5e44c51f57272afbd69414ae629ec7c6b27f5a410efc78b70a0"
  
- inherit pypi setuptools3
+ SRC_URI += "file://run-ptest"
  
 -- 
 2.34.1
