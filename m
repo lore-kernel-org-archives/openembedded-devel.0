@@ -2,30 +2,30 @@ Return-Path: <niko.mauno@vaisala.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6C3BCE836E
-	for <webhook@archiver.kernel.org>; Mon, 30 Sep 2024 16:26:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B6C9CCE836F
+	for <webhook@archiver.kernel.org>; Mon, 30 Sep 2024 16:26:22 +0000 (UTC)
 Received: from EUR05-VI1-obe.outbound.protection.outlook.com (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.106])
  by mx.groups.io with SMTP id smtpd.web10.59036.1727713570740389019
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 Sep 2024 09:26:12 -0700
+ Mon, 30 Sep 2024 09:26:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=hf2OioDQ;
+ dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=s8iRp7Ls;
  spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 40.107.21.106, mailfrom: niko.mauno@vaisala.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=N+dtL/nwbZaOgaipW55pg928t9ANcmaSR6TdYNqsjhFPRweE9TK5zhFZrhpUcvyFem6BATOq/+OF9BPiDuLhWOraRMnlWI5G4sKDUTa7XdAZmDQpyL2B/CKA2lqaOawPISB8oPd+g6Klp48ijI2AieOrObNAJfea2RFelJMi2lsiJMPLKzJqG3zkWHrPwKCknU1y1z5XwGxpHWqgvOOsI0LVVnB3107OTwTRJhM1ZOjyVphsDydijjA9CBVeb0KQ9uxGgUWjqjYIqLo2kgea9P4it+3rtxJI8DAOE5Dab5r46q+c0xez25M5H+v8g7rjFBg/1vDbrnQAmXB/H3Gx/w==
+ b=fxfbz25jrBSQBHrkiHNpx6sD17roHMu4E5H5wmPfhOgSc1QNCaLhg3RkrIQAmzSVKuX/0wNowVd5AJ8cY5jhzrYBBtlr/51dTviUQ/oKQH4Fwwt8jCAbIxS/dimwk5O1kq0od7kOOmYp2r0L0q5jPZHnsh53VtU0cJds0OuuE+Y0SbuoXXurTPP4w0LCIBhOphOdei/gab494JSgO+opyMFk7YUV8COO4pNX3s3rm4CfdzfOTwbu3lmrMu9dVS+AZbFWpKxbBW5kIMH0+OVn6xjGNyz/r2hkbasYNEznP9KWeCrtOccIxBv5o8N5mmZnC2iAZRTmcdyQwTo7ZOlV0w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=B2qeWpV8vEBfLLMTtMrIrmdgFCXY0zMq+KREpoJygd4=;
- b=SHorNz5lev6BzVjP+5wv5GCIXCjZ+2Eq+tvDLwk3/13qrBvI5LL3EshH2Mz/3gJoN3D/4BIUk4RPldtui/KLFCAAdkH7D8oBTPFH8TuW/CFhzTCOKJnbNpG6nKs62n51dsW7N165DCS6rvWau5XONwpqAI5MaDWNuJt+iWeSTc0XTpxFt8/8KNT9Rv48FqK/SCjkvaLJOZr5Pbb/4ACstc+FB0zgnXYD2pH6+cRej2pAN3aDe4F8etj81KmQpCXbbAwndoFEow0z9dvepX24ZeVuvZnOIpgIMhagRyGtXrFYG8rRhRmewLfyzTLRuaUmf7T2W5vn0bYraOFZgL9GUA==
+ bh=iZykrOQ3wpk+J0Lfm0L+kFWZ6wQefZ20SDsLIYwROD8=;
+ b=ACQFZ/HKqQA2Of36Fb5PPcBKf3V6gwWRxXMt0vJWFbjMCjnw/X5EdA0OtV2gG2dG2nXfRdY5d9kiDcnCHzERP01hFiXq4A9YgQDUxryxX4n79/LJKv0iEKIWMch88A2rBU+vVvvbXjMTxLA1nwMSxskznkvpD7SIfB/tDohCjGPLnS3Uy61rBvId+kM6KDnAjLaFuo6S4+CRCpSh2nP4r93cow1k4amOcvjQ8BQp9aRCu/sB05YfLZQ8+f3AZMWUS+o2TEwelnRCEqDEUkY6tWigO1AUQWtuDcu41qsIiYbIYSr8B4wa6STsgnxwP6+L4ODepSdToBCJovQBOVivYg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
  dkim=pass header.d=vaisala.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=B2qeWpV8vEBfLLMTtMrIrmdgFCXY0zMq+KREpoJygd4=;
- b=hf2OioDQmmdput2oToZ3OcKXPKs2NGYxeqaHRN8hKi9UZQuCwQa16CvWTvzf2dq3H+wi+WEDYPlVH/+SjMc+3R3Lnlcn1oDOHenbV3XA7M9SofGInb4EC1X+QnXLrxtdD+iNTcVGhgOG6pJb8jKq0q+kFOs9b5l4D3bDInpi9XUgyzbjWwJ7m3bOBfSt/Fg6F3Y9FJj37Me7NX1MN3AagQEliU99BjQTxOBKQGXiTiMMQZOWlJTsc3X7w6wHIH88mUq1apCklzalGL2QYwsc/KIUKW0dH47Jkmxo7Oo0QeuZL/ahQGkUf+FyjohQcWiJi9ua3BYW+9VdJKLWRy+lUw==
+ bh=iZykrOQ3wpk+J0Lfm0L+kFWZ6wQefZ20SDsLIYwROD8=;
+ b=s8iRp7Ls1Z3jFckJLnCklm9ci+Gs+cWUQia3Zdg8PkwfMKso9lF4foVq3cPvDgdFjSREZTZo6gNMFd+SemXYTk+ZaBZtcu74ZEr559LUn4iebpcjkRRBJv/bUlwESAcdkkLzQfD+3xciO57PTJMeyDrGN6koPgHaFjiwCYnuTRF5fJX7TYUvjT9EagWefEkNd0UhL0QgCDSBzLkPKEsgMTawbni7dJn3hDnUjvQr2k2LyWJcsZGHTdGZGb7tuBCMsHpL4u1eSlZI5OXxGbO3U6SSPXCC+4MO86i+eiaExaMMP3ZqBWWnBqRM5fNdmYVqRA7IAOT2Ykh3Fs5Ul3XUdA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vaisala.com;
 Received: from AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
@@ -41,9 +41,9 @@ From: Niko Mauno <niko.mauno@vaisala.com>
 To: openembedded-devel@lists.openembedded.org
 CC: raj.khem@gmail.com,
 	Niko Mauno <niko.mauno@vaisala.com>
-Subject: [meta-oe][PATCHv2 2/4] telepathy-idle: Remove obsolete recipe
-Date: Mon, 30 Sep 2024 16:25:30 +0000
-Message-ID: <20240930162532.4064184-2-niko.mauno@vaisala.com>
+Subject: [meta-oe][PATCHv2 3/4] lio-utils: Remove obsolete recipe
+Date: Mon, 30 Sep 2024 16:25:31 +0000
+Message-ID: <20240930162532.4064184-3-niko.mauno@vaisala.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240930162532.4064184-1-niko.mauno@vaisala.com>
 References: <20240930162532.4064184-1-niko.mauno@vaisala.com>
@@ -55,200 +55,317 @@ X-ClientProxiedBy: AM0PR05CA0083.eurprd05.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|DB8PR06MB6426:EE_
-X-MS-Office365-Filtering-Correlation-Id: 72566292-cfc9-4737-8196-08dce16c9585
+X-MS-Office365-Filtering-Correlation-Id: 0ec39ff1-f89c-4bad-9ce5-08dce16c95b7
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
 	BCL:0;ARA:13230040|366016|52116014|376014|1800799024|38350700014;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?cCNaFcqZTcYHIEdP9v892riOqZQz4/e0VcjXeJIcS/LzcTmJ8jQlug6K0TaL?=
- =?us-ascii?Q?tV0mkAhW/QkFz8O6l2UZAokz6/sDHvrFP4BSGaA2Qirylo4Yc+vHjkuR5r5x?=
- =?us-ascii?Q?czG9/vZiV+17pRIWw4o/iBaMIS0DOK8qNKyNe8UtoZwGovVK1Zl7rL8QHsNF?=
- =?us-ascii?Q?3zXwCU061gvgt0pclzeiJFWhwEUlTlAhkTE8Am/tOKfEv33XBEjbZ2WKY8/N?=
- =?us-ascii?Q?Z6J7vIYA/R1v5ffbqoYnxnGXrqP9G+z5wIa7H5zpIqXYY/lUmVCHVjOpA7p9?=
- =?us-ascii?Q?DDzJZXnYJmo3G/x497j2ahDNk5hUoQia19b/lK1/wCyO0itq9Sx33v7SGe8p?=
- =?us-ascii?Q?BY8wC82pW55LuCywrPBMUiWhfqXm+6KPny0Ea3qIfPeBBwDyPLBV3YLD442n?=
- =?us-ascii?Q?nYCOUNjQwbjq7xYa/gzcp3BYJHyy35esCFHV/+u5CDmYgWi1lVIIpSfjVpqd?=
- =?us-ascii?Q?tS5YKSvvjcorbLwJs5kWYbh7czB/IE39vVvwbnTSJeIyppY2qkhUkz6lCyOt?=
- =?us-ascii?Q?jx9grLTDtLRGI/CwLIhptrCaTjlxr7qPJ6kcAxP1BLuCBaSTPKVQo6xDvC9T?=
- =?us-ascii?Q?7iyOP8+dRrAtAFeqlcJ6coDpWYMjCQZ7yhJ/HSaOnlXMoGt3br+zVCROKhT6?=
- =?us-ascii?Q?Xa1/mQzhKIXSpz1tGQFtYy5+zPYDMklgXhExvQeUkxcZNWiOlyLP4dHbdp7q?=
- =?us-ascii?Q?7/vULTe6uUt7qzYCWO4HpYjQqgRwvRrFzB5hgIQqEe9rk+P/s03JijJVm1pV?=
- =?us-ascii?Q?dD+4kzfqzlODePa1eYHJgxOYiTluzPb3ncSbdOUHUXmWxAXybuC/HyPhRwi8?=
- =?us-ascii?Q?lSIXnMHszqvS+dVSCZWCoybSQv7hYTN/qbTmGLLGUReGwgZKuUEMWZ868EBf?=
- =?us-ascii?Q?qaSTkj/IECsARAoZe4AzYzE0tXa3GL/CBgtFJ8vWTHwaiRNF/bLU2r6KTb5T?=
- =?us-ascii?Q?DEYI0tejoOF3zotRkL9Ujk0VCuBbp+lu8TjQOquVN/2JaiEZLj8vbTEBgVol?=
- =?us-ascii?Q?3ewHciLRSB/4/fnGKUCEpVSlvvZbq4cOJ3e9OkAErMCvXdxjChD7uYaXPlIV?=
- =?us-ascii?Q?lNmj3fCW6frQPsx5zey6zzTFhdRfVbxWR1QkZ+xDzc2yBSC4SrfAWtEuvaF3?=
- =?us-ascii?Q?ngMq515wF/vdahraqpbI3458YoP5Mt6YKyqj6jTYMjKL4Dgm0UEOAkGh8BBi?=
- =?us-ascii?Q?peRpu3/fBHIbaSQQSXOuqBIbVdJUh6end1//etENuVtROoXvRuuhJrvzpavH?=
- =?us-ascii?Q?NgEHuKrP1DupaV5j0vQEYFROWgp5qvTMX24+wVk6Lg=3D=3D?=
+	=?us-ascii?Q?py6JvvjyvUcQLPxwxkqqmAzhVrVMhRpT0dbYVz76BFk06tjUrJsS28ga9buU?=
+ =?us-ascii?Q?bkN6cGN5Xj4wlKyRBZqE7ygPpC7OLqV3b9HI2zf0A61k5M+9+WrMBBcBmIz1?=
+ =?us-ascii?Q?98PJe+ET4GmV7teAEjX7tuRicDJRluhJ5ruRQW0Ny7Dsq79p+yxFer5TeE4S?=
+ =?us-ascii?Q?6dlZZVa0mX+Xx1ZrOTFhgMvonqGUrJoniZ5JmsMtlYTqfUcPGtAzxd6QWhUR?=
+ =?us-ascii?Q?AtfupqMPQTdq13th5LOlbE8ZTySK25+BLBu8gukfCIsqTOtItOp7ZlKSL9vM?=
+ =?us-ascii?Q?tm7z8A94Jamct28M007ZhsbUjN+xSmWkItm66qQJCsPxjmo8PPhpCr0EJofW?=
+ =?us-ascii?Q?nmvmMZC91+UjcO4C4ddRN2ps3s/WY93kOza95jEXx3mzpRlGJouzmwTTh+jT?=
+ =?us-ascii?Q?f8y40MnR10MvfCxOf02nRZPNwX4J/EYiLmoJ/WLpBB9C9BVyax1SI5v54flo?=
+ =?us-ascii?Q?OQdDtFclITWFNyLqP8C5b3gLqaLwEAJbqfJ7aCRaayfLGpvQJR0HKlVlRpJB?=
+ =?us-ascii?Q?0Ja7sr9mtroJ8ELljEYVYHi4N1AYtk8ngEOUjiO6kzxUhPWPtYH7wo+pBP0E?=
+ =?us-ascii?Q?wzA4XJzRfbuYx5dV2EdmdnvKs5yhyZ83GbdUI7Cg5ZWWBCImHHVGizhlDa9R?=
+ =?us-ascii?Q?tY+unS5hCozRth3I/kYslSB6sKVAMvjbsuzCtPoKA6uSzjckzIeDkVtwyDZ7?=
+ =?us-ascii?Q?+XTXx8BibbL4f524gSDqoV+KEyzk0Bu5d2Nh7K45CAt5Fx+ez6snGFpa252c?=
+ =?us-ascii?Q?Axg72dOF9DtyujZtATErWkAknj61C6hAx3g7wUZxkAZVPb3FATNYqKwniHpz?=
+ =?us-ascii?Q?0b9J1e9c+v7mhJ3aaZiWSMj/PFOcVeMlSkcLOzmY5B3LW6rhcAgaNTkXTsq3?=
+ =?us-ascii?Q?aGWKBTBxXwXTfUewCi5SzCmUHtu7rOfNtMpUWrqPQyKgM+2ma3k/BvSmUhOw?=
+ =?us-ascii?Q?tGv4pOn0QNy4F07gD0ZM83Gb/HlyQvHS+G9kLCFPBubcgRg2unWcKPZtoLSh?=
+ =?us-ascii?Q?5s0rLUFXFoULMLxDTcj1pnpaJUq+9lani4iHPeiDuKadAkzoPA7kMXb9P/pa?=
+ =?us-ascii?Q?m+DFuO/Zqb47zskHC375OPCkxzmJDpTKbCwDlq9WCgt2OFFO7nxAsaXrze9g?=
+ =?us-ascii?Q?MoxTL45siQTtkTwvJs7LZMgQaFjBInEXk8cfD5TVT5UAr3boiLR040YQT+Fg?=
+ =?us-ascii?Q?XPW8YKRwsgviluGbRwEUGn8UaSQqWwjCKQcDKKu00DNFAtdOpJuQta6n20GE?=
+ =?us-ascii?Q?MUXa0R5PfJnmMpzyHnCLsjbqpYlB+kg4yx1EVcaD9g=3D=3D?=
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(52116014)(376014)(1800799024)(38350700014);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?hP7gvCkUE4IbC2f8XiMogTWKohFD48buxkf5jYuIWdmzQixGXsZXphHv5sOR?=
- =?us-ascii?Q?amvog4548RT+GxbkP8fxu3ZQbvyJ256wykCiOL7yB+ThUwE061WmwxwQAY4n?=
- =?us-ascii?Q?8mD8sAOtXnmUQy4dLzB6blqnRjnXC56lioPXUQwcKAo4PCk7Ju50NMfwBCkj?=
- =?us-ascii?Q?0U9extsIaxNqNQK7G+5VKkD0CMHlMpkJMv2e/ejKozxs9yo5G5LpdY8bLET0?=
- =?us-ascii?Q?vajN/Fkme+DJt8yBHLBfE2LCOFCn6aLd51URKlJMpILympPd47GuHjuuPbrT?=
- =?us-ascii?Q?w9E4cPYiA3tzown3c9OQ4qc++w+v5MtFlqHLlAxmS2x48a+ecvdyrLoN5EOV?=
- =?us-ascii?Q?WhP1hbfsFkrkBJ2qv6IJc3lDvfXUYOCVDSIAvxzDvZxb8gTO6KP70Xa4QRQx?=
- =?us-ascii?Q?kPQFZINvG/wuozRNrx31hdC1qjbTk8KfRTbb/En1b7E5+/9DwV9tbf3obgXF?=
- =?us-ascii?Q?5H90yJWOosnic3iw/oqZxjjdMyL4lU+5u+Oj9MYssBss+q5y08KLGv7OeRhe?=
- =?us-ascii?Q?9cxiYHvmLWHclN/uO5IEaJFOur4Q+VEwH9OXQvEeZqg7ijfkNa1DGGE7MJ4T?=
- =?us-ascii?Q?j0Y0Vgq3B+f1klXbmaobm5ngogffhNIjttp/sejoMpNXBiOwvyMMk/Xs1HMZ?=
- =?us-ascii?Q?x5P20EErNiiOq9FJQZgj5VFxDdSZfx3hL+TC6mySGBp48kdXPzpN4wU5UaY3?=
- =?us-ascii?Q?9IzrFa2b6MfuqjdfIswnBf2WIgzim6WYGamVjjVly+L7HDWa3LG6hrOp7sYv?=
- =?us-ascii?Q?/VURxyHRbo67clOvPDUx14V5Mz/ePWf90cAEkpnn/JxXtrpVQPE3sTc6WJwK?=
- =?us-ascii?Q?6ZChlnTv/ypg8KZpgLpcF1KsCuaugGu5h+9idqXEDafu32klBanqGqhkwTyy?=
- =?us-ascii?Q?zmb0tPqfyeVmoQzQDMh5g4fStdmuEj6mQyV5knA6CiE9IUssuReHQGE6wPP8?=
- =?us-ascii?Q?d/5EPF/h2SfD+idbdWq5DAF2GpI/3icrJIFwbrKNN1Wb3NbT6Gi5CR0gLoAm?=
- =?us-ascii?Q?RFChL0Al5p10jhRWRMJCe0r5SKnE+ZHVG3wbrCEnd9jC52tfTbGivrjIxJ4T?=
- =?us-ascii?Q?+nrZrwzj5XHY7hmwcywkC+9p0pwJo1mIJMmiVJwYt8fLbkkk+NyUiJ9JYaGH?=
- =?us-ascii?Q?Nx/kf2H9lzr4fzrYUP/Wc3rf+2PtlKmwYJhC6vWuUg8FzcFOQmQXHlYMq7RV?=
- =?us-ascii?Q?R5rkemadjiOQOr3O05BEEkMhnPegwJcFEvYAGEj6b92bj/yFH6PxfrytrVxV?=
- =?us-ascii?Q?CccN6yN4R6wqof625U6CXq+P98ewWeb6f4hvpiceROwLbgHklAfVpG7J/OBj?=
- =?us-ascii?Q?LhU+gFipCZVZybqtJIoC8fTOQKKFRR5fQsHtc3pzkR/eiMjAQUPpiotsjqu0?=
- =?us-ascii?Q?TWInK6WBtP+zf39FPLowTijJl2/TaO/3Fam/tsV3dpm1oZkdvpvBj0pKtdQV?=
- =?us-ascii?Q?+cFSwy0zS4b71LX74pDXl+H7VbZY51Vp0xdW7RzWAheRdUEmCJassZVvYFEr?=
- =?us-ascii?Q?aBeuOyv/ZEFEq7CMvTNKfjI2E6MaoiCsQ5mF+VMRpToorGn2mqsmgb5qoB8n?=
- =?us-ascii?Q?uHeWlqb9jYPdnomzrJwuTwoRaAV+h32ctO0PY2mO3hiETXSmNoE7mYOGnvPQ?=
- =?us-ascii?Q?wg=3D=3D?=
+	=?us-ascii?Q?Q9ED0ytg9NcJchI9S0NtYUm82N1kGPwZ65rbYgt75BPRb3Bj85qqHA9vY8Bj?=
+ =?us-ascii?Q?No54YL5t2jhvN2pWt9y41TjwJaf35Qxc+rcMKRfmHr3D/caX1D+ktMIqZSsR?=
+ =?us-ascii?Q?6BtVN6jdnp2F7Aieo63R+k0uNbFmySof4AOz3jmqWeuhRIyEwFxyEzt9gLQ4?=
+ =?us-ascii?Q?89tIooqLGjIdHOKKqyOqtDXPGzEzVxyaiqdI3Aq1aYMR50OykedgHkB3ypw8?=
+ =?us-ascii?Q?o6XC5UOSdIufLfAdjcIdteZYpe6aeDbDeR6qtpKwGRGoAQ+nYn2KqWyEVFBg?=
+ =?us-ascii?Q?mjMj0WAPIUqiRgp4fqm2iqR9HM9q68KheMXR7eFi6aF7lU9hm8PyaklfMF63?=
+ =?us-ascii?Q?4338nyW0pBRk1xW0y0UxIlEkLT2TVpzOIPc2pv/hqXYGZbhTjtv0w93Pb962?=
+ =?us-ascii?Q?XnfFdVICApgbxzXD5GNyQZYt+JHQNb0khUU1MEVCpNUXsOxe1Nwnyu3dLCzU?=
+ =?us-ascii?Q?4GYIU92i/06uRzwU8SGBT2cbFSdcLMMCugPrgbmyltHuxVHzKl1j5Q6nyu3w?=
+ =?us-ascii?Q?9iLrenFbXBwNg4taci1bTnePezwc3Tsh8/w4Cg7pBpavn2LH8ACFqJsbDLo6?=
+ =?us-ascii?Q?55oV+KpU06gKTLiMtq+You9lAUmrgaB4AdHLD1P9gpyG4prNjX0QNdKBDvCN?=
+ =?us-ascii?Q?wgcizAuHCV2CY1XRZUW5r9yZT8p2wIhSg8wV65S5P2wVNW8g0j65X4ifLQo7?=
+ =?us-ascii?Q?EKaYkWS456p98bvuIc12PocXiUJgKBXBrDYb4lzNcPs+pbp/l/A/A6GPzrvd?=
+ =?us-ascii?Q?iM/IQXnASg3LEqXW2om+WiSSju3PtEDGiEvOl+xM8X4vqQ40eo8tdrvO7ogL?=
+ =?us-ascii?Q?VfivUZmxtCzrrAai0Uy5+QWIYHMh8qKfhHKNk5va8C+ayXYo2MiqUtrNiYaE?=
+ =?us-ascii?Q?b6aHbSY05/Nm7jA2ZKANf80qCx5TEQKf3CPgW4ht6wk6mwhUbHvGR+rWzQd8?=
+ =?us-ascii?Q?dBJiL1rDLBcTSKwedVTaqKQi15Brm63kx2oXBVxHodhB/Ih7ifyUJrQzYaD+?=
+ =?us-ascii?Q?llac6uj/V30mhGjGURsmHtOV1lieEFBYY7tjptLI0Nhov6TEvxnbo20rnjN9?=
+ =?us-ascii?Q?7IlqT40NdY+kbd4ZQdGliDgrUmhVekQjguioHk9XsWy+Q/t8z55TZFKSXiLm?=
+ =?us-ascii?Q?5GhIi26hE7nDATnXJAThFrNkMxAq/Jzk14xKkXXkqBpZ79jW/HLOboVKgzcP?=
+ =?us-ascii?Q?xXS0KvdkCJlkM8HfK3uY706ZvemKaAkhWaS2NbopnBc7x4bq7QlzqBGbrO79?=
+ =?us-ascii?Q?kBTj8hGfgbzQ2+60y/z7zBZbGR43Wuzhhko8V2bxvqRiIm3/uVtQY9Y9zHJz?=
+ =?us-ascii?Q?OA+zvzgpJWJ1XFyryH5KXsfd2JwtTZyeTnpzDBRi2GpVbBYlnpFtHZTo/17K?=
+ =?us-ascii?Q?xj5IUmKxafRYhC/eO7PEOWBch5e+ULI1lhzfLgzvRNwjiw7zBXQrDTZ2a3VM?=
+ =?us-ascii?Q?huwdIF8gMjcvFPnJqO7sBpPUm34SCCQGD3fUjQcRxPndWkdQWMP/9tRgN2HP?=
+ =?us-ascii?Q?j+G/F9LeKzDeuY4Z+F5Df43RoQO8uJp4kd1AFb7v7dobwCM9hW8g4sVndOeV?=
+ =?us-ascii?Q?kPU+oVWsnhqFRenZL2o53O47HUmw2T4MLZ2ttMIjwWT2iqG1x6Sf1B6jNwgE?=
+ =?us-ascii?Q?oA=3D=3D?=
 X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 72566292-cfc9-4737-8196-08dce16c9585
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0ec39ff1-f89c-4bad-9ce5-08dce16c95b7
 X-MS-Exchange-CrossTenant-AuthSource: AS4PR06MB8447.eurprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2024 16:26:06.2053
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2024 16:26:06.5216
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: T8t6RXgILELReAA+MLmvIMjwxdSVEQFCckhtjxit9jJVNEPNDQ4oxIhrL4ucdGy1QHtEhfAVix3ghJbGsnNnZA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: SYKBMbFBxM492VFkz3IzsYrrVlsxNrDpS5W1LwnNmy9jKxuyIKUUX+ZqwaWrwyCaUWyBWtl7efaF606HmPI5ww==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR06MB6426
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 30 Sep 2024 16:26:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112609
+ <openembedded-devel@lists.openembedded.org>; Mon, 30 Sep 2024 16:26:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112611
 
 This recipe depends on meta-python2, master branch of which has not
 been updated sine February 2022, see
 https://git.openembedded.org/meta-python2/log/?h=3Dmaster
 
-Also, master branch of telepathy has not been updated since June 2016,
-see https://cgit.freedesktop.org/wiki/telepathy/log/?h=3Dmaster
+Also, master branch of lio-utils has not been updated since May 2014,
+see https://github.com/Datera/lio-utils/commits/master/
 
 Thus, remove the obsolete recipe, along with associated packagegroup
 declarations/references.
 
 Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
 ---
- .../fix-svc-gtk-doc.h-target.patch            | 15 -------------
- .../telepathy/telepathy-idle_0.2.0.bb         | 22 -------------------
- .../packagegroups/packagegroup-meta-oe.bb     |  6 -----
- 3 files changed, 43 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/telepathy/telepathy-idle/f=
-ix-svc-gtk-doc.h-target.patch
- delete mode 100644 meta-oe/recipes-connectivity/telepathy/telepathy-idle_0=
-.2.0.bb
+ .../packagegroups/packagegroup-meta-oe.bb     |  6 --
+ ...t-environment-variables-and-add-LDFL.patch | 63 ----------------
+ .../lio-utils/lio-utils_4.1.bb                | 75 -------------------
+ 3 files changed, 144 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/lio-utils/lio-utils/0001-Makefi=
+les-Respect-environment-variables-and-add-LDFL.patch
+ delete mode 100644 meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb
 
-diff --git a/meta-oe/recipes-connectivity/telepathy/telepathy-idle/fix-svc-=
-gtk-doc.h-target.patch b/meta-oe/recipes-connectivity/telepathy/telepathy-i=
-dle/fix-svc-gtk-doc.h-target.patch
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/m=
+eta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 163061ca7..b29b86d45 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -22,7 +22,6 @@ PACKAGES =3D "\
+     packagegroup-meta-oe-shells \
+     packagegroup-meta-oe-security \
+     packagegroup-meta-oe-support \
+-    packagegroup-meta-oe-support-python2 \
+     packagegroup-meta-oe-test \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "packagegroup-meta-oe-g=
+nome", "", d)} \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "packagegroup-meta-oe-g=
+raphics", "", d)} \
+@@ -47,7 +46,6 @@ RDEPENDS:packagegroup-meta-oe =3D "\
+     packagegroup-meta-oe-security \
+     packagegroup-meta-oe-shells \
+     packagegroup-meta-oe-support \
+-    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "packagegro=
+up-meta-oe-support-python2", "", d)} \
+     packagegroup-meta-oe-test \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "packagegroup-meta-oe-g=
+nome", "", d)} \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "packagegroup-meta-oe-g=
+raphics", "", d)} \
+@@ -914,10 +912,6 @@ RDEPENDS:packagegroup-meta-oe-support:append:aarch64 =
+=3D " ne10"
+ RDEPENDS:packagegroup-meta-oe-support:append:x86 =3D " mcelog mce-inject m=
+ce-test vboxguestdrivers"
+ RDEPENDS:packagegroup-meta-oe-support:append:x86-64 =3D " mcelog mce-injec=
+t mce-test vboxguestdrivers"
+=20
+-RDEPENDS:packagegroup-meta-oe-support-python2 =3D"\
+-    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", bb.utils.co=
+ntains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', 'lio-utils', '', d), "", d)}=
+ \
+-"
+-
+ RDEPENDS:packagegroup-meta-oe-support:remove:arm =3D"numactl"
+ RDEPENDS:packagegroup-meta-oe-support:remove:mipsarch =3D "gperftools"
+ RDEPENDS:packagegroup-meta-oe-support:remove:riscv64 =3D "gperftools uim"
+diff --git a/meta-oe/recipes-support/lio-utils/lio-utils/0001-Makefiles-Res=
+pect-environment-variables-and-add-LDFL.patch b/meta-oe/recipes-support/lio=
+-utils/lio-utils/0001-Makefiles-Respect-environment-variables-and-add-LDFL.=
+patch
 deleted file mode 100644
-index 2cd2c78c3..000000000
---- a/meta-oe/recipes-connectivity/telepathy/telepathy-idle/fix-svc-gtk-doc=
-.h-target.patch
+index 86edcc2e4..000000000
+--- a/meta-oe/recipes-support/lio-utils/lio-utils/0001-Makefiles-Respect-en=
+vironment-variables-and-add-LDFL.patch
 +++ /dev/null
-@@ -1,15 +0,0 @@
+@@ -1,63 +0,0 @@
+-From 2cc2315eecaa48fd24792aaa889dc7d9fb96978b Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Mon, 20 Mar 2017 22:18:44 -0700
+-Subject: [PATCH] Makefiles: Respect environment variables and add LDFLAGS =
+to
+- linker cmdline
+-
+-Fixes QA errors about GNU_HASH
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
 -Upstream-Status: Pending
 -
--Signed-off-by: Constantin Musca <constantinx.musca@intel.com>
----- a/extensions/Makefile.am
--+++ b/extensions/Makefile.am
--@@ -37,8 +37,8 @@ _gen/all.xml: all.xml $(wildcard $(srcdi
-- 		--xinclude $(tools_dir)/identity.xsl \
-- 		$< > $@
+- mib-modules/Makefile | 10 +++++-----
+- tools/Makefile       |  2 +-
+- 2 files changed, 6 insertions(+), 6 deletions(-)
+-
+-diff --git a/mib-modules/Makefile b/mib-modules/Makefile
+-index 0d54c9b..051d4d2 100644
+---- a/mib-modules/Makefile
+-+++ b/mib-modules/Makefile
+-@@ -17,13 +17,13 @@ TARG		=3D iscsiTargetMib.so
+- OBJS		=3D iscsiTargetMib.o iscsiMib.o scsiMib.o ipsAuthMib.o \
+- 		iscsiAuthData.o
 -=20
---extensions.html: _gen/all.xml $(tools_dir)/doc-generator.xsl
--+extensions.html _gen/svc-gtk-doc.h: _gen/all.xml $(tools_dir)/doc-generat=
-or.xsl
-- 	$(AM_V_GEN)$(XSLTPROC) $(XSLTPROCFLAGS) \
-- 		$(tools_dir)/doc-generator.xsl \
-- 		$< > $@
+--CC		=3D gcc
+--CFLAGS		=3D -I$(INCLDIR) -I$(INCLDIR)/agent -I$(INCLDIR)/agent/mibgroup -=
+shared -fPIC
+-+CC		?=3D gcc
+-+CFLAGS		+=3D -I$(INCLDIR) -I$(INCLDIR)/agent -I$(INCLDIR)/agent/mibgroup =
+-shared -fPIC
+- CFLAGS		+=3D -I../include -Wall -Werror
+- #CFLAGS		+=3D$(AUTO_CFLAGS)
 -=20
-diff --git a/meta-oe/recipes-connectivity/telepathy/telepathy-idle_0.2.0.bb=
- b/meta-oe/recipes-connectivity/telepathy/telepathy-idle_0.2.0.bb
+--LD		=3D gcc -shared
+--
+-+LD		?=3D gcc
+-+LDFLAGS		+=3D -shared
+- INSTALL		=3D install
+-=20
+- all: $(TARG)
+-@@ -32,7 +32,7 @@ all: $(TARG)
+- 	$(CC) $(CFLAGS) -o $@ -c $<
+-=20
+- $(TARG): $(OBJS)
+--	$(LD) -o $@ $(OBJS)
+-+	$(LD) -o $@ $(OBJS) $(LDFLAGS)
+-=20
+- clean:
+- 	rm -f $(OBJS) $(TARG)
+-diff --git a/tools/Makefile b/tools/Makefile
+-index 79ed3cd..ffd9bf3 100644
+---- a/tools/Makefile
+-+++ b/tools/Makefile
+-@@ -6,7 +6,7 @@ ISCSI_NAME_OBJS      =3D $(ISCSI_NAME_SRCS:.c=3D.o)
+- all:: $(ISCSI_NAME)=20
+-=20
+- $(ISCSI_NAME): $(ISCSI_NAME_OBJS)
+--	$(CC) -o $@ $(CFLAGS) $(ISCSI_NAME_OBJS)=20
+-+	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(ISCSI_NAME_OBJS)=20
+-=20
+- clean:
+- 	rm -f $(ISCSI_NAME_OBJS) $(ISCSI_NAME)=20
+---=20
+-2.12.0
+-
+diff --git a/meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb b/meta-oe/r=
+ecipes-support/lio-utils/lio-utils_4.1.bb
 deleted file mode 100644
-index 039cfc3a8..000000000
---- a/meta-oe/recipes-connectivity/telepathy/telepathy-idle_0.2.0.bb
+index 844e5acf9..000000000
+--- a/meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb
 +++ /dev/null
-@@ -1,22 +0,0 @@
--SUMMARY =3D "Telepathy IRC connection manager"
--DESCRIPTION =3D "Telepathy implementation of the Internet Relay Chat proto=
-cols."
--HOMEPAGE =3D "http://telepathy.freedesktop.org/wiki/"
--DEPENDS =3D "glib-2.0 dbus telepathy-glib openssl libxslt-native"
--LICENSE =3D "LGPL-2.1-only"
--LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D2d5025d4aa3495befef8f17206a5b0a=
-1 \
--                    file://src/idle.c;beginline=3D1;endline=3D19;md5=3Db06=
-b1e2594423111a1a7910b0eefc7f9"
+@@ -1,75 +0,0 @@
+-SUMMARY =3D "lio-utils"
+-DESCRIPTION =3D "a simple low-level configuration tool set for the Target+=
+iSCSI (LIO)"
+-HOMEPAGE =3D "http://linux-iscsi.org/index.php/Lio-utils"
+-LICENSE =3D "GPL-2.0-only"
+-LIC_FILES_CHKSUM =3D "file://debian/copyright;md5=3Dc3ea231a32635cbb5debed=
+f3e88aa3df"
 -
--SRC_URI =3D "http://telepathy.freedesktop.org/releases/${BPN}/${BPN}-${PV}=
-.tar.gz \
--           file://fix-svc-gtk-doc.h-target.patch"
--SRC_URI[md5sum] =3D "92a2de5198284cbd3c430b0d1a971a86"
--SRC_URI[sha256sum] =3D "3013ad4b38d14ee630b8cc8ada5e95ccaa849b9a6fe15d2eaf=
-6d0717d76f2fab"
+-PV =3D "4.1+git"
 -
--inherit autotools pkgconfig ${@bb.utils.contains("BBFILE_COLLECTIONS", "me=
-ta-python2", "pythonnative", "", d)}
+-SRC_URI =3D "git://github.com/Datera/lio-utils.git;branch=3Dmaster;protoco=
+l=3Dhttps \
+-           file://0001-Makefiles-Respect-environment-variables-and-add-LDF=
+L.patch \
+-           "
+-SRCREV =3D "0ac9091c1ff7a52d5435a4f4449e82637142e06e"
+-S =3D "${WORKDIR}/git"
 -
--FILES:${PN} +=3D "${datadir}/telepathy \
--                ${datadir}/dbus-1"
+-inherit ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "distut=
+ils", "", d)}
+-
+-EXTRA_OEMAKE +=3D "DESTDIR=3D${D}"
+-
+-do_compile() {
+-    cd ${S}/tcm-py
+-    distutils_do_compile
+-
+-    cd ${S}/lio-py
+-    distutils_do_compile
+-
+-    if test -d ${S}/tools; then
+-        oe_runmake -C ${S}/tools
+-    fi
+-}
+-
+-do_install() {
+-    cd ${S}/tcm-py
+-    distutils_do_install
+-
+-    cd ${S}/lio-py
+-    distutils_do_install
+-
+-    SITE_PACKAGES=3D${D}/${PYTHON_SITEPACKAGES_DIR}
+-    install -d ${D}/${sbindir}
+-    for var in tcm_node tcm_dump tcm_loop tcm_fabric lio_dump lio_node; do
+-        if [ ! -h ${D}/${sbindir}/${var} ];then
+-            chmod a+x ${SITE_PACKAGES}/${var}.py
+-            ln -s ${PYTHON_SITEPACKAGES_DIR}/${var}.py ${D}/${sbindir}/${v=
+ar}
+-        fi
+-    done
+-
+-    if test -d ${S}/tools; then
+-        oe_runmake -C ${S}/tools install
+-    fi
+-
+-    install -d ${D}/etc/target/
+-    install -d ${D}/etc/init.d/
+-    install -m 755 ${S}/scripts/rc.target ${D}/etc/init.d/
+-    install -m 755 ${S}/conf/tcm_start.default ${D}/etc/target/tcm_start.s=
+h
+-    install -m 755 ${S}/conf/lio_start.default ${D}/etc/target/lio_start.s=
+h
+-}
+-
+-SKIP_RECIPE[lio-utils] ?=3D "${@bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_P=
+YTHON3', 'yes', '', 'python2 is out of support for long time, read https://=
+www.python.org/doc/sunset-python-2/ https://python3statement.org/ and if yo=
+u really have to temporarily use this, then set I_SWEAR_TO_MIGRATE_TO_PYTHO=
+N3 to "yes"', d)}"
+-
+-RDEPENDS:${PN} +=3D "python-stringold python-subprocess python-shell \
+-    python-datetime python-textutils python-crypt python-netclient python-=
+email \
+-    bash"
+-
+-FILES:${PN} +=3D "${sbindir}/* /etc/init.d/* /etc/target/*"
+-
+-# http://errors.yoctoproject.org/Errors/Details/184712/
+-# python-native/python: can't open file 'setup.py': [Errno 2] No such file=
+ or directory
+-CLEANBROKEN =3D "1"
 -
 -python() {
 -    if 'meta-python2' not in d.getVar('BBFILE_COLLECTIONS').split():
 -        raise bb.parse.SkipRecipe('Requires meta-python2 to be present.')
 -}
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/m=
-eta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 9523e78dd..163061ca7 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -8,7 +8,6 @@ PACKAGES =3D "\
-     packagegroup-meta-oe \
-     packagegroup-meta-oe-benchmarks \
-     packagegroup-meta-oe-connectivity \
--    packagegroup-meta-oe-connectivity-python2 \
-     packagegroup-meta-oe-core \
-     packagegroup-meta-oe-crypto \
-     packagegroup-meta-oe-bsp \
-@@ -35,7 +34,6 @@ RDEPENDS:packagegroup-meta-oe =3D "\
-     packagegroup-meta-oe-benchmarks \
-     packagegroup-meta-oe-bsp \
-     packagegroup-meta-oe-connectivity \
--    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "packagegro=
-up-meta-oe-connectivity-python2", "", d)} \
-     packagegroup-meta-oe-core \
-     packagegroup-meta-oe-crypto \
-     packagegroup-meta-oe-dbs \
-@@ -167,10 +165,6 @@ RDEPENDS:packagegroup-meta-oe-connectivity =3D"\
-=20
- RDEPENDS:packagegroup-meta-oe-connectivity:append:libc-glibc =3D " wvstrea=
-ms wvdial"
-=20
--RDEPENDS:packagegroup-meta-oe-connectivity-python2 =3D "\
--    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "telepathy-=
-idle", "", d)} \
--"
 -
- # dracut needs dracut
- RDEPENDS:packagegroup-meta-oe-core =3D "\
-     ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "dbus-broker", "", =
-d)} \
+-
 --=20
 2.39.2
 
