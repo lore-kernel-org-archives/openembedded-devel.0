@@ -2,53 +2,53 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17F56CF64A6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D789CF64A8
 	for <webhook@archiver.kernel.org>; Mon, 30 Sep 2024 07:43:59 +0000 (UTC)
-Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
- by mx.groups.io with SMTP id smtpd.web11.49301.1727682229480890415
+Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
+ by mx.groups.io with SMTP id smtpd.web11.49302.1727682229491166126
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 Sep 2024 00:43:49 -0700
+ Mon, 30 Sep 2024 00:43:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=VlJuAwWv;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=CUDuXvmL;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1727682229; x=1759218229;
+  t=1727682230; x=1759218230;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=/B94ceMxkKNavuQWOLg7vJHwdjfitvwneZbKRct/LYc=;
-  b=VlJuAwWvGAAs+09hCWWKxDqCuvmejxnFSDNjfR8xzLzfj2V9LoLScai1
-   rSVdr4JfH0CVLKSdUJYiW0HmG3xsUfF/Mt/nnTopPcFRQCQjhmF8viq3x
-   dikLG1jiF8OPV1f3mgMLcWdzson9prbtkbDY9n7pCxxBKA/CfuK/EXNYb
-   2CL+3GnMJPLerU3YbRrKlo52lpfs6dfpC1o9TROWuArdFD5giPo7jlob4
-   05w9XFO47GGfg39e+gZW62qNlxuXXBYqRPZ4wFuNfY9Z9uX6uYEio3wWj
-   F+2wKMp6as6ZOVN8XlLzbbkkKiaYyQZ/azp3mrHM7gkjA7syJLK4GuIND
+  bh=kUKAHUG312GKRJ80HrvjzhuF5M5WhZItmT3gxBDqu6E=;
+  b=CUDuXvmLMyxoaa9d7jpJLE4TJxBnMd737WdP1QDn7+BgnAEdXUJH9l+L
+   URnBA4RTaPQx5OdrxSw1FIi3WS9ew205cJ6r8FIC/NjoWdvptKYYL9bf1
+   rpOLjErXvqYCxYvzd9wkm7nTPzHU8GM7QxwLAu5vm+C1UhW9ysbgdcvw/
+   6K1CWr0qcHqhQra0XYbf8wgcbyM4q7yF82Ur+MFzq3FO+K3YbWJyYeAp+
+   d0z2spKWcjivAam/LESkCmgzcXGUKORP2keAlGpQVNjrRljNEDB6uJNj6
+   B6oK98xure7S/oADwydA7f9HQLxMydtb6TchqdStLZCSGNirkCB8Wnfnw
    w==;
-X-CSE-ConnectionGUID: L02jAX4HSOWbJzhDewaXhA==
-X-CSE-MsgGUID: OwOBH6zXRb+VkaogwpzwWQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11210"; a="163553685"
+X-CSE-ConnectionGUID: 4DiQSBflSiq/JupMnvTfSQ==
+X-CSE-MsgGUID: zTNk/zJ+Sx2lCZMmyqu5TQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11210"; a="162602076"
 X-IronPort-AV: E=Sophos;i="6.11,165,1725289200"; 
-   d="scan'208";a="163553685"
-Received: from unknown (HELO oym-r1.gw.nic.fujitsu.com) ([210.162.30.89])
-  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Sep 2024 16:43:47 +0900
-Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
-	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 60022D2AAF
-	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Sep 2024 16:43:45 +0900 (JST)
+   d="scan'208";a="162602076"
+Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
+  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Sep 2024 16:43:49 +0900
+Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
+	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 24367D9224
+	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Sep 2024 16:43:47 +0900 (JST)
 Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id DAF949EF47
-	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Sep 2024 16:43:43 +0900 (JST)
+	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 630A1D4C1D
+	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Sep 2024 16:43:46 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 71DF720076D01
-	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Sep 2024 16:43:43 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id EB58020076D01
+	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Sep 2024 16:43:45 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 243181A000A;
-	Mon, 30 Sep 2024 15:43:43 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 9C2991A000A;
+	Mon, 30 Sep 2024 15:43:45 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 21/40] python3-greenlet: upgrade 3.1.0 -> 3.1.1
-Date: Mon, 30 Sep 2024 15:42:46 +0800
-Message-Id: <1727682185-12664-21-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 25/40] python3-prompt-toolkit: upgrade 3.0.47 -> 3.0.48
+Date: Mon, 30 Sep 2024 15:42:50 +0800
+Message-Id: <1727682185-12664-25-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1727682185-12664-1-git-send-email-wangmy@fujitsu.com>
 References: <1727682185-12664-1-git-send-email-wangmy@fujitsu.com>
@@ -56,49 +56,50 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28696.005
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28696.005
-X-TMASE-Result: 10-1.896600-10.000000
-X-TMASE-MatchedRID: R9NZgeCyXhKjz0nOeth/yUIIxwDaU5mrTfK5j0EZbys/d0QOA4TCLzBX
-	Xb/qS2636GicUJauF4QczB+65IerA+SG32/q3ytjA9lly13c/gHVy4hHC3/gyLKw8Hx0EGitcqf
-	oMGP+CwQi+t+0AiFaYnp5g9gYJWDLeBzEkCCpnRmeAiCmPx4NwGmRqNBHmBveVDC1CbuJXmMqtq
-	5d3cxkNclmSii/L8LkGOiVt32fIK7UV9PUBXfbaMy1Sf381AHyaidGtXGnIHGEA/hNMAO0Z906o
-	Ub1Oa+D42yDfT/Y4WUiMLzcJUaQl/zs1/e9oUcoU8mdcvbI1h2S6jzjuXTm0MTMzICazP4UehYt
-	aVdyxm8=
+X-TMASE-Result: 10--1.476600-10.000000
+X-TMASE-MatchedRID: wgzGQ0X+yFqjz0nOeth/yaoXHZz/dXlxtAQ1UAnR9neZt08TfNy6OOaq
+	OLvWCjS6xmXDKxPRwmYNKu6sdFLYue1a16oqp8B1/HTKStsDGMJHNQ8CqEKO2MC5DTEMxpeQ7m0
+	K7bkUDKJY5Eh/SzoiVnVgf6iGPAIAeBzEkCCpnRmeAiCmPx4NwBnUJ0Ek6yhjxEHRux+uk8hxKp
+	vEGAbTDkXTH2hPAAxZxedG8Ns/CkHwgdNjiQx606u2xymPc00Vgygf3nuesQv2kR1MBtIRM/eUK
+	OYaqSgtp7Y+EAo8OJYTepVhD1wDb4K+pasWyF5Rwt7TMGN5mtsVA4/nYFEFckxOwqPXyr98
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 30 Sep 2024 07:43:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112579
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112584
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-==========
-- Fix crashes on 32-bit PPC Linux.
-- Remove unnecessary logging sometimes during interpreter shutdown.
-- Fix some crashes on 32-bit PPC MacOS.
+- Typing improvements:
+  * Add '@overload' to 'contrib.regular_languages.compiler.Variables.get'.
+  * Use 'Sequence' instead of 'list' for 'words' argument in completers.
+- Improve 'ModalCursorShapeConfig':
+  * Display an "underscore" cursor in Vi's "replace single" mode, like
+    "replace" mode.
+  * Display an "beam" cursor in Emacs (insert) mode.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-greenlet_3.1.0.bb => python3-greenlet_3.1.1.bb}    | 2 +-
+ ...rompt-toolkit_3.0.47.bb => python3-prompt-toolkit_3.0.48.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-greenlet_3.1.0.bb => python3-greenlet_3.1.1.bb} (81%)
+ rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_3.0.47.bb => python3-prompt-toolkit_3.0.48.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-greenlet_3.1.0.bb b/meta-python/recipes-devtools/python/python3-greenlet_3.1.1.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-greenlet_3.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-greenlet_3.1.1.bb
-index 11e8a76c8..c7a38b9a1 100644
---- a/meta-python/recipes-devtools/python/python3-greenlet_3.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-greenlet_3.1.1.bb
-@@ -4,7 +4,7 @@ LICENSE = "MIT & PSF-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e95668d68e4329085c7ab3535e6a7aee \
-                     file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
+diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.47.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.48.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.47.bb
+rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.48.bb
+index 9997785dc..3ed18905f 100644
+--- a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.47.bb
++++ b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.48.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://python-prompt-toolkit.readthedocs.io/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f"
  
--SRC_URI[sha256sum] = "b395121e9bbe8d02a750886f108d540abe66075e61e22f7353d9acb0b81be0f0"
-+SRC_URI[sha256sum] = "4ce3ac6cdb6adf7946475d7ef31777c26d94bccc377e070a7986bd2d5c515467"
+-SRC_URI[sha256sum] = "1e1b29cb58080b1e69f207c893a1a7bf16d127a5c30c9d17a25a5d77792e5360"
++SRC_URI[sha256sum] = "d6623ab0477a80df74e646bdbc93621143f5caf104206aa29294d53de1a03d90"
  
- inherit pypi python_setuptools_build_meta
+ inherit pypi setuptools3
  
 -- 
 2.34.1
