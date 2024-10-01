@@ -1,76 +1,105 @@
-Return-Path: <lsorense@csclub.uwaterloo.ca>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B62FECF3186
-	for <webhook@archiver.kernel.org>; Tue,  1 Oct 2024 21:04:42 +0000 (UTC)
-Received: from caffeine.csclub.uwaterloo.ca (caffeine.csclub.uwaterloo.ca [129.97.134.17])
- by mx.groups.io with SMTP id smtpd.web11.93441.1727816672588529530
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0056CF3187
+	for <webhook@archiver.kernel.org>; Tue,  1 Oct 2024 21:15:12 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.web10.93399.1727817301815300322
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Oct 2024 14:04:32 -0700
+ Tue, 01 Oct 2024 14:15:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: csclub.uwaterloo.ca, ip: 129.97.134.17, mailfrom: lsorense@csclub.uwaterloo.ca)
-Received: by caffeine.csclub.uwaterloo.ca (Postfix, from userid 20367)
-	id 3EFD6460C28; Tue,  1 Oct 2024 17:04:31 -0400 (EDT)
-Date: Tue, 1 Oct 2024 17:04:31 -0400
-To: Armin Kuster <akuster808@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org,
-	Yi Zhao <yi.zhao@windriver.com>, Khem Raj <raj.khem@gmail.com>
-Subject: Re: [oe] [meta-oe][scarthgap][PATCH 3/5] samba: upgrade 4.19.6 ->
- 4.19.7
-Message-ID: <Zvxj379qqn8aM9uF@csclub.uwaterloo.ca>
-References: <20240915163040.189190-1-akuster808@gmail.com>
- <20240915163040.189190-3-akuster808@gmail.com>
+ dkim=pass header.i=@smile.fr header.s=google header.b=G155MyTY;
+ spf=pass (domain: smile.fr, ip: 209.85.128.53, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-42e7b7bef42so49391055e9.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Oct 2024 14:15:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=smile.fr; s=google; t=1727817300; x=1728422100; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=3H5zWmbM1Ln/q2g2jRotyPR7peJ4e03ZZ8wh90YOhxM=;
+        b=G155MyTYNkTI+C3X4Mn1eDqeMZnUyGYmC+KKdJ+7u3rKRGTYDRVNGJz9dimqQnMMxs
+         Bwt3ET8Ju7sckwu9xMlDybC0fSKP/BeipipoopBaj36IsnUv12gxeGtE/hSFIaYM+f+d
+         XCKQs4b1rWf92Y/hbXcN5DOAuZEgACmDYlOXU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1727817300; x=1728422100;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=3H5zWmbM1Ln/q2g2jRotyPR7peJ4e03ZZ8wh90YOhxM=;
+        b=qDI+71PQ27pJYgloU80CBhZvZmlQTGNjdOugJ8tDVZNicinOOWAUVjU6tGh3NWI64D
+         KGI9vdb1hvNpyNAVnQsY8euDzwSrHftC4RnWQ/KW241Q5DLznPYUd+FYY/ArMeegUusA
+         m39JMHSbRz8F0h8Y1Bwj2G2nCIUI9WQ4LTPFS/Zfagsb4RwjYcoFDxs9WKPjdTLLMHLn
+         mH1ntt2XyNDu5Vi6IBNQ9vP+1k18Qcx0F6qJ6yJ38HOb/odEuGx8xrqwOX1G/PFRBWQB
+         339+c+j8+ynyrVDcCyFMEeJLrrYygjj09XPD7BouWD/u6GrpyM7a9GB7hEbwlS6zJVyx
+         M72w==
+X-Gm-Message-State: AOJu0Yy54KZ8SshBK+hFppmggREUZ8o7cP5VQdOcC2nTfSJLL3uOSHYa
+	/9h2SAXu95gwAuZUg44DWVQnzAsFy30SImg9rm1PzaSYjHZ1lkErLjlbfDa5gex3YWXfFOt6zC9
+	S
+X-Google-Smtp-Source: AGHT+IEEinsatJVo33mevZhotpaCwaIbDX3BiJU37qbUheZY/ioCHTPWXgVj3btsdBKu7oOHMsAX5A==
+X-Received: by 2002:a05:600c:35d2:b0:42a:a6aa:4135 with SMTP id 5b1f17b1804b1-42f777c278dmr5175185e9.20.1727817299769;
+        Tue, 01 Oct 2024 14:14:59 -0700 (PDT)
+Received: from P-ASN-ECS-830T8C3.local (53.1.159.89.rev.sfr.net. [89.159.1.53])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-37cd564d287sm12689340f8f.11.2024.10.01.14.14.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 01 Oct 2024 14:14:59 -0700 (PDT)
+From: Yoann Congal <yoann.congal@smile.fr>
+To: openembedded-devel@lists.openembedded.org
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-initramfs][PATCH] non-repro-meta-initramfs: update known non-reproducible list
+Date: Tue,  1 Oct 2024 23:14:43 +0200
+Message-Id: <20241001211442.3188342-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240915163040.189190-3-akuster808@gmail.com>
-From: Lennart Sorensen <lsorense@csclub.uwaterloo.ca>
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Oct 2024 21:04:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112638
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Oct 2024 21:15:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112639
 
-On Sun, Sep 15, 2024 at 12:30:38PM -0400, Armin Kuster wrote:
-> From: Yi Zhao <yi.zhao@windriver.com>
-> 
-> ChangeLog:
-> https://www.samba.org/samba/history/samba-4.19.7.html
-> 
-> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> (cherry picked from commit 41df431b91f1d81070c1f0e8633995d7afba52e4)
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->  .../samba/{samba_4.19.6.bb => samba_4.19.7.bb}                  | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-networking/recipes-connectivity/samba/{samba_4.19.6.bb => samba_4.19.7.bb} (99%)
-> 
-> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.19.6.bb b/meta-networking/recipes-connectivity/samba/samba_4.19.7.bb
-> similarity index 99%
-> rename from meta-networking/recipes-connectivity/samba/samba_4.19.6.bb
-> rename to meta-networking/recipes-connectivity/samba/samba_4.19.7.bb
-> index bd0309934b..dddf594515 100644
-> --- a/meta-networking/recipes-connectivity/samba/samba_4.19.6.bb
-> +++ b/meta-networking/recipes-connectivity/samba/samba_4.19.7.bb
-> @@ -31,7 +31,7 @@ SRC_URI:append:libc-musl = " \
->             file://samba-4.3.9-remove-getpwent_r.patch \
->             "
->  
-> -SRC_URI[sha256sum] = "653b52095554dbc223c63b96af5cdf9e98c3e048549c5f56143d3b33dce1cef1"
-> +SRC_URI[sha256sum] = "2bbb800af2d6bc7b9c23e708cd58d008da3bfa6ef7e621d9ec8b53387efee445"
->  
->  UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.19(\.\d+)+).tar.gz"
+From: Yoann Congal <yoann.congal@smile.fr>
 
-This broke the build for me.  Seems it now requires ldb 2.8.1 but the
-version in 5.0 is 2.8.0 so configure fails.
+Remove packages seen reproducible in the last 3 completed tests:
+https://autobuilder.yoctoproject.org/typhoon/#/builders/155/builds/43/steps/20/logs/stdio
+https://autobuilder.yoctoproject.org/typhoon/#/builders/155/builds/44/steps/20/logs/stdio
+https://autobuilder.yoctoproject.org/typhoon/#/builders/155/builds/45/steps/20/logs/stdio
 
-The update to 4.19.8 has the same complaint.
+Effectively, the list is now empty. This marks meta-initramfs as
+reproducible!
 
-The commit right before this one builds fine of course so I temporarily
-jumped to back to that one for now.
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+---
+ .../conf/include/non-repro-meta-initramfs.inc | 22 +------------------
+ 1 file changed, 1 insertion(+), 21 deletions(-)
 
--- 
-Len Sorensen
+diff --git a/meta-initramfs/conf/include/non-repro-meta-initramfs.inc b/meta-initramfs/conf/include/non-repro-meta-initramfs.inc
+index 8f01f5624b..c05f59d1a2 100755
+--- a/meta-initramfs/conf/include/non-repro-meta-initramfs.inc
++++ b/meta-initramfs/conf/include/non-repro-meta-initramfs.inc
+@@ -1,23 +1,3 @@
+ # List of known non-reproducible package of the meta-initramfs layer
+ # Please keep this list sorted
+-KNOWN_NON_REPRO_META_INITRAMFS = " \
+-    kexecboot-klibc \
+-    kexecboot-klibc-dbg \
+-    kexec-klibc \
+-    kexec-tools-klibc-dbg \
+-    mtdinfo-klibc \
+-    ubiattach-klibc \
+-    ubiblock-klibc \
+-    ubicrc32-klibc \
+-    ubidetach-klibc \
+-    ubiformat-klibc \
+-    ubimkvol-klibc \
+-    ubinfo-klibc \
+-    ubinize-klibc \
+-    ubirename-klibc \
+-    ubirmvol-klibc \
+-    ubirsvol-klibc \
+-    ubiupdatevol-klibc \
+-    ubi-utils-klibc-dbg \
+-    vmcore-dmesg-klibc \
+-"
++KNOWN_NON_REPRO_META_INITRAMFS = ""
 
