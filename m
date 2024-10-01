@@ -1,133 +1,261 @@
-Return-Path: <mikko.rapeli@linaro.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1178CCEACCB
-	for <webhook@archiver.kernel.org>; Tue,  1 Oct 2024 14:14:20 +0000 (UTC)
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com [209.85.167.51])
- by mx.groups.io with SMTP id smtpd.web11.82882.1727792057530025660
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3B0ECEACE5
+	for <webhook@archiver.kernel.org>; Tue,  1 Oct 2024 16:20:00 +0000 (UTC)
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
+ by mx.groups.io with SMTP id smtpd.web10.85905.1727799594793923421
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Oct 2024 07:14:17 -0700
+ Tue, 01 Oct 2024 09:19:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=KnVtRRMS;
- spf=pass (domain: linaro.org, ip: 209.85.167.51, mailfrom: mikko.rapeli@linaro.org)
-Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-5398b589032so4955230e87.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Oct 2024 07:14:17 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=N9pK2aeW;
+ spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-7db174f9050so1380489a12.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Oct 2024 09:19:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1727792055; x=1728396855; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1727799594; x=1728404394; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=WBOO8RSjQQj9ptMqPlRnPlDvTLf1uxARGwQurCznp/M=;
-        b=KnVtRRMSgOIPJT8BkyuwUq4sP8WAKRcZt3DT/rwDLJB9h+oBhVplpbqUNxyQ6UF37b
-         1//tIkN4nE0lveAJ4pQh1yEzMEc7HTyjM5VFx4LDYgcOjdmynvmoSPB4y3qc51yxB/83
-         iqqYMXCrI8F7aTDb4BxOVsKn2RtD8Dv5WTdduWKN0yxGyLK/LiAFp+fx8FM1X0sor3v/
-         fvzXg4gSKLe8YLSQHthkvyMdj8w1iQOsBL4cdxAVi6TFLuwqDjVfVMkHQk7Y1I0eeH99
-         EljGM5JL3/f2ONwL0XdIC57NlC6zRBPEQBEt21yJxoU6D3cTRFGZwdaFsnXgfPzrsULq
-         cGRQ==
+        bh=5gaSpiyhW3KJ8QnraWErmWlMC/Q3OuVtCibUySVJ/KE=;
+        b=N9pK2aeW66sWHuh5+YArJdC/djMEvOruP5E3ReWOsheSF0fSAXrX/8rt2f1Ej9mG3p
+         3fey9LFArjF4j5DWgeVPdqJpEVlWQx/la9bn+nqPPsNhu8+SWnFNDh2QPrKXpNIoY7UM
+         lqYL7tQfaKIZ79tmYKE0qCTdwJkFkh10iEC50W7u4wkbs83CvoGWBSMxa0HsTy2BZoEr
+         ajIKGmA1Sh2TBH8XffNKf5F/BX5zvWdbx74mdVg94JJa7qeNrLPmNvfv/eBskKbdN/SU
+         C0kLSvLjB5fs6ZzMQNXslXQxcAT/5a2Fh12R+C1kyH0DrIYWkoBFVOxjR3Twz2eaZUsO
+         Ff6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727792055; x=1728396855;
+        d=1e100.net; s=20230601; t=1727799594; x=1728404394;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=WBOO8RSjQQj9ptMqPlRnPlDvTLf1uxARGwQurCznp/M=;
-        b=F3AsCQWs27oYXkZKCX2z4vbs1A2t3M5cxYVJUPrSLt+nj9HyRdZovwSG9PC70uPMWD
-         ri7IGRJ5nr6n09w4/4TnXwpDeYqh2diWGKY1vYLjip4aEGtK+tXyv4ic1NtS+xQY0cnw
-         nmYTGcQjysZBQaglnp1UwPWLKlx+AxWGguTkwZ3odfu8cGTd1YIVbFKhq/ejNHqsRlS2
-         5SdZQvN5l4JXW9ncrnLc47gXx+lJMoTBBck/GaT++SxskuvCjzZIlM/idEM6jdmXqFmi
-         Q/Sn1ooyDHoB9LUXTQTn2hsUVw+VXXrg2aETDcaXaWxSH7wiOovzwspyl6EC4smPGAxC
-         DXNg==
-X-Gm-Message-State: AOJu0YzSjfuLk/cYwN3WCsETMgvOfmcNF+PH3RrspZEN/oKgE2v9wtpz
-	M2SDuH5F0GPefSG/mJfEkr4GGoyNEuaiywe+NEqM8RGyZg0Y3ABwWyIn2stjWAO6IJ131CEkS90
-	V27Y=
-X-Google-Smtp-Source: AGHT+IHdqkvjbLWIhVVXHdQw5xg4SbAvO6oEs23gphyPlHO3jG2pxkwvaB+BCn9g/z2bpB/KwITBow==
-X-Received: by 2002:ac2:51cc:0:b0:539:8d2c:c01a with SMTP id 2adb3069b0e04-5398d2cc08fmr7568593e87.29.1727792055406;
-        Tue, 01 Oct 2024 07:14:15 -0700 (PDT)
-Received: from localhost.localdomain (78-27-76-97.bb.dnainternet.fi. [78.27.76.97])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5389fd5e3basm1605268e87.93.2024.10.01.07.14.13
+        bh=5gaSpiyhW3KJ8QnraWErmWlMC/Q3OuVtCibUySVJ/KE=;
+        b=PLGMu1KR27pJk1dnzR4B+b14/YcMQ+HLpmU6+Elv3xkpmOGmN69uzaBSRWnvxJMQOd
+         eRQqnlkeDDBN08Dcg1YZ6RPLWLPb0E5NW6+c2slXjhIDe8VIzlVVE+Mmz6oRqjdRkF7u
+         OdJBQIkQRn+H7O3ScF8VdwWVjpcdaTVwPZKFM/1kBDsk2yfsfbHLHuYX/7NxfCSLRnRN
+         6DPYN4DnvTfgWINPCbLf6doUTRSvnOrNUClH24rSlAbX224rJrOyskNGyVLE48Odcl7n
+         KkNq59mokc4d5iOpS+n9sBo97buExruWuyAFhtO+hU5PgOn4T3HKzYgGPrarW0Q7trRc
+         abow==
+X-Gm-Message-State: AOJu0YwyhJwy9m7mhUxfZg4pl5Fn2n0avFeBmVXw3kvrYDxh6AiW50wq
+	6GiPjOG4R8QuvKlwtY9G6ZdfsFls4Byu3swiW8SG9xANFE/UCWMsCYBiC8Hw
+X-Google-Smtp-Source: AGHT+IGK9LJ3fkhSGi3yMan/FD/fxeimoB1eTXvtzFCf80kAyQsYI0jpG1W5rkYE1tCgA5ZhQ3PcBA==
+X-Received: by 2002:a17:90b:790:b0:2d3:c4d1:c95d with SMTP id 98e67ed59e1d1-2e1846ca4f4mr281073a91.21.1727799593898;
+        Tue, 01 Oct 2024 09:19:53 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::caca])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2e123e454dasm5131299a91.48.2024.10.01.09.19.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Oct 2024 07:14:14 -0700 (PDT)
-From: Mikko Rapeli <mikko.rapeli@linaro.org>
+        Tue, 01 Oct 2024 09:19:53 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Mikko Rapeli <mikko.rapeli@linaro.org>
-Subject: [meta-oe][PATCH] python3-pefile: remove recipe
-Date: Tue,  1 Oct 2024 17:13:52 +0300
-Message-ID: <20241001141352.54484-1-mikko.rapeli@linaro.org>
-X-Mailer: git-send-email 2.45.2
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-pyasn1-modules: Stop using pyasn1.compat.octets in tests
+Date: Tue,  1 Oct 2024 09:19:51 -0700
+Message-ID: <20241001161951.2723156-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.46.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Oct 2024 14:14:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112632
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Oct 2024 16:20:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112633
 
-It has been moved to oe-core.
+asn1 0.6.1 has dropped this module
 
-Signed-off-by: Mikko Rapeli <mikko.rapeli@linaro.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../include/ptest-packagelists-meta-oe.inc    |  1 -
- .../python/python3-pefile/run-ptest           |  3 --
- .../python/python3-pefile_2024.8.26.bb        | 28 -------------------
- 3 files changed, 32 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/python/python3-pefile/run-ptest
- delete mode 100644 meta-oe/recipes-devtools/python/python3-pefile_2024.8.26.bb
+ ...0001-Stop-using-pyasn1.compat.octets.patch | 171 ++++++++++++++++++
+ .../python/python3-pyasn1-modules_0.4.1.bb    |   1 +
+ 2 files changed, 172 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyasn1-modules/0001-Stop-using-pyasn1.compat.octets.patch
 
-diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-index f20eff219..ff48e9d14 100644
---- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-+++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-@@ -36,7 +36,6 @@ PTESTS_FAST_META_OE = "\
-     pegtl \
-     protobuf \
-     pv \
--    python3-pefile \
-     sdbus-c++ \
-     uthash \
-     xmlsec1 \
-diff --git a/meta-oe/recipes-devtools/python/python3-pefile/run-ptest b/meta-oe/recipes-devtools/python/python3-pefile/run-ptest
-deleted file mode 100644
-index 95ae72306..000000000
---- a/meta-oe/recipes-devtools/python/python3-pefile/run-ptest
-+++ /dev/null
-@@ -1,3 +0,0 @@
--#!/bin/sh
--
--pytest --automake --ignore=./tests/pefile_test.py
-diff --git a/meta-oe/recipes-devtools/python/python3-pefile_2024.8.26.bb b/meta-oe/recipes-devtools/python/python3-pefile_2024.8.26.bb
-deleted file mode 100644
-index 87e651d9d..000000000
---- a/meta-oe/recipes-devtools/python/python3-pefile_2024.8.26.bb
-+++ /dev/null
-@@ -1,28 +0,0 @@
--SUMMARY = "Python PE parsing module"
--DESCRIPTION = "A multi-platform Python module to parse and work with Portable Executable (PE) files."
--HOMEPAGE = "https://github.com/erocarrera/pefile"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=e34c75178086aca0a17551ffbacaca53"
--
--inherit setuptools3 ptest
--SRCREV = "4b3b1e2e568a88d4f1897d694d684f23d9e270c4"
--SRC_URI = "git://github.com/erocarrera/pefile;branch=master;protocol=https \
--           file://run-ptest"
--S = "${WORKDIR}/git"
--
--BBCLASSEXTEND = "native nativesdk"
--
--do_install_ptest() {
--   install -d ${D}${PTEST_PATH}/tests
--   cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
--}
--
--RDEPENDS:${PN} += " \
--    python3-mmap \
--    python3-netclient \
--    python3-stringold \
--"
--RDEPENDS:${PN}-ptest += "\
--    python3-pytest \
--    python3-unittest-automake-output \
--"
--- 
-2.34.1
-
+diff --git a/meta-python/recipes-devtools/python/python3-pyasn1-modules/0001-Stop-using-pyasn1.compat.octets.patch b/meta-python/recipes-devtools/python/python3-pyasn1-modules/0001-Stop-using-pyasn1.compat.octets.patch
+new file mode 100644
+index 0000000000..d9751b7187
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pyasn1-modules/0001-Stop-using-pyasn1.compat.octets.patch
+@@ -0,0 +1,171 @@
++From d20c89d017a572755484b1bc41eac20285e68550 Mon Sep 17 00:00:00 2001
++From: Heiko Becker <mail@heiko-becker.de>
++Date: Wed, 25 Sep 2024 22:38:42 +0200
++Subject: [PATCH] Stop using pyasn1.compat.octets
++
++It was removed from pyasn1 in
++https://github.com/pyasn1/pyasn1/commit/6f770ba886a8931c35cb090a5c3a6d67f5a41bd9
++
++Fixes #19.
++
++Upstream-Status: Submitted [https://github.com/pyasn1/pyasn1-modules/pull/22]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ tests/test_pem.py     | 3 +--
++ tests/test_rfc3770.py | 3 +--
++ tests/test_rfc4073.py | 3 +--
++ tests/test_rfc4334.py | 3 +--
++ tests/test_rfc5755.py | 3 +--
++ tests/test_rfc6032.py | 7 +++----
++ tests/test_rfc6120.py | 1 -
++ 7 files changed, 8 insertions(+), 15 deletions(-)
++
++diff --git a/tests/test_pem.py b/tests/test_pem.py
++index dbcca5a..e0fe334 100644
++--- a/tests/test_pem.py
+++++ b/tests/test_pem.py
++@@ -7,7 +7,6 @@
++ import sys
++ import unittest
++ 
++-from pyasn1.compat.octets import ints2octs
++ from pyasn1_modules import pem
++ 
++ 
++@@ -93,7 +92,7 @@ GGbx7DI=
++             24, 102, 241, 236, 50
++         ]
++ 
++-        self.assertEqual(ints2octs(expected), binary)
+++        self.assertEqual(bytes(expected), binary)
++ 
++ 
++ suite = unittest.TestLoader().loadTestsFromModule(sys.modules[__name__])
++diff --git a/tests/test_rfc3770.py b/tests/test_rfc3770.py
++index 667ab24..93d4093 100644
++--- a/tests/test_rfc3770.py
+++++ b/tests/test_rfc3770.py
++@@ -10,7 +10,6 @@ import unittest
++ 
++ from pyasn1.codec.der.decoder import decode as der_decoder
++ from pyasn1.codec.der.encoder import encode as der_encoder
++-from pyasn1.compat.octets import str2octs
++ 
++ from pyasn1_modules import pem
++ from pyasn1_modules import rfc5480
++@@ -79,7 +78,7 @@ DAlVlhox680Jxy5J8Pkx
++                 self.assertEqual(extn['extnValue'], der_encoder(extnValue))
++ 
++                 if extn['extnID'] == rfc3770.id_pe_wlanSSID:
++-                    self.assertIn(str2octs('Example'), extnValue)
+++                    self.assertIn(b'Example', extnValue)
++ 
++                 if extn['extnID'] == rfc5280.id_ce_extKeyUsage:
++                     self.assertIn(rfc3770.id_kp_eapOverLAN, extnValue)
++diff --git a/tests/test_rfc4073.py b/tests/test_rfc4073.py
++index 4bd5e5f..3b516cc 100644
++--- a/tests/test_rfc4073.py
+++++ b/tests/test_rfc4073.py
++@@ -10,7 +10,6 @@ import unittest
++ 
++ from pyasn1.codec.der.decoder import decode as der_decoder
++ from pyasn1.codec.der.encoder import encode as der_encoder
++-from pyasn1.compat.octets import str2octs
++ 
++ from pyasn1_modules import pem
++ from pyasn1_modules import rfc2634
++@@ -131,7 +130,7 @@ buWO3egPDL8Kf7tBhzjIKLw=
++ 
++             self.assertIn(next_ci['contentType'], rfc5652.cmsContentTypesMap)
++             self.assertEqual(rfc5652.id_data, next_ci['contentType'])
++-            self.assertIn(str2octs('Content-Type: text'), next_ci['content'])
+++            self.assertIn(b'Content-Type: text', next_ci['content'])
++ 
++             for attr in ci['content']['attrs']:
++                 self.assertIn(attr['attrType'], rfc5652.cmsAttributesMap)
++diff --git a/tests/test_rfc4334.py b/tests/test_rfc4334.py
++index 9ba5fdf..e180d67 100644
++--- a/tests/test_rfc4334.py
+++++ b/tests/test_rfc4334.py
++@@ -10,7 +10,6 @@ import unittest
++ 
++ from pyasn1.codec.der.decoder import decode as der_decoder
++ from pyasn1.codec.der.encoder import encode as der_encoder
++-from pyasn1.compat.octets import str2octs
++ 
++ from pyasn1_modules import pem
++ from pyasn1_modules import rfc5280
++@@ -67,7 +66,7 @@ DAlVlhox680Jxy5J8Pkx
++                 self.assertEqual(extn['extnValue'], der_encoder(extnValue))
++ 
++                 if extn['extnID'] == rfc4334.id_pe_wlanSSID:
++-                    self.assertIn( str2octs('Example'), extnValue)
+++                    self.assertIn(b'Example', extnValue)
++             
++                 if extn['extnID'] == rfc5280.id_ce_extKeyUsage:
++                     self.assertIn(rfc4334.id_kp_eapOverLAN, extnValue)
++diff --git a/tests/test_rfc5755.py b/tests/test_rfc5755.py
++index cf4a05f..46908e2 100644
++--- a/tests/test_rfc5755.py
+++++ b/tests/test_rfc5755.py
++@@ -10,7 +10,6 @@ import unittest
++ 
++ from pyasn1.codec.der.decoder import decode as der_decoder
++ from pyasn1.codec.der.encoder import encode as der_encoder
++-from pyasn1.compat.octets import str2octs
++ 
++ from pyasn1_modules import pem
++ from pyasn1_modules import rfc5280
++@@ -85,7 +84,7 @@ Q4eikPk4LQey
++             count += 1
++             if attr['type'] == rfc5755.id_aca_authenticationInfo:
++                 self.assertEqual(
++-                    str2octs('password'), attr['values'][0]['authInfo'])
+++                    b'password', attr['values'][0]['authInfo'])
++ 
++         self.assertEqual(5, count)
++ 
++diff --git a/tests/test_rfc6032.py b/tests/test_rfc6032.py
++index 287bad8..2327416 100644
++--- a/tests/test_rfc6032.py
+++++ b/tests/test_rfc6032.py
++@@ -10,7 +10,6 @@ import unittest
++ 
++ from pyasn1.codec.der.decoder import decode as der_decoder
++ from pyasn1.codec.der.encoder import encode as der_encoder
++-from pyasn1.compat.octets import str2octs
++ 
++ from pyasn1_modules import pem
++ from pyasn1_modules import rfc5652
++@@ -64,7 +63,7 @@ YIZIAWUCAQVCMRAEDnB0Zi1rZGMtODEyMzc0
++         self.assertFalse(rest)
++         self.assertTrue(keyid.prettyPrint())
++         self.assertEqual(attrVal0, der_encoder(keyid))
++-        self.assertEqual(str2octs('ptf-kdc-812374'), keyid)
+++        self.assertEqual(b'ptf-kdc-812374', keyid)
++ 
++     def testOpenTypes(self):
++         substrate = pem.readBase64fromText(self.encrypted_key_pkg_pem_text)
++@@ -86,8 +85,8 @@ YIZIAWUCAQVCMRAEDnB0Zi1rZGMtODEyMzc0
++             self.assertNotEqual('0x', attr['attrValues'][0].prettyPrint()[:2])
++ 
++             if attr['attrType'] == rfc6032.id_aa_KP_contentDecryptKeyID:
++-                self.assertEqual(str2octs(
++-                    'ptf-kdc-812374'), attr['attrValues'][0])
+++                self.assertEqual(
+++                    b'ptf-kdc-812374', attr['attrValues'][0])
++ 
++ 
++ suite = unittest.TestLoader().loadTestsFromModule(sys.modules[__name__])
++diff --git a/tests/test_rfc6120.py b/tests/test_rfc6120.py
++index bdedab8..a621745 100644
++--- a/tests/test_rfc6120.py
+++++ b/tests/test_rfc6120.py
++@@ -10,7 +10,6 @@ import unittest
++ 
++ from pyasn1.codec.der.decoder import decode as der_decoder
++ from pyasn1.codec.der.encoder import encode as der_encoder
++-from pyasn1.compat.octets import str2octs
++ 
++ from pyasn1_modules import pem
++ from pyasn1_modules import rfc5280
+diff --git a/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.4.1.bb b/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.4.1.bb
+index e8c0f960aa..03097801b8 100644
+--- a/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.4.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.4.1.bb
+@@ -6,6 +6,7 @@ HOMEPAGE = "https://github.com/etingof/pyasn1-modules"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=190f79253908c986e6cacf380c3a5f6d"
+ 
++SRC_URI += "file://0001-Stop-using-pyasn1.compat.octets.patch"
+ SRC_URI[sha256sum] = "c28e2dbf9c06ad61c71a075c7e0f9fd0f1b0bb2d2ad4377f240d33ac2ab60a7c"
+ 
+ PYPI_PACKAGE = "pyasn1_modules"
 
