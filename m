@@ -1,170 +1,76 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <lsorense@csclub.uwaterloo.ca>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 756ACCEACF1
-	for <webhook@archiver.kernel.org>; Tue,  1 Oct 2024 17:36:21 +0000 (UTC)
-Received: from mail-oa1-f54.google.com (mail-oa1-f54.google.com [209.85.160.54])
- by mx.groups.io with SMTP id smtpd.web10.87880.1727804175871444282
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B62FECF3186
+	for <webhook@archiver.kernel.org>; Tue,  1 Oct 2024 21:04:42 +0000 (UTC)
+Received: from caffeine.csclub.uwaterloo.ca (caffeine.csclub.uwaterloo.ca [129.97.134.17])
+ by mx.groups.io with SMTP id smtpd.web11.93441.1727816672588529530
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Oct 2024 10:36:15 -0700
+ Tue, 01 Oct 2024 14:04:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cLEv0Wws;
- spf=pass (domain: gmail.com, ip: 209.85.160.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f54.google.com with SMTP id 586e51a60fabf-2877d7ae3f6so422839fac.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Oct 2024 10:36:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1727804175; x=1728408975; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YTVD83Pyl+HcCjd22L0bjXHAtzPkM0dBB7Iu+GHkPIw=;
-        b=cLEv0WwsrBxVKlZODTGzQ4aih7mKJdW6Roi8M4AKFdb9ObV8X9XuY3F8MNcWbhHbj6
-         CXtqzwWlDsSBWaefLhg6mR1I4OnF0fEOnYEraNiQEl6Y2CUkKE66KaHdajDE1YkfUR8s
-         NrvajEtkY7HNFWS2pD21tnY3/x1g6HKGXH5pveIdns4BFQDHeJe5bgPquazlBX2JV/am
-         MX+NfUXJDUdjVEu3JJtDvTlkyXvBuhjL5aJp44hFXZTY68aCX9du21oKHZBgG/zieGHJ
-         qDM/Bm1RnQNLXGnLZQDUe39ZjjgER06qCSWYqoE27k2JG/H+cV3I8DW7n4Cg1I58RzuN
-         6DAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727804175; x=1728408975;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=YTVD83Pyl+HcCjd22L0bjXHAtzPkM0dBB7Iu+GHkPIw=;
-        b=KsiQ4Ys5278OTJh6x0C3Zkp/Dipp1cAgi66b/Pxf7GMEXekrM9TaCJL85mxsGBQfhP
-         e7ZEOphB0BGDkYmeVUGgDwpDtND99QmVwNQFYYq9DHOqJE2LDhs2dlxezAdpl3TBVmNq
-         TyS1rIYE9Qw4jBmXxjRd5rXffh6NSINLb3Dvn5x/I5rTKguj18nxVFoCd/CprmlmnbFU
-         aS8ADM/smh/v6SM2DWMeMiUNzzpNQ8NomX4GqTMxFcMkrHPhcE/1VdMTI50PCXdWxKZ5
-         ivdqimXouZ5RdgGpqQZjc5iUTj3h32t+EN1w5Dv1mH3aOp2g6yBfZGxSeWjdGOXGCFjx
-         BmPA==
-X-Gm-Message-State: AOJu0Yxb5EuMSL2m2Qw//86GxrHBjJQRRJsPNEqQWe0x5PXORiskuBuD
-	zE2OGg+hZWS+cE+iM39UmHuVfBK+0eGeeGAVRO2yX+pbqBdvjRKIIwVlphHkEMuuhjwf0XhLU2z
-	DSxo/tcqnRHwWztJ4cdrtnjEfXmg=
-X-Google-Smtp-Source: AGHT+IEKdYuWybc/nlbsvwQGpduPMoPpJVTbjQ5c4I+mcBdMV8kuMdLCiBM5WYNr+3DMKcb2IaXzwijNJSbwFkLrvhQ=
-X-Received: by 2002:a05:6870:8a0a:b0:287:29a0:cfe4 with SMTP id
- 586e51a60fabf-28788f2b104mr203093fac.32.1727804174886; Tue, 01 Oct 2024
- 10:36:14 -0700 (PDT)
+ dkim=none (message not signed); spf=pass (domain: csclub.uwaterloo.ca, ip: 129.97.134.17, mailfrom: lsorense@csclub.uwaterloo.ca)
+Received: by caffeine.csclub.uwaterloo.ca (Postfix, from userid 20367)
+	id 3EFD6460C28; Tue,  1 Oct 2024 17:04:31 -0400 (EDT)
+Date: Tue, 1 Oct 2024 17:04:31 -0400
+To: Armin Kuster <akuster808@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org,
+	Yi Zhao <yi.zhao@windriver.com>, Khem Raj <raj.khem@gmail.com>
+Subject: Re: [oe] [meta-oe][scarthgap][PATCH 3/5] samba: upgrade 4.19.6 ->
+ 4.19.7
+Message-ID: <Zvxj379qqn8aM9uF@csclub.uwaterloo.ca>
+References: <20240915163040.189190-1-akuster808@gmail.com>
+ <20240915163040.189190-3-akuster808@gmail.com>
 MIME-Version: 1.0
-References: <20241001165743.1061735-1-alperyasinak1@gmail.com>
-In-Reply-To: <20241001165743.1061735-1-alperyasinak1@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 1 Oct 2024 10:35:48 -0700
-Message-ID: <CAMKF1soJx38rQmuyctmu+mFpJNzroN4JH-VLcrf=6mfHg9rnTw@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] curlpp: Fix build issue
-To: alperyasinak1@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240915163040.189190-3-akuster808@gmail.com>
+From: Lennart Sorensen <lsorense@csclub.uwaterloo.ca>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Oct 2024 17:36:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112637
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Oct 2024 21:04:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112638
 
-On Tue, Oct 1, 2024 at 9:57=E2=80=AFAM Alper Ak via lists.openembedded.org
-<alperyasinak1=3Dgmail.com@lists.openembedded.org> wrote:
->
-> Signed-off-by: alperak <alperyasinak1@gmail.com>
+On Sun, Sep 15, 2024 at 12:30:38PM -0400, Armin Kuster wrote:
+> From: Yi Zhao <yi.zhao@windriver.com>
+> 
+> ChangeLog:
+> https://www.samba.org/samba/history/samba-4.19.7.html
+> 
+> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> (cherry picked from commit 41df431b91f1d81070c1f0e8633995d7afba52e4)
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
 > ---
->  ...id-conversion-from-int-to-CURLoption.patch | 36 +++++++++++++++++++
->  .../recipes-support/curlpp/curlpp_0.8.1.bb    |  3 +-
->  2 files changed, 38 insertions(+), 1 deletion(-)
->  create mode 100644 meta-networking/recipes-support/curlpp/curlpp/0002-fi=
-x-invalid-conversion-from-int-to-CURLoption.patch
->
-> diff --git a/meta-networking/recipes-support/curlpp/curlpp/0002-fix-inval=
-id-conversion-from-int-to-CURLoption.patch b/meta-networking/recipes-suppor=
-t/curlpp/curlpp/0002-fix-invalid-conversion-from-int-to-CURLoption.patch
-> new file mode 100644
-> index 000000000..1712a5346
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/curlpp/curlpp/0002-fix-invalid-conv=
-ersion-from-int-to-CURLoption.patch
-> @@ -0,0 +1,36 @@
-> +From ebe9144fdfdc8154661b93322cec4a1c43aa75ff Mon Sep 17 00:00:00 2001
-> +From: alperak <alperyasinak1@gmail.com>
-> +Date: Tue, 1 Oct 2024 19:45:38 +0300
-> +Subject: [PATCH] Fix invalid conversion from int to CURLoption
-> +
-> +Options.hpp:281:74: error: invalid conversion from 'int' to 'CURLoption'=
- [-fpermissive]
-> +  281 |         typedef curlpp::OptionTrait<curl_closepolicy, CURLOPT_CL=
-OSEPOLICY> ClosePolicy;
-> +      |                                                                 =
-         ^
-> +      |                                                                 =
-         |
-> +      |                                                                 =
-         int
-> +
-> +Fix invalid conversion by adding explicit cast to CURLoption
-> +
-> +Upstream-Status: Pending
+>  .../samba/{samba_4.19.6.bb => samba_4.19.7.bb}                  | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-networking/recipes-connectivity/samba/{samba_4.19.6.bb => samba_4.19.7.bb} (99%)
+> 
+> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.19.6.bb b/meta-networking/recipes-connectivity/samba/samba_4.19.7.bb
+> similarity index 99%
+> rename from meta-networking/recipes-connectivity/samba/samba_4.19.6.bb
+> rename to meta-networking/recipes-connectivity/samba/samba_4.19.7.bb
+> index bd0309934b..dddf594515 100644
+> --- a/meta-networking/recipes-connectivity/samba/samba_4.19.6.bb
+> +++ b/meta-networking/recipes-connectivity/samba/samba_4.19.7.bb
+> @@ -31,7 +31,7 @@ SRC_URI:append:libc-musl = " \
+>             file://samba-4.3.9-remove-getpwent_r.patch \
+>             "
+>  
+> -SRC_URI[sha256sum] = "653b52095554dbc223c63b96af5cdf9e98c3e048549c5f56143d3b33dce1cef1"
+> +SRC_URI[sha256sum] = "2bbb800af2d6bc7b9c23e708cd58d008da3bfa6ef7e621d9ec8b53387efee445"
+>  
+>  UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.19(\.\d+)+).tar.gz"
 
-Thanks for fixing this, I would suggest sending this patch upstream so
-we get it reviewed.
+This broke the build for me.  Seems it now requires ldb 2.8.1 but the
+version in 5.0 is 2.8.0 so configure fails.
 
-> +
-> +Signed-off-by: alperak <alperyasinak1@gmail.com>
-> +---
-> + include/curlpp/Options.hpp | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/include/curlpp/Options.hpp b/include/curlpp/Options.hpp
-> +index c705c9d..7c9a501 100644
-> +--- a/include/curlpp/Options.hpp
-> ++++ b/include/curlpp/Options.hpp
-> +@@ -278,7 +278,7 @@ namespace options
-> +       typedef curlpp::OptionTrait<long, CURLOPT_LOW_SPEED_LIMIT> LowSpe=
-edLimit;
-> +       typedef curlpp::OptionTrait<long, CURLOPT_LOW_SPEED_TIME> LowSpee=
-dTime;
-> +       typedef curlpp::OptionTrait<long, CURLOPT_MAXCONNECTS> MaxConnect=
-s;
-> +-      typedef curlpp::OptionTrait<curl_closepolicy, CURLOPT_CLOSEPOLICY=
-> ClosePolicy;
-> ++      typedef curlpp::OptionTrait<curl_closepolicy, (CURLoption)CURLOPT=
-_CLOSEPOLICY> ClosePolicy;
-> +       typedef curlpp::OptionTrait<bool, CURLOPT_FRESH_CONNECT> FreshCon=
-nect;
-> +       typedef curlpp::OptionTrait<bool, CURLOPT_FORBID_REUSE> ForbidReu=
-se;
-> +       typedef curlpp::OptionTrait<long, CURLOPT_CONNECTTIMEOUT> Connect=
-Timeout;
-> +--
-> +2.25.1
-> +
-> diff --git a/meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb b/met=
-a-networking/recipes-support/curlpp/curlpp_0.8.1.bb
-> index 131f1873a..cacdc9773 100644
-> --- a/meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb
-> +++ b/meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb
-> @@ -8,7 +8,8 @@ DEPENDS =3D "curl"
->  DEPENDS:class-native =3D "curl-native"
->
->  SRC_URI =3D "git://github.com/jpbarrette/curlpp.git;branch=3Dmaster;prot=
-ocol=3Dhttps \
-> -           file://0001-curlpp-config.in-Remove-references-to-absolute-bu=
-ild.patch"
-> +           file://0001-curlpp-config.in-Remove-references-to-absolute-bu=
-ild.patch \
-> +           file://0002-fix-invalid-conversion-from-int-to-CURLoption.pat=
-ch"
->
->  SRCREV =3D "592552a165cc569dac7674cb7fc9de3dc829906f"
->
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#112636): https://lists.openembedded.org/g/openembedde=
-d-devel/message/112636
-> Mute This Topic: https://lists.openembedded.org/mt/108763095/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+The update to 4.19.8 has the same complaint.
+
+The commit right before this one builds fine of course so I temporarily
+jumped to back to that one for now.
+
+-- 
+Len Sorensen
 
