@@ -2,86 +2,89 @@ Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A1F6CF31BA
-	for <webhook@archiver.kernel.org>; Wed,  2 Oct 2024 19:58:39 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.web10.3615.1727899110114435368
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BAA3FCF8540
+	for <webhook@archiver.kernel.org>; Wed,  2 Oct 2024 21:08:59 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.web10.5325.1727903332583395880
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Oct 2024 12:58:30 -0700
+ Wed, 02 Oct 2024 14:08:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=e+71O7Dc;
- spf=pass (domain: smile.fr, ip: 209.85.128.46, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-42cb9a0c300so1088995e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Oct 2024 12:58:29 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=XxAHv6ah;
+ spf=pass (domain: smile.fr, ip: 209.85.128.45, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-42cb0f28bfbso1548005e9.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Oct 2024 14:08:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1727899108; x=1728503908; darn=lists.openembedded.org;
+        d=smile.fr; s=google; t=1727903331; x=1728508131; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=7eBdLLwqM6h53k8yll87/xB1QCCSdKJoghHezMBC0x0=;
-        b=e+71O7DcmLMfl3mGLv7E7r+LanRI01Wyk6PJ3ZhrEh4K8SDvn1X1R197huYbzxBc57
-         dbqPALHz8E+CRlltSP8+VaiDRtM1AsPaLWVLFoGr2wTFwgBNKvzw1NiJ9BgDZFSAA4er
-         0LqzT9JMrPBdh4P5lpCdeWLeW+cEYIDPVJlVQ=
+        bh=QbEYuAEVvNwn15xZvJslnGycPWJAXtY7YPTL7I8qJjs=;
+        b=XxAHv6ah8NIL4VzGm6Itqm0AKBYc/gR9Suu1J2BjQYIYT57fswdWVpkHG9MqP0z/xf
+         optcUhj5bTwHU2ZqA7VezfjhNGdbaqfzgDUX4heIgA5PBJKuNb1GgVTUh0K6GlLMOGqv
+         lY7rXTUwJ/PbV46s9nOjrdQpBTDyTy4tyAIUc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727899108; x=1728503908;
+        d=1e100.net; s=20230601; t=1727903331; x=1728508131;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=7eBdLLwqM6h53k8yll87/xB1QCCSdKJoghHezMBC0x0=;
-        b=qI2kSolTHv/2TxAe5xKlRRhwgyi3E8KNQbwdnfVGJdSCae4Wto0DUvQe5C3vYsNk0o
-         HZBAJ6QnkaAGQsyJd5O2lYnF+g7oDNclyE+C336fk+ayue4VgSJNeZG+qncUgedstP4Y
-         581WRpCYzRwG9ZZq5WjMbyeCuM5xoyqnLHyxI8VMPQObsR7qhCfwLfMavxrRb+uIOL08
-         Fix8K82VelQRjo92guXHJDBhSJu9XtFbtbqFMoTFNKX8WPZX7mIWZDXXUMq1taijBwlG
-         VwFrb9i1+64Dq/ZL7y6AZvWFO8nUjcVJdHPgExMA+nLgBKinjYuxk0XwZLd7wbzv+Xua
-         QR8Q==
-X-Gm-Message-State: AOJu0YwpcignyEj/2UxF02g7t5rs3c8zgpuw5gdWHdUuotP0TMXqoXsx
-	9I3y/v5LQvMewRb5gRCe65wF4DnvyY1ko+6nlpBfQ20NnUD32uGshSjdjhzEywQjdgwPLsJvCLr
+        bh=QbEYuAEVvNwn15xZvJslnGycPWJAXtY7YPTL7I8qJjs=;
+        b=esdGoADyjva4i1+3TqeslQ1ZSsJpRRosA8T0I/6ZMsiqXw05e4xbYtKaAwxcdulejF
+         gLIE96B6swBAgJOdWs4UMOamKzPvLsA8mFqyTj+9I9+b7uCETT4Ssm4/2vpzmuOBpgbg
+         /iIjjInURWY6q+64EA7H6grwc1OGfy07mW7spzu15lzrRhPPzB3GnGw5oswI6irmZCoy
+         Ygi7LTNRkEUmTUI/ASAcjI8b9S7Rig4nm+c9ZF2uM6dDXA654uTZ2KnwLRzUDu/Imu0t
+         t7MxmN+e9VocJDdh54fK51T7iJuUyrufNsYz8p8/U+tHeLdEYYUF4fJZz21/gkrYOPB/
+         TQ/Q==
+X-Gm-Message-State: AOJu0YyR2mwiHJsbal7pb0GvaFqZSMV1/o6UfSp4dejLZbv6g9E7Tfec
+	XPoshDrX18EymI+oZhRYd1qGd3Urt2tN8IW9CKlfGVjopAin2qi2YwmGgRC9ugoiv9M7SEvvyEB
 	r
-X-Google-Smtp-Source: AGHT+IHPZX6X43PDBeOHLnh1FN0Ed/BI4v2DuvPIo/2prvkn9Nw3ngVzkDa4PA2YdXcxV51a972X/g==
-X-Received: by 2002:a05:600c:4e86:b0:428:1965:450d with SMTP id 5b1f17b1804b1-42f777c27e4mr32741645e9.17.1727899108005;
-        Wed, 02 Oct 2024 12:58:28 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IERs5ARDGx9t5MoF+CdHpTK3A3SYwWiQGC4wmkejBz+XOc3/CNP18Qspa9C2vrT8J9RADvZsQ==
+X-Received: by 2002:a05:600c:35d6:b0:42c:c1f6:6ded with SMTP id 5b1f17b1804b1-42f778f2b9cmr32018555e9.29.1727903330093;
+        Wed, 02 Oct 2024 14:08:50 -0700 (PDT)
 Received: from P-ASN-ECS-830T8C3.local (53.1.159.89.rev.sfr.net. [89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-37cd564d41dsm14662091f8f.17.2024.10.02.12.58.27
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-42f79db1d6csm28980465e9.1.2024.10.02.14.08.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Oct 2024 12:58:27 -0700 (PDT)
+        Wed, 02 Oct 2024 14:08:49 -0700 (PDT)
 From: Yoann Congal <yoann.congal@smile.fr>
 To: openembedded-devel@lists.openembedded.org
 Cc: Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-multimedia][PATCH] minidlna: fix reproducibility
-Date: Wed,  2 Oct 2024 21:57:18 +0200
-Message-Id: <20241002195718.2100890-1-yoann.congal@smile.fr>
+Subject: [meta-networking][PATCH] non-repro-meta-networking: update known non-reproducible list
+Date: Wed,  2 Oct 2024 23:08:38 +0200
+Message-Id: <20241002210838.2567828-1-yoann.congal@smile.fr>
 X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 02 Oct 2024 19:58:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112643
+ <openembedded-devel@lists.openembedded.org>; Wed, 02 Oct 2024 21:08:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112644
 
 From: Yoann Congal <yoann.congal@smile.fr>
 
-Minidlna configuration puts os name & version in the binary which lead
-to non-reproducibility. Fix this by forcing those variables to constant
-values.
+Add:
+* ntopng: date in version
+* opensaf: build host hostname in /etc/ files
+
+from: https://autobuilder.yoctoproject.org/typhoon/#/builders/155/builds/45/steps/28/logs/stdio
 
 Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 ---
- meta-multimedia/recipes-multimedia/minidlna/minidlna.inc | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-networking/conf/include/non-repro-meta-networking.inc | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc b/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
-index 8c9ead1489..170e676b24 100644
---- a/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
-+++ b/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
-@@ -21,6 +21,10 @@ S = "${WORKDIR}/git"
- # configure.ac:30: error: required file './ABOUT-NLS' not found
- EXTRA_AUTORECONF = ""
- 
-+# Reproducibility: force os-name and os-version to constants to avoid host
-+# related build differences
-+EXTRA_OECONF = "--with-os-name='${DISTRO_NAME}' --with-os-version=''"
-+
- do_install:append(){
-     install -d ${D}${sysconfdir}
-     install -m 0755 minidlna.conf ${D}${sysconfdir}
+diff --git a/meta-networking/conf/include/non-repro-meta-networking.inc b/meta-networking/conf/include/non-repro-meta-networking.inc
+index c5313416a7..6519ef33ed 100755
+--- a/meta-networking/conf/include/non-repro-meta-networking.inc
++++ b/meta-networking/conf/include/non-repro-meta-networking.inc
+@@ -21,8 +21,11 @@ KNOWN_NON_REPRO_META_NETWORKING = " \
+     ndisc6-rdnssd \
+     ndisc6-rltraceroute6 \
+     netsniff-ng-doc \
++    ntopng \
++    ntopng-dbg \
+     ntpsec-src \
+     openl2tp \
++    opensaf \
+     postfix-cfg \
+     rp-pppoe \
+     udpcast-doc \
 
