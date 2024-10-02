@@ -1,95 +1,87 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 136E7CF319E
-	for <webhook@archiver.kernel.org>; Wed,  2 Oct 2024 19:10:29 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web11.2473.1727896224069219219
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A1F6CF31BA
+	for <webhook@archiver.kernel.org>; Wed,  2 Oct 2024 19:58:39 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.web10.3615.1727899110114435368
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Oct 2024 12:10:24 -0700
+ Wed, 02 Oct 2024 12:58:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Q93jfkJ1;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-20b84bfbdfcso8815885ad.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Oct 2024 12:10:24 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=e+71O7Dc;
+ spf=pass (domain: smile.fr, ip: 209.85.128.46, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-42cb9a0c300so1088995e9.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Oct 2024 12:58:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1727896223; x=1728501023; darn=lists.openembedded.org;
+        d=smile.fr; s=google; t=1727899108; x=1728503908; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=kBfl9T79s9IrtaND90g2u8axEUqcDlfeta1NcHqo0lc=;
-        b=Q93jfkJ1NEzpVFdcs3nEgYytly1pDC0hAQUO4W2Zcslfv4oIfOmTXxfKKFQtlN1RfD
-         POUkPZr1Pkk0NfI/wuzup0SQniiG61vqWd8S4xYjZ3slp5H01lj+ILMr3BWxKTwXK5TQ
-         a6Iy67BMMe/UG9b2ZxK2AT5hq1KgAWXGLWyQY8jZ00p/e/1lZl2+I9VAKu1FxCmSSNcW
-         TrkEp2ueQrfjArNYaXdvrQ54NQJjOswYktL8WY4jfpQwk1b6QblLnZHITggbJDMBzvW7
-         soO/FLKodTzsvIMYac9M1pjFodBY+YDENiKdK2mwe9iK7NizyITMDmd7PVSfH7UwQXBC
-         M3xw==
+        bh=7eBdLLwqM6h53k8yll87/xB1QCCSdKJoghHezMBC0x0=;
+        b=e+71O7DcmLMfl3mGLv7E7r+LanRI01Wyk6PJ3ZhrEh4K8SDvn1X1R197huYbzxBc57
+         dbqPALHz8E+CRlltSP8+VaiDRtM1AsPaLWVLFoGr2wTFwgBNKvzw1NiJ9BgDZFSAA4er
+         0LqzT9JMrPBdh4P5lpCdeWLeW+cEYIDPVJlVQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1727896223; x=1728501023;
+        d=1e100.net; s=20230601; t=1727899108; x=1728503908;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=kBfl9T79s9IrtaND90g2u8axEUqcDlfeta1NcHqo0lc=;
-        b=sg/t3T55/xQEBXw5ZvHOCSoQjn6ipWBp3xQCG9SbCszCjFnmq+Xg/H5TJFYT07Vh+l
-         EwSYYWSOZdJAYGIzlc4tRCULAeVVo+m6eEARjSRXzAIFzQJmUeJoTlVUsHUDIXEBtAr/
-         OoC+eV0wV0BCiuoDEA/m+1lv1yMYbHeSHFud+kZT3tsUwZjLhMbAMHKR08/BiIgbArBV
-         6P2qtGFk9FHnVjqHYRa6TPgCJjwCFeVajnVk7Dim1QC9QWe17cIMk3ijwCry93rZvdtA
-         MNtgcjiwzVGa6iVEMV3aqGA8FdQPZ56v+q5EhbHpCrm0HD5a7SJvQPB1Hgz0K0HZ551c
-         X2xw==
-X-Gm-Message-State: AOJu0YwAivNse8vjkNgsVuqCy8gOjo47an/MylB6Uk+ntZgNP2U78vNu
-	u9hUQP0n5SKu8PgLc/5/LvhspUf9vhAZJ5+iq4osJIn3EIVMVrk2+wp+KBHr
-X-Google-Smtp-Source: AGHT+IEvOLxccDKZ/POsmQTYhl3Gr5L9hkXhNlgt97rVToq3wzN9h8a/TXXFXipZyy/4xNLpMjkn9Q==
-X-Received: by 2002:a17:903:1c9:b0:20b:9df1:549f with SMTP id d9443c01a7336-20be18b2839mr9090175ad.12.1727896223283;
-        Wed, 02 Oct 2024 12:10:23 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::caca])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-20b37d60de3sm87455675ad.41.2024.10.02.12.10.22
+        bh=7eBdLLwqM6h53k8yll87/xB1QCCSdKJoghHezMBC0x0=;
+        b=qI2kSolTHv/2TxAe5xKlRRhwgyi3E8KNQbwdnfVGJdSCae4Wto0DUvQe5C3vYsNk0o
+         HZBAJ6QnkaAGQsyJd5O2lYnF+g7oDNclyE+C336fk+ayue4VgSJNeZG+qncUgedstP4Y
+         581WRpCYzRwG9ZZq5WjMbyeCuM5xoyqnLHyxI8VMPQObsR7qhCfwLfMavxrRb+uIOL08
+         Fix8K82VelQRjo92guXHJDBhSJu9XtFbtbqFMoTFNKX8WPZX7mIWZDXXUMq1taijBwlG
+         VwFrb9i1+64Dq/ZL7y6AZvWFO8nUjcVJdHPgExMA+nLgBKinjYuxk0XwZLd7wbzv+Xua
+         QR8Q==
+X-Gm-Message-State: AOJu0YwpcignyEj/2UxF02g7t5rs3c8zgpuw5gdWHdUuotP0TMXqoXsx
+	9I3y/v5LQvMewRb5gRCe65wF4DnvyY1ko+6nlpBfQ20NnUD32uGshSjdjhzEywQjdgwPLsJvCLr
+	r
+X-Google-Smtp-Source: AGHT+IHPZX6X43PDBeOHLnh1FN0Ed/BI4v2DuvPIo/2prvkn9Nw3ngVzkDa4PA2YdXcxV51a972X/g==
+X-Received: by 2002:a05:600c:4e86:b0:428:1965:450d with SMTP id 5b1f17b1804b1-42f777c27e4mr32741645e9.17.1727899108005;
+        Wed, 02 Oct 2024 12:58:28 -0700 (PDT)
+Received: from P-ASN-ECS-830T8C3.local (53.1.159.89.rev.sfr.net. [89.159.1.53])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-37cd564d41dsm14662091f8f.17.2024.10.02.12.58.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Oct 2024 12:10:22 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Wed, 02 Oct 2024 12:58:27 -0700 (PDT)
+From: Yoann Congal <yoann.congal@smile.fr>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] rsyslog: Enable 64bit atomics check
-Date: Wed,  2 Oct 2024 12:10:20 -0700
-Message-ID: <20241002191020.1021564-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.46.2
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-multimedia][PATCH] minidlna: fix reproducibility
+Date: Wed,  2 Oct 2024 21:57:18 +0200
+Message-Id: <20241002195718.2100890-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 02 Oct 2024 19:10:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112642
+ <openembedded-devel@lists.openembedded.org>; Wed, 02 Oct 2024 19:58:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112643
 
-Build checks for this during configure but the test is a runtime
-test, which does not work when cross-compiling, therefore
-prescribe this by caching it for architecture/compiler options
-where it will work ok.
+From: Yoann Congal <yoann.congal@smile.fr>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Minidlna configuration puts os name & version in the binary which lead
+to non-reproducibility. Fix this by forcing those variables to constant
+values.
+
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 ---
- meta-oe/recipes-extended/rsyslog/rsyslog_8.2408.0.bb | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ meta-multimedia/recipes-multimedia/minidlna/minidlna.inc | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2408.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2408.0.bb
-index 41e3963580..cf833de22c 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2408.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2408.0.bb
-@@ -39,11 +39,12 @@ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+diff --git a/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc b/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
+index 8c9ead1489..170e676b24 100644
+--- a/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
++++ b/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
+@@ -21,6 +21,10 @@ S = "${WORKDIR}/git"
+ # configure.ac:30: error: required file './ABOUT-NLS' not found
+ EXTRA_AUTORECONF = ""
  
- inherit autotools pkgconfig systemd update-rc.d ptest
- 
--EXTRA_OECONF += "--disable-generate-man-pages ap_cv_atomic_builtins=yes"
--EXTRA_OECONF += "--enable-imfile-tests"
--EXTRA_OECONF:remove:mipsarch = "ap_cv_atomic_builtins=yes"
--EXTRA_OECONF:remove:powerpc = "ap_cv_atomic_builtins=yes"
--EXTRA_OECONF:remove:riscv32 = "ap_cv_atomic_builtins=yes"
-+EXTRA_OECONF += "--enable-imfile-tests ${ATOMICS}"
-+ATOMICS = "ap_cv_atomic_builtins_64=yes ap_cv_atomic_builtins=yes"
-+ATOMICS:mipsarch = ""
-+ATOMICS:powerpc = ""
-+ATOMICS:riscv32 = ""
-+ATOMICS:armv5 = ""
- 
- # first line is default yes in configure
- PACKAGECONFIG ??= " \
++# Reproducibility: force os-name and os-version to constants to avoid host
++# related build differences
++EXTRA_OECONF = "--with-os-name='${DISTRO_NAME}' --with-os-version=''"
++
+ do_install:append(){
+     install -d ${D}${sysconfdir}
+     install -m 0755 minidlna.conf ${D}${sysconfdir}
 
