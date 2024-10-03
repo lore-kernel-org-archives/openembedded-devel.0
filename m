@@ -2,30 +2,30 @@ Return-Path: <niko.mauno@vaisala.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CB7C4CF34A8
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C9F3CCF34A7
 	for <webhook@archiver.kernel.org>; Thu,  3 Oct 2024 12:43:13 +0000 (UTC)
 Received: from EUR02-VI1-obe.outbound.protection.outlook.com (EUR02-VI1-obe.outbound.protection.outlook.com [40.107.241.105])
  by mx.groups.io with SMTP id smtpd.web11.10398.1727959388976526076
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Oct 2024 05:43:12 -0700
+ Thu, 03 Oct 2024 05:43:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=w6AKzKWT;
+ dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=CPJe0E5B;
  spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 40.107.241.105, mailfrom: niko.mauno@vaisala.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oCBYt9+gluWMFHnbzZ5maYeF5hoYOPytJWFY3RE6RODQDQv+y9A7cl8KGUDkF/g2wL6Iwl1a8VZgz0kRiXKISsbimObwJuBkp7+RxWSssH90qmr3WLxM24oKnUHiflQlkkKtXztWrZgjJJGKgVRfdMy6xxjxgUhb56kAaLqY1rFMBt68CkmwghgXiCzYSDPc87855/6BT1+0Pd7Gf/y6g5yg6kjsMbpsfWc4Sup1Xq4IVBg4q0NM1MODO/GFAB1P+SS8uZZ5Z5Std3XJBPt/XUPGAZMwJSPuLj/jeuNnA/b+CyW1SBSNZ1EIo5eyuM2ZTJQXyh8Z9DDRf3R1JDg20A==
+ b=gnN5DC1or177zGt6uAVLmyzlzXngDFBH/tuGXJm8P8XaONzCPoPrUgqmKglMbnMo/AgFjnB0Dsk/6FXlKXskpY+oPjk7wHv2mtRQEWuCvZil4+ZnJcMiR1hEUhhtKAZzUczceFUHJ1WNC2KwLEc1oSrJ+ZiM9DKfONgq3jXCGJegwC+bTIiKh+QmYprgmFax6QGAXaJIKZgrDZlMay2FHYa1700G8Fvl9k5Yk2NgkRPeaiRZ/51t42TiiD+yvEucAVVvAy3w4InX5XrDhwZf2dWyjfp5s9WO3Yf2JbjV4e/N6Bje/qJLYu/sCqhfvtdp6TYMf7pCXww4GQyI7WyQrw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=t45oEHuiW2hgTbKM/7+mp5GjTom3JerVHwRYCTgqYMI=;
- b=jdpgVtzE+9N0P5hGO4fc0cjWcMNrzGYmoY+h7xzxKQTlpNaRudRZy7P2L1dEFcnqIZkVKV8aXnefThZzC89yJa0CYioxliJxtKgVjEZ/ZPD7DqMRjCY6E43OzagVrvzBa38lpdwy1PFPp2jeEL0KVLwFCDEs4rPTVP/VgguK3r8PN3ZMpsFax1ZJy2nTDY+xkY4wJAxz4Q4bDs7r40d6gdxoNlDGmBBdkAPTB3Ke04Tfl7pdP3s8smUQrTYxf9QiZql/UXE8VEcsd1nfKL2dtbow5bfmV8tp0cDaf4I0z5GQEpVPtiY4kdkQ/Bv895iugamtlCNiw/Rm+Dc6YZZt2A==
+ bh=WLJictBd89k+AlfkuDD9J75iiAIPqf8SC4dQBXPpLO8=;
+ b=Sf8BWAOINO0jSl7NtBMU0Ym4hA1+tIcA0h1wRWCcDtNKUOiOIZSXDkTpl/fYKMGvwmpvp0+2mBFC+Uj5ejQzg1Hyucr1VqQ7rQ1+cHXSyhsP73hC70Q//izzR+RoZxU844eCa+Ij/4nbh3q4qnHdZip13a+ubjKA25lMZ0s1ver/r6uvQnECSRTny3F0Ls3hTbyDy8VrZ1qoZ7I0Vkln9QMAbA3LZS+QcuNul6k4+c3VeS4od3pR3boaS4/LlKyNDVfg1b2dkI9EqOLEm8ClH/Oq3RRR85pJjSWGKn9HUYB/hTKnmsztpDcrIeJHqmR2QiTOefQ6rgSklTOwlo/nvQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
  dkim=pass header.d=vaisala.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=t45oEHuiW2hgTbKM/7+mp5GjTom3JerVHwRYCTgqYMI=;
- b=w6AKzKWTcE/TEWB8gfZyrXZSf2wZKi3yxwCE7I7XSdYMOzalupFcCBAE0PPEqbRMb2XqfgsjX/H1foLKJ0nyp7CV3Ya6ZGfgPyOilGJn9u58BQoKF2vFYmZI9eQPF3f5mypDP2eyBarN80WBgvY9cWde1MpYZpjHMfP9B5XsOhf+PeuoB745wlhf6I8RM/XdkrgBBGhbzU+UkOpo11Fp2+Q9HBJKL9Ry0+GhT5dfkGvKdJt8p4+pIJ5sAEYLyipMNSVXeDfUBKP2mXtEdwuiKM9e7anf8lLK+tjUUaiFtOsg768+udOPShRHrN8lwPLkjI0K27drFpLO8ukYkQK68Q==
+ bh=WLJictBd89k+AlfkuDD9J75iiAIPqf8SC4dQBXPpLO8=;
+ b=CPJe0E5BQGKl+FFMl0j8xuOzWAzUZ3d6TeZPEXwItw46vTWs8Kmeg0O3a4a/ZOmW7MZby3/L4f31+qN2qaNuhZK+pVcVuSplKfJLHxmThP7NrpSdkiGNTD1dTcqS6Csb5G6XMgAMDQu4yphq7AxNv9PI3br+83ove7GfGY6VGfD+t7LX0pe8SQlTPq/X6Jwz7tFzqaRHcryaGVb6pmmGiljqRJSYei9RTTGTM1B+i8j+cs1nq2l1LMZIYr0rgkakREKh0gAd0NObdofCitfw4DGbY1NzANWBvzOaloJE4QdH/0YxUftHVQwGXsEHOQ1an2S4dFnPJbj/cvNj8iFb/A==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vaisala.com;
 Received: from AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
@@ -41,9 +41,9 @@ From: Niko Mauno <niko.mauno@vaisala.com>
 To: openembedded-devel@lists.openembedded.org
 CC: raj.khem@gmail.com,
 	Niko Mauno <niko.mauno@vaisala.com>
-Subject: [meta-oe][PATCH 3/3] packagegroup-meta-oe: Cosmetic: Arrange values alphabetically
-Date: Thu,  3 Oct 2024 12:42:43 +0000
-Message-ID: <20241003124243.2411621-3-niko.mauno@vaisala.com>
+Subject: [meta-oe][PATCH 2/3] packagegroup-meta-oe: Fix recipe style issue
+Date: Thu,  3 Oct 2024 12:42:42 +0000
+Message-ID: <20241003124243.2411621-2-niko.mauno@vaisala.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20241003124243.2411621-1-niko.mauno@vaisala.com>
 References: <20241003124243.2411621-1-niko.mauno@vaisala.com>
@@ -55,1218 +55,265 @@ X-ClientProxiedBy: GV3PEPF0000366D.SWEP280.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|PA1PR06MB9517:EE_
-X-MS-Office365-Filtering-Correlation-Id: c5f76dfe-030a-4a4a-89e4-08dce3a8edd5
+X-MS-Office365-Filtering-Correlation-Id: a18ebf9e-13e0-4455-a853-08dce3a8ed93
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
 	BCL:0;ARA:13230040|1800799024|366016|376014|52116014|38350700014;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?zO9/0SOOVyKtFhKMzrVwGFD6ZV09gs+X1gw3SLr9BcNWfK7g5Hx8vY6hrrST?=
- =?us-ascii?Q?AYrDt2FSyn/rC3hfxm16PV99EcU+m1ZhfoLFifZJFgrRTtKrBAUkQOekPaf9?=
- =?us-ascii?Q?G9H/1MQ/omS9yeqeEuHXM6BHKKhrIwxya+6cEYZsDpzXzTmGAaLHmKCZrzIt?=
- =?us-ascii?Q?ICqpn/ijNZZfn6FNGRqpQXGvKzCUi5RbtE48gVfojB5+nG9gfD4LvyA9ldGE?=
- =?us-ascii?Q?Y8EwiWxvVEVnVdmIqbEh4+wXjGqt1bc8t5B20W1ad6nFLdfNIhgHx8IRsTES?=
- =?us-ascii?Q?4LmjyZZmw0kJPGvMbAETR3T1jp7hjUrssDB2VUCS3MQewmVSqKF0x7EGIsIL?=
- =?us-ascii?Q?IMHwWfOcXHzddfT6+3lyiET690hCLk3dyM0cZn59XgiSdrG1VIlW+4ypVarM?=
- =?us-ascii?Q?VnDR6LKi0npz/qRqM4an9lblg8wC+XK4gsYXMEJWPlXNI1cJH5bRJg0vVq10?=
- =?us-ascii?Q?uV7daFk3e9tXnof/AbXnDgd5wiA7kownSL/MK6nk5hMadPMyFgSV0OzxgkFb?=
- =?us-ascii?Q?mnnSbgGWT6MKr8wA/ta2fjrfsyr068xzu7KgusewzT/zLGLFrUajO7Nrczem?=
- =?us-ascii?Q?IylQBim8JwCLUZl4MDFRj9cEFIxRUffKtnhWpK5faKy0o2ZmoFQNU26oYTa+?=
- =?us-ascii?Q?cmYKSL+NeUd7J2u+BuDD4WpwxZfr1HvhL+Nf6Bn9TW6wKyvGpw6FI1K+YpZ1?=
- =?us-ascii?Q?Fn2IA+4CObXiDU6mxLVI867HxlAoYa2h7gr3kvKypNjCm06qrAqT5doXAcsa?=
- =?us-ascii?Q?9cqPGnxFqFuXeWgd1r/p4Z+9vXi6tvOQOOiHYi0DN8+KQIkunyfWcBN+qfr5?=
- =?us-ascii?Q?I3QQLs6Vh0PTYH17CQTl4Azl5eQA5lPr0+PRCdI/VQKSelLFNAwUwdg2zvsG?=
- =?us-ascii?Q?PigWSdicDJL9wFvdHyoGo5I6HPYOc1YPX9GXLw6e19+4EyKoPdQPEAhxruKX?=
- =?us-ascii?Q?jGCrJMzQsyAXHB2+z1Jh18zUHQhdvrZ78qimHnQVqWMayTnHx6cyDVxTOi1N?=
- =?us-ascii?Q?5ss4tCTk5vN7Azyx4EYhXAlT+mvHhFxZm/1KbAl8G00vGCSTthemw/30Y4nF?=
- =?us-ascii?Q?uMvA1HkJmHNBbM9z8xAqBHQG1xUATVxQIElisAhYTYHuN+sMUe3ayttFdVGZ?=
- =?us-ascii?Q?EjOVn6AXUlXfyb+spqXR6oB12EsDz8wKUXk8JWOHT3m5MTqtd+WIu/A3S6nM?=
- =?us-ascii?Q?z5/O9LJGunNyhM26e2Kh8D0S4mBEAgz+qyARR9yL7BBsNSP8C/UaQtKQ8loA?=
- =?us-ascii?Q?zHuHgl5MsxH5+QdApr4k5/zMnAvsyuo539V6ngSTkrl+v426SxBo3zMSyYPO?=
- =?us-ascii?Q?nrU+eClDrOjxvUwm5aOabsd+l3iVjT4/WUzg6AxWvFuQgQ=3D=3D?=
+	=?us-ascii?Q?m6brFF5YSGIMI9ZenQuu2c/2knGCbLUJ9agMsY69ogJ0XuJOJ36P16YRjAci?=
+ =?us-ascii?Q?biypB8JApWNdA2wV/eDqar70AaIaZQtQNEMDCdff//rJBDqNgR6+5sTTxx8V?=
+ =?us-ascii?Q?ZDg/Q3mjvIF6JCWwLQaO4Im/65EsSmMjyG7o5fFyuYEnMHlUKIhXtcrmTTM0?=
+ =?us-ascii?Q?3uFWW6mEHe9Jv9NL6/Z53cp9W3idgW5vugq7opm3Hh2VBIwYZ+/KWy77oM13?=
+ =?us-ascii?Q?zCs6bsOcZVhXFL6LaxSEfMsyU3LT38+51BeSMo2d3n0G5rW2jSlHTNnaiAO0?=
+ =?us-ascii?Q?G9dF+OQwiXgWQCXxHpHKXMYn/bDYf2KsT1fJYOJr/eTVVNCqhVgJOgH1EIhm?=
+ =?us-ascii?Q?G4/QtDNSuz1xa6z1TRcNKvLKzWX3fxXnQvUrMgTqrrZssUfmbuSg6xzSWBfL?=
+ =?us-ascii?Q?CYK2zVHkDfbis7ZBXzG1LXZyJq9S3xzYGLaBsBd1g+OVoyM73yoL0kTmb16T?=
+ =?us-ascii?Q?bSSFj2VG6YNgZkJqkfGq5VfscX5qVjb3qDXT4Zbragwxy4qWyrhUK4WovmYv?=
+ =?us-ascii?Q?48qbMWRRLxOHetc/3iFR5zCyIbS/Igfn3gZZ+R1PN5JiuDWZJD0IVro1ViXM?=
+ =?us-ascii?Q?72KkRODw56u89VIdjZszcvQ/0g0WasAa65gScX08x4JcLN6Q0aIfuoI2Evwi?=
+ =?us-ascii?Q?PLRbtbW14UDW54KVbyO60KQRb9cQYHb6kJhYC2HuPLEnzytXL66bvm/zcjrH?=
+ =?us-ascii?Q?vnycPNowutnZvcSPzWQ/t5q+x2h8GH8aLJj0N+0RqJhMoaM6RTijS0vYiBAu?=
+ =?us-ascii?Q?eGku5vi9hmBAYS5rpImweS/jelBSqc+ZmIwx3qKfCEVxPtC7JmUFjQx5tZx+?=
+ =?us-ascii?Q?By0BMGObviSgQ3eBZSgk4SkZ7r37cLgOIW1FpPbZkG9HLG/jR1ScDXw54MtV?=
+ =?us-ascii?Q?xDuo8IUSR1Mw61zKveXI3L0a0oBIkNiREy+N0dLykb8yyJc5Y4IqBw6llGTN?=
+ =?us-ascii?Q?8M0eS+od+DBw6kJKeu414tNWhyYiGBiJIr3RRUdvvwGEE4N5O/VQtabxKyhk?=
+ =?us-ascii?Q?C59/cl/BPOVy+sXMFoAYZtvo8JpM/rJYu3Y3cRVWTBTUe/bsv4q6bb8YXUnQ?=
+ =?us-ascii?Q?3NFtE7cQmEzJwBjOcWB+cdlVMspvvHLCAS9KSycPEU/NXIxijX3D/CFxFTHh?=
+ =?us-ascii?Q?0q+bxCibi0yB7DHb/z+llLZkbdgrO4hgllF2LKT8xZM4G2PhntjROFsnSm+J?=
+ =?us-ascii?Q?XnvxncwTzfq8gS9fMRDHGQ7LQL3Tfh+cDnfxlSZJydw6HKjBPxO8z0k8FjzL?=
+ =?us-ascii?Q?GxKlujDTFITzFJHw4rWA0tsVAhcfLTaHDUocGxj155Ig9WRZeUjNZC4uLkPt?=
+ =?us-ascii?Q?4zXVF+gsFkFPR9P9ErbWxeSq/atSEjK80EuhTxFwfOdLwg=3D=3D?=
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(52116014)(38350700014);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?QdG5eGWOIdkZ4/b7GDoMgwF1iZ4ZsQ7phcBMxI69/ziA2jAtJn8FFJYljqcC?=
- =?us-ascii?Q?oBIkvecFRjOuPKiSHw9TphibWPevt+oNU5dTY9XoPQrIvdOhuEaMzS2mFG6F?=
- =?us-ascii?Q?+Cb8QedVpMweoiYzD/qx+SY2S/G8j2VIjMz83rUQWRpXt+lyGx4BirFDtccL?=
- =?us-ascii?Q?N8/Dq/K2qepNXcFh9BQYVVMoORWzPIHCi+LNN9A5QCJPViVb5Maxy2q29Ol/?=
- =?us-ascii?Q?u6ERKZyMYu40AMmsrjEsCgzVEmovjzs9rKkZGwQmYshzSl+xWEsKGAQWoBKO?=
- =?us-ascii?Q?MnPdXoJdezD4Z/NlhwsFlOPEoFrEr7n3AX8JGIFERz78K2RxrKwrt54D9LbV?=
- =?us-ascii?Q?g14Vo3kwO/Ta/kTJk274ubXzxbeaOSSZav/iVikWal94HwkboxczCbnsK/Vo?=
- =?us-ascii?Q?sALs/EliYC3PKOvVYZmP2usvEyTc5jXWDtRqVOtFfN0fhNcA1eEhEcPp42YS?=
- =?us-ascii?Q?eUBbVgVwjr4ZVaPcTobBtaa3Xb7nOdvWueO652So7XxYZc/Bs7C4B0vxX0Ql?=
- =?us-ascii?Q?lZ6zdJF4qpwR7H2qJea80erO4prCZNpjuTmRmOsofbGvVeAc6ma7Z1cnBuRf?=
- =?us-ascii?Q?WZf0VuK0fdvFPmNiTiAPSbUSkKitJvW9mJqMbcoRp0lESsQ9a2uyYta9d8p/?=
- =?us-ascii?Q?rRd3x+9Fy/NV2+wTUjtO2zmXuA82ds0JBh2seXINu6ScUcKGvAlJCOgxrZxe?=
- =?us-ascii?Q?q4ink2L8AwU12b17DzFIpKoZDm3KDQv/tqWqQ6Bn2am3/7TKiHOtivQvt741?=
- =?us-ascii?Q?RwBJVvG+r6f/Bjuh5phz2SHpElKmt8uixQbALGjL4p3ZUs/QZulg/VvdBJYN?=
- =?us-ascii?Q?WM5jBqKs6CJmfDzoP5DhOwF3HlAupXdu8CFKezJouu753aPhXpT4OtKjGZHo?=
- =?us-ascii?Q?hEmwI/ctHxRKafdVxtiQHUwsKmI+R26Ak2X8EeBdeVKj3mqPWOy04Y0k7Ha5?=
- =?us-ascii?Q?DcVjF5dGmq78WsU1GztDWW4JLXDTKdd9w7Ic7tGOFOHEAAM5YdWIPmLMVdAL?=
- =?us-ascii?Q?byDytYMh5NUrINtrHU+elZb0LLWTJHiSTmM9dujnRUatBpT0ium3tCk51NkK?=
- =?us-ascii?Q?zC4+CqpEF5bIfov4BvU15GqavZ6fJENzDQcOeOcav7TIcdqX4G2L+wK6pXCm?=
- =?us-ascii?Q?bmIRY3XRql+I8aoJQgyA2Z8v+XwFr+8cpVYFkhHLBA7f9aGNfRpIzOA/iFXW?=
- =?us-ascii?Q?Toc/+gtlrmcPPzoANRTJWyGrERJZ/qvSeH6vZ6WUx3rhW9BwA3kPWKlSQHFQ?=
- =?us-ascii?Q?5g6lX68AA9YRD7jq2cu1TwNnRimXGOwZ1KoUbXfm6QlzLNgLJvayh9WB6O1B?=
- =?us-ascii?Q?8T50CS9THCcXUXc9zvqm7wYZ1URNTRYMUYqkS4e8RC5JwmCbBDYNnb4OUdt/?=
- =?us-ascii?Q?X/468QDSsOU5yUR4a6rN0E2hsPEwfEo2yEyGumT7fdu5bZEMmINeTolsEPeV?=
- =?us-ascii?Q?oj2AU8KSgDJBVfw3Qv1m9rz1RzHZH4aS4lvEeReezHwVi8sIdOZqYkC8a5Q1?=
- =?us-ascii?Q?CZ45HGL8EkHWrQBZL94RGDM3Hk+g9jEUd+z2gvUMwiywJ7hj9bGmemsOGFpq?=
- =?us-ascii?Q?0+xgFdvafkob67WnmxXqKhlsHsV7bMfYuUNmp6U1KHPng9GrKnZT/qVBVeuP?=
- =?us-ascii?Q?OA=3D=3D?=
+	=?us-ascii?Q?1RH4aBPorbtir8sk33I1dTwJbzvt3HRoUp0AA6x1g3/2XG4TKJ9EVyTVBUb8?=
+ =?us-ascii?Q?bzY9RE5y5aC07Gwe9vx9BDCzBQi74jrt0zvCW7VSi/kVzNjyOoGdtsJWT+zk?=
+ =?us-ascii?Q?LycSK2Wig3hPERIUeeWJNgId1BiUoSqFRh8+SrWKSiIHB3IwNQli8BorZlNh?=
+ =?us-ascii?Q?LExk7FMB/HaH0zEFbSj8i9D0q3I2VtuOENQ8jWW8pqancuj4+kSjuIQnzBNE?=
+ =?us-ascii?Q?cP8awi9LraEJHgl8CaVOlaQanaT2x5VpR5bHsNgcrUyHBHqYTwjdVHdOfvbX?=
+ =?us-ascii?Q?/KCQ7UrT8aLDXPlBx51/4QYVmbwtvqSzbPNV3w7wQkY4hvIY9eiSOCPeCOAf?=
+ =?us-ascii?Q?qYeCLjs6P7TfDikFWuFKZ9VCCuHYZXrm8IDnOgvA9ODUCMYAEa+7DiOR8o7r?=
+ =?us-ascii?Q?hQbCOQQUpRfyUkEirIZBMurnGm5Yvr5ut07qv1RqMsB6WIYXWY8HgIFAEMGb?=
+ =?us-ascii?Q?be7g1CGZt7WjBH/8WhtXbLLKtdPJddRKTSkYV/Wa4SVGQ1xsqRw5gqDE4nrK?=
+ =?us-ascii?Q?2daTDZBrjilhlwYXmYVz12ZWeSsIgWSYvkKchpHOKhNYsMRkvuY6coLe19hI?=
+ =?us-ascii?Q?ihq2sYWGKECzfmpPRyngz0EKZNbxSBdS/vTtpSHjbi/MMJKoJXKFzOp46+9l?=
+ =?us-ascii?Q?FaQg78+3Xf+nPnCHXasAD1CXG37IEJlx+x16fW+sNT9SJIGhBQgj++R9FtvC?=
+ =?us-ascii?Q?s1En0eAkt7iC9MONO4GaoWarZwoOKdfIQc7xSCqVKlGcxn03LYTPhLHRviyD?=
+ =?us-ascii?Q?0BGKNHl0RQOVHUO+snBXnrepkSPwNUrZLDijiNOFlXg05aej6iRnqDtCUeux?=
+ =?us-ascii?Q?UwM78glZps0vi+pw2B1WMmmU7BzpgqxL/QCgRMgOHELtRqlH3T3Y/e7PUYaG?=
+ =?us-ascii?Q?vILA1RM+kbGWd/yMYUF4HAK1w9tvuRqY11mLlzFD6fFjg62UJ3pKvvL1i2K2?=
+ =?us-ascii?Q?1N8BCJfOy54IRuAgF9h8scsUsxFdkgvtERcOEFnffz70njIfgrocnNU9Xkqw?=
+ =?us-ascii?Q?sg2IdN6cJ8TmLgRHLiB/xA2N5GufenpNURWFg2gqUiQcCa5PmCGHCBPaQdLA?=
+ =?us-ascii?Q?4Z5UBLua2TdogVkfJvAyaMYXw0Ib8BrEHXMr+ZQdDlKzF+KjIG0WNGKNqzYU?=
+ =?us-ascii?Q?SPCkBm9jSWS59Qa8OsuyxrthLXEnOzWdATWAkd7/DloCLr45GOEhU71uZlOv?=
+ =?us-ascii?Q?+1UuqXvPKm2fmGY3Zlmk70gc1EbmD3K0XEQVuXFPL72q73xLOOKLbfzRBASI?=
+ =?us-ascii?Q?0uyEtGMWYev6SJliJ+icn0NoVV0z2vFGYwbw9MRkDCGe+l1tjIQivfHIIgEi?=
+ =?us-ascii?Q?VURRjuz+dHe8tQvJPlmLIH2B9khIh83yYj6gFCqx8dLR0sgN2RcXnwIvxRXI?=
+ =?us-ascii?Q?RP6vO09yaziGjONdaaBCUgRif0BHaOt5uVoG+g0xPVw99zutPRZ3FcTtEMM0?=
+ =?us-ascii?Q?W+mWiYKMugQGgyqhYQaiB+UBFgthIFW7sXKrlGU+j7AM1BG4ZRqt2CgLvf6y?=
+ =?us-ascii?Q?at+tukcbGjm1JaKWXks75Q+L7kOQ7wM6owyeA9PIXVsWc1mkwcE2S0PfM3WV?=
+ =?us-ascii?Q?ceOLT8bvGcbOSH/KbMfOR+CvsX7u36vCc43l7nGaNYr/wa8EXLiGgwnKtSNw?=
+ =?us-ascii?Q?JA=3D=3D?=
 X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c5f76dfe-030a-4a4a-89e4-08dce3a8edd5
+X-MS-Exchange-CrossTenant-Network-Message-Id: a18ebf9e-13e0-4455-a853-08dce3a8ed93
 X-MS-Exchange-CrossTenant-AuthSource: AS4PR06MB8447.eurprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Oct 2024 12:43:06.5470
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Oct 2024 12:43:06.0811
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: kFrdVRcwQa0Gr94IwiLSs2BRVanx+tbEiCr2XtTZLLUqJNSYdzbSX2mrUKsxnDmb7/1f6vJwoo/KvfcbCrmOYg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: kQFSqvrVVraxsEb8BAaQjHMNlwHunrbD0ImfE6VekR3nNAb21zlruSAi8t42b/nv101v3MFAVUiqAb62UuUolw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR06MB9517
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 03 Oct 2024 12:43:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112649
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112648
 
-In order to improve the readability of the file, arrange value lines
-of variables with multiple values in alphabetic order.
+Add missing trailing space characters after =3D operator.
 
 Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
 ---
- .../packagegroups/packagegroup-meta-oe.bb     | 640 +++++++++---------
- 1 file changed, 325 insertions(+), 315 deletions(-)
+ .../packagegroups/packagegroup-meta-oe.bb     | 34 +++++++++----------
+ 1 file changed, 17 insertions(+), 17 deletions(-)
 
 diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/m=
 eta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index a8565982f..6dbe194cd 100644
+index 1ff53757e..a8565982f 100644
 --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
 +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -7,10 +7,10 @@ PROVIDES =3D "${PACKAGES}"
- PACKAGES =3D "\
-     packagegroup-meta-oe \
-     packagegroup-meta-oe-benchmarks \
-+    packagegroup-meta-oe-bsp \
-     packagegroup-meta-oe-connectivity \
-     packagegroup-meta-oe-core \
-     packagegroup-meta-oe-crypto \
--    packagegroup-meta-oe-bsp \
-     packagegroup-meta-oe-dbs \
-     packagegroup-meta-oe-devtools \
-     packagegroup-meta-oe-extended \
-@@ -18,8 +18,8 @@ PACKAGES =3D "\
-     packagegroup-meta-oe-multimedia \
-     packagegroup-meta-oe-navigation \
-     packagegroup-meta-oe-printing \
--    packagegroup-meta-oe-shells \
-     packagegroup-meta-oe-security \
-+    packagegroup-meta-oe-shells \
-     packagegroup-meta-oe-support \
-     packagegroup-meta-oe-test \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "packagegroup-meta-oe-g=
-nome", "", d)} \
-@@ -95,10 +95,10 @@ RDEPENDS:packagegroup-meta-oe-bsp =3D "\
-     fwupd \
-     fwupd-efi \
-     irda-utils \
-+    lmsensors \
-     lmsensors-config-cgi \
-     lmsensors-config-fancontrol \
-     lmsensors-config-sensord \
--    lmsensors \
-     lsscsi \
-     nvme-cli \
-     pcmciautils \
-@@ -117,6 +117,7 @@ RDEPENDS:packagegroup-meta-oe-bsp:remove:riscv32 =3D "e=
-fivar efibootmgr fwupd fwup
+@@ -86,7 +86,7 @@ RDEPENDS:packagegroup-meta-oe-benchmarks:remove:mips64el =
+=3D "tinymembench"
+ RDEPENDS:packagegroup-meta-oe-benchmarks:remove:riscv64 =3D "libhugetlbfs"
+ RDEPENDS:packagegroup-meta-oe-benchmarks:remove:riscv32 =3D "libhugetlbfs"
 =20
- RDEPENDS:packagegroup-meta-oe-connectivity =3D "\
+-RDEPENDS:packagegroup-meta-oe-bsp =3D"\
++RDEPENDS:packagegroup-meta-oe-bsp =3D "\
+     acpitool \
+     cpufrequtils \
+     edac-utils \
+@@ -115,7 +115,7 @@ RDEPENDS:packagegroup-meta-oe-bsp:remove:powerpc64le =
+=3D "efivar efibootmgr fwupd
+ RDEPENDS:packagegroup-meta-oe-bsp:remove:riscv64 =3D "efivar efibootmgr fw=
+upd fwupd-efi"
+ RDEPENDS:packagegroup-meta-oe-bsp:remove:riscv32 =3D "efivar efibootmgr fw=
+upd fwupd-efi"
+=20
+-RDEPENDS:packagegroup-meta-oe-connectivity =3D"\
++RDEPENDS:packagegroup-meta-oe-connectivity =3D "\
      cyrus-sasl \
-+    czmq \
      gammu \
      gattlib \
-     gensio \
-@@ -140,8 +141,8 @@ RDEPENDS:packagegroup-meta-oe-connectivity =3D "\
-     modemmanager \
-     mosh \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "obex-data-server", "",=
- d)} \
--    openobex \
-     obexftp \
-+    openobex \
-     packagegroup-tools-bluetooth \
-     paho-mqtt-c \
-     paho-mqtt-cpp \
-@@ -155,7 +156,6 @@ RDEPENDS:packagegroup-meta-oe-connectivity =3D "\
-     usbmuxd \
-     wifi-test-suite \
-     zabbix \
--    czmq \
-     zeromq \
- "
-=20
-@@ -164,26 +164,26 @@ RDEPENDS:packagegroup-meta-oe-connectivity:append:lib=
-c-glibc =3D " wvstreams wvdia
- # dracut needs dracut
- RDEPENDS:packagegroup-meta-oe-core =3D "\
-     ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "dbus-broker", "", =
-d)} \
-+    dbus-cxx \
-     dbus-daemon-proxy \
--    libdbus-c++ \
-+    distro-feed-configs \
-     emlog \
--    kernel-module-emlog \
-     glibmm \
-+    kernel-module-emlog \
-+    libdbus-c++ \
-     libnfc \
-     libsigc++-2.0 \
-     libsigc++-3 \
-     mdbus2 \
--    distro-feed-configs \
-     mm-common \
-     ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "ndctl", "", d)} \
-     pim435 \
-     proxy-libintl \
-     safec \
--    sdbus-c++-tools \
-     sdbus-c++ \
-+    sdbus-c++-tools \
-     toybox \
-     usleep \
--    dbus-cxx \
- "
- RDEPENDS:packagegroup-meta-oe-core:append:libc-glibc =3D " ${@bb.utils.con=
-tains("DISTRO_FEATURES", "x11 opengl", "glfw", "", d)}"
+@@ -189,7 +189,7 @@ RDEPENDS:packagegroup-meta-oe-core:append:libc-glibc =
+=3D " ${@bb.utils.contains("D
  RDEPENDS:packagegroup-meta-oe-core:remove:riscv64 =3D "safec"
-@@ -215,84 +215,84 @@ RDEPENDS:packagegroup-meta-oe-dbs:remove:libc-musl:po=
-werpc =3D "rocksdb"
+ RDEPENDS:packagegroup-meta-oe-core:remove:riscv32 =3D "safec"
 =20
- RDEPENDS:packagegroup-meta-oe-devtools =3D "\
+-RDEPENDS:packagegroup-meta-oe-crypto =3D"\
++RDEPENDS:packagegroup-meta-oe-crypto =3D "\
+     botan \
+     cryptsetup \
+     fsverity-utils \
+@@ -200,7 +200,7 @@ RDEPENDS:packagegroup-meta-oe-crypto =3D"\
+ "
+ RDEPENDS:packagegroup-meta-oe-crypto:remove:riscv32 =3D "botan"
+=20
+-RDEPENDS:packagegroup-meta-oe-dbs =3D"\
++RDEPENDS:packagegroup-meta-oe-dbs =3D "\
+     influxdb \
+     leveldb \
+     libdbi \
+@@ -213,7 +213,7 @@ RDEPENDS:packagegroup-meta-oe-dbs =3D"\
+ "
+ RDEPENDS:packagegroup-meta-oe-dbs:remove:libc-musl:powerpc =3D "rocksdb"
+=20
+-RDEPENDS:packagegroup-meta-oe-devtools =3D"\
++RDEPENDS:packagegroup-meta-oe-devtools =3D "\
      abseil-cpp \
-+    android-tools \
-+    android-tools-conf \
      apitrace \
      breakpad \
--    android-tools-conf \
--    android-tools \
--    concurrencykit \
-+    capnproto-compiler \
-     cgdb \
--    ctags \
--    debootstrap \
-     cjson \
-     cloc \
--    icon-slicer \
-+    concurrencykit \
-     cscope \
-+    ctags \
-     dbd-mariadb \
-+    debootstrap \
-     dmalloc \
-     ${@bb.utils.contains("PACKAGE_CLASSES", "package_rpm", "dnf-plugin-tui=
-", "", d)} \
-     doxygen \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geany-plugins geany", =
-"", d)} \
--    jemalloc \
--    lemon \
-     flatbuffers \
--    heaptrack \
--    libparse-yapp-perl \
--    libubox \
--    ltrace \
--    luajit \
--    mcpp \
--    memstat \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geany-plugins geany", =
-"", d)} \
-     giflib \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "glade", "", d)} \
-     grpc \
-     guider \
--    php \
-+    heaptrack \
-+    icon-slicer \
-+    ipc-run \
-     iptraf-ng \
-+    jemalloc \
-     jq \
--    json-spirit \
--    serialcheck \
--    tclap \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "tk", "", d)} \
--    uw-imap \
-     jsoncpp \
-     jsonrpc \
--    yajl \
-+    json-schema-validator \
-+    json-spirit \
-     kconfig-frontends \
-+    lemon \
-+    libdbi-perl \
-+    libdev-checklib-perl \
-     libgee \
-+    libio-pty-perl \
-+    libjson-perl \
-+    libparse-yapp-perl \
-+    libperlio-gzip-perl \
-     libsombok3 \
-+    libubox \
-+    libxerces-c \
-     lshw \
-+    ltrace \
-+    luajit \
-     luaposix \
--    capnproto-compiler \
-+    mcpp \
-+    memstat \
-+    mercurial \
-+    microsoft-gsl \
-     mpich \
-     msgpack-c \
-     msgpack-cpp \
--    mercurial \
-     nodejs \
-     openocd \
-     pax-utils \
--    ipc-run \
--    libdbi-perl \
--    libdev-checklib-perl \
--    libio-pty-perl \
--    libjson-perl \
--    libperlio-gzip-perl \
-+    php \
-     ply \
--    protobuf-c \
-+    poke \
-     protobuf \
-+    protobuf-c \
-     pugixml \
-     python3-distutils-extra \
-     python3-pycups \
-     rapidjson \
-+    serialcheck \
-     squashfs-tools-ng \
-+    tclap \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "tk", "", d)} \
-     uftrace \
-+    uw-imap \
-     valijson \
--    libxerces-c \
-     xerces-c-samples \
-     xmlrpc-c \
-+    yajl \
-     yasm \
--    json-schema-validator \
--    poke \
--    microsoft-gsl \
- "
- RDEPENDS:packagegroup-meta-oe-devtools:append:x86 =3D " cpuid msr-tools pa=
-hole pmtools"
- RDEPENDS:packagegroup-meta-oe-devtools:append:x86-64 =3D " cpuid msr-tools=
- pahole pcimem pmtools"
-@@ -320,105 +320,105 @@ RDEPENDS:packagegroup-meta-oe-extended =3D "\
+@@ -315,7 +315,7 @@ RDEPENDS:packagegroup-meta-oe-devtools:remove:libc-musl=
+:riscv32 =3D "php"
+ RDEPENDS:packagegroup-meta-oe-devtools:remove:aarch64 =3D "concurrencykit"
+ RDEPENDS:packagegroup-meta-oe-devtools:remove:x86 =3D "ply"
+=20
+-RDEPENDS:packagegroup-meta-oe-extended =3D"\
++RDEPENDS:packagegroup-meta-oe-extended =3D "\
+     bitwise \
      ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland opengl", "boinc-c=
 lient", "", d)} \
      brotli \
-     byacc \
-+    can-utils \
-+    canutils \
-     cmatrix \
-     cmpi-bindings \
-     collectd \
-     ddrescue \
-     dialog \
--    duktape \
--    enscript \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gnuplot", "", d)} \
-     dlt-daemon \
-     docopt.cpp \
--    iotop \
-+    duktape \
-     dumb-init \
--    konkretcmpi \
-+    enscript \
-     figlet \
--    libcec \
--    libdivecomputer \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libgxim", "", d)} \
--    liblognorm \
--    libmodbus \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gnuplot", "", d)} \
-     haveged \
-     hexedit \
-     hiredis \
-     hplip \
-     hwloc \
--    libleak \
--    libuio \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libwmf", "", d)} \
--    libyang \
--    lprng \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "icewm", "", d)} \
--    md5deep \
-     indent \
--    jansson \
--    nana \
--    nicstat \
--    ${@bb.utils.contains("DISTRO_FEATURES", "pam", "openwsman", "", d)} \
--    p7zip \
-+    iotop \
-     isomd5sum \
-+    jansson \
-     jpnevulator \
--    ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "polkit-group-rule-d=
-atetime polkit-group-rule-network polkit", "", d)} \
--    rarpd \
--    redis \
--    libfastjson \
--    librelp \
--    sblim-cmpi-devel \
--    sblim-sfc-common \
--    ${@bb.utils.contains("DISTRO_FEATURES", "pam", "sblim-sfcb ", "", d)} =
-\
--    sblim-sfcc \
-+    konkretcmpi \
-     libblockdev \
--    sgpio \
--    smartmontools \
--    can-utils \
--    canutils \
--    libsocketcan \
-+    libcec \
-     libconfig \
--    linuxconsole \
--    uml-utilities \
-+    libdivecomputer \
-+    libfastjson \
-+    libfile-fnmatch-perl \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libgxim", "", d)} \
-     libidn \
--    libqb \
--    wipe \
--    libzip \
--    zram \
--    libplist \
--    libusbmuxd \
-+    libleak \
-     liblockfile \
-     liblogging \
-+    liblognorm \
-+    libmodbus \
-+    libplist \
-     libpwquality \
-+    libqb \
-+    librelp \
-     ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "libreport", "", d)=
-} \
-     libserialport \
-+    libsigrok \
-+    libsigrokdecode \
-+    libsocketcan \
-     libstatgrab \
-+    libuio \
-+    libusbmuxd \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libwmf", "", d)} \
-+    libyang \
-+    libzip \
-+    linuxconsole \
-     lockfile-progs \
-     logwatch \
-+    lprng \
-+    md5deep \
-     mraa \
-+    nana \
-+    nicstat \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "pam", "openwsman", "", d)} \
-     ostree \
-+    p7zip \
-     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "pam-plugin-ccreds pam-=
-plugin-ldapdb pam-ssh-agent-auth", "", d)} \
-     pegtl \
--    libfile-fnmatch-perl \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "polkit-group-rule-d=
-atetime polkit-group-rule-network polkit", "", d)} \
-+    rarpd \
-+    redis \
-+    redis-plus-plus \
-     rrdtool \
-     sanlock \
-+    sblim-cmpi-devel \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "pam", "sblim-sfcb ", "", d)} =
-\
-+    sblim-sfcc \
-+    sblim-sfc-common \
-     scsirastools \
-     sedutil \
--    libsigrok \
--    libsigrokdecode \
--    s-nail \
-+    sgpio \
-     sigrok-cli \
-+    smartmontools \
-+    s-nail \
-     snappy \
-     tipcutils \
-     tiptop \
-     tmate \
-     tmux \
-     triggerhappy \
-+    uml-utilities \
-     upm \
-     vlock \
-     volume-key \
-+    wipe \
-     wxwidgets \
-     zlog \
-+    zram \
-     zstd \
-     zsync-curl \
--    redis-plus-plus \
- "
- RDEPENDS:packagegroup-meta-oe-extended:append:libc-musl =3D " libexecinfo"
- RDEPENDS:packagegroup-meta-oe-extended:append:x86-64 =3D " pmdk libx86-1"
-@@ -436,164 +436,174 @@ RDEPENDS:packagegroup-meta-oe-extended:remove:riscv=
-32 =3D "upm libleak mraa sysdig
- RDEPENDS:packagegroup-meta-oe-gnome =3D "\
+@@ -433,7 +433,7 @@ RDEPENDS:packagegroup-meta-oe-extended:remove:powerpc64=
+le =3D "upm mraa sysdig"
+ RDEPENDS:packagegroup-meta-oe-extended:remove:riscv64 =3D "upm libleak mra=
+a sysdig tiptop"
+ RDEPENDS:packagegroup-meta-oe-extended:remove:riscv32 =3D "upm libleak mra=
+a sysdig tiptop"
+=20
+-RDEPENDS:packagegroup-meta-oe-gnome =3D"\
++RDEPENDS:packagegroup-meta-oe-gnome =3D "\
      atkmm \
      gcab \
--    gnome-common \
-     gmime \
--    libjcat \
-+    gnome-common \
-+    gnome-theme-adwaita \
-     gtk+ \
--    gtkmm3 \
-     gtkmm \
-+    gtkmm3 \
-+    libjcat \
-     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", =
-"libpeas", "", d)} \
-     pyxdg \
--    gnome-theme-adwaita \
+     gnome-common \
+@@ -447,7 +447,7 @@ RDEPENDS:packagegroup-meta-oe-gnome =3D"\
+     gnome-theme-adwaita \
  "
 =20
- RDEPENDS:packagegroup-meta-oe-graphics =3D "\
-+    bdftopcf \
+-RDEPENDS:packagegroup-meta-oe-graphics =3D"\
++RDEPENDS:packagegroup-meta-oe-graphics =3D "\
      cairomm \
--    directfb-examples \
--    directfb \
--    fbgrab \
-+    deqp-runner \
-     dietsplash \
-+    directfb \
-+    directfb-examples \
-     ${@bb.utils.contains("PACKAGE_CLASSES", "package_rpm", "dnfdragora", "=
-", d)} \
--    fontforge \
-+    fbgrab \
-     fbida \
-     feh \
-+    font-adobe-100dpi \
-+    font-adobe-utopia-100dpi \
-+    font-bh-100dpi \
-+    font-bh-lucidatypewriter-100dpi \
-+    font-bitstream-100dpi \
-+    font-cursor-misc \
-+    fontforge \
-+    font-misc-misc \
-     ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "freeglut", "", d)} =
-\
-     ftgl \
-     fvwm \
--    gtkperf \
-     gphoto2 \
--    imlib2 \
--    libgphoto2 \
-     graphviz \
-+    gtkperf \
-     gtkwave \
-+    iceauth \
-+    imlib2 \
-     jasper \
-+    leptonica \
-     libforms \
-+    libgphoto2 \
-+    libmng \
-+    libsdl \
-+    libsdl2-image \
-+    libsdl2-mixer \
-+    libsdl2-net \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "libsdl2-ttf", "", d=
-)} \
-+    libsdl-gfx \
-+    libsdl-image \
-+    libsdl-mixer \
-+    libsdl-net \
-+    libsdl-ttf \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libvdpau vdpauinfo", "=
-", d)} \
-+    libvncserver \
-+    libxaw6 \
-+    libxpresent \
-+    libyui \
-+    libyui-ncurses \
-+    lvgl \
-     lxdm \
-     numlockx \
-     nyancat \
-     obconf \
-     openbox \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "opengl-es-cts", "",=
- d)} \
-+    openjpeg \
-     packagegroup-fonts-truetype \
-+    pangomm \
-+    parallel-deqp-runner \
-     qrencode \
-+    sessreg \
-+    setxkbmap \
-+    source-code-pro-fonts \
-+    source-han-sans-cn-fonts \
-+    source-han-sans-jp-fonts \
-+    source-han-sans-kr-fonts \
-+    source-han-sans-tw-fonts \
-+    spirv-shader-generator \
-+    spirv-tools \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "st", "", d)} \
--    leptonica \
--    libvncserver \
--    libmng \
--    libsdl-gfx \
--    libsdl-image \
--    libsdl-mixer \
--    libsdl-net \
--    libsdl-ttf \
--    libsdl2-image \
--    libsdl2-mixer \
--    libsdl2-net \
--    ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "libsdl2-ttf", "", d=
-)} \
--    libsdl \
--    lvgl \
--    ttf-arphic-uming \
--    ttf-droid-sans ttf-droid-sans-mono ttf-droid-sans-fallback ttf-droid-s=
-ans-japanese ttf-droid-serif \
-+    stalonetray \
-+    surf \
-+    terminus-font-consolefonts \
-+    terminus-font-pcf \
-+    tesseract \
-+    tesseract-lang \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11 pam", "tigervnc", "", d)}=
- \
-+    tslib \
-     ttf-abyssinica \
--    source-han-sans-cn-fonts \
--    source-han-sans-jp-fonts \
--    source-han-sans-kr-fonts \
--    source-han-sans-tw-fonts \
--    source-code-pro-fonts \
-+    ttf-arphic-uming \
-+    ttf-dejavu-common \
-+    ttf-dejavu-mathtexgyre \
-     ttf-dejavu-sans \
-     ttf-dejavu-sans-condensed \
-     ttf-dejavu-sans-mono \
-     ttf-dejavu-serif \
-     ttf-dejavu-serif-condensed \
--    ttf-dejavu-mathtexgyre \
--    ttf-dejavu-common \
-+    ttf-droid-sans \
-+    ttf-droid-sans-fallback \
-+    ttf-droid-sans-japanese \
-+    ttf-droid-sans-mono \
-+    ttf-droid-serif \
-     ttf-gentium \
-     ttf-hunky-sans \
-     ttf-hunky-serif \
--    ttf-ipag ttf-ipagp ttf-ipamp ttf-ipam \
--    ttf-lohit \
-     ttf-inconsolata \
--    ttf-liberation-sans-narrow \
-+    ttf-ipag \
-+    ttf-ipagp \
-+    ttf-ipam \
-+    ttf-ipamp \
-     ttf-liberation-mono \
-     ttf-liberation-sans \
-+    ttf-liberation-sans-narrow \
-     ttf-liberation-serif \
-     ttf-lklug \
-+    ttf-lohit \
-     ttf-noto-emoji-color \
-     ttf-noto-emoji-regular \
-+    ttf-pt-sans \
-+    ttf-roboto \
-     ttf-sazanami-gothic \
-     ttf-sazanami-mincho \
--    ttf-takao-pgothic ttf-takao-gothic ttf-takao-pmincho ttf-takao-mincho =
-\
-+    ttf-takao-gothic \
-+    ttf-takao-mincho \
-+    ttf-takao-pgothic \
-+    ttf-takao-pmincho \
-     ttf-tlwg \
--    ttf-roboto \
--    ttf-wqy-zenhei \
--    ttf-pt-sans \
--    ttf-vlgothic \
-     ttf-ubuntu-mono \
-     ttf-ubuntu-sans \
--    libyui-ncurses \
--    libyui \
--    x11vnc \
--    terminus-font-consolefonts \
--    terminus-font-pcf \
--    xdotool \
--    xkbevd \
--    bdftopcf \
--    iceauth \
--    sessreg \
--    xgamma \
--    setxkbmap \
--    xkbutils \
-+    ttf-vlgothic \
-+    ttf-wqy-zenhei \
-     twm \
-+    unclutter-xfixes \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "opengl vulkan", "vulkan-cts",=
- "", d)} \
-+    x11vnc \
-+    xcb-util-cursor \
-     xclock \
-+    xcursorgen \
-+    xdotool \
-+    xf86-input-tslib \
-+    xf86-input-void \
-+    xf86-video-armsoc \
-+    xf86-video-ati \
-     xfontsel \
-+    xgamma \
-+    xkbevd \
-     xkbprint \
-+    xkbutils \
-     xlsatoms \
-     xlsclients \
-     xlsfonts \
-     xmag \
-     xmessage \
-+    xorg-fonts-100dpi \
-+    xorg-sgml-doctools \
-     xrdb \
-     xrefresh \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11 pam", "xscreensaver", "",=
- d)} \
-+    xserver-common \
-     xsetroot \
-     xstdcmap \
-     xterm \
-     xwd \
-     xwud \
--    xorg-sgml-doctools \
--    xf86-input-tslib \
--    xf86-input-void \
--    xf86-video-armsoc \
--    xf86-video-ati \
--    font-adobe-100dpi \
--    font-adobe-utopia-100dpi \
--    font-bh-100dpi \
--    font-bh-lucidatypewriter-100dpi \
--    font-bitstream-100dpi \
--    font-cursor-misc \
--    font-misc-misc \
--    xorg-fonts-100dpi \
--    libxaw6 \
--    libxpresent \
--    xcb-util-cursor \
--    xserver-common \
--    openjpeg \
--    pangomm \
--    spirv-shader-generator \
--    spirv-tools \
--    stalonetray \
--    surf \
--    tesseract-lang \
--    tesseract \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11 pam", "tigervnc", "", d)}=
- \
--    tslib \
--    unclutter-xfixes \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libvdpau vdpauinfo", "=
-", d)} \
--    xcursorgen \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11 pam", "xscreensaver", "",=
- d)} \
-     yad \
-     ydotool \
--    parallel-deqp-runner \
--    deqp-runner \
--    ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "opengl-es-cts", "",=
- d)} \
--    ${@bb.utils.contains("DISTRO_FEATURES", "opengl vulkan", "vulkan-cts",=
- "", d)} \
- "
- RDEPENDS:packagegroup-meta-oe-graphics:append:x86 =3D " renderdoc xf86-vid=
-eo-nouveau xf86-video-mga"
- RDEPENDS:packagegroup-meta-oe-graphics:append:x86-64 =3D " renderdoc xf86-=
-video-nouveau xf86-video-mga"
-@@ -604,10 +614,10 @@ RDEPENDS:packagegroup-meta-oe-graphics:remove:libc-mu=
-sl =3D "renderdoc"
+     directfb-examples \
+     directfb \
+@@ -602,7 +602,7 @@ RDEPENDS:packagegroup-meta-oe-graphics:append:aarch64 =
+=3D " renderdoc"
 =20
- RDEPENDS:packagegroup-meta-oe-kernel =3D "\
+ RDEPENDS:packagegroup-meta-oe-graphics:remove:libc-musl =3D "renderdoc"
+=20
+-RDEPENDS:packagegroup-meta-oe-kernel =3D"\
++RDEPENDS:packagegroup-meta-oe-kernel =3D "\
      agent-proxy \
--    crash \
-+    broadcom-bt-firmware \
+     crash \
      cpupower \
-+    crash \
-     ipmitool \
--    broadcom-bt-firmware \
-     kernel-selftest \
-     minicoredumper \
-     oprofile \
-@@ -632,42 +642,42 @@ RDEPENDS:packagegroup-meta-oe-kernel:remove:riscv64 =
-=3D "crash oprofile"
+@@ -631,7 +631,7 @@ RDEPENDS:packagegroup-meta-oe-kernel:remove:mips64el =
+=3D "crash"
+ RDEPENDS:packagegroup-meta-oe-kernel:remove:riscv64 =3D "crash oprofile"
  RDEPENDS:packagegroup-meta-oe-kernel:remove:riscv32 =3D "crash makedumpfil=
 e oprofile"
 =20
- RDEPENDS:packagegroup-meta-oe-multimedia =3D "\
--    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "faad2", =
+-RDEPENDS:packagegroup-meta-oe-multimedia =3D"\
++RDEPENDS:packagegroup-meta-oe-multimedia =3D "\
+     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "faad2", =
 "", d)} \
-+    a2jmidid \
-+    audiofile \
      dirsplit \
-+    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "faad2", =
-"", d)} \
      genisoimage \
-     icedax \
--    wodim \
-     id3lib \
--    audiofile \
--    a2jmidid \
-     jack-server \
-     jack-utils \
-     libass \
--    libcdio-paranoia \
-     libcdio \
-+    libcdio-paranoia \
-+    libdvdread \
-     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "libmad",=
- "", d)} \
-+    libmikmod \
-     libmms \
--    libdvdread \
-+    libmodplug \
-     libopus \
-+    libopusenc \
-+    libvpx \
-     live555-examples \
-     live555-mediaserver \
--    libmikmod \
--    libmodplug \
-+    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "mpv", ""=
-, d)} \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pavucontrol", "", d)} =
-\
-     sound-theme-freedesktop \
--    yavta \
-     v4l-utils \
-     wavpack \
--    libvpx \
-+    wodim \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xsp", "", d)} \
--    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "mpv", ""=
-, d)} \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pavucontrol", "", d)} =
-\
--    libopusenc \
-+    yavta \
+@@ -664,7 +664,7 @@ RDEPENDS:packagegroup-meta-oe-multimedia =3D"\
+     libopusenc \
  "
 =20
- RDEPENDS:packagegroup-meta-oe-navigation =3D "\
-+    geoclue \
+-RDEPENDS:packagegroup-meta-oe-navigation =3D"\
++RDEPENDS:packagegroup-meta-oe-navigation =3D "\
      geos \
      ${@bb.utils.contains("DISTRO_FEATURES", "bluz4", "gpsd-machine-conf gp=
 sd", "", d)} \
--    geoclue \
-     libspatialite \
+     geoclue \
+@@ -672,13 +672,13 @@ RDEPENDS:packagegroup-meta-oe-navigation =3D"\
      proj \
  "
-@@ -679,12 +689,12 @@ RDEPENDS:packagegroup-meta-oe-printing =3D "\
+=20
+-RDEPENDS:packagegroup-meta-oe-printing =3D"\
++RDEPENDS:packagegroup-meta-oe-printing =3D "\
+     cups-filters \
+     gutenprint \
+     qpdf \
  "
 =20
- RDEPENDS:packagegroup-meta-oe-security =3D "\
-+    auditd \
+-RDEPENDS:packagegroup-meta-oe-security =3D"\
++RDEPENDS:packagegroup-meta-oe-security =3D "\
      keyutils \
      nmap \
      ${@bb.utils.contains("DISTRO_FEATURES", "pam", "passwdqc", "", d)} \
-     softhsm \
-     tomoyo-tools \
--    auditd \
+@@ -687,14 +687,14 @@ RDEPENDS:packagegroup-meta-oe-security =3D"\
+     auditd \
  "
 =20
- RDEPENDS:packagegroup-meta-oe-shells =3D "\
-@@ -695,209 +705,209 @@ RDEPENDS:packagegroup-meta-oe-shells =3D "\
+-RDEPENDS:packagegroup-meta-oe-shells =3D"\
++RDEPENDS:packagegroup-meta-oe-shells =3D "\
+     dash \
+     mksh \
+     tcsh \
+     zsh \
  "
 =20
- RDEPENDS:packagegroup-meta-oe-support =3D "\
--    anthy \
--    atop \
+-RDEPENDS:packagegroup-meta-oe-support =3D"\
++RDEPENDS:packagegroup-meta-oe-support =3D "\
+     anthy \
+     atop \
      ace-cloud-editor \
--    ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "driverctl", "", d)=
-} \
--    frame \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geis", "", d)} \
--    grail \
-+    anthy \
-     asio \
-+    atop \
-     augeas \
-     avro-c \
-     bdwgc \
-     c-ares \
-+    ccid \
-+    ckermit \
-+    clinfo \
-     cmark \
-     ${@bb.utils.contains("DISTRO_FEATURES", "polkit gobject-introspection-=
-data", "colord", "", d)} \
-     consolation \
-+    c-periphery \
-     cpprest \
-     ctapi-common \
-+    daemonize \
-+    daemontools \
-+    devmem2 \
-     dfu-util \
-     dhex \
-     digitemp \
-     dool \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "driverctl", "", d)=
-} \
-+    eject \
-+    emacs \
-+    enca \
-+    epeg \
-     espeak \
-     evemu-tools \
-     exiv2 \
--    libnice \
--    c-periphery \
-+    fbset \
-+    fbset-modes \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "fltk", "", d)} \
-+    frame \
-+    freerdp \
-     function2 \
-+    funyahoo-plusplus \
-     gd \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geis", "", d)} \
-+    gengetopt \
-     gflags \
-     glog \
-+    googlebenchmark \
-     gperftools \
-     gpm \
-+    gradm \
-+    grail \
-+    gsl \
-     gsoap \
-+    hddtemp \
-     hdf5 \
-+    hidapi \
-     hstr \
-     htop \
--    hunspell-dictionaries \
-     hunspell \
-+    hunspell-dictionaries \
-     hwdata \
-+    icyque \
-     iksemel \
--    gengetopt \
--    googlebenchmark \
-     imagemagick \
-+    imapfilter \
-     iniparser \
-     inotify-tools \
-     joe \
-     lcms \
-     lcov \
--    imapfilter \
-+    libatasmart \
-     libbytesize \
-+    libcanberra \
-+    libcereal \
-     libcyusbserial \
-+    libdevmapper \
-     libestr \
-     libfann \
-     libftdi \
--    libjs-jquery-globalize \
--    libjs-jquery-cookie \
--    ccid \
--    zchunk \
--    libgpiod \
--    libmanette \
--    ckermit \
--    libcereal \
--    daemontools \
--    libiio \
--    devmem2 \
-     libgit2 \
-+    libgpiod \
-+    libgusb \
-     libharu \
--    eject \
--    enca \
--    epeg \
-+    libiio \
-+    libinih \
-+    libjs-jquery-cookie \
-+    libjs-jquery-globalize \
-+    libjs-jquery-icheck \
-+    libjs-sizzle \
-+    libmanette \
-+    libmicrohttpd \
-+    libmimetic \
-     libmxml \
--    fbset-modes \
--    fbset \
-+    libnice \
-+    liboauth \
-     liboop \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "fltk", "", d)} \
--    freerdp \
--    libgusb \
--    emacs \
-+    libotr \
-     libp11 \
-     libraw1394 \
--    gradm \
--    gsl \
-     librsync \
--    hddtemp \
--    hidapi \
-+    libsass \
-+    libsmi \
-     libsoc \
--    libmimetic \
--    libinih \
-+    libssh \
-+    libssh2 \
-     libtar \
-     libteam \
-+    libtinyxml \
-+    libtinyxml2 \
-+    liburing \
-     libusb-compat \
--    libatasmart \
--    libcanberra \
--    libssh \
--    libssh2 \
--    libusbgx-config \
-+    libusbg \
-     libusbgx \
-+    libusbgx-config \
-+    libutempter \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "links-x11", "links", d=
-)} \
-     lockdev \
-+    log4c \
-+    log4cpp \
-     logwarn \
--    libjs-sizzle \
-+    lvm2 \
-     mailcap \
--    liboauth \
-+    mbuffer \
-     mg \
-+    mime-support \
-+    minini \
-     monit \
-     mscgen \
--    libsmi \
--    remmina \
-+    multipath-tools \
-+    nano \
-     neon \
-     nmon \
--    libjs-jquery-icheck \
--    libtinyxml \
--    libusbg \
--    libutempter \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "links-x11", "links", d=
-)} \
--    log4c \
--    log4cpp \
-     nspr \
--    libdevmapper \
--    lvm2 \
-     nss \
--    mbuffer \
--    onig \
--    mime-support \
--    minini \
--    multipath-tools \
-     numactl \
--    clinfo \
--    opencv \
--    opensc \
-+    onig \
-     openct \
-+    opencv \
-     openldap \
--    wbxml2 \
-+    opensc \
-     p910nd \
--    libtinyxml2 \
-+    pcp \
-+    pcsc-lite \
-+    pcsc-tools \
-     picocom \
--    funyahoo-plusplus \
--    icyque \
--    libotr \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pidgin-otr", "", d)} \
-     pidgin \
--    purple-skypeweb \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pidgin-otr", "", d)} \
-     pidgin-sipe \
-     pngcheck \
-     poco \
--    poppler-data \
-     poppler \
-+    poppler-data \
-     portaudio-v19 \
-+    pps-tools \
-     procmail \
--    pxaregs \
-+    purple-skypeweb \
-     pv \
--    rsnapshot \
--    pps-tools \
-+    pxaregs \
-     raptor2 \
-     rdfind \
-     re2 \
-+    read-edid \
-+    remmina \
-+    rsnapshot \
-+    sassc \
-+    satyr \
-     sdmon \
-     sdparm \
-     serial-forward \
--    read-edid \
--    spitools \
--    libsass \
--    sassc \
-+    sg3-utils \
-+    sharutils \
-     smarty \
-+    spitools \
-+    srecord \
-+    ssiapi \
-+    stm32flash \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "synergy", "", d)} \
-     syslog-ng \
-     system-config-keyboard \
-     tbb \
--    satyr \
--    pcp \
--    pcsc-lite \
--    pcsc-tools \
--    sharutils \
--    sg3-utils \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "uim", "", d)} \
--    uchardet \
--    srecord \
--    ssiapi \
-+    thin-provisioning-tools \
-+    tokyocabinet \
-     tree \
--    utouch-evemu \
--    utouch-frame \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "utouch-mtview", "", d)=
-} \
-+    uchardet \
-     ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "udisks2", "", d)} \
--    stm32flash \
--    tokyocabinet \
--    xmlstarlet \
--    thin-provisioning-tools \
-     uhubctl \
--    zile \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "uim", "", d)} \
-+    unicode-ucd \
-     unixodbc \
--    daemonize \
-     upower \
--    unicode-ucd \
--    xdelta3 \
-     uriparser \
--    nano \
-+    usb-modeswitch \
-+    usb-modeswitch-data \
-+    utouch-evemu \
-+    utouch-frame \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "utouch-mtview", "", d)=
-} \
-+    wbxml2 \
-+    xdelta3 \
-     xdg-user-dirs \
-     xmlsec1 \
--    usb-modeswitch-data \
--    usb-modeswitch \
--    liburing \
--    zbar \
--    libmicrohttpd \
-+    xmlstarlet \
-     yaml-cpp \
-+    zbar \
-+    zchunk \
-+    zile \
- "
- RDEPENDS:packagegroup-meta-oe-support:append:armv7a =3D "${@bb.utils.conta=
-ins("TUNE_FEATURES","neon"," ne10","",d)}"
- RDEPENDS:packagegroup-meta-oe-support:append:armv7ve =3D "${@bb.utils.cont=
-ains("TUNE_FEATURES","neon"," ne10","",d)}"
-@@ -937,18 +947,18 @@ RDEPENDS:packagegroup-meta-oe-test:remove:riscv64 =3D=
- "fwts"
- RDEPENDS:packagegroup-meta-oe-test:remove:riscv32 =3D "fwts"
+@@ -905,7 +905,7 @@ RDEPENDS:packagegroup-meta-oe-support:append:aarch64 =
+=3D " ne10"
+ RDEPENDS:packagegroup-meta-oe-support:append:x86 =3D " mcelog mce-inject m=
+ce-test vboxguestdrivers"
+ RDEPENDS:packagegroup-meta-oe-support:append:x86-64 =3D " mcelog mce-injec=
+t mce-test vboxguestdrivers"
 =20
- RDEPENDS:packagegroup-meta-oe-ptest-packages =3D "\
--    zeromq-ptest \
-+    cmocka-ptest \
-+    hiredis-ptest \
-     leveldb-ptest \
--    psqlodbc-ptest \
-+    libteam-ptest \
-+    minicoredumper-ptest \
-+    oprofile-ptest \
-+    poco-ptest \
-     protobuf-ptest \
-+    psqlodbc-ptest \
-     rsyslog-ptest \
--    oprofile-ptest \
--    libteam-ptest \
-     uthash-ptest \
--    poco-ptest \
--    cmocka-ptest \
--    minicoredumper-ptest \
--    hiredis-ptest \
-+    zeromq-ptest \
- "
- RDEPENDS:packagegroup-meta-oe-ptest-packages:append:x86 =3D " mcelog-ptest=
-"
- RDEPENDS:packagegroup-meta-oe-ptest-packages:append:x86-64 =3D " mcelog-pt=
-est"
+-RDEPENDS:packagegroup-meta-oe-support:remove:arm =3D"numactl"
++RDEPENDS:packagegroup-meta-oe-support:remove:arm =3D "numactl"
+ RDEPENDS:packagegroup-meta-oe-support:remove:mipsarch =3D "gperftools"
+ RDEPENDS:packagegroup-meta-oe-support:remove:riscv64 =3D "gperftools uim"
+ RDEPENDS:packagegroup-meta-oe-support:remove:riscv32 =3D "gperftools uim"
+@@ -914,7 +914,7 @@ RDEPENDS:packagegroup-meta-oe-support:remove:powerpc64l=
+e =3D "libcereal ssiapi"
+ RDEPENDS:packagegroup-meta-oe-support:remove:libc-musl =3D "pcp"
+ RDEPENDS:packagegroup-meta-oe-support:remove:libc-musl:powerpc =3D "gsl"
+=20
+-RDEPENDS:packagegroup-meta-oe-test =3D"\
++RDEPENDS:packagegroup-meta-oe-test =3D "\
+     bats \
+     cmocka \
+     cppunit \
 --=20
 2.39.2
 
