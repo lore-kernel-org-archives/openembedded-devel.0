@@ -1,99 +1,108 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A4F21CFA748
-	for <webhook@archiver.kernel.org>; Fri,  4 Oct 2024 04:23:51 +0000 (UTC)
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web11.15276.1728015828510999840
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 884EDCFA74F
+	for <webhook@archiver.kernel.org>; Fri,  4 Oct 2024 07:22:42 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web10.16773.1728026557654777148
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Oct 2024 21:23:48 -0700
+ Fri, 04 Oct 2024 00:22:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=OZen/MP1;
- spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-718f4fd89e5so1679203b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Oct 2024 21:23:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1728015827; x=1728620627; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=RrEoQ+b9LDJNeHOS/7al4y73IEX+Rr+btiVg0V/SyH8=;
-        b=OZen/MP1KXuI4oHg+dTG4Jqg56spPn12j+7LM0VQauzkyitX9fhYJAK7y3xoJ+fpMD
-         ll+2DHsPyB9CNa/Cr1bs6qzhaIUh1Q46S9/eyZ9CWsIMThoYEL83fFcentCGM1+P5TFS
-         8akw2VRcNu+bpMjfevo8d+xmcnDfL6mggozP0WiVYc72A7+6m5hEWFhvpi700DRewoud
-         B7VoIqreosL/a4JFBZTTO1uFHukM/1CoQGcX1E8qBpt60/yYFUWK399K23WL6yJORFZb
-         9C5aOWg83Q/B8NitftNdeyd+hGtCjw48YBNRhgfVCBoH71c1gxNKmpSk9Yayr6A+pztf
-         +rJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728015827; x=1728620627;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=RrEoQ+b9LDJNeHOS/7al4y73IEX+Rr+btiVg0V/SyH8=;
-        b=Bjtu+uhhrP4ouqEhMNH+YKvWKUbe3yJkUOk+ByvUWhTVZcBwkMO27ZhpJfPc6LiEM/
-         TBTGG5JSIWJRSfXLUUyzWTxWXk5PUdD3l5CkFj4jfBQIWAZdEqmF+m2vcFIRyycDZtT8
-         UX2k8Th0pBwR16HgJ5U+hahrfQ29iNRUEZZrcJI7d6MlYOIfeJT/qG1VayvXrGQGAaDs
-         +BuXkbXdL8dIe8Yrvyq579wZPVAGWjvrGJ2PeyiEdhY5INluxoag6T45/pLQbsMeLuNn
-         PxQVmUb7lFw9brV0dG8E4lc5eKrpvtJigTkgkmwZtDTtj9Dw28yW5c8s0iKeWIUq3vtl
-         /blA==
-X-Gm-Message-State: AOJu0Yz/W//jqSIJ7DkRZfyU6fVFpA2vMU//U+0YZmwux1YSDD1Ciw5X
-	I2t/5CyKe06ReowwZrLtr8M3tF2/Pxo5vaNc2YHoGqBXgCCJqnqiLZ1Xg0zN
-X-Google-Smtp-Source: AGHT+IHwcKNvujRbDz5ro4lr2mnYkp/BmjO4vFb47N2E9UlPP4WSMOirC02Z9y2Uy8BM61GR5/uXKQ==
-X-Received: by 2002:a05:6a20:c78d:b0:1cf:42ab:5776 with SMTP id adf61e73a8af0-1d6dfadd626mr1782235637.32.1728015827272;
-        Thu, 03 Oct 2024 21:23:47 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::1340])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-7e9dcb1d523sm1558810a12.53.2024.10.03.21.23.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Oct 2024 21:23:46 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-filesystems][PATCH] sshfs-fuse: Fix ptests
-Date: Thu,  3 Oct 2024 21:23:44 -0700
-Message-ID: <20241004042344.999232-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.46.2
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd70.aul.t-online.de (fwd70.aul.t-online.de [10.223.144.96])
+	by mailout03.t-online.de (Postfix) with SMTP id 798F53528F;
+	Fri,  4 Oct 2024 09:22:21 +0200 (CEST)
+Received: from [192.168.178.67] ([84.163.34.163]) by fwd70.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1swcdp-44GAhk0; Fri, 4 Oct 2024 09:22:21 +0200
+Date: Fri, 04 Oct 2024 09:24:17 +0200
+From: Markus Volk <f_l_k@t-online.de>
+Subject: Re: [oe] [meta-oe][PATCH] webkitgtk3: update 2.44.3 -> 2.46.0
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Message-Id: <HWLTKS.726242ZDS9WE3@t-online.de>
+In-Reply-To: <FC14KS.G22B53FBJ0212@t-online.de>
+References: <20240918184731.54155-1-f_l_k@t-online.de>
+	<CAMKF1srYntLyTC+rixg+4UgYB8pyCUB7q26nsJWp5ntKM38OJg@mail.gmail.com>
+	<FC14KS.G22B53FBJ0212@t-online.de>
+X-Mailer: geary/46.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/alternative; boundary="=-vRIxG9hlbil/wTH1wMOg"
+X-TOI-EXPURGATEID: 150726::1728026541-8963143E-8D769EFD/0/0 CLEAN NORMAL
+X-TOI-MSGID: 85e2e1fd-e46a-4f10-b118-942feb9e6201
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 04 Oct 2024 04:23:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112654
+ <openembedded-devel@lists.openembedded.org>; Fri, 04 Oct 2024 07:22:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112655
 
-Symlink to sshfs parallel to test dir is needed
-during test runs
+--=-vRIxG9hlbil/wTH1wMOg
+Content-Type: text/plain; charset=us-ascii; format=flowed
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../recipes-filesystems/sshfs-fuse/sshfs-fuse/run-ptest         | 2 +-
- .../recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb          | 2 ++
- 2 files changed, 3 insertions(+), 1 deletion(-)
+On Fri, Sep 20 2024 at 02:00:15 PM +02:00:00, Markus Volk 
+<f_l_k@t-online.de> wrote:
+>> it fails to compile on riscv64 and perhaps this commit is to blame
+> 
+> Yes, looks like this commit is the reason. That missing RISCV64 
+> register errors sounds quite unfamiliar to me and I always get lost 
+> for hours looking at the webkitgtk code. I'll check if this issue was 
+> already addressed  and if so maybe also has been fixed. If not, I'll 
+> file an issue for it. The webkitgtk update brings great usability 
+> improvements for epiphany but is not a build requirement for epiphany 
+> 47.0. Also current gnome-online-accounts seems to work well without 
+> the webkitgtk update.  Therefore no need to hurry
 
-diff --git a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/run-ptest b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/run-ptest
-index b63c4de0d9..8d2017d39c 100644
---- a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/run-ptest
-+++ b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/run-ptest
-@@ -1,3 +1,3 @@
- #!/bin/sh
- 
--pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-+pytest --automake
-diff --git a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb
-index 5a926dac0c..fd5af0b026 100644
---- a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb
-+++ b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb
-@@ -20,6 +20,7 @@ SRC_URI += " \
- 
- RDEPENDS:${PN}-ptest += " \
-         python3-pytest \
-+        python3-unittest-automake-output \
-         bash \
-         fuse \
- "
-@@ -27,4 +28,5 @@ RDEPENDS:${PN}-ptest += " \
- do_install_ptest() {
-         install -d ${D}${PTEST_PATH}/test
-         cp -rf ${S}/test/* ${D}${PTEST_PATH}/test/
-+        ln -sf ${bindir}/sshfs ${D}${PTEST_PATH}/sshfs
- }
+
+I had a closer look at the webkitgtk riscv64 issue. The error with the 
+missing RISCV64 registers is due to a typo. But once that was fixed, 
+the fun began. Despite looking at the code in a few places, I couldn't 
+figure out how to build webassembly with Jit. However, I was able to 
+build webassembly without jit, and since I've seen that there are 
+general efforts to make things compilable without jit, I wanted to ask 
+if jit support is mandatory for riscv64?
+
+webassembly build with jit enabled leads to a similar problem as this 
+one some time ago:
+[<https://bugs.launchpad.net/ubuntu/+source/webkit2gtk/+bug/2008798>]
+
+It seems to me that riscv64 does not support b3 at all? I'm not 
+entirely sure, as I don't even own such a machine, but the fact that 
+this typo was not caught for the release version suggests that riscv64 
+is not being tested by CI in the webkit project. Therefore I ask.
+
+
+--=-vRIxG9hlbil/wTH1wMOg
+Content-Type: text/html; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+
+<div id=3D"geary-body" dir=3D"auto">On Fri, Sep 20 2024 at 02:00:15 PM +02:=
+00:00, Markus Volk &lt;f_l_k@t-online.de&gt; wrote:<br><blockquote type=3D"=
+cite"><blockquote type=3D"cite"><div class=3D"plaintext" style=3D"white-spa=
+ce: break-spaces;">it fails to compile on riscv64 and perhaps this commit i=
+s to blame</div></blockquote><div><br></div><div>Yes, looks like this commi=
+t is the reason. That missing RISCV64 register errors sounds quite unfamili=
+ar to me and I always get lost for hours looking at the webkitgtk code. I'l=
+l check if this issue was already addressed &nbsp;and if so maybe also has =
+been fixed. If not, I'll file an issue for it. The webkitgtk update brings =
+great usability improvements for epiphany but is not a build requirement fo=
+r epiphany 47.0. Also current gnome-online-accounts seems to work well with=
+out the webkitgtk update. &nbsp;Therefore no need to hurry</div></blockquot=
+e><div><br></div><div><div><br></div><div>I had a closer look at the webkit=
+gtk riscv64 issue. The error with the missing RISCV64 registers is due to a=
+ typo. But once that was fixed, the fun began. Despite looking at the code =
+in a few places, I couldn't figure out how to build webassembly with Jit. H=
+owever, I was able to build webassembly without jit, and since I've seen th=
+at there are general efforts to make things compilable without jit, I wante=
+d to ask if jit support is mandatory for riscv64?</div><div><br></div><div>=
+webassembly build with jit enabled leads to a similar problem as this one s=
+ome time ago:</div><div>[<a href=3D"https://bugs.launchpad.net/ubuntu/+sour=
+ce/webkit2gtk/+bug/2008798">https://bugs.launchpad.net/ubuntu/+source/webki=
+t2gtk/+bug/2008798</a>]</div><div><br></div><div>It seems to me that riscv6=
+4 does not support b3 at all? I'm not entirely sure, as I don't even own su=
+ch a machine, but the fact that this typo was not caught for the release ve=
+rsion suggests that riscv64 is not being tested by CI in the webkit project=
+. Therefore I ask.</div></div></div>
+--=-vRIxG9hlbil/wTH1wMOg--
+
 
