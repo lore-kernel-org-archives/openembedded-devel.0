@@ -2,56 +2,56 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D4F7FCFA76F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4F58CFA76E
 	for <webhook@archiver.kernel.org>; Fri,  4 Oct 2024 10:59:53 +0000 (UTC)
-Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com [209.85.128.169])
- by mx.groups.io with SMTP id smtpd.web10.13801.1728009625558020450
+Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
+ by mx.groups.io with SMTP id smtpd.web11.14008.1728009628591458269
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Oct 2024 19:40:25 -0700
+ Thu, 03 Oct 2024 19:40:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=nedM/6XV;
- spf=pass (domain: gmail.com, ip: 209.85.128.169, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-6dbb24ee2ebso16361377b3.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Oct 2024 19:40:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bepjpeo0;
+ spf=pass (domain: gmail.com, ip: 209.85.128.181, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-6e235a61bcbso18193447b3.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Oct 2024 19:40:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1728009624; x=1728614424; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1728009627; x=1728614427; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=EahcdNjNLnz8uuJoAgYKRrbhVHER+Y6tH9BWvo5aKWk=;
-        b=nedM/6XV6Gdohv6Uj20m0G1OoXwxG6y8hAw79wcm3NCniIaDX+Kod3AWHSd1+tkyWw
-         Rzx+vT6tkDfUgJkIuPjIc3vOCRWjftT6b97XXlVXgnJyFFTus0NrjcSf5dMY4s9W/W99
-         S19+G+qKjZXXe3fFJsp27RAH8HT+9X1LbJt2QZhnJr172y+8yRov6W1ce0UxgHHmFKUO
-         K+2fA0CNYxvjVXszbMyEX4hMz/7c0CLxRZ1cGPjwyMoAuAwBrT1+7JDKM4KawTTUBI7f
-         TNtuY6PpmpD6vJUmT3Hs5iDQcAt1YwrV1fRZYft96wx5mkGanPB8CPfcZn4uGo5h5z76
-         BlWA==
+        bh=grReZjjSr3el6Pvhn8oRl4VG+X+/CKGuro0dzMoSo6s=;
+        b=bepjpeo0e/cpyhRdUvGzOq2hw7ARIzkLg7ub6lOVmVZN+bvBdAVmf46H6gw2lc2rOZ
+         S4zb7HMiWA4uQHl6mksbRM4Tf8XBOun+MJvPZRJKwrOixE32ZglNnnE92d8UpImnPJjE
+         HFF2X6xNMIoxiVryAo/vnvuoOksU4G1SXpjQ/rD7mQrASy8f1bq5QNK5oH4Vek9Zu0cv
+         ywKISeUjPOinV7T+nT0zz3VjrJMsKEVuhCXq5F0zK+3d1WXCeGAlSwZK3m96Ajx8tQW3
+         X9XS/NnkH7mZ14U6NO/0Cb+caSQ1JJuhmVEGhbTtTvipaxYQ19zL+8604RBn9y/aCTzw
+         qMAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728009624; x=1728614424;
+        d=1e100.net; s=20230601; t=1728009627; x=1728614427;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=EahcdNjNLnz8uuJoAgYKRrbhVHER+Y6tH9BWvo5aKWk=;
-        b=jaOafHCTl/aNYeThqy9+/EqUpyvcjx7pFfNt5ev+snomYp+xsaGNbJsJlGOju9ZD/P
-         D/2YRQn6LM3YU2V2lk+qD2g0tDfS6rKaLgp/Z/1vujTeJOLJNyhsqMrNcCSalBGywVEW
-         dQ3GmEULyMZRIxAh3YzLgrJDe5xB5cB8j50OacQk4hEAFbeMwLc1pIpjljMI154s96/0
-         Nu+qpEVK930kBO/sXJeVHTmmFVEgr1dY//zCipZDWCStfbUpe6UiTaDlFj3DleCAELOn
-         /JxQE6n+lllGbgY+Sa72QI5oJU0VasdJtaS645g8MauSt9N0/wqsUkFPcirgAhTTcCy7
-         pr/Q==
-X-Gm-Message-State: AOJu0YxoWo3zuoyk4uujXNNXM6WTTjhDHcn7J2Bim3GN6RaIOGgam4QY
-	ykRYGC8XbakDp7LRYlNIIQUdFNdWn65JkJtPO2JAmrh3Na+uta53kQlzQA==
-X-Google-Smtp-Source: AGHT+IGCB7vbhm0ZHqo2+cCcokjF8UloiCPjvHgXq2fEzqkuPyC7LhWTddtmexZv7nf32U3L8e151Q==
-X-Received: by 2002:a05:690c:3186:b0:6e2:ab93:8c68 with SMTP id 00721157ae682-6e2c7238ef0mr9843827b3.25.1728009624252;
-        Thu, 03 Oct 2024 19:40:24 -0700 (PDT)
+        bh=grReZjjSr3el6Pvhn8oRl4VG+X+/CKGuro0dzMoSo6s=;
+        b=RLUZYlWPLNu2vkUcDLZ3FycC1iZgjJHNxYgcevq6kXYUuUvofDtA1l2i5hT0rTUnMA
+         KCpR6uFTmIThl62wJxD2RjSqqXCOx3c2RqKmD4uBhsPPVu8g51tDQkufLebpfL8VB883
+         20KE5tcTUkBS4iT/CBV40RZRoPmZwlSHSo1tu5gkxqzjXzcI77j2YEmo6iidgfDpZ1q5
+         G9ezLX33zkIa+UZFOp1OlcdPweEkh/m3SLu9ZvVZccoCDPrBLcYaelnjYfa/TCJUUkX6
+         NSTWXi6nGjhREy0RPP+ptuZz4JKcffsbDZfvPYzjaPLJURufyDccWpS2Uz/E8ueUhrz6
+         cekQ==
+X-Gm-Message-State: AOJu0Yw6x5Ri+zj/b5jShcLZG1SMYILQtuhJPCB3shBMLci9n0lFHkGj
+	b+PsqSrJGpoczo5yzDYyd+q3I89t6rhTo5jEt2uMFfGP6bgFHCnAU6Bfjg==
+X-Google-Smtp-Source: AGHT+IHN6sGhj6kNu9ejLVtEtG4e9KJBJDpOrFtzaMGypAgWl5aH5rs/k/Gt/ms4s0go333HIglCJw==
+X-Received: by 2002:a05:690c:4a0e:b0:6dd:b8ff:c29c with SMTP id 00721157ae682-6e2b53e7162mr39493237b3.17.1728009627086;
+        Thu, 03 Oct 2024 19:40:27 -0700 (PDT)
 Received: from localhost.localdomain ([67.7.85.114])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6e2bc2d1bf3sm4908547b3.74.2024.10.03.19.40.23
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6e2bc2d1bf3sm4908547b3.74.2024.10.03.19.40.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Oct 2024 19:40:24 -0700 (PDT)
+        Thu, 03 Oct 2024 19:40:26 -0700 (PDT)
 From: "J. S." <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][PATCH 4/5] xfwm4-themes: Drop unnecessary SRC_URI[md5sum]
-Date: Thu,  3 Oct 2024 22:33:07 -0400
-Message-ID: <20241004023842.14172-6-schonm@gmail.com>
+Subject: [meta-xfce][PATCH 5/5] xfce4-vala: Drop unnecessary SRC_URI[md5sum]
+Date: Thu,  3 Oct 2024 22:33:08 -0400
+Message-ID: <20241004023842.14172-7-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241004023842.14172-2-schonm@gmail.com>
 References: <20241004023842.14172-2-schonm@gmail.com>
@@ -61,25 +61,25 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 04 Oct 2024 10:59:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112662
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112663
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb | 1 -
+ meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb b/meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb
-index 272f83c01..d69abfedf 100644
---- a/meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb
-+++ b/meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb
-@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- inherit xfce
+diff --git a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
+index 0a65bd94a..6ee5391d2 100644
+--- a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
++++ b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
+@@ -11,7 +11,6 @@ SRC_URI = " \
+     http://archive.xfce.org/src/bindings/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2 \
+     file://0001-configure.ac-Detect-vapidir-if-not-set-explicitly.patch \
+ "
+-SRC_URI[md5sum] = "0bbb1d6e473e0fe9b335b7b1b49d8a71"
+ SRC_URI[sha256sum] = "07a8f2b7c09fcdd3d86e0c52adea3c58ca011d0142a93997a01b4af77260ae7b"
  
- SRC_URI = "http://archive.xfce.org/src/art/${BPN}/${@'${PV}'[0:4]}/${BP}.tar.bz2"
--SRC_URI[md5sum] = "eaa58362053a3549c8be0b32efd3c54f"
- SRC_URI[sha256sum] = "3214d5f00e9703b5e8c9e7c3287d606dedec7285ceb4d5db332e93ada66fd575"
- 
- # using xfwm4-theme as in xfwm4 might cause warnings of packages supplied by
+ FILES:${PN} += "${datadir}/vala-*/vapi"
 -- 
 2.43.0
 
