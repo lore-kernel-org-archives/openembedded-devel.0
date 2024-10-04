@@ -2,72 +2,85 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C8173CFA76A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C813CCFA769
 	for <webhook@archiver.kernel.org>; Fri,  4 Oct 2024 10:59:53 +0000 (UTC)
 Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com [209.85.128.176])
- by mx.groups.io with SMTP id smtpd.web11.13995.1728009600049606449
+ by mx.groups.io with SMTP id smtpd.web10.13799.1728009622698507587
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Oct 2024 19:40:00 -0700
+ Thu, 03 Oct 2024 19:40:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NXaDCgn+;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cVnvipjA;
  spf=pass (domain: gmail.com, ip: 209.85.128.176, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-6e2b1b10103so13935847b3.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Oct 2024 19:39:59 -0700 (PDT)
+Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-6e2326896cbso13845237b3.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Oct 2024 19:40:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1728009599; x=1728614399; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=bEwtysekiVKhqlMLuUrDRb9bf26dZw6WtUQnewoBqkI=;
-        b=NXaDCgn+3JePpWWYZAYZYHmvcmD8hrQcb4cINrjuQU8ubNJtB4KUJf294bjLT51LPj
-         6mOIWkgaK2YofxoM8IRC6AlVEK9QeKcNtvE7cFGhR3jAvqJNqvVvKmRRf+94IQ/jlL7a
-         C1wWoTNeKP4SI+gZL0hwxRH7o7iUFhHMLPHJTGS/joc3jQYWBir2ATNNyQYyd69eb/QJ
-         m2bKVhYqrd4canAl3nCBSQebyIcri54aFMslJQz2rdbq0cYJpaMsCbB1soQRHdWWxTj5
-         rwH6sDTonV2v/oDLezfbOlzVd83MMdGqYPLdSJkAWmXv5S2rVOumV+3H0J57mvC1t3PQ
-         Vvyw==
+        d=gmail.com; s=20230601; t=1728009621; x=1728614421; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=K65LMJA++2LRdBvIq4Gisp89wj9B3rSbf4RpI5RzYMQ=;
+        b=cVnvipjAd/Xpg04Q/XMImD15zEpAlygXqS6dNexDWliKSc73NS2qGlcKcIhw1Lsnlq
+         mns4InIuxam80oz05QqPmPreDGr6JvNyQ9ISrTyvbJCzAd2pBK0MYcCh+Di9rwqKsKpL
+         LV/joUMxXIuPXHwAIb93roR+ZLdhAaxjZZtP348hPAoE8ZOV2D9nGlmIhOPHcSePLzf+
+         eaQwe8TlIon6Y8BowQmDKx4NihmdjqON+5HErrxNU1cdW3kYN3fgSaQcaRmmzMqRMpmv
+         j5Z+LLQO47RM9qvZCaFvuoIP18HLWxynlYSrAvCgVyZXv2qv58j493IGMl8BUB8PpD/X
+         3H7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728009599; x=1728614399;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=bEwtysekiVKhqlMLuUrDRb9bf26dZw6WtUQnewoBqkI=;
-        b=sjpaYrOtIGn4cBmh10m0csk1ld9VXXbR+dR5gUo/rg9JvK8cruFNUP4NLhNgG/gEQ/
-         a4i/g9168Neroi13rrlnecubEbHuiygOfyr44A0UgB0eZsyF9pCHUkOVr87jyOlVVIGa
-         U/f4DLUiHxv0OzLp7a0MBth+olEaqBfeFGo8/ogvz3KBbG4mdJbs4mwEIriwdCKhNWb4
-         c+rB52OltDfgWkVFXgtWqE3GRvjZ3qaN0OrUgxkGtZsmNutJlSgS0Mk5I/cioCar/MTP
-         hXeewPzbIYk/fFNi46/7kf4SVQ2sAU0KNbx9cTg07I3/uQ+8qSbk3+45G54IyAZkb1/Q
-         UMMw==
-X-Gm-Message-State: AOJu0YwWYzf47TASMSfZnqxBH45GYAKz8ApL+2Oi3ym3jpSo9l5w2e6U
-	IUKiBinQbVl7tONbXsbdYzZwgkmEnYxZpD6nSoErpYsK4L7mvejIu8bEBg==
-X-Google-Smtp-Source: AGHT+IHtSfaZ6ucnqAPMndxl6Wep9C5GxJQxfAM7zg30xG5TLMHubheEttrm7w3mNZhgUri06rOQLA==
-X-Received: by 2002:a05:690c:360e:b0:6db:d221:b7df with SMTP id 00721157ae682-6e2c723affcmr13883647b3.25.1728009598472;
-        Thu, 03 Oct 2024 19:39:58 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1728009621; x=1728614421;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=K65LMJA++2LRdBvIq4Gisp89wj9B3rSbf4RpI5RzYMQ=;
+        b=Ipjjb59mSJl7qk6KnSriCgFrh88gzE70stS7tLloNsef42h1ppnVEuixHr5QI3WJay
+         P7OgIZfiAlAfasjSGqsLVOGM9fZz+2f1yL/9jB03IAhLZnlJftQuAa1qcmKcsCT4hrsx
+         sNRpnS+v2RAnP3MqNmVC49RM78Xguk/zfzxjulD/nhEwe5gm71c95Slb4yv58aN84mPT
+         5TIJfM1U/eTcvfxI739SHMWGvy8vCcESAK9BiwTpg89XjBsRSkOFEUPKLbRBv/C/kbX9
+         V/09GK12+0N0+XFecH10s6TQKwXOdQVU9EfP3J3Ni/netrMQrMxBXKqEx5+mfKCdkR95
+         j83w==
+X-Gm-Message-State: AOJu0YxKwGrM7/fRcDsRlT1hI3mo/tO8Oyp0bfsftzoDY0T6VKio9xwr
+	uAfc4VdKj+fEkPRoDGRorHDNYgwxaNj3aSnZFAT9u8v2vFRtM72HMohazA==
+X-Google-Smtp-Source: AGHT+IFHKEdsVO3zIJBhZs9OaXU+Ak0OwNr1EZdSIfTJllDvHGEaMWpd8QONef9+/Jp4ipZGO2DaJg==
+X-Received: by 2002:a05:690c:dd4:b0:6e2:18b8:c01d with SMTP id 00721157ae682-6e2c72413b4mr12799197b3.22.1728009621083;
+        Thu, 03 Oct 2024 19:40:21 -0700 (PDT)
 Received: from localhost.localdomain ([67.7.85.114])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6e2bc2d1bf3sm4908547b3.74.2024.10.03.19.39.57
-        for <openembedded-devel@lists.openembedded.org>
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6e2bc2d1bf3sm4908547b3.74.2024.10.03.19.40.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Oct 2024 19:39:58 -0700 (PDT)
+        Thu, 03 Oct 2024 19:40:20 -0700 (PDT)
 From: "J. S." <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-xfce][PATCH 0/5]
-Date: Thu,  3 Oct 2024 22:33:03 -0400
-Message-ID: <20241004023842.14172-2-schonm@gmail.com>
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-xfce][PATCH 3/5] xfce-dusk-gtk3: Drop unnecessary SRC_URI[md5sum]
+Date: Thu,  3 Oct 2024 22:33:06 -0400
+Message-ID: <20241004023842.14172-5-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241004023842.14172-2-schonm@gmail.com>
+References: <20241004023842.14172-2-schonm@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 04 Oct 2024 10:59:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112658
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112661
 
-In keeping with the suggestion found in the note in section 5.5 of the documentation here:
-https://docs.yoctoproject.org/dev-manual/new-recipe.html?highlight=src_uri+md5sum#fetching-code
-that the use of SRC_URI[md5sum] is deprecated - drop it from the recipes where SRC_URI[sha256sum]
-is already in use.
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
+---
+ meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
+diff --git a/meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb b/meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb
+index 4cbdb4e08..4dacb203d 100644
+--- a/meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb
++++ b/meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb
+@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8f0e2cd40e05189ec81232da84bd6e1a"
+ inherit allarch
+ 
+ SRC_URI = "http://sources.openembedded.org/141404-xfce_dusk_gtk3-1_3.tar.gz;subdir=${BPN}-${PV}"
+-SRC_URI[md5sum] = "b3ad37ad8173b14ec090e60a80e65d8f"
+ SRC_URI[sha256sum] = "bfa8a88607d1a1da5bd0b9e4e075767c54400a3c5a0fae88b619ed71532f30b4"
+ 
+ do_configure() {
+-- 
+2.43.0
 
-[meta-xfce][PATCH 1/5] openzone: Drop unnecessary SRC_URI[md5sum]
-[meta-xfce][PATCH 2/5] rodent-icon-theme: Drop unnecessary SRC_URI[md5sum]
-[meta-xfce][PATCH 3/5] xfce-dusk-gtk3: Drop unnecessary SRC_URI[md5sum]
-[meta-xfce][PATCH 4/5] xfwm4-themes: Drop unnecessary SRC_URI[md5sum]
-[meta-xfce][PATCH 5/5] xfce4-vala: Drop unnecessary SRC_URI[md5sum]
 
