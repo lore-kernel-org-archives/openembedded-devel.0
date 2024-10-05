@@ -2,182 +2,96 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 09199CF8869
-	for <webhook@archiver.kernel.org>; Sat,  5 Oct 2024 06:54:16 +0000 (UTC)
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.web11.7091.1728111249521686352
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2752ACFA756
+	for <webhook@archiver.kernel.org>; Sat,  5 Oct 2024 15:56:39 +0000 (UTC)
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.web10.14252.1728143792011437797
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Oct 2024 23:54:09 -0700
+ Sat, 05 Oct 2024 08:56:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=UzK7OvkI;
- spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-20b64584fd4so28575715ad.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 04 Oct 2024 23:54:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bGf2WYMD;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-71ddb6199c4so1996123b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 05 Oct 2024 08:56:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1728111249; x=1728716049; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=WfI6cwxIF5Hhx9upprMP/cobOYwzj90JI2z9wO9ep20=;
-        b=UzK7OvkIwRK7hi/xhnfaS67BOXhcRIfL2vfa9Zpj9DgTvIgMWkE6w7ULc/Ya+YyJ06
-         LBJKCW5qiP4sm8sfstTnWRYWGyQoMFW6j1VULe1+QP5dp4N3sVBbTA8e/QLeETY0zDWH
-         XDgHZGHUeLkO+t/f3Ks07bdzDBhKrXPMINtW17TeTy4KU1DDa61Y5m836CD1/Z2athCo
-         pA/zPwZdgVxYVSmAPOLDdwlcV+dqU0wuPp/l41qREKwga83ZB+T5i11iCLnJTD1TOCz0
-         WPkQPjCDoRLGsPQ82W0pKcxLIsIoMs7ClkRZdYeKbhtTvZsgJP1CA5r39E46PkP3722R
-         o/0A==
+        d=gmail.com; s=20230601; t=1728143791; x=1728748591; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=SNpzNXH7paMMyZ7XyLVd8nAC6hLRwig1Hhv2HzrjJmE=;
+        b=bGf2WYMDMTH7bSB5E78XGFCRq5T9Tck8IqM9/2ruhal7BtH2bl53eY6TTfKLivn3Rl
+         8kjlPcYLx4GUW2dh0EpzmIO5LkV64WQb0CcjNfFWRz+lrDav3PLJTnMw1rnBEbnQSf5x
+         fe7H9YVa/rwZeoUyfD3vynIUTzvRYStCcePFjpks7QxjB3w079hze2FQO3iH+0GWFOTV
+         y5zYbaDJkKLzHytVaHf+J2nxymbCW80xbDI0zIq8cQ48Wy8lLJs9PVnyRWQo08klxMF9
+         QRC1dzt4sIbIqMnLHpiMxjLhfwxe/JRD/2XbtRkkryyUoIkAoo9pEZml7Z+KtOggyzSM
+         iD6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728111249; x=1728716049;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=WfI6cwxIF5Hhx9upprMP/cobOYwzj90JI2z9wO9ep20=;
-        b=uqhorAEhUxSSww43DphUMEnSpF0210CINXMAmQyDmzT0h3NNwu1pQlofXd84EJ2dPB
-         ccHN5y2SV0Qn781FGiskXG8AXYhXRQCplMvvClWRX/w9crIDFySOPnLlnMPSzG1iJgff
-         YncCcbXYeisIEC+WSkyNszRsEJ3SQAQ3g7QkcnLRDTGIsSdj6N6MiNapCjT6q/dc+cfV
-         Lwf2AgkVzK3Xi9Ko7+C1bDi9n99FyhMTN52pZs6ERL3ZurxnnqcN/iQ4ItDkDu+qkqqL
-         /zT1nj10ROdwf4djP7G7baQt5eVovZCTaVO6pRAx4dKxLkEXBrZoIKGdZ4GEp2SQ99Ah
-         1WfA==
-X-Gm-Message-State: AOJu0Yy3by17a+rnmWM0tnzJ/9rwvH7x1M9Aec39DkYCUwFfOxblAgpI
-	UEgmqB1cctyILkgUOZCQv6PCOkaoC0hD9w1Ws0ix9IIszpQqSEn4LxQFc5Ou
-X-Google-Smtp-Source: AGHT+IHuh/Fg7wnIcOcsQdLME78UNdJYyMS2AK0A3itk6Ua4MTBuSHhwbYw9c3zQvy/RoeG+4sdQuQ==
-X-Received: by 2002:a17:902:dac6:b0:20b:8109:2c87 with SMTP id d9443c01a7336-20bfe023e2cmr76845165ad.6.1728111248598;
-        Fri, 04 Oct 2024 23:54:08 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::6d1b])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-20c138afaa0sm8024325ad.4.2024.10.04.23.54.08
+        d=1e100.net; s=20230601; t=1728143791; x=1728748591;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=SNpzNXH7paMMyZ7XyLVd8nAC6hLRwig1Hhv2HzrjJmE=;
+        b=hPqEbTxBhGNbFVRxae/DYvUEyQJjzs9FSqBT7uRmkyyTkwzMrmnLurz+LcxhuM+TUO
+         d1M2yx/jTrpVKwwg6zw2WpbR1lvew3MgEaIF+Sqv/soWjnt8gCdA21Wpsg5Odt0lr1jP
+         Y9VNv4OoWEvbUsL1J/TiiZrXqA23QxejRJFqH5oW8+n+yRaqBSYfjYly9NpeYCWH8AZp
+         tKwxeXapZx25YfYt1V7ynMojS45sxgW5qN27T/OoNFTFrIi2sDr0QOEUyDSugdLambIr
+         ggjgr5O1fpCcbU2IZun5ny061Au16j2glJ3B9w9B8RCq8UhyuaVLyHgWB/Yz9D49tVZl
+         VKeA==
+X-Gm-Message-State: AOJu0Yw+FkqVHwMVYh72KMj96M/G5ibOt2jPIu8MwFFDRB2i43R/00bD
+	XpCKWpRq/A+sZ2FmJ8lTC+NfTmsn3+f039HIS+/EjTZedT9ASSKFW40dp3k+
+X-Google-Smtp-Source: AGHT+IEMB9WNcuY7LcxntBm8gwFeSGQzFbcZLRoZFaET/vT7ISbP0k8ljjLnZojK5G08wehNuIoLIA==
+X-Received: by 2002:a05:6a21:1190:b0:1cf:ff65:3c30 with SMTP id adf61e73a8af0-1d6dfa547bbmr7984818637.29.1728143791176;
+        Sat, 05 Oct 2024 08:56:31 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::23dc])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-71df0cbba2bsm1629396b3a.41.2024.10.05.08.56.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 04 Oct 2024 23:54:08 -0700 (PDT)
+        Sat, 05 Oct 2024 08:56:30 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/2] highway: Update the risc32 RVV selection patch
-Date: Fri,  4 Oct 2024 23:54:05 -0700
-Message-ID: <20241005065406.3182738-1-raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH 2/2] libopenmpt: Upgrade to 0.7.10
+Date: Sat,  5 Oct 2024 08:56:27 -0700
+Message-ID: <20241005155627.2558421-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.46.2
+In-Reply-To: <20241005155627.2558421-1-raj.khem@gmail.com>
+References: <20241005155627.2558421-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 05 Oct 2024 06:54:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112672
-
-Use the v3 of upstream submitted patch
+ <openembedded-devel@lists.openembedded.org>; Sat, 05 Oct 2024 15:56:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112675
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ck-for-deducing-32bit-or-64bit-RISCV.patch | 71 +++++++++----------
- 1 file changed, 35 insertions(+), 36 deletions(-)
+ .../libopenmpt/{libopenmpt_0.7.3.bb => libopenmpt_0.7.10.bb} | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-multimedia/recipes-multimedia/libopenmpt/{libopenmpt_0.7.3.bb => libopenmpt_0.7.10.bb} (94%)
 
-diff --git a/meta-oe/recipes-extended/highway/highway/0001-Add-cmake-check-for-deducing-32bit-or-64bit-RISCV.patch b/meta-oe/recipes-extended/highway/highway/0001-Add-cmake-check-for-deducing-32bit-or-64bit-RISCV.patch
-index bafe218f0d..ecc9c441c5 100644
---- a/meta-oe/recipes-extended/highway/highway/0001-Add-cmake-check-for-deducing-32bit-or-64bit-RISCV.patch
-+++ b/meta-oe/recipes-extended/highway/highway/0001-Add-cmake-check-for-deducing-32bit-or-64bit-RISCV.patch
-@@ -1,4 +1,4 @@
--From 5d40c0c49f9acde83ba71b6f59094cdbd12e1b78 Mon Sep 17 00:00:00 2001
-+From b06541a75043c9a8213187fca942a0270783bd0e Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Tue, 17 Sep 2024 18:22:36 +0000
- Subject: [PATCH] Add cmake check for deducing 32bit or 64bit RISCV
-@@ -7,52 +7,49 @@ Currently its only compilable for RV64 when RVV is
- enabled, this will extend it to build for RV32 with
- RVV as well
+diff --git a/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.3.bb b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.10.bb
+similarity index 94%
+rename from meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.3.bb
+rename to meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.10.bb
+index 8bb49b2f12..fea15f04ef 100644
+--- a/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.3.bb
++++ b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.10.bb
+@@ -7,15 +7,14 @@ HOMEPAGE = "https://lib.openmpt.org/libopenmpt/"
+ SECTION = "libs"
  
--Upstream-Status: Pending
-+Upstream-Status: Submitted [https://github.com/google/highway/pull/2330]
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-- CMakeLists.txt | 36 ++++++++++++++++++++++++++++++++++--
-- 1 file changed, 34 insertions(+), 2 deletions(-)
-+ CMakeLists.txt | 38 +++++++++++++++++++++++++++++++++++---
-+ 1 file changed, 35 insertions(+), 3 deletions(-)
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=59f6e21f42e49919617267ff13a0b232"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=829270a66f67187a1d08640df673249a"
  
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index ea8b330c..cd824787 100644
- --- a/CMakeLists.txt
- +++ b/CMakeLists.txt
--@@ -65,6 +65,34 @@ if (NOT CMAKE_BUILD_TYPE)
--   set(CMAKE_BUILD_TYPE RelWithDebInfo)
-+@@ -59,6 +59,33 @@ if(CHECK_PIE_SUPPORTED)
-+   endif()
-  endif()
-  
--+include(CheckCSourceCompiles)
-++if (CMAKE_CXX_COMPILER_ARCHITECTURE_ID MATCHES "RISCV32|RISCV64|RISCV128" OR CMAKE_SYSTEM_PROCESSOR MATCHES "riscv32|riscv64|riscv128")
-++  include(CheckCSourceCompiles)
-++  check_c_source_compiles("
-++  #if __riscv_xlen == 64
-++  int main() { return 0; }
-++  #else
-++  #error Not RISCV-64
-++  #endif
-++  " IS_RISCV_XLEN_64)
- +
--+check_c_source_compiles("
--+#if __riscv_xlen == 64
--+int main() { return 0; }
--+#else
--+#error Not RISCV-64
--+#endif
--+" IS_RISCV_XLEN_64)
-++  check_c_source_compiles("
-++  #if __riscv_xlen == 32
-++  int main() { return 0; }
-++  #else
-++  #error Not RISCV-32
-++  #endif
-++  " IS_RISCV_XLEN_32)
- +
--+check_c_source_compiles("
--+#if __riscv_xlen == 32
--+int main() { return 0; }
--+#else
--+#error Not RISCV-32
--+#endif
--+" IS_RISCV_XLEN_32)
--+
--+if(IS_RISCV_XLEN_32)
--+  set(RISCV_XLEN 32)
--+elseif(IS_RISCV_XLEN_64)
--+  set(RISCV_XLEN 64)
--+else()
--+  message(WARNING "Unable to determine RISC-V XLEN")
-++  if(IS_RISCV_XLEN_32)
-++    set(RISCV_XLEN 32)
-++  elseif(IS_RISCV_XLEN_64)
-++    set(RISCV_XLEN 64)
-++  else()
-++    message(WARNING "Unable to determine RISC-V XLEN")
-++  endif()
- +endif()
- +
--+message(STATUS "RISC-V XLEN: ${RISCV_XLEN}")
--+
-- # The following is only required with GCC < 6.1.0 or CLANG < 16.0
-- set(HWY_CMAKE_ARM7 OFF CACHE BOOL "Set copts for Armv7 with NEON (requires vfpv4)?")
-+ include(GNUInstallDirs)
-  
--@@ -72,7 +100,7 @@ set(HWY_CMAKE_ARM7 OFF CACHE BOOL "Set copts for Armv7 with NEON (requires vfpv4
-+ if (NOT CMAKE_BUILD_TYPE)
-+@@ -72,7 +99,7 @@ set(HWY_CMAKE_ARM7 OFF CACHE BOOL "Set c
-  # skipped. For GCC 13.1+, you can also build with -fexcess-precision=standard.
-  set(HWY_CMAKE_SSE2 OFF CACHE BOOL "Set SSE2 as baseline for 32-bit x86?")
-  
-@@ -61,15 +58,17 @@ index ea8b330c..cd824787 100644
-  set(HWY_CMAKE_RVV ON CACHE BOOL "Set copts for RISCV with RVV?")
-  
-  # Unconditionally adding -Werror risks breaking the build when new warnings
--@@ -378,7 +406,11 @@ else()
-+@@ -378,7 +405,13 @@ else()
-      # we add the gcv compiler flag, which then requires the CPU (now when using
-      # either compiler) to support V.
-      if(HWY_CMAKE_RVV)
- -      list(APPEND HWY_FLAGS -march=rv64gcv1p0)
- +      if(RISCV_XLEN EQUAL 64)
- +        list(APPEND HWY_FLAGS -march=rv64gcv1p0)
-++        add_link_options(-march=rv64gcv1p0)
- +      elseif(RISCV_XLEN EQUAL 32)
- +        list(APPEND HWY_FLAGS -march=rv32gcv1p0)
-++        add_link_options(-march=rv32gcv1p0)
- +      endif()
-        if(${CMAKE_CXX_COMPILER_ID} MATCHES "Clang")
-          list(APPEND HWY_FLAGS -menable-experimental-extensions)
+ DEPENDS = "virtual/libiconv"
+ 
+ SRC_URI = "https://lib.openmpt.org/files/libopenmpt/src/libopenmpt-${PV}+release.autotools.tar.gz \
+            file://run-ptest \
+           "
+-
+-SRC_URI[sha256sum] = "2cf8369b7916b09264f3f14b9fb6cef35a6e9bee0328dec4f49d98211ccfd722"
++SRC_URI[sha256sum] = "093713c1c1024f4f10c4779a66ceb2af51fb7c908a9e99feb892d04019220ba1"
+ 
+ S = "${WORKDIR}/libopenmpt-${PV}+release.autotools"
+ 
 
