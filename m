@@ -2,82 +2,87 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 26222CFA754
-	for <webhook@archiver.kernel.org>; Sat,  5 Oct 2024 15:56:39 +0000 (UTC)
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web10.14251.1728143790775520178
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5318ECFA756
+	for <webhook@archiver.kernel.org>; Sat,  5 Oct 2024 16:37:09 +0000 (UTC)
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
+ by mx.groups.io with SMTP id smtpd.web11.15192.1728146227421551771
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Oct 2024 08:56:30 -0700
+ Sat, 05 Oct 2024 09:37:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=k2Csyy3i;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-71dec1cf48fso1307202b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 05 Oct 2024 08:56:30 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=P1irHTT0;
+ spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-71dc4451fffso3111230b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 05 Oct 2024 09:37:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1728143790; x=1728748590; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1728146226; x=1728751026; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=XawF5mSvnijKP7pOe34OvBU2NEYk8M174ler74jRQdQ=;
-        b=k2Csyy3ikzvsP9b0DfNfCCFs4NAITSRpBpNaObms060RhjgAbxFLujEjWthmok6vib
-         2iIu/iGUk4O2PxzEzjaAMXLDRbvMk+GEXCR8lD61jYhmGHKopB9LtnzRR6D2uStuHWpu
-         a4aKs9NoNzCpGiER0Vx9JfwZj62sfZZUMRMVSz+ej8t7Q3T2/jP7bfT+lu//OaNHFmrt
-         xE9ZaivEmg9RGh/pLDLwtJfwqynQAuo99qnZVhhNDjYc7ZiQ4Cz6SLYsZ35d25Aa0Jvk
-         VpoLoosLG5TBdbCAVhIE+5uA7EfTkdmh5VyPLtazukB3IM8UEOC6jd0sNsDfXVpJ1f9L
-         Eljw==
+        bh=CrOnXMI8cGE6PYln/7X3YCrztZJMND6/pmc4UVh48X4=;
+        b=P1irHTT0sDarItzJYb2kZ/C/zQkOGdr2W12RizG2gpS6cFyPzDIi5cWvVKxe7TuRx0
+         Ml9yv0tVhU0QnTYiMOrICXXll4nDscNfoMY0oKnsLF6O/qKRmSLA4N0LKCmcLzILWofU
+         mKK5CMtYK8IhFqANxWMa2BwTS+OT9gR6SeeKdN2mRIZgU2NZT3GVnBGSANpPvJ1moBPs
+         N7nqELLfYn60adMHDUfu+TyuHBzZkXvl1GwhIana7BJm5ts09169bBf7WD1TEDkzhTa5
+         P7ESmE2XCRY3h1n/6gIh+CtoVVIF0MqUgex4gxOtzEaxQkxaVxnxdt2RR7fK8CTgJ2oK
+         llQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728143790; x=1728748590;
+        d=1e100.net; s=20230601; t=1728146226; x=1728751026;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=XawF5mSvnijKP7pOe34OvBU2NEYk8M174ler74jRQdQ=;
-        b=f9bXyL2OpJndAJlrJe2iSoDj+3zP+UwaHNbz+i/GiIHINNZ/jeJr7Kr1S+4B3O9hUU
-         XfJgE3EDNj9yWTR2sQ1eMa0ZpwCOjMZ4vGCg04J0fFVd2qjuc+TG4fjTojjbEKaZX2Cg
-         g5+4lwfmbUN0+x1Ifh03lpYLHVMsFvLVNgDQaMPCgyLL1gdEU0SE5YzySXcMgYmhxzAw
-         U9/kongUeSuvqWsFzwhNr45uRhK/XI/jPY/h6ehkgn7++Nw83WucK31FOA6eX9s2W503
-         KSfrQlYK5zOZTvMjI+sRlL68hwwiRARiHxSnySPcE5MUTLO7DK2Gqo8gbR5nyiWqjJlP
-         aKhA==
-X-Gm-Message-State: AOJu0YyZP7Lf7RdDrvYXoVHpMB1ZSDOI8ED2Kq8PoMx3xIH1z2Zd9EXP
-	sEElO2gPe9drK7lthN+NXTIlZvu0/hxLVF3lpxHlO0iqdxHGwtZXf4hmuI/y
-X-Google-Smtp-Source: AGHT+IEx2p8AKC3cfnzmKsNz57P0IBOfJOo0g3bdIT/ULd1fSgVu6YwBF/uqFpnkzII7mjvi3elizA==
-X-Received: by 2002:a05:6a00:180a:b0:71d:fc85:aa2e with SMTP id d2e1a72fcca58-71dfc85abdamr787428b3a.8.1728143789693;
-        Sat, 05 Oct 2024 08:56:29 -0700 (PDT)
+        bh=CrOnXMI8cGE6PYln/7X3YCrztZJMND6/pmc4UVh48X4=;
+        b=OEzLjjmseCtrtodcGz2ABhz44mkZl4dASNFRpN8gBeqwKA5nRTOnB45vWxR3S8hSF6
+         +Yy771c+rlJ9qis/Nzq4d/QoAnImGkjKAAYCc0DQ1zaTX+F/UHZSE3G8Nl+j6msvyP2U
+         FivQjkSVsFzGSqtIjINyUfQ1lX8UV3iuPiJl860WtP+pt0GFExNe62l1QV9HoLQOd6kU
+         N/cHMEs2jbDiYGQyEUaJGi5JtF8akfoLQR+FlEnHGnI50FyPl+sIDAj4gYGJuNneHh2g
+         pJcm2ghxBvq3rc5nJGOUwq2sSyK5g5ThOgqfd5DE70wgiKO62XBakITIiU0vL8iJ/1E1
+         yrgw==
+X-Gm-Message-State: AOJu0YyMEIYTcNot57D0JhXxqBwdgZeynyKkHPbXaYI337laAJnvsvrs
+	mcnMf4fnSfOSR6h5VDiycQv3FSJiYCpXFysYcC5vCSKsaBb5dX7C0h/NTo/N
+X-Google-Smtp-Source: AGHT+IHSA0jb/tw9oW4bGO0FjxGRkl98IsSv65iHZm0Tt0Y0v3ZXE1iXpyCu4o0wwkto2VRtFSxGqw==
+X-Received: by 2002:a05:6a20:cd8f:b0:1cf:337e:9920 with SMTP id adf61e73a8af0-1d6dfae63dfmr10351748637.47.1728146226425;
+        Sat, 05 Oct 2024 09:37:06 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::23dc])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-71df0cbba2bsm1629396b3a.41.2024.10.05.08.56.28
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-7e9f6c3758esm1934754a12.74.2024.10.05.09.37.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 05 Oct 2024 08:56:29 -0700 (PDT)
+        Sat, 05 Oct 2024 09:37:06 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-filesystems][PATCH 1/2] sshfs-fuse: Add rdep on python3-compile for ptests
-Date: Sat,  5 Oct 2024 08:56:26 -0700
-Message-ID: <20241005155627.2558421-1-raj.khem@gmail.com>
+Subject: [meta-filesystems][PATCH] sshfs-fuse: Do not prompt for known_hosts during ptests
+Date: Sat,  5 Oct 2024 09:37:04 -0700
+Message-ID: <20241005163704.2594867-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.46.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 05 Oct 2024 15:56:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112674
+ <openembedded-devel@lists.openembedded.org>; Sat, 05 Oct 2024 16:37:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112676
+
+ptest runs are non-interactive, therefore ignore
+adding to known_hosts on localhost
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb         | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../sshfs-fuse/sshfs-fuse/run-ptest                    | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb
-index fd5af0b026..569c7f6901 100644
---- a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb
-+++ b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb
-@@ -17,8 +17,9 @@ inherit meson pkgconfig ptest
- SRC_URI += " \
- 	file://run-ptest \
- "
+diff --git a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/run-ptest b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/run-ptest
+index 8d2017d39c..5aab54d5b5 100644
+--- a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/run-ptest
++++ b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/run-ptest
+@@ -1,3 +1,11 @@
+ #!/bin/sh
 -
-+#python3-compile for filecmp module
- RDEPENDS:${PN}-ptest += " \
-+        python3-compile \
-         python3-pytest \
-         python3-unittest-automake-output \
-         bash \
++mkdir -p ~/.ssh
++cat > ~/.ssh/config << EOF
++Host *
++  CheckHostIP no
++  StrictHostKeyChecking no
++  UserKnownHostsFile=/dev/null
++EOF
+ pytest --automake
++
++rm -rf ~/.ssh/config
 
