@@ -1,90 +1,186 @@
-Return-Path: <dbaryshkov@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F62CCFB43F
-	for <webhook@archiver.kernel.org>; Sun,  6 Oct 2024 15:19:36 +0000 (UTC)
-Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
- by mx.groups.io with SMTP id smtpd.web11.32857.1728227972747438215
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B230CFB424
+	for <webhook@archiver.kernel.org>; Sun,  6 Oct 2024 16:07:16 +0000 (UTC)
+Received: from mail-oo1-f52.google.com (mail-oo1-f52.google.com [209.85.161.52])
+ by mx.groups.io with SMTP id smtpd.web10.33642.1728230835475936024
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 06 Oct 2024 08:19:33 -0700
+ Sun, 06 Oct 2024 09:07:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=JyXXSKm8;
- spf=pass (domain: linaro.org, ip: 209.85.167.54, mailfrom: dmitry.baryshkov@linaro.org)
-Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5369f1c7cb8so3815531e87.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 06 Oct 2024 08:19:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=H2qjpAQG;
+ spf=pass (domain: gmail.com, ip: 209.85.161.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f52.google.com with SMTP id 006d021491bc7-5e7e14594f9so616927eaf.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 06 Oct 2024 09:07:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1728227971; x=1728832771; darn=lists.openembedded.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=io+5jTDi8kpDbXrvJgzkFa77nCvb3XieffMhmGPZQ3k=;
-        b=JyXXSKm8MrPLoWyDAGq62WN7wS3L/dK82F+23tCXZ8nKaViRlJmINwCJccAz27Uw+R
-         Jscxsn1lhbVBRWfDn2qsRKSiIFDKoSIGMER8QPz569ETxIjkRdvJXoT4sG817lz5Ez0g
-         qdzcH1QEEk604xB8t0EYrOHVbIGBgejzuVWPsDIMvSwOKZd14E4/w+VTIqapom3rV4B5
-         /uy95yd9lKvUpLe2XKMyOPJ+3kOSYuf3vNFww4+tqgfYDDMxEaN4A4qbVjdYc3ehHWx8
-         XAR6somaYVolBB0sgwOs/aWMTqxydhYXba7xsM/N0auWBubojsDMB9u0+5jfG31s8wLn
-         QYzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728227971; x=1728832771;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1728230835; x=1728835635; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=io+5jTDi8kpDbXrvJgzkFa77nCvb3XieffMhmGPZQ3k=;
-        b=trBXMTcKbWW4NIEsNEazkCp3a+qDQo6wqtlWxehFlij6qqNJ8kRboWXw1Ib3KexPsu
-         OUR2uqu0KXU2cLYXotWnpzkd7/NFEOiE/iTiPke/MVbYrhKlY5APtRSft/u3qDtc0Jaj
-         EDahuncK67lt1PjxN+pLLrFkr/a9jLCw2Rdo/x15tANxQOOYdpACe6KltkvIYUNvEMpt
-         Oi4W6SFPvF24wNM3g+Ze+DANVLcn3Q+MGqtOo2l/xFmR1pywRX0LXLldtv61RG63+ClD
-         0xEv9SoiAQsKdTntzXvlyKu18Dgw/Y7aKL9AvEtSAIfXP7QAI7tnDxJ6vlECrTJ63VGm
-         jTKw==
-X-Gm-Message-State: AOJu0YxYG2f+GbeiEasUBjKaFHxdhBqLKRNsv97a+ljvwudQqyPVq8Xd
-	7TQMmeLp2AHp151lbEZTo/3phrvt+Nlz2UU8+aBt2tWjVNqBqLsBLiqlsDpe9Sk=
-X-Google-Smtp-Source: AGHT+IHYpXL3m30V8bty4hUXAYuc/++CYGTimNffhaE1bUcGXsJ5+7+HY4bTAfH4r4R7+oDf+4CR4A==
-X-Received: by 2002:a05:6512:39c5:b0:535:6cbf:51a3 with SMTP id 2adb3069b0e04-539ab88a017mr4892192e87.25.1728227970670;
-        Sun, 06 Oct 2024 08:19:30 -0700 (PDT)
-Received: from eriador.lumag.spb.ru (2001-14ba-a0c3-3a00-89ea-67f6-92cd-b49.rev.dnainternet.fi. [2001:14ba:a0c3:3a00:89ea:67f6:92cd:b49])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-539afec0f75sm543012e87.11.2024.10.06.08.19.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 06 Oct 2024 08:19:29 -0700 (PDT)
-Date: Sun, 6 Oct 2024 18:19:26 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-To: Raghuvarya S <quic_raghuvar@quicinc.com>,
-	Armin Kuster <akuster808@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org,
-	Khem Raj <raj.khem@gmail.com>
-Subject: Re: [meta-oe][scarthgap][PATCH 1/3] android-tools-adbd.service:
- Update ConditionPathExists to /etc
-Message-ID: <ZwKqfttwAQ-AhX74@eriador.lumag.spb.ru>
-References: <20240924063229.2309109-1-quic_raghuvar@quicinc.com>
+        bh=xuiwp5LnNvtw0ign96JTy50qCglwGWZv6uVuhB8JLaw=;
+        b=H2qjpAQGgBYVXc5xniAYaSiZqM9hJPs79SO2AuPFwrxB7Ss4xupauTiCDrbYw9RuAY
+         A/3PsaqnBFc/u7i9GPZG+GjSaSPAZwXM0gcUzKnxHrN1ul+8iig9yW3W/CudvXOgAp46
+         aJa335IeywmqXCuwWhQHw0kHCMloRITFpNPQm3/9kf0EuR/my/X1n0oQx0pSvLw/Bi60
+         2XIuZ1NifoHE7tWiY+U+I8lXnSBI5zdmKQmgb6ZSRwdznoIpwiRrPOSMbKIqZG0F6TWK
+         t1xDZLlLnAFF9s2W/xPQD1admFLq4ZI6ATjw0yA50MPjuK8cl9PEaBdR7/Ikod5Ne7dg
+         Guyw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1728230835; x=1728835635;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=xuiwp5LnNvtw0ign96JTy50qCglwGWZv6uVuhB8JLaw=;
+        b=BPkcacMe8FzD3LQIz2MemaEGNa+aA5N5ivrcc84y8gEtr895dX8crbHMHg2qLBS/9N
+         GLFwxtfEdHUJIofjWx45diFnwKSh0qUk/vF1fY4mvELmIXxsklzx0jA8BpWGxXWTmcAO
+         K79w6g3/8CuTVJlC63waeAVu0Hi6OvTi4O4PiPR4sJF8/xF9nQmAcHGQxuos2hzwzxR/
+         XMq18SIpkr7zCvd18xDECMchNYDh0/mGtX/tnQrZ1ppf0TnmqEjR+1p8CS5UzFM9Ntee
+         q0OQpaDBjsdTsNpDbGfibzzhGhMeQrGBX14BPBxPT20AcNt3FEfZ53k4OZyPY0h5/8ON
+         uH2w==
+X-Forwarded-Encrypted: i=1; AJvYcCX3U4wgH8BRTrH5ZjMiRIQT8UUARgFNtfDrvIuIX5fsSaoi46Gh53xtw+TfD7LEKLCalq0HroyNCH+5CPmubqtMkw0=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yx04VC7XGDHcP3m/1/+uJXPQE6xjqi+bIFsxtvOI4g211ik+j3N
+	bcMS58WNIR5+KeCoovnd3txIdqR8dEaZc5OT+SbAbnVwgvw4HaMJFyBJ1LTVk3Lqo2s0SzWhb0z
+	H/0dElNE9eh63j2VKotDRt7aG7822l4JIDNw=
+X-Google-Smtp-Source: AGHT+IEdRVsSw3x0D1T00rg38AnK4C9MU8Er5+WcMAICVmn3STrmWdNs3NARuKxZV5hq4amzIGzzsnp4wji0HMM+HlI=
+X-Received: by 2002:a05:6870:1f0c:b0:261:44d:3b86 with SMTP id
+ 586e51a60fabf-287c1e15af9mr5007227fac.23.1728230834594; Sun, 06 Oct 2024
+ 09:07:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240924063229.2309109-1-quic_raghuvar@quicinc.com>
+References: <20240925144556.1451584-1-dmitry.baryshkov@linaro.org>
+ <CAB2nKc_d33JRj7kLQju6SdB9OnnE37E82baQoj2nVPirsqnFOQ@mail.gmail.com>
+ <CANPvuR=PVPxLbXD13WQ3YDxEFCtMGrEZv0ng1JkHS=FK5FPT_Q@mail.gmail.com> <CALT56yOAdVUp-kfK2-sy=4-x2zeKk1D9qyeO++5qJfWOw5Zcng@mail.gmail.com>
+In-Reply-To: <CALT56yOAdVUp-kfK2-sy=4-x2zeKk1D9qyeO++5qJfWOw5Zcng@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 6 Oct 2024 09:06:48 -0700
+Message-ID: <CAMKF1sri+95bnhqVmsCG+bnukQ--jPrOXoH9CQdynCBQBbtkCg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][scarthgap][PATCH] libdevmapper: Inherit nopackages
+To: Dmitry Baryshkov <dbaryshkov@gmail.com>
+Cc: Jose Quaresma <quaresma.jose@gmail.com>, Armin Kuster <akuster808@gmail.com>, 
+	vincent.prince.fr@gmail.com, openembedded-devel@lists.openembedded.org, 
+	Peter Kjellerstedt <pkj@axis.com>, Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 06 Oct 2024 15:19:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112681
+ <openembedded-devel@lists.openembedded.org>; Sun, 06 Oct 2024 16:07:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112682
 
-On Tue, Sep 24, 2024 at 12:02:28PM +0530, Raghuvarya S wrote:
-> To ensure android-tools-adbd.service starts at boot, the path
-> for ConditionPathExists must be present at build time. /etc is
-> more suitable for build-time files than /var, which is for
-> runtime files. Changed ConditionPathExists from
-> /var/usb-debugging-enabled to /etc/usb-debugging-enabled
-> 
-> Backport-of: 8106cfe769aa ("android-tools-adbd.service: Change /var to /etc in ConditionPathExists")
-> CC: Khem Raj <raj.khem@gmail.com>
-> CC: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-> Signed-off-by: Raghuvarya S <quic_raghuvar@quicinc.com>
-> ---
->  .../android-tools/android-tools/android-tools-adbd.service      | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+Usually there is a monthly update to stable branches that Armin
+prepares over the month in stable/<release>-nut branch on
+meta-openembedded-contrib repo e.g. for scarthgap
 
-Armin, Khem, what is the plan with respect to this backport request?
-Could you please clarify, is there anything remaining on the Qualcomm's
-side? Is it rejected for backporting to stable branches?
+https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Dstable/scar=
+thgap-nut
 
--- 
-With best wishes
-Dmitry
+I do see this patch staged there, so it will be in the next point
+release in October.
+
+
+On Sun, Oct 6, 2024 at 8:15=E2=80=AFAM Dmitry Baryshkov <dbaryshkov@gmail.c=
+om> wrote:
+>
+> Hello,
+>
+> On Thu, 26 Sept 2024 at 12:13, Jose Quaresma <quaresma.jose@gmail.com> wr=
+ote:
+> >
+> >
+> >
+> > Vincent Prince via lists.openembedded.org <vincent.prince.fr=3Dgmail.co=
+m@lists.openembedded.org> escreveu (quinta, 26/09/2024 =C3=A0(s) 10:49):
+> >>
+> >> Hello all,
+> >>
+> >> Any update on this backport patch? :)
+> >
+> >
+> > The patch is not yet on the staging tree but I believe it will be there=
+ soon.
+> > https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Dstable/=
+scarthgap-nut
+> >
+> > but yes, this should be a priority given that the scarthgap recipe is b=
+roken.
+>
+> And it still hasn't been merged. Armin, Khem, is there anything
+> delaying the patch from being applied?
+>
+> >
+> > Jose
+> >
+> >>
+> >>
+> >> Best regards,
+> >> Vincent
+> >>
+> >> Le mer. 25 sept. 2024 =C3=A0 16:46, Dmitry Baryshkov via
+> >> lists.openembedded.org <dbaryshkov=3Dgmail.com@lists.openembedded.org>=
+ a
+> >> =C3=A9crit :
+> >> >
+> >> > From: Peter Kjellerstedt <pkj@axis.com>
+> >> >
+> >> > This fixes errors from buildhistory changes where packages-split wou=
+ld
+> >> > be empty.
+> >> >
+> >> > Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+> >> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> >> > (cherry picked from commit 90f96e053ad3eefa7693d9748efdfbfa72d7dcfd)
+> >> > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+> >> > ---
+> >> >
+> >> > The oe-core got commit c9e2a8fa2f03 ("buildhistory: Simplify interce=
+pt
+> >> > call sites and drop SSTATEPOSTINSTFUNC usage") backported to the
+> >> > scarthgap branch. Backport the fix for libdevmapper too.
+> >> >
+> >> > ---
+> >> >  meta-oe/recipes-support/lvm2/libdevmapper_2.03.22.bb | 2 ++
+> >> >  1 file changed, 2 insertions(+)
+> >> >
+> >> > diff --git a/meta-oe/recipes-support/lvm2/libdevmapper_2.03.22.bb b/=
+meta-oe/recipes-support/lvm2/libdevmapper_2.03.22.bb
+> >> > index be558ce1d218..3b4439c3ae06 100644
+> >> > --- a/meta-oe/recipes-support/lvm2/libdevmapper_2.03.22.bb
+> >> > +++ b/meta-oe/recipes-support/lvm2/libdevmapper_2.03.22.bb
+> >> > @@ -5,6 +5,8 @@ require lvm2.inc
+> >> >
+> >> >  DEPENDS +=3D "autoconf-archive-native"
+> >> >
+> >> > +inherit nopackages
+> >> > +
+> >> >  TARGET_CC_ARCH +=3D "${LDFLAGS}"
+> >> >
+> >> >  do_install() {
+> >> > --
+> >> > 2.39.5
+> >> >
+> >> >
+> >> >
+> >> >
+> >>
+> >> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >> Links: You receive all messages sent to this group.
+> >> View/Reply Online (#112515): https://lists.openembedded.org/g/openembe=
+dded-devel/message/112515
+> >> Mute This Topic: https://lists.openembedded.org/mt/108648856/5052612
+> >> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> >> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub=
+ [quaresma.jose@gmail.com]
+> >> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >>
+> >
+> >
+> > --
+> > Best regards,
+> >
+> > Jos=C3=A9 Quaresma
+>
+>
+>
+> --
+> With best wishes
+> Dmitry
 
