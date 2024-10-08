@@ -1,84 +1,89 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AEF6CF0427
-	for <webhook@archiver.kernel.org>; Tue,  8 Oct 2024 21:38:54 +0000 (UTC)
-Received: from mta-64-228.siemens.flowmailer.net (mta-64-228.siemens.flowmailer.net [185.136.64.228])
- by mx.groups.io with SMTP id smtpd.web11.971.1728423533484956912
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 71369CF0428
+	for <webhook@archiver.kernel.org>; Tue,  8 Oct 2024 21:59:24 +0000 (UTC)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.web10.1351.1728424756825002564
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Oct 2024 14:38:54 -0700
+ Tue, 08 Oct 2024 14:59:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=QOnWTReq;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-256628-202410082138490aab98a2660b04faf0-dzp4uy@rts-flowmailer.siemens.com)
-Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 202410082138490aab98a2660b04faf0
-        for <openembedded-devel@lists.openembedded.org>;
-        Tue, 08 Oct 2024 23:38:50 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=gm3ZcK9r1xGZTFKGAxk2k85s92MCLN2+Av9Svq3SaQA=;
- b=QOnWTReqnwVJcKDEozqNXdNL9D4k74PDEJhM4Y/nJ0vGUk4GurRxqoZCnIVglwcacCtVOt
- arUcy9LQiVMt5c8w9IZ+7q7x63TMXSyZCAebQ6FwL2Gn7zFDXJekim7UQCLBpiCWn+RpUpbk
- cRGvkn1c0jHhdgPJwTDnIErNswoFjXkP9VXNnoccOQpBE7BXOGUvSTokxBAKulGsV1x5NBQD
- pgNRv7M7GutKa81iCaNxkqSAeNYzQkqLcV1G5eLfUI1rtOqxq8cPrvMk/tbtc5q1yjQzUtZA
- /rj5LWpoY/H7kpaAuD1Zc4bULj8LpgYhTUBJ2/WZbRVbkSusD6tYHMIg==;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=pass header.i=@smile.fr header.s=google header.b=yMWyBejo;
+ spf=pass (domain: smile.fr, ip: 209.85.128.52, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4305724c12eso6196285e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Oct 2024 14:59:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=smile.fr; s=google; t=1728424755; x=1729029555; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=uKdTlY+KOR4i98m0kId6L673KYffGycFn0i+NBeAEOU=;
+        b=yMWyBejo2PytFVJbYtFu9xRHbS8iAIqxIzAc1S3sFipfli1f1AMOKZz2eYSsytH6Rc
+         wfPrAZPxPSvrn+IcaO6Mab1O4bZ6hSkn3CmjJ+9k83sAZMPjtw9s4tmU8gX+HdyjfZ98
+         0fQgLY6ex7DQvnppT+DAOV9JCkOz49qk7vEFE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1728424755; x=1729029555;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=uKdTlY+KOR4i98m0kId6L673KYffGycFn0i+NBeAEOU=;
+        b=WOKamUzOlcBwwTBWsxcrGD0Cor0cgemeUcfG2zOIFXz5Ux4tu8voGhL+Y35iDJvwkm
+         cNOusVQZjqnMwPMvXaoAClLVv/IjAAqWzqWBmHyi+z2p7m/RayH3raTO+AJZHQhx49q9
+         7MZFzIDvRAdax60LCAI1S2aP1XXn3i8Ajkd/Ral8L6FkxpEGicCtqXFrEOrUt+45j1f9
+         cZqPtzrK6gepgKbO/vZ1vtCBbHEwKAc+ZmtuUmZtB0gv59ZfC1vaGFULbLYhYr/IT2I0
+         b3FQdGkdXvRMEpUK4GJqN+gcox01ci0n+pX1Lx6LjzLM4EPfdze/ulUBWiKt9JmjrY/9
+         qn0Q==
+X-Gm-Message-State: AOJu0YyPwuFvbzA64vpZszAoLhcX0dY5ENxyxFSMaRU+/fYgYp8PrLRT
+	MrS9zwkt9SNmGy6rQvxHo/fsGRQoqSAwsERApZIalyMZYJdGYx+KZV3zgUSEmDWWnKnbkxOPxHB
+	N
+X-Google-Smtp-Source: AGHT+IHu57YgdbprShKRmjjWXpk98VQLCTbDr0B0vNgfNpXQa7OsMNNoobWKiayEODuHs/SGJbuDhw==
+X-Received: by 2002:a05:600c:3b19:b0:42c:a7cc:cb64 with SMTP id 5b1f17b1804b1-430ccf1b0c0mr1080515e9.3.1728424754645;
+        Tue, 08 Oct 2024 14:59:14 -0700 (PDT)
+Received: from P-ASN-ECS-830T8C3.local (53.1.159.89.rev.sfr.net. [89.159.1.53])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-37d1691ba45sm8925722f8f.44.2024.10.08.14.59.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 08 Oct 2024 14:59:14 -0700 (PDT)
+From: Yoann Congal <yoann.congal@smile.fr>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>,
-	Wang Mingyu <wangmy@fujitsu.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Armin Kuster <akuster808@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH] cjson: upgrade 1.7.17 -> 1.7.18
-Date: Tue,  8 Oct 2024 23:36:09 +0200
-Message-Id: <20241008213609.224824-1-peter.marko@siemens.com>
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-oe][PATCH] wtmpdb: fix installed-vs-shipped build error
+Date: Tue,  8 Oct 2024 23:58:55 +0200
+Message-Id: <20241008215855.1242951-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Oct 2024 21:38:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112720
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Oct 2024 21:59:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112721
 
-From: Peter Marko <peter.marko@siemens.com>
+From: Yoann Congal <yoann.congal@smile.fr>
 
-Changelog:
-============
-* Add NULL check to cJSON_SetValuestring()(CVE-2024-31755)
-* Remove non-functional list handling of compiler flags
-* Fix heap buffer overflow
-* remove misused optimization flag -01
-* Set free'd pointers to NULL whenever they are not reassigned immediately after
+wtmpdb installs a PAM plugin in "${base_libdir}/security/pam_wtmpdb.so".
+This path is not in default FILES.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(From meta-openembedded rev: 535822eff7647b6363225bb8f04d2d7d59a71204)
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Add this path to FILES:${PN} to fix this error:
+  ERROR: wtmpdb-0.11.0-r0 do_package: QA Issue: wtmpdb: Files/directories were installed but not shipped in any package:
+    /lib/security/pam_wtmpdb.so
+  Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+  wtmpdb: 1 installed and not shipped files. [installed-vs-shipped]
+  ERROR: wtmpdb-0.11.0-r0 do_package: Fatal QA errors were found, failing task.
+  ERROR: Logfile of failure stored in: .../poky/build-master/tmp/work/core2-64-poky-linux/wtmpdb/0.11.0/temp/log.do_package.939726
+  ERROR: Task (.../poky/meta-openembedded/meta-oe/recipes-extended/wtmpdb/wtmpdb_0.11.0.bb:do_package) failed with exit code '1'
+
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 ---
- .../recipes-devtools/cjson/{cjson_1.7.17.bb => cjson_1.7.18.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/cjson/{cjson_1.7.17.bb => cjson_1.7.18.bb} (91%)
+ meta-oe/recipes-extended/wtmpdb/wtmpdb_0.11.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-devtools/cjson/cjson_1.7.17.bb b/meta-oe/recipes-devtools/cjson/cjson_1.7.18.bb
-similarity index 91%
-rename from meta-oe/recipes-devtools/cjson/cjson_1.7.17.bb
-rename to meta-oe/recipes-devtools/cjson/cjson_1.7.18.bb
-index c9c38a9fe3..797ab028cd 100644
---- a/meta-oe/recipes-devtools/cjson/cjson_1.7.17.bb
-+++ b/meta-oe/recipes-devtools/cjson/cjson_1.7.18.bb
-@@ -6,7 +6,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=218947f77e8cb8e2fa02918dc41c50d0"
- 
- SRC_URI = "git://github.com/DaveGamble/cJSON.git;branch=master;protocol=https"
--SRCREV = "87d8f0961a01bf09bef98ff89bae9fdec42181ee"
-+SRCREV = "acc76239bee01d8e9c858ae2cab296704e52d916"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.30.2
-
+diff --git a/meta-oe/recipes-extended/wtmpdb/wtmpdb_0.11.0.bb b/meta-oe/recipes-extended/wtmpdb/wtmpdb_0.11.0.bb
+index 7fb31f208b..d4a8b49e1d 100644
+--- a/meta-oe/recipes-extended/wtmpdb/wtmpdb_0.11.0.bb
++++ b/meta-oe/recipes-extended/wtmpdb/wtmpdb_0.11.0.bb
+@@ -33,3 +33,4 @@ do_install:append () {
+ FILES:${PN} += " ${systemd_system_unitdir} "
+ FILES:${PN} += " ${libdir} "
+ FILES:${PN} += " ${nonarch_libdir}/tmpfiles.d/* "
++FILES:${PN} += " ${base_libdir}/security/*.so "
 
