@@ -2,54 +2,54 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B6AECEDD8F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C859CEDD90
 	for <webhook@archiver.kernel.org>; Wed,  9 Oct 2024 12:30:20 +0000 (UTC)
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
- by mx.groups.io with SMTP id smtpd.web10.15042.1728477018161492840
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+ by mx.groups.io with SMTP id smtpd.web11.15105.1728477019211358378
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Oct 2024 05:30:18 -0700
+ Wed, 09 Oct 2024 05:30:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=jez7rLoM;
- spf=pass (domain: konsulko.com, ip: 209.85.208.44, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-5c903f5bd0eso3427376a12.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Oct 2024 05:30:17 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=WP7LUe99;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.54, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-37cd26c6dd1so6367111f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Oct 2024 05:30:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1728477016; x=1729081816; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1728477017; x=1729081817; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=6JvBEMWLgBdnCaAbd7mNbZHk30HiQfRK+KYcXIsIQvw=;
-        b=jez7rLoMF/HcAdWFp+rEEOqDaBIaSqsrVU+nz8pe4bZr4xZGjZBAW65cyBsqwCaHs3
-         SkuWyejf9gJwCtD3IgTppKi8+D8NALKGj+GxJrVvQRaO4jt5kBdECCv5odqRdW9B6s+u
-         Z6x+izeOZUT5MbA+XRLsaIyGf+6EdVoMaUtxU=
+        bh=CiN9oIK8brmBuarzy7+nxjaLnCQofGs5Rj7o92HCHlg=;
+        b=WP7LUe99XQzGFMxtDhnvpb+9nuKLl1/EA+zBIUIj0cjngiMjvSP60E+KjLpTUcGdn9
+         i6WqsWBd3H1pQEjJYW6nl/fLkIAqETO1tKiFMTkuaNxeL+fgS9t6vi8j7vp2Dv7zV1st
+         lWklWm6305PleGYHUhFrEUnTWI4SqPkYhb0/A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728477016; x=1729081816;
+        d=1e100.net; s=20230601; t=1728477017; x=1729081817;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=6JvBEMWLgBdnCaAbd7mNbZHk30HiQfRK+KYcXIsIQvw=;
-        b=M9JcoDYOc1ayDfmA8Zq9qGaYSQaodufeQV+3r81QXjJORVbCrzb8wAdt/GNlvw6Jaf
-         2vbnbnWvwSdpeyhF+EuWFXmRKHDWnqgpyZ3gQfweMTnb23QTvilkHU0AT2aQpBbur4mk
-         Di9eB+KW5/9YMqXUMdt4pLyvE4CJKS6zlcbpTlbDuJm6LpYR7yrM0a9yaoWpT2+63vF/
-         XocmhefUdAizTEzsmf/IK9PTaKIMYrI9YSeCH5sD75E2jdjFgxzxe8uHJcAJOjDfyl1o
-         JOSAuCl/VuZgqBoOOFOzW3SEdn54nO6sxzfJC1/X26HyxTGdH5HuixcnHj2A7Q/PsRUT
-         Psjw==
-X-Gm-Message-State: AOJu0YwWIXWhr/3FidLtDOu+V+jP0ydnvdnRPFtWmUo02LeiDxNdh9OA
-	bda6MemKXKOIVZbhWt1XaTYZS+p7BzLGcaUmPo81ETre5QJrYT1Nepu6o99+PYGfEdJmPIRKqFQ
-	f
-X-Google-Smtp-Source: AGHT+IFCGQx0QgJ1Si/3++s5MBeUPTLoE/GK6kZ4DZ48mQ7dyfF0LUpjjyEJONrLtT+1TNY3uQIKqA==
-X-Received: by 2002:a17:906:c113:b0:a99:5541:e172 with SMTP id a640c23a62f3a-a998d19f928mr204232366b.21.1728477016220;
-        Wed, 09 Oct 2024 05:30:16 -0700 (PDT)
+        bh=CiN9oIK8brmBuarzy7+nxjaLnCQofGs5Rj7o92HCHlg=;
+        b=Pa4WcpNRxd9cjYkmGKNAJkGP6vHS8sZtdO8Tu/s5n2JxfaCoKTti+r1BVq/jWtMhK/
+         lNoiGn48HT57p7C6+4US/QPYECz0Qz1XFRsANpWPQ5nZMQR9ioqztMYnNnuErzl13u2Z
+         TnBx9/uvALAW6ooIWzdWWuVAPi7HDEzLnHdIMUeYO/npV+U7Pq1BwYsVuKPBdJP1ZKqN
+         6i2zVT8msS0ljVZlwPFe8MYLPKZ9zQyoe/qliHca6SOvPblosE4tBEq5y1qks9Yrgr79
+         WW0CgtMidPF+37aeeKXuDrLZk74bub7vA5gpjHbRL2qooi4tjiV2UMyFkzTQmiyH3Pp9
+         EbUw==
+X-Gm-Message-State: AOJu0Ywpa8CSSvz15MzstG/4MjWYyrAEiwtAxBA1jKEqN16yo3qlSr2B
+	JCCFFbH1X4QwyU8yo0Xd3epOC8BGB5J44rCqaFomV6420mHGK0pb/6RLTuVPsAwtQKrefxV2BXX
+	y
+X-Google-Smtp-Source: AGHT+IGsE1dzwL4lWeW3sv+M/6R76zBIq84LKJSo5KuP8loVg7nC7aIBZzy4UHuyO5CV6Sk5YxI6Lg==
+X-Received: by 2002:a05:6000:12d0:b0:37d:37a6:f4e3 with SMTP id ffacd0b85a97d-37d3aa41f7fmr1800987f8f.23.1728477017336;
+        Wed, 09 Oct 2024 05:30:17 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a9944c6d6basm543582266b.145.2024.10.09.05.30.15
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a9944c6d6basm543582266b.145.2024.10.09.05.30.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Oct 2024 05:30:15 -0700 (PDT)
+        Wed, 09 Oct 2024 05:30:16 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-yarl: Upgrade 1.13.1 -> 1.14.0
-Date: Wed,  9 Oct 2024 15:30:06 +0300
-Message-Id: <20241009123007.1023153-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-pymodbus: Upgrade 3.7.2 -> 3.7.3
+Date: Wed,  9 Oct 2024 15:30:07 +0300
+Message-Id: <20241009123007.1023153-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241009123007.1023153-1-leon.anavi@konsulko.com>
 References: <20241009123007.1023153-1-leon.anavi@konsulko.com>
@@ -59,50 +59,67 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 09 Oct 2024 12:30:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112730
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112731
 
-Upgrade to release 1.14.0:
+Upgrade to version 3.7.3:
 
-- Switched to using the :mod:`propcache <propcache.api>` package
-  for property caching
-- Started testing with Hypothesis
-- Improved performance of :py:meth:`~yarl.URL.is_default_port` when
-  no explicit port is set
-- Improved performance of converting :class:`~yarl.URL` to a string
-  when no explicit port is set
-- Improved performance of the :py:meth:`~yarl.URL.origin` method
-- Improved performance of encoding hosts
+- 100% test coverage of framers
+- Framer, final touches
+- Readme file renamed
+- Remove old framers
+- frameProcessIncomingPacket removed
+- Cleanup framers (reduce old_framers)
+- Run CI on PR targeted at wait_next_api
+- Sync client, allow unknown recv msg size
+- integrate old rtu framer in new framer
+- Update README.rst
+- Client.close should not allow reconnect=
+- Remove async client.idle_time()
+- Client doc, add common methods (base)
+- Reset receive buffer with send()
+- Remove unused protocol_id from pdu
+- CI run on demand on non-protected branches
+- Server listener and client connections have is_server set
+- Reopen listener in server if disconnected
+- Regroup test
+- Improve docs around sync clients and reconnection
+- transport 100% test coverage (again)
+- Update actions to new node.js
+- Bump 3rd party
+- Documentation on_connect_callback
+- Fixes the unexpected implementation of the
+  ModbusSerialClient.connected property
+- Forward error responses instead of timing out
+- Add stacklevel=2 to logging functions
+- Fix encoding & decoding of ReadFileRecordResponse
+- Improvements for example/contib/solar
+- Update solar.py
+- Remove double conversion in int
+- fixed type hints for write_register and write_registers
+- Remove _header from framers
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-yarl_1.13.1.bb => python3-yarl_1.14.0.bb}  | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-yarl_1.13.1.bb => python3-yarl_1.14.0.bb} (86%)
+ .../{python3-pymodbus_3.7.2.bb => python3-pymodbus_3.7.3.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pymodbus_3.7.2.bb => python3-pymodbus_3.7.3.bb} (90%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-yarl_1.13.1.bb b/meta-python/recipes-devtools/python/python3-yarl_1.14.0.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-yarl_1.13.1.bb
-rename to meta-python/recipes-devtools/python/python3-yarl_1.14.0.bb
-index 16708fd1f..a7406dfb8 100644
---- a/meta-python/recipes-devtools/python/python3-yarl_1.13.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-yarl_1.14.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/aio-libs/yarl/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-python/recipes-devtools/python/python3-pymodbus_3.7.2.bb b/meta-python/recipes-devtools/python/python3-pymodbus_3.7.3.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-pymodbus_3.7.2.bb
+rename to meta-python/recipes-devtools/python/python3-pymodbus_3.7.3.bb
+index b240837d4..9e4c80ebf 100644
+--- a/meta-python/recipes-devtools/python/python3-pymodbus_3.7.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pymodbus_3.7.3.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/riptideio/pymodbus/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=eba8057aa82c058d2042b4b0a0e9cc63"
  
--SRC_URI[sha256sum] = "ec8cfe2295f3e5e44c51f57272afbd69414ae629ec7c6b27f5a410efc78b70a0"
-+SRC_URI[sha256sum] = "88c7d9d58aab0724b979ab5617330acb1c7030b79379c8138c1c8c94e121d1b3"
+-SRC_URI[sha256sum] = "6cc63a14c8cca83f5b6d9dae3319565061bd49503ee7282df681201c16357eef"
++SRC_URI[sha256sum] = "603490162382fe34258992e3b8fe8d2da573a08aa49257ee7ab7b5b1d1a6653c"
  
- SRC_URI += "file://run-ptest"
+ inherit pypi python_setuptools_build_meta
  
-@@ -20,6 +20,7 @@ RDEPENDS:${PN} = "\
-     python3-multidict \
-     python3-idna \
-     python3-io \
-+    python3-propcache \
- "
- 
- RDEPENDS:${PN}-ptest += " \
 -- 
 2.39.5
 
