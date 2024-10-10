@@ -1,78 +1,126 @@
-Return-Path: <mingli.yu@eng.windriver.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 69491CF07B5
-	for <webhook@archiver.kernel.org>; Thu, 10 Oct 2024 06:36:07 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.37417.1728542157668313101
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A9A6FCF07B8
+	for <webhook@archiver.kernel.org>; Thu, 10 Oct 2024 07:02:37 +0000 (UTC)
+Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
+ by mx.groups.io with SMTP id smtpd.web10.37642.1728543752839247884
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Oct 2024 23:35:57 -0700
+ Thu, 10 Oct 2024 00:02:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=0013aa6c8c=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49A4opC8031536
-	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Oct 2024 06:35:57 GMT
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 422ve8wcb6-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Oct 2024 06:35:56 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Wed, 9 Oct 2024 23:35:55 -0700
-Received: from pek-lpg-core4.wrs.com (128.224.153.44) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.39 via Frontend Transport; Wed, 9 Oct 2024 23:35:55 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH v2 2/2] ptest-packagelists-meta-oe.inc: Add asio
-Date: Thu, 10 Oct 2024 14:35:53 +0800
-Message-ID: <20241010063553.2075150-2-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241010063553.2075150-1-mingli.yu@windriver.com>
-References: <20241010063553.2075150-1-mingli.yu@windriver.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
+Received: from fwd84.aul.t-online.de (fwd84.aul.t-online.de [10.223.144.110])
+	by mailout02.t-online.de (Postfix) with SMTP id 4245C26998
+	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Oct 2024 09:02:01 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.163.43.30]) by fwd84.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1synBN-1TSxcH0; Thu, 10 Oct 2024 09:01:58 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] cryptsetup: fix udev PACKAGECONFIG
+Date: Thu, 10 Oct 2024 09:03:54 +0200
+Message-ID: <20241010070354.938649-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.46.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=CPp4XgrD c=1 sm=1 tr=0 ts=670775cc cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=DAUX931o1VcA:10 a=t7CeM3EgAAAA:8 a=5qBrznAP3dz6ixwHqT4A:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: IPvdMERQY7hQW1F7vsa5XSl4hOiQhaxc
-X-Proofpoint-GUID: IPvdMERQY7hQW1F7vsa5XSl4hOiQhaxc
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.62.30
- definitions=2024-10-10_03,2024-10-09_02,2024-09-30_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 adultscore=0
- spamscore=0 lowpriorityscore=0 mlxlogscore=874 bulkscore=0
- priorityscore=1501 malwarescore=0 mlxscore=0 impostorscore=0
- suspectscore=0 phishscore=0 classifier=spam authscore=0 adjust=0
- reason=mlx scancount=1 engine=8.21.0-2409260000
- definitions=main-2410100042
+X-TOI-EXPURGATEID: 150726::1728543718-9F7FC40F-D824CF6A/0/0 CLEAN NORMAL
+X-TOI-MSGID: a78a9ba7-ca27-4386-a247-018eaad4e74a
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Oct 2024 06:36:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112759
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Oct 2024 07:02:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112760
 
-From: Mingli Yu <mingli.yu@windriver.com>
+This commit removed the lvm2-udevrules package.
+[https://git.openembedded.org/meta-openembedded/commit/?h=3Dmaster-next&i=
+d=3Dc37c867e1adddd6fa39cf3f3d4c6688ea6dc825a]
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Align accordingly to avoid error at do_rootfs
+
+Error:
+ Problem 1: package udisks2-2.10.1-r0.corei7_64 from oe-repo requires lib=
+blockdev.so.3()(64bit), but none of the providers can be installed
+  - package udisks2-2.10.1-r0.corei7_64 from oe-repo requires libbd_utils=
+.so.3()(64bit), but none of the providers can be installed
+  - package udisks2-2.10.1-r0.corei7_64 from oe-repo requires libblockdev=
+ >=3D 3.2.0, but none of the providers can be installed
+  - package gvfs-1.56.0-r0.corei7_64 from oe-repo requires udisks2, but n=
+one of the providers can be installed
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires libcrypt=
+setup.so.12()(64bit), but none of the providers can be installed
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires libcrypt=
+setup.so.12(CRYPTSETUP_2.0)(64bit), but none of the providers can be inst=
+alled
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires libcrypt=
+setup.so.12(CRYPTSETUP_2.4)(64bit), but none of the providers can be inst=
+alled
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires libcrypt=
+setup.so.12(CRYPTSETUP_2.7)(64bit), but none of the providers can be inst=
+alled
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires cryptset=
+up >=3D 2.7.5, but none of the providers can be installed
+  - conflicting requests
+  - nothing provides lvm2-udevrules needed by cryptsetup-2.7.5-r0.corei7_=
+64 from oe-repo
+ Problem 2: package gvfs-1.56.0-r0.corei7_64 from oe-repo requires udisks=
+2, but none of the providers can be installed
+  - package udisks2-2.10.1-r0.corei7_64 from oe-repo requires libblockdev=
+.so.3()(64bit), but none of the providers can be installed
+  - package udisks2-2.10.1-r0.corei7_64 from oe-repo requires libbd_utils=
+.so.3()(64bit), but none of the providers can be installed
+  - package udisks2-2.10.1-r0.corei7_64 from oe-repo requires libblockdev=
+ >=3D 3.2.0, but none of the providers can be installed
+  - package gvfsd-trash-1.56.0-r0.corei7_64 from oe-repo requires libgvfs=
+common.so()(64bit), but none of the providers can be installed
+  - package gvfsd-trash-1.56.0-r0.corei7_64 from oe-repo requires libgvfs=
+daemon.so()(64bit), but none of the providers can be installed
+  - package gvfsd-trash-1.56.0-r0.corei7_64 from oe-repo requires gvfs >=3D=
+ 1.56.0, but none of the providers can be installed
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires libcrypt=
+setup.so.12()(64bit), but none of the providers can be installed
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires libcrypt=
+setup.so.12(CRYPTSETUP_2.0)(64bit), but none of the providers can be inst=
+alled
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires libcrypt=
+setup.so.12(CRYPTSETUP_2.4)(64bit), but none of the providers can be inst=
+alled
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires libcrypt=
+setup.so.12(CRYPTSETUP_2.7)(64bit), but none of the providers can be inst=
+alled
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires cryptset=
+up >=3D 2.7.5, but none of the providers can be installed
+  - conflicting requests
+  - nothing provides lvm2-udevrules needed by cryptsetup-2.7.5-r0.corei7_=
+64 from oe-repo
+(try to add '--skip-broken' to skip uninstallable packages)
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/conf/include/ptest-packagelists-meta-oe.inc | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.5.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-index 32c16f82b..565037469 100644
---- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-+++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-@@ -7,6 +7,7 @@
- #
- # ptests which take less than ~30s each
- PTESTS_FAST_META_OE = "\
-+    asio \
-     cmocka \
-     cunit \
-     duktape \
--- 
-2.34.1
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.5.bb b/meta=
+-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.5.bb
+index 54b47ea3f..60bf501eb 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.5.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.5.bb
+@@ -53,7 +53,7 @@ PACKAGECONFIG[veritysetup] =3D "--enable-veritysetup,--=
+disable-veritysetup"
+ PACKAGECONFIG[luks2-reencryption] =3D "--enable-luks2-reencryption,--dis=
+able-luks2-reencryption"
+ PACKAGECONFIG[integritysetup] =3D "--enable-integritysetup,--disable-int=
+egritysetup"
+ PACKAGECONFIG[selinux] =3D "--enable-selinux,--disable-selinux"
+-PACKAGECONFIG[udev] =3D "--enable-udev,--disable-udev,,udev lvm2-udevrul=
+es"
++PACKAGECONFIG[udev] =3D "--enable-udev,--disable-udev,,udev lvm2"
+ PACKAGECONFIG[kernel_crypto] =3D "--enable-kernel_crypto,--disable-kerne=
+l_crypto"
+ # gcrypt-pkbdf2 requries --with-crypto_backend=3Dgcrypt or the flag isn'=
+t
+ # recognized.
+--=20
+2.46.1
 
 
