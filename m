@@ -1,80 +1,90 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E0E4AD0D7B8
-	for <webhook@archiver.kernel.org>; Fri, 11 Oct 2024 15:02:20 +0000 (UTC)
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web11.14102.1728658935828122769
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 38A47D0D7BA
+	for <webhook@archiver.kernel.org>; Fri, 11 Oct 2024 15:10:41 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.web11.14272.1728659437244365602
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Oct 2024 08:02:15 -0700
+ Fri, 11 Oct 2024 08:10:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=HjgR9GT4;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-20c803787abso15020555ad.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Oct 2024 08:02:15 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=cgAtlog6;
+ spf=pass (domain: smile.fr, ip: 209.85.128.54, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4311bb9d4beso10426345e9.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Oct 2024 08:10:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1728658935; x=1729263735; darn=lists.openembedded.org;
+        d=smile.fr; s=google; t=1728659435; x=1729264235; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=1n0CqXC3fDNqs2dpcQMXyBVALQ307fyPX+UommG1gJs=;
-        b=HjgR9GT4oZId257ktFW01Wc3RQxF2hF8HyoBEgo7tcKSSU2BqTEKsX5DMVYJwPQOoi
-         wdm8Il9zWmmj2uDfZqb6nUwCO6mWWMLMSHi5UIqhiV4CeRuUcNRqWvygMCEDlewXvhjW
-         xZLUevmjilI6Gv2x/hai5bZjXKQj4fS4JPNjy0dWcVd2sIxC74EsC0ehG5Zmox72JUDS
-         WfA9aV6l8Kxa7Dq/9Mef7OdaN60uM+ij5AbfqzMZLRAcG7pjASj1JCJeBynA0Z8+0OvO
-         2UaMFnTDIvVGnrRz5Zgv5xecLyPjxGhvCCD7PZYd6z5b8qTgVYNHK6qg76ALHiXfnbnL
-         JLvg==
+        bh=WJa18xRLVRZDpWkY9Juth1dwFSbT7N+xf2xIDQkBECk=;
+        b=cgAtlog6W8utxjaK8kwqMzhANeTZnjPNM/0XDjavilKgDPAD3rE5yDXy7g2Le3gg9C
+         pgLZEKnuPIgo3qo3FMvDp2pWkqJgWnC/bM+/RCYl23MvULbr6CqiFNH1F62dj9j81NsG
+         SCnTkXAWORynEJyXgNNPwJ75emqTqh9VA3rsI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728658935; x=1729263735;
+        d=1e100.net; s=20230601; t=1728659435; x=1729264235;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=1n0CqXC3fDNqs2dpcQMXyBVALQ307fyPX+UommG1gJs=;
-        b=aFCDRugRSiQLIfPUbMKnvCwt5NQl+V9GXlXFB2uBVtwlJquorc0tpl74eq8l2TR/el
-         wtrUBTfdw0KbQVDNgw68plg9+HxppjAmhmOU+6Qs0x3tAsm6rNuvGRIIO5WnxXEdAuw5
-         TGvY0x1XFtQ3VC9uM700D0U9BElnMJj+C66Pfu9vd30rFo7PvSWM1FMfgU4xr43zhCi/
-         s9mJ5eODmWE1Gk4FKnDfyjCk/HpcNEeoVEbuPlkL0KuCedM60ICjxb9/PcaRkBx9guCT
-         CtLKILUQSOMXD1kUwuKRwxjgjCeXFs1RyNP9zL0acVZcjV6EKqIsnM/auafYverePLdq
-         Yk4w==
-X-Gm-Message-State: AOJu0YxXylA4GCoPkBWfZQeK3FUCOUCOY9TtMqJaNX4QsjsC2jvTEskq
-	0vAG/kEtvf34ERMxITCNYoQFa2j+wAxtZ4l30INgzHdntQOambAfjBu05xqG
-X-Google-Smtp-Source: AGHT+IHfTz65iKj2nUAYVOre+KH3dQYMTuOU1nKuHGSp1vDQpfPL3IqV6ahUakzoOTcC3BYDsA4JgA==
-X-Received: by 2002:a17:902:f60c:b0:20c:5a7b:dcb3 with SMTP id d9443c01a7336-20c8052b62bmr101257085ad.30.1728658934792;
-        Fri, 11 Oct 2024 08:02:14 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::8d77])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-7ea44969bd1sm2540190a12.93.2024.10.11.08.02.14
+        bh=WJa18xRLVRZDpWkY9Juth1dwFSbT7N+xf2xIDQkBECk=;
+        b=H5R4M6UVu0pDIonOCwCk7rjGWlPg8MO/kiYgh3JeMkGzyhiBN/JDR/hbVEZBsN/tIX
+         fsMZXx7Q+Sw3RaZO/QmYeVxP4tkSVQKcWRbOiy3pL7a67kY0/BIPzjM5/+CHrYHyhHeP
+         nuOxeAiYF3pg3+jDm8yOY4OoWTVWvvrg0VFzp1fbQOre6psDrPqNRhlwAmy4I853HVK5
+         0wJQJ+jehuaT7JGL2OrV7JwPM2k1v5TUcKHdun2GTmY8Brm/yVPUiGe7NtpqI6Psfi97
+         1nM6QxEzZlyxrPHHRMOMsfLW8E50CqUBgABWpNlUjTokxDxDzlcSy5Gav2Ku9aXOXsoo
+         K9vw==
+X-Gm-Message-State: AOJu0YzxpJ5c+U9kTdWr/lAgLqronEg+L6yjHEWFZ6H/5Zmk7OKbAlDh
+	rSAwSsD/BQBjGW8PmYx711EY0mz9Cs8tycPwd2p9Q8GB7tdkQxhlTa+ZSeRnAGCQsQaW+QgJ8l2
+	J
+X-Google-Smtp-Source: AGHT+IGGSOTi5au/+gFQxqt6mseKxlmELKsIzWwZdqm72ljRQghtuH5tF72ws1V39ZnxCzT44OB1fg==
+X-Received: by 2002:a05:600c:3b19:b0:42c:b34d:720c with SMTP id 5b1f17b1804b1-4311deb62c4mr18849955e9.4.1728659434557;
+        Fri, 11 Oct 2024 08:10:34 -0700 (PDT)
+Received: from P-ASN-ECS-830T8C3.local (53.1.159.89.rev.sfr.net. [89.159.1.53])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-431183567c8sm44539985e9.38.2024.10.11.08.10.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Oct 2024 08:02:14 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Fri, 11 Oct 2024 08:10:34 -0700 (PDT)
+From: Yoann Congal <yoann.congal@smile.fr>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH] python3-yarl: Add missing rdep on python3-hypothesis for ptests
-Date: Fri, 11 Oct 2024 08:02:12 -0700
-Message-ID: <20241011150212.3576668-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.47.0
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-gnome][PATCH] gimp: fix buildpaths QA error by removing gimptool
+Date: Fri, 11 Oct 2024 17:10:23 +0200
+Message-Id: <20241011151023.1516957-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Oct 2024 15:02:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112806
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Oct 2024 15:10:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112807
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+From: Yoann Congal <yoann.congal@smile.fr>
+
+gimptool can be used in GIMP plugin compilation. It would make more
+sense as a native tool. It also contains the sysroot path which break
+build with buildpaths QA error. Remove it from target packages.
+
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 ---
- meta-python/recipes-devtools/python/python3-yarl_1.14.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-yarl_1.14.0.bb b/meta-python/recipes-devtools/python/python3-yarl_1.14.0.bb
-index a7406dfb8c..d0b8b0d0c2 100644
---- a/meta-python/recipes-devtools/python/python3-yarl_1.14.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-yarl_1.14.0.bb
-@@ -24,6 +24,7 @@ RDEPENDS:${PN} = "\
- "
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb b/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
+index a17e03b103..8755af94a9 100644
+--- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
++++ b/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
+@@ -70,6 +70,13 @@ do_compile:prepend() {
+     export GEGL_PATH=`find ${STAGING_LIBDIR_NATIVE} -maxdepth 1 -name 'gegl-*'`
+ }
  
- RDEPENDS:${PN}-ptest += " \
-+	python3-hypothesis \
-     python3-pytest \
-     python3-unittest-automake-output \
- "
++do_install:append:class-target() {
++    # gimptool can be used in GIMP plugin compilation. It would make more sense
++    # as a native tool. It also contains the sysroot path which break build
++    # with buildpaths QA error. Remove it from target packages.
++    rm ${D}/${bindir}/gimptool-2.0
++}
++
+ FILES:${PN}  += "${datadir}/metainfo"
+ 
+ RDEPENDS:${PN} += "mypaint-brushes-1.0"
 
