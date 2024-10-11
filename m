@@ -1,140 +1,141 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA553D0D79D
-	for <webhook@archiver.kernel.org>; Fri, 11 Oct 2024 14:24:20 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- by mx.groups.io with SMTP id smtpd.web11.12978.1728656657880400163
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E826FD0D79F
+	for <webhook@archiver.kernel.org>; Fri, 11 Oct 2024 14:40:20 +0000 (UTC)
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+ by mx.groups.io with SMTP id smtpd.web11.13492.1728657612823511784
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Oct 2024 07:24:18 -0700
+ Fri, 11 Oct 2024 07:40:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=DXRmLhGi;
- spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: reatmon@ti.com)
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49BEOHPR077195;
-	Fri, 11 Oct 2024 09:24:17 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1728656657;
-	bh=rfp35ttTLQjUfNAgxFwzgI3misgoL/Fb01F2usxGp7A=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=DXRmLhGigyyqYHpyd/y2G1JNI2B+dlvAqrehGU1DDzy98iYA/olTWZa0S+XL006d1
-	 D8vNZYyihIJfy1w3Oi8d6hBp2udnH83NUH6LMh41CbBldsuB+IKr0OqsfeZXuJrLxC
-	 Oc/FM/XrbSkI1YD1IMJBJYsW11i3ZoEjLCLMc2jg=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
-	by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49BEOH4O129743;
-	Fri, 11 Oct 2024 09:24:17 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 11
- Oct 2024 09:24:16 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 11 Oct 2024 09:24:16 -0500
-Received: from uda0214219 (uda0214219.dhcp.ti.com [128.247.81.222])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49BEOGU7106793;
-	Fri, 11 Oct 2024 09:24:16 -0500
-Received: from reatmon by uda0214219 with local (Exim 4.90_1)
-	(envelope-from <reatmon@ti.com>)
-	id 1szGYy-0003E9-Ej; Fri, 11 Oct 2024 09:24:16 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: <openembedded-devel@lists.openembedded.org>, Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][scarthgap][PATCH] kernel-selftest: Update to allow for turning on all tests
-Date: Fri, 11 Oct 2024 09:24:16 -0500
-Message-ID: <20241011142416.12363-2-reatmon@ti.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20241011142416.12363-1-reatmon@ti.com>
-References: <20241011142416.12363-1-reatmon@ti.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=O0Dp8guy;
+ spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-a993302fa02so330908866b.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Oct 2024 07:40:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1728657611; x=1729262411; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=yLkM4/mJSK5BYvKqbpoSsz2IWgFlOnDRTQ/gWOzG6Q0=;
+        b=O0Dp8guyQqUalAkFKrhxqmmi8Gxddl/1ibWR26CFE17VCEY9TpdARsJK7LOZ2JQABe
+         Luksi+jf0+YbOiXhfhZvMXBrD2hsoGtfXyiZPDC1KK+o25F2woSzjuiSs9FcnykmP9wx
+         ++Z273pKEbo3MBOxCR+RTeynw0kZ5MtSJeCEeFkxHEPsN+5sKtl61/B5ZjZpPgjqb+ev
+         AZzUAFIa+IiLJ8XOoy2qk98wxfOPYZxBiYyyyy1cbm2PH4H2YLtHduW996LXrqk/gGCY
+         dkDwExtSg9waNZrg+VL0V4bnYcQzNmvzjdougbMzXmyShqH3o5JYZ/jyXLUNrNt4OuNL
+         zxmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1728657611; x=1729262411;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=yLkM4/mJSK5BYvKqbpoSsz2IWgFlOnDRTQ/gWOzG6Q0=;
+        b=aHSnpLV8gYCs/5Bm7801rPHHZ4XQcx/2ebvNKZgcg9WBRs0/EVcjEWfoWVi/QZKWL0
+         m4DCi/72XwbLeOsfqb5VbHTc3iPQEVAVM8H7ack74B3BrzzvNEji3r2fxQA1LoEx1D7q
+         K2XcbNb1z/SjNC5end44fM0HLtD9+1Tov+d9uNcbzGy1I8F67pD+Fd5Dybmhl9k+P/Cb
+         +p5mJYMU1zIgwCmbDhM5IpSNyXPQBMcUZmuwTF1cP6V/BL+sDLxR6dglGqz6JLEo1tvU
+         zSloMz7nqsfATieqegG+QVIYx0G5/ay3E1tKEqCEVSE4+znPZokGApTIXg5HxRWV/d0h
+         +rnA==
+X-Gm-Message-State: AOJu0YzE1OiEf9PArtE73c2YZFPTVEtAmYrGRxORkiOPZIHGu5OMH7kE
+	GWNLxMZqcIA8nOo82x6088RqpHP2r8b3t3pvj99RNpve1fDOprNIAC7FxkHO
+X-Google-Smtp-Source: AGHT+IH3R9yPGJRhTdt4Gztd8ljt3ByT3IGhxfW77rNFh2Mi4fkDM8OgtOxa1cEhrM+mr1E4WWlHww==
+X-Received: by 2002:a17:907:9809:b0:a99:a44b:e622 with SMTP id a640c23a62f3a-a99b937a769mr220053066b.25.1728657610518;
+        Fri, 11 Oct 2024 07:40:10 -0700 (PDT)
+Received: from localhost.localdomain ([176.33.66.209])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a99a80f2928sm217477366b.214.2024.10.11.07.40.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 11 Oct 2024 07:40:09 -0700 (PDT)
+From: alperak <alperyasinak1@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-python][PATCH] python3-pint: move PTESTS_PROBLEMS_META_PYTHON to PTESTS_SLOW_META_PYTHON
+Date: Fri, 11 Oct 2024 17:40:02 +0300
+Message-Id: <20241011144002.2968471-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Oct 2024 14:24:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112803
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Oct 2024 14:40:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112804
 
-In testing adding in more kernel-selftests there were a number of issues
-that arose that require changes that are more appropriate for the main
-recipe and not a bbappend.
+- Tested on qemux86-64.
 
-1) Stop looping over TEST_LIST ourselves and use the TARGETS="" provided
-by the kernel-sefltest Makefiles.  This correctly sets up various
-variables that the selftest Makefiles all need.  Also, do_install
-becomes cleaner because the main Makefile already installs the list of
-tests and the top level script.
+- The PyPi package name defaults to PN without the python3- prefix, so there is no need to set PYPI_PACKAGE as pint, it is by default.
 
-2) Add DEBUG_PREFIX_MAP to the CC setting to avoid some "buildpaths" QA
-errors.
+- xfailed tests are known failures upstream.
 
-3) Add two INSANE_SKIPS for "already-stripped" and "ldflags".  Some of
-the selftest Makefiles are adding flags to their compiles that basically
-break the above checks.  Since these compiles are not really meant as
-user level tools and instead testing, it should be ok to just always set
-INSANE_SKIP for these two.
+Ptest result:
+=============
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+qemux86-64:
+
+Testsuite summary
+TOTAL: 2784
+PASS: 2094
+SKIP: 676
+XFAIL: 12
+FAIL: 0
+XPASS: 2
+ERROR: 0
+DURATION: 1611
+END: /usr/lib/python3-pint/ptest
+2024-10-11T14:34
+STOP: ptest-runner
+TOTAL: 1 FAIL: 0
+
+Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- .../kernel-selftest/kernel-selftest.bb        | 26 +++++++------------
- 1 file changed, 10 insertions(+), 16 deletions(-)
+ meta-python/conf/include/ptest-packagelists-meta-python.inc | 2 +-
+ meta-python/recipes-devtools/python/python3-pint_0.24.3.bb  | 6 ++----
+ 2 files changed, 3 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-index 01f185adb..a070ceab5 100644
---- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-+++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-@@ -55,7 +55,7 @@ TEST_LIST = "\
- EXTRA_OEMAKE = '\
-     CROSS_COMPILE=${TARGET_PREFIX} \
-     ARCH=${ARCH} \
--    CC="${CC}" \
-+    CC="${CC} ${DEBUG_PREFIX_MAP}" \
-     AR="${AR}" \
-     LD="${LD}" \
-     CLANG="clang -fno-stack-protector -target ${TARGET_ARCH} ${TOOLCHAIN_OPTIONS} -isystem ${S} -D__WORDSIZE=\'64\' -Wno-error=unused-command-line-argument" \
-@@ -96,25 +96,13 @@ either install it and add it to HOSTTOOLS, or add clang-native from meta-clang t
-     sed -i -e '/mrecord-mcount/d' ${S}/Makefile
-     sed -i -e '/Wno-alloc-size-larger-than/d' ${S}/Makefile
-     sed -i -e '/Wno-alloc-size-larger-than/d' ${S}/scripts/Makefile.*
--    for i in ${TEST_LIST}
--    do
--        oe_runmake -C ${S}/tools/testing/selftests/${i}
--    done
-+    oe_runmake -C ${S}/tools/testing/selftests TARGETS="${TEST_LIST}"
- }
+diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+index 07ae46908..9e828fa5c 100644
+--- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
++++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+@@ -103,6 +103,7 @@ PTESTS_SLOW_META_PYTHON = "\
+     python3-lz4 \
+     python3-marshmallow \
+     python3-pillow \
++    python3-pint \
+     python3-pytest-localserver \
+     python3-scrypt \
+     python3-traitlets \
+@@ -114,7 +115,6 @@ PTESTS_PROBLEMS_META_PYTHON ="\
+     python3-betamax \
+     python3-dnspython \
+     python3-fastjsonschema \
+-    python3-pint \
+     python3-pyzmq \
+     python3-whoosh \
+ "
+diff --git a/meta-python/recipes-devtools/python/python3-pint_0.24.3.bb b/meta-python/recipes-devtools/python/python3-pint_0.24.3.bb
+index 23e9fdb0e..72589dda9 100644
+--- a/meta-python/recipes-devtools/python/python3-pint_0.24.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pint_0.24.3.bb
+@@ -6,8 +6,6 @@ SECTION = "devel/python"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=bccf824202692270a1e0829a62e3f47b"
  
- do_install() {
--    for i in ${TEST_LIST}
--    do
--        oe_runmake -C ${S}/tools/testing/selftests/${i} INSTALL_PATH=${D}/usr/kernel-selftest/${i} install
--        # Install kselftest-list.txt that required by kselftest runner.
--        oe_runmake -s --no-print-directory COLLECTION=${i} -C ${S}/tools/testing/selftests/${i} emit_tests \
--            >> ${D}/usr/kernel-selftest/kselftest-list.txt
--    done
--    # Install kselftest runner.
--    install -m 0755 ${S}/tools/testing/selftests/run_kselftest.sh ${D}/usr/kernel-selftest/
--    cp -R --no-dereference --preserve=mode,links -v ${S}/tools/testing/selftests/kselftest ${D}/usr/kernel-selftest/
-+    oe_runmake -C ${S}/tools/testing/selftests INSTALL_PATH=${D}/usr/kernel-selftest TARGETS="${TEST_LIST}" install
-     if [ -e ${D}/usr/kernel-selftest/bpf/test_offload.py ]; then
--	sed -i -e '1s,#!.*python3,#! /usr/bin/env python3,' ${D}/usr/kernel-selftest/bpf/test_offload.py
-+        sed -i -e '1s,#!.*python3,#! /usr/bin/env python3,' ${D}/usr/kernel-selftest/bpf/test_offload.py
-     fi
-     chown root:root  -R ${D}/usr/kernel-selftest
- }
-@@ -158,6 +146,12 @@ RDEPENDS:${PN} += "python3 perl perl-module-io-handle"
+-PYPI_PACKAGE = "pint"
+-
+ inherit pypi ptest python_setuptools_build_meta
  
- INSANE_SKIP:${PN} += "libdir"
+ SRC_URI[sha256sum] = "d54771093e8b94c4e0a35ac638c2444ddf3ef685652bab7675ffecfa0c5c5cdf"
+@@ -21,8 +19,8 @@ SRC_URI += " \
+ "
  
-+# A few of the selftests set compile flags that trip up the "ldflags" and
-+# "already-stripped" QA checks.  As this is mainly a testing package and
-+# not really meant for user level execution, disable these two checks.
-+INSANE_SKIP:${PN} += "ldflags"
-+INSANE_SKIP:${PN} += "already-stripped"
-+
- SECURITY_CFLAGS = ""
- COMPATIBLE_HOST:libc-musl = 'null'
- 
+ RDEPENDS:${PN} += " \
+-    python3-setuptools \
+-    python3-packaging \
++	python3-setuptools \
++	python3-packaging \
+ "
+ # python3-misc for timeit.py 
+ RDEPENDS:${PN}-ptest += " \
 -- 
-2.17.1
+2.25.1
 
 
