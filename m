@@ -1,125 +1,164 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <Liyin.Zhang.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0FAFCCFD2F5
-	for <webhook@archiver.kernel.org>; Fri, 11 Oct 2024 08:55:29 +0000 (UTC)
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
- by mx.groups.io with SMTP id smtpd.web11.7054.1728636919461521050
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 115C4CFD2F5
+	for <webhook@archiver.kernel.org>; Fri, 11 Oct 2024 08:55:59 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.7085.1728636951820691025
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Oct 2024 01:55:19 -0700
+ Fri, 11 Oct 2024 01:55:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=m0bPuO/q;
- spf=pass (domain: konsulko.com, ip: 209.85.208.54, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-5c920611a86so2339638a12.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Oct 2024 01:55:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1728636918; x=1729241718; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=nl6594XtkGlkdB3PY6zeTNNhxKX1QdgsT5ZS36bVDe0=;
-        b=m0bPuO/qCRVhCttij66mL+38pkLnn4rqzotQrQ0CuowwTvForZH8nsIiIeFGF4bf+D
-         ujglDCFrv8ewMlPBMEniHZrOA2oBlE0bQ9k23//Vbd814AVby0GFu2YvmUyRg49S4EQE
-         AO2W8Dtl9/b9gTwY3EU0zksjRubTrt/s+i2hY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728636918; x=1729241718;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=nl6594XtkGlkdB3PY6zeTNNhxKX1QdgsT5ZS36bVDe0=;
-        b=VfG1wh2VxeNs+hlqVW/9WDhuw+jOL/eRHXPg6i1Z6eE38PkUBey7yn6aqPvZVkTGPA
-         /UJbhV0VgynuH7yUKfFmJOTMtXPD9rWqmKnVuwR2ZHbUAIRxO6YVmRHx7TjB3LDNf4zF
-         J9gzPYZ8vakeLx0/6iyChBE7ApNT4lVp83T41u+MYsy3lVlskuQswK8AqsbHJpAhyC+q
-         EZzzzSDeFdyYvT2pGZliKHbLRRJI1Gjs4boltZvIt7qrzBteUGsZMlL86fVQa3NPMgqW
-         ultxhDAxe1F5eRk854iMa1szLc0Gsm/Ju7etPsl0GsAYlWDNFn/VogEas/gN0Z89s4zN
-         uAlg==
-X-Gm-Message-State: AOJu0YzdWnjTDMO7ixS4rIbWRYNUACJUE7Le9n8HwT5vmQjSaJn3MpAG
-	6VBP2xwR2jQjrqvLMALI2MicWgANCco9KsC8pUpgaY4ZLaGWOug+P18KRh0EHF67uT+YE5t5puX
-	Y
-X-Google-Smtp-Source: AGHT+IHrSrpbRulFkwkv1ZntFbKpGzUDecJ/8474luaAbfOTXmW3EPAYH22wXzfxoRau+Y8GNQiv0Q==
-X-Received: by 2002:a05:6402:4308:b0:5c5:c4b1:883c with SMTP id 4fb4d7f45d1cf-5c948c809c9mr1099274a12.4.1728636916913;
-        Fri, 11 Oct 2024 01:55:16 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5c937153939sm1713866a12.47.2024.10.11.01.55.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Oct 2024 01:55:15 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=0014a34f0e=liyin.zhang.cn@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49B5mOsh002838
+	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Oct 2024 08:55:51 GMT
+Received: from nam04-bn8-obe.outbound.protection.outlook.com (mail-bn8nam04lp2045.outbound.protection.outlook.com [104.47.74.45])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 426sffgaqb-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Oct 2024 08:55:50 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=VwjlOBK0ZrfvtmlaQtsMuy6WOXH9OY/2fs2+LGR+Psyr1FDy4F9KSkMF6iWEL0aqyazkqqN+mSU9saLG4Dk+3wW8+YrN8aM1Bjs7FOQXH8Pc+HynKeOeyUfosxlayXG+GS2zPunXe6bs3piT8EGndOaKTVklEAhhQYPJcOvcGJF+h9RmkPG8aqE3Xz6uSlLmiQm2u1d+hK8ZwUleyOEp8e4vZNvVk44hVdPWWaOXOZOnsMDinqOSvuu4qoEjLmpS/n1u0X84E2NhbZKhZfyVwySYoFYNJ7/vjGQ0RE3AhInjuCVOYH9tFrc5Dicch0I4CTetGWpfthXriDmjFnJzQw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QOgNzPY6tfHNOCLJBLXLsRC7HOM5BbP+7YO60EgFO7E=;
+ b=tcQD++lpx13PMh7ffmFwM13yJVhT016I6O96UkUhqYpood5Qii0e+eDLGoU3ifNuCrp0SWZsUf4pNWPeY4uE50r0drCZl57mVxAkytvxOcvIDe5U6tfo2yNZhfMXqmLyK7C6X0zR50hFLDXmiigVQ8IMv+0XHThtam5eKmoqXbvqQuknyAn4dEvPTsf5FmHf2Y9RQh5QST+UYy+mk+9emlYiZXHFDWjyiCssIIqKiW9+hmrPKJuu/bvRyqEBSjTZVU4JyLvb7QB95bKeiCduUwcJTDnijrEjPFTkBDEnW6SN6zRx+Pmy5VuL/CLSAaH/bdIz1d9L/iU9qM+c7b5bbA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from CYYPR11MB8430.namprd11.prod.outlook.com (2603:10b6:930:c6::19)
+ by SA0PR11MB4637.namprd11.prod.outlook.com (2603:10b6:806:97::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.18; Fri, 11 Oct
+ 2024 08:55:49 +0000
+Received: from CYYPR11MB8430.namprd11.prod.outlook.com
+ ([fe80::76d2:8036:2c6b:7563]) by CYYPR11MB8430.namprd11.prod.outlook.com
+ ([fe80::76d2:8036:2c6b:7563%6]) with mapi id 15.20.8048.018; Fri, 11 Oct 2024
+ 08:55:49 +0000
+From: liyin.zhang.cn@windriver.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/4] python3-dnspython: Upgrade 2.6.1 -> 2.7.0
-Date: Fri, 11 Oct 2024 11:55:06 +0300
-Message-Id: <20241011085507.3722721-3-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20241011085507.3722721-1-leon.anavi@konsulko.com>
-References: <20241011085507.3722721-1-leon.anavi@konsulko.com>
-MIME-Version: 1.0
+Subject: [meta-oe][kirkstone][PATCH] sound-theme-freedesktop: Update SRC_URI
+Date: Fri, 11 Oct 2024 16:55:32 +0800
+Message-Id: <20241011085532.2205208-1-liyin.zhang.cn@windriver.com>
+X-Mailer: git-send-email 2.25.1
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SG2PR01CA0115.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:40::19) To SJ2PR11MB8421.namprd11.prod.outlook.com
+ (2603:10b6:a03:549::9)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CYYPR11MB8430:EE_|SA0PR11MB4637:EE_
+X-MS-Office365-Filtering-Correlation-Id: fde82b5e-d793-4629-dd96-08dce9d28024
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|366016|376014|52116014|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?hl60STVjh5bC6Ia4oPRe2YuJpHqiZKh3SaiIbcFy71rrUDUJH3paAy/yK6+a?=
+ =?us-ascii?Q?12SWTyqJPMsw7Lcw+5tiA4B2j+lvJjmId1yvE3p1OHc75eGBIiZ5PGXoWYof?=
+ =?us-ascii?Q?L6aviOXrn2SMrAsMLYMX7T5cEX909P1GzGo4un9DIl7BX8lFan4GkTOseltL?=
+ =?us-ascii?Q?sOQvPcqhLMK4PvpXaHylw2q7znhEK0JZc+pQq20kHGfPt+gsChQoTyMFlnW/?=
+ =?us-ascii?Q?iTtTYQ++naOBKsoTuA7J/zdkqW6y8LlL1B8C77BocahmmTqL3acrVW9XvcEn?=
+ =?us-ascii?Q?Zv68D8TgbBlG0TKZ7rkfQ95ChTNx5MNz3GefmnZDVaZVcxCBJfL2tOM3DTRw?=
+ =?us-ascii?Q?j4pF4fBPuW5zISt2n4JA3SQWso7YqZ97upkop+AgfFmb0HaTdTVvHXbXtIqh?=
+ =?us-ascii?Q?4g7t5m4M6lp0TwHnagjeqtnM7inX5spkGjYUZZAcDst5B7PtAxi5IqlxrYdI?=
+ =?us-ascii?Q?QENprjA1l66wRvp2jgmVIOhvXlvB4pD7HHvxT6h80t7jKikdGb283I8/fRak?=
+ =?us-ascii?Q?AFBoqkUZ7fbASzvWLBU/L8lQ7TiHT/pLFfzVVDK0TK2LB8EgJoBHQOGVWGi3?=
+ =?us-ascii?Q?9d8lEt/XnFaUjglfOatHPWalRRqW44fgUl3OsHV/Z/Puj41oOkkewDW/Z6cu?=
+ =?us-ascii?Q?0LSzXffUtJ6lZn2eIRnpUSOJNdRxppVXFPE/AQY2y2NZKuutW07V4jBeQDWb?=
+ =?us-ascii?Q?0AhuPZ90OzltosaAmNlincvXnzDrVzzQAQzrZtETYJEtI01zROh7HO4xit95?=
+ =?us-ascii?Q?kiO/MY8qDig4xxXkeXI2mD1OkEZxbOPBbjK/tZkoFV+wvGtRoL3Medxf4rtA?=
+ =?us-ascii?Q?Qrc+GJYJDlmwF4au9CX5W/Xs3SPjFz/+uQVJehHwwlx9GUnx6SRvm8PgRnMv?=
+ =?us-ascii?Q?UsuBljEuf8F2N/zKAI/tdQG9oJx6d+MMGcPZ74jlLICs4rS9MQdKYHJErcXV?=
+ =?us-ascii?Q?n2TeNMbbro0u/TL3+aFnlARpv0pqUfAGvo9INce7eno8aSGaFIDt2e4LLbQE?=
+ =?us-ascii?Q?IJlfHBo3UB77oXkdFhA2bhF9Y5GUWswvAxi+9C3Wb+Mq86a70s7Otqq9aRl9?=
+ =?us-ascii?Q?IBhIEeWyQiW0UO/QVlkGIaySmiOX4auRaZJBBagrMKzx2HJ/dA6YUI8defHV?=
+ =?us-ascii?Q?sDY2p4Wlz/kUHWexX8Z55P8VcPK14mw2Xi40svLVmhO1q/72LM5aGmkicvgp?=
+ =?us-ascii?Q?rNGCLb0GVdKL2fulhOQIuzkqRcCu8kaey8Z8qv4RVuU801xPUgmg3T+vNZoI?=
+ =?us-ascii?Q?9tYaABL6opVMus/2RivukJCezdaSvihyjirimEc0/Q=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CYYPR11MB8430.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(52116014)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?SOq889iwiEen+uLGLLi7zwMMX3gBvorU2fBvPQbrxWrXxh7VPfh0SD8jf7H4?=
+ =?us-ascii?Q?J0fCk5ViUM7A9/4RudohVItVgHvOzTN2frajhipR1DNlEt4ce8cGZj9nKWLs?=
+ =?us-ascii?Q?6B33b1SZdz/jExpBDGwfbX42OwcjgV3kgZcfcPBX7n7BKh2wPBHrqr0jXU3B?=
+ =?us-ascii?Q?htKq81N1LaDTsNvc/qsWQZxrPJaWNG8Fmf7Y4uMKpvyHdsho1BDFh84ZePgN?=
+ =?us-ascii?Q?oH+9U98KyUnMtBXyzoMC1KWmw+ZIw8ZehgPovyo6SSCD56O5Lxb7JoCh4EES?=
+ =?us-ascii?Q?psl/f5axtLkzUqSGfHSJAewauuSrxJlAoaoKXFtVcrEhAzm+KX+xg7Mfkvs0?=
+ =?us-ascii?Q?5OqZUopDnm3dKawpStD43tuEVe0I17y55Z84vByj1Zr+uKAe2w7H9QJ1GEy5?=
+ =?us-ascii?Q?EwGFP84waIJpv6moBzBMwW/7TtY8daK1gDRNl39UuE/nCsdAcXvuo1vcFgrO?=
+ =?us-ascii?Q?cchMRvGwKMXNTe1/NKv50Z+xqHNuMbt1Ra9h4MUoF/WAEJQzKNtdTK9eGhuV?=
+ =?us-ascii?Q?v7DLJgk3IcE5itYGLDkGRGt3iS+2R6nNJhkkjS5Efzv06Aw/1fuGUmAoH6oQ?=
+ =?us-ascii?Q?fdlUyjQp7YvmX10XFUYgE76+124dv/Jc/DOOeo0sb9Unj6bUp1JYhaRknyQf?=
+ =?us-ascii?Q?2OhAos53plUk4h+lLevaPW9XIC1ooS70NTgmmaAjUoGdip2GPhEdxHNH1Zg9?=
+ =?us-ascii?Q?2w806X7JSadKuUspaZWJaFnr3T6BThZEwYvh6ON0PB9xfx9r4PUok8jV+33r?=
+ =?us-ascii?Q?u0GbiCsguSEzx8iQswJgmt21m6lv1fdjFabR4Pch4FLOblkRFsVGzDuvQ7sC?=
+ =?us-ascii?Q?yTu2Vezuh4henV6JKJoThLtxS5CXU14VW8NTyj8/HKz1Zy7MLMCPiQFER0kr?=
+ =?us-ascii?Q?xAyckxbwKvAD1NJYSAfJ39RhFAnckPB4RLAOA+MCw5ePevnTXPywCeN+DEH5?=
+ =?us-ascii?Q?BjkbFuUfguDWoUSVzpO+jt80M7CLNe92bmmSgyd88NmKQnipInkOLisXDGfp?=
+ =?us-ascii?Q?niN/ruJ2hD4VGdfCGQHmteHLkVgR1tq5M+gSLcdfFHxO1pdXO018f1Hp0RFy?=
+ =?us-ascii?Q?ZCSQqBh4/PYU03T3/QJLR65FLo+aXafmtYNcPafXdfnUL61V2RF5qlq1l7za?=
+ =?us-ascii?Q?fhSxYysMuj/HPp02NEh96H/X85rw1QMqPJQA6KiQQSjoe2JkemJ2NSVN1UHh?=
+ =?us-ascii?Q?6tFCqauSjQJHHOQsLbNclpFOUiLdYAbxNI/7vgnQYe1Wwg9B4avv28JUhBSl?=
+ =?us-ascii?Q?6f5MBcm60q0Cl1g9k7oz9xD2hn4qTf6bkgBROw5VdjWJQaDEXCG8wwdV5MMH?=
+ =?us-ascii?Q?rDjJ1tz0h+Fomq4v6ziU6RMFIKWtXIx1Sn7jZWVd6m8ewpKbxWosnU478Y+P?=
+ =?us-ascii?Q?V9qC4QhYQeP4vu7f/+NFi3eGCiXNBu0McOm1Io+hDVHwiiipQmc2AinJ2ivy?=
+ =?us-ascii?Q?o4pks8+/aXrsVQ5e7mpqdC1X3cG8d+e/fPweIVt0G0Drvo6RWtJMdhK2E0sz?=
+ =?us-ascii?Q?P+LbFfJdsvvFmADM8cRgh+7PGtO609MnpsshNNhwvS6jzK+fzHnXLzvUus5B?=
+ =?us-ascii?Q?ECXz5jrlYQ8sjdGVnr3UsyIT59CAtS0vg/CGYQZRF7gjXZhGm3mMzsFOhNUQ?=
+ =?us-ascii?Q?3Q=3D=3D?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: fde82b5e-d793-4629-dd96-08dce9d28024
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR11MB8421.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Oct 2024 08:55:49.0526
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: L6E40cQQFfeOI0UDMa0S0anHmMeCtoATgXj8kXCHbYEfMLi8rySaFG3E7etrO8xZaEk6NPKuHIHnUI3Od73p4GPdtdXe5gE5jaVA05scXLM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR11MB4637
+X-Proofpoint-GUID: 2OMQB8b6voYmO3NkpVYvg8MakrnBMF-Z
+X-Authority-Analysis: v=2.4 cv=IrZMc6/g c=1 sm=1 tr=0 ts=6708e816 cx=c_pps a=GbYsmhbcUJoGoLxTsnc7yA==:117 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=DAUX931o1VcA:10 a=bRTqI5nwn0kA:10 a=t7CeM3EgAAAA:8 a=e5mUnYsNAAAA:8 a=DxLxgj1Zz3yi28Dz2jwA:9
+ a=FdTzh2GWekK77mhwV6Dw:22 a=Vxmtnl_E_bksehYqCbjh:22
+X-Proofpoint-ORIG-GUID: 2OMQB8b6voYmO3NkpVYvg8MakrnBMF-Z
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.62.30
+ definitions=2024-10-11_06,2024-10-11_01,2024-09-30_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 adultscore=0
+ lowpriorityscore=0 priorityscore=1501 malwarescore=0 mlxlogscore=773
+ suspectscore=0 spamscore=0 impostorscore=0 mlxscore=0 clxscore=1015
+ bulkscore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2409260000 definitions=main-2410110060
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Oct 2024 08:55:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112793
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Oct 2024 08:55:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112795
 
-Upgrade to release 2.7.0:
+From: Liyin Zhang <liyin.zhang.cn@windriver.com>
 
-- dns.query.https() and dns.asyncquery.https() now support HTTP/3
-  and the http_version parameter may be used to specify which
-  version to use.
-- If the cryptography module is installed, then dnspython will now
-  create deterministic ECDSA signatures by default. Cryptography,
-  if installed, must be at least version 43. Thanks to Jakob
-  Schlyter for adding the feature.
-- The RESINFO and WALLET RdataTypes are now supported.
-- The COOKIE and Report-Channel EDNS0 options are now supported.
-- All supported RdataTypes can now be imported at a single time
-  rather than lazily on first use by calling
-  dns.rdata.load_all_types().
-- The SVCB and HTTPS records now support the ohttp parameter.
-- xfr() and inbound_xfr() now share a common implementation.
-- Tokens are now supported for QUIC and HTTP/3.
-- dns.message.from_wire() now saves the input wire format in the
-  Message's "wire" attribute. Likewise,
-  dns.message.Message.to_wire() now records the generated wire
-  format in that attribute.
-- The dns.message.Message object now has a get_options() helper to
-  retrieve EDNS0 options of a specified type, and an
-  extended_errors() helper to retrieve the list of EDE options in a
-  message (if any).
-- dns.message.make_response() now has a copy mode which controls
-  how sections are copied. By default, a copy mode appropriate for
-  the opcode is used. This is currently
-  dns.message.CopyMode.QUESTION for all opcodes.
-- If an IP address is used as the hostname in a URL, the https
-  query code now passes the sni_hostname to httpx as this is
-  required to get httpx to validate the certificate and check for
-  an IP subject alternative name.
-- The minimum supported aioquic version is now 1.0.0.
-- The minimum supported Python version is now 3.9.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Liyin Zhang <liyin.zhang.cn@windriver.com>
 ---
- .../{python3-dnspython_2.6.1.bb => python3-dnspython_2.7.0.bb}  | 2 +-
+ .../sound-themes/sound-theme-freedesktop_0.8.bb                 | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-dnspython_2.6.1.bb => python3-dnspython_2.7.0.bb} (88%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-dnspython_2.6.1.bb b/meta-python/recipes-devtools/python/python3-dnspython_2.7.0.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-dnspython_2.6.1.bb
-rename to meta-python/recipes-devtools/python/python3-dnspython_2.7.0.bb
-index 13e31afe7..e9ca31c3a 100644
---- a/meta-python/recipes-devtools/python/python3-dnspython_2.6.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-dnspython_2.7.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.dnspython.org/"
- LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5af50906b5929837f667dfe31052bd34"
+diff --git a/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb b/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
+index 87320a98e..508519e4f 100644
+--- a/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
++++ b/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
+@@ -11,6 +11,6 @@ inherit autotools gettext
  
--SRC_URI[sha256sum] = "e8f0f9c23a7b7cb99ded64e6c3a6f3e701d78f50c55e002b839dea7225cff7cc"
-+SRC_URI[sha256sum] = "ce9c432eda0dc91cf618a5cedf1a4e142651196bbcd2c80e89ed5a907e5cfaf1"
+ DEPENDS += "glib-2.0-native"
  
- inherit pypi python_hatchling ptest
- 
+-SRC_URI = "http://people.freedesktop.org/~mccann/dist/${BPN}-${PV}.tar.bz2"
++SRC_URI = "https://people.freedesktop.org/~mccann/dist/${BPN}-${PV}.tar.bz2"
+ SRC_URI[md5sum] = "d7387912cfd275282d1ec94483cb2f62"
+ SRC_URI[sha256sum] = "cb518b20eef05ec2e82dda1fa89a292c1760dc023aba91b8aa69bafac85e8a14"
 -- 
-2.39.5
+2.25.1
 
 
