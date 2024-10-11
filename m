@@ -2,56 +2,56 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ADA9D0D78F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4AD6DD0D78D
 	for <webhook@archiver.kernel.org>; Fri, 11 Oct 2024 13:05:30 +0000 (UTC)
-Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
- by mx.groups.io with SMTP id smtpd.web10.11020.1728651920774354320
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
+ by mx.groups.io with SMTP id smtpd.web10.11021.1728651922666780181
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Oct 2024 06:05:21 -0700
+ Fri, 11 Oct 2024 06:05:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=a86YXgjn;
- spf=pass (domain: gmail.com, ip: 209.85.167.41, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-539e1543ab8so858024e87.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Oct 2024 06:05:20 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CfrKLx/d;
+ spf=pass (domain: gmail.com, ip: 209.85.218.42, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-a99cc265e0aso36080366b.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Oct 2024 06:05:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1728651918; x=1729256718; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1728651920; x=1729256720; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=vMdKcwykEJ5DXtLwBa75eQRYegcmlbvuo9lvXBbeNS0=;
-        b=a86YXgjnpTB0znmq3poGnkVaNdfzAh1CcsQbpF84IHG+XkULBjq0zRKjvJrsdxQ4ms
-         GWedi/8rcAGPcmnIsYIFz3sb5Ut5Je2wIq4kael+bX0CEiAiG7Zl6mvA6K1FX9kOzh8U
-         dQQH3rhsnLK0F1LTSxbQiqv3dzJZ+mb+x2vZ0Dv3xVEcm5+HI6pPfQN37alG3AQyvIQR
-         juBR6pnZxB8hd9nOXWXJOvNTqxgBOo8K6mVgwedXIBl26IdCaqgpZhlF645aaICnHxey
-         +dwcQ+4jdUuGwRVa8CzCyRXwtHNPlRjXAuxGOQT9+EKIVIDrSXHXeZrfXRWBx+ZL5Ma4
-         rNPg==
+        bh=uHyLR8bsXKGyqQH45ypedRSjH33MqZEcciWqsYm3ZYQ=;
+        b=CfrKLx/dNAApAPbqs+2wL09yRSqwz/uNpq7f2IwmlFFeUogo63MBBuzMnWRL0QT8+z
+         7KekplIVCm6WgvQx24O9qfetyvpAThLUVcIEsdXvVpx2TUiXSZSVfz8Ht+y1iRMcq3iw
+         hTlH9GR+BYJNH0eNIuCKW4FqFpXN4tnSvlk0ATlfcct8ApA/QsLhWQ2tWeE6CtztNsVZ
+         d07LOd60XuHmfRQp6wVhdgs6UtBdJ7TlQiClhXYQ/jshEcQw6+2JWweDOJ87DbhROcrG
+         SEjTsuRbUuhN4kuOPF+MdfTqQJufdMlj5vvAFz9Zt18ciPZHVfctYLUzU/+DbqDW4XWY
+         I0ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728651918; x=1729256718;
+        d=1e100.net; s=20230601; t=1728651920; x=1729256720;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=vMdKcwykEJ5DXtLwBa75eQRYegcmlbvuo9lvXBbeNS0=;
-        b=NapKHnyveDv9/VoLnGAd1fPT2EsHjH6pHOrtAPc/m3cOoisId5Jy91012i0U0meiQQ
-         EmacOMIejDJjf1unFqsLwUYsgXdunYa6oB7gpPgMB6XuDxCnc0uwzGItfOuAQCzsDWcw
-         XHpiuUPw6FpfatwMtUfZZ0eE4oRLD44FwwlECBkxW5zSQk+6Uqt9lWT6izLUZ0lmJTIg
-         r57E75nfr2mzRK8LKgx8tH1J8yuS9cKwaCpzkwoj+AzooIQt2yIJlP2FOKqwULzzGQH4
-         n4Y0mfDEeE6I6dffo0TRL04sh7VoGIB5NMZR6ZfmOR/URLWGBw6NNheXR0CtLuDedlst
-         NBvA==
-X-Gm-Message-State: AOJu0YzI6xKl4XtIBd4Kda6wjuRHXTu9K863lTjOzslwRhTuZ6Qrplm2
-	bQR4sQ35I2RJKGCEWOxypJ01l5AKbhJ/HW7zES2iO2/z1fNwKyzuNtF7BCDG
-X-Google-Smtp-Source: AGHT+IG5cNeTruCjCe54ndQh0m87mnnd/ZsAnjtxJe998vfM8ig5Z2/0CKzbcd784HC4RxXv6Z2VXg==
-X-Received: by 2002:a05:6512:3b10:b0:539:8cd1:848 with SMTP id 2adb3069b0e04-539da5aa786mr1772560e87.61.1728651918035;
-        Fri, 11 Oct 2024 06:05:18 -0700 (PDT)
+        bh=uHyLR8bsXKGyqQH45ypedRSjH33MqZEcciWqsYm3ZYQ=;
+        b=kjGfko2kvOeVIlsU9Kov2ixZaKVspEm53wCxEmAVEZL+c+8FY8UL4TB8gC4PoEhC28
+         d0JfyLYt3eVORMTjxB0svmNgs0+u1tIYCm4qiNuILmtAGVw7OJ6K5knYXy9/ptajLndU
+         /J3/L5qsmy2EtlGemh7zQ4NgCRiV9VAvys2JAYw53VxndW3Gg6TlZ1fr02x7hFEeaOFL
+         jVGFuYX3VMRihWoDgFkZlrdo/+JsHKXygxSktkYpdvsy/qOvu8UvYY9dmWVI2ZK4HK6q
+         G9lKDAMY0uuG5S3/BYxMhYIIJPHHvtZbI7agxfRTq+mSm0MQVlyhEOdvSoIsSQMprOzd
+         TR5Q==
+X-Gm-Message-State: AOJu0YwBD7mOsnG2SJjq0QDwcKSfKqAK/6PSnely6UZSWzBLxTFiefKF
+	dcXyBiEiAgY8szECpqMR2SZ0qKTCsLmIZFo3bteynRqieyA6seId41C6X1Od
+X-Google-Smtp-Source: AGHT+IF+nFHDhFCjaqmHQ7OrL+DOvWrawmEgypX2fbAGVlN2vmmxYneBn7iCqjTTA47TPah1vcqSsQ==
+X-Received: by 2002:a17:907:3ea2:b0:a99:501c:b841 with SMTP id a640c23a62f3a-a99b93c7fe3mr225630066b.28.1728651919682;
+        Fri, 11 Oct 2024 06:05:19 -0700 (PDT)
 Received: from localhost.localdomain ([176.33.66.209])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a99a7ec56eesm210466066b.31.2024.10.11.06.05.16
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a99a7ec56eesm210466066b.31.2024.10.11.06.05.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Oct 2024 06:05:17 -0700 (PDT)
+        Fri, 11 Oct 2024 06:05:18 -0700 (PDT)
 From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-python][PATCH 3/5] python3-outcome: enable ptest
-Date: Fri, 11 Oct 2024 16:04:39 +0300
-Message-Id: <20241011130441.2919272-3-alperyasinak1@gmail.com>
+Subject: [meta-python][PATCH 4/5] python3-portion: enable ptest
+Date: Fri, 11 Oct 2024 16:04:40 +0300
+Message-Id: <20241011130441.2919272-4-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241011130441.2919272-1-alperyasinak1@gmail.com>
 References: <20241011130441.2919272-1-alperyasinak1@gmail.com>
@@ -61,13 +61,11 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 11 Oct 2024 13:05:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112799
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112800
 
 - Tested on qemux86-64 and qemuarm64
 
 - Added ptest into PTESTS_FAST_META_PYTHON
-
-- The PyPi package name defaults to PN without the python3- prefix, so there is no need to set PYPI_PACKAGE as outcome, it is by default.
 
 Ptest result:
 =============
@@ -75,101 +73,100 @@ Ptest result:
 qemux86-64:
 
 Testsuite summary
-TOTAL: 10
-PASS: 10
+TOTAL: 205
+PASS: 205
 SKIP: 0
 XFAIL: 0
 FAIL: 0
 XPASS: 0
 ERROR: 0
-DURATION: 7
-END: /usr/lib/python3-outcome/ptest
-2024-10-11T09:27
+DURATION: 27
+END: /usr/lib/python3-portion/ptest
+2024-10-11T12:13
 STOP: ptest-runner
 TOTAL: 1 FAIL: 0
 
 qemuarm64:
 
 Testsuite summary
-TOTAL: 10
-PASS: 10
+TOTAL: 205
+PASS: 205
 SKIP: 0
 XFAIL: 0
 FAIL: 0
 XPASS: 0
 ERROR: 0
-DURATION: 6
-END: /usr/lib/python3-outcome/ptest
-2024-10-11T09:24
+DURATION: 25
+END: /usr/lib/python3-portion/ptest
+2024-10-11T12:18
 STOP: ptest-runner
 TOTAL: 1 FAIL: 0
 
 Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
  .../ptest-packagelists-meta-python.inc        |  1 +
- .../python/python3-outcome/run-ptest          |  3 +++
- .../python/python3-outcome_1.3.0.post0.bb     | 26 ++++++++++++++++---
- 3 files changed, 26 insertions(+), 4 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-outcome/run-ptest
+ .../python/python3-portion/run-ptest          |  3 +++
+ .../python/python3-portion_2.5.0.bb           | 22 ++++++++++++++++---
+ 3 files changed, 23 insertions(+), 3 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-portion/run-ptest
 
 diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-index 7864b632a..8f739f24f 100644
+index 8f739f24f..196ff6a73 100644
 --- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
 +++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-@@ -42,6 +42,7 @@ PTESTS_FAST_META_PYTHON = "\
-     python3-multidict \
-     python3-netaddr \
-     python3-ordered-set \
-+    python3-outcome \
-     python3-parse \
-     python3-parse-type \
+@@ -48,6 +48,7 @@ PTESTS_FAST_META_PYTHON = "\
      python3-platformdirs \
-diff --git a/meta-python/recipes-devtools/python/python3-outcome/run-ptest b/meta-python/recipes-devtools/python/python3-outcome/run-ptest
+     python3-polyline \
+     python3-portalocker \
++    python3-portion \
+     python3-precise-runner \
+     python3-prettytable \
+     python3-propcache \
+diff --git a/meta-python/recipes-devtools/python/python3-portion/run-ptest b/meta-python/recipes-devtools/python/python3-portion/run-ptest
 new file mode 100644
 index 000000000..8d2017d39
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-outcome/run-ptest
++++ b/meta-python/recipes-devtools/python/python3-portion/run-ptest
 @@ -0,0 +1,3 @@
 +#!/bin/sh
 +
 +pytest --automake
-diff --git a/meta-python/recipes-devtools/python/python3-outcome_1.3.0.post0.bb b/meta-python/recipes-devtools/python/python3-outcome_1.3.0.post0.bb
-index 89c0da470..971430187 100644
---- a/meta-python/recipes-devtools/python/python3-outcome_1.3.0.post0.bb
-+++ b/meta-python/recipes-devtools/python/python3-outcome_1.3.0.post0.bb
-@@ -7,10 +7,28 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fa7b86389e58dd4087a8d2b833e5fe96 \
+diff --git a/meta-python/recipes-devtools/python/python3-portion_2.5.0.bb b/meta-python/recipes-devtools/python/python3-portion_2.5.0.bb
+index f4e5d2036..269473e93 100644
+--- a/meta-python/recipes-devtools/python/python3-portion_2.5.0.bb
++++ b/meta-python/recipes-devtools/python/python3-portion_2.5.0.bb
+@@ -5,12 +5,28 @@ SECTION = "devel/python"
+ LICENSE = "LGPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3000208d539ec061b899bce1d9ce9404"
  
- SRC_URI[sha256sum] = "9dcf02e65f2971b80047b377468e72a268e15c0af3cf1238e6ff14f7f91143b8"
+-inherit pypi python_setuptools_build_meta
++inherit pypi python_setuptools_build_meta ptest
  
--inherit pypi setuptools3
-+inherit pypi setuptools3 ptest
+ SRC_URI[sha256sum] = "80ae7bab71f4844e3eb33c57954d76a3bd4cb351039b6e260e779325aeb4a487"
  
--RDEPENDS:${PN} += "python3-attrs"
+-RDEPENDS:${PN} = "\
+-    python3-sortedcontainers \
 +SRC_URI += " \
 +	file://run-ptest \
-+"
+ "
  
--RDEPENDS:${PN} += "python3-asyncio python3-core python3-pytest python3-typing-extensions"
++RDEPENDS:${PN} += "\
++	python3-sortedcontainers \
++"
++
 +RDEPENDS:${PN}-ptest += " \
 +	python3-pytest \
-+	python3-pytest-asyncio \
 +	python3-unittest-automake-output \
-+	python3-outcome \
-+"
- 
--PYPI_PACKAGE = "outcome"
-+RDEPENDS:${PN} += " \
-+	python3-asyncio \
-+	python3-attrs \
-+	python3-core \
-+	python3-pytest \
-+	python3-typing-extensions \
 +"
 +
 +do_install_ptest() {
 +	install -d ${D}${PTEST_PATH}/tests
++	# This file tests README.md and deleted as redundant.
++	rm -f ${S}/tests/test_doc.py
 +	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
 +}
++
+ BBCLASSEXTEND = "native"
 -- 
 2.25.1
 
