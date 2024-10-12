@@ -1,379 +1,279 @@
-Return-Path: <Jiaying.Song.CN@windriver.com>
+Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BBDE5D1A435
-	for <webhook@archiver.kernel.org>; Sat, 12 Oct 2024 06:45:47 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.5676.1728715540907127907
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BFF4DD1A442
+	for <webhook@archiver.kernel.org>; Sat, 12 Oct 2024 06:53:37 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.5732.1728716012271580630
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Oct 2024 23:45:41 -0700
+ Fri, 11 Oct 2024 23:53:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=001582d2eb=jiaying.song.cn@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49C6C2d1019047
-	for <openembedded-devel@lists.openembedded.org>; Sat, 12 Oct 2024 06:45:40 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 427g38g4ms-1
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=0015cf250c=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49C6rWTT011280;
+	Fri, 11 Oct 2024 23:53:32 -0700
+Received: from nam10-mw2-obe.outbound.protection.outlook.com (mail-mw2nam10lp2043.outbound.protection.outlook.com [104.47.55.43])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 426sfgh950-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Sat, 12 Oct 2024 06:45:39 +0000 (GMT)
-Received: from m0250812.ppops.net (m0250812.ppops.net [127.0.0.1])
-	by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 49C6jdTq000664;
-	Sat, 12 Oct 2024 06:45:39 GMT
-Received: from nam10-bn7-obe.outbound.protection.outlook.com (mail-bn7nam10lp2048.outbound.protection.outlook.com [104.47.70.48])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 427g38g4mq-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Sat, 12 Oct 2024 06:45:39 +0000 (GMT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Oct 2024 23:53:31 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PCrokFd0iOPZ9LEcG/qh9Ds6ZMOHb3hOBTHDAbjZxw1RnWfXcUUJt/XZJZAeqX3Q0pZt073k2mZ+5COeZH3h3ozvGmWzAFQHgnDv1PGrHrBKjLPxorB09jRt2EzZszufApnMm5dkKlGkyuc3S6GTdtHOY6WpNccuilMtNBUUQfzEsQgp/mTmpJ6cPGW1M4jP1gfKCFn9lFwP2ujlOvl034fNpcRi7I0JcEm6ODznG8kVzjW3Cagxctp/lPd6+pSvmd26O+D5kQoWG82Ae71iwj9jxyjXKNxfAgq1TiBRjkOygMeiPOITJvQS8MnPdUexutBG3Qjosll43Ykz3lHLuQ==
+ b=uQ7+U5QXmghSFAMU2VghlZnR1+i+5VAfm7glqez/hQohZW+QpnOJy34KtYK/rXQLBGeMxBd2qgefEWKOIEXXTi17i1fkJ4jNHhtPnqxzL9DckfS9dNQA6BFvmPrN2sA/JjgdYZrwk+o1Wz7kpmHT1EbuUoDUs45Z5I7QtpMrY9PqpyqzsKskUy13VVkl1KMsNxDGDVAIQx0+sxZdQElsBkVL7j4GiW4w+dXeU0r9DzPk1maD4LljlASJ2s8PP4Q7u4x5spidaR34xQw5zDPdSvqq40RgMBRgSl/kziGkof09e8w/AMwzRvEzPGCRXyFxWxI0VvNNwIOkBENGTRLbGw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KZATsppQ7SM/08EqogKrXqs+X7hZ99OezCSyhmS/+q4=;
- b=hKec2NHAtZtAmacJm27x89pvEDNEKxs+BF660AE6cqez/BQ6sFCSprAFdV3wlgSeURrcrXuoA7g5YOpQz8pNAPYF+HAtu5BiD757p+DXIvi8lfFCZ+P2cSOh3IwVo/PYTGrwHFxSTS5+kYlrCsrCvcCHzaqZUeIuL/P/VUgmZP9yhWuVwUBBB8X8pNdjafa1ehHyCLmNA2r/nk8/w/1n+cwG/QBtXz5r7tees1HvDkvogHfC/q93S/j2ixRVwlMXMs+KdJQQBOot2Z9vict5eNotYREzLspoASArc1eM/lTSsFiIF1+jkjZ++JxXj/2quwOt23U9FvdCYthyY+tcgg==
+ bh=HQV7BKorz7b2XccU26m3ASTG6kbgxQcU1T7oWKr7Xsw=;
+ b=xdZkr0GHMGjz8WHzMc87RN7AbaZYnlFkyNIT9cyPjNlNSQiw2nE8PWLQJH8bGXLnlLbPuFHs7azY8EEGFyVTJNsocEATvj2DmRQZgIf5rkGCQ83Rbh00WENz0A7YczDddTyHeJxJPEMw9vjG2mHgqk5jKmKmKmhk5E+t0ceH8M70t5q+k88pkFEs48J5nBA6cPRgEvQy9x5Xkxws7Mf+7G4TwHIZ+35YII0Wf8KOr83JWv4e6IJB36DuJDuePM9JGCr2sCkoyqTkYVUb/43xrGaCGbGGpfCwQ7mC+DqZ0sUo217WiZrjaVFX2Of6uxOHg4tqR4jJ1p7pENsFQpx6+Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from PH8PR11MB6928.namprd11.prod.outlook.com (2603:10b6:510:224::12)
- by MW4PR11MB5872.namprd11.prod.outlook.com (2603:10b6:303:169::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.21; Sat, 12 Oct
- 2024 06:45:35 +0000
-Received: from PH8PR11MB6928.namprd11.prod.outlook.com
- ([fe80::4f5d:1d96:e74c:2840]) by PH8PR11MB6928.namprd11.prod.outlook.com
- ([fe80::4f5d:1d96:e74c:2840%5]) with mapi id 15.20.8048.017; Sat, 12 Oct 2024
- 06:45:35 +0000
-From: "Song, Jiaying (CN)" <Jiaying.Song.CN@windriver.com>
-To: "raj.khem@gmail.com" <raj.khem@gmail.com>
-CC: "Zhao, Yi" <Yi.Zhao@windriver.com>,
-        "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-        "Li, Changqing"
-	<Changqing.Li@windriver.com>
-Subject: RE: [oe] [meta-oe][PATCH 6/6] debootstrap: upgrade 1.0.132 -> 1.0.137
-Thread-Topic: [oe] [meta-oe][PATCH 6/6] debootstrap: upgrade 1.0.132 ->
- 1.0.137
-Thread-Index: AQHbB25+rv2WbBJDwUqrsVrWc9kjl7KCzypw
-Date: Sat, 12 Oct 2024 06:45:35 +0000
-Message-ID: 
- <PH8PR11MB6928E4BF2813A15A2028BE61B87A2@PH8PR11MB6928.namprd11.prod.outlook.com>
-References: <20240915125153.2940806-1-yi.zhao@windriver.com>
- <20240915125153.2940806-6-yi.zhao@windriver.com>
-In-Reply-To: <20240915125153.2940806-6-yi.zhao@windriver.com>
-Accept-Language: en-AS, zh-CN, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PH8PR11MB6928:EE_|MW4PR11MB5872:EE_
-x-ms-office365-filtering-correlation-id: 5e09ed43-5221-4b97-8141-08dcea8979b2
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|366016|1800799024|376014|38070700018;
-x-microsoft-antispam-message-info: 
- =?us-ascii?Q?yVzgTUdxVYgdYbnAM0gq7QjPM6aEiQ9eocw57NI12cR86aoKE6JfeciVgfE/?=
- =?us-ascii?Q?+koMXHRxRJG6FiBhg3VGaTJVxfKssE1dEh82MlxB73gE1ABWqc5N+nXwX+TM?=
- =?us-ascii?Q?HvT+iqO4KEcQHl+B4fQyBj1h08+b88S67+CjQNFAPUW/qHGug+Hhe9Volay+?=
- =?us-ascii?Q?nnmDvCI41Ko72QRUSirflfBgpGdd1FyPZ2JrQHBrFzVOP07oxU350YHnMBdc?=
- =?us-ascii?Q?qQ1SVJSGMVFIOcLMAKT0cQBZJ3xbT4247HpWkRVb85JrIyJCwTW6ZCQARl4P?=
- =?us-ascii?Q?KSES8MtigrhckIfbO1YzttTreK1JqYHJAk38bb+zwDdwf/YcF2gClkGiIkSo?=
- =?us-ascii?Q?GiMyMg7lt6M1g26OO1biQYKJMsRqbxAO8pnzlTdVSDARILcDnfgOcGuNvYkz?=
- =?us-ascii?Q?uSJ5mgV8RFdL5Vo614IuXomkPvKfjUBU+E9E2Eh669RCr7M9AQfO+djt74JX?=
- =?us-ascii?Q?Y7ZlUUeIzwTfuhFKMCic9wLWcMf6UatkUYj/ftIvHqEaaeuLlU7O5nzPK2hy?=
- =?us-ascii?Q?9iuRIe25aiarr3XpUzjUFMPVVt1nyBfTMmKt/pHGN8yHooA3RHQ1LaJN5hwK?=
- =?us-ascii?Q?vK5/hjudB2UcJ8xUvTpOeY+R9y81uHpuOTyE47jHImbZkue8I28UOOKivNJy?=
- =?us-ascii?Q?pQ0r+BgC/wyShDKccdU/VnssrXVDPJN5njWoCqB93bP/M1HvI3iQNZA+zaVE?=
- =?us-ascii?Q?Jve18Tr8MfbLiM2o2GBFZG6O71vx86p5enKw8PBQ2oJurHTYW1upn0+QP/LT?=
- =?us-ascii?Q?5eQymyS/FAJGdarrYwtn6d1a8NbJypjNDkt7Xv1x/6u4VDZS9cuN8jJHTLm2?=
- =?us-ascii?Q?6yGYC3cCToSk69LddzhCuMRjsnjA8JjWNVZVPBH2Nx13ElPqycnd3wjBfC6/?=
- =?us-ascii?Q?pbU1OEUwSFRG7+11klnHT6VR5nO8uwT8urh29rVIUxkxMXStAT+5oY7Q3nro?=
- =?us-ascii?Q?CD8CUXNxhb+wCfI0ZW+ek8GwENKmoGjM2YpIIFhPsqF6X41wJNREx0zmHEI3?=
- =?us-ascii?Q?xLHkqK/vMq1iflAtMEwX82XbdKPyr4O3nCb+Cd4HkYHIAbdHbkEnGiRNhvRl?=
- =?us-ascii?Q?6wR5+Yy3hEHVXrL4F5UoZT/fh2V4HpDuSZT0sZtPP8uNsMTeZN0FnaldgIDa?=
- =?us-ascii?Q?V452SLVw0rsoPnnDmrB9NOj/w63oOaYxQpKoqMw+4uRDhiZiA1OKw9Wjv7Dj?=
- =?us-ascii?Q?zM5HCWkVGmnuXxquIGNEefENQp9Zayq3r84els4DYe0t2mZB/r7slV6g3g+F?=
- =?us-ascii?Q?kj6u89P200/DoSul+eIsCJ1IkSjgbrEnNRBOY1bEJuLLJi4VPr6y3eOR5Leh?=
- =?us-ascii?Q?42o=3D?=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH8PR11MB6928.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(38070700018);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?us-ascii?Q?01if1jLF3wpq6Xl1jpyA1HFMUsEY53gJKRMJ/4S2/G+f59RBWKKx6tzN3lNK?=
- =?us-ascii?Q?cPrcH5rO9rPb4bvP0ESg/8t0EKb2N6lWtzfADP/T0boiZIY8+cULcuDt4eTN?=
- =?us-ascii?Q?g/rQC6koazFghmMGXwHIVoGt9wxRuCECT5gS9hYTq3EGlFg0VAMYJytkyErv?=
- =?us-ascii?Q?nQv4v+sIgnx4Z1npVa17qq+WAuUGmKJxLxmVASic3ap1YNbfvAEAs1m2PVFU?=
- =?us-ascii?Q?2LtyhUL7OEy6r5kNOcIohiVsOZGr9pKkTT/wn2p8FUOnRQYS9kuksGG5IeOH?=
- =?us-ascii?Q?JKGYQYhjZgRZw7Z/6oM3IV33qA5A5UyLYf01js1qIxyzLpSbCTyuqn4PsAB+?=
- =?us-ascii?Q?RJwQsFvyj4crgjCJcYUSaDuj2Hp75Cyknh1XYnIGqoE5kd3pWB4ckZ/PHqpE?=
- =?us-ascii?Q?u5TmNS/pVmPpxt2NS+8enRwmHFP9AL7KtHV+pinosjknRRwgeKPJrepi+PBm?=
- =?us-ascii?Q?4eU/JXTDW5oE0pg6lhda/j9JFGlwycjOOBfbHO4HZTPfC0AOki5sYdRCwN3F?=
- =?us-ascii?Q?39rC8dpqV5ltX9674olFb1LkTln9Cb/OwGGYsd9E8l5EZYSR/6Nrrcl3RVGo?=
- =?us-ascii?Q?+tPjrsW8kEMCpm2Uwlh0iuO12i+vOKTMHG6xMJNPZJtSJ8mwJpB/GKpldJBv?=
- =?us-ascii?Q?j3b0J2RXkNFB/h5GnIdFxNlXWXWfxDrukSDPbUImFDEJgrPsrnn+F34AViOC?=
- =?us-ascii?Q?2Ds7l75w8PQ1k10knTDBqsALJ82RdJ7/7LRD3BtvAlwmIHq9kXwO5IgLn2jd?=
- =?us-ascii?Q?bmU1f0aC14QNabLKXntsxljxwXeNDECe2+V4JGQ4I9baLWgfp7l2tIj3xR3V?=
- =?us-ascii?Q?pxBeTRLIajXgcKjmbgvKnPlAo7I98mZXeANJXpg0Mzvfyw3yOdHVB4KD/Qar?=
- =?us-ascii?Q?k6hEdp4DDFi5wFSmn0SpiIrmCrNbP4ubkd9nGTln/y/Tk07b2/VzET0jBOXg?=
- =?us-ascii?Q?+5xSZwZfynbm3UrdGQ5E0reYBQvt3z+BU7dept6i+/SPxyERucmek9WJ2Q7q?=
- =?us-ascii?Q?kiF6WBVqoUp1SdG1suHxlJnQsrdj05eR25vgiyKoZhJqiw75SzabZNX+xngT?=
- =?us-ascii?Q?lBJf/1SZxbxik8kRTfwUHSCrIX+4xRU2ynGqa5fTKV98ymI/2zIW+l8BMVfq?=
- =?us-ascii?Q?BKvhS3iSE92HmdQk14puc0HhVjNk2kOx6a64XO+E4ujZ+Gkfp3vgY6rIVdTU?=
- =?us-ascii?Q?asKncSQNrJ39cFlKOQW7zVJWf0IDOrfHdFYjoEWK+9nqjwp+xfF2rCg4KCPW?=
- =?us-ascii?Q?hmHF5Y/bT3q+BqDiHXVX2DPEO/kdUYPekKVi/mA0hppu6Xp7JM4YIhUQD9Wp?=
- =?us-ascii?Q?U4Z3tvcdxwxpybVRF2EzMGEdGw7fkHHS7gfYVgaDHvm43HGi36itfrQ2b6xQ?=
- =?us-ascii?Q?rwX1Rdgf1GIzBgFThm2b0+XQTlAVxOFE7FLInOBv8TQaR2Nk/q7ksvxjsBZe?=
- =?us-ascii?Q?YgNyt1dytL5gbPaInG+16qRI8LOcNAgauNtSMH8y22gOttTa3BS9vFp3wugj?=
- =?us-ascii?Q?iE7zpSgtMtbfg7o3XrLpDaFVFnVs/gRCbDoVUx8sxs2tCEv8d1iYClhBKRIi?=
- =?us-ascii?Q?wSPsHe8AGpke8vJZYuhVggUFliECv9U3yYs7fEnjRKrOIQGRBFQQveQb0tnH?=
- =?us-ascii?Q?8g=3D=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Received: from DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5) by
+ CY8PR11MB7267.namprd11.prod.outlook.com (2603:10b6:930:9a::13) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8048.20; Sat, 12 Oct 2024 06:53:29 +0000
+Received: from DS0PR11MB6399.namprd11.prod.outlook.com
+ ([fe80::2b44:787c:e7ee:bfad]) by DS0PR11MB6399.namprd11.prod.outlook.com
+ ([fe80::2b44:787c:e7ee:bfad%5]) with mapi id 15.20.8048.017; Sat, 12 Oct 2024
+ 06:53:29 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH 1/2] glog: upgrade 0.6.0 -> 0.7.1
+Date: Sat, 12 Oct 2024 14:53:11 +0800
+Message-Id: <20241012065312.3239400-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.25.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SGBP274CA0002.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:b0::14)
+ To DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5)
 MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|CY8PR11MB7267:EE_
+X-MS-Office365-Filtering-Correlation-Id: bfe00dac-12cf-49a5-f495-08dcea8a9426
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|376014|366016|1800799024|52116014|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?Sc0+jxZ4kxnrimAor0XudNZ5kPtTCuOMfN6ww4C30R43lVT1D1slqKk6fyOF?=
+ =?us-ascii?Q?+/vLNpcTW8VwBP+14zveS44EH6L8kFBFWE4PNIQR5BAiVvDgOMuFMrzlmTmL?=
+ =?us-ascii?Q?Z+eCeOajLNYoBbEciItt5Ns6bgKYLtVCOD6F4EQ7YInGJs9PzM1iPdve4st+?=
+ =?us-ascii?Q?bXk6ZoF0sFc4OphTBSq3vtT4mjDA3bTvDNcIX608eADgA/NHvR/gNDcHTi05?=
+ =?us-ascii?Q?4l9N1alzlbmFuR4W63GRtEFFDhFuv3syaYcuLBmDbfsnF7VUcmYSvCCD3EGi?=
+ =?us-ascii?Q?k5r/YTJGYdABn5wd+2kjZNDCjXVm0VBNEFLXlBhWagepIpzSaTlV8iJvW4q6?=
+ =?us-ascii?Q?bbxprmd/JZF5lUAC5GiHNBa3JyEIb8gsqAqxxm98uqd/PxF+GkLOyh3x5gfD?=
+ =?us-ascii?Q?CqziUU7Q2FtF0TzsOhhXek8yAbxgTA/m1pyxj9RzMtC4Kc1tKC3WxoaegwP7?=
+ =?us-ascii?Q?s8LqIDGp4VEAh3/GX4MOfPZTcRkj0aR44fuf2ls047Uhz+n/BKxmKnuuRYqP?=
+ =?us-ascii?Q?lBpCZhDeTkmlyqJh3R/SGvVjLlK2Sd7giJahqCoMSb4iwW34lS7hE9CRe7cd?=
+ =?us-ascii?Q?+XWnUj9Hfh+/at5FdC6bXhvER1NmTPjWEuuMbwgU3HjMcDwSGiUpcgIkLtl6?=
+ =?us-ascii?Q?xRokc0hvEUomVbM7/lmYGyi3z79xpZzwqiGgbjXzgBBE5JDLlFmobZIZ/wvu?=
+ =?us-ascii?Q?XqfJQW9qr24+Hmc+Hv9Z+TeR9HqXRIjMWzHOJ8qvmFhdK6r127u2/DVHEf1g?=
+ =?us-ascii?Q?zWMYcotqdhhiNSsTOHssJK5flgN7VwXzBY1E72dmJq1sW4Th9mvekOErMTSY?=
+ =?us-ascii?Q?CEYcy5pWB2G6hBB53o9yloAUuwPNd/Br0pJ9JUEkhdvConswJfO/IQoZg/v/?=
+ =?us-ascii?Q?G2kKKu2viJOaTEKOiDdijRt1xSHWxKVgY9BqXtmhhiWQ4uIh6hsssqw+nWt/?=
+ =?us-ascii?Q?QeNw3sOcpXGdWMJLqKWhgqXg3HNtf35skkhsirQw9GoeKdrQVWi6aPebU/wO?=
+ =?us-ascii?Q?1LfoeAn060rd/nILPAVnOZcEOTU7SM3veoSKAX3ZIwMAgLeDLHz+D/u5oizZ?=
+ =?us-ascii?Q?h2Bn1ZJN/gUELE96Q64h3veoHRN5X4ZUpcd72US7d0VrA+umToDDLGSYbwPC?=
+ =?us-ascii?Q?r4Ivj22hIUyCrbfy/c3pw6FyKtwbVLFteUlhsKfp2Uy4oCvhikei8ttw+1FD?=
+ =?us-ascii?Q?EyMaNVz1OE5thyOwTdOkhDk87TuFgRzfU0CZ44HtUHw0CFegSOJhzF4y7W9E?=
+ =?us-ascii?Q?AJrhl7kgKPF+0SSnUud0sPf0/III+BR5phmxLenTZw1CLtI315ZzQKJVATcf?=
+ =?us-ascii?Q?GLLX3jDuYe5idJIQGOiunmm3bMoyBOwAO6TSBa6TBcbaRw=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(52116014)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?ZHXyrDia7dJx6Dtd3yVH+u2qBkbPHgxxlaICNrajbqbEi3fuRb8On7C8A428?=
+ =?us-ascii?Q?IWsB8ZERVmw6lXG0Cap/FTzLY6Klp20D4LMhP1jQ8Or28z8ly5A/Di/TwJmG?=
+ =?us-ascii?Q?rAQjArRLdpFhrYGQiPUdBv0MPhRrHf0jBLrBGHHCkFZX1QA0f7QkYXeP4rGZ?=
+ =?us-ascii?Q?9o/eGz61brg5H9WZ5g9iD4Fure+vZ18tTLm/hbVtzaKRX96lBuBVhUGURdhk?=
+ =?us-ascii?Q?2/SPtUZGLx6ftvVjWQHm4tqbCLIL60AE5hWhfNwtrvZd5QQI1q5nF+T+0CSL?=
+ =?us-ascii?Q?5E2NaLmlNiXIpRKKJ4cZhofoWX5ENgfwdReXdvFDTLL4X2Cwmkp5+kAte0qO?=
+ =?us-ascii?Q?4zRuNMwB3C+Fjjcnc3f8GoDC1yuDysJqSfOupDB0V8C0cbKepiC6Qcn7VNqQ?=
+ =?us-ascii?Q?PCeVlXPS1nbv7jHKN9ed2ypzv+Rl8jFGQV30dlO93trSErQ6XatUunu95GXw?=
+ =?us-ascii?Q?qJYrYqX5T44EcOZWeboddTe1xpzwTN0fRR+ERB5NFefcLqyxzbrSWyHkwTwK?=
+ =?us-ascii?Q?7J7CKECoJFVq6xRQsl89uSDYbL33G/oL53+RC2iMn312SWdTwSCKoUj+wt5f?=
+ =?us-ascii?Q?E4uvzHKO7TfyyvmgErZnEiujvnMH0+lchbV5HWsXRDf+rvCrVLPrgEjplVIH?=
+ =?us-ascii?Q?fTINu8ZuvbR9oai7qKqm64bvY0exYfpb3vd2G+rZZvZjar9hj16p+laaxx+K?=
+ =?us-ascii?Q?Rig+INhnvD63OnaGWL+Et786eSY9AX8DmewA/hUWTAUGmfshqLqeXCqtUFhD?=
+ =?us-ascii?Q?WJMGwFwVHVUVnMEwHci3S08RdL8hGBPdi+0WL+yZvnX3IZ+5/NGQAvrA7FBl?=
+ =?us-ascii?Q?JgqEGWpc7hsxpPjTbMd78GLfb2YsVQg2ovR3Q6tz8x/v5LM7luvKuGblqObO?=
+ =?us-ascii?Q?M8131TWA2AFvr1B8/uIakL0Fop9PrWLHG/rtVK2CM3HjwuHDi/p/JftrUnZm?=
+ =?us-ascii?Q?OLMimH8MhA1yxrNcyTZxAYpxMeu5eiZoJVT9GjW2cNmnpZ0SojUPZj3/qzNc?=
+ =?us-ascii?Q?UnTsfKI3jlvp0O0exvyGvPfyYSniMtkyECvD2iYN/o2rmK943MGGlgEaeDTe?=
+ =?us-ascii?Q?OiEz086p0oAtyghUTjWz3qOjPS8Xbf39OB93UV9iYfkBS5gAXuT8lWV0Ucyu?=
+ =?us-ascii?Q?2s/cSI3Ghs+dw2nKU7F4PdA3ai0lUZuMlcxC8dkUwbzc5M5Cftbcg7vtgxCb?=
+ =?us-ascii?Q?WVVj50muPYXIbNeVQdycQ/PXYd85bmpo2kkTi9lb+35VNWguwLGgwFmKc4Py?=
+ =?us-ascii?Q?GlS4E9JCqkuwl8lTnZSKd8qFdavUstHsA0zias5cYs18/be5teq8NrXHuzkf?=
+ =?us-ascii?Q?xnS3gCGg0KC/8raXKDOq0lIet18cbLAYC/dtw2rtimiVe7n+djm/fq6Rgrnd?=
+ =?us-ascii?Q?BzNFEkbTuOgclkeUPCg3RFRST8hY9bJ8hl6Pu1qIg0voeFWg0V8M3bemJPUh?=
+ =?us-ascii?Q?5QVqy6TMDnSWi++0vBAr2moKlWexZ8/Jxniy/AHTr58RCM3ndTV2kM4mxfnK?=
+ =?us-ascii?Q?YvJnFsvgKnpOHQAI3lmlSmBeQyfWS+m+mgJdVOVPI6qryvqUoWlmdLpO6LKs?=
+ =?us-ascii?Q?p60lsaIozQ60+LIDc8E5C2TTXCFTgWhNAVBe/VUg?=
 X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: bfe00dac-12cf-49a5-f495-08dcea8a9426
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6399.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PH8PR11MB6928.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5e09ed43-5221-4b97-8141-08dcea8979b2
-X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Oct 2024 06:45:35.2355
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2024 06:53:29.3178
  (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: mMfJjTj4MNjd+h/AUJGfoUje+kX4lfQPJb754ZWl6mXjAO71/3Q2KWyacL2bMswP0g6M3fKdyhWR3yvfwSBCgxKhM9mC+7LjOLVUYXpQbPM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR11MB5872
-X-Proofpoint-GUID: 3cu7u9jErElc_HBPGJ9iA2v8yPSPVCdv
-X-Proofpoint-ORIG-GUID: usPR3qd71_xbIDFC-wwaV1ZS6GEVxLHd
-X-Authority-Analysis: v=2.4 cv=DukE+3/+ c=1 sm=1 tr=0 ts=670a1b13 cx=c_pps a=PK5aExQQjalka8oDlC/sVA==:117 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10 a=DAUX931o1VcA:10 a=bRTqI5nwn0kA:10 a=xNf9USuDAAAA:8 a=Q4-j1AaZAAAA:8
- a=t7CeM3EgAAAA:8 a=QZg4Uw8NlMAVgxGFAe8A:9 a=CjuIK1q_8ugA:10 a=9H3Qd4_ONW2Ztcrla5EB:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: /aC5ruRk27Mp/JcSl6QbgCKkQShNGY+pej2UXmEQM9vcWOe8/0QMceKEQtanEiE0CUZBCgatBBoYn3Af1JxHxg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR11MB7267
+X-Authority-Analysis: v=2.4 cv=QrQM3kyd c=1 sm=1 tr=0 ts=670a1ceb cx=c_pps a=2TzYObwzRp/N0knVItohZg==:117 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=DAUX931o1VcA:10 a=bRTqI5nwn0kA:10 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8
+ a=wzS5HhsdN6HSmMmEo_wA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: IuXSIAzm8kV6Qyc5epkW9tFBp4f3_pLp
+X-Proofpoint-ORIG-GUID: IuXSIAzm8kV6Qyc5epkW9tFBp4f3_pLp
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.62.30
  definitions=2024-10-12_03,2024-10-11_01,2024-09-30_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1011 mlxscore=0
- phishscore=0 suspectscore=0 mlxlogscore=999 impostorscore=0 spamscore=0
- malwarescore=0 bulkscore=0 adultscore=0 lowpriorityscore=0
- priorityscore=1501 classifier=spam authscore=0 adjust=0 reason=mlx
- scancount=1 engine=8.21.0-2409260000 definitions=main-2410120044
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0
+ priorityscore=1501 impostorscore=0 mlxlogscore=999 lowpriorityscore=0
+ malwarescore=0 mlxscore=0 adultscore=0 bulkscore=0 phishscore=0
+ clxscore=1015 suspectscore=0 classifier=spam authscore=0 adjust=0
+ reason=mlx scancount=1 engine=8.21.0-2409260000
+ definitions=main-2410120045
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 12 Oct 2024 06:45:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112819
-
-Hi Khem,
-
-Could you please upgrade the version of debootstrap on the Scarthgap branch=
- from 1.0.132 to 1.0.137? The official download link for version 1.0.132 ha=
-s been removed, which leads to the following error during the build process=
-:
-
-WARNING: debootstrap-1.0.132-r0.wr2401 do_fetch: Failed to fetch URL http:/=
-/ftp.debian.org/debian/pool/main/d/debootstrap/debootstrap_1.0.132.tar.gz, =
-attempting MIRRORS if available
-
-Best regards,
-Jiaying.
-
-
------Original Message-----
-From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.o=
-penembedded.org> On Behalf Of Yi Zhao via lists.openembedded.org
-Sent: Sunday, September 15, 2024 8:52 PM
-To: openembedded-devel@lists.openembedded.org
-Subject: [oe] [meta-oe][PATCH 6/6] debootstrap: upgrade 1.0.132 -> 1.0.137
+ <openembedded-devel@lists.openembedded.org>; Sat, 12 Oct 2024 06:53:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112820
 
 ChangeLog:
-https://salsa.debian.org/installer-team/debootstrap/-/blob/1.0.137/debian/c=
-hangelog
+https://github.com/google/glog/releases/tag/v0.7.0
+https://github.com/google/glog/releases/tag/v0.7.1
+
+Drop 0001-Change-SleepForMilliseconds-parameter-from-unsigned-.patch and
+libexecinfo.patch as the issues have been fixed upstream.
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- ...rt-to-override-usr-sbin-and-usr-share.patch | 18 ++++++++----------  ..=
-.support-to-override-usr-bin-arch-test.patch | 12 ++++++------  ...o-not-ha=
-rdcode-the-full-path-of-dpkg.patch} |  8 ++++----  ...strap_1.0.132.bb =3D>=
- debootstrap_1.0.137.bb} |  6 +++---
- 4 files changed, 21 insertions(+), 23 deletions(-)  rename meta-oe/recipes=
--devtools/debootstrap/debootstrap/{0001-do-not-hardcode-the-full-path-of-dp=
-kg.patch =3D> 0003-do-not-hardcode-the-full-path-of-dpkg.patch} (87%)  rena=
-me meta-oe/recipes-devtools/debootstrap/{debootstrap_1.0.132.bb =3D> deboot=
-strap_1.0.137.bb} (71%)
+ ...illiseconds-parameter-from-unsigned-.patch | 33 ---------------
+ .../glog/glog/libexecinfo.patch               | 40 -------------------
+ .../glog/{glog_0.6.0.bb => glog_0.7.1.bb}     |  7 ++--
+ 3 files changed, 3 insertions(+), 77 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/glog/glog/0001-Change-SleepForMilliseconds-parameter-from-unsigned-.patch
+ delete mode 100644 meta-oe/recipes-support/glog/glog/libexecinfo.patch
+ rename meta-oe/recipes-support/glog/{glog_0.6.0.bb => glog_0.7.1.bb} (84%)
 
-diff --git a/meta-oe/recipes-devtools/debootstrap/debootstrap/0001-support-=
-to-override-usr-sbin-and-usr-share.patch b/meta-oe/recipes-devtools/deboots=
-trap/debootstrap/0001-support-to-override-usr-sbin-and-usr-share.patch
-index 12dd23810..faa66e026 100644
---- a/meta-oe/recipes-devtools/debootstrap/debootstrap/0001-support-to-over=
-ride-usr-sbin-and-usr-share.patch
-+++ b/meta-oe/recipes-devtools/debootstrap/debootstrap/0001-support-to-o
-+++ verride-usr-sbin-and-usr-share.patch
-@@ -1,20 +1,20 @@
--From 87d0174e8d56e7458dc94f05f82ab7a67a5cf7d0 Mon Sep 17 00:00:00 2001
-+From 6c8b0a3f9c09a7a135d95ff18038bcba22e87b86 Mon Sep 17 00:00:00 2001
- From: Hongxu Jia <hongxu.jia@windriver.com>
- Date: Thu, 8 Apr 2021 14:06:05 +0800
--Subject: [PATCH 1/2] support to override /usr/sbin and /usr/share
-+Subject: [PATCH] support to override /usr/sbin and /usr/share
-=20
- Upstream-Status: Submitted [https://salsa.debian.org/installer-team/deboot=
-strap/-/merge_requests/55]
-=20
- Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
- ---
-- Makefile | 12 +++++++-----
-- 1 file changed, 7 insertions(+), 5 deletions(-)
-+ Makefile | 10 ++++++----
-+ 1 file changed, 6 insertions(+), 4 deletions(-)
-=20
- diff --git a/Makefile b/Makefile
--index 8516803..a2d8c00 100644
-+index 21a9a39..649f465 100644
- --- a/Makefile
- +++ b/Makefile
--@@ -5,14 +5,16 @@ all:
-+@@ -5,13 +5,15 @@ all:
- =20
-  clean:
- =20
-@@ -28,14 +28,12 @@ index 8516803..a2d8c00 100644
- +	mkdir -p $(DESTDIR)$(sbindir)
- =20
-  	cp -a scripts/* $(DSDIR)/scripts/
-- 	install -o root -g root -m 0644 functions $(DSDIR)/
-+ 	install -m 0644 functions $(DSDIR)/
- =20
- -	sed 's/@VERSION@/$(VERSION)/g' debootstrap >$(DESTDIR)/usr/sbin/debootst=
-rap
---	chown root:root $(DESTDIR)/usr/sbin/debootstrap
- -	chmod 0755 $(DESTDIR)/usr/sbin/debootstrap
- +	sed 's/@VERSION@/$(VERSION)/g' debootstrap >$(DESTDIR)$(sbindir)/deboots=
-trap
--+	chown root:root $(DESTDIR)$(sbindir)/debootstrap
- +	chmod 0755 $(DESTDIR)$(sbindir)/debootstrap
- --
--2.17.1
-+2.25.1
-=20
-diff --git a/meta-oe/recipes-devtools/debootstrap/debootstrap/0002-support-=
-to-override-usr-bin-arch-test.patch b/meta-oe/recipes-devtools/debootstrap/=
-debootstrap/0002-support-to-override-usr-bin-arch-test.patch
-index 69329df4e..5de65779d 100644
---- a/meta-oe/recipes-devtools/debootstrap/debootstrap/0002-support-to-over=
-ride-usr-bin-arch-test.patch
-+++ b/meta-oe/recipes-devtools/debootstrap/debootstrap/0002-support-to-o
-+++ verride-usr-bin-arch-test.patch
-@@ -1,7 +1,7 @@
--From f0420b201f2fb5286ccf5657faa6b38cd2680e10 Mon Sep 17 00:00:00 2001
-+From 3fee46c7e50f432fbd5c97c60b918d71c91f1adc Mon Sep 17 00:00:00 2001
- From: Hongxu Jia <hongxu.jia@windriver.com>
- Date: Thu, 8 Apr 2021 14:08:06 +0800
--Subject: [PATCH 2/2] support to override /usr/bin/arch-test
-+Subject: [PATCH] support to override /usr/bin/arch-test
-=20
- Upstream-Status: Submitted [https://salsa.debian.org/installer-team/deboot=
-strap/-/merge_requests/55]
-=20
-@@ -11,12 +11,12 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-  1 file changed, 8 insertions(+), 4 deletions(-)
-=20
- diff --git a/debootstrap b/debootstrap
--index 9b9e58d..a3cf3af 100755
-+index 552c8d6..11a9465 100755
- --- a/debootstrap
- +++ b/debootstrap
- @@ -51,6 +51,10 @@ INRELEASE_PATH=3D""
-+=20
-  DEF_MIRROR=3D"http://deb.debian.org/debian"
-- DEF_HTTPS_MIRROR=3D"https://deb.debian.org/debian"
- =20
- +if [ -z "$ARCH_TEST" ]; then
- +	ARCH_TEST=3D"/usr/bin/arch-test"
-@@ -25,7 +25,7 @@ index 9b9e58d..a3cf3af 100755
-  # set $CONTAINER
-  detect_container
- =20
--@@ -645,12 +649,12 @@ fi
-+@@ -661,12 +665,12 @@ fi
- =20
-  #########################################################################=
-##
- =20
-@@ -43,5 +43,5 @@ index 9b9e58d..a3cf3af 100755
-  		ret=3D3
-  	fi
- --
--2.17.1
-+2.25.1
-=20
-diff --git a/meta-oe/recipes-devtools/debootstrap/debootstrap/0001-do-not-h=
-ardcode-the-full-path-of-dpkg.patch b/meta-oe/recipes-devtools/debootstrap/=
-debootstrap/0003-do-not-hardcode-the-full-path-of-dpkg.patch
-similarity index 87%
-rename from meta-oe/recipes-devtools/debootstrap/debootstrap/0001-do-not-ha=
-rdcode-the-full-path-of-dpkg.patch
-rename to meta-oe/recipes-devtools/debootstrap/debootstrap/0003-do-not-hard=
-code-the-full-path-of-dpkg.patch
-index 2a5f23316..5cd1ce88a 100644
---- a/meta-oe/recipes-devtools/debootstrap/debootstrap/0001-do-not-hardcode=
--the-full-path-of-dpkg.patch
-+++ b/meta-oe/recipes-devtools/debootstrap/debootstrap/0003-do-not-hardc
-+++ ode-the-full-path-of-dpkg.patch
-@@ -1,4 +1,4 @@
--From e735fb23f46f0c3c7a1144ba6b4050bfc0015a05 Mon Sep 17 00:00:00 2001
-+From e92554e57b4aae242cb0416025883ccc2c539d2a Mon Sep 17 00:00:00 2001
- From: Hongxu Jia <hongxu.jia@windriver.com>
- Date: Wed, 2 Jun 2021 13:34:35 +0800
- Subject: [PATCH] do not hardcode the full path of dpkg @@ -16,10 +16,10 @@=
- Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-  1 file changed, 1 insertion(+), 1 deletion(-)
-=20
- diff --git a/debootstrap b/debootstrap
--index a3cf3af..5e96c3e 100755
-+index 11a9465..17ab05a 100755
- --- a/debootstrap
- +++ b/debootstrap
--@@ -538,7 +538,7 @@ fi
-+@@ -551,7 +551,7 @@ fi
- =20
-  if in_path dpkg && \
-       dpkg --print-architecture >/dev/null 2>&1; then @@ -29,5 +29,5 @@ in=
-dex a3cf3af..5e96c3e 100755
-       udpkg --print-architecture >/dev/null 2>&1; then
-  	HOST_ARCH=3D$(/usr/bin/udpkg --print-architecture)
- --
--2.27.0
-+2.25.1
-=20
-diff --git a/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.132.bb b/=
-meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.137.bb
-similarity index 71%
-rename from meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.132.bb
-rename to meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.137.bb
-index c28a51749..d4783b354 100644
---- a/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.132.bb
-+++ b/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.137.bb
-@@ -2,16 +2,16 @@ SUMMARY =3D "Install a Debian system into a subdirectory"
- HOMEPAGE =3D "https://wiki.debian.org/Debootstrap"
- SECTION =3D "devel"
- LICENSE =3D "MIT"
--LIC_FILES_CHKSUM =3D "file://debian/copyright;md5=3D1e68ced6e1689d4cd9dac7=
-5ff5225608"
-+LIC_FILES_CHKSUM =3D "file://debian/copyright;md5=3De7b45429ef05610abf91ac=
-199fdb3a6e"
-=20
- SRC_URI  =3D "\
-     ${DEBIAN_MIRROR}/main/d/debootstrap/debootstrap_${PV}.tar.gz \
-     file://0001-support-to-override-usr-sbin-and-usr-share.patch \
-     file://0002-support-to-override-usr-bin-arch-test.patch \
--    file://0001-do-not-hardcode-the-full-path-of-dpkg.patch \
-+    file://0003-do-not-hardcode-the-full-path-of-dpkg.patch \
+diff --git a/meta-oe/recipes-support/glog/glog/0001-Change-SleepForMilliseconds-parameter-from-unsigned-.patch b/meta-oe/recipes-support/glog/glog/0001-Change-SleepForMilliseconds-parameter-from-unsigned-.patch
+deleted file mode 100644
+index 3732c62cd..000000000
+--- a/meta-oe/recipes-support/glog/glog/0001-Change-SleepForMilliseconds-parameter-from-unsigned-.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-From 176230435cb4b64ff7f2d97f77a04579ad9ca239 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 18 Feb 2023 13:14:14 -0800
+-Subject: [PATCH] Change SleepForMilliseconds parameter from unsigned int -> long
+-
+-Fixes following error on 32bit platforms
+-
+-src/googletest.h:631:35: error: non-constant-expression cannot be narrowed from type 'unsigned int' to 'long' in initializer list [-Wc++11-narrowing]
+-  const struct timespec req = {0, t * 1000 * 1000};
+-                                  ^~~~~~~~~~~~~~~
+-
+-Upstream-Status: Submitted [https://github.com/google/glog/pull/894]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/googletest.h | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/googletest.h b/src/googletest.h
+-index 5761361..836b06c 100644
+---- a/src/googletest.h
+-+++ b/src/googletest.h
+-@@ -625,7 +625,7 @@ class Thread {
+- #endif
+- };
+- 
+--static inline void SleepForMilliseconds(unsigned t) {
+-+static inline void SleepForMilliseconds(long t) {
+- #ifndef GLOG_OS_WINDOWS
+- # if defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE >= 199309L
+-   const struct timespec req = {0, t * 1000 * 1000};
+--- 
+-2.39.2
+-
+diff --git a/meta-oe/recipes-support/glog/glog/libexecinfo.patch b/meta-oe/recipes-support/glog/glog/libexecinfo.patch
+deleted file mode 100644
+index a791a40db..000000000
+--- a/meta-oe/recipes-support/glog/glog/libexecinfo.patch
++++ /dev/null
+@@ -1,40 +0,0 @@
+-From 19d00c15710840910a7397252c14d612746631fe Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Mon, 8 Mar 2021 14:58:40 -0800
+-Subject: [PATCH] Link libexecinfo if its found, this is needed for musl based
+- systems
+-
+-Fixes
+-ld: libglog.so.0.4.0: undefined reference to `backtrace'
+-| collect2: error: ld returned 1 exit status
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-
+----
+- CMakeLists.txt | 5 +++++
+- 1 file changed, 5 insertions(+)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 846b444..1553358 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -162,6 +162,7 @@ cmake_pop_check_state ()
+- check_cxx_symbol_exists (snprintf cstdio HAVE_SNPRINTF)
+- 
+- check_library_exists (dbghelp UnDecorateSymbolName "" HAVE_DBGHELP)
+-+check_library_exists (execinfo backtrace "" HAVE_EXECINFO)
+- 
+- check_cxx_source_compiles ("
+- #include <cstdlib>
+-@@ -629,6 +630,10 @@ if (Unwind_FOUND)
+-   set (Unwind_DEPENDENCY "find_dependency (Unwind ${Unwind_VERSION})")
+- endif (Unwind_FOUND)
+- 
+-+if (HAVE_EXECINFO)
+-+  target_link_libraries (glog PUBLIC execinfo)
+-+endif (HAVE_EXECINFO)
+-+
+- if (HAVE_DBGHELP)
+-   target_link_libraries (glog PRIVATE dbghelp)
+-   set (glog_libraries_options_for_static_linking "${glog_libraries_options_for_static_linking} -ldbghelp")
+diff --git a/meta-oe/recipes-support/glog/glog_0.6.0.bb b/meta-oe/recipes-support/glog/glog_0.7.1.bb
+similarity index 84%
+rename from meta-oe/recipes-support/glog/glog_0.6.0.bb
+rename to meta-oe/recipes-support/glog/glog_0.7.1.bb
+index ec39604f4..586afcad5 100644
+--- a/meta-oe/recipes-support/glog/glog_0.6.0.bb
++++ b/meta-oe/recipes-support/glog/glog_0.7.1.bb
+@@ -4,15 +4,13 @@ macros."
+ HOMEPAGE = "https://github.com/google/glog"
+ 
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=dc9db360e0bbd4e46672f3fd91dd6c4b"
++LIC_FILES_CHKSUM = "file://COPYING;md5=583a6ead531ca3cd5a2ea593a2888800"
+ 
+ SRC_URI = " \
+     git://github.com/google/glog.git;branch=master;protocol=https \
+-    file://libexecinfo.patch \
+-    file://0001-Change-SleepForMilliseconds-parameter-from-unsigned-.patch \
  "
-=20
--SRC_URI[sha256sum] =3D "d963a465314ac0e8fd5392573def042e6663e8edf3d08ace4b=
-bd0d27ee8431f7"
-+SRC_URI[sha256sum] =3D "666927457ee4b0b3e68e55a0efbf3fb69189610b7abbd53401=
-7d7032cb3ae833"
-=20
- S =3D "${WORKDIR}/debootstrap"
-=20
---
+ 
+-SRCREV = "b33e3bad4c46c8a6345525fd822af355e5ef9446"
++SRCREV = "7b134a5c82c0c0b5698bb6bf7a835b230c5638e4"
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -24,6 +22,7 @@ PACKAGECONFIG:remove:riscv32 = "unwind 64bit-atomics"
+ PACKAGECONFIG:remove:mipsarch = "64bit-atomics"
+ PACKAGECONFIG:remove:armv5 = "64bit-atomics"
+ PACKAGECONFIG:remove:armv6 = "64bit-atomics"
++PACKAGECONFIG:remove:powerpc = "64bit-atomics"
+ 
+ PACKAGECONFIG:append:libc-musl:riscv64 = " execinfo"
+ PACKAGECONFIG:append:libc-musl:riscv32 = " execinfo"
+-- 
 2.25.1
 
 
