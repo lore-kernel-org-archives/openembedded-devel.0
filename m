@@ -1,88 +1,81 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 64630D0EE19
-	for <webhook@archiver.kernel.org>; Fri, 11 Oct 2024 19:12:12 +0000 (UTC)
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.web10.20360.1728673929289967233
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00B82D0EE3F
+	for <webhook@archiver.kernel.org>; Sat, 12 Oct 2024 00:47:26 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web10.1754.1728694041814600650
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Oct 2024 12:12:09 -0700
+ Fri, 11 Oct 2024 17:47:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CWIWXGwz;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-207115e3056so19811465ad.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Oct 2024 12:12:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1728673928; x=1729278728; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=AfQqb9ah1bS7Jh3BMzmt3RV3YHaOHEjErsrT3YBjYww=;
-        b=CWIWXGwzbzxCrq6S3n6VCz9KPVucWfNhGExE8X5E6sbex4FgVzZ/xSnt84iwhqwtXT
-         TPfVN3oSVy1n15H/74Ah54bw0PNzM/EcLzIZOz8YQR9zz2oOJxrF05vdo+PxB//qiON4
-         gLlD2jwR6yTPqgB9aPNASOBcrmDEkwqHaX+Nuf2ozF7zFwnlQsUNKLz9+JNFaxwLvsoC
-         +cQ13CDKnMtvQfIS+tTLZfM3n8eQnBwu8X0wgDUH6LgoQYHsqP9UMKjmXIEHVqDpX+WA
-         1Et+EVjbmzxIOBO3mdIYeGVn8cbogSKZQG5e0IRHYrRXQM2sb3ZUeTFTQgpdo0wFRn9u
-         ZgBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728673928; x=1729278728;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=AfQqb9ah1bS7Jh3BMzmt3RV3YHaOHEjErsrT3YBjYww=;
-        b=Tm9mXlFhestwSQXsxjoFz9oAIlnFrU7ujSgmigmMKMfLIUKm1H1JQ1dI6xm2BXk5rL
-         YID41QnHNEemKiPyGkNq7ZIzBYPrlTMgSj61WxiznBHr2ju6Rm3H6ozQ7QewUIeE6w0D
-         p+3U6qQ9OuhnTQ+yvNvLcF8/yl/8UqanMz3aEUkYZ8eTwMzsmcgNeOWTttCMBuUTH4SJ
-         rowlOyzow7Np+Zuc16e6PTvcSh0JEG380EEOowltqA307pBpsajF7h+82VaJQw3GPch4
-         LRp7JRXHJRvDdLAmTC1wNVJYadoH8LTPNwGaAmkTsynW4rNwowDWaGdcvjrnFTHjKISU
-         NMVA==
-X-Gm-Message-State: AOJu0YxP1z4jmGRBlMOKkad1WpdpwnQ2REHM6yQVgx9dMuE0fpGX9gBv
-	WwygXlRPsrTIq411RnCHem02eifyep+iKLl2tqN+17EEE9DulUEqDbGbE+xI
-X-Google-Smtp-Source: AGHT+IEi15WN5p+SLLvq5kO7tqI4jyHmQdCiS9BO/2wJ6Hskw3TJRQoNEQYMkZOYbZbhKwW0n3XKuA==
-X-Received: by 2002:a17:902:ccca:b0:20c:8f98:5dbe with SMTP id d9443c01a7336-20ca1677b77mr63063575ad.33.1728673928309;
-        Fri, 11 Oct 2024 12:12:08 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::f083])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-20c8bc0ca82sm26584075ad.68.2024.10.11.12.12.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Oct 2024 12:12:07 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd81.aul.t-online.de (fwd81.aul.t-online.de [10.223.144.107])
+	by mailout03.t-online.de (Postfix) with SMTP id 835402B689
+	for <openembedded-devel@lists.openembedded.org>; Sat, 12 Oct 2024 02:47:08 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.154.170.60]) by fwd81.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1szQHj-30Avz70; Sat, 12 Oct 2024 02:47:07 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 2/2] python3-python-multipart: Fix ptest dependencie
-Date: Fri, 11 Oct 2024 12:12:05 -0700
-Message-ID: <20241011191205.808096-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20241011191205.808096-1-raj.khem@gmail.com>
-References: <20241011191205.808096-1-raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH] libspelling: update 0.4.0 -> 0.4.2
+Date: Sat, 12 Oct 2024 02:48:52 +0200
+Message-ID: <20241012004852.1630526-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.46.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1728694027-23FFD47E-C9CCD363/0/0 CLEAN NORMAL
+X-TOI-MSGID: 59d5f29e-e05c-4d56-b294-a52d84e15f77
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Oct 2024 19:12:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112814
+ <openembedded-devel@lists.openembedded.org>; Sat, 12 Oct 2024 00:47:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112815
 
-Do not overwerite implicit dependencies, otherwise
-ptests stop depending upon the correcpoding python module
-resulting in runtime failures
+libspelling 0.4.2
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+This is a bug-fix release for GNOME 47
+
+ * Limit the number of corrections to 10 in enchant backend to help with
+   dictionary configurations which produce many results.
+ * Hide add/ignore menu items when disabled.
+ * Don't show word corrections when spellcheck is disabled.
+
+libspelling 0.4.1
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+This is a bug-fix release for GNOME 47
+
+ * Fixes an important issue tracking weak pointers from a GtkTextBuffer.
+ * Fixes an important issue where we could get invalid text iters from
+   GtkTextBuffer::delete-range() after the deletion occurred when other
+   signal handlers are in play.
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../recipes-devtools/python/python3-python-multipart_0.0.12.bb  | 2 +-
+ .../libspelling/{libspelling_0.4.0.bb =3D> libspelling_0.4.2.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/libspelling/{libspelling_0.4.0.bb =3D> l=
+ibspelling_0.4.2.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-python-multipart_0.0.12.bb b/meta-python/recipes-devtools/python/python3-python-multipart_0.0.12.bb
-index 340e297b83..b3c018629c 100644
---- a/meta-python/recipes-devtools/python/python3-python-multipart_0.0.12.bb
-+++ b/meta-python/recipes-devtools/python/python3-python-multipart_0.0.12.bb
-@@ -12,7 +12,7 @@ SRC_URI += " \
- 	file://run-ptest \
- "
- 
--RDEPENDS:${PN}-ptest = " \
-+RDEPENDS:${PN}-ptest += " \
- 	python3-pytest \
- 	python3-pyyaml \
- 	python3-unittest-automake-output \
+diff --git a/meta-gnome/recipes-gnome/libspelling/libspelling_0.4.0.bb b/=
+meta-gnome/recipes-gnome/libspelling/libspelling_0.4.2.bb
+similarity index 82%
+rename from meta-gnome/recipes-gnome/libspelling/libspelling_0.4.0.bb
+rename to meta-gnome/recipes-gnome/libspelling/libspelling_0.4.2.bb
+index dd4c8891e..833fe65c3 100644
+--- a/meta-gnome/recipes-gnome/libspelling/libspelling_0.4.0.bb
++++ b/meta-gnome/recipes-gnome/libspelling/libspelling_0.4.2.bb
+@@ -13,4 +13,4 @@ GIDOCGEN_MESON_OPTION =3D 'docs'
+ PACKAGECONFIG ?=3D ""
+ PACKAGECONFIG[sysprof] =3D "-Dsysprof=3Dtrue,-Dsysprof=3Dfalse,sysprof"
+=20
+-SRC_URI[archive.sha256sum] =3D "00c63970d708a0ef3bcba40e708a06d7030114cb=
+9f210c74583ffad56d36e3dd"
++SRC_URI[archive.sha256sum] =3D "b3e609b1a247e71bc097e262564f33f51fd7db56=
+6eeb0cd74ae5021536b878b5"
+--=20
+2.46.1
+
 
