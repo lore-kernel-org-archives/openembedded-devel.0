@@ -2,96 +2,138 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B238CFC504
-	for <webhook@archiver.kernel.org>; Mon, 14 Oct 2024 08:55:43 +0000 (UTC)
-Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
- by mx.groups.io with SMTP id smtpd.web10.50481.1728896135600351285
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DBB2CFC500
+	for <webhook@archiver.kernel.org>; Mon, 14 Oct 2024 08:56:03 +0000 (UTC)
+Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
+ by mx.groups.io with SMTP id smtpd.web11.50333.1728896160077214616
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Oct 2024 01:55:36 -0700
+ Mon, 14 Oct 2024 01:56:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=DkUMIogK;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=n7suGirH;
+ spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1728896136; x=1760432136;
-  h=from:to:cc:subject:date:message-id;
-  bh=maPu2+PXQtfSPqpCpZmpBFBT0rNWBtuFDnCUiYxX/8A=;
-  b=DkUMIogK/Gi2Ud9/GCuKiZaOKoWGTfJNUYrxd9xnPFR0CnezoUcDaDUq
-   3I6MbYECtsBHJ0TfgNuE8HKJ1Dw5qlxypQqlQHcLiS5EFCEsulQwvD2UP
-   exLZrj7Z1iyZYvD6s4davyk6MfvFLmQp3O+60kZ3EZ5sICyKNQmn+J7SA
-   /+xlenHItZUUJ7MOJRqCpO0BC9MGltXBr6E7NuFYNRo6oVPDG7wvXUQnc
-   buqUTkHuTaCN6fU8FO/e4mp7Ci2JKiYTHfN9e4eeV5WY4t9tDglLHHScr
-   y73oCcvLI+cxVoIUM5T5/g1gysw54yaRFw/QM31vVi/QpAzBj5YxqAbHK
-   g==;
-X-CSE-ConnectionGUID: IhAzSB1HTmyUY76Lwiq29Q==
-X-CSE-MsgGUID: F2P44ElBSXC6pjOOeKLnSA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11224"; a="176669395"
+  t=1728896160; x=1760432160;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references;
+  bh=yHLzhwWYS8EbmVrUgpE5ItNAv0AOhlBfRra8BwtAgtI=;
+  b=n7suGirH9/cEbNyKdv3rWJFZDqAsWQOIZSr11n04YYc6vbuWFTJtxwXa
+   gnObotpeMgO8Lw5Y3IPD17d4I4KCbFTZH28g1gAjOrWPRZ7l9j5vYaeud
+   vse9winMpnhrOakrfy0sIn41wB17QPQlGsjIjgXAA17DGZGroSvFojOBE
+   Bh7oIC54bfL1n2ygOBJ+nMuE1z14FdCaHW4Bb46mxteXMzr4XCEEk+sdl
+   EOZFydRV3hNJhHk4my4CjlAuyQ4HCw7BH90WS9e8oToXOBTBFpgPC8cTq
+   SCgR8MbMfMmY1pEs6gDpwlVllntrrRT7wgTkZKJna7oAHxKuslS3Jpw6N
+   w==;
+X-CSE-ConnectionGUID: uELrdioyTHCC9rRVeYl8KQ==
+X-CSE-MsgGUID: QOj028kiS5SO7L62DCwVwg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11224"; a="164671111"
 X-IronPort-AV: E=Sophos;i="6.11,202,1725289200"; 
-   d="scan'208";a="176669395"
-Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
-  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2024 17:55:33 +0900
-Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 3234FCD6DF
-	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:55:31 +0900 (JST)
+   d="scan'208";a="164671111"
+Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
+  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2024 17:55:58 +0900
+Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
+	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id CAD39D5A47
+	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:55:55 +0900 (JST)
 Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 708F6D5028
-	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:55:30 +0900 (JST)
+	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 1EF45D3F00
+	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:55:55 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id EC60A200649DB
-	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:55:29 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 9D33A200649DB
+	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:55:54 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 6A2DE1A000A;
-	Mon, 14 Oct 2024 16:55:29 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 4397B1A01ED;
+	Mon, 14 Oct 2024 16:55:54 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 01/54] adw-gtk3: upgrade 5.4 -> 5.5
-Date: Mon, 14 Oct 2024 16:54:22 +0800
-Message-Id: <1728896115-2944-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 09/54] libtorrent: upgrade 0.13.8 -> 0.14.0
+Date: Mon, 14 Oct 2024 16:54:30 +0800
+Message-Id: <1728896115-2944-9-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1728896115-2944-1-git-send-email-wangmy@fujitsu.com>
+References: <1728896115-2944-1-git-send-email-wangmy@fujitsu.com>
 X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28730.006
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28730.006
-X-TMASE-Result: 10--1.351700-10.000000
-X-TMASE-MatchedRID: 6e3s/u+cBDSjz0nOeth/yeKLvlSV0+r2prmCp+RjmiiU8ftiyKjZrdMj
-	jwb9QfV2CC8aAmGeO6lV00+whwxVQy/7QU2czuUNaDCzqDR7DPb1q+x7zkhJWuTDRyP4fmgwo8W
-	MkQWv6iV3LAytsQR4e1cppCzPq+1UxlblqLlYqXKnia0u1SCudO0IImMxeHaiIEKQwp4ZTCqDu1
-	xmmsjmSTdWbudrtVEcRxg93VXOIFtSlV4qIYdYn+HO5MLJmme4053yJFkakMj+v9v52ZIoWjoAf
-	389xF3XFSk9HhUZnw7OGIWnws4LoyHWPYzouJUy
+X-TMASE-Result: 10--0.200200-10.000000
+X-TMASE-MatchedRID: FBE0XpCroJijz0nOeth/yUIIxwDaU5mr8FHp8LCpZ7RQWIO4YO+fPW8q
+	nFk+BWUX6Y0NhLe2qGW/MfwiIqx1/cgqWOFh1Y7mCoHzIAMWCU35EyDUzlC8Rcj0QMA/92m2XR/
+	hn+4QIq3Pz9CYF+mMT7MIrP4Y72+XKr4Zn1kfEiEdZEkR8Y/meSthirXYhZk5kXGw9OO7nQrE41
+	Bh6hF6cU3JmjmjwvjwZACetupFJLBxqOIZOym6taqHmm/V4M/P3SkTY86NiDgHNq0HeN2LVI/MV
+	Y+TBf96wAcnOhjN5iGAL09PYcYYu5t7ZCTW/W0/M6A0eGVTtgxLGPRv0WdxQpTx+2LIqNmt0yOP
+	Bv1B9XYILxoCYZ47qVXTT7CHDFVDL/tBTZzO5Q07Cl8sx4HBG53ZbPRfc5otZYjmj55HGp2sGHK
+	/YO0c/+LzNWBegCW2wgn7iDBesS0nRE+fI6etkvSHHP4PZOzuVfwszJRw6JmMYyTCelCrbwBqXB
+	r9PGg00tAMvam6NXcB1wfuwRf2fAdyct7dHalSNZfI+NxXbqS0YIeF0IRBI0u/kTKv9giuqwOHO
+	1Fdn0Kb4tj0DvxRUIs9ro6z1cfchCFNTbTJJtE=
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 08:55:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112851
+ <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 08:56:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112864
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-bugfix:
-- Since 5.4 black selection in gtk4 apps (with no libadwaita)
+Changelog:
+===========
+- Merge branch 'stickz-throttle-increase'
+- Increase max throttle speed to 33 gigabits
+- Remove decision structure for popcount_wrapper
+- Merge branch 'kannibalox-feature/fast-delegation'
+- Fix double insert
+- Speed up delegating by returning multiple request assignments at once
+- Allow 10 gigabit speed throttles
+- Fix memory access crash with socket_address object
+- Add is_initialized() API
+- configure: Define _GNU_SOURCE when checking for pthread_setname_np
+- Create FUNDING.yml
+- Updated and cleaned up automake. (#224)
+- Removed obsolete files.
+- Added ipv6 options.
+- Detect ip address.
+- Added '--disable-execinfo' option to configure.
+- Fixed issue with multiple connections from NAT not working.
+- Improved backtrace error checking.
+- Added option to disable pthread_setname_np.
+- Replaced custom execinfo autoconf test.
+- Changes automake required files.
+- Refactor make process. (#207)
+- Consolidate make script to optimize build. (#206)
+- Fix log format so GCC can check it. (#205)
+- Fix compiler warnings. (#204)
+- Fix for inotify missing quickly renamed files (#203)
+- libtorrent.pc.in: add Libs.Private (#202)
+- Backport changes from feature-bind. (#200)
+- Merge pull request #195 from Nicholi/log_append
+- Removed log append function. Added append parameter with default value (false) to log_open_file functions.
+- Allow logs to be appended rather than overwritten.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../gnome-themes/{adw-gtk3_5.4.bb => adw-gtk3_5.5.bb}           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-gnome/gnome-themes/{adw-gtk3_5.4.bb => adw-gtk3_5.5.bb} (88%)
+ .../libtorrent/{libtorrent_git.bb => libtorrent_0.14.0.bb}    | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+ rename meta-oe/recipes-connectivity/libtorrent/{libtorrent_git.bb => libtorrent_0.14.0.bb} (93%)
 
-diff --git a/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_5.4.bb b/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_5.5.bb
-similarity index 88%
-rename from meta-oe/recipes-gnome/gnome-themes/adw-gtk3_5.4.bb
-rename to meta-oe/recipes-gnome/gnome-themes/adw-gtk3_5.5.bb
-index 3a0ca620b..2f1e80abe 100644
---- a/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_5.4.bb
-+++ b/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_5.5.bb
-@@ -11,6 +11,6 @@ inherit meson
- SRC_URI = "git://github.com/lassekongo83/adw-gtk3.git;protocol=https;branch=main"
+diff --git a/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb b/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.14.0.bb
+similarity index 93%
+rename from meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
+rename to meta-oe/recipes-connectivity/libtorrent/libtorrent_0.14.0.bb
+index c7a0562db..912b00261 100644
+--- a/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
++++ b/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.14.0.bb
+@@ -6,10 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
  
- S = "${WORKDIR}/git"
--SRCREV = "91aac01e4f4bfbbe233cf7f4bb7a8e4cff73bc5f"
-+SRCREV = "385a900628644dc81fa4942ac848a765229be93a"
+ DEPENDS = "zlib libsigc++-2.0 openssl cppunit"
  
- FILES:${PN} = "${datadir}/themes"
+-PV = "0.13.8+git"
+-
+ SRC_URI = "git://github.com/rakshasa/libtorrent;branch=master;protocol=https"
+-SRCREV = "e60f222241319aaae482789517ad00ae9344bd13"
++SRCREV = "08fb6635ba249665cb08a4de1b955288d25c21e1"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ 
 -- 
 2.34.1
 
