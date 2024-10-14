@@ -2,53 +2,53 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DBB2CFC500
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DBDFCFC503
 	for <webhook@archiver.kernel.org>; Mon, 14 Oct 2024 08:56:03 +0000 (UTC)
 Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
  by mx.groups.io with SMTP id smtpd.web11.50333.1728896160077214616
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 14 Oct 2024 01:56:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=n7suGirH;
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=fOzaskBp;
  spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1728896160; x=1760432160;
+  t=1728896161; x=1760432161;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=yHLzhwWYS8EbmVrUgpE5ItNAv0AOhlBfRra8BwtAgtI=;
-  b=n7suGirH9/cEbNyKdv3rWJFZDqAsWQOIZSr11n04YYc6vbuWFTJtxwXa
-   gnObotpeMgO8Lw5Y3IPD17d4I4KCbFTZH28g1gAjOrWPRZ7l9j5vYaeud
-   vse9winMpnhrOakrfy0sIn41wB17QPQlGsjIjgXAA17DGZGroSvFojOBE
-   Bh7oIC54bfL1n2ygOBJ+nMuE1z14FdCaHW4Bb46mxteXMzr4XCEEk+sdl
-   EOZFydRV3hNJhHk4my4CjlAuyQ4HCw7BH90WS9e8oToXOBTBFpgPC8cTq
-   SCgR8MbMfMmY1pEs6gDpwlVllntrrRT7wgTkZKJna7oAHxKuslS3Jpw6N
+  bh=8FAvZzzjWqT1vBzS3hcFhvJz0IuACZ/gUoDVke/OPyY=;
+  b=fOzaskBptCDEsDoIambxQvd3lgTORDbhDmRWcwcOGA6jduZH2wq91cxk
+   T+9vX4jsC6na8784mI2eyrKuwRlgxMge8BNvmAdVFLNNX77McPITVlHiP
+   fAs9a1pJIJK3TnIKZA/1A9UFDdaDcShSapvzIfqgnl8ncCpDBVSTQrCua
+   zDevBl+LPE/AODi5/xCYYCVIwpVRzs2q1CIjqg9DoZ2l+vIjifPXmSYFv
+   gXLzsJPLOw+PlDNvokYiPV1YDE1+DzPFdWIv9TusNt+ll5lCwEBY/SrXK
+   cjIFkZ/YW50qOU5OzvZviJ8sdOax57s+vJYTLoZotbyNJgyF0h9EP/+T3
    w==;
-X-CSE-ConnectionGUID: uELrdioyTHCC9rRVeYl8KQ==
-X-CSE-MsgGUID: QOj028kiS5SO7L62DCwVwg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11224"; a="164671111"
+X-CSE-ConnectionGUID: 7sXylbrhQuyQfRwMrHuMbQ==
+X-CSE-MsgGUID: xzLsO+pfQFGQux3yf3eYjQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11224"; a="164671115"
 X-IronPort-AV: E=Sophos;i="6.11,202,1725289200"; 
-   d="scan'208";a="164671111"
-Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
+   d="scan'208";a="164671115"
+Received: from unknown (HELO oym-r1.gw.nic.fujitsu.com) ([210.162.30.89])
   by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2024 17:55:58 +0900
-Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
-	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id CAD39D5A47
-	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:55:55 +0900 (JST)
+Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
+	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 9B4B0D29E1
+	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:55:56 +0900 (JST)
 Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 1EF45D3F00
+	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id E1149D7755
 	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:55:55 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 9D33A200649DB
-	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:55:54 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 82CAD20071A2A
+	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:55:55 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 4397B1A01ED;
-	Mon, 14 Oct 2024 16:55:54 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 2FC7C1A01E9;
+	Mon, 14 Oct 2024 16:55:55 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 09/54] libtorrent: upgrade 0.13.8 -> 0.14.0
-Date: Mon, 14 Oct 2024 16:54:30 +0800
-Message-Id: <1728896115-2944-9-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 13/54] python3-aiohappyeyeballs: upgrade 2.4.2 -> 2.4.3
+Date: Mon, 14 Oct 2024 16:54:34 +0800
+Message-Id: <1728896115-2944-13-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1728896115-2944-1-git-send-email-wangmy@fujitsu.com>
 References: <1728896115-2944-1-git-send-email-wangmy@fujitsu.com>
@@ -56,83 +56,47 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28730.006
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28730.006
-X-TMASE-Result: 10--0.200200-10.000000
-X-TMASE-MatchedRID: FBE0XpCroJijz0nOeth/yUIIxwDaU5mr8FHp8LCpZ7RQWIO4YO+fPW8q
-	nFk+BWUX6Y0NhLe2qGW/MfwiIqx1/cgqWOFh1Y7mCoHzIAMWCU35EyDUzlC8Rcj0QMA/92m2XR/
-	hn+4QIq3Pz9CYF+mMT7MIrP4Y72+XKr4Zn1kfEiEdZEkR8Y/meSthirXYhZk5kXGw9OO7nQrE41
-	Bh6hF6cU3JmjmjwvjwZACetupFJLBxqOIZOym6taqHmm/V4M/P3SkTY86NiDgHNq0HeN2LVI/MV
-	Y+TBf96wAcnOhjN5iGAL09PYcYYu5t7ZCTW/W0/M6A0eGVTtgxLGPRv0WdxQpTx+2LIqNmt0yOP
-	Bv1B9XYILxoCYZ47qVXTT7CHDFVDL/tBTZzO5Q07Cl8sx4HBG53ZbPRfc5otZYjmj55HGp2sGHK
-	/YO0c/+LzNWBegCW2wgn7iDBesS0nRE+fI6etkvSHHP4PZOzuVfwszJRw6JmMYyTCelCrbwBqXB
-	r9PGg00tAMvam6NXcB1wfuwRf2fAdyct7dHalSNZfI+NxXbqS0YIeF0IRBI0u/kTKv9giuqwOHO
-	1Fdn0Kb4tj0DvxRUIs9ro6z1cfchCFNTbTJJtE=
+X-TMASE-Result: 10--2.073000-10.000000
+X-TMASE-MatchedRID: hsQjHHSArR6jz0nOeth/yUIIxwDaU5mr2FA7wK9mP9cfyMkN7e89A1Dg
+	Qi40AwSj4CtjYmQpb2kF1Ec/oUIRlVpCIuRr0RxKTuctSpiuWyUUi4Ehat054xHfiujuTbed1vZ
+	7s3YIVDKbepuhA18xJLao0Zou4ee+HxPMjOKY7A+u65UDD0aDgsRB0bsfrpPIcSqbxBgG0w4X0W
+	NfrxesspihDCHMa7QOl0xBBN0959PTGtkp6jmeYPPZcq6ORJAM50gYyWI8xFFL8aU9yMgHF7v5+
+	tWvIH6Cvuj0U3MjTcuCvqWrFsheUcLe0zBjeZrbFQOP52BRBXJMTsKj18q/fA==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 08:56:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112864
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112865
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-===========
-- Merge branch 'stickz-throttle-increase'
-- Increase max throttle speed to 33 gigabits
-- Remove decision structure for popcount_wrapper
-- Merge branch 'kannibalox-feature/fast-delegation'
-- Fix double insert
-- Speed up delegating by returning multiple request assignments at once
-- Allow 10 gigabit speed throttles
-- Fix memory access crash with socket_address object
-- Add is_initialized() API
-- configure: Define _GNU_SOURCE when checking for pthread_setname_np
-- Create FUNDING.yml
-- Updated and cleaned up automake. (#224)
-- Removed obsolete files.
-- Added ipv6 options.
-- Detect ip address.
-- Added '--disable-execinfo' option to configure.
-- Fixed issue with multiple connections from NAT not working.
-- Improved backtrace error checking.
-- Added option to disable pthread_setname_np.
-- Replaced custom execinfo autoconf test.
-- Changes automake required files.
-- Refactor make process. (#207)
-- Consolidate make script to optimize build. (#206)
-- Fix log format so GCC can check it. (#205)
-- Fix compiler warnings. (#204)
-- Fix for inotify missing quickly renamed files (#203)
-- libtorrent.pc.in: add Libs.Private (#202)
-- Backport changes from feature-bind. (#200)
-- Merge pull request #195 from Nicholi/log_append
-- Removed log append function. Added append parameter with default value (false) to log_open_file functions.
-- Allow logs to be appended rather than overwritten.
+============
+- Rewrite staggered_race to be race safe
+- Re-raise runtimeerror when uvloop raises runtimeerror during connect
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libtorrent/{libtorrent_git.bb => libtorrent_0.14.0.bb}    | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
- rename meta-oe/recipes-connectivity/libtorrent/{libtorrent_git.bb => libtorrent_0.14.0.bb} (93%)
+ ...happyeyeballs_2.4.2.bb => python3-aiohappyeyeballs_2.4.3.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-aiohappyeyeballs_2.4.2.bb => python3-aiohappyeyeballs_2.4.3.bb} (81%)
 
-diff --git a/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb b/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.14.0.bb
-similarity index 93%
-rename from meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
-rename to meta-oe/recipes-connectivity/libtorrent/libtorrent_0.14.0.bb
-index c7a0562db..912b00261 100644
---- a/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
-+++ b/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.14.0.bb
-@@ -6,10 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
+diff --git a/meta-python/recipes-devtools/python/python3-aiohappyeyeballs_2.4.2.bb b/meta-python/recipes-devtools/python/python3-aiohappyeyeballs_2.4.3.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-aiohappyeyeballs_2.4.2.bb
+rename to meta-python/recipes-devtools/python/python3-aiohappyeyeballs_2.4.3.bb
+index ce2572f95..e06bd7178 100644
+--- a/meta-python/recipes-devtools/python/python3-aiohappyeyeballs_2.4.2.bb
++++ b/meta-python/recipes-devtools/python/python3-aiohappyeyeballs_2.4.3.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/aio-libs/aiohappyeyeballs"
+ LICENSE = "PSF-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=fcf6b249c2641540219a727f35d8d2c2"
  
- DEPENDS = "zlib libsigc++-2.0 openssl cppunit"
+-SRC_URI[sha256sum] = "4ca893e6c5c1f5bf3888b04cb5a3bee24995398efef6e0b9f747b5e89d84fd74"
++SRC_URI[sha256sum] = "75cf88a15106a5002a8eb1dab212525c00d1f4c0fa96e551c9fbe6f09a621586"
  
--PV = "0.13.8+git"
--
- SRC_URI = "git://github.com/rakshasa/libtorrent;branch=master;protocol=https"
--SRCREV = "e60f222241319aaae482789517ad00ae9344bd13"
-+SRCREV = "08fb6635ba249665cb08a4de1b955288d25c21e1"
- 
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ inherit pypi python_poetry_core
  
 -- 
 2.34.1
