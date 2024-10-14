@@ -2,53 +2,53 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A311DCFC52A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 93D7FCFC525
 	for <webhook@archiver.kernel.org>; Mon, 14 Oct 2024 08:56:24 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.web11.50345.1728896174806757882
+Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
+ by mx.groups.io with SMTP id smtpd.web10.50498.1728896176490697559
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 14 Oct 2024 01:56:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=bS0Lz09M;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=USz5kxP3;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
   t=1728896177; x=1760432177;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=22jy5Kqi5keMGpPVPBHSWwmtMELwQ8KpvN+t/PCtGWI=;
-  b=bS0Lz09MKBQZYyhuYlwD8CIb0FFSlJ77XB+APXgnEm/MKPPkHHDJQNiT
-   wnERGb884tppSlTkQ9cgwOUAF0flJc4vh4OBAUOaEYK6/8V7K2/5fvWKC
-   RZ0pjDTw0lx8bbUUAuc+pY/Is4R6/l6c2FNEOC31zM7/WLtaZGvsrfOai
-   lnukDPXpiSECF6BOivD8sJtc9OMQ5Y1iCLQPhDys6HKareCy+0iL6CoW4
-   m2gFROzh3k9fYwvt6pz/YsURllo8nU9IOSOwE2S26bAjdMwT6B65/6YC0
-   +uATOu+Aq3JrlEzXkt7zeCGfz6A5tTszZ4i4K5A6zASlwosPtZEPSPat2
-   A==;
-X-CSE-ConnectionGUID: DWgLLIJ7RZaDUqp8/AI50Q==
-X-CSE-MsgGUID: UOhomDpSRye0PUZ15Ox9iA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11224"; a="178861019"
+  bh=am41aPLzUXsm9ovjHnoDtNLYe3Hn0EOa+NDa2YSdgys=;
+  b=USz5kxP3UyK4A0WwH58khYIgEsyfy+MI7nnrj2mFn01ggwR5J8TCx9G6
+   G4IymbyZGvYxrGkmk3Wmc3Taecvc6dRyi04KX4X3IsntBvtfSdiKrfpbs
+   tfIcF0PIY7JfPkOpR4PsCQovwhRhOSKXEltR6rZlkAu9rgMF5qgfLc0ab
+   9NBNW3Qb3U9CwO55XYjnC59Fjqxe3uftw40yahI9uuwNoZL1iRQo9LxVM
+   9cO/Oovml1VbLdrdICKuAeHJZUg9uqaClxyHXTTmQm0aWw7T5zY0HNxWK
+   zc7j1oxHCo8aTjy3efH8UjD95RBWF6Ktr8guASZ5X99tJe92ce92TenW8
+   Q==;
+X-CSE-ConnectionGUID: h1k5rEWrSFe+w6RClZ3EVA==
+X-CSE-MsgGUID: W6AKild3QOitGS9SybaQsg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11224"; a="175895934"
 X-IronPort-AV: E=Sophos;i="6.11,202,1725289200"; 
-   d="scan'208";a="178861019"
+   d="scan'208";a="175895934"
 Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
-  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2024 17:56:15 +0900
-Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
-	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 099F8D433F
-	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:56:13 +0900 (JST)
+  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2024 17:56:15 +0900
+Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
+	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 4B4BCD4334
+	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:56:12 +0900 (JST)
 Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 8D022E4999
-	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:56:10 +0900 (JST)
+	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 7B4AED752B
+	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:56:11 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 22C0920071A28
-	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:56:10 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 07A3620071A28
+	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:56:11 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id E04E31A000A;
-	Mon, 14 Oct 2024 16:56:09 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id C5D001A000A;
+	Mon, 14 Oct 2024 16:56:10 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 39/54] python3-scrypt: upgrade 0.8.24 -> 0.8.27
-Date: Mon, 14 Oct 2024 16:55:00 +0800
-Message-Id: <1728896115-2944-39-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 43/54] python3-termcolor: upgrade 2.4.0 -> 2.5.0
+Date: Mon, 14 Oct 2024 16:55:04 +0800
+Message-Id: <1728896115-2944-43-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1728896115-2944-1-git-send-email-wangmy@fujitsu.com>
 References: <1728896115-2944-1-git-send-email-wangmy@fujitsu.com>
@@ -56,43 +56,49 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28730.006
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28730.006
-X-TMASE-Result: 10-1.565100-10.000000
-X-TMASE-MatchedRID: pFlEBMmIVU6jz0nOeth/yQPZZctd3P4B1cuIRwt/4MiysPB8dBBorXKn
-	6DBj/gsEIvrftAIhWmIAf/HImzvCGDkdZrWTFzcxOjf3A4DTYuF9LQinZ4QefCP/VFuTOXUTPvB
-	STRncWKuOhzOa6g8KrXdkG8sbQc+4sdyTqYTiEEbtHfh9xbj97sh22hmYs0tM7+0Suv7+3idijr
-	3iL45lWipBsYCiR6HjnIKbXmQRUP/gT9AYezWxdB0m4Rm5hspVxSSu8i52URmXTt0OuyJi/IIuE
-	VM/dBEMBtjAKW7+qHc=
+X-TMASE-Result: 10--1.003600-10.000000
+X-TMASE-MatchedRID: 6e3s/u+cBDSjz0nOeth/yUIIxwDaU5mrF4r8H5YrEqz0tC1XEqEg676p
+	xbTOjavy+7QcRaVoa8nGKIf6hBf7VaGGOyqBK41vEXjPIvKd74AQhNjZQYyI3AdVRmAIzhtAo8W
+	MkQWv6iV3LAytsQR4e42j49Ftap9ExlblqLlYqXJ/XtXar9YiW0YsmYe604jVk7OEMGtvs7xJu9
+	g0KxS39TTvBBJs4Ep4sViTOZPIxTpEis25UOtP3daCswCUhPJV0nwM7vLrG5r+v9v52ZIoWjoAf
+	389xF3XFSk9HhUZnw7OGIWnws4LoyHWPYzouJUy
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 08:56:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112894
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112895
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+Changelog:
+=========
+- Add strike attribute
+- Generate and upload attestations to PyPI
+- Drop support for Python 3.8
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-scrypt_0.8.24.bb => python3-scrypt_0.8.27.bb}      | 2 +-
+ .../{python3-termcolor_2.4.0.bb => python3-termcolor_2.5.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-scrypt_0.8.24.bb => python3-scrypt_0.8.27.bb} (87%)
+ rename meta-python/recipes-devtools/python/{python3-termcolor_2.4.0.bb => python3-termcolor_2.5.0.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-scrypt_0.8.24.bb b/meta-python/recipes-devtools/python/python3-scrypt_0.8.27.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-scrypt_0.8.24.bb
-rename to meta-python/recipes-devtools/python/python3-scrypt_0.8.27.bb
-index 94c83e495..a3254de07 100644
---- a/meta-python/recipes-devtools/python/python3-scrypt_0.8.24.bb
-+++ b/meta-python/recipes-devtools/python/python3-scrypt_0.8.27.bb
-@@ -5,7 +5,7 @@ HOMEPAGE="https://github.com/holgern/py-scrypt"
+diff --git a/meta-python/recipes-devtools/python/python3-termcolor_2.4.0.bb b/meta-python/recipes-devtools/python/python3-termcolor_2.5.0.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-termcolor_2.4.0.bb
+rename to meta-python/recipes-devtools/python/python3-termcolor_2.5.0.bb
+index ea6b68399..6df8341c8 100644
+--- a/meta-python/recipes-devtools/python/python3-termcolor_2.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-termcolor_2.5.0.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=e5f5f7c9b280511f124dba5dda3d180e"
  
- SRC_URI += "file://0001-py-scrypt-remove-the-hard-coded-include-paths.patch"
+ inherit pypi python_setuptools_build_meta
  
--SRC_URI[sha256sum] = "98ffde45e4a95461d73ded54ba7a26857679920d4f8ff320f6f7ade6e29531bd"
-+SRC_URI[sha256sum] = "a7b637848ed518c1ea2b31a9ecaaa3f49616598d8442de8706cf1f01fbabf0a7"
+-SRC_URI[sha256sum] = "aab9e56047c8ac41ed798fa36d892a37aca6b3e9159f3e0c24bc64a9b3ac7b7a"
++SRC_URI[sha256sum] = "998d8d27da6d48442e8e1f016119076b690d962507531df4890fcd2db2ef8a6f"
  
- inherit pypi ptest setuptools3 dos2unix
- 
+ DEPENDS += " \
+ 	python3-toml-native \
 -- 
 2.34.1
 
