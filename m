@@ -2,53 +2,53 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F6CACFC508
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FEB3CFC504
 	for <webhook@archiver.kernel.org>; Mon, 14 Oct 2024 08:56:03 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.web10.50486.1728896160581594984
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.web11.50330.1728896158310042178
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Oct 2024 01:56:01 -0700
+ Mon, 14 Oct 2024 01:55:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=silRulJd;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=cVrjBceo;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1728896161; x=1760432161;
+  t=1728896158; x=1760432158;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=j1jnl8iKJmydoVI8WtWHJavPNHrlwX1REuT8O2pKRIY=;
-  b=silRulJdQ7xcmPKeBl1RsXPheVeO/kpj6F5pstHTeOFY4CeYuxYxfb0m
-   L+KGP0n+iBKk+wQxQ8+TiyhNREcEYuBF5kKKh005+uIuURm9k0LF/vtj/
-   RcqqLD4omvistFpSJEmI9yc7NWKn2DZ61R1+a0cLIfgKKJ5lpI21jqFSi
-   Ojcfaq5KZR8F6rb+bhlpkldJ4eknzAW3Owq6KZ9KMr2amkQM8Hey4wMQc
-   mhbZvfe/GRauNrpmv0CSK+q0P9L1tL2iOktLvBAjpSrg7REKp2xd/6BFO
-   EUVZOLj7yOqJ96QjaNIbaWOGIvVRZe4N9mEf4Pi4EXC+6zKli6vqcmJkD
-   w==;
-X-CSE-ConnectionGUID: FH2DOO48TQ2I33u2n7ebyQ==
-X-CSE-MsgGUID: li9AVM89TzCeWzz7ZvVq8Q==
-X-IronPort-AV: E=McAfee;i="6700,10204,11224"; a="178861006"
+  bh=AgNIiTnZq54zhcZLZgfgn/gnXcbV3Ir5vRfvIkTk2t0=;
+  b=cVrjBceoIo+5kv4mwRZjbHiRjcfMr1ZqiCepDdNXNtkSPaxWeuJkjA/s
+   CSZ05wiW8KDZ4qrvZQGzXk1EAjXH5PmCRTwzE94yirqylxBoIwM8NNV38
+   3i5zuTCUAafOPkd8gB4fs06R9dYmJwFxGU8jHoeSAjETmj2JQ6xE4n/p1
+   IrJ1uUGkir6vI2MDXPxZm1WrcomPTKyU0kjIxeo4+8YEf4Co2/mjVVDum
+   91aI2vjZjR4C/GKMzvY8OsskQwPC1Dn2RKeWP89o9DWdPJOMQibd+O4ga
+   7uprhXOiuRef4VtV+s4CcfhQqe55my3K1TpMyvfXyraCjW5Uj8f6+7ry+
+   Q==;
+X-CSE-ConnectionGUID: mV3/LLbRSEOhYRTCLdSYHg==
+X-CSE-MsgGUID: tv3z5+xgS+SZPGiBS2zmBA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11224"; a="165031656"
 X-IronPort-AV: E=Sophos;i="6.11,202,1725289200"; 
-   d="scan'208";a="178861006"
-Received: from unknown (HELO oym-r1.gw.nic.fujitsu.com) ([210.162.30.89])
-  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2024 17:55:59 +0900
-Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
-	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 51A67D29E1
-	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:55:56 +0900 (JST)
+   d="scan'208";a="165031656"
+Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2024 17:55:56 +0900
+Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
+	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 29C60D6473
+	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:55:54 +0900 (JST)
 Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 8FA43D7749
-	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:55:55 +0900 (JST)
+	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 646F2D4BD2
+	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:55:53 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 2C5FB20071A28
-	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:55:55 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 0122A200649DB
+	for <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 17:55:53 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id C86661A000A;
-	Mon, 14 Oct 2024 16:55:53 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id A2A241A000A;
+	Mon, 14 Oct 2024 16:55:52 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 07/54] libimobiledevice-glue: upgrade 1.3.0 -> 1.3.1
-Date: Mon, 14 Oct 2024 16:54:28 +0800
-Message-Id: <1728896115-2944-7-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 02/54] ctags: upgrade 6.1.20240922.0 -> 6.1.20241006.0
+Date: Mon, 14 Oct 2024 16:54:23 +0800
+Message-Id: <1728896115-2944-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1728896115-2944-1-git-send-email-wangmy@fujitsu.com>
 References: <1728896115-2944-1-git-send-email-wangmy@fujitsu.com>
@@ -56,44 +56,41 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28730.006
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28730.006
-X-TMASE-Result: 10-2.653700-10.000000
-X-TMASE-MatchedRID: hsQjHHSArR6jz0nOeth/yYL5ja7E+OhyTfK5j0EZbyvX45MWooXn2VDg
-	Qi40AwSj4CtjYmQpb2kF1Ec/oUIRlVpCIuRr0RxKTuctSpiuWyUUi4Ehat054/67wpKrIJNBI+e
-	Ym11U0ibzflyoTkWhRYAy6p60ZV62yA7duzCw6dIBpRCTkRk5SfoLR4+zsDTtCQvlWYtoEBFpO7
-	j4/9NVMxuMV6IgIzo4jHh8BRTJilcqET5gPFsKYwcJtE+x13wl7Gbm8f0ojq334YDJdRIgPAvnn
-	UCVrMxZrJ52MgWboPvyDBYNCJzj6s+YAJ5mo7zlOKgonZY9TFMtLgAQ4uO3AA==
+X-TMASE-Result: 10-1.026400-10.000000
+X-TMASE-MatchedRID: pFlEBMmIVU6jz0nOeth/yQPZZctd3P4B1cuIRwt/4MiysPB8dBBorXKn
+	6DBj/gsEIvrftAIhWmJ6eYPYGCVgy3gcxJAgqZ0ZaDCzqDR7DPZ9LQinZ4QefCP/VFuTOXUTPvB
+	STRncWKuOhzOa6g8KrQrU6u0ns/XCeCXn0FOd6Dixfy3SHnE9tx03HU0BLxOaiT00FH2W6WTv0T
+	vynaFGT8ri0UMjOYhIC6QdbOuZAQB81h+uZ23xfx0m4Rm5hspVxSSu8i52URmXTt0OuyJi/IIuE
+	VM/dBEMBtjAKW7+qHc=
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 14 Oct 2024 08:56:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112863
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112852
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Fixes:
-  * socket: Fix scope_id lookup for socket_connect_addr()
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...obiledevice-glue_1.3.0.bb => libimobiledevice-glue_1.3.1.bb} | 2 +-
+ .../ctags/{ctags_6.1.20240922.0.bb => ctags_6.1.20241006.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/libimobiledevice-glue/{libimobiledevice-glue_1.3.0.bb => libimobiledevice-glue_1.3.1.bb} (89%)
+ rename meta-oe/recipes-devtools/ctags/{ctags_6.1.20240922.0.bb => ctags_6.1.20241006.0.bb} (95%)
 
-diff --git a/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_1.3.0.bb b/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_1.3.1.bb
-similarity index 89%
-rename from meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_1.3.0.bb
-rename to meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_1.3.1.bb
-index 8bd555d96..2f58738c3 100644
---- a/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_1.3.0.bb
-+++ b/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_1.3.1.bb
-@@ -8,7 +8,7 @@ HOMEPAGE = "http://www.libimobiledevice.org/"
+diff --git a/meta-oe/recipes-devtools/ctags/ctags_6.1.20240922.0.bb b/meta-oe/recipes-devtools/ctags/ctags_6.1.20241006.0.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/ctags/ctags_6.1.20240922.0.bb
+rename to meta-oe/recipes-devtools/ctags/ctags_6.1.20241006.0.bb
+index 436793c58..90b0e2cb4 100644
+--- a/meta-oe/recipes-devtools/ctags/ctags_6.1.20240922.0.bb
++++ b/meta-oe/recipes-devtools/ctags/ctags_6.1.20241006.0.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
- DEPENDS = "libplist"
+ inherit autotools-brokensep pkgconfig manpages
  
--SRCREV = "362f7848ac89b74d9dd113b38b51ecb601f76094"
-+SRCREV = "a4ec1cf9cc7084cbe5571e31640ef773701e5f51"
- SRC_URI = "git://github.com/libimobiledevice/libimobiledevice-glue;protocol=https;branch=master"
+-SRCREV = "7e96624c9be94c5b4b89e5ae1f093e58282abf43"
++SRCREV = "ecf0c4adcce9853d666590bf2be101f983bad1cf"
+ SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https"
  
  S = "${WORKDIR}/git"
 -- 
