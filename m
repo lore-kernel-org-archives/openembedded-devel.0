@@ -2,67 +2,114 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 205BED1815E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E87CD1815D
 	for <webhook@archiver.kernel.org>; Tue, 15 Oct 2024 00:34:37 +0000 (UTC)
 Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web11.2122.1728952475736390356
+ by mx.groups.io with SMTP id smtpd.web10.2058.1728952475821614542
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 14 Oct 2024 17:34:36 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
 Received: from fwd76.aul.t-online.de (fwd76.aul.t-online.de [10.223.144.102])
-	by mailout03.t-online.de (Postfix) with SMTP id ED823444FE
+	by mailout03.t-online.de (Postfix) with SMTP id EF5D5444FF
 	for <openembedded-devel@lists.openembedded.org>; Tue, 15 Oct 2024 02:34:33 +0200 (CEST)
 Received: from intel-corei7-64.fritz.box ([79.219.230.111]) by fwd76.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1t0VW8-0NQBHN0; Tue, 15 Oct 2024 02:34:28 +0200
+	esmtp id 1t0VW8-0NQBHO0; Tue, 15 Oct 2024 02:34:28 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCHv2 1/2] fastfloat: add recipe
-Date: Tue, 15 Oct 2024 02:36:26 +0200
-Message-ID: <20241015003627.1014058-1-f_l_k@t-online.de>
+Subject: [meta-oe][PATCHv2 2/2] libplacebo: dont use gitsm
+Date: Tue, 15 Oct 2024 02:36:27 +0200
+Message-ID: <20241015003627.1014058-2-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.47.0
+In-Reply-To: <20241015003627.1014058-1-f_l_k@t-online.de>
+References: <20241015003627.1014058-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1728952468-7EFFB5E0-256BABB7/0/0 CLEAN NORMAL
-X-TOI-MSGID: d14e56f8-fa08-4523-b846-ec718085b7d5
+X-TOI-EXPURGATEID: 150726::1728952468-6FFFD5E0-F6528D14/0/0 CLEAN NORMAL
+X-TOI-MSGID: d621e163-571d-45f8-a24c-8b23c9d5e7a4
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 15 Oct 2024 00:34:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112913
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112914
 
-fastfloat is needed to compile libplacebo with clang
+- Add PACKAGECONFIGs to allow build according to DISTRO_FEATURES
+- Add path to vulkan-registry
+- Add fastfloat dependency for clang
+- Build with lcms by default, because mpv warns about missing littlecms2
+  support
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../recipes-devtools/fastfloat/fastfloat_5.2.0.bb | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/fastfloat/fastfloat_5.2.0.bb
+ .../mplayer/libplacebo_7.349.0.bb             | 28 +++++++++----------
+ 1 file changed, 14 insertions(+), 14 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/fastfloat/fastfloat_5.2.0.bb b/meta=
--oe/recipes-devtools/fastfloat/fastfloat_5.2.0.bb
-new file mode 100644
-index 000000000..b121a97b2
---- /dev/null
-+++ b/meta-oe/recipes-devtools/fastfloat/fastfloat_5.2.0.bb
-@@ -0,0 +1,15 @@
-+SUMMARY =3D "fast_float number parsing library: 4x faster than strtod"
-+HOMEPAGE =3D "https://github.com/fastfloat/fast_float"
-+LICENSE =3D "Apache-2.0 & BSL-1.0 & MIT"
-+LIC_FILES_CHKSUM =3D " \
-+	file://LICENSE-MIT;md5=3D32b11d50c7d9788d4270f6a83f3e68eb \
-+	file://LICENSE-APACHE;md5=3D81db248e90379bcfc0582b578b009bc3 \
-+	file://LICENSE-BOOST;md5=3D2c7a3fa82e66676005cd4ee2608fd7d2 \
-+"
+diff --git a/meta-oe/recipes-multimedia/mplayer/libplacebo_7.349.0.bb b/m=
+eta-oe/recipes-multimedia/mplayer/libplacebo_7.349.0.bb
+index b68e67a8c..f0f18f2e4 100644
+--- a/meta-oe/recipes-multimedia/mplayer/libplacebo_7.349.0.bb
++++ b/meta-oe/recipes-multimedia/mplayer/libplacebo_7.349.0.bb
+@@ -1,22 +1,22 @@
+ SUMMARY =3D"Reusable library for GPU-accelerated video/image rendering p=
+rimitives"
+-LICENSE =3D "Apache-2.0 & BSD-3-Clause & BSL-1.0 & MIT"
+-LIC_FILES_CHKSUM =3D "file://3rdparty/Vulkan-Headers/LICENSE.txt;md5=3D3=
+b83ef96387f14655fc854ddc3c6bd57 \
+-                    file://3rdparty/fast_float/LICENSE-APACHE;md5=3D81db=
+248e90379bcfc0582b578b009bc3 \
+-                    file://3rdparty/fast_float/LICENSE-BOOST;md5=3D2c7a3=
+fa82e66676005cd4ee2608fd7d2 \
+-                    file://3rdparty/fast_float/LICENSE-MIT;md5=3D32b11d5=
+0c7d9788d4270f6a83f3e68eb \
+-                    file://3rdparty/glad/LICENSE;md5=3Dae570f26774ac096c=
+ff8f992091a223c \
+-                    file://3rdparty/jinja/LICENSE.rst;md5=3D5dc88300786f=
+1c214c1e9827a5229462 \
+-                    file://3rdparty/jinja/docs/license.rst;md5=3D5f4c795=
+946979fabc2361be4c70d0a9f \
+-                    file://3rdparty/markupsafe/LICENSE.rst;md5=3Dffeffa5=
+9c90c9c4a033c7574f8f3fb75 \
+-                    file://3rdparty/markupsafe/docs/license.rst;md5=3D5f=
+4c795946979fabc2361be4c70d0a9f \
+-                    file://LICENSE;md5=3D435ed639f84d4585d93824e7da3d85d=
+a \
+-                    file://demos/3rdparty/nuklear/src/LICENSE;md5=3D6052=
+431ae6cd4f0082276c54996e7770 \
+-                    file://demos/LICENSE;md5=3D65d3616852dbf7b1a6d4b53b0=
+0626032"
++LICENSE =3D "LGPL-2.1-only"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D435ed639f84d4585d93824e7da3d8=
+5da"
+=20
+-SRC_URI =3D "gitsm://github.com/haasn/libplacebo;protocol=3Dhttps;branch=
+=3Dmaster"
++DEPENDS +=3D "fastfloat"
+=20
++SRC_URI =3D "git://code.videolan.org/videolan/libplacebo.git;protocol=3D=
+https;branch=3Dv7.349"
+ SRCREV =3D "1fd3c7bde7b943fe8985c893310b5269a09b46c5"
+=20
+ inherit meson pkgconfig
+=20
+ S =3D "${WORKDIR}/git"
 +
-+SRC_URI =3D "git://github.com/fastfloat/fast_float.git;protocol=3Dhttps;=
-branch=3Dmain"
++PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'vulkan openg=
+l', d)} lcms"
 +
-+SRCREV =3D "2b2395f9ac836ffca6404424bcc252bff7aa80e4"
-+S =3D "${WORKDIR}/git"
++PACKAGECONFIG[vulkan] =3D  "-Dvulkan=3Denabled,-Dvulkan=3Ddisabled,vulka=
+n-loader vulkan-headers shaderc spirv-shader-generator python3-mako-nativ=
+e python3-jinja2-native glad-native"
++PACKAGECONFIG[glslang] =3D "-Dglslang=3Denabled,-Dglslang=3Ddisabled,gls=
+lang"
++PACKAGECONFIG[opengl] =3D "-Dopengl=3Denabled,-Dopengl=3Ddisabled,glad,g=
+lad"
++PACKAGECONFIG[lcms] =3D "-Dlcms=3Denabled,-Dlcms=3Ddisabled,lcms"
++PACKAGECONFIG[demos] =3D "-Ddemos=3Dtrue,-Ddemos=3Dfalse,ffmpeg libsdl2 =
+libsdl2-image"
 +
-+inherit cmake
++EXTRA_OEMESON =3D "-Dvulkan-registry=3D${STAGING_DATADIR}/vulkan/registr=
+y/vk.xml"
 --=20
 2.47.0
 
