@@ -2,57 +2,57 @@ Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 561D7D2A54D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AE4FD2A553
 	for <webhook@archiver.kernel.org>; Wed, 16 Oct 2024 19:35:29 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.web10.32015.1729107321354877720
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.web11.32582.1729107320822073056
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 16 Oct 2024 12:35:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=iiVgpYzB;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-43115887867so1145485e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Oct 2024 12:35:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QKDovKjI;
+ spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-37d55f0cf85so73168f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Oct 2024 12:35:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1729107320; x=1729712120; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1729107319; x=1729712119; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=wKwvYe39nBsv0ou8UQbvoOTMiew7wQ993evdtT8JLq4=;
-        b=iiVgpYzBPlzDXDxwusnF20eaLODUxgFdfXXqXHOY3XwY8LwqBJxZYS5BISeZJ7RWq3
-         7IQS3r3BPLF6VqEzaMnuSdrIZIzZGZhg51mqKIzdmIljZV5hjGAWaUcOlaacDQ3ydI1l
-         X6zfpgYbXCKlnkZvxzkv8CHJRrwa6m9c5LB82D4m7vwaYoW7x/g6QJj/O7DYUe3W/DZ4
-         CIv28F5rfJiDXs7tth1PxgDY5VD2NrE7VF6FC2ldnASwWXyGkR9VrPxdAwmHSqijaEMx
-         txxYFxjA8zQD89biOLEZAGkpZIPMPBFW7dbB8mIxPTraiCLCtKcYd6vP15FnkpLLaNJo
-         gJbg==
+        bh=PZ6eysO1/gu3beY0ZHZHPoa1kVbjq+GdKCI+YC4Ojpo=;
+        b=QKDovKjI53l3QMHBe/gj+YC5VzLNfZe/aoQSXuJdF3SQGwVOC3H3sijMJ8gCNoquJc
+         Y/ghvPWd6m8RK7vkvxAkhwvjwko5JpMFXAP5jqNDcSgo74JSr2H9qSlpgzJYUFxSd2w+
+         dB4LM8p+AWfhBw5srWwFmz+dZsmh/O84fzreMeu09Z64Sj5T7n1q/dL2yt/f/KVY33bY
+         4SWLyuKbyJoG5gVidvxwytIb9n1MhV2/vM1/iEv8LpoqWwREgiR8jVolEaPnnkOhNRWD
+         kGSjmHw0zFrI/JDd3Il42RNoyDOBtaFZ7hFQxDQWQdJijE86eWfps0Lk4V8BF/aV9466
+         jXNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729107320; x=1729712120;
+        d=1e100.net; s=20230601; t=1729107319; x=1729712119;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=wKwvYe39nBsv0ou8UQbvoOTMiew7wQ993evdtT8JLq4=;
-        b=Ki1UYeyS2Fr79nEodmHycl3PD8R3Mlt5VeU9TlSaaxKFFs7HGWKCMEtni4OWS1XsOR
-         pcWfG46vxaoDEdPfl46361m37W9Alt7FBPYYxH5qMtQSdO6Gd/KYhK5Op8tZ9u//Wwjr
-         r20QAnTfFxSyAYblJEvBA859ozGn8xBs9RJJFgHvBqxZ1eLRsE9gQBU8rKPtRpXfPqEc
-         9h8QCzxVCgURAA/EB94yUvl1P5TtYBlP2wZu2Gk2SNCU4CCrxLVIZP/jSilPZoJZJBvK
-         cySpA4I5ldI3BzIXJTewnCVgfThdxjy8KrMZwZtGvqvZazDNxQPyp/pPMlnE0QM10fNM
-         d7Tg==
-X-Gm-Message-State: AOJu0YzIWFRSs9GCO0xutbLsR/xpXSASdaimu3e/bf7PfBGz2RqDHBaQ
-	1aIfEx1R53o3r4Vu9FLP0eqtPK2JV6pUXfoqpXeBpsY798qe58TCMZnONg==
-X-Google-Smtp-Source: AGHT+IEuCgkQ38oxi2mhQ1LKFayVtC6r/EBv/M83zWetTk12yT/nEHunzw1NNN6KCjjOSkklLj/3aA==
-X-Received: by 2002:a05:600c:3109:b0:431:3b80:6ca7 with SMTP id 5b1f17b1804b1-43158756ee3mr4705565e9.13.1729107319353;
-        Wed, 16 Oct 2024 12:35:19 -0700 (PDT)
+        bh=PZ6eysO1/gu3beY0ZHZHPoa1kVbjq+GdKCI+YC4Ojpo=;
+        b=aPMO7Vdhwz7xDTdlwlyTldoelX+6vEDULRVuQVwMXCH6Eo/5Gx1lKD0YMXjD17lPy4
+         FSaBOII29RHfzHLQjKmDw27GIDdKRN9YZVJ4mab29rvJYOPucQfYLmiU11ml/jK+QruR
+         GNJjcCU16Rj+6OdcLN82nF5h7ps4sfKTgj+KjKBYnmx/32/7DBssi2Uer9VJWgNkE+pj
+         OfgFlbnIuoJ1fev1IgUTUscqNJMv3JRTInRsrkYO5MUokKg1jXZR6EAlp055NhkabWUz
+         /eKRtqUOpD3fXupairJSd40KhgVtEgp1OdKbXthE3nXtjPEzP7R7sEW7Qtl7keOclhpR
+         hfSQ==
+X-Gm-Message-State: AOJu0Yxbp1D6odq72+zBAeyejiUsh8EoW7k1NQVXg4ZnaN1kLbyEngXw
+	A388bxzHDVg+eRXkG/QmY1E4xpWtGZAq3VXe99OtW0CyWot8casA0AP4+w==
+X-Google-Smtp-Source: AGHT+IFYGm4HIqNVyzYBhBUX1goPklZKfjtKpZTzJd7dBTUTbMVyyyyO87baFjBuqMFuUXr0eeRs2g==
+X-Received: by 2002:adf:fe89:0:b0:37d:5129:f454 with SMTP id ffacd0b85a97d-37d551d4fd9mr12988757f8f.15.1729107318862;
+        Wed, 16 Oct 2024 12:35:18 -0700 (PDT)
 Received: from Zen2.lab.linutronix.de. (drugstore.linutronix.de. [80.153.143.164])
         by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-37d7fbf838dsm5120724f8f.78.2024.10.16.12.35.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Oct 2024 12:35:19 -0700 (PDT)
+        Wed, 16 Oct 2024 12:35:18 -0700 (PDT)
 From: Alexander Kanavin <alex.kanavin@gmail.com>
 X-Google-Original-From: Alexander Kanavin <alex@linutronix.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alexander Kanavin <alex@linutronix.de>
-Subject: [PATCH 13/13] python3-grpcio-tools/channelz/reflection: update 1.62.2 -> 1.66.2
-Date: Wed, 16 Oct 2024 21:35:05 +0200
-Message-Id: <20241016193505.3459828-13-alex@linutronix.de>
+Subject: [PATCH 12/13] python3-wxgtk4: update 4.2.1 -> 4.2.2
+Date: Wed, 16 Oct 2024 21:35:04 +0200
+Message-Id: <20241016193505.3459828-12-alex@linutronix.de>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241016193505.3459828-1-alex@linutronix.de>
 References: <20241016193505.3459828-1-alex@linutronix.de>
@@ -62,78 +62,220 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 16 Oct 2024 19:35:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112954
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112953
 
 This addresses python 3.13 issues.
 
+License-Update: added bsd-2-clause to LICENSE.txt
+
+Drop 0001-sip-Fix-build-with-gcc-14.patch as already fixed upstream.
+
 Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ---
- ...o-channelz_1.62.2.bb => python3-grpcio-channelz_1.66.2.bb} | 3 ++-
- ...flection_1.62.2.bb => python3-grpcio-reflection_1.66.2.bb} | 3 ++-
- ...-grpcio-tools_1.62.2.bb => python3-grpcio-tools_1.66.2.bb} | 4 +++-
- 3 files changed, 7 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-grpcio-channelz_1.62.2.bb => python3-grpcio-channelz_1.66.2.bb} (73%)
- rename meta-python/recipes-devtools/python/{python3-grpcio-reflection_1.62.2.bb => python3-grpcio-reflection_1.66.2.bb} (73%)
- rename meta-python/recipes-devtools/python/{python3-grpcio-tools_1.62.2.bb => python3-grpcio-tools_1.66.2.bb} (80%)
+ ...y-use-GetAssertStackTrace-under-USE_.patch |  6 ++--
+ .../0001-sip-Fix-build-with-gcc-14.patch      | 31 -------------------
+ .../add-back-option-build-base.patch          |  9 ++++--
+ .../not-overwrite-cflags-cxxflags.patch       | 10 ++++--
+ .../wxgtk-fixup-build-scripts.patch           | 15 +++++----
+ ...xgtk4_4.2.1.bb => python3-wxgtk4_4.2.2.bb} |  7 ++---
+ 6 files changed, 28 insertions(+), 50 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-sip-Fix-build-with-gcc-14.patch
+ rename meta-python/recipes-devtools/python3-wxgtk4/{python3-wxgtk4_4.2.1.bb => python3-wxgtk4_4.2.2.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.62.2.bb b/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.66.2.bb
-similarity index 73%
-rename from meta-python/recipes-devtools/python/python3-grpcio-channelz_1.62.2.bb
-rename to meta-python/recipes-devtools/python/python3-grpcio-channelz_1.66.2.bb
-index ed5ede425..dce7737b2 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.62.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.66.2.bb
-@@ -8,8 +8,9 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=7145f7cdd263359b62
- inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-sip-Conditionally-use-GetAssertStackTrace-under-USE_.patch b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-sip-Conditionally-use-GetAssertStackTrace-under-USE_.patch
+index f8a3061ae..1426067d2 100644
+--- a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-sip-Conditionally-use-GetAssertStackTrace-under-USE_.patch
++++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-sip-Conditionally-use-GetAssertStackTrace-under-USE_.patch
+@@ -1,4 +1,4 @@
+-From b9f95c06b2e7a525f4f93d705976882e8dcba6ab Mon Sep 17 00:00:00 2001
++From b62aa1a2e3e0feced819a375be3b2187cc356284 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Tue, 20 Dec 2022 09:46:31 -0800
+ Subject: [PATCH] sip: Conditionally use GetAssertStackTrace under
+@@ -15,7 +15,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  1 file changed, 4 insertions(+)
  
- DEPENDS += "python3-grpcio"
-+PYPI_PACKAGE = "grpcio_channelz"
+ diff --git a/sip/cpp/sip_corewxAppTraits.cpp b/sip/cpp/sip_corewxAppTraits.cpp
+-index 9c9f9d5b..1d2d2f90 100644
++index 9a9a4a66..a54e7659 100644
+ --- a/sip/cpp/sip_corewxAppTraits.cpp
+ +++ b/sip/cpp/sip_corewxAppTraits.cpp
+ @@ -471,7 +471,11 @@ static PyObject *meth_wxAppTraits_GetAssertStackTrace(PyObject *sipSelf, PyObjec
+@@ -23,7 +23,7 @@ index 9c9f9d5b..1d2d2f90 100644
+  
+              Py_BEGIN_ALLOW_THREADS
+ +#if wxUSE_STACKWALKER
+-             sipRes = new  ::wxString((sipSelfWasArg ? sipCpp-> ::wxAppTraits::GetAssertStackTrace() : sipCpp->GetAssertStackTrace()));
++             sipRes = new ::wxString((sipSelfWasArg ? sipCpp->::wxAppTraits::GetAssertStackTrace() : sipCpp->GetAssertStackTrace()));
+ +#else
+ +            sipRes = new  ::wxString("");
+ +#endif
+diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-sip-Fix-build-with-gcc-14.patch b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-sip-Fix-build-with-gcc-14.patch
+deleted file mode 100644
+index 4782e74ef..000000000
+--- a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-sip-Fix-build-with-gcc-14.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From 5234a454a1b9f11f83e59909fb2972176497e02c Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Thu, 9 May 2024 17:35:11 -0700
+-Subject: [PATCH] sip: Fix build with gcc-14
+-
+-Fixes -Wincompatible-pointer-types
+-sip/siplib/siplib.c:3900:20: error: assignment to 'sipSimpleWrapper *' {aka 'struct _sipSimpleWrapper *'} from incompatible pointer type 'PyObject *' {aka 'struct _object *'} [-Wincompatible-pointer-types]
+-|  3900 |             *selfp = va_arg(va, PyObject *);
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- sip/siplib/siplib.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/sip/siplib/siplib.c b/sip/siplib/siplib.c
+-index 95563e5c..ae3fac60 100644
+---- a/sip/siplib/siplib.c
+-+++ b/sip/siplib/siplib.c
+-@@ -3897,7 +3897,7 @@ static int parsePass1(PyObject **parseErrp, sipSimpleWrapper **selfp,
+-     {
+-     case '#':
+-             /* A ctor has an argument with the /Transfer/ annotation. */
+--            *selfp = va_arg(va, PyObject *);
+-+            *selfp = (sipSimpleWrapper *)va_arg(va, PyObject *);
+-             break;
+- 
+-     case 'B':
+--- 
+-2.45.0
+-
+diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/add-back-option-build-base.patch b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/add-back-option-build-base.patch
+index a46f3f870..2622df24e 100644
+--- a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/add-back-option-build-base.patch
++++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/add-back-option-build-base.patch
+@@ -1,4 +1,7 @@
+-Add back default user options for cross build.
++From bc08fddaf4b23073b2afbc045a26aedc4d2c6470 Mon Sep 17 00:00:00 2001
++From: Kai Kang <kai.kang@windriver.com>
++Date: Wed, 30 Mar 2022 17:39:33 +0800
++Subject: [PATCH] Add back default user options for cross build.
  
--SRC_URI[sha256sum] = "6e4ac2c43d76b245c5f66d98f523db08786b186128a655ee6f20a30a7e68e4f9"
-+SRC_URI[sha256sum] = "4904c7837523436624895d9062694f290b7f33383b296a1ec7c497b6e4c7ed19"
+ Upstream-Status: Pending [oe specific]
  
- RDEPENDS:${PN} = "python3-grpcio"
+@@ -8,10 +11,10 @@ Signed-off-by: Kai Kang <kai.kang@windriver.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
  
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio-reflection_1.62.2.bb b/meta-python/recipes-devtools/python/python3-grpcio-reflection_1.66.2.bb
-similarity index 73%
-rename from meta-python/recipes-devtools/python/python3-grpcio-reflection_1.62.2.bb
-rename to meta-python/recipes-devtools/python/python3-grpcio-reflection_1.66.2.bb
-index 478c5b33e..c89d69bbd 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio-reflection_1.62.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio-reflection_1.66.2.bb
-@@ -8,8 +8,9 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=7145f7cdd263359b62
- inherit pypi setuptools3
+ diff --git a/setup.py b/setup.py
+-index a215da7..dccfeb3 100644
++index 99ee6612..fad5aba8 100644
+ --- a/setup.py
+ +++ b/setup.py
+-@@ -105,7 +105,7 @@ class wx_build(orig_build):
++@@ -111,7 +111,7 @@ class wx_build(orig_build):
+      Delegate to build.py for doing the actual build, (including wxWidgets)
+      instead of letting distutils do it all.
+      """
+diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/not-overwrite-cflags-cxxflags.patch b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/not-overwrite-cflags-cxxflags.patch
+index 67f7949b3..3dc4cb1e7 100644
+--- a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/not-overwrite-cflags-cxxflags.patch
++++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/not-overwrite-cflags-cxxflags.patch
+@@ -1,4 +1,8 @@
+-Not overwrite CFLAGS and CXXFLAGS. It also avoid buildpaths qa issue:
++From 05189dc7063a7c238e38589cbaf92be256270e54 Mon Sep 17 00:00:00 2001
++From: Kai Kang <kai.kang@windriver.com>
++Date: Wed, 23 Nov 2022 13:40:00 +0800
++Subject: [PATCH] Not overwrite CFLAGS and CXXFLAGS. It also avoid buildpaths
++ qa issue:
  
- DEPENDS += "python3-grpcio"
-+PYPI_PACKAGE = "grpcio_reflection"
+   WARNING: python3-wxgtk4-4.2.0-r0 do_package_qa: QA Issue: File
+   /usr/lib64/python3.11/site-packages/wx/.debug/_xml.cpython-311-aarch64-linux-gnu.so
+@@ -12,10 +16,10 @@ Signed-off-by: Kai Kang <kai.kang@windriver.com>
+  1 file changed, 2 insertions(+), 2 deletions(-)
  
--SRC_URI[sha256sum] = "2dd44806d68d0006636529bda573012b19a42281478c2d051cdaaebb91e2516c"
-+SRC_URI[sha256sum] = "add827e2deb56e96803c82ace1d4e77fa0c8ec3747d6398e9951f739d71067d4"
+ diff --git a/wscript b/wscript
+-index 067b307..50d96d1 100644
++index 79bdf3e1..d6244d5e 100644
+ --- a/wscript
+ +++ b/wscript
+-@@ -195,8 +195,8 @@ def configure(conf):
++@@ -188,8 +188,8 @@ def configure(conf):
+          cfg.finishSetup(conf.env.wx_config, conf.env.debug,
+                          'mingw32' if isWindows and not conf.env.use_msvc else None)
+  
+diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/wxgtk-fixup-build-scripts.patch b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/wxgtk-fixup-build-scripts.patch
+index 0d65ebb59..09497133b 100644
+--- a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/wxgtk-fixup-build-scripts.patch
++++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/wxgtk-fixup-build-scripts.patch
+@@ -1,4 +1,7 @@
+-Fix issues in build scripts:
++From 171df10f86be6defb9e317ac62df8a7b0389b901 Mon Sep 17 00:00:00 2001
++From: Kai Kang <kai.kang@windriver.com>
++Date: Wed, 30 Mar 2022 17:39:33 +0800
++Subject: [PATCH] Fix issues in build scripts:
  
- RDEPENDS:${PN} = "python3-grpcio"
+ * remove hardcode lib path from buildtools/config.py which is not suitable for
+   cross build
+@@ -15,10 +18,10 @@ Signed-off-by: Kai Kang <kai.kang@windriver.com>
+  2 files changed, 4 insertions(+), 4 deletions(-)
  
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.62.2.bb b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.66.2.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-grpcio-tools_1.62.2.bb
-rename to meta-python/recipes-devtools/python/python3-grpcio-tools_1.66.2.bb
-index e05b8734d..6765bed04 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.62.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.66.2.bb
-@@ -7,12 +7,14 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=7145f7cdd263359b62
+ diff --git a/buildtools/config.py b/buildtools/config.py
+-index c837e5d..d426005 100644
++index 94c216ec..b3ec3f2e 100644
+ --- a/buildtools/config.py
+ +++ b/buildtools/config.py
+-@@ -312,8 +312,8 @@ class Configuration(object):
++@@ -336,8 +336,8 @@ class Configuration(object):
+                  # wx-config doesn't output that for some reason.  For now, just
+                  # add it unconditionally but we should really check if the lib is
+                  # really found there or wx-config should be fixed.
+@@ -30,10 +33,10 @@ index c837e5d..d426005 100644
+              # Move the various -I, -D, etc. flags we got from the config scripts
+              # into the distutils lists.
+ diff --git a/setup.py b/setup.py
+-index 64bec4b..fb29253 100644
++index fad5aba8..eade737b 100644
+ --- a/setup.py
+ +++ b/setup.py
+-@@ -130,7 +130,7 @@ class wx_build(orig_build):
++@@ -135,7 +135,7 @@ class wx_build(orig_build):
+                  'message and the wxWidgets and Phoenix build steps in the future.\n')
+  
+              # Use the same Python that is running this script.
+@@ -42,7 +45,7 @@ index 64bec4b..fb29253 100644
+              cmd = ' '.join(cmd)
+              runcmd(cmd)
+  
+-@@ -233,7 +233,7 @@ if haveWheel:
++@@ -238,7 +238,7 @@ if haveWheel:
+  class wx_install(orig_install):
+      def finalize_options(self):
+          orig_install.finalize_options(self)
+diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.1.bb b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.2.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.1.bb
+rename to meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.2.bb
+index cc6b6cef6..64e2b3ebb 100644
+--- a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.1.bb
++++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.2.bb
+@@ -1,8 +1,8 @@
+ DESCRIPTION = "Python3 interface to the wxWidgets Cross-platform C++ GUI toolkit."
+ HOMEPAGE = "http://www.wxpython.org"
  
- inherit pypi setuptools3
+-LICENSE = "LGPL-2.0-only & WXwindows"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=bdabf9e11191e2b9d3b6aef5f338ec00"
++LICENSE = "LGPL-2.0-only & WXwindows & BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=102f37a0d23aa258e59e4cc8b5380b35"
  
-+PYPI_PACKAGE = "grpcio_tools"
-+
- DEPENDS += "python3-grpcio"
+ DEPENDS = "python3-attrdict3-native python3-six-native wxwidgets-native \
+            wxwidgets \
+@@ -14,9 +14,8 @@ SRC_URI += "file://add-back-option-build-base.patch \
+            file://wxgtk-fixup-build-scripts.patch \
+            file://not-overwrite-cflags-cxxflags.patch \
+            file://0001-sip-Conditionally-use-GetAssertStackTrace-under-USE_.patch \
+-           file://0001-sip-Fix-build-with-gcc-14.patch \
+            "
+-SRC_URI[sha256sum] = "e48de211a6606bf072ec3fa778771d6b746c00b7f4b970eb58728ddf56d13d5c"
++SRC_URI[sha256sum] = "5dbcb0650f67fdc2c5965795a255ffaa3d7b09fb149aa8da2d0d9aa44e38e2ba"
  
- SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch \
-             file://0001-protobuf-Disable-musttail-attribute-on-mips.patch \
-             "
--SRC_URI[sha256sum] = "5fd5e1582b678e6b941ee5f5809340be5e0724691df5299aae8226640f94e18f"
-+SRC_URI[sha256sum] = "4a36e07913d26ba5ccfd2685ba63ca97f26b08c249d2cc9e74dda37efa49d7e4"
- 
- RDEPENDS:${PN} = "python3-grpcio"
+ S = "${WORKDIR}/wxPython-${PV}"
  
 -- 
 2.39.5
