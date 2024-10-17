@@ -2,175 +2,120 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 262B6D3C52B
-	for <webhook@archiver.kernel.org>; Thu, 17 Oct 2024 18:54:43 +0000 (UTC)
-Received: from mail-oo1-f45.google.com (mail-oo1-f45.google.com [209.85.161.45])
- by mx.groups.io with SMTP id smtpd.web11.5824.1729191282396332350
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BDC91D3C532
+	for <webhook@archiver.kernel.org>; Thu, 17 Oct 2024 20:47:13 +0000 (UTC)
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
+ by mx.groups.io with SMTP id smtpd.web10.8097.1729198032988629093
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Oct 2024 11:54:42 -0700
+ Thu, 17 Oct 2024 13:47:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=RQIhUV5W;
- spf=pass (domain: gmail.com, ip: 209.85.161.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f45.google.com with SMTP id 006d021491bc7-5eb858c4d20so280676eaf.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Oct 2024 11:54:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FPmqMVvZ;
+ spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f175.google.com with SMTP id 5614622812f47-3e5ef9e795bso917219b6e.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Oct 2024 13:47:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1729191281; x=1729796081; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1729198032; x=1729802832; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jLth0KwMm00K9ttJBDMkIiJ1S8JeLejexMj300Ph/lY=;
-        b=RQIhUV5WoQ4GCaqUKdQW4xyXGVEOQwXY7bpwMxhLM6hoqcYt0oE+FO1KokeKha5T4r
-         dcOBhyMzDsdWuGv0MQOhP0fYw2zYGZ168uCbD9//Qm6+M1ykpYE1TYbnkymNPtz8yGFU
-         jPLgwSm/WUoryfmyUpRqt+hptPlkxAv5SUxXdC8TkPbvQ7clSZ4q039R372167uYKXiO
-         Kbt2mNohfHaAmtkyxR93y2i+jEM8PhZY3WakQ0Zx8Oqdno7Wsjx6F6ECJCkyZroQwHtj
-         LzF5dl7sJGFcOhTkI1MbwgpCuC9oQUNzvzrOT5yNRfQ+plu8/MNai+SbN0o/OIRjoV4m
-         Al0A==
+        bh=tB8KO5pNoxMl5ExPo42zsn1Roeyk9fLZ92NdCKk1R8k=;
+        b=FPmqMVvZAn9Gla8awfGIhQ6z6LolzBGf49GIubwVVfDmwiDssKBn5jMYc9+hv4VpQP
+         3tKPktUO2Nyy8YvpZH9VudOt0kHexKbnDIQfb5WiR+HkCHqYEO9q+bcKqXNSP+tQZfzQ
+         DjJDpWozCKia3WDJq+TjndesVXYhLusAo+x2G+xXMYEwE+Zhjq1BcnxkGclUcVhVyaOT
+         SMr4R8F6i8NJ2bxR0WvtZUPYdYi9iWph01tAqs5rgyoNlDcJuMbxu04+6euoRSSdjFqK
+         wF0kjIS8HiWGVBFbIpVMy0TbNrrl3rWF/2Bq4unH6HGtVu/cDOaftrfqiKx0Yy3jTLwW
+         UGkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729191281; x=1729796081;
+        d=1e100.net; s=20230601; t=1729198032; x=1729802832;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=jLth0KwMm00K9ttJBDMkIiJ1S8JeLejexMj300Ph/lY=;
-        b=OUP9tVb94/8QngBPmRohWYfnecrby0QkH5/h1EpEnIIlVSjgEgqTOOnnBqnunJbqC7
-         yGrSzvnJKNUvp+fomnBYvEdbaVO6cvPabs5bAq9p3BRClLPkuLZlC1rpF8l69iOsAr2g
-         ECulWqKx3mJI5X4wMV9zFg5BaNNjeGEY2uyxlYCujgCAU1Ftzl7TAS229cU7cKFClv80
-         2yKFrCipB0kNEgKvVXehWi0OYpkwL7K0Oi6xzfisdzeZD2YiA8Jm9bKExrwCn/FzqYqR
-         gAW7zKc+f2dLQqSf+z4sHlrSSD+1QlY95PN2dZW9iBWMp+Jj4Bvvu9pInI1Wc0cU51C0
-         BKNQ==
-X-Gm-Message-State: AOJu0Ywq8kYAd4s05jWSUVBoFFzPHZ70P0qqbJYWAKcuJY0O6O09B+vV
-	G2dbbs+G68/E+8Lzofq3O+MnlJ6dnEYfCW2F7Yf/D7xlpAXI59ginMgIdQfu2MvTWtWOOcIWzeB
-	IaXnL2KP3eX4ng6I6BQdBXQRcrUg=
-X-Google-Smtp-Source: AGHT+IEUsx3qc3HlI4JgrqDMooZCDgeg4SogxyGLpTQsPFhyHFYP8l7somQO4JsZLUnPNLa4jNxPL2CXPWd2cafRrsc=
-X-Received: by 2002:a05:6820:1625:b0:5e7:cb2e:dfec with SMTP id
- 006d021491bc7-5eb26452981mr10968635eaf.8.1729191281646; Thu, 17 Oct 2024
- 11:54:41 -0700 (PDT)
+        bh=tB8KO5pNoxMl5ExPo42zsn1Roeyk9fLZ92NdCKk1R8k=;
+        b=JGjQjS3ngqUyzFQpzJKEl+snFDK+cnztJnwCAnXy1lTYCLbbmuSvTZB3YplLYbsPN0
+         sWYTIVCvgWZanSur88KApZO0RCM6+uDjw8ADODb01c4CmxA9ZeHJNscIQMZ4BLwj0Om2
+         2hjN/k820SEWUGdoBWpK2IBoHXiHPPtcmKTmNwkt3WEi6577EVNG7RtCJxDtN9qiatEs
+         Lm7AxhhGS/eszHm3pyGntsE30Lxn5M4oWKQdsi0gZtRixkBkPK9D13FSksTVdFkNSNdR
+         y6EqfahlCYyNY/Y5rL+nEztiWIwhlS3wcys0z94h+VlRnZ23RTPpzN4YA6vmLilEKLnF
+         s3Kg==
+X-Forwarded-Encrypted: i=1; AJvYcCUsRWOKy0Ezd8MDF1F7VPjy+osZUbxnYXNguGjj4xphEiYHWXEpkXejsduTqeLbd6QN2XTVlO1sH5yMBfw7mzdnnfA=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YwgG3gZ+yvg1ryEApcDu0gvUdpgPvJqcfocMJI0feROWatgL74H
+	lsZ5OaD2LPcqAaMqg7qE5frgu6f+S2kCTjZ4czGhEBkMYz+NkkSvThCmudSlG+rjhmwPi1Zmvso
+	ZYimd9SsrjK82mNkpu3l+JzYuCR8=
+X-Google-Smtp-Source: AGHT+IFYsh9nIwMwvHRPLKfqmmJF1zO4nKQf0MCh34PT3c8OpF00I0vGEXzaeZEtd/RxrDYSU11ja6eC4LW2I9ZNdoc=
+X-Received: by 2002:a05:6808:201f:b0:3e5:f9ee:a2b3 with SMTP id
+ 5614622812f47-3e602c651admr19239b6e.4.1729198032104; Thu, 17 Oct 2024
+ 13:47:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241017070839.39476-1-patrick@subset.ch>
-In-Reply-To: <20241017070839.39476-1-patrick@subset.ch>
+References: <20241017063626.2089926-1-chanh@os.amperecomputing.com>
+In-Reply-To: <20241017063626.2089926-1-chanh@os.amperecomputing.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 17 Oct 2024 11:54:15 -0700
-Message-ID: <CAMKF1spGmL-v7izu2-zJQ=KmxE=qf2QwVQe_sGE-9exGhMeHhw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2] fluentbit: fix building with wasm support
-To: patrick.wicki@subset.ch
-Cc: openembedded-devel@lists.openembedded.org, 
-	Patrick Wicki <patrick.wicki@siemens.com>
+Date: Thu, 17 Oct 2024 13:46:45 -0700
+Message-ID: <CAMKF1srdcMcJ6CVEm3Cf42nEyFug+kDO0yGWQ53GGjG1TADGfw@mail.gmail.com>
+Subject: Re: [meta-networking,v2][PATCH] mctp: upgrade 1.1 -> 2.0
+To: Chanh Nguyen <chanh@os.amperecomputing.com>
+Cc: Jeremy Kerr <jk@codeconstruct.com.au>, openembedded-devel@lists.openembedded.org, 
+	Phong Vo <phong@os.amperecomputing.com>, Thang Nguyen <thang@os.amperecomputing.com>, 
+	Quan Nguyen <quan@os.amperecomputing.com>, Khanh Pham <khpham@amperecomputing.com>, 
+	Thu Nguyen <tbnguyen@amperecomputing.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 17 Oct 2024 18:54:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112969
+ <openembedded-devel@lists.openembedded.org>; Thu, 17 Oct 2024 20:47:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/112970
 
-it fails in configure -
-https://valkyrie.yoctoproject.org/#/builders/81/builds/66/steps/14/logs/std=
-io
+ok, now it fails for musl target see
 
-On Thu, Oct 17, 2024 at 12:09=E2=80=AFAM Patrick Wicki via
-lists.openembedded.org
-<patrick.wicki=3Dsubset.ch@lists.openembedded.org> wrote:
+https://errors.yoctoproject.org/Errors/Details/809802/
+
+maybe you need to include linux/socket.h to get AF_MCTP address family
+definition
+
+On Wed, Oct 16, 2024 at 11:36=E2=80=AFPM Chanh Nguyen
+<chanh@os.amperecomputing.com> wrote:
 >
-> From: Patrick Wicki <patrick.wicki@siemens.com>
->
-> Add patch for the wasm runtime that fixes building for x86.
->
-> Signed-off-by: Patrick Wicki <patrick.wicki@siemens.com>
+> Signed-off-by: Chanh Nguyen <chanh@os.amperecomputing.com>
 > ---
->  ...d-cmake-try_run-when-cross-compiling.patch | 42 +++++++++++++++++++
->  .../fluentbit/fluentbit_3.1.9.bb              |  1 +
->  2 files changed, 43 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0002-was=
-m-avoid-cmake-try_run-when-cross-compiling.patch
+> Change in v2:
+>   - Fix CI failed                              [Chanh]
+> ---
+>  .../recipes-support/mctp/{mctp_1.1.bb =3D> mctp_2.0.bb}       | 6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
+>  rename meta-networking/recipes-support/mctp/{mctp_1.1.bb =3D> mctp_2.0.b=
+b} (93%)
 >
-> diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0002-wasm-avoid=
--cmake-try_run-when-cross-compiling.patch b/meta-oe/recipes-extended/fluent=
-bit/fluentbit/0002-wasm-avoid-cmake-try_run-when-cross-compiling.patch
-> new file mode 100644
-> index 000000000..419e85903
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0002-wasm-avoid-cmake-=
-try_run-when-cross-compiling.patch
-> @@ -0,0 +1,42 @@
-> +From 5b6d274664f92a6c6083f4d27a1b1604a326f22c Mon Sep 17 00:00:00 2001
-> +From: Patrick Wicki <patrick.wicki@siemens.com>
-> +Date: Sat, 5 Oct 2024 21:36:12 +0200
-> +Subject: [PATCH] wasm: avoid cmake try_run when cross-compiling for x86
+> diff --git a/meta-networking/recipes-support/mctp/mctp_1.1.bb b/meta-netw=
+orking/recipes-support/mctp/mctp_2.0.bb
+> similarity index 93%
+> rename from meta-networking/recipes-support/mctp/mctp_1.1.bb
+> rename to meta-networking/recipes-support/mctp/mctp_2.0.bb
+> index bf3961be4..62044e007 100644
+> --- a/meta-networking/recipes-support/mctp/mctp_1.1.bb
+> +++ b/meta-networking/recipes-support/mctp/mctp_2.0.bb
+> @@ -5,7 +5,7 @@ LICENSE =3D "GPL-2.0-only"
+>
+>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4cc91856b08b094b4f406a29dc61d=
+b21"
+>
+> -SRCREV =3D "a591ad885aa28f113cb45870b2fd5bce48378d6f"
+> +SRCREV =3D "9986862f88fd6e6ca75e2a29236cf332d640e600"
+>
+>  SRC_URI =3D "git://github.com/CodeConstruct/mctp;branch=3Dmain;protocol=
+=3Dhttps"
+>
+> @@ -13,6 +13,10 @@ S =3D "${WORKDIR}/git"
+>
+>  inherit meson pkgconfig systemd
+>
+> +EXTRA_OEMESON =3D " \
+> +    -Dtests=3Dfalse \
+> +"
 > +
-> +This fixes building the wasm micro runtime used when enabling wasm
-> +support in fluentbit.
-> +cmake try_run does not work when cross-compiling because the test progra=
-m
-> +cannot be executed:
-> +
-> +| CMake Error: try_run() invoked in cross-compiling mode, please set the=
- following cache variables appropriately:
-> +|    TEST_WRGSBASE_RESULT (advanced)
-> +| For details see .../fluentbit/3.1.9/build/TryRunResults.cmake
-> +|      Write linear memory base addr to x86 GS register disabled
-> +| -- Configuring incomplete, errors occurred!
-> +
-> +Since we cannot run the test program, assume that the instruction is not
-> +available and disable the option.
-> +
-> +This patch is no longer needed once fluentbit updates WAMR, as it's been
-> +fixed in https://github.com/bytecodealliance/wasm-micro-runtime/pull/306=
-6.
-> +
-> +Upstream-Status: Pending [https://github.com/fluent/fluent-bit/pull/8744=
-]
-> +
-> +Signed-off-by: Patrick Wicki <patrick.wicki@siemens.com>
-> +---
-> + .../build-scripts/config_common.cmake                           | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/lib/wasm-micro-runtime-WAMR-1.3.0/build-scripts/config_comm=
-on.cmake b/lib/wasm-micro-runtime-WAMR-1.3.0/build-scripts/config_common.cm=
-ake
-> +index e73ebc85f..c2504e007 100644
-> +--- a/lib/wasm-micro-runtime-WAMR-1.3.0/build-scripts/config_common.cmak=
-e
-> ++++ b/lib/wasm-micro-runtime-WAMR-1.3.0/build-scripts/config_common.cmak=
-e
-> +@@ -408,7 +408,7 @@ if (WAMR_BUILD_STATIC_PGO EQUAL 1)
-> +   add_definitions (-DWASM_ENABLE_STATIC_PGO=3D1)
-> +   message ("     AOT static PGO enabled")
-> + endif ()
-> +-if (WAMR_DISABLE_WRITE_GS_BASE EQUAL 1)
-> ++if (WAMR_DISABLE_WRITE_GS_BASE EQUAL 1 OR CMAKE_CROSSCOMPILING)
-> +   add_definitions (-DWASM_DISABLE_WRITE_GS_BASE=3D1)
-> +   message ("     Write linear memory base addr to x86 GS register disab=
-led")
-> + elseif (WAMR_BUILD_TARGET STREQUAL "X86_64"
-> diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb b/meta=
--oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
-> index fc67236d3..d42a9a964 100644
-> --- a/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
-> +++ b/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
-> @@ -21,6 +21,7 @@ SRCREV =3D "431fa79ae27edaef8d050a7af6f038f4400193a1"
->  SRC_URI =3D "\
->      git://github.com/fluent/fluent-bit.git;branch=3D3.1;protocol=3Dhttps=
- \
->      file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.pat=
-ch \
-> +    file://0002-wasm-avoid-cmake-try_run-when-cross-compiling.patch \
->      file://0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.pat=
-ch \
->      ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '', 'file://0003-=
-Disable-installing-systemd-service-file.patch', d)} \
+>  PACKAGECONFIG ??=3D " \
+>      ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
 >  "
 > --
-> 2.47.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#112961): https://lists.openembedded.org/g/openembedde=
-d-devel/message/112961
-> Mute This Topic: https://lists.openembedded.org/mt/109059531/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> 2.43.0
 >
 
