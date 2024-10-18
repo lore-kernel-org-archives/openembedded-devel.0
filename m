@@ -2,56 +2,56 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E418FD3F283
-	for <webhook@archiver.kernel.org>; Fri, 18 Oct 2024 19:48:42 +0000 (UTC)
-Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com [209.85.128.169])
- by mx.groups.io with SMTP id smtpd.web10.29965.1729278809400840872
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0118AD3F285
+	for <webhook@archiver.kernel.org>; Fri, 18 Oct 2024 19:48:53 +0000 (UTC)
+Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com [209.85.167.178])
+ by mx.groups.io with SMTP id smtpd.web10.29985.1729278830070942196
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Oct 2024 12:13:29 -0700
+ Fri, 18 Oct 2024 12:13:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=OJ9URecX;
- spf=pass (domain: gmail.com, ip: 209.85.128.169, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-6e396a69062so23918087b3.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Oct 2024 12:13:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=af0fxBSc;
+ spf=pass (domain: gmail.com, ip: 209.85.167.178, mailfrom: schonm@gmail.com)
+Received: by mail-oi1-f178.google.com with SMTP id 5614622812f47-3e6075cba82so258069b6e.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Oct 2024 12:13:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1729278808; x=1729883608; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1729278829; x=1729883629; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=+5zG9rPGqnVmELr0PNfSUt+Izra60CYQzz1X5nM2Yy0=;
-        b=OJ9URecXwfbuSKCZkAnahzqQwaWsJWcRwCy+1cj8rGsh2RT0Shk/tTyfdfHxBVx5hi
-         pwZDXiaKxNUFDwjueP0QW3i58EzzCTOGisAmHwvO/qt42hpdYQ2ld45Y2Viha+1LUhR+
-         BlBJ9w0x57VfvfqTdiZFneaMBF49Mt9/v5s1klp9mp/v4fzTn65OyEA27Hgw5Y0Xmgk2
-         E0jdxumIDnPW4ai6GIq9BrKNnTON1Rxmf9Pm9K4uEOW7xr1cS++ysHfNKjB9TvPt9B6r
-         uFzSMR9YfsBayNFvOmnN9hNlC+DuAcicmgF5Ys3Rv/vmfS55ufQ+LWlsB7mZCA7ZnmET
-         InLA==
+        bh=oVOWfCeUeNiAC/z+Qjvdwzv+TLU5Q3PCI7e1ipnphiA=;
+        b=af0fxBSclkFbgWY1v9tZ+ttsR8YQwGQDGdf2iNfZqOVRQJWh1oKHKX2Ii7fQPRKehp
+         qbW2qjiNveSfDt8XI1ovm1mwMzR1/1FNLhhmvAO/LICkgrhdHJNdi/JkNe+nqa3fxdA7
+         4VkDieVzfLy/12ifaAgZVFfJUYCXMaAaoy7WADhfh4BTpVw0nGNdRRGP57KXP28iXrr2
+         F5M0PCFszbIDv4EQq5gzGliqC3RcL1E7Ivez5xGMNZfV6849sn8rTbhp9+cTGCFUJ6Ij
+         OuUTsnJ5aB68QrhZoQDEBHwDHdtj5Pz6lfu3WlE+9cM51LrCU6xTJYQT8JLK07NKLftV
+         Kmxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729278808; x=1729883608;
+        d=1e100.net; s=20230601; t=1729278829; x=1729883629;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=+5zG9rPGqnVmELr0PNfSUt+Izra60CYQzz1X5nM2Yy0=;
-        b=AAoTyp4hrB7t9OUPPyxey+mMB3bofxB3XM9lJIAvSEvXQ0QrZ+cqYRZPqURbU3pvj1
-         0cV+g1i/I2b2MjXO62yfJAU2ADDrXCftG5GuEiJCB/iGY+sNOw0nyFw488UzbFn2KAlx
-         n+nYWdFn6pvPTuOmbOflwkoEnCgkMNcVBgjMp8twsWK4AZrjhgiSZ6rvzBY9L6ZQ3Qw9
-         pR1oBfX0RIQEv17l6MiGlwdQ7vBi/gp1bAp9KtbTqKnAhXHCZpwtZVsyG/nqS+jwE7mM
-         qlrI7lsvXO/8A/hdf3rKqdbwQtbwt/JOc9EQBA8z8iLAc3SSTjBd63mjVKjJwmrvzD8Q
-         foqQ==
-X-Gm-Message-State: AOJu0YzuU1wnA5fkVGA7Mp0JjdZyvikvXvZYD0dPwFLp3w6zL/savr5n
-	FF4HHWqna2ROrKdZGzNJxiauCSzZW5xZdUvexShJmQ7VKitqNYX0kGaA+Q==
-X-Google-Smtp-Source: AGHT+IFnGozwjcPXq+bW/GFc4R+sjWySRQSDyg1LPMi9ItGRN/uW8PuTEahOq6iJZq/9Sn0HvGkwmw==
-X-Received: by 2002:a05:690c:48c1:b0:6e5:af24:92fa with SMTP id 00721157ae682-6e5bfc7a906mr45578127b3.21.1729278808098;
-        Fri, 18 Oct 2024 12:13:28 -0700 (PDT)
+        bh=oVOWfCeUeNiAC/z+Qjvdwzv+TLU5Q3PCI7e1ipnphiA=;
+        b=LBYZA9r1GhmqElgVgCW6sf4mioJu2Y308oYgkH4Wd+quM09s4p4YP8spSUKzB7jeSb
+         IWPEuu62vPGVpaeyKXS9TOmHnkwW6nM9A0CTNn/dVs5AObZN26UsYCnHRLst+qWY7vZw
+         Z2Y3iItyrZm76w4EoP4r9WNR9kXyFNlRRxYXgxNZ7himAOL2V7HWKi/sykXmecsNcD+b
+         ENpEp3euPcMyzTLzi2Lzg8DfDgSv9Xxfkw2hhIF1ghmunbp/+8VhbJnhzU1Ns/sBLui+
+         jKdRap56w+6GtPH+k6VHdi8JPKlmL/D73zNovypPC0AjSuYSkQyibrGTXCHWSDYxsdEx
+         eXVA==
+X-Gm-Message-State: AOJu0YzCr2yfUZ+uWvQfas4gLhsIPDkDH5pt7BjI4fQiVFyGU1ZPcaDx
+	JZSdRr3RgShgtmzbME70anPIaiTgT5w1meLoiQh/Ym8MvxWfGUCfaWTqIA==
+X-Google-Smtp-Source: AGHT+IHbTX9Te0K9c3Ci+szF4HQu72NMPZtZ6T9a6o7gndtruA+kUCMXTcx601jWfMTEsu0G/7ufKA==
+X-Received: by 2002:a05:6808:191c:b0:3e5:fd5a:c39b with SMTP id 5614622812f47-3e602c64e79mr3325195b6e.4.1729278829000;
+        Fri, 18 Oct 2024 12:13:49 -0700 (PDT)
 Received: from localhost.localdomain ([67.7.85.114])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6e5c00df1d2sm4280517b3.31.2024.10.18.12.13.27
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6e5c00df1d2sm4280517b3.31.2024.10.18.12.13.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Oct 2024 12:13:27 -0700 (PDT)
+        Fri, 18 Oct 2024 12:13:48 -0700 (PDT)
 From: "J. S." <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-python][PATCH 27/68] python3-html5lib: Drop unnecessary SRC_URI md5sum
-Date: Fri, 18 Oct 2024 15:06:14 -0400
-Message-ID: <20241018191101.25184-28-schonm@gmail.com>
+Subject: [meta-python][PATCH 59/68] python3-service-identity: Drop unnecessary SRC_URI md5sum
+Date: Fri, 18 Oct 2024 15:06:46 -0400
+Message-ID: <20241018191101.25184-60-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241018191101.25184-1-schonm@gmail.com>
 References: <20241018191101.25184-1-schonm@gmail.com>
@@ -60,26 +60,26 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 18 Oct 2024 19:48:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113014
+ <openembedded-devel@lists.openembedded.org>; Fri, 18 Oct 2024 19:48:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113046
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-html5lib_1.1.bb | 1 -
+ .../recipes-devtools/python/python3-service-identity_21.1.0.bb   | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-html5lib_1.1.bb b/meta-python/recipes-devtools/python/python3-html5lib_1.1.bb
-index d6272a07c..94fbe0455 100644
---- a/meta-python/recipes-devtools/python/python3-html5lib_1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-html5lib_1.1.bb
-@@ -2,7 +2,6 @@ SUMMARY = "HTML parser based on the WHATWG HTML specifcation"
+diff --git a/meta-python/recipes-devtools/python/python3-service-identity_21.1.0.bb b/meta-python/recipes-devtools/python/python3-service-identity_21.1.0.bb
+index a1d6a3c0d..babe05e1d 100644
+--- a/meta-python/recipes-devtools/python/python3-service-identity_21.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-service-identity_21.1.0.bb
+@@ -4,7 +4,6 @@ HOMEPAGE = "https://pypi.org/project/service-identity"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1ba5ada9e6fead1fdc32f43c9f10ba7c"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=8a0f079f4e6a215d6bd6f9d97cab4d5f"
  
--SRC_URI[md5sum] = "6748742e2ec4cb99287a6bc82bcfe2b0"
- SRC_URI[sha256sum] = "b2e5b40261e20f354d198eae92afc10d750afb487ed5e50f9c4eaf07c184146f"
+-SRC_URI[md5sum] = "5e5c195d8fcedc72f9068be2ad9b5a13"
+ SRC_URI[sha256sum] = "6e6c6086ca271dc11b033d17c3a8bea9f24ebff920c587da090afc9519419d34"
  
- inherit pypi setuptools3
+ inherit pypi python_setuptools_build_meta ptest
 -- 
 2.43.0
 
