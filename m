@@ -2,56 +2,56 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D580AD3E1BC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5F23D3E1BD
 	for <webhook@archiver.kernel.org>; Fri, 18 Oct 2024 19:48:42 +0000 (UTC)
-Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
- by mx.groups.io with SMTP id smtpd.web10.29963.1729278808299821609
+Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com [209.85.128.169])
+ by mx.groups.io with SMTP id smtpd.web10.29962.1729278807733048111
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Oct 2024 12:13:28 -0700
+ Fri, 18 Oct 2024 12:13:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=njIp/rVz;
- spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-6e35bf59cf6so34605167b3.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Oct 2024 12:13:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IUdhh8B0;
+ spf=pass (domain: gmail.com, ip: 209.85.128.169, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-6e34339d41bso22712437b3.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Oct 2024 12:13:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1729278807; x=1729883607; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=60T6c/T4g1GLLbx4x6aAScJxGPnV7MB60m9F07cWaRE=;
-        b=njIp/rVzGF8JQSxH6xouJoAGKpvJBm6IHqnaYa7jLMo7CkmvlTJLPlQ/WL3efJl5LZ
-         mx2mIkvCpuJP9WyfP8j/9AZDu0sz3pPXj2XZKWKrDEDImT69r3LBFeRV5HjwDa/PW3tF
-         1ZJE1buI2AVQBwlUxMOrlEOw/qyRx9Ofo3rZ+JT9Y61rDVeXdDO8pQIi/nhYMIuJa9eh
-         ELpIozZh4vNdDGEf3J3MZ+C2HpUAjkIFy9QINt0ZqYcpK4g1RWnQpNNE2JbRyASf7MSU
-         MVCmTXlTcUFgu088FFg20u3tI88gJIvI2rI92RTz4KwajriklI/F/Cty+NNrsptClG3X
-         cQaw==
+        bh=RkeHrWkQjumu+xEz3gDB/Usy0W5H0TVvfrTC2lGoVvY=;
+        b=IUdhh8B065+bAt2PY1FOXLZUulZP5xS6+2GrJCqmirjFmWMD5vESafbVHgbOxxiWVt
+         dnmXYEOSbtf/jghRK6fCiWZRV3fQzqh9zaIH3GPnDvfKw7bU88KM/xLLz9p1vJs2OD6r
+         TPqwb2aNOj1QQvquqHBp1GhQjQKSDz2SlrfRBktDtGEfMoFr488bdf/zsk3676YGsfrD
+         t7UvtX/iYyVN4R1hmx22+4kz108wdbdvhDcXHDqFqYi6+oV7a07lUZA8xTYcRcXQk4xL
+         W5mkd7s+e/a75NRXdL/0jKEV2Grsu0ROnAa0xhOzG+iRLWRznyvhDnVF2QIn6HJ2Czo/
+         qFCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1729278807; x=1729883607;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=60T6c/T4g1GLLbx4x6aAScJxGPnV7MB60m9F07cWaRE=;
-        b=Q+1HbAfSGiqVKpJ5iziVVYX8TDXo8D+DzbgcSKp92LxKLGq7QszhIIKr58zw1Ue9E2
-         XoNF0h9vsukQWIUeQyMG4vMS44k7grGNxKCpAGCyLCApwPF6iEV3Rv9Uaz4wdVWnVzI3
-         yxaZLg9rQoaxZqsL6GaiXTh1ctjdoqj3QrRhg9CacKGWdQMxt8ImfjXv9TQnkDMx9edA
-         S2y8MEuSz2IVftYgs0piNUyUyupu3vwzLb6HJOWOUW+y3Z3xjvJqxmkFOtGEH9all3mw
-         A6HNkjGqdkUY/2xPG6Jx8wH0sJ2XOLh4SXmTkiggxXErlvVuQoglStwViVdnWiuy5Lg9
-         OLlA==
-X-Gm-Message-State: AOJu0YxDkuRWQFD5RGZPYiP3VSTnjj+3S3bydGS+dB8HOzXEiv3nA5Xb
-	lvSGpcCyIVhaNj2a0SUoEQQV39q7cR216/fFHteP1tG4G2Sfxarmh5j4mA==
-X-Google-Smtp-Source: AGHT+IEwqkmf6z5YxRW7yfHnDCxk7QSlT80IzdvEfpzwiG2iuS4JqBgDyoZxox7Pvisp89nxc/38jQ==
-X-Received: by 2002:a05:690c:6711:b0:6dd:c619:4cb1 with SMTP id 00721157ae682-6e5a3ae9939mr73904257b3.0.1729278806872;
+        bh=RkeHrWkQjumu+xEz3gDB/Usy0W5H0TVvfrTC2lGoVvY=;
+        b=EF6TXfTNobclaenzEyybwWcR9WPgiWx+GH5tAvfxDVRwiOkg583pBweHVmR2wKHzHy
+         EfBvV/KZGyCsq7fUuJfIFyDrHJKQmNVCbF5oxf8NV3fzTBq1fDgzTPAqB6hrequgYrdW
+         R52P7Gu5CXKhWIRcKEMSVTmuK4a6sP6n+sJqeiKS+NHZvO+8d9URVt7YK2XZ+U18P0lF
+         AgPaWwIsGgkMAL5gMu9sB0pSMnBMp3JS51Xyf7gY6WieVOPo8GJH8m+7fTjDpo0WJpGT
+         8Fk2viyXRZbQIr4fD9fZTe1gfaeI9WbHNvsA8yzhqRvaaOidKF5Z+uEq215ez+huFBCt
+         cZUQ==
+X-Gm-Message-State: AOJu0YwjxCtaFBj9hrUcqyr4D7J97jjsjTW0gatIKzyRHQL5BtMxLSsR
+	0bDLBZ6QPY+TlZt5emTqzqAkcbamuyLWRVW4n70vYnZIGbqQh4OVPg7elg==
+X-Google-Smtp-Source: AGHT+IHuDQw+rpFtOogjbbcp8IGFJU5Gx8SvWTJlu2Zu2INtNSjWm8yDvOqVhNnJBY5pJcCBdCAzlw==
+X-Received: by 2002:a05:690c:4d04:b0:6e3:1837:4860 with SMTP id 00721157ae682-6e5bfc22a98mr37966017b3.13.1729278806251;
         Fri, 18 Oct 2024 12:13:26 -0700 (PDT)
 Received: from localhost.localdomain ([67.7.85.114])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6e5c00df1d2sm4280517b3.31.2024.10.18.12.13.26
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6e5c00df1d2sm4280517b3.31.2024.10.18.12.13.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Fri, 18 Oct 2024 12:13:26 -0700 (PDT)
 From: "J. S." <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-python][PATCH 25/68] python3-flask-user: Drop unnecessary SRC_URI md5sum
-Date: Fri, 18 Oct 2024 15:06:12 -0400
-Message-ID: <20241018191101.25184-26-schonm@gmail.com>
+Subject: [meta-python][PATCH 24/68] python3-flask-uploads: Drop unnecessary SRC_URI md5sum
+Date: Fri, 18 Oct 2024 15:06:11 -0400
+Message-ID: <20241018191101.25184-25-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241018191101.25184-1-schonm@gmail.com>
 References: <20241018191101.25184-1-schonm@gmail.com>
@@ -61,25 +61,25 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 18 Oct 2024 19:48:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113012
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113011
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb | 1 -
+ .../recipes-devtools/python/python3-flask-uploads_0.2.1.bb       | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb b/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
-index ac449361a..65be459b7 100644
---- a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
-@@ -6,7 +6,6 @@ HOMEPAGE = " https://github.com/lingthio/Flask-User"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=97de97cd9d6e23c88129d884588ce71a"
+diff --git a/meta-python/recipes-devtools/python/python3-flask-uploads_0.2.1.bb b/meta-python/recipes-devtools/python/python3-flask-uploads_0.2.1.bb
+index 9ac321dec..a51ead3c8 100644
+--- a/meta-python/recipes-devtools/python/python3-flask-uploads_0.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-flask-uploads_0.2.1.bb
+@@ -2,7 +2,6 @@ DESCRIPTION = "Flexible and efficient upload handling for Flask"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;md5=b712ac634b39469660c9bdfb8d03421c"
  
--SRC_URI[md5sum] = "f7965e66ca139c8436896da07e66c21f"
- SRC_URI[sha256sum] = "601abcc0343dfbae0c56273d98362d5cdc266ac84d20b3f65a212e4a2c83b302"
+-SRC_URI[md5sum] = "e5eee34aa92b64a4d22847672b3858a1"
+ SRC_URI[sha256sum] = "53ecbd6033667d50ae02b63adebbaa33c7fc56c09e5293025810cf9d841ecb02"
  
- PYPI_PACKAGE = "Flask-User"
+ PYPI_PACKAGE = "Flask-Uploads"
 -- 
 2.43.0
 
