@@ -2,63 +2,63 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E6EABD3C910
-	for <webhook@archiver.kernel.org>; Sat, 19 Oct 2024 12:48:52 +0000 (UTC)
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
- by mx.groups.io with SMTP id smtpd.web10.1831.1729318287047358268
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CDD87D3C911
+	for <webhook@archiver.kernel.org>; Sat, 19 Oct 2024 12:49:02 +0000 (UTC)
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+ by mx.groups.io with SMTP id smtpd.web10.1876.1729318797126974593
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Oct 2024 23:11:27 -0700
+ Fri, 18 Oct 2024 23:19:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KzgBeLLd;
- spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: sanakazi720@gmail.com)
-Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-20cbb1cf324so24955995ad.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Oct 2024 23:11:27 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=j6szfdk5;
+ spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: sanakazi720@gmail.com)
+Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-71e5a1c9071so2167236b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Oct 2024 23:19:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1729318286; x=1729923086; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1729318796; x=1729923596; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
         bh=Iwg6uTldXgeFo5WlhgI5DCFIudzz8+n++BRHHe1q83I=;
-        b=KzgBeLLd2/TGTCSDEF4Ir9qQ/bBwhkYoRLrepwjkKNn/uRt/YOtdgO63THCGI95XG4
-         LxwTXio72UA0KfyaVK553Qyual0NMev2m9Jv7BH3U7wcOncuPnkgB49Uv6psD5cmMQ33
-         iWa3GhgUMoLnzxHKpPkp89VRrUMXYxnynD8S5dPNzbymSY8XEyxHK5cbMQGDcLH/Kue0
-         Sdz4k/h+or/Gpie/ASYWEIQJzoty+z5/i2FydOOEhOh/zO6n8otG+9flLrHyHF4V92fK
-         FoOnIihinAl5vzVLFn1XOWjZ5YrayNJDdvaQ0xw3quKhZbgm8xOOjWDuV0D2mrnH9sW+
-         UOfw==
+        b=j6szfdk5uaYxZzPu9bKUtVLlQbuO0XB8Bm8X504a3ProVEtUj1gEusC6+4hAsNfACK
+         Hq6oG+19A93Rr/nuBpmWT9g0rGRltTGddszTIBw/1Ohi6LlbqJEgpnVlV3ZI3bDTmdzM
+         i0IxlWMVimTlvjg+WNxhEVUXq+l4iCiG55L2+XnYBrNw+cy55J2R1o4ukLYsB5JI0yeg
+         Kg8CHR9JgusBbm1CpDz4ujpy/joEDFpRZbgkD7qD6vJhDAQ8m9MWXEhiey//d7Gy+YY4
+         2DC7U+O0SVQHIMfyNM7PQRo8pjmnc9vYwRnWmZpHV+Bw97+0yz3RalXxYbUv8JGl81WJ
+         kmFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729318286; x=1729923086;
+        d=1e100.net; s=20230601; t=1729318796; x=1729923596;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
         bh=Iwg6uTldXgeFo5WlhgI5DCFIudzz8+n++BRHHe1q83I=;
-        b=djSnmAcPUoySwsHV6kRaKLcwML5WgZnH1MYJlTarja43WXo6Y4pfzdLRbuFyZfAMnx
-         pRUFCDQzFyJtVy8I08RDWHcBnUXaUb/OGP8pQb8DBpcTDe6UCbFAeb3FPVxK+plp9FZn
-         wdDALkQJzWAT+2rfZfjlPI8aA2GDQMyVLar3cWIdPDO6LfNPKtYuKTHO9WOLmb5irBhi
-         W+sqW8uKI4Fh+tTXkvQLYYfuic2wjiRm2GfUfBgFZuLTd/7T6Jtx7yuoaUm1TA4NydpQ
-         hV3lCE+8OGT6xey+H3dcfEjz1cgmenQL0EUyUe335A1fVK3cw6XWU6us3jCySAR8Ph8T
-         54TQ==
-X-Gm-Message-State: AOJu0Yx437lYWYrF3mUKpgj0Kforo408UU4x++J9gh+fnZ3QDq88eCgV
-	VrmluK77HD/qQftEGLdmFeNlU0a2jMsrDyH3bincN/CJoeond9GQEjwGAw==
-X-Google-Smtp-Source: AGHT+IEey5AQF+UeodvjT3Xu4sJT51g8ssK9Wx4wxu550tSrnzcxpbUzZ+9SLIj2ZS4UPsh9YgvE8A==
-X-Received: by 2002:a17:902:ecd0:b0:20c:d2e4:dc33 with SMTP id d9443c01a7336-20e5a7372a1mr55252555ad.14.1729318286251;
-        Fri, 18 Oct 2024 23:11:26 -0700 (PDT)
+        b=e3slXgZior9QRnvBx5JpCS8pwtb5HOs8USQpqTp9Iiwu6UnR6+9cvB9PV/GjPm5vyL
+         fukfjF9FpCt/geb6Mlk8l8NMDFDijyEQpAdskJ5Bl4K63JTOFyt5gXx46H9lHjqPsOfG
+         24pdRRAp3f+cY3hBgdmUyZz/j+FN2WEU7O5FEk0e/14kH0ZUIYQZoefODCkrvzDSC6tW
+         5BZHhpAKGoqNNFd0SLJqCL+nklJ+iedJSKPoJNWfZzWNPtFv2LYWb5S/SS/uPle3K4jH
+         mihmrRKLOGmu7PswxEhBz0taxam9AkIzbFIoM5rFehIZ/YUkj6ImTIgVfVdggAopmnj1
+         6Hxg==
+X-Gm-Message-State: AOJu0Yz+69L4tSyK0jVRlVTXkBKIx+XIeo2I7xkxfxlDXIYXj1BknvzS
+	YG/Z74GgGSNtICxAKda3wZIS6eAWxSUqwI62GeQDAPg+TvG+l1rrlRA2Yw==
+X-Google-Smtp-Source: AGHT+IHon4MS7RLRsrndSGzWbpoY/fQlY958foyKgaLvNZjDvFdGPBB6F0kA0fL48dtyfFftMt4rmA==
+X-Received: by 2002:a05:6a21:1707:b0:1d9:275b:4eef with SMTP id adf61e73a8af0-1d92c4e1424mr6142158637.14.1729318796174;
+        Fri, 18 Oct 2024 23:19:56 -0700 (PDT)
 Received: from localhost.localdomain ([2401:4900:1c17:8115:96a1:8120:10eb:a55b])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-20e5a8de5b3sm21676345ad.159.2024.10.18.23.11.24
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-71ea333cfbesm2443332b3a.59.2024.10.18.23.19.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Oct 2024 23:11:25 -0700 (PDT)
+        Fri, 18 Oct 2024 23:19:55 -0700 (PDT)
 From: "Sana Kazi" <sanakazi720@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Sana <sanakazi720@gmail.com>
 Subject: [meta-oe][scarthgap][PATCH] configure: treat all openssl-3.x releases the same
-Date: Sat, 19 Oct 2024 11:41:06 +0530
-Message-Id: <20241019061106.144661-1-sanakazi720@gmail.com>
+Date: Sat, 19 Oct 2024 11:49:45 +0530
+Message-Id: <20241019061945.146707-1-sanakazi720@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 19 Oct 2024 12:48:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113057
+ <openembedded-devel@lists.openembedded.org>; Sat, 19 Oct 2024 12:49:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113058
 
 OpenSSL's soversion will not change for any 3.x minor release.
 
