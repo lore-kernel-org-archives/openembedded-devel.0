@@ -1,308 +1,399 @@
-Return-Path: <niko.mauno@vaisala.com>
+Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8492FD0E6C4
-	for <webhook@archiver.kernel.org>; Mon, 21 Oct 2024 17:01:05 +0000 (UTC)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.120])
- by mx.groups.io with SMTP id smtpd.web11.451.1729530061417993036
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C6FBD17138
+	for <webhook@archiver.kernel.org>; Mon, 21 Oct 2024 20:39:20 +0000 (UTC)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+ by mx.groups.io with SMTP id smtpd.web11.2883.1729543155985632917
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Oct 2024 10:01:01 -0700
+ Mon, 21 Oct 2024 13:39:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=iJKVrgzj;
- spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 40.107.21.120, mailfrom: niko.mauno@vaisala.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=buoO87qVhLVtfyJ5RMH9umxVtvweOeGhX669WGi7mwOuaekLmq9HWCe0A1mU/9Vr3vphQitQIXemQp6gqq4S501wRUabITaXWjo+qkFeY6gTakexw6+le5GP+rbS/8qBKc59NACd4gvkDL19t4Hxrk+LHXfSimTdapa9wUQ6J4lpfUU9KYhZ1U1m1hR5bR1GyPBfAIhC2OyWYc0MTCPjck/pGIqSitQoNWc5bXBHQWOeMgAKzUOsOQfC66haVLKpRFOX+cIXf6G+LKhHnWOByk5iGNRuAaEkOQQv2JAsu0U1bOOKU5WR//AS3pCLbWXvjDw9Abx5/g1PUYYwcM63zw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hMtwcwqPZFxTTBteEVt8lyElPXSBoOCKT2BFE9krztE=;
- b=GhxdsEjBHmQWZc9JvdAZxfk7OHaffj8RcqHKjRW6z/wIcKfLjbCUL4c6jsRw/W54uPAhwkQ+WkYHgHodp+cSMR6J+3jkCgqANb1eNTxPxt9rmfl/yeRbq57x/1KFEeVRqfxnoapZ5uDkhenRMphCAe6Z8nugOJ8qK8zeFiWz+mTzRdvUWkY5Sh4ls3QltnNj0Z7RCvWvy1miFZPC5FbIXKffHY9+OiDRBNUJUmPz/jsssiMLb9FlidjzqTpSw1PHv/6gU4CKResU/5yJjzOCmJ6Tb2tzhmn0EnxM/mLlz7LlJ5m8//sDNC8pDaVqljT3qx8kowbdnXJr8USJhkiF4g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
- dkim=pass header.d=vaisala.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hMtwcwqPZFxTTBteEVt8lyElPXSBoOCKT2BFE9krztE=;
- b=iJKVrgzjST1CMgj5rh7hmOW/ClI8i2KNpCg4h5XW8tqntlHZggfFZea0lQszPP/wOf/ZHX1JK2+5T0qDWPTk55EhZXXtz+fSoWYqg97wadIq1o9L3e0fD6xrCpQLk5YOJ9x8ncC+J6yD/ON/cuGqPFHC2MMiTIZGdNVG8dLf0xKReQYMvnAvG4Ip+/mTaCsJlxVwwUKBPtP+HgBW/Nb46QKwvHq1RP2BxiudLnysH4GYfuboO4g3BYbq+Bas6g+ko+Ayav2Tl7QmMrltGNn+EFfqYy0T/Rc3iW3NejlUgEvKzhOmBJg5+TnhaHR7w2iGB4hn001Jk0dKdm3XtKYgAA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vaisala.com;
-Received: from AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
- by VI1PR06MB8904.eurprd06.prod.outlook.com (2603:10a6:800:1e0::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.20; Mon, 21 Oct
- 2024 17:00:57 +0000
-Received: from AS4PR06MB8447.eurprd06.prod.outlook.com
- ([fe80::af93:b150:b886:b2bc]) by AS4PR06MB8447.eurprd06.prod.outlook.com
- ([fe80::af93:b150:b886:b2bc%6]) with mapi id 15.20.8069.024; Mon, 21 Oct 2024
- 17:00:57 +0000
-Message-ID: <dcd59bb1-3893-4b77-8792-10e13217c3d7@vaisala.com>
-Date: Mon, 21 Oct 2024 20:00:55 +0300
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH v2] fluentbit: fix building with wasm
- support
-To: patrick.wicki@subset.ch, raj.khem@gmail.com
-CC: openembedded-devel@lists.openembedded.org
-References: <20241017070839.39476-1-patrick@subset.ch>
- <CAMKF1spGmL-v7izu2-zJQ=KmxE=qf2QwVQe_sGE-9exGhMeHhw@mail.gmail.com>
- <6358f89f72cfdc608818f24cbc9f282fbe99e240.camel@subset.ch>
-Content-Language: en-US
-From: Niko Mauno <niko.mauno@vaisala.com>
-In-Reply-To: <6358f89f72cfdc608818f24cbc9f282fbe99e240.camel@subset.ch>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: AS4P195CA0004.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:20b:5e2::19) To AS4PR06MB8447.eurprd06.prod.outlook.com
- (2603:10a6:20b:4e2::11)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=anUcVxV/;
+ spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: jan.vermaete@gmail.com)
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-37d461162b8so3260446f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 21 Oct 2024 13:39:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1729543154; x=1730147954; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=UC/8FTl7kQOxlAwtFk0QZ260OXjG0S6yrJqgkQDaVq4=;
+        b=anUcVxV/NOOE/ynzjiKjV7oPlTjivEMYeKoNe852R/HVekhlwNaRMN6o5cOeCkFxrQ
+         RXeozmaA9oijTNuuYcIYoNwtWcXrY3nD+ZoeQ76dssO4oipc6Yy9Cd3pAiWOJvvhMLYa
+         4FspfFYVQdhpBIrkQv6A3W3GJHq0o6Jgb+/IJTG2DGfRJt5Tg8VWL+vLPov5XgExtwmN
+         YfNkCa7D41raAbNKPG83jnIHiiCQCeUH2DZCcWhY9i5b9ItyEkHX/bKNuCj4U1y/r0xa
+         wSRowCImfUAp+3IQAcLCBwWFSNRym4sZqsy3WZT8ftfmw/YkZ+20DlWTKBJ1vD6q0swJ
+         gEqg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1729543154; x=1730147954;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=UC/8FTl7kQOxlAwtFk0QZ260OXjG0S6yrJqgkQDaVq4=;
+        b=KYTF6wYqnbO8tOwzdfmQYjHjBhslB2xOD5gw1RB5J65NW+RFlJNxaQCi76ZJEtnmG4
+         JagYQrHfrhfZnFVlQuXBw3ox/sgW934PJsnF5FlnLOkr+/XxZr2l+PvWx6ePODLyo32f
+         RvlDyiHbnxtn8Owt9UiCdAyIladNFokKu/LKZJPPK3TngeboFrGoEYCYl1OGekk8zdKR
+         819rYLAHM4i88mgl8eT+pjA46uGMsaNXILIqD47vjdHrMUg+dbAI8bmqtKo4wxIPEWef
+         ZbuZlt2lXiUfgTUKp3FPYTnZQwRjv9uj3yzNoF2x+6y8wC+6kRBw/r6h1KEiavyWOSl9
+         9vbA==
+X-Gm-Message-State: AOJu0YwhrKkymGvEbBs3q2sSCehaBAHdyFC4Dd47AxltTuV6RNc36+/9
+	bnyDU0sLw+pj+54CeEhwCHhsQK0gd3R8AIs1taiwacPxxtn3QZ7Fv/ExW3v6tKU=
+X-Google-Smtp-Source: AGHT+IFZVdqtlwWO4a7FQWeBTFiyj3R2Tp0FUMVaL+q8LawgqVd50w2mAG3g/xW+sN13YhMU4LHJtw==
+X-Received: by 2002:a5d:5267:0:b0:36c:ff0c:36d7 with SMTP id ffacd0b85a97d-37ea2140294mr8437236f8f.2.1729543153706;
+        Mon, 21 Oct 2024 13:39:13 -0700 (PDT)
+Received: from localhost.localdomain (ptr-fij45qxtdobqrxrcewr.18120a2.ip6.access.telenet.be. [2a02:1812:512:2c00:6021:e9a4:5aa0:257b])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-37ee0b94071sm5097999f8f.89.2024.10.21.13.39.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 21 Oct 2024 13:39:13 -0700 (PDT)
+From: Jan Vermaete <jan.vermaete@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jan Vermaete <jan.vermaete@gmail.com>
+Subject: [meta-oe][PATCH] doxygen: version bump 1.9.3 -> 1.12.0
+Date: Mon, 21 Oct 2024 22:39:04 +0200
+Message-Id: <20241021203904.2905690-1-jan.vermaete@gmail.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|VI1PR06MB8904:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2205c49a-e834-47b6-8730-08dcf1f1eeaa
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024|4022899009;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?1OdeYCkBQqK+v0/K5byhStkCR43N96TtD18dT5vHViOnLM0JZon4QnLBs3n7?=
- =?us-ascii?Q?+/IXbcXtWL+maRRduNYACDanVycbydBBdwxuxCTQwlGtvuUZZuJQialw5bgP?=
- =?us-ascii?Q?aotROSR64XjUBLiW8xxXfNs3HsHpuU86DUEX4Ndv0uaHhVxACd/Hoj801Hyb?=
- =?us-ascii?Q?qlKpI0NFhuE1AUUTDsFU0MtPuuqONt+OJzXETefQx/bnTdzxIWXDg+XGgidh?=
- =?us-ascii?Q?/wtzBnaLTVdDzBlz8RyqHgkZojjEv1f+WSOatN4umc/naMs3reDsF/1yVKRZ?=
- =?us-ascii?Q?Y1zTVX3AFc5myrSyh0vLYD0NYxSwGdSEn+CRwBCb3vjvLz0FZZNvXvXKr5gr?=
- =?us-ascii?Q?r3U1NXNVn/rsFlVBWPJXl3L7PPk0O8t/4ywjSNUanaosKD9QnvEak+XpEZEd?=
- =?us-ascii?Q?Om3SlyRcnPGvdmlgI7B197KP+E3p5kxDqEcpU4Yk8oOCZcmO+R938lzppDlC?=
- =?us-ascii?Q?ww2edmS7Fu4OMmHY22g6FjTAgma3t0fU4fg6ZJi2ed9H0jj8luJeB/HKz+0L?=
- =?us-ascii?Q?h8VMvvfEKbbh8jcE1KDppZbADuHB0JLLLs0Hgs2UYeWxA2FuIdJV3b9JGFSZ?=
- =?us-ascii?Q?pyUQVynFdftETwzLNa9n782utyp73wjXHv3swWJifwAg0LDYgDKAkoQXFOi3?=
- =?us-ascii?Q?I+Qt5PYDMUah/CrUnrtxjHVtoUUV23UMu/go+gII00I0SOC+TQ8jS41RGo82?=
- =?us-ascii?Q?ZXnmk0wMxnSIVBN7dUUIJsNt4377iCMoIazVqAW0Z9qZo+vEKb5QvVTcxTRv?=
- =?us-ascii?Q?AfWDTf5OMMFhju7Ru+Z6j287fdAV4bvzCY7Y8esAryKS9GXeD2Jzgog6BSvH?=
- =?us-ascii?Q?e2NKtKEH3p+KH75+o5syF8Xpq28z5hhZH1DjbUYckdVAED9whMht4j+WxIAx?=
- =?us-ascii?Q?w+n7Y/xr9H9GVXOECQC7ejbjzz1hPEJoSezia9l1ioBaYBbPGSlqM+TocnmU?=
- =?us-ascii?Q?lPQEQHSSBaTH+KT2wWjeFjmO8APQSsj5xUGH9AiZXsDDD9mLBcXcBkpJLK4e?=
- =?us-ascii?Q?wObeGSzdnrGl1cy1/PL+3VvtRSgd/7YZqB0eVWPGJxMjFhkYYLt9ZYXhKZ3B?=
- =?us-ascii?Q?gkX9dRzNRZr3OXSRePIOnSEzLZeBOM5vZuh1ZkfMZcBIVhy9R+ec0dZWVZ6W?=
- =?us-ascii?Q?a5vFMjOEdz7jH4jQvlJM98ahsDL3+bG01JdrlTbFYxVb+/vNV4qJ38fU6q3z?=
- =?us-ascii?Q?SqVkyRkySNl86QHpT7zLtrwxhTAIEc3KgEpZRda4yJFNUZbPqjjYMfSz2snV?=
- =?us-ascii?Q?Zn9dtszXK3p4/9thvPDF?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(4022899009);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?cL3UqG4R3PqwNCs3hp5zghuyjY2dWGP6GfZ4RVtli6ZjQxJMv7r6nWwP6zTy?=
- =?us-ascii?Q?nh6aYIlcmaOQO2Y2tr3Yl67P1HHDRwp2H14u1vVMDOHhC1UmumEnAJ9zPkRI?=
- =?us-ascii?Q?Yl12uwbJ3tetyBDHNrED4ieleSszYj1wXofIryQC9QHQUwu+tGx1s9NyfhVv?=
- =?us-ascii?Q?EC9TDYZsgxlH4Xj2MQAaPBvWK2EQmkFsQWU8VuB4HrDq6tl3hutySsNYQ+pl?=
- =?us-ascii?Q?pQRyeOGluR3T4OL0HDyns84Z2xTM1JmDPvAIyHRtGGE5fJkVxuLV0ApIaH0y?=
- =?us-ascii?Q?q5HUXkpVaLcxLZM84CkQ9Wqla04Q2N5s2twgYMnlr+aQBQ1/Mus8dT5BwNIk?=
- =?us-ascii?Q?VgFInMcJ61BH4bFaHPl7cfapB/1auuEz4Yfq7h2bPfy4q42UavMPdUnH5B4n?=
- =?us-ascii?Q?bD1y5Oa1vChkOXS3I2Hp+C1C7YA6WFENqx7vzh7WNQ+aNKycNew5HqZggKgi?=
- =?us-ascii?Q?wD0SlXbTQTNT3/iZh2eU2Wympmc2s4f3dCyYlkxf7K5xd2JMKgG3/JWh2XkV?=
- =?us-ascii?Q?QgDhzYG/+yVu+FB0IvEAjAfXVU8aXD6Gcjbz/gtDiVbuKopyd7ueVX0ojO0P?=
- =?us-ascii?Q?TNUw7lUWxhLrwPJzUIRQHk4pASDfePywdBTBTyeILIWsXqS0K2tx3mURxERY?=
- =?us-ascii?Q?N4/alD6qAhHFFWuPemyqE6vi4874HAdmy6D8sTvadWNm7MGAirtMxBoKCyPd?=
- =?us-ascii?Q?RvBFTZzkjI8x6HZYq8sh1ZzzsFkqx+EoVEB8ElU0AaVX+QCX+DVkQ88iI4wR?=
- =?us-ascii?Q?nde1KtlzZipWIgzhA/lBU7VKznrKhB0yIvyK1QEpyhK2Tf3CbdrXuMCqXlFC?=
- =?us-ascii?Q?yuGClSwwR3r7VBCsWQ5SnuJkzl01eee9OWkKIcDqvJyLMiBACAVIwzms5n5b?=
- =?us-ascii?Q?XmPPQ2WGEc7ul4IxE5WB4uuchPac2qbOeqUuiss4w4/IV54G/WeO/0rfwQYU?=
- =?us-ascii?Q?3C9PurdD0bVj+vLo2X4Y5VjzEvUKOSBzD8hyeMugt4dlvnLzInNSzTO59Kqt?=
- =?us-ascii?Q?A2nm/6DkN4vg7XzJzu3G5BPSFDJF1FakwXfNoz1ubKms5aBiIy9pH8OCFIUb?=
- =?us-ascii?Q?0kjJGYo8ELdJEIo3UpAa9ngmWJo/3o/qGh3F2/M1HKuNuKbVQBbSK7dBHELM?=
- =?us-ascii?Q?PbY/xjHGm72KaCkng4OvyEh8VHAA0sONiCYGOla5lmtYT856dyXrot6mVrsN?=
- =?us-ascii?Q?DTP6xvajD3hjultNdR6tRZfqF7w0jpifz7Q9/RpkTPjRY3RjkOYeEr6fGCIU?=
- =?us-ascii?Q?aFkQU+obRoiCQAiWmXctIjaZurOlUBa+/3lR4TChMdhgvANFUqpSBKJO0bLK?=
- =?us-ascii?Q?hEF+bPdxv7K7Bkh3VbwfJDlNi8D/3gLzb6896oHamhDify/rYmkTZi7+kgLL?=
- =?us-ascii?Q?7Z8zEYv5ZMLvR0pXRKBPIeJ3gmmSKUktFVo0SgGnu3AN6zM/YE15DkmwQPhD?=
- =?us-ascii?Q?zq2xKo0IhS1nsA4ZRy/OfR4z41mKn6AE+bRXr3FvBpHT4XE6cb4JaLB7eoKm?=
- =?us-ascii?Q?EaN/vzOMMGF1AF1K8CvNQqzSE9Pv7kO96gNzuScii91FPSPY1Vf9+QCQJWmd?=
- =?us-ascii?Q?TPXINd5RuUYWKTfQSnCPaACxsFgCdbAM+WAkIPkERHqY11QNoRDXwHzCUk+J?=
- =?us-ascii?Q?0g=3D=3D?=
-X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2205c49a-e834-47b6-8730-08dcf1f1eeaa
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR06MB8447.eurprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2024 17:00:57.3999
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: KnCdwp3irDNYMiMBGPQriNuWJklVA2Za9sVomqcyXaEWkgvYcXersAzhL262Nbqrj5BruDLL6ViNvAEMUV55gQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR06MB8904
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Oct 2024 17:01:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113081
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Oct 2024 20:39:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113082
 
-The CMake failure which occurs during fluentbit do_configure, seems to be
+* The project moved from sourceforge to github (https://github.com/doxygen/doxygen?tab=readme-ov-file#source-code)
+* The python3 patches are not needed anymore
+* iconv patch: seems to be not longer needed
 
-   | CMake Error at src/CMakeLists.txt:550 (install):
-   |   install DIRECTORY given unknown argument "/etc/fluent-bit/".
+Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+---
+ .../0001-build-don-t-look-for-Iconv.patch     |  37 ---
+ .../doxygen-native-only-check-python3.patch   | 232 ------------------
+ .../{doxygen_1.9.3.bb => doxygen_1.12.0.bb}   |  16 +-
+ 3 files changed, 9 insertions(+), 276 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/doxygen/doxygen/0001-build-don-t-look-for-Iconv.patch
+ delete mode 100644 meta-oe/recipes-devtools/doxygen/doxygen/doxygen-native-only-check-python3.patch
+ rename meta-oe/recipes-devtools/doxygen/{doxygen_1.9.3.bb => doxygen_1.12.0.bb} (50%)
 
-which occurs inside "upstart" specific segment at https://github.com/fluent=
-/fluent-bit/blob/v3.1.9/src/CMakeLists.txt#L550
+diff --git a/meta-oe/recipes-devtools/doxygen/doxygen/0001-build-don-t-look-for-Iconv.patch b/meta-oe/recipes-devtools/doxygen/doxygen/0001-build-don-t-look-for-Iconv.patch
+deleted file mode 100644
+index 47c8edb49..000000000
+--- a/meta-oe/recipes-devtools/doxygen/doxygen/0001-build-don-t-look-for-Iconv.patch
++++ /dev/null
+@@ -1,37 +0,0 @@
+-From 24650b0c7db6b213a2eaa5061b75b9f1b43f1ce9 Mon Sep 17 00:00:00 2001
+-From: Bartosz Golaszewski <brgl@bgdev.pl>
+-Date: Fri, 23 Nov 2018 11:44:56 +0100
+-Subject: [PATCH] build: don't look for Iconv
+-
+-Drop the find_package() for Iconv. CMake is unable to find iconv.h in
+-native build but all modern systems supply it as part of the standard
+-C library. We don't need this check in meta-openembedded.
+-
+-Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
+-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+-
+-Upstream-Status: Inappropriate
+-- upstream doxygen must build on many architectures, this change is
+-  too intrusive for upstream
+----
+- CMakeLists.txt | 4 ----
+- 1 file changed, 4 deletions(-)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 06b9696f..f30b46b8 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -117,10 +117,6 @@ if (sqlite3)
+-   endif()
+- endif()
+- 
+--find_package(Iconv REQUIRED)
+--include_directories(${ICONV_INCLUDE_DIR})
+--
+--
+- #set(DOXYDOCS ${PROJECT_SOURCE_DIR}/doc CACHE INTERNAL "Path to doxygen docs")
+- set(DOXYDOCS ${PROJECT_BINARY_DIR}/doc)
+- set(ENV{DOXYGEN_DOCDIR} ${DOXYDOCS})
+--- 
+-2.27.0
+-
+diff --git a/meta-oe/recipes-devtools/doxygen/doxygen/doxygen-native-only-check-python3.patch b/meta-oe/recipes-devtools/doxygen/doxygen/doxygen-native-only-check-python3.patch
+deleted file mode 100644
+index 796bc61dd..000000000
+--- a/meta-oe/recipes-devtools/doxygen/doxygen/doxygen-native-only-check-python3.patch
++++ /dev/null
+@@ -1,232 +0,0 @@
+-From daf686508f2ee4711d93e96e5b100e50bf161656 Mon Sep 17 00:00:00 2001
+-From: Leon Anavi <leon.anavi@konsulko.com>
+-Date: Wed, 26 Aug 2020 10:52:10 +0300
+-Subject: [PATCH] doxygen: Fix Python issues for doxygen-native
+-
+-It fails to compile doxygen-native when /usr/bin/python is a link
+-to python3 on build host:
+-
+-| Failed to import the site module
+-| Traceback (most recent call last):
+-|   File "/usr/lib64/python3.6/site.py", line 564, in <module>
+-|     main()
+-|   File "/usr/lib64/python3.6/site.py", line 550, in main
+-|     known_paths = addusersitepackages(known_paths)
+-|   File "/usr/lib64/python3.6/site.py", line 282, in addusersitepackages
+-|     user_site = getusersitepackages()
+-|   File "/usr/lib64/python3.6/site.py", line 258, in getusersitepackages
+-|     user_base = getuserbase() # this will also set USER_BASE
+-|   File "/usr/lib64/python3.6/site.py", line 248, in getuserbase
+-|     USER_BASE = get_config_var('userbase')
+-|   File "/usr/lib64/python3.6/sysconfig.py", line 604, in get_config_var
+-|     return get_config_vars().get(name)
+-|   File "/usr/lib64/python3.6/sysconfig.py", line 553, in get_config_vars
+-|     _init_posix(_CONFIG_VARS)
+-|   File "/usr/lib64/python3.6/sysconfig.py", line 424, in _init_posix
+-|     _temp = __import__(name, globals(), locals(), ['build_time_vars'], 0)
+-| ModuleNotFoundError: No module named '_sysconfigdata'
+-
+-Replace find_package PythonInterp with Python3 to fix this issue
+-that it uses python3 from python3-native. And it also replaces the
+-result variable PYTHON_EXECUTABLE with Python3_EXECUTABLE.
+-
+-This patch is only needded by doxygen-native.
+-
+-Updated to apply to release 1.9.1.
+-
+-Upstream-Status: Inappropriate [oe specific]
+-
+-Co-Authored-By: Kai Kang <kai.kang@windriver.com>
+-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+-
+----
+- CMakeLists.txt                  |  2 +-
+- addon/doxywizard/CMakeLists.txt |  6 +++---
+- doc/CMakeLists.txt              |  6 +++---
+- examples/CMakeLists.txt         |  4 ++--
+- libmscgen/CMakeLists.txt        |  2 +-
+- src/CMakeLists.txt              | 10 +++++-----
+- testing/CMakeLists.txt          |  4 ++--
+- 7 files changed, 17 insertions(+), 17 deletions(-)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 2455793..28f0d83 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -105,7 +105,7 @@ else ()
+- endif ()
+- 
+- find_program(DOT NAMES dot)
+--find_package(PythonInterp REQUIRED)
+-+find_package(Python3 REQUIRED)
+- find_package(FLEX REQUIRED)
+- find_package(BISON REQUIRED)
+- if (BISON_VERSION VERSION_LESS 2.7)
+-diff --git a/addon/doxywizard/CMakeLists.txt b/addon/doxywizard/CMakeLists.txt
+-index 63ac8e3..d37d1d0 100644
+---- a/addon/doxywizard/CMakeLists.txt
+-+++ b/addon/doxywizard/CMakeLists.txt
+-@@ -57,7 +57,7 @@ set_source_files_properties(${GENERATED_SRC_WIZARD}/settings.h PROPERTIES GENERA
+- 
+- # generate version.cpp
+- add_custom_command(
+--    COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/src/version.py ${VERSION} > ${GENERATED_SRC_WIZARD}/version.cpp
+-+    COMMAND ${Python3_EXECUTABLE} ${PROJECT_SOURCE_DIR}/src/version.py ${VERSION} > ${GENERATED_SRC_WIZARD}/version.cpp
+-     DEPENDS ${PROJECT_SOURCE_DIR}/VERSION ${PROJECT_SOURCE_DIR}/src/version.py
+-     OUTPUT ${GENERATED_SRC_WIZARD}/version.cpp
+- )
+-@@ -65,7 +65,7 @@ set_source_files_properties(${GENERATED_SRC_WIZARD}/version.cpp PROPERTIES GENER
+- 
+- # generate configdoc.cpp
+- add_custom_command(
+--    COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/src/configgen.py -wiz ${PROJECT_SOURCE_DIR}/src/config.xml > ${GENERATED_SRC_WIZARD}/configdoc.cpp
+-+    COMMAND ${Python3_EXECUTABLE} ${PROJECT_SOURCE_DIR}/src/configgen.py -wiz ${PROJECT_SOURCE_DIR}/src/config.xml > ${GENERATED_SRC_WIZARD}/configdoc.cpp
+-     DEPENDS  ${PROJECT_SOURCE_DIR}/src/configgen.py ${PROJECT_SOURCE_DIR}/src/config.xml
+-     OUTPUT ${GENERATED_SRC_WIZARD}/configdoc.cpp
+- )
+-@@ -74,7 +74,7 @@ set_source_files_properties(${GENERATED_SRC_WIZARD}/configdoc.cpp PROPERTIES GEN
+- set(LEX_FILES config_doxyw)
+- foreach(lex_file ${LEX_FILES})
+-     add_custom_command(
+--        COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/src/scan_states.py ${PROJECT_SOURCE_DIR}/addon/doxywizard/${lex_file}.l > ${GENERATED_SRC_WIZARD}/${lex_file}.l.h
+-+        COMMAND ${Python3_EXECUTABLE} ${PROJECT_SOURCE_DIR}/src/scan_states.py ${PROJECT_SOURCE_DIR}/addon/doxywizard/${lex_file}.l > ${GENERATED_SRC_WIZARD}/${lex_file}.l.h
+-         DEPENDS ${PROJECT_SOURCE_DIR}/src/scan_states.py ${PROJECT_SOURCE_DIR}/addon/doxywizard/${lex_file}.l
+-         OUTPUT  ${GENERATED_SRC_WIZARD}/${lex_file}.l.h
+-     )
+-diff --git a/doc/CMakeLists.txt b/doc/CMakeLists.txt
+-index ec63ceb..49a2bda 100644
+---- a/doc/CMakeLists.txt
+-+++ b/doc/CMakeLists.txt
+-@@ -168,7 +168,7 @@ configure_file(${PROJECT_SOURCE_DIR}/doc/doxyindexer.1      ${PROJECT_BINARY_DIR
+- 
+- # doc/language.doc (see tag Doxyfile:INPUT)
+- add_custom_command(
+--        COMMAND ${PYTHON_EXECUTABLE} translator.py ${PROJECT_SOURCE_DIR}
+-+        COMMAND ${Python3_EXECUTABLE} translator.py ${PROJECT_SOURCE_DIR}
+-         DEPENDS ${PROJECT_SOURCE_DIR}/doc/maintainers.txt ${PROJECT_SOURCE_DIR}/doc/language.tpl ${PROJECT_BINARY_DIR}/doc/translator.py ${LANG_FILES}
+-         OUTPUT language.doc
+-         WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/doc
+-@@ -177,7 +177,7 @@ set_source_files_properties(language.doc PROPERTIES GENERATED 1)
+- 
+- # doc/config.doc (see tag Doxyfile:INPUT)
+- add_custom_command(
+--        COMMAND ${PYTHON_EXECUTABLE}  ${TOP}/src/configgen.py -doc ${TOP}/src/config.xml > config.doc
+-+        COMMAND ${Python3_EXECUTABLE}  ${TOP}/src/configgen.py -doc ${TOP}/src/config.xml > config.doc
+-         DEPENDS ${TOP}/src/config.xml ${TOP}/src/configgen.py
+-         OUTPUT config.doc
+-         WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/doc/
+-@@ -228,7 +228,7 @@ add_custom_target(docs_chm
+-     COMMAND ${CMAKE_COMMAND} -E echo "    for file in files:" >> ${PROJECT_BINARY_DIR}/chm/doxygen_manual_examples_chm.py
+-     COMMAND ${CMAKE_COMMAND} -E echo "        if file.endswith('.html') or file.endswith('.png') or file.endswith('.css') or file.endswith('.gif'):" >> ${PROJECT_BINARY_DIR}/chm/doxygen_manual_examples_chm.py
+-     COMMAND ${CMAKE_COMMAND} -E echo "            print(os.path.join(root, file))" >> ${PROJECT_BINARY_DIR}/chm/doxygen_manual_examples_chm.py
+--    COMMAND ${CMAKE_COMMAND} -E chdir  ${PROJECT_BINARY_DIR}/chm ${PYTHON_EXECUTABLE} ${PROJECT_BINARY_DIR}/chm/doxygen_manual_examples_chm.py >> ${PROJECT_BINARY_DIR}/chm/doxygen_manual.hhp
+-+    COMMAND ${CMAKE_COMMAND} -E chdir  ${PROJECT_BINARY_DIR}/chm ${Python3_EXECUTABLE} ${PROJECT_BINARY_DIR}/chm/doxygen_manual_examples_chm.py >> ${PROJECT_BINARY_DIR}/chm/doxygen_manual.hhp
+-     COMMAND ${CMAKE_COMMAND} -E chdir ${PROJECT_BINARY_DIR}/chm "${HTML_HELP_COMPILER}" doxygen_manual.hhp || echo > nul
+-     COMMAND ${CMAKE_COMMAND} -E rename ${PROJECT_BINARY_DIR}/chm/index.chm ${PROJECT_BINARY_DIR}/chm/doxygen_manual.chm
+-         DEPENDS ${PROJECT_BINARY_DIR}/doc/language.doc ${PROJECT_BINARY_DIR}/doc/config.doc
+-diff --git a/examples/CMakeLists.txt b/examples/CMakeLists.txt
+-index 194b427..248b807 100644
+---- a/examples/CMakeLists.txt
+-+++ b/examples/CMakeLists.txt
+-@@ -54,7 +54,7 @@ foreach (f_inp  ${BASIC_EXAMPLES})
+-         COMMAND ${CMAKE_COMMAND} -E make_directory ${PROJECT_BINARY_DIR}/html/examples/${f}
+-         COMMAND ${CMAKE_COMMAND} -E make_directory ${PROJECT_BINARY_DIR}/latex/examples/${f}
+- 	COMMAND ${EXECUTABLE_OUTPUT_PATH}/doxygen ${f}.cfg
+--        COMMAND ${PYTHON_EXECUTABLE}  ${TOP}/examples/strip_example.py  < ${PROJECT_BINARY_DIR}/latex/examples/${f}/latex/refman.tex > ${PROJECT_BINARY_DIR}/latex/examples/${f}/latex/refman_doc.tex
+-+        COMMAND ${Python3_EXECUTABLE}  ${TOP}/examples/strip_example.py  < ${PROJECT_BINARY_DIR}/latex/examples/${f}/latex/refman.tex > ${PROJECT_BINARY_DIR}/latex/examples/${f}/latex/refman_doc.tex
+- 	DEPENDS doxygen ${f}.${f_ext} ${f}.cfg ${TOP}/examples/strip_example.py
+- 	OUTPUT ${PROJECT_BINARY_DIR}/html/examples/${f}/html/index.html ${PROJECT_BINARY_DIR}/latex/examples/${f}/latex/refman_doc.tex
+-     )
+-@@ -73,7 +73,7 @@ if (DOT)
+-         COMMAND ${CMAKE_COMMAND} -E make_directory ${PROJECT_BINARY_DIR}/html/examples/diagrams
+-         COMMAND ${CMAKE_COMMAND} -E make_directory ${PROJECT_BINARY_DIR}/latex/examples/diagrams
+- 	COMMAND ${EXECUTABLE_OUTPUT_PATH}/doxygen diagrams.cfg
+--        COMMAND ${PYTHON_EXECUTABLE}  ${TOP}/examples/strip_example.py  < ${PROJECT_BINARY_DIR}/latex/examples/diagrams/latex/refman.tex > ${PROJECT_BINARY_DIR}/latex/examples/diagrams/latex/refman_doc.tex
+-+        COMMAND ${Python3_EXECUTABLE}  ${TOP}/examples/strip_example.py  < ${PROJECT_BINARY_DIR}/html/examples/diagrams/latex/refman.tex > ${PROJECT_BINARY_DIR}/html/examples/diagrams/latex/refman_doc.tex
+- 	DEPENDS doxygen diagrams_a.h diagrams_b.h diagrams_c.h diagrams_d.h diagrams_e.h diagrams.cfg ${TOP}/examples/strip_example.py
+- 	OUTPUT ${PROJECT_BINARY_DIR}/html/examples/diagrams/html/index.html ${PROJECT_BINARY_DIR}/latex/examples/diagrams/latex/refman_doc.tex
+-   )
+-diff --git a/libmscgen/CMakeLists.txt b/libmscgen/CMakeLists.txt
+-index 34cf4d8..f015afc 100644
+---- a/libmscgen/CMakeLists.txt
+-+++ b/libmscgen/CMakeLists.txt
+-@@ -7,7 +7,7 @@ include_directories(
+- set(LEX_FILES mscgen_lexer) 
+- foreach(lex_file ${LEX_FILES})
+-     add_custom_command(
+--        COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/src/scan_states.py ${PROJECT_SOURCE_DIR}/libmscgen/${lex_file}.l > ${GENERATED_SRC}/${lex_file}.l.h
+-+        COMMAND ${Python3_EXECUTABLE} ${PROJECT_SOURCE_DIR}/src/scan_states.py ${PROJECT_SOURCE_DIR}/libmscgen/${lex_file}.l > ${GENERATED_SRC}/${lex_file}.l.h
+-         DEPENDS ${PROJECT_SOURCE_DIR}/src/scan_states.py ${PROJECT_SOURCE_DIR}/libmscgen/${lex_file}.l
+-         OUTPUT  ${GENERATED_SRC}/${lex_file}.l.h
+-     )
+-diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+-index 0e0c5f7..c1d3ca5 100644
+---- a/src/CMakeLists.txt
+-+++ b/src/CMakeLists.txt
+-@@ -40,7 +40,7 @@ set_source_files_properties(${GENERATED_SRC}/settings.h PROPERTIES GENERATED 1)
+- 
+- # configvalues.h
+- add_custom_command(
+--    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/configgen.py -maph ${CMAKE_CURRENT_LIST_DIR}/config.xml > ${GENERATED_SRC}/configvalues.h
+-+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/configgen.py -maph ${CMAKE_CURRENT_LIST_DIR}/config.xml > ${GENERATED_SRC}/configvalues.h
+-     DEPENDS ${CMAKE_CURRENT_LIST_DIR}/config.xml ${CMAKE_CURRENT_LIST_DIR}/configgen.py
+-     OUTPUT ${GENERATED_SRC}/configvalues.h
+- )
+-@@ -52,7 +52,7 @@ add_custom_target(
+- 
+- # configvalues.cpp
+- add_custom_command(
+--    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/configgen.py -maps ${CMAKE_CURRENT_LIST_DIR}/config.xml > ${GENERATED_SRC}/configvalues.cpp
+-+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/configgen.py -maps ${CMAKE_CURRENT_LIST_DIR}/config.xml > ${GENERATED_SRC}/configvalues.cpp
+-     DEPENDS ${CMAKE_CURRENT_LIST_DIR}/config.xml ${CMAKE_CURRENT_LIST_DIR}/configgen.py
+-     OUTPUT ${GENERATED_SRC}/configvalues.cpp
+- )
+-@@ -60,7 +60,7 @@ set_source_files_properties(${GENERATED_SRC}/configvalues.cpp PROPERTIES GENERAT
+- 
+- # configoptions.cpp
+- add_custom_command(
+--    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/configgen.py -cpp ${CMAKE_CURRENT_LIST_DIR}/config.xml > ${GENERATED_SRC}/configoptions.cpp
+-+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/configgen.py -cpp ${CMAKE_CURRENT_LIST_DIR}/config.xml > ${GENERATED_SRC}/configoptions.cpp
+-     DEPENDS ${CMAKE_CURRENT_LIST_DIR}/config.xml ${CMAKE_CURRENT_LIST_DIR}/configgen.py
+-     OUTPUT ${GENERATED_SRC}/configoptions.cpp
+- )
+-@@ -95,7 +95,7 @@ endif()
+- # resources.cpp
+- add_custom_command(
+-     COMMENT  "Generating ${GENERATED_SRC}/resources.cpp"
+--    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/res2cc_cmd.py ${PROJECT_SOURCE_DIR}/templates ${GENERATED_SRC}/resources.cpp
+-+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/res2cc_cmd.py ${PROJECT_SOURCE_DIR}/templates ${GENERATED_SRC}/resources.cpp
+-     DEPENDS ${RESOURCES} ${CMAKE_CURRENT_LIST_DIR}/res2cc_cmd.py
+-     OUTPUT ${GENERATED_SRC}/resources.cpp
+- )
+-@@ -126,7 +126,7 @@ foreach(lex_file ${LEX_FILES})
+-     set(LEX_FILES_H ${LEX_FILES_H} " " ${GENERATED_SRC}/${lex_file}.l.h CACHE INTERNAL "Stores generated files")
+-     set(LEX_FILES_CPP ${LEX_FILES_CPP} " " ${GENERATED_SRC}/${lex_file}.cpp CACHE INTERNAL "Stores generated files")
+-     add_custom_command(
+--        COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/scan_states.py ${CMAKE_CURRENT_LIST_DIR}/${lex_file}.l > ${GENERATED_SRC}/${lex_file}.l.h
+-+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/scan_states.py ${CMAKE_CURRENT_LIST_DIR}/${lex_file}.l > ${GENERATED_SRC}/${lex_file}.l.h
+-         DEPENDS ${CMAKE_CURRENT_LIST_DIR}/scan_states.py ${CMAKE_CURRENT_LIST_DIR}/${lex_file}.l
+-         OUTPUT  ${GENERATED_SRC}/${lex_file}.l.h
+-     )
+-diff --git a/testing/CMakeLists.txt b/testing/CMakeLists.txt
+-index fd6912e..0af1865 100644
+---- a/testing/CMakeLists.txt
+-+++ b/testing/CMakeLists.txt
+-@@ -1,7 +1,7 @@
+- # run all tests sequentially (keep for backward compatibility)
+- add_custom_target(tests
+- 	COMMENT "Running doxygen tests..."
+--	COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/testing/runtests.py --doxygen ${PROJECT_BINARY_DIR}/bin/doxygen --inputdir ${PROJECT_SOURCE_DIR}/testing --outputdir ${PROJECT_BINARY_DIR}/testing
+-+	COMMAND ${Python3_EXECUTABLE} ${PROJECT_SOURCE_DIR}/testing/runtests.py --doxygen ${PROJECT_BINARY_DIR}/bin/doxygen --inputdir ${PROJECT_SOURCE_DIR}/testing --outputdir ${PROJECT_BINARY_DIR}/testing
+- 	DEPENDS doxygen
+- )
+- 
+-@@ -19,6 +19,6 @@ foreach(TEST_FILE ${TEST_FILES})
+- 	string(REGEX REPLACE "^.*/([0-9][0-9][0-9]*).*$" "\\1" TEST_ID "${TEST_FILE}")
+- 	# add a test target for each test
+- 	add_test(NAME ${TEST_NAME}
+--		 COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/testing/runtests.py --id ${TEST_ID} --doxygen $<TARGET_FILE:doxygen> --inputdir ${PROJECT_SOURCE_DIR}/testing --outputdir ${PROJECT_BINARY_DIR}/testing
+-+		 COMMAND ${Python3_EXECUTABLE} ${PROJECT_SOURCE_DIR}/testing/runtests.py --id ${TEST_ID} --doxygen $<TARGET_FILE:doxygen> --inputdir ${PROJECT_SOURCE_DIR}/testing --outputdir ${PROJECT_BINARY_DIR}/testing
+- 	)
+- endforeach()
+diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.9.3.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.12.0.bb
+similarity index 50%
+rename from meta-oe/recipes-devtools/doxygen/doxygen_1.9.3.bb
+rename to meta-oe/recipes-devtools/doxygen/doxygen_1.12.0.bb
+index 16a4250b2..11ea116af 100644
+--- a/meta-oe/recipes-devtools/doxygen/doxygen_1.9.3.bb
++++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.12.0.bb
+@@ -4,16 +4,17 @@ HOMEPAGE = "http://www.doxygen.org/"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+-DEPENDS = "flex-native bison-native"
++DEPENDS = "bison-native flex-native"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
+-           file://0001-build-don-t-look-for-Iconv.patch \
++SRC_URI = "\
++    git://github.com/doxygen/doxygen.git;branch=master;protocol=https \
+ "
+-SRC_URI:append:class-native = " file://doxygen-native-only-check-python3.patch"
+-SRC_URI[sha256sum] = "f352dbc3221af7012b7b00935f2dfdc9fb67a97d43287d2f6c81c50449d254e0"
+ 
+-UPSTREAM_CHECK_URI = "https://github.com/doxygen/doxygen/releases"
+-UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
++SRCREV = "c73f5d30f9e8b1df5ba15a1d064ff2067cbb8267"
++
++S = "${WORKDIR}/git"
++
++UPSTREAM_CHECK_GITTAGREGEX = "Release_(?P<pver>\d+(\_\d+)+)"
+ 
+ inherit cmake python3native
+ 
+@@ -21,4 +22,5 @@ EXTRA_OECMAKE += "\
+     -DFLEX_TARGET_ARG_COMPILE_FLAGS='--noline' \
+     -DBISON_TARGET_ARG_COMPILE_FLAGS='--no-lines' \
+ "
++
+ BBCLASSEXTEND = "native nativesdk"
+-- 
+2.39.5
 
-I looked to me like the preceding condition on line 543:
-
-    elseif(IS_DIRECTORY /usr/share/upstart)
-
-is not cross-compile friendly, and during the failed test, presumably the b=
-uild host happened to have a /usr/share/upstart directory which caused the =
-condition being evaluated as true.
-
-I've now submitted a patch which should mitigate this issue, and also fixes=
- potential for similar kind of issue with systemd init manager case, when t=
-he build host does not have systemd specific /lib/systemd/system directory.
-
--Niko
-
-On 21.10.2024 15.29, Patrick Wicki via lists.openembedded.org wrote:
-> I've been unable to reproduce this failure on my end unfortunately. In
-> my understanding, the contents of the patched file should not even
-> affect the build at all unless the "wasm" PACKAGECONFIG is enabled,
-> which is not the case by default.
->=20
-> I'm open to suggestions. Otherwise, I think we can skip this patch and
-> wait for upstream to update the WASM runtime, which should fix it too.
->=20
-> On Thu, 2024-10-17 at 11:54 -0700, Khem Raj via lists.openembedded.org
-> wrote:
->> it fails in configure -
->> https://valkyrie.yoctoproject.org/#/builders/81/builds/66/steps/14/logs/=
-stdio
->>
->> On Thu, Oct 17, 2024 at 12:09=E2=80=AFAM Patrick Wicki via
->> lists.openembedded.org
->> <patrick.wicki=3Dsubset.ch@lists.openembedded.org> wrote:
->>>
->>> From: Patrick Wicki <patrick.wicki@siemens.com>
->>>
->>> Add patch for the wasm runtime that fixes building for x86.
->>>
->>> Signed-off-by: Patrick Wicki <patrick.wicki@siemens.com>
->>> ---
->>>  =C2=A0...d-cmake-try_run-when-cross-compiling.patch | 42
->>> +++++++++++++++++++
->>>  =C2=A0.../fluentbit/fluentbit_3.1.9.bb=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 1 +
->>>  =C2=A02 files changed, 43 insertions(+)
->>>  =C2=A0create mode 100644 meta-oe/recipes-
->>> extended/fluentbit/fluentbit/0002-wasm-avoid-cmake-try_run-when-
->>> cross-compiling.patch
->>>
->>> diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0002-
->>> wasm-avoid-cmake-try_run-when-cross-compiling.patch b/meta-
->>> oe/recipes-extended/fluentbit/fluentbit/0002-wasm-avoid-cmake-
->>> try_run-when-cross-compiling.patch
->>> new file mode 100644
->>> index 000000000..419e85903
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0002-wasm-avoid-
->>> cmake-try_run-when-cross-compiling.patch
->>> @@ -0,0 +1,42 @@
->>> +From 5b6d274664f92a6c6083f4d27a1b1604a326f22c Mon Sep 17 00:00:00
->>> 2001
->>> +From: Patrick Wicki <patrick.wicki@siemens.com>
->>> +Date: Sat, 5 Oct 2024 21:36:12 +0200
->>> +Subject: [PATCH] wasm: avoid cmake try_run when cross-compiling
->>> for x86
->>> +
->>> +This fixes building the wasm micro runtime used when enabling wasm
->>> +support in fluentbit.
->>> +cmake try_run does not work when cross-compiling because the test
->>> program
->>> +cannot be executed:
->>> +
->>> +| CMake Error: try_run() invoked in cross-compiling mode, please
->>> set the following cache variables appropriately:
->>> +|=C2=A0=C2=A0=C2=A0 TEST_WRGSBASE_RESULT (advanced)
->>> +| For details see .../fluentbit/3.1.9/build/TryRunResults.cmake
->>> +|=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Write linear memory base addr to x86 G=
-S register disabled
->>> +| -- Configuring incomplete, errors occurred!
->>> +
->>> +Since we cannot run the test program, assume that the instruction
->>> is not
->>> +available and disable the option.
->>> +
->>> +This patch is no longer needed once fluentbit updates WAMR, as
->>> it's been
->>> +fixed in
->>> https://github.com/bytecodealliance/wasm-micro-runtime/pull/3066.
->>> +
->>> +Upstream-Status: Pending
->>> [https://github.com/fluent/fluent-bit/pull/8744]
->>> +
->>> +Signed-off-by: Patrick Wicki <patrick.wicki@siemens.com>
->>> +---
->>> + .../build-scripts/config_common.cmake=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |
->>> 2 +-
->>> + 1 file changed, 1 insertion(+), 1 deletion(-)
->>> +
->>> +diff --git a/lib/wasm-micro-runtime-WAMR-1.3.0/build-
->>> scripts/config_common.cmake b/lib/wasm-micro-runtime-WAMR-
->>> 1.3.0/build-scripts/config_common.cmake
->>> +index e73ebc85f..c2504e007 100644
->>> +--- a/lib/wasm-micro-runtime-WAMR-1.3.0/build-
->>> scripts/config_common.cmake
->>> ++++ b/lib/wasm-micro-runtime-WAMR-1.3.0/build-
->>> scripts/config_common.cmake
->>> +@@ -408,7 +408,7 @@ if (WAMR_BUILD_STATIC_PGO EQUAL 1)
->>> +=C2=A0=C2=A0 add_definitions (-DWASM_ENABLE_STATIC_PGO=3D1)
->>> +=C2=A0=C2=A0 message ("=C2=A0=C2=A0=C2=A0=C2=A0 AOT static PGO enabled=
-")
->>> + endif ()
->>> +-if (WAMR_DISABLE_WRITE_GS_BASE EQUAL 1)
->>> ++if (WAMR_DISABLE_WRITE_GS_BASE EQUAL 1 OR CMAKE_CROSSCOMPILING)
->>> +=C2=A0=C2=A0 add_definitions (-DWASM_DISABLE_WRITE_GS_BASE=3D1)
->>> +=C2=A0=C2=A0 message ("=C2=A0=C2=A0=C2=A0=C2=A0 Write linear memory ba=
-se addr to x86 GS register
->>> disabled")
->>> + elseif (WAMR_BUILD_TARGET STREQUAL "X86_64"
->>> diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
->>> b/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
->>> index fc67236d3..d42a9a964 100644
->>> --- a/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
->>> +++ b/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
->>> @@ -21,6 +21,7 @@ SRCREV =3D
->>> "431fa79ae27edaef8d050a7af6f038f4400193a1"
->>>  =C2=A0SRC_URI =3D "\
->>>  =C2=A0=C2=A0=C2=A0=C2=A0 git://github.com/fluent/fluent-
->>> bit.git;branch=3D3.1;protocol=3Dhttps \
->>>     =20
->>> file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch
->>>  =C2=A0\
->>> +
->>> file://0002-wasm-avoid-cmake-try_run-when-cross-compiling.patch=C2=A0\
->>>     =20
->>> file://0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch
->>>  =C2=A0\
->>>  =C2=A0=C2=A0=C2=A0=C2=A0 ${@bb.utils.contains('DISTRO_FEATURES', 'syst=
-emd', '',
->>> 'file://0003-Disable-installing-systemd-service-file.patch',=C2=A0d)} \
->>>  =C2=A0"
->>> --
->>> 2.47.0
->>>
->>>
->>>
->>>
->>
->>
->>
->=20
->=20
->=20
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#113076): https://lists.openembedded.org/g/openembedde=
-d-devel/message/113076
-> Mute This Topic: https://lists.openembedded.org/mt/109059531/3618471
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [n=
-iko.mauno@vaisala.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->=20
 
