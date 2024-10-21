@@ -2,304 +2,307 @@ Return-Path: <niko.mauno@vaisala.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87C3ED15DBF
-	for <webhook@archiver.kernel.org>; Mon, 21 Oct 2024 16:57:55 +0000 (UTC)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com (EUR05-DB8-obe.outbound.protection.outlook.com [40.107.20.96])
- by mx.groups.io with SMTP id smtpd.web11.376.1729529867266316964
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8492FD0E6C4
+	for <webhook@archiver.kernel.org>; Mon, 21 Oct 2024 17:01:05 +0000 (UTC)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.120])
+ by mx.groups.io with SMTP id smtpd.web11.451.1729530061417993036
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Oct 2024 09:57:48 -0700
+ Mon, 21 Oct 2024 10:01:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=iKMVhaNF;
- spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 40.107.20.96, mailfrom: niko.mauno@vaisala.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=iJKVrgzj;
+ spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 40.107.21.120, mailfrom: niko.mauno@vaisala.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=KXMjKC1dZCplipCRKwTIAY/7qr5tpN5STYn7Ho3FBfwBY7cZwOya1z/6KqbWQ0UeKNSYU2nm2ZlenXwvVdb3LPbmmX1tj9wlknwj6UdpcwzgEJ0Sc/ANsAX9ThotxtqBqwnbgHCiUWOCkYBPSf2m20saKwbjg9ifBkVEUyigGacji0+12HTJuABl+cBB5D65A7W5VLMkM1JQGVBuVHsyEbYvQwh9sLLMqg3g5IOtRoDCdrkzxhB7/o/ZSgwzeTYxV66XFjx5BwDqem32ypsAKxAtfgbLp9xQDqogRJbHse7fiW4k6oxiUErbFdtiO7bpaTZIclQ6V2kJW+ZWrGpl+Q==
+ b=buoO87qVhLVtfyJ5RMH9umxVtvweOeGhX669WGi7mwOuaekLmq9HWCe0A1mU/9Vr3vphQitQIXemQp6gqq4S501wRUabITaXWjo+qkFeY6gTakexw6+le5GP+rbS/8qBKc59NACd4gvkDL19t4Hxrk+LHXfSimTdapa9wUQ6J4lpfUU9KYhZ1U1m1hR5bR1GyPBfAIhC2OyWYc0MTCPjck/pGIqSitQoNWc5bXBHQWOeMgAKzUOsOQfC66haVLKpRFOX+cIXf6G+LKhHnWOByk5iGNRuAaEkOQQv2JAsu0U1bOOKU5WR//AS3pCLbWXvjDw9Abx5/g1PUYYwcM63zw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pkhWH6+CI/OHv8+Q8uS8iKDF9EBBPeBzo/8rXhIMHlc=;
- b=RH2PI3aCY5ZXw2pPIHGelQxj7PZ+MJqfFsYz9ysVh7W50yGYrPD68Dq56v6+jg/NSFrSZwp4U36gHjiHgznz/exMqJFc2+REDaZQxlqNgyrKI6dewnWhvhCRZ4ZXumSB8C4/n+gvxY7sbSTdVioJVvRf1StpZWHY0zD14CM/Gk7N6LnJqt6Yb5V8HlcnyxXGRUnxIbKQwDJpBUiLpb5YPar4Y61vFLqjWp2IruWZQSadEE8gd8ccLEJytUpBVpFKv5EjL9rWDqQBlFANXjrR477ujdSt56Kcfw2F852nHWwpWdOveL4t3sWWgk1m3dnFtpNwYqjnySPxD6l8xdFqMA==
+ bh=hMtwcwqPZFxTTBteEVt8lyElPXSBoOCKT2BFE9krztE=;
+ b=GhxdsEjBHmQWZc9JvdAZxfk7OHaffj8RcqHKjRW6z/wIcKfLjbCUL4c6jsRw/W54uPAhwkQ+WkYHgHodp+cSMR6J+3jkCgqANb1eNTxPxt9rmfl/yeRbq57x/1KFEeVRqfxnoapZ5uDkhenRMphCAe6Z8nugOJ8qK8zeFiWz+mTzRdvUWkY5Sh4ls3QltnNj0Z7RCvWvy1miFZPC5FbIXKffHY9+OiDRBNUJUmPz/jsssiMLb9FlidjzqTpSw1PHv/6gU4CKResU/5yJjzOCmJ6Tb2tzhmn0EnxM/mLlz7LlJ5m8//sDNC8pDaVqljT3qx8kowbdnXJr8USJhkiF4g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
  dkim=pass header.d=vaisala.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pkhWH6+CI/OHv8+Q8uS8iKDF9EBBPeBzo/8rXhIMHlc=;
- b=iKMVhaNF0N2watiHVo++4/Trv07Ib97j7GZTdc+F17UrZC6AFuPaPgzSRgfqpaqnHVSFiAWgrRUpgolOqW0v1QgBkv3EPcxd2Exb8S1tfsFt8AtuYIS64auFUvlzSt/vrdqaBLkpry4ixBOMW+xIp2kzRFka4rTtfIt2vVd8JqnCj4X3u7v1vLgH+RRbOCwAg6my3k+xKqQPVXREd3lfRDO541b27DTQ1jehuWbS29J5lNnTSSrQRyPQc3dNS4KGXYXzwyjO8zcNrRXIBEQGxNDS8lYs6ioNcn6L6nGN7Y1H84Y/w/qB4iU9UNVDzCIRUWFjI7mxxfigQEE/jemdYg==
+ bh=hMtwcwqPZFxTTBteEVt8lyElPXSBoOCKT2BFE9krztE=;
+ b=iJKVrgzjST1CMgj5rh7hmOW/ClI8i2KNpCg4h5XW8tqntlHZggfFZea0lQszPP/wOf/ZHX1JK2+5T0qDWPTk55EhZXXtz+fSoWYqg97wadIq1o9L3e0fD6xrCpQLk5YOJ9x8ncC+J6yD/ON/cuGqPFHC2MMiTIZGdNVG8dLf0xKReQYMvnAvG4Ip+/mTaCsJlxVwwUKBPtP+HgBW/Nb46QKwvHq1RP2BxiudLnysH4GYfuboO4g3BYbq+Bas6g+ko+Ayav2Tl7QmMrltGNn+EFfqYy0T/Rc3iW3NejlUgEvKzhOmBJg5+TnhaHR7w2iGB4hn001Jk0dKdm3XtKYgAA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vaisala.com;
 Received: from AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
  by VI1PR06MB8904.eurprd06.prod.outlook.com (2603:10a6:800:1e0::21) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.20; Mon, 21 Oct
- 2024 16:57:42 +0000
+ 2024 17:00:57 +0000
 Received: from AS4PR06MB8447.eurprd06.prod.outlook.com
  ([fe80::af93:b150:b886:b2bc]) by AS4PR06MB8447.eurprd06.prod.outlook.com
  ([fe80::af93:b150:b886:b2bc%6]) with mapi id 15.20.8069.024; Mon, 21 Oct 2024
- 16:57:42 +0000
+ 17:00:57 +0000
+Message-ID: <dcd59bb1-3893-4b77-8792-10e13217c3d7@vaisala.com>
+Date: Mon, 21 Oct 2024 20:00:55 +0300
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH v2] fluentbit: fix building with wasm
+ support
+To: patrick.wicki@subset.ch, raj.khem@gmail.com
+CC: openembedded-devel@lists.openembedded.org
+References: <20241017070839.39476-1-patrick@subset.ch>
+ <CAMKF1spGmL-v7izu2-zJQ=KmxE=qf2QwVQe_sGE-9exGhMeHhw@mail.gmail.com>
+ <6358f89f72cfdc608818f24cbc9f282fbe99e240.camel@subset.ch>
+Content-Language: en-US
 From: Niko Mauno <niko.mauno@vaisala.com>
-To: openembedded-devel@lists.openembedded.org
-CC: raj.khem@gmail.com,
-	patrick.wicki@subset.ch,
-	Niko Mauno <niko.mauno@vaisala.com>
-Subject: [meta-oe][PATCH] fluentbit: Mitigate init manager detection issues
-Date: Mon, 21 Oct 2024 16:57:03 +0000
-Message-ID: <20241021165703.3473986-1-niko.mauno@vaisala.com>
-X-Mailer: git-send-email 2.39.2
+In-Reply-To: <6358f89f72cfdc608818f24cbc9f282fbe99e240.camel@subset.ch>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-ClientProxiedBy: GV2PEPF00004591.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:158:401::42d) To AS4PR06MB8447.eurprd06.prod.outlook.com
+X-ClientProxiedBy: AS4P195CA0004.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:20b:5e2::19) To AS4PR06MB8447.eurprd06.prod.outlook.com
  (2603:10a6:20b:4e2::11)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|VI1PR06MB8904:EE_
-X-MS-Office365-Filtering-Correlation-Id: ccde8327-4e8e-4eda-3684-08dcf1f17a92
+X-MS-Office365-Filtering-Correlation-Id: 2205c49a-e834-47b6-8730-08dcf1f1eeaa
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|52116014|366016|376014|1800799024|38350700014;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024|4022899009;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?B0I5zOQyLmkTxQH1YRXHxxHZR/1LT4cnb/XbxrRKc/8cb6hNFdwN6p7+GVh1?=
- =?us-ascii?Q?+Yi5cOvTH5NaP56aPZUobAK1aUKtoyb/OtBpAgHGWtsTXmUi3hslFiNeZacp?=
- =?us-ascii?Q?sT8F452nh4RlLCmZGqj5F1Up+OZWrqDWkCA+/qxQF9lRGUHjqL7xJfFYuldg?=
- =?us-ascii?Q?bvQfS8Y6U2OD80/xmruxsDPDkDN41f9ejziUK/242B3tjMHkFFXcz+WI6V5V?=
- =?us-ascii?Q?n3c9DtgxuEDISZHEIkd6h5J4utpt6LhZQM03OHKCmS79w4QgLzvYwOJQd4q5?=
- =?us-ascii?Q?rvFwvaNbBoIxBsg7AQzptWy5bjoYmK+tJYvSrNIr3DGEH3Fklw42iv6QnrNf?=
- =?us-ascii?Q?GDtxaa28wSA2YKPwcHGB7vsSSyFAmC00yLUvZMZRes7FTfYO6S6kJKHn6BE0?=
- =?us-ascii?Q?0xPl7PkjHCZdEO8ZX+wgAMEOUFdWKNiChWnq0jNsGhjismf3uUrcLiYargr8?=
- =?us-ascii?Q?QI8U2cUcoGJ3Lx2c3MuDgCB1xa8cMFqd9tbu+HREfcxS8YOMqrb7LkDH3UjO?=
- =?us-ascii?Q?c/GsDxJMB4aoRc88q676a7t6LiRYPG47LUIamcVvrp/yM5RVsiA3/vFqE6QR?=
- =?us-ascii?Q?Ih1lbOiE7HvDlK75GS1LqvOzviNzTxAXOS9XR4iInH7wqkYEBjXJinBISa5A?=
- =?us-ascii?Q?zNjJ6ahHvcbK2AXfxYjlfwf64hD+lMe0zbGHNx9gA/JtQbDkZzHWiIiAJWlK?=
- =?us-ascii?Q?W1NR+0iuAuwt4HzpmTdoO8qOAetR9kU9DJo2yon4UM2RmNopJJibkpP5sdXz?=
- =?us-ascii?Q?5NEABFYPhks9dMfNXnoZJ+/1/jSvcEKpLNnwUiILX49E2NJ3FbMjONum966k?=
- =?us-ascii?Q?+RUSottNpYqc4T1hIo7OwaylnDYCW90OzUGYfP45ydCaJ2woEOhV+KxWPkrm?=
- =?us-ascii?Q?bP3CqWtMmJGxsHUuIPmm8nrP/nF4ipEyMZiiO6n7QXR2cs6zWDBkk0puHIEh?=
- =?us-ascii?Q?belKcdxE7ewhJKlodx7IEHWtXPyJNjWZEE/wbkN2WXJM538HYeTw9p+UBHr4?=
- =?us-ascii?Q?Pq1nvFc1CxAvcjsW3D1Pnbd7a7aVIGEo8pxocAtAEJ4mcJIRx0PCyEectNEJ?=
- =?us-ascii?Q?nfxXLwwuXT9YVkm1Jwc+9izZS0jXUMCFoix6b3f9QOPn3c5UpNTHquzPIMyg?=
- =?us-ascii?Q?+opmG3IDBfx4P0RJfCJ0FoOXpI8Zz2xsXgjiLhScOZGkmXMLp8g7lWunpzdG?=
- =?us-ascii?Q?zccG+cqBSDK03+slbKjk6ZKNEltJSpwZZuhMTgdNBBymGEQGMNVwqmqQCmDC?=
- =?us-ascii?Q?xUsEiVitN6ZTlYVy/L/hNwi+R4o14k5ochE90lSyJ5k2unA3sAtVjFgZsYs1?=
- =?us-ascii?Q?RRNHND/EZwfnvgZZhHoUNOodSJEyOsWXcrUGhXGDU9C5QI4wUTDgmxmCDw7P?=
- =?us-ascii?Q?vvDNtlo=3D?=
+	=?us-ascii?Q?1OdeYCkBQqK+v0/K5byhStkCR43N96TtD18dT5vHViOnLM0JZon4QnLBs3n7?=
+ =?us-ascii?Q?+/IXbcXtWL+maRRduNYACDanVycbydBBdwxuxCTQwlGtvuUZZuJQialw5bgP?=
+ =?us-ascii?Q?aotROSR64XjUBLiW8xxXfNs3HsHpuU86DUEX4Ndv0uaHhVxACd/Hoj801Hyb?=
+ =?us-ascii?Q?qlKpI0NFhuE1AUUTDsFU0MtPuuqONt+OJzXETefQx/bnTdzxIWXDg+XGgidh?=
+ =?us-ascii?Q?/wtzBnaLTVdDzBlz8RyqHgkZojjEv1f+WSOatN4umc/naMs3reDsF/1yVKRZ?=
+ =?us-ascii?Q?Y1zTVX3AFc5myrSyh0vLYD0NYxSwGdSEn+CRwBCb3vjvLz0FZZNvXvXKr5gr?=
+ =?us-ascii?Q?r3U1NXNVn/rsFlVBWPJXl3L7PPk0O8t/4ywjSNUanaosKD9QnvEak+XpEZEd?=
+ =?us-ascii?Q?Om3SlyRcnPGvdmlgI7B197KP+E3p5kxDqEcpU4Yk8oOCZcmO+R938lzppDlC?=
+ =?us-ascii?Q?ww2edmS7Fu4OMmHY22g6FjTAgma3t0fU4fg6ZJi2ed9H0jj8luJeB/HKz+0L?=
+ =?us-ascii?Q?h8VMvvfEKbbh8jcE1KDppZbADuHB0JLLLs0Hgs2UYeWxA2FuIdJV3b9JGFSZ?=
+ =?us-ascii?Q?pyUQVynFdftETwzLNa9n782utyp73wjXHv3swWJifwAg0LDYgDKAkoQXFOi3?=
+ =?us-ascii?Q?I+Qt5PYDMUah/CrUnrtxjHVtoUUV23UMu/go+gII00I0SOC+TQ8jS41RGo82?=
+ =?us-ascii?Q?ZXnmk0wMxnSIVBN7dUUIJsNt4377iCMoIazVqAW0Z9qZo+vEKb5QvVTcxTRv?=
+ =?us-ascii?Q?AfWDTf5OMMFhju7Ru+Z6j287fdAV4bvzCY7Y8esAryKS9GXeD2Jzgog6BSvH?=
+ =?us-ascii?Q?e2NKtKEH3p+KH75+o5syF8Xpq28z5hhZH1DjbUYckdVAED9whMht4j+WxIAx?=
+ =?us-ascii?Q?w+n7Y/xr9H9GVXOECQC7ejbjzz1hPEJoSezia9l1ioBaYBbPGSlqM+TocnmU?=
+ =?us-ascii?Q?lPQEQHSSBaTH+KT2wWjeFjmO8APQSsj5xUGH9AiZXsDDD9mLBcXcBkpJLK4e?=
+ =?us-ascii?Q?wObeGSzdnrGl1cy1/PL+3VvtRSgd/7YZqB0eVWPGJxMjFhkYYLt9ZYXhKZ3B?=
+ =?us-ascii?Q?gkX9dRzNRZr3OXSRePIOnSEzLZeBOM5vZuh1ZkfMZcBIVhy9R+ec0dZWVZ6W?=
+ =?us-ascii?Q?a5vFMjOEdz7jH4jQvlJM98ahsDL3+bG01JdrlTbFYxVb+/vNV4qJ38fU6q3z?=
+ =?us-ascii?Q?SqVkyRkySNl86QHpT7zLtrwxhTAIEc3KgEpZRda4yJFNUZbPqjjYMfSz2snV?=
+ =?us-ascii?Q?Zn9dtszXK3p4/9thvPDF?=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(52116014)(366016)(376014)(1800799024)(38350700014);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(4022899009);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?bgonaXZAKADguKXIa9fGy0GV+e1tKdljgTUVxClu9FDBynbkkoV+zWCt/XxE?=
- =?us-ascii?Q?QpDHAO3quO5mab0LpUFNI/XDKFFJWocmt4zJoUjM/Pr0Jl482aFI4syWs7Ko?=
- =?us-ascii?Q?Ro3O32WWG6S5IvwEOCJijsM83Cd2tlPQ6AoHgXmd5GmgnZLgWZkX2BdIHWWa?=
- =?us-ascii?Q?Lb/9Du0EboJb6pZsLttG9GmW1QGGy96uHE8PQNrZfDwortvcPRS5JTwb+pxs?=
- =?us-ascii?Q?pIoU3gR29Y/pu08dRcha8uEYfA0wabfoWFHuoPQt3hmWOn3rYZFCGmS4ikTQ?=
- =?us-ascii?Q?sWrXbtMfQTKPfuC0qGoJTtA07GwNyEE7/RGKyQfyb28HhZ6kGWt3hTjk0zLD?=
- =?us-ascii?Q?dle9nA1qUCYBqWXhRl6EK22XUc9d65kZFGAk88uCVEW4Rs4abnsPIYL0VgB9?=
- =?us-ascii?Q?Vk4/0uFcoJ848FtXy/G3lu34qfr+iTgXIZpfmXS4N33cdIRhAHMMrn8kSE/n?=
- =?us-ascii?Q?2JdXiN3jXKq+Rus0YoxL9a/FybSS8O9oMmFQt+x1HL6hVND9KnHei5mMzKXe?=
- =?us-ascii?Q?DAxl3F9DN9b4Buk3oYU6zCev56P7u9bb84vPerAH6EiwHdBLClhNAD9frVZW?=
- =?us-ascii?Q?wad+nbw0FHH6ffvCjJzIFZYQ+4xHV0KyF3s7zDV3vGlInT7uFw1RfPBG0Tu7?=
- =?us-ascii?Q?NR0Aexsk/qknpK5jlgjtqcBIMTKlIN55dGSv89T4JLkQ1CZVOBaXCN6Qn8ub?=
- =?us-ascii?Q?AchGQPDa2vZCyNwbjRpaRbOADlb+z95/IybVXpisOH0M3EwqqD020cl+4U/K?=
- =?us-ascii?Q?u0DDSVkAaL1nRG2g6bEVB2RJSGLuyOAIazkpALePDoGJ2cewYMHf1LzsQOUf?=
- =?us-ascii?Q?VedQEMX5kcqdudbxpHE/GZPWGsP/dCHKZ3MhBkwQnkrqKiY8SF0bibu5MXus?=
- =?us-ascii?Q?F0gEVlh7dhbCy2r4BFx0fvWFyw35md/NvyhQX/B+XAwstR8OjhuE4A3XKt48?=
- =?us-ascii?Q?9VGEuTBmaJeB63uR13l9co1ECLo4E/Vv/Y7lCkmAJB5bbTPmuA9tdtEu4yBJ?=
- =?us-ascii?Q?xa/L/vFhveOxInvXnyT88Xz0gvwWEre9gaMOpkvXc/LdGzChIs+ONli6k8Lj?=
- =?us-ascii?Q?/sNbZRZq+nIvqSOyaUFC5xWVXJ+cE89fiQs/RJY8RWaLLNXXajqbgRfXUQNk?=
- =?us-ascii?Q?i2Uag6wjNhwLqciYuPhdvb9P+Z43YH3/WXb7Hd2ZMx86TkwoO0JD0aKFAJKN?=
- =?us-ascii?Q?ZO+jhdmu3GDjNkviufNlXUktUYeuW/Deg2P3v0SksafuimsMoCfHXiwMJA6x?=
- =?us-ascii?Q?hEPRExE+vDRS50Cx0jChV/n7A0ob1Pc0qdI94JVjOc8nOB4fppGxpT8Xrwfy?=
- =?us-ascii?Q?6hdtDBUrF9ZFxddagb5wLOLEi5CgTBO2LhGTYm+Idt0Ak2j47iYf/HGBWZk+?=
- =?us-ascii?Q?kR36P6Y0OfyXuIqtaustJfs9Atx3gn6aVliRw9U2J9wB+GQsGgtlabRUyQYp?=
- =?us-ascii?Q?dDtlHAOdPT3X6AhorgsgaJxzE6WU4vI12wazdskqsObRDe0ihkyMSnzQq0wW?=
- =?us-ascii?Q?Cl/heXX5x9hLT2v2DpoEOC1JNuJSAiCC3U6PkO6cNXECRRzonEGsHa0MSeoJ?=
- =?us-ascii?Q?gWciqeeS52vBrrBxatPLxyh7IpLDSTHZzLg9FUjYWuIdJDkYh2parhK3nXdg?=
- =?us-ascii?Q?kA=3D=3D?=
+	=?us-ascii?Q?cL3UqG4R3PqwNCs3hp5zghuyjY2dWGP6GfZ4RVtli6ZjQxJMv7r6nWwP6zTy?=
+ =?us-ascii?Q?nh6aYIlcmaOQO2Y2tr3Yl67P1HHDRwp2H14u1vVMDOHhC1UmumEnAJ9zPkRI?=
+ =?us-ascii?Q?Yl12uwbJ3tetyBDHNrED4ieleSszYj1wXofIryQC9QHQUwu+tGx1s9NyfhVv?=
+ =?us-ascii?Q?EC9TDYZsgxlH4Xj2MQAaPBvWK2EQmkFsQWU8VuB4HrDq6tl3hutySsNYQ+pl?=
+ =?us-ascii?Q?pQRyeOGluR3T4OL0HDyns84Z2xTM1JmDPvAIyHRtGGE5fJkVxuLV0ApIaH0y?=
+ =?us-ascii?Q?q5HUXkpVaLcxLZM84CkQ9Wqla04Q2N5s2twgYMnlr+aQBQ1/Mus8dT5BwNIk?=
+ =?us-ascii?Q?VgFInMcJ61BH4bFaHPl7cfapB/1auuEz4Yfq7h2bPfy4q42UavMPdUnH5B4n?=
+ =?us-ascii?Q?bD1y5Oa1vChkOXS3I2Hp+C1C7YA6WFENqx7vzh7WNQ+aNKycNew5HqZggKgi?=
+ =?us-ascii?Q?wD0SlXbTQTNT3/iZh2eU2Wympmc2s4f3dCyYlkxf7K5xd2JMKgG3/JWh2XkV?=
+ =?us-ascii?Q?QgDhzYG/+yVu+FB0IvEAjAfXVU8aXD6Gcjbz/gtDiVbuKopyd7ueVX0ojO0P?=
+ =?us-ascii?Q?TNUw7lUWxhLrwPJzUIRQHk4pASDfePywdBTBTyeILIWsXqS0K2tx3mURxERY?=
+ =?us-ascii?Q?N4/alD6qAhHFFWuPemyqE6vi4874HAdmy6D8sTvadWNm7MGAirtMxBoKCyPd?=
+ =?us-ascii?Q?RvBFTZzkjI8x6HZYq8sh1ZzzsFkqx+EoVEB8ElU0AaVX+QCX+DVkQ88iI4wR?=
+ =?us-ascii?Q?nde1KtlzZipWIgzhA/lBU7VKznrKhB0yIvyK1QEpyhK2Tf3CbdrXuMCqXlFC?=
+ =?us-ascii?Q?yuGClSwwR3r7VBCsWQ5SnuJkzl01eee9OWkKIcDqvJyLMiBACAVIwzms5n5b?=
+ =?us-ascii?Q?XmPPQ2WGEc7ul4IxE5WB4uuchPac2qbOeqUuiss4w4/IV54G/WeO/0rfwQYU?=
+ =?us-ascii?Q?3C9PurdD0bVj+vLo2X4Y5VjzEvUKOSBzD8hyeMugt4dlvnLzInNSzTO59Kqt?=
+ =?us-ascii?Q?A2nm/6DkN4vg7XzJzu3G5BPSFDJF1FakwXfNoz1ubKms5aBiIy9pH8OCFIUb?=
+ =?us-ascii?Q?0kjJGYo8ELdJEIo3UpAa9ngmWJo/3o/qGh3F2/M1HKuNuKbVQBbSK7dBHELM?=
+ =?us-ascii?Q?PbY/xjHGm72KaCkng4OvyEh8VHAA0sONiCYGOla5lmtYT856dyXrot6mVrsN?=
+ =?us-ascii?Q?DTP6xvajD3hjultNdR6tRZfqF7w0jpifz7Q9/RpkTPjRY3RjkOYeEr6fGCIU?=
+ =?us-ascii?Q?aFkQU+obRoiCQAiWmXctIjaZurOlUBa+/3lR4TChMdhgvANFUqpSBKJO0bLK?=
+ =?us-ascii?Q?hEF+bPdxv7K7Bkh3VbwfJDlNi8D/3gLzb6896oHamhDify/rYmkTZi7+kgLL?=
+ =?us-ascii?Q?7Z8zEYv5ZMLvR0pXRKBPIeJ3gmmSKUktFVo0SgGnu3AN6zM/YE15DkmwQPhD?=
+ =?us-ascii?Q?zq2xKo0IhS1nsA4ZRy/OfR4z41mKn6AE+bRXr3FvBpHT4XE6cb4JaLB7eoKm?=
+ =?us-ascii?Q?EaN/vzOMMGF1AF1K8CvNQqzSE9Pv7kO96gNzuScii91FPSPY1Vf9+QCQJWmd?=
+ =?us-ascii?Q?TPXINd5RuUYWKTfQSnCPaACxsFgCdbAM+WAkIPkERHqY11QNoRDXwHzCUk+J?=
+ =?us-ascii?Q?0g=3D=3D?=
 X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ccde8327-4e8e-4eda-3684-08dcf1f17a92
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2205c49a-e834-47b6-8730-08dcf1f1eeaa
 X-MS-Exchange-CrossTenant-AuthSource: AS4PR06MB8447.eurprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2024 16:57:42.6249
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2024 17:00:57.3999
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LyLOgoGjamNdx5Mo1Cz+94MdQ0yYUnP9zxS0nS8ndQmBubvW4ZMAvAlBZYrIbWnTSmoUEFJxbDBMD7SMiJ8ASQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: KnCdwp3irDNYMiMBGPQriNuWJklVA2Za9sVomqcyXaEWkgvYcXersAzhL262Nbqrj5BruDLL6ViNvAEMUV55gQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR06MB8904
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Oct 2024 16:57:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113080
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Oct 2024 17:01:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113081
 
-Avoid following CMake failure which during do_configure stemming from
-non-cross compile friendly condition check executed on a build host
-which has /usr/share/upstart directory
+The CMake failure which occurs during fluentbit do_configure, seems to be
 
-  | CMake Error at src/CMakeLists.txt:550 (install):
-  |   install DIRECTORY given unknown argument "/etc/fluent-bit/".
+   | CMake Error at src/CMakeLists.txt:550 (install):
+   |   install DIRECTORY given unknown argument "/etc/fluent-bit/".
 
-Also handle systemd init manager case more appropriately, so that it
-works also when the build host does not have a /lib/systemd/system
-directory.
+which occurs inside "upstart" specific segment at https://github.com/fluent=
+/fluent-bit/blob/v3.1.9/src/CMakeLists.txt#L550
 
-Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
----
- ...ts.txt-Revise-init-manager-deduction.patch | 41 +++++++++++++++++++
- ...able-installing-systemd-service-file.patch | 40 ------------------
- .../fluentbit/fluentbit_3.1.9.bb              |  9 +++-
- 3 files changed, 49 insertions(+), 41 deletions(-)
- create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0003-CMake=
-Lists.txt-Revise-init-manager-deduction.patch
- delete mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0003-Disab=
-le-installing-systemd-service-file.patch
+I looked to me like the preceding condition on line 543:
 
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0003-CMakeLists.t=
-xt-Revise-init-manager-deduction.patch b/meta-oe/recipes-extended/fluentbit=
-/fluentbit/0003-CMakeLists.txt-Revise-init-manager-deduction.patch
-new file mode 100644
-index 0000000000..5105444dc0
---- /dev/null
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0003-CMakeLists.txt-Revi=
-se-init-manager-deduction.patch
-@@ -0,0 +1,41 @@
-+From c9969cc46e5e4d58db28c89b22bebe42d9f96962 Mon Sep 17 00:00:00 2001
-+From: Niko Mauno <niko.mauno@vaisala.com>
-+Date: Mon, 21 Oct 2024 16:02:46 +0000
-+Subject: [PATCH] CMakeLists.txt: Revise init manager deduction
-+
-+The init manager deduction is not cross-compile friendly, so replace
-+the host specific condition checks with placeholders that can be
-+replaced in Yocto recipe.
-+
-+Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
-+
-+Upstream-Status: Inappropriate [configuration]
-+---
-+ src/CMakeLists.txt | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-+index 084f2c57d..f0f35f00b 100644
-+--- a/src/CMakeLists.txt
-++++ b/src/CMakeLists.txt
-+@@ -532,7 +532,7 @@ if(FLB_BINARY)
-+     set(SYSTEMD_UNITDIR  /lib/systemd/system)
-+   endif()
-+=20
-+-  if(SYSTEMD_UNITDIR)
-++  if(@INIT_MANAGER_IS_SYSTEMD@)
-+     set(FLB_SYSTEMD_SCRIPT "${PROJECT_SOURCE_DIR}/init/${FLB_OUT_NAME}.se=
-rvice")
-+     configure_file(
-+       "${PROJECT_SOURCE_DIR}/init/systemd.in"
-+@@ -540,7 +540,7 @@ if(FLB_BINARY)
-+       )
-+     install(FILES ${FLB_SYSTEMD_SCRIPT} COMPONENT binary DESTINATION ${SY=
-STEMD_UNITDIR})
-+     install(DIRECTORY DESTINATION ${FLB_INSTALL_CONFDIR} COMPONENT binary=
-)
-+-  elseif(IS_DIRECTORY /usr/share/upstart)
-++  elseif(@INIT_MANAGER_IS_UPSTART@)
-+     set(FLB_UPSTART_SCRIPT "${PROJECT_SOURCE_DIR}/init/${FLB_OUT_NAME}.co=
-nf")
-+     configure_file(
-+       "${PROJECT_SOURCE_DIR}/init/upstart.in"
-+--=20
-+2.39.2
-+
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0003-Disable-inst=
-alling-systemd-service-file.patch b/meta-oe/recipes-extended/fluentbit/flue=
-ntbit/0003-Disable-installing-systemd-service-file.patch
-deleted file mode 100644
-index 36a0092ba8..0000000000
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/0003-Disable-installing-=
-systemd-service-file.patch
-+++ /dev/null
-@@ -1,40 +0,0 @@
--From c3b891eeec691753fccdf8e0a4541dcba244ec6b Mon Sep 17 00:00:00 2001
--From: Niko Mauno <niko.mauno@vaisala.com>
--Date: Thu, 10 Oct 2024 11:06:07 +0300
--Subject: [PATCH] Disable installing systemd service file
--
--With this we avoid the the following BitBake error when using some
--other init manager than SystemD:
--
--  ERROR: fluentbit-3.1.9-r0 do_package: QA Issue: fluentbit: Files/directo=
-ries were installed but not shipped in any package:
--    /lib
--    /lib/systemd
--    /lib/systemd/system
--    /lib/systemd/system/fluent-bit.service
--  Please set FILES such that these items are packaged. Alternatively if th=
-ey are unneeded, avoid installing them or delete them within do_install.
--  fluentbit: 4 installed and not shipped files. [installed-vs-shipped]
--  ERROR: fluentbit-3.1.9-r0 do_package: Fatal QA errors were found, failin=
-g task.
--
--Upstream-Status: Inappropriate [hack]
--
--Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
-----
-- src/CMakeLists.txt | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
--index e24666484..c102806d0 100644
----- a/src/CMakeLists.txt
--+++ b/src/CMakeLists.txt
--@@ -534,7 +534,7 @@ if(FLB_BINARY)
--     set(SYSTEMD_UNITDIR  /lib/systemd/system)
--   endif()
--=20
---  if(SYSTEMD_UNITDIR)
--+  if(FALSE)
--     set(FLB_SYSTEMD_SCRIPT "${PROJECT_SOURCE_DIR}/init/${FLB_OUT_NAME}.se=
-rvice")
--     configure_file(
--       "${PROJECT_SOURCE_DIR}/init/systemd.in"
----=20
--2.39.2
--
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb b/meta-o=
-e/recipes-extended/fluentbit/fluentbit_3.1.9.bb
-index fc67236d3e..f96e1a7edc 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
-@@ -22,7 +22,7 @@ SRC_URI =3D "\
-     git://github.com/fluent/fluent-bit.git;branch=3D3.1;protocol=3Dhttps \
-     file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch=
- \
-     file://0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch=
- \
--    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '', 'file://0003-Di=
-sable-installing-systemd-service-file.patch', d)} \
-+    file://0003-CMakeLists.txt-Revise-init-manager-deduction.patch \
- "
- SRC_URI:append:libc-musl =3D "\
-     file://0004-chunkio-Link-with-fts-library-with-musl.patch \
-@@ -116,6 +116,13 @@ EXTRA_OECMAKE:append:riscv32 =3D " -DCMAKE_C_STANDARD_=
-LIBRARIES=3D-latomic"
- EXTRA_OECMAKE:append:riscv64 =3D " -DCMAKE_C_STANDARD_LIBRARIES=3D-latomic=
-"
- EXTRA_OECMAKE:append:x86 =3D " -DCMAKE_C_STANDARD_LIBRARIES=3D-latomic"
-=20
-+do_configure:prepend() {
-+    sed -i \
-+        -e 's#@INIT_MANAGER_IS_SYSTEMD@#'${@'TRUE' if d.getVar('INIT_MANAG=
-ER') =3D=3D 'systemd' else 'FALSE'}'#' \
-+        -e 's#@INIT_MANAGER_IS_UPSTART@#'${@'TRUE' if d.getVar('INIT_MANAG=
-ER') =3D=3D 'upstart' else 'FALSE'}'#' \
-+        ${S}/src/CMakeLists.txt
-+}
-+
- # flex hardcodes the input file in #line directives leading to TMPDIR cont=
-amination of debug sources.
- do_compile:append() {
-     find ${B} -name '*.c' -or -name '*.h' | xargs sed -i -e 's|${TMPDIR}|$=
-{TARGET_DBGSRC_DIR}/|g'
---=20
-2.39.2
+    elseif(IS_DIRECTORY /usr/share/upstart)
 
+is not cross-compile friendly, and during the failed test, presumably the b=
+uild host happened to have a /usr/share/upstart directory which caused the =
+condition being evaluated as true.
+
+I've now submitted a patch which should mitigate this issue, and also fixes=
+ potential for similar kind of issue with systemd init manager case, when t=
+he build host does not have systemd specific /lib/systemd/system directory.
+
+-Niko
+
+On 21.10.2024 15.29, Patrick Wicki via lists.openembedded.org wrote:
+> I've been unable to reproduce this failure on my end unfortunately. In
+> my understanding, the contents of the patched file should not even
+> affect the build at all unless the "wasm" PACKAGECONFIG is enabled,
+> which is not the case by default.
+>=20
+> I'm open to suggestions. Otherwise, I think we can skip this patch and
+> wait for upstream to update the WASM runtime, which should fix it too.
+>=20
+> On Thu, 2024-10-17 at 11:54 -0700, Khem Raj via lists.openembedded.org
+> wrote:
+>> it fails in configure -
+>> https://valkyrie.yoctoproject.org/#/builders/81/builds/66/steps/14/logs/=
+stdio
+>>
+>> On Thu, Oct 17, 2024 at 12:09=E2=80=AFAM Patrick Wicki via
+>> lists.openembedded.org
+>> <patrick.wicki=3Dsubset.ch@lists.openembedded.org> wrote:
+>>>
+>>> From: Patrick Wicki <patrick.wicki@siemens.com>
+>>>
+>>> Add patch for the wasm runtime that fixes building for x86.
+>>>
+>>> Signed-off-by: Patrick Wicki <patrick.wicki@siemens.com>
+>>> ---
+>>>  =C2=A0...d-cmake-try_run-when-cross-compiling.patch | 42
+>>> +++++++++++++++++++
+>>>  =C2=A0.../fluentbit/fluentbit_3.1.9.bb=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 1 +
+>>>  =C2=A02 files changed, 43 insertions(+)
+>>>  =C2=A0create mode 100644 meta-oe/recipes-
+>>> extended/fluentbit/fluentbit/0002-wasm-avoid-cmake-try_run-when-
+>>> cross-compiling.patch
+>>>
+>>> diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0002-
+>>> wasm-avoid-cmake-try_run-when-cross-compiling.patch b/meta-
+>>> oe/recipes-extended/fluentbit/fluentbit/0002-wasm-avoid-cmake-
+>>> try_run-when-cross-compiling.patch
+>>> new file mode 100644
+>>> index 000000000..419e85903
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0002-wasm-avoid-
+>>> cmake-try_run-when-cross-compiling.patch
+>>> @@ -0,0 +1,42 @@
+>>> +From 5b6d274664f92a6c6083f4d27a1b1604a326f22c Mon Sep 17 00:00:00
+>>> 2001
+>>> +From: Patrick Wicki <patrick.wicki@siemens.com>
+>>> +Date: Sat, 5 Oct 2024 21:36:12 +0200
+>>> +Subject: [PATCH] wasm: avoid cmake try_run when cross-compiling
+>>> for x86
+>>> +
+>>> +This fixes building the wasm micro runtime used when enabling wasm
+>>> +support in fluentbit.
+>>> +cmake try_run does not work when cross-compiling because the test
+>>> program
+>>> +cannot be executed:
+>>> +
+>>> +| CMake Error: try_run() invoked in cross-compiling mode, please
+>>> set the following cache variables appropriately:
+>>> +|=C2=A0=C2=A0=C2=A0 TEST_WRGSBASE_RESULT (advanced)
+>>> +| For details see .../fluentbit/3.1.9/build/TryRunResults.cmake
+>>> +|=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Write linear memory base addr to x86 G=
+S register disabled
+>>> +| -- Configuring incomplete, errors occurred!
+>>> +
+>>> +Since we cannot run the test program, assume that the instruction
+>>> is not
+>>> +available and disable the option.
+>>> +
+>>> +This patch is no longer needed once fluentbit updates WAMR, as
+>>> it's been
+>>> +fixed in
+>>> https://github.com/bytecodealliance/wasm-micro-runtime/pull/3066.
+>>> +
+>>> +Upstream-Status: Pending
+>>> [https://github.com/fluent/fluent-bit/pull/8744]
+>>> +
+>>> +Signed-off-by: Patrick Wicki <patrick.wicki@siemens.com>
+>>> +---
+>>> + .../build-scripts/config_common.cmake=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |
+>>> 2 +-
+>>> + 1 file changed, 1 insertion(+), 1 deletion(-)
+>>> +
+>>> +diff --git a/lib/wasm-micro-runtime-WAMR-1.3.0/build-
+>>> scripts/config_common.cmake b/lib/wasm-micro-runtime-WAMR-
+>>> 1.3.0/build-scripts/config_common.cmake
+>>> +index e73ebc85f..c2504e007 100644
+>>> +--- a/lib/wasm-micro-runtime-WAMR-1.3.0/build-
+>>> scripts/config_common.cmake
+>>> ++++ b/lib/wasm-micro-runtime-WAMR-1.3.0/build-
+>>> scripts/config_common.cmake
+>>> +@@ -408,7 +408,7 @@ if (WAMR_BUILD_STATIC_PGO EQUAL 1)
+>>> +=C2=A0=C2=A0 add_definitions (-DWASM_ENABLE_STATIC_PGO=3D1)
+>>> +=C2=A0=C2=A0 message ("=C2=A0=C2=A0=C2=A0=C2=A0 AOT static PGO enabled=
+")
+>>> + endif ()
+>>> +-if (WAMR_DISABLE_WRITE_GS_BASE EQUAL 1)
+>>> ++if (WAMR_DISABLE_WRITE_GS_BASE EQUAL 1 OR CMAKE_CROSSCOMPILING)
+>>> +=C2=A0=C2=A0 add_definitions (-DWASM_DISABLE_WRITE_GS_BASE=3D1)
+>>> +=C2=A0=C2=A0 message ("=C2=A0=C2=A0=C2=A0=C2=A0 Write linear memory ba=
+se addr to x86 GS register
+>>> disabled")
+>>> + elseif (WAMR_BUILD_TARGET STREQUAL "X86_64"
+>>> diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
+>>> b/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
+>>> index fc67236d3..d42a9a964 100644
+>>> --- a/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
+>>> +++ b/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
+>>> @@ -21,6 +21,7 @@ SRCREV =3D
+>>> "431fa79ae27edaef8d050a7af6f038f4400193a1"
+>>>  =C2=A0SRC_URI =3D "\
+>>>  =C2=A0=C2=A0=C2=A0=C2=A0 git://github.com/fluent/fluent-
+>>> bit.git;branch=3D3.1;protocol=3Dhttps \
+>>>     =20
+>>> file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch
+>>>  =C2=A0\
+>>> +
+>>> file://0002-wasm-avoid-cmake-try_run-when-cross-compiling.patch=C2=A0\
+>>>     =20
+>>> file://0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch
+>>>  =C2=A0\
+>>>  =C2=A0=C2=A0=C2=A0=C2=A0 ${@bb.utils.contains('DISTRO_FEATURES', 'syst=
+emd', '',
+>>> 'file://0003-Disable-installing-systemd-service-file.patch',=C2=A0d)} \
+>>>  =C2=A0"
+>>> --
+>>> 2.47.0
+>>>
+>>>
+>>>
+>>>
+>>
+>>
+>>
+>=20
+>=20
+>=20
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#113076): https://lists.openembedded.org/g/openembedde=
+d-devel/message/113076
+> Mute This Topic: https://lists.openembedded.org/mt/109059531/3618471
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [n=
+iko.mauno@vaisala.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>=20
 
