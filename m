@@ -1,142 +1,203 @@
-Return-Path: <patrick.wicki@subset.ch>
+Return-Path: <sjolley.yp.pm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AF4DD17141
-	for <webhook@archiver.kernel.org>; Mon, 21 Oct 2024 21:37:10 +0000 (UTC)
-Received: from ci74p00im-qukt09090101.me.com (ci74p00im-qukt09090101.me.com [17.57.156.18])
- by mx.groups.io with SMTP id smtpd.web11.4202.1729546627854979705
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 17517D17148
+	for <webhook@archiver.kernel.org>; Mon, 21 Oct 2024 23:31:11 +0000 (UTC)
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.web10.6476.1729553464801671995
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Oct 2024 14:37:08 -0700
+ Mon, 21 Oct 2024 16:31:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@subset.ch header.s=sig1 header.b=Hi/IpmPK;
- spf=pass (domain: subset.ch, ip: 17.57.156.18, mailfrom: patrick@subset.ch)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=subset.ch; s=sig1;
-	t=1729546627; bh=8gzAGcH1Qtgc/L/u4lUVCRN6+ZUQi79mKkZ1nePxTrk=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version;
-	b=Hi/IpmPKqKkZSPiqpYDRu3OMrcRAEd6EVZXJiGF76PQZWVIFtoKXhA3EYUixuKY4T
-	 emD+9J9c22L0KbVWLFiaxIIKiYIvic/XySAQ4JvZfRyn4qoBI0s1v+akbainBzTolp
-	 B5qO/64XfoiMwQnpRerMOIr1dh0D5Nr4cha7oZsGQGhZumEFQ+TN2Ypjmp65Spe4jY
-	 TDIL+Uvl+pUbeleqWIHCl0oBM5j94+XemXA3DbmGIWod2BaboFgPFm5CMRnQLQfP0Q
-	 Sdo8U6XsVixNYbKmYfhJwj0E4GzSUgEXjMC+0KfP4DWVHuUBgQHRB6P0rng1uWGyUp
-	 U4NSNMM6zoG4g==
-Received: from localhost.localdomain (ci77p00im-dlb-asmtp-mailmevip.me.com [17.57.156.26])
-	by ci74p00im-qukt09090101.me.com (Postfix) with ESMTPSA id C607535C0140;
-	Mon, 21 Oct 2024 21:37:05 +0000 (UTC)
-From: patrick@subset.ch
-To: openembedded-devel@lists.openembedded.org
-Cc: Patrick Wicki <patrick.wicki@siemens.com>
-Subject: [meta-oe][PATCH v3] fluentbit: fix building with wasm support
-Date: Mon, 21 Oct 2024 23:36:25 +0200
-Message-ID: <20241021213625.2564398-1-patrick@subset.ch>
-X-Mailer: git-send-email 2.47.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Q4ybSXek;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: sjolley.yp.pm@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-2e3010478e6so4003077a91.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 21 Oct 2024 16:31:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1729553464; x=1730158264; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=T6ayPsDAUjz1aXsTBRzBQO25mivODpyWggHxdSZ5rI0=;
+        b=Q4ybSXekY1G3EwsOsHRJngCJbjPQjHL06iC7FBqQu0MjSxwsbTZRdK/eEMitDQZHqH
+         jDUp+5HWcTvmLJgoLYe2w2m+VEZKpy46RSUA0+27Ke+rwSse99EEGcYzc7wi1W8sbeaI
+         KQW7n5JDzxUuPQBYxBCbq4lRui7Tv7/gSmAsPOnCbRhsy8lhQF7eitWOfT4GRa/C3UuP
+         /dBdeYZ16wIOAdlYxh+OHbzvgGcoPORQH9eO5Ch6Z8Zr21K1SVi3qEoh0uWloa+/f7//
+         EiecLX7A36cN/YeU2UysfDK++upPB5M8zl1bEEs+VRCrpJ4c9r7ERmebUYfEaZ4fELWl
+         eadg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1729553464; x=1730158264;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=T6ayPsDAUjz1aXsTBRzBQO25mivODpyWggHxdSZ5rI0=;
+        b=BAC62U3UH/O5e+9UTom98vqIiHQvsRFSc8zm+3TKJI7wAgJN2vBsLOFDMzHn4MrXKy
+         j8ZnIn3EHSMYjOTIkPN6PrBfHRXNawU+GqqDDMMeOuX31Fs0KUzb3dzr3//7Ct6T4i/z
+         b02w6DNvdMJ2gqVq6WbFVBabJc6mUU4lRRG4JL9vbkvvO+xBqQ299+8NlSEetruWi3T4
+         M6PWCXfqJVPHY8VQ/kJTchhpXPgNEOMLUnpXCMD4eC6D1DuEJwrDqW4cIS578EBoXgKC
+         RGcfd/VbQgHA2Bz67qqG3XpZC6bKAwNqspLIFrN12NKX5SPyn8oaG/9S4+2lrU9yJ20L
+         qaUw==
+X-Gm-Message-State: AOJu0YxMC1UROranMY5NjY6Uiaqf6XfjUh7R9TkbWaIEXuR2dpkbzpGb
+	mSdHEjbAJLJ4qr4tBSyhnQlhpJy8hWFVNa6RTgsj9yxD0uOBy1kmFJD0XDGb2M/sCwGnkrag9fo
+	usVrKreiTFDOkW7Ul+O5qGcB+MizIdBvC
+X-Google-Smtp-Source: AGHT+IGApSu+rUMxDErPBVh2PdlUqOTBqM7qYTRprb44K7cYq1SN3ILitwozTpKf6ydO0Iz82K5xyrsOCUWOIjsujPs=
+X-Received: by 2002:a17:90a:640d:b0:2e2:af04:8b64 with SMTP id
+ 98e67ed59e1d1-2e5616c5550mr16127734a91.7.1729553463853; Mon, 21 Oct 2024
+ 16:31:03 -0700 (PDT)
 MIME-Version: 1.0
-X-Proofpoint-ORIG-GUID: lOGsssDjEWi3EieHNliYftXiYit614cT
-X-Proofpoint-GUID: lOGsssDjEWi3EieHNliYftXiYit614cT
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.62.30
- definitions=2024-10-21_22,2024-10-21_01,2024-09-30_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 malwarescore=0
- phishscore=0 mlxscore=0 spamscore=0 clxscore=1030 adultscore=0 bulkscore=0
- mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2308100000 definitions=main-2410210154
-Content-Transfer-Encoding: quoted-printable
+From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
+Date: Mon, 21 Oct 2024 16:30:52 -0700
+Message-ID: <CAK5yBb_QbkoTDuOTR6djvfQL8GWUKS-cYkTKLoSPn2jJSAt4=g@mail.gmail.com>
+Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
+To: openembedded-devel@lists.openembedded.org, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="000000000000d54a0e0625050b1b"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Oct 2024 21:37:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113084
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Oct 2024 23:31:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113085
 
-From: Patrick Wicki <patrick.wicki@siemens.com>
+--000000000000d54a0e0625050b1b
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Patch the cmake config of the wasm micro runtime dependency. This fixes
-the build for x86 by avoiding the cmake try_run() which cannot be
-invoked in cross-compiling mode.
+All,
 
-Signed-off-by: Patrick Wicki <patrick.wicki@siemens.com>
----
- ...d-cmake-try_run-when-cross-compiling.patch | 42 +++++++++++++++++++
- .../fluentbit/fluentbit_3.1.9.bb              |  1 +
- 2 files changed, 43 insertions(+)
- create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0004-was=
-m-avoid-cmake-try_run-when-cross-compiling.patch
+The triage team is starting to try and collect up and classify bugs which a
+newcomer to the project would be able to work on in a way which means
+people can find them. They're being listed on the triage page under the
+appropriate heading:
+https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
+review:
+https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
+how to create a bugzilla account at:
+https://bugzilla.yoctoproject.org/createaccount.cgi
 
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0004-wasm-avoid=
--cmake-try_run-when-cross-compiling.patch b/meta-oe/recipes-extended/flue=
-ntbit/fluentbit/0004-wasm-avoid-cmake-try_run-when-cross-compiling.patch
-new file mode 100644
-index 000000000..419e85903
---- /dev/null
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0004-wasm-avoid-cmake-=
-try_run-when-cross-compiling.patch
-@@ -0,0 +1,42 @@
-+From 5b6d274664f92a6c6083f4d27a1b1604a326f22c Mon Sep 17 00:00:00 2001
-+From: Patrick Wicki <patrick.wicki@siemens.com>
-+Date: Sat, 5 Oct 2024 21:36:12 +0200
-+Subject: [PATCH] wasm: avoid cmake try_run when cross-compiling for x86
-+
-+This fixes building the wasm micro runtime used when enabling wasm
-+support in fluentbit.
-+cmake try_run does not work when cross-compiling because the test progra=
-m
-+cannot be executed:
-+
-+| CMake Error: try_run() invoked in cross-compiling mode, please set the=
- following cache variables appropriately:
-+|    TEST_WRGSBASE_RESULT (advanced)
-+| For details see .../fluentbit/3.1.9/build/TryRunResults.cmake
-+|      Write linear memory base addr to x86 GS register disabled
-+| -- Configuring incomplete, errors occurred!
-+
-+Since we cannot run the test program, assume that the instruction is not
-+available and disable the option.
-+
-+This patch is no longer needed once fluentbit updates WAMR, as it's been
-+fixed in https://github.com/bytecodealliance/wasm-micro-runtime/pull/306=
-6.
-+
-+Upstream-Status: Pending [https://github.com/fluent/fluent-bit/pull/8744=
-]
-+
-+Signed-off-by: Patrick Wicki <patrick.wicki@siemens.com>
-+---
-+ .../build-scripts/config_common.cmake                           | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/lib/wasm-micro-runtime-WAMR-1.3.0/build-scripts/config_comm=
-on.cmake b/lib/wasm-micro-runtime-WAMR-1.3.0/build-scripts/config_common.=
-cmake
-+index e73ebc85f..c2504e007 100644
-+--- a/lib/wasm-micro-runtime-WAMR-1.3.0/build-scripts/config_common.cmak=
-e
-++++ b/lib/wasm-micro-runtime-WAMR-1.3.0/build-scripts/config_common.cmak=
-e
-+@@ -408,7 +408,7 @@ if (WAMR_BUILD_STATIC_PGO EQUAL 1)
-+   add_definitions (-DWASM_ENABLE_STATIC_PGO=3D1)
-+   message ("     AOT static PGO enabled")
-+ endif ()
-+-if (WAMR_DISABLE_WRITE_GS_BASE EQUAL 1)
-++if (WAMR_DISABLE_WRITE_GS_BASE EQUAL 1 OR CMAKE_CROSSCOMPILING)
-+   add_definitions (-DWASM_DISABLE_WRITE_GS_BASE=3D1)
-+   message ("     Write linear memory base addr to x86 GS register disab=
-led")
-+ elseif (WAMR_BUILD_TARGET STREQUAL "X86_64"
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb b/meta=
--oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
-index f96e1a7ed..a70534e91 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
-@@ -23,6 +23,7 @@ SRC_URI =3D "\
-     file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.pat=
-ch \
-     file://0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.pat=
-ch \
-     file://0003-CMakeLists.txt-Revise-init-manager-deduction.patch \
-+    file://0004-wasm-avoid-cmake-try_run-when-cross-compiling.patch \
- "
- SRC_URI:append:libc-musl =3D "\
-     file://0004-chunkio-Link-with-fts-library-with-musl.patch \
---=20
-2.47.0
+The idea is these bugs should be straight forward for a person to help work
+on who doesn't have deep experience with the project. If anyone can help,
+please take ownership of the bug and send patches! If anyone needs
+help/advice there are people on irc who can likely do so, or some of the
+more experienced contributors will likely be happy to help too.
 
+Also, the triage team meets weekly and does its best to handle the bugs
+reported into the Bugzilla. The number of people attending that meeting has
+fallen, as have the number of people available to help fix bugs. One of the
+things we hear users report is they don't know how to help. We (the triage
+team) are therefore going to start reporting out the currently 410
+unassigned or newcomer bugs.
+
+We're hoping people may be able to spare some time now and again to help
+out with these. Bugs are split into two types, "true bugs" where things
+don't work as they should and "enhancements" which are features we'd want
+to add to the system. There are also roughly four different "priority"
+classes right now, =E2=80=9C5.1=E2=80=9D, =E2=80=9C5.2", "5.99" and "Future=
+", the more
+pressing/urgent issues being in "5.1" and then =E2=80=9C5.2=E2=80=9D.
+
+Please review this link and if a bug is something you would be able to help
+with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
+an e-mail with the bug number you would like and I will assign it to you
+(please make sure you have a Bugzilla account). The list is at:
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs
+
+Thanks,
+
+
+
+*Stephen K. Jolley*
+
+*Yocto Project Program Manager*
+
+(    *Cell*:                (208) 244-4460
+
+* *Email*:                 *s
+<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
+*
+
+--000000000000d54a0e0625050b1b
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><span style=3D"font-size:11pt;font-family:Calibri,Arial">A=
+ll,<br><br>The triage team is starting to try and collect up and classify b=
+ugs which a newcomer to the project would be able to work on in a way which=
+ means people can find them. They&#39;re being listed on the triage page un=
+der the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/wiki/=
+Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage#New=
+comer_Bugs</a>  Also please review: <a href=3D"https://www.openembedded.org=
+/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.org/w=
+iki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugzilla =
+account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount.cgi"=
+>https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The idea is=
+ these bugs should be straight forward for a person to help work on who doe=
+sn&#39;t have deep experience with the project.  If anyone can help, please=
+ take ownership of the bug and send patches!  If anyone needs help/advice t=
+here are people on irc who can likely do so, or some of the more experience=
+d contributors will likely be happy to help too.<br><br>Also, the triage te=
+am meets weekly and does its best to handle the bugs reported into the Bugz=
+illa. The number of people attending that meeting has fallen, as have the n=
+umber of people available to help fix bugs. One of the things we hear users=
+ report is they don&#39;t know how to help. We (the triage team) are theref=
+ore going to start reporting out the currently 410 unassigned or newcomer b=
+ugs.<br><br>We&#39;re hoping people may be able to spare some time now and =
+again to help out with these.  Bugs are split into two types, &quot;true bu=
+gs&quot; where things don&#39;t work as they should and &quot;enhancements&=
+quot; which are features we&#39;d want to add to the system.  There are als=
+o roughly four different &quot;priority&quot; classes right now, =E2=80=9C5=
+.1=E2=80=9D, =E2=80=9C5.2&quot;, &quot;5.99&quot; and &quot;Future&quot;, t=
+he more pressing/urgent issues being in &quot;5.1&quot; and then =E2=80=9C5=
+.2=E2=80=9D.<br><br>Please review this link and if a bug is something you w=
+ould be able to help with either take ownership of the bug, or send me (<a =
+href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>) an e-m=
+ail with the bug number you would like and I will assign it to you (please =
+make sure you have a Bugzilla account).  The list is at: <a href=3D"https:/=
+/wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcomer_Bugs"=
+>https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcom=
+er_Bugs</a></span><br><div dir=3D"ltr" class=3D"gmail_signature" data-smart=
+mail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p class=3D"MsoN=
+ormal" style=3D"background-image:initial;background-position:initial;backgr=
+ound-repeat:initial"><span style=3D"font-size:12pt;font-family:Arial,sans-s=
+erif">Thanks,<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
+ily:Arial,sans-serif">=C2=A0<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
+lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
+ont-family:Arial,sans-serif"><span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
+amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
+an></b></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
+&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
+<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
+:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
+s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
+-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
+><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
+/span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
+t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
+=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
+color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
+uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
+ lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
+erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
+phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
+.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
+u></p></div></div></div></div>
+
+--000000000000d54a0e0625050b1b--
 
