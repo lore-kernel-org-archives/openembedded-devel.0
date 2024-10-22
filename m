@@ -2,56 +2,56 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 81E15CDD0EA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 74F68CDD0E6
 	for <webhook@archiver.kernel.org>; Tue, 22 Oct 2024 18:21:31 +0000 (UTC)
-Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com [209.85.219.171])
- by mx.groups.io with SMTP id smtpd.web11.21800.1729612103792334972
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
+ by mx.groups.io with SMTP id smtpd.web10.21959.1729612102607585026
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Oct 2024 08:48:23 -0700
+ Tue, 22 Oct 2024 08:48:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=H2Nbx/np;
- spf=pass (domain: gmail.com, ip: 209.85.219.171, mailfrom: schonm@gmail.com)
-Received: by mail-yb1-f171.google.com with SMTP id 3f1490d57ef6-e290d48d3f7so5198383276.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 22 Oct 2024 08:48:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=eLwUrUAM;
+ spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-6e2e3e4f65dso63812267b3.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 22 Oct 2024 08:48:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1729612103; x=1730216903; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1729612101; x=1730216901; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=VtNUTvEkNeyc6OkBElsEK0LUrP94RWEC6Ki39aacnJc=;
-        b=H2Nbx/np+euyNxZmK33tic4zVeITqPMs4rHEAw2FoqIYZ8+DGcDQXszBbGND99Znk9
-         xooXpBrAV5zPFGOcJpxIUvpKmEkFAcUxxPDNGFBsyD4foDdEmfnpbvwbBeYMKxr3aX86
-         xRO1E0ru0s0GWyNBrv7SZjljkxRJInYvogdZF4rSUjVXkO+rriU+EpZElLE6Ttz1HOeo
-         DL+Ic+EvZoAMmGwvVHpNfj22A9CnN+SxBHaV/t0v1a30alinpsuz3kYiCZFke1fjF+S9
-         TYZM7HMzF67sjekX0DaYPpKHzurm7NquNfF4xo4x+uQ68por1+rS0RS7CipGMzR3WpO6
-         IpTw==
+        bh=LH8L1pJlWrds7cFEtRs71qU3jNm1q62GaaePGAMy94Y=;
+        b=eLwUrUAMhE2q3PDwYeFlh/D3WmY/56hN6dloeDbOuePQhg8nZSxiAHkecJ/3tbLgdF
+         vqwFacmRvr6+QzjRg0/L1m6DSJCCetdHI6p47EPyzE/k6C+fhFifaJ8BsLSAeqOSOqOL
+         P/LMMSQeWD6IoZFWJyzunJYZNTvYpNPrAhRPLGLXltE6CFrdoB3De7lgU9Nsqx8BSy5F
+         5Wm/MYy5a84tyojZI+jr4rf4QVb9N1jIsOfM5yqgMQIz6h2KDZLftHtaOnhUrN3IeyEP
+         gRTh8vHSR0G6DjqN3bdcLlFyao/tOB8WLhAHDAQ4+NWLOJ3ta4uEUh+6c+CYSja8vLku
+         UklQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729612103; x=1730216903;
+        d=1e100.net; s=20230601; t=1729612101; x=1730216901;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=VtNUTvEkNeyc6OkBElsEK0LUrP94RWEC6Ki39aacnJc=;
-        b=oiS884np8wtVpLy594Urx56Sjy3V3UlKnTdb+/MR1BwJke9hG8x6EOa5KWImA95JQS
-         nUOWj8JOaZBkemuKWfEqO4XiVFQWSQevb7v1K7+NZwmcaMzBgPNrB6QscrnAZdRe8TMY
-         CaVqmpkHUDx6/4COmo4H/zlhOonCejQrZukHXs/UL4ESglx3cIujdhsxJ9buvNwzcgW+
-         MUO02EHidTuVdLObY90J0eaS5BcvEtHBBQSNk4NsBMOGBcWMlXeppG5FMstIBcGBIUd2
-         Umm2AFbj56z9538mSct9732qWCo9YE/nqMCPkf2R0MmBOPB5C4vk1HXYxPrlYDoWBao2
-         7x2g==
-X-Gm-Message-State: AOJu0YxggPIZ2PEzxeKgiURr5W+sfwMqTeVOJ/SPjZlfm1lmNSMc6Zah
-	Phv4d2W7wq652MOkvcwiiXp52guXs6N9wRShIP/bE6uhOghq/DJYdkn02A==
-X-Google-Smtp-Source: AGHT+IEc5m8V8JDqNVQUyV34l5NKSH01+tlJus4gnAaruNi2KPyeLI7Ue9EWn3fD3VTO3k9CWlYT5g==
-X-Received: by 2002:a05:6902:138d:b0:e2b:d3da:46c8 with SMTP id 3f1490d57ef6-e2bd3da4899mr11290750276.37.1729612102515;
-        Tue, 22 Oct 2024 08:48:22 -0700 (PDT)
+        bh=LH8L1pJlWrds7cFEtRs71qU3jNm1q62GaaePGAMy94Y=;
+        b=LsjH6QsqDyP2kz8mYSxuB8VNzO6sNOPYQZfS40jCvgVSa4Q2HeDoR+39llLjx7uYwC
+         kZW811FLQVQT3FkPUZrFjsCUohxrNK7+dsgcMOlu0avATIp+mLqWb8uokt+G4OCvJdot
+         PpeYQ7HFTSy+3GdtFMzdnAxPDYisddFLnY1JIlQqP3f4JmUV35IgAeCfe8YQSkYH44gi
+         w2afN1aog3sZLAi7hRXEmewhQI3JCUAoAakH2nOu9NHFbQx3pzc6II2/ORTUzLySP3qq
+         L0gIj5S0rRZC2ITtm6V4aPY++/iakbbjt9fReueh190Zb0C+0tdj8TfjEFKpZO7sYs/+
+         CU6g==
+X-Gm-Message-State: AOJu0YwGiKYNKMSiyhhz9yLJHXf44C2hJkMRRhdBgI7cUr7JLsO7HrWE
+	bFuvsK/F+N8MjoERON3FEEN8APtBfrhf06hQVGJT5kmBUcF3/c7fjGbovQ==
+X-Google-Smtp-Source: AGHT+IFQ1WTI/IVvQWXm1m6VRywGblLE2lAuxSaOXEIGqH4nHnRp2bFPwfsTVDTZqExFEEc03q/vsQ==
+X-Received: by 2002:a05:690c:fc2:b0:6e3:39c1:1692 with SMTP id 00721157ae682-6e5bfbebc36mr138162157b3.6.1729612101221;
+        Tue, 22 Oct 2024 08:48:21 -0700 (PDT)
 Received: from localhost.localdomain ([67.7.85.114])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6e5f5d085dfsm11187407b3.123.2024.10.22.08.48.22
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6e5f5d085dfsm11187407b3.123.2024.10.22.08.48.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Oct 2024 08:48:22 -0700 (PDT)
+        Tue, 22 Oct 2024 08:48:21 -0700 (PDT)
 From: "J. S." <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-perl][PATCH 43/46] libtext-wrapi18n-perl: Drop unnecessary SRC_URI md5sum
-Date: Tue, 22 Oct 2024 11:45:01 -0400
-Message-ID: <20241022154729.20331-44-schonm@gmail.com>
+Subject: [meta-perl][PATCH 41/46] libtext-diff-perl: Drop unnecessary SRC_URI md5sum
+Date: Tue, 22 Oct 2024 11:44:59 -0400
+Message-ID: <20241022154729.20331-42-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241022154729.20331-1-schonm@gmail.com>
 References: <20241022154729.20331-1-schonm@gmail.com>
@@ -61,25 +61,25 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 22 Oct 2024 18:21:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113134
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113132
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb | 1 -
+ meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb b/meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb
-index 017e951d3..0949dbb7a 100644
---- a/meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb
-+++ b/meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb
-@@ -18,7 +18,6 @@ LIC_FILES_CHKSUM = "file://README;md5=080862e1e40cdcddef4393e137285858"
+diff --git a/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb b/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
+index 9dfadde8e..2e89b759b 100644
+--- a/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
++++ b/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
+@@ -14,7 +14,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=385c55653886acac3821999a3ccd17b3"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/O/OV/OVID/Text-Diff-${PV}.tar.gz \
+            file://run-ptest \
+           "
+-SRC_URI[md5sum] = "30d56e6dd5551ca16b8e16cc7299dc21"
+ SRC_URI[sha256sum] = "a67f50a48e313c1680cc662109ce5f913ea71454db355d0cf4db87ac89d2d2fa"
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/K/KU/KUBOTA/Text-WrapI18N-${PV}.tar.gz"
- 
--SRC_URI[md5sum] = "0799c16a00926e6c18d400c2e2861d5f"
- SRC_URI[sha256sum] = "4bd29a17f0c2c792d12c1005b3c276f2ab0fae39c00859ae1741d7941846a488"
- 
- S = "${WORKDIR}/Text-WrapI18N-${PV}"
+ S = "${WORKDIR}/Text-Diff-${PV}"
 -- 
 2.43.0
 
