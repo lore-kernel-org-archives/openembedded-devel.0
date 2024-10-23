@@ -1,977 +1,184 @@
-Return-Path: <brgl@bgdev.pl>
+Return-Path: <chanh@os.amperecomputing.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A374ED2E038
-	for <webhook@archiver.kernel.org>; Wed, 23 Oct 2024 09:44:09 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web10.4952.1729676646538816448
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 84502D2E039
+	for <webhook@archiver.kernel.org>; Wed, 23 Oct 2024 09:44:19 +0000 (UTC)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com (SJ2PR03CU001.outbound.protection.outlook.com [52.101.43.93])
+ by mx.groups.io with SMTP id smtpd.web11.4986.1729676655251882602
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Oct 2024 02:44:07 -0700
+ Wed, 23 Oct 2024 02:44:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=U+eGqENH;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.48, mailfrom: brgl@bgdev.pl)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-431616c23b5so4785245e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Oct 2024 02:44:06 -0700 (PDT)
+ dkim=fail reason="dkim: no key for signature: lookup selector1-amperemail-onmicrosoft-com._domainkey.amperemail.onmicrosoft.com on 100.100.100.100:53: no such host" header.i=@amperemail.onmicrosoft.com header.s=selector1-amperemail-onmicrosoft-com header.b=JDvB8ErB;
+ spf=pass (domain: os.amperecomputing.com, ip: 52.101.43.93, mailfrom: chanh@os.amperecomputing.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hwxUtTJYua9fGX+aNuJxC11W7veFLEznFHdcLCocuir7XkYm9Y7WkeILRTNwjcOJk50FKKL6gT4Ev/lzfI/lRG2lirKf31DkHKp6NlkQ3mqPSmXPRwgTK9NDeCSNngFi8I/XYNXtjeHOxtJsQEKc6YgrEXse5vF0ecmYYmQE1BWXq535uv7Mp6ZMZ5wN/R2jmb1H77y9TEwKT6x29Z22TSXiGR4w3Y0AxKBoVaVgM+zIUV3nisMomm2RQ8FdOjs7OBGva/aLJNQgGavG4WQvz56xPhBBaisAAznZ3RBFwgkx9aQkip7wnU83tgLkSfzqE+p6FQv2bOMKbkhODOYR9g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=avceuThjmdoVn79ywgQ86Rqj4XIqmpErxNIk3J7qpUI=;
+ b=YQ+WJ9nufxnt0AExgrQDSKpUEWTkBLvgAx4TMhNtiFTvOt/MA9JxE/eVszT7irZNWLELxPgER1oBAhTYfir2lJBnlSEc35UAjDBLI57+OtyVP3tzZVp7Oyv/3GzhXgRhaKBfLWvfBiKcgXQSh/15kRCNFlLiS/6NynKiVbG1ElqJ7L2s0xTjqMpsgFsNDmKIioijIL4EqCarINdcf/eFzf2G+NjiChmj791vYMCFWgLiMWldPJUMuLRHE2QI6ABn6yRHvyEAWnZt6G+zhGxMmysEaOjmUX7xab7BVhQuZfBmGoKvRHlVBVpql70T7Jwa+mGPi5XD2/VjHb0JSfQMnQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=os.amperecomputing.com; dmarc=pass action=none
+ header.from=amperemail.onmicrosoft.com; dkim=pass
+ header.d=amperemail.onmicrosoft.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1729676645; x=1730281445; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=aMbJmtmh7Tl/qU+PCMZ53H/vDrsN3RWGiGAdf+ZL9nU=;
-        b=U+eGqENHzBHG9DUZ2iEWz9gj4sA/lOiBbA0hs8oOLRnktlIhxU3kKUH+I9/r4dZCAC
-         DS83n/TxBmLvpKMsnSOmlEdPURw8HOh6TDJY4jsFrFF5MrMDUM2FHcyCIxef/Qqkvdl5
-         ktmQci8c8iM3goXXMDPWujDc0gfX3G22nzuzWFVA4rWodvFq8i5U1fvh3OhD+DnJqTRC
-         VMth2pxJUuzpQLRMI/7QrYleH9lhQFO9xFe0fX5WkrmFu6wkPu51Xz5ZJZtlDVo/DG+y
-         qjwLRDNM3rA3pPHMFgfkR3FDe5JhYt2jjg3R3HIyj9EUI92z+jj0pKgfdmvNV3W0LhJY
-         Yojw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729676645; x=1730281445;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=aMbJmtmh7Tl/qU+PCMZ53H/vDrsN3RWGiGAdf+ZL9nU=;
-        b=Dn0sSjKcS0bUm4/UKJMY1gxircZmH3T1lsf159C4X3JZbVAE6G+IWf3RujAof5CgGT
-         8HmKtaPiheMFfwJsUmeMomKAwIXBHueOXjW1P69f8UFbvt8Ib1MbCWWFMAtl+zRajkW1
-         UB2Vn09W7rsqYuwcHNBoeg49kEmeDAHbjqx1D7d1qst7ffDyKxDSGsIXNYHdrRC4a8fU
-         hCqoHdCCL6/T3StZoYaFDp7veG4swy8ktcAASX3dwukSEyJrRzrC0BURrAc/0H2f6z5T
-         +ni8+gbsBpY+Pbv/PyZsgxd7jCdQI4gbfTKvl/3xR+vrTWOfJK5KyLzyC0ZnQDAmGp7R
-         YQcw==
-X-Forwarded-Encrypted: i=1; AJvYcCXLBVj6lzHzwBx8Evg10aVMMYa38C05cMe0E5sfnC/CRvnO4WQm2G+CQnMZEb1BhEICPJ87+1ipdSaqlxJ4n0Yggws=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YwvzG7oQxs3n8Mac2MGlPNR9OnSIrzjO/V9ZtSzIRmYjOL/Aida
-	dN2ysCcKm8mhiZzEW9XPcov12uN9mm9CiaT8VZWc+fjAltejTmvStbC1MvlPwR0=
-X-Google-Smtp-Source: AGHT+IFXVVfyM5ba01UGFCz+le94mR0hAm1UuEtOnp77+hORgA4DpEShoiSHJ5ExSHVxmXZw8JPcRQ==
-X-Received: by 2002:a05:600c:3590:b0:431:55af:a220 with SMTP id 5b1f17b1804b1-43184459e7bmr11557985e9.12.1729676643612;
-        Wed, 23 Oct 2024 02:44:03 -0700 (PDT)
-Received: from brgl-uxlite.home ([2a01:cb1d:dc:7e00:99d3:9841:de95:cce3])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-43186c0d6ecsm11282705e9.30.2024.10.23.02.44.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Oct 2024 02:44:03 -0700 (PDT)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>,
-	Bruce Ashfield <bruce.ashfield@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Subject: [meta-oe][PATCH v2] libgpiod: update to v2.2
-Date: Wed, 23 Oct 2024 11:43:59 +0200
-Message-ID: <20241023094359.31912-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.43.0
+ d=amperemail.onmicrosoft.com; s=selector1-amperemail-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=avceuThjmdoVn79ywgQ86Rqj4XIqmpErxNIk3J7qpUI=;
+ b=JDvB8ErBu9qaSwUUVmFx3wL6Apkjp9AAAFYJvYRa+Bc3c4Aj9cMsdTMi1Fm+bu8nKbezIlCSh/3YPPyAhwBCuQYyf8UJJpY7WeUqi9fzjsIoUXyapuKdxlNgL+vmQ6nLXuDpoxBYckmWatrZueUJcxGEv1ezTu5ezcReIovAclI=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amperemail.onmicrosoft.com;
+Received: from BL3PR01MB7057.prod.exchangelabs.com (2603:10b6:208:35c::16) by
+ SA1PR01MB7326.prod.exchangelabs.com (2603:10b6:806:1f5::21) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7982.34; Wed, 23 Oct 2024 09:44:11 +0000
+Received: from BL3PR01MB7057.prod.exchangelabs.com
+ ([fe80::b69e:5684:ed7c:4d09]) by BL3PR01MB7057.prod.exchangelabs.com
+ ([fe80::b69e:5684:ed7c:4d09%5]) with mapi id 15.20.8093.018; Wed, 23 Oct 2024
+ 09:44:10 +0000
+Message-ID: <f4956959-0c24-4f66-9048-f52b7c46a377@amperemail.onmicrosoft.com>
+Date: Wed, 23 Oct 2024 16:44:02 +0700
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-networking,v2][PATCH] mctp: upgrade 1.1 -> 2.0
+To: Jeremy Kerr <jk@codeconstruct.com.au>, raj.khem@gmail.com
+Cc: Chanh Nguyen <chanh@os.amperecomputing.com>,
+ openembedded-devel@lists.openembedded.org,
+ Phong Vo <phong@os.amperecomputing.com>,
+ Thang Nguyen <thang@os.amperecomputing.com>,
+ Quan Nguyen <quan@os.amperecomputing.com>,
+ Khanh Pham <khpham@amperecomputing.com>,
+ Thu Nguyen <tbnguyen@amperecomputing.com>
+References: <20241017063626.2089926-1-chanh@os.amperecomputing.com>
+ <CAMKF1srdcMcJ6CVEm3Cf42nEyFug+kDO0yGWQ53GGjG1TADGfw@mail.gmail.com>
+ <64bbd9ab-d24b-4085-9e7b-abbfbc286264@amperemail.onmicrosoft.com>
+ <CAMKF1sqr6WcQHBXietnNMmVqSFq2wenkMtfLSqyD5OCRxeirEQ@mail.gmail.com>
+ <66ef3f0b-431c-4d4e-a3a4-9519503feeac@amperemail.onmicrosoft.com>
+ <3047b261e2b8da8c814e5a33d6229a15523a2ecd.camel@codeconstruct.com.au>
+Content-Language: en-US
+From: Chanh Nguyen <chanh@amperemail.onmicrosoft.com>
+In-Reply-To: <3047b261e2b8da8c814e5a33d6229a15523a2ecd.camel@codeconstruct.com.au>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SJ0PR05CA0016.namprd05.prod.outlook.com
+ (2603:10b6:a03:33b::21) To BL3PR01MB7057.prod.exchangelabs.com
+ (2603:10b6:208:35c::16)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL3PR01MB7057:EE_|SA1PR01MB7326:EE_
+X-MS-Office365-Filtering-Correlation-Id: c6e05c85-3e2f-4867-90e7-08dcf3473f2e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
+X-Microsoft-Antispam-Message-Info: 
+	=?utf-8?B?UXRDbnBJS2d2QWZXb1R6cXB4Q0hqcGx2am0ycmVzQ1NCSzExcTRIYnphWWZy?=
+ =?utf-8?B?Q0dxcEhoekJtMXBEMFJUWGJyaG1qU0NsTi9uOFJpcVNJcEJVSG55bGtZUEZR?=
+ =?utf-8?B?WC9yVjdjYkNHNzVWNVFtdzVCZ1dzV2R6dVZVSzRZbVRaWkM2N1VLZ2huOHBC?=
+ =?utf-8?B?MWRxZXd2UzlCbkREQUNKUDdqZVVvQmtKU09xa3FLZGxrSFQ2Zm9oNGlZZVpo?=
+ =?utf-8?B?dXJ4dlpSS3VBSHhmMEVYd01UYytTaUVTVzVYVENGQlNVTTBnYzJsMzN4dmFk?=
+ =?utf-8?B?aldlQTV6K0luVUV2bmlIMm5LcUZVUUZ3dWsvVkVGdjdLWS9Zb1czUW52WjNK?=
+ =?utf-8?B?NWxpbWxtd2tpZDJNTjRpanlOSW9xTXM2Mys5TTJvNnNxSlpYbUU4NFdhUGdH?=
+ =?utf-8?B?M2J0ODFrNUVCSm9XNC8veHlpZGh0L3FtQjVrRTFqMnhiVFQ1clZUUXB3VjUz?=
+ =?utf-8?B?bzBrSjh3emsycmRGYWZjaDVZeGxZdTl6MDU2Y2Z4T0tLc1BLWWhOVEpaOFRI?=
+ =?utf-8?B?YUxubXJkNEI2bS9GUG9GK0xrTEVtempWZ2EwTm83YVJ3eUwxRW5vbkNvVEpi?=
+ =?utf-8?B?MmVUeitqYkU1NXZUakFNb0VybEk4QUgzMG1YTzJYd1RBdDFjdktlU1grNWx0?=
+ =?utf-8?B?M3hxRm9vU1VSRmxjK2RUVXBmK3lQS1MyYUg5Q284S01RRlZKYVFzYW1CNWxl?=
+ =?utf-8?B?TjZwVXo2TWpDMzg1RHhocStvQmx1UFRuYUg1eE9iS3hRNzJPaHhOR1VKUlFC?=
+ =?utf-8?B?akh2REdzM29SWVd6Zk4yR2tHRWZPWit3enZXaEVmcTJXQlA0bG8wbE5IRGJ1?=
+ =?utf-8?B?TnV1T3BoQUU0TitUMlg3dzh1REZDZTBhZVNTRkdPY29mbHh2ang1UVZ1dVZV?=
+ =?utf-8?B?RzVzdGt6RWhnZWZXTm1DR3ViVWRNZlJlS3p3NHFKdTY4MXRiMnFLZWJ5WlZu?=
+ =?utf-8?B?ZlZWOGNVOUtTVUlVUHVsQ1B0TlhtV1I2QnJmZ0pzMmcvYTN1ZTVKQ08xUDNj?=
+ =?utf-8?B?V1NlSFA2UjNnVkZ2SkQ3ZTFucVNzY1JXd3RyemprOFF5aDJLYzkrbGVKb0Mv?=
+ =?utf-8?B?WldPMlNIK28rOTFhMDdSNnhIOEF3R21wcHdUYzQ3KzArTnZyZDMycUVKbVI0?=
+ =?utf-8?B?SVp2RmQ3UndNWWJzOWFobVRzeFQwaUw4T21LdzFOcXdJclFaQ0tKL1VEeHYy?=
+ =?utf-8?B?alNua2JDYTlFWWw4bEhIdkErb1dqNFIvMElSTHB6OHordGpld3JQQkNZU2xN?=
+ =?utf-8?B?RzBxNklVeFMvUHF1QWgxVktXKzdhS1FVSVJUSDYzOGZTVDJkWUZHOTlSMUQz?=
+ =?utf-8?B?akx5MkNvSzhCaFdheXJtaFpZVUZNNGd0TW93MTZNZFVDZEk4d0FyR0Ntd3Bp?=
+ =?utf-8?B?aHh4bjJmdStBNERtRmpFY1hQcHFFSWI0cFpId1E1anBoNXFseXZ1K3RuWkxx?=
+ =?utf-8?B?MVkxYmUxTHREY0YwMEtURXpqUzBNVUpnRUpDMUx5WDU5OENLYzdZTUVSQk9W?=
+ =?utf-8?B?NkIzYlZ3YmhQamg2TUJrNXRGZEhzNXYzNE4rdHhDRDh5MStkL0RDUVB5SjE2?=
+ =?utf-8?B?dm9xeHFLaDc4Rm51TVZSMUhyRHNUYUNQQTN3U3lWZzhHb0NUcXZ1ZnNtQWlx?=
+ =?utf-8?B?UXZhZThyRW5GT2RZSi9rMVA1bkNWOWVKMzNsMlVJcE9COGczWnRDbDlTbktP?=
+ =?utf-8?Q?8bcVTEDlO/V+T+m5+pKk?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL3PR01MB7057.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?WU5kR2VLa3ZiTWllMnA3ZFhwNjdlc2gzb0ErdkhhRldqdHIvWVE2cnp5eURG?=
+ =?utf-8?B?cVJGaGV1MGxHYzVpYUhMY3ZGWmlqbnFEdkovTmNtNHdyVXg4VlNaKzNLUzdN?=
+ =?utf-8?B?SkV1a28rMGRFOUU1ZFFEM3NTL2tuZzRSY3pnc1pET3gySy9ycXZ0RHQwWUpw?=
+ =?utf-8?B?bnk5dDc2UW5RU2Q5UlBqSEhKc2NoU0RnZUhUQ1Urc3pOQXU4cXBHQTNWUGNI?=
+ =?utf-8?B?U1ZQMHRraFAwZmtkd1NvMm1rL3FVWEZsN0U1MW9RZDBlb09uUUxlajZNQ1Zu?=
+ =?utf-8?B?WWt3S3VJSExucFoxcnVsNms0Q1dSZjM2dmhsMVhuaTk2bmlaUFdOUXFUVkZC?=
+ =?utf-8?B?RDRqUUhlOHF0Rm5zOFNackhVQ3B0NktWVDcyR2NQVUM1YkVRTVZIZjl0VTZm?=
+ =?utf-8?B?OXNTZTRLZ3FjNTM4TmxCMUEySFVDa0MrQzQ5K1hRM1M2bEgwRDVMMmE1aFg3?=
+ =?utf-8?B?WWU5a05PaE95M21nSEZqamlWNUV5SUp2NVF3WWV1cXRhRlFWdDFtT1cvR2xW?=
+ =?utf-8?B?S2trNzNjZ2FoQVc1TmNNeWgxb09iaUx0Zm1tR3AxTVBRZjJtaWNlT0pldzNP?=
+ =?utf-8?B?MHNIY1QyNWxrUFI3bGZsdDNlblR2ZlhTZmJEN2dGM3dCOGFDUFRCZ0VCbVRi?=
+ =?utf-8?B?TkNWYVVxZjlzdXN0MnpJamZOU2t1Q3BTRS9ackpYYWJiTFlpeFJRK3ExUU03?=
+ =?utf-8?B?QkpiTE92L2d2a0JkdVZLSHFycmVXZXFwa3ZHc29yQXdZVlVvVHVBKzlJM1lD?=
+ =?utf-8?B?YUtEdDA5Q0RYWENxVzg3eE5OdEI1OURsSmRxVFdBVEs1MVBkemxRMG9mVnVZ?=
+ =?utf-8?B?bUtNMnhaZGhKYUhjQ25iODdnOHhKelVPcFhaSDBtVXhQaUN2SHlaSU1EVFhx?=
+ =?utf-8?B?YjFtZXRYd043VUpldTVjR05teHpUM3BOVzZEZmJzbThHdTFQaW0vL1lWOXNG?=
+ =?utf-8?B?YWxaU01oQ2JZNnZ2WVZ5bEllRUdNMmlPSjRnTzJoc1N2V2ZsRERndFh0QTZH?=
+ =?utf-8?B?TnZLU3BlNnkvWjhvUWJ2eXlmbVpKQkhmdkRsUndJQ2NWOTdYTHI2K1BSSUZY?=
+ =?utf-8?B?Ky92dlRKb1ZCL2Z1cE5wL0lmMFBZV1pqUGViOGE0ekJKM2ZEb1ZmclYyUEth?=
+ =?utf-8?B?cXBWckxpd0s4OWVudVY5aDh1Y1RHaU1tSXV3bjBvZ3BJWTRyNk1McWZ5ZjFG?=
+ =?utf-8?B?eW82cWZVdmVBNzJZNEdjL1BESldzalhub0RpbWY4L0pQdU15OThIbEdqOEhT?=
+ =?utf-8?B?aEVuTnFhVGlYNCtWWXl6a1ZEUzNzY3RsK2JPZW1vQlZyaXkxQ2RGbEFOQ25u?=
+ =?utf-8?B?VTE4NTdSNU53d05lSHlwSlZnTXUwZXFhYW1GOGNleURXUzRuNWpiRHZINWZY?=
+ =?utf-8?B?Z3VEbDZCeEtITG5KWVcvRjB2L3B0clcvdWZqRVA2L3V2YmtvVFpNSFJyd2tp?=
+ =?utf-8?B?RStlTUs2MlhjSEJ2Nmo1YjZQYXgzcXpFazNMTUcvLzFPbTlJdGlFY1lLblBx?=
+ =?utf-8?B?NHlkS1lNZktBZEl5UGJCNWtVelNISWNWbTlYT3E3eTIrUnhmL0tFNVdqaGZF?=
+ =?utf-8?B?RktLTjFWbXRtYnBSbmQ2MXhFVmllWVJhTlBUUjBEbi9YdUhUM1U3WVpDVENF?=
+ =?utf-8?B?dERId3FUNlJCRW1TZjI1aXVmNm40eFBBc1doT1RqeTNud1B0ZVE4TWdINHVz?=
+ =?utf-8?B?RktCbXFwSnMzSEdBSmdZeWZ5b09kSkkxZ0dKaDNlNUVkSVk5VW0wcGl1cWlu?=
+ =?utf-8?B?N0tPNEllWU9WclljeEFZOHpSeDhseERMSTdEd0FBMjZoSHdOaUJmeHQ4RzVX?=
+ =?utf-8?B?aDNUYXZUeGJoRWFjSjBOditRS25jZVB5YlgwYnZsV05UM2MvMjV5aTkvR3l6?=
+ =?utf-8?B?Qm5CeUdZRnZoa3NmZ0g4ZW44Q2VnNzJmTHNLWGZ0OG5oT0hUN1ZwVzBMcjFB?=
+ =?utf-8?B?MjhJZ1hFOVFVRW16V2RyNWU0OUtVekxsbU9KUWs5R3owYnRmRWlOc2dVQlJW?=
+ =?utf-8?B?UEFHUndWRHhWczdlUlRBUjdCbHkvYTJhTlFaOXRvZDE1dWp2WTFFZDg1ekI4?=
+ =?utf-8?B?K2NnTkZQNXFLeHdTbE9MN1ZZTGhTMFg1NjlwaCthRklYQW5iWlUzTWNlMXJz?=
+ =?utf-8?B?bE5CMllnMTZINmhtY2NNTXJlTGlTeElFTkhXMnJwdC9JbHpXcHlad1MxS0Fj?=
+ =?utf-8?Q?n6vqJwivdN6p8k/f2hTa8SY=3D?=
+X-OriginatorOrg: amperemail.onmicrosoft.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c6e05c85-3e2f-4867-90e7-08dcf3473f2e
+X-MS-Exchange-CrossTenant-AuthSource: BL3PR01MB7057.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2024 09:44:10.9069
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3bc2b170-fd94-476d-b0ce-4229bdc904a7
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: jvVzJSKn00uRgMN2dgimhEidES4TyidXHTH2wvn/oJEw5WyrsEoUKue/W9W4YTmuk4xAZ4Q5VLLxQlO+0SVq4wHcSclr6Vl4+StaBUGSbXDJzwYCHo9MGDUrJx7erI8G
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR01MB7326
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Oct 2024 09:44:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113146
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Oct 2024 09:44:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113147
 
-From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-This is a big update for libgpiod bringing in the D-Bus daemon and its
-command-line client. This is why the patch is pretty hefty. The majority
-of the line count comes from the removed patch that is now upstream but
-the v2.2 recipe also now contains a lot of bits and pieces that make the
-D-Bus daemon work both with system as well as sysvinit.
 
-The project now packages the systemd service and udev rules that allow
-the manager to run under its own user in a well sandboxed environment
-but the sysvsinit script is carried in the recipe as I don't want to
-put support for legacy systems in libgpiod repo.
+On 23/10/2024 16:38, Jeremy Kerr wrote:
+> Hi Chanh,
+>> I saw my patch v3 was merged to the master branch of meta-openembedded
+>> https://github.com/openembedded/meta-openembedded/commit/b51e4288b93a97467b1d7dd77b4fab537bc311e3
+> 
+> Ah, neat. Khem had just mentioned that he had merged v2, not v3.
+> 
+> So, all looks good here? unless there are other build failures?
 
-The patch also updates the ptests for libgpiod to run three new
-test-suites: one for GLib bindings, one for the command-line D-Bus
-client and finally one testing some daemon corner-cases not supported by
-the client.
+Yes, Khem had merged v3 
+(https://patchwork.yoctoproject.org/project/oe/patch/20241018092326.2152223-1-chanh@os.amperecomputing.com/). 
+This patch is good for me.
 
-Build tested with various config options with systemd and sysvinit (the
-latter with glibc and musl) on 32- and 64-bit architectures.
+So, I think we don't need to do anything more.
 
-The complete changelog since v2.1 (taken verbatim from the NEWS file) is
-below:
-
-libgpiod v2.2
-=============
-
-New features:
-- add GObject bindings with introspection
-- add a D-Bus interface to libgpiod together with a daemon implementing it and
-  a command-line client
-- split out the common shell test code for gpio-tools into a reusable test
-  harness for GPIO command-line tools
-- add minutes as a new supported time unit for tools and allow longer periods
-  for timeouts, line holding, etc.
-- add a script for generating sdist and wheels for python bindings
-- migrate C++ tests to using Catch2 v3
-
-Improvements:
-- relicense C++ bindings under LGPL-2.1-or-later in order to make the project
-  more attractive to users with GPL-3.0 restrictions
-- remove dependency on grep from tools' tests
-- make shell scripts pass shellcheck treewide
-- use ppoll() in tools to actually achieve the advertised microsecond
-  granularity of timeouts
-- documentation improvements
-- improve typing info in python bindings
-- improve __repr__() implementations in python bindings
-- make reconfiguring lines more flexible in python bindings by relaxing the
-  requirement to carry the ordering of the config entries from the request
-- support casting of line.Value to bool in python bindings
-- various new test-cases for improved coverage treewide
-- align the test cases with the current kernel requirement for specifying
-  direction explicitly when reconfiguring lines
-
-Bug fixes:
-- fix C++ bindings build using slibtool
-- accept the new style automatic GPIO chip labels from gpio-sim in bash tests
-- fix C++ tests with recent kernels which introduced stricter reconfigure
-  behavior
-- fix a use-after-free bug in python bindings
-- fix passing the event clock property to line requests in python bindings
-- fix a memory leak in tools
-- make sure the string buffers in line-info and chip-info are big enough to not
-  truncate the strings they hold below the size accepted by the kernel
-- remove buggy and unnecessary flags sanitization from line-config
-- fix python bindings installation with Makefile build
-- sanitize the return values of GPIO ioctl()s which in some cases may be
-  erroneously positive
-- fix requesting lines by name with multiple entries in python bindings
-
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
----
-Changes in v2:
-- fix SRC_URI[sha256sum] value
-
- ...cxx-Migrate-C-tests-to-use-Catch2-v3.patch | 530 ------------------
- .../libgpiod/libgpiod-2.x/gpio-manager.init   |  76 +++
- .../libgpiod/libgpiod-2.x/run-ptest           |  43 +-
- .../libgpiod/libgpiod_2.1.3.bb                |  33 --
- .../recipes-support/libgpiod/libgpiod_2.2.bb  |  98 ++++
- 5 files changed, 205 insertions(+), 575 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-Migrate-C-tests-to-use-Catch2-v3.patch
- create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.x/gpio-manager.init
- delete mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_2.1.3.bb
- create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
-
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-Migrate-C-tests-to-use-Catch2-v3.patch b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-Migrate-C-tests-to-use-Catch2-v3.patch
-deleted file mode 100644
-index ac1eff510..000000000
---- a/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-Migrate-C-tests-to-use-Catch2-v3.patch
-+++ /dev/null
-@@ -1,530 +0,0 @@
--From 0d3e1b3923a1fac80e9d75d8b5e33cd36f4fe659 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 31 May 2024 09:03:22 -0700
--Subject: [PATCH] bindings: cxx: Migrate C++ tests to use Catch2 v3
--
--Catch2 v3.x has API changes which needs to be addressed
--in the tests themselves, hence this changeset is to fix
--those.
--
--Upstream-Status: Submitted [https://lore.kernel.org/linux-gpio/20240531184223.3949069-1-raj.khem@gmail.com/T/#u]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-----
-- bindings/cxx/tests/Makefile.am              |  2 +-
-- bindings/cxx/tests/gpiod-cxx-test-main.cpp  |  3 +--
-- bindings/cxx/tests/helpers.hpp              |  8 +++---
-- bindings/cxx/tests/tests-chip-info.cpp      | 30 ++++++++++-----------
-- bindings/cxx/tests/tests-chip.cpp           | 14 +++++-----
-- bindings/cxx/tests/tests-edge-event.cpp     |  2 +-
-- bindings/cxx/tests/tests-info-event.cpp     |  2 +-
-- bindings/cxx/tests/tests-line-config.cpp    |  2 +-
-- bindings/cxx/tests/tests-line-info.cpp      | 22 +++++++--------
-- bindings/cxx/tests/tests-line-request.cpp   | 16 +++++------
-- bindings/cxx/tests/tests-line-settings.cpp  |  2 +-
-- bindings/cxx/tests/tests-line.cpp           |  2 +-
-- bindings/cxx/tests/tests-misc.cpp           |  2 +-
-- bindings/cxx/tests/tests-request-config.cpp | 10 +++----
-- configure.ac                                |  4 +--
-- 15 files changed, 60 insertions(+), 61 deletions(-)
--
--diff --git a/bindings/cxx/tests/Makefile.am b/bindings/cxx/tests/Makefile.am
--index fbf80a1..d9284da 100644
----- a/bindings/cxx/tests/Makefile.am
--+++ b/bindings/cxx/tests/Makefile.am
--@@ -4,7 +4,7 @@
-- AM_CXXFLAGS = -I$(top_srcdir)/bindings/cxx/ -I$(top_srcdir)/include
-- AM_CXXFLAGS += -I$(top_srcdir)/tests/gpiosim/
-- AM_CXXFLAGS += -Wall -Wextra -g -std=gnu++17 $(CATCH2_CFLAGS)
---AM_LDFLAGS = -pthread
--+AM_LDFLAGS = -pthread $(CATCH2_LIBS)
-- LDADD = $(top_builddir)/bindings/cxx/libgpiodcxx.la
-- LDADD += $(top_builddir)/tests/gpiosim/libgpiosim.la
-- 
--diff --git a/bindings/cxx/tests/gpiod-cxx-test-main.cpp b/bindings/cxx/tests/gpiod-cxx-test-main.cpp
--index 11bf8e5..ec48286 100644
----- a/bindings/cxx/tests/gpiod-cxx-test-main.cpp
--+++ b/bindings/cxx/tests/gpiod-cxx-test-main.cpp
--@@ -1,5 +1,4 @@
-- // SPDX-License-Identifier: GPL-2.0-or-later
-- // SPDX-FileCopyrightText: 2017-2021 Bartosz Golaszewski <bartekgola@gmail.com>
-- 
---#define CATCH_CONFIG_MAIN
---#include <catch2/catch.hpp>
--+#include <catch2/catch_all.hpp>
--diff --git a/bindings/cxx/tests/helpers.hpp b/bindings/cxx/tests/helpers.hpp
--index 62d9827..62bbdf5 100644
----- a/bindings/cxx/tests/helpers.hpp
--+++ b/bindings/cxx/tests/helpers.hpp
--@@ -4,13 +4,13 @@
-- #ifndef __GPIOD_CXX_TEST_HELPERS_HPP__
-- #define __GPIOD_CXX_TEST_HELPERS_HPP__
-- 
---#include <catch2/catch.hpp>
--+#include <catch2/catch_all.hpp>
-- #include <regex>
-- #include <string>
-- #include <sstream>
-- #include <system_error>
-- 
---class system_error_matcher : public Catch::MatcherBase<::std::system_error>
--+class system_error_matcher : public Catch::Matchers::MatcherBase<::std::system_error>
-- {
-- public:
-- 	explicit system_error_matcher(int expected_errno);
--@@ -21,7 +21,7 @@ private:
-- 	::std::error_condition _m_cond;
-- };
-- 
---class regex_matcher : public Catch::MatcherBase<::std::string>
--+class regex_matcher : public Catch::Matchers::MatcherBase<::std::string>
-- {
-- public:
-- 	explicit regex_matcher(const ::std::string& pattern);
--@@ -33,7 +33,7 @@ private:
-- 	::std::string _m_repr;
-- };
-- 
---template<class T> class stringify_matcher : public Catch::MatcherBase<T>
--+template<class T> class stringify_matcher : public Catch::Matchers::MatcherBase<T>
-- {
-- public:
-- 	explicit stringify_matcher(const ::std::string& expected) : _m_expected(expected)
--diff --git a/bindings/cxx/tests/tests-chip-info.cpp b/bindings/cxx/tests/tests-chip-info.cpp
--index 717c387..2c54f53 100644
----- a/bindings/cxx/tests/tests-chip-info.cpp
--+++ b/bindings/cxx/tests/tests-chip-info.cpp
--@@ -1,7 +1,7 @@
-- // SPDX-License-Identifier: GPL-2.0-or-later
-- // SPDX-FileCopyrightText: 2021-2022 Bartosz Golaszewski <brgl@bgdev.pl>
-- 
---#include <catch2/catch.hpp>
--+#include <catch2/catch_all.hpp>
-- #include <gpiod.hpp>
-- #include <sstream>
-- 
--@@ -24,12 +24,12 @@ TEST_CASE("chip_info properties can be read", "[chip-info][chip]")
-- 
-- 	SECTION("get chip name")
-- 	{
---		REQUIRE_THAT(info.name(), Catch::Equals(sim.name()));
--+		REQUIRE_THAT(info.name(), Catch::Matchers::Equals(sim.name()));
-- 	}
-- 
-- 	SECTION("get chip label")
-- 	{
---		REQUIRE_THAT(info.label(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(info.label(), Catch::Matchers::Equals("foobar"));
-- 	}
-- 
-- 	SECTION("get num_lines")
--@@ -52,12 +52,12 @@ TEST_CASE("chip_info can be copied and moved", "[chip-info]")
-- 	{
-- 		auto copy(info);
-- 
---		REQUIRE_THAT(copy.name(), Catch::Equals(sim.name()));
---		REQUIRE_THAT(copy.label(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(copy.name(), Catch::Matchers::Equals(sim.name()));
--+		REQUIRE_THAT(copy.label(), Catch::Matchers::Equals("foobar"));
-- 		REQUIRE(copy.num_lines() == 4);
-- 
---		REQUIRE_THAT(info.name(), Catch::Equals(sim.name()));
---		REQUIRE_THAT(info.label(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(info.name(), Catch::Matchers::Equals(sim.name()));
--+		REQUIRE_THAT(info.label(), Catch::Matchers::Equals("foobar"));
-- 		REQUIRE(info.num_lines() == 4);
-- 	}
-- 
--@@ -67,12 +67,12 @@ TEST_CASE("chip_info can be copied and moved", "[chip-info]")
-- 
-- 		copy = info;
-- 
---		REQUIRE_THAT(copy.name(), Catch::Equals(sim.name()));
---		REQUIRE_THAT(copy.label(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(copy.name(), Catch::Matchers::Equals(sim.name()));
--+		REQUIRE_THAT(copy.label(), Catch::Matchers::Equals("foobar"));
-- 		REQUIRE(copy.num_lines() == 4);
-- 
---		REQUIRE_THAT(info.name(), Catch::Equals(sim.name()));
---		REQUIRE_THAT(info.label(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(info.name(), Catch::Matchers::Equals(sim.name()));
--+		REQUIRE_THAT(info.label(), Catch::Matchers::Equals("foobar"));
-- 		REQUIRE(info.num_lines() == 4);
-- 	}
-- 
--@@ -80,8 +80,8 @@ TEST_CASE("chip_info can be copied and moved", "[chip-info]")
-- 	{
-- 		auto moved(std::move(info));
-- 
---		REQUIRE_THAT(moved.name(), Catch::Equals(sim.name()));
---		REQUIRE_THAT(moved.label(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(moved.name(), Catch::Matchers::Equals(sim.name()));
--+		REQUIRE_THAT(moved.label(), Catch::Matchers::Equals("foobar"));
-- 		REQUIRE(moved.num_lines() == 4);
-- 	}
-- 
--@@ -91,8 +91,8 @@ TEST_CASE("chip_info can be copied and moved", "[chip-info]")
-- 
-- 		moved = ::std::move(info);
-- 
---		REQUIRE_THAT(moved.name(), Catch::Equals(sim.name()));
---		REQUIRE_THAT(moved.label(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(moved.name(), Catch::Matchers::Equals(sim.name()));
--+		REQUIRE_THAT(moved.label(), Catch::Matchers::Equals("foobar"));
-- 		REQUIRE(moved.num_lines() == 4);
-- 	}
-- }
--diff --git a/bindings/cxx/tests/tests-chip.cpp b/bindings/cxx/tests/tests-chip.cpp
--index c5ec19b..1ab7add 100644
----- a/bindings/cxx/tests/tests-chip.cpp
--+++ b/bindings/cxx/tests/tests-chip.cpp
--@@ -1,7 +1,7 @@
-- // SPDX-License-Identifier: GPL-2.0-or-later
-- // SPDX-FileCopyrightText: 2021-2022 Bartosz Golaszewski <brgl@bgdev.pl>
-- 
---#include <catch2/catch.hpp>
--+#include <catch2/catch_all.hpp>
-- #include <gpiod.hpp>
-- #include <sstream>
-- #include <system_error>
--@@ -48,9 +48,9 @@ TEST_CASE("chip constructor works", "[chip]")
-- 			.build();
-- 
-- 		::gpiod::chip first(sim.dev_path());
---		REQUIRE_THAT(first.get_info().label(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(first.get_info().label(), Catch::Matchers::Equals("foobar"));
-- 		::gpiod::chip second(::std::move(first));
---		REQUIRE_THAT(second.get_info().label(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(second.get_info().label(), Catch::Matchers::Equals("foobar"));
-- 	}
-- }
-- 
--@@ -70,9 +70,9 @@ TEST_CASE("chip operators work", "[chip]")
-- 
-- 		::gpiod::chip moved_chip(moved_sim.dev_path());
-- 
---		REQUIRE_THAT(chip.get_info().label(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(chip.get_info().label(), Catch::Matchers::Equals("foobar"));
-- 		chip = ::std::move(moved_chip);
---		REQUIRE_THAT(chip.get_info().label(), Catch::Equals("moved"));
--+		REQUIRE_THAT(chip.get_info().label(), Catch::Matchers::Equals("moved"));
-- 	}
-- 
-- 	SECTION("boolean operator")
--@@ -94,7 +94,7 @@ TEST_CASE("chip properties can be read", "[chip]")
-- 
-- 	SECTION("get device path")
-- 	{
---		REQUIRE_THAT(chip.path(), Catch::Equals(sim.dev_path()));
--+		REQUIRE_THAT(chip.path(), Catch::Matchers::Equals(sim.dev_path()));
-- 	}
-- 
-- 	SECTION("get file descriptor")
--@@ -169,7 +169,7 @@ TEST_CASE("stream insertion operator works for chip", "[chip]")
-- 			    "\", label=\"foobar\", num_lines=4))";
-- 
-- 		buf << chip;
---		REQUIRE_THAT(buf.str(), Catch::Equals(expected.str()));
--+		REQUIRE_THAT(buf.str(), Catch::Matchers::Equals(expected.str()));
-- 	}
-- 
-- 	SECTION("closed chip")
--diff --git a/bindings/cxx/tests/tests-edge-event.cpp b/bindings/cxx/tests/tests-edge-event.cpp
--index 19a6ab3..db387be 100644
----- a/bindings/cxx/tests/tests-edge-event.cpp
--+++ b/bindings/cxx/tests/tests-edge-event.cpp
--@@ -1,7 +1,7 @@
-- // SPDX-License-Identifier: GPL-2.0-or-later
-- // SPDX-FileCopyrightText: 2022 Bartosz Golaszewski <brgl@bgdev.pl>
-- 
---#include <catch2/catch.hpp>
--+#include <catch2/catch_all.hpp>
-- #include <chrono>
-- #include <gpiod.hpp>
-- #include <sstream>
--diff --git a/bindings/cxx/tests/tests-info-event.cpp b/bindings/cxx/tests/tests-info-event.cpp
--index 21c0ef0..f7ae309 100644
----- a/bindings/cxx/tests/tests-info-event.cpp
--+++ b/bindings/cxx/tests/tests-info-event.cpp
--@@ -1,7 +1,7 @@
-- // SPDX-License-Identifier: GPL-2.0-or-later
-- // SPDX-FileCopyrightText: 2022 Bartosz Golaszewski <brgl@bgdev.pl>
-- 
---#include <catch2/catch.hpp>
--+#include <catch2/catch_all.hpp>
-- #include <chrono>
-- #include <filesystem>
-- #include <gpiod.hpp>
--diff --git a/bindings/cxx/tests/tests-line-config.cpp b/bindings/cxx/tests/tests-line-config.cpp
--index 5e439a1..2f510fb 100644
----- a/bindings/cxx/tests/tests-line-config.cpp
--+++ b/bindings/cxx/tests/tests-line-config.cpp
--@@ -1,7 +1,7 @@
-- // SPDX-License-Identifier: GPL-2.0-or-later
-- // SPDX-FileCopyrightText: 2022 Bartosz Golaszewski <brgl@bgdev.pl>
-- 
---#include <catch2/catch.hpp>
--+#include <catch2/catch_all.hpp>
-- #include <gpiod.hpp>
-- 
-- #include "gpiosim.hpp"
--diff --git a/bindings/cxx/tests/tests-line-info.cpp b/bindings/cxx/tests/tests-line-info.cpp
--index 21211f2..8589da3 100644
----- a/bindings/cxx/tests/tests-line-info.cpp
--+++ b/bindings/cxx/tests/tests-line-info.cpp
--@@ -1,7 +1,7 @@
-- // SPDX-License-Identifier: GPL-2.0-or-later
-- // SPDX-FileCopyrightText: 2022 Bartosz Golaszewski <brgl@bgdev.pl>
-- 
---#include <catch2/catch.hpp>
--+#include <catch2/catch_all.hpp>
-- #include <gpiod.hpp>
-- #include <string>
-- 
--@@ -35,9 +35,9 @@ TEST_CASE("get_line_info() works", "[chip][line-info]")
-- 		auto info = chip.get_line_info(0);
-- 
-- 		REQUIRE(info.offset() == 0);
---		REQUIRE_THAT(info.name(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(info.name(), Catch::Matchers::Equals("foobar"));
-- 		REQUIRE(info.used());
---		REQUIRE_THAT(info.consumer(), Catch::Equals("hog"));
--+		REQUIRE_THAT(info.consumer(), Catch::Matchers::Equals("hog"));
-- 		REQUIRE(info.direction() == ::gpiod::line::direction::OUTPUT);
-- 		REQUIRE_FALSE(info.active_low());
-- 		REQUIRE(info.bias() == ::gpiod::line::bias::UNKNOWN);
--@@ -74,9 +74,9 @@ TEST_CASE("line properties can be retrieved", "[line-info]")
-- 		auto info6 = chip.get_line_info(6);
-- 
-- 		REQUIRE(info4.offset() == 4);
---		REQUIRE_THAT(info4.name(), Catch::Equals("baz"));
--+		REQUIRE_THAT(info4.name(), Catch::Matchers::Equals("baz"));
-- 		REQUIRE(info4.used());
---		REQUIRE_THAT(info4.consumer(), Catch::Equals("hog4"));
--+		REQUIRE_THAT(info4.consumer(), Catch::Matchers::Equals("hog4"));
-- 		REQUIRE(info4.direction() == direction::OUTPUT);
-- 		REQUIRE(info4.edge_detection() == edge::NONE);
-- 		REQUIRE_FALSE(info4.active_low());
--@@ -102,10 +102,10 @@ TEST_CASE("line_info can be copied and moved")
-- 	{
-- 		auto copy(info);
-- 		REQUIRE(copy.offset() == 2);
---		REQUIRE_THAT(copy.name(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(copy.name(), Catch::Matchers::Equals("foobar"));
-- 		/* info can still be used */
-- 		REQUIRE(info.offset() == 2);
---		REQUIRE_THAT(info.name(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(info.name(), Catch::Matchers::Equals("foobar"));
-- 	}
-- 
-- 	SECTION("assignment operator works")
--@@ -113,17 +113,17 @@ TEST_CASE("line_info can be copied and moved")
-- 		auto copy = chip.get_line_info(0);
-- 		copy = info;
-- 		REQUIRE(copy.offset() == 2);
---		REQUIRE_THAT(copy.name(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(copy.name(), Catch::Matchers::Equals("foobar"));
-- 		/* info can still be used */
-- 		REQUIRE(info.offset() == 2);
---		REQUIRE_THAT(info.name(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(info.name(), Catch::Matchers::Equals("foobar"));
-- 	}
-- 
-- 	SECTION("move constructor works")
-- 	{
-- 		auto copy(::std::move(info));
-- 		REQUIRE(copy.offset() == 2);
---		REQUIRE_THAT(copy.name(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(copy.name(), Catch::Matchers::Equals("foobar"));
-- 	}
-- 
-- 	SECTION("move assignment operator works")
--@@ -131,7 +131,7 @@ TEST_CASE("line_info can be copied and moved")
-- 		auto copy = chip.get_line_info(0);
-- 		copy = ::std::move(info);
-- 		REQUIRE(copy.offset() == 2);
---		REQUIRE_THAT(copy.name(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(copy.name(), Catch::Matchers::Equals("foobar"));
-- 	}
-- }
-- 
--diff --git a/bindings/cxx/tests/tests-line-request.cpp b/bindings/cxx/tests/tests-line-request.cpp
--index 9632ae0..af8b979 100644
----- a/bindings/cxx/tests/tests-line-request.cpp
--+++ b/bindings/cxx/tests/tests-line-request.cpp
--@@ -1,7 +1,7 @@
-- // SPDX-License-Identifier: GPL-2.0-or-later
-- // SPDX-FileCopyrightText: 2022 Bartosz Golaszewski <brgl@bgdev.pl>
-- 
---#include <catch2/catch.hpp>
--+#include <catch2/catch_all.hpp>
-- #include <gpiod.hpp>
-- #include <sstream>
-- #include <stdexcept>
--@@ -20,7 +20,7 @@ using pull = ::gpiosim::chip::pull;
-- 
-- namespace {
-- 
---class value_matcher : public Catch::MatcherBase<value>
--+class value_matcher : public Catch::Matchers::MatcherBase<value>
-- {
-- public:
-- 	value_matcher(pull pull, bool active_low = false)
--@@ -117,7 +117,7 @@ TEST_CASE("consumer string is set correctly", "[line-request]")
-- 		auto info = chip.get_line_info(2);
-- 
-- 		REQUIRE(info.used());
---		REQUIRE_THAT(info.consumer(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(info.consumer(), Catch::Matchers::Equals("foobar"));
-- 	}
-- 
-- 	SECTION("empty consumer")
--@@ -130,7 +130,7 @@ TEST_CASE("consumer string is set correctly", "[line-request]")
-- 		auto info = chip.get_line_info(2);
-- 
-- 		REQUIRE(info.used());
---		REQUIRE_THAT(info.consumer(), Catch::Equals("?"));
--+		REQUIRE_THAT(info.consumer(), Catch::Matchers::Equals("?"));
-- 	}
-- }
-- 
--@@ -380,7 +380,7 @@ TEST_CASE("line_request can be moved", "[line-request]")
-- 		auto moved(::std::move(request));
-- 
-- 		REQUIRE(moved.fd() == fd);
---		REQUIRE_THAT(moved.offsets(), Catch::Equals(offs));
--+		REQUIRE_THAT(moved.offsets(), Catch::Matchers::Equals(offs));
-- 	}
-- 
-- 	SECTION("move assignment operator works")
--@@ -388,7 +388,7 @@ TEST_CASE("line_request can be moved", "[line-request]")
-- 		another = ::std::move(request);
-- 
-- 		REQUIRE(another.fd() == fd);
---		REQUIRE_THAT(another.offsets(), Catch::Equals(offs));
--+		REQUIRE_THAT(another.offsets(), Catch::Matchers::Equals(offs));
-- 	}
-- }
-- 
--@@ -484,7 +484,7 @@ TEST_CASE("line_request stream insertion operator works", "[line-request]")
-- 	{
-- 		buf << request;
-- 
---		REQUIRE_THAT(buf.str(), Catch::Equals(expected.str()));
--+		REQUIRE_THAT(buf.str(), Catch::Matchers::Equals(expected.str()));
-- 	}
-- 
-- 	SECTION("request released")
--@@ -493,7 +493,7 @@ TEST_CASE("line_request stream insertion operator works", "[line-request]")
-- 
-- 		buf << request;
-- 
---		REQUIRE_THAT(buf.str(), Catch::Equals("gpiod::line_request(released)"));
--+		REQUIRE_THAT(buf.str(), Catch::Matchers::Equals("gpiod::line_request(released)"));
-- 	}
-- }
-- 
--diff --git a/bindings/cxx/tests/tests-line-settings.cpp b/bindings/cxx/tests/tests-line-settings.cpp
--index dc821bb..2690331 100644
----- a/bindings/cxx/tests/tests-line-settings.cpp
--+++ b/bindings/cxx/tests/tests-line-settings.cpp
--@@ -1,7 +1,7 @@
-- // SPDX-License-Identifier: GPL-2.0-or-later
-- // SPDX-FileCopyrightText: 2022 Bartosz Golaszewski <brgl@bgdev.pl>
-- 
---#include <catch2/catch.hpp>
--+#include <catch2/catch_all.hpp>
-- #include <gpiod.hpp>
-- 
-- #include "helpers.hpp"
--diff --git a/bindings/cxx/tests/tests-line.cpp b/bindings/cxx/tests/tests-line.cpp
--index 319012a..abd0e08 100644
----- a/bindings/cxx/tests/tests-line.cpp
--+++ b/bindings/cxx/tests/tests-line.cpp
--@@ -1,7 +1,7 @@
-- // SPDX-License-Identifier: GPL-2.0-or-later
-- // SPDX-FileCopyrightText: 2021-2022 Bartosz Golaszewski <brgl@bgdev.pl>
-- 
---#include <catch2/catch.hpp>
--+#include <catch2/catch_all.hpp>
-- #include <gpiod.hpp>
-- 
-- #include "helpers.hpp"
--diff --git a/bindings/cxx/tests/tests-misc.cpp b/bindings/cxx/tests/tests-misc.cpp
--index f06dc39..33fc3fa 100644
----- a/bindings/cxx/tests/tests-misc.cpp
--+++ b/bindings/cxx/tests/tests-misc.cpp
--@@ -1,7 +1,7 @@
-- // SPDX-License-Identifier: GPL-2.0-or-later
-- // SPDX-FileCopyrightText: 2021-2022 Bartosz Golaszewski <brgl@bgdev.pl>
-- 
---#include <catch2/catch.hpp>
--+#include <catch2/catch_all.hpp>
-- #include <filesystem>
-- #include <gpiod.hpp>
-- #include <string>
--diff --git a/bindings/cxx/tests/tests-request-config.cpp b/bindings/cxx/tests/tests-request-config.cpp
--index 66eb748..d71e91b 100644
----- a/bindings/cxx/tests/tests-request-config.cpp
--+++ b/bindings/cxx/tests/tests-request-config.cpp
--@@ -1,7 +1,7 @@
-- // SPDX-License-Identifier: GPL-2.0-or-later
-- // SPDX-FileCopyrightText: 2021-2022 Bartosz Golaszewski <brgl@bgdev.pl>
-- 
---#include <catch2/catch.hpp>
--+#include <catch2/catch_all.hpp>
-- #include <cstddef>
-- #include <gpiod.hpp>
-- #include <string>
--@@ -33,7 +33,7 @@ TEST_CASE("request_config can be moved", "[request-config]")
-- 	SECTION("move constructor works")
-- 	{
-- 		auto moved(::std::move(cfg));
---		REQUIRE_THAT(moved.consumer(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(moved.consumer(), Catch::Matchers::Equals("foobar"));
-- 		REQUIRE(moved.event_buffer_size() == 64);
-- 	}
-- 
--@@ -43,7 +43,7 @@ TEST_CASE("request_config can be moved", "[request-config]")
-- 
-- 		moved = ::std::move(cfg);
-- 
---		REQUIRE_THAT(moved.consumer(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(moved.consumer(), Catch::Matchers::Equals("foobar"));
-- 		REQUIRE(moved.event_buffer_size() == 64);
-- 	}
-- }
--@@ -55,7 +55,7 @@ TEST_CASE("request_config mutators work", "[request-config]")
-- 	SECTION("set consumer")
-- 	{
-- 		cfg.set_consumer("foobar");
---		REQUIRE_THAT(cfg.consumer(), Catch::Equals("foobar"));
--+		REQUIRE_THAT(cfg.consumer(), Catch::Matchers::Equals("foobar"));
-- 	}
-- 
-- 	SECTION("set event_buffer_size")
--@@ -77,7 +77,7 @@ TEST_CASE("request_config stream insertion operator works", "[request-config]")
-- 
-- 	::std::string expected("gpiod::request_config(consumer='foobar', event_buffer_size=32)");
-- 
---	REQUIRE_THAT(buf.str(), Catch::Equals(expected));
--+	REQUIRE_THAT(buf.str(), Catch::Matchers::Equals(expected));
-- }
-- 
-- } /* namespace */
--diff --git a/configure.ac b/configure.ac
--index a2370c5..216007e 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -206,9 +206,9 @@ then
-- 
-- 	if test "x$with_tests" = xtrue
-- 	then
---		PKG_CHECK_MODULES([CATCH2], [catch2],, [
--+		PKG_CHECK_MODULES([CATCH2], [catch2-with-main],, [
-- 			AC_LANG_PUSH([C++])
---			AC_CHECK_HEADERS([catch2/catch.hpp], [], [HEADER_NOT_FOUND_CXX([catch2/catch.hpp])])
--+			AC_CHECK_HEADERS([catch2/catch_all.hpp], [], [HEADER_NOT_FOUND_CXX([catch2/catch_all.hpp])])
-- 			AC_LANG_POP([C++])
-- 		])
-- 	fi
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-2.x/gpio-manager.init b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/gpio-manager.init
-new file mode 100644
-index 000000000..e36755eea
---- /dev/null
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/gpio-manager.init
-@@ -0,0 +1,76 @@
-+#! /bin/sh
-+### BEGIN INIT INFO
-+# Provides:		gpio-manager
-+# Required-Start:	$remote_fs $syslog
-+# Required-Stop:	$remote_fs $syslog
-+# Default-Start:	2 3 4 5
-+# Default-Stop:		1
-+# Short-Description:	Centralized GPIO manager daemon
-+### END INIT INFO
-+#
-+# -*- coding: utf-8 -*-
-+# Debian init.d script for gpio-manager
-+# Copyright (c) 2024 Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-+
-+# set -e
-+
-+# Source function library.
-+. /etc/init.d/functions
-+
-+DAEMON=/usr/bin/gpio-manager
-+NAME=gpio-manager
-+PIDFILE=/var/run/gpio-manager/pid
-+DESC="GPIO manager daemon"
-+
-+test -x $DAEMON || exit 0
-+test "$ENABLED" != "0" || exit 0
-+
-+do_start()
-+{
-+	mkdir -p "`dirname $PIDFILE`"
-+	if [ -e $PIDFILE ]; then
-+		PIDDIR=/proc/$(cat $PIDFILE)
-+		if [ -d ${PIDDIR} -a "$(readlink -f ${PIDDIR}/exe)" = "${DAEMON}" ]; then
-+			echo "$DESC already started; not starting."
-+		else
-+			echo "Removing stale PID file $PIDFILE."
-+			rm -f $PIDFILE
-+		fi
-+	fi
-+
-+	echo -n "Starting $DESC: "
-+	start-stop-daemon --user gpio-manager --background --start --quiet --make-pidfile --pidfile $PIDFILE --exec $DAEMON
-+	echo "$NAME."
-+}
-+
-+do_stop()
-+{
-+	echo -n "Stopping $DESC: "
-+	start-stop-daemon --stop --quiet --pidfile $PIDFILE
-+	echo "$NAME."
-+	rm -f $PIDFILE
-+}
-+
-+case "$1" in
-+	start)
-+		do_start
-+	;;
-+	stop)
-+		do_stop
-+	;;
-+	status)
-+		status $DAEMON
-+		exit $?
-+	;;
-+	restart)
-+		do_stop
-+		sleep 1
-+		do_start
-+	;;
-+	*)
-+		echo "Usage: /etc/init.d/$NAME {start|stop|status|restart}" >&2
-+		exit 1
-+	;;
-+esac
-+
-+exit 0
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-2.x/run-ptest b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/run-ptest
-index 29ec0d102..eae172116 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod-2.x/run-ptest
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/run-ptest
-@@ -1,24 +1,43 @@
- #!/bin/sh
- 
--testbins="gpiod-test gpio-tools-test.bash gpiod-cxx-test"
--
- ptestdir=$(dirname "$(readlink -f "$0")")
- cd $ptestdir/tests
- 
-+export GPIODBUS_TEST_DAEMON_PATH="$ptestdir/tests/gpio-manager"
-+export PATH="$ptestdir/tests/:$PATH"
-+
- # libgpiod v2 uses gpio-sim - a configfs-based testing module. We need to
- # make sure configfs is mounted before running any tests.
- modprobe configfs
- mountpoint /sys/kernel/config > /dev/null || mount -t configfs configfs /sys/kernel/config
- 
--for testbin in $testbins; do
--	if test -e ./$testbin; then
--		./$testbin > ./$testbin.out 2>&1
--		if [ $? -ne 0 ]; then
--			echo "FAIL: $testbin"
--		else
--			echo "PASS: $testbin"
--		fi
-+# Make sure the daemon is not running during tests.
-+systemctl stop gpio-manager 2> /dev/null > /dev/null
-+service gpio-manager stop 2> /dev/null > /dev/null
-+
-+run_one_test() {
-+	testbin="$1"
-+
-+	./$testbin > ./$testbin.out 2>&1
-+	if [ $? -ne 0 ]; then
-+		echo "FAIL: $testbin"
- 	else
--		echo "SKIP: $testbin"
-+		echo "PASS: $testbin"
- 	fi
--done
-+}
-+
-+run_one_test gpiod-test
-+run_one_test gpio-tools-test.bash
-+run_one_test gpiod-cxx-test
-+run_one_test gpiod-glib-test
-+
-+# Wait for the leftover uevents to be emitted before running DBus tests.
-+udevadm settle
-+run_one_test gpiodbus-test
-+
-+udevadm settle
-+gpio-manager 2> /dev/null > /dev/null &
-+GPIO_MANAGER_PID=$!
-+run_one_test gpiocli-test.bash
-+kill $GPIO_MANAGER_PID
-+wait $GPIO_MANAGER_PID
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.1.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.1.3.bb
-deleted file mode 100644
-index 6130371e4..000000000
---- a/meta-oe/recipes-support/libgpiod/libgpiod_2.1.3.bb
-+++ /dev/null
-@@ -1,33 +0,0 @@
--require libgpiod.inc
--
--LICENSE = "GPL-2.0-or-later & LGPL-2.1-or-later & CC-BY-SA-4.0"
--LIC_FILES_CHKSUM = " \
--    file://LICENSES/GPL-2.0-or-later.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
--    file://LICENSES/LGPL-2.1-or-later.txt;md5=4b54a1fd55a448865a0b32d41598759d \
--    file://LICENSES/CC-BY-SA-4.0.txt;md5=fba3b94d88bfb9b81369b869a1e9a20f \
--"
--
--FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-2.x:"
--
--SRC_URI += "file://0001-bindings-cxx-Migrate-C-tests-to-use-Catch2-v3.patch"
--SRC_URI[sha256sum] = "2be4c0b03e995d236c0e476e14aeb475d7b431dd1439609b6d65c540f91eaf58"
--
--# Enable all project features for ptest
--PACKAGECONFIG[tests] = "--enable-tests --enable-tools --enable-bindings-cxx --enable-gpioset-interactive,--disable-tests,kmod util-linux glib-2.0 catch2 libedit"
--PACKAGECONFIG[gpioset-interactive] = "--enable-gpioset-interactive,--disable-gpioset-interactive,libedit"
--
--PACKAGES =+ "${PN}-ptest-dev"
--FILES:${PN}-tools += "${bindir}/gpionotify"
--FILES:${PN}-ptest += "${libdir}/libgpiosim.so.*"
--FILES:${PN}-ptest-dev += "${includedir}/gpiosim.h"
--
--RDEPENDS:${PN}-ptest += " \
--    ${@bb.utils.contains('PTEST_ENABLED', '1', 'shunit2 bash', '', d)} \
--"
--RRECOMMENDS:${PN}-ptest += "kernel-module-gpio-sim kernel-module-configfs"
--
--do_install_ptest:append() {
--    install -m 0755 ${B}/bindings/cxx/tests/.libs/gpiod-cxx-test ${D}${PTEST_PATH}/tests/
--    install -m 0755 ${S}/tools/gpio-tools-test.bash ${D}${PTEST_PATH}/tests/
--    install -m 0644 ${S}/tests/gpiosim/gpiosim.h ${D}${includedir}/gpiosim.h
--}
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
-new file mode 100644
-index 000000000..5f627ce28
---- /dev/null
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
-@@ -0,0 +1,98 @@
-+require libgpiod.inc
-+
-+inherit systemd update-rc.d useradd gobject-introspection
-+
-+LICENSE = "GPL-2.0-or-later & LGPL-2.1-or-later & CC-BY-SA-4.0"
-+LIC_FILES_CHKSUM = " \
-+    file://LICENSES/GPL-2.0-or-later.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-+    file://LICENSES/LGPL-2.1-or-later.txt;md5=4b54a1fd55a448865a0b32d41598759d \
-+    file://LICENSES/CC-BY-SA-4.0.txt;md5=fba3b94d88bfb9b81369b869a1e9a20f \
-+"
-+
-+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-2.x:"
-+
-+SRC_URI += "file://gpio-manager.init"
-+
-+SRC_URI[sha256sum] = "ee29735890eb1cc0e4b494001da5163d1a9c4735343201d22485db313601ca07"
-+
-+S = "${UNPACKDIR}/${PN}-2.2"
-+
-+# Enable all project features for ptest
-+PACKAGECONFIG[tests] = " \
-+    --enable-tests --enable-tools --enable-bindings-cxx --enable-bindings-glib --enable-gpioset-interactive --enable-dbus, \
-+    --disable-tests, \
-+    kmod util-linux glib-2.0 catch2 libedit glib-2.0-native libgudev, \
-+    bash glib-2.0-utils libgpiod-manager shunit2 \
-+"
-+PACKAGECONFIG[gpioset-interactive] = "--enable-gpioset-interactive,--disable-gpioset-interactive,libedit"
-+PACKAGECONFIG[glib] = "--enable-bindings-glib,--disable-bindings-glib,glib-2.0 glib-2.0-native"
-+PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,glib-2.0 glib-2.0-native libgudev"
-+
-+PACKAGES =+ "${PN}-ptest-dev ${PN}-glib ${PN}-manager ${PN}-cli"
-+FILES:${PN}-tools += "${bindir}/gpionotify"
-+FILES:${PN}-ptest += "${libdir}/libgpiosim.so.*"
-+FILES:${PN}-ptest-dev += "${includedir}/gpiosim.h"
-+FILES:${PN}-glib += "${libdir}/libgpiod-glib.so.*"
-+FILES:${PN}-manager += " \
-+    ${bindir}/gpio-manager \
-+    ${sysconfdir}/dbus-1/system.d/io.gpiod1.conf \
-+    ${datadir}/dbus-1/interfaces/io.gpiod1.xml \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${systemd_system_unitdir}/gpio-manager.service', '', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${sysconfdir}/init.d/gpio-manager', '', d)} \
-+"
-+FILES:${PN}-cli += "${bindir}/gpiocli"
-+
-+RDEPENDS:${PN}-manager += "dbus"
-+
-+SYSTEMD_PACKAGES = "${PN}-manager"
-+
-+python __anonymous() {
-+    distro_features = d.getVar("DISTRO_FEATURES").split()
-+    packageconfig = d.getVar("PACKAGECONFIG").split()
-+    pn = d.getVar("PN")
-+
-+    if "systemd" in distro_features and "dbus" in packageconfig:
-+        d.appendVar("EXTRA_OECONF", " --enable-systemd")
-+        # We need to set it conditionally or else the systemd class will look
-+        # for the file that we don't install with systemd support disabled.
-+        d.setVar("SYSTEMD_SERVICE:{}-manager".format(pn), "gpio-manager.service")
-+    else:
-+        d.appendVar("EXTRA_OECONF", " --disable-systemd")
-+}
-+
-+UPDATERCPN = "${PN}-manager"
-+INITSCRIPT_NAME = "gpio-manager"
-+INITSCRIPT_PARAMS = "start 20 2 3 4 5 . stop 20 0 1 6 ."
-+
-+USERADD_PACKAGES = "${PN}-manager"
-+GROUPADD_PARAM:${PN}-manager = "--system gpio"
-+USERADD_PARAM:${PN}-manager = "--system -M -s /bin/nologin -g gpio gpio-manager"
-+
-+RDEPENDS:${PN}-ptest += " \
-+    ${@bb.utils.contains('PTEST_ENABLED', '1', 'shunit2 bash', '', d)} \
-+"
-+RRECOMMENDS:${PN}-ptest += "kernel-module-gpio-sim kernel-module-configfs"
-+INSANE_SKIP:${PN}-ptest += "buildpaths"
-+
-+do_compile:prepend() {
-+    export GIR_EXTRA_LIBS_PATH="${B}/lib/.libs"
-+}
-+
-+do_install:append() {
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-+        install -d ${D}${sysconfdir}/init.d
-+        install -m 0755 ${UNPACKDIR}/gpio-manager.init ${D}${sysconfdir}/init.d/gpio-manager
-+    fi
-+}
-+
-+do_install_ptest:append() {
-+    install -m 0755 ${B}/bindings/cxx/tests/.libs/gpiod-cxx-test ${D}${PTEST_PATH}/tests/
-+    install -m 0755 ${S}/tools/gpio-tools-test.bash ${D}${PTEST_PATH}/tests/
-+    install -m 0644 ${S}/tests/scripts/gpiod-bash-test-helper.inc ${D}${PTEST_PATH}/tests/
-+    install -m 0644 ${S}/tests/gpiosim/gpiosim.h ${D}${includedir}/gpiosim.h
-+    install -m 0755 ${B}/bindings/glib/tests/.libs/gpiod-glib-test ${D}${PTEST_PATH}/tests/
-+    install -m 0755 ${B}/dbus/tests/.libs/gpiodbus-test ${D}${PTEST_PATH}/tests/
-+    install -m 0755 ${S}/dbus/client/gpiocli-test.bash ${D}${PTEST_PATH}/tests/
-+    install -m 0755 ${B}/dbus/manager/.libs/gpio-manager ${D}${PTEST_PATH}/tests/
-+    install -m 0755 ${B}/dbus/client/.libs/gpiocli ${D}${PTEST_PATH}/tests/
-+}
--- 
-2.30.2
+> 
+> Cheers,
+> 
+> 
+> Jeremy
 
 
