@@ -1,126 +1,107 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D7D0ACF5386
-	for <webhook@archiver.kernel.org>; Wed, 23 Oct 2024 12:37:01 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.web11.7968.1729687012372109960
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 449CCCF538A
+	for <webhook@archiver.kernel.org>; Wed, 23 Oct 2024 13:41:52 +0000 (UTC)
+Received: from mail-oo1-f45.google.com (mail-oo1-f45.google.com [209.85.161.45])
+ by mx.groups.io with SMTP id smtpd.web10.9189.1729690906033072195
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Oct 2024 05:36:52 -0700
+ Wed, 23 Oct 2024 06:41:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=Fm7khPHQ;
- spf=pass (domain: konsulko.com, ip: 209.85.128.41, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-43159c9f617so65391785e9.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Oct 2024 05:36:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nNRzMt0+;
+ spf=pass (domain: gmail.com, ip: 209.85.161.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f45.google.com with SMTP id 006d021491bc7-5e5d0a80db4so3501754eaf.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Oct 2024 06:41:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1729687010; x=1730291810; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1729690905; x=1730295705; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=YxwSvI98hUDVYJGZE6FV7BZa7eCdNTO9AfoX5uwX04g=;
-        b=Fm7khPHQhVclAzhajnd05IiJocjJ21ZQz1SGr51qb8QzvbXcIsQ1zEhkDNfVhIL0Zc
-         w/D3i2CjwObsy4ntykblzydVUbvQcmwFmIOSkE+KUilHsGEcYBplxpcFm41nZJnvMTRd
-         eEEC7Z7q/0Nw4oCszJ9ZcUiPr4Odtl2vGyYdU=
+        bh=2pG8Rz4KAWRJkMqhzEh/inKTKu8WuM/nOtrKqwYVcvc=;
+        b=nNRzMt0+2FeTJM6WPIh5df94KiLlWPFCUtLAKHoAYgs6b5QrDKuYIrx8VhabzV0TY7
+         FVtKSXkx1nO+gGyGm54NSNhjxXQHOYHKBI6AxtvumS9YRVx++H9nLXto8kpkpx8hTopV
+         SZe06RZwycLTDsnW0UYI3eiagxKbjV9g4Zu/PLMqgK4tlHRppj5JXNfYLePjFsuYzOvr
+         zq6AEWlVLv6NeKD6R1nnO0a6fSn6vDiFa3tAD+JYCsPSQOf16OaXKtTExIh6/LrFpr5V
+         J+MczPh9J7D44BbGTfBTQPZLbf/+XsoJq6+HEFaikwOtE3lDONzG2E3iBbigORgjv3SJ
+         Ugug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729687010; x=1730291810;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1729690905; x=1730295705;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=YxwSvI98hUDVYJGZE6FV7BZa7eCdNTO9AfoX5uwX04g=;
-        b=caQbnAglXJN+48XL32AGNL4piUGMjn7GIh0fgsIHck8K7bHnZ/FYVwxrEDanxeem/M
-         ZE4h4DrX1/XtuJp9bLfcBDlmqAISmhmLzM7ewabkXR+kbSGC+V3R9Z5Xwu7lme/Mx1sn
-         rE7JJRyDffFDXv68JD+kNHpHQZs1uQip6XaTE+kXDtq7pzYh3jJcgz7IHafHB1pp5ACW
-         ih7ltUA7CpKzcBmWkFFYNzI5u+n30RX+j+VMcZUbfusf7BCWihWLowvGRBjfsQrrNFiH
-         PH3A0jiw6BxnShnjdjoYe2MA/HDjvcz8A09YlIyNfLGLpWJbtp7DeIXWzpgkPqIqI1iX
-         Gq7Q==
-X-Gm-Message-State: AOJu0YyFirejZMbTDF43lF3WxU2kUsa1S757ug0QO6iP3WqBOQoHF44L
-	I7S0irPd8va6fBv07lscrkTVk3uqISh90kmJIhARvyD9YOMx+ZdUtvaWrCvDENuKiKm4w+Dtbev
-	M
-X-Google-Smtp-Source: AGHT+IEns/vPFo2G0o/V4QKdPRI0fjyveFSsrB7mQ2nb7slQ24SnOx1QGka80/Yz+a1YBuP4Q2pkNA==
-X-Received: by 2002:a05:600c:46c7:b0:431:50fa:89c4 with SMTP id 5b1f17b1804b1-4318412acc0mr23574815e9.3.1729687010559;
-        Wed, 23 Oct 2024 05:36:50 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-37ee0b9bc90sm8751248f8f.100.2024.10.23.05.36.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Oct 2024 05:36:50 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-trio: Upgrade 0.26.2 -> 0.27.0
-Date: Wed, 23 Oct 2024 15:36:45 +0300
-Message-Id: <20241023123646.1067047-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20241023123646.1067047-1-leon.anavi@konsulko.com>
-References: <20241023123646.1067047-1-leon.anavi@konsulko.com>
+        bh=2pG8Rz4KAWRJkMqhzEh/inKTKu8WuM/nOtrKqwYVcvc=;
+        b=CUs1y4xAPJRFuAD0wFj2vsYYv+5EIOHsb++JS7FqHXKN4w0bVLCLAL48sZ30GBsyZT
+         TfHw27KsO+PcqsJgafP/0jsuZoHwL0lyN7mt5ZUczEqcIczVygU+TyvJOndT8aPll1HC
+         ff4veAjfftJ3UTGOXV0MTMgZ+cc/jVfDJVwKPyZofkWd/T15F8f7s6P2l8jtml1r/JKx
+         +MkzRRUg91hqA0W/hbXPMHBkrGz6lOXOcxOWqIGrAJx5cN3VrS2SMznHpww7q1shom1i
+         Os5LfJ9X3cU4MePJYREQpZYuEowrQ42rIO6pPYEEEZo0iRuKbEbNJO3Tia7fQoV3OlGt
+         Yd2A==
+X-Forwarded-Encrypted: i=1; AJvYcCUhBkKeDWVm6qiTGdAVTLTgbPIed0rOJxaqbdPtjjGZvWUNy0NVv+ndkdavJzpyThd4Ys7ZpFF3qmaV0+eHq6k/Vaw=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Ywan9uqxZxHAM4Ez5Pz2xatms2yQzuFub05UDdmUw6Uv5hW50/H
+	Wwx29lKmXEH/5/XZGMVzHH0qp7YOmfU3yrS2MMTHxpRDpp96upBUdGoR8ZEVCic78WNifhf2HhF
+	X8xXhCQJF/E2i7VoGlCHuNcia/z4=
+X-Google-Smtp-Source: AGHT+IEVUyQWZQ+cWx90OTJrmCAAeNH2VaBldl0OXTLHCLjBiKXDTgQN20c7WnouRcILRdIdKSPNg003r6RV+V/jhqc=
+X-Received: by 2002:a05:6820:1625:b0:5e5:7086:ebed with SMTP id
+ 006d021491bc7-5ebee94c09dmr2022774eaf.7.1729690905231; Wed, 23 Oct 2024
+ 06:41:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241017063626.2089926-1-chanh@os.amperecomputing.com>
+ <CAMKF1srdcMcJ6CVEm3Cf42nEyFug+kDO0yGWQ53GGjG1TADGfw@mail.gmail.com>
+ <64bbd9ab-d24b-4085-9e7b-abbfbc286264@amperemail.onmicrosoft.com>
+ <CAMKF1sqr6WcQHBXietnNMmVqSFq2wenkMtfLSqyD5OCRxeirEQ@mail.gmail.com>
+ <66ef3f0b-431c-4d4e-a3a4-9519503feeac@amperemail.onmicrosoft.com>
+ <3047b261e2b8da8c814e5a33d6229a15523a2ecd.camel@codeconstruct.com.au> <f4956959-0c24-4f66-9048-f52b7c46a377@amperemail.onmicrosoft.com>
+In-Reply-To: <f4956959-0c24-4f66-9048-f52b7c46a377@amperemail.onmicrosoft.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 23 Oct 2024 06:41:18 -0700
+Message-ID: <CAMKF1sq71MZCZZzW31kv5j6Rt68FfZkea4w-yPSZkEuykf0Dew@mail.gmail.com>
+Subject: Re: [oe] [meta-networking,v2][PATCH] mctp: upgrade 1.1 -> 2.0
+To: Chanh Nguyen <chanh@amperemail.onmicrosoft.com>
+Cc: Jeremy Kerr <jk@codeconstruct.com.au>, Chanh Nguyen <chanh@os.amperecomputing.com>, 
+	openembedded-devel@lists.openembedded.org, 
+	Phong Vo <phong@os.amperecomputing.com>, Thang Nguyen <thang@os.amperecomputing.com>, 
+	Quan Nguyen <quan@os.amperecomputing.com>, Khanh Pham <khpham@amperecomputing.com>, 
+	Thu Nguyen <tbnguyen@amperecomputing.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Oct 2024 12:37:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113149
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Oct 2024 13:41:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113151
 
-Upgrade to release 0.27.0:
+On Wed, Oct 23, 2024 at 2:44=E2=80=AFAM Chanh Nguyen
+<chanh@amperemail.onmicrosoft.com> wrote:
+>
+>
+>
+> On 23/10/2024 16:38, Jeremy Kerr wrote:
+> > Hi Chanh,
+> >> I saw my patch v3 was merged to the master branch of meta-openembedded
+> >> https://github.com/openembedded/meta-openembedded/commit/b51e4288b93a9=
+7467b1d7dd77b4fab537bc311e3
+> >
+> > Ah, neat. Khem had just mentioned that he had merged v2, not v3.
+> >
+> > So, all looks good here? unless there are other build failures?
+>
+> Yes, Khem had merged v3
+> (https://patchwork.yoctoproject.org/project/oe/patch/20241018092326.21522=
+23-1-chanh@os.amperecomputing.com/).
+> This patch is good for me.
+>
+> So, I think we don't need to do anything more.
 
-- trio.move_on_after and trio.fail_after previously set the deadline
-  relative to initialization time, instead of more intuitively upon
-  entering the context manager.
-- CancelScope.relative_deadline and CancelScope.is_relative added,
-  as well as a relative_deadline parameter to __init__. This allows
-  initializing scopes ahead of time, but where the specified
-  relative deadline doesn't count down until the scope is entered
-- trio.Lock and trio.StrictFIFOLock will now raise
-  trio.BrokenResourceError when trio.Lock.acquire would previously
-  stall due to the owner of the lock exiting without releasing the
-  lock
-- trio.move_on_at, trio.move_on_after, trio.fail_at and
-  trio.fail_after now accept shield as a keyword argument. If
-  specified, it provides an initial value for the
-  ~trio.CancelScope.shield attribute of the trio.CancelScope
-  object created by the context manager
-- Added trio.lowlevel.add_parking_lot_breaker and
-  trio.lowlevel.remove_parking_lot_breaker to allow creating
-  custom lock/semaphore implementations that will break their
-  underlying parking lot if a task exits unexpectedly.
-  trio.lowlevel.ParkingLot.break_lot is also added, to allow
-  breaking a parking lot intentionally
-- Allow sockets to bind any os.PathLike object
-- Update trio.lowlevel.open_process's documentation to allow bytes
-- Update trio.sleep_forever to be NoReturn
+yes, I realized that the build was using an older version of patch
+since some of my CI builds run over 18 hrs,
+I lost track of patch versions. seems good for now.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- ...{python3-trio_0.26.2.bb => python3-trio_0.27.0.bb} | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-trio_0.26.2.bb => python3-trio_0.27.0.bb} (66%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-trio_0.26.2.bb b/meta-python/recipes-devtools/python/python3-trio_0.27.0.bb
-similarity index 66%
-rename from meta-python/recipes-devtools/python/python3-trio_0.26.2.bb
-rename to meta-python/recipes-devtools/python/python3-trio_0.27.0.bb
-index 1272606f6..524e439d4 100644
---- a/meta-python/recipes-devtools/python/python3-trio_0.26.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-trio_0.27.0.bb
-@@ -5,9 +5,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=447ea202d14d2aee40d8a2c26c865da9 \
-                     file://LICENSE.APACHE2;md5=3b83ef96387f14655fc854ddc3c6bd57 \
-                     file://LICENSE.MIT;md5=5f229c828e5a6f0a2ce90c7d3c054721"
- 
--SRC_URI[sha256sum] = "0346c3852c15e5c7d40ea15972c4805689ef2cb8b5206f794c9c19450119f3a4"
-+SRC_URI[sha256sum] = "1dcc95ab1726b2da054afea8fd761af74bad79bd52381b84eae408e983c76831"
- 
- inherit pypi python_setuptools_build_meta
- 
--PYPI_PACKAGE = "trio"
--RDEPENDS:${PN} = "python3-idna python3-sniffio"
-+RDEPENDS:${PN} = " \
-+	python3-idna \
-+	python3-sniffio \
-+	python3-attrs \
-+	python3-outcome \
-+	python3-sortedcontainers \
-+"
--- 
-2.39.5
-
+>
+> >
+> > Cheers,
+> >
+> >
+> > Jeremy
+>
 
