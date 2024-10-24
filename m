@@ -1,246 +1,201 @@
-Return-Path: <alexander.sverdlin@siemens.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ED8A2CE8E7C
-	for <webhook@archiver.kernel.org>; Thu, 24 Oct 2024 14:10:37 +0000 (UTC)
-Received: from EUR03-VI1-obe.outbound.protection.outlook.com (EUR03-VI1-obe.outbound.protection.outlook.com [40.107.103.56])
- by mx.groups.io with SMTP id smtpd.web10.15536.1729779035872411983
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 05DF8CE8E7E
+	for <webhook@archiver.kernel.org>; Thu, 24 Oct 2024 14:19:58 +0000 (UTC)
+Received: from mail-oo1-f53.google.com (mail-oo1-f53.google.com [209.85.161.53])
+ by mx.groups.io with SMTP id smtpd.web10.15758.1729779591988986534
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Oct 2024 07:10:36 -0700
+ Thu, 24 Oct 2024 07:19:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@siemens.com header.s=selector2 header.b=nFoIcp2j;
- spf=pass (domain: siemens.com, ip: 40.107.103.56, mailfrom: alexander.sverdlin@siemens.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=N4GU1j9HNHCqkzzsvD/bBuUY+QgtFoVCquCvwvmc/F5npohzmgRoVAr2yWqMdjKeTcoCeXdbPiyMPT3s82faDsTDta4I78MsrW9uAE4zIDBSqkFhqNwHY2CfQe8HKC48b36pLHqN1ykoTrgYHSZf2OBPgYdGA4IPrrJwenZyfT3Grb8VsXGc4P+neQTvRIAzYKR5EQ4FAjIXxC+NR8tbi/I6YoACMUSF4bB7Prn+Ty4CsOya2KBG8t+rc22u4wDWLdLuHiAv23UCzfVRN5T2I7Z7E2VT3kVQQHwLmU/ogKiHyinjkDICaaWx8TWi4/KbKjkSbYQHPiY35MERRzGUbQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZZPfmRJN/byyEJ8phTI7j2PFINV0SfdqK0VLVoRYgnw=;
- b=vHLWfewWXGkVdbuqtI41HifZ9ihMxxTMaaIFNYkAgy6YUgdepOQJJKF3chWZyv7vrX9UYZpEpcZcZlucedoAvPLFwohHu3IxPHJ6oDiMNRAdun8hQgJRnGikPCzYrlq9FP5LjSrCw7L/atFYi4X8N4z3wdZ50E4B0fd/Ut9o7bB06bSOghhhZZ24HRgFMuoExzq7tzVg92xxXthzgc758MdVegbG1j5RR0CQklySOZkbqPBjyPTgR5mtObTDfcNGGwsnct2Hlll1t5kdc5PC1bCvd4DuTgbZ8Ns4TphRJROofvULE63fyosghTpGb+tpQzODYEBGSTFtAilaPdyGHg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZZPfmRJN/byyEJ8phTI7j2PFINV0SfdqK0VLVoRYgnw=;
- b=nFoIcp2j7L9lfw70rFV6hjWbmf7RYL+es7CPApq0cRD590yv2PbI6/IGobFft1SewiBCBi0M7mco1TWy/XcBLEsZD8L/biDkpqqye01CPDU8zPU2IFPVeMrVM8ZdpFWsneJb0zoa36SnV92lxuQQFnQmUfmv1gGcc1aiWD+1ZW3e3o25c1qDXJLs7M16vT2m/TH1FyS0M1Lp9SvIAmZwj4M5MuWwm38BIgxq6RbGqVcj8WOcJscd0q8w2yfKzhEgXPcBbwCC5zh7RnhAbnHS28yCRw+NKVmC5xZgkd0p4udD+wPNyqM7GC27KZB8cLZN0GDlmAfnb4RReIshfX0MyA==
-Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5b6::22)
- by GV2PR10MB6719.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:b3::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.14; Thu, 24 Oct
- 2024 14:10:32 +0000
-Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::baa6:3ada:fbe6:98f4]) by AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::baa6:3ada:fbe6:98f4%7]) with mapi id 15.20.8093.014; Thu, 24 Oct 2024
- 14:10:31 +0000
-From: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
-To: "bruce.ashfield@gmail.com" <bruce.ashfield@gmail.com>,
-	"raj.khem@gmail.com" <raj.khem@gmail.com>, "brgl@bgdev.pl" <brgl@bgdev.pl>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-CC: "bartosz.golaszewski@linaro.org" <bartosz.golaszewski@linaro.org>
-Subject: Re: [meta-oe][PATCH v3] libgpiod: update to v2.2
-Thread-Topic: [meta-oe][PATCH v3] libgpiod: update to v2.2
-Thread-Index: AQHbJhvaZk5h/FHg+kCYFjkYR9hRN7KV8L8A
-Date: Thu, 24 Oct 2024 14:10:31 +0000
-Message-ID: <29bbf4a17cfa28fc45c0f3e7fe3b472170d6bdec.camel@siemens.com>
-References: <20241024135126.48781-1-brgl@bgdev.pl>
-In-Reply-To: <20241024135126.48781-1-brgl@bgdev.pl>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS8PR10MB6867:EE_|GV2PR10MB6719:EE_
-x-ms-office365-filtering-correlation-id: 118a377b-40f7-4953-a838-08dcf4359f15
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|366016|376014|38070700018;
-x-microsoft-antispam-message-info: 
- =?utf-8?B?UnJweHBJblM2VFF1VWpUZVhpNHJOSVBOYWpDd1FFeUxZeC9GK25rck1BOHEr?=
- =?utf-8?B?dm9wRjN2M3BwWDU2ckh5Z3FodlZXbTJPM0tFWnRJQzdsOUEyN2cvK3NIU29j?=
- =?utf-8?B?TytmK3ZNUGduUkFuTDNEQkdXOE9FT2RYd01YQi9rcUNEZzBDK3ZucHpwWklS?=
- =?utf-8?B?dmR3Q1hHak00QUxKNHMzOUYwNWV2dWgzck5kOUI4Wm9uOEV0VTY1V1plVW9I?=
- =?utf-8?B?Z1dwdWYyaEpZWkNkSUV2OGpZa1hFT1pvNUVxU0JLMlVPVS9BOFRnY3ZxMUJj?=
- =?utf-8?B?RE94VnF0eVlJNFpwTFhrelREOTdCcmFpZjZIZDBWMCtDMmVXUjFJVVZKU2tp?=
- =?utf-8?B?dHFnbThybU5UcUlMRHZHNVcxdFV4anozdExYNWVHaFFIZDFRb0pqRk5TUmRu?=
- =?utf-8?B?YkwwRVVQWHM5MDV4aDE3Z0xVdTJvbWhnQVN0OUcyNDNVekQ1MFJkVUVzOEJQ?=
- =?utf-8?B?OWZ3cXFmOTJXWnhqTlVLVUFkWldjVkExalYrdkRLU0plMWNGVWZ6UUN2eSs3?=
- =?utf-8?B?ekc0eDllVXVMaTBlWUJFL0dLRUxtb3BGbGptZ3pMSTRGbjU2MWRvV1pWbUlP?=
- =?utf-8?B?bGx4eUZBcmN5WlBhZWE5RDJTOU1zSmZ6Tlk0TTZxTzNwTElDZG5sRVBzMGVw?=
- =?utf-8?B?WGNkVU9HTThENkRYVXplaFlIUm5yMDg1UXRLZmMrKzFDa1dORkVnV3crNEtP?=
- =?utf-8?B?L0NxMDdlZUM4UUEwRDdBTG1qTStCdHNvWGtkaytZUSszbmVGQXAyU2hHcWo5?=
- =?utf-8?B?S0U1UDIvL3k4OEtCNTBPVkladTRabGNac2Jhb3VET2hBWDNuaGE1MEJWODUw?=
- =?utf-8?B?NXVwR0hLVmZ0YU8rK1ZlM3dtZHpIOXEzSEE4U21kMTF1UE93aytXVytOeFMy?=
- =?utf-8?B?bE9rUmp0SEVjSEhHcG1TT0JsWWpXSkV5TEVEYjBhcnpRV3MrNHU3b1Jacjgy?=
- =?utf-8?B?bEkzTS9mSWdrUXZET2RyNFhzdXRnQUlOblIwQ01IQWxNamt4T2dRZ0o3enBP?=
- =?utf-8?B?NUF4L0hjUm9MZzF5RnFJT1pDWm9CNk1USWZxbnZKZ2N2RGdkMGk5STMxT0E1?=
- =?utf-8?B?VkpWelBIUklOM1B2VDM1KzlZeDE2V0psN2VPQytSN0g5L0NOdlVGRnRwUTha?=
- =?utf-8?B?VXJGNTZsd21pVWZFQ291aDhGMm1mbm40SlJKYmN6alNNZkxyOTBrSDNyZ1BI?=
- =?utf-8?B?MENNQTAyVEVUTkxpUkFLdTVDVHZVSWZ0cmhPQnF4b0hzQmc4K29Sb0pOc0k0?=
- =?utf-8?B?L1hNWW9QVnh0Zmx4cEpiVE9IZnB4ZzNGa0hmQlVLcWQxeHFnTzhUcEw4VE1t?=
- =?utf-8?B?WlRmL3FHYnB0ODhWdUxEZWhCbHNHU0JMdk9vMVlrbWxQWTZ3MndNRTFEOEdu?=
- =?utf-8?B?T2hjTE8wNEZCZ0M3czdoNWNUaTdNMEU5RCt0ZklKSklsVnNrYzBIUnZJTzFW?=
- =?utf-8?B?SUhpV3ZCQ3JUZS92U2FmWUsvNXBJYjQ4Unl5M1RPOFRVd093cHNVcUNjeGg1?=
- =?utf-8?B?Y2NSV3gyRWxQY3ZKZUJIK3FTS1B0Z2c5RFpJK3h3UUY4VzlRbmFRVis0azV4?=
- =?utf-8?B?L2UvdFdxU0JJV2xhTWFXNDF6WmVEN3JhQXhVWEVqbFBXQUlka0ZKdFlMZFc2?=
- =?utf-8?B?UjdOdCtBdC9RUjdyMEVsY2tXSHRxOVJ3WG5yRUFYbFZML1htV3R4SnBkdS80?=
- =?utf-8?B?bTFCVTBFSkpTbzJGOHFqU1o1TjlWVFlKekxVUnN4N0ZDRjVvNDNvdkJZTG5G?=
- =?utf-8?Q?5LZCJX3PIphlKNd0pf4zzb5rZowCmgyokuxVaZx?=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(38070700018);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?eHJCNitqRVcwRkIvRzU1Y1RvT1pYYzE1RWRFZTd2UTNvUEFMbkQvbytnN0My?=
- =?utf-8?B?NTlIVnByaU1BcVlPQWovRjdsOXpWUUY2Vys3NjBsRzNZdXowbzVhTTJFY0Nn?=
- =?utf-8?B?WTJnMHR4b1A2ZEc2eXVlSWhWZnZFVDdyMXp6YkdTSFlsWkFYdDYvRWRoRWlv?=
- =?utf-8?B?cG93RmQwZXU0R3AwUUplNjlmZy92SFIyZ0wyb0s3SHFNK0F4c3NETjNqK2xI?=
- =?utf-8?B?VDNlbEhHczVGZTRsMGJxWGhEOGw2TWcrYTEzVkUrMmFGNTlXL1RFbkZYUmdX?=
- =?utf-8?B?bzJSS3FXZXJlU2ZCa3RhL0NRNXJwbHZDdjFtb3pwTGNxK1pQUzhKSmN0Nzd1?=
- =?utf-8?B?UXc4VEdaMTIxVnpnYjlDTUg3RzVZcnNvTDNKVmlMclZXOForUTRBbjV2MVJJ?=
- =?utf-8?B?Tmg3VExEOWdxdlkwVUlocGtJQ2pLRGlTNVVYSEErMFZKTE83Z1UvOXJHeGtB?=
- =?utf-8?B?cHplNDRIOGFnQU8vczNzMGgybm9GR2s4dmp1YnEvLytsVWZqKzUraGsxRmtZ?=
- =?utf-8?B?SVQ0bVIxbVcrL0c5ZHg0S0FNQ3lZbXQyWTZxNExIWE9uMXRNYllZMlJXNllm?=
- =?utf-8?B?MFh4MjNDOVBpZHQ3WTU3Z2Q4b1N6akNPOVhXY0ZxdHlpdUtWUXFKMUNEUmVa?=
- =?utf-8?B?SnZlTVp5S2ZXaW8zczR0YitZeE1yb2VVVWd4QWVpc2U0bzdwSnRYL1drbE9W?=
- =?utf-8?B?MHNUTk5zS3dZOVVVSStxU29Od2JTOS9wT0VtM3pMRW9HRS9neVhYV1hibi9U?=
- =?utf-8?B?UnFEWVJ3TE9yUkNabTJqM2ZUTFhEay9hdmJ6U2VNOVBkREFQQWJtM1BMRzQ1?=
- =?utf-8?B?VUtjaUNIakJMZEdnZFFiclhhTUVDcWNqUUtIY0NWUGNRNkFSRHNyRHJtRUFo?=
- =?utf-8?B?Nm5KUEVWTG9jS3QzQVpZcmgrZjR6NTZxSmFlV3dnNHBxaHlCdWsvYysrS0ZI?=
- =?utf-8?B?bnZZL3pLT29ONFBEYU53YVdwVzRMZENaZDdHN1VRWDVXa2tMNEQvZ0FPb1VZ?=
- =?utf-8?B?QlVXWUpmRGlOTE1QTGFCMTdFT1hHRGFpb0MxU0RSczhLN0NrRWhidFh1dkxy?=
- =?utf-8?B?R1B5WmRZd1FxVWJrUlJoNER6K1NNbmFaWXVGSHloVE1NaUwzWXZiSjA2T0Va?=
- =?utf-8?B?WWJ0ckh4eEtaYW1VNlNHcFJkSjRiMnZxN1FLR0VHVzlIZ3NXSlJvZEI1RUtp?=
- =?utf-8?B?Z1lyR3BNSHRMMTM0SmFKMnplMnlzUit1WjVMcUVYTk4vYXo1dStkYTdiMTgw?=
- =?utf-8?B?eXBvVTZIMkphWlgvR2Y5TkNDcnpOS2hpYlZPTnp6Q3RoWExkalduVytYdWc0?=
- =?utf-8?B?dHFKZVRHeWM1bVZwYmZ4RWx2d3l1dk9rK1g4dnQ5WFV3MW84ZnJOa0dtVXpZ?=
- =?utf-8?B?MDUrWjBCakxSNUIrNmFYR0ROdWQzbUI5dnBqVEpUVWJ0WFVxMmxQY3YwWjFD?=
- =?utf-8?B?amxSTm1GRTE2TmVuejJYZEtjcS9SRXhxa3FWeERuTEVOdlJSQzUyRld1emVZ?=
- =?utf-8?B?bDVJOHJBdEtNb0FvMzh0OXJDSW5XODlnVjJReVEzRzJ5MkxiUEhBR3p3amd6?=
- =?utf-8?B?S1VvcldVdUF2dTlhSGF2ZGhReVlHLzh6RHlubG1MWVB5dW0zY2gyeE9SeTZ2?=
- =?utf-8?B?cUQ1Q1o0Ry9Ndlpjb0Z6dVhGVXJ2YUhRYUxrV0lMSTBETis1UXFyYTNmSUI2?=
- =?utf-8?B?Y0RDeE4yZlJ3VzhzYUc0RDZJNXNnakJSS3VKSDU3MGpraExCelBHMGNYVHlq?=
- =?utf-8?B?bDFROXJRTzQzL0JKMjgraUtnSGc1aWpTdlBFSmZPWTlNNVFHV3BkY3JEMTRE?=
- =?utf-8?B?RE9VeGNPWDlCR1RmdytVT0FxMVBxRGlRT3pUL3oxWCtlWXViV2t6d0dsTWxs?=
- =?utf-8?B?dCs4VnFoOXdsZ0NYNTlkcUV5OG9sR0REM1d6V0FtWHlubE5HZTc2bGxiMGV3?=
- =?utf-8?B?UWo5NlRYRXVTcEpMbEVuZmFqSkgrZnBEeXVPa0JRWlc1eWtDbjNJRnovUm4y?=
- =?utf-8?B?QVpNZFhTSjlZUk9Ja09INDQ5SHF6ekJZek5KRFJxU01xSGowZEs0RGxvWjNP?=
- =?utf-8?B?OHVQeWN6VThDbXdKNml5TGRGOGszMFlaSklLbEdGSTVpcW90RXdIMEllcW1E?=
- =?utf-8?B?UEVjUGlTZmdGd2JhSDFpc0RQOHZzTVc3dGlBM3dvT0I0U0pXSWdNNFRZTXE1?=
- =?utf-8?Q?B6BdcHLhrD2RB0drsbMVwCY=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <F361229EA5D53B48918E52AA438410CA@EURPRD10.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FGWKPiAo;
+ spf=pass (domain: gmail.com, ip: 209.85.161.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f53.google.com with SMTP id 006d021491bc7-5ebc03951abso458982eaf.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Oct 2024 07:19:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1729779591; x=1730384391; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=JIRc29JMYIQAXegV0p7PbiXMiB/aOqM/Ko3KGUjbOSk=;
+        b=FGWKPiAoDo43A0icV36WxGU5RXbHqIELj/Y7U677+5r+jqxDtpl/Ch1+XwY6JC9dt7
+         riidVYHD7WSnmFfUKbiXvEb1x531kaMtF6Nk5H62CoZhorcPG9q/uyzoOkUBuZEaZMOi
+         e8O6rUfy3tz21+3fy5lzWHecfEdCtrW6hQus5wM5j+WAtyY5Rs3oVrb5UZYdkahgWzpR
+         XfqNlrHJWtEDEaj8rwi7hetNS4jeUQzgziiy3q93wvY1TB6ZrUiKAgPsYpcb6defc/qH
+         B7t9RO830ox7NGGthyrSFU464Nyj2YpW0drXViTqp/M9GWpxjNFfrN5d4UzJ/l4cxA77
+         x53g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1729779591; x=1730384391;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=JIRc29JMYIQAXegV0p7PbiXMiB/aOqM/Ko3KGUjbOSk=;
+        b=aVc9+V32uZt8abg3Zx0lupc7GMwkSjr7B5TyBSz65C9yI/OuenZZHa+sVDutc+ZAVa
+         Y6l8qiapstadmSJmiKBhbOeLJilWIIzr3yLzwAYtMdtZbWwDaUJohmYTS0hQmScysKdU
+         QTwoQHn/2lYPqlPZnpmhFxgAr2fxaEDRy0DJYx/wdFomovCfm5RxaNmI+0C2vCyIuN76
+         756czQ64YP8LPNpt6R/2pXPSMfKjFneRTlDIRmVdPvLFFAO3/4W8CfBfTRYpAIsE3mj7
+         hpP8sPGOKZllq2B3kn1Pzfxka9onQ6g+Ver0YBgx9T+F1Cpwx5nVQQ8nD4QKpe2NLUnM
+         kO6w==
+X-Forwarded-Encrypted: i=1; AJvYcCX2yhoAdMNITyIQ7hB82gAYDF/ROgBgtT2mLZumrhSZHfNsCIDWR44bcxQtlAzOzZ3ErZio+bVqmHoJ7zUPO46+4L8=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YyoIgVXcj8F/QY+plW2WzyQHz8WBmvIYseB/zca/x2zjawa76JQ
+	OVDft9ciA840g7wSmixy7TR7HX3BwJ9QPr5uOCXuUg8ftf3ay0d1DR5eQ2KUU6Mr5Lb8S//GcpZ
+	P3HQEOJShU1avIfBS3yluA7kYx2g=
+X-Google-Smtp-Source: AGHT+IFMEYa/BryAgZxkO9PJ3qWG9KZCDd93mDYGF5bIIf8FRZB26sjXJi6NsHuVB9CQ/+KAHTus/jdl1TuPaTIu9QM=
+X-Received: by 2002:a05:6820:1acb:b0:5e7:cb2e:dfec with SMTP id
+ 006d021491bc7-5ebee9974bfmr4343223eaf.8.1729779588339; Thu, 24 Oct 2024
+ 07:19:48 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 118a377b-40f7-4953-a838-08dcf4359f15
-X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Oct 2024 14:10:31.8833
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: eyNAbqvWsFFh+uBpiykwlORB7lNkgOS84bPlkTE3MIRt7tvbDSzN6LM2K+q4SrAxAYfIcI+vPfz2Lrb78BhFbhzyVYtvD+wqoGJEFaWLiTI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR10MB6719
+References: <20241024135126.48781-1-brgl@bgdev.pl> <29bbf4a17cfa28fc45c0f3e7fe3b472170d6bdec.camel@siemens.com>
+In-Reply-To: <29bbf4a17cfa28fc45c0f3e7fe3b472170d6bdec.camel@siemens.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 24 Oct 2024 07:19:21 -0700
+Message-ID: <CAMKF1spzk7ezwr1ekRq+NxoLFuT3gZ66-ARsc1_ZYfi0czwUgg@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH v3] libgpiod: update to v2.2
+To: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
+Cc: "bruce.ashfield@gmail.com" <bruce.ashfield@gmail.com>, "brgl@bgdev.pl" <brgl@bgdev.pl>, 
+	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>, 
+	"bartosz.golaszewski@linaro.org" <bartosz.golaszewski@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Oct 2024 14:10:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113170
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Oct 2024 14:19:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113171
 
-SGVsbG8gYWxsLA0KDQpPbiBUaHUsIDIwMjQtMTAtMjQgYXQgMTU6NTEgKzAyMDAsIEJhcnRvc3og
-R29sYXN6ZXdza2kgd3JvdGU6DQo+IEZyb206IEJhcnRvc3ogR29sYXN6ZXdza2kgPGJhcnRvc3ou
-Z29sYXN6ZXdza2lAbGluYXJvLm9yZz4NCj4gDQo+IFRoaXMgaXMgYSBiaWcgdXBkYXRlIGZvciBs
-aWJncGlvZCBicmluZ2luZyBpbiB0aGUgRC1CdXMgZGFlbW9uIGFuZCBpdHMNCj4gY29tbWFuZC1s
-aW5lIGNsaWVudC4gVGhpcyBpcyB3aHkgdGhlIHBhdGNoIGlzIHByZXR0eSBoZWZ0eS4gVGhlIG1h
-am9yaXR5DQo+IG9mIHRoZSBsaW5lIGNvdW50IGNvbWVzIGZyb20gdGhlIHJlbW92ZWQgcGF0Y2gg
-dGhhdCBpcyBub3cgdXBzdHJlYW0gYnV0DQo+IHRoZSB2Mi4yIHJlY2lwZSBhbHNvIG5vdyBjb250
-YWlucyBhIGxvdCBvZiBiaXRzIGFuZCBwaWVjZXMgdGhhdCBtYWtlIHRoZQ0KPiBELUJ1cyBkYWVt
-b24gd29yayBib3RoIHdpdGggc3lzdGVtIGFzIHdlbGwgYXMgc3lzdmluaXQuDQo+IA0KPiBUaGUg
-cHJvamVjdCBub3cgcGFja2FnZXMgdGhlIHN5c3RlbWQgc2VydmljZSBhbmQgdWRldiBydWxlcyB0
-aGF0IGFsbG93DQo+IHRoZSBtYW5hZ2VyIHRvIHJ1biB1bmRlciBpdHMgb3duIHVzZXIgaW4gYSB3
-ZWxsIHNhbmRib3hlZCBlbnZpcm9ubWVudA0KPiBidXQgdGhlIHN5c3ZzaW5pdCBzY3JpcHQgaXMg
-Y2FycmllZCBpbiB0aGUgcmVjaXBlIGFzIEkgZG9uJ3Qgd2FudCB0bw0KPiBwdXQgc3VwcG9ydCBm
-b3IgbGVnYWN5IHN5c3RlbXMgaW4gbGliZ3Bpb2QgcmVwby4NCj4gDQo+IFRoZSBwYXRjaCBhbHNv
-IHVwZGF0ZXMgdGhlIHB0ZXN0cyBmb3IgbGliZ3Bpb2QgdG8gcnVuIHRocmVlIG5ldw0KPiB0ZXN0
-LXN1aXRlczogb25lIGZvciBHTGliIGJpbmRpbmdzLCBvbmUgZm9yIHRoZSBjb21tYW5kLWxpbmUg
-RC1CdXMNCj4gY2xpZW50IGFuZCBmaW5hbGx5IG9uZSB0ZXN0aW5nIHNvbWUgZGFlbW9uIGNvcm5l
-ci1jYXNlcyBub3Qgc3VwcG9ydGVkIGJ5DQo+IHRoZSBjbGllbnQuDQo+IA0KPiBCdWlsZCB0ZXN0
-ZWQgd2l0aCB2YXJpb3VzIGNvbmZpZyBvcHRpb25zIHdpdGggc3lzdGVtZCBhbmQgc3lzdmluaXQg
-KHRoZQ0KPiBsYXR0ZXIgd2l0aCBnbGliYyBhbmQgbXVzbCkgb24gMzItIGFuZCA2NC1iaXQgYXJj
-aGl0ZWN0dXJlcy4NCj4gDQo+IFRoZSBjb21wbGV0ZSBjaGFuZ2Vsb2cgc2luY2UgdjIuMSAodGFr
-ZW4gdmVyYmF0aW0gZnJvbSB0aGUgTkVXUyBmaWxlKSBpcw0KPiBiZWxvdzoNCj4gDQo+IGxpYmdw
-aW9kIHYyLjINCj4gPT09PT09PT09PT09PQ0KPiANCj4gTmV3IGZlYXR1cmVzOg0KPiAtIGFkZCBH
-T2JqZWN0IGJpbmRpbmdzIHdpdGggaW50cm9zcGVjdGlvbg0KPiAtIGFkZCBhIEQtQnVzIGludGVy
-ZmFjZSB0byBsaWJncGlvZCB0b2dldGhlciB3aXRoIGEgZGFlbW9uIGltcGxlbWVudGluZyBpdCBh
-bmQNCj4gwqAgYSBjb21tYW5kLWxpbmUgY2xpZW50DQo+IC0gc3BsaXQgb3V0IHRoZSBjb21tb24g
-c2hlbGwgdGVzdCBjb2RlIGZvciBncGlvLXRvb2xzIGludG8gYSByZXVzYWJsZSB0ZXN0DQo+IMKg
-IGhhcm5lc3MgZm9yIEdQSU8gY29tbWFuZC1saW5lIHRvb2xzDQo+IC0gYWRkIG1pbnV0ZXMgYXMg
-YSBuZXcgc3VwcG9ydGVkIHRpbWUgdW5pdCBmb3IgdG9vbHMgYW5kIGFsbG93IGxvbmdlciBwZXJp
-b2RzDQo+IMKgIGZvciB0aW1lb3V0cywgbGluZSBob2xkaW5nLCBldGMuDQo+IC0gYWRkIGEgc2Ny
-aXB0IGZvciBnZW5lcmF0aW5nIHNkaXN0IGFuZCB3aGVlbHMgZm9yIHB5dGhvbiBiaW5kaW5ncw0K
-PiAtIG1pZ3JhdGUgQysrIHRlc3RzIHRvIHVzaW5nIENhdGNoMiB2Mw0KPiANCj4gSW1wcm92ZW1l
-bnRzOg0KPiAtIHJlbGljZW5zZSBDKysgYmluZGluZ3MgdW5kZXIgTEdQTC0yLjEtb3ItbGF0ZXIg
-aW4gb3JkZXIgdG8gbWFrZSB0aGUgcHJvamVjdA0KPiDCoCBtb3JlIGF0dHJhY3RpdmUgdG8gdXNl
-cnMgd2l0aCBHUEwtMy4wIHJlc3RyaWN0aW9ucw0KPiAtIHJlbW92ZSBkZXBlbmRlbmN5IG9uIGdy
-ZXAgZnJvbSB0b29scycgdGVzdHMNCj4gLSBtYWtlIHNoZWxsIHNjcmlwdHMgcGFzcyBzaGVsbGNo
-ZWNrIHRyZWV3aWRlDQo+IC0gdXNlIHBwb2xsKCkgaW4gdG9vbHMgdG8gYWN0dWFsbHkgYWNoaWV2
-ZSB0aGUgYWR2ZXJ0aXNlZCBtaWNyb3NlY29uZA0KPiDCoCBncmFudWxhcml0eSBvZiB0aW1lb3V0
-cw0KPiAtIGRvY3VtZW50YXRpb24gaW1wcm92ZW1lbnRzDQo+IC0gaW1wcm92ZSB0eXBpbmcgaW5m
-byBpbiBweXRob24gYmluZGluZ3MNCj4gLSBpbXByb3ZlIF9fcmVwcl9fKCkgaW1wbGVtZW50YXRp
-b25zIGluIHB5dGhvbiBiaW5kaW5ncw0KPiAtIG1ha2UgcmVjb25maWd1cmluZyBsaW5lcyBtb3Jl
-IGZsZXhpYmxlIGluIHB5dGhvbiBiaW5kaW5ncyBieSByZWxheGluZyB0aGUNCj4gwqAgcmVxdWly
-ZW1lbnQgdG8gY2FycnkgdGhlIG9yZGVyaW5nIG9mIHRoZSBjb25maWcgZW50cmllcyBmcm9tIHRo
-ZSByZXF1ZXN0DQo+IC0gc3VwcG9ydCBjYXN0aW5nIG9mIGxpbmUuVmFsdWUgdG8gYm9vbCBpbiBw
-eXRob24gYmluZGluZ3MNCj4gLSB2YXJpb3VzIG5ldyB0ZXN0LWNhc2VzIGZvciBpbXByb3ZlZCBj
-b3ZlcmFnZSB0cmVld2lkZQ0KPiAtIGFsaWduIHRoZSB0ZXN0IGNhc2VzIHdpdGggdGhlIGN1cnJl
-bnQga2VybmVsIHJlcXVpcmVtZW50IGZvciBzcGVjaWZ5aW5nDQo+IMKgIGRpcmVjdGlvbiBleHBs
-aWNpdGx5IHdoZW4gcmVjb25maWd1cmluZyBsaW5lcw0KPiANCj4gQnVnIGZpeGVzOg0KPiAtIGZp
-eCBDKysgYmluZGluZ3MgYnVpbGQgdXNpbmcgc2xpYnRvb2wNCj4gLSBhY2NlcHQgdGhlIG5ldyBz
-dHlsZSBhdXRvbWF0aWMgR1BJTyBjaGlwIGxhYmVscyBmcm9tIGdwaW8tc2ltIGluIGJhc2ggdGVz
-dHMNCj4gLSBmaXggQysrIHRlc3RzIHdpdGggcmVjZW50IGtlcm5lbHMgd2hpY2ggaW50cm9kdWNl
-ZCBzdHJpY3RlciByZWNvbmZpZ3VyZQ0KPiDCoCBiZWhhdmlvcg0KPiAtIGZpeCBhIHVzZS1hZnRl
-ci1mcmVlIGJ1ZyBpbiBweXRob24gYmluZGluZ3MNCj4gLSBmaXggcGFzc2luZyB0aGUgZXZlbnQg
-Y2xvY2sgcHJvcGVydHkgdG8gbGluZSByZXF1ZXN0cyBpbiBweXRob24gYmluZGluZ3MNCj4gLSBm
-aXggYSBtZW1vcnkgbGVhayBpbiB0b29scw0KPiAtIG1ha2Ugc3VyZSB0aGUgc3RyaW5nIGJ1ZmZl
-cnMgaW4gbGluZS1pbmZvIGFuZCBjaGlwLWluZm8gYXJlIGJpZyBlbm91Z2ggdG8gbm90DQo+IMKg
-IHRydW5jYXRlIHRoZSBzdHJpbmdzIHRoZXkgaG9sZCBiZWxvdyB0aGUgc2l6ZSBhY2NlcHRlZCBi
-eSB0aGUga2VybmVsDQo+IC0gcmVtb3ZlIGJ1Z2d5IGFuZCB1bm5lY2Vzc2FyeSBmbGFncyBzYW5p
-dGl6YXRpb24gZnJvbSBsaW5lLWNvbmZpZw0KPiAtIGZpeCBweXRob24gYmluZGluZ3MgaW5zdGFs
-bGF0aW9uIHdpdGggTWFrZWZpbGUgYnVpbGQNCj4gLSBzYW5pdGl6ZSB0aGUgcmV0dXJuIHZhbHVl
-cyBvZiBHUElPIGlvY3RsKClzIHdoaWNoIGluIHNvbWUgY2FzZXMgbWF5IGJlDQo+IMKgIGVycm9u
-ZW91c2x5IHBvc2l0aXZlDQo+IC0gZml4IHJlcXVlc3RpbmcgbGluZXMgYnkgbmFtZSB3aXRoIG11
-bHRpcGxlIGVudHJpZXMgaW4gcHl0aG9uIGJpbmRpbmdzDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBC
-YXJ0b3N6IEdvbGFzemV3c2tpIDxiYXJ0b3N6LmdvbGFzemV3c2tpQGxpbmFyby5vcmc+DQoNCkkg
-YWRtaXQgSSBoYWQgdG8gYmFja3BvcnQgaXQgdG8gc2NhcnRoZ2FwIHRvIHRlc3QgKGFsb25nIHdp
-dGggZ2xpYiAyLjgwLCBldGMpLA0KYnV0IEkgZGlkbid0IG5vdGljZSBhbnkgcHJvYmxlbXMgYW5k
-IEknbSBhYmxlIHRvIHN0YXJ0IGdwaW8tbWFuYWdlcg0KKHN5c3RlbWQgc2VydmljZSkgYW5kIGNv
-bnRyb2wgaXQgb3ZlciBncGlvY2xpLg0KDQpUaGFua3MgYSBsb3QgQmFydG9zeiENCg0KUmV2aWV3
-ZWQtYnk6IEFsZXhhbmRlciBTdmVyZGxpbiA8YWxleGFuZGVyLnN2ZXJkbGluQHNpZW1lbnMuY29t
-Pg0KVGVzdGVkLWJ5OiBBbGV4YW5kZXIgU3ZlcmRsaW4gPGFsZXhhbmRlci5zdmVyZGxpbkBzaWVt
-ZW5zLmNvbT4NCg0KPiAtLS0NCj4gQ2hhbmdlcyBpbiB2MzoNCj4gLSBtYWtlIGRidXMgYSBydW50
-aW1lIGRlcGVuZGVuY3kgZm9yIHRoZSAnZGJ1cycgYW5kICd0ZXN0cycgUEFDS0FHRUNPTkZJRw0K
-PiDCoCBzd2l0Y2hlcw0KPiAtIG1ha2UgbGliZ3Bpb2QtbWFuYWdlciBhIHJ1bnRpbWUgZGVwZW5k
-ZW5jeSBmb3IgbGliZ3Bpb2QtY2xpDQo+IA0KPiBDaGFuZ2VzIGluIHYyOg0KPiAtIGZpeCBTUkNf
-VVJJW3NoYTI1NnN1bV0gdmFsdWUNCj4gDQo+IMKgLi4uY3h4LU1pZ3JhdGUtQy10ZXN0cy10by11
-c2UtQ2F0Y2gyLXYzLnBhdGNoIHwgNTMwIC0tLS0tLS0tLS0tLS0tLS0tLQ0KPiDCoC4uLi9saWJn
-cGlvZC9saWJncGlvZC0yLngvZ3Bpby1tYW5hZ2VyLmluaXTCoMKgIHzCoCA3NiArKysNCj4gwqAu
-Li4vbGliZ3Bpb2QvbGliZ3Bpb2QtMi54L3J1bi1wdGVzdMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzC
-oCA0MyArLQ0KPiDCoC4uLi9saWJncGlvZC9saWJncGlvZF8yLjEuMy5iYsKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCB8wqAgMzMgLS0NCj4gwqAuLi4vcmVjaXBlcy1zdXBwb3J0L2xpYmdw
-aW9kL2xpYmdwaW9kXzIuMi5iYsKgIHzCoCA5OSArKysrDQo+IMKgNSBmaWxlcyBjaGFuZ2VkLCAy
-MDYgaW5zZXJ0aW9ucygrKSwgNTc1IGRlbGV0aW9ucygtKQ0KPiDCoGRlbGV0ZSBtb2RlIDEwMDY0
-NCBtZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJncGlvZC9saWJncGlvZC0yLngvMDAwMS1iaW5k
-aW5ncy1jeHgtTWlncmF0ZS1DLXRlc3RzLXRvLXVzZS1DYXRjaDItdjMucGF0Y2gNCj4gwqBjcmVh
-dGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGliZ3Bpb2QvbGliZ3Bpb2Qt
-Mi54L2dwaW8tbWFuYWdlci5pbml0DQo+IMKgZGVsZXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVj
-aXBlcy1zdXBwb3J0L2xpYmdwaW9kL2xpYmdwaW9kXzIuMS4zLmJiDQo+IMKgY3JlYXRlIG1vZGUg
-MTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpYmdwaW9kL2xpYmdwaW9kXzIuMi5iYg0K
-DQotLSANCkFsZXhhbmRlciBTdmVyZGxpbg0KU2llbWVucyBBRw0Kd3d3LnNpZW1lbnMuY29tDQo=
+Thanks for testing and Review Alexander.
+
+On Thu, Oct 24, 2024 at 7:10=E2=80=AFAM Sverdlin, Alexander
+<alexander.sverdlin@siemens.com> wrote:
+>
+> Hello all,
+>
+> On Thu, 2024-10-24 at 15:51 +0200, Bartosz Golaszewski wrote:
+> > From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+> >
+> > This is a big update for libgpiod bringing in the D-Bus daemon and its
+> > command-line client. This is why the patch is pretty hefty. The majorit=
+y
+> > of the line count comes from the removed patch that is now upstream but
+> > the v2.2 recipe also now contains a lot of bits and pieces that make th=
+e
+> > D-Bus daemon work both with system as well as sysvinit.
+> >
+> > The project now packages the systemd service and udev rules that allow
+> > the manager to run under its own user in a well sandboxed environment
+> > but the sysvsinit script is carried in the recipe as I don't want to
+> > put support for legacy systems in libgpiod repo.
+> >
+> > The patch also updates the ptests for libgpiod to run three new
+> > test-suites: one for GLib bindings, one for the command-line D-Bus
+> > client and finally one testing some daemon corner-cases not supported b=
+y
+> > the client.
+> >
+> > Build tested with various config options with systemd and sysvinit (the
+> > latter with glibc and musl) on 32- and 64-bit architectures.
+> >
+> > The complete changelog since v2.1 (taken verbatim from the NEWS file) i=
+s
+> > below:
+> >
+> > libgpiod v2.2
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >
+> > New features:
+> > - add GObject bindings with introspection
+> > - add a D-Bus interface to libgpiod together with a daemon implementing=
+ it and
+> >   a command-line client
+> > - split out the common shell test code for gpio-tools into a reusable t=
+est
+> >   harness for GPIO command-line tools
+> > - add minutes as a new supported time unit for tools and allow longer p=
+eriods
+> >   for timeouts, line holding, etc.
+> > - add a script for generating sdist and wheels for python bindings
+> > - migrate C++ tests to using Catch2 v3
+> >
+> > Improvements:
+> > - relicense C++ bindings under LGPL-2.1-or-later in order to make the p=
+roject
+> >   more attractive to users with GPL-3.0 restrictions
+> > - remove dependency on grep from tools' tests
+> > - make shell scripts pass shellcheck treewide
+> > - use ppoll() in tools to actually achieve the advertised microsecond
+> >   granularity of timeouts
+> > - documentation improvements
+> > - improve typing info in python bindings
+> > - improve __repr__() implementations in python bindings
+> > - make reconfiguring lines more flexible in python bindings by relaxing=
+ the
+> >   requirement to carry the ordering of the config entries from the requ=
+est
+> > - support casting of line.Value to bool in python bindings
+> > - various new test-cases for improved coverage treewide
+> > - align the test cases with the current kernel requirement for specifyi=
+ng
+> >   direction explicitly when reconfiguring lines
+> >
+> > Bug fixes:
+> > - fix C++ bindings build using slibtool
+> > - accept the new style automatic GPIO chip labels from gpio-sim in bash=
+ tests
+> > - fix C++ tests with recent kernels which introduced stricter reconfigu=
+re
+> >   behavior
+> > - fix a use-after-free bug in python bindings
+> > - fix passing the event clock property to line requests in python bindi=
+ngs
+> > - fix a memory leak in tools
+> > - make sure the string buffers in line-info and chip-info are big enoug=
+h to not
+> >   truncate the strings they hold below the size accepted by the kernel
+> > - remove buggy and unnecessary flags sanitization from line-config
+> > - fix python bindings installation with Makefile build
+> > - sanitize the return values of GPIO ioctl()s which in some cases may b=
+e
+> >   erroneously positive
+> > - fix requesting lines by name with multiple entries in python bindings
+> >
+> > Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+>
+> I admit I had to backport it to scarthgap to test (along with glib 2.80, =
+etc),
+> but I didn't notice any problems and I'm able to start gpio-manager
+> (systemd service) and control it over gpiocli.
+>
+> Thanks a lot Bartosz!
+>
+> Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+> Tested-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+>
+> > ---
+> > Changes in v3:
+> > - make dbus a runtime dependency for the 'dbus' and 'tests' PACKAGECONF=
+IG
+> >   switches
+> > - make libgpiod-manager a runtime dependency for libgpiod-cli
+> >
+> > Changes in v2:
+> > - fix SRC_URI[sha256sum] value
+> >
+> >  ...cxx-Migrate-C-tests-to-use-Catch2-v3.patch | 530 ------------------
+> >  .../libgpiod/libgpiod-2.x/gpio-manager.init   |  76 +++
+> >  .../libgpiod/libgpiod-2.x/run-ptest           |  43 +-
+> >  .../libgpiod/libgpiod_2.1.3.bb                |  33 --
+> >  .../recipes-support/libgpiod/libgpiod_2.2.bb  |  99 ++++
+> >  5 files changed, 206 insertions(+), 575 deletions(-)
+> >  delete mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-=
+bindings-cxx-Migrate-C-tests-to-use-Catch2-v3.patch
+> >  create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.x/gpio-=
+manager.init
+> >  delete mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_2.1.3.bb
+> >  create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
+>
+> --
+> Alexander Sverdlin
+> Siemens AG
+> www.siemens.com
 
