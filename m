@@ -2,56 +2,56 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B8AFD1038F
-	for <webhook@archiver.kernel.org>; Thu, 24 Oct 2024 20:36:25 +0000 (UTC)
-Received: from mail-yb1-f170.google.com (mail-yb1-f170.google.com [209.85.219.170])
- by mx.groups.io with SMTP id smtpd.web11.6088.1729801155331602096
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B427DD10374
+	for <webhook@archiver.kernel.org>; Thu, 24 Oct 2024 20:36:24 +0000 (UTC)
+Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
+ by mx.groups.io with SMTP id smtpd.web10.6206.1729801159290204214
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Oct 2024 13:19:15 -0700
+ Thu, 24 Oct 2024 13:19:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=G8eZU01m;
- spf=pass (domain: gmail.com, ip: 209.85.219.170, mailfrom: schonm@gmail.com)
-Received: by mail-yb1-f170.google.com with SMTP id 3f1490d57ef6-e28e4451e0bso1485196276.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Oct 2024 13:19:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=F2XvUuPW;
+ spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-6e38fc62b9fso13131867b3.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Oct 2024 13:19:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1729801154; x=1730405954; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1729801158; x=1730405958; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=re6KsNPRWwewi0K04pJQewJcY5V6kXAH4dRU6hiyi94=;
-        b=G8eZU01mMp6z9E8bednCLI2Oj//DYzmJ5CHgcwZu0xAKUwO+5UHIKpEEI29c0CQqef
-         VJJg7YORXch3+6jUP+QZwV82fgzvPapTr7Zc1MTiI8/jqWCzsKrkSTm1ciOSUKMKMn1B
-         726pVhR6ktEYrMSNq/fCtKyv8WCyqXfV3KnN6nleLFAxy66p6FCTOATklIuPsyATPVQE
-         37lWw5Tyr/0E1LT++zC+YCh8J334kzMkkONy5hn7NPGu0kkJRsIgpnNRQttK/9FnjMjS
-         WXk8ZQEqZba7/XbU64xJQtxAGV147/xzv0szVpdaywbCXHj+VwStlRlgnSdVDYTDAVTb
-         0NRQ==
+        bh=W9lCigUgfeDhBdQLghHW+NG8LsaQAKoimOzdOplAMQI=;
+        b=F2XvUuPWfiuYI4PizZRzx6/WlfrqXouahvS7eWKZ8HO3PmfdYyCjrdRE0aoJwioRKR
+         Y6KWylrcVkZ9yF4cf5mRYvoIksZCdoqbfl675Yf8synrZ4tx2ov7afps+ghXZZNRckMl
+         5Desovb5N1dsiovBYy+GEio4ArgjhQtnBUVvZIgLzIKCqhaepieHaZjFPA9Cm15oT4Xs
+         y+JKzeeZgvcdVYz3+DI3qXQmXOQgXPbhNigQJcsscDgvqXghrkIj0BqXSu6F3Pz7excf
+         WtQLkM+fqtyLI1yPAj6m3iOsww/biNU+Peku7gZ9PsxpG7pEbyX1UxwkQAcG5FhXlI1H
+         b2tQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729801154; x=1730405954;
+        d=1e100.net; s=20230601; t=1729801158; x=1730405958;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=re6KsNPRWwewi0K04pJQewJcY5V6kXAH4dRU6hiyi94=;
-        b=dHiIKzEPk+Vq0emwoBsnCrpQAnaAJ19niu45xHh4BDzMyDYGMeneX8fRiiWf6SC9rL
-         bngadWgmUVdr4/Bnq7Q2AHoShcfAnMqvtVhVxYayI5hJxlUOgbW6DjyHlvIN7rMpCiJu
-         wc/L79b5gvuwZqFpEj9h3AhmyObVyyRr8cBXNYVheFofImhC9lbr5gc4yQayG9HoxEh7
-         A/aNq8UA/Q62cLRv400y41iGcd1gf9Ptc8TAWhMdUfuWoLmPj06yQs97TChm1N5CVH3T
-         YomAhX8a2WdlAmGVC6HDyx9tNidK77sNxBnNa+EcyfUpQCMgAAjWv0RqKvS0xWaieDjn
-         mwTg==
-X-Gm-Message-State: AOJu0Yxg2Q6LE1CdWkFuE8hqpaHG216utWU8HjrKniSZJ2shHTzvnMvi
-	aUVPAPIIMc22xdbJX+8eQsEvOeKTMlPF5jFtGPixJSbv2cB8KJpCIs0Azg==
-X-Google-Smtp-Source: AGHT+IGQJNmbtG7gUgzAu9YMCUXZjFvq2xFffX9aN/jfBaHr1HA4nB1hArkcTVWY9YskPWqkKCwSCg==
-X-Received: by 2002:a05:690c:4093:b0:6e2:aa89:9d0 with SMTP id 00721157ae682-6e858166a13mr28082037b3.10.1729801153863;
-        Thu, 24 Oct 2024 13:19:13 -0700 (PDT)
+        bh=W9lCigUgfeDhBdQLghHW+NG8LsaQAKoimOzdOplAMQI=;
+        b=nArf38nlb3tAJbqmsiVN4lB66SzhoqGTy9e3nFH/qBQSDMsLGOH59lMCfkbhgTAExm
+         GCsTZqTu4KwwvNJzcM2IATG6hxj6cswg4zLCMw9p6pc2j4wOdrEFlOnmWFrLy0/4exNi
+         9AcMPC92b/vC+XhFmrGMEWYAhyyb7Tl9OjMGhKDcUoa9drK2lyi8JzWWlvo940lE5ygV
+         EUqroHyWIhljNiLKsVCOp0dNFGLZkBQq0HNtuZ2npN6XaHJIPE9X8TRLankc98gpupHY
+         MQ60qZb8lTRhqGDoEY2QJujLq4Z0YfYfMWwBDei7hpt9/+vQhQZPfbe9f8J7opEuHv3W
+         GCQg==
+X-Gm-Message-State: AOJu0YyzYdtKPcxDfXG15pJz7IJ/RDAeLP4VepeD2GG8g6YtTVX8RleQ
+	NAGmTvgz3BshzD/50ewhLMrdYyJC7ldpjl6xS08DWhdAnzRrFvhn7IcMDA==
+X-Google-Smtp-Source: AGHT+IEb7xJTNVkdl57jEUh+BskwHye6OcahWEcx2AOqoz1WPtuuN1rEgCWjZj2yj0Bfyfz/QNFd1A==
+X-Received: by 2002:a05:690c:3411:b0:6e3:39b6:5370 with SMTP id 00721157ae682-6e7f0e47ed9mr69746437b3.24.1729801158031;
+        Thu, 24 Oct 2024 13:19:18 -0700 (PDT)
 Received: from localhost.localdomain ([67.7.85.114])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6e5f59f551csm21484897b3.10.2024.10.24.13.19.13
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6e5f59f551csm21484897b3.10.2024.10.24.13.19.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 24 Oct 2024 13:19:13 -0700 (PDT)
+        Thu, 24 Oct 2024 13:19:17 -0700 (PDT)
 From: "J. S." <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-perl][PATCH 32/42] libproc-waitstat-perl: Change references to search.cpan.org to use metacpan.org
-Date: Thu, 24 Oct 2024 16:07:51 -0400
-Message-ID: <20241024201806.440273-33-schonm@gmail.com>
+Subject: [meta-perl][PATCH 37/42] libtext-diff-perl: Change references to search.cpan.org to use metacpan.org
+Date: Thu, 24 Oct 2024 16:07:56 -0400
+Message-ID: <20241024201806.440273-38-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241024201806.440273-1-schonm@gmail.com>
 References: <20241024201806.440273-1-schonm@gmail.com>
@@ -60,36 +60,27 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Oct 2024 20:36:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113210
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Oct 2024 20:36:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113215
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb b/meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb
-index 5e4c71b70..db7ca17ad 100644
---- a/meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb
-+++ b/meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Interpret and act on wait() status values"
- DESCRIPTION = "This module contains functions for interpreting and acting \
- on wait status values."
+diff --git a/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb b/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
+index 2e89b759b..9c473d15a 100644
+--- a/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
++++ b/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
+@@ -6,7 +6,7 @@ faster than shelling out to a system's diff executable for small files, \
+ and generally slower on larger files."
+ SECTION = "libs"
  
--HOMEPAGE = "http://search.cpan.org/~rosch/Proc-WaitStat/"
-+HOMEPAGE = "https://metacpan.org/dist/Proc-WaitStat"
- SECTION = "libraries"
+-HOMEPAGE = "http://search.cpan.org/~ovid/Text-Diff/"
++HOMEPAGE = "https://metacpan.org/release/OVID/Text-Diff-1.41"
  
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
-@@ -12,7 +12,7 @@ RDEPENDS:${PN} += "perl libipc-signal-perl"
- 
- S = "${WORKDIR}/Proc-WaitStat-${PV}"
- 
--SRC_URI = "http://search.cpan.org/CPAN/authors/id/R/RO/ROSCH/Proc-WaitStat-${PV}.tar.gz"
-+SRC_URI = "https://cpan.metacpan.org/authors/id/R/RO/ROSCH/Proc-WaitStat-${PV}.tar.gz"
- 
- SRC_URI[sha256sum] = "d07563f5e787909d16e7390241e877f49ab739b1de9d0e2ea1a41bd0bf4474bc"
- 
+ LICENSE = "Artistic-1.0 | GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=385c55653886acac3821999a3ccd17b3"
 -- 
 2.43.0
 
