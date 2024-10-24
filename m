@@ -1,113 +1,106 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A470CE8E6B
-	for <webhook@archiver.kernel.org>; Thu, 24 Oct 2024 12:18:57 +0000 (UTC)
-Received: from mail-oo1-f51.google.com (mail-oo1-f51.google.com [209.85.161.51])
- by mx.groups.io with SMTP id smtpd.web10.13211.1729772335623121570
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B0D2DCE8E74
+	for <webhook@archiver.kernel.org>; Thu, 24 Oct 2024 13:20:37 +0000 (UTC)
+Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com [209.85.219.171])
+ by mx.groups.io with SMTP id smtpd.web10.14142.1729775194557775075
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Oct 2024 05:18:55 -0700
+ Thu, 24 Oct 2024 06:06:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=AgGPEwov;
- spf=pass (domain: gmail.com, ip: 209.85.161.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f51.google.com with SMTP id 006d021491bc7-5ebc0dbc65dso453507eaf.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Oct 2024 05:18:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WaKVLMnf;
+ spf=pass (domain: gmail.com, ip: 209.85.219.171, mailfrom: schonm@gmail.com)
+Received: by mail-yb1-f171.google.com with SMTP id 3f1490d57ef6-dff1ccdc17bso976984276.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Oct 2024 06:06:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1729772335; x=1730377135; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=0isuJFjN8T/XJGrUvAFTDaoV0AcNuYbhCKXlLs1m044=;
-        b=AgGPEwovvPDqojESshMxZ4NnMsQ5aKHJP0zTA2EWZF+W0MfW4iffbikq1EhOC/zcFj
-         2SYgWV2PN5B8IZb0wlJRLjvJaJNMvzFGxO4q9Ik1aLG8Nxw+DdyeluCs821T80c8kQlg
-         8LqeyJbxEPFJzdxGDKRua/cjxUDM7pviQ+RddEbqk74rEEzn47Lz/wrbT4zcWk/rulmc
-         kzpQRsTjs5LtMTjLhr/NkHq7rIscZTeM6PQzVSCrrBtF2aAG8oWYcCLQpdeowPZKesMI
-         H0AhkGK8DM5t6m4wgCG5vY4XTqa/I7wzDQsLKvjmWB5LOWAio+6BNCvZzhLaWhxohocl
-         Wgsw==
+        d=gmail.com; s=20230601; t=1729775193; x=1730379993; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Hkw1A/IzquqR6nSmFqydBcjarXch/5grPkcb8zeK3/c=;
+        b=WaKVLMnf2IUFXn2Bq3Hq5oTaztktAW2o+9VkUUzm9l0qrbPMWG8KVDzb8NxjM/WrzH
+         Yvpf2nwlN+uS3W+CkPfCbt+K6p6ZEwXBYW8yZEGh2x+ZLmxMpkHNuhiT+6uxZGBJ7wMi
+         zz8oktV3m625paer9wldbGvcYM3ub+TpGiA6VZyi+7Fvgjf6LHpNjRnsn+d7BO43eSu4
+         jVGU33jEdGixuWNgpNw4g5LhqlJJ7UnlbFri3zwXYCtdSCOwI1GVVMmpTk9TKXnD4yFb
+         RssMtVEAb28B27imcHwtEaaD4v1zlDSZRi7IrYZJq/RVcx9WR73vb2AH2ifaLhBmxg3c
+         IkiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729772335; x=1730377135;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=0isuJFjN8T/XJGrUvAFTDaoV0AcNuYbhCKXlLs1m044=;
-        b=h71kiFkb8JEYrnKxPrHBzPv0Q2bHduJTQjc6lEDYS5/n5wu4GwPpV34r+sOnr89vf+
-         6gwnDIxRQLp5nQTjka36Vuw9x6+Mk0TRtJ4CpVgcYDol6iNbBF8+0LIYQiIsrurIWoyg
-         8jrsIJRnbCRsUwyRSGYNpm8VQJvIi1nu8p7A8d1pjlUOip+YWd0m1BqGcmwiXJK2iMK3
-         MCSekIyp5lM6fonPzWzAReOl2VoAtTMVekFd9DR2YrvYzZOiknphpEm1Dgb+Bb4n6Jww
-         1BW5B8fcmf5yTTV1IXSm4JDsaiocFBr/dZVTbCA0UkX5UgmaOcHu2MfFd5/w3blKYqhl
-         mQHQ==
-X-Forwarded-Encrypted: i=1; AJvYcCW9fy07LXuRs7tQ7cWqSXI2v6lfCIbCbMLrH3PIhJ0qTeuu3grVI+4QOgfLNlfKEqyAwtOE81pM8nYoRPiNTcTWa7g=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzGzdhW5vNEKsMbB0Ig5a5PZaBuuIjRPKaQNZUAIndSK8XkreHv
-	rHvS3KflbCpSWOf2DNXV3g/XUY8EVusqbzuOQigQb6eBTR5ZRVOGsAu1CC3cpn7XftGbiQmhTjP
-	Z3z7INaMqgBxA+/pg8hoCInOm9Yg=
-X-Google-Smtp-Source: AGHT+IGhmDGrw0aQgFwCoAHWUUQhW8zfG6mOwQcAXXsTSZGyJJd9O0du8RYnzvA25ksKO81RdPeeBUX8V2em4jQ+3Ck=
-X-Received: by 2002:a05:6820:22a0:b0:5eb:fc8c:4669 with SMTP id
- 006d021491bc7-5ec0525b002mr1192524eaf.0.1729772334879; Thu, 24 Oct 2024
- 05:18:54 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1729775193; x=1730379993;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Hkw1A/IzquqR6nSmFqydBcjarXch/5grPkcb8zeK3/c=;
+        b=uUvrIXkt+6d0P42Cv7Yl3da1d/armAT2FfxijVoxs2I3GPjGQoW2iFKY4VhMFGz2q4
+         KepMTRRl4ZQBJsXhIZDHseXUd06LLxSnYoPERnVAeeWryDrNgEjEUCoAnYLsuN5I7WFl
+         UlZhtDBd6NkkwfJBrGEdJdrybd+xeG83KnYDk7F8Wg1+9FovcyVNif9BLr56p3VzWd1D
+         px687cXJIBFoSrCD7DHbjfLmnhRjXSUzuN1mUsNPWJCrsfbdmqVWf0n41o2wpTlHDvFi
+         sHjGhugbgEejRkxCu5+W3jk59JLzc3xr1sCEW2LL5afEXeda7Cwfq5dlg4tKakHa13d6
+         XheQ==
+X-Gm-Message-State: AOJu0YzayuiAm5ZvQak5G67fMMl7mbRNhGrLHtaEQFwSSJ4TjcxZXPsX
+	0q5E1jl3+22Ll4Vs5M8rqDHO7+0JURnth/OtvJ+QpnOny78ca13vWmxVoA==
+X-Google-Smtp-Source: AGHT+IGYvXoYpuOYe2VfuJFgJkBYtaOqm+a66R+YfImnY2AaKzHcbYU1xasyv+MRoiGcvBmWJGrQ1A==
+X-Received: by 2002:a05:690c:dd3:b0:6dd:cdd7:ce49 with SMTP id 00721157ae682-6e7f0df5d79mr65175947b3.6.1729775193096;
+        Thu, 24 Oct 2024 06:06:33 -0700 (PDT)
+Received: from localhost.localdomain ([67.7.85.114])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6e5f5ad5a1asm19448897b3.69.2024.10.24.06.06.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 24 Oct 2024 06:06:32 -0700 (PDT)
+From: "J. S." <schonm@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-perl][PATCH] libdigest-hmac-perl: upgrade 1.03 -> 1.05
+Date: Thu, 24 Oct 2024 09:06:12 -0400
+Message-ID: <20241024130612.21656-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20241024065109.74010-1-chanh@os.amperecomputing.com> <38e5da48-fc0e-4685-b615-992a1f78dd45@amperemail.onmicrosoft.com>
-In-Reply-To: <38e5da48-fc0e-4685-b615-992a1f78dd45@amperemail.onmicrosoft.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 24 Oct 2024 05:18:27 -0700
-Message-ID: <CAMKF1sprL34koHC73Y9ji5ZTP2J+2W+TLDmoKjRzUR9vcudDjg@mail.gmail.com>
-Subject: Re: [meta-networking][PATCH] mctp: Fix CI build error with musl+clang
-To: Chanh Nguyen <chanh@amperemail.onmicrosoft.com>
-Cc: Chanh Nguyen <chanh@os.amperecomputing.com>, Jeremy Kerr <jk@codeconstruct.com.au>, 
-	openembedded-devel@lists.openembedded.org, 
-	Thang Nguyen <thang@os.amperecomputing.com>, Thu Nguyen <tbnguyen@amperecomputing.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Oct 2024 12:18:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113166
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Oct 2024 13:20:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113167
 
-Please test it and wait it to merge before sending pull request here,
-feature branches are temporary and usually not something we use in OE
+This new version brings an updated copyright date and a new maintainer.
+This distributes under the Perl license (as it did previously).
 
-On Wed, Oct 23, 2024 at 11:52=E2=80=AFPM Chanh Nguyen
-<chanh@amperemail.onmicrosoft.com> wrote:
->
-> Hi Khem,
->
-> This is only a temporary patch. It helps check CI build errors on the
-> MCTP repo. Please help run the CI build; if any error you can show here,
-> then Jeremy will update the mctp repo to fix errors.
->
-> Please don't merge this patch. When the CI builds completely without any
-> errors, I will push a new patch with the latest version on the MCTP repo.
->
-> Thanks,
->
-> Chanh
->
-> On 24/10/2024 13:51, Chanh Nguyen wrote:
-> > Signed-off-by: Chanh Nguyen <chanh@os.amperecomputing.com>
-> > ---
-> >   meta-networking/recipes-support/mctp/mctp_2.0.bb | 4 ++--
-> >   1 file changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/meta-networking/recipes-support/mctp/mctp_2.0.bb b/meta-ne=
-tworking/recipes-support/mctp/mctp_2.0.bb
-> > index c6aa7c104..793afe755 100644
-> > --- a/meta-networking/recipes-support/mctp/mctp_2.0.bb
-> > +++ b/meta-networking/recipes-support/mctp/mctp_2.0.bb
-> > @@ -5,9 +5,9 @@ LICENSE =3D "GPL-2.0-only"
-> >
-> >   LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4cc91856b08b094b4f406a29dc=
-61db21"
-> >
-> > -SRCREV =3D "f110926b082731b25720b444378ad55d7a9d451d"
-> > +SRCREV =3D "089dc53fa7387cca517cd713061c323ca06fb6dd"
-> >
-> > -SRC_URI =3D "git://github.com/CodeConstruct/mctp;branch=3Dmain;protoco=
-l=3Dhttps"
-> > +SRC_URI =3D "git://github.com/CodeConstruct/mctp;branch=3Ddev/cross-fi=
-xes;protocol=3Dhttps"
-> >
-> >   S =3D "${WORKDIR}/git"
-> >
->
+Update the HOMEPAGE and SRC_URI to use metacpan.org instead of search.cpan.org
+
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
+---
+ ...gest-hmac-perl_1.03.bb => libdigest-hmac-perl_1.05.bb} | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-perl/recipes-perl/libdigest/{libdigest-hmac-perl_1.03.bb => libdigest-hmac-perl_1.05.bb} (57%)
+
+diff --git a/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb b/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.05.bb
+similarity index 57%
+rename from meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
+rename to meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.05.bb
+index 41b4e78c5..7b5980287 100644
+--- a/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
++++ b/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.05.bb
+@@ -1,17 +1,17 @@
+ SUMMARY = "Keyed-Hashing for Message Authentication"
+ DESCRIPTION = "Keyed-Hashing for Message Authentication"
+-HOMEPAGE = "http://search.cpan.org/~gaas/Digest-HMAC-1.03/"
++HOMEPAGE = "https://metacpan.org/pod/Digest::HMAC"
+ SECTION = "libs"
+ 
+ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+-LIC_FILES_CHKSUM = "file://README;beginline=13;endline=17;md5=da980cdc026faa065e5d5004115334e6"
++LIC_FILES_CHKSUM = "file://README;beginline=6;endline=9;md5=6321739e9ccbf74ee5dd2eb82c42d609"
+ 
+ RDEPENDS:${PN} = "libdigest-sha1-perl perl-module-extutils-makemaker perl-module-digest-md5"
+ 
+-SRC_URI = "http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/Digest-HMAC-${PV}.tar.gz \
++SRC_URI = "https://cpan.metacpan.org/authors/id/A/AR/ARODLAND/Digest-HMAC-${PV}.tar.gz \
+            file://run-ptest \
+           "
+-SRC_URI[sha256sum] = "3bc72c6d3ff144d73aefb90e9a78d33612d58cf1cd1631ecfb8985ba96da4a59"
++SRC_URI[sha256sum] = "215cb59cba610745cfb2d4b3f8ef756d590e57e3ad7986a992e87c4969fcdc7a"
+ 
+ S = "${WORKDIR}/Digest-HMAC-${PV}"
+ 
+-- 
+2.43.0
+
 
