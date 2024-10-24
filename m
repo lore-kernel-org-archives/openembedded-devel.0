@@ -1,150 +1,152 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AD5BCE8E8B
-	for <webhook@archiver.kernel.org>; Thu, 24 Oct 2024 15:22:28 +0000 (UTC)
-Received: from mail-oo1-f44.google.com (mail-oo1-f44.google.com [209.85.161.44])
- by mx.groups.io with SMTP id smtpd.web10.17229.1729783347278886160
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 922E6CE8E96
+	for <webhook@archiver.kernel.org>; Thu, 24 Oct 2024 16:44:32 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by mx.groups.io with SMTP id smtpd.web11.1206.1729788265049306610
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Oct 2024 08:22:27 -0700
+ Thu, 24 Oct 2024 09:44:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XBzYBbo0;
- spf=pass (domain: gmail.com, ip: 209.85.161.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f44.google.com with SMTP id 006d021491bc7-5ebc0dbc566so574194eaf.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 24 Oct 2024 08:22:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1729783346; x=1730388146; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=PMGTy7rl2VuoLUuUepkQNvQT4nYBwMmPBGX9TeojDLo=;
-        b=XBzYBbo0lj9OsK/+IdkCQsVA/qO5xuEEItK6Jo9KKv4nzZIIofSCnwMH4zVHwblypS
-         /vILIetqq6phsKwstndg8YmL9E9eavn0rigloay35Ktmg5uN4nRzqfTdvl1dWNlpfV8i
-         1Q6MWNnM40ohmfd+WAUz7SSVrJOfzoKkMr5OJoKF4kggz8+ao95PmlowIBUwpeGYTXvD
-         arm3WrrRltYbf0IH6CoW8YX4rwjL1nv8f/csPOgiBSC33sa6bYUoQbU+vTf01aur2cjZ
-         +ALLVtlJj7TmcQtf7WLKec7E/OOxF+lCPjKpSRmp7rQvo1zN2SbMnBTl8RnMJM7kEWg8
-         kyDg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729783346; x=1730388146;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=PMGTy7rl2VuoLUuUepkQNvQT4nYBwMmPBGX9TeojDLo=;
-        b=JyceuH8ift+JsZC0uo+XDt+l/WXak1qrimxyx6SHS8pvEqgZ/iA5d33D84vWQejY/T
-         dpDbWaKJLEQsCIfCSBRteUmWbfQhfFtcShWfU04Qd7Ryju2b8+C0PB1DveLpmcBfJWVx
-         KXB2NLx2gfYSIA/0h21eGUabdLfSRQCgDl18Ql4rxmcfjqiGFw5seSfOsEQWp3ZG8RgV
-         nl73D2SCJbrc8DkYjicGKzO2JHQBKNwfHd4x4MrVM6lBIDC8XI18WWpgjHFV1zYRiAoX
-         FLu2lSxTGgqMd9in2Ff/SBI1E2YIH5Cgan0GJxms9JJ76cNLMLZGRmSwsVVTPavtouqk
-         iCxA==
-X-Forwarded-Encrypted: i=1; AJvYcCWkh+DRpLHK9oiGZVEBJ61J3a9+VMEur2sa++rx/7s6Lqv942Q3qCWtBwaUQwVOoF/egjDX94JBExfxHaXhLHZZlXg=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yy3J9mQ2ZoyEVtdTPMoJoIXf2qn/XGsBUNAkGnDolufXERDExNN
-	62Ln9/PHf7c7t9/jrIKZIZq54/m2IRvvHnuRQFChKim+RabC6RecWpBzmdqWAUytd7J8zxXbfCA
-	wqSruxyOsbKViQOOKBddSLa2vju4=
-X-Google-Smtp-Source: AGHT+IGLCi/S9kcHNJ0/R+qNTym4qMAq86mZWVAIVExkaCmRaenIqxh6lXb+pxXIdnxnLyABbG1J0tbguQn2CtsQTlY=
-X-Received: by 2002:a05:6820:1c85:b0:5eb:827b:9bbf with SMTP id
- 006d021491bc7-5ec057e80f2mr1785241eaf.7.1729783346508; Thu, 24 Oct 2024
- 08:22:26 -0700 (PDT)
+ dkim=none (message not signed); spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9BBCC339
+	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Oct 2024 09:44:53 -0700 (PDT)
+Received: from cesw-amp-gbt-1s-m12830-04.oss.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 982423F71E
+	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Oct 2024 09:44:23 -0700 (PDT)
+From: Ross Burton <ross.burton@arm.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] tk: set AUTOTOOLS_SCRIPT_PATH instead of having to mess with S/../
+Date: Thu, 24 Oct 2024 17:44:19 +0100
+Message-Id: <20241024164419.288686-1-ross.burton@arm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20241024065109.74010-1-chanh@os.amperecomputing.com>
- <38e5da48-fc0e-4685-b615-992a1f78dd45@amperemail.onmicrosoft.com>
- <CAMKF1sprL34koHC73Y9ji5ZTP2J+2W+TLDmoKjRzUR9vcudDjg@mail.gmail.com>
- <4f094abd-bd57-41b3-b4a4-e42180b45dc5@amperemail.onmicrosoft.com> <2b431a79-3d7f-4b55-8238-21072edbaf20@amperemail.onmicrosoft.com>
-In-Reply-To: <2b431a79-3d7f-4b55-8238-21072edbaf20@amperemail.onmicrosoft.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 24 Oct 2024 08:22:00 -0700
-Message-ID: <CAMKF1soGa9mqLAxC2+4s+L8iEdgdpp57asn7Y5ULusrucR9sSA@mail.gmail.com>
-Subject: Re: [meta-networking][PATCH] mctp: Fix CI build error with musl+clang
-To: Chanh Nguyen <chanh@amperemail.onmicrosoft.com>
-Cc: Chanh Nguyen <chanh@os.amperecomputing.com>, Jeremy Kerr <jk@codeconstruct.com.au>, 
-	openembedded-devel@lists.openembedded.org, 
-	Thang Nguyen <thang@os.amperecomputing.com>, Thu Nguyen <tbnguyen@amperecomputing.com>
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Oct 2024 15:22:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113175
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Oct 2024 16:44:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113176
 
-On Thu, Oct 24, 2024 at 7:57=E2=80=AFAM Chanh Nguyen
-<chanh@amperemail.onmicrosoft.com> wrote:
->
->
->
-> On 24/10/2024 21:46, Chanh Nguyen wrote:
-> >
-> >
-> > On 24/10/2024 19:18, Khem Raj wrote:
-> >> Please test it and wait it to merge before sending pull request here,
-> >> feature branches are temporary and usually not something we use in OE
-> >>
-> >
-> > Yes Khem, it is only temporary for CI build checking.
-> >
-> > Can you please help run CI build? If any other errors, we'll fix.
-> >
-> > Thanks,
-> > Chanh
-> >
-> I and Jeremy used the musl compiler (https://musl.cc/), and it compiled
-> the MCTP successfully. It seems the error just happens with your CI run,
-> and we haven't known to run the CI to check.
->
+We want to run the configure script in ${S}/unix, so instead of setting
+S to BP/unix and then having to use ../ to reach up a level constantly
+(including some deep changes to DEBUG_PREFIX_MAP and PSEUDO_IGNORE_PATHS)
+we can set S to the top of the source tree as usual and tell autotools
+where the configure script is.
 
-As I mentioned before, the combination is clang19 + musl, musl.cc is
-gcc+musl only so
-you won't see clang specific issues with it.
-That's fine if you can say [RFT] in the subject line to convey the intentio=
-n.
+This both makes the recipe clearer, and enables tk-src to be generated
+correctly.
 
-> >> On Wed, Oct 23, 2024 at 11:52=E2=80=AFPM Chanh Nguyen
-> >> <chanh@amperemail.onmicrosoft.com> wrote:
-> >>>
-> >>> Hi Khem,
-> >>>
-> >>> This is only a temporary patch. It helps check CI build errors on the
-> >>> MCTP repo. Please help run the CI build; if any error you can show he=
-re,
-> >>> then Jeremy will update the mctp repo to fix errors.
-> >>>
-> >>> Please don't merge this patch. When the CI builds completely without =
-any
-> >>> errors, I will push a new patch with the latest version on the MCTP
-> >>> repo.
-> >>>
-> >>> Thanks,
-> >>>
-> >>> Chanh
-> >>>
-> >>> On 24/10/2024 13:51, Chanh Nguyen wrote:
-> >>>> Signed-off-by: Chanh Nguyen <chanh@os.amperecomputing.com>
-> >>>> ---
-> >>>>    meta-networking/recipes-support/mctp/mctp_2.0.bb | 4 ++--
-> >>>>    1 file changed, 2 insertions(+), 2 deletions(-)
-> >>>>
-> >>>> diff --git a/meta-networking/recipes-support/mctp/mctp_2.0.bb b/
-> >>>> meta-networking/recipes-support/mctp/mctp_2.0.bb
-> >>>> index c6aa7c104..793afe755 100644
-> >>>> --- a/meta-networking/recipes-support/mctp/mctp_2.0.bb
-> >>>> +++ b/meta-networking/recipes-support/mctp/mctp_2.0.bb
-> >>>> @@ -5,9 +5,9 @@ LICENSE =3D "GPL-2.0-only"
-> >>>>
-> >>>>    LIC_FILES_CHKSUM =3D "file://
-> >>>> LICENSE;md5=3D4cc91856b08b094b4f406a29dc61db21"
-> >>>>
-> >>>> -SRCREV =3D "f110926b082731b25720b444378ad55d7a9d451d"
-> >>>> +SRCREV =3D "089dc53fa7387cca517cd713061c323ca06fb6dd"
-> >>>>
-> >>>> -SRC_URI =3D "git://github.com/CodeConstruct/
-> >>>> mctp;branch=3Dmain;protocol=3Dhttps"
-> >>>> +SRC_URI =3D "git://github.com/CodeConstruct/mctp;branch=3Ddev/cross=
+Signed-off-by: Ross Burton <ross.burton@arm.com>
+---
+ .../recipes-devtools/tcltk/tk/fix-xft.diff    |  4 +--
+ meta-oe/recipes-devtools/tcltk/tk_8.6.15.bb   | 34 ++++++++++---------
+ 2 files changed, 20 insertions(+), 18 deletions(-)
+
+diff --git a/meta-oe/recipes-devtools/tcltk/tk/fix-xft.diff b/meta-oe/rec=
+ipes-devtools/tcltk/tk/fix-xft.diff
+index fdf3c66535..c1e2f7344e 100644
+--- a/meta-oe/recipes-devtools/tcltk/tk/fix-xft.diff
++++ b/meta-oe/recipes-devtools/tcltk/tk/fix-xft.diff
+@@ -1,7 +1,7 @@
+ Upstream-Status: Pending
+=20
+---- /tmp/configure.in	2010-05-19 13:29:03.000000000 +0200
+-+++ unix/configure.in	2010-05-19 13:42:05.000000000 +0200
++--- a/unix/configure.in	2010-05-19 13:29:03.000000000 +0200
+++++ b/unix/configure.in	2010-05-19 13:42:05.000000000 +0200
+ @@ -526,13 +526,9 @@
+  	found_xft=3D"yes"
+  	dnl make sure package configurator (xft-config or pkg-config
+diff --git a/meta-oe/recipes-devtools/tcltk/tk_8.6.15.bb b/meta-oe/recipe=
+s-devtools/tcltk/tk_8.6.15.bb
+index 8d055c9d11..1438a05625 100644
+--- a/meta-oe/recipes-devtools/tcltk/tk_8.6.15.bb
++++ b/meta-oe/recipes-devtools/tcltk/tk_8.6.15.bb
+@@ -4,23 +4,23 @@ SECTION =3D "devel/tcltk"
+=20
+ # http://www.tcl.tk/software/tcltk/license.html
+ LICENSE =3D "TCL"
+-LIC_FILES_CHKSUM =3D "file://${S}/../license.terms;md5=3Dc88f99decec11af=
+a967ad33d314f87fe \
+-    file://${S}/../compat/license.terms;md5=3Dc88f99decec11afa967ad33d31=
+4f87fe \
+-    file://${S}/../doc/license.terms;md5=3Dc88f99decec11afa967ad33d314f8=
+7fe \
+-    file://${S}/../library/license.terms;md5=3Dc88f99decec11afa967ad33d3=
+14f87fe \
+-    file://${S}/../macosx/license.terms;md5=3Dc88f99decec11afa967ad33d31=
+4f87fe \
+-    file://${S}/../tests/license.terms;md5=3Dc88f99decec11afa967ad33d314=
+f87fe \
+-    file://${S}/../unix/license.terms;md5=3Dc88f99decec11afa967ad33d314f=
+87fe \
+-    file://${S}/../win/license.terms;md5=3Dc88f99decec11afa967ad33d314f8=
+7fe \
+-    file://${S}/../xlib/license.terms;md5=3Dc88f99decec11afa967ad33d314f=
+87fe \
++LIC_FILES_CHKSUM =3D "file://license.terms;md5=3Dc88f99decec11afa967ad33=
+d314f87fe \
++    file://compat/license.terms;md5=3Dc88f99decec11afa967ad33d314f87fe \
++    file://doc/license.terms;md5=3Dc88f99decec11afa967ad33d314f87fe \
++    file://library/license.terms;md5=3Dc88f99decec11afa967ad33d314f87fe =
+\
++    file://macosx/license.terms;md5=3Dc88f99decec11afa967ad33d314f87fe \
++    file://tests/license.terms;md5=3Dc88f99decec11afa967ad33d314f87fe \
++    file://unix/license.terms;md5=3Dc88f99decec11afa967ad33d314f87fe \
++    file://win/license.terms;md5=3Dc88f99decec11afa967ad33d314f87fe \
++    file://xlib/license.terms;md5=3Dc88f99decec11afa967ad33d314f87fe \
+ "
+=20
+ DEPENDS =3D "tcl virtual/libx11 libxt"
+=20
+ SRC_URI =3D "\
+     ${SOURCEFORGE_MIRROR}/tcl/${BPN}${PV}-src.tar.gz \
+-    file://confsearch.diff;striplevel=3D2 \
+-    file://tkprivate.diff;striplevel=3D2 \
++    file://confsearch.diff \
++    file://tkprivate.diff \
+     file://fix-xft.diff \
+ "
+=20
+@@ -29,17 +29,17 @@ SRC_URI[sha256sum] =3D "550969f35379f952b3020f3ab7b9d=
+d5bfd11c1ef7c9b7c6a75f5c49aca
+ UPSTREAM_CHECK_URI =3D "https://sourceforge.net/projects/tcl/files/Tcl/"
+ UPSTREAM_CHECK_REGEX =3D "Tcl/(?P<pver>\d+(\.\d+)+)/"
+=20
+-S =3D "${WORKDIR}/${BPN}${PV}/unix"
 -
-> >>>> fixes;protocol=3Dhttps"
-> >>>>
-> >>>>    S =3D "${WORKDIR}/git"
-> >>>>
-> >>>
-> >
->
+-DEBUG_PREFIX_MAP +=3D "-fdebug-prefix-map=3D${S}/../=3D${TARGET_DBGSRC_D=
+IR}/.."
+-
+-PSEUDO_IGNORE_PATHS .=3D ",${WORKDIR}/${BPN}${PV}"
++S =3D "${WORKDIR}/${BPN}${PV}"
+=20
+ # Short version format: "8.6"
+ VER =3D "${@os.path.splitext(d.getVar('PV'))[0]}"
+=20
+ LDFLAGS +=3D "-Wl,-rpath,${libdir}/tcltk/${PV}/lib"
++
+ inherit autotools features_check pkgconfig
++
++AUTOTOOLS_SCRIPT_PATH =3D "${S}/unix"
++
+ # depends on virtual/libx11
+ REQUIRED_DISTRO_FEATURES =3D "x11"
+=20
+@@ -49,7 +49,9 @@ EXTRA_OECONF =3D "\
+     --with-tcl=3D${STAGING_BINDIR}/crossscripts \
+     --libdir=3D${libdir} \
+ "
++
+ export TK_LIBRARY=3D'${libdir}/tk${VER}'
++
+ do_install:append() {
+     ln -sf libtk${VER}.so ${D}${libdir}/libtk${VER}.so.0
+     oe_libinstall -so libtk${VER} ${D}${libdir}
+--=20
+2.34.1
+
 
