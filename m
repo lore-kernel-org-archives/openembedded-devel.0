@@ -1,200 +1,126 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D161D10BE7
-	for <webhook@archiver.kernel.org>; Sat, 26 Oct 2024 06:58:24 +0000 (UTC)
-Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
- by mx.groups.io with SMTP id smtpd.web10.6212.1729925897886367487
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D6572D0C604
+	for <webhook@archiver.kernel.org>; Sat, 26 Oct 2024 16:08:46 +0000 (UTC)
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web10.13471.1729958922503442258
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Oct 2024 23:58:18 -0700
+ Sat, 26 Oct 2024 09:08:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
-Received: from fwd80.aul.t-online.de (fwd80.aul.t-online.de [10.223.144.106])
-	by mailout09.t-online.de (Postfix) with SMTP id D47CA2D346
-	for <openembedded-devel@lists.openembedded.org>; Sat, 26 Oct 2024 08:56:46 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.163.34.187]) by fwd80.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1t4aj4-3lcyFF0; Sat, 26 Oct 2024 08:56:42 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YAT+DcAt;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-20b5affde14so21377425ad.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Oct 2024 09:08:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1729958921; x=1730563721; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=R7mW3s+chc7vYulAiuino7kGJCB1P3iMNfbdHS9etwo=;
+        b=YAT+DcAtsxn7Zyyt/TaPTf30LDYoeIRRBaZVzpNOMRJekGrhKqEOPySnoBGOJQ9jIM
+         yZHrM6eZ8dix1Lk2lk4jLrNmsDI+SHOs4A93QRDJPt55rDL8U1L8CzX0sgeDcCfOPZhf
+         QcWTAaXOw2SV4BzL526BkGjHlnuS/X4Jw85EFZ4NXkdDyzXD0pT2gMBe/d6NtKjGxA8M
+         zt7kLuqKWZXOKPtDn4xVAYdj2SzYHHP0yq/LTYxTKtz6S/PXfXi4HFfk5XM8208d7znB
+         kEbspb181OXgZsgGI7Jh+qdkRTDTracx9r9+Veh58v27uJLJys9nlMJE+QlbttcoFjCV
+         bPfQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1729958921; x=1730563721;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=R7mW3s+chc7vYulAiuino7kGJCB1P3iMNfbdHS9etwo=;
+        b=ZDrQBd3dvBcPDPb1n87jUaDCRv0wlFLM5u5uahVAJC12AWlc8uomZbvzMMw4o5OzBG
+         gxHqAWEn2mg7hiyc0QyNR3OnEC4K0XwiHfYd9+02mLG1kObY1tQQRbBaFKmg0Vrm3EF+
+         74gxm1FcYQBav9BflEyeEQScd1X5dPI36v0Ot/3BeWUq6erODIt6ZimQc/darrCDBWIr
+         21pRwJqClyfnWVI2FNPzVS04tIodWefNHMcErxcvLuld4p+0ms9DNGdIfI6yDHHm6J1N
+         0+cR9AykvVHOYfMsW0+0jQi8rFHOtt0BtEnGQnPcifG6YJfK717nUZxzrj4O8LGu56AG
+         taGw==
+X-Gm-Message-State: AOJu0YxJKm69Ew/nXsSLlSGD0MT+U3d92ffvrHftL85PWEzVdxIoGcrh
+	ek98qkVa3IF1eSZ0rTV15Q4vEociHa4WmULGowzyT6A1TJM+mjE/fkdBPTcO
+X-Google-Smtp-Source: AGHT+IHSiknqo29Bl/zdGgJpu3TeyKLLVsfu/w8TOkJz8jfvntWd2JY1eYdArJrG0ruQ+R9/OOilHg==
+X-Received: by 2002:a17:902:f547:b0:20d:2848:2bee with SMTP id d9443c01a7336-210c6892da8mr42590945ad.16.1729958921523;
+        Sat, 26 Oct 2024 09:08:41 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::f344])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-210bc04575esm25668135ad.235.2024.10.26.09.08.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 26 Oct 2024 09:08:40 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] pipewire: update 1.2.5 -> 1.2.6
-Date: Sat, 26 Oct 2024 08:58:38 +0200
-Message-ID: <20241026065838.308889-1-f_l_k@t-online.de>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH 2/2] python3-ptyprocess: Fix ptests with python 3.13
+Date: Sat, 26 Oct 2024 09:08:38 -0700
+Message-ID: <20241026160838.2872370-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.47.0
+In-Reply-To: <20241026160838.2872370-1-raj.khem@gmail.com>
+References: <20241026160838.2872370-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1729925802-35FF9467-FAA9E051/0/0 CLEAN NORMAL
-X-TOI-MSGID: 7494ca5e-89f5-4387-b41d-777bc742cbf9
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 26 Oct 2024 06:58:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113235
+ <openembedded-devel@lists.openembedded.org>; Sat, 26 Oct 2024 16:08:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113237
 
-- replace patch by the one that was implemented upstream
-
-PipeWire 1.2.6 (2024-10-23)
-
-This is a bugfix release that is API and ABI compatible with the previous
-1.2.x and 1.0.x releases.
-
-Highlights
-  - The filter-chain param changes were not aggregated correctly, causing=
- some
-    param changes to be ignored. (#4331)
-  - Clear the JACK io ports correctly when stopping to avoid crashes. (#4=
-337)
-  - Some more small fixes and improvements.
-
-PipeWire
-  - Stream states are now updated based on the underlying node state.
-  - Exported nodes now have their state change done synchronously so that=
- the
-    server can immediately start the driver and avoid some initial xruns.
-  - Improve stream flush handling and improve the docs.
-  - Don't send mix_info to destroyed ports to avoid some errors in the
-    JACK clients.
-
-Modules
-  - The filter-chain param changes were not aggregated correctly, causing=
- some
-    param changes to be ignored. (#4331)
-  - The filter-chain now correctly optimizes unlinked nodes in all cases.
-
-SPA
-  - ALSA PCM node properties are now no longer overwritten with card prop=
-erties.
-    (#4135)
-  - Increase the adapter retry count to avoid xruns in some cases. (#4334=
-)
-  - Fix potential crash in cleanup of ALSA nodes.
-
-Bluetooth
-  - Fix a crash with broadcast sinks.
-  - Improve compatibility with Phonak hearing aids.
-  - Don't exit when DBus goes down.
-
-JACK
-  - Clear the io ports correctly when stopping to avoid crashes. (#4337)
-
-Docs
-  - Backport docs from master.
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...277b317b4836beccaa3248ab9055526811c.patch} | 25 +++++++++++--------
- .../{pipewire_1.2.5.bb =3D> pipewire_1.2.6.bb}  |  4 +--
- 2 files changed, 17 insertions(+), 12 deletions(-)
- rename meta-multimedia/recipes-multimedia/pipewire/files/{0001-parser.h-=
-avoid-missing-field-intializers.patch =3D> 0ca64277b317b4836beccaa3248ab9=
-055526811c.patch} (69%)
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_1.2.5.bb =3D=
-> pipewire_1.2.6.bb} (99%)
+ ...12974bd9084aa568d2e18ce5b2a7e0e45983.patch | 35 +++++++++++++++++++
+ .../python/python3-ptyprocess_0.7.0.bb        |  1 +
+ 2 files changed, 36 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-ptyprocess/a44312974bd9084aa568d2e18ce5b2a7e0e45983.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/files/0001-parse=
-r.h-avoid-missing-field-intializers.patch b/meta-multimedia/recipes-multi=
-media/pipewire/files/0ca64277b317b4836beccaa3248ab9055526811c.patch
-similarity index 69%
-rename from meta-multimedia/recipes-multimedia/pipewire/files/0001-parser=
-.h-avoid-missing-field-intializers.patch
-rename to meta-multimedia/recipes-multimedia/pipewire/files/0ca64277b317b=
-4836beccaa3248ab9055526811c.patch
-index daeff7e13..9b05e9e4c 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/files/0001-parser.h-avo=
-id-missing-field-intializers.patch
-+++ b/meta-multimedia/recipes-multimedia/pipewire/files/0ca64277b317b4836=
-beccaa3248ab9055526811c.patch
-@@ -1,17 +1,22 @@
--From a6d8d98845754b015e2e155c396091b0791a23c9 Mon Sep 17 00:00:00 2001
--From: Markus Volk <f_l_k@t-online.de>
--Date: Sat, 28 Sep 2024 18:39:43 +0200
--Subject: [PATCH] fix zero initialization
-+From 0ca64277b317b4836beccaa3248ab9055526811c Mon Sep 17 00:00:00 2001
-+From: Wim Taymans <wtaymans@redhat.com>
-+Date: Mon, 30 Sep 2024 10:06:30 +0200
-+Subject: [PATCH] spa: initialize all fields explicitly
+diff --git a/meta-python/recipes-devtools/python/python3-ptyprocess/a44312974bd9084aa568d2e18ce5b2a7e0e45983.patch b/meta-python/recipes-devtools/python/python3-ptyprocess/a44312974bd9084aa568d2e18ce5b2a7e0e45983.patch
+new file mode 100644
+index 0000000000..0f1542341d
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-ptyprocess/a44312974bd9084aa568d2e18ce5b2a7e0e45983.patch
+@@ -0,0 +1,35 @@
++From a44312974bd9084aa568d2e18ce5b2a7e0e45983 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Miro=20Hron=C4=8Dok?= <miro@hroncok.cz>
++Date: Mon, 23 Oct 2023 15:18:02 +0200
++Subject: [PATCH] Remove unittest.makeSuite, gone from Python 3.13
 +
-+Patch by Petar Popovic
++See https://docs.python.org/3.13/whatsnew/3.13.html
 +
-+Fixes #4325
++"""
++Removed the following unittest functions, deprecated in Python 3.11:
 +
-+Upstream-Status: Backport [https://gitlab.freedesktop.org/pipewire/pipew=
-ire/-/commit/0ca64277b317b4836beccaa3248ab9055526811c]
-=20
- Signed-off-by: Markus Volk <f_l_k@t-online.de>
--Upstream-Status: Submitted [https://gitlab.freedesktop.org/pipewire/pipe=
-wire/-/issues/4325]
- ---
-  spa/include/spa/pod/builder.h | 2 +-
-  spa/include/spa/pod/parser.h  | 2 +-
-  2 files changed, 2 insertions(+), 2 deletions(-)
-=20
- diff --git a/spa/include/spa/pod/builder.h b/spa/include/spa/pod/builder=
-.h
--index 0564d94ea..b0487bf48 100644
-+index 0564d94ea2..6d3e9d54af 100644
- --- a/spa/include/spa/pod/builder.h
- +++ b/spa/include/spa/pod/builder.h
- @@ -49,7 +49,7 @@ struct spa_pod_builder {
-@@ -19,12 +24,12 @@ index 0564d94ea..b0487bf48 100644
-  };
- =20
- -#define SPA_POD_BUILDER_INIT(buffer,size)  ((struct spa_pod_builder){ (=
-buffer), (size), 0, {0}, {0} })
--+#define SPA_POD_BUILDER_INIT(buffer,size)  ((struct spa_pod_builder){ (=
-buffer), (size), 0, {}, {} })
-++#define SPA_POD_BUILDER_INIT(buffer,size)  ((struct spa_pod_builder){ (=
-buffer), (size), 0, {0,0,NULL},{NULL,NULL}})
- =20
-  static inline void
-  spa_pod_builder_get_state(struct spa_pod_builder *builder, struct spa_p=
-od_builder_state *state)
- diff --git a/spa/include/spa/pod/parser.h b/spa/include/spa/pod/parser.h
--index 083f91171..387298927 100644
-+index 083f911713..4c1e72acce 100644
- --- a/spa/include/spa/pod/parser.h
- +++ b/spa/include/spa/pod/parser.h
- @@ -33,7 +33,7 @@ struct spa_pod_parser {
-@@ -32,10 +37,10 @@ index 083f91171..387298927 100644
-  };
- =20
- -#define SPA_POD_PARSER_INIT(buffer,size)  ((struct spa_pod_parser){ (bu=
-ffer), (size), 0, {0} })
--+#define SPA_POD_PARSER_INIT(buffer,size)  ((struct spa_pod_parser){ (bu=
-ffer), (size), 0, {} })
-++#define SPA_POD_PARSER_INIT(buffer,size)  ((struct spa_pod_parser){ (bu=
-ffer), (size), 0, {0,0,NULL}})
- =20
-  static inline void spa_pod_parser_init(struct spa_pod_parser *parser,
-  				       const void *data, uint32_t size)
- --=20
--2.46.0
-+GitLab
-=20
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.5.b=
-b b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.6.bb
-similarity index 99%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.5.bb
-rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.6.bb
-index a02c5de8c..4ce047a2a 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.5.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.6.bb
-@@ -12,9 +12,9 @@ LIC_FILES_CHKSUM =3D " \
-=20
- DEPENDS =3D "dbus ncurses"
-=20
--SRCREV =3D "71fac7fa818f21234da4c356de0b44e47e1a2ef2"
-+SRCREV =3D "79eebcb72490484e25208971ca15b9e0ea25bd95"
- SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
-1.2;protocol=3Dhttps"
--SRC_URI +=3D "file://0001-parser.h-avoid-missing-field-intializers.patch=
-"
-+SRC_URI +=3D "file://0ca64277b317b4836beccaa3248ab9055526811c.patch"
-=20
- S =3D "${WORKDIR}/git"
-=20
---=20
-2.47.0
-
++    unittest.findTestCases()
++    unittest.makeSuite()
++    unittest.getTestCaseNames()
++"""
++
++The removed call does not seem to have any effect when the file is executed
++directly, run trough unittest discover or pytest.
++
++Upstream-Status: Backport [https://github.com/pexpect/ptyprocess/pull/75]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ tests/test_invalid_binary.py | 3 ---
++ 1 file changed, 3 deletions(-)
++
++diff --git a/tests/test_invalid_binary.py b/tests/test_invalid_binary.py
++index cf28098..545f9f7 100755
++--- a/tests/test_invalid_binary.py
+++++ b/tests/test_invalid_binary.py
++@@ -69,6 +69,3 @@ def test_invalid_binary(self):
++ 
++ if __name__ == '__main__':
++     unittest.main()
++-
++-suite = unittest.makeSuite(InvalidBinaryChars,'test')
++-
+diff --git a/meta-python/recipes-devtools/python/python3-ptyprocess_0.7.0.bb b/meta-python/recipes-devtools/python/python3-ptyprocess_0.7.0.bb
+index 4abec0a01c..e0c5e47199 100644
+--- a/meta-python/recipes-devtools/python/python3-ptyprocess_0.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-ptyprocess_0.7.0.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cfdcd51fa7d5808da4e74346ee394490"
+ 
+ SRCNAME = "ptyprocess"
+ 
++SRC_URI += "file://a44312974bd9084aa568d2e18ce5b2a7e0e45983.patch"
+ SRC_URI[sha256sum] = "5c5d0a3b48ceee0b48485e0c26037c0acd7d29765ca3fbb5cb3831d347423220"
+ 
+ inherit pypi python_flit_core
 
