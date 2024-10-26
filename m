@@ -1,129 +1,200 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 760F0D1039A
-	for <webhook@archiver.kernel.org>; Sat, 26 Oct 2024 03:05:02 +0000 (UTC)
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web10.4203.1729911896496494244
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D161D10BE7
+	for <webhook@archiver.kernel.org>; Sat, 26 Oct 2024 06:58:24 +0000 (UTC)
+Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
+ by mx.groups.io with SMTP id smtpd.web10.6212.1729925897886367487
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Oct 2024 20:04:56 -0700
+ Fri, 25 Oct 2024 23:58:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=TYK9FsDx;
- spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-2e2e6a1042dso1983277a91.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Oct 2024 20:04:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1729911896; x=1730516696; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=3J1MbvlGIfSSbk357o4+m8yk5mpVoCgL7yM+F1MNVqQ=;
-        b=TYK9FsDxLN3Dpw+2ISbAOaH3/AEFwVXuU72+5XfqcSQ6LUnnl+Ykc6e9WGHqJtY73y
-         JwHiJhrk4uF2dHVtez3eAO3KuO3QHobuaNddYEUVP/YhOBW4f6zy9z3m0KtgEc/hxcDD
-         OpwUkciSz4YAuVdFiy1ZjHOr0Z3jBjH8M6/iiv62Ylel1flpA7bM5o+ejNId+oLhJh84
-         7eU5Tig8JTBXIGzSuqSs0gHhBqoJZ0CDGduUG0XidkeAXx2rkZANFbsd+YA8YBGQPHh4
-         9KhGPKs5mriAWKbvlZF7bfBT6Lpi+8jmZtvSslQCkGlo910POFEvjUsG4l2I+fEK5HFU
-         rraA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729911896; x=1730516696;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=3J1MbvlGIfSSbk357o4+m8yk5mpVoCgL7yM+F1MNVqQ=;
-        b=WPyY9Z/iPW/BeEq/FWEMXrpMXn3bPYSooXpc35GkW88uewvJHHt/K4iiNkde8Km9AK
-         hqSpdY6WstZvJKJLXicwt0s10AIfNrQ99vtdJJpkwT1kn1Qgrw//JniMhDQsu7D+yZLn
-         M8tZEsavGHyEjA8GgrApw0mSTpgXbsjryhLSCw49O7WMVrZjdB4fLfx1soa1onW5UfOK
-         lDwXpfElw8y4DuGgZyaDrWcGMF1kRNfx9jK4PCe9Zjorg+2zgaTGSYphJcWwSsVihQuT
-         mF/JnVo9Zb56iwvgcWe7T6hPLvUU92Cp8hbKG99GZzRuTM/TljJEMbrYN9MUlNlHcJUI
-         E7wA==
-X-Gm-Message-State: AOJu0YxCrycKzGr/HetyVrLtSv4ctZ3V6vIFNrdbAs+wmfws5V7I6CYn
-	LKznZgo5QAbbooweZ/97bBlCLG5zD9j08LHo8mlhsw5R096fqYCEw6ieYx8l
-X-Google-Smtp-Source: AGHT+IGL8JkZhycKY4fSWE+78Gxn03hUo6cMIW5xUArFhbSdk7iJXbeQ+Zwdbyfr9LnWrgM1Leh7Jg==
-X-Received: by 2002:a17:90b:342:b0:2e2:a96c:f009 with SMTP id 98e67ed59e1d1-2e8f105e9d4mr1837629a91.9.1729911895392;
-        Fri, 25 Oct 2024 20:04:55 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::7c83])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2e8e3771a1fsm2307317a91.57.2024.10.25.20.04.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Oct 2024 20:04:54 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
+Received: from fwd80.aul.t-online.de (fwd80.aul.t-online.de [10.223.144.106])
+	by mailout09.t-online.de (Postfix) with SMTP id D47CA2D346
+	for <openembedded-devel@lists.openembedded.org>; Sat, 26 Oct 2024 08:56:46 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.163.34.187]) by fwd80.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1t4aj4-3lcyFF0; Sat, 26 Oct 2024 08:56:42 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 1/4] python3-zopeinterface: Upgrade to 7.1.1
-Date: Fri, 25 Oct 2024 20:04:50 -0700
-Message-ID: <20241026030453.2517894-1-raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH] pipewire: update 1.2.5 -> 1.2.6
+Date: Sat, 26 Oct 2024 08:58:38 +0200
+Message-ID: <20241026065838.308889-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1729925802-35FF9467-FAA9E051/0/0 CLEAN NORMAL
+X-TOI-MSGID: 7494ca5e-89f5-4387-b41d-777bc742cbf9
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 26 Oct 2024 03:05:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113231
+ <openembedded-devel@lists.openembedded.org>; Sat, 26 Oct 2024 06:58:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113235
 
-Changes
+- replace patch by the one that was implemented upstream
 
-7.1.1 (2024-10-23)
-Fix segmentation faults in weakrefobject.c on Python 3.12 and 3.13.
+PipeWire 1.2.6 (2024-10-23)
 
-7.1.0 (2024-10-10)
-Declare support for Python 3.13.
+This is a bugfix release that is API and ABI compatible with the previous
+1.2.x and 1.0.x releases.
 
-Fix segmentation faults on Python 3.13.
+Highlights
+  - The filter-chain param changes were not aggregated correctly, causing=
+ some
+    param changes to be ignored. (#4331)
+  - Clear the JACK io ports correctly when stopping to avoid crashes. (#4=
+337)
+  - Some more small fixes and improvements.
 
-7.0.3 (2024-08-27)
-Fix Assertion ‘memb->type == T_PYSSIZET’ failed. for Python < 3.12.
+PipeWire
+  - Stream states are now updated based on the underlying node state.
+  - Exported nodes now have their state change done synchronously so that=
+ the
+    server can immediately start the driver and avoid some initial xruns.
+  - Improve stream flush handling and improve the docs.
+  - Don't send mix_info to destroyed ports to avoid some errors in the
+    JACK clients.
 
-7.0.2 (2024-08-26)
-Fix reference-counting bug in C module initialization (broken in 7.0).
+Modules
+  - The filter-chain param changes were not aggregated correctly, causing=
+ some
+    param changes to be ignored. (#4331)
+  - The filter-chain now correctly optimizes unlinked nodes in all cases.
 
-7.0.1 (2024-08-06)
-Fix subclassability of ObjectSpecificationDescriptor (broken in 7.0).
+SPA
+  - ALSA PCM node properties are now no longer overwritten with card prop=
+erties.
+    (#4135)
+  - Increase the adapter retry count to avoid xruns in some cases. (#4334=
+)
+  - Fix potential crash in cleanup of ALSA nodes.
 
-7.0 (2024-08-06)
-Enable heap-based types (PEP 384) for Python >= 3.11.
+Bluetooth
+  - Fix a crash with broadcast sinks.
+  - Improve compatibility with Phonak hearing aids.
+  - Don't exit when DBus goes down.
 
-Adopt multi-phase module initialization (PEP 489).
+JACK
+  - Clear the io ports correctly when stopping to avoid crashes. (#4337)
 
-Drop support for Python 3.7.
+Docs
+  - Backport docs from master.
 
-6.4.post2 (2024-05-24)
-Publish missing Windows wheels, second attempt.
-
-6.4.post1 (2024-05-23)
-Publish missing Windows wheels.
-
-6.4.post0 (2024-05-22)
-The sdist of version 6.4 was uploaded to PyPI as zope_interface-6.4.tar.gz instead of zope.interface-6.4-py2.tar.gz which cannot be installed by zc.buildout. This release is a re-release of version 6.4 with the correct sdist name.
-
-6.4 (2024-05-15)
-Adjust for incompatible changes in Python 3.13b1.
-
-Build windows wheels on GHA.
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- ...3-zopeinterface_6.3.bb => python3-zopeinterface_7.1.1.bb} | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-zopeinterface_6.3.bb => python3-zopeinterface_7.1.1.bb} (84%)
+ ...277b317b4836beccaa3248ab9055526811c.patch} | 25 +++++++++++--------
+ .../{pipewire_1.2.5.bb =3D> pipewire_1.2.6.bb}  |  4 +--
+ 2 files changed, 17 insertions(+), 12 deletions(-)
+ rename meta-multimedia/recipes-multimedia/pipewire/files/{0001-parser.h-=
+avoid-missing-field-intializers.patch =3D> 0ca64277b317b4836beccaa3248ab9=
+055526811c.patch} (69%)
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_1.2.5.bb =3D=
+> pipewire_1.2.6.bb} (99%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-zopeinterface_6.3.bb b/meta-python/recipes-devtools/python/python3-zopeinterface_7.1.1.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-zopeinterface_6.3.bb
-rename to meta-python/recipes-devtools/python/python3-zopeinterface_7.1.1.bb
-index 21d03f2e7d..76b0641817 100644
---- a/meta-python/recipes-devtools/python/python3-zopeinterface_6.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-zopeinterface_7.1.1.bb
-@@ -4,9 +4,8 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e54fd776274c1b7423
- 
- PYPI_PACKAGE = "zope.interface"
- 
--inherit pypi setuptools3
--SRC_URI[sha256sum] = "f83d6b4b22262d9a826c3bd4b2fbfafe1d0000f085ef8e44cd1328eea274ae6a"
--
-+inherit pypi python_setuptools_build_meta
-+SRC_URI[sha256sum] = "4284d664ef0ff7b709836d4de7b13d80873dc5faeffc073abdb280058bfac5e3"
- PACKAGES =. "${PN}-test "
- 
- RPROVIDES:${PN} += "zope-interfaces"
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/files/0001-parse=
+r.h-avoid-missing-field-intializers.patch b/meta-multimedia/recipes-multi=
+media/pipewire/files/0ca64277b317b4836beccaa3248ab9055526811c.patch
+similarity index 69%
+rename from meta-multimedia/recipes-multimedia/pipewire/files/0001-parser=
+.h-avoid-missing-field-intializers.patch
+rename to meta-multimedia/recipes-multimedia/pipewire/files/0ca64277b317b=
+4836beccaa3248ab9055526811c.patch
+index daeff7e13..9b05e9e4c 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/files/0001-parser.h-avo=
+id-missing-field-intializers.patch
++++ b/meta-multimedia/recipes-multimedia/pipewire/files/0ca64277b317b4836=
+beccaa3248ab9055526811c.patch
+@@ -1,17 +1,22 @@
+-From a6d8d98845754b015e2e155c396091b0791a23c9 Mon Sep 17 00:00:00 2001
+-From: Markus Volk <f_l_k@t-online.de>
+-Date: Sat, 28 Sep 2024 18:39:43 +0200
+-Subject: [PATCH] fix zero initialization
++From 0ca64277b317b4836beccaa3248ab9055526811c Mon Sep 17 00:00:00 2001
++From: Wim Taymans <wtaymans@redhat.com>
++Date: Mon, 30 Sep 2024 10:06:30 +0200
++Subject: [PATCH] spa: initialize all fields explicitly
++
++Patch by Petar Popovic
++
++Fixes #4325
++
++Upstream-Status: Backport [https://gitlab.freedesktop.org/pipewire/pipew=
+ire/-/commit/0ca64277b317b4836beccaa3248ab9055526811c]
+=20
+ Signed-off-by: Markus Volk <f_l_k@t-online.de>
+-Upstream-Status: Submitted [https://gitlab.freedesktop.org/pipewire/pipe=
+wire/-/issues/4325]
+ ---
+  spa/include/spa/pod/builder.h | 2 +-
+  spa/include/spa/pod/parser.h  | 2 +-
+  2 files changed, 2 insertions(+), 2 deletions(-)
+=20
+ diff --git a/spa/include/spa/pod/builder.h b/spa/include/spa/pod/builder=
+.h
+-index 0564d94ea..b0487bf48 100644
++index 0564d94ea2..6d3e9d54af 100644
+ --- a/spa/include/spa/pod/builder.h
+ +++ b/spa/include/spa/pod/builder.h
+ @@ -49,7 +49,7 @@ struct spa_pod_builder {
+@@ -19,12 +24,12 @@ index 0564d94ea..b0487bf48 100644
+  };
+ =20
+ -#define SPA_POD_BUILDER_INIT(buffer,size)  ((struct spa_pod_builder){ (=
+buffer), (size), 0, {0}, {0} })
+-+#define SPA_POD_BUILDER_INIT(buffer,size)  ((struct spa_pod_builder){ (=
+buffer), (size), 0, {}, {} })
+++#define SPA_POD_BUILDER_INIT(buffer,size)  ((struct spa_pod_builder){ (=
+buffer), (size), 0, {0,0,NULL},{NULL,NULL}})
+ =20
+  static inline void
+  spa_pod_builder_get_state(struct spa_pod_builder *builder, struct spa_p=
+od_builder_state *state)
+ diff --git a/spa/include/spa/pod/parser.h b/spa/include/spa/pod/parser.h
+-index 083f91171..387298927 100644
++index 083f911713..4c1e72acce 100644
+ --- a/spa/include/spa/pod/parser.h
+ +++ b/spa/include/spa/pod/parser.h
+ @@ -33,7 +33,7 @@ struct spa_pod_parser {
+@@ -32,10 +37,10 @@ index 083f91171..387298927 100644
+  };
+ =20
+ -#define SPA_POD_PARSER_INIT(buffer,size)  ((struct spa_pod_parser){ (bu=
+ffer), (size), 0, {0} })
+-+#define SPA_POD_PARSER_INIT(buffer,size)  ((struct spa_pod_parser){ (bu=
+ffer), (size), 0, {} })
+++#define SPA_POD_PARSER_INIT(buffer,size)  ((struct spa_pod_parser){ (bu=
+ffer), (size), 0, {0,0,NULL}})
+ =20
+  static inline void spa_pod_parser_init(struct spa_pod_parser *parser,
+  				       const void *data, uint32_t size)
+ --=20
+-2.46.0
++GitLab
+=20
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.5.b=
+b b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.6.bb
+similarity index 99%
+rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.5.bb
+rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.6.bb
+index a02c5de8c..4ce047a2a 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.5.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.6.bb
+@@ -12,9 +12,9 @@ LIC_FILES_CHKSUM =3D " \
+=20
+ DEPENDS =3D "dbus ncurses"
+=20
+-SRCREV =3D "71fac7fa818f21234da4c356de0b44e47e1a2ef2"
++SRCREV =3D "79eebcb72490484e25208971ca15b9e0ea25bd95"
+ SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
+1.2;protocol=3Dhttps"
+-SRC_URI +=3D "file://0001-parser.h-avoid-missing-field-intializers.patch=
+"
++SRC_URI +=3D "file://0ca64277b317b4836beccaa3248ab9055526811c.patch"
+=20
+ S =3D "${WORKDIR}/git"
+=20
+--=20
+2.47.0
+
 
