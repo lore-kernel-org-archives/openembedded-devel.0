@@ -2,91 +2,167 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF005D13583
-	for <webhook@archiver.kernel.org>; Sun, 27 Oct 2024 20:17:05 +0000 (UTC)
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
- by mx.groups.io with SMTP id smtpd.web10.36809.1730060208499826465
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 182F6D13589
+	for <webhook@archiver.kernel.org>; Sun, 27 Oct 2024 21:40:16 +0000 (UTC)
+Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
+ by mx.groups.io with SMTP id smtpd.web11.38368.1730065206160885587
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Oct 2024 13:16:48 -0700
+ Sun, 27 Oct 2024 14:40:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lDE+oGV4;
- spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-37d55f0cf85so2816595f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Oct 2024 13:16:48 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SbEfMO+d;
+ spf=pass (domain: gmail.com, ip: 209.85.167.53, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-539e690479cso3485013e87.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Oct 2024 14:40:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730060207; x=1730665007; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=jgEG+WJOzfWRfJa/miGiRHc25R0SVQriwG1ng4aG/dA=;
-        b=lDE+oGV46ZxzW69fxduUy85zbsMd7ULhwhJLrQ5GP8b35coaZn7qkC1fQ117FXQRwz
-         H22KBFxEKx5934kjwsLy3da5TTDK7X9CMEZjNNZ+u6oDs4BA4cwiyIHEahFrAX12eTWh
-         VZDNWhWKRpHRKCjYW3SI8H6ywnuUDOqsRbhL/bsFebV7wcysuSM/ma8+YZi/ImgBYbcl
-         +e9NTyIK3d+b1yDhO4P26BuUbFXGoO6HjOq4ezzVKPfVCpz74Vv8PkrhnJDvOnf2HhUx
-         8QSYSOIHXGhjMrBt+7GTsuuZnzGRkLucJKeQ4RA2P2bidIaNu8oC5/aNIjTlFc/it0Hp
-         u4Sw==
+        d=gmail.com; s=20230601; t=1730065204; x=1730670004; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Vfa5Jukyao3FmN/FTA76f16FJeYywe+JYzKk2nKqJfU=;
+        b=SbEfMO+dMNYUt683q2yhoe6JetZDt0KT3IjOQRLiQOMzCkkJWh1NBwJ8Qr9GH8Dg4i
+         Q82zOUL7SDfvWM3x7E5dcA0IbgE4KC6yknoLO+t46FOSGtGFvV+Iu90X0u4YRTsx/s/W
+         +CEQrLoyK287usNE+P7UkXzL71V4eW21oVz+YvTCR54fF6Xp6sLfxngM7e7frPbsO3Sb
+         Fi0EkDOWIKv0FlBs/X4uiHNR0Xr7pNv/My/7aHAnxHLLjTV/7NHpX71PiAChTmxSg47a
+         yQZ/knq9ywpmSpYq/SkWzOB67n0eR79Kyf+QqBcJseWkm4LFkaYKPGwLJZz6Gl9VW+Ea
+         zA2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730060207; x=1730665007;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=jgEG+WJOzfWRfJa/miGiRHc25R0SVQriwG1ng4aG/dA=;
-        b=t/TpETgG1vC9vqmmpc5sk3c5QrX0L1oFnzK4scHlj8+C1ZneqkudrXZtxJmsizYSco
-         PcB9Rpo0HSOb4lFOurrVqikBkzspSBEgv4Jtl0J5jrZKCLQL2rmkNhbsN7lPAcmwm5uk
-         8rCL7zz6+qzBA1jmZpJgh3m7NYBV/4QZd/YyBh/mX/43zyx8TwMZX8sZaaZqTYc0nE26
-         cfJdRNLPn2txnwPN2f8C+b/ALeyBmOFRG/DugVqeTOeGX/zEn8o5nSqwKKSOwfUuT7Z/
-         N2LTL1xYw9dbqpMUID5xwzHHkKFdruXJcQi3CQ4pxQ/dHKMGmX/lki3T/mkAmh+N8I8m
-         kHfw==
-X-Gm-Message-State: AOJu0YyE272f8Xpq1RaKlA7cC89kuuPnumhb/1nJcXDzYo7iSHmMR0g3
-	9hP3GyJLXuwTbJu/HypvgkgRzr/ztUjru/jjaNWOE4r0/ANg+m8j2OHWSQ==
-X-Google-Smtp-Source: AGHT+IHTFDVebxogfHLy3TqiuLW+Q8B/Pe+4jzuw5zE7de1m5hYEk//TrrdPLS837Kay5Opc8YwTDg==
-X-Received: by 2002:a5d:440a:0:b0:37c:d1b6:a261 with SMTP id ffacd0b85a97d-3806122feefmr4606484f8f.59.1730060206619;
-        Sun, 27 Oct 2024 13:16:46 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4319360d233sm84204645e9.45.2024.10.27.13.16.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Oct 2024 13:16:46 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: akuster808@gmail.com,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH] gitpkgv: Fix python deprecation warning
-Date: Sun, 27 Oct 2024 21:16:41 +0100
-Message-ID: <20241027201641.3858573-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.47.0
+        d=1e100.net; s=20230601; t=1730065204; x=1730670004;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Vfa5Jukyao3FmN/FTA76f16FJeYywe+JYzKk2nKqJfU=;
+        b=wlzQiN9HP/btV4/yzifb6RP+UgNiJEAUFfl8eF22KxS4II8U3JeiJpFoauI+pIaW5e
+         SwlBVwe7iitbtW69CWJEjDE9XNjzTvEnFz5dTgqaESkFrFPNbS/F4UGtkdjoX5dpItLG
+         SFWkUS9viRZuWcQmC5W6eLDvAYEmbBXtvt6wXnXVpdQT/9Em4IlFKdTCV+o4C+xH0ILz
+         TF7pCD+gqgeyCWabltd85I6y4ytr1QZCrVu8OybmRhiOebR4vnFr955meS15rpQ0uH25
+         16BcXtXtJ3tCkTwcCdU9B5am7ImvmrvDmbOhSqBbEzhYntwuIfQW5aaq2YZSR2hip0Rc
+         kOaQ==
+X-Gm-Message-State: AOJu0YzEyc+YFiNPDXioMKbLdF9WZBzqWt/g85RohSpQAYsku11MY9Fz
+	9NJq4LjxJunUPl/hmYvmvt97277GOGBzXRa2PuH8c4dn+xlaMHiGLhl4fB3SulHauIgZtY/ragl
+	i04z+itHHQwZ1Tv0ScA8p1FslukI=
+X-Google-Smtp-Source: AGHT+IGrQMnqC75PYIyRcdVdHyNK0QF6eQXBcsGx3krOYQtD76imydPvDSfEeBWQYLHgH/FzmfgInNuwNFZukNGEzGA=
+X-Received: by 2002:a05:6512:3d8b:b0:539:d0ef:b3f9 with SMTP id
+ 2adb3069b0e04-53b3491dfc0mr2540784e87.40.1730065203929; Sun, 27 Oct 2024
+ 14:40:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241017061710.1108077-1-raj.khem@gmail.com>
+In-Reply-To: <20241017061710.1108077-1-raj.khem@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Sun, 27 Oct 2024 22:39:51 +0100
+Message-ID: <CA+chaQc0_H7SRUaErOXjWDcZ3srk_8n9kw+f7aQM6eQDYECvQw@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH] xmlrpc-c: Fix race condition triggered during
+ symlink creation
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 27 Oct 2024 20:17:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113252
+ <openembedded-devel@lists.openembedded.org>; Sun, 27 Oct 2024 21:40:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113253
 
-From: Khem Raj <raj.khem@gmail.com>
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-Fixes
-DeprecationWarning: 'pipes' is deprecated and slated for removal in Python 3.13
+Thanks Khem!
 
-pipes is an alias for shlex therefore switch to using shlex
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/classes/gitpkgv.bbclass | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/classes/gitpkgv.bbclass b/meta-oe/classes/gitpkgv.bbclass
-index 180421ed35..cb2cea26be 100644
---- a/meta-oe/classes/gitpkgv.bbclass
-+++ b/meta-oe/classes/gitpkgv.bbclass
-@@ -56,7 +56,7 @@ def gitpkgv_drop_tag_prefix(d, version):
- def get_git_pkgv(d, use_tags):
-     import os
-     import bb
--    from pipes import quote
-+    from shlex import quote
- 
-     src_uri = d.getVar('SRC_URI').split()
-     fetcher = bb.fetch2.Fetch(src_uri, d)
--- 
-2.47.0
-
+On Thu, Oct 17, 2024 at 8:17=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wrote=
+:
+>
+> This should fix race condition sometime seen in highly parallell builds
+>
+>    | rm -f libxmlrpc_util.so.4
+>    | rm -f libxmlrpc_util.so.4
+>    | ln -s libxmlrpc_util.so.4.60 libxmlrpc_util.so.4
+>    | ln -s libxmlrpc_util.so.4.60 libxmlrpc_util.so.4
+>    | rm -f libxmlrpc_util.so
+>    | ln: failed to create symbolic link 'libxmlrpc_util.so.4': File exist=
+s
+>    | make[2]: *** [/home/kraj01/yoe/build/tmp/work/core2-64-yoe-linux/xml=
+rpc-c/1.60.03/git/stable/unix-common.mk:72: libxmlrpc_util.so.4] Error 1
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Cc: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  ...nsuring-Sequential-Execution-of-rm-a.patch | 46 +++++++++++++++++++
+>  .../xmlrpc-c/xmlrpc-c_1.60.03.bb              |  1 +
+>  2 files changed, 47 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-unix-=
+common.mk-Ensuring-Sequential-Execution-of-rm-a.patch
+>
+> diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-unix-common.=
+mk-Ensuring-Sequential-Execution-of-rm-a.patch b/meta-oe/recipes-devtools/x=
+mlrpc-c/xmlrpc-c/0001-unix-common.mk-Ensuring-Sequential-Execution-of-rm-a.=
+patch
+> new file mode 100644
+> index 0000000000..02b5244f3a
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-unix-common.mk-Ensu=
+ring-Sequential-Execution-of-rm-a.patch
+> @@ -0,0 +1,46 @@
+> +From c9bd05e8f0ad805b81625cfa717d06071cfd9b48 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Wed, 16 Oct 2024 22:52:38 -0700
+> +Subject: [PATCH] unix-common.mk: Ensuring Sequential Execution of rm and=
+ ln commands
+> +
+> +With high parallel execution, it results in race condition where
+> +its trying to create symlink while the original symlink while rm is
+> +not done deleting the existing file yet.
+> +
+> +force sequential execution by adding dependencies between the steps
+> +or combining them into a single shell command
+> +
+> +Here, && ensures that the ln -s command only runs after rm -f target
+> +successfully completes.
+> +
+> +Similar error reported here [1]
+> +
+> +[1] https://bugs.gentoo.org/932835
+> +
+> +Upstream-Status: Pending
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + unix-common.mk | 6 ++----
+> + 1 file changed, 2 insertions(+), 4 deletions(-)
+> +
+> +diff --git a/unix-common.mk b/unix-common.mk
+> +index 6954faf5..983c48cd 100644
+> +--- a/unix-common.mk
+> ++++ b/unix-common.mk
+> +@@ -62,14 +62,12 @@ SHLIB_CMD =3D $(CCLD) $(LADD) $(LDFLAGS_SHLIB) -o $@=
+ $^
+> + SHLIB_LE_TARGETS =3D $(call shliblefn, $(SHARED_LIBS_TO_BUILD))
+> +
+> + $(SHLIB_LE_TARGETS):%:%.$(MAJ)
+> +-      rm -f $@
+> +-      $(LN_S) $< $@
+> ++      rm -f $@ && $(LN_S) $< $@
+> +
+> + SONAME_TARGETS =3D $(SHLIB_LE_TARGETS:%=3D%.$(MAJ))
+> +
+> + $(SONAME_TARGETS):%:%.$(MIN)
+> +-      rm -f $@
+> +-      $(LN_S) $< $@
+> ++      rm -f $@ && $(LN_S) $< $@
+> +
+> + .PHONY: $(SHLIB_INSTALL_TARGETS)
+> + .PHONY: install-shared-libraries
+> diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.60.03.bb b/meta=
+-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.60.03.bb
+> index a34256c275..f5ee920cad 100644
+> --- a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.60.03.bb
+> +++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.60.03.bb
+> @@ -7,6 +7,7 @@ LIC_FILES_CHKSUM =3D "file://doc/COPYING;md5=3Daefbf81ba0=
+750f02176b6f86752ea951"
+>
+>  SRC_URI =3D "git://github.com/mirror/xmlrpc-c.git;branch=3Dmaster;protoc=
+ol=3Dhttps \
+>             file://0001-test-cpp-server_abyss-Fix-build-with-clang-libc.p=
+atch \
+> +           file://0001-unix-common.mk-Ensuring-Sequential-Execution-of-r=
+m-a.patch \
+>             "
+>  # one more commit after Release 1.60.03 in the Stable series
+>  SRCREV =3D "a823b0bb5cf0a4dbd34f929cbfdfb0439c5d9b0e"
 
