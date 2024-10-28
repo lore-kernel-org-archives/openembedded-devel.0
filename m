@@ -2,85 +2,85 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 74276D5B845
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 81B74D5B84B
 	for <webhook@archiver.kernel.org>; Mon, 28 Oct 2024 22:15:16 +0000 (UTC)
-Received: from mail-ot1-f49.google.com (mail-ot1-f49.google.com [209.85.210.49])
- by mx.groups.io with SMTP id smtpd.web11.135.1730140100396071662
+Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
+ by mx.groups.io with SMTP id smtpd.web10.1003.1730142297283581827
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Oct 2024 11:28:20 -0700
+ Mon, 28 Oct 2024 12:04:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mw90yNyj;
- spf=pass (domain: gmail.com, ip: 209.85.210.49, mailfrom: schonm@gmail.com)
-Received: by mail-ot1-f49.google.com with SMTP id 46e09a7af769-718066adb47so2687868a34.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Oct 2024 11:28:20 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mUUMh9dE;
+ spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-6e8063533b5so45264117b3.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Oct 2024 12:04:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730140099; x=1730744899; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730142296; x=1730747096; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=xvpnJBRCwNuT0j0WsH0diuXVIsz4AFl1ytLXmrAWa7k=;
-        b=mw90yNyjjniSBYd0GSWtVF8lYjsS0SN75bjD+SoxMTV+oll3KhQCHa39XdClY9pJKQ
-         USjvKcQVkBIcmeao0HVVqi/lZd/u/uWWRdBsh1QHGnXF2QcDBHCir2UYZD3ehIBJrj8h
-         KAJZy0zgSjIKYUWe0HliRpioANvH9UIb1NoNq+lswCo3/SRiCfJHZhFnhJQwztPbo0AZ
-         6RmjU15ztWPmGOLEbWyJ87SyhZ/jwBRgCzBT+5Hj/gboOVz3ghWQ+CVoGd9EujbvfWd8
-         XcWXflUeqYTsIj3MqoYx8cGQcqovCMlBoG9MUrCqjdkApfnk/r5KXlxFvJbdMb+PazWP
-         F8Pg==
+        bh=gd1/yKDF5MuwPNH7yy/zgGTir/0MODzmfHy7m217AJ0=;
+        b=mUUMh9dEpNO8zk4l+B/GgkKMjZi+nmettawGbO2tmmRkjQcZRTtcZXkpmSVFGlQL5i
+         4/M75A78s7aruan74tkQi0nJU/yOwZEZ//7qAog7YJEPp3pAG35XjAwfQt8gYAdLxEFf
+         Hy007egn+McShuxefAsJZ9Uf3T8Ww+gWrb+dircbnD6UYEFV1mOj4c/kEfWU8t1bOFwe
+         bxlbua9VkAxogay6+895GP+BZomWN+pjW/8YVAnBsZOh4fE/FzDB8qp9OxTXUYueTOBl
+         dEPWT06/amlCPMWIz0jX31D/1krATbUhrjtfd8obZCFqIDSxQ9FBFeQHtXW90jZEpOhK
+         +yNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730140099; x=1730744899;
+        d=1e100.net; s=20230601; t=1730142296; x=1730747096;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=xvpnJBRCwNuT0j0WsH0diuXVIsz4AFl1ytLXmrAWa7k=;
-        b=NYZ+jp3o3Jt4NrDmRIAIS9Z3QPIbBBqjUFZtQRuoKNlkzmg8l0OJkYw+D66EWR+lYO
-         vS2jm9foeCZk4L34fVjUNM1cyDPjpVaEmSCBKI1AVzktY3RpR1Z76So6aglt9rIzj95y
-         8TSNhoOHq0Wl5QBTGsYYmjFFGDyRTsqwPdh20JB+mKqyMjVomJsRmj/TGC+ixoujDMev
-         2czd5QNcuO9dtsKE7qc682pV7DPNOyXoS9kzWUbLb/lKUgUT5ciq2sBaWBagMXjxgcLs
-         mKkkA9peD7GCr+gWGrpfL3LE+2zU2jHf5v3KxP0so0qL29l+iVfL3owDa7cAUKpSlEaw
-         aKlw==
-X-Gm-Message-State: AOJu0YzLnq66G6auuhtvT9lF/4FGx8MDGqlVVhLY6f5JT5jxQdToY//m
-	mhP+XHavI1jiOEuTltzn2ST9CTiyNIiTSSl1vbX0PGqM2DgsrSVeJhuw6w==
-X-Google-Smtp-Source: AGHT+IG/LkXfJ1PpNYpDDsE1cpgoy5JXi7Lg8uI8RYNKaPu+wNFBRx8ZxZJQX/rV7f//r5/jMl1g2g==
-X-Received: by 2002:a05:6830:2d86:b0:718:8651:86ae with SMTP id 46e09a7af769-71886518a3cmr1701189a34.13.1730140099313;
-        Mon, 28 Oct 2024 11:28:19 -0700 (PDT)
+        bh=gd1/yKDF5MuwPNH7yy/zgGTir/0MODzmfHy7m217AJ0=;
+        b=m+GzZGKKbNh4zPN0FklAC4zUJsZUiVhRtK4eadYL0ui8em6U83Hr0RGZxStgbpOT3O
+         cO5WhlghMlMFziDhMGKdcgMfEAZXyujuFzMHS9Za5lR3iIezRCuN5DoYoGS8flk51tQV
+         Evdm/eFhtU1f03PMqL2pyaRS49z9eBfB6GSCT6xtmZR5r+ejVppi5sIrFKEXLiZgulU6
+         a1oeP4o3SkiI9IYAGbbi/dbN5RhLqSkeNOZULvlRwgNjSrVJkiU42PKjFw4szPCUo69K
+         xhGtD6c1Ddr1i2rIE7+5tv/vnJl4dvrBT+kv9MZTsO9L8/oIRUrmhzf3f8+l3cDGhi0w
+         ur6w==
+X-Gm-Message-State: AOJu0YyYlr8qe+7F1YlW7mgS0ZK8wlFq2Pu3dJUDp8LMdzf2z/XpYaQg
+	vaNzGQqBfpwVHcsm+RpEh386N4+DLB3Q/irCDyZMNLGtFjSHUHIT3rDU3Q==
+X-Google-Smtp-Source: AGHT+IFBwNFYZYLtyPKYwzaQTrA2Dx3wVgF4HY2PfaR1GK/M0cxR0GJpu7q3nwDSWDsXFfh0sTG3mQ==
+X-Received: by 2002:a05:690c:4b93:b0:6e3:2630:2a0c with SMTP id 00721157ae682-6e9d8a6ffe0mr97346137b3.26.1730142295748;
+        Mon, 28 Oct 2024 12:04:55 -0700 (PDT)
 Received: from localhost.localdomain ([67.7.85.114])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6e9c6c770cfsm15493397b3.99.2024.10.28.11.28.18
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6e9c6c187e4sm15557237b3.62.2024.10.28.12.04.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Oct 2024 11:28:19 -0700 (PDT)
+        Mon, 28 Oct 2024 12:04:55 -0700 (PDT)
 From: "J. S." <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: schonm@gmail.com
-Subject: [meta-perl][PATCH 13/22] libnet-dns-perl: Use
-Date: Mon, 28 Oct 2024 14:20:29 -0400
-Message-ID: <20241028182749.5058-14-schonm@gmail.com>
+Subject: [meta-perl][PATCH v2 04/22] libdata-hexdump-perl: Use ${CPAN_MIRROR}
+Date: Mon, 28 Oct 2024 15:01:40 -0400
+Message-ID: <20241028190444.10522-5-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241028182749.5058-1-schonm@gmail.com>
-References: <20241028182749.5058-1-schonm@gmail.com>
+In-Reply-To: <20241028190444.10522-1-schonm@gmail.com>
+References: <20241028190444.10522-1-schonm@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 28 Oct 2024 22:15:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113281
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113295
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-perl/recipes-perl/libnet/libnet-dns-perl_1.47.bb | 2 +-
+ meta-perl/recipes-perl/libdata/libdata-hexdump-perl_0.02.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.47.bb b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.47.bb
-index de979cf22..e83701397 100644
---- a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.47.bb
-+++ b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.47.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=252;endline=269;md5=de95b6a896d5f861
+diff --git a/meta-perl/recipes-perl/libdata/libdata-hexdump-perl_0.02.bb b/meta-perl/recipes-perl/libdata/libdata-hexdump-perl_0.02.bb
+index 25483bf35..f52d0034f 100644
+--- a/meta-perl/recipes-perl/libdata/libdata-hexdump-perl_0.02.bb
++++ b/meta-perl/recipes-perl/libdata/libdata-hexdump-perl_0.02.bb
+@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = "file://lib/Data/HexDump.pm;beginline=215;endline=217;md5=bf1
  
- DEPENDS += "perl"
+ DEPENDS = "perl"
  
--SRC_URI = "https://cpan.metacpan.org/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
-+SRC_URI = "${CPAN_MIRROR}/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
- 
- SRC_URI[sha256sum] = "fec3dab10ac82dbac26b1ae2e367909256f420835d96cda7dc1b508e29938f0b"
- 
+-SRC_URI = "https://cpan.metacpan.org/authors/id/F/FT/FTASSIN/Data-HexDump-${PV}.tar.gz \
++SRC_URI = "${CPAN_MIRROR}/authors/id/F/FT/FTASSIN/Data-HexDump-${PV}.tar.gz \
+            file://run-ptest \
+ "
+ SRC_URI[sha256sum] = "1a9d843e7f667c1c6f77c67af5d77e7462ff23b41937cb17454d03535cd9be70"
 -- 
 2.43.0
 
