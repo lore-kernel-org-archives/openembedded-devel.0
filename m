@@ -2,85 +2,90 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 50295D5B178
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 32D10D5B171
 	for <webhook@archiver.kernel.org>; Mon, 28 Oct 2024 22:15:16 +0000 (UTC)
-Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
- by mx.groups.io with SMTP id smtpd.web10.127.1730140105911454057
+Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
+ by mx.groups.io with SMTP id smtpd.web11.50623.1730119265003516492
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Oct 2024 11:28:26 -0700
+ Mon, 28 Oct 2024 05:41:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ot7/maa/;
- spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-6e377e4aea3so40980547b3.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Oct 2024 11:28:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fgKpM7a2;
+ spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-6ea11b32ab4so4375457b3.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Oct 2024 05:41:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730140105; x=1730744905; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730119264; x=1730724064; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=+xvrp+Ui2TNXWwg1PJTg7xMTwMGidzvjDQ8U+0w0T04=;
-        b=Ot7/maa/kNroiWIrAH+hz8Et+MojiTZfaMt5UXA+S3bRJYPbnQHK7eH7SD+45xoANM
-         47ZlZ1oZOQGJ3gRzvb5klLQVUOjs0O60hbm+kvThkYaAG8I8duBkK/OkC7jJVzJbhY4f
-         Okp7B2RCnbjvn5g/mA8ymgK8VUpFiHTCNP2RN9DiYJGZjk+/XBiOdlBwmBmZrlG7sNAm
-         19+9dn+iHLEVtVpekdNv64ITs/VpzZiL1zoqXRwH1jS0FkRHSYRe5A8LM+yT8Dwqm13O
-         bcZKh+3YRhwqAHEparx4MKyYk+T9SSgUtqN00n103aVSrZVc+GtQz8OLggATK/+jNmkH
-         ksyg==
+        bh=+6cByHqzAFbvcE0ZHC5XLoN2lidvNcZEqFGvV7nOdcQ=;
+        b=fgKpM7a2Biw97BDMkEaFVCoBoCFT7R8D2BEQGhop8a9Vy6PePKsxhKO42Ll7La5G/h
+         gsg1C9LURY0ZeGhufluosVl2y7Y5DnGxDNAlwinacKz5fBhS6UNr/Tajfl3xn22S+Oxl
+         aGNY7pK7Mg3JOcqPb6WMPf8wCbe5PDQBpyySMhiST4mR+vwA8plhuB66WpEFA1XD0hOk
+         BBeUh/moOh609/TSy94Sj5i5V6UdwzbsPQAR95dzGmfhvTo/rReU9oHMvKJ+lH4YUksm
+         LCArTC+Ae1PhWTPTm9yx7tg3EpU4BIP0z4WuVwJPP6HAUolK2npULqA9MHHmxJ7d+Zxe
+         n7kA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730140105; x=1730744905;
+        d=1e100.net; s=20230601; t=1730119264; x=1730724064;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=+xvrp+Ui2TNXWwg1PJTg7xMTwMGidzvjDQ8U+0w0T04=;
-        b=NHsrHnUTysBRt2kOXQ1CtQ6rPiN+gQo+cN63sw3Q4jLlPRp9vDbcTD4sQCE1jCIlfw
-         K9gXpfrYp7IokY5Ts4Rr6aT7RIPAnWa8tEHDqi/zX4GFuD0jwxPPoIw7gsl9kLTOC833
-         mmJm8hTaVmSKAbL9eJK+YWLLC2FEXMuMD1/clid/qhQ75RCTQhWG7Idk8eOY4BpCDVXs
-         9z7NEY5OEa1RDFek+d6R+hSb+QAlry+nIaS6wevGo8GB+JjV2MST7fSqaEar0YVBpOcF
-         QXg+RgkR1C1KXG0vZzDUG/VvYSG2pvMWjZ4O52gy4D2uAdy+SWt/SbeMgiYynaGQ5tx1
-         L6NQ==
-X-Gm-Message-State: AOJu0YxSSSux9KnQVpFu+cNT4iv4qNbaoV0fcr6amJnWiftMIP6bajIi
-	sTH2fPlK359T/UCyo8jsjmlxC3bXIc3lu0cPX7KbIvpgCWxgPPvzp2KuNA==
-X-Google-Smtp-Source: AGHT+IHgAY/KvfmHDmN6HNAsyo127dgXULxfQSEZpAA1udAnYT+EcQCISpmZ7GB+OIOUd057XortyA==
-X-Received: by 2002:a05:690c:f06:b0:6e2:ac0a:8926 with SMTP id 00721157ae682-6e9d88b8a54mr87882527b3.9.1730140104519;
-        Mon, 28 Oct 2024 11:28:24 -0700 (PDT)
+        bh=+6cByHqzAFbvcE0ZHC5XLoN2lidvNcZEqFGvV7nOdcQ=;
+        b=vsWupdPSy/IC6GTn70UpPzQsjffdWYaU+v35DulGemu/i/+A3y4KM6jS5uo5Wp0S8+
+         J+Uf7lux7zn9P89uIqGJvPXbn388Ny8RJ8fOSczb4Qwxkl7Bj/SrvZOXRNYidezcRR/T
+         ubK9q7fSSJf9/BOLI19rsl0bm2EPs6N0yMgKsc3G+XUeIVEsa8YbejcbxzFtmpObuK2E
+         qT42548DAlHiV6oCkhtkMzKYWsrrRJelLm0KY8B5xV0IqLrmGQYUb1TzMiNJDVFbxuTc
+         5+VYlLKXJqzl5JEB31wt0V2220jXSihAbqbjfIw5STWVN7Tm8pecCyt7tWTeUdj3vCFz
+         xuTw==
+X-Gm-Message-State: AOJu0YyZPzaAY5A+lmm12qLJewicM5Epv4Xm7fhNDQP6aD7JhToiv3H3
+	r/AkgBcXxo0sn83vGXbO4BufyA4mWyCy9RFc/im5SjNoktuHOpEqDceusQ==
+X-Google-Smtp-Source: AGHT+IE1+dZUEh+btNWumiOOUcFvNNkEbW4owo8s8mnVWV/PyPxmweKodrGrusYhRl4+i4qRc327YQ==
+X-Received: by 2002:a05:690c:668b:b0:6dd:b8ff:c29c with SMTP id 00721157ae682-6e857eee03cmr108236857b3.17.1730119263414;
+        Mon, 28 Oct 2024 05:41:03 -0700 (PDT)
 Received: from localhost.localdomain ([67.7.85.114])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6e9c6c770cfsm15493397b3.99.2024.10.28.11.28.24
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6e9c6c76fa5sm13974777b3.97.2024.10.28.05.41.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Oct 2024 11:28:24 -0700 (PDT)
+        Mon, 28 Oct 2024 05:41:03 -0700 (PDT)
 From: "J. S." <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: schonm@gmail.com
-Subject: [meta-perl][PATCH 21/22] libxml-libxml-perl: Use
-Date: Mon, 28 Oct 2024 14:20:37 -0400
-Message-ID: <20241028182749.5058-22-schonm@gmail.com>
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-perl][PATCH v2 2/2] libmodule-build-tiny-perl: fix QA Issue: TMPDIR [buildpaths]
+Date: Mon, 28 Oct 2024 08:40:43 -0400
+Message-ID: <20241028124043.5014-2-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241028182749.5058-1-schonm@gmail.com>
-References: <20241028182749.5058-1-schonm@gmail.com>
+In-Reply-To: <20241028124043.5014-1-schonm@gmail.com>
+References: <20241028124043.5014-1-schonm@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 28 Oct 2024 22:15:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113289
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113267
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../libmodule/libmodule-build-tiny-perl_0.048.bb           | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb
-index b1d5e5db5..e0ed6e7c3 100644
---- a/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb
-+++ b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb
-@@ -22,7 +22,7 @@ RDEPENDS:${PN} += "\
-     zlib \
- "
+diff --git a/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.048.bb b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.048.bb
+index a662b4540..bab9c5c95 100644
+--- a/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.048.bb
++++ b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.048.bb
+@@ -21,6 +21,13 @@ S = "${WORKDIR}/Module-Build-Tiny-${PV}"
  
--SRC_URI = "https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/XML-LibXML-${PV}.tar.gz;name=libxml \
-+SRC_URI = "${CPAN_MIRROR}/authors/id/S/SH/SHLOMIF/XML-LibXML-${PV}.tar.gz;name=libxml \
-     file://disable-libxml2-check.patch \
-     file://fix-CATALOG-conditional-compile.patch \
-     file://using-DOCB-conditional.patch \
+ inherit cpan_build ptest-perl
+ 
++do_install:append() {
++  sed -i \
++    -e 's|${TMPDIR}||g' \
++    `find ${D}/usr/lib/perl5 -type f -name .packlist`
++}
++
++
+ RDEPENDS:${PN} += " \
+     libextutils-config-perl \
+     libextutils-helpers-perl \
 -- 
 2.43.0
 
