@@ -1,96 +1,139 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AE0A8D3A699
-	for <webhook@archiver.kernel.org>; Tue, 29 Oct 2024 20:26:34 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.web11.4206.1730233585480886014
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5EBA4D74946
+	for <webhook@archiver.kernel.org>; Tue, 29 Oct 2024 22:12:18 +0000 (UTC)
+Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
+ by mx.groups.io with SMTP id smtpd.web10.1113.1730239929821912644
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Oct 2024 13:26:25 -0700
+ Tue, 29 Oct 2024 15:12:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=E/9GEzO0;
- spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4315eac969aso1514905e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Oct 2024 13:26:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730233584; x=1730838384; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=CqB/TI0XOUfpMLtfuFlWqjvh/oJLDWj0SHgScqKAJJ4=;
-        b=E/9GEzO0zFhm+2+WFVQHq//PjU4Lc/1sU6C0TqDSo1dkFHUO07BJ7xw6hhP0eVw66B
-         ukhIe1Y1syiX62Pr4DZgmViczosB4d7xI1Q5lFKPNJs7wRPLbPRkJy6mdfs42Hd9TFWE
-         kOhq9NFq3XFzHhhXYbQcOpHI999RahlwXU1hInIBDapoWtDp9Xmi1GzZbDuAxt1yFf3y
-         X5/ra4T400l8MTwW1f830WDVIJBHxVK5D4K2VpYIKWqMAcGbuCDiBJ/eyAq4Sw8yIgK7
-         sSr3DlJiAgElQzeHbK9HsStA0GZHfxHDq7LilDjcsv6IcZIwrf8zBQPPL9iGZ6I4ZIz2
-         ATug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730233584; x=1730838384;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=CqB/TI0XOUfpMLtfuFlWqjvh/oJLDWj0SHgScqKAJJ4=;
-        b=Ir09/HQaWYRDYa/LHORw6baY8y9mIBw8zmUPwFczMyVQxNeh144qWXdwlEi9urWNPs
-         TVc+hco2VZr3nH1n9DuoiBMvYkynjvql7/YklQooaQ7F7ii/jn/tfOI2uoSVezd2Xcoe
-         yPECPy3ZXOdY65F2etVohEjh1ZkgZN39p/1tLT9mCfZCZ3uKesoLE7+12Fq151lRcwII
-         t6xX8dW5mcXfp3tb/8EArIR5ug5uT6XPdmMhX4LCnmUDCkMyE+ZRIfvmhuhlY4a9gkaz
-         oDeEBt2f2u2LNzfT3P28WDIkKLwYPddJZoxZF+NEi9gWnrTUoQLTMSlt8S1DRkU4dczT
-         Ls9g==
-X-Gm-Message-State: AOJu0YyXH2LftaSEtH6kHqtVwK42XeTetUKHHjkrtl95GxmPgnLrK1Qj
-	TIKWCA3jpU4R+Rjy70vzsl5ziqtFVQ+FWdLR6A6lbe8dwsFUs1Uz5a51/r0S
-X-Google-Smtp-Source: AGHT+IG2sKQ1EhgyMxeekb8+7tYAxJcY/0KjxccUC3oNf7ivicH/8Zr78s5sMbt1kfce3nh6akvQTg==
-X-Received: by 2002:a05:600c:4508:b0:431:4fbd:f571 with SMTP id 5b1f17b1804b1-431b5737c83mr29061425e9.13.1730233583495;
-        Tue, 29 Oct 2024 13:26:23 -0700 (PDT)
-Received: from localhost.localdomain (ptr-fij45qxtdobqrxrcewr.18120a2.ip6.access.telenet.be. [2a02:1812:512:2c00:6021:e9a4:5aa0:257b])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4318b570880sm186166235e9.35.2024.10.29.13.26.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Oct 2024 13:26:22 -0700 (PDT)
-From: Jan Vermaete <jan.vermaete@gmail.com>
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=M4RQEYD6;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-20241029221206a017a9b076d7c9b4fe-vy1u_b@rts-flowmailer.siemens.com)
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 20241029221206a017a9b076d7c9b4fe
+        for <openembedded-devel@lists.openembedded.org>;
+        Tue, 29 Oct 2024 23:12:07 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=FaUuya4oaoweohObGvGKeKctT7t36nQ31L3doOvyz0M=;
+ b=M4RQEYD6RNAd0x0k9osEaz5AOAV75Z2TyZAylYjjrZr1f6b1VV99+VEDj/JdSJSyCxWbdW
+ xFXPwzZ6SS4E66A7llNe9sGJHWkmoNNr7qIfzPFmX+g915zkDSVcg/mcelVdAcU2dPcC5nmn
+ ElThBPOAd/VNuliat2xCxdDcpRNF2WKgWyiGWP4CsudfRgrhgYt93yudnWCsYR3s1l+LwpkA
+ rXfrzQtybWP1UYC2BivirHer1zozc2DTGMXuZ7y/8H40lBMCRSqtgSI9xw74pv2nRCWqacrj
+ sf+Nrvu54r7cn+ZCaVA+e9gTZTEVUn3RZjgxkQozXcN6bpcAcqwXuVxw==;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-python][PATCH] python3-apispec: Upgrade 6.6.1 to 6.7.0
-Date: Tue, 29 Oct 2024 21:26:15 +0100
-Message-Id: <20241029202615.1874859-1-jan.vermaete@gmail.com>
-X-Mailer: git-send-email 2.39.5
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-oe][kirkstone][PATCH 1/2] nss: patch CVE-2024-6602
+Date: Tue, 29 Oct 2024 23:11:11 +0100
+Message-Id: <20241029221112.197996-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 29 Oct 2024 20:26:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113333
+ <openembedded-devel@lists.openembedded.org>; Tue, 29 Oct 2024 22:12:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113334
 
-Bug fixes:
+From: Peter Marko <peter.marko@siemens.com>
 
-    Fix handling of fields.Dict() with values unset
+Pick the same patch as Debian took for bullseye.
 
-Other changes:
-
-    Officially support Python 3.13
-    Drop support for Python 3.8
-
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../{python3-apispec_6.6.1.bb => python3-apispec_6.7.0.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-apispec_6.6.1.bb => python3-apispec_6.7.0.bb} (80%)
+ .../nss/nss/CVE-2024-6602.patch               | 65 +++++++++++++++++++
+ meta-oe/recipes-support/nss/nss_3.74.bb       |  1 +
+ 2 files changed, 66 insertions(+)
+ create mode 100644 meta-oe/recipes-support/nss/nss/CVE-2024-6602.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-apispec_6.6.1.bb b/meta-python/recipes-devtools/python/python3-apispec_6.7.0.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-apispec_6.6.1.bb
-rename to meta-python/recipes-devtools/python/python3-apispec_6.7.0.bb
-index 90d7ee271..670c791db 100644
---- a/meta-python/recipes-devtools/python/python3-apispec_6.6.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-apispec_6.7.0.bb
-@@ -5,6 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a75956865b40c80a37c1e864716592b4"
+diff --git a/meta-oe/recipes-support/nss/nss/CVE-2024-6602.patch b/meta-oe/recipes-support/nss/nss/CVE-2024-6602.patch
+new file mode 100644
+index 0000000000..f75d822d03
+--- /dev/null
++++ b/meta-oe/recipes-support/nss/nss/CVE-2024-6602.patch
+@@ -0,0 +1,65 @@
++From 7804e99346339bb31f801a2fcba63b6fbd8bca4a Mon Sep 17 00:00:00 2001
++From: John Schanck <jschanck@mozilla.com>
++Date: Mon, 20 May 2024 18:46:14 +0000
++Subject: [PATCH] Bug 1895032 - remove redundant AllocItem implementation.
++ r=nss-reviewers,rrelyea
++
++Differential Revision: https://phabricator.services.mozilla.com/D209476
++
++--HG--
++extra : moz-landing-system : lando
++
++CVE: CVE-2024-6602
++Upstream-Status: Backport [https://hg.mozilla.org/projects/nss/rev/f9b22115dc97be76e388dc9d0dca946dde955e64]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ nss/lib/util/secitem.c | 23 ++++-------------------
++ 1 file changed, 4 insertions(+), 19 deletions(-)
++
++diff --git a/nss/lib/util/secitem.c b/nss/lib/util/secitem.c
++index cd6996178..6ba11a551 100644
++--- a/nss/lib/util/secitem.c
+++++ b/nss/lib/util/secitem.c
++@@ -238,35 +238,20 @@ SECITEM_ArenaDupItem(PLArenaPool *arena, const SECItem *from)
++     SECItem *to;
++ 
++     if (from == NULL) {
++-        return (NULL);
+++        return NULL;
++     }
++ 
++-    if (arena != NULL) {
++-        to = (SECItem *)PORT_ArenaAlloc(arena, sizeof(SECItem));
++-    } else {
++-        to = (SECItem *)PORT_Alloc(sizeof(SECItem));
++-    }
+++    to = SECITEM_AllocItem(arena, NULL, from->len);
++     if (to == NULL) {
++-        return (NULL);
+++        return NULL;
++     }
++ 
++-    if (arena != NULL) {
++-        to->data = (unsigned char *)PORT_ArenaAlloc(arena, from->len);
++-    } else {
++-        to->data = (unsigned char *)PORT_Alloc(from->len);
++-    }
++-    if (to->data == NULL) {
++-        PORT_Free(to);
++-        return (NULL);
++-    }
++-
++-    to->len = from->len;
++     to->type = from->type;
++     if (to->len) {
++         PORT_Memcpy(to->data, from->data, to->len);
++     }
++ 
++-    return (to);
+++    return to;
++ }
++ 
++ SECStatus
++-- 
++2.30.2
++
+diff --git a/meta-oe/recipes-support/nss/nss_3.74.bb b/meta-oe/recipes-support/nss/nss_3.74.bb
+index cffeee5ecb..464a353ff7 100644
+--- a/meta-oe/recipes-support/nss/nss_3.74.bb
++++ b/meta-oe/recipes-support/nss/nss_3.74.bb
+@@ -37,6 +37,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
+            file://CVE-2023-0767.patch \
+            file://0001-Bug-1750624-Pin-validation-date-for-PayPalEE-test-ce.patch \
+            file://regenerate_NameConstrain_test_certificates.tar.gz \
++           file://CVE-2024-6602.patch \
+            "
+ SRC_URI[sha256sum] = "88928811f9f40f87d42e2eaccdf6e454562e51486067f2ddbe90aa47ea6cd056"
  
- inherit pypi python_setuptools_build_meta
- 
--SRC_URI[sha256sum] = "f5caa47cee75fe03b9c50b5594048b4c052eeca2c212e0dac12dbb6175d9a659"
-+SRC_URI[sha256sum] = "fa2cf1063bb227ed6f7f66b019f320d7dc0a7cb02acdf166a160e2381f4b2c39"
- 
- RDEPENDS:${PN} += "python3-packaging"
 -- 
-2.39.5
+2.30.2
 
 
