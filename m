@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB89DD5B87D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D8C85D5B877
 	for <webhook@archiver.kernel.org>; Tue, 29 Oct 2024 04:25:08 +0000 (UTC)
-Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com [209.85.167.178])
- by mx.groups.io with SMTP id smtpd.web11.11978.1730175905754112836
+Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
+ by mx.groups.io with SMTP id smtpd.web10.11999.1730175903641505793
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Oct 2024 21:25:05 -0700
+ Mon, 28 Oct 2024 21:25:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XRz58+pa;
- spf=pass (domain: gmail.com, ip: 209.85.167.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f178.google.com with SMTP id 5614622812f47-3e60f6ea262so2455661b6e.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Oct 2024 21:25:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dVP4COPg;
+ spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f48.google.com with SMTP id 46e09a7af769-7180e07185bso2262193a34.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Oct 2024 21:25:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730175905; x=1730780705; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730175903; x=1730780703; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=yhhQfSgE31kUwqSQ9Vw7J+VDTp2u88ij71TY53diBnA=;
-        b=XRz58+pasRjFlA0+tBEZFyQj3PNIsUIBJ/qKOb4gvR7ceG63z9zMNLCN9WAHvXjYPc
-         Xhut/EB+ocdoyIfbyXd0fWrHrjN1u4I6Qdcpt+el85bQmvDDn7eBOTXoCW/P1K3370h+
-         qRNmejqwH+5UfmVIGLV337o8E9xSGxFOuICwxZBPspzSoTGQLFP7bNY9ffG/tq1wm1sd
-         AlFHRHobAZK2SaLogm7p86Gz3btZSrFmmGzC6m7OmckzYUzTk4bI9Zd/PMGtpiyIwC7A
-         ss0C8oGmdNyExMgjvmcsaPipLZmWWnexZRJjFs+xM6wcMTEz+2hMs0CwFKRvtu7WmgFX
-         zSNA==
+        bh=wqo2b3qUsP7FuK9XGZkGMQQD31+e15K8NDQ/+zsT95E=;
+        b=dVP4COPgAERVxeUph/tOoHjH6fTKNGYRK44Dp7FpkXvin9oSN33rgp8LyUzwZzU9VF
+         Tgemz0UxcKWVBuqTNoBpsppnc6nie1mZv0zJ5xShxUW3KsU2E9EJOee7iAWvONgPMUxL
+         EtnuTBgGOUe6iEaTCInXF+c7vqjicGxkAwrGb49ayK5fCX3nEbS30Tn2KTSfBM0MdJpA
+         cQgKH/qPkQmauk+YKqytoVgNkRun2/xtrwGXybx8ujp/gbYAZxjCE6CvNciLKwF8zUrN
+         Ky9dLSVHx1Gy0b7n2EnxhUNcR0yJ7pkhNN7MH+fvr7eaUKXp2y6L2AorsnOgXlxSfhrU
+         Kt4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730175905; x=1730780705;
+        d=1e100.net; s=20230601; t=1730175903; x=1730780703;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=yhhQfSgE31kUwqSQ9Vw7J+VDTp2u88ij71TY53diBnA=;
-        b=WhU9ThsoDZwxyn3L7dyE2An2ZBuc9Jz7ypdaQbHM85E37eAwKVxqTJp1hcpIAY0jAl
-         xzvAMQ2ySQrwd2wEkHxr625crL97PEuPfVlRQEmuzayA74RxUsP/pZENw2ljgh3nB4OP
-         Qn/P5BamwW+D8RmdlYNKmo7/cf5uFAQtSrLT9w983Fm3668JCcAPr0GhO1eBaHv4mfKi
-         MK1PPZuIJGm2ssPH9opeoP4mMtUNrrSJAyVKCF60w3w4zi2ZHESqM1wYz31DyzKZvh+o
-         cxplU2/oER3leatOLQKFtWzPqTcFENRgTsmRBRtqNOVlyWcFMz9qW2zlF3VlcxrxLD69
-         xbOw==
-X-Gm-Message-State: AOJu0Yy3dxeVB7vx0E1JAIf4H/3USCcTG3tDHZYL57lPwRRe+0re/zj/
-	dhOP1Jt53gbYfmGJWT4FMNrYol/uVAzPEX9O+xlgPWKmuUhaaIAdfsa3AllE
-X-Google-Smtp-Source: AGHT+IEty3XN6ArP3V6UFgz7RZ2N36TaiG+IkwxiKNJQNofKv1pl8dzASXRIW3IErNknCJ0UoWSO/w==
-X-Received: by 2002:a05:6808:384a:b0:3e0:374a:1a60 with SMTP id 5614622812f47-3e6384c4db2mr9157023b6e.30.1730175904849;
-        Mon, 28 Oct 2024 21:25:04 -0700 (PDT)
+        bh=wqo2b3qUsP7FuK9XGZkGMQQD31+e15K8NDQ/+zsT95E=;
+        b=pZsBjhAxuCzGAnGjcqQ6tJYfI5lGgxLEbzO73m1z0iChc1ha9vEhqmt1o4yC8hfisS
+         KLA6XS8Y4pAKbi4bEkiNNriVTBEzuojgQTt6tD1JHO6l1k/pjWMFme+vwFL7ZBZ62MD3
+         GGWebNHOQGJ/hOdWKRAJBsov98ZddKJw4Gt3Dkn6cGHj0ysxfmCCXfxcdMBr598LpWfI
+         11RtayGUWOFanbvXmEgU6W9Hdcbs5RYv05+HG71hNGSvPitLNzSYjNDwjtpUeFOMk59P
+         fmHhnTu+/7ToWSXvAozW6QpT9OTAnpx0kVix5VknJ22G/jbQyGc+Ws8Co5b3M5FPOzNb
+         T+CA==
+X-Gm-Message-State: AOJu0Yw/2TB37nF/lgI29VnGlG2BKvGhHWh+KTnl4I3GzkA3+XqtDap/
+	rW8PH3HwsHaw2f5FCE6Thu1AQBBURsAX2qUoCwwTD8HkXDVoWQIQELhCV0Pp
+X-Google-Smtp-Source: AGHT+IEqaPbnlsNPdDHcdW7Jwc9Bk4jHXkupi391iksH7Z73F1nspQL2F4Y/aYjwMK0GDEXYeTDSiA==
+X-Received: by 2002:a05:6830:314e:b0:718:41b8:5d6d with SMTP id 46e09a7af769-7186828d782mr7156121a34.24.1730175902594;
+        Mon, 28 Oct 2024 21:25:02 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::8085])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-7edc8679cbesm6710198a12.24.2024.10.28.21.25.03
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-7edc8679cbesm6710198a12.24.2024.10.28.21.25.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Oct 2024 21:25:03 -0700 (PDT)
+        Mon, 28 Oct 2024 21:25:02 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 5/5] python3-pydantic: Upgrade to 2.9.2
-Date: Mon, 28 Oct 2024 21:24:57 -0700
-Message-ID: <20241029042457.4125617-5-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 3/5] python3-eventlet: Add new thread attributes from Python 3.13
+Date: Mon, 28 Oct 2024 21:24:55 -0700
+Message-ID: <20241029042457.4125617-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241029042457.4125617-1-raj.khem@gmail.com>
 References: <20241029042457.4125617-1-raj.khem@gmail.com>
@@ -61,53 +61,58 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 29 Oct 2024 04:25:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113321
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113319
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...python3-pydantic_2.8.2.bb => python3-pydantic_2.9.2.bb} | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pydantic_2.8.2.bb => python3-pydantic_2.9.2.bb} (90%)
+ ...d6cc086684ee74db250f5fd35227c98e678a.patch | 27 +++++++++++++++++++
+ .../python/python3-eventlet_0.37.0.bb         |  1 +
+ 2 files changed, 28 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-eventlet/d19ad6cc086684ee74db250f5fd35227c98e678a.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-pydantic_2.8.2.bb b/meta-python/recipes-devtools/python/python3-pydantic_2.9.2.bb
-similarity index 90%
-rename from meta-python/recipes-devtools/python/python3-pydantic_2.8.2.bb
-rename to meta-python/recipes-devtools/python/python3-pydantic_2.9.2.bb
-index de610d7815..b776d05dce 100644
---- a/meta-python/recipes-devtools/python/python3-pydantic_2.8.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pydantic_2.9.2.bb
-@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=09280955509d1c4ca14bae02f21d49a6"
+diff --git a/meta-python/recipes-devtools/python/python3-eventlet/d19ad6cc086684ee74db250f5fd35227c98e678a.patch b/meta-python/recipes-devtools/python/python3-eventlet/d19ad6cc086684ee74db250f5fd35227c98e678a.patch
+new file mode 100644
+index 0000000000..f8a268309a
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-eventlet/d19ad6cc086684ee74db250f5fd35227c98e678a.patch
+@@ -0,0 +1,27 @@
++From d19ad6cc086684ee74db250f5fd35227c98e678a Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Miro=20Hron=C4=8Dok?= <miro@hroncok.cz>
++Date: Thu, 6 Jun 2024 10:29:29 +0200
++Subject: [PATCH] Add new thread attributes from Python 3.13
++
++Does not fix https://github.com/eventlet/eventlet/issues/964 yet
++Upstream-Status: Backport [https://github.com/eventlet/eventlet/pull/965]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ eventlet/green/thread.py | 7 +++++++
++ 1 file changed, 7 insertions(+)
++
++diff --git a/eventlet/green/thread.py b/eventlet/green/thread.py
++index 053a1c3c6..384b3c290 100644
++--- a/eventlet/green/thread.py
+++++ b/eventlet/green/thread.py
++@@ -118,3 +118,10 @@ def stack_size(size=None):
++ 
++ if hasattr(__thread, 'daemon_threads_allowed'):
++     daemon_threads_allowed = __thread.daemon_threads_allowed
+++
+++if hasattr(__thread, 'start_joinable_thread'):
+++    start_joinable_thread = __thread.start_joinable_thread
+++    _shutdown = __thread._shutdown
+++    _make_thread_handle = __thread._make_thread_handle
+++    _ThreadHandle = __thread._ThreadHandle
+++    _get_main_thread_ident = __thread._get_main_thread_ident
+diff --git a/meta-python/recipes-devtools/python/python3-eventlet_0.37.0.bb b/meta-python/recipes-devtools/python/python3-eventlet_0.37.0.bb
+index 84de0d8e44..df23162e05 100644
+--- a/meta-python/recipes-devtools/python/python3-eventlet_0.37.0.bb
++++ b/meta-python/recipes-devtools/python/python3-eventlet_0.37.0.bb
+@@ -4,6 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=56472ad6de4caf50e05332a34b66e778"
+ 
++SRC_URI += "file://d19ad6cc086684ee74db250f5fd35227c98e678a.patch"
+ SRC_URI[sha256sum] = "fa49bf5a549cdbaa06919679979ea022ac8f8f3cf0499f26849a1cd8e64c30b1"
  
  inherit pypi python_hatchling
- 
--SRC_URI[sha256sum] = "6f62c13d067b0755ad1c21a34bdd06c0c12625a22b0fc09c6b149816604f7c2a"
-+SRC_URI[sha256sum] = "d155cef71265d1e9807ed1c32b4c8deec042a44a50a4188b25ac67ecd81a9c0f" 
- 
- DEPENDS += "python3-hatch-fancy-pypi-readme-native"
- 
-@@ -24,12 +24,15 @@ RDEPENDS:${PN} += "\
-     python3-image \
-     python3-io \
-     python3-json \
-+    python3-jsonschema \
-     python3-logging \
-     python3-netclient \
-     python3-numbers \
-     python3-profile \
-     python3-pydantic-core \
-     python3-typing-extensions \
-+    python3-tzdata \
-+    python3-zoneinfo \
- "
- 
- inherit ptest
-@@ -38,6 +41,8 @@ RDEPENDS:${PN}-ptest += "\
-     python3-cloudpickle \
-     python3-dirty-equals \
-     python3-email-validator \
-+    python3-html \
-+    python3-hypothesis \
-     python3-pydoc \
-     python3-pytest \
-     python3-pytest-mock \
 
