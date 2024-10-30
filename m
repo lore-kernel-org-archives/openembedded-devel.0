@@ -1,106 +1,89 @@
-Return-Path: <hieu2.nguyen@lge.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 21971D5CC8F
-	for <webhook@archiver.kernel.org>; Wed, 30 Oct 2024 10:52:22 +0000 (UTC)
-Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.51])
- by mx.groups.io with SMTP id smtpd.web10.12169.1730285537040144935
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AFC75D5CCBB
+	for <webhook@archiver.kernel.org>; Wed, 30 Oct 2024 15:14:19 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.web11.17322.1730301256762948091
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Oct 2024 03:52:18 -0700
+ Wed, 30 Oct 2024 08:14:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.51, mailfrom: hieu2.nguyen@lge.com)
-Received: from unknown (HELO lgeamrelo01.lge.com) (156.147.1.125)
-	by 156.147.23.51 with ESMTP; 30 Oct 2024 19:52:14 +0900
-X-Original-SENDERIP: 156.147.1.125
-X-Original-MAILFROM: hieu2.nguyen@lge.com
-Received: from unknown (HELO vsl.LGE.NET) (10.218.140.120)
-	by 156.147.1.125 with ESMTP; 30 Oct 2024 19:52:14 +0900
-X-Original-SENDERIP: 10.218.140.120
-X-Original-MAILFROM: hieu2.nguyen@lge.com
-From: hieu2.nguyen@lge.com
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Bwb5nuC0;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-43155abaf0bso65494835e9.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Oct 2024 08:14:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1730301255; x=1730906055; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=MrJF6zKOdHXKScgDJl3inpFZarjjxmn3bJg7yEu5mzM=;
+        b=Bwb5nuC0M8jgjioIX5Hr+Y9d2lr+ZZtd4VwNpiU+HgBQ/nDuNUzXIhZ0i2PV6bYDP6
+         LA3oJfxNLnUpFvigCCP45L4AzvsAAAIFGt9WiRw28tlwKW8TatNgkp3tzDCSXqHnT7AB
+         ZTp9yuUCxCPVzKE4aKXbWTJhDHktzrXIudQySxpUs1q9Q36oljKSh4uk0CuStHOH4ozw
+         y0A9CfRSiFooCQTSbctK6EoNuN4vklIxhtE1obKmFoswOEO+eccdpcXbjAbvOywKYzzd
+         U+n7mufBChp6RMM2KpSMTTxm2DwPbyD79IrZshuSmmjujhB5WUOsMT1WdiuQOJOWxOyp
+         AeUA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1730301255; x=1730906055;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=MrJF6zKOdHXKScgDJl3inpFZarjjxmn3bJg7yEu5mzM=;
+        b=KxMm4B6KxvBLZy1ae4LruL0LG4i5eJ+1K2NDPhs1+FQJNq7VAVB8C9iJWRSr60X42N
+         qYRWHY5/sOGMetva8sfk96I8H9SJp2DGYC+20Tx+zMhV7DLSLNJVKYvt2BNvEvtR7zbL
+         +3yPW6A2vGo3SPP2oM0rVjCULGbneF/vJWJ2UuCZpRbl2CEpaxiqxzR8rAK506RZ5jK7
+         5SR11fL33ArtvibcITIUM3kHk5XXtvi17AL9PLlLwj0hZThz/+qJ6qoK8vsfNskD/xTc
+         My0Hl7LnckmbEwsW0t9UhDWM3bDixK1cm8ha3XvFvp1aAHCeoX5vcibwJg12nqpkJ+Tf
+         chGA==
+X-Gm-Message-State: AOJu0YyO41+lhvmVyyOVzYyeQaxNdg3s4dD2QVif3NphmDVXm5+Aq/ws
+	VRtH6DiX/eGgAt2q9Ka4UVA9l3uk43BXcQ1eFaXD0p+h91OiqTGNtRwZcA==
+X-Google-Smtp-Source: AGHT+IFuFtWEq4jz/Qe2JJ/a72VbFq3SUvFa8FnZBROFX+nXXi/KsWv8KFT2nFWsF1nb6nC6NUOIgw==
+X-Received: by 2002:a05:600c:4f0b:b0:431:4b88:d408 with SMTP id 5b1f17b1804b1-4319ac6e80dmr138998945e9.5.1730301254982;
+        Wed, 30 Oct 2024 08:14:14 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-431bd917f0bsm23855225e9.17.2024.10.30.08.14.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 30 Oct 2024 08:14:14 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: hieu2.nguyen@lge.com
-Subject: [meta-oe] libmtp: enable stack memory protection
-Date: Wed, 30 Oct 2024 10:51:53 +0000
-Message-ID: <20241030105153.3049343-1-hieu2.nguyen@lge.com>
-X-Mailer: git-send-email 2.45.1
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] libgpiod: drop wrong S assignment
+Date: Wed, 30 Oct 2024 16:14:09 +0100
+Message-ID: <20241030151409.208066-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 30 Oct 2024 10:52:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113343
+ <openembedded-devel@lists.openembedded.org>; Wed, 30 Oct 2024 15:14:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113344
 
-From: Hieu Van Nguyen <hieu2.nguyen@lge.com>
+* the default from bitbake.conf:
+  S = /
+  works better, because it points to correct directory even with e.g. when
+  building lib32-libgpiod with multilib
 
-Add 0002-util-mtp-hotplug.c-Enable-stack-memory-protection.patch:
-Use "return 0" instead of "exit(0)" to let the program exit normally
-by returning from the main function. This allows the compiler to
-perform necessary cleanup operations, including stack canary checks.
-
-Signed-off-by: Hieu Van Nguyen <hieu2.nguyen@lge.com>
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- ...lug.c-Enable-stack-memory-protection.patch | 33 +++++++++++++++++++
- .../libmtp/libmtp_1.1.21.bb                   |  3 +-
- 2 files changed, 35 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-connectivity/libmtp/libmtp/0002-util-mtp-hotplug.c-Enable-stack-memory-protection.patch
+ meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/libmtp/libmtp/0002-util-mtp-hotplug.c-Enable-stack-memory-protection.patch b/meta-oe/recipes-connectivity/libmtp/libmtp/0002-util-mtp-hotplug.c-Enable-stack-memory-protection.patch
-new file mode 100644
-index 0000000000..9cd4b2fbd6
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/libmtp/libmtp/0002-util-mtp-hotplug.c-Enable-stack-memory-protection.patch
-@@ -0,0 +1,33 @@
-+From 0644188a537a06bc6d04483b21e23b80987eb497 Mon Sep 17 00:00:00 2001
-+From: Hieu Van Nguyen <hieu2.nguyen@lge.com>
-+Date: Fri, 11 Oct 2024 04:21:21 +0000
-+Subject: [PATCH] util/mtp-hotplug.c: Enable stack memory protection
-+
-+Use "return 0" instead of "exit(0)" at the end of main()
-+function to enable checking for Stack Overflow at Runtime.
-+
-+Use "return 0" to let the program exit normally by returning from
-+the main function. This allows the compiler to perform necessary
-+cleanup operations, including stack canary checks.
-+
-+__stack_chk_fail function isn't being invoked when using exit(0) at
-+the end of the main function
-+$ objdump -T ./util/.libs/mtp-hotplug | grep __stack_chk_fail
-+This return empty.
-+---
-+Upstream-Status: Backport [https://github.com/libmtp/libmtp/commit/e89dbb6ecf244936acc9a52aa4af9635bda5926a]
-+
-+ util/mtp-hotplug.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/util/mtp-hotplug.c b/util/mtp-hotplug.c
-+index b5bc6da40f..db75cb38a1 100644
-+--- a/util/mtp-hotplug.c
-++++ b/util/mtp-hotplug.c
-+@@ -301,5 +301,5 @@ int main (int argc, char **argv)
-+     printf("\n");
-+   }
-+ 
-+-  exit (0);
-++  return 0;
-+ }
-diff --git a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.21.bb b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.21.bb
-index 16f82c6ba3..69dff50cd7 100644
---- a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.21.bb
-+++ b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.21.bb
-@@ -18,7 +18,8 @@ DEPENDS = "libusb1 gettext-native"
- DEPENDS:append:class-target = " ${BPN}-native"
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
+index 3d9758e27a..00252dfe64 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
+@@ -17,8 +17,6 @@ SRC_URI += "file://gpio-manager.init"
  
- SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.gz"
--SRC_URI:append:class-target = " file://0001-Use-native-mtp-hotplug.patch"
-+SRC_URI:append:class-target = " file://0001-Use-native-mtp-hotplug.patch \
-+                                file://0002-util-mtp-hotplug.c-Enable-stack-memory-protection.patch"
- SRC_URI[sha256sum] = "f4c1ceb3df020a6cb851110f620c14fe399518c494ed252039cbfb4e34335135"
+ SRC_URI[sha256sum] = "ee29735890eb1cc0e4b494001da5163d1a9c4735343201d22485db313601ca07"
  
- UPSTREAM_CHECK_URI = "https://github.com/libmtp/libmtp/releases"
+-S = "${UNPACKDIR}/${PN}-2.2"
+-
+ # Enable all project features for ptest
+ PACKAGECONFIG[tests] = " \
+     --enable-tests --enable-tools --enable-bindings-cxx --enable-bindings-glib --enable-gpioset-interactive --enable-dbus, \
 -- 
-2.45.1
+2.47.0
 
 
