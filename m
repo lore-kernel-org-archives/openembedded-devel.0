@@ -1,56 +1,114 @@
-Return-Path: <denis@denix.org>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AB9BD6B6D4
-	for <webhook@archiver.kernel.org>; Wed, 30 Oct 2024 20:08:41 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web10.25106.1730318914117681765
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B4D3D6B6DA
+	for <webhook@archiver.kernel.org>; Wed, 30 Oct 2024 20:54:21 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.web10.26203.1730321653654848720
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Oct 2024 13:08:34 -0700
+ Wed, 30 Oct 2024 13:54:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 28C63410FD;
-	Wed, 30 Oct 2024 20:08:33 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id wcFd__9Eeto1; Wed, 30 Oct 2024 20:08:33 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id F193440DF9;
-	Wed, 30 Oct 2024 20:08:29 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 065DB1640BD; Wed, 30 Oct 2024 16:08:29 -0400 (EDT)
-Date: Wed, 30 Oct 2024 16:08:28 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	Yocto Project <yocto@lists.yoctoproject.org>,
-	openembedded-members@lists.openembedded.org
-Subject: OpenEmbedded Happy Hour October 30 9pm/2100 UTC
-Message-ID: <20241030200828.GF20070@denix.org>
+ dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=0cnRh3z5;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.45, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4315eeb2601so2610095e9.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Oct 2024 13:54:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1730321652; x=1730926452; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=UJjjkuuND++MRSM2PM9iUrTCK565o8WGfalH0I8wABs=;
+        b=0cnRh3z5sDmqGp+8BrvG/2Z9OoonF/2zfB7e1iKy0bcEJ4XtO88wvRWc4msh1oZvZs
+         m+GH1JOd+k1fOZ08nU0pFeGY16TPtV7BEreBVMEDcFYrszSFMXASImiq1u/yt0t38NHe
+         kJwu1RVaGUI4uQfXtETxtSsVjw7JKTtggsJEsYrN1GiqN2LfU/8LrKloE/zLL6DN86DD
+         9uicmumSuoH9xXC+EsFVadDfIbjt4+IiqygtKjfpuHMzlwntQp5Y7FRdumyuj+DndqoB
+         6ST6rEneHXwYQleUdlRM7+b6flAQqtBPMpmPfwOgwzqAZYm64zmUEYFrLXREnTvjf9wR
+         GMHg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1730321652; x=1730926452;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=UJjjkuuND++MRSM2PM9iUrTCK565o8WGfalH0I8wABs=;
+        b=oT4TUbVgiIWE8NB34b1WVUgBMg/DJovbVVLCEOnZzLyjK2j1hnVjUFTIDwz+pcJwRt
+         sK4Jic7dGkKbQzKj8eI1NW+XmBGFiAqLVfs8exVho/LGltJGU6lqD0mqPuEB7UTcEMDg
+         KXAQDrG0HcNFyCZ4lls8m5VD45qLCwEodRN6OpxrUQW+1+swnbrCLtEIF9apeBS38UOx
+         582sm38vZ68AbfqHDK2PvC6OJPBoEAGrc46c3xu1wj5HScmc0VFlDgimLsEklGFj1MmJ
+         PV969o/daXzHF5zPg14mJm9Eo3ltazEhLWqgQLyl0dfYiGMsW18jqS7biicvq7R5fHu9
+         irFA==
+X-Forwarded-Encrypted: i=1; AJvYcCXIQO9pPVZnRdF1Ac60d9v4XCcgxtesUIkXjxU0f3Kl91SX0VbD4d/r99PKFrVmT/tzE+fQ99LP0bZ9/mNUbe4rM/Q=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YyWRtgkV3UU2oGkA6NiGbz4mYCObU/IYM73cmvyyFuMsKJzPG3+
+	shrMa5xnuPwSeIi3yly0eNwWywF5cYi0jtFs+gGKNfLP0xIazS/YG2USGhCIDlI=
+X-Google-Smtp-Source: AGHT+IFh8F9mnsKEiEQgJHU7JIOBN8HhjIOtIruTNlKI3TFgG/lReHEA9RPq1NhuXosQXBAi+vucZg==
+X-Received: by 2002:a05:600c:4fce:b0:431:4f29:9539 with SMTP id 5b1f17b1804b1-4319ad29f7cmr189613115e9.32.1730321651874;
+        Wed, 30 Oct 2024 13:54:11 -0700 (PDT)
+Received: from brgl-pocket.. (2a02-8440-c115-9a66-6177-8af0-b80d-9b87.rev.sfr.net. [2a02:8440:c115:9a66:6177:8af0:b80d:9b87])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4327d5bf429sm1545995e9.12.2024.10.30.13.54.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 30 Oct 2024 13:54:11 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Max Krummenacher <max.oss.09@gmail.com>,
+	Martin Jansa <martin.jansa@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [meta-oe][PATCH] libgpiod: selectively enable GObject introspection
+Date: Wed, 30 Oct 2024 21:53:31 +0100
+Message-ID: <20241030205334.10278-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 30 Oct 2024 20:08:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113353
+ <openembedded-devel@lists.openembedded.org>; Wed, 30 Oct 2024 20:54:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113354
 
-All,
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-Just a quick reminder about our monthly OpenEmbedded Happy Hour that is 
-scheduled for today, October 30 at 2100/9pm UTC (5pm ET/2pm PT)
+The oe-core bbclass for GObject introspection sets GI_DATA_ENABLED if
+the relevant distro feature is enabled. That means that it's up to the
+inheriting recipe to disable it if needed.
 
-https://www.openembedded.org/wiki/Calendar
-https://www.openembedded.org/wiki/Happy_Hours
-https://www.timeanddate.com/worldclock/fixedtime.html?msg=OpenEmbedded+Happy+Hour+October+30&iso=20241030T21
+For libgpiod: we only want to enable it if any of the GLib based
+packages is being generated (GLib bindings, D-Bus daemon or ptest).
 
-Best regards,
-Denys Dmytriyenko
-OpenEmbedded Board of Directors
+This also effectively reverts commit 78a332939f8b (libgpiod_2.2: depend
+on glib-2.0) which indiscriminately pulls in GLib for all packages
+generated by this recipe which feels like shooting a fly with a cannon.
+
+Fixes: 9626e8a2c8f2 ("libgpiod: update to v2.2")
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+---
+ meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
+index 3d9758e27a..25f3734a16 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
+@@ -9,8 +9,6 @@ LIC_FILES_CHKSUM = " \
+     file://LICENSES/CC-BY-SA-4.0.txt;md5=fba3b94d88bfb9b81369b869a1e9a20f \
+ "
+ 
+-DEPENDS += "glib-2.0"
+-
+ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-2.x:"
+ 
+ SRC_URI += "file://gpio-manager.init"
+@@ -61,6 +59,10 @@ python __anonymous() {
+         d.setVar("SYSTEMD_SERVICE:{}-manager".format(pn), "gpio-manager.service")
+     else:
+         d.appendVar("EXTRA_OECONF", " --disable-systemd")
++
++    # Disable gobject introspection set by the bbclass if we don't want it.
++    if not any(cfg in ["glib", "dbus", "ptest"] for cfg in packageconfig):
++        d.setVar("GI_DATA_ENABLED", "False")
+ }
+ 
+ UPDATERCPN = "${PN}-manager"
+-- 
+2.45.2
+
 
