@@ -2,104 +2,88 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA53BD5CCBD
-	for <webhook@archiver.kernel.org>; Wed, 30 Oct 2024 15:33:39 +0000 (UTC)
-Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
- by mx.groups.io with SMTP id smtpd.web11.17795.1730302411109613400
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE3C7D5CCBE
+	for <webhook@archiver.kernel.org>; Wed, 30 Oct 2024 15:33:49 +0000 (UTC)
+Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
+ by mx.groups.io with SMTP id smtpd.web11.17800.1730302420169552986
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Oct 2024 08:33:31 -0700
+ Wed, 30 Oct 2024 08:33:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Q27V/o3o;
- spf=pass (domain: gmail.com, ip: 209.85.167.52, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-53c73f01284so971420e87.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Oct 2024 08:33:30 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=i3vplLeU;
+ spf=pass (domain: gmail.com, ip: 209.85.167.53, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-539e8607c2aso6986584e87.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Oct 2024 08:33:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730302409; x=1730907209; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=yChAIGhQSSyBwzxRht+kJK8fZsZcbB+Nep8A7l++Dks=;
-        b=Q27V/o3oD4SFT/kPSz/y1aDHkw9aRM9yd8ltyNn/yTCn+yH04Qtae9C8kqGtmIaqHp
-         l7QJ6g/edsdRbPR9SI2xtzp5w3G35Rba4JoA8yuQu2Tnu+bWBc6Nmi29MVtNTIBTUo6o
-         D6DnQU8H7zkPhxECN1ABnykTJMrXNQg4tdnKyvgm8kVZDlXPX74R7uTE7CtuiDDWkNhm
-         1iKguCufS77j2iVExsgZW+WAEk4jOn65pnzZ2oHdfQN1hLtRHSm6pa/RL+5JbG0KFn7U
-         HKj/wFaKXZQqR9aHSr9826DlmNp56M4gv5bW6V7XQKmkzjs1j5S/sVMu2+KWlcD4XaI8
-         hOdA==
+        d=gmail.com; s=20230601; t=1730302418; x=1730907218; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ELnlrNoPEENoB/auPJJxNqA9/y99ceE9u0CXqRmp6zI=;
+        b=i3vplLeU/evIJqEu66oH9eQeLnrHEkLDw5DlpHTgcNXGFHo5TDkH404D0NT/soWVsu
+         pg8HKsrHVM1WDSyiXYrzzFnMNFjWKjEn7WJ3CpYUl0Jp9q60CSMltvqMN8D/kjAwSEv6
+         /LXIHckzlSSqcX0vN++on5s/9FooKfhYt11EYp1EiG3tBoc2g3FrYJVb2ZGcQr8jB6nP
+         v5X92vtnXRY2VyGZAiNDBdoBwuD+6ltjPA7iHNQaveEUdgm4VH4PW26/8QC8tGdBgsxn
+         1sHK9amipRTf1It1vWTVKXm1WdhvIi6k5C/rCKV8SxQMnfTjNUGnMsNPaeiMtyNrQnQK
+         ZHUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730302409; x=1730907209;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=yChAIGhQSSyBwzxRht+kJK8fZsZcbB+Nep8A7l++Dks=;
-        b=D3pTCtgQwH9is+lxXmD0/tkd0wDjbSkL1+6CeHF/S4BEV6qKqDbnwQ+3mzmvN5g8rm
-         hGr9W9Iae2bQUt4BKX1OSY6yJgURNbLJqpTi9kRSl3qbFwpD/ZUMVG4bFmRx+JR8+3t/
-         Qtw9x/wUji4TIe04TS2bGXvskt5ltIfgJxp8ho7Rk4nLYxl+Pr/5umg7pVzf5vMuQi+f
-         go1PYxBkGC1F5IBAKEkZC8aze7RrgM06ZPvQI9BB9IDZUZN/0bbduwfd07fw4ygI+2k/
-         fCKnwceIRUBiJY9kGTPS7l1N5ResfCpGSLOSY72j7uYzE7wLoRHTCjdJ/C7977VY4gOx
-         cr6g==
-X-Gm-Message-State: AOJu0YyjniO8i8A7H0xy62YKkfgCqzIfEPiLHBj3u/XFLj/2taC8+c17
-	y/WrQ6LNY9EPjhJFTYGAJzcyTaS8WmrSUn7QRZ1SDV2uiLtZjtfMZXf8C1g2n4AM/o0FIlb3rRb
-	itHq2vu39ExY80ADx774M58EYSXQ=
-X-Google-Smtp-Source: AGHT+IFEvY/f8wrauQJArbDhKXKiBD2j1lVakiFZ4nQ9q2Piusrgy5Dn5R8JwQaSFYp9ybeplqaYTTlskUuqo6jhVSE=
-X-Received: by 2002:a05:6512:33cd:b0:53a:d1a:be09 with SMTP id
- 2adb3069b0e04-53b3490f057mr8636954e87.37.1730302408907; Wed, 30 Oct 2024
- 08:33:28 -0700 (PDT)
-MIME-Version: 1.0
-References: <20241030151409.208066-1-martin.jansa@gmail.com> <54c371b7-d67e-4a12-b9b4-1d7a50ed0a1c@smile.fr>
-In-Reply-To: <54c371b7-d67e-4a12-b9b4-1d7a50ed0a1c@smile.fr>
+        d=1e100.net; s=20230601; t=1730302418; x=1730907218;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ELnlrNoPEENoB/auPJJxNqA9/y99ceE9u0CXqRmp6zI=;
+        b=Ak9nqnbpgod2mDKGFwr/8xTqzFmQq7Ibuw79wX4fyrrm4xZ8CB0rKiLQk8wUGu7Dc8
+         5jJdSQrR22hgUOLbqPb6PHL/2SL9s0wlgj0uQ+T7+2otjxgqZZ4umAIL9NaaoBGf+Mcv
+         ZE6XnLR+Xe8uY0DEExkLdvpOgfk55aY/9PrGxcmQeyAyljZuHYQ6UQPwCK2jRcvtju+b
+         Q6MwPKcICQl3KdLXbPd0SZqNhQX25aUtu7xA0bDeqh44WXA1H0zFfhSI1vgGUYBj1555
+         EfUODZK2wbA44ZE0tSr9+tihVG+GnHepE4QHZQt50tJJWERhJE4r/wYcMsNd0Cql1nt7
+         SATQ==
+X-Gm-Message-State: AOJu0Yy3bIcyWrcrm3Q+NqtsFFgbwbjMdMihzV6pzj8EGIQ/ptyDNnG/
+	OFvtEatLwDYBHVWjk+V/VgprmAFt9nB/zE7+7idaMC/zrUOASg7eEsBU6A==
+X-Google-Smtp-Source: AGHT+IH6da4XAjgVdxRBOSJ8K4t+yVbGVB6v6veiAtTF2teXQ7dJhLZuvXgkI27GFO5ZZO+ZClYUew==
+X-Received: by 2002:a05:6512:ba2:b0:539:968a:9196 with SMTP id 2adb3069b0e04-53b34a2d6e3mr7195632e87.48.1730302417355;
+        Wed, 30 Oct 2024 08:33:37 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5cbb6257f37sm4797851a12.19.2024.10.30.08.33.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 30 Oct 2024 08:33:36 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 30 Oct 2024 16:33:15 +0100
-Message-ID: <CA+chaQe85DWEkS9fJhrvxQ-Kek2FEJRqc_xFZTO2FQr6i0SihA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] libgpiod: drop wrong S assignment
-To: Yoann Congal <yoann.congal@smile.fr>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH v2] libgpiod: drop wrong S assignment
+Date: Wed, 30 Oct 2024 16:33:29 +0100
+Message-ID: <20241030153329.255181-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.47.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 30 Oct 2024 15:33:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113346
+ <openembedded-devel@lists.openembedded.org>; Wed, 30 Oct 2024 15:33:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113347
 
-Indeed, but wrote it in shell where those 2 variables were empty :),
-sending v2 now, thanks for review.
+* the default from bitbake.conf:
+  S = "${WORKDIR}/${BP}"
+  works better, because it points to correct directory even with e.g. when
+  building lib32-libgpiod with multilib
 
-On Wed, Oct 30, 2024 at 4:18=E2=80=AFPM Yoann Congal <yoann.congal@smile.fr=
-> wrote:
->
->
->
-> Le 30/10/2024 =C3=A0 16:14, Martin Jansa via lists.openembedded.org a =C3=
-=A9crit :
-> > * the default from bitbake.conf:
-> >   S =3D /
->
-> You meant
-> S =3D "${WORKDIR}/${BP}"
-> ?
-> >   works better, because it points to correct directory even with e.g. w=
-hen
-> >   building lib32-libgpiod with multilib
-> >
-> > Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-> > ---
-> >  meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb | 2 --
-> >  1 file changed, 2 deletions(-)
-> >
-> > diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb b/meta-oe=
-/recipes-support/libgpiod/libgpiod_2.2.bb
-> > index 3d9758e27a..00252dfe64 100644
-> > --- a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
-> > +++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
-> > @@ -17,8 +17,6 @@ SRC_URI +=3D "file://gpio-manager.init"
-> >
-> >  SRC_URI[sha256sum] =3D "ee29735890eb1cc0e4b494001da5163d1a9c4735343201=
-d22485db313601ca07"
-> >
-> > -S =3D "${UNPACKDIR}/${PN}-2.2"
-> > -
-> >  # Enable all project features for ptest
-> >  PACKAGECONFIG[tests] =3D " \
-> >      --enable-tests --enable-tools --enable-bindings-cxx --enable-bindi=
-ngs-glib --enable-gpioset-interactive --enable-dbus, \
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+---
+ meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
+index 3d9758e27a..00252dfe64 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
+@@ -17,8 +17,6 @@ SRC_URI += "file://gpio-manager.init"
+ 
+ SRC_URI[sha256sum] = "ee29735890eb1cc0e4b494001da5163d1a9c4735343201d22485db313601ca07"
+ 
+-S = "${UNPACKDIR}/${PN}-2.2"
+-
+ # Enable all project features for ptest
+ PACKAGECONFIG[tests] = " \
+     --enable-tests --enable-tools --enable-bindings-cxx --enable-bindings-glib --enable-gpioset-interactive --enable-dbus, \
+-- 
+2.47.0
+
 
