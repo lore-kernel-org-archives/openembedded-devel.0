@@ -1,118 +1,184 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 52D37D74948
-	for <webhook@archiver.kernel.org>; Tue, 29 Oct 2024 22:13:38 +0000 (UTC)
-Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
- by mx.groups.io with SMTP id smtpd.web10.1147.1730240016380179515
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5333ED74954
+	for <webhook@archiver.kernel.org>; Wed, 30 Oct 2024 01:32:09 +0000 (UTC)
+Received: from mail-oo1-f45.google.com (mail-oo1-f45.google.com [209.85.161.45])
+ by mx.groups.io with SMTP id smtpd.web10.4776.1730251921640480848
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Oct 2024 15:13:36 -0700
+ Tue, 29 Oct 2024 18:32:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=Hb3qLqO7;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-2024102922133413dc181df26d0edcf0-jovzpv@rts-flowmailer.siemens.com)
-Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 2024102922133413dc181df26d0edcf0
-        for <openembedded-devel@lists.openembedded.org>;
-        Tue, 29 Oct 2024 23:13:34 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=eMhOJ24GDWMUsJBENcQ5qcJBF/K42Pv7bhVlR6TCLYE=;
- b=Hb3qLqO73y8NzLlVvTY2iGpSZ2pId3g6tQ6zONduJTfw7vTX7XOgbEXWcTtPKsA5Ie1nqM
- 0LcovKrqBg/wn0J9QmFQaUDlRedbBNgFQvDYgCLPX18k1SKHopPjlQEUvui6nxuljVVx3k7L
- Jp7bI/DyQgfncgARTdEWTwfSXeCD24veeMrZiZ/5sz/KDsGBNvNRnO5Sc2dgd9sYGtbMhp3g
- CcZ8a4dgQPc945Anjy/iDWrP9cpm0Uh681y8HVkRNnEOHU06cXqgmPIZ5s6mOM0IzI82X/1i
- lX5QTRNLHhgfhJmrJWHG81ZNRSlk2kXFAhydDKLCa4NzMT6XOiZBgE0Q==;
-From: Peter Marko <peter.marko@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][scarthgap][PATCH 2/2] nss: patch CVE-2024-6609
-Date: Tue, 29 Oct 2024 23:12:39 +0100
-Message-Id: <20241029221239.198121-2-peter.marko@siemens.com>
-In-Reply-To: <20241029221239.198121-1-peter.marko@siemens.com>
-References: <20241029221239.198121-1-peter.marko@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jhm65Gbh;
+ spf=pass (domain: gmail.com, ip: 209.85.161.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f45.google.com with SMTP id 006d021491bc7-5eb70a779baso3229694eaf.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Oct 2024 18:32:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1730251921; x=1730856721; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=0KRpqZ3PGjgrvUEPZHjLUp82otCXRO+3ySXJ30l8hVA=;
+        b=jhm65GbhH5/Hfhhzyxs+noOWEsJ45TD2txboB5YCYy9vG70PBm92kZ/a8ZgONrO6Yq
+         EMoJgK9Wn/XltmG+JwcASD7MrnljQ3NN/mfNXNI21uiPRPD7R2NPM+UKkT98lSP/Wdk3
+         iMWN2eRlwn1C1paz0f95ztGdgVNRZvvY/yY1TqN4OltRY0HSCRppIZMfJNbxFlFixI3+
+         UopIcKCVI/WyjAppWKLzH70KKL54csa+vFZNSmS+LMgCAZiTIQWtRVJdUrnxCsINwbgd
+         QtxEJIA0ary4P62Ekthx2J6ATKjuAVcxImhHZMnbO73zjYNSy5yan6Kj2+IWnsP0mWBJ
+         P4jQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1730251921; x=1730856721;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=0KRpqZ3PGjgrvUEPZHjLUp82otCXRO+3ySXJ30l8hVA=;
+        b=a4/GfvqM1QC7b6zRzFnZkgmx1ujHU3OxaNZdvhF0+orRn2LoFwLHWrKSLSmiCeS8eE
+         mQ4WBK7yo5w1Ppfopu9ondB12xt11DIM0kfNAX5ld+f4Gu3d8WKXmvMWiIkjcoClrf1/
+         vV3WHElMegmDP7ZBajejtburWey6xhP+w1GsVIQdinamP3o5Th8KyfkC//5KkcdRbKQn
+         ra9l03SStVD/fgihXYLyv/m+SJ3lEqgtCbdBMMhS7ua4tMFwneBoZ2rv6cYXMlBB1nGg
+         MsqNqaedyUQ/roBKAi7PcUvsl/ld5ll9mlrUeqSCmABJyLvKuu0xYer4tAg5uxzud+jw
+         UBNw==
+X-Forwarded-Encrypted: i=1; AJvYcCVPG39PHechjToNznMTEhPrBubEduFQhU+qXyx+sCNU8NiG9MpiYjDi9RTEAX/sZ3Tx21sPAWBwpN94P2/NfDRoSQ0=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yxoh9qaGYiTdr9PXPKgweyA6LpkHF7SVG2h1FcAPgu80Le2FfGJ
+	5vmmsxYtAqR/jSEePSycArqRshcR6/gGJYTkuZ2bJVB5W0oOJ0w5MNjBnymxnjZBEK5TTDU4GMK
+	Qao61TY/RZC/AO8+HWACmxu0OtMY=
+X-Google-Smtp-Source: AGHT+IHeFMxpMLbX2a/UYhKDIndZYFXb+yIw/Qf2F1Ca2fLo6nlhemSTiy2jioCeQR6Sg0Ak9p6fq1sO751kEj/gt2w=
+X-Received: by 2002:a05:6820:2208:b0:5ec:1edf:7f35 with SMTP id
+ 006d021491bc7-5ec5eb2f5f4mr1518629eaf.2.1730251920840; Tue, 29 Oct 2024
+ 18:32:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
+References: <20241028112450.2793248-1-max.oss.09@gmail.com> <CAMRc=MdUQ59LmOZAJd=E7qjFiT9UGq2vx4zsHgR3cx7-kNhd=g@mail.gmail.com>
+In-Reply-To: <CAMRc=MdUQ59LmOZAJd=E7qjFiT9UGq2vx4zsHgR3cx7-kNhd=g@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 29 Oct 2024 18:31:34 -0700
+Message-ID: <CAMKF1srnqVmyuX+PTVAJUWXyN5QZJjc_6JqWy+SNHBpo+LC-tA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] libgpiod_2.2: depend on glib-2.0
+To: brgl@bgdev.pl
+Cc: max.oss.09@gmail.com, openembedded-devel@lists.openembedded.org, 
+	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>, 
+	Max Krummenacher <max.krummenacher@toradex.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 29 Oct 2024 22:13:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113337
+ <openembedded-devel@lists.openembedded.org>; Wed, 30 Oct 2024 01:32:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113338
 
-From: Peter Marko <peter.marko@siemens.com>
+Bart,
 
-Pick the same patch as Debian took for bullseye.
+On Mon, Oct 28, 2024 at 12:21=E2=80=AFPM Bartosz Golaszewski via
+lists.openembedded.org <brgl=3Dbgdev.pl@lists.openembedded.org> wrote:
+>
+> On Mon, Oct 28, 2024 at 12:26=E2=80=AFPM Max Krummenacher via
+> lists.openembedded.org <max.oss.09=3Dgmail.com@lists.openembedded.org>
+> wrote:
+> >
+> > From: Max Krummenacher <max.krummenacher@toradex.com>
+> >
+> > In my setup a build fails with
+> >
+> > | checking for gobject-introspection... configure: error: gobject-intro=
+spection-1.0 is not installed
+> > | NOTE: The following config.log files may provide further information.
+> > | NOTE: /var/home/krm/build/oe-core_master/build/tmp/work/cortexa55-tdx=
+-linux/libgpiod/2.2/build/config.log
+> > | ERROR: configure failed
+> >
+> > From config.log this seems to be related to glib-2.0 not found:
+> >
+> > | configure:22484: $PKG_CONFIG --exists --print-errors "gobject-introsp=
+ection-1.0"
+> > | Package glib-2.0 was not found in the pkg-config search path.
+> > | Perhaps you should add the directory containing `glib-2.0.pc'
+> > | to the PKG_CONFIG_PATH environment variable
+> > | Package 'glib-2.0', required by 'gobject-introspection-1.0', not foun=
+d
+> > | configure:22487: $? =3D 1
+> > | configure:22491: error: gobject-introspection-1.0 is not installed
+> >
+> > Note that glib-2.0.pc is present in recipes-sysroot-native but not
+> > in recipes-sysroot.
+> >
+> > Adding glib-2.0 to depends allows successful build of libgpiod 2.
+> >
+> > Fixes: 117d09ce43c7 ("libgpiod: update to v2.2")
+> > Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+> > ---
+> >  meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb | 2 ++
+> >  1 file changed, 2 insertions(+)
+> >
+> > I'm unsure if that is the correct fix.
+> > I would have expected that if gobject-introspection-1.0.pc depends
+> > on glib-2.0 to be present, then the inherit of gobject-introspection
+> > would have done the needful.
+> > However I'm not really familiar with gobject-introspection in the
+> > first place.
+> >
+> > Max
+> >
+> > diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb b/meta-oe=
+/recipes-support/libgpiod/libgpiod_2.2.bb
+> > index b55da72f7b7f..3d9758e27af7 100644
+> > --- a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
+> > +++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
+> > @@ -9,6 +9,8 @@ LIC_FILES_CHKSUM =3D " \
+> >      file://LICENSES/CC-BY-SA-4.0.txt;md5=3Dfba3b94d88bfb9b81369b869a1e=
+9a20f \
+> >  "
+> >
+> > +DEPENDS +=3D "glib-2.0"
+> > +
+>
+> Pulling in the entire GLib for everything in this recipe is definitely
+> a wrong answer. I'm travelling and have limited time right now but I
+> will take a look on Thursday or Friday. I did test disabling
+> introspection though so I'm surprised to see this.
+>
 
-There is no direct backport to version prior 3.102 because
-commit NSS_3_101_BETA2-12-g8d94c529b [1] rewrote this code.
+There is a problem with this when --enable-introspection is used
+without ptests being in distro features
+the reason it works with ptests on is that it enables 'test'
+packageconfig which brings in glib-2.0 dependency
+however if we build without 'ptest' DISTRO_FEATURE it will fail to
+configure like below
 
-Applied patch was proposed for old versions in [2] and already
-applied in Debian bullseye.
+   configure:22490: checking for gobject-introspection
+   configure:22499: $PKG_CONFIG --exists --print-errors
+"gobject-introspection-1.0"
+   Package glib-2.0 was not found in the pkg-config search path.
+   Perhaps you should add the directory containing `glib-2.0.pc'
+   to the PKG_CONFIG_PATH environment variable
+   Package 'glib-2.0', required by 'gobject-introspection-1.0', not found
+   configure:22502: $? =3D 1
+   configure:22506: error: gobject-introspection-1.0 is not installed
 
-I could not find suitable upstream status, inappropriate is the best
-I could pick from offered possibilities.
+The check inconfigure,ac is using GOBJECT_INTROSPECTION_CHECK macro
+which is expanding to this
+check I guess.
 
-[1] https://github.com/nss-dev/nss/commit/8d94c529b333194d080c4885ddd3a40e6c296ae9<
-[2] https://groups.google.com/a/mozilla.org/g/dev-tech-crypto/c/t9JmsYkujWM/m/HjKuk-ngBAAJ
+It seems that glib-2.0 is a hard dep for gobject-introspection so it
+might be better to add it in bbclass itself.
 
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
----
- .../nss/nss/CVE-2024-6609.patch               | 30 +++++++++++++++++++
- meta-oe/recipes-support/nss/nss_3.98.bb       |  1 +
- 2 files changed, 31 insertions(+)
- create mode 100644 meta-oe/recipes-support/nss/nss/CVE-2024-6609.patch
-
-diff --git a/meta-oe/recipes-support/nss/nss/CVE-2024-6609.patch b/meta-oe/recipes-support/nss/nss/CVE-2024-6609.patch
-new file mode 100644
-index 0000000000..38932cc237
---- /dev/null
-+++ b/meta-oe/recipes-support/nss/nss/CVE-2024-6609.patch
-@@ -0,0 +1,30 @@
-+From 41550b24b92c4a5971da9842e5e9f2b452aceca8 Tue Oct 29 22:44:57 2024
-+From: Peter Marko <peter.marko@siemens.com>
-+Date: Tue, 29 Oct 2024 22:44:57 +0100
-+Subject: [PATCH] fix CVE-2024-6609
-+
-+CVE: CVE-2024-6609
-+Upstream-Status: Inappropriate [upstream ticket: https://groups.google.com/a/mozilla.org/g/dev-tech-crypto/c/t9JmsYkujWM/m/HjKuk-ngBAAJ]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ nss/lib/freebl/ec.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/nss/lib/freebl/ec.c b/nss/lib/freebl/ec.c
-+index 73a625a..c9490da 100644
-+--- a/nss/lib/freebl/ec.c
-++++ b/nss/lib/freebl/ec.c
-+@@ -302,6 +302,10 @@ done:
-+ 
-+ cleanup:
-+     mp_clear(&k);
-++    if (err < MP_OKAY) {
-++        MP_TO_SEC_ERROR(err);
-++        rv = SECFailure;
-++    }
-+     if (rv) {
-+         PORT_FreeArena(arena, PR_TRUE);
-+     }
-+-- 
-+2.30.2
-+
-diff --git a/meta-oe/recipes-support/nss/nss_3.98.bb b/meta-oe/recipes-support/nss/nss_3.98.bb
-index b3ad6133b6..9218b4d30b 100644
---- a/meta-oe/recipes-support/nss/nss_3.98.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.98.bb
-@@ -33,6 +33,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/security/nss/releases/${VERSION_DIR}/src/$
-            file://nss-fix-nsinstall-build.patch \
-            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
-            file://CVE-2024-6602.patch \
-+           file://CVE-2024-6609.patch \
-            "
- SRC_URI[sha256sum] = "f549cc33d35c0601674bfacf7c6ad683c187595eb4125b423238d3e9aa4209ce"
- 
--- 
-2.30.2
-
+> Bart
+>
+> >  FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${PN}-2.x:"
+> >
+> >  SRC_URI +=3D "file://gpio-manager.init"
+> > --
+> > 2.42.0
+> >
+> >
+> >
+> >
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#113265): https://lists.openembedded.org/g/openembedde=
+d-devel/message/113265
+> Mute This Topic: https://lists.openembedded.org/mt/109255084/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
