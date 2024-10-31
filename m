@@ -1,127 +1,96 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <andrea.ricchi@amarulasolutions.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 70029D6B6DB
-	for <webhook@archiver.kernel.org>; Wed, 30 Oct 2024 21:03:01 +0000 (UTC)
-Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com [209.85.208.172])
- by mx.groups.io with SMTP id smtpd.web10.26402.1730322173457305763
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1893CE68962
+	for <webhook@archiver.kernel.org>; Thu, 31 Oct 2024 09:20:36 +0000 (UTC)
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+ by mx.groups.io with SMTP id smtpd.web11.8385.1730366433967297632
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Oct 2024 14:02:53 -0700
+ Thu, 31 Oct 2024 02:20:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jq/V9km2;
- spf=pass (domain: gmail.com, ip: 209.85.208.172, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lj1-f172.google.com with SMTP id 38308e7fff4ca-2fb5a9c7420so2126681fa.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Oct 2024 14:02:53 -0700 (PDT)
+ dkim=pass header.i=@amarulasolutions.com header.s=google header.b=al7acobF;
+ spf=pass (domain: amarulasolutions.com, ip: 209.85.218.54, mailfrom: andrea.ricchi@amarulasolutions.com)
+Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-a93c1cc74fdso86466766b.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 31 Oct 2024 02:20:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730322172; x=1730926972; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=27mvQNBUzkOP+TX0NBuIX+CsbjJxZvhX8Bl9UXsEigQ=;
-        b=jq/V9km2P6paUaygvse+53+3bE1HxzEZcGN+KmVesMgQQYOdF4P+cwn6oCoRdwcb2o
-         njZQiaLxI3ln0J2o+47i2r+57nDdLfOEQuCngagXthcGUbBkapAnmsrm8feWy8JWRVCA
-         aCI7UwXwXeKSCNxO3AL925z7gWKqWKSA5ZLYqXsol9bn3e0tBiEsYetA8Dik9DgrSMuQ
-         DCjHUuyPQBi+XveHt42y49Gq5wWqLhrSB4HQnqOYjioZdPGIDP+p99zXbRlfuz0FaxvS
-         TiDF1wXZn22vw6S2SlxCv/6vVSEK+QiteegCZ3n/fqKABim9acR7PqiqFCDEEOXrh8fS
-         UHKQ==
+        d=amarulasolutions.com; s=google; t=1730366432; x=1730971232; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=UdVzuyc7h6ljQYFp8JYIENkWpczkr0q6Dx7+3YPFJD4=;
+        b=al7acobF8b2a6dAnWRdjV3zjfBh8kc9aVvg/D/0LUoMyKuJ0DkNBx+dNw2axvsV5Rb
+         20rBjCWkKY8n0oyZVfhba8mjYk/LMl/j2mw218PumWWBF1RT973Yhk8uV9yeUBrj1Rua
+         oiUa+k2yDdrDM1kEQ0pRs+L3RVKYiH70rtD9I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730322172; x=1730926972;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=27mvQNBUzkOP+TX0NBuIX+CsbjJxZvhX8Bl9UXsEigQ=;
-        b=uuPpSBN4E4B77iiQIcXccZ/w5NtXgElWYowAfjEIyjGm1x/zkIcvOaCNy12ZAQWu/j
-         vrI1jrztMZJKSI8e2Y9TCylSy3mmEwMCba3ZzBkwiHUkypEoXrQAcD1m/zinr1RaJiNy
-         88y/Jrx+7MwX18QE5GsWMCJQWIINCvrTup70y/ZvyXcfmSvmA5NC/l1arfxp350k658n
-         0FWQTJ32kW0xNn5heAXjr3HmuuAE3amIp+mpthD9oJVznxiHlapdD1gRZQZNtmX+T0IL
-         09MR9ox6AXyWKUp04xYfvp3TNOwy6Wf+QlhNDSOvmxWg7G5rhWcGmXZTsESZGcXLV+PF
-         OXCA==
-X-Forwarded-Encrypted: i=1; AJvYcCU+Pqn6fE0NLtrF4BHLc2TVr1dGoULOmV/IjeKD9OxvRG0AxJ7y7G+jxwFfdvO2WKc+eX8JOuFMD3NjtLW6XgnSZjc=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YxkWQWctI/Qfkg3vmYeQtz8/meam2Zy9LYDAWqPxn1an1z3nMOZ
-	lkCkULUpQpS0PQTEFdovz/MlTDabHB6h6Cugv4ij6ZhHUaM+bwuB6uJQ+9ps7cMi0PnzRpKHSG7
-	dEKguNf0SOIqe6vNUNxd/nTDEo2k=
-X-Google-Smtp-Source: AGHT+IHBJq7xWnZwCKgSW2Txu9o0VMiLCvhxrxsCmBMgHpGr9P+UPrH+5ZRRC3tPPf6wZ/kz6ZnI/DhXGNNO7qZKMFY=
-X-Received: by 2002:a05:651c:b20:b0:2fa:d4c1:3b71 with SMTP id
- 38308e7fff4ca-2fcbdfc6bbcmr84140041fa.19.1730322171271; Wed, 30 Oct 2024
- 14:02:51 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1730366432; x=1730971232;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=UdVzuyc7h6ljQYFp8JYIENkWpczkr0q6Dx7+3YPFJD4=;
+        b=nc2Jfor0zJnOGGHtqXab0dWjWdIi3p6m9gNeSJ/G77DBoVrq4ICdnDRbQ2Gha6YiDi
+         /Dv0a0zO/UIUWHs27HuF10NnvHeMovifm3vmR3DP9unBGiQ+2ZdGcqOOHLMxIa8b+8eY
+         bKePW7RwWsiGc1BKU80sCf+BTrGfbIc2XNEtmzpjKgm5WtfciEf0NN+FiHtzoMpvekX3
+         g3gyxcsgeXeFtZ+RSKj3SjN5XgjT/7HslH6HXzaNhBvRBrYL+ByHq05jiZlyv+oECL5w
+         VuAHKRN6Qi9Ko4nV0YLQdzJR4Z53fS+tr/CNx4GHG1ILDe8TewBTdz+j6gA4zuxOd3wJ
+         ePCg==
+X-Gm-Message-State: AOJu0Yzd35N3o2fgijQZy+0ELxrueHHS1VdKJIPY96ud8FlZ7sQQSgmr
+	RVasPgTEXo/T1P57eD2asxgorz61sXbpZ3aX56fEpnyNy0wzOiIqx829KbDAlUMA2vUmiK8aN4k
+	p
+X-Google-Smtp-Source: AGHT+IEDsAsuNDO6Sc8CaBE0EyAb+vex8OQr4lcLXWo5Zs4mKZpUZWM1cvzvG3sj9dQZ+JSR8ra6TA==
+X-Received: by 2002:a17:906:4788:b0:a99:5ad9:b672 with SMTP id a640c23a62f3a-a9de5ca5eb1mr1786026466b.10.1730366432086;
+        Thu, 31 Oct 2024 02:20:32 -0700 (PDT)
+Received: from RccLenovo-T14S.homenet.telecomitalia.it (host-79-17-249-140.retail.telecomitalia.it. [79.17.249.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a9e56649337sm44362166b.183.2024.10.31.02.20.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 31 Oct 2024 02:20:31 -0700 (PDT)
+From: Andrea Ricchi <andrea.ricchi@amarulasolutions.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Andrea Ricchi <andrea.ricchi@amarulasolutions.com>
+Subject: [meta-oe][scarthgap][PATCH] asyncmqtt: add recipe
+Date: Thu, 31 Oct 2024 10:20:11 +0100
+Message-Id: <20241031092011.16158-1-andrea.ricchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20241030205334.10278-1-brgl@bgdev.pl>
-In-Reply-To: <20241030205334.10278-1-brgl@bgdev.pl>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 30 Oct 2024 22:02:37 +0100
-Message-ID: <CA+chaQcHWBW-Fkzyi6e2hYiJzQx-cXqaLUJ7d6Jvo_aiZG9Hrg@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH] libgpiod: selectively enable GObject introspection
-To: Bartosz Golaszewski <brgl@bgdev.pl>
-Cc: Khem Raj <raj.khem@gmail.com>, Max Krummenacher <max.oss.09@gmail.com>, 
-	Bruce Ashfield <bruce.ashfield@gmail.com>, openembedded-devel@lists.openembedded.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 30 Oct 2024 21:03:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113355
+ <openembedded-devel@lists.openembedded.org>; Thu, 31 Oct 2024 09:20:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113356
 
-Please use BPN in:
-FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${PN}-2.x:"
+async_mqtt is an C++ library for asynchronous MQTT communication.
+The library is header-only using C++17 and Boost libraries; the main
+features are client and server support, MQTT v3.1.1 and v5.0 support,
+continuous packet sending and auto acquiring/mapping topic alias is
+supported.
 
-I could send another separate fix, but then it would conflict with
-this one, so probably better if you send v2 with it.
+Signed-off-by: Andrea Ricchi <andrea.ricchi@amarulasolutions.com>
+---
+ .../asyncmqtt/asyncmqtt_9.0.2.bb                   | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/asyncmqtt/asyncmqtt_9.0.2.bb
 
-On Wed, Oct 30, 2024 at 9:54=E2=80=AFPM Bartosz Golaszewski <brgl@bgdev.pl>=
- wrote:
->
-> From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
->
-> The oe-core bbclass for GObject introspection sets GI_DATA_ENABLED if
-> the relevant distro feature is enabled. That means that it's up to the
-> inheriting recipe to disable it if needed.
->
-> For libgpiod: we only want to enable it if any of the GLib based
-> packages is being generated (GLib bindings, D-Bus daemon or ptest).
->
-> This also effectively reverts commit 78a332939f8b (libgpiod_2.2: depend
-> on glib-2.0) which indiscriminately pulls in GLib for all packages
-> generated by this recipe which feels like shooting a fly with a cannon.
->
-> Fixes: 9626e8a2c8f2 ("libgpiod: update to v2.2")
-> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-> ---
->  meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb b/meta-oe/r=
-ecipes-support/libgpiod/libgpiod_2.2.bb
-> index 3d9758e27a..25f3734a16 100644
-> --- a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
-> +++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
-> @@ -9,8 +9,6 @@ LIC_FILES_CHKSUM =3D " \
->      file://LICENSES/CC-BY-SA-4.0.txt;md5=3Dfba3b94d88bfb9b81369b869a1e9a=
-20f \
->  "
->
-> -DEPENDS +=3D "glib-2.0"
-> -
->  FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${PN}-2.x:"
->
->  SRC_URI +=3D "file://gpio-manager.init"
-> @@ -61,6 +59,10 @@ python __anonymous() {
->          d.setVar("SYSTEMD_SERVICE:{}-manager".format(pn), "gpio-manager.=
-service")
->      else:
->          d.appendVar("EXTRA_OECONF", " --disable-systemd")
-> +
-> +    # Disable gobject introspection set by the bbclass if we don't want =
-it.
-> +    if not any(cfg in ["glib", "dbus", "ptest"] for cfg in packageconfig=
-):
-> +        d.setVar("GI_DATA_ENABLED", "False")
->  }
->
->  UPDATERCPN =3D "${PN}-manager"
-> --
-> 2.45.2
->
+diff --git a/meta-oe/recipes-connectivity/asyncmqtt/asyncmqtt_9.0.2.bb b/meta-oe/recipes-connectivity/asyncmqtt/asyncmqtt_9.0.2.bb
+new file mode 100644
+index 000000000..dac83065c
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/asyncmqtt/asyncmqtt_9.0.2.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "MQTT communication C++ library using Boost.Asio"
++HOMEPAGE = "https://github.com/redboltz/async_mqtt"
++LICENSE = "BSL-1.0"
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=e4224ccaecb14d942c71d31bef20d78c"
++
++SRC_URI = "git://github.com/redboltz/async_mqtt;protocol=http;branch=main;protocol=https"
++SRCREV = "51a97adfd022cf5205c3bb31f38ace1f7fbd21a1"
++
++DEPENDS = "openssl boost"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
+-- 
+2.34.1
+
 
