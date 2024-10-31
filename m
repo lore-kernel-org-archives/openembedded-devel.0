@@ -2,56 +2,56 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86F6CD767C7
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 872DCD767C8
 	for <webhook@archiver.kernel.org>; Thu, 31 Oct 2024 13:41:37 +0000 (UTC)
-Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com [209.85.208.177])
- by mx.groups.io with SMTP id smtpd.web11.12750.1730382093677828569
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
+ by mx.groups.io with SMTP id smtpd.web10.12753.1730382095186050823
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 31 Oct 2024 06:41:34 -0700
+ Thu, 31 Oct 2024 06:41:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=aVKcHqHK;
- spf=pass (domain: gmail.com, ip: 209.85.208.177, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lj1-f177.google.com with SMTP id 38308e7fff4ca-2fb5740a03bso9162831fa.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 31 Oct 2024 06:41:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TQ9KGyKg;
+ spf=pass (domain: gmail.com, ip: 209.85.167.48, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-539f8490856so1007853e87.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 31 Oct 2024 06:41:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730382092; x=1730986892; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730382093; x=1730986893; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=s3Ntyem0hNVxnwb/NnCcEwiEzSU68mwf97PnMrU1AuI=;
-        b=aVKcHqHKfLJJuGaLwods9EVkrptrGR1IjtjhGwouYATXrN1mVX3inHPCn9US+0NXx6
-         EUFJFWqN5+DyNLMUXvpCbJyC1oDT96euEYTrBxPOuqKZP1ysdkCTOsv3A08ktB7liFTZ
-         gTvwEo1HPcZtHBRFonY6sNzFx1kiuyb4JJBf17xxZwsOWrzoobE0QPKckxhxFdcO/ENP
-         RH8nQetj3bbqQeENmx6fCY1cg4Da6x1bFtxmvUvdip6UvrcIb9IBhum5hSh6en+EgeXY
-         uJFAJ3zZQnsB/y/x5o2cUiiXhbk6PQqzy93faeAUb/OgVii7HYvcCJo5yRGxs5VPUhSo
-         Duzg==
+        bh=YZQx2YvdtrYv0ozsAM59eD2s82ZGksOhhONQZuCsLhM=;
+        b=TQ9KGyKgD3LI1/6H8JgiE+sstphxYbfCbbNdXovVVnrK1HxpBrViVmhLqS+Dd4B2TK
+         b923hwKAFHjqpuC9g9GzWfFGQlCmW2KB+NiLcLvsD7tIaupQtByIg8reRO2eGjWEUSMn
+         HcvhFe/z6nCSBHRA7UL7Sfd8jD8pRa1dPHbFLIkbs+2p/tRXGm6vqBPe0fw7NtvjhqxV
+         Ar325rCpNx1EdWT2B0inP8SgVQfYgtmyqxmyuLqgg2Opf0nYtIN+NQuFG08mWzfMOA89
+         I+m1kSuVkc+I1IjZU/UV2+PgFLwQltntFk5fTSIDNlOl/HSPuNm6Mb1ewdibQdihzq1U
+         BRqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730382092; x=1730986892;
+        d=1e100.net; s=20230601; t=1730382093; x=1730986893;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=s3Ntyem0hNVxnwb/NnCcEwiEzSU68mwf97PnMrU1AuI=;
-        b=i3gZFORU63b4xB11GynNe5DSFJDQGVh979WetCBr+XRvcKH5zX/qdn9bEA+iN+gDaG
-         RfIZJjFzNbnhaJl4GBGes1WDVK2FeXIqKZ/W+jZ6WQ70kub5h3eubca5n9IBFtz7STmG
-         yxZSuXQvKrEXku5b1wC3XssevRQub8xaZQQ3kquzbzMW2h8542mxWi+gJKDNoqUVrK0U
-         6+k2aAwf3DIL8jfrWOM3fSySP3cobfyCFTPSNolW6iVArRGcft/RaIkOTG6KL+I6+Z/Y
-         ARqx8ezgOP4ggqyzDQ1F1vzRJPTLls7H2a/XmuFrAFvDCfkKUNTT4PdJoDd9y2qKkZ8M
-         hSFQ==
-X-Gm-Message-State: AOJu0YwryxGHdO0EedjPCE/wof2nPhUqFYT/gIshZ4OLrqH5wI0FHvM5
-	1ZiOWJGq70yltEq+2vZS4hrpi/HymaaT7K7UiR4bApFYM3F0ss0GBOo+Mw==
-X-Google-Smtp-Source: AGHT+IEhGY+LN30/IRIB9y+zwotYWNiNrjAbjoBLOOjYZ49qSr9n0Xf5mfKUKS9k9AO92qoqoWQ9Gw==
-X-Received: by 2002:a2e:4611:0:b0:2fb:382e:410b with SMTP id 38308e7fff4ca-2fd059d31f3mr34000271fa.32.1730382091524;
-        Thu, 31 Oct 2024 06:41:31 -0700 (PDT)
+        bh=YZQx2YvdtrYv0ozsAM59eD2s82ZGksOhhONQZuCsLhM=;
+        b=DiwhX+wwTRo4Sau510e060hHwKa0eHHT7e7MvH5Cma4I3FlooSCQ5oIA0g7VYFyJFV
+         NxEHM00JiuJEMs+ZoE2YFybNxADjk7yb4Q3iOdmQqQWyQbN8idtIBbz2rpSRh4ZBjvhK
+         1mG3m9Gwhd6MYr/kV0up8kC82wsDusm3GFVqyav84SunkzYYgxFkRUHaw15qefU28Llu
+         FW/WBP8DoDOc9ZPAUREdZNwOijy5TcHtjec1cz9rijJJx7x97OUS+lvhjkeExc+LGxbY
+         B7QzbSozWo6gBjNBIcJAsOvsujRYf7ZMF8fF5Kl6fkN5TADTKdpUTMg20V+hGzkkRaKG
+         +JxQ==
+X-Gm-Message-State: AOJu0Yw0h7dpIUeJW4BCVa74JjpXQxgmGZdh9OKJEx1kZC4yaYttiil8
+	S3MILQsvoJG5RugAl4FgFU/sG4wPZ1bMyCqRJ4Nh9oCXov4wW28/GdxGaA==
+X-Google-Smtp-Source: AGHT+IFKg64+jMqOG/ErjqBQ7X/uZrrq8AN+a9GejSkFVZsp7rHetyeUXxQF81rEDYOB4ONFAnsH0A==
+X-Received: by 2002:a05:6512:3a91:b0:539:f51e:2465 with SMTP id 2adb3069b0e04-53c79e32369mr1857275e87.22.1730382092711;
+        Thu, 31 Oct 2024 06:41:32 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5ceac7c8c91sm594226a12.75.2024.10.31.06.41.30
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5ceac78941bsm626488a12.44.2024.10.31.06.41.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 31 Oct 2024 06:41:30 -0700 (PDT)
+        Thu, 31 Oct 2024 06:41:32 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [master-next][meta-oe][PATCH 08/11] python3-django-south: fold .inc file into .bb
-Date: Thu, 31 Oct 2024 14:41:11 +0100
-Message-ID: <20241031134114.2791747-8-martin.jansa@gmail.com>
+Subject: [master-next][meta-oe][PATCH 09/11] python3-flask-bootstrap: fold .inc file into .bb
+Date: Thu, 31 Oct 2024 14:41:12 +0100
+Message-ID: <20241031134114.2791747-9-martin.jansa@gmail.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241031134114.2791747-1-martin.jansa@gmail.com>
 References: <20241031134114.2791747-1-martin.jansa@gmail.com>
@@ -61,61 +61,56 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 31 Oct 2024 13:41:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113365
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113366
 
 * python2 is long dead, kill .inc file as well
 
 Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- .../python/python-django-south.inc             | 16 ----------------
- .../python/python3-django-south_1.0.2.bb       | 18 ++++++++++++++++--
- 2 files changed, 16 insertions(+), 18 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-django-south.inc
+ .../python/python-flask-bootstrap.inc             | 13 -------------
+ .../python/python3-flask-bootstrap_3.3.7.1.bb     | 15 ++++++++++++++-
+ 2 files changed, 14 insertions(+), 14 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-flask-bootstrap.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-django-south.inc b/meta-python/recipes-devtools/python/python-django-south.inc
+diff --git a/meta-python/recipes-devtools/python/python-flask-bootstrap.inc b/meta-python/recipes-devtools/python/python-flask-bootstrap.inc
 deleted file mode 100644
-index c2932f9230..0000000000
---- a/meta-python/recipes-devtools/python/python-django-south.inc
+index e476b41add..0000000000
+--- a/meta-python/recipes-devtools/python/python-flask-bootstrap.inc
 +++ /dev/null
-@@ -1,16 +0,0 @@
--SUMMARY = "Migrations for Django"
--DESCRIPTION = "South is an intelligent database migrations library for the Django web framework. It is database-independent and DVCS-friendly, as well as a whole host of other features."
--HOMEPAGE = "http://south.aeracode.org/"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=17;endline=18;md5=2155d8ae21e7c23101d5febac696b27e"
+@@ -1,13 +0,0 @@
+-DESCRIPTION = "An extension that includes Bootstrap in your project, without any boilerplate code."
+-LICENSE = "Apache-2.0 & MIT & BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=a03749709f06118a17349deb5a210619"
 -
--SRC_URI[sha256sum] = "d360bd31898f9df59f6faa786551065bba45b35e7ee3c39b381b4fbfef7392f4"
+-SRC_URI[sha256sum] = "cb08ed940183f6343a64e465e83b3a3f13c53e1baabb8d72b5da4545ef123ac8"
 -
--PYPI_PACKAGE = "South"
--inherit pypi
--
--BBCLASSEXTEND = "native nativesdk"
+-PYPI_PACKAGE = "Flask-Bootstrap"
 -
 -RDEPENDS:${PN} += "\
--    python3-django \
+-    python3-dominate \
+-    python3-flask \
+-    python3-visitor \
 -    "
-diff --git a/meta-python/recipes-devtools/python/python3-django-south_1.0.2.bb b/meta-python/recipes-devtools/python/python3-django-south_1.0.2.bb
-index 10519111fa..8237cf034d 100644
---- a/meta-python/recipes-devtools/python/python3-django-south_1.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-django-south_1.0.2.bb
-@@ -1,2 +1,16 @@
--require python-django-south.inc
--inherit setuptools3
-+SUMMARY = "Migrations for Django"
-+DESCRIPTION = "South is an intelligent database migrations library for the Django web framework. It is database-independent and DVCS-friendly, as well as a whole host of other features."
-+HOMEPAGE = "http://south.aeracode.org/"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=17;endline=18;md5=2155d8ae21e7c23101d5febac696b27e"
+diff --git a/meta-python/recipes-devtools/python/python3-flask-bootstrap_3.3.7.1.bb b/meta-python/recipes-devtools/python/python3-flask-bootstrap_3.3.7.1.bb
+index 877c754361..7553ce74a2 100644
+--- a/meta-python/recipes-devtools/python/python3-flask-bootstrap_3.3.7.1.bb
++++ b/meta-python/recipes-devtools/python/python3-flask-bootstrap_3.3.7.1.bb
+@@ -1,2 +1,15 @@
++DESCRIPTION = "An extension that includes Bootstrap in your project, without any boilerplate code."
++LICENSE = "Apache-2.0 & MIT & BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=a03749709f06118a17349deb5a210619"
 +
-+SRC_URI[sha256sum] = "d360bd31898f9df59f6faa786551065bba45b35e7ee3c39b381b4fbfef7392f4"
++SRC_URI[sha256sum] = "cb08ed940183f6343a64e465e83b3a3f13c53e1baabb8d72b5da4545ef123ac8"
 +
-+PYPI_PACKAGE = "South"
-+inherit pypi setuptools3
++PYPI_PACKAGE = "Flask-Bootstrap"
 +
-+BBCLASSEXTEND = "native nativesdk"
+ inherit pypi setuptools3
+-require python-flask-bootstrap.inc
 +
 +RDEPENDS:${PN} += "\
-+    python3-django \
++    python3-dominate \
++    python3-flask \
++    python3-visitor \
 +    "
 -- 
 2.47.0
