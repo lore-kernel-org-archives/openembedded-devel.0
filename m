@@ -1,154 +1,84 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <Jiaying.Song.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 00036E6748D
-	for <webhook@archiver.kernel.org>; Thu, 31 Oct 2024 22:46:20 +0000 (UTC)
-Received: from mail-lj1-f179.google.com (mail-lj1-f179.google.com [209.85.208.179])
- by mx.groups.io with SMTP id smtpd.web11.25132.1730414777235368436
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FF4DE6749F
+	for <webhook@archiver.kernel.org>; Fri,  1 Nov 2024 03:50:42 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.29613.1730433032014500956
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 31 Oct 2024 15:46:17 -0700
+ Thu, 31 Oct 2024 20:50:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=AFRNbHAk;
- spf=pass (domain: gmail.com, ip: 209.85.208.179, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lj1-f179.google.com with SMTP id 38308e7fff4ca-2fc968b3545so14925671fa.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 31 Oct 2024 15:46:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730414775; x=1731019575; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=TzWBDh/5c0FX4Aqtqz8JWCwojvRgfjK/LvI5QpYn5GI=;
-        b=AFRNbHAk6EcWi2DUzkI3GGb2PU3yF5uyIB3GD5il10iMSBClpYYSsQsgyqmLdAJ1bT
-         FvJmiMLZTOZ1LE3w7ir6Q6KFm2iCEl4kT6rfKua2sWHGprz8SWyzjQw7aDhGb/5lQqjS
-         r4Qvkmrmf8SYiM9lO+Wwc+7312Ot/9KJ07OEkjtV7Zd1KggnNAwrTc8X2uWi0dJDIxWn
-         U8o6bumskl8X67b08bL91Y2SI2nqy1P5K68jOc/cJ5V1u9RBmBihnATCKDozTBX3ICVR
-         gvFjQiOyzOOllDod6dmbB5krbnFj53IuwsvsMfHUccdDMM4xmFyahJllatb+ssJo9SSF
-         IlGg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730414775; x=1731019575;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=TzWBDh/5c0FX4Aqtqz8JWCwojvRgfjK/LvI5QpYn5GI=;
-        b=GFUC2y617Zz0kUbN7EJlGA4PDbqdrCZDO3kUe816uukNEW64/b8ml2bpWlqHs8jT10
-         Qm+RmWD11oyPT8EnBslFw1YAEHfV+IwZE3iZAl2RPkVz/hWmBrglKmPknPphw8PgVbOG
-         XWgC8GN35nu/zBG1EcHgo1X1q9YMHgCYFlue5bQLeCjg8NhXoK0CBYeeHszMCBUaJgPJ
-         PM5kXwkLYqD0oZpXqSl0ANR4Js2slVbSZzuNjFRmjX9o5nKvt6eRZaBo4Y8117Ie2kg5
-         155TZurZMy+IPEMImQNPYeJlqwJzzhUHKjc9zwM10PXuun7WJnOCWOEuKGE3GUA2/2fg
-         WnmQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWcDnpVcvh0D5+XxABjLUjhIgzMz0rEEShT5mv+ARWLK0Hj03v6PZFLSbrA7DcXf5Kf8+Cs6OPweUYRzM69F8jEfhs=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzO0F6TEy9DzgvK827UjneyUwItKdjy4iwg4VtNpOmta0ge6x/s
-	0m32E3MU20kI2uiUZnkuJ3elTWyUU+P0mzts/k4/xywU7lq7Ky0JBnqsN6LkVFrjvOGr/zc+2m2
-	ktz+mInWtNb8x3GDr1VAgXfyVNVI=
-X-Google-Smtp-Source: AGHT+IH+KYvHoUxfnPzf5Ozyycj1aHKPCJ7+DQPFFHsVRQ3GK3FRJSi9GILOYlg8PpylftEfKZHhyLuwlV2nE7o9DaA=
-X-Received: by 2002:a05:651c:b2b:b0:2fb:5740:9f9a with SMTP id
- 38308e7fff4ca-2fdecbf1286mr27415431fa.29.1730414775007; Thu, 31 Oct 2024
- 15:46:15 -0700 (PDT)
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=103524b381=jiaying.song.cn@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4A12un90011008
+	for <openembedded-devel@lists.openembedded.org>; Fri, 1 Nov 2024 03:50:31 GMT
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 42mf15gfq9-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 01 Nov 2024 03:50:31 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Thu, 31 Oct 2024 20:50:29 -0700
+Received: from pek-lpg-core3.wrs.com (128.224.153.43) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.39 via Frontend Transport; Thu, 31 Oct 2024 20:50:28 -0700
+From: <jiaying.song.cn@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <changqing.li@windriver.com>
+Subject: [meta-networking][scarthgap][PATCH] openipmi: upgrade 2.0.34->2.0.36
+Date: Fri, 1 Nov 2024 11:50:28 +0800
+Message-ID: <20241101035028.1550732-1-jiaying.song.cn@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20241020150843.1068181-1-raj.khem@gmail.com> <CA+chaQcWf6gCEJbQX16zR=B3PUmaR78WCVorvrP4JvQsJAPDPw@mail.gmail.com>
- <JOE8MS.4DEF6FX7L6873@t-online.de> <18039C488E2C1344.6352@lists.openembedded.org>
-In-Reply-To: <18039C488E2C1344.6352@lists.openembedded.org>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 31 Oct 2024 23:45:59 +0100
-Message-ID: <CA+chaQevEQ2=G0Z0QG5FvZ4pSh0F7p-vOG69g1m95vQYPk364A@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v3] snapper: add recipe
-To: martin.jansa@gmail.com
-Cc: Markus Volk <f_l_k@t-online.de>, raj.khem@gmail.com, 
-	openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=PeqthThd c=1 sm=1 tr=0 ts=67245007 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=VlfZXiiP6vEA:10 a=t7CeM3EgAAAA:8 a=FP58Ms26AAAA:8 a=7O6FeZcl4HbonBWUR2gA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: XcBjx1j8SZlPNOz1Rc9rq9QUtDezI_wT
+X-Proofpoint-GUID: XcBjx1j8SZlPNOz1Rc9rq9QUtDezI_wT
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.62.30
+ definitions=2024-10-31_14,2024-10-31_01,2024-09-30_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0
+ lowpriorityscore=0 phishscore=0 mlxscore=0 suspectscore=0 adultscore=0
+ bulkscore=0 mlxlogscore=866 priorityscore=1501 impostorscore=0
+ clxscore=1015 spamscore=0 classifier=spam authscore=0 adjust=0 reason=mlx
+ scancount=1 engine=8.21.0-2409260000 definitions=main-2411010026
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 31 Oct 2024 22:46:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113377
+ <openembedded-devel@lists.openembedded.org>; Fri, 01 Nov 2024 03:50:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113378
 
-On Thu, Oct 31, 2024 at 7:15=E2=80=AFPM Martin Jansa via
-lists.openembedded.org <martin.jansa=3Dgmail.com@lists.openembedded.org>
-wrote:
->
-> Yes, systemd_system_unitdir helps with the systemd files, but the other f=
-iles:
->   /usr/lib/snapper/systemd-helper
->   /usr/lib/snapper/installation-helper
->   /usr/lib/snapper/plugins
->
-> don't use systemd_system_unitdir and as the path to them is hardcoded
-> in the source, I guess we should either hardcode the path in FILES as
-> well (so that they are still packaged and found in runtime even if
-> someone changes libdir value) or change both the code and the
-> packaging to respect libdir (which might be too much to ask after
-> looking at the Makefile.am).
->
-> I have a .patch file to change Makefile.am to allow passing PREFIX,
-> LIBDIR, DATADIR, SYSTEMDDIR values, but then I've noticed plugins and
-> helpers and stopped there (as I changing that as well to respect
-> passed LIBDIR) should be at least partially tested in runtime which I
-> wasn't planning to. Sending PR with just Makefile.am changes and
-> asking the developers to "finish it" also probably won't help much, so
-> I've just sent previous e-mail and added SKIP_RECIPE in our DISTRO
-> with multilib. I can share the draft PR if someone finds that useful.
+From: Jiaying Song <jiaying.song.cn@windriver.com>
 
-Added libdir configuration for those paths and here is slightly updated ver=
-sion:
-https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Djansa/snapp=
-er
-completely not tested in runtime, I've only checked that lib32-snapper
-builds without installed-vs-shipped and the most files look in
-expected locations (but I guess /usr/lib32/security/pam_snapper.so
-should be moved to nonarch libdir, so it would need separate configure
-param from currently used libdir).
+Full changelog:
+https://sourceforge.net/p/openipmi/news/
 
-Not sure if this was worth it :).
+Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
+---
+ .../openipmi/{openipmi_2.0.34.bb => openipmi_2.0.36.bb}         | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/openipmi/{openipmi_2.0.34.bb => openipmi_2.0.36.bb} (98%)
 
-lib32-snapper/0.11.2 $ find image/usr/lib*
-image/usr/lib
-image/usr/lib/systemd
-image/usr/lib/systemd/system
-image/usr/lib/systemd/system/snapper-boot.timer
-image/usr/lib/systemd/system/snapperd.service
-image/usr/lib/systemd/system/snapper-boot.service
-image/usr/lib/systemd/system/snapper-timeline.timer
-image/usr/lib/systemd/system/snapper-cleanup.service
-image/usr/lib/systemd/system/snapper-cleanup.timer
-image/usr/lib/systemd/system/snapper-timeline.service
-image/usr/lib32
-image/usr/lib32/libsnapper.so
-image/usr/lib32/libsnapper.so.7
-image/usr/lib32/snapper
-image/usr/lib32/snapper/systemd-helper
-image/usr/lib32/snapper/plugins
-image/usr/lib32/snapper/testsuite
-image/usr/lib32/snapper/testsuite/owner1
-image/usr/lib32/snapper/testsuite/CAUTION
-image/usr/lib32/snapper/testsuite/permissions2
-image/usr/lib32/snapper/testsuite/xattrs3
-image/usr/lib32/snapper/testsuite/error4
-image/usr/lib32/snapper/testsuite/xattrs4
-image/usr/lib32/snapper/testsuite/setup-and-run-all
-image/usr/lib32/snapper/testsuite/ug-tests
-image/usr/lib32/snapper/testsuite/ascii-file
-image/usr/lib32/snapper/testsuite/xattrs1
-image/usr/lib32/snapper/testsuite/xattrs2
-image/usr/lib32/snapper/testsuite/directory1
-image/usr/lib32/snapper/testsuite/owner3
-image/usr/lib32/snapper/testsuite/permissions3
-image/usr/lib32/snapper/testsuite/test-btrfsutils
-image/usr/lib32/snapper/testsuite/error1
-image/usr/lib32/snapper/testsuite/permissions1
-image/usr/lib32/snapper/testsuite/missing-directory1
-image/usr/lib32/snapper/testsuite/simple1
-image/usr/lib32/snapper/testsuite/owner2
-image/usr/lib32/snapper/testsuite/error2
-image/usr/lib32/snapper/testsuite/run-all
-image/usr/lib32/snapper/installation-helper
-image/usr/lib32/pam_snapper
-image/usr/lib32/pam_snapper/pam_snapper_useradd.sh
-image/usr/lib32/pam_snapper/pam_snapper_pamconfig.sh
-image/usr/lib32/pam_snapper/pam_snapper_homeconvert.sh
-image/usr/lib32/pam_snapper/pam_snapper_userdel.sh
-image/usr/lib32/security
-image/usr/lib32/security/pam_snapper.so
-image/usr/lib32/libsnapper.so.7.4.3
+diff --git a/meta-networking/recipes-support/openipmi/openipmi_2.0.34.bb b/meta-networking/recipes-support/openipmi/openipmi_2.0.36.bb
+similarity index 98%
+rename from meta-networking/recipes-support/openipmi/openipmi_2.0.34.bb
+rename to meta-networking/recipes-support/openipmi/openipmi_2.0.36.bb
+index eacbe5ce9..583b64c7d 100644
+--- a/meta-networking/recipes-support/openipmi/openipmi_2.0.34.bb
++++ b/meta-networking/recipes-support/openipmi/openipmi_2.0.36.bb
+@@ -34,7 +34,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
+ 
+ S = "${WORKDIR}/OpenIPMI-${PV}"
+ 
+-SRC_URI[sha256sum] = "93227e43c72b5c3bd5949323e0669aa5527d1a971473a3a365af03fb8284a95f"
++SRC_URI[sha256sum] = "a0403148fa5f7bed930c958a4d1c558047e273763a408b3a0368edc137cc55d9"
+ 
+ inherit autotools-brokensep pkgconfig perlnative update-rc.d systemd cpan-base python3targetconfig
+ 
+-- 
+2.34.1
+
 
