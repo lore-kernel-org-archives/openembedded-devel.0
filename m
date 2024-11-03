@@ -2,123 +2,206 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F7E5E6B27E
-	for <webhook@archiver.kernel.org>; Sun,  3 Nov 2024 10:37:05 +0000 (UTC)
-Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com [209.85.208.177])
- by mx.groups.io with SMTP id smtpd.web11.33608.1730630221983901183
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8DE4E6F06C
+	for <webhook@archiver.kernel.org>; Sun,  3 Nov 2024 10:48:55 +0000 (UTC)
+Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com [209.85.208.181])
+ by mx.groups.io with SMTP id smtpd.web10.33814.1730630928418974330
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 03 Nov 2024 02:37:02 -0800
+ Sun, 03 Nov 2024 02:48:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GZa5fjcI;
- spf=pass (domain: gmail.com, ip: 209.85.208.177, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lj1-f177.google.com with SMTP id 38308e7fff4ca-2fc968b3545so30704471fa.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 03 Nov 2024 02:37:01 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kIVpBEGz;
+ spf=pass (domain: gmail.com, ip: 209.85.208.181, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lj1-f181.google.com with SMTP id 38308e7fff4ca-2fb4fa17044so33556821fa.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 03 Nov 2024 02:48:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730630220; x=1731235020; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730630926; x=1731235726; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=f1oHW6yhPXD+dtYaymqD3TmwQRwGw6W4rVxvN7FIAco=;
-        b=GZa5fjcIRsjEGixcl6l74Pw0dhuNOJUPUOXDto63ijdQXvtALDukkvrX6Jma6pstvB
-         2XCqKcmNgAedNQIhQr8Xxg1mqhpUnQAY3wh9fRB5ndSue8up54k6Y5jTm2vx83+YFs1C
-         IysiIA0f8Xs9xE8UleMcij3Zf80p5YhzEvQ/wI2QUa4dtexwXsjEJBTUS0881cWbL6ex
-         +ZdHASAQ8hESKCf29MlaYZNZuHRfXnZHpNUIPsXftj+qJtOOPXbVmpgxI9oj9VwssxNb
-         IJg+CTd3SsjSY/s/A5n0jZHfT+5m4hkI+MJuTs1nVJnlpoBWNbCPVC+7zCHaTYwmzwrS
-         xdxg==
+        bh=pR+upPC8s037B0KTDrzdMGOKUXTl7pC/NPgLkxTg30k=;
+        b=kIVpBEGzJcIDZ6c9ifik6GK7K3Mt0Szinve7ilmZXEr07ck6U+hGa/az9xixCDY+p3
+         QAMOIhwhocVgH9xMndbr8ksWM1OyV3g6vl4BdhQ7qvJbSAtwcIpUR1JzGsupLDC2MCak
+         d4GcbFNK3MwMKfZEIsj5SKw1ZiaWQRghZrYqOiEBnYx09ZwOcby4kqX3DhRjTN7ygy09
+         uAOgd+YPE8NBTOm/tSY1Dyz8FShjMb+lBcuuzwoMaz5dFhCUE3bNyybTBR1QjbOBIC3/
+         5fIk6TdQduVWtp1lH1OUpdTumqPW8p9I+5rfwoPRec2XDtibkcb6VYyUo4HC7/FZ7LC5
+         durQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730630220; x=1731235020;
+        d=1e100.net; s=20230601; t=1730630926; x=1731235726;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=f1oHW6yhPXD+dtYaymqD3TmwQRwGw6W4rVxvN7FIAco=;
-        b=fVRbG+h21JgjUz0Mpfbf07wVgIVhLZvEO8tKhwhCYFELvZAMmaXWpEhESK1cD9mxJ1
-         0dDByr7K0IdnMaCeRTc7cwF5sUOclNzV7U5ZgUHGoLY72v2ch32uiO7sB9r5M1CoxCG6
-         2e0Yill5RvBoD0hizxaCCcTR3ZQTwDUXpPaOPJL4N7odsoIfZhjVit2iNxhwV4EPLIZ4
-         RnOarjGI/Zk8i6LoeBJaXgO1ZCfIukEUHZW+TUtPKIhM0P1q4SZKwNvb/rBKdc0CpPsf
-         EMb74UynqZwaEw6XcHsUqXVUaYRqjd/N+m5+SNjkt6YNfbAi8BrL6pPMICfIkozZ/iYH
-         kA0A==
-X-Forwarded-Encrypted: i=1; AJvYcCWX9KnCCucXebYaTNZYU0paViyyG2nxO+51VyD7uiodZN+wC4F5tHbDT8lPYIHqyKV8wlvlIVRsg9ORGgUh62Z2z2w=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yx/IEu2hSyinPSoaDrkKI4pprTX2Fr0zG1YxVpx812v7GgV626X
-	YviUjwpG71sbsFJmNI+AVtF0WHSBpzm4TZE8+k8Pmq/7/yAqmCY5qI0xS+gCteu1QZlXvCxNXV7
-	eUWzZBJT/Ee9uPZbWR29a/PbrxL4=
-X-Google-Smtp-Source: AGHT+IFx9jKDxb3y4kKyH3zwfb7QhBQfcxvrKrf2Y93Gdm6nToroGAj1y9I1vbeuA7s02UgHxdfF9euLaR4pitq1PZ8=
-X-Received: by 2002:a2e:709:0:b0:2fb:351c:c3c9 with SMTP id
- 38308e7fff4ca-2fdecc329femr40905581fa.44.1730630219509; Sun, 03 Nov 2024
- 02:36:59 -0800 (PST)
+        bh=pR+upPC8s037B0KTDrzdMGOKUXTl7pC/NPgLkxTg30k=;
+        b=MOtZ7T2Ncqpe/9eEByxHjStSModg8P6pehKS8a+oB2rjxQVSLD4fPCK7fsnGoEywYl
+         XSCLXlmACwUYBtD/Sr/wbn5lI6d8wFZd4WrdyyH6/e5IhDnMcPgcQ69ovtY5aprfI02e
+         ZnM/gp9+FRFDWfD8HDJOWf7Sayxf9gTE01Ke0nJToXW3Di6wLJTOWmv/qw4uE6Gbcd6O
+         k6AlLpidxLYZQh2Qf4HXx1xmDaxKfCVF4c9sM+84SfHXbyPng/tMcdupu99AgG0B9AGo
+         9e0weXdldNb6hfe8DGSortIw82ElnaeLWpw2vnHgxA26GIg7rKe6AipZ9HJQwaYrdvJU
+         rDIw==
+X-Forwarded-Encrypted: i=1; AJvYcCWrz39UJ1UQuVWDcHPEycSJbqeF+3dhqyyM3ww8QOMF8OttVEwMMlVICzrGYeEUMiH+/JuGL5wtNn0xR0qCqsUncPo=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yxwv6k8rsFsmTaxMHIlIA8QnLLn826ApZhdCMHEk1eAlQ+6v6bZ
+	DC707eshITHQSaF3PErv+YQyEFkyhwUwlrrIy/M5sAWJvKJFHS8qD5taW81EptJ/2n2BMHDvBxb
+	XoojOR9tbtXih/ajG8KCHLAe+kkE=
+X-Google-Smtp-Source: AGHT+IFcPiRqb6ZA5PUfOx6Rg5xTCbLadrKXZ8MUD8yGQjn74KyMEK/P9lgzYbfkEn8lLXQqLs3d0Fjt2hPwBCLq45Y=
+X-Received: by 2002:a05:651c:994:b0:2fb:5504:794d with SMTP id
+ 38308e7fff4ca-2fedb7ecb76mr38381661fa.44.1730630926080; Sun, 03 Nov 2024
+ 02:48:46 -0800 (PST)
 MIME-Version: 1.0
-References: <20241020150843.1068181-1-raj.khem@gmail.com> <CA+chaQcWf6gCEJbQX16zR=B3PUmaR78WCVorvrP4JvQsJAPDPw@mail.gmail.com>
- <JOE8MS.4DEF6FX7L6873@t-online.de> <18039C488E2C1344.6352@lists.openembedded.org>
- <CA+chaQevEQ2=G0Z0QG5FvZ4pSh0F7p-vOG69g1m95vQYPk364A@mail.gmail.com>
- <1803C5E0EFB35EE5.1077@lists.openembedded.org> <DIT9MS.I2UFW3U29ROC@t-online.de>
-In-Reply-To: <DIT9MS.I2UFW3U29ROC@t-online.de>
+References: <20241017061710.1108077-1-raj.khem@gmail.com> <18026D239C42081A.19860@lists.openembedded.org>
+In-Reply-To: <18026D239C42081A.19860@lists.openembedded.org>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sun, 3 Nov 2024 11:36:48 +0100
-Message-ID: <CA+chaQcpx_2O5O8Ca5p+03fVvejirAjLboyj-SBYHD36a8mpuQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v3] snapper: add recipe
-To: Markus Volk <f_l_k@t-online.de>
-Cc: raj.khem@gmail.com, openembedded-devel@lists.openembedded.org
+Date: Sun, 3 Nov 2024 11:48:34 +0100
+Message-ID: <CA+chaQdnF2LhKjKuaErwVDYvVvFUqo2DsL=2XBeap0fe9HbWOQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] xmlrpc-c: Fix race condition triggered
+ during symlink creation
+To: martin.jansa@gmail.com
+Cc: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 03 Nov 2024 10:37:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113394
+ <openembedded-devel@lists.openembedded.org>; Sun, 03 Nov 2024 10:48:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113395
 
-Sounds good enough to me and as you said simpler than patching it.
+Looks like I spoke too soon, got the same build failure 3 more times
+in last 2 days.
 
-Thanks for looking into this.
+rm -f libxmlrpc_util.so.4 && ln -s libxmlrpc_util.so.4.60 libxmlrpc_util.so=
+.4
+rm -f xmlrpc_util++.pc
+rm -f libxmlrpc_util.so && ln -s libxmlrpc_util.so.4 libxmlrpc_util.so
+Echoes to 'xmlrpc_util++.pc' suppressed here ...
+make[3]: Entering directory 'xmlrpc-c/1.60.03/git/stable/lib/libutil'
+rm -f libxmlrpc_util.so && ln -s libxmlrpc_util.so.4 libxmlrpc_util.so
+make[3]: Leaving directory 'xmlrpc-c/1.60.03/git/stable/lib/libutil'
+ln: failed to create symbolic link 'libxmlrpc_util.so': File exists
+make[3]: *** [xmlrpc-c/1.60.03/git/stable/unix-common.mk:65:
+libxmlrpc_util.so] Error 1
 
-On Fri, Nov 1, 2024 at 1:01=E2=80=AFPM Markus Volk <f_l_k@t-online.de> wrot=
-e:
+Looks like it calls:
+
+make -C xmlrpc-c/1.60.03/git/stable/lib/libutil/ -f
+xmlrpc-c/1.60.03/git/stable/lib/libutil/Makefile \
+    libxmlrpc_util.so
+
+twice and the added && isn't enough to avoid the race between the 2.
+
+On Sun, Oct 27, 2024 at 10:40=E2=80=AFPM Martin Jansa via
+lists.openembedded.org <martin.jansa=3Dgmail.com@lists.openembedded.org>
+wrote:
 >
-> I have now set up a multilib build environment to see exactly how that wo=
-rks. If I haven't forgotten anything, it was easier than I thought. I added=
- the following to local.conf:
+> Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 >
-> require conf/multilib.conf
-> MULTILIBS =3D =C4=81 multilib:lib32=C4=81
-> DEFAULTTUNE:virtclass-multilib-lib32 =3D =C4=81 x86=C4=81
-> IMAGE_INSTALL:append =3D =C4=81 lib32-glibc lib32-libgcc lib32-libstdc++ =
-snapper lib32-snapper=C4=81
+> Thanks Khem!
 >
-> Then set FILES:${PN} like this:
-> FILES:${PN} +=3D =C4=81 ${nonarch_libdir} ${systemd_system_unitdir} ${dat=
-adir}=C4=81
+> On Thu, Oct 17, 2024 at 8:17=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wro=
+te:
+> >
+> > This should fix race condition sometime seen in highly parallell builds
+> >
+> >    | rm -f libxmlrpc_util.so.4
+> >    | rm -f libxmlrpc_util.so.4
+> >    | ln -s libxmlrpc_util.so.4.60 libxmlrpc_util.so.4
+> >    | ln -s libxmlrpc_util.so.4.60 libxmlrpc_util.so.4
+> >    | rm -f libxmlrpc_util.so
+> >    | ln: failed to create symbolic link 'libxmlrpc_util.so.4': File exi=
+sts
+> >    | make[2]: *** [/home/kraj01/yoe/build/tmp/work/core2-64-yoe-linux/x=
+mlrpc-c/1.60.03/git/stable/unix-common.mk:72: libxmlrpc_util.so.4] Error 1
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > Cc: Martin Jansa <Martin.Jansa@gmail.com>
+> > ---
+> >  ...nsuring-Sequential-Execution-of-rm-a.patch | 46 +++++++++++++++++++
+> >  .../xmlrpc-c/xmlrpc-c_1.60.03.bb              |  1 +
+> >  2 files changed, 47 insertions(+)
+> >  create mode 100644 meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-uni=
+x-common.mk-Ensuring-Sequential-Execution-of-rm-a.patch
+> >
+> > diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-unix-commo=
+n.mk-Ensuring-Sequential-Execution-of-rm-a.patch b/meta-oe/recipes-devtools=
+/xmlrpc-c/xmlrpc-c/0001-unix-common.mk-Ensuring-Sequential-Execution-of-rm-=
+a.patch
+> > new file mode 100644
+> > index 0000000000..02b5244f3a
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-unix-common.mk-En=
+suring-Sequential-Execution-of-rm-a.patch
+> > @@ -0,0 +1,46 @@
+> > +From c9bd05e8f0ad805b81625cfa717d06071cfd9b48 Mon Sep 17 00:00:00 2001
+> > +From: Khem Raj <raj.khem@gmail.com>
+> > +Date: Wed, 16 Oct 2024 22:52:38 -0700
+> > +Subject: [PATCH] unix-common.mk: Ensuring Sequential Execution of rm a=
+nd ln commands
+> > +
+> > +With high parallel execution, it results in race condition where
+> > +its trying to create symlink while the original symlink while rm is
+> > +not done deleting the existing file yet.
+> > +
+> > +force sequential execution by adding dependencies between the steps
+> > +or combining them into a single shell command
+> > +
+> > +Here, && ensures that the ln -s command only runs after rm -f target
+> > +successfully completes.
+> > +
+> > +Similar error reported here [1]
+> > +
+> > +[1] https://bugs.gentoo.org/932835
+> > +
+> > +Upstream-Status: Pending
+> > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > +---
+> > + unix-common.mk | 6 ++----
+> > + 1 file changed, 2 insertions(+), 4 deletions(-)
+> > +
+> > +diff --git a/unix-common.mk b/unix-common.mk
+> > +index 6954faf5..983c48cd 100644
+> > +--- a/unix-common.mk
+> > ++++ b/unix-common.mk
+> > +@@ -62,14 +62,12 @@ SHLIB_CMD =3D $(CCLD) $(LADD) $(LDFLAGS_SHLIB) -o =
+$@ $^
+> > + SHLIB_LE_TARGETS =3D $(call shliblefn, $(SHARED_LIBS_TO_BUILD))
+> > +
+> > + $(SHLIB_LE_TARGETS):%:%.$(MAJ)
+> > +-      rm -f $@
+> > +-      $(LN_S) $< $@
+> > ++      rm -f $@ && $(LN_S) $< $@
+> > +
+> > + SONAME_TARGETS =3D $(SHLIB_LE_TARGETS:%=3D%.$(MAJ))
+> > +
+> > + $(SONAME_TARGETS):%:%.$(MIN)
+> > +-      rm -f $@
+> > +-      $(LN_S) $< $@
+> > ++      rm -f $@ && $(LN_S) $< $@
+> > +
+> > + .PHONY: $(SHLIB_INSTALL_TARGETS)
+> > + .PHONY: install-shared-libraries
+> > diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.60.03.bb b/me=
+ta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.60.03.bb
+> > index a34256c275..f5ee920cad 100644
+> > --- a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.60.03.bb
+> > +++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.60.03.bb
+> > @@ -7,6 +7,7 @@ LIC_FILES_CHKSUM =3D "file://doc/COPYING;md5=3Daefbf81b=
+a0750f02176b6f86752ea951"
+> >
+> >  SRC_URI =3D "git://github.com/mirror/xmlrpc-c.git;branch=3Dmaster;prot=
+ocol=3Dhttps \
+> >             file://0001-test-cpp-server_abyss-Fix-build-with-clang-libc=
+.patch \
+> > +           file://0001-unix-common.mk-Ensuring-Sequential-Execution-of=
+-rm-a.patch \
+> >             "
+> >  # one more commit after Release 1.60.03 in the Stable series
+> >  SRCREV =3D "a823b0bb5cf0a4dbd34f929cbfdfb0439c5d9b0e"
 >
-> And I was able to build core-image-minimal with both snapper and lib32-sn=
-apper installed without facing any conflicts in do_rootfs
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#113253): https://lists.openembedded.org/g/openembedde=
+d-devel/message/113253
+> Mute This Topic: https://lists.openembedded.org/mt/109059191/3617156
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
+artin.jansa@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
->
->
-> On Fri, Nov 1 2024 at 07:59:35 AM +01:00:00, Markus Volk <f_l_k@t-online.=
-de> wrote:
->
-> On Thu, Oct 31 2024 at 11:45:59 PM +01:00:00, Martin Jansa <martin.jansa@=
-gmail.com> wrote:
->
-> Not sure if this was worth it :).
->
->
-> An easy way to hack this might also be something like this ?
->
-> # Did this just for testing purpose
-> export nonarch_libdir =3D "/usr/lib32"
->
-> do_install:append() {
->  if [ ! "${libdir}" =3D "${nonarch_libdir}" ]; then mkdir ${D}${nonarch_l=
-ibdir};mv ${D}${libdir}/snapper ${D}${nonarch_libdir}/snapper; fi
-> }
->
->
-> FILES:${PN} +=3D "${nonarch_libdir}/snapper ${libdir}/pam_snapper ${syste=
-md_system_unitdir} ${libdir}/security ${datadir}"
->
-> Since I'm not building multilib, I just did an export for nonarch_libdir =
-to have a difference here for testing. Kind of seemed to work.
-> The 'mkdir' command is probably  only needed in my testcase, because if b=
-uilding multilib the ${D}${nonarch_libdir} directory is presumably already =
-present
->
-> Not pretty but eventually less maintainance than a patch
 
