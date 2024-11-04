@@ -1,106 +1,108 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DE8BD1BDED
-	for <webhook@archiver.kernel.org>; Mon,  4 Nov 2024 20:22:44 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.web10.550.1730751756586366979
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BC65CD1BDF7
+	for <webhook@archiver.kernel.org>; Mon,  4 Nov 2024 21:35:24 +0000 (UTC)
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web10.2433.1730756122803107202
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Nov 2024 12:22:36 -0800
+ Mon, 04 Nov 2024 13:35:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=F5tvn4WO;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-43152b79d25so39661435e9.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Nov 2024 12:22:36 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JyGOhaDs;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-20c693b68f5so50375375ad.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Nov 2024 13:35:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730751755; x=1731356555; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730756122; x=1731360922; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=9x+Y13mDNuXUnHzf8OtPDRufpGHAEiyNPiZDMlWS0W0=;
-        b=F5tvn4WOUxhjHS3++o7iVmLvgdURpI5WVoUZqmf307ZzRlaGsj42GjW2ib0kMe2HEF
-         6zVkJtsB9jBBpOz1TF8YdlQ10pJ1hGC9AZAqxPLHObPijConnYHYImkNAMeIfjz7dFYT
-         z2Inu9uspRrYjgoXOXo711K7e8FOUVny9U/lQ64MPUxj1u99FcR8q9HDqUwE2McyVwpn
-         Qp6+JMLW3FzgBcCP9fhkn/YDzDqqb74ct0MOVcts3EpovV3bUU59ZpNrMZDLTqNA5DSJ
-         zd6EIo63PSRer2J58RGXA5JwZ7Jt3Y/njxEItyzTs/OByyk8Ps/mHjr5oZ9XxyddBxST
-         jHnw==
+        bh=YOG/BLZUvqxfMLQ/MGRz2EKkjjGG33rmPV9KJrMFTHs=;
+        b=JyGOhaDsYfX9gTtnTpiOmXQz01QPzWpLxbpvin0ssAQTEYQIpOMeFN9odpv9EPetu/
+         iM2rEUWJCfJKH2hOOvEh/LgsmM18KHBoyNq+EadSk0W5cnB1akwgYyV9Ab/oMkRdVkWX
+         7vaKQvwGhyD+de8uve5u5/nKjZ0p3+XqH8V4opXu6O51x5ZPVlhYZRXdQ7VVyPwlQakN
+         X5iicywHB8T/1jv2hWhMiTvpdjlwrhj4Fwog1umvVAaq5+Voqk5UxMEf2e3J+BHI6yOt
+         oCZ/lkJvIUTplQ2tOaLV9Y3J+KXoZ1W29KvnIWt/jaSs+sEhqIxGYOAIiL3bb8eK2COQ
+         n6Kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730751755; x=1731356555;
+        d=1e100.net; s=20230601; t=1730756122; x=1731360922;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=9x+Y13mDNuXUnHzf8OtPDRufpGHAEiyNPiZDMlWS0W0=;
-        b=oqM/v9IkZIyHiqfY58lxz2LE7kob2Q6nw6ofcsaBW0+xlV58XpAFGdG5zot/GFu8PE
-         lz6guaPsi+QP0Y0rrKPcb+UFpDCcLPApjKuDC+SE+KlwZCpr6R9YwVBWk2ZZPW0P7Hlm
-         Pr2DAgo7VqvLHB9VakC1X/rc/0YXGqrqWop/pkkF4ZjXO9KTlmM4Jk1KFht4+4CaOQpr
-         Loq9PQ4ZavVPKfV7zwVEbXU1p/aYzLkBYhkSN3HC1pcmmuJF3JNFHknMJjNeu4QcQ6tc
-         ysVPV+H1EJeKxr0M66EGAU3JNg84uXojch7NiR77sR7kCR8zW1jgFOpHHVlkmiI+A0IB
-         0c1w==
-X-Gm-Message-State: AOJu0YzDVXltrj5gKuvtN38xWgxPYCqxFhNF/Lf21oV/OqoUg0iRMFWf
-	2kT1jt9SFujD7j32pyMivIfOe2ThGwX5RXUyrBbg7spcwf9/XTNxwiNc0v+n
-X-Google-Smtp-Source: AGHT+IF40xsEMWk0SPKEB7XtSfwcnG7Uy5QC9l7mzJw9wtlhPrSMJAQ9+FmvZHXQKeVXtEn36x8DDQ==
-X-Received: by 2002:a05:600c:3b14:b0:431:5c17:d575 with SMTP id 5b1f17b1804b1-4327b6f9521mr147396725e9.11.1730751754580;
-        Mon, 04 Nov 2024 12:22:34 -0800 (PST)
-Received: from localhost.localdomain (ptr-fij45qxtdobqrxrcewr.18120a2.ip6.access.telenet.be. [2a02:1812:512:2c00:6021:e9a4:5aa0:257b])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-381c113e885sm14113696f8f.89.2024.11.04.12.22.33
+        bh=YOG/BLZUvqxfMLQ/MGRz2EKkjjGG33rmPV9KJrMFTHs=;
+        b=o3L0jxQPhwFzcxop7Qty/WSApXAzdrBH2p5or2cV+UdSzdn9oNKUF5nSnGp2+/m7ow
+         tZ4qAr6Rz89p2ZSJfVYftiMAfJlfF7AHR0jpKJgJjRdsVoYJjhk1l+8ThGE2RRCAummy
+         bihCHsEivep5OfhWcpGUSrxhA4dcx2pcBexddDdQrqDwKrUu5j5Qy72KDZYRdYx1Ugb7
+         rXAOmH2GKT9U6HH63XBBWv8Fbf/Uigk/6SC5iULsT8xH+8pnoSrlaXDwkjD47yo2J592
+         qhCx4rF0GHG+Q1tK8g5Ozeg8Rtsh6x3uUqvcx3eBX6pq9QHkR0pbspTwdngRmnlGN3HH
+         S2Iw==
+X-Gm-Message-State: AOJu0YzI9oNu6s10adSL5eadWURnmmjtndZV0Q6JE//A0I8YiSLyw+Eu
+	kMj6D1i0mdLvBOx+Gn2cw9Z/krIw51vwiubrFCjjDW+wmtrkVQny75RLDQ==
+X-Google-Smtp-Source: AGHT+IGGD1mHhsyBUZd2FWrcZvdjQ5knOYtm2JpBOEwpm3Rec7/IP343kNpfeF3/pvb08gW/OmrlRg==
+X-Received: by 2002:a17:902:db11:b0:20e:986a:6e72 with SMTP id d9443c01a7336-21103b1bb5dmr259284075ad.30.1730756121799;
+        Mon, 04 Nov 2024 13:35:21 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::a151])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-211057d3c31sm66354985ad.252.2024.11.04.13.35.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 04 Nov 2024 12:22:34 -0800 (PST)
-From: Jan Vermaete <jan.vermaete@gmail.com>
+        Mon, 04 Nov 2024 13:35:21 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-python][PATCH] python3-apiflask: version bump 2.1.1 -> 2.2.1
-Date: Mon,  4 Nov 2024 21:21:57 +0100
-Message-Id: <20241104202157.2231657-1-jan.vermaete@gmail.com>
-X-Mailer: git-send-email 2.39.5
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] fluentbit: Add IPO option as a packageconfig knob
+Date: Mon,  4 Nov 2024 13:35:19 -0800
+Message-ID: <20241104213519.3656688-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 04 Nov 2024 20:22:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113409
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Nov 2024 21:35:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113410
 
-fixed:
-  do_check_backend: QA Issue: inherits setuptools3 but has pyproject.toml with setuptools.build_meta, use the correct class [pep517-backend]
-  warning:oelint.vars.dependsordered:'RDEPENDS' entries should be ordered alphabetically
+LTO seems to fail on clang+arm, therefore disable it for now.
 
-Download of the source archive was failing with PYPI_PACKAGE set.
+| arm-yoe-linux-musleabi-ld.lld: error: undefined hidden symbol: co_swap_function.llvm.232435740610378447
+| >>> referenced by arm.c:76 (lib/monkey/deps/flb_libco/arm.c:76)
+| >>>               library/fluent-bit.lto.libfluent-bit.a(flb_input_thread.c.o at 1278594).o:(input_thread)
+| >>> referenced by flb_input_thread.c:0 (src/flb_input_thread.c:0)
+| >>>               library/fluent-bit.lto.libfluent-bit.a(flb_input_thread.c.o at 1278594).o:(input_thread)
+| >>> referenced by arm.c:76 (lib/monkey/deps/flb_libco/arm.c:76)
+| >>>               library/fluent-bit.lto.libfluent-bit.a(flb_output.c.o at 1447274).o:(.Lflb_output_task_flush$local)
+| >>> referenced 88 more times
 
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...on3-apiflask_2.1.1.bb => python3-apiflask_2.2.1.bb} | 10 ++++------
- 1 file changed, 4 insertions(+), 6 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-apiflask_2.1.1.bb => python3-apiflask_2.2.1.bb} (74%)
+ meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-apiflask_2.1.1.bb b/meta-python/recipes-devtools/python/python3-apiflask_2.2.1.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python3-apiflask_2.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-apiflask_2.2.1.bb
-index 94f2e37a8..d6e88beec 100644
---- a/meta-python/recipes-devtools/python/python3-apiflask_2.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-apiflask_2.2.1.bb
-@@ -3,16 +3,14 @@ HOMEPAGE = "https://github.com/apiflask/apiflask"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5f89d1b0dec37448d4f4163dc3c40e64"
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
+index a70534e91c..ea67ac5882 100644
+--- a/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit_3.1.9.bb
+@@ -39,6 +39,7 @@ PACKAGECONFIG ??= "\
+     custom-calyptia \
+     http-server \
+     inotify \
++    ipo \
+     metrics \
+     parser \
+     proxy-go \
+@@ -51,6 +52,8 @@ PACKAGECONFIG ??= "\
+     tls \
+     utf8-encoder \
+ "
++# See https://github.com/fluent/fluent-bit/issues/7248#issuecomment-1631280496
++PACKAGECONFIG:remove:toolchain-clang:arm = "ipo"
  
--inherit pypi setuptools3
-+inherit pypi python_setuptools_build_meta
- 
--PYPI_PACKAGE = "APIFlask"
--
--SRC_URI[sha256sum] = "88db5a539cc155e35d9636d99b434d00ca6c0b23e7c87c8321ec9dc980535366"
-+SRC_URI[sha256sum] = "9c7573fedbb75524396c5733d4b0c150d1839a5d52b905c15b6a36e030c44908"
- 
- RDEPENDS:${PN} += "\
-+    python3-apispec \
-     python3-flask \
-+    python3-flask-httpauth \
-     python3-flask-marshmallow \
-     python3-webargs \
--    python3-flask-httpauth \
--    python3-apispec \
-     "
--- 
-2.39.5
-
+ PACKAGECONFIG[all] = "-DFLB_ALL=Yes,-DFLB_ALL=No"
+ PACKAGECONFIG[arrow] = "-DFLB_ARROW=Yes,-DFLB_ARROW=No"
+@@ -69,6 +72,7 @@ PACKAGECONFIG[examples] = "-DFLB_EXAMPLES=Yes,-DFLB_EXAMPLES=No"
+ PACKAGECONFIG[http-client-debug] = "-DFLB_HTTP_CLIENT_DEBUG=Yes,-DFLB_HTTP_CLIENT_DEBUG=No"
+ PACKAGECONFIG[http-server] = "-DFLB_HTTP_SERVER=Yes,-DFLB_HTTP_SERVER=No"
+ PACKAGECONFIG[inotify] = "-DFLB_INOTIFY=Yes,-DFLB_INOTIFY=No"
++PACKAGECONFIG[ipo] = "-DFLB_IPO=Yes,-DFLB_IPO=no"
+ PACKAGECONFIG[jemalloc] = "-DFLB_JEMALLOC=Yes,-DFLB_JEMALLOC=No,jemalloc"
+ PACKAGECONFIG[luajit] = "-DFLB_LUAJIT=Yes,-DFLB_LUAJIT=No"
+ PACKAGECONFIG[metrics] = "-DFLB_METRICS=Yes,-DFLB_METRICS=No"
 
