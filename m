@@ -2,187 +2,112 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 101D4D132C1
-	for <webhook@archiver.kernel.org>; Mon,  4 Nov 2024 13:25:03 +0000 (UTC)
-Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com [209.85.208.171])
- by mx.groups.io with SMTP id smtpd.web11.57202.1730726701353323188
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8474ED132DC
+	for <webhook@archiver.kernel.org>; Mon,  4 Nov 2024 15:05:43 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.web10.59768.1730732740088482025
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Nov 2024 05:25:01 -0800
+ Mon, 04 Nov 2024 07:05:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gn4Nr3Iu;
- spf=pass (domain: gmail.com, ip: 209.85.208.171, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lj1-f171.google.com with SMTP id 38308e7fff4ca-2fb599aac99so35231501fa.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Nov 2024 05:25:01 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=N/zKZTox;
+ spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4316f3d3c21so33881055e9.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Nov 2024 07:05:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730726699; x=1731331499; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730732738; x=1731337538; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Hn8JdQiFEJA8gprQf57gTYTq4GZOhig0eY+ERx6YS5w=;
-        b=gn4Nr3IuQ+MO3wS70TLiRG6lCUyortxj1J8OmPz3y2p2SRSn2JCB1iaHFlNyUkmu89
-         22lXzsjPVB34cfgtHM2XEdXRTb0yWnzx8Z1dFTsd+pUyQ+sg/1XpNMRxftFbPiFbHMDA
-         CUqqEjjOrRFHbawoSnAX5mILjn8w2av3atq4FV9X2Woo6OGCYamcWp2Axq9mQG1wovlO
-         GjzvW/hEQcQzaLtKQ/1UQK3/3RGBgSJI+DFYpm7EQxoA9pUGe0t2A+H58r6piKUzEIgI
-         CMOD/mJMfdTC01higPohjYZhJQhQxVCxhTDdnibVlP87XY0NLHXglzb6yxkUocoNmK/k
-         /PPg==
+        bh=Wuj4XuI1IRWngLSanjOJ7gM9j9K9zxAkLO9bcSFUYdg=;
+        b=N/zKZToxal/grdFBuU39oE6lIujJJ5RKvS5ztX513vuls/3uvPEOA7r1hW1hEMNpti
+         7K0bOHftX//PoGMAWswwSZt993JFd7btR03ilJRMa2EHaTrf7kwT1mtWQuQaSHV+dB9b
+         Y7YnpSOVQL3b38XTYKmTMAXDUAlqcsZij8MxsDQllFofqI6yrpzaG2wwNm4q6iO/DcA1
+         JGPoNpYS072d6mPuinASTr3b5vjwMsPOfqaRHH1f4LNP4vuArcD8wZsQpDBsR0OiY2e4
+         8pSZNIoNitaMH4v2qqKKj7vDWT6/a9sBG4oP0kJsUU+vv1cq81bGbGWKr0Un7cB9yi9/
+         J+NQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730726699; x=1731331499;
+        d=1e100.net; s=20230601; t=1730732738; x=1731337538;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Hn8JdQiFEJA8gprQf57gTYTq4GZOhig0eY+ERx6YS5w=;
-        b=ZzZGb5kVjsnZcJNlUo6iyPumwYZJwE+ZyENJ0uwoTUM9S0oy97zRw+hBsnrhyriczI
-         oCl6xaAh9wi0quy1VUlvjtxzWIGruivBYpN6/gvEfpMuBSflnu+K9L2Ucrwbsoxu+q61
-         OVcGKbV75HEWTTdt49SIRjg+xM4FtqnRRY/2aEbXLmVs19l73Rt5xg73zPu4MMCQQlod
-         Q72j1Wn8XGQeGzr2ejiQB7HAPZylI7Msg94X9CXfz2KN1XNJwV6zIlGfdEZx5nfvvgC7
-         /tlX9xl+J8AEEK0+dRS7XRPfmmjEHapkeg9oexS/qJTcHhNScBR2zWrb6ujfLxKDLguE
-         rmvQ==
-X-Gm-Message-State: AOJu0YxF3dr+rC712XfBpYuUG9/tJFjEK0Lsr7KANVdCSmtR5gCFGQoK
-	bAUH1BEXoRRGtY+0PJoTewXmc3kA626PQ7u3PlIGgTuVuTIGZ30W5Q70Vg==
-X-Google-Smtp-Source: AGHT+IFAQhDqHhyNAmLmN5s6owNjx9IhOi5I9A52SwzzFtD5B0PeZBRsb/2c22i+/D0Bv+kRzl+gsw==
-X-Received: by 2002:a2e:bd15:0:b0:2fb:34dc:7beb with SMTP id 38308e7fff4ca-2fedb7a2114mr62214761fa.12.1730726699201;
-        Mon, 04 Nov 2024 05:24:59 -0800 (PST)
+        bh=Wuj4XuI1IRWngLSanjOJ7gM9j9K9zxAkLO9bcSFUYdg=;
+        b=Zd+fliEtKxQOPYSTR6PImGBraBUavf/oRIU9FJHO2/Xsj1F1RnqeYxMQS98pV8YFoH
+         q94m9rJLohbunEsqCT833KssRpByEhEvVcLVzcPxULlSe/V+kTL+t0nZcMlea49oQZ4c
+         +PEMqGnWEAk5uC64yuFVbvnuLJN0JaInKYCVAhxa4bCQtOuI7p6U+7FTZ9q0LD89FZss
+         9arG+CETeAE0vN7+Kkgv4f/tNfXNx0orhAIPNtj8ChNkNFxd4WKshRJFOUhaeVMMhPT+
+         wSZuehQWM8KTAP/lza08vM9RKncjWI/MrQCNB97pmQBUHKNkNrUqAIYntYhBNIKJxD40
+         uIpg==
+X-Gm-Message-State: AOJu0YxpL9Ap4XOV968kTbgTFrNbF5cSZThuM8H0gQPE5jrBvktNy2Dn
+	toMyFhf5RgnhV+/Tub80nJppFR4nhrII3AkT8QhO4NZk3OIkqmjGOIaVFQ==
+X-Google-Smtp-Source: AGHT+IFwfj6jO4vcc0dw+c0yirw3inqmyHSZmj0emH4M/0tdsCZyCal9f0lWe6YJHxvwVf78cHZqPA==
+X-Received: by 2002:a05:6000:18a7:b0:37d:45ab:422b with SMTP id ffacd0b85a97d-381b708b694mr16292346f8f.31.1730732737979;
+        Mon, 04 Nov 2024 07:05:37 -0800 (PST)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5cecb0d4b23sm2300831a12.59.2024.11.04.05.24.58
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-381c10d414csm13340382f8f.26.2024.11.04.07.05.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 04 Nov 2024 05:24:58 -0800 (PST)
+        Mon, 04 Nov 2024 07:05:37 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Kai Kang <kai.kang@windriver.com>,
+Cc: rajmohan r <semc.2042@gmail.com>,
 	Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] xmlrpc-c: improve the fix for parallel build a bit
-Date: Mon,  4 Nov 2024 14:24:53 +0100
-Message-ID: <20241104132453.1872268-1-martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] unbound: update to latest to fix occasional build failure
+Date: Mon,  4 Nov 2024 16:05:32 +0100
+Message-ID: <20241104150532.1167022-1-martin.jansa@gmail.com>
 X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 04 Nov 2024 13:25:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113405
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Nov 2024 15:05:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113406
 
-* still needs some improvements, but should work a bit better
-  I've rebuilt it 30 times without triggering the issue now
-  with previous version it failed on 5th iteration already
+buildhistory-diff shows few new files in testdata:
+
+packages/core2-64-oe-linux/unbound/unbound-ptest: FILELIST: added "
+  /usr/lib/unbound/ptest/tests/testdata/rpz_val_block.rpl
+  /usr/lib/unbound/ptest/tests/testdata/serve_expired_ttl_reset.rpl
+  /usr/lib/unbound/ptest/tests/testdata/val_negcache_ttl_prefetch.rpl
+  /usr/lib/unbound/ptest/tests/testdata/val_negcache_ttl.rpl
+  /usr/lib/unbound/ptest/tests/testdata/iter_max_global_quota.rpl
+  /usr/lib/unbound/ptest/tests/testdata/iter_unverified_glue.rpl
+  /usr/lib/unbound/ptest/tests/testdata/serve_expired_val_bogus.rpl
+  /usr/lib/unbound/ptest/tests/testdata/iter_unverified_glue_fallback.rpl
+  /usr/lib/unbound/ptest/tests/testdata/serve_expired_client_timeout_val_bogus.rpl
+  /usr/lib/unbound/ptest/tests/testdata/serve_expired_client_timeout_val_insecure_delegation.rpl
+  /usr/lib/unbound/ptest/tests/testdata/dns64_prefetch_cache.rpl"
+
+wasn't tested in runtime, I don't use it, I just wanted to get rid of
+random build failure from world builds (happens at least since kirkstone
+which has 1.15.0).
 
 Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- ...nsuring-Sequential-Execution-of-rm-a.patch | 77 +++++++++++++++++--
- 1 file changed, 70 insertions(+), 7 deletions(-)
+ .../unbound/{unbound_1.21.1.bb => unbound_1.22.0.bb}      | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+ rename meta-networking/recipes-support/unbound/{unbound_1.21.1.bb => unbound_1.22.0.bb} (87%)
 
-diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-unix-common.mk-Ensuring-Sequential-Execution-of-rm-a.patch b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-unix-common.mk-Ensuring-Sequential-Execution-of-rm-a.patch
-index 02b5244f3a..152667661e 100644
---- a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-unix-common.mk-Ensuring-Sequential-Execution-of-rm-a.patch
-+++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-unix-common.mk-Ensuring-Sequential-Execution-of-rm-a.patch
-@@ -1,23 +1,86 @@
- From c9bd05e8f0ad805b81625cfa717d06071cfd9b48 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Wed, 16 Oct 2024 22:52:38 -0700
--Subject: [PATCH] unix-common.mk: Ensuring Sequential Execution of rm and ln commands
-+Subject: [PATCH] unix-common.mk: Avoid race condition between mutliple make calls running in parallel
- 
- With high parallel execution, it results in race condition where
- its trying to create symlink while the original symlink while rm is
- not done deleting the existing file yet.
- 
--force sequential execution by adding dependencies between the steps
--or combining them into a single shell command
-+The issue is that submake for libxmlrpc_util.so is called 12 times
-+which can run in parallel and then some of them will try to create
-+target link at the same time (after both already finished rm call).
- 
--Here, && ensures that the ln -s command only runs after rm -f target
--successfully completes.
-+Use -f which should be supported even by relatively old ln and
-+should avoid the need for rm (and hopefully will avoid this race)
+diff --git a/meta-networking/recipes-support/unbound/unbound_1.21.1.bb b/meta-networking/recipes-support/unbound/unbound_1.22.0.bb
+similarity index 87%
+rename from meta-networking/recipes-support/unbound/unbound_1.21.1.bb
+rename to meta-networking/recipes-support/unbound/unbound_1.22.0.bb
+index 9fc7e665ea..2f0c92dd9f 100644
+--- a/meta-networking/recipes-support/unbound/unbound_1.21.1.bb
++++ b/meta-networking/recipes-support/unbound/unbound_1.22.0.bb
+@@ -12,7 +12,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
+ SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master \
+            file://run-ptest \
+            "
+-SRCREV = "b7c61d7cc256d6a174e6179622c7fa968272c259"
 +
-+For libutil++ it calls "all" and "libxmlrpc_util++.so" only once,
-+but for libutil it calls "all" and then 12 times libxmlrpc_util.so
-+(after-clean-j1.log is the make output with -n and -j1 instead of
-+-j70), still trying to figure out why, my autofoo is rusty :).
-+
-+Ideally we should prevent calling it 12 times, but until we figure
-+out why we can at least avoid the random build failures.
-+
-+Another interesting fact is that I haven't seen this issue until
-+the upgrade to 1.60.03 from 1.59.01 from:
-+https://lists.openembedded.org/g/openembedded-devel/message/112706
-+but I don't see any changes which should cause this in the git since
-+1.59.01, but the gentoo bug report is against 1.54.06 already.
-+
-+martin@jama /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable $ grep -A 1 lib/libutil++/Makefile after-clean-j1.log
-+make -C libutil++/ -f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil++/Makefile \
-+    all 
-+--
-+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil++/ -f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil++/Makefile \
-+    libxmlrpc_util++.so
-+
-+martin@jama /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable $ grep -A 1 lib/libutil/Makefile after-clean-j1.log
-+make -C libutil/ -f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/Makefile \
-+    all 
-+--
-+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/ -f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/Makefile \
-+    libxmlrpc_util.so
-+--
-+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/ -f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/Makefile \
-+    libxmlrpc_util.so
-+--
-+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/ -f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/Makefile \
-+    libxmlrpc_util.so
-+--
-+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/ -f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/Makefile \
-+    libxmlrpc_util.so
-+--
-+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/ -f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/Makefile \
-+    libxmlrpc_util.so
-+--
-+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/ -f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/Makefile \
-+    libxmlrpc_util.so
-+--
-+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/ -f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/Makefile \
-+    libxmlrpc_util.so
-+--
-+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/ -f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/Makefile \
-+    libxmlrpc_util.so
-+--
-+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/ -f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/Makefile \
-+    libxmlrpc_util.so
-+--
-+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/ -f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/Makefile \
-+    libxmlrpc_util.so
-+--
-+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/ -f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/Makefile \
-+    libxmlrpc_util.so
-+--
-+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/ -f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/lib/libutil/Makefile \
-+    libxmlrpc_util.so
++# 17 commits after 1.22.0 tag:
++# https://github.com/NLnetLabs/unbound/compare/release-1.22.0...7985d17b57d25be262de56c29a43ae4b61c1b896
++# to include fix for occasional build failure:
++# https://github.com/NLnetLabs/unbound/commit/46cfbf313d812a6e50614a691e162b171dc91d7b
++PV .= "+git"
++SRCREV = "7985d17b57d25be262de56c29a43ae4b61c1b896"
  
- Similar error reported here [1]
+ inherit autotools pkgconfig systemd update-rc.d ptest
  
- [1] https://bugs.gentoo.org/932835
- 
- Upstream-Status: Pending
-+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-  unix-common.mk | 6 ++----
-@@ -33,14 +96,14 @@ index 6954faf5..983c48cd 100644
-  $(SHLIB_LE_TARGETS):%:%.$(MAJ)
- -	rm -f $@
- -	$(LN_S) $< $@
--+	rm -f $@ && $(LN_S) $< $@
-++	$(LN_S) -f $< $@
-  
-  SONAME_TARGETS = $(SHLIB_LE_TARGETS:%=%.$(MAJ))
-  
-  $(SONAME_TARGETS):%:%.$(MIN)
- -	rm -f $@
- -	$(LN_S) $< $@
--+	rm -f $@ && $(LN_S) $< $@
-++	$(LN_S) -f $< $@
-  
-  .PHONY: $(SHLIB_INSTALL_TARGETS)
-  .PHONY: install-shared-libraries
 -- 
 2.47.0
 
