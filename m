@@ -1,114 +1,147 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <ceggers@arri.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8474ED132DC
-	for <webhook@archiver.kernel.org>; Mon,  4 Nov 2024 15:05:43 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web10.59768.1730732740088482025
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 86887D132DD
+	for <webhook@archiver.kernel.org>; Mon,  4 Nov 2024 15:07:33 +0000 (UTC)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.63])
+ by mx.groups.io with SMTP id smtpd.web11.59668.1730732842249319372
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Nov 2024 07:05:40 -0800
+ Mon, 04 Nov 2024 07:07:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=N/zKZTox;
- spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4316f3d3c21so33881055e9.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Nov 2024 07:05:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730732738; x=1731337538; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Wuj4XuI1IRWngLSanjOJ7gM9j9K9zxAkLO9bcSFUYdg=;
-        b=N/zKZToxal/grdFBuU39oE6lIujJJ5RKvS5ztX513vuls/3uvPEOA7r1hW1hEMNpti
-         7K0bOHftX//PoGMAWswwSZt993JFd7btR03ilJRMa2EHaTrf7kwT1mtWQuQaSHV+dB9b
-         Y7YnpSOVQL3b38XTYKmTMAXDUAlqcsZij8MxsDQllFofqI6yrpzaG2wwNm4q6iO/DcA1
-         JGPoNpYS072d6mPuinASTr3b5vjwMsPOfqaRHH1f4LNP4vuArcD8wZsQpDBsR0OiY2e4
-         8pSZNIoNitaMH4v2qqKKj7vDWT6/a9sBG4oP0kJsUU+vv1cq81bGbGWKr0Un7cB9yi9/
-         J+NQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730732738; x=1731337538;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Wuj4XuI1IRWngLSanjOJ7gM9j9K9zxAkLO9bcSFUYdg=;
-        b=Zd+fliEtKxQOPYSTR6PImGBraBUavf/oRIU9FJHO2/Xsj1F1RnqeYxMQS98pV8YFoH
-         q94m9rJLohbunEsqCT833KssRpByEhEvVcLVzcPxULlSe/V+kTL+t0nZcMlea49oQZ4c
-         +PEMqGnWEAk5uC64yuFVbvnuLJN0JaInKYCVAhxa4bCQtOuI7p6U+7FTZ9q0LD89FZss
-         9arG+CETeAE0vN7+Kkgv4f/tNfXNx0orhAIPNtj8ChNkNFxd4WKshRJFOUhaeVMMhPT+
-         wSZuehQWM8KTAP/lza08vM9RKncjWI/MrQCNB97pmQBUHKNkNrUqAIYntYhBNIKJxD40
-         uIpg==
-X-Gm-Message-State: AOJu0YxpL9Ap4XOV968kTbgTFrNbF5cSZThuM8H0gQPE5jrBvktNy2Dn
-	toMyFhf5RgnhV+/Tub80nJppFR4nhrII3AkT8QhO4NZk3OIkqmjGOIaVFQ==
-X-Google-Smtp-Source: AGHT+IFwfj6jO4vcc0dw+c0yirw3inqmyHSZmj0emH4M/0tdsCZyCal9f0lWe6YJHxvwVf78cHZqPA==
-X-Received: by 2002:a05:6000:18a7:b0:37d:45ab:422b with SMTP id ffacd0b85a97d-381b708b694mr16292346f8f.31.1730732737979;
-        Mon, 04 Nov 2024 07:05:37 -0800 (PST)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-381c10d414csm13340382f8f.26.2024.11.04.07.05.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 04 Nov 2024 07:05:37 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: rajmohan r <semc.2042@gmail.com>,
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] unbound: update to latest to fix occasional build failure
-Date: Mon,  4 Nov 2024 16:05:32 +0100
-Message-ID: <20241104150532.1167022-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.47.0
+ dkim=fail reason="dkim: body hash did not verify" header.i=@arri.de header.s=selector1 header.b=dWtQb769;
+ spf=pass (domain: arri.de, ip: 40.107.21.63, mailfrom: ceggers@arri.de)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jdw07WPCWPna05RLKRA6f1/q22QurERX21ZDJV3UG5sutLMTKs8V74R/rjUotsHGVX43SiHCtO4JA5zHv88DPH6vkJ2RnqgNFxc2q0s8q2G8mIfzudM0tVoJswFLWUooRWYb3dbGwWo1pwXHAQiHwJmnYzkFXicfvs+ryYcmSKST/icGp3PWTW4eNgRjBPiLCPSH6Ufwj+ajgK763A1jPz3sUqj0aAYnV79UQut6p9y5fL7BmTio5z24lw+mScK1bgZe79ijEOBnEKCd+dEKlRaNYxxWm9lcfzUwa4eQnwXVOZ+FEGUOCjyK5OErW4DRx/upGtYExLAQzp+NuIh9qg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PMCyiT28wefM/aG4o8plTSC9firPBR/R5NEjwo0yKzk=;
+ b=uDEbg+SdeMNWznlQaklOCPY2bI63llUhsSbYyfhvgnF2WG3NfslwtHib3caNEB27R+yBPzpvaRw9KjhvUXdYXrMbQtV4ygT2HHComUeVdCKO3qdWF+aAQJwqWwpaZynTbkCbuGkbsXeo8CM3iQkmFb0gx5FaMbDDZM0exmqx741zdQbYc/tE5SAXaGZuYYh+Kjz0O85ZvwRPiKZ98hHBJ79JRDHGcG2WdCV9fjqP9b9vX466c/r3PT4+jVg1239zFL9vof8xtGoQ4tnNDmlA4notTd9FcCao39MHVKynlEtnR++ZI7RlOGL3RUsppksl6OZdH5mClhg2XBTYrOve7Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 217.111.95.7) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arri.de;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=arri.de;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arri.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PMCyiT28wefM/aG4o8plTSC9firPBR/R5NEjwo0yKzk=;
+ b=dWtQb769fgrAvN3v4tmJE7GUMvBghwXiSdRSHSMU/ucOvGSk3+hzxIlaE83o6yEfdQk0UI84PTgG/fU5WwXOqk+M7FME5dZ1iqxfWBtvKrRBG7sO6PiOG/XyUuwoVf2GmzqsMttxV6xvGGMPYPpPKj/kiD+W+bYL58X12IulnW0=
+Received: from MW4PR03CA0056.namprd03.prod.outlook.com (2603:10b6:303:8e::31)
+ by AS2PR07MB9304.eurprd07.prod.outlook.com (2603:10a6:20b:60b::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.20; Mon, 4 Nov
+ 2024 15:07:17 +0000
+Received: from AM3PEPF0000A79C.eurprd04.prod.outlook.com
+ (2603:10b6:303:8e:cafe::b7) by MW4PR03CA0056.outlook.office365.com
+ (2603:10b6:303:8e::31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.30 via Frontend
+ Transport; Mon, 4 Nov 2024 15:07:15 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 217.111.95.7)
+ smtp.mailfrom=arri.de; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=arri.de;
+Received-SPF: Fail (protection.outlook.com: domain of arri.de does not
+ designate 217.111.95.7 as permitted sender) receiver=protection.outlook.com;
+ client-ip=217.111.95.7; helo=mta.arri.de;
+Received: from mta.arri.de (217.111.95.7) by
+ AM3PEPF0000A79C.mail.protection.outlook.com (10.167.16.107) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8137.17 via Frontend Transport; Mon, 4 Nov 2024 15:07:13 +0000
+Received: from N9W6SW14.arri.de (10.30.4.236) by mta.arri.de (10.10.18.5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.34; Mon, 4 Nov
+ 2024 16:07:13 +0100
+From: Christian Eggers <ceggers@arri.de>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Christian Eggers <ceggers@arri.de>
+Subject: [PATCH] glibmm: use ${bindir_native}
+Date: Mon, 4 Nov 2024 16:07:04 +0100
+Message-ID: <20241104150704.24868-1-ceggers@arri.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-Originating-IP: [10.30.4.236]
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM3PEPF0000A79C:EE_|AS2PR07MB9304:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1b200c61-6ba0-4d24-aee0-08dcfce25d69
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|36860700013|376014|82310400026|1800799024;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?nyhFYrQM34VMNrh5J6z8OR/RvJ7FQnorv4nrTMVXVPndYQF/nYQ3fYRJ/t2z?=
+ =?us-ascii?Q?mmCo47GUnaV8TmFBMZUrjPaSYrj+TNhzqLq5XHX8UiTJPbkUDE8gdnMS81QW?=
+ =?us-ascii?Q?/OR/jxCgwGZPsLOXSh6Q98OJlnAA9g8q6z+DR1bRETv3rsfInJ2V/IWKvQnE?=
+ =?us-ascii?Q?2oYFW7VKpmE+XK79GpUMTuqYbqymRXWK2UNvPSMCwKpsU9pfinaJByInRshY?=
+ =?us-ascii?Q?XGd4+ABkgF4s/JIQB9UJN4+2NeWxWv/gI7FkydbODofqbmDxnj/jSoR96WLh?=
+ =?us-ascii?Q?E+86YQKU+MXpk191Fxuwo3L4Mh1YcekBk+LRGUwzwJHzivgHnwcLYORqpzzW?=
+ =?us-ascii?Q?8aJzt65JkNA0aVI14je0KBAyYz9f3J4k7p1mQfidAw9FvOJ9jXqWlhlEP1UM?=
+ =?us-ascii?Q?r1xiH/IL+0mwfh/JVKEnXSR8CMHbJZPICckX50G4VegSb/2FuhMVzCReP4/m?=
+ =?us-ascii?Q?ZZDUi+7Z3U/WZdG8NuwGbaMvxu3UvJ8/qBlqFTfM7gbsupQqu+x8nRy/TSXJ?=
+ =?us-ascii?Q?XO/myW0Iw6aB94gFga6JfJHXXZ1Wp0QZHc51eV7X8e62jhhBjX1ekbDn5HW/?=
+ =?us-ascii?Q?I263zARIPpwd4XihBLmHN7Ur8NbtRQgwaqhMexuWrq6/BKhlHBp7m+MM003L?=
+ =?us-ascii?Q?UEyY7t4snWpiuHg1WOaVPjFN9hqU89YvtW0Df9F9cVXqBJQlXMvH9FGj+8tD?=
+ =?us-ascii?Q?w9XqQYhfKP6/qSpEnm9TUpU6UWIwROl+VRQ9IkPC6vcsT9dTaoi6X+9lyO3o?=
+ =?us-ascii?Q?7yMg7JoCA9TtL3iA5IFSGm7hXMLnDsrbjRnue2OFitSj/+0vhXWxtI2c6LWT?=
+ =?us-ascii?Q?ovP8NdXfRZEV06Ggsv3z83VO7kbiJ3yP1i8VSnjKSKIvv7eGkYyq58HjyoZI?=
+ =?us-ascii?Q?ZSi6R8n0m1PWXeveIKlLG9hgmsmNs406Nj5eEFg3f6jSndZNGWAI2y0+Uu+Z?=
+ =?us-ascii?Q?E0owTwhyQPEDUmtMZ8+mOIW+ehHskoH76B3lkNnt7OvW+i/ugorpuf5Y6oob?=
+ =?us-ascii?Q?BHxBavOauoSEz1HtjV0/4OY0egovtfYhPmvY/nya+MhSsoXTHODf26g7pJkf?=
+ =?us-ascii?Q?llePhKY6+iAD8buBT9FVo1V+vTjJ6+yxT/lLbQfC9hl0tz6GZTkMKCkh+nzw?=
+ =?us-ascii?Q?wIq4nQCRvIjDKQHaxcEvXDrK8mFxMNBbs7QeqAqLCJ/Nz9nAHauQASElu22k?=
+ =?us-ascii?Q?+jDS3s5Qx5oizrNnJFHadkQs9O2IW4P7fJPhgRVEoEC6XBhCxlEkgQb43SFF?=
+ =?us-ascii?Q?1Mgn4qUnvql5RECICcYEWIDLUFfEuwp2+8n2zTJz6iXlzv/F5nQJopjSl5HS?=
+ =?us-ascii?Q?2GJsL9awbiNMpzKwJKKb+VqmHVTKdtaROxOx/tovI/gT9mpNTqHfzJiFQJot?=
+ =?us-ascii?Q?j0MXfWfqqg6Xj9I65vt9V9xoDcZtEuVABwTDrlnK7JcRk34jkg=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:217.111.95.7;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mta.arri.de;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arri.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2024 15:07:13.9470
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1b200c61-6ba0-4d24-aee0-08dcfce25d69
+X-MS-Exchange-CrossTenant-Id: e6a73a5a-614d-4c51-b3e3-53b660a9433a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e6a73a5a-614d-4c51-b3e3-53b660a9433a;Ip=[217.111.95.7];Helo=[mta.arri.de]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	AM3PEPF0000A79C.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR07MB9304
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 04 Nov 2024 15:05:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113406
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Nov 2024 15:07:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113407
 
-buildhistory-diff shows few new files in testdata:
+With the current ${bindir} the build fails if BBCLASSEXTEND'ing to
+nativesdk and enabling maintainer-mode.
 
-packages/core2-64-oe-linux/unbound/unbound-ptest: FILELIST: added "
-  /usr/lib/unbound/ptest/tests/testdata/rpz_val_block.rpl
-  /usr/lib/unbound/ptest/tests/testdata/serve_expired_ttl_reset.rpl
-  /usr/lib/unbound/ptest/tests/testdata/val_negcache_ttl_prefetch.rpl
-  /usr/lib/unbound/ptest/tests/testdata/val_negcache_ttl.rpl
-  /usr/lib/unbound/ptest/tests/testdata/iter_max_global_quota.rpl
-  /usr/lib/unbound/ptest/tests/testdata/iter_unverified_glue.rpl
-  /usr/lib/unbound/ptest/tests/testdata/serve_expired_val_bogus.rpl
-  /usr/lib/unbound/ptest/tests/testdata/iter_unverified_glue_fallback.rpl
-  /usr/lib/unbound/ptest/tests/testdata/serve_expired_client_timeout_val_bogus.rpl
-  /usr/lib/unbound/ptest/tests/testdata/serve_expired_client_timeout_val_insecure_delegation.rpl
-  /usr/lib/unbound/ptest/tests/testdata/dns64_prefetch_cache.rpl"
-
-wasn't tested in runtime, I don't use it, I just wanted to get rid of
-random build failure from world builds (happens at least since kirkstone
-which has 1.15.0).
-
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+Fixes: 3d0279c18738 ("glibmm: fix reproducibility issues")
+Signed-off-by: Christian Eggers <ceggers@arri.de>
 ---
- .../unbound/{unbound_1.21.1.bb => unbound_1.22.0.bb}      | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
- rename meta-networking/recipes-support/unbound/{unbound_1.21.1.bb => unbound_1.22.0.bb} (87%)
+N.B. Enabling maintainer-mode (e.g. after adding patches) needs further
+packages in DEPENDS, but I think this should be bbappend'ed locally.
 
-diff --git a/meta-networking/recipes-support/unbound/unbound_1.21.1.bb b/meta-networking/recipes-support/unbound/unbound_1.22.0.bb
-similarity index 87%
-rename from meta-networking/recipes-support/unbound/unbound_1.21.1.bb
-rename to meta-networking/recipes-support/unbound/unbound_1.22.0.bb
-index 9fc7e665ea..2f0c92dd9f 100644
---- a/meta-networking/recipes-support/unbound/unbound_1.21.1.bb
-+++ b/meta-networking/recipes-support/unbound/unbound_1.22.0.bb
-@@ -12,7 +12,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
- SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master \
-            file://run-ptest \
-            "
--SRCREV = "b7c61d7cc256d6a174e6179622c7fa968272c259"
-+
-+# 17 commits after 1.22.0 tag:
-+# https://github.com/NLnetLabs/unbound/compare/release-1.22.0...7985d17b57d25be262de56c29a43ae4b61c1b896
-+# to include fix for occasional build failure:
-+# https://github.com/NLnetLabs/unbound/commit/46cfbf313d812a6e50614a691e162b171dc91d7b
-+PV .= "+git"
-+SRCREV = "7985d17b57d25be262de56c29a43ae4b61c1b896"
- 
- inherit autotools pkgconfig systemd update-rc.d ptest
- 
--- 
-2.47.0
+ meta-oe/recipes-core/glib-2.0/glibmm_2.66.7.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-core/glib-2.0/glibmm_2.66.7.bb b/meta-oe/recip=
+es-core/glib-2.0/glibmm_2.66.7.bb
+index 46519384998d..7c7a3fafb74c 100644
+--- a/meta-oe/recipes-core/glib-2.0/glibmm_2.66.7.bb
++++ b/meta-oe/recipes-core/glib-2.0/glibmm_2.66.7.bb
+@@ -24,7 +24,7 @@ EXTRA_OEMESON +=3D "--cross-file=3D${WORKDIR}/meson-${PN}=
+.cross -Dmaintainer-mode=3Dfa
+ do_write_config:append() {
+     cat >${WORKDIR}/meson-${PN}.cross <<EOF
+ [binaries]
+-m4 =3D '${bindir}/m4'
+-perl =3D '${bindir}/perl'
++m4 =3D '${bindir_native}/m4'
++perl =3D '${bindir_native}/perl'
+ EOF
+ }
+--=20
+2.43.0
 
 
