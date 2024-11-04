@@ -1,260 +1,252 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <Jiaying.Song.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5974AD11198
-	for <webhook@archiver.kernel.org>; Mon,  4 Nov 2024 00:21:49 +0000 (UTC)
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web10.47228.1730679707822187837
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DB6B7D111AE
+	for <webhook@archiver.kernel.org>; Mon,  4 Nov 2024 05:57:40 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.51419.1730699856749641920
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 03 Nov 2024 16:21:47 -0800
+ Sun, 03 Nov 2024 21:57:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gGnZfdM5;
- spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-720aa3dbda5so2637425b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 03 Nov 2024 16:21:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730679707; x=1731284507; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=j/KusAgj0klxGX0wPDqsJg1CSUo5opPG9sE1TobyqD4=;
-        b=gGnZfdM5k8Xjl8wX+Dka39vq7v1VOm7KoXo6um+jaezY2PHZBHOyLvobUYMIJb+Uoq
-         grc+fpdymrhvV+DoOrgJlu3VApIqKY2xRsX8iJNQ7LQ5xK+KaPhrwQFW1D+4lGj5rf3+
-         Z7czTkPwSWVqcI+APMSia7LxWa37KGStrRfgp4/ZxjFaXdxaw9cTdTF+B8cmKIp4/a2s
-         MUHTZeY4Qr5Glil3UJCKqW94+v1ZXfr1k9KwBl6RT0bbigg6K2d2fdIGweIsdkBs7U6J
-         PZXT85beojJ0lsofXjg8CwwVr0HTK88igtWqwNi5iKiDcuGHLi1sG6uzQiK4K4pT4qdL
-         U3tg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730679707; x=1731284507;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=j/KusAgj0klxGX0wPDqsJg1CSUo5opPG9sE1TobyqD4=;
-        b=RI2lgeKwmGI3Aa9wcKs/Z8/9wXJOglyLUYrcZzRHpq2em710jmkSicKrfpoAV2Was6
-         95ppCHCSNnCqL6A+0KicbuS7SMhjXo/CIdQrIguvtl02e4VDmKRTW/TCylfevNK2KbPj
-         ehJJRD/3LPyPt2RQhmq+AeF5/+6+Xqwmr8SZmrfeABuCvSc2r46tazDKvs9iSkBvR8eM
-         gXcub1mhlBR/vKjWA1bImfy44x9Pc2cYQlIAkElje3eNVRcc5B72M63HfdXv7Hpgakpx
-         HRwteHUO7on2Yxg11Juu2aKTbUykokpx7QZaCvFLc7NE5NfajivfHANrBQRBbkeShlA0
-         FI3A==
-X-Gm-Message-State: AOJu0YwX4T+9CmnDfgla1y+lUifS3BCm6nq6wYnF5FwlImys8Y5wzVGj
-	uklQbuxWZzhQv6F+KO6K56e6R1yUlTL1+BH8I0S4fcm1KNDEdwqbfaGrsA==
-X-Google-Smtp-Source: AGHT+IFOps8L+WInuxnc+q1OUcWfhrsFvEvxIY4/+Ykk3L+FymNjjBU8gN2sHJFSbsbqs8hGiw3YhQ==
-X-Received: by 2002:a05:6a20:2d1f:b0:1d9:78c:dcf2 with SMTP id adf61e73a8af0-1d9eee6385fmr25106865637.43.1730679706844;
-        Sun, 03 Nov 2024 16:21:46 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::18d7])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-720bc2c498esm6413871b3a.97.2024.11.03.16.21.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 03 Nov 2024 16:21:46 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] tk: Upgrade to TK 9.0.0 release
-Date: Sun,  3 Nov 2024 16:21:43 -0800
-Message-ID: <20241104002143.2982616-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20241104002143.2982616-1-raj.khem@gmail.com>
-References: <20241104002143.2982616-1-raj.khem@gmail.com>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=103804c5e6=jiaying.song.cn@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4A45OXnx027614
+	for <openembedded-devel@lists.openembedded.org>; Sun, 3 Nov 2024 21:57:36 -0800
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 42nfc319qg-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 03 Nov 2024 21:57:36 -0800 (PST)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Sun, 3 Nov 2024 21:57:35 -0800
+Received: from pek-lpg-core1.wrs.com (128.224.156.132) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.39 via Frontend Transport; Sun, 3 Nov 2024 21:57:34 -0800
+From: <jiaying.song.cn@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <Changqing.Li@windriver.com>
+Subject: [meta-networking][Kirkstone][PATCH v2] openipmi: upgrade 2.0.32->2.0.36
+Date: Mon, 4 Nov 2024 14:00:18 +0800
+Message-ID: <20241104060018.3059624-1-jiaying.song.cn@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=T7feTOKQ c=1 sm=1 tr=0 ts=67286250 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=VlfZXiiP6vEA:10 a=t7CeM3EgAAAA:8 a=FP58Ms26AAAA:8 a=VhezN14C5EISivN7u2sA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: cZbnGAEGEgqk0dH38KDAMGACovb4Qdh2
+X-Proofpoint-ORIG-GUID: cZbnGAEGEgqk0dH38KDAMGACovb4Qdh2
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.62.30
+ definitions=2024-11-04_03,2024-11-01_01,2024-09-30_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 bulkscore=0
+ phishscore=0 lowpriorityscore=0 adultscore=0 clxscore=1015 suspectscore=0
+ spamscore=0 mlxlogscore=999 malwarescore=0 priorityscore=1501 mlxscore=0
+ classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2409260000 definitions=main-2411040051
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 04 Nov 2024 00:21:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113402
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Nov 2024 05:57:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113403
 
-Core is upgrading TCL to 9.0.0 as well, this has to
-be done in tandem
+From: Jiaying Song <jiaying.song.cn@windriver.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+2c4ab4a6c openipmi: fix do_configure error when using dash
+03dd014eb openipmi: update 2.0.32 -> 2.0.34
+
+Merge the above commits related to the upgrade, and then upgrade the
+version of openipmi from 2.0.34 to 2.0.36.
+
+Full changelog for openipmi::
+https://sourceforge.net/p/openipmi/news/
+
+Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
 ---
- .../recipes-devtools/tcltk/tk/confsearch.diff | 47 -------------------
- .../recipes-devtools/tcltk/tk/fix-xft.diff    | 18 -------
- .../recipes-devtools/tcltk/tk/tkprivate.diff  | 43 -----------------
- .../tcltk/{tk_8.6.15.bb => tk_9.0.0.bb}       | 14 ++----
- 4 files changed, 5 insertions(+), 117 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/tcltk/tk/confsearch.diff
- delete mode 100644 meta-oe/recipes-devtools/tcltk/tk/fix-xft.diff
- delete mode 100644 meta-oe/recipes-devtools/tcltk/tk/tkprivate.diff
- rename meta-oe/recipes-devtools/tcltk/{tk_8.6.15.bb => tk_9.0.0.bb} (89%)
+ ..._devel.m4-do-not-check-for-distutils.patch | 41 ----------------
+ ...fix-symlink-install-error-in-cmdlang.patch | 11 +++--
+ ...pmi-remove-host-path-from-la_LDFLAGS.patch | 49 -------------------
+ ...{openipmi_2.0.32.bb => openipmi_2.0.36.bb} | 15 +++---
+ 4 files changed, 13 insertions(+), 103 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/openipmi/files/0001-m4-ax_python_devel.m4-do-not-check-for-distutils.patch
+ delete mode 100644 meta-networking/recipes-support/openipmi/files/openipmi-remove-host-path-from-la_LDFLAGS.patch
+ rename meta-networking/recipes-support/openipmi/{openipmi_2.0.32.bb => openipmi_2.0.36.bb} (87%)
 
-diff --git a/meta-oe/recipes-devtools/tcltk/tk/confsearch.diff b/meta-oe/recipes-devtools/tcltk/tk/confsearch.diff
+diff --git a/meta-networking/recipes-support/openipmi/files/0001-m4-ax_python_devel.m4-do-not-check-for-distutils.patch b/meta-networking/recipes-support/openipmi/files/0001-m4-ax_python_devel.m4-do-not-check-for-distutils.patch
 deleted file mode 100644
-index 81d4735752..0000000000
---- a/meta-oe/recipes-devtools/tcltk/tk/confsearch.diff
+index 00956fb11..000000000
+--- a/meta-networking/recipes-support/openipmi/files/0001-m4-ax_python_devel.m4-do-not-check-for-distutils.patch
 +++ /dev/null
-@@ -1,47 +0,0 @@
--From 5539442e5f5442606071afc5cf02642314ad13bb Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Wed, 17 Aug 2011 22:52:35 +0200
--Subject: [PATCH] tk 8.5.8: import from OE rev
+@@ -1,41 +0,0 @@
+-From 3a35611687864cf3599712d0d2ff54532b0118ac Mon Sep 17 00:00:00 2001
+-From: Alexander Kanavin <alex@linutronix.de>
+-Date: Sun, 3 Oct 2021 21:42:32 +0200
+-Subject: [PATCH] m4/ax_python_devel.m4: do not check for distutils
 -
--Patch by Sergei Golovan allows to find tclConfig.sh in /usr/share/tcltk/tcl8.5
--and tkConfig.sh in /usr/share/tcltk/tk8.5 where they are located in Debian
--installation.
+-With py 3.10 this prints a deprecation warning which is
+-taken as an error. Upstream should rework the code to not
+-use distuils.
 -
--Upstream-Status: Pending
+-Upstream-Status: Inappropriate [needs a proper fix upstream]
+-Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ----
-- unix/configure | 1 +
-- unix/tcl.m4    | 2 ++
-- 2 files changed, 3 insertions(+)
+- m4/ax_python_devel.m4 | 15 ---------------
+- 1 file changed, 15 deletions(-)
 -
--Index: a/unix/configure
--===================================================================
----- a/unix/configure.orig
--+++ b/unix/configure
--@@ -1431,6 +1431,7 @@ echo "$as_me: error: ${with_tclconfig} d
-- 			`ls -d /usr/local/lib 2>/dev/null` \
-- 			`ls -d /usr/contrib/lib 2>/dev/null` \
-- 			`ls -d /usr/pkg/lib 2>/dev/null` \
--+			`ls -d /usr/share/tcltk/tcl8.6 2>/dev/null` \
-- 			`ls -d /usr/lib/tcl8.6 2>/dev/null` \
-- 			`ls -d /usr/lib 2>/dev/null` \
-- 			`ls -d /usr/lib64 2>/dev/null` \
--Index: a/unix/tcl.m4
--===================================================================
----- a/unix/tcl.m4.orig
--+++ b/unix/tcl.m4
--@@ -93,6 +93,7 @@ AC_DEFUN([SC_PATH_TCLCONFIG], [
-- 			`ls -d /usr/local/lib 2>/dev/null` \
-- 			`ls -d /usr/contrib/lib 2>/dev/null` \
-- 			`ls -d /usr/pkg/lib 2>/dev/null` \
--+			`ls -d /usr/share/tcltk/tcl8.6 2>/dev/null` \
-- 			`ls -d /usr/lib/tcl8.6 2>/dev/null` \
-- 			`ls -d /usr/lib 2>/dev/null` \
-- 			`ls -d /usr/lib64 2>/dev/null` \
--@@ -226,6 +227,7 @@ AC_DEFUN([SC_PATH_TKCONFIG], [
-- 			`ls -d /usr/local/lib 2>/dev/null` \
-- 			`ls -d /usr/contrib/lib 2>/dev/null` \
-- 			`ls -d /usr/pkg/lib 2>/dev/null` \
--+			`ls -d /usr/share/tcltk/tcl8.6 2>/dev/null` \
-- 			`ls -d /usr/lib/tk8.6 2>/dev/null` \
-- 			`ls -d /usr/lib 2>/dev/null` \
-- 			`ls -d /usr/lib64 2>/dev/null` \
-diff --git a/meta-oe/recipes-devtools/tcltk/tk/fix-xft.diff b/meta-oe/recipes-devtools/tcltk/tk/fix-xft.diff
-deleted file mode 100644
-index c1e2f7344e..0000000000
---- a/meta-oe/recipes-devtools/tcltk/tk/fix-xft.diff
-+++ /dev/null
-@@ -1,18 +0,0 @@
--Upstream-Status: Pending
--
----- a/unix/configure.in	2010-05-19 13:29:03.000000000 +0200
--+++ b/unix/configure.in	2010-05-19 13:42:05.000000000 +0200
--@@ -526,13 +526,9 @@
-- 	found_xft="yes"
-- 	dnl make sure package configurator (xft-config or pkg-config
-- 	dnl says that xft is present.
---	XFT_CFLAGS=`xft-config --cflags 2>/dev/null` || found_xft="no"
---	XFT_LIBS=`xft-config --libs 2>/dev/null` || found_xft="no"
---	if test "$found_xft" = "no" ; then
-- 	    found_xft=yes
-- 	    XFT_CFLAGS=`pkg-config --cflags xft fontconfig 2>/dev/null` || found_xft="no"
-- 	    XFT_LIBS=`pkg-config --libs xft fontconfig 2>/dev/null` || found_xft="no"
+-diff --git a/m4/ax_python_devel.m4 b/m4/ax_python_devel.m4
+-index e0804c5..cfc0b24 100644
+---- a/m4/ax_python_devel.m4
+-+++ b/m4/ax_python_devel.m4
+-@@ -138,21 +138,6 @@ variable to configure. See ``configure --help'' for reference.
+- 		fi
+- 	fi
+- 
+--	#
+--	# Check if you have distutils, else fail
+--	#
+--	AC_MSG_CHECKING([for the distutils Python package])
+--	ac_distutils_result=`$PYTHON -c "import distutils" 2>&1`
+--	if test -z "$ac_distutils_result"; then
+--		AC_MSG_RESULT([yes])
+--	else
+--		AC_MSG_RESULT([no])
+--		AC_MSG_ERROR([cannot import Python module "distutils".
+--Please check your Python installation. The error was:
+--$ac_distutils_result])
+--		PYTHON_VERSION=""
 --	fi
-- 	AC_MSG_RESULT([$found_xft])
-- 	dnl make sure that compiling against Xft header file doesn't bomb
-- 	if test "$found_xft" = "yes" ; then
-diff --git a/meta-oe/recipes-devtools/tcltk/tk/tkprivate.diff b/meta-oe/recipes-devtools/tcltk/tk/tkprivate.diff
-deleted file mode 100644
-index 8cdcf20207..0000000000
---- a/meta-oe/recipes-devtools/tcltk/tk/tkprivate.diff
-+++ /dev/null
-@@ -1,43 +0,0 @@
--Patch by Chris Waters sets path which are normally point to a directory
--with Tk sources to a subdirectory of /usr/include/tcl8.4 (debian/rules
--puts private Tk headers there).
--
--Upstream-Status: Pending
--
----- tk8.5-8.5.8.orig/unix/tkConfig.sh.in
--+++ tk8.5-8.5.8/unix/tkConfig.sh.in
--@@ -55,7 +55,7 @@
-- 
-- # String to pass to linker to pick up the Tk library from its
-- # build directory.
---TK_BUILD_LIB_SPEC='@TK_BUILD_LIB_SPEC@'
--+TK_BUILD_LIB_SPEC='@TK_LIB_SPEC@'
-- 
-- # String to pass to linker to pick up the Tk library from its
-- # installed directory.
--@@ -71,7 +71,7 @@
-- # different place than the directory containing the source files, this
-- # points to the location of the sources, not the location where Tk was
-- # compiled.
---TK_SRC_DIR='@TK_SRC_DIR@'
--+TK_SRC_DIR='@includedir@/tk-private'
-- 
-- # Needed if you want to make a 'fat' shared library library
-- # containing tk objects or link a different wish.
--@@ -86,14 +86,14 @@
-- 
-- # String to pass to linker to pick up the Tk stub library from its
-- # build directory.
---TK_BUILD_STUB_LIB_SPEC='@TK_BUILD_STUB_LIB_SPEC@'
--+TK_BUILD_STUB_LIB_SPEC='@TK_STUB_LIB_SPEC@'
-- 
-- # String to pass to linker to pick up the Tk stub library from its
-- # installed directory.
-- TK_STUB_LIB_SPEC='@TK_STUB_LIB_SPEC@'
-- 
-- # Path to the Tk stub library in the build directory.
---TK_BUILD_STUB_LIB_PATH='@TK_BUILD_STUB_LIB_PATH@'
--+TK_BUILD_STUB_LIB_PATH='@TK_STUB_LIB_PATH@'
-- 
-- # Path to the Tk stub library in the install directory.
-- TK_STUB_LIB_PATH='@TK_STUB_LIB_PATH@'
-diff --git a/meta-oe/recipes-devtools/tcltk/tk_8.6.15.bb b/meta-oe/recipes-devtools/tcltk/tk_9.0.0.bb
-similarity index 89%
-rename from meta-oe/recipes-devtools/tcltk/tk_8.6.15.bb
-rename to meta-oe/recipes-devtools/tcltk/tk_9.0.0.bb
-index 1438a05625..25c0c38577 100644
---- a/meta-oe/recipes-devtools/tcltk/tk_8.6.15.bb
-+++ b/meta-oe/recipes-devtools/tcltk/tk_9.0.0.bb
-@@ -15,16 +15,12 @@ LIC_FILES_CHKSUM = "file://license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-     file://xlib/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
- "
+--
+- 	#
+- 	# Check for Python include path
+- 	#
+diff --git a/meta-networking/recipes-support/openipmi/files/fix-symlink-install-error-in-cmdlang.patch b/meta-networking/recipes-support/openipmi/files/fix-symlink-install-error-in-cmdlang.patch
+index 243488424..262c1f87a 100644
+--- a/meta-networking/recipes-support/openipmi/files/fix-symlink-install-error-in-cmdlang.patch
++++ b/meta-networking/recipes-support/openipmi/files/fix-symlink-install-error-in-cmdlang.patch
+@@ -1,4 +1,4 @@
+-From 7854c60c92243adb14ea89e16fc226d2e47dd4f9 Mon Sep 17 00:00:00 2001
++From 4d6904ec43981216e995fb28c4dfa73d3a130fd1 Mon Sep 17 00:00:00 2001
+ From: Aws Ismail <aws.ismail@windriver.com>
+ Date: Thu, 7 Jun 2012 16:00:13 -0400
+ Subject: [PATCH] Fix symlink install error in cmdlang
+@@ -14,14 +14,17 @@ Signed-off-by: Aws Ismail <aws.ismail@windriver.com>
+  1 file changed, 1 insertion(+)
  
--DEPENDS = "tcl virtual/libx11 libxt"
-+DEPENDS = "tcl virtual/libx11 libxt zip-native"
- 
- SRC_URI = "\
-     ${SOURCEFORGE_MIRROR}/tcl/${BPN}${PV}-src.tar.gz \
--    file://confsearch.diff \
--    file://tkprivate.diff \
--    file://fix-xft.diff \
- "
--
--SRC_URI[sha256sum] = "550969f35379f952b3020f3ab7b9dd5bfd11c1ef7c9b7c6a75f5c49aca793fec"
-+SRC_URI[sha256sum] = "f166e3c20773c82243f753cef4b091d05267cb7f87da64be88cb2ca5a2ba027e"
- 
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/tcl/files/Tcl/"
- UPSTREAM_CHECK_REGEX = "Tcl/(?P<pver>\d+(\.\d+)+)/"
-@@ -44,7 +40,6 @@ AUTOTOOLS_SCRIPT_PATH = "${S}/unix"
- REQUIRED_DISTRO_FEATURES = "x11"
- 
- EXTRA_OECONF = "\
--    --enable-threads \
-     --with-x \
-     --with-tcl=${STAGING_BINDIR}/crossscripts \
-     --libdir=${libdir} \
-@@ -53,8 +48,6 @@ EXTRA_OECONF = "\
- export TK_LIBRARY='${libdir}/tk${VER}'
- 
- do_install:append() {
--    ln -sf libtk${VER}.so ${D}${libdir}/libtk${VER}.so.0
--    oe_libinstall -so libtk${VER} ${D}${libdir}
-     ln -sf wish${VER} ${D}${bindir}/wish
- 
-     sed -i "s;-L${B};-L${STAGING_LIBDIR};g" tkConfig.sh
-@@ -69,6 +62,9 @@ PACKAGECONFIG[xss] = "--enable-xss,--disable-xss,libxscrnsaver libxext"
- 
- PACKAGES =+ "${PN}-lib"
- 
-+SOLIBS = ".so"
-+FILES_SOLIBSDEV = ""
+ diff --git a/cmdlang/Makefile.am b/cmdlang/Makefile.am
+-index 0ca3827..d9a941f 100644
++index 7235446..e99c67b 100644
+ --- a/cmdlang/Makefile.am
+ +++ b/cmdlang/Makefile.am
+-@@ -35,6 +35,7 @@ openipmish_LDADD =  libOpenIPMIcmdlang.la \
++@@ -41,6 +41,7 @@ openipmish_CFLAGS = -Wall -Wsign-compare -I$(top_builddir)/include \
+  # compatability.
+- install-data-local:
++ install-exec-hook:
+  	rm -f $(DESTDIR)$(bindir)/ipmish
+ +	mkdir -p $(DESTDIR)$(bindir)/
+  	$(LN_S) openipmish $(DESTDIR)$(bindir)/ipmish
+  
+  uninstall-local:
++-- 
++2.25.1
 +
- FILES:${PN}-lib = "${libdir}/libtk${VER}.so*"
- FILES:${PN} += "${libdir}/tk*"
+diff --git a/meta-networking/recipes-support/openipmi/files/openipmi-remove-host-path-from-la_LDFLAGS.patch b/meta-networking/recipes-support/openipmi/files/openipmi-remove-host-path-from-la_LDFLAGS.patch
+deleted file mode 100644
+index 1aea32eae..000000000
+--- a/meta-networking/recipes-support/openipmi/files/openipmi-remove-host-path-from-la_LDFLAGS.patch
++++ /dev/null
+@@ -1,49 +0,0 @@
+-From 5a4abf223d79d4e1a58bbad1e4f2f406c7cab748 Mon Sep 17 00:00:00 2001
+-From: Jackie Huang <jackie.huang@windriver.com>
+-Date: Mon, 29 Dec 2014 18:16:04 +0800
+-Subject: [PATCH] remove host path from la_LDFLAGS
+-
+-Upstream-Status: Inappropriate [ cross compile specific ]
+-
+-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+----
+- cmdlang/Makefile.am | 2 +-
+- unix/Makefile.am    | 4 ++--
+- 2 files changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/cmdlang/Makefile.am b/cmdlang/Makefile.am
+-index 9cf180d..da46ceb 100644
+---- a/cmdlang/Makefile.am
+-+++ b/cmdlang/Makefile.am
+-@@ -18,7 +18,7 @@ libOpenIPMIcmdlang_la_LIBADD = -lm \
+- 	$(top_builddir)/utils/libOpenIPMIutils.la \
+- 	$(top_builddir)/lib/libOpenIPMI.la
+- libOpenIPMIcmdlang_la_LDFLAGS = -rdynamic -version-info $(LD_VERSION) \
+--	-L$(libdir) -no-undefined
+-+	-no-undefined
+- 
+- bin_PROGRAMS = openipmish
+- 
+-diff --git a/unix/Makefile.am b/unix/Makefile.am
+-index baf0815..80c3d5d 100644
+---- a/unix/Makefile.am
+-+++ b/unix/Makefile.am
+-@@ -11,13 +11,13 @@ libOpenIPMIpthread_la_SOURCES = posix_thread_os_hnd.c selector.c
+- libOpenIPMIpthread_la_LIBADD = -lpthread $(GDBM_LIB) \
+- 	$(top_builddir)/utils/libOpenIPMIutils.la $(RT_LIB)
+- libOpenIPMIpthread_la_LDFLAGS = -rdynamic -version-info $(LD_VERSION) \
+--	-L$(libdir) -no-undefined
+-+	-no-undefined
+- 
+- libOpenIPMIposix_la_SOURCES = posix_os_hnd.c selector.c
+- libOpenIPMIposix_la_LIBADD = $(top_builddir)/utils/libOpenIPMIutils.la \
+- 	$(GDBM_LIB) $(RT_LIB)
+- libOpenIPMIposix_la_LDFLAGS = -rdynamic -version-info $(LD_VERSION) \
+--	-L$(libdir) -no-undefined
+-+	-no-undefined
+- 
+- noinst_HEADERS = heap.h
+- 
+--- 
+-2.17.1
+-
+diff --git a/meta-networking/recipes-support/openipmi/openipmi_2.0.32.bb b/meta-networking/recipes-support/openipmi/openipmi_2.0.36.bb
+similarity index 87%
+rename from meta-networking/recipes-support/openipmi/openipmi_2.0.32.bb
+rename to meta-networking/recipes-support/openipmi/openipmi_2.0.36.bb
+index 8625afaa7..35fea7879 100644
+--- a/meta-networking/recipes-support/openipmi/openipmi_2.0.32.bb
++++ b/meta-networking/recipes-support/openipmi/openipmi_2.0.36.bb
+@@ -26,26 +26,23 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
+ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
+            file://fix-symlink-install-error-in-cmdlang.patch \
+            file://openipmi-no-openipmigui-man.patch \
+-           file://openipmi-remove-host-path-from-la_LDFLAGS.patch \
+            file://ipmi-init-fix-the-arguments.patch \
+            file://include_sys_types.patch \
+            file://openipmi-helper \
+            file://ipmi.service \
+-           file://0001-m4-ax_python_devel.m4-do-not-check-for-distutils.patch \
+-           "
++"
  
+ S = "${WORKDIR}/OpenIPMI-${PV}"
+ 
+-SRC_URI[md5sum] = "532404c9df7d0e8bde975b95b9e6775b"
+-SRC_URI[sha256sum] = "f6d0fd4c0a74b05f80907229d0b270f54ca23294bcc11979f8b8d12766786945"
++SRC_URI[sha256sum] = "a0403148fa5f7bed930c958a4d1c558047e273763a408b3a0368edc137cc55d9"
+ 
+-inherit autotools-brokensep pkgconfig python3native perlnative update-rc.d systemd cpan-base python3targetconfig
++inherit autotools-brokensep pkgconfig perlnative update-rc.d systemd cpan-base python3targetconfig
+ 
+ EXTRA_OECONF = "--disable-static \
+                 --with-perl='${STAGING_BINDIR_NATIVE}/perl-native/perl' \
+-                --with-python='${STAGING_BINDIR_NATIVE}/python3-native/python3' \
+-                --with-pythoninstall='${PYTHON_SITEPACKAGES_DIR}' \
+-                --with-glibver=2.0"
++                --with-glibver=2.0 \
++                --with-pythoncflags='-I${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI}' \
++		"
+ 
+ PACKAGECONFIG ??= "gdbm"
+ PACKAGECONFIG[gdbm] = "ac_cv_header_gdbm_h=yes,ac_cv_header_gdbm_h=no,gdbm,"
+-- 
+2.25.1
+
 
