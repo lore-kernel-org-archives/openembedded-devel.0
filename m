@@ -1,252 +1,339 @@
-Return-Path: <Jiaying.Song.CN@windriver.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DB6B7D111AE
-	for <webhook@archiver.kernel.org>; Mon,  4 Nov 2024 05:57:40 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.51419.1730699856749641920
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 63BA2D132AD
+	for <webhook@archiver.kernel.org>; Mon,  4 Nov 2024 11:03:02 +0000 (UTC)
+Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com [209.85.208.181])
+ by mx.groups.io with SMTP id smtpd.web11.55099.1730718174766321128
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 03 Nov 2024 21:57:36 -0800
+ Mon, 04 Nov 2024 03:02:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=103804c5e6=jiaying.song.cn@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4A45OXnx027614
-	for <openembedded-devel@lists.openembedded.org>; Sun, 3 Nov 2024 21:57:36 -0800
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 42nfc319qg-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Sun, 03 Nov 2024 21:57:36 -0800 (PST)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Sun, 3 Nov 2024 21:57:35 -0800
-Received: from pek-lpg-core1.wrs.com (128.224.156.132) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.39 via Frontend Transport; Sun, 3 Nov 2024 21:57:34 -0800
-From: <jiaying.song.cn@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <Changqing.Li@windriver.com>
-Subject: [meta-networking][Kirkstone][PATCH v2] openipmi: upgrade 2.0.32->2.0.36
-Date: Mon, 4 Nov 2024 14:00:18 +0800
-Message-ID: <20241104060018.3059624-1-jiaying.song.cn@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NeWeo+BQ;
+ spf=pass (domain: gmail.com, ip: 209.85.208.181, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lj1-f181.google.com with SMTP id 38308e7fff4ca-2fb5be4381dso35568961fa.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Nov 2024 03:02:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1730718173; x=1731322973; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=TXwwtWp0R+e0f0njxIVv67PcGDUdefQmjOXwk4fgqwk=;
+        b=NeWeo+BQ5FRxaYGuSAn46Sd7xBIBXJ19qXgxUp1b8nak6dMGNlUibovkGqn+i5UBU8
+         uEa75XMG2FcUGX2+n1ifoZUbP5ZhPiLBwH1Q0S0fp9F6qpFV6CIQ9Ix8jI3YfZs0UO8n
+         Sz2Ao5kZTF+ybOUTo+B9RbELFVuJSdJQDgP6zG/LcaKPE1VXdMT3k+gosrbwNgQ6E5UP
+         zQk+HTmRB/M2XkdNDYVRNeFPQv9aWEh2rO6E3gZnINr7wedt7Yj85F9ymorVM+XJ+qAj
+         apaSG36EtA2BkDRX7FFjbxeHLD9cVm3w/+V+/K+yb+u/Rj1SSC3fdZ2bG5+nvm5gaJ3b
+         Msnw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1730718173; x=1731322973;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=TXwwtWp0R+e0f0njxIVv67PcGDUdefQmjOXwk4fgqwk=;
+        b=bcoz9/KahHDk1uu5Eqw1ofJb06hzCEGuN0GPbmGb45A8ROw3PihSnCyDBk1YvgTcRf
+         IM61Oxze3d8y4MqlXfUjOqTa5LX0RxIBdOxFXKwlKVf2EpDzFheCeA+zkJa1FLZiJIHy
+         e0wiF5+oNTUgyJNly4pcA59xad8Sa1OO6wCeUe+vlQdgWXGpqDFSJnR3C2h3e1m/v92O
+         knqFl1wJk1mDIKhZPtBzqAXheFiHKzcMNvcSTnEe61uXnyEJK1YLlHtpMW+z8mb7cO7x
+         T6VOBDfFUt63GJ+0oMw+btBolJr25QdlhWemT3FtDEcaD6ARJFguMxUBL1bIku6G30CG
+         WlXA==
+X-Forwarded-Encrypted: i=1; AJvYcCVL+D1lKnxtRuWhjKq/Wic9S51WWTI7pMF+Yz35S9vg5LuRAYBj3Ws8eG3/9POmJIMGiCNqovyipJD3z/p4vn7jzEs=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YxPAQeydLYmSCBw9QSRNPLLrb35Ql1f1Y7BhTY9/FiwtnkHkaub
+	rkyqFeUorHMH7wqeVRFtuNwD4znK/5MoZio7DVnDMMtJ+Wds6QpJkFSkXIe9dmtbM9IRVpNYqmo
+	yeu/ZHikox53csBTCxG/PLROerNU=
+X-Google-Smtp-Source: AGHT+IEWGCWOOZwYNX93XPgRnJvAoX66ZQl7hJt5vj/uwYi2R6tCYt8684pTUoWWCzkOAokfJFDR2wk2gPHPOcLRRZs=
+X-Received: by 2002:a05:651c:505:b0:2f5:abe:b6bd with SMTP id
+ 38308e7fff4ca-2fcbe099636mr141355221fa.42.1730718172515; Mon, 04 Nov 2024
+ 03:02:52 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=T7feTOKQ c=1 sm=1 tr=0 ts=67286250 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=VlfZXiiP6vEA:10 a=t7CeM3EgAAAA:8 a=FP58Ms26AAAA:8 a=VhezN14C5EISivN7u2sA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: cZbnGAEGEgqk0dH38KDAMGACovb4Qdh2
-X-Proofpoint-ORIG-GUID: cZbnGAEGEgqk0dH38KDAMGACovb4Qdh2
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.62.30
- definitions=2024-11-04_03,2024-11-01_01,2024-09-30_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 bulkscore=0
- phishscore=0 lowpriorityscore=0 adultscore=0 clxscore=1015 suspectscore=0
- spamscore=0 mlxlogscore=999 malwarescore=0 priorityscore=1501 mlxscore=0
- classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
- engine=8.21.0-2409260000 definitions=main-2411040051
+References: <20241017061710.1108077-1-raj.khem@gmail.com> <18026D239C42081A.19860@lists.openembedded.org>
+ <18046FA91741B6C6.30502@lists.openembedded.org>
+In-Reply-To: <18046FA91741B6C6.30502@lists.openembedded.org>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 4 Nov 2024 12:02:39 +0100
+Message-ID: <CA+chaQf8PVtew-TCxXxs4oTEYiy11mCUkM0MDyFq5bhdE0e0Pw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] xmlrpc-c: Fix race condition triggered
+ during symlink creation
+To: martin.jansa@gmail.com
+Cc: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 04 Nov 2024 05:57:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113403
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Nov 2024 11:03:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113404
 
-From: Jiaying Song <jiaying.song.cn@windriver.com>
+For libutil++ it calls "all" and "libxmlrpc_util++.so" only, but for
+libutil it calls "all" and then 13 times libxmlrpc_util.so
+(after-clean-j1.log is the make output with -n and -j1 instead of
+-j70), still trying to figure out why, my autofoo is rusty :).
 
-2c4ab4a6c openipmi: fix do_configure error when using dash
-03dd014eb openipmi: update 2.0.32 -> 2.0.34
-
-Merge the above commits related to the upgrade, and then upgrade the
-version of openipmi from 2.0.34 to 2.0.36.
-
-Full changelog for openipmi::
-https://sourceforge.net/p/openipmi/news/
-
-Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
----
- ..._devel.m4-do-not-check-for-distutils.patch | 41 ----------------
- ...fix-symlink-install-error-in-cmdlang.patch | 11 +++--
- ...pmi-remove-host-path-from-la_LDFLAGS.patch | 49 -------------------
- ...{openipmi_2.0.32.bb => openipmi_2.0.36.bb} | 15 +++---
- 4 files changed, 13 insertions(+), 103 deletions(-)
- delete mode 100644 meta-networking/recipes-support/openipmi/files/0001-m4-ax_python_devel.m4-do-not-check-for-distutils.patch
- delete mode 100644 meta-networking/recipes-support/openipmi/files/openipmi-remove-host-path-from-la_LDFLAGS.patch
- rename meta-networking/recipes-support/openipmi/{openipmi_2.0.32.bb => openipmi_2.0.36.bb} (87%)
-
-diff --git a/meta-networking/recipes-support/openipmi/files/0001-m4-ax_python_devel.m4-do-not-check-for-distutils.patch b/meta-networking/recipes-support/openipmi/files/0001-m4-ax_python_devel.m4-do-not-check-for-distutils.patch
-deleted file mode 100644
-index 00956fb11..000000000
---- a/meta-networking/recipes-support/openipmi/files/0001-m4-ax_python_devel.m4-do-not-check-for-distutils.patch
-+++ /dev/null
-@@ -1,41 +0,0 @@
--From 3a35611687864cf3599712d0d2ff54532b0118ac Mon Sep 17 00:00:00 2001
--From: Alexander Kanavin <alex@linutronix.de>
--Date: Sun, 3 Oct 2021 21:42:32 +0200
--Subject: [PATCH] m4/ax_python_devel.m4: do not check for distutils
--
--With py 3.10 this prints a deprecation warning which is
--taken as an error. Upstream should rework the code to not
--use distuils.
--
--Upstream-Status: Inappropriate [needs a proper fix upstream]
--Signed-off-by: Alexander Kanavin <alex@linutronix.de>
-----
-- m4/ax_python_devel.m4 | 15 ---------------
-- 1 file changed, 15 deletions(-)
--
--diff --git a/m4/ax_python_devel.m4 b/m4/ax_python_devel.m4
--index e0804c5..cfc0b24 100644
----- a/m4/ax_python_devel.m4
--+++ b/m4/ax_python_devel.m4
--@@ -138,21 +138,6 @@ variable to configure. See ``configure --help'' for reference.
-- 		fi
-- 	fi
-- 
---	#
---	# Check if you have distutils, else fail
---	#
---	AC_MSG_CHECKING([for the distutils Python package])
---	ac_distutils_result=`$PYTHON -c "import distutils" 2>&1`
---	if test -z "$ac_distutils_result"; then
---		AC_MSG_RESULT([yes])
---	else
---		AC_MSG_RESULT([no])
---		AC_MSG_ERROR([cannot import Python module "distutils".
---Please check your Python installation. The error was:
---$ac_distutils_result])
---		PYTHON_VERSION=""
---	fi
+martin@jama /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/g=
+it/stable
+$ grep -A 1 lib/libutil++/Makefile after-clean-j1.log
+make -C libutil++/ -f
+/OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/li=
+b/libutil++/Makefile
+\
+    all
 --
-- 	#
-- 	# Check for Python include path
-- 	#
-diff --git a/meta-networking/recipes-support/openipmi/files/fix-symlink-install-error-in-cmdlang.patch b/meta-networking/recipes-support/openipmi/files/fix-symlink-install-error-in-cmdlang.patch
-index 243488424..262c1f87a 100644
---- a/meta-networking/recipes-support/openipmi/files/fix-symlink-install-error-in-cmdlang.patch
-+++ b/meta-networking/recipes-support/openipmi/files/fix-symlink-install-error-in-cmdlang.patch
-@@ -1,4 +1,4 @@
--From 7854c60c92243adb14ea89e16fc226d2e47dd4f9 Mon Sep 17 00:00:00 2001
-+From 4d6904ec43981216e995fb28c4dfa73d3a130fd1 Mon Sep 17 00:00:00 2001
- From: Aws Ismail <aws.ismail@windriver.com>
- Date: Thu, 7 Jun 2012 16:00:13 -0400
- Subject: [PATCH] Fix symlink install error in cmdlang
-@@ -14,14 +14,17 @@ Signed-off-by: Aws Ismail <aws.ismail@windriver.com>
-  1 file changed, 1 insertion(+)
- 
- diff --git a/cmdlang/Makefile.am b/cmdlang/Makefile.am
--index 0ca3827..d9a941f 100644
-+index 7235446..e99c67b 100644
- --- a/cmdlang/Makefile.am
- +++ b/cmdlang/Makefile.am
--@@ -35,6 +35,7 @@ openipmish_LDADD =  libOpenIPMIcmdlang.la \
-+@@ -41,6 +41,7 @@ openipmish_CFLAGS = -Wall -Wsign-compare -I$(top_builddir)/include \
-  # compatability.
-- install-data-local:
-+ install-exec-hook:
-  	rm -f $(DESTDIR)$(bindir)/ipmish
- +	mkdir -p $(DESTDIR)$(bindir)/
-  	$(LN_S) openipmish $(DESTDIR)$(bindir)/ipmish
-  
-  uninstall-local:
-+-- 
-+2.25.1
-+
-diff --git a/meta-networking/recipes-support/openipmi/files/openipmi-remove-host-path-from-la_LDFLAGS.patch b/meta-networking/recipes-support/openipmi/files/openipmi-remove-host-path-from-la_LDFLAGS.patch
-deleted file mode 100644
-index 1aea32eae..000000000
---- a/meta-networking/recipes-support/openipmi/files/openipmi-remove-host-path-from-la_LDFLAGS.patch
-+++ /dev/null
-@@ -1,49 +0,0 @@
--From 5a4abf223d79d4e1a58bbad1e4f2f406c7cab748 Mon Sep 17 00:00:00 2001
--From: Jackie Huang <jackie.huang@windriver.com>
--Date: Mon, 29 Dec 2014 18:16:04 +0800
--Subject: [PATCH] remove host path from la_LDFLAGS
--
--Upstream-Status: Inappropriate [ cross compile specific ]
--
--Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-----
-- cmdlang/Makefile.am | 2 +-
-- unix/Makefile.am    | 4 ++--
-- 2 files changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/cmdlang/Makefile.am b/cmdlang/Makefile.am
--index 9cf180d..da46ceb 100644
----- a/cmdlang/Makefile.am
--+++ b/cmdlang/Makefile.am
--@@ -18,7 +18,7 @@ libOpenIPMIcmdlang_la_LIBADD = -lm \
-- 	$(top_builddir)/utils/libOpenIPMIutils.la \
-- 	$(top_builddir)/lib/libOpenIPMI.la
-- libOpenIPMIcmdlang_la_LDFLAGS = -rdynamic -version-info $(LD_VERSION) \
---	-L$(libdir) -no-undefined
--+	-no-undefined
-- 
-- bin_PROGRAMS = openipmish
-- 
--diff --git a/unix/Makefile.am b/unix/Makefile.am
--index baf0815..80c3d5d 100644
----- a/unix/Makefile.am
--+++ b/unix/Makefile.am
--@@ -11,13 +11,13 @@ libOpenIPMIpthread_la_SOURCES = posix_thread_os_hnd.c selector.c
-- libOpenIPMIpthread_la_LIBADD = -lpthread $(GDBM_LIB) \
-- 	$(top_builddir)/utils/libOpenIPMIutils.la $(RT_LIB)
-- libOpenIPMIpthread_la_LDFLAGS = -rdynamic -version-info $(LD_VERSION) \
---	-L$(libdir) -no-undefined
--+	-no-undefined
-- 
-- libOpenIPMIposix_la_SOURCES = posix_os_hnd.c selector.c
-- libOpenIPMIposix_la_LIBADD = $(top_builddir)/utils/libOpenIPMIutils.la \
-- 	$(GDBM_LIB) $(RT_LIB)
-- libOpenIPMIposix_la_LDFLAGS = -rdynamic -version-info $(LD_VERSION) \
---	-L$(libdir) -no-undefined
--+	-no-undefined
-- 
-- noinst_HEADERS = heap.h
-- 
---- 
--2.17.1
--
-diff --git a/meta-networking/recipes-support/openipmi/openipmi_2.0.32.bb b/meta-networking/recipes-support/openipmi/openipmi_2.0.36.bb
-similarity index 87%
-rename from meta-networking/recipes-support/openipmi/openipmi_2.0.32.bb
-rename to meta-networking/recipes-support/openipmi/openipmi_2.0.36.bb
-index 8625afaa7..35fea7879 100644
---- a/meta-networking/recipes-support/openipmi/openipmi_2.0.32.bb
-+++ b/meta-networking/recipes-support/openipmi/openipmi_2.0.36.bb
-@@ -26,26 +26,23 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
- SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
-            file://fix-symlink-install-error-in-cmdlang.patch \
-            file://openipmi-no-openipmigui-man.patch \
--           file://openipmi-remove-host-path-from-la_LDFLAGS.patch \
-            file://ipmi-init-fix-the-arguments.patch \
-            file://include_sys_types.patch \
-            file://openipmi-helper \
-            file://ipmi.service \
--           file://0001-m4-ax_python_devel.m4-do-not-check-for-distutils.patch \
--           "
-+"
- 
- S = "${WORKDIR}/OpenIPMI-${PV}"
- 
--SRC_URI[md5sum] = "532404c9df7d0e8bde975b95b9e6775b"
--SRC_URI[sha256sum] = "f6d0fd4c0a74b05f80907229d0b270f54ca23294bcc11979f8b8d12766786945"
-+SRC_URI[sha256sum] = "a0403148fa5f7bed930c958a4d1c558047e273763a408b3a0368edc137cc55d9"
- 
--inherit autotools-brokensep pkgconfig python3native perlnative update-rc.d systemd cpan-base python3targetconfig
-+inherit autotools-brokensep pkgconfig perlnative update-rc.d systemd cpan-base python3targetconfig
- 
- EXTRA_OECONF = "--disable-static \
-                 --with-perl='${STAGING_BINDIR_NATIVE}/perl-native/perl' \
--                --with-python='${STAGING_BINDIR_NATIVE}/python3-native/python3' \
--                --with-pythoninstall='${PYTHON_SITEPACKAGES_DIR}' \
--                --with-glibver=2.0"
-+                --with-glibver=2.0 \
-+                --with-pythoncflags='-I${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI}' \
-+		"
- 
- PACKAGECONFIG ??= "gdbm"
- PACKAGECONFIG[gdbm] = "ac_cv_header_gdbm_h=yes,ac_cv_header_gdbm_h=no,gdbm,"
--- 
-2.25.1
+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/s=
+table/lib/libutil++/
+-f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable=
+/lib/libutil++/Makefile
+\
+    libxmlrpc_util++.so
+martin@jama /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/g=
+it/stable
+$ grep -A 1 lib/libutil/Makefile after-clean-j1.log
+make -C libutil/ -f
+/OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable/li=
+b/libutil/Makefile
+\
+    all
+--
+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/s=
+table/lib/libutil/
+-f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable=
+/lib/libutil/Makefile
+\
+    libxmlrpc_util.so
+--
+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/s=
+table/lib/libutil/
+-f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable=
+/lib/libutil/Makefile
+\
+    libxmlrpc_util.so
+--
+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/s=
+table/lib/libutil/
+-f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable=
+/lib/libutil/Makefile
+\
+    libxmlrpc_util.so
+--
+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/s=
+table/lib/libutil/
+-f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable=
+/lib/libutil/Makefile
+\
+    libxmlrpc_util.so
+--
+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/s=
+table/lib/libutil/
+-f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable=
+/lib/libutil/Makefile
+\
+    libxmlrpc_util.so
+--
+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/s=
+table/lib/libutil/
+-f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable=
+/lib/libutil/Makefile
+\
+    libxmlrpc_util.so
+--
+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/s=
+table/lib/libutil/
+-f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable=
+/lib/libutil/Makefile
+\
+    libxmlrpc_util.so
+--
+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/s=
+table/lib/libutil/
+-f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable=
+/lib/libutil/Makefile
+\
+    libxmlrpc_util.so
+--
+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/s=
+table/lib/libutil/
+-f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable=
+/lib/libutil/Makefile
+\
+    libxmlrpc_util.so
+--
+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/s=
+table/lib/libutil/
+-f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable=
+/lib/libutil/Makefile
+\
+    libxmlrpc_util.so
+--
+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/s=
+table/lib/libutil/
+-f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable=
+/lib/libutil/Makefile
+\
+    libxmlrpc_util.so
+--
+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/s=
+table/lib/libutil/
+-f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable=
+/lib/libutil/Makefile
+\
+    libxmlrpc_util.so
+--
+make -C /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/s=
+table/lib/libutil/
+-f /OE/build/oe-core/tmp/work/core2-64-oe-linux/xmlrpc-c/1.60.03/git/stable=
+/lib/libutil/Makefile
+\
+    libxmlrpc_util.so
 
+On Sun, Nov 3, 2024 at 11:48=E2=80=AFAM Martin Jansa via
+lists.openembedded.org <martin.jansa=3Dgmail.com@lists.openembedded.org>
+wrote:
+>
+> Looks like I spoke too soon, got the same build failure 3 more times
+> in last 2 days.
+>
+> rm -f libxmlrpc_util.so.4 && ln -s libxmlrpc_util.so.4.60 libxmlrpc_util.=
+so.4
+> rm -f xmlrpc_util++.pc
+> rm -f libxmlrpc_util.so && ln -s libxmlrpc_util.so.4 libxmlrpc_util.so
+> Echoes to 'xmlrpc_util++.pc' suppressed here ...
+> make[3]: Entering directory 'xmlrpc-c/1.60.03/git/stable/lib/libutil'
+> rm -f libxmlrpc_util.so && ln -s libxmlrpc_util.so.4 libxmlrpc_util.so
+> make[3]: Leaving directory 'xmlrpc-c/1.60.03/git/stable/lib/libutil'
+> ln: failed to create symbolic link 'libxmlrpc_util.so': File exists
+> make[3]: *** [xmlrpc-c/1.60.03/git/stable/unix-common.mk:65:
+> libxmlrpc_util.so] Error 1
+>
+> Looks like it calls:
+>
+> make -C xmlrpc-c/1.60.03/git/stable/lib/libutil/ -f
+> xmlrpc-c/1.60.03/git/stable/lib/libutil/Makefile \
+>     libxmlrpc_util.so
+>
+> twice and the added && isn't enough to avoid the race between the 2.
+>
+> On Sun, Oct 27, 2024 at 10:40=E2=80=AFPM Martin Jansa via
+> lists.openembedded.org <martin.jansa=3Dgmail.com@lists.openembedded.org>
+> wrote:
+> >
+> > Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+> >
+> > Thanks Khem!
+> >
+> > On Thu, Oct 17, 2024 at 8:17=E2=80=AFAM Khem Raj <raj.khem@gmail.com> w=
+rote:
+> > >
+> > > This should fix race condition sometime seen in highly parallell buil=
+ds
+> > >
+> > >    | rm -f libxmlrpc_util.so.4
+> > >    | rm -f libxmlrpc_util.so.4
+> > >    | ln -s libxmlrpc_util.so.4.60 libxmlrpc_util.so.4
+> > >    | ln -s libxmlrpc_util.so.4.60 libxmlrpc_util.so.4
+> > >    | rm -f libxmlrpc_util.so
+> > >    | ln: failed to create symbolic link 'libxmlrpc_util.so.4': File e=
+xists
+> > >    | make[2]: *** [/home/kraj01/yoe/build/tmp/work/core2-64-yoe-linux=
+/xmlrpc-c/1.60.03/git/stable/unix-common.mk:72: libxmlrpc_util.so.4] Error =
+1
+> > >
+> > > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > > Cc: Martin Jansa <Martin.Jansa@gmail.com>
+> > > ---
+> > >  ...nsuring-Sequential-Execution-of-rm-a.patch | 46 +++++++++++++++++=
+++
+> > >  .../xmlrpc-c/xmlrpc-c_1.60.03.bb              |  1 +
+> > >  2 files changed, 47 insertions(+)
+> > >  create mode 100644 meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-u=
+nix-common.mk-Ensuring-Sequential-Execution-of-rm-a.patch
+> > >
+> > > diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-unix-com=
+mon.mk-Ensuring-Sequential-Execution-of-rm-a.patch b/meta-oe/recipes-devtoo=
+ls/xmlrpc-c/xmlrpc-c/0001-unix-common.mk-Ensuring-Sequential-Execution-of-r=
+m-a.patch
+> > > new file mode 100644
+> > > index 0000000000..02b5244f3a
+> > > --- /dev/null
+> > > +++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-unix-common.mk-=
+Ensuring-Sequential-Execution-of-rm-a.patch
+> > > @@ -0,0 +1,46 @@
+> > > +From c9bd05e8f0ad805b81625cfa717d06071cfd9b48 Mon Sep 17 00:00:00 20=
+01
+> > > +From: Khem Raj <raj.khem@gmail.com>
+> > > +Date: Wed, 16 Oct 2024 22:52:38 -0700
+> > > +Subject: [PATCH] unix-common.mk: Ensuring Sequential Execution of rm=
+ and ln commands
+> > > +
+> > > +With high parallel execution, it results in race condition where
+> > > +its trying to create symlink while the original symlink while rm is
+> > > +not done deleting the existing file yet.
+> > > +
+> > > +force sequential execution by adding dependencies between the steps
+> > > +or combining them into a single shell command
+> > > +
+> > > +Here, && ensures that the ln -s command only runs after rm -f target
+> > > +successfully completes.
+> > > +
+> > > +Similar error reported here [1]
+> > > +
+> > > +[1] https://bugs.gentoo.org/932835
+> > > +
+> > > +Upstream-Status: Pending
+> > > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > > +---
+> > > + unix-common.mk | 6 ++----
+> > > + 1 file changed, 2 insertions(+), 4 deletions(-)
+> > > +
+> > > +diff --git a/unix-common.mk b/unix-common.mk
+> > > +index 6954faf5..983c48cd 100644
+> > > +--- a/unix-common.mk
+> > > ++++ b/unix-common.mk
+> > > +@@ -62,14 +62,12 @@ SHLIB_CMD =3D $(CCLD) $(LADD) $(LDFLAGS_SHLIB) -=
+o $@ $^
+> > > + SHLIB_LE_TARGETS =3D $(call shliblefn, $(SHARED_LIBS_TO_BUILD))
+> > > +
+> > > + $(SHLIB_LE_TARGETS):%:%.$(MAJ)
+> > > +-      rm -f $@
+> > > +-      $(LN_S) $< $@
+> > > ++      rm -f $@ && $(LN_S) $< $@
+> > > +
+> > > + SONAME_TARGETS =3D $(SHLIB_LE_TARGETS:%=3D%.$(MAJ))
+> > > +
+> > > + $(SONAME_TARGETS):%:%.$(MIN)
+> > > +-      rm -f $@
+> > > +-      $(LN_S) $< $@
+> > > ++      rm -f $@ && $(LN_S) $< $@
+> > > +
+> > > + .PHONY: $(SHLIB_INSTALL_TARGETS)
+> > > + .PHONY: install-shared-libraries
+> > > diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.60.03.bb b/=
+meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.60.03.bb
+> > > index a34256c275..f5ee920cad 100644
+> > > --- a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.60.03.bb
+> > > +++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.60.03.bb
+> > > @@ -7,6 +7,7 @@ LIC_FILES_CHKSUM =3D "file://doc/COPYING;md5=3Daefbf8=
+1ba0750f02176b6f86752ea951"
+> > >
+> > >  SRC_URI =3D "git://github.com/mirror/xmlrpc-c.git;branch=3Dmaster;pr=
+otocol=3Dhttps \
+> > >             file://0001-test-cpp-server_abyss-Fix-build-with-clang-li=
+bc.patch \
+> > > +           file://0001-unix-common.mk-Ensuring-Sequential-Execution-=
+of-rm-a.patch \
+> > >             "
+> > >  # one more commit after Release 1.60.03 in the Stable series
+> > >  SRCREV =3D "a823b0bb5cf0a4dbd34f929cbfdfb0439c5d9b0e"
+> >
+> >
+> >
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#113395): https://lists.openembedded.org/g/openembedde=
+d-devel/message/113395
+> Mute This Topic: https://lists.openembedded.org/mt/109059191/3617156
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
+artin.jansa@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
