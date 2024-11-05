@@ -2,56 +2,56 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B0287D33A50
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AB1C3D33A4B
 	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 18:54:55 +0000 (UTC)
-Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
- by mx.groups.io with SMTP id smtpd.web10.27837.1730831901996638661
+Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com [209.85.219.180])
+ by mx.groups.io with SMTP id smtpd.web11.27727.1730831893996891487
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 10:38:22 -0800
+ Tue, 05 Nov 2024 10:38:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lCZc3DDy;
- spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-6e2e3e4f65dso11351497b3.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 10:38:21 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=iU/FLoBy;
+ spf=pass (domain: gmail.com, ip: 209.85.219.180, mailfrom: schonm@gmail.com)
+Received: by mail-yb1-f180.google.com with SMTP id 3f1490d57ef6-e29687f4cc6so4650750276.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 10:38:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730831901; x=1731436701; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730831893; x=1731436693; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=u2liv2MtSp82xl1vMC8IRokI74CkTDKDkTpc09HY4EQ=;
-        b=lCZc3DDy7AZqsTafokM3wqVJXX8z/vrq6YFGb9u1z69x4qt1TzOAojAyTu2u9UadlI
-         JMFxL6/PQUFaszQfSaIFXcxr3dETA8XjuowiePAPA1rm+5mc7fzM1CtWsD7kgCMFdf4B
-         vt0gyEBbTJ1hVGqBRnD9yXsmrEoAyIwraFz9ODykb7HBAZoqnvCSPmUUtcraesbItESt
-         MtewD4SEoTpgHaH94o19DmRyfTLblJ9vEv2gSaXuQ0+Ywwukw1ii7XSXEK0K2Wv3ZUNQ
-         lr/cRLl3r97bkAEVp7SUXJdTZbKTknhOCtt9r13RjrhhXMwa+uEjZ3fjLi8lUVwYTdqF
-         ebPQ==
+        bh=sx8vIxC/TWg0kY2srneG0/uJvuWLTCOcB9Lr3hJnAHI=;
+        b=iU/FLoByUBhdaXMv/l3tjTH8Zc/CULf1xNOpulGfkJSF6eW2Cg3lVve/xAK1tuglRG
+         SvsjnnswqzBShYPvd13GPEjkum+oAcbFAint5T8GnvTIvMzANv2ZgN42wlG5796iaJDx
+         1bv5+AVcz/gG8pp+chO9HZfE++l8d7vEH0dWiAZPZ1rgEtOvf70F8QYAnomvM5+WrsYd
+         nQUtAxIaCtVhllGJL+UKk7B3us03Rf1kKXmmb5wZXiCzJuZbMm/8DQvdkwNE06SyMGG6
+         ESJz50wVxCMjs3L4+i4YJ4ggMj5EGoce/k/iK9g65M0gqywwThvqaFQ8gzLua6oRVhSn
+         oObA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730831901; x=1731436701;
+        d=1e100.net; s=20230601; t=1730831893; x=1731436693;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=u2liv2MtSp82xl1vMC8IRokI74CkTDKDkTpc09HY4EQ=;
-        b=Arx71gKECfoyhx/xX+UT61nAVL6l9HnJfuHsOIQZc1OxLcZJeCxLDOjwYWZUcSFyZ6
-         8SLmyvnphHmM8DOQkzh0UmHd8MioTEytFxcfjZvd8v07hTHC1mumm8UsqgsVVib2S/fe
-         mNMw72csBkpeESo8Fkci9ZX11pXXQuYwCNJ8V93A2Sjkmwm+PN/r3AdkXFxGc3U/d88C
-         Wt9DOMFId8B+9gIt3nN9oabTS+Jdk0HxB6xPVoaU00jzOMHsghyo/hn9sKyojS2mDUX1
-         4GSSUhp9cpaCxXlyJcOmpha+BlpX0i6bQs2TxfsBIogiG+Du+qSNyfZ1GitAPaGTi3n4
-         b6dg==
-X-Gm-Message-State: AOJu0Yz9w/hDAkYBoE2ir+iRhnylSnjBx7WcE1670iyH897+0/GqECgv
-	DVq1pnyuRd03dGO7UsHJwiix4mzT186jsbBykJNJDsTO101luzyAhbdeZKxn
-X-Google-Smtp-Source: AGHT+IFyb2HdpSiKedeRhzixh96CxZV12+VLG38cvc/Uy98r0YGN11bsgUL7ftNZONhui8Fh0gcY4A==
-X-Received: by 2002:a05:690c:6186:b0:6ea:96bf:1706 with SMTP id 00721157ae682-6ea96bf2f0fmr77254797b3.0.1730831900622;
-        Tue, 05 Nov 2024 10:38:20 -0800 (PST)
+        bh=sx8vIxC/TWg0kY2srneG0/uJvuWLTCOcB9Lr3hJnAHI=;
+        b=CDSrfmkeAUp6omo/lM6Ia2Oi8/y6NVly55XKhit0rx2RPID1AchBgDoKvGhvg6x5eu
+         Jc0Shh24ItOcq0gdF/qnwQ+xHt3DJyCDbgns+PjoMMArVQFiQxf6mY2B06CxQMtenAu0
+         Ed51qXB+cD7bzilFdnYbVJABJaGPAps6yKI/XXRWwwmNLkB00b7ph+nYrfOz93hW7UJM
+         8xoNdqY3rAy3weG90yUC4s42U3OVTiz8ETkyKBWtia3V8hROjmXHIDr7h4bsFoIs/TuG
+         yhzYBqinbfouSYmxugxqqacHCNyAsbvX4yQ3HF2SHN9IAbtNvY+sPHRa1pldVKeX0Qn6
+         l1vQ==
+X-Gm-Message-State: AOJu0Yx/n9ObQv6ddoavcIU0zoE/Jsom6mtDZnMVxxrsPAbpzSzYc7f3
+	vKYtGZmZaTeddmOPRIpXH57U8l+3uNLLXSW4S1Io98vk7xmlbdLbip9BB1Y5
+X-Google-Smtp-Source: AGHT+IHf3VWwhBxaE2RgXikcjx+vwXFIAyxRgyKjXRTkbf9zIlY/h4iLP0FVXnN4/5ohtOzdGpdO8A==
+X-Received: by 2002:a05:690c:883:b0:6e5:e714:3bdf with SMTP id 00721157ae682-6ea64a9f501mr170707547b3.5.1730831892715;
+        Tue, 05 Nov 2024 10:38:12 -0800 (PST)
 Received: from localhost.localdomain ([71.215.7.194])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c48b6esm23957617b3.103.2024.11.05.10.38.20
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c48b6esm23957617b3.103.2024.11.05.10.38.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Nov 2024 10:38:20 -0800 (PST)
+        Tue, 05 Nov 2024 10:38:12 -0800 (PST)
 From: "J. S." <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: schonm@gmail.com
-Subject: [meta-oe][PATCH 030/161] glade: Drop unnecessary SRC_URI md5sum
-Date: Tue,  5 Nov 2024 13:25:06 -0500
-Message-ID: <20241105183658.34982-32-schonm@gmail.com>
+Subject: [meta-oe][PATCH 020/161] wvdial: Drop unnecessary SRC_URI md5sum
+Date: Tue,  5 Nov 2024 13:24:56 -0500
+Message-ID: <20241105183658.34982-22-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241105183658.34982-2-schonm@gmail.com>
 References: <20241105183658.34982-2-schonm@gmail.com>
@@ -61,25 +61,25 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 18:54:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113545
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113535
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-oe/recipes-devtools/glade/glade_3.22.2.bb | 1 -
+ meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/glade/glade_3.22.2.bb b/meta-oe/recipes-devtools/glade/glade_3.22.2.bb
-index 72c4036be..84ca98a8b 100644
---- a/meta-oe/recipes-devtools/glade/glade_3.22.2.bb
-+++ b/meta-oe/recipes-devtools/glade/glade_3.22.2.bb
-@@ -18,7 +18,6 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
- SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/glade/3.22/glade-${PV}.tar.xz \
-            file://remove-yelp-help-rules-var.patch \
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb b/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
+index c1da15a1b..70a4f7c00 100644
+--- a/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
++++ b/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
+@@ -13,7 +13,6 @@ SRC_URI = "https://storage.googleapis.com/google-code-archive-downloads/v2/code.
+            file://typo_pon.wvdial.1.patch \
+            file://musl-support.patch \
            "
--SRC_URI[md5sum] = "c074fa378c8f1ad80d20133c4ae6f42d"
- SRC_URI[sha256sum] = "edefa6eb24b4d15bd52589121dc109bc08c286157c41288deb74dd9cc3f26a21"
+-SRC_URI[md5sum] = "37e9a2d664effe4efd44c0e1a20136de"
+ SRC_URI[sha256sum] = "99906d9560cbdbc97e1855e7b0a7169f1e11983be3ac539140423f09debced82"
  
- EXTRA_OECONF += "--disable-man-pages"
+ # code.google.com/archive page is generated by javascript from JSON and does not
 -- 
 2.43.0
 
