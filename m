@@ -2,56 +2,56 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 33436D36102
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42F8FD36107
 	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 18:55:17 +0000 (UTC)
-Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
- by mx.groups.io with SMTP id smtpd.web10.27896.1730831949917322835
+Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
+ by mx.groups.io with SMTP id smtpd.web11.27777.1730831949171862326
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 10:39:10 -0800
+ Tue, 05 Nov 2024 10:39:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=X8Po7GxZ;
- spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-6e3cdbc25a0so64380707b3.2
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZDmYBm2m;
+ spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-6e38fc62b9fso49954867b3.2
         for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 10:39:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730831949; x=1731436749; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730831948; x=1731436748; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=UMeDRY7YpYjbRI8YHtS9jJ0FjJg06VMj+bWkWBpzFds=;
-        b=X8Po7GxZDS5jDBds7FJPU/tWjc86AZ9TF6V9vkm6uI1tSd3JQkZqUh2e808TIxBwcE
-         hcmPVhyKa6w/a5jRqzLnWmkn5qyp/YLKew1yYVxTFAQ6Fe/XTINQt4+fHx49w9tEdlyi
-         4DdYN8+MtvZJvpA0nB1SeuzrgP6AtZweImvD7iMHZMDakGYSxCQ8gPbIEuvT/biz3Arg
-         4divXiDBcy4fFMRW8wbk1KUQzDlSakSHBO0Iyc+Csge91MAotdJ7IWcby7P7PdO1B+lj
-         CoLtc3cFlBq67f0hnTrNfAB4YqWuUZOjoWYAqMsZRiVpR2jscRi4Z7X2Gk1DIpXQbsX9
-         46Ug==
+        bh=4ITGjFWIya4kUXYn1FWeL3WGrX63HRNSR+bSAOxQcf4=;
+        b=ZDmYBm2mtkJLKA+E/TuMtnPqJbuVpx7feqVl/ACx6bSBGu83XgYSZFp9trcfdvAMfQ
+         JwCGGWGIOKcTtTGTk1QTS4eMCH9cmQvEu8Vr+DPeU36HgipRjXPIswfreTFlwIgaTKPw
+         3RaEtx03bJFhvW9o1CLdVVanHeKct2NeoBoYkJHNckMOp1/3Fw/ZGBolBBjrBHR4TD1Y
+         LGbucLqBF/ElYFWvKrBtX6HQp98z2HehvmHU04Q+Svt0/jzaIyEo603cVBUtTmZdpAze
+         /zrg+/3Ckt3eXiPc5qwyvwQJ3mQO2gt+JEVLPZwsZwgvO64WV2RhgjABeLlwbd4GsQ/H
+         LgRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730831949; x=1731436749;
+        d=1e100.net; s=20230601; t=1730831948; x=1731436748;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=UMeDRY7YpYjbRI8YHtS9jJ0FjJg06VMj+bWkWBpzFds=;
-        b=rzZhXU3e2qMqtE+y84M0dTLdPshbw+W9UH50zgSVYCUzrrjk/ZcXtTsuzXMv/aIW/M
-         PdE+z3fbSbOqm7ovdGAxSOeBvntyYS5U+DxUMtMQvdpvasrzy3UO6kQ9Wgv0K4dpuyqa
-         rMAwWAExTcfnhp3XD21UOfjHepbhZbANHrQnPLvguRny1Fh9adV0Nl/ukeLmotkQd9Ko
-         uHYQ7rE7Qr7PZ8tVxJUWmxhWuLVRiO9WE6/bFeC5C+hfpxD1BJKwz0//MKeQRsPhcy/g
-         ggc7NDKnUuSoRYJUtGrFChJmoU5FN4Hcu1qWAr0rDDDlhzjbAJ0ZAs4Sp3f6MWNOZpe0
-         OdYg==
-X-Gm-Message-State: AOJu0Yy3/EvXgaPuSYZJ1wZbfiXl3/Bs77NQHlo7qXK95v2ksk+dUXSU
-	N3+j1FrY5FW3KuR1OYWS2exd0TsjmOu52qBc4XwEh+rDoxtU26t0bOT/rcGn
-X-Google-Smtp-Source: AGHT+IEOJ838oU+wclkDTfP7MARak5bWXAZLWXyymxzUvMJewvxeGnXzdI+76Zg8C1Gg3j7BZsBs0Q==
-X-Received: by 2002:a05:690c:6f8e:b0:685:3ca1:b9d8 with SMTP id 00721157ae682-6ea64bdd307mr166873797b3.30.1730831948606;
-        Tue, 05 Nov 2024 10:39:08 -0800 (PST)
+        bh=4ITGjFWIya4kUXYn1FWeL3WGrX63HRNSR+bSAOxQcf4=;
+        b=VDhtRj53QPDaVXfM7nYLVDGuKFgvqSunIaJ+0DWHizd4cO3C48bqVSAmRAhG4VTsFq
+         E+vd5a5uZMRMTBsGVR7ztrsiX645AwzJ2UOKGDnHMTM3wvK0gdwzb5TbYNBGz6wqs0nf
+         Q6zdAn6uNP1v6wGDQVGkDSFwXgVWy+bGZmdsOwnW1drCXPrbSRBokbvUUgWwhT7b0RbK
+         zoeM54v92DWIrAXx1xVIdDCxRG/btgRMRVdA0RSkqPo4HDGP4lR6PWC9WBL9x0KxqOrO
+         oMn+HlY/R8K9aTb874oH7Km1Xn0kl3b+Salkb3bpKQBIZX1d8Hc77pk8PvzgzrMGu2c9
+         TD/Q==
+X-Gm-Message-State: AOJu0Yyfwd+MequXfNifxc6AIBEeCvtAmY0hSvPj22BDt7RLzCHaC++g
+	XvV5sR5jtFb3JCziMPmnpFx80RcHNu1FNOVTJU2GDU08IrpQFR+w3PCZknSQ
+X-Google-Smtp-Source: AGHT+IG0V0n720troy+qU9aLIsqNMmy7WZG90pf5NYiL3OAu6reCNMCGREQ5A0BBelfJqSI4xlBrcw==
+X-Received: by 2002:a05:690c:315:b0:6ea:807c:bba2 with SMTP id 00721157ae682-6ea807cc08bmr102551037b3.10.1730831947860;
+        Tue, 05 Nov 2024 10:39:07 -0800 (PST)
 Received: from localhost.localdomain ([71.215.7.194])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c48b6esm23957617b3.103.2024.11.05.10.39.08
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c48b6esm23957617b3.103.2024.11.05.10.39.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Nov 2024 10:39:08 -0800 (PST)
+        Tue, 05 Nov 2024 10:39:07 -0800 (PST)
 From: "J. S." <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: schonm@gmail.com
-Subject: [meta-oe][PATCH 086/161] ttf-mplus: Drop unnecessary SRC_URI md5sum
-Date: Tue,  5 Nov 2024 13:26:02 -0500
-Message-ID: <20241105183658.34982-88-schonm@gmail.com>
+Subject: [meta-oe][PATCH 085/161] ttf-liberation: Drop unnecessary SRC_URI md5sum
+Date: Tue,  5 Nov 2024 13:26:01 -0500
+Message-ID: <20241105183658.34982-87-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241105183658.34982-2-schonm@gmail.com>
 References: <20241105183658.34982-2-schonm@gmail.com>
@@ -61,23 +61,23 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 18:55:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113601
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113600
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb | 1 -
+ meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_0.2.bb | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
-index a3babe90a..4adada04f 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
-@@ -22,5 +22,4 @@ do_install() {
-     install -m 0644 *.ttf ${D}${datadir}/fonts/ttf-mplus/
- }
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_0.2.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_0.2.bb
+index 6d7ba11e7..188064c37 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_0.2.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_0.2.bb
+@@ -18,5 +18,4 @@ FILES:ttf-liberation-mono  = "${datadir}/fonts/truetype/*Mono*"
+ FILES:ttf-liberation-sans  = "${datadir}/fonts/truetype/*Sans*"
+ FILES:ttf-liberation-serif = "${datadir}/fonts/truetype/*Serif*"
  
--SRC_URI[md5sum] = "d1400184b51b3871e8d2fca6c50e18ae"
- SRC_URI[sha256sum] = "a20b9b9b03c2a6fb1e2137d29e8a6ce06406ba1e008906ea3c474dc048dc06a6"
+-SRC_URI[md5sum] = "77728078a17e39f7c242b42c3bf6feb8"
+ SRC_URI[sha256sum] = "174cf27c57612971434ec8cc4a52bfd37bad8408e9b9219539c6d5113df6ff8f"
 -- 
 2.43.0
 
