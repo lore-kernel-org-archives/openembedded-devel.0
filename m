@@ -2,57 +2,56 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 524F7D2C136
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C440D2C12F
 	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 14:37:22 +0000 (UTC)
-Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
- by mx.groups.io with SMTP id smtpd.web10.19649.1730817437593434766
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
+ by mx.groups.io with SMTP id smtpd.web10.19647.1730817436716435084
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 06:37:17 -0800
+ Tue, 05 Nov 2024 06:37:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PXsUK8PN;
- spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-6e9ba45d67fso50973707b3.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:37:17 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=T8NrZRRS;
+ spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-6e330b7752cso43328217b3.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:37:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730817437; x=1731422237; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730817436; x=1731422236; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=1t77H2ODM87W8uoAkUFSrqyyV0Lsw0kUG7cHBWzbRuc=;
-        b=PXsUK8PNSUpScDEzdbIR19Owk/sAH/NvRa+ByLwxzdyyx3zviCaEmWhWgv1htF+L1Q
-         bIEjMVXNUvPnapHG2x+/jtC2ZM6A3pquJDtBBFqoJu/BvilblqsSBQrqu8N40T3bvGxb
-         bGRuVSCx/mZRA6tXJNda9RA8T7JmrYQXtaBcZ8X02s9Om5WEdPQcNVIMH4L1yzFO+DRi
-         axzV975XaR1TGXxV87n5DHD+Q38mq6SI4s+bP/H9kFaNJnK1pZZ343T2Wkwb1s0z4sWZ
-         yS+4ywj1tfNdzOA7SH/mZUlwnZxUwXW2Fr6V127tsnbSbQcVr6LK1/qhkNoC3stKlYsv
-         KC+g==
+        bh=1u2dWAOu2G/3+LSvWfF57oTm3vcgg+4Dkf1Uq5usIr0=;
+        b=T8NrZRRSGNic+aHbGEE/Dd9yaCEYZwkuq8ITYIrHN3xs9Hg2XAeq8blI9d8OVJ2miP
+         XNZz8Gqs+zpa0XViu7wjjownAWraogYrn/VDll961lUvAXmN6BTZQ8sZJRHWDFmZ2GKd
+         tn0/HX4Jf/6N612OZJaFwHgEVcuFW1bnOI8mowZ+ViA9BCTmH3Tij0riLApXgBmeWadq
+         1tE3M5wNUa1QFucTvRUrBE6IV1fZwoRM6Mgj5D66Q/nPyPVe2PjSLWKkN9JCDzGmer1Y
+         n1SpOs3z7SR3iiJ78Ag+PfdAktTq21GW2ZOv58mF5X1AvTISk0hrRxdOHq4gC866RtpO
+         1m8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730817437; x=1731422237;
+        d=1e100.net; s=20230601; t=1730817436; x=1731422236;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=1t77H2ODM87W8uoAkUFSrqyyV0Lsw0kUG7cHBWzbRuc=;
-        b=K7G4sIPD+HkmCu0DPTGHt2lkLbBIm+Fmr7wxJYGHNubiT+MvSpQ8XzYoWPx8xgKY7E
-         e9OoZuPcrIYfe5QyTqOZx8R/yxxVtNa74ueI7MjvrnYUj29qOZgymn4g+kG9oGaMGucs
-         99boDn7p8NDgsKjclKTDzaTwk9KY9my7Vo5XCAgBHgWm6lzFr5WsmmJ133GQ4CiqtS+c
-         9YMTsyrYZKlZ1xQtAF1H3CkhBvFTgTvQA9jQvCItgaKOjHhHfmrlfKcjeCbJa13xnjRr
-         ae2+aAD9qOY0q41lCWq6CEc7/rbGUTrLnS6wE89m4AMfXCZBPiHGj8WDnzDIi3a9iaXO
-         6wsQ==
-X-Gm-Message-State: AOJu0YyQfhiAEUS73Lo2so0+6ZnS9IAXxTPvY4t1RldIQRXWeg57ilrY
-	cVNi8iLJdfOA/nGgHCgCrNT1cqb6SKsV8G85/CjKcXpPW9Dl1+PxJA+TIQ==
-X-Google-Smtp-Source: AGHT+IG0bSOZC7yz6C/xlH6Tjt9XnITV+U4TQMx4Jrikkq3RO7dJvtceqc7o+P0XHNWLDEphfq8PkQ==
-X-Received: by 2002:a05:690c:102:b0:6e5:e163:e001 with SMTP id 00721157ae682-6ea3b87e250mr231508847b3.8.1730817436660;
-        Tue, 05 Nov 2024 06:37:16 -0800 (PST)
+        bh=1u2dWAOu2G/3+LSvWfF57oTm3vcgg+4Dkf1Uq5usIr0=;
+        b=qfXtgcTRQ9xeRQw8u7YMvMEnlFDby8wGeJ59HRbjsV/TYxsQv4OJW09Nk1KrmmemB5
+         eOpNpMZnNA7pp8y7hkkdo0Z3sBY/DxSLaGIf0Ejk5lIzICb4nD0xl+jSHCJ5OSq4aPAh
+         kJarXQ8SWk6aQIHtOD/9X0oIVLMQt6ZaqvoeqyoNS1L9j8osrSTl2BqxNP+UQmpYJRHI
+         c8GWApzDfvLUgg2yX+MxRtw9NEr+2gJ9pT1hBbo6dLEZ5wCBO4cO19zMCH72pVciSZhY
+         CGq1JqVFkTkDoLXVvNypJ38hW06P4xb2LNAm1fPIW5hc4lCZSdMJbZQaBpBzwKGy3tgg
+         /5OA==
+X-Gm-Message-State: AOJu0Yxr/TRnQHprIU3rjUScwniLoEb+oUkZ0Wh+A7iI9xsDQ/FVsmIW
+	Yq27z91XPpaNuiX1Zudf3h2rP+hZGRkYn7hY14iVhW7tIpfE1KC2Dtw+OQ==
+X-Google-Smtp-Source: AGHT+IFobaGkVGSzv2BZ10jlBJrG+mlt8lYCjtgPeV2B7hjy07hOHVUQcFdcWiLmJSuis2GD7Dp9hg==
+X-Received: by 2002:a05:690c:6c11:b0:6e9:c117:760b with SMTP id 00721157ae682-6ea557df6d0mr158941047b3.5.1730817435584;
+        Tue, 05 Nov 2024 06:37:15 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:45dd:7000::29])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.37.16
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.37.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Nov 2024 06:37:16 -0800 (PST)
+        Tue, 05 Nov 2024 06:37:15 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Liyin Zhang <liyin.zhang.cn@windriver.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][styhead][PATCH 80/90] sound-theme-freedesktop: Update SRC_URI
-Date: Tue,  5 Nov 2024 09:35:45 -0500
-Message-ID: <20241105143638.2301245-81-akuster808@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][styhead][PATCH 78/90] ndisc6: Fix reproducible build
+Date: Tue,  5 Nov 2024 09:35:43 -0500
+Message-ID: <20241105143638.2301245-79-akuster808@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241105143638.2301245-1-akuster808@gmail.com>
 References: <20241105143638.2301245-1-akuster808@gmail.com>
@@ -62,30 +61,128 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 14:37:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113498
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113496
 
-From: Liyin Zhang <liyin.zhang.cn@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-Signed-off-by: Liyin Zhang <liyin.zhang.cn@windriver.com>
+includes the CFLAGS used to build the package in
+the binary via PACKAGE_CONFIGURE_INVOCATION which then includes the
+absolute build path via (eg.) the -ffile-prefix-map flag.
+
+Here we remove using variables like PACKAGE_CONFIGURE_INVOCATION in code
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 3fbeee6aa5c39dea65d89fc32e5495742250d585)
+(cherry picked from commit 70c663b7ae90283d25ca3704852ca96aa808e31a)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../sound-themes/sound-theme-freedesktop_0.8.bb                 | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...riables-indicating-buildtime-informa.patch | 85 +++++++++++++++++++
+ .../recipes-support/ndisc6/ndisc6_1.0.8.bb    |  1 +
+ 2 files changed, 86 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ndisc6/ndisc6/0001-Remove-use-of-variables-indicating-buildtime-informa.patch
 
-diff --git a/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb b/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
-index 87320a98e8..508519e4f8 100644
---- a/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
-+++ b/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
-@@ -11,6 +11,6 @@ inherit autotools gettext
+diff --git a/meta-networking/recipes-support/ndisc6/ndisc6/0001-Remove-use-of-variables-indicating-buildtime-informa.patch b/meta-networking/recipes-support/ndisc6/ndisc6/0001-Remove-use-of-variables-indicating-buildtime-informa.patch
+new file mode 100644
+index 0000000000..7bfb17bf08
+--- /dev/null
++++ b/meta-networking/recipes-support/ndisc6/ndisc6/0001-Remove-use-of-variables-indicating-buildtime-informa.patch
+@@ -0,0 +1,85 @@
++From 7b3e78cf0348ea737609a2ace07c7c55aae36bcb Mon Sep 17 00:00:00 2001
++From: Santiago Vila <sanvila@debian.org>
++Date: Wed, 9 Oct 2024 22:05:09 -0700
++Subject: [PATCH] Remove use of variables indicating buildtime information
++
++We should not really care about the build date or the build host
++
++Sourced From: https://salsa.debian.org/debian/ndisc6/-/blob/master/debian/patches/reproducible-build.patch?ref_type=heads
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ rdnss/rdnssd.c   | 2 --
++ src/addrinfo.c   | 2 --
++ src/ndisc.c      | 2 --
++ src/tcpspray.c   | 2 --
++ src/traceroute.c | 2 --
++ 5 files changed, 10 deletions(-)
++
++diff --git a/rdnss/rdnssd.c b/rdnss/rdnssd.c
++index b87edb2..7201525 100644
++--- a/rdnss/rdnssd.c
+++++ b/rdnss/rdnssd.c
++@@ -741,8 +741,6 @@ version (void)
++ {
++ 	printf (_("rdnssd: IPv6 Recursive DNS Server discovery Daemon %s (%s)\n"),
++ 	        VERSION, "$Rev$");
++-	printf (_(" built %s on %s\n"), __DATE__, PACKAGE_BUILD_HOSTNAME);
++-	printf (_("Configured with: %s\n"), PACKAGE_CONFIGURE_INVOCATION);
++ 	puts (_("Written by Pierre Ynard and Remi Denis-Courmont\n"));
++ 
++ 	printf (_("Copyright (C) %u-%u Pierre Ynard, Remi Denis-Courmont\n"),
++diff --git a/src/addrinfo.c b/src/addrinfo.c
++index cd73722..6316abd 100644
++--- a/src/addrinfo.c
+++++ b/src/addrinfo.c
++@@ -148,8 +148,6 @@ static int quick_usage (const char *path)
++ static int version (void)
++ {
++         printf (_("addrinfo %s (%s)\n"), VERSION, "$Rev$");
++-	printf (_(" built %s on %s\n"), __DATE__, PACKAGE_BUILD_HOSTNAME);
++-        printf (_("Configured with: %s\n"), PACKAGE_CONFIGURE_INVOCATION);
++         puts (_("Written by Remi Denis-Courmont\n"));
++ 
++         printf (_("Copyright (C) %u-%u Remi Denis-Courmont\n"), 2002, 2007);
++diff --git a/src/ndisc.c b/src/ndisc.c
++index b190b18..6e222a0 100644
++--- a/src/ndisc.c
+++++ b/src/ndisc.c
++@@ -920,9 +920,7 @@ version (void)
++ {
++ 	printf (_(
++ "ndisc6: IPv6 Neighbor/Router Discovery userland tool %s (%s)\n"), VERSION, "$Rev$");
++-	printf (_(" built %s on %s\n"), __DATE__, PACKAGE_BUILD_HOSTNAME);
++ 
++-	printf (_("Configured with: %s\n"), PACKAGE_CONFIGURE_INVOCATION);
++ 	puts (_("Written by Remi Denis-Courmont\n"));
++ 
++ 	printf (_("Copyright (C) %u-%u Remi Denis-Courmont\n"), 2004, 2007);
++diff --git a/src/tcpspray.c b/src/tcpspray.c
++index 39d8939..6347795 100644
++--- a/src/tcpspray.c
+++++ b/src/tcpspray.c
++@@ -302,8 +302,6 @@ version (void)
++ {
++ 	printf (_(
++ "tcpspray6: TCP/IP bandwidth tester %s (%s)\n"), VERSION, "$Rev$");
++-	printf (_(" built %s on %s\n"), __DATE__, PACKAGE_BUILD_HOSTNAME);
++-	printf (_("Configured with: %s\n"), PACKAGE_CONFIGURE_INVOCATION);
++ 	puts (_("Written by Remi Denis-Courmont\n"));
++ 
++ 	printf (_("Copyright (C) %u-%u Remi Denis-Courmont\n"), 2005, 2007);
++diff --git a/src/traceroute.c b/src/traceroute.c
++index 489bc55..604b6af 100644
++--- a/src/traceroute.c
+++++ b/src/traceroute.c
++@@ -1251,8 +1251,6 @@ version (void)
++ {
++ 	printf (_(
++ "traceroute6: TCP & UDP IPv6 traceroute tool %s (%s)\n"), VERSION, "$Rev$");
++-	printf (_(" built %s on %s\n"), __DATE__, PACKAGE_BUILD_HOSTNAME);
++-	printf (_("Configured with: %s\n"), PACKAGE_CONFIGURE_INVOCATION);
++ 	puts (_("Written by Remi Denis-Courmont\n"));
++ 
++ 	printf (_("Copyright (C) %u-%u Remi Denis-Courmont\n"), 2005, 2007);
+diff --git a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb
+index fb00b83516..21579d64c1 100644
+--- a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb
++++ b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb
+@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ SRCREV = "92e5d1cf6547fe40316b2a6ca2f7b8195ae0cbe5"
+ SRC_URI = "git://git.remlab.net/git/ndisc6.git;protocol=http;branch=master \
+            file://0001-autogen-Do-not-symlink-gettext.h-from-build-host.patch \
++           file://0001-Remove-use-of-variables-indicating-buildtime-informa.patch \
+            "
  
- DEPENDS += "glib-2.0-native"
- 
--SRC_URI = "http://people.freedesktop.org/~mccann/dist/${BPN}-${PV}.tar.bz2"
-+SRC_URI = "https://people.freedesktop.org/~mccann/dist/${BPN}-${PV}.tar.bz2"
- SRC_URI[md5sum] = "d7387912cfd275282d1ec94483cb2f62"
- SRC_URI[sha256sum] = "cb518b20eef05ec2e82dda1fa89a292c1760dc023aba91b8aa69bafac85e8a14"
+ S = "${WORKDIR}/git"
 -- 
 2.43.0
 
