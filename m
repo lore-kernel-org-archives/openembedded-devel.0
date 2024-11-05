@@ -2,56 +2,56 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2F0ED35E2C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2DB9D35E25
 	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 18:54:55 +0000 (UTC)
-Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com [209.85.128.169])
- by mx.groups.io with SMTP id smtpd.web11.27734.1730831901197211743
+Received: from mail-yb1-f169.google.com (mail-yb1-f169.google.com [209.85.219.169])
+ by mx.groups.io with SMTP id smtpd.web10.27819.1730831885147975264
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 10:38:21 -0800
+ Tue, 05 Nov 2024 10:38:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cRSWcJca;
- spf=pass (domain: gmail.com, ip: 209.85.128.169, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-6ea7c9227bfso12400757b3.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 10:38:21 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=m7Tqh0Os;
+ spf=pass (domain: gmail.com, ip: 209.85.219.169, mailfrom: schonm@gmail.com)
+Received: by mail-yb1-f169.google.com with SMTP id 3f1490d57ef6-e30eca40c44so5224854276.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 10:38:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730831900; x=1731436700; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730831884; x=1731436684; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=7gCcAPtDheyBiX47U4bDyAgR+msaEiZcohew89+uQ/E=;
-        b=cRSWcJcah5MSDI6nZRKkaTqvgfJ4BVOKbIXLnKL0E3SIAelnXDpFkXTjCl1yZdc38p
-         nkGxbDYBIfPMXn1xo4Uadn1Ttft/WfOVq3+3QkZuixWCvNrLMDzrlsP05xvhufyhKAbU
-         exYUeqWELSCWdwbKLUyms8MUPe0eXFVctSYRAt8CKcwEghbTMJlLGB7CtfrDIZDbaZBE
-         9w1Y5IVNFvnlnrZWjAtGuNlGsqTV41KGkRIhYLuN574knqvTTGUbgMvLU6pigMoNH05d
-         Mr4H7qXSKSd/MHqNNVlLEFA1iZeY5RhpfcTrNXuX0SVxNMTb0ctj3ORa5/eJeWsCvJHX
-         buWg==
+        bh=Nvo55LZgqm6p1EEjLPHt56x0uqZuDDFOq0ypkktbmMk=;
+        b=m7Tqh0Os4sQySqd4uQ9khOXtfZV75Z47o64nme8tWXlJXvTq8M1+sdc54uYNVCzoM0
+         46f2tHpGF9PmM61WMz3D+AY9MtPC+3x9TbRWJGeqFkIdJqEtihlIZS0HTw6AGZsItCmg
+         eVNBtrz572nEXgzM7103wDmtjApz+mXeGnfsV357QuRUImJHKZrYhyO+K1kEplnVNSrJ
+         F0u0UEcuqv7wGALOGwJJWGzxZtVrLFDQkRZeZAYgFidVm6T26J9eIOlom40nRbfeFQkl
+         D/Z7BPhJqVYKM3Bc7qcqEby5W/tWHJAfqtqJrfN0zSlDKdoKLGoVn3eIpRyllrrvk7Y+
+         Yx0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730831900; x=1731436700;
+        d=1e100.net; s=20230601; t=1730831884; x=1731436684;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=7gCcAPtDheyBiX47U4bDyAgR+msaEiZcohew89+uQ/E=;
-        b=UrbH01FrH3kteElaAPyUa8fD3RMtKq7Be2Fw9FLjXflW4dk2KuLJkh6nOnwT8Vp00r
-         AO9jpFghlDXbwjfJGJT+Q5QlhRztLWZXjJODtlpEWTfe4kS/2VfdvTZ9W2GKIggUvnsY
-         Ae0JBRuc54enXzOCmAux3nlz1jTpyg6xYTkcgyzRyxktZJhjERFGY2t7V8G8YLGRb5H4
-         39k19tNbeA3BxRsp9ei5wGIQ3dt0QwL/sxBS8lOzWyijlVsGEq9AKdN4SD0DI46Spkd9
-         JK0t/Hzr7nEZt7PiFsJsGwxOUeT/65bwpX5wOThV9L9gU74pF2Kqy2MIDZPp2yi1l53a
-         DA9A==
-X-Gm-Message-State: AOJu0YwDwiPwEQwo+o4CC8Ew7VB5SzvYMUdL0NmxjMHy0woo0MryNk/W
-	ZfTLkIyZifv9QdEG6PAX2UEoNkYaQ86XEMTmVP8cBfTZbQ3ev1OMj5lLekOL
-X-Google-Smtp-Source: AGHT+IE959VBXssq0q1IE4k1jL52lMiH6viipk9+VjXDvj21j3dthF61V6JpwSvcxdGnHskEKfYojA==
-X-Received: by 2002:a05:690c:fd0:b0:6ea:87dc:49b1 with SMTP id 00721157ae682-6ea87dc4fcfmr89569267b3.10.1730831899851;
-        Tue, 05 Nov 2024 10:38:19 -0800 (PST)
+        bh=Nvo55LZgqm6p1EEjLPHt56x0uqZuDDFOq0ypkktbmMk=;
+        b=d+v7v0Yg30PPCqIuRAR4exDQEem3F3NpA7jR/+xA9CPGybJmeNrxzmI2buj6GYa930
+         Fv+B7VYbpbmyIKM+gCmuYvj1Q7dHABAAFdzwkalgsCjqEMq3zGZkt0onnkwGmm9yoqzK
+         b5ZCZX74pjkS/CxEZ7agrrmBYjMt/h+cqpfWuYz3j6/eUqNTCD75o95zmYGwQ+IgSYE8
+         NOEtMVm/kuxFhovKxisOmmgABgfZD+Ehu8cC3r+hiesLZ6jOkVCyRzJuZ+Jl6Uj9CkIH
+         dHs/TBjBb4e2h6R7AoAh6AsmOHkryqqgdUQE8AfVfqnIRLx/lDYUvlbNwrXrNRcJNaXQ
+         eEUw==
+X-Gm-Message-State: AOJu0YwM14AxocTzYegBdITSaf8cvOlK8hvFbAb8nivgDTQiTgj5JBdh
+	hz9tb8MBMqUlO3CZ+edyZ4lL1Teru0CkGGMFsIXL6f8H9r8B0zZnzKXhI1f0
+X-Google-Smtp-Source: AGHT+IGyMn5EDJedZRNxpRhAFvRsAYS6E4YHfZzrRlvqm1iszr80pjIK8bBJ+6mGYd060gDtHo6r8g==
+X-Received: by 2002:a05:690c:2a44:b0:6dd:76ce:d6c9 with SMTP id 00721157ae682-6e9d8b0eb5dmr268480547b3.42.1730831883592;
+        Tue, 05 Nov 2024 10:38:03 -0800 (PST)
 Received: from localhost.localdomain ([71.215.7.194])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c48b6esm23957617b3.103.2024.11.05.10.38.19
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c48b6esm23957617b3.103.2024.11.05.10.38.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Nov 2024 10:38:19 -0800 (PST)
+        Tue, 05 Nov 2024 10:38:03 -0800 (PST)
 From: "J. S." <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: schonm@gmail.com
-Subject: [meta-oe][PATCH 029/161] dmalloc: Drop unnecessary SRC_URI md5sum
-Date: Tue,  5 Nov 2024 13:25:05 -0500
-Message-ID: <20241105183658.34982-31-schonm@gmail.com>
+Subject: [meta-oe][PATCH 008/161] nbench-byte: Drop unnecessary SRC_URI md5sum
+Date: Tue,  5 Nov 2024 13:24:44 -0500
+Message-ID: <20241105183658.34982-10-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241105183658.34982-2-schonm@gmail.com>
 References: <20241105183658.34982-2-schonm@gmail.com>
@@ -61,25 +61,25 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 18:54:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113544
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113523
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-oe/recipes-devtools/dmalloc/dmalloc_5.5.2.bb | 1 -
+ meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/dmalloc/dmalloc_5.5.2.bb b/meta-oe/recipes-devtools/dmalloc/dmalloc_5.5.2.bb
-index 2f0d8a340..79252f94a 100644
---- a/meta-oe/recipes-devtools/dmalloc/dmalloc_5.5.2.bb
-+++ b/meta-oe/recipes-devtools/dmalloc/dmalloc_5.5.2.bb
-@@ -28,7 +28,6 @@ SRC_URI = "http://dmalloc.com/releases/dmalloc-${PV}.tgz \
-            file://0001-undefined-strdup-macro.patch \
- "
+diff --git a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
+index b4d55be1b..9e1cedc2d 100644
+--- a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
++++ b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
+@@ -11,7 +11,6 @@ SRC_URI = "https://fossies.org/linux/misc/old/${BP}.tar.gz \
+            file://nbench_32bits.patch \
+            file://Makefile-add-more-dependencies-to-pointer.h.patch"
  
--SRC_URI[md5sum] = "f92e5606c23a8092f3d5694e8d1c932e"
- SRC_URI[sha256sum] = "d3be5c6eec24950cb3bd67dbfbcdf036f1278fae5fd78655ef8cdf9e911e428a"
+-SRC_URI[md5sum] = "285dfab361080759d477ea1fe7d3093a"
+ SRC_URI[sha256sum] = "723dd073f80e9969639eb577d2af4b540fc29716b6eafdac488d8f5aed9101ac"
  
- ARM_INSTRUCTION_SET = "arm"
+ EXTRA_OEMAKE = "-e MAKEFLAGS="
 -- 
 2.43.0
 
