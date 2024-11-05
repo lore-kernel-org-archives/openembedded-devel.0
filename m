@@ -2,56 +2,57 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 91028D2B94E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D1EDD2C13D
 	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 14:37:22 +0000 (UTC)
-Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
- by mx.groups.io with SMTP id smtpd.web11.19561.1730817433992060080
+Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
+ by mx.groups.io with SMTP id smtpd.web11.19568.1730817440016932073
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 06:37:14 -0800
+ Tue, 05 Nov 2024 06:37:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=er44N+mF;
- spf=pass (domain: gmail.com, ip: 209.85.128.174, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-6ea053b5929so45600147b3.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:37:13 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kk6CmnU/;
+ spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-6e5cec98cceso44062027b3.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:37:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730817433; x=1731422233; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730817439; x=1731422239; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=FyEbBqKvW4VAwbFUEMOBpPgk+Qpu/W7Z5W00eEokiK4=;
-        b=er44N+mFuv8VEOMH/PWtzxWPTUDdPy8ISs7J8VvioErX3C+lpL7baEoGnbGwkHpozj
-         0joUBLuhbjncMooES5P4zUD6TXJ1QzdF4BUH+eP8FconJWQdZi8zW3M5bOs/CUrLVbt5
-         1uwqoKEW2OTGuAsuNRljdAPdRnCVBysrAPz38PJW6QjLYoOmb6RMBqbyiaU1P8GEO2mR
-         RvXhT48XSC0YaQba5cxzyDYPB/V6WS5zyFUsuElTqgGUizO2L4+dxqsry8WdP1Si7c2x
-         aRkO4tDN6w6HIDr5SjqedR5JdNzn8IGSRiUIj0IzVqcA2LaKk+tYLosbr6DirP3+2WCA
-         9OaA==
+        bh=aWzQLSr+HxsPLFC9U/ANTRjIu8wBLZk24EwPceyUrKU=;
+        b=kk6CmnU/jGMHHGs7BWnJxgvN73LqMGkuOx42ZEgnx38z7R48YHcE7ToD92O29YLYtm
+         tVFHuV9AXc3hYyXIqUH5r3lLLpWEao47J0lQZ0s4T4Cw0obndz8hhoO8rjwrsKxC1FGb
+         8N8EhZFpPj8tlGM5Usqeu8QX3bGI6vxnjRtzZuJ81JfSw/RgIl6ojxLBuGM6IiRAi/oN
+         vA86xaRtp33wXypoVkTBx09rvltHumEJO9gL6aNisVgagJSV2ZLVx7qROMq9I+nCgzph
+         3sTrRJkbxeHX9J+SStJrNBNaXCDhHIyceim5z5nuUfBGMs9fJZYGaG7YV0mc+EnIg1zy
+         kf6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730817433; x=1731422233;
+        d=1e100.net; s=20230601; t=1730817439; x=1731422239;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=FyEbBqKvW4VAwbFUEMOBpPgk+Qpu/W7Z5W00eEokiK4=;
-        b=iX2X9UfVznMZY6Uz4IK5kjdtxsB6gF5S2jIseRnDgpwdcY4S+kZJlS1YSsXoim71Yp
-         1nbi9TEvSu9bfeJUKN17QEnZFr/Qpv3n11tnhxfnN0WNwRkoJ26GZ+cZOnvxBqmsBhW4
-         /7Ovsd2xFI+AfM1jgKrMxcsjU+aethFi8m3CvPNYJyMG5CA/85MTtb0xV/dJpwcYKpsU
-         THNH9qB4qprubMEzmWeKloNknBAU03KgLrh6EIYJGbIMnpSSJrmYNk2rPR8jPfEtV3cw
-         EBuuIXcL0H9BQerdiio67G49RbsjsRQnWz5vdrFqSy5AQVdHgnuIPa2VrySqIaT/Pnhe
-         b6nQ==
-X-Gm-Message-State: AOJu0YzAKvwt7cf/xhWKG2c4HxNO2R+LZVgNRKZizpVnA+hKqG9hVgis
-	xAd8Q6+cy1+9MyZ0n+okcXrG3vSdJYPNCYqrxkvLUCbbdkqP4IFGeTaBTw==
-X-Google-Smtp-Source: AGHT+IELQHsbUr0ZOwSPBK651WM1Yyo38ssfpNvDq1FXKaimrLWjOu6KB+1+u3IjoKh1Glf8UzVX7A==
-X-Received: by 2002:a05:690c:6207:b0:6e3:1903:5608 with SMTP id 00721157ae682-6ea64b1fd6cmr160264337b3.21.1730817432911;
-        Tue, 05 Nov 2024 06:37:12 -0800 (PST)
+        bh=aWzQLSr+HxsPLFC9U/ANTRjIu8wBLZk24EwPceyUrKU=;
+        b=A9lNJX6SNdGC/Gg3TkEpf8eUfmXKL4UNCi16Go7BqAG1Xl95yVC2b8blp06mkfPR0x
+         7rS1GhJYbYg2NCXsoI92d4YqanmrMSbQCA7R+FH14Wx/UKmSvBLv+ZxFFInVSjMVYq4A
+         TuBmM0NJK3rhvAyC2uXL1ayUwSIYLS4UMJxNe8REmgAwivyA+G56txKUdKShzOUiJPM4
+         siKHonMJRRTXR+/3PA+PKaHdABZoUjfce7u9yWso2QlLo0w2c4xOmpZD5onYHJDi74Rh
+         HMSEmo4Pa/K2VtnwxXtk1hFlAvs3ujvfYUsFFoK//aV+GPf8yQyCT+e0b+pInrihaSVj
+         PSMg==
+X-Gm-Message-State: AOJu0YynpeqPgmnfVwq/fK9FKtKDkl0e+u9Kaz59bqt0nDTjQcSmC+FX
+	BsIDcRP1pH74mfcp4uSjV1F3BUdXjZmLIFob8uAWmSs/kUyZK3SoqG4uXg==
+X-Google-Smtp-Source: AGHT+IGgvLu72pllgNrrJytY8idO8OqwOBInKM/nRxQ6ZqsGzcW6Q+KVHaPysPh5AfD3VVsTgffmzw==
+X-Received: by 2002:a05:690c:9c0b:b0:6ea:7bbe:56ef with SMTP id 00721157ae682-6ea7bbe5932mr125574417b3.16.1730817438960;
+        Tue, 05 Nov 2024 06:37:18 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:45dd:7000::29])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.37.12
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.37.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Nov 2024 06:37:12 -0800 (PST)
+        Tue, 05 Nov 2024 06:37:18 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][styhead][PATCH 72/90] webkitgtk3: Fix build break with latest gir
-Date: Tue,  5 Nov 2024 09:35:37 -0500
-Message-ID: <20241105143638.2301245-73-akuster808@gmail.com>
+Cc: "J. S." <schonm@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][styhead][PATCH 85/90] nodejs: cleanup
+Date: Tue,  5 Nov 2024 09:35:50 -0500
+Message-ID: <20241105143638.2301245-86-akuster808@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241105143638.2301245-1-akuster808@gmail.com>
 References: <20241105143638.2301245-1-akuster808@gmail.com>
@@ -61,72 +62,156 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 14:37:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113490
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113503
 
-From: Khem Raj <raj.khem@gmail.com>
+From: "J. S." <schonm@gmail.com>
 
-Reported with clang-19
+Drop two patches which haven't been referenced by the nodejs recipe since the
+20.11.0 version checkin.
+  0001-build-fix-build-with-Python-3.12.patch
+  0001-gyp-resolve-python-3.12-issues.patch
 
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 7be0d59669f9bc102895bc0596c30805be0eda23)
+(cherry picked from commit 2698039ac432d861465b84fc650fcaa8526c8a3c)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...b1773bff2ef7c3b867ab019d69faa36c010d.patch | 33 +++++++++++++++++++
- .../webkitgtk/webkitgtk3_2.44.3.bb            |  1 +
- 2 files changed, 34 insertions(+)
- create mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/fff1b1773bff2ef7c3b867ab019d69faa36c010d.patch
+ ...001-build-fix-build-with-Python-3.12.patch | 55 ----------------
+ .../0001-gyp-resolve-python-3.12-issues.patch | 63 -------------------
+ 2 files changed, 118 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-build-fix-build-with-Python-3.12.patch
+ delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-gyp-resolve-python-3.12-issues.patch
 
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/fff1b1773bff2ef7c3b867ab019d69faa36c010d.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/fff1b1773bff2ef7c3b867ab019d69faa36c010d.patch
-new file mode 100644
-index 0000000000..3d76aa4e4d
---- /dev/null
-+++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3/fff1b1773bff2ef7c3b867ab019d69faa36c010d.patch
-@@ -0,0 +1,33 @@
-+From fff1b1773bff2ef7c3b867ab019d69faa36c010d Mon Sep 17 00:00:00 2001
-+From: Michael Catanzaro <mcatanzaro@redhat.com>
-+Date: Wed, 3 Jul 2024 13:36:54 -0700
-+Subject: [PATCH] WebKitDOMEventTarget.h:95: Warning: WebKit2WebExtension:
-+ invalid "scope" annotation: only valid on callback parameters
-+ https://bugs.webkit.org/show_bug.cgi?id=276180
-+
-+Unreviewed build fix.
-+
-+Emmanuele recommends using (type gpointer) for the GCallback parameter
-+of webkit_dom_event_target_remove_event_listener, since it won't be
-+called and is therefore not functioning as a callback.
-+
-+* Source/WebKit/WebProcess/InjectedBundle/API/gtk/DOM/WebKitDOMEventTarget.h:
-+
-+Canonical link: https://commits.webkit.org/280639@main
-+Upstream-Status: Backport [https://github.com/WebKit/WebKit/commit/fff1b1773bff2ef7c3b867ab019d69faa36c010d]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ .../InjectedBundle/API/gtk/DOM/WebKitDOMEventTarget.h           | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+--- a/Source/WebKit/WebProcess/InjectedBundle/API/gtk/DOM/WebKitDOMEventTarget.h
-++++ b/Source/WebKit/WebProcess/InjectedBundle/API/gtk/DOM/WebKitDOMEventTarget.h
-+@@ -92,7 +92,7 @@ WEBKIT_DEPRECATED gboolean  webkit_dom_e
-+  * webkit_dom_event_target_remove_event_listener:
-+  * @target: A #WebKitDOMEventTarget
-+  * @event_name: A #gchar
-+- * @handler: (scope call): A #GCallback
-++ * @handler: (type gpointer): A #GCallback
-+  * @use_capture: A #gboolean
-+  *
-+  * Returns: a #gboolean
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.44.3.bb b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.44.3.bb
-index 0dadf570e2..01eefe13de 100644
---- a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.44.3.bb
-+++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.44.3.bb
-@@ -16,6 +16,7 @@ SRC_URI = "https://www.webkitgtk.org/releases/webkitgtk-${PV}.tar.xz \
-            file://0001-LowLevelInterpreter.cpp-339-21-error-t6-was-not-decl.patch \
-            file://30e1d5e22213fdaca2a29ec3400c927d710a37a8.patch \
-            file://0001-Fix-build-issues-with-latest-Clang.patch \
-+           file://fff1b1773bff2ef7c3b867ab019d69faa36c010d.patch \
-            "
- SRC_URI[sha256sum] = "dc82d042ecaca981a4852357c06e5235743319cf10a94cd36ad41b97883a0b54"
- 
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-build-fix-build-with-Python-3.12.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-build-fix-build-with-Python-3.12.patch
+deleted file mode 100644
+index 39026d0742..0000000000
+--- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-build-fix-build-with-Python-3.12.patch
++++ /dev/null
+@@ -1,55 +0,0 @@
+-From 656f6c91f1da7f1e1ffb01e2de7d9026a84958b5 Mon Sep 17 00:00:00 2001
+-From: Luigi Pinca <luigipinca@gmail.com>
+-Date: Wed, 8 Nov 2023 21:20:53 +0100
+-Subject: [PATCH] build: fix build with Python 3.12
+-
+-Replace `distutils.version.StrictVersion` with
+-`packaging.version.Version`.
+-
+-Refs: https://github.com/nodejs/node/pull/50209#issuecomment-1795852539
+-PR-URL: https://github.com/nodejs/node/pull/50582
+-Reviewed-By: Richard Lau <rlau@redhat.com>
+-Reviewed-By: Chengzhong Wu <legendecas@gmail.com>
+-
+-Upstream-Status: Backport [https://github.com/nodejs/node/commit/95534ad82f4e33f53fd50efe633d43f8da70cba6]
+-Signed-off-by: Alexander Kanavin <alex@linutronix.de>
+----
+- configure.py | 11 +++++------
+- 1 file changed, 5 insertions(+), 6 deletions(-)
+-
+-diff --git a/configure.py b/configure.py
+-index 62f041ce..18fe7c14 100755
+---- a/configure.py
+-+++ b/configure.py
+-@@ -14,8 +14,6 @@ import bz2
+- import io
+- from pathlib import Path
+- 
+--from distutils.version import StrictVersion
+--
+- # If not run from node/, cd to node/.
+- os.chdir(Path(__file__).parent)
+- 
+-@@ -30,6 +28,7 @@ tools_path = Path('tools')
+- 
+- sys.path.insert(0, str(tools_path / 'gyp' / 'pylib'))
+- from gyp.common import GetFlavor
+-+from packaging.version import Version
+- 
+- # imports in tools/configure.d
+- sys.path.insert(0, str(tools_path / 'configure.d'))
+-@@ -1565,10 +1564,10 @@ def configure_openssl(o):
+-     # supported asm compiler for AVX2. See https://github.com/openssl/openssl/
+-     # blob/OpenSSL_1_1_0-stable/crypto/modes/asm/aesni-gcm-x86_64.pl#L52-L69
+-     openssl110_asm_supported = \
+--      ('gas_version' in variables and StrictVersion(variables['gas_version']) >= StrictVersion('2.23')) or \
+--      ('xcode_version' in variables and StrictVersion(variables['xcode_version']) >= StrictVersion('5.0')) or \
+--      ('llvm_version' in variables and StrictVersion(variables['llvm_version']) >= StrictVersion('3.3')) or \
+--      ('nasm_version' in variables and StrictVersion(variables['nasm_version']) >= StrictVersion('2.10'))
+-+      ('gas_version' in variables and Version(variables['gas_version']) >= Version('2.23')) or \
+-+      ('xcode_version' in variables and Version(variables['xcode_version']) >= Version('5.0')) or \
+-+      ('llvm_version' in variables and Version(variables['llvm_version']) >= Version('3.3')) or \
+-+      ('nasm_version' in variables and Version(variables['nasm_version']) >= Version('2.10'))
+- 
+-     if is_x86 and not openssl110_asm_supported:
+-       error('''Did not find a new enough assembler, install one or build with
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-gyp-resolve-python-3.12-issues.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-gyp-resolve-python-3.12-issues.patch
+deleted file mode 100644
+index 9d878dfb8d..0000000000
+--- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-gyp-resolve-python-3.12-issues.patch
++++ /dev/null
+@@ -1,63 +0,0 @@
+-From bf8c96ba6936050ed4a0de5bc8aeeaf2b3c50dc1 Mon Sep 17 00:00:00 2001
+-From: Alexander Kanavin <alex@linutronix.de>
+-Date: Thu, 7 Dec 2023 12:54:30 +0100
+-Subject: [PATCH] gyp: resolve python 3.12 issues
+-
+-Upstream has updated gyp wholesale in the main branch, so
+-this patch can be dropped in due time.
+-
+-Upstream-Status: Inappropriate [issue will be fixed upstream with the next nodejs LTS update]
+-
+-Signed-off-by: Alexander Kanavin <alex@linutronix.de>
+----
+- deps/npm/node_modules/node-gyp/gyp/pylib/gyp/input.py | 4 ++--
+- tools/gyp/pylib/gyp/input.py                          | 4 ++--
+- 2 files changed, 4 insertions(+), 4 deletions(-)
+-
+-diff --git a/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/input.py b/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/input.py
+-index d9699a0a..173e9465 100644
+---- a/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/input.py
+-+++ b/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/input.py
+-@@ -16,7 +16,7 @@ import subprocess
+- import sys
+- import threading
+- import traceback
+--from distutils.version import StrictVersion
+-+from packaging.version import Version
+- from gyp.common import GypError
+- from gyp.common import OrderedSet
+- 
+-@@ -1183,7 +1183,7 @@ def EvalSingleCondition(cond_expr, true_dict, false_dict, phase, variables, buil
+-         else:
+-             ast_code = compile(cond_expr_expanded, "<string>", "eval")
+-             cached_conditions_asts[cond_expr_expanded] = ast_code
+--        env = {"__builtins__": {}, "v": StrictVersion}
+-+        env = {"__builtins__": {}, "v": Version}
+-         if eval(ast_code, env, variables):
+-             return true_dict
+-         return false_dict
+-diff --git a/tools/gyp/pylib/gyp/input.py b/tools/gyp/pylib/gyp/input.py
+-index 354958bf..ab6112e5 100644
+---- a/tools/gyp/pylib/gyp/input.py
+-+++ b/tools/gyp/pylib/gyp/input.py
+-@@ -16,7 +16,7 @@ import subprocess
+- import sys
+- import threading
+- import traceback
+--from distutils.version import StrictVersion
+-+from packaging.version import Version
+- from gyp.common import GypError
+- from gyp.common import OrderedSet
+- 
+-@@ -1190,7 +1190,7 @@ def EvalSingleCondition(cond_expr, true_dict, false_dict, phase, variables, buil
+-         else:
+-             ast_code = compile(cond_expr_expanded, "<string>", "eval")
+-             cached_conditions_asts[cond_expr_expanded] = ast_code
+--        env = {"__builtins__": {}, "v": StrictVersion}
+-+        env = {"__builtins__": {}, "v": Version}
+-         if eval(ast_code, env, variables):
+-             return true_dict
+-         return false_dict
+--- 
+-2.39.2
+-
 -- 
 2.43.0
 
