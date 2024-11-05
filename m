@@ -2,57 +2,57 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AB81D2B950
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1446DD2B94E
 	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 14:36:50 +0000 (UTC)
-Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com [209.85.128.176])
- by mx.groups.io with SMTP id smtpd.web10.19588.1730817407475154223
+Received: from mail-yb1-f173.google.com (mail-yb1-f173.google.com [209.85.219.173])
+ by mx.groups.io with SMTP id smtpd.web11.19498.1730817403148713811
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 06:36:47 -0800
+ Tue, 05 Nov 2024 06:36:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=B9WpO1CE;
- spf=pass (domain: gmail.com, ip: 209.85.128.176, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-6ea053b5929so45595647b3.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:36:47 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=H86gWfEN;
+ spf=pass (domain: gmail.com, ip: 209.85.219.173, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f173.google.com with SMTP id 3f1490d57ef6-e292926104bso4744999276.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:36:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730817406; x=1731422206; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730817402; x=1731422202; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=IgrZ6+cSeGOBgZ7w8eBuhyAGsccQODYCY9BymyxVDQg=;
-        b=B9WpO1CEk4r25Al+t1SyTM5vHJMEX2MTq1VJ0KN8osVf8YOLeBMfK7WT8FOtYFJhCJ
-         mMXFPp+Wxj1iH3DLTAjCXx13PrZT18EGYKEMI6O//0ePlqZGXt86KgFb7p9hdBiQY4YD
-         ygpnBnuzM/EjQcTqf9buyCW3ccooY4c6UQWWDMtPzusLo+kqQH7lLa9qjYPhvEO4g1OZ
-         juLIUK8p62ZgHswnW3DrnxvoLZ32GTDfBFd7doel/zIYCyPPnIU/fv+7dJT30jvp5icm
-         riHMXVJFqr9iu29w0IvqPxqhBDxhMGYu+2tD0DeS1erNLvxjGbCQuIPMKA1XWMhFd6UK
-         CWzw==
+        bh=jQPpzrrGFS5wGamk9WfugMfAZ7A0hJDMONeG1ntxMVw=;
+        b=H86gWfENLL/5fwvy+8WvOdVBTqVv6z/iC+GltHi3T7pqaKCq0ID++XAVRxTAEzNpbl
+         grVuyj9GXW7hr/3xtIkY6zSV69AYPMN+KGRByJ1MHQYDv1tRU+UKp3eYn6/4RRLGXSza
+         L021Zo4zSTn3YDcGBCfvi0m7vWPISbelrBcNqvxww5ibHzI3tlKaqjUKp+iL5ITATm2G
+         edKK5hE/pDI3FTYoJE7KrC2bV4OQ/rpIFHgriHY7uLPLl36OU1m0kVd23sCH4w9I+kYx
+         PVe6kHUkzeeivIcMDtWjxvRO+MnVUQuxrxEBlv6sBtAukk/U+L1MmuEWk2UfXAbuXxjE
+         qaTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730817406; x=1731422206;
+        d=1e100.net; s=20230601; t=1730817402; x=1731422202;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=IgrZ6+cSeGOBgZ7w8eBuhyAGsccQODYCY9BymyxVDQg=;
-        b=Nk4JlmldKLCbjwDxzyArODrdwXY67yD4IT+ry0rGhTws85jSTZP+/g92mi8DFpJJvf
-         Cp7kYWZrOnjQsqV1aXp7iIV7V/gZkfQLYdMqxqdM35lQ7n6AYnsQtrR6O6sGwc9fi4XT
-         7lYq6mAnEbnHuKLU3OjnQh5tw3bC+rhdwBZTHsnOKfpv8tvP5UK0oBuEK6ltAV6l54YH
-         ntW4fpZAgANe7MUEzNxfw+kFm7KtMvOEJkrpCDT1z0alH2O3yyTdtjChjyPGchkOuFiu
-         tq9fpioBzmPxQ9GHM9VHsBUnRgucT00fwOGVZk3sdmU3TG8teFkAw1FI8FEerEx5Fe2v
-         xawg==
-X-Gm-Message-State: AOJu0Yw1fOJ/0xJvcHgEKVeo8CN3jq4CahgxyzZT5hHRO13LoZYWuMOV
-	2y8q5VtJa1CavGBZNslhKZvbGVKhBnla7Rz3tjnuCl+QVX3y9PiOa40VEw==
-X-Google-Smtp-Source: AGHT+IHIdt4nIrf4mSZxk3/aY539YG25My+cmQvu7eqTpbmA7Oe27yx8CUCeDpBoU9O+lL7TCOgvZA==
-X-Received: by 2002:a05:690c:4b0c:b0:6e3:7eb7:b600 with SMTP id 00721157ae682-6ea64c2f2b1mr153014567b3.43.1730817406455;
-        Tue, 05 Nov 2024 06:36:46 -0800 (PST)
+        bh=jQPpzrrGFS5wGamk9WfugMfAZ7A0hJDMONeG1ntxMVw=;
+        b=i3qB79bp9feP5Vmgae+U5sbE9RZTZIvbuYC7AZAi3AscKfoo9QLuc50ntSCNcDW1d9
+         BZ21eEiRHT/ir5jHbNAE1rGcMbfzBNQg0sH+dWvieCR65ijn1rTjV/IcMUizFql040gs
+         caeM0+bIuTDuA7aT6PG5+7rqjm0b4zF+Tr5o7wX2egcH4UaNrhjaYKpileKPsebzkkWp
+         vqA0zRZouYQpuFkIVDwM3fpA6jd5nL2dOXka2lnrUP/bZZmz6Osu5O7mzjAdLkaJPXhN
+         EU34+tzs3prcFctzaCBFICgfPLUxJ6cJ40occG2BjnWsz0WkBvoGOe/TMDmyQeWdWSG+
+         bfMw==
+X-Gm-Message-State: AOJu0YzE5pbcn/S1/+7dVX5t+rEY5hY9mCf1Uiwfle+5oMlodc603Fai
+	a1e73rE5Qva2XRs+0+C9n2GOdt/YvKYc9lSYSXCL17Pj9eiMWPN+UZylBQ==
+X-Google-Smtp-Source: AGHT+IGDrJd9kJpIDM91sQrBiS+3p8mACkzliTuQUqj9/fj6DPI0Upk1FzX1mvYq+21wGBu0RGM1AQ==
+X-Received: by 2002:a05:690c:23c2:b0:6e3:156e:a917 with SMTP id 00721157ae682-6e9d89b12b9mr362442757b3.14.1730817402206;
+        Tue, 05 Nov 2024 06:36:42 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:45dd:7000::29])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.36.46
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.36.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Nov 2024 06:36:46 -0800 (PST)
+        Tue, 05 Nov 2024 06:36:42 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][styhead][PATCH 16/90] python3-pyasn1-modules: upgrade 0.4.0 -> 0.4.1
-Date: Tue,  5 Nov 2024 09:34:41 -0500
-Message-ID: <20241105143638.2301245-17-akuster808@gmail.com>
+Subject: [meta-oe][styhead][PATCH 06/90] libmanette: upgrade 0.2.7 -> 0.2.9
+Date: Tue,  5 Nov 2024 09:34:31 -0500
+Message-ID: <20241105143638.2301245-7-akuster808@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241105143638.2301245-1-akuster808@gmail.com>
 References: <20241105143638.2301245-1-akuster808@gmail.com>
@@ -62,36 +62,47 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 14:36:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113434
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113423
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-  Added support for Python 3.13
+===========
+* Update and clean up the game controller mapping database
+* ManetteDevice
+ - add manette_device_get_mapping() and manette_device_get_guid()
+ - Handle keycodes before BTN_MISC as well
+* ManetteMapping
+ - Allow to map paddle1-4, misc1-6 and touchpad buttons
+ - Improve error handling
+* ManetteMappingManager
+ - Check if user mapping file exists
+* Tests
+ - Test default mappings
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...-pyasn1-modules_0.4.0.bb => python3-pyasn1-modules_0.4.1.bb} | 2 +-
+ .../libmanette/{libmanette_0.2.7.bb => libmanette_0.2.9.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pyasn1-modules_0.4.0.bb => python3-pyasn1-modules_0.4.1.bb} (90%)
+ rename meta-oe/recipes-support/libmanette/{libmanette_0.2.7.bb => libmanette_0.2.9.bb} (87%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.4.0.bb b/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.4.1.bb
-similarity index 90%
-rename from meta-python/recipes-devtools/python/python3-pyasn1-modules_0.4.0.bb
-rename to meta-python/recipes-devtools/python/python3-pyasn1-modules_0.4.1.bb
-index 48372d917f..e8c0f960aa 100644
---- a/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.4.1.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/etingof/pyasn1-modules"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=190f79253908c986e6cacf380c3a5f6d"
+diff --git a/meta-oe/recipes-support/libmanette/libmanette_0.2.7.bb b/meta-oe/recipes-support/libmanette/libmanette_0.2.9.bb
+similarity index 87%
+rename from meta-oe/recipes-support/libmanette/libmanette_0.2.7.bb
+rename to meta-oe/recipes-support/libmanette/libmanette_0.2.9.bb
+index db05422699..2e59401892 100644
+--- a/meta-oe/recipes-support/libmanette/libmanette_0.2.7.bb
++++ b/meta-oe/recipes-support/libmanette/libmanette_0.2.9.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+ DEPENDS = "libevdev libgudev"
  
--SRC_URI[sha256sum] = "831dbcea1b177b28c9baddf4c6d1013c24c3accd14a1873fffaa6a2e905f17b6"
-+SRC_URI[sha256sum] = "c28e2dbf9c06ad61c71a075c7e0f9fd0f1b0bb2d2ad4377f240d33ac2ab60a7c"
+ SRC_URI = "https://download.gnome.org/sources/libmanette/0.2/libmanette-${PV}.tar.xz"
+-SRC_URI[sha256sum] = "cddd5c02a131072c19c6cde6f2cb2cd57eae7dacb50d14c337efd980baa51a51"
++SRC_URI[sha256sum] = "29366be5452f60a74c65fc64ffe2d74eddd4e6e6824c2cefa567a43bd92b688f"
  
- PYPI_PACKAGE = "pyasn1_modules"
+ inherit meson pkgconfig gobject-introspection ptest vala
  
 -- 
 2.43.0
