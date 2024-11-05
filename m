@@ -2,57 +2,57 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 123DFD2C10F
-	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 14:37:01 +0000 (UTC)
-Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
- by mx.groups.io with SMTP id smtpd.web10.19604.1730817410951806466
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3CF4D2C10D
+	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 14:37:00 +0000 (UTC)
+Received: from mail-yw1-f171.google.com (mail-yw1-f171.google.com [209.85.128.171])
+ by mx.groups.io with SMTP id smtpd.web10.19614.1730817417671703121
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 06:36:51 -0800
+ Tue, 05 Nov 2024 06:36:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=hWsd7vPB;
- spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-6ea11b32ab4so36753127b3.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:36:50 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=BHt2/sFP;
+ spf=pass (domain: gmail.com, ip: 209.85.128.171, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f171.google.com with SMTP id 00721157ae682-6e3cdbc25a0so60984467b3.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:36:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730817410; x=1731422210; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730817417; x=1731422217; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=h701cJeR2nJyjirhzEOd2svUc1QpMc+pwHm/eymkJ7E=;
-        b=hWsd7vPBlky+jOvbsdMU/xbOqFFtdLiVMO47JpgWmQICZ8l2WeUDMBkNL3E81nCqkP
-         V9qZUS6L0CIRtU4g+IrI+agfwHC7HcOA/RoB9M7dFUcI0RF08D7tWqBulYaWFr4UUbcK
-         FTSJxENiyvbygR5yEO8Shc4wrqyhyaFFRUj3/7MKaPzNen30nKKbO4zib6OXp/IeCxdW
-         GaClTl/o/40/3dV5vWAPRODfhEb/P1xwIrbrNlbT4+vd6X0IBkVMKh/XotSyJfe3zgKa
-         IzTzVhQNJ2PbFSzHL3wc9rOIdtfyC+L6ML6dIosB+IQzCCsHYZ068iE/i80RlAtItm7U
-         zfSg==
+        bh=OjX86YdVb1CErLxigVEEoZ2wn/C9nMkvLicGJhqSC1c=;
+        b=BHt2/sFPMzKWu/r/UO22wdxpRoxY146Iy0S5IgRNSQkJSj7gIJ1MsiRVd3R9u+0WFZ
+         jS3HtgC6uSGTG+cqD8p0bbj8mnKEhxVQJmDurR6MzgLw5EOXPKTXUSFNBlyZvFdBbhZl
+         4cbXTZbRLivpObolkL48AEprybMrr2p5IptraoDI9eNtU7z8iuPbLMWPbBIcK+bI+MjE
+         DTNw4l/j2IkUzfTcu0Y4QDV63maKBwySBwM/c/bamIXaTU+a+EYkCqkhWl4Qk1dzwizM
+         A77r127dLVUeeQc097W+mrJElpt0bQ+MYgVgZFEXJKLo8mhLS0Yt0zLggZKEjDdWAbAb
+         hwLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730817410; x=1731422210;
+        d=1e100.net; s=20230601; t=1730817417; x=1731422217;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=h701cJeR2nJyjirhzEOd2svUc1QpMc+pwHm/eymkJ7E=;
-        b=rIRcGifUDF3fnFCXElVoNj5rtaaEPPBZ42DMa1GDu7LsHBodn0FsFCB6vfGLbe4w85
-         KwpBE/4a84wNYoggUXNWc4+FnZO+iy7WdNc5SfwJG5zdbKGn8IG8BtC2OHoes2rTF43G
-         wsHI2rGO5eDTR6poy3zgnxUr/FKKewyRMm3O6WbKpJ1byaRPC32w1/oqY7k60QjGikLS
-         OR2qA/gVf+2QpGB962+DyIIzsFZ1iyVCRyVE54Nkz5rVggGGYESf6mVCXdv7JNBVITbx
-         9CU2GlI0IZSS5d3UY5FhA8aajgumjfp9p+9wZFUq+YIav3ekov6Osz609TOql+FiPlfg
-         6fgg==
-X-Gm-Message-State: AOJu0Yz5Udey/mBXGHgl/g7SKgZ2GBYcNxQX+pLXn0CS/1hwLZBA7nTV
-	T5siV0aaEc0+j6RJMegws0Tm3CHdQdqF8l4kduteUretRxv1KIJGgurg8A==
-X-Google-Smtp-Source: AGHT+IHD2oR1O5ys1sQ0LIoJIi4GSqfdeF1jvZvM07xESgFCvtIcqyytGMPYOhBHVa+xnY6JxZmPJA==
-X-Received: by 2002:a05:690c:6c11:b0:6e9:c117:760b with SMTP id 00721157ae682-6ea557df6d0mr158927747b3.5.1730817410044;
-        Tue, 05 Nov 2024 06:36:50 -0800 (PST)
+        bh=OjX86YdVb1CErLxigVEEoZ2wn/C9nMkvLicGJhqSC1c=;
+        b=AGakuxMXXHQhzYAq7iKgwdcFZYOUA1Uf0mMHwPTgPAD7zYRQtLdcjaYhtWDjpuZYri
+         MWVwK80kD4wRAdtjq7hC/36HJXjqCR3sUJWu4jJiMI3cs3ETg8ym4P+n60BwjFwxLNIO
+         Xn4ufPnE/pOgfnmfscw+cr2DAG1spg49gVA+Quwx2e1JHRr6kitdTkl229rcpHvS790C
+         TZ+Kx0DyDz61G2UJts7t6O14cReX7qPcC9Ne6dDAp6PH2O02TbBq/ApPfFh1I8O5G5XQ
+         v4WlmTCza1+FsTnGMPzMTywhxZMJ2sm10IkwKdHLWS7b2DyNNxTpTxwlI1sZrqMfA0aH
+         9EuQ==
+X-Gm-Message-State: AOJu0YwQokOeGoMWt5gd3nWcGnR66+I89J2fhBps3I+2czfEn0XlBhni
+	k0kP4ATDmJBA7psjTmegMeezmQ+F0q3K4GzswQFB1bnm4wG4LVEf7WYvjQ==
+X-Google-Smtp-Source: AGHT+IHjcNhrP5cunhLeL29jDDRgwTXZuYYyOF4gtig4yGWCyP9eBaxLxCNqCi9Y5xbGRxpc9yhQZw==
+X-Received: by 2002:a05:690c:4d49:b0:6ea:5da9:34cc with SMTP id 00721157ae682-6ea64aa6dd5mr175320527b3.7.1730817416655;
+        Tue, 05 Nov 2024 06:36:56 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:45dd:7000::29])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.36.49
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.36.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Nov 2024 06:36:49 -0800 (PST)
+        Tue, 05 Nov 2024 06:36:56 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
+Cc: Yi Zhao <yi.zhao@windriver.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][styhead][PATCH 24/90] python3-xmlschema: upgrade 3.3.2 -> 3.4.1
-Date: Tue,  5 Nov 2024 09:34:49 -0500
-Message-ID: <20241105143638.2301245-25-akuster808@gmail.com>
+Subject: [meta-oe][styhead][PATCH 38/90] tcpslice: upgrade 1.7 -> 1.8
+Date: Tue,  5 Nov 2024 09:35:03 -0500
+Message-ID: <20241105143638.2301245-39-akuster808@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241105143638.2301245-1-akuster808@gmail.com>
 References: <20241105143638.2301245-1-akuster808@gmail.com>
@@ -61,40 +61,37 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 14:37:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113441
+ <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 14:37:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113456
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Yi Zhao <yi.zhao@windriver.com>
 
-Changelog:
-===========
-- Fix failing URL normalization tests
-- Disable protocols checking with elementpath v4.5.0
-- Extended ModelVisitor to make it usable as an helper class for generating content
+ChangeLog:
+https://github.com/the-tcpdump-group/tcpslice/blob/tcpslice-1.8/CHANGES
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{python3-xmlschema_3.3.2.bb => python3-xmlschema_3.4.1.bb}  | 2 +-
+ .../tcpdump/{tcpslice_1.7.bb => tcpslice_1.8.bb}                | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-xmlschema_3.3.2.bb => python3-xmlschema_3.4.1.bb} (81%)
+ rename meta-networking/recipes-support/tcpdump/{tcpslice_1.7.bb => tcpslice_1.8.bb} (87%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-xmlschema_3.3.2.bb b/meta-python/recipes-devtools/python/python3-xmlschema_3.4.1.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-xmlschema_3.3.2.bb
-rename to meta-python/recipes-devtools/python/python3-xmlschema_3.4.1.bb
-index 33244d98e5..845735c9ba 100644
---- a/meta-python/recipes-devtools/python/python3-xmlschema_3.3.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-xmlschema_3.4.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/xmlschema"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=26aa26eda991a3a2b61c11b62d3fda65"
+diff --git a/meta-networking/recipes-support/tcpdump/tcpslice_1.7.bb b/meta-networking/recipes-support/tcpdump/tcpslice_1.8.bb
+similarity index 87%
+rename from meta-networking/recipes-support/tcpdump/tcpslice_1.7.bb
+rename to meta-networking/recipes-support/tcpdump/tcpslice_1.8.bb
+index 93197dc3bc..3d61160bb0 100644
+--- a/meta-networking/recipes-support/tcpdump/tcpslice_1.7.bb
++++ b/meta-networking/recipes-support/tcpdump/tcpslice_1.8.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://tcpslice.c;endline=20;md5=99519e2e5234d1662a4ce16baa6
  
--SRC_URI[sha256sum] = "a2f021f21d0b5ab371e9bcb5a1d5c34b9ba2c74ad3e32854474c4159bf94e158"
-+SRC_URI[sha256sum] = "4f69eca6f2c446b06c74acd958e7d6613487c253d959a3b75078dfcc880b80ff"
+ SRC_URI = "http://www.tcpdump.org/release/${BP}.tar.gz \
+            "
+-SRC_URI[sha256sum] = "e513f0710c4ab45ec627e5df6f7b80d12e488146e1bd500c92247e20ca608903"
++SRC_URI[sha256sum] = "082967d6bf793499d3d655cea2149e07c0da97287f1877a6eab88d17cb703d0d"
  
- inherit pypi python_setuptools_build_meta
+ UPSTREAM_CHECK_REGEX = "tcpslice-(?P<pver>\d+(\.\d+)+)\.tar"
  
 -- 
 2.43.0
