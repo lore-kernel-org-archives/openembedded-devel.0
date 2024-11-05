@@ -1,106 +1,81 @@
-Return-Path: <jsbronder@cold-front.org>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE70AD3E770
-	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 21:20:08 +0000 (UTC)
-Received: from fout-b3-smtp.messagingengine.com (fout-b3-smtp.messagingengine.com [202.12.124.146])
- by mx.groups.io with SMTP id smtpd.web10.31604.1730841605524220840
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B5B1D3E77D
+	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 22:57:59 +0000 (UTC)
+Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
+ by mx.groups.io with SMTP id smtpd.web10.30057.1730837356950938658
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 13:20:05 -0800
+ Tue, 05 Nov 2024 12:09:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@cold-front.org header.s=fm1 header.b=bDpuflxU;
- dkim=pass header.i=@messagingengine.com header.s=fm3 header.b=oExpyRlV;
- spf=pass (domain: cold-front.org, ip: 202.12.124.146, mailfrom: jsbronder@cold-front.org)
-Received: from phl-compute-03.internal (phl-compute-03.phl.internal [10.202.2.43])
-	by mailfout.stl.internal (Postfix) with ESMTP id C4FAD1140151;
-	Tue,  5 Nov 2024 16:20:04 -0500 (EST)
-Received: from phl-mailfrontend-01 ([10.202.2.162])
-  by phl-compute-03.internal (MEProxy); Tue, 05 Nov 2024 16:20:04 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
-	 h=cc:cc:content-transfer-encoding:content-type:date:date:from
-	:from:in-reply-to:message-id:mime-version:reply-to:subject
-	:subject:to:to; s=fm1; t=1730841604; x=1730928004; bh=QF+5W0ZpKD
-	qVcIfCSbsJh0mQpFQ6DWURrVmJycWGJqI=; b=bDpuflxUYq1e4HDixSp4FGEJMb
-	2kFSQZeQbtk0O3vz36lQgqYNv3cugCuS7/oanPxF0jHaEpxkQb4c8h29Fzl9/R3J
-	p21oDfpCc6BPzynRJeT5/lIxbwU6j4KyQUz/jsrnGMQw/fQzProQOKJ5nrUs4N5g
-	LhdCM1ld5qvbshKtbMYqlRZ36/su+nbeoAoVZvw4YnT0Doh0cOpcXcWlw1f/pXEG
-	2f/15Y4vOTHyj6eDT7qCqdyqzUWZm41jufz5T20psUDcJWEIEvq0gEd1WGNI109A
-	8R3OkK5DYEDAAszS4eVcoPtxvty8U77uBHucf1fNoq0DhAvc/pAkjEjtKrvQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:feedback-id:feedback-id:from:from
-	:in-reply-to:message-id:mime-version:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
-	1730841604; x=1730928004; bh=QF+5W0ZpKDqVcIfCSbsJh0mQpFQ6DWURrVm
-	JycWGJqI=; b=oExpyRlVYmcVbjcV2voSq6c6DsU7IqBSNkEoWzh1PUHbtOziswo
-	LlhINz9MZfG2FKuCNg5/vt/KHrFpc4Iz6ZhIJ/iDPoYyIJfS4s4NP1l73uV7iYMz
-	mNp30FTbp/CK6spUumBYk7fo5UBTBqVGz01N14GO28u5rnD3AK59ajHInmx8aqkB
-	jszPP0GkKFTQ/UFxfozmiwn4UdXdo4jlvogDPRZQo410YSnrxy/jXeXwdrJ1GEp+
-	Oq43IuQL/O9Zk5DYueThaJEA596v8S7agmJ+2+B5x0ReDyk7Ow3nchRayY1DxzNy
-	1x0jVCZxRwnDEQlQDShMSJ8lwe13M0STqKA==
-X-ME-Sender: <xms:BIwqZ-d6ws1KV3NTnWSkX7KEMM-jB5ZXZfxZfaUCVXhStu51gwygVg>
-    <xme:BIwqZ4P6Iz2Me46RrdT637q7oRwVJPoEB5AjwbfDzlq6OOSnF0-_mSVD4BNZUalf-
-    2a69S-Paw4XxZ0h9g>
-X-ME-Received: <xmr:BIwqZ_izh93nTY1E6C-uqY1xd8b1aUTjp0jZ6Ejo5DB0gC78pS5lpFEN5lm-SdCtoNS4JbHCYId4S-s0BHISxmGBe-rvCsR0OKp5aXW7iw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefuddrtddtgdduudekucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggvpdfu
-    rfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucenucfjughrpefhvfevuf
-    ffkffoggfgsedtkeertdertddtnecuhfhrohhmpefluhhsthhinhcuuehrohhnuggvrhcu
-    oehjshgsrhhonhguvghrsegtohhlugdqfhhrohhnthdrohhrgheqnecuggftrfgrthhtvg
-    hrnhepudfghfdvkeeuheduudduhfeuieeikeegfeelhffgfeejgeelheejhfeftdelheeg
-    necuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhhssg
-    hrohhnuggvrhestgholhguqdhfrhhonhhtrdhorhhgpdhnsggprhgtphhtthhopedvpdhm
-    ohguvgepshhmthhpohhuthdprhgtphhtthhopehophgvnhgvmhgsvgguuggvugdquggvvh
-    gvlheslhhishhtshdrohhpvghnvghmsggvugguvggurdhorhhgpdhrtghpthhtohepjhhs
-    sghrohhnuggvrhestgholhguqdhfrhhonhhtrdhorhhg
-X-ME-Proxy: <xmx:BIwqZ7_c-3txeNXUXm6qSxU13CWlpXjRCs_P2Vc2Tk7u7q2iWMYgfA>
-    <xmx:BIwqZ6tb6HCzlna6FYPDVl6TV899dFNqocqnGtb35551doLQPLjJYQ>
-    <xmx:BIwqZyFG1SEuUUVSzr5gHI0TGZaO5dIXonj9lj4neG3tWRorYBNSPg>
-    <xmx:BIwqZ5MT2rsc2EQBwTIHyxVg2H-1sUSBZbm5-fdVx-c_gdiTcyJq5w>
-    <xmx:BIwqZz4TZRBFo3F7kN0wdI7fz3C-CT2UkkWFPxaMdcwzM5e9NeSLyP_r>
-Feedback-ID: iea0042cb:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 5 Nov 2024 16:20:04 -0500 (EST)
-From: Justin Bronder <jsbronder@cold-front.org>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jaEK8C+T;
+ spf=pass (domain: gmail.com, ip: 209.85.128.180, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-6e38fa1f82fso10063407b3.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 12:09:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1730837356; x=1731442156; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=oO9Aaw7AZn2kptiR2UCbyy2x2ZQG87Dkx/SzZOZnR44=;
+        b=jaEK8C+Twse+/kcwdwXsM+JeeEXUmHK/D02/MDRzUd1Fccx3AdHIJqxaCHViySrRHf
+         FtOLLgcqe0Ch/VI8UIJNwe9oozJwVlbGR0WFFshYDCJ7G8Tgs19cx/8sBj8psmXqfQkE
+         IG7toVmN6ytXuxAxPNlNOkE28WVbQfLHSnTTjNcvlbpEcb0ayR1b8s8DOjeL+dmlUWap
+         wufKi5knAY8EZOANCOyeiXtaDvhtf4eJRenxwJdhNJFrdwS2O6wvYsv6a2cHPCxm16Xd
+         +f8z26JmXTyamkdE7y4y7xcTrOUr75UdMedt/ahHBBFVGldiQva9UgygalOVXck1tevJ
+         CWLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1730837356; x=1731442156;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=oO9Aaw7AZn2kptiR2UCbyy2x2ZQG87Dkx/SzZOZnR44=;
+        b=bEsfTncLNjYgNnkCaSxMkvyCr2eynyYONWle00zhg8WVAKq0ObWP6U+1xZP/+az2X+
+         0WYAykwAulNIdb4pZGPr8qrSjB8lu8QsAbP+KCRMuqECr9kLa6pMuqlHjg5+uwyQWR25
+         8x9/2ID4LCZl28zQi7jwvgFbgbRckvLoq3CJ/lADkMofyyki/F1/2sPaUZ5BQNbP2onK
+         E7jEaUGmDJ8hkfjXStrMEcMpPlBGM7lvxD+vYalhP6nVc1R5ydm3jpNkwDbL1y7ikBHd
+         ZwCsYhp5yxyUBZYP/PGBeb1Kem5QLAlqq2AdbnEifl9Hlb4z/6m6Kqc022yLIKeGmPhm
+         1mDg==
+X-Gm-Message-State: AOJu0Yzkj0guMw5xeqnQPNPFVpcnYYnJX+RKSDzynyryD5VJtdnMxH2D
+	jwKq/7Sok2p4rQc5icvjAojzMGK7qxjtpq+JBaRZbJOAELw0+m+hLO6WxmMW
+X-Google-Smtp-Source: AGHT+IE7f1aLgmPQEyRUvQ09OsRjShWBbnqxvJ5bowklQjtUcUF45wirroU3H1zauOB2mC17O0oUyA==
+X-Received: by 2002:a05:690c:4b0e:b0:6e3:2047:58fd with SMTP id 00721157ae682-6e9d8b47cfbmr366144117b3.38.1730837355441;
+        Tue, 05 Nov 2024 12:09:15 -0800 (PST)
+Received: from localhost.localdomain ([71.215.7.194])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55ac9788sm24384527b3.9.2024.11.05.12.09.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 05 Nov 2024 12:09:15 -0800 (PST)
+From: "J. S." <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Justin Bronder <jsbronder@cold-front.org>
-Subject: [meta-python][scarthgap][PATCH] python3-xmodem: replace hardcoded /usr with ${prefix}
-Date: Tue,  5 Nov 2024 16:19:51 -0500
-Message-ID: <20241105211951.305771-1-jsbronder@cold-front.org>
-X-Mailer: git-send-email 2.46.1
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH 100/161] font-misc-misc: Drop unnecessary SRC_URI md5sum
+Date: Tue,  5 Nov 2024 15:05:50 -0500
+Message-ID: <20241105200651.39395-100-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 21:20:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113617
+ <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 22:57:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113618
 
-Without this the native recipe cannot be built.
-
-Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
-(cherry picked from commit 4a86f8a54fe96f4aa05232180a2a744a15638f55)
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-xmodem_0.4.7.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-graphics/xorg-font/font-misc-misc_1.1.2.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-xmodem_0.4.7.bb b/meta-python/recipes-devtools/python/python3-xmodem_0.4.7.bb
-index 482f0c641..a5942e3d5 100644
---- a/meta-python/recipes-devtools/python/python3-xmodem_0.4.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-xmodem_0.4.7.bb
-@@ -9,8 +9,8 @@ inherit pypi setuptools3
+diff --git a/meta-oe/recipes-graphics/xorg-font/font-misc-misc_1.1.2.bb b/meta-oe/recipes-graphics/xorg-font/font-misc-misc_1.1.2.bb
+index 852f93602..ed314ab3c 100644
+--- a/meta-oe/recipes-graphics/xorg-font/font-misc-misc_1.1.2.bb
++++ b/meta-oe/recipes-graphics/xorg-font/font-misc-misc_1.1.2.bb
+@@ -13,5 +13,4 @@ inherit features_check
+ # depends on bdftopcf-native -> virtual/libx11
+ REQUIRED_DISTRO_FEATURES = "x11"
  
- do_install:append() {
-     install -d ${D}${docdir}/${PN}
--    mv ${D}/usr/doc/* ${D}${docdir}/${PN}/
--    rmdir ${D}/usr/doc
-+    mv ${D}${prefix}/doc/* ${D}${docdir}/${PN}/
-+    rmdir ${D}${prefix}/doc
- }
- 
- RDEPENDS:${PN} += " \
+-SRC_URI[md5sum] = "c88eb44b3b903d79fb44b860a213e623"
+ SRC_URI[sha256sum] = "b8e77940e4e1769dc47ef1805918d8c9be37c708735832a07204258bacc11794"
 -- 
-2.46.1
+2.43.0
 
 
