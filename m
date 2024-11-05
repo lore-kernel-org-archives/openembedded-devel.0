@@ -1,84 +1,70 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 45E06D3177D
-	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 18:17:14 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web11.27157.1730830630559872895
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D6F0D33A3D
+	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 18:54:55 +0000 (UTC)
+Received: from mail-yb1-f173.google.com (mail-yb1-f173.google.com [209.85.219.173])
+ by mx.groups.io with SMTP id smtpd.web11.27708.1730831864905280335
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 10:17:10 -0800
+ Tue, 05 Nov 2024 10:37:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=at6A8TRw;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-720b2d8bcd3so4713533b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 10:17:10 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=l2atKMfr;
+ spf=pass (domain: gmail.com, ip: 209.85.219.173, mailfrom: schonm@gmail.com)
+Received: by mail-yb1-f173.google.com with SMTP id 3f1490d57ef6-e30d821c3e0so5883645276.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 10:37:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730830630; x=1731435430; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730831864; x=1731436664; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=zuXassOIjl08A2NgRhhrttJYRaSassEICJ3wDSVrV3I=;
-        b=at6A8TRwXsm7Y0u1+mVuLisAs5Q0DE/53sAGe71X5snb1TbU+TdmBdR8CcEOMX3chp
-         f/Ia8d3/tE/XA72DRyy0GL9bRxB1Mggc6J46PYpuABG+s6K+LpaA4vYJZ/NSfPXlcTSY
-         n62CW+RTH+ruMag6dvXTTyl1f0qbbFqevIC4iZzi3BDrL7NuQp5bNw/xx7Rq3iudTPbE
-         FgChRHrkiA17hro2vLm4yN/aMgjx4cO64MUDOLE4z4z9wBFc/TE9Uzmjh1AW4H49gHJi
-         xhAzTfpZXfoQ1GshKfbfDznleU74IS0ycgFMhxX+SemJRzAlZfieZ6Pr/t1y1nGyxgCl
-         r3zg==
+        bh=WmKVRqcUwuPG35ntuYOwAV1ri3jwg38VtdvoWjYunVA=;
+        b=l2atKMfrl/8lZkjmyW5Y4FrJrCoLJuT89Cmzkyp2G+pe7GN1YN1hEdGqM7BxL1SvB7
+         vhir2VTVCHD1SPM+EdHUIREeeruuhjhM/BRbtQV1zCYJrvXm4i7Yntqc72mPAd+1xcSV
+         kjQkm6oXFXUAISs75Xj6790/SrpWBLxQRdjoYvppRXlf4y0kWdaItBnQfT77elryjXQY
+         AcR0lAV731+63jgPGoOmOjjppxUhfqCOS2Oezo3keXZRdv03i3D9cTJKW5NKuDucq0S6
+         p2opsU4Ue3818EiDhvhtxyk+zL7cOP0VvzMi/mle3LL+ih7efPZXXKn9X4BW5rb04ZK+
+         LC7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730830630; x=1731435430;
+        d=1e100.net; s=20230601; t=1730831864; x=1731436664;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=zuXassOIjl08A2NgRhhrttJYRaSassEICJ3wDSVrV3I=;
-        b=QB4dUsMWiFkeU0SwMzL32S1VGMtt4rSnnhNK7ICYf+dkNoM6AtXrbw2SUHe2fiPntj
-         WIHGuUjzjPBlepBxyRKSXPrRmd8A64Ke4Ula5ZreopzQhPqNchd8tamzF/txEvyTgEsp
-         Su+IHJV9N+DdvENSoPjoPCJFa13D9XAEuOvgPE6AtkJSSHeNmT92lDkrdinNu8LdQLpM
-         ZrcQXebGf10tq7eiBzPtz1sqrk+DWJzXWRTnWjm6FZWx81maPn2kPz5X01V9PJOvMbLx
-         BQITEYGukKFGAXjX9Ig5mfeRUJRmMkSy68ynbVGo/p+FfLoAiX+Y1lKjUP1OAuAMW2no
-         YFHA==
-X-Gm-Message-State: AOJu0YzuunOUrMIDT8NguhcoBpMhBNRu9195xypOzbQnruOf8HFFw530
-	55xxpMYZiEGsuWFUJPQ3tW9A2z5ZnjZQf7bm1WbclUIfTkKUGVczxjIhCQ==
-X-Google-Smtp-Source: AGHT+IHCmY/z+dmg7XVT8U/ALoZKxCbPOvdtSkjx7w0096cjX+nPfRHwmVfCVkJt8+AQ/sQ54sfgUQ==
-X-Received: by 2002:a05:6a20:9150:b0:1db:f908:f605 with SMTP id adf61e73a8af0-1dbf908f67dmr2313362637.33.1730830629581;
-        Tue, 05 Nov 2024 10:17:09 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::ba3])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-720bc1c9fd4sm9939837b3a.22.2024.11.05.10.17.08
+        bh=WmKVRqcUwuPG35ntuYOwAV1ri3jwg38VtdvoWjYunVA=;
+        b=lxDcT9mhItoshLMN9w7d26WWmmsAoRXFZ9gNB4pNzkvh6DXPJfJu5Bwv0Prg9a8UQV
+         OQDOipBOEAsA55XV5J5g5MeJAKPrLkYWRlo2/lKcoPo4qGgJig9JImLVr2K37V7ED191
+         a/msS3ZxMECLH2YiNMc+KZRKB5k6XdIMQRc7NBzJBMuLZiidSgM8zBMySkftA/4TXmLK
+         V3t0HkqOjLiNQDvZpSXxSAYI360AxehwaMifXUsBrCEFzXwrR8MsetSib+PF02ruh4Fn
+         GWtuREt1AUD/FBrS8U65qmCLgqyJ5LsvjrlMuo/toDmFiAAzmnCiDAN2lDRAjkuDgscr
+         Nnbg==
+X-Gm-Message-State: AOJu0Yybml/L/zBa7EzqNbNfSjiWpszhCdjAs1Tu/BKrSuBj0nzlz7Dc
+	Z7f+eFaywZWe95IHg04gQgSOWQ0FqhiEudtatLuSgap+xaDID8VWtyAM1XV4
+X-Google-Smtp-Source: AGHT+IG9kHHezS0zGhOoIzqXva5ZHzOdC94uIcM6mXQTLIHgqtsLoEXj1HcVQxdgCLZyvJf57Ai99A==
+X-Received: by 2002:a05:690c:f89:b0:6ea:8b94:6c15 with SMTP id 00721157ae682-6ea8b947204mr90487497b3.24.1730831863430;
+        Tue, 05 Nov 2024 10:37:43 -0800 (PST)
+Received: from localhost.localdomain ([71.215.7.194])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c48b6esm23957617b3.103.2024.11.05.10.37.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Nov 2024 10:17:09 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+        Tue, 05 Nov 2024 10:37:43 -0800 (PST)
+From: "J. S." <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] postgresql: Disable tcl support by default
-Date: Tue,  5 Nov 2024 10:17:06 -0800
-Message-ID: <20241105181706.2125790-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.47.0
+Cc: schonm@gmail.com
+Subject: [meta-oe][PATCH 0/161] Drop unnecessary SRC_URI md5sum
+Date: Tue,  5 Nov 2024 13:24:36 -0500
+Message-ID: <20241105183658.34982-2-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 18:17:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113514
+ <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 18:54:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113515
 
-It needs tcl8 and defaults have moved to using tcl9
-and postgres has to be ported to work with tcl9
+Following the note in section 5.5 found here :
+  https://docs.yoctoproject.org/dev-manual/new-recipe.html?highlight=md5sum#fetching-code
+drop the use of the SRC_URI[md5sum] where SRC_URI[sha256sum] is already being used.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-dbs/postgresql/postgresql.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Thanks,
+Jason Schonberg
 
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
-index ec5daeaa66..e19f2f48e2 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
-@@ -55,7 +55,7 @@ pkg_postinst:${PN} () {
- 
- PACKAGECONFIG ??= " \
-     ${@bb.utils.filter('DISTRO_FEATURES', 'pam systemd', d)} \
--    openssl python uuid libxml tcl perl zlib icu readline \
-+    openssl python uuid libxml perl zlib icu readline \
- "
- PACKAGECONFIG[tcl] = "--with-tcl --with-tclconfig=${STAGING_BINDIR_CROSS},--without-tcl,tcl tcl-native,"
- PACKAGECONFIG[perl] = "--with-perl,--without-perl,perl,perl"
 
