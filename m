@@ -2,57 +2,57 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B1887D2B95F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D054D2B956
 	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 14:37:22 +0000 (UTC)
-Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com [209.85.128.176])
- by mx.groups.io with SMTP id smtpd.web10.19655.1730817441949600415
+Received: from mail-yb1-f179.google.com (mail-yb1-f179.google.com [209.85.219.179])
+ by mx.groups.io with SMTP id smtpd.web10.19637.1730817432149437358
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 06:37:22 -0800
+ Tue, 05 Nov 2024 06:37:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=OmQHSAYN;
- spf=pass (domain: gmail.com, ip: 209.85.128.176, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-6ea50585bf2so58096337b3.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:37:21 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DMg0A0Jq;
+ spf=pass (domain: gmail.com, ip: 209.85.219.179, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f179.google.com with SMTP id 3f1490d57ef6-e30d212b6b1so4829628276.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:37:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730817441; x=1731422241; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730817431; x=1731422231; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=QChh7IVcnOd88ove+9uDPxh8FC1lOfQm08kA5wX0TfM=;
-        b=OmQHSAYNdC0uo53UTROHxcsdvtJMTIxGg9La24560Rp4OhDYrWOGZRJeK3/oYQeqe5
-         8yH96BNybUBLknt6FzJiSykeCHDQ0lJtRvz3CX1slM36q73/J6sTGIfgmHMgfJxobGZl
-         RtCsl8GPEAde9q7JF+4L8SnwnwZ1V9aDhgLMVdLDVmijQ2GbstONwg0j6vlarFMXfJJj
-         v5yWcEIoS7lHZXQMCE3NoBCt4SiiQbXlfA0GLYprkE9eTH+5Pp6A0Ep5xj+ztWFSgsuW
-         fsOA1+k4f/NhPFS6FyxA25EPmVj595WjvpPqNRr5xs+8nZzM+oQqWksvE8KTVR8GuB3w
-         s/Tw==
+        bh=k7NxNkLi+oy/Ik3wtbQYv24AkQag6+rm6jS4Wj1xzTc=;
+        b=DMg0A0JqD3JEDvji11vRlyiBHNtnftbHhXda1SV99Y8HiNEbLG/jg/GJlAGEcHDwPG
+         umSYTymwxphMMh3Mqh0aUfwvrHAaA+TS3EKuHgQxWWnxUE6bMdCgkPDkGoVHIMBIHI7l
+         fntajbaYYrMMunDC8/Yu0bOyCuYYd+BtJb+41faasw0fRN3Q7VuxGdD4eHu5YVop8eUA
+         u6TOfrTiA+OcYoO6h/zfoYMHNjocffH7kGMq05YosC+sKiqLJ48Mlv+pNXHjspNnzvAJ
+         UBLOVMlNauxD8Xq3a//Pqapw9qQBkM6EkCvnDCWLtDSMaUEWfkxHB5Ee7dnSQ8qxUPNy
+         AfiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730817441; x=1731422241;
+        d=1e100.net; s=20230601; t=1730817431; x=1731422231;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=QChh7IVcnOd88ove+9uDPxh8FC1lOfQm08kA5wX0TfM=;
-        b=vF78TB9kedxyu4ZG1tLCgyCb3nl5g/AMfjAgxiq4bKr09qLvXVp0LXr1MUm6DEfpj+
-         pYMbKXaSboaMaZ9U+Cpioq+FK9MYBakS+A82OZnl0itDvLJjXJ15MvM2Eo98AUqqgH1h
-         NkU1lyIvYxepoaf6tQgaI2jG5En89KSeE941L1g4yoD/LhVFtU7kP82S+alGPLvVNry0
-         AceYg0flk38sPIRnfJ7MvIbJDtfWPoDdcxRb4+0u4R2pqsmnvheEBifhul1s9SmGmXJv
-         mVpDT8IHQFSgOP7VpK0WugQd4pbR22qhKbVGJBU4sX3jWRjcBtLMNorXTx3kLXTi3M38
-         iYqw==
-X-Gm-Message-State: AOJu0YybJnnOOU8muLV+GJyOQWk5LaEG3Mn+vb4DZSJAppsGbyg82FJu
-	fWJ5l28z4mu21oALKjle55kGcc/7Kq3WQp3b8LHv7WMoIUXQq4CPcZ4zTw==
-X-Google-Smtp-Source: AGHT+IEzB59cf1bMbDgMEzXraLHtu/xrSKB2iWY7n5meEekwo+h5Lwm3Cio55bPdtRYAB0BAy34kFA==
-X-Received: by 2002:a05:690c:7013:b0:6e3:34b9:961d with SMTP id 00721157ae682-6ea64c2ed0bmr158469657b3.38.1730817439440;
-        Tue, 05 Nov 2024 06:37:19 -0800 (PST)
+        bh=k7NxNkLi+oy/Ik3wtbQYv24AkQag6+rm6jS4Wj1xzTc=;
+        b=NPJXRwVdvlAOPf9aLhlHYqYkDaM3CtXE4Nu1xT9w/0hu2YQLM5rxnIlm2gdDMw5fbH
+         Ye3goNrmo+pcF0rqZ7GWNxhmBssazdZCBHarFYCZ4u7ZoDfztAUABGUelsBcju1bkdbs
+         8BPclpxD9dbLJVz3Fv0yUe2rBkTMPAuBLq0U3/9/KdwJGNAk9bRL6G5nv44lLIrggmnX
+         fDudOcFBkMeB8KREhX7azrm/WCk4Y6CyJEoosW7Jzr0ub8IYuhBscDUWLacpzh96pxsC
+         qKydMb54CrLSJgjGLJ2w6Z/hW51WeOwNB+0MR2Sy78GrR2KuDjqCCVnzQqrdlpp1zjDw
+         5b/Q==
+X-Gm-Message-State: AOJu0YxQWoHWfEmpTvfHocwIyO6cvlvRvO3Ev8kpimTOI4z4GyXfrQ4L
+	U3ykztgmtELdMVR/fNN6fYdj2EWtNr1ttvBSrDR4/WKBFOuw5Nb2a2ON4Q==
+X-Google-Smtp-Source: AGHT+IEROOkbqat6nHSasOpRC86U9SLTm14XFrtCagvW0Sdnxyx8PrQGy9hlce9YZDP6fqup5nJbKQ==
+X-Received: by 2002:a05:690c:74c5:b0:6e5:c145:370a with SMTP id 00721157ae682-6e9d8ad56f0mr379847267b3.43.1730817430773;
+        Tue, 05 Nov 2024 06:37:10 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:45dd:7000::29])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.37.19
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.37.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Nov 2024 06:37:19 -0800 (PST)
+        Tue, 05 Nov 2024 06:37:10 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
+Cc: Yi Zhao <yi.zhao@windriver.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][styhead][PATCH 86/90] nmap: Fix off-by-one overflow in the IP protocol table.
-Date: Tue,  5 Nov 2024 09:35:51 -0500
-Message-ID: <20241105143638.2301245-87-akuster808@gmail.com>
+Subject: [meta-oe][styhead][PATCH 67/90] libhugetlbfs: upgrade 2.23 -> 2.24
+Date: Tue,  5 Nov 2024 09:35:32 -0500
+Message-ID: <20241105143638.2301245-68-akuster808@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241105143638.2301245-1-akuster808@gmail.com>
 References: <20241105143638.2301245-1-akuster808@gmail.com>
@@ -62,205 +62,1028 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 14:37:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113508
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113485
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Yi Zhao <yi.zhao@windriver.com>
 
-Add patch to fix core dumped error when using "nmap -sO"
+ChangeLog:
+https://github.com/libhugetlbfs/libhugetlbfs/blob/2.24/NEWS
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+* Refresh patches
+* Drop backport patches
+* Inherit autotools-brokensep since it has switched to automake
+* Add a patch to fix build on musl
+
+Test Results:
+$ mkdir -p /mnt/hugetlbfs
+$ mount -t hugetlbfs none /mnt/hugetlbfs
+
+$ hugeadm --pool-pages-min 2MB:64
+$ hugeadm --pool-pages-max 2MB:256
+
+$ cd /usr/lib/libhugetlbfs/tests/
+$ ./run_tests.py
+PASS
+zero_filesize_segment (2M: 64): PASS
+test_root (2M: 64):     PASS
+meminfo_nohuge (2M: 64):        PASS
+gethugepagesize (2M: 64):       PASS
+gethugepagesizes (2M: 64):      PASS
+HUGETLB_VERBOSE=1 empty_mounts (2M: 64):        PASS
+HUGETLB_VERBOSE=1 large_mounts (2M: 64):        PASS
+find_path (2M: 64):     PASS
+unlinked_fd (2M: 64):   PASS
+readback (2M: 64):      PASS
+truncate (2M: 64):      PASS
+shared (2M: 64):        PASS
+mprotect (2M: 64):      PASS
+mlock (2M: 64): PASS
+misalign (2M: 64):      PASS
+fallocate_basic.sh (2M: 64):    PASS
+fallocate_align.sh (2M: 64):    PASS
+ptrace-write-hugepage (2M: 64): PASS
+icache-hygiene (2M: 64):        PASS
+slbpacaflush (2M: 64):  PASS (inconclusive)
+straddle_4GB_static (2M: 64):   PASS
+huge_at_4GB_normal_below_static (2M: 64):       PASS
+huge_below_4GB_normal_above_static (2M: 64):    PASS
+map_high_truncate_2 (2M: 64):   PASS
+misaligned_offset (2M: 64):     PASS (inconclusive)
+truncate_above_4GB (2M: 64):    PASS
+brk_near_huge (2M: 64): Fatal glibc error: malloc.c:2599 (sysmalloc): assertion failed: (old_top == initial_top (av) && old_size = = 0) || ((unsigned long) (old_size) >= MINSIZE && prev_inuse (old_top) && ((unsigned long) old_end & (pagesize - 1)) == 0)
+task-size-overrun (2M: 64):     PASS
+stack_grow_into_huge (2M: 64):  PASS
+corrupt-by-cow-opt (2M: 64):    PASS
+noresv-preserve-resv-page (2M: 64):     PASS
+noresv-regarded-as-resv (2M: 64):       PASS
+readahead_reserve.sh (2M: 64):  PASS
+madvise_reserve.sh (2M: 64):    PASS
+fadvise_reserve.sh (2M: 64):    PASS
+mremap-expand-slice-collision.sh (2M: 64):      PASS
+mremap-fixed-normal-near-huge.sh (2M: 64):      PASS
+mremap-fixed-huge-near-normal.sh (2M: 64):      PASS
+set shmmax limit to 67108864
+shm-perms (2M: 64):     PASS
+private (2M: 64):       PASS
+fork-cow (2M: 64):      PASS
+direct (2M: 64):        PASS
+malloc (2M: 64):        PASS
+LD_PRELOAD=libhugetlbfs.so HUGETLB_MORECORE=yes malloc (2M: 64):        SKIPPED
+LD_PRELOAD=libhugetlbfs.so HUGETLB_MORECORE=yes HUGETLB_RESTRICT_EXE=unknown:none malloc (2M: 64):      SKIPPED
+LD_PRELOAD=libhugetlbfs.so HUGETLB_MORECORE=yes HUGETLB_RESTRICT_EXE=unknown:malloc malloc (2M: 64):    SKIPPED
+malloc_manysmall (2M: 64):      PASS
+LD_PRELOAD=libhugetlbfs.so HUGETLB_MORECORE=yes malloc_manysmall (2M: 64):      SKIPPED
+GLIBC_TUNABLES=glibc.malloc.tcache_count=0 heapshrink (2M: 64): PASS
+GLIBC_TUNABLES=glibc.malloc.tcache_count=0 LD_PRELOAD=libheapshrink.so heapshrink (2M: 64):     PASS
+GLIBC_TUNABLES=glibc.malloc.tcache_count=0 LD_PRELOAD=libhugetlbfs.so HUGETLB_MORECORE=yes heapshrink (2M: 64): SKIPPED
+GLIBC_TUNABLES=glibc.malloc.tcache_count=0 LD_PRELOAD=libhugetlbfs.so libheapshrink.so HUGETLB_MORECORE=yes heapshrink (2M: 64): SKIPPED
+GLIBC_TUNABLES=glibc.malloc.tcache_count=0 LD_PRELOAD=libheapshrink.so HUGETLB_MORECORE=yes HUGETLB_MORECORE_SHRINK=yes heapshrink (2M: 64):      SKIPPED
+GLIBC_TUNABLES=glibc.malloc.tcache_count=0 LD_PRELOAD=libhugetlbfs.so libheapshrink.so HUGETLB_MORECORE=yes HUGETLB_MORECORE_SHRINK=yes heapshrink (2M: 64):      SKIPPED
+HUGETLB_VERBOSE=1 HUGETLB_MORECORE=yes heap-overflow (2M: 64):  SKIPPED
+HUGETLB_VERBOSE=0 linkhuge_nofd (2M: 64):       PASS
+LD_PRELOAD=libhugetlbfs.so HUGETLB_VERBOSE=0 linkhuge_nofd (2M: 64):    PASS
+linkhuge (2M: 64):      PASS
+LD_PRELOAD=libhugetlbfs.so linkhuge (2M: 64):   PASS
+linkhuge_rw (2M: 64):   PASS
+HUGETLB_ELFMAP=R linkhuge_rw (2M: 64):  PASS
+HUGETLB_ELFMAP=W linkhuge_rw (2M: 64):  PASS
+HUGETLB_ELFMAP=RW linkhuge_rw (2M: 64): PASS
+HUGETLB_ELFMAP=no linkhuge_rw (2M: 64): PASS
+HUGETLB_MINIMAL_COPY=no HUGETLB_ELFMAP=R linkhuge_rw (2M: 64):  PASS
+HUGETLB_MINIMAL_COPY=no HUGETLB_ELFMAP=W linkhuge_rw (2M: 64):  PASS
+HUGETLB_MINIMAL_COPY=no HUGETLB_ELFMAP=RW linkhuge_rw (2M: 64): PASS
+HUGETLB_ELFMAP=R HUGETLB_SHARE=0 linkhuge_rw (2M: 64):  PASS
+HUGETLB_ELFMAP=R HUGETLB_SHARE=1 linkhuge_rw (2M: 64):  PASS
+HUGETLB_ELFMAP=W HUGETLB_SHARE=0 linkhuge_rw (2M: 64):  PASS
+HUGETLB_ELFMAP=W HUGETLB_SHARE=1 linkhuge_rw (2M: 64):  PASS
+HUGETLB_ELFMAP=RW HUGETLB_SHARE=0 linkhuge_rw (2M: 64): PASS
+HUGETLB_ELFMAP=RW HUGETLB_SHARE=1 linkhuge_rw (2M: 64): PASS
+chunk-overcommit (2M: 64):      PASS
+alloc-instantiate-race shared (2M: 64): PASS
+alloc-instantiate-race private (2M: 64):        PASS
+truncate_reserve_wraparound (2M: 64):   PASS
+truncate_sigbus_versus_oom (2M: 64):    PASS
+get_huge_pages (2M: 64):        PASS
+shmoverride_linked (2M: 64):    PASS
+HUGETLB_SHM=yes shmoverride_linked (2M: 64):    PASS
+LD_PRELOAD=libhugetlbfs.so shmoverride_unlinked (2M: 64):       PASS
+LD_PRELOAD=libhugetlbfs.so HUGETLB_SHM=yes shmoverride_unlinked (2M: 64):       PASS
+quota.sh (2M: 64):      PASS
+counters.sh (2M: 64):   PASS
+mmap-gettest 10 64 (2M: 64):    PASS
+mmap-cow 63 64 (2M: 64):        PASS
+set shmmax limit to 134217728
+shm-fork 10 32 (2M: 64):        PASS
+set shmmax limit to 134217728
+shm-fork 10 64 (2M: 64):        PASS
+set shmmax limit to 134217728
+shm-getraw 64 /dev/full (2M: 64):       PASS
+fallocate_stress.sh (2M: 64):   PASS
+********** TEST SUMMARY
+*                      2M
+*                      32-bit 64-bit
+*     Total testcases:     0     91
+*             Skipped:     0      9
+*                PASS:     0     81
+*                FAIL:     0      0
+*    Killed by signal:     0      1
+*   Bad configuration:     0      0
+*       Expected FAIL:     0      0
+*     Unexpected PASS:     0      0
+*    Test not present:     0      0
+* Strange test result:     0      0
+**********
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 6a5b26d467c692c3537aaebf9bd088736dc93dc4)
+(cherry picked from commit 47ee82f0842bbd3f150fb47821fedb376ec77f30)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...ne-overflow-in-the-IP-protocol-table.patch | 165 ++++++++++++++++++
- meta-oe/recipes-security/nmap/nmap_7.95.bb    |   1 +
- 2 files changed, 166 insertions(+)
- create mode 100644 meta-oe/recipes-security/nmap/files/0003-Fix-off-by-one-overflow-in-the-IP-protocol-table.patch
+ ...bfs-fix-Ttext-segment-argument-on-AA.patch | 210 ------------------
+ ...32-and-LIB64-if-they-point-to-the-s.patch} |  19 +-
+ ...Append-CPPFLAGS-rather-then-override.patch |  31 ---
+ ...d-search-host-library-path-for-cros.patch} |   6 +-
+ ...le-install-static-4G-edge-testcases.patch} |  22 +-
+ ...t-use-hard-coded-path-.-obj-hugeadm.patch} |   8 +-
+ ...i386-avoid-search-host-library-path.patch} |   6 +-
+ ...0006-include-stddef.h-for-ptrdiff_t.patch} |  12 +-
+ ...=> 0007-Mark-glibc-specific-code-so.patch} |  19 +-
+ ...conf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch} |  12 +-
+ ...hm.c-Mark-glibc-specific-changes-so.patch} |  10 +-
+ ... => 0010-Include-dirent.h-for-ino_t.patch} |   8 +-
+ ... 0011-include-limits.h-for-PATH_MAX.patch} |  14 +-
+ ...etup_helper-use-python3-interpreter.patch} |   6 +-
+ ...link.c-include-libgen.h-for-basename.patch |  41 ++++
+ ...bhugetlbfs_git.bb => libhugetlbfs_2.24.bb} |  55 +++--
+ 16 files changed, 149 insertions(+), 330 deletions(-)
+ delete mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0001-Revert-ld.hugetlbfs-fix-Ttext-segment-argument-on-AA.patch
+ rename meta-oe/recipes-benchmark/libhugetlbfs/files/{skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch => 0001-skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch} (70%)
+ delete mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0001-tests-makefile-Append-CPPFLAGS-rather-then-override.patch
+ rename meta-oe/recipes-benchmark/libhugetlbfs/files/{libhugetlbfs-avoid-search-host-library-path-for-cros.patch => 0002-libhugetlbfs-avoid-search-host-library-path-for-cros.patch} (98%)
+ rename meta-oe/recipes-benchmark/libhugetlbfs/files/{tests-Makefile-install-static-4G-edge-testcases.patch => 0003-tests-Makefile-install-static-4G-edge-testcases.patch} (73%)
+ rename meta-oe/recipes-benchmark/libhugetlbfs/files/{0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch => 0004-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch} (90%)
+ rename meta-oe/recipes-benchmark/libhugetlbfs/files/{libhugetlbfs-elf_i386-avoid-search-host-library-path.patch => 0005-libhugetlbfs-elf_i386-avoid-search-host-library-path.patch} (94%)
+ rename meta-oe/recipes-benchmark/libhugetlbfs/files/{0001-include-stddef.h-for-ptrdiff_t.patch => 0006-include-stddef.h-for-ptrdiff_t.patch} (81%)
+ rename meta-oe/recipes-benchmark/libhugetlbfs/files/{0002-Mark-glibc-specific-code-so.patch => 0007-Mark-glibc-specific-code-so.patch} (74%)
+ rename meta-oe/recipes-benchmark/libhugetlbfs/files/{0003-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch => 0008-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch} (92%)
+ rename meta-oe/recipes-benchmark/libhugetlbfs/files/{0004-shm.c-Mark-glibc-specific-changes-so.patch => 0009-shm.c-Mark-glibc-specific-changes-so.patch} (91%)
+ rename meta-oe/recipes-benchmark/libhugetlbfs/files/{0005-Include-dirent.h-for-ino_t.patch => 0010-Include-dirent.h-for-ino_t.patch} (90%)
+ rename meta-oe/recipes-benchmark/libhugetlbfs/files/{0006-include-limits.h-for-PATH_MAX.patch => 0011-include-limits.h-for-PATH_MAX.patch} (85%)
+ rename meta-oe/recipes-benchmark/libhugetlbfs/files/{0001-huge_page_setup_helper-use-python3-interpreter.patch => 0012-huge_page_setup_helper-use-python3-interpreter.patch} (88%)
+ create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0013-elflink.c-include-libgen.h-for-basename.patch
+ rename meta-oe/recipes-benchmark/libhugetlbfs/{libhugetlbfs_git.bb => libhugetlbfs_2.24.bb} (52%)
 
-diff --git a/meta-oe/recipes-security/nmap/files/0003-Fix-off-by-one-overflow-in-the-IP-protocol-table.patch b/meta-oe/recipes-security/nmap/files/0003-Fix-off-by-one-overflow-in-the-IP-protocol-table.patch
-new file mode 100644
-index 0000000000..bcb04250bb
---- /dev/null
-+++ b/meta-oe/recipes-security/nmap/files/0003-Fix-off-by-one-overflow-in-the-IP-protocol-table.patch
-@@ -0,0 +1,165 @@
-+From 364d089250d1acf459e9e8580161e7bb06268106 Mon Sep 17 00:00:00 2001
-+From: Wang Mingyu <wangmy@fujitsu.com>
-+Date: Tue, 15 Oct 2024 02:47:38 +0000
-+Subject: [PATCH] Fix off-by-one overflow in the IP protocol table.
-+
-+Fixes #2896, closes #2897, closes #2900
-+
-+Upstream-Status: Backport [https://github.com/nmap/nmap/commit/efa0dc36f2ecade6ba8d2ed25dd4d5fbffdea308]
-+
-+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-+---
-+ CHANGELOG     |  3 +++
-+ portlist.cc   |  8 ++++----
-+ protocols.cc  |  6 +++---
-+ protocols.h   |  2 ++
-+ scan_lists.cc | 10 +++++-----
-+ 5 files changed, 17 insertions(+), 12 deletions(-)
-+
-+diff --git a/CHANGELOG b/CHANGELOG
-+index f01262c..5b204bd 100644
-+--- a/CHANGELOG
-++++ b/CHANGELOG
-+@@ -1,5 +1,8 @@
-+ #Nmap Changelog ($Id: CHANGELOG 38849 2024-04-18 17:16:42Z dmiller $); -*-text-*-
-+ 
-++o [GH#2900, GH#2896, GH#2897] Nmap is now able to scan IP protocol 255.
-++  [nnposter]
-++
-+ Nmap 7.95 [2024-04-19]
-+ 
-+ o [Windows] Upgraded Npcap (our Windows raw packet capturing and
-+diff --git a/portlist.cc b/portlist.cc
-+index 8258853..cd08437 100644
-+--- a/portlist.cc
-++++ b/portlist.cc
-+@@ -480,7 +480,7 @@ void PortList::setPortState(u16 portno, u8 protocol, int state, int *oldstate) {
-+       state != PORT_CLOSEDFILTERED)
-+     fatal("%s: attempt to add port number %d with illegal state %d\n", __func__, portno, state);
-+ 
-+-  assert(protocol!=IPPROTO_IP || portno<256);
-++  assert(protocol!=IPPROTO_IP || portno<=MAX_IPPROTONUM);
-+ 
-+   bool created = false;
-+   current = createPort(portno, protocol, &created);
-+@@ -566,7 +566,7 @@ Port *PortList::nextPort(const Port *cur, Port *next,
-+   if (cur) {
-+     proto = INPROTO2PORTLISTPROTO(cur->proto);
-+     assert(port_map[proto]!=NULL); // Hmm, it's not possible to handle port that doesn't have anything in map
-+-    assert(cur->proto!=IPPROTO_IP || cur->portno<256);
-++    assert(cur->proto!=IPPROTO_IP || cur->portno<=MAX_IPPROTONUM);
-+     mapped_pno = port_map[proto][cur->portno];
-+     mapped_pno++; //  we're interested in next port after current
-+   } else { // running for the first time
-+@@ -615,7 +615,7 @@ void PortList::mapPort(u16 *portno, u8 *protocol) const {
-+   mapped_protocol = INPROTO2PORTLISTPROTO(*protocol);
-+ 
-+   if (*protocol == IPPROTO_IP)
-+-    assert(*portno < 256);
-++    assert(*portno <= MAX_IPPROTONUM);
-+   if(port_map[mapped_protocol]==NULL || port_list[mapped_protocol]==NULL) {
-+     fatal("%s(%i,%i): you're trying to access uninitialized protocol", __func__, *portno, *protocol);
-+   }
-+@@ -713,7 +713,7 @@ int PortList::port_list_count[PORTLIST_PROTO_MAX];
-+  * should be sorted. */
-+ void PortList::initializePortMap(int protocol, u16 *ports, int portcount) {
-+   int i;
-+-  int ports_max = (protocol == IPPROTO_IP) ? 256 : 65536;
-++  int ports_max = (protocol == IPPROTO_IP) ? MAX_IPPROTONUM + 1 : 65536;
-+   int proto = INPROTO2PORTLISTPROTO(protocol);
-+ 
-+   if (port_map[proto] != NULL || port_map_rev[proto] != NULL)
-+diff --git a/protocols.cc b/protocols.cc
-+index 76e42c7..85e55e4 100644
-+--- a/protocols.cc
-++++ b/protocols.cc
-+@@ -79,7 +79,7 @@ struct strcmp_comparator {
-+ 
-+ // IP Protocol number is 8 bits wide
-+ // protocol_table[IPPROTO_TCP] == {"tcp", 6}
-+-static struct nprotoent *protocol_table[UCHAR_MAX];
-++static struct nprotoent *protocol_table[MAX_IPPROTONUM + 1];
-+ // proto_map["tcp"] = {"tcp", 6}
-+ typedef std::map<const char *, struct nprotoent, strcmp_comparator> ProtoMap;
-+ static ProtoMap proto_map;
-+@@ -119,7 +119,7 @@ static int nmap_protocols_init() {
-+     if (*p == '#' || *p == '\0')
-+       continue;
-+     res = sscanf(line, "%127s %hu", protocolname, &protno);
-+-    if (res !=2 || protno > UCHAR_MAX) {
-++    if (res !=2 || protno > MAX_IPPROTONUM) {
-+       error("Parse error in protocols file %s line %d", filename, lineno);
-+       continue;
-+     }
-+@@ -191,7 +191,7 @@ const struct nprotoent *nmap_getprotbynum(int num) {
-+   if (nmap_protocols_init() == -1)
-+     return NULL;
-+ 
-+-  assert(num >= 0 && num < UCHAR_MAX);
-++  assert(num >= 0 && num <= MAX_IPPROTONUM);
-+   return protocol_table[num];
-+ }
-+ 
-+diff --git a/protocols.h b/protocols.h
-+index 8934284..2de0aa4 100644
-+--- a/protocols.h
-++++ b/protocols.h
-+@@ -79,6 +79,8 @@ int addprotocolsfromservmask(char *mask, u8 *porttbl);
-+ const struct nprotoent *nmap_getprotbynum(int num);
-+ const struct nprotoent *nmap_getprotbyname(const char *name);
-+ 
-++#define MAX_IPPROTONUM 255
-++
-+ #define MAX_IPPROTOSTRLEN 4
-+ #define IPPROTO2STR(p)		\
-+   ((p)==IPPROTO_TCP ? "tcp" :	\
-+diff --git a/scan_lists.cc b/scan_lists.cc
-+index f02e279..ebe1357 100644
-+--- a/scan_lists.cc
-++++ b/scan_lists.cc
-+@@ -165,7 +165,7 @@ void getpts(const char *origexpr, struct scan_lists *ports) {
-+       ports->udp_count++;
-+     if (porttbl[i] & SCAN_SCTP_PORT)
-+       ports->sctp_count++;
-+-    if (porttbl[i] & SCAN_PROTOCOLS && i < 256)
-++    if (porttbl[i] & SCAN_PROTOCOLS && i <= MAX_IPPROTONUM)
-+       ports->prot_count++;
-+   }
-+ 
-+@@ -192,7 +192,7 @@ void getpts(const char *origexpr, struct scan_lists *ports) {
-+       ports->udp_ports[udpi++] = i;
-+     if (porttbl[i] & SCAN_SCTP_PORT)
-+       ports->sctp_ports[sctpi++] = i;
-+-    if (porttbl[i] & SCAN_PROTOCOLS && i < 256)
-++    if (porttbl[i] & SCAN_PROTOCOLS && i <= MAX_IPPROTONUM)
-+       ports->prots[proti++] = i;
-+   }
-+ 
-+@@ -388,7 +388,7 @@ static void getpts_aux(const char *origexpr, int nested, u8 *porttbl, int range_
-+     } else if (isdigit((int) (unsigned char) *current_range)) {
-+       rangestart = strtol(current_range, &endptr, 10);
-+       if (range_type & SCAN_PROTOCOLS) {
-+-        if (rangestart < 0 || rangestart > 255)
-++        if (rangestart < 0 || rangestart > MAX_IPPROTONUM)
-+           fatal("Protocols specified must be between 0 and 255 inclusive");
-+       } else {
-+         if (rangestart < 0 || rangestart > 65535)
-+@@ -429,13 +429,13 @@ static void getpts_aux(const char *origexpr, int nested, u8 *porttbl, int range_
-+       if (!*current_range || *current_range == ',' || *current_range == ']') {
-+         /* Ended with a -, meaning up until the last possible port */
-+         if (range_type & SCAN_PROTOCOLS)
-+-          rangeend = 255;
-++          rangeend = MAX_IPPROTONUM;
-+         else
-+           rangeend = 65535;
-+       } else if (isdigit((int) (unsigned char) *current_range)) {
-+         rangeend = strtol(current_range, &endptr, 10);
-+         if (range_type & SCAN_PROTOCOLS) {
-+-          if (rangeend < 0 || rangeend > 255)
-++          if (rangeend < 0 || rangeend > MAX_IPPROTONUM)
-+             fatal("Protocols specified must be between 0 and 255 inclusive");
-+         } else {
-+           if (rangeend < 0 || rangeend > 65535)
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-Revert-ld.hugetlbfs-fix-Ttext-segment-argument-on-AA.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-Revert-ld.hugetlbfs-fix-Ttext-segment-argument-on-AA.patch
+deleted file mode 100644
+index 0787ef27d2..0000000000
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-Revert-ld.hugetlbfs-fix-Ttext-segment-argument-on-AA.patch
++++ /dev/null
+@@ -1,210 +0,0 @@
+-From 0a163f60b4a316c4b6f1726a71c84755f3bd85e7 Mon Sep 17 00:00:00 2001
+-From: Martin Jansa <martin.jansa@lge.com>
+-Date: Wed, 16 Sep 2020 04:36:04 -0700
+-Subject: [PATCH] Revert "ld.hugetlbfs: fix -Ttext-segment argument on AArch64"
+-
+-This reverts commit 852dcc963ce44861ed7c4e225aa92ff2b5b43579.
+-
+-* works around
+-  ERROR: libhugetlbfs-1_2.23-r0 do_populate_sysroot: Fatal errors occurred in subprocesses:
+-  Command '['arm-oe-linux-gnueabi-strip', '--remove-section=.comment', '--remove-section=.note', 'libhugetlbfs/1_2.23-r0/sysroot-destdir/usr/lib/libhugetlbfs/tests/obj32/linkhuge_rw']' returned non-zero exit status 1.
+-  Subprocess output:arm-oe-linux-gnueabi-strip:
+-  libhugetlbfs/1_2.23-r0/sysroot-destdir/usr/lib/libhugetlbfs/tests/obj32/stmuFa58: error: PHDR segment not covered by LOAD segment
+-  arm-oe-linux-gnueabi-strip: libhugetlbfs/1_2.23-r0/sysroot-destdir/usr/lib/libhugetlbfs/tests/obj32/stmuFa58[.interp]: file format not recognized
+-
+-I don't see anything suspicious in the build (the same cmdline as in 2.22
+-version), but it uses
+-
+-libhugetlbfs/1_2.22-r0-old/temp/log.do_compile:arm-oe-linux-gnueabi-gcc
+- -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 -Wl,-O1
+--Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,relro,-z,now
+--fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security
+--Werror=format-security -Werror=return-type
+---sysroot=/jenkins/mjansa/build/ros/oe-melodic-gatesgarth/libhugetlbfs/1_2.22-r0/recipe-sysroot
+--I.. -O2 -Wall -g -o obj32/linkhuge_rw.o -c linkhuge_rw.c
+-libhugetlbfs/1_2.22-r0-old/temp/log.do_compile:arm-oe-linux-gnueabi-gcc
+- -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 -Wl,-O1
+--Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,relro,-z,now
+--fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security
+--Werror=format-security -Werror=return-type
+---sysroot=/jenkins/mjansa/build/ros/oe-melodic-gatesgarth/libhugetlbfs/1_2.22-r0/recipe-sysroot
+--B./obj32 -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,relro,-z,now
+--ldl -L../obj32 -o obj32/linkhuge_rw -Wl,--no-as-needed -lpthread -ldl
+--lhugetlbfs_privutils -Wl,--hugetlbfs-align obj32/linkhuge_rw.o
+-obj32/testutils.o
+-libhugetlbfs/1_2.23-r0-new/temp/log.do_compile:arm-oe-linux-gnueabi-gcc
+- -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 -Wl,-O1
+--Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,relro,-z,now
+--fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security
+--Werror=format-security -Werror=return-type
+---sysroot=/jenkins/mjansa/build/ros/oe-melodic-gatesgarth/libhugetlbfs/1_2.23-r0/recipe-sysroot
+--I.. -O2 -Wall -g -o obj32/linkhuge_rw.o -c linkhuge_rw.c
+-libhugetlbfs/1_2.23-r0-new/temp/log.do_compile:arm-oe-linux-gnueabi-gcc
+- -mthumb -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 -Wl,-O1
+--Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,relro,-z,now
+--fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security
+--Werror=format-security -Werror=return-type
+---sysroot=/jenkins/mjansa/build/ros/oe-melodic-gatesgarth/libhugetlbfs/1_2.23-r0/recipe-sysroot
+--B./obj32 -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,relro,-z,now
+--ldl -L../obj32 -o obj32/linkhuge_rw -Wl,--no-as-needed -lpthread -ldl
+--lhugetlbfs_privutils -Wl,--hugetlbfs-align obj32/linkhuge_rw.o
+-obj32/testutils.o
+-
+-And the git log between 2.22 and 2.23 is also very short and looks
+-reasonable.
+-https://github.com/libhugetlbfs/libhugetlbfs/compare/2.22...2.23
+-
+-When checking with readelf -l it also shows the error about PHDR segment:
+-arm-oe-linux-gnueabi-readelf -l
+-./1_2.22-r0-old/sysroot-destdir/usr/lib/libhugetlbfs/tests/obj32/linkhuge_rw
+-
+-Elf file type is DYN (Shared object file)
+-Entry point 0x201105
+-There are 10 program headers, starting at offset 52
+-
+-Program Headers:
+-  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
+-  PHDR           0x000034 0x00200034 0x00200034 0x00140 0x00140 R   0x4
+-  INTERP         0x000174 0x00200174 0x00200174 0x0001d 0x0001d R   0x1
+-      [Requesting program interpreter: /usr/lib/ld-linux-armhf.so.3]
+-  LOAD           0x000000 0x00200000 0x00200000 0x1222c 0x1222c R E 0x200000
+-  LOAD           0x1ffdf0 0x005ffdf0 0x005ffdf0 0x102e0 0x202ec RW  0x200000
+-  DYNAMIC        0x1ffdf8 0x005ffdf8 0x005ffdf8 0x00128 0x00128 RW  0x4
+-  NOTE           0x000194 0x00200194 0x00200194 0x00044 0x00044 R   0x4
+-  GNU_EH_FRAME   0x012224 0x00212224 0x00212224 0x00008 0x00008 R   0x4
+-  GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RW  0x10
+-  EXIDX          0x001c5c 0x00201c5c 0x00201c5c 0x00008 0x00008 R   0x4
+-  GNU_RELRO      0x1ffdf0 0x005ffdf0 0x005ffdf0 0x00210 0x00210 RW  0x4
+-
+- Section to Segment mapping:
+-  Segment Sections...
+-   00
+-   01     .interp
+-   02     .interp .note.ABI-tag .note.gnu.build-id .dynsym .dynstr
+-.gnu.hash .gnu.version .gnu.version_r .rel.dyn .rel.plt .init .plt .text
+-.fini .ARM.extab .ARM.exidx .rodata .eh_frame .eh_frame_hdr
+-   03     .fini_array .init_array .dynamic .got .data .bss
+-   04     .dynamic
+-   05     .note.ABI-tag .note.gnu.build-id
+-   06     .eh_frame_hdr
+-   07
+-   08     .ARM.extab .ARM.exidx
+-   09     .fini_array .init_array .dynamic .got
+-
+-arm-oe-linux-gnueabi-readelf -l
+-./1_2.23-r0-new/sysroot-destdir/usr/lib/libhugetlbfs/tests/obj32/linkhuge_rw
+-
+-Elf file type is DYN (Shared object file)
+-Entry point 0x31cd1
+-There are 10 program headers, starting at offset 52
+-
+-Program Headers:
+-  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
+-  PHDR           0x000000 0x00000000 0x00000000 0x00000 0x00000 R   0
+-readelf: Error: the PHDR segment is not covered by a LOAD segment
+-  INTERP         0x030d40 0x00030d40 0x00030d40 0x0001d 0x0001d R   0x1
+-      [Requesting program interpreter: /usr/lib/ld-linux-armhf.so.3]
+-  LOAD           0x030d40 0x00030d40 0x00030d40 0x120b8 0x120b8 R E 0x200000
+-  LOAD           0x1ffdf0 0x003ffdf0 0x003ffdf0 0x102e0 0x202ec RW  0x200000
+-  DYNAMIC        0x1ffdf8 0x003ffdf8 0x003ffdf8 0x00128 0x00128 RW  0x4
+-  NOTE           0x030d60 0x00030d60 0x00030d60 0x00044 0x00044 R   0x4
+-  GNU_EH_FRAME   0x042df0 0x00042df0 0x00042df0 0x00008 0x00008 R   0x4
+-  GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RW  0x10
+-  EXIDX          0x032828 0x00032828 0x00032828 0x00008 0x00008 R   0x4
+-  GNU_RELRO      0x1ffdf0 0x003ffdf0 0x003ffdf0 0x00210 0x00210 RW  0x4
+-
+- Section to Segment mapping:
+-  Segment Sections...
+-   00
+-   01     .interp
+-   02     .interp .note.ABI-tag .note.gnu.build-id .dynsym .dynstr
+-.gnu.hash .gnu.version .gnu.version_r .rel.dyn .rel.plt .init .plt .text
+-.fini .ARM.extab .ARM.exidx .rodata .eh_frame .eh_frame_hdr
+-   03     .fini_array .init_array .dynamic .got .data .bss
+-   04     .dynamic
+-   05     .note.ABI-tag .note.gnu.build-id
+-   06     .eh_frame_hdr
+-   07
+-   08     .ARM.extab .ARM.exidx
+-   09     .fini_array .init_array .dynamic .got
+-
+-And the diff between these 2:
+-
+-1_2.22-r0-old/sysroot-destdir/usr/lib/libhugetlbfs/tests/obj32/linkhuge_rw.readelf
+-1_2.23-r0-new/sysroot-destdir/usr/lib/libhugetlbfs/tests/obj32/linkhuge_rw.readelf
+- Elf file type is DYN (Shared object file)
+--Entry point 0x201105
+-+Entry point 0x31cd1
+- There are 10 program headers, starting at offset 52
+-
+- Program Headers:
+-   Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
+--  PHDR           0x000034 0x00200034 0x00200034 0x00140 0x00140 R   0x4
+--  INTERP         0x000174 0x00200174 0x00200174 0x0001d 0x0001d R   0x1
+-+  PHDR           0x000000 0x00000000 0x00000000 0x00000 0x00000 R   0
+-+readelf: Error: the PHDR segment is not covered by a LOAD segment
+-+  INTERP         0x030d40 0x00030d40 0x00030d40 0x0001d 0x0001d R   0x1
+-       [Requesting program interpreter: /usr/lib/ld-linux-armhf.so.3]
+--  LOAD           0x000000 0x00200000 0x00200000 0x1222c 0x1222c R E 0x200000
+--  LOAD           0x1ffdf0 0x005ffdf0 0x005ffdf0 0x102e0 0x202ec RW  0x200000
+--  DYNAMIC        0x1ffdf8 0x005ffdf8 0x005ffdf8 0x00128 0x00128 RW  0x4
+--  NOTE           0x000194 0x00200194 0x00200194 0x00044 0x00044 R   0x4
+--  GNU_EH_FRAME   0x012224 0x00212224 0x00212224 0x00008 0x00008 R   0x4
+-+  LOAD           0x030d40 0x00030d40 0x00030d40 0x120b8 0x120b8 R E 0x200000
+-+  LOAD           0x1ffdf0 0x003ffdf0 0x003ffdf0 0x102e0 0x202ec RW  0x200000
+-+  DYNAMIC        0x1ffdf8 0x003ffdf8 0x003ffdf8 0x00128 0x00128 RW  0x4
+-+  NOTE           0x030d60 0x00030d60 0x00030d60 0x00044 0x00044 R   0x4
+-+  GNU_EH_FRAME   0x042df0 0x00042df0 0x00042df0 0x00008 0x00008 R   0x4
+-   GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RW  0x10
+--  EXIDX          0x001c5c 0x00201c5c 0x00201c5c 0x00008 0x00008 R   0x4
+--  GNU_RELRO      0x1ffdf0 0x005ffdf0 0x005ffdf0 0x00210 0x00210 RW  0x4
+-+  EXIDX          0x032828 0x00032828 0x00032828 0x00008 0x00008 R   0x4
+-+  GNU_RELRO      0x1ffdf0 0x003ffdf0 0x003ffdf0 0x00210 0x00210 RW  0x4
+-
+-  Section to Segment mapping:
+-
+-Revert fixes this build issue, but I still don't see why it fails this way.
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+-
+-# Please enter the commit message for your changes. Lines starting
+-# with '#' will be ignored, and an empty message aborts the commit.
+-#
+-# Date:      Wed Sep 16 13:43:09 2020 +0200
+-#
+-# On branch jansa/master
+-# Changes to be committed:
+-#	new file:   meta-oe/recipes-benchmark/libhugetlbfs/files/0001-Revert-ld.hugetlbfs-fix-Ttext-segment-argument-on-AA.patch
+-#	modified:   meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+-#
+-# Untracked files:
+-#	counts.txt
+-#	diff
+-#	log.svn
+-#	log.svn2
+-#	wip/
+-#
+----
+- ld.hugetlbfs | 4 +---
+- 1 file changed, 1 insertion(+), 3 deletions(-)
+-
+-diff --git a/ld.hugetlbfs b/ld.hugetlbfs
+-index 5e4e497..6ee8238 100755
+---- a/ld.hugetlbfs
+-+++ b/ld.hugetlbfs
+-@@ -130,9 +130,7 @@ if [ "$HTLB_ALIGN" == "slice" ]; then
+- 	# targeting the ARM platform one needs to explicitly set the text segment offset
+- 	# otherwise it will be NULL.
+- 	case "$EMU" in
+--	armelf*_linux_eabi|aarch64elf*|aarch64linux*)
+--		printf -v TEXTADDR "%x" "$SLICE_SIZE"
+--		HTLBOPTS="$HTLBOPTS -Ttext-segment=$TEXTADDR" ;;
+-+	armelf*_linux_eabi|aarch64elf*|aarch64linux*)	HTLBOPTS="$HTLBOPTS -Ttext-segment=$SLICE_SIZE" ;;
+- 	elf_i386)		HTLBOPTS="$HTLBOPTS -Ttext-segment=0x08000000" ;;
+- 	elf64ppc|elf64lppc)
+- 		if [ "$MMU_TYPE" == "Hash" ] ; then
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch
+similarity index 70%
+rename from meta-oe/recipes-benchmark/libhugetlbfs/files/skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch
+rename to meta-oe/recipes-benchmark/libhugetlbfs/files/0001-skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch
+index a13c5389fb..3dbc34d08d 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/files/skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch
+@@ -1,20 +1,20 @@
+-From 183a4dafe141197de5840f2e48c266ef209307aa Mon Sep 17 00:00:00 2001
++From b448672f1bc08dcef2ae07727ae6f124a3032a35 Mon Sep 17 00:00:00 2001
+ From: Ting Liu <b28495@freescale.com>
+ Date: Mon, 18 Jun 2012 16:37:05 +0800
+ Subject: [PATCH] skip checking LIB32 and LIB64 if they point to the same place
+ 
+ Upstream-Status: Inappropriate [oe-core specific]
+-Signed-off-by: Ting Liu <b28495@freescale.com>
+ 
++Signed-off-by: Ting Liu <b28495@freescale.com>
+ ---
+- Makefile | 1 -
++ Makefile.in | 1 -
+  1 file changed, 1 deletion(-)
+ 
+-diff --git a/Makefile b/Makefile
+-index 51e41f0..373df3c 100644
+---- a/Makefile
+-+++ b/Makefile
+-@@ -177,7 +177,6 @@ REALLIB32 = $(realpath $(PREFIX)/$(LIB32))
++diff --git a/Makefile.in b/Makefile.in
++index 65ae5a4..25be577 100644
++--- a/Makefile.in
+++++ b/Makefile.in
++@@ -196,7 +196,6 @@ REALLIB32 = $(realpath $(PREFIX)/$(LIB32))
+  REALLIB64 = $(realpath $(PREFIX)/$(LIB64))
+  ifneq ($(realpath $(PREFIX)),)
+  ifeq ($(REALLIB32),$(REALLIB64))
+@@ -22,3 +22,6 @@ index 51e41f0..373df3c 100644
+  endif
+  endif
+  
 +-- 
-+2.34.1
++2.25.1
 +
-diff --git a/meta-oe/recipes-security/nmap/nmap_7.95.bb b/meta-oe/recipes-security/nmap/nmap_7.95.bb
-index 79c28e71f0..a319be4fb0 100644
---- a/meta-oe/recipes-security/nmap/nmap_7.95.bb
-+++ b/meta-oe/recipes-security/nmap/nmap_7.95.bb
-@@ -10,6 +10,7 @@ SRC_URI = "http://nmap.org/dist/${BP}.tar.bz2 \
-            file://nmap-replace-shtool-mkdir-with-coreutils-mkdir-command.patch \
-            file://0001-Include-time.h-header-to-pass-clang-compilation.patch \
-            file://0002-Fix-building-with-libc.patch \
-+           file://0003-Fix-off-by-one-overflow-in-the-IP-protocol-table.patch \
-            "
- SRC_URI[sha256sum] = "e14ab530e47b5afd88f1c8a2bac7f89cd8fe6b478e22d255c5b9bddb7a1c5778" 
- inherit autotools-brokensep pkgconfig python3native
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-tests-makefile-Append-CPPFLAGS-rather-then-override.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-tests-makefile-Append-CPPFLAGS-rather-then-override.patch
+deleted file mode 100644
+index 78a4cb0fc2..0000000000
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-tests-makefile-Append-CPPFLAGS-rather-then-override.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From b6dba773491bbb7b4664dacdd87a12af860f1bd8 Mon Sep 17 00:00:00 2001
+-From: Oleksiy Obitotskyy <oobitots@cisco.com>
+-Date: Thu, 28 Jan 2021 05:43:33 -0800
+-Subject: [PATCH] tests/makefile: Append CPPFLAGS rather then override
+-
+-CPPFLAGS overrided and we could miss some options needed.
+-
+-Upstream-Status: Submitted
+-Signed-off-by: Oleksiy Obitotskyy <oobitots@cisco.com>
+----
+- tests/Makefile | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/tests/Makefile b/tests/Makefile
+-index 0ca3716..d262932 100644
+---- a/tests/Makefile
+-+++ b/tests/Makefile
+-@@ -33,8 +33,8 @@ HELPERS = get_hugetlbfs_path compare_kvers
+- HELPER_LIBS = libheapshrink.so
+- BADTOOLCHAIN = bad-toolchain.sh
+- 
+--CFLAGS = -O2 -Wall -g
+--CPPFLAGS = -I..
+-+CFLAGS += -O2 -Wall -g
+-+CPPFLAGS += -I..
+- STATIC_LIBHUGE = -Wl,--whole-archive -lhugetlbfs -Wl,--no-whole-archive
+- STATIC_LDLIBS = -Wl,--no-as-needed -lpthread
+- LDLIBS = $(STATIC_LDLIBS) -ldl -lhugetlbfs_privutils
+--- 
+-2.26.2.Cisco
+-
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-avoid-search-host-library-path-for-cros.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0002-libhugetlbfs-avoid-search-host-library-path-for-cros.patch
+similarity index 98%
+rename from meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-avoid-search-host-library-path-for-cros.patch
+rename to meta-oe/recipes-benchmark/libhugetlbfs/files/0002-libhugetlbfs-avoid-search-host-library-path-for-cros.patch
+index f95e9e85a4..1b99c007f5 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-avoid-search-host-library-path-for-cros.patch
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0002-libhugetlbfs-avoid-search-host-library-path-for-cros.patch
+@@ -1,4 +1,4 @@
+-From 82a4f60ab24dff121f5f9d3bbcd9a8a28bb7caef Mon Sep 17 00:00:00 2001
++From d3903cbe348c6ecb2f38b37f20dafa6b0ca3b114 Mon Sep 17 00:00:00 2001
+ From: Chunrong Guo <B40290@freescale.com>
+ Date: Sun, 8 Sep 2013 23:21:49 -0500
+ Subject: [PATCH] libhugetlbfs: avoid search host library path for cross
+@@ -7,7 +7,6 @@ Subject: [PATCH] libhugetlbfs: avoid search host library path for cross
+ Upstream-Status: Inappropriate [oe-core specific]
+ 
+ Signed-off-by: Chunrong Guo <B40290@freescale.com>
+-
+ ---
+  ldscripts/elf32ppclinux.xB   | 2 +-
+  ldscripts/elf32ppclinux.xBDT | 2 +-
+@@ -95,3 +94,6 @@ index 1855202..c62d245 100644
+  INPUT(-lhugetlbfs);
+  /* Do we need any of these for elf?
+     __DYNAMIC = 0;    */
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/tests-Makefile-install-static-4G-edge-testcases.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0003-tests-Makefile-install-static-4G-edge-testcases.patch
+similarity index 73%
+rename from meta-oe/recipes-benchmark/libhugetlbfs/files/tests-Makefile-install-static-4G-edge-testcases.patch
+rename to meta-oe/recipes-benchmark/libhugetlbfs/files/0003-tests-Makefile-install-static-4G-edge-testcases.patch
+index b8b2f8e6fb..98cdf2f51c 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/files/tests-Makefile-install-static-4G-edge-testcases.patch
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0003-tests-Makefile-install-static-4G-edge-testcases.patch
+@@ -1,22 +1,21 @@
+-From f1ad8ff887f16daee8d06eca3df0f2541bfdaac0 Mon Sep 17 00:00:00 2001
++From 3e54866a0ea3c9e933e91213cbe6e55b7ff67b87 Mon Sep 17 00:00:00 2001
+ From: Ting Liu <b28495@freescale.com>
+ Date: Mon, 23 Sep 2013 08:00:55 +0000
+-Subject: [PATCH] libhugetlbfs: add recipe
+-
+-Upstream-Status: Submitted
++Subject: [PATCH] tests/Makefile: install static 4G edge testcases
+ 
+ TESTS_64 is empty, install will fail due to missing file operand
+ 
+-Signed-off-by: Ting Liu <b28495@freescale.com>
++Upstream-Status: Submitted
+ 
++Signed-off-by: Ting Liu <b28495@freescale.com>
+ ---
+- tests/Makefile | 2 +-
++ tests/Makefile.in | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+-diff --git a/tests/Makefile b/tests/Makefile
+-index 073df96..0ca3716 100644
+---- a/tests/Makefile
+-+++ b/tests/Makefile
++diff --git a/tests/Makefile.in b/tests/Makefile.in
++index d33a228..d262932 100644
++--- a/tests/Makefile.in
+++++ b/tests/Makefile.in
+ @@ -295,7 +295,7 @@ obj64/install:
+  	$(INSTALL) -m 755 wrapper-utils.sh $(DESTDIR)$(INST_TESTSDIR64)/obj64
+  	$(INSTALL) -m 755 $(HELPERS:%=obj64/%) $(DESTDIR)$(INST_TESTSDIR64)/obj64
+@@ -26,3 +25,6 @@ index 073df96..0ca3716 100644
+  	$(INSTALL) -m 755 run_tests.py $(DESTDIR)$(INST_TESTSDIR64)
+  
+  install: $(OBJDIRS:%=%/install)
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0004-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch
+similarity index 90%
+rename from meta-oe/recipes-benchmark/libhugetlbfs/files/0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch
+rename to meta-oe/recipes-benchmark/libhugetlbfs/files/0004-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch
+index 83934abef8..6b010365a0 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0004-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch
+@@ -1,4 +1,4 @@
+-From 0077532b07e268347cb8557be6d70148d5f0e840 Mon Sep 17 00:00:00 2001
++From 86d3ebfc4da5ccbc82fdee4abaf2cbf758d82403 Mon Sep 17 00:00:00 2001
+ From: Ting Liu <b28495@freescale.com>
+ Date: Wed, 21 Aug 2013 15:44:57 +0800
+ Subject: [PATCH] run_test.py: not use hard coded path ../obj/hugeadm
+@@ -20,10 +20,10 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
+  1 file changed, 11 insertions(+), 1 deletion(-)
+ 
+ diff --git a/tests/run_tests.py b/tests/run_tests.py
+-index 018264d..0aabcd1 100755
++index 4793262..6cd0241 100755
+ --- a/tests/run_tests.py
+ +++ b/tests/run_tests.py
+-@@ -245,9 +245,19 @@ def get_pagesizes():
++@@ -250,9 +250,19 @@ def get_pagesizes():
+      Use libhugetlbfs' hugeadm utility to get a list of page sizes that have
+      active mount points and at least one huge page allocated to the pool.
+      """
+@@ -45,5 +45,5 @@ index 018264d..0aabcd1 100755
+          return sizes
+  
+ -- 
+-2.7.4
++2.25.1
+ 
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-elf_i386-avoid-search-host-library-path.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0005-libhugetlbfs-elf_i386-avoid-search-host-library-path.patch
+similarity index 94%
+rename from meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-elf_i386-avoid-search-host-library-path.patch
+rename to meta-oe/recipes-benchmark/libhugetlbfs/files/0005-libhugetlbfs-elf_i386-avoid-search-host-library-path.patch
+index 7cc180a4b7..fc8776af66 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-elf_i386-avoid-search-host-library-path.patch
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0005-libhugetlbfs-elf_i386-avoid-search-host-library-path.patch
+@@ -1,4 +1,4 @@
+-From b5887693d90c430291b644c2f5713b5fdd1777ce Mon Sep 17 00:00:00 2001
++From 8c7a379876e3c7a32bef8620f94a85d20b7b186f Mon Sep 17 00:00:00 2001
+ From: Jackie Huang <jackie.huang@windriver.com>
+ Date: Tue, 4 Nov 2014 00:49:11 -0800
+ Subject: [PATCH] libhugetlbfs/elf_i386: avoid search host library path for
+@@ -7,7 +7,6 @@ Subject: [PATCH] libhugetlbfs/elf_i386: avoid search host library path for
+ Upstream-Status: Inappropriate [cross compile specific]
+ 
+ Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+-
+ ---
+  ldscripts/elf_i386.xB   | 1 -
+  ldscripts/elf_i386.xBDT | 1 -
+@@ -37,3 +36,6 @@ index d72aebe..3bac1b1 100644
+  INPUT(-lhugetlbfs);
+  /* Do we need any of these for elf?
+     __DYNAMIC = 0;    */
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-include-stddef.h-for-ptrdiff_t.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0006-include-stddef.h-for-ptrdiff_t.patch
+similarity index 81%
+rename from meta-oe/recipes-benchmark/libhugetlbfs/files/0001-include-stddef.h-for-ptrdiff_t.patch
+rename to meta-oe/recipes-benchmark/libhugetlbfs/files/0006-include-stddef.h-for-ptrdiff_t.patch
+index 914b0514f8..33a4efb1fa 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-include-stddef.h-for-ptrdiff_t.patch
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0006-include-stddef.h-for-ptrdiff_t.patch
+@@ -1,18 +1,17 @@
+-From 351d1de09dd80049b7a2cb02c5750635d0389873 Mon Sep 17 00:00:00 2001
++From 5fe5dae674e259bcdd57b9c6a0004111ab0700ce Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Thu, 21 Jun 2018 19:25:57 -0700
+ Subject: [PATCH] include stddef.h for ptrdiff_t
+ 
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-
+----
+ Upstream-Status: Pending
+ 
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
+  morecore.c | 1 +
+  1 file changed, 1 insertion(+)
+ 
+ diff --git a/morecore.c b/morecore.c
+-index 6563bbd..0eef782 100644
++index 405c566..0edccd2 100644
+ --- a/morecore.c
+ +++ b/morecore.c
+ @@ -19,6 +19,7 @@
+@@ -23,3 +22,6 @@ index 6563bbd..0eef782 100644
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include <malloc.h>
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0002-Mark-glibc-specific-code-so.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0007-Mark-glibc-specific-code-so.patch
+similarity index 74%
+rename from meta-oe/recipes-benchmark/libhugetlbfs/files/0002-Mark-glibc-specific-code-so.patch
+rename to meta-oe/recipes-benchmark/libhugetlbfs/files/0007-Mark-glibc-specific-code-so.patch
+index 7ad6c43eb1..5b2c91b8a1 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/files/0002-Mark-glibc-specific-code-so.patch
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0007-Mark-glibc-specific-code-so.patch
+@@ -1,21 +1,20 @@
+-From 0f548286848c70aa325c6748d80e8651389b4938 Mon Sep 17 00:00:00 2001
++From c98e64c56d0118a2d5f950eaceaed0e85eaa2543 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Thu, 21 Jun 2018 19:32:59 -0700
+ Subject: [PATCH] Mark glibc specific code so
+ 
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-
+----
+ Upstream-Status: Pending
+ 
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
+  morecore.c | 3 ++-
+  1 file changed, 2 insertions(+), 1 deletion(-)
+ 
+ diff --git a/morecore.c b/morecore.c
+-index 0eef782..d48509c 100644
++index 0edccd2..db22216 100644
+ --- a/morecore.c
+ +++ b/morecore.c
+-@@ -364,6 +364,7 @@ void hugetlbfs_setup_morecore(void)
++@@ -371,6 +371,7 @@ void hugetlbfs_setup_morecore(void)
+  
+  	INFO("setup_morecore(): heapaddr = 0x%lx\n", heapaddr);
+  
+@@ -23,7 +22,7 @@ index 0eef782..d48509c 100644
+  	heaptop = heapbase = (void *)heapaddr;
+  	if (__hugetlb_opts.thp_morecore)
+  		__morecore = &thp_morecore;
+-@@ -371,7 +372,6 @@ void hugetlbfs_setup_morecore(void)
++@@ -378,7 +379,6 @@ void hugetlbfs_setup_morecore(void)
+  		__morecore = &hugetlbfs_morecore;
+  
+  	/* Set some allocator options more appropriate for hugepages */
+@@ -31,9 +30,13 @@ index 0eef782..d48509c 100644
+  	if (__hugetlb_opts.shrink_ok)
+  		mallopt(M_TRIM_THRESHOLD, hpage_size + hpage_size / 2);
+  	else
+-@@ -381,4 +381,5 @@ void hugetlbfs_setup_morecore(void)
++@@ -388,5 +388,6 @@ void hugetlbfs_setup_morecore(void)
+  	 * This doesn't appear to prohibit malloc() from falling back
+  	 * to mmap() if we run out of hugepages. */
+  	mallopt(M_MMAP_MAX, 0);
+ +#endif
+  }
++ #endif /* HAS_MORECORE */
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0003-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0008-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch
+similarity index 92%
+rename from meta-oe/recipes-benchmark/libhugetlbfs/files/0003-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch
+rename to meta-oe/recipes-benchmark/libhugetlbfs/files/0008-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch
+index 858a8e511a..73844b71f9 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/files/0003-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0008-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch
+@@ -1,20 +1,19 @@
+-From 9ff04d7acc700387e3837f8ab11a41efea5ee8b0 Mon Sep 17 00:00:00 2001
++From 4f69eb130dc2c67a90f2460cedb78f6db11dd6d2 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Thu, 21 Jun 2018 19:44:26 -0700
+ Subject: [PATCH] alloc.c: Avoid sysconf(_SC_LEVEL2_CACHE_LINESIZE) on linux
+ 
+ musl does not have it
+ 
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-
+----
+ Upstream-Status: Pending
+ 
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
+  alloc.c | 15 ++++++++++++++-
+  1 file changed, 14 insertions(+), 1 deletion(-)
+ 
+ diff --git a/alloc.c b/alloc.c
+-index bce9464..cf7eb40 100644
++index b8ed663..a58c43d 100644
+ --- a/alloc.c
+ +++ b/alloc.c
+ @@ -245,6 +245,19 @@ void free_huge_pages(void *ptr)
+@@ -46,3 +45,6 @@ index bce9464..cf7eb40 100644
+  		linemod = time(NULL);
+  	}
+  
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0004-shm.c-Mark-glibc-specific-changes-so.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0009-shm.c-Mark-glibc-specific-changes-so.patch
+similarity index 91%
+rename from meta-oe/recipes-benchmark/libhugetlbfs/files/0004-shm.c-Mark-glibc-specific-changes-so.patch
+rename to meta-oe/recipes-benchmark/libhugetlbfs/files/0009-shm.c-Mark-glibc-specific-changes-so.patch
+index c3f7b3e479..4fbf30e24b 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/files/0004-shm.c-Mark-glibc-specific-changes-so.patch
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0009-shm.c-Mark-glibc-specific-changes-so.patch
+@@ -1,13 +1,12 @@
+-From 9ce323432a7f4d99f617970c7e35b607b9bbf843 Mon Sep 17 00:00:00 2001
++From 37239dd5f14a34b05e77b3ca6e34f96161f1339a Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Thu, 21 Jun 2018 19:48:04 -0700
+ Subject: [PATCH] shm.c: Mark glibc specific changes so
+ 
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-
+----
+ Upstream-Status: Pending
+ 
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
+  shm.c | 3 ++-
+  1 file changed, 2 insertions(+), 1 deletion(-)
+ 
+@@ -28,3 +27,6 @@ index 1f82cab..9447b63 100644
+  
+  /* call syscall shmget through the generic syscall mechanism */
+  static int syscall_shmget(key_t key, size_t size, int shmflg)
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0005-Include-dirent.h-for-ino_t.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0010-Include-dirent.h-for-ino_t.patch
+similarity index 90%
+rename from meta-oe/recipes-benchmark/libhugetlbfs/files/0005-Include-dirent.h-for-ino_t.patch
+rename to meta-oe/recipes-benchmark/libhugetlbfs/files/0010-Include-dirent.h-for-ino_t.patch
+index 8bd1633392..a530a5267a 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/files/0005-Include-dirent.h-for-ino_t.patch
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0010-Include-dirent.h-for-ino_t.patch
+@@ -1,4 +1,4 @@
+-From bb8c370aaaf25b1fe1fbf984e73177018026cb91 Mon Sep 17 00:00:00 2001
++From ec9163c0436d1c77cecc941aca2e524b26001b15 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Thu, 21 Jun 2018 19:51:02 -0700
+ Subject: [PATCH] Include dirent.h for ino_t
+@@ -6,13 +6,13 @@ Subject: [PATCH] Include dirent.h for ino_t
+ Fixes
+ error: unknown type name 'ino_t'; did you mean 'int'?
+ 
++Upstream-Status: Pending
++
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ 
+ Update for 2.22.
+ Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+ ---
+-Upstream-Status: Pending
+-
+  tests/hugetests.h | 1 +
+  1 file changed, 1 insertion(+)
+ 
+@@ -29,5 +29,5 @@ index bc4e16a..fbe4dc0 100644
+  
+  #include "libhugetlbfs_privutils.h"
+ -- 
+-2.7.4
++2.25.1
+ 
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0006-include-limits.h-for-PATH_MAX.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0011-include-limits.h-for-PATH_MAX.patch
+similarity index 85%
+rename from meta-oe/recipes-benchmark/libhugetlbfs/files/0006-include-limits.h-for-PATH_MAX.patch
+rename to meta-oe/recipes-benchmark/libhugetlbfs/files/0011-include-limits.h-for-PATH_MAX.patch
+index e4f8030961..08de396d9f 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/files/0006-include-limits.h-for-PATH_MAX.patch
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0011-include-limits.h-for-PATH_MAX.patch
+@@ -1,4 +1,4 @@
+-From 5f64aa8c47c2d3a155a97e262f89cc47394a69eb Mon Sep 17 00:00:00 2001
++From 79b76433f4b6f2f14914817b7e8ac0db1df39250 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Thu, 21 Jun 2018 19:58:53 -0700
+ Subject: [PATCH] include limits.h for PATH_MAX
+@@ -7,17 +7,16 @@ Fixes
+ 
+ error: 'PATH_MAX' undeclared
+ 
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-
+----
+ Upstream-Status: Pending
+ 
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
+  hugeadm.c                | 1 +
+  tests/gethugepagesizes.c | 1 +
+  2 files changed, 2 insertions(+)
+ 
+ diff --git a/hugeadm.c b/hugeadm.c
+-index fe4211d..8db274c 100644
++index 79a4867..65d5136 100644
+ --- a/hugeadm.c
+ +++ b/hugeadm.c
+ @@ -33,6 +33,7 @@
+@@ -29,7 +28,7 @@ index fe4211d..8db274c 100644
+  #include <sys/stat.h>
+  #include <sys/types.h>
+ diff --git a/tests/gethugepagesizes.c b/tests/gethugepagesizes.c
+-index 9551b38..2645e3f 100644
++index 5777265..990db69 100644
+ --- a/tests/gethugepagesizes.c
+ +++ b/tests/gethugepagesizes.c
+ @@ -29,6 +29,7 @@
+@@ -40,3 +39,6 @@ index 9551b38..2645e3f 100644
+  
+  #include "hugetests.h"
+  
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-huge_page_setup_helper-use-python3-interpreter.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0012-huge_page_setup_helper-use-python3-interpreter.patch
+similarity index 88%
+rename from meta-oe/recipes-benchmark/libhugetlbfs/files/0001-huge_page_setup_helper-use-python3-interpreter.patch
+rename to meta-oe/recipes-benchmark/libhugetlbfs/files/0012-huge_page_setup_helper-use-python3-interpreter.patch
+index e45f283b38..0583df95ad 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-huge_page_setup_helper-use-python3-interpreter.patch
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0012-huge_page_setup_helper-use-python3-interpreter.patch
+@@ -1,4 +1,4 @@
+-From b77c61de4d88d2c6e5d31f4f5a5877cc4c61272e Mon Sep 17 00:00:00 2001
++From e5580e392b8764e1e6509c5a4ed13fb2ce7566b9 Mon Sep 17 00:00:00 2001
+ From: Andrey Zhizhikin <andrey.z@gmail.com>
+ Date: Mon, 27 Jan 2020 17:27:55 +0000
+ Subject: [PATCH] huge_page_setup_helper: use python3 interpreter
+@@ -15,7 +15,7 @@ Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/huge_page_setup_helper.py b/huge_page_setup_helper.py
+-index a9ba2bf..7ba0c92 100755
++index 01fc8dc..79a88ca 100755
+ --- a/huge_page_setup_helper.py
+ +++ b/huge_page_setup_helper.py
+ @@ -1,4 +1,4 @@
+@@ -25,5 +25,5 @@ index a9ba2bf..7ba0c92 100755
+  #
+  # Tool to set up Linux large page support with minimal effort
+ -- 
+-2.17.1
++2.25.1
+ 
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0013-elflink.c-include-libgen.h-for-basename.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0013-elflink.c-include-libgen.h-for-basename.patch
+new file mode 100644
+index 0000000000..264a535cc7
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0013-elflink.c-include-libgen.h-for-basename.patch
+@@ -0,0 +1,41 @@
++From 825444522d698991be04bbfa683a7cf785c6f72c Mon Sep 17 00:00:00 2001
++From: Yi Zhao <yi.zhao@windriver.com>
++Date: Wed, 2 Oct 2024 00:06:34 +0800
++Subject: [PATCH] elflink.c: include libgen.h for basename
++
++Basename prototype has been removed from string.h from latest musl[1].
++Compilers e.g. clang-18 flags the absense of prototype as error.
++Therefore include libgen.h for providing it.
++
++elflink.c: In function 'get_shared_file_name':
++elflink.c:363:19: error: implicit declaration of function 'basename' [-Wimplicit-function-declaration]
++  363 |         binary2 = basename(binary);
++      |                   ^~~~~~~~
++elflink.c:363:17: error: assignment to 'char *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
++  363 |         binary2 = basename(binary);
++      |                 ^
++
++[1] https://git.musl-libc.org/cgit/musl/commit/?id=725e17ed6dff4d0cd22487bb64470881e86a92e7
++
++Upstream-Status: Pending
++
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ elflink.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/elflink.c b/elflink.c
++index 278d338..0e78d61 100644
++--- a/elflink.c
+++++ b/elflink.c
++@@ -38,6 +38,7 @@
++ #include <limits.h>
++ #include <elf.h>
++ #include <dlfcn.h>
+++#include <libgen.h>
++ 
++ #include "version.h"
++ #include "hugetlbfs.h"
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_2.24.bb
+similarity index 52%
+rename from meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+rename to meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_2.24.bb
+index 80af9873b1..00b34ad4ab 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_2.24.bb
+@@ -5,28 +5,26 @@ LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
+ 
+ DEPENDS = "sysfsutils"
+ RDEPENDS:${PN} += "bash python3-core"
+-RDEPENDS:${PN}-tests += "bash python3-core"
++RDEPENDS:${PN}-tests += "bash python3-core python3-resource"
+ 
+-PV = "2.23"
+ PE = "1"
+ 
+-SRCREV = "6b126a4d7da9490fa40fe7e1b962edcb939feddc"
++SRCREV = "1322884fb0d55dc55f53563c1aa6328d118997e7"
+ SRC_URI = " \
+     git://github.com/libhugetlbfs/libhugetlbfs.git;protocol=https;branch=master \
+-    file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
+-    file://libhugetlbfs-avoid-search-host-library-path-for-cros.patch \
+-    file://tests-Makefile-install-static-4G-edge-testcases.patch \
+-    file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
+-    file://libhugetlbfs-elf_i386-avoid-search-host-library-path.patch \
+-    file://0001-include-stddef.h-for-ptrdiff_t.patch \
+-    file://0002-Mark-glibc-specific-code-so.patch \
+-    file://0003-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch \
+-    file://0004-shm.c-Mark-glibc-specific-changes-so.patch \
+-    file://0005-Include-dirent.h-for-ino_t.patch \
+-    file://0006-include-limits.h-for-PATH_MAX.patch \
+-    file://0001-huge_page_setup_helper-use-python3-interpreter.patch \
+-    file://0001-Revert-ld.hugetlbfs-fix-Ttext-segment-argument-on-AA.patch \
+-    file://0001-tests-makefile-Append-CPPFLAGS-rather-then-override.patch \
++    file://0001-skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
++    file://0002-libhugetlbfs-avoid-search-host-library-path-for-cros.patch \
++    file://0003-tests-Makefile-install-static-4G-edge-testcases.patch \
++    file://0004-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
++    file://0005-libhugetlbfs-elf_i386-avoid-search-host-library-path.patch \
++    file://0006-include-stddef.h-for-ptrdiff_t.patch \
++    file://0007-Mark-glibc-specific-code-so.patch \
++    file://0008-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch \
++    file://0009-shm.c-Mark-glibc-specific-changes-so.patch \
++    file://0010-Include-dirent.h-for-ino_t.patch \
++    file://0011-include-limits.h-for-PATH_MAX.patch \
++    file://0012-huge_page_setup_helper-use-python3-interpreter.patch \
++    file://0013-elflink.c-include-libgen.h-for-basename.patch \
+ "
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
+@@ -48,22 +46,26 @@ export HUGETLB_LDSCRIPT_PATH="${S}/ldscripts"
+ 
+ TARGET_CC_ARCH += "${LDFLAGS}"
+ 
++inherit autotools-brokensep cpan-base
++
+ #The CUSTOM_LDSCRIPTS doesn't work with the gold linker
+-inherit cpan-base
+-do_configure() {
++do_configure:prepend() {
+     if [ "${@bb.utils.filter('DISTRO_FEATURES', 'ld-is-gold', d)}" ]; then
+-      sed -i 's/CUSTOM_LDSCRIPTS = yes/CUSTOM_LDSCRIPTS = no/'  Makefile
++        sed -i 's/CUSTOM_LDSCRIPTS = yes/CUSTOM_LDSCRIPTS = no/'  Makefile.in
+     fi
+ }
+ 
+ do_install() {
+-        oe_runmake PREFIX=${prefix} DESTDIR=${D}  \
+-          INST_TESTSDIR32=${libdir}/libhugetlbfs/tests \
+-          INST_TESTSDIR64=${libdir}/libhugetlbfs/tests \
+-          install-tests
++    oe_runmake PREFIX=${prefix} DESTDIR=${D}  \
++        INST_TESTSDIR32=${libdir}/libhugetlbfs/tests \
++        INST_TESTSDIR64=${libdir}/libhugetlbfs/tests \
++        install-tests
++
++    sed -i -e 's|${RECIPE_SYSROOT_NATIVE}||g' \
++        -e 's|${RECIPE_SYSROOT}||g' \
++        `find ${D}${libdir}/libhugetlbfs/tests -name dummy.ldscript`
+ }
+ 
+-
+ PACKAGES =+ "${PN}-tests "
+ FILES:${PN} += "${libdir}/*.so"
+ FILES:${PN}-dev = "${includedir}"
+@@ -74,6 +76,3 @@ INSANE_SKIP:${PN} = "dev-so"
+ 
+ INHIBIT_PACKAGE_STRIP = "1"
+ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+-
+-# see https://github.com/libhugetlbfs/libhugetlbfs/issues/52
+-SKIP_RECIPE[libhugetlbfs] ?= "Needs porting to glibc 2.34+"
 -- 
 2.43.0
 
