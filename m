@@ -2,57 +2,57 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3EAABD2B939
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 55B60D2B944
 	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 14:37:00 +0000 (UTC)
-Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
- by mx.groups.io with SMTP id smtpd.web11.19525.1730817410586691867
+Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com [209.85.219.177])
+ by mx.groups.io with SMTP id smtpd.web11.19534.1730817414546963414
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 06:36:50 -0800
+ Tue, 05 Nov 2024 06:36:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MmhKvDnR;
- spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-6e330b7752cso43323497b3.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:36:50 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hGrib6TU;
+ spf=pass (domain: gmail.com, ip: 209.85.219.177, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f177.google.com with SMTP id 3f1490d57ef6-e290222fdd0so4907211276.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:36:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730817410; x=1731422210; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730817413; x=1731422213; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=JHu2+oJNSNK1iuHhEPo0f6ZFnaG6shiFjU/0jRNbrww=;
-        b=MmhKvDnRJ/mSt0GSaqDsgqgp394tLx9YubTgNGlmZnofHMDSHS2gP81KoCQWF5/yAQ
-         v6ilZcjDNU4YqHF6MdLlc6Qhdi8GqH+cK3/kjnbob6qtP9JnDea9iEbEDhEnvdL5K8BQ
-         LSHAnmFM4liTQoRWAMMPW9V1oXIabfaXs1vKkuDoIix+cW3FU0Qqh25SJ1XSCdbKHe/3
-         79XrNBNuzKl6fnfEdI6v8d4jNv1jMfo30AVS21N9g1ah2XzRg4VGfbVCXbagbnwrRS0e
-         COrqXh7aw1K8FnJff96t/BqDVAP6r3xw2DZ9Ua7EDcOLKh8QKcY9a7Lo+ySNLYjdJtBu
-         SW7A==
+        bh=2k+eMUn71Li/qvdXNmRHamEaFy6gketQAD0yPWVYF+0=;
+        b=hGrib6TUJYsqKui5gWlpOoqK9ZHUBlAQ2ITTo/uF6d17Vluyr6ekXIuf077fVrPjGH
+         yMf3IMEMB/etEVucdAI/02xGasDaSlahTEt9s4KZjS5S7HIom79+kDRTdSzqmjo3HDTa
+         nIk58g0G62DYpNLKElqN64DMnbhUIuYfM95ycTsBn1wtbfyP8aDiUi1cc66vz8G4xG2Z
+         7WbtyyxFydT0xFR7aulxls6CouAZEeZcCtdlMVu/mpIL5we1KPSk7RGW21VOITDdRjqP
+         DIp49qI8YHkWyRE3i/jLtcCHaZ1nkw12/frNqOoHfOf5lWGBV+84CGGFB1t+w0Y4L8oj
+         k7/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730817410; x=1731422210;
+        d=1e100.net; s=20230601; t=1730817413; x=1731422213;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=JHu2+oJNSNK1iuHhEPo0f6ZFnaG6shiFjU/0jRNbrww=;
-        b=Ab6CnaTGGi2GRVf7B/R5H7CFsEFRFUXCg4rE3gHyXkCalVTnxqvH07qLnNIkBbOlAf
-         6nyMwTzKug9UKuzsRGq7g7cui/RlG7R1562pdSEMobtBxm9RPxys3SvfmlyS2okGBNMI
-         WpRpuT4fVfI1L32E6frOVWggVdB1a+pkiCuhrVOXRp8OeyQpFu7OVGCL68qlZgKkPB2l
-         Nj/drDzOISm3CsBnHWUPau8hjySLtU5sgGGmw1/0s0DdOTYTAmAdSeiuXGqJhNReSciY
-         sheI+rrJI5YxkDQ2BtF72qa4dst6ilSzmUvkx4JAjbhmpEMBrPkmZVEU1JDAOMrum4EW
-         L9Ow==
-X-Gm-Message-State: AOJu0YwZhfo3BHyPeDehFh45GhsjgEnB8BZPiDPjCICzyUgodUcDPWSC
-	lqZRt+ZA+WPndbEAbKxLeR3fDaHF4WyIMfFM6eAKUitZ4dD62pNM78BdhA==
-X-Google-Smtp-Source: AGHT+IEQkBoj3Xoz8N/XIlLEDRKQnKVeeXVuCkELmIFBweh6eKKTJvkYfoxB6eroFWNMi+ozsb84vw==
-X-Received: by 2002:a05:690c:7346:b0:6e3:7625:15f7 with SMTP id 00721157ae682-6ea6432725cmr134519437b3.10.1730817409668;
-        Tue, 05 Nov 2024 06:36:49 -0800 (PST)
+        bh=2k+eMUn71Li/qvdXNmRHamEaFy6gketQAD0yPWVYF+0=;
+        b=pDn4NHP0y6k7T26GvhAvlW+shw+BTXKBT+0t7j6SWsb4uuQKJQIdA8Vap5RhscgGOT
+         9JPr8+spjrdq2kg2+zx58q6jvk4+qMCF+j5ngJdMZqpnZIjKwpQjw1ykyLWCyYB4uRH0
+         3neBANfWzzO1HmzSI8hbWvRgxvU8bqfUo38H9zIOyrVI/c4RD4RA0J3Z1lACu/21T3dp
+         2+g8YRNVhptUKxzSrkQB1y3rN71keBcY2N+vTgJqH7NkjT1dZ1PHzwSe6P98z1xxjRV/
+         VrujobVWwCL3cFH6n+RJfcF9tbAZSqQbq3J37M6/ZhkoWpjYgdI+bmfhmsQmyi2REDEU
+         AOeg==
+X-Gm-Message-State: AOJu0YyNOnyOUHiumJ0n7mb6ix92SSlaqcqKNf3BS+WwFw7hJbk/3IBQ
+	3MstoxDJ4vk9MNjls+TZr7tHs4wPDvGq7MkdP02CCHwu7yjCXANaq18AzA==
+X-Google-Smtp-Source: AGHT+IF/Vn16N2INUyexbENsrHajXHXrcnthjiv/bQRNrt8y+0uLYHMhZC4gGQucKtLTLaKxovmjbQ==
+X-Received: by 2002:a05:690c:998e:b0:6e3:2192:e0e6 with SMTP id 00721157ae682-6e9d892d7f7mr363326797b3.14.1730817413572;
+        Tue, 05 Nov 2024 06:36:53 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:45dd:7000::29])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.36.49
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.36.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Nov 2024 06:36:49 -0800 (PST)
+        Tue, 05 Nov 2024 06:36:53 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
+Cc: Yi Zhao <yi.zhao@windriver.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][styhead][PATCH 23/90] python3-virtualenv: upgrade 20.26.4 -> 20.26.5
-Date: Tue,  5 Nov 2024 09:34:48 -0500
-Message-ID: <20241105143638.2301245-24-akuster808@gmail.com>
+Subject: [meta-oe][styhead][PATCH 32/90] protobuf: upgrade 4.25.4 -> 4.25.5
+Date: Tue,  5 Nov 2024 09:34:57 -0500
+Message-ID: <20241105143638.2301245-33-akuster808@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241105143638.2301245-1-akuster808@gmail.com>
 References: <20241105143638.2301245-1-akuster808@gmail.com>
@@ -62,37 +62,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 14:37:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113440
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113450
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Yi Zhao <yi.zhao@windriver.com>
 
-Changelog:
- Use uv over pip
+ChangeLog:
+https://github.com/protocolbuffers/protobuf/releases/tag/v25.5
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...hon3-virtualenv_20.26.4.bb => python3-virtualenv_20.26.5.bb} | 2 +-
+ .../protobuf/{protobuf_4.25.4.bb => protobuf_4.25.5.bb}         | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-virtualenv_20.26.4.bb => python3-virtualenv_20.26.5.bb} (87%)
+ rename meta-oe/recipes-devtools/protobuf/{protobuf_4.25.4.bb => protobuf_4.25.5.bb} (98%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-virtualenv_20.26.4.bb b/meta-python/recipes-devtools/python/python3-virtualenv_20.26.5.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-virtualenv_20.26.4.bb
-rename to meta-python/recipes-devtools/python/python3-virtualenv_20.26.5.bb
-index aadef0e947..82d60aeaab 100644
---- a/meta-python/recipes-devtools/python/python3-virtualenv_20.26.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-virtualenv_20.26.5.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/pypa/virtualenv"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0ce089158cf60a8ab6abb452b6405538"
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.4.bb b/meta-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb
+similarity index 98%
+rename from meta-oe/recipes-devtools/protobuf/protobuf_4.25.4.bb
+rename to meta-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb
+index 354b3213ad..d5fd901370 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.4.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
+ DEPENDS = "zlib abseil-cpp"
+ DEPENDS:append:class-target = " protobuf-native"
  
--SRC_URI[sha256sum] = "c17f4e0f3e6036e9f26700446f85c76ab11df65ff6d8a9cbfad9f71aabfcf23c"
-+SRC_URI[sha256sum] = "ce489cac131aa58f4b25e321d6d186171f78e6cb13fafbf32a840cee67733ff4"
+-SRCREV = "e915ce24b3d43c0fffcbf847354288c07dda1de0"
++SRCREV = "9d0ec0f92b5b5fdeeda11f9dcecc1872ff378014"
  
- BBCLASSEXTEND = "native nativesdk"
- inherit pypi python_hatchling
+ SRC_URI = "gitsm://github.com/protocolbuffers/protobuf.git;branch=25.x;protocol=https \
+            file://run-ptest \
 -- 
 2.43.0
 
