@@ -2,57 +2,57 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 328B9D2C12B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 428AED2C12D
 	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 14:37:22 +0000 (UTC)
-Received: from mail-yb1-f176.google.com (mail-yb1-f176.google.com [209.85.219.176])
- by mx.groups.io with SMTP id smtpd.web11.19559.1730817432775717594
+Received: from mail-yb1-f175.google.com (mail-yb1-f175.google.com [209.85.219.175])
+ by mx.groups.io with SMTP id smtpd.web11.19562.1730817437054611097
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 06:37:12 -0800
+ Tue, 05 Nov 2024 06:37:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=aykI7Ugq;
- spf=pass (domain: gmail.com, ip: 209.85.219.176, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f176.google.com with SMTP id 3f1490d57ef6-e292926104bso4745555276.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:37:12 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ka3qLGEZ;
+ spf=pass (domain: gmail.com, ip: 209.85.219.175, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f175.google.com with SMTP id 3f1490d57ef6-e290d5f83bcso5280539276.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:37:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730817432; x=1731422232; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730817436; x=1731422236; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ex5vdFrBlbxwQzZUHb5nIisYG1dAe76GfuUsaNcQa2Y=;
-        b=aykI7UgqHqAJuCjJVJNAWhoYAsQUf6pDTQ9SfVeydeXpyTIzY5ixqLxkm50zkNBRAJ
-         xvTYH+q71kmj1xpclCthrP+ntYjBtd+342NTQ0CxL+daMcL0JTmEst2hxTYXihN0epaz
-         O+DmWe1BjfcZMEObwiUotWgozuEBfeyN6BbNldsjHFvtwSFRzIQTAF71K7b7wHYyrt/d
-         17BlDnL5WuVLiupnP5YRlvo/i9QGbspc5vYToaa1wsodNsL17gLF1rM0AzhH6AgDvvGM
-         DmLzaj1o8tq35ZhKBqB67gpc6nfydEeax5qWfCbw8kpEUgQQE2llcMygIsvb2gZf1eV0
-         okQw==
+        bh=asZ1IzECC6SNI6ibZi/MsvRfhlLM9ncrkAlPLoJu9Ko=;
+        b=ka3qLGEZ1rRtbwbgBxyxx+7vk1qUv8bqZPrOGeKsGUjsBiWBol1DZVpLrohAv7t6JI
+         7Sm3tgiyp8zI+blXseBdF7uQj1bwCF+ctVfIVXJtN17Zsrg27oi8PbtWfbj/NsrM4DGu
+         JXgDrB4APmoCL+HNP4dV5yWj65HS2kkyJQL7GO7D2WFGXM0FXFvWeJoAqVSLsIyImqRS
+         WhQ7rp/w5tpXFlNrrKaLrZNrIb0ZyXNdvdXoQgwrgNgxN02AddgxoLVM56KWlDcNp+ZT
+         YnwNba6u8OY87uYOe0rrs7wGxH99NMbCc9hSU30vXdkcx0QsmpSCBpvpbjZ9aqF7HDSf
+         6qpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730817432; x=1731422232;
+        d=1e100.net; s=20230601; t=1730817436; x=1731422236;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=ex5vdFrBlbxwQzZUHb5nIisYG1dAe76GfuUsaNcQa2Y=;
-        b=gleXBYRc4+mhyIoHOIxfN5O0h/WyMipd9JfeoPaLmQccQSJFA80D8t3Ndub6c1vyiE
-         msqFATqJAr0R8DTW1p9Di0aVdLbca8qAndl8gnhtBN+tqCfvk80LHyFoHbuMcwaWQohN
-         n49RxjUpLGHsQ7hfiaGy2xcrgMLRy0c7m7dGEZZApgfklSI7/yjaFiuP2BbCjEdyJrnv
-         o8UUUoUDDPNfOap3/vxmzik0JE1mmquLs5LyGgP4m3Xio0nFbWpnX23/Fa9gNEI1SZis
-         UthEtTLY230kxVAZHaLEQnvyVdU2MTzmkMaWHoHUqaN2AwND29PhyrhLgysvDIa9zvnk
-         lPhg==
-X-Gm-Message-State: AOJu0YyoM9rNVCJ+vqHQwjAH8K91AmTmWCt4AdRMJZ+r9wTGWafLXk3d
-	G0pDWnPAQ+QEFrIQHxygbXch1ZVDL38paLaYIvI+G/oRkK2/eZSLX+UPdQ==
-X-Google-Smtp-Source: AGHT+IGAokarPv3nY48xLZztchYzMqyYYu5Znf9G26fAFTWXrpfrbJwY7JhXxWx1QTA2p/2y9jJ3ww==
-X-Received: by 2002:a05:690c:6312:b0:6ea:95f5:2608 with SMTP id 00721157ae682-6ea95f52ff2mr70656227b3.7.1730817430170;
-        Tue, 05 Nov 2024 06:37:10 -0800 (PST)
+        bh=asZ1IzECC6SNI6ibZi/MsvRfhlLM9ncrkAlPLoJu9Ko=;
+        b=d3CMeTbBHgPDNila4HUACt+GCa9z1NNLCLNcjlxazKC1QW7ElTQX3bMvVj9uifTb3q
+         JLWzyhu0Hfzg6JBZvo41Bx6GV8gUGNOd+Ff1eaF/XH/1+qUFkJyYwiTQU+VG/oTqZppw
+         p77OLnaMqVJVo4Z3NGa7wpbx8Sy6g5/mvtfuI8edKuNei2jlf7tsC0UkI3o4oJEE1Nng
+         j3uKn2eunicjbK09Ocq8dZEEbsrJxoPmzOrUvpc4KMPxtvX2edRnsKL5IH08Uh4WcilP
+         HN4uvKlb0qwicDdy36Gvu7g3yaI9P93hi9LQlha+jAiuMJ3dYWUcHHmFRd12kH6GI7iI
+         aF0A==
+X-Gm-Message-State: AOJu0YyC+2w5xiaPYcs65qUHR/LBNi+zW7RQuVMpAmrHmRidDbvwuaXC
+	cuvGivgcTyYezDsO1Um/KSAcwL8NQTqb51+hJECNIoJNsZGzuftCWmLn4Q==
+X-Google-Smtp-Source: AGHT+IEHvTXrVzdPK7ZwRxWeYoGyWmooogzJne5eROiv1sBu/h4aA0KaqQ6bBXJwATgxWi1Y7a9WjQ==
+X-Received: by 2002:a05:690c:480c:b0:6e3:2e50:8bd0 with SMTP id 00721157ae682-6ea64af0517mr161450657b3.13.1730817436117;
+        Tue, 05 Nov 2024 06:37:16 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:45dd:7000::29])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.37.09
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.37.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Nov 2024 06:37:09 -0800 (PST)
+        Tue, 05 Nov 2024 06:37:15 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>,
+Cc: Markus Volk <f_l_k@t-online.de>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][styhead][PATCH 66/90] curlpp: Fix build issue
-Date: Tue,  5 Nov 2024 09:35:31 -0500
-Message-ID: <20241105143638.2301245-67-akuster808@gmail.com>
+Subject: [meta-oe][styhead][PATCH 79/90] cryptsetup: fix udev PACKAGECONFIG
+Date: Tue,  5 Nov 2024 09:35:44 -0500
+Message-ID: <20241105143638.2301245-80-akuster808@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241105143638.2301245-1-akuster808@gmail.com>
 References: <20241105143638.2301245-1-akuster808@gmail.com>
@@ -62,76 +62,64 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 14:37:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113487
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113497
 
-From: alperak <alperyasinak1@gmail.com>
+From: Markus Volk <f_l_k@t-online.de>
 
-Signed-off-by: alperak <alperyasinak1@gmail.com>
+This commit removed the lvm2-udevrules package.
+[https://git.openembedded.org/meta-openembedded/commit/?h=master-next&id=c37c867e1adddd6fa39cf3f3d4c6688ea6dc825a]
+
+Align accordingly to avoid error at do_rootfs
+
+Error:
+ Problem 1: package udisks2-2.10.1-r0.corei7_64 from oe-repo requires libblockdev.so.3()(64bit), but none of the providers can be installed
+  - package udisks2-2.10.1-r0.corei7_64 from oe-repo requires libbd_utils.so.3()(64bit), but none of the providers can be installed
+  - package udisks2-2.10.1-r0.corei7_64 from oe-repo requires libblockdev >= 3.2.0, but none of the providers can be installed
+  - package gvfs-1.56.0-r0.corei7_64 from oe-repo requires udisks2, but none of the providers can be installed
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires libcryptsetup.so.12()(64bit), but none of the providers can be installed
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires libcryptsetup.so.12(CRYPTSETUP_2.0)(64bit), but none of the providers can be installed
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires libcryptsetup.so.12(CRYPTSETUP_2.4)(64bit), but none of the providers can be installed
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires libcryptsetup.so.12(CRYPTSETUP_2.7)(64bit), but none of the providers can be installed
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires cryptsetup >= 2.7.5, but none of the providers can be installed
+  - conflicting requests
+  - nothing provides lvm2-udevrules needed by cryptsetup-2.7.5-r0.corei7_64 from oe-repo
+ Problem 2: package gvfs-1.56.0-r0.corei7_64 from oe-repo requires udisks2, but none of the providers can be installed
+  - package udisks2-2.10.1-r0.corei7_64 from oe-repo requires libblockdev.so.3()(64bit), but none of the providers can be installed
+  - package udisks2-2.10.1-r0.corei7_64 from oe-repo requires libbd_utils.so.3()(64bit), but none of the providers can be installed
+  - package udisks2-2.10.1-r0.corei7_64 from oe-repo requires libblockdev >= 3.2.0, but none of the providers can be installed
+  - package gvfsd-trash-1.56.0-r0.corei7_64 from oe-repo requires libgvfscommon.so()(64bit), but none of the providers can be installed
+  - package gvfsd-trash-1.56.0-r0.corei7_64 from oe-repo requires libgvfsdaemon.so()(64bit), but none of the providers can be installed
+  - package gvfsd-trash-1.56.0-r0.corei7_64 from oe-repo requires gvfs >= 1.56.0, but none of the providers can be installed
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires libcryptsetup.so.12()(64bit), but none of the providers can be installed
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires libcryptsetup.so.12(CRYPTSETUP_2.0)(64bit), but none of the providers can be installed
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires libcryptsetup.so.12(CRYPTSETUP_2.4)(64bit), but none of the providers can be installed
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires libcryptsetup.so.12(CRYPTSETUP_2.7)(64bit), but none of the providers can be installed
+  - package libblockdev-3.2.0-r0.corei7_64 from oe-repo requires cryptsetup >= 2.7.5, but none of the providers can be installed
+  - conflicting requests
+  - nothing provides lvm2-udevrules needed by cryptsetup-2.7.5-r0.corei7_64 from oe-repo
+(try to add '--skip-broken' to skip uninstallable packages)
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 56010090ef75da2a3d564e16ee046a709da4a650)
+(cherry picked from commit 1ca8df16af411871e10f268064570146cdef54cb)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...id-conversion-from-int-to-CURLoption.patch | 36 +++++++++++++++++++
- .../recipes-support/curlpp/curlpp_0.8.1.bb    |  3 +-
- 2 files changed, 38 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/curlpp/curlpp/0002-fix-invalid-conversion-from-int-to-CURLoption.patch
+ meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.5.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/curlpp/curlpp/0002-fix-invalid-conversion-from-int-to-CURLoption.patch b/meta-networking/recipes-support/curlpp/curlpp/0002-fix-invalid-conversion-from-int-to-CURLoption.patch
-new file mode 100644
-index 0000000000..1712a53462
---- /dev/null
-+++ b/meta-networking/recipes-support/curlpp/curlpp/0002-fix-invalid-conversion-from-int-to-CURLoption.patch
-@@ -0,0 +1,36 @@
-+From ebe9144fdfdc8154661b93322cec4a1c43aa75ff Mon Sep 17 00:00:00 2001
-+From: alperak <alperyasinak1@gmail.com>
-+Date: Tue, 1 Oct 2024 19:45:38 +0300
-+Subject: [PATCH] Fix invalid conversion from int to CURLoption
-+
-+Options.hpp:281:74: error: invalid conversion from 'int' to 'CURLoption' [-fpermissive]
-+  281 |         typedef curlpp::OptionTrait<curl_closepolicy, CURLOPT_CLOSEPOLICY> ClosePolicy;
-+      |                                                                          ^
-+      |                                                                          |
-+      |                                                                          int
-+
-+Fix invalid conversion by adding explicit cast to CURLoption
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: alperak <alperyasinak1@gmail.com>
-+---
-+ include/curlpp/Options.hpp | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/include/curlpp/Options.hpp b/include/curlpp/Options.hpp
-+index c705c9d..7c9a501 100644
-+--- a/include/curlpp/Options.hpp
-++++ b/include/curlpp/Options.hpp
-+@@ -278,7 +278,7 @@ namespace options
-+ 	typedef curlpp::OptionTrait<long, CURLOPT_LOW_SPEED_LIMIT> LowSpeedLimit;
-+ 	typedef curlpp::OptionTrait<long, CURLOPT_LOW_SPEED_TIME> LowSpeedTime;
-+ 	typedef curlpp::OptionTrait<long, CURLOPT_MAXCONNECTS> MaxConnects;
-+-	typedef curlpp::OptionTrait<curl_closepolicy, CURLOPT_CLOSEPOLICY> ClosePolicy;
-++	typedef curlpp::OptionTrait<curl_closepolicy, (CURLoption)CURLOPT_CLOSEPOLICY> ClosePolicy;
-+ 	typedef curlpp::OptionTrait<bool, CURLOPT_FRESH_CONNECT> FreshConnect;
-+ 	typedef curlpp::OptionTrait<bool, CURLOPT_FORBID_REUSE> ForbidReuse;
-+ 	typedef curlpp::OptionTrait<long, CURLOPT_CONNECTTIMEOUT> ConnectTimeout;
-+-- 
-+2.25.1
-+
-diff --git a/meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb b/meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb
-index 131f1873a2..cacdc9773b 100644
---- a/meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb
-+++ b/meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb
-@@ -8,7 +8,8 @@ DEPENDS = "curl"
- DEPENDS:class-native = "curl-native"
- 
- SRC_URI = "git://github.com/jpbarrette/curlpp.git;branch=master;protocol=https \
--           file://0001-curlpp-config.in-Remove-references-to-absolute-build.patch"
-+           file://0001-curlpp-config.in-Remove-references-to-absolute-build.patch \
-+           file://0002-fix-invalid-conversion-from-int-to-CURLoption.patch"
- 
- SRCREV = "592552a165cc569dac7674cb7fc9de3dc829906f"
- 
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.5.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.5.bb
+index 54b47ea3fd..60bf501eb9 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.5.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.5.bb
+@@ -53,7 +53,7 @@ PACKAGECONFIG[veritysetup] = "--enable-veritysetup,--disable-veritysetup"
+ PACKAGECONFIG[luks2-reencryption] = "--enable-luks2-reencryption,--disable-luks2-reencryption"
+ PACKAGECONFIG[integritysetup] = "--enable-integritysetup,--disable-integritysetup"
+ PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux"
+-PACKAGECONFIG[udev] = "--enable-udev,--disable-udev,,udev lvm2-udevrules"
++PACKAGECONFIG[udev] = "--enable-udev,--disable-udev,,udev lvm2"
+ PACKAGECONFIG[kernel_crypto] = "--enable-kernel_crypto,--disable-kernel_crypto"
+ # gcrypt-pkbdf2 requries --with-crypto_backend=gcrypt or the flag isn't
+ # recognized.
 -- 
 2.43.0
 
