@@ -1,98 +1,93 @@
-Return-Path: <tomek.zyje@gmail.com>
+Return-Path: <liezhi.yang@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7551ED111A4
-	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 07:40:47 +0000 (UTC)
-Subject: run-postinsts problem with do_create_spdx task
-To: openembedded-devel@lists.openembedded.org
-From: tomek.zyje@gmail.com
-X-Originating-Location: Gdynia, Pomerania, PL (77.254.40.155)
-X-Originating-Platform: Linux Chrome 129
-User-Agent: GROUPS.IO Web Poster
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BC53D12676
+	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 09:52:38 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.14114.1730800355321901738
+ for <openembedded-devel@lists.openembedded.org>;
+ Tue, 05 Nov 2024 01:52:35 -0800
+Authentication-Results: mx.groups.io;
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=1039ed3882=liezhi.yang@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4A55awGW007158
+	for <openembedded-devel@lists.openembedded.org>; Tue, 5 Nov 2024 09:52:34 GMT
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 42n9a0jumx-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 09:52:34 +0000 (GMT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Tue, 5 Nov 2024 01:52:33 -0800
+Received: from ala-lpggp7.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2507.39 via Frontend Transport; Tue, 5 Nov 2024 01:52:33 -0800
+From: <liezhi.yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] gnulib: Add do_deploy_archives back
+Date: Tue, 5 Nov 2024 01:52:33 -0800
+Message-ID: <20241105095233.887542-1-liezhi.yang@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Date: Mon, 04 Nov 2024 23:40:39 -0800
-Message-ID: <nQmS.1730792439393657412.qbqI@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="sWcDTTX3PHOA57BqV6Ao"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=H7mJwPYi c=1 sm=1 tr=0 ts=6729eae2 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=VlfZXiiP6vEA:10 a=t7CeM3EgAAAA:8 a=omOdbC7AAAAA:8 a=enG6-LMoPoosSpmFjXMA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: PUu3UcKAmyaMyF1RznaxL8j-n6UeS3yZ
+X-Proofpoint-GUID: PUu3UcKAmyaMyF1RznaxL8j-n6UeS3yZ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.62.30
+ definitions=2024-11-05_03,2024-11-04_01,2024-09-30_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 clxscore=1011
+ priorityscore=1501 lowpriorityscore=0 impostorscore=0 suspectscore=0
+ bulkscore=0 mlxlogscore=999 malwarescore=0 adultscore=0 mlxscore=0
+ phishscore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2409260000 definitions=main-2411050074
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 07:40:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113414
+ <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 09:52:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113415
 
---sWcDTTX3PHOA57BqV6Ao
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+From: Robert Yang <liezhi.yang@windriver.com>
 
-I have a problem with building run-postinsts when changing the machine
-configuration for a build. I think I saw similar topics to this but to be
-honest it is hard to debug for me and maybe someone will be able to help.
-It can be reproduced by building run-postinsts when using `poky` as a distr=
-o and
-`ls1028ardb` [1] as a machine and then just changing the machine to
-`am57xx-evm` [2]. Then the following error shows up
+The gnulib has sources, so we can't delete do_deploy_archives, the commit which
+deleted it said:
 
-```
-ERROR: run-postinsts-1.0-r0 do_create_spdx: Cannot find any SPDX file for r=
-ecipe initscripts, False sstate:initscripts:aarch64-poky-linux:1.0:r0:aarch=
-64:12: sstate:initscripts::1.0:r0::12:
-ERROR: Logfile of failure stored in: /home/ubuntu/meta-proj/build/tmp/work/=
-all-poky-linux/run-postinsts/1.0/temp/log.do_create_spdx.14761
-ERROR: Task (/home/ubuntu/meta-proj/build/../poky/meta/recipes-devtools/run=
--postinsts/run-postinsts_1.0.bb:do_create_spdx) failed with exit code '1'
-```
+"""
+commit 32d29814278262005ef9bd691178c68b8cb1e000
+Author: leimaohui <leimaohui@cn.fujitsu.com>
+Date:   Fri Aug 3 16:32:33 2018 +0800
 
-Why the run-postinsts do_create_spdx package depends on initscripts recipe
-anyhow? I could go past this error by removing `allarch` from inherit direc=
-tive
-set in `run-postinsts` [3] recipe but it does not seems to be good solution=
- for
-this problem as this recipe clearly produce allarchs artifacts. How to debu=
-g
-this?
+    Fix bug when inherit archiver.
+"""
 
-[1] https://github.com/Freescale/meta-freescale/blob/scarthgap/conf/machine=
-/ls1028ardb.conf
-[2] https://git.yoctoproject.org/meta-ti/tree/meta-ti-bsp/conf/machine/am57=
-xx-evm.conf
-[3] https://git.yoctoproject.org/poky/plain/meta/recipes-devtools/run-posti=
-nsts/run-postinsts_1.0.bb
+I tried the following build:
+ARCHIVER_MODE[src] = "original"
+ARCHIVER_MODE[src] = "patched"
+ARCHIVER_MODE[src] = "configured"
+ARCHIVER_MODE[src] = "mirror"
 
-Regards
-Tomasz =C5=BByjewski
+The bug should be fixed during the past years.
 
---sWcDTTX3PHOA57BqV6Ao
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+---
+ meta-oe/recipes-support/gnulib/gnulib_202401.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-<div>I have a problem with building run-postinsts when changing the machine=
-<br />configuration for a build. I think I saw similar topics to this but t=
-o be<br />honest it is hard to debug for me and maybe someone will be able =
-to help.<br />It can be reproduced by building run-postinsts when using `po=
-ky` as a distro and<br />`ls1028ardb` [1] as a machine and then just changi=
-ng the machine to<br />`am57xx-evm` [2]. Then the following error shows up<=
-/div>
-<div><br />```<br />ERROR: run-postinsts-1.0-r0 do_create_spdx: Cannot find=
- any SPDX file for recipe initscripts, False sstate:initscripts:aarch64-pok=
-y-linux:1.0:r0:aarch64:12: sstate:initscripts::1.0:r0::12:<br />ERROR: Logf=
-ile of failure stored in: /home/ubuntu/meta-proj/build/tmp/work/all-poky-li=
-nux/run-postinsts/1.0/temp/log.do_create_spdx.14761<br />ERROR: Task (/home=
-/ubuntu/meta-proj/build/../poky/meta/recipes-devtools/run-postinsts/run-pos=
-tinsts_1.0.bb:do_create_spdx) failed with exit code '1'<br />```</div>
-<div><br />Why the run-postinsts do_create_spdx package depends on initscri=
-pts recipe<br />anyhow? I could go past this error by removing `allarch` fr=
-om inherit directive<br />set in `run-postinsts` [3] recipe but it does not=
- seems to be good solution for<br />this problem as this recipe clearly pro=
-duce allarchs artifacts. How to debug<br />this?</div>
-<div><br />[1] https://github.com/Freescale/meta-freescale/blob/scarthgap/c=
-onf/machine/ls1028ardb.conf<br />[2] https://git.yoctoproject.org/meta-ti/t=
-ree/meta-ti-bsp/conf/machine/am57xx-evm.conf<br />[3] <a href=3D"https://gi=
-t.yoctoproject.org/poky/plain/meta/recipes-devtools/run-postinsts/run-posti=
-nsts_1.0.bb" target=3D"_blank" rel=3D"noopener">https://git.yoctoproject.or=
-g/poky/plain/meta/recipes-devtools/run-postinsts/run-postinsts_1.0.bb</a></=
-div>
-<div>&nbsp;</div>
-<div>Regards<br />Tomasz =C5=BByjewski</div>
+diff --git a/meta-oe/recipes-support/gnulib/gnulib_202401.bb b/meta-oe/recipes-support/gnulib/gnulib_202401.bb
+index 41675d358..8f70cd7a0 100644
+--- a/meta-oe/recipes-support/gnulib/gnulib_202401.bb
++++ b/meta-oe/recipes-support/gnulib/gnulib_202401.bb
+@@ -32,6 +32,5 @@ do_packagedata[noexec] = "1"
+ deltask package_write_ipk
+ deltask package_write_deb
+ deltask package_write_rpm
+-deltask do_deploy_archives 
+ 
+ BBCLASSEXTEND = "native"
+-- 
+2.25.1
 
---sWcDTTX3PHOA57BqV6Ao--
 
