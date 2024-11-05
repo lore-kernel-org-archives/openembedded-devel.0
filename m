@@ -2,46 +2,46 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B126AD2B93A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B1130D2B939
 	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 14:36:49 +0000 (UTC)
-Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
- by mx.groups.io with SMTP id smtpd.web11.19503.1730817404651607389
+Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
+ by mx.groups.io with SMTP id smtpd.web10.19584.1730817405037400999
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 06:36:44 -0800
+ Tue, 05 Nov 2024 06:36:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=TA+JmPts;
- spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-6e34339d41bso47427107b3.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=c4rqlFRw;
+ spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-6ea7c26e195so36629297b3.0
         for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:36:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1730817404; x=1731422204; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=of8UzuOhBgqBN38oO2BLOKsspqiU9fxnuP8ok10CnRc=;
-        b=TA+JmPts4rnlU0w27j/QJgNT+WnA589MVqIraV9OAFLssSJajZ/SlsSlhzinpMuj+n
-         XKk2oyTur54gbjFWC8nUeZEsyphqmSaOwsqZMezS9jrq/sLOWeBIzxdtDm/8bzPW0/Kk
-         LJrb+AWVqeIGDeBxbr535GcLkxEcNch9W5NnjTVDeVby1DSSrF932/iIu3YV7ndb5h3K
-         yZpOsdaJSWgvjnlF5kZ5CknelT3pGpZ8wbgA24KKIchStxwFVn9dhKY1PuMInEBWHonj
-         SS9aV8Um7e9a1C0VqNmMwj5+P+K3OmQ4nr1meSxh2YYMt/9Jdc6gipBlAV3wBGR7YveA
-         HhcA==
+        bh=m5HmB3zBwqhMqiO/eSLAtnhXesnnIzYkAiYp3kLF0ZU=;
+        b=c4rqlFRwxgfjknHryS5yZqsMAnVR/ADctwvoprs5Lbh8tRCx2AfCJjhF/6FWr+l2Tl
+         CL1DNE9+iAE2mp0fQoMHnCLfNoaTzHKrBib1vGoAqjK07RDFNu7OSwaHoTAsQhEe829F
+         uxuMCYnACSzpOWImvumKj0HHcGr5SQk5JFEqOBHz0WT2aKIOJ995OoRsWJiTr1AwyI16
+         XSKs1/P5/pDVAyoi7Rjy11o1Iyecj/49lzrwn1TMZHPjhoHKjXZeZ11/Df+VUJhKC4fL
+         uDpfYHTGixIJpQRdOz5EkGnPLrmZEpPXE7hLO5eYc41fD7DI6hvR0Oe15Cu8i0EyKuWa
+         cJRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1730817404; x=1731422204;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=of8UzuOhBgqBN38oO2BLOKsspqiU9fxnuP8ok10CnRc=;
-        b=Bz0uajoSJ2J6qL2aUjt9MvJNxC7mX2u4NwImLmHoHL9pLkPjkOSdZQ0kK37kCQ9DgB
-         F5aaS4XR3t/59G6tFmxPseMcrK9Nl8IQJmrHPO/CrctkslqMoL+AGYqJTR2KInaLLF+f
-         krzZZCohjfj30xGYjaN9N7JQOiKl3QXR52rG1w6N7Sx1nRoogeX+QhUO6VJEbHg5B8j2
-         sMPQl8wX4nMqxkIDh3Pg/sb0QkiEfFTEkPKy8/RVs812CUa3gmVNRs7fziHti3Fe7sei
-         Y+zQuFOGUYIs+zoC1lsxz2cXoYzKBaTVc7LLOjmOqpDo0BCyjdnhZb1BAflOTOcHc2NR
-         thqA==
-X-Gm-Message-State: AOJu0YwSVrSaO/UELDh8Vwc98AMMCPeBM+xJF322IDVKzLqCMaONhnR0
-	krN+aErRwyPyGHZ60R+dQxCd5K9XLWuODpbzrb5S8Xs3GeixOyDE7Gu6vA==
-X-Google-Smtp-Source: AGHT+IHFJ+maq1rNkW0s4FN0Y3F81f8viRTKzvS5+Hga/mW6VdTX7nHvTOCvRFCEG/KTAcfx5gVTNg==
-X-Received: by 2002:a05:690c:94:b0:6e3:1e5d:fe2 with SMTP id 00721157ae682-6e9d8acb426mr335652837b3.31.1730817403682;
-        Tue, 05 Nov 2024 06:36:43 -0800 (PST)
+        bh=m5HmB3zBwqhMqiO/eSLAtnhXesnnIzYkAiYp3kLF0ZU=;
+        b=Ce0QShz0uyZGRTdL/KI1FoyzIdbVH3Oml/gJ7piGHCq8KJ0mUDV6foZKHD7C2xwPJv
+         BJBA0btuOiAA+2lZS/2dfAFfJKPFbNy2Btlkyq4BFe6PU5sZkakFB4nQDtRK9tNSUPl9
+         xnfSOeyG+s3IqLfKmYqqx78t3OhPHlqYZ+LXfYMu8vXNvspcSEWFMNCNUtFHADKy10Gj
+         RvdS4rEfivdy6E/mL+H9zlq+dDEZHS0HVP9gUM2DCnzqFlB1We2rSmKPhKkNrnUcg1aT
+         M9L+khVzY7fA5gIV1GZpDduIPiSQU2H7qZPYZAEvyd1b0uEWH2sCwMWANscYKlQjSQcv
+         NaHw==
+X-Gm-Message-State: AOJu0YxUYiNMu3aZspWdzJN0x0QFVQrsNFc0sj/ZZlYPY4r3uuP7vX+R
+	h5gitY4iE/Ze1d0gK+dQ39RXVRb9kFvAoBXimrtMCBEOdE9yH/wtB7Y23Q==
+X-Google-Smtp-Source: AGHT+IGHFEKWFDhzkBab6GQcd4MZj18NHrlKiZ7Fteo+iFMY9UBPAeXWzF9L841AcxN7ZJjTtAs7EA==
+X-Received: by 2002:a05:690c:6905:b0:6e5:9d3c:f9d3 with SMTP id 00721157ae682-6ea52551d82mr207921327b3.41.1730817404105;
+        Tue, 05 Nov 2024 06:36:44 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:45dd:7000::29])
         by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.36.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
@@ -50,9 +50,9 @@ From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][styhead][PATCH 10/90] python3-filelock: upgrade 3.16.0 -> 3.16.1
-Date: Tue,  5 Nov 2024 09:34:35 -0500
-Message-ID: <20241105143638.2301245-11-akuster808@gmail.com>
+Subject: [meta-oe][styhead][PATCH 11/90] python3-greenlet: upgrade 3.0.3 -> 3.1.0
+Date: Tue,  5 Nov 2024 09:34:36 -0500
+Message-ID: <20241105143638.2301245-12-akuster808@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241105143638.2301245-1-akuster808@gmail.com>
 References: <20241105143638.2301245-1-akuster808@gmail.com>
@@ -62,37 +62,39 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 14:36:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113428
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113429
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
- CI improvements
+==========
+- Adds support for Python 3.13.
+- Greatly reduce the chances for crashes during interpreter shutdown.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../{python3-filelock_3.16.0.bb => python3-filelock_3.16.1.bb}  | 2 +-
+ .../{python3-greenlet_3.0.3.bb => python3-greenlet_3.1.0.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-filelock_3.16.0.bb => python3-filelock_3.16.1.bb} (87%)
+ rename meta-python/recipes-devtools/python/{python3-greenlet_3.0.3.bb => python3-greenlet_3.1.0.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-filelock_3.16.0.bb b/meta-python/recipes-devtools/python/python3-filelock_3.16.1.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-filelock_3.16.0.bb
-rename to meta-python/recipes-devtools/python/python3-filelock_3.16.1.bb
-index 0aac54a158..abafa1245b 100644
---- a/meta-python/recipes-devtools/python/python3-filelock_3.16.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-filelock_3.16.1.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "https://py-filelock.readthedocs.io/"
- LICENSE = "Unlicense"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=911690f51af322440237a253d695d19f"
+diff --git a/meta-python/recipes-devtools/python/python3-greenlet_3.0.3.bb b/meta-python/recipes-devtools/python/python3-greenlet_3.1.0.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-greenlet_3.0.3.bb
+rename to meta-python/recipes-devtools/python/python3-greenlet_3.1.0.bb
+index a79db00492..11e8a76c8d 100644
+--- a/meta-python/recipes-devtools/python/python3-greenlet_3.0.3.bb
++++ b/meta-python/recipes-devtools/python/python3-greenlet_3.1.0.bb
+@@ -4,7 +4,7 @@ LICENSE = "MIT & PSF-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e95668d68e4329085c7ab3535e6a7aee \
+                     file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
  
--SRC_URI[sha256sum] = "81de9eb8453c769b63369f87f11131a7ab04e367f8d97ad39dc230daa07e3bec"
-+SRC_URI[sha256sum] = "c249fbfcd5db47e5e2d6d62198e565475ee65e4831e2561c8e313fa7eb961435"
+-SRC_URI[sha256sum] = "43374442353259554ce33599da8b692d5aa96f8976d567d4badf263371fbe491"
++SRC_URI[sha256sum] = "b395121e9bbe8d02a750886f108d540abe66075e61e22f7353d9acb0b81be0f0"
  
- BBCLASSEXTEND = "native nativesdk"
- inherit pypi python_hatchling
+ inherit pypi python_setuptools_build_meta
+ 
 -- 
 2.43.0
 
