@@ -2,56 +2,57 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CB048D2C106
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5F3CD2B95F
 	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 14:37:00 +0000 (UTC)
-Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
- by mx.groups.io with SMTP id smtpd.web10.19615.1730817418443479215
+Received: from mail-yb1-f170.google.com (mail-yb1-f170.google.com [209.85.219.170])
+ by mx.groups.io with SMTP id smtpd.web11.19533.1730817414107293608
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 06:36:58 -0800
+ Tue, 05 Nov 2024 06:36:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=AAkBVMvY;
- spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-6e9ba45d67fso50969537b3.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:36:58 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YXLvFfAz;
+ spf=pass (domain: gmail.com, ip: 209.85.219.170, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f170.google.com with SMTP id 3f1490d57ef6-e2bd7d8aaf8so4905030276.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:36:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730817417; x=1731422217; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730817413; x=1731422213; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=xPGeOZojJ6Lf60jHxJYGMx9mG+SRMUukGkzZ6oeJ4xc=;
-        b=AAkBVMvY89ugQJA7573v7j9TbOe2I4HeB71Fs1ncSHDJM7P3QxicPFTaY6aR6cfbsk
-         WF4i9AfCwrneZ0pDdxcspzKP2yYQ7z5uSnmZnVcPGPRdsukycfsFzNmoYx5uQ6ALjlfL
-         VJFmBEPntnukNLUCcg+Dc6Zu+rDDfGv4Cv5XTdgES8Xwr1QhYuMsSkXBknlOdpdPGzLX
-         j8LSsdm1gKdqeYgATuAwGYBmgIHXLdSv2+CxUsgRVVkvuvxQodprwok9MWJ66TvSLM5g
-         GuY1P254pkUYzkRqs70BHUGZh1+ppVrJ/Sr+9NXeQjjF/t3Z4Oh4zw+CBcKosuJm4109
-         31+g==
+        bh=N6rgthTvSmqtUv3rkodmnZDfMbEqFJzMU/lK6icQa+c=;
+        b=YXLvFfAzzGRYM1Gv7TKt4q/HcQshdT2bfoASzxnKuP6zHBhxjtztENrl441maJRZJn
+         9bY5V0YttqMe3G9vPik24Ny5JzUPw8kr+4c1vdhGwol6EppQGjPoaM2A8PDhAwftI7gl
+         Uy/2dkCj0STQxqGjuUHaLOABm+liacqJBGrxs9g6pGq/DMHUDWFfRtk0GuZxOY2t4OQM
+         FHOoSXlzAVKRqr975VqqHUJJz6Yi9gt3nQX9JZThx3JcYHUzlo8NyUebtI2pAN8h4Rn8
+         TYZKnwEDvGCz3PfUbxWiZWx07F69XGyfXwcHab5BX+cHAC+INK98TsT8XNdb9Ymuj+Ne
+         e3Ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730817417; x=1731422217;
+        d=1e100.net; s=20230601; t=1730817413; x=1731422213;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=xPGeOZojJ6Lf60jHxJYGMx9mG+SRMUukGkzZ6oeJ4xc=;
-        b=omHnvoevMPTNoO9hJ5386j4b9aDYe2+Cik0rF2aSJskVsGX7hVJWZPHMaTmrUzKGVI
-         jDdIYkzaww1Z6XKv4gQWnUt4lfMJNQJuiMXd7LKL5QBtDRFfDekzfMCNkz2FH3sPa3oh
-         GeKHJNfZZ9h9XhhSGT6sR4J0M7ZtDFpmrjF2qL1EmPawNncqCJa5dK6Bluf5TQp7V4oh
-         Wwyvs9kYgIyBjZZj7NdgXFajWxn4+pm3Q9JMYgvZ7dVyl1mXzdIkUP0gOidXWWCw7Rzi
-         rIa/eo1GubmdIJaQ+P5QCj8085TCzyC/WF7RXL4jWJrWTzt0yJjeanELs+6ltEa0ueF4
-         Hc4w==
-X-Gm-Message-State: AOJu0YyO1Ug08+RiqmfYwaSSdJ3ozw3i3Mp1XQAr2A4j35IymkJ97304
-	e+DRbYDobeYu9Lqdw8MldI9xoEU8K8PyHXl/iqsClBjs4R+lUzaPyR/4Bg==
-X-Google-Smtp-Source: AGHT+IGd0XDrcYyOxPSo0AYIYyTzpH8X3TFfFqsTqC9M63kskZrY/uk4iU0nz4XYUqcqD+vWjf/33g==
-X-Received: by 2002:a05:690c:304:b0:6ea:98d8:a55 with SMTP id 00721157ae682-6ea98d80b01mr73131847b3.14.1730817417517;
-        Tue, 05 Nov 2024 06:36:57 -0800 (PST)
+        bh=N6rgthTvSmqtUv3rkodmnZDfMbEqFJzMU/lK6icQa+c=;
+        b=SpxCADI+LUGKWthcZ0lh8rL/wcTwggkHagDM76Y8fLyKKphI1ZKVHSst7GV4MRhX8/
+         oOnp1uL8t3BQ/+JC8Z8gPG3Jlc1ttRw7qKyu99WwB/N25qflm63zbaTmB26ursXYzfq9
+         vNeByBvox5FN/q+XPX8OfGgxpV6k+JaLpdAwj8QTzZOMtjXv8HGoKb2Dv1vut5ZO3OOM
+         +n/mtNdWsofYcbDpVf4kk/DIsL5UQVz43vguo3OL+TnSdMpvOLncvzeEhY2jN4RteyCK
+         LTCrLrF4vfYt1bq5P3ecq2MlIT0pIeElWW8PIIC7INrbOyQyQXEvjmFV9029vqqd68+c
+         0JTg==
+X-Gm-Message-State: AOJu0YzoySrJXgZdHt83o3ilUQ4I3MNVjxLs9liWZdqWr300ukOBymE4
+	yodu1B50MiJa/X9v3ag6FEDnl2GItuZG2QG8eKr3+NDEFabcnkcaUANEKQ==
+X-Google-Smtp-Source: AGHT+IFN+vNwXnTnjk2t27tLWoQzWbCW8MbXxHw+jfTR4AQ54WSeXNfCYimx2OGxQF0PvY3UIocb1g==
+X-Received: by 2002:a05:690c:ec3:b0:6e5:bca9:cb8f with SMTP id 00721157ae682-6ea525509b9mr209091977b3.38.1730817413181;
+        Tue, 05 Nov 2024 06:36:53 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:45dd:7000::29])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.36.57
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.36.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Nov 2024 06:36:57 -0800 (PST)
+        Tue, 05 Nov 2024 06:36:52 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][styhead][PATCH 40/90] python3-typer: Disable test_rich_markup_mode tests
-Date: Tue,  5 Nov 2024 09:35:05 -0500
-Message-ID: <20241105143638.2301245-41-akuster808@gmail.com>
+Cc: Yi Zhao <yi.zhao@windriver.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][styhead][PATCH 31/90] protobuf: add abseil-cpp to RDEPENDS
+Date: Tue,  5 Nov 2024 09:34:56 -0500
+Message-ID: <20241105143638.2301245-32-akuster808@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241105143638.2301245-1-akuster808@gmail.com>
 References: <20241105143638.2301245-1-akuster808@gmail.com>
@@ -61,30 +62,39 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 14:37:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113458
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113449
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Yi Zhao <yi.zhao@windriver.com>
 
-They fail for OE, see
-https://github.com/fastapi/typer/pull/859/files/2cfd641d86a591a0d8582dec9292c03e6322a21a
+Since commit[1], the libraries of abseil-cpp have been splitted into
+separate packages. When protobuf is installed into the image, only 48
+abseil libraries are installed as runtime dependencies. But the output
+of 'pkg-config --libs protobuf' lists 66 abseil-cpp libraries are
+required. Add abseil-cpp to RDEPENDS to ensure that all required
+abseil-cpp libraries are installed.
 
+[1] https://git.openembedded.org/meta-openembedded/commit/?id=dd6421e65eb75c35a904f4b487ba022075035ecc
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-typer/run-ptest | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-devtools/protobuf/protobuf_4.25.4.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-typer/run-ptest b/meta-python/recipes-devtools/python/python3-typer/run-ptest
-index 94b40789b1..94b6c0fc22 100644
---- a/meta-python/recipes-devtools/python/python3-typer/run-ptest
-+++ b/meta-python/recipes-devtools/python/python3-typer/run-ptest
-@@ -3,4 +3,5 @@
- # Ignore the test_tutorial and test_completion.
- # Because it needs the docs_src package what is not in Yocto.
- # And the tests are not that useful for Yocto.
--pytest --automake --ignore tests/test_tutorial --ignore tests/test_completion
-+# for test_rich_markup_mode.py see https://github.com/fastapi/typer/pull/859/files/2cfd641d86a591a0d8582dec9292c03e6322a21a
-+pytest --automake --ignore tests/test_tutorial --ignore tests/test_completion --deselect tests/test_rich_markup_mode.py::test_rich_markup_mode_rich
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.4.bb b/meta-oe/recipes-devtools/protobuf/protobuf_4.25.4.bb
+index cc5204de4d..354b3213ad 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.4.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_4.25.4.bb
+@@ -106,6 +106,8 @@ FILES:${PN}-lite = "${libdir}/libprotobuf-lite${SOLIBS}"
+ # CMake requires protoc binary to exist in sysroot, even if it has wrong architecture.
+ SYSROOT_DIRS += "${bindir}"
+ 
++RDEPENDS:${PN} = "abseil-cpp"
++RDEPENDS:${PN}-lite = "abseil-cpp"
+ RDEPENDS:${PN}-compiler = "${PN}"
+ RDEPENDS:${PN}-dev += "${PN}-compiler"
+ RDEPENDS:${PN}-ptest = "bash ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python3-protobuf', '', d)}"
 -- 
 2.43.0
 
