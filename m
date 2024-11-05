@@ -2,57 +2,57 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E8CF1D2C109
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C67DD2B94D
 	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 14:37:00 +0000 (UTC)
-Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
- by mx.groups.io with SMTP id smtpd.web10.19607.1730817412892266139
+Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
+ by mx.groups.io with SMTP id smtpd.web11.19527.1730817411704093517
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 06:36:53 -0800
+ Tue, 05 Nov 2024 06:36:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=X7/6V1Fi;
- spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-6ea11b32ab4so36753437b3.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:36:52 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ROqFbu8Z;
+ spf=pass (domain: gmail.com, ip: 209.85.128.174, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-6e33c65d104so46420227b3.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:36:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730817412; x=1731422212; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730817411; x=1731422211; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=CoQ6EP3PdQuMpoPXSMinDDzL6cNeFdkvjk9t/9qH6wY=;
-        b=X7/6V1Fix0Ai1VIvKT/EC/sVL5aZimYsrZjOn5AqOtT07jsFTgwk6pW7aMOwumKzFF
-         R2HVW9CYVchWjL2F1I306OgIccGwbh9kfynN2gcyPO6/2iRII1WwN2I+nAZXruQbSPFa
-         dfW77oVZfflPXeMfVMJp5YWX06tf8e9waY1DLPcFzhHhHpjYN8B8JlEwVwimvthxDznB
-         YhLS/bu3njwoITvMuAwVQluMpKxWUKp5/Nb6e/1y5d3TnP7+FmDCid+7SRCeB3veCByS
-         h1C4+tLX4qedQKOgLSXpypnyvLifd98Owg6UJeeAfZouRr8p9URImFBxCzYvg4ypK4J4
-         okLA==
+        bh=brbqvqZZz92b6XfQlzUbi1h6m70aRvmnp52O4JbQ5Uw=;
+        b=ROqFbu8Zfu3dHo21U66k1DgGWyfcBMMXi+GgAGcTJrdPCkIequeRthddvkF2U724qI
+         Tjwp5owlyrwE8bNVWAQFdB4mVu82AGW8JSqS+RuaNuiSxLBjTQ0nFDWXW8zvzJ07ohBe
+         DQRP39wJd9ZTD9iYIhmaWHPPZ0ksgQkV4tN+CptawjvE9J2tNUpnPJo+1c1IPoyjq3Uy
+         Bd/scWCFrPcQyli7NxjeyC29kSAVwWhrBwawkokNq8Jqdah6qM2gJFqi7pXW/p6mByb0
+         GJjQ0qYH81HuNPYtCPyMbIxYzwkMUGLvtwp15tsMcSR8eQdiaYLjG8ybRpR5D7051uj4
+         RnTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730817412; x=1731422212;
+        d=1e100.net; s=20230601; t=1730817411; x=1731422211;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=CoQ6EP3PdQuMpoPXSMinDDzL6cNeFdkvjk9t/9qH6wY=;
-        b=vnHFY17E4SOJe9S3pp77wdPdmyU/KIvT+kKTo3C8gP7qkUEyIcNgjFDWBeF96T3YZP
-         epLwUmJvZJj/dKTTw9SFAC8LHC62EqRcd/PH9iLCUV0eJ0FptKE+es/r01cXmGKnuYMZ
-         4bh13awAwPHF+iIYbuRUcZkZHKZPV+yQfQvVPMLmRSObtEzqvcwbK8sWuowHlkVn7zdI
-         +bLaXUfN6LC/89P+NfPUkI+CsMhI+cyfxC/qhE8OrSBfRSoam5+sCHUbwJf7eGsL4QE6
-         e1v5tLyztV4tWtpa0lwDyO6AyaMDwOABA7Bk1NQI7ORkPK+wpxTVCwLVv5NAkSENpWre
-         /RIQ==
-X-Gm-Message-State: AOJu0Yzw/vaaT7KpfhTDHQpN+I2uT0oUhYhYDMZe98T2bkgBPr9HRh6E
-	Z9+Q2i+4OZs1IbERM1GneskTpbc36eHpaZYaPBj0mFfmXUU5Q3v/yqusnw==
-X-Google-Smtp-Source: AGHT+IHa64AUlf2Ll7Xag2QsT6HkssOFTx2Cjroe9nkfI3A1Zl2t0VsZx7Dl4V1TfvyYX+EbpZOsHA==
-X-Received: by 2002:a05:690c:7304:b0:6e2:fcb5:52fa with SMTP id 00721157ae682-6ea558288e0mr152364917b3.9.1730817411925;
-        Tue, 05 Nov 2024 06:36:51 -0800 (PST)
+        bh=brbqvqZZz92b6XfQlzUbi1h6m70aRvmnp52O4JbQ5Uw=;
+        b=jzjQs9N4Y/UiwkhE1/El7uv+vLHrz8aAtPuhyg0vMazCFqoYnw0ej3Q4jPiIrJltTZ
+         vaRPv6aRoHO5KfC67WbfS/wc5kusMiNPDGpoXyuHtJbdRTKXafnIam+CphoAlFybPdV2
+         +yIUbhzrcqmK6NU9HkWJbqeyE7ABla2bpgfrA4i3CIw7AQoiCnm2natGCXzKR/OUarb6
+         IEjH8ikv2r3FlZv+GSvHzcdHgNasEZ4B4V/KBaRFmv1m4kJWuZQxc773PIAvIsgkUk/y
+         zxYbUgR51B2p8mri2T+26Iv/7B0uy242xVqE4n+f8uF7HTt0x5OwxnDmuqiSCz99oUtg
+         DsGA==
+X-Gm-Message-State: AOJu0YwiVROu2ueSCrpPP8bsL1Wb/GZ6rht5a5BhjrO27nIDxvelQZLr
+	SR6xoDPb/fvHSffddwj0tZZ5lbHCtUBVFCiSLhh5gNbplJAKaoFeMRWNMw==
+X-Google-Smtp-Source: AGHT+IHmMBZJu7A2qtQN0dl1AJkJAEuQNVCbZ1SZvozPY14+Lv6Y2XmennTl0TQinJfxZVWMB7NEiQ==
+X-Received: by 2002:a05:690c:5:b0:6de:c0e:20ef with SMTP id 00721157ae682-6e9d88ecdc1mr351351757b3.7.1730817409291;
+        Tue, 05 Nov 2024 06:36:49 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:45dd:7000::29])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.36.51
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.36.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Nov 2024 06:36:51 -0800 (PST)
+        Tue, 05 Nov 2024 06:36:49 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][styhead][PATCH 28/90] traceroute: upgrade 2.1.5 -> 2.1.6
-Date: Tue,  5 Nov 2024 09:34:53 -0500
-Message-ID: <20241105143638.2301245-29-akuster808@gmail.com>
+Subject: [meta-oe][styhead][PATCH 22/90] python3-robotframework: upgrade 7.0.1 -> 7.1
+Date: Tue,  5 Nov 2024 09:34:47 -0500
+Message-ID: <20241105143638.2301245-23-akuster808@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241105143638.2301245-1-akuster808@gmail.com>
 References: <20241105143638.2301245-1-akuster808@gmail.com>
@@ -62,38 +62,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 14:37:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113446
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113443
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-- Let getaddrinfo(3) select the default IPv4 or IPv6 protocol version
-  when it is not explicitly specified on the command line
+ https://github.com/robotframework/robotframework/blob/master/doc/releasenotes/rf-7.1.rst
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../traceroute/{traceroute_2.1.5.bb => traceroute_2.1.6.bb}     | 2 +-
+ ...n3-robotframework_7.0.1.bb => python3-robotframework_7.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/traceroute/{traceroute_2.1.5.bb => traceroute_2.1.6.bb} (94%)
+ rename meta-python/recipes-devtools/python/{python3-robotframework_7.0.1.bb => python3-robotframework_7.1.bb} (91%)
 
-diff --git a/meta-networking/recipes-support/traceroute/traceroute_2.1.5.bb b/meta-networking/recipes-support/traceroute/traceroute_2.1.6.bb
-similarity index 94%
-rename from meta-networking/recipes-support/traceroute/traceroute_2.1.5.bb
-rename to meta-networking/recipes-support/traceroute/traceroute_2.1.6.bb
-index 862cba91e9..b72c375400 100644
---- a/meta-networking/recipes-support/traceroute/traceroute_2.1.5.bb
-+++ b/meta-networking/recipes-support/traceroute/traceroute_2.1.6.bb
-@@ -17,7 +17,7 @@ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/traceroute/files/tracerou
+diff --git a/meta-python/recipes-devtools/python/python3-robotframework_7.0.1.bb b/meta-python/recipes-devtools/python/python3-robotframework_7.1.bb
+similarity index 91%
+rename from meta-python/recipes-devtools/python/python3-robotframework_7.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-robotframework_7.1.bb
+index 9e81e8e7be..979aba6812 100644
+--- a/meta-python/recipes-devtools/python/python3-robotframework_7.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-robotframework_7.1.bb
+@@ -13,7 +13,7 @@ inherit pypi setuptools3
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/traceroute/traceroute/${BP}/${BP}.tar.gz \
- "
--SRC_URI[sha256sum] = "9c6c260d96eaab51e3ce461b0a84fe87123ebc6dd6c9a59fab803f95b35a859e"
-+SRC_URI[sha256sum] = "9ccef9cdb9d7a98ff7fbf93f79ebd0e48881664b525c4b232a0fcec7dcb9db5e"
+ PYPI_PACKAGE_EXT = "zip"
  
- EXTRA_OEMAKE = "VPATH=${STAGING_LIBDIR}"
- LTOEXTRA += "-flto-partition=none"
+-SRC_URI[sha256sum] = "58d01b84cd7eccea69f2dbe13cbcbff1299e551168d3b88c25617b0c9d6ddc75"
++SRC_URI[sha256sum] = "34796d387e182b36f05d82f3bbc802bd6a30192ebf1e03c76d2086d0d04faaff"
+ 
+ RDEPENDS:${PN} += " \
+     python3-shell \
 -- 
 2.43.0
 
