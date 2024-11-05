@@ -2,57 +2,57 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A5F3CD2B95F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F75AD2B945
 	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 14:37:00 +0000 (UTC)
 Received: from mail-yb1-f170.google.com (mail-yb1-f170.google.com [209.85.219.170])
- by mx.groups.io with SMTP id smtpd.web11.19533.1730817414107293608
+ by mx.groups.io with SMTP id smtpd.web11.19536.1730817414955105461
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 06:36:54 -0800
+ Tue, 05 Nov 2024 06:36:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=YXLvFfAz;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mwU7eRtX;
  spf=pass (domain: gmail.com, ip: 209.85.219.170, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f170.google.com with SMTP id 3f1490d57ef6-e2bd7d8aaf8so4905030276.3
+Received: by mail-yb1-f170.google.com with SMTP id 3f1490d57ef6-e290e857d56so4958488276.1
         for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:36:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730817413; x=1731422213; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730817414; x=1731422214; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=N6rgthTvSmqtUv3rkodmnZDfMbEqFJzMU/lK6icQa+c=;
-        b=YXLvFfAzzGRYM1Gv7TKt4q/HcQshdT2bfoASzxnKuP6zHBhxjtztENrl441maJRZJn
-         9bY5V0YttqMe3G9vPik24Ny5JzUPw8kr+4c1vdhGwol6EppQGjPoaM2A8PDhAwftI7gl
-         Uy/2dkCj0STQxqGjuUHaLOABm+liacqJBGrxs9g6pGq/DMHUDWFfRtk0GuZxOY2t4OQM
-         FHOoSXlzAVKRqr975VqqHUJJz6Yi9gt3nQX9JZThx3JcYHUzlo8NyUebtI2pAN8h4Rn8
-         TYZKnwEDvGCz3PfUbxWiZWx07F69XGyfXwcHab5BX+cHAC+INK98TsT8XNdb9Ymuj+Ne
-         e3Ww==
+        bh=iMBi7oPP6GWzWV7eVwDFByjYfFlY5Y8UKwLnBP6MwBY=;
+        b=mwU7eRtX0FQkldp3bQm1aA8VKY3JSrHAf2q5sCGmbYOSuRaNXIXKJZgmIoCSZKmmSs
+         L6bag3cKXqGO2OghIGnWafdAvb5vFX0goi3NW8flNtYWOsmBiyp/1J4bzyBW2w6ZhFS6
+         OoIB8qbHmR+WILM1yfv1kyii06kVrVDwF6GB6B1or+z7cqhBl/jwDEsNbI/NQZZuNHNv
+         o4A2UI+hpqi0aD3MApWeF+7JwsIgV/3nCNYwZWK216+2ZhKWHzUMN1rwLhcHoop0sQy4
+         1HyB0eFgwfXymKeFHT6Wi5uKMBpls/VNNKtcuD9/BKLTLE6JX/hwwWebcXJy19FUOuZV
+         ESig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730817413; x=1731422213;
+        d=1e100.net; s=20230601; t=1730817414; x=1731422214;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=N6rgthTvSmqtUv3rkodmnZDfMbEqFJzMU/lK6icQa+c=;
-        b=SpxCADI+LUGKWthcZ0lh8rL/wcTwggkHagDM76Y8fLyKKphI1ZKVHSst7GV4MRhX8/
-         oOnp1uL8t3BQ/+JC8Z8gPG3Jlc1ttRw7qKyu99WwB/N25qflm63zbaTmB26ursXYzfq9
-         vNeByBvox5FN/q+XPX8OfGgxpV6k+JaLpdAwj8QTzZOMtjXv8HGoKb2Dv1vut5ZO3OOM
-         +n/mtNdWsofYcbDpVf4kk/DIsL5UQVz43vguo3OL+TnSdMpvOLncvzeEhY2jN4RteyCK
-         LTCrLrF4vfYt1bq5P3ecq2MlIT0pIeElWW8PIIC7INrbOyQyQXEvjmFV9029vqqd68+c
-         0JTg==
-X-Gm-Message-State: AOJu0YzoySrJXgZdHt83o3ilUQ4I3MNVjxLs9liWZdqWr300ukOBymE4
-	yodu1B50MiJa/X9v3ag6FEDnl2GItuZG2QG8eKr3+NDEFabcnkcaUANEKQ==
-X-Google-Smtp-Source: AGHT+IFN+vNwXnTnjk2t27tLWoQzWbCW8MbXxHw+jfTR4AQ54WSeXNfCYimx2OGxQF0PvY3UIocb1g==
-X-Received: by 2002:a05:690c:ec3:b0:6e5:bca9:cb8f with SMTP id 00721157ae682-6ea525509b9mr209091977b3.38.1730817413181;
+        bh=iMBi7oPP6GWzWV7eVwDFByjYfFlY5Y8UKwLnBP6MwBY=;
+        b=FvaF9TnQI0XMxCLhL1ayo/ZNb8naQjwhDbpZ3ufFMrNn7HjrZof+krf5ijvTA6Pgsj
+         TW1r4PZcR0lJ8OI4YFL+PNGOxkFHGqUcFdKdM1Kkc2xQMhEPFJ/o+Q6k+sNnZrEUrP6o
+         3VmUoDJARUIPCNsqA68dAAu2HojJErFguhZc+MnK0Bk8j+N6EetiA7aGnADKOqwYlJYs
+         QuLaCs0+UF4mepsl4diLuOUSCJryvy42X0w5S+mpJkb2gHmDqPEYCwdjCNDcVJCh7sge
+         UhnBzOyye5MfGg3/yU6BJpH1u6JXWuxlzCiKWl83hjnPliFF+GbCZDzV2UGRMkGsJez9
+         LgfQ==
+X-Gm-Message-State: AOJu0YxrmAfYAfBoVsLVw85/qT8xjevjo8mhXbtv+plD8ddV8iNB4z+/
+	aMWwRppRxNPIKLbJAqe7X7YJAFBAe26+csofrwgR56nsnEIvUI/nhE8O5g==
+X-Google-Smtp-Source: AGHT+IHPapAF8nlm1kMjvwNIINuAvUxFaiyvSC8UMZtTZ130K+SWSB2XtT2Ue3Iz9wpmqAPQplifcA==
+X-Received: by 2002:a05:690c:61c9:b0:6e3:31ee:23ab with SMTP id 00721157ae682-6e9d899d1c2mr364430297b3.25.1730817413979;
         Tue, 05 Nov 2024 06:36:53 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:45dd:7000::29])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.36.52
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.36.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Nov 2024 06:36:52 -0800 (PST)
+        Tue, 05 Nov 2024 06:36:53 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yi Zhao <yi.zhao@windriver.com>,
+Cc: Yoann Congal <yoann.congal@smile.fr>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][styhead][PATCH 31/90] protobuf: add abseil-cpp to RDEPENDS
-Date: Tue,  5 Nov 2024 09:34:56 -0500
-Message-ID: <20241105143638.2301245-32-akuster808@gmail.com>
+Subject: [meta-oe][styhead][PATCH 33/90] non-repro-meta-networking: update known non-reproducible list
+Date: Tue,  5 Nov 2024 09:34:58 -0500
+Message-ID: <20241105143638.2301245-34-akuster808@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241105143638.2301245-1-akuster808@gmail.com>
 References: <20241105143638.2301245-1-akuster808@gmail.com>
@@ -62,39 +62,90 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 14:37:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113449
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113451
 
-From: Yi Zhao <yi.zhao@windriver.com>
+From: Yoann Congal <yoann.congal@smile.fr>
 
-Since commit[1], the libraries of abseil-cpp have been splitted into
-separate packages. When protobuf is installed into the image, only 48
-abseil libraries are installed as runtime dependencies. But the output
-of 'pkg-config --libs protobuf' lists 66 abseil-cpp libraries are
-required. Add abseil-cpp to RDEPENDS to ensure that all required
-abseil-cpp libraries are installed.
+Remove packages seen reproducible in the last 3 completed tests:
+https://autobuilder.yoctoproject.org/typhoon/#/builders/155/builds/44/steps/28/logs/stdio
+https://autobuilder.yoctoproject.org/typhoon/#/builders/155/builds/43/steps/28/logs/stdio
+https://autobuilder.yoctoproject.org/typhoon/#/builders/155/builds/41/steps/28/logs/stdio
 
-[1] https://git.openembedded.org/meta-openembedded/commit/?id=dd6421e65eb75c35a904f4b487ba022075035ecc
+Add babeld & babeld-dbg from:
+https://autobuilder.yoctoproject.org/typhoon/#/builders/155/builds/44/steps/28/logs/stdio
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-devtools/protobuf/protobuf_4.25.4.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../include/non-repro-meta-networking.inc     | 33 ++-----------------
+ 1 file changed, 2 insertions(+), 31 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.4.bb b/meta-oe/recipes-devtools/protobuf/protobuf_4.25.4.bb
-index cc5204de4d..354b3213ad 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.4.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf_4.25.4.bb
-@@ -106,6 +106,8 @@ FILES:${PN}-lite = "${libdir}/libprotobuf-lite${SOLIBS}"
- # CMake requires protoc binary to exist in sysroot, even if it has wrong architecture.
- SYSROOT_DIRS += "${bindir}"
- 
-+RDEPENDS:${PN} = "abseil-cpp"
-+RDEPENDS:${PN}-lite = "abseil-cpp"
- RDEPENDS:${PN}-compiler = "${PN}"
- RDEPENDS:${PN}-dev += "${PN}-compiler"
- RDEPENDS:${PN}-ptest = "bash ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python3-protobuf', '', d)}"
+diff --git a/meta-networking/conf/include/non-repro-meta-networking.inc b/meta-networking/conf/include/non-repro-meta-networking.inc
+index 0564e1ced8..c5313416a7 100755
+--- a/meta-networking/conf/include/non-repro-meta-networking.inc
++++ b/meta-networking/conf/include/non-repro-meta-networking.inc
+@@ -1,34 +1,19 @@
+ # List of known non-reproducible package of the meta-networking layer
+ # Please keep this list sorted
+ KNOWN_NON_REPRO_META_NETWORKING = " \
+-    blueman \
+-    blueman-dbg \
+-    blueman-src \
+-    civetweb-dev \
++    babeld \
++    babeld-dbg \
+     dhcp-relay-staticdev \
+     ettercap-src \
+-    fetchmail \
+-    fetchmail-dbg \
+     freediameter \
+-    freediameter-src \
+     freeradius \
+     htpdate-doc \
+-    keepalived \
+-    keepalived-dbg \
+     libbearssl-staticdev \
+-    libfko3 \
+-    libfko-client \
+-    libfko-daemon \
+-    libfko-dbg \
+     libmosquitto1 \
+     libowfat-staticdev \
+     libruli-staticdev \
+-    libsamba-util0 \
+     mosquitto \
+-    mosquitto-dbg \
+     ncftp \
+-    ncftp-dbg \
+-    ncftp-src \
+     ndisc6-dbg \
+     ndisc6-misc \
+     ndisc6-ndisc6 \
+@@ -38,23 +23,9 @@ KNOWN_NON_REPRO_META_NETWORKING = " \
+     netsniff-ng-doc \
+     ntpsec-src \
+     openl2tp \
+-    openl2tp-dbg \
+-    ot-br-posix \
+-    ot-br-posix-dbg \
+     postfix-cfg \
+-    proftpd \
+-    proftpd-dbg \
+-    proftpd-dev \
+-    rdist \
+-    rdist-dbg \
+     rp-pppoe \
+-    samba-dbg \
+-    tayga \
+-    tayga-dbg \
+     udpcast-doc \
+     unbound-doc \
+-    wolfssl \
+-    wolfssl-dbg \
+     znc \
+-    znc-doc \
+ "
 -- 
 2.43.0
 
