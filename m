@@ -2,56 +2,56 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 40B65D35E4D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 67E89D35E57
 	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 18:55:06 +0000 (UTC)
-Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
- by mx.groups.io with SMTP id smtpd.web10.27868.1730831927115209525
+Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com [209.85.219.171])
+ by mx.groups.io with SMTP id smtpd.web10.27864.1730831924328172569
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 10:38:47 -0800
+ Tue, 05 Nov 2024 10:38:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gaCNsFKQ;
- spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-6ea5b97e31cso963307b3.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 10:38:47 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Srh/iCzh;
+ spf=pass (domain: gmail.com, ip: 209.85.219.171, mailfrom: schonm@gmail.com)
+Received: by mail-yb1-f171.google.com with SMTP id 3f1490d57ef6-e290554afb4so5843238276.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 10:38:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730831926; x=1731436726; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730831923; x=1731436723; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=7uYdoOQJn1EG768uVgDT/0ofEzmD1RpnXEllCKn5SHY=;
-        b=gaCNsFKQ8F4HgSQ1AiKDo3dFTt12yA6b1zx5/jsKPCW3Sl9EI0V4K0zr5En9LwbK7c
-         stc+/6UdIDOOg7JP/p8fcibODS72saiRCOBa63wb0P3MfJl65j8bHj2b/kxz53YaCYXI
-         bzRnpZoJGtlco0/MBUa176E03fadlNKyGOq93x6dfvDAGJu4wmQi0paMSEFem0/Uq5ll
-         kjoHD4yXP+5/TC6jdJe2odjdnCpiK6i/idkhJROUp4OkXun0CY0nPGH0tD377GBk2X2/
-         WoaPuMF/ew3QzA7XPCBiPqZf2ctcQEuM/3isIMQIS2RM7XlNvHSRE85ndxaXmXDkMTI+
-         VXmA==
+        bh=U64fGhnG/yWSP7pUIL3BDXeSOoQdWwxrHBYyYBpRPCU=;
+        b=Srh/iCzh8z8N5Yc/uJHvi7ce22lKswYZjvVgOcWEfC6dEKCxM/DfeJ8foznnDjVg/W
+         URfzY/h5yfkbhkNxjrweTFcwhNFsrTp3RxIuucOGAu8mPa0WLbX8kU8K04xyx67c//2Q
+         mfoO7FYf04k8fkgOhTJKtwk68yJ1tZuC/QJmJnL4yY7pYx/HYgCfBzVWaIe+tESMCbPA
+         kM2vzsPI30XxSpWzkYLfGiURjB0kVlITO73mBfILkiAYb3y3dilEUDAIm6X3xlNmWATf
+         g+fqkgMcB2F9TEEynS/zAoGyGnzxYm2NlJscNgNFjgjHzZF6j+NqVclvgfy6zcFi3bRq
+         YkuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730831926; x=1731436726;
+        d=1e100.net; s=20230601; t=1730831923; x=1731436723;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=7uYdoOQJn1EG768uVgDT/0ofEzmD1RpnXEllCKn5SHY=;
-        b=KdpJ0UN/JSrVHb56OnfVSzNhfe/D/qm6YXEnY7DHEaCPDVcKv1e1V0btbmOgWtyVTY
-         niHhXuyEvVfyjOekSACjY1rnKB8+34ClJwbWBhSW0xOf4tT28UQJKit+CvDT6cH8ePcF
-         +0gs3oJ95ehKlSJmLQXoPGPzr2EZror9Qt02JN/00XQC17PrFJZXbgDZxgtcmPKMVVok
-         dWhh1NDsb8J29T8IhFGAQ8gFBLFiy5vMsT8463Qdt0OFUhQkcQ+Vdc/ZB6ampbvCqRxw
-         AwRhWmdPK/G6uqGU00AVFa2qV3g3344bFVvhOUGf2bDzKV2QitkhCdbkzVlLgu4MULQZ
-         sbpw==
-X-Gm-Message-State: AOJu0Ywu//sf+IAk+YES8a3boO4p4R6UJbCCuw8q+EwkcWt8cy32Hb39
-	Am3zdubrEUY7kxncsUJJPIJHbD0HVetxVyN8/GOhwQwq09CDMKouTYszJSK1
-X-Google-Smtp-Source: AGHT+IE66HpsWYUZIkR7aKiygYiGiSaJkL59Sn52SJM+bS9rTgK02TWxBLSyeH30EPElYOHajy+E4g==
-X-Received: by 2002:a05:690c:d18:b0:6db:d02f:b2c4 with SMTP id 00721157ae682-6ea64308628mr140433287b3.7.1730831925781;
-        Tue, 05 Nov 2024 10:38:45 -0800 (PST)
+        bh=U64fGhnG/yWSP7pUIL3BDXeSOoQdWwxrHBYyYBpRPCU=;
+        b=qpX/7pjCZpqzFPSxjC0hG+Ha5YRnbMS0a1VeRxO+CEa8s1PWjs9o4mTrYNIMj8gdbt
+         j4ETjbgoEf5YT/W+kcP3TE+DeVTSjAZrCnMbggnDbSpC7JCO1nu/AS70V3m6aNKOnPSi
+         BPKuw4Z3Rj8mwgBTydX2IRwMDOhoVwqFOa47Bs3v1HF7/GSOHDjhJ+Bo5pmRGFhU/7dl
+         p3E19Sw1nzUb13JCBylfBniFHj5EbI7lxheE2kkwyJ6O0Fu6LDD3YedEU8srvz+QcwoL
+         zXIcpfwygnk1gAsA3Ol0hZChYzZXlET85YP44c50Q/1l37aa5fpFN6WmYM01KVJyKm9c
+         Rltg==
+X-Gm-Message-State: AOJu0YxMX84K0Y3td5zBeN2sWHw8euMSFZxMG/07XiCJGh9HqR0AKMUT
+	1OBmZ6SR7I06Y41yMCn7mUx2AvJBpD65KXOHOOfALedx/ka3UwIKKI4Av389
+X-Google-Smtp-Source: AGHT+IH59GFOiXU/FcgTLrwMdKW1XHXSL8eDUyPBcJAC6FNR4A0fv+kF90AbyCUSjnwKPIU5EOQCwg==
+X-Received: by 2002:a05:690c:6e88:b0:6ea:7afd:d901 with SMTP id 00721157ae682-6ea7afddd68mr119287337b3.18.1730831922978;
+        Tue, 05 Nov 2024 10:38:42 -0800 (PST)
 Received: from localhost.localdomain ([71.215.7.194])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c48b6esm23957617b3.103.2024.11.05.10.38.45
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c48b6esm23957617b3.103.2024.11.05.10.38.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Nov 2024 10:38:45 -0800 (PST)
+        Tue, 05 Nov 2024 10:38:42 -0800 (PST)
 From: "J. S." <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: schonm@gmail.com
-Subject: [meta-oe][PATCH 058/161] scsirastools: Drop unnecessary SRC_URI md5sum
-Date: Tue,  5 Nov 2024 13:25:34 -0500
-Message-ID: <20241105183658.34982-60-schonm@gmail.com>
+Subject: [meta-oe][PATCH 054/161] sblim-cmpi-devel: Drop unnecessary SRC_URI md5sum
+Date: Tue,  5 Nov 2024 13:25:30 -0500
+Message-ID: <20241105183658.34982-56-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241105183658.34982-2-schonm@gmail.com>
 References: <20241105183658.34982-2-schonm@gmail.com>
@@ -61,25 +61,25 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 18:55:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113573
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113569
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-oe/recipes-extended/scsirastools/scsirastools_1.6.6.bb | 1 -
+ .../recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb  | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/scsirastools/scsirastools_1.6.6.bb b/meta-oe/recipes-extended/scsirastools/scsirastools_1.6.6.bb
-index c9a5bd1f9..ccd2f90c3 100644
---- a/meta-oe/recipes-extended/scsirastools/scsirastools_1.6.6.bb
-+++ b/meta-oe/recipes-extended/scsirastools/scsirastools_1.6.6.bb
-@@ -14,7 +14,6 @@ SRC_URI = "http://prdownloads.sourceforge.net/scsirastools/scsirastools-${PV}.ta
-            file://mdadm.patch;apply=no \
-            file://print-format.patch \
- "
--SRC_URI[md5sum] = "6271a61b2ce40aaf33ef61775148cda1"
- SRC_URI[sha256sum] = "e7b997e75decb06a650c42c35cd63d0c94c34e39cf133c723337b0eeabbfdf6a"
+diff --git a/meta-oe/recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb b/meta-oe/recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb
+index b71ad234e..41cbe4c42 100644
+--- a/meta-oe/recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb
++++ b/meta-oe/recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb
+@@ -10,7 +10,6 @@ SECTION = "Development/Libraries"
  
- inherit autotools update-rc.d
+ SRC_URI = "${SOURCEFORGE_MIRROR}/sblim/${BP}.tar.bz2 \
+            file://sblim-cmpi-devel-2.0.3-docdir.patch"
+-SRC_URI[md5sum] = "b934616f88a848f17ca3cf1b9e792cbf"
+ SRC_URI[sha256sum] = "1671cabff6b922b6fde897673d9fdafd56c9310f82a7eacc0547d596b9cdfea6"
+ 
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/sblim/files/development%20pkgs/sblim-cmpi-devel/"
 -- 
 2.43.0
 
