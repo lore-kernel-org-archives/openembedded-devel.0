@@ -2,57 +2,57 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2ADD3D2C10F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A251D2C122
 	for <webhook@archiver.kernel.org>; Tue,  5 Nov 2024 14:37:11 +0000 (UTC)
-Received: from mail-yb1-f173.google.com (mail-yb1-f173.google.com [209.85.219.173])
- by mx.groups.io with SMTP id smtpd.web10.19633.1730817429609221359
+Received: from mail-yb1-f179.google.com (mail-yb1-f179.google.com [209.85.219.179])
+ by mx.groups.io with SMTP id smtpd.web11.19546.1730817422841109349
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 06:37:09 -0800
+ Tue, 05 Nov 2024 06:37:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QG2rovUf;
- spf=pass (domain: gmail.com, ip: 209.85.219.173, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f173.google.com with SMTP id 3f1490d57ef6-e2e444e355fso4996881276.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:37:09 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=e9qoNj26;
+ spf=pass (domain: gmail.com, ip: 209.85.219.179, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f179.google.com with SMTP id 3f1490d57ef6-e30d821c3e0so5594443276.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 06:37:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730817429; x=1731422229; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730817422; x=1731422222; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=CaIcrPq52hbnOpy8cCLX1R/iTshb1Ucuqo0UVfPkw2Q=;
-        b=QG2rovUfrNkzycUBolRCSdYq8ji1LshLIsajQEJG1dBU8Ec3J9IZLDXvBO2fhZCvpv
-         xX5PXZbqkgWGC8SaP9CIb4cHB3+U3IV03SAxf1xD2R2vbNHlRH16sDuM0g1YSLSwftH9
-         AgVc4Dv4MVdJCXqFwDgf+ULhd20ZKhOAmxO8+1pdip65DQEBbcvzhhr3GAjtvl5ceo/d
-         qDgIUV74Qj6qlQA+orziIIFlDmi/Peio73QP7Jb6AswBTDmmDhe8k2y28fDXq54mLhdA
-         F2iYuMaKhM1K82tIsAMfxLeLt302cbwzO2Qtb8poGuBNBoIHDk7WSmybxk4XYigAEOsO
-         0l+g==
+        bh=woHFkTg6zLo4m2PzpfvA8bk9tqjEZOh9wdevQkeJQ+I=;
+        b=e9qoNj26MFx0g1RBpDnotORV+8XmV8xW//sD9qOOF9+CKCQiGAY2U4bqLJKP0znceR
+         nU/Qb/2F2448MihMAa7+ULmpSnNWYjJnpW1qyM4nZA+Cifv2CQrspqby2lrlTJEE7v5E
+         ETGgBkN57WzTbmaSjE3Q/YCKLDPtUUVg3oY05IYw5gGo0l9/U/XCrQ4U2WUgPbyak1NE
+         ElrGURdGzH0rcvw9+TJMpSPhrTJIJQEapuiBXuA68uU9qQerbtlanREuS3E3G/U6KREn
+         e8eUZD+tMTs33tKEbsjw7ifTm7j/V/MDcMOI8eV7Yf8pWFunEtl1Svf0c8nYuTsfNa0I
+         +A7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730817429; x=1731422229;
+        d=1e100.net; s=20230601; t=1730817422; x=1731422222;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=CaIcrPq52hbnOpy8cCLX1R/iTshb1Ucuqo0UVfPkw2Q=;
-        b=eaQZ7YxEMoHmV303QYyP3HI0Irvm7JJ94Fbs4RaLmPNFADiMabsHvQ2fkNus0ttmnF
-         G6ZvbDUpIkL8JZdjRYMpVRbJ9vwxKZjFObUSfoAO4aeUaGJKWOjmyS8Ovu7ylCJu48D7
-         JRVQNKW3nLsx+xT2noDF2A2WKw6xwMeFkAj8yzC74gF7ZmQG/svxKDO7BmkJcUMhsbIZ
-         y89IIVdbpAUT7bRMvsTUMpRIEE4BgwoW7RKtNTa+U5J4+pS2G06ngu51f9EgT3c8Tyju
-         5mU5/hgfmSkFaU56kdWZOq25zhQrOtRI5+/vrdZXgovcF+KdIKwOnhtm4Sy2PGz7GGW2
-         b7Xw==
-X-Gm-Message-State: AOJu0YxaywNDGCSsxdW1bllJ/hD4s8cB2BQDT6ab+MWX8Cx0sx9kP2Ex
-	JONr+czvSVJygJQcI2FwMsRa85Ot6h7SlCTgbURBZ5Cb/p60djL6stMwQw==
-X-Google-Smtp-Source: AGHT+IGeGzjvX8o++phranuschzL6FlLt271dFF6YJyRwhx0Ftzb1pqkeMXuI9RjPwpFRcq0RRQhhQ==
-X-Received: by 2002:a05:690c:9a8c:b0:6ea:3283:55bd with SMTP id 00721157ae682-6ea5591e0a0mr145784357b3.22.1730817428646;
-        Tue, 05 Nov 2024 06:37:08 -0800 (PST)
+        bh=woHFkTg6zLo4m2PzpfvA8bk9tqjEZOh9wdevQkeJQ+I=;
+        b=aX7+sIb5KkDE+VjVrK/xzeUaRTgfEn+sYiZJEujK0sQoT818FoVALUFJF5uWd7Hd0w
+         j7FAGwpiWYP3O7sh9IAipdSyi5zeMqT6pN8W8YsHEWaZC2jZihjgr5PL8M9yI2Y3X1cw
+         q4x3NH08kPYejMWYaAPuGQUl4zZZMBIecHcLxa+JKLMQ5FZFD+MEF/sU6km7r/XCHHnT
+         DWI7DQ3nswbg8O0b4eTOyKn4UJpjtX6mfvjwNVvOnLK46JbWMArp1iQQyf8J2ECa77hc
+         MALxCauF45opbvB98h6cpbNP/nvR1QKhMoq2a/TjfDoGgr3zBqdfx4J9x/XuGGhoEA+s
+         Gt6Q==
+X-Gm-Message-State: AOJu0YyJdPNjzy6zT7f6vv5FppCmZFl6ssUkz5gxgSxga9cZafKCJpe3
+	N3gKzYIBFWoYCXT93faHIsfW+pZ1eVA381vUDVsFBY8cJxg0lvv7uPcXxA==
+X-Google-Smtp-Source: AGHT+IH2+ta51DpcKYRp6WDZlVxPsVidPqhK7JD9Z4ZvBVcVwZIlibxvjpH12I6+hYZ35L47RhHBFQ==
+X-Received: by 2002:a05:690c:9c0e:b0:6e3:2ec1:457a with SMTP id 00721157ae682-6ea64bb23e7mr164197287b3.29.1730817421896;
+        Tue, 05 Nov 2024 06:37:01 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:45dd:7000::29])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.37.08
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ea55c8723esm22495977b3.126.2024.11.05.06.37.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Nov 2024 06:37:08 -0800 (PST)
+        Tue, 05 Nov 2024 06:37:01 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>,
+Cc: s-tokumoto <s-tokumoto@fujitsu.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][styhead][PATCH 63/90] python3-pastedeploy: switch to PEP-517 build backend
-Date: Tue,  5 Nov 2024 09:35:28 -0500
-Message-ID: <20241105143638.2301245-64-akuster808@gmail.com>
+Subject: [meta-oe][styhead][PATCH 50/90] fuse: Add "fuse:fuse" to CVE_PRODUCT
+Date: Tue,  5 Nov 2024 09:35:15 -0500
+Message-ID: <20241105143638.2301245-51-akuster808@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241105143638.2301245-1-akuster808@gmail.com>
 References: <20241105143638.2301245-1-akuster808@gmail.com>
@@ -62,60 +62,36 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 14:37:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113481
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113468
 
-From: alperak <alperyasinak1@gmail.com>
+From: s-tokumoto <s-tokumoto@fujitsu.com>
 
-- The project has a proper pyproject.toml which declares the setuptools.build.meta PEP-517 backend.
+Since there are vulnerabilities that cannot be detected by the existing
+CVE_PRODUCT, add "fuse:fuse" to CVE_PRODUCT.
 
-- Unnecessary dependencies dropped.
+https://nvd.nist.gov/vuln/detail/CVE-2010-0789
+https://nvd.nist.gov/vuln/detail/CVE-2005-1858
 
-Fix:
-
-WARNING: python3-pastedeploy-3.1.0-r0 do_check_backend: QA Issue: inherits setuptools3 but has pyproject.toml with setuptools.build_meta, use the correct class [pep517-backend]
-
-Signed-off-by: alperak <alperyasinak1@gmail.com>
+Signed-off-by: Shunsuke Tokumoto <s-tokumoto@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit f421917ff688727cf2197849cbbed1e3c412d3c0)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../python/python3-pastedeploy_3.1.0.bb         | 17 ++++++++++-------
- 1 file changed, 10 insertions(+), 7 deletions(-)
+ meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pastedeploy_3.1.0.bb b/meta-python/recipes-devtools/python/python3-pastedeploy_3.1.0.bb
-index 27f32bf1af..e3405939c7 100644
---- a/meta-python/recipes-devtools/python/python3-pastedeploy_3.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pastedeploy_3.1.0.bb
-@@ -3,19 +3,22 @@ HOMEPAGE = "https://pylonsproject.org/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://license.txt;md5=1798f29d55080c60365e6283cb49779c"
+diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
+index 6f613e9cd1..fca7d42b39 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
+@@ -23,7 +23,7 @@ SRC_URI[sha256sum] = "d0e69d5d608cc22ff4843791ad097f554dd32540ddc9bed7638cc6fea7
+ UPSTREAM_CHECK_URI = "https://github.com/libfuse/libfuse/releases"
+ UPSTREAM_CHECK_REGEX = "fuse\-(?P<pver>2(\.\d+)+).tar.gz"
  
--inherit pypi
-+inherit pypi python_setuptools_build_meta
-+
- PYPI_PACKAGE = "PasteDeploy"
+-CVE_PRODUCT = "fuse_project:fuse"
++CVE_PRODUCT = "fuse_project:fuse fuse:fuse"
  
- SRC_URI[sha256sum] = "9ddbaf152f8095438a9fe81f82c78a6714b92ae8e066bed418b6a7ff6a095a95"
+ inherit autotools pkgconfig update-rc.d systemd
  
--S = "${WORKDIR}/PasteDeploy-${PV}"
--
--inherit setuptools3
--
- # Uncomment this line to enable all the optional features.
- #PACKAGECONFIG ?= "paste docs"
- PACKAGECONFIG[paste] = ",,,python3-paste"
- PACKAGECONFIG[docs] = ",,,python3-sphinx python3-pylons-sphinx-themes"
- 
--DEPENDS= "python3 python3-setuptools-scm-native python3-pytest-runner-native"
--RDEPENDS:${PN} += "python3-core  python3-misc python3-netclient python3-pkgutil python3-setuptools python3-threading python3-core"
-+RDEPENDS:${PN} += " \
-+	python3-core \
-+	python3-misc \
-+	python3-netclient \
-+	python3-pkgutil \
-+	python3-setuptools \
-+	python3-threading \
-+"
 -- 
 2.43.0
 
