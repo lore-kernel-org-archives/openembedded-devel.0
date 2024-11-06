@@ -1,84 +1,134 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <Jiaying.Song.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0283D29FB0
-	for <webhook@archiver.kernel.org>; Wed,  6 Nov 2024 07:17:54 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.web10.40604.1730877470853610991
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3824FD29FB8
+	for <webhook@archiver.kernel.org>; Wed,  6 Nov 2024 07:55:05 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.40843.1730879699253122657
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 23:17:51 -0800
+ Tue, 05 Nov 2024 23:54:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=h1Ki+plk;
- spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-37d3e8d923fso4272387f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 23:17:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730877469; x=1731482269; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=WOiDcJ7G6R5B1GhAi8npc7SrfZLcurUZI/iTj++foQo=;
-        b=h1Ki+plkFoI+UjCQGNKqRlsKx7gg2ACV1QahZSQk5W62tnZLRbCO2UEK34lfX8lYRb
-         XeveNQkRt/hw9Jmw+3IgwdO1c8jSTthPOC7q3h94ka8nHS9+1bCl35pmiqQh0m0kwGLF
-         8tnxGonwGyb7Q0hFaJtNc1SNeUokGeEx260hgWg9bOJolN6yPmfAPPOe6idvmTHaAKge
-         +TI0MI/z2qeesu3D6Ya+EoVeJud2WCmZZ7jbLOH05IpSowZUg6unWy3mEU6572t2WmG+
-         DQaSfkhACZA+vu2cD+922XeDB02vlNg0eJoJYPyZGo9//jdF4YzSfkidrOXWWy+ou8B7
-         J2ig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730877469; x=1731482269;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=WOiDcJ7G6R5B1GhAi8npc7SrfZLcurUZI/iTj++foQo=;
-        b=HvVb86Ye6yHm83Ux16+ovH7SHa0tPUMPK2eNtUYiRNbDr73SFYBaSgl30FmWRari44
-         2Uq1UmkXjUB8tOohArUxgAsUzLzxeZf87EM/at0AeUWqZCEjuaLyO8Ey/aVQ8n7N6pb+
-         3PMyUF1pvTvBLa5s7bxgs0pMnYcR9onkdv5A09kl4/bACeVsrEBCpmsrHmVG+BYn1dfc
-         nb25NDjhx6OQA4RKo07xTx0CVwFBs/K5hw9H1Eor6zmugOH8rc7jDespvNx1qWpi4VWa
-         cqLdAPg7Y0Yw21/qcViKzrpiLR42iSedACqtwVLqVDUxWVqJpSq1h/CXM3p/3CabGxhE
-         1zwA==
-X-Gm-Message-State: AOJu0Yz0L7mbrdtCMZ4yBLON0CiSug2wginKQD3wNLBo26FkIcETYJ/f
-	WPUQWhHfsNKCPOBYx9z1nAG8HYQNtKG5Fj18S3P/nl1nTp0Y/jYkrHjbA7Sc
-X-Google-Smtp-Source: AGHT+IFAoOXqaKWo0+zbn1fQK+aMUOwVqvQY0ewq03ImwKchzGLgBQ4vD0+jxGupXeC5JgKLnKZadA==
-X-Received: by 2002:adf:fbd2:0:b0:37d:5299:c406 with SMTP id ffacd0b85a97d-380611e4b44mr25089803f8f.38.1730877468732;
-        Tue, 05 Nov 2024 23:17:48 -0800 (PST)
-Received: from localhost.localdomain (ptr-fij45qxtdobqrxrcewr.18120a2.ip6.access.telenet.be. [2a02:1812:512:2c00:6021:e9a4:5aa0:257b])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-432a267dfadsm43294625e9.0.2024.11.05.23.17.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Nov 2024 23:17:48 -0800 (PST)
-From: Jan Vermaete <jan.vermaete@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-python][PATCH] python3-xmlschema: dropped Python version in SUMMARY
-Date: Wed,  6 Nov 2024 08:17:41 +0100
-Message-Id: <20241106071741.6546-1-jan.vermaete@gmail.com>
-X-Mailer: git-send-email 2.39.5
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=1040bdf8e9=jiaying.song.cn@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4A65U1Aj024487
+	for <openembedded-devel@lists.openembedded.org>; Wed, 6 Nov 2024 07:54:58 GMT
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 42nb28c46j-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 06 Nov 2024 07:54:58 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Tue, 5 Nov 2024 23:54:57 -0800
+Received: from pek-lpg-core1.wrs.com (128.224.156.132) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.39 via Frontend Transport; Tue, 5 Nov 2024 23:54:56 -0800
+From: <jiaying.song.cn@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <changqing.li@windriver.com>
+Subject: [meta-networking][scarthgap][PATCH] tcpreplay: fix CVE-2023-43279
+Date: Wed, 6 Nov 2024 16:52:32 +0800
+Message-ID: <20241106085232.2760825-1-jiaying.song.cn@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=CfNa56rl c=1 sm=1 tr=0 ts=672b20d2 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=VlfZXiiP6vEA:10 a=t7CeM3EgAAAA:8 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8 a=pGLkceISAAAA:8 a=ZxhBd3u3P7EdYXRbN_AA:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: 6vuD6jm2sKQvwWH8jGE6b0nQncVRMG0f
+X-Proofpoint-GUID: 6vuD6jm2sKQvwWH8jGE6b0nQncVRMG0f
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.62.30
+ definitions=2024-11-06_03,2024-11-05_01,2024-09-30_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 mlxlogscore=999
+ spamscore=0 bulkscore=0 lowpriorityscore=0 priorityscore=1501
+ malwarescore=0 adultscore=0 suspectscore=0 clxscore=1015 impostorscore=0
+ phishscore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2409260000 definitions=main-2411060063
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Nov 2024 07:17:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113732
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Nov 2024 07:55:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113733
 
-The info at the homepage was that the python version 3.8+ is supported.
-But having this info in the SUMMARY has not point.
+From: Jiaying Song <jiaying.song.cn@windriver.com>
 
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+Null Pointer Dereference in mask_cidr6 component at cidr.c in Tcpreplay
+4.4.4 allows attackers to crash the application via crafted tcprewrite
+command.
+
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2023-43279
+
+Upstream patches:
+https://github.com/appneta/tcpreplay/pull/860/commits/963842ceca79e97ac3242448a0de94fb901d3560
+
+Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
 ---
- meta-python/recipes-devtools/python/python3-xmlschema_3.4.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../tcpreplay/tcpreplay/CVE-2023-43279.patch  | 39 +++++++++++++++++++
+ .../tcpreplay/tcpreplay_4.4.4.bb              |  1 +
+ 2 files changed, 40 insertions(+)
+ create mode 100644 meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-43279.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-xmlschema_3.4.2.bb b/meta-python/recipes-devtools/python/python3-xmlschema_3.4.2.bb
-index b29862b1d..26792c3a7 100644
---- a/meta-python/recipes-devtools/python/python3-xmlschema_3.4.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-xmlschema_3.4.2.bb
-@@ -1,4 +1,4 @@
--SUMMARY = "The xmlschema library is an implementation of XML Schema for Python (supports Python 3.6+)."
-+SUMMARY = "The xmlschema library is an implementation of XML Schema for Python."
- HOMEPAGE = "https://github.com/sissaschool/xmlschema"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=26aa26eda991a3a2b61c11b62d3fda65"
+diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-43279.patch b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-43279.patch
+new file mode 100644
+index 000000000..45581268c
+--- /dev/null
++++ b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-43279.patch
+@@ -0,0 +1,39 @@
++From 3164a75f2660a5c3537feff9fd8751346cf5ca57 Mon Sep 17 00:00:00 2001
++From: Gabriel Ganne <gabriel.ganne@gmail.com>
++Date: Sun, 21 Jan 2024 09:16:38 +0100
++Subject: [PATCH] add check for empty cidr
++
++This causes tcprewrite to exit with an error instead of crashing.
++
++Fixes: #824
++
++Upstream-Status: Backport
++CVE: CVE-2023-43279
++
++Reference to upstream patch:
++https://github.com/appneta/tcpreplay/pull/860/commits/963842ceca79e97ac3242448a0de94fb901d3560
++
++Signed-off-by: Gabriel Ganne <gabriel.ganne@gmail.com>
++Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
++---
++ src/common/cidr.c | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/src/common/cidr.c b/src/common/cidr.c
++index 687fd04..9afbfec 100644
++--- a/src/common/cidr.c
+++++ b/src/common/cidr.c
++@@ -249,6 +249,10 @@ parse_cidr(tcpr_cidr_t **cidrdata, char *cidrin, char *delim)
++     char *network;
++     char *token = NULL;
++ 
+++    if (cidrin == NULL) {
+++        errx(-1, "%s", "Unable to parse empty CIDR");
+++    }
+++
++     mask_cidr6(&cidrin, delim);
++ 
++     /* first iteration of input using strtok */
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
+index 16cff2f0e..03a6cfdba 100644
+--- a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
++++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
+@@ -12,6 +12,7 @@ SRC_URI = "https://github.com/appneta/${BPN}/releases/download/v${PV}/${BP}.tar.
+     file://0001-configure.ac-unify-search-dirs-for-pcap-and-add-lib3.patch \
+     file://0001-configure.ac-do-not-run-conftest-in-case-of-cross-co.patch \
+     file://CVE-2023-4256.patch \
++    file://CVE-2023-43279.patch \
+ "
+ 
+ SRC_URI[sha256sum] = "44f18fb6d3470ecaf77a51b901a119dae16da5be4d4140ffbb2785e37ad6d4bf"
 -- 
-2.39.5
+2.25.1
 
 
