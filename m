@@ -2,34 +2,34 @@ Return-Path: <thomas.perrot@bootlin.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 35068D59F71
-	for <webhook@archiver.kernel.org>; Wed,  6 Nov 2024 20:25:39 +0000 (UTC)
-Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net [217.70.183.195])
- by mx.groups.io with SMTP id smtpd.web10.56321.1730924729247689268
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41111D59F74
+	for <webhook@archiver.kernel.org>; Wed,  6 Nov 2024 20:37:19 +0000 (UTC)
+Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
+ by mx.groups.io with SMTP id smtpd.web11.56377.1730925430877699936
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Nov 2024 12:25:29 -0800
+ Wed, 06 Nov 2024 12:37:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bootlin.com header.s=gm1 header.b=J8pE2xXo;
- spf=pass (domain: bootlin.com, ip: 217.70.183.195, mailfrom: thomas.perrot@bootlin.com)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 547D860004;
-	Wed,  6 Nov 2024 20:25:26 +0000 (UTC)
+ dkim=pass header.i=@bootlin.com header.s=gm1 header.b=crr6wiz4;
+ spf=pass (domain: bootlin.com, ip: 217.70.183.197, mailfrom: thomas.perrot@bootlin.com)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id BE9361C0004;
+	Wed,  6 Nov 2024 20:37:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1730924727;
+	t=1730925429;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding;
-	bh=+Xli6OYkAgIJk/htxjoWU3vdK1uHGRqEXDY4Nql96YY=;
-	b=J8pE2xXo94vajyARMjnb4k2NupXIzucfNjJx/akOJbgBZWELgCtupRsPlUeaspVsYYoTqV
-	RrCnkMpFDrCeUEGfY0zLhqRL9xmZ/0saMaKmAlqkI3a+nGuEIODSc/L//P9JWYC6zVrxsk
-	s+qR11xreVw7+oG0vkWlDu42jb5ROJ/M/6Gdq2rUY1kQ8sfh5C0qkRfXwsgl3rYSTNCVY4
-	s+Ocui/qT4BVdUq2YPeybL2CpyRQIG/cbFElViYciR85Yw3pYM2g11quiXB+d/KVrfbAIs
-	idVN9mhAHHo2IlQUPZa7gPozrwN4VcQx738OQwp+mYMEQQlmF/rujOQrKm8tCw==
+	bh=+IxRqg6zERTkXGXP2f9yzQpZqd1shREo5xOrOurWDqI=;
+	b=crr6wiz4Uix/63xJvq4WL+hQYJexqau3/Oi0PuH3T8G7fxBwZ/C1+x854o6WG6gb56/lru
+	q1V0B2jUtW9UMO1Hpmy2P/AlBt+13ajKGlAg/RNJEMHOBP4HmI3qctVRw8VnUtEYNBLSFG
+	PY7XfZF217hXHoJC+Ts7gBDiBVltTokIJnSHh69wCWsUDowMOmKmLG01DPZUXW7Ih5Dleg
+	l734KA/QmdrbU9eTPfIuycKyOca195R8sDHin+dgnDea7LBJheExdVDPzh+escrmRKycSU
+	Sha87vr+1a7LIcbwElO2ucsAK8AHOBi4FMrxcQ95NHYCq5Q2XmzZouVxZRwUWg==
 From: thomas.perrot@bootlin.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Thomas Perrot <thomas.perrot@bootlin.com>
-Subject: [oe][meta-oe][PATCH v2] taisei: add a recipe for version 1.4.2
-Date: Wed,  6 Nov 2024 21:23:16 +0100
-Message-ID: <20241106202327.94170-1-thomas.perrot@bootlin.com>
+Subject: [oe][meta-oe][PATCH v3] taisei: add a recipe for version 1.4.2
+Date: Wed,  6 Nov 2024 21:37:01 +0100
+Message-ID: <20241106203705.113159-1-thomas.perrot@bootlin.com>
 X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -38,8 +38,8 @@ X-GND-Sasl: thomas.perrot@bootlin.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Nov 2024 20:25:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113745
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Nov 2024 20:37:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113746
 
 From: Thomas Perrot <thomas.perrot@bootlin.com>
 
@@ -49,15 +49,19 @@ Signed-off-by: Thomas Perrot <thomas.perrot@bootlin.com>
 ---
 
 Changes in version 2:
-- Fixes the strip issue
-- Uses the variable ${datadir}
+- Fixes the strip issue.
+- Uses the variable ${datadir}.
 - Moves the recipe to a dynamic layer.
 
+Changes in version 3:
+- Add a packagegroup-meta-oe.bbappend in multimedia-layer.
+
  meta-oe/conf/layer.conf                       |  2 +
+ .../packagegroup-meta-oe.bbappend             |  1 +
  ...e-strip-option-from-executable-build.patch | 29 +++++++++++
  .../recipes-graphics/taisei/taisei_1.4.2.bb   | 52 +++++++++++++++++++
- .../packagegroups/packagegroup-meta-oe.bb     |  1 +
  4 files changed, 84 insertions(+)
+ create mode 100644 meta-oe/dynamic-layers/multimedia-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
  create mode 100644 meta-oe/dynamic-layers/multimedia-layer/recipes-graphics/taisei/taisei/0001-Remove-strip-option-from-executable-build.patch
  create mode 100644 meta-oe/dynamic-layers/multimedia-layer/recipes-graphics/taisei/taisei_1.4.2.bb
 
@@ -74,6 +78,13 @@ index d05f26588cab..351837eafc39 100644
      networking-layer:${LAYERDIR}/dynamic-layers/networking-layer/recipes-*/*/*.bb \
      networking-layer:${LAYERDIR}/dynamic-layers/networking-layer/recipes-*/*/*.bbappend \
      gnome-layer:${LAYERDIR}/dynamic-layers/gnome-layer/recipes-*/*/*.bb \
+diff --git a/meta-oe/dynamic-layers/multimedia-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend b/meta-oe/dynamic-layers/multimedia-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
+new file mode 100644
+index 000000000000..7353193c2379
+--- /dev/null
++++ b/meta-oe/dynamic-layers/multimedia-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
+@@ -0,0 +1 @@
++RDEPENDS:packagegroup-meta-oe-graphics:append = "${@bb.utils.contains('BBFILE_COLLECTIONS', 'multimedia-layer', ' taisei', '', d)}"
 diff --git a/meta-oe/dynamic-layers/multimedia-layer/recipes-graphics/taisei/taisei/0001-Remove-strip-option-from-executable-build.patch b/meta-oe/dynamic-layers/multimedia-layer/recipes-graphics/taisei/taisei/0001-Remove-strip-option-from-executable-build.patch
 new file mode 100644
 index 000000000000..da9f9267008b
@@ -167,18 +178,6 @@ index 000000000000..4d34239a984d
 +
 +
 +FILES:${PN} += "${datadir}"
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 178256c83f63..4635fe3d44d0 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -521,6 +521,7 @@ RDEPENDS:packagegroup-meta-oe-graphics = "\
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "st", "", d)} \
-     stalonetray \
-     surf \
-+    taisei \
-     terminus-font-consolefonts \
-     terminus-font-pcf \
-     tesseract \
 --
 2.47.0
 
