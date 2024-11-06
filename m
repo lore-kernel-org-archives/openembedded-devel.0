@@ -2,116 +2,123 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C17F6D40D13
-	for <webhook@archiver.kernel.org>; Wed,  6 Nov 2024 00:26:51 +0000 (UTC)
-Received: from mail-oo1-f54.google.com (mail-oo1-f54.google.com [209.85.161.54])
- by mx.groups.io with SMTP id smtpd.web10.35391.1730852809457052644
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 08A9AD40D18
+	for <webhook@archiver.kernel.org>; Wed,  6 Nov 2024 01:08:52 +0000 (UTC)
+Received: from mail-ot1-f54.google.com (mail-ot1-f54.google.com [209.85.210.54])
+ by mx.groups.io with SMTP id smtpd.web10.36119.1730855325559515461
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 16:26:49 -0800
+ Tue, 05 Nov 2024 17:08:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KnvyZCvR;
- spf=pass (domain: gmail.com, ip: 209.85.161.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f54.google.com with SMTP id 006d021491bc7-5ec6bdd9923so3051388eaf.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 16:26:49 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JebqcIat;
+ spf=pass (domain: gmail.com, ip: 209.85.210.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f54.google.com with SMTP id 46e09a7af769-71808b6246bso3213164a34.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Nov 2024 17:08:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1730852809; x=1731457609; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1730855325; x=1731460125; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=5A2Uxhkg3vgGQIPGq1eEhLlvXQhmDrzJdMMj9E0hHJo=;
-        b=KnvyZCvRWUoqYdxmWWObRH02OFlc4ZGArAkzIPwknGqx860m/GycpY6HnL3CrFXR97
-         c6P11d2usQwurznRDbBSnsFcZlr8jqp9eVOIDIWM1fKms6Tucyg6nRtojlAUUPoGKkDT
-         SNUXMryG5NC65u66aIXStPIES/HWO9NE0BdjjgCgINZQizAy6I/iLTV6FcwprKRZFWjK
-         Fn9RW+84flbeobZ36ZBxH022+c/cH6rbjBe8dtkmdqTeYaZOuHoZIguurdkAuvXGnWux
-         qGjPccCNS410Q5/0GyJZ3DlA4A3xRC49ktpFz9i/bG3TCxuciih85N1AVoexibQ2/R/J
-         rIUg==
+        bh=3pK63EJF9gOde0b8xQSKSh5t31y/XyySuaMAox1YIt0=;
+        b=JebqcIat8oEbS+fFdZwFgnVm7OnaUGEAY0aAqSFCrTMxfzAgS4pdjX7QjBXORAb4h0
+         8YwaURKI80eOtEc+DQfXqZNUBSDmNBKsnoM60LmN8PisnUcscF3RByYKFT03Bm+ly2b6
+         eboyK8nSe3zgftqwx/kOfHJciGOycM4dlYOpFbKjdiImiBCqDq3S+FNQ06ufnKp295sN
+         doMdchUFTqlBN0r/4nq/n2PtFPwdDt0xQ+KuqMw+9Lsz45GkItsvEE7tKL/62Cuf1u9K
+         nnC8UU2BJQ3H/xB7yuHChHIry3r13Cn2Ef1UVadLU86vrhHoQN+sR1Vszw9wnN+MGmem
+         qF2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1730852809; x=1731457609;
+        d=1e100.net; s=20230601; t=1730855325; x=1731460125;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=5A2Uxhkg3vgGQIPGq1eEhLlvXQhmDrzJdMMj9E0hHJo=;
-        b=l4pRMxzQx5hBPAy3PEntjE6H/Yaeel9FwVGtND/cikw96dCAFGNLdz4Yy2qUb/AQtn
-         nBBsQJkkgK1TcDbW6NYpkRkXWgGCUjm+o7YWXTcP4RirBmocbLVXpwLEJ9AzLeA+PNle
-         GG710qINRYdYpOmmIb1Ct7QxoWjzVNCbWbgzG1rBIOJEBoEcfEGOb7HGrR2yrOPSHV1k
-         03OR4+vwyoxNGHv9fyO5aJ2x8mU/d7XjX2u3lNoia2iMKkEadtWqXX+ObdIjIbF7mAeh
-         Qawb8LtFPfohWMjIy64JWC5tN5HICcp5kNU42rM7uJzQgV22guqxBwHuvHN6dM/DVB2K
-         TJVg==
-X-Forwarded-Encrypted: i=1; AJvYcCW5elCZMmQpCPmtZSQh6GLgCBeh38griO0yntJDB+lyJxAcFXNBpYQuPzhhVKQxykHxOcpQd7eDI6O9EuiEyVMdhhM=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YwC+XL6iea1qgwa+Lee7amnredi0UGEKgVBGIklaKHV0PDFrv5N
-	QtJSfNFObk6UOrK6NDZezcJZeKcWhWiTtDutzHTwd3M9LiYEMxmWxiGZEzKgTlnINeAI9GSOG2U
-	rTmZ4LVCN7ZIJLTBLkWDgpgqkGdY=
-X-Google-Smtp-Source: AGHT+IF9+nFVjETyyhnfYI2qfAHZN6vw9KnjZ0674P1utB9Rd9nM+3tgImrDD9UCWWr+cizpgq9RvXTwp/mnbXibxLg=
-X-Received: by 2002:a05:6820:80b:b0:5e5:c489:6f3c with SMTP id
- 006d021491bc7-5ede651022fmr10465325eaf.5.1730852808601; Tue, 05 Nov 2024
- 16:26:48 -0800 (PST)
+        bh=3pK63EJF9gOde0b8xQSKSh5t31y/XyySuaMAox1YIt0=;
+        b=E7bX8Vmopek3kA/2CfvvBZpX0wmTt9attM1hj9yvttj0ee753VU6iWMwVc2bOk3yfG
+         c20lwIeTMFyMgcj/l7DlzXeFwHEAfy0xep2HqjidYlsaivd6Nb5R9BxfjEmoVi1Q0fJv
+         NZ/Qy7/JX5fGRre5HSWRn3AgSTHPBA7hMPpvORPfInT22c/hw6JI4Q9BnzNhAqMJ5MuD
+         fUP6qphIkNdutBNgi9/pAtx1gawuwNX8HKr/vVab9O3PgcdTh0/DIDj5er+tTzrCoSMh
+         DSGQAUm9dMF8R4zPVcYxdlnMg1/uEeFgDKGzTycv/oO+LNHKmf0AJuEqILQILNJdsAU7
+         j1vw==
+X-Forwarded-Encrypted: i=1; AJvYcCVH7/GLBWu3F39+4z7TW23wPRBp51AgBMPuLBLjjR3sSz91XoHBUkpesCgbBkXezXfnqY67GRVKd0sDd87ZC+B1a2I=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yy/z/8ID/8wKVj34kbm89QpDi+qSU2BpX4CFFMNlQTtBhlP3+RD
+	4kNd1Jg0NrVOBkDTS1dEHsbBEJ/MottJfrvkgbvZ8Dcsh6/ssvivkAKqKCZ/RA49JOcbQFAB/rC
+	OtSaIwt2nEOTFdX2IapudX7Sxg8apZA==
+X-Google-Smtp-Source: AGHT+IEQZpbwvawfgaqw3l23H8euxNkF1ullLXr0Mav/N9D1k4WMPkg++t2jCDUMtOxmnpNbOfFbjoTF7o2qRy6QnYE=
+X-Received: by 2002:a05:6830:350a:b0:710:f879:a15a with SMTP id
+ 46e09a7af769-719ca25bec7mr18095901a34.27.1730855323226; Tue, 05 Nov 2024
+ 17:08:43 -0800 (PST)
 MIME-Version: 1.0
-References: <20241105101028.2967192-1-peng.zhang1.cn@windriver.com>
- <877c9ihrc0.fsf@prevas.dk> <950fae77-cccc-4785-a930-a42c86571d5e@windriver.com>
-In-Reply-To: <950fae77-cccc-4785-a930-a42c86571d5e@windriver.com>
+References: <20241105183658.34982-2-schonm@gmail.com> <CAMKF1soPxY9ic1WUBPL4iXFgKA6eV8F0a8ab0nDvVfkyJ4Na8w@mail.gmail.com>
+ <CABTo8gA+4kJDeMOWOWqiAcwZdCa9XFxpVq9cyAQXQUD_dUFz8Q@mail.gmail.com> <CA+chaQeHTahXvMFvrG26LUz3kJZoU1huGuPYGo7bRcvXEro5pQ@mail.gmail.com>
+In-Reply-To: <CA+chaQeHTahXvMFvrG26LUz3kJZoU1huGuPYGo7bRcvXEro5pQ@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 5 Nov 2024 16:26:22 -0800
-Message-ID: <CAMKF1spfPByGjr3CcGVDGbo5LOug901YZYtxgwHQAJUjGc8y1g@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] parallel: Add recipe for GUN Parallel
-To: peng.zhang1.cn@windriver.com
-Cc: Rasmus Villemoes <ravi@prevas.dk>, openembedded-devel@lists.openembedded.org
+Date: Tue, 5 Nov 2024 17:08:17 -0800
+Message-ID: <CAMKF1srvM_0RE1HokPTDKCx94Q3qSuoO-d_2Vw2-ouSrY_dA5Q@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 0/161] Drop unnecessary SRC_URI md5sum
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: schonm@gmail.com, openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Nov 2024 00:26:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113682
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Nov 2024 01:08:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113683
 
-On Tue, Nov 5, 2024 at 3:15=E2=80=AFPM Zhang, Peng (Paul) (CN) via
-lists.openembedded.org
-<peng.zhang1.cn=3Dwindriver.com@lists.openembedded.org> wrote:
->
->
-> On 11/5/2024 7:07 PM, Rasmus Villemoes wrote:
-> > CAUTION: This email comes from a non Wind River email account!
-> > Do not click links or open attachments unless you recognize the sender =
-and know the content is safe.
-> >
-> > On Tue, Nov 05 2024, "peng.zhang1.cn via lists.openembedded.org" <peng.=
-zhang1.cn=3Dwindriver.com@lists.openembedded.org> wrote:
-> >
-> >> From: Zhang Peng <peng.zhang1.cn@windriver.com>
-> >>
-> >> This recipe adds the parallel package, a shell tool for executing jobs
-> >> in parallel using one or more computers.
-> > I often use GNU parallel, and might find some use for it on an embedded
-> > target, so makes sense to me. However
-> >
-> >> Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
-> >> ---
-> >>   .../parallel/parallel_20150322.bb             | 22 +++++++++++++++++=
-++
-> >>   1 file changed, 22 insertions(+)
-> >>   create mode 100644
-> >> meta-oe/recipes-extended/parallel/parallel_20150322.bb
-> > Why such an old version? It's not a dead project, there was a release
-> > just a few weeks ago. If it's because of some dependencies that the
-> > newer releases have grown and which are hard/impossible to satisfy in
-> > oe, that should be mentioned in the commit message.
-> The first version I used was 20150322, which was already quite
-> user-friendly and straightforward to compile and deploy. Given that this
-> is the initial version of OE, I prioritized getting it working first,
-> with plans to upgrade as new features or requirements arise in future
-> iterations.
+yeah I think thats perhaps a better way to get this all in once.
 
-It's better to get the latest version to begin with here.
-
-> > Rasmus
+On Tue, Nov 5, 2024 at 3:02=E2=80=AFPM Martin Jansa <martin.jansa@gmail.com=
+> wrote:
 >
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#113680): https://lists.openembedded.org/g/openembedde=
-d-devel/message/113680
-> Mute This Topic: https://lists.openembedded.org/mt/109403275/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Why not send all these simple one line changes in single commit per
+> layer? They aren't controversial nor need separate explanation for
+> each recipe.
 >
+> On Tue, Nov 5, 2024 at 11:59=E2=80=AFPM J. S. via lists.openembedded.org
+> <schonm=3Dgmail.com@lists.openembedded.org> wrote:
+> >
+> > I did indeed run into mail throttling.  I will keep my submissions
+> > shorter in the future.
+> >
+> > The remaining 100-161 should be on the mailing list at this point.
+> >
+> > Please let me know if you encounter any issues.
+> >
+> > Thanks,
+> > Jason Schonberg
+> >
+> > On Tue, Nov 5, 2024 at 4:10=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wr=
+ote:
+> > >
+> > > Thanks for this much needed cleanup. I see that it says patch 0/161,
+> > > but then I only see 99 patches on ML.
+> > > so something is amiss here. I wonder if there is some throttling on
+> > > mailer or some such. so perhaps send 100 onwards
+> > > as a new patch series. If nothing works create a pull request
+> > >
+> > > On Tue, Nov 5, 2024 at 10:54=E2=80=AFAM J. S. via lists.openembedded.=
+org
+> > > <schonm=3Dgmail.com@lists.openembedded.org> wrote:
+> > > >
+> > > > Following the note in section 5.5 found here :
+> > > >   https://docs.yoctoproject.org/dev-manual/new-recipe.html?highligh=
+t=3Dmd5sum#fetching-code
+> > > > drop the use of the SRC_URI[md5sum] where SRC_URI[sha256sum] is alr=
+eady being used.
+> > > >
+> > > > Thanks,
+> > > > Jason Schonberg
+> > > >
+> > > >
+> > > >
+> > > >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#113678): https://lists.openembedded.org/g/openembed=
+ded-devel/message/113678
+> > Mute This Topic: https://lists.openembedded.org/mt/109411793/3617156
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[martin.jansa@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
 
