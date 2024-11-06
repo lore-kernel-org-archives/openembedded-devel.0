@@ -2,53 +2,53 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CF87D29FB0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CCF0D29FAF
 	for <webhook@archiver.kernel.org>; Wed,  6 Nov 2024 06:31:34 +0000 (UTC)
-Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
- by mx.groups.io with SMTP id smtpd.web10.40139.1730874690487656887
+Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
+ by mx.groups.io with SMTP id smtpd.web10.40137.1730874687516066881
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Nov 2024 22:31:34 -0800
+ Tue, 05 Nov 2024 22:31:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=E5/cVtiM;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=KkGVQu3M;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1730874693; x=1762410693;
+  t=1730874689; x=1762410689;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=M38kbX7WZl9ZwHjuEL+6FvDoWvE8nFO29mfBvAxcriU=;
-  b=E5/cVtiMcFVzqeBLjes98oYtZupgXddYM1xQhDSjKInj7yg3wC6iKLJT
-   yVxPDCURUNsztMKkGdUatmYmPn1PlszQ9kpTRHekbQCGK/xrvbm37HEEG
-   6YxOSQOtxr3Qb9h4J+0VpkPsDwX2Ax6vpd74aG1481pt9kmVyTQDaBE4+
-   jhM2JHz7sezkmkEiSkefAmQdZwMHurIJG2nQ81UzTRvjs0Iz4e9OKf+xS
-   XcZCl6i6Tf1tXV0AYcDIMpCPwDBrBpc/gXySSvCXcmDeGtKqqBv8MuPL6
-   XEqYUENOin8X2/uUftVy+govLyevEcTJ8mBHAuFirOUwKHlQOPH1vUYMq
-   A==;
-X-CSE-ConnectionGUID: NrGt+Bm6RuS563jGqSCMaQ==
-X-CSE-MsgGUID: 8pT2ZYemTJ2/OSPYQh77iA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11247"; a="158171289"
+  bh=PfzHzcPLxsa8vWg0XkT3T37l5CObWgWdfIuzvLrE+LQ=;
+  b=KkGVQu3Mv9vIykC4AwiSlGrHACVcChSJD3tKnolkyXPoh5CzXIj1fmRp
+   aDho5WPVLuVjZ+3pfJpDscF6lXMbgFYFeThrwArraikPTnV/uqOoE4oya
+   12FaBCOPEMk716/qqDm+ryKOc4gR8jpHzURFNS7lN2RR0ndRj2DkHh/1N
+   h6nYxIyi2pT4nNhNXP5B6Q7KSAn071AnOusqCC3XMPCaBJNWTqHAQ94Iu
+   eJ94aQi1lHZBWf2JW+uiYUAB4HumgxvvldwacToa6Qtf19kha+f4ovX6H
+   /d1UkfhUMSryhBspZUC7ymu9eguqjnLjc2uXf/x0AYcc6V9c9dd+J+dRt
+   g==;
+X-CSE-ConnectionGUID: dwHoXPdSTwaOqIOqlvrTLQ==
+X-CSE-MsgGUID: AZuY4WLsSB6Q1G0zgNWoIw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11247"; a="179341288"
 X-IronPort-AV: E=Sophos;i="6.11,262,1725289200"; 
-   d="scan'208";a="158171289"
+   d="scan'208";a="179341288"
 Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
-  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Nov 2024 15:31:32 +0900
+  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Nov 2024 15:31:26 +0900
 Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
-	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 61DADC6847
-	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Nov 2024 15:31:30 +0900 (JST)
+	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 46E11C684E
+	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Nov 2024 15:31:24 +0900 (JST)
 Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id B0F0CD969A
-	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Nov 2024 15:31:29 +0900 (JST)
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 860D6D968F
+	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Nov 2024 15:31:23 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 4F4496B5E9
-	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Nov 2024 15:31:29 +0900 (JST)
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 207216BA6D
+	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Nov 2024 15:31:23 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id F28821A000A;
-	Wed,  6 Nov 2024 14:31:28 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id C34F11A000A;
+	Wed,  6 Nov 2024 14:31:22 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 40/46] python3-watchdog: upgrade 5.0.3 -> 6.0.0
-Date: Wed,  6 Nov 2024 14:30:54 +0800
-Message-Id: <1730874660-2364-40-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 30/46] python3-prettytable: upgrade 3.11.0 -> 3.12.0
+Date: Wed,  6 Nov 2024 14:30:44 +0800
+Message-Id: <1730874660-2364-30-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1730874660-2364-1-git-send-email-wangmy@fujitsu.com>
 References: <1730874660-2364-1-git-send-email-wangmy@fujitsu.com>
@@ -56,65 +56,70 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28778.005
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28778.005
-X-TMASE-Result: 10--5.859000-10.000000
-X-TMASE-MatchedRID: KEcVumlYY7qjz0nOeth/yUIIxwDaU5mrf6yIJ/9AolOOEENgsUAuYnMW
-	fmr8UEU8eA0V3ATvsIgx1J0nF7mCuLvGEmcXHXAm1l+BjLM8lsrC4hYi9ARtbhBLhUIMOS2nu/R
-	nVX8mJCIWm/gAtjCd7GetXQVroYqa79SLQXyG7tBYUconbBJWJJSr4ZD/PIl0x8BJ7uScK23Z6i
-	UJ3BCiqwSVf/gN2fPbWrtEdRkW/p9tF6/n498MP/LeH1FBnhK0wTlc9CcHMZdH8jOVX4IxtpTXF
-	me9d+wogZBEjCNOXeLrixWWWJYrHx8TzIzimOwPC24oEZ6SpSkj80Za3RRg8LHkPRKH7yUN6b1+
-	gwvm7QfrFe1GWrRVfYeIuTLBqMyWpSBl0hpeDh8=
+X-TMASE-Result: 10--0.066900-10.000000
+X-TMASE-MatchedRID: jrsYt7uzg+ujz0nOeth/yUIIxwDaU5mrF4r8H5YrEqxYC5LPd7BvbVxc
+	aPG5Iqk8nJ0c0AWmZwHhTMOht/kDw8RtdQ+Byd8E/9mRo9wUk+U4Ddbs3t0GCf9b1MifZCVy7Sc
+	dpy2ZKwKcrQThtVmcVou5LnX5kwAT7VrXqiqnwHX8dMpK2wMYwkc1DwKoQo7YwLkNMQzGl5BEGD
+	rWRIrgOIGQRIwjTl3iao1ovsqxhbivvxILmKK/HBRFJJyf5BJeXU/IDt4T4+H6C0ePs7A07YVH0
+	dq7wY7uIMlChDfvpXE/vZ8x/HZ+83OZqsKwmpMp00bxtKOmGMwD1QfrxXVxQVSEvZrepm7yGD4t
+	Z74CJHBuNvvmQpDOuUktqSl3Pp+HMi5lZCU5YJRTyZ1y9sjWHZLqPOO5dObQxMzMgJrM/hR6Fi1
+	pV3LGbw==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 06 Nov 2024 06:31:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113723
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113714
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-==========
--Pin test dependecies.
-- [docs] Add typing info to quick start.
-- [inotify] Use of select.poll() instead of deprecated select.select(), if available.
-- [inotify] Fix reading inotify file descriptor after closing it.
-- [utils] The stop_signal keyword-argument type of the AutoRestartTrick class can now be either a signal.Signals or an int.
-- [utils] Added the __repr__() method to the Trick class.
-- [utils] Removed the unused echo_class() function from the echo module.
-- [utils] Removed the unused echo_instancemethod() function from the echo module.
-- [utils] Removed the unused echo_module() function from the echo module.
-- [utils] Removed the unused is_class_private_name() function from the echo module.
-- [utils] Removed the unused is_classmethod() function from the echo module.
-- [utils] Removed the unused ic_method(met() function from the echo module.
-- [utils] Removed the unused method_name() function from the echo module.
-- [utils] Removed the unused name() function from the echo module.
-- [watchmedo] Fixed Mypy issues.
-- [watchmedo] Added the __repr__() method to the HelpFormatter class.
-- [watchmedo] Removed the --trace CLI argument from the watchmedo log command, useless since events are logged by default at the LoggerTrick class level.
-- [windows] Fixed Mypy issues.
+===========
+- Emit DeprecationWarnings for hrule and tableStyle constants
+- Add new themes to ColorTable
+- Use SPDX license identifier
+- Add IntEnum for HRuleStyle and VRuleStyle
+- Add IntEnum for Table styles
+- Add OptionsType
+- Add attribute type hints
+- Add missing attribute annotations
+- Add type aliases for Align, VAlign, HeaderStyle
+- Add type annotations for attributes property
+- Improve TableHandler type annotations
+- Improve function type annotations
+- Improve row and column type annotations
+- Improve type annotations for field names
+- Include RowType in __all__
+- Small improvements
+- Generate __version__ at build to avoid slow importlib.metadata call
+- Release to PyPI using Trusted Publishing
+- Drop support for Python 3.8
+- Update new home to prettytable/prettytable
+- Fix drawing headerless colored tables with title
+- 1Adjust format validation
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-watchdog_5.0.3.bb => python3-watchdog_6.0.0.bb}    | 2 +-
+ ...hon3-prettytable_3.11.0.bb => python3-prettytable_3.12.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-watchdog_5.0.3.bb => python3-watchdog_6.0.0.bb} (79%)
+ rename meta-python/recipes-devtools/python/{python3-prettytable_3.11.0.bb => python3-prettytable_3.12.0.bb} (91%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-watchdog_5.0.3.bb b/meta-python/recipes-devtools/python/python3-watchdog_6.0.0.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-watchdog_5.0.3.bb
-rename to meta-python/recipes-devtools/python/python3-watchdog_6.0.0.bb
-index 0467f55ac..4f56e8104 100644
---- a/meta-python/recipes-devtools/python/python3-watchdog_5.0.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-watchdog_6.0.0.bb
-@@ -4,7 +4,7 @@ DEPENDS = "python3-argh"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-python/recipes-devtools/python/python3-prettytable_3.11.0.bb b/meta-python/recipes-devtools/python/python3-prettytable_3.12.0.bb
+similarity index 91%
+rename from meta-python/recipes-devtools/python/python3-prettytable_3.11.0.bb
+rename to meta-python/recipes-devtools/python/python3-prettytable_3.12.0.bb
+index df11141a5..442aadda2 100644
+--- a/meta-python/recipes-devtools/python/python3-prettytable_3.11.0.bb
++++ b/meta-python/recipes-devtools/python/python3-prettytable_3.12.0.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c9a6829fcd174d9535b46211917c7671"
  
--SRC_URI[sha256sum] = "108f42a7f0345042a854d4d0ad0834b741d421330d5f575b81cb27b883500176"
-+SRC_URI[sha256sum] = "9ddf7c82fda3ae8e24decda1338ede66e1c99883db93711d8fb941eaa2d8c282"
  
- inherit pypi setuptools3
- 
+-SRC_URI[sha256sum] = "7e23ca1e68bbfd06ba8de98bf553bf3493264c96d5e8a615c0471025deeba722"
++SRC_URI[sha256sum] = "f04b3e1ba35747ac86e96ec33e3bb9748ce08e254dc2a1c6253945901beec804"
+ SRC_URI += " \
+ 	file://run-ptest \
+ "
 -- 
 2.34.1
 
