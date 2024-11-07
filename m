@@ -1,183 +1,126 @@
-Return-Path: <thomas.perrot@bootlin.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41111D59F74
-	for <webhook@archiver.kernel.org>; Wed,  6 Nov 2024 20:37:19 +0000 (UTC)
-Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
- by mx.groups.io with SMTP id smtpd.web11.56377.1730925430877699936
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A4E08D5AE6C
+	for <webhook@archiver.kernel.org>; Thu,  7 Nov 2024 06:52:02 +0000 (UTC)
+Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com [209.85.208.171])
+ by mx.groups.io with SMTP id smtpd.web10.66660.1730962313098956405
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Nov 2024 12:37:11 -0800
+ Wed, 06 Nov 2024 22:51:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bootlin.com header.s=gm1 header.b=crr6wiz4;
- spf=pass (domain: bootlin.com, ip: 217.70.183.197, mailfrom: thomas.perrot@bootlin.com)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id BE9361C0004;
-	Wed,  6 Nov 2024 20:37:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1730925429;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=+IxRqg6zERTkXGXP2f9yzQpZqd1shREo5xOrOurWDqI=;
-	b=crr6wiz4Uix/63xJvq4WL+hQYJexqau3/Oi0PuH3T8G7fxBwZ/C1+x854o6WG6gb56/lru
-	q1V0B2jUtW9UMO1Hpmy2P/AlBt+13ajKGlAg/RNJEMHOBP4HmI3qctVRw8VnUtEYNBLSFG
-	PY7XfZF217hXHoJC+Ts7gBDiBVltTokIJnSHh69wCWsUDowMOmKmLG01DPZUXW7Ih5Dleg
-	l734KA/QmdrbU9eTPfIuycKyOca195R8sDHin+dgnDea7LBJheExdVDPzh+escrmRKycSU
-	Sha87vr+1a7LIcbwElO2ucsAK8AHOBi4FMrxcQ95NHYCq5Q2XmzZouVxZRwUWg==
-From: thomas.perrot@bootlin.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Thomas Perrot <thomas.perrot@bootlin.com>
-Subject: [oe][meta-oe][PATCH v3] taisei: add a recipe for version 1.4.2
-Date: Wed,  6 Nov 2024 21:37:01 +0100
-Message-ID: <20241106203705.113159-1-thomas.perrot@bootlin.com>
-X-Mailer: git-send-email 2.47.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=BJqXwYAC;
+ spf=pass (domain: gmail.com, ip: 209.85.208.171, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lj1-f171.google.com with SMTP id 38308e7fff4ca-2fb3c3d5513so5402571fa.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Nov 2024 22:51:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1730962311; x=1731567111; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Zc6+43ClJ/QpUPAegZH0Z2WYrwIDR/wYVlcNb81vkMs=;
+        b=BJqXwYACYLnX/JWTNiRWJp8GaLD8maA6xMm2WMMo9vmBeJAff79ek2MVQc5IsWeL8H
+         N2lfwg9Z61N+mfQ29xLVgAbA9TJ1cjO/zEjicVa1FHW99HBJLd+u9I7AwtjGkD6jJfN3
+         XySg1R8cqWRzHOYnDd11Np/2x6Rwo1SbgXHEo3qpPN17b8qB5BNiuNXThWh8OFGjEsyj
+         g2Ox3BE2PQheVRvccTQYVraEJ3ZCP/NkQUZRpRO+Slgaltw18Q2ScY4ZsSZEoMddGC6v
+         jVkuZZISFvyUB63VaFZgsV2STwmxZ2iTHxA+BPRfS4ziPRXmrZG7JA+HraVjygmhQaaD
+         dqzg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1730962311; x=1731567111;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Zc6+43ClJ/QpUPAegZH0Z2WYrwIDR/wYVlcNb81vkMs=;
+        b=YYQ+9lHevg93Izhqahs8oJmxAylrfWW4ylnazvSOZRilkMvzV6Ba3FusUeecsuZm83
+         LtGggs0F+4QXY61/VAOSn3dghe0biDiLPnhPVDkElphTszqdhlIQzu4Gpx4UvDUbG3Ku
+         W0DLC+lMpB4n4U95yZ3X4nXu9HZC5X0EDJtse8QkBLx8ivEgmFxtca4nV8qD9jCmuaEF
+         UnjU/jYeYk+ql/mw/6nhjhkx7hpcbdt4g026JZJ2+uvp+C2XoIP1/efJogN/H9totjTL
+         OXu++kEBCb34UrK+YDjfT02oLNPAZyciqhDCu3auUlTTrl49pYZrryoG+tD4xYiTIqtA
+         M+Yg==
+X-Gm-Message-State: AOJu0YwS5UxdF4zAlauEGERsJSiFEK17JE1kZ2plc9DBwcn+tLvbADzo
+	vulGCCrWFPYscny4NGSsoZbPVOzE2ev3wl8JvnT5DCh1Zj5iSjEnP6A9FqoEFlPRLqILH3SRrbP
+	nGSuHW02SOqezPeUR21C9e0VsdB8=
+X-Google-Smtp-Source: AGHT+IEhLf4jf2cC+ppc1tctdKjiLPqo06/pmFNgBMDKr7NlgA2n5cfxe4VuEa3TvP/XZh1fobGYGPBvXkCLuyrkvNc=
+X-Received: by 2002:a05:651c:211f:b0:2f7:4d86:5dcf with SMTP id
+ 38308e7fff4ca-2ff1ab0e9cbmr990401fa.35.1730962310872; Wed, 06 Nov 2024
+ 22:51:50 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-GND-Sasl: thomas.perrot@bootlin.com
+References: <20241103221343.138008-1-f_l_k@t-online.de>
+In-Reply-To: <20241103221343.138008-1-f_l_k@t-online.de>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 7 Nov 2024 07:51:36 +0100
+Message-ID: <CA+chaQeE1chOGVxjHTHy7CY7UvKYbjwRdUe1zrxsaFXadnPKLA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] snapper: use nonarch_libdir in FILES
+To: f_l_k@t-online.de
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Nov 2024 20:37:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113746
+ <openembedded-devel@lists.openembedded.org>; Thu, 07 Nov 2024 06:52:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113747
 
-From: Thomas Perrot <thomas.perrot@bootlin.com>
+We might need to keep
+${libdir}/pam_snapper
+in FILES as pam_snapper respects configured libdir and causes:
 
-Taisei Project is an open source danmaku.
+I'm sorry that I've noticed this only after this was merged.
 
-Signed-off-by: Thomas Perrot <thomas.perrot@bootlin.com>
----
+ERROR: QA Issue: snapper: Files/directories were installed but not
+shipped in any package:
+  /usr/lib64/security/pam_snapper.so
+Please set FILES such that these items are packaged. Alternatively if
+they are unneeded, avoid installing them or delete them within
+do_install.
+snapper: 1 installed and not shipped files. [installed-vs-shipped]
 
-Changes in version 2:
-- Fixes the strip issue.
-- Uses the variable ${datadir}.
-- Moves the recipe to a dynamic layer.
-
-Changes in version 3:
-- Add a packagegroup-meta-oe.bbappend in multimedia-layer.
-
- meta-oe/conf/layer.conf                       |  2 +
- .../packagegroup-meta-oe.bbappend             |  1 +
- ...e-strip-option-from-executable-build.patch | 29 +++++++++++
- .../recipes-graphics/taisei/taisei_1.4.2.bb   | 52 +++++++++++++++++++
- 4 files changed, 84 insertions(+)
- create mode 100644 meta-oe/dynamic-layers/multimedia-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
- create mode 100644 meta-oe/dynamic-layers/multimedia-layer/recipes-graphics/taisei/taisei/0001-Remove-strip-option-from-executable-build.patch
- create mode 100644 meta-oe/dynamic-layers/multimedia-layer/recipes-graphics/taisei/taisei_1.4.2.bb
-
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index d05f26588cab..351837eafc39 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -28,6 +28,8 @@ BBFILE_PRIORITY_openembedded-layer = "5"
- BBFILES_DYNAMIC += " \
-     meta-python:${LAYERDIR}/dynamic-layers/meta-python/recipes-*/*/*.bb \
-     meta-python:${LAYERDIR}/dynamic-layers/meta-python/recipes-*/*/*.bbappend \
-+    multimedia-layer:${LAYERDIR}/dynamic-layers/multimedia-layer/recipes-*/*/*.bb \
-+    multimedia-layer:${LAYERDIR}/dynamic-layers/multimedia-layer/recipes-*/*/*.bbappend \
-     networking-layer:${LAYERDIR}/dynamic-layers/networking-layer/recipes-*/*/*.bb \
-     networking-layer:${LAYERDIR}/dynamic-layers/networking-layer/recipes-*/*/*.bbappend \
-     gnome-layer:${LAYERDIR}/dynamic-layers/gnome-layer/recipes-*/*/*.bb \
-diff --git a/meta-oe/dynamic-layers/multimedia-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend b/meta-oe/dynamic-layers/multimedia-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
-new file mode 100644
-index 000000000000..7353193c2379
---- /dev/null
-+++ b/meta-oe/dynamic-layers/multimedia-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
-@@ -0,0 +1 @@
-+RDEPENDS:packagegroup-meta-oe-graphics:append = "${@bb.utils.contains('BBFILE_COLLECTIONS', 'multimedia-layer', ' taisei', '', d)}"
-diff --git a/meta-oe/dynamic-layers/multimedia-layer/recipes-graphics/taisei/taisei/0001-Remove-strip-option-from-executable-build.patch b/meta-oe/dynamic-layers/multimedia-layer/recipes-graphics/taisei/taisei/0001-Remove-strip-option-from-executable-build.patch
-new file mode 100644
-index 000000000000..da9f9267008b
---- /dev/null
-+++ b/meta-oe/dynamic-layers/multimedia-layer/recipes-graphics/taisei/taisei/0001-Remove-strip-option-from-executable-build.patch
-@@ -0,0 +1,29 @@
-+From 6c86f8aea2a29c33af3f212afa9f0ea180822d1e Mon Sep 17 00:00:00 2001
-+From: Thomas Perrot <thomas.perrot@bootlin.com>
-+Date: Wed, 6 Nov 2024 21:02:54 +0100
-+Subject: [PATCH] Remove strip option from executable build
-+
-+To improve debugging experience, OE tasks will strip binaries.
-+
-+Upstream-Status: Inappropriate [oe-specific]
-+
-+Signed-off-by: Thomas Perrot <thomas.perrot@bootlin.com>
-+---
-+ meson.build | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/meson.build b/meson.build
-+index 88d4d53263ae..8a1f540836e0 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -73,7 +73,6 @@ project('taisei', 'c',
-+
-+         # You may want to change these for a debug build dir
-+         'buildtype=release',
-+-        'strip=true',
-+         'b_lto=true',
-+         'b_ndebug=if-release',
-+     ]
-+--
-+2.47.0
-+
-diff --git a/meta-oe/dynamic-layers/multimedia-layer/recipes-graphics/taisei/taisei_1.4.2.bb b/meta-oe/dynamic-layers/multimedia-layer/recipes-graphics/taisei/taisei_1.4.2.bb
-new file mode 100644
-index 000000000000..4d34239a984d
---- /dev/null
-+++ b/meta-oe/dynamic-layers/multimedia-layer/recipes-graphics/taisei/taisei_1.4.2.bb
-@@ -0,0 +1,52 @@
-+SUMMARY = "Taisei Project is an open source danmaku"
-+DESCRIPTION = "Taisei Project is an open source fan-game set in the world of \
-+               Tōhō Project. It is a top-down vertical-scrolling curtain fire \
-+               shooting game (STG), also known as a 'bullet hell' or 'danmaku'. \
-+               STGs are fast-paced games focused around pattern recognition and \
-+               mastery through practice."
-+HOMEPAGE = "https://taisei-project.org"
-+BUGTRACKER = "https://github.com/taisei-project/taisei/issues"
-+LICENSE = "CC-BY-4.0 & CC0-1.0 & MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=1a11ffd7e1bdd1d3156cecec60a2846f"
-+
-+DEPENDS = "\
-+    cglm \
-+    freetype \
-+    libsdl2 \
-+    libwebp \
-+    opusfile \
-+    zstd \
-+"
-+
-+RDEPENDS_${PN} = "\
-+    cglm (>= 0.7.8) \
-+    freetype \
-+    libsdl2 (>= 2.0.16) \
-+    libpng (>= 1.5.0) \
-+    libwebp (>= 0.5) \
-+    libzstd (>= 1.4.0) \
-+    opengl (>= 3.3) \
-+    opusfile \
-+    zlib \
-+"
-+
-+SRC_URI = "gitsm://github.com/taisei-project/taisei.git;branch=v1.4.x;protocol=https \
-+           file://0001-Remove-strip-option-from-executable-build.patch"
-+
-+SRCREV = "c098579d4fa0f004ccc204c5bc46eac3717cba28"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit features_check meson mime mime-xdg pkgconfig python3native
-+
-+REQUIRED_DISTRO_FEATURES = "opengl"
-+
-+PACKAGECONFIG ??= ""
-+
-+PACKAGECONFIG[a_null] = "-Da_null=true,-Da_null=false"
-+PACKAGECONFIG[developer] = "-Ddeveloper=true,-Ddeveloper=false"
-+PACKAGECONFIG[docs] = "-Ddocs=true,-Ddocs=false,python3-docutils-native"
-+
-+
-+
-+FILES:${PN} += "${datadir}"
---
-2.47.0
+On Sun, Nov 3, 2024 at 11:11=E2=80=AFPM Markus Volk via lists.openembedded.=
+org
+<f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
+>
+> This avoids an 'installed vs.shipped' issue for multilib
+>
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> ---
+>  meta-oe/recipes-support/snapper/snapper_0.11.2.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-support/snapper/snapper_0.11.2.bb b/meta-oe/=
+recipes-support/snapper/snapper_0.11.2.bb
+> index 840c60730..d8987eead 100644
+> --- a/meta-oe/recipes-support/snapper/snapper_0.11.2.bb
+> +++ b/meta-oe/recipes-support/snapper/snapper_0.11.2.bb
+> @@ -30,12 +30,12 @@ export RMBIN =3D "${bindir}/rm"
+>  export TOUCHBIN =3D "${bindir}/touch"
+>  export CPBIN =3D "${bindir}/cp"
+>
+> -
+>  do_install:append() {
+>         install -d ${D}${sysconfdir}/sysconfig
+>         install -m0644 ${S}/data/default-config ${D}${sysconfdir}/sysconf=
+ig/snapper
+>  }
+>
+> -FILES:${PN} +=3D "${libdir}/pam_snapper ${libdir}/systemd ${libdir}/secu=
+rity ${datadir}"
+> +FILES:${PN} +=3D "${nonarch_libdir} ${systemd_system_unitdir} ${datadir}=
+"
+> +
+>  # bash is needed for the testsuite
+>  RDEPENDS:${PN} =3D "bash diffutils util-linux util-linux-mount"
+> --
+> 2.47.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#113400): https://lists.openembedded.org/g/openembedde=
+d-devel/message/113400
+> Mute This Topic: https://lists.openembedded.org/mt/109375234/3617156
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
+artin.jansa@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
