@@ -1,137 +1,98 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 97B6DD5E368
-	for <webhook@archiver.kernel.org>; Sat,  9 Nov 2024 13:20:36 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.web11.16485.1731158432919764180
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AABEDD5E36D
+	for <webhook@archiver.kernel.org>; Sat,  9 Nov 2024 13:29:36 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.web11.16607.1731158973999955842
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 09 Nov 2024 05:20:33 -0800
+ Sat, 09 Nov 2024 05:29:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mAYGGKkl;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-37d5689eea8so1836616f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 09 Nov 2024 05:20:32 -0800 (PST)
+ dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=DbG28M4c;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.42, mailfrom: brgl@bgdev.pl)
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-37d4a5ecc44so1966633f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 09 Nov 2024 05:29:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1731158431; x=1731763231; darn=lists.openembedded.org;
+        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1731158972; x=1731763772; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=5C3jdNgO0oYYkdSQqiONJrMmGUfU2rC1aWHJ7y0J5eo=;
-        b=mAYGGKklmTjX7CXWq8z8VnWWMMun0THAiTd9ZydR/JdIZgqXTyvoFC5/xUYQtHzFlT
-         9s0t5tYEgy+yXoBBJQueoy5kPg+vc+D7jWozQaPCuLwm+a8y0k/TV0dPi0buifNJqEHo
-         PZ2Kh2BhQbnxayqsAZfMFZ9/KrFYFvaDqyVNqiWNi/SBFRVPjBG0Iz6nG2Bj7Ko1Wk0b
-         dBtkzarZ30mBkJdewlkgwVtRYDdSVWq//NsMGqu/PTSXlPxj3FHUJjnfCrESBLBcxohv
-         hE4i4U23ZjVBw8Qsi0l0uL+0NTs5MZhEsf1QGRLZ9x6eBX039pwgwQRPmxqmaDZDf+sS
-         UXgQ==
+        bh=fa9WhTlchJ0a6nzDvFnTFGlbjcxRvwKAmo5PeCMRUpw=;
+        b=DbG28M4c+rKmkqG7hJA4B1Y6f9xjc5johxAd9F3C6MJniEI6UrSw4BMfgz0nUaysOs
+         ASkvlwtJPNTaipd7/fGXuGN1fj+R/9n4MVLtdlf3o/h4fow3qjgeSotPieOCI57EiHKv
+         cyGS3A1IUSO/9ZB68/OTfrm72dqfDOKM4S1TSXc5fRt8eDkn3BmbpqHTq8QKlOhIkQOt
+         tEkQjwdQvyuLw4+YKqcASr0VwAAtk4Ry6qLeYLBgg8pQXtRuYx6QuaQB16UdDkCX6LUp
+         7YuXb5RUBzlG+XuZiN7FqTREj3NNytV/tie+O8mKeDHWRqgPTyHR+jYOTPx7Ff4zbeE0
+         tGWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731158431; x=1731763231;
+        d=1e100.net; s=20230601; t=1731158972; x=1731763772;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=5C3jdNgO0oYYkdSQqiONJrMmGUfU2rC1aWHJ7y0J5eo=;
-        b=sfecZVV8fGm36ISVsZEKvtldDr1ERdUmHjFcVoU5j7EvgPkGMFJhpQeWVpauW42kbF
-         E6TDcrcJaZqDohlEQbu/NlUiLblt1UHbMjTaMl4jHWlyTcQYnYCBuhl9rB11pTrIPAeo
-         ah6LFtJFrEQlczIqbzEVXxeJUeu3snFL/rxmUSZkWn7rawqDPdnbrOCgb3bnR8KCcz2B
-         +jVLXHyQMsXAHTOG0bl4R7yVtwoPZLVwRyQBnYPAVn/GnHXlkZj306w/f/s0+FcJzhcI
-         iRkFXv595ybKozWSh6cL7SkHIlUHWEMR9HcEad2/ZqH44mHJ6P9AU+JDyvXcxkDAbkaJ
-         wmcA==
-X-Gm-Message-State: AOJu0YzEuUXHUloOA3elLMmuW4jxgxikoDI3whzldOwjNfI8ST5m3nxY
-	+DhggdduB1ZSuTnz03yM/UbJY3nPNvm/a7kvq0CjTafw9/py4dujP6596Q==
-X-Google-Smtp-Source: AGHT+IE9f7/D6IXqfVsc/swgFTxYHeRb7ql6K30TCQ3phqrO9Xey/K5o50bi9/2tcDFAWLzqiAo39w==
-X-Received: by 2002:a05:6000:4107:b0:381:f604:30c2 with SMTP id ffacd0b85a97d-381f6043253mr2837817f8f.35.1731158430793;
-        Sat, 09 Nov 2024 05:20:30 -0800 (PST)
-Received: from localhost.localdomain (ptr-fij45qxtdobqrxrcewr.18120a2.ip6.access.telenet.be. [2a02:1812:512:2c00:6021:e9a4:5aa0:257b])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-381ed9978c6sm7676435f8f.50.2024.11.09.05.20.28
+        bh=fa9WhTlchJ0a6nzDvFnTFGlbjcxRvwKAmo5PeCMRUpw=;
+        b=ueYpgarjKPH6ybVg3Ptxd8+0mTNTuuT9lLGHEJkGvJQ6SKLW8BxjEtzeq/AQaZGcUk
+         XKMnmadaSck4oE6k7TvLZaZe0q+psRFkXO83du4d5s7VOLEVoTZaEdxOKmxzyQ9kyeLk
+         z9bKgWK97rdN3naVC+DQofUN3nw5pFyCAD147GJMr4zuyTF83MtJ+leIl7GnPaHIAIvN
+         Knf1mHvreQZO8mOj5wy6Us6ZT8wk2vlj2qHMuAdQSN7Nc+wXzQa1ugn/Wla5uEMVEgbe
+         Q35pEuACN/lwvtlY57NnNe+lPn9jY2UIunPJlZwU6ua9nDBsKC8htsHG5AGdohfjNykz
+         jxoQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUpzYFQvmdkwsKF616m0VUzJD+CnUywVO8XerJ00WwSR+Jjpa20+M5NWkQdzDXtlrQSsVbaiV5yKKjK1DgtAYkU7UE=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YwHL2n9o8Swxg/sQrm/7YJ70+Ltefq+4gyG1odmM3WKbnlYdqvc
+	LMpzm4WBW6pjWAU6PZR02R7e4YGr6Gov7Ra6fwm9rQ6euwrxz9+3HMixxaZnsEs=
+X-Google-Smtp-Source: AGHT+IHQrSUm2mXS1aLpz4LEqnKcP+tjzoZc3Kdrx5iMfIzS5mqx3uZ2Rq7XX+iQuD96N2EA2bsusg==
+X-Received: by 2002:a05:6000:4025:b0:381:d014:9bdd with SMTP id ffacd0b85a97d-381f186df92mr5622228f8f.23.1731158972252;
+        Sat, 09 Nov 2024 05:29:32 -0800 (PST)
+Received: from brgl-uxlite.home ([2a01:cb1d:dc:7e00:3194:2330:43bb:8a9b])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-432aa70a2ccsm148534975e9.31.2024.11.09.05.29.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 09 Nov 2024 05:20:29 -0800 (PST)
-From: Jan Vermaete <jan.vermaete@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-python][PATCH] python3-xmlschema: adding ptest
-Date: Sat,  9 Nov 2024 14:20:09 +0100
-Message-Id: <20241109132009.78919-1-jan.vermaete@gmail.com>
-X-Mailer: git-send-email 2.39.5
+        Sat, 09 Nov 2024 05:29:31 -0800 (PST)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [meta-python][PATCH] python3-fuse: new recipe
+Date: Sat,  9 Nov 2024 14:29:24 +0100
+Message-ID: <20241109132924.4334-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 09 Nov 2024 13:20:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113770
+ <openembedded-devel@lists.openembedded.org>; Sat, 09 Nov 2024 13:29:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113771
 
-Running them in qemu took about 6m.
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-A few tests are ignored with the -k option of pytest.
-  * Because some input files where missing
-  * Windows only tests (although with a skip in the pytest)
-  * tests that needed input()
+Add a recipe for fuse-python - the official python3 bindings for
+libfuse2.
 
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 ---
- .../include/ptest-packagelists-meta-python.inc     |  1 +
- .../python/python3-xmlschema/run-ptest             |  9 +++++++++
- .../python/python3-xmlschema_3.4.2.bb              | 14 +++++++++++++-
- 3 files changed, 23 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-xmlschema/run-ptest
+ .../recipes-devtools/python/python3-fuse_1.0.8.bb    | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-fuse_1.0.8.bb
 
-diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-index ee8f957cc..72b4ef5ad 100644
---- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
-+++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-@@ -91,6 +91,7 @@ PTESTS_FAST_META_PYTHON = "\
-     python3-wrapt \
-     python3-wsproto \
-     python3-xlrd \
-+    python3-xmlschema \
-     python3-xmltodict \
-     python3-xxhash \
-     python3-yarl \
-diff --git a/meta-python/recipes-devtools/python/python3-xmlschema/run-ptest b/meta-python/recipes-devtools/python/python3-xmlschema/run-ptest
+diff --git a/meta-python/recipes-devtools/python/python3-fuse_1.0.8.bb b/meta-python/recipes-devtools/python/python3-fuse_1.0.8.bb
 new file mode 100644
-index 000000000..971b45be4
+index 000000000..3dd1d1442
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-xmlschema/run-ptest
-@@ -0,0 +1,9 @@
-+#!/bin/sh
++++ b/meta-python/recipes-devtools/python/python3-fuse_1.0.8.bb
+@@ -0,0 +1,12 @@
++SUMMARY = "Python bindings for libfuse2."
 +
-+# List of test not to run at ptest
-+#   SKIP: tests/test_locations.py:TestLocations.test_normalize_url_with_base_unc_path_on_windows # SKIP Run only on Windows systems
-+#   FAIL: tests/test_package.py:TestPackaging.test_version
-+#   FAIL: tests/test_package.py:TestPackaging.test_elementpath_requirement
-+#   FAIL: tests/test_package.py:TestPackaging.test_forgotten_debug_statements
++LICENSE = "LGPL-2.1-only"
++LIC_FILES_CHKSUM = "file://COPYING;md5=243b725d71bb5df4a1e5920b344b86ad"
 +
-+pytest --automake -k 'not TestLocations and not TestPackaging'
-diff --git a/meta-python/recipes-devtools/python/python3-xmlschema_3.4.2.bb b/meta-python/recipes-devtools/python/python3-xmlschema_3.4.2.bb
-index b29862b1d..388f69c7c 100644
---- a/meta-python/recipes-devtools/python/python3-xmlschema_3.4.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-xmlschema_3.4.2.bb
-@@ -5,11 +5,23 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=26aa26eda991a3a2b61c11b62d3fda65"
- 
- SRC_URI[sha256sum] = "d35023ea504ea46127302d1297b046d023b96fec5fe4b4b690534ea85b5e9bf8"
- 
--inherit pypi python_setuptools_build_meta
-+SRC_URI:append = " file://run-ptest"
++inherit setuptools3 pypi pkgconfig
 +
-+inherit pypi python_setuptools_build_meta ptest
- 
- RDEPENDS:${PN} += "\
-     python3-elementpath \
-     python3-modules \
- "
- 
-+RDEPENDS:${PN}-ptest += "\
-+    python3-pytest \
-+    python3-unittest-automake-output \
-+"
++SRC_URI[sha256sum] = "6d27023207162ae82145b42cb5e26ef11b2eccc60c8b85f5528fee3e94475187"
 +
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/tests
-+    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
++DEPENDS = "fuse python3-setuptools-native"
 +
- BBCLASSEXTEND = "native nativesdk"
++PYPI_PACKAGE = "fuse_python"
 -- 
-2.39.5
+2.45.2
 
 
