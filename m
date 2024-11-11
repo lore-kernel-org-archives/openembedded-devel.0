@@ -1,81 +1,91 @@
-Return-Path: <Jiaying.Song.CN@windriver.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4701FD5E140
-	for <webhook@archiver.kernel.org>; Mon, 11 Nov 2024 08:06:18 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.54666.1731312377163017412
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 47969D5E392
+	for <webhook@archiver.kernel.org>; Mon, 11 Nov 2024 08:08:48 +0000 (UTC)
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+ by mx.groups.io with SMTP id smtpd.web10.54668.1731312524080632312
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Nov 2024 00:06:17 -0800
+ Mon, 11 Nov 2024 00:08:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=10456d5a36=jiaying.song.cn@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4AB6AfeQ003211
-	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Nov 2024 08:06:16 GMT
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 42svy0hqkx-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Nov 2024 08:06:16 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Mon, 11 Nov 2024 00:06:14 -0800
-Received: from pek-lpg-core1.wrs.com (128.224.156.132) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.39 via Frontend Transport; Mon, 11 Nov 2024 00:06:13 -0800
-From: <jiaying.song.cn@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <changqing.li@windriver.com>
-Subject: [meta-xfce][scarthgap][PATCH] xfce-dusk-gtk3: fix do_fetch error
-Date: Mon, 11 Nov 2024 17:03:52 +0800
-Message-ID: <20241111090352.3231076-1-jiaying.song.cn@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Sp/8Dgx8;
+ spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-a9ec86a67feso740618066b.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 11 Nov 2024 00:08:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1731312522; x=1731917322; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=NjKOSQ85fPO6JaiV1Ke3trGdp5AyD+SskJ7QY6DJx8g=;
+        b=Sp/8Dgx82rm5+8KCO9rTVObYn00A3tp/hFiu0+UZ2eLaYabJ/pE/vZgWaNWIvgSMYy
+         od+WWRL6iy3X9SZszUtC5UUQWqLUopdlQjwmDgN2qqooWpbF5isUfEh/q7ABWzhwMeN6
+         HKe2tZRIbeDS9vrmJ2lvIoxEbKk9lfmRRo0r75vxgnkJO3VPc7qvq+a2o8d9jd5Zt2Hf
+         ieC1LV4CzC2OUJ/5o5fZv2TAp1kBygo9wG4oZ4F/fNhAilzDlW5IUhCC5fj7G6SYfnwH
+         0AYn24nkQeD4LYQ2mcXWuJZTfK0L5onBPxWp5kFDWawJWjMu20Dc4/DvSJlJO+H3bKjI
+         n4yg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1731312522; x=1731917322;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=NjKOSQ85fPO6JaiV1Ke3trGdp5AyD+SskJ7QY6DJx8g=;
+        b=CpB/h5xXgwdfexpjrhhTwMvuDo+llkY8dfBI+sENnTAcX9ns8DBbk74uEH8tj23YXz
+         D7IJ+fBIUMZ/0Gn8ljWkvT9Jwi1zaKTisq99ItnlS6HczUYz15FSZZelWJ0DcljwQF5R
+         MCiXAMGUfnsu/x0BXsz8qxVHGTbWJDnCMWsF0ek216UuzKuNprhiFVVDiV+4fcIUbLm3
+         QjBxQiKDKpAbmqPnPID4Hki9XKIgmzHuIWmEtAJ57cxcOjPQNEBnif3l5QZidI3zN9AZ
+         8oNtd3vj2Po9CJhMvUj+BshGMQ7/UXFh+oSzDdKeO6YtfWIygGJmHEYjEHQ4Zt9gE+Qf
+         XghQ==
+X-Gm-Message-State: AOJu0YycIypCRhknrZudINYPjuz+/2+vEdVo/iZ3fp3KapNRZGEpkOQJ
+	k78R7mhWmJvewQ/CwM8jPAWgNNNIsVTBrsDUr4/g9UTrHLovzPl77PGnmg==
+X-Google-Smtp-Source: AGHT+IEh4BvMfKbdsAvL+cQ1NN/Eq4AHpQrHzGVA6pjaEFCMLrc83xxPDyHzQe+6SYVZul+rAevAmw==
+X-Received: by 2002:a17:907:2d0c:b0:a9a:154e:dd86 with SMTP id a640c23a62f3a-a9eeff43e6emr1246323766b.28.1731312522240;
+        Mon, 11 Nov 2024 00:08:42 -0800 (PST)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a9ee0a46119sm562253566b.46.2024.11.11.00.08.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 11 Nov 2024 00:08:41 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: akuster808@gmail.com,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH] libjs-jquery-cookie: update branch from master to main
+Date: Mon, 11 Nov 2024 09:08:32 +0100
+Message-ID: <20241111080832.885767-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=Zv+/KM7G c=1 sm=1 tr=0 ts=6731baf8 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=VlfZXiiP6vEA:10 a=t7CeM3EgAAAA:8 a=Q4-j1AaZAAAA:8 a=iGHA9ds3AAAA:8 a=BIR7QS4JDcFw_9wYrowA:9 a=FdTzh2GWekK77mhwV6Dw:22
- a=9H3Qd4_ONW2Ztcrla5EB:22 a=nM-MV4yxpKKO9kiQg6Ot:22
-X-Proofpoint-GUID: NY83Qp5KsPWKlsjdimcnSVkB0y-CmdAY
-X-Proofpoint-ORIG-GUID: NY83Qp5KsPWKlsjdimcnSVkB0y-CmdAY
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.62.30
- definitions=2024-11-11_06,2024-11-08_01,2024-09-30_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0
- priorityscore=1501 bulkscore=0 mlxscore=0 malwarescore=0 phishscore=0
- spamscore=0 impostorscore=0 mlxlogscore=667 clxscore=1015 suspectscore=0
- lowpriorityscore=0 classifier=spam authscore=0 adjust=0 reason=mlx
- scancount=1 engine=8.21.0-2409260000 definitions=main-2411110068
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 11 Nov 2024 08:06:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113785
+ <openembedded-devel@lists.openembedded.org>; Mon, 11 Nov 2024 08:08:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113786
 
-From: Jiaying Song <jiaying.song.cn@windriver.com>
+* it was updated in nanbield with upgrade to 3.0.5 in:
+  fc0a506bde libjs-jquery-cookie: upgrade 3.0.1 -> 3.0.5
 
-Change the SRC_URI to the correct value due to the following error:
-WARNING: xfce-dusk-gtk3-1.3-r0 do_fetch: Failed to fetch URL http://sources.openembedded.org/141404-xfce_dusk_gtk3-1_3.tar.gz;subdir=xfce-dusk-gtk3-1.3, attempting MIRRORS if available
+* drop duplicated protocol param as in mickledore:
+  2e0a581bee recipes: Remove double protocol= from SRC_URIs
 
-Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb | 2 +-
+ meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.1.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb b/meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb
-index 4cbdb4e083..a6a1790c1a 100644
---- a/meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb
-+++ b/meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8f0e2cd40e05189ec81232da84bd6e1a"
+diff --git a/meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.1.bb b/meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.1.bb
+index 2db16e114e..4061e677e6 100644
+--- a/meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.1.bb
++++ b/meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/js-cookie/js-cookie"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e16cf0e247d84f8999bf55865a9c98cf"
  
- inherit allarch
+-SRC_URI = "git://github.com/js-cookie/js-cookie.git;protocol=http;branch=master;protocol=https"
++SRC_URI = "git://github.com/js-cookie/js-cookie.git;protocol=https;branch=main"
  
--SRC_URI = "http://sources.openembedded.org/141404-xfce_dusk_gtk3-1_3.tar.gz;subdir=${BPN}-${PV}"
-+SRC_URI = "https://downloads.yoctoproject.org/mirror/sources/141404-xfce_dusk_gtk3-1_3.tar.gz;subdir=${BPN}-${PV}"
- SRC_URI[md5sum] = "b3ad37ad8173b14ec090e60a80e65d8f"
- SRC_URI[sha256sum] = "bfa8a88607d1a1da5bd0b9e4e075767c54400a3c5a0fae88b619ed71532f30b4"
+ SRCREV = "0ba77141dd215782cc7770347a457906908c66ff"
  
 -- 
-2.25.1
+2.47.0
 
 
