@@ -1,1368 +1,189 @@
-Return-Path: <thakur.virendra1810@gmail.com>
+Return-Path: <Haixiao.Yan.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C10ADD12D74
-	for <webhook@archiver.kernel.org>; Mon, 11 Nov 2024 06:10:47 +0000 (UTC)
-Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
- by mx.groups.io with SMTP id smtpd.web10.52850.1731305439229356155
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF9AAD12D79
+	for <webhook@archiver.kernel.org>; Mon, 11 Nov 2024 06:41:47 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.53531.1731307302761711861
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 10 Nov 2024 22:10:39 -0800
+ Sun, 10 Nov 2024 22:41:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Zjgi/s+w;
- spf=pass (domain: gmail.com, ip: 209.85.216.46, mailfrom: thakur.virendra1810@gmail.com)
-Received: by mail-pj1-f46.google.com with SMTP id 98e67ed59e1d1-2e2e23f2931so3362006a91.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 10 Nov 2024 22:10:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1731305438; x=1731910238; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Q82p7YE/NnyozipxdrcYMTFHORHH1WxnQNhmqTUa7F8=;
-        b=Zjgi/s+wedSOUoGAxcNxMzsyupFjM33hxn6yLVGVrfbUdU4vKRaXxbuz5yXdCUK6cN
-         ubcJeuxpCUtLADmXtykh1NPLGrJ45hZFN+9Zh6CHltgDCRrKAlyiVw2ZnwbraTiLD3v9
-         j5IJfXWLWcOOW7BMQ+rf61DEwDrc3dp8Auq71fb8cwJbrypHtb2z2ACQPymFoC9+YQkM
-         r5H4nHhvh9d5LTq+mbhAlJFknekcdFKNdBYHq2uwJHW8ekIBNKITYtE57Jm+LSyRClfX
-         Ick998xTKf8gBp5zzsQFSFdAy2eMauAFn3pIMGWWR4nzRh5j+ENrAgdgUXfStpmRNcA5
-         fOzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731305438; x=1731910238;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Q82p7YE/NnyozipxdrcYMTFHORHH1WxnQNhmqTUa7F8=;
-        b=D9fqVky4w1it+SaXJbeVva/NSRXniW31h6iGQhhiGFQPXI/HRbNA8sZGw7ZJe6Ns7C
-         y1E0PzZdEHlxW+KRdgrcdpZtrBH0lrUoco+uMg0qeirIOCxo5xNa52Wjx46nEaxmFdpA
-         r8JNK2nwP6tOB1K1Csxvly6LShdscy0xDt2ddpsLvf0Om2GyBIHylMkShnKhjU5F7SvR
-         B6aIYth9ry+fxXBbxZ6l7080qozewr8EvT+XSoZf/x1QVTBu+q/yy6HQ5Mp2j0f0lRAV
-         cNVP6xdfrSOqfkphCFdUr5QjReyADJwYrBsVr8fsrNhxjuOTCjJ18xBG1AhO1yNPvkyf
-         k6dg==
-X-Gm-Message-State: AOJu0YwdopZX/FLf3rG7a5F/n2ZabsSmRRi2fXE+TeVwqsQlu+eZax81
-	dujkYe/rRbvyoK94ra3jI4DwNxhAmZ3xh6GexRsEg4c7uJfojH5nRu/4RA==
-X-Google-Smtp-Source: AGHT+IEGi6AVm60nqALe/J9xcRSQhN+5pEr/Z/s4sD0TpvhhCgAXbUHSOz/Y24gBQfrxf43F+fYWDQ==
-X-Received: by 2002:a17:90b:380a:b0:2e0:a77e:82f7 with SMTP id 98e67ed59e1d1-2e9b178c6a2mr13738727a91.36.1731305437131;
-        Sun, 10 Nov 2024 22:10:37 -0800 (PST)
-Received: from LL-3020L.kpit.com ([2401:4900:1c43:22f:4ee2:722d:5960:e120])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2e99a4f994asm9701189a91.1.2024.11.10.22.10.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 10 Nov 2024 22:10:36 -0800 (PST)
-From: Virendra Thakur <thakur.virendra1810@gmail.com>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=1045eb20c4=haixiao.yan.cn@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4AB5M8tJ005065
+	for <openembedded-devel@lists.openembedded.org>; Sun, 10 Nov 2024 22:41:42 -0800
+Received: from nam10-dm6-obe.outbound.protection.outlook.com (mail-dm6nam10lp2043.outbound.protection.outlook.com [104.47.58.43])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 42t84ps78j-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 10 Nov 2024 22:41:42 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=KLIxLSiioeX8u5QE+CIYtVikDlZhX41kUbhSf8k2938IBvJVsd0D8vDuhpGGZV2ayhV+OZtXYqhl1ADPxo+aWR5moYO+h9vW+UPGyIFYkXN5kXQ53PzkiJXepzrLIoWhO3D2AexmcELuxsFLsKgJ2KDOLPypbrndFkQU/5lhtDisxyQlw15fBTE5Rr1ptnw4x2VwN9Geu+TKDrOJ6iBSHrcBX8vEtYzUvOY14bl4cFI2ndBAjmsfWyIJLwqwMjf8lqarYFJNbcdicnP5IcEyTHhFQneyMTUAlcwox+FGkoXFEHO9jR009ho06ovwRUPEVapOjgIWm6it4Rlf6ayFCg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4oMQrS1Sk18ypbjoyXpuGlG0g1KG0k91RMhyqBTRU9Q=;
+ b=WEnY62PcK38vWzCwT0laLezG3JCZuWCmdMrVOVqMfMxQ5s3Rvh7qO4Oa6wrOtCqrc9kC2IpiVpnomTpFipfx8+njzA8deQuEP/sre3J6pnAMBpIkKJkdsArfpvP+i8yHI5oH+JKxqfLlJlbCQuOiQuLcsupzPpdqvl8KPTsY9h3tmtYU8k6PaCHLH+QI0IGyf4FrJ72Wv8Kw2nGUMvHmSb2LBqkY+k6IOSOfvz81C2GGcby7CImxOjmsOoGLxpges4ZXAXzjcf6LhCrFlgC+fLqSKWNEFJLXU4IyP9XX2YROH4gHAtapyGvXZjD8kUqU1lSMGAx57Xn1CXAqZNBq0g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from IA1PR11MB8200.namprd11.prod.outlook.com (2603:10b6:208:454::6)
+ by CYXPR11MB8730.namprd11.prod.outlook.com (2603:10b6:930:e3::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.29; Mon, 11 Nov
+ 2024 06:41:39 +0000
+Received: from IA1PR11MB8200.namprd11.prod.outlook.com
+ ([fe80::b6d:5228:91bf:469e]) by IA1PR11MB8200.namprd11.prod.outlook.com
+ ([fe80::b6d:5228:91bf:469e%6]) with mapi id 15.20.8137.022; Mon, 11 Nov 2024
+ 06:41:39 +0000
+From: haixiao.yan.cn@windriver.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Virendra Thakur <virendrak@kpit.com>
-Subject: [meta-oe][scarthgap][PATCH] opensc: Fix multiple cve CVE-2024-45615-45616-45617-45618-45619-45620
-Date: Mon, 11 Nov 2024 11:38:47 +0530
-Message-Id: <20241111060847.1769547-1-thakur.virendra1810@gmail.com>
+Subject: [oe][meta-networking][scarthgap][PATCH 1/1] openvpn: upgrade 2.6.10 -> 2.6.12
+Date: Mon, 11 Nov 2024 14:41:19 +0800
+Message-Id: <20241111064119.2832645-1-haixiao.yan.cn@windriver.com>
 X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TYCP286CA0004.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:26c::13) To IA1PR11MB8200.namprd11.prod.outlook.com
+ (2603:10b6:208:454::6)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: IA1PR11MB8200:EE_|CYXPR11MB8730:EE_
+X-MS-Office365-Filtering-Correlation-Id: 94ea9f98-1c17-4ba2-ff1d-08dd021be534
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|366016|52116014|376014|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?EG8Q++nVXhl9tI8rSHaw6CW74UXVj3do0gqXAWAaEf+ELqAFKKhewkOwd0L2?=
+ =?us-ascii?Q?A5CGkJwtCCZ8Wr602/0TD2ynjoTghlXM73aFwhzyZcTJB01UuEKNBzESeLsS?=
+ =?us-ascii?Q?wBPOgALgnoPPF+V+JmFPUl+P6CKCCSeyJDE9m8xzzE99yE6P0O6MZjkBgOL8?=
+ =?us-ascii?Q?SwYwUMJ8kKGNIB5E5itLrA43chnlTjJJfI9mDxGp+x9E5hQ9HMf3SaT8WqGW?=
+ =?us-ascii?Q?g7xXnCA8ChAsH63YJ8Swh3v/PDHnjWG7yNDG2cSg7UuU4TXBteFVxKbx9eqO?=
+ =?us-ascii?Q?35Y2hZ5YhYha0wwpZUji4ozy9BeHZcuqFlYvmU6mf8YgBCb0U5U1CLX9DDup?=
+ =?us-ascii?Q?Esad15DEJqBsyrvNmB/8bgRvXZ9Ke2vKAeB1+aBw+l8MmObNkKf7UwoJ2fHO?=
+ =?us-ascii?Q?XT27ONu3nEQ3/Y0fSo4Rfhw6IVqpexSSQbNJuDFAG0ufePqVSTWIqZQBUVlC?=
+ =?us-ascii?Q?EDto3T8WEukJAvYwkGyyIVpMIkLH12JKKg4AARXHdLRT38PZdTYFAB/dTtaV?=
+ =?us-ascii?Q?DVcjyy7T9ZV0ySA2XSDBpV8MutCU8jh2bOBNLVwuPxJxhcI7IcfOF3M1ummS?=
+ =?us-ascii?Q?Chh9g6sKe/aP0CvBvU22PqBk1Pt2IjQmZxVKq824GV385E/DTSMy2ltwX2m3?=
+ =?us-ascii?Q?MmeodEMtvdGsgHIxxy6IgojbA6rrrEpjFzBDnPXhXyyZe+KuKlyPIqzwQ0m5?=
+ =?us-ascii?Q?Q9liVzW02GJBu5iUbV7xHUmcx/jIPgk7CrH9PNQHyJ3Uqii+osOjiYSRbMZE?=
+ =?us-ascii?Q?g98XmKnqZmX70lcFV/hyTw7pKIALjCKvn6kya9bA7kk0vtT7VW58BWSkmwyH?=
+ =?us-ascii?Q?QWIGU21f6r1CQi9vhl52mao6kSlnX9ZVWJEKg4n0pEpRypgqam0tP9kxH6yF?=
+ =?us-ascii?Q?dsJjiKtUj2Rav4kZAPN4eqzMgdXKqQakgPMzYT/oCJT09u5k7bosJCGOLDPZ?=
+ =?us-ascii?Q?QO1LG0fQ3xPSC9nsn5yi8BNu7bBpEs97Wnd55zEEn1LaOWX6DQH2VsRAHPGh?=
+ =?us-ascii?Q?/DXu0zwUYqUEt8CBrFBaMjzSKqlBRSZzKSjkRHeUv6568lmhnZPW0HpNlGzJ?=
+ =?us-ascii?Q?vSBwMCWAFTyQy2Gsa9lFcqX4alJmu5sRWQVlULdPi4/Loi00wMnlkhbprcED?=
+ =?us-ascii?Q?2Xo8hPBqjQ9SE29gUIgTNWp9v8ltmZkHramVF2PZUNsknM0XXOWBuQl5Hh9p?=
+ =?us-ascii?Q?o+1rLFxGCwL1PXf2RYznabMZnwB89bl4yZ1Eyj1eEKa3FGqPt+BJaBivQ0iF?=
+ =?us-ascii?Q?5wY24BhpD0nJvhkd7zWOrU/g0s4kIyAHZ8pDWR1stRsg7J9EkgQWx3t7t8Ce?=
+ =?us-ascii?Q?wXIXrnfmJsMxghghZ1ZNsKATknlGnHcYgj2NAvcwDssG1g=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA1PR11MB8200.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(52116014)(376014)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?YwL3yCFN/faXmjK4BqS9FPvv/Vb3GIX4Czf2YsrTPgkPEVbcLrsotJ2A0Rxn?=
+ =?us-ascii?Q?iU4/nMgXMBZZJhegO9sePdrttcUCzG3lQ1yUfXihx8WaQ0UURas3TKU7Wo1S?=
+ =?us-ascii?Q?qR1Ev1ptvXvQwJjYWDbroL3ZW455vYz4Vg6pCvatfeaNwk2RAk9/XeNVdH3T?=
+ =?us-ascii?Q?DHDoeBWB0MwGz915APXN690jP8BNanvzdRpPP2asB8Cd7HhBF1xNDashEBpe?=
+ =?us-ascii?Q?QNnVjJeZ6OXqxjFscV825oWiWfuWXwehK35uL96s085niLvJm6koGlJZq3XN?=
+ =?us-ascii?Q?x33FcEZQurzdgKOkmacUQnbNlQ0DfzB0RKfel/Upae7K34VneUF6SB/6xrs5?=
+ =?us-ascii?Q?9/8LyF6nSzGIm7OMFr6EFesRKl5wWKo2qF5vsAfF6lpnE4/6FMcok+bNOc+N?=
+ =?us-ascii?Q?kXgte2ZoSSZRbYI12SE4nehoxhWo1YRr5HTpw+d7ZRHDrg8Pv5tcKvTOb2m3?=
+ =?us-ascii?Q?qrqo4tATkKZRNev+sg52xhnw3L3iD5DXOV6tMZBn6whTQth4CdX/1aU9LsWj?=
+ =?us-ascii?Q?uq7sq/1tIJsGgUzFzO+4wSzpwIRSo4ZkV12KhLAhzTq4NsYrMjKaJtlNVrFU?=
+ =?us-ascii?Q?QO6IRNxkHz8ReSMKuuuCKsI5UrKtshy31HnKlqEAoHXPgKZ3jxF/CrdyMVKL?=
+ =?us-ascii?Q?Da079e2+oY+KbVIla1+mKAZENIriGW+dxte/M8sTKpjwSj1d1UlmTZjvOrA5?=
+ =?us-ascii?Q?sse1z82tJqw0kUNZtEw/ykB587OBQHOOOd+shYD4BHcn6iytlqwrFRMaPYCX?=
+ =?us-ascii?Q?pplUBi8hp/xDHG+Av791PgIWzGm0fUSCxRQdOCKpOrWVRYpKHlSgUCr23VnM?=
+ =?us-ascii?Q?qTNBJr1vkHlut/jec1/S07pkkGy2nomz541e/brgEMoIBi9HhmjWfKsBNBhz?=
+ =?us-ascii?Q?iTP8mzLh1QhbnwnSviiot5pVZp+g1e4Nlms6VhsQr/dLJnyuLSp/U52ytvrh?=
+ =?us-ascii?Q?uM1wzE81yLnT5I95bSShvEvKYgW1MXJHMS6hyW93/Qd+3p8A9aOjsKZ40fNn?=
+ =?us-ascii?Q?wtOGz0hitufV9ao7u6HZNM2mwePWgmASgSPJO+51fe+nkhMiZ5N7M8GwKpNA?=
+ =?us-ascii?Q?YISZ1PMS+kO5S436Li5yMvYctUBUNGnzJDcMrbLu4XYVdOJOXxxiSn2wNYC6?=
+ =?us-ascii?Q?1oPYruKe0rEbJDJototImj95HN2mAnZd+MZHoO3wrH62we6uReZ1F3UqHW0A?=
+ =?us-ascii?Q?7m3IusBQS5RgMRlwmT54qWZ58rVjfIbjGkZ6XxyJQ4MGuUr1+8aFke1/xshZ?=
+ =?us-ascii?Q?hEWc9gd0BaKLJi0ONbBrdEDP2iaqz5xI90rByaasZduJm7XxXe/e4lqBGYg7?=
+ =?us-ascii?Q?h0IoB/9MrMJBzBBy0R8bWYkFGAJDYY1dkqo+DIDvCV/iAUyBLbMU/KBf2lI6?=
+ =?us-ascii?Q?v6qSZBNhjBBmy4J8W1HfiPBS/92r4zzLQ5tJVyLZwDLunE7I5sgBDyKjArXZ?=
+ =?us-ascii?Q?aKnPc9hkjlh8wJtpG4bp0nICEpbw/lnP8ivhl0nutVyr+GgxvXf7rCiHI+Iw?=
+ =?us-ascii?Q?vclOcjP8EVSdtPqRTnrwJt17Te1kAoXYQwM2oySAP40sCl9D3gAkiKky5xAz?=
+ =?us-ascii?Q?bBjYyDb6A2YPGY0NECsEXpNNfNLZ91Zdu0zCuDrdjz9r56FpjoZSAQCsiMq/?=
+ =?us-ascii?Q?NQ=3D=3D?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 94ea9f98-1c17-4ba2-ff1d-08dd021be534
+X-MS-Exchange-CrossTenant-AuthSource: IA1PR11MB8200.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2024 06:41:39.1971
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: v7yHRKLjcbL9YAgnOnAxEyMy9SIqV9Lbqc/wQM6RnqAgZj5PHlHGoQhe01VlstGC/l53KHDVlniJ9eQd+6f2qoVGHrexraxFVivZM3pw+uY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYXPR11MB8730
+X-Authority-Analysis: v=2.4 cv=IrVMc6/g c=1 sm=1 tr=0 ts=6731a726 cx=c_pps a=S2IcI55zTQM2EKrhu3zyRw==:117 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=JBbWWo_dQDwA:10 a=VlfZXiiP6vEA:10 a=bRTqI5nwn0kA:10
+ a=t7CeM3EgAAAA:8 a=NEAV23lmAAAA:8 a=9dNbsytUAAAA:8 a=uDo-SIiEAAAA:8 a=vOtmyezTaZJXdoZdcd0A:9 a=FdTzh2GWekK77mhwV6Dw:22 a=gPpeecpFUKP6j8iU7U-x:22 a=Rkhf4GTZPwEC63LfVcCP:22
+X-Proofpoint-ORIG-GUID: tayeweCMIaE8xOROkyE_nExbJBLPUDxk
+X-Proofpoint-GUID: tayeweCMIaE8xOROkyE_nExbJBLPUDxk
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.62.30
+ definitions=2024-11-11_06,2024-11-08_01,2024-09-30_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 clxscore=1015
+ malwarescore=0 priorityscore=1501 suspectscore=0 bulkscore=0 spamscore=0
+ mlxscore=0 mlxlogscore=999 adultscore=0 lowpriorityscore=0 impostorscore=0
+ classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2409260000 definitions=main-2411110055
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 11 Nov 2024 06:10:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113782
+ <openembedded-devel@lists.openembedded.org>; Mon, 11 Nov 2024 06:41:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113783
 
-From: Virendra Thakur <virendrak@kpit.com>
+From: Haixiao Yan <haixiao.yan.cn@windriver.com>
 
-Fixes for uninitialized memory issues
+ChangeLog:
+https://github.com/OpenVPN/openvpn/blob/v2.6.12/Changes.rst
 
-Hunk present in card-entersafe.c and card-gids.c are refresehed base
-on codebase.
+Security fixes:
 
-Signed-off-by: Virendra Thakur <virendrak@kpit.com>
+CVE-2024-4877: Windows: harden interactive service pipe.
+Security scope: a malicious process with "some" elevated privileges
+(SeImpersonatePrivilege) could open the pipe a second time,
+tricking openvn GUI into providing user credentials (tokens),
+getting full access to the account openvpn-gui.exe runs as.
+
+CVE-2024-5594: control channel: refuse control channel messages with
+nonprintable characters in them.
+Security scope: a malicious openvpn peer can send garbage to openvpn log,
+or cause high CPU load.
+
+CVE-2024-28882: only call schedule_exit() once (on a given peer).
+Security scope: an authenticated client can make the server "keep the
+session" even when the server has been told to disconnect this client.
+
+Signed-off-by: Haixiao Yan <haixiao.yan.cn@windriver.com>
 ---
- ...ixes-for-uninitialized-memory-issues.patch | 1268 +++++++++++++++++
- .../recipes-support/opensc/opensc_0.25.1.bb   |    4 +-
- 2 files changed, 1271 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/opensc/files/0001-PR-Fixes-for-uninitialized-memory-issues.patch
+ .../openvpn/{openvpn_2.6.10.bb => openvpn_2.6.12.bb}            | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/openvpn/{openvpn_2.6.10.bb => openvpn_2.6.12.bb} (97%)
 
-diff --git a/meta-oe/recipes-support/opensc/files/0001-PR-Fixes-for-uninitialized-memory-issues.patch b/meta-oe/recipes-support/opensc/files/0001-PR-Fixes-for-uninitialized-memory-issues.patch
-new file mode 100644
-index 000000000..1c45067e5
---- /dev/null
-+++ b/meta-oe/recipes-support/opensc/files/0001-PR-Fixes-for-uninitialized-memory-issues.patch
-@@ -0,0 +1,1268 @@
-+From: Virendra Thakur <virendrak@kpit.com>
-+Date: Tue, 15 Oct 2024 17:29:19 +0000 (-0600)
-+Subject: Avoid using uninitialized memory
-+
-+Avoid using uninitialized memory
-+
-+37 new use-of-uninitialized-memory bugs were found while testing fuzzing harnesses. The bugs were found in these functions:
-+
-+cac_read_file()
-+cardos_match_card()
-+sc_bin_to_hex()
-+strcmp(), from gids_get_identifiers()
-+do_select()
-+bcmp(), from cac_list_compare_path()
-+insert_cert()
-+cardos_lifecycle_get()
-+gids_read_masterfile()
-+sc_pkcs15init_parse_info()
-+piv_get_challenge()
-+asn1_decode()
-+malloc(), from cac_read_file()
-+sc_asn1_decode_object_id()
-+sc_pkcs15emu_sc_hsm_decode_cvc()
-+gemsafe_get_cert_len()
-+process_fcp()
-+dnie_process_fci()
-+iso7816_process_fci()
-+sc_pkcs15_read_file()
-+strlen(), from set_string()
-+asn1_encode_path()
-+msc_extract_rsa_public_key()
-+sc_build_pin()
-+DES_set_key_unchecked(), from openssl_enc()
-+starcos_write_pukey()
-+iasecc_sdo_parse()
-+setcos_generate_key()
-+iasecc_parse_size()
-+iasecc_se_parse()
-+sc_hsm_determine_free_id()
-+asn1_encode_entry()
-+coolkey_rsa_op()
-+sc_asn1_read_tag()
-+do_init_app()
-+sc_pkcs15init_create_pin()
-+sc_asn1_clear_algorithm_id()
-+Reported by Matteo Marini (@Heinzeen)
-+
-+Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/pull/3225/files/ab476044a009003262991c065b792baa053c7be5]
-+
-+CVE: CVE-2024-45615 CVE-2024-45616 CVE-2024-45617 CVE-2024-45618 CVE-2024-45619 CVE-2024-45620
-+Hunk present in card-entersafe.c and card-gids.c are refresehed base on codebase.
-+
-+From f25c61dae98ebfc7eb81b48f002621663cfcf9cb Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Mon, 20 May 2024 21:19:15 +0200
-+Subject: [PATCH 01/30] gids: Avoid using uninitialized memory
-+
-+Thanks Matteo Marini for report
-+
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-h5f7-rjr5-vx54
-+
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+---
-+ src/libopensc/card-gids.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/libopensc/card-gids.c b/src/libopensc/card-gids.c
-+index aa63035097..90c98b557d 100644
-+--- a/src/libopensc/card-gids.c
-++++ b/src/libopensc/card-gids.c
-+@@ -251,7 +251,7 @@ static int gids_get_DO(sc_card_t* card,
-+ 	LOG_TEST_RET(card->ctx, r, "gids get data failed");
-+ 	LOG_TEST_RET(card->ctx,  sc_check_sw(card, apdu.sw1, apdu.sw2), "invalid return");
-+ 
-+-	p = sc_asn1_find_tag(card->ctx, buffer, sizeof(buffer), dataObjectIdentifier, &datasize);
-++       p = sc_asn1_find_tag(card->ctx, buffer, apdu.resplen, dataObjectIdentifier, &datasize);
-+ 	if (!p) {
-+ 		LOG_FUNC_RETURN(card->ctx, SC_ERROR_FILE_NOT_FOUND);
-+ 	}
-+
-+From a905ad4600ab13f36ec1d0c909b18ca016d91a5a Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Mon, 20 May 2024 21:31:38 +0200
-+Subject: [PATCH 02/30] pkcs15init: Avoid using uninitialized memory
-+
-+Thanks Matteo Marini for report
-+
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-h5f7-rjr5-vx54
-+
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+---
-+ src/pkcs15init/profile.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/pkcs15init/profile.c b/src/pkcs15init/profile.c
-+index 5113af6ef6..72963e2f9c 100644
-+--- a/src/pkcs15init/profile.c
-++++ b/src/pkcs15init/profile.c
-+@@ -1809,7 +1809,7 @@ do_pin_storedlength(struct state *cur, int argc, char **argv)
-+ static int
-+ do_pin_flags(struct state *cur, int argc, char **argv)
-+ {
-+-	unsigned int	flags;
-++	unsigned int	flags = 0;
-+ 	int		i, r;
-+ 
-+ 	if (cur->pin->pin.auth_type != SC_PKCS15_PIN_AUTH_TYPE_PIN)
-+
-+From 4ca050b83c8f265280059697c3764460ad8aac9b Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Tue, 3 Sep 2024 09:15:22 +0200
-+Subject: [PATCH 03/30] pkcs15init: Remove tab indentation
-+
-+---
-+ src/pkcs15init/profile.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/pkcs15init/profile.c b/src/pkcs15init/profile.c
-+index 72963e2f9c..4fbc3e7e1f 100644
-+--- a/src/pkcs15init/profile.c
-++++ b/src/pkcs15init/profile.c
-+@@ -1809,7 +1809,7 @@ do_pin_storedlength(struct state *cur, int argc, char **argv)
-+ static int
-+ do_pin_flags(struct state *cur, int argc, char **argv)
-+ {
-+-	unsigned int	flags = 0;
-++	unsigned int flags = 0;
-+ 	int		i, r;
-+ 
-+ 	if (cur->pin->pin.auth_type != SC_PKCS15_PIN_AUTH_TYPE_PIN)
-+
-+From 5580be58f2dc88f8b75a60d213a57014333c6b17 Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Mon, 20 May 2024 22:14:48 +0200
-+Subject: [PATCH 04/30] cac: Correctly calculate certificate length based on
-+ the resplen
-+
-+Thanks Matteo Marini for report
-+
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-h5f7-rjr5-vx54
-+
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+---
-+ src/libopensc/card-cac1.c | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/libopensc/card-cac1.c b/src/libopensc/card-cac1.c
-+index 5ddacc4565..06b2671f43 100644
-+--- a/src/libopensc/card-cac1.c
-++++ b/src/libopensc/card-cac1.c
-+@@ -92,12 +92,12 @@ static int cac_cac1_get_certificate(sc_card_t *card, u8 **out_buf, size_t *out_l
-+ 		if (apdu.sw1 != 0x63 || apdu.sw2 < 1)  {
-+ 			/* we've either finished reading, or hit an error, break */
-+ 			r = sc_check_sw(card, apdu.sw1, apdu.sw2);
-+-			left -= len;
-++			left -= apdu.resplen;
-+ 			break;
-+ 		}
-+ 		/* Adjust the lengths */
-+-		left -= len;
-+-		out_ptr += len;
-++		left -= apdu.resplen;
-++		out_ptr += apdu.resplen;
-+ 		len = MIN(left, apdu.sw2);
-+ 	}
-+ 	if (r < 0) {
-+
-+From 9da37a80ed3b3ceaf472e1a43a4672f4e30637d1 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Thu, 11 Jul 2024 14:58:25 +0200
-+Subject: [PATCH 05/30] cac: Fix uninitialized values
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_card/1,fuzz_pkcs11/6
-+---
-+ src/libopensc/card-cac.c | 12 ++++++------
-+ 1 file changed, 6 insertions(+), 6 deletions(-)
-+
-+diff --git a/src/libopensc/card-cac.c b/src/libopensc/card-cac.c
-+index 898fce8aa5..412f22644d 100644
-+--- a/src/libopensc/card-cac.c
-++++ b/src/libopensc/card-cac.c
-+@@ -252,7 +252,7 @@ static int cac_apdu_io(sc_card_t *card, int ins, int p1, int p2,
-+ 	size_t * recvbuflen)
-+ {
-+ 	int r;
-+-	sc_apdu_t apdu;
-++	sc_apdu_t apdu = {0};
-+ 	u8 rbufinitbuf[CAC_MAX_SIZE];
-+ 	u8 *rbuf;
-+ 	size_t rbuflen;
-+@@ -389,13 +389,13 @@ cac_get_acr(sc_card_t *card, int acr_type, u8 **out_buf, size_t *out_len)
-+ static int cac_read_file(sc_card_t *card, int file_type, u8 **out_buf, size_t *out_len)
-+ {
-+ 	u8 params[2];
-+-	u8 count[2];
-++	u8 count[2] = {0};
-+ 	u8 *out = NULL;
-+-	u8 *out_ptr;
-++	u8 *out_ptr = NULL;
-+ 	size_t offset = 0;
-+ 	size_t size = 0;
-+ 	size_t left = 0;
-+-	size_t len;
-++	size_t len = 0;
-+ 	int r;
-+ 
-+ 	params[0] = file_type;
-+@@ -458,7 +458,7 @@ static int cac_read_binary(sc_card_t *card, unsigned int idx,
-+ 	const u8 *tl_ptr, *val_ptr, *tl_start;
-+ 	u8 *tlv_ptr;
-+ 	const u8 *cert_ptr;
-+-	size_t tl_len, val_len, tlv_len;
-++	size_t tl_len = 0, val_len = 0, tlv_len;
-+ 	size_t len, tl_head_len, cert_len;
-+ 	u8 cert_type, tag;
-+ 
-+@@ -1519,7 +1519,7 @@ static int cac_parse_CCC(sc_card_t *card, cac_private_data_t *priv, const u8 *tl
-+ static int cac_process_CCC(sc_card_t *card, cac_private_data_t *priv, int depth)
-+ {
-+ 	u8 *tl = NULL, *val = NULL;
-+-	size_t tl_len, val_len;
-++	size_t tl_len = 0, val_len = 0;
-+ 	int r;
-+ 
-+ 	if (depth > CAC_MAX_CCC_DEPTH) {
-+
-+From 39a55ef0a44cb34b22e585281b1e1eee30eb79a5 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Thu, 11 Jul 2024 15:27:19 +0200
-+Subject: [PATCH 06/30] cardos: Fix uninitialized values
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_card/2
-+---
-+ src/libopensc/card-cardos.c | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
-+
-+diff --git a/src/libopensc/card-cardos.c b/src/libopensc/card-cardos.c
-+index 2e2d524333..a0e2322478 100644
-+--- a/src/libopensc/card-cardos.c
-++++ b/src/libopensc/card-cardos.c
-+@@ -94,14 +94,14 @@ static void fixup_transceive_length(const struct sc_card *card,
-+ 
-+ static int cardos_match_card(sc_card_t *card)
-+ {
-+-	unsigned char atr[SC_MAX_ATR_SIZE];
-++	unsigned char atr[SC_MAX_ATR_SIZE] = { 0 };
-+ 	int i;
-+ 
-+ 	i = _sc_match_atr(card, cardos_atrs, &card->type);
-+ 	if (i < 0)
-+ 		return 0;
-+ 
-+-	memcpy(atr, card->atr.value, sizeof(atr));
-++	memcpy(atr, card->atr.value, card->atr.len);
-+ 
-+ 	/* Do not change card type for CIE! */
-+ 	if (card->type == SC_CARD_TYPE_CARDOS_CIE_V1)
-+@@ -114,8 +114,8 @@ static int cardos_match_card(sc_card_t *card)
-+ 		return 1;
-+ 	if (card->type == SC_CARD_TYPE_CARDOS_M4_2) {
-+ 		int rv;
-+-		sc_apdu_t apdu;
-+-		u8 rbuf[SC_MAX_APDU_BUFFER_SIZE];
-++		sc_apdu_t apdu = { 0 };
-++		u8 rbuf[SC_MAX_APDU_BUFFER_SIZE] = { 0 };
-+ 		/* first check some additional ATR bytes */
-+ 		if ((atr[4] != 0xff && atr[4] != 0x02) ||
-+ 		    (atr[6] != 0x10 && atr[6] != 0x0a) ||
-+
-+From e66619fadb3fd666e3359886fe18e387de068799 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Fri, 12 Jul 2024 13:16:56 +0200
-+Subject: [PATCH 07/30] card-dnie: Check APDU response length and ASN1 lengths
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs15_decode/10, fuzz_pkcs15_encode/12
-+---
-+ src/libopensc/asn1.c      | 4 +++-
-+ src/libopensc/card-dnie.c | 8 ++++++--
-+ 2 files changed, 9 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/libopensc/asn1.c b/src/libopensc/asn1.c
-+index 08ef56149c..548263a2da 100644
-+--- a/src/libopensc/asn1.c
-++++ b/src/libopensc/asn1.c
-+@@ -68,7 +68,7 @@ int sc_asn1_read_tag(const u8 ** buf, size_t buflen, unsigned int *cla_out,
-+ 
-+ 	*buf = NULL;
-+ 
-+-	if (left == 0 || !p)
-++	if (left == 0 || !p || buflen == 0)
-+ 		return SC_ERROR_INVALID_ASN1_OBJECT;
-+ 	if (*p == 0xff || *p == 0) {
-+ 		/* end of data reached */
-+@@ -83,6 +83,8 @@ int sc_asn1_read_tag(const u8 ** buf, size_t buflen, unsigned int *cla_out,
-+ 	 */
-+ 	cla = (*p & SC_ASN1_TAG_CLASS) | (*p & SC_ASN1_TAG_CONSTRUCTED);
-+ 	tag = *p & SC_ASN1_TAG_PRIMITIVE;
-++	if (left < 1)
-++		return SC_ERROR_INVALID_ASN1_OBJECT;
-+ 	p++;
-+ 	left--;
-+ 	if (tag == SC_ASN1_TAG_PRIMITIVE) {
-+diff --git a/src/libopensc/card-dnie.c b/src/libopensc/card-dnie.c
-+index 464670f096..d8b90e8439 100644
-+--- a/src/libopensc/card-dnie.c
-++++ b/src/libopensc/card-dnie.c
-+@@ -1172,12 +1172,16 @@ static int dnie_compose_and_send_apdu(sc_card_t *card, const u8 *path, size_t pa
-+ 
-+ 	if (file_out) {
-+ 		/* finally process FCI response */
-++		size_t len = apdu.resp[1];
-+ 		sc_file_free(*file_out);
-+ 		*file_out = sc_file_new();
-+ 		if (*file_out == NULL) {
-+ 			LOG_FUNC_RETURN(ctx, SC_ERROR_OUT_OF_MEMORY);
-+ 		}
-+-		res = card->ops->process_fci(card, *file_out, apdu.resp + 2, apdu.resp[1]);
-++		if (apdu.resplen - 2 < len || len < 1) {
-++			LOG_FUNC_RETURN(ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED);
-++		}
-++		res = card->ops->process_fci(card, *file_out, apdu.resp + 2, len);
-+ 	}
-+ 	LOG_FUNC_RETURN(ctx, res);
-+ }
-+@@ -1935,7 +1939,7 @@ static int dnie_process_fci(struct sc_card *card,
-+ 	int *op = df_acl;
-+ 	int n = 0;
-+ 	sc_context_t *ctx = NULL;
-+-	if ((card == NULL) || (card->ctx == NULL) || (file == NULL))
-++	if ((card == NULL) || (card->ctx == NULL) || (file == NULL) || buflen == 0)
-+ 		return SC_ERROR_INVALID_ARGUMENTS;
-+ 	ctx = card->ctx;
-+ 	LOG_FUNC_CALLED(ctx);
-+
-+From 737931e6edaaa2142e1e71a2b76159f6ce458bb8 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Fri, 12 Jul 2024 14:03:59 +0200
-+Subject: [PATCH 08/30] muscle: Report invalid SW when reading object
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs11/20, fuzz_pkcs15init/10
-+---
-+ src/libopensc/muscle.c | 19 ++++++++++---------
-+ 1 file changed, 10 insertions(+), 9 deletions(-)
-+
-+diff --git a/src/libopensc/muscle.c b/src/libopensc/muscle.c
-+index 46a9f66b88..89dfcbbcba 100644
-+--- a/src/libopensc/muscle.c
-++++ b/src/libopensc/muscle.c
-+@@ -92,33 +92,34 @@ int msc_partial_read_object(sc_card_t *card, msc_id objectId, int offset, u8 *da
-+ 	apdu.resp = data;
-+ 	r = sc_transmit_apdu(card, &apdu);
-+ 	LOG_TEST_RET(card->ctx, r, "APDU transmit failed");
-+-	if(apdu.sw1 == 0x90 && apdu.sw2 == 0x00)
-++	if (apdu.sw1 == 0x90 && apdu.sw2 == 0x00 && dataLength <= apdu.resplen)
-+ 		return (int)dataLength;
-+-	if(apdu.sw1 == 0x9C) {
-+-		if(apdu.sw2 == 0x07) {
-++	if (apdu.sw1 == 0x9C) {
-++		if (apdu.sw2 == 0x07) {
-+ 			SC_FUNC_RETURN(card->ctx, SC_LOG_DEBUG_VERBOSE, SC_ERROR_FILE_NOT_FOUND);
-+-		} else if(apdu.sw2 == 0x06) {
-++		} else if (apdu.sw2 == 0x06) {
-+ 			SC_FUNC_RETURN(card->ctx, SC_LOG_DEBUG_VERBOSE, SC_ERROR_NOT_ALLOWED);
-+-		} else if(apdu.sw2 == 0x0F) {
-++		} else if (apdu.sw2 == 0x0F) {
-+ 			/* GUESSED */
-+ 			SC_FUNC_RETURN(card->ctx, SC_LOG_DEBUG_VERBOSE, SC_ERROR_INVALID_ARGUMENTS);
-+ 		}
-+ 	}
-+ 	sc_log(card->ctx,
-+ 		"got strange SWs: 0x%02X 0x%02X\n", apdu.sw1, apdu.sw2);
-+-	return (int)dataLength;
-+-
-++	SC_FUNC_RETURN(card->ctx, SC_LOG_DEBUG_VERBOSE, SC_ERROR_UNKNOWN_DATA_RECEIVED);
-+ }
-+ 
-+ int msc_read_object(sc_card_t *card, msc_id objectId, int offset, u8 *data, size_t dataLength)
-+ {
-+-	int r;
-++	int r = 0;
-+ 	unsigned int i;
-+ 	size_t max_read_unit = MSC_MAX_READ;
-+ 
-+-	for(i = 0; i < dataLength; i += max_read_unit) {
-++	for (i = 0; i < dataLength; i += r) {
-+ 		r = msc_partial_read_object(card, objectId, offset + i, data + i, MIN(dataLength - i, max_read_unit));
-+ 		LOG_TEST_RET(card->ctx, r, "Error in partial object read");
-++		if (r == 0)
-++			break;
-+ 	}
-+ 	return (int)dataLength;
-+ }
-+
-+From e7f6a24b7e9ac849d0242ce9e183c8160e5e9e8c Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Fri, 12 Jul 2024 14:16:24 +0200
-+Subject: [PATCH 09/30] card-mcrd: Check length of response buffer in select
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs11/5,12 fuzz_pkcs15_crypt/9
-+---
-+ src/libopensc/card-mcrd.c | 11 +++++++----
-+ 1 file changed, 7 insertions(+), 4 deletions(-)
-+
-+diff --git a/src/libopensc/card-mcrd.c b/src/libopensc/card-mcrd.c
-+index 3a549999eb..911e9f0a07 100644
-+--- a/src/libopensc/card-mcrd.c
-++++ b/src/libopensc/card-mcrd.c
-+@@ -587,20 +587,23 @@ do_select(sc_card_t * card, u8 kind,
-+ 		}
-+ 	}
-+ 
-+-	if (p2 == 0x04 && apdu.resp[0] == 0x62) {
-++	if (p2 == 0x04 && apdu.resplen > 2 && apdu.resp[0] == 0x62) {
-+ 		*file = sc_file_new();
-+ 		if (!*file)
-+ 			LOG_FUNC_RETURN(card->ctx, SC_ERROR_OUT_OF_MEMORY);
-++		if (apdu.resp[1] > apdu.resplen - 2)
-++			LOG_FUNC_RETURN(card->ctx, SC_ERROR_INVALID_DATA);
-+ 		process_fcp(card, *file, apdu.resp + 2, apdu.resp[1]);
-+ 		return SC_SUCCESS;
-+ 	}
-+ 
-+-	if (p2 != 0x0C && apdu.resp[0] == 0x6F) {
-++	if (p2 != 0x0C && apdu.resplen > 2 && apdu.resp[0] == 0x6F) {
-+ 		*file = sc_file_new();
-+ 		if (!*file)
-+ 			LOG_FUNC_RETURN(card->ctx, SC_ERROR_OUT_OF_MEMORY);
-+-		if (apdu.resp[1] <= apdu.resplen)
-+-			process_fcp(card, *file, apdu.resp + 2, apdu.resp[1]);
-++		if (apdu.resp[1] > apdu.resplen - 2)
-++			LOG_FUNC_RETURN(card->ctx, SC_ERROR_INVALID_DATA);
-++		process_fcp(card, *file, apdu.resp + 2, apdu.resp[1]);
-+ 		return SC_SUCCESS;
-+ 	}
-+ 	return SC_SUCCESS;
-+
-+From d18a07ea891c7bd7dff0d187fbb4df5169fd9698 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Fri, 12 Jul 2024 14:35:47 +0200
-+Subject: [PATCH 10/30] pkcs15-cert.c: Initialize OID length
-+
-+In case it is not set later.
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs11/7
-+---
-+ src/libopensc/pkcs15-cert.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/libopensc/pkcs15-cert.c b/src/libopensc/pkcs15-cert.c
-+index 1777a85835..5e2dbb89d0 100644
-+--- a/src/libopensc/pkcs15-cert.c
-++++ b/src/libopensc/pkcs15-cert.c
-+@@ -169,7 +169,7 @@ sc_pkcs15_get_name_from_dn(struct sc_context *ctx, const u8 *dn, size_t dn_len,
-+ 	for (next_ava = rdn, next_ava_len = rdn_len; next_ava_len; ) {
-+ 		const u8 *ava, *dummy, *oidp;
-+ 		struct sc_object_id oid;
-+-		size_t ava_len, dummy_len, oid_len;
-++		size_t ava_len = 0, dummy_len, oid_len = 0;
-+ 
-+ 		/* unwrap the set and point to the next ava */
-+ 		ava = sc_asn1_skip_tag(ctx, &next_ava, &next_ava_len, SC_ASN1_TAG_SET | SC_ASN1_CONS, &ava_len);
-+
-+From c65e6f004d99187d63d68e4a9a9d5ada770b7b8d Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Fri, 12 Jul 2024 15:04:19 +0200
-+Subject: [PATCH 11/30] card-gids: Use actual length of reponse buffer
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs11/11
-+---
-+ src/libopensc/card-gids.c | 6 ++++--
-+ 1 file changed, 4 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/libopensc/card-gids.c b/src/libopensc/card-gids.c
-+index 90c98b557d..5fb0d4acb4 100644
-+--- a/src/libopensc/card-gids.c
-++++ b/src/libopensc/card-gids.c
-+@@ -231,6 +231,7 @@ static int gids_get_DO(sc_card_t* card,
-+ 	size_t datasize = 0;
-+ 	const u8* p;
-+ 	u8 buffer[MAX_GIDS_FILE_SIZE];
-++        size_t buffer_len = sizeof(buffer);
-+ 
-+ 	SC_FUNC_CALLED(card->ctx, SC_LOG_DEBUG_VERBOSE);
-+ 	sc_log(card->ctx,
-+@@ -244,14 +245,15 @@ static int gids_get_DO(sc_card_t* card,
-+ 	apdu.data = data;
-+ 	apdu.datalen = 04;
-+ 	apdu.resp = buffer;
-+-	apdu.resplen = sizeof(buffer);
-++        apdu.resplen = buffer_len;
-+ 	apdu.le = 256;
-+ 
-+ 	r = sc_transmit_apdu(card, &apdu);
-+ 	LOG_TEST_RET(card->ctx, r, "gids get data failed");
-+ 	LOG_TEST_RET(card->ctx,  sc_check_sw(card, apdu.sw1, apdu.sw2), "invalid return");
-++        buffer_len = apdu.resplen;
-+ 
-+-       p = sc_asn1_find_tag(card->ctx, buffer, apdu.resplen, dataObjectIdentifier, &datasize);
-++       p = sc_asn1_find_tag(card->ctx, buffer, buffer_len, dataObjectIdentifier, &datasize);
-+ 	if (!p) {
-+ 		LOG_FUNC_RETURN(card->ctx, SC_ERROR_FILE_NOT_FOUND);
-+ 	}
-+
-+From 3b242c5d7160a66fb94efabef9318ebf03ebc63f Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Tue, 16 Jul 2024 14:05:36 +0200
-+Subject: [PATCH 12/30]  cac: Check return value when selecting AID
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs11/14
-+---
-+ src/libopensc/card-cac.c | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/libopensc/card-cac.c b/src/libopensc/card-cac.c
-+index 412f22644d..71ab7e482f 100644
-+--- a/src/libopensc/card-cac.c
-++++ b/src/libopensc/card-cac.c
-+@@ -1293,10 +1293,10 @@ static int cac_parse_aid(sc_card_t *card, cac_private_data_t *priv, const u8 *ai
-+ 	/* Call without OID set will just select the AID without subsequent
-+ 	 * OID selection, which we need to figure out just now
-+ 	 */
-+-	cac_select_file_by_type(card, &new_object.path, NULL);
-++	r = cac_select_file_by_type(card, &new_object.path, NULL);
-++	LOG_TEST_RET(card->ctx, r, "Cannot select AID");
-+ 	r = cac_get_properties(card, &prop);
-+-	if (r < 0)
-+-		return SC_ERROR_INTERNAL;
-++	LOG_TEST_RET(card->ctx, r, "Cannot get CAC properties");
-+ 
-+ 	for (i = 0; i < prop.num_objects; i++) {
-+ 		/* don't fail just because we have more certs than we can support */
-+
-+From 19d55573fcb638d02acc378cf638da9b4e481cd7 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Tue, 16 Jul 2024 14:22:02 +0200
-+Subject: [PATCH 13/30] pkcs15-tcos: Check number of read bytes for cert
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs11/15
-+---
-+ src/libopensc/pkcs15-tcos.c | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/libopensc/pkcs15-tcos.c b/src/libopensc/pkcs15-tcos.c
-+index a84001e122..4d02a98ee1 100644
-+--- a/src/libopensc/pkcs15-tcos.c
-++++ b/src/libopensc/pkcs15-tcos.c
-+@@ -62,7 +62,8 @@ static int insert_cert(
-+ 			"Select(%s) failed\n", path);
-+ 		return 1;
-+ 	}
-+-	if(sc_read_binary(card, 0, cert, sizeof(cert), 0)<0){
-++	r = sc_read_binary(card, 0, cert, sizeof(cert), 0);
-++	if (r <= 0){
-+ 		sc_log(ctx, 
-+ 			"ReadBinary(%s) failed\n", path);
-+ 		return 2;
-+
-+From 74d42f32fd6f96f190ee7dd188f873115dcb5af2 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Tue, 16 Jul 2024 14:29:01 +0200
-+Subject: [PATCH 14/30] cardos: Return error when response length is 0
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs11/18
-+---
-+ src/libopensc/card-cardos.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/libopensc/card-cardos.c b/src/libopensc/card-cardos.c
-+index a0e2322478..124752d78b 100644
-+--- a/src/libopensc/card-cardos.c
-++++ b/src/libopensc/card-cardos.c
-+@@ -1281,7 +1281,7 @@ cardos_lifecycle_get(sc_card_t *card, int *mode)
-+ 	LOG_TEST_RET(card->ctx, r, "Card returned error");
-+ 
-+ 	if (apdu.resplen < 1) {
-+-		LOG_TEST_RET(card->ctx, r, "Lifecycle byte not in response");
-++		LOG_TEST_RET(card->ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED, "Lifecycle byte not in response");
-+ 	}
-+ 
-+ 	r = SC_SUCCESS;
-+
-+From 2e6333f2024765bbd0e384cadce6d6c6496339a2 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Tue, 16 Jul 2024 15:51:51 +0200
-+Subject: [PATCH 15/30] card-piv: Initialize variables for tag and CLA
-+
-+In case they are not later initialize later by
-+sc_asn1_read_tag() function.
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs11/21
-+---
-+ src/libopensc/card-piv.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/libopensc/card-piv.c b/src/libopensc/card-piv.c
-+index f4eafe47a4..034635d898 100644
-+--- a/src/libopensc/card-piv.c
-++++ b/src/libopensc/card-piv.c
-+@@ -4428,7 +4428,7 @@ static int piv_get_challenge(sc_card_t *card, u8 *rnd, size_t len)
-+ 	const u8 *p;
-+ 	size_t out_len = 0;
-+ 	int r;
-+-	unsigned int tag_out, cla_out;
-++	unsigned int tag_out = 0, cla_out = 0;
-+ 	piv_private_data_t * priv = PIV_DATA(card);
-+ 
-+ 	LOG_FUNC_CALLED(card->ctx);
-+
-+From 95815e45fb9f764d6e820a287ebc242e5a3155ec Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Tue, 16 Jul 2024 16:32:45 +0200
-+Subject: [PATCH 16/30] pkcs15-sc-hsm: Initialize variables for tag and CLA
-+
-+In case they are not later initialize later by
-+sc_asn1_read_tag() function.
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs15_crypt/12
-+---
-+ src/libopensc/pkcs15-sc-hsm.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/libopensc/pkcs15-sc-hsm.c b/src/libopensc/pkcs15-sc-hsm.c
-+index 315cd74482..acdbee7054 100644
-+--- a/src/libopensc/pkcs15-sc-hsm.c
-++++ b/src/libopensc/pkcs15-sc-hsm.c
-+@@ -386,7 +386,7 @@ int sc_pkcs15emu_sc_hsm_decode_cvc(sc_pkcs15_card_t * p15card,
-+ 	struct sc_asn1_entry asn1_cvcert[C_ASN1_CVCERT_SIZE];
-+ 	struct sc_asn1_entry asn1_cvc_body[C_ASN1_CVC_BODY_SIZE];
-+ 	struct sc_asn1_entry asn1_cvc_pubkey[C_ASN1_CVC_PUBKEY_SIZE];
-+-	unsigned int cla,tag;
-++	unsigned int cla = 0, tag = 0;
-+ 	size_t taglen;
-+ 	const u8 *tbuf;
-+ 	int r;
-+
-+From 16e0af0a310e4f611b88ea29ec53e02928d5ba35 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Wed, 17 Jul 2024 09:15:43 +0200
-+Subject: [PATCH 17/30] pkcs15-gemsafeV1: Check length of buffer for object
-+
-+Number of actually read bytes may differ from
-+the stated object length.
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs15_crypt/15
-+---
-+ src/libopensc/pkcs15-gemsafeV1.c | 20 +++++++++++++++-----
-+ 1 file changed, 15 insertions(+), 5 deletions(-)
-+
-+diff --git a/src/libopensc/pkcs15-gemsafeV1.c b/src/libopensc/pkcs15-gemsafeV1.c
-+index 25140503fa..9fb8956fe9 100644
-+--- a/src/libopensc/pkcs15-gemsafeV1.c
-++++ b/src/libopensc/pkcs15-gemsafeV1.c
-+@@ -169,6 +169,7 @@ static int gemsafe_get_cert_len(sc_card_t *card)
-+ 	size_t objlen;
-+ 	int certlen;
-+ 	unsigned int ind, i=0;
-++	int read_len;
-+ 
-+ 	sc_format_path(GEMSAFE_PATH, &path);
-+ 	r = sc_select_file(card, &path, &file);
-+@@ -177,9 +178,11 @@ static int gemsafe_get_cert_len(sc_card_t *card)
-+ 	sc_file_free(file);
-+ 
-+ 	/* Initial read */
-+-	r = sc_read_binary(card, 0, ibuf, GEMSAFE_READ_QUANTUM, 0);
-+-	if (r < 0)
-++	read_len = sc_read_binary(card, 0, ibuf, GEMSAFE_READ_QUANTUM, 0);
-++	if (read_len <= 2) {
-++		sc_log(card->ctx, "Invalid size of object data: %d", read_len);
-+ 		return SC_ERROR_INTERNAL;
-++	}
-+ 
-+ 	/* Actual stored object size is encoded in first 2 bytes
-+ 	 * (allocated EF space is much greater!)
-+@@ -208,7 +211,7 @@ static int gemsafe_get_cert_len(sc_card_t *card)
-+ 	 * the private key.
-+ 	 */
-+ 	ind = 2; /* skip length */
-+-	while (ibuf[ind] == 0x01 && i < gemsafe_cert_max) {
-++	while (ind + 1 < (size_t)read_len && ibuf[ind] == 0x01 && i < gemsafe_cert_max) {
-+ 		if (ibuf[ind+1] == 0xFE) {
-+ 			gemsafe_prkeys[i].ref = ibuf[ind+4];
-+ 			sc_log(card->ctx, "Key container %d is allocated and uses key_ref %d",
-+@@ -235,7 +238,7 @@ static int gemsafe_get_cert_len(sc_card_t *card)
-+ 	/* Read entire file, then dissect in memory.
-+ 	 * Gemalto ClassicClient seems to do it the same way.
-+ 	 */
-+-	iptr = ibuf + GEMSAFE_READ_QUANTUM;
-++	iptr = ibuf + read_len;
-+ 	while ((size_t)(iptr - ibuf) < objlen) {
-+ 		r = sc_read_binary(card, (unsigned)(iptr - ibuf), iptr,
-+ 				   MIN(GEMSAFE_READ_QUANTUM, objlen - (iptr - ibuf)), 0);
-+@@ -243,7 +246,14 @@ static int gemsafe_get_cert_len(sc_card_t *card)
-+ 			sc_log(card->ctx, "Could not read cert object");
-+ 			return SC_ERROR_INTERNAL;
-+ 		}
-+-		iptr += GEMSAFE_READ_QUANTUM;
-++		if (r == 0)
-++			break;
-++		read_len += r;
-++		iptr += r;
-++	}
-++	if ((size_t)read_len < objlen) {
-++		sc_log(card->ctx, "Could not read cert object");
-++		return SC_ERROR_INTERNAL;
-+ 	}
-+ 
-+ 	/* Search buffer for certificates, they start with 0x3082. */
-+
-+From 5aad7762d144a39ef11bd6f0881fc7e992161bb5 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Wed, 17 Jul 2024 10:39:52 +0200
-+Subject: [PATCH 18/30] card-jpki: Check number of read bytes
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs15_encode/18
-+---
-+ src/libopensc/card-jpki.c | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/src/libopensc/card-jpki.c b/src/libopensc/card-jpki.c
-+index 6e4d0f3165..71339491d1 100644
-+--- a/src/libopensc/card-jpki.c
-++++ b/src/libopensc/card-jpki.c
-+@@ -195,6 +195,8 @@ jpki_select_file(struct sc_card *card,
-+ 		u8 buf[4];
-+ 		rc = sc_read_binary(card, 0, buf, 4, 0);
-+ 		LOG_TEST_RET(card->ctx, rc, "SW Check failed");
-++		if (rc < 4)
-++			LOG_TEST_RET(card->ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED, "Received data too short");
-+ 		file = sc_file_new();
-+ 		if (!file) {
-+ 			LOG_FUNC_RETURN(card->ctx, SC_ERROR_OUT_OF_MEMORY);
-+
-+From 535e9d62f94b496bb5214edf0ee6f431ae6d94cb Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Wed, 17 Jul 2024 11:18:52 +0200
-+Subject: [PATCH 19/30] pkcs15-tcos: Check return value of serial num
-+ conversion
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs15_encode/21
-+---
-+ src/libopensc/pkcs15-tcos.c | 9 +++++++--
-+ 1 file changed, 7 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/libopensc/pkcs15-tcos.c b/src/libopensc/pkcs15-tcos.c
-+index 4d02a98ee1..2bd275c4f4 100644
-+--- a/src/libopensc/pkcs15-tcos.c
-++++ b/src/libopensc/pkcs15-tcos.c
-+@@ -531,10 +531,15 @@ int sc_pkcs15emu_tcos_init_ex(
-+ 	/* get the card serial number */
-+ 	r = sc_card_ctl(card, SC_CARDCTL_GET_SERIALNR, &serialnr);
-+ 	if (r < 0) {
-+-		sc_log(ctx,  "unable to get ICCSN\n");
-++		sc_log(ctx, "unable to get ICCSN");
-+ 		return SC_ERROR_WRONG_CARD;
-+ 	}
-+-	sc_bin_to_hex(serialnr.value, serialnr.len , serial, sizeof(serial), 0);
-++	r = sc_bin_to_hex(serialnr.value, serialnr.len, serial, sizeof(serial), 0);
-++	if (r != SC_SUCCESS) {
-++		sc_log(ctx, "serial number invalid");
-++		return SC_ERROR_INTERNAL;
-++	}
-++
-+ 	serial[19] = '\0';
-+ 	set_string(&p15card->tokeninfo->serial_number, serial);
-+ 
-+
-+From 230a783a0476ef1b387818ba5dd9c1c73978744f Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Wed, 17 Jul 2024 12:53:52 +0200
-+Subject: [PATCH 20/30] pkcs15-tcos: Check certificate length before accessing
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs15_encode/8
-+---
-+ src/libopensc/pkcs15-tcos.c | 35 +++++++++++++++++++++--------------
-+ 1 file changed, 21 insertions(+), 14 deletions(-)
-+
-+diff --git a/src/libopensc/pkcs15-tcos.c b/src/libopensc/pkcs15-tcos.c
-+index 2bd275c4f4..ecaa66edf2 100644
-+--- a/src/libopensc/pkcs15-tcos.c
-++++ b/src/libopensc/pkcs15-tcos.c
-+@@ -45,6 +45,7 @@ static int insert_cert(
-+ 	struct sc_pkcs15_cert_info cert_info;
-+ 	struct sc_pkcs15_object cert_obj;
-+ 	unsigned char cert[20];
-++	size_t cert_len = 0;
-+ 	int r;
-+ 
-+ 	memset(&cert_info, 0, sizeof(cert_info));
-+@@ -57,25 +58,31 @@ static int insert_cert(
-+ 	strlcpy(cert_obj.label, label, sizeof(cert_obj.label));
-+ 	cert_obj.flags = writable ? SC_PKCS15_CO_FLAG_MODIFIABLE : 0;
-+ 
-+-	if(sc_select_file(card, &cert_info.path, NULL)!=SC_SUCCESS){
-+-		sc_log(ctx, 
-+-			"Select(%s) failed\n", path);
-++	if (sc_select_file(card, &cert_info.path, NULL) != SC_SUCCESS) {
-++		sc_log(ctx, "Select(%s) failed", path);
-+ 		return 1;
-+ 	}
-+ 	r = sc_read_binary(card, 0, cert, sizeof(cert), 0);
-+-	if (r <= 0){
-+-		sc_log(ctx, 
-+-			"ReadBinary(%s) failed\n", path);
-++	if (r <= 0) {
-++		sc_log(ctx, "ReadBinary(%s) failed\n", path);
-+ 		return 2;
-+ 	}
-+-	if(cert[0]!=0x30 || cert[1]!=0x82){
-+-		sc_log(ctx, 
-+-			"Invalid Cert: %02X:%02X:...\n", cert[0], cert[1]);
-++	cert_len = r; /* actual number of read bytes */
-++	if (cert_len < 7 || (size_t)(7 + cert[5]) > cert_len) {
-++		sc_log(ctx, "Invalid certificate length");
-++		return 3;
-++	}
-++	if (cert[0] != 0x30 || cert[1] != 0x82) {
-++		sc_log(ctx, "Invalid Cert: %02X:%02X:...\n", cert[0], cert[1]);
-+ 		return 3;
-+ 	}
-+ 
-+ 	/* some certificates are prefixed by an OID */
-+-	if(cert[4]==0x06 && cert[5]<10 && cert[6+cert[5]]==0x30 && cert[7+cert[5]]==0x82){
-++	if (cert[4] == 0x06 && cert[5] < 10 && cert[6 + cert[5]] == 0x30 && cert[7 + cert[5]] == 0x82) {
-++		if ((size_t)(9 + cert[5]) > cert_len) {
-++			sc_log(ctx, "Invalid certificate length");
-++			return 3;
-++		}
-+ 		cert_info.path.index=6+cert[5];
-+ 		cert_info.path.count=(cert[8+cert[5]]<<8) + cert[9+cert[5]] + 4;
-+ 	} else {
-+@@ -83,12 +90,12 @@ static int insert_cert(
-+ 		cert_info.path.count=(cert[2]<<8) + cert[3] + 4;
-+ 	}
-+ 
-+-	r=sc_pkcs15emu_add_x509_cert(p15card, &cert_obj, &cert_info);
-+-	if(r!=SC_SUCCESS){
-+-		sc_log(ctx,  "sc_pkcs15emu_add_x509_cert(%s) failed\n", path);
-++	r = sc_pkcs15emu_add_x509_cert(p15card, &cert_obj, &cert_info);
-++	if (r != SC_SUCCESS) {
-++		sc_log(ctx, "sc_pkcs15emu_add_x509_cert(%s) failed", path);
-+ 		return 4;
-+ 	}
-+-	sc_log(ctx,  "%s: OK, Index=%d, Count=%d\n", path, cert_info.path.index, cert_info.path.count);
-++	sc_log(ctx, "%s: OK, Index=%d, Count=%d", path, cert_info.path.index, cert_info.path.count);
-+ 	return 0;
-+ }
-+ 
-+
-+From afb1bba4f1966a5b78fdba44b6e7c4dd115cfb29 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Wed, 17 Jul 2024 14:56:22 +0200
-+Subject: [PATCH 21/30] pkcs15-lib: Report transport key error
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs15init/17, fuzz_pkcs15init/18
-+---
-+ src/pkcs15init/pkcs15-lib.c | 6 ++++--
-+ 1 file changed, 4 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/pkcs15init/pkcs15-lib.c b/src/pkcs15init/pkcs15-lib.c
-+index 6574e8025d..943d53e987 100644
-+--- a/src/pkcs15init/pkcs15-lib.c
-++++ b/src/pkcs15init/pkcs15-lib.c
-+@@ -3831,13 +3831,15 @@ sc_pkcs15init_get_transport_key(struct sc_profile *profile, struct sc_pkcs15_car
-+ 	if (callbacks.get_key)   {
-+ 		rv = callbacks.get_key(profile, type, reference, defbuf, defsize, pinbuf, pinsize);
-+ 		LOG_TEST_RET(ctx, rv, "Cannot get key");
-+-	}
-+-	else if (rv >= 0)  {
-++	} else if (rv >= 0) {
-+ 		if (*pinsize < defsize)
-+ 			LOG_TEST_RET(ctx, SC_ERROR_BUFFER_TOO_SMALL, "Get transport key error");
-+ 
-+ 		memcpy(pinbuf, data.key_data, data.len);
-+ 		*pinsize = data.len;
-++	} else {
-++		/* pinbuf and pinsize were not filled */
-++		LOG_TEST_RET(ctx, SC_ERROR_INTERNAL, "Get transport key error");
-+ 	}
-+ 
-+ 	memset(&auth_info, 0, sizeof(auth_info));
-+
-+From 60f08c6fca2f87f30480589d00922599c8189555 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Thu, 18 Jul 2024 09:23:20 +0200
-+Subject: [PATCH 22/30] pkcs15-starcos: Check length of file to be non-zero
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs15init/20
-+---
-+ src/pkcs15init/pkcs15-starcos.c | 4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/pkcs15init/pkcs15-starcos.c b/src/pkcs15init/pkcs15-starcos.c
-+index bde7413a46..267ad2b04a 100644
-+--- a/src/pkcs15init/pkcs15-starcos.c
-++++ b/src/pkcs15init/pkcs15-starcos.c
-+@@ -670,6 +670,8 @@ static int starcos_write_pukey(sc_profile_t *profile, sc_card_t *card,
-+ 		return r;
-+ 	len = tfile->size;
-+ 	sc_file_free(tfile);
-++	if (len == 0)
-++		return SC_ERROR_INTERNAL;
-+ 	buf = malloc(len);
-+ 	if (!buf)
-+ 		return SC_ERROR_OUT_OF_MEMORY;
-+@@ -684,7 +686,7 @@ static int starcos_write_pukey(sc_profile_t *profile, sc_card_t *card,
-+ 	if (num_keys == 0xff)
-+ 		num_keys = 0;
-+ 	/* encode public key */
-+-	keylen  = starcos_encode_pukey(rsa, NULL, kinfo);
-++	keylen = starcos_encode_pukey(rsa, NULL, kinfo);
-+ 	if (!keylen) {
-+ 		free(buf);
-+ 		return SC_ERROR_INTERNAL;
-+
-+From 513d3fdeed6b07f05c8d3bf9532d0b54dcbc3488 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Thu, 18 Jul 2024 09:35:23 +0200
-+Subject: [PATCH 23/30] iasecc-sdo: Check length of data before dereferencing
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs15init/21
-+---
-+ src/libopensc/iasecc-sdo.c | 3 +++
-+ 1 file changed, 3 insertions(+)
-+
-+diff --git a/src/libopensc/iasecc-sdo.c b/src/libopensc/iasecc-sdo.c
-+index 417b6dd57d..98402a4e3f 100644
-+--- a/src/libopensc/iasecc-sdo.c
-++++ b/src/libopensc/iasecc-sdo.c
-+@@ -760,6 +760,9 @@ iasecc_sdo_parse(struct sc_card *card, unsigned char *data, size_t data_len, str
-+ 
-+ 	LOG_FUNC_CALLED(ctx);
-+ 
-++	if (data == NULL || data_len < 2)
-++		LOG_FUNC_RETURN(ctx, SC_ERROR_INVALID_DATA);
-++
-+ 	if (*data == IASECC_SDO_TEMPLATE_TAG)   {
-+ 		size_size = iasecc_parse_size(data + 1, data_len - 1, &size);
-+ 		LOG_TEST_RET(ctx, size_size, "parse error: invalid size data of IASECC_SDO_TEMPLATE");
-+
-+From b1cdaf4b820d6ba6e3f42acd289ef3e6540bb9f3 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Thu, 18 Jul 2024 15:39:15 +0200
-+Subject: [PATCH 24/30] card-oberthur: Check length of serial number
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs11/1, fuzz_pkcs15init/2
-+---
-+ src/libopensc/card-oberthur.c | 5 ++++-
-+ 1 file changed, 4 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/libopensc/card-oberthur.c b/src/libopensc/card-oberthur.c
-+index f344d5901f..5920c2c417 100644
-+--- a/src/libopensc/card-oberthur.c
-++++ b/src/libopensc/card-oberthur.c
-+@@ -145,7 +145,7 @@ auth_select_aid(struct sc_card *card)
-+ {
-+ 	struct sc_apdu apdu;
-+ 	unsigned char apdu_resp[SC_MAX_APDU_BUFFER_SIZE];
-+-	struct auth_private_data *data =  (struct auth_private_data *) card->drv_data;
-++	struct auth_private_data *data = (struct auth_private_data *)card->drv_data;
-+ 	int rv, ii;
-+ 	struct sc_path tmp_path;
-+ 
-+@@ -162,6 +162,9 @@ auth_select_aid(struct sc_card *card)
-+ 
-+ 	rv = sc_transmit_apdu(card, &apdu);
-+ 	LOG_TEST_RET(card->ctx, rv, "APDU transmit failed");
-++	if (apdu.resplen < 20) {
-++		LOG_TEST_RET(card->ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED, "Serial number has incorrect length");
-++	}
-+ 	card->serialnr.len = 4;
-+ 	memcpy(card->serialnr.value, apdu.resp+15, 4);
-+ 
-+
-+From 67064f41b5dd0947a7fcbc78b7c46d35439c6458 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Thu, 18 Jul 2024 10:16:39 +0200
-+Subject: [PATCH 25/30] pkcs15-setcos: Check length of generated key
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs15init/26
-+---
-+ src/pkcs15init/pkcs15-setcos.c | 5 ++++-
-+ 1 file changed, 4 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/pkcs15init/pkcs15-setcos.c b/src/pkcs15init/pkcs15-setcos.c
-+index a445513901..6525541f5a 100644
-+--- a/src/pkcs15init/pkcs15-setcos.c
-++++ b/src/pkcs15init/pkcs15-setcos.c
-+@@ -507,6 +507,9 @@ setcos_generate_key(struct sc_profile *profile, struct sc_pkcs15_card *p15card,
-+ 		r = sc_card_ctl(p15card->card, SC_CARDCTL_SETCOS_GETDATA, &data_obj);
-+ 		LOG_TEST_RET(ctx, r, "Cannot get key modulus: 'SETCOS_GETDATA' failed");
-+ 
-++		if (data_obj.DataLen < 3 || data_obj.DataLen < pubkey->u.rsa.modulus.len)
-++			LOG_TEST_RET(ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED, "Cannot get key modulus: wrong length of raw key");
-++
-+ 		keybits = ((raw_pubkey[0] * 256) + raw_pubkey[1]);  /* modulus bit length */
-+ 		if (keybits != key_info->modulus_length)  {
-+ 			sc_log(ctx,
-+@@ -514,7 +517,7 @@ setcos_generate_key(struct sc_profile *profile, struct sc_pkcs15_card *p15card,
-+ 				 keybits, key_info->modulus_length);
-+ 			LOG_TEST_RET(ctx, SC_ERROR_PKCS15INIT, "Failed to generate key");
-+ 		}
-+-		memcpy (pubkey->u.rsa.modulus.data, &raw_pubkey[2], pubkey->u.rsa.modulus.len);
-++		memcpy(pubkey->u.rsa.modulus.data, &raw_pubkey[2], pubkey->u.rsa.modulus.len);
-+ 	} else {
-+ 		sc_file_free(file);
-+ 	}
-+
-+From c911e5fca9184b16f94669ca0fa5227aaf0b590e Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Thu, 18 Jul 2024 11:03:46 +0200
-+Subject: [PATCH 26/30] iasecc-sdo: Check length of data when parsing
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs15init/27,29
-+---
-+ src/libopensc/iasecc-sdo.c | 9 +++++++++
-+ 1 file changed, 9 insertions(+)
-+
-+diff --git a/src/libopensc/iasecc-sdo.c b/src/libopensc/iasecc-sdo.c
-+index 98402a4e3f..dbd5b9f08c 100644
-+--- a/src/libopensc/iasecc-sdo.c
-++++ b/src/libopensc/iasecc-sdo.c
-+@@ -318,16 +318,25 @@ iasecc_se_parse(struct sc_card *card, unsigned char *data, size_t data_len, stru
-+ 
-+ 	LOG_FUNC_CALLED(ctx);
-+ 
-++	if (data_len < 1)
-++		LOG_FUNC_RETURN(ctx, SC_ERROR_INVALID_DATA);
-++
-+ 	if (*data == IASECC_SDO_TEMPLATE_TAG)   {
-+ 		size_size = iasecc_parse_size(data + 1, data_len - 1, &size);
-+ 		LOG_TEST_RET(ctx, size_size, "parse error: invalid size data of IASECC_SDO_TEMPLATE");
-+ 
-++		if (data_len - 1 < size)
-++			LOG_FUNC_RETURN(ctx, SC_ERROR_INVALID_DATA);
-++
-+ 		data += size_size + 1;
-+ 		data_len = size;
-+ 		sc_log(ctx,
-+ 		       "IASECC_SDO_TEMPLATE: size %"SC_FORMAT_LEN_SIZE_T"u, size_size %d",
-+ 		       size, size_size);
-+ 
-++		if (data_len < 3)
-++			LOG_FUNC_RETURN(ctx, SC_ERROR_INVALID_DATA);
-++
-+ 		if (*data != IASECC_SDO_TAG_HEADER)
-+ 			LOG_FUNC_RETURN(ctx, SC_ERROR_INVALID_DATA);
-+ 
-+
-+From 755448b802a3631724eaf9a3cdece327afd127b7 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Thu, 18 Jul 2024 11:38:25 +0200
-+Subject: [PATCH 27/30] pkcs15-sc-hsm: Properly check length of file list
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs15init/8
-+---
-+ src/pkcs15init/pkcs15-sc-hsm.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/pkcs15init/pkcs15-sc-hsm.c b/src/pkcs15init/pkcs15-sc-hsm.c
-+index 71f96cfc56..db1a2b518f 100644
-+--- a/src/pkcs15init/pkcs15-sc-hsm.c
-++++ b/src/pkcs15init/pkcs15-sc-hsm.c
-+@@ -140,7 +140,7 @@ static int sc_hsm_determine_free_id(struct sc_pkcs15_card *p15card, u8 range)
-+ 	LOG_TEST_RET(card->ctx, filelistlength, "Could not enumerate file and key identifier");
-+ 
-+ 	for (j = 0; j < 256; j++) {
-+-		for (i = 0; i < filelistlength; i += 2) {
-++		for (i = 0; i + 1 < filelistlength; i += 2) {
-+ 			if ((filelist[i] == range) && (filelist[i + 1] == j)) {
-+ 				break;
-+ 			}
-+
-+From 9c8c25a82e1ef4b26a1828e430f6efe07f002b8c Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Thu, 18 Jul 2024 12:33:31 +0200
-+Subject: [PATCH 28/30] card-coolkey: Check length of buffer before conversion
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs15_reader/3
-+---
-+ src/libopensc/card-coolkey.c | 11 ++++++++---
-+ 1 file changed, 8 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/libopensc/card-coolkey.c b/src/libopensc/card-coolkey.c
-+index 9192aac092..5d547bc960 100644
-+--- a/src/libopensc/card-coolkey.c
-++++ b/src/libopensc/card-coolkey.c
-+@@ -1688,6 +1688,7 @@ static int coolkey_rsa_op(sc_card_t *card, const u8 * data, size_t datalen,
-+ 	u8 key_number;
-+ 	size_t params_len;
-+ 	u8 buf[MAX_COMPUTE_BUF + 2];
-++	size_t buf_len;
-+ 	u8 *buf_out;
-+ 
-+ 	SC_FUNC_CALLED(card->ctx, SC_LOG_DEBUG_VERBOSE);
-+@@ -1728,8 +1729,6 @@ static int coolkey_rsa_op(sc_card_t *card, const u8 * data, size_t datalen,
-+ 		ushort2bebytes(params.init.buf_len, 0);
-+ 	} else {
-+ 		/* The data fits in APDU. Copy it to the params object */
-+-		size_t buf_len;
-+-
-+ 		params.init.location = COOLKEY_CRYPT_LOCATION_APDU;
-+ 
-+ 		params_len = sizeof(params.init) + datalen;
-+@@ -1749,6 +1748,7 @@ static int coolkey_rsa_op(sc_card_t *card, const u8 * data, size_t datalen,
-+ 	if (r < 0) {
-+ 		goto done;
-+ 	}
-++	buf_len = crypt_out_len_p;
-+ 
-+ 	if (datalen > MAX_COMPUTE_BUF) {
-+ 		u8 len_buf[2];
-+@@ -1767,7 +1767,12 @@ static int coolkey_rsa_op(sc_card_t *card, const u8 * data, size_t datalen,
-+ 					priv->nonce, sizeof(priv->nonce));
-+ 
-+ 	} else {
-+-		size_t out_length = bebytes2ushort(buf);
-++		size_t out_length;
-++		if (buf_len < 2) {
-++			r = SC_ERROR_WRONG_LENGTH;
-++			goto done;
-++		}
-++		out_length = bebytes2ushort(buf);
-+ 		if (out_length > sizeof buf - 2) {
-+ 			r = SC_ERROR_WRONG_LENGTH;
-+ 			goto done;
-+
-+From b6754eb3b279505c6d4f09cfa1c77dcad9420468 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Tue, 23 Jul 2024 10:48:32 +0200
-+Subject: [PATCH 29/30] card-entersafe: Check length of serial number
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs15_reader/5
-+---
-+ src/libopensc/card-entersafe.c | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/src/libopensc/card-entersafe.c b/src/libopensc/card-entersafe.c
-+index 5f6d8a424d..025ebedc91 100644
-+--- a/src/libopensc/card-entersafe.c
-++++ b/src/libopensc/card-entersafe.c
-+@@ -1479,6 +1479,8 @@ static int entersafe_get_serialnr(sc_car
-+ 	r=entersafe_transmit_apdu(card, &apdu,0,0,0,0);
-+ 	LOG_TEST_RET(card->ctx, r, "APDU transmit failed");
-+ 	LOG_TEST_RET(card->ctx, sc_check_sw(card,apdu.sw1,apdu.sw2),"EnterSafe get SN failed");
-++        if (apdu.resplen != 8)
-++                LOG_TEST_RET(card->ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED, "Invalid length of SN");
-+ 
-+ 	card->serialnr.len=serial->len=8;
-+ 	memcpy(card->serialnr.value,rbuf,8);
-+
-+From ab476044a009003262991c065b792baa053c7be5 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Thu, 1 Aug 2024 10:32:40 +0200
-+Subject: [PATCH 30/30] card-cardos: Check length of APDU response
-+
-+---
-+ src/libopensc/card-cardos.c | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
-+
-+diff --git a/src/libopensc/card-cardos.c b/src/libopensc/card-cardos.c
-+index 124752d78b..595ec099e3 100644
-+--- a/src/libopensc/card-cardos.c
-++++ b/src/libopensc/card-cardos.c
-+@@ -94,7 +94,7 @@ static void fixup_transceive_length(const struct sc_card *card,
-+ 
-+ static int cardos_match_card(sc_card_t *card)
-+ {
-+-	unsigned char atr[SC_MAX_ATR_SIZE] = { 0 };
-++	unsigned char atr[SC_MAX_ATR_SIZE] = {0};
-+ 	int i;
-+ 
-+ 	i = _sc_match_atr(card, cardos_atrs, &card->type);
-+@@ -114,8 +114,8 @@ static int cardos_match_card(sc_card_t *card)
-+ 		return 1;
-+ 	if (card->type == SC_CARD_TYPE_CARDOS_M4_2) {
-+ 		int rv;
-+-		sc_apdu_t apdu = { 0 };
-+-		u8 rbuf[SC_MAX_APDU_BUFFER_SIZE] = { 0 };
-++		sc_apdu_t apdu = {0};
-++		u8 rbuf[SC_MAX_APDU_BUFFER_SIZE] = {0};
-+ 		/* first check some additional ATR bytes */
-+ 		if ((atr[4] != 0xff && atr[4] != 0x02) ||
-+ 		    (atr[6] != 0x10 && atr[6] != 0x0a) ||
-+@@ -131,7 +131,7 @@ static int cardos_match_card(sc_card_t *card)
-+ 		apdu.lc = 0;
-+ 		rv = sc_transmit_apdu(card, &apdu);
-+ 		LOG_TEST_RET(card->ctx, rv, "APDU transmit failed");
-+-		if (apdu.sw1 != 0x90 || apdu.sw2 != 0x00)
-++		if (apdu.sw1 != 0x90 || apdu.sw2 != 0x00 || apdu.resplen < 2)
-+ 			return 0;
-+ 		if (apdu.resp[0] != atr[10] ||
-+ 		    apdu.resp[1] != atr[11])
-diff --git a/meta-oe/recipes-support/opensc/opensc_0.25.1.bb b/meta-oe/recipes-support/opensc/opensc_0.25.1.bb
-index 19fb78092..74738247b 100644
---- a/meta-oe/recipes-support/opensc/opensc_0.25.1.bb
-+++ b/meta-oe/recipes-support/opensc/opensc_0.25.1.bb
-@@ -13,7 +13,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cb8aedd3bced19bd8026d96a8b6876d7"
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.6.10.bb b/meta-networking/recipes-support/openvpn/openvpn_2.6.12.bb
+similarity index 97%
+rename from meta-networking/recipes-support/openvpn/openvpn_2.6.10.bb
+rename to meta-networking/recipes-support/openvpn/openvpn_2.6.12.bb
+index f8de78ff74fd..af237280ea0d 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.6.10.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.6.12.bb
+@@ -14,7 +14,7 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
  
- #v0.21.0
- SRCREV = "0a4b772d6fdab9bfaaa3123775a48a7cb6c5e7c6"
--SRC_URI = "git://github.com/OpenSC/OpenSC;branch=stable-0.25;protocol=https"
-+SRC_URI = "git://github.com/OpenSC/OpenSC;branch=stable-0.25;protocol=https \
-+           file://0001-PR-Fixes-for-uninitialized-memory-issues.patch \
-+         "
- DEPENDS = "virtual/libiconv openssl"
+ UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
  
- S = "${WORKDIR}/git"
+-SRC_URI[sha256sum] = "1993bbb7b9edb430626eaa24573f881fd3df642f427fcb824b1aed1fca1bcc9b"
++SRC_URI[sha256sum] = "1c610fddeb686e34f1367c347e027e418e07523a10f4d8ce4a2c2af2f61a1929"
+ 
+ CVE_STATUS[CVE-2020-27569] = "not-applicable-config: Applies only Aviatrix OpenVPN client, not openvpn"
+ 
 -- 
 2.34.1
 
