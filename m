@@ -1,166 +1,87 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <soumya.sambu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 03A83D41C13
-	for <webhook@archiver.kernel.org>; Wed, 13 Nov 2024 08:09:50 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.web11.6914.1731485383648351754
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FA3FD41C19
+	for <webhook@archiver.kernel.org>; Wed, 13 Nov 2024 08:37:20 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.7279.1731487034418398627
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Nov 2024 00:09:43 -0800
+ Wed, 13 Nov 2024 00:37:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GF0p4fQP;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4314c452180so2389165e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 13 Nov 2024 00:09:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1731485382; x=1732090182; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=lyBTNLwcHpNWBN37Q/eFMHUs9zAXTRw6Ajctx8XikWs=;
-        b=GF0p4fQPGG+TQuekaGpQ2ijqrV/65l/rPFEabMY7qbB3OSNwID0q2oiKpNKEMG5hPO
-         FcgXFHLT1FLm4Iu7SqPwFtJh1qQL5vN7PEGJU4623vuaJ9A7DsEiQxm79nRKcHNpNUPO
-         QCPAjFiXkIh8KSnO4FuvUEqff1sBQ/zD2yxKVzS9k7Za+KurDLPiHDTovxIq9eQIc0l/
-         No2ADh098MToxVbFrfTQ3mpGWCX8qz59tf65cls8SeNsN+94Ee16yxz37fLqQjf7A3ip
-         f6qfYvYayYbM0CNSdN7fs+2jswqdI8x6CN1RVejqru1xkCtUDS57fq0ibSAirTafqPxz
-         99xw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1731485382; x=1732090182;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=lyBTNLwcHpNWBN37Q/eFMHUs9zAXTRw6Ajctx8XikWs=;
-        b=fmW+3jM5gbhIuPQLZDaIttrrpAAXFOY0sn+M1UDmTYchZ3cwSlCpQ+8/wZTRlkAZYn
-         BKOwKYU4xKYU1KfW6sFheZ+dlcOBQJ2BM2dYRR60JF/fWshCe2VLJLNHm9EOcR6Hhikw
-         OykNA9hK2Cwc6MnUUsP7GdCxMOt9HSJqZXYcIdGr+9gItLuGGPiy+QxxUo7sxFdqySsq
-         iCeLhVniIgy1LVMuOWJWFa8wjLUa+FJu5U3Eb2pq3JS8mGMcf8u81Lt3tXy6ShHd0kVZ
-         9OWCpCB4QvC5lkyJf5VmSPINZzJPQU/YcOkxSkUSULy3d6w65/mLNcDqvxsmJo6j4WzV
-         A6AQ==
-X-Gm-Message-State: AOJu0Yz72y2MDYOXiSJhwwOoc0BZyFEGK9YIcfPvW2iub4mbJJijYQDk
-	Bj1DNuPObv/OYvbYagMYM/6UuWPkJqB4fjVahQgUF7LQjQnjHdXaugy3RQ==
-X-Google-Smtp-Source: AGHT+IHqMXZHT25/iU/2zIcbLETwhtbO5DCdqWmZftEv7h2lOxPoBQNUn/1bpL0/KRp9X7HAwZi2Sw==
-X-Received: by 2002:a05:6000:4006:b0:37d:3baa:9f34 with SMTP id ffacd0b85a97d-381f1a6665cmr17239296f8f.1.1731485381399;
-        Wed, 13 Nov 2024 00:09:41 -0800 (PST)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-381eda137dbsm17340972f8f.110.2024.11.13.00.09.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 13 Nov 2024 00:09:40 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: akuster808@gmail.com,
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH] poco: use main instead of master branch
-Date: Wed, 13 Nov 2024 09:09:34 +0100
-Message-ID: <20241113080934.3741097-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.47.0
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=1047d8a9e1=soumya.sambu@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4AD5pSs6003032
+	for <openembedded-devel@lists.openembedded.org>; Wed, 13 Nov 2024 08:37:13 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 42uwv49rn4-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 13 Nov 2024 08:37:13 +0000 (GMT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Wed, 13 Nov 2024 00:37:12 -0800
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Wed, 13 Nov 2024 00:37:10 -0800
+From: ssambu <soumya.sambu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-python][PATCH 1/1] python3-werkzeug: upgrade 3.0.3 -> 3.0.6
+Date: Wed, 13 Nov 2024 08:37:07 +0000
+Message-ID: <20241113083707.932229-1-soumya.sambu@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: PPI8-utCiB8zaoOry2Z19NBfvCSK2a55
+X-Authority-Analysis: v=2.4 cv=Ke6AshYD c=1 sm=1 tr=0 ts=67346539 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=VlfZXiiP6vEA:10 a=t7CeM3EgAAAA:8 a=NEAV23lmAAAA:8 a=YPyeh4z1AAAA:8 a=1LiM2mn5wCEHQ-l7AnwA:9 a=FdTzh2GWekK77mhwV6Dw:22
+ a=w8JrRwqxyiy52LetAMdd:22
+X-Proofpoint-ORIG-GUID: PPI8-utCiB8zaoOry2Z19NBfvCSK2a55
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.62.30
+ definitions=2024-11-12_09,2024-11-12_02,2024-09-30_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 bulkscore=0
+ spamscore=0 mlxlogscore=999 priorityscore=1501 lowpriorityscore=0
+ suspectscore=0 mlxscore=0 impostorscore=0 clxscore=1015 adultscore=0
+ phishscore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2409260000 definitions=main-2411130075
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 Nov 2024 08:09:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113802
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 Nov 2024 08:37:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113803
 
-Branches used in langdale, mickledore, nanbield were re-written in upstream :(, fixes were sent to meta-oe:
-langdale: https://lists.openembedded.org/g/openembedded-devel/message/107533
-mickledore: https://lists.openembedded.org/g/openembedded-devel/message/107531
-merged in:
-https://git.openembedded.org/meta-openembedded/commit/?h=mickledore&id=b0d67900ae9e8911f734c25c0674fe55df8cd188
-nanbield: https://lists.openembedded.org/g/openembedded-devel/message/107532
-merged in:
-https://git.openembedded.org/meta-openembedded/commit/?h=nanbield&id=2da6e1b0e43a8993fd422fee3f83940100b59f4c
+From: Soumya Sambu <soumya.sambu@windriver.com>
 
-fix for langdale wasn't ever fixed because it was sent after langdale
-was already EOL, but looks like the version used in kirkstone got
-broken recently as well, because master branch was removed:
+Includes fix for CVE-2024-49767
 
-poco/1.11.2-r0/git $ git branch -a --contains 9d1c428c861f2e5ccf09149bbe8d2149720c5896
-* master
-...
-  remotes/origin/dev-task-test-diag
-  remotes/origin/devel
-  remotes/origin/feat/acceptor-service-handler-args
-  remotes/origin/fix/posix-sleep
-  remotes/origin/issue-templates
-  remotes/origin/master
-  remotes/origin/poco-1.12.0
-  remotes/origin/poco-1.12.1
-  remotes/origin/poco-1.12.2
-  remotes/origin/poco-1.12.3
-  remotes/origin/poco-1.12.4
-  remotes/origin/poco-1.12.5
-  remotes/origin/poco-1.12.6
-  remotes/origin/poco-1.9.5-not-released
-  remotes/origin/poll-closed-server-test
-  remotes/origin/upgrade-ci-actions-to-v3
+Changelog:
+==========
+https://github.com/pallets/werkzeug/blob/3.0.6/CHANGES.rst
 
-poco/1.11.2-r0/git $ git remote prune origin
-Pruning origin
-URL: https://github.com/pocoproject/poco.git
-...
- * [pruned] origin/android-ndk-action
- * [pruned] origin/develop
- * [pruned] origin/feat/wepoll
- * [pruned] origin/fix/PollSet-race
- * [pruned] origin/fix/swap-noexcept
- * [pruned] origin/master
- * [pruned] origin/poco-1.10.2
- * [pruned] origin/poco-1.9.5
- refs/remotes/origin/HEAD has become dangling!
-
-poco/1.11.2-r0/git $ git branch -a --contains 9d1c428c861f2e5ccf09149bbe8d2149720c5896
-* master
-...
-  remotes/origin/dev-task-test-diag
-  remotes/origin/devel
-  remotes/origin/discourage-using-configure-and-make
-  remotes/origin/feat/acceptor-service-handler-args
-  remotes/origin/feat/json-logging
-  remotes/origin/fix/posix-sleep
-  remotes/origin/issue-templates
-  remotes/origin/main
-  remotes/origin/master-pre-1.13.0
-  remotes/origin/master-unused
-  remotes/origin/openssl_fix
-  remotes/origin/poco-1.12.0
-  remotes/origin/poco-1.12.1
-  remotes/origin/poco-1.12.2
-  remotes/origin/poco-1.12.3
-  remotes/origin/poco-1.12.4
-  remotes/origin/poco-1.12.5
-  remotes/origin/poco-1.12.6
-  remotes/origin/poco-1.13.0
-  remotes/origin/poco-1.13.1
-  remotes/origin/poco-1.13.2
-  remotes/origin/poco-1.13.3
-  remotes/origin/poco-1.13.4
-  remotes/origin/poco-1.9.5-not-released
-  remotes/origin/poll-closed-server-test
-  remotes/origin/release-1.14-changelog-authors
-  remotes/origin/search-support
-  remotes/origin/upgrade-ci-actions-to-v3
-
-switch to main branch which is the most common and the least surprising.
-
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
 ---
- meta-oe/recipes-support/poco/poco_1.11.2.bb | 2 +-
+ .../{python3-werkzeug_3.0.3.bb => python3-werkzeug_3.0.6.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-werkzeug_3.0.3.bb => python3-werkzeug_3.0.6.bb} (90%)
 
-diff --git a/meta-oe/recipes-support/poco/poco_1.11.2.bb b/meta-oe/recipes-support/poco/poco_1.11.2.bb
-index 8694983e7c..ae8bbf87e4 100644
---- a/meta-oe/recipes-support/poco/poco_1.11.2.bb
-+++ b/meta-oe/recipes-support/poco/poco_1.11.2.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4267f48fc738f50380cbeeb76f95cebc"
- DEPENDS = "libpcre zlib"
+diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_3.0.3.bb b/meta-python/recipes-devtools/python/python3-werkzeug_3.0.6.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-werkzeug_3.0.3.bb
+rename to meta-python/recipes-devtools/python/python3-werkzeug_3.0.6.bb
+index a5e343bf2..5758830cb 100644
+--- a/meta-python/recipes-devtools/python/python3-werkzeug_3.0.3.bb
++++ b/meta-python/recipes-devtools/python/python3-werkzeug_3.0.6.bb
+@@ -10,7 +10,7 @@ HOMEPAGE = "https://werkzeug.palletsprojects.com"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5dc88300786f1c214c1e9827a5229462"
  
- SRC_URI = " \
--    git://github.com/pocoproject/poco.git;branch=master;protocol=https \
-+    git://github.com/pocoproject/poco.git;branch=main;protocol=https \
-     file://run-ptest \
-    "
- SRCREV = "9d1c428c861f2e5ccf09149bbe8d2149720c5896"
+-SRC_URI[sha256sum] = "097e5bfda9f0aba8da6b8545146def481d06aa7d3266e7448e2cccf67dd8bd18"
++SRC_URI[sha256sum] = "a8dd59d4de28ca70471a34cba79bed5f7ef2e036a76b3ab0835474246eb41f8d"
+ 
+ inherit pypi python_flit_core
+ 
 -- 
-2.47.0
+2.40.0
 
 
