@@ -2,64 +2,63 @@ Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF6BFD6A23F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BAD70D6A23D
 	for <webhook@archiver.kernel.org>; Thu, 14 Nov 2024 22:00:17 +0000 (UTC)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web10.6510.1731621615468643370
+ by mx.groups.io with SMTP id smtpd.web10.6506.1731621612903711636
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Nov 2024 14:00:15 -0800
+ Thu, 14 Nov 2024 14:00:13 -0800
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 178EE1474
-	for <openembedded-devel@lists.openembedded.org>; Thu, 14 Nov 2024 14:00:45 -0800 (PST)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 621381474
+	for <openembedded-devel@lists.openembedded.org>; Thu, 14 Nov 2024 14:00:42 -0800 (PST)
 Received: from cesw-amp-gbt-1s-m12830-04.oss.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id B878C3F66E
-	for <openembedded-devel@lists.openembedded.org>; Thu, 14 Nov 2024 14:00:14 -0800 (PST)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 0B0123F66E
+	for <openembedded-devel@lists.openembedded.org>; Thu, 14 Nov 2024 14:00:11 -0800 (PST)
 From: Ross Burton <ross.burton@arm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 05/21] python3-frozenlist: inherit cython class
-Date: Thu, 14 Nov 2024 21:59:53 +0000
-Message-Id: <20241114220009.737413-5-ross.burton@arm.com>
+Subject: [PATCH 01/21] blueman: inherit cython class
+Date: Thu, 14 Nov 2024 21:59:49 +0000
+Message-Id: <20241114220009.737413-1-ross.burton@arm.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241114220009.737413-1-ross.burton@arm.com>
-References: <20241114220009.737413-1-ross.burton@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 14 Nov 2024 22:00:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113828
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113824
 
 Use the new cython class to avoid duplicated fixup code to remove build
 paths.
 
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- .../recipes-devtools/python/python3-frozenlist_1.4.1.bb        | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-frozenlist_1.4.1=
-.bb b/meta-python/recipes-devtools/python/python3-frozenlist_1.4.1.bb
-index 4288f2922e..638bb20786 100644
---- a/meta-python/recipes-devtools/python/python3-frozenlist_1.4.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-frozenlist_1.4.1.bb
-@@ -5,11 +5,10 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dcf056e8e7a0a=
-5477451af18b7b5aa98c"
+diff --git a/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.b=
+b b/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb
+index e7f0987e0f..974c563299 100644
+--- a/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb
++++ b/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb
+@@ -2,9 +2,9 @@ DESCRIPTION =3D "Blueman is a GTK+ Bluetooth Manager"
+ LICENSE =3D "GPL-3.0-only"
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
+504"
 =20
- SRC_URI[sha256sum] =3D "c037a86e8513059a2613aaba4d817bb90b9d9b6b69aace3c=
-e9c877e8c8ed402b"
+-DEPENDS =3D "gtk+3 glib-2.0 bluez5 python3-pygobject python3-cython-nati=
+ve"
++DEPENDS =3D "gtk+3 glib-2.0 bluez5 python3-pygobject"
 =20
--inherit pypi python_setuptools_build_meta
-+inherit pypi python_setuptools_build_meta cython
+-inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon=
+-cache features_check python3targetconfig
++inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon=
+-cache features_check python3targetconfig cython
 =20
- DEPENDS +=3D " \
-     python3-expandvars-native \
--    python3-cython-native \
- "
+ REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
 =20
- BBCLASSEXTEND =3D "native nativesdk"
 --=20
 2.34.1
 
