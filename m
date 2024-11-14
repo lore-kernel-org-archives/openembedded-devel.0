@@ -2,25 +2,25 @@ Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CE032D6A240
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CC7D9D6A242
 	for <webhook@archiver.kernel.org>; Thu, 14 Nov 2024 22:00:17 +0000 (UTC)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web11.6446.1731621617370450022
+ by mx.groups.io with SMTP id smtpd.web11.6445.1731621616701635663
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Nov 2024 14:00:17 -0800
+ Thu, 14 Nov 2024 14:00:16 -0800
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 03BDC1474
-	for <openembedded-devel@lists.openembedded.org>; Thu, 14 Nov 2024 14:00:47 -0800 (PST)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5B8971474
+	for <openembedded-devel@lists.openembedded.org>; Thu, 14 Nov 2024 14:00:46 -0800 (PST)
 Received: from cesw-amp-gbt-1s-m12830-04.oss.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id AD5013F66E
-	for <openembedded-devel@lists.openembedded.org>; Thu, 14 Nov 2024 14:00:16 -0800 (PST)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 116043F66E
+	for <openembedded-devel@lists.openembedded.org>; Thu, 14 Nov 2024 14:00:15 -0800 (PST)
 From: Ross Burton <ross.burton@arm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 08/21] python3-kivy: inherit cython class
-Date: Thu, 14 Nov 2024 21:59:56 +0000
-Message-Id: <20241114220009.737413-8-ross.burton@arm.com>
+Subject: [PATCH 07/21] python3-h5py: inherit cython class
+Date: Thu, 14 Nov 2024 21:59:55 +0000
+Message-Id: <20241114220009.737413-7-ross.burton@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241114220009.737413-1-ross.burton@arm.com>
 References: <20241114220009.737413-1-ross.burton@arm.com>
@@ -30,58 +30,54 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 14 Nov 2024 22:00:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113831
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113830
 
 Use the new cython class to avoid duplicated fixup code to remove build
 paths.
 
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- .../recipes-devtools/python/python3-kivy_2.3.0.bb      | 10 +---------
- 1 file changed, 1 insertion(+), 9 deletions(-)
+ .../recipes-devtools/python/python3-h5py_3.12.1.bb  | 13 +------------
+ 1 file changed, 1 insertion(+), 12 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.3.0.bb b/=
-meta-python/recipes-devtools/python/python3-kivy_2.3.0.bb
-index 045ac23106..dc7c66f781 100644
---- a/meta-python/recipes-devtools/python/python3-kivy_2.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-kivy_2.3.0.bb
-@@ -4,7 +4,7 @@ HOMEPAGE =3D "https://kivy.org/"
- LICENSE =3D "MIT"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D6d3bc49400e35d5a2279d14c40dcf=
-b09"
+diff --git a/meta-python/recipes-devtools/python/python3-h5py_3.12.1.bb b=
+/meta-python/recipes-devtools/python/python3-h5py_3.12.1.bb
+index a84dd28822..152d952263 100644
+--- a/meta-python/recipes-devtools/python/python3-h5py_3.12.1.bb
++++ b/meta-python/recipes-devtools/python/python3-h5py_3.12.1.bb
+@@ -8,12 +8,11 @@ SRC_URI[sha256sum] =3D "326d70b53d31baa61f00b8aa5f95c2f=
+cb9621a3ee8365d770c551a13db
 =20
--inherit setuptools3 pkgconfig features_check
-+inherit setuptools3 pkgconfig features_check cython
+ SRC_URI +=3D "file://0001-setup_build.py-avoid-absolute-path.patch"
 =20
- # Kivy's setup files only look for GLES libraries for Android, iOS, RPi,
- # and mali-based OS's. We need to patch the setup file to tell Kivy setu=
-p
-@@ -52,7 +52,6 @@ DEPENDS +=3D " \
-     libsdl2-mixer \
-     pango \
-     python3 \
--    python3-cython-native \
- "
+-inherit pkgconfig pypi setuptools3
++inherit pkgconfig pypi setuptools3 cython
 =20
- RDEPENDS:${PN} =3D " \
-@@ -75,10 +74,3 @@ RDEPENDS:${PN} =3D " \
- # python3-kivy/2.3.0/git/kivy/graphics/cgl_backend/cgl_gl.c:4568:52: err=
-or: assignment to 'void (*)(GLuint,  GLsizei,  const GLchar **, const GLi=
-nt *)' {aka 'void (*)(unsigned int,  int,  const char **, const int *)'} =
-from incompatible pointer type 'void (*)(GLuint,  GLsizei,  const GLchar =
-* const*, const GLint *)' {aka 'void (*)(unsigned int,  int,  const char =
-* const*, const int *)'} [-Wincompatible-pointer-types]
- # python3-kivy/2.3.0/git/kivy/core/window/_window_sdl2.c:8781:23: error:=
- passing argument 1 of 'SDL_SetEventFilter' from incompatible pointer typ=
-e [-Wincompatible-pointer-types]
- CFLAGS +=3D "-Wno-error=3Dincompatible-pointer-types"
+ BBCLASSEXTEND =3D "native"
+=20
+ DEPENDS =3D "python3-pkgconfig-native \
+-           python3-cython-native \
+            python3-numpy-native \
+            python3-six-native \
+            hdf5-native \
+@@ -21,16 +20,6 @@ DEPENDS =3D "python3-pkgconfig-native \
+            hdf5 \
+           "
+=20
+-PACKAGESPLITFUNCS =3D+ "fix_cythonized_sources"
 -
--do_compile:append() {
--    for f in `find ${B} -name *.c`
--    do
--        sed -i -e "/BEGIN: Cython Metadata/,/END: Cython Metadata/d" $f
--    done
+-fix_cythonized_sources() {
+-	for f in `grep -l -r -e '\/* Generated by Cython.*/$' ${PKGD}${TARGET_D=
+BGSRC_DIR}`; do
+-		if [ -e $f ]; then
+-			sed -i -e 's#${RECIPE_SYSROOT_NATIVE}##g' $f
+-		fi
+-	done
 -}
+-
+ RDEPENDS:${PN} =3D "python3-numpy \
+                   python3-six \
+                   python3-json \
 --=20
 2.34.1
 
