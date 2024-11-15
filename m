@@ -1,154 +1,174 @@
-Return-Path: <mark.jonas@de.bosch.com>
+Return-Path: <rasmus.villemoes@prevas.dk>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78497D6DDF3
-	for <webhook@archiver.kernel.org>; Fri, 15 Nov 2024 12:20:32 +0000 (UTC)
-Received: from DUZPR83CU001.outbound.protection.outlook.com (DUZPR83CU001.outbound.protection.outlook.com [52.101.67.26])
- by mx.groups.io with SMTP id smtpd.web10.19614.1731673226039541130
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D774D68BC1
+	for <webhook@archiver.kernel.org>; Fri, 15 Nov 2024 14:36:53 +0000 (UTC)
+Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.66.10])
+ by mx.groups.io with SMTP id smtpd.web11.22078.1731681407821623555
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Nov 2024 04:20:26 -0800
+ Fri, 15 Nov 2024 06:36:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@de.bosch.com header.s=selector2 header.b=LJtPtRqS;
- spf=pass (domain: de.bosch.com, ip: 52.101.67.26, mailfrom: mark.jonas@de.bosch.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@prevas.dk header.s=selector1 header.b=XA1kuPg5;
+ spf=pass (domain: prevas.dk, ip: 52.101.66.10, mailfrom: rasmus.villemoes@prevas.dk)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZWveKL7VvmIdYjvaJV1FNcRSbpJHgURLHWHteNru3aAYFJfU1zlqoW3QiYdn5T3xPkrmo2AsdrDaY7weAdwDTOfpSNa4uqb4MYYdcJYFpxzWymyt69R6xRX5C9Ub6ZFbtbLwZY3BHlPD4s1v9eLVvThYDqhPlcfxKkPIocji3A86J6YCKVbdg2jdAHAb4SQT5GTTJRHiUkyn5nPeJSO9aDydKxmPMTCs83eroXwYr7T1sSAxim/qdc/oJUX9w83KqpVFyHbBq2GO1dVAZGIBb8MvlqtG4FhcMG0x71KieldZabjZnJaoynduDea8rliHGUbWvlY27MpnIrtJBKjrzw==
+ b=P+28c/rMz15ySpmCGei/Y9PUcY2QoRYqzn641cIHkx0B5gn9rRMA/S9agr2R5oZosPImjBUqXDT1J4hWyxaRze+0GAKpwjnfKChyAzHBvZMLteDM+9qnvuoDOw4AigPB+aKa676GY3wB+dgaTBlwOvfpLW96ICUN6EC6PWINvaZ83bTM/FAlUc040A6+6jbHFI7QRH0bS6893BUWwtIX0QLfv1TPA+GHnDpxMAbClrbrxvZHB+c1J2w7o9OwPRKSeP3CUEvg33gR2xuS6X+21AY0zW/s+kfjsOMKwD2O6cAQVWIZGx/hkjJ9obxgltES33SsMRskts/vs73qaG/kog==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SB4mM2nc4KbqJckHmaSFnr2E7NEF/C0g3N8Qim3nN5E=;
- b=aI9VyEpsNw2YV5NPhnnwLKninyo4SfIU1cW/BocV+UR8RISSQ1owpDFip626bGuEa5B5Efr0FylFOai6vhzcUqOwJOLf1feNb6MocF3oCU8Dsy2dqaPabVEhpvZhrIAymED2lwNUhpAZAFdCM9igJRT8zEOA+j4n9HB22RhXkfNaqfH8GY87C39E6bkk7M7HerFtWqZMCMSp6epKm2vqWr3qJTOhVKZdKz208WGSa0jrs9JpJrHhviBEUDRQgjIrcylm6/Qs648/TOIapHuHtzfTB2J8W0VYDOP6htGo8U7HliO8cMmmY1XTqsukzbmVuMtXE1B0pgzo9JaixVrx9A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 139.15.153.206) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=de.bosch.com; dmarc=pass (p=reject sp=none pct=100) action=none
- header.from=de.bosch.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=de.bosch.com;
- s=selector2;
+ bh=T4JDABvp1PdGVIeH6UToV4hUYR/RfE1DRFt3lF2M0uI=;
+ b=LOclueXJVnsXq9G2/tgvNeDcYV7SzpUwJy3UTOtwojquLDshsFGrozRXW2PMNThdkXrgJmVBaO775xLhkTHvOvANnT4+TS1mmqsRqNrvIJfEkklp+IzLt/8V1XBTl+vB4yPx9iW1yOPYrJf+Bw3YQa2iscEZOwPb3z6/prRLcdy3RTT0hA1GhD8Np3ZOS6H74PQ1Uov4T13RcojwTs86NS+BuJGcSQgnQUBoTwSiMz7AT5P8vtiHsx6kMQg8dsVWyOETdLG0FwIKwlPDjfiadhMUZV4LEAp/LI9Ade1CfesWpz4VOdFZncl9wVPDzvG75C7u4nxRbMyQwTkGLhm59A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SB4mM2nc4KbqJckHmaSFnr2E7NEF/C0g3N8Qim3nN5E=;
- b=LJtPtRqS6quXRPZ9roCYTgGdUQZe6nogT8sYFhRl4UCwWfsiSO0tBuL1TO+wp0JOV0DolveHeL0JnU/6WeX4VsF1O41A4pgI7teqbVGXLr42ZKjyz1V95F7OtEL80Xvg1k5SnOSOJNWRQDJQ93bParew793WPfFcBw6QrHv2yRt2Wvn62wi7bX9U3JTE0b2I2FIXx7Boc6PRNtkD5rddZBwbfYYsNidfFasKW0ssdlXCW4q3mSvBsulypV0NEax90X+YDFlWviHz79t9iU3Jl+MS8swZANY7jW6hW+UY1E7EpKynUTc6uIZN1XkupIUkV3VLmIosIPH5HQa0xUUf+w==
-Received: from AS9PR0301CA0014.eurprd03.prod.outlook.com
- (2603:10a6:20b:468::21) by GV1PR10MB6540.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:150:84::9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.17; Fri, 15 Nov
- 2024 12:20:22 +0000
-Received: from AM2PEPF0001C70E.eurprd05.prod.outlook.com
- (2603:10a6:20b:468:cafe::70) by AS9PR0301CA0014.outlook.office365.com
- (2603:10a6:20b:468::21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.17 via Frontend
- Transport; Fri, 15 Nov 2024 12:20:22 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 139.15.153.206)
- smtp.mailfrom=de.bosch.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=de.bosch.com;
-Received-SPF: Pass (protection.outlook.com: domain of de.bosch.com designates
- 139.15.153.206 as permitted sender) receiver=protection.outlook.com;
- client-ip=139.15.153.206; helo=eop.bosch-org.com; pr=C
-Received: from eop.bosch-org.com (139.15.153.206) by
- AM2PEPF0001C70E.mail.protection.outlook.com (10.167.16.202) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8158.14 via Frontend Transport; Fri, 15 Nov 2024 12:20:22 +0000
-Received: from FE-EXCAS2000.de.bosch.com (10.139.217.199) by eop.bosch-org.com
- (139.15.153.206) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.13; Fri, 15 Nov
- 2024 13:20:16 +0100
-Received: from GRB-C-0009M.ot.de.bosch.com (10.139.217.196) by
- FE-EXCAS2000.de.bosch.com (10.139.217.199) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.43; Fri, 15 Nov 2024 13:20:16 +0100
-From: <mark.jonas@de.bosch.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <raj.khem@gmail.com>, Ricardo Simoes <ricardo.simoes@pt.bosch.com>, "Mark
- Jonas" <mark.jonas@de.bosch.com>
-Subject: [meta-oe][PATCH] magic-enum: Upgrade 0.9.6 -> 0.9.7
-Date: Fri, 15 Nov 2024 13:19:56 +0100
-Message-ID: <20241115121956.5037-1-mark.jonas@de.bosch.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
+ bh=T4JDABvp1PdGVIeH6UToV4hUYR/RfE1DRFt3lF2M0uI=;
+ b=XA1kuPg5i/aKntUBEijogyc1z/iyno9e+pACw5tzG3foneT/MXEn9bjLOTZYUQSc3469iW4OC5FCnLe1KR1i5e+A+DrFwgamfNHgnsxNKFr1bPIiU4+sCIqKazN+a8RS3bHS1x/eFvEdFKAope+dxWmQJzoM3R5D2O7tqw/5xWE=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:41::17)
+ by DB4PR10MB7061.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:3f3::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.16; Fri, 15 Nov
+ 2024 14:36:43 +0000
+Received: from DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::7e2c:5309:f792:ded4]) by DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::7e2c:5309:f792:ded4%5]) with mapi id 15.20.8158.013; Fri, 15 Nov 2024
+ 14:36:43 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: openembedded-devel@lists.openembedded.org
+CC: Khem Raj <raj.khem@gmail.com>,
+	Rasmus Villemoes <ravi@prevas.dk>
+Subject: [meta-oe][PATCH] cryptsetup: demote udev runtime dependency to recommendation
+Date: Fri, 15 Nov 2024 15:36:50 +0100
+Message-ID: <20241115143650.3577853-1-ravi@prevas.dk>
+X-Mailer: git-send-email 2.47.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
-X-Originating-IP: [10.139.217.196]
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: MM0P280CA0024.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:a::13) To DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:41::17)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM2PEPF0001C70E:EE_|GV1PR10MB6540:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7a906daa-f891-43bb-1e42-08dd056fe068
+X-MS-TrafficTypeDiagnostic: DB7PR10MB2475:EE_|DB4PR10MB7061:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4b692a6b-f47f-4fa9-4dcf-08dd0582ecdd
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|36860700013|376014|82310400026;
+	BCL:0;ARA:13230040|376014|52116014|1800799024|366016|38350700014;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?u4yOa2phY5frqVnNnM8+BY0CGoHUAFZuNFAKM0vQncoWqUJ+J6kKk2j8OOLQ?=
- =?us-ascii?Q?n0WXSZXab8DNMYH7KHjR2pWNaQ3+l0kSEt31nLsa8UfttDz2bpLliUB6qZy4?=
- =?us-ascii?Q?jICzwPKu/WLyhosKHXSnigqMBOxkqZSynHUrZOwyV7mWPujaIA59QG+n0S57?=
- =?us-ascii?Q?z5DgwSZxF8ay1kLOpUdnYRqKqB+2GsngoapiIIMvdyFwxEucCPLHepYGUPWj?=
- =?us-ascii?Q?uP9XZNKapIlpxN4xgwTp/9v8C1C1E8d8ki6+oA3DP1oJ0CtDhbmsc98UebY8?=
- =?us-ascii?Q?wEud2t6V1ETsOUHCMk3lqMI2FvB0yvBRSvYN+jVTqoivNxqzk/hBkstjIhgt?=
- =?us-ascii?Q?Fgt/r1iD9u8XAkKAiJc0nosJIT/issOKRu7v9MTV8oqIReff1g8/s62Vg2ZX?=
- =?us-ascii?Q?qmpmL1CFJceIctK0pkPPCeRUhVDp5NF2QKgr9TwmnMnG/AR8uo3d5vzqTLY5?=
- =?us-ascii?Q?o/NlUVij3Qhd2vvHMqd09ij3TGr03pPTkYnAKan7tHnNY0OU5xLqbMyhheZ+?=
- =?us-ascii?Q?Y/MVnI1C0mE0Ma5cAG1S2pV7Tq3xL+JlhCrlrieaw7Q7BYv3bSuK3bty/IB+?=
- =?us-ascii?Q?0jZKSkpRUiNFuyC0+sNtdLpmq/KOecisjVWvx1iUbviblQdkjDZlGuC+Kgci?=
- =?us-ascii?Q?Y5tdkIsRqC4KvfByfeMKs3yYieusGTONBIoVVsMg4yD0X9W3gjpijHlMAzB1?=
- =?us-ascii?Q?0r1ZgEzJBGqxjn+axp06GSCL5F0kKGCqOPLQ87K0/nvBj/AA36A2R+Q/fUvU?=
- =?us-ascii?Q?iPNDWA2yXI6X9ypm/UMfsC+57oZFmX9RUqL8XdV4QIkSCvf9EWekGocc6pOJ?=
- =?us-ascii?Q?QYj1eQMIQFdiJNgKjjNhAfUG2Fdn/EXVoA0Je2xzKJfo1LZiL9sVX9GUR140?=
- =?us-ascii?Q?9KittZkSOxsULVQiDHxafs5p8kGzBFddq+JF39Z2euJcvo1/q5nodvOrAzBD?=
- =?us-ascii?Q?kVri684Q9S0HIGxiASbZyUUq1W3ddhU6rAQ7bP9vKsmb2viUV4AgWKD+JKz+?=
- =?us-ascii?Q?BTqKUvVjH8BRIP+qncwU75yrhF/EOhoUXHzvQVrUbmj6ANENKGEJu/ZQK6rn?=
- =?us-ascii?Q?UVYDIwyIhyUUwBVoBA2tp46Ec4Xtlk3nkee3NS46KkO4wZwn+7uOhjzZoefG?=
- =?us-ascii?Q?zNMVt80EvXe5lReF93OPl0VsQPCuUGL1NGdZcxZDdFmL0vXD/9FGZNrhs7+9?=
- =?us-ascii?Q?GqsjeXeYmG+h9GvVTkajGm7RbuTEX461DM9SXcaK6CfoV8Px2j2c1rE9DogV?=
- =?us-ascii?Q?mbjl+21Z8hjfF1XDLQlFButugRkcmpEKm2ioc+xnCxoRghorlK2sAPOJf5hj?=
- =?us-ascii?Q?qcYiO/nBsQMq5Jvzfkqby+3VAlKweNNqRdA6/L04ms+MTZjsN/eaybUbTlWl?=
- =?us-ascii?Q?nNIW5Sbqm2aRY8TFeqBtX/1kRoW+E/C6cqtFczFqexyYTY+Mkg=3D=3D?=
+	=?us-ascii?Q?5yyAQ+8NE1YTO9wUuBHN/rq0/Y7vW/7YT41CP8cHZaO30Oz955lVr8YzmnwV?=
+ =?us-ascii?Q?RizhzdHt8MZ8eNTEjbRUS+cCMvWHDpyLl4GJowYET/S26D0cEi16kjWEErdX?=
+ =?us-ascii?Q?QKacIK6Sxn7uD8cGj5XxeTVQmUwJtHavlt+6gngdnxCjhmlz4uPu5jxg1rvB?=
+ =?us-ascii?Q?y+vWzKC/1ym/mrrTtPGCzkxPplHNNujZ2yIDeo9ONV+PVlppqPJqCPBVkJG2?=
+ =?us-ascii?Q?2ggR0zj/UbbWMCpWDKsDlcEITUpVRsbYu/rMiYGW/pzQIJRjUDJXWFAETXPF?=
+ =?us-ascii?Q?9Wd6gmRqXpJbJHTpFXVc0Y8H6kKGlTbF0AiWWdHd6ucc2r71t7xAiDK9+tCA?=
+ =?us-ascii?Q?xOuUGMy+Lay87VhENg7PSaRAaBFASHnG7M3XM6yxZAtdtBkjUoL+BD+BAGIA?=
+ =?us-ascii?Q?XpTHxXYgqFOwVP0azS/e7gZudJtS1ZwjR6x1ZMu/Ddb2OyspQHkYZvCgIhz1?=
+ =?us-ascii?Q?jDOHhRLrh0OMcBXA3Bq45i/a9bH3NFSVanJua1ZCYdzwT2OQIMl3okxcVUow?=
+ =?us-ascii?Q?W+2Q6gE3wG7NHixwWb0IzXqufqRCbd6I5hH/BK32lvH3q4LQjTCIx4Cq3Mo7?=
+ =?us-ascii?Q?PrsS0kUKeBqidT62rUeypNj6t9AUJTVyXny/07WkQH4lDoCvm+BaLQnG/0tM?=
+ =?us-ascii?Q?KxoN8fMmzj+alxjTkODIL9t4U2ul4Xtuaa5y0VyFO0dCCrlaYPAFjEh88pVA?=
+ =?us-ascii?Q?W3wlia9xUxWOADIQy14eJstSwX81RDoEMgp49Xg48/YDBtgt5hVJipahVdsC?=
+ =?us-ascii?Q?rT3q4jty9TTcQpx3w0icn4lPqgzrRKh02OgEJR8LqhPuVbNwwWtVSLDfGYP6?=
+ =?us-ascii?Q?bmBngdMtW34t3etM4s/f9QiOSdfotiMM6xSUqXRu9RtGDub3pozOdoE3hxRV?=
+ =?us-ascii?Q?lB7U1XckiZyWpZjllUAxObl7z/KA/VAmbY1kdvzxFqS27ALGbhU37ByqJhFN?=
+ =?us-ascii?Q?ckwWcrBg7lknPXk2BjyjcBG9win5+hqOja2rMC2jzwqnBjtpnKLBC//w/Hby?=
+ =?us-ascii?Q?0Jh1OG5T70vQAT1cI2/rns7o627OfEkvPrxLSz3F/N1zer4l1lfRNJLT5iQN?=
+ =?us-ascii?Q?0ZQVVqbhHtN9r02p91oOqyU8jP1ZG1pfPbtAL2g7lZ33vxKRMlzMbzFHlH0O?=
+ =?us-ascii?Q?NtGiStVa8Cya7wtRcr9ZMIzEMn5KBy/CwuC+2UezE9FPj4L8HG0Br54aNVK0?=
+ =?us-ascii?Q?wA4k0G19P8J87hFnONG3VBtGNegnRFRNwRUC/mD3aPmIirx8VkSPaCS4iEKk?=
+ =?us-ascii?Q?/EirhWhnj3yj5N7J1vV+xT4lkS/Fz2oecMTSabHNV2B4WM9ZUcffeaLM0VIo?=
+ =?us-ascii?Q?Dq3AxF6Ae++7octlvi45U4D+gHSwdElkeaQN+cwCSE0Huyi9LaB7j9Ml8Hqx?=
+ =?us-ascii?Q?YRiBBcU=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:139.15.153.206;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:eop.bosch-org.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026);DIR:OUT;SFP:1101;
-X-OriginatorOrg: de.bosch.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Nov 2024 12:20:22.0282
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(52116014)(1800799024)(366016)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?CndvpHLIlHu3t/tm9Ob+b6BTsRI3BECOHnfaczB9y64rxuRGpKSOpy56T9SV?=
+ =?us-ascii?Q?WApfkwlp3vEsRSV9m1E7xmYnzOvDff/nDHIwe5TGXsg9miWav9wP9xiHuxQw?=
+ =?us-ascii?Q?WoIMavockLttRigrfSn1bCR0Vgg1RBB9sfI5vM8DnWlzbI/j3WTJBs2OVm4H?=
+ =?us-ascii?Q?120js/EojoQurcfcLEAv1qj5mf4zE2ZDE0cYiQBjaHcWfvWJ7zf4dmxAFSv7?=
+ =?us-ascii?Q?vBpsbXnxVBC9vWT2aPls4eUNltvALc8oX1hVvw/E9I3AGXoX1S1crzmITlZh?=
+ =?us-ascii?Q?viktw5PYaJDSe3EOgLpQn7pWmbLmXUl0wQZJsyvYV1WKIL5DFM53Mf6kt9q4?=
+ =?us-ascii?Q?RzfmvgGm3GvHehkUlEN18aOTdR0wA9i900Db8Ex0d2szcRdWcGeQmPdKQ3+X?=
+ =?us-ascii?Q?KtlJztlIeL63ztC6DmIoNUAT7IowdVmE7DZoxZc+i+DNY2BA2xF2PLCskhU/?=
+ =?us-ascii?Q?xhkpKeRpsNdrYE4PpGp07pGKeXr0H94Qt6+S5Fxh0CGyQ/8iSI8QeXtRvCtq?=
+ =?us-ascii?Q?2udYPXbLu4c1NDsv5wa315eGxBHnAGJJyZMsRizEA/m3lFKqNDU08STEa4Uq?=
+ =?us-ascii?Q?P++tGLe1SZUbYB3hZ6LcOVkk7j4CQlChUTPnPFQKYfkF0+n20gUc3/P8k3f/?=
+ =?us-ascii?Q?J93w6leMuP/H+mLmwLtTe/V1H1Yar3hjOBY+0uGeg+vLxQXFQ7jtfGOs/FeW?=
+ =?us-ascii?Q?z2AiqR3zrH7VfKq68/cua+Rfn6SMZkQNjTPsrxeFI2S40gaPD4BKP2DsU16M?=
+ =?us-ascii?Q?bCNfbnEI1lZoK43kGwjUbsYcgaxVhBslV9Gp549lvGJwpojeij4AZECoFhux?=
+ =?us-ascii?Q?RWAwaEuuYz1WPMrJptD3I1egOIkvbyfeG7oRTnf5iHRhoNiQ6U9TQXJOEvug?=
+ =?us-ascii?Q?5XTI/Vu2ad0lwwLb2+fhUneHdY6UMazcyYAvn9EHLWjSjbHYb3fzVEtv1Fvu?=
+ =?us-ascii?Q?pb+6lCJnGe5LHtANEGyErCnbeZDQmA2wDwJGgxDWL5BBoZXVc3grfpgyG2vi?=
+ =?us-ascii?Q?8xLYJhVupIddnP6prML2eY+egn17FOJh94lzf9a4gRhKtXd94Z2r8DizahIk?=
+ =?us-ascii?Q?tdJxMGFyYajrjCbHSGi8sMTI/NNtAHyx45VMWxHifAhTILjvHOzrjjChzSZ4?=
+ =?us-ascii?Q?AuSH0pT0yeQND+ejMxnDX7TrKOfwFiyNGnROR4kpymTP/jFBsD2vZOh8wLNf?=
+ =?us-ascii?Q?r5PoRk3Od1VRr0g1evFZE5MWco0FHlWt9WnjNUmu12VPV+lQM969V1keuAgH?=
+ =?us-ascii?Q?dtYAkrzgFo3WF06ejSapWIr69QiLopWaDDv9oE3td4+q9aaKn7bSncYMGh6o?=
+ =?us-ascii?Q?erwi5rwoaMCeif1H15iTwHpVnPom6iT5y1vrPf7xKQGBV2/4ehJUKnu48pFT?=
+ =?us-ascii?Q?ZhoX+v0rshlxgPq8h2dIeEGohm9DHJt1D8JoTvKSIlpI9elCVs6C8OzFXZ6g?=
+ =?us-ascii?Q?GiusyhpkwrhxUVtQtFQ+KVMNmUZSzt8AR07sd+zdnTyYXeOedlfcv06QVKgU?=
+ =?us-ascii?Q?quIgBfU/ggU3LG4OG9h8Eml0cvw6IVN67Tj8sEhqMJw6I9AnrTX4Gi1uQyam?=
+ =?us-ascii?Q?D8Z1/XQuTuhUD/NPZRj5TtzGuP5dtIp+bIsKDXyjWoaxx18GefkHOJEmB7/p?=
+ =?us-ascii?Q?UQ=3D=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4b692a6b-f47f-4fa9-4dcf-08dd0582ecdd
+X-MS-Exchange-CrossTenant-AuthSource: DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Nov 2024 14:36:43.5826
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7a906daa-f891-43bb-1e42-08dd056fe068
-X-MS-Exchange-CrossTenant-Id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=0ae51e19-07c8-4e4b-bb6d-648ee58410f4;Ip=[139.15.153.206];Helo=[eop.bosch-org.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AM2PEPF0001C70E.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB6540
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: KntrVek5G0ddjx0tSsvFkxSoFYGB3e7rlIbXCMs03/CI7srGQ3hRAgxNeOU1LUZ48QU5CjxxZeLd9SSfSaAx8KjCJB9tVKiFc+EqFJKgZjo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB4PR10MB7061
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 15 Nov 2024 12:20:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113851
+ <openembedded-devel@lists.openembedded.org>; Fri, 15 Nov 2024 14:36:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113852
 
-From: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
+From: Rasmus Villemoes <ravi@prevas.dk>
 
-Changelog: https://github.com/Neargye/magic_enum/releases/tag/v0.9.7
+We use veritysetup in our custom initramfs to verify the rootfs before
+mounting it. We do not use udev or run systemd as PID1 in that
+initramfs. This RDEPENDS on udev and lvm2, and everything that udev
+ends up pulling in, thus bloats the initramfs by more than 10MiB.
 
-Signed-off-by: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
-Signed-off-by: Mark Jonas <mark.jonas@de.bosch.com>
+Removing udev from PACKAGECONFIG is not really an option, because we
+do want the udev integration in the real rootfs.
+
+Demote it to a recommendation so that the initramfs recipe can avoid
+udev and lvm2 using BAD_RECOMMENDATIONS or NO_RECOMMENDATIONS.
+
+Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 ---
- .../magic-enum/{magic-enum_0.9.6.bb =3D> magic-enum_0.9.7.bb}     | 2 +-
+ meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.5.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/magic-enum/{magic-enum_0.9.6.bb =3D> magic=
--enum_0.9.7.bb} (95%)
 
-diff --git a/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.6.bb b/meta=
--oe/recipes-extended/magic-enum/magic-enum_0.9.7.bb
-similarity index 95%
-rename from meta-oe/recipes-extended/magic-enum/magic-enum_0.9.6.bb
-rename to meta-oe/recipes-extended/magic-enum/magic-enum_0.9.7.bb
-index 01a134a5b..4557ed0a8 100644
---- a/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.6.bb
-+++ b/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.7.bb
-@@ -16,7 +16,7 @@ SRC_URI =3D " \
-     file://run-ptest \
- "
-=20
--SRCREV =3D "dd6a39d0ba1852cf06907e0f0573a2a10d23c2ad"
-+SRCREV =3D "e046b69a3736d314fad813e159b1c192eaef92cd"
- S =3D "${WORKDIR}/git"
-=20
- inherit cmake ptest
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.5.bb b/meta-o=
+e/recipes-crypto/cryptsetup/cryptsetup_2.7.5.bb
+index 60bf501eb9..91ea446851 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.5.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.5.bb
+@@ -53,7 +53,7 @@ PACKAGECONFIG[veritysetup] =3D "--enable-veritysetup,--di=
+sable-veritysetup"
+ PACKAGECONFIG[luks2-reencryption] =3D "--enable-luks2-reencryption,--disab=
+le-luks2-reencryption"
+ PACKAGECONFIG[integritysetup] =3D "--enable-integritysetup,--disable-integ=
+ritysetup"
+ PACKAGECONFIG[selinux] =3D "--enable-selinux,--disable-selinux"
+-PACKAGECONFIG[udev] =3D "--enable-udev,--disable-udev,,udev lvm2"
++PACKAGECONFIG[udev] =3D "--enable-udev,--disable-udev,,,udev lvm2"
+ PACKAGECONFIG[kernel_crypto] =3D "--enable-kernel_crypto,--disable-kernel_=
+crypto"
+ # gcrypt-pkbdf2 requries --with-crypto_backend=3Dgcrypt or the flag isn't
+ # recognized.
 --=20
-2.34.1
+2.47.0
 
 
