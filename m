@@ -2,7 +2,7 @@ Return-Path: <jamin_lin@aspeedtech.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F7B4D5E396
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 718ADD68BEF
 	for <webhook@archiver.kernel.org>; Mon, 18 Nov 2024 06:24:05 +0000 (UTC)
 Received: from TWMBX01.aspeed.com (TWMBX01.aspeed.com [211.20.114.72])
  by mx.groups.io with SMTP id smtpd.web10.34515.1731911040336774602
@@ -20,9 +20,9 @@ Received: from localhost.localdomain (192.168.10.10) by TWMBX01.aspeed.com
 From: Jamin Lin <jamin_lin@aspeedtech.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: <troy_lee@aspeedtech.com>, <jamin_lin@aspeedtech.com>
-Subject: [PATCH v4 2/3] uboot-sign: support to create users specific image tree source
-Date: Mon, 18 Nov 2024 14:23:57 +0800
-Message-ID: <20241118062358.283666-3-jamin_lin@aspeedtech.com>
+Subject: [PATCH v4 1/3] uboot-sign: support to create TEE and ATF image tree source
+Date: Mon, 18 Nov 2024 14:23:56 +0800
+Message-ID: <20241118062358.283666-2-jamin_lin@aspeedtech.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241118062358.283666-1-jamin_lin@aspeedtech.com>
 References: <20241118062358.283666-1-jamin_lin@aspeedtech.com>
@@ -33,83 +33,149 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 18 Nov 2024 06:24:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113859
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113858
 
 Currently, uboot-sign.bbclass only supports to create Image Tree Source(ITS=
 )
-for "u-boot" and "flat_dt". However, users may want to support their privat=
-e
-images for specific application and purpose.
+for "u-boot" and "flat_dt". However, users may want to support multiple ima=
+ges
+such as  ARM Trusted Firmware(ATF), Trusted Execution Environment(TEE) and
+users private images for specific application and purpose.
 
-To make this bbclass more flexible and support users specific ITS, creates =
-new
-"uboot_fitimage_user_image" function. It is an empty function, so users can
-create a bbappend to overwrite this function with their specific settings.
+To make this bbclass more flexible and support ATF and TEE, creates new
+functions which are "uboot_fitimage_atf" and "uboot_fitimage_tee"
+for ATF and TEE ITS file creation, respectively.
 
-Otherwise, users need to overwrite the "uboot_fitimage_assemble" function.
+Add a variable "UBOOT_FIT_ARM_TRUSTED_FIRMWARE" to
+enable ATF ITS generation and it is disable by default.
 
-Add a variable "UBOOT_FIT_USER_IMAGE" to enable users specific ITS generati=
-on
+Add a variable "UBOOT_FIT_TEE" to enable TEE ITS generation
 and it is disable by default.
-
-Add a variable "UBOOT_FIT_CONF_USER_LOADABLES" to load users specific image=
-s
-and it is an empty by default.
 
 Signed-off-by: Jamin Lin <jamin_lin@aspeedtech.com>
 ---
- meta/classes-recipe/uboot-sign.bbclass | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+ meta/classes-recipe/uboot-sign.bbclass | 80 +++++++++++++++++++++++++-
+ 1 file changed, 79 insertions(+), 1 deletion(-)
 
 diff --git a/meta/classes-recipe/uboot-sign.bbclass b/meta/classes-recipe/u=
 boot-sign.bbclass
-index f1b3470127..3b61f239e3 100644
+index a17be745ce..f1b3470127 100644
 --- a/meta/classes-recipe/uboot-sign.bbclass
 +++ b/meta/classes-recipe/uboot-sign.bbclass
-@@ -100,6 +100,13 @@ UBOOT_FIT_ARM_TRUSTED_FIRMWARE_IMAGE ?=3D "bl31.bin"
- UBOOT_FIT_TEE ?=3D "0"
- UBOOT_FIT_TEE_IMAGE ?=3D "tee-raw.bin"
+@@ -88,6 +88,18 @@ UBOOT_FIT_ADDRESS_CELLS ?=3D "1"
+ # This is only necessary for determining the signing configuration
+ KERNEL_PN =3D "${PREFERRED_PROVIDER_virtual/kernel}"
 =20
-+# User specific image
-+UBOOT_FIT_USER_IMAGE ?=3D "0"
++# ARM Trusted Firmware(ATF) is a reference implementation of secure world
++# software for Arm A-Profile architectures, (Armv8-A and Armv7-A), includi=
+ng
++# an Exception Level 3 (EL3) Secure Monitor.
++UBOOT_FIT_ARM_TRUSTED_FIRMWARE ?=3D "0"
++UBOOT_FIT_ARM_TRUSTED_FIRMWARE_IMAGE ?=3D "bl31.bin"
 +
-+# Unit name containing a list of users additional binaries to be loaded.
-+# It is a comma-separated list of strings.
-+UBOOT_FIT_CONF_USER_LOADABLES ?=3D ''
++# A Trusted Execution Environment(TEE) is an environment for executing cod=
+e,
++# in which those executing the code can have high levels of trust in the a=
+sset
++# management of that surrounding environment.
++UBOOT_FIT_TEE ?=3D "0"
++UBOOT_FIT_TEE_IMAGE ?=3D "tee-raw.bin"
 +
  UBOOT_FIT_UBOOT_LOADADDRESS ?=3D "${UBOOT_LOADADDRESS}"
  UBOOT_FIT_UBOOT_ENTRYPOINT ?=3D "${UBOOT_ENTRYPOINT}"
 =20
-@@ -246,6 +253,12 @@ do_uboot_generate_rsa_keys() {
+@@ -234,9 +246,64 @@ do_uboot_generate_rsa_keys() {
 =20
  addtask uboot_generate_rsa_keys before do_uboot_assemble_fitimage after do=
 _compile
 =20
-+# Create a ITS file for the user specific image. It is an empty function a=
-nd
-+# users should create a bbappend to overwrite this function
-+uboot_fitimage_user_image() {
-+	bbwarn "Please add your specific image ITS settings for u-boot FIT image =
-generation."
++# Create a ITS file for the atf
++uboot_fitimage_atf() {
++	cat << EOF >> ${UBOOT_ITS}
++        atf {
++            description =3D "ARM Trusted Firmware";
++            data =3D /incbin/("${UBOOT_FIT_ARM_TRUSTED_FIRMWARE_IMAGE}");
++            type =3D "firmware";
++            arch =3D "${UBOOT_ARCH}";
++            os =3D "arm-trusted-firmware";
++            load =3D <${UBOOT_FIT_ARM_TRUSTED_FIRMWARE_LOADADDRESS}>;
++            entry =3D <${UBOOT_FIT_ARM_TRUSTED_FIRMWARE_ENTRYPOINT}>;
++            compression =3D "none";
++EOF
++	if [ "${SPL_SIGN_ENABLE}" =3D "1" ] ; then
++		cat << EOF >> ${UBOOT_ITS}
++            signature {
++                algo =3D "${UBOOT_FIT_HASH_ALG},${UBOOT_FIT_SIGN_ALG}";
++                key-name-hint =3D "${SPL_SIGN_KEYNAME}";
++            };
++EOF
++	fi
++
++	cat << EOF >> ${UBOOT_ITS}
++        };
++EOF
 +}
 +
- # Create a ITS file for the atf
- uboot_fitimage_atf() {
- 	cat << EOF >> ${UBOOT_ITS}
-@@ -366,6 +379,13 @@ EOF
- 		conf_loadables=3D"\"atf\", ${conf_loadables}"
- 		uboot_fitimage_atf
- 	fi
-+
-+	if [ "${UBOOT_FIT_USER_IMAGE}" =3D "1" ] ; then
-+		if [ -n "${UBOOT_FIT_CONF_USER_LOADABLES}" ] ; then
-+			conf_loadables=3D"${conf_loadables}${UBOOT_FIT_CONF_USER_LOADABLES}"
-+		fi
-+		uboot_fitimage_user_image
++# Create a ITS file for the tee
++uboot_fitimage_tee() {
++	cat << EOF >> ${UBOOT_ITS}
++        tee {
++            description =3D "Trusted Execution Environment";
++            data =3D /incbin/("${UBOOT_FIT_TEE_IMAGE}");
++            type =3D "tee";
++            arch =3D "${UBOOT_ARCH}";
++            os =3D "tee";
++            load =3D <${UBOOT_FIT_TEE_LOADADDRESS}>;
++            entry =3D <${UBOOT_FIT_TEE_ENTRYPOINT}>;
++            compression =3D "none";
++EOF
++	if [ "${SPL_SIGN_ENABLE}" =3D "1" ] ; then
++		cat << EOF >> ${UBOOT_ITS}
++            signature {
++                algo =3D "${UBOOT_FIT_HASH_ALG},${UBOOT_FIT_SIGN_ALG}";
++                key-name-hint =3D "${SPL_SIGN_KEYNAME}";
++            };
++EOF
 +	fi
++
++	cat << EOF >> ${UBOOT_ITS}
++        };
++EOF
++}
++
+ # Create a ITS file for the U-boot FIT, for use when
+ # we want to sign it so that the SPL can verify it
+ uboot_fitimage_assemble() {
++	conf_loadables=3D"\"uboot\""
+ 	rm -f ${UBOOT_ITS} ${UBOOT_FITIMAGE_BINARY}
+=20
+ 	# First we create the ITS script
+@@ -289,13 +356,24 @@ EOF
+=20
  	cat << EOF >> ${UBOOT_ITS}
+         };
++EOF
++	if [ "${UBOOT_FIT_TEE}" =3D "1" ] ; then
++		conf_loadables=3D"\"tee\", ${conf_loadables}"
++		uboot_fitimage_tee
++	fi
++
++	if [ "${UBOOT_FIT_ARM_TRUSTED_FIRMWARE}" =3D "1" ] ; then
++		conf_loadables=3D"\"atf\", ${conf_loadables}"
++		uboot_fitimage_atf
++	fi
++	cat << EOF >> ${UBOOT_ITS}
      };
 =20
+     configurations {
+         default =3D "conf";
+         conf {
+             description =3D "Boot with signed U-Boot FIT";
+-            loadables =3D "uboot";
++            loadables =3D ${conf_loadables};
+             fdt =3D "fdt";
+         };
+     };
 --=20
 2.25.1
 
