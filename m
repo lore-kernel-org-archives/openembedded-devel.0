@@ -1,88 +1,91 @@
-Return-Path: <steve@sakoman.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DA86D44165
-	for <webhook@archiver.kernel.org>; Tue, 19 Nov 2024 14:33:10 +0000 (UTC)
-Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com [209.85.219.177])
- by mx.groups.io with SMTP id smtpd.web11.22584.1732026789541035201
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8CFC7D6C283
+	for <webhook@archiver.kernel.org>; Tue, 19 Nov 2024 17:55:01 +0000 (UTC)
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.web11.28154.1732038897059984203
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Nov 2024 06:33:09 -0800
+ Tue, 19 Nov 2024 09:54:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@sakoman-com.20230601.gappssmtp.com header.s=20230601 header.b=uP67GVdE;
- spf=softfail (domain: sakoman.com, ip: 209.85.219.177, mailfrom: steve@sakoman.com)
-Received: by mail-yb1-f177.google.com with SMTP id 3f1490d57ef6-e38232fc4d8so2491402276.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 19 Nov 2024 06:33:09 -0800 (PST)
+ dkim=pass header.i=@smile.fr header.s=google header.b=mmuwiJLm;
+ spf=pass (domain: smile.fr, ip: 209.85.221.41, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-382423e1f7aso1887954f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 19 Nov 2024 09:54:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=sakoman-com.20230601.gappssmtp.com; s=20230601; t=1732026788; x=1732631588; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=act7yDE4N3e1lOiDZyeCwOsZUVYVaL/TB8ACCqbicRM=;
-        b=uP67GVdEg/3XgUqNH2Fzxht/ckMlowaq7Kw6S++mlixiZSl8Tm4XcB6EH5iZdQ+il6
-         2sfRj1aGFqEe0ZUkz6cNJtSA/6Sp7zQrsb1P7fgalp99xyHjrCuE4eOcbdaQZFy9QIA/
-         1uZpaQGO3PP3Tr+1XBEwqk1LgaY/F4YI1nDJsKHs11i1k8lSBpmHyygoQWNUv1go5FK9
-         A55K+IVkjenvaa5+9pR6tOxIvHF2CIAUlYkAV5s1YRQibHTsGe1A9+bwE8Wt69o/RKZT
-         plL2SAYWOxt4S95vsz9aUHJhRVnmsqCo4Pj3kOVbBkjtZX5znstsRw60hUIgfqUd6nl+
-         ycUg==
+        d=smile.fr; s=google; t=1732038895; x=1732643695; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=/Am91LJVdKA5DDbhYdHq5i9M8nnRJCivCoY9OGUiTqA=;
+        b=mmuwiJLmYlUQijwYYlW8THaMWeuZrNKRlOwAeq4Y4W7Lv8IWtKPLoJwTsDo3E6EUNc
+         4fHJTyOMww0slWieNYJWl/d3O59QLea5qygGzlgZ337B55DyMimnrOWpFffQVvLVf+nW
+         hT/MMpesIy+1PH9n2KKydwkcl1W8T22sNzxzU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732026788; x=1732631588;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=act7yDE4N3e1lOiDZyeCwOsZUVYVaL/TB8ACCqbicRM=;
-        b=VJik5tmUDTeQo6B3KEzbYo5vGcxjlAuVKvWYBz03N8RKsStLMu9xqZ8MYc6mTVsvk0
-         WuvMdMzoBzL+6s9C+g3wd7hVuXnhyx6YWUX83yU6C0WMrmAliQGnzmw4aN63nGPvCGPe
-         BbAN4y2f9+YId+9PllgLEovwDAiph0pWjZblXhNjwenNCC0fg2pDNJxIyixB/JLIR15R
-         69gSX3tACBi1m8ar3mfyizac9lPSB+SuVKF39fkbN/7DNNrHxALoXXo13vjMek0AFyuQ
-         UjGck6jNFYMXQn2zgporNCWxEp3NJk2pZDNnS3OMXCRVM9uX0dVjx6gcHGvX9XJGN3OX
-         vOFw==
-X-Forwarded-Encrypted: i=1; AJvYcCXm4uBbmFHSRmM2zXo1EksJ+125YtJn5L4QlbFNlzO9XdeMIUmtKaS3r2cI/4++gXBBjiKiodp7NQiDiHOSr9f1Mrs=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YwYzHbg6batE8ZitPqqPw1YW7V5gsQGIduDcW4lZ9d/p5xSHdS6
-	Kj6d5rqZaf8p0wqdKbAcIt5mysuguumPdBt9QAKdXX+XkER6C7sps5mIld4wkltgHAMEnuTyT+e
-	CQjpsFeZCo/pL0r7f8GoYL8yQXX8lBQwPKmfeOrNVQvatonAs
-X-Google-Smtp-Source: AGHT+IFi88aKAoqgSxRpvjGLbvVad+QMOfgPm1U9ZaCIjlT6Xf/qecDCRgnVuxq5xpkYmrdbXQOICHoqommKuk10heI=
-X-Received: by 2002:a05:6902:110b:b0:e2b:d4c8:c5e9 with SMTP id
- 3f1490d57ef6-e3825d379e2mr12480510276.11.1732026788671; Tue, 19 Nov 2024
- 06:33:08 -0800 (PST)
+        d=1e100.net; s=20230601; t=1732038895; x=1732643695;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=/Am91LJVdKA5DDbhYdHq5i9M8nnRJCivCoY9OGUiTqA=;
+        b=hzVFaPzI+50nq3E/5CTV9DzSMpGAEa7dPuNcqjhDYK1rnJhVAqA3tSd5etFpD5Hc1H
+         +riZw+NrmGLHy+KD19fD1fiOOr2V+2UtMCLe3AexjOJNLx9/kQ2ywMQZPbuTPe/feYFl
+         j75D+nR3fsjCmbP5uBNAkqim+lrL2ut6gjaL1elIqrTSh4rLVdUqXyw3t681zu59fIgs
+         3HdKODK8J4PLFJ0bfcVlB7W6yZLs9jssEu09xM202QKvA5L+BCZ+qQbQJRCn16S9ccVV
+         ufgau1NkNydavfp3RW/v6iU6bOrxU1Yuj48PdDVlJy04prSEEpvR2J+e0vcCamo9cXQR
+         OwCA==
+X-Gm-Message-State: AOJu0YxscorPz/4rZhInSSRVbQLHd6CISMKD9fFlipDiHzuZrpKgxVSY
+	SvMZ69uiCv0gnIcBZdfOjFIOmHZEAEjm0uiTPgzmZNnKX4huK0RTb566e5ozyEwY0ilMH62Hy9f
+	C
+X-Google-Smtp-Source: AGHT+IHIGoRR3o0y3KraiG/MWiG/nYgm5krIoy58esG1zZOkQszZLnhWci8lYh5r7+xNguARbusiOg==
+X-Received: by 2002:a5d:6484:0:b0:382:3be6:5502 with SMTP id ffacd0b85a97d-3823be657ffmr8986302f8f.51.1732038894987;
+        Tue, 19 Nov 2024 09:54:54 -0800 (PST)
+Received: from P-ASN-ECS-830T8C3.local (53.1.159.89.rev.sfr.net. [89.159.1.53])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3821ae2f602sm16220606f8f.90.2024.11.19.09.54.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 19 Nov 2024 09:54:54 -0800 (PST)
+From: Yoann Congal <yoann.congal@smile.fr>
+To: openembedded-devel@lists.openembedded.org
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-oe][PATCH] tk: make tk_8.x depend on tcl8
+Date: Tue, 19 Nov 2024 18:54:47 +0100
+Message-Id: <20241119175446.1889573-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-References: <20241114111829.1182716-1-liyin.zhang.cn@windriver.com>
- <ZzX0di8r1p4zh_PO@bootlin-mathieu> <7a80e2e2-622a-419d-8ea6-7c29e2a2a992@windriver.com>
- <ZzyKvNO8ZLK-UMT4@bootlin-mathieu>
-In-Reply-To: <ZzyKvNO8ZLK-UMT4@bootlin-mathieu>
-From: Steve Sakoman <steve@sakoman.com>
-Date: Tue, 19 Nov 2024 06:32:57 -0800
-Message-ID: <CAOSpxdZVReE8MuoHNz2LhimFCtng9WKFDS8wGruXuouua5f5xA@mail.gmail.com>
-Subject: Re: [OE-core] [PATCH] lttng-ust: backport patch to fix
- cmake-multiple-shared-libraries build error
-To: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
-Cc: "Zhang, Liyin (CN)" <liyin.zhang.cn@windriver.com>, openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 19 Nov 2024 14:33:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113910
+ <openembedded-devel@lists.openembedded.org>; Tue, 19 Nov 2024 17:55:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113911
 
-On Tue, Nov 19, 2024 at 4:55=E2=80=AFAM Mathieu Dubois-Briand
-<mathieu.dubois-briand@bootlin.com> wrote:
->
-> On Tue, Nov 19, 2024 at 09:32:17AM +0800, Zhang, Liyin (CN) wrote:
-> >
-> > Sorry, I forgot branch name. Please merge it into [scarthgap].
-> >
-> > Thanks.
->
-> Ok, noted it's not for master. Adding Steve, in copy to make sure he
-> sees your patch.
+From: Yoann Congal <yoann.congal@smile.fr>
 
-Got it, thanks!
+tk_8.x depends on tcl8 (tcl is the 9.x version in OE-core)
 
-Steve
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+---
+NB: This patch fixes a do_configure failure but a later do_compile
+failure is fixed by a patch in OE-Core:
+https://lists.openembedded.org/g/openembedded-core/message/207399
 
-> --
-> Mathieu Dubois-Briand, Bootlin
-> Embedded Linux and Kernel engineering
-> https://bootlin.com
+This is kind of a workaround since the proper solution would be to
+upgrade to tk_9.x. But I would rather fix the build first and upgrade
+later.
+---
+ meta-oe/recipes-devtools/tcltk/tk_8.6.15.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-devtools/tcltk/tk_8.6.15.bb b/meta-oe/recipes-devtools/tcltk/tk_8.6.15.bb
+index 1438a05625..ddd7043c0a 100644
+--- a/meta-oe/recipes-devtools/tcltk/tk_8.6.15.bb
++++ b/meta-oe/recipes-devtools/tcltk/tk_8.6.15.bb
+@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = "file://license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+     file://xlib/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+ "
+ 
+-DEPENDS = "tcl virtual/libx11 libxt"
++DEPENDS = "tcl8 virtual/libx11 libxt"
+ 
+ SRC_URI = "\
+     ${SOURCEFORGE_MIRROR}/tcl/${BPN}${PV}-src.tar.gz \
 
