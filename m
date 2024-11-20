@@ -1,112 +1,189 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <Jiaying.Song.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B9FDD6C2BD
-	for <webhook@archiver.kernel.org>; Wed, 20 Nov 2024 00:59:10 +0000 (UTC)
-Received: from mail-oi1-f170.google.com (mail-oi1-f170.google.com [209.85.167.170])
- by mx.groups.io with SMTP id smtpd.web10.2755.1732064346600329152
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AFDD5D6E2B6
+	for <webhook@archiver.kernel.org>; Wed, 20 Nov 2024 05:29:41 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.6769.1732080576334232213
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Nov 2024 16:59:06 -0800
+ Tue, 19 Nov 2024 21:29:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=RrcPFK37;
- spf=pass (domain: gmail.com, ip: 209.85.167.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f170.google.com with SMTP id 5614622812f47-3e60825aa26so2090282b6e.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 19 Nov 2024 16:59:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1732064346; x=1732669146; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=6dSb2PhAjsy434MGtiQ/79KpG091gvZurzXsjm8JUSQ=;
-        b=RrcPFK37ZZ1WN7Lw/9fb88XCWTYL0FeZYTDl5b5GqtEqMLbhf/L8pnzpUvc3Ruglw/
-         wGlnKNGdzbiG9KCzEWUXQfFRpPn7FarWkR9GRytWpu5ckCdIK0hAJxFFsl0YJmtYGF1a
-         58XIuZYLZIeuMCqm73O1lqkyg/QRAD8DDg3sHlVVeAzJXkJSwz/pdaXo766VSdcSmsmi
-         7bmg2dcliayOehAJRFI1xO+m/Cj6cinkvox21+qFQ+GskI/DkbrvaMFiiE07keyeyvMy
-         Tt81Ejw0Eazsd4xnPdBgIa9E7a41gNrJJ786v0yV69JekWBIXvu8jKuSdp+eakN6DPYf
-         eZWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732064346; x=1732669146;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=6dSb2PhAjsy434MGtiQ/79KpG091gvZurzXsjm8JUSQ=;
-        b=shsxHAXjLn/YYeQf/IWja5NsVMiwdUIipnP1vcB1StrIulCQLzNI6o1wrv1Xot92wJ
-         cJr5WC2rEhnsAhHiaGncXjsL1J3EDseHkrFqGZ4bvmJc2ZJbNoo5EN/FtA9DwdoaotfR
-         lIqzRXxuY8z5UBvaE6Zm6OxulayBQYC5r5lbK//ASZHqO+FM272rhDt0ekNVJtRHx4bJ
-         Ao7VyC+oPAtNCeN7mb8u6AEpdvPS/at9vpjabeA9ikyXLN/YdHitulm1SsczMY3DOx2x
-         lGV90PC6AMmkDNNiEdWWK5MTTFOW+YnZiOk5JbPnbTxvzQavvzh9z/xRF1c7JRwdcSB6
-         fwsA==
-X-Forwarded-Encrypted: i=1; AJvYcCV/2DzBbEwzzSeIBg6B+fIuEIldzSgerd/+aDIUz0lxCqAkFLdbay8SGhStHy3mPj/EXC/fmrDwBBItkMErbDZvbNA=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzN6cToAw5fAdnnMohFQ/SaEjISGPN100ovBT0DzlCP9Zq4U2GJ
-	GJLpQ8GXXRC2Dosc+gmHcndy6UDYa58YvhodSBFKNCpDxgesSRatWxqdxZfcAV3Z+Ksa906iSnk
-	B5yRpq7L1X/qc8vwnw+yJw5dtCtI=
-X-Google-Smtp-Source: AGHT+IGYYDQgBuRncspYdNdC3M/YJhe02AaiMs+L4y+DrcsXTEFkOc+AWHpsuK8tzr6/ZJilsG5+Gva87rNNWyOhq5w=
-X-Received: by 2002:a05:6808:2023:b0:3e6:3860:596b with SMTP id
- 5614622812f47-3e7eb6b83d8mr877966b6e.8.1732064345876; Tue, 19 Nov 2024
- 16:59:05 -0800 (PST)
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=1054f72aee=jiaying.song.cn@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4AK5CPt3013285
+	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Nov 2024 21:29:35 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 42xqj7ut53-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Nov 2024 21:29:35 -0800 (PST)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Tue, 19 Nov 2024 21:29:34 -0800
+Received: from pek-lpg-core3.wrs.com (128.224.153.43) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Tue, 19 Nov 2024 21:29:34 -0800
+From: <jiaying.song.cn@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <changqing.li@windriver.com>
+Subject: [meta-networking][PATCH] openvpn: add ptest support
+Date: Wed, 20 Nov 2024 13:29:33 +0800
+Message-ID: <20241120052933.2174895-1-jiaying.song.cn@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20241109132924.4334-1-brgl@bgdev.pl>
-In-Reply-To: <20241109132924.4334-1-brgl@bgdev.pl>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 19 Nov 2024 16:58:40 -0800
-Message-ID: <CAMKF1sp-HYajgrrGyxLQ7DY7oWDXgOD4tez_LCKM+cr4qOkk5Q@mail.gmail.com>
-Subject: Re: [meta-python][PATCH] python3-fuse: new recipe
-To: Bartosz Golaszewski <brgl@bgdev.pl>
-Cc: Bruce Ashfield <bruce.ashfield@gmail.com>, openembedded-devel@lists.openembedded.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: lR9O0xQJezG9eaVdKaNehLbCO5Gyd1ZM
+X-Proofpoint-GUID: lR9O0xQJezG9eaVdKaNehLbCO5Gyd1ZM
+X-Authority-Analysis: v=2.4 cv=Sb6ldeRu c=1 sm=1 tr=0 ts=673d73bf cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=VlfZXiiP6vEA:10 a=uDo-SIiEAAAA:8 a=9dNbsytUAAAA:8 a=t7CeM3EgAAAA:8 a=xTxiDkjYvB-ne5mhvqgA:9 a=Rkhf4GTZPwEC63LfVcCP:22
+ a=gPpeecpFUKP6j8iU7U-x:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.62.30
+ definitions=2024-11-20_02,2024-11-18_01,2024-09-30_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 suspectscore=0
+ mlxlogscore=999 lowpriorityscore=0 spamscore=0 priorityscore=1501
+ impostorscore=0 malwarescore=0 adultscore=0 phishscore=0 mlxscore=0
+ bulkscore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2409260000 definitions=main-2411200038
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Nov 2024 00:59:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113920
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Nov 2024 05:29:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113921
 
-this is breaking YP compatible check. see
-https://valkyrie.yoctoproject.org/#/builders/81/builds/141/steps/12/logs/er=
-rors
+From: Jiaying Song <jiaying.song.cn@windriver.com>
 
-It depends on fuse which comes from meta-filesystems. Perhaps this
-recipe should be added to meta-filesystems layer as well.
+All test cases PASS.
+Add openvpn to PTESTS_SLOW because test duration longer than 30s Below is parts of the run log:
+[==========] xkey provider tests: Running 3 test(s).
+[ RUN      ] xkey_provider_test_fetch
+[       OK ] xkey_provider_test_fetch
+[ RUN      ] xkey_provider_test_mgmt_sign_cb
+[       OK ] xkey_provider_test_mgmt_sign_cb
+[ RUN      ] xkey_provider_test_generic_sign_cb
+[       OK ] xkey_provider_test_generic_sign_cb
+[==========] xkey provider tests: 3 test(s) run.
+[  PASSED  ] 3 test(s).
+PASS: provider_testdriver
 
-On Sat, Nov 9, 2024 at 5:29=E2=80=AFAM Bartosz Golaszewski <brgl@bgdev.pl> =
-wrote:
->
-> From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
->
-> Add a recipe for fuse-python - the official python3 bindings for
-> libfuse2.
->
-> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-> ---
->  .../recipes-devtools/python/python3-fuse_1.0.8.bb    | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python3-fuse_1.0.=
-8.bb
->
-> diff --git a/meta-python/recipes-devtools/python/python3-fuse_1.0.8.bb b/=
-meta-python/recipes-devtools/python/python3-fuse_1.0.8.bb
-> new file mode 100644
-> index 000000000..3dd1d1442
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-fuse_1.0.8.bb
-> @@ -0,0 +1,12 @@
-> +SUMMARY =3D "Python bindings for libfuse2."
-> +
-> +LICENSE =3D "LGPL-2.1-only"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D243b725d71bb5df4a1e5920b344b8=
-6ad"
-> +
-> +inherit setuptools3 pypi pkgconfig
-> +
-> +SRC_URI[sha256sum] =3D "6d27023207162ae82145b42cb5e26ef11b2eccc60c8b85f5=
-528fee3e94475187"
-> +
-> +DEPENDS =3D "fuse python3-setuptools-native"
-> +
-> +PYPI_PACKAGE =3D "fuse_python"
-> --
-> 2.45.2
->
+The files t_client.sh.in and t_cltsrv.sh were not added because they
+require specific environment configuration files. It is recommended that
+users configure these based on their environment before testing.
+
+Since the recipe enables iproute2, the condition for t_net.sh based on
+HAVE_SITNL is not met, so t_net.sh will not be included in the build.
+
+Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
+---
+ .../ptest-packagelists-meta-networking.inc    |  1 +
+ .../recipes-support/openvpn/openvpn/run-ptest |  5 ++
+ .../recipes-support/openvpn/openvpn_2.6.12.bb | 48 ++++++++++++++++++-
+ 3 files changed, 52 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-support/openvpn/openvpn/run-ptest
+
+diff --git a/meta-networking/conf/include/ptest-packagelists-meta-networking.inc b/meta-networking/conf/include/ptest-packagelists-meta-networking.inc
+index 7ec6f9063d..2197a06e74 100644
+--- a/meta-networking/conf/include/ptest-packagelists-meta-networking.inc
++++ b/meta-networking/conf/include/ptest-packagelists-meta-networking.inc
+@@ -25,6 +25,7 @@ PTESTS_FAST_META_NETWORKING = "\
+ #    firewalld
+ PTESTS_SLOW_META_NETWORKING = "\
+     net-snmp \
++    openvpn \
+ "
+ 
+ PTESTS_PROBLEMS_META_NETWORKING = "\
+diff --git a/meta-networking/recipes-support/openvpn/openvpn/run-ptest b/meta-networking/recipes-support/openvpn/openvpn/run-ptest
+new file mode 100644
+index 0000000000..5b187d9086
+--- /dev/null
++++ b/meta-networking/recipes-support/openvpn/openvpn/run-ptest
+@@ -0,0 +1,5 @@
++#!/bin/sh
++for x in `find ./ -name Makefile`;
++do
++	make -C `dirname ${x}` -k runtest-TESTS
++done
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.6.12.bb b/meta-networking/recipes-support/openvpn/openvpn_2.6.12.bb
+index d81b8ce449..958eecb63a 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.6.12.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.6.12.bb
+@@ -3,13 +3,14 @@ HOMEPAGE = "https://openvpn.net/"
+ SECTION = "net"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=89196bacc47ed37a5b242a535661a049"
+-DEPENDS = "lzo lz4 openssl iproute2 libcap-ng ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
++DEPENDS = "lzo lz4 openssl iproute2 libcap-ng ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} ${@bb.utils.contains('PTEST_ENABLED', '1', 'cmocka', '', d)} "
+ 
+-inherit autotools systemd update-rc.d pkgconfig
++inherit autotools systemd update-rc.d pkgconfig ptest
+ 
+ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
+            file://0001-configure.ac-eliminate-build-path-from-openvpn-versi.patch \
+            file://openvpn \
++           file://run-ptest \
+           "
+ 
+ UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
+@@ -42,6 +43,8 @@ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
+ PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
+ PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
+ 
++RDEPENDS:${PN}-ptest:append = " make bash"
++
+ do_install:append() {
+     install -d ${D}/${sysconfdir}/init.d
+     install -m 755 ${UNPACKDIR}/openvpn ${D}/${sysconfdir}/init.d
+@@ -63,6 +66,47 @@ do_install:append() {
+     install -d -m 710 ${D}/${localstatedir}/lib/openvpn
+ }
+ 
++do_compile_ptest () {
++    for x in `find ${B}/tests/unit_tests -name Makefile -exec grep -l buildtest-TESTS {} \;`; do
++        dir=`dirname ${x}`
++        case $dir in
++            *example*)   
++                echo "Skipping directory: $dir"
++                ;;
++            *)           
++                oe_runmake -C ${dir} buildtest-TESTS
++                ;;
++        esac
++    done
++}
++
++do_install_ptest() {
++    for x in $(find ${B}/tests/unit_tests -name Makefile -exec grep -l buildtest-TESTS {} \;); do
++        dir=$(dirname ${x})
++
++        if [[ "$dir" == *example* ]]; then
++            continue
++        fi
++
++        target_dir="${D}/${PTEST_PATH}/unit_tests/$(basename ${dir})"
++        mkdir -p ${target_dir}
++        cp -f ${dir}/Makefile ${target_dir}/        
++        sed -i "s/^Makefile:/MM:/g" ${target_dir}/Makefile
++        sed -i 's/^#TESTS = $(am__EXEEXT_4)/TESTS = $(am__EXEEXT_4)/' ${target_dir}/Makefile
++
++        for testfile in $(find ${dir} -name "*testdriver"); do
++            cp -rf ${testfile} ${target_dir}/
++        done
++    done
++    sed -i 's|find ./|find ${PTEST_PATH}|g' ${D}${PTEST_PATH}/run-ptest
++    sed -i 's|${top_builddir}/src/openvpn|${sbindir}|g' ${S}/tests/t_lpback.sh
++    cp -f ${S}/tests/t_lpback.sh ${D}/${PTEST_PATH}
++    cp -f ${B}/tests/Makefile ${D}/${PTEST_PATH}
++    sed -i "s/^Makefile:/MM:/g" ${D}/${PTEST_PATH}/Makefile
++    sed -i "s/^test_scripts = t_client.sh t_lpback.sh t_cltsrv.sh/test_scripts = t_lpback.sh/g" ${D}/${PTEST_PATH}/Makefile
++    
++}
++
+ PACKAGES =+ " ${PN}-sample "
+ 
+ RRECOMMENDS:${PN} = "kernel-module-tun"
+-- 
+2.34.1
+
 
