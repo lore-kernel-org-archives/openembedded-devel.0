@@ -2,146 +2,121 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 771F7D6C29E
-	for <webhook@archiver.kernel.org>; Tue, 19 Nov 2024 21:17:42 +0000 (UTC)
-Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com [209.85.210.53])
- by mx.groups.io with SMTP id smtpd.web11.33005.1732051059686435127
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59E25D6C2BD
+	for <webhook@archiver.kernel.org>; Wed, 20 Nov 2024 00:37:50 +0000 (UTC)
+Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com [209.85.210.45])
+ by mx.groups.io with SMTP id smtpd.web10.2358.1732063061504661179
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Nov 2024 13:17:39 -0800
+ Tue, 19 Nov 2024 16:37:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ERDYm3Qu;
- spf=pass (domain: gmail.com, ip: 209.85.210.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f53.google.com with SMTP id 46e09a7af769-7181eb9ad46so838400a34.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 19 Nov 2024 13:17:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OwQszaZy;
+ spf=pass (domain: gmail.com, ip: 209.85.210.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f45.google.com with SMTP id 46e09a7af769-7180f2f5fb0so2201136a34.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 19 Nov 2024 16:37:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1732051059; x=1732655859; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1732063061; x=1732667861; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=AFtpReqZHOieGNfY2Ryk0/Fzhm0lMHReNqRcXU+d33s=;
-        b=ERDYm3QuQm+L6YZQrC1vr6T+pfH4vgpcArwpI/N0sCTPHu9FqNgfk3XqCi4CkmCLuA
-         Khgj9/U159C3od8RIacxD59KYSr77dTAEchxE0sTfym6HNC9VVV+LVNe0Ao3s6nGIUe5
-         YQA1mShuCgTGoAx+VZktNy+6+SuEZ2ANLCvah8vK/G0wPuAn/2J6ykcgnIKF4lpC5ZDA
-         A1UJOWFSKxPEEOZCPDZmLIIGUBfF/gsw3rE0tD4UlMWi56BEaiC/pvb+j/hE/1WPwNV9
-         9ZzSyTiZgFYBED2YgiG0a82ANXPCWa1AdeX/Ajdo7OaqqD0D+bFciz3PVykvyoh+Pu44
-         4qig==
+        bh=JnFKxrw7rXbkUo4Qnzq3/SXCD2RwIqREu7k/8ldtq/8=;
+        b=OwQszaZy0uXBqkdjTDo93bXBch/QIiefo0FFAceXaOKONK+DOncfGONC8M3Yuxt8Ni
+         DirIeBP8r174D6Gs/rZ9HF0ITeNhiDIm6pSu7nx+vlYurUrDlyng1c4wuMjc22JOno9+
+         VVfGl8VIANzVtsypb16/gSSqgB1FSORcA0AoYenNzjj23ou3kGecENaCI22pG4ti5+Dk
+         WIUL4sw/PGdJJ7dYksjQrsasK38e5OtYAjTcc81wUL8hqvkK3gaJ3XisUJwFa9TH9AwN
+         Cg6KhabVoHhTtCIQ5lO64Eck+/cNnI9B31r0yV4iOqUykWY0fFCtDtGmaq4fvaUb5BQ1
+         hFDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732051059; x=1732655859;
+        d=1e100.net; s=20230601; t=1732063061; x=1732667861;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=AFtpReqZHOieGNfY2Ryk0/Fzhm0lMHReNqRcXU+d33s=;
-        b=sxLr6rxpJDcS41uUVW0OIot2GsJZaAeUW7xtvUtdC0mGfl+Bq9huisvW9tjqcQ42wD
-         olrEGi02v7TGksFGMGeDyMfeY1+u5RipfpyTHMa5dmAbDefR5I8qzIYQGQ34wRVdNKby
-         2BHXAqnhby6aXSwhRZ2b0EIu1abrm1jH62hgTdIhhBZMqAlmdKHCU5tZQgUtZrxtWIb3
-         GL/uCQH1978Yjv8lkli+rUQqaJ/8SQ3rJyFQcAfo5+uH7LzsNnYhKDMEW4/nFDXjlCup
-         ywLVTJDO/dtPAgP9goKtI34hcuaCorddM9dTgd1XuDx172PuXNVfWTEjCD7ZgA4oM4Tw
-         amKQ==
-X-Gm-Message-State: AOJu0YwmtD/JWiYC3aFSBPoAZ8WDJw0pjrXlGXsVwSkCP92LDVfhmPmW
-	YA8dija1MxI/W0yokGZgRZSn60IzZHhNSwPY/+IXZ7il1Qcg+9JNpULS+5I8Un08hJ+byzX8XzH
-	rOex0xjcAQGzFil/XLo7vtM44iRyxRg==
-X-Google-Smtp-Source: AGHT+IG8234/0KB5MUdq6BAXqspOz10QaYvm/xQVaWpoxuGEY5P1/BQGcLvYSzQnSY8CjjmOhggOuIYIuNP7b400p6Q=
-X-Received: by 2002:a05:6830:84b:b0:716:a571:d3ab with SMTP id
- 46e09a7af769-71ab31faca6mr362154a34.21.1732051058920; Tue, 19 Nov 2024
- 13:17:38 -0800 (PST)
+        bh=JnFKxrw7rXbkUo4Qnzq3/SXCD2RwIqREu7k/8ldtq/8=;
+        b=Mbi712qenWSuRFWAcWcMUUMjrspgkirer4J1RSSZ1AFxBZ8I0rdlCruf4NG+m9WbPF
+         DxOsN/f8+rVbxLeosadbszBC1Vb2DL1SbSZSg8qGZYyzfW7Qnqzit5k/gVNH5apnQfxy
+         3pzMFQSEgf56Kz8Ci0Nf8UqN2pJo29Yt/3+fgJO2M48nrunmGakX/vR5HNjzWfO8CY0y
+         pwcp7iz4OSugJXIPxZMnIBRViIoXNYfu2t9WUJ3WlCALyzkjnahYxWtLSt6k5z8UaEge
+         qKzHw0XI3np9lbjJntPtN21n6KihKs2dYdTlVZTrIvyVeGilWSH6s0MVUyqE4WqBGh54
+         7GoQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWNfIyMH7unS+sVeIvQtAmNTl3zZuvR0tWhJUYK8aby+Dp+NUa1YbQ96nP4JGUm84ATX+Y/wrKqyuCLx/vcNb+Ljlo=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YxrDXu1A+wNizsplA74MG7qwRPq96IyQxiqwJ0QmT6wW1pP3TuK
+	4gFYNtjLxkAPjaUuwEFGZMg67vBwIBXDH6qoUhbWHV0XNDqbDZnbKRDiR5vkZvtyaCL+QqpcG8L
+	rEhicjFqSeB0FVWLIKXH7tZ8j6Rk=
+X-Google-Smtp-Source: AGHT+IHrM/kUvdkjbZ0cr+AGrWSfsCGvVDCC+h/7zwcYqxw5+REmpzRz9QNV1pCrskgc4twsvtmLwKlWrxpERe1OQxE=
+X-Received: by 2002:a05:6830:6a99:b0:718:9a71:be2f with SMTP id
+ 46e09a7af769-71ab32239bemr948973a34.21.1732063060669; Tue, 19 Nov 2024
+ 16:37:40 -0800 (PST)
 MIME-Version: 1.0
-References: <20241112165106.2273168-1-peng.zhang1.cn@windriver.com>
-In-Reply-To: <20241112165106.2273168-1-peng.zhang1.cn@windriver.com>
+References: <20241112174555.1525173-1-ross.burton@arm.com> <20241112174555.1525173-2-ross.burton@arm.com>
+ <CANNYZj_Ezei_RLRBXPtxoJ1pCkzW8PVnAKUYQSDUr30925eiNw@mail.gmail.com>
+In-Reply-To: <CANNYZj_Ezei_RLRBXPtxoJ1pCkzW8PVnAKUYQSDUr30925eiNw@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 19 Nov 2024 13:17:13 -0800
-Message-ID: <CAMKF1srLOCMrSqmGbtWfymw8JTFHnyUZk5EsR+ECBdbVBiF5og@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v5] parallel: Add recipe for GNU Parallel
-To: peng.zhang1.cn@windriver.com
-Cc: openembedded-devel@lists.openembedded.org
+Date: Tue, 19 Nov 2024 16:37:14 -0800
+Message-ID: <CAMKF1sryc9ku=Vg3gLr3MU0WrOZrm2ehVc_rWk2mOYm_KLhNrw@mail.gmail.com>
+Subject: Re: [oe] [PATCH 2/2] tk: tk 8 needs tcl 8
+To: alex.kanavin@gmail.com
+Cc: ross.burton@arm.com, openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 19 Nov 2024 21:17:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113918
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Nov 2024 00:37:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113919
 
-I have taken v3, please send the delta between v3 and v5 as a separate
-patch please.
+On Tue, Nov 12, 2024 at 12:25=E2=80=AFPM Alexander Kanavin via
+lists.openembedded.org <alex.kanavin=3Dgmail.com@lists.openembedded.org>
+wrote:
+>
+> Khem has a patch in master-next that covers this and more:
+> https://git.openembedded.org/meta-openembedded/commit/?h=3Dmaster-next&id=
+=3D0449563c4088b6a0754daec9f0eb6da3929d2234
+> should be merged ASAP rather.
 
-On Tue, Nov 12, 2024 at 8:51=E2=80=AFAM Zhang, Peng (Paul) (CN) via
-lists.openembedded.org
-<peng.zhang1.cn=3Dwindriver.com@lists.openembedded.org> wrote:
+This had some build problems before I left for vacation, I will look
+into finishing it this week and hopefully
+we can keep both tk8 and tk9 recipes.
+
 >
-> From: Zhang Peng <peng.zhang1.cn@windriver.com>
+> Alex
 >
-> This recipe adds the parallel package, a shell tool for executing jobs
-> in parallel using one or more computers.
->
-> Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
-> ---
->  .../parallel/parallel_20241022.bb             | 39 +++++++++++++++++++
->  1 file changed, 39 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/parallel/parallel_20241022.b=
-b
->
-> diff --git a/meta-oe/recipes-extended/parallel/parallel_20241022.bb b/met=
-a-oe/recipes-extended/parallel/parallel_20241022.bb
-> new file mode 100644
-> index 000000000..30ff9182e
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/parallel/parallel_20241022.bb
-> @@ -0,0 +1,39 @@
-> +SUMMARY =3D "GNU Parallel - A shell tool for executing jobs in parallel =
-using one or more computers"
-> +DESCRIPTION =3D "GNU Parallel is a command-line tool for executing jobs =
-in parallel on one or more computers. \
-> +It allows users to run multiple commands simultaneously, making it easie=
-r to process large batches of tasks."
-> +
-> +HOMEPAGE =3D "https://www.gnu.org/software/parallel/"
-> +LICENSE =3D "CC-BY-SA-4.0 & GFDL-1.3-or-later & GPL-3.0-or-later"
-> +
-> +LIC_FILES_CHKSUM =3D " \
-> +    file://LICENSES/CC-BY-SA-4.0.txt;md5=3D7130783469368ceb248a4f03e89ea=
-4b8 \
-> +    file://LICENSES/GFDL-1.3-or-later.txt;md5=3De0771ae6a62dc8a2e50b1d45=
-0fea66b7 \
-> +    file://LICENSES/GPL-3.0-or-later.txt;md5=3D8da5784ab1c72e63ac74971f8=
-8658166 \
-> +"
-> +
-> +SRC_URI =3D "${GNU_MIRROR}/${BPN}/${BP}.tar.bz2"
-> +SRC_URI[sha256sum] =3D "6de22bf1c67f7f316670d21ed1a2a32f1214dfbd3e420939=
-ba937925c0a57a12"
-> +
-> +inherit autotools bash-completion
-> +
-> +PACKAGES +=3D "${PN}-zsh-completion"
-> +FILES:${PN}-zsh-completion =3D "${datadir}/zsh"
-> +
-> +RDEPENDS:${PN} =3D " \
-> +    perl \
-> +    perl-module-file-basename \
-> +    perl-module-file-glob \
-> +    perl-module-file-path \
-> +    perl-module-file-temp \
-> +    perl-module-filehandle \
-> +    perl-module-getopt-long \
-> +    perl-module-io-select \
-> +    perl-module-ipc-open3 \
-> +    perl-module-posix \
-> +    perl-module-symbol \
-> +    perl-module-thread-queue \
-> +    perl-module-threads \
-> +    perl-module-threads-shared \
-> +"
-> +
-> +BBCLASSEXTEND =3D "native"
-> --
-> 2.34.1
->
+> On Tue, 12 Nov 2024 at 18:46, Ross Burton via lists.openembedded.org
+> <ross.burton=3Darm.com@lists.openembedded.org> wrote:
+> >
+> > oe-core now has Tcl 9, so Tk 8 needs to depend on tcl8 until we've
+> > upgraded tk to v9.
+> >
+> > Signed-off-by: Ross Burton <ross.burton@arm.com>
+> > ---
+> >  meta-oe/recipes-devtools/tcltk/tk_8.6.15.bb | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/meta-oe/recipes-devtools/tcltk/tk_8.6.15.bb b/meta-oe/reci=
+pes-devtools/tcltk/tk_8.6.15.bb
+> > index 1438a05625..ddd7043c0a 100644
+> > --- a/meta-oe/recipes-devtools/tcltk/tk_8.6.15.bb
+> > +++ b/meta-oe/recipes-devtools/tcltk/tk_8.6.15.bb
+> > @@ -15,7 +15,7 @@ LIC_FILES_CHKSUM =3D "file://license.terms;md5=3Dc88f=
+99decec11afa967ad33d314f87fe \
+> >      file://xlib/license.terms;md5=3Dc88f99decec11afa967ad33d314f87fe \
+> >  "
+> >
+> > -DEPENDS =3D "tcl virtual/libx11 libxt"
+> > +DEPENDS =3D "tcl8 virtual/libx11 libxt"
+> >
+> >  SRC_URI =3D "\
+> >      ${SOURCEFORGE_MIRROR}/tcl/${BPN}${PV}-src.tar.gz \
+> > --
+> > 2.34.1
+> >
+> >
+> >
+> >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#113795): https://lists.openembedded.org/g/openembedde=
-d-devel/message/113795
-> Mute This Topic: https://lists.openembedded.org/mt/109538400/1997914
+> View/Reply Online (#113799): https://lists.openembedded.org/g/openembedde=
+d-devel/message/113799
+> Mute This Topic: https://lists.openembedded.org/mt/109539529/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
