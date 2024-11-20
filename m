@@ -2,63 +2,61 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DC2FD743E8
-	for <webhook@archiver.kernel.org>; Wed, 20 Nov 2024 22:04:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BC324D743F1
+	for <webhook@archiver.kernel.org>; Wed, 20 Nov 2024 23:26:02 +0000 (UTC)
 Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
- by mx.groups.io with SMTP id smtpd.web10.161.1732140233703592414
+ by mx.groups.io with SMTP id smtpd.web10.1926.1732145161614967753
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Nov 2024 14:03:54 -0800
+ Wed, 20 Nov 2024 15:26:01 -0800
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
-Received: from fwd87.aul.t-online.de (fwd87.aul.t-online.de [10.223.144.113])
-	by mailout10.t-online.de (Postfix) with SMTP id 97B5063A
-	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Nov 2024 23:03:51 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.154.160.173]) by fwd87.t-online.de
+Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
+	by mailout10.t-online.de (Postfix) with SMTP id 959E3911
+	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Nov 2024 00:25:59 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.160.173]) by fwd86.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tDsne-12FfWL0; Wed, 20 Nov 2024 23:03:50 +0100
+	esmtp id 1tDu58-3zmzPF0; Thu, 21 Nov 2024 00:25:58 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] eog: add itstool-native dependency
-Date: Wed, 20 Nov 2024 23:06:08 +0100
-Message-ID: <20241120220608.1690113-1-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH 1/2] geary: add itstool-native dependency
+Date: Thu, 21 Nov 2024 00:28:11 +0100
+Message-ID: <20241120232812.2718277-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1732140230-72FFB700-CEE121D1/0/0 CLEAN NORMAL
-X-TOI-MSGID: d93d2726-8fb4-40e1-a62e-08e611c95991
+X-TOI-EXPURGATEID: 150726::1732145158-4E7FA459-17DBD872/0/0 CLEAN NORMAL
+X-TOI-MSGID: f11a3d72-1cfc-478d-9c05-bfaa6c6a3e49
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Nov 2024 22:04:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113940
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Nov 2024 23:26:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113941
 
 fixes:
-| ../eog-47.0/help/meson.build:45:6: ERROR: Program 'itstool' not found o=
-r not executable
+| Configuring org.gnome.Geary.service using configuration
+| Program itstool found: NO
 |
-| A full log can be found at /home/flk/poky/build/tmp/work/corei7-64-poky=
--linux/eog/47.0/build/meson-logs/meson-log.txt
-| ERROR: meson failed
+| ../git/help/meson.build:21:6: ERROR: Program 'itstool' not found or not=
+ executable
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-gnome/recipes-gnome/eog/eog_47.0.bb | 1 +
+ meta-gnome/recipes-connectivity/geary/geary_46.0.bb | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-gnome/recipes-gnome/eog/eog_47.0.bb b/meta-gnome/recipe=
-s-gnome/eog/eog_47.0.bb
-index 8e0583cf9..82a1febed 100644
---- a/meta-gnome/recipes-gnome/eog/eog_47.0.bb
-+++ b/meta-gnome/recipes-gnome/eog/eog_47.0.bb
-@@ -3,6 +3,7 @@ LICENSE =3D "GPL-2.0-only"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
-263"
-=20
- DEPENDS =3D " \
+diff --git a/meta-gnome/recipes-connectivity/geary/geary_46.0.bb b/meta-g=
+nome/recipes-connectivity/geary/geary_46.0.bb
+index d8d48ef51..2ca27c4f3 100644
+--- a/meta-gnome/recipes-connectivity/geary/geary_46.0.bb
++++ b/meta-gnome/recipes-connectivity/geary/geary_46.0.bb
+@@ -18,6 +18,7 @@ DEPENDS =3D " \
+     gtk+3 \
+     icu \
+     iso-codes \
 +    itstool-native \
-     librsvg \
-     gnome-desktop \
-     gsettings-desktop-schemas \
+     json-glib \
+     libhandy \
+     libical \
 --=20
 2.47.0
 
