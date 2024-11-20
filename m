@@ -1,120 +1,163 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 46A17D711D2
-	for <webhook@archiver.kernel.org>; Wed, 20 Nov 2024 17:40:46 +0000 (UTC)
-Received: from mail-oi1-f170.google.com (mail-oi1-f170.google.com [209.85.167.170])
- by mx.groups.io with SMTP id smtpd.web11.20109.1732124437553642250
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83324D711D9
+	for <webhook@archiver.kernel.org>; Wed, 20 Nov 2024 18:32:56 +0000 (UTC)
+Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
+ by mx.groups.io with SMTP id smtpd.web11.22154.1732127567729897274
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Nov 2024 09:40:37 -0800
+ Wed, 20 Nov 2024 10:32:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=BBvE7KLR;
- spf=pass (domain: gmail.com, ip: 209.85.167.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f170.google.com with SMTP id 5614622812f47-3e5fbc40239so27899b6e.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Nov 2024 09:40:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1732124437; x=1732729237; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=maxeg6nSw1j3XrhKLspIuHhL1xRX8ADN4GVqUFIhPCE=;
-        b=BBvE7KLRcEbfVHinCJ5JOTnADcPsGOUNHODKyTORpLkMpQmqeEUHLvsmd2e+4b+Qw9
-         uabQddnaqMguPLAxaKRYXkQ4MG1ctzlJujJHKvO4ucMycJR8R3KmIIh+dzPtqHewXVHG
-         FjpR2IKjrEbXtz/w2qR7kuGBN2kkzGluiO1q3gMXW/hlPs0sZO2JyorZCi0r+hn6QTKz
-         +zbYMQ1NFEIWwa79kr+k3ATkO9mz0W0FUSstH2HOWF1iH3+pGNAOdGyj/57spCI6dAsg
-         cZ+j+OD5aUZW2jj3FTL1AXyoJB02ANV8OXZD4QcIui8kkKBRxIYeY96PkXyfMi1Xr2fj
-         v2jA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732124437; x=1732729237;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=maxeg6nSw1j3XrhKLspIuHhL1xRX8ADN4GVqUFIhPCE=;
-        b=R7TjFt25ip9AYt0edI5liPNB7ZUiUNnM4GpCbNK3RF1ESi0R25t9Wb1Q+57v9wPYej
-         uTUJxmwj5JDhP8tnPKAqWmBshA0hrxX06oKGIJO4o0pB2odbw+OAJ9/gwDgj5bHkD3Vf
-         a9XJxfFQB4WljuOY9s1xrWIbO6wU7vh8LT/UISTzJj5/FLFBkiVQqqg9TBkZsv+L6/P4
-         y3ouKdB9Jdu3S4v42kcrzlxFwCwUkmKPU2ZjCjxWn5AALxd3aiEOl/buOgr3ifGF2dqT
-         XGHlV+oBI1Bxq/fraz/3/BalAj7akWOiYX+G0HDRGGqYSHZbT5E7J7ixZNMdX9Emygq2
-         hrxg==
-X-Gm-Message-State: AOJu0YxOD/6xamSnG6X45LIoxFIhv2QztNh+xt7MwwIuq/4tl7Pn65qa
-	DxjSonScC+xCip5MnMKpvDEuxsh0+U4bTFn1XYC/sDsihX0bMBRPRjd6cW+U5X/TpLDKgBDE44j
-	fHcYA+2nMoYs5dmJCflR41rryM/I=
-X-Google-Smtp-Source: AGHT+IHCdx7YXJOlv78puScpYz3Pb8E++1GrwgNa0WDFKOLeTcgM1MEgebuNlIAC19z7XlAvL8TJvMuERrbSLHOcsrY=
-X-Received: by 2002:a05:6808:2508:b0:3e6:5522:b4d8 with SMTP id
- 5614622812f47-3e7eb6f56c3mr4217791b6e.17.1732124436804; Wed, 20 Nov 2024
- 09:40:36 -0800 (PST)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
+Received: from fwd71.aul.t-online.de (fwd71.aul.t-online.de [10.223.144.97])
+	by mailout04.t-online.de (Postfix) with SMTP id 5DD40BED
+	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Nov 2024 19:32:30 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.160.173]) by fwd71.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1tDpV6-2AJI3t0; Wed, 20 Nov 2024 19:32:28 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-gnome][PATCH] libsecret: add pam support depending on DISTRO_FEATURES
+Date: Wed, 20 Nov 2024 19:34:56 +0100
+Message-ID: <20241120183456.2546-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
-References: <20241120082208.1619368-1-martin.jansa@gmail.com>
-In-Reply-To: <20241120082208.1619368-1-martin.jansa@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 20 Nov 2024 09:40:10 -0800
-Message-ID: <CAMKF1squMc9aFOjS=GMZvvwxGRkP86a2peHdSVTuxcCzgyj8cA@mail.gmail.com>
-Subject: Re: [meta-oe][styhead][PATCH 1/2] python3-pdm-build-locked: Add recipe
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, akuster808@gmail.com
-Content-Type: text/plain; charset="UTF-8"
+X-TOI-EXPURGATEID: 150726::1732127548-EDFEF6C2-CC1C6580/0/0 CLEAN NORMAL
+X-TOI-MSGID: f8ad5b7e-d113-48d1-9e51-d2fa800c1578
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Nov 2024 17:40:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113932
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Nov 2024 18:32:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113933
 
-lgtm
+pam module has been ported from gnome-keyring to libsecret
+[https://gitlab.gnome.org/GNOME/libsecret/-/commit/9a37dc839a9be1670afeb6=
+47d9f82b6ef1cd0893]
 
-On Wed, Nov 20, 2024 at 12:22=E2=80=AFAM Martin Jansa <martin.jansa@gmail.c=
-om> wrote:
->
-> From: Khem Raj <raj.khem@gmail.com>
->
-> * backporting new recipes is against stable policy, but
->   https://git.openembedded.org/meta-openembedded/commit/?h=3Dstyhead&id=
-=3Dcb58461c8f9067247d630ec385851ed9c3889f79
->   was backported and added this dependency, so now styhead is failing wit=
-h:
->
-> ERROR: Nothing PROVIDES 'python3-pdm-build-locked-native' (but
-> meta-oe/meta-python/recipes-devtools/python/python3-pdm_2.19.1.bb
-> DEPENDS on or otherwise requires it). Close matches:
->   python3-build-native
->   python3-filelock-native
->   python3-pdm-backend-native
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-> ---
->  .../python/python3-pdm-build-locked_0.3.3.bb        | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python3-pdm-build=
--locked_0.3.3.bb
->
-> diff --git a/meta-python/recipes-devtools/python/python3-pdm-build-locked=
-_0.3.3.bb b/meta-python/recipes-devtools/python/python3-pdm-build-locked_0.=
-3.3.bb
-> new file mode 100644
-> index 0000000000..f20f11ff44
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-pdm-build-locked_0.3.3.=
-bb
-> @@ -0,0 +1,13 @@
-> +SUMMARY =3D "pdm plugin to publish locked dependencies as optional-depen=
-dencies"
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D19382cdf9c143df4f00b9caa0b60c=
-75a"
-> +
-> +SRC_URI[sha256sum] =3D "b784135abf62b93ce0a11332ee24723a2699b7f266fddb79=
-50a5b70c93df6214"
-> +
-> +inherit pypi python_setuptools_build_meta
-> +
-> +DEPENDS +=3D " python3-pdm-backend-native"
-> +
-> +PYPI_PACKAGE =3D "pdm_build_locked"
-> +
-> +BBCLASSEXTEND +=3D "native nativesdk"
-> --
-> 2.47.0
->
+Add a PACKAGECONFIG for pam and enable it if pam is in
+DISTRO_FEATURES
+
+Add a patch that disables the pam test, because it would require
+pam_wrapper recipe
+
+[https://gitlab.com/cwrap/pam_wrapper]
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../libsecret/0001-pam-disable-tests.patch    | 71 +++++++++++++++++++
+ .../libsecret/libsecret_0.21.4.bb             |  3 +
+ 2 files changed, 74 insertions(+)
+ create mode 100644 meta/recipes-gnome/libsecret/libsecret/0001-pam-disab=
+le-tests.patch
+
+diff --git a/meta/recipes-gnome/libsecret/libsecret/0001-pam-disable-test=
+s.patch b/meta/recipes-gnome/libsecret/libsecret/0001-pam-disable-tests.p=
+atch
+new file mode 100644
+index 0000000000..28cf7c3651
+--- /dev/null
++++ b/meta/recipes-gnome/libsecret/libsecret/0001-pam-disable-tests.patch
+@@ -0,0 +1,71 @@
++From a028d36dc7b8d0bc33e674d2a0427b171aef2d32 Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Wed, 20 Nov 2024 16:30:07 +0100
++Subject: [PATCH] pam/meson.build: disable tests
++
++Otherwise a recipe for pam_wrapper would be required:
++https://gitlab.com/cwrap/pam_wrapper
++
++Signed-off-by: Markus Volk <f_l_k@t-online.de>
++
++Upstream-Status Inappropriate [oe-specific]
++---
++ pam/meson.build | 42 +++++++++++++++++++++---------------------
++ 1 file changed, 21 insertions(+), 21 deletions(-)
++
++diff --git a/pam/meson.build b/pam/meson.build
++index 8413b58..06d41c4 100644
++--- a/pam/meson.build
+++++ b/pam/meson.build
++@@ -19,27 +19,27 @@ pam_gnome_keyring =3D shared_library('pam_gnome_keyr=
+ing',
++ )
++=20
++ # pam tests
++-pam_wrapper =3D dependency('pam_wrapper', required: true)
++-libpamtest =3D dependency('libpamtest', required: true)
+++#pam_wrapper =3D dependency('pam_wrapper', required: true)
+++#libpamtest =3D dependency('libpamtest', required: true)
++=20
++-subdir('servicedir')
+++#subdir('servicedir')
++=20
++-test_bin =3D executable('pam_test',
++-  sources: [
++-    'test-pam.c',
++-  ],
++-  dependencies: [
++-    libpamtest,
++-    glib_deps,
++-  ],
++-)
+++#test_bin =3D executable('pam_test',
+++#  sources: [
+++#    'test-pam.c',
+++#  ],
+++#  dependencies: [
+++#    libpamtest,
+++#    glib_deps,
+++#  ],
+++#)
++=20
++-test('pam-test',
++-  test_bin,
++-  env: {
++-    'LD_PRELOAD': 'libpam_wrapper.so',
++-    'PAM_WRAPPER': '1',
++-    'PAM_WRAPPER_DEBUGLEVEL': '5',
++-    'PAM_WRAPPER_SERVICE_DIR': meson.current_build_dir() + '/servicedir=
+',
++-  },
++-)
+++#test('pam-test',
+++#  test_bin,
+++#  env: {
+++#    'LD_PRELOAD': 'libpam_wrapper.so',
+++#    'PAM_WRAPPER': '1',
+++#    'PAM_WRAPPER_DEBUGLEVEL': '5',
+++#    'PAM_WRAPPER_SERVICE_DIR': meson.current_build_dir() + '/servicedi=
+r',
+++#  },
+++#)
++--=20
++2.47.0
++
+diff --git a/meta/recipes-gnome/libsecret/libsecret_0.21.4.bb b/meta/reci=
+pes-gnome/libsecret/libsecret_0.21.4.bb
+index 88c3c73510..1bdd26d500 100644
+--- a/meta/recipes-gnome/libsecret/libsecret_0.21.4.bb
++++ b/meta/recipes-gnome/libsecret/libsecret_0.21.4.bb
+@@ -13,11 +13,14 @@ inherit gnomebase gi-docgen vala gobject-introspectio=
+n manpages
+=20
+ DEPENDS +=3D "glib-2.0 libgcrypt gettext-native"
+=20
++SRC_URI +=3D "file://0001-pam-disable-tests.patch"
+ SRC_URI[archive.sha256sum] =3D "163d08d783be6d4ab9a979ceb5a4fecbc1d9660d=
+3c34168c581301cd53912b20"
+=20
+ GTKDOC_MESON_OPTION =3D 'gtk_doc'
+=20
++PACKAGECONFIG ?=3D "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
+ PACKAGECONFIG[manpages] =3D "-Dmanpage=3Dtrue,-Dmanpage=3Dfalse,libxslt-=
+native xmlto-native"
++PACKAGECONFIG[pam] =3D "-Dpam=3Dtrue,-Dpam=3Dfalse,libpam"
+=20
+ # http://errors.yoctoproject.org/Errors/Details/20228/
+ ARM_INSTRUCTION_SET:armv4 =3D "arm"
+--=20
+2.47.0
+
 
