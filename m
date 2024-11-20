@@ -2,112 +2,119 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 250F9D711D1
-	for <webhook@archiver.kernel.org>; Wed, 20 Nov 2024 17:33:16 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web11.19902.1732123987226366878
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 46A17D711D2
+	for <webhook@archiver.kernel.org>; Wed, 20 Nov 2024 17:40:46 +0000 (UTC)
+Received: from mail-oi1-f170.google.com (mail-oi1-f170.google.com [209.85.167.170])
+ by mx.groups.io with SMTP id smtpd.web11.20109.1732124437553642250
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Nov 2024 09:33:07 -0800
+ Wed, 20 Nov 2024 09:40:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=SUiz+szg;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-21210fe8775so9486045ad.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Nov 2024 09:33:07 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=BBvE7KLR;
+ spf=pass (domain: gmail.com, ip: 209.85.167.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f170.google.com with SMTP id 5614622812f47-3e5fbc40239so27899b6e.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Nov 2024 09:40:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1732123986; x=1732728786; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1732124437; x=1732729237; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4sXEypVC2z/XuVlvw7ajkIT7/2kLbbwMaTUiIhsylQs=;
-        b=SUiz+szgbBX22x4jXzgFqkw+4hYb3kjwwXd/6IyN65OYdHOI6aJ7quIHUOvHY33kHF
-         oqlUxI2qCWBszl5EpRIvSLpo3cf9K/XxUTrxlbGrubzHSsL8oCJBu57YGEWuf1lIY5rR
-         a78ILVbilOB9GTp57V3fTytdcwqDmKqT2n7+a7aTyKYg9BFRALVeZ8kIcOw3EVg6k/7Y
-         6jp6U1ZS+kkaU9bOBc+GuD8UroArYyeEbQL2Rw+1UPpGilOdlPttRpt9rt7iLUjErW/K
-         QrEwVBOv36L69lgaKYHjL7my8Pd5XO6NDsGw0kTaBGulfZzUgfNHoUumBorkehFQPpzL
-         I9yQ==
+        bh=maxeg6nSw1j3XrhKLspIuHhL1xRX8ADN4GVqUFIhPCE=;
+        b=BBvE7KLRcEbfVHinCJ5JOTnADcPsGOUNHODKyTORpLkMpQmqeEUHLvsmd2e+4b+Qw9
+         uabQddnaqMguPLAxaKRYXkQ4MG1ctzlJujJHKvO4ucMycJR8R3KmIIh+dzPtqHewXVHG
+         FjpR2IKjrEbXtz/w2qR7kuGBN2kkzGluiO1q3gMXW/hlPs0sZO2JyorZCi0r+hn6QTKz
+         +zbYMQ1NFEIWwa79kr+k3ATkO9mz0W0FUSstH2HOWF1iH3+pGNAOdGyj/57spCI6dAsg
+         cZ+j+OD5aUZW2jj3FTL1AXyoJB02ANV8OXZD4QcIui8kkKBRxIYeY96PkXyfMi1Xr2fj
+         v2jA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732123986; x=1732728786;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1732124437; x=1732729237;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=4sXEypVC2z/XuVlvw7ajkIT7/2kLbbwMaTUiIhsylQs=;
-        b=NCGxYR2LRdgjHPTeJxOhhHfdZEAecQR3J4+CAYjRzmFPphYYC5bmy4B5hf45gzmFQm
-         LLH434PCQLo6Jr0z+3vvR/CQ6AsWk/YQAYQpUZl5IadZUymcy7GZQqn3ZBONcJHMmvmn
-         OSZR91nyG/6rdWKFjFXlpTc0uJ7ZFrivzf4/JNdJ8+eI4Ffw5w791RPGa7Sjz9HQMg+Q
-         z9yZp7WtB9H3lGFQXlUNWfE1rLCXMxVPhdwcDObdKNgxPU527OcKUj1h23Za9fpKY8uu
-         ppfu+3gm7TGD2EqGLEFeaJSQf623PiHEB4zkJkk99IUgWEVbLhDxhNVzg9RbAV713mhE
-         98pQ==
-X-Gm-Message-State: AOJu0YyrdRZOh/IK0Nz2kOZap8K6tRw6ts39FBLRHLsU2QU57wlT+vHs
-	cgwG9J2zLphBirszjaAUGzHXdpVtWMjm8ajEpMKAsnZvRoDYwxVomMHDXg==
-X-Google-Smtp-Source: AGHT+IE2i18D5IgVqr5TFzUArfFHsCiURjyw/qLUN1iyWLOEhsWfPPcoHx8WJLKhBeZY79FN8ZFGEQ==
-X-Received: by 2002:a17:902:e943:b0:212:10ea:a4a1 with SMTP id d9443c01a7336-21283c86ac6mr94175ad.15.1732123984967;
-        Wed, 20 Nov 2024 09:33:04 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8201:fd20::2c23])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2121859c307sm61533885ad.238.2024.11.20.09.33.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 Nov 2024 09:33:04 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 2/2] keepalived: Upgrade to 2.3.2
-Date: Wed, 20 Nov 2024 09:32:58 -0800
-Message-ID: <20241120173258.3321858-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20241120173258.3321858-1-raj.khem@gmail.com>
-References: <20241120173258.3321858-1-raj.khem@gmail.com>
+        bh=maxeg6nSw1j3XrhKLspIuHhL1xRX8ADN4GVqUFIhPCE=;
+        b=R7TjFt25ip9AYt0edI5liPNB7ZUiUNnM4GpCbNK3RF1ESi0R25t9Wb1Q+57v9wPYej
+         uTUJxmwj5JDhP8tnPKAqWmBshA0hrxX06oKGIJO4o0pB2odbw+OAJ9/gwDgj5bHkD3Vf
+         a9XJxfFQB4WljuOY9s1xrWIbO6wU7vh8LT/UISTzJj5/FLFBkiVQqqg9TBkZsv+L6/P4
+         y3ouKdB9Jdu3S4v42kcrzlxFwCwUkmKPU2ZjCjxWn5AALxd3aiEOl/buOgr3ifGF2dqT
+         XGHlV+oBI1Bxq/fraz/3/BalAj7akWOiYX+G0HDRGGqYSHZbT5E7J7ixZNMdX9Emygq2
+         hrxg==
+X-Gm-Message-State: AOJu0YxOD/6xamSnG6X45LIoxFIhv2QztNh+xt7MwwIuq/4tl7Pn65qa
+	DxjSonScC+xCip5MnMKpvDEuxsh0+U4bTFn1XYC/sDsihX0bMBRPRjd6cW+U5X/TpLDKgBDE44j
+	fHcYA+2nMoYs5dmJCflR41rryM/I=
+X-Google-Smtp-Source: AGHT+IHCdx7YXJOlv78puScpYz3Pb8E++1GrwgNa0WDFKOLeTcgM1MEgebuNlIAC19z7XlAvL8TJvMuERrbSLHOcsrY=
+X-Received: by 2002:a05:6808:2508:b0:3e6:5522:b4d8 with SMTP id
+ 5614622812f47-3e7eb6f56c3mr4217791b6e.17.1732124436804; Wed, 20 Nov 2024
+ 09:40:36 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241120082208.1619368-1-martin.jansa@gmail.com>
+In-Reply-To: <20241120082208.1619368-1-martin.jansa@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 20 Nov 2024 09:40:10 -0800
+Message-ID: <CAMKF1squMc9aFOjS=GMZvvwxGRkP86a2peHdSVTuxcCzgyj8cA@mail.gmail.com>
+Subject: Re: [meta-oe][styhead][PATCH 1/2] python3-pdm-build-locked: Add recipe
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, akuster808@gmail.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Nov 2024 17:33:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113931
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Nov 2024 17:40:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113932
 
-Changes are
-https://www.keepalived.org/release-notes/Release-2.3.0.html
-https://www.keepalived.org/release-notes/Release-2.3.1.html
-https://www.keepalived.org/release-notes/Release-2.3.2.html
+lgtm
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...nfigure.ac-Do-not-emit-compiler-flags-into-object-.patch | 6 ++----
- .../keepalived/{keepalived_2.2.8.bb => keepalived_2.3.2.bb} | 2 +-
- 2 files changed, 3 insertions(+), 5 deletions(-)
- rename meta-networking/recipes-daemons/keepalived/{keepalived_2.2.8.bb => keepalived_2.3.2.bb} (95%)
-
-diff --git a/meta-networking/recipes-daemons/keepalived/keepalived/0001-configure.ac-Do-not-emit-compiler-flags-into-object-.patch b/meta-networking/recipes-daemons/keepalived/keepalived/0001-configure.ac-Do-not-emit-compiler-flags-into-object-.patch
-index 1f9f8b30b1..e44e2035c2 100644
---- a/meta-networking/recipes-daemons/keepalived/keepalived/0001-configure.ac-Do-not-emit-compiler-flags-into-object-.patch
-+++ b/meta-networking/recipes-daemons/keepalived/keepalived/0001-configure.ac-Do-not-emit-compiler-flags-into-object-.patch
-@@ -13,12 +13,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  configure.ac | 3 +--
-  1 file changed, 1 insertion(+), 2 deletions(-)
- 
--diff --git a/configure.ac b/configure.ac
--index fae16f1..677b94a 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -904,8 +904,7 @@ if test "$enable_hardening" != no; then
-- 	  "-Wp,-D_FORTIFY_SOURCE=2" \
-+@@ -1013,8 +1013,7 @@ if test "$enable_hardening" != no; then
-+ 	  "-Wp,-D_FORTIFY_SOURCE=$FORTIFY_SOURCE" \
-  	  "-fexceptions" \
-  	  "-fstack-protector-strong" \
- -	  "--param=ssp-buffer-size=4" \
-diff --git a/meta-networking/recipes-daemons/keepalived/keepalived_2.2.8.bb b/meta-networking/recipes-daemons/keepalived/keepalived_2.3.2.bb
-similarity index 95%
-rename from meta-networking/recipes-daemons/keepalived/keepalived_2.2.8.bb
-rename to meta-networking/recipes-daemons/keepalived/keepalived_2.3.2.bb
-index c4d59d3caa..2cb76e6d41 100644
---- a/meta-networking/recipes-daemons/keepalived/keepalived_2.2.8.bb
-+++ b/meta-networking/recipes-daemons/keepalived/keepalived_2.3.2.bb
-@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- SRC_URI = "http://www.keepalived.org/software/${BP}.tar.gz \
-            file://0001-configure.ac-Do-not-emit-compiler-flags-into-object-.patch \
-            "
--SRC_URI[sha256sum] = "85882eb62974f395d4c631be990a41a839594a7e62fbfebcb5649a937a7a1bb6"
-+SRC_URI[sha256sum] = "77f4a22e5a23fa8e49b8916acdfb584c864e72905a2f1de2a7f62ed40a896160"
- UPSTREAM_CHECK_URI = "https://github.com/acassen/keepalived/releases"
- 
- DEPENDS = "libnfnetlink openssl"
+On Wed, Nov 20, 2024 at 12:22=E2=80=AFAM Martin Jansa <martin.jansa@gmail.c=
+om> wrote:
+>
+> From: Khem Raj <raj.khem@gmail.com>
+>
+> * backporting new recipes is against stable policy, but
+>   https://git.openembedded.org/meta-openembedded/commit/?h=3Dstyhead&id=
+=3Dcb58461c8f9067247d630ec385851ed9c3889f79
+>   was backported and added this dependency, so now styhead is failing wit=
+h:
+>
+> ERROR: Nothing PROVIDES 'python3-pdm-build-locked-native' (but
+> meta-oe/meta-python/recipes-devtools/python/python3-pdm_2.19.1.bb
+> DEPENDS on or otherwise requires it). Close matches:
+>   python3-build-native
+>   python3-filelock-native
+>   python3-pdm-backend-native
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+> ---
+>  .../python/python3-pdm-build-locked_0.3.3.bb        | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-pdm-build=
+-locked_0.3.3.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-pdm-build-locked=
+_0.3.3.bb b/meta-python/recipes-devtools/python/python3-pdm-build-locked_0.=
+3.3.bb
+> new file mode 100644
+> index 0000000000..f20f11ff44
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-pdm-build-locked_0.3.3.=
+bb
+> @@ -0,0 +1,13 @@
+> +SUMMARY =3D "pdm plugin to publish locked dependencies as optional-depen=
+dencies"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D19382cdf9c143df4f00b9caa0b60c=
+75a"
+> +
+> +SRC_URI[sha256sum] =3D "b784135abf62b93ce0a11332ee24723a2699b7f266fddb79=
+50a5b70c93df6214"
+> +
+> +inherit pypi python_setuptools_build_meta
+> +
+> +DEPENDS +=3D " python3-pdm-backend-native"
+> +
+> +PYPI_PACKAGE =3D "pdm_build_locked"
+> +
+> +BBCLASSEXTEND +=3D "native nativesdk"
+> --
+> 2.47.0
+>
 
