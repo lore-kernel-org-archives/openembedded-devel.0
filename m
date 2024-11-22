@@ -1,332 +1,545 @@
-Return-Path: <philip@balister.org>
+Return-Path: <hongxu.jia@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C5E3ED75E31
-	for <webhook@archiver.kernel.org>; Fri, 22 Nov 2024 12:08:25 +0000 (UTC)
-Received: from SA9PR02CU001.outbound.protection.outlook.com (SA9PR02CU001.outbound.protection.outlook.com [40.93.194.8])
- by mx.groups.io with SMTP id smtpd.web11.17674.1732251405497059278
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 29A95D75E49
+	for <webhook@archiver.kernel.org>; Fri, 22 Nov 2024 13:46:46 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.24302.1732283203330515689
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Nov 2024 20:56:45 -0800
+ Fri, 22 Nov 2024 05:46:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ni.com header.s=selector1 header.b=aaxLEVA7;
- spf=pass (domain: ni.com, ip: 40.93.194.8, mailfrom: pratheeksha.s.n@ni.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WdmUxGylocqmKb8+gXzr7E7eGpoJ24b4DFDU+JJe2h6tfugJNevrBxpQvEHo/+xHCefpf0yQbkqHSW/9+SlesL10laYMinssN+qrDPsyVrOW9ZPN1h0LQt/lKHQ16E6EbXSCXmWwf190Oy9/i+p7EiYaSSXdGVMCW1OKRueGnG4TUH6PGAha1BY/p9LvQ70AMeN9VBeXWx2SFwoiWmh8h4e8PwGIK5aaxlelEsh9HJQe0HqXFVs31Gyxdo8Y5ShAQQ9lh/SEzC4Qza3pKKPGBkAQUHPUg004NMLqJkFMbn7Lz17dYaqxhFFK7ocxDJtF1DkjjY/I911QNL96bHT+Gw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=O5LMtaCFbj+Dza6dN0uMznR0dG2hGy0KhJx7w1A5WGw=;
- b=BoyLDGpsICcNVQVnsgs/A/gUUr6Qs06NvPeLPIGM8LbwuqxgkPUUHaa7YHEHwLMq7Y8vBnXbeJk7XDwYnILlKLrQCclJN9/RsZW7b/fw1dCalF39AVfqQoU+8BbFIW5k67VTv4X5yiZimE+0dDYCeELCQLE8QUJIaDVSV11HPYgWbfyEMCIswcIFyTwRpA52iHtshbw7/PuRuZZGpVvIpecUGxzUOCAw3iipjUQib5k6rp6+045hhMfplSF9ha1ACnrrtabgxd8lRqo7hPRCRoP4lPMJH2RuZsrlaXjXGhNSViBvd+hS0OBA+Dh4nXYFCU2N2zwH2iyouLzyqNZbAA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 130.164.94.73) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=ni.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=ni.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ni.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=O5LMtaCFbj+Dza6dN0uMznR0dG2hGy0KhJx7w1A5WGw=;
- b=aaxLEVA7oULq+sycZ0muSsQMI6SeRxVSgd4K+c+n6hwHWHZhMe0JaFPPdhYeWOjEIK9DNDmzgyNQZOeHpbKvBSEeKqJzIRICyFxy+pwtq3ZlgNNgLYl1IhDrPF8RnZ/QOYtDcjc763HikgsoeXYSnkgC8zOqvU8JRmhwHN+n7z8=
-Received: from PH7PR17CA0048.namprd17.prod.outlook.com (2603:10b6:510:323::11)
- by SA3PR04MB8770.namprd04.prod.outlook.com (2603:10b6:806:2f2::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.23; Fri, 22 Nov
- 2024 04:56:39 +0000
-Received: from SN1PEPF000252A1.namprd05.prod.outlook.com
- (2603:10b6:510:323:cafe::3c) by PH7PR17CA0048.outlook.office365.com
- (2603:10b6:510:323::11) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8182.16 via Frontend
- Transport; Fri, 22 Nov 2024 04:56:39 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 130.164.94.73)
- smtp.mailfrom=ni.com; dkim=none (message not signed) header.d=none;dmarc=pass
- action=none header.from=ni.com;
-Received-SPF: Pass (protection.outlook.com: domain of ni.com designates
- 130.164.94.73 as permitted sender) receiver=protection.outlook.com;
- client-ip=130.164.94.73; helo=us-aus-excas-p1.ni.corp.natinst.com; pr=C
-Received: from us-aus-excas-p1.ni.corp.natinst.com (130.164.94.73) by
- SN1PEPF000252A1.mail.protection.outlook.com (10.167.242.8) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8182.16 via Frontend Transport; Fri, 22 Nov 2024 04:56:38 +0000
-Received: from us-aus-excas-p2.ni.corp.natinst.com (130.164.68.18) by
- us-aus-excas-p1.ni.corp.natinst.com (130.164.68.17) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.28; Thu, 21 Nov 2024 22:56:37 -0600
-Received: from INRD-PSN.ni.corp.natinst.com (172.18.68.32) by
- us-aus-excas-p2.ni.corp.natinst.com (130.164.68.18) with Microsoft SMTP
- Server id 15.2.1258.28 via Frontend Transport; Thu, 21 Nov 2024 22:56:35
- -0600
-From: pratheekshasn <pratheeksha.s.n@ni.com>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=105629bf38=hongxu.jia@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4AMAIiX3024037
+	for <openembedded-devel@lists.openembedded.org>; Fri, 22 Nov 2024 05:46:43 -0800
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 42xqj7xv00-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 22 Nov 2024 05:46:42 -0800 (PST)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Fri, 22 Nov 2024 05:46:42 -0800
+Received: from pek-lpg-core5.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Fri, 22 Nov 2024 05:46:41 -0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: pratheekshasn <pratheeksha.s.n@ni.com>
-Subject: [meta-gnome][kirkstone][PATCH] Onboard: Add onboard virtual keyboard
-Date: Fri, 22 Nov 2024 10:26:32 +0530
-Message-ID: <20241122045632.2470221-1-pratheeksha.s.n@ni.com>
-X-Mailer: git-send-email 2.43.0
+Subject: [meta-oe][scarthgap][PATCH] p7zip: fix CVE-2023-52169 and CVE-2023-52168
+Date: Fri, 22 Nov 2024 21:46:40 +0800
+Message-ID: <20241122134640.2061966-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF000252A1:EE_|SA3PR04MB8770:EE_
-X-MS-Office365-Filtering-Correlation-Id: 51f1a35b-0298-4d5c-2a32-08dd0ab20c2d
-x-ni-monitor: EOP Exclude NI Domains ETR True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|1800799024|36860700013|82310400026|43062017;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?QaUIkf1ifAi8dGX3PcZxLY/Ozma4KrHa3F+1vWeKZSsUX5yGYYEYP9r4bTDq?=
- =?us-ascii?Q?QJbJNBWndTxrr4JpaQzhYf0+TxSx3RHep59tRQ+aaHJ6fo1zaqZ3VCqPmSXU?=
- =?us-ascii?Q?GWxumF/gghTw2p/BgK8pmdAM6C1Yl5BApPpobU+tliLmcp5s/WDkJ5yQD/w5?=
- =?us-ascii?Q?3dQGftEQBEE5AWVi6nNmVYNxmBGS9C5KQAlTyF4gW656Cpr2z8Bf66gv9HfF?=
- =?us-ascii?Q?nFaUzayMf4kBzCa+p5Ng3yseMdfhn5sdogkh14uhDmutnyrjPMsrcxpnCZ/3?=
- =?us-ascii?Q?eWw62CNWXkG6mIuyc3Bhryl69u2OvHEnw4Td+I4P7aUZoFslgo1wYQTVDFx3?=
- =?us-ascii?Q?K5jhxxMkIrrOwyUOP2Dim8aCHlPoJZtWVYTsfnPaBszsKWoBrbdBtUs20MfB?=
- =?us-ascii?Q?zz+hkjHI2nnBFmXA9PeefjQrb0v970U6QhMvPTTBoqmOT0H2Q+W2o+HlNKOx?=
- =?us-ascii?Q?EOqrj0z8EWrumK90MLT1GyvAEFmyNN1e/lIeq4HOpNaTdLPeI4FtM0uQ7pRw?=
- =?us-ascii?Q?P9MTEO8nOth52MmA9+/VhvJDaLZ+2VdVQP/8BDPfd4CchqNde6StacQ+U22C?=
- =?us-ascii?Q?gkKooy9HSm2Sb6vuTPCefDQ5ds1OG7gi+0kAcKmcmjoo87fzmyBt+TiqJwG5?=
- =?us-ascii?Q?KyfMVsBCt7hRhVGCVnz4Vc13b0aiwJN0m0ljAyeBVkM8UvEPJwWrT9szN+B+?=
- =?us-ascii?Q?F9H0At+iDhKLBw8UG4VghlTQMxCnwuoIq3CFubmQfsUB9BFnW3aCPeUj992z?=
- =?us-ascii?Q?MgyneMVde9hsTj7hPJST6nPHwpHieHUA35n6FeMDpF8TTQv5m9dp2qGXJNxo?=
- =?us-ascii?Q?If13EZhHTjvwde9cfKxrq6byD8twv5RNO/7WkOwpfEWOtwKFH18pPI6ls4r0?=
- =?us-ascii?Q?9nZL1mi2XEGwUMMRl4kV/RWigDFp8KpxM9E67LmTX5DYkd1djgVVDRvqazGq?=
- =?us-ascii?Q?nmCb8jdTIu2jz4HzLllL+DW8GGoOUpAOpFB7fxc1Hf3eq2TSDuEXnH+UaLg0?=
- =?us-ascii?Q?/ouH9Z7CpYOOsT4CngUpqLtKyxeiY6xaq0w4leM+SmVVTsdpxGLcMTqVLKbw?=
- =?us-ascii?Q?C/i0ubdKC4QXVu5utKmM53r50QUPFRDfaBeP/gK0azNPPATaQ7OSyKlTAqO1?=
- =?us-ascii?Q?JCFVTwx8hpyUfLs1r4lh3fLl4BZrgXF2F7gWYuiRwKJF6d8X54DI9g7Z8Jwm?=
- =?us-ascii?Q?TCfyDQOPpiP+G7qO51AFT+eVG05Wsa9rYfI+S3EDbrUyqVHmImYfQGDv2eFm?=
- =?us-ascii?Q?hkBvRi4ckdjSee+q5jF5eLN8OWgckmQ10oozGdkq0iRGpFMaa9Z+U75fej8W?=
- =?us-ascii?Q?d30NB0QVdZHXOUNRT9f/PflGgjLDIjsMlrjQMT1HRhaY2tYFOf/m4qy0hhmn?=
- =?us-ascii?Q?dgUJoonGfIFkDbheNRuoIOqVtQ9e?=
-X-Forefront-Antispam-Report: 
-	CIP:130.164.94.73;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:us-aus-excas-p1.ni.corp.natinst.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026)(43062017);DIR:OUT;SFP:1101;
-X-OriginatorOrg: ni.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Nov 2024 04:56:38.0752
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 51f1a35b-0298-4d5c-2a32-08dd0ab20c2d
-X-MS-Exchange-CrossTenant-Id: 87ba1f9a-44cd-43a6-b008-6fdb45a5204e
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=87ba1f9a-44cd-43a6-b008-6fdb45a5204e;Ip=[130.164.94.73];Helo=[us-aus-excas-p1.ni.corp.natinst.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	SN1PEPF000252A1.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR04MB8770
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: sD_l7qL2P6Kv1bIYoO5eGk4w0OWuReq2
+X-Proofpoint-GUID: sD_l7qL2P6Kv1bIYoO5eGk4w0OWuReq2
+X-Authority-Analysis: v=2.4 cv=Sb6ldeRu c=1 sm=1 tr=0 ts=67408b42 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=VlfZXiiP6vEA:10 a=NEAV23lmAAAA:8 a=rSOwsd83AAAA:8 a=FP58Ms26AAAA:8 a=t7CeM3EgAAAA:8 a=ZeHzwlFx6R48Dl661EMA:9
+ a=z6duCZvG03gA:10 a=rfQBsaRwJpcA:10 a=h9rF45_IxnQrhvPb0Vt3:22 a=u88H62rNFFGbxZIp_uAB:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.62.30
+ definitions=2024-11-22_06,2024-11-21_01,2024-09-30_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 suspectscore=0
+ mlxlogscore=999 lowpriorityscore=0 spamscore=0 priorityscore=1501
+ impostorscore=0 malwarescore=0 adultscore=0 phishscore=0 mlxscore=0
+ bulkscore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2409260000 definitions=main-2411220116
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 22 Nov 2024 12:08:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113998
+ <openembedded-devel@lists.openembedded.org>; Fri, 22 Nov 2024 13:46:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/113999
 
-Signed-off by: Pratheeksha S N <pratheeksha.s.n@ni.com>
+According to [1][2], Igor Pavlov, the author of 7-Zip, refused to
+provide an advisory or any related change log entries. Have to
+backport a part of ./CPP/7zip/Archive/NtfsHandler.cpp from upstream
+big commit https://github.com/ip7z/7zip/commit/fc662341e6f85da78ada0e443f6116b978f79f22
+
+[1] https://dfir.ru/2024/06/19/vulnerabilities-in-7-zip-and-ntfs3/
+[2] https://dfir.ru/wp-content/uploads/2024/07/screenshot-2024-07-03-at-02-13-40-7-zip-_-bugs-_-2402-two-vulnerabilities-in-the-ntfs-handler.png
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- ...ine-error-API-if-platform-does-not-h.patch | 67 +++++++++++++++++++
- .../0002-onboard-onhover-seg-fault-fix.patch  | 52 ++++++++++++++
- .../recipes-support/onboard/onboard_1.4.1.bb  | 36 ++++++++++
- 3 files changed, 155 insertions(+)
- create mode 100644 meta-gnome/recipes-support/onboard/onboard/0001-pypredi=
-ct-lm-Define-error-API-if-platform-does-not-h.patch
- create mode 100644 meta-gnome/recipes-support/onboard/onboard/0002-onboard=
--onhover-seg-fault-fix.patch
- create mode 100644 meta-gnome/recipes-support/onboard/onboard_1.4.1.bb
+ ...-two-buffer-overflow-vulnerabilities.patch | 455 ++++++++++++++++++
+ meta-oe/recipes-extended/p7zip/p7zip_16.02.bb |   1 +
+ 2 files changed, 456 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/p7zip/files/0001-Fix-two-buffer-overflow-vulnerabilities.patch
 
-diff --git a/meta-gnome/recipes-support/onboard/onboard/0001-pypredict-lm-D=
-efine-error-API-if-platform-does-not-h.patch b/meta-gnome/recipes-support/o=
-nboard/onboard/0001-pypredict-lm-Define-error-API-if-platform-does-not-h.pa=
-tch
+diff --git a/meta-oe/recipes-extended/p7zip/files/0001-Fix-two-buffer-overflow-vulnerabilities.patch b/meta-oe/recipes-extended/p7zip/files/0001-Fix-two-buffer-overflow-vulnerabilities.patch
 new file mode 100644
-index 000000000..fda37895c
+index 0000000000..d149c34134
 --- /dev/null
-+++ b/meta-gnome/recipes-support/onboard/onboard/0001-pypredict-lm-Define-e=
-rror-API-if-platform-does-not-h.patch
-@@ -0,0 +1,67 @@
-+From 1c95f64aa342147387ce4b1b7269a5c8b34bd898 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 13 Jul 2017 09:01:04 -0700
-+Subject: [PATCH] pypredict/lm: Define error API if platform does not have =
-it
++++ b/meta-oe/recipes-extended/p7zip/files/0001-Fix-two-buffer-overflow-vulnerabilities.patch
+@@ -0,0 +1,455 @@
++From 1f266347b154ed90b8262126f04e8cc8f59fa617 Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Fri, 22 Nov 2024 21:25:21 +0800
++Subject: [PATCH] Fix two buffer overflow vulnerabilities
 +
-+error() API is not implemented across all libcs on linux
-+e.g. musl does not provide it.
++According to [1][2], Igor Pavlov, the author of 7-Zip, refused to
++provide an advisory or any related change log entries. We have to
++backport a part of ./CPP/7zip/Archive/NtfsHandler.cpp from upstream
++big commit
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Upstream-Status: Backport [https://github.com/ip7z/7zip/commit/fc662341e6f85da78ada0e443f6116b978f79f22]
++
++[1] https://dfir.ru/2024/06/19/vulnerabilities-in-7-zip-and-ntfs3/
++[2] https://dfir.ru/wp-content/uploads/2024/07/screenshot-2024-07-03-at-02-13-40-7-zip-_-bugs-_-2402-two-vulnerabilities-in-the-ntfs-handler.png
++
++CVE: CVE-2023-52169
++CVE: CVE-2023-52168
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 +---
-+ Onboard/pypredict/lm/lm.cpp         |  1 -
-+ Onboard/pypredict/lm/lm.h           | 13 +++++++++++++
-+ Onboard/pypredict/lm/lm_dynamic.cpp |  2 --
-+ 3 files changed, 13 insertions(+), 3 deletions(-)
++ CPP/7zip/Archive/NtfsHandler.cpp | 229 ++++++++++++++++++++-----------
++ 1 file changed, 151 insertions(+), 78 deletions(-)
 +
-+diff --git a/Onboard/pypredict/lm/lm.cpp b/Onboard/pypredict/lm/lm.cpp
-+index 2e64296..37ae241 100644
-+--- a/Onboard/pypredict/lm/lm.cpp
-++++ b/Onboard/pypredict/lm/lm.cpp
-+@@ -19,7 +19,6 @@
-+=20
-+ #include <stdlib.h>
-+ #include <stdio.h>
-+-#include <error.h>
-+ #include <algorithm>
-+ #include <cmath>
-+ #include <string>
-+diff --git a/Onboard/pypredict/lm/lm.h b/Onboard/pypredict/lm/lm.h
-+index ed4164a..b8b63ee 100644
-+--- a/Onboard/pypredict/lm/lm.h
-++++ b/Onboard/pypredict/lm/lm.h
-+@@ -32,6 +32,19 @@
-+ #include <algorithm>
-+ #include <string>
-+=20
-++#if defined(HAVE_ERROR_H)
-++#include <error.h>
-++#else
-++#include <err.h>
-++#define _onboard_error(S, E, F, ...) do { \
-++       if (E) \
-++               err(S, F ": %s", ##__VA_ARGS__, strerror(E)); \
-++       else \
-++               err(S, F, ##__VA_ARGS__); \
-++} while(0)
++diff --git a/CPP/7zip/Archive/NtfsHandler.cpp b/CPP/7zip/Archive/NtfsHandler.cpp
++index 93e9f88..2701439 100644
++--- a/CPP/7zip/Archive/NtfsHandler.cpp
+++++ b/CPP/7zip/Archive/NtfsHandler.cpp
++@@ -71,8 +71,9 @@ struct CHeader
++ {
++   unsigned SectorSizeLog;
++   unsigned ClusterSizeLog;
+++  unsigned MftRecordSizeLog;
++   // Byte MediaType;
++-  UInt32 NumHiddenSectors;
+++  //UInt32 NumHiddenSectors;
++   UInt64 NumSectors;
++   UInt64 NumClusters;
++   UInt64 MftCluster;
++@@ -111,30 +112,42 @@ bool CHeader::Parse(const Byte *p)
++   if (memcmp(p + 3, "NTFS    ", 8) != 0)
++     return false;
++   {
++-    int t = GetLog(Get16(p + 11));
++-    if (t < 9 || t > 12)
++-      return false;
++-    SectorSizeLog = t;
++-    t = GetLog(p[13]);
++-    if (t < 0)
++-      return false;
++-    sectorsPerClusterLog = t;
++-    ClusterSizeLog = SectorSizeLog + sectorsPerClusterLog;
++-    if (ClusterSizeLog > 30)
++-      return false;
+++    {
+++      const int t = GetLog(Get16(p + 11));
+++      if (t < 9 || t > 12)
+++        return false;
+++      SectorSizeLog = (unsigned)t;
+++    }
+++    {
+++      const unsigned v = p[13];
+++      if (v <= 0x80)
+++      {
+++        const int t = GetLog(v);
+++        if (t < 0)
+++          return false;
+++        sectorsPerClusterLog = (unsigned)t;
+++      }
+++      else
+++        sectorsPerClusterLog = 0x100 - v;
+++      ClusterSizeLog = SectorSizeLog + sectorsPerClusterLog;
+++      if (ClusterSizeLog > 30)
+++        return false;
+++    }
++   }
++ 
++   for (int i = 14; i < 21; i++)
++     if (p[i] != 0)
++       return false;
++ 
+++  // F8 : a hard disk
+++  // F0 : high-density 3.5-inch floppy disk
++   if (p[21] != 0xF8) // MediaType = Fixed_Disk
++     return false;
++   if (Get16(p + 22) != 0) // NumFatSectors
++     return false;
++-  G16(p + 24, SectorsPerTrack); // 63 usually
++-  G16(p + 26, NumHeads); // 255
++-  G32(p + 28, NumHiddenSectors); // 63 (XP) / 2048 (Vista and win7) / (0 on media that are not partitioned ?)
+++  // G16(p + 24, SectorsPerTrack); // 63 usually
+++  // G16(p + 26, NumHeads); // 255
+++  // G32(p + 28, NumHiddenSectors); // 63 (XP) / 2048 (Vista and win7) / (0 on media that are not partitioned ?)
++   if (Get32(p + 32) != 0) // NumSectors32
++     return false;
++ 
++@@ -156,14 +169,47 @@ bool CHeader::Parse(const Byte *p)
++ 
++   NumClusters = NumSectors >> sectorsPerClusterLog;
++ 
++-  G64(p + 0x30, MftCluster);
+++  G64(p + 0x30, MftCluster);   // $MFT.
++   // G64(p + 0x38, Mft2Cluster);
++-  G64(p + 0x48, SerialNumber);
++-  UInt32 numClustersInMftRec;
++-  UInt32 numClustersInIndexBlock;
++-  G32(p + 0x40, numClustersInMftRec); // -10 means 2 ^10 = 1024 bytes.
++-  G32(p + 0x44, numClustersInIndexBlock);
++-  return (numClustersInMftRec < 256 && numClustersInIndexBlock < 256);
+++  G64(p + 0x48, SerialNumber); // $MFTMirr
 ++
-++#define error _onboard_error
-++#endif
-+=20
-+ // break into debugger
-+ // step twice to come back out of the raise() call into known code
-+diff --git a/Onboard/pypredict/lm/lm_dynamic.cpp b/Onboard/pypredict/lm/lm=
-_dynamic.cpp
-+index 7c62824..e7c7f40 100644
-+--- a/Onboard/pypredict/lm/lm_dynamic.cpp
-++++ b/Onboard/pypredict/lm/lm_dynamic.cpp
-+@@ -17,8 +17,6 @@
-+  * along with this program. If not, see <http://www.gnu.org/licenses/>.
-+  */
-+=20
-+-#include <error.h>
+++  /*
+++    numClusters_per_MftRecord:
+++    numClusters_per_IndexBlock:
+++    only low byte from 4 bytes is used. Another 3 high bytes are zeros.
+++      If the number is positive (number < 0x80),
+++          then it represents the number of clusters.
+++      If the number is negative (number >= 0x80),
+++          then the size of the file record is 2 raised to the absolute value of this number.
+++          example: (0xF6 == -10) means 2^10 = 1024 bytes.
+++  */
+++  {
+++    UInt32 numClusters_per_MftRecord;
+++    G32(p + 0x40, numClusters_per_MftRecord);
+++    if (numClusters_per_MftRecord >= 0x100 || numClusters_per_MftRecord == 0)
+++      return false;
+++    if (numClusters_per_MftRecord < 0x80)
+++    {
+++      const int t = GetLog(numClusters_per_MftRecord);
+++      if (t < 0)
+++        return false;
+++      MftRecordSizeLog = (unsigned)t + ClusterSizeLog;
+++    }
+++    else
+++      MftRecordSizeLog = 0x100 - numClusters_per_MftRecord;
+++    // what exact MFT record sizes are possible and supported by Windows?
+++    // do we need to change this limit here?
+++    const unsigned k_MftRecordSizeLog_MAX = 12;
+++    if (MftRecordSizeLog > k_MftRecordSizeLog_MAX)
+++      return false;
+++    if (MftRecordSizeLog < SectorSizeLog)
+++      return false;
+++  }
+++  {
+++    UInt32 numClusters_per_IndexBlock;
+++    G32(p + 0x44, numClusters_per_IndexBlock);
+++    return (numClusters_per_IndexBlock < 0x100);
+++  }
++ }
++ 
++ struct CMftRef
++@@ -235,7 +281,7 @@ struct CFileNameAttr
++   bool Parse(const Byte *p, unsigned size);
++ };
++ 
++-static void GetString(const Byte *p, unsigned len, UString2 &res)
+++static void GetString(const Byte *p, const unsigned len, UString2 &res)
++ {
++   if (len == 0 && res.IsEmpty())
++     return;
++@@ -266,8 +312,8 @@ bool CFileNameAttr::Parse(const Byte *p, unsigned size)
++   G32(p + 0x38, Attrib);
++   // G16(p + 0x3C, PackedEaSize);
++   NameType = p[0x41];
++-  unsigned len = p[0x40];
++-  if (0x42 + len > size)
+++  const unsigned len = p[0x40];
+++  if (0x42 + len * 2 > size)
++     return false;
++   if (len != 0)
++     GetString(p + 0x42, len, Name);
++@@ -954,6 +1000,14 @@ struct CDataRef
++ static const UInt32 kMagic_FILE = 0x454C4946;
++ static const UInt32 kMagic_BAAD = 0x44414142;
++ 
+++// 22.02: we support some rare case magic values:
+++static const UInt32 kMagic_INDX = 0x58444e49;
+++static const UInt32 kMagic_HOLE = 0x454c4f48;
+++static const UInt32 kMagic_RSTR = 0x52545352;
+++static const UInt32 kMagic_RCRD = 0x44524352;
+++static const UInt32 kMagic_CHKD = 0x444b4843;
+++static const UInt32 kMagic_FFFFFFFF = 0xFFFFFFFF;
+++
++ struct CMftRec
++ {
++   UInt32 Magic;
++@@ -1030,6 +1084,26 @@ struct CMftRec
++ 
++   bool Parse(Byte *p, unsigned sectorSizeLog, UInt32 numSectors, UInt32 recNumber, CObjectVector<CAttr> *attrs);
++ 
+++  bool Is_Magic_Empty() const
+++  {
+++    // what exact Magic values are possible for empty and unused records?
+++    const UInt32 k_Magic_Unused_MAX = 5; // 22.02
+++    return (Magic <= k_Magic_Unused_MAX);
+++  }
+++  bool Is_Magic_FILE() const { return (Magic == kMagic_FILE); }
+++  // bool Is_Magic_BAAD() const { return (Magic == kMagic_BAAD); }
+++  bool Is_Magic_CanIgnore() const
+++  {
+++    return Is_Magic_Empty()
+++        || Magic == kMagic_BAAD
+++        || Magic == kMagic_INDX
+++        || Magic == kMagic_HOLE
+++        || Magic == kMagic_RSTR
+++        || Magic == kMagic_RCRD
+++        || Magic == kMagic_CHKD
+++        || Magic == kMagic_FFFFFFFF;
+++  }
+++
++   bool IsEmpty() const { return (Magic <= 2); }
++   bool IsFILE() const { return (Magic == kMagic_FILE); }
++   bool IsBAAD() const { return (Magic == kMagic_BAAD); }
++@@ -1141,9 +1215,8 @@ bool CMftRec::Parse(Byte *p, unsigned sectorSizeLog, UInt32 numSectors, UInt32 r
++     CObjectVector<CAttr> *attrs)
++ {
++   G32(p, Magic);
++-  if (!IsFILE())
++-    return IsEmpty() || IsBAAD();
 +-
-+ #include "lm_dynamic.h"
-+=20
-+ using namespace std;
-+--=20
-+2.13.2
-+
-diff --git a/meta-gnome/recipes-support/onboard/onboard/0002-onboard-onhove=
-r-seg-fault-fix.patch b/meta-gnome/recipes-support/onboard/onboard/0002-onb=
-oard-onhover-seg-fault-fix.patch
-new file mode 100644
-index 000000000..1ec195cb8
---- /dev/null
-+++ b/meta-gnome/recipes-support/onboard/onboard/0002-onboard-onhover-seg-f=
-ault-fix.patch
-@@ -0,0 +1,52 @@
-+From: 1be95325d320122efd5dedf7437839cfcca01f7a
-+From: https://github.com/void-linux/void-packages/commit/1be95325d320122ef=
-d5dedf7437839cfcca01f7a
-+Date: Mon, 23 Sep 2024
-+Subject: [PATCH] onboard: fix segfault when hovering over the keyboard
-+
-+Currently, if the mouse pointer is hovered over the Onboard keyboard, the =
-application crashes with a segmentation fault.
-+This is because the new_device_event function is not acquiring the GIL bef=
-ore creating a new object. This patch fixes
-+the issue by acquiring the GIL before creating a new object. It also acqui=
-res the GIL before queueing the event.
-+This patch is taken from the fix provided in the following link:
-+https://github.com/void-linux/void-packages/commit/1be95325d320122efd5dedf=
-7437839cfcca01f7a
-+
-+Signed-off by: Pratheeksha S N <pratheeksha.s.n@ni.com>
-+
-+Upstream-Status: Inactive-Upstream [lastcommit: 2017-10-09]
-+
-+--- a/Onboard/osk/osk_devices.c
-++++ b/Onboard/osk/osk_devices.c
-+@@ -97,13 +97,15 @@ osk_device_event_dealloc (OskDeviceEvent
-+ static OskDeviceEvent*
-+ new_device_event (void)
-+ {
-+-    OskDeviceEvent *ev =3D PyObject_New(OskDeviceEvent, &osk_device_event=
-_type);
-++    OskDeviceEvent *ev;
-++    PyGILState_STATE gstate =3D PyGILState_Ensure();
-++    ev =3D PyObject_New(OskDeviceEvent, &osk_device_event_type);
-+     if (ev)
+++  if (!Is_Magic_FILE())
+++    return Is_Magic_CanIgnore();
++   
++   {
++     UInt32 usaOffset;
++@@ -1188,12 +1261,12 @@ bool CMftRec::Parse(Byte *p, unsigned sectorSizeLog, UInt32 numSectors, UInt32 r
++   G16(p + 0x10, SeqNumber);
++   // G16(p + 0x12, LinkCount);
++   // PRF(printf(" L=%d", LinkCount));
++-  UInt32 attrOffs = Get16(p + 0x14);
+++  const UInt32 attrOffs = Get16(p + 0x14);
++   G16(p + 0x16, Flags);
++   PRF(printf(" F=%4X", Flags));
++ 
++-  UInt32 bytesInUse = Get32(p + 0x18);
++-  UInt32 bytesAlloc = Get32(p + 0x1C);
+++  const UInt32 bytesInUse = Get32(p + 0x18);
+++  const UInt32 bytesAlloc = Get32(p + 0x1C);
++   G64(p + 0x20, BaseMftRef.Val);
++   if (BaseMftRef.Val != 0)
++   {
++@@ -1667,68 +1740,57 @@ HRESULT CDatabase::Open()
++  
++   SeekToCluster(Header.MftCluster);
++ 
++-  CMftRec mftRec;
++-  UInt32 numSectorsInRec;
++-
+++  // we use ByteBuf for records reading.
+++  // so the size of ByteBuf must be >= mftRecordSize
+++  const size_t recSize = (size_t)1 << Header.MftRecordSizeLog;
+++  const size_t kBufSize = MyMax((size_t)(1 << 15), recSize);
+++  ByteBuf.Alloc(kBufSize);
+++  RINOK(ReadStream_FALSE(InStream, ByteBuf, recSize))
+++  {
+++    const UInt32 allocSize = Get32(ByteBuf + 0x1C);
+++    if (allocSize != recSize)
+++      return S_FALSE;
+++  }
+++  // MftRecordSizeLog >= SectorSizeLog
+++  const UInt32 numSectorsInRec = 1u << (Header.MftRecordSizeLog - Header.SectorSizeLog);
++   CMyComPtr<IInStream> mftStream;
+++  CMftRec mftRec;
++   {
++-    UInt32 blockSize = 1 << 12;
++-    ByteBuf.Alloc(blockSize);
++-    RINOK(ReadStream_FALSE(InStream, ByteBuf, blockSize));
++-    
++-    {
++-      UInt32 allocSize = Get32(ByteBuf + 0x1C);
++-      int t = GetLog(allocSize);
++-      if (t < (int)Header.SectorSizeLog)
++-        return S_FALSE;
++-      RecSizeLog = t;
++-      if (RecSizeLog > 15)
++-        return S_FALSE;
++-    }
++-
++-    numSectorsInRec = 1 << (RecSizeLog - Header.SectorSizeLog);
++     if (!mftRec.Parse(ByteBuf, Header.SectorSizeLog, numSectorsInRec, 0, NULL))
++       return S_FALSE;
++-    if (!mftRec.IsFILE())
+++    if (!mftRec.Is_Magic_FILE())
++       return S_FALSE;
++     mftRec.ParseDataNames();
++     if (mftRec.DataRefs.IsEmpty())
++       return S_FALSE;
++-    RINOK(mftRec.GetStream(InStream, 0, Header.ClusterSizeLog, Header.NumClusters, &mftStream));
+++    RINOK(mftRec.GetStream(InStream, 0, Header.ClusterSizeLog, Header.NumClusters, &mftStream))
++     if (!mftStream)
++       return S_FALSE;
++   }
++ 
++   // CObjectVector<CAttr> SecurityAttrs;
++ 
++-  UInt64 mftSize = mftRec.DataAttrs[0].Size;
+++  const UInt64 mftSize = mftRec.DataAttrs[0].Size;
++   if ((mftSize >> 4) > Header.GetPhySize_Clusters())
++     return S_FALSE;
++ 
++-  const size_t kBufSize = (1 << 15);
++-  const size_t recSize = ((size_t)1 << RecSizeLog);
++-  if (kBufSize < recSize)
++-    return S_FALSE;
++-
++   {
++-    const UInt64 numFiles = mftSize >> RecSizeLog;
+++    const UInt64 numFiles = mftSize >> Header.MftRecordSizeLog;
++     if (numFiles > (1 << 30))
++       return S_FALSE;
++     if (OpenCallback)
 +     {
-+         osk_device_event_type.tp_init((PyObject*) ev, NULL, NULL);
-+-        return ev;
++       RINOK(OpenCallback->SetTotal(&numFiles, &mftSize));
 +     }
-+-    return NULL;
-++    PyGILState_Release(gstate);
-++    return ev;
-+ }
-+=20
-+ static PyObject *
-+@@ -334,6 +336,7 @@ osk_devices_dealloc (OskDevices *dev)
-+ static void
-+ queue_event (OskDevices* dev, OskDeviceEvent* event, Bool discard_pending=
-)
-+ {
-++    PyGILState_STATE state =3D PyGILState_Ensure ();
-+     GQueue* queue =3D dev->event_queue;
-+     if (queue)
++-    
++-    ByteBuf.Alloc(kBufSize);
++     Recs.ClearAndReserve((unsigned)numFiles);
++   }
++-  
+++ 
++   for (UInt64 pos64 = 0;;)
++   {
++     if (OpenCallback)
 +     {
-+@@ -364,6 +367,7 @@ queue_event (OskDevices* dev, OskDeviceE
-+         Py_INCREF(event);
-+         g_queue_push_head(queue, event);
++       const UInt64 numFiles = Recs.Size();
++-      if ((numFiles & 0x3FF) == 0)
+++      if ((numFiles & 0x3FFF) == 0)
++       {
++         RINOK(OpenCallback->SetCompleted(&numFiles, &pos64));
++       }
++@@ -1817,12 +1879,18 @@ HRESULT CDatabase::Open()
++   for (i = 0; i < Recs.Size(); i++)
++   {
++     CMftRec &rec = Recs[i];
+++    if (!rec.Is_Magic_FILE())
+++      continue;
+++
++     if (!rec.BaseMftRef.IsBaseItself())
++     {
++-      UInt64 refIndex = rec.BaseMftRef.GetIndex();
++-      if (refIndex > (UInt32)Recs.Size())
+++      const UInt64 refIndex = rec.BaseMftRef.GetIndex();
+++      if (refIndex >= Recs.Size())
++         return S_FALSE;
++       CMftRec &refRec = Recs[(unsigned)refIndex];
+++      if (!refRec.Is_Magic_FILE())
+++        continue;
+++
++       bool moveAttrs = (refRec.SeqNumber == rec.BaseMftRef.GetNumber() && refRec.BaseMftRef.IsBaseItself());
++       if (rec.InUse() && refRec.InUse())
++       {
++@@ -1837,12 +1905,17 @@ HRESULT CDatabase::Open()
++   }
++ 
++   for (i = 0; i < Recs.Size(); i++)
++-    Recs[i].ParseDataNames();
+++  {
+++    CMftRec &rec = Recs[i];
+++    if (!rec.Is_Magic_FILE())
+++      continue;
+++    rec.ParseDataNames();
+++  }
++   
++   for (i = 0; i < Recs.Size(); i++)
++   {
++     CMftRec &rec = Recs[i];
++-    if (!rec.IsFILE() || !rec.BaseMftRef.IsBaseItself())
+++    if (!rec.Is_Magic_FILE() || !rec.BaseMftRef.IsBaseItself())
++       continue;
++     if (i < kNumSysRecs && !_showSystemFiles)
++       continue;
++@@ -1864,7 +1937,7 @@ HRESULT CDatabase::Open()
++       FOR_VECTOR (di, rec.DataRefs)
++         if (rec.DataAttrs[rec.DataRefs[di].Start].Name.IsEmpty())
++         {
++-          indexOfUnnamedStream = di;
+++          indexOfUnnamedStream = (int)di;
++           break;
++         }
 +     }
-++    PyGILState_Release (state);
-+ }
-+=20
-+ static gboolean idle_process_event_queue (OskDevices* dev)
-diff --git a/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb b/meta-gno=
-me/recipes-support/onboard/onboard_1.4.1.bb
-new file mode 100644
-index 000000000..359a2134e
---- /dev/null
-+++ b/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb
-@@ -0,0 +1,36 @@
-+SUMMARY =3D "An onscreen keyboard"
-+LICENSE =3D "GPL-3.0-only"
-+LIC_FILES_CHKSUM =3D "file://COPYING.GPL3;md5=3D8521fa4dd51909b407c5150498=
-d34f4e"
++@@ -1922,14 +1995,14 @@ HRESULT CDatabase::Open()
++           indexOfUnnamedStream);
++       
++       if (rec.MyItemIndex < 0)
++-        rec.MyItemIndex = Items.Size();
++-      item.ParentHost = Items.Add(item);
+++        rec.MyItemIndex = (int)Items.Size();
+++      item.ParentHost = (int)Items.Add(item);
++       
++       /* we can use that code to reduce the number of alt streams:
++          it will not show how alt streams for hard links. */
++       // if (!isMainName) continue; isMainName = false;
++ 
++-      unsigned numAltStreams = 0;
+++      // unsigned numAltStreams = 0;
++ 
++       FOR_VECTOR (di, rec.DataRefs)
++       {
++@@ -1947,9 +2020,9 @@ HRESULT CDatabase::Open()
++             continue;
++         }
++ 
++-        numAltStreams++;
+++        // numAltStreams++;
++         ThereAreAltStreams = true;
++-        item.DataIndex = di;
+++        item.DataIndex = (int)di;
++         Items.Add(item);
++       }
++     }
++@@ -1964,10 +2037,10 @@ HRESULT CDatabase::Open()
++       if (attr.Name == L"$SDS")
++       {
++         CMyComPtr<IInStream> sdsStream;
++-        RINOK(rec.GetStream(InStream, di, Header.ClusterSizeLog, Header.NumClusters, &sdsStream));
+++        RINOK(rec.GetStream(InStream, (int)di, Header.ClusterSizeLog, Header.NumClusters, &sdsStream));
++         if (sdsStream)
++         {
++-          UInt64 size64 = attr.GetSize();
+++          const UInt64 size64 = attr.GetSize();
++           if (size64 < (UInt32)1 << 29)
++           {
++             size_t size = (size_t)size64;
++@@ -1997,7 +2070,7 @@ HRESULT CDatabase::Open()
++     const CMftRec &rec = Recs[item.RecIndex];
++     const CFileNameAttr &fn = rec.FileNames[item.NameIndex];
++     const CMftRef &parentDirRef = fn.ParentDirRef;
++-    UInt64 refIndex = parentDirRef.GetIndex();
+++    const UInt64 refIndex = parentDirRef.GetIndex();
++     if (refIndex == kRecIndex_RootDir)
++       item.ParentFolder = -1;
++     else
++@@ -2024,17 +2097,17 @@ HRESULT CDatabase::Open()
++   unsigned virtIndex = Items.Size();
++   if (_showSystemFiles)
++   {
++-    _systemFolderIndex = virtIndex++;
+++    _systemFolderIndex = (int)(virtIndex++);
++     VirtFolderNames.Add(kVirtualFolder_System);
++   }
++   if (thereAreUnknownFolders_Normal)
++   {
++-    _lostFolderIndex_Normal = virtIndex++;
+++    _lostFolderIndex_Normal = (int)(virtIndex++);
++     VirtFolderNames.Add(kVirtualFolder_Lost_Normal);
++   }
++   if (thereAreUnknownFolders_Deleted)
++   {
++-    _lostFolderIndex_Deleted = virtIndex++;
+++    _lostFolderIndex_Deleted = (int)(virtIndex++);
++     VirtFolderNames.Add(kVirtualFolder_Lost_Deleted);
++   }
++ 
++-- 
++2.34.1
 +
-+DEPENDS +=3D "gtk+3 hunspell libcanberra libxkbfile dconf python3-distutil=
-s-extra-native intltool-native"
-+
-+SRC_URI =3D "https://launchpad.net/onboard/1.4/${PV}/+download/${BPN}-${PV=
-}.tar.gz \
-+           file://0001-pypredict-lm-Define-error-API-if-platform-does-not-=
-h.patch \
-+	       file://0002-onboard-onhover-seg-fault-fix.patch \
-+           "
-+SRC_URI[md5sum] =3D "1a2fbe82e934f5b37841d17ff51e80e8"
-+SRC_URI[sha256sum] =3D "01cae1ac5b1ef1ab985bd2d2d79ded6fc99ee04b1535cc1bb1=
-91e43a231a3865"
-+
-+inherit features_check setuptools3 pkgconfig gtk-icon-cache gsettings mime=
--xdg
-+
-+REQUIRED_DISTRO_FEATURES =3D "x11"
-+
-+FILES:${PN} +=3D " \
-+    ${datadir}/dbus-1 \
-+    ${datadir}/icons \
-+    ${datadir}/gnome-shell \
-+    ${datadir}/help \
-+"
-+
-+RDEPENDS:${PN} +=3D " \
-+    ncurses \
-+    python3-dbus \
-+    python3-pycairo \
-+    python3-pygobject \
-+"
-+
-+do_install:append() {
-+	install -d ${D}${sysconfdir}/xdg/autostart
-+
-+	mv ${D}${PYTHON_SITEPACKAGES_DIR}${sysconfdir}/xdg/autostart/onboard-auto=
-start.desktop ${D}${sysconfdir}/xdg/autostart
-+}
---=20
-2.43.0
+diff --git a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
+index e795482eb6..31a12fdb04 100644
+--- a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
++++ b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
+@@ -12,6 +12,7 @@ SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_al
+            file://change_numMethods_from_bool_to_unsigned.patch \
+            file://CVE-2018-5996.patch \
+            file://CVE-2016-9296.patch \
++           file://0001-Fix-two-buffer-overflow-vulnerabilities.patch \
+            "
+ 
+ SRC_URI[md5sum] = "a0128d661cfe7cc8c121e73519c54fbf"
+-- 
+2.34.1
 
 
