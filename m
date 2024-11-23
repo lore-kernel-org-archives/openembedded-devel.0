@@ -1,97 +1,125 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8BB51E6ADD3
-	for <webhook@archiver.kernel.org>; Sat, 23 Nov 2024 00:04:09 +0000 (UTC)
-Received: from mail-yb1-f172.google.com (mail-yb1-f172.google.com [209.85.219.172])
- by mx.groups.io with SMTP id smtpd.web11.38795.1732320247218278769
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BA8FD75E59
+	for <webhook@archiver.kernel.org>; Sat, 23 Nov 2024 16:59:54 +0000 (UTC)
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web11.51107.1732381189151221836
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Nov 2024 16:04:07 -0800
+ Sat, 23 Nov 2024 08:59:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LEjy0vLe;
- spf=pass (domain: gmail.com, ip: 209.85.219.172, mailfrom: schonm@gmail.com)
-Received: by mail-yb1-f172.google.com with SMTP id 3f1490d57ef6-e38c1ac8e3cso3147709276.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 22 Nov 2024 16:04:07 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XBj78JlO;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-7f8095a200eso3221414a12.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 23 Nov 2024 08:59:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1732320246; x=1732925046; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=OxD+zYhalaR+PbNCB0Yf2STFst8py+nGJxRcajSobeI=;
-        b=LEjy0vLexSa0cLhdiDsXazSnpDngywDvVWHdBCiUupa9uwYQtdRKM8lC4ANLy1RFdc
-         6PEWVDmYbdfdycpIPg97QczxrCQGNI4/OMLNiO00yGACfgIwNfyHRhwKQmIArZjIJHGS
-         EFnM1InTg1CNIBHFWDIb8i7GsoVyr832Fg6KC/vrzL+pUwGuArszbsJrPsVIwpzG695C
-         04dclRpz5CsDeAXfAG1abP62YCZGsTbWbe7sqS8ptN8F0N41IjtkqD7QwqmOaK7J/tkT
-         UEb6Y49DlYS9ZSKb/ZVEhRLwIQbdkUWuljmSIp24bWWkCxHCqQG+YsI/naXHZ+MHfKM5
-         PuDw==
+        d=gmail.com; s=20230601; t=1732381188; x=1732985988; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=GUq1h9s6oGHEQD5ZXxCMoN0NtGSlh2u8iA0RrDmhJlY=;
+        b=XBj78JlOCjiN0Z+O5MIYsL7kOJ1kmlhSkbGtfOcX/+9qUW7VvElZIdvKyViWmc1u/D
+         IRIP0uGJslwpLk+cocczT/Z96oIvM+6UQn8W4hCYj2XZqZgCGk36aCvcIEUpMIynmS4B
+         MDkPluwIIU9FmtGb7JHNRUzsxY4nH5vYdgJzIYGyObd3Be/EXas/Pif/mwQ4pT8DYgP8
+         HhKrwNZ8eG/GO6FXuFS93Ubv1VaZxtyf9IUaoMobtXzT4ZaLIMQghJkVLS+3TdVCctTu
+         dcOPc6rNiAIazbVyrAtKw8uONjjkKWNpaUZZcdJ2iglG8YUbNO8bFoU7OTvG8nyc+WYs
+         qW4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732320246; x=1732925046;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=OxD+zYhalaR+PbNCB0Yf2STFst8py+nGJxRcajSobeI=;
-        b=uLZ4mAEGi3G8HEtvTiEY18t0arpi8pdeZLkyzBmb5MXO6r1g0OrMNFX/n8sEZczwMM
-         9vc5lPH22XzdFCeyTH36bhbHC8/d7iau3duBdDOeryHuhHjATHBmuB6PSEpOe69jB5SZ
-         +lpLJ4DI1jufxy3W2rFrwxyVAlV3YMbR8GC6wYRS4JBUrOBP4NCBVOGuX6LLOPOTGpZS
-         dyNsvtzC/1oPK1bCIpMb3DJntCMUied+7bZ2wzuqm2WiPmAndM16R/H6RNXBYqvuQGuf
-         VQL4kJmkEmLaKDa3mxB5JFBd7FvQcPmWGexPBIvyQOb+4R08dpngZRNoExCtw/TAmFQI
-         bgkg==
-X-Gm-Message-State: AOJu0YxPCRY8jrz2mSa+w5+uPaEar9JGCwSm0EhdexXyUHVQ6GDXeiaB
-	nzEtt9tPj8tcI4BcqWiZHp3rU/KeIxK8rZ+cmOviadewqmURYRDU/wLXjp0b
-X-Gm-Gg: ASbGncti7mN0hofKcleJTPwoZbWchkkvmslCtX+c9mv5Zmi+rfN/vN0/taaIE00cU9c
-	NJkQV30miUvopG/uznS4LPHx790caVz3KiYRkSf5PlcS8WrqmwpZ+Rv/AaM/GiGrL99BMx8R4jC
-	R9Do290VZ9CoFvTLeu6STVjVHu7V/vyH4/pGWPe+Zfe0Zg98ha3bixiyaOm79fuETxofj+Ks0/1
-	XId34NYiwdG+cpK/cWzPjV2IUQwSWJPpO6LJllV3N7Gy/sFuMxv2d3T
-X-Google-Smtp-Source: AGHT+IHQ5gO2fFZPRR7o5W/kIk3APCyZY+mCPUMho1s32ICP9KlR6Mgjgl6anOEy9pDipk3pCKuBSg==
-X-Received: by 2002:a25:c886:0:b0:e38:9227:bf06 with SMTP id 3f1490d57ef6-e38e14a30b0mr9313974276.2.1732320245978;
-        Fri, 22 Nov 2024 16:04:05 -0800 (PST)
-Received: from localhost.localdomain ([71.215.7.194])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e38f6319e12sm888256276.38.2024.11.22.16.04.05
+        d=1e100.net; s=20230601; t=1732381188; x=1732985988;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=GUq1h9s6oGHEQD5ZXxCMoN0NtGSlh2u8iA0RrDmhJlY=;
+        b=K6vtKoC5sCdzWo2cX1Y7c8xpGmXcFbsukdooULd4GbcQAseGG3/ZH3dVpedFdx+ysq
+         1pvEmITmz1UMWWB3tOfe/dtsitIgGW+kznkdkk+g/AmgaVV+k/eS2J3tk6iKDQ4au3mo
+         3teHf9swEq4yKck4z/eJRd4gYwKOZJbeoZ5x0U0Pr1meXayqa+D1j8rswDWOKR1RDO4p
+         qzt2m6PpCVy983eS5mVYcyHdXUHDEiMPz5BDhd6BSCoM5deJFN2MqBJ8HAYFttuZtUhM
+         DDF7F6ioVJwHdCM2/FRVtkkZ5N7ws+YaxM3s2bu+I8jcJEohmBy/ZzrsXxDFNbb2Cy1j
+         s8/Q==
+X-Gm-Message-State: AOJu0YzszKjeOGk1p9IGJpKrUYo8Z00bJhOUR81YMeXoX6QEfZGe13S3
+	1K3CgirVwrfQe60rBs5PbY/UFB5yBjZQsoMVoCJS0e80slz1szWAdbR9gA==
+X-Gm-Gg: ASbGncsDed/7I8UTB92QQP49LmsJPvKLek97ZWSV2GAkNs5jLFlT0tu1X0WNfdjBgJP
+	obtfFyLkd0L0PpG83en7LXE5/+Jl8ez16e+r2lN3DJRILtCnrZ+bYeyo0kWb1/KJWw9QBLZAdXF
+	NaAYRY4OBiSiL/ddHfPS7G5YIddXF1FY3SDfztsZR0SUYDdfe6r9ERX7pB9/8zfi/kCBqX1qCoW
+	GvfcjXQdBeaw6gKafpNRlcRpKIvXw9/CNcFrz192fhat4JfSII=
+X-Google-Smtp-Source: AGHT+IGO3i7EAXv54UQiiqJ0+/sExPGOg7oHTl4v7gECLL5rBnVdUSKsDSHkS9PDyp41a6NjbrtBWA==
+X-Received: by 2002:a05:6a20:a109:b0:1db:d6e4:d1d9 with SMTP id adf61e73a8af0-1e09d5af343mr11956875637.1.1732381186629;
+        Sat, 23 Nov 2024 08:59:46 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8201:fd20::1dd])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-7fbcc2280acsm3103871a12.48.2024.11.23.08.59.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 22 Nov 2024 16:04:05 -0800 (PST)
-From: Jason Schonberg <schonm@gmail.com>
+        Sat, 23 Nov 2024 08:59:46 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][PATCH 6/6] xfconf: Upgrade 4.18.0 -> 4.18.1
-Date: Fri, 22 Nov 2024 19:02:30 -0500
-Message-ID: <20241123000230.1479075-6-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241123000230.1479075-1-schonm@gmail.com>
-References: <20241123000230.1479075-1-schonm@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] dovecot: Upgrade to 2.3.21.1
+Date: Sat, 23 Nov 2024 08:59:43 -0800
+Message-ID: <20241123165943.3163820-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 23 Nov 2024 00:04:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114015
+ <openembedded-devel@lists.openembedded.org>; Sat, 23 Nov 2024 16:59:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114016
 
-Changelog: https://gitlab.xfce.org/xfce/xfconf/-/tags/xfconf-4.18.1
+Fix build with icu-76.x while here
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-xfce/xfconf/{xfconf_4.18.0.bb => xfconf_4.18.1.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-xfce/xfconf/{xfconf_4.18.0.bb => xfconf_4.18.1.bb} (89%)
+ ...5b54a408d12fce0c94ab0bbaedbb5ef69830.patch | 24 +++++++++++++++++++
+ ...{dovecot_2.3.21.bb => dovecot_2.3.21.1.bb} |  3 ++-
+ 2 files changed, 26 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/dovecot/dovecot/1ccd5b54a408d12fce0c94ab0bbaedbb5ef69830.patch
+ rename meta-networking/recipes-support/dovecot/{dovecot_2.3.21.bb => dovecot_2.3.21.1.bb} (95%)
 
-diff --git a/meta-xfce/recipes-xfce/xfconf/xfconf_4.18.0.bb b/meta-xfce/recipes-xfce/xfconf/xfconf_4.18.1.bb
-similarity index 89%
-rename from meta-xfce/recipes-xfce/xfconf/xfconf_4.18.0.bb
-rename to meta-xfce/recipes-xfce/xfconf/xfconf_4.18.1.bb
-index f5c598b8d..e780b0760 100644
---- a/meta-xfce/recipes-xfce/xfconf/xfconf_4.18.0.bb
-+++ b/meta-xfce/recipes-xfce/xfconf/xfconf_4.18.1.bb
-@@ -8,7 +8,7 @@ inherit xfce gtk-doc gobject-introspection bash-completion vala
+diff --git a/meta-networking/recipes-support/dovecot/dovecot/1ccd5b54a408d12fce0c94ab0bbaedbb5ef69830.patch b/meta-networking/recipes-support/dovecot/dovecot/1ccd5b54a408d12fce0c94ab0bbaedbb5ef69830.patch
+new file mode 100644
+index 0000000000..0765d963c1
+--- /dev/null
++++ b/meta-networking/recipes-support/dovecot/dovecot/1ccd5b54a408d12fce0c94ab0bbaedbb5ef69830.patch
+@@ -0,0 +1,24 @@
++From 1ccd5b54a408d12fce0c94ab0bbaedbb5ef69830 Mon Sep 17 00:00:00 2001
++From: fundawang <fundawang@yeah.net>
++Date: Sun, 27 Oct 2024 22:11:21 +0800
++Subject: [PATCH] configure: Explicitly check for icu-uc
++
++Ensure we link against libicu-uc when it's split in v76.
++
++Upstream-Status: Backport [https://github.com/dovecot/core/commit/1ccd5b54a408d12fce0c94ab0bbaedbb5ef69830]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ m4/want_icu.m4 | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++--- a/m4/want_icu.m4
+++++ b/m4/want_icu.m4
++@@ -1,7 +1,7 @@
++ AC_DEFUN([DOVECOT_WANT_ICU], [
++   if test "$want_icu" != "no"; then
++     if test "$PKG_CONFIG" != "" && $PKG_CONFIG --exists icu-i18n 2>/dev/null; then
++-      PKG_CHECK_MODULES(LIBICU, icu-i18n)
+++      PKG_CHECK_MODULES(LIBICU, [icu-i18n icu-uc])
++       have_icu=yes
++       AC_DEFINE(HAVE_LIBICU,, [Define if you want ICU normalization support for FTS])
++     elif test "$want_icu" = "yes"; then
+diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.3.21.bb b/meta-networking/recipes-support/dovecot/dovecot_2.3.21.1.bb
+similarity index 95%
+rename from meta-networking/recipes-support/dovecot/dovecot_2.3.21.bb
+rename to meta-networking/recipes-support/dovecot/dovecot_2.3.21.1.bb
+index 4e76d24526..3177cdb1d7 100644
+--- a/meta-networking/recipes-support/dovecot/dovecot_2.3.21.bb
++++ b/meta-networking/recipes-support/dovecot/dovecot_2.3.21.1.bb
+@@ -11,8 +11,9 @@ SRC_URI = "http://dovecot.org/releases/2.3/dovecot-${PV}.tar.gz \
+            file://dovecot.socket \
+            file://0001-not-check-pandoc.patch \
+            file://0001-m4-Check-for-libunwind-instead-of-libunwind-generic.patch \
++           file://1ccd5b54a408d12fce0c94ab0bbaedbb5ef69830.patch \
+            "
+-SRC_URI[sha256sum] = "05b11093a71c237c2ef309ad587510721cc93bbee6828251549fc1586c36502d"
++SRC_URI[sha256sum] = "2d90a178c4297611088bf7daae5492a3bc3d5ab6328c3a032eb425d2c249097e"
  
- EXTRA_OECONF += "PERL=${STAGING_DIR_TARGET}/usr/bin/perl"
- 
--SRC_URI[sha256sum] = "2e8c50160bf800a807aea094fc9dad81f9f361f42db56607508ed5b4855d2906"
-+SRC_URI[sha256sum] = "d9714751bbcfdc5a59340da6ef8ddfc0807221587b962d907f97dc0a8a002257"
- 
- FILES:${PN} += "${libdir}/xfce4/xfconf/xfconfd \
-                 ${libdir}/gio/modules/libxfconfgsettingsbackend.so \
--- 
-2.43.0
-
+ DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc bison-native"
+ CFLAGS += "-I${STAGING_INCDIR}/tirpc"
 
