@@ -2,87 +2,133 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8AA1BE6688A
-	for <webhook@archiver.kernel.org>; Sat, 23 Nov 2024 21:52:45 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web10.56132.1732398754478450009
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3C7EE6688F
+	for <webhook@archiver.kernel.org>; Sat, 23 Nov 2024 22:34:55 +0000 (UTC)
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.web11.57201.1732401289383873513
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 23 Nov 2024 13:52:34 -0800
+ Sat, 23 Nov 2024 14:34:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=hZfDZA/y;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-2ea1e5fc65bso2592930a91.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 23 Nov 2024 13:52:34 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=gcnwZZkS;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2142214abd2so12485845ad.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 23 Nov 2024 14:34:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1732398754; x=1733003554; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=hAfnzYOXC2NRPrI+2ggszmXkSEUtbqKeJ25Lagt2bP4=;
-        b=hZfDZA/yoRC5j2EgtqE/uYHOpKGjg5z8riB5Fc2sOiXNiTb9vGYVO42lfyyC/5wmZz
-         POHMXRAl4Mf4p/wOXx6k1HTGR5UumygyEACQwB3siNZu7iaMsnu2Ey4AqljCmRrV3tOW
-         K6POlB26Z6/Y7D9gmhLKtueqiLCIvRgOl1c22XazmGEnxBYSfBxV0lWKKZuyVO20t51p
-         /3rHkkwA/wDYCe7A9/PBnhtS84qsGrRTj4O41wq2Tdy6uDDMxFikNT9ztl6MwLYR30bc
-         65itR9q2r1efXk59IbNpXaWIr5l9dOhmwTQSlk3kSXRPLz1T1H7GAW0vEy8AuGyJqlYy
-         wxkg==
+        d=gmail.com; s=20230601; t=1732401288; x=1733006088; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=V6YCmy6lCMI4J6elwpYJyft5zlwN8uvtp3ibilL3LvQ=;
+        b=gcnwZZkSejBLgLWXFcqSHiYpFKnXZWVBL370/cnASkyclY3t2/AZQagjdy254OV7Lu
+         2M86Z/zNZD8Om6Cj9N77QUqu+drTqgp8lGQFryrF4GXqqySXjr0caX2ld7luiz7rDplq
+         yyQ+/Au6BdRiL+O7szXfCq+XMA74OAEYlY5EcZSvPBsLXb3/cCE3dw9m0ypcwmeUqtPh
+         2g/HSp0/O8ouw4uayQp4V12mv2ZBBJLPzFRbCPfAYE4vX2jcAkTG+PTCbQHgZSbrWTQZ
+         YokpTYZug3lzshGz1vKdvYOxWJqi5AFWBppP099pbzz5+VcrPydLItwtqyps2XUBXF/0
+         PQUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732398754; x=1733003554;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=hAfnzYOXC2NRPrI+2ggszmXkSEUtbqKeJ25Lagt2bP4=;
-        b=LufsXFbeK/3pEwjMQvwcjBB8FOjpyL1d27ewViXkXfiO04ikNeX0rkAJgref9503w+
-         ro4My8Cl+U7Q8/0jhchROwSmxEFKnqaEPMypvnTYr8m2HUAkROspQzLPXOgghS3boc3B
-         Rtm6mjNhPBvcONdVIuTsI6NfBri4tRVFwW5kZ0IU/M0TXX85fS/Dp0fx3PU/Af/WnMT0
-         MGZ5DV2yfp8fibGxp5WjRJN+s7XIEdpGbCkzhEtexDpFrQmEPyHCeK7ZKki6tZ2MXdDY
-         agIE/KzMzu80nlgczoLsmAIw67AU835Y0qbndt3gxzK3ugsx0msdcuSb0etfn/FrJDXp
-         u0CQ==
-X-Gm-Message-State: AOJu0Yw7PwUvxRXGEtCjsFD7Mvjbx9426GqtzKnMAyPVhQB6LS1x2OAE
-	p3go34flvCtdiznD3I56U2Ba61QibkXM4bShI2W8tGPQg0CxhQb+oVWVVQ==
-X-Gm-Gg: ASbGncshN2vNAnaHGJtUbyH9LZMmhRSPd746mUI+qanemnT5+gbJwqZJQhXySFmm3Yf
-	FVD0k1BxzUHeECD3fRCjjgA1FHT2QRwsMlq8kEgAEUTUjhv9GHY8S3MMP9fD5d2+cEILFLjZJI+
-	nZcmUtqVhiuRAmTa3R4+R14DczhHNxpnbUDFSQcyQjGmcfWY4+jwYH3z3a+0WEuaMGgrRIewQg7
-	stTYHrAw6yO8nYp59KPiFMywNrmcPgTSEudAmQzkJzAutcymwg=
-X-Google-Smtp-Source: AGHT+IG+aHdsuX9SQdEskGVBRlqgfVHWbQXKXmb6taVGfDOTobj1+W4mu482K4WNoIhbIElOKUKBxg==
-X-Received: by 2002:a17:90a:b884:b0:2ea:37b4:5373 with SMTP id 98e67ed59e1d1-2eb0e22cfc2mr9443774a91.10.1732398753697;
-        Sat, 23 Nov 2024 13:52:33 -0800 (PST)
+        d=1e100.net; s=20230601; t=1732401288; x=1733006088;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=V6YCmy6lCMI4J6elwpYJyft5zlwN8uvtp3ibilL3LvQ=;
+        b=aKXst/P52V+KldjR26pZLwCHx8yHeEe4bm291APhX3J5BuFw77LsXmvtuYgP06vmS5
+         kGbl/1uFu9amS20xXO0X5LKl/UzKGOTopnxsIO4rxnYrMEpEVbqhpOBGzBhkAxHuEw5g
+         ZPYCO9YM8ilWxyX79nI7BA8AQaPjIK6IEEpEtTEdNNswYjsgDqmDVXI5H9t+yR/9bcsD
+         OppJRUKk9Gh7azzmaXu2np+71MHtkw3h9wsVdGoXC6oiNwVW9HDmUlDqWQcklZ3XgDVD
+         FEp2swqb03XMuV2RYzwGu5sxZWVqRQlhdy55sVs8HNr4LQu9Cs9n70KNPigyXyZhqx0H
+         UkvA==
+X-Gm-Message-State: AOJu0YxyGqOnYxAD7SNOTBobOsUgASwDc83EZUyvhcQ06BDvzMfjixlA
+	mZYk84vb3BY4llyp29icCXKxQHe2iMADKYL8Xf3fMZK1CoKUnnxUlzCevA==
+X-Gm-Gg: ASbGncv2c95j5YbpI+n6etQZcpYCeEKF6XMKjDa7+dCpRSq7n1I8Vam2BHB3aG8DUFj
+	zWw4WBhHtkBY6EWerAJidgzj/KuCA2sRMAiGP3HItLsq2/E8xphOPdHm4eC94cF0lRJKlr1IdOG
+	PRWfc71GDYj1FyMIki5FXFydegtu/wM4vWd/xcCLHoyY6dPtFJxqvbH5vtPUAnbdr3tSNAVydgz
+	Ij/tKUOG71GO1jiSr25eSWOM+/Z5L5tj/F4xvC5VO1Hb4nyvoA=
+X-Google-Smtp-Source: AGHT+IE/ChF9QX7TKSNaMfQ3uH6dqPbDMGTlRGlkmk5Mr+sk+iBVWQFwVhzHEJn1o1o+Zw+Fzqgaxg==
+X-Received: by 2002:a17:902:cec7:b0:20c:a175:b720 with SMTP id d9443c01a7336-2129f65a8d7mr117664685ad.1.1732401288396;
+        Sat, 23 Nov 2024 14:34:48 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8201:fd20::1dd])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2eb0cfe48d2sm3810268a91.3.2024.11.23.13.52.32
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2129dba2f26sm37521945ad.85.2024.11.23.14.34.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 23 Nov 2024 13:52:33 -0800 (PST)
+        Sat, 23 Nov 2024 14:34:48 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] opencv: Specify right path for <numpy/ndarrayobject.h>
-Date: Sat, 23 Nov 2024 13:52:30 -0800
-Message-ID: <20241123215230.1558824-2-raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH] evolution-data-server: Fix build with ICU-76+
+Date: Sat, 23 Nov 2024 14:34:45 -0800
+Message-ID: <20241123223445.1611457-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20241123215230.1558824-1-raj.khem@gmail.com>
-References: <20241123215230.1558824-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 23 Nov 2024 21:52:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114025
+ <openembedded-devel@lists.openembedded.org>; Sat, 23 Nov 2024 22:34:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114026
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/opencv/opencv_4.10.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../evolution-data-server.bb                  |  1 +
+ ...Fails-to-build-link-against-icu-76.1.patch | 42 +++++++++++++++++++
+ 2 files changed, 43 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0001-I-574-Fails-to-build-link-against-icu-76.1.patch
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_4.10.0.bb b/meta-oe/recipes-support/opencv/opencv_4.10.0.bb
-index 07bdb37b75..5e54ab636f 100644
---- a/meta-oe/recipes-support/opencv/opencv_4.10.0.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_4.10.0.bb
-@@ -113,7 +113,7 @@ PACKAGECONFIG[opencl] = "-DWITH_OPENCL=ON,-DWITH_OPENCL=OFF,opencl-headers virtu
- PACKAGECONFIG[openvino] = "-DWITH_OPENVINO=ON,-DWITH_OPENVINO=OFF,openvino-inference-engine,openvino-inference-engine"
- PACKAGECONFIG[oracle-java] = "-DJAVA_INCLUDE_PATH=${ORACLE_JAVA_HOME}/include -DJAVA_INCLUDE_PATH2=${ORACLE_JAVA_HOME}/include/linux -DJAVA_AWT_INCLUDE_PATH=${ORACLE_JAVA_HOME}/include -DJAVA_AWT_LIBRARY=${ORACLE_JAVA_HOME}/lib/amd64/libjawt.so -DJAVA_JVM_LIBRARY=${ORACLE_JAVA_HOME}/lib/amd64/server/libjvm.so,,ant-native oracle-jse-jdk oracle-jse-jdk-native,"
- PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng,"
--PACKAGECONFIG[python3] = "-DPYTHON3_INCLUDE_PATH=${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI} -DPYTHON3_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include,,python3-numpy,"
-+PACKAGECONFIG[python3] = "-DPYTHON3_INCLUDE_PATH=${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI} -DPYTHON3_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/_core/include,,python3-numpy,"
- PACKAGECONFIG[samples] = "-DBUILD_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON,-DBUILD_EXAMPLES=OFF,,"
- PACKAGECONFIG[tbb] = "-DWITH_TBB=ON,-DWITH_TBB=OFF,tbb,"
- PACKAGECONFIG[tests] = "-DBUILD_TESTS=ON,-DBUILD_TESTS=OFF,,"
+diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
+index 384484e0dc..f0b43256d7 100644
+--- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
++++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
+@@ -18,6 +18,7 @@ SRC_URI += " \
+     file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
+     file://0004-call-native-helpers.patch \
+     file://0001-data-CMakeLists.txt-dont-create-automatic-google-log.patch \
++    file://0001-I-574-Fails-to-build-link-against-icu-76.1.patch \
+     file://iconv-detect.h \
+ "
+ 
+diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0001-I-574-Fails-to-build-link-against-icu-76.1.patch b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0001-I-574-Fails-to-build-link-against-icu-76.1.patch
+new file mode 100644
+index 0000000000..9f1bbfe5e0
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server/0001-I-574-Fails-to-build-link-against-icu-76.1.patch
+@@ -0,0 +1,42 @@
++From 12666816df679118fe50f15ba2da3244c62ac215 Mon Sep 17 00:00:00 2001
++From: Milan Crha <mcrha@redhat.com>
++Date: Tue, 19 Nov 2024 11:15:12 +0100
++Subject: [PATCH] I#574 - Fails to build/link against icu 76.1
++
++Closes https://gitlab.gnome.org/GNOME/evolution-data-server/-/issues/574
++
++Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/evolution-data-server/-/pipelines/761044]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ CMakeLists.txt | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 42721b3..fcaa188 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -376,13 +376,13 @@ endif(WIN32)
++ # ICU started shipping pkg-config files but it's not present
++ # on many systems, if we don't find the pkg-config
++ # file then let's fallback on a manual check
++-pkg_check_modules(ICU icu-i18n)
+++pkg_check_modules(ICU icu-i18n icu-uc)
++ 
++ if(NOT ICU_FOUND)
++ 	CHECK_INCLUDE_FILE(unicode/ucol.h HAVE_UNICODE_UCOL_H)
++ 	if(NOT HAVE_UNICODE_UCOL_H)
++ 		message(FATAL_ERROR "ICU unicode/ucol.h not found; icu-i18n is required")
++-	endif(HAVE_UNICODE_UCOL_H)
+++	endif(NOT HAVE_UNICODE_UCOL_H)
++ 
++ 	set(CMAKE_REQUIRED_LIBRARIES "-licui18n -licuuc -licudata")
++ 	CHECK_C_SOURCE_COMPILES("#include <unicode/ucol.h>
++@@ -393,7 +393,7 @@ if(NOT ICU_FOUND)
++ 		set(ICU_CFLAGS -D_REENTRANT)
++ 		set(ICU_LIBS "-licui18n -licuuc -licudata")
++ 	else(HAVE_UCOL_OPEN)
++-		message(FATAL_ERROR "Failed to find icu-i18n, install its development files or build them first")
+++		message(FATAL_ERROR "Failed to find icui18n, icuuc and icudata, install its development files or build them first")
++ 	endif(HAVE_UCOL_OPEN)
++ endif(NOT ICU_FOUND)
++ 
 
