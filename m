@@ -1,101 +1,91 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BF45D6EC1E
-	for <webhook@archiver.kernel.org>; Fri, 29 Nov 2024 14:46:35 +0000 (UTC)
-Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
- by mx.groups.io with SMTP id smtpd.web10.116418.1732891585362804564
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DA21ED72A04
+	for <webhook@archiver.kernel.org>; Fri, 29 Nov 2024 19:57:36 +0000 (UTC)
+Received: from mail-io1-f52.google.com (mail-io1-f52.google.com [209.85.166.52])
+ by mx.groups.io with SMTP id smtpd.web10.414.1732467313715790960
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Nov 2024 06:46:25 -0800
+ Sun, 24 Nov 2024 08:55:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=RBwOK8Os;
- spf=pass (domain: konsulko.com, ip: 209.85.167.41, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-53ddb99e9dcso2013029e87.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 29 Nov 2024 06:46:25 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=AUSPFknn;
+ spf=pass (domain: gmail.com, ip: 209.85.166.52, mailfrom: ethan.twardy@gmail.com)
+Received: by mail-io1-f52.google.com with SMTP id ca18e2360f4ac-84198253240so7367739f.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 24 Nov 2024 08:55:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1732891583; x=1733496383; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QRjuA0gNkJjQ1WdcfflEKEvIn9ZQzNmrw/SG/g09epA=;
-        b=RBwOK8OsMw8WlX55j9owpYmt/TXhddFre4pd34HIIS5EobpbP2ukBE3XKcuV3pVEtm
-         yv0UWHpYe3WT/F1ySKjaSVBPt+a6CND/onEv92dAcw+CsaWVuT9YsK84e2N7M+WMeHKt
-         s84iGxTHN9zGRlXGSwA1UrxNo1Hv3LiZTurpA=
+        d=gmail.com; s=20230601; t=1732467313; x=1733072113; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=86LcKlU/XTNhk1XwkIWYw7lMfVrcyfemlbFyZoKnG94=;
+        b=AUSPFknnFMAzjAeKXdGLP8y0AC9k0Ygq/1HXfzTJw9XmCFIz83MXwpP+LfWG2dKd6t
+         +1xwp6CJlRmpZdcH6RaCMTWgmdGuSflhr31RnOIt6k4avQnKmlu8bMsBwMHbq5NdBdCF
+         0k6syp5wmLIrCELz167zMJzy/KyFHby3W/+iF0hPHuhkoMf6a4gPm+YQ+F66PUDpnhNm
+         KA2to3uJC4kt9RNdc6DxfhC+zK6PumGAx0S87Nc0C9ANgsxdqsWTSofyeXmrxHtAhhcN
+         3lRtoyBbh4ienikSNzfyMl4YphPbZ4puLo2ObJo0YOkPx7nqrj8YgU/LhOlD0UH7zkYm
+         mXuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732891583; x=1733496383;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=QRjuA0gNkJjQ1WdcfflEKEvIn9ZQzNmrw/SG/g09epA=;
-        b=Wqsq+fsWkb1z7U0oq55gC0eAichUF11bdueazu8lx88kLYxgR+inLI/ZGI32hfwbjF
-         vSRmZcQjZ82piqrAaKNJn0b6ObiYaM8OorHaupEy9uprWPIMuEF3d3dR8s9D1oNBpUYj
-         ASkNJgLLtlNjxkJFhWIhPU25tNAEKskDT3dDQbKzAArcaVFds7H7mjjDgt+oT8guWbHx
-         YXkid+niR7HVRrD0aoIe4y79rxb0pGuM3Wwbgr1zhrfmK5MJFf3nNODzZwVxNU9OBuHR
-         PmD2XVO7tJ5k5mJuQxE8BlL/ScZleyMwzM072+cUqV83mg9ei69hFUnQI/TuHp8lGMZY
-         ferA==
-X-Gm-Message-State: AOJu0YxrK3t6u9LdD25cskzq8TBjBAJh8dw1K460r+WOKZlP7v5Uvhbs
-	sJirFPjifGFcbXPfmZNr8DXlYdFf9nqBzfA+AYr4WXUlQzkHAn944O4jdGnUQwxW7jts9OQGDyt
-	6
-X-Gm-Gg: ASbGnctrjbk0w5Q/I4lwL74vC2/XNoTAMwyetyZXyA7nHXaVpFsi77UXQNi+DJ+gJXw
-	BHXDvp9KU3ONYQkRPQdVVJ4zYgtDbYJI9WYdb4zzv5ATVKVvKRxMJtuBg9TVj93xxMr+yL8CGMi
-	fwilw/xv0T1yqWGQlazxbNipF+A3LhyLAcsXg6GtzZckAIfRbp6B4AcODjHWaY78EmKADCtwa+A
-	W4VIgRatcA76/p9rqUvF2P/F9ccyssSAVRWVw3RtLEWoQ1RAATu2YAgNqXPSOlE
-X-Google-Smtp-Source: AGHT+IHsKQekYr4MzFuxNLOYqP0J6i3yFeY0pXUyBMjUDq7OPieVJW0J7FXM8ivDvhwfFF4rtiE2wA==
-X-Received: by 2002:a05:6512:e87:b0:53d:e8f5:f9d4 with SMTP id 2adb3069b0e04-53df0108f5fmr6313024e87.36.1732891583243;
-        Fri, 29 Nov 2024 06:46:23 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5d0b87cb290sm622832a12.12.2024.11.29.06.46.21
+        d=1e100.net; s=20230601; t=1732467313; x=1733072113;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=86LcKlU/XTNhk1XwkIWYw7lMfVrcyfemlbFyZoKnG94=;
+        b=wnfEpGCEaP48hoOPlTEudbFDrbQl3LIhnnMcMLokGugYloVIVz6a7zSXHiGflhMY0H
+         2t+dYE9fs6/4/lhTXIyT7HbGlINbvP3A8dR+27SX3gsrNFQ+EA4NvrkgCrlBRTlslvoB
+         0oB/tlfuNC2cYdn0aKsPR4ipGcluU8IQwjSFb9PD38eCG4BD4LSd/z8/+IWcakQtDHCY
+         t/I9CDD+WwosE3S088s9o/9JlCOPFtKCV+A5LANbOT2xCv01oMOlolgd/jJtxEntppg/
+         w/eQNMyd5j2IlhVyV8VgdVw8KwnjiHKCTRW0/qj5j/D2BZB+hj8rVPd8epZ4Doj1NXZ5
+         MeDA==
+X-Gm-Message-State: AOJu0YyGva5fNRcse4sFqemIsOH4GAm5s4g3UVlIoRxLy+LRLfKff2kF
+	2wDPPwbd0zAt7inr4Pw78RGoBn5lB+tlgFn3uQraSgtEU66YxSpI775L9Q==
+X-Gm-Gg: ASbGnctqqtsAnERkt3Z75hJpHrq98IvZeeiDgThBkgULlmQRpAmHHjy3JMMY7//pHll
+	ip7OqCEjjJ9nv3KNCAsu3bd2EUMOkk+L1vIFG5eYtFMVkq+7GqhVq4cKf6AMiZD+SxRk+EoSZ98
+	I0fUw6yVTXgQFUo/I0ADwe8q0rispOq+b4AbJUze6WdzIgLACNRWhdTYuJMQ1/v4A2qkTsZb0jQ
+	3qw//awBB2PXLFt5GqK9oW4h+Y3VyObWQwQ30EATwnSYbichSHFlLUqOgit34AUyGc2sOdJFiNO
+	rzXbEZw3zP9ymEs36em1055zgYSgK7/mleYfZyFEX0D3
+X-Google-Smtp-Source: AGHT+IFeiEWIulj0kUxlfjE+hFERZqOLQfckbq4m5dEylyEkYKtCcDieB92zzMKsmmBvdF6t1YxfaQ==
+X-Received: by 2002:a05:6602:1345:b0:83a:db84:41a8 with SMTP id ca18e2360f4ac-83ecdcf3ca6mr1049039439f.10.1732467312538;
+        Sun, 24 Nov 2024 08:55:12 -0800 (PST)
+Received: from localhost.localdomain (h135-135-92-85.ashwwi.broadband.dynamic.tds.net. [135.135.92.85])
+        by smtp.gmail.com with ESMTPSA id ca18e2360f4ac-84180e319f9sm39507339f.0.2024.11.24.08.55.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 29 Nov 2024 06:46:22 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Sun, 24 Nov 2024 08:55:11 -0800 (PST)
+From: "AmateurECE" <ethan.twardy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-stevedore: Upgrade 5.3.0 -> 5.4.0
-Date: Fri, 29 Nov 2024 16:46:16 +0200
-Message-Id: <20241129144619.780319-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20241129144619.780319-1-leon.anavi@konsulko.com>
-References: <20241129144619.780319-1-leon.anavi@konsulko.com>
+Cc: "Ethan D. Twardy" <ethan.twardy@gmail.com>
+Subject: [meta-multimedia][PATCH] pipewire: Add glib-2.0-native dep for bluez5
+Date: Sun, 24 Nov 2024 10:54:19 -0600
+Message-ID: <20241124165419.24549-1-ethan.twardy@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 29 Nov 2024 14:46:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114115
+ <openembedded-devel@lists.openembedded.org>; Fri, 29 Nov 2024 19:57:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114119
 
-Upgrade to version 5.4.0:
+The SPA plugins for bluez depend on D-Bus bindings generated using
+gdbus-codegen at build time. Some PACKAGECONFIG combinations appear to
+pull this in accidentally. Add an explicit dependency to ensure that
+it's in the sysroot when PACKAGECONFIG contains bluez5.
 
-- Add note about requirements lower bounds
-- Remove Python 3.8 support
-- Run pyupgrade to clean up Python 2 syntaxes
-- Declare Python 3.12 support
-- Update master for stable/2024.2
+Signed-off-by: Ethan D. Twardy <ethan.twardy@gmail.com>
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../{python3-stevedore_5.3.0.bb => python3-stevedore_5.4.0.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-stevedore_5.3.0.bb => python3-stevedore_5.4.0.bb} (79%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-stevedore_5.3.0.bb b/meta-python/recipes-devtools/python/python3-stevedore_5.4.0.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-stevedore_5.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-stevedore_5.4.0.bb
-index 7c9c3ebbf8..07e0778aa7 100644
---- a/meta-python/recipes-devtools/python/python3-stevedore_5.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-stevedore_5.4.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://docs.openstack.org/stevedore/latest/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
--SRC_URI[sha256sum] = "9a64265f4060312828151c204efbe9b7a9852a0d9228756344dbc7e4023e375a"
-+SRC_URI[sha256sum] = "79e92235ecb828fe952b6b8b0c6c87863248631922c8e8e0fa5b17b232c4514d"
- 
- DEPENDS += "python3-pbr-native"
- 
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.5.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.5.bb
+index c8ac04d59..1c51fcc15 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.5.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.5.bb
+@@ -96,7 +96,7 @@ PACKAGECONFIG:class-target ??= " \
+ # as being in conflict.
+ PACKAGECONFIG[alsa] = "-Dalsa=enabled,-Dalsa=disabled,alsa-lib udev,,pipewire-alsa pipewire-alsa-card-profile"
+ PACKAGECONFIG[avahi] = "-Davahi=enabled,-Davahi=disabled,avahi"
+-PACKAGECONFIG[bluez] = "-Dbluez5=enabled,-Dbluez5=disabled,bluez5 sbc"
++PACKAGECONFIG[bluez] = "-Dbluez5=enabled,-Dbluez5=disabled,bluez5 sbc glib-2.0-native"
+ PACKAGECONFIG[bluez-aac] = "-Dbluez5-codec-aac=enabled,-Dbluez5-codec-aac=disabled,fdk-aac"
+ PACKAGECONFIG[bluez-opus] = "-Dbluez5-codec-opus=enabled,-Dbluez5-codec-opus=disabled,libopus"
+ PACKAGECONFIG[bluez-lc3] = "-Dbluez5-codec-lc3=enabled,-Dbluez5-codec-lc3=disabled,liblc3"
 -- 
-2.39.5
+2.45.2
 
 
