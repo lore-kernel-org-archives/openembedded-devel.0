@@ -1,115 +1,94 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98DA0D58D4C
-	for <webhook@archiver.kernel.org>; Mon, 25 Nov 2024 13:32:24 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.web11.18730.1732541535586641110
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22426D58D56
+	for <webhook@archiver.kernel.org>; Mon, 25 Nov 2024 14:53:55 +0000 (UTC)
+Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
+ by mx.groups.io with SMTP id smtpd.web11.20489.1732546430066978380
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Nov 2024 05:32:15 -0800
+ Mon, 25 Nov 2024 06:53:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=MQZUpFXY;
- spf=pass (domain: konsulko.com, ip: 209.85.221.41, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-38232cebb0cso3436581f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Nov 2024 05:32:15 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=MVuFKTFM;
+ spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-6eed41d2b12so33620357b3.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Nov 2024 06:53:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1732541534; x=1733146334; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=LLcPtpJMW8oLSyCj+i8hDep1fdLk1Nh7dWSKQ4/MGfo=;
-        b=MQZUpFXY97u/ewJlsh9WJugMOMoWQz4/sP1G//wPo7Z8mnjfrKU+vnhbGhgtj+58hY
-         LXcJjlHlOLUqd8K/NQrxmUV5pLPYD3nZG+Fpe+WEWJTY6eabonec4W0EbrVBIREocZ/a
-         yS07eodKUO3eNR3mrWcXJMKNxRkEeienFuJsQ=
+        d=gmail.com; s=20230601; t=1732546429; x=1733151229; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=WEDgjoKusE7LYX4PknvdN7bhBIBSpbvrznmjy0BNJjo=;
+        b=MVuFKTFME4WfND4JXIwKw+zBdOnNFN0yD4bXs9xh/t8A7WS/6kVpca9e+1O9a4mvSC
+         bg8JY7qBuya/hExAWFiLQiNd7Pr+tTI/ne9UNeXg+JRqmwQM7VXVfAJgSTIKdfH4veIY
+         2rsrHW8MYs9UyOeZ11A9Idki1k3oAdortLmnX1/sYilFSLLYTCubHLN4fraJEvIb1M4l
+         oiI+EkydNIEeAtAPMyP491I/b+73RyPmsGKmXotUZnpwumSAA6Z2lUPUy4YPxFh1XwUa
+         FSS0f242pgwvbcm7nuwPNMB14QJFhysnASZiS4iB6pUT5QxuOu+ZBddA7CfZ48i/bfq1
+         4V3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732541534; x=1733146334;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=LLcPtpJMW8oLSyCj+i8hDep1fdLk1Nh7dWSKQ4/MGfo=;
-        b=LATKqNpmvFwEf1BFKA/d3DAOp7+Mc/mE8OktefJ0+OfiklQw6+egYstVElI0FXuDFp
-         MwQBTAmG/xyGq4cJcC6/6Tg93OMV9dE/4fwDitbH+G2IuaMi31WneBzQpGPHnRnVh9ua
-         TtgNEHNEOBUuqIDY85QWfARBNa2dZRSynq4rEU4bJrD8ug+QIQqk0IwwpkaA0RN7dEHK
-         JV8QIcM1BKjQH18XoKURZVkqJ1CJEFcWHxCucLBq0+if0oldRALZwNXudttxbUvALSQt
-         Ez3+OIEpozR55CscSpHH193APYaxVAtAdVZhU+qXG6RcdC71rOKgtedSPJIg2PCIliGX
-         /WDA==
-X-Gm-Message-State: AOJu0Yywkm8bXoHtQkJ3MVw1bB+QpW5OlDp4fHbKcKOANhjew99HbYff
-	YRCs9O/4I/g/LfoLxfY/KD6rL+DL1bJGDr7WypIYHFWZXrjPDmd40mv61c4pX6z5O3rgpd2WPQL
-	+
-X-Gm-Gg: ASbGnct+mvZQejxPI+/WTwbWTMefuzftNW0ermGqsIBEuXFTzdo3FBYsAjYo0Zwpd3e
-	9iowvctvMEIWCX431usYnALbkCmeuqxTmWPxqW7Ll2vsaqgrlmuJY4HP6V6hHLwuoPnTpp8brHh
-	aIqhx8P5qh10n/WdHy2x8yQtYwwcJPVDJxWPxLn8yPk2tFOJWN7xMhsjLf4/7+xqPKzZESx+TD1
-	lDEqMLVfCHfNw5g67YOLctB5p6V7wsrrd//juhyJWj/yKfIO1b2rmkEePcelWME
-X-Google-Smtp-Source: AGHT+IHzeCj0gxLZFdJ+mNjYnh8BwyxNEPkWfZeY48y/22EM2eZO0pn5Ss7RFT67HjfrLnc7xdwLmQ==
-X-Received: by 2002:a05:6000:4010:b0:381:f5c3:1d02 with SMTP id ffacd0b85a97d-38260bc8e60mr9682348f8f.44.1732541533750;
-        Mon, 25 Nov 2024 05:32:13 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3825fad60e5sm10741023f8f.3.2024.11.25.05.32.13
+        d=1e100.net; s=20230601; t=1732546429; x=1733151229;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=WEDgjoKusE7LYX4PknvdN7bhBIBSpbvrznmjy0BNJjo=;
+        b=mvDsTeAWabRDIHdTUcrpN0MbP3I1KrvTZOr+pPnDYjZcxKKCNgHccaPXCvxwBhXuii
+         Z7Y48LRlaSU7vlTqET/+w9jnNgADozIFbNOfTx4LRwEk2dNJTdIW2yZEICwDLGJ+MF/p
+         h9pm4vV87RAH5I8rQWYh3qSNwTuEgRrHjIv/YvwuDsSiZa4L9eg+2LKLiqh9FLcz8hdK
+         vd8AH2Ez9AHt0G7ujBq0CqBSAGTIxY5CfQMe8+5QK7lpuWqtJVx/sLI3VWzOpekzavah
+         9Qv/mC5vNHZ33Csbg7NkRrYPpa8imKlqRc3M41Uf6S3hMvVbSGzD9hF0f1+s3t63vIdS
+         Yvqg==
+X-Gm-Message-State: AOJu0YyTep4dX3olzBeujYrL2zRYWu0/fwJ8aw8LbkWgDp7WW/IDVU3P
+	1SOlFJqV1Ipk5w/AUp+RMwbDP5laBsQ1C4f6z+sjm4gpz0t2U6I2FQfcI6yv
+X-Gm-Gg: ASbGncsnhSzqVCLTdpykew0C2euypwj2ZhPQ3ZZaf4gAaV+Qp//boSlQ9/4vvjG1B2Y
+	gbTp5kyuMsUL+AzQqsxw+FqNkKvJe2TgM8blPT0KbKKkwXHodpEFI0tXR8/Z3d/vAqIo1sbf4wb
+	57yl+OR4/wq549bj1c2GGbzBjPQiupRhSAn2PF9FeXdY+o6YMfYlDQzNrVRgbAV+IuUFCBQx3Dc
+	fPl9D81VFPPsH8WbCLxDAmj91fcA/HXwIZB4qu7gaoxE+zL1z95E52k
+X-Google-Smtp-Source: AGHT+IHQxhVD/BRWR/DEdg1SiT5kTgBloMdK2xiI95mvn8vNiwg/enixZD1XtVVhtUiLkUuIiFuYsA==
+X-Received: by 2002:a05:690c:30f:b0:6ee:676b:4c65 with SMTP id 00721157ae682-6eecd304c86mr143237547b3.19.1732546428627;
+        Mon, 25 Nov 2024 06:53:48 -0800 (PST)
+Received: from localhost.localdomain ([71.215.7.194])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6eedfe152b2sm18073417b3.1.2024.11.25.06.53.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 25 Nov 2024 05:32:13 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Mon, 25 Nov 2024 06:53:48 -0800 (PST)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-fsspec: Upgrade 2024.9.0 -> 2024.10.0
-Date: Mon, 25 Nov 2024 15:32:04 +0200
-Message-Id: <20241125133204.31594-5-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20241125133204.31594-1-leon.anavi@konsulko.com>
-References: <20241125133204.31594-1-leon.anavi@konsulko.com>
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-xfce][PATCH 1/7] exo: Upgrade 4.19.0 -> 4.19.1
+Date: Mon, 25 Nov 2024 09:53:01 -0500
+Message-ID: <20241125145307.5479-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Nov 2024 13:32:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114037
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Nov 2024 14:53:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114038
 
-Upgrade to release 2024.10.0:
+Changelog: https://gitlab.xfce.org/xfce/exo/-/tags/exo-4.19.1
 
-- Performance of memoryFS rm
-- Performance of git FS info
-- Avoid git hex for newer pygit
-- Tests fix for zip
-- Missing open_async for dirFS
-- Handle pathlib in zip
-- Skip tests needing kerchunk if not installed
-- Allow repeated kwargs in unchain
-- Code style
-- Allow pyarrow in referenceFS parquet
-- Don't hardcode test port for parallel runs
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- ...ython3-fsspec_2024.9.0.bb => python3-fsspec_2024.10.0.bb} | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-fsspec_2024.9.0.bb => python3-fsspec_2024.10.0.bb} (86%)
+ meta-xfce/recipes-xfce/exo/{exo_4.19.0.bb => exo_4.19.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-xfce/recipes-xfce/exo/{exo_4.19.0.bb => exo_4.19.1.bb} (90%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-fsspec_2024.9.0.bb b/meta-python/recipes-devtools/python/python3-fsspec_2024.10.0.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-fsspec_2024.9.0.bb
-rename to meta-python/recipes-devtools/python/python3-fsspec_2024.10.0.bb
-index 1073f94802..e6c2b45f8c 100644
---- a/meta-python/recipes-devtools/python/python3-fsspec_2024.9.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-fsspec_2024.10.0.bb
-@@ -3,13 +3,14 @@ HOMEPAGE = "https://github.com/fsspec/filesystem_spec"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b38a11bf4dcdfc66307f8515ce1fbaa6"
+diff --git a/meta-xfce/recipes-xfce/exo/exo_4.19.0.bb b/meta-xfce/recipes-xfce/exo/exo_4.19.1.bb
+similarity index 90%
+rename from meta-xfce/recipes-xfce/exo/exo_4.19.0.bb
+rename to meta-xfce/recipes-xfce/exo/exo_4.19.1.bb
+index 48044240a..f5415af75 100644
+--- a/meta-xfce/recipes-xfce/exo/exo_4.19.0.bb
++++ b/meta-xfce/recipes-xfce/exo/exo_4.19.1.bb
+@@ -15,7 +15,7 @@ SRC_URI += " \
+     file://exo-no-tests-0.8.patch \
+ "
  
--DEPENDS = "python3-hatch-vcs-native python3-hatchling-native"
--SRC_URI[sha256sum] = "4b0afb90c2f21832df142f292649035d80b421f60a9e1c027802e5a0da2b04e8"
-+SRC_URI[sha256sum] = "eda2d8a4116d4f2429db8550f2457da57279247dd930bb12f821b58391359493"
+-SRC_URI[sha256sum] = "a0124108c197efcc576a6deeface381416dc7137b6a7e7dfa3060fad62509fb7"
++SRC_URI[sha256sum] = "4c3721d47126b1a3143f00a4e4dff5eea364c02c3fa141b09c0b1af16b1f0794"
  
- inherit pypi python_hatchling ptest
- 
- PYPI_PACKAGE = "fsspec"
- 
-+DEPENDS = "python3-hatch-vcs-native python3-hatchling-native"
-+
- RDEPENDS:${PN}-ptest += "\
- 	python3-pytest \
- 	python3-pytest-mock \
+ # Note: python bindings did not work in oe-dev and are about to be moved to
+ # pyxfce see http://comments.gmane.org/gmane.comp.desktop.xfce.devel.version4/19560
 -- 
-2.39.5
+2.43.0
 
 
