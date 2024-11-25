@@ -1,269 +1,145 @@
-Return-Path: <alex.kanavin@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EADEDD58D73
-	for <webhook@archiver.kernel.org>; Mon, 25 Nov 2024 17:52:05 +0000 (UTC)
-Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com [209.85.219.51])
- by mx.groups.io with SMTP id smtpd.web10.24741.1732557117848934159
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33D33D58D7F
+	for <webhook@archiver.kernel.org>; Mon, 25 Nov 2024 18:46:36 +0000 (UTC)
+Received: from mail-oi1-f170.google.com (mail-oi1-f170.google.com [209.85.167.170])
+ by mx.groups.io with SMTP id smtpd.web11.26491.1732560386874258898
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Nov 2024 09:51:58 -0800
+ Mon, 25 Nov 2024 10:46:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KUUqPbyK;
- spf=pass (domain: gmail.com, ip: 209.85.219.51, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-qv1-f51.google.com with SMTP id 6a1803df08f44-6d846307673so14288956d6.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Nov 2024 09:51:57 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kqHgQ0by;
+ spf=pass (domain: gmail.com, ip: 209.85.167.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f170.google.com with SMTP id 5614622812f47-3ea49150430so616981b6e.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Nov 2024 10:46:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1732557117; x=1733161917; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=G8UCB3LSbE4ABk+wYL4CnWDqI0LSpcM5DCfw0n/OQLo=;
-        b=KUUqPbyKsBFTBPldBBw6d+5Xb6aCTytUVDSlU46Riw3v3ft9LpbuFR8OOnIKwOYoLz
-         AcOIVcvlohvR5oAvhWY8HDaxFyboTRXu7Z0UQUjnGm6qD8NziY8/Ib36WtN7dkMUNdsw
-         RlvpyqQbEF4US5yagjZ6+dojVVG1D6F/KmrEE147POgxJjxxonNFkPhdX7sqqBONqTwv
-         BTo68Ue27BbZpQrN9Jvtn7tEu01/ULrI+o3knDvs6AnljE3/fTC8RNE6HpaSGF0gxKK+
-         P84nqvrbNUPW/vLGGiSnMG/Fh5Z7nlmFaeszqJdMHKkNLL/dK4lNQiZ3ZWl/8nCr9OkI
-         6WBw==
+        d=gmail.com; s=20230601; t=1732560386; x=1733165186; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=n0aG75YdzlGzkFp9v705/iI2i+IovdxZ90UdCE2itSQ=;
+        b=kqHgQ0bykE3Qtpfre0Vx4dAdNHuTMZpXHAInA2ZeknSVgacJHsJQMVKmYJig8XEPP+
+         D8ijXIQcfNz6rSHNvsuEh8ic7AINTzornadqW2qnda60oE1OImtHHXyBOAPRBNdPdejt
+         LlLnz3Ws1mLqNqMu2Yzv0ZswM5/00SoUVk8nvk0XOrfRiyKKi7ZRvc5PYy8V8nDv+PMf
+         Oz4e8BDbXvY0CBVUUCOStQ/Tk7XqfN7BOrSaXID3J7aZ2alXZt2+Op6A5Kn+H9o0OCvr
+         46McPJbSRY+B9dSsZdzzJcYT2jUizizE/YqZtGl6kVJB7sF71zyOeWE41iT2yydg18Rr
+         nDBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732557117; x=1733161917;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=G8UCB3LSbE4ABk+wYL4CnWDqI0LSpcM5DCfw0n/OQLo=;
-        b=UNqoTuzw9Ex2cuD0ZtSX/ddIkHe/aCdB8c+uFhDLRQy9kBgjoqB4NY0exMzg7JCcks
-         SA4yZ2aUJ+Ar6Q0ZhJq7WWpyIgfmDYpNhMcTxE5Gqg904p5YaMQcCj8pVyvPxxmwqAVS
-         35NhHtY0oXqLHWwLJMoboQ7a5f+OiLrutjqFulQStd4kfKvUiMmb+mSbNwxcQBUqJSZR
-         gzoII60OXDbkmVMtIGtJJWGsIYFuyS8ADIlDabOjtdBgarq6j2W3Ysv49Hr8D6dXqDei
-         qYNawVZDQwbMamVmV5aadNlsg9uft4Xs9pWBjxcC+xbPEB7UHXcf1v+Ut9j5YeS3lhlt
-         1Zug==
-X-Gm-Message-State: AOJu0YyRo/cBxJneSMgIWQGRMZjzagnyemOhSIJ2JHjek/ueP6KUboVg
-	uFPKN5J1rdD0ZC3vmZR0w9XtV6W4Ag6m6BPdMbbKimYq/0a6Gni2b5cINOgt3MVyR737sLEGGVq
-	cEzsW4jbC6J7jEeuN03PygEigeEI=
-X-Gm-Gg: ASbGncvTs9WmZa2sWKaS5XbTQPEAyac5vQNoktDK0qopf8m6K8EIuJC6HS8TXH9eSOy
-	ZjWEWlT2GS9jeoqNWQ8XiYSDa+hZWLgxyi4Wsw/FYDEbZz1qXgEC0V1up9BcAi0VHTA==
-X-Google-Smtp-Source: AGHT+IGF6sTnn0M0ZToxoP20vwtem/+x75dEDVDbTd7ujeiPB8qWfqZBs/DYiA2FjRhDRSC4eIud+GgIdV63IAmrAzw=
-X-Received: by 2002:ad4:5cac:0:b0:6cc:41cc:cab6 with SMTP id
- 6a1803df08f44-6d450ea4648mr247836256d6.23.1732557115336; Mon, 25 Nov 2024
- 09:51:55 -0800 (PST)
+        d=1e100.net; s=20230601; t=1732560386; x=1733165186;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=n0aG75YdzlGzkFp9v705/iI2i+IovdxZ90UdCE2itSQ=;
+        b=UJpH84IbWCVBkXN2JIROexV8SuSze3q2eWnC+y1iH39j6WurThA3PxGlZneCBCLMPz
+         wbvD3MIreGogscc2pbSyroHyZ2+/Xb0E5GZLQSXfEyrjVeDO1wquQUT4i14PgB8HKUsc
+         7V3K02vKvrqP6rc43tURcFc/gIEv5AuUt2WfhbM2JWptsrGOczLlWSho4Miaez+HDLLC
+         6E72XljGXRmYdAJ0+o/i6kO7OaRM1O6FIR0e0d/lfgI/Fv5oa2q9YXNv83p+8rhiw+xS
+         oqXSIZ/BexwiRyKehhPcIGAUo7q8oAOPxkJbzcqaDzkXYVm1JW/FM3N1e9aHUimlzTSg
+         Qa8Q==
+X-Gm-Message-State: AOJu0YxNXk/asnd5xp2efPrnZQcJLUe1VKZdWzMzALH2v48bf5MZ2jXA
+	1WQ9r8T3uQ9fODGxlbr+6Mstxsme+Pc0ffAOwA0UdGnugSspW6+OCJHZcUwjqQrgbKQfshs7RbE
+	IxcB5aVYeXG+scsoR28UJSaWqErU/e/Ho
+X-Gm-Gg: ASbGncvzM5to/y7tjChBoYMQyw8sAb3GhTAW3a6m/mSaHy7FkK2ebTL6UP+AY9lgZpW
+	syRD6c2bYg98DluqMVrg0SL87QFhwzw==
+X-Google-Smtp-Source: AGHT+IE8LzsnVSCg3Zjo24gzJkG6IUV9fHg1hFwefeyKkmtvXWiOIcvL3BJcgtvavnYYme96qCpGzfyi5JE7IGuNuuI=
+X-Received: by 2002:a05:6808:170c:b0:3e7:b632:2a8 with SMTP id
+ 5614622812f47-3e915823eb2mr12856344b6e.17.1732560386141; Mon, 25 Nov 2024
+ 10:46:26 -0800 (PST)
 MIME-Version: 1.0
-References: <20241125172401.596324-1-pratheeksha.s.n@ni.com>
-In-Reply-To: <20241125172401.596324-1-pratheeksha.s.n@ni.com>
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Mon, 25 Nov 2024 18:51:44 +0100
-Message-ID: <CANNYZj-=wQAoqATb--x_r9YUnZg_DzLd4ZLHP6yXAvHvpp5d5Q@mail.gmail.com>
-Subject: Re: [oe] [meta-gnome][PATCH] Onboard: Add onboard virtual keyboard
-To: pratheeksha.s.n@ni.com
+References: <20241125145307.5479-1-schonm@gmail.com> <20241125145307.5479-3-schonm@gmail.com>
+In-Reply-To: <20241125145307.5479-3-schonm@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 25 Nov 2024 10:46:00 -0800
+Message-ID: <CAMKF1sqgczUcaBXVYdZfF8vyJBhYb8sDA-hxvWF4s1zBE0HCDw@mail.gmail.com>
+Subject: Re: [oe] [meta-xfce][PATCH 3/7] libxfce4ui: Upgrade 4.19.3 -> 4.19.4
+To: schonm@gmail.com
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Nov 2024 17:52:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114046
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Nov 2024 18:46:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114047
 
-This is a defunct Ubuntu project. Is there a reason it should be added
-to meta-gnome, as gnome provides its own implementation of the on
-screen keyboard?
+with lld linker I see errors like
 
-Alex
+   | riscv32-yoe-linux-ld.lld: error: undefined reference: IceSetIOErrorHan=
+dler
+   | >>> referenced by ./.libs/libxfce4ui-2.so (disallowed by
+--no-allow-shlib-undefined)
+   |
+   | riscv32-yoe-linux-ld.lld: error: undefined reference: IceAddConnection=
+Watch
+   | >>> referenced by ./.libs/libxfce4ui-2.so (disallowed by
+--no-allow-shlib-undefined)
+   |
+   | riscv32-yoe-linux-ld.lld: error: undefined reference: IceConnectionNum=
+ber
+   | >>> referenced by ./.libs/libxfce4ui-2.so (disallowed by
+--no-allow-shlib-undefined)
+   |
+   | riscv32-yoe-linux-ld.lld: error: undefined reference: IceProcessMessag=
+es
+   | >>> referenced by ./.libs/libxfce4ui-2.so (disallowed by
+--no-allow-shlib-undefined)
+   |
+   | riscv32-yoe-linux-ld.lld: error: undefined reference:
+IceSetShutdownNegotiation
+   | >>> referenced by ./.libs/libxfce4ui-2.so (disallowed by
+--no-allow-shlib-undefined)
+   |
+   | riscv32-yoe-linux-ld.lld: error: undefined reference: IceCloseConnecti=
+on
+   | >>> referenced by ./.libs/libxfce4ui-2.so (disallowed by
+--no-allow-shlib-undefined)
 
-On Mon, 25 Nov 2024 at 18:24, pratheekshasn via lists.openembedded.org
-<pratheeksha.s.n=ni.com@lists.openembedded.org> wrote:
+On Mon, Nov 25, 2024 at 6:54=E2=80=AFAM J. S. via lists.openembedded.org
+<schonm=3Dgmail.com@lists.openembedded.org> wrote:
 >
-> Signed-off by: Pratheeksha S N <pratheeksha.s.n@ni.com>
+> Changelog: https://gitlab.xfce.org/xfce/libxfce4ui/-/tags/libxfce4ui-4.19=
+.4
+>
+> Signed-off-by: Jason Schonberg <schonm@gmail.com>
 > ---
->  ...ine-error-API-if-platform-does-not-h.patch | 70 +++++++++++++++++++
->  .../0002-onboard-onhover-seg-fault-fix.patch  | 52 ++++++++++++++
->  .../recipes-support/onboard/onboard_1.4.1.bb  | 34 +++++++++
->  3 files changed, 156 insertions(+)
->  create mode 100644 meta-gnome/recipes-support/onboard/onboard/0001-pypredict-lm-Define-error-API-if-platform-does-not-h.patch
->  create mode 100644 meta-gnome/recipes-support/onboard/onboard/0002-onboard-onhover-seg-fault-fix.patch
->  create mode 100644 meta-gnome/recipes-support/onboard/onboard_1.4.1.bb
+>  .../libxfce4ui/{libxfce4ui_4.19.3.bb =3D> libxfce4ui_4.19.4.bb}   | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-xfce/recipes-xfce/libxfce4ui/{libxfce4ui_4.19.3.bb =3D> libx=
+fce4ui_4.19.4.bb} (92%)
 >
-> diff --git a/meta-gnome/recipes-support/onboard/onboard/0001-pypredict-lm-Define-error-API-if-platform-does-not-h.patch b/meta-gnome/recipes-support/onboard/onboard/0001-pypredict-lm-Define-error-API-if-platform-does-not-h.patch
-> new file mode 100644
-> index 000000000..3f4145264
-> --- /dev/null
-> +++ b/meta-gnome/recipes-support/onboard/onboard/0001-pypredict-lm-Define-error-API-if-platform-does-not-h.patch
-> @@ -0,0 +1,70 @@
-> +From 1c95f64aa342147387ce4b1b7269a5c8b34bd898 Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Thu, 13 Jul 2017 09:01:04 -0700
-> +Subject: [PATCH] pypredict/lm: Define error API if platform does not have it
-> +
-> +error() API is not implemented across all libcs on linux
-> +e.g. musl does not provide it.
-> +
-> +Upstream-Status: Inactive-Upstream [lastcommit: 2017-10-09]
-> +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +
-> +---
-> + Onboard/pypredict/lm/lm.cpp         |  1 -
-> + Onboard/pypredict/lm/lm.h           | 13 +++++++++++++
-> + Onboard/pypredict/lm/lm_dynamic.cpp |  2 --
-> + 3 files changed, 13 insertions(+), 3 deletions(-)
-> +
-> +diff --git a/Onboard/pypredict/lm/lm.cpp b/Onboard/pypredict/lm/lm.cpp
-> +index 2e64296..37ae241 100644
-> +--- a/Onboard/pypredict/lm/lm.cpp
-> ++++ b/Onboard/pypredict/lm/lm.cpp
-> +@@ -19,7 +19,6 @@
-> +
-> + #include <stdlib.h>
-> + #include <stdio.h>
-> +-#include <error.h>
-> + #include <algorithm>
-> + #include <cmath>
-> + #include <string>
-> +diff --git a/Onboard/pypredict/lm/lm.h b/Onboard/pypredict/lm/lm.h
-> +index ed4164a..b8b63ee 100644
-> +--- a/Onboard/pypredict/lm/lm.h
-> ++++ b/Onboard/pypredict/lm/lm.h
-> +@@ -32,6 +32,19 @@
-> + #include <algorithm>
-> + #include <string>
-> +
-> ++#if defined(HAVE_ERROR_H)
-> ++#include <error.h>
-> ++#else
-> ++#include <err.h>
-> ++#define _onboard_error(S, E, F, ...) do { \
-> ++       if (E) \
-> ++               err(S, F ": %s", ##__VA_ARGS__, strerror(E)); \
-> ++       else \
-> ++               err(S, F, ##__VA_ARGS__); \
-> ++} while(0)
-> ++
-> ++#define error _onboard_error
-> ++#endif
-> +
-> + // break into debugger
-> + // step twice to come back out of the raise() call into known code
-> +diff --git a/Onboard/pypredict/lm/lm_dynamic.cpp b/Onboard/pypredict/lm/lm_dynamic.cpp
-> +index 7c62824..e7c7f40 100644
-> +--- a/Onboard/pypredict/lm/lm_dynamic.cpp
-> ++++ b/Onboard/pypredict/lm/lm_dynamic.cpp
-> +@@ -17,8 +17,6 @@
-> +  * along with this program. If not, see <http://www.gnu.org/licenses/>.
-> +  */
-> +
-> +-#include <error.h>
-> +-
-> + #include "lm_dynamic.h"
-> +
-> + using namespace std;
-> +--
-> +2.13.2
-> +
-> diff --git a/meta-gnome/recipes-support/onboard/onboard/0002-onboard-onhover-seg-fault-fix.patch b/meta-gnome/recipes-support/onboard/onboard/0002-onboard-onhover-seg-fault-fix.patch
-> new file mode 100644
-> index 000000000..1ec195cb8
-> --- /dev/null
-> +++ b/meta-gnome/recipes-support/onboard/onboard/0002-onboard-onhover-seg-fault-fix.patch
-> @@ -0,0 +1,52 @@
-> +From: 1be95325d320122efd5dedf7437839cfcca01f7a
-> +From: https://github.com/void-linux/void-packages/commit/1be95325d320122efd5dedf7437839cfcca01f7a
-> +Date: Mon, 23 Sep 2024
-> +Subject: [PATCH] onboard: fix segfault when hovering over the keyboard
-> +
-> +Currently, if the mouse pointer is hovered over the Onboard keyboard, the application crashes with a segmentation fault.
-> +This is because the new_device_event function is not acquiring the GIL before creating a new object. This patch fixes
-> +the issue by acquiring the GIL before creating a new object. It also acquires the GIL before queueing the event.
-> +This patch is taken from the fix provided in the following link:
-> +https://github.com/void-linux/void-packages/commit/1be95325d320122efd5dedf7437839cfcca01f7a
-> +
-> +Signed-off by: Pratheeksha S N <pratheeksha.s.n@ni.com>
-> +
-> +Upstream-Status: Inactive-Upstream [lastcommit: 2017-10-09]
-> +
-> +--- a/Onboard/osk/osk_devices.c
-> ++++ b/Onboard/osk/osk_devices.c
-> +@@ -97,13 +97,15 @@ osk_device_event_dealloc (OskDeviceEvent
-> + static OskDeviceEvent*
-> + new_device_event (void)
-> + {
-> +-    OskDeviceEvent *ev = PyObject_New(OskDeviceEvent, &osk_device_event_type);
-> ++    OskDeviceEvent *ev;
-> ++    PyGILState_STATE gstate = PyGILState_Ensure();
-> ++    ev = PyObject_New(OskDeviceEvent, &osk_device_event_type);
-> +     if (ev)
-> +     {
-> +         osk_device_event_type.tp_init((PyObject*) ev, NULL, NULL);
-> +-        return ev;
-> +     }
-> +-    return NULL;
-> ++    PyGILState_Release(gstate);
-> ++    return ev;
-> + }
-> +
-> + static PyObject *
-> +@@ -334,6 +336,7 @@ osk_devices_dealloc (OskDevices *dev)
-> + static void
-> + queue_event (OskDevices* dev, OskDeviceEvent* event, Bool discard_pending)
-> + {
-> ++    PyGILState_STATE state = PyGILState_Ensure ();
-> +     GQueue* queue = dev->event_queue;
-> +     if (queue)
-> +     {
-> +@@ -364,6 +367,7 @@ queue_event (OskDevices* dev, OskDeviceE
-> +         Py_INCREF(event);
-> +         g_queue_push_head(queue, event);
-> +     }
-> ++    PyGILState_Release (state);
-> + }
-> +
-> + static gboolean idle_process_event_queue (OskDevices* dev)
-> diff --git a/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb b/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb
-> new file mode 100644
-> index 000000000..6a6346d8a
-> --- /dev/null
-> +++ b/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb
-> @@ -0,0 +1,34 @@
-> +SUMMARY = "An onscreen keyboard"
-> +LICENSE = "GPL-3.0-only"
-> +LIC_FILES_CHKSUM = "file://COPYING.GPL3;md5=8521fa4dd51909b407c5150498d34f4e"
-> +
-> +DEPENDS += "gtk+3 hunspell libcanberra libxkbfile dconf python3-distutils-extra-native intltool-native"
-> +
-> +SRC_URI = "https://launchpad.net/onboard/1.4/${PV}/+download/${BPN}-${PV}.tar.gz \
-> +           file://0001-pypredict-lm-Define-error-API-if-platform-does-not-h.patch \
-> +              file://0002-onboard-onhover-seg-fault-fix.patch \
-> +           "
-> +SRC_URI[md5sum] = "1a2fbe82e934f5b37841d17ff51e80e8"
-> +SRC_URI[sha256sum] = "01cae1ac5b1ef1ab985bd2d2d79ded6fc99ee04b1535cc1bb191e43a231a3865"
-> +
-> +inherit features_check setuptools3 pkgconfig gtk-icon-cache gsettings mime-xdg
-> +
-> +REQUIRED_DISTRO_FEATURES = "x11"
-> +
-> +FILES:${PN} += " \
-> +    ${datadir}/dbus-1 \
-> +    ${datadir}/icons \
-> +    ${datadir}/gnome-shell \
-> +    ${datadir}/help \
-> +"
-> +
-> +RDEPENDS:${PN} += " \
-> +    ncurses \
-> +    python3-dbus \
-> +    python3-pycairo \
-> +    python3-pygobject \
-> +"
-> +
-> +do_install:append() {
-> +       install -Dm 0644 ${D}${PYTHON_SITEPACKAGES_DIR}${sysconfdir}/xdg/autostart/onboard-autostart.desktop ${D}${sysconfdir}/xdg/autostart/onboard-autostart.desktop
-> +}
+> diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.19.3.bb b/met=
+a-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.19.4.bb
+> similarity index 92%
+> rename from meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.19.3.bb
+> rename to meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.19.4.bb
+> index e53d01d00..ce711eb36 100644
+> --- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.19.3.bb
+> +++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.19.4.bb
+> @@ -12,7 +12,7 @@ ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
+>
+>  # TODO: Check if 0001-... can go
+>  SRC_URI +=3D "file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.x=
+ml-fix.patch"
+> -SRC_URI[sha256sum] =3D "16815eef494ba9bac9c854e95c205c0bc5568c8022c31604=
+348f9edadb02f227"
+> +SRC_URI[sha256sum] =3D "c873ec46d5dd448df60a8385e029892f85b40ad66200cc3c=
+055ab7156d718796"
+>
+>  EXTRA_OECONF +=3D "--with-vendor-info=3D${DISTRO}"
+>  EXTRA_OECONF +=3D "--disable-vala"
 > --
 > 2.43.0
 >
 >
-> -=-=-=-=-=-=-=-=-=-=-=-
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#114045): https://lists.openembedded.org/g/openembedded-devel/message/114045
-> Mute This Topic: https://lists.openembedded.org/mt/109720017/1686489
+> View/Reply Online (#114040): https://lists.openembedded.org/g/openembedde=
+d-devel/message/114040
+> Mute This Topic: https://lists.openembedded.org/mt/109772240/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [alex.kanavin@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 
