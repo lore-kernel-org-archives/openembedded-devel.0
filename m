@@ -1,758 +1,273 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2304FD3B7CC
-	for <webhook@archiver.kernel.org>; Mon, 25 Nov 2024 01:13:20 +0000 (UTC)
-Received: from mail-qv1-f42.google.com (mail-qv1-f42.google.com [209.85.219.42])
- by mx.groups.io with SMTP id smtpd.web10.9025.1732497191281678002
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4731ED5806E
+	for <webhook@archiver.kernel.org>; Mon, 25 Nov 2024 12:01:03 +0000 (UTC)
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.web11.17189.1732536055359260997
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 24 Nov 2024 17:13:11 -0800
+ Mon, 25 Nov 2024 04:00:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jtQJTgmR;
- spf=pass (domain: gmail.com, ip: 209.85.219.42, mailfrom: akuster808@gmail.com)
-Received: by mail-qv1-f42.google.com with SMTP id 6a1803df08f44-6d419832bf5so34883736d6.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 24 Nov 2024 17:13:11 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WwaEckKh;
+ spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4315e9e9642so39755065e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Nov 2024 04:00:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1732497190; x=1733101990; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=m8lqr+5cTaC87+F2/VQLk9FwCfJ9MYgsX74IfbvOMRw=;
-        b=jtQJTgmRN9LLLpM5gj+van2G83pW8F5KnScyyopdBaQmXwb4bNLf6Jb6EfTRQP353k
-         JZB7X1Peze/65N66mjenRfhYW2R4WxarqSRbUqWQir7QoKF6nQpvPqN4lcyRA2tm5rAc
-         I4KodUjabUc9+g+bdbrYtg3A7ei7g5m7Bh07jPHAcKKDZgSARm7uh6NKRQ5Ryp1iPFpF
-         ttjHzBjBGzUGMdMJEmE5QbHC6DkBG8+ZkROVXGxVyiF4/o9LNVKhO6g1bNuUNF3/3ZTs
-         /m9tIwSMmMFWaR6PhhgNubvM9+PLKElsvW6ERF1zP0cHo3Rtuob5eh9RUL6SKtlKLkql
-         M1XQ==
+        d=gmail.com; s=20230601; t=1732536053; x=1733140853; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=BRE/sdmcVj4Dd3VeaSMQvp5ui4ZKUa3uUMgBinoQwYc=;
+        b=WwaEckKh8r0wUg7cLJfDvEWOTKMVF8Y7qKjNKfRczXLVsr/U1Kq7bfxbrXo2lqhw7O
+         ooFJiIGOi8daYALOM0LRdudlTX75JCG9zJrUelZ2YukIGmPem/8LKpoHkqzFrX7SEQ4a
+         Q1DBDzEiJnMFUye4YQU/GdbLymuhruPHJZSaXRt+MEDxxAx++tDe6VgsMf16MTMOiL05
+         oe81bMTjq7F6avCr1pp9fbn/6ojklUxLaT+880ruRG5uysmnRvZ/erKN2QJaX+1vB4BW
+         3ESFkqx3L52mK/ulcjy+wuMzFy2EGuYHxoh3ZUFq5YDFnB2vPTMUlQ/0YWh5yfoEh0WC
+         zBww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732497190; x=1733101990;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=m8lqr+5cTaC87+F2/VQLk9FwCfJ9MYgsX74IfbvOMRw=;
-        b=LHhoIkEWdWDoASXddWF3v8vfav2MljJYML4qJ6zGVxEPc+rS+Yx2KfS8wgqVeI3N05
-         8tZcA4O2AhNg4B/CH9rmfHx7QomxwYhjBc9wy2CfWWfB0EDwYTpWIowuJelwDF5umW4q
-         vq0NiTvqZY6HNIMqx0hn73eEQNpJerK9884FfMNLnT7++6swjSeTwgdMCAiP3JYpHxrY
-         ac7HG4FPdr/aSHQlonAVdFdJmIFeW4PkWeXi/nGyGXvJD3t6s2GzXOuqjohS0umlMBGg
-         SA7YfIbbZ/X41Ep40GDmYfQNQHAYUD+5UIQG0aWSYDnnYNV0GRsbrdj34cn8YjCI5Nvs
-         rh0w==
-X-Forwarded-Encrypted: i=1; AJvYcCVW1WOl0XSuk0TZvZv/DlcVWvGQ+GCx3x9k+4EJS3Db8l1PYN9vA/9t3KWfS8q/jj13U94Yr3ArpmV5/at7+8biIM8=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yy7TAGMjLSQWh6EO4tGszKbuf9ao58EKVWNd5Nv7TwGlq9/1ueZ
-	gUnyD95kGGV1k7JNJSMI5dQ++Z8AE4CN9CiNcKTDEBtCezn+rRBb
-X-Gm-Gg: ASbGncuvOQabzX20JgHmRTymuXXN2T/5giccwUIpM7W2es8Pziv2lTs8u2MROdbAqxT
-	oQ5ATEv6ON5++2NX3G98mrj+H+v/A3GshdPbTxP3hjyY3X38r/HhlY7HUfou8Hwhb2quebs1Y5l
-	zlkIZVuy8NMz/Jue+SgGCz/cYiomIl7ZpXu5vGICMAQ6G2/y/3oj1ZrWUMP9k8NooIS1Yauwt/U
-	9pBjmN1R71i8GQnKVDgOULH8ZuZnB6VXt9xdzNSIDgu+23FUq0niUNCSydXN9aqEanyZdkPuh6j
-	LMyGhEOqrDxHFhsCYTHNn1s=
-X-Google-Smtp-Source: AGHT+IHD+PJduQ5OQ/AoKtpvGthitu0VGIBGsFz7PfVOwvPfoI73j1VRxevOdcrXJBl0u7fNaF1iGg==
-X-Received: by 2002:ad4:5f0f:0:b0:6d4:19d2:2089 with SMTP id 6a1803df08f44-6d45138d320mr169611386d6.32.1732497189884;
-        Sun, 24 Nov 2024 17:13:09 -0800 (PST)
-Received: from ?IPV6:2600:1700:45dd:7000:67e:183a:a92f:dbeb? ([2600:1700:45dd:7000:67e:183a:a92f:dbeb])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-6d451ab5107sm37229486d6.58.2024.11.24.17.13.08
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 24 Nov 2024 17:13:09 -0800 (PST)
-Message-ID: <a52ed549-a9c6-477b-85aa-ca31b0da3981@gmail.com>
-Date: Sun, 24 Nov 2024 20:13:08 -0500
+        d=1e100.net; s=20230601; t=1732536053; x=1733140853;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=BRE/sdmcVj4Dd3VeaSMQvp5ui4ZKUa3uUMgBinoQwYc=;
+        b=ftqgFbeeuYfap4sGFkfuHMKaAPWtB/kXNglutitmU097os5JQcVH41m9uCmcGebN2M
+         Bh+i263UP48Pej1+0kUrtbicRDu+2nB7JecLM+i/nNSkfNqoHKszK3oGb6oB2nWPqqj+
+         2TwtUJRaQXEAtVz9jfvhjgxmH0ug4IFgPP+2NySncU11Mc/oo/wek+UQ8p/bPALIOHNm
+         7oB4XRvvVKLotcrNB20CAQigXFhHKWnsEE7X7NkvmaeiC51I1173T/m7uDbOvqugtTpx
+         hcSfbiJ1QvviaRg+3wn0BWzlxObRkfptVd2hiEb2s6+/R59jzq3ZHMWBMdCPvp7IHf+T
+         ZmLw==
+X-Gm-Message-State: AOJu0YzjmdNn4mVmdpQHq82Thh6Jifm7IKW5S+2g7mPgINNHs07vvHxW
+	s3slJaD68rgpLcw/qCm85h0pk3xE1/pNkE96DDnGyjjrkeGDr2IETHt+EA==
+X-Gm-Gg: ASbGncs5CiSxaWYF2YVBRtWxw8cFrMS2vhjGrkm3yjScFh8JHGx6I+yrfipQRMhnlcE
+	38LbcaAUwy9CBeW0z1MV553eYRmlfrIZpHpTs6C8xMUVq844WScnlzaZVpXAhzm0YAilHxom3be
+	PWB6Q8S+h2gvni3fD9RAnRGUPjw4Kkrm19S3WUaTaTodK8F/HLkdaDh3SstW36K8bpz6GjaFHzb
+	1pKcYXJKd0Ivb9mkik8EJIgEMR/0yNMt9i2mPPj2PpxZ6hMGrJmQRPm4awfaodgo0zIJ7bfiz9j
+	dcxsCqboesI=
+X-Google-Smtp-Source: AGHT+IH4+nKNjpPB8dO6pxlrT2wdqlKuK7IJTGulng7nW+l4igGwTPxi5B9X8i6V2KiSs5HTIies/A==
+X-Received: by 2002:a5d:6da7:0:b0:382:4926:98fa with SMTP id ffacd0b85a97d-38260bccdf8mr9758658f8f.40.1732536053008;
+        Mon, 25 Nov 2024 04:00:53 -0800 (PST)
+Received: from Zen2.lab.linutronix.de. (drugstore.linutronix.de. [80.153.143.164])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4349e117bf5sm47267655e9.18.2024.11.25.04.00.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 25 Nov 2024 04:00:52 -0800 (PST)
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+X-Google-Original-From: Alexander Kanavin <alex@linutronix.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alexander Kanavin <alex@linutronix.de>
+Subject: [PATCH] liburi-perl: add to meta-perl from oe-core
+Date: Mon, 25 Nov 2024 13:00:45 +0100
+Message-Id: <20241125120045.2145788-1-alex@linutronix.de>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] styhead merge request: Nov 9th
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-References: <dcf8b1d5-cb88-4401-9835-e51104834dcb@gmail.com>
- <18099828148711C1.32520@lists.openembedded.org>
- <CA+chaQdgmDLM01P60k_fMDYnpfu9KBzcabT+SwsD6pweiqC24g@mail.gmail.com>
-Content-Language: en-US
-From: akuster808 <akuster808@gmail.com>
-Autocrypt: addr=akuster808@gmail.com; keydata=
- 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
- ApZ86eOP
-In-Reply-To: <CA+chaQdgmDLM01P60k_fMDYnpfu9KBzcabT+SwsD6pweiqC24g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Nov 2024 01:13:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114031
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Nov 2024 12:01:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114032
 
+The recipe has no usage in core.
 
+Signed-off-by: Alexander Kanavin <alex@linutronix.de>
+---
+ .../include/ptest-packagelists-meta-perl.inc  |   1 +
+ .../0001-Skip-TODO-test-cases-that-fail.patch | 109 ++++++++++++++++++
+ .../recipes-perl/liburi/liburi-perl_5.31.bb   |  56 +++++++++
+ 3 files changed, 166 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/liburi/liburi-perl/0001-Skip-TODO-test-cases-that-fail.patch
+ create mode 100644 meta-perl/recipes-perl/liburi/liburi-perl_5.31.bb
 
-
-On 11/20/24 3:23 AM, Martin Jansa wrote:
-> Fixes for both sent:
-> https://lists.openembedded.org/g/openembedded-devel/message/113923
-> https://lists.openembedded.org/g/openembedded-devel/message/113924
-> but I still wonder how this passed any build testing with styhead for you.
-
-It didn't and I reverted it on my build system but forgot to reflect 
-that in the push i did.
-
-- armin
->
-> On Wed, Nov 20, 2024 at 7:07 AM Martin Jansa via
-> lists.openembedded.org <martin.jansa=gmail.com@lists.openembedded.org>
-> wrote:
->> Did you forget to include some changes?
->>
->> python3-alembic is now failing with
->>
->> | ERROR Missing dependencies:
->> |       setuptools<69.3,>=61.0
->> | WARNING: exit code 1 from a shell command.
->>
->> and python3-pdm is missing its dependencies as well:
->>
->> ERROR: Nothing PROVIDES 'python3-pdm-build-locked-native' (but
->> meta-oe/meta-python/recipes-devtools/python/python3-pdm_2.19.1.bb
->> DEPENDS on or otherwise requires it). Close matches:
->>    python3-build-native
->>    python3-filelock-native
->>    python3-pdm-backend-native
->>
->> On Sat, Nov 9, 2024 at 8:22 PM Armin Kuster via lists.openembedded.org
->> <akuster808=gmail.com@lists.openembedded.org> wrote:
->>> The following changes since commit a7a24fc390966bb4ebe2cb1e536c2634494f4658:
->>>
->>>     meta-openemnedded: Add myself as styhead maintainer (2024-09-29
->>> 12:09:29 -0400)
->>>
->>> are available in the Git repository at:
->>>
->>>     https://git.openembedded.org/git/meta-openembedded styhead-next
->>>
->>> for you to fetch changes up to afbbe81df6425805392b62b6f153acf740782e8a:
->>>
->>>     nng: Rename default branch of github.com:nanomsg/nng.git (2024-11-09
->>> 14:07:27 -0500)
->>>
->>> ----------------------------------------------------------------
->>> Armin Kuster (1):
->>>         audit: fix build when systemd is enabled.
->>>
->>> Chen Qi (1):
->>>         jansson: add JSON_INTEGER_IS_LONG_LONG for cmake
->>>
->>> Etienne Cordonnier (1):
->>>         perfetto: upgrade 31.0 -> 47.0
->>>
->>> Ghislain Mangé (1):
->>>         wireshark: fix typo in PACKAGECONFIG[zstd]
->>>
->>> J. S. (5):
->>>         syslog-ng: upgrade 4.6.0 -> 4.7.0
->>>         xfce4-panel: upgrade 4.18.3 -> 4.18.4
->>>         nodejs: upgrade 20.17.0 -> 20.18.0
->>>         xfce4-panel: upgrade 4.18.4 -> 4.18.5
->>>         nodejs: cleanup
->>>
->>> Jeroen Knoops (1):
->>>         nng: Rename default branch of github.com:nanomsg/nng.git
->>>
->>> Jiaying Song (2):
->>>         wireguard-tools: fix do_fetch error
->>>         vlock: fix do_fetch error
->>>
->>> Jose Quaresma (3):
->>>         gpsd: make the meta-python dependency conditionally
->>>         Revert "gpsd: make the meta-python dependency conditionally"
->>>         gpsd: condition the runtime dependence of pyserial on the pygps
->>>
->>> Katariina Lounento (1):
->>>         libtar: patch CVEs
->>>
->>> Khem Raj (17):
->>>         python3-typer: Disable test_rich_markup_mode tests
->>>         python3-pydbus: Add missing rdep on xml module for ptests
->>>         python3-pdm: Upgrade to 2.19.1
->>>         python3-pdm-backend: Upgrade to 2.4.1 release
->>>         python3-ujson: Add python misc modules to ptest rdeps
->>>         python3-gunicorn: Add missing rdeps for ptests
->>>         python3-eth-hash: Add packageconfigs and switch to pep517-backend
->>>         python3-validators: Add missing rdeps for ptests
->>>         python3-pint: Upgrade to 0.24.3
->>>         python3-pytest-mock: Fix ptests
->>>         python3-sqlparse: Add missing rdep on mypy module for ptests
->>>         libhugetlbfs: Use linker wrapper during build
->>>         webkitgtk3: Always use -g1 for debug flags
->>>         webkitgtk3: Fix build break with latest gir
->>>         ndisc6: Fix reproducible build
->>>         rsyslog: Enable 64bit atomics check
->>>         xmlsec1: Switch SRC_URI to use github release
->>>
->>> Liyin Zhang (1):
->>>         sound-theme-freedesktop: Update SRC_URI
->>>
->>> Markus Volk (3):
->>>         gnome-shell: add gnome-control-center dependency
->>>         gnome-desktop: update 44.0 -> 44.1
->>>         cryptsetup: fix udev PACKAGECONFIG
->>>
->>> Martin Jansa (1):
->>>         xmlrpc-c: update SRCREV
->>>
->>> Rouven Czerwinski (1):
->>>         softhsm: add destroyed global access prevention patch
->>>
->>> Ryan Eatmon (1):
->>>         kernel-selftest: Update to allow for turning on all tests
->>>
->>> Shinji Matsunaga (1):
->>>         audit: Fix CVE_PRODUCT
->>>
->>> Valeria Petrov (1):
->>>         apache2: do not depend on zlib header and libs from host
->>>
->>> Wang Mingyu (29):
->>>         bdwgc: upgrade 8.2.6 -> 8.2.8
->>>         ctags: upgrade 6.1.20240908.0 -> 6.1.20240915.0
->>>         gnome-backgrounds: upgrade 46.0 -> 47.0
->>>         gnome-chess: upgrade 46.0 -> 47.0
->>>         gnome-font-viewer: upgrade 46.0 -> 47.0
->>>         libmanette: upgrade 0.2.7 -> 0.2.9
->>>         pegtl: upgrade 3.2.7 -> 3.2.8
->>>         python3-elementpath: upgrade 4.4.0 -> 4.5.0
->>>         python3-eventlet: upgrade 0.36.1 -> 0.37.0
->>>         python3-filelock: upgrade 3.16.0 -> 3.16.1
->>>         python3-greenlet: upgrade 3.0.3 -> 3.1.0
->>>         python3-nmap: upgrade 1.6.0 -> 1.9.1
->>>         python3-paramiko: upgrade 3.4.1 -> 3.5.0
->>>         python3-platformdirs: upgrade 4.3.1 -> 4.3.6
->>>         python3-psycopg: upgrade 3.2.1 -> 3.2.2
->>>         python3-pyasn1-modules: upgrade 0.4.0 -> 0.4.1
->>>         python3-pymisp: upgrade 2.4.197 -> 2.4.198
->>>         python3-pyproject-api: upgrade 1.7.1 -> 1.7.2
->>>         python3-pyunormalize: upgrade 15.1.0 -> 16.0.0
->>>         python3-regex: upgrade 2024.7.24 -> 2024.9.11
->>>         python3-rich: upgrade 13.8.0 -> 13.8.1
->>>         python3-robotframework: upgrade 7.0.1 -> 7.1
->>>         python3-virtualenv: upgrade 20.26.4 -> 20.26.5
->>>         python3-xmlschema: upgrade 3.3.2 -> 3.4.1
->>>         python3-yarl: upgrade 1.10.0 -> 1.11.1
->>>         stunnel: upgrade 5.72 -> 5.73
->>>         tecla: upgrade 46.0 -> 47.0
->>>         traceroute: upgrade 2.1.5 -> 2.1.6
->>>         nmap: Fix off-by-one overflow in the IP protocol table.
->>>
->>> Yi Zhao (6):
->>>         abseil-cpp: upgrade 20240116.2 -> 20240722.0
->>>         protobuf: add abseil-cpp to RDEPENDS
->>>         protobuf: upgrade 4.25.4 -> 4.25.5
->>>         lksctp-tools: upgrade 1.0.19 -> 1.0.20
->>>         tcpslice: upgrade 1.7 -> 1.8
->>>         libhugetlbfs: upgrade 2.23 -> 2.24
->>>
->>> Yoann Congal (4):
->>>         non-repro-meta-networking: update known non-reproducible list
->>>         polkit: Update Upstream-Status of a merged patch
->>>         wtmpdb: fix installed-vs-shipped build error
->>>         minidlna: fix reproducibility
->>>
->>> alperak (8):
->>>         python3-sqlalchemy: Upgrade 2.0.32 -> 2.0.35 and switch to
->>> PEP-517 build backend
->>>         python3-alembic: switch to PEP-517 build backend
->>>         python3-inflate64: switch to PEP-517 build backend
->>>         python3-spidev: switch to PEP-517 build backend
->>>         python3-pastedeploy: switch to PEP-517 build backend
->>>         python3-reedsolo: switch to PEP-517 build backend
->>>         curlpp: Fix build issue
->>>         libhugetlbfs: Fix contains reference to TMPDIR [buildpaths] error
->>>
->>> ptak (1):
->>>         opencv: upgrade 4.9.0 -> 4.10.0
->>>
->>> s-tokumoto (2):
->>>         capnproto: Add "capnp" to CVE_PRODUCT
->>>         fuse: Add "fuse:fuse" to CVE_PRODUCT
->>>
->>>    meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb |   2 +-
->>>    .../gnome-backgrounds/{gnome-backgrounds_46.0.bb =>
->>> gnome-backgrounds_47.0.bb}            |   2 +-
->>>    meta-gnome/recipes-gnome/gnome-chess/{gnome-chess_46.0.bb =>
->>> gnome-chess_47.0.bb}         |   4 +-
->>>    meta-gnome/recipes-gnome/gnome-desktop/{gnome-desktop_44.0.bb =>
->>> gnome-desktop_44.1.bb}   |   2 +-
->>>    .../gnome-font-viewer/0001-window-Fix-function-callback-definition.patch
->>> |  43 ---
->>>    .../gnome-font-viewer/{gnome-font-viewer_46.0.bb =>
->>> gnome-font-viewer_47.0.bb}            |   3 +-
->>>    meta-gnome/recipes-gnome/gnome-shell/gnome-shell_46.2.bb |   1 +
->>>    meta-gnome/recipes-gnome/tecla/{tecla_46.0.bb =>
->>> tecla_47.0.bb}                           |   2 +-
->>>    meta-multimedia/recipes-multimedia/minidlna/minidlna.inc |   4 +
->>>    meta-networking/conf/include/non-repro-meta-networking.inc |  33 +--
->>>    meta-networking/recipes-connectivity/nanomsg/nng_1.7.3.bb |   2 +-
->>>    meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20210914.bb
->>> |   2 +-
->>>    .../curlpp/curlpp/0002-fix-invalid-conversion-from-int-to-CURLoption.patch
->>> |  36 +++
->>>    meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb |   3 +-
->>>    .../recipes-support/lksctp-tools/{lksctp-tools_1.0.19.bb =>
->>> lksctp-tools_1.0.20.bb}       |  14 +-
->>>    .../ndisc6/ndisc6/0001-Remove-use-of-variables-indicating-buildtime-informa.patch
->>> |  85 ++++++
->>>    meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb |   1 +
->>>    meta-networking/recipes-support/stunnel/stunnel/fix-openssl-no-des.patch
->>> |  19 +-
->>>    meta-networking/recipes-support/stunnel/{stunnel_5.72.bb =>
->>> stunnel_5.73.bb}              |   2 +-
->>>    meta-networking/recipes-support/tcpdump/{tcpslice_1.7.bb =>
->>> tcpslice_1.8.bb}              |   2 +-
->>>    meta-networking/recipes-support/traceroute/{traceroute_2.1.5.bb =>
->>> traceroute_2.1.6.bb}   |   2 +-
->>>    meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb |   2 +-
->>>    .../libhugetlbfs/files/0001-Revert-ld.hugetlbfs-fix-Ttext-segment-argument-on-AA.patch
->>> | 210 --------------
->>>    ...int-to-the-s.patch =>
->>> 0001-skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch} | 19 +-
->>>    .../libhugetlbfs/files/0001-tests-makefile-Append-CPPFLAGS-rather-then-override.patch
->>> |  31 --
->>>    ...ath-for-cros.patch =>
->>> 0002-libhugetlbfs-avoid-search-host-library-path-for-cros.patch} | 6 +-
->>>    ...4G-edge-testcases.patch =>
->>> 0003-tests-Makefile-install-static-4G-edge-testcases.patch} |  22 +-
->>>    ...h-.-obj-hugeadm.patch =>
->>> 0004-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch} |   8 +-
->>>    ...library-path.patch =>
->>> 0005-libhugetlbfs-elf_i386-avoid-search-host-library-path.patch} | 6 +-
->>>    ...001-include-stddef.h-for-ptrdiff_t.patch =>
->>> 0006-include-stddef.h-for-ptrdiff_t.patch} |  12 +-
->>>    .../{0002-Mark-glibc-specific-code-so.patch =>
->>> 0007-Mark-glibc-specific-code-so.patch}    |  19 +-
->>>    ...INESIZE-on-l.patch =>
->>> 0008-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch} | 12 +-
->>>    ...rk-glibc-specific-changes-so.patch =>
->>> 0009-shm.c-Mark-glibc-specific-changes-so.patch} |  10 +-
->>>    .../{0005-Include-dirent.h-for-ino_t.patch =>
->>> 0010-Include-dirent.h-for-ino_t.patch}      |   8 +-
->>>    ...{0006-include-limits.h-for-PATH_MAX.patch =>
->>> 0011-include-limits.h-for-PATH_MAX.patch} |  14 +-
->>>    ...ython3-interpreter.patch =>
->>> 0012-huge_page_setup_helper-use-python3-interpreter.patch} |   6 +-
->>>    .../libhugetlbfs/files/0013-elflink.c-include-libgen.h-for-basename.patch
->>> |  41 +++
->>>    meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_2.24.bb |  87 ++++++
->>>    meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb |  79 -----
->>>    meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.5.bb |   2 +-
->>>    meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-absl-always-use-asm-sgidefs.h.patch
->>> |   7 +-
->>>    .../abseil-cpp/abseil-cpp/0002-Remove-maes-option-from-cross-compilation.patch
->>> |  17 +-
->>>    .../abseil-cpp/abseil-cpp/0003-Remove-neon-option-from-cross-compilation.patch
->>> |  18 +-
->>>    .../abseil-cpp/abseil-cpp/0004-PR-1644-unscaledcycleclock-remove-RISC-V-support.patch
->>> |  82 ------
->>>    .../abseil-cpp/abseil-cpp/{abseil-ppc-fixes.patch =>
->>> 0004-abseil-ppc-fixes.patch}         |  44 ++-
->>>    .../recipes-devtools/abseil-cpp/{abseil-cpp_20240116.2.bb =>
->>> abseil-cpp_20240722.0.bb}    |   7 +-
->>>    meta-oe/recipes-devtools/capnproto/capnproto_1.0.2.bb |   2 +
->>>    meta-oe/recipes-devtools/ctags/{ctags_6.1.20240908.0.bb =>
->>> ctags_6.1.20240915.0.bb}       |   2 +-
->>>    .../recipes-devtools/nodejs/{nodejs-oe-cache-20.17 =>
->>> nodejs-oe-cache-20.18}/oe-npm-cache |   0
->>>    .../nodejs/{nodejs-oe-cache-native_20.17.bb =>
->>> nodejs-oe-cache-native_20.18.bb}           |   0
->>>    meta-oe/recipes-devtools/nodejs/nodejs/0001-build-fix-build-with-Python-3.12.patch
->>> |  55 ----
->>>    meta-oe/recipes-devtools/nodejs/nodejs/0001-gyp-resolve-python-3.12-issues.patch
->>> |  63 ----
->>>    meta-oe/recipes-devtools/nodejs/nodejs/libatomic.patch |   2 +-
->>>    meta-oe/recipes-devtools/nodejs/{nodejs_20.17.0.bb =>
->>> nodejs_20.18.0.bb}                  |   4 +-
->>>    meta-oe/recipes-devtools/perfetto/common/0001-fix-musl-build.patch |
->>> 40 +++
->>>    .../perfetto/files/0001-Add-missing-header-cstdint-for-uintXX_t-types.patch
->>> |  58 ----
->>>    meta-oe/recipes-devtools/perfetto/libperfetto.bb |   2 +-
->>>    .../perfetto/{files =>
->>> libperfetto}/0001-meson-add-pc-file-for-lib_perfetto.patch |  20 +-
->>>    meta-oe/recipes-devtools/perfetto/perfetto.bb |  30 +-
->>>    meta-oe/recipes-devtools/perfetto/perfetto.inc |  11 +-
->>>    .../perfetto/{files =>
->>> perfetto}/0001-Remove-check_build_deps-build-steps.patch |  18 +-
->>>    meta-oe/recipes-devtools/perfetto/perfetto/0002-traced-fix-missing-include.patch
->>> |  28 ++
->>>    meta-oe/recipes-devtools/protobuf/{protobuf_4.25.4.bb =>
->>> protobuf_4.25.5.bb}              |   4 +-
->>>    meta-oe/recipes-devtools/python/{python3-psycopg_3.2.1.bb =>
->>> python3-psycopg_3.2.2.bb}    |   2 +-
->>>    meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.59.01.bb |   2 +-
->>>    .../jansson/jansson/0001-add-back-JSON_INTEGER_IS_LONG_LONG-for-cmake.patch
->>> |  51 ++++
->>>    meta-oe/recipes-extended/jansson/jansson_2.14.bb |   1 +
->>>    meta-oe/recipes-extended/pegtl/{pegtl_3.2.7.bb =>
->>> pegtl_3.2.8.bb}                         |   2 +-
->>>    .../polkit/files/meson-build-Support-openembedded-OS-for-PAM-config.patch
->>> |   2 +-
->>>    meta-oe/recipes-extended/rsyslog/rsyslog_8.2408.0.bb |  11 +-
->>>    meta-oe/recipes-extended/vlock/vlock_2.2.3.bb |   2 +-
->>>    meta-oe/recipes-extended/wtmpdb/wtmpdb_0.11.0.bb |   1 +
->>>    meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb |  26 +-
->>>    meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
->>> |   2 +-
->>>    meta-oe/recipes-navigation/gpsd/gpsd_3.25.bb |   3 +-
->>>    meta-oe/recipes-security/audit/audit_4.0.2.bb |   8 +
->>>    .../nmap/files/0003-Fix-off-by-one-overflow-in-the-IP-protocol-table.patch
->>> | 165 +++++++++++
->>>    meta-oe/recipes-security/nmap/nmap_7.95.bb |   1 +
->>>    .../softhsm/files/0002-Prevent-accessing-of-global-c-objects-once-they-are-.patch
->>> | 672 +++++++++++++++++++++++++++++++++++++++++++
->>>    meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb |   1 +
->>>    meta-oe/recipes-support/bdwgc/{bdwgc_8.2.6.bb =>
->>> bdwgc_8.2.8.bb}                          |   2 +-
->>>    meta-oe/recipes-support/libmanette/{libmanette_0.2.7.bb =>
->>> libmanette_0.2.9.bb}           |   2 +-
->>>    meta-oe/recipes-support/libtar/files/0003-Fix-missing-prototype-compiler-warnings.patch
->>> |  53 ++++
->>>    meta-oe/recipes-support/libtar/files/0004-Fix-invalid-memory-de-reference-issue.patch
->>> |  44 +++
->>>    .../libtar/files/0005-fix-file-descriptor-leaks-reported-by-cppcheck.patch
->>> | 101 +++++++
->>>    meta-oe/recipes-support/libtar/files/0006-fix-memleak-on-tar_open-failure.patch
->>> |  26 ++
->>>    meta-oe/recipes-support/libtar/files/0007-fix-memleaks-in-libtar-sample-program.patch
->>> | 119 ++++++++
->>>    .../libtar/files/0008-decode-avoid-using-a-static-buffer-in-th_get_pathnam.patch
->>> |  89 ++++++
->>>    meta-oe/recipes-support/libtar/files/0009-Check-for-NULL-before-freeing-th_pathname.patch
->>> |  30 ++
->>>    meta-oe/recipes-support/libtar/files/0010-Added-stdlib.h-for-malloc-in-lib-decode.c.patch
->>> |  26 ++
->>>    .../libtar/files/0011-libtar-fix-programming-mistakes-detected-by-static-a.patch
->>> | 100 +++++++
->>>    meta-oe/recipes-support/libtar/files/CVE-2013-4420.patch | 160 +++++++++++
->>>    meta-oe/recipes-support/libtar/files/CVE-2021-33640-CVE-2021-33645-CVE-2021-33646.patch
->>> |  42 +++
->>>    meta-oe/recipes-support/libtar/files/CVE-2021-33643-CVE-2021-33644.patch
->>> |  52 ++++
->>>    meta-oe/recipes-support/libtar/libtar_1.2.20.bb |  12 +
->>>    meta-oe/recipes-support/opencv/{opencv_4.9.0.bb =>
->>> opencv_4.10.0.bb}                      |   4 +-
->>>    .../syslog-ng/files/0001-macros-guard-ipv6-code-with-SYSLOG_NG_ENABLE_IPV6.patch
->>> |  40 ---
->>>    meta-oe/recipes-support/syslog-ng/{syslog-ng_4.6.0.bb =>
->>> syslog-ng_4.7.0.bb}              |   5 +-
->>>    .../recipes-support/webkitgtk/webkitgtk3/fff1b1773bff2ef7c3b867ab019d69faa36c010d.patch
->>> |  33 +++
->>>    meta-oe/recipes-support/webkitgtk/webkitgtk3_2.44.3.bb |   6 +-
->>>    meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.5.bb |   2 +-
->>>    meta-python/recipes-devtools/python/python3-alembic_1.13.2.bb |   4 +-
->>>    .../python/{python3-elementpath_4.4.0.bb =>
->>> python3-elementpath_4.5.0.bb}                 |   2 +-
->>>    meta-python/recipes-devtools/python/python3-eth-hash_0.7.0.bb |  20 +-
->>>    .../recipes-devtools/python/{python3-eventlet_0.36.1.bb =>
->>> python3-eventlet_0.37.0.bb}    |   2 +-
->>>    .../recipes-devtools/python/{python3-filelock_3.16.0.bb =>
->>> python3-filelock_3.16.1.bb}    |   2 +-
->>>    .../recipes-devtools/python/{python3-greenlet_3.0.3.bb =>
->>> python3-greenlet_3.1.0.bb}      |   2 +-
->>>    meta-python/recipes-devtools/python/python3-gunicorn_23.0.0.bb |   2 +
->>>    meta-python/recipes-devtools/python/python3-inflate64_1.0.0.bb |   4 +-
->>>    meta-python/recipes-devtools/python/{python3-nmap_1.6.0.bb =>
->>> python3-nmap_1.9.1.bb}      |   2 +-
->>>    .../recipes-devtools/python/{python3-paramiko_3.4.1.bb =>
->>> python3-paramiko_3.5.0.bb}      |   2 +-
->>>    meta-python/recipes-devtools/python/python3-pastedeploy_3.1.0.bb |  17 +-
->>>    .../python/{python3-pdm-backend_2.3.3.bb =>
->>> python3-pdm-backend_2.4.1.bb}                 |   2 +-
->>>    meta-python/recipes-devtools/python/{python3-pdm_2.16.1.bb =>
->>> python3-pdm_2.19.1.bb}      |   3 +-
->>>    meta-python/recipes-devtools/python/python3-pint/run-ptest |   2 +-
->>>    meta-python/recipes-devtools/python/{python3-pint_0.24.1.bb =>
->>> python3-pint_0.24.3.bb}    |  17 +-
->>>    .../python/{python3-platformdirs_4.3.1.bb =>
->>> python3-platformdirs_4.3.6.bb}               |   2 +-
->>>    .../python/{python3-pyasn1-modules_0.4.0.bb =>
->>> python3-pyasn1-modules_0.4.1.bb}           |   2 +-
->>>    meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb |   2 +-
->>>    .../recipes-devtools/python/{python3-pymisp_2.4.197.bb =>
->>> python3-pymisp_2.4.198.bb}      |   2 +-
->>>    .../python/{python3-pyproject-api_1.7.1.bb =>
->>> python3-pyproject-api_1.7.2.bb}             |   2 +-
->>>    .../python/python3-pytest-mock/0001-test_pytest_mock-skip-args-introspection-tests.patch
->>> |  38 ---
->>>    meta-python/recipes-devtools/python/python3-pytest-mock/run-ptest |   4 +-
->>>    meta-python/recipes-devtools/python/python3-pytest-mock_3.14.0.bb |  19 +-
->>>    .../python/{python3-pyunormalize_15.1.0.bb =>
->>> python3-pyunormalize_16.0.0.bb}             |   4 +-
->>>    .../recipes-devtools/python/{python3-regex_2024.7.24.bb =>
->>> python3-regex_2024.9.11.bb}    |   2 +-
->>>    .../python/{python3-robotframework_7.0.1.bb =>
->>> python3-robotframework_7.1.bb}             |   2 +-
->>>    meta-python/recipes-devtools/python/python3-spidev_3.6.bb |   2 +-
->>>    .../python/{python3-sqlalchemy_2.0.32.bb =>
->>> python3-sqlalchemy_2.0.35.bb}                 |   7 +-
->>>    meta-python/recipes-devtools/python/python3-sqlparse_0.5.1.bb |   1 +
->>>    meta-python/recipes-devtools/python/python3-typer/run-ptest |   3 +-
->>>    meta-python/recipes-devtools/python/python3-ujson/run-ptest |   2 +-
->>>    meta-python/recipes-devtools/python/python3-ujson_5.10.0.bb |   3 +-
->>>    meta-python/recipes-devtools/python/python3-validators_0.34.0.bb |   4 +
->>>    .../python/{python3-virtualenv_20.26.4.bb =>
->>> python3-virtualenv_20.26.5.bb}               |   2 +-
->>>    .../recipes-devtools/python/{python3-xmlschema_3.3.2.bb =>
->>> python3-xmlschema_3.4.1.bb}    |   2 +-
->>>    meta-python/recipes-devtools/python/{python3-yarl_1.10.0.bb =>
->>> python3-yarl_1.11.1.bb}    |   2 +-
->>>    meta-python/recipes-devtools/python3-reedsolo/python3-reedsolo_2.1.0b1.bb
->>> |   2 +-
->>>    .../recipes-extended/python-rich/{python3-rich_13.8.0.bb =>
->>> python3-rich_13.8.1.bb}       |   2 +-
->>>    meta-webserver/recipes-httpd/apache2/apache2_2.4.62.bb |   2 +-
->>>    meta-xfce/recipes-xfce/xfce4-panel/{xfce4-panel_4.18.3.bb =>
->>> xfce4-panel_4.18.5.bb}       |   2 +-
->>>    141 files changed, 2455 insertions(+), 1015 deletions(-)
->>>    rename
->>> meta-gnome/recipes-gnome/gnome-backgrounds/{gnome-backgrounds_46.0.bb =>
->>> gnome-backgrounds_47.0.bb} (76%)
->>>    rename meta-gnome/recipes-gnome/gnome-chess/{gnome-chess_46.0.bb =>
->>> gnome-chess_47.0.bb} (92%)
->>>    rename meta-gnome/recipes-gnome/gnome-desktop/{gnome-desktop_44.0.bb
->>> => gnome-desktop_44.1.bb} (92%)
->>>    delete mode 100644
->>> meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer/0001-window-Fix-function-callback-definition.patch
->>>    rename
->>> meta-gnome/recipes-gnome/gnome-font-viewer/{gnome-font-viewer_46.0.bb =>
->>> gnome-font-viewer_47.0.bb} (71%)
->>>    rename meta-gnome/recipes-gnome/tecla/{tecla_46.0.bb => tecla_47.0.bb}
->>> (80%)
->>>    create mode 100644
->>> meta-networking/recipes-support/curlpp/curlpp/0002-fix-invalid-conversion-from-int-to-CURLoption.patch
->>>    rename
->>> meta-networking/recipes-support/lksctp-tools/{lksctp-tools_1.0.19.bb =>
->>> lksctp-tools_1.0.20.bb} (79%)
->>>    create mode 100644
->>> meta-networking/recipes-support/ndisc6/ndisc6/0001-Remove-use-of-variables-indicating-buildtime-informa.patch
->>>    rename meta-networking/recipes-support/stunnel/{stunnel_5.72.bb =>
->>> stunnel_5.73.bb} (93%)
->>>    rename meta-networking/recipes-support/tcpdump/{tcpslice_1.7.bb =>
->>> tcpslice_1.8.bb} (87%)
->>>    rename meta-networking/recipes-support/traceroute/{traceroute_2.1.5.bb
->>> => traceroute_2.1.6.bb} (94%)
->>>    delete mode 100644
->>> meta-oe/recipes-benchmark/libhugetlbfs/files/0001-Revert-ld.hugetlbfs-fix-Ttext-segment-argument-on-AA.patch
->>>    rename
->>> meta-oe/recipes-benchmark/libhugetlbfs/files/{skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch
->>> => 0001-skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch} (70%)
->>>    delete mode 100644
->>> meta-oe/recipes-benchmark/libhugetlbfs/files/0001-tests-makefile-Append-CPPFLAGS-rather-then-override.patch
->>>    rename
->>> meta-oe/recipes-benchmark/libhugetlbfs/files/{libhugetlbfs-avoid-search-host-library-path-for-cros.patch
->>> => 0002-libhugetlbfs-avoid-search-host-library-path-for-cros.patch} (98%)
->>>    rename
->>> meta-oe/recipes-benchmark/libhugetlbfs/files/{tests-Makefile-install-static-4G-edge-testcases.patch
->>> => 0003-tests-Makefile-install-static-4G-edge-testcases.patch} (73%)
->>>    rename
->>> meta-oe/recipes-benchmark/libhugetlbfs/files/{0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch
->>> => 0004-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch} (90%)
->>>    rename
->>> meta-oe/recipes-benchmark/libhugetlbfs/files/{libhugetlbfs-elf_i386-avoid-search-host-library-path.patch
->>> => 0005-libhugetlbfs-elf_i386-avoid-search-host-library-path.patch} (94%)
->>>    rename
->>> meta-oe/recipes-benchmark/libhugetlbfs/files/{0001-include-stddef.h-for-ptrdiff_t.patch
->>> => 0006-include-stddef.h-for-ptrdiff_t.patch} (81%)
->>>    rename
->>> meta-oe/recipes-benchmark/libhugetlbfs/files/{0002-Mark-glibc-specific-code-so.patch
->>> => 0007-Mark-glibc-specific-code-so.patch} (74%)
->>>    rename
->>> meta-oe/recipes-benchmark/libhugetlbfs/files/{0003-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch
->>> => 0008-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch} (92%)
->>>    rename
->>> meta-oe/recipes-benchmark/libhugetlbfs/files/{0004-shm.c-Mark-glibc-specific-changes-so.patch
->>> => 0009-shm.c-Mark-glibc-specific-changes-so.patch} (91%)
->>>    rename
->>> meta-oe/recipes-benchmark/libhugetlbfs/files/{0005-Include-dirent.h-for-ino_t.patch
->>> => 0010-Include-dirent.h-for-ino_t.patch} (90%)
->>>    rename
->>> meta-oe/recipes-benchmark/libhugetlbfs/files/{0006-include-limits.h-for-PATH_MAX.patch
->>> => 0011-include-limits.h-for-PATH_MAX.patch} (85%)
->>>    rename
->>> meta-oe/recipes-benchmark/libhugetlbfs/files/{0001-huge_page_setup_helper-use-python3-interpreter.patch
->>> => 0012-huge_page_setup_helper-use-python3-interpreter.patch} (88%)
->>>    create mode 100644
->>> meta-oe/recipes-benchmark/libhugetlbfs/files/0013-elflink.c-include-libgen.h-for-basename.patch
->>>    create mode 100644
->>> meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_2.24.bb
->>>    delete mode 100644
->>> meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
->>>    delete mode 100644
->>> meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-PR-1644-unscaledcycleclock-remove-RISC-V-support.patch
->>>    rename
->>> meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/{abseil-ppc-fixes.patch
->>> => 0004-abseil-ppc-fixes.patch} (69%)
->>>    rename meta-oe/recipes-devtools/abseil-cpp/{abseil-cpp_20240116.2.bb
->>> => abseil-cpp_20240722.0.bb} (88%)
->>>    rename meta-oe/recipes-devtools/ctags/{ctags_6.1.20240908.0.bb =>
->>> ctags_6.1.20240915.0.bb} (95%)
->>>    rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-20.17 =>
->>> nodejs-oe-cache-20.18}/oe-npm-cache (100%)
->>>    rename
->>> meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_20.17.bb =>
->>> nodejs-oe-cache-native_20.18.bb} (100%)
->>>    delete mode 100644
->>> meta-oe/recipes-devtools/nodejs/nodejs/0001-build-fix-build-with-Python-3.12.patch
->>>    delete mode 100644
->>> meta-oe/recipes-devtools/nodejs/nodejs/0001-gyp-resolve-python-3.12-issues.patch
->>>    rename meta-oe/recipes-devtools/nodejs/{nodejs_20.17.0.bb =>
->>> nodejs_20.18.0.bb} (98%)
->>>    create mode 100644
->>> meta-oe/recipes-devtools/perfetto/common/0001-fix-musl-build.patch
->>>    delete mode 100644
->>> meta-oe/recipes-devtools/perfetto/files/0001-Add-missing-header-cstdint-for-uintXX_t-types.patch
->>>    rename meta-oe/recipes-devtools/perfetto/{files =>
->>> libperfetto}/0001-meson-add-pc-file-for-lib_perfetto.patch (69%)
->>>    rename meta-oe/recipes-devtools/perfetto/{files =>
->>> perfetto}/0001-Remove-check_build_deps-build-steps.patch (85%)
->>>    create mode 100644
->>> meta-oe/recipes-devtools/perfetto/perfetto/0002-traced-fix-missing-include.patch
->>>    rename meta-oe/recipes-devtools/protobuf/{protobuf_4.25.4.bb =>
->>> protobuf_4.25.5.bb} (97%)
->>>    rename meta-oe/recipes-devtools/python/{python3-psycopg_3.2.1.bb =>
->>> python3-psycopg_3.2.2.bb} (85%)
->>>    create mode 100644
->>> meta-oe/recipes-extended/jansson/jansson/0001-add-back-JSON_INTEGER_IS_LONG_LONG-for-cmake.patch
->>>    rename meta-oe/recipes-extended/pegtl/{pegtl_3.2.7.bb =>
->>> pegtl_3.2.8.bb} (93%)
->>>    create mode 100644
->>> meta-oe/recipes-security/nmap/files/0003-Fix-off-by-one-overflow-in-the-IP-protocol-table.patch
->>>    create mode 100644
->>> meta-oe/recipes-security/softhsm/files/0002-Prevent-accessing-of-global-c-objects-once-they-are-.patch
->>>    rename meta-oe/recipes-support/bdwgc/{bdwgc_8.2.6.bb =>
->>> bdwgc_8.2.8.bb} (96%)
->>>    rename meta-oe/recipes-support/libmanette/{libmanette_0.2.7.bb =>
->>> libmanette_0.2.9.bb} (87%)
->>>    create mode 100644
->>> meta-oe/recipes-support/libtar/files/0003-Fix-missing-prototype-compiler-warnings.patch
->>>    create mode 100644
->>> meta-oe/recipes-support/libtar/files/0004-Fix-invalid-memory-de-reference-issue.patch
->>>    create mode 100644
->>> meta-oe/recipes-support/libtar/files/0005-fix-file-descriptor-leaks-reported-by-cppcheck.patch
->>>    create mode 100644
->>> meta-oe/recipes-support/libtar/files/0006-fix-memleak-on-tar_open-failure.patch
->>>    create mode 100644
->>> meta-oe/recipes-support/libtar/files/0007-fix-memleaks-in-libtar-sample-program.patch
->>>    create mode 100644
->>> meta-oe/recipes-support/libtar/files/0008-decode-avoid-using-a-static-buffer-in-th_get_pathnam.patch
->>>    create mode 100644
->>> meta-oe/recipes-support/libtar/files/0009-Check-for-NULL-before-freeing-th_pathname.patch
->>>    create mode 100644
->>> meta-oe/recipes-support/libtar/files/0010-Added-stdlib.h-for-malloc-in-lib-decode.c.patch
->>>    create mode 100644
->>> meta-oe/recipes-support/libtar/files/0011-libtar-fix-programming-mistakes-detected-by-static-a.patch
->>>    create mode 100644
->>> meta-oe/recipes-support/libtar/files/CVE-2013-4420.patch
->>>    create mode 100644
->>> meta-oe/recipes-support/libtar/files/CVE-2021-33640-CVE-2021-33645-CVE-2021-33646.patch
->>>    create mode 100644
->>> meta-oe/recipes-support/libtar/files/CVE-2021-33643-CVE-2021-33644.patch
->>>    rename meta-oe/recipes-support/opencv/{opencv_4.9.0.bb =>
->>> opencv_4.10.0.bb} (98%)
->>>    delete mode 100644
->>> meta-oe/recipes-support/syslog-ng/files/0001-macros-guard-ipv6-code-with-SYSLOG_NG_ENABLE_IPV6.patch
->>>    rename meta-oe/recipes-support/syslog-ng/{syslog-ng_4.6.0.bb =>
->>> syslog-ng_4.7.0.bb} (97%)
->>>    create mode 100644
->>> meta-oe/recipes-support/webkitgtk/webkitgtk3/fff1b1773bff2ef7c3b867ab019d69faa36c010d.patch
->>>    rename
->>> meta-python/recipes-devtools/python/{python3-elementpath_4.4.0.bb =>
->>> python3-elementpath_4.5.0.bb} (85%)
->>>    rename meta-python/recipes-devtools/python/{python3-eventlet_0.36.1.bb
->>> => python3-eventlet_0.37.0.bb} (80%)
->>>    rename meta-python/recipes-devtools/python/{python3-filelock_3.16.0.bb
->>> => python3-filelock_3.16.1.bb} (87%)
->>>    rename meta-python/recipes-devtools/python/{python3-greenlet_3.0.3.bb
->>> => python3-greenlet_3.1.0.bb} (81%)
->>>    rename meta-python/recipes-devtools/python/{python3-nmap_1.6.0.bb =>
->>> python3-nmap_1.9.1.bb} (82%)
->>>    rename meta-python/recipes-devtools/python/{python3-paramiko_3.4.1.bb
->>> => python3-paramiko_3.5.0.bb} (82%)
->>>    rename
->>> meta-python/recipes-devtools/python/{python3-pdm-backend_2.3.3.bb =>
->>> python3-pdm-backend_2.4.1.bb} (80%)
->>>    rename meta-python/recipes-devtools/python/{python3-pdm_2.16.1.bb =>
->>> python3-pdm_2.19.1.bb} (75%)
->>>    rename meta-python/recipes-devtools/python/{python3-pint_0.24.1.bb =>
->>> python3-pint_0.24.3.bb} (66%)
->>>    rename
->>> meta-python/recipes-devtools/python/{python3-platformdirs_4.3.1.bb =>
->>> python3-platformdirs_4.3.6.bb} (88%)
->>>    rename
->>> meta-python/recipes-devtools/python/{python3-pyasn1-modules_0.4.0.bb =>
->>> python3-pyasn1-modules_0.4.1.bb} (90%)
->>>    rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.197.bb
->>> => python3-pymisp_2.4.198.bb} (85%)
->>>    rename
->>> meta-python/recipes-devtools/python/{python3-pyproject-api_1.7.1.bb =>
->>> python3-pyproject-api_1.7.2.bb} (86%)
->>>    delete mode 100644
->>> meta-python/recipes-devtools/python/python3-pytest-mock/0001-test_pytest_mock-skip-args-introspection-tests.patch
->>>    rename
->>> meta-python/recipes-devtools/python/{python3-pyunormalize_15.1.0.bb =>
->>> python3-pyunormalize_16.0.0.bb} (58%)
->>>    rename meta-python/recipes-devtools/python/{python3-regex_2024.7.24.bb
->>> => python3-regex_2024.9.11.bb} (80%)
->>>    rename
->>> meta-python/recipes-devtools/python/{python3-robotframework_7.0.1.bb =>
->>> python3-robotframework_7.1.bb} (91%)
->>>    rename
->>> meta-python/recipes-devtools/python/{python3-sqlalchemy_2.0.32.bb =>
->>> python3-sqlalchemy_2.0.35.bb} (77%)
->>>    rename
->>> meta-python/recipes-devtools/python/{python3-virtualenv_20.26.4.bb =>
->>> python3-virtualenv_20.26.5.bb} (87%)
->>>    rename meta-python/recipes-devtools/python/{python3-xmlschema_3.3.2.bb
->>> => python3-xmlschema_3.4.1.bb} (81%)
->>>    rename meta-python/recipes-devtools/python/{python3-yarl_1.10.0.bb =>
->>> python3-yarl_1.11.1.bb} (88%)
->>>    rename
->>> meta-python/recipes-extended/python-rich/{python3-rich_13.8.0.bb =>
->>> python3-rich_13.8.1.bb} (85%)
->>>    rename meta-xfce/recipes-xfce/xfce4-panel/{xfce4-panel_4.18.3.bb =>
->>> xfce4-panel_4.18.5.bb} (94%)
->>>
->>>
->>>
->> -=-=-=-=-=-=-=-=-=-=-=-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#113922): https://lists.openembedded.org/g/openembedded-devel/message/113922
->> Mute This Topic: https://lists.openembedded.org/mt/109486707/3617156
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [martin.jansa@gmail.com]
->> -=-=-=-=-=-=-=-=-=-=-=-
->>
+diff --git a/meta-perl/conf/include/ptest-packagelists-meta-perl.inc b/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
+index 842f817f1f..9fc5e9675a 100644
+--- a/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
++++ b/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
+@@ -21,6 +21,7 @@ PTESTS_FAST_META_PERL = "\
+     libterm-readkey-perl \
+     libtest-nowarnings-perl \
+     libtext-diff-perl \
++    liburi-perl \
+ "
+ 
+ PTESTS_SLOW_META_PERL = "\
+diff --git a/meta-perl/recipes-perl/liburi/liburi-perl/0001-Skip-TODO-test-cases-that-fail.patch b/meta-perl/recipes-perl/liburi/liburi-perl/0001-Skip-TODO-test-cases-that-fail.patch
+new file mode 100644
+index 0000000000..c15c3be93a
+--- /dev/null
++++ b/meta-perl/recipes-perl/liburi/liburi-perl/0001-Skip-TODO-test-cases-that-fail.patch
+@@ -0,0 +1,109 @@
++From c424e6118d3bd836939ce39c70ee9e6bbd984028 Mon Sep 17 00:00:00 2001
++From: Tim Orling <tim.orling@konsulko.com>
++Date: Thu, 17 Nov 2022 16:33:20 -0800
++Subject: [PATCH] Skip TODO test cases that fail
++
++TODO cases report as "not ok" with ptest-runner
++
++Upstream-Status: Inappropriate [ptest-runner specific]
++
++Signed-off-by: Tim Orling <tim.orling@konsulko.com>
++---
++ t/escape-char.t | 20 ++++++++++----------
++ t/iri.t         | 18 +++++++++---------
++ t/mailto.t      | 12 ++++++------
++ 3 files changed, 25 insertions(+), 25 deletions(-)
++
++diff --git a/t/escape-char.t b/t/escape-char.t
++index c6ce79c..5e62ad5 100644
++--- a/t/escape-char.t
+++++ b/t/escape-char.t
++@@ -6,16 +6,16 @@ use warnings;
++ use Test::More;
++ use URI ();
++ 
++-TODO: {
++-    my $str = "http://foo/\xE9";
++-    utf8::upgrade($str);
++-    my $uri = URI->new($str);
++-
++-    local $TODO = 'URI::Escape::escape_char misunderstands utf8';
++-
++-    # http://foo/%C3%A9
++-    is("$uri", 'http://foo/%E9', 'correctly created a URI from a utf8-upgraded string');
++-}
+++#TODO: {
+++#    my $str = "http://foo/\xE9";
+++#    utf8::upgrade($str);
+++#    my $uri = URI->new($str);
+++#
+++#    local $TODO = 'URI::Escape::escape_char misunderstands utf8';
+++#
+++#    # http://foo/%C3%A9
+++#    is("$uri", 'http://foo/%E9', 'correctly created a URI from a utf8-upgraded string');
+++#}
++ 
++ {
++     my $str = "http://foo/\xE9";
++diff --git a/t/iri.t b/t/iri.t
++index cf983d6..884b36e 100644
++--- a/t/iri.t
+++++ b/t/iri.t
++@@ -6,7 +6,7 @@ use Test::More;
++ use Config qw( %Config );
++ 
++ if (defined $Config{useperlio}) {
++-    plan tests=>30;
+++    plan tests=>28;
++ } else {
++     plan skip_all=>"this perl doesn't support PerlIO layers";
++ }
++@@ -67,17 +67,17 @@ is $u->as_iri, "http://➡.ws/";
++ # draft-duerst-iri-bis.txt examples (section 3.7.1):
++ is(URI->new("http://www.example.org/D%C3%BCrst")->as_iri, "http://www.example.org/D\xFCrst");
++ is(URI->new("http://www.example.org/D%FCrst")->as_iri, "http://www.example.org/D%FCrst");
++-TODO: {
++-    local $TODO = "some chars (like U+202E, RIGHT-TO-LEFT OVERRIDE) need to stay escaped";
++-is(URI->new("http://xn--99zt52a.example.org/%e2%80%ae")->as_iri, "http://\x{7D0D}\x{8C46}.example.org/%e2%80%ae");
++-}
+++#TODO: {
+++#    local $TODO = "some chars (like U+202E, RIGHT-TO-LEFT OVERRIDE) need to stay escaped";
+++#is(URI->new("http://xn--99zt52a.example.org/%e2%80%ae")->as_iri, "http://\x{7D0D}\x{8C46}.example.org/%e2%80%ae");
+++#}
++ 
++ # try some URLs that can't be IDNA encoded (fallback to encoded UTF8 bytes)
++ $u = URI->new("http://" . ("ü" x 128));
++ is $u, "http://" . ("%C3%BC" x 128);
++ is $u->host, ("\xC3\xBC" x 128);
++-TODO: {
++-    local $TODO = "should ihost decode UTF8 bytes?";
++-    is $u->ihost, ("ü" x 128);
++-}
+++#TODO: {
+++#    local $TODO = "should ihost decode UTF8 bytes?";
+++#    is $u->ihost, ("ü" x 128);
+++#}
++ is $u->as_iri, "http://" . ("ü" x 128);
++diff --git a/t/mailto.t b/t/mailto.t
++index 79e9a13..c68cfb2 100644
++--- a/t/mailto.t
+++++ b/t/mailto.t
++@@ -48,12 +48,12 @@ $u = URI->new('mailto:user+detail@example.com');
++ is $u->to, 'user+detail@example.com', 'subaddress with `+` parsed correctly';
++ is $u, 'mailto:user+detail@example.com', '... and stringification works';
++ 
++-TODO: {
++-    local $TODO = "We can't handle quoted local parts without properly parsing the email addresses";
++-    $u = URI->new('mailto:"foo bar+baz"@example.com');
++-    is $u->to, '"foo bar+baz"@example.com', 'address with quoted local part containing spaces is parsed correctly';
++-    is $u, 'mailto:%22foo%20bar+baz%22@example.com', '... and stringification works';
++-}
+++#TODO: {
+++#    local $TODO = "We can't handle quoted local parts without properly parsing the email addresses";
+++#    $u = URI->new('mailto:"foo bar+baz"@example.com');
+++#    is $u->to, '"foo bar+baz"@example.com', 'address with quoted local part containing spaces is parsed correctly';
+++#    is $u, 'mailto:%22foo%20bar+baz%22@example.com', '... and stringification works';
+++#}
++ 
++ # RFC 5321 (4.1.3) - Address Literals
++ 
+diff --git a/meta-perl/recipes-perl/liburi/liburi-perl_5.31.bb b/meta-perl/recipes-perl/liburi/liburi-perl_5.31.bb
+new file mode 100644
+index 0000000000..e23942b81e
+--- /dev/null
++++ b/meta-perl/recipes-perl/liburi/liburi-perl_5.31.bb
+@@ -0,0 +1,56 @@
++SUMMARY = "Perl module to manipulate and access URI strings"
++DESCRIPTION = "This package contains the URI.pm module with friends. \
++The module implements the URI class. URI objects can be used to access \
++and manipulate the various components that make up these strings."
++HOMEPAGE = "https://metacpan.org/dist/URI"
++SECTION = "libs"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=9944b87af51186f848ae558344aded9f"
++
++SRC_URI = "${CPAN_MIRROR}/authors/id/O/OA/OALDERS/URI-${PV}.tar.gz \
++           file://0001-Skip-TODO-test-cases-that-fail.patch \
++           "
++
++SRC_URI[sha256sum] = "b9c4d58b2614b8611ae03a95a6d60ed996f4b311ef3cd5a937b92f1825ecc564"
++
++S = "${WORKDIR}/URI-${PV}"
++
++EXTRA_CPANFLAGS = "EXPATLIBPATH=${STAGING_LIBDIR} EXPATINCPATH=${STAGING_INCDIR}"
++
++inherit cpan ptest-perl
++
++do_compile() {
++	export LIBC="$(find ${STAGING_DIR_TARGET}/${base_libdir}/ -name 'libc-*.so')"
++	cpan_do_compile
++}
++
++do_install:prepend() {
++	# these tests require "-T" (taint) command line option
++	rm -rf ${B}/t/cwd.t
++	rm -rf ${B}/t/file.t
++}
++
++RDEPENDS:${PN} += "\
++    perl-module-integer \
++    perl-module-mime-base64 \
++"
++
++RDEPENDS:${PN}-ptest += " \
++    libtest-fatal-perl \
++    libtest-needs-perl \
++    libtest-warnings-perl \
++    perl-module-encode \
++    perl-module-encode-encoding \
++    perl-module-extutils-makemaker \
++    perl-module-extutils-mm-unix \
++    perl-module-file-spec-functions \
++    perl-module-net-domain \
++    perl-module-perlio \
++    perl-module-perlio-encoding \
++    perl-module-test \
++    perl-module-test-more \
++    perl-module-utf8 \
++"
++
++BBCLASSEXTEND = "native"
+-- 
+2.39.5
 
 
