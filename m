@@ -1,173 +1,99 @@
-Return-Path: <jlu@pengutronix.de>
+Return-Path: <gudni.m.g@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BFF62D3B9B2
-	for <webhook@archiver.kernel.org>; Tue, 26 Nov 2024 15:49:13 +0000 (UTC)
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
- by mx.groups.io with SMTP id smtpd.web11.49552.1732636145676772567
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A0510D6554A
+	for <webhook@archiver.kernel.org>; Tue, 26 Nov 2024 18:32:54 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.web11.53898.1732645969192399840
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Nov 2024 07:49:06 -0800
+ Tue, 26 Nov 2024 10:32:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: pengutronix.de, ip: 185.203.201.7, mailfrom: jlu@pengutronix.de)
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1tFxoF-0006hb-Lg; Tue, 26 Nov 2024 16:49:03 +0100
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77])
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1tFxoE-000H1W-1y;
-	Tue, 26 Nov 2024 16:49:03 +0100
-Received: from localhost ([127.0.0.1])
-	by ptz.office.stw.pengutronix.de with esmtp (Exim 4.96)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1tFxoF-009FTY-0s;
-	Tue, 26 Nov 2024 16:49:03 +0100
-Message-ID: <993d5bc627151ecab7366454bc0fa0f02491cf28.camel@pengutronix.de>
-Subject: Re: [oe] [meta-oe][PATCH v1] signing.bbclass: add certificate
- ca-chain handling
-From: Jan =?ISO-8859-1?Q?L=FCbbe?= <jlu@pengutronix.de>
-To: johannes.schneider@leica-geosystems.com, 
-	openembedded-devel@lists.openembedded.org
-Date: Tue, 26 Nov 2024 16:49:03 +0100
-In-Reply-To: <20241101120514.185668-1-johannes.schneider@leica-geosystems.com>
-References: 
-	<20241101120514.185668-1-johannes.schneider@leica-geosystems.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.54.1 (by Flathub.org) 
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=HVCMG+nH;
+ spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: gudni.m.g@gmail.com)
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-3824709ee03so4286750f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Nov 2024 10:32:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1732645967; x=1733250767; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ypFWSEFT1fdBPQc6nP6U9m0As5nltJC27zhDD0TYEpQ=;
+        b=HVCMG+nHDviCav691ZKrJWXiN4XdS0u5wOIqq9WuQIHrykXaPqpZMYvZNwXS/R+DBb
+         9ABfVcW4swMtl0kcJqkmPnGdkZe5a5XWS7IgExOpk5dSOAF0ZKWgeUDf/BvnrHIuWwBI
+         S5OsqL+P84abk4jS2vea2GbGCTFSaVeem1TNsb8VL6nr+mIngzmWLHMQ1np7z2PQbRkA
+         yvTcEMy8RYsFPf/LjzCMPDqQ1pkqzVLO8MdRMn44d57ie9YmfU0INwLjToId7B1WrPk6
+         DmdUmAjTfI/simC+TD1jZ1m9TLwQUb5kXBxGgzCcxhAaDB2BXVgP9DgCIUIObVlQ8Uk0
+         erRw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1732645967; x=1733250767;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ypFWSEFT1fdBPQc6nP6U9m0As5nltJC27zhDD0TYEpQ=;
+        b=ozsQPokLmpj24AH5iCLb4C4xdC/JbsS7DRL1+nRPx0tYsbIGHlDzxkEqlUffQbgIqH
+         Y9mx//RZ0bPZqtle5Bv7+yS1voxMFY1WMa15R8szvRmi+2tWRSWQuuqu1K5cjd/ubd1c
+         4MUDwUqLQT+cR0AnucY+NnMCJSQ/h1xR/xcNW6qsftn7y+nyt9M+pXpmL3rSsogMLlEe
+         r39jx3/K6U72dJEa7GZXQ2XnprUnrqEA0iL4UeyL00nKhZJut+cCarXbfVsrvJOOveNP
+         IsFofhJlQhFxiTdkHHSBfFF328RSK5WOYKp8w+zr/hlMNFqyOCAmarSoSjgptkapz6BM
+         eX3Q==
+X-Gm-Message-State: AOJu0YyvJlWbJz0WLpqnFRwr3YHJUIIiiVkPymHqHey3Nv2/rJsLG6yH
+	7nwaO7WlFrTCY6dftmrL8ZYP2s4vW1NMIVdWh0KKnj5vf3UhjGtGcBTkFA==
+X-Gm-Gg: ASbGncvL6Quxrpgthu+bmGiyOpk7bIwwKXp9jWNrrN+8MQ3LInnrNmlgLYeS0KkboyE
+	cYEwJOiDGaTyluRCT/rLt7+4cuPUm2c1AyAROtuxljXQwHBSsc2VSXBjFCX2mKIcyQctUIPXb7V
+	hQqTyz6imbJHyqJhORii57TAW6jwxvN1pfxtfr+MLXz8MNnW6HtOb9vNUu9B0JjhPSosMKJZL54
+	OSuz++wLHOXbCx6RTzoGji68/2CfAOHl9/efslMn691FH+jVcdgdCPBdhXXraJBLVRWExzz6W8=
+X-Google-Smtp-Source: AGHT+IHKgkBfmKa7F2BlHTZLZZmBL/6vWp9/fsQm1XG05zzQfhxhCBl2MtKfCitYMNaCTxLrln7IuA==
+X-Received: by 2002:a05:6000:20c2:b0:382:49b7:cbc0 with SMTP id ffacd0b85a97d-38260be6237mr12844251f8f.52.1732645967047;
+        Tue, 26 Nov 2024 10:32:47 -0800 (PST)
+Received: from localhost.localdomain ([81.15.100.92])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3825fafedbcsm14176267f8f.41.2024.11.26.10.32.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 26 Nov 2024 10:32:46 -0800 (PST)
+From: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudni.m.g@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudni.m.g@gmail.com>
+Subject: [meta-python][PATCH] python3-isodate: move from oe-core to meta-python
+Date: Tue, 26 Nov 2024 18:32:34 +0000
+Message-ID: <20241126183234.7438-1-gudni.m.g@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: jlu@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Nov 2024 15:49:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114076
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Nov 2024 18:32:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114077
 
-Hi Johannes,
+Signed-off-by: Guðni Már Gilbert <gudni.m.g@gmail.com>
+---
+ .../python/python3-isodate_0.6.1.bb              | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-isodate_0.6.1.bb
 
-On Fri, 2024-11-01 at 13:05 +0100, Johannes Schneider via lists.openembedde=
-d.org wrote:
-> Add handling of ca-chains which can consist of more than one
-> certificate in a .pem file, which need to be split off, processed and
-> stored separately in the softhsm - as the tool-chain
-> signing.bbclass::signing_import_cert* -> softhsm -> 'extract-cert'
-> only supports one-per-file, due to using/expecting "plain" x509
-> in-/output.
->=20
-> The added signing_import_cert_chain_from_pem function takes a <role>
-> basename, and iterates through the input .pem file, creating numbered
-> <role>_1, _2, ... roles as needed.
-
-Why do you want to import certificates without corresponding private
-keys into the singing mechanism?
-
-They can't be used for signing, so don't really fit the role concept as
-I intended it. This mismatch then leads to workarounds such as the _N
-suffix and the problem below.
-
-> Afterwards the certificates can be used or extracted one-by-one from
-> the softhsm, using the numbered roles; the only precondition - or
-> limitation - is that the PKI structure has to be known beforhand;
-> e.g. how many certificates are between leaf and root.
-
-The point of the signing.bbclass is to abstract over different HSMs and
-allow flexible key selection at the .conf level.
-
-With this approach, any recipe using this set of generated
-(certificate-only) roles now needs to know how long the chain is and
-the PKIs with different layouts are no longer possible.
-
-
-Could you describe you use-case in detail? I think we should try to
-find a design which avoids using roles for certificate chains, while
-also allowing different PKI layouts between SoftHSM and actual HSMs.
-
-> Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.co=
-m>
-> ---
-> =C2=A0meta-oe/classes/signing.bbclass | 30 ++++++++++++++++++++++++++++++
-> =C2=A01 file changed, 30 insertions(+)
->=20
-> diff --git a/meta-oe/classes/signing.bbclass b/meta-oe/classes/signing.bb=
-class
-> index 3e662ff73..8af7bbf8e 100644
-> --- a/meta-oe/classes/signing.bbclass
-> +++ b/meta-oe/classes/signing.bbclass
-> @@ -134,6 +134,36 @@ signing_import_cert_from_der() {
-> =C2=A0=C2=A0=C2=A0=C2=A0 signing_pkcs11_tool --type cert --write-object "=
-${der}" --label "${role}"
-> =C2=A0}
-> =C2=A0
-> +# signing_import_cert_chain_from_pem <role> <pem>
-> +#
-> +
-> +# Import a certificate *chain* from a PEM file to a role.
-> +# (e.g. multiple ones concatenated in one file)
-> +#
-> +# Due to limitations in the toolchain:
-> +#=C2=A0=C2=A0 signing class -> softhsm -> 'extract-cert'
-> +# the input certificate is split into a sequentially numbered list of ro=
-les,
-> +# starting at <role>_1
-> +#
-> +# (The limitations are the conversion step from x509 to a plain .der, an=
-d
-> +# extract-cert expecting a x509 and then producing only plain .der again=
-)
-> +signing_import_cert_chain_from_pem() {
-> +=C2=A0=C2=A0=C2=A0 local role=3D"${1}"
-> +=C2=A0=C2=A0=C2=A0 local pem=3D"${2}"
-> +=C2=A0=C2=A0=C2=A0 local i=3D1
-> +
-> +=C2=A0=C2=A0=C2=A0 cat "${pem}" | \
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 while openssl x509 -inform pe=
-m -outform der -out ${B}/temp_${i}.der; do
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 signi=
-ng_import_define_role "${role}_${i}"
-
-Calling signing_import_define_role() from an import function breaks the
-separation and ordering we currently use (first
-signing_import_define_role(), then import certs/keys) and is surprising
-compared to the existing signing_import_define_role()
-
-Regards
-Jan
-
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 signi=
-ng_pkcs11_tool --type cert \
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 --write-object=C2=A0 ${B}/temp_${i}=
-.der \
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 --label "${role}_${i}"
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 rm ${=
-B}/temp_${i}.der
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 echo =
-"imported ${pem} under role: ${role}_${i}"
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 i=3D$=
-(awk "BEGIN {print $i+1}")
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 done
-> +}
-> +
-> =C2=A0# signing_import_cert_from_pem <role> <pem>
-> =C2=A0#
-> =C2=A0# Import a certificate from PEM file to a role. To be used
->=20
-
---=20
-Pengutronix e.K.                        |                             |
-Steuerwalder Str. 21                    | https://www.pengutronix.de/ |
-31137 Hildesheim, Germany               | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686        | Fax:   +49-5121-206917-5555 |
-
+diff --git a/meta-python/recipes-devtools/python/python3-isodate_0.6.1.bb b/meta-python/recipes-devtools/python/python3-isodate_0.6.1.bb
+new file mode 100644
+index 000000000..293fb0827
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-isodate_0.6.1.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "ISO 8601 date/time parser"
++HOMEPAGE = "https://github.com/gweis/isodate/"
++SECTION = "devel/python"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e910b35b0ef4e1f665b9a75d6afb7709"
++
++SRC_URI[sha256sum] = "48c5881de7e8b0a0d648cb024c8062dc84e7b840ed81e864c7614fd3c127bde9"
++
++inherit pypi setuptools3
++
++RDEPENDS:${PN} += " \
++    python3-numbers \
++    python3-six \
++"
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.43.0
 
 
