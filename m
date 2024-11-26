@@ -1,132 +1,99 @@
-Return-Path: <Yogita.Urade@windriver.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 62AF4D5A6E2
-	for <webhook@archiver.kernel.org>; Tue, 26 Nov 2024 04:41:20 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.38891.1732596073756570637
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7076D5A6E6
+	for <webhook@archiver.kernel.org>; Tue, 26 Nov 2024 06:49:10 +0000 (UTC)
+Received: from mail-yb1-f179.google.com (mail-yb1-f179.google.com [209.85.219.179])
+ by mx.groups.io with SMTP id smtpd.web10.40028.1732603746406160558
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Nov 2024 20:41:13 -0800
+ Mon, 25 Nov 2024 22:49:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=106056d748=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4AQ2k5Ij007788
-	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Nov 2024 04:41:13 GMT
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 433491avf1-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Nov 2024 04:41:12 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Mon, 25 Nov 2024 20:41:10 -0800
-From: yurade <yogita.urade@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][master][scarthgap][PATCH 1/1] php: upgrade 8.2.20 -> 8.2.24
-Date: Tue, 26 Nov 2024 04:40:52 +0000
-Message-ID: <20241126044052.525009-1-yogita.urade@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WpjAY7UQ;
+ spf=pass (domain: gmail.com, ip: 209.85.219.179, mailfrom: schonm@gmail.com)
+Received: by mail-yb1-f179.google.com with SMTP id 3f1490d57ef6-e388d8850d3so5158589276.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Nov 2024 22:49:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1732603745; x=1733208545; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Dt5NZ3Bbzr6DosnPcVA84bfDchKF6BmPe7nkCymkDGQ=;
+        b=WpjAY7UQYD16e/pcedltrYL6SF8CQj6SDCllTlt1CbVhUYQuTN6ULhh+VhpWT2yqRg
+         Ae/MnPN0sc5UQtTACDZRj91xBnRtiTUTrBPafAwMetlecYL2AjGLc3fl+PeFmdyy9Lwc
+         uZFfMvxj8Pamdq25d9txFNtZw+Xs0A94up2nSAdUwJV7ZgsLpqsw1pfCelhAvEXrklry
+         BpdpPZZobcbVRKvpo4MYqOUgPTeA/oOPnanYL1CZpf/3BOl2pxayqEmgTZzFyT+BGSIZ
+         q0toBWai23C7II+XEufBkOkJqMqQgmyKiU9tZ2nY9ZcSK8qQVkZtnvPSs3RhV1qW0qTQ
+         558w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1732603745; x=1733208545;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Dt5NZ3Bbzr6DosnPcVA84bfDchKF6BmPe7nkCymkDGQ=;
+        b=IfJEZIF3RZVNISspnMjwpT26eAEA5rVcRRGMQx5bwX4rmMsJyMh0F6UgKfVlUh/g5U
+         EHXuUJw4yHPxtcwsPN3Zn5yzeR5WGkuea8qmPTLc58WjoFru6vNgLLu9Q6RWw5sHNc5/
+         vSImeZJQcH1J8FElp9IgmDDRhhWQQXPOe1zKnZB9ybulu1cy8OwIMmK8GTkxgm3n6dFq
+         CZI1TE1wCtSJf/bMCj8Wgz++T6o0wvZwLRiCeybvqWsI8gtjZBS1BjPDtd2ZfQruFgzs
+         ofO7khWmoXTEtxYDQTzIeLKDwS/6y4dMluBE+TJS3m6mJW1gTYLptW+hu14X5qxTtYKe
+         CqHg==
+X-Gm-Message-State: AOJu0YxSFcKzc7tUQn1gGE10j4ZeYjBvGP+x2x+8f0Isckp9xwMEjo9y
+	S7CTRz1vG7zTnEvcufkZ1OKIVNqgGy3qQgcYYXC9oA8whKKjkFfYZVCgweNo
+X-Gm-Gg: ASbGncvRghacvLl7CYm8IBjd0iKmr4vuG2xE6ksuLhzeyV0eqG7ELEs/BTea3m6AZtW
+	3WvN+EZqMJK+/4n8bPLkOzPqFy3kspcMgjxibqVsaqarNyQumtl8hPz2CrtkQs2eNWtKX+bpa0b
+	xbQ26v2BYTsKW1DLa/IVQQK3XbNh0cGK4ZkRUAWrvzRWwhhFnqkp8Jmi+O7IqnWSw90BKQW3fkE
+	ROEz9VKT7gxRJDt71iEpuT21H4oVv2+gE+pVsU8xPazV66DD06GifTq
+X-Google-Smtp-Source: AGHT+IEWhtOMoLro/w+v5qARVddc3wZIGVJIxqEPNtUs+5dy0rLqfc5PdErQ/jZP1lxZK09sxL/ylg==
+X-Received: by 2002:a05:6902:e0c:b0:e38:7de:de3a with SMTP id 3f1490d57ef6-e38f8bd31e3mr13246448276.32.1732603744881;
+        Mon, 25 Nov 2024 22:49:04 -0800 (PST)
+Received: from localhost.localdomain ([71.215.7.194])
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e38f6084765sm2920711276.25.2024.11.25.22.49.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 25 Nov 2024 22:49:04 -0800 (PST)
+From: Jason Schonberg <schonm@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-xfce][PATCH 1/2] libxfce4ui: Upgrade 4.19.3 -> 4.19.6
+Date: Tue, 26 Nov 2024 01:48:52 -0500
+Message-ID: <20241126064854.1685359-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Authority-Analysis: v=2.4 cv=W4ZqVgWk c=1 sm=1 tr=0 ts=67455168 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=JhMfiyDoiLEA:10 a=HCiNrPZc1L8A:10 a=VlfZXiiP6vEA:10 a=67BIL_jfAAAA:8 a=t7CeM3EgAAAA:8 a=NEAV23lmAAAA:8
- a=ZgU6DmHzig3f5syPRCgA:9 a=zWsmoVtUA9YA:10 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: 6drA0uT0MMNq-cSsMinXBF-D3604lgQ_
-X-Proofpoint-ORIG-GUID: 6drA0uT0MMNq-cSsMinXBF-D3604lgQ_
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2024-11-26_03,2024-11-25_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1011 bulkscore=0
- adultscore=0 mlxscore=0 suspectscore=0 priorityscore=1501
- lowpriorityscore=0 malwarescore=0 mlxlogscore=999 impostorscore=0
- phishscore=0 spamscore=0 classifier=spam authscore=0 adjust=0 reason=mlx
- scancount=1 engine=8.21.0-2409260000 definitions=main-2411260037
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Nov 2024 04:41:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114057
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Nov 2024 06:49:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114058
 
-From: Yogita Urade <yogita.urade@windriver.com>
+Changelog: https://gitlab.xfce.org/xfce/libxfce4ui/-/tags/libxfce4ui-4.19.6
 
-Includes fix for CVE-2024-8925, CVE-2024-8926, CVE-2024-8927
-and CVE-2024-9026
+Changelog: https://gitlab.xfce.org/xfce/libxfce4ui/-/tags/libxfce4ui-4.19.5
 
-Changelog:
-https://www.php.net/ChangeLog-8.php#8.2.24
+The 4.19.5 version fixed a linking problem with clang which appeared in the
+4.19.4 version of libxfce4ui.
 
-Rebase 0001-ext-opcache-config.m4-enable-opcache.patch to new version
-
-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- ...001-ext-opcache-config.m4-enable-opcache.patch | 15 +++++++++------
- .../php/{php_8.2.20.bb => php_8.2.24.bb}          |  2 +-
- 2 files changed, 10 insertions(+), 7 deletions(-)
- rename meta-oe/recipes-devtools/php/{php_8.2.20.bb => php_8.2.24.bb} (99%)
+ .../libxfce4ui/{libxfce4ui_4.19.3.bb => libxfce4ui_4.19.6.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-xfce/recipes-xfce/libxfce4ui/{libxfce4ui_4.19.3.bb => libxfce4ui_4.19.6.bb} (92%)
 
-diff --git a/meta-oe/recipes-devtools/php/php/0001-ext-opcache-config.m4-enable-opcache.patch b/meta-oe/recipes-devtools/php/php/0001-ext-opcache-config.m4-enable-opcache.patch
-index c743697469..496213540b 100644
---- a/meta-oe/recipes-devtools/php/php/0001-ext-opcache-config.m4-enable-opcache.patch
-+++ b/meta-oe/recipes-devtools/php/php/0001-ext-opcache-config.m4-enable-opcache.patch
-@@ -1,6 +1,6 @@
--From 889583912ddd7abc628f2703892ec4884db6419a Mon Sep 17 00:00:00 2001
--From: Soumya Sambu <soumya.sambu@windriver.com>
--Date: Tue, 7 May 2024 08:39:16 +0000
-+From aa99f9db92817358d6b91040cc555f5ca31b727c Mon Sep 17 00:00:00 2001
-+From: Yogita Urade <yogita.urade@windriver.com>
-+Date: Mon, 25 Nov 2024 07:07:38 +0000
- Subject: [PATCH 01/11] ext/opcache/config.m4: enable opcache
+diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.19.3.bb b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.19.6.bb
+similarity index 92%
+rename from meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.19.3.bb
+rename to meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.19.6.bb
+index e53d01d00..e9215f8b9 100644
+--- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.19.3.bb
++++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.19.6.bb
+@@ -12,7 +12,7 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
  
- We can't use AC_TRY_RUN to run programs in a cross compile
-@@ -23,12 +23,15 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+ # TODO: Check if 0001-... can go
+ SRC_URI += "file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch"
+-SRC_URI[sha256sum] = "16815eef494ba9bac9c854e95c205c0bc5568c8022c31604348f9edadb02f227"
++SRC_URI[sha256sum] = "effe2c29408161beff4ae879f4591e7209c2bf5517c46545a1701337950afc7c"
  
- update patch to version 8.2.18
- Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
-+
-+update patch to version 8.2.24
-+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
- ---
-  ext/opcache/config.m4 | 204 ++----------------------------------------
-  1 file changed, 8 insertions(+), 196 deletions(-)
- 
- diff --git a/ext/opcache/config.m4 b/ext/opcache/config.m4
--index 6bf07ad3..5d645b86 100644
-+index b3929382..ba1a9aff 100644
- --- a/ext/opcache/config.m4
- +++ b/ext/opcache/config.m4
- @@ -113,209 +113,21 @@ if test "$PHP_OPCACHE" != "no"; then
-@@ -247,8 +250,8 @@ index 6bf07ad3..5d645b86 100644
- +  have_shm_mmap_posix=yes
- +  PHP_CHECK_LIBRARY(rt, shm_unlink, [PHP_ADD_LIBRARY(rt,1,OPCACHE_SHARED_LIBADD)])
-  
--   PHP_NEW_EXTENSION(opcache,
-- 	ZendAccelerator.c \
-+   AX_CHECK_COMPILE_FLAG([-Wno-implicit-fallthrough],
-+     [PHP_OPCACHE_CFLAGS="$PHP_OPCACHE_CFLAGS -Wno-implicit-fallthrough"],,
- -- 
- 2.40.0
- 
-diff --git a/meta-oe/recipes-devtools/php/php_8.2.20.bb b/meta-oe/recipes-devtools/php/php_8.2.24.bb
-similarity index 99%
-rename from meta-oe/recipes-devtools/php/php_8.2.20.bb
-rename to meta-oe/recipes-devtools/php/php_8.2.24.bb
-index f306b16931..22bc92278b 100644
---- a/meta-oe/recipes-devtools/php/php_8.2.20.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.2.24.bb
-@@ -34,7 +34,7 @@ SRC_URI:append:class-target = " \
-           "
- 
- S = "${WORKDIR}/php-${PV}"
--SRC_URI[sha256sum] = "5dec6fa61c7b9c47aa1d76666be651f2642ed2bcf6cd8638c57e3571ce2aac61"
-+SRC_URI[sha256sum] = "4cc76ec644eee97d17c92bfe8d0e84714fedf299a538b7dfadc0639dd0dc432f"
- 
- CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
- CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
+ EXTRA_OECONF += "--with-vendor-info=${DISTRO}"
+ EXTRA_OECONF += "--disable-vala"
 -- 
-2.40.0
+2.43.0
 
 
