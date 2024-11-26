@@ -1,137 +1,178 @@
-Return-Path: <Divya.Chellam@windriver.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D5DBD5A6FC
-	for <webhook@archiver.kernel.org>; Tue, 26 Nov 2024 08:22:21 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.41300.1732609334332411051
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 67071D3B986
+	for <webhook@archiver.kernel.org>; Tue, 26 Nov 2024 11:25:42 +0000 (UTC)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com (EUR05-AM6-obe.outbound.protection.outlook.com [40.107.22.56])
+ by mx.groups.io with SMTP id smtpd.web11.44007.1732620324963827782
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Nov 2024 00:22:14 -0800
+ Tue, 26 Nov 2024 03:25:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=10608d989f=divya.chellam@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4AQ6U2I6030784
-	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Nov 2024 00:22:14 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 433b79asbt-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Nov 2024 00:22:13 -0800 (PST)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Tue, 26 Nov 2024 00:22:11 -0800
-From: dchellam <divya.chellam@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][scarthgap][PATCH 1/2] redis: upgrade 7.2.4 -> 7.2.5
-Date: Tue, 26 Nov 2024 08:21:49 +0000
-Message-ID: <20241126082150.829120-1-divya.chellam@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@siemens.com header.s=selector2 header.b=NHD+V0y9;
+ spf=pass (domain: siemens.com, ip: 40.107.22.56, mailfrom: peter.marko@siemens.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=XcTdNIo4bXZ+0d0Rvz51+VRGyMsjjZE3N08voBrX1huZEZTEF5jGxuWNCsfBxTiYcVOu4JMlyIjKMTslfXxIeQg44wxCIWyJX+2e3ufjZVB4QDO4Jj/0qW7svqSnp9BEfzu680thT+UMqfoemGWYjHfayKOz4U0I8qgtvMuRHPxv79Fk3l/keqV8O9PYeYorUzmOWiSUvAGLoe3KPeGTXdx2US8pnHyCQNVXLN9JYjqhuNrOkBT1Pjc7l1VIIcf/wYnJxONaZsER9Do47qtjp7V+1Ml4vOnABpySx5/b1FeZ7oxE38BOg9flItCEDWdWk636dxOMT2JsthCBJfwkLQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=GbNXh/HitmCV2v0k68pbAEhDCwMEH8qI5KnCY17kyUY=;
+ b=dJgAfJvO/cQoVZht38XlQn1GKOne1btdg78dtCBkIaUbOfpHAn+XywUN93nde0BSPq99D7hClZ55XXCMHgvIDxEiqwXAftFfomZkrRhfMdshvANa43cUnF/60bfBTWTuC7pCWFZw1oUunhgU68BH8zZ3CZWjjpqSGo/tM3luR5aIQZMzhfb3Hp4E1vYx2Wy17fj4k5URaEEr+TP7Oty3hyZRJQVDKDCNwuWUitpbSjf/pltBGjkFzhp32pNBy1HbXLs38FDs4r9OOF3Bds+i6ZteqhtDokLm3fCmSYv8OVD6UFHHZbVolZOc/zEe4B9WWekLZ0dWps0lbntdg6QQcA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
+ dkim=pass header.d=siemens.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GbNXh/HitmCV2v0k68pbAEhDCwMEH8qI5KnCY17kyUY=;
+ b=NHD+V0y9p70PC2fp5KWrO96pPIgHY+LsxqBeSaFMq7hyQ2lSl+OFZOAfdSV5ladpkGYQ9iPso1ZtExIsdSD+yQsSu9Pcwl2lhq4btNCuWYKhYMd1aIgzr4MxzSoqTcwjViHRSz2ytMxcW7StWeMeYkuFR+dXyxz1PK9NUws+uU2ydJwHkjjWTxmHqEBiq5ydCELaogNGR5E6UCGk2n4elmbwJ5nZYIuueg6aUccfGigKX6Ehy12spYP8cAnwLbJebIbSAmHIjIQqrRr93JxeW+0iKkQq14XL2byCVJUH2C6+xvnf3BrkY8UxB2SRmISiNDgPkDrioyA0/xViYEpKTw==
+Received: from AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:479::20)
+ by GV1PR10MB7978.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:8a::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.13; Tue, 26 Nov
+ 2024 11:25:21 +0000
+Received: from AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::6c68:267b:6fd1:d3f2]) by AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::6c68:267b:6fd1:d3f2%3]) with mapi id 15.20.8182.018; Tue, 26 Nov 2024
+ 11:25:21 +0000
+From: "Marko, Peter" <Peter.Marko@siemens.com>
+To: Benjamin Bouvier <benjamin.bouvier@ekinops.com>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] [meta-networking][PATCH 2/3] bridge-utils: add CVE_PRODUCT
+Thread-Topic: [oe] [meta-networking][PATCH 2/3] bridge-utils: add CVE_PRODUCT
+Thread-Index: AQHbO++PIF5mcvcGREKxWAmpQX2TzLLBaRXQgAfNFYCAADys4A==
+Date: Tue, 26 Nov 2024 11:25:21 +0000
+Message-ID: 
+ <AS1PR10MB5697F831946ED6F127DBD614FD2F2@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
+References: <20241121082901.2747720-1-benjamin.bouvier@ekinops.com>
+ <20241121082901.2747720-3-benjamin.bouvier@ekinops.com>
+ <AS1PR10MB5697EA4EDECB7A2FE01A9C2AFD222@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
+ <7d40f30c-5644-41db-bb5b-ef01fe6297f1@ekinops.com>
+In-Reply-To: <7d40f30c-5644-41db-bb5b-ef01fe6297f1@ekinops.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+ MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_ActionId=70d2b061-4815-4fa3-85f6-93a6ff09750f;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_ContentBits=0;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Enabled=true;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Method=Standard;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Name=restricted;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SetDate=2024-11-26T11:21:35Z;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SiteId=38ae3bcd-9579-4fd4-adda-b42e1495d55a;
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=siemens.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AS1PR10MB5697:EE_|GV1PR10MB7978:EE_
+x-ms-office365-filtering-correlation-id: 92d820d0-fc43-49ea-2805-08dd0e0d036a
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|376014|1800799024|366016|38070700018;
+x-microsoft-antispam-message-info: 
+ =?utf-8?B?SWI0ZjVMeGdyUVhheThucThDK09pV0FTZnJYeUxKTTltR3hRalRHYmFkOW1X?=
+ =?utf-8?B?OThidjJEekp2RnhnQ0JuYlJURjZuWW5kbVdraFR0MnRCQWJpNFdlQnFVRW42?=
+ =?utf-8?B?SlBDa1FvR2lvVEZaNzJjSGV0OHJDcXp4ZU1UdkNBakVvYWR6eXk0OVJkbVU3?=
+ =?utf-8?B?bGNWVW05UDE0Qm5iUkMzemp5VmFTblltRFk5UktuL2kvUnpGWXd0TGY1NEd5?=
+ =?utf-8?B?M2lGUEFDSFhSZVpDN1QxelVuRllrNVB3ek9VeEdLcGhqZTNSY1I3eWp3WWph?=
+ =?utf-8?B?aWZDTUoxRW80ZVZWcGtvQ1haUTB2bzl1clNKcWExeUdFWUgrYjc1MUNRYnQ5?=
+ =?utf-8?B?SkRhRFRYWjFUY1RYVUhhTTZFQ05vV09PN1VDQi8ralk1MWlseGlhMG1sY3NP?=
+ =?utf-8?B?T3R2WnhyZXF4dzRSa1hBUXpTNFNsL3NjcjhpV2gxRHRKWE8wZ3JJeGc0Y1Ey?=
+ =?utf-8?B?eVpCVFN6LzlxUEZwV3YzcXJNRUxveS8yQzNaUnlKdTBMSHlmam5WdXllMHVk?=
+ =?utf-8?B?a1RlWW1WNEdqbk5vOUp2OTg0aXI2UklrNWVmcnZ6TUdyNGQ3ZUdobnBWeWhM?=
+ =?utf-8?B?YmljRy9hbXEvT3pLdHNMSWt2ZlVFdlNwd3hDVm1zUmllVEFJL0FudkRZN2JB?=
+ =?utf-8?B?MnVRQW9raDdWMWhlcWYzZXlVbEtZbVdVaGJ4Szl3bzd4dENqbXlLeUp0cnhM?=
+ =?utf-8?B?M0k2TFBDT0wwc3BwbDlsT0FYZlBSaXd6MEFGZ0tUWkVYb3JrRHhNaWNFK0p2?=
+ =?utf-8?B?LzZlMTdIemlOckxWdTdvODVSOU04MXlWMzJEYW1rVWR5OUZQZHl5MVpRMUti?=
+ =?utf-8?B?MVhPaUd0WXAyZllaUHBrUjBGMkwwN1NpSFFVeVJzZi9uYmZnV1QxYzFaVzRh?=
+ =?utf-8?B?M3hIbVdtbURnOWJQVXNlYUNuNFJhVW9PL05sYkhJcDJCZXcyUjJtamt4VWM0?=
+ =?utf-8?B?eGZPTE1iTklIS0NDRmQxYXhGbFhGVUl4Q3pMaVBmcVVxUjAzdDZETDRaVnB3?=
+ =?utf-8?B?QnlJTzdWdjR3WEpRYnVNQjJNOEl6OTJ2TGZzRWovZTR5OEprT0Y2OUVaOXha?=
+ =?utf-8?B?VHp6ZDZNTFFDcHJuamtTY2FJTTlHelpPNlVvbHE4NDExQTIzc2I1dTBIQ0Nq?=
+ =?utf-8?B?d3NzaHZLRGZnUXVNbU1DTGRmUEdFcVJITm4wRk9nVjFidnhubEpKNXpZelM1?=
+ =?utf-8?B?akJCWTNDcTdBMWtJZW5USE9VN2RZM1B6UXRucUNVaFNlUHZuNGcvaEZJZmg2?=
+ =?utf-8?B?cERFUjVqaXhhQy9VRVVNUFYySUMyb3Vid0JmSythc0x0NVEwcDhYYjIzZlVZ?=
+ =?utf-8?B?dWFSM3JITUczZkpZRG94TWZkd0xvTTlXR2NNYy9CWE1uTlJSVVU3UDFZMUdj?=
+ =?utf-8?B?SmhwMmNJbEVrVDJtWGNmTEhCMTkyZVpNMTJDZWF5eVRrY0ExWTJybW9qd2RY?=
+ =?utf-8?B?UlVkSExMQ3N5SS9JUnBvMm1wRFNOWStHcUFXZmdsR09icFRJbWdUV1pWTXAx?=
+ =?utf-8?B?WEFIamcwOWlHeWpQYytoYVEyVEpIKzVDdGNQMCtSZ0NSUVFWUGJESDB3UHlV?=
+ =?utf-8?B?N1F5MkZBU1hXczVSYVpWOXI1VnpYV0ZoL2hjZFVpd2U4UmhwY1RiWGN1Z0g0?=
+ =?utf-8?B?WnlUWUFtb0paL0ZKTndzeDMrY0ZmckE2eXNFVVRWdE04US95TXhSQkYraEsr?=
+ =?utf-8?B?aFN0S3lDd21USVg0aXQvMHZFeG02d2g2cTVlQ1V2MlJZaUdDTlROejlyek96?=
+ =?utf-8?B?QXNtNThBTU5xMmdqTlBsbWdaakJ1c2V1ZW5JNmZQVEd6QlRaTXl2cGJEUGtm?=
+ =?utf-8?B?ZDJQeHVBM0U4enRhbGdQSERzUThvck5TQllDMnkrQTlOUnZYMHI0SWF6clMz?=
+ =?utf-8?B?bzZ6bG5Ka3I2OStZSFZnMUxZekZOaFFLK3orYTY3cDNxd2c9PQ==?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?cEg0UnVsa3E5c1NqZlhsSU4vMWRpVjNhMjZMMU1rcXhhTDlWamF1UmlPOFFO?=
+ =?utf-8?B?Y1RsemRKZUZZM3JFWVhWM3d4THZsdGRZN0taSGpoem12dThxNDR4ZUROVGFU?=
+ =?utf-8?B?eU1rTVZrSkI0NnUzQzdQTUllWVZ0YjRYU3BrcWZzaXp5TmdCWGk3R2FQa3RD?=
+ =?utf-8?B?QjM3MVFyV3RiTEplcFlZdWxiS2RxUGJmSWhMLzZHL2ZLYUJQb3NMSm1BODBq?=
+ =?utf-8?B?K0RubWUrdnM0YS9lU1h5RGtabTR2dk12a241b2wrejdtRklScjlocDVJaC9Q?=
+ =?utf-8?B?UFVIVWZxSnJGTldMdkFjNVlEMkFtZ3Q0VnZhMVlPVC84VmhNOUI0OGlFTG9h?=
+ =?utf-8?B?WFNBaFdxb1dEc3FmdlJNaGh0QlpkWnMwT3pzRys3UjdhaG5lKzVFMU1jOHA4?=
+ =?utf-8?B?SGpBbllKWlBHSUhUYi9GbkNud3hSWms1QTBhSlhheXhEUWJ4Sks3Y09KeEk5?=
+ =?utf-8?B?bFEvSUdtT1VPZmlPSnVNUDJ1bmYyeWhHTTd1UFNKZXhmVnE1MkZhYm1JTS9n?=
+ =?utf-8?B?VGIvK29xOHZtRCtWS1lDT0JnWlJSWlJ3STNqclU4MEh2MGZDOEpOcUd1SnEw?=
+ =?utf-8?B?YjhCL1JIa2MxVUZsVHM2dFZjMC9RL3VJMVVMekRYbzYyd1NwWXlDZk51cG9y?=
+ =?utf-8?B?L09RdmtJSFZPdTM1aHRySExPVkk0SHQ1ekg0MHE2RzNIeTVKWTNIRlFXVmVm?=
+ =?utf-8?B?M1hpNE8vZXpJdVhKTjQ0WEYxaUtNUGlsdTdnRlVQQUgzVzJ1T01SaHg0ZEZI?=
+ =?utf-8?B?ZWczVGtJWkFNK2Q4TUFCR1B1L2dyS2hDaEFRdEhnL0g3ZWFmcElpVlhKUEcw?=
+ =?utf-8?B?R29DT3lkWHo0MGVuQVNhdVdzY1FvTkQzWWlickhsak5sYi9Hdy9YNkVvV3V2?=
+ =?utf-8?B?d2orT0lJSnh5OG9STlM3WGpmdWRtUEdFNWJraEVRblF4cDBPdlIrZzRVUmx6?=
+ =?utf-8?B?Sk9PaG9XVEhybXZVRklod3RuRSszdGZPWE8raVRpUU1jNlhIN09GMlZqL2s0?=
+ =?utf-8?B?RmhkY2g2b1hmN1BRWlUvc1pTWkVWWUJXcDJTYmFQUkc3dlpMNG5vQjlqSTNo?=
+ =?utf-8?B?MDM1Y09qSWY0NGJYQi9xZVpYMlgzMXRFV3JPa2dRdTY1QmhFTkNSUEZtc3NZ?=
+ =?utf-8?B?eUNJMFZ3U0Z5SkZZdVpVaHloTVViUUV0V1YyU0pjSmpzclJzVG9WNFdxTkNh?=
+ =?utf-8?B?QXA0UTZSOWk1Z3lTcjgwMzFYb01pazg0TnFCd3NLMkxaNFhTRC84TWVyWUpw?=
+ =?utf-8?B?ZFovYXRnUlpYREVNa0dSNE5LZE5KblZXRlVwcXpPQ0x2V0t0MlUvUEhXY2xn?=
+ =?utf-8?B?eDRTbUFLcnU2aElNeVNjcHBmVWJHa1BMYUpRdUthQy8zRmV0NDJsUHE3K043?=
+ =?utf-8?B?YjAzOXFZbkhNTnZkRExMbzMycGF1UG5SVWpsWU1CRTFlNGtERy9BK1E3ekk5?=
+ =?utf-8?B?Z01OdUpGeG11QkdiencxeWJrUkQ4ZWZXcmJ3b2MzY003b2RNbE9UeVdsZy8y?=
+ =?utf-8?B?T1U1b2doZE5mUFBCY0lpMmxQc1lTczVVazJTTkdtZy9oWXVhNEJuZ1VGYmhu?=
+ =?utf-8?B?cmNjNTVsWHlLOTN3YXpaUzhVUXZsL1dIUjh4eHVRT2hVbWkzRHZrMUU3RTRv?=
+ =?utf-8?B?QVZpTUdJUnVSZTRGdXg1TVgzMUJvQmJaMG5aVEtxb0FNdFdDbktTaXAzUTZr?=
+ =?utf-8?B?TVpKQzh5UTNsYWREa2Rnc2hVekoxdkU2Q2hZai8xeTRqbXZpczFSaHBmZ3RX?=
+ =?utf-8?B?RGptMWRneXBheGNDQytIb3RzTkdpL0ZNTVFQYVVKR3pSV2hUWEF3Rzdkd21D?=
+ =?utf-8?B?SFBXWCtKY0JucWptdGVsZHR6YjhYZ1lsTnpLQmF4cVNQcHRoZmpKcGRObkJX?=
+ =?utf-8?B?REhLQkFZdEpuUFpuYm83enZwdnM1enF2Z2gvdWVmZnhNUHp0M04wZDhXTUh4?=
+ =?utf-8?B?TUk4Z3R1UlVubS9QUVVBQm1IS3F0MzBRTXpMWno3TEpRcmpNL2NvRS9VMlBa?=
+ =?utf-8?B?bjYwWGU4YytuWHB0UHdtL1Z4RmVXSFBFSWdrcy9qbjVuRStNclphOHlEK0xQ?=
+ =?utf-8?B?c3Z2a1JlZ083Nmp4dG1ReEpSalBaRE9nSUN4OUJPSld6ck45bVg4b0M0UnR3?=
+ =?utf-8?Q?khbTLdqFhjaxgO+GfeO4Pdo/g?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Authority-Analysis: v=2.4 cv=atbgCjZV c=1 sm=1 tr=0 ts=67458535 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=VlfZXiiP6vEA:10 a=7UKGVgRVAAAA:8 a=omOdbC7AAAAA:8 a=pGLkceISAAAA:8 a=t7CeM3EgAAAA:8
- a=F7pGAyCFXEtAQ7mIUa0A:9 a=8Ox4Rr8FuIIqx5qz5MW0:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: GKPrXzj7w1bxa6y5sk7eD9G1e4e4YqXN
-X-Proofpoint-ORIG-GUID: GKPrXzj7w1bxa6y5sk7eD9G1e4e4YqXN
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2024-11-26_06,2024-11-25_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 phishscore=0
- adultscore=0 mlxlogscore=999 bulkscore=0 lowpriorityscore=0 clxscore=1011
- malwarescore=0 spamscore=0 impostorscore=0 mlxscore=0 priorityscore=1501
- classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
- engine=8.21.0-2409260000 definitions=main-2411260066
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 92d820d0-fc43-49ea-2805-08dd0e0d036a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Nov 2024 11:25:21.0878
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 1l0gDelIhDGsoF1c1SI2ZTT+LQ051gcqfK33LzARcF5UHWK4A6mpNoyDLUmM/YoDzZvJrlUTNsljBO1f1eVqcw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB7978
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Nov 2024 08:22:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114069
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Nov 2024 11:25:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114071
 
-From: Wang Mingyu <wangmy@fujitsu.com>
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Divya Chellam <divya.chellam@windriver.com>
----
- .../0001-src-Do-not-reset-FINAL_LIBS.patch                      | 0
- .../0006-Define-correct-gregs-for-RISCV32.patch                 | 0
- .../redis/{redis-7.2.4 => redis-7.2.5}/GNU_SOURCE-7.patch       | 0
- .../hiredis-use-default-CC-if-it-is-set.patch                   | 0
- .../redis/{redis-7.2.4 => redis-7.2.5}/init-redis-server        | 0
- .../lua-update-Makefile-to-use-environment-build-setting.patch  | 0
- .../redis/{redis-7.2.4 => redis-7.2.5}/oe-use-libc-malloc.patch | 0
- .../redis/{redis-7.2.4 => redis-7.2.5}/redis.conf               | 0
- .../redis/{redis-7.2.4 => redis-7.2.5}/redis.service            | 0
- .../recipes-extended/redis/{redis_7.2.4.bb => redis_7.2.5.bb}   | 2 +-
- 10 files changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/redis/{redis-7.2.4 => redis-7.2.5}/0001-src-Do-not-reset-FINAL_LIBS.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.4 => redis-7.2.5}/0006-Define-correct-gregs-for-RISCV32.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.4 => redis-7.2.5}/GNU_SOURCE-7.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.4 => redis-7.2.5}/hiredis-use-default-CC-if-it-is-set.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.4 => redis-7.2.5}/init-redis-server (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.4 => redis-7.2.5}/lua-update-Makefile-to-use-environment-build-setting.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.4 => redis-7.2.5}/oe-use-libc-malloc.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.4 => redis-7.2.5}/redis.conf (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.4 => redis-7.2.5}/redis.service (100%)
- rename meta-oe/recipes-extended/redis/{redis_7.2.4.bb => redis_7.2.5.bb} (96%)
-
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.4/0001-src-Do-not-reset-FINAL_LIBS.patch b/meta-oe/recipes-extended/redis/redis-7.2.5/0001-src-Do-not-reset-FINAL_LIBS.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.4/0001-src-Do-not-reset-FINAL_LIBS.patch
-rename to meta-oe/recipes-extended/redis/redis-7.2.5/0001-src-Do-not-reset-FINAL_LIBS.patch
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.4/0006-Define-correct-gregs-for-RISCV32.patch b/meta-oe/recipes-extended/redis/redis-7.2.5/0006-Define-correct-gregs-for-RISCV32.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.4/0006-Define-correct-gregs-for-RISCV32.patch
-rename to meta-oe/recipes-extended/redis/redis-7.2.5/0006-Define-correct-gregs-for-RISCV32.patch
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.4/GNU_SOURCE-7.patch b/meta-oe/recipes-extended/redis/redis-7.2.5/GNU_SOURCE-7.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.4/GNU_SOURCE-7.patch
-rename to meta-oe/recipes-extended/redis/redis-7.2.5/GNU_SOURCE-7.patch
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.4/hiredis-use-default-CC-if-it-is-set.patch b/meta-oe/recipes-extended/redis/redis-7.2.5/hiredis-use-default-CC-if-it-is-set.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.4/hiredis-use-default-CC-if-it-is-set.patch
-rename to meta-oe/recipes-extended/redis/redis-7.2.5/hiredis-use-default-CC-if-it-is-set.patch
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.4/init-redis-server b/meta-oe/recipes-extended/redis/redis-7.2.5/init-redis-server
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.4/init-redis-server
-rename to meta-oe/recipes-extended/redis/redis-7.2.5/init-redis-server
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.4/lua-update-Makefile-to-use-environment-build-setting.patch b/meta-oe/recipes-extended/redis/redis-7.2.5/lua-update-Makefile-to-use-environment-build-setting.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.4/lua-update-Makefile-to-use-environment-build-setting.patch
-rename to meta-oe/recipes-extended/redis/redis-7.2.5/lua-update-Makefile-to-use-environment-build-setting.patch
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.4/oe-use-libc-malloc.patch b/meta-oe/recipes-extended/redis/redis-7.2.5/oe-use-libc-malloc.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.4/oe-use-libc-malloc.patch
-rename to meta-oe/recipes-extended/redis/redis-7.2.5/oe-use-libc-malloc.patch
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.4/redis.conf b/meta-oe/recipes-extended/redis/redis-7.2.5/redis.conf
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.4/redis.conf
-rename to meta-oe/recipes-extended/redis/redis-7.2.5/redis.conf
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.4/redis.service b/meta-oe/recipes-extended/redis/redis-7.2.5/redis.service
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.4/redis.service
-rename to meta-oe/recipes-extended/redis/redis-7.2.5/redis.service
-diff --git a/meta-oe/recipes-extended/redis/redis_7.2.4.bb b/meta-oe/recipes-extended/redis/redis_7.2.5.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/redis/redis_7.2.4.bb
-rename to meta-oe/recipes-extended/redis/redis_7.2.5.bb
-index 5d64e9ba78..44fb22bc5e 100644
---- a/meta-oe/recipes-extended/redis/redis_7.2.4.bb
-+++ b/meta-oe/recipes-extended/redis/redis_7.2.5.bb
-@@ -17,7 +17,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://GNU_SOURCE-7.patch \
-            file://0006-Define-correct-gregs-for-RISCV32.patch \
-            "
--SRC_URI[sha256sum] = "8d104c26a154b29fd67d6568b4f375212212ad41e0c2caa3d66480e78dbd3b59"
-+SRC_URI[sha256sum] = "5981179706f8391f03be91d951acafaeda91af7fac56beffb2701963103e423d"
- 
- inherit autotools-brokensep pkgconfig update-rc.d systemd useradd
- 
--- 
-2.40.0
-
+DQo+IEkndmUgbG9va2VkIGF0IG52ZCBkYXRhYmFzZSB0byBnZXQgdmVuZG9yIG5hbWUgYXNzb2Np
+YXRlZCBmb3IgZWFjaCBjb21wb25lbnQ6aHR0cHM6Ly9udmQubmlzdC5nb3YvcHJvZHVjdHMvY3Bl
+L3NlYXJjaCAgDQo+IEZvciBicmlkZ2UtdXRpbHMsIGl0IHJldHVybnMga2VybmVsIGFzIHRoZSB2
+ZW5kb3IgbmFtZS4NCg0KVGhhbmtzIQ0KDQo+IEEgY29tcG9uZW50IG9ubHkgcmVsaWVzIG9uIGEg
+c3BlY2lmaWMgc291cmNlLCB3aGljaCBpcyBhbHdheXMgYXNzb2NpYXRlZCB0byBhIHZlbmRvcjpj
+b21wb25lbnQgcGFpci4gU2V0dGluZyB0aGUgY29tcGxldGUgbmFtZSBzaG91bGQgaGVscCB0byBh
+bnRpY2lwYXRlIGZhbHNlLXBvc2l0aXZlIENWRSByZXBvcnRpbmcgYmVmb3JlIGZhY2luZyB0aGF0
+IGlzc3VlLg0KPiBJdCBpcyBhbHNvIGludGVyZXN0aW5nIGluIG9yZGVyIHRvIHN1cHBseSBtb3Jl
+IHByZWNpc2UgaW5mb3JtYXRpb24gZm9yIG1ldGEtbGF5ZXJzIGxpa2UgbWV0YS1kZXBlbmRlbmN5
+dHJhY2sgb2YgbWV0YS1jeWNsb25lZHggd2hpY2ggcmVseSBvbiBDVkVfUFJPRFVDVCB2YXJpYWJs
+ZSB0byBwcm9kdWNlIFNCT00uDQoNCkkgaGF2ZSBhIGJhZCBleHBlcmllbmNlIHdpdGggcmVseWlu
+ZyBvbiBjcGUgYmVpbmcgZXhhY3QsIGVzcGVjaWFsbHkgZm9yIGZpcnN0IENWRXMgd2hlcmUgcmFu
+ZG9tIG5hbWVzIGFyZSBhc3NpZ25lZCBhcyB0aGVyZSBpcyBubyBmb3JtZXIgZXhhbXBsZS4NCkkg
+aG9wZSB0aGlzIGltcHJvdmVzIHdpdGggdGhlIG5ldyBDVkUgYW5ub3RhdGlvbnMsIGxldCdzIHNl
+ZS4NCkknZCByYXRoZXIgY2hhbmdlIHRoZSBDVkVfUFJPRFVDVCBvbiBmaXJzdCBmYWxzZSBwb3Np
+dGl2ZSBpbiBmZWFyIHRoYXQgc29tZW9uZSBpbnZlbnRzIG5ldyBjcGUgYW5kIHdlIGhhdmUgYSBm
+YWxzZSBuZWdhdGl2ZS4NCg0KUGV0ZXINCg==
 
