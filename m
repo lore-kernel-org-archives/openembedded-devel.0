@@ -1,160 +1,110 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41D05D690EB
-	for <webhook@archiver.kernel.org>; Thu, 28 Nov 2024 08:27:06 +0000 (UTC)
-Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com [209.85.167.178])
- by mx.groups.io with SMTP id smtpd.web11.90831.1732782409121945922
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5188D690F8
+	for <webhook@archiver.kernel.org>; Thu, 28 Nov 2024 10:39:06 +0000 (UTC)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+ by mx.groups.io with SMTP id smtpd.web11.92152.1732790345800209603
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Nov 2024 00:26:49 -0800
+ Thu, 28 Nov 2024 02:39:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=g1Mp43wm;
- spf=pass (domain: gmail.com, ip: 209.85.167.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f178.google.com with SMTP id 5614622812f47-3ea467fda32so341608b6e.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 28 Nov 2024 00:26:49 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=ERNQ0Tn4;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.53, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-aa51bf95ce1so125090666b.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 28 Nov 2024 02:39:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1732782408; x=1733387208; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=siRhoePEg6FxN6lucmfks7o0vKbWsevfcZ7MidV6br0=;
-        b=g1Mp43wmRbpK5YteSixzI87UE7QD6NVWbx55jUZp1PKVewnh+Ju+ti4KeTtRsiqrRo
-         UmpiGeubSBQ2mRBxX3hvBY/6BLNsCiQKSLMA237YKj88dEytxDdG5VEGF/UvbmuCbwWc
-         4NNdjtQ+N2scxIarQ+B4Uk/N6X767ot6zWw3ais5x8aJhL2X8niK13wLATUfSetQd6X9
-         Tcip2NMajDZMgAF4pVd9tWyjqffhR913SMZ1rwK8Y1lIYVoIe4hXfovGxUP0coiGp4Gh
-         ddwvxGV+Z2LX3ctGKGuE/dbjjHq23zemk87CYIoUNPfQLEyQ5uPqkI7tt2N8Fsx3PTf8
-         uIEA==
+        d=konsulko.com; s=google; t=1732790344; x=1733395144; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lBwh75UAb1eEsKA95Z02OVIziCqfemh+BbPoxMKBwlU=;
+        b=ERNQ0Tn41adWdgMvr20WLn1gUkHQBYVXVwBTLyL2AFiGgTEkx38HCT4z5hiLOg6e/f
+         VTara5OUXy9tr8cmS7kNEThpqwcw9e9Kh0Honbc6okLxHo6Fe5Sq4idf4DxO2pqO/7GN
+         AsMJCEC6ygRCgvJKdGEQEFIjW3wPw1aZviVaI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1732782408; x=1733387208;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=siRhoePEg6FxN6lucmfks7o0vKbWsevfcZ7MidV6br0=;
-        b=pKwwa8hNbX2OmNbtCFli5JItn5J4CDQSWKdETumt1we8HScpBLl4d/yL4lsycvWhr/
-         kVkxLJ1Bbtx8RoSWBTuO/sZw+Zz2FFx8Nh7nYEPyXGWqOKBRKo8vfzp1EV0uiI9i55Bj
-         f4IddUZgQRtonPwg3leZOB1VGuJVPI3Ty/iLKow7JUP1fjR63f0f8mBp+8AUw+Fu9yks
-         JHlgk0XDw2R9E879QW33qQqclt5AQLAuWX8UmAU/eMo84CyV1Xgb5RspcUQwn5w4H4bP
-         BzZKUG9o9wqpNPjqiC5s1rKf9u5LDwP0A6dNM9XpWMj1AGbjROehOdLqgZaiuWCa+ypx
-         ICSw==
-X-Gm-Message-State: AOJu0YzQRrXaSksXTfZZbm4GM+qre+zE9lrY96/FueZ1qfY/eJ+z5FKY
-	zGMSg4Emm9NVbFzw5n7Trvo5OXW1cNgTl/VXltG35XVVbaUXbyV051TgwCOOR3xOmp4YWMIS7xI
-	KA5Cwc6lYWI3PPmRvlhS1At71IG4=
-X-Gm-Gg: ASbGncuKfW2lI7jLnZPXTTFon0oVWxuYEJDk6t+XyRTUOYzpGJ3zHop30Jf64oHp68J
-	ccJmbiNIfrnL5FpK5JwDsWdiRspszhp3tNREwL+um9hdKtZJLzy3/ZYit+VI6OIU=
-X-Google-Smtp-Source: AGHT+IFgDn/MRcHEcg0tmRg1ZzkSSkddkeaooDW4PGm5u5KXdFdsoRmWdYdSS+JNhFO3IT2W9X6BRtkgqeUxsyqcDac=
-X-Received: by 2002:a05:6808:2010:b0:3ea:50a8:4587 with SMTP id
- 5614622812f47-3ea6dbd39d5mr6088786b6e.10.1732782408187; Thu, 28 Nov 2024
- 00:26:48 -0800 (PST)
+        d=1e100.net; s=20230601; t=1732790344; x=1733395144;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=lBwh75UAb1eEsKA95Z02OVIziCqfemh+BbPoxMKBwlU=;
+        b=IFx3MJdGb4AfcEn+H4GSK0EnV2o+R4Grpz0l/8PSoMZWNvJ+UqZGhJNliaLrUuudEd
+         xdXAInBy2nHp9o3dsSv8CL4g7HgkJGg5b9Q0hAj6EMlGZrTrGpiF/qrFMdk6mEF211cu
+         xvmdjFnukV3G4yDaW3wTKbgbZFEhZLgjdV6bqRC/Z9ICF+os8y2w9cmAJSAGEFTlQuWu
+         hyfu5CM53Ks6VFx9QTAeqk612wJ2PJFiNXNZr7vwRtZiCnsqwGpCRJpT9f++LauEyvYS
+         aLEmSHHrCphwvZK5J98pDCRb5Ao3S/K15G9kys1V3QjKePTcLEJv0V0FZa042FV9+L0j
+         +UkQ==
+X-Gm-Message-State: AOJu0YyaqcVWLkr6JjV9x4YGsFjq9LBzMz2vLPSt2UA3A+uAbIg+Dis8
+	JKMc66sWg/BqoQwQGAJaxIdaiXv4UEkAzY4YDmYD+hgXsKiDySzueYekCDNlv8cOBqH2lxotodM
+	6
+X-Gm-Gg: ASbGncvc88YNtQRcPBGHAANrRZKKHrKp9gyb3gThlvYCA4bbs0IiAIqbe7+F3tdgYoy
+	Z1A63K5SVdMFx2pKlBguuHZH1g1z1jZQRvb0Z+aVCkR9ghBROmGFCvvFKuiDvTAShqbQYwsQpl7
+	jf+opVHVwkgCnwlvP2w+df8UtvZLKuak7eFGt/EvfI+k9lLsgjYWPt/V1CJ+FeG0GXpwwiKFo76
+	T8ApKe50t2UZMECWLfytMQv94KNvUZbALmjD71EgYqRdDA3R99wJvalMWhcbuo9
+X-Google-Smtp-Source: AGHT+IHxIo3KjfgjWtGZSG0bqZOsERqyaRaLF5yycW4DzJ2487E6d7usqEeVvz0SBOQa+TfLieejcw==
+X-Received: by 2002:a17:906:846f:b0:aa5:ac9:ce5e with SMTP id a640c23a62f3a-aa580f569e5mr612629866b.31.1732790343980;
+        Thu, 28 Nov 2024 02:39:03 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-aa5996c11fcsm52227666b.39.2024.11.28.02.39.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 28 Nov 2024 02:39:03 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-charset-normalizer: Upgrade 3.3.2 -> 3.4.0
+Date: Thu, 28 Nov 2024 12:38:58 +0200
+Message-Id: <20241128103858.4052195-5-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20241128103858.4052195-1-leon.anavi@konsulko.com>
+References: <20241128103858.4052195-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
-References: <a3a50dd2-bb9a-45e9-a376-505dc7dfd04a@windriver.com>
-In-Reply-To: <a3a50dd2-bb9a-45e9-a376-505dc7dfd04a@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 28 Nov 2024 00:26:37 -0800
-Message-ID: <CAMKF1sqX_WXLe8+zrtQXWnm=_TRXCryrN-2_1OHP-_xiANL=dw@mail.gmail.com>
-Subject: Re: new objtool warnings with gcc-14.2
-To: Bin Lan <Bin.Lan.CN@windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000e9c8f40627f4d7b8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 28 Nov 2024 08:27:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114103
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Nov 2024 10:39:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114108
 
---000000000000e9c8f40627f4d7b8
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Upgrade to version 3.4.0:
 
-On Wed, Nov 27, 2024 at 7:29=E2=80=AFPM Bin Lan <Bin.Lan.CN@windriver.com> =
-wrote:
+- Argument --no-preemptive in the CLI to prevent the detector to
+  search for hints
+- Support for Python 3.13
+- Relax the TypeError exception thrown when trying to compare a
+  CharsetMatch with anything else than a CharsetMatch
+- Improved the general reliability of the detector based on user
+  feedbacks
+- Declared charset in content (preemptive detection) not changed
+  when converting to utf-8 bytes
 
-> Hi,
->
-> When building linux-yocto-6.6.y with defconfig on x86-64 with gcc-14.2 ,
-> I got the following error:
->
->      AR      built-in.a
->      AR      vmlinux.a
->      LD      vmlinux.o
->      vmlinux.o: warning: objtool: .export_symbol+0x332a0: data
-> relocation to !ENDBR: stpcpy+0x0
->      OBJCOPY modules.builtin.modinfo
->      GEN     modules.builtin
->      MODPOST vmlinux.symvers
->
-> This is caused by gcc. Refer to
->
-> https://lore.kernel.org/lkml/20240802093552.GG39708@noisy.programming.kic=
-ks-ass.net/T/
->
-> https://gcc.gnu.org/bugzilla/show_bug.cgi?id=3D116174#c6
->
-> The issue is fixed in GCC14.3 and GCC15.
->
-> Can we upgrade yocto gcc to 14.3? Thank you.
->
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ ...ormalizer_3.3.2.bb => python3-charset-normalizer_3.4.0.bb} | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-charset-normalizer_3.3.2.bb => python3-charset-normalizer_3.4.0.bb} (77%)
 
-Thanks for report. GCC 14.3 is not yet released however we can certainly
-cherry pick the patch into our patches for 14.2 until we upgrade to 14.3
+diff --git a/meta-python/recipes-devtools/python/python3-charset-normalizer_3.3.2.bb b/meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.0.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-charset-normalizer_3.3.2.bb
+rename to meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.0.bb
+index ca9a88ccfb..10f199db49 100644
+--- a/meta-python/recipes-devtools/python/python3-charset-normalizer_3.3.2.bb
++++ b/meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.0.bb
+@@ -3,10 +3,12 @@ HOMEPAGE = "https://github.com/ousret/charset_normalizer"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0974a390827087287db39928f7c524b5"
+ 
+-SRC_URI[sha256sum] = "f30c3cb33b24454a82faecaf01b19c18562b1e89558fb6c56de4d9118a032fd5"
++SRC_URI[sha256sum] = "223217c3d4f82c3ac5e29032b3f1c2eb0fb591b72161f86d93f5719079dae93e"
+ 
+ inherit pypi setuptools3
+ 
++PYPI_PACKAGE = "charset_normalizer"
++
+ RDEPENDS:${PN} += " \
+ 	python3-core \
+ 	python3-logging \
+-- 
+2.39.5
 
-
-> B.R.
->
-> Bin Lan
->
->
->
-
---000000000000e9c8f40627f4d7b8
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Wed, Nov 27, 2024 at 7:29=E2=80=AFPM Bin Lan &lt;<a href=
-=3D"mailto:Bin.Lan.CN@windriver.com">Bin.Lan.CN@windriver.com</a>&gt; wrote=
-:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.=
-8ex;border-left-width:1px;border-left-style:solid;padding-left:1ex;border-l=
-eft-color:rgb(204,204,204)">Hi,<br>
-<br>
-When building linux-yocto-6.6.y with defconfig on x86-64 with gcc-14.2 , <b=
-r>
-I got the following error:<br>
-<br>
-=C2=A0=C2=A0=C2=A0=C2=A0 AR=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 built-in.a<br>
-=C2=A0=C2=A0=C2=A0=C2=A0 AR=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 vmlinux.a<br>
-=C2=A0=C2=A0=C2=A0=C2=A0 LD=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 vmlinux.o<br>
-=C2=A0=C2=A0=C2=A0=C2=A0 vmlinux.o: warning: objtool: .export_symbol+0x332a=
-0: data <br>
-relocation to !ENDBR: stpcpy+0x0<br>
-=C2=A0=C2=A0=C2=A0=C2=A0 OBJCOPY modules.builtin.modinfo<br>
-=C2=A0=C2=A0=C2=A0=C2=A0 GEN=C2=A0=C2=A0=C2=A0=C2=A0 modules.builtin<br>
-=C2=A0=C2=A0=C2=A0=C2=A0 MODPOST vmlinux.symvers<br>
-<br>
-This is caused by gcc. Refer to <br>
-<a href=3D"https://lore.kernel.org/lkml/20240802093552.GG39708@noisy.progra=
-mming.kicks-ass.net/T/" rel=3D"noreferrer" target=3D"_blank">https://lore.k=
-ernel.org/lkml/20240802093552.GG39708@noisy.programming.kicks-ass.net/T/</a=
-><br>
-<br>
-<a href=3D"https://gcc.gnu.org/bugzilla/show_bug.cgi?id=3D116174#c6" rel=3D=
-"noreferrer" target=3D"_blank">https://gcc.gnu.org/bugzilla/show_bug.cgi?id=
-=3D116174#c6</a><br>
-<br>
-The issue is fixed in GCC14.3 and GCC15.<br>
-<br>
-Can we upgrade yocto gcc to 14.3? Thank you.<br>
-</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Thanks for repor=
-t. GCC 14.3 is not yet released however we can certainly cherry pick the pa=
-tch into our patches for 14.2 until we upgrade to 14.3=C2=A0</div><div dir=
-=3D"auto"><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
-px 0px 0.8ex;border-left-width:1px;border-left-style:solid;padding-left:1ex=
-;border-left-color:rgb(204,204,204)"><br>
-B.R.<br>
-<br>
-Bin Lan<br>
-<br>
-<br>
-</blockquote></div></div>
-
---000000000000e9c8f40627f4d7b8--
 
