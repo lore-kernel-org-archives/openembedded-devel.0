@@ -1,93 +1,117 @@
-Return-Path: <dev@g0hl1n.net>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C1D3D6D242
-	for <webhook@archiver.kernel.org>; Wed, 27 Nov 2024 21:48:53 +0000 (UTC)
-Received: from out-177.mta0.migadu.com (out-177.mta0.migadu.com [91.218.175.177])
- by mx.groups.io with SMTP id smtpd.web10.82582.1732744128784809907
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DE752D6D255
+	for <webhook@archiver.kernel.org>; Thu, 28 Nov 2024 03:15:44 +0000 (UTC)
+Received: from mail-oa1-f43.google.com (mail-oa1-f43.google.com [209.85.160.43])
+ by mx.groups.io with SMTP id smtpd.web10.87265.1732763735415161945
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Nov 2024 13:48:49 -0800
+ Wed, 27 Nov 2024 19:15:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@g0hl1n.net header.s=key1 header.b=YvTAPxB4;
- spf=pass (domain: g0hl1n.net, ip: 91.218.175.177, mailfrom: dev@g0hl1n.net)
-Date: Wed, 27 Nov 2024 22:48:41 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=g0hl1n.net; s=key1;
-	t=1732744126;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=1CGr7Moz3mZ/guzg+pEmvmXuMjT9MDy7RT0eLnhpdtg=;
-	b=YvTAPxB4c5jvTyOkG8vHDMw8C4LBUAMHNLfEW8UNAh+g1jtQbGdTU+eTTLs7OZYnOjEShH
-	bRb4ajdhMEk9869zT6XUKNfX2RdWaIIYIn7Y2ax0TOYSR6VxqLgIpgX4FM2YoVleEvIQiV
-	8wvlm/X5psD85mxoHMv/RcdWLn8AWTg=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Richard Leitner <dev@g0hl1n.net>
-To: wangmy@fujitsu.com
-Cc: openembedded-devel@lists.openembedded.org, leon.anavi@konsulko.com
-Subject: Re: [oe] [meta-python] [PATCH 29/46] python3-moteus: upgrade 0.3.72
- -> 0.3.73
-Message-ID: <kbwywvujpwobtcitjixqudv3nxgrsqoz5qu4jol7t3mijtdb7n@gf6o3adxdc7f>
-References: <1730874660-2364-1-git-send-email-wangmy@fujitsu.com>
- <1730874660-2364-29-git-send-email-wangmy@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=HCKh8QzA;
+ spf=pass (domain: gmail.com, ip: 209.85.160.43, mailfrom: schonm@gmail.com)
+Received: by mail-oa1-f43.google.com with SMTP id 586e51a60fabf-296539a58b4so276152fac.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Nov 2024 19:15:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1732763734; x=1733368534; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ajYmSb8jAPHexdMvzyby/+Y8bVLX9/PBWFY3sPT2Dgw=;
+        b=HCKh8QzAASXgEf76PRiKVfwhfC/lyyOC/wppKksgQXuMzgSsjMMSVJ9EDuVmOqXpvk
+         fSw1HdppkFQnblZptUQRr462cPUSK5JPLhL8CLT8oH1xl5+55ejXSxjw2SFdFbbdN704
+         DzV1gF/H564S7GN9Z7+MtyRVRuGkmxvzzLbvGIaDdn1O619tVZVfPgOP77KgHDeye6/M
+         IM5TQkdwJ0OJbFobUQ/yTBvDjTw5ffKECaGN9rhCCVwgRJjmHEeJrBNENLNEJn8bBKlE
+         zIngZZJNpkzOmX+9sYUkikGqZXhMzZjN0+ubNFn2gvRTJrKcKWMacoLGVHXk73bQkdY8
+         Bc4Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1732763734; x=1733368534;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ajYmSb8jAPHexdMvzyby/+Y8bVLX9/PBWFY3sPT2Dgw=;
+        b=asKqNSm808h7AUaU69kyqWqgpAcWZrKZLQKESDF+Pqto4Pae1uoJ8jZHRLvqiganup
+         uxAXqcfrmrNovMKTk+WvRz8fuWDDxb8ZNKerwBPafuVDUI+UF63O93qExFnvOh+HEhY9
+         y+5tP1J+mTfBtTHfrAzlE8dUbapqV3gMZLrH6vRGQlb/hBguOkMNZe+6tlaiv/gA/xEN
+         mHihcSiYoOrmz1w5qy/LG+AZSzVhPjdGxsyIAeb9UuWUTxOa/WtocgnTRP+ulNULrJov
+         graLMRRzC9LhTYKsloFR4Gps/jFSBgSbUDv7hA3yCcpl1pFuCDiTMn6tp88A/yht4vWe
+         3+yA==
+X-Gm-Message-State: AOJu0Yz9zzVF+Y8rtJgo5iG3y8eBdJVhSb0rMXjNASanZfzdHGqiDs2C
+	ltNGr5X50PG7N8e8gQPFoLCRJk+9AA46dcFL5uC9yFdUE32TIKxdgzmBxoYak9H4L80cnig0pVD
+	681akhG3kAuj+NRnZ+lDvfFhh/5g=
+X-Gm-Gg: ASbGncuBM99QTSeJRG0yFuSRXCe7WuKzNZ3K44mWAjCYiSiQA6eRmaQriwIL1h2QLmx
+	MTtwUyO15isx84sN+C+yu/hyCUAvkPw==
+X-Google-Smtp-Source: AGHT+IE7b6X5qRDWQCGWcYlr7hsBQdG1NmuWQEVLSRqf3t6KWO4IWxJ6gk73X8OmTuDVttFV/x7+JNz+k3UkYBK2/rg=
+X-Received: by 2002:a05:6871:e7c4:b0:29d:c8fd:cccd with SMTP id
+ 586e51a60fabf-29dc8fdf378mr4792195fac.2.1732763734195; Wed, 27 Nov 2024
+ 19:15:34 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <1730874660-2364-29-git-send-email-wangmy@fujitsu.com>
-X-Migadu-Flow: FLOW_OUT
+References: <20241126064854.1685359-1-schonm@gmail.com> <20241126064854.1685359-2-schonm@gmail.com>
+ <CAMKF1srK0ZGNLYOk=Syc=ucNjbRC=0_Dq4stC-vWkUxomVGbjw@mail.gmail.com>
+In-Reply-To: <CAMKF1srK0ZGNLYOk=Syc=ucNjbRC=0_Dq4stC-vWkUxomVGbjw@mail.gmail.com>
+From: "J. S." <schonm@gmail.com>
+Date: Wed, 27 Nov 2024 22:15:22 -0500
+Message-ID: <CABTo8gDUPOseb9=PQbuYUfp6ZOtAeTf+er4XE1S2weZ_M7MD6w@mail.gmail.com>
+Subject: Re: [oe] [meta-xfce][PATCH 2/2] xfce4-settings: ignore some warnings.
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Nov 2024 21:48:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114099
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Nov 2024 03:15:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114100
 
-Hi Wang, Hi Leon,
+Agreed.
 
-I just stubled across this patch as I was working on updating moteus
-too. Leon, I've put you on CC as you also updated moteus once and therefore
-may be interested in this topic.
+https://patchwork.yoctoproject.org/project/oe/patch/20241127005545.86128-1-=
+schonm@gmail.com/
 
-Wang, unfortunately it seems you mixed up the subject and content of this
-patch as it updates python3-marshmallow, but has python3-moteus in the
-subject.
-
-And another point I came across was that moteus python packages >=
-0.3.73 are no longer providing source distributions on pypi.org or
-pythonpackages.org. Therefore this patch would result in a broken
-fetch for python3-moteus if it really was updating moteus.
-
-As I found no references/reasoning for the missing source packages I
-opened an issue upstream: https://github.com/mjbots/moteus/issues/77
-
-regards;rl
-
-On Wed, Nov 06, 2024 at 02:30:43PM +0800, wangmy@fujitsu.com wrote:
-> From: Wang Mingyu <wangmy@fujitsu.com>
-> 
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  ...hon3-marshmallow_3.22.0.bb => python3-marshmallow_3.23.1.bb} | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-python/recipes-devtools/python/{python3-marshmallow_3.22.0.bb => python3-marshmallow_3.23.1.bb} (92%)
-> 
-> diff --git a/meta-python/recipes-devtools/python/python3-marshmallow_3.22.0.bb b/meta-python/recipes-devtools/python/python3-marshmallow_3.23.1.bb
-> similarity index 92%
-> rename from meta-python/recipes-devtools/python/python3-marshmallow_3.22.0.bb
-> rename to meta-python/recipes-devtools/python/python3-marshmallow_3.23.1.bb
-> index 269522dce..715439588 100644
-> --- a/meta-python/recipes-devtools/python/python3-marshmallow_3.22.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-marshmallow_3.23.1.bb
-> @@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "\
->                      file://LICENSE;md5=27586b20700d7544c06933afe56f7df4 \
->                      file://docs/license.rst;md5=13da439ad060419fb7cf364523017cfb"
->  
-> -SRC_URI[sha256sum] = "4972f529104a220bb8637d595aa4c9762afbe7f7a77d82dc58c1615d70c5823e"
-> +SRC_URI[sha256sum] = "3a8dfda6edd8dcdbf216c0ede1d1e78d230a6dc9c5a088f58c4083b974a0d468"
->  
->  inherit python_flit_core pypi ptest
->  
-> -- 
-> 2.34.1
-> 
-> 
+On Tue, Nov 26, 2024 at 10:23=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wrot=
+e:
+>
+> On Mon, Nov 25, 2024 at 10:49=E2=80=AFPM J. S. via lists.openembedded.org
+> <schonm=3Dgmail.com@lists.openembedded.org> wrote:
+> >
+> > Signed-off-by: Jason Schonberg <schonm@gmail.com>
+> > ---
+> >  meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.18.3.bb | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.18.=
+3.bb b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.18.3.bb
+> > index 7bfcb492f..f9620d85d 100644
+> > --- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.18.3.bb
+> > +++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.18.3.bb
+> > @@ -11,6 +11,7 @@ REQUIRED_DISTRO_FEATURES =3D "x11"
+> >  SRC_URI +=3D "file://0001-xsettings.xml-Set-default-themes.patch"
+> >  SRC_URI[sha256sum] =3D "2db9e99be503280739a08779503bdf11db8b9db9851c3a=
+981deb449002f3f1a1"
+> >
+> > +CFLAGS +=3D " -Wno-deprecated-declarations -Wno-implicit-function-decl=
+aration"
+>
+> Some context around build failure would be good to document either as
+> comment or commit msg, that will help in removing
+> these options in future when code is fixed.
+>
+> >  EXTRA_OECONF +=3D "--enable-maintainer-mode --disable-debug"
+> >
+> >  PACKAGECONFIG ??=3D " \
+> > --
+> > 2.43.0
+> >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#114059): https://lists.openembedded.org/g/openembed=
+ded-devel/message/114059
+> > Mute This Topic: https://lists.openembedded.org/mt/109786213/1997914
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[raj.khem@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
 
