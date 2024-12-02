@@ -1,454 +1,1048 @@
-Return-Path: <Qi.Chen@windriver.com>
+Return-Path: <Jiaying.Song.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE211D4979E
-	for <webhook@archiver.kernel.org>; Mon,  2 Dec 2024 05:35:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8A3BD10DB5
+	for <webhook@archiver.kernel.org>; Mon,  2 Dec 2024 07:51:47 +0000 (UTC)
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.167853.1733117743351664732
+ by mx.groups.io with SMTP id smtpd.web10.168431.1733125897467924474
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 01 Dec 2024 21:35:43 -0800
+ Sun, 01 Dec 2024 23:51:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=2066b44c8d=qi.chen@windriver.com)
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=2066993530=jiaying.song.cn@windriver.com)
 Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4B251rDL016411
-	for <openembedded-devel@lists.openembedded.org>; Sun, 1 Dec 2024 21:35:43 -0800
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 437xv7segv-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Sun, 01 Dec 2024 21:35:42 -0800 (PST)
-Received: from m0250810.ppops.net (m0250810.ppops.net [127.0.0.1])
-	by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 4B25ZgWI031678;
-	Sun, 1 Dec 2024 21:35:42 -0800
-Received: from nam02-dm3-obe.outbound.protection.outlook.com (mail-dm3nam02lp2047.outbound.protection.outlook.com [104.47.56.47])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 437xv7segu-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Sun, 01 Dec 2024 21:35:42 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=laVyJvDnSPWeACQfpEsxSxHxWAIFtMd1cafYyox3xq9O61DdcC350mktBesbaQ4F0G27h6qVDJdNZiw0U1/4RQVj/Yw9I6T7kPgTF60rQuDGwJZiccHSfUn86FggRz6mGjIjMbdQc3SI833zEjgYqkDP5dcYxPgpRj9pPRWMNYqZOY/dlLxmrVcwZC2DWWE7RoUXf5CYyL/hgWac9ojJ4PpG9S8EMNm8Yg7KTPs0m9l7gC6lbSCnZRr6U+CqP26YfMwZlOYfgHdBzjttUZqkSc1PBQ9BGYCz0PLgd8kt/S4zPnlWRip6E+qwq21HM0NIHPtJ0jKHs4l2kmYNqIjwdw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HsKb1HK4zRbXVnnIqcSCDMzSnCQ2F0GeFxX5RkRdrbg=;
- b=EJFZQx/axfsr5+XeKhH8/+3zCnc32fEyBoKxP/uM6/LZT0Ql/ijdoI9dbdmOLHjZHM2HgJ3IDYNkLHsmRy2YYBJZ+tj/rg2JzpxDpruiJO1BPBgAgWNaJoRnDROPuw7d7hjWt/G5P5MTe14cLbUGce+1jOjlTKSHwnhzsJaThSulcZvwPZKvqD4UrMMh7Mmyygln77eaEVNi+htK9o/QahNiCgU0CgXdgZp12BynWhTJsECtdnSQHe7DXeY49EHmoG+0CCXWWM8ZU4Aka+IUX1PdwEr4XIxGr2gOKNZ8R2GSaAyBhBMqa4LpdYeMV6WG5K96V7Tg0ZycdGVGI9b6Xg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from CO6PR11MB5602.namprd11.prod.outlook.com (2603:10b6:303:13a::5)
- by PH7PR11MB7641.namprd11.prod.outlook.com (2603:10b6:510:27b::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.18; Mon, 2 Dec
- 2024 05:35:27 +0000
-Received: from CO6PR11MB5602.namprd11.prod.outlook.com
- ([fe80::a7e3:721d:9cec:6093]) by CO6PR11MB5602.namprd11.prod.outlook.com
- ([fe80::a7e3:721d:9cec:6093%4]) with mapi id 15.20.8207.017; Mon, 2 Dec 2024
- 05:35:27 +0000
-Message-ID: <abaf94d8-0f87-4011-81fa-e2aa688e011d@windriver.com>
-Date: Mon, 2 Dec 2024 13:35:22 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH 1/2] protobuf: add abseil-cpp to RDEPENDS
-To: peter.marko@siemens.com,
-        "peter.kjellerstedt@axis.com" <peter.kjellerstedt@axis.com>,
-        Yi Zhao <yi.zhao@windriver.com>, Yi Zhao <yi.zhao@eng.windriver.com>
-Cc: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-References: <20240922073618.1359707-1-yi.zhao@windriver.com>
- <DB5PR02MB102135305A71D2997E959868FEF6F2@DB5PR02MB10213.eurprd02.prod.outlook.com>
- <202aa218-94f5-46bb-a514-6118ad457078@windriver.com>
- <DB5PR02MB1021337FE7EFF0AE0B9BC1CB7EF772@DB5PR02MB10213.eurprd02.prod.outlook.com>
- <AS1PR10MB56979DF6B1DA72BE50B9D217FD772@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
- <180D44A5BB7DBFF8.7301@lists.openembedded.org>
-Content-Language: en-US
-From: ChenQi <Qi.Chen@windriver.com>
-In-Reply-To: <180D44A5BB7DBFF8.7301@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-X-ClientProxiedBy: TY2PR0101CA0039.apcprd01.prod.exchangelabs.com
- (2603:1096:404:8000::25) To CO6PR11MB5602.namprd11.prod.outlook.com
- (2603:10b6:303:13a::5)
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4B27D32q009559
+	for <openembedded-devel@lists.openembedded.org>; Sun, 1 Dec 2024 23:51:37 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 437xv7shaa-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 01 Dec 2024 23:51:36 -0800 (PST)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Sun, 1 Dec 2024 23:51:35 -0800
+Received: from pek-lpg-core1.wrs.com (128.224.156.132) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Sun, 1 Dec 2024 23:51:34 -0800
+From: <jiaying.song.cn@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <changqing.li@windriver.com>
+Subject: [meta-python][kirkstone][PATCH] python3-aiohttp: fix CVE-2023-49081/CVE-2024-30251/CVE-2024-52304/CVE-2023-49082/CVE-2024-27306
+Date: Mon, 2 Dec 2024 16:49:23 +0800
+Message-ID: <20241202084924.2064149-1-jiaying.song.cn@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO6PR11MB5602:EE_|PH7PR11MB7641:EE_
-X-MS-Office365-Filtering-Correlation-Id: bd2c95cd-c4c0-4bff-bd46-08dd1293205b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|4022899009|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?Z0d4MFBhVkNsRWNjUVhSNFlOaHU0MFhlWkd6Y3RNS090N0N3U0pBdE40Qkhh?=
- =?utf-8?B?dllQeHN3ZU5kWnBlT1lldzNsaXIyR1BIVHF1N0ZIejF5ZkpCemI2M1BzaS91?=
- =?utf-8?B?aklWSEpOclo1STRTRDh4RE1VbG9KbDdnTkN1dnZuVkxIQ3N6eHExVTZRMTlu?=
- =?utf-8?B?bDZtWUZKZmxtWEUvRUZlQ1lyM25zMXlTd2psZkxRYjQvMTh2MlVWbnExbGJK?=
- =?utf-8?B?cnR4TUlUUWFrTXBYUnBnWmQ4cU9oWGFhaGR5NVZ5c09TWkRUWHBldWhuczlP?=
- =?utf-8?B?VVRQY3pRM1p1MmhwZGQ3VEYybE9HUFZvazJhTHBaWURnQkpQcUZiRElzemlj?=
- =?utf-8?B?Qm5yMGFrcjY4L1hNU3dkVmU0ZG5kMCtaa2t1MHluOFVQcXBrSjZ0UG9tWmZt?=
- =?utf-8?B?ZGpsb0s3aGxQNXhkM2s5YkdMNit2MHFNTlpkWnhRUHc3MGFGK2RCNWRFRzll?=
- =?utf-8?B?TjJHQzh0TFlEak01ZkpyVE16Ukg5Yk5RcVpvNnFXQmh6d2YvQ25iT3hhKy9Y?=
- =?utf-8?B?M2d3NXBEeFJLektJaDkxOTErQXM3UW8vb3NTNDJaMW16SVpTdThIcWFSWWMy?=
- =?utf-8?B?Nm1Ba2RjeHgyK1IyNDBYbWI1RGNvNmZqQVlFU0hSRFg1aHNyZGZHTTR0Y1R1?=
- =?utf-8?B?YmZXMnVSUUY5VzZKYzBqdjRLMmg4bFVKU2p4c2dZdVhoanE2cmVYRDF6SzMy?=
- =?utf-8?B?TnVQUXNlMWgvbFAxVXZ0dExNYStXMzUwejkwL0RaS3YxdTN6YlFXZmU3dkhX?=
- =?utf-8?B?aFFJZVk0UmtVQXNKNzhXMFdGZnJkQnBwR28rRDF3aUdEWTZmNjluNVVhYXpu?=
- =?utf-8?B?VUV1ZENRZzhOS09PdjZMZ1RZRFY3ZEtUMDQrS1gxdkRyTTJRUnJJNm44ajhu?=
- =?utf-8?B?NHhCY2xiY3VSaVJ5SEJYSjQ0WkI5NDZRRGc0S2dMRUZwajJEMTV3RTBEa1Ry?=
- =?utf-8?B?eEdqRm41ZHhMSDd5aWZSdlY2L3M1Z2c4RTZveXJ3ZFRBVEFYallSeVR2UmhS?=
- =?utf-8?B?TFNFRGl2MW54VWFQR20yZ0p3STB3MytCUFZVVUVQNWErQ3J1L0xOYmhZN1Qz?=
- =?utf-8?B?NGNHenNEeFc3MEtvbXlWTzYwaXhINGRCY0kzVWk5eEd4NGRzQ2JTUyswM0FV?=
- =?utf-8?B?TngvYkZiV2ZQVDRZYzlheWppaU1JNmF4MjhFQ0hhY1pFeWx0YTNmeDVVMVU0?=
- =?utf-8?B?Mk1oV3hOS0RZTTE3OVhTVjN2T3AvY3hYYk12VCtiRTNtbXlmR2t1SDMyMXAv?=
- =?utf-8?B?N1JESjJCQlk5eWVnWUVKQjdhNjk1UXhyZFZqcjFTT01lSU0wNjBUU2IyS0FZ?=
- =?utf-8?B?Z2l2YlFaMnM4SlJSZ2JiNmYzU2lyaGd3VDROazF4L2xzazBBakFNaG1aRW1D?=
- =?utf-8?B?cU45TXZ0OGFhb2g0UjlwUGpaWUsvMWdkdElQZ0VkTVpzSFBxWVlvSG5HWC92?=
- =?utf-8?B?WFgvS2I3eGFnZ2VFSGVTdzcrVjluK3E1cUQvcE9Qb1hJT2QrRVUreENqeWR4?=
- =?utf-8?B?WmhrSFZYU2ZjcWQ3blBQZk8rR21kSlZpeFVCbzc5T3pxMlowMEE5T2RUckhu?=
- =?utf-8?B?UnZhTEhha3J5dE9mZ09xd1Q4NUVZZjhxUk0vbTRQYThrTjk4NUNlM1Q4MTZ5?=
- =?utf-8?B?ek8vR3pwT1hoY05zWmZNOFk4WVk1QjZnbm1XVGpBMkMrZHhtUDB6VjhnRHJU?=
- =?utf-8?B?QzVES3h3NnRYd0owdnMrbndGSGhKNytURkdwVlVoYWlSS1lpNys2V2hnMnRY?=
- =?utf-8?Q?yU65BF+X8b7nRB5cn8=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO6PR11MB5602.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(4022899009)(366016)(1800799024);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?TDdHRnZ2Zk5LWlArQzBmZGlFOTR3ODUwR3YrWTd5UUdXcXZKSzd1KytoN3dp?=
- =?utf-8?B?TFlhRmZucDhURDRGaUhTdjVSR3Z2UG5sT0libmxSdmlidGNKVmJKN1QrdHhX?=
- =?utf-8?B?TTFkY2E1U0l2MnpxRTVJMGFyRVpGOHpMSmVxYmVUVjE1VnFXRFRTKy9IUlpH?=
- =?utf-8?B?VTNoWnpXN1Jvc09pRGhiSmVGRlB1Si91bmZGdlRvUUdST3NzTEIrQ1pxRm16?=
- =?utf-8?B?b09QcFAxdHR6SEI5UlV5Y1dCSzBNZ3NKanFWbDRGaVBhWUxKcWFJUW1STVg1?=
- =?utf-8?B?cGIyWXRTRVRRMWdZcVZZSDZOSkpqVFhwOHBhdVpZZHFwZHZFc0hPQmZZeVpn?=
- =?utf-8?B?dGpXaHB4UWRtcER3MmI5TEFaSk04Uk5LeVdoQlJmQWYzSjlKZUFCSkVxMmFC?=
- =?utf-8?B?Q2ZhSWFqVHJpeExsMGRZVXJFZkgxY1FNZE1DaEc4R0FRODIwcllGY0FnQ25p?=
- =?utf-8?B?Q2xUaWEzY2VtamtKYURQMWxMS1Ayc3dZNkdBb085Y2RSTzlkbjJaSDB5M2Va?=
- =?utf-8?B?bWRYaFJqUStBYXFGS1JWdkxGTzFkSUErZ0dFVy9xK25hTEJXNzR5OTIzMmEz?=
- =?utf-8?B?Wm90K1ZIVGtZRlFPNFZ6RktFN040L2VlV3R3bVphcVZ6MWRyZFRZRlVJOXRy?=
- =?utf-8?B?SDRwc254U3laR0lZZ2NONGphdy9WWTJ6alY0c00wM2JSR3dWcDEwa2V2eTda?=
- =?utf-8?B?UjZNWXg5a1djbmQ3bmE1NmNPMk9WdkFFeFVMTG0yMUpDNnZwczdtR2dMOHQv?=
- =?utf-8?B?ZytxbXIwYTNBTTMyWEhZWndVRkx5MlJ0UlBEVjV2Sm8yaEZxYzY1M29VL1hK?=
- =?utf-8?B?cUwzMXhTVXFDUjNVRFlxWXZHMTJieVVlbjRDa2hKK2xwSEVMeWdrVXoyQ3BI?=
- =?utf-8?B?c2xFZVV6WCtDbWloZjNsa2FwMVF0dXpSQTZ6YkMyTngybjZpek9rQ1NXcUxG?=
- =?utf-8?B?VVRxUGI0L25UblVvcEcwelp3TDFmTjgzSDBHVEdtSU51N0drQnhrZkhkTGMr?=
- =?utf-8?B?YmF0cytBbm5PbVdhZ2UrdzUyVWdSbklaU08yanc2aW55VXN2cFprRm9mTXg1?=
- =?utf-8?B?YUJLb1FXYmM5M1FFR2dYS3IzTnp0Nnh4Rjg1WTNCakdFZmJEYWNBU2V3YTI1?=
- =?utf-8?B?UUgrUE03Vld4WHc5N25nSkwyT0J2eXJScnB1V1BEK1cza2JVMEQ4S2F3VUxI?=
- =?utf-8?B?dFFsOE5kMEdpc01mQXNzSmp3VWRRbFNtWFhkVzY3OXRiYXd1cUtXem41Tzkw?=
- =?utf-8?B?ZGE3cE1FSmJyNDc0V3JudkpVamlaZFozSUdhS2hQUmY5bG83NXBKZXZocllR?=
- =?utf-8?B?YXpma1l4aUFMQmNlZkRwd1BpSit1VEQxa2FhaHNIR2dsT0hGU3VjdDVkNGF6?=
- =?utf-8?B?ZUJwMGV3TEhiclBlMThpS3ZOS0Q3bWlxbnl6OVBzU1VGSkFoTnN0SHE2cEZ1?=
- =?utf-8?B?SFpyd3kxN3hXNVV1cDc0NXBMS2ozdW5iZEpQay8zSTI0dXVHRHNjWWU5aU1L?=
- =?utf-8?B?SW05WmFVWjB2N1dvUjVob1Y0c01GM0xpenJUNVNBNGJCb3c0NUxxOGNKSkpK?=
- =?utf-8?B?cmo1RCszcnlWK2dIMjJpZ0U4TkFuUHpDdXNSMThjRFFGcXlQNDBJTmoyUUkx?=
- =?utf-8?B?UnlOdzJqSkQrTmNjMzAyK2QrWEdVdWN3YndFSEdkMzZrbTVJT2ZPNTV6VXFq?=
- =?utf-8?B?TTEwTktFMjNsK3lRRDRNa1dKMFhHZFdWenNYUmIreDB6dnJNUHIxNmpCNysr?=
- =?utf-8?B?b3lXRHMxK1dzL3ZWZVFhQVEvRmZQM01XK2NBcW0rZWtOOWN0Zlg1NTZkQTJl?=
- =?utf-8?B?d1dPWHM5OEQxTEhOT0JHK1pQTitSa2p6UDN5c2NCUkpFVElRTGcvWTE3ZWw0?=
- =?utf-8?B?WjNMOFZya3B3MXVoQzIwTFQzMXljbjdVbEJ3WXJaZEg1M3dIcDRqVVhLYXJm?=
- =?utf-8?B?NUppT1U0TFBlQ0VVd3doWDE3b0VBeTdVd2hMejU3dGIvYW53SUFuSnhSQlN1?=
- =?utf-8?B?RVREalRHb1prdktEd1RlRnJkS0RGdTJuWW0vV0wyK3gvaEEzdnJ1b2VaMEU5?=
- =?utf-8?B?WU1UTWFVRlU2UVRycktmaFliMVJqVE8zMUNKM1pseGhyRVE2aDFGcjJCTkRM?=
- =?utf-8?Q?CETL0bPgpeSnX3QBZwIffSrqV?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bd2c95cd-c4c0-4bff-bd46-08dd1293205b
-X-MS-Exchange-CrossTenant-AuthSource: CO6PR11MB5602.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Dec 2024 05:35:27.1020
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7szxgyFVzKlDpJ+3/qJ8g87uooYBXlia1afQw675TwkrEv1K+MaWzj6hk5+rXv/Q8+lcN0T1TaPIoqrsc3IRGQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB7641
-X-Proofpoint-GUID: DtSIIWiDpr_gGZRWo6BXRkObFr75_92k
-X-Authority-Analysis: v=2.4 cv=RpA/LDmK c=1 sm=1 tr=0 ts=674d472e cx=c_pps a=e6lK8rWizvdfspXvJDLByw==:117 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=RZcAm9yDv7YA:10 a=bRTqI5nwn0kA:10
- a=NEAV23lmAAAA:8 a=MO2eYF9NAAAA:8 a=Q4-j1AaZAAAA:8 a=t7CeM3EgAAAA:8 a=3-RhneuVAAAA:8 a=4Jz-tj0HIe-pyuF7uqEA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=P0Bp-009Bj7CKDYx-y5u:22 a=9H3Qd4_ONW2Ztcrla5EB:22 a=FdTzh2GWekK77mhwV6Dw:22 a=VLVLkjT_5ZicWzSuYqSo:22
-X-Proofpoint-ORIG-GUID: -xqZhnHfULYvouNtQZemHVBcziVotB14
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: Wa9ZbDWDf-0pSTBwKvQwuIyckAfdzhUr
+X-Authority-Analysis: v=2.4 cv=RpA/LDmK c=1 sm=1 tr=0 ts=674d6708 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=RZcAm9yDv7YA:10 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8 a=8AHkEIZyAAAA:8 a=48vgC7mUAAAA:8 a=ekYV4lpRAAAA:8 a=t7CeM3EgAAAA:8
+ a=0lhnMm1FAAAA:8 a=pGLkceISAAAA:8 a=v90GV_Y8AAAA:8 a=VlckX9PKAAAA:8 a=pIMtKCVDeNLomotfWAoA:9 a=4AMJtBEf4HbnZVMp:21 a=mrCxpU6zTNQDHnudu_9Q:22 a=FdTzh2GWekK77mhwV6Dw:22 a=9CHbX8HeWodPCPcMgNm7:22 a=fBD7mPJ_7mWCjuCAFpJ4:22 a=ZmiM9RdZ4sPD_HvZpKn1:22
+X-Proofpoint-ORIG-GUID: Wa9ZbDWDf-0pSTBwKvQwuIyckAfdzhUr
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2024-12-02_02,2024-11-28_01,2024-11-22_01
+ definitions=2024-12-02_04,2024-11-28_01,2024-11-22_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
  impostorscore=0 spamscore=0 bulkscore=0 malwarescore=0 adultscore=0
  phishscore=0 mlxlogscore=999 clxscore=1015 suspectscore=0
  priorityscore=1501 mlxscore=0 classifier=spam authscore=0 adjust=0
  reason=mlx scancount=1 engine=8.21.0-2411120000
- definitions=main-2412020048
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 4B251rDL016411
+ definitions=main-2412020068
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Dec 2024 05:35:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114134
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Dec 2024 07:51:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114135
 
-Before we rework the abseil-cpp and protobuf recipes, a possible=20
-improvement for this patch is that we list the needed libraries in=20
-RDEPENDS manually.
+From: Jiaying Song <jiaying.song.cn@windriver.com>
 
-Regards,
-Qi
+CVE-2023-49081:
+aiohttp is an asynchronous HTTP client/server framework for asyncio and
+Python. Improper validation made it possible for an attacker to modify
+the HTTP request (e.g. to insert a new header) or create a new HTTP
+request if the attacker controls the HTTP version. The vulnerability
+only occurs if the attacker can control the HTTP version of the request.
+This issue has been patched in version 3.9.0.
 
-On 12/2/24 13:21, Chen Qi via lists.openembedded.org wrote:
-> I'll explain in more details what the problem is and why this patch is=20
-> correct, given the current status of abseil-cpp recipe.
->
-> In protobuf's abseil-cpp.cmake file, there's a hardcoded list of absl=20
-> targets used by protobuf:
-> https://github.com/protocolbuffers/protobuf/blob/main/cmake/abseil-cpp.=
-cmake#L56=20
->
->
-> This value in turn is parsed and used to replace the=20
-> @_protobuf_PC_REQUIRES@ in protobuf.pc.cmake.
->
-> Here's the generated probobuf.pc file's contents:
-> """
-> $ cat=C2=A0 ../build/protobuf.pc
-> prefix=3D/usr
-> exec_prefix=3D/usr
-> libdir=3D/usr/lib64
-> includedir=3D/usr/include
->
-> Name: Protocol Buffers
-> Description: Google's Data Interchange Format
-> Version: 25.3.0
-> Requires: absl_absl_check absl_absl_log absl_algorithm absl_base=20
-> absl_bind_front absl_bits absl_btree absl_cleanup absl_cord=20
-> absl_core_headers absl_debugging absl_die_if_null=20
-> absl_dynamic_annotations absl_flags absl_flat_hash_map=20
-> absl_flat_hash_set absl_function_ref absl_hash absl_layout=20
-> absl_log_initialize absl_log_severity absl_memory absl_node_hash_map=20
-> absl_node_hash_set absl_optional absl_span absl_status absl_statusor=20
-> absl_strings absl_synchronization absl_time absl_type_traits=20
-> absl_utility absl_variant utf8_range
-> Libs: -L${libdir} -lprotobuf
-> Cflags: -I${includedir} -DPROTOBUF_USE_DLLS
-> Conflicts: protobuf-lite
-> """
->
-> Let me use "absl_hash" and "absl_absl_log" in the above list as example=
-s.
->
-> """
-> $ find ../../../abseil-cpp/20240116.2/packa
-> ges-split/ -name "libabsl_hash.so.*"
-> ../../../abseil-cpp/20240116.2/packages-split/libabsl-hash/usr/lib64/li=
-babsl_hash.so.2401.0.0=20
->
-> ../../../abseil-cpp/20240116.2/packages-split/abseil-cpp-dbg/usr/lib64/=
-.debug/libabsl_hash.so.2401.0.0=20
->
-> $ find ../../../abseil-cpp/20240116.2/packa
-> ges-split/ -name "libabsl_absl_log.so.*"
-> $
-> """
->
-> See? The current package splitting of abseil-cpp does not match what=20
-> protobuf assumes. And I thinks protobuf's assumption is correct,=20
-> because there's really a absl_absl_log.pc file generated by abseil-cpp.
->
-> And there's the contents and location of absl_absl_log.pc:
-> """
-> $ cat=20
-> ../../../abseil-cpp/20240116.2/packages-split/abseil-cpp-dev/usr/lib64/=
-pkgconfig/absl_absl_log.pc
-> prefix=3D/usr
-> exec_prefix=3D${prefix}
-> libdir=3D/usr/lib64
-> includedir=3D/usr/include
->
-> Name: absl_absl_log
-> Description: Abseil absl_log library
-> URL: https://abseil.io/
-> Version: 20240116
-> Requires: absl_log_internal_log_impl =3D 20240116
-> Libs: -L${libdir}
-> Cflags: -I${includedir} -DNOMINMAX
-> """
->
-> And there's the contents for the absl_log_internal_log_impl:
-> """
-> $ cat ../../../abseil-cpp/20240116.2/packag
-> es-split/abseil-cpp-dev/usr/lib64/pkgconfig/absl_log_internal_log_impl.=
-pc
-> prefix=3D/usr
-> exec_prefix=3D${prefix}
-> libdir=3D/usr/lib64
-> includedir=3D/usr/include
->
-> Name: absl_log_internal_log_impl
-> Description: Abseil log_internal_log_impl library
-> URL: https://abseil.io/
-> Version: 20240116
-> Requires: absl_log_internal_conditions =3D 20240116,=20
-> absl_log_internal_message =3D 20240116, absl_log_internal_strip =3D=20
-> 20240116, absl_absl_vlog_is_on =3D 20240116
-> Libs: -L${libdir}
-> Cflags: -I${includedir} -DNOMINMAX
-> """
->
-> We can then find the absl_log_internal_conditions library:
-> """
-> $ find ../../../abseil-cpp/20240116.2/packages-split/ -name=20
-> "*absl_log_internal_message*"
-> ../../../abseil-cpp/20240116.2/packages-split/libabsl-log-internal-mess=
-age/usr/lib64/libabsl_log_internal_message.so.2401.0.0=20
->
-> ../../../abseil-cpp/20240116.2/packages-split/abseil-cpp-dev/usr/lib64/=
-libabsl_log_internal_message.so=20
->
-> ../../../abseil-cpp/20240116.2/packages-split/abseil-cpp-dev/usr/lib64/=
-pkgconfig/absl_log_internal_message.pc=20
->
-> ../../../abseil-cpp/20240116.2/packages-split/abseil-cpp-dbg/usr/lib64/=
-.debug/libabsl_log_internal_message.so.2401.0.0=20
->
-> """
->
-> What does all above mean? It means that abseil-cpp is not splitted=20
-> reasonably. This could be proven by the absl_absl_log.pc file as=20
-> described above.
->
-> So, given the current situation of abseil-cpp, Yi's solution is=20
-> correct. Before abseil-cpp is re-splitted according to its pc files,=20
-> which then could possibly lead to automatic parsing of the protobuf.pc=20
-> file to add extra RDEPENDS automatically in protobuf recipe, we need=20
-> to have Yi's solution. And we need to use RDEEPNDS instead of=20
-> RRECOMMENDS (see the 'Requires' directive in corresponding .pc files).
->
-> Regards,
-> Qi
->
-> On 10/1/24 20:42, Peter Marko via lists.openembedded.org wrote:
->>> -----Original Message-----
->>> From: openembedded-devel@lists.openembedded.org <openembedded-
->>> devel@lists.openembedded.org> On Behalf Of Peter Kjellerstedt via
->>> lists.openembedded.org
->>> Sent: Tuesday, October 1, 2024 14:00
->>> To: Yi Zhao <yi.zhao@windriver.com>; Yi Zhao=20
->>> <yi.zhao@eng.windriver.com>
->>> Cc: openembedded-devel@lists.openembedded.org
->>> Subject: Re: [oe] [meta-oe][PATCH 1/2] protobuf: add abseil-cpp to
->>> RDEPENDS
->>>
->>>> -----Original Message-----
->>>> From: Yi Zhao <yi.zhao@windriver.com>
->>>> Sent: den 25 september 2024 04:17
->>>> To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>; Yi Zhao
->>> <yi.zhao@eng.windriver.com>
->>>> Cc: openembedded-devel@lists.openembedded.org
->>>> Subject: Re: [oe] [meta-oe][PATCH 1/2] protobuf: add abseil-cpp to
->>> RDEPENDS
->>>>
->>>> On 9/24/24 03:02, Peter Kjellerstedt wrote:
->>>>>> -----Original Message-----
->>>>>> From: openembedded-devel@lists.openembedded.org <openembedded-
->>> devel@lists.openembedded.org> On Behalf Of Yi Zhao
->>>>>> Sent: den 22 september 2024 09:36
->>>>>> To: openembedded-devel@lists.openembedded.org
->>>>>> Subject: [oe] [meta-oe][PATCH 1/2] protobuf: add abseil-cpp to
->>> RDEPENDS
->>>>>> Since commit[1], the libraries of abseil-cpp have been splitted in=
-to
->>>>>> separate packages. When protobuf is installed into the image,=20
->>>>>> only 48
->>>>>> abseil libraries are installed as runtime dependencies. But the=20
->>>>>> output
->>>>>> of 'pkg-config --libs protobuf' lists 66 abseil-cpp libraries are
->>>>>> required. Add abseil-cpp to RDEPENDS to ensure that all required
->>>>>> abseil-cpp libraries are installed.
->>>>>>
->>>>>> [1] https://git.openembedded.org/meta-
->>> openembedded/commit/?id=3Ddd6421e65eb75c35a904f4b487ba022075035
->>> ecc
->>>>>> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
->>>>>> ---
->>>>>> =C2=A0=C2=A0 meta-oe/recipes-devtools/protobuf/protobuf_4.25.4.bb =
-| 2 ++
->>>>>> =C2=A0=C2=A0 1 file changed, 2 insertions(+)
->>>>>>
->>>>>> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.4.bb
->>> b/meta-oe/recipes-devtools/protobuf/protobuf_4.25.4.bb
->>>>>> index cc5204de4..354b3213a 100644
->>>>>> --- a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.4.bb
->>>>>> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_4.25.4.bb
->>>>>> @@ -106,6 +106,8 @@ FILES:${PN}-lite =3D "${libdir}/libprotobuf-
->>> lite${SOLIBS}"
->>>>>> =C2=A0=C2=A0 # CMake requires protoc binary to exist in sysroot, e=
-ven if it=20
->>>>>> has wrong
->>> architecture.
->>>>>> =C2=A0=C2=A0 SYSROOT_DIRS +=3D "${bindir}"
->>>>>>
->>>>>> +RDEPENDS:${PN} =3D "abseil-cpp"
->>>>>> +RDEPENDS:${PN}-lite =3D "abseil-cpp"
->>>>> This defeats the whole purpose of splitting up the abseil
->>>>> libraries. What triggered this change? Was it an actual
->>>>> runtime error, or were you only looking at the output
->>>>> from pkg-config --libs protobuf?
->>>>>
->>>>> Since the .pc files are in the protobuf-dev package, which
->>>>> depends on the abseil-cpp-dev package, all abseil libraries
->>>>> should be available if you are actually building on target
->>>>> or with an SDK.
->>>> Our customer reported this issue. Here is his description:
->>>> The abseil libraries will be included in the SDK, but not on the=20
->>>> target.
->>>> The application is building with SDK. The yocto build is adding=20
->>>> protobuf
->>>> to the image (no explicit abseil libraries are added). If an=20
->>>> application
->>>> then are built using the SDK it can not be executed on target as
->>>> libraries are missing.
->>> Can we at least change the dependency to a recommendation so
->>> that it can be avoided via BAD_RECOMMENDATIONS? Because as it
->>> is, it penalizes everyone that use protobuf for the case where
->>> one provides an SDK with protobuf.
->>>
->>> My suggestion would be to change it to:
->>>
->>> # Recommend abseil-cpp so that all its libraries are installed in cas=
-e
->>> # protobuf is provided as part of an SDK. Everyone else should add
->>> # BAD_RECOMMENDATIONS +=3D "abseil-cpp" to their configuration.
->>> RRECOMMENDS:${PN} =3D "abseil-cpp"
->>> RRECOMMENDS:${PN}-lite =3D "abseil-cpp"
->>>
->> I think that's also not the right way to do this.
->> Adding unnecessary stuff to release images to satisfy SDK needs is=20
->> wrong.
->>
->> I also wonder if the problem is not at the SDK level.
->> If you build an sdk, there is explicitly installed package base and=20
->> additional required dependencies of those packages.
->> The dependencies may not be complete and fully usable, only their=20
->> parts sufficient for the explicitly installed stuff is present.
->> Are the sdk users assuming that full abseil-cpp is installed and thus=20
->> using also parts not needed for protobuf?
->> The proper solution would be probably to include abseil-cpp=20
->> explicitly in SDK used in that way.
->>
->> Peter
->>
->>>> //Yi
->>>>
->>>>>> =C2=A0=C2=A0 RDEPENDS:${PN}-compiler =3D "${PN}"
->>>>>> =C2=A0=C2=A0 RDEPENDS:${PN}-dev +=3D "${PN}-compiler"
->>>>>> =C2=A0=C2=A0 RDEPENDS:${PN}-ptest =3D "bash
->>> ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python3-protobuf',=20
->>> '', d)}"
->>>>>> --=20
->>>>>> 2.25.1
->>>>> //Peter
->>> //Peter
->>
->>
->>
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#114133): https://lists.openembedded.org/g/openembed=
-ded-devel/message/114133
-> Mute This Topic: https://lists.openembedded.org/mt/108587631/3618072
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[Qi.Chen@windriver.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2023-49081
+
+Upstream patches:
+https://github.com/aio-libs/aiohttp/commit/1e86b777e61cf4eefc7d92fa57fa19dcc676013b
+
+CVE-2024-30251:
+aiohttp is an asynchronous HTTP client/server framework for asyncio and Python.
+In affected versions an attacker can send a specially crafted POST
+(multipart/form-data) request. When the aiohttp server processes it, the server
+will enter an infinite loop and be unable to process any further requests. An
+attacker can stop the application from serving requests after sending a single
+request. This issue has been addressed in version 3.9.4. Users are advised to
+upgrade. Users unable to upgrade may manually apply a patch to their systems.
+Please see the linked GHSA for instructions.
+
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2024-30251
+
+Upstream patches:
+https://github.com/aio-libs/aiohttp/commit/cebe526b9c34dc3a3da9140409db63014bc4cf19
+https://github.com/aio-libs/aiohttp/commit/7eecdff163ccf029fbb1ddc9de4169d4aaeb6597
+https://github.com/aio-libs/aiohttp/commit/f21c6f2ca512a026ce7f0f6c6311f62d6a638866
+
+CVE-2024-52304:
+aiohttp is an asynchronous HTTP client/server framework for asyncio and Python.
+Prior to version 3.10.11, the Python parser parses newlines in chunk extensions
+incorrectly which can lead to request smuggling vulnerabilities under certain
+conditions. If a pure Python version of aiohttp is installed (i.e. without the
+usual C extensions) or `AIOHTTP_NO_EXTENSIONS` is enabled, then an attacker may
+be able to execute a request smuggling attack to bypass certain firewalls or
+proxy protections. Version 3.10.11 fixes the issue.
+
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2024-52304
+
+Upstream patches:
+https://github.com/aio-libs/aiohttp/commit/259edc369075de63e6f3a4eaade058c62af0df71
+
+CVE-2023-49082:
+aiohttp is an asynchronous HTTP client/server framework for asyncio and Python.
+Improper validation makes it possible for an attacker to modify the HTTP
+request (e.g. insert a new header) or even create a new HTTP request if the
+attacker controls the HTTP method. The vulnerability occurs only if the
+attacker can control the HTTP method (GET, POST etc.) of the request. If the
+attacker can control the HTTP version of the request it will be able to modify
+the request (request smuggling). This issue has been patched in version 3.9.0.
+
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2023-49082
+
+Upstream patches:
+https://github.com/aio-libs/aiohttp/pull/7806/commits/a43bc1779892e7014b7723c59d08fb37a000955e
+
+CVE-2024-27306:
+aiohttp is an asynchronous HTTP client/server framework for asyncio and Python.
+A XSS vulnerability exists on index pages for static file handling. This
+vulnerability is fixed in 3.9.4. We have always recommended using a reverse
+proxy server (e.g. nginx) for serving static files. Users following the
+recommendation are unaffected. Other users can disable `show_index` if unable
+to upgrade.
+
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2024-27306
+
+Upstream patches:
+https://github.com/aio-libs/aiohttp/commit/28335525d1eac015a7e7584137678cbb6ff19397
+
+Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
+---
+ .../python3-aiohttp/CVE-2023-49081.patch      |  96 ++++
+ .../python3-aiohttp/CVE-2023-49082.patch      | 105 ++++
+ .../python3-aiohttp/CVE-2024-27306.patch      |  81 +++
+ .../python3-aiohttp/CVE-2024-30251.patch      | 522 ++++++++++++++++++
+ .../python3-aiohttp/CVE-2024-52304.patch      |  46 ++
+ .../python/python3-aiohttp_3.8.6.bb           |   5 +
+ 6 files changed, 855 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2023-49081.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2023-49082.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2024-27306.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2024-30251.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2024-52304.patch
+
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2023-49081.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2023-49081.patch
+new file mode 100644
+index 0000000000..503b001445
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2023-49081.patch
+@@ -0,0 +1,96 @@
++From 67bf97cd1dfa513c8b6374905ee225b4d46cdf20 Mon Sep 17 00:00:00 2001
++From: Sam Bull <git@sambull.org>
++Date: Mon, 13 Nov 2023 22:13:06 +0000
++Subject: [PATCH] Disallow arbitrary sequence types in version (#7835)
++
++Upstream-Status: Backport
++[https://github.com/aio-libs/aiohttp/commit/1e86b777e61cf4eefc7d92fa57fa19dcc676013b]
++
++CVE: CVE-2023-49081
++
++Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
++Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
++---
++ CHANGES/7835.bugfix          |  1 +
++ aiohttp/client_reqrep.py     |  4 ++--
++ tests/test_client_request.py | 18 +++++++++++++++---
++ 3 files changed, 18 insertions(+), 5 deletions(-)
++ create mode 100644 CHANGES/7835.bugfix
++
++diff --git a/CHANGES/7835.bugfix b/CHANGES/7835.bugfix
++new file mode 100644
++index 0000000..4ce3af4
++--- /dev/null
+++++ b/CHANGES/7835.bugfix
++@@ -0,0 +1 @@
+++Fixed arbitrary sequence types being allowed to inject headers via version parameter -- by :user:`Dreamsorcerer`
++diff --git a/aiohttp/client_reqrep.py b/aiohttp/client_reqrep.py
++index 987d68f..d3cd77e 100644
++--- a/aiohttp/client_reqrep.py
+++++ b/aiohttp/client_reqrep.py
++@@ -661,8 +661,8 @@ class ClientRequest:
++             self.headers[hdrs.CONNECTION] = connection
++ 
++         # status + headers
++-        status_line = "{0} {1} HTTP/{2[0]}.{2[1]}".format(
++-            self.method, path, self.version
+++        status_line = "{0} {1} HTTP/{v.major}.{v.minor}".format(
+++            self.method, path, v=self.version
++         )
++         await writer.write_headers(status_line, self.headers)
++ 
++diff --git a/tests/test_client_request.py b/tests/test_client_request.py
++index 9eeb933..009f1a0 100644
++--- a/tests/test_client_request.py
+++++ b/tests/test_client_request.py
++@@ -20,6 +20,7 @@ from aiohttp.client_reqrep import (
++     _merge_ssl_params,
++ )
++ from aiohttp.helpers import PY_311
+++from aiohttp.http import HttpVersion
++ from aiohttp.test_utils import make_mocked_coro
++ 
++ 
++@@ -576,18 +577,18 @@ async def test_connection_header(loop, conn) -> None:
++     req.headers.clear()
++ 
++     req.keep_alive.return_value = True
++-    req.version = (1, 1)
+++    req.version = HttpVersion(1, 1)
++     req.headers.clear()
++     await req.send(conn)
++     assert req.headers.get("CONNECTION") is None
++ 
++-    req.version = (1, 0)
+++    req.version = HttpVersion(1, 0)
++     req.headers.clear()
++     await req.send(conn)
++     assert req.headers.get("CONNECTION") == "keep-alive"
++ 
++     req.keep_alive.return_value = False
++-    req.version = (1, 1)
+++    req.version = HttpVersion(1, 1)
++     req.headers.clear()
++     await req.send(conn)
++     assert req.headers.get("CONNECTION") == "close"
++@@ -1113,6 +1114,17 @@ async def test_close(loop, buf, conn) -> None:
++     await req.close()
++     resp.close()
++ 
+++async def test_bad_version(loop: Any, conn: Any) -> None:
+++    req = ClientRequest(
+++        "GET",
+++        URL("http://python.org"),
+++        loop=loop,
+++        headers={"Connection": "Close"},
+++        version=("1", "1\r\nInjected-Header: not allowed"),
+++    )
+++
+++    with pytest.raises(AttributeError):
+++        await req.send(conn)
++ 
++ async def test_custom_response_class(loop, conn) -> None:
++     class CustomResponse(ClientResponse):
++-- 
++2.25.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2023-49082.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2023-49082.patch
+new file mode 100644
+index 0000000000..cfcb980317
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2023-49082.patch
+@@ -0,0 +1,105 @@
++From a2200dc43d9fe0ee19b9185b30749c204a4dfd45 Mon Sep 17 00:00:00 2001
++From: Sam Bull <git@sambull.org>
++Date: Wed, 8 Nov 2023 19:25:05 +0000
++Subject: [PATCH] Add HTTP method validation (#6533) (#7806)
++
++(cherry picked from commit 75fca0b00b4297d0a30c51ae97a65428336eb2c1)
++
++Upstream-Status: Backport
++[https://github.com/aio-libs/aiohttp/pull/7806/commits/a43bc1779892e7014b7723c59d08fb37a000955e]
++
++CVE: CVE-2023-49082
++
++Co-authored-by: Andrew Svetlov <andrew.svetlov@gmail.com>
++Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
++---
++ CHANGES/6533.feature         | 1 +
++ aiohttp/client_reqrep.py     | 9 ++++++++-
++ tests/test_client_request.py | 5 +++++
++ tests/test_web_request.py    | 9 +++++++--
++ 4 files changed, 21 insertions(+), 3 deletions(-)
++ create mode 100644 CHANGES/6533.feature
++
++diff --git a/CHANGES/6533.feature b/CHANGES/6533.feature
++new file mode 100644
++index 0000000..36bcbeb
++--- /dev/null
+++++ b/CHANGES/6533.feature
++@@ -0,0 +1 @@
+++Add HTTP method validation.
++diff --git a/aiohttp/client_reqrep.py b/aiohttp/client_reqrep.py
++index d3cd77e..a8135b2 100644
++--- a/aiohttp/client_reqrep.py
+++++ b/aiohttp/client_reqrep.py
++@@ -78,6 +78,7 @@ if TYPE_CHECKING:  # pragma: no cover
++     from .tracing import Trace
++ 
++ 
+++_CONTAINS_CONTROL_CHAR_RE = re.compile(r"[^-!#$%&'*+.^_`|~0-9a-zA-Z]")
++ json_re = re.compile(r"^application/(?:[\w.+-]+?\+)?json")
++ 
++ 
++@@ -266,10 +267,16 @@ class ClientRequest:
++         proxy_headers: Optional[LooseHeaders] = None,
++         traces: Optional[List["Trace"]] = None,
++     ):
++-
++         if loop is None:
++             loop = asyncio.get_event_loop()
++ 
+++        match = _CONTAINS_CONTROL_CHAR_RE.search(method)
+++        if match:
+++            raise ValueError(
+++                f"Method cannot contain non-token characters {method!r} "
+++                "(found at least {match.group()!r})"
+++            )
+++
++         assert isinstance(url, URL), url
++         assert isinstance(proxy, (URL, type(None))), proxy
++         # FIXME: session is None in tests only, need to fix tests
++diff --git a/tests/test_client_request.py b/tests/test_client_request.py
++index 009f1a0..d0f208b 100644
++--- a/tests/test_client_request.py
+++++ b/tests/test_client_request.py
++@@ -89,6 +89,11 @@ def test_method3(make_request) -> None:
++     assert req.method == "HEAD"
++ 
++ 
+++def test_method_invalid(make_request) -> None:
+++    with pytest.raises(ValueError, match="Method cannot contain non-token characters"):
+++        make_request("METHOD WITH\nWHITESPACES", "http://python.org/")
+++
+++
++ def test_version_1_0(make_request) -> None:
++     req = make_request("get", "http://python.org/", version="1.0")
++     assert req.version == (1, 0)
++diff --git a/tests/test_web_request.py b/tests/test_web_request.py
++index c6aeaf8..2bb0cd5 100644
++--- a/tests/test_web_request.py
+++++ b/tests/test_web_request.py
++@@ -43,7 +43,10 @@ def test_base_ctor() -> None:
++ 
++     assert "GET" == req.method
++     assert HttpVersion(1, 1) == req.version
++-    assert req.host == socket.getfqdn()
+++    # MacOS may return CamelCased host name, need .lower()
+++    # FQDN can be wider than host, e.g.
+++    # 'fv-az397-495' in 'fv-az397-495.internal.cloudapp.net'
+++    assert req.host.lower() in socket.getfqdn().lower()
++     assert "/path/to?a=1&b=2" == req.path_qs
++     assert "/path/to" == req.path
++     assert "a=1&b=2" == req.query_string
++@@ -66,7 +69,9 @@ def test_ctor() -> None:
++     assert "GET" == req.method
++     assert HttpVersion(1, 1) == req.version
++     # MacOS may return CamelCased host name, need .lower()
++-    assert req.host.lower() == socket.getfqdn().lower()
+++    # FQDN can be wider than host, e.g.
+++    # 'fv-az397-495' in 'fv-az397-495.internal.cloudapp.net'
+++    assert req.host.lower() in socket.getfqdn().lower()
++     assert "/path/to?a=1&b=2" == req.path_qs
++     assert "/path/to" == req.path
++     assert "a=1&b=2" == req.query_string
++-- 
++2.25.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2024-27306.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2024-27306.patch
+new file mode 100644
+index 0000000000..f87ef92679
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2024-27306.patch
+@@ -0,0 +1,81 @@
++From d05042f1a35ec0adb797c056024d457ac1fd7088 Mon Sep 17 00:00:00 2001
++From: Sam Bull <git@sambull.org>
++Date: Thu, 11 Apr 2024 15:54:45 +0100
++Subject: [PATCH] Escape filenames and paths in HTML when generating index
++ pages (#8317) (#8319)
++
++Upstream-Status: Backport
++[https://github.com/aio-libs/aiohttp/commit/28335525d1eac015a7e7584137678cbb6ff19397]
++
++CVE: CVE-2024-27306
++
++Co-authored-by: J. Nick Koston <nick@koston.org>
++(cherry picked from commit ffbc43233209df302863712b511a11bdb6001b0f)
++Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
++---
++ CHANGES/8317.bugfix.rst      |  1 +
++ aiohttp/web_urldispatcher.py | 11 ++++++-----
++ 2 files changed, 7 insertions(+), 5 deletions(-)
++ create mode 100644 CHANGES/8317.bugfix.rst
++
++diff --git a/CHANGES/8317.bugfix.rst b/CHANGES/8317.bugfix.rst
++new file mode 100644
++index 0000000..b24ef2a
++--- /dev/null
+++++ b/CHANGES/8317.bugfix.rst
++@@ -0,0 +1 @@
+++Escaped filenames in static view -- by :user:`bdraco`.
++diff --git a/aiohttp/web_urldispatcher.py b/aiohttp/web_urldispatcher.py
++index e8a8023..791ab94 100644
++--- a/aiohttp/web_urldispatcher.py
+++++ b/aiohttp/web_urldispatcher.py
++@@ -1,7 +1,9 @@
++ import abc
++ import asyncio
++ import base64
+++import functools
++ import hashlib
+++import html
++ import inspect
++ import keyword
++ import os
++@@ -87,6 +89,7 @@ PATH_SEP: Final[str] = re.escape("/")
++ _ExpectHandler = Callable[[Request], Awaitable[None]]
++ _Resolve = Tuple[Optional["UrlMappingMatchInfo"], Set[str]]
++ 
+++html_escape = functools.partial(html.escape, quote=True)
++ 
++ class _InfoDict(TypedDict, total=False):
++     path: str
++@@ -706,7 +709,7 @@ class StaticResource(PrefixResource):
++         assert filepath.is_dir()
++ 
++         relative_path_to_dir = filepath.relative_to(self._directory).as_posix()
++-        index_of = f"Index of /{relative_path_to_dir}"
+++        index_of = f"Index of /{html_escape(relative_path_to_dir)}"
++         h1 = f"<h1>{index_of}</h1>"
++ 
++         index_list = []
++@@ -714,7 +717,7 @@ class StaticResource(PrefixResource):
++         for _file in sorted(dir_index):
++             # show file url as relative to static path
++             rel_path = _file.relative_to(self._directory).as_posix()
++-            file_url = self._prefix + "/" + rel_path
+++            quoted_file_url = _quote_path(f"{self._prefix}/{rel_path}")
++ 
++             # if file is a directory, add '/' to the end of the name
++             if _file.is_dir():
++@@ -723,9 +726,7 @@ class StaticResource(PrefixResource):
++                 file_name = _file.name
++ 
++             index_list.append(
++-                '<li><a href="{url}">{name}</a></li>'.format(
++-                    url=file_url, name=file_name
++-                )
+++                f'<li><a href="{quoted_file_url}">{html_escape(file_name)}</a></li>'
++             )
++         ul = "<ul>\n{}\n</ul>".format("\n".join(index_list))
++         body = f"<body>\n{h1}\n{ul}\n</body>"
++-- 
++2.25.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2024-30251.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2024-30251.patch
+new file mode 100644
+index 0000000000..20226eb754
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2024-30251.patch
+@@ -0,0 +1,522 @@
++From 44108afc0c0460d154216cab9aaa1d8f57edc3cc Mon Sep 17 00:00:00 2001
++From: Sam Bull <git@sambull.org>
++Date: Sun, 7 Apr 2024 13:19:31 +0100
++Subject: [PATCH] Fix handling of multipart/form-data (#8280) (#8302)
++
++https://datatracker.ietf.org/doc/html/rfc7578
++(cherry picked from commit 7d0be3fee540a3d4161ac7dc76422f1f5ea60104)
++
++The following commits are also included:
++7eecdff1 [PR #8332/482e6cdf backport][3.9] Add set_content_disposition test (#8333)
++f21c6f2c [PR #8335/5a6949da backport][3.9] Add Content-Disposition automatically (#8336)
++
++Upstream-Status: Backport
++[https://github.com/aio-libs/aiohttp/commit/cebe526b9c34dc3a3da9140409db63014bc4cf19
++https://github.com/aio-libs/aiohttp/commit/7eecdff163ccf029fbb1ddc9de4169d4aaeb6597
++https://github.com/aio-libs/aiohttp/commit/f21c6f2ca512a026ce7f0f6c6311f62d6a638866]
++
++CVE: CVE-2024-30251
++
++Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
++---
++ CHANGES/8280.bugfix.rst      |   1 +
++ CHANGES/8280.deprecation.rst |   2 +
++ CHANGES/8332.bugfix.rst      |   1 +
++ CHANGES/8335.bugfix.rst      |   1 +
++ aiohttp/formdata.py          |  12 +++-
++ aiohttp/multipart.py         | 128 ++++++++++++++++++++++++-----------
++ tests/test_multipart.py      |  87 ++++++++++++++++++++----
++ tests/test_web_functional.py |  27 ++------
++ 8 files changed, 182 insertions(+), 77 deletions(-)
++ create mode 100644 CHANGES/8280.bugfix.rst
++ create mode 100644 CHANGES/8280.deprecation.rst
++ create mode 100644 CHANGES/8332.bugfix.rst
++ create mode 100644 CHANGES/8335.bugfix.rst
++
++diff --git a/CHANGES/8280.bugfix.rst b/CHANGES/8280.bugfix.rst
++new file mode 100644
++index 0000000..3aebe36
++--- /dev/null
+++++ b/CHANGES/8280.bugfix.rst
++@@ -0,0 +1 @@
+++Fixed ``multipart/form-data`` compliance with :rfc:`7578` -- by :user:`Dreamsorcerer`.
++diff --git a/CHANGES/8280.deprecation.rst b/CHANGES/8280.deprecation.rst
++new file mode 100644
++index 0000000..302dbb2
++--- /dev/null
+++++ b/CHANGES/8280.deprecation.rst
++@@ -0,0 +1,2 @@
+++Deprecated ``content_transfer_encoding`` parameter in :py:meth:`FormData.add_field()
+++<aiohttp.FormData.add_field>` -- by :user:`Dreamsorcerer`.
++diff --git a/CHANGES/8332.bugfix.rst b/CHANGES/8332.bugfix.rst
++new file mode 100644
++index 0000000..70cad26
++--- /dev/null
+++++ b/CHANGES/8332.bugfix.rst
++@@ -0,0 +1 @@
+++Fixed regression with adding Content-Disposition to form-data part after appending to writer -- by :user:`Dreamsorcerer`/:user:`Olegt0rr`.
++diff --git a/CHANGES/8335.bugfix.rst b/CHANGES/8335.bugfix.rst
++new file mode 100644
++index 0000000..cd93b86
++--- /dev/null
+++++ b/CHANGES/8335.bugfix.rst
++@@ -0,0 +1 @@
+++Added default Content-Disposition in multipart/form-data responses -- by :user:`Dreamsorcerer`.
++diff --git a/aiohttp/formdata.py b/aiohttp/formdata.py
++index e7cd24c..2b75b3d 100644
++--- a/aiohttp/formdata.py
+++++ b/aiohttp/formdata.py
++@@ -1,4 +1,5 @@
++ import io
+++import warnings
++ from typing import Any, Iterable, List, Optional
++ from urllib.parse import urlencode
++ 
++@@ -53,7 +54,12 @@ class FormData:
++         if isinstance(value, io.IOBase):
++             self._is_multipart = True
++         elif isinstance(value, (bytes, bytearray, memoryview)):
+++            msg = (
+++                "In v4, passing bytes will no longer create a file field. "
+++                "Please explicitly use the filename parameter or pass a BytesIO object."
+++            )
++             if filename is None and content_transfer_encoding is None:
+++                warnings.warn(msg, DeprecationWarning)
++                 filename = name
++ 
++         type_options: MultiDict[str] = MultiDict({"name": name})
++@@ -81,7 +87,11 @@ class FormData:
++                     "content_transfer_encoding must be an instance"
++                     " of str. Got: %s" % content_transfer_encoding
++                 )
++-            headers[hdrs.CONTENT_TRANSFER_ENCODING] = content_transfer_encoding
+++            msg = (
+++                "content_transfer_encoding is deprecated. "
+++                "To maintain compatibility with v4 please pass a BytesPayload."
+++            )
+++            warnings.warn(msg, DeprecationWarning)
++             self._is_multipart = True
++ 
++         self._fields.append((type_options, headers, value))
++diff --git a/aiohttp/multipart.py b/aiohttp/multipart.py
++index 73801f4..9cd49bb 100644
++--- a/aiohttp/multipart.py
+++++ b/aiohttp/multipart.py
++@@ -255,13 +255,22 @@ class BodyPartReader:
++     chunk_size = 8192
++ 
++     def __init__(
++-        self, boundary: bytes, headers: "CIMultiDictProxy[str]", content: StreamReader
+++        self,
+++        boundary: bytes,
+++        headers: "CIMultiDictProxy[str]",
+++        content: StreamReader,
+++        *,
+++        subtype: str = "mixed",
+++        default_charset: Optional[str] = None,
++     ) -> None:
++         self.headers = headers
++         self._boundary = boundary
++         self._content = content
+++        self._default_charset = default_charset
++         self._at_eof = False
++-        length = self.headers.get(CONTENT_LENGTH, None)
+++        self._is_form_data = subtype == "form-data"
+++        # https://datatracker.ietf.org/doc/html/rfc7578#section-4.8
+++        length = None if self._is_form_data else self.headers.get(CONTENT_LENGTH, None)
++         self._length = int(length) if length is not None else None
++         self._read_bytes = 0
++         # TODO: typeing.Deque is not supported by Python 3.5
++@@ -329,6 +338,8 @@ class BodyPartReader:
++         assert self._length is not None, "Content-Length required for chunked read"
++         chunk_size = min(size, self._length - self._read_bytes)
++         chunk = await self._content.read(chunk_size)
+++        if self._content.at_eof():
+++            self._at_eof = True
++         return chunk
++ 
++     async def _read_chunk_from_stream(self, size: int) -> bytes:
++@@ -444,7 +455,8 @@ class BodyPartReader:
++         """
++         if CONTENT_TRANSFER_ENCODING in self.headers:
++             data = self._decode_content_transfer(data)
++-        if CONTENT_ENCODING in self.headers:
+++        # https://datatracker.ietf.org/doc/html/rfc7578#section-4.8
+++        if not self._is_form_data and CONTENT_ENCODING in self.headers:
++             return self._decode_content(data)
++         return data
++ 
++@@ -478,7 +490,7 @@ class BodyPartReader:
++         """Returns charset parameter from Content-Type header or default."""
++         ctype = self.headers.get(CONTENT_TYPE, "")
++         mimetype = parse_mimetype(ctype)
++-        return mimetype.parameters.get("charset", default)
+++        return mimetype.parameters.get("charset", self._default_charset or default)
++ 
++     @reify
++     def name(self) -> Optional[str]:
++@@ -533,9 +545,17 @@ class MultipartReader:
++     part_reader_cls = BodyPartReader
++ 
++     def __init__(self, headers: Mapping[str, str], content: StreamReader) -> None:
+++        self._mimetype = parse_mimetype(headers[CONTENT_TYPE])
+++        assert self._mimetype.type == "multipart", "multipart/* content type expected"
+++        if "boundary" not in self._mimetype.parameters:
+++            raise ValueError(
+++                "boundary missed for Content-Type: %s" % headers[CONTENT_TYPE]
+++            )
+++
++         self.headers = headers
++         self._boundary = ("--" + self._get_boundary()).encode()
++         self._content = content
+++        self._default_charset: Optional[str] = None
++         self._last_part: Optional[Union["MultipartReader", BodyPartReader]] = None
++         self._at_eof = False
++         self._at_bof = True
++@@ -587,7 +607,24 @@ class MultipartReader:
++             await self._read_boundary()
++         if self._at_eof:  # we just read the last boundary, nothing to do there
++             return None
++-        self._last_part = await self.fetch_next_part()
+++
+++        part = await self.fetch_next_part()
+++        # https://datatracker.ietf.org/doc/html/rfc7578#section-4.6
+++        if (
+++            self._last_part is None
+++            and self._mimetype.subtype == "form-data"
+++            and isinstance(part, BodyPartReader)
+++        ):
+++            _, params = parse_content_disposition(part.headers.get(CONTENT_DISPOSITION))
+++            if params.get("name") == "_charset_":
+++                # Longest encoding in https://encoding.spec.whatwg.org/encodings.json
+++                # is 19 characters, so 32 should be more than enough for any valid encoding.
+++                charset = await part.read_chunk(32)
+++                if len(charset) > 31:
+++                    raise RuntimeError("Invalid default charset")
+++                self._default_charset = charset.strip().decode()
+++                part = await self.fetch_next_part()
+++        self._last_part = part
++         return self._last_part
++ 
++     async def release(self) -> None:
++@@ -623,19 +660,16 @@ class MultipartReader:
++                 return type(self)(headers, self._content)
++             return self.multipart_reader_cls(headers, self._content)
++         else:
++-            return self.part_reader_cls(self._boundary, headers, self._content)
++-
++-    def _get_boundary(self) -> str:
++-        mimetype = parse_mimetype(self.headers[CONTENT_TYPE])
++-
++-        assert mimetype.type == "multipart", "multipart/* content type expected"
++-
++-        if "boundary" not in mimetype.parameters:
++-            raise ValueError(
++-                "boundary missed for Content-Type: %s" % self.headers[CONTENT_TYPE]
+++            return self.part_reader_cls(
+++                self._boundary,
+++                headers,
+++                self._content,
+++                subtype=self._mimetype.subtype,
+++                default_charset=self._default_charset,
++             )
++ 
++-        boundary = mimetype.parameters["boundary"]
+++    def _get_boundary(self) -> str:
+++        boundary = self._mimetype.parameters["boundary"]
++         if len(boundary) > 70:
++             raise ValueError("boundary %r is too long (70 chars max)" % boundary)
++ 
++@@ -726,6 +760,7 @@ class MultipartWriter(Payload):
++         super().__init__(None, content_type=ctype)
++ 
++         self._parts: List[_Part] = []
+++        self._is_form_data = subtype == "form-data"
++ 
++     def __enter__(self) -> "MultipartWriter":
++         return self
++@@ -803,32 +838,38 @@ class MultipartWriter(Payload):
++ 
++     def append_payload(self, payload: Payload) -> Payload:
++         """Adds a new body part to multipart writer."""
++-        # compression
++-        encoding: Optional[str] = payload.headers.get(
++-            CONTENT_ENCODING,
++-            "",
++-        ).lower()
++-        if encoding and encoding not in ("deflate", "gzip", "identity"):
++-            raise RuntimeError(f"unknown content encoding: {encoding}")
++-        if encoding == "identity":
++-            encoding = None
++-
++-        # te encoding
++-        te_encoding: Optional[str] = payload.headers.get(
++-            CONTENT_TRANSFER_ENCODING,
++-            "",
++-        ).lower()
++-        if te_encoding not in ("", "base64", "quoted-printable", "binary"):
++-            raise RuntimeError(
++-                "unknown content transfer encoding: {}" "".format(te_encoding)
+++        encoding: Optional[str] = None
+++        te_encoding: Optional[str] = None
+++        if self._is_form_data:
+++            # https://datatracker.ietf.org/doc/html/rfc7578#section-4.7
+++            # https://datatracker.ietf.org/doc/html/rfc7578#section-4.8
+++            assert (
+++                not {CONTENT_ENCODING, CONTENT_LENGTH, CONTENT_TRANSFER_ENCODING}
+++                & payload.headers.keys()
++             )
++-        if te_encoding == "binary":
++-            te_encoding = None
++-
++-        # size
++-        size = payload.size
++-        if size is not None and not (encoding or te_encoding):
++-            payload.headers[CONTENT_LENGTH] = str(size)
+++            # Set default Content-Disposition in case user doesn't create one
+++            if CONTENT_DISPOSITION not in payload.headers:
+++                name = f"section-{len(self._parts)}"
+++                payload.set_content_disposition("form-data", name=name)
+++        else:
+++            # compression
+++            encoding = payload.headers.get(CONTENT_ENCODING, "").lower()
+++            if encoding and encoding not in ("deflate", "gzip", "identity"):
+++                raise RuntimeError(f"unknown content encoding: {encoding}")
+++            if encoding == "identity":
+++                encoding = None
+++
+++            # te encoding
+++            te_encoding = payload.headers.get(CONTENT_TRANSFER_ENCODING, "").lower()
+++            if te_encoding not in ("", "base64", "quoted-printable", "binary"):
+++                raise RuntimeError(f"unknown content transfer encoding: {te_encoding}")
+++            if te_encoding == "binary":
+++                te_encoding = None
+++
+++            # size
+++            size = payload.size
+++            if size is not None and not (encoding or te_encoding):
+++                payload.headers[CONTENT_LENGTH] = str(size)
++ 
++         self._parts.append((payload, encoding, te_encoding))  # type: ignore[arg-type]
++         return payload
++@@ -886,6 +927,11 @@ class MultipartWriter(Payload):
++     async def write(self, writer: Any, close_boundary: bool = True) -> None:
++         """Write body."""
++         for part, encoding, te_encoding in self._parts:
+++            if self._is_form_data:
+++                # https://datatracker.ietf.org/doc/html/rfc7578#section-4.2
+++                assert CONTENT_DISPOSITION in part.headers
+++                assert "name=" in part.headers[CONTENT_DISPOSITION]
+++
++             await writer.write(b"--" + self._boundary + b"\r\n")
++             await writer.write(part._binary_headers)
++ 
++diff --git a/tests/test_multipart.py b/tests/test_multipart.py
++index cc3f5ff..1d036fb 100644
++--- a/tests/test_multipart.py
+++++ b/tests/test_multipart.py
++@@ -942,6 +942,58 @@ class TestMultipartReader:
++             assert first.at_eof()
++             assert not second.at_eof()
++ 
+++    async def test_read_form_default_encoding(self) -> None:
+++        with Stream(
+++            b"--:\r\n"
+++            b'Content-Disposition: form-data; name="_charset_"\r\n\r\n'
+++            b"ascii"
+++            b"\r\n"
+++            b"--:\r\n"
+++            b'Content-Disposition: form-data; name="field1"\r\n\r\n'
+++            b"foo"
+++            b"\r\n"
+++            b"--:\r\n"
+++            b"Content-Type: text/plain;charset=UTF-8\r\n"
+++            b'Content-Disposition: form-data; name="field2"\r\n\r\n'
+++            b"foo"
+++            b"\r\n"
+++            b"--:\r\n"
+++            b'Content-Disposition: form-data; name="field3"\r\n\r\n'
+++            b"foo"
+++            b"\r\n"
+++        ) as stream:
+++            reader = aiohttp.MultipartReader(
+++                {CONTENT_TYPE: 'multipart/form-data;boundary=":"'},
+++                stream,
+++            )
+++            field1 = await reader.next()
+++            assert field1.name == "field1"
+++            assert field1.get_charset("default") == "ascii"
+++            field2 = await reader.next()
+++            assert field2.name == "field2"
+++            assert field2.get_charset("default") == "UTF-8"
+++            field3 = await reader.next()
+++            assert field3.name == "field3"
+++            assert field3.get_charset("default") == "ascii"
+++
+++    async def test_read_form_invalid_default_encoding(self) -> None:
+++        with Stream(
+++            b"--:\r\n"
+++            b'Content-Disposition: form-data; name="_charset_"\r\n\r\n'
+++            b"this-value-is-too-long-to-be-a-charset"
+++            b"\r\n"
+++            b"--:\r\n"
+++            b'Content-Disposition: form-data; name="field1"\r\n\r\n'
+++            b"foo"
+++            b"\r\n"
+++        ) as stream:
+++            reader = aiohttp.MultipartReader(
+++                {CONTENT_TYPE: 'multipart/form-data;boundary=":"'},
+++                stream,
+++            )
+++            with pytest.raises(RuntimeError, match="Invalid default charset"):
+++                await reader.next()
+++
++ 
++ async def test_writer(writer) -> None:
++     assert writer.size == 7
++@@ -1228,6 +1280,25 @@ class TestMultipartWriter:
++         part = writer._parts[0][0]
++         assert part.headers[CONTENT_TYPE] == "test/passed"
++ 
+++    def test_set_content_disposition_after_append(self):
+++        writer = aiohttp.MultipartWriter("form-data")
+++        part = writer.append("some-data")
+++        part.set_content_disposition("form-data", name="method")
+++        assert 'name="method"' in part.headers[CONTENT_DISPOSITION]
+++
+++    def test_automatic_content_disposition(self):
+++        writer = aiohttp.MultipartWriter("form-data")
+++        writer.append_json(())
+++        part = payload.StringPayload("foo")
+++        part.set_content_disposition("form-data", name="second")
+++        writer.append_payload(part)
+++        writer.append("foo")
+++
+++        disps = tuple(p[0].headers[CONTENT_DISPOSITION] for p in writer._parts)
+++        assert 'name="section-0"' in disps[0]
+++        assert 'name="second"' in disps[1]
+++        assert 'name="section-2"' in disps[2]
+++
++     def test_with(self) -> None:
++         with aiohttp.MultipartWriter(boundary=":") as writer:
++             writer.append("foo")
++@@ -1278,7 +1349,6 @@ class TestMultipartWriter:
++                         CONTENT_TYPE: "text/python",
++                     },
++                 )
++-            content_length = part.size
++             await writer.write(stream)
++ 
++         assert part.headers[CONTENT_TYPE] == "text/python"
++@@ -1289,9 +1359,7 @@ class TestMultipartWriter:
++         assert headers == (
++             b"--:\r\n"
++             b"Content-Type: text/python\r\n"
++-            b'Content-Disposition: attachments; filename="bug.py"\r\n'
++-            b"Content-Length: %s"
++-            b"" % (str(content_length).encode(),)
+++            b'Content-Disposition: attachments; filename="bug.py"'
++         )
++ 
++     async def test_set_content_disposition_override(self, buf, stream):
++@@ -1305,7 +1373,6 @@ class TestMultipartWriter:
++                         CONTENT_TYPE: "text/python",
++                     },
++                 )
++-            content_length = part.size
++             await writer.write(stream)
++ 
++         assert part.headers[CONTENT_TYPE] == "text/python"
++@@ -1316,9 +1383,7 @@ class TestMultipartWriter:
++         assert headers == (
++             b"--:\r\n"
++             b"Content-Type: text/python\r\n"
++-            b'Content-Disposition: attachments; filename="bug.py"\r\n'
++-            b"Content-Length: %s"
++-            b"" % (str(content_length).encode(),)
+++            b'Content-Disposition: attachments; filename="bug.py"'
++         )
++ 
++     async def test_reset_content_disposition_header(self, buf, stream):
++@@ -1330,8 +1395,6 @@ class TestMultipartWriter:
++                     headers={CONTENT_TYPE: "text/plain"},
++                 )
++ 
++-            content_length = part.size
++-
++             assert CONTENT_DISPOSITION in part.headers
++ 
++             part.set_content_disposition("attachments", filename="bug.py")
++@@ -1344,9 +1407,7 @@ class TestMultipartWriter:
++             b"--:\r\n"
++             b"Content-Type: text/plain\r\n"
++             b"Content-Disposition:"
++-            b' attachments; filename="bug.py"\r\n'
++-            b"Content-Length: %s"
++-            b"" % (str(content_length).encode(),)
+++            b' attachments; filename="bug.py"'
++         )
++ 
++ 
++diff --git a/tests/test_web_functional.py b/tests/test_web_functional.py
++index 5fdfb23..61739e9 100644
++--- a/tests/test_web_functional.py
+++++ b/tests/test_web_functional.py
++@@ -34,7 +34,8 @@ def fname(here):
++ 
++ def new_dummy_form():
++     form = FormData()
++-    form.add_field("name", b"123", content_transfer_encoding="base64")
+++    with pytest.warns(DeprecationWarning, match="BytesPayload"):
+++        form.add_field("name", b"123", content_transfer_encoding="base64")
++     return form
++ 
++ 
++@@ -429,25 +430,6 @@ async def test_release_post_data(aiohttp_client) -> None:
++     await resp.release()
++ 
++ 
++-async def test_POST_DATA_with_content_transfer_encoding(aiohttp_client) -> None:
++-    async def handler(request):
++-        data = await request.post()
++-        assert b"123" == data["name"]
++-        return web.Response()
++-
++-    app = web.Application()
++-    app.router.add_post("/", handler)
++-    client = await aiohttp_client(app)
++-
++-    form = FormData()
++-    form.add_field("name", b"123", content_transfer_encoding="base64")
++-
++-    resp = await client.post("/", data=form)
++-    assert 200 == resp.status
++-
++-    await resp.release()
++-
++-
++ async def test_post_form_with_duplicate_keys(aiohttp_client) -> None:
++     async def handler(request):
++         data = await request.post()
++@@ -505,7 +487,8 @@ async def test_100_continue(aiohttp_client) -> None:
++         return web.Response()
++ 
++     form = FormData()
++-    form.add_field("name", b"123", content_transfer_encoding="base64")
+++    with pytest.warns(DeprecationWarning, match="BytesPayload"):
+++        form.add_field("name", b"123", content_transfer_encoding="base64")
++ 
++     app = web.Application()
++     app.router.add_post("/", handler)
++@@ -683,7 +666,7 @@ async def test_upload_file(aiohttp_client) -> None:
++     app.router.add_post("/", handler)
++     client = await aiohttp_client(app)
++ 
++-    resp = await client.post("/", data={"file": data})
+++    resp = await client.post("/", data={"file": io.BytesIO(data)})
++     assert 200 == resp.status
++ 
++     await resp.release()
++-- 
++2.25.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2024-52304.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2024-52304.patch
+new file mode 100644
+index 0000000000..a76968c6ca
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2024-52304.patch
+@@ -0,0 +1,46 @@
++From 27b9925ad3ac716a6db3a3d1214b3fe2a260c5c8 Mon Sep 17 00:00:00 2001
++From: "J. Nick Koston" <nick@koston.org>
++Date: Wed, 13 Nov 2024 08:50:36 -0600
++Subject: [PATCH] Fix incorrect parsing of chunk extensions with the pure
++ Python parser (#9853)
++
++Upstream-Status: Backport
++[https://github.com/aio-libs/aiohttp/commit/259edc369075de63e6f3a4eaade058c62af0df71]
++
++CVE: CVE-2024-52304
++
++Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
++---
++ CHANGES/9851.bugfix.rst | 1 +
++ aiohttp/http_parser.py  | 7 +++++++
++ 2 files changed, 8 insertions(+)
++ create mode 100644 CHANGES/9851.bugfix.rst
++
++diff --git a/CHANGES/9851.bugfix.rst b/CHANGES/9851.bugfix.rst
++new file mode 100644
++index 0000000..02541a9
++--- /dev/null
+++++ b/CHANGES/9851.bugfix.rst
++@@ -0,0 +1 @@
+++Fixed incorrect parsing of chunk extensions with the pure Python parser -- by :user:`bdraco`.
++diff --git a/aiohttp/http_parser.py b/aiohttp/http_parser.py
++index 91e01f4..1ee1269 100644
++--- a/aiohttp/http_parser.py
+++++ b/aiohttp/http_parser.py
++@@ -820,6 +820,13 @@ class HttpPayloadParser:
++                         i = chunk.find(CHUNK_EXT, 0, pos)
++                         if i >= 0:
++                             size_b = chunk[:i]  # strip chunk-extensions
+++                            # Verify no LF in the chunk-extension
+++                            if b"\n" in (ext := chunk[i:pos]):
+++                                exc = BadHttpMessage(
+++                                    f"Unexpected LF in chunk-extension: {ext!r}"
+++                                )
+++                                set_exception(self.payload, exc)
+++                                raise exc
++                         else:
++                             size_b = chunk[:pos]
++ 
++-- 
++2.25.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb
+index c805e17d86..479c2f2064 100644
+--- a/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb
++++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb
+@@ -5,6 +5,11 @@ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=748073912af33aa59430d3702aa32d41"
+ 
+ SRC_URI += "file://CVE-2024-23334.patch \
++            file://CVE-2023-49081.patch \
++            file://CVE-2024-30251.patch \
++            file://CVE-2024-52304.patch \
++            file://CVE-2023-49082.patch \
++            file://CVE-2024-27306.patch \
+            "
+ 
+ SRC_URI[sha256sum] = "b0cf2a4501bff9330a8a5248b4ce951851e415bdcce9dc158e76cfd55e15085c"
+-- 
+2.25.1
 
 
