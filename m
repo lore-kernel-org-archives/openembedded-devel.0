@@ -1,88 +1,112 @@
-Return-Path: <philip@balister.org>
+Return-Path: <gudni.m.g@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B92AE69EA6
-	for <webhook@archiver.kernel.org>; Tue,  3 Dec 2024 15:17:25 +0000 (UTC)
-Received: from mail-il1-f171.google.com (mail-il1-f171.google.com [209.85.166.171])
- by mx.groups.io with SMTP id smtpd.web10.21913.1733238235998822314
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B30CE69EA6
+	for <webhook@archiver.kernel.org>; Tue,  3 Dec 2024 15:27:05 +0000 (UTC)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+ by mx.groups.io with SMTP id smtpd.web11.22759.1733239615997060708
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Dec 2024 07:03:56 -0800
+ Tue, 03 Dec 2024 07:26:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=iXR5MLWq;
- spf=pass (domain: gmail.com, ip: 209.85.166.171, mailfrom: ethan.twardy@gmail.com)
-Received: by mail-il1-f171.google.com with SMTP id e9e14a558f8ab-3a790d6e782so23601725ab.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Dec 2024 07:03:55 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SseuyDvO;
+ spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: gudni.m.g@gmail.com)
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-385ea29eee1so2117981f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Dec 2024 07:26:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1733238235; x=1733843035; darn=lists.openembedded.org;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-transfer-encoding:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=hjfkVGBRTFBLAJpMvhES6EC+t93TU9YilBU2l34K19I=;
-        b=iXR5MLWqUDmzF/dsLKfl24SfDNvrnqeApsmRnsatY8UF5uBAjS1LqF2SOwBhtV2iSZ
-         aPreNClntueUmKx8/opK5avrQ8clVViS7H0k+MuRtSIPCnEL/o4q7ZCJawTaj3NPzNrl
-         88InjcEBNaG9mtjD5TyFZT83qCofjW44G6OiCjwICDHAEvVeXwDS+s44Be6ao1JMNmY9
-         QQq2IWtnfzMGm8nNk2o7ej8IJl2iQO0rxXm+Jj8yVCoNGY0F+z3f8MaRL/lLatr2r98E
-         61chPs0VWNgwi+HHYtdxDRnz/D0w7W6pESgWgX6P686jKhsI4aQ12K5N1KPWDGkvCrZD
-         tW+w==
+        d=gmail.com; s=20230601; t=1733239614; x=1733844414; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=DKCEsVulouu4z7vHkypS7ufYPZV473W+2BGAwvDGZ54=;
+        b=SseuyDvOO1cDRkZQShyeCxvss2gwtjHG/WTF4EacyKGJGfMnEaAmAIGym+Cmrrmc92
+         MuSpPCMaou1PXLOJ00o11JJi+BhQD+PmlmuSOif6mYMoHktJ/yZaVEERpzyn1hYEyu1d
+         v38vKWF21d4Kn6K+VxN1kKOAxhW1V67oK1x8D4/btgfWoHSvuyaDFXIj5Gdg/fqVkgxs
+         iKkwSFOlfmy2/1ZTr1ucQD8PKkIGYmCrk3NPsNYTdXOadDECtNhUTLmLTARfPvP5AdA3
+         e0NK1Kw44GfExkFSmJdeBpQipiD8uHl+Hq65V95Asb5NeOOFxrlxq8zzyI9q3z4G+eZU
+         9bFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733238235; x=1733843035;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=hjfkVGBRTFBLAJpMvhES6EC+t93TU9YilBU2l34K19I=;
-        b=cJ7cBasSVDlMYlNdQKVjmAfl9L46wVlrS5kMmJSHfWVFNvx0dlr1yzbh6k0u13EPMo
-         WGFPrK3hSlTxQUMFZgE3gqbfFZ1l84Waipvqde24iADwAM2QyhzMjMdIlQVsZOs1JGQd
-         8+uYwRLIM2T9sHKj/wBSJQygSoRcR0mjseJIy8S3yO5XVDA2GxHfB6TD98MxrxV5OzDC
-         /TXR/Jn+tdDB7Q4C3cH/tc5CoHdUvIrEuUI5p6ijEH/S/1CXhPaFjsqpeoLHmfT9cpr1
-         XhTe2W825p5VY6lSWDtuw6Bw8nMmoRjQgpLE/vMJCXNwnyTqCdKicRJf5Tar6cH4H4EU
-         2uMw==
-X-Gm-Message-State: AOJu0YwCG3qw864JShZkLWIALknfIGIJ43BF9ahXiKiWs4V8xgg35beq
-	GyzwLgSF1YqlkhKHIaNXrOJBkDfqw8aLhba9UPdfzom1baUg5vue
-X-Gm-Gg: ASbGncscf1xjo5oVXW7fT27GZErlmCZjsgol9mC8BOSYdmeKMQ6Iad0edsqL6H07Gvv
-	o/gii2KQ7/efKctnj7grTMpyrKN4CqcDDWS95+QXqEAYAeeBNcYM640ZhUC+j1bGkceOg79rD4L
-	lBfijE9A9EKBPkhy6HSeGz5J1XHd6CZ+u3F0rhk+GuMndpNvMFvH0Bv6nMN0P9AP+9BERMTN371
-	PGQhgmk3Xa4Zf50WI+SjnhyXpMZPMijzNkjmKgsliTPSPBCEsvEOU7q345q6swsbSYBQJH/ejQZ
-	taOPjzHq0lhMaUWUqP6m1T+csJ4Z
-X-Google-Smtp-Source: AGHT+IHKuOiY68Jec/s7kouR7RJyMum9hVNgbbP9VzH3t5yYV7jTOWRBqHYkI5E8/oCoZxMq/L2LfQ==
-X-Received: by 2002:a05:6e02:16c5:b0:3a7:d792:d6e9 with SMTP id e9e14a558f8ab-3a7f9aa3d27mr34928515ab.22.1733238235092;
-        Tue, 03 Dec 2024 07:03:55 -0800 (PST)
-Received: from localhost (h135-135-92-85.ashwwi.broadband.dynamic.tds.net. [135.135.92.85])
-        by smtp.gmail.com with ESMTPSA id e9e14a558f8ab-3a7d8534282sm22443055ab.22.2024.12.03.07.03.53
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 03 Dec 2024 07:03:54 -0800 (PST)
-Mime-Version: 1.0
-Date: Tue, 03 Dec 2024 09:03:52 -0600
-Message-Id: <D625OBSZYCB3.CNBANSTUR7WI@gmail.com>
-Cc: <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-multimedia][PATCH] pipewire: Add glib-2.0-native dep for bluez5
-From: "AmateurECE" <ethan.twardy@gmail.com>
-To: "Khem Raj" <raj.khem@gmail.com>
-X-Mailer: aerc 0.18.2
-References: <20241124165419.24549-1-ethan.twardy@gmail.com>
- <CAMKF1sqq7iu2AiQxBX2eqQX0P_sO1of_5ioCp7u5nj2hodYxcA@mail.gmail.com>
-In-Reply-To: <CAMKF1sqq7iu2AiQxBX2eqQX0P_sO1of_5ioCp7u5nj2hodYxcA@mail.gmail.com>
-Content-Transfer-Encoding: quoted-printable
+        d=1e100.net; s=20230601; t=1733239614; x=1733844414;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=DKCEsVulouu4z7vHkypS7ufYPZV473W+2BGAwvDGZ54=;
+        b=XAfvVYcHONlIvJZ1YcQZwq85YHo2j1nk6FOhuKUJZXTUqESwivORtdR77U5yNhKjmM
+         0DEpWYitkyrYGRp3zcsFL0rf7m4PZyQ5rKWRxmmWh8cf+JWMRJhGKp3d8Yl2NB4GoXw/
+         WAlE03Xv8liarnbSCI5hGR5lFmP9taZp3bsCi+QI7p1IjvDa6P+oRMGHfkkiGoqEsM+t
+         SpVjApSwmbP1FIub7ahzJ9a+Vd/5CTzrF/urYbaEXprmt4h8WgWtKDQHqdmgzxWNQjmw
+         /Zm1jmFTW9JRUVWi1roFerSmhKA5EW3NvbI5fAs9tJINlY0fKshdRr4nN5LZijg8eJdz
+         Unng==
+X-Gm-Message-State: AOJu0Yw2cadKlYgunyVtmDI1FqKQzQ79XDyXOs1Pc6Bp798CLv3Ydz5C
+	pBlFLt1fcV5svocwnRh0LmFbkXhRclcf13YVUgAcyIyQecG9XRAa8xVo9w==
+X-Gm-Gg: ASbGncsbQzebHub46C4SayM2O55IsdJry+2o2nboCzsB8Qf4P8D1FdgNCfw84IkXdwa
+	Q97uuBNzkEstq7r46iZojAfTJjjKotVKEsx/oayduFxVE8ZPxM/jfL9G6BEVQQaghU9xIMeMW6V
+	HaFx4QSCHKFM6mNiWWmcpyUThBbkItZ1NJjtuKWD9YPvvtNA2EKavZhufdDRaW7Slt716i6IU4l
+	FhD2143g89NDcyQ3NZz5eIQ13imNirheUkWkoR77JNlHULDC89hr8bJl+vJpKTUV/g1zLRq4+8=
+X-Google-Smtp-Source: AGHT+IF4zblzV11gaABcXkaie1iiLiaV3p9r//rlTuXXUz6K/8O6qXR1SzFcGzAlxBSyYYe0PFDvsQ==
+X-Received: by 2002:a05:6000:713:b0:385:e170:d5b8 with SMTP id ffacd0b85a97d-385fd53ed15mr2188391f8f.42.1733239613845;
+        Tue, 03 Dec 2024 07:26:53 -0800 (PST)
+Received: from localhost.localdomain ([81.15.100.92])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-385e9fda2f6sm8796849f8f.107.2024.12.03.07.26.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 03 Dec 2024 07:26:53 -0800 (PST)
+From: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudni.m.g@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudni.m.g@gmail.com>
+Subject: [meta-python][PATCH] python3-twisted: upgrade 24.10.0 -> 24.11.0
+Date: Tue,  3 Dec 2024 15:26:29 +0000
+Message-ID: <20241203152629.4664-1-gudni.m.g@gmail.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 03 Dec 2024 15:17:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114182
+ <openembedded-devel@lists.openembedded.org>; Tue, 03 Dec 2024 15:27:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114183
 
-On Fri Nov 29, 2024 at 5:28 PM CST, Khem Raj wrote:
-> Thanks for the patch, it is not done on top of master it seems. Please
-> rebase it on master and resend if patch is needed for master
-> otherwise mark the release branch in subject prefix. This will help
-> route it correctly.
+Changes:
 
-Thanks for getting back to me, Khem! I will rebase onto master and
-resend the patch shortly. Please forgive my question, I'm unfamiliar
-with the OpenEmbedded development process: I'd like this change to be
-applied to both master and the scarthgap branch, since I'm currently
-basing my work on scarthgap. In that case, should I submit two patches,
-one to be applied to master, and one to be applied to scarthgap (with
-[scarthgap] in the subject line)?
+https://github.com/twisted/twisted/releases/tag/twisted-24.11.0
 
-Ethan
+- Twisted's implementations of twisted.internet.interfaces.IReactorMulticast now accept IPv6 literals and allow for IPv6 multicast.
+- TCP throughput when sending data is slightly faster.
+- twisted.internet.endpoints.clientFromString can handle "tls:"
+endpoints with default [bindAddress]{.title-ref}. This was a
+regression introduced in 24.10.0.
+- HTTP server can handle listening on filesystem UNIX sockets. This
+was a regression introduced in 24.10.0.
+- twisted.internet.tcp.Connection.setTcpNoDelay was updated to fix a
+potential failure when setting TCP_NODELAY on macOS.
+- twisted.python.constants, deprecated since 16.5.0, has been removed.
+- twisted.mail.imap.IMAPServer.arg_fetchatt can now detect that a IMAP
+partial request has been made that is longer than the original
+message and alter the output of the response in order to match the
+IMAPRev4 spec
+
+Signed-off-by: Guðni Már Gilbert <gudni.m.g@gmail.com>
+---
+ .../{python3-twisted_24.10.0.bb => python3-twisted_24.11.0.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-twisted_24.10.0.bb => python3-twisted_24.11.0.bb} (98%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-twisted_24.10.0.bb b/meta-python/recipes-devtools/python/python3-twisted_24.11.0.bb
+similarity index 98%
+rename from meta-python/recipes-devtools/python/python3-twisted_24.10.0.bb
+rename to meta-python/recipes-devtools/python/python3-twisted_24.11.0.bb
+index 865190fac..6f2894e88 100644
+--- a/meta-python/recipes-devtools/python/python3-twisted_24.10.0.bb
++++ b/meta-python/recipes-devtools/python/python3-twisted_24.11.0.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "https://twisted.org"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c1c5d2c2493b848f83864bdedd67bbf5"
+ 
+-SRC_URI[sha256sum] = "02951299672595fea0f70fa2d5f7b5e3d56836157eda68859a6ad6492d36756e"
++SRC_URI[sha256sum] = "695d0556d5ec579dcc464d2856b634880ed1319f45b10d19043f2b57eb0115b5"
+ 
+ inherit pypi python_hatchling
+ 
+-- 
+2.43.0
+
 
