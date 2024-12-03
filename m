@@ -2,53 +2,54 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B0C0EE6C5F0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D276E6C5EA
 	for <webhook@archiver.kernel.org>; Tue,  3 Dec 2024 00:17:10 +0000 (UTC)
-Received: from esa11.hc1455-7.c3s2.iphmx.com (esa11.hc1455-7.c3s2.iphmx.com [207.54.90.137])
- by mx.groups.io with SMTP id smtpd.web11.8215.1733185028024875654
+Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
+ by mx.groups.io with SMTP id smtpd.web11.8207.1733185020432032227
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Dec 2024 16:17:10 -0800
+ Mon, 02 Dec 2024 16:17:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=CdGMraq3;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.137, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=IGg2/mLX;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1733185029; x=1764721029;
+  t=1733185020; x=1764721020;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=Hj+GYx37+6GoP5+CsZ1POOdNiJ5Oz1964ix6cMmdBAI=;
-  b=CdGMraq36xFF/EfWis8YHz69Cwt/ut4oXZcbz8PFmSUGOf5IdSmbxzBH
-   AhJla64Yo9FI/vLNV5YtJfzBMobCgb43XiiHr7RyBMGYXMG+g73HM8jsq
-   ltHdK+++dtRkwhW0sb0PonudELGoDlqTM9yuLzrf9lYpsexL4J70bEmuf
-   mY0BlkJf6RAoCWWFCWxqvC37kE9V43qh5lYwbto15tWF6SY+3K3P8Byvg
-   ubSiqpE26MooEM1uo/Y+AyXTt+b1aR0YM/hcKRCvh5Q7mY2iEG4chvOx3
-   YA3HirpyAkESZjRQRDa2PiUo1k8PMOqn9lg631APLgoJEDud++9uqBcOV
-   A==;
-X-CSE-ConnectionGUID: nHsnhdNDQkaU7m5JrWklKw==
-X-CSE-MsgGUID: 0TP8gA2qTregSG+MeSRo0A==
-X-IronPort-AV: E=McAfee;i="6700,10204,11274"; a="161830287"
+  bh=KSsoKK7fYKGHohzSIZ58nPvxHlsGhtr0GxsiO+o8zuk=;
+  b=IGg2/mLXGMdiLz5qREryHINiP6HSEjWMRglmD8C94XGk8CCd19aOZalI
+   r88TdmtpCOT96SIuA05xvPxB5oQ330Kr7NEk32ImUp3q+5qgarmyzxSLh
+   mRlvse1vQsmjqqrLVvFiccB6bmCDoD5U5qkJgQZ74x/P+ze9yDqaXKP9R
+   QcUtYcBbqVcEsNS/zDAErJIVQjj03rnGD4VuYjKpCvoG1g2KCFq5gOG1f
+   gdn3dLYmFOlOP/y0CEpr/5+2WvMfpdoMDH11/BAYNZsyFvu3fTNBnJ0cb
+   uEj1ReQmy9wWYipG2aW2T3OYNMwmBjUBprBa4ZXSXeOH4J07/BZWmDVXL
+   g==;
+X-CSE-ConnectionGUID: HNu4DLasSlKMEUj4YoYifQ==
+X-CSE-MsgGUID: 9l8l192gQ0i7ELeQ6dLw+g==
+X-IronPort-AV: E=McAfee;i="6700,10204,11274"; a="182406413"
 X-IronPort-AV: E=Sophos;i="6.12,203,1728918000"; 
-   d="scan'208";a="161830287"
-Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
-  by esa11.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Dec 2024 09:17:08 +0900
-Received: from yto-m1.gw.nic.fujitsu.com (yto-nat-yto-m1.gw.nic.fujitsu.com [192.168.83.64])
-	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id DE3B6D4F62
-	for <openembedded-devel@lists.openembedded.org>; Tue,  3 Dec 2024 09:17:05 +0900 (JST)
-Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id A8C45CF7D9
-	for <openembedded-devel@lists.openembedded.org>; Tue,  3 Dec 2024 09:17:05 +0900 (JST)
+   d="scan'208";a="182406413"
+Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
+  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Dec 2024 09:16:58 +0900
+Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
+	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 3C6C3D6EA1
+	for <openembedded-devel@lists.openembedded.org>; Tue,  3 Dec 2024 09:16:56 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 13482D3F1D
+	for <openembedded-devel@lists.openembedded.org>; Tue,  3 Dec 2024 09:16:56 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 3813F20071A06
-	for <openembedded-devel@lists.openembedded.org>; Tue,  3 Dec 2024 09:17:05 +0900 (JST)
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id A2F866CB26
+	for <openembedded-devel@lists.openembedded.org>; Tue,  3 Dec 2024 09:16:55 +0900 (JST)
 Received: from localhost.localdomain.localdomain (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id D87161A0003;
-	Tue,  3 Dec 2024 08:17:04 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 42FD71A0003;
+	Tue,  3 Dec 2024 08:16:55 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@cn.fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH 33/34] tinysparql: upgrade 3.8.0 -> 3.8.1
-Date: Tue,  3 Dec 2024 08:16:38 +0800
-Message-Id: <1733184999-27041-33-git-send-email-wangmy@fujitsu.com>
+Cc: Wang Mingyu <wangmy@fujitsu.com>,
+	Wang Mingyu <wangmy@cn.fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 16/34] python3-cantools: upgrade 39.4.11 -> 39.4.13
+Date: Tue,  3 Dec 2024 08:16:21 +0800
+Message-Id: <1733184999-27041-16-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1733184999-27041-1-git-send-email-wangmy@fujitsu.com>
 References: <1733184999-27041-1-git-send-email-wangmy@fujitsu.com>
@@ -56,128 +57,50 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28834.003
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28834.003
-X-TMASE-Result: 10--3.892100-10.000000
-X-TMASE-MatchedRID: +qH7TW9/Rkejz0nOeth/ySrLqyE6Ur/jnJdsOLB4zv79wRnyxuPjhMir
-	dQwFSTzq/9FzCWH6Yv3FLqTgoGRsK7BAQLqGlKivP0HVIeixJdA3l2plwgrtWCD1HdXyqDnEvwU
-	evDt+uW6uw/I+coNEnxKFeojD/r+TofDSIGnaDB4cQNQCplRkzpi7ngo5v+d0z+Mu0UJyeG8+JN
-	YnO/CORyreb8Xf//jlUohz+xKeF4GY37wz4y436LGWmeVAULKHgjDdudOPBHowAYdq1VTXo4uVC
-	Dz2gMcK4vM1YF6AJbbCCfuIMF6xLd934/rDAK3zlGdyD+QE2h8Yo1vwXjsSa54/QHGpFjoht0iP
-	yHG+VaGoxh7hYllh3In2an4Y7PVX+mzb3tqyW5lqv1iHdgsPLmHyyBzMyaJaUrFvXfvigD7+v9v
-	52ZIoWjoAf389xF3XFSk9HhUZnw7OGIWnws4LoyHWPYzouJUy
+X-TMASE-Result: 10--3.293300-10.000000
+X-TMASE-MatchedRID: R9NZgeCyXhKjz0nOeth/yUIIxwDaU5mra9qiaDSLgo14YeSlHZYForWQ
+	yyh6qcDkAwr1d1MD+niLnMEhPnjoxxLmJd2F/yFuP0HVIeixJdA3l2plwgrtWCD1HdXyqDnEvwU
+	evDt+uW6vBQc3bCgEsHqYviVWLIXKeBzEkCCpnRmeAiCmPx4NwGmRqNBHmBveVDC1CbuJXmMqtq
+	5d3cxkNRjzriyVB0jfRn7vGqDWco6ECzvDFWnVvUY3PRtJFF3aXrp/lcehTU8s4YUHcxEPtJ4q7
+	hp074mBeGcyi1hLnV9Qrc6S24J5BjIuZWQlOWCUU8mdcvbI1h2S6jzjuXTm0MTMzICazP4UehYt
+	aVdyxm8=
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 03 Dec 2024 00:17:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114175
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114160
 
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
-
-0001-fix-reproducibility.patch
-refreshed for 3.8.1
+From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-============
-* Fix leak iterating bus-based cursors
-* Fix allowed extension for Turtle files in ontology definitions
-* Test fixes
+=============
+- Use tox and CMake to test generated C code on Windows
+- fix floating-point precision issue in arxml 'parse_number_string'
+- Encode the given NamedSignalValue 'value' when explicitly given
 
 Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- .../tinysparql/0001-fix-reproducibility.patch | 27 ++++++-------------
- ...inysparql_3.8.0.bb => tinysparql_3.8.1.bb} |  2 +-
- 2 files changed, 9 insertions(+), 20 deletions(-)
- rename meta-gnome/recipes-gnome/tracker/{tinysparql_3.8.0.bb => tinysparql_3.8.1.bb} (95%)
+ ...{python3-cantools_39.4.11.bb => python3-cantools_39.4.13.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-cantools_39.4.11.bb => python3-cantools_39.4.13.bb} (84%)
 
-diff --git a/meta-gnome/recipes-gnome/tracker/tinysparql/0001-fix-reproducibility.patch b/meta-gnome/recipes-gnome/tracker/tinysparql/0001-fix-reproducibility.patch
-index 23da5bb97e..67c0bdfebc 100644
---- a/meta-gnome/recipes-gnome/tracker/tinysparql/0001-fix-reproducibility.patch
-+++ b/meta-gnome/recipes-gnome/tracker/tinysparql/0001-fix-reproducibility.patch
-@@ -1,4 +1,4 @@
--From 1eec06fc1ef26e4954507001c1c2f981eab8d77d Mon Sep 17 00:00:00 2001
-+From e4552b9c5dbe8816266f332c5e20796d46eb5b16 Mon Sep 17 00:00:00 2001
- From: Markus Volk <f_l_k@t-online.de>
- Date: Mon, 18 Sep 2023 02:47:55 +0200
- Subject: [PATCH] tracker: fix reproducibility issue
-@@ -14,13 +14,12 @@ Signed-off-by: Markus Volk <f_l_k@t-online.de>
- ---
-  meson.build                        | 6 +++---
-  src/libtracker-common/meson.build  | 4 ++--
-- src/libtracker-http/meson.build    | 8 ++++----
-- src/libtracker-http/tracker-http.c | 4 ++--
-+ src/libtracker-http/tracker-http.c | 2 +-
-  src/libtracker-sparql/meson.build  | 4 ++--
-- 5 files changed, 13 insertions(+), 13 deletions(-)
-+ 4 files changed, 8 insertions(+), 8 deletions(-)
+diff --git a/meta-python/recipes-devtools/python/python3-cantools_39.4.11.bb b/meta-python/recipes-devtools/python/python3-cantools_39.4.13.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-cantools_39.4.11.bb
+rename to meta-python/recipes-devtools/python/python3-cantools_39.4.13.bb
+index 08047e4d54..fa9447b918 100644
+--- a/meta-python/recipes-devtools/python/python3-cantools_39.4.11.bb
++++ b/meta-python/recipes-devtools/python/python3-cantools_39.4.13.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/eerimoq/cantools"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd"
  
- diff --git a/meson.build b/meson.build
--index 41c00fafc..6e7282cb7 100644
-+index 8552c6d..d72ff52 100644
- --- a/meson.build
- +++ b/meson.build
- @@ -333,7 +333,7 @@ have_rtld_noload = cc.has_header_symbol('dlfcn.h', 'RTLD_NOLOAD')
-@@ -44,7 +43,7 @@ index 41c00fafc..6e7282cb7 100644
-  
-  tracker_uninstalled_cli_dir = join_paths(meson.current_build_dir(), 'src', 'tracker')
- diff --git a/src/libtracker-common/meson.build b/src/libtracker-common/meson.build
--index 72c2ae073..12218c870 100644
-+index 72c2ae0..12218c8 100644
- --- a/src/libtracker-common/meson.build
- +++ b/src/libtracker-common/meson.build
- @@ -51,10 +51,10 @@ libtracker_common = static_library('tracker-common',
-@@ -61,10 +60,10 @@ index 72c2ae073..12218c870 100644
-    include_directories: [configinc, srcinc],
-    gnu_symbol_visibility: 'hidden',
- diff --git a/src/libtracker-http/tracker-http.c b/src/libtracker-http/tracker-http.c
--index dd82e9928..3cc68b240 100644
-+index dd82e99..cb3f1f7 100644
- --- a/src/libtracker-http/tracker-http.c
- +++ b/src/libtracker-http/tracker-http.c
--@@ -53,13 +53,13 @@ ensure_types (void)
-+@@ -53,7 +53,7 @@ ensure_types (void)
-  
-  		current_dir = g_get_current_dir ();
-  
-@@ -73,15 +72,8 @@ index dd82e9928..3cc68b240 100644
-  			/* Detect in-build runtime of this code, this may happen
-  			 * building introspection information or running tests.
-  			 * We want the in-tree modules to be loaded then.
-- 			 */
-- 			module_path = g_strdup_printf (BUILD_LIBDIR "/%s", modules[i]);
---		} else {
--+		} else {
-- 			module_path = g_strdup_printf (PRIVATE_LIBDIR "/%s", modules[i]);
-- 		}
-- 
- diff --git a/src/libtracker-sparql/meson.build b/src/libtracker-sparql/meson.build
--index 5eccb92fc..161f6ea21 100644
-+index 5eccb92..161f6ea 100644
- --- a/src/libtracker-sparql/meson.build
- +++ b/src/libtracker-sparql/meson.build
- @@ -102,10 +102,10 @@ libtracker_sparql_private = static_library('tracker-sparql-private',
-@@ -97,6 +89,3 @@ index 5eccb92fc..161f6ea21 100644
-      ] + tracker_c_args,
-  
-      dependencies: [libtracker_sparql_dependencies],
---- 
--2.46.0
--
-diff --git a/meta-gnome/recipes-gnome/tracker/tinysparql_3.8.0.bb b/meta-gnome/recipes-gnome/tracker/tinysparql_3.8.1.bb
-similarity index 95%
-rename from meta-gnome/recipes-gnome/tracker/tinysparql_3.8.0.bb
-rename to meta-gnome/recipes-gnome/tracker/tinysparql_3.8.1.bb
-index 628384464d..0da2d1764c 100644
---- a/meta-gnome/recipes-gnome/tracker/tinysparql_3.8.0.bb
-+++ b/meta-gnome/recipes-gnome/tracker/tinysparql_3.8.1.bb
-@@ -20,7 +20,7 @@ inherit gettext gnomebase gobject-introspection vala gtk-doc bash-completion
+-SRC_URI[sha256sum] = "0b7bd88a236bb2ddfd7da5dd713058e97b749185e9d1257413b27bd4cfe7d82a"
++SRC_URI[sha256sum] = "ad84fb561f5ab20ccd2a45b7fcb29093008f6c8981c9f636f2d94613ed37c3d1"
  
- SRC_URI += "file://0001-fix-reproducibility.patch"
- SRC_URI += "file://0001-src-libtracker-sparql-meson.build-dont-create-compat.patch"
--SRC_URI[archive.sha256sum] = "c0fcda77520f531548b2395137dcd193ee9cde5e222d3c9d273f030d1762a504"
-+SRC_URI[archive.sha256sum] = "53e04add1ecb4d08caa1317f477fdf0e7148eaac5462831f2374880092ffb295"
+ PYPI_PACKAGE = "cantools"
  
- # text search is not an option anymore and requires sqlite3 build with
- # PACKAGECONFIG[fts5] set (default)
 -- 
 2.34.1
 
