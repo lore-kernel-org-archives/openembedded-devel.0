@@ -1,167 +1,251 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <kamalgmbh32@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D6B14E74AC3
-	for <webhook@archiver.kernel.org>; Tue,  3 Dec 2024 17:00:45 +0000 (UTC)
-Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com [209.85.167.176])
- by mx.groups.io with SMTP id smtpd.web11.25387.1733245242801656297
- for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Dec 2024 09:00:42 -0800
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=j35YKjxE;
- spf=pass (domain: gmail.com, ip: 209.85.167.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f176.google.com with SMTP id 5614622812f47-3ea4acd3ed2so2473941b6e.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Dec 2024 09:00:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1733245242; x=1733850042; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=/xLKxFly/sXUMl/DUq2xzo9Et2AB0PJJQ6rpdchqDDE=;
-        b=j35YKjxEBYVIVQcHO77TXPakvwwQNUiK06SlovOeDM9caMI83WzcYFzr4KnNKY3Qwq
-         U8QsP/aOcMSdvgygnQsQ+TEbtVBZ1SXQn8t8DTpe9r15znvPqHYyORS2eF9bLcxhpjSk
-         lzNhH6UkbADA/7nkBGqCRk0xYf30Y2RPHpbTq87bx8wyCAf//62e+UEoC80+8O953dii
-         9a9DFospYR2tMn8QpDMS+UIXmFIUS9kOkhA+bWL4ONp5+vng9pfZ8ej5hkDcjwMemgVN
-         jy87qwAlyvT3XXNN8zucpnnu8GtS/6OnT3gR2qpYZdYBT7h11GEebxiMiOuMpUQ9wAMa
-         q0ow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733245242; x=1733850042;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=/xLKxFly/sXUMl/DUq2xzo9Et2AB0PJJQ6rpdchqDDE=;
-        b=BNZVAE4f3SBpCmPrw0pyy378Cla66rJ+KCzXwTLeKAlcVClJu+h+50amBik72DEMmH
-         H4fH5lBMQt9k/nbLqoHYdfplslssE6tMPhu/NvalNFa8D3RgrTF2RzLntRv6aPGC2I/H
-         zsrAUyhpph4sEI7sqblelSleADhXZhb5x/vO563l9ItGb0ffpLFS3t0I673Xn3Xp6BS7
-         +RhCshYWkgruU46EZsM9T++QTMXHMldG88wcBl4LQ2A846zwG89ZCOf5qjd7UhgusfUo
-         gJD4xfbtFIOhfJAC5raQlBs1rYZ0mG2OONsf8Mt6IAZ9Z5iJ6b6aGJkkT1w/tVeyjlRF
-         CDBw==
-X-Forwarded-Encrypted: i=1; AJvYcCUKOk8sN/g3pNw67Oj8LNjHOdWHCJi7tYJzn6V9akVA+I+FGr0OYSY01G5K76oQrkZIceaKujh1FwFXP+vUIsZyRhI=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yycs8jaBzpLre0V9n0ckRruzaet2fDS1FhqW1IbWmPUKg/0czDu
-	MSMxCUtQm4PJenC1FpFaR+iWTsZNwq0IY04ITGMw0pUG4YFwPIyNKZQOzPj/anAWnXTxGdpqfbc
-	/bvmLzInkqcXm6zg+070rYWEHbh0=
-X-Gm-Gg: ASbGncua0zzJS2YsISztByHyaDO5BHayHGfUIQkmFHEKATaMH7gRLuvxbqWVHYk0hOp
-	opgn6+qcUCMsXu4/5YwpUfqP9lWFIPw==
-X-Google-Smtp-Source: AGHT+IHXIB/e1fHmJ/QGu61z3Yp9Cn0JnmB7fOSMM71Z7Uf6BenT0VpnmLWjl43EskRf+bjy2eIk/TlAEn5NwMIYtsY=
-X-Received: by 2002:a05:6808:200e:b0:3ea:64cc:4972 with SMTP id
- 5614622812f47-3eaf03bab8cmr635455b6e.30.1733245241839; Tue, 03 Dec 2024
- 09:00:41 -0800 (PST)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0B25E74AD5
+	for <webhook@archiver.kernel.org>; Tue,  3 Dec 2024 20:54:56 +0000 (UTC)
+Subject: Need Support: how to install Multilib in yocto: I am enabling  Multilib ,lib32-gcc, lib32g++ and lib32fotran
+To: openembedded-devel@lists.openembedded.org
+From: "Kamal GMBH" <kamalgmbh32@gmail.com>
+X-Originating-Location: Plano, Texas, US (161.69.80.128)
+X-Originating-Platform: Windows Chrome 131
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-References: <20241130124846.232284-1-johannes.schneider@leica-geosystems.com> <5ce10539cc5280e1b26fbfae7c0e00e193223ee8.camel@pengutronix.de>
-In-Reply-To: <5ce10539cc5280e1b26fbfae7c0e00e193223ee8.camel@pengutronix.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 3 Dec 2024 09:00:16 -0800
-Message-ID: <CAMKF1srYtecYEBMk9GT+EvqGK-Qy-XC7NZcwZXAtUx+CeDvQEw@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH v1] signing.bbclass: add set|get|has_ca functions
-To: =?UTF-8?Q?Jan_L=C3=BCbbe?= <jlu@pengutronix.de>
-Cc: Johannes Schneider <johannes.schneider@leica-geosystems.com>, 
-	openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Date: Tue, 03 Dec 2024 12:54:56 -0800
+Message-ID: <rtPJ.1733259296056727661.h2CI@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="5HlQ8r2wMIS1E6TZj2g7"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 03 Dec 2024 17:00:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114186
+ <openembedded-devel@lists.openembedded.org>; Tue, 03 Dec 2024 20:54:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114187
 
-On Tue, Dec 3, 2024 at 8:45=E2=80=AFAM Jan L=C3=BCbbe <jlu@pengutronix.de> =
-wrote:
->
-> On Sat, 2024-11-30 at 13:48 +0100, Johannes Schneider wrote:
-> > Add a mechanism to establish a (metadata) link between roles, in the
-> > form of a new 'ca' variable.  Which is intended to point from one role
-> > to another, to preserve the leaf->intermediary certificate relation.
-> >
-> > With this additional mechanism, it would be now possible to import a
-> > complex PKI tree of certificates (either just the certificates, or
-> > both cert+key where available); and then later during usage of one
-> > role, reconstruct the verification chain from the leaf, through
-> > multiple intermediary, and up to the root role.
-> >
-> > Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.=
-com>
->
-> No, as explained in the other thread, CA certificates are *not* roles.
-> A possible extension would be that roles refer to a CA certificate. We
-> should continue to discuss this in the thread "signing.bbclass: add
-> set|get|has_ca functions"
+--5HlQ8r2wMIS1E6TZj2g7
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-perhaps a plugin sort ?
+*local.conf file:*
 
->
-> Khem: This should not be merged in the current form.
+*DISTRO_FEATURES:append =3D " multilib"*
+*# Enable multilib support*
+*MULTILIBS =3D "multilib:lib32"*
+*DEFAULTTUNE_virtclass- multilib-lib32 =3D "x86"*
+*# Include lib32 versions of GCC, G++, and Fortran*
+*IMAGE_INSTALL:append =3D " lib32-libgcc lib32-gcc-runtime lib32-libstdc++ =
+lib32-gfortran"*
 
-yeah thanks
+umesha@yocto-server-2:/media/ nvme1/umesha/kamal-poky/poky/ build$ *bitbake=
+-layers show-recipes | grep libgcc*
+libgcc:
+libgcc-initial:
 
->
-> Jan
->
-> > ---
-> >  meta-oe/classes/signing.bbclass | 34 +++++++++++++++++++++++++++++++++
-> >  1 file changed, 34 insertions(+)
-> >
-> > diff --git a/meta-oe/classes/signing.bbclass b/meta-oe/classes/signing.=
-bbclass
-> > index 8af7bbf8e..f1765e96b 100644
-> > --- a/meta-oe/classes/signing.bbclass
-> > +++ b/meta-oe/classes/signing.bbclass
-> > @@ -246,6 +246,18 @@ signing_import_key_from_pem() {
-> >      signing_import_privkey_from_pem "${role}" "${pem}"
-> >  }
-> >
-> > +# signing_import_set_ca <role> <role_ca>
-> > +#
-> > +# Link the certificate from <role> to its issuer stored in <ca_role>
-> > +# By walking this linked list a CA-chain can later be reconstructed fr=
-om the
-> > +# involed roles.
-> > +signing_import_set_ca() {
-> > +    local role=3D"${1}"
-> > +    local ca_role=3D"${2}"
-> > +
-> > +    echo "_SIGNING_CA_${role}_=3D\"${ca_role}\"" >> $_SIGNING_ENV_FILE=
-_
-> > +}
-> > +
-> >  signing_import_finish() {
-> >      echo "loaded objects:"
-> >      signing_pkcs11_tool --list-objects
-> > @@ -346,6 +358,28 @@ signing_get_module() {
-> >      fi
-> >  }
-> >
-> > +# signing_get_ca <role>
-> > +#
-> > +# returns the <ca_role> that has been set previously through
-> > +# signing_import_set_ca; or the empty string if none was set
-> > +signing_get_ca() {
-> > +    local role=3D"${1}"
-> > +
-> > +    eval local ca_role=3D"\$_SIGNING_CA_${role}_"
-> > +    echo "$ca_role"
-> > +}
-> > +
-> > +# signing_has_ca <role>
-> > +#
-> > +# check if the role links to another role that is its certificate
-> > +# authority/issuer.
-> > +signing_has_ca() {
-> > +    local ca_role=3D"$(signing_get_ca ${1})"
-> > +
-> > +    test -n "$ca_role"
-> > +    return $?
-> > +}
-> > +
-> >  python () {
-> >      signing_class_prepare(d)
-> >  }
->
-> --
-> Pengutronix e.K.                        |                             |
-> Steuerwalder Str. 21                    | https://www.pengutronix.de/ |
-> 31137 Hildesheim, Germany               | Phone: +49-5121-206917-0    |
-> Amtsgericht Hildesheim, HRA 2686        | Fax:   +49-5121-206917-5555 |
->
->
+umesha@yocto-server-2:/media/ nvme1/umesha/kamal-poky/poky/ build$
+*Here lib32-gcc details is not showing ..*
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D =3D
+*another try:*
+*require conf/multilib.conf=C2=A0 =3D> newly added*
+local.conf file:
+DISTRO_FEATURES:append =3D " multilib"
+# Enable multilib support
+MULTILIBS =3D "multilib:lib32"
+DEFAULTTUNE_virtclass- multilib-lib32 =3D "x86"
+# Include lib32 versions of GCC, G++, and Fortran
+IMAGE_INSTALL:append =3D " lib32-libgcc lib32-gcc-runtime lib32-libstdc++ l=
+ib32-gfortran"
+
+umesha@yocto-server-2:/media/ nvme1/umesha/kamal-poky/poky/ build$ *bitbake=
+-layers show-recipes | grep libgcc*
+ERROR: =C2=A0OE-core's config sanity checker detected a potential misconfig=
+uration.
+Either fix the cause of this error or at your own risk disable the checker =
+(see sanity.conf).
+Following is the list of potential problems / advisories:
+Toolchain tunings invalid:
+No tuning found for lib32 multilib.
+Traceback (most recent call last):
+File "/media/nvme1/umesha/kamal- poky/poky/bitbake/bin/bitbake- layers", li=
+ne 95, in <module>
+ret =3D main()
+File "/media/nvme1/umesha/kamal- poky/poky/bitbake/bin/bitbake- layers", li=
+ne 85, in main
+tinfoil.parse_recipes()
+File "/media/nvme1/umesha/kamal- poky/poky/bitbake/lib/bb/ tinfoil.py", lin=
+e 448, in parse_recipes
+self.run_actions(config_ params)
+File "/media/nvme1/umesha/kamal- poky/poky/bitbake/lib/bb/ tinfoil.py", lin=
+e 431, in run_actions
+raise TinfoilUIException(ret)
+bb.tinfoil.TinfoilUIException: 1
+umesha@yocto-server-2:/media/ nvme1/umesha/kamal-poky/poky/ build$
+umesha@yocto-server-2:/media/ nvme1/umesha/kamal-poky/poky/ build$
+
+Thank you in Advance!!
+
+--5HlQ8r2wMIS1E6TZj2g7
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div>
+<div style=3D"color: #222222; font-family: Arial, Helvetica, sans-serif; fo=
+nt-size: small; font-style: normal; font-variant-ligatures: normal; font-va=
+riant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; t=
+ext-align: start; text-indent: 0px; text-transform: none; widows: 2; word-s=
+pacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; backgroun=
+d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
+: initial; text-decoration-color: initial;"><strong>local.conf file:</stron=
+g></div>
+<div style=3D"color: #222222; font-family: Arial, Helvetica, sans-serif; fo=
+nt-size: small; font-style: normal; font-variant-ligatures: normal; font-va=
+riant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; t=
+ext-align: start; text-indent: 0px; text-transform: none; widows: 2; word-s=
+pacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; backgroun=
+d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
+: initial; text-decoration-color: initial;"><br /><strong>DISTRO_FEATURES:a=
+ppend =3D " multilib"</strong></div>
+<div style=3D"color: #222222; font-family: Arial, Helvetica, sans-serif; fo=
+nt-size: small; font-style: normal; font-variant-ligatures: normal; font-va=
+riant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; t=
+ext-align: start; text-indent: 0px; text-transform: none; widows: 2; word-s=
+pacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; backgroun=
+d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
+: initial; text-decoration-color: initial;"><strong># Enable multilib suppo=
+rt</strong><br /><strong>MULTILIBS =3D "multilib:lib32"</strong><br /><stro=
+ng>DEFAULTTUNE_virtclass-<wbr />multilib-lib32 =3D "x86"</strong></div>
+<div style=3D"color: #222222; font-family: Arial, Helvetica, sans-serif; fo=
+nt-size: small; font-style: normal; font-variant-ligatures: normal; font-va=
+riant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; t=
+ext-align: start; text-indent: 0px; text-transform: none; widows: 2; word-s=
+pacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; backgroun=
+d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
+: initial; text-decoration-color: initial;"><strong># Include lib32 version=
+s of GCC, G++, and Fortran</strong><br /><strong>IMAGE_INSTALL:append =3D "=
+ lib32-libgcc lib32-gcc-runtime lib32-libstdc++ lib32-gfortran"</strong></d=
+iv>
+<div style=3D"color: #222222; font-family: Arial, Helvetica, sans-serif; fo=
+nt-size: small; font-style: normal; font-variant-ligatures: normal; font-va=
+riant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; t=
+ext-align: start; text-indent: 0px; text-transform: none; widows: 2; word-s=
+pacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; backgroun=
+d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
+: initial; text-decoration-color: initial;">&nbsp;</div>
+<div style=3D"color: #222222; font-family: Arial, Helvetica, sans-serif; fo=
+nt-size: small; font-style: normal; font-variant-ligatures: normal; font-va=
+riant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; t=
+ext-align: start; text-indent: 0px; text-transform: none; widows: 2; word-s=
+pacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; backgroun=
+d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
+: initial; text-decoration-color: initial;">umesha@yocto-server-2:/media/<w=
+br />nvme1/umesha/kamal-poky/poky/<wbr />build$<span>&nbsp;</span><strong>b=
+itbake-layers show-recipes | grep libgcc</strong><br />libgcc:<br />libgcc-=
+initial:</div>
+<div style=3D"color: #222222; font-family: Arial, Helvetica, sans-serif; fo=
+nt-size: small; font-style: normal; font-variant-ligatures: normal; font-va=
+riant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; t=
+ext-align: start; text-indent: 0px; text-transform: none; widows: 2; word-s=
+pacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; backgroun=
+d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
+: initial; text-decoration-color: initial;"><br />umesha@yocto-server-2:/me=
+dia/<wbr />nvme1/umesha/kamal-poky/poky/<wbr />build$&nbsp;</div>
+<div style=3D"color: #222222; font-family: Arial, Helvetica, sans-serif; fo=
+nt-size: small; font-style: normal; font-variant-ligatures: normal; font-va=
+riant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; t=
+ext-align: start; text-indent: 0px; text-transform: none; widows: 2; word-s=
+pacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; backgroun=
+d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
+: initial; text-decoration-color: initial;"><strong>Here lib32-gcc details =
+is not showing ..</strong></div>
+<div style=3D"color: #222222; font-family: Arial, Helvetica, sans-serif; fo=
+nt-size: small; font-style: normal; font-variant-ligatures: normal; font-va=
+riant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; t=
+ext-align: start; text-indent: 0px; text-transform: none; widows: 2; word-s=
+pacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; backgroun=
+d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
+: initial; text-decoration-color: initial;">=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<wbr />=3D<br /=
+><strong>another try:</strong></div>
+<div style=3D"color: #222222; font-family: Arial, Helvetica, sans-serif; fo=
+nt-size: small; font-style: normal; font-variant-ligatures: normal; font-va=
+riant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; t=
+ext-align: start; text-indent: 0px; text-transform: none; widows: 2; word-s=
+pacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; backgroun=
+d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
+: initial; text-decoration-color: initial;"><strong>require conf/multilib.c=
+onf&nbsp; =3D&gt; newly added&nbsp;</strong><br />local.conf file:<br />DIS=
+TRO_FEATURES:append =3D " multilib"</div>
+<div style=3D"color: #222222; font-family: Arial, Helvetica, sans-serif; fo=
+nt-size: small; font-style: normal; font-variant-ligatures: normal; font-va=
+riant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; t=
+ext-align: start; text-indent: 0px; text-transform: none; widows: 2; word-s=
+pacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; backgroun=
+d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
+: initial; text-decoration-color: initial;"># Enable multilib support<br />=
+MULTILIBS =3D "multilib:lib32"<br />DEFAULTTUNE_virtclass-<wbr />multilib-l=
+ib32 =3D "x86"</div>
+<div style=3D"color: #222222; font-family: Arial, Helvetica, sans-serif; fo=
+nt-size: small; font-style: normal; font-variant-ligatures: normal; font-va=
+riant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; t=
+ext-align: start; text-indent: 0px; text-transform: none; widows: 2; word-s=
+pacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; backgroun=
+d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
+: initial; text-decoration-color: initial;"># Include lib32 versions of GCC=
+, G++, and Fortran<br />IMAGE_INSTALL:append =3D " lib32-libgcc lib32-gcc-r=
+untime lib32-libstdc++ lib32-gfortran"</div>
+<div style=3D"color: #222222; font-family: Arial, Helvetica, sans-serif; fo=
+nt-size: small; font-style: normal; font-variant-ligatures: normal; font-va=
+riant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; t=
+ext-align: start; text-indent: 0px; text-transform: none; widows: 2; word-s=
+pacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; backgroun=
+d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
+: initial; text-decoration-color: initial;"><br />umesha@yocto-server-2:/me=
+dia/<wbr />nvme1/umesha/kamal-poky/poky/<wbr />build$<span>&nbsp;</span><st=
+rong>bitbake-layers show-recipes | grep libgcc</strong><br />ERROR: &nbsp;O=
+E-core's config sanity checker detected a potential misconfiguration.<br />=
+&nbsp; &nbsp; Either fix the cause of this error or at your own risk disabl=
+e the checker (see sanity.conf).<br />&nbsp; &nbsp; Following is the list o=
+f potential problems / advisories:</div>
+<div style=3D"color: #222222; font-family: Arial, Helvetica, sans-serif; fo=
+nt-size: small; font-style: normal; font-variant-ligatures: normal; font-va=
+riant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; t=
+ext-align: start; text-indent: 0px; text-transform: none; widows: 2; word-s=
+pacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; backgroun=
+d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
+: initial; text-decoration-color: initial;">&nbsp; &nbsp; Toolchain tunings=
+ invalid:<br />No tuning found for lib32 multilib.</div>
+<div style=3D"color: #222222; font-family: Arial, Helvetica, sans-serif; fo=
+nt-size: small; font-style: normal; font-variant-ligatures: normal; font-va=
+riant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; t=
+ext-align: start; text-indent: 0px; text-transform: none; widows: 2; word-s=
+pacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; backgroun=
+d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
+: initial; text-decoration-color: initial;">Traceback (most recent call las=
+t):<br />&nbsp; File "/media/nvme1/umesha/kamal-<wbr />poky/poky/bitbake/bi=
+n/bitbake-<wbr />layers", line 95, in &lt;module&gt;<br />&nbsp; &nbsp; ret=
+ =3D main()<br />&nbsp; File "/media/nvme1/umesha/kamal-<wbr />poky/poky/bi=
+tbake/bin/bitbake-<wbr />layers", line 85, in main<br />&nbsp; &nbsp; tinfo=
+il.parse_recipes()<br />&nbsp; File "/media/nvme1/umesha/kamal-<wbr />poky/=
+poky/bitbake/lib/bb/<wbr />tinfoil.py", line 448, in parse_recipes<br />&nb=
+sp; &nbsp; self.run_actions(config_<wbr />params)<br />&nbsp; File "/media/=
+nvme1/umesha/kamal-<wbr />poky/poky/bitbake/lib/bb/<wbr />tinfoil.py", line=
+ 431, in run_actions<br />&nbsp; &nbsp; raise TinfoilUIException(ret)<br />=
+bb.tinfoil.TinfoilUIException: 1<br />umesha@yocto-server-2:/media/<wbr />n=
+vme1/umesha/kamal-poky/poky/<wbr />build$&nbsp;<br />umesha@yocto-server-2:=
+/media/<wbr />nvme1/umesha/kamal-poky/poky/<wbr />build$&nbsp;</div>
+<div style=3D"color: #222222; font-family: Arial, Helvetica, sans-serif; fo=
+nt-size: small; font-style: normal; font-variant-ligatures: normal; font-va=
+riant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; t=
+ext-align: start; text-indent: 0px; text-transform: none; widows: 2; word-s=
+pacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; backgroun=
+d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
+: initial; text-decoration-color: initial;">&nbsp;</div>
+<div style=3D"color: #222222; font-family: Arial, Helvetica, sans-serif; fo=
+nt-size: small; font-style: normal; font-variant-ligatures: normal; font-va=
+riant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; t=
+ext-align: start; text-indent: 0px; text-transform: none; widows: 2; word-s=
+pacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; backgroun=
+d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
+: initial; text-decoration-color: initial;">Thank you in Advance!!</div>
+</div>
+
+--5HlQ8r2wMIS1E6TZj2g7--
 
