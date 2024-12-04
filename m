@@ -1,166 +1,195 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B660E7716B
-	for <webhook@archiver.kernel.org>; Wed,  4 Dec 2024 04:55:00 +0000 (UTC)
-Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
- by mx.groups.io with SMTP id smtpd.web11.6823.1733288097529329046
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 690D8E7716F
+	for <webhook@archiver.kernel.org>; Wed,  4 Dec 2024 07:52:12 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.8885.1733298729964584739
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Dec 2024 20:54:57 -0800
+ Tue, 03 Dec 2024 23:52:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=JZWrxtF4;
- spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-6eeb31b10ceso55492247b3.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Dec 2024 20:54:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1733288096; x=1733892896; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=J5piiAfxKBTu7pa73ZxHVO8VT87n/2UT94h3qInZ9m4=;
-        b=JZWrxtF41aH2nQs7F4CmfeHrAJpovvqm2iz3kpV8TT3XCLlW7MBUTzTs4xIt6zNatN
-         VVKGCv/d05SGX9YR86fV4WgKx1PhpUiqzouhBzb3O0UQD07fEupHwi7cukhKixeUGGd+
-         bKN7O0pNGt/WhRBu/eGTgeoSAEOA8o53EETe2Cyemu0mCA4M9gYyxBFEIN4Ny3eu6LKI
-         g+BixGnJPY6TU2ukoaNphwtDbdUKXMWYBmnmo8ZfRKx9N1VSRvq0qSq8IpwBy9W7uRy6
-         htIe+2mbtMGIjdBwNohB9DpcjkG8a1uT3mZ0oXg/WxGBg85UWUkO8TtDKq1Dt4Q4X4sN
-         5pRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733288096; x=1733892896;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=J5piiAfxKBTu7pa73ZxHVO8VT87n/2UT94h3qInZ9m4=;
-        b=IMmwn58kbbtUxtrsBsR08B3jiRdQOG+E5m1KQg16864rS+SZJgefR5Zi3NDDqvIoWQ
-         Piw4ItvjKe6+rgfhHoyzKGj1hKPV4ALEvbo6OyC+Re9qvmvKqtaacTAm4TpMsUf19jYD
-         awfUp1Zv3DrDPlnNuUMNZL4yqehym4nf3XSlYpdBxDZMzS5v/aSO/mjrjApyotPXHp+r
-         McRoVngZq7cIoPlcRU9n7YWkpyrcYfg/tIjHNC0dGjv6nAwPP1Ffz3ewjLj/vF+bwHR+
-         +BQ8Q5en4fjqJoOuTe8FI+FcH3rPNCS578m6n6x/4hSFG7jxcT1pmLUWj7VLIYc+nKgN
-         HGVA==
-X-Gm-Message-State: AOJu0YyFPhGjiLAJfre7wfS6tkPDkkkYVPqfjsIZMdI0jlWn5Io3OCxt
-	cm9lPT/ISzRnimgb/mM0ll0egOD9MMGoDphHeVMWeB/hiTRs2VKzIafzpn9q
-X-Gm-Gg: ASbGncsR11v52/MLAiw52/mjduoUuNVO5YdeF2TVDyTxWUejuo3Wha8f26LAwAWbzBZ
-	NfFhYTzPwVBVHhoqCZDhwlegv6GxHM/Kag81Dtub9kl/PYK+/1/LcSCf57z1EjF2+0GF9+dIXvC
-	OfS3hJ0aKlUwszFfL/70TIW4oVvNmu8/7jK8SckQQow6IPX0fQ4/gVSBWTYsf0IgMYNCWNoHgyH
-	ud6uVIXiaQyZCsLNu8pYYFVGRt0678RKOSdovsW/tfYZmVFJbQmyyxT
-X-Google-Smtp-Source: AGHT+IFp2W6PibmdILCl1hpzOGFOnwpQKhHr4XevRrpuOCfuEsfXo+UwiDgPjHPmlizF2/EDQvoqzA==
-X-Received: by 2002:a05:690c:c08:b0:6ef:579c:38e6 with SMTP id 00721157ae682-6efbd3fd769mr35874337b3.28.1733288096047;
-        Tue, 03 Dec 2024 20:54:56 -0800 (PST)
-Received: from localhost.localdomain ([71.215.7.194])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ef4db292fdsm31111617b3.8.2024.12.03.20.54.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Dec 2024 20:54:55 -0800 (PST)
-From: Jason Schonberg <schonm@gmail.com>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=20682f46d1=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4B46D323023644
+	for <openembedded-devel@lists.openembedded.org>; Tue, 3 Dec 2024 23:52:09 -0800
+Received: from nam11-bn8-obe.outbound.protection.outlook.com (mail-bn8nam11lp2171.outbound.protection.outlook.com [104.47.58.171])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 437xv7v920-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 03 Dec 2024 23:52:09 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=N9EZ7+TTyUMkAD7sd+1DpNK+qYjZNRzl9TGPIUHCIs+PVDRQpWtA9qBaHlnyhwWtVL6dfX7wOl4l17BUiLD3T4cmyTizoJb76xJdDjHg+xH0MmpdQNnP9V50Q1FyR6VpR6suTwyetXA8Mk4GuIIrgDxyRZaVWuVrHYxRKpK+vp+0JE0+zsXFb8mOKWcwERrQgApYcjaXU0M/BTgaBnd5RILMijoM2r7FhckPwtk5xIrTakgMSsUAM4DR3ZqqkQjH1khvnBYvoWHD+H1EZTegNZkOBcJ06l2PWdmgo1pwFcga9gkLoZ3ohqMG+Zq3msEHObnsd+GNvC21w4kRAmAzVQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=gEwuKuNCuLZWyHr0uhuIRwjq5bhahcw2dm4ChV39oYU=;
+ b=dSguk/g2LU335znFMH48yYHtuMfnAgjvqYi7IXKbjTvmOGPD7DWyilCIGnSpTi3aG8ukndZvunq6LJIBHffu5g5erHDhptiv+O9AUxKSSELRa/Uif6L+frd9rZrjizb4Wk87VokA8c5lQvQSi4pXzw64DpkfXs0tsfuxgpvZCBy7xV5sLZkyLp4F1GzhXi4L38SPSVxv22dQA7+nq32b9s7Q5mcB/IvZGR09ZQo5dbf/rS0F7L6qnA2B+ULqBexBPjfXcsBl/cFA1ixWWLGtjqzpdKl0ieSo0XzwvVf2BCH6MTfuRwopCqSErfjN0bnCmX5DixoT3AaSxVbjUymiwA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5) by
+ SJ0PR11MB6573.namprd11.prod.outlook.com (2603:10b6:a03:44d::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.17; Wed, 4 Dec
+ 2024 07:52:06 +0000
+Received: from DS0PR11MB6399.namprd11.prod.outlook.com
+ ([fe80::2b44:787c:e7ee:bfad]) by DS0PR11MB6399.namprd11.prod.outlook.com
+ ([fe80::2b44:787c:e7ee:bfad%7]) with mapi id 15.20.8207.017; Wed, 4 Dec 2024
+ 07:52:06 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] nodejs: upgrade 22.11.0 -> 22.12.0
-Date: Tue,  3 Dec 2024 23:54:07 -0500
-Message-ID: <20241204045407.2978-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
+Subject: [meta-oe][PATCH] lastlog2: remove leftover patch
+Date: Wed,  4 Dec 2024 15:51:55 +0800
+Message-Id: <20241204075156.3811134-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.25.1
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TYCP286CA0085.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:2b3::8) To DS0PR11MB6399.namprd11.prod.outlook.com
+ (2603:10b6:8:c8::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|SJ0PR11MB6573:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0d20dbef-b20d-4626-bf4f-08dd14388c20
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|376014|1800799024|366016|52116014|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?0QpF+qF9TpZtGa8MqgJldiUhN593lEY/AgGmRWkTwemflbW1oph40c5mNtiA?=
+ =?us-ascii?Q?vOWEfbLgJghKuPP9t8i6heJYYJMOqb6rZ9tE67EyrB01Gr4uqgMvSL2xO5hp?=
+ =?us-ascii?Q?CRWVgqPoPMNkFvGdDN0dRC7lcdwom01GFdQVRMELfmj/qUGf98DmahWlzJ8t?=
+ =?us-ascii?Q?cZoG3PFxeEBvGPn8vMR1covSdXljbrhtQc2b4uIzgHSTtyxh0c1QhBWzIWQl?=
+ =?us-ascii?Q?1Z9lre1XLZ0guUzBIa+SKsqHd515Fz5si+Kl+j9sm1es3172bISKP7zv21X8?=
+ =?us-ascii?Q?KokutEd908SfY1Y4M4vVZvMVSA3kxe/mVvJ/rihkAsqUljaQna55RgCsjJtD?=
+ =?us-ascii?Q?kABtOhqRKj5Op8CWivbRvsH245Agph0bN7UFsFKA4Z6jjrdoPwXpTUSF2V+s?=
+ =?us-ascii?Q?xkL5SmXzi22dnQL/m6GSMGA49kn2EAD7of/OvBBOu6+Vjb+y2ysogptQ3cFY?=
+ =?us-ascii?Q?VHWIKF818eCwGzPbhmHpIs3yxlKwDNwYDPGRfxPPgRScayDICzrpOTB4EbhZ?=
+ =?us-ascii?Q?pF63+1e/SnkuoIWqtJlUqEk8sx7Kk5F/J1/vPTa6oT4WhBHmvXupihZxDAG1?=
+ =?us-ascii?Q?xxRl5YZxQHw5cPkyCSZn0bj+AoF5q7sC/YvQLb/+l5CGu2BLdwtoYEggIVNB?=
+ =?us-ascii?Q?xKVXHbFEtS3XsQ+/XxRNdERy7l7RtMEImXKFXvek94Wdp7xlhS1a7kyp0oLN?=
+ =?us-ascii?Q?+KQq4pjMA0AaDq1mu55SsGUoIZ2XWErFUD1zHDXDNThBU4ehYWlV2OsUWqjv?=
+ =?us-ascii?Q?swdfezdrIVdCPSX6A5kv9xUQux39zuytY/9ywvScM1s1szTuN20akYODO/Sv?=
+ =?us-ascii?Q?SZTkAE1PfMvUUt6Z0lFWhXPJ7hfqiDl9WGl3bMczVUoHI4i0RkXVXoVazPcP?=
+ =?us-ascii?Q?9ZH+YWcZAuU4QvbJpL+hZv19Eaulp7AETv5NDc2jvtKrRhYY+QgeYMx9obGN?=
+ =?us-ascii?Q?FV0EwM8N0PR6L5VxVwNOfumFTHWRbndQmt0I/Hc3bhL/ifqTyNpKs1Q/4Zj5?=
+ =?us-ascii?Q?g8jxdbdQMsS4WBFVL6GLT3KTrypFJKMnlQ4uOtjziME7u+l1lDocNvq8NapU?=
+ =?us-ascii?Q?wyrwuj9E1lRKJ37q808TejpWU7TanZ75dLDacyaWvioFbvyRu+3iq9OKsncv?=
+ =?us-ascii?Q?EYLd3ZMOzqmJA1oqcdVGRrQDizMy2lsdGf9ZiFIaR/TrLe/aaFoR1nCDQEvK?=
+ =?us-ascii?Q?044Strck5lQHHEGyNA9rKr1B0kKyNIe0VKkAHGYMJV343Jf/P6Pz17v1W1l+?=
+ =?us-ascii?Q?YJlMXQG77nGhKexQjv7+vqKaFJ8BwrsXKHkIz+fh1fmU3M1Cczq5ojl2xjSq?=
+ =?us-ascii?Q?vs5fh8N5yHrW8CFV1cnEj6HA47TNwDFb4qGomn8WDFsO9mWFWqGTu87RHmS7?=
+ =?us-ascii?Q?/c6yI6rCLux1TUojixOyPW/qZZCTosoRJGOp7KiKs7rMsFvH0Q=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(52116014)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?1k4IdJF9Q+on7v4AnaDQTFcmiMw6TTgjWyX1hqQJFuveU82fL4FHpgrTs1ax?=
+ =?us-ascii?Q?GILPMXI1bCLIFtgvSUXUEwJUvydvydNL910Fh1kLnvPMQCFIjfvHAkuXhGxN?=
+ =?us-ascii?Q?iNFbLTkszUYkTtaOegAKKzdX6+luvMVwLHCe8jxSxSc1KdDROiFfEH4KOrdF?=
+ =?us-ascii?Q?FIIyL/GFc7z1rx74m+YDukf0+kzef7K4Klp+m0eYtcEcWFUtugtIjVaoUVeo?=
+ =?us-ascii?Q?ogXYb1MEj/xzGj87h3yv/UZV7BZwkKY/vrJxSo7ZgBn0LxoC0riU9Bkd/7Vb?=
+ =?us-ascii?Q?+YVomQ6vh6a0nvn9jaLBmjqTcjlcy3QteAKMXUWYA+Ugc004ijixPRzf4IZr?=
+ =?us-ascii?Q?Tgdu+2wiuEBckbhAhWMtrRKedCdtMpLhExRDbrfkyi8E3QeSVuTLi0+qZMLr?=
+ =?us-ascii?Q?+kWkjbg5/6TSebK1t5GK9Gza1M8/j+D6JV5kFID10D/B7zk2AyC9u4qYMN1S?=
+ =?us-ascii?Q?pwzxVyrmTgKZbN+n58NKxXcjluqv28RclT0lJvA8wck3fHM+7/UwtB/6Kq+q?=
+ =?us-ascii?Q?pv46GHomvmwhJV7dubUGGwbGY7DLubudM3uVLLAiEzs0UBLmRBGyQyEsbIYJ?=
+ =?us-ascii?Q?fsr57KU4AqMuTS1Zni0neNcArnSgJBW5icmbN+FUNlBzAGRZmYQ4cK3j0Zot?=
+ =?us-ascii?Q?ZpKX6kTWzu62w7vpq+wUo4+MO7xq3SX0w0cY8yoZtH1F6iiKVaaDeIG7PAtW?=
+ =?us-ascii?Q?2dPgAnXpzxG5v4kvlvhqlUCMkdg+v6Apk7h1XIkniN+FHV23dYLFsPPDemC/?=
+ =?us-ascii?Q?8E+u60UTeNzvOO4lxfeuEf5fFmjMPS1eIb0sgSZHShwEbuiHhjSNilw9W8Nn?=
+ =?us-ascii?Q?duB3PsnvAdFu28XdTggdg49wtU0Gdnsb2oYhZhottZac+2nvLKf26PsAK4sz?=
+ =?us-ascii?Q?IKbWynBDlrw+iWn6YYc03NP1jo4Lux9xn5OC0oiqLROzEQwD8qzoe0cmQvoz?=
+ =?us-ascii?Q?SV45gI4MnAg8e+661aEJY9mQvX2wYAuYyK4uJgs384TwmyjssCHeUwTSB3es?=
+ =?us-ascii?Q?3YBEsU78sD1rQt1zwE3jLsfSi71ebDQTxc5A0RCqz5C2qmsOsMw8WG10HSVy?=
+ =?us-ascii?Q?GSATKD67P3kfPmDpTaOe3AGbGeX+r6LOaZgXT03F53Sf70I+vns4k4iaiN9f?=
+ =?us-ascii?Q?0B/U80sDUdRoYlpmdbDHS7OEwMndTyCleeSDEUzVg65dU4Yiwg5qAWWzU/2N?=
+ =?us-ascii?Q?Iu8GVukwGTs66bjFwQ8/cdZat06yVp2Kicpj+ypX4CJoDjqNBbMYj0jmyllQ?=
+ =?us-ascii?Q?bBtr0bZklAvh9Q9AjzuaiVeOaRJDesNZ/DGhA0kLe2zY77SxiL/q0YUKlc3L?=
+ =?us-ascii?Q?l46W8u94C+nYdlWFHJHxq38YxPC4RvE153013f8wE4OU2esE7ircosnfBdu1?=
+ =?us-ascii?Q?LFk3cDj59Ynz3o3+Ex4rYn+lB3RmL8BwspC64NBK93BWBVXmqrN1bvYFAeKj?=
+ =?us-ascii?Q?xRtXDyee3kMuDmfh8Uq6roPGDCo+7vQxncWek4t5rsJVFzJAUWBPIrnyKSGy?=
+ =?us-ascii?Q?CqE/4JgnKAkOKf9OS0x8xyo94L1TYTK3NOgOOCpIDHd6z0UG2rIB5CRtDVaS?=
+ =?us-ascii?Q?i3YCCc2doPgSfdRAIbY13KcEcHn/kBYRyWTaqLJN?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0d20dbef-b20d-4626-bf4f-08dd14388c20
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6399.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2024 07:52:06.0349
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Kvu8uz53tS10m02h9iFwyWYuGrEcYC943FuuPOHRLvwGdIJbn1G9B2JXL1gMLQIOtgA38v9Iisd9qQLegUeNRA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB6573
+X-Proofpoint-GUID: HFhpmBOWfXeHm7CIwjsowfuG0-0Eb2gX
+X-Authority-Analysis: v=2.4 cv=RpA/LDmK c=1 sm=1 tr=0 ts=67500a29 cx=c_pps a=b6GhQBMDPEYsGtK7UrBDFg==:117 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=RZcAm9yDv7YA:10 a=bRTqI5nwn0kA:10 a=Q4-j1AaZAAAA:8
+ a=t7CeM3EgAAAA:8 a=omOdbC7AAAAA:8 a=j53JfvzYLTSlhgR7efEA:9 a=9H3Qd4_ONW2Ztcrla5EB:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: HFhpmBOWfXeHm7CIwjsowfuG0-0Eb2gX
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2024-12-04_05,2024-12-03_03,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
+ impostorscore=0 spamscore=0 bulkscore=0 malwarescore=0 adultscore=0
+ phishscore=0 mlxlogscore=825 clxscore=1015 suspectscore=0
+ priorityscore=1501 mlxscore=0 classifier=spam authscore=0 adjust=0
+ reason=mlx scancount=1 engine=8.21.0-2411120000
+ definitions=main-2412040060
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Dec 2024 04:55:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114193
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Dec 2024 07:52:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114194
 
-License-Update: Add JSON parsing library under MIT license.
-  https://github.com/nodejs/node/pull/56040/commits/27bcd103e775e00eb8d03ac37052bbd4ccb6d239
+The lastlog2 recipe has been removed in commit[1]. Clean up leftover
+patch.
 
-Drop backported patch fix-build-with-icu-76.patch.  It is already
-integrated in this version https://github.com/nodejs/node/pull/56040/commits/c3ca978d9c73d1a96f4d5c7bfa3c10ce786b8fe9
+[1] https://git.openembedded.org/meta-openembedded/commit/?id=9f818a060516b6d0f0b437f5891affc1ab01a3b4
 
-Changelog: https://github.com/nodejs/node/blob/main/doc/changelogs/CHANGELOG_V22.md#22.12.0
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../oe-npm-cache                              |  0
- ....11.bb => nodejs-oe-cache-native_22.12.bb} |  0
- .../nodejs/nodejs/fix-build-with-icu-76.patch | 29 -------------------
- .../{nodejs_22.11.0.bb => nodejs_22.12.0.bb}  |  5 ++--
- 4 files changed, 2 insertions(+), 32 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-22.11 => nodejs-oe-cache-22.12}/oe-npm-cache (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_22.11.bb => nodejs-oe-cache-native_22.12.bb} (100%)
- delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/fix-build-with-icu-76.patch
- rename meta-oe/recipes-devtools/nodejs/{nodejs_22.11.0.bb => nodejs_22.12.0.bb} (97%)
+ ...emove-lto-to-fix-link-error-of-clang.patch | 31 -------------------
+ 1 file changed, 31 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/lastlog2/files/0001-remove-lto-to-fix-link-error-of-clang.patch
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.11/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.12/oe-npm-cache
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.11/oe-npm-cache
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.12/oe-npm-cache
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.11.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.12.bb
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.11.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.12.bb
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/fix-build-with-icu-76.patch b/meta-oe/recipes-devtools/nodejs/nodejs/fix-build-with-icu-76.patch
+diff --git a/meta-oe/recipes-extended/lastlog2/files/0001-remove-lto-to-fix-link-error-of-clang.patch b/meta-oe/recipes-extended/lastlog2/files/0001-remove-lto-to-fix-link-error-of-clang.patch
 deleted file mode 100644
-index e8501bcdb..000000000
---- a/meta-oe/recipes-devtools/nodejs/nodejs/fix-build-with-icu-76.patch
+index 71c3de974..000000000
+--- a/meta-oe/recipes-extended/lastlog2/files/0001-remove-lto-to-fix-link-error-of-clang.patch
 +++ /dev/null
-@@ -1,29 +0,0 @@
--From 54299ac3a3d4e4520b8604dce43c2584092ccde2 Mon Sep 17 00:00:00 2001
--From: Michael Cho <michael@michaelcho.dev>
--Date: Sun, 27 Oct 2024 10:08:07 -0400
--Subject: [PATCH] build: fix building with system icu 76
+@@ -1,31 +0,0 @@
+-From 692523d2f8bf0ce893a781761154db4277f0fceb Mon Sep 17 00:00:00 2001
+-From: Wang Mingyu <wangmy@fujitsu.com>
+-Date: Wed, 19 Jul 2023 07:11:15 +0000
+-Subject: remove lto to fix link error of clang
 -
--ICU 76 decided to reduce overlinking[^1] thus `icu-i18n` will no longer
--add `icu-uc` when linking to shared libraries. This results in undefined
--symbols/references when trying to build with system ICU 76.
+-error message:
+-| tests/tst-y2038-64bit-time_t.p/tst-y2038-64bit-time_t.c.o: file not recognized: file format not recognized
+-| clang-16: error: linker command failed with exit code 1 (use -v to see invocation)
 -
--[^1]: unicode-org/icu@199bc82
+-Upstream-Status: Pending
 -
--Upstream-Status: Backport [https://github.com/nodejs/node/commit/81517faceac86497b3c8717837f491aa29a5e0f9]
+-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ----
-- configure.py | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
+- meson.build | 1 -
+- 1 file changed, 1 deletion(-)
 -
--diff --git a/configure.py b/configure.py
--index a5f47af1748903..a4e210261e2e76 100755
----- a/configure.py
--+++ b/configure.py
--@@ -1879,7 +1879,7 @@ def icu_download(path):
--   elif with_intl == 'system-icu':
--     # ICU from pkg-config.
--     o['variables']['v8_enable_i18n_support'] = 1
---    pkgicu = pkg_config('icu-i18n')
--+    pkgicu = pkg_config(['icu-i18n', 'icu-uc'])
--     if not pkgicu[0]:
--       error('''Could not load pkg-config data for "icu-i18n".
--        See above errors or the README.md.''')
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.11.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.12.0.bb
-similarity index 97%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_22.11.0.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_22.12.0.bb
-index 8cbf53978..194df4c33 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_22.11.0.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.12.0.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
- HOMEPAGE = "http://nodejs.org"
- LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=25e89142a2f4b075904a9986c45fbdb2"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=0bd28a461eccad39f85a29e33e8f879f"
- 
- CVE_PRODUCT = "nodejs node.js"
- 
-@@ -28,7 +28,6 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://0001-deps-disable-io_uring-support-in-libuv.patch \
-            file://0001-positional-args.patch \
-            file://0001-custom-env.patch \
--           file://fix-build-with-icu-76.patch \
-            file://run-ptest \
-            "
- SRC_URI:append:class-target = " \
-@@ -37,7 +36,7 @@ SRC_URI:append:class-target = " \
- SRC_URI:append:toolchain-clang:powerpc64le = " \
-            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
-            "
--SRC_URI[sha256sum] = "bbf0297761d53aefda9d7855c57c7d2c272b83a7b5bad4fea9cb29006d8e1d35"
-+SRC_URI[sha256sum] = "fe1bc4be004dc12721ea2cb671b08a21de01c6976960ef8a1248798589679e16"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
+-diff --git a/meson.build b/meson.build
+-index c521577..13d993b 100644
+---- a/meson.build
+-+++ b/meson.build
+-@@ -26,7 +26,6 @@ add_project_arguments(['-D_GNU_SOURCE=1',
+-                        '-DPROJECT_VERSION="@0@"'.format(meson.project_version()) ], language : 'c')
+- 
+- possible_cc_flags = [
+--                  '-flto=auto',
+-                   '-ffat-lto-objects',
+- 		  '-fstack-protector-strong',
+- 		  '-funwind-tables',
+--- 
+-2.34.1
+-
 -- 
-2.43.0
+2.25.1
 
 
