@@ -1,354 +1,503 @@
-Return-Path: <yi.zhao@eng.windriver.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 67AFCE7716B
-	for <webhook@archiver.kernel.org>; Wed,  4 Dec 2024 07:52:12 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.8864.1733298730636997779
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D9F3FE7716B
+	for <webhook@archiver.kernel.org>; Wed,  4 Dec 2024 09:15:02 +0000 (UTC)
+Received: from mail-yb1-f182.google.com (mail-yb1-f182.google.com [209.85.219.182])
+ by mx.groups.io with SMTP id smtpd.web11.9764.1733303694382601546
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Dec 2024 23:52:10 -0800
+ Wed, 04 Dec 2024 01:14:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=20682f46d1=yi.zhao@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4B46D324023644
-	for <openembedded-devel@lists.openembedded.org>; Tue, 3 Dec 2024 23:52:10 -0800
-Received: from nam11-bn8-obe.outbound.protection.outlook.com (mail-bn8nam11lp2171.outbound.protection.outlook.com [104.47.58.171])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 437xv7v920-2
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 03 Dec 2024 23:52:10 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Q9gQ+7jGzjnGfApezZ/yxTKkcGVhbthz/YcuhqmiuS1wq8JRp4y/W4e7C9VsJIuGEFB2VoS1/QchE816/WWAFC1h+wElqhsSHhKuUy/v9bQ2n475/oU9Sg/WNsxb3XomCTCUqe0FOMJKE3w6fd6yHUHvJm4OhAz7by3puoGVFu2+DzeQxTbCWFzuKn9NDV1S+pmc4s4TuveNvFvpQaAEzXGkQlliNvpOc94EvWnl72hjHjLwYxcgGZa5eO245D3VOJg3xNM0GpdkhMQ8S+s+FpWkQk4U6HSF6o2mPiSCLOS7jgdJ8drH6V1t0yO9aSfNO1P7xY+g4Bj6mqIRVNtzMA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=d31kkjPS0+4/PZeVSdNec2a9HeFGul3U02Q8CasLcf0=;
- b=Oxz4cS+wUREH1XDK/oNDVEAKlsc+WK4CO7pEj+i6/CZUviDpqQVn2fR3kOtGUqOzilzjMm0/CMkF8aB+vPP7/paaAjZlWKYm9yxQnwKOKTdg8XAF8ZLpzsKkQWulazm1lNYBzd3khfIBvJpNjG19Q1ZaeO29g4/rEFJpYs1jVe11a1qefbIN15F/jSR0lYkTu2DXbzUJPulWE0/OsMBr6nFRk5fS+EXLz9mCarPUp+tLdCMMJ844KCTU1CfH0Q8eCmcLktl9weQg13FD34O70aeN5nvhpoYdWA1EqNYoDiUPkeC5TbDcnra6nZmwXuty/1bS2wtDutqiUQV1Y+pylA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5) by
- SJ0PR11MB6573.namprd11.prod.outlook.com (2603:10b6:a03:44d::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.17; Wed, 4 Dec
- 2024 07:52:07 +0000
-Received: from DS0PR11MB6399.namprd11.prod.outlook.com
- ([fe80::2b44:787c:e7ee:bfad]) by DS0PR11MB6399.namprd11.prod.outlook.com
- ([fe80::2b44:787c:e7ee:bfad%7]) with mapi id 15.20.8207.017; Wed, 4 Dec 2024
- 07:52:07 +0000
-From: Yi Zhao <yi.zhao@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] autoconf-2.13-native: remove recipe
-Date: Wed,  4 Dec 2024 15:51:56 +0800
-Message-Id: <20241204075156.3811134-2-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20241204075156.3811134-1-yi.zhao@windriver.com>
-References: <20241204075156.3811134-1-yi.zhao@windriver.com>
-Content-Type: text/plain; charset=UTF-8
-X-ClientProxiedBy: TYCP286CA0085.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:400:2b3::8) To DS0PR11MB6399.namprd11.prod.outlook.com
- (2603:10b6:8:c8::5)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fFhdm7vT;
+ spf=pass (domain: gmail.com, ip: 209.85.219.182, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-yb1-f182.google.com with SMTP id 3f1490d57ef6-e398273d6ffso4887078276.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Dec 2024 01:14:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1733303693; x=1733908493; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=qcpUASTfV+YwMYZ8oZFRKw8GAS81Kkcb903nbQj623Y=;
+        b=fFhdm7vTo+JjN+Pr0VY87+/59U2BSeHZBsX67zkrWw3QLIj/uZEMbB+HAT+0OKt4RB
+         USU+IUhRMVnwM0ylWVvt2+mnrp2JVXkx9kYT8/1r4ZAzxvEHeifZK06HNnLGqyQZHkcv
+         4pHcu3rbhYRH04DYjqFDiuOv29HNz+eVZQDPNVLaMtXP4VEXEZzd9TnRcTfBg09Mf1c7
+         ab+Bv6LdRchdptKwT7rkdJ17JXmNH+LmjFkzHzFBhjrxG8iwFbgJk5113olNbxwk65v0
+         aLhCrsfZcTgQiM74XWLN5sSmxm7PeC6V1Uw6QOt+gID62E3UAQYQWmcU/Gyf/ehCzhD0
+         mT0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1733303693; x=1733908493;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=qcpUASTfV+YwMYZ8oZFRKw8GAS81Kkcb903nbQj623Y=;
+        b=Jzxqk0i17UmEm0FSYHRTZxg3rE/CDsMA15cKv6KYrnBod4eKvEX6jQP0koIgwaeaQB
+         2CIYVbcr3MIx76DMtmebfZRyvT43hwmDahGpbTODBQEo+IQalN9LzKV7XW7RsJasc3tC
+         aLeNY0DfacEBF6gtAQNYAyXaBHg/P3ZkduZ+MAlEVJPEiexaPp+E+hvG6UDPrVpc4WH3
+         tPohGxaHtu1E7diGrb97or2YXlvx6xn6tz/6X6dcUIeBQD6m4EBw3geFyZaZNokDyXti
+         83q/O1SpHP6T7gv7/MaV6oeNXtrF5N/u3RIOTWlaf1aqGeccMMz1oKLkuQ6rraYF8mCN
+         /BYg==
+X-Gm-Message-State: AOJu0Yz6sUa8YkQrs2AdBvgXG2DHucoSN3dSV66bQeBPHxaWaYJmszEr
+	USNs/hc1mwVHuDGGJJZ+ivSNu1w4DUv5ebSDKFjGVPlCmdH6ZGEe4O0bl6x0dapMHlSxx9xTa0m
+	8m/xBjebVs93+6V2YpbtQCDnOJN5nlg==
+X-Gm-Gg: ASbGncvrGGHBtZHE+aAgkVIc8f5ML8wCcJMi/KWBPQK+Phyd45dP4pgMiixj6C29gby
+	DcRhWiEcjGA7z+qEsBZl8cnnT+GnbKAwJ
+X-Google-Smtp-Source: AGHT+IGhax9O9uOD9sKGwzXKADHv8Ue9UmJ/YSjMIoauky1wAJhfEq43RRCxON3ALan9e85SOmzEKI2m51sR3eQpilc=
+X-Received: by 2002:a05:6902:1103:b0:e39:853b:822a with SMTP id
+ 3f1490d57ef6-e39d35ad7ebmr5079958276.0.1733303693225; Wed, 04 Dec 2024
+ 01:14:53 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|SJ0PR11MB6573:EE_
-X-MS-Office365-Filtering-Correlation-Id: 51f80563-5e91-44c9-d47f-08dd14388cd5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|1800799024|366016|52116014|38350700014;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?SWdSallpeXRESlljcHFaMDBrc0hwV2IzN1JGUFdTT0VVa2FsbUQzSG9HNWVG?=
- =?utf-8?B?d0xWVEk5VENMMTI5OXRCU2JoNWtnWi9IN2Y1djFFWldNbnk1QTBGQ3hFbHVz?=
- =?utf-8?B?U2dadk5wRjBQN3pqNXYwdnFpK0FLYlcxWlYxcVI4S3ZlZDRtMVJZRTdtZzR1?=
- =?utf-8?B?NmpGTWpyY0RuQTRtME5oOVVlUSt5Nm1JQzc0UzNMaHNnWjZ6V3FWaWNuVUhM?=
- =?utf-8?B?ZlBwVHZPOWQrZjJReVhUdUpJdnJtR203WnhiekswbnFJZitIZ1NkeGhKcE5R?=
- =?utf-8?B?aW5oVG9CaHlyWUNFL0l4dFVvZ1dieHY5anhuVmFQRDNOeG51SGJNTHdkWkZU?=
- =?utf-8?B?Qnpvb0I4Sm5Uamp3ZzR6L3FqejZ1Nm5kVEM0YUJnUjliQnUzKzNnU0dydldn?=
- =?utf-8?B?eVdzL3FqMDRRSkhNVXZFbDQrcXhYeXJ0d1cweVRtSUFjNEhnanRQcWoyQnpK?=
- =?utf-8?B?QU9kMDAzZ24waDNucTRBNDdMdVRCWGVpWE1TaWxSb3B3UGgwVUp5djZtelUw?=
- =?utf-8?B?SE9YQzZMRnA0dzhHVGZLdW5SN0NuczVDWjhoTk5OUDNXUk05cEhLQjNINk5X?=
- =?utf-8?B?bk1Pa2NTT3BXSmZ6U0tJc291Ync1bFphK1AyYnNtVmpJWCsrdVhEaW5qcWVt?=
- =?utf-8?B?MG9PRUZMVWJqMWh6V282TmFodGNaUmZJOWFVdEVCa2NoUEJWdUtBWURYRlNI?=
- =?utf-8?B?U2d6RWJlUEFiTHVIcHdtQlpGZUV4djVBb0wvak10ZDhCWnBxQm1wWExzakkr?=
- =?utf-8?B?NFNDU2p6NXJzN25xUDkyUE9KVlRtNlZ0Q09QSGRUM3IxMkFoK0RwZTdIMXkx?=
- =?utf-8?B?NjRlOWp1dURlVlppODFBbU84ZzdBVlpvL1ZGWGEyTHdHaWFuZ0ZlaGNwS2ZH?=
- =?utf-8?B?UkVXdFVyaWQvY0U1dWxkdlE2WllEdGwvOGFpRTJkK3J3SmkrUTBJQUJBVUQw?=
- =?utf-8?B?RkV6NkNOVll2KzQxMUxRTHdqOTZqUW5ibVBPenEvbmNBUEJ3b3hubStKUEls?=
- =?utf-8?B?WFJ1aGY1aDA1amFybFl5LzdBcjVpVHowTzJ3WGlDbFhHNE9NYloreWZIWVlH?=
- =?utf-8?B?Mis0dEgvSTJzZk95TzlwQkxQaVVkQ1NCdTBJTUhHVnI0ZHZtbkQ1aEpzcnBi?=
- =?utf-8?B?NW1iVkNCMStRWUN0cXVTdUVrNFdXR1BWeGlsV1ZacHk1YzZOQTZWZ2xSS0h4?=
- =?utf-8?B?YXhmL1RNbERTSmRxblV6RGVFZHdyN2xETVBuV3JBRko0cnRvcFRyTklsdmxj?=
- =?utf-8?B?TUR0eWorTEpIZmNjQ1YzR3hGRTBwNFQ3N1ZpZHRSMUJVaEo0Q0xialAzcVlU?=
- =?utf-8?B?N25QVzRCMS9yRSs1ci96RXJhSisvem1GMmFoTHVSQnE2RVlyY0lFS25KYlVV?=
- =?utf-8?B?aWpxcUNidGpYMVZuYVBWSUE5UnRoQ2h3V0s1NEwrbHAxcldVZlAxVHhaUVpi?=
- =?utf-8?B?R2FWZHp0QzlvczBGVmpqQ0lPdVEwUFBQWThYWnZ1RkZoR252bXhPNFlUek1s?=
- =?utf-8?B?QjhxRHNQeE9BRHl3OHMyalo5NFpsSFZVcXhPbmRNTlR3cWZPdy8raWQ3eDZV?=
- =?utf-8?B?NGVXNDd0RFhRRWJqa05IR0RkVklxZ0NIQUs5SXZKZGs4SGMwSHhkR1FNWHJK?=
- =?utf-8?B?ZElkSXBUdCt0UzhnbmNsa0dWdFBKUS9kT0dpbjZxZHlUaWJWSlhNRjVCa29i?=
- =?utf-8?B?WExvbjcya2pYSVc0aXQ1RnBqVFVkazVWUDUrVnYwN0hWK1lYc0ExZEVCc2FK?=
- =?utf-8?B?TlRjL0hpWjk3VWo2cjZFUER4UmNDTU90U25UZzVPY084ZUJ5NEpXTEdlMDVT?=
- =?utf-8?B?NFllYXNNUDlzaHNTNzc4ZmQxVlowcG9ETGZlMVFmVDN5U0xHaVV4a3hHdW1l?=
- =?utf-8?B?MEMxR0xYRkRPcnVUcXFhb1FvM0s4WTczeElVS3BWczdib2kwWEhaOWFYMFVZ?=
- =?utf-8?Q?POdKQzjImas=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(52116014)(38350700014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?Z0tFZXBRS0NIYzdyeG1VRzhRdm1NV0hvVm8rcGFaS3llWTMybUw5V1JKTVls?=
- =?utf-8?B?SnZqUU91QTFBbGdnMkprc2ZCK3hOOURPd1dkeFQ2SElVSk9BMVd4NDVIQnlo?=
- =?utf-8?B?eDBueDJBZTZGNlhlNG52bkFOTkw1WVlhZVZGY3AxdHNmTDd6eWt5a01TZ05X?=
- =?utf-8?B?dE5EYmo1TUZkV2l3VkhvaTFyZnh5WlBXVG1oWk14OWt4Y1pMSTQ3ejN5Z2tS?=
- =?utf-8?B?ZzZHWVZMNXRJZTFUcDBxTU0xRVRCOWVValo2dlZxTEdoQTAyRTNpWHRURzVC?=
- =?utf-8?B?ZXNEbFNRSGJQdmY5Rlcya3Q2RUNxR1NaRXNkZjlObmk1ZENRelVNSExBUW01?=
- =?utf-8?B?R2JoSitrYS9IZmtidXV4ZXh5T0srNTFEWlhEZVl6dFZQemQ0ZE54T2Z5STJ0?=
- =?utf-8?B?Rzl2WGJ5WEF3RWNrWHZ5bVc2K0VxUHhlck1EbDZodVRncWRDOXJxQ2hDQXRS?=
- =?utf-8?B?SFZ6dXhlQ1hsdlpkK2I4bjRGNS9FOWM4V211ZFA4dEVGT1A5WXJOWWhwUmhz?=
- =?utf-8?B?V084L1dqR2tDZHlmdmEzeFZFY1J1L1ZiOG9mMEY4ZjFJNWRkTjlMU3NGUzFY?=
- =?utf-8?B?b0h5SS9LYzhlWU55QjVIMWRRUWgrNENhNVRsU2p5V0JKQllTeFdTVWp1aUd4?=
- =?utf-8?B?emd5MFJDSzEzWlNHV0w0dy9BQW1Ib0U4VEY3RFdZVmdvdWRlb3dmbndxd0ho?=
- =?utf-8?B?UWN3c3plZkRuQUI3dFM0UUFQZzZqNmZVTHQ3Nk1RNjNNY0ZRSGJCL001Zm1T?=
- =?utf-8?B?UEVNZGhnbGFwN3lCOGowU0lYWWFoeTJtNlg0TGs5QTBZREFqSGQ4NEFDSXZB?=
- =?utf-8?B?V29mSFIycVBWdzhPWU1pL1hMVHQ0ek8vQ294cVZzaU5LSXUxeHUzUVlNZ2VT?=
- =?utf-8?B?OUVkZnVFMDkwMzdGVEMvN2syeFJKK0V0eVg0TmI2UFZrcGk5akt6a0trM1NI?=
- =?utf-8?B?Y0hoRFhNNnlkKzg4Y1hzU2FjK1RWbDgzS3h0cjA3ZU9zOVFheXBXWkFRQ1BK?=
- =?utf-8?B?Vm5sR2NBMkloZWdMU0VxQW9nUVNKWnNIdjZaTE9UWUpOb0J0cjdGSW0vaHM4?=
- =?utf-8?B?Slp3YTB4Yk4xQUkvKzl0REdOaElWZXpCczVudzkybjAzdFpvZkhZc0FMZER3?=
- =?utf-8?B?aGp0VWN1OUxxVFVjd25aVGY3RmpUM1U5ZmN5RVlzMEhLTk5waE42M1hlRFh5?=
- =?utf-8?B?enRDOVRSN0Q0bkUrR0ZMaUM3NFRXSW50bmZDNS9mbFZxYkxZSTR6MzJBMktM?=
- =?utf-8?B?Z0lqci9NaC9GOTNjUVhKV0lQZFMrN3krQlNNWTlMai9tQ1JrM29MVitjWGsx?=
- =?utf-8?B?Vk5CNWdicHlpUFpRVXpZV1pXbEp6WnNndC9EbDJsUXM3bG5DbC9iTjZhUDUr?=
- =?utf-8?B?ZW1YZlF4V2xMNjVDMVdiMC9XMks0MFkxRXJHM21IeWhtUUNGN2Q5Ymk1QnJo?=
- =?utf-8?B?NmRJNVB6cW85VkNubGFHWTNTMWZsdmx4VzFpUDl6aU55VHN0NjVsRWp2cFVp?=
- =?utf-8?B?ZlpyZG1uOGVBVVI0S3ZyWWpVa2VLQTVrZmhYRCtXcWJ4Y2U2Rlpodk4wVzBn?=
- =?utf-8?B?SU9WNlA0Q0xZVmQzcFJacmxXNmcyZk4wazFibVZ5VS9McUxXZEJXVkVacUFQ?=
- =?utf-8?B?NVpGdWUwOWdPUW56NFRqTUUzSDlsbG5ZQ0tTRGxWZ01UQk84S2RlWVRwR2R4?=
- =?utf-8?B?V0lCSWVaTndURHRocmtPSllNZ0tITWpoTXYzTnFLa0RUc3Z2Rzh4eHJWSnl0?=
- =?utf-8?B?RnEvOVhHM0ZQWENVTmRLSkhKUUR3SUpXdThOR2JjWDVnSEpOUGdnR1hWejJQ?=
- =?utf-8?B?T28ybFU5ZEVtRmdGaGlDL3RKSzdORWt1UU5NRUl3U0dMTWhYYjlZSnJQTEZJ?=
- =?utf-8?B?cnRCTXlIU3E1dWVUQzl5RGd2ZzhuZFdVdlBpckxheFQ0K0hFRU9aTDNPYkhm?=
- =?utf-8?B?eHBOckMvZm5XNk5zckNBNk9ueWVoS1BiY05zLzNsYVRJaS92dTlkVDZ2Y2dM?=
- =?utf-8?B?QmFzWVA3N0ljYzU4NUw2aUpRekJEVGxYVnlOTHFWaWtyWjdmQUxwdzdLZytR?=
- =?utf-8?B?R2cwNlNxYThraXdRd2t4anhBQXlqQzU1NmF4Q3UrWjhQdDdMckVUUmEvdk9x?=
- =?utf-8?Q?gRbn9yQYcy4Ih6cMego8zM0kp?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 51f80563-5e91-44c9-d47f-08dd14388cd5
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6399.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2024 07:52:07.1847
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: x5eC0ZRyXYbmlNjwiWWOmscuozBa230qlkecxjRoGjAuoaNSRE51YeWhFA28DRWZTgKgRE+3Oi4prpeioUL20g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB6573
-X-Proofpoint-GUID: yui6edeEDhpQcUBgIyf-2v8pv6ccwpr4
-X-Authority-Analysis: v=2.4 cv=RpA/LDmK c=1 sm=1 tr=0 ts=67500a2a cx=c_pps a=b6GhQBMDPEYsGtK7UrBDFg==:117 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=RZcAm9yDv7YA:10 a=bRTqI5nwn0kA:10
- a=Q4-j1AaZAAAA:8 a=mDV3o1hIAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8 a=pyvtBbrsAAAA:8 a=FGqIs18fuTmYtjqEzw0A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=9H3Qd4_ONW2Ztcrla5EB:22 a=FdTzh2GWekK77mhwV6Dw:22 a=ykIQO9eVlTWXpgri3un8:22
-X-Proofpoint-ORIG-GUID: yui6edeEDhpQcUBgIyf-2v8pv6ccwpr4
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2024-12-04_05,2024-12-03_03,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- impostorscore=0 spamscore=0 bulkscore=0 malwarescore=0 adultscore=0
- phishscore=0 mlxlogscore=999 clxscore=1015 suspectscore=0
- priorityscore=1501 mlxscore=0 classifier=spam authscore=0 adjust=0
- reason=mlx scancount=1 engine=8.21.0-2411120000
- definitions=main-2412040060
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 4B46D324023644
+References: <CADySD0Hxn4YRVT1_8Vjzcv1Oqe_B7O6UHtEYyRzhKkH8OPq2pg@mail.gmail.com>
+In-Reply-To: <CADySD0Hxn4YRVT1_8Vjzcv1Oqe_B7O6UHtEYyRzhKkH8OPq2pg@mail.gmail.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Wed, 4 Dec 2024 22:14:41 +1300
+Message-ID: <CADySD0GaOXtoNvagju9h1_1b_h1bjMVijW3RyyO1ji3iX=2q8g@mail.gmail.com>
+Subject: Trying to build image inside crops docker using github workflow
+To: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000ec3ad506286e36e8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Dec 2024 07:52:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114195
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Dec 2024 09:15:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114196
 
-The autoconf-2.13-native recipe was introduced for building mozjs-78[1].
-But mozjs-78 has been removed for a long time[1] and the current mozjs
-doesn't require it anymore. Considering that autoconf 2.13 was released
-in 1999 and no recipes require it anymore, we can safely remove it.
+--000000000000ec3ad506286e36e8
+Content-Type: text/plain; charset="UTF-8"
 
-[1] https://git.openembedded.org/meta-openembedded/commit/?id=3Dfe1607060=
-ac2dd42ae8c5115b8cbc4993b467a87
-[2] https://git.openembedded.org/meta-openembedded/commit/?id=3D7432c1a2e=
-f9d75b078da31d268ffd016e8dcf583
+Hello,
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- .../autoconf-2.13-native_2.13.bb              | 67 -------------------
- ....guess-config.sub-install-to-destdir.patch | 67 -------------------
- 2 files changed, 134 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/autoconf-2.13/autoconf-2.13-=
-native_2.13.bb
- delete mode 100644 meta-oe/recipes-devtools/autoconf-2.13/autoconf-2.13/=
-0001-Add-config.guess-config.sub-install-to-destdir.patch
+I am trying to use github workflow to build core-image-minimal (scarthgap)
+inside a docker container (ghcr.io/crops/poky:ubuntu-22.04)
 
-diff --git a/meta-oe/recipes-devtools/autoconf-2.13/autoconf-2.13-native_=
-2.13.bb b/meta-oe/recipes-devtools/autoconf-2.13/autoconf-2.13-native_2.1=
-3.bb
-deleted file mode 100644
-index 6b4c55ed4..000000000
---- a/meta-oe/recipes-devtools/autoconf-2.13/autoconf-2.13-native_2.13.bb
-+++ /dev/null
-@@ -1,67 +0,0 @@
--SUMMARY =3D "A GNU tool that produce shell scripts to automatically conf=
-igure software"
--DESCRIPTION =3D "Autoconf is an extensible package of M4 macros that pro=
-duce shell scripts to automatically \=20
--configure software source code packages. Autoconf creates a configuratio=
-n script for a package from a template \
--file that lists the operating system features that the package can use, =
-in the form of M4 macro calls."
--SECTION =3D "devel"
--
--HOMEPAGE =3D "http://www.gnu.org/software/autoconf/"
--
--LICENSE =3D "GPL-3.0-only"
--LICENSE =3D "GPL-2.0-only & GPL-3.0-only"
--LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D361b6b837cad26c6900a926b62aad=
-a5f"
--
--SRC_URI =3D " \
--    ${GNU_MIRROR}/autoconf/autoconf-${PV}.tar.gz \
--    file://0001-Add-config.guess-config.sub-install-to-destdir.patch \
--"
--
--S =3D "${WORKDIR}/${BPN}"
--SRC_URI[sha256sum] =3D "f0611136bee505811e9ca11ca7ac188ef5323a8e2ef19cff=
-d3edb3cf08fd791e"
--
--inherit texinfo native
--
--DEPENDS +=3D "m4-native gnu-config-native"
--RDEPENDS:${PN} =3D "m4-native gnu-config-native"
--
--PERL =3D "${USRBINPATH}/perl"
--PERL:class-native =3D "/usr/bin/env perl"
--
--CACHED_CONFIGUREVARS +=3D "ac_cv_path_PERL=3D'${PERL}' \
--                         ac_cv_path_M4=3Dm4 \
--                        "
--
--CONFIGUREOPTS =3D " \
--    --build=3D${BUILD_SYS} \
--    --host=3D${HOST_SYS} \
--    --target=3D${TARGET_SYS} \
--    --prefix=3D${prefix} \
--    --exec_prefix=3D${exec_prefix} \
--    --bindir=3D${bindir} \
--    --sbindir=3D${sbindir} \
--    --libexecdir=3D${libexecdir} \
--    --datadir=3D${datadir} \
--    --sysconfdir=3D${sysconfdir} \
--    --sharedstatedir=3D${sharedstatedir} \
--    --localstatedir=3D${localstatedir} \
--    --libdir=3D${libdir} \
--    --includedir=3D${includedir} \
--    --oldincludedir=3D${includedir} \
--    --infodir=3D${infodir} \
--    --mandir=3D${mandir} \
--    --disable-silent-rules \
--"
--
--do_configure() {
--    ${CACHED_CONFIGUREVARS} ./configure ${CONFIGUREOPTS}
--}
--
--do_install() {
--	oe_runmake 'DESTDIR=3D${D}' install
--
--    # avoid conflicts with standard autotools
--    ver=3D"213"
--    for file in `find ${D}${bindir} -type f`; do
--        mv $file $file$ver
--    done
--	mv ${D}${datadir}/autoconf ${D}${datadir}/autoconf213
--}
-diff --git a/meta-oe/recipes-devtools/autoconf-2.13/autoconf-2.13/0001-Ad=
-d-config.guess-config.sub-install-to-destdir.patch b/meta-oe/recipes-devt=
-ools/autoconf-2.13/autoconf-2.13/0001-Add-config.guess-config.sub-install=
--to-destdir.patch
-deleted file mode 100644
-index f6e9ecb9a..000000000
---- a/meta-oe/recipes-devtools/autoconf-2.13/autoconf-2.13/0001-Add-confi=
-g.guess-config.sub-install-to-destdir.patch
-+++ /dev/null
-@@ -1,67 +0,0 @@
--From 3d3e23f7b14e87849405a4e109a69b76696615fc Mon Sep 17 00:00:00 2001
--From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
-om>
--Date: Wed, 11 Dec 2019 23:18:19 +0100
--Subject: [PATCH] Add config.guess config.sub / install to destdir
--MIME-Version: 1.0
--Content-Type: text/plain; charset=3DUTF-8
--Content-Transfer-Encoding: 8bit
--
--Upstream-Status: Inappropriate [Configuration]
--
--Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-----
-- Makefile.in | 18 +++++++++---------
-- 1 file changed, 9 insertions(+), 9 deletions(-)
--
--diff --git a/Makefile.in b/Makefile.in
--index a6c94d4..4b1b708 100644
----- a/Makefile.in
--+++ b/Makefile.in
--@@ -137,23 +137,23 @@ installcheck: all install
-- 	cd testsuite && ${MAKE} AUTOCONF=3D${bindir}/autoconf $@
--=20
-- installdirs:
---	$(SHELL) ${srcdir}/mkinstalldirs $(bindir) $(infodir) $(acdatadir)
--+	$(SHELL) ${srcdir}/mkinstalldirs ${DESTDIR}$(bindir) ${DESTDIR}$(infod=
-ir) ${DESTDIR}$(acdatadir)
--=20
-- install: all $(M4FILES) acconfig.h installdirs install-info
-- 	for p in $(ASCRIPTS); do \
---	  $(INSTALL_PROGRAM) $$p $(bindir)/`echo $$p|sed '$(transform)'`; \
--+	  $(INSTALL_PROGRAM) $$p ${DESTDIR}$(bindir)/`echo $$p|sed '$(transfor=
-m)'`; \
-- 	done
-- 	for i in $(M4FROZEN); do \
---	  $(INSTALL_DATA) $$i $(acdatadir)/$$i; \
--+	  $(INSTALL_DATA) $$i ${DESTDIR}$(acdatadir)/$$i; \
-- 	done
-- 	for i in $(M4FILES) acconfig.h; do \
---	  $(INSTALL_DATA) $(srcdir)/$$i $(acdatadir)/$$i; \
--+	  $(INSTALL_DATA) $(srcdir)/$$i ${DESTDIR}$(acdatadir)/$$i; \
-- 	done
-- 	-if test -f autoscan; then \
---	$(INSTALL_PROGRAM) autoscan $(bindir)/`echo autoscan|sed '$(transform)=
-'`; \
--+	$(INSTALL_PROGRAM) autoscan ${DESTDIR}$(bindir)/`echo autoscan|sed '$(=
-transform)'`; \
-- 	for i in acfunctions acheaders acidentifiers acprograms \
---	  acmakevars; do \
---	$(INSTALL_DATA) $(srcdir)/$$i $(acdatadir)/$$i; \
--+	  acmakevars config.guess config.sub; do \
--+	$(INSTALL_DATA) $(srcdir)/$$i ${DESTDIR}$(acdatadir)/$$i; \
-- 	done; \
-- 	else :; fi
--=20
--@@ -161,11 +161,11 @@ install: all $(M4FILES) acconfig.h installdirs ins=
-tall-info
-- install-info: info installdirs
-- 	if test -f autoconf.info; then \
-- 	  for i in *.info*; do \
---	    $(INSTALL_DATA) $$i $(infodir)/$$i; \
--+	    $(INSTALL_DATA) $$i ${DESTDIR}$(infodir)/$$i; \
-- 	  done; \
-- 	else \
-- 	  for i in $(srcdir)/*.info*; do \
---	    $(INSTALL_DATA) $$i $(infodir)/`echo $$i | sed 's|^$(srcdir)/||'`;=
- \
--+	    $(INSTALL_DATA) $$i ${DESTDIR}$(infodir)/`echo $$i | sed 's|^$(src=
-dir)/||'`; \
-- 	  done; \
-- 	fi
--=20
----=20
--2.21.0
--
---=20
-2.25.1
+Following is the workflow step:
 
+
+steps:
+- name: Start Yocto image build
+shell: bash
+
+run: |
+echo "${{ secrets.TRACKER_TOKEN }}" | docker login ghcr.io -u ${{
+github.actor }} --password-stdin
+docker pull ghcr.io/crops/poky:ubuntu-22.04
+
+cat << 'EOF' > script.sh
+#!/bin/bash
+echo "Running inside the Docker container"
+git clone git://git.yoctoproject.org/poky -b scarthgap
+source oe-init-build-env
+bitbake core-image-minimal
+EOF
+
+chmod +x script.sh
+docker run --rm -v $(pwd):/yocto --workdir=/workdir
+ghcr.io/crops/poky:ubuntu-22.04 /bin/bash -c "source /workdir/script.sh"
+
+
+But I am getting following error when this step runs:
+
+WARNING: bitbake binary is not found in PATH, did you source the script?
+ERROR: Execution of event handler 'defaultcheck_sanity_eventhandler' failed
+Traceback (most recent call last):
+File "/workdir/poky/meta/classes-global/sanity.bbclass", line 1025, in
+defaultcheck_sanity_eventhandler(e=<bb.event.SanityCheck object at
+0x7f7495a4cca0>, d=<bb.data_smart.DataSmart object at 0x7f74959d6a40>):
+sanity_data = bb.data.createCopy(e.data)
+> check_sanity(sanity_data)
+if e.generateevents:
+File "/workdir/poky/meta/classes-global/sanity.bbclass", line 996, in
+check_sanity(sanity_data=<bb.data_smart.DataSmart object at
+0x7f7495a4cf10>):
+if last_sanity_version < sanity_version or last_nativelsbstr !=
+nativelsbstr:
+> check_sanity_version_change(status, sanity_data)
+status.addresult(check_sanity_sstate_dir_change(sstate_dir, sanity_data))
+File "/workdir/poky/meta/classes-global/sanity.bbclass", line 702, in
+check_sanity_version_change(status=<SanityStatus object at 0x7f7495a4db10>,
+d=<bb.data_smart.DataSmart object at 0x7f7495a4cf10>):
+for bin_cmd in suid_check_bins:
+> bin_path = bb.utils.which(os.environ["PATH"], bin_cmd)
+if bin_path:
+File "/usr/lib/python3.10/os.py", line 680, in
+_Environ.__getitem__(key='PATH'):
+# raise KeyError with the original key value
+> raise KeyError(key) from None
+return self.decodevalue(value)
+KeyError: 'PATH'
+ERROR: Command execution failed: Traceback (most recent call last):
+File "/workdir/poky/bitbake/lib/bb/command.py", line 122, in
+runAsyncCommand
+self.cooker.updateCache()
+File "/workdir/poky/bitbake/lib/bb/cooker.py", line 1606, in updateCache
+bb.event.fire(bb.event.SanityCheck(False), self.databuilder.mcdata[mc])
+File "/workdir/poky/bitbake/lib/bb/event.py", line 225, in fire
+fire_class_handlers(event, d)
+File "/workdir/poky/bitbake/lib/bb/event.py", line 132, in
+fire_class_handlers
+execute_handler(name, handler, event, d)
+File "/workdir/poky/bitbake/lib/bb/event.py", line 103, in execute_handler
+ret = handler(event, d)
+File "/workdir/poky/meta/classes-global/sanity.bbclass", line 1025, in
+defaultcheck_sanity_eventhandler
+check_sanity(sanity_data)
+File "/workdir/poky/meta/classes-global/sanity.bbclass", line 996, in
+check_sanity
+check_sanity_version_change(status, sanity_data)
+File "/workdir/poky/meta/classes-global/sanity.bbclass", line 702, in
+check_sanity_version_change
+bin_path = bb.utils.which(os.environ["PATH"], bin_cmd)
+File "/usr/lib/python3.10/os.py", line 680, in __getitem__
+raise KeyError(key) from None
+KeyError: 'PATH'
+Summary: There was 1 WARNING message.
+Summary: There were 2 ERROR messages, returning a non-zero exit code.
+
+I have confirmed by adding "echo $PATH" before image starts that PATH
+environment variable exists and bitbake is in the path:
+
+/workdir/poky/scripts:/workdir/poky/bitbake/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+
+But if I run the step as it is in my host machine, docker container is able
+to build the image.
+
+Any suggestions on what could be wrong here?
+
+thanks
+Ankur
+
+--000000000000ec3ad506286e36e8
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"ltr">Hello,<br><br>=
+I am trying to use github workflow to build core-image-minimal (scarthgap) =
+inside a docker container (<a href=3D"http://ghcr.io/crops/poky:ubuntu-22.0=
+4" target=3D"_blank">ghcr.io/crops/poky:ubuntu-22.04</a>)<br><br>Following =
+is the workflow step:<br><div><br></div><div><div style=3D"font-family:verd=
+ana,sans-serif"><br></div><div style=3D"font-family:verdana,sans-serif"><sp=
+an style=3D"font-family:verdana,sans-serif"><span class=3D"gmail_default" s=
+tyle=3D"font-family:verdana,sans-serif"></span>steps:<br>- name: Start Yoct=
+o image build<br>shell: bash<br><br>run: |<br>echo &quot;${{ secrets.TRACKE=
+R_TOKEN }}&quot; | docker login <a href=3D"http://ghcr.io" target=3D"_blank=
+">ghcr.io</a> -u ${{ github.actor }} --password-stdin<br>docker pull <a hre=
+f=3D"http://ghcr.io/crops/poky:ubuntu-22.04" target=3D"_blank">ghcr.io/crop=
+s/poky:ubuntu-22.04</a><br><br>cat &lt;&lt; &#39;EOF&#39; &gt; script.sh<br=
+>#!/bin/bash<br>echo &quot;Running inside the Docker container&quot;<br>git=
+ clone git://<a href=3D"http://git.yoctoproject.org/poky" target=3D"_blank"=
+>git.yoctoproject.org/poky</a> -b scarthgap<br>source oe-init-build-env<br>=
+bitbake c<span class=3D"gmail_default" style=3D"font-family:verdana,sans-se=
+rif">ore-image-minimal</span><br>EOF<br><br>chmod +x script.sh<br>docker ru=
+n --rm -v $(pwd):/<span class=3D"gmail_default" style=3D"font-family:verdan=
+a,sans-serif">yocto</span> --workdir=3D/<span class=3D"gmail_default" style=
+=3D"font-family:verdana,sans-serif">workdir</span> <a href=3D"http://ghcr.i=
+o/crops/poky:ubuntu-22.04" target=3D"_blank">ghcr.io/crops/poky:ubuntu-22.0=
+4</a> /bin/bash -c &quot;source /<span class=3D"gmail_default" style=3D"fon=
+t-family:verdana,sans-serif">workdir</span>/script.sh&quot;<br></span></div=
+><div style=3D"font-family:verdana,sans-serif"><br></div><br></div><span st=
+yle=3D"font-family:verdana,sans-serif"><span class=3D"gmail_default" style=
+=3D"font-family:verdana,sans-serif"></span></span>But I am getting followin=
+g error when this step runs:</div><div dir=3D"ltr"><br><div><div style=3D"f=
+ont-family:verdana,sans-serif"><div><div><div><span><span>WARNING: bitbake =
+binary is not found in PATH, did you source the script?
+</span></span>
+  </div>
+</div>
+  </div><div>
+    <div>
+  <div>
+    </div></div></div><div><div>
+    <span><span>ERROR: Execution of event handler &#39;defaultcheck_sanity_=
+eventhandler&#39; failed
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>Traceback (most recent call last):
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>  File &quot;/workdir/poky/meta/classes-global/sanity.bbcla=
+ss&quot;, line 1025, in defaultcheck_sanity_eventhandler(e=3D&lt;bb.event.S=
+anityCheck object at 0x7f7495a4cca0&gt;, d=3D&lt;bb.data_smart.DataSmart ob=
+ject at 0x7f74959d6a40&gt;):
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>             sanity_data =3D bb.data.createCopy(e.data)
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>    &gt;        check_sanity(sanity_data)
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>             if e.generateevents:
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>  File &quot;/workdir/poky/meta/classes-global/sanity.bbcla=
+ss&quot;, line 996, in check_sanity(sanity_data=3D&lt;bb.data_smart.DataSma=
+rt object at 0x7f7495a4cf10&gt;):
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>         if last_sanity_version &lt; sanity_version or last=
+_nativelsbstr !=3D nativelsbstr:=20
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>    &gt;        check_sanity_version_change(status, sanity_=
+data)
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>             status.addresult(check_sanity_sstate_dir_chang=
+e(sstate_dir, sanity_data))
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>  File &quot;/workdir/poky/meta/classes-global/sanity.bbcla=
+ss&quot;, line 702, in check_sanity_version_change(status=3D&lt;SanityStatu=
+s object at 0x7f7495a4db10&gt;, d=3D&lt;bb.data_smart.DataSmart object at 0=
+x7f7495a4cf10&gt;):
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>         for bin_cmd in suid_check_bins:
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>    &gt;        bin_path =3D bb.utils.which(os.environ[&quo=
+t;PATH&quot;], bin_cmd)
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>             if bin_path:
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>  File &quot;/usr/lib/python3.10/os.py&quot;, line 680, in =
+_Environ.__getitem__(key=3D&#39;PATH&#39;):
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>                 # raise KeyError with the original key val=
+ue
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>    &gt;            raise KeyError(key) from None
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>             return self.decodevalue(value)
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>KeyError: &#39;PATH&#39;
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>ERROR: Command execution failed: Traceback (most recent cal=
+l last):
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>  File &quot;/workdir/poky/bitbake/lib/bb/command.py&quot;,=
+ line 122, in runAsyncCommand
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>    self.cooker.updateCache()
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>  File &quot;/workdir/poky/bitbake/lib/bb/cooker.py&quot;, =
+line 1606, in updateCache
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>    bb.event.fire(bb.event.SanityCheck(False), self.databui=
+lder.mcdata[mc])
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>  File &quot;/workdir/poky/bitbake/lib/bb/event.py&quot;, l=
+ine 225, in fire
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>    fire_class_handlers(event, d)
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>  File &quot;/workdir/poky/bitbake/lib/bb/event.py&quot;, l=
+ine 132, in fire_class_handlers
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>    execute_handler(name, handler, event, d)
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>  File &quot;/workdir/poky/bitbake/lib/bb/event.py&quot;, l=
+ine 103, in execute_handler
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>    ret =3D handler(event, d)
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>  File &quot;/workdir/poky/meta/classes-global/sanity.bbcla=
+ss&quot;, line 1025, in defaultcheck_sanity_eventhandler
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>    check_sanity(sanity_data)
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>  File &quot;/workdir/poky/meta/classes-global/sanity.bbcla=
+ss&quot;, line 996, in check_sanity
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>    check_sanity_version_change(status, sanity_data)
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div style=3D"height:auto"><div><div><div>
+    <span><span>  File &quot;/workdir/poky/meta/classes-global/sanity.bbcla=
+ss&quot;, line 702, in check_sanity_version_change
+</span></span>
+  </div>
+</div>
+  </div></div><div style=3D"height:auto"><div>
+    <div>
+  <div>
+    </div></div></div></div><div><div>
+    <span><span>    bin_path =3D bb.utils.which(os.environ[&quot;PATH&quot;=
+], bin_cmd)
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>  File &quot;/usr/lib/python3.10/os.py&quot;, line 680, in =
+__getitem__
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>    raise KeyError(key) from None
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>KeyError: &#39;PATH&#39;
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div><div><div>
+    <span><span>Summary: There was 1 WARNING message.
+</span></span>
+  </div>
+</div><div>
+  <div>
+    </div></div>
+    <span><span>Summary: There were 2 ERROR messages, returning a non-zero =
+exit code.</span></span></div><div style=3D"font-family:verdana,sans-serif"=
+><span><span><br></span></span></div><div style=3D"font-family:verdana,sans=
+-serif"><span><span>I have confirmed by adding <span class=3D"gmail_default=
+" style=3D"font-family:verdana,sans-serif">&quot;</span>echo $PATH<span cla=
+ss=3D"gmail_default" style=3D"font-family:verdana,sans-serif">&quot;</span>=
+ before image starts <span class=3D"gmail_default" style=3D"font-family:ver=
+dana,sans-serif">that</span> PATH<span class=3D"gmail_default" style=3D"fon=
+t-family:verdana,sans-serif"> environment variable exists and bitbake is in=
+ the path:<br></span></span></span></div><div style=3D"font-family:verdana,=
+sans-serif"><span><span><br>/workdir/poky/scripts:/workdir/poky/bitbake/bin=
+:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span></span>=
+</div><div style=3D"font-family:verdana,sans-serif"><span><span><br></span>=
+</span></div><div style=3D"font-family:verdana,sans-serif"><span><span><br>=
+</span></span></div><div style=3D"font-family:verdana,sans-serif"><span><sp=
+an>But if I run the step as it is in my host machine, docker container is a=
+ble to build the image.</span></span></div><div style=3D"font-family:verdan=
+a,sans-serif"><span><span><br></span></span></div><div style=3D"font-family=
+:verdana,sans-serif"><span><span>Any suggestions on what could be wrong her=
+e?</span></span></div><div style=3D"font-family:verdana,sans-serif"><span><=
+span><br></span></span></div><div style=3D"font-family:verdana,sans-serif">=
+<span><span>thanks</span></span></div><div style=3D"font-family:verdana,san=
+s-serif"><span><span>Ankur<br></span></span></div><br></div></div>
+</div></div>
+
+--000000000000ec3ad506286e36e8--
 
