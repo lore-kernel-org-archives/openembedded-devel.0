@@ -1,215 +1,169 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BB4CE77170
-	for <webhook@archiver.kernel.org>; Thu,  5 Dec 2024 09:37:52 +0000 (UTC)
-Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
- by mx.groups.io with SMTP id smtpd.web10.6679.1733391471938093991
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 458A1E7716D
+	for <webhook@archiver.kernel.org>; Thu,  5 Dec 2024 12:34:33 +0000 (UTC)
+Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
+ by mx.groups.io with SMTP id smtpd.web11.9775.1733402064964557842
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Dec 2024 01:37:52 -0800
+ Thu, 05 Dec 2024 04:34:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=RkfweKbO;
- spf=pass (domain: gmail.com, ip: 209.85.128.175, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-6ef524fda21so4101907b3.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Dec 2024 01:37:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1733391471; x=1733996271; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=I8baEqC1woKY4Tjbw4vErxdnXx/YnxLevFMMTtuIFiE=;
-        b=RkfweKbOVJTYUd+j3jU4MkcIWOsydg3VeE15XmR4Oh0cqsG2vm9RKHJrKN12Hwt2U4
-         MWUEq/Ep67eBiNRSlKg4fyDvYQ8OU7JwTdFOojXYANXD+mWTlrWbGTXRidg9SDTZvTFi
-         +HtWp3Fj+SMU486snHV6F2UoKxxAfG4gMTn567IjEZADYMzYg9yJHqF5dEUpxaLJsEK/
-         u4RDHMPrZgsRg8PaN/sS3QnAnY2mefrXWJCUNmmT+3AvbyQAMzRsDB7Ge7dkjJsICihW
-         R9MBDq81sBWWqwjZQkb8dY2Q7MXoHh2Eis8b3+KF4ajSMFDateK3iOrJ8/vM0WYFb0rH
-         SdvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733391471; x=1733996271;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=I8baEqC1woKY4Tjbw4vErxdnXx/YnxLevFMMTtuIFiE=;
-        b=a4UBp6x0/l1TmbCUSyJoiLo4twTbMye7BGvVDfnRvPdu9SChTwruCxrlcpKVK5csvS
-         AhGLm6izlzk88n3e0UXMc4XB2N+g6S/2ijtpKB3POG0Zi5iLQyJ2tKbW9MM4FE5BNoWd
-         UNezPpvjqOdXy2EnfKrleiY0ThmucMo7xN4gHtipC13TvMc6betYECX6no4Ux2GSUj1c
-         jljUiyvqz0IT4AUCrXQzmXe9USs6Yp1+pxZ0qcBwPLAArmyuMTfq4xtDORpSX/tNfrwI
-         sHKsDKT5EBZ4LbMmkAstshAEfFR6KkKBc1/eYq7KpBtDqPBsVCUNP3BybutT86aG6cpC
-         9bnA==
-X-Gm-Message-State: AOJu0YyV+z2n3bgoQqDAKIMICPO8Cwb7BY3tmiBAasvL4Yf1cd82PWG6
-	Q2wdJhYleJGOIvgCB4cL2/1gDkjZj+CEbSfFpXt5UL08pCo1tc/h5LXjs6zHjnESpEY5udRpUfL
-	aXhLEHF8+EKdfC69oE7jBVE2S1zhUmCLE
-X-Gm-Gg: ASbGncsaE5Km9KZDW1CEhl5BkBWy0pyV9+6mAIX6zD0ttM3Z9ZxpxHoTn7P7V2pHESX
-	c4LXEcCOQQrRvWMSgZQhf/ODV1OQBsJL1
-X-Google-Smtp-Source: AGHT+IHC6fiGMSSK37+ju2b279qdqAq4d69vMP4reKyn7XrM4toXO6tWFkMyQiJGxhuZQgLMIF42P8ijKCMwX/tl2wU=
-X-Received: by 2002:a05:6902:1501:b0:e33:13ab:52c1 with SMTP id
- 3f1490d57ef6-e39d436c390mr8645066276.35.1733391470959; Thu, 05 Dec 2024
- 01:37:50 -0800 (PST)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
+Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
+	by mailout02.t-online.de (Postfix) with SMTP id C5FEEBBB
+	for <openembedded-devel@lists.openembedded.org>; Thu,  5 Dec 2024 13:34:22 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.36.186]) by fwd86.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1tJB3m-0dfANV0; Thu, 5 Dec 2024 13:34:22 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-gnome][PATCH] gthumb: update 3.12.4 -> 3.12.6
+Date: Thu,  5 Dec 2024 13:34:14 +0100
+Message-ID: <20241205123414.309181-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
-References: <CADySD0Hxn4YRVT1_8Vjzcv1Oqe_B7O6UHtEYyRzhKkH8OPq2pg@mail.gmail.com>
- <CADySD0GaOXtoNvagju9h1_1b_h1bjMVijW3RyyO1ji3iX=2q8g@mail.gmail.com> <CAMKF1srUvghoYyv2t_5pOqRptjAtMdO568g2a37tcgAZGSCqJA@mail.gmail.com>
-In-Reply-To: <CAMKF1srUvghoYyv2t_5pOqRptjAtMdO568g2a37tcgAZGSCqJA@mail.gmail.com>
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Thu, 5 Dec 2024 22:37:39 +1300
-Message-ID: <CADySD0HNZ8U_-cfpzXbLLvjdArZUNs7xfVr5dWe5FoENx9WJAw@mail.gmail.com>
-Subject: Re: [oe] Trying to build image inside crops docker using github workflow
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1733402062-8E7FB9BF-07F38D74/0/0 CLEAN NORMAL
+X-TOI-MSGID: dfcf6195-bd2e-487a-bf85-47a12dbe760c
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Dec 2024 09:37:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114201
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Dec 2024 12:34:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114202
 
-On Thu, Dec 5, 2024 at 6:12=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Wed, Dec 4, 2024 at 1:14=E2=80=AFAM Ankur Tyagi via lists.openembedded=
-.org
-> <ankur.tyagi85=3Dgmail.com@lists.openembedded.org> wrote:
-> >
-> > Hello,
-> >
-> > I am trying to use github workflow to build core-image-minimal (scarthg=
-ap) inside a docker container (ghcr.io/crops/poky:ubuntu-22.04)
-> >
-> > Following is the workflow step:
-> >
-> >
-> > steps:
-> > - name: Start Yocto image build
-> > shell: bash
-> >
-> > run: |
-> > echo "${{ secrets.TRACKER_TOKEN }}" | docker login ghcr.io -u ${{ githu=
-b.actor }} --password-stdin
-> > docker pull ghcr.io/crops/poky:ubuntu-22.04
-> >
-> > cat << 'EOF' > script.sh
-> > #!/bin/bash
-> > echo "Running inside the Docker container"
-> > git clone git://git.yoctoproject.org/poky -b scarthgap
-> > source oe-init-build-env
-> > bitbake core-image-minimal
-> > EOF
-> >
-> > chmod +x script.sh
-> > docker run --rm -v $(pwd):/yocto --workdir=3D/workdir ghcr.io/crops/pok=
-y:ubuntu-22.04 /bin/bash -c "source /workdir/script.sh"
->
-> its possible that its executing in a fresh shell which is not
-> inheriting the environment. Maybe try to run steps outside the script.
+- add support for jxl, webp, gstreamer
+- add more PACKAGECONFIG options
+- disable webservices to avoid pulling in deprecated libsoup2
+- remove yelp-native dependency
+- dont build colord by default to make buildable without polkit
+- drop polkit and gobject-introspection from REQUIRED_DISTRO_FEATURES
 
-Thanks for your reply.
+Version 3.12.6
+~~~~~~~~~~~~~~
+Released: 2024-03-10
 
-Using a new shell for the script is understandable but I don't understand
-how a fresh shell can be used to execute part of the script.
+Features:
+ * WebAlbums: allow Exif image title to be used. (Linas Vepstas)
 
-I still tried your suggestion and a few other things like
-https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-gi=
-thub-actions#jobsjob_idcontainer
-but no success.
+Bugfixes:
+ * Fixed 'could not perform operation' when editing a modified image.
+ * Video thumbnailer: use the default thumbnail size if invalid. (Linas V=
+epstas)
+ * Video thumbnailer: avoid a null pointer dereference and crash. (Linas =
+Vepstas)
 
-Instead of using docker run, noticed that the github workflow uses
-docker create and docker start (which is good)
-and also override the entrypoint. I am yet to figure out if that is the rea=
-son.
+Translations:
+ * Slovenian (Martin Srebotnjak)
 
-But in the end, I worked-around the problem by self-hosting the runner
-and it is working now.
+Version 3.12.5
+~~~~~~~~~~~~~~
+Released: 2024-02-18
 
->
-> >
-> >
-> > But I am getting following error when this step runs:
-> >
-> > WARNING: bitbake binary is not found in PATH, did you source the script=
-?
-> > ERROR: Execution of event handler 'defaultcheck_sanity_eventhandler' fa=
-iled
-> > Traceback (most recent call last):
-> > File "/workdir/poky/meta/classes-global/sanity.bbclass", line 1025, in =
-defaultcheck_sanity_eventhandler(e=3D<bb.event.SanityCheck object at 0x7f74=
-95a4cca0>, d=3D<bb.data_smart.DataSmart object at 0x7f74959d6a40>):
-> > sanity_data =3D bb.data.createCopy(e.data)
-> > > check_sanity(sanity_data)
-> > if e.generateevents:
-> > File "/workdir/poky/meta/classes-global/sanity.bbclass", line 996, in c=
-heck_sanity(sanity_data=3D<bb.data_smart.DataSmart object at 0x7f7495a4cf10=
->):
-> > if last_sanity_version < sanity_version or last_nativelsbstr !=3D nativ=
-elsbstr:
-> > > check_sanity_version_change(status, sanity_data)
-> > status.addresult(check_sanity_sstate_dir_change(sstate_dir, sanity_data=
-))
-> > File "/workdir/poky/meta/classes-global/sanity.bbclass", line 702, in c=
-heck_sanity_version_change(status=3D<SanityStatus object at 0x7f7495a4db10>=
-, d=3D<bb.data_smart.DataSmart object at 0x7f7495a4cf10>):
-> > for bin_cmd in suid_check_bins:
-> > > bin_path =3D bb.utils.which(os.environ["PATH"], bin_cmd)
-> > if bin_path:
-> > File "/usr/lib/python3.10/os.py", line 680, in _Environ.__getitem__(key=
-=3D'PATH'):
-> > # raise KeyError with the original key value
-> > > raise KeyError(key) from None
-> > return self.decodevalue(value)
-> > KeyError: 'PATH'
-> > ERROR: Command execution failed: Traceback (most recent call last):
-> > File "/workdir/poky/bitbake/lib/bb/command.py", line 122, in runAsyncCo=
-mmand
-> > self.cooker.updateCache()
-> > File "/workdir/poky/bitbake/lib/bb/cooker.py", line 1606, in updateCach=
-e
-> > bb.event.fire(bb.event.SanityCheck(False), self.databuilder.mcdata[mc])
-> > File "/workdir/poky/bitbake/lib/bb/event.py", line 225, in fire
-> > fire_class_handlers(event, d)
-> > File "/workdir/poky/bitbake/lib/bb/event.py", line 132, in fire_class_h=
-andlers
-> > execute_handler(name, handler, event, d)
-> > File "/workdir/poky/bitbake/lib/bb/event.py", line 103, in execute_hand=
-ler
-> > ret =3D handler(event, d)
-> > File "/workdir/poky/meta/classes-global/sanity.bbclass", line 1025, in =
-defaultcheck_sanity_eventhandler
-> > check_sanity(sanity_data)
-> > File "/workdir/poky/meta/classes-global/sanity.bbclass", line 996, in c=
-heck_sanity
-> > check_sanity_version_change(status, sanity_data)
-> > File "/workdir/poky/meta/classes-global/sanity.bbclass", line 702, in c=
-heck_sanity_version_change
-> > bin_path =3D bb.utils.which(os.environ["PATH"], bin_cmd)
-> > File "/usr/lib/python3.10/os.py", line 680, in __getitem__
-> > raise KeyError(key) from None
-> > KeyError: 'PATH'
-> > Summary: There was 1 WARNING message.
-> > Summary: There were 2 ERROR messages, returning a non-zero exit code.
-> >
-> > I have confirmed by adding "echo $PATH" before image starts that PATH e=
-nvironment variable exists and bitbake is in the path:
-> >
-> > /workdir/poky/scripts:/workdir/poky/bitbake/bin:/usr/local/sbin:/usr/lo=
-cal/bin:/usr/sbin:/usr/bin:/sbin:/bin
-> >
-> >
-> > But if I run the step as it is in my host machine, docker container is =
-able to build the image.
-> >
-> > Any suggestions on what could be wrong here?
-> >
-> > thanks
-> > Ankur
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#114196): https://lists.openembedded.org/g/openembed=
-ded-devel/message/114196
-> > Mute This Topic: https://lists.openembedded.org/mt/109916860/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[raj.khem@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
+Bugfixes:
+ * Add to catalog: show the next image only when in viewer mode (!313)
+ * jxl: added support for version 0.9.0 (Timo Gurr) (!306)
+ * Commenting a picture deletes its Color Profile tag. This only
+   happened when the 'Store metadata inside files if possible' option
+   was active. (!293)
+
+Translations:
+ * Chinese/Traditional (Cheng-Chia Tseng)
+ * Turkish (Sabri =C3=9Cnal)
+ * =C4=8De=C5=A1tina (Daniel Rusek)
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../recipes-gnome/gthumb/gthumb_3.12.4.bb     | 30 -----------------
+ .../recipes-gnome/gthumb/gthumb_3.12.6.bb     | 32 +++++++++++++++++++
+ 2 files changed, 32 insertions(+), 30 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/gthumb/gthumb_3.12.4.bb
+ create mode 100644 meta-gnome/recipes-gnome/gthumb/gthumb_3.12.6.bb
+
+diff --git a/meta-gnome/recipes-gnome/gthumb/gthumb_3.12.4.bb b/meta-gnom=
+e/recipes-gnome/gthumb/gthumb_3.12.4.bb
+deleted file mode 100644
+index 79db8b7d7..000000000
+--- a/meta-gnome/recipes-gnome/gthumb/gthumb_3.12.4.bb
++++ /dev/null
+@@ -1,30 +0,0 @@
+-SUMMARY =3D "Image viewer and browser"
+-LICENSE=3D"GPL-2.0-only"
+-LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D59530bdf33659b29e73d4adb9f9f6=
+552"
+-
+-
+-REQUIRED_DISTRO_FEATURES =3D "polkit gobject-introspection-data"
+-
+-DEPENDS =3D " \
+-    glib-2.0-native \
+-    bison-native \
+-    yelp-tools-native \
+-    gtk+3 \
+-    gsettings-desktop-schemas \
+-    zlib \
+-    jpeg \
+-    exiv2 \
+-    colord \
+-    lcms \
+-    libraw \
+-    librsvg \
+-    libsoup \
+-    json-glib \
+-    libsecret \
+-"
+-
+-inherit features_check gnomebase gnome-help gsettings itstool mime-xdg
+-
+-SRC_URI[archive.sha256sum] =3D "add693ac0aeb9a30d829ba03a06208289d3f6868=
+dc3b02573549e88190c794e8"
+-
+-FILES:${PN} +=3D "${datadir}/metainfo"
+diff --git a/meta-gnome/recipes-gnome/gthumb/gthumb_3.12.6.bb b/meta-gnom=
+e/recipes-gnome/gthumb/gthumb_3.12.6.bb
+new file mode 100644
+index 000000000..5c69152c1
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gthumb/gthumb_3.12.6.bb
+@@ -0,0 +1,32 @@
++SUMMARY =3D "Image viewer and browser"
++LICENSE=3D"GPL-2.0-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D59530bdf33659b29e73d4adb9f9f6=
+552"
++
++DEPENDS =3D " \
++    glib-2.0-native \
++    bison-native \
++    gtk+3 \
++    gsettings-desktop-schemas \
++    zlib \
++    jpeg \
++    json-glib \
++"
++
++PACKAGECONFIG ?=3D "exiv2 gstreamer lcms libjxl libraw librsvg libwebp"
++PACKAGECONFIG[gstreamer] =3D "-Dgstreamer=3Dtrue,-Dgstreamer=3Dfalse,gst=
+reamer1.0 gstreamer1.0-plugins-base"
++PACKAGECONFIG[libwebp] =3D "-Dlibwebp=3Dtrue,-Dlibwebp=3Dfalse,libwebp"
++PACKAGECONFIG[libjxl] =3D "-Dlibjxl=3Dtrue,-Dlibjxl=3Dfalse,libjxl"
++PACKAGECONFIG[lcms] =3D "-Dlcms2=3Dtrue,-Dlcms2=3Dfalse,lcms"
++PACKAGECONFIG[colord] =3D "-Dcolord=3Dtrue,-Dcolord=3Dfalse,colord"
++PACKAGECONFIG[exiv2] =3D "-Dexiv2=3Dtrue,-Dexiv2=3Dfalse,exiv2"
++PACKAGECONFIG[librsvg] =3D "-Dlibrsvg=3Dtrue,-Dlibrsvg=3Dfalse,librsvg"
++PACKAGECONFIG[libraw] =3D "-Dlibraw=3Dtrue,-Dlibraw=3Dfalse,libraw"
++
++# webservices would require libsecret and webkitgtk3 build with deprecat=
+ed libsoup2
++EXTRA_OEMESON +=3D "-Dwebservices=3Dfalse -Dlibsecret=3Dfalse"
++
++inherit gnomebase gnome-help gsettings itstool mime-xdg
++
++SRC_URI[archive.sha256sum] =3D "608770c6c8e73073a1d404b65bd1b761e1ac5dc2=
+5e70130ff072488fa92f5c33"
++
++FILES:${PN} +=3D "${datadir}/metainfo"
+--=20
+2.47.0
+
 
