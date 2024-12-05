@@ -2,42 +2,42 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 458A1E7716D
-	for <webhook@archiver.kernel.org>; Thu,  5 Dec 2024 12:34:33 +0000 (UTC)
-Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
- by mx.groups.io with SMTP id smtpd.web11.9775.1733402064964557842
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DB27E7716D
+	for <webhook@archiver.kernel.org>; Thu,  5 Dec 2024 12:46:23 +0000 (UTC)
+Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
+ by mx.groups.io with SMTP id smtpd.web11.9956.1733402781025122406
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Dec 2024 04:34:25 -0800
+ Thu, 05 Dec 2024 04:46:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
-Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
-	by mailout02.t-online.de (Postfix) with SMTP id C5FEEBBB
-	for <openembedded-devel@lists.openembedded.org>; Thu,  5 Dec 2024 13:34:22 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.36.186]) by fwd86.t-online.de
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
+Received: from fwd77.aul.t-online.de (fwd77.aul.t-online.de [10.223.144.103])
+	by mailout08.t-online.de (Postfix) with SMTP id C8D3157B
+	for <openembedded-devel@lists.openembedded.org>; Thu,  5 Dec 2024 13:46:18 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.36.186]) by fwd77.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tJB3m-0dfANV0; Thu, 5 Dec 2024 13:34:22 +0100
+	esmtp id 1tJBFK-2DhNQX0; Thu, 5 Dec 2024 13:46:18 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] gthumb: update 3.12.4 -> 3.12.6
-Date: Thu,  5 Dec 2024 13:34:14 +0100
-Message-ID: <20241205123414.309181-1-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCHv2] gthumb: update 3.12.4 -> 3.12.6
+Date: Thu,  5 Dec 2024 13:46:15 +0100
+Message-ID: <20241205124615.517117-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-X-TOI-EXPURGATEID: 150726::1733402062-8E7FB9BF-07F38D74/0/0 CLEAN NORMAL
-X-TOI-MSGID: dfcf6195-bd2e-487a-bf85-47a12dbe760c
+X-TOI-EXPURGATEID: 150726::1733402778-0D7F99D3-A26FE5A5/0/0 CLEAN NORMAL
+X-TOI-MSGID: 9df51064-91e1-4fe5-a423-0afc5dcbf5b2
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Dec 2024 12:34:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114202
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Dec 2024 12:46:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114203
 
 - add support for jxl, webp, gstreamer
 - add more PACKAGECONFIG options
 - disable webservices to avoid pulling in deprecated libsoup2
 - remove yelp-native dependency
-- dont build colord by default to make buildable without polkit
+- build colord dependent on polkit feature
 - drop polkit and gobject-introspection from REQUIRED_DISTRO_FEATURES
 
 Version 3.12.6
@@ -123,7 +123,7 @@ dc3b02573549e88190c794e8"
 diff --git a/meta-gnome/recipes-gnome/gthumb/gthumb_3.12.6.bb b/meta-gnom=
 e/recipes-gnome/gthumb/gthumb_3.12.6.bb
 new file mode 100644
-index 000000000..5c69152c1
+index 000000000..2085d63ab
 --- /dev/null
 +++ b/meta-gnome/recipes-gnome/gthumb/gthumb_3.12.6.bb
 @@ -0,0 +1,32 @@
@@ -142,7 +142,8 @@ index 000000000..5c69152c1
 +    json-glib \
 +"
 +
-+PACKAGECONFIG ?=3D "exiv2 gstreamer lcms libjxl libraw librsvg libwebp"
++PACKAGECONFIG ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'c=
+olord', '', d)} exiv2 gstreamer lcms libjxl libraw librsvg libwebp"
 +PACKAGECONFIG[gstreamer] =3D "-Dgstreamer=3Dtrue,-Dgstreamer=3Dfalse,gst=
 reamer1.0 gstreamer1.0-plugins-base"
 +PACKAGECONFIG[libwebp] =3D "-Dlibwebp=3Dtrue,-Dlibwebp=3Dfalse,libwebp"
