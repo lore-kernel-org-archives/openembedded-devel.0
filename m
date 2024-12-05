@@ -1,191 +1,236 @@
-Return-Path: <yi.zhao@eng.windriver.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 82803E7716C
-	for <webhook@archiver.kernel.org>; Thu,  5 Dec 2024 12:58:53 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.10283.1733403530199285479
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76D06E7716C
+	for <webhook@archiver.kernel.org>; Thu,  5 Dec 2024 13:11:23 +0000 (UTC)
+Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
+ by mx.groups.io with SMTP id smtpd.web10.10538.1733404281366077908
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Dec 2024 04:58:50 -0800
+ Thu, 05 Dec 2024 05:11:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=206902e622=yi.zhao@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4B57IS9s014661
-	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Dec 2024 12:58:49 GMT
-Received: from nam11-bn8-obe.outbound.protection.outlook.com (mail-bn8nam11lp2173.outbound.protection.outlook.com [104.47.58.173])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 437sp7610d-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 05 Dec 2024 12:58:49 +0000 (GMT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NJXNtcmA+RgpAhQFtM3aAYmFxee/DeeHC86nYesaZkrPtZMZMVFJB4EU3Gfu8g0ITmKV5DYABJre5aM2/zZXBNg9qwX7KXp0qXcmhnUjlwSSFiOtVf520fxbCN2OwmWXdIviDIUQdepfnRxinnp4Mgcux07dJs5RlaTfZ1IBxkxTdhwq65wPbTumSstwF0ANNhZ0/WZw5XNrtFhcNCQLuJ/3mOysd5/xEa4Utd3VKj3kcnPo05t/SohCJCTOOGdLSyINdAb8Nf0vIMJrhbIawMyANNk4ascVxj6nj8DUitXMrhjr0MuZwLzPzvxHc5LyF7D9t4caCXXJG4sByIKuwA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CLXtb3Hu/v8h3qlQQa4N36yzDSAoHovFDaoIJKp5T60=;
- b=iuI450Qs9ixo2b2p3xn/sYdnIdW66s7xoGJGB7EZV36rHYYjpVgtgWQdRTsE+WmxvIb+Jd1BIrXLD3aF+Lm9ywHNuoyMSlXtNc1HH6wKMhe9eqA/VudLqK0TV2njJA6bzUoLGGx0nTHR3K4VIhyVFD/hAXcvyPVRLFxajH4JknjTcdy1MHd7KDtRE/BdvhTxgVQSF9vTC+vCOXfbdR4gQ6pNAEUwfgaPlbj6rziJjG+tMyvTWiw6ClCruVDWKi4qIXT5o/bdq7iHlidA83THP6XcGyVek3zUizXv21JZ/bHqRPNno5juVHPU2msQhuEPlF+MTPbOYRXOWObmOyqZuQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5) by
- BY1PR11MB8006.namprd11.prod.outlook.com (2603:10b6:a03:52d::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8230.11; Thu, 5 Dec
- 2024 12:58:46 +0000
-Received: from DS0PR11MB6399.namprd11.prod.outlook.com
- ([fe80::2b44:787c:e7ee:bfad]) by DS0PR11MB6399.namprd11.prod.outlook.com
- ([fe80::2b44:787c:e7ee:bfad%7]) with mapi id 15.20.8207.017; Thu, 5 Dec 2024
- 12:58:46 +0000
-From: Yi Zhao <yi.zhao@windriver.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
+Received: from fwd72.aul.t-online.de (fwd72.aul.t-online.de [10.223.144.98])
+	by mailout08.t-online.de (Postfix) with SMTP id 68CB4B0C
+	for <openembedded-devel@lists.openembedded.org>; Thu,  5 Dec 2024 14:11:19 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.36.186]) by fwd72.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1tJBdV-4BnMnZ0; Thu, 5 Dec 2024 14:11:17 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] pam-radius: add recipe
-Date: Thu,  5 Dec 2024 20:58:31 +0800
-Message-Id: <20241205125831.3715975-1-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.25.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: TYCP286CA0187.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:400:382::11) To DS0PR11MB6399.namprd11.prod.outlook.com
- (2603:10b6:8:c8::5)
+Subject: [meta-gnome][PATCHv3] gthumb: update 3.12.4 -> 3.12.6
+Date: Thu,  5 Dec 2024 14:11:15 +0100
+Message-ID: <20241205131115.567116-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|BY1PR11MB8006:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7a858eaf-dc6b-4dfc-3f5b-08dd152c8e1e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|52116014|366016|376014|38350700014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?+e/oomHFCsQwuqrHYhIU39tSVpCbAoNnJ7t917Xt7aFBnWxAbgPW+6VbLoen?=
- =?us-ascii?Q?0il4WGYpK0bjhJE58fqqEQAK5vZeTAfiM/TIwwh4W2+IasgejWHDVwFyNNzW?=
- =?us-ascii?Q?IB1/1fmOIC79PpQLiDpesLPK1HcGIJ2gktaeb4gg3YatmyEEcm1MyG4xenIN?=
- =?us-ascii?Q?D72ct7TIo48HQA16xsN/IuMSJvhjw3/k6oi1Mvf+O6s/ciEVKmObttMZaxxL?=
- =?us-ascii?Q?fCr7xW7SzssBChiWnBU+0y0pMuTWBCQWtXgq8uURSCYN9MND87J5rmThkH+8?=
- =?us-ascii?Q?vh5yxyOD2ed7hjAVYeMoZ1vMOrAEccpTTZ3BubP+JoPIZsbzefzaBsezH7DL?=
- =?us-ascii?Q?KG3ih3VK8Dcod1EljPloshAk/UyjOkeU6cHDuUaWBAEHm69ukf1wBJQjuoN6?=
- =?us-ascii?Q?sb8vovbB2UKvusGVZwscInY4vv4OOZVIoYO1xA6lI9VdkDjmV2qcT11rNaYh?=
- =?us-ascii?Q?+Or6Rlu/kmWtGxSliUs929kzB7Eo9uwQD1+fSCAs9Up9LlyzqSjsYMmAADtj?=
- =?us-ascii?Q?E+njBP4oJS7WJr1HbCNzrePzCYMQBgH6p5Yiyjdq74dLj5vV5GWjKmp36xEm?=
- =?us-ascii?Q?gjXzwWYy2yWMxWsfyvr1DxQhgZ3wyaWV3/I1i/PVbRNJYReAyaF05iyrQldk?=
- =?us-ascii?Q?90uiJwo1Pf6m0NOhmEoCfS2kp7PRz+qGOJuXuwqwoSr2aHuPzGCKlHJT5iKD?=
- =?us-ascii?Q?6mEIXYbyGDCx+ehn59UTB8DIvuATXxBUh261CCWKFrSNhJmm6fdEz1z7Z1qv?=
- =?us-ascii?Q?4fmUoK65ULnszv6Uq9+xSJu6B8rvRut698b5GxZEnm6sefsI3Umllj2ka1lE?=
- =?us-ascii?Q?O/mqdtP9Jmx/juYzKraSK+i1M1tHZ9jsgu++WQe47E18g4Yvzk9/RZPIFNC0?=
- =?us-ascii?Q?jepdNHEqZUGIwKhoPXcW7D5DyKUBF/QUAEsbPprjJvfzKL9jJ8HwZt+82nWF?=
- =?us-ascii?Q?pKP7YK25s39p/c2MfvWUmOBAMwhXh72lP6bxz46O+yRwtHb5nvAh0UpIUf6n?=
- =?us-ascii?Q?PqESNZj4rzXGknL57kaZ1wegvGS9zMLeGHQP4uvb7oQ4IVEWB2O5IwLqPo6n?=
- =?us-ascii?Q?V+jDSkSmy/ZKC59bmtbAT+Baz/H3soJvWStf2ukpzdSCG1x/JCW08Vbs7Lp1?=
- =?us-ascii?Q?7b3aO2I0vo69hbmdlcLe5xEr+Wyco80enIqaHJ7pouerRL1lHWpAiXugZOmS?=
- =?us-ascii?Q?LX6aIiRY8w43j4Rx/1fr+91KVsEGjWKhI5Djb3Me/sa594nXIvKXkDhIj487?=
- =?us-ascii?Q?IA1D8NvS/I5X6B8z/e47sjDZahKxegscBRGo6Uo1MGbIIcQbc0M4T/buTmff?=
- =?us-ascii?Q?FOcr1NwPGGPACpDMzMSVXf3XwaWaL5SqnWNd+4KdP7MSz9rIhp+zErE1paJi?=
- =?us-ascii?Q?RZ42IkvfOCbkySk1F+UbJEXwVVVAS6qsen3T4Gi63gTgNqq1rQ=3D=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(52116014)(366016)(376014)(38350700014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?B/TemHd7065PfznOaF5sljbiR3hbsRvtwRTnaKmcuhWbl4e/qKY3xgDDD4iM?=
- =?us-ascii?Q?Zxi6vCYuM0yIb8hJsxCHQ7oTqCbLI1tOqcrHN5S1hA5xKd1I8CMYbbAaRrcI?=
- =?us-ascii?Q?TyqTWNrkbVLHmEhM8gs8zTWUW4PBcEQVjda2Y/AsXUReUIDwQdv9CLXiJ4m6?=
- =?us-ascii?Q?rL3SZFycfUpW1dGSU6wQPENurIoDOh+l/iiuj67rWK4cSGhigMoEq2vknyXM?=
- =?us-ascii?Q?ofp3oUhZsje5MYB2SN0OAcIROefDpP9xshgm8Ci1KNV8kep7JfAYHAu85KZW?=
- =?us-ascii?Q?4xQVg0EaDEC0MlkD6PAB6X+nsnU6oadlj486bJe2BMGdoGEECHvbW0konSyX?=
- =?us-ascii?Q?1jaXzqseTHOEhiqFhbNiN/ciMuugpFO0+CzJlJLFYdJ3xwc5heJWnvnz/eOx?=
- =?us-ascii?Q?bgsIxliB+AgmyCXQDulELcsO7KFkuGL3JARo6YzJmKgFfH1OVkkewL29FbVz?=
- =?us-ascii?Q?BrnAT5/PZR7zua39xoAOmvvRxXDPf22my3DKa88hqVvtFE3j4+IQP+bjGGlE?=
- =?us-ascii?Q?5WYMwuYTJeOx4Wi24HQ9U2VXdjreMmMCFugsjvCNkzuEyWvYccbTdUx4D8+k?=
- =?us-ascii?Q?YojX6BaljPMVOP20HUAZK4HTRF1O4zNN2jaCnrxRi8bncdKX00TnvIpmWnKp?=
- =?us-ascii?Q?K9tOrw9QQ0ZfQ2KEesb6hvWzN0QV4jQ2HtKQu1L9Cgpv53O2Cg4xNcA16KI4?=
- =?us-ascii?Q?K7FTnhjH45ykt48Xd1v56co8/ggsriH0PRKZzfPMqSqcCsvFqpJziriN+aXO?=
- =?us-ascii?Q?s7zgOI4ibzADm1PP9cARhh1UgYKbM3BSWrxFuxqx1IgTmqNYPQlPtqau8QHA?=
- =?us-ascii?Q?8s+IroZcLNOVDW1by6MxNzx5jPBoUMjt0Pmh1aJPNj95/F5hixlZ4LoUCLTF?=
- =?us-ascii?Q?PXmhTlDxH04oMB/TvOcTvMQ24os0SM40f+bUvampJWe+ay5LH7Kx72Q3TRhC?=
- =?us-ascii?Q?xCxGDCoDSmfH2Em3CSaS6dFfgfunC50r0Lyb6tITw4WtF24mCGZyzXof+FLC?=
- =?us-ascii?Q?0q0w2JVSk+zWZF0vF+M627Dk4UEbyl16HWoDZ7zR9B6GLt0ap9apb8g6/Z1V?=
- =?us-ascii?Q?VwkNr/qK4dFHDnfOCyh+Lbswdpu8rh6ncbZmDMqZHzedLtCRnHIKmkQaXZSq?=
- =?us-ascii?Q?dCygUzdvoURgejSRY7UNFd84gCE3Yb7aDnR8WfiFG4JkjQEMgnoHDngbGbmk?=
- =?us-ascii?Q?xl/wr0pSkY8EXWpHAvSXX4pMgBUXmNoUk8DwZYdFugyVW9CzWmYFIG0CaclJ?=
- =?us-ascii?Q?pUcIE3X1mCMt8uLZ0Zz8B6qhd3mWpZPSZCksahLRqed/nlnbFsq+xBmmLbXl?=
- =?us-ascii?Q?HFtDHKLy/UuFnlasJhGgm7rlD40WAqlY+xR36N2x7PHaDCTMVGCloLiVWVDi?=
- =?us-ascii?Q?SQ/3Nm8RZTLkR9YSPdRxpA1dMgaSk2vLpISoc3ZlSDwYqtPzdybaOjJIL5om?=
- =?us-ascii?Q?yDHOduSxufLGXWBEpBPPgfSINj6LYRH+Zib1Qb/8YNYMf+KpS1LpdwB00hMu?=
- =?us-ascii?Q?o/AMD5kFTK5C1jaeTqRASYnH6TVZlCoHie53A+GMesZedbJX0ygLiwbeNOv0?=
- =?us-ascii?Q?w3XJ/l3tFbuvO0kY4gEjTYGeG1ZAwER52A9X97Kx?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7a858eaf-dc6b-4dfc-3f5b-08dd152c8e1e
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6399.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2024 12:58:46.5429
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GJso+Q7Vt1c/hmAqrU1h18BnljSCQyEcwjcEX1l0YRfHdkN9y69DqwYxWUgSHBwCrOk/rhMAI7nPKAByh9N7cg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY1PR11MB8006
-X-Authority-Analysis: v=2.4 cv=Qvqk3Uyd c=1 sm=1 tr=0 ts=6751a389 cx=c_pps a=19K1aDEwnJ0RahI1emVHDw==:117 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=RZcAm9yDv7YA:10 a=bRTqI5nwn0kA:10 a=FcTRRU_JAAAA:8
- a=t7CeM3EgAAAA:8 a=NEAV23lmAAAA:8 a=ZHT1k9LS8aEVz82yAlsA:9 a=24chkg8mTlgNITX-x-SQ:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: x5aMJAu4QQswJ-55vrO_xr5qHlP73Ata
-X-Proofpoint-GUID: x5aMJAu4QQswJ-55vrO_xr5qHlP73Ata
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2024-12-05_10,2024-12-05_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 impostorscore=0
- lowpriorityscore=0 mlxscore=0 phishscore=0 mlxlogscore=889 malwarescore=0
- bulkscore=0 priorityscore=1501 suspectscore=0 adultscore=0 spamscore=0
- classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
- engine=8.21.0-2411120000 definitions=main-2412050094
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1733404277-637FDB9C-D9401771/0/0 CLEAN NORMAL
+X-TOI-MSGID: 691d9d37-d4ac-40b2-b0bf-a2a73fa5c6a4
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Dec 2024 12:58:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114205
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Dec 2024 13:11:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114206
 
-The RADIUS authentication PAM module allows any PAM-capable machine to
-become a RADIUS client for authentication and accounting requests.
+- add support for jxl, webp, gstreamer
+- add more PACKAGECONFIG options
+- disable webservices to avoid pulling in deprecated libsoup2
+- remove yelp-native dependency
+- build colord dependent on polkit feature
+- drop polkit and gobject-introspection from REQUIRED_DISTRO_FEATURES
+- add backport patch to fix 32-bit
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Version 3.12.6
+~~~~~~~~~~~~~~
+Released: 2024-03-10
+
+Features:
+ * WebAlbums: allow Exif image title to be used. (Linas Vepstas)
+
+Bugfixes:
+ * Fixed 'could not perform operation' when editing a modified image.
+ * Video thumbnailer: use the default thumbnail size if invalid. (Linas V=
+epstas)
+ * Video thumbnailer: avoid a null pointer dereference and crash. (Linas =
+Vepstas)
+
+Translations:
+ * Slovenian (Martin Srebotnjak)
+
+Version 3.12.5
+~~~~~~~~~~~~~~
+Released: 2024-02-18
+
+Bugfixes:
+ * Add to catalog: show the next image only when in viewer mode (!313)
+ * jxl: added support for version 0.9.0 (Timo Gurr) (!306)
+ * Commenting a picture deletes its Color Profile tag. This only
+   happened when the 'Store metadata inside files if possible' option
+   was active. (!293)
+
+Translations:
+ * Chinese/Traditional (Cheng-Chia Tseng)
+ * Turkish (Sabri =C3=9Cnal)
+ * =C4=8De=C5=A1tina (Daniel Rusek)
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../recipes-extended/pam/pam-radius_3.0.0.bb  | 30 +++++++++++++++++++
- 1 file changed, 30 insertions(+)
- create mode 100644 meta-oe/recipes-extended/pam/pam-radius_3.0.0.bb
+ ...9483afd1215378c8b9871f51cd61770e53e7.patch | 49 +++++++++++++++++++
+ .../recipes-gnome/gthumb/gthumb_3.12.4.bb     | 30 ------------
+ .../recipes-gnome/gthumb/gthumb_3.12.6.bb     | 34 +++++++++++++
+ 3 files changed, 83 insertions(+), 30 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/gthumb/gthumb/283c9483afd121=
+5378c8b9871f51cd61770e53e7.patch
+ delete mode 100644 meta-gnome/recipes-gnome/gthumb/gthumb_3.12.4.bb
+ create mode 100644 meta-gnome/recipes-gnome/gthumb/gthumb_3.12.6.bb
 
-diff --git a/meta-oe/recipes-extended/pam/pam-radius_3.0.0.bb b/meta-oe/recipes-extended/pam/pam-radius_3.0.0.bb
+diff --git a/meta-gnome/recipes-gnome/gthumb/gthumb/283c9483afd1215378c8b=
+9871f51cd61770e53e7.patch b/meta-gnome/recipes-gnome/gthumb/gthumb/283c94=
+83afd1215378c8b9871f51cd61770e53e7.patch
 new file mode 100644
-index 000000000..50a540e46
+index 000000000..c2dbce0c1
 --- /dev/null
-+++ b/meta-oe/recipes-extended/pam/pam-radius_3.0.0.bb
-@@ -0,0 +1,30 @@
-+SUMMARY = "PAM module for RADIUS authentication"
-+DESCRIPTION = "This allows any PAM-capable machine to become a RADIUS client for \
-+authentication and accounting requests. You will need a RADIUS server to perform \
-+the actual authentication."
-+HOMEPAGE = "http://freeradius.org/pam_radius_auth/"
++++ b/meta-gnome/recipes-gnome/gthumb/gthumb/283c9483afd1215378c8b9871f51=
+cd61770e53e7.patch
+@@ -0,0 +1,49 @@
++From b48e34c436eb59877b0fe75ba3bf724c0de4dc36 Mon Sep 17 00:00:00 2001
++From: Pino Toscano <toscano.pino@tiscali.it>
++Date: Sat, 7 Sep 2024 09:40:49 +0200
++Subject: [PATCH] migrate-catalogs: properly use time_t for localtime()
 +
-+LICENSE = "GPL-2.0-only"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=cbbd794e2a0a289b9dfcc9f513d1996e"
++Commit ed219c771bc0c63e1a7847e44c81f43223454eac changed the type of the
++'date' variable from 'time_t' to 'long', to ensure the right type is
++handled by sscanf(). The problem is that, in case 'time_t' is not the
++same as 'long', the wrong pointer is passed to localtime(), and more
++strict build flags (such as the defaults of GCC 14) cause the build to
++fail on such setups.
 +
-+SRC_URI = "git://github.com/FreeRADIUS/pam_radius.git;protocol=https;branch=master"
-+SRCREV="b6442c3e0147f1019990520483fa3a30e4ccf059"
++The ideal fix in this case would be to switch back the 'date' variable
++to 'time_t' and use the right format specifier for it in sscanf();
++however, since this is an helper to convert very old format, this
++additional code is not much worth it. Hence, use a simpler fix: in case
++a date timestamp was read from the file, set it to a new 'time_t'
++variable which is then used for localtime(). Since 'time_t' is big at
++least as much as 'long', there is no precision/value loss.
 +
-+S = "${WORKDIR}/git"
++There should be no behaviour change.
 +
-+DEPENDS = "libpam"
++Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gthumb/-/commi=
+t/283c9483afd1215378c8b9871f51cd61770e53e7]
++---
++ gthumb/main-migrate-catalogs.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
 +
-+inherit autotools-brokensep features_check
-+REQUIRED_DISTRO_FEATURES = "pam"
++diff --git a/gthumb/main-migrate-catalogs.c b/gthumb/main-migrate-catalo=
+gs.c
++index 75f5cb11d..e194ed19f 100644
++--- a/gthumb/main-migrate-catalogs.c
+++++ b/gthumb/main-migrate-catalogs.c
++@@ -308,12 +308,13 @@ migration_for_each_file (GFile     *file,
++ 				sscanf (line, "%d", &date_scope);
++=20
++ 				if ((date > 0) && (date_scope >=3D 1) && (date_scope <=3D 3)) {
+++					time_t	     date_as_time =3D date;
++ 					struct tm   *tm;
++ 					GthDateTime *dt;
++ 					char        *exif_date;
++ 					char        *op;
++=20
++-					tm =3D localtime (&date);
+++					tm =3D localtime (&date_as_time);
++ 					dt =3D gth_datetime_new ();
++ 					gth_datetime_from_struct_tm (dt, tm);
++ 					exif_date =3D gth_datetime_to_exif_date (dt);
++--=20
++GitLab
 +
-+EXTRA_OECONF = "--disable-developer"
+diff --git a/meta-gnome/recipes-gnome/gthumb/gthumb_3.12.4.bb b/meta-gnom=
+e/recipes-gnome/gthumb/gthumb_3.12.4.bb
+deleted file mode 100644
+index 79db8b7d7..000000000
+--- a/meta-gnome/recipes-gnome/gthumb/gthumb_3.12.4.bb
++++ /dev/null
+@@ -1,30 +0,0 @@
+-SUMMARY =3D "Image viewer and browser"
+-LICENSE=3D"GPL-2.0-only"
+-LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D59530bdf33659b29e73d4adb9f9f6=
+552"
+-
+-
+-REQUIRED_DISTRO_FEATURES =3D "polkit gobject-introspection-data"
+-
+-DEPENDS =3D " \
+-    glib-2.0-native \
+-    bison-native \
+-    yelp-tools-native \
+-    gtk+3 \
+-    gsettings-desktop-schemas \
+-    zlib \
+-    jpeg \
+-    exiv2 \
+-    colord \
+-    lcms \
+-    libraw \
+-    librsvg \
+-    libsoup \
+-    json-glib \
+-    libsecret \
+-"
+-
+-inherit features_check gnomebase gnome-help gsettings itstool mime-xdg
+-
+-SRC_URI[archive.sha256sum] =3D "add693ac0aeb9a30d829ba03a06208289d3f6868=
+dc3b02573549e88190c794e8"
+-
+-FILES:${PN} +=3D "${datadir}/metainfo"
+diff --git a/meta-gnome/recipes-gnome/gthumb/gthumb_3.12.6.bb b/meta-gnom=
+e/recipes-gnome/gthumb/gthumb_3.12.6.bb
+new file mode 100644
+index 000000000..891717858
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gthumb/gthumb_3.12.6.bb
+@@ -0,0 +1,34 @@
++SUMMARY =3D "Image viewer and browser"
++LICENSE=3D"GPL-2.0-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D59530bdf33659b29e73d4adb9f9f6=
+552"
 +
-+do_install() {
-+    install -d ${D}${sysconfdir}
-+    install -m 644 ${S}/pam_radius_auth.conf ${D}${sysconfdir}
-+    install -d ${D}${base_libdir}/security
-+    install -m 644 ${S}/pam_radius_auth.so ${D}${base_libdir}/security
-+}
++DEPENDS =3D " \
++    glib-2.0 \
++    glib-2.0-native \
++    bison-native \
++    gtk+3 \
++    gsettings-desktop-schemas \
++    zlib \
++    jpeg \
++    json-glib \
++"
 +
-+FILES:${PN} += "${base_libdir}/security/*.so"
-+FILES:${PN}-dbg += "${base_libdir}/security/.debug"
--- 
-2.25.1
++PACKAGECONFIG ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'c=
+olord', '', d)} exiv2 gstreamer lcms libjxl libraw librsvg libwebp"
++PACKAGECONFIG[gstreamer] =3D "-Dgstreamer=3Dtrue,-Dgstreamer=3Dfalse,gst=
+reamer1.0 gstreamer1.0-plugins-base"
++PACKAGECONFIG[libwebp] =3D "-Dlibwebp=3Dtrue,-Dlibwebp=3Dfalse,libwebp"
++PACKAGECONFIG[libjxl] =3D "-Dlibjxl=3Dtrue,-Dlibjxl=3Dfalse,libjxl"
++PACKAGECONFIG[lcms] =3D "-Dlcms2=3Dtrue,-Dlcms2=3Dfalse,lcms"
++PACKAGECONFIG[colord] =3D "-Dcolord=3Dtrue,-Dcolord=3Dfalse,colord"
++PACKAGECONFIG[exiv2] =3D "-Dexiv2=3Dtrue,-Dexiv2=3Dfalse,exiv2"
++PACKAGECONFIG[librsvg] =3D "-Dlibrsvg=3Dtrue,-Dlibrsvg=3Dfalse,librsvg"
++PACKAGECONFIG[libraw] =3D "-Dlibraw=3Dtrue,-Dlibraw=3Dfalse,libraw"
++
++# webservices would require libsecret and webkitgtk3 built with deprecat=
+ed libsoup2
++EXTRA_OEMESON +=3D "-Dwebservices=3Dfalse -Dlibsecret=3Dfalse"
++
++inherit gnomebase gnome-help gsettings itstool mime-xdg
++
++SRC_URI +=3D "file://283c9483afd1215378c8b9871f51cd61770e53e7.patch"
++SRC_URI[archive.sha256sum] =3D "608770c6c8e73073a1d404b65bd1b761e1ac5dc2=
+5e70130ff072488fa92f5c33"
++
++FILES:${PN} +=3D "${datadir}/metainfo"
+--=20
+2.47.0
 
 
