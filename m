@@ -2,98 +2,89 @@ Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C23FE77173
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EB7AE7717B
 	for <webhook@archiver.kernel.org>; Fri,  6 Dec 2024 11:11:40 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.web10.34759.1733483499393952671
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+ by mx.groups.io with SMTP id smtpd.web11.34611.1733483497498368288
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 06 Dec 2024 03:11:39 -0800
+ Fri, 06 Dec 2024 03:11:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=uSyc7i7X;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.47, mailfrom: brgl@bgdev.pl)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-434aa472617so13526365e9.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 06 Dec 2024 03:11:39 -0800 (PST)
+ dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=TMMR0uvC;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.41, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-43494a20379so18783815e9.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 06 Dec 2024 03:11:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1733483498; x=1734088298; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=fItchsX+7kV6kUOaIc26h980oXg2fPlxX5pENy/XsUs=;
-        b=uSyc7i7XBwqRtddcVMiL4a+UB8zFvdDo5OtOkZXmziKIAIAiGc3ivCo4ogB6iB2c9M
-         4x4/AFt8eBDT+iwod2oZRnji4cULYGJd9AVqPAAZ7ljQjHg0kIvaTbxnYuLNcf1CCBGU
-         UOVbL6cL4YsIpak3TkaOk84wA4XEOWmBLQQ3+sMztr8psOOmTGthRfoIAfLNN5MeNau8
-         1bP6hqM2wmULBjjEYPZZ8iULGIVTM92EJ5lkJZMuU+QggVcc8K8WVeCzEoD+2fpo5qTP
-         VYdkOVKXIh4AP7zHI2ZplOqwKrGp5Cv9vr81oIg19Fsu5XOqWBH+tMpLMUmYkF7AXREz
-         WzVw==
+        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1733483496; x=1734088296; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=psZZzG0HKRVHISkdogqWCsLFQf2DEXeYvtIVhPmMDiA=;
+        b=TMMR0uvCz6sekBkFRkTZsufYC4FsuAsm1LE2miRwdh72OqVP5jJUT2X8qxmSgX+g+s
+         y4utMy/IyK9VyHI5XXHpufYS7nPwZtHhna+0f2AiVqN3p+YTQCVVGc/NwXqMdC7FJhyu
+         1jgJliHCddpTTXOt1ahrWkODOLN5U3QgHm4hqkK9ZMWpoY+dSPR1IJlPVjUmHkcEjjxL
+         6tFMUpv7K7JIC0qOZFW8bQdT9ScNxtcTwKhnVq5kg+WIXhxwexaZoK6EMVSp3wqImqRC
+         ThhssHtmRdk8LDSmmOPsxLIQE5uC/TvctmKmM66OP9A97WM+1nfC6EtJP4apvgjQk+2S
+         LlPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733483498; x=1734088298;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=fItchsX+7kV6kUOaIc26h980oXg2fPlxX5pENy/XsUs=;
-        b=KVHEDYfFDr8KllIsNwuquEO/1MpW30uXetv2ncBKZzWc8v7Tl/8cwzM2+41lW+77dE
-         Ofe7nMuncUhfCBdohttgjyhV/T1HZpyDkj3Id3HXlvGVFBY/KA8sY2RfZGlQnOvJ6K0j
-         IQ/BsEOmdSSnwkA9AGFiNXvsqPih2Qm8ugMIRWhoF99rzjuiLZ7PByAIGFfTfX16qeFn
-         OtlQxpRyU4+2fsaqhWmj8Q634WAdZCzniN73HXP8DACEe0Y+kt6ZyyTBvHG+5YGekcLz
-         XzpeL5KYFkXK8leFraMZckVUE1O1riUnXE3NR5opt9DsDDNAFljZnnhCFItg6Xp0HIyr
-         zG6Q==
-X-Forwarded-Encrypted: i=1; AJvYcCWUxWxHodZko/h276nz6Kzl9gCMVOx1OZAGdIdwpcQgOnph1o/vKzrvdWFAcaGB4qaBfHxRzE6LjOL9YxTKgWK1z84=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyAay4dJob6Va8ZjFBZcoSrxSZH7XMAySPaBDD+gF5rChnGUPlw
-	nAw3Ihg1vl3JG6HhOI6uKde4eN49yxo9JKYb8lfZDN+Q7+UX3yUYp+3tWXl+H2Q=
-X-Gm-Gg: ASbGncvE15UCMQ560IE2Zm2CL/jQ9gv/4zMKwx2HXWDCGm9zH0QiT/pbz3Qdcd7YysR
-	XYTL9sjoO7BS4vvD6cNYDzJOuw8CXHefIK9M77aFzBmrf0Tre3ENtnZ7YVCxpqFzusf7+xvwGh9
-	1d5Z9B7qd0YrJfckYXLyHWpMS7tOLyz/Wv7bA3s7UQ5CuWiWDv82Yy9Pbpt4e3Fa7IXnVwGilXt
-	v89a6x1GlUnGxJolA04bXhW8mUQ7KeoeFH7HkhEANMhPk0ETw==
-X-Google-Smtp-Source: AGHT+IFRsSDHIpB/S0sHMgVpexDEzc3yzfGC2K42dBaYeTcuOY3LuCx6LwGczMqqLzg+JJGYspRX/g==
-X-Received: by 2002:a05:600c:1d1e:b0:434:a4a6:51f8 with SMTP id 5b1f17b1804b1-434dde6b13cmr25013765e9.0.1733483497822;
-        Fri, 06 Dec 2024 03:11:37 -0800 (PST)
+        d=1e100.net; s=20230601; t=1733483496; x=1734088296;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=psZZzG0HKRVHISkdogqWCsLFQf2DEXeYvtIVhPmMDiA=;
+        b=BgBXaopVSUJr2k3L4ujFxSxAMjoZY1XXH/dfiphRkX9lxaTQDW4Ti1DsaBr65GOnHT
+         NSrh7f2viRk7DJMW/cAzZCOeISAX47+hqYRK2ADtzivoIeH1t2rM8aeJwkhIsqadL0Qq
+         j0mzvkyUczeXjtCf5kWCUIFrXWZeaZ4ASbh0jni8ixs74AWFl3t7qeTWFx2Vv+gawOKB
+         sKqM21xEbsKSeIm3GxEomvt3XTWuUdFsFiAYvwCJCE//MtT3C1HfIRoorsO6hkx1Y2a1
+         rspSValRnGqlF1YIj3Sl/1T84Y52Mfu+sZX+Lf0CfeyIM+LWM2Jc0ccxQpsbWmX4nTrV
+         +//w==
+X-Forwarded-Encrypted: i=1; AJvYcCXagJCvOYjNPhSwEcgC1+dGPaotelIHKM+mCeuAgsAOTQvRONdDwJOdA/O4xiiA+uPoyjE2S4S85AsvwQ1ybmeJiZ4=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YxFVOsD/8LSFErvx8/3dki5aklF9NmE+0AEAqo+F46XfjUeLeBk
+	ppdUf5wOFXxpsSs5FHMW20LyaS2SRkLMY27r6meX0gMh38VK23rRbg6GkIUCEyQ=
+X-Gm-Gg: ASbGncsfpYr22fQDpsGPrYqA1UK6OzQqB028h6puWB8UH1YCIC1hM3ggvdCN8ICMKaP
+	9vFYVjpBEHP043KXy+nPwDQ4Y8g0P5J3VRnlJ3RPO95Ph/BoeV+P+6n4uMCdTC/4EOpUX6p+1NQ
+	jJ1FViMqgK6bPLuF7KwsgPtfPLd8X0VY71M5X+xKuxRZbLVDaZKQk8tvmOiq+cQZZVZs4FqbcSF
+	IXhupXAQnr2iocp5o3LSygP65YuFa1n9Frp8NG6qJ483KchDQ==
+X-Google-Smtp-Source: AGHT+IEHX0MpCnkB8fTzk6tBtXF/mpY2+nruShhs1k4ImKUYSlFZ++fwGUSlPPU1zK2tL42F/qvE1A==
+X-Received: by 2002:a05:600c:5118:b0:434:a555:d0d with SMTP id 5b1f17b1804b1-434ddedd65emr20903985e9.29.1733483495418;
+        Fri, 06 Dec 2024 03:11:35 -0800 (PST)
 Received: from brgl-uxlite.home ([2a01:cb1d:dc:7e00:6dc5:5621:fbd1:6903])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-434da0da461sm53830585e9.20.2024.12.06.03.11.36
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-434da0da461sm53830585e9.20.2024.12.06.03.11.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 06 Dec 2024 03:11:36 -0800 (PST)
+        Fri, 06 Dec 2024 03:11:34 -0800 (PST)
 From: Bartosz Golaszewski <brgl@bgdev.pl>
 To: Khem Raj <raj.khem@gmail.com>,
 	Bruce Ashfield <bruce.ashfield@gmail.com>,
 	openembedded-devel@lists.openembedded.org
 Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Subject: [meta-python][PATCH 2/3] python3-gpiod: pull in just libgpiosim, not the entire libgpiod-ptest
-Date: Fri,  6 Dec 2024 12:11:30 +0100
-Message-ID: <20241206111131.35594-3-brgl@bgdev.pl>
+Subject: [meta-oe][PATCH 0/3] libgpiod: improve package dependencies
+Date: Fri,  6 Dec 2024 12:11:28 +0100
+Message-ID: <20241206111131.35594-1-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241206111131.35594-1-brgl@bgdev.pl>
-References: <20241206111131.35594-1-brgl@bgdev.pl>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 06 Dec 2024 11:11:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114216
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114214
 
 From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-We now have a separate package containing the libgpiosim shared object
-which is all from libgpiod-ptest that we need for this package's tests.
-Let's relax the run-time dependency.
+I noticed that if I select python3-gpiod-ptest, the gpio-manager daemon
+is pulled in too which doesn't make sense. This is caused by the fact
+that we pull in libgpiod-ptest which in turn rdepends on gpio-manager.
+This series reworks the dependencies, makes them a bit more fine-grained
+and results in limited impact of selecting ptest packages for libgpiod
+and the python bindings.
 
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
----
- meta-python/recipes-devtools/python/python3-gpiod_2.2.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Bartosz Golaszewski (3):
+  libgpiod: minimize intra-recipe dependencies for ptest
+  python3-gpiod: pull in just libgpiosim, not the entire libgpiod-ptest
+  python3-gpiod: don't recommend kernel-module-configfs for ptest
 
-diff --git a/meta-python/recipes-devtools/python/python3-gpiod_2.2.2.bb b/meta-python/recipes-devtools/python/python3-gpiod_2.2.2.bb
-index 0c7e8ef93..c4be99468 100644
---- a/meta-python/recipes-devtools/python/python3-gpiod_2.2.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-gpiod_2.2.2.bb
-@@ -21,7 +21,7 @@ RDEPENDS:${PN} += " \
-     python3-profile \
- "
- RDEPENDS:${PN}-ptest += " \
--    libgpiod-ptest \
-+    libgpiod-gpiosim \
-     python3-setuptools \
- "
- RRECOMMENDS:${PN}-ptest += "kernel-module-configfs"
+ .../recipes-support/libgpiod/libgpiod_2.2.bb  | 19 +++++++++++--------
+ .../python/python3-gpiod_2.2.2.bb             |  3 +--
+ 2 files changed, 12 insertions(+), 10 deletions(-)
+
 -- 
 2.45.2
 
