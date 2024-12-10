@@ -1,399 +1,142 @@
-Return-Path: <brgl@bgdev.pl>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 25A1DE7717F
-	for <webhook@archiver.kernel.org>; Tue, 10 Dec 2024 12:32:59 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.web11.9291.1733833969036343809
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2258DE7717F
+	for <webhook@archiver.kernel.org>; Tue, 10 Dec 2024 12:45:49 +0000 (UTC)
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
+ by mx.groups.io with SMTP id smtpd.web11.9542.1733834743443490238
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Dec 2024 04:32:49 -0800
+ Tue, 10 Dec 2024 04:45:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=cF00j5VM;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.43, mailfrom: brgl@bgdev.pl)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-434fe0a8cceso14895315e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Dec 2024 04:32:48 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dAPMUyLw;
+ spf=pass (domain: gmail.com, ip: 209.85.208.44, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-5d0d32cd31aso6551677a12.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Dec 2024 04:45:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1733833967; x=1734438767; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1733834742; x=1734439542; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=8TQba4Qc/3sD7E0WlO/88F06+JlPNVZZTzQVSDiYLeA=;
-        b=cF00j5VMDeKK1M0gAKmgP/kSj1y4fK76Xngk/QiUa8CHPKj5kmA80/XTHbCBbHhOJ4
-         17184pbamiaoCfPXFRq3bkjaZ6nQGP09K4RBBvH/qHZdD62aROuvSZP8y8VYJGy1mQ/f
-         zq14/A0njBJPmhSUNNiak784jV/wHEawcAkcCTilc3NMqBmgPR8C9guG6LXqdk5ROzev
-         6pm+fjhyNJkJ8lrh5JWmGWtL/r5yH5HKfSP0J8k1x5ODhQCqE54jFWPr5h+0A6Y5TSYC
-         SeWt86jZQmb4UmMp/cU1VYqiig3bkG7iB1ItJNbny2OvzQnXzzh8TUCKo+gbbE4FYHgt
-         oy8g==
+        bh=V5K/2JqZURBt4lXzr0kkVxgd4N7tBCigmE4jix0mon0=;
+        b=dAPMUyLw5aMvubPaYr2BKInAir/Y/jfF3QWYi67Q+SavO+SuxADpem9Y/PTgEnbRQE
+         SdnxfRl0oLftFF1AdhB6Eq5AvHg50V4Fu2axpDgA30KjBz3NE1NNUMDVLVXAGICOWAgZ
+         tvTvCqhp7rMHl2YxVgzwpaUN0rEBJAJIFjYStEXiI5Fj6A3zM9BGJUcJwgy8IsamCIXT
+         feaKJVsD/l7mHQdreLGcgAKdSmQxDMtvaj7Tk79bAFf3Buh3mmTDUiwt0DqKX3HfiU/G
+         FZUd9fqZagGrk/AZqiMzDcMUqd94FEmrxAklOjfeaClqQvL+ygAROTzr8rdIUS1HQhuc
+         HkTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733833967; x=1734438767;
+        d=1e100.net; s=20230601; t=1733834742; x=1734439542;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=8TQba4Qc/3sD7E0WlO/88F06+JlPNVZZTzQVSDiYLeA=;
-        b=NtNVKxT3esnyApPvnjiio92Pylx60cusMDnl0aDMGDUVP1SLEWT3qc11EZ+W7x6nlB
-         gpU9+s4QQoL/4HG4E5QZBKTYcHSiHwaq5Jc4JFMRowH9vsTWYcwi6R8RsVoJBhRC+9AX
-         VxkleEESVNzgm5rj7hfZyFnUnc8Xpofl3EUemNN9Oa/M+d2lff57iTJq1wkprjc/Cr8Q
-         qzR05xNKsWLCw6AiBerR0arKoQ9SPAsjAsb5EgnOOr3EMe7XZQoAXRxYEtClRRfM+DEN
-         Ygyk73aVkyFJQb5uddcNTcIcILHww8fwcvjy0Bu47AvDLbznlkx7ibjMLQIWN7KZhHiO
-         cXAA==
-X-Forwarded-Encrypted: i=1; AJvYcCWOXiu2FeeR25cHTd+n9DEIQon+pT2yRGDk68IFSIgk90nXDgJjNpqohaRDt6Xzf1FQW5ffST/nliEMBukrIgySkCI=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yy8tDM7vJ4+FycfaHLjaWHqzEpBZ/+IYTHGUWf9CyYrY/lXhK9u
-	874+4CTL77OrabiaG1LhcpespRMtvpKlpfCZMO1R9Z4oo53ROD4SyRrEOHNVVeA=
-X-Gm-Gg: ASbGncvwq4db3WDt0hyLL+GkUc8Gc9DhAcRpfemnPzffr4HcOmbEDU2VQvcPEx/Vlkj
-	E2Skq1nboGy1Fj03Ki55lyy9RJmV60IxxrZPCQXsxuxS0YvHyxR2s27UlICuA24GixPAoAq+C5L
-	UMCuNus45stjcjaFovjH3ZHxk6yfQQuSUuiFqHfZhm5lXbXwOir4p9zSJkN7z3+zhOZb+NNdqIJ
-	gXsyhVZrenSSQf0cf2jf+MGMdOuvMu674DiMG2NYG9KRojJLlq6Hg==
-X-Google-Smtp-Source: AGHT+IGMem0V5HPVWRv2tcIEJDjDrxc85w+gnFYYE4g2kQVY3vKRPuxViTI8P94Mokj12jpRgO0+iQ==
-X-Received: by 2002:a5d:47a1:0:b0:385:f7ea:eb86 with SMTP id ffacd0b85a97d-3862b333779mr12635899f8f.7.1733833967020;
-        Tue, 10 Dec 2024 04:32:47 -0800 (PST)
-Received: from brgl-uxlite.home ([2a01:cb1d:dc:7e00:4c2b:c454:658c:f771])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-386366efb6bsm10016957f8f.51.2024.12.10.04.32.46
+        bh=V5K/2JqZURBt4lXzr0kkVxgd4N7tBCigmE4jix0mon0=;
+        b=DQgKA7npSD6YHQURX0OsjWXC8Ubx/XvkBbhXB4xGSfeo7ZKZErr0WRghM1YEe+6Bo6
+         EBkd2GU+d8KxLyid40N8ahTc0neDoo0YRYMSmrCTueGE8WjGnTQBoeDYiwDAB/6IXtv+
+         JBmmSezFfRLaVl6paQ93cLTaOy264mY53Z6snGDBxE9Sei1iyfq1IcDq8wBenkEoWRQ9
+         ssZ/WJvGXuKtp9WtP9ZUOCfTu6bL8/rC/AGvhn98WTSh1yXPAwvM15A1f8nRUf9Z2jot
+         Cyp+f2zKzeLwc0DxaoBAP/DrXsU3LF9RuPR64Ks4C1RK9z9G8CsZa/L+ai7fkyn2bcw/
+         Reeg==
+X-Gm-Message-State: AOJu0YwDprrKmDBosbVF2x2nE+P+/qTtIBBICSdKvq+lDyK6Sp2wuDwT
+	Oxpcc+k/BIRDv0Fl2SE88IhR85hwLuKvuY4E5BaBOXuPrSiqsuCabFrK9w==
+X-Gm-Gg: ASbGncvjNDzHgSpwqfwFZHenmn8qDbItAo4+OAAs9MuclcAjLpvj+z5J0kNKms9C4b4
+	QR7EVJInNgp8EyfxGKfi4CzJwMkswYcirrq/fJYts6YNJBMAZ1VmArhbMw44m3xlrO78nnBUTPO
+	ogdIsh7tAbHIu2zhD5imrDQrxgv3JPAGcYncIOlqGqRIrxQPatYZp2aOlY5a+PMC2pcflTGbYTV
+	O3i/cEOP93e4bRAFNc6ODIiLbTAfQsDvLFip2P/OCYd7yNbfiK00c8fr4FRTiYFahTkTJ1MS/FE
+	LFW/nxIfKhs=
+X-Google-Smtp-Source: AGHT+IHMauEp8mF2gI7aNwMs8L75eo7QQmMi8d/ToalJd4BJvZEmMGKh4v+RVYUHfAAYUxBrRarWfA==
+X-Received: by 2002:a05:6402:274d:b0:5d0:9054:b119 with SMTP id 4fb4d7f45d1cf-5d4185d5fb5mr10254930a12.21.1733834741581;
+        Tue, 10 Dec 2024 04:45:41 -0800 (PST)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5d149a25ce7sm7451844a12.5.2024.12.10.04.45.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Dec 2024 04:32:46 -0800 (PST)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>,
-	Bruce Ashfield <bruce.ashfield@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Subject: [meta-filesystems][PATCH] gpiod-sysfs-proxy: new recipe
-Date: Tue, 10 Dec 2024 13:32:43 +0100
-Message-ID: <20241210123243.58809-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.45.2
+        Tue, 10 Dec 2024 04:45:40 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: akuster808@gmail.com,
+	Khem Raj <raj.khem@gmail.com>,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH] nspr: Fix build with clang16
+Date: Tue, 10 Dec 2024 13:45:36 +0100
+Message-ID: <20241210124536.3319728-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Dec 2024 12:32:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114261
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Dec 2024 12:45:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114262
 
-From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+From: Khem Raj <raj.khem@gmail.com>
 
-Many users are reluctant to use libgpiod instead of the deprecated
-/sys/class/gpio interface. The gpiod-sysfs-proxy project aims at making
-the transition easier by implementing a compatibility layer in
-user-space using FUSE and python3-gpiod. This way we can eat the cookie
-by disabling the sysfs ABI and have the users have it too by sticking to
-their existing scripts.
+* also needed for nspr-native build with gcc-14 on host
 
-The project itself is a very simple setuptools-based python package but
-the recipe is quite complex due to comprehensive distro integration.
-
-By default we use /run/gpio as mountpoint. For full backward
-compatibility with the kernel interface, the user must explicitly add
-the 'sys-class-mount' switch to PACKAGECONFIG. We do this because,
-depending on whether CONFIG_GPIO_SYSFS Kconfig option is enabled,
-/sys/class/gpio will either be non-empty or not exist at all. In the
-latter case, we need to somehow create the /sys/class/gpio and, since
-user-space is not allowed to mkdir() inside sysfs, we use overlayfs for
-that. As this is rather non-standard, we want the user to be aware of
-this.
-
-We support both systemd and sys V init managers.
-
-We also provide a ptest package which uses an external
-gpio-sysfs-compat-tests script.
-
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- meta-filesystems/conf/layer.conf              |  4 +
- .../gpiod-sysfs-proxy.init.in                 | 84 ++++++++++++++++++
- .../gpiod-sysfs-proxy.service.in              | 15 ++++
- .../gpiod-sysfs-proxy/run-gpio-sys.mount      | 13 +++
- .../gpiod-sysfs-proxy/run-ptest.in            | 21 +++++
- .../gpiod-sysfs-proxy/sys-class.mount         | 16 ++++
- .../gpiod-sysfs-proxy_0.1.1.bb                | 85 +++++++++++++++++++
- 7 files changed, 238 insertions(+)
- create mode 100644 meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/gpiod-sysfs-proxy.init.in
- create mode 100644 meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/gpiod-sysfs-proxy.service.in
- create mode 100644 meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/run-gpio-sys.mount
- create mode 100644 meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/run-ptest.in
- create mode 100644 meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/sys-class.mount
- create mode 100644 meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy_0.1.1.bb
+ ...Wincompatible-function-pointer-types.patch | 39 +++++++++++++++++++
+ meta-oe/recipes-support/nspr/nspr_4.29.bb     |  1 +
+ 2 files changed, 40 insertions(+)
+ create mode 100644 meta-oe/recipes-support/nspr/nspr/0001-Fix-Wincompatible-function-pointer-types.patch
 
-diff --git a/meta-filesystems/conf/layer.conf b/meta-filesystems/conf/layer.conf
-index 8a0c831e2..5323913d5 100644
---- a/meta-filesystems/conf/layer.conf
-+++ b/meta-filesystems/conf/layer.conf
-@@ -16,3 +16,7 @@ LAYERVERSION_filesystems-layer = "1"
- LAYERDEPENDS_filesystems-layer = "core openembedded-layer networking-layer"
+diff --git a/meta-oe/recipes-support/nspr/nspr/0001-Fix-Wincompatible-function-pointer-types.patch b/meta-oe/recipes-support/nspr/nspr/0001-Fix-Wincompatible-function-pointer-types.patch
+new file mode 100644
+index 0000000000..8515075fe0
+--- /dev/null
++++ b/meta-oe/recipes-support/nspr/nspr/0001-Fix-Wincompatible-function-pointer-types.patch
+@@ -0,0 +1,39 @@
++From d24dc9bebaefbd8abf32707bad5efc0c811c0cd4 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 18 Jan 2023 13:04:56 -0800
++Subject: [PATCH] Fix -Wincompatible-function-pointer-types
++
++Fixes warnings with clang16
++testfile.c:576:31: error: incompatible function pointer types passing 'PRInt32 (void *)' (aka 'int (void *)') to parameter of type 'void (*)(void *)' [-Wincompatible-function-pointe r-types]
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ pr/tests/testfile.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/pr/tests/testfile.c b/pr/tests/testfile.c
++index 79d8a05..42aa6a7 100644
++--- a/pr/tests/testfile.c
+++++ b/pr/tests/testfile.c
++@@ -123,7 +123,7 @@ PRThread* create_new_thread(PRThreadType type,
++     if (native_thread) {
++ #if defined(_PR_PTHREADS)
++         pthread_t tid;
++-        if (!pthread_create(&tid, NULL, start, arg)) {
+++        if (!pthread_create(&tid, NULL, (void*(*)(void*))start, arg)) {
++             return((PRThread *) tid);
++         }
++         else {
++@@ -573,7 +573,7 @@ static PRInt32 RunDirTest(void)
++ 
++         thrarg.done= 0;
++         t = create_new_thread(PR_USER_THREAD,
++-                              DirTest, &thrarg,
+++                              (void (*)(void *))DirTest, &thrarg,
++                               PR_PRIORITY_NORMAL,
++                               PR_LOCAL_THREAD,
++                               PR_UNJOINABLE_THREAD,
++-- 
++2.39.1
++
+diff --git a/meta-oe/recipes-support/nspr/nspr_4.29.bb b/meta-oe/recipes-support/nspr/nspr_4.29.bb
+index b60de08d2a..c9215fc275 100644
+--- a/meta-oe/recipes-support/nspr/nspr_4.29.bb
++++ b/meta-oe/recipes-support/nspr/nspr_4.29.bb
+@@ -12,6 +12,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/nspr/releases/v${PV}/src/nspr-${PV}.tar.gz
+            file://0002-Add-nios2-support.patch \
+            file://0001-md-Fix-build-with-musl.patch \
+            file://Makefile.in-remove-_BUILD_STRING-and-_BUILD_TIME.patch \
++           file://0001-Fix-Wincompatible-function-pointer-types.patch \
+            file://nspr.pc.in \
+ "
  
- LAYERSERIES_COMPAT_filesystems-layer = "styhead walnascar"
-+
-+BBFILES_DYNAMIC += " \
-+    meta-python:${LAYERDIR}/dynamic-layers/meta-python/recipes-*/*/*.bb \
-+"
-diff --git a/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/gpiod-sysfs-proxy.init.in b/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/gpiod-sysfs-proxy.init.in
-new file mode 100644
-index 000000000..a9cf5e407
---- /dev/null
-+++ b/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/gpiod-sysfs-proxy.init.in
-@@ -0,0 +1,84 @@
-+#! /bin/sh
-+### BEGIN INIT INFO
-+# Provides:             gpiod-sysfs-proxy
-+# Required-Start:       $remote_fs $syslog
-+# Required-Stop:        $remote_fs $syslog
-+# Default-Start:        2 3 4 5
-+# Default-Stop:         1
-+# Short-Description:    User-space, libgpiod-based compatibility layer for linux GPIO sysfs interface.
-+### END INIT INFO
-+#
-+# -*- coding: utf-8 -*-
-+# Debian init.d script for gpiod-sysfs-proxy
-+# Copyright (c) 2024 Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-+
-+# set -e
-+
-+# Source function library.
-+. /etc/init.d/functions
-+
-+PROG="/usr/bin/gpiod-sysfs-proxy"
-+NAME="gpiod-sysfs-proxy"
-+DESC="/sys/class/gpio compatibility layer"
-+MOUNTPOINT="@mountpoint@"
-+
-+test -x $PROG || exit 0
-+
-+do_start()
-+{
-+	echo -n "Starting $DESC: "
-+
-+	if [ "$MOUNTPOINT" = "/sys/class/gpio" ] && [ ! -e /sys/class/gpio ]; then
-+		mkdir -p /run/gpio/sys /run/gpio/class/gpio /run/gpio/work
-+		mount -t sysfs sysfs /run/gpio/sys -o nosuid,nodev,noexec
-+		# Bail out if overlayfs is not available
-+		set -e
-+		mount -t overlay overlay /sys/class \
-+-o upperdir=/run/gpio/class,lowerdir=/run/gpio/sys/class,workdir=/run/gpio/work,nosuid,nodev,noexec,relatime,ro
-+		set +e
-+	else
-+		mkdir -p $MOUNTPOINT
-+	fi
-+
-+	$PROG $MOUNTPOINT -o nonempty -o allow_other -o default_permissions -o entry_timeout=0 -f | logger -i $NAME &
-+	echo "done"
-+}
-+
-+do_stop()
-+{
-+	echo -n "Stopping $DESC: "
-+
-+	umount $MOUNTPOINT
-+
-+	mountpoint -q /sys/class
-+	if [ "$?" = "0" ]; then
-+		umount /sys/class
-+		umount /run/gpio/sys
-+		rm -rf /run/gpio
-+	fi
-+	echo "done"
-+}
-+
-+case "$1" in
-+	start)
-+		do_start
-+	;;
-+	stop)
-+		do_stop
-+	;;
-+	status)
-+		status $PROG
-+		exit $?
-+	;;
-+	restart)
-+		do_stop
-+		sleep 1
-+		do_start
-+	;;
-+	*)
-+		echo "Usage: /etc/init.d/$NAME {start|stop|status|restart}" >&2
-+		exit 1
-+	;;
-+esac
-+
-+exit 0
-diff --git a/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/gpiod-sysfs-proxy.service.in b/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/gpiod-sysfs-proxy.service.in
-new file mode 100644
-index 000000000..313523268
---- /dev/null
-+++ b/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/gpiod-sysfs-proxy.service.in
-@@ -0,0 +1,15 @@
-+# SPDX-License-Identifier: CC0-1.0
-+# SPDX-FileCopyrightText: 2024 Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-+
-+[Unit]
-+Description=User-space, libgpiod-based compatibility layer for linux GPIO sysfs interface
-+
-+[Service]
-+RuntimeDirectory=gpio
-+Type=simple
-+ExecStart=/usr/bin/gpiod-sysfs-proxy @mountpoint@ -f -o nonempty -o allow_other -o default_permissions -o entry_timeout=0
-+ExecStop=/bin/umount @mountpoint@
-+Restart=always
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/run-gpio-sys.mount b/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/run-gpio-sys.mount
-new file mode 100644
-index 000000000..a924cb9b6
---- /dev/null
-+++ b/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/run-gpio-sys.mount
-@@ -0,0 +1,13 @@
-+# SPDX-License-Identifier: CC0-1.0
-+# SPDX-FileCopyrightText: 2024 Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-+
-+[Unit]
-+Description=Remount of sysfs for gpiod-sysfs-proxy
-+ConditionPathExists=!/sys/class/gpio
-+
-+[Mount]
-+DirectoryMode=0700
-+What=sysfs
-+Where=/run/gpio/sys
-+Type=sysfs
-+Options=nosuid,nodev,noexec
-diff --git a/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/run-ptest.in b/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/run-ptest.in
-new file mode 100644
-index 000000000..aab3a5ce3
---- /dev/null
-+++ b/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/run-ptest.in
-@@ -0,0 +1,21 @@
-+#!/bin/sh
-+
-+ptestdir=$(dirname "$(readlink -f "$0")")
-+testbin="gpio-sysfs-compat-tests"
-+
-+modprobe gpio-sim
-+modprobe configfs
-+
-+mountpoint -q /sys/kernel/config
-+if [ "$?" -ne "0" ]; then
-+	mount -t configfs configfs /sys/kernel/config
-+fi
-+
-+cd $ptestdir/tests
-+
-+./$testbin -v --gpio-class @mountpoint@ --chown-user gpio-test > ./$testbin.out 2>&1
-+if [ $? -ne 0 ]; then
-+	echo "FAIL: $testbin"
-+else
-+	echo "PASS: $testbin"
-+fi
-diff --git a/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/sys-class.mount b/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/sys-class.mount
-new file mode 100644
-index 000000000..e3e3ce8e7
---- /dev/null
-+++ b/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy/sys-class.mount
-@@ -0,0 +1,16 @@
-+# SPDX-License-Identifier: CC0-1.0
-+# SPDX-FileCopyrightText: 2024 Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-+
-+[Unit]
-+Description=Overlay on top of /sys/class adding the gpio class directory
-+Before=gpiod-sysfs-proxy.service
-+After=run-gpio-sys.mount
-+ConditionPathExists=!/sys/class/gpio
-+
-+[Mount]
-+RuntimeDirectory=gpio/class/gpio
-+DirectoryMode=0755
-+What=overlay
-+Where=/sys/class
-+Type=overlay
-+Options=upperdir=/run/gpio/class,lowerdir=/run/gpio/sys/class,workdir=/run/gpio/work,ro,nosuid,nodev,noexec,relatime
-diff --git a/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy_0.1.1.bb b/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy_0.1.1.bb
-new file mode 100644
-index 000000000..4d466d30f
---- /dev/null
-+++ b/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy_0.1.1.bb
-@@ -0,0 +1,85 @@
-+SUMMARY = "User-space, libgpiod-based compatibility layer for linux GPIO sysfs interface."
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0dcf8b702b5c96178978c7223f64a73b"
-+
-+inherit systemd update-rc.d ptest pypi python_pep517 python_setuptools_build_meta useradd
-+
-+PYPI_PACKAGE = "gpiod_sysfs_proxy"
-+
-+SRC_URI += " \
-+    file://gpiod-sysfs-proxy.service.in \
-+    file://run-gpio-sys.mount \
-+    file://sys-class.mount \
-+    file://gpiod-sysfs-proxy.init.in \
-+    file://run-ptest.in \
-+"
-+
-+SRC_URI[sha256sum] = "c7830cb6a2c01914df2bc0549aef2dcfcb955520d400f65b3b50fb7a6f77f1b4"
-+
-+# For full backward compatibility with the kernel sysfs interface, this option
-+# must be selected. However, we don't make it the default as - with kernel sysfs
-+# disabled - it plays a silly game with /sys/class, where it mounts a read-only
-+# overlay containing the missing /sys/class/gpio directory. This is a rather
-+# non-standard behavior so make sure the user actually wants it.
-+PACKAGECONFIG[sys-class-mount] = ""
-+
-+export MOUNTPOINT="${@bb.utils.contains('PACKAGECONFIG', 'sys-class-mount', '\/sys\/class\/gpio', '\/run\/gpio', d)}"
-+
-+do_install:append() {
-+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+        install -d ${D}${systemd_system_unitdir}
-+        install -m 0644 ${UNPACKDIR}/gpiod-sysfs-proxy.service.in ${D}${systemd_system_unitdir}/gpiod-sysfs-proxy.service
-+
-+        if ${@bb.utils.contains('PACKAGECONFIG', 'sys-class-mount', 'true', 'false', d)}; then
-+            install -d ${D}${systemd_system_unitdir}/sysinit.target.wants/
-+
-+            install -m 0644 ${UNPACKDIR}/run-gpio-sys.mount ${D}${systemd_system_unitdir}/run-gpio-sys.mount
-+            install -m 0644 ${UNPACKDIR}/sys-class.mount ${D}${systemd_system_unitdir}/sys-class.mount
-+
-+            ln -sf ../run-gpio-sys.mount ${D}${systemd_system_unitdir}/sysinit.target.wants/run-gpio-sys.mount
-+            ln -sf ../sys-class.mount ${D}${systemd_system_unitdir}/sysinit.target.wants/sys-class.mount
-+        fi
-+
-+        sed -i "s/@mountpoint@/$MOUNTPOINT/g" ${D}${systemd_system_unitdir}/gpiod-sysfs-proxy.service
-+    elif ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-+        install -d ${D}${sysconfdir}/init.d
-+        install -m 0755 ${UNPACKDIR}/gpiod-sysfs-proxy.init.in ${D}${sysconfdir}/init.d/gpiod-sysfs-proxy
-+        sed -i "s/@mountpoint@/$MOUNTPOINT/g" ${D}${sysconfdir}/init.d/gpiod-sysfs-proxy
-+    fi
-+}
-+
-+SYSTEMD_SERVICE:${PN} = "gpiod-sysfs-proxy.service"
-+SYSTEMD_AUTO_ENABLE = "enable"
-+
-+INITSCRIPT_NAME = "gpiod-sysfs-proxy"
-+INITSCRIPT_PARAMS = "start 20 2 3 4 5 . stop 20 0 1 6 ."
-+
-+FILES:${PN} += "/usr/lib/systemd/system"
-+
-+RDEPENDS:${PN} += " \
-+    python3-fuse \
-+    python3-gpiod \
-+    python3-pyudev \
-+"
-+
-+python __anonymous() {
-+    if d.getVar("PTEST_ENABLED") == "1":
-+        d.appendVar("SRC_URI", "git://github.com/brgl/gpio-sysfs-compat-tests;protocol=https;branch=main;destsuffix=tests;name=tests")
-+        d.setVar("SRCREV_tests", "a3c9daa4650dd1e8d7fd8972db68d9c2c204263d")
-+}
-+
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/tests/
-+    install -m 0755 ${UNPACKDIR}/run-ptest.in ${D}${PTEST_PATH}/run-ptest
-+    sed -i "s/@mountpoint@/$MOUNTPOINT/g" ${D}${PTEST_PATH}/run-ptest
-+    install -m 0755 ${UNPACKDIR}/tests/gpio-sysfs-compat-tests ${D}${PTEST_PATH}/tests/gpio-sysfs-compat-tests
-+}
-+
-+# Test user is created for verifying chown() and chmod() operations.
-+USERADD_PACKAGES = "${PN}-ptest"
-+GROUPADD_PARAM:${PN}-ptest = "--system gpio-test"
-+USERADD_PARAM:${PN}-ptest = "--system -M -s /bin/nologin -g gpio-test gpio-test"
-+
-+RDEPENDS:${PN}-ptest += "kmod"
-+RRECOMMENDS:${PN}-ptest += "kernel-module-gpio-sim kernel-module-configfs"
 -- 
-2.45.2
+2.47.1
 
 
