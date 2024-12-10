@@ -1,84 +1,151 @@
-Return-Path: <derek@asterius.io>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88370E7717F
-	for <webhook@archiver.kernel.org>; Tue, 10 Dec 2024 21:34:27 +0000 (UTC)
-Received: from mail-il1-f177.google.com (mail-il1-f177.google.com [209.85.166.177])
- by mx.groups.io with SMTP id smtpd.web11.4721.1733866457250805598
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 714D1E7717F
+	for <webhook@archiver.kernel.org>; Tue, 10 Dec 2024 21:43:57 +0000 (UTC)
+Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com [209.85.160.46])
+ by mx.groups.io with SMTP id smtpd.web11.5047.1733867036493235403
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Dec 2024 13:34:17 -0800
+ Tue, 10 Dec 2024 13:43:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.177, mailfrom: straka.derek@gmail.com)
-Received: by mail-il1-f177.google.com with SMTP id e9e14a558f8ab-3a7e108b491so47275775ab.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Dec 2024 13:34:17 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=j5shfiLH;
+ spf=pass (domain: gmail.com, ip: 209.85.160.46, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f46.google.com with SMTP id 586e51a60fabf-29e65257182so2984446fac.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Dec 2024 13:43:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1733867036; x=1734471836; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=HfdzvWbaV3RmJIPf6q7PlOlGPJwYEY+p4JLj3W+r0Ms=;
+        b=j5shfiLHWSXAilhqvjVkPO+YRFgCwqmwHvmNJ41GXobul1ao5eyDmVasSJTwYv21yP
+         zUrj2yIfn8FgwnrOUKGSs00oP/JsgsNvopGUnU4rJodtdhCkAFVRnZYblaOCHyjdNy5a
+         8MBOohHxJaXqF6WpQcoOCOxJk0jCAIRtYLPgphwUCbmu7lS36PIR8VQaOC8wwDcWX+3S
+         GwWbdssI6dtAAo4lM2E51o+nYlYqVC3S4YXsbZ7xSEtAW3ZGdZn2mo22S6YQouS7ylCL
+         XSS9hNZIjmHe4Y781magoV9wHrh2tAd9BN9927oV3oGUnlgZ4AQicjf6CjTTJIL9Andk
+         f9kA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1733866456; x=1734471256;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=k/VXTyRUXcudvE1TxWLObf6w5z+A819ZJHKgdbmR8kI=;
-        b=gzELoxOlTEulApdpbRD4DwHKekwH/PtZsNugKgiCM1IHfRgSu/P56+qEnw/l96kEMJ
-         MIGPmK8sCOmMmUt4YCl9taGxnoSyfsbwkRoUT2Vekq+jpyVMXLSGAwMDKJ43lgXjaC2o
-         i2BW6ziisUY1GjlqvIaAjcKnNaCz1dVvFbzTD3Qs228PPnYEFc3ZKhJQghBsYCYOk4y3
-         u5RZnZAGvX6r+gPMwLFCRa5IaVbsIqB7oYG7DqrmLH59EaPiEExX94/gXRi3+YtdRWgz
-         94HavH+GHiVZySzxVXwfvw/QbceDLbZmt8+vRY9+sDFD9tYS8CWYU3WvC6z70IF9+h5+
-         9lhQ==
-X-Gm-Message-State: AOJu0YyDXt2hRj/rxLfRnE3VHLs0Se50P39ObKRqJ4Qt15CsmJu0K7B0
-	YH45eMTLlFK6YcMWYstXUW6ZYr7aTQs1pZaRdRW1WUUoykoKlXAJhkMp8g==
-X-Gm-Gg: ASbGncvQ1+fMYXj9+wLLPKyGkzZaEblMWf1Ehib8sj7Y6W4UkYkTq4LdQ0qZxhNxX4z
-	l33DN8Obu/Ng+n8SmdE7t+EgtS0juLA7a86jkhlZS6fNfKuh7Ir4rJqhNHHRTh+jb0p3aDwvFc8
-	3d7sVZvxGTiqbehb2VvyhFKmS+pf+EfQhnQ6gZxsADd3wI/4nK5Pmi2rHR0RB6NG4n72RROaHis
-	tqPk+IkYxP8M48wg2rECWrs1g7pP/jI2CtqlZZsBMupHaixT69nPLsocJBMUwsBbK+Pf9vBRLRb
-	TsUJ4yQMkMBbZi+quNPUbCc=
-X-Google-Smtp-Source: AGHT+IHcGlxaz2HJ87e3Ie7azRmD3Jd9xQIaID2+8Qqu5LztFA9s7Ab/Gi3RQkr5jT0xj18hhR8L1A==
-X-Received: by 2002:a92:c54d:0:b0:3a7:c5c8:aa53 with SMTP id e9e14a558f8ab-3aa06dd708emr5406535ab.13.1733866456107;
-        Tue, 10 Dec 2024 13:34:16 -0800 (PST)
-Received: from alpha.lab.asterius.io (c-24-118-24-24.hsd1.mn.comcast.net. [24.118.24.24])
-        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-4e2bf67d0a8sm1315781173.102.2024.12.10.13.34.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Dec 2024 13:34:14 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-webserver][PATCH] nginx: Upgrade mainline release version 1.27.1 -> 1.27.3
-Date: Tue, 10 Dec 2024 21:33:34 +0000
-Message-Id: <20241210213334.1489570-1-derek@asterius.io>
-X-Mailer: git-send-email 2.34.1
+        d=1e100.net; s=20230601; t=1733867036; x=1734471836;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=HfdzvWbaV3RmJIPf6q7PlOlGPJwYEY+p4JLj3W+r0Ms=;
+        b=RpxlyLMU94p0phIfafY7TRkTc2DxqnPQuoH9oTbYVSdWGudJi0DONiMgXJzfjxD+4E
+         Sqp1WVFj+txJs5WVr1ganWLbH0Z+P6HZmbQWF1z2O7R8EmtP2PHK3Nsa29SAB8hpV4PA
+         2Bh525dw0sI2rpBcEZ+omPewJApKJ4rCCWNVv+km4qTqc04SBN4ETVc2/XHwhizhaP/D
+         onVuCCYGoDlyA77Es+U1OIdMW+HBBoDZ7W0QDnz+iKhPBZ1upaKz8VBYFry+qREzn3by
+         f7cBWQB13GzXmypx61Y5hiBJSC4C8rH34OllyyQu0+Z80mhUGMEF1UlWez35Rypy9rbf
+         r19g==
+X-Gm-Message-State: AOJu0Yw19qy+7uADqcBDhufyfXqMAFSI1vZvdGmBauENNuiSPr4lmzIs
+	4J41OwzqoAHP8HWYMyMHhqWM01jeLeUyMPFdi5N/BLsWG+4FrevoWGqu8Jk8yxZSPaIplUPBkei
+	kjmPLrGqpfsNU8t5zF4RbksBmRgn4oJZQ7gM=
+X-Gm-Gg: ASbGncsuu64a6MZmM1UobXzW+gjExGa/fQqyYLliYs2hRLVFBsdfbqZQvBHI/X3dDPv
+	tPsLUt8ZGnVwvBmk7ECxNxJ5uxyVmg+wD0ycmNG/q29bN6cgQRG2Dh4vVkdtxDFTt
+X-Google-Smtp-Source: AGHT+IHkqhGu+f+CaHGMjYTZmZfHtCxpbY1DJELXoNdo1mEN2ZqN9ZSLJ8IzPNIkIeBFKXhR1wHYEHPa26w4ibuQx5I=
+X-Received: by 2002:a05:6870:8e17:b0:29e:5dfd:1e17 with SMTP id
+ 586e51a60fabf-2a012c5cb8bmr462416fac.23.1733867035698; Tue, 10 Dec 2024
+ 13:43:55 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241209213948.2377-1-mail@michael-fitzmayer.de>
+In-Reply-To: <20241209213948.2377-1-mail@michael-fitzmayer.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 10 Dec 2024 13:43:29 -0800
+Message-ID: <CAMKF1sratBWEuCCTzv8zp_EQSdSnrVcDbauWLHH2ijUiMiL5Cw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] canopenterm: fix number of arguments check
+ in API function
+To: mail@michael-fitzmayer.de
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Dec 2024 21:34:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114265
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Dec 2024 21:43:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114266
 
-License-Update: License file negative and empty space changes
+the patch needs some tags added e.g. Upstream-Status, see
+https://valkyrie.yoctoproject.org/#/builders/81/builds/199/steps/14/logs/er=
+rors
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../recipes-httpd/nginx/{nginx_1.27.1.bb => nginx_1.27.3.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-webserver/recipes-httpd/nginx/{nginx_1.27.1.bb => nginx_1.27.3.bb} (53%)
-
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.27.1.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.27.3.bb
-similarity index 53%
-rename from meta-webserver/recipes-httpd/nginx/nginx_1.27.1.bb
-rename to meta-webserver/recipes-httpd/nginx/nginx_1.27.3.bb
-index 5927ecab0..2f1bfa3b9 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.27.1.bb
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.27.3.bb
-@@ -4,7 +4,7 @@ require nginx.inc
- # 1.27.x is the current mainline branches containing all new features
- DEFAULT_PREFERENCE = "-1"
- 
--LIC_FILES_CHKSUM = "file://LICENSE;md5=a6547d7e5628787ee2a9c5a3480eb628"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=8323c46a4f3aac555a90caca346bb3d2"
- 
--SRC_URI[sha256sum] = "bd7ba68a6ce1ea3768b771c7e2ab4955a59fb1b1ae8d554fedb6c2304104bdfc"
-+SRC_URI[sha256sum] = "ba23a9568f442036b61cd0e29bd66a47b90634efa91e0b2cf2d719057a9b7903"
- 
--- 
-2.34.1
-
+On Mon, Dec 9, 2024 at 1:40=E2=80=AFPM Michael Fitzmayer via
+lists.openembedded.org
+<mail=3Dmichael-fitzmayer.de@lists.openembedded.org> wrote:
+>
+> Signed-off-by: Michael Fitzmayer <mail@michael-fitzmayer.de>
+> ---
+>  ...r-of-arguments-check-in-API-function.patch | 23 +++++++++++++++++++
+>  .../canopenterm/canopenterm_1.0.10.bb         |  4 +++-
+>  2 files changed, 26 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/recipes-extended/canopenterm/canopenterm/0001=
+-fix-number-of-arguments-check-in-API-function.patch
+>
+> diff --git a/meta-oe/recipes-extended/canopenterm/canopenterm/0001-fix-nu=
+mber-of-arguments-check-in-API-function.patch b/meta-oe/recipes-extended/ca=
+nopenterm/canopenterm/0001-fix-number-of-arguments-check-in-API-function.pa=
+tch
+> new file mode 100644
+> index 000000000..aba139ff5
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/canopenterm/canopenterm/0001-fix-number-of=
+-arguments-check-in-API-function.patch
+> @@ -0,0 +1,23 @@
+> +From 02e8b19d4090809deee11bf6801c0444c38fe4d2 Mon Sep 17 00:00:00 2001
+> +From: Michael Fitzmayer <mail@michael-fitzmayer.de>
+> +Date: Mon, 9 Dec 2024 22:30:03 +0100
+> +Subject: [PATCH] canopenterm: fix number of arguments check in API funct=
+ion
+> +
+> +Signed-off-by: Michael Fitzmayer <mail@michael-fitzmayer.de>
+> +---
+> + src/api/python_test_report.c | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/src/api/python_test_report.c b/src/api/python_test_report.c
+> +index ff7b31e..1b1fc4a 100644
+> +--- a/src/api/python_test_report.c
+> ++++ b/src/api/python_test_report.c
+> +@@ -69,7 +69,7 @@ bool py_test_eds_file(int argc, py_Ref argv)
+> +     (void)argc;
+> +     (void)argv;
+> +
+> +-    PY_CHECK_ARGC(2);
+> ++    PY_CHECK_ARGC(3);
+> +
+> +     node_id   =3D py_toint(py_arg(0));
+> +     file_name =3D py_tostr(py_arg(1));
+> diff --git a/meta-oe/recipes-extended/canopenterm/canopenterm_1.0.10.bb b=
+/meta-oe/recipes-extended/canopenterm/canopenterm_1.0.10.bb
+> index b15a36330..81ba15fab 100644
+> --- a/meta-oe/recipes-extended/canopenterm/canopenterm_1.0.10.bb
+> +++ b/meta-oe/recipes-extended/canopenterm/canopenterm_1.0.10.bb
+> @@ -15,7 +15,9 @@ LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3D10e84ea70=
+e8c3a1fbc462f5424806474"
+>
+>  DEPENDS =3D "cjson libinih libsdl2 lua libsocketcan pocketpy"
+>
+> -SRC_URI =3D "git://github.com/CANopenTerm/CANopenTerm.git;protocol=3Dhtt=
+ps;branch=3Dmain"
+> +SRC_URI =3D "git://github.com/CANopenTerm/CANopenTerm.git;protocol=3Dhtt=
+ps;branch=3Dmain \
+> +           file://0001-fix-number-of-arguments-check-in-API-function.pat=
+ch \
+> +           "
+>
+>  SRCREV  =3D "e0760b2e9657907e691be4df384ca7617109635d"
+>
+> --
+> 2.39.5
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#114257): https://lists.openembedded.org/g/openembedde=
+d-devel/message/114257
+> Mute This Topic: https://lists.openembedded.org/mt/110015092/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
