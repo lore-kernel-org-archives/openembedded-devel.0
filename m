@@ -1,289 +1,190 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <hsimeliere.opensource@witekio.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 72DF0E77180
-	for <webhook@archiver.kernel.org>; Wed, 11 Dec 2024 08:07:13 +0000 (UTC)
-Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
- by mx.groups.io with SMTP id smtpd.web11.5751.1733904428912521932
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B0893E77182
+	for <webhook@archiver.kernel.org>; Wed, 11 Dec 2024 08:56:23 +0000 (UTC)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com (EUR05-AM6-obe.outbound.protection.outlook.com [40.107.22.136])
+ by mx.groups.io with SMTP id smtpd.web11.6351.1733907380643502560
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Dec 2024 00:07:09 -0800
+ Wed, 11 Dec 2024 00:56:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
-Received: from fwd78.aul.t-online.de (fwd78.aul.t-online.de [10.223.144.104])
-	by mailout04.t-online.de (Postfix) with SMTP id 562EFA7E
-	for <openembedded-devel@lists.openembedded.org>; Wed, 11 Dec 2024 09:07:07 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.33.231]) by fwd78.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tLHkL-0OXTbX0; Wed, 11 Dec 2024 09:07:01 +0100
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@witekio.com header.s=selector2 header.b=eWkjtq+Q;
+ spf=pass (domain: witekio.com, ip: 40.107.22.136, mailfrom: hsimeliere@witekio.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=WloEvz1460WUcTGpJJdVF+0L+2/od1Ju50Q93kEzc/BnR5xuVxkaT2kMm91x3Pjh0l8UvxD3YQRLMPd2V11+XPrW+/GA3Hu43JWpLucjWnE/QaxlyHnkIIW301cJKV9SnnyD43uCMtd6vj8eZKmEKk0Lamca5dZnnOatKgoYv0DlZBpgfJROldMClr2naz+gqU9qngZLBCKTUz7VCNZJ1LOVvFKK+mDP5JuYhbdXN84MSemeqR+u/ACsH9Vl3S0zi0l/WHIreMwyDqiweuI//a3UmnNQpgCGxrgu9WPOm9vnKrJQlrZYU/sFVw/mNFT53q18dYg7z1MIkPt5TPEiag==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=T9neh4DuMdi9d9svaP1QgcVKTN70UUFN2FGTT0qy+NE=;
+ b=p2whQMwL5tGuYT22xD1qhgnoTP0A5bCEdmJwHbvdUYvBU7b3wTYeDj/CqQp8vIAKi/dWCycM70493zvxEyfp0EXR2GbYLvXVIE6ewvMP0yaBMs2BkMR5i1x8IF63EV6YwAWKCLc3710rBw4Uvqvsee/g1fDqI2fGWGjzfizQIKk7/iTp0j+cHDhkiwmR+xIGbIVe2fU+qHZVxXcaJSwqdDRyVV0DoSz82LgpoOV4DFZZbVEl4IR888p33ZKAdvRu58cmvGXlHaqDspYa0jw0slC/yxT8zupK61EoVVbYhD/ikqoI9sUtfbSwSi4COz1p1qSz5vw/XHu2yRK+WGJBHA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=witekio.com; dmarc=pass action=none header.from=witekio.com;
+ dkim=pass header.d=witekio.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=witekio.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=T9neh4DuMdi9d9svaP1QgcVKTN70UUFN2FGTT0qy+NE=;
+ b=eWkjtq+QzNLpgSceBM0Q3cw+lhApOA5J3G1YJSxOUfY9MyCcwqpsLGaHi8NnOBYo2kVIyxSIKZSeYDSWHOUYvPyijAVO9QniTLDT0nBa9eRHjMjwm+4qkWGLtqXksvfXcNkkbiMnqJSwZWGRD1F0Rb1iTs4gp1pkRPwp4CmlJOopetLrruZuBmbmXfCgY6P4xHogcKDMYzVBLNybVhQlifWcxlWjjfE6ST4ONcbyzr1gJm8eqiMEtGWRU3t/Pgv0xXgVTm7cLBdlJ33KXnu1vr/Q0r6Pi16Y63Uv8+PfTBDDb/0aL1DUkyuD7Xl2EfJxomB0vJaR7Yj499wbl4Zpgg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=witekio.com;
+Received: from PR3P192MB0714.EURP192.PROD.OUTLOOK.COM (2603:10a6:102:48::10)
+ by DBAP192MB0988.EURP192.PROD.OUTLOOK.COM (2603:10a6:10:1b4::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8251.15; Wed, 11 Dec
+ 2024 08:56:17 +0000
+Received: from PR3P192MB0714.EURP192.PROD.OUTLOOK.COM
+ ([fe80::345f:a9e9:d884:3091]) by PR3P192MB0714.EURP192.PROD.OUTLOOK.COM
+ ([fe80::345f:a9e9:d884:3091%7]) with mapi id 15.20.8251.008; Wed, 11 Dec 2024
+ 08:56:17 +0000
+From: hsimeliere.opensource@witekio.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 3/4] gnome-shell: update 47.1 -> 47.2
-Date: Wed, 11 Dec 2024 09:06:59 +0100
-Message-ID: <20241211080700.104771-3-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20241211080700.104771-1-f_l_k@t-online.de>
-References: <20241211080700.104771-1-f_l_k@t-online.de>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-TOI-EXPURGATEID: 150726::1733904421-77FF486F-60710D73/0/0 CLEAN NORMAL
-X-TOI-MSGID: 2892d3c6-8e67-49fb-827b-728bd57bfff4
+CC: Wang Mingyu <wangmy@fujitsu.com>,
+	Khem Raj <raj.khem@gmail.com>,
+	Bruno VERNAY <bruno.vernay@se.com>,
+	Hugo SIMELIERE <hsimeliere.opensource@witekio.com>
+Subject: [meta-networking][scarthgap][PATCH 2/2] mosquitto: upgrade 2.0.19 -> 2.0.20
+Date: Wed, 11 Dec 2024 09:55:40 +0100
+Message-ID: <20241211085540.6811-2-hsimeliere.opensource@witekio.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241211085540.6811-1-hsimeliere.opensource@witekio.com>
+References: <20241211085540.6811-1-hsimeliere.opensource@witekio.com>
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-ClientProxiedBy: PA7P264CA0240.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:372::17) To PR3P192MB0714.EURP192.PROD.OUTLOOK.COM
+ (2603:10a6:102:48::10)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PR3P192MB0714:EE_|DBAP192MB0988:EE_
+X-MS-Office365-Filtering-Correlation-Id: 61021fe2-30de-40f1-9095-08dd19c1ac89
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|366016|52116014|1800799024|376014|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?7C9H2hChsxvhQ9dbwkteAKU3nH8uuLm3HVbGufOLI1r13Cg4MuYRAVFq86FY?=
+ =?us-ascii?Q?AaFyQJ2UgzcGTj+InH6wZDXI4GZvLQPjUq8BpKZc2tbo9XZOlqUlf8VMhCsm?=
+ =?us-ascii?Q?nk8hAcTx/c1Z0ZhEEtub8oIRYAQZwcAsKcxNObgq8cjV7cnR4cGv6LXmlqug?=
+ =?us-ascii?Q?CMaG07W7SjHrf5h/TLoAvJuaN9CD39l1nmN9MkOtPt3WL+G1d3pttXUkoSwl?=
+ =?us-ascii?Q?wppITCkpcVPvWNQNevI2fHR0b2A8U+761Q3xPmKggSBkNhv19/qITD8Si96Z?=
+ =?us-ascii?Q?HmqGrEI4iwfoYUTTxkiwWWC26FN1cQt195DYTTswtdtqoflLyl02chH9Ag6u?=
+ =?us-ascii?Q?u1PdQsi9Ej8VZRs9rFWdxSagAM9TItMJuZxjahpLo5XIQzF7iFArg3Fb1XPO?=
+ =?us-ascii?Q?z4OFjSmUrsux3+37QS2GTCKn52f+JjhntJVGJLZCQXgl3gYpf028G8J9LsLK?=
+ =?us-ascii?Q?rJnW36fTSfiYWsLmTfKsin3jXSU/0mwBAOtoXHKODd0L0SeMEj9KP4R/pVrB?=
+ =?us-ascii?Q?14putw+W5LDrMYwlJWpf61VbjJISF8unvchsWnUE5lSGguBCj29vp5jhL9Za?=
+ =?us-ascii?Q?JRAkAhrWo5UZu3DyRI6WdmzLH0eMBP6//le/GTL1ciUdtAMVPEt0EA7iHHz7?=
+ =?us-ascii?Q?RXpURFwAkodUHf2lhGp7N+Vm8ZSyB3f5KZlMyKtcP7Ulnx2nR9rMdO+P6d5f?=
+ =?us-ascii?Q?toGueBf3gzGzX/Icbdh84U9fVLalG4CxWKhRhM4j1rNdZpbLStkGnIYb2GYN?=
+ =?us-ascii?Q?53+TuBn7m+Fogmq5x48oMC/Nrq0MNo5Fpw3RxfZFXM+fiBjRldg+8RPQOB/f?=
+ =?us-ascii?Q?U5+NAGZ3vG0r+n7N7adVuhntdu8OosTA16JvLNwRD/Xv+EIVWAzxU3Z4MouT?=
+ =?us-ascii?Q?oOTT/V4mi/GEWD57XmvKQOYDLygWcR06SWlC8X+sMwckHkXH3iqRBltJ9gzy?=
+ =?us-ascii?Q?Q7YSvmkJBNZ2bYubFzs0nybnvgpgn/CYYZUCmny8WZChNG9GqwlCxM216QVV?=
+ =?us-ascii?Q?lx0Z03xigBwKcdRZHKSYN0yK+Ok+i6NL8jtkVkP6tyu19tY0I/697xPkk0X1?=
+ =?us-ascii?Q?BXYme64Jc7W6E0KV/4MUgMME12rr/FBLmsPMFzZqNP3IBTe+63S6ebShnfqe?=
+ =?us-ascii?Q?eWl096H2M12NsjvPUVgv+k2de+mgdmI9tlHyL2HbmR2uOh/9jPpGeUeTaltk?=
+ =?us-ascii?Q?hnke+OWoNaJ7ue2BhDVKlu9KlG7wfCbb5oxI/HgY9E/iuQSDLA6YF6rUUpkw?=
+ =?us-ascii?Q?AAFt3uB8+c+it8hCv8GTdkr4/0VQcsjJUXpIDGQjYhGFBXyHP1mnFG3FSIEl?=
+ =?us-ascii?Q?YEh1XGaxixqEa8IQ71DO+wJWErFvqx8OV9gcdOlYoUNG+egTowhX+TB6Bf4M?=
+ =?us-ascii?Q?BfL8MmA=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PR3P192MB0714.EURP192.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(52116014)(1800799024)(376014)(38350700014);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?AmarYOaDKCmLdCjN+HimDcyOKI3uHx0DBR99w5XGZWxPnZHI+f5ihrSQnE5+?=
+ =?us-ascii?Q?CBlyQxJKK5gO1ugU/iqqRl0gV6gA5yVZI/eIL57bxhMvhnGFlqJn14e78MeF?=
+ =?us-ascii?Q?AqWjT7i4NcpocBoAWyfQHs1LYVStxguoqBq8XZrzHx5msZoMciw9QnzsWj0V?=
+ =?us-ascii?Q?ulrnY5RqegAbHA3wxh7L6jfuSYD0vD4xn/bTg6bkLF3F9JWVga2mIRECwu3q?=
+ =?us-ascii?Q?QvPhC+7Qx3GYsWrtxBT88GCZ5VX2Wr1Y50YdgTU8gyX0I0g2qr+YVqTfqKfT?=
+ =?us-ascii?Q?f5wYBImqzfUFLJ5MwaSb8gU4T6J0tXpwxf1ez+UMF6Q0q6TjBjlwIFPBsMHr?=
+ =?us-ascii?Q?AyzTNsiF8HIrGl5Szxh6IPUc/08ZDB/iR5bWVz/2WfMFIkyezuTPYTGcDq6R?=
+ =?us-ascii?Q?D46ZjuEwOjPbyojclDAlmkFtPxVRe7cdPzms4AXlbOn88Z5B+9vh2mQe51QC?=
+ =?us-ascii?Q?zTG0aIY86NChOPM8kcX22w8Z7HHlenQiHK5TKMYu0tbB+zmoAhqosDEXA08o?=
+ =?us-ascii?Q?b2n0mElwmS2I4OhKF/qG4uI1x69d+eG09O+scT11WwFsChsdGbdR/Zpo5APY?=
+ =?us-ascii?Q?eDRHDeATFNOyTMKUen/TLLEWzU4pNeSDwCYwnfkJYQPocTmzfxGt4KZ19azH?=
+ =?us-ascii?Q?W6MpVwUx1/Ss4rkBVgVUkRX/7wxiwtcB6JyRSxYtcNRZx+MQ27WW6GU11hZf?=
+ =?us-ascii?Q?HnNdo8C9mRZWonjF0hQ+m9xOeUbxPaSI0kc4puKiwd1ccDmdNxPAtplWMEv7?=
+ =?us-ascii?Q?8ou3jswyYN6KalvxwYOk3hDS4jxWpeRCi0Ot88W0yjvTY1ces2Am+3OyMqSf?=
+ =?us-ascii?Q?igzC8RGQ6WWSYzSMOht3FZJGIoehQaUuDrcEUpJ4tYYgPXf7fN4gNpgXdAZI?=
+ =?us-ascii?Q?6mgKPhTK1UMy3JiBB2ek2qeCKMpk0FeVb7N+uC+cdut5yWwA3BV/MEh0Nzhi?=
+ =?us-ascii?Q?Cu2jP2qe4BYVxxmWZqFhLadxAaVovYxaYEVHaJ3pnet2HnkJh8EQvjPAEPsy?=
+ =?us-ascii?Q?vyBjkJyxKI1ngcmTusSv7C5/66KwNQsHt/LJEcP3l0iSZxuVIQmJkijrLDRg?=
+ =?us-ascii?Q?nfEsBB0Yin6jSfO8jKV7QROXPPIeH4zKvbCz0ObRKRyiRxzAnLyJbA7ua6Il?=
+ =?us-ascii?Q?D3BmjTDDDbjIt0GQTGzCcvYVIOA0Kn4Mq0Ra8iqIeyWITVA4ov3pMQCOSMV9?=
+ =?us-ascii?Q?A3VumZ966Y5oTuw5aVIrDbHWouuaPMtu3UFsg1zfqy9CMa+fItpWvLy7qRiF?=
+ =?us-ascii?Q?L2mXlkHbAq+ijH+KF0Tgs+pDuZceThuImEnGurYZ/ZB5uovz6AZZOgljDlTB?=
+ =?us-ascii?Q?y1U9zHg1Xp3KQrgk7yUOaQq3mXmEm2tk/ld6DzN5StkHXxxlOX58lFurTuKW?=
+ =?us-ascii?Q?UI4DjrS/zikDoeBuXjk4tgSrFTlbNSFe3eQ/v0Fr1F+VADfWjX+LkBnS9YrG?=
+ =?us-ascii?Q?cJ/bSDTgmMrUkSrg3XrQI7htefBS+ElN2HZILb+KvK5BawFiAE1DmNCe5RkS?=
+ =?us-ascii?Q?MJFH6FtPgdjHUEgsIvAn5/MgB752P/+yQhUsZ5yq6/hc1l9bs8EhFr7T4o2T?=
+ =?us-ascii?Q?jWPIVGtPAC/OP2h/771gizhV9JzPAWO0a9b2f1Xv?=
+X-OriginatorOrg: witekio.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 61021fe2-30de-40f1-9095-08dd19c1ac89
+X-MS-Exchange-CrossTenant-AuthSource: PR3P192MB0714.EURP192.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Dec 2024 08:56:17.6490
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 317e086a-301a-49af-9ea4-48a1c458b903
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: gUqAKn0aVu0I/tSfS+bQ0VyyV4QknrpJ6ph4whOKhlNsCmCjcODAwKj2CZ3fZ5+fphUMZ3cLce1oT1fa1pFOXw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAP192MB0988
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 11 Dec 2024 08:07:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114273
+ <openembedded-devel@lists.openembedded.org>; Wed, 11 Dec 2024 08:56:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114276
 
-- Remove patch to set gjs path. It would require rework.
-  Set the path from a cross-file instead
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-47.2
-=3D=3D=3D=3D
-* Fix graphical artifacts in partially-rounded buttons [Sebastian; #7996]
-* Fix caret tracking in magnifier [Bilal; !3522]
-* Improve accessibility of keyboard backlight quick settings toggle
-  [Luk=C3=A1=C5=A1, Florian; !3538, !3545]
-* Fix resetting non-caps shift key in on-screen keyboard [Jonas; !3286]
-* Misc. bug fixes and cleanups [Florian, Bilal, Automeris, Daniel, Jonas;
-  !3520, !3518, !3521, !3529, !3535, !3532, !3540, !3549, !3548, !3539]
+Changelog:
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Broker:
+- Fix QoS 1 / QoS 2 publish incorrectly returning "no subscribers".
+  Closes #3128.
+- Open files with appropriate access on Windows.
+- Don't allow invalid response topic values.
+- Fix some strict protocol compliance issues.
 
-Contributors:
-  Jonas Dre=C3=9Fler, Bilal Elmoussaoui, Sebastian Keller, Florian M=C3=BC=
-llner,
-  Automeris naranja, Daniel Rusek, Luk=C3=A1=C5=A1 Tyrychtr
+Client library:
+- Fix cmake build on OS X.
 
-Translators:
-  Aefgh Threenine [th], Fabio Tomat [fur], Nathan Follens [nl],
-  =D0=9C=D0=B0=D1=80=D0=BA=D0=BE =D0=9A=D0=BE=D1=81=D1=82=D0=B8=D1=9B [sr=
-]
+Build:
+- Fix build on NetBSD
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Bruno VERNAY <bruno.vernay@se.com>
+Signed-off-by: Hugo SIMELIERE <hsimeliere.opensource@witekio.com>
 ---
- ...47.1.bb =3D> gnome-shell-extensions_47.2.bb} |   2 +-
- ...s-gjs_path-to-optionally-set-path-to.patch | 124 ------------------
- ...nome-shell_47.1.bb =3D> gnome-shell_47.2.bb} |  15 ++-
- 3 files changed, 11 insertions(+), 130 deletions(-)
- rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell-extensions_47.1=
-.bb =3D> gnome-shell-extensions_47.2.bb} (84%)
- delete mode 100644 meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0001=
--Introduce-options-gjs_path-to-optionally-set-path-to.patch
- rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell_47.1.bb =3D> gn=
-ome-shell_47.2.bb} (88%)
+ .../mosquitto/{mosquitto_2.0.19.bb =3D> mosquitto_2.0.20.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.19.bb=
+ =3D> mosquitto_2.0.20.bb} (97%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_=
-47.1.bb b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_47.=
-2.bb
-similarity index 84%
-rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_4=
-7.1.bb
-rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_47.=
-2.bb
-index a47548fbb..6567704c4 100644
---- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_47.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_47.2.bb
-@@ -6,7 +6,7 @@ inherit gnomebase gettext gsettings features_check
-=20
- REQUIRED_DISTRO_FEATURES =3D "x11 polkit systemd pam gobject-introspecti=
-on-data"
-=20
--SRC_URI[archive.sha256sum] =3D "e9438cc5d39f9875dfd04ea0abb51e5962eaad5c=
-20274123243b1612098b3a85"
-+SRC_URI[archive.sha256sum] =3D "dd774a0291584917abde88bbc4eccf9244178e3c=
-269ce0618d0495177c12652d"
-=20
- EXTRA_OEMESON +=3D " \
-     -Dextension_set=3Dall \
-diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0001-Introd=
-uce-options-gjs_path-to-optionally-set-path-to.patch b/meta-gnome/recipes=
--gnome/gnome-shell/gnome-shell/0001-Introduce-options-gjs_path-to-optiona=
-lly-set-path-to.patch
-deleted file mode 100644
-index 8ef0da16f..000000000
---- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0001-Introduce-opt=
-ions-gjs_path-to-optionally-set-path-to.patch
-+++ /dev/null
-@@ -1,124 +0,0 @@
--From e9835f650d70bf22ad0e5d8c2179aa01b2d18955 Mon Sep 17 00:00:00 2001
--From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
-om>
--Date: Thu, 28 Oct 2021 18:57:24 +0200
--Subject: [PATCH] Introduce options 'gjs_path' to optionally set path to =
-gjs
--MIME-Version: 1.0
--Content-Type: text/plain; charset=3DUTF-8
--Content-Transfer-Encoding: 8bit
--
--From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
-om>
--MIME-Version: 1.0
--Content-Type: text/plain; charset=3DUTF-8
--Content-Transfer-Encoding: 8bit
--
--From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
-om>
--MIME-Version: 1.0
--Content-Type: text/plain; charset=3DUTF-8
--Content-Transfer-Encoding: 8bit
--
--From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
-om>
--MIME-Version: 1.0
--Content-Type: text/plain; charset=3DUTF-8
--Content-Transfer-Encoding: 8bit
--
--Upstream-Status: Pending
--
--Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-----
-- js/dbusServices/meson.build                  | 2 +-
-- meson.build                                  | 6 +++++-
-- meson_options.txt                            | 6 ++++++
-- subprojects/extensions-app/js/meson.build    | 2 +-
-- subprojects/extensions-app/meson.build       | 7 ++++++-
-- subprojects/extensions-app/meson_options.txt | 6 ++++++
-- 6 files changed, 25 insertions(+), 4 deletions(-)
--
--diff --git a/js/dbusServices/meson.build b/js/dbusServices/meson.build
--index 48b7f89..700b590 100644
----- a/js/dbusServices/meson.build
--+++ b/js/dbusServices/meson.build
--@@ -22,7 +22,7 @@ foreach service, dir : dbus_services
--=20
--   serviceconf =3D configuration_data()
--   serviceconf.set('service', service)
---  serviceconf.set('gjs', gjs.full_path())
--+  serviceconf.set('gjs', gjs)
--   serviceconf.set('pkgdatadir', pkgdatadir)
--=20
--   configure_file(
--diff --git a/meson.build b/meson.build
--index a6d83b1..2c612a8 100644
----- a/meson.build
--+++ b/meson.build
--@@ -134,7 +134,11 @@ endif
--=20
-- mutter_typelibdir =3D mutter_dep.get_variable('typelibdir')
-- python =3D find_program('python3')
---gjs =3D find_program('gjs')
--+if get_option('gjs_path') =3D=3D ''
--+  gjs =3D find_program('gjs')
--+else
--+  gjs =3D get_option('gjs_path')
--+endif
--=20
-- cc =3D meson.get_compiler('c')
--=20
--diff --git a/meson_options.txt b/meson_options.txt
--index 6e83d92..1bf0ecb 100644
----- a/meson_options.txt
--+++ b/meson_options.txt
--@@ -45,3 +45,9 @@ option('systemd',
--   value: true,
--   description: 'Enable systemd integration'
-- )
--+
--+option('gjs_path',
--+  type: 'string',
--+  value: '',
--+  description: 'Instead of searching gjs executable, configure path'
--+)
--diff --git a/subprojects/extensions-app/js/meson.build b/subprojects/ext=
-ensions-app/js/meson.build
--index c9a67f8..91ae887 100644
----- a/subprojects/extensions-app/js/meson.build
--+++ b/subprojects/extensions-app/js/meson.build
--@@ -9,7 +9,7 @@ endif
-- launcherconf.set('prefix', prefix)
-- launcherconf.set('libdir', libdir)
-- launcherconf.set('pkgdatadir', pkgdatadir)
---launcherconf.set('gjs', gjs.full_path())
--+launcherconf.set('gjs', gjs)
--=20
-- configure_file(
--   input: prgname + '.in',
--diff --git a/subprojects/extensions-app/meson.build b/subprojects/extens=
-ions-app/meson.build
--index 45f391b..d581408 100644
----- a/subprojects/extensions-app/meson.build
--+++ b/subprojects/extensions-app/meson.build
--@@ -47,7 +47,12 @@ metainfodir =3D join_paths(datadir, 'metainfo')
-- schemadir =3D join_paths(datadir, 'glib-2.0', 'schemas')
-- servicedir =3D join_paths(datadir, 'dbus-1', 'services')
--=20
---gjs =3D find_program('gjs')
--+if get_option('gjs_path') =3D=3D ''
--+  gjs =3D find_program('gjs')
--+else
--+  gjs =3D get_option('gjs_path')
--+endif
--+
-- appstream_util =3D find_program('appstream-util', required: false)
-- appstreamcli =3D find_program('appstreamcli', required: false)
-- desktop_file_validate =3D find_program('desktop-file-validate', require=
-d: false)
--diff --git a/subprojects/extensions-app/meson_options.txt b/subprojects/=
-extensions-app/meson_options.txt
--index ca2eb41..2787785 100644
----- a/subprojects/extensions-app/meson_options.txt
--+++ b/subprojects/extensions-app/meson_options.txt
--@@ -10,3 +10,9 @@ option('profile',
--   ],
--   value: 'default'
-- )
--+
--+option('gjs_path',
--+  type: 'string',
--+  value: '',
--+  description: 'Instead of searching gjs executable, configure path'
--+)
-diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_47.1.bb b/m=
-eta-gnome/recipes-gnome/gnome-shell/gnome-shell_47.2.bb
-similarity index 88%
-rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell_47.1.bb
-rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell_47.2.bb
-index 042b3935a..417f0a181 100644
---- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_47.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_47.2.bb
-@@ -33,21 +33,26 @@ GIR_MESON_OPTION =3D ""
- # gobject-introspection is mandatory and cannot be configured
- REQUIRED_DISTRO_FEATURES +=3D "gobject-introspection-data"
-=20
--SRC_URI[archive.sha256sum] =3D "b467575f8c159d20557258517f0dd68dfd0147d1=
-1b48d97ab8e1f709bc522a63"
--SRC_URI +=3D "file://0001-Introduce-options-gjs_path-to-optionally-set-p=
-ath-to.patch"
-+SRC_URI[archive.sha256sum] =3D "4184d01a1ab82cb421d1ca2e2bcce0292ceb46c4=
-c749e61b0bde4b75004d2e00"
-=20
- PACKAGECONFIG ??=3D "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', =
-'systemd', d)}"
- PACKAGECONFIG[bluetooth] =3D ",,gnome-bluetooth"
- PACKAGECONFIG[nm] =3D "-Dnetworkmanager=3Dtrue, -Dnetworkmanager=3Dfalse=
-,networkmanager libsecret,networkmanager"
- PACKAGECONFIG[systemd] =3D "-Dsystemd=3Dtrue, -Dsystemd=3Dfalse, systemd=
-"
-=20
--EXTRA_OEMESON =3D " \
--    -Dgjs_path=3D${bindir}/gjs \
--    -Dextensions-app:gjs_path=3D${bindir}/gjs \
-+EXTRA_OEMESON +=3D " \
-     -Dtests=3Dfalse \
-     -Dman=3Dfalse \
-+    --cross-file=3D${WORKDIR}/meson-${PN}.cross \
+diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.1=
+9.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.20.bb
+similarity index 97%
+rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.19=
+.bb
+rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.20.b=
+b
+index c6ce2e095..2bc130318 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.19.bb
++++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.20.bb
+@@ -19,7 +19,7 @@ SRC_URI =3D "http://mosquitto.org/files/source/mosquitto-=
+${PV}.tar.gz \
+            file://2895.patch \
  "
 =20
-+do_write_config:append() {
-+    cat >${WORKDIR}/meson-${PN}.cross <<EOF
-+[binaries]
-+gjs =3D '${bindir}/gjs'
-+EOF
-+}
-+
- do_install:append() {
-     # fix shebangs
-     for tool in `find ${D}${bindir} -name '*-tool'`; do
+-SRC_URI[sha256sum] =3D "33af3637f119a61c509c01d2f8f6cc3d8be76f49e850132f28=
+60af142abf82a9"
++SRC_URI[sha256sum] =3D "ebd07d89d2a446a7f74100ad51272e4a8bf300b61634a7812e=
+19f068f2759de8"
+=20
+ inherit systemd update-rc.d useradd cmake pkgconfig
+=20
 --=20
-2.47.0
+2.43.0
 
 
