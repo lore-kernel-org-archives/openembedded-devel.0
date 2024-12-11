@@ -1,255 +1,306 @@
-Return-Path: <hsimeliere.opensource@witekio.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AEE1AE7717D
-	for <webhook@archiver.kernel.org>; Wed, 11 Dec 2024 08:56:23 +0000 (UTC)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.134])
- by mx.groups.io with SMTP id smtpd.web10.6323.1733907369159932257
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 270C7E7717D
+	for <webhook@archiver.kernel.org>; Wed, 11 Dec 2024 10:18:34 +0000 (UTC)
+Received: from mail-oo1-f44.google.com (mail-oo1-f44.google.com [209.85.161.44])
+ by mx.groups.io with SMTP id smtpd.web10.7640.1733912312828226092
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Dec 2024 00:56:10 -0800
+ Wed, 11 Dec 2024 02:18:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@witekio.com header.s=selector2 header.b=soA5dU4h;
- spf=pass (domain: witekio.com, ip: 40.107.21.134, mailfrom: hsimeliere@witekio.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cUVjOlYO+9zn1bkcX+Lpc3mej4a0Oty5sgpyUK600RxSypq2yKAesXIYVV0OAKg9dvUh5FhEUhWJcWYbkNWE2oos6+RRQTCdY/UsAWLjJqKrrPBJBimlKHifliWaf9b5KXIekgVBbO3NAxFZM0UKoi5BrXscVlszMdcKohKHBvEEXBBPGCxvsSEqaCuGfFltamuCmH7NVyO5HHkx1LSDy/t4lstd2gMqoJfZST7H/hdCZnBHkaZFxbp4Hez7juCE4OZX72NwLqPCw7CRtCJaCdCgk6Rt5Z1/4XHuXFmXPVTeZ7VY0fXh10FzsLZuRyDWbTCjmcdrtfVQpd4XDKuI9A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=AKWFPyYJCyVeJGlbcvjCdjZr9ZVPvQblrm8mcaBVpHk=;
- b=RGo+Hh2WN3TfqCSmNR+BqH2DRrdO1f3WiITZC89fpWYqOo4fI8URZ9/xFE/I9UojyIXoUZPmkkDTjLR1CJTsZZR6fY1oZs54D6V0kNSEBUOgXycPIaTRmhWW9rUf0injwX89mogI68WUVZG1C5p7NOoGwide5aGY/aeWeeAKiNRy9Fzey+HQSS26d67NaqzORUsii+7GlZHt+wMxN/omhNsoCjVmGD9Og7IBPg/R1Y1TBwZhFRtgMgZ9DkVIrotaMYelFAoj9sKmgXP+t+RgMToAy6QDlpO5f5O03TM7RzrHE1j8l6b6+ryzCVABGVftdkuW51t//0MqhL21C13igg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=witekio.com; dmarc=pass action=none header.from=witekio.com;
- dkim=pass header.d=witekio.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=witekio.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AKWFPyYJCyVeJGlbcvjCdjZr9ZVPvQblrm8mcaBVpHk=;
- b=soA5dU4hOMRO6OcGDkVbDMqPx1Jk5iLsqkTsHwr7zHj+MqgTzgXDoN0CYIf464Zu7oU9c9GZwutCVntDxJ7/idSPLHE+A+psnypqqJW1twzgxQile7fGz0coymbPuvxdrRcHknIXO4BMKZSHyZ2tNyscoLZxTtMeEjVcR7YU2VDLnrWaya2aj6Y/fRbMYAy5+vmsAsfUKy7oGva72jCUSqYBWkO+9WTHydAE3iYmV3E/BuykCWN0N02/t8nbe4XxGe9cqlyKvdipX+R0p89tTCTo0P+gvajE1kNJFRbXcaCZFET1OYHDEpaU89/sH+p5JucQ+mvUlOGbFdFxMQPM/w==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=witekio.com;
-Received: from PR3P192MB0714.EURP192.PROD.OUTLOOK.COM (2603:10a6:102:48::10)
- by DBAP192MB0988.EURP192.PROD.OUTLOOK.COM (2603:10a6:10:1b4::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8251.15; Wed, 11 Dec
- 2024 08:56:05 +0000
-Received: from PR3P192MB0714.EURP192.PROD.OUTLOOK.COM
- ([fe80::345f:a9e9:d884:3091]) by PR3P192MB0714.EURP192.PROD.OUTLOOK.COM
- ([fe80::345f:a9e9:d884:3091%7]) with mapi id 15.20.8251.008; Wed, 11 Dec 2024
- 08:56:05 +0000
-From: hsimeliere.opensource@witekio.com
-To: openembedded-devel@lists.openembedded.org
-CC: Fabrice Aeschbacher <fabrice.aeschbacher@siemens.com>,
-	Peter Marko <peter.marko@siemens.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Bruno VERNAY <bruno.vernay@se.com>,
-	Hugo SIMELIERE <hsimeliere.opensource@witekio.com>
-Subject: [meta-networking][scarthgap][PATCH 1/2] mosquitto: upgrade 2.0.18 -> 2.0.19
-Date: Wed, 11 Dec 2024 09:55:39 +0100
-Message-ID: <20241211085540.6811-1-hsimeliere.opensource@witekio.com>
-X-Mailer: git-send-email 2.43.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-ClientProxiedBy: PA7P264CA0240.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:372::17) To PR3P192MB0714.EURP192.PROD.OUTLOOK.COM
- (2603:10a6:102:48::10)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=eC0HYoZ1;
+ spf=pass (domain: gmail.com, ip: 209.85.161.44, mailfrom: schonm@gmail.com)
+Received: by mail-oo1-f44.google.com with SMTP id 006d021491bc7-5f2d8f62290so470142eaf.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Dec 2024 02:18:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1733912312; x=1734517112; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ckP4BsLFQKueJQs/wbGs7ZWjlksBC+diluKJ+BjoFyw=;
+        b=eC0HYoZ1Qia/Rf5yR94OHEo/2m/s8tSLJppf0VV2sgDRl9UgPaDsuiGfmhLsLWFMtV
+         dm1eJ0fGcie4UgdOkHn+Q24x8hW+lANCLmCZO3V6UoiyRY95cp1Qk3q8HmAAq2XYHprG
+         SdQO+ihwqrflNDMRy6WD8upWNA7/TsaB2kGSpu3OMJ3u0TD5vHT2VzFqAgENbP6nTzNM
+         OmUW/UrfgTUDJTl1ZoRBX3JhqdctJZBu7Q+ATY2tp9XKwlbNJH2XKIz7AI0ZsNvgkaVy
+         TEV28Uy4Xltf1MSNS+FaupcRQsFuKeMv0plFpfimWK9AlRw5PHoB3/7i/3diWULby5Hz
+         9yIQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1733912312; x=1734517112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ckP4BsLFQKueJQs/wbGs7ZWjlksBC+diluKJ+BjoFyw=;
+        b=nJWCTp53G5SBxuUhu1UlzPZ1GoBGojmgMRR7rCttNMqk1VWLb0gwIKY6sETOJaYGDO
+         ZRru+JL0e+yFArhgnTMKqxqmzax2SO+qQIL1fB6rUn/vehEwwonePyXwkexs2ngRTana
+         Y2x6kyvMy505wCETyypSvzSOgQ9IBZcRn2T4JTpsMvJGWF4JAhjuUCwi3+xsiL0arqfD
+         a2tJj0pu0TgFEknaBqrNJ0cbiIouhsTP8TxCAp1hXjUs6ffKRzQvkpMSaL0ZqVmQlTc+
+         bMtxdPV/J9SWb1W7nacCUBa7etre8rWLJ69ljdg/w1LMeo1i8uBmK5jpJxMKndsayVht
+         SUAQ==
+X-Forwarded-Encrypted: i=1; AJvYcCV4Pl7AnOdUieEzR5QZCpYvbEHU+CS5u3ilc3oOFedJo7fdQWVsUHNe3EPSB4hIzCo6fV6hOJVnKdlAeQtYDxptyJk=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yyk0oMzM6SDNYaSf1J8KyoeePMon/jOoxweNmxESlYuwovWr/wq
+	GiogAc63b9NdXFQtz+IKSCpHVa2KqaSWQH8DnKD0M4yz82ILv7xgZyPZueUvrqhnyX2hPLIm+97
+	WKRad36OPiALZ1JZCL9LOtqsd3vs=
+X-Gm-Gg: ASbGncvh+OdAfohBOkPDMcac6kcWOD1+qOD3vUBYt13JquAISdtAGD3DQAYMje/5hxZ
+	9NrjoN/0lRo/Fe2GWL+f3Tnoio/TPE9K3Rw==
+X-Google-Smtp-Source: AGHT+IG4mqBsduGVb0BXLVP4azOlBtsUQdFZ1EI3SNCGd7nspWqIkFfvuHtGIUOlMolHekSQaPHV2pn68T+QVNtjvis=
+X-Received: by 2002:a05:6820:1b87:b0:5f2:c911:a6fa with SMTP id
+ 006d021491bc7-5f2da03d902mr1118781eaf.1.1733912311274; Wed, 11 Dec 2024
+ 02:18:31 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PR3P192MB0714:EE_|DBAP192MB0988:EE_
-X-MS-Office365-Filtering-Correlation-Id: b2e7520e-b6fe-48b2-32ef-08dd19c1a4f4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|52116014|1800799024|376014|38350700014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?xYVpdQzGhFze0PD2k0B5s6bX/pPPqf9t0KiTA5Q+d6je9hRZkBOozg4Y0ise?=
- =?us-ascii?Q?ASINbZqcEmK11b0Pr1ttc2hcsa7MtS0X6ro82xtsp0ui5raZ2ifxn+EZLeKs?=
- =?us-ascii?Q?bQAjx1v06vLRaLlm4ie9CrV95WXV0TrtyRenwpSxrherrExSTmOK5ygClHzY?=
- =?us-ascii?Q?O8lxB8mE2MUDIHOSdOvakuvlBKX4Xj3dcW1CMOf6j3l2KRklqphqqpTp0XnN?=
- =?us-ascii?Q?63BoG2GAGyR9GUQeUxNxyC634F8QF1jECSprcK3HHmjri2FLJmTvOJrDcf7B?=
- =?us-ascii?Q?TzSMKPPuojDl3Pu469paexZgJwtAYJDIV7BeFZamcgShA6CwyDYmOXInpg9y?=
- =?us-ascii?Q?61eLIibCQfbGDiUrxrknWHNPFTM6ATe8pIXq+PfI86ZpQMrr9+gkePzSHyes?=
- =?us-ascii?Q?TwPyDkOA6P0xWaX5P/jGGoBvWpcMQXwP86PO2WVeCCeoDRl2P2fQX7JmbzzX?=
- =?us-ascii?Q?7umOvRoVAK36b77/zKmy+Vq8LX+j7DfTiqZSM8XFCcKb1lfPo5YRZLN16hUc?=
- =?us-ascii?Q?NbIdQdRXHKLjXtXJ8TdKR3ll1FKZaCMbKS/clbhvv0tK6bI1MDxk7kT2kAYI?=
- =?us-ascii?Q?2TTuS0/Bl4tIP4HpDq/Nja7Yd45sOETsKnql/r8vH/9r+KxgUlyjET2MG7ag?=
- =?us-ascii?Q?+j4DFwKw9WqRDbLyaLyU1fBayC7zPCmWheGYk869pavz4ZEPBRuD0lBWCGBL?=
- =?us-ascii?Q?r3fTFICN3j+NLhlxEJFNs8IY84L3YXUMemssQTuBWMb9lp79jRYRTTdOCpz4?=
- =?us-ascii?Q?OLSQzF6z34jIW812XXYScOfYG0/1lpxYo3vd+QGxtyon/mafpLf0LkoO9iZx?=
- =?us-ascii?Q?EFzbnFq2Qtd0TMbYfaSkUnhIFIK0KQiMW8XjZXvyH7tLurIUI8qTkgPd3trO?=
- =?us-ascii?Q?MjqfSyuAUXVmszssx75kHG9gzF15cnxMGSTlIBw404sIyRKrjfy90C1SMk+I?=
- =?us-ascii?Q?h/xd2N7v3KhdV7DkjEdKY7DJ0vuJ0/CITpV1Pq22Xg9yj0cmT2f5P4cVkgL5?=
- =?us-ascii?Q?WzZ8vk/U94P7n2Owj/IP/daFJYwpfFyW/zMbzYR3i51N361BXolId0C5S09f?=
- =?us-ascii?Q?NXsWkZ0qlhjcviRMCIkUtxC8l+mTd9czithWWj8M3r0FbNZ31ynuK7qdmeTk?=
- =?us-ascii?Q?IM/CjzHS44bjN23mZtM8CcXZcyvjz2vO+Xv1kcdX1fAqCGvc3cdNU1hpjaqf?=
- =?us-ascii?Q?W5+jmknO5kquurpKPzjb+j+NbnyInLQRLbTC5OPXqER3aAYXr+jDV2GHWXxm?=
- =?us-ascii?Q?K4330OX3b3AATv4Pu9g/9ygvGs3W5sQuQQMwWMXQEVMmJVVfzG9gv7cOac7F?=
- =?us-ascii?Q?P9BlbspMA4lg6LIiSbwklCZu6EE7BIc/PjHkn6FRN0dCgsItaQzOT2KDYn+j?=
- =?us-ascii?Q?ncDVk2s=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PR3P192MB0714.EURP192.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(52116014)(1800799024)(376014)(38350700014);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?Hc9ROk2deNtj2gUF15tdED2cgD+sDH382vLJygbe4C4cbTip0xTUiNdKqNlQ?=
- =?us-ascii?Q?Q9Mz2jBzC+PUCFE+3VW+r+sV0nRHMhoB7Aqs+OWgl9m680wGtMTowDUBu+2H?=
- =?us-ascii?Q?tfz1onOPuPR0gGX8m6Y3DpqG2lef3osAOD38jdRYsiPigx94Kz0A+lHM0MGU?=
- =?us-ascii?Q?DPA9H8/QEK/z8FteamNmOUrS+1t+VAq/plAgZqvpLS+zsQbESt03CYaFSqIe?=
- =?us-ascii?Q?xMuL8lqBWYiX5syrM1uhT/vWC+j6r7OdPbr6Jb6yXSE/9+V0yHKLEVSWlUOp?=
- =?us-ascii?Q?xkrtb9Nb11PoVa2fAnM8h21NXmuVBmKF8YVzbA5dn4wFqgkBacWWa1hpPzrW?=
- =?us-ascii?Q?OxKZrKw0qFqtk9KRJw7Xs3e0/LtFNaZUty/gReL+zJDt8uhE4ZiH5ktkgaaZ?=
- =?us-ascii?Q?8L9lqJs8ZC9ovHggiVD87pzelT3uKa3on9WV4sKhwJmMzDJeuuomwYY5CSsc?=
- =?us-ascii?Q?1p9JHx5FB5X9Nx6Ry4HbOPaTQGw67TbbL98Im+LWUmmcCnkpEaCFZh7m+9/j?=
- =?us-ascii?Q?5ffZGHhlfxq8Bsm4pyBlWmOJqBgsPXeifh6D64dq9sYtpHL4d+eMbHHFEtco?=
- =?us-ascii?Q?+Ruch8YboGNDG5FEGUvUkM6gldKviLduJxYR+t7gqwy1bh8Sh3NdMujE+Cnx?=
- =?us-ascii?Q?kivPLpMguTVO95oHhGPdPIcblmNOxCuP0/QAaaV+9wFqMGxsJdKxKU65R5kw?=
- =?us-ascii?Q?OJ1/DsWaaMRsoiP2b2rFtqBdrkHSzVReiFBUD9keaHYn5+w+KMaYPnf8LfUh?=
- =?us-ascii?Q?f4SkNvEDrkLEl1asdvel3gzNlrc8ypbljfU6Yh4k/GtAYmthmsGC7YsVMuHL?=
- =?us-ascii?Q?L0YIwgoMLfqjyyGnTXdPoyDcb7RGHqZ6AMTRm5ouReHQ270mT73ZKKJU7Wed?=
- =?us-ascii?Q?M/V3AlNaEavJDgAieGy1490zqWXfLwWeG2eV52RYsJKE9vfxAjIeJWKgIgVz?=
- =?us-ascii?Q?mdCfXiWzIOEmStem1fv09k/LliAXKI8PhXOVExdB6HHrAUWTHjrbX1zgqbBC?=
- =?us-ascii?Q?iMajKTO9Ru9WdKh50GSLnYVuU5CudCARQGTyU+3SmYp/EMwK8zsJfS8UGCJ0?=
- =?us-ascii?Q?BBqsXaLhLarvHU3FpJ2O3U/ZSevYoW1C0uhQ8uZUGVtVsOvIoHGag1sM5yXj?=
- =?us-ascii?Q?LqdmlpWqQtOSk65aXY+UUgPJUPAiIT09R2j56UZ9jQvM3OKoHQxMXWXvkT+e?=
- =?us-ascii?Q?SnTHVjgFdjEdFA1hALGPnix2Cw5wfU3OFlAd1tVC6KkIzcN+5ydpaLGCIe+4?=
- =?us-ascii?Q?oKOE2wp6hSv0UJpD2G9woVQXtokMAbfTMN1gfMiN2UQrquSIER/7lJhGscb0?=
- =?us-ascii?Q?EuSOrCFl+VD1ZpUwuqoDwrbNNe3GxWltnNsRBIYMVLogWlTgFcwR6e99s4FF?=
- =?us-ascii?Q?uT/bMFSbdpSD+/6GL3BQXkupNMyqZi80/uVMIkUIobFywhDOPNbKFxYKRc2M?=
- =?us-ascii?Q?rGpvdRwF2xre7oVHbyJ/STDKICG9oho2tojuuWgacE57ipmoprtPiTry4kV6?=
- =?us-ascii?Q?jHwoeQukEHm2eQ8VejPDrFO7WwwtDPqm+suxHHSzNGhDY/PeE307k+UxP/Mz?=
- =?us-ascii?Q?Bw1RbgQ454JMSwL7kUtYlIOavMxuGxNZz2pgEwlG?=
-X-OriginatorOrg: witekio.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b2e7520e-b6fe-48b2-32ef-08dd19c1a4f4
-X-MS-Exchange-CrossTenant-AuthSource: PR3P192MB0714.EURP192.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Dec 2024 08:56:05.0416
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 317e086a-301a-49af-9ea4-48a1c458b903
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7+bKezHCbIMkCCGFOWiKnz7W0K4QbzTtsnlwVuh3eKEknBEOPIVKoMNqWq2w3AhzNeV5R8XEUR/41WI2+wNeQA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAP192MB0988
+References: <20241204045407.2978-1-schonm@gmail.com> <CA+chaQdXHkju6U1355phTU64K6MMR+DrwBbXjyGTsiH+w-j=+A@mail.gmail.com>
+ <34fde8bf-eeee-4900-b5ee-24849eebce9e@windriver.com> <CA+chaQc-T7-i6Ju9qiyaQVeR6a9gkonmyAXB4M3dVf1WiuRsFA@mail.gmail.com>
+In-Reply-To: <CA+chaQc-T7-i6Ju9qiyaQVeR6a9gkonmyAXB4M3dVf1WiuRsFA@mail.gmail.com>
+From: "J. S." <schonm@gmail.com>
+Date: Wed, 11 Dec 2024 05:18:20 -0500
+Message-ID: <CABTo8gA3Y=fPX2K1sYFxtMxtUrExvKcHxY2D0VfsR71=V835=g@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] nodejs: upgrade 22.11.0 -> 22.12.0
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: Changqing Li <changqing.li@windriver.com>, openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 11 Dec 2024 08:56:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114275
+ <openembedded-devel@lists.openembedded.org>; Wed, 11 Dec 2024 10:18:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114277
 
-From: Fabrice Aeschbacher <fabrice.aeschbacher@siemens.com>
+If it is easier to send a patch to revert to nodejs 22.11.0 I wouldn't oppo=
+se.
 
-- Solves CVE-2024-8376
-- removed 1571.patch and 2894.patch, already applied in v2.0.19
-
-https://github.com/eclipse/mosquitto/blob/v2.0.19/ChangeLog.txt
-
-Signed-off-by: Fabrice Aeschbacher <fabrice.aeschbacher@siemens.com>
-Reviewed-by: Peter Marko <peter.marko@siemens.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Bruno VERNAY <bruno.vernay@se.com>
-Signed-off-by: Hugo SIMELIERE <hsimeliere.opensource@witekio.com>
----
- .../mosquitto/files/1571.patch                | 22 ----------------
- .../mosquitto/files/2894.patch                | 25 -------------------
- ...osquitto_2.0.18.bb =3D> mosquitto_2.0.19.bb} |  4 +--
- 3 files changed, 1 insertion(+), 50 deletions(-)
- delete mode 100644 meta-networking/recipes-connectivity/mosquitto/files/15=
-71.patch
- delete mode 100644 meta-networking/recipes-connectivity/mosquitto/files/28=
-94.patch
- rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.18.bb=
- =3D> mosquitto_2.0.19.bb} (95%)
-
-diff --git a/meta-networking/recipes-connectivity/mosquitto/files/1571.patc=
-h b/meta-networking/recipes-connectivity/mosquitto/files/1571.patch
-deleted file mode 100644
-index 627638ec8..000000000
---- a/meta-networking/recipes-connectivity/mosquitto/files/1571.patch
-+++ /dev/null
-@@ -1,22 +0,0 @@
--Upstream-Status: Submitted [https://github.com/eclipse/mosquitto/pull/1571=
-]
--From 3fe5468f1bdca1bff1d18cf43c9e338f41aa9e32 Mon Sep 17 00:00:00 2001
--From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
--Date: Wed, 22 Jan 2020 12:39:49 +0100
--Subject: [PATCH] Add dynamic symbols linking with cmake too
--
--Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-----
-- lib/CMakeLists.txt | 2 ++
-- 1 file changed, 2 insertions(+)
--
----- a/lib/CMakeLists.txt
--+++ b/lib/CMakeLists.txt
--@@ -94,6 +94,8 @@
-- 	OUTPUT_NAME mosquitto
-- 	VERSION ${VERSION}
-- 	SOVERSION 1
--+	LINK_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/linker.version
--+	LINK_FLAGS "-Wl,--version-script=3D${CMAKE_CURRENT_SOURCE_DIR}/linker.ve=
-rsion"
-- )
--=20
-- install(TARGETS libmosquitto
-diff --git a/meta-networking/recipes-connectivity/mosquitto/files/2894.patc=
-h b/meta-networking/recipes-connectivity/mosquitto/files/2894.patch
-deleted file mode 100644
-index 7374cbd26..000000000
---- a/meta-networking/recipes-connectivity/mosquitto/files/2894.patch
-+++ /dev/null
-@@ -1,25 +0,0 @@
--From: Joachim Zobel <jz-2017@heute-morgen.de>
--Date: Wed, 13 Sep 2023 09:55:34 +0200
--Subject: [PATCH] Link correctly with shared websockets library if needed s=
-ee:
-- https://github.com/eclipse/mosquitto/pull/2751
--
--Patch contributed by Joachim Zobel <jz-2017@heute-morgen.de> and  Daniel E=
-ngberg <daniel.engberg.lists@pyret.net>
-----
--Upstream-Status: Pending
--
-- src/CMakeLists.txt | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
--index 9380a04..dce8313 100644
----- a/src/CMakeLists.txt
--+++ b/src/CMakeLists.txt
--@@ -200,7 +200,7 @@ if (WITH_WEBSOCKETS)
-- 			link_directories(${mosquitto_SOURCE_DIR})
-- 		endif (WIN32)
-- 	else (STATIC_WEBSOCKETS)
---		set (MOSQ_LIBS ${MOSQ_LIBS} websockets)
--+		set (MOSQ_LIBS ${MOSQ_LIBS} websockets_shared)
-- 	endif (STATIC_WEBSOCKETS)
-- endif (WITH_WEBSOCKETS)
--=20
-diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.1=
-8.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.19.bb
-similarity index 95%
-rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.18=
-.bb
-rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.19.b=
-b
-index ea9eb4857..c6ce2e095 100644
---- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.18.bb
-+++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.19.bb
-@@ -16,12 +16,10 @@ DEPENDS =3D "uthash cjson"
-=20
- SRC_URI =3D "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
-            file://mosquitto.init \
--           file://1571.patch \
--           file://2894.patch \
-            file://2895.patch \
- "
-=20
--SRC_URI[sha256sum] =3D "d665fe7d0032881b1371a47f34169ee4edab67903b2cd2b4c0=
-83822823f4448a"
-+SRC_URI[sha256sum] =3D "33af3637f119a61c509c01d2f8f6cc3d8be76f49e850132f28=
-60af142abf82a9"
-=20
- inherit systemd update-rc.d useradd cmake pkgconfig
-=20
---=20
-2.43.0
-
+On Wed, Dec 11, 2024 at 3:05=E2=80=AFAM Martin Jansa <martin.jansa@gmail.co=
+m> wrote:
+>
+> On Wed, Dec 11, 2024 at 4:49=E2=80=AFAM Changqing Li <changqing.li@windri=
+ver.com> wrote:
+> >
+> >
+> > On 12/7/24 22:08, Martin Jansa wrote:
+> >
+> > CAUTION: This email comes from a non Wind River email account!
+> > Do not click links or open attachments unless you recognize the sender =
+and know the content is safe.
+> >
+> > This seems to reintroduce io_uring support in embedded libuv from:
+> > https://github.com/nodejs/node/pull/55114/files
+> >
+> > I cannot reproduce this issue since I cannot even compile nodejs succes=
+sfully,
+> >
+> > poky master qemux86-64,  do_compile failed with error:
+> >
+> > g++: error: unrecognized command line option =E2=80=98-std=3Dgnu++20=E2=
+=80=99; did you mean =E2=80=98-std=3Dgnu++2a=E2=80=99?
+> >
+> > which leads to the same issues as previous nodejs upgrade in:
+> > https://lists.openembedded.org/g/openembedded-devel/message/105583
+> > https://git.openembedded.org/meta-openembedded/commit/?id=3Dd08453978c3=
+1ee41d28206c6ff198d7d9d701d88
+> > https://git.openembedded.org/meta-openembedded/commit/?id=3D0d9351e9290=
+f6750e44ab52536bbe9268d5afac3
+> > https://git.openembedded.org/meta-openembedded/commit/?id=3D7bb28628991=
+ec9be9610540401f7c6cc4c19997f
+> >
+> > pseudo still doesn't support io_uring:
+> > https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D15244
+> >
+> > calling chown in hundreds recipes to work around pseudo limitation
+> > doesn't seem good work around.
+> >
+> > The UV_USE_IO_URING variable still exists in code (even after its
+> > documentation was removed in:
+> > https://github.com/louwers/node/commit/2b298e132d2f681270e9f3d5eb313491=
+4653d2e1
+> >
+> > I think the problem reproduces since io_uring support is enabled again =
+by default in above commit, which is in 22.12.0.
+> >
+> > for now, UV_USE_IO_URING should still work, we can use export UV_USE_IO=
+_URING=3D0 to disable io_uring, but as the doc
+> >
+> > said maybe UV_USE_IO_URING will be removed in the future version. so an=
+other option is to add a patch to disable io_uring like
+>
+> Yes, unfortunately UV_USE_IO_URING doesn't avoid this issue.
+>
+> The old minimal reproducer I was using before (com.webos.app.minimal)
+> doesn't trigger this now, only some other similar apps. I'm trying to
+> find out which exact call triggers this (as it might be faster to
+> figure out than bisecting nodejs).
+>
+> > this: https://git.openembedded.org/meta-openembedded/diff/meta-oe/recip=
+es-devtools/nodejs/nodejs/0001-deps-disable-io_uring-support-in-libuv.patch=
+?id=3D0d9351e9290f6750e44ab52536bbe9268d5afac3
+> >
+> > ) but it doesn't seem to work.
+> >
+> > It's failing because the
+> > 0001-deps-disable-io_uring-support-in-libuv.patch patch restored in:
+> > https://git.openembedded.org/meta-openembedded/diff/meta-oe/recipes-dev=
+tools/nodejs/nodejs/0001-deps-disable-io_uring-support-in-libuv.patch?id=3D=
+6652b031d7d4d9cabf16d481f3b82115f7d8e15a
+> > is wrong (it adds
+> > meta-oe/recipes-devtools/nodejs/nodejs/0001-deps-disable-io_uring-suppo=
+rt-in-libuv.patch
+> > inside nodejs source instead of patching deps/uv/src/unix/linux.c).
+> >
+> > Yes,  this patch is added wrongly.
+>
+> Should I send a patch to just remove it (as it didn't do anything
+> useful in this form) or wait a bit more until we have a complete fix?
+>
+> >
+> > //Changqing
+> >
+> > I've restored the patch properly in:
+> > https://lists.openembedded.org/g/openembedded-devel/message/114222
+> > but it still isn't enough and recipes fail in do_package or
+> > do_package_qa (depending on UID used on host).
+> > Reverting to 22.11.0 avoids the issue. Anyone else seeing this?
+> >
+> > +Changqing Li
+> >
+> >
+> >
+> > On Wed, Dec 4, 2024 at 5:54=E2=80=AFAM J. S. via lists.openembedded.org
+> > <schonm=3Dgmail.com@lists.openembedded.org> wrote:
+> >
+> > License-Update: Add JSON parsing library under MIT license.
+> >   https://github.com/nodejs/node/pull/56040/commits/27bcd103e775e00eb8d=
+03ac37052bbd4ccb6d239
+> >
+> > Drop backported patch fix-build-with-icu-76.patch.  It is already
+> > integrated in this version https://github.com/nodejs/node/pull/56040/co=
+mmits/c3ca978d9c73d1a96f4d5c7bfa3c10ce786b8fe9
+> >
+> > Changelog: https://github.com/nodejs/node/blob/main/doc/changelogs/CHAN=
+GELOG_V22.md#22.12.0
+> >
+> > Signed-off-by: Jason Schonberg <schonm@gmail.com>
+> > ---
+> >  .../oe-npm-cache                              |  0
+> >  ....11.bb =3D> nodejs-oe-cache-native_22.12.bb} |  0
+> >  .../nodejs/nodejs/fix-build-with-icu-76.patch | 29 -------------------
+> >  .../{nodejs_22.11.0.bb =3D> nodejs_22.12.0.bb}  |  5 ++--
+> >  4 files changed, 2 insertions(+), 32 deletions(-)
+> >  rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-22.11 =3D> nod=
+ejs-oe-cache-22.12}/oe-npm-cache (100%)
+> >  rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_22.11.b=
+b =3D> nodejs-oe-cache-native_22.12.bb} (100%)
+> >  delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/fix-build-wi=
+th-icu-76.patch
+> >  rename meta-oe/recipes-devtools/nodejs/{nodejs_22.11.0.bb =3D> nodejs_=
+22.12.0.bb} (97%)
+> >
+> > diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.11/oe-n=
+pm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.12/oe-npm-cac=
+he
+> > similarity index 100%
+> > rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.11/oe-np=
+m-cache
+> > rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.12/oe-npm-=
+cache
+> > diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.=
+11.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.12.bb
+> > similarity index 100%
+> > rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.1=
+1.bb
+> > rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.12.=
+bb
+> > diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/fix-build-with-icu-=
+76.patch b/meta-oe/recipes-devtools/nodejs/nodejs/fix-build-with-icu-76.pat=
+ch
+> > deleted file mode 100644
+> > index e8501bcdb..000000000
+> > --- a/meta-oe/recipes-devtools/nodejs/nodejs/fix-build-with-icu-76.patc=
+h
+> > +++ /dev/null
+> > @@ -1,29 +0,0 @@
+> > -From 54299ac3a3d4e4520b8604dce43c2584092ccde2 Mon Sep 17 00:00:00 2001
+> > -From: Michael Cho <michael@michaelcho.dev>
+> > -Date: Sun, 27 Oct 2024 10:08:07 -0400
+> > -Subject: [PATCH] build: fix building with system icu 76
+> > -
+> > -ICU 76 decided to reduce overlinking[^1] thus `icu-i18n` will no longe=
+r
+> > -add `icu-uc` when linking to shared libraries. This results in undefin=
+ed
+> > -symbols/references when trying to build with system ICU 76.
+> > -
+> > -[^1]: unicode-org/icu@199bc82
+> > -
+> > -Upstream-Status: Backport [https://github.com/nodejs/node/commit/81517=
+faceac86497b3c8717837f491aa29a5e0f9]
+> > ----
+> > - configure.py | 2 +-
+> > - 1 file changed, 1 insertion(+), 1 deletion(-)
+> > -
+> > -diff --git a/configure.py b/configure.py
+> > -index a5f47af1748903..a4e210261e2e76 100755
+> > ---- a/configure.py
+> > -+++ b/configure.py
+> > -@@ -1879,7 +1879,7 @@ def icu_download(path):
+> > -   elif with_intl =3D=3D 'system-icu':
+> > -     # ICU from pkg-config.
+> > -     o['variables']['v8_enable_i18n_support'] =3D 1
+> > --    pkgicu =3D pkg_config('icu-i18n')
+> > -+    pkgicu =3D pkg_config(['icu-i18n', 'icu-uc'])
+> > -     if not pkgicu[0]:
+> > -       error('''Could not load pkg-config data for "icu-i18n".
+> > -        See above errors or the README.md.''')
+> > diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.11.0.bb b/meta-o=
+e/recipes-devtools/nodejs/nodejs_22.12.0.bb
+> > similarity index 97%
+> > rename from meta-oe/recipes-devtools/nodejs/nodejs_22.11.0.bb
+> > rename to meta-oe/recipes-devtools/nodejs/nodejs_22.12.0.bb
+> > index 8cbf53978..194df4c33 100644
+> > --- a/meta-oe/recipes-devtools/nodejs/nodejs_22.11.0.bb
+> > +++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.12.0.bb
+> > @@ -1,7 +1,7 @@
+> >  DESCRIPTION =3D "nodeJS Evented I/O for V8 JavaScript"
+> >  HOMEPAGE =3D "http://nodejs.org"
+> >  LICENSE =3D "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & =
+Apache-2.0"
+> > -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D25e89142a2f4b075904a9986c45=
+fbdb2"
+> > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D0bd28a461eccad39f85a29e33e8=
+f879f"
+> >
+> >  CVE_PRODUCT =3D "nodejs node.js"
+> >
+> > @@ -28,7 +28,6 @@ SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV=
+}.tar.xz \
+> >             file://0001-deps-disable-io_uring-support-in-libuv.patch \
+> >             file://0001-positional-args.patch \
+> >             file://0001-custom-env.patch \
+> > -           file://fix-build-with-icu-76.patch \
+> >             file://run-ptest \
+> >             "
+> >  SRC_URI:append:class-target =3D " \
+> > @@ -37,7 +36,7 @@ SRC_URI:append:class-target =3D " \
+> >  SRC_URI:append:toolchain-clang:powerpc64le =3D " \
+> >             file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch =
+\
+> >             "
+> > -SRC_URI[sha256sum] =3D "bbf0297761d53aefda9d7855c57c7d2c272b83a7b5bad4=
+fea9cb29006d8e1d35"
+> > +SRC_URI[sha256sum] =3D "fe1bc4be004dc12721ea2cb671b08a21de01c6976960ef=
+8a1248798589679e16"
+> >
+> >  S =3D "${WORKDIR}/node-v${PV}"
+> >
+> > --
+> > 2.43.0
+> >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#114193): https://lists.openembedded.org/g/openembed=
+ded-devel/message/114193
+> > Mute This Topic: https://lists.openembedded.org/mt/109914816/3617156
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[martin.jansa@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
 
