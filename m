@@ -1,167 +1,113 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <marc.ferland@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86A01E7717F
-	for <webhook@archiver.kernel.org>; Thu, 12 Dec 2024 18:52:00 +0000 (UTC)
-Received: from mta-65-226.siemens.flowmailer.net (mta-65-226.siemens.flowmailer.net [185.136.65.226])
- by mx.groups.io with SMTP id smtpd.web10.591.1734029512263376966
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E7B1E7717F
+	for <webhook@archiver.kernel.org>; Thu, 12 Dec 2024 19:40:58 +0000 (UTC)
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+ by mx.groups.io with SMTP id smtpd.web11.47.1734032455067061460
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Dec 2024 10:51:52 -0800
+ Thu, 12 Dec 2024 11:40:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=bNuAptxG;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.226, mailfrom: fm-256628-202412121851491cad5bef71aeebaefd-qjxth8@rts-flowmailer.siemens.com)
-Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id 202412121851491cad5bef71aeebaefd
-        for <openembedded-devel@lists.openembedded.org>;
-        Thu, 12 Dec 2024 19:51:49 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=vGwJGb4kXApAnEc6c8rb3nboAJMnhbM8U3MdAQ+5QLQ=;
- b=bNuAptxG0+d4qwCKi3mPuApbMVHAZePHxa1/uxRHR9cuGzm/AlswotKYpe65U4BI13Fu4P
- N/Gp4M+sK7ruosGb2fHPdwsSEjpwplp9VWaE1X7IjtUpU1PAnRgTkdFd/wJuCf2Xyr8stWzJ
- 7RhrKE9sSAewCS7MdBKPI6l+15bXWYqpS3UB8mLc6ySjyVRPJpyVWEhRLdThOR2b4+4vszSQ
- dHNUxLWxo0pOhMUf8nSJx7c1gqD+/ec8wmUWxA51dsQfWc1BBoW/Gs8hkeurEtb91Gl0BpL/
- 3T5wHN8VyzJq9ZsFqGFY5R2ENQ6I741E6JppRbfu06DxyS6GaLN6L5hg==;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fxV0PTra;
+ spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: marc.ferland@gmail.com)
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4361815b96cso7181095e9.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Dec 2024 11:40:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1734032453; x=1734637253; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Gj96IO2Lc5C1pEdbruEQOfuchEMWIer5n9PjJEnMrxM=;
+        b=fxV0PTraUHm2E9Pbp7UOLGb1p0IxQiLAgNfsmM0q54idH3CqFTr79tKMbo1JanY9AG
+         +SDmgDlxgJAh74cwbu2ByXtRHlj3fxJy5Ytc+SFQqkYjIO7dA+jmlHjPdHiISDtYg2Zn
+         g+9TS0GYP0ELfPiINUb2/kPzpwisFAlDNRSuLh35Xv2HRkVDKWCN/tpkYymBRR5IQK4h
+         WQaIEsM/mnbi85I2tQYsPX+LmlwfaL8GAaYuTxvk1GmAuc52U2aK3/SNLxbfkuzolsnQ
+         ThVGHMJ6FZvtWr6/aP5Hsz2c5qclkUxRapmsCFjMpcW8l6BDqgSlUtvbkH+jQjvOTVf1
+         GGBQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1734032453; x=1734637253;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Gj96IO2Lc5C1pEdbruEQOfuchEMWIer5n9PjJEnMrxM=;
+        b=IcD/LDnBfV7Dof5GkjhnKNaKzFs+Go1phtqwdLeyaL0DUZ2qmZgPNRZZzzhZjGEaxn
+         f5BAqqjL6gkvYhRQPVdc4ZvY+9VfzHLZeOLxKHfSQlf0cR0D45qTLSKBaMSi3IFRnfi6
+         9cLb0OV/7etFhtBGygNWwJVT2wVSumhptl0CC8bSBmeEKZiyFNHvGfibsa/STXDpTWIa
+         XNroUYT1thnXZgX32pesgb1PmOzyLolBbgSTakSEKoMLkyngbfZfXqpSTgr9Xd/K7PJC
+         fjfeMUrLbb/UKXU/+5ArjNnVq7R5QPTmRKg0y84dblV5Gjd5rAhpIdpNbS+shJRKhT0l
+         9aQQ==
+X-Gm-Message-State: AOJu0YzffL+QxQTardAKZfLR6h9mF/pd4M15CSVj8nD1AcPUhuEDWw5P
+	hzLCpA4FNwZeKXYau5EViNLpCYsUfSXPah2cjAdcxR2fVpIO5GtqwezQAg==
+X-Gm-Gg: ASbGncvHcIGQ0cCoGst+CoOq4cwTJQ6i2h0bA3PPyVuUwB3tGlKKQj78da2qikhw6ur
+	B+rfl3JoGdoAifOR/urlvAQThsoq6Xc2puKmINGjHhE8jhkQE8VDzRjsyE190wupJUcQOtcfIQt
+	ZqxXJcieoIuIzkwmZxA1TMZ7LJWHbXd+xggkmkgXZAEmsbXo5yTc8Xp2KGlyvjFDBv0E4dJnR4z
+	3vMbQdOGjuR6anOwE2atNowiFXhxIgXrd+3Xs3NIJGk2tHJxEGInyCNE+v+Hrf5JJ/3iuFPBqcE
+	X8IggM9NvyqoMr9YTesviic5YbucXe1hB+foTOkCZMUMZnqy6uqJAMb2qX8Y2BwSHZD6UdzNxZJ
+	0x9Aq
+X-Google-Smtp-Source: AGHT+IHFCMjhDZ8RMmU1ohVW1OrsmQOIi3Vl1wl3S6GQYQG7EeY/KW8ZYYzn24S38SuF1ETko7n3yw==
+X-Received: by 2002:a05:600c:5101:b0:434:a1d3:a331 with SMTP id 5b1f17b1804b1-4361c3e2350mr58140425e9.22.1734032452587;
+        Thu, 12 Dec 2024 11:40:52 -0800 (PST)
+Received: from mfe-desktop.Sonatest.net (ipagstaticip-d73c7528-4de5-0861-800b-03d8b15e3869.sdsl.bell.ca. [174.94.156.236])
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4362571765dsm25788735e9.39.2024.12.12.11.40.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 12 Dec 2024 11:40:52 -0800 (PST)
+From: marc.ferland@gmail.com
+X-Google-Original-From: marc.ferland@sonatest.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Peter Marko <peter.marko@siemens.com>
-Subject: [meta-networking][scarthgap][PATCH 2/2] ndisc6: Fix reproducible build
-Date: Thu, 12 Dec 2024 19:50:40 +0100
-Message-Id: <20241212185040.2244548-3-peter.marko@siemens.com>
-In-Reply-To: <20241212185040.2244548-1-peter.marko@siemens.com>
-References: <20241212185040.2244548-1-peter.marko@siemens.com>
+Cc: Marc Ferland <marc.ferland@sonatest.com>
+Subject: [meta-oe][PATCH 1/3] upower: use archive file in SRC_URI and fix UPSTREAM_CHECK_URI
+Date: Thu, 12 Dec 2024 14:40:44 -0500
+Message-Id: <20241212194046.874645-1-marc.ferland@sonatest.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 12 Dec 2024 18:52:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114294
+ <openembedded-devel@lists.openembedded.org>; Thu, 12 Dec 2024 19:40:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114295
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Marc Ferland <marc.ferland@sonatest.com>
 
-includes the CFLAGS used to build the package in
-the binary via PACKAGE_CONFIGURE_INVOCATION which then includes the
-absolute build path via (eg.) the -ffile-prefix-map flag.
+upower releases are available as tar.bz2 archives let's use them
+instead off cloning the whole repo.
 
-Here we remove using variables like PACKAGE_CONFIGURE_INVOCATION in code
+Also, fix the UPSTREAM_CHECK regex that changed after revision
+0.99.13. The format went from:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+    UPOWER_0_99_13
+
+to
+
+    v0.99.14
+
+Signed-off-by: Marc Ferland <marc.ferland@sonatest.com>
 ---
- ...riables-indicating-buildtime-informa.patch | 85 +++++++++++++++++++
- .../recipes-support/ndisc6/ndisc6_1.0.8.bb    |  1 +
- 2 files changed, 86 insertions(+)
- create mode 100644 meta-networking/recipes-support/ndisc6/ndisc6/0001-Remove-use-of-variables-indicating-buildtime-informa.patch
+ meta-oe/recipes-support/upower/upower_0.99.17.bb | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/meta-networking/recipes-support/ndisc6/ndisc6/0001-Remove-use-of-variables-indicating-buildtime-informa.patch b/meta-networking/recipes-support/ndisc6/ndisc6/0001-Remove-use-of-variables-indicating-buildtime-informa.patch
-new file mode 100644
-index 000000000..7bfb17bf0
---- /dev/null
-+++ b/meta-networking/recipes-support/ndisc6/ndisc6/0001-Remove-use-of-variables-indicating-buildtime-informa.patch
-@@ -0,0 +1,85 @@
-+From 7b3e78cf0348ea737609a2ace07c7c55aae36bcb Mon Sep 17 00:00:00 2001
-+From: Santiago Vila <sanvila@debian.org>
-+Date: Wed, 9 Oct 2024 22:05:09 -0700
-+Subject: [PATCH] Remove use of variables indicating buildtime information
-+
-+We should not really care about the build date or the build host
-+
-+Sourced From: https://salsa.debian.org/debian/ndisc6/-/blob/master/debian/patches/reproducible-build.patch?ref_type=heads
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ rdnss/rdnssd.c   | 2 --
-+ src/addrinfo.c   | 2 --
-+ src/ndisc.c      | 2 --
-+ src/tcpspray.c   | 2 --
-+ src/traceroute.c | 2 --
-+ 5 files changed, 10 deletions(-)
-+
-+diff --git a/rdnss/rdnssd.c b/rdnss/rdnssd.c
-+index b87edb2..7201525 100644
-+--- a/rdnss/rdnssd.c
-++++ b/rdnss/rdnssd.c
-+@@ -741,8 +741,6 @@ version (void)
-+ {
-+ 	printf (_("rdnssd: IPv6 Recursive DNS Server discovery Daemon %s (%s)\n"),
-+ 	        VERSION, "$Rev$");
-+-	printf (_(" built %s on %s\n"), __DATE__, PACKAGE_BUILD_HOSTNAME);
-+-	printf (_("Configured with: %s\n"), PACKAGE_CONFIGURE_INVOCATION);
-+ 	puts (_("Written by Pierre Ynard and Remi Denis-Courmont\n"));
-+ 
-+ 	printf (_("Copyright (C) %u-%u Pierre Ynard, Remi Denis-Courmont\n"),
-+diff --git a/src/addrinfo.c b/src/addrinfo.c
-+index cd73722..6316abd 100644
-+--- a/src/addrinfo.c
-++++ b/src/addrinfo.c
-+@@ -148,8 +148,6 @@ static int quick_usage (const char *path)
-+ static int version (void)
-+ {
-+         printf (_("addrinfo %s (%s)\n"), VERSION, "$Rev$");
-+-	printf (_(" built %s on %s\n"), __DATE__, PACKAGE_BUILD_HOSTNAME);
-+-        printf (_("Configured with: %s\n"), PACKAGE_CONFIGURE_INVOCATION);
-+         puts (_("Written by Remi Denis-Courmont\n"));
-+ 
-+         printf (_("Copyright (C) %u-%u Remi Denis-Courmont\n"), 2002, 2007);
-+diff --git a/src/ndisc.c b/src/ndisc.c
-+index b190b18..6e222a0 100644
-+--- a/src/ndisc.c
-++++ b/src/ndisc.c
-+@@ -920,9 +920,7 @@ version (void)
-+ {
-+ 	printf (_(
-+ "ndisc6: IPv6 Neighbor/Router Discovery userland tool %s (%s)\n"), VERSION, "$Rev$");
-+-	printf (_(" built %s on %s\n"), __DATE__, PACKAGE_BUILD_HOSTNAME);
-+ 
-+-	printf (_("Configured with: %s\n"), PACKAGE_CONFIGURE_INVOCATION);
-+ 	puts (_("Written by Remi Denis-Courmont\n"));
-+ 
-+ 	printf (_("Copyright (C) %u-%u Remi Denis-Courmont\n"), 2004, 2007);
-+diff --git a/src/tcpspray.c b/src/tcpspray.c
-+index 39d8939..6347795 100644
-+--- a/src/tcpspray.c
-++++ b/src/tcpspray.c
-+@@ -302,8 +302,6 @@ version (void)
-+ {
-+ 	printf (_(
-+ "tcpspray6: TCP/IP bandwidth tester %s (%s)\n"), VERSION, "$Rev$");
-+-	printf (_(" built %s on %s\n"), __DATE__, PACKAGE_BUILD_HOSTNAME);
-+-	printf (_("Configured with: %s\n"), PACKAGE_CONFIGURE_INVOCATION);
-+ 	puts (_("Written by Remi Denis-Courmont\n"));
-+ 
-+ 	printf (_("Copyright (C) %u-%u Remi Denis-Courmont\n"), 2005, 2007);
-+diff --git a/src/traceroute.c b/src/traceroute.c
-+index 489bc55..604b6af 100644
-+--- a/src/traceroute.c
-++++ b/src/traceroute.c
-+@@ -1251,8 +1251,6 @@ version (void)
-+ {
-+ 	printf (_(
-+ "traceroute6: TCP & UDP IPv6 traceroute tool %s (%s)\n"), VERSION, "$Rev$");
-+-	printf (_(" built %s on %s\n"), __DATE__, PACKAGE_BUILD_HOSTNAME);
-+-	printf (_("Configured with: %s\n"), PACKAGE_CONFIGURE_INVOCATION);
-+ 	puts (_("Written by Remi Denis-Courmont\n"));
-+ 
-+ 	printf (_("Copyright (C) %u-%u Remi Denis-Courmont\n"), 2005, 2007);
-diff --git a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb
-index fb00b8351..21579d64c 100644
---- a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb
-+++ b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb
-@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- SRCREV = "92e5d1cf6547fe40316b2a6ca2f7b8195ae0cbe5"
- SRC_URI = "git://git.remlab.net/git/ndisc6.git;protocol=http;branch=master \
-            file://0001-autogen-Do-not-symlink-gettext.h-from-build-host.patch \
-+           file://0001-Remove-use-of-variables-indicating-buildtime-informa.patch \
-            "
+diff --git a/meta-oe/recipes-support/upower/upower_0.99.17.bb b/meta-oe/recipes-support/upower/upower_0.99.17.bb
+index 0572cc801..5e2f04f31 100644
+--- a/meta-oe/recipes-support/upower/upower_0.99.17.bb
++++ b/meta-oe/recipes-support/upower/upower_0.99.17.bb
+@@ -11,11 +11,12 @@ DEPENDS = " \
+     dbus-glib \
+ "
  
- S = "${WORKDIR}/git"
+-SRC_URI = "git://gitlab.freedesktop.org/upower/upower.git;protocol=https;branch=master"
+-SRCREV = "c889154ec8e3e2239db9260d48b2e198d72ba002"
+-S = "${WORKDIR}/git"
++SRC_URI = "https://gitlab.freedesktop.org/${BPN}/${BPN}/-/archive/v${PV}/${BPN}-v${PV}.tar.bz2"
++SRC_URI[sha256sum] = "de7177deb2ee23d9c505046c74a856564acab8fd1d39aa1541d123af5a99ca8d"
++S = "${WORKDIR}/${BPN}-v${PV}"
+ 
+-UPSTREAM_CHECK_GITTAGREGEX = "UPOWER_(?P<pver>\d+(\_\d+)+)"
++UPSTREAM_CHECK_URI = "https://gitlab.freedesktop.org/${BPN}/${BPN}/-/tags"
++UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+)"
+ 
+ GIR_MESON_ENABLE_FLAG = "enabled"
+ GIR_MESON_DISABLE_FLAG = "disabled"
 -- 
-2.30.2
+2.34.1
 
 
