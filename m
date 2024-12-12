@@ -1,111 +1,125 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 43FBCE7717F
-	for <webhook@archiver.kernel.org>; Thu, 12 Dec 2024 20:13:38 +0000 (UTC)
-Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com [209.85.210.53])
- by mx.groups.io with SMTP id smtpd.web10.745.1734034416795190641
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68F2EE7717F
+	for <webhook@archiver.kernel.org>; Thu, 12 Dec 2024 20:37:58 +0000 (UTC)
+Received: from mail-oa1-f47.google.com (mail-oa1-f47.google.com [209.85.160.47])
+ by mx.groups.io with SMTP id smtpd.web10.1246.1734035868881660669
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Dec 2024 12:13:36 -0800
+ Thu, 12 Dec 2024 12:37:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LkqkuwoB;
- spf=pass (domain: gmail.com, ip: 209.85.210.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f53.google.com with SMTP id 46e09a7af769-71e0351311eso232030a34.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Dec 2024 12:13:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1734034416; x=1734639216; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=u9zwjwR/jAipErx3kOgxnRbs27yBTKdGoODLLZcTnLk=;
-        b=LkqkuwoBrIZXe9mt+2FpZA45T82ZBQJSd61Clb9kbGwbyrO3HSs6T5ReJY7Qr9lU54
-         ETxB2mBC7r0eeDu24k4xGpaCC9bfDRgVQQ+YspShCJ/vO9K3uxIs3Ar6hQLJdSNQsBUq
-         2Dibe8cz+XEmsolKwxG5za3vzDzapYmt9xajIDC9xmcFOKRwSG/BOH0T9JQzjBvcGj9c
-         99HjM+YrDYbUHjPpAxfHB2HnLWl3Vu54GyETpRNCbonaw7DjTna6UZ5n4bNNOfPz4r/r
-         Nl5An+4I+0UOwmzo+nwIqyuAho6sMojNnK6IphQAboY+q+RHU2+fOfYsMJNtkfp2Z2Xr
-         cWaA==
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.160.47, mailfrom: straka.derek@gmail.com)
+Received: by mail-oa1-f47.google.com with SMTP id 586e51a60fabf-27d0e994ae3so424407fac.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Dec 2024 12:37:48 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734034416; x=1734639216;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=u9zwjwR/jAipErx3kOgxnRbs27yBTKdGoODLLZcTnLk=;
-        b=kQ5+ZHaXiDC08mtwpx2loaEGWBjpOqY7YDGwTALkZfhXt6Y0rZ/vdetT/5EGFGf2FX
-         LEkiTDSESfSP7D8VAaCErW5tbMX9i5bq5JhdIBoTAld5IzNrGzwlXw1aQYzZ9RW4reTw
-         TZVu0qbetvj1n/0wTHBGsjt+liHxD0sRc1Nzf+0e43uC4VUdXxCp+fbQ+1aA2zBFxYmk
-         oEmfhg0KgYUV1KfIABmicjBx/8aPg8YZ1WChtRKZ2K34Y2Ee0q9RhN0SnvumWsdrdMXf
-         WB3doW6cXUyrGoRsqPRsAYwaIqT0C0KpxPKIf9AYF4cJGj3CaYTn3Cf94aovDjifiaht
-         VHZQ==
-X-Gm-Message-State: AOJu0YyqPQOb2E26Gz4FK0Hf4tk90LnOf4tQIL18SordpRSQfYghT7UA
-	JP6syAvDfr+oC2QGdp4tpQaWg3rh3Z7HMmqJYneqZpOwB5YprG4vrFCywgX9Gu2QjYCZCRmwtPl
-	8KNTxK9PMYknqEQYeZtqdtlVsyS+sUQ+0
-X-Gm-Gg: ASbGnctmxVbq03FQTS3CZuMS1cO2P5VX5u7Ql3bOFkUUtitAFC/FOkET62cyi05cwpF
-	m67TSU4kDaJji/MU1sr8AbZowbgKf3sQzH4r9
-X-Google-Smtp-Source: AGHT+IHe8QY2mNbX+QVf8Po32qt9iIjNAGmRBibMb0kjRMwGbrV5WhqTvCtM5fuIqJfIm3uJyT4fIOsWEyVvX9mQ/gM=
-X-Received: by 2002:a05:6870:e30f:b0:29e:4c80:422c with SMTP id
- 586e51a60fabf-2a3ac835bd7mr33973fac.34.1734034415999; Thu, 12 Dec 2024
- 12:13:35 -0800 (PST)
+        d=1e100.net; s=20230601; t=1734035868; x=1734640668;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ylJ8sW61+ba03rGMUalWjrYem7V4vH5+bbWNnMyvLz8=;
+        b=F11LKuYYQebshCkH+GrOgnuyQSOlK+/4jhp0cVfSekxQuccub9ZvENRhijaVnI0WXI
+         0lrHHq+a4fjVW/EQBHt7pWeJ/37Y5HHLHTMqhlfVdolzbOGnX3Gai17Nuf8QW1hZbO1J
+         atKvn1/6h1iJq8TU9RgOV644DH5vgSRhi8c3E3tUoCFCe++Gew5K13QCqaeXNGx3VZOQ
+         nutTXeWkmJreKofD4EMvFNlBBW/4ym/eAfvjotChMWVT7/sOtYHLq/wLu2mfMZ7bqxHY
+         F3uXIKm82avSAr9wm4oF8OCDCUVqj2YElH5RdHixeAauemBXQ6CnOG905uq8H69ZbtqI
+         mzBA==
+X-Gm-Message-State: AOJu0YxRsVy8I0UV9og4bQyDR+3CEYzsv4sbwxiGjv+Tdi0lqTwFJx/M
+	C1kkXpoRnBmr4H9FoK0X+zXapjflK4ZA8b/h6HmadWyLloCXDC5jT577uQ==
+X-Gm-Gg: ASbGncvKRBL71h+qW+Wwc/SjN2RnselU2V5Mhabxbt4T5mdlfBTRa05k4Yxh5p7mwYE
+	FeUpdX5bX3DpVpCOS6QEQusmpJPsY+RWON3LkLXoNL5NySQoqJGq+eFWJReLlO5z5qxgzP4gHTT
+	MMspKP+6XClx4yMHmYwlMwIzxkJtS2IyRNmjd3C8AV2ea3ITSPonzoqsWbslJa+aPJPZadgE5+I
+	f8mEY2homeuJhwTCoD8TR3sXgknm4+oYd2dQrBS0r45uxNtJqvpBBK9RvvdS976lkJGBLR4MofW
+	C2aVzPFS45wcT1unkYfLh40sew==
+X-Google-Smtp-Source: AGHT+IGzPQThNLEnoY8sv8LNmw9K1GWlL/hrS/CdsXJvCO5EaQlESdmx7szjriW7LzUTrVYAkm2Bqg==
+X-Received: by 2002:a05:6870:44d2:b0:296:b638:1b1a with SMTP id 586e51a60fabf-2a3acb8c582mr76932fac.42.1734035867703;
+        Thu, 12 Dec 2024 12:37:47 -0800 (PST)
+Received: from alpha.lab.asterius.io (c-24-118-24-24.hsd1.mn.comcast.net. [24.118.24.24])
+        by smtp.gmail.com with ESMTPSA id 006d021491bc7-5f312a72b39sm401514eaf.18.2024.12.12.12.37.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 12 Dec 2024 12:37:46 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Cc: Derek Straka <derek@asterius.io>
+Subject: [oe][meta-python][PATCH] python3-cmake: update to version 3.31.1
+Date: Thu, 12 Dec 2024 20:37:22 +0000
+Message-Id: <20241212203722.3532280-1-derek@asterius.io>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20241209213948.2377-1-mail@michael-fitzmayer.de>
- <CAMKF1sratBWEuCCTzv8zp_EQSdSnrVcDbauWLHH2ijUiMiL5Cw@mail.gmail.com> <000c01db4cd0$1ca84560$55f8d020$@michael-fitzmayer.de>
-In-Reply-To: <000c01db4cd0$1ca84560$55f8d020$@michael-fitzmayer.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 12 Dec 2024 12:13:09 -0800
-Message-ID: <CAMKF1spsr16bepG1kByGR5BPAxhTp_+bmsWtDQiQQYLdihgWoQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] canopenterm: fix number of arguments check
- in API function
-To: mail@michael-fitzmayer.de
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 12 Dec 2024 20:13:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114300
+ <openembedded-devel@lists.openembedded.org>; Thu, 12 Dec 2024 20:37:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114301
 
-On Thu, Dec 12, 2024 at 11:57=E2=80=AFAM Michael Fitzmayer via
-lists.openembedded.org
-<mail=3Dmichael-fitzmayer.de@lists.openembedded.org> wrote:
->
-> The patch is upstream, and I'm actively working on the next version, expe=
-cted in 2-4 weeks. This change is a minor fix for a non-critical bug notice=
-d after I released the last tagged version.
->
-> I will have a look at it. But in hindsight, it would probably make more s=
-ense for me to finish the next release first.
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../python3-cmake/run-cmake-from-path.patch   | 20 +++++++++----------
+ ...make_3.28.3.bb => python3-cmake_3.31.1.bb} |  5 +++--
+ 2 files changed, 13 insertions(+), 12 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cmake_3.28.3.bb => python3-cmake_3.31.1.bb} (84%)
 
-Ok thats fine. I will drop this one for now.
+diff --git a/meta-python/recipes-devtools/python/python3-cmake/run-cmake-from-path.patch b/meta-python/recipes-devtools/python/python3-cmake/run-cmake-from-path.patch
+index d4d2903d5..7b4190a70 100644
+--- a/meta-python/recipes-devtools/python/python3-cmake/run-cmake-from-path.patch
++++ b/meta-python/recipes-devtools/python/python3-cmake/run-cmake-from-path.patch
+@@ -1,13 +1,13 @@
+ Upstream-Status: Pending
+ 
+---- cmake-3.25.2/src/cmake/__init__.py.old	2023-03-10 09:40:43.582315753 +0100
+-+++ cmake-3.25.2/src/cmake/__init__.py	2023-03-10 09:41:38.030874047 +0100
+-@@ -36,7 +36,7 @@
+- 
+- 
+- def _program(name, args):
+--    return subprocess.call([os.path.join(CMAKE_BIN_DIR, name)] + args, close_fds=False)
++--- cmake-3.25.2/src/cmake/__init__.py.old	2024-12-12 20:25:48.207389622 +0000
+++++ cmake-3.25.2/src/cmake/__init__.py	2024-12-12 20:25:48.207389622 +0000
++@@ -44,7 +44,7 @@
++
++
++ def _program(name: str, args: Iterable[str]) -> int:
++-    return subprocess.call([os.path.join(CMAKE_BIN_DIR, name), *args], close_fds=False)
+ +    return subprocess.call([name] + args, close_fds=False)
+- 
+- 
+- def cmake():
++
++ def _program_exit(name: str, *args: str) -> NoReturn:
++     if sys.platform.startswith("win"):
+diff --git a/meta-python/recipes-devtools/python/python3-cmake_3.28.3.bb b/meta-python/recipes-devtools/python/python3-cmake_3.31.1.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-cmake_3.28.3.bb
+rename to meta-python/recipes-devtools/python/python3-cmake_3.31.1.bb
+index a6c3e139b..5e75246ec 100644
+--- a/meta-python/recipes-devtools/python/python3-cmake_3.28.3.bb
++++ b/meta-python/recipes-devtools/python/python3-cmake_3.31.1.bb
+@@ -5,13 +5,13 @@ LIC_FILES_CHKSUM = " \
+ 	file://LICENSE_Apache_20;md5=19cbd64715b51267a47bf3750cc6a8a5 \
+ "
+ 
+-DEPENDS = "ninja-native cmake-native python3-scikit-build-native"
++DEPENDS = "ninja-native cmake-native python3-scikit-build-native python3-scikit-build-core-native"
+ 
+ PYPI_PACKAGE = "cmake"
+ PYPI_ARCHIVE_NAME_PREFIX = "pypi-"
+ 
+ inherit pypi python_setuptools_build_meta
+-SRC_URI[sha256sum] = "a8092815c739da7d6775c26ec30c2645f0fca9527a29e36a682faec7d39cde89"
++SRC_URI[sha256sum] = "45e09ef6fc5a0d3d4cac11bfee43ba3f9925f301660630d3d1e5457fbe12ecdf"
+ 
+ SRC_URI += " \
+ 	file://CMakeLists.txt \
+@@ -32,6 +32,7 @@ do_install:append () {
+ RDEPENDS:${PN} = " \
+ 	cmake \
+ 	python3-scikit-build \
++	python3-scikit-build-core \
+ "
+ 
+ BBCLASSEXTEND = "native nativesdk"
+-- 
+2.34.1
 
->
-> Hopefully, I=E2=80=99ll have understood and integrated Ptest by then.
-
-Even better.
-
->
-> -----Original Message-----
-> From: Khem Raj <raj.khem@gmail.com>
-> Sent: 10 December 2024 22:43
-> To: mail@michael-fitzmayer.de
-> Cc: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH] canopenterm: fix number of arguments c=
-heck in API function
->
-> the patch needs some tags added e.g. Upstream-Status, see https://valkyri=
-e.yoctoproject.org/#/builders/81/builds/199/steps/14/logs/errors
->
->
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#114299): https://lists.openembedded.org/g/openembedde=
-d-devel/message/114299
-> Mute This Topic: https://lists.openembedded.org/mt/110015092/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
