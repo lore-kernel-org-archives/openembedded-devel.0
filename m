@@ -1,109 +1,92 @@
-Return-Path: <marc.ferland@gmail.com>
+Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BBA6E7717F
-	for <webhook@archiver.kernel.org>; Thu, 12 Dec 2024 19:41:08 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web11.51.1734032459280263318
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24D9AE7717F
+	for <webhook@archiver.kernel.org>; Thu, 12 Dec 2024 19:44:18 +0000 (UTC)
+Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com [209.85.160.46])
+ by mx.groups.io with SMTP id smtpd.web11.104.1734032649553793042
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Dec 2024 11:40:59 -0800
+ Thu, 12 Dec 2024 11:44:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=aL9j28LD;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: marc.ferland@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-43624b2d453so12905555e9.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Dec 2024 11:40:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1734032457; x=1734637257; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=/ZBwQVWipFlYY2PL8SsC1ak5uoiPmbOvT9Ed7l2luxM=;
-        b=aL9j28LDMSdHtL3htR+SVf6jc8Kx9T7xPPYugXQGuJK1ynS61YCHdPlyp0Keue+rtl
-         65beMWz7NrlCOnaN6c7Xo327YhHPlD2F3iIuZwkgY2SMM4KAvq/FerzTfNpcCSqGTcFP
-         3BntEbVuwAVLAa2kep+tSa1kOzzF7DrBnVMQ0eeHtWsUZ9xhhe2E6+CvzeXkbbg49inr
-         Wt49ASnIe4fYWyMpdbTGbA/0OtZbPMwQrZ7u34DrvX2kVSdVco3Vb0jaIgK0pLzbzNi7
-         AoTFL/uaFTeXcqGm7nHSDvXqcyxdob3WuwAG5fvW8evrMCoZ2SzHGfr3QQKDknjwiJgN
-         4fNg==
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.160.46, mailfrom: straka.derek@gmail.com)
+Received: by mail-oa1-f46.google.com with SMTP id 586e51a60fabf-29645a83b1bso468178fac.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Dec 2024 11:44:09 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734032457; x=1734637257;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=/ZBwQVWipFlYY2PL8SsC1ak5uoiPmbOvT9Ed7l2luxM=;
-        b=eRuCdmbvJxriCRQeluHlZu1LY0hJ+kSVgEgw/r0MDNbPl1if4MJ3IOpKwjUxe/8yG1
-         mGIKx1+OfFUjeZnPM8qm3XG2LyWmGDJAMvREUPbgojciGo5pPpEhAIVUII/z9JLq95NQ
-         3WQDDqbP88ZMFmpcPcqfY2WARnibHmGfTT3uONFPSYRDyhwL92XU0YX9xDTDt1asl8tg
-         LqcDkmwIHpiudAXCGuSwjUEB/n/P60ZGxsqwrmynLEybLAWTvCzbQWL8r6X5KpgzPQnR
-         cIG0X41S0by9lfqSqEtINIDJf6u8rXUAezZmdo+Fa6//aC2QhYjpoLZb51XQyuKDDOm7
-         rfPA==
-X-Gm-Message-State: AOJu0Yz8aQ8N095eKb+iIDOzq9/OPyCghQ4WfKZD0MChR/NoQsIfTmjQ
-	P4p+iIg1aVaHT5aFKLFfy4OmnBqGYDtYwmxZFBXe7d7wSMtvDcH9WoD06g==
-X-Gm-Gg: ASbGncvdRejLTjT22eF3qxk9T4BgL5GumqsokuIABCqiSTAPyNokwXsScoVs8V5HqMu
-	i30yFY3sHr4XL+raGU7YVFuaR4ebc3AlmbirHvBhkI7Lpbuh6DEFUM8L6YDjpCIuyGrFD7JdnqL
-	7o2YdEtczMDXE1TeQt1uV5ZuU8/TR2GvnbdMXtAT/aRCCvywFKinDZ5VQQzvURd5+2DWJ/S3m/L
-	AApzZ8zBM/OXEmy6Ob3zwxsAgjj9qhKfy9LOjeHVywll6TjNUFv7z6sFJfp1nnieYGgSxazS9O6
-	OrhUjw4UDTomuy34usdnPq8gIL37kEoRpIBWF6TH0rCHB0vjGAXRtRAJsoNQWUsNEkGjMlPZqFF
-	kaQ2S
-X-Google-Smtp-Source: AGHT+IEA5cMMyfBW9+1P2OqKkfGmVIw6I6ybm1yz6EWey1pOPrcXpvb9rGLZGE2+shr2cqTRsCwOfw==
-X-Received: by 2002:a05:600c:1c01:b0:434:f0df:9fd with SMTP id 5b1f17b1804b1-4361c393cb6mr86399885e9.2.1734032456833;
-        Thu, 12 Dec 2024 11:40:56 -0800 (PST)
-Received: from mfe-desktop.Sonatest.net (ipagstaticip-d73c7528-4de5-0861-800b-03d8b15e3869.sdsl.bell.ca. [174.94.156.236])
-        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4362571765dsm25788735e9.39.2024.12.12.11.40.55
+        d=1e100.net; s=20230601; t=1734032648; x=1734637448;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=m0L8Hm6qqZxIaD9RkD2u/OPz5/2rHt7YrGpj5TpvpEA=;
+        b=iinWM/x7pRLRIffV/lxLCvpp7cUQiep1scoYiDN5eerekMKOv61PLjb9XBkyVBM83z
+         NuZRpp/ycAgrXiX3UolFwCC0NS99fRrydiVTZQVTCjrCCEcwSgZ+gUATHjSVgUBBLJue
+         5j4/SM+LWNorDJK1CIhCCYjjwY4dVxqtXuF5sx+uSTI4QVwQiXUVhvAGKa2arkWa9w+K
+         s+OL+/FHfk9mjbDmQM6KsnYHoYx7V5evI6nNp6qr3MYjEVXYuJh3Lt57Wo3fidZDv2Xf
+         bXhIWId0sO0rABEYZ6tfO1irArIJO3nh9140ri7qGYHOe+Ovpe9sVs/1tWQpuyGt7Lz2
+         FhdA==
+X-Gm-Message-State: AOJu0YyvUSNpjcmPg8s/0JnSGOxqMWw1973u4sGTvIVT+ryoYA2deyl+
+	cU6r3nW1XzdlfuAbd//s1by9qQj3FpTniFJzIpMUX0YQef26FWvGx9Ezhw==
+X-Gm-Gg: ASbGncuWmvhLNXv42CjfbhC2eqJXa7oTj0PcoYCKFo1JBq85jHw98XBOnl145ueplhr
+	uaEyrZ8HYH3YVQ9nfUYqZnDAk8HF6aav1ba9sfor1pFwiJp1tAw3lBzisqlR8wSCmU3EwGttJhO
+	fd+CvSFejJsDv8Vl6irWcd3IRSwfMAQlSvlTDk37c0X3lB9Zd0KVzwVJy5a7zoqMsxSWUYVstJz
+	SMb4eUcrDUDlR73GxFVmj9WF2X3j/iisooYQy070PdNjytBkcbK1z3YJUq5TmVHj/NWFPOgpVry
+	VlaIMg0maqjCy72I86xS8vXt/w==
+X-Google-Smtp-Source: AGHT+IGi/kDyCa2F9gnPSPEDmGF1VzJXypOqrikk6YnicZhP7ddd7xaIXC2bOrxuAPo3SzAqtC+iTw==
+X-Received: by 2002:a05:6871:5d0:b0:29e:3eff:dea with SMTP id 586e51a60fabf-2a012bb3bf7mr4533510fac.8.1734032648452;
+        Thu, 12 Dec 2024 11:44:08 -0800 (PST)
+Received: from alpha.lab.asterius.io (c-24-118-24-24.hsd1.mn.comcast.net. [24.118.24.24])
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-29fc16f4664sm2815543fac.37.2024.12.12.11.44.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Dec 2024 11:40:56 -0800 (PST)
-From: marc.ferland@gmail.com
-X-Google-Original-From: marc.ferland@sonatest.com
+        Thu, 12 Dec 2024 11:44:07 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Cc: Marc Ferland <marc.ferland@sonatest.com>
-Subject: [meta-oe][PATCH 3/3] upower: add polkit PACKAGECONFIG option
-Date: Thu, 12 Dec 2024 14:40:46 -0500
-Message-Id: <20241212194046.874645-3-marc.ferland@sonatest.com>
+Cc: Derek Straka <derek@asterius.io>
+Subject: [oe][meta-python][PATCH] python3-luma-oled: update to version 3.14.0
+Date: Thu, 12 Dec 2024 19:43:35 +0000
+Message-Id: <20241212194335.2708667-1-derek@asterius.io>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241212194046.874645-1-marc.ferland@sonatest.com>
-References: <20241212194046.874645-1-marc.ferland@sonatest.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 12 Dec 2024 19:41:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114297
+ <openembedded-devel@lists.openembedded.org>; Thu, 12 Dec 2024 19:44:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114298
 
-From: Marc Ferland <marc.ferland@sonatest.com>
+License-Update: Copyright year updated for 2024
 
-Add a PACKAGECONFIG option for polkit. Activate it when
-DISTRO_FEATURES contains 'polkit'.
-
-Signed-off-by: Marc Ferland <marc.ferland@sonatest.com>
+Remove unneded CLEANBROKEN
 ---
- meta-oe/recipes-support/upower/upower_1.90.6.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ ...n3-luma-oled_3.13.0.bb => python3-luma-oled_3.14.0.bb} | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-luma-oled_3.13.0.bb => python3-luma-oled_3.14.0.bb} (63%)
 
-diff --git a/meta-oe/recipes-support/upower/upower_1.90.6.bb b/meta-oe/recipes-support/upower/upower_1.90.6.bb
-index 2cffdc14f..6d5fa7016 100644
---- a/meta-oe/recipes-support/upower/upower_1.90.6.bb
-+++ b/meta-oe/recipes-support/upower/upower_1.90.6.bb
-@@ -24,9 +24,10 @@ GTKDOC_MESON_OPTION = "gtk-doc"
+diff --git a/meta-python/recipes-devtools/python/python3-luma-oled_3.13.0.bb b/meta-python/recipes-devtools/python/python3-luma-oled_3.14.0.bb
+similarity index 63%
+rename from meta-python/recipes-devtools/python/python3-luma-oled_3.13.0.bb
+rename to meta-python/recipes-devtools/python/python3-luma-oled_3.14.0.bb
+index 74b9be502..a95254c38 100644
+--- a/meta-python/recipes-devtools/python/python3-luma-oled_3.13.0.bb
++++ b/meta-python/recipes-devtools/python/python3-luma-oled_3.14.0.bb
+@@ -4,15 +4,13 @@ A small library to drive an OLED device with either SSD1306 , SSD1309, SSD1322,
+ SSD1325, SSD1327, SSD1331, SSD1351 or SH1106 chipset"
+ HOMEPAGE = "https://github.com/rm-hull/luma.oled"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=5ec447eb69733e20a55838de7e8cb991"
++LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=95cba8b3a40c6f55d5d901980fe6e067"
  
- inherit meson pkgconfig gtk-doc gettext gobject-introspection systemd
+ inherit pypi python_setuptools_build_meta
  
--PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd polkit', d)}"
- PACKAGECONFIG[idevice] = "-Didevice=enabled,-Didevice=disabled,libimobiledevice libplist"
- PACKAGECONFIG[systemd] = "-Dsystemdsystemunitdir=${systemd_system_unitdir},-Dsystemdsystemunitdir=no -Dudevrulesdir=${base_libdir}/udev/rules.d,systemd"
-+PACKAGECONFIG[polkit] = "-Dpolkit=enabled,-Dpolkit=disabled,polkit"
+-SRC_URI[sha256sum] = "7e2a0d6a4c968c64980255d681ec27914d9abd5a66a9019b289bf3ad050c2125"
++SRC_URI[sha256sum] = "36218565eda0614c8cf44ef42cb9a5904ddf808e4516e99ddae111fc93c5a206"
  
- EXTRA_OEMESON = " \
-     -Dos_backend=linux \
-@@ -41,6 +42,7 @@ RDEPENDS:${PN} += "dbus"
- RRECOMMENDS:${PN} += "pm-utils"
- FILES:${PN} += " \
-     ${datadir}/dbus-1/ \
-+    ${datadir}/polkit-1/ \
-     ${base_libdir}/udev/* \
- "
+-CLEANBROKEN = "1"
+-
+-PYPI_PACKAGE = "luma.oled"
++PYPI_PACKAGE = "luma_oled"
  
+ RDEPENDS:${PN} += " \
+ 	python3-luma-core \
 -- 
 2.34.1
 
