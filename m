@@ -2,56 +2,56 @@ Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9724FE7717F
-	for <webhook@archiver.kernel.org>; Thu, 12 Dec 2024 21:20:28 +0000 (UTC)
-Received: from mail-il1-f180.google.com (mail-il1-f180.google.com [209.85.166.180])
- by mx.groups.io with SMTP id smtpd.web11.2028.1734038424035362436
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7253FE77180
+	for <webhook@archiver.kernel.org>; Thu, 12 Dec 2024 21:21:08 +0000 (UTC)
+Received: from mail-oa1-f48.google.com (mail-oa1-f48.google.com [209.85.160.48])
+ by mx.groups.io with SMTP id smtpd.web10.2152.1734038461580991586
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Dec 2024 13:20:24 -0800
+ Thu, 12 Dec 2024 13:21:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.180, mailfrom: straka.derek@gmail.com)
-Received: by mail-il1-f180.google.com with SMTP id e9e14a558f8ab-3a7d7c1b190so3987995ab.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Dec 2024 13:20:23 -0800 (PST)
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.160.48, mailfrom: straka.derek@gmail.com)
+Received: by mail-oa1-f48.google.com with SMTP id 586e51a60fabf-29fb5257e05so369956fac.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Dec 2024 13:21:01 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734038423; x=1734643223;
+        d=1e100.net; s=20230601; t=1734038460; x=1734643260;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
         bh=mS1qKzqnhwYpFzzFMnqBV1BIDNNyjTU4TwVV6/dEeNo=;
-        b=QqLHFLKbHGQTpD0nXiwrvLbJUWmcRAvbwJquXal5JbFwRQujMqr8CqxYZPZ2iO4Wfq
-         NlUMnMI55325NZhjXAhhm9i3ypb3THnmP+t2XPDzSS0gJdMx7qbmxRC2F2nfCwpEgNgB
-         HiVIxLpqDjafnirLvrHHv8OnEvQ+Nt74j0Y24JZoEsEFwnIgPhQl758rh++G4Mszp4te
-         5/Qx4b8gJG7d7d1TWd9gR4+vG6aIXrFwFmq65SxqqSZ6US28xdiAhisuhNv5x1IWlqkA
-         gXE1VudpbzCs6K0SSTEieAhDt19YFFptbMPE2QPGRvizMgYGxkGlY7YQUT51Dgq0O/6Z
-         RMGA==
-X-Gm-Message-State: AOJu0YzAodvaO2va9MAIYHy73G+xj5uBu2n5waJKjMkR8+OMEmNlfwl2
-	JQ/sEo5Yz4XJmoGUfPN4mUf+KCzwgUWYpnKJyqYe07oYf+1oB24eBQrCRw==
-X-Gm-Gg: ASbGncsb3XJ+Ow9fGXEJWdxHomfBVzMZKM/vBzEiI8Sc1S3hH+lMsiQ0oX7vUKbVu5C
-	oXWFa3kelYho/bLZ7a5mclAXscpmo4UzIOavEo0cms1PsMt3+HM1HGesYBekDYxIqpS4JrbRpsc
-	g4/zaH21GVX318m15hmYING7zrO3kaQftLwTZ+BY0oQVcyra4KZCkOrRVkUUfkKRxjMjn9CbXfO
-	S8ypSKjB8Npaj8uPzKlxYjYT7+nzNQuZAalhG6FJoveVn1UkCf0fn2c8pseQLciTxrKHFVUu23f
-	aFwqnj6w2emwpx+GF0YN9Yihag==
-X-Google-Smtp-Source: AGHT+IEP+cxfh9p6gcQdKToFaP9FV0Kxvut+rziUxf6l1qMjSxSsM86dVDQovLINdNNCr/MeLhAMiQ==
-X-Received: by 2002:a05:6e02:2188:b0:3a7:99a5:a207 with SMTP id e9e14a558f8ab-3aff470f565mr4028645ab.5.1734038422925;
-        Thu, 12 Dec 2024 13:20:22 -0800 (PST)
+        b=Nw1JYH/msHKIGvEYmBrLdexkiTKBepkXn4Ys6dySnhdGMXEdjHx7vitt5YnbtJbBaH
+         A4X55s84HSkJPMIBUSpmA4IhT37/lBRCVgJEeKqCsUtpKWWuxuY3IaAdd4JDsky22xNl
+         ogwEQCoLMjLuFmAdaSv/tzN2SrkbNWuVnkYxiOa4uagWQS6LNd1A5Q/SLPNvmcCnBh0q
+         j9pTdN6XUJjQ7C9u8x1hca1+7TpewPayf2j6ZOUI+ALC5QQVeT5UgydoER51Rb89mUCk
+         ZEtCNXgjYX45EfIM8bh90ukpNhkJIG5yKAyaghECzVWxMahTQe5t5u0rpX0l6awP1yax
+         w5vw==
+X-Gm-Message-State: AOJu0Yz/cY0b2/1x2QQKuag+7BMQWkvvNnzoLRmKlxksAsDcyTsyBGA1
+	QWwS4M7seETUyjuVtp7F/W1KYYoBtzBtO/ZJx2Ajj32fXSH2BuBwczM3Vg==
+X-Gm-Gg: ASbGnctz6PfdfB5Cpj6LLPmqGaraCVFai4pofdq0+gh40gQR6aQjzB7Lxmu1RcmP6rJ
+	qqO/wPZrt8N5oW7oUm/0SPrqW3SyDJ4Y5RsRu2eey/Zae4wtfqfZgVoEjVzZyatCSgStJLbRVRI
+	6PPtClYmk8Q/2/IkB/vv0gFZxzHDOS6C7yoRdZ2PTGN/Lv/wx83/KxHg3kEjJJ9F3T//AqfwXKO
+	SN364IUSZC6YYbmKAVmng71rZuAmZvTgUrqoPx6GXRkewOk9gQpIG1zjmULGTzeIm5Yq38mWf6s
+	tVuewIKhTgROeqV58ZcQnHGhWw==
+X-Google-Smtp-Source: AGHT+IG/aLa58JjmklC2MATQ2/QGVPKSjB+8cEZbz6mCnzISy0QerX67jt/UAzwyt3QpPQL01k9kyA==
+X-Received: by 2002:a05:6870:2155:b0:296:c3cf:39ed with SMTP id 586e51a60fabf-2a3ac99f488mr97921fac.38.1734038460439;
+        Thu, 12 Dec 2024 13:21:00 -0800 (PST)
 Received: from alpha.lab.asterius.io (c-24-118-24-24.hsd1.mn.comcast.net. [24.118.24.24])
-        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-4e2bb66b153sm2376537173.137.2024.12.12.13.20.21
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-29f5665c35asm4495836fac.11.2024.12.12.13.20.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Dec 2024 13:20:22 -0800 (PST)
+        Thu, 12 Dec 2024 13:20:59 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH] python-prompt-toolkit: set the value of UPSTREAM_CHECK_PYPI_PACKAGE to enable version checking
-Date: Thu, 12 Dec 2024 21:20:13 +0000
-Message-Id: <20241212212013.3548343-1-derek@asterius.io>
+Subject: [oe][meta-python][PATCHv2] python3-prompt-toolkit: set the value of UPSTREAM_CHECK_PYPI_PACKAGE to enable version checking
+Date: Thu, 12 Dec 2024 21:20:53 +0000
+Message-Id: <20241212212053.3548401-1-derek@asterius.io>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 12 Dec 2024 21:20:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114304
+ <openembedded-devel@lists.openembedded.org>; Thu, 12 Dec 2024 21:21:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114305
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
