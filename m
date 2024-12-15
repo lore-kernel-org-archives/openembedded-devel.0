@@ -2,103 +2,109 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D230E77186
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0CEC8E77184
 	for <webhook@archiver.kernel.org>; Sun, 15 Dec 2024 18:36:24 +0000 (UTC)
-Received: from mail-yb1-f178.google.com (mail-yb1-f178.google.com [209.85.219.178])
- by mx.groups.io with SMTP id smtpd.web10.40713.1734287780214034428
+Received: from mail-yb1-f175.google.com (mail-yb1-f175.google.com [209.85.219.175])
+ by mx.groups.io with SMTP id smtpd.web11.40491.1734287779567104603
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Dec 2024 10:36:20 -0800
+ Sun, 15 Dec 2024 10:36:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=B0TkDN2Z;
- spf=pass (domain: gmail.com, ip: 209.85.219.178, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f178.google.com with SMTP id 3f1490d57ef6-e3978c00a5aso2451151276.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Dec 2024 10:36:20 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=R3c1GVXY;
+ spf=pass (domain: gmail.com, ip: 209.85.219.175, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f175.google.com with SMTP id 3f1490d57ef6-e39f43344c5so2553895276.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Dec 2024 10:36:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1734287779; x=1734892579; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1734287778; x=1734892578; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=8HowMzID34hgb1UCyDHViLl3S26kmtrY5xwfXP9j8EM=;
-        b=B0TkDN2Zpd8C7gSiIEdV1ciHV5kgBW0gTLLOdmQcJ4GY2oL3CJ6HYsGjy5m3LUD0F2
-         hhco3Ul2u6++sgTCFyWNuSKH5luCmd+fCQgy41VvYzhlqzDq2+sykmyvPp3ObVFSJT1m
-         fzbXs9x9A2W9SkJntKAp7aPqjDXhOPe1n6oSc9eBFuXfyaxuM4d1HITqwUuLcRIusKU5
-         jQTuPiY1vvoZL3VtA5+3t3CLOUoTe6iCyB9JErj6kLjUXBNBu415JPwR76Skb97/neT6
-         cRTnmOwl+A78FyPf44pBwgvLSAe1/Cka3C50xzYQCGhWjapFOW4PkGRlgQIB0MTs2Mrb
-         tZIQ==
+        bh=U8R45s8KbkWJz5OEFqTsKoyxHltpyTDYf8JrtumXCjs=;
+        b=R3c1GVXYIKSnp8w7MCAePRP/3p8vSa/5PBU3gWRdPwvFz8DKU+HqoGu98YkI6XEJlj
+         Cn+JhUI1PwFzzpoRD+HxI3umr1nHPc2sSSBDRaAdoqX+0eRCBP1Q9YdPqra6ixtvwceH
+         8lmzzxFEiwXTHEC3a1eKCT2MIOH+dgeR+9Hib8SY3Jwcktud95ZeBEh0oMS0jyjny2P4
+         qSKyywwP5l3dJobtmAzL/Fu6F4ASlfG/V4VcMovTu/mT8RdnPCIZwaTDoOXeLq+vnOr+
+         8vtYii9rh/nnKm55ouWo2CAZ0Exv9Q4Voe6yhUAPwk0vaUKg0u6IbdvFnRzno2waVAiI
+         sl4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734287779; x=1734892579;
+        d=1e100.net; s=20230601; t=1734287778; x=1734892578;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=8HowMzID34hgb1UCyDHViLl3S26kmtrY5xwfXP9j8EM=;
-        b=M/5G41d0aNmxyfgvW+W2/yFQylnNlBHkECBEnZfu4+Oz1M8vNlEbh5MFJlQusiRDsZ
-         rJRUcdFY5dMNKUJeP36xRzao0kyxdV7kx496y91e/0rVwiHzPSJnFaUjl+Z7YKJVBIer
-         0nN7IGBptMHnrrO6r2b+Wwvvq/bcwFC5SYemu7PAG6jcAkA5NEL+/vfFwE8W8H5OGak6
-         w7qbLGTBX6bG3SlLD0YE14LGan2cS+McXMAFHp0Bh8I+zLs5GF/v8yw+KEJVjQxG+CF2
-         1AhBt+E5cJoqayEwezLeMWkFXmi5kxtY53Vg++aD6ZoGsrwTEliPIUly29zLKwmb/LYx
-         Lz0g==
-X-Gm-Message-State: AOJu0Yxvw1RZa9MTUjlogP6+nbpWzwnw1dywEnBt829tc+BT1zHeaTYp
-	mF7cN84rIIelg2hX1w6puLdMaLwpW3K5XWTh86u5V0nCDnOpsvYdGKBM3VaL
-X-Gm-Gg: ASbGnctPmfJPUPlw5kKsIyQzT8wHHNu0nQjXE45HHxGNW6vVzYMjK69N+sClbEeVdYM
-	XpyRJpPzulkvkXfqNY1C2fNGA77eAiQLeOVlo3AuOIb7K+3uLcsWx4sw7m03+vEUwgmAfxgMkuG
-	oh+vWJLaW13RYbo8NExAdRJAebyqG6YkmtR+twUYnHC6hTDWc6zJf+2Gmjdd1K3ITXWJxPdhd+3
-	DRNOu42Qh1cjNcqWHfQ78P43zQ7024M9aIWAOrIvcahas2Qll2Bt8kb9OCt72ZLHhfxWw==
-X-Google-Smtp-Source: AGHT+IG8ornReQ5Vw7m5XPmGdF8JqsxFxWLtzauGQDHE+6SA7/8R579gHggnn1PZT5XBg/eb5I3UnA==
-X-Received: by 2002:a05:6902:70b:b0:e38:87bf:8e61 with SMTP id 3f1490d57ef6-e434f83f44bmr7731143276.27.1734287779292;
-        Sun, 15 Dec 2024 10:36:19 -0800 (PST)
+        bh=U8R45s8KbkWJz5OEFqTsKoyxHltpyTDYf8JrtumXCjs=;
+        b=NLhbNJbbI/XKM+3btwy0x3LBxWneDLxkP+FNbB0H1G5vw9JDJMiLV7CBgjMP4kj6QW
+         m2pk79T2wsxZV1Sjwm2aQoVDc3rzv/SriBxVt1dJPS3vWVr9d+pE1JRvEjtNtPsMLj6I
+         hSdpcCpiXxiSpUt+wfs+jOEgnSjpkX2Dnm7O+xkAEymACJ4jCurRCV7XubedO8BC4+7v
+         wgZMcJFrC/mtpUkidYM+Ep9FOtU4Tesk9uK46BpRW3q+Rz2rGfiMQGx5RgSYYtupSDor
+         M/D9jvztncmoQ3Sh8svMYKTyEccH5/6MZMPMXVIm3nwCdOxketvVD5J7d6oH14j9EW0h
+         l0qg==
+X-Gm-Message-State: AOJu0YxoqYyO73zUy95bbxz3ISUJbPHbXBxHK4eXkezZH5Wc9J4pemqZ
+	r6BwYaE3PY+vo33SFYkFPrK5YrAAtKPsKPBNarSRg7TZvdqpbjsHTzz6+g4s
+X-Gm-Gg: ASbGncsShaMMm80bIYMB5s+tTR81Wv19VBDMVgKf4P3Nb/avgQqEk1Lqs2nqYRyjwS8
+	D3vCecimdaCfq+YCLTzyrPdIJVLrTfBHVWgXEEfYjrpmzIIgGbm76WbSMO+idIPre+/QFg+edQE
+	0BlcBGkMU9aTDb39BqPMvpKdb7RYH0Yk0sMu3ys07KDxzTM6ejjEQiTcaTp69MDy/G0qlrOdj8/
+	ReRjP77gFlsGadzQ6BWDhzbR637/t8+pBaffcRnJKcGWrDgK9s2aLEevEcihApbaPcJJg==
+X-Google-Smtp-Source: AGHT+IET7cbv7a8vZM7vZXHBt74nOcaNilz8fihUogAbskHMKgv0vzRLir0f1Sjog+Ppwy/sdWq0xQ==
+X-Received: by 2002:a05:6902:2511:b0:e4a:7154:9249 with SMTP id 3f1490d57ef6-e4a71731bbamr2364638276.38.1734287778620;
+        Sun, 15 Dec 2024 10:36:18 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:45dd:7000:a906:ba5:bc1d:da36])
         by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e47035366easm985356276.18.2024.12.15.10.36.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sun, 15 Dec 2024 10:36:18 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Ghislain=20Mang=C3=A9?= <ghislain.mange@smile.fr>,
-	Yoann Congal <yoann.congal@smile.fr>,
+Cc: Peter Marko <peter.marko@siemens.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][styhead][PATCH 4/5] wireshark: use inherit_defer for conditional cases
-Date: Sun, 15 Dec 2024 13:36:15 -0500
-Message-ID: <20241215183616.7218-4-akuster808@gmail.com>
+Subject: [meta-oe][styhead][PATCH 3/5] proftpd: set status of CVE-2001-0027
+Date: Sun, 15 Dec 2024 13:36:14 -0500
+Message-ID: <20241215183616.7218-3-akuster808@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241215183616.7218-1-akuster808@gmail.com>
 References: <20241215183616.7218-1-akuster808@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 15 Dec 2024 18:36:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114320
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114319
 
-From: Ghislain Mangé <ghislain.mange@smile.fr>
+From: Peter Marko <peter.marko@siemens.com>
 
-Conditionnal inherit may be missed when PACKAGECONFIG qt5 is activated
-after this inherit, eg in .bbappend. see patch [0]
+This ancient CVE [1] is unversioned ("*") in NVD DB.
+"mod_sqlpw module in ProFTPD does not reset a cached password..."
 
-[0]: https://lists.openembedded.org/g/bitbake-devel/message/16815
+Looking at history and changelog, the module was removed [2] around
+the time when this CVE was published, likely as reaction to this CVE.
+"mod_sqlpw.c, mod_mysql.c and mod_pgsql.c have been REMOVED from the
+distribution. They are currently unmaintained and have numerous bugs."
 
-Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
-Signed-off-by: Ghislain Mangé <ghislain.mange@smile.fr>
+Note: It was later re-introduced as mod_sql when it got fixed under
+new maintainer.
+
+[1] https://nvd.nist.gov/vuln/detail/CVE-2001-0027
+[2] https://github.com/proftpd/proftpd/blob/v1.3.8b/NEWS#L3362
+
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 97318e27ebf9f528acf77fb0759c332bd83adb4b)
+(cherry picked from commit 03a1b56bc7ce88a3b0ad6790606b0498899cc1e3)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-daemons/proftpd/proftpd_1.3.8b.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb b/meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb
-index 3fa293d0cd..9c93fd026c 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb
-@@ -48,7 +48,7 @@ PACKAGECONFIG[nghttp2] = "-DENABLE_NGHTTP2=ON,-DENABLE_NGHTTP2=OFF, nghttp2"
- # these next two options require addional layers
- PACKAGECONFIG[qt5] = "-DENABLE_QT5=ON -DBUILD_wireshark=ON, -DENABLE_QT5=OFF -DBUILD_wireshark=OFF, qttools-native qtmultimedia qtsvg"
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.8b.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.8b.bb
+index 33480bff2c..ce31c8a475 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.8b.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.8b.bb
+@@ -21,6 +21,8 @@ S = "${WORKDIR}/git"
  
--inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
-+inherit_defer ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
+ inherit autotools-brokensep useradd update-rc.d systemd multilib_script
  
- EXTRA_OECMAKE += "-DENABLE_NETLINK=ON \
-                   -DBUILD_mmdbresolve=OFF \
++CVE_STATUS[CVE-2001-0027] = "fixed-version: version 1.2.0rc3 removed affected module"
++
+ EXTRA_OECONF += "--enable-largefile INSTALL=install"
+ 
+ PACKAGECONFIG ??= "shadow \
 -- 
 2.43.0
 
