@@ -1,142 +1,76 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BB860E77180
-	for <webhook@archiver.kernel.org>; Sat, 14 Dec 2024 18:02:35 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web11.22097.1734199350048527644
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C0123E7716A
+	for <webhook@archiver.kernel.org>; Sun, 15 Dec 2024 10:30:31 +0000 (UTC)
+Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
+ by mx.groups.io with SMTP id smtpd.web10.33858.1734258627109169033
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Dec 2024 10:02:30 -0800
+ Sun, 15 Dec 2024 02:30:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=IV7/IJh/;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-725f3594965so2099193b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Dec 2024 10:02:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1734199349; x=1734804149; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=mpVkL6VbY8dr9uTEhCVPUpTZblX5K5Y8wBARAANzcAo=;
-        b=IV7/IJh/OeZpw+h8+/jzrA5nlMBya84uIRh0pwh5mLoKW1RVv8LaZ5KDzrJiJ6RAoO
-         oRwqgL2GJtXAM1TzfEWmPCeTxoqXrKQjxFHw56YKTOzpv/sMdM9onKd7Bi+xmrmPs7IF
-         V3mrkU3l2s2v6iAa8m6dwAqOrac15Eqo0MIF/zILEZpI45K4azwLvN71BNL68EfF7Z3q
-         VHwT368kpgQxkA7EoQ9vZmGbPRbuTGlsABQ+hk+R7l19YrPn2S/5rQcrd7KYp/RxvsdK
-         ToQrW/jlVH9LYANjIQhnZNKATWSuYnDvfw0w+wDf8hWKR146nFqelIrjAwPzgVbJSs4d
-         J6Rg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734199349; x=1734804149;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=mpVkL6VbY8dr9uTEhCVPUpTZblX5K5Y8wBARAANzcAo=;
-        b=CsEfAYz9LAYFkY80oWayoFWICIqRdTn08w/FVUAp6IGZlML+smhy882+/NS1pgeo+f
-         9pG7sD28XR+Nws9LCMihAvZZxKK2kWP5JLdgAC9DRDHEkMgaXhJlQZmgV4BpCUIzIOpm
-         54BaVx+vSG3WB95P85zTUsD1N3eTcwHFtaSsr31GE9UtMXUTj07JpLOkA/rkJ7zgU67T
-         Dg7xZx8rwvSPF+IDpjFZui/42Iu4RYheMzSt4J0+AnDjBU5R+/F5+/SBJ+4VL/LWvQ9e
-         RERuzgOGGaqjfEZAqT+asT2ZglWt4BnNyN4SxOMlx1Mzmy7G2o4jcCIPhHCX/+UEzWzR
-         c1ig==
-X-Gm-Message-State: AOJu0Yz9qnrnnSVmw39NuzrV0i9Mry12ZXfDymMI6XLfABSrpov1SrpR
-	P9HI4n6C2dbpYIRooidwDCPGvPNZnqdw2bDNdmd7ZsGaxsIi3LwwAlngh33d
-X-Gm-Gg: ASbGncsYxe9TQE0V/hhsuhX2dFZLjElL91f3r91qDzi3lk/dARIk44R8R5POPecfNIp
-	oPbr4k+sn6NGkNopLNw6SZRXd1yUND7cj/RobN5jve7Hs8k6GVy0Ld05YjV63fgvtTyBXKSEpeM
-	AlXuo66LtwlFFrj+f569GofJOwRA+just/bGvITPyq5UCsWJXzM2KSNMZGDayEHm/nkaq3XChDf
-	wl4xxvKJ0v1UWi+hYtc4NuEVNTjui7twF2hjCUbZLWH2BlN
-X-Google-Smtp-Source: AGHT+IHhwQ8P67yAS680sh9vrHo1ka93ytq9aejkj1q2R+lFFz7c4LWWP1Pvm0C68kT72TXDszBoJg==
-X-Received: by 2002:a05:6a00:4fd2:b0:724:5815:62c1 with SMTP id d2e1a72fcca58-7290c24d06cmr10367485b3a.19.1734199349144;
-        Sat, 14 Dec 2024 10:02:29 -0800 (PST)
-Received: from apollo.localdomain ([2601:646:8201:fd20::86b6])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-72918ac51b5sm1686095b3a.8.2024.12.14.10.02.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Dec 2024 10:02:28 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
+Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
+	by mailout12.t-online.de (Postfix) with SMTP id 1EA9165D
+	for <openembedded-devel@lists.openembedded.org>; Sun, 15 Dec 2024 11:30:24 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.40.43]) by fwd74.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1tMltH-2sVDNJ0; Sun, 15 Dec 2024 11:30:23 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] kernel-module-emlog: Fix build with kernel 6.12+
-Date: Sat, 14 Dec 2024 10:02:26 -0800
-Message-ID: <20241214180226.1218440-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] iwd: update 3.0 -> 3.2
+Date: Sun, 15 Dec 2024 11:30:26 +0100
+Message-ID: <20241215103026.1423873-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1734258623-02FFA99A-91644A34/0/0 CLEAN NORMAL
+X-TOI-MSGID: 28700f38-fd58-4c7a-a5e9-2a31f7c720f3
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 14 Dec 2024 18:02:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114315
+ <openembedded-devel@lists.openembedded.org>; Sun, 15 Dec 2024 10:30:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114316
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ver 3.2:
+	Fix issue with GCC 15 and -std=3Dc23 build errors.
+	Add support for using PMKSA over SAE if available.
+	Add support for HighUtilization/StationCount thresholds.
+	Add support for disabling Multicast RX option.
+
+ver 3.1:
+	Fix issue with handling OWE transition BSS selection.
+	Fix issue with handling oper class 136 starting frequency.
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-core/emlog/emlog.inc          |  1 +
- ...move-modules_clean-from-clean-target.patch |  0
- ...not-use-no_llseek-with-kernel-6.12.0.patch | 32 +++++++++++++++++++
- .../Drop-use-of-error-h.patch                 |  0
- .../emlog/{emlog => files}/emlog.initd        |  0
- 5 files changed, 33 insertions(+)
- rename meta-oe/recipes-core/emlog/{emlog => files}/0001-Remove-modules_clean-from-clean-target.patch (100%)
- create mode 100644 meta-oe/recipes-core/emlog/files/0001-emlog-Do-not-use-no_llseek-with-kernel-6.12.0.patch
- rename meta-oe/recipes-core/emlog/{emlog => files}/Drop-use-of-error-h.patch (100%)
- rename meta-oe/recipes-core/emlog/{emlog => files}/emlog.initd (100%)
+ meta-oe/recipes-connectivity/iwd/{iwd_3.0.bb =3D> iwd_3.2.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-connectivity/iwd/{iwd_3.0.bb =3D> iwd_3.2.bb} (94=
+%)
 
-diff --git a/meta-oe/recipes-core/emlog/emlog.inc b/meta-oe/recipes-core/emlog/emlog.inc
-index 631e52f388..5e96b8b3bd 100644
---- a/meta-oe/recipes-core/emlog/emlog.inc
-+++ b/meta-oe/recipes-core/emlog/emlog.inc
-@@ -4,6 +4,7 @@ LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
- SRC_URI = "git://github.com/nicupavel/emlog.git;protocol=https;branch=master"
-+SRC_URI += "file://0001-emlog-Do-not-use-no_llseek-with-kernel-6.12.0.patch"
- SRCREV = "a9bbf324fde131ff4cf064e32674086c4ced4dca"
- PV = "0.70+git"
- S = "${WORKDIR}/git"
-diff --git a/meta-oe/recipes-core/emlog/emlog/0001-Remove-modules_clean-from-clean-target.patch b/meta-oe/recipes-core/emlog/files/0001-Remove-modules_clean-from-clean-target.patch
-similarity index 100%
-rename from meta-oe/recipes-core/emlog/emlog/0001-Remove-modules_clean-from-clean-target.patch
-rename to meta-oe/recipes-core/emlog/files/0001-Remove-modules_clean-from-clean-target.patch
-diff --git a/meta-oe/recipes-core/emlog/files/0001-emlog-Do-not-use-no_llseek-with-kernel-6.12.0.patch b/meta-oe/recipes-core/emlog/files/0001-emlog-Do-not-use-no_llseek-with-kernel-6.12.0.patch
-new file mode 100644
-index 0000000000..86f719b0bb
---- /dev/null
-+++ b/meta-oe/recipes-core/emlog/files/0001-emlog-Do-not-use-no_llseek-with-kernel-6.12.0.patch
-@@ -0,0 +1,32 @@
-+From dca01ea62833249d78ac3bdf277b73424bf93e89 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 14 Dec 2024 09:55:10 -0800
-+Subject: [PATCH] emlog: Do not use no_llseek with kernel 6.12.0+
-+
-+no_llseek is finally gone with 6.12-rc1 [1]
-+
-+[1] https://github.com/torvalds/linux/commit/cb787f4ac0c2e439ea8d7e6387b925f74576bdf8
-+
-+Upstream-Status: Submitted [https://github.com/nicupavel/emlog/pull/16]
-+---
-+ emlog.c | 7 ++++++-
-+ 1 file changed, 6 insertions(+), 1 deletion(-)
-+
-+diff --git a/emlog.c b/emlog.c
-+index 2ead738..b45c72d 100644
-+--- a/emlog.c
-++++ b/emlog.c
-+@@ -464,7 +464,12 @@ static const struct file_operations emlog_fops = {
-+     .open = emlog_open,
-+     .release = emlog_release,
-+     .poll = emlog_poll,
-+-    .llseek = no_llseek,        /* no_llseek by default introduced at v2.6.37-rc1 */
-++#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 12, 0)
-++    /* no_llseek by default introduced at v2.6.37-rc1 and
-++     * removed in 6.12.0
-++     */
-++    .llseek = no_llseek,
-++#endif
-+     .owner = THIS_MODULE,
-+ };
-+ 
-diff --git a/meta-oe/recipes-core/emlog/emlog/Drop-use-of-error-h.patch b/meta-oe/recipes-core/emlog/files/Drop-use-of-error-h.patch
-similarity index 100%
-rename from meta-oe/recipes-core/emlog/emlog/Drop-use-of-error-h.patch
-rename to meta-oe/recipes-core/emlog/files/Drop-use-of-error-h.patch
-diff --git a/meta-oe/recipes-core/emlog/emlog/emlog.initd b/meta-oe/recipes-core/emlog/files/emlog.initd
-similarity index 100%
-rename from meta-oe/recipes-core/emlog/emlog/emlog.initd
-rename to meta-oe/recipes-core/emlog/files/emlog.initd
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd_3.0.bb b/meta-oe/recipe=
+s-connectivity/iwd/iwd_3.2.bb
+similarity index 94%
+rename from meta-oe/recipes-connectivity/iwd/iwd_3.0.bb
+rename to meta-oe/recipes-connectivity/iwd/iwd_3.2.bb
+index a1293d6dca..e5d838d25f 100644
+--- a/meta-oe/recipes-connectivity/iwd/iwd_3.0.bb
++++ b/meta-oe/recipes-connectivity/iwd/iwd_3.2.bb
+@@ -8,7 +8,7 @@ DEPENDS =3D "dbus"
+ SRC_URI =3D "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar=
+.xz \
+            file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-fo=
+r-e.patch \
+            "
+-SRC_URI[sha256sum] =3D "bd167ab368b6ba302b6c948a4f41f02d233a12e20d5094b1=
+c0393325309f8a60"
++SRC_URI[sha256sum] =3D "21f5a8e29a41ff301045f36eed97a4e540262adfdc003db8=
+47fe0c7dce874e15"
+=20
+ inherit autotools manpages pkgconfig python3native systemd
+=20
+--=20
+2.47.1
+
 
