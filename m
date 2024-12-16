@@ -1,112 +1,93 @@
-Return-Path: <kai.kang@windriver.com>
+Return-Path: <miroslav.nagy@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EDF1BE77183
-	for <webhook@archiver.kernel.org>; Mon, 16 Dec 2024 10:36:28 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.53417.1734345385468533595
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C794E7717F
+	for <webhook@archiver.kernel.org>; Mon, 16 Dec 2024 11:44:39 +0000 (UTC)
+Received: from mta-65-228.siemens.flowmailer.net (mta-65-228.siemens.flowmailer.net [185.136.65.228])
+ by mx.groups.io with SMTP id smtpd.web10.54800.1734349471060975720
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Dec 2024 02:36:25 -0800
+ Mon, 16 Dec 2024 03:44:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=2080fd93a2=kai.kang@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BG9IiU7012899
-	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Dec 2024 02:36:25 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 43h6681jxs-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Dec 2024 02:36:25 -0800 (PST)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Mon, 16 Dec 2024 02:36:24 -0800
-Received: from pek-lpg-core4.wrs.com (128.224.153.44) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Mon, 16 Dec 2024 02:36:23 -0800
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-xfce][PATCH 2/5] libxfce4util: 4.19.3 -> 4.20.0
-Date: Mon, 16 Dec 2024 18:36:15 +0800
-Message-ID: <20241216103618.4078816-2-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241216103618.4078816-1-kai.kang@windriver.com>
-References: <20241216103618.4078816-1-kai.kang@windriver.com>
+ dkim=pass header.i=miroslav.nagy@siemens.com header.s=fm2 header.b=czu2C9cx;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.228, mailfrom: fm-1328341-202412161144279e031c6eb2adac2c51-l1fjws@rts-flowmailer.siemens.com)
+Received: by mta-65-228.siemens.flowmailer.net with ESMTPSA id 202412161144279e031c6eb2adac2c51
+        for <openembedded-devel@lists.openembedded.org>;
+        Mon, 16 Dec 2024 12:44:28 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
+ d=siemens.com; i=miroslav.nagy@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=Caey4q+FZj2TmyPrJN6J37xp5jpo8tdkwiujPzs5Njk=;
+ b=czu2C9cxsCXCBPJV87H38dGLXtc0bbOwehN6qBpp1CYLA7bIe4BTMzWBdUzHlylPBI1ShZ
+ Knio+ssMOjNqTI8IHThsNUX5uc0Tn98xRkVHA/Cxos3tkpE5V8P5t6fJfWa/3RK8thJzGzng
+ R7viJ7vgyk/Z+t0yA3TSVysTdDh92zSwC9O6wTadpjDGRlQbtFDqB+cfjQTRV8Y+9723ev3a
+ gFBfSRMVVt9tGDN3x2kXswpCI6mcSGkmPszBtANrIOnBtpPJDUJWYBWRM/9Sb/Pg/XPGBUJV
+ dZrqtSmLUVRLy4pX5LNJIzzziKQHpuDgBxFnCe1qE7A3YFU3qkr/jzVg==;
+From: "miroslav.nagy" <miroslav.nagy@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: "miroslav.nagy" <miroslav.nagy@siemens.com>,
+	Peter Marko <peter.marko@siemens.com>
+Subject: [meta-oe][PATCH] 7-zip: add new recipe
+Date: Mon, 16 Dec 2024 12:43:49 +0100
+Message-Id: <20241216114349.125642-1-miroslav.nagy@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: 9D7dzBsp3TZjtq9R08hBLVqpgk2G9Dia
-X-Authority-Analysis: v=2.4 cv=K5XYHzWI c=1 sm=1 tr=0 ts=676002a9 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=RZcAm9yDv7YA:10 a=t7CeM3EgAAAA:8 a=lWhOIMQbgaqtsgal_LMA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: 9D7dzBsp3TZjtq9R08hBLVqpgk2G9Dia
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2024-12-16_04,2024-12-13_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- lowpriorityscore=0 phishscore=0 adultscore=0 clxscore=1011 malwarescore=0
- spamscore=0 mlxscore=0 mlxlogscore=898 impostorscore=0 bulkscore=0
- suspectscore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
- engine=8.21.0-2411120000 definitions=main-2412160089
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-1328341:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 16 Dec 2024 10:36:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114327
+ <openembedded-devel@lists.openembedded.org>; Mon, 16 Dec 2024 11:44:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114331
 
-From: Kai Kang <kai.kang@windriver.com>
+From: Miroslav Nagy <miroslav.nagy@siemens.com>
 
-Change log:
+This recipe should eventually replace p7zip recipe.
+p7zip is very old and not updated with unfixed security vulnerabilities.
+Using real upstream package should solve this.
 
-4.20.0 (2024-12-15)
-======
-- Translation Updates:
-  Polish
-4.19.5 (2024-12-01)
-======
-- Bump Xfce overall version to 4.20pre2
-- I18n: Update po/LINGUAS list
-- Call xfce_kiosk's parent finalizer to prevent leaks
-- Translation Updates:
-  Amharic, Telugu
-4.19.4 (2024-11-01)
-======
-- bump Xfce overall version to 4.20pre1
-- Remove local ABI check
-- Add meson build
-- Migrate to xdt-gen-visibility and xdt-check-abi
-- I18n: Update po/LINGUAS list
-- build: Bump requirements for Xfce 4.20
-- Apply .clang-format file
-- Add missing includes of libxfce4util-alias.h
-- clang-format: Add file
-- xfce-rc: Fix support for the LANGUAGE environment variable
-- scan-build: Add false positive file
-- build: Use AM_DISTCHECK_CONFIGURE_FLAGS
-- session-management: Try to create D-BUS proxy synchronously
-- session-management: Always set an error when returning FALSE
-- fileutils: Fix MD5 hash in xfce_create_shared_thumbnail_path()
-- Translation Updates:
-  Asturian, Greek, Hungarian, Lithuanian, Persian (Iran)
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Miroslav Nagy <miroslav.nagy@siemens.com>
+Reviewed-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../{libxfce4util_4.19.3.bb => libxfce4util_4.20.0.bb}          | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-xfce/libxfce4util/{libxfce4util_4.19.3.bb => libxfce4util_4.20.0.bb} (75%)
+ meta-oe/recipes-extended/7-zip/7-zip_24.09.bb | 28 +++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/7-zip/7-zip_24.09.bb
 
-diff --git a/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.19.3.bb b/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.20.0.bb
-similarity index 75%
-rename from meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.19.3.bb
-rename to meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.20.0.bb
-index 364384d9f..0b8356e0a 100644
---- a/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.19.3.bb
-+++ b/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.20.0.bb
-@@ -6,4 +6,4 @@ DEPENDS = "intltool-native xfce4-dev-tools-native glib-2.0"
- 
- inherit xfce gtk-doc gobject-introspection vala
- 
--SRC_URI[sha256sum] = "f047937f753466b7ff74ad3809c817b11db44498dd90497de7e1584ee48502c6"
-+SRC_URI[sha256sum] = "21493f9c9995a282823db93839f6b9f06ae31edb094191ba9acf04d932a2b592"
+diff --git a/meta-oe/recipes-extended/7-zip/7-zip_24.09.bb b/meta-oe/recipes-extended/7-zip/7-zip_24.09.bb
+new file mode 100644
+index 000000000..6e8d0ba77
+--- /dev/null
++++ b/meta-oe/recipes-extended/7-zip/7-zip_24.09.bb
+@@ -0,0 +1,28 @@
++SUMMARY = "7-Zip is a file archiver with a high compression ratio."
++HOMEPAGE = "https://www.7-zip.org"
++LICENSE = "LGPL-2.1-or-later & BSD-3-Clause & unRAR"
++LIC_FILES_CHKSUM = "file://DOC/copying.txt;md5=b0d181292c99cf9bb2ae9166dd3a0239 \
++                    file://DOC/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de \
++                    file://DOC/License.txt;md5=8bfe22e0285a3043b61ea408d234c55d"
++CVE_PRODUCT = "7-zip 7zip"
++
++PV_WITHOUT_DOT = "${@d.getVar('PV').replace('.', '')}"
++
++SRC_URI = "https://www.7-zip.org/a/7z${PV_WITHOUT_DOT}-src.tar.xz;subdir=${BP}"
++SRC_URI[sha256sum] = "49c05169f49572c1128453579af1632a952409ced028259381dac30726b6133a"
++
++B = "${WORKDIR}/build"
++
++EXTRA_OEMAKE += 'LDFLAGS="${LDFLAGS}" LFLAGS_STRIP="" O="${B}"'
++
++do_compile() {
++    cd ${S}/CPP/7zip/Bundles/Alone2
++    oe_runmake --file makefile.gcc
++}
++
++do_install() {
++    install -d ${D}${bindir}
++    install -m 0755 ${B}/7zz ${D}${bindir}/7zz
++}
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
-2.34.1
+2.39.5
 
 
