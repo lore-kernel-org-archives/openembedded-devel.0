@@ -1,93 +1,58 @@
-Return-Path: <miroslav.nagy@siemens.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C794E7717F
-	for <webhook@archiver.kernel.org>; Mon, 16 Dec 2024 11:44:39 +0000 (UTC)
-Received: from mta-65-228.siemens.flowmailer.net (mta-65-228.siemens.flowmailer.net [185.136.65.228])
- by mx.groups.io with SMTP id smtpd.web10.54800.1734349471060975720
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D578E7717F
+	for <webhook@archiver.kernel.org>; Mon, 16 Dec 2024 12:15:49 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web11.55109.1734351341331899914
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Dec 2024 03:44:31 -0800
+ Mon, 16 Dec 2024 04:15:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=miroslav.nagy@siemens.com header.s=fm2 header.b=czu2C9cx;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.228, mailfrom: fm-1328341-202412161144279e031c6eb2adac2c51-l1fjws@rts-flowmailer.siemens.com)
-Received: by mta-65-228.siemens.flowmailer.net with ESMTPSA id 202412161144279e031c6eb2adac2c51
-        for <openembedded-devel@lists.openembedded.org>;
-        Mon, 16 Dec 2024 12:44:28 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=miroslav.nagy@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=Caey4q+FZj2TmyPrJN6J37xp5jpo8tdkwiujPzs5Njk=;
- b=czu2C9cxsCXCBPJV87H38dGLXtc0bbOwehN6qBpp1CYLA7bIe4BTMzWBdUzHlylPBI1ShZ
- Knio+ssMOjNqTI8IHThsNUX5uc0Tn98xRkVHA/Cxos3tkpE5V8P5t6fJfWa/3RK8thJzGzng
- R7viJ7vgyk/Z+t0yA3TSVysTdDh92zSwC9O6wTadpjDGRlQbtFDqB+cfjQTRV8Y+9723ev3a
- gFBfSRMVVt9tGDN3x2kXswpCI6mcSGkmPszBtANrIOnBtpPJDUJWYBWRM/9Sb/Pg/XPGBUJV
- dZrqtSmLUVRLy4pX5LNJIzzziKQHpuDgBxFnCe1qE7A3YFU3qkr/jzVg==;
-From: "miroslav.nagy" <miroslav.nagy@siemens.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
+	by mailout03.t-online.de (Postfix) with SMTP id 45A46A31
+	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Dec 2024 13:15:38 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.162.147]) by fwd86.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1tNA0a-0JvUjx0; Mon, 16 Dec 2024 13:15:32 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: "miroslav.nagy" <miroslav.nagy@siemens.com>,
-	Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH] 7-zip: add new recipe
-Date: Mon, 16 Dec 2024 12:43:49 +0100
-Message-Id: <20241216114349.125642-1-miroslav.nagy@siemens.com>
+Subject: [meta-oe][PATCH 1/3] luajit: update
+Date: Mon, 16 Dec 2024 13:15:25 +0100
+Message-ID: <20241216121527.1428075-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-1328341:519-21489:flowmailer
+X-TOI-EXPURGATEID: 150726::1734351332-E9FF89BF-27089953/0/0 CLEAN NORMAL
+X-TOI-MSGID: 3f3d0566-6657-4def-be34-389c05f5caf9
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 16 Dec 2024 11:44:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114331
+ <openembedded-devel@lists.openembedded.org>; Mon, 16 Dec 2024 12:15:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114332
 
-From: Miroslav Nagy <miroslav.nagy@siemens.com>
-
-This recipe should eventually replace p7zip recipe.
-p7zip is very old and not updated with unfixed security vulnerabilities.
-Using real upstream package should solve this.
-
-Signed-off-by: Miroslav Nagy <miroslav.nagy@siemens.com>
-Reviewed-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-extended/7-zip/7-zip_24.09.bb | 28 +++++++++++++++++++
- 1 file changed, 28 insertions(+)
- create mode 100644 meta-oe/recipes-extended/7-zip/7-zip_24.09.bb
+ meta-oe/recipes-devtools/luajit/luajit_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/7-zip/7-zip_24.09.bb b/meta-oe/recipes-extended/7-zip/7-zip_24.09.bb
-new file mode 100644
-index 000000000..6e8d0ba77
---- /dev/null
-+++ b/meta-oe/recipes-extended/7-zip/7-zip_24.09.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "7-Zip is a file archiver with a high compression ratio."
-+HOMEPAGE = "https://www.7-zip.org"
-+LICENSE = "LGPL-2.1-or-later & BSD-3-Clause & unRAR"
-+LIC_FILES_CHKSUM = "file://DOC/copying.txt;md5=b0d181292c99cf9bb2ae9166dd3a0239 \
-+                    file://DOC/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de \
-+                    file://DOC/License.txt;md5=8bfe22e0285a3043b61ea408d234c55d"
-+CVE_PRODUCT = "7-zip 7zip"
-+
-+PV_WITHOUT_DOT = "${@d.getVar('PV').replace('.', '')}"
-+
-+SRC_URI = "https://www.7-zip.org/a/7z${PV_WITHOUT_DOT}-src.tar.xz;subdir=${BP}"
-+SRC_URI[sha256sum] = "49c05169f49572c1128453579af1632a952409ced028259381dac30726b6133a"
-+
-+B = "${WORKDIR}/build"
-+
-+EXTRA_OEMAKE += 'LDFLAGS="${LDFLAGS}" LFLAGS_STRIP="" O="${B}"'
-+
-+do_compile() {
-+    cd ${S}/CPP/7zip/Bundles/Alone2
-+    oe_runmake --file makefile.gcc
-+}
-+
-+do_install() {
-+    install -d ${D}${bindir}
-+    install -m 0755 ${B}/7zz ${D}${bindir}/7zz
-+}
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.39.5
+diff --git a/meta-oe/recipes-devtools/luajit/luajit_git.bb b/meta-oe/reci=
+pes-devtools/luajit/luajit_git.bb
+index 4189217541..6a79ffb897 100644
+--- a/meta-oe/recipes-devtools/luajit/luajit_git.bb
++++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+@@ -9,7 +9,7 @@ SRC_URI =3D "git://luajit.org/git/luajit-2.0.git;protocol=
+=3Dhttp;branch=3Dv2.1 \
+            "
+=20
+ PV =3D "2.1"
+-SRCREV =3D "c525bcb9024510cad9e170e12b6209aedb330f83"
++SRCREV =3D "19878ec05c239ccaf5f3d17af27670a963e25b8b"
+=20
+ S =3D "${WORKDIR}/git"
+=20
+--=20
+2.47.0
 
 
