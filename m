@@ -1,169 +1,273 @@
-Return-Path: <chanh@os.amperecomputing.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E83CE7717F
-	for <webhook@archiver.kernel.org>; Mon, 16 Dec 2024 08:22:48 +0000 (UTC)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (NAM10-BN7-obe.outbound.protection.outlook.com [40.107.92.117])
- by mx.groups.io with SMTP id smtpd.web11.52113.1734337363104456942
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B552E77180
+	for <webhook@archiver.kernel.org>; Mon, 16 Dec 2024 09:07:08 +0000 (UTC)
+Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
+ by mx.groups.io with SMTP id smtpd.web11.52531.1734340023955414946
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Dec 2024 00:22:43 -0800
+ Mon, 16 Dec 2024 01:07:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@os.amperecomputing.com header.s=selector2 header.b=D6C4VAwU;
- spf=pass (domain: os.amperecomputing.com, ip: 40.107.92.117, mailfrom: chanh@os.amperecomputing.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AiE5m4sOwe+DeKxcvy8NVunwhyrVRf7TyJttZe5pg+jztQMTo7Hbh7Xx2JSOo1tbFGt1nclaYBxHKkiQW4wvSXmHIGGiNW0kXYb3EEQsGhFBa3YCYjFplZQZ8oBoYhjC3IrKhqotX7f2aXptjVBXxJU8aAJuiuQ+AprSGfIxyDH1Gcwo88qQ0TAQWUq4QqrlkQPGxWVED2D9HdBj2sGqXyUi3oSvR4FrlJcbH2gXw9TLVdMg3L6vtQpgtBR+mrL7g8pTesacR5wrya/2EK4VGA4JtDnSWTDNiWavq3aa1h6HyUBPrFgBjGqhZtlsXXwC67DN4/8tUeoXSDO4ZoT5YQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=25NnDo742WQbf1n5tNoNOMcHLqPc/wKLwwLdN3BM+jM=;
- b=tweJON0AVgY6fA0aNrAL5hsqk/bd3+4wP7OS0YdJ3Or4Vle0MM7uqTtGMhe/ncEIx8OjL4vt/uMQBHZc5ixNhv+M5y+CpKpdoNm5azv28TZ5iJkai7z4YUB+QyI/cXM2D7jokh2E9VBoiNrsJTUwOtrD6RUvYoInPTIfZwdqOisI62b/kE3BAkZGd3PiwwFGP9MYRyihqOKi6hOgVf7U1Ur2sa3wm0BUZOE6gXpN0dk0gVcfAuuKelJ4+0vrp1ZqwVO5LaHMP3xD/tAyh1nxKQu5whZwrbCbR2K3JQPcpMAchTYG/yMMd7wZ2B71fNOt/4nMeUYUlYGegNH49LHKlQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=os.amperecomputing.com; dmarc=pass action=none
- header.from=os.amperecomputing.com; dkim=pass
- header.d=os.amperecomputing.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=os.amperecomputing.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=25NnDo742WQbf1n5tNoNOMcHLqPc/wKLwwLdN3BM+jM=;
- b=D6C4VAwUESAC0oqjGu3iZPgsk37gHnH4TFKDk5R/vlXJRmiKFYgyyN9IZVjCFa5dACl57gKgL0hukc0yq4UzdgzI2lkn1kQMIq3I4aNR0viT8V8fsLdjNPHI25HmTO6bEZELdr/tHMbkn007H2lSqFQzVM1VHk0+Yi2wTfUd/Yw=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=os.amperecomputing.com;
-Received: from BL3PR01MB7057.prod.exchangelabs.com (2603:10b6:208:35c::16) by
- SA1PR01MB6592.prod.exchangelabs.com (2603:10b6:806:185::20) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8272.6; Mon, 16 Dec 2024 08:22:39 +0000
-Received: from BL3PR01MB7057.prod.exchangelabs.com
- ([fe80::b69e:5684:ed7c:4d09]) by BL3PR01MB7057.prod.exchangelabs.com
- ([fe80::b69e:5684:ed7c:4d09%4]) with mapi id 15.20.8272.005; Mon, 16 Dec 2024
- 08:22:37 +0000
-From: Chanh Nguyen <chanh@os.amperecomputing.com>
-To: Khem Raj <raj.khem@gmail.com>,
-	Jeremy Kerr <jk@codeconstruct.com.au>,
-	openembedded-devel@lists.openembedded.org
-CC: Phong Vo <phong@os.amperecomputing.com>,
-	Thang Nguyen <thang@os.amperecomputing.com>,
-	Quan Nguyen <quan@os.amperecomputing.com>,
-	Thu Nguyen <tbnguyen@amperecomputing.com>,
-	Chanh Nguyen <chanh@os.amperecomputing.com>
-Subject: [meta-networking][PATCH] mctp: upgrade 2.0 -> 2.1
-Date: Mon, 16 Dec 2024 08:22:01 +0000
-Message-ID: <20241216082201.3302723-1-chanh@os.amperecomputing.com>
-X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-ClientProxiedBy: SG2P153CA0027.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c7::14)
- To BL3PR01MB7057.prod.exchangelabs.com (2603:10b6:208:35c::16)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
+Received: from fwd75.aul.t-online.de (fwd75.aul.t-online.de [10.223.144.101])
+	by mailout12.t-online.de (Postfix) with SMTP id A6E841860
+	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Dec 2024 10:07:01 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.162.147]) by fwd75.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1tN746-0Tnsen0; Mon, 16 Dec 2024 10:06:58 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH 1/3] cbindgen: add recipe
+Date: Mon, 16 Dec 2024 10:07:03 +0100
+Message-ID: <20241216090705.1698-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL3PR01MB7057:EE_|SA1PR01MB6592:EE_
-X-MS-Office365-Filtering-Correlation-Id: 570ba5ef-bbca-417e-ff08-08dd1daaccbb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|376014|1800799024|52116014|38350700014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?PhxKvcJi1R5+BGvrf+2//Hxxki/r7OTPLIQxK2HYULg2mTI5bXSv5H3oOEAt?=
- =?us-ascii?Q?FexEY5HBHPMfUHTQGO9SYQD6N+5xrCtNRPzuN+86CrAO01HApxrh8AuHuuSd?=
- =?us-ascii?Q?YTkAhd+bRWc/NknC4qZGYAYijb/9zwpDhnCWiM6/xjLEOBN3vOQBUhI3netl?=
- =?us-ascii?Q?w2pS/YMvaVVByliktIRB4exWXP2KKJiw6t/SnxC29XBn7bgK63IKjwYFljrg?=
- =?us-ascii?Q?9ypPCRVV+exAeC8n9haCOKrJFO8AjW3jXowCm1bGiz3D4knMS4kdPdRCtswq?=
- =?us-ascii?Q?GJD6E8PIbo51xccfBbltUtBL9TwsjoOWUWYwe491DCKUcOhcnneg2TwWluPY?=
- =?us-ascii?Q?8+tN8jgAEF63etxN9hVSodAbsGnyNtYy3T/WLPFfMizoT6ypAA7Ql9j7CVf3?=
- =?us-ascii?Q?jevlbJyPniAXmiMTXmnvZCF2zQ65jIHa7nxk2U8GvFJSKvC9aFO4riLYZqts?=
- =?us-ascii?Q?dHHldkK8CwRAETSv8EtqCGi7nv0mDTTZvP0WneFjhN+gCGqvQOau8Z0zShrm?=
- =?us-ascii?Q?KAQrqRDtbSk8lzVAHM4kgttHAc+5XwTAsNMypbj7dRNAu8k82Y+DWGDkalbL?=
- =?us-ascii?Q?hj7p19FEI5Y7VV9nat3Cs+WZxHeSZPQqPlPUTy2df4/6GpnFuktCYLdjsiZj?=
- =?us-ascii?Q?mvianyYPuuSuDOpYl1Rk6Fsmvmn+cp3Ub92lIl675lXGdu2SmbkpFkoE/B3r?=
- =?us-ascii?Q?gofpG8KIISMJirtET8Z6UpuaEWnI8nWOnvcI5bQ6f0tJRTHoAW9rjeOmPzyx?=
- =?us-ascii?Q?sGpWvurVBQRi/9UtZth5XCI0H5pguI9Sukl3AoOS8o3ma4Ski6gM7h0pu+LQ?=
- =?us-ascii?Q?IMREFW2lLI2ndFthAFllkm8ns5TFVikeprTC0iFaeieE1V898RR6Jqf7Ax47?=
- =?us-ascii?Q?rwW+b+cOMJgWSQSwrze86cYxu7/fLsTqt16HpEDgHjCN910C/LwfEpD0WiR+?=
- =?us-ascii?Q?ZU9mIR6ANRc8R58hX3KUeLGRXDHRqcAcwFdimkc1ZV9xuXxu/8ZmIYST/VBg?=
- =?us-ascii?Q?UCS7Rvvk/xeT1EqE+0Kxca0C1NyzPeGMZ103Z6CO8ObZNqua5O5tthP63oaE?=
- =?us-ascii?Q?PXugToWC7Cz7a/REBqSyibrca5VcPtpjPUs0xkGBVFnxTGStXPCmDP9a0zXy?=
- =?us-ascii?Q?s2tC0119XM1cVAY2qK9mxFB2iLHXrAXssYC16SRtKuBPzC/I/qz4nLDTYGAA?=
- =?us-ascii?Q?f7SC6kFqZ/4oDWV8PnPDMjIvhUl4yQzka+sw/E8JcVbRewq0D79qHNt4mul7?=
- =?us-ascii?Q?4SA7bJldX/MgSgtKv3JuBwvy27C1WjFochQdSeZX1JU2b6SxXMR7GfB+M5L+?=
- =?us-ascii?Q?1lCk3yL35t9ZFeDm+RoJo76eB0E0ajwB334DpNPRVLTVYXui3eF6X3TWWOJ0?=
- =?us-ascii?Q?6D20u8y5YIqYCiHa8MtRiEYcVXlv0pppognB6BwMGk+NAXE14f5Ud+pkuywK?=
- =?us-ascii?Q?YdQ+W8ktS5V+0eQhFn5YiiF1YUhUj9Y7?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL3PR01MB7057.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(52116014)(38350700014);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?o9ic2OtYiy8RpI7+eyXUJeiRQMH7hA8poPbjd+kMJZPyHqS+uV3o/S3XkpKO?=
- =?us-ascii?Q?qoRJ3epLIrvb6DRAF9lGimZmw0B212DTxwZwBA3kvNaVmo4pq+aMDPXOKAp1?=
- =?us-ascii?Q?bxljiACT0IV6Vp7DHBxAY8giDDhjGw6n3pz8KeKk5aBy4jeXPPbc5X07tP55?=
- =?us-ascii?Q?HwB1NzxNRUsy9UHt/wQhDvm9+eC0cMKWtG4q/M/nqN3N888sCgzhsCTLNqNc?=
- =?us-ascii?Q?i/O9YhYcvF586NM0hFwsDAn8uVjtTMazHOpxCzkUY1BpxBnM8ybRiUgWMKxR?=
- =?us-ascii?Q?px4/po6QkZB4W0gCS06vZr/mi12fbIfVFTwGGFsN50necGhuyJmfNX1PbFq0?=
- =?us-ascii?Q?X7FlujGnJdQhvph4kxbBIIdy5prQjaFdyDGh+P2a4LwRcaFbkbuS8bBYHluU?=
- =?us-ascii?Q?cSNubFHTddsOI+FAHCxMQo0hctyLvJsWHk0Q/+f9/1E0DAfreI47VFhcGIZX?=
- =?us-ascii?Q?8dONHmFojwojwHt/EHZtI1iYrMUzN8UVDK9hFFVRKFB9hD29x+drTtaqDZbY?=
- =?us-ascii?Q?e/pXn+7Q3FOj6HMsbdkqi1KmefpHbIJQTP/unM+fROs+MorNvdVhXDx66COe?=
- =?us-ascii?Q?vtsWzG58bI+NmScQ7sYQB35kh/QXjNDnmHuvnbIDNe24OnQ8CF4H+jkoEWLJ?=
- =?us-ascii?Q?yFpr6zXCuw3/+Bfi/d9q8x7RueVbTY9P/Rh6TxwzpI1Jic04XNHjQMRoCywk?=
- =?us-ascii?Q?nBeskeUxKwylBW5EZhIEJBuGEfqVzEEOwPFCKawwY0tnqR4ONtfN056nCseY?=
- =?us-ascii?Q?NxVy32eo91AaRjG1x3SJi8koKZwwvIp8O+mW0JEPQu+6Ge2twl/2gKqh6pIy?=
- =?us-ascii?Q?DqRRcIA7bXa93GYmdXcCBlnsdTNv6LPUZR1Ee1DxdB5ENE2pI9Qw26xQGFcD?=
- =?us-ascii?Q?nnQPP5GnDmqrY7AKxAbHDoX7L8c7NaWw9r6UuFi9HqfQTAXHtdZb86SkRgzg?=
- =?us-ascii?Q?vWypW9UrTzlI7XTPqisAAanN9aL5Ajpu2ZDHKbrdc01Au5GY0qU+Nm04BrEt?=
- =?us-ascii?Q?QfBNSjnI9bjnBqzHEAVRHum9TEzPUfsA0f9GiWXqf/XPUox2lRVJiAVAI1LK?=
- =?us-ascii?Q?udSE22gKsTYRPBtmoEq5KmV/V82uY+HnX8RwzpLvdTfmSbf9zHgyBhx7ETBB?=
- =?us-ascii?Q?zl+xGO3fYJFBG539NrD6oZYAxfktvUijQwx01oOE3hsZAsz96V/jwbWo2ngT?=
- =?us-ascii?Q?kSP3zhfGqkwLrt0sMqpioZ+ZgE9jjbArYbtik7SOAR+dc6Elx+sLpbjmeUql?=
- =?us-ascii?Q?ez6E6ViVH1qBrAiVkKI7HwuH2dwpEJZS2Wo3CmcmAPtRAz1vm+PLeDTpJ8IH?=
- =?us-ascii?Q?svfpZPvNZakoUM3DbqkPpYkIFV4sjCqfIZ+ffu6ZRKlts/fs4+sH/p6dL/36?=
- =?us-ascii?Q?GAXbKS+pbcbe67zbBhB663gNQvhwC3zceIrEiUXsvgRYegMpUVFLseNn3tT6?=
- =?us-ascii?Q?f0OavAQV/DsrGCg4H/iPKNz1BhVqkbE2ckIjWeisC4aXbeVRbhYinAsVXEWX?=
- =?us-ascii?Q?5m7FTgHgPbPyM8gqKSl24Puf54JBZPQzzadkWIZ40a4Ww4bWeBDz7d3qW78U?=
- =?us-ascii?Q?33txYvQrdsaB9GLA5I6Vsr9myKThczralnNM4xGw8mSwcf3as5PCC8k5hiF/?=
- =?us-ascii?Q?U+C+FNMy68vnG2oEpi/t/i8=3D?=
-X-OriginatorOrg: os.amperecomputing.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 570ba5ef-bbca-417e-ff08-08dd1daaccbb
-X-MS-Exchange-CrossTenant-AuthSource: BL3PR01MB7057.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Dec 2024 08:22:37.7356
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3bc2b170-fd94-476d-b0ce-4229bdc904a7
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 6I+qjC4qCVj63sKY1EKwBkqLNv0JvaQTLhltDVraDk+Q+FWtky1mZ6fNRgG56Y5Okjct7ADbPnAwOeOmk6Fpw718sw9b3Ok1gKhuLt+Yd0mH16F9/wdOc5x+1BEee8n7
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR01MB6592
+X-TOI-EXPURGATEID: 150726::1734340018-1AFFA9DC-356421B5/10/3626336762 SUSPECT URL
+X-TOI-MSGID: 5b194ec8-91a6-464a-8d3c-128799e98b7f
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 16 Dec 2024 08:22:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114322
+ <openembedded-devel@lists.openembedded.org>; Mon, 16 Dec 2024 09:07:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114323
 
-Signed-off-by: Chanh Nguyen <chanh@os.amperecomputing.com>
+cbindgen creates C/C++11 headers for Rust libraries which expose a public=
+ C API
+
+It is a required dependency for the current mozjs esr release
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../recipes-support/mctp/{mctp_2.0.bb =3D> mctp_2.1.bb}           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/mctp/{mctp_2.0.bb =3D> mctp_2.1.bb}=
- (96%)
+ .../cbindgen/cbindgen_0.27.0.bb               | 148 ++++++++++++++++++
+ 1 file changed, 148 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/cbindgen/cbindgen_0.27.0.bb
 
-diff --git a/meta-networking/recipes-support/mctp/mctp_2.0.bb b/meta-networ=
-king/recipes-support/mctp/mctp_2.1.bb
-similarity index 96%
-rename from meta-networking/recipes-support/mctp/mctp_2.0.bb
-rename to meta-networking/recipes-support/mctp/mctp_2.1.bb
-index 24f974774..931a4535a 100644
---- a/meta-networking/recipes-support/mctp/mctp_2.0.bb
-+++ b/meta-networking/recipes-support/mctp/mctp_2.1.bb
-@@ -5,7 +5,7 @@ LICENSE =3D "GPL-2.0-only"
-=20
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4cc91856b08b094b4f406a29dc61db2=
-1"
-=20
--SRCREV =3D "089dc53fa7387cca517cd713061c323ca06fb6dd"
-+SRCREV =3D "9042704131d270e713fc267d3cc84273bc995315"
-=20
- SRC_URI =3D "git://github.com/CodeConstruct/mctp;branch=3Dmain;protocol=3D=
-https"
-=20
+diff --git a/meta-oe/recipes-devtools/cbindgen/cbindgen_0.27.0.bb b/meta-=
+oe/recipes-devtools/cbindgen/cbindgen_0.27.0.bb
+new file mode 100644
+index 0000000000..e395f667c2
+--- /dev/null
++++ b/meta-oe/recipes-devtools/cbindgen/cbindgen_0.27.0.bb
+@@ -0,0 +1,148 @@
++SUMMARY =3D "cbindgen creates C/C++11 headers for Rust libraries which e=
+xpose a public C API"
++HOMEPAGE =3D "https://github.com/mozilla/cbindgen"
++LICENSE =3D "MPL-2.0"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D9741c346eef56131163e13b9db124=
+1b3"
++
++SRC_URI +=3D "git://github.com/mozilla/cbindgen.git;protocol=3Dhttps;bra=
+nch=3Dmaster"
++SRCREV =3D "58c6156b0d91e82abb03c26187b8d18fa4345ce0"
++S =3D "${WORKDIR}/git"
++
++inherit cargo pkgconfig
++
++SRC_URI +=3D " \
++    crate://crates.io/anstream/0.6.15 \
++    crate://crates.io/anstyle-parse/0.2.5 \
++    crate://crates.io/anstyle-query/1.1.1 \
++    crate://crates.io/anstyle-wincon/3.0.4 \
++    crate://crates.io/anstyle/1.0.8 \
++    crate://crates.io/autocfg/1.3.0 \
++    crate://crates.io/bitflags/2.6.0 \
++    crate://crates.io/cfg-if/1.0.0 \
++    crate://crates.io/clap/4.5.15 \
++    crate://crates.io/clap_builder/4.5.15 \
++    crate://crates.io/clap_lex/0.7.2 \
++    crate://crates.io/colorchoice/1.0.2 \
++    crate://crates.io/dashmap/5.5.3 \
++    crate://crates.io/diff/0.1.13 \
++    crate://crates.io/equivalent/1.0.1 \
++    crate://crates.io/errno/0.3.9 \
++    crate://crates.io/fastrand/2.1.0 \
++    crate://crates.io/hashbrown/0.14.5 \
++    crate://crates.io/heck/0.4.1 \
++    crate://crates.io/indexmap/2.3.0 \
++    crate://crates.io/is_terminal_polyfill/1.70.1 \
++    crate://crates.io/itoa/1.0.11 \
++    crate://crates.io/lazy_static/1.5.0 \
++    crate://crates.io/libc/0.2.155 \
++    crate://crates.io/linux-raw-sys/0.4.14 \
++    crate://crates.io/lock_api/0.4.12 \
++    crate://crates.io/log/0.4.22 \
++    crate://crates.io/memchr/2.7.4 \
++    crate://crates.io/once_cell/1.19.0 \
++    crate://crates.io/parking_lot/0.12.3 \
++    crate://crates.io/parking_lot_core/0.9.10 \
++    crate://crates.io/pretty_assertions/1.4.0 \
++    crate://crates.io/proc-macro2/1.0.86 \
++    crate://crates.io/quote/1.0.36 \
++    crate://crates.io/redox_syscall/0.5.3 \
++    crate://crates.io/rustix/0.38.34 \
++    crate://crates.io/ryu/1.0.18 \
++    crate://crates.io/scopeguard/1.2.0 \
++    crate://crates.io/serde/1.0.205 \
++    crate://crates.io/serde_derive/1.0.205 \
++    crate://crates.io/serde_json/1.0.122 \
++    crate://crates.io/serde_spanned/0.6.7 \
++    crate://crates.io/serial_test/2.0.0 \
++    crate://crates.io/serial_test_derive/2.0.0 \
++    crate://crates.io/smallvec/1.13.2 \
++    crate://crates.io/strsim/0.11.1 \
++    crate://crates.io/syn/2.0.72 \
++    crate://crates.io/tempfile/3.12.0 \
++    crate://crates.io/toml/0.8.19 \
++    crate://crates.io/toml_datetime/0.6.8 \
++    crate://crates.io/toml_edit/0.22.20 \
++    crate://crates.io/unicode-ident/1.0.12 \
++    crate://crates.io/utf8parse/0.2.2 \
++    crate://crates.io/windows-sys/0.52.0 \
++    crate://crates.io/windows-sys/0.59.0 \
++    crate://crates.io/windows-targets/0.52.6 \
++    crate://crates.io/windows_aarch64_gnullvm/0.52.6 \
++    crate://crates.io/windows_aarch64_msvc/0.52.6 \
++    crate://crates.io/windows_i686_gnu/0.52.6 \
++    crate://crates.io/windows_i686_gnullvm/0.52.6 \
++    crate://crates.io/windows_i686_msvc/0.52.6 \
++    crate://crates.io/windows_x86_64_gnu/0.52.6 \
++    crate://crates.io/windows_x86_64_gnullvm/0.52.6 \
++    crate://crates.io/windows_x86_64_msvc/0.52.6 \
++    crate://crates.io/winnow/0.6.18 \
++    crate://crates.io/yansi/0.5.1 \
++"
++
++SRC_URI[anstream-0.6.15.sha256sum] =3D "64e15c1ab1f89faffbf04a634d5e1962=
+e9074f2741eef6d97f3c4e322426d526"
++SRC_URI[anstyle-parse-0.2.5.sha256sum] =3D "eb47de1e80c2b463c735db5b217a=
+0ddc39d612e7ac9e2e96a5aed1f57616c1cb"
++SRC_URI[anstyle-query-1.1.1.sha256sum] =3D "6d36fc52c7f6c869915e99412912=
+f22093507da8d9e942ceaf66fe4b7c14422a"
++SRC_URI[anstyle-wincon-3.0.4.sha256sum] =3D "5bf74e1b6e971609db8ca7a9ce7=
+9fd5768ab6ae46441c572e46cf596f59e57f8"
++SRC_URI[anstyle-1.0.8.sha256sum] =3D "1bec1de6f59aedf83baf9ff929c98f2ad6=
+54b97c9510f4e70cf6f661d49fd5b1"
++SRC_URI[autocfg-1.3.0.sha256sum] =3D "0c4b4d0bd25bd0b74681c0ad21497610ce=
+1b7c91b1022cd21c80c6fbdd9476b0"
++SRC_URI[bitflags-2.6.0.sha256sum] =3D "b048fb63fd8b5923fc5aa7b340d8e156a=
+ec7ec02f0c78fa8a6ddc2613f6f71de"
++SRC_URI[cfg-if-1.0.0.sha256sum] =3D "baf1de4339761588bc0619e3cbc0120ee58=
+2ebb74b53b4efbf79117bd2da40fd"
++SRC_URI[clap-4.5.15.sha256sum] =3D "11d8838454fda655dafd3accb2b6e2bea645=
+b9e4078abe84a22ceb947235c5cc"
++SRC_URI[clap_builder-4.5.15.sha256sum] =3D "216aec2b177652e3846684cbfe25=
+c9964d18ec45234f0f5da5157b207ed1aab6"
++SRC_URI[clap_lex-0.7.2.sha256sum] =3D "1462739cb27611015575c0c11df5df760=
+1141071f07518d56fcc1be504cbec97"
++SRC_URI[colorchoice-1.0.2.sha256sum] =3D "d3fd119d74b830634cea2a0f58bbd0=
+d54540518a14397557951e79340abc28c0"
++SRC_URI[dashmap-5.5.3.sha256sum] =3D "978747c1d849a7d2ee5e8adc0159961c48=
+fb7e5db2f06af6723b80123bb53856"
++SRC_URI[diff-0.1.13.sha256sum] =3D "56254986775e3233ffa9c4d7d3faaf6d36a2=
+c09d30b20687e9f88bc8bafc16c8"
++SRC_URI[equivalent-1.0.1.sha256sum] =3D "5443807d6dff69373d433ab9ef5378a=
+d8df50ca6298caf15de6e52e24aaf54d5"
++SRC_URI[errno-0.3.9.sha256sum] =3D "534c5cf6194dfab3db3242765c03bbe257cf=
+92f22b38f6bc0c58d59108a820ba"
++SRC_URI[fastrand-2.1.0.sha256sum] =3D "9fc0510504f03c51ada170672ac806f1f=
+105a88aa97a5281117e1ddc3368e51a"
++SRC_URI[hashbrown-0.14.5.sha256sum] =3D "e5274423e17b7c9fc20b6e7e208532f=
+9b19825d82dfd615708b70edd83df41f1"
++SRC_URI[heck-0.4.1.sha256sum] =3D "95505c38b4572b2d910cecb0281560f54b440=
+a19336cbbcb27bf6ce6adc6f5a8"
++SRC_URI[indexmap-2.3.0.sha256sum] =3D "de3fc2e30ba82dd1b3911c8de1ffc143c=
+74a914a14e99514d7637e3099df5ea0"
++SRC_URI[is_terminal_polyfill-1.70.1.sha256sum] =3D "7943c866cc5cd64cbc25=
+b2e01621d07fa8eb2a1a23160ee81ce38704e97b8ecf"
++SRC_URI[itoa-1.0.11.sha256sum] =3D "49f1f14873335454500d59611f1cf4a4b0f7=
+86f9ac11f4312a78e4cf2566695b"
++SRC_URI[lazy_static-1.5.0.sha256sum] =3D "bbd2bcb4c963f2ddae06a2efc7e9f3=
+591312473c50c6685e1f298068316e66fe"
++SRC_URI[libc-0.2.155.sha256sum] =3D "97b3888a4aecf77e811145cadf6eef5901f=
+4782c53886191b2f693f24761847c"
++SRC_URI[linux-raw-sys-0.4.14.sha256sum] =3D "78b3ae25bc7c8c38cec158d1f27=
+57ee79e9b3740fbc7ccf0e59e4b08d793fa89"
++SRC_URI[lock_api-0.4.12.sha256sum] =3D "07af8b9cdd281b7915f413fa73f29ebd=
+5d55d0d3f0155584dade1ff18cea1b17"
++SRC_URI[log-0.4.22.sha256sum] =3D "a7a70ba024b9dc04c27ea2f0c0548feb474ec=
+5c54bba33a7f72f873a39d07b24"
++SRC_URI[memchr-2.7.4.sha256sum] =3D "78ca9ab1a0babb1e7d5695e3530886289c1=
+8cf2f87ec19a575a0abdce112e3a3"
++SRC_URI[once_cell-1.19.0.sha256sum] =3D "3fdb12b2476b595f9358c5161aa467c=
+2438859caa136dec86c26fdd2efe17b92"
++SRC_URI[parking_lot-0.12.3.sha256sum] =3D "f1bf18183cf54e8d6059647fc3063=
+646a1801cf30896933ec2311622cc4b9a27"
++SRC_URI[parking_lot_core-0.9.10.sha256sum] =3D "1e401f977ab385c9e4e3ab30=
+627d6f26d00e2c73eef317493c4ec6d468726cf8"
++SRC_URI[pretty_assertions-1.4.0.sha256sum] =3D "af7cee1a6c8a5b9208b3cb10=
+61f10c0cb689087b3d8ce85fb9d2dd7a29b6ba66"
++SRC_URI[proc-macro2-1.0.86.sha256sum] =3D "5e719e8df665df0d1c8fbfd238015=
+744736151d4445ec0836b8e628aae103b77"
++SRC_URI[quote-1.0.36.sha256sum] =3D "0fa76aaf39101c457836aec0ce2316dbdc3=
+ab723cdda1c6bd4e6ad4208acaca7"
++SRC_URI[redox_syscall-0.5.3.sha256sum] =3D "2a908a6e00f1fdd0dfd9c0eb08ce=
+85126f6d8bbda50017e74bc4a4b7d4a926a4"
++SRC_URI[rustix-0.38.34.sha256sum] =3D "70dc5ec042f7a43c4a73241207cecc987=
+3a06d45debb38b329f8541d85c2730f"
++SRC_URI[ryu-1.0.18.sha256sum] =3D "f3cb5ba0dc43242ce17de99c180e96db90b23=
+5b8a9fdc9543c96d2209116bd9f"
++SRC_URI[scopeguard-1.2.0.sha256sum] =3D "94143f37725109f92c262ed2cf5e59b=
+ce7498c01bcc1502d7b9afe439a4e9f49"
++SRC_URI[serde-1.0.205.sha256sum] =3D "e33aedb1a7135da52b7c21791455563fac=
+bbcc43d0f0f66165b42c21b3dfb150"
++SRC_URI[serde_derive-1.0.205.sha256sum] =3D "692d6f5ac90220161d6774db30c=
+662202721e64aed9058d2c394f451261420c1"
++SRC_URI[serde_json-1.0.122.sha256sum] =3D "784b6203951c57ff748476b126ccb=
+5e8e2959a5c19e5c617ab1956be3dbc68da"
++SRC_URI[serde_spanned-0.6.7.sha256sum] =3D "eb5b1b31579f3811bf615c144393=
+417496f152e12ac8b7663bf664f4a815306d"
++SRC_URI[serial_test-2.0.0.sha256sum] =3D "0e56dd856803e253c8f298af3f4d7e=
+b0ae5e23a737252cd90bb4f3b435033b2d"
++SRC_URI[serial_test_derive-2.0.0.sha256sum] =3D "91d129178576168c589c9ec=
+973feedf7d3126c01ac2bf08795109aa35b69fb8f"
++SRC_URI[smallvec-1.13.2.sha256sum] =3D "3c5e1a9a646d36c3599cd173a41282da=
+f47c44583ad367b8e6837255952e5c67"
++SRC_URI[strsim-0.11.1.sha256sum] =3D "7da8b5736845d9f2fcb837ea5d9e262856=
+4b3b043a70948a3f0b778838c5fb4f"
++SRC_URI[syn-2.0.72.sha256sum] =3D "dc4b9b9bf2add8093d3f2c0204471e951b228=
+5580335de42f9d2534f3ae7a8af"
++SRC_URI[tempfile-3.12.0.sha256sum] =3D "04cbcdd0c794ebb0d4cf35e88edd2f7d=
+2c4c3e9a5a6dab322839b321c6a87a64"
++SRC_URI[toml-0.8.19.sha256sum] =3D "a1ed1f98e3fdc28d6d910e6737ae6ab1a93b=
+f1985935a1193e68f93eeb68d24e"
++SRC_URI[toml_datetime-0.6.8.sha256sum] =3D "0dd7358ecb8fc2f8d014bf86f6f6=
+38ce72ba252a2c3a2572f2a795f1d23efb41"
++SRC_URI[toml_edit-0.22.20.sha256sum] =3D "583c44c02ad26b0c3f3066fe629275=
+e50627026c51ac2e595cca4c230ce1ce1d"
++SRC_URI[unicode-ident-1.0.12.sha256sum] =3D "3354b9ac3fae1ff6755cb6db536=
+83adb661634f67557942dea4facebec0fee4b"
++SRC_URI[utf8parse-0.2.2.sha256sum] =3D "06abde3611657adf66d383f00b093d7f=
+aecc7fa57071cce2578660c9f1010821"
++SRC_URI[windows-sys-0.52.0.sha256sum] =3D "282be5f36a8ce781fad8c8ae18fa3=
+f9beff57ec1b52cb3de0789201425d9a33d"
++SRC_URI[windows-sys-0.59.0.sha256sum] =3D "1e38bc4d79ed67fd075bcc251a1c3=
+9b32a1776bbe92e5bef1f0bf1f8c531853b"
++SRC_URI[windows-targets-0.52.6.sha256sum] =3D "9b724f72796e036ab90c1021d=
+4780d4d3d648aca59e491e6b98e725b84e99973"
++SRC_URI[windows_aarch64_gnullvm-0.52.6.sha256sum] =3D "32a4622180e7a0ec0=
+44bb555404c800bc9fd9ec262ec147edd5989ccd0c02cd3"
++SRC_URI[windows_aarch64_msvc-0.52.6.sha256sum] =3D "09ec2a7bb152e2252b53=
+fa7803150007879548bc709c039df7627cabbd05d469"
++SRC_URI[windows_i686_gnu-0.52.6.sha256sum] =3D "8e9b5ad5ab802e97eb8e295a=
+c6720e509ee4c243f69d781394014ebfe8bbfa0b"
++SRC_URI[windows_i686_gnullvm-0.52.6.sha256sum] =3D "0eee52d38c090b3caa76=
+c563b86c3a4bd71ef1a819287c19d586d7334ae8ed66"
++SRC_URI[windows_i686_msvc-0.52.6.sha256sum] =3D "240948bc05c5e7c6dabba28=
+bf89d89ffce3e303022809e73deaefe4f6ec56c66"
++SRC_URI[windows_x86_64_gnu-0.52.6.sha256sum] =3D "147a5c80aabfbf0c7d901c=
+b5895d1de30ef2907eb21fbbab29ca94c5b08b1a78"
++SRC_URI[windows_x86_64_gnullvm-0.52.6.sha256sum] =3D "24d5b23dc417412679=
+681396f2b49f3de8c1473deb516bd34410872eff51ed0d"
++SRC_URI[windows_x86_64_msvc-0.52.6.sha256sum] =3D "589f6da84c646204747d1=
+270a2a5661ea66ed1cced2631d546fdfb155959f9ec"
++SRC_URI[winnow-0.6.18.sha256sum] =3D "68a9bda4691f099d435ad181000724da8e=
+5899daa10713c2d432552b9ccd3a6f"
++SRC_URI[yansi-0.5.1.sha256sum] =3D "09041cd90cf85f7f8b2df60c646f853b7f53=
+5ce68f85244eb6731cf89fa498ec"
++
++BBCLASSEXTEND +=3D "native"
 --=20
-2.34.1
+2.47.1
 
 
