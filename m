@@ -1,116 +1,281 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2CF00E77183
-	for <webhook@archiver.kernel.org>; Mon, 16 Dec 2024 21:05:12 +0000 (UTC)
-Received: from mail-oa1-f42.google.com (mail-oa1-f42.google.com [209.85.160.42])
- by mx.groups.io with SMTP id smtpd.web10.67271.1734383109728609776
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42123E7717F
+	for <webhook@archiver.kernel.org>; Mon, 16 Dec 2024 21:30:12 +0000 (UTC)
+Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
+ by mx.groups.io with SMTP id smtpd.web10.67745.1734384605633337263
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Dec 2024 13:05:09 -0800
+ Mon, 16 Dec 2024 13:30:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=JqKUirIo;
- spf=pass (domain: gmail.com, ip: 209.85.160.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f42.google.com with SMTP id 586e51a60fabf-29fbba47ca4so1889778fac.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Dec 2024 13:05:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1734383109; x=1734987909; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=4IR6kK3EeB8xXPmgxwWTqQi0idFqJ1buQoRqLX5jozE=;
-        b=JqKUirIouM8PzGWl/sSPKDUMRV8Jlw2A0qjfoNe8y8TPH6WVUOvPrOPc/9il9PtI5T
-         GOkSKBubIwvUurkXwVgnEa1SMPhEIitKSCd1NRHLtut/wQU5Tn6CtvJ4JGRKa/jerPOJ
-         DTkLYf3/qEzkZgIa/6n83DzSRtCUE/fSr9OCwdXeYvsMLza+PVZgiUtfYxNOHgj5OT1N
-         9rR3CNekrQwu1LMOgmfUE35Kco4yOFHBotJCT9d4PRAAuKwuWC45f2uz66uGaI9tlGo9
-         QFVDufRl6Lbovz9hbw2MHOw73fQuiHyLljBK5SHM02fPcBmC7IHN2x0D6kPf/Ftwfp6C
-         Ix4A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734383109; x=1734987909;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=4IR6kK3EeB8xXPmgxwWTqQi0idFqJ1buQoRqLX5jozE=;
-        b=N0bmbiSPmYa1YsvzMH4WMAdObhPmfwBXBdQXDEhwA91AM/1FQDN+2b3YAReMMs/fFK
-         5YJNfJj92quX+SD39lI5hAnn4f0r0NWapnLFEvFbj1I+Kgki3BD1WfWJDdVJ2MUUgSUS
-         BKKjThfOIu9D1nSDQAt7+6QC4y4W6sFmMMGQfIiIqKq7oIkm2kglAzcPV0wN3fT/bqvZ
-         HtXMSsPcXR10HWi9uY//ShCTTKSR4RwmGhbrzeuMjWXA5HKVewZvlNg4XhvNTxNH+/BX
-         ygfeCQAC/P+9MCrOJGTndX5XyWho9MuZiRq3mwn3lConFUXNOhPedUE2aaslVQBtDot2
-         tvmw==
-X-Gm-Message-State: AOJu0Ywav6ve/zaWis/W0wgWmarlzEGFY1Q7CSzf8du6Jo+PiEPpWhU0
-	JsZHMOuUXk5G0gd54BzUI9TK69Kudtf3oyVaY2xChVB9Ti6XNV6xBa4QDMkpnZy9V7XAsjyOvl1
-	z5snVryoqzE3hv0prPBpLXPYBAWc=
-X-Gm-Gg: ASbGnctHkN9BBBEhEG3mPp3HlY42lKqQmTs4TFqYzn9vYFjjQqZMm/rHm4XLKUuhV3R
-	Xt/57dsjfg8Qa/s/e85S4IDml0xpDlEeG/Ylk8sHQDF3kL4Mgx/kHk81R+o77m+l3mLR0lw99
-X-Google-Smtp-Source: AGHT+IGtKDeHyd8tO+UISoNTL9mzm+t7LJsjn6aHfMZNKWcychrjJjxeE3dlgGjO5VogBkGLjBNTpdjWlEnZevTZJkI=
-X-Received: by 2002:a05:6870:9d94:b0:297:285e:f824 with SMTP id
- 586e51a60fabf-2a3ac5a41b9mr7298668fac.10.1734383109018; Mon, 16 Dec 2024
- 13:05:09 -0800 (PST)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
+Received: from fwd76.aul.t-online.de (fwd76.aul.t-online.de [10.223.144.102])
+	by mailout05.t-online.de (Postfix) with SMTP id 9E384F07
+	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Dec 2024 22:30:02 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.162.147]) by fwd76.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1tNIfA-0WN5yT0; Mon, 16 Dec 2024 22:30:00 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCHv3] libpeas: update 1.36.0 -> 2.0.5
+Date: Mon, 16 Dec 2024 22:30:08 +0100
+Message-ID: <20241216213008.2701-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
-References: <1811A85A00D6A22F.23577@lists.openembedded.org>
- <VX6LOS.3HWFQSO1SJD41@t-online.de> <CAMKF1srFAYctP2qWSh0SRTFHgjyHbECD_G2AvrGWqd3tyq3-Kg@mail.gmail.com>
- <Y7SLOS.86J6WO9IZ2GB2@t-online.de>
-In-Reply-To: <Y7SLOS.86J6WO9IZ2GB2@t-online.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 16 Dec 2024 13:04:56 -0800
-Message-ID: <CAMKF1sr-a7XZyTDfhZdkVxo1ZhLFxLYSm0f28jv65M+0CGsBcw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCHv2] libpeas: update 1.36.0 -> 2.0.5
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000001e1b940629698993"
+X-TOI-EXPURGATEID: 150726::1734384600-F37FD9C7-E3AEBBED/0/0 CLEAN NORMAL
+X-TOI-MSGID: c813e1d1-4c85-4c18-b7d4-52abbc82fbf6
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 16 Dec 2024 21:05:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114340
+ <openembedded-devel@lists.openembedded.org>; Mon, 16 Dec 2024 21:30:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114341
 
---0000000000001e1b940629698993
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+- Drop 0001-Remove-builddir-and-srcdir-paths-from-test-binaries.patch
+  peas-demo is not built anymore
+- Add patch to disable the broken check for lgi
+  lgi does not support pkgconfig but it hasn't changed version since 2017
+- Remove gtk+3 from depends and dont inherit gtk-icon-cache to not pull i=
+t
+  in again indirectly
+- g-i is not required anymore and will be built depending on DISTRO_FEATU=
+RES
+- Dont package the loaders into separate packages to reduce required RDEP=
+ENDS.
+  If a loader is not wanted on target it will be better to remove the acc=
+ording
+  PACKAGECONFIG option to also remove the dependencies?
+- Move libpeas recipe to meta-gnome
 
-On Mon, Dec 16, 2024 at 12:14=E2=80=AFPM Markus Volk <f_l_k@t-online.de> wr=
-ote:
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../libpeas/libpeas/disable-lgi-check.patch   | 37 +++++++++
+ .../recipes-gnome/libpeas/libpeas_2.0.5.bb    | 20 +++++
+ ...-and-srcdir-paths-from-test-binaries.patch | 82 -------------------
+ .../recipes-gnome/libpeas/libpeas_1.36.0.bb   | 28 -------
+ 4 files changed, 57 insertions(+), 110 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/libpeas/libpeas/disable-lgi-=
+check.patch
+ create mode 100644 meta-gnome/recipes-gnome/libpeas/libpeas_2.0.5.bb
+ delete mode 100644 meta-oe/recipes-gnome/libpeas/libpeas/0001-Remove-bui=
+lddir-and-srcdir-paths-from-test-binaries.patch
+ delete mode 100644 meta-oe/recipes-gnome/libpeas/libpeas_1.36.0.bb
 
-> On Mon, Dec 16 2024 at 09:47:39 AM -08:00:00, Khem Raj <raj.khem@gmail.co=
-m>
-> wrote:
->
-> libpeas seems to be needed by meta-gnome only, so perhaps move this recip=
-e
-> to meta-gnome is the right thing to do.
->
->
-> We could also move gjs to meta-oe because it only pulls in mozjs-128 and
-> cairo. Both are also in meta-oe.
->
+diff --git a/meta-gnome/recipes-gnome/libpeas/libpeas/disable-lgi-check.p=
+atch b/meta-gnome/recipes-gnome/libpeas/libpeas/disable-lgi-check.patch
+new file mode 100644
+index 0000000000..9ed7adb8ce
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/libpeas/libpeas/disable-lgi-check.patch
+@@ -0,0 +1,37 @@
++From c9bb8f5c730745b48eb86404d0297ebc15bf9fa7 Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Mon, 16 Dec 2024 12:22:49 +0100
++Subject: [PATCH] meson
++
++Upstream-Status: Inappropriate [oe-specific]
++
++Signed-off-by: Markus Volk <f_l_k@t-online.de>
++---
++ meson.build | 11 +++++----------
++ 1 file changed, 3 insertions(+), 8 deletions(-)
++
++diff --git a/meson.build b/meson.build
++index a8100af..0fb15d2 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -209,14 +209,9 @@ if lua_found
++     else
++         lua_prg =3D lua51_prg
++     endif
++-    lua_lgi_check =3D run_command(lua_prg, ['-e', 'print(require("lgi")=
+._VERSION)'])
++-    if lua_lgi_check.returncode() =3D=3D 0
++-        lua_lgi_ver =3D lua_lgi_check.stdout().strip()
++-        if lua_lgi_ver.version_compare(lua_lgi_req)
++-            lua51_lgi_dep =3D declare_dependency(version: lua_lgi_ver)
++-            lua_lgi_found =3D true
++-        endif
++-    endif
+++    lua_lgi_ver =3D '0.9.0'
+++    lua_lgi_found =3D true
+++    lua51_lgi_dep =3D declare_dependency(version: lua_lgi_ver)
++     message('lua-lgi version: ' + lua_lgi_ver)
++ endif
++=20
++--=20
++2.47.0
++
+diff --git a/meta-gnome/recipes-gnome/libpeas/libpeas_2.0.5.bb b/meta-gno=
+me/recipes-gnome/libpeas/libpeas_2.0.5.bb
+new file mode 100644
+index 0000000000..8c7d364765
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/libpeas/libpeas_2.0.5.bb
+@@ -0,0 +1,20 @@
++SUMMARY =3D "libpeas is a gobject-based plugins engine"
++HOMEPAGE =3D "https://wiki.gnome.org/Projects/Libpeas"
++LICENSE =3D "LGPL-2.1-or-later"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4b54a1fd55a448865a0b32d415987=
+59d"
++
++DEPENDS =3D "glib-2.0"
++
++inherit gnomebase gobject-introspection vala gi-docgen
++
++SRC_URI +=3D "file://disable-lgi-check.patch"
++SRC_URI[archive.sha256sum] =3D "376f2f73d731b54e13ddbab1d91b6382cf6a9805=
+24def44df62add15489de6dd"
++
++PACKAGECONFIG ?=3D "python3 gjs lua51 ${@bb.utils.contains('DISTRO_FEATU=
+RES', 'gobject-introspection', 'vala', '', d)}"
++PACKAGECONFIG[python3] =3D "-Dpython3=3Dtrue,-Dpython3=3Dfalse,python3-p=
+ygobject,python3-pygobject"
++PACKAGECONFIG[gjs] =3D "-Dgjs=3Dtrue,-Dgjs=3Dfalse,gjs mozjs-128"
++PACKAGECONFIG[lua51] =3D "-Dlua51=3Dtrue,-Dlua51=3Dfalse,luajit luajit-n=
+ative,lua-lgi"
++PACKAGECONFIG[vala] =3D "-Dvapi=3Dtrue,-Dvapi=3Dfalse"
++
++FILES:${PN} +=3D "${libdir}/libpeas-2"
++
+diff --git a/meta-oe/recipes-gnome/libpeas/libpeas/0001-Remove-builddir-a=
+nd-srcdir-paths-from-test-binaries.patch b/meta-oe/recipes-gnome/libpeas/=
+libpeas/0001-Remove-builddir-and-srcdir-paths-from-test-binaries.patch
+deleted file mode 100644
+index 6bb48777ec..0000000000
+--- a/meta-oe/recipes-gnome/libpeas/libpeas/0001-Remove-builddir-and-srcd=
+ir-paths-from-test-binaries.patch
++++ /dev/null
+@@ -1,82 +0,0 @@
+-From d798af685e9e1166400acbdab082c17b02dad85b Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Thu, 18 May 2023 23:28:10 -0700
+-Subject: [PATCH] Remove builddir and srcdir paths from test binaries
+-
+-Encoding buildtime paths is not needed since if these tests are to be
+-run they will be run on target where builddir structure most certainly
+-wont be available.
+-
+-Fixes
+-WARNING: libpeas-1.36.0-r0 do_package_qa: QA Issue: File /usr/bin/peas-d=
+emo in package libpeas-demo contains reference to TMPDIR [buildpaths]
+-
+-Upstream-Status: Inappropriate [Cross-compile specific]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- peas-demo/meson.build                 | 2 +-
+- tests/libpeas-gtk/testing/meson.build | 4 ++--
+- tests/libpeas/testing/meson.build     | 4 ++--
+- tests/testing-util/meson.build        | 4 ++--
+- 4 files changed, 7 insertions(+), 7 deletions(-)
+-
+-diff --git a/peas-demo/meson.build b/peas-demo/meson.build
+-index a3ec53b..855ebf2 100644
+---- a/peas-demo/meson.build
+-+++ b/peas-demo/meson.build
+-@@ -9,7 +9,7 @@ peas_demo_c =3D [
+-=20
+- peas_demo_c_args =3D [
+-   '-DHAVE_CONFIG_H',
+--  '-DPEAS_BUILDDIR=3D"@0@"'.format(builddir),
+-+  '-DPEAS_BUILDDIR=3D"/usr/src/debug/libpeas"',
+-   '-DPEAS_PREFIX=3D"@0@"'.format(prefix),
+-   '-DPEAS_LIBDIR=3D"@0@"'.format(libdir),
+- ]
+-diff --git a/tests/libpeas-gtk/testing/meson.build b/tests/libpeas-gtk/t=
+esting/meson.build
+-index 646f42d..fd9a692 100644
+---- a/tests/libpeas-gtk/testing/meson.build
+-+++ b/tests/libpeas-gtk/testing/meson.build
+-@@ -19,8 +19,8 @@ libpeas_gtk_testing_deps =3D [
+-=20
+- libpeas_gtk_testing_c_args =3D [
+-   '-DHAVE_CONFIG_H',
+--  '-DBUILDDIR=3D"@0@"'.format(builddir),
+--  '-DSRCDIR=3D"@0@"'.format(srcdir),
+-+  '-DBUILDDIR=3D"/usr/src/debug/libpeas"',
+-+  '-DSRCDIR=3D"/usr/src/debug/libpeas"',
+- ]
+-=20
+- libpeas_gtk_testing_lib =3D library(
+-diff --git a/tests/libpeas/testing/meson.build b/tests/libpeas/testing/m=
+eson.build
+-index 74ba7b1..084daa9 100644
+---- a/tests/libpeas/testing/meson.build
+-+++ b/tests/libpeas/testing/meson.build
+-@@ -21,8 +21,8 @@ libpeas_testing_deps =3D [
+-=20
+- libpeas_testing_c_args =3D [
+-   '-DHAVE_CONFIG_H',
+--  '-DBUILDDIR=3D"@0@"'.format(builddir),
+--  '-DSRCDIR=3D"@0@"'.format(srcdir),
+-+  '-DBUILDDIR=3D"/usr/src/debug/libpeas"',
+-+  '-DSRCDIR=3D"/usr/src/debug/libpeas"',
+- ]
+-=20
+- libpeas_testing_lib =3D library(
+-diff --git a/tests/testing-util/meson.build b/tests/testing-util/meson.b=
+uild
+-index 1c40740..83ad059 100644
+---- a/tests/testing-util/meson.build
+-+++ b/tests/testing-util/meson.build
+-@@ -17,8 +17,8 @@ libtesting_util_deps =3D [
+-=20
+- libtesting_util_c_args =3D [
+-   '-DHAVE_CONFIG_H',
+--  '-DBUILDDIR=3D"@0@"'.format(builddir),
+--  '-DSRCDIR=3D"@0@"'.format(srcdir),
+-+  '-DBUILDDIR=3D"/usr/src/debug/libpeas"',
+-+  '-DSRCDIR=3D"/usr/src/debug/libpeas"',
+-   '-UG_DISABLE_ASSERT',
+-   '-UG_DISABLE_CAST_CHECKS',
+- ]
+---=20
+-2.40.1
+-
+diff --git a/meta-oe/recipes-gnome/libpeas/libpeas_1.36.0.bb b/meta-oe/re=
+cipes-gnome/libpeas/libpeas_1.36.0.bb
+deleted file mode 100644
+index 016981f04d..0000000000
+--- a/meta-oe/recipes-gnome/libpeas/libpeas_1.36.0.bb
++++ /dev/null
+@@ -1,28 +0,0 @@
+-SUMMARY =3D "libpeas is a gobject-based plugins engine"
+-HOMEPAGE =3D "https://wiki.gnome.org/Projects/Libpeas"
+-LICENSE =3D "LGPL-2.1-or-later"
+-LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4b54a1fd55a448865a0b32d415987=
+59d"
+-
+-DEPENDS =3D "gtk+3"
+-
+-GTKDOC_MESON_OPTION =3D "gtk_doc"
+-
+-inherit gnomebase gobject-introspection gi-docgen gtk-icon-cache feature=
+s_check
+-
+-ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
+-# FIXME: When upgrading to libpeas 2, g-i is no longer needed.
+-REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
+-
+-SRC_URI +=3D "file://0001-Remove-builddir-and-srcdir-paths-from-test-bin=
+aries.patch"
+-SRC_URI[archive.sha256sum] =3D "297cb9c2cccd8e8617623d1a3e8415b4530b8e5a=
+893e3527bbfd1edd13237b4c"
+-
+-PACKAGECONFIG[python3] =3D "-Dpython3=3Dtrue,-Dpython3=3Dfalse,python3-p=
+ygobject"
+-
+-PACKAGES =3D+ "${PN}-demo ${PN}-python3"
+-FILES:${PN}-demo =3D " \
+-    ${bindir}/peas-demo \
+-    ${libdir}/peas-demo \
+-"
+-
+-RDEPENDS:${PN}-python3 =3D "python3-pygobject"
+-FILES:${PN}-python3 =3D "${libdir}/libpeas-1.0/loaders/libpython3loader.=
+so"
+--=20
+2.47.0
 
-Yeah that works too if there are more
-Users of gjs beyond meta-gnome
-
->
-
---0000000000001e1b940629698993
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote gmail_quote_container"><d=
-iv dir=3D"ltr" class=3D"gmail_attr">On Mon, Dec 16, 2024 at 12:14=E2=80=AFP=
-M Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@t-online.de</a=
->&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0=
- 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><div id=3D"m_915839457=
-2807842853geary-body" dir=3D"auto">On Mon, Dec 16 2024 at 09:47:39 AM -08:0=
-0:00, Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">=
-raj.khem@gmail.com</a>&gt; wrote:<br><blockquote type=3D"cite"><div style=
-=3D"white-space:break-spaces">libpeas seems to be needed by meta-gnome only=
-, so perhaps move this
-recipe to meta-gnome is the right thing to do.
-</div></blockquote><div><br></div><div>We could also move gjs to meta-oe be=
-cause it only pulls in mozjs-128 and cairo. Both are also in meta-oe.</div>=
-</div></blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Yeah that =
-works too if there are more</div><div dir=3D"auto">Users of gjs beyond meta=
--gnome=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .=
-8ex;border-left:1px #ccc solid;padding-left:1ex"><div id=3D"m_9158394572807=
-842853geary-body" dir=3D"auto"><div dir=3D"auto"></div></div></blockquote><=
-/div></div>
-
---0000000000001e1b940629698993--
 
