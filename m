@@ -2,109 +2,97 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 239C8E7716A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 23A09E7717F
 	for <webhook@archiver.kernel.org>; Tue, 17 Dec 2024 09:01:56 +0000 (UTC)
-Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
- by mx.groups.io with SMTP id smtpd.web10.77388.1734426112249572980
+Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
+ by mx.groups.io with SMTP id smtpd.web10.77392.1734426114321450172
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Dec 2024 01:01:52 -0800
+ Tue, 17 Dec 2024 01:01:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=UgUZOWUJ;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=E5lNARlj;
+ spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1734426113; x=1765962113;
-  h=from:to:cc:subject:date:message-id;
-  bh=ypvUViKpQdmlQDgm1xdFN76DvNNQxTjEWf/eww/yYlE=;
-  b=UgUZOWUJfXwhDjd5cnVl7wCu0gvOzQ0bDW0MGYUVHUdIVKGZN4K/z5oG
-   v1+BCGhwb6smubJqHuELP+/h5wf6iStztb4MqDULsw1PPNVDsxu1ttQHK
-   GtT5H/kCr4NlFJ6DZn8pzIUFGObHsS0scR/sS5CVcxZ1FQcY3ZyzTjc8V
-   5/4xVklGKHusP9VFhDut4eZxQ7cbtLqvhs5RFiDzcMk9fiQ8Adz2E3HFI
-   knlzC40LdENGrkXDgNnL0gA2JqeQR1nz4QD5cYulGrqUMQAzplqTN6ISw
-   sZ4tx9XDWrafql594QeNMDgXpsf3I7uWppDD4eM1V3cWbJArG5iNhLjBd
+  t=1734426115; x=1765962115;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references;
+  bh=zgUGm5psu8/DpUW/rGkwhNApaWLuflrGucH6dpGMsWs=;
+  b=E5lNARljxLnGpf98LgzGqtLhdazNsVyVPpVmfoFNskGJdQ93uNQckPi3
+   HHwN3H+DWCWAD1WTT4yLxDY3OqrkBzJ2WgYL9fPB4iKyqIWsRI4i/reP9
+   rN0pNd74UW8asLG846WiUSGjWNdVSeXIBcGNIFqAdw0HRrSZibuhfDLBV
+   smsJV4MfXSQEaa+l9f8fKFyKBDYQRJhhVBHCfXBuY8AP40N+d8sxzb6OI
+   OLRjd7T/A8WWIp0JQbASngrhB3VbZFBNDtwgWq2fFZTyckm02XDjrXFs6
+   QUBbmBTQhGtmpqePlnXZRjxvbjXtoAHsGk30CtMx4CEPsat8L6xgyvUaL
    A==;
-X-CSE-ConnectionGUID: NIZ2g/PxQzu0+kNpQD81Ag==
-X-CSE-MsgGUID: +zy71eTTQ0anWmj8fwvx9g==
-X-IronPort-AV: E=McAfee;i="6700,10204,11288"; a="183207099"
+X-CSE-ConnectionGUID: JZ6RtEGLTh+goWtjvTSVoA==
+X-CSE-MsgGUID: 23p/6GoOQ9CtLNks745MGQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11288"; a="162953822"
 X-IronPort-AV: E=Sophos;i="6.12,241,1728918000"; 
-   d="scan'208";a="183207099"
-Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
-  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Dec 2024 18:01:50 +0900
-Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
-	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id CB2C6D6EAA
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Dec 2024 18:01:47 +0900 (JST)
+   d="scan'208";a="162953822"
+Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
+  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Dec 2024 18:01:53 +0900
+Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
+	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id ECBF0C2260
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Dec 2024 18:01:50 +0900 (JST)
 Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 9CA90D971B
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Dec 2024 18:01:47 +0900 (JST)
+	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id C61BED8B31
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Dec 2024 18:01:50 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 34F666B5DE
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Dec 2024 18:01:47 +0900 (JST)
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 655E0347B0
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Dec 2024 18:01:50 +0900 (JST)
 Received: from localhost.localdomain.localdomain (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id AAE231A000B;
-	Tue, 17 Dec 2024 17:01:46 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 2BB7C1A0071;
+	Tue, 17 Dec 2024 17:01:50 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@cn.fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 01/17] ace: update 8.0.1 -> 8.0.2
-Date: Tue, 17 Dec 2024 17:01:20 +0800
-Message-Id: <1734426096-18300-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 10/17] mcelog: upgrade 201 -> 202
+Date: Tue, 17 Dec 2024 17:01:29 +0800
+Message-Id: <1734426096-18300-10-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1734426096-18300-1-git-send-email-wangmy@fujitsu.com>
+References: <1734426096-18300-1-git-send-email-wangmy@fujitsu.com>
 X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28864.006
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28864.006
-X-TMASE-Result: 10--7.251300-10.000000
-X-TMASE-MatchedRID: ndt4s9/dZzCvbHkumykHIxIRh9wkXSlFMx/Xynyqsrskt9BigJAcVkXK
-	3zSCIcxkZoy+MSdGAHe3hqOHWQsaxVnGEjlsas2yBApSYI86Y6gnhzAhgvoq599RlPzeVuQQgg8
-	W5tsFXID7tBxFpWhryf+1065WI2+4L/tBTZzO5Q25x7uAXGEprZiQDIJsDspXof6W0W/Hq1OIwP
-	rAH8iLMlOIGpHp3GAOXgGaSZV93LfIY6JevWs4vp4CIKY/Hg3AaZGo0EeYG96O8R6rqACRhmqSJ
-	e3/DJB6C24oEZ6SpSkj80Za3RRg8BfZxcEflXlqBUEZTO4mEwbFlcInT0vJ/cYXMMEiNHUpOsn2
-	BWT1UWg=
+X-TMASE-Result: 10--1.979800-10.000000
+X-TMASE-MatchedRID: S9L8qTrmXfGjz0nOeth/yfx0ykrbAxjCchr4pBLGIvAH8UzOewTxw78F
+	Hrw7frluf146W0iUu2v8LO5wKi8YUnDICbPFvtnTHEDUAqZUZM4ZiTLIQu4YpMSiwizsgluQ1vZ
+	7s3YIVDLYgCp6bjAgaoAy6p60ZV62To3UJuRLIoTdB/CxWTRRu+rAZ8KTspSzyQeRC44eWI1ehH
+	aLv18F8ppKEILu7MfWxLj4kp4FOrRdrLke4AtXSyqV0Tetu0JXUXL91baWVQc1EgrMIFf/+aoZc
+	7+AI1PZiB6mlDKe1V7S/yytHeCN9GXv4CQeNUk7G6qTOwq/n71+3BndfXUhXQ==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 17 Dec 2024 09:01:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114350
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114359
 
 From: Wang Mingyu <wangmy@cn.fujitsu.com>
 
-Changelog:
-============
-- Removed ACE_make_checked_array_iterator that used deprecated stdext::checked_array_iterator
-- Embarcadero C++ Builder bcc64x compiler support has been updated to match the C++Builder 12.2 release
-- Added support for Linux platforms that use musl-libc instead of glibc
-- Improved QNX support
-- Add support for std::string_view to CDR classes
-- Define ACE_HAS_CPP23 when we have a C++23 capable C++ compiler
-
 Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- .../recipes-connectivity/ace/{ace_8.0.1.bb => ace_8.0.2.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/ace/{ace_8.0.1.bb => ace_8.0.2.bb} (90%)
+ meta-oe/recipes-support/mcelog/{mcelog_201.bb => mcelog_202.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/mcelog/{mcelog_201.bb => mcelog_202.bb} (96%)
 
-diff --git a/meta-oe/recipes-connectivity/ace/ace_8.0.1.bb b/meta-oe/recipes-connectivity/ace/ace_8.0.2.bb
-similarity index 90%
-rename from meta-oe/recipes-connectivity/ace/ace_8.0.1.bb
-rename to meta-oe/recipes-connectivity/ace/ace_8.0.2.bb
-index c79fba323c..64a4e7575f 100644
---- a/meta-oe/recipes-connectivity/ace/ace_8.0.1.bb
-+++ b/meta-oe/recipes-connectivity/ace/ace_8.0.2.bb
-@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d2c090e9c730fd91677782d8e2091d77"
+diff --git a/meta-oe/recipes-support/mcelog/mcelog_201.bb b/meta-oe/recipes-support/mcelog/mcelog_202.bb
+similarity index 96%
+rename from meta-oe/recipes-support/mcelog/mcelog_201.bb
+rename to meta-oe/recipes-support/mcelog/mcelog_202.bb
+index 799347fe40..59fb86f2a3 100644
+--- a/meta-oe/recipes-support/mcelog/mcelog_201.bb
++++ b/meta-oe/recipes-support/mcelog/mcelog_202.bb
+@@ -10,7 +10,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git;protocol=http;;
+            file://run-ptest \
+            "
  
- DEPENDS += "openssl gperf-native"
+-SRCREV = "d70a0a7a794b35225295f77225941462c1d57254"
++SRCREV = "6b3fe165f35ef9897a6573042851922b3a3e4e4d"
  
--SRC_URI = "https://github.com/DOCGroup/ACE_TAO/releases/download/ACE%2BTAO-8_0_1/ACE-${PV}.tar.bz2 \
-+SRC_URI = "https://github.com/DOCGroup/ACE_TAO/releases/download/ACE%2BTAO-8_0_2/ACE-${PV}.tar.bz2 \
-            file://ace_config.patch \
-            file://no_sysctl.patch \
-           "
--SRC_URI[sha256sum] = "8d379f37d56db33f3ae447725b632d48b1c13e887593547ac3568e3b428c28f0"
-+SRC_URI[sha256sum] = "dba38a905858ec4a44c04b4bbaef42b891adf061e8c0bbdaa1dce2c04fcccb7f"
- 
- UPSTREAM_CHECK_URI = "https://github.com/DOCGroup/ACE_TAO/releases"
- UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 -- 
 2.43.0
 
