@@ -1,99 +1,88 @@
-Return-Path: <brgl@bgdev.pl>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B3975E7717F
-	for <webhook@archiver.kernel.org>; Tue, 17 Dec 2024 17:40:29 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.web11.87827.1734457225037064227
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BFF0BE77188
+	for <webhook@archiver.kernel.org>; Wed, 18 Dec 2024 17:11:16 +0000 (UTC)
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web11.110766.1734541873671872354
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Dec 2024 09:40:25 -0800
+ Wed, 18 Dec 2024 09:11:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=0aZcPtoF;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.53, mailfrom: brgl@bgdev.pl)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-436341f575fso43610965e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Dec 2024 09:40:24 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WlsjNoub;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-2ee50ffcf14so878531a91.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Dec 2024 09:11:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1734457223; x=1735062023; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1734541873; x=1735146673; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=XsP6LOhqGnb4bRs/onzpPGb6+DoEYaJ4XHJ7/TJNINo=;
-        b=0aZcPtoFjwgVR22msTNw+ITtjtpWToyGuaX2Bu6r3OXrqceSuR6Lx6su0b+oBsbo5s
-         JHkOaY4cYY7rhVOs1Dwzx96jQ4/s+Fdk0NmDilEJiWBLXJb4f8nSgsIaMlUijHk+dvBM
-         23d2WsRZPUxZDR5Q0i2KoL280yX5aI/FJp+N0LSfAbl5SY/SUr6K5ooU+82jughZ2W+F
-         Nmjwk7iDqFTbbkGDuCpFDKMvtTJH9swDEaMLhTSwKyyReW55wld/bicydKbUsZI4y94n
-         ouHJygLbHKZcWm+0KjU6eJCqmdqCB/V/XdCB+IwDYE93HOQ53a49xJFX3tVZr5NI9+BO
-         bPvw==
+        bh=rbQvVkH/58QDutZ21LsLW6k1apHzV+h4r+aBRshzTIM=;
+        b=WlsjNoubXy1+DFtzBBQJt3eKhr+qf2WYa3Q3KJsQ11Ijh4dB+gTBG4KEJuvnqFx6lH
+         b69m34Nf/18ouPDp7U4ohYF5BMOUFbyVlJbC0LDU8mTFtwMnEDr2eIJ6ThINAJ/5F77c
+         Y5MrD73z7MTa6U7VuxD1eXf1Jf7aYzpgUcO98c7PsEhw4hYTKi9LAjxuC2S3ByLXn2LA
+         7ermQvn2vftjcy6JzxRsnU7Q4fPdceW/p768bq3aN5cyYGOQ7KQ5q+KY/k6MF2sDjId4
+         ymC+nZ0F2c4tGUgWQszayi55/OyibuYgGgsLgxpoUjFUIKevcifc6J1viCIdl2UwYutY
+         e+Ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734457223; x=1735062023;
+        d=1e100.net; s=20230601; t=1734541873; x=1735146673;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=XsP6LOhqGnb4bRs/onzpPGb6+DoEYaJ4XHJ7/TJNINo=;
-        b=TgJjUNgrnrgkSME9ZOk/yXt9eNjWk1v4kEgjYmfbCisVsaiKt0ax+18jCPZeg3c9uc
-         ANZXibBRN8hwxJ+Ud+aPAFtPSWn+RoIJn2S5XAzeAHwR1ko6BgShSU5vPt78frzPjC5M
-         jIziHAPEjyh7/vhv7H9lYgjZo1111jHcN3G6Z0sVYoEVrsRM3+yjmWgVyYwmpaOk9lW/
-         O0mI4h0XxwAshdtl6DDfUomn5dY141cNIZHmTKqe2w/wUYoX3jAQ/oUoyHaXgUwFN1Q/
-         xK6IeIq7gya/HS6lEuPZ+kvLd7jb4BY7fFqhiIrdUvjhS8RPS5ILY+9Pu9NbrZG4d96f
-         Xg7Q==
-X-Forwarded-Encrypted: i=1; AJvYcCW/kMY6OGnh7K4fmAFY+X+maLtFwLM+xlpgSEa9XQomls/ztJIltYHIo27uhWZZo3d78WGKySxPihbtHOcri3eD8SI=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyhwXU72oJLvSRMYKzUxcC8WbO4AuEzD66XzTqd4ICiPlGA6BA3
-	HfVOOytGAGCcFN8MCA8IjfmTBLCwJx1n4s8PAYQ/6Nk0oUWawv7zSWaj/qmz8ms=
-X-Gm-Gg: ASbGncsXN+riGwpgPRqixwe8qqCjr3yn8xodf1Wn2LhnuMzweBJy4M0eCfEAnmsHcgb
-	oobKz4bgYUCheVcR3z+gKWuVls9FUxR3rX4smUbYcMglgbKSh4zDMDH+altYLe6DmnaN7H+6QHx
-	yWeuZH3/am4ArpZZ4FgrQQq+GNnvkW96jBS8NMXh5ufjlDmzALI38Yed8P1ehFH/t4dURjbXKRk
-	bst1//Jrh4KIF0kuAWM96FOdx7aZY5fWI1PW83FothV52/UiD+E8iJS
-X-Google-Smtp-Source: AGHT+IGTUgOO/QOTfw5KgD0B/ySvGRiT13IMLcbrj4sZE4ud6TlMKdB58ig2TdwxLHle988on4u7Ag==
-X-Received: by 2002:a05:600c:1da4:b0:434:f753:6012 with SMTP id 5b1f17b1804b1-4362aa509abmr179939595e9.17.1734457222963;
-        Tue, 17 Dec 2024 09:40:22 -0800 (PST)
-Received: from brgl-uxlite.home ([2a01:cb1d:dc:7e00:4699:6189:1775:3ce7])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-436362b74c7sm122954005e9.33.2024.12.17.09.40.22
+        bh=rbQvVkH/58QDutZ21LsLW6k1apHzV+h4r+aBRshzTIM=;
+        b=J73hy7hzqleBrr1111/vNiy88XZxOy/U9UgvY7Xcg1XtIn6BJPS1GzENrJVONHX/Oc
+         nmA2XgSw/EnkPmvGx5aY6Zr282jx0mcxm7X70sA02GNzx6/ZHaj2Sddb7aItw8bWWcve
+         CtSt7/vHztyfKRRXuT7a5EiFHlycxA7IH5q0kp+q2lisJv6SDosc7jJmBM3Mk7q9/oNA
+         BxLOkT9jjSHlqc8yvEa6JyzRVARsPjpYcHKrf/7P1e/m9Zw1enxfNNueT1ZFloU5fluB
+         3RRX65ScAmXbLx2qj2nrQLVHh7vxpMorHOKiuHE0gyLdtlYNRaXTgfd+nz3aCzaL9CdN
+         xODA==
+X-Gm-Message-State: AOJu0YzXalvHCb+UrVG8LJeBHRbhAH5zKWK8F1zqOD+g9ae30QmqwQhq
+	ewesMLEZo/Mo9VZgxGLDDaEftnG7AaRIba/U7OJj8JZjkO4Nxy4GNCXpMkkz
+X-Gm-Gg: ASbGncuQ5wpUoMea2Jci1sjML7BJ9BP5CiC/5Cv8ht/sKWC5j5h4MbkHgkKMURgs8T0
+	IWHwptXB6fnLeRkV2I2Htd/VLWzlOAW4gYNcS2SW6sSkEWgAqgXaTT1UEhsqcB3VJRfIcgIuakZ
+	PzPwoK91MwgtfDwt71LNfU49NR5LjX6QCjXrdhc46WaBPSu3cr0QjTpduRqgVlJK3A+ak8DdEbb
+	Lc2pcsgEmp3wyCPRP7671XVcu5oulf6vgw8QoGkVgkrlr7wLW9Q2jRuydE=
+X-Google-Smtp-Source: AGHT+IERZ0lFZ7ULnNZWs4vHMvc8932+f1da/eiOF61QRomBvFas4BQPxi9oMEMabGZJi95lnawMmg==
+X-Received: by 2002:a17:90b:3a4c:b0:2ee:cbd0:4910 with SMTP id 98e67ed59e1d1-2f443553188mr104355a91.1.1734541872882;
+        Wed, 18 Dec 2024 09:11:12 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8201:fd20::5877])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2f2ee06dd77sm1816697a91.33.2024.12.18.09.11.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Dec 2024 09:40:22 -0800 (PST)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>,
-	Bruce Ashfield <bruce.ashfield@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Subject: [meta-filesystems][PATCH] gpiod-sysfs-proxy: update v0.1.1 -> v0.1.2
-Date: Tue, 17 Dec 2024 18:40:20 +0100
-Message-ID: <20241217174020.84283-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.45.2
+        Wed, 18 Dec 2024 09:11:12 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH] libpeas: Disable lua support on architectures without luajit port
+Date: Wed, 18 Dec 2024 09:11:09 -0800
+Message-ID: <20241218171110.680112-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Dec 2024 17:40:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114373
+ <openembedded-devel@lists.openembedded.org>; Wed, 18 Dec 2024 17:11:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114374
 
-From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-
-Small bugfix release addressing some corner-cases spotted in testing.
-
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../{gpiod-sysfs-proxy_0.1.1.bb => gpiod-sysfs-proxy_0.1.2.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/{gpiod-sysfs-proxy_0.1.1.bb => gpiod-sysfs-proxy_0.1.2.bb} (97%)
+ meta-gnome/recipes-gnome/libpeas/libpeas_2.0.5.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy_0.1.1.bb b/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy_0.1.2.bb
-similarity index 97%
-rename from meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy_0.1.1.bb
-rename to meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy_0.1.2.bb
-index 4d466d30f..fef258910 100644
---- a/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy_0.1.1.bb
-+++ b/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy_0.1.2.bb
-@@ -15,7 +15,7 @@ SRC_URI += " \
-     file://run-ptest.in \
- "
+diff --git a/meta-gnome/recipes-gnome/libpeas/libpeas_2.0.5.bb b/meta-gnome/recipes-gnome/libpeas/libpeas_2.0.5.bb
+index 8c7d364765..557831da6e 100644
+--- a/meta-gnome/recipes-gnome/libpeas/libpeas_2.0.5.bb
++++ b/meta-gnome/recipes-gnome/libpeas/libpeas_2.0.5.bb
+@@ -11,6 +11,11 @@ SRC_URI += "file://disable-lgi-check.patch"
+ SRC_URI[archive.sha256sum] = "376f2f73d731b54e13ddbab1d91b6382cf6a980524def44df62add15489de6dd"
  
--SRC_URI[sha256sum] = "c7830cb6a2c01914df2bc0549aef2dcfcb955520d400f65b3b50fb7a6f77f1b4"
-+SRC_URI[sha256sum] = "4bdd4b8a7042f63a40507ae0f16b360011e67cbb2f0276289636487a54849530"
- 
- # For full backward compatibility with the kernel sysfs interface, this option
- # must be selected. However, we don't make it the default as - with kernel sysfs
--- 
-2.45.2
-
+ PACKAGECONFIG ?= "python3 gjs lua51 ${@bb.utils.contains('DISTRO_FEATURES', 'gobject-introspection', 'vala', '', d)}"
++PACKAGECONFIG:remove:riscv32 = "lua51"
++PACKAGECONFIG:remove:riscv64 = "lua51"
++PACKAGECONFIG:remove:powerpc64 = "lua51"
++PACKAGECONFIG:remove:powerpc64le = "lua51"
++
+ PACKAGECONFIG[python3] = "-Dpython3=true,-Dpython3=false,python3-pygobject,python3-pygobject"
+ PACKAGECONFIG[gjs] = "-Dgjs=true,-Dgjs=false,gjs mozjs-128"
+ PACKAGECONFIG[lua51] = "-Dlua51=true,-Dlua51=false,luajit luajit-native,lua-lgi"
 
