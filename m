@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C54F2E7718A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BF999E77184
 	for <webhook@archiver.kernel.org>; Thu, 19 Dec 2024 20:29:25 +0000 (UTC)
 Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
  by mx.groups.io with SMTP id smtpd.web10.138184.1734640158367521957
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Dec 2024 12:29:21 -0800
+ Thu, 19 Dec 2024 12:29:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=ZwbikYfn;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-20241219202920b3dc21880eaf03d166-8sn6a_@rts-flowmailer.siemens.com)
-Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 20241219202920b3dc21880eaf03d166
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=Vp4TtrQd;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-20241219202916875f3f728104897ef1-x_q2nt@rts-flowmailer.siemens.com)
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 20241219202916875f3f728104897ef1
         for <openembedded-devel@lists.openembedded.org>;
-        Thu, 19 Dec 2024 21:29:20 +0100
+        Thu, 19 Dec 2024 21:29:16 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=eIRcIhOQXyt7HWnN9kEN0Sasr6gzdtwJ351HnmzuX5M=;
- b=ZwbikYfnCrFw8cqfNEZ7yWNP4y+ei4QjRH56YdxRfQHwuXNDk8mO21Igh4RFYm6ZlLoEUE
- MFiWY1b9qut8wTkgmNVF8DwGoP7oD7D0Q8rCqEURO/Dh6THrqTXvT4mmmTYfCvKO0CnWMwnK
- IkJKSQ3T2bjuY0cZ4uum/f7p2tTBpUzMpRJL9m7jtwOCVCxQOPWSI8ewCE6rRHtlJ9nuxIZf
- 77EAYPxLdf7N4x82M5JJlkquucoBB8YgidtMXikLlokiJeIxB1ZILrtvdoCLV8MYwsiO7kbV
- +EbgK92mU1JhKjgkUATgAccEh0x6AW9/aAlEP6H8MFXcY2V9meg36SzQ==;
+ bh=+CqQucpsP7m2LFK/bL1AYFG69D94dVZCTjbxt4kkx7w=;
+ b=Vp4TtrQd/EplnjjOqV5sadXNE7c/dog2C6rCs0txy9CH3US/yuyzDpMfoBG33FBo6bi91b
+ 7XwwcUDEi31s+cIcN0/tlSBDpNhRHYMDUxkjTRfnSH3YJELdMDmGUwNaawW8YBcPDOP7OP3A
+ R4rNeyTPFlKlapmAPF2fUeIFHRvsumsMpJ/w+2YbYeLt8jNuwJf1I8soaZGlDFC9cQ1ghx7a
+ bXo9alW0L1xjl3Xu9W0wqW717EnnE0H4W5zaosuaiYlwjWKk5HZS4625h4qRgHjUU/GpRMpX
+ CUqdpeT827DVtRuEPpanktCxWbaDOGWESrWFJ59FQ0DZ1V6vLlKfI4Jg==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH 12/12] emlog: set CVE_PRODUCT
-Date: Thu, 19 Dec 2024 21:27:38 +0100
-Message-Id: <20241219202738.346121-13-peter.marko@siemens.com>
+Subject: [meta-oe][PATCH 11/12] memcached: ignore disputed CVE-2022-26635
+Date: Thu, 19 Dec 2024 21:27:37 +0100
+Message-Id: <20241219202738.346121-12-peter.marko@siemens.com>
 In-Reply-To: <20241219202738.346121-1-peter.marko@siemens.com>
 References: <20241219202738.346121-1-peter.marko@siemens.com>
 MIME-Version: 1.0
@@ -39,31 +39,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 19 Dec 2024 20:29:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114413
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114412
 
 From: Peter Marko <peter.marko@siemens.com>
 
-This will remove false-positive CVE-2024-50655 from reports.
-There are different emlog components from other vendors around.
+Per [1] this is a problem of applications using memcached inproperly.
+
+This should not be a CVE against php-memcached, but for whatever
+software the issue was actually found in. php-memcached and
+libmemcached provide a VERIFY_KEY flag if they're too lazy to
+filter untrusted user input.
+
+[1] https://github.com/php-memcached-dev/php-memcached/issues/519
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- meta-oe/recipes-core/emlog/emlog.inc | 2 ++
+ meta-networking/recipes-support/memcached/memcached_1.6.17.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-core/emlog/emlog.inc b/meta-oe/recipes-core/emlog/emlog.inc
-index 631e52f388..ec78a11086 100644
---- a/meta-oe/recipes-core/emlog/emlog.inc
-+++ b/meta-oe/recipes-core/emlog/emlog.inc
-@@ -8,6 +8,8 @@ SRCREV = "a9bbf324fde131ff4cf064e32674086c4ced4dca"
- PV = "0.70+git"
- S = "${WORKDIR}/git"
+diff --git a/meta-networking/recipes-support/memcached/memcached_1.6.17.bb b/meta-networking/recipes-support/memcached/memcached_1.6.17.bb
+index 270ad5486d..7234f02a13 100644
+--- a/meta-networking/recipes-support/memcached/memcached_1.6.17.bb
++++ b/meta-networking/recipes-support/memcached/memcached_1.6.17.bb
+@@ -25,6 +25,8 @@ SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz \
+            "
+ SRC_URI[sha256sum] = "2055e373613d8fc21529aff9f0adce3e23b9ce01ba0478d30e7941d9f2bd1224"
  
-+CVE_PRODUCT = "nicupavel:emlog"
++CVE_STATUS[CVE-2022-26635] = "disputed: this is a problem of applications using php-memcached inproperly"
 +
- EXTRA_OEMAKE += " \
-     CFLAGS='${TARGET_CFLAGS}' \
- "
+ # set the same COMPATIBLE_HOST as libhugetlbfs
+ COMPATIBLE_HOST = "(i.86|x86_64|powerpc|powerpc64|aarch64|arm).*-linux*"
+ 
 -- 
 2.30.2
 
