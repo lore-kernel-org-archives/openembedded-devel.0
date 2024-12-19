@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE428E7718B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BA9B1E77184
 	for <webhook@archiver.kernel.org>; Thu, 19 Dec 2024 20:28:55 +0000 (UTC)
-Received: from mta-64-228.siemens.flowmailer.net (mta-64-228.siemens.flowmailer.net [185.136.64.228])
- by mx.groups.io with SMTP id smtpd.web11.138140.1734640126347330083
+Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
+ by mx.groups.io with SMTP id smtpd.web11.138144.1734640134643274085
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Dec 2024 12:28:46 -0800
+ Thu, 19 Dec 2024 12:28:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=alsPW+tS;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-256628-202412192028446287e9dbc5dc4aeaae-llgw0w@rts-flowmailer.siemens.com)
-Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 202412192028446287e9dbc5dc4aeaae
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=K6BX3rmK;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-20241219202852315cd91551f20af53c-he6mgy@rts-flowmailer.siemens.com)
+Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 20241219202852315cd91551f20af53c
         for <openembedded-devel@lists.openembedded.org>;
-        Thu, 19 Dec 2024 21:28:44 +0100
+        Thu, 19 Dec 2024 21:28:52 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=Jy34stIp+lY+uv0iwtz26dtttQc0niJABEgYOofh01U=;
- b=alsPW+tSY6FjiroNOp82wiWtRdTzK1L0DZRvv7POZmOAw/e61ZsQESPC5SFDjBH7odfOdN
- rYFfMXB4+bS0cQGwOb+AL8qypxbTLk3+4QLfLXGcAHom/g2cLDI5yWnqkw0Z98eYOzmFEJFf
- kyOdVEeaPKU+VLFFDfFsR6xKZnX9teIzeWS4z8poK44M5NsVZ/KoQvR4T7e6pTv8+E++45AX
- TepuAOJ7ksZLgTruG9XEVBXP88EmBs1lAMA5helLiRgB8Yfbb6oEuk4arlZwVAzoizds7HDB
- Xpnp6AWNibhLXLNbMvLQ/UeGIcNAAGHeKHuOogH3m03v9ZJdLdn+Nm/w==;
+ bh=8nbAoc/20xQfjyyA28I5Ummr1jXjPqN4Pm/zBnc5BKQ=;
+ b=K6BX3rmKutj89b3ElS+FoICAmTSS+Eee4exackMps6unSqXRYt14oqwSN5CcfWG5hrHz8v
+ r9+ytCcT/8ufOveb/yS52rxlMLbZlBEVyvaTZZUkJo68yKZrJzcOqwPYCm6/FAcul2PbnkYI
+ yOGD02QZN7AXn+FNPWXuFdcS8Oe5h+kv++sphDicFqBmIlMAosTYFT0fbD8aJTmh2MNl/PW8
+ xd80X0j72XZmA25TkaXrI7WS1HQTR2M6GkCiabo6vm5CQtvpTL45ztMpWFALtZZ6s7DIyy7z
+ CTqtZXTWVEWFGH34qETF82COshOFsf80jGGvelxdBDOFlNyF6u2poZJw==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH 03/12] apache2: remove old version references from CVEs
-Date: Thu, 19 Dec 2024 21:27:29 +0100
-Message-Id: <20241219202738.346121-4-peter.marko@siemens.com>
+Subject: [meta-oe][PATCH 05/12] gattlib: mark CVE-2019-6498 as fixed
+Date: Thu, 19 Dec 2024 21:27:31 +0100
+Message-Id: <20241219202738.346121-6-peter.marko@siemens.com>
 In-Reply-To: <20241219202738.346121-1-peter.marko@siemens.com>
 References: <20241219202738.346121-1-peter.marko@siemens.com>
 MIME-Version: 1.0
@@ -39,45 +39,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 19 Dec 2024 20:28:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114404
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114406
 
 From: Peter Marko <peter.marko@siemens.com>
 
-These were not updated on recipe upgrade.
-To make maintenance easier, remove exact versions.
+Our hash does not point to exact tag and CVE patch is already in.
+
+We use: 33a8a275928b186381bb0aea0f9778e330e57ec3
+Fix: https://github.com/labapart/gattlib/commit/60b813a770e42fdb0e85c1d2da7a55327784b8d6
+
+git describe --tags --match=v0.2 33a8a275928b186381bb0aea0f9778e330e57ec3 60b813a770e42fdb0e85c1d2da7a55327784b8d6
+v0.2-262-g33a8a27
+v0.2-85-g60b813a
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../recipes-httpd/apache2/apache2_2.4.62.bb        | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ meta-oe/recipes-connectivity/gattlib/gattlib_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.62.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.62.bb
-index 475f77d41b..3a988f2494 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.62.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.62.bb
-@@ -37,15 +37,15 @@ DEPENDS = "openssl expat pcre apr apr-util apache2-native "
+diff --git a/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb b/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb
+index 7ad28d594d..0841dc2596 100644
+--- a/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb
++++ b/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb
+@@ -17,6 +17,8 @@ SRCREV = "33a8a275928b186381bb0aea0f9778e330e57ec3"
  
- CVE_PRODUCT = "apache:http_server"
+ S = "${WORKDIR}/git"
  
--CVE_STATUS[CVE-1999-0289] = "not-applicable-platform: The current version (2.4.6) is not affected. It only applies for Windows"
-+CVE_STATUS[CVE-1999-0289] = "not-applicable-platform: The current version is not affected. It only applies for Windows"
- CVE_STATUS[CVE-1999-0678] = "not-applicable-platform: this CVE is for Debian packaging configuration"
- CVE_STATUS[CVE-1999-1412] = "not-applicable-platform: this CVE is for MAC OS X specific problem"
--CVE_STATUS[CVE-2007-0450] = "not-applicable-platform: The current version (2.4.6) is not affected. It only applies for Windows."
--CVE_STATUS[CVE-2007-6421] = "cpe-incorrect: The current version (2.4.59) is not affected by the CVE which affects versions from 2.2 (incl.) to 2.2.8 (excl.)"
--CVE_STATUS[CVE-2007-6422] = "cpe-incorrect: The current version (2.4.59) is not affected by the CVE which affects versions from 2.2 (incl.) to 2.2.8 (excl.)"
--CVE_STATUS[CVE-2007-6423] = "cpe-incorrect: The current version (2.4.59) is not affected by the CVE which affects versions from 2.2.x to 2.2.7-dev"
--CVE_STATUS[CVE-2008-2168] = "cpe-incorrect: The current version (2.4.59) is not affected by the CVE which affects versions up to 2.2.6 (excl.)"
--CVE_STATUS[CVE-2010-0425] = "not-applicable-platform: The current version (2.4.6) is not affected. It only applies for Windows."
-+CVE_STATUS[CVE-2007-0450] = "not-applicable-platform: The current version is not affected. It only applies for Windows."
-+CVE_STATUS[CVE-2007-6421] = "cpe-incorrect: The current version is not affected by the CVE which affects versions from 2.2 (incl.) to 2.2.8 (excl.)"
-+CVE_STATUS[CVE-2007-6422] = "cpe-incorrect: The current version is not affected by the CVE which affects versions from 2.2 (incl.) to 2.2.8 (excl.)"
-+CVE_STATUS[CVE-2007-6423] = "cpe-incorrect: The current version is not affected by the CVE which affects versions from 2.2.x to 2.2.7-dev"
-+CVE_STATUS[CVE-2008-2168] = "cpe-incorrect: The current version is not affected by the CVE which affects versions up to 2.2.6 (excl.)"
-+CVE_STATUS[CVE-2010-0425] = "not-applicable-platform: The current version is not affected. It only applies for Windows."
++CVE_STATUS[CVE-2019-6498] = "fixed-version: patch is already included in sources"
++
+ PACKAGECONFIG[examples] = "-DGATTLIB_BUILD_EXAMPLES=ON,-DGATTLIB_BUILD_EXAMPLES=OFF"
  
- SSTATE_SCAN_FILES += "apxs config_vars.mk config.nice"
- 
+ # Set this to force use of DBus API if Bluez version is older than 5.42
 -- 
 2.30.2
 
