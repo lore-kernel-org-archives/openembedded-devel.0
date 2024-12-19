@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CE74E7718A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51B83E7718B
 	for <webhook@archiver.kernel.org>; Thu, 19 Dec 2024 20:50:36 +0000 (UTC)
-Received: from mta-65-226.siemens.flowmailer.net (mta-65-226.siemens.flowmailer.net [185.136.65.226])
- by mx.groups.io with SMTP id smtpd.web10.138557.1734641434959316738
+Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
+ by mx.groups.io with SMTP id smtpd.web11.138547.1734641426677226628
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Dec 2024 12:50:35 -0800
+ Thu, 19 Dec 2024 12:50:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=nuQxKo96;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.226, mailfrom: fm-256628-20241219205033ae4b339928358e13a9-g9l3_u@rts-flowmailer.siemens.com)
-Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id 20241219205033ae4b339928358e13a9
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=ezJXU6/e;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-202412192050243696be039639db3414-sefk3r@rts-flowmailer.siemens.com)
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 202412192050243696be039639db3414
         for <openembedded-devel@lists.openembedded.org>;
-        Thu, 19 Dec 2024 21:50:33 +0100
+        Thu, 19 Dec 2024 21:50:25 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=4acOEUW0KM6GDiDuJ1RI4womNLDA1sjdrTgPxfqv/0w=;
- b=nuQxKo963kxNGKuoZWKxVlkfvOMIJafbHNezf69YM7SwAUu8tp6SyMlqFlTyDxx5ya5YxG
- INdPru2IHeIeK2TblHphJ8JTGAH17+zWNDdSqlwqHECrc2CiU9R1fMo70q6PJh7bNQQwc22p
- 1u+oHPXvBEt3Z5WdtjNikVX6oWA2v8cT8oME2zOXZvy000ThUq7tB1sqdPwQH3Y87JJwoVF1
- 9ym52LHjn2i5jTHLigl6VtK4Mab7oMuRTOTJS0Y8mmyWqBob4Sl6I3TO3MFMI7EEn4FALtRe
- wdlPsfRLgHuUSbGZRWnIHtpwK3hw9DquH1AnValS8Kr8OYAEjjkB+N4g==;
+ bh=CtQ9GB0634YwQcAsdGLWyX2e8VCqvZaZqLiaR50JVu0=;
+ b=ezJXU6/eUyTmmj6lSJDaMVIm/xA+ATR+RWqFUxnMMjSaJbPlGn+YkXMF94sT0rLFNDzhsI
+ 5Io1AfnUMHT3ga6xxn6rdwi+r5xGrgx6FjG4k5MV6PreVEI29V3ceTT+6vvfCuG8rDiUo6hf
+ +Hmm92he1UNvS8XoiwRCxQWYuYxjdyu9TK6aQUR21Y3LgbK/3WB2ac3yp+nkC8g2UzB6FNMX
+ ML5ewSAcn7uPEmeINnyGm7XKmRPkO7QZIExVQrgDXwi5YDJWwFa/bXYF1QnUqov8G4lFsgxR
+ lAGU58Jo2sHH2TQXFQmJZdGT38Xn4NsWd9KXRxZAFP6uxtPLA5Tf+62A==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH v2 10/12] swagger-ui: mark CVE-2016-1000229 as fixed
-Date: Thu, 19 Dec 2024 21:48:59 +0100
-Message-Id: <20241219204901.347009-11-peter.marko@siemens.com>
+Subject: [meta-oe][PATCH v2 08/12] spice-gtk: mark CVE-2012-4425 as fixed
+Date: Thu, 19 Dec 2024 21:48:57 +0100
+Message-Id: <20241219204901.347009-9-peter.marko@siemens.com>
 In-Reply-To: <20241219204901.347009-1-peter.marko@siemens.com>
 References: <20241219204901.347009-1-peter.marko@siemens.com>
 MIME-Version: 1.0
@@ -39,31 +39,33 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 19 Dec 2024 20:50:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114426
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114424
 
 From: Peter Marko <peter.marko@siemens.com>
 
-as per https://github.com/swagger-api/swagger-ui/issues/1865
+It is fixed by [1] since 0.15.3.
 NVD tracks this CVE as version-less.
+
+[1] https://cgit.freedesktop.org/spice/spice-gtk/commit/?id=efbf867bb88845d5edf839550b54494b1bb752b9
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.18.2.bb | 2 ++
+ meta-networking/recipes-support/spice/spice-gtk_0.42.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.18.2.bb b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.18.2.bb
-index 5add32db43..0998643b2a 100644
---- a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.18.2.bb
-+++ b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.18.2.bb
-@@ -14,6 +14,8 @@ SRC_URI = "git://github.com/swagger-api/swagger-ui;branch=master;protocol=https"
+diff --git a/meta-networking/recipes-support/spice/spice-gtk_0.42.bb b/meta-networking/recipes-support/spice/spice-gtk_0.42.bb
+index c8a3f7f532..4ef39f0904 100644
+--- a/meta-networking/recipes-support/spice/spice-gtk_0.42.bb
++++ b/meta-networking/recipes-support/spice/spice-gtk_0.42.bb
+@@ -12,6 +12,8 @@ SRCREV = "f04479c16f0969fb394ebe74b6eff74e560a42f0"
  
- SRCREV = "3c7e281d97fd3e70b25f7ff4a001eabd56e375d7"
+ SRC_URI = "gitsm://gitlab.freedesktop.org/spice/spice-gtk.git;protocol=https;branch=master"
  
-+CVE_STATUS[CVE-2016-1000229] = "fixed-version: fixed since 2.2.1"
++CVE_STATUS[CVE-2012-4425] = "fixed-version: fixed since 0.15.3"
 +
  S = "${WORKDIR}/git"
  
- do_install() {
+ DEPENDS = " \
 -- 
 2.30.2
 
