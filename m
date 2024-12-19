@@ -1,229 +1,127 @@
-Return-Path: <mns@gomspace.com>
+Return-Path: <hongxu.jia@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7335CE77184
-	for <webhook@archiver.kernel.org>; Thu, 19 Dec 2024 06:31:11 +0000 (UTC)
-Received: from EUR02-AM0-obe.outbound.protection.outlook.com (EUR02-AM0-obe.outbound.protection.outlook.com [40.107.247.98])
- by mx.groups.io with SMTP id smtpd.web11.124558.1734589865252563198
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3335AE77184
+	for <webhook@archiver.kernel.org>; Thu, 19 Dec 2024 08:48:02 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.125819.1734598081810627108
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Dec 2024 22:31:05 -0800
+ Thu, 19 Dec 2024 00:48:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@gomspace.com header.s=selector2 header.b=oCB/Mx73;
- spf=pass (domain: gomspace.com, ip: 40.107.247.98, mailfrom: mns@gomspace.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JOEiB/EhDRllPJFi7CXljCEge58A6mJmjWDJmBguGH617/TcoJmZoWn8hMxa1lHDjLwcz5oobJXBw3Y6oSns3VbjV2C+2EAR+8v/D2/4ev7RsxWV5UGTO3PZclRF3bcwXJHZ62pIUgiUj7+BJpZ0BmRFymec6uBvXW/dOpRnYzcBElMpPukmL1jkuqLBZdsS9V8R538Q21tW5PhU91lnYm7fVoJWizfhCsvko9jnmUG1UXKztkJjcLy6qYl/zo3sLkT2hg/1pUlRPYpHevQjHSAxyvhOnzctST3X671yW/t3+bYBwFu/paSH3nmHZwhHOhtdQPP7+hZc7M/MHllkVA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=atgsiy/mjtIfN2PcG2+5aavu0d1UfXOUFa6oqyPFbEo=;
- b=epszXPhwCj3as/0Aqiw9d/NRurhjRiyP9pWAQvz1YnWj4caXD7uw5P4LapnSPP0v2Rxz/Vmy7cj4ZIzvJy93U/6R86xYBuwPrxSfCMQ3Dbf72A5wJO/YapBR0Sqb6rd6YjiT1jkDOmjARyBYapviMECCeZxr+xJhfVbq6WqpX4MBm6zzzk2yQD4ijwUQFx5IK1byEu2UQrQvDCxVf9OyS8Qbg1azuCNKqJDnzdv0rA59qI+tn7wZ78pcexhtFrn1QmMbtqCdTI4QNfdH/dX3Dks9SvZQ7UtKXvZ02bshKqD0UvcQfHf5FYLxPag9McWPXYLb48C10CA6qe+RdFXbCg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 79.171.149.170) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=gomspace.com; dmarc=pass (p=none sp=none pct=100) action=none
- header.from=gomspace.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gomspace.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=atgsiy/mjtIfN2PcG2+5aavu0d1UfXOUFa6oqyPFbEo=;
- b=oCB/Mx73EH6mbwk9q8BzEinCRiXdDU+3L4cj6aksq3wPlqYFRU9mPzUHeGqJT5fCwHqGGYI/P1meaf7WtE8/mt8Dl4knGmgGSpir3DzmOAjbY3ggVJ3RZlxuON+Y5WBvb6wgWtygQcZ/hPvdpgxh07rUBFKZn8XVzZmitV3TLgo=
-Received: from PA7P264CA0171.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:36f::20)
- by AS4PR08MB7656.eurprd08.prod.outlook.com (2603:10a6:20b:4f2::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8272.14; Thu, 19 Dec
- 2024 06:31:01 +0000
-Received: from AM3PEPF0000A799.eurprd04.prod.outlook.com
- (2603:10a6:102:36f:cafe::d8) by PA7P264CA0171.outlook.office365.com
- (2603:10a6:102:36f::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8251.23 via Frontend Transport; Thu,
- 19 Dec 2024 06:31:01 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 79.171.149.170)
- smtp.mailfrom=gomspace.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=gomspace.com;
-Received-SPF: Pass (protection.outlook.com: domain of gomspace.com designates
- 79.171.149.170 as permitted sender) receiver=protection.outlook.com;
- client-ip=79.171.149.170; helo=webmail.gomspace.com; pr=C
-Received: from webmail.gomspace.com (79.171.149.170) by
- AM3PEPF0000A799.mail.protection.outlook.com (10.167.16.104) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8251.15 via Frontend Transport; Thu, 19 Dec 2024 06:30:59 +0000
-Received: from DK-AAL-EX02.gomspace.lan (10.0.1.86) by
- DK-AAL-EX02.gomspace.lan (10.0.1.86) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.14; Thu, 19 Dec 2024 07:30:59 +0100
-Received: from mns-T460s.gomspace.lan (10.0.8.155) by DK-AAL-EX02.gomspace.lan
- (10.0.1.86) with Microsoft SMTP Server id 15.2.1544.14 via Frontend
- Transport; Thu, 19 Dec 2024 07:30:59 +0100
-From: Martin Siegumfeldt <mns@gomspace.com>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=208319dcd1=hongxu.jia@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BJ7oOha015742
+	for <openembedded-devel@lists.openembedded.org>; Thu, 19 Dec 2024 00:48:01 -0800
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 43h6685c7m-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 19 Dec 2024 00:48:01 -0800 (PST)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Thu, 19 Dec 2024 00:48:00 -0800
+Received: from pek-lpg-core5.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Thu, 19 Dec 2024 00:48:00 -0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Martin Siegumfeldt <mns@gomspace.com>
-Subject: [meta-oe][styhead][PATCH] pps-tools: backport a patch to fix prints
-Date: Thu, 19 Dec 2024 07:30:56 +0100
-Message-ID: <20241219063056.1902050-1-mns@gomspace.com>
-X-Mailer: git-send-email 2.43.2
+Subject: [meta-oe][PATCH 2/3] Update p7zip to 7zip
+Date: Thu, 19 Dec 2024 16:47:57 +0800
+Message-ID: <20241219084758.3809790-2-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241219084758.3809790-1-hongxu.jia@windriver.com>
+References: <20241219084758.3809790-1-hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-EndpointSecurity-0xde81-EV: v:7.9.18.468, d:out, a:y, w:t, t:8, sv:1734573576, ts:1734589859
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM3PEPF0000A799:EE_|AS4PR08MB7656:EE_
-X-MS-Office365-Filtering-Correlation-Id: aeb6213c-2d35-43d9-d601-08dd1ff6b411
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700013|82310400026|1800799024|376014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?eQT9UP8Ak9YihiLKuVOZPMXdPnNTyIL1gtBi+uTCvntpxos2FLQlfEqyg26N?=
- =?us-ascii?Q?9RlmpeO99I4t9aEvRzZzmQmfGW6Jt+AkNMJcAFxySbz7QwVBImN6Ur4F/pi2?=
- =?us-ascii?Q?IxAepqQ7ijez/NNG2kUnt96XiWHnIDoTaokd5DYKLT1WvTyGMrmyP1NTL824?=
- =?us-ascii?Q?/62Fg5qpahXczrPHDA/uqboLkHeT602ddZ9LvZmYc7aQH6yiiF1qxXi69ukY?=
- =?us-ascii?Q?BCwbbOna3n/LpasO0nDfEyRN2WQpcbc5HNDxWEan7VcmSWYv0suy6ylB3UMl?=
- =?us-ascii?Q?xrPHLxV2rt2fQVGPbX1YWzA7nSs2zep9yzdJ6y6XJL4VjDeXphC2Lz4dBB30?=
- =?us-ascii?Q?TWDo+5KoQBV6CXUKjFFsY432cZVfKBPrw1QjBB7TRO1P2ERvypvtYu+F5i6O?=
- =?us-ascii?Q?5nXPtOMuaOeaUJ5/JViZV+N2hKGFgME2nhSSYmhHY05bdgA+cB9/FpLZWSyv?=
- =?us-ascii?Q?TfcrAE50v7zGXzTPP8oFpcBp28XeaOL6Vb2uEiHSpZGMjB7YAnPUNceRfsnc?=
- =?us-ascii?Q?xj4kGsaqyMrLKXYcMebc32BQdrYnxkIGVqNairK6YtoHlfAwV06H78elKLJc?=
- =?us-ascii?Q?6Tmb9Fqo7KKfkc8E1SlSK04PbBgpSuEtNlDOea6FvTML7nJDLdxchtw/Qs7D?=
- =?us-ascii?Q?j1kDdPhND6y2uTH6OQZfioqhQwv8Ov3d0bQJ1sKBsRG/xo0iiJJw2kFyRo/d?=
- =?us-ascii?Q?zWa5EGEqyAfsZ2KBAsTjpI0kHJ9zukj/cOMp7aCQY2LX5golIdnMci8TgFcU?=
- =?us-ascii?Q?KPJw+SUvv+oKXTmPKlxqb2S+xOtDMAIm2l10OIpksIOEjcdRcLfUawbyx+pl?=
- =?us-ascii?Q?SPVNWmJrTYjrg/dimD/g0RXnq8OOqWFX/2aiL1NwNOXa5ZUifvsboZMPeDyH?=
- =?us-ascii?Q?ONePLCsdQombA6kGvxuG6sX8gtKhNcmUtwrSBVSEKyEWzfExmpGbG/M+DMxl?=
- =?us-ascii?Q?QgvWQXqHT50e9sTka/0T7DgKt4xXxar5c/Uhgx9dbdTaY3nTzGf+Np1AVFSk?=
- =?us-ascii?Q?HZImO5QUn8RPaXlNS7SRnfXbMowETDMXHgB1yMXgePNyD7jlUU/RXVyaHgJd?=
- =?us-ascii?Q?HRDQPihQGvJdXIZUbD1m0qLo4YRmWqhdBzGGVbQMp7brOln/LBf0QvG9bEEX?=
- =?us-ascii?Q?h1kRk897UGXT1rwwBiGwFfN82JI+XhQiI3OsNQjgOry5rXjemgszjQvI915o?=
- =?us-ascii?Q?iJTwWuWJ8VW+FFhmLopohLchbvIr3B4JnhADUx/+ti4DQHnuXUHL8rt2oixm?=
- =?us-ascii?Q?ZluEkTcGZRu61tWBzeWjVZuz+BxHhhWX+CACn51epwJvpm6GUJvdDjGC4UEz?=
- =?us-ascii?Q?gLCstNisETGUIZNctpqAnfuQqkXAg9npdGYfZEsRyCnVpN7aYAl/culC9SxR?=
- =?us-ascii?Q?U61tD1ZOCamVpUkiAXL6UrtpIZxqSGgbEB3qlb0DXKMvChorjRdrrgg5G3NL?=
- =?us-ascii?Q?8KT2jAdWa5IduiRMvJJ3PvvlV7A+cd2w8g2b9tD0LUOiRZW9kXXzLVas4r+z?=
- =?us-ascii?Q?EjDBFq7+U3Ux0MU=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:79.171.149.170;CTRY:DK;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:webmail.gomspace.com;PTR:webmail.gomspace.com;CAT:NONE;SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014);DIR:OUT;SFP:1102;
-X-OriginatorOrg: gomspace.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Dec 2024 06:30:59.9493
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: aeb6213c-2d35-43d9-d601-08dd1ff6b411
-X-MS-Exchange-CrossTenant-Id: 91ed1e54-6d8b-4599-84d8-65fe75fda3d1
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=91ed1e54-6d8b-4599-84d8-65fe75fda3d1;Ip=[79.171.149.170];Helo=[webmail.gomspace.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AM3PEPF0000A799.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR08MB7656
+X-Proofpoint-ORIG-GUID: C9yNHXnuZcYNWmHdF6zsSpnfa2_GZ9An
+X-Authority-Analysis: v=2.4 cv=K5XYHzWI c=1 sm=1 tr=0 ts=6763ddc1 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=RZcAm9yDv7YA:10 a=t7CeM3EgAAAA:8 a=ybSwKhoZCyFeAVVXRqUA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: C9yNHXnuZcYNWmHdF6zsSpnfa2_GZ9An
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2024-12-19_03,2024-12-18_02,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ lowpriorityscore=0 phishscore=0 adultscore=0 clxscore=1015 malwarescore=0
+ spamscore=0 mlxscore=0 mlxlogscore=999 impostorscore=0 bulkscore=0
+ suspectscore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2411120000 definitions=main-2412190069
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 Dec 2024 06:31:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114379
+ <openembedded-devel@lists.openembedded.org>; Thu, 19 Dec 2024 08:48:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114381
 
-Patch reported issue observed on ARM32 based HW during bump
-from Langdale to Scarthgap
+Due to commit [Use 7zip 2409 to replace p7zip 16.02] applied,
+update affected recipes
 
-Signed-off-by: Martin Siegumfeldt <mns@gomspace.com>
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- ...-Use-lld-in-printf-for-64-bit-time_t.patch | 59 +++++++++++++++++++
- .../pps-tools/pps-tools_1.0.3.bb              |  4 +-
- 2 files changed, 62 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/pps-tools/pps-tools/0001-Use-ll=
-d-in-printf-for-64-bit-time_t.patch
+ .../recipes-devtool/android-tools/android-tools_29.0.6.r14.bb | 4 ++--
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb    | 2 +-
+ meta-python/recipes-devtools/python/python3-rarfile_4.2.bb    | 2 +-
+ meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.21.bb        | 2 +-
+ 4 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-support/pps-tools/pps-tools/0001-Use-lld-in-pr=
-intf-for-64-bit-time_t.patch b/meta-oe/recipes-support/pps-tools/pps-tools/=
-0001-Use-lld-in-printf-for-64-bit-time_t.patch
-new file mode 100644
-index 000000000..058217d68
---- /dev/null
-+++ b/meta-oe/recipes-support/pps-tools/pps-tools/0001-Use-lld-in-printf-fo=
-r-64-bit-time_t.patch
-@@ -0,0 +1,59 @@
-+From 6faed0a3b41fba4619fe4598a2834dfb4d2be7e4 Mon Sep 17 00:00:00 2001
-+From: Matt Merhar <mattmerhar@protonmail.com>
-+Date: Fri, 10 Nov 2023 17:21:51 -0500
-+Subject: [PATCH] Use %lld in printf for 64-bit time_t
-+
-+musl 1.2.0 switched to use 64-bit time_t everywhere, including 32-bit
-+architectures, causing garbage values to be printed from ppswatch and
-+ppstest.
-+
-+Use the correct format string for the affected printf statements and
-+explicitly cast to long long to avoid potential compatibility issues
-+with 32-bit glibc.
-+
-+Upstream-Status: Backport [https://github.com/redlab-i/pps-tools/commit/6f=
-aed0a3b41fba4619fe4598a2834dfb4d2be7e4]
-+
-+Signed-off-by: Matt Merhar <mattmerhar@protonmail.com>
-+---
-+ ppstest.c  | 8 ++++----
-+ ppswatch.c | 2 +-
-+ 2 files changed, 5 insertions(+), 5 deletions(-)
-+
-+diff --git a/ppstest.c b/ppstest.c
-+index 0370794..c375a09 100644
-+--- a/ppstest.c
-++++ b/ppstest.c
-+@@ -110,13 +110,13 @@ retry:
-+ 	}
-+=20
-+ 	printf("source %d - "
-+-	       "assert %ld.%09ld, sequence: %ld - "
-+-	       "clear  %ld.%09ld, sequence: %ld\n",
-++	       "assert %lld.%09ld, sequence: %ld - "
-++	       "clear  %lld.%09ld, sequence: %ld\n",
-+ 	       i,
-+-	       infobuf.assert_timestamp.tv_sec,
-++	       (long long)infobuf.assert_timestamp.tv_sec,
-+ 	       infobuf.assert_timestamp.tv_nsec,
-+ 	       infobuf.assert_sequence,
-+-	       infobuf.clear_timestamp.tv_sec,
-++	       (long long)infobuf.clear_timestamp.tv_sec,
-+ 	       infobuf.clear_timestamp.tv_nsec, infobuf.clear_sequence);
-+ 	fflush(stdout);
-+=20
-+diff --git a/ppswatch.c b/ppswatch.c
-+index 5c6202b..15d7a77 100644
-+--- a/ppswatch.c
-++++ b/ppswatch.c
-+@@ -148,7 +148,7 @@ int fetch_source(pps_handle_t handle, int avail_mode)
-+ 	if (max_divergence < div)
-+ 		max_divergence =3D div;
-+ 	if (div >=3D margin) {
-+-		printf("timestamp: %ld, sequence: %ld, offset: % 6ld\n", ts.tv_sec, seq=
-, ts.tv_nsec);
-++		printf("timestamp: %lld, sequence: %ld, offset: % 6ld\n", (long long)ts=
-.tv_sec, seq, ts.tv_nsec);
-+ 		fflush(stdout);
-+ 		overflows++;
-+ 		curr_unsync++;
-+--=20
-+2.47.1
-+
-diff --git a/meta-oe/recipes-support/pps-tools/pps-tools_1.0.3.bb b/meta-oe=
-/recipes-support/pps-tools/pps-tools_1.0.3.bb
-index 65c06c1bd..34b4bbf75 100644
---- a/meta-oe/recipes-support/pps-tools/pps-tools_1.0.3.bb
-+++ b/meta-oe/recipes-support/pps-tools/pps-tools_1.0.3.bb
-@@ -5,7 +5,9 @@ LICENSE =3D "GPL-2.0-only"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882bb=
-e"
-=20
- SRCREV =3D "c50cb7183e252b47308fa22f420e0a877277aa29"
--SRC_URI =3D "git://github.com/ago/pps-tools.git;branch=3Dmaster;protocol=
-=3Dhttps"
-+SRC_URI =3D "git://github.com/ago/pps-tools.git;branch=3Dmaster;protocol=
-=3Dhttps \
-+           file://0001-Use-lld-in-printf-for-64-bit-time_t.patch \
-+           "
-=20
- S =3D "${WORKDIR}/git"
-=20
---=20
-2.43.2
+diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
+index d2680b457..ee665bb15 100644
+--- a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
++++ b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
+     file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=cb641bc04cda31daea161b1bc15da69f \
+     file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9 \
+ "
+-DEPENDS = "libbsd libpcre zlib libcap libusb squashfs-tools p7zip libselinux googletest"
++DEPENDS = "libbsd libpcre zlib libcap libusb squashfs-tools 7zip libselinux googletest"
+ 
+ SRCREV_core = "abfd66fafcbb691d7860df059f1df1c9b1ef29da"
+ 
+@@ -168,7 +168,7 @@ do_install() {
+ 
+ PACKAGES =+ "${PN}-fstools ${PN}-adbd"
+ 
+-RDEPENDS:${BPN} = "${BPN}-conf p7zip"
++RDEPENDS:${BPN} = "${BPN}-conf 7zip"
+ 
+ FILES:${PN}-adbd = "\
+     ${bindir}/adbd \
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index cffd2d687..4065eae52 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -385,7 +385,7 @@ RDEPENDS:packagegroup-meta-oe-extended = "\
+     nicstat \
+     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "openwsman", "", d)} \
+     ostree \
+-    p7zip \
++    7zip \
+     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "pam-plugin-ccreds pam-plugin-ldapdb pam-ssh-agent-auth", "", d)} \
+     pegtl \
+     ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "polkit-group-rule-datetime polkit-group-rule-network polkit", "", d)} \
+diff --git a/meta-python/recipes-devtools/python/python3-rarfile_4.2.bb b/meta-python/recipes-devtools/python/python3-rarfile_4.2.bb
+index 41cff4bfc..6f3012d1e 100644
+--- a/meta-python/recipes-devtools/python/python3-rarfile_4.2.bb
++++ b/meta-python/recipes-devtools/python/python3-rarfile_4.2.bb
+@@ -13,7 +13,7 @@ inherit pypi
+ PYPI_PACKAGE="rarfile"
+ 
+ RDEPENDS:${PN} += "\
+-    p7zip \
++    7zip \
+     python3-core \
+     python3-datetime \
+     python3-crypt \
+diff --git a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.21.bb b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.21.bb
+index abb5c14e6..4822f0cad 100644
+--- a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.21.bb
++++ b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.21.bb
+@@ -30,4 +30,4 @@ do_configure:prepend() {
+ 
+ FILES:${PN} += "${libdir}/thunar-archive-plugin"
+ 
+-RRECOMMENDS:${PN} = "lzop zip tar bzip2 unzip xz p7zip"
++RRECOMMENDS:${PN} = "lzop zip tar bzip2 unzip xz 7zip"
+-- 
+2.34.1
 
-
-________________________
-This email was scanned by Bitdefender
 
