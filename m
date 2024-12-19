@@ -1,80 +1,87 @@
-Return-Path: <Jiaying.Song.CN@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D852E77188
-	for <webhook@archiver.kernel.org>; Thu, 19 Dec 2024 03:21:30 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.122330.1734578487205721255
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CFE75E77184
+	for <webhook@archiver.kernel.org>; Thu, 19 Dec 2024 04:27:20 +0000 (UTC)
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
+ by mx.groups.io with SMTP id smtpd.web11.123143.1734582435727807535
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Dec 2024 19:21:27 -0800
+ Wed, 18 Dec 2024 20:27:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=20836d65da=jiaying.song.cn@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BJ3EqAj006568
-	for <openembedded-devel@lists.openembedded.org>; Wed, 18 Dec 2024 19:21:26 -0800
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 43h66853s1-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 18 Dec 2024 19:21:26 -0800 (PST)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Wed, 18 Dec 2024 19:21:26 -0800
-Received: from pek-lpg-core1.wrs.com (128.224.156.132) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Wed, 18 Dec 2024 19:21:25 -0800
-From: <jiaying.song.cn@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <Changqing.Li@windriver.com>
-Subject: [meta-oe][scarthgap][PATCH v2] xmlsec1: Switch SRC_URI to use github release
-Date: Thu, 19 Dec 2024 11:21:23 +0800
-Message-ID: <20241219032123.3576640-1-jiaying.song.cn@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=LGuUmWLr;
+ spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-216281bc30fso4580375ad.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Dec 2024 20:27:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1734582435; x=1735187235; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=6lK4orh67fwdbnM7ksXEwyqldkfrtU405DGk4Bv47hM=;
+        b=LGuUmWLrDoK2mbbSac+Eke3fCJ/C/nGB4rE1KR8HzFGawCdSkVgq1BgCf4F9Lrv3Jq
+         vDUdcbzwQMfwAJOwZ+k9CRhEkAoZTbJCHbO/JnHgrl94XUNgfCByS0+pA9U1YB/01UKO
+         k8dKphf40dAhU9Qkm0OIlrJnXmLZUGU4mOw7q7DbuGF2KaxS0a+4OuirMIyLubUfmD9I
+         6bYLa9gYJ5bM7U6h9rzcaLPDJErXOlPgjzvpA9dtFvn664T6SbjE7hjzZnp5b3NilBqA
+         xQnoLizxltKSecBk7GVGxJAFQD+18A2vsNOcq+Fz1/s5tUC7miaf5eLxKEPf03IkHSnV
+         vqFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1734582435; x=1735187235;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=6lK4orh67fwdbnM7ksXEwyqldkfrtU405DGk4Bv47hM=;
+        b=hzbQQcVhRLBTv/yWy8SJ1Y7jfP+CZ2/tFnUumK5zhlqQjM7rdnvGrvfiRglE8YZ+Xk
+         N2MPToEfldZsvm8VkBiLyJItSmxiLi0v6IeP0FhJuqmM1VFc0gQBO42uK4Xeepe7pach
+         mLU4YzfCRgkYwAAuIsx4ThE/5aSQSjFq93z4FAiwGN2e3b3ElOhYknad95HYE94jkrLc
+         KAXdAgO0GOpLVDsATj3aAm8G6hLGuMUaYtanoGoM7SU0X26Eiu3evw60dd78pf++fY1w
+         8d8f6/9OTjoLxhnsc3zPoar3nPK58lulRb2TZMlDTRdcIbAp41tOSUi2edouE+HaFeAX
+         veTw==
+X-Gm-Message-State: AOJu0Yw69f9WWvkwFkgIp9JRy0xUJTeDfsnQWVRQ4YR/OrMvyt+6HX21
+	GkYWJzIghHYphxQC0DtHQJ8Gn5zCm/nAIMpNIb0g5D4o6gHmEG1Qd4jALokI
+X-Gm-Gg: ASbGncueQVqed6E3QVjbXQjxM05g04iz849BuhtDcD2LZhBpVVyoQKTXTiTfTs0o8Oh
+	v9gqF7PilFIdv1Od7aM2XWH8AOL9WAi9k0LDekUr6H1PAquKdIKJm6anMw9+EQi5eIzKmkecnuh
+	oiIcAdhZnSEkqbL2mOmH61/ufPqDoXzsy7s0VLOFKh9K+XJn4Q57XDQnvN1zS8c40ua13Kko+hU
+	NWfU6X0sJG7MTNLzdssjd3J4HuyWRWwErH632f0WiX/+bEe7jqF3gRe+w==
+X-Google-Smtp-Source: AGHT+IGlmPc8GITwYaXbrYrNK5L+/gWkMxdN5SjZ3rj95D4P3ulhTWIp+Bveoao43jvndZmuHGZxqA==
+X-Received: by 2002:a17:902:da8b:b0:216:32c4:f807 with SMTP id d9443c01a7336-218d7261d12mr66345305ad.45.1734582434640;
+        Wed, 18 Dec 2024 20:27:14 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8201:fd20::d5a])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-219dc9f5152sm3340905ad.192.2024.12.18.20.27.13
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 18 Dec 2024 20:27:14 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] libnfs: Add gnutls build time dependency
+Date: Wed, 18 Dec 2024 20:27:12 -0800
+Message-ID: <20241219042712.27876-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: yrvgD_VJ5zAMcjMtvs_4mirOebGkTYvx
-X-Authority-Analysis: v=2.4 cv=K5XYHzWI c=1 sm=1 tr=0 ts=67639136 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=RZcAm9yDv7YA:10 a=PjL9yVGjAAAA:8 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=A5q1kjMgKVMUW4fyQIcA:9 a=EO-MHUxLLT6bydkwyJ4X:22
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: yrvgD_VJ5zAMcjMtvs_4mirOebGkTYvx
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2024-12-19_01,2024-12-18_02,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- lowpriorityscore=0 phishscore=0 adultscore=0 clxscore=1015 malwarescore=0
- spamscore=0 mlxscore=0 mlxlogscore=999 impostorscore=0 bulkscore=0
- suspectscore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
- engine=8.21.0-2411120000 definitions=main-2412190022
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 Dec 2024 03:21:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114377
+ <openembedded-devel@lists.openembedded.org>; Thu, 19 Dec 2024 04:27:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114378
 
-From: Jiaying Song <jiaying.song.cn@windriver.com>
+It does not build without it.
 
-This ensures that we do not have to do the toggling from releases to old-release in LTS release branches
-
-Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-connectivity/libnfs/libnfs_6.0.2.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.4.bb b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.4.bb
-index 7639209e1..c65350672 100644
---- a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.4.bb
-+++ b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.4.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=352791d62092ea8104f085042de7f4d0"
+diff --git a/meta-oe/recipes-connectivity/libnfs/libnfs_6.0.2.bb b/meta-oe/recipes-connectivity/libnfs/libnfs_6.0.2.bb
+index bec7279a06..0d21a7e596 100644
+--- a/meta-oe/recipes-connectivity/libnfs/libnfs_6.0.2.bb
++++ b/meta-oe/recipes-connectivity/libnfs/libnfs_6.0.2.bb
+@@ -9,6 +9,8 @@ SRC_URI = "git://github.com/sahlberg/libnfs.git;protocol=https;branch=master \
+ SRCREV = "18c5c73ee88bb7dc8da0d55dc95164bb77e49dc6"
+ S = "${WORKDIR}/git"
  
- SECTION = "libs"
++DEPENDS += "gnutls"
++
+ inherit cmake
  
--SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
-+SRC_URI = "https://github.com/lsh123/xmlsec/releases/download/${PV}/${BP}.tar.gz \
-            file://fix-ltmain.sh.patch \
-            file://change-finding-path-of-nss.patch \
-            file://makefile-ptest.patch \
--- 
-2.25.1
-
+ do_install:append() {
 
