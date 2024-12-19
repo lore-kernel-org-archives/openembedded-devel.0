@@ -1,730 +1,213 @@
-Return-Path: <hongxu.jia@eng.windriver.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A4DA3E77184
-	for <webhook@archiver.kernel.org>; Thu, 19 Dec 2024 16:04:04 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.132161.1734624242419287396
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE528E7718A
+	for <webhook@archiver.kernel.org>; Thu, 19 Dec 2024 16:38:04 +0000 (UTC)
+Received: from EUR02-DB5-obe.outbound.protection.outlook.com (EUR02-DB5-obe.outbound.protection.outlook.com [40.107.249.78])
+ by mx.groups.io with SMTP id smtpd.web11.133144.1734626278807183447
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Dec 2024 08:04:02 -0800
+ Thu, 19 Dec 2024 08:37:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=208319dcd1=hongxu.jia@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BJ7em40018466;
-	Thu, 19 Dec 2024 08:04:02 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 43hadq5sku-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
-	Thu, 19 Dec 2024 08:04:01 -0800 (PST)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Thu, 19 Dec 2024 08:04:00 -0800
-Received: from pek-lpg-core5.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Thu, 19 Dec 2024 08:03:59 -0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <peter.marko@siemens.com>
-Subject: [PATCH V4 1/3] Use 7zip 24.09 to replace p7zip 16.02
-Date: Fri, 20 Dec 2024 00:03:58 +0800
-Message-ID: <20241219160359.2769071-1-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241219091404.113636-1-hongxu.jia@windriver.com>
-References: <20241219091404.113636-1-hongxu.jia@windriver.com>
+ dkim=pass header.i=@siemens.com header.s=selector2 header.b=hl2PTE63;
+ spf=pass (domain: siemens.com, ip: 40.107.249.78, mailfrom: peter.marko@siemens.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=kYwsgOj+MKDVYZMH6Qy9Y8X0SVXztbkRYVfyTH1HPNdOYeHDzihNuAKm5KJVZGjXS5rdcpIiFGySHMiTl3b1LLzUej+nppJj5tH6YDxej1NGNnAxB5efR5mX6karISJpEza5C9FLABIRvJmSLXqi1DzA7Z47lvv7F9Pl1Om5q1bM8R8+QJIa480vgsJfaIXMf8bAX9wV4rp/H5ww44n4J9JhKbTJg+ZuvhpB+4CeKzCqc/u3t9vtY9Jz73jlkACGmzXObEOeuvREOrRcRKa6dx2cunOpFxSTjUpcW/ok1QvglhwqKgCtES6hKtK36ggkn3n8AxqUcB/MJg3AM6fteg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=E2KlQj3E/YCKcDrrUi9xRibnHIWI3VVO9NogFDyL6H0=;
+ b=XfxWblMA0Es1tNqSgp4iC13D2+DXbjgIUnLZ7cLy7IeRWrQDXDluIzXO4poICbJY3nlTPT3SA2iFuksGTA23vVcFxpgfpnutv71ykPZuKt7fCu0+AHbh94co5MyjnH5pVvV3CRYiiSyiq5vgj92EzGMavp6skJ+8yuz3ux7546N500z2Sk7Dsg/aG8Li0SrBc1aiowfbJPp1Z9W8xb+ZisxmUV8wInfdHDSYgFChQZubYRg4xIxYK4p12nr/PTkMQ3+n+TOwAG/zXt3Rr8K/tFrBlaljkf1KonTBBgN/GIf7nb7934jQPDSKJQzIX+c83FVxR5eCBLo0PcD3Xj6qhg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
+ dkim=pass header.d=siemens.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=E2KlQj3E/YCKcDrrUi9xRibnHIWI3VVO9NogFDyL6H0=;
+ b=hl2PTE63TTA9iAPmCe91hO13uDHwav8gRaO91TzCbdFA9fOt/IV5fB1EZ0ObfAXgU0W/zkOs19jQwjXX19P14LtD+tPU4Pgs/MPsWvajXFIGqVfk1gZipzLKzMtc6AfbkBw6oagpc9TTxijvpFOMam9HFh8B5eKqTMZ2kqq/GUswv/SwGDmgZith1YaPb4eQFKbnwUGx+EOjMFBgc2dR4y0XVDDogIRqlFZD15kjHSmEz9+COtNqVB30yHFcfxEkuxjsU4mVSA8ML1gSQtDoE6+KAD21NA15XvORQ+HJfrlEYgxKEFwpbWk2wLQCVJlwHLJysT1UqhHWa2c7UvpGpg==
+Received: from AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:479::20)
+ by AS2PR10MB6349.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:550::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8272.11; Thu, 19 Dec
+ 2024 16:37:55 +0000
+Received: from AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::6c68:267b:6fd1:d3f2]) by AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::6c68:267b:6fd1:d3f2%3]) with mapi id 15.20.8272.005; Thu, 19 Dec 2024
+ 16:37:54 +0000
+From: "Marko, Peter" <Peter.Marko@siemens.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+CC: "Nagy, Miroslav" <miroslav.nagy@siemens.com>
+Subject: RE: [meta-oe][PATCH] 7-zip: add new recipe
+Thread-Topic: [meta-oe][PATCH] 7-zip: add new recipe
+Thread-Index: AQHbT6/dQvNlCDKj802QuisHS4q5erLtyFQQ
+Date: Thu, 19 Dec 2024 16:37:54 +0000
+Message-ID: 
+ <AS1PR10MB569793D31A8537F39634F9C4FD062@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
+References: <20241216114349.125642-1-miroslav.nagy@siemens.com>
+In-Reply-To: <20241216114349.125642-1-miroslav.nagy@siemens.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+ MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_ActionId=e6be7396-e909-4003-af01-93d4cbb8cd3c;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_ContentBits=0;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Enabled=true;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Method=Standard;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Name=restricted;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SetDate=2024-12-19T16:34:19Z;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SiteId=38ae3bcd-9579-4fd4-adda-b42e1495d55a;
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=siemens.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AS1PR10MB5697:EE_|AS2PR10MB6349:EE_
+x-ms-office365-filtering-correlation-id: 3157eb30-9945-444e-7e49-08dd204b7d10
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230040|376014|1800799024|366016|7053199007|38070700018;
+x-microsoft-antispam-message-info: 
+ =?us-ascii?Q?34sImUMfQ5xYpYMT2U3rGUGdhuVtqCYvoJrM5Alnm+164iZ8BYOmpDPtFKjH?=
+ =?us-ascii?Q?n5+BeI5HLO65iCL7O7qCVO95JAErFxRkTJVo7A+73XadpHJVeKxtvmKuNB+u?=
+ =?us-ascii?Q?RgnsVKcAh0dZdlRiAOchit5CgD1Kr/02aoN7KW47C7M9g3ORNSt1VDXCvjzv?=
+ =?us-ascii?Q?u9rjivmjgcYk8ypoYvcbYGxbVQB6nwwm7zNYb4MKY7L+KPoWa0avQ1jShWSl?=
+ =?us-ascii?Q?vzMiVsxVEGGxcDrDRJUFgtLhYH0WJPwJN9u2MqhptRYM7RitZwSPjBV5JXjD?=
+ =?us-ascii?Q?Ngg7TK8t42jfNWPSsM7UFzlVcVdmdtfoNaHsT4PEV0WLLFn1akcgN6I+atNY?=
+ =?us-ascii?Q?obBiKMZR+XnXC9m0ISYgSWWh1924H5RPOhs/GfyQdKKI+PXEbA96s+lV6Drg?=
+ =?us-ascii?Q?yT3HklnAI4e5unUYil+IHh2So/ZzduEUYOt+4YUC3jaU1cc64o0X36FwehsI?=
+ =?us-ascii?Q?rcfB+9Rb24IxpwL3+asHjMseHWlDrCYe2GTpW8gQhtT9ejfO6jj/ilnqkT7R?=
+ =?us-ascii?Q?ea3zHlYHkR9DhltWjDf2w0OiYn6IH4AqubD/aOY9kdMogQhLnwJLEfHGT9Hg?=
+ =?us-ascii?Q?OfcelVsoHxIm4hnabg5qratAe8Ky4UZz6jrfNi1YdFnCwfhg1UGUu+o3f5Fc?=
+ =?us-ascii?Q?aQb8TZ/34fjNhnK0GsQObPDWEb8S/RMZnGHwG5yTmUXSwlcxPr6s3fEII1mZ?=
+ =?us-ascii?Q?wA1Ms8cb5rNI7jwnQMskZBA3HA5dN4wHl6GG4GDAQd2bPGTNl37T/rjSUhmx?=
+ =?us-ascii?Q?bKgHL/FL1Zc3eHQb5VomTju+w4xDVjBFy1p+/Oo1JKcSkrguiPg7GQr1iP1N?=
+ =?us-ascii?Q?niJxPUN7l18hfueKSrR1rk4XnOSBwiKsum4Ige2QBkemdDtv5Scl9TJpjxYm?=
+ =?us-ascii?Q?s/xZkJPRhleNSg8XfrnS4SikcoyAF+Aks9cgmghO3BH/5C8ongxTs2kLaaZs?=
+ =?us-ascii?Q?x6PX/zA1vaAEfB/O5JRLzYeJ6Al44aoOy0oxgxjIudlXA0ArRNdg8kwsna47?=
+ =?us-ascii?Q?D9gBjP4klLCboNh09ioipVFY998/lBBeUrnDPpBPF9ccTJXuiyO6/p42r5rL?=
+ =?us-ascii?Q?8QZBgArTQlxAcYUG3TATwQCvOBhUKGZmGQYcprChIXDyFZfeIkouX0rrIS9j?=
+ =?us-ascii?Q?9qcAaf0bmNjveqD/9oEaLMFPpqofvXGw3CKvQEMpUfT9NDbZOzYi78nedRkt?=
+ =?us-ascii?Q?UbjjxrRANp4iKqRaOe0RpgXd4h7z5o0gDZCbwa0aqOPfiwVCgE2D4IEITdvr?=
+ =?us-ascii?Q?kywMO84iQSKagFtD/TTz51S5OL+JBPbVxxj2yAh0SxY2ESepxLrq/p1Wh49v?=
+ =?us-ascii?Q?QrmPxt51a4Fbn80M6kLYWbFZheA7MPaPocRYCUymryfS2REQHUNONVzrB0BP?=
+ =?us-ascii?Q?AxGl6E/oDYVh40VV4yg6DdgdkmrO?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(7053199007)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?us-ascii?Q?5iuo7MPt701/Lh+pWNjW5hsLEu0xHcz3ddAhOit2ogkUSO7FSOA5IC6u5hC7?=
+ =?us-ascii?Q?ObmDpiDJYUS0EwZHodArIKVJTEbG9yz3JtP9DaAe0pZ2XOWFAdI72s1PYJLj?=
+ =?us-ascii?Q?gN70RJMJZqm94kXiZyKrxQ5hHK/6MVF/MOYXi/XDyimDiGE7yDcFu2vTILMh?=
+ =?us-ascii?Q?tfHR091pKMCGacxRPvXOCVLSwnzCEcBtLYxaN5iZeI68drdsFnT5mQIAGPTT?=
+ =?us-ascii?Q?oyqGba3Hy6haGLcUyWNUySmFAwXQ7Oidgf9tJxllGxGgyn8bzttv2nHRy2V0?=
+ =?us-ascii?Q?FCnF5tTATCoyIoFuid574h8PvYIgnRyFc1AgIvb6QVoSlXnik+q28JiNGnTL?=
+ =?us-ascii?Q?vmJ44cC4/sAHEOdkVGWmRdlGKwpqWp6N/+typ+lj5r7uLUeIX85GZLffVfDM?=
+ =?us-ascii?Q?w0/HOFbvQjRvpWJfmAiZ7Xc+j3YmRH68xQm6cii12Q9bgo682kev4m/HwoZq?=
+ =?us-ascii?Q?GdMtmVO+T7+EMuJD2fndgWSm4XH2b3CdO5rviL/OrWpIcHBzI5geq4DsS6Je?=
+ =?us-ascii?Q?tQwX31SZbuzxU5aOT9Q8dY1iy4ttHtvsXO1o9Dxg0CxhdDVJ3FxG11jDWGxT?=
+ =?us-ascii?Q?jRGXENc1WOQjwWbQIeV133DfvfKdtFHHmBsvoKuW18nCTnFsBh6Z5Di9Dg8L?=
+ =?us-ascii?Q?A/DmSfpqpYF90iJQzTEx5lYjf90w/6QtGaQBhqCtzDgCd1GNjYK21dkf9TG+?=
+ =?us-ascii?Q?mMwoV+EqMlQZXPi1KQz0l8LKFQfIUki7bsP+2Dve2Iklut+3mcBTyb9oGSvP?=
+ =?us-ascii?Q?j6rjo7B8zuw+oQx2dC1834yBF8qiPVID8ObvlvmsLCJKkRgjTJJvC8Lex2dt?=
+ =?us-ascii?Q?VSz0kd+NB/0ftvVD1wnDGAKryL0EunlrrEOa2i1dNLDq6XY39Y+muwMoM6PD?=
+ =?us-ascii?Q?0QZXqyPMq+/Qp4iiuiZ4r2VlATXfEl41qZJNc9AGntx24d2vz9rWMO9GQL/V?=
+ =?us-ascii?Q?8xnV5MWouft15pmCU89Nzk7tQnCf+CWezEkTsbZs46JOKes0A/EkqAaI3y8S?=
+ =?us-ascii?Q?HcmbyW5wuLaBKhq9jHbOviA0sNmG0M1jDZZtxPGJyJDaAkkf8XDXnah124kW?=
+ =?us-ascii?Q?sI86gY4Ah6/cQnjBC+ePXgfNjzAVzlpnc5LQIZvG1j9JuAKp7jCJ0y65MXkX?=
+ =?us-ascii?Q?y2VoqJbwtze31UvsCOC9PZfZHAI/QVC9s1XOrhM//NPxLWTFLOka5I/65G4A?=
+ =?us-ascii?Q?xrFr5NpSpKC5eycovd78xeuOJc2ir+KH55YTYnjLLnIKXR9dR/HCkwPZ2Osg?=
+ =?us-ascii?Q?SxJ0DiL/RzGNzmrkSOrtY1I1emkfHGVv1lY9HZJDWSmGBsDiN2+FfZ7Dhibq?=
+ =?us-ascii?Q?fNtXivdgk4vawDB1g+VjtKfcH3qnm6bz9cqG9hTjvUr8iILSGb1vPTE+FZ0I?=
+ =?us-ascii?Q?EkrVEWBfxY/4BFDx7c6qbrPA8M06kg2w/GORKsX0Yw1dcX3KAXlPR8m8axKL?=
+ =?us-ascii?Q?h5NEEHdq/dlEtvgNHgqVxG8P5NXLDWVsssqr3neI5bDa2RbpRaQCXIPwe4C5?=
+ =?us-ascii?Q?09QlnOAXvnV/r1RuZD8JV6ILw/DUCRJR3r8cri84hvMazwSBIqr6krROOvKJ?=
+ =?us-ascii?Q?jgYSLKQbcSWRodTzkzTm+nl+8Lx15AuTNtyKH0F+?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: RE9lGkKHVtFpSGM-84u68gYMz2aAMiGa
-X-Authority-Analysis: v=2.4 cv=INT4ChvG c=1 sm=1 tr=0 ts=676443f1 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=RZcAm9yDv7YA:10 a=FP58Ms26AAAA:8 a=xNf9USuDAAAA:8 a=PTOB6kbnAAAA:8 a=NEAV23lmAAAA:8 a=6I5d2MoRAAAA:8 a=t7CeM3EgAAAA:8
- a=pGLkceISAAAA:8 a=Qnov7ifiAAAA:8 a=a_U1oVfrAAAA:8 a=jue-JzrFPsYr8rXDpZ0A:9 a=lvfz_6v1X3QA:10 a=FdTzh2GWekK77mhwV6Dw:22 a=4d9-RgBc9cJG6cC6SkVU:22
-X-Proofpoint-GUID: RE9lGkKHVtFpSGM-84u68gYMz2aAMiGa
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2024-12-19_07,2024-12-19_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- clxscore=1011 priorityscore=1501 impostorscore=0 malwarescore=0 mlxscore=0
- spamscore=0 phishscore=0 mlxlogscore=999 adultscore=0 suspectscore=0
- bulkscore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
- engine=8.21.0-2411120000 definitions=main-2412190129
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3157eb30-9945-444e-7e49-08dd204b7d10
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Dec 2024 16:37:54.9013
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: jvUYDJMvYxyiTx8GlH+4hLZ1vP+279G9ZVESUEX5rKYtJVtB1LhEVox6p7S70ueob2yr1wYsUgiz6l+9TsfZJQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB6349
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 Dec 2024 16:04:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114398
+ <openembedded-devel@lists.openembedded.org>; Thu, 19 Dec 2024 16:38:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114399
 
-According to DOC/readme.txt [1]:
+Please drop this patch.
+The newer patch from Hongxu Jia adds the same component under different rec=
+ipe name and is more feature-rich.
 
-    7-Zip and p7zip
-    ===============
-    Now there are two different ports of 7-Zip for Linux/macOS:
+Peter
 
-    1) p7zip - another port of 7-Zip for Linux, made by an independent developer.
-       The latest version of p7zip now is 16.02, and that p7zip 16.02 is outdated now.
-       http://sourceforge.net/projects/p7zip/
-
-    2) 7-Zip for Linux/macOS - this package - it's new code with all changes from latest 7-Zip for Windows
-
-Add recipe 7-zip [2] to instead of recipe p7zip[3] in which the upstream is dead since 2016
-
-Use git repo to instead of tarball
-
-Drop obsolete patches
-- CVE-2016-9296.patch
-- CVE-2017-17969.patch
-- CVE-2018-5996.patch
-- change_numMethods_from_bool_to_unsigned.patch
-- 0001-Fix-two-buffer-overflow-vulnerabilities.patch
-- 0001-Fix-narrowing-errors-Wc-11-narrowing.patch
-
-License-Update: DOC/License.txt: Add BSD-2-Clause & BSD-3-Clause
-
-The codec libraries was removed since 21.02 [4]
-
-Refer debian to compile 7-zip [5]
-
-Add link 7z.so to lib7z.so and create wrapper to command 7z
-which required running with absolute path to link the library 7z.so
-
-[1] https://salsa.debian.org/debian/7zip/-/blob/master/DOC/readme.txt?ref_type=heads
-[2] https://sourceforge.net/projects/p7zip/
-[3] https://www.7-zip.org/
-[4] https://github.com/p7zip-project/p7zip/commit/6c6ed1eba9ff0c0ded9323600f1f3c686d6b6692
-[5] https://salsa.debian.org/debian/7zip/-/blob/master/debian/rules
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- .../p7zip_16.02.bb => 7zip/7zip_24.09.bb}     |  66 ++---
- .../0001-support-yocto-cross-compiling.patch  |  51 ++++
- .../recipes-extended/7zip/files/7z_wrapper.sh |   4 +
- ...Fix-narrowing-errors-Wc-11-narrowing.patch |  49 ----
- .../p7zip/files/CVE-2016-9296.patch           |  27 ---
- .../p7zip/files/CVE-2017-17969.patch          |  40 ---
- .../p7zip/files/CVE-2018-5996.patch           | 227 ------------------
- ...nge_numMethods_from_bool_to_unsigned.patch |  34 ---
- ...t_override_compiler_and_do_not_strip.patch |  38 ---
- 9 files changed, 93 insertions(+), 443 deletions(-)
- rename meta-oe/recipes-extended/{p7zip/p7zip_16.02.bb => 7zip/7zip_24.09.bb} (24%)
- create mode 100644 meta-oe/recipes-extended/7zip/files/0001-support-yocto-cross-compiling.patch
- create mode 100755 meta-oe/recipes-extended/7zip/files/7z_wrapper.sh
- delete mode 100644 meta-oe/recipes-extended/p7zip/files/0001-Fix-narrowing-errors-Wc-11-narrowing.patch
- delete mode 100644 meta-oe/recipes-extended/p7zip/files/CVE-2016-9296.patch
- delete mode 100644 meta-oe/recipes-extended/p7zip/files/CVE-2017-17969.patch
- delete mode 100644 meta-oe/recipes-extended/p7zip/files/CVE-2018-5996.patch
- delete mode 100644 meta-oe/recipes-extended/p7zip/files/change_numMethods_from_bool_to_unsigned.patch
- delete mode 100644 meta-oe/recipes-extended/p7zip/files/do_not_override_compiler_and_do_not_strip.patch
-
-diff --git a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb b/meta-oe/recipes-extended/7zip/7zip_24.09.bb
-similarity index 24%
-rename from meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
-rename to meta-oe/recipes-extended/7zip/7zip_24.09.bb
-index 789819a5e..2ccec7840 100644
---- a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
-+++ b/meta-oe/recipes-extended/7zip/7zip_24.09.bb
-@@ -1,46 +1,56 @@
- SUMMARY = "7-zip is a commandline utility handling 7z archives."
- HOMEPAGE = "http://www.7-zip.org/"
--LICENSE = "LGPL-2.1-or-later & unRAR"
-+LICENSE = "LGPL-2.1-or-later & unRAR & PD & BSD-2-Clause & BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://DOC/copying.txt;md5=4fbd65380cdd255951079008b364516c \
-                     file://DOC/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de \
--                    file://DOC/License.txt;md5=879598edf1f54dddb6930d7581357f8b"
--
--SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_all.tar.bz2 \
--           file://do_not_override_compiler_and_do_not_strip.patch \
--           file://CVE-2017-17969.patch \
--           file://0001-Fix-narrowing-errors-Wc-11-narrowing.patch \
--           file://change_numMethods_from_bool_to_unsigned.patch \
--           file://CVE-2018-5996.patch \
--           file://CVE-2016-9296.patch \
--           "
--
--SRC_URI[sha256sum] = "5eb20ac0e2944f6cb9c2d51dd6c4518941c185347d4089ea89087ffdd6e2341f"
--
--UPSTREAM_CHECK_URI = "https://tracker.debian.org/pkg/p7zip"
--UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
--
--S = "${WORKDIR}/${BPN}_${PV}"
-+                    file://DOC/License.txt;md5=44483e232b64ffca25fe001f3d6418d0"
- 
--do_compile:append() {
--    oe_runmake 7z
-+CVE_PRODUCT = "7-zip 7zip"
-+SRC_URI = "git://github.com/ip7z/7zip.git;protocol=https;branch=main \
-+           file://0001-support-yocto-cross-compiling.patch \
-+           file://7z_wrapper.sh \
-+           "
-+SRCREV = "e5431fa6f5505e385c6f9367260717e9c47dc2ee"
-+
-+UPSTREAM_CHECK_URI = "https://github.com/ip7z/7zip/releases/latest"
-+
-+S = "${WORKDIR}/git"
-+
-+# Support Yocto cross compiling
-+EXTRA_OEMAKE += " \
-+    CXXFLAGS_EXTRA='${CXXFLAGS}' \
-+    CFLAGS_BASE2='${CFLAGS}' \
-+    LDFLAGS_STATIC_3='${LDFLAGS}' \
-+"
-+
-+do_compile() {
-+    oe_runmake -C CPP/7zip/Bundles/Alone2    -f ../../cmpl_gcc.mak
-+    oe_runmake -C CPP/7zip/Bundles/Format7zF -f ../../cmpl_gcc.mak
-+    oe_runmake -C CPP/7zip/UI/Console        -f ../../cmpl_gcc.mak
-+    oe_runmake -C CPP/7zip/Bundles/SFXCon    -f ../../cmpl_gcc.mak
-+    oe_runmake -C CPP/7zip/Bundles/Alone     -f ../../cmpl_gcc.mak
-+    oe_runmake -C CPP/7zip/Bundles/Alone7z   -f ../../cmpl_gcc.mak
- }
--FILES:${PN} += "${libdir}/* ${bindir}/7z"
-+
-+FILES:${PN} += "${libdir}/*"
- 
- FILES_SOLIBSDEV = ""
- INSANE_SKIP:${PN} += "dev-so"
- 
- do_install() {
- 	install -d ${D}${bindir}
--	install -d ${D}${bindir}/Codecs
-+	install -m 0755 ${S}/CPP/7zip/Bundles/Alone/b/g/7za ${D}${bindir}
-+	install -m 0755 ${S}/CPP/7zip/Bundles/Alone7z/b/g/7zr ${D}${bindir}
-+	install -m 0755 ${S}/CPP/7zip/UI/Console/b/g/7z ${D}${bindir}/7z.real
-+	install -m 0755 ${UNPACKDIR}/7z_wrapper.sh ${D}${bindir}/7z
-+
- 	install -d ${D}${libdir}
--	install -d ${D}${libdir}/Codecs
--	install -m 0755 ${S}/bin/7za ${D}${bindir}
--	ln -s 7za ${D}${bindir}/7z
--	install -m 0755 ${S}/bin/Codecs/* ${D}${libdir}/Codecs/
--	install -m 0755 ${S}/bin/7z.so ${D}${libdir}/lib7z.so
-+	install -m 0755 ${S}/CPP/7zip/Bundles/Format7zF/b/g/7z.so ${D}${libdir}/lib7z.so
-+	ln -rsn ${D}${libdir}/lib7z.so ${D}${bindir}/7z.so
- }
- 
--RPROVIDES:${PN} += "lib7z.so()(64bit) 7z lib7z.so"
-+PROVIDES += "p7zip"
-+RPROVIDES:${PN} += "lib7z.so()(64bit) 7z lib7z.so p7zip"
- RPROVIDES:${PN}-dev += "lib7z.so()(64bit) 7z lib7z.so"
- 
- BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-oe/recipes-extended/7zip/files/0001-support-yocto-cross-compiling.patch b/meta-oe/recipes-extended/7zip/files/0001-support-yocto-cross-compiling.patch
-new file mode 100644
-index 000000000..06908e94f
---- /dev/null
-+++ b/meta-oe/recipes-extended/7zip/files/0001-support-yocto-cross-compiling.patch
-@@ -0,0 +1,51 @@
-+From fd0d54f96576a8ff572bb7c7d28df6b097f99a30 Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Wed, 18 Dec 2024 16:38:11 +0800
-+Subject: [PATCH] support yocto cross compiling
-+
-+Remove -s from $LFLAGS_STRIP, do not strip binary to workaournd
-+Yocto build warning
-+...
-+WARNING: 7zip-native-24.09-r0 do_populate_sysroot: File 'tmp/work/x86_64-linux/
-+7zip-native/24.09/recipe-sysroot-native/usr/lib/7z.so' from 7zip-native was already stripped,
-+this will prevent future debugging!
-+...
-+
-+Apply CC, CXX from environments
-+
-+Upstream-Status: Inappropriate [Yocto specific]
-+
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ CPP/7zip/7zip_gcc.mak | 2 +-
-+ CPP/7zip/var_gcc.mak  | 2 --
-+ 2 files changed, 1 insertion(+), 3 deletions(-)
-+
-+diff --git a/CPP/7zip/7zip_gcc.mak b/CPP/7zip/7zip_gcc.mak
-+index bcb06a0..297f0a8 100644
-+--- a/CPP/7zip/7zip_gcc.mak
-++++ b/CPP/7zip/7zip_gcc.mak
-+@@ -45,7 +45,7 @@ CFLAGS_DEBUG = -g
-+ else
-+ CFLAGS_DEBUG = -DNDEBUG
-+ ifneq ($(CC), $(CROSS_COMPILE)clang)
-+-LFLAGS_STRIP = -s
-++LFLAGS_STRIP = 
-+ endif
-+ endif
-+ 
-+diff --git a/CPP/7zip/var_gcc.mak b/CPP/7zip/var_gcc.mak
-+index 664491c..6d0f485 100644
-+--- a/CPP/7zip/var_gcc.mak
-++++ b/CPP/7zip/var_gcc.mak
-+@@ -6,7 +6,5 @@ IS_ARM64=
-+ CROSS_COMPILE=
-+ MY_ARCH=
-+ USE_ASM=
-+-CC=$(CROSS_COMPILE)gcc
-+-CXX=$(CROSS_COMPILE)g++
-+ 
-+ # -march=armv8-a+crc+crypto
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/recipes-extended/7zip/files/7z_wrapper.sh b/meta-oe/recipes-extended/7zip/files/7z_wrapper.sh
-new file mode 100755
-index 000000000..af5b9b393
---- /dev/null
-+++ b/meta-oe/recipes-extended/7zip/files/7z_wrapper.sh
-@@ -0,0 +1,4 @@
-+#!/bin/sh
-+realpath=`readlink -fn $0`
-+realdir=`dirname $realpath`
-+exec $realdir/7z.real "$@"
-diff --git a/meta-oe/recipes-extended/p7zip/files/0001-Fix-narrowing-errors-Wc-11-narrowing.patch b/meta-oe/recipes-extended/p7zip/files/0001-Fix-narrowing-errors-Wc-11-narrowing.patch
-deleted file mode 100644
-index 1f08d1603..000000000
---- a/meta-oe/recipes-extended/p7zip/files/0001-Fix-narrowing-errors-Wc-11-narrowing.patch
-+++ /dev/null
-@@ -1,49 +0,0 @@
--From 653674e11872465dd5edf1c1e8413ea813d7e086 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Mon, 23 Apr 2018 23:07:21 -0700
--Subject: [PATCH] Fix narrowing errors -Wc++11-narrowing
--
--Clang 6.x finds these errors
--
--    ../../../../CPP/Windows/ErrorMsg.cpp:24:10: error: case value evaluates to -2147024809, which cannot be narrowed to type 'DWORD' (aka 'unsigned int') [-Wc++11-narrowing]
--        case E_INVALIDARG          : txt = "E_INVALIDARG"; break ;
--             ^
--
--HRESULT causes the macro to be parsed as a signed long, so we need to force it
--to be checked as an unsigned long instead.
--
--also reported here https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=224930
--
--Upstream-Status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
-----
-- CPP/Windows/ErrorMsg.cpp | 14 +++++++-------
-- 1 file changed, 7 insertions(+), 7 deletions(-)
--
--diff --git a/CPP/Windows/ErrorMsg.cpp b/CPP/Windows/ErrorMsg.cpp
--index 99684ae..78a64ba 100644
----- a/CPP/Windows/ErrorMsg.cpp
--+++ b/CPP/Windows/ErrorMsg.cpp
--@@ -15,13 +15,13 @@ UString MyFormatMessage(DWORD errorCode)
-- 
--   switch(errorCode) {
--     case ERROR_NO_MORE_FILES   : txt = "No more files"; break ;
---    case E_NOTIMPL             : txt = "E_NOTIMPL"; break ;
---    case E_NOINTERFACE         : txt = "E_NOINTERFACE"; break ;
---    case E_ABORT               : txt = "E_ABORT"; break ;
---    case E_FAIL                : txt = "E_FAIL"; break ;
---    case STG_E_INVALIDFUNCTION : txt = "STG_E_INVALIDFUNCTION"; break ;
---    case E_OUTOFMEMORY         : txt = "E_OUTOFMEMORY"; break ;
---    case E_INVALIDARG          : txt = "E_INVALIDARG"; break ;
--+    case (DWORD) E_NOTIMPL             : txt = "E_NOTIMPL"; break ;
--+    case (DWORD) E_NOINTERFACE         : txt = "E_NOINTERFACE"; break ;
--+    case (DWORD) E_ABORT               : txt = "E_ABORT"; break ;
--+    case (DWORD) E_FAIL                : txt = "E_FAIL"; break ;
--+    case (DWORD) STG_E_INVALIDFUNCTION : txt = "STG_E_INVALIDFUNCTION"; break ;
--+    case (DWORD) E_OUTOFMEMORY         : txt = "E_OUTOFMEMORY"; break ;
--+    case (DWORD) E_INVALIDARG          : txt = "E_INVALIDARG"; break ;
--     case ERROR_DIRECTORY          : txt = "Error Directory"; break ;
--     default:
--       txt = strerror(errorCode);
-diff --git a/meta-oe/recipes-extended/p7zip/files/CVE-2016-9296.patch b/meta-oe/recipes-extended/p7zip/files/CVE-2016-9296.patch
-deleted file mode 100644
-index 98e186cbf..000000000
---- a/meta-oe/recipes-extended/p7zip/files/CVE-2016-9296.patch
-+++ /dev/null
-@@ -1,27 +0,0 @@
--p7zip: Update CVE-2016-9296 patch URL.
--From: Robert Luberda <robert@debian.org>
--Date: Sat, 19 Nov 2016 08:48:08 +0100
--Subject: Fix nullptr dereference (CVE-2016-9296)
--
--Patch taken from https://sourceforge.net/p/p7zip/bugs/185/
--This patch file taken from Debian's patch set for p7zip
--
--Upstream-Status: Backport [https://sourceforge.net/p/p7zip/bugs/185/]
--CVE: CVE-2016-9296
--
--Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
--
--Index: p7zip_16.02/CPP/7zip/Archive/7z/7zIn.cpp
--===================================================================
----- p7zip_16.02.orig/CPP/7zip/Archive/7z/7zIn.cpp
--+++ p7zip_16.02/CPP/7zip/Archive/7z/7zIn.cpp
--@@ -1097,7 +1097,8 @@ HRESULT CInArchive::ReadAndDecodePackedS
--       if (CrcCalc(data, unpackSize) != folders.FolderCRCs.Vals[i])
--         ThrowIncorrect();
--   }
---  HeadersSize += folders.PackPositions[folders.NumPackStreams];
--+  if (folders.PackPositions)
--+      HeadersSize += folders.PackPositions[folders.NumPackStreams];
--   return S_OK;
-- }
-- 
-diff --git a/meta-oe/recipes-extended/p7zip/files/CVE-2017-17969.patch b/meta-oe/recipes-extended/p7zip/files/CVE-2017-17969.patch
-deleted file mode 100644
-index 9ba107807..000000000
---- a/meta-oe/recipes-extended/p7zip/files/CVE-2017-17969.patch
-+++ /dev/null
-@@ -1,40 +0,0 @@
--From 7f2da4f810b429ddb7afa0e252e3d02ced0eba87 Mon Sep 17 00:00:00 2001
--From: Radovan Scasny <radovan.scasny@siemens.com>
--Date: Tue, 20 Feb 2018 12:08:13 +0100
--Subject: [PATCH] p7zip: Fix CVE-2017-17969
--
--[No upstream tracking] -- https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=888297
--
--Heap-based buffer overflow in 7zip
--
--Compress/ShrinkDecoder.cpp: Heap-based buffer overflow
--in the NCompress::NShrink::CDecoder::CodeReal method
--in 7-Zip before 18.00 and p7zip allows remote attackers
--to cause a denial of service (out-of-bounds write)
--or potentially execute arbitrary code via a crafted ZIP archive.
--
--Upstream-Status: Backport [https://sourceforge.net/p/p7zip/bugs/_discuss/thread/0920f369/8316/attachment/CVE-2017-17969.patch]
--CVE: CVE-2017-17969
--Signed-off-by: Radovan Scasny <radovan.scasny@siemens.com>
--
-----
-- CPP/7zip/Compress/ShrinkDecoder.cpp | 5 +++++
-- 1 file changed, 5 insertions(+)
--
--diff --git a/CPP/7zip/Compress/ShrinkDecoder.cpp b/CPP/7zip/Compress/ShrinkDecoder.cpp
--index 80b7e67..5bb0559 100644
----- a/CPP/7zip/Compress/ShrinkDecoder.cpp
--+++ b/CPP/7zip/Compress/ShrinkDecoder.cpp
--@@ -121,7 +121,12 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
--     {
--       _stack[i++] = _suffixes[cur];
--       cur = _parents[cur];
--+	  if (cur >= kNumItems || i >= kNumItems)
--+	  	break;
--     }
--+	
--+	if (cur >= kNumItems || i >= kNumItems)
--+		break;
--     
--     _stack[i++] = (Byte)cur;
--     lastChar2 = (Byte)cur;
-diff --git a/meta-oe/recipes-extended/p7zip/files/CVE-2018-5996.patch b/meta-oe/recipes-extended/p7zip/files/CVE-2018-5996.patch
-deleted file mode 100644
-index 47868c982..000000000
---- a/meta-oe/recipes-extended/p7zip/files/CVE-2018-5996.patch
-+++ /dev/null
-@@ -1,227 +0,0 @@
--From: Robert Luberda <robert@debian.org>
--Date: Sun, 28 Jan 2018 23:47:40 +0100
--Subject: CVE-2018-5996
--
--Hopefully fix Memory Corruptions via RAR PPMd (CVE-2018-5996) by
--applying a few changes from 7Zip 18.00-beta.
--
--Bug-Debian: https://bugs.debian.org/#888314
--
--Upstream-Status: Backport [https://sources.debian.org/data/non-free/p/p7zip-rar/16.02-3/debian/patches/06-CVE-2018-5996.patch]
--CVE: CVE-2018-5996
--
--Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
-----
-- CPP/7zip/Compress/Rar1Decoder.cpp | 13 +++++++++----
-- CPP/7zip/Compress/Rar1Decoder.h   |  1 +
-- CPP/7zip/Compress/Rar2Decoder.cpp | 10 +++++++++-
-- CPP/7zip/Compress/Rar2Decoder.h   |  1 +
-- CPP/7zip/Compress/Rar3Decoder.cpp | 23 ++++++++++++++++++++---
-- CPP/7zip/Compress/Rar3Decoder.h   |  2 ++
-- 6 files changed, 42 insertions(+), 8 deletions(-)
--
--diff --git a/CPP/7zip/Compress/Rar1Decoder.cpp b/CPP/7zip/Compress/Rar1Decoder.cpp
--index 1aaedcc..68030c7 100644
----- a/CPP/7zip/Compress/Rar1Decoder.cpp
--+++ b/CPP/7zip/Compress/Rar1Decoder.cpp
--@@ -29,7 +29,7 @@ public:
-- };
-- */
-- 
---CDecoder::CDecoder(): m_IsSolid(false) { }
--+CDecoder::CDecoder(): m_IsSolid(false), _errorMode(false) { }
-- 
-- void CDecoder::InitStructures()
-- {
--@@ -406,9 +406,14 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
--   InitData();
--   if (!m_IsSolid)
--   {
--+    _errorMode = false;
--     InitStructures();
--     InitHuff();
--   }
--+
--+  if (_errorMode)
--+    return S_FALSE;
--+
--   if (m_UnpackSize > 0)
--   {
--     GetFlagsBuf();
--@@ -477,9 +482,9 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream
--     const UInt64 *inSize, const UInt64 *outSize, ICompressProgressInfo *progress)
-- {
--   try { return CodeReal(inStream, outStream, inSize, outSize, progress); }
---  catch(const CInBufferException &e) { return e.ErrorCode; }
---  catch(const CLzOutWindowException &e) { return e.ErrorCode; }
---  catch(...) { return S_FALSE; }
--+  catch(const CInBufferException &e) { _errorMode = true; return e.ErrorCode; }
--+  catch(const CLzOutWindowException &e) { _errorMode = true; return e.ErrorCode; }
--+  catch(...) { _errorMode = true; return S_FALSE; }
-- }
-- 
-- STDMETHODIMP CDecoder::SetDecoderProperties2(const Byte *data, UInt32 size)
--diff --git a/CPP/7zip/Compress/Rar1Decoder.h b/CPP/7zip/Compress/Rar1Decoder.h
--index 630f089..01b606b 100644
----- a/CPP/7zip/Compress/Rar1Decoder.h
--+++ b/CPP/7zip/Compress/Rar1Decoder.h
--@@ -39,6 +39,7 @@ public:
-- 
--   Int64 m_UnpackSize;
--   bool m_IsSolid;
--+  bool _errorMode;
-- 
--   UInt32 ReadBits(int numBits);
--   HRESULT CopyBlock(UInt32 distance, UInt32 len);
--diff --git a/CPP/7zip/Compress/Rar2Decoder.cpp b/CPP/7zip/Compress/Rar2Decoder.cpp
--index b3f2b4b..0580c8d 100644
----- a/CPP/7zip/Compress/Rar2Decoder.cpp
--+++ b/CPP/7zip/Compress/Rar2Decoder.cpp
--@@ -80,7 +80,8 @@ static const UInt32 kHistorySize = 1 << 20;
-- static const UInt32 kWindowReservSize = (1 << 22) + 256;
-- 
-- CDecoder::CDecoder():
---  m_IsSolid(false)
--+  m_IsSolid(false),
--+  m_TablesOK(false)
-- {
-- }
-- 
--@@ -100,6 +101,8 @@ UInt32 CDecoder::ReadBits(unsigned numBits) { return m_InBitStream.ReadBits(numB
-- 
-- bool CDecoder::ReadTables(void)
-- {
--+  m_TablesOK = false;
--+
--   Byte levelLevels[kLevelTableSize];
--   Byte newLevels[kMaxTableSize];
--   m_AudioMode = (ReadBits(1) == 1);
--@@ -170,6 +173,8 @@ bool CDecoder::ReadTables(void)
--   }
--   
--   memcpy(m_LastLevels, newLevels, kMaxTableSize);
--+  m_TablesOK = true;
--+
--   return true;
-- }
-- 
--@@ -344,6 +349,9 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
--       return S_FALSE;
--   }
-- 
--+  if (!m_TablesOK)
--+    return S_FALSE;
--+
--   UInt64 startPos = m_OutWindowStream.GetProcessedSize();
--   while (pos < unPackSize)
--   {
--diff --git a/CPP/7zip/Compress/Rar2Decoder.h b/CPP/7zip/Compress/Rar2Decoder.h
--index 3a0535c..0e9005f 100644
----- a/CPP/7zip/Compress/Rar2Decoder.h
--+++ b/CPP/7zip/Compress/Rar2Decoder.h
--@@ -139,6 +139,7 @@ class CDecoder :
-- 
--   UInt64 m_PackSize;
--   bool m_IsSolid;
--+  bool m_TablesOK;
-- 
--   void InitStructures();
--   UInt32 ReadBits(unsigned numBits);
--diff --git a/CPP/7zip/Compress/Rar3Decoder.cpp b/CPP/7zip/Compress/Rar3Decoder.cpp
--index 3bf2513..6cb8a6a 100644
----- a/CPP/7zip/Compress/Rar3Decoder.cpp
--+++ b/CPP/7zip/Compress/Rar3Decoder.cpp
--@@ -92,7 +92,8 @@ CDecoder::CDecoder():
--   _writtenFileSize(0),
--   _vmData(0),
--   _vmCode(0),
---  m_IsSolid(false)
--+  m_IsSolid(false),
--+  _errorMode(false)
-- {
--   Ppmd7_Construct(&_ppmd);
-- }
--@@ -545,6 +546,9 @@ HRESULT CDecoder::ReadTables(bool &keepDecompressing)
--     return InitPPM();
--   }
-- 
--+  TablesRead = false;
--+  TablesOK = false;
--+
--   _lzMode = true;
--   PrevAlignBits = 0;
--   PrevAlignCount = 0;
--@@ -606,6 +610,9 @@ HRESULT CDecoder::ReadTables(bool &keepDecompressing)
--       }
--     }
--   }
--+  if (InputEofError())
--+    return S_FALSE;
--+
--   TablesRead = true;
-- 
--   // original code has check here:
--@@ -623,6 +630,9 @@ HRESULT CDecoder::ReadTables(bool &keepDecompressing)
--   RIF(m_LenDecoder.Build(&newLevels[kMainTableSize + kDistTableSize + kAlignTableSize]));
-- 
--   memcpy(m_LastLevels, newLevels, kTablesSizesSum);
--+
--+  TablesOK = true;
--+
--   return S_OK;
-- }
-- 
--@@ -824,7 +834,12 @@ HRESULT CDecoder::CodeReal(ICompressProgressInfo *progress)
--     PpmEscChar = 2;
--     PpmError = true;
--     InitFilters();
--+    _errorMode = false;
--   }
--+
--+  if (_errorMode)
--+    return S_FALSE;
--+
--   if (!m_IsSolid || !TablesRead)
--   {
--     bool keepDecompressing;
--@@ -838,6 +853,8 @@ HRESULT CDecoder::CodeReal(ICompressProgressInfo *progress)
--     bool keepDecompressing;
--     if (_lzMode)
--     {
--+      if (!TablesOK)
--+        return S_FALSE;
--       RINOK(DecodeLZ(keepDecompressing))
--     }
--     else
--@@ -901,8 +918,8 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream
--     _unpackSize = outSize ? *outSize : (UInt64)(Int64)-1;
--     return CodeReal(progress);
--   }
---  catch(const CInBufferException &e)  { return e.ErrorCode; }
---  catch(...) { return S_FALSE; }
--+  catch(const CInBufferException &e)  { _errorMode = true; return e.ErrorCode; }
--+  catch(...) { _errorMode = true; return S_FALSE; }
--   // CNewException is possible here. But probably CNewException is caused
--   // by error in data stream.
-- }
--diff --git a/CPP/7zip/Compress/Rar3Decoder.h b/CPP/7zip/Compress/Rar3Decoder.h
--index c130cec..2f72d7d 100644
----- a/CPP/7zip/Compress/Rar3Decoder.h
--+++ b/CPP/7zip/Compress/Rar3Decoder.h
--@@ -192,6 +192,7 @@ class CDecoder:
--   UInt32 _lastFilter;
-- 
--   bool m_IsSolid;
--+  bool _errorMode;
-- 
--   bool _lzMode;
--   bool _unsupportedFilter;
--@@ -200,6 +201,7 @@ class CDecoder:
--   UInt32 PrevAlignCount;
-- 
--   bool TablesRead;
--+  bool TablesOK;
-- 
--   CPpmd7 _ppmd;
--   int PpmEscChar;
--
-diff --git a/meta-oe/recipes-extended/p7zip/files/change_numMethods_from_bool_to_unsigned.patch b/meta-oe/recipes-extended/p7zip/files/change_numMethods_from_bool_to_unsigned.patch
-deleted file mode 100644
-index 93eb0588c..000000000
---- a/meta-oe/recipes-extended/p7zip/files/change_numMethods_from_bool_to_unsigned.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From 0820ef4b9238c1e39ae5bda32cc08cce3fd3ce89 Mon Sep 17 00:00:00 2001
--From: Nisha Parrakat <Nisha.Parrakat@kpit.com>
--Date: Wed, 26 May 2021 19:59:28 +0000
--Subject: [PATCH] fixes the below error
--
--| ../../../../CPP/7zip/Archive/Wim/WimHandler.cpp: In member function 'virtual LONG NArchive::NWim::CHandler::GetArchiveProperty(PROPID, PROPVARIANT*)':
--| ../../../../CPP/7zip/Archive/Wim/WimHandler.cpp:308:11: error: use of an operand of type 'bool' in 'operator++' is forbidden in C++17
--|   308 |           numMethods++;
--|       |           ^~~~~~~~~~
--| ../../../../CPP/7zip/Archive/Wim/WimHandler.cpp:318:9: error: use of an operand of type 'bool' in 'operator++' is forbidden in C++17
--|   318 |         numMethods++;
--
--use unsigned instead of bool
--Signed-off-by: Nisha Parrakat <Nisha.Parrakat@kpit.com>
--
--Upstream-Status: Pending
--
-----
-- CPP/7zip/Archive/Wim/WimHandler.cpp | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/CPP/7zip/Archive/Wim/WimHandler.cpp b/CPP/7zip/Archive/Wim/WimHandler.cpp
--index 27d3298..4ff5cfe 100644
----- a/CPP/7zip/Archive/Wim/WimHandler.cpp
--+++ b/CPP/7zip/Archive/Wim/WimHandler.cpp
--@@ -298,7 +298,7 @@ STDMETHODIMP CHandler::GetArchiveProperty(PROPID propID, PROPVARIANT *value)
-- 
--       AString res;
-- 
---      bool numMethods = 0;
--+      unsigned numMethods = 0;
--       for (unsigned i = 0; i < ARRAY_SIZE(k_Methods); i++)
--       {
--         if (methodMask & ((UInt32)1 << i))
-diff --git a/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler_and_do_not_strip.patch b/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler_and_do_not_strip.patch
-deleted file mode 100644
-index 2636e7f6f..000000000
---- a/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler_and_do_not_strip.patch
-+++ /dev/null
-@@ -1,38 +0,0 @@
--From b2aa209dfc5e59d6329b55b9764782334b63dbe8 Mon Sep 17 00:00:00 2001
--From: Raphael Freudiger <raphael.freudiger@siemens.com>
--Date: Wed, 11 Feb 2015 09:11:47 +0100
--Subject: [PATCH] do not override compiler and do not strip
--
--The default makefile sets the compiler to g++ or gcc. This leads to a wrong architecture when cross-compiling.
--Remove the hardcoded compiler and just append the flags to CXX and CC.
--
--Upstream-Status: Pending
--Signed-off-by: Raphael Freudiger <raphael.freudiger@siemens.com>
--Reviewed-By: Pascal Bach <pascal.bach@siemens.com>
--
-----
-- makefile.machine | 4 +---
-- 1 file changed, 1 insertion(+), 3 deletions(-)
--
--diff --git a/makefile.machine b/makefile.machine
--index 9e34c34..e9244d9 100644
----- a/makefile.machine
--+++ b/makefile.machine
--@@ -2,7 +2,7 @@
-- # makefile for Linux (x86, PPC, alpha ...)
-- #
-- 
---OPTFLAGS=-O -s
--+OPTFLAGS=-O
-- 
-- ALLFLAGS=${OPTFLAGS} -pipe \
--     	-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE \
--@@ -10,8 +10,6 @@ ALLFLAGS=${OPTFLAGS} -pipe \
-- 	-D_7ZIP_LARGE_PAGES \
-- 	$(LOCAL_FLAGS)
-- 
---CXX=g++
---CC=gcc
-- CC_SHARED=-fPIC
-- LINK_SHARED=-fPIC -shared
-- 
--- 
-2.34.1
+> -----Original Message-----
+> From: Nagy, Miroslav (FT D EU SK BFS1) <miroslav.nagy@siemens.com>
+> Sent: Monday, December 16, 2024 12:44
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Nagy, Miroslav (FT D EU SK BFS1) <miroslav.nagy@siemens.com>; Marko,
+> Peter (FT D EU SK BFS1) <Peter.Marko@siemens.com>
+> Subject: [meta-oe][PATCH] 7-zip: add new recipe
+>=20
+> From: Miroslav Nagy <miroslav.nagy@siemens.com>
+>=20
+> This recipe should eventually replace p7zip recipe.
+> p7zip is very old and not updated with unfixed security vulnerabilities.
+> Using real upstream package should solve this.
+>=20
+> Signed-off-by: Miroslav Nagy <miroslav.nagy@siemens.com>
+> Reviewed-by: Peter Marko <peter.marko@siemens.com>
+> ---
+>  meta-oe/recipes-extended/7-zip/7-zip_24.09.bb | 28 +++++++++++++++++++
+>  1 file changed, 28 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/7-zip/7-zip_24.09.bb
+>=20
+> diff --git a/meta-oe/recipes-extended/7-zip/7-zip_24.09.bb b/meta-oe/reci=
+pes-
+> extended/7-zip/7-zip_24.09.bb
+> new file mode 100644
+> index 000000000..6e8d0ba77
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/7-zip/7-zip_24.09.bb
+> @@ -0,0 +1,28 @@
+> +SUMMARY =3D "7-Zip is a file archiver with a high compression ratio."
+> +HOMEPAGE =3D "https://www.7-zip.org"
+> +LICENSE =3D "LGPL-2.1-or-later & BSD-3-Clause & unRAR"
+> +LIC_FILES_CHKSUM =3D
+> "file://DOC/copying.txt;md5=3Db0d181292c99cf9bb2ae9166dd3a0239 \
+> +
+> file://DOC/unRarLicense.txt;md5=3D9c87ddde469ef94aed153b0951d088de \
+> +                    file://DOC/License.txt;md5=3D8bfe22e0285a3043b61ea40=
+8d234c55d"
+> +CVE_PRODUCT =3D "7-zip 7zip"
+> +
+> +PV_WITHOUT_DOT =3D "${@d.getVar('PV').replace('.', '')}"
+> +
+> +SRC_URI =3D "https://www.7-zip.org/a/7z${PV_WITHOUT_DOT}-
+> src.tar.xz;subdir=3D${BP}"
+> +SRC_URI[sha256sum] =3D
+> "49c05169f49572c1128453579af1632a952409ced028259381dac30726b6133a"
+> +
+> +B =3D "${WORKDIR}/build"
+> +
+> +EXTRA_OEMAKE +=3D 'LDFLAGS=3D"${LDFLAGS}" LFLAGS_STRIP=3D"" O=3D"${B}"'
+> +
+> +do_compile() {
+> +    cd ${S}/CPP/7zip/Bundles/Alone2
+> +    oe_runmake --file makefile.gcc
+> +}
+> +
+> +do_install() {
+> +    install -d ${D}${bindir}
+> +    install -m 0755 ${B}/7zz ${D}${bindir}/7zz
+> +}
+> +
+> +BBCLASSEXTEND =3D "native nativesdk"
+> --
+> 2.39.5
 
 
