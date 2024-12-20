@@ -1,116 +1,97 @@
-Return-Path: <Yogita.Urade@windriver.com>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1627E77188
-	for <webhook@archiver.kernel.org>; Fri, 20 Dec 2024 09:32:00 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.148624.1734687112917826449
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31A9AE77188
+	for <webhook@archiver.kernel.org>; Fri, 20 Dec 2024 11:21:11 +0000 (UTC)
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
+ by mx.groups.io with SMTP id smtpd.web10.149928.1734693665213917023
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Dec 2024 01:31:53 -0800
+ Fri, 20 Dec 2024 03:21:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=2084575f12=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BK6wQvI005056
-	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Dec 2024 09:31:52 GMT
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 43h1096yy7-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Dec 2024 09:31:51 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Fri, 20 Dec 2024 01:31:49 -0800
-From: yurade <yogita.urade@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][scarthgap][PATCH 1/1] postgresql: upgrade 16.4 -> 16.5
-Date: Fri, 20 Dec 2024 09:31:28 +0000
-Message-ID: <20241220093128.2841117-1-yogita.urade@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@mvista.com header.s=google header.b=iYf96weC;
+ spf=pass (domain: mvista.com, ip: 209.85.210.175, mailfrom: vanusuri@mvista.com)
+Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-7265c18d79bso2050708b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Dec 2024 03:21:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1734693664; x=1735298464; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=7rirCmQQ91LZLeWPdJIAd1RaTB4/Dy8DDT6Sgr0zZ3U=;
+        b=iYf96weCuMmwlpj533d5P0id4oLA3JT7EboOHoJSzZae44Nt/1ovRgyam6DIhvvASk
+         NUH2rHg6BaN4IYuKEZkyUueJ1iZnQpD2mgSmQWLTshRIkTmwGYpF1IqLAmHg/jyNH6SW
+         Kysiih6hLkrJnl9CI9lwG27wrJBL00it/6kLU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1734693664; x=1735298464;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=7rirCmQQ91LZLeWPdJIAd1RaTB4/Dy8DDT6Sgr0zZ3U=;
+        b=Qp7JtMnwwp1zKIk3P9SLJfFzCc6+N0e4GUGez33BA2gmo8KdLD2EBce9gmXBgfX39s
+         RIh0uKKzq9IG276WXpqO6w0Ak2cXR7WqTTB1qArcuxR7e4B8ohCWEKFv7VWqA7E/8msM
+         b2K8mMxqygqyuqABLGY1IarQp8lZpqsXhztp7iDHPKVfBfL3ybkelnc/wynzJrPMg5W/
+         d/sIbf+FaF42MV1PuEfUmWA6nPVXy8LiZBC10GF2qMXThoFAwKjdllc2Qf4v5eG1u1iu
+         VJaBZZ6EzzB/oUC/Hl9+Ci3s97F4NcAVXRJehnSzSSBFZb3QaxhFr3/DFJeTa2D/Ug8Q
+         ZXDg==
+X-Gm-Message-State: AOJu0Yz5mIT0UAtlr5J1vN0/XzucXu8NDbTHcE+eUesDGqhotAi2eAVV
+	txtIxORxYKkHGfr+dYWWAdpHRbwybDJJwxOiSB4Lats5ISH74b6LgPYzysFFv5gFftGpe6C1WPM
+	B8pY=
+X-Gm-Gg: ASbGncuECR7wTbpTlyIk0fnIA4x+57LED3W/6kEYoHh1+uj1bXi4m12eIMXOlii0UDM
+	Dh7TSuozSwiUWCKMDC5iYCg4XcaKzyP39UGPL1WGGs5Im/CHoTcmiHTcAF0GCKPvbXe5MxA0jiY
+	8s81m4l/9EERBe49cuVFP495gUS5GvB6w5tjAeG0gBzx4prBx2THDZBcalLlrVenD56/roOopqL
+	TVbJIAeNRWBTsdf0313V9P5dKyUVn2Uqibm7P6vTocJzZU9/l0G+TJl+LHJk47ktyJUSwE=
+X-Google-Smtp-Source: AGHT+IF/RrLFKbfuZYkChJLAI3VeI0pilK0J1+UW1ucYjS4aRIP8NaFB9kpKHltdnVrVDcaPRx3Hdw==
+X-Received: by 2002:a05:6a00:8085:b0:725:e309:7110 with SMTP id d2e1a72fcca58-72abdd3bf64mr3897121b3a.5.1734693663699;
+        Fri, 20 Dec 2024 03:21:03 -0800 (PST)
+Received: from MVIN00020.mvista.com ([2401:4900:882f:7af7:716c:47cc:4544:7388])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-72aad8dba83sm2859847b3a.116.2024.12.20.03.21.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 20 Dec 2024 03:21:02 -0800 (PST)
+From: vanusuri@mvista.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Vijay Anusuri <vanusuri@mvista.com>
+Subject: [oe][meta-oe][scarthgap][PATCH] php: upgrade 8.2.24 -> 8.2.26
+Date: Fri, 20 Dec 2024 16:50:53 +0530
+Message-Id: <20241220112053.1866849-1-vanusuri@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Authority-Analysis: v=2.4 cv=bp62BFai c=1 sm=1 tr=0 ts=67653987 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=RZcAm9yDv7YA:10 a=epTmVMiNAAAA:8 a=t7CeM3EgAAAA:8 a=eG7aWNzutWAoOeBMYPIA:9
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: UC4kImG2Le-FaBXH86imivh0TOEfZA5o
-X-Proofpoint-GUID: UC4kImG2Le-FaBXH86imivh0TOEfZA5o
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2024-12-20_03,2024-12-19_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 phishscore=0
- priorityscore=1501 adultscore=0 bulkscore=0 clxscore=1011 spamscore=0
- suspectscore=0 mlxlogscore=999 mlxscore=0 lowpriorityscore=0
- malwarescore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
- engine=8.21.0-2411120000 definitions=main-2412200078
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 20 Dec 2024 09:32:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114433
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Dec 2024 11:21:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114434
 
-From: Yogita Urade <yogita.urade@windriver.com>
+From: Vijay Anusuri <vanusuri@mvista.com>
 
-Includes fix for CVE-2024-10976, CVE-2024-10977, CVE-2024-10978
-and CVE-2024-10979
+Includes fix for CVE-2024-8929, CVE-2024-11236, CVE-2024-11234 and CVE-2024-11233
 
 Changelog:
-https://www.postgresql.org/docs/release/16.5/
+https://www.php.net/ChangeLog-8.php#8.2.26
 
-0003-configure.ac-bypass-autoconf-2.69-version-check.patch
-Refreshed for 16.5
-
-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
- ...03-configure.ac-bypass-autoconf-2.69-version-check.patch | 6 +++---
- .../postgresql/{postgresql_16.4.bb => postgresql_16.5.bb}   | 2 +-
- 2 files changed, 4 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-dbs/postgresql/{postgresql_16.4.bb => postgresql_16.5.bb} (86%)
+ meta-oe/recipes-devtools/php/{php_8.2.24.bb => php_8.2.26.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/php/{php_8.2.24.bb => php_8.2.26.bb} (99%)
 
-diff --git a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
-index 342aeba85..0388bc1b4 100644
---- a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
-+++ b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
-@@ -13,12 +13,12 @@ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
-  1 file changed, 4 deletions(-)
+diff --git a/meta-oe/recipes-devtools/php/php_8.2.24.bb b/meta-oe/recipes-devtools/php/php_8.2.26.bb
+similarity index 99%
+rename from meta-oe/recipes-devtools/php/php_8.2.24.bb
+rename to meta-oe/recipes-devtools/php/php_8.2.26.bb
+index 034f3bef1..10ef2c36e 100644
+--- a/meta-oe/recipes-devtools/php/php_8.2.24.bb
++++ b/meta-oe/recipes-devtools/php/php_8.2.26.bb
+@@ -34,7 +34,7 @@ SRC_URI:append:class-target = " \
+           "
  
- diff --git a/configure.ac b/configure.ac
--index 65715a4..4ad6340 100644
-+index df61ab4..b795f8c 100644
- --- a/configure.ac
- +++ b/configure.ac
- @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch undefined macros
-  
-- AC_INIT([PostgreSQL], [16.4], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
-+ AC_INIT([PostgreSQL], [16.5], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
-  
- -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
- -Untested combinations of 'autoconf' and PostgreSQL versions are not
-@@ -28,5 +28,5 @@ index 65715a4..4ad6340 100644
-  AC_CONFIG_SRCDIR([src/backend/access/common/heaptuple.c])
-  AC_CONFIG_AUX_DIR(config)
- -- 
--2.34.1
-+2.40.0
+ S = "${WORKDIR}/php-${PV}"
+-SRC_URI[sha256sum] = "4cc76ec644eee97d17c92bfe8d0e84714fedf299a538b7dfadc0639dd0dc432f"
++SRC_URI[sha256sum] = "be57c347d451c905bcb4336832a864d9928dd0e20989b872705fea0ba6476c6b"
  
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_16.4.bb b/meta-oe/recipes-dbs/postgresql/postgresql_16.5.bb
-similarity index 86%
-rename from meta-oe/recipes-dbs/postgresql/postgresql_16.4.bb
-rename to meta-oe/recipes-dbs/postgresql/postgresql_16.5.bb
-index 1a47369e4..76498375b 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql_16.4.bb
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql_16.5.bb
-@@ -11,6 +11,6 @@ SRC_URI += "\
-    file://0005-postgresql-fix-ptest-failure-of-sysviews.patch \
- "
- 
--SRC_URI[sha256sum] = "971766d645aa73e93b9ef4e3be44201b4f45b5477095b049125403f9f3386d6f"
-+SRC_URI[sha256sum] = "a6cbbb7037f98cb8afa7d3970b7c48040cf02b115e39253a0c037a8bb8e778f0"
- 
- CVE_STATUS[CVE-2017-8806] = "not-applicable-config: Ddoesn't apply to out configuration of postgresql so we can safely ignore it."
+ CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
+ CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
 -- 
-2.40.0
+2.25.1
 
 
