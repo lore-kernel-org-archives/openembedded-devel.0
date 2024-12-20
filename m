@@ -2,179 +2,116 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DE649E7718A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DCE92E77188
 	for <webhook@archiver.kernel.org>; Fri, 20 Dec 2024 06:39:59 +0000 (UTC)
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web11.147146.1734676794087507193
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web10.147223.1734676793208731288
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Dec 2024 22:39:54 -0800
+ Thu, 19 Dec 2024 22:39:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=T+j6IAU0;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-725f2f79ed9so1307498b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Dec 2024 22:39:54 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NViCArRz;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-801c7e6518eso1028455a12.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Dec 2024 22:39:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1734676793; x=1735281593; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=nYuvGny+Rj2xJ/EQWROhkXwRCDQ7OTvmw5jBYm1m/tY=;
-        b=T+j6IAU0M4Yanet3h6U/M+5/3UMS/vX/QyDAHVoCUZsCQrWnNzBbO0mo1dp4wrY6dx
-         uSEH8+ImFtLWIfW3pBhac6ZazEKs0odZo+d1xPB6pif8QU94gc2OwmKJv9r5PR1JyGN+
-         qx5gi2VlUUf4A4yPr/1izxSmUFDndvum5hEDfs51qCvtqUa0D1qLwG13ug3UgC/a1oNc
-         gKUKR32PHTh6lkH8CjUU4LOTq90L77EDi+GmhVJwHBVjsaRGBbJD08XJ9xG/JiJ+kpAe
-         Zt1/YBE9aHkQljGK2/N7eUSWjFApiiKicV7KDhr22t7PriBZ31iDDkop10O04WZ/oUB4
-         Jw/w==
+        d=gmail.com; s=20230601; t=1734676792; x=1735281592; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=vpPYAq5qzmD1yiZx0gUL3wrcd5hXvclVQYuNJxLVskM=;
+        b=NViCArRz7DAx6flIqwu8v1wD1nTtoJGKaMYU9vL2yB4L3ryWgVKxxNl/yCFoInQHo9
+         8dbmZ7q4jlk1bJBX3rKcVgU2VsLltNg8SXm3zMWdECjtwqAYTdVjMARo0pK6xTN2iTTb
+         k9YnZV3RoIXGLkRiphH6k7Z2bOD59V1xFOMR7rb+b+hhsj03t9YdZGiWxODfj7j0ToWf
+         8XfWTq0+yll3Tp2uBGqZHSJhrQ/D6UP4ZkcP4ll/fjiBPac+1llPKAIvtgKcdQTkOl+1
+         OaAe8en0upPPiKDpZe+wCdbVtr249DuuAD3vp3/iS/4u1WJXiM1GG5Bn11qS8iM8PK/a
+         GbIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734676793; x=1735281593;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=nYuvGny+Rj2xJ/EQWROhkXwRCDQ7OTvmw5jBYm1m/tY=;
-        b=r187x3xPIFTVK9jBeXIv9CeLvwWQaaGbyyKP7K+mP4tcCTVwuAPrLSBNRhexA6qUya
-         YUafQWngsA1UFO++uJ7HwWTQl1K29CCBu38lhRmZ6Z7M3qJmuMW7GcQw1l9V00rE/t6S
-         w8E0m1dFpR1EL2F+P1imopSV38M/fDq67Dkz/YdZhmouJ7AuD/d1ayiQbrN4zwkbk0lE
-         LsqQx3brFmaV6zuqPzp6IG8rHmgJxnKm3nKPV7o3NgijQuIYpQgMTvQxjKdyhMGNvKbj
-         0EnxoKVyEai9VbIQEn3Klr+ahMkb/uHRZ6PwGWTx15NcD0RFZxSp/vYIn1jWb8WHhujF
-         B1Iw==
-X-Gm-Message-State: AOJu0YzgDl+AjTlgo5vQsfRpLY/nwJDbCSVKEoeF63ryTZqPMn2PjqTK
-	IupdxQEz/fqzOokho8N1urXKCjT9y3gSwA1QioiSIV6sbS9FkKl/R77ROytX
-X-Gm-Gg: ASbGncunEb3tBZvejVXLky5I/HeqaIkJikfDpPmSQ00brZGyYxdDCLkMH9FWWbeKUoX
-	17zB0ZA6GrMNDFvzZsaZbnxCtzfu4iggR9iVkiFXXcKU2WjB/GA8FogO6eWJE4zxNaxqc5Pc+Ao
-	XiX/580xiW/EclWW7ZA8lCT+6OiYSsyaWUPSgzLb0TpjHx7Un+yV1kWKJ4Q5IBtb8RveX+/XGXB
-	P02TbR5lASfAt8pLj8BIrUkcIu/QViB+ylJC7u7OBDJa4PLswLpBW7Jag==
-X-Google-Smtp-Source: AGHT+IGfWIrPJnAeHFQgs6NiovyF+lAwVBksg6llUqkNyLe6poRPub8U6x1kxiYqXIAnVPhiSGEfEg==
-X-Received: by 2002:a05:6a00:4ac5:b0:725:b12e:604c with SMTP id d2e1a72fcca58-72abdd3c467mr2291709b3a.4.1734676793146;
-        Thu, 19 Dec 2024 22:39:53 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8201:fd20::898])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-72aad8dba83sm2374419b3a.116.2024.12.19.22.39.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        d=1e100.net; s=20230601; t=1734676792; x=1735281592;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=vpPYAq5qzmD1yiZx0gUL3wrcd5hXvclVQYuNJxLVskM=;
+        b=fLJcIXOtJXM1gHdGqqWkmf4gO3cZuJ76TYqPXzEHjS9a7dmyQ8z1fcaTZTjmzonVFR
+         rwsgXHR0cty5wicoLqOtWGeTsieb5nhnT5cvuQ7r+0M6VYwQGnd8chDc2/nSs3jS4JP9
+         TpM1xbrnrU+QGXtHcDSCc97oBlZCd+MwGUo8w78RGuIwNUVqabyWZBTG5SjvY2ECRavs
+         EkrL23aoYUbtk6zbfEciy++hN2Uh+kNeSEA2zwJ7oT3Pt3E+jwDxLI9NEAoxuCwtpSS2
+         UCy7GYftD2pEhRuYVO52InzdoqS0WL0SQomRnNjK9sUtFcSnGluJjFgKqxVfLkblUO7D
+         9M/w==
+X-Gm-Message-State: AOJu0YzG3+BVPsaMAWUzkbR1f0GpYPzN7KAC+sE+17uyDhf0Dx4cnaTm
+	qH2rq08veWROHW5pwCymqYw6G5+A2XuoQi9BoA18SI57rMhQWsH5FccdJdvG
+X-Gm-Gg: ASbGncueRfAdmhY7j1TZ9jz+aQJ0m2ynSYiuWsQP1OqKXhvFGJb/tOY6ANnywhyVjqA
+	Dm09Bqf05xnihnno+B+fpEvQLy6CktaY9N7b40FbLXzsrB7/AAFE+nXOrxEJY9RI4Tq4DuAnz4V
+	ndy13GJsC+dmdj3YARKIV8BlnlAVkZZh1EYuxrCZ64k8ldhZ6CqlZOSyqSg894BuP+8OafiWYts
+	AL6xLXFwsGmjxuRMRMFrnnSCG+OJFWTdaeVZnncJBbsy/ju7N5vM8mv7g==
+X-Google-Smtp-Source: AGHT+IHRUVL5Brg1Zbe/VfersRtl5qaMOeELmoueyRoFQg3cSgY2Bi3GmxPQh9pUQ+WGml7jYylRUw==
+X-Received: by 2002:a05:6a20:430a:b0:1e0:d867:c880 with SMTP id adf61e73a8af0-1e5e082f91amr3132725637.42.1734676792200;
         Thu, 19 Dec 2024 22:39:52 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8201:fd20::898])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-72aad8dba83sm2374419b3a.116.2024.12.19.22.39.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 19 Dec 2024 22:39:51 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] 7zip: Fix build with clang
-Date: Thu, 19 Dec 2024 22:39:49 -0800
-Message-ID: <20241220063949.3205273-2-raj.khem@gmail.com>
+Subject: [meta-xfce][PATCH 1/2] xfce4-pulseaudio-plugin: Fix build with libwindowing 4.19.6
+Date: Thu, 19 Dec 2024 22:39:48 -0800
+Message-ID: <20241220063949.3205273-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20241220063949.3205273-1-raj.khem@gmail.com>
-References: <20241220063949.3205273-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 20 Dec 2024 06:39:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114430
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114429
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/7zip/7zip_24.09.bb   | 31 +++++++++++++------
- .../0001-support-yocto-cross-compiling.patch  | 18 ++++++-----
- 2 files changed, 31 insertions(+), 18 deletions(-)
+ ...ow_activate-signature-in-libwindowin.patch | 25 +++++++++++++++++++
+ .../xfce4-pulseaudio-plugin_0.4.8.bb          |  1 +
+ 2 files changed, 26 insertions(+)
+ create mode 100644 meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin/0001-Use-new-xfw_window_activate-signature-in-libwindowin.patch
 
-diff --git a/meta-oe/recipes-extended/7zip/7zip_24.09.bb b/meta-oe/recipes-extended/7zip/7zip_24.09.bb
-index 2ccec78404..84093e8d37 100644
---- a/meta-oe/recipes-extended/7zip/7zip_24.09.bb
-+++ b/meta-oe/recipes-extended/7zip/7zip_24.09.bb
-@@ -17,19 +17,27 @@ UPSTREAM_CHECK_URI = "https://github.com/ip7z/7zip/releases/latest"
- S = "${WORKDIR}/git"
- 
- # Support Yocto cross compiling
-+CXXFLAGS:append:toolchain-clang = " -Wno-error=cast-qual -Wno-error=sign-conversion \
-+                                    -Wno-error=disabled-macro-expansion \
-+                                    -Wno-error=cast-function-type-strict"
+diff --git a/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin/0001-Use-new-xfw_window_activate-signature-in-libwindowin.patch b/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin/0001-Use-new-xfw_window_activate-signature-in-libwindowin.patch
+new file mode 100644
+index 0000000000..301cda7246
+--- /dev/null
++++ b/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin/0001-Use-new-xfw_window_activate-signature-in-libwindowin.patch
+@@ -0,0 +1,25 @@
++From 37d718444bc7e6039fb6abf2360b032a91ddc512 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Ga=C3=ABl=20Bonithon?= <gael@xfce.org>
++Date: Mon, 7 Oct 2024 09:57:59 +0200
++Subject: [PATCH] Use new xfw_window_activate() signature in libwindowing
++ 4.19.6
 +
- EXTRA_OEMAKE += " \
-     CXXFLAGS_EXTRA='${CXXFLAGS}' \
-     CFLAGS_BASE2='${CFLAGS}' \
-     LDFLAGS_STATIC_3='${LDFLAGS}' \
- "
- 
-+# Support clang
-+MAKEFILE ?= "../../cmpl_gcc.mak"
-+MAKEFILE:class-target:toolchain-clang = "../../cmpl_clang.mak"
++Upstream-Status: Backport [https://gitlab.xfce.org/panel-plugins/xfce4-pulseaudio-plugin/-/merge_requests/63]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ panel-plugin/pulseaudio-mpris-player.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
- do_compile() {
--    oe_runmake -C CPP/7zip/Bundles/Alone2    -f ../../cmpl_gcc.mak
--    oe_runmake -C CPP/7zip/Bundles/Format7zF -f ../../cmpl_gcc.mak
--    oe_runmake -C CPP/7zip/UI/Console        -f ../../cmpl_gcc.mak
--    oe_runmake -C CPP/7zip/Bundles/SFXCon    -f ../../cmpl_gcc.mak
--    oe_runmake -C CPP/7zip/Bundles/Alone     -f ../../cmpl_gcc.mak
--    oe_runmake -C CPP/7zip/Bundles/Alone7z   -f ../../cmpl_gcc.mak
-+    oe_runmake -C CPP/7zip/Bundles/Alone2    -f ${MAKEFILE}
-+    oe_runmake -C CPP/7zip/Bundles/Format7zF -f ${MAKEFILE}
-+    oe_runmake -C CPP/7zip/UI/Console        -f ${MAKEFILE}
-+    oe_runmake -C CPP/7zip/Bundles/SFXCon    -f ${MAKEFILE}
-+    oe_runmake -C CPP/7zip/Bundles/Alone     -f ${MAKEFILE}
-+    oe_runmake -C CPP/7zip/Bundles/Alone7z   -f ${MAKEFILE}
- }
++diff --git a/panel-plugin/pulseaudio-mpris-player.c b/panel-plugin/pulseaudio-mpris-player.c
++index 1694b3f..b4582c5 100644
++--- a/panel-plugin/pulseaudio-mpris-player.c
+++++ b/panel-plugin/pulseaudio-mpris-player.c
++@@ -291,7 +291,7 @@ pulseaudio_mpris_player_raise_wnck (PulseaudioMprisPlayer *player)
++     {
++       if (g_strcmp0 (player->player_label, xfw_window_get_name (lp->data)) == 0)
++         {
++-          xfw_window_activate (lp->data, g_get_monotonic_time () / 1000, NULL);
+++          xfw_window_activate (lp->data, NULL, g_get_monotonic_time () / 1000, NULL);
++           break;
++         }
++     }
+diff --git a/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.4.8.bb b/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.4.8.bb
+index c01b4966f0..2cb33604c7 100644
+--- a/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.4.8.bb
++++ b/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.4.8.bb
+@@ -8,6 +8,7 @@ REQUIRED_DISTRO_FEATURES = "pulseaudio x11"
  
- FILES:${PN} += "${libdir}/*"
-@@ -37,15 +45,18 @@ FILES:${PN} += "${libdir}/*"
- FILES_SOLIBSDEV = ""
- INSANE_SKIP:${PN} += "dev-so"
+ DEPENDS += "dbus-glib pulseaudio"
  
-+INSTALLDIR ?= "g"
-+INSTALLDIR:class-target:toolchain-clang = "c"
-+
- do_install() {
- 	install -d ${D}${bindir}
--	install -m 0755 ${S}/CPP/7zip/Bundles/Alone/b/g/7za ${D}${bindir}
--	install -m 0755 ${S}/CPP/7zip/Bundles/Alone7z/b/g/7zr ${D}${bindir}
--	install -m 0755 ${S}/CPP/7zip/UI/Console/b/g/7z ${D}${bindir}/7z.real
-+	install -m 0755 ${S}/CPP/7zip/Bundles/Alone/b/${INSTALLDIR}/7za ${D}${bindir}
-+	install -m 0755 ${S}/CPP/7zip/Bundles/Alone7z/b/${INSTALLDIR}/7zr ${D}${bindir}
-+	install -m 0755 ${S}/CPP/7zip/UI/Console/b/${INSTALLDIR}/7z ${D}${bindir}/7z.real
- 	install -m 0755 ${UNPACKDIR}/7z_wrapper.sh ${D}${bindir}/7z
++SRC_URI += "file://0001-Use-new-xfw_window_activate-signature-in-libwindowin.patch"
+ SRC_URI[sha256sum] = "bd742b207c39c221e91c57c9c9be2839eb802d1b1ee01a02b7427cd02d3f0348"
  
- 	install -d ${D}${libdir}
--	install -m 0755 ${S}/CPP/7zip/Bundles/Format7zF/b/g/7z.so ${D}${libdir}/lib7z.so
-+	install -m 0755 ${S}/CPP/7zip/Bundles/Format7zF/b/${INSTALLDIR}/7z.so ${D}${libdir}/lib7z.so
- 	ln -rsn ${D}${libdir}/lib7z.so ${D}${bindir}/7z.so
- }
- 
-diff --git a/meta-oe/recipes-extended/7zip/files/0001-support-yocto-cross-compiling.patch b/meta-oe/recipes-extended/7zip/files/0001-support-yocto-cross-compiling.patch
-index 06908e94fe..e3d0477930 100644
---- a/meta-oe/recipes-extended/7zip/files/0001-support-yocto-cross-compiling.patch
-+++ b/meta-oe/recipes-extended/7zip/files/0001-support-yocto-cross-compiling.patch
-@@ -21,8 +21,6 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-  CPP/7zip/var_gcc.mak  | 2 --
-  2 files changed, 1 insertion(+), 3 deletions(-)
- 
--diff --git a/CPP/7zip/7zip_gcc.mak b/CPP/7zip/7zip_gcc.mak
--index bcb06a0..297f0a8 100644
- --- a/CPP/7zip/7zip_gcc.mak
- +++ b/CPP/7zip/7zip_gcc.mak
- @@ -45,7 +45,7 @@ CFLAGS_DEBUG = -g
-@@ -30,12 +28,10 @@ index bcb06a0..297f0a8 100644
-  CFLAGS_DEBUG = -DNDEBUG
-  ifneq ($(CC), $(CROSS_COMPILE)clang)
- -LFLAGS_STRIP = -s
--+LFLAGS_STRIP = 
-++LFLAGS_STRIP =
-  endif
-  endif
-  
--diff --git a/CPP/7zip/var_gcc.mak b/CPP/7zip/var_gcc.mak
--index 664491c..6d0f485 100644
- --- a/CPP/7zip/var_gcc.mak
- +++ b/CPP/7zip/var_gcc.mak
- @@ -6,7 +6,5 @@ IS_ARM64=
-@@ -46,6 +42,12 @@ index 664491c..6d0f485 100644
- -CXX=$(CROSS_COMPILE)g++
-  
-  # -march=armv8-a+crc+crypto
---- 
--2.34.1
--
-+--- a/CPP/7zip/var_clang.mak
-++++ b/CPP/7zip/var_clang.mak
-+@@ -6,6 +6,4 @@ IS_ARM64=
-+ CROSS_COMPILE=
-+ MY_ARCH=
-+ USE_ASM=
-+-CC=$(CROSS_COMPILE)clang
-+-CXX=$(CROSS_COMPILE)clang++
-+ USE_CLANG=1
+ PACKAGECONFIG ??= "libnotify"
 
