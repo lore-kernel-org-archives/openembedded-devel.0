@@ -1,100 +1,93 @@
-Return-Path: <brgl@bgdev.pl>
+Return-Path: <t.f.g.geelen@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F26E2E7718B
-	for <webhook@archiver.kernel.org>; Fri, 20 Dec 2024 18:06:01 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web11.1333.1734717956373320844
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F3F8EE7718B
+	for <webhook@archiver.kernel.org>; Sat, 21 Dec 2024 22:57:32 +0000 (UTC)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.web10.15914.1734821842714382391
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Dec 2024 10:05:56 -0800
+ Sat, 21 Dec 2024 14:57:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=HC6/M8Jo;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.49, mailfrom: brgl@bgdev.pl)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-434b3e32e9dso23757345e9.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Dec 2024 10:05:56 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=RtvLqrxp;
+ spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: t.f.g.geelen@gmail.com)
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-aa6c0dbce1fso442847166b.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Dec 2024 14:57:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1734717955; x=1735322755; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1734821840; x=1735426640; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=9/FUbhQnjYXV5TE2gBwwd2Y1XhedwUQspah6mDy1nMo=;
-        b=HC6/M8JoTCU9s0CeUNGZf/tcKPg6AwoQCF07GnYBOJxJrjQzF/6oz/UViI8BfiF69X
-         y3XSNcJbxvpVC8L0buJbEN598UAALKud8hsQmqkNrheuhwyoa0EcTxId4LjuYK0N3Som
-         ZScIGO4wzKEV245kTf8HFzUp2+1ggsl/2sYmKwLbjwGyX7LtfINOKf7qlvPZikDgEyOm
-         swCTBABoH71A9FRLE7XN5ByirVmsCSXL/33+t8NDr0yTvKP0riLYqp4o/Lve9nrsQzbK
-         3638H5XUxCa0BFomcqLszK6If1mDLZIIGFXsZulXg80N7DEiiv7MaBp30csJreE2kUnj
-         Mvtg==
+        bh=gqg34bHG5cTGIALktMTs6F0g0BHYeQJHOUHDehPZGsU=;
+        b=RtvLqrxp0VnTg23joUob/QmEHQxfgYEfZUt/BY5RS2rMRaN6/RTdIAYswAtMZiVZf4
+         /fDgOXjx55XYTgYlkWUIS5ZlfmF+7cpQ6SSUrbJnGdUB7efbqpEzNxBPiBGCzUvVwjrc
+         16Zzfpp7+gkIrBhdNap/Vki1zTGbFHDnM9mptApCQOXmjrpNFKclewVoCYd2gBnx3FqB
+         PpY38sRexZskYgQB2Axt2K4PXcIZPmQ45Wbw8NhKFA9G2ZKusE+bi0rH8kLko7uLCFA/
+         8Tjx+OTeIRRtubKenyF/iNu7RzqFFI9QuDdJTSqrzKNeyF7eQ4yqOZDUZs7vanTy8dXa
+         Ogvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734717955; x=1735322755;
+        d=1e100.net; s=20230601; t=1734821840; x=1735426640;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=9/FUbhQnjYXV5TE2gBwwd2Y1XhedwUQspah6mDy1nMo=;
-        b=RtDDURhy2lA4g75H3reujoak84+XruCGcLqu0dTPeBrO13UMQq7KsCImIJS/8XYid+
-         74W5WQOVn1IbEfwbe3KG2zEYpWtVq9S2GYlYkHUmzkK+67+51s6+6GPD0SYuMJd1/KZj
-         ikmiWWWx+0t4+4xhyeRhVxilIFetNiz1vAxXvoeHro3g06dOuxMjPXB9N+cioi6iAapi
-         lUXfg9LTr37RoAK25BIF3SDWU5y7PeVnpyHrnZORAxnhwQ80/YG3WT4DZr5dQxTIskeV
-         z5qAY2kqcw93cXQXc43lVHpML/vlRDUpygem6D4hiLFFvgGkgs+EbifydILGuncg2qG7
-         3rLw==
-X-Forwarded-Encrypted: i=1; AJvYcCXIV3tlqO52ZigpCloyNfbUI2+nm7E2/d3r8AUsq4a9PpdqqJRFCfsZrGu4Tn3exMi6z0CIboiYY8ynY+Pej/hHOmk=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzoLxbD6wUzA8EnxYqh8DAydRUL+zDveDuGMdV77rSYlcTlJEcP
-	Kr74gMxGqJxu1ZkHZu39ODD+POuHaQEovXYMxjg+9rEYHaDbvQSnSJf/JC8VNnk=
-X-Gm-Gg: ASbGncsFWhRMMbHlyICjiyywJiAATYr5IHTBCoi0PqpLst5AIEaQ1hLe2rGjkryVN+r
-	AJGLn4EDi3VfrGM5p5odFizdnFxbIzG1mzrV963/FdUyqXDKBx1nORt2j/kV/RIe3z5T5NDYmiY
-	yLD0sFWfdAzUPj4NyQY7F09Ox2Y6brCF8Nw5k4UTtRRaKRDOdDi4g0dumFqnSlbDgfvf025ozfV
-	MwhwFQO6NXyCk62z/jch7Cl5TOaD20VSFRA32PcwQEEpkYHKsiGgBhE
-X-Google-Smtp-Source: AGHT+IHtPEKQGVX6VQb9fw76EjQZugPL6P9MMLlAfUzuflwlrOEZSxAZFbFShcIyKpUP8LSYH/S7BA==
-X-Received: by 2002:a05:6000:178c:b0:386:3560:477f with SMTP id ffacd0b85a97d-38a221f1852mr3726926f8f.23.1734717954682;
-        Fri, 20 Dec 2024 10:05:54 -0800 (PST)
-Received: from brgl-uxlite.home ([2a01:cb1d:dc:7e00:72db:1014:577a:9e6b])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-43665cd9c29sm30447085e9.14.2024.12.20.10.05.53
+        bh=gqg34bHG5cTGIALktMTs6F0g0BHYeQJHOUHDehPZGsU=;
+        b=dzjdMI3wo0tc3AqHY3W/SQozjfUaKNnNeb7/nOhMNqxGEKPa2dDW8N0UH7A71PQTGc
+         JTQI+GoIuI0Yc9lZwzUHvtSEz3uLcUmHTCcSJKZfQSKSP8j2pmt7kFmnwEAM4U0U9YZ1
+         uinapIskI4jR0zUC5VY4i8t+apt7xkVABgJnWkTA9iU/3su6yC1C6IKgXZeLZQE18DMX
+         Ep+MUMZV2629L5SHotzsquP6jdaFfA1ULHRosuUkLYZDNRANwAR1OjN7cTgWW+Q/m4OP
+         mzx1xqd0h4DqP8+osC0lkQX0Xs24AoPT/zNlAGxzeQEuGt/q8You8gzmaZERnTIoBTiC
+         YVRA==
+X-Gm-Message-State: AOJu0YwuijWhu5QWmkS09fssOV6ZkYORMC1ey552a8nkMRrfH33IqhvC
+	qBJ7Xos1ChtM2fI1E3xARH5n+clhGGQQNEDVuJy1WrY6fo0KvDbyH5hBvVdb
+X-Gm-Gg: ASbGncskDnLlk153l4SjvtV8rS2oYLALhqK9d2xARLRx9MA5fQf50OMCYGQ0AbYiQ7q
+	pG0jU7IkKv3dYHW3bcXN8xUCo5GQGXJMkBdkN6P8SBWnxJ3ampXXn30Hy9fIxkWL46d2R0O6ZE6
+	opgUqyCi0exhVVTtQVayGKPhkMFGnUKDjyli8SBBpuow3kZb3RvUA++L5WXUhgemF/DfowX5WVw
+	xsbBheH2+R/kT3PwJLOCLS+AqGM6OXrCqy2D4En74jXriDaH1XhccW9ZUOWZGA8yNycs1yLfcxf
+	S5E+aOuXLyfNLxuo0++mWFrYOw8/J5zG4pM=
+X-Google-Smtp-Source: AGHT+IFkOAx81vPFqI2L1Z7IPotLhhhLv9dqKPm733Rf2+DyLdZf6cLlLX0DPHbyLRE6mBW7K14YmA==
+X-Received: by 2002:a05:6402:2087:b0:5d3:da65:ff26 with SMTP id 4fb4d7f45d1cf-5d81de1c939mr16875603a12.31.1734821840065;
+        Sat, 21 Dec 2024 14:57:20 -0800 (PST)
+Received: from control-center.fritz.box (150-12-20-31.ftth.glasoperator.nl. [31.20.12.150])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-aac0e82f858sm330717666b.21.2024.12.21.14.57.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 20 Dec 2024 10:05:54 -0800 (PST)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>,
-	Bruce Ashfield <bruce.ashfield@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Subject: [meta-python][PATCH] python3-gpiod: update v2.2.2 -> v2.2.3
-Date: Fri, 20 Dec 2024 19:05:51 +0100
-Message-ID: <20241220180551.110039-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.45.2
+        Sat, 21 Dec 2024 14:57:18 -0800 (PST)
+From: Tom Geelen <t.f.g.geelen@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Tom Geelen <t.f.g.geelen@gmail.com>
+Subject: [meta-python][PATCH 1/7] python3-aiohttp: upgrade 3.11.8 -> 3.11.11
+Date: Sat, 21 Dec 2024 22:56:59 +0000
+Message-ID: <20241221225704.2712991-2-t.f.g.geelen@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 20 Dec 2024 18:06:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114450
+ <openembedded-devel@lists.openembedded.org>; Sat, 21 Dec 2024 22:57:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114451
 
-From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-
-Small bugfix release addressing a potential crash due to a bad usage of
-PyDict_Next() in the C extension.
-
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Signed-off-by: Tom Geelen <t.f.g.geelen@gmail.com>
 ---
- .../python/{python3-gpiod_2.2.2.bb => python3-gpiod_2.2.3.bb}   | 2 +-
+ .../{python3-aiohttp_3.11.8.bb => python3-aiohttp_3.11.11.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-gpiod_2.2.2.bb => python3-gpiod_2.2.3.bb} (93%)
+ rename meta-python/recipes-devtools/python/{python3-aiohttp_3.11.8.bb => python3-aiohttp_3.11.11.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-gpiod_2.2.2.bb b/meta-python/recipes-devtools/python/python3-gpiod_2.2.3.bb
-similarity index 93%
-rename from meta-python/recipes-devtools/python/python3-gpiod_2.2.2.bb
-rename to meta-python/recipes-devtools/python/python3-gpiod_2.2.3.bb
-index a7c4ee52c..58908ad0d 100644
---- a/meta-python/recipes-devtools/python/python3-gpiod_2.2.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-gpiod_2.2.3.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://setup.py;beginline=241;endline=241;md5=f5ddb56912b7f2
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.11.8.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.11.11.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-aiohttp_3.11.8.bb
+rename to meta-python/recipes-devtools/python/python3-aiohttp_3.11.11.bb
+index 9c4720daf2..3d4cb75e6a 100644
+--- a/meta-python/recipes-devtools/python/python3-aiohttp_3.11.8.bb
++++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.11.11.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/aio-libs/aiohttp"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=748073912af33aa59430d3702aa32d41"
  
- SRC_URI += "file://run-ptest"
+-SRC_URI[sha256sum] = "7bc9d64a2350cbb29a9732334e1a0743cbb6844de1731cbdf5949b235653f3fd"
++SRC_URI[sha256sum] = "bb49c7f1e6ebf3821a42d81d494f538107610c3a705987f53068546b0e90303e"
  
--SRC_URI[sha256sum] = "aa4571f64e1070d38e4c14c491f69637ee73e23c801d3a418dde4d5410e5d53f"
-+SRC_URI[sha256sum] = "b916c3741dfc4dbcf6224b39e50765f672b137896287715709d49e9f063304c5"
- 
- inherit python_setuptools_build_meta python_pep517 ptest pypi
- 
+ PYPI_PACKAGE = "aiohttp"
+ inherit python_setuptools_build_meta pypi
 -- 
-2.45.2
+2.43.0
 
 
