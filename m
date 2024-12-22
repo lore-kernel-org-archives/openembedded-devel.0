@@ -1,96 +1,129 @@
-Return-Path: <t.f.g.geelen@gmail.com>
+Return-Path: <hongxu.jia@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DA1DBE7718F
-	for <webhook@archiver.kernel.org>; Sat, 21 Dec 2024 22:58:12 +0000 (UTC)
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
- by mx.groups.io with SMTP id smtpd.web10.15946.1734821885859550805
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AA76BE7718D
+	for <webhook@archiver.kernel.org>; Sun, 22 Dec 2024 08:16:25 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.21524.1734855377847050225
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 21 Dec 2024 14:58:06 -0800
+ Sun, 22 Dec 2024 00:16:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZxHlV5ny;
- spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: t.f.g.geelen@gmail.com)
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-aa66ead88b3so575118766b.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Dec 2024 14:58:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1734821884; x=1735426684; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=1ldWNMNnkYF7Rl1VT5T04eI7EW9vJmp3RKtytIMYXLA=;
-        b=ZxHlV5nyMllNjptod+at7Z8G/3MPrep5LaZ17ahzAF0fD0IMWgwtUfYS5GlA0y1eHY
-         LO+GyQzcYEabpobMDNB2o53VKfEVNUNx2ictJmZ7VMSB2IhmNHOxZpN4SrTDykuJCr1r
-         vbGMvYy+Y8pEI+MhpdZCV3ImTz6mJnmuFMpW8/G6ZYZH7TAGhab1L2jbm5wWcWs1It0e
-         IvoPNubWJXOjAGOyQ8mb5atmpSZ4vI7VSTblaAVmAQMvM9Y2tegL8wI72KcyX20T+oWe
-         R+u5vPHVpvm8lI4PPMTW978rtaKkxKSn7Xy8JShYQCEdGGZmQF6+xhTgnd2h8neddxE0
-         IJBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1734821884; x=1735426684;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=1ldWNMNnkYF7Rl1VT5T04eI7EW9vJmp3RKtytIMYXLA=;
-        b=tHBB7BI5DeNXZBffJjx8gKIaXNbxCFplqZTPzgt1vjtyO6UC7u9yNfoV7RyI9bE3vZ
-         Nqj7ZpeGoZDS2WcjAeQXgabM+/bolXaf82kny8NceoM8cTBk1t3FFNB3U5MDdE63K1pd
-         3aeV7J6LJgyCIGHJT2YNDHQ/dPiPsKU+w5cYOGITh8I0lKB8N/Wg+oC5+Fvso+YGuj9y
-         krYw08paXutPcMLLkYvR0ouQndYE8UQrq+ne4Iw799/CI1ObY0XZz7cSxVAUoFLutoZu
-         mLQbeVg9A/UUMU2rXXVHiYit+f6LMDgcfVaplEoG5de7EmK0xzi7TdJDSk8ivqGcZjcI
-         D2Qg==
-X-Gm-Message-State: AOJu0YzPy41RlMKVMzlLFvzRltOLfrebnfRxpsRqhROx40yjYI9HHTTZ
-	a0NIBWqNJs+VdDs5HwVlgfDcQEowuDqQqvI2ncHD0iYrYTs8ApcmGV9pyPxy
-X-Gm-Gg: ASbGnctANA5GC7GgigH8vMuPNIub9Obxp/EsqEUZ010AqQD6EzWjQhP/Ea42x+6diNo
-	Nb7JvUQBZIz21cYFmZktdaoSqPHJ/VIoXxLM+sgD8n4JsiWXhwg82gCXdxcxzHW0RjPa1VoLw0W
-	hm4+qqIumqbMNC1hrfB2i3V4HnEma8JVSHkWI2mfInOJgNBk/hApxaugCPF7/PI5iyEpexIFRbU
-	eecIkwHhXK0ZMktLYO9/advUqKKbWE5ZvbyBZP61knU6IyIhMZPfxbuITH+lKq6f/QLZnPyMEl8
-	eulFjZT27QkPAABkF9+LOVYdwWzWahIC+38=
-X-Google-Smtp-Source: AGHT+IEQI2HTROO34VqCW6MLoaR2aud1+jHRvvYBdWnR9ofx+bOCYx/YCiuk3Z2eRG5ZponReguM9g==
-X-Received: by 2002:a17:907:d08f:b0:aae:9cfe:4448 with SMTP id a640c23a62f3a-aae9cfe46a7mr294744366b.29.1734821883661;
-        Sat, 21 Dec 2024 14:58:03 -0800 (PST)
-Received: from control-center.fritz.box (150-12-20-31.ftth.glasoperator.nl. [31.20.12.150])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-aac0e82f858sm330717666b.21.2024.12.21.14.58.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 21 Dec 2024 14:58:02 -0800 (PST)
-From: Tom Geelen <t.f.g.geelen@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tom Geelen <t.f.g.geelen@gmail.com>
-Subject: [meta-python][PATCH 6/7] python3-sqlalchemy: upgrade 2.0.35 -> 2.0.36
-Date: Sat, 21 Dec 2024 22:57:06 +0000
-Message-ID: <20241221225704.2712991-9-t.f.g.geelen@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241221225704.2712991-2-t.f.g.geelen@gmail.com>
-References: <20241221225704.2712991-2-t.f.g.geelen@gmail.com>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=208694af22=hongxu.jia@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BM7LDJD005518;
+	Sun, 22 Dec 2024 08:16:16 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 43njw0rxmk-2
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Sun, 22 Dec 2024 08:16:16 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Sun, 22 Dec 2024 00:16:15 -0800
+Received: from pek-lpg-core5.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Sun, 22 Dec 2024 00:16:14 -0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <akuster808@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH 2/4] Update p7zip to 7zip
+Date: Sun, 22 Dec 2024 16:16:10 +0800
+Message-ID: <20241222081612.239474-2-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241222081612.239474-1-hongxu.jia@windriver.com>
+References: <20241222081612.239474-1-hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=Yc5H5xRf c=1 sm=1 tr=0 ts=6767cad0 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=RZcAm9yDv7YA:10 a=t7CeM3EgAAAA:8 a=5Ayg2Ohv2b7I1Z2Q0e8A:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: Jx95QNpMPTdt_OPIZpAF92ZT-jdV22LM
+X-Proofpoint-GUID: Jx95QNpMPTdt_OPIZpAF92ZT-jdV22LM
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2024-12-22_03,2024-12-19_01,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 phishscore=0
+ malwarescore=0 spamscore=0 impostorscore=0 mlxscore=0 mlxlogscore=999
+ adultscore=0 lowpriorityscore=0 priorityscore=1501 clxscore=1011
+ bulkscore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2411120000 definitions=main-2412220073
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 21 Dec 2024 22:58:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114456
+ <openembedded-devel@lists.openembedded.org>; Sun, 22 Dec 2024 08:16:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114459
 
-Signed-off-by: Tom Geelen <t.f.g.geelen@gmail.com>
+Due to commit [Use 7zip 2409 to replace p7zip 16.02] applied,
+update affected recipes
+
+(cherry picked from commit 751cc692ee13f0e7ba7a82d73dd4c987da3d578d)
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- ...ython3-sqlalchemy_2.0.35.bb => python3-sqlalchemy_2.0.36.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-sqlalchemy_2.0.35.bb => python3-sqlalchemy_2.0.36.bb} (87%)
+ .../recipes-devtool/android-tools/android-tools_29.0.6.r14.bb | 4 ++--
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb    | 2 +-
+ meta-python/recipes-devtools/python/python3-rarfile_4.2.bb    | 2 +-
+ meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.21.bb        | 2 +-
+ 4 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.35.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.36.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.35.bb
-rename to meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.36.bb
-index 87d76e9e33..058d90bbef 100644
---- a/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.35.bb
-+++ b/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.36.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.sqlalchemy.org/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c78b979ae6c20775a28a287d32092cbb"
+diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
+index e9b0c97e9..72d29e571 100644
+--- a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
++++ b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
+     file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=cb641bc04cda31daea161b1bc15da69f \
+     file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9 \
+ "
+-DEPENDS = "libbsd libpcre zlib libcap libusb squashfs-tools p7zip libselinux googletest"
++DEPENDS = "libbsd libpcre zlib libcap libusb squashfs-tools 7zip libselinux googletest"
  
--SRC_URI[sha256sum] = "e11d7ea4d24f0a262bccf9a7cd6284c976c5369dac21db237cff59586045ab9f"
-+SRC_URI[sha256sum] = "7f2767680b6d2398aea7082e45a774b2b0767b5c8d8ffb9c8b683088ea9b29c5"
+ SRCREV_core = "abfd66fafcbb691d7860df059f1df1c9b1ef29da"
  
- inherit pypi python_setuptools_build_meta cython
+@@ -166,7 +166,7 @@ do_install() {
  
+ PACKAGES =+ "${PN}-fstools ${PN}-adbd"
+ 
+-RDEPENDS:${BPN} = "${BPN}-conf p7zip"
++RDEPENDS:${BPN} = "${BPN}-conf 7zip"
+ 
+ FILES:${PN}-adbd = "\
+     ${bindir}/adbd \
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 71f74287c..7af2af905 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -374,7 +374,7 @@ RDEPENDS:packagegroup-meta-oe-extended ="\
+     nana \
+     nicstat \
+     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "openwsman", "", d)} \
+-    p7zip \
++    7zip \
+     isomd5sum \
+     jpnevulator \
+     ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "polkit-group-rule-datetime polkit-group-rule-network polkit", "", d)} \
+diff --git a/meta-python/recipes-devtools/python/python3-rarfile_4.2.bb b/meta-python/recipes-devtools/python/python3-rarfile_4.2.bb
+index 41cff4bfc..6f3012d1e 100644
+--- a/meta-python/recipes-devtools/python/python3-rarfile_4.2.bb
++++ b/meta-python/recipes-devtools/python/python3-rarfile_4.2.bb
+@@ -13,7 +13,7 @@ inherit pypi
+ PYPI_PACKAGE="rarfile"
+ 
+ RDEPENDS:${PN} += "\
+-    p7zip \
++    7zip \
+     python3-core \
+     python3-datetime \
+     python3-crypt \
+diff --git a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.21.bb b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.21.bb
+index abb5c14e6..4822f0cad 100644
+--- a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.21.bb
++++ b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.21.bb
+@@ -30,4 +30,4 @@ do_configure:prepend() {
+ 
+ FILES:${PN} += "${libdir}/thunar-archive-plugin"
+ 
+-RRECOMMENDS:${PN} = "lzop zip tar bzip2 unzip xz p7zip"
++RRECOMMENDS:${PN} = "lzop zip tar bzip2 unzip xz 7zip"
 -- 
-2.43.0
+2.34.1
 
 
