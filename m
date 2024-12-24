@@ -2,53 +2,53 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3CB2FE7719F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B24AC02180
 	for <webhook@archiver.kernel.org>; Tue, 24 Dec 2024 09:27:31 +0000 (UTC)
-Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
- by mx.groups.io with SMTP id smtpd.web10.30508.1735032444345337866
+Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
+ by mx.groups.io with SMTP id smtpd.web10.30509.1735032445057522136
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 24 Dec 2024 01:27:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=sGp5Xlbs;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=rksnOuO8;
+ spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1735032445; x=1766568445;
+  t=1735032444; x=1766568444;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=16TRWU6sH5wBB9a32RQIb/EoP/OgHvNZkQlTvF6uWT0=;
-  b=sGp5XlbsMxEIMRYyqqrAry3+HpnbW4o8TQmnmtK28nrFTXbeL8uAO8bk
-   jj9D70TEvk6DNhZpUb5MoOa0wCFE+v5DwzVaiQB0guGpBNp9O5dGdxO5K
-   Wroq9IY6Fnt5dFhlPJ4ahp3pVgz34ImskKVDSscGcwMz+HAmv9AZCwtN1
-   FKAU/btWE39KgCg9/5oH2RDFWVxHMDRyoA3KvV0D5KygiGoBgeMTvQ7FP
-   aJm/m7OXI57Rmk09LVZFjVlGKour8hQbTsMEkne+f2TwlTXQkO2ZmGCo0
-   NCn3AMT4XkkpShZM8ypO4kiKRLxiO0+r8dbMZHd/ZvgI8FBFZfUria0S3
-   Q==;
-X-CSE-ConnectionGUID: EAGYSUKPTJW3MoUvypppJg==
-X-CSE-MsgGUID: PzVXpjZSSUWqxNDTxvqtZQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11295"; a="172125387"
+  bh=j3t7rqcisoBM8mF+6f+gRmY3cJlM5wSxNtBqQpHXKLQ=;
+  b=rksnOuO81wwQt53e1TA4dgGey20W4h6Uh5T4+uSq8UkTqDU0fkefW/BV
+   WzfNZMEIETSTFJ8CcIoOkJwSRiFuwtvi1hG1zj2ykA14rVEaxQ6F/yXzz
+   MX0Y8on0nCDksabYnpe5QUbAxAe14qJxAarA63EgMAF8YQSFfxUs/GVoE
+   xM+OA9Hd8m2BwnlKi5SFyfa0I2ifZiLbDCI+T5V0WsQC5EwAxVJzERsPo
+   pSsBvUz9Kk07PnyiQ8Yv/MO7TaFCQtM7LaEI3sD1QL6iR3Db4ifMyKzC5
+   kzfbzla0+E4ibaVcLvrtkMrQTjpFla+A+7GhgcGElrN6Ngx848nm375St
+   g==;
+X-CSE-ConnectionGUID: CZaWlw9zRPGuNi5tTiXZKA==
+X-CSE-MsgGUID: Jh41edXTRmO1k7SyBkbWHg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11295"; a="163714075"
 X-IronPort-AV: E=Sophos;i="6.12,259,1728918000"; 
-   d="scan'208";a="172125387"
-Received: from unknown (HELO oym-r1.gw.nic.fujitsu.com) ([210.162.30.89])
-  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Dec 2024 18:27:24 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 607EFD4809
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 18:27:22 +0900 (JST)
+   d="scan'208";a="163714075"
+Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
+  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Dec 2024 18:27:22 +0900
+Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
+	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id F1D58DBB84
+	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 18:27:20 +0900 (JST)
 Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 300D7BDC92
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 18:27:22 +0900 (JST)
+	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id C7DEAD72B2
+	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 18:27:20 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id C1E796BB64
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 18:27:21 +0900 (JST)
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 520A56BB64
+	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 18:27:20 +0900 (JST)
 Received: from localhost.localdomain.localdomain (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 8832B1A0073;
-	Tue, 24 Dec 2024 17:27:21 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 1876B1A006C;
+	Tue, 24 Dec 2024 17:27:20 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 35/67] python3-importlib-metadata: upgrade 8.4.0 -> 8.5.0
-Date: Tue, 24 Dec 2024 17:26:29 +0800
-Message-Id: <1735032421-13513-35-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 29/67] python3-grpcio-channelz: upgrade 1.67.1 -> 1.68.1
+Date: Tue, 24 Dec 2024 17:26:23 +0800
+Message-Id: <1735032421-13513-29-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1735032421-13513-1-git-send-email-wangmy@fujitsu.com>
 References: <1735032421-13513-1-git-send-email-wangmy@fujitsu.com>
@@ -56,42 +56,41 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28878.006
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28878.006
-X-TMASE-Result: 10--0.235500-10.000000
-X-TMASE-MatchedRID: uzDfqB7OXkqjz0nOeth/yQPZZctd3P4BC5HdxA3MwScH8UzOewTxw+79
-	DJRUi35pTQ0JkPG287/mn3xyPJAJogMWCgdCzp+angIgpj8eDcBpkajQR5gb3lQwtQm7iV5jKra
-	uXd3MZDX+X7zGTTVMP2gZDAlrmdipMxCQqSm6UO4Z67+3aly55xDUit3uGZBcrFqkx5m/xxNRZS
-	6vJkPYOT0fkhqJ3Zpro4y8VaI0OPXo4DGSOCid9FPJnXL2yNYdkuo847l05tDEzMyAmsz+FHoWL
-	WlXcsZv
+X-TMASE-Result: 10-0.832500-10.000000
+X-TMASE-MatchedRID: V7gFd1X8+4Wjz0nOeth/yQPZZctd3P4B1cuIRwt/4MiysPB8dBBorXKn
+	6DBj/gsEIvrftAIhWmI/dksnGuGmFZH0YXYnbGozFEUknJ/kEl5lVdRvgpNpe/oLR4+zsDTtB00
+	/kkeBTwDhcQ7L/ibs2VXPsl9AX9UPUO3miAzxY0mtNrAF3r4t7jRajYOFZYVQYYH+1EP5PTvI67
+	5zZ/BUWthXuypoTpB7k4yhqesvKCryDBYNCJzj6s+YAJ5mo7zlOKgonZY9TFMtLgAQ4uO3AA==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 09:27:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114505
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114503
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ib-metadata_8.4.0.bb => python3-importlib-metadata_8.5.0.bb} | 2 +-
+ ...cio-channelz_1.67.1.bb => python3-grpcio-channelz_1.68.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-importlib-metadata_8.4.0.bb => python3-importlib-metadata_8.5.0.bb} (87%)
+ rename meta-python/recipes-devtools/python/{python3-grpcio-channelz_1.67.1.bb => python3-grpcio-channelz_1.68.1.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-importlib-metadata_8.4.0.bb b/meta-python/recipes-devtools/python/python3-importlib-metadata_8.5.0.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-importlib-metadata_8.4.0.bb
-rename to meta-python/recipes-devtools/python/python3-importlib-metadata_8.5.0.bb
-index 763aa170c6..d51edf3356 100644
---- a/meta-python/recipes-devtools/python/python3-importlib-metadata_8.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-importlib-metadata_8.5.0.bb
-@@ -8,7 +8,7 @@ inherit pypi python_setuptools_build_meta
- PYPI_PACKAGE = "importlib_metadata"
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.67.1.bb b/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.68.1.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-grpcio-channelz_1.67.1.bb
+rename to meta-python/recipes-devtools/python/python3-grpcio-channelz_1.68.1.bb
+index 9f81c6a691..414db61558 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.67.1.bb
++++ b/meta-python/recipes-devtools/python/python3-grpcio-channelz_1.68.1.bb
+@@ -11,7 +11,7 @@ DEPENDS += "python3-grpcio"
+ PYPI_PACKAGE = "grpcio_channelz"
  UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
  
--SRC_URI[sha256sum] = "9a547d3bc3608b025f93d403fdd1aae741c24fbb8314df4b155675742ce303c5"
-+SRC_URI[sha256sum] = "71522656f0abace1d072b9e5481a48f07c138e00f079c38c8f883823f9c26bd7"
+-SRC_URI[sha256sum] = "a4ae742c9ca04327ae0eec43d7e5b96c9686b8fc24200ae0816a67ab18342710"
++SRC_URI[sha256sum] = "ebe9b127745306db1707bcb8eb0dc56b947c3b616729b59d7b451e2639ecb6d2"
  
- S = "${WORKDIR}/importlib_metadata-${PV}"
+ RDEPENDS:${PN} = "python3-grpcio"
  
 -- 
 2.43.0
