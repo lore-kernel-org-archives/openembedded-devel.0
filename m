@@ -2,53 +2,53 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CF23CC02194
-	for <webhook@archiver.kernel.org>; Tue, 24 Dec 2024 09:27:31 +0000 (UTC)
-Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
- by mx.groups.io with SMTP id smtpd.web11.30359.1735032440774627257
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 091B3C02199
+	for <webhook@archiver.kernel.org>; Tue, 24 Dec 2024 09:27:32 +0000 (UTC)
+Received: from esa11.hc1455-7.c3s2.iphmx.com (esa11.hc1455-7.c3s2.iphmx.com [207.54.90.137])
+ by mx.groups.io with SMTP id smtpd.web10.30502.1735032438455142389
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Dec 2024 01:27:21 -0800
+ Tue, 24 Dec 2024 01:27:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Sp4HBh6k;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=pzcxIHE9;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.137, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1735032441; x=1766568441;
+  t=1735032451; x=1766568451;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=YAKzwvO19MWj7MXL2GPDP8lIjHkyVkaaxfgNixqIDmw=;
-  b=Sp4HBh6kARH13hnjCu6q+gBe7pQqsWHBpX7jhDrqB1VLHK0D3/JRZmVq
-   32u5zR1plOTpcnhp2j0vFW/Q4piNeXvVvQljhv+jvRAxSsvrYkEJkCFZT
-   Xo84ToHQ3f5LiqDlO8fRiFCitpu0zhCXQWz2QGbb5xGFOcqzR8MR+i+Dn
-   if3NLH8Wuxl6akjWY6XFgSAIMOMgswgHGYTmz8C3Zxcl9xcOZ3S5cQXTS
-   VAGnhWuOuQFAKqqZh1sCh4FLKSoz8AD5ASuYbjS5tG5INMcyDIbanL6tW
-   qpeR8B7Pacwq6OnBj6T7UCzBMqTtHrsRqGKAa2TEEhERegKQgtCRgI62g
-   g==;
-X-CSE-ConnectionGUID: AwQl7IjoQeuR/AeH+VecIA==
-X-CSE-MsgGUID: a69xSpQsRcasfqjG3Vrv1g==
-X-IronPort-AV: E=McAfee;i="6700,10204,11295"; a="183972679"
+  bh=hD/eqv3M5bF6rktCu0FmTrwOfachhsWhcdjmHRVpmTU=;
+  b=pzcxIHE94gnO5fbFuJ8rbhG9oGeGFuxLDCF77tCkXOT9VR3H64/D1kSN
+   wIdKzJTyMzucrS+kV4hucYVCBSS09l7BrFAVFDvaOTnYhTUhC5yxyInRR
+   8988S1g7XY/9GoISfo0cv2gz9nxzpX32SLakQJFe16X4Y5ugHxVTF3w3a
+   xQglIZowOpaa7j1hEVenOIZLMEUiGwKfqTnVAAdlBfeMvVx/a0PsfeQjX
+   t8oiSLBdpM2833owEGVk8dJM5v3lFfScvS8eecEabdsO/xFYz0o+yuUhK
+   6J/1/IdUrOoZpYavkS58mKysxscpKGTp/eos6j/5avHEEIhk3LFT+oZeU
+   A==;
+X-CSE-ConnectionGUID: euWkzvpHSdmFl2uFupiG8Q==
+X-CSE-MsgGUID: 51H5L32pTROZHA5R+JM1GQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11295"; a="164248064"
 X-IronPort-AV: E=Sophos;i="6.12,259,1728918000"; 
-   d="scan'208";a="183972679"
-Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
-  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Dec 2024 18:27:19 +0900
-Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
-	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id AC983C2264
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 18:27:16 +0900 (JST)
+   d="scan'208";a="164248064"
+Received: from unknown (HELO oym-r1.gw.nic.fujitsu.com) ([210.162.30.89])
+  by esa11.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Dec 2024 18:27:29 +0900
+Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
+	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id BA296D480C
+	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 18:27:26 +0900 (JST)
 Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 81DC0D5B42
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 18:27:16 +0900 (JST)
+	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 89C41D8CAD
+	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 18:27:26 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 1DE8A6BB6B
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 18:27:16 +0900 (JST)
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 1EF436BB64
+	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 18:27:26 +0900 (JST)
 Received: from localhost.localdomain.localdomain (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id BB5381A006C;
-	Tue, 24 Dec 2024 17:27:15 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id D94511A0073;
+	Tue, 24 Dec 2024 17:27:25 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 11/67] python3-astroid: upgrade 3.3.5 -> 3.3.7
-Date: Tue, 24 Dec 2024 17:26:05 +0800
-Message-Id: <1735032421-13513-11-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 53/67] python3-python-multipart: upgrade 0.0.12 -> 0.0.20
+Date: Tue, 24 Dec 2024 17:26:47 +0800
+Message-Id: <1735032421-13513-53-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1735032421-13513-1-git-send-email-wangmy@fujitsu.com>
 References: <1735032421-13513-1-git-send-email-wangmy@fujitsu.com>
@@ -56,47 +56,54 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28878.006
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28878.006
-X-TMASE-Result: 10-0.239400-10.000000
-X-TMASE-MatchedRID: hsQjHHSArR6jz0nOeth/yUIIxwDaU5mrTfK5j0EZbytOed0Eey3YOXJ9
-	Mbn64cXRX64KjR1hKzoNyr61Mu6ROm0Xr+fj3ww/8t4fUUGeErTBOVz0Jwcxl0fyM5VfgjG2h+t
-	oLLKXwRGBkESMI05d4uuLFZZYlisfHxPMjOKY7A+u65UDD0aDgsRB0bsfrpPIcSqbxBgG0w50zm
-	F0k359E1U9A2P4GKGmmZicRe+QtviOIHxcCol1xHhBBJD7OcS7SAPnGWBArCoChMZ+8y5Lw9s46
-	Ip5f1MiyQ1b3pcLPomCvqWrFsheUcLe0zBjeZrbFQOP52BRBXJMTsKj18q/fA==
+X-TMASE-Result: 10--2.398500-10.000000
+X-TMASE-MatchedRID: hsQjHHSArR6jz0nOeth/yUIIxwDaU5mr2FA7wK9mP9eWufoHnGUNfgjJ
+	lierVE/ndnLCqPd2a8ebf27+X2x9Mh1YpEPWJiyz/HTKStsDGMJHNQ8CqEKO2MC5DTEMxpeQ2uX
+	Hvx4h0c2K6+iS4xVS+OuLFZZYlisfHxPMjOKY7A+6vVBUUydJCsRB0bsfrpPIcSqbxBgG0w648j
+	QwcOHrsS6AT8Guc+CUvXVLxpnkXFEcmg+yn8Gb9/UQ1WEjtuxynQtL+k0rG6LtBBXGXYJ5zkSY9
+	jdthctQ+g5xgOP5iFaCvqWrFsheUcLe0zBjeZrbFQOP52BRBXJMTsKj18q/fA==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 09:27:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114486
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 09:27:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114524
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-===========
-- Fix inability to import collections.abc in python 3.13.1.
-- Fix crash when typing._alias() call is missing arguments.
+=========
+- Handle messages containing only end boundary #142.
+- Don't warn when CRLF is found after last boundary on MultipartParser #193.
+- Hard break if found data after last boundary on MultipartParser #189.
+- Handle PermissionError in fallback code for old import name #182.
+- Add dunder attributes to multipart package #177.
+- Replace FutureWarning to PendingDeprecationWarning #174.
+- Add missing files to SDist #171.
+- Fix import scheme for multipart module (#168).
+- Rename import to python_multipart
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-astroid_3.3.5.bb => python3-astroid_3.3.7.bb}      | 2 +-
+ ...n-multipart_0.0.12.bb => python3-python-multipart_0.0.20.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-astroid_3.3.5.bb => python3-astroid_3.3.7.bb} (90%)
+ rename meta-python/recipes-devtools/python/{python3-python-multipart_0.0.12.bb => python3-python-multipart_0.0.20.bb} (85%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-astroid_3.3.5.bb b/meta-python/recipes-devtools/python/python3-astroid_3.3.7.bb
-similarity index 90%
-rename from meta-python/recipes-devtools/python/python3-astroid_3.3.5.bb
-rename to meta-python/recipes-devtools/python/python3-astroid_3.3.7.bb
-index cfa58e7ee5..783bf1d7f5 100644
---- a/meta-python/recipes-devtools/python/python3-astroid_3.3.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-astroid_3.3.7.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
- LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
+diff --git a/meta-python/recipes-devtools/python/python3-python-multipart_0.0.12.bb b/meta-python/recipes-devtools/python/python3-python-multipart_0.0.20.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-python-multipart_0.0.12.bb
+rename to meta-python/recipes-devtools/python/python3-python-multipart_0.0.20.bb
+index b1ed5e5522..db5e7bb45a 100644
+--- a/meta-python/recipes-devtools/python/python3-python-multipart_0.0.12.bb
++++ b/meta-python/recipes-devtools/python/python3-python-multipart_0.0.20.bb
+@@ -2,7 +2,7 @@ SUMMARY = "A streaming multipart parser for Python"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3d98f0d58b28321924a89ab60c82410e"
  
--SRC_URI[sha256sum] = "5cfc40ae9f68311075d27ef68a4841bdc5cc7f6cf86671b49f00607d30188e2d"
-+SRC_URI[sha256sum] = "29fe1df7ef64dc17a54dbfad67b40b445340fcdba7c4012e7ecc9270c9b2f5b6"
+-SRC_URI[sha256sum] = "045e1f98d719c1ce085ed7f7e1ef9d8ccc8c02ba02b5566d5f7521410ced58cb"
++SRC_URI[sha256sum] = "8dd0cab45b8e23064ae09147625994d090fa46f5b0d1e13af944c331a7fa9d13"
  
- inherit pypi python_setuptools_build_meta
+ inherit pypi python_hatchling ptest
  
 -- 
 2.43.0
