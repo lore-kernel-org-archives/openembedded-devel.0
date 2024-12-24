@@ -2,53 +2,53 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F15EE77191
-	for <webhook@archiver.kernel.org>; Tue, 24 Dec 2024 09:27:20 +0000 (UTC)
-Received: from esa11.hc1455-7.c3s2.iphmx.com (esa11.hc1455-7.c3s2.iphmx.com [207.54.90.137])
- by mx.groups.io with SMTP id smtpd.web10.30502.1735032438455142389
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5BECE77188
+	for <webhook@archiver.kernel.org>; Tue, 24 Dec 2024 09:27:30 +0000 (UTC)
+Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
+ by mx.groups.io with SMTP id smtpd.web10.30509.1735032445057522136
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Dec 2024 01:27:19 -0800
+ Tue, 24 Dec 2024 01:27:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=cLVfMYW5;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.137, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=MS/D/0BL;
+ spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1735032440; x=1766568440;
+  t=1735032449; x=1766568449;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=OOQrXclRrP8rGc4Hn+lOa4kPwfhrgkT41eM8ZuEoYDU=;
-  b=cLVfMYW5BQz7VD1YPnXspPtST/NvzR6N4kphOfjim0e75Mvpt62O6wlX
-   WuoAW6oSkXcYBkJtTGiX+Ap/5QxNMk3iYI2/kFSNjTBiolDsxoHwPBFGP
-   Xcha7SY7xpuuIC8qeN50xcafYBjgqw/6nxlmk+L6+TBJT556LJ5aFyiqn
-   xJUOrOlP5PA0kd98njdgz0/dJQArdRX99K6j6i/8s6Nz/FcZmQzoiEPP/
-   7bTv18GB8P9M+AIeqYkz42gbzt0HXpURffuXAKaX8Z+0hCLX0hAjeSp2+
-   pfh7LdUWGMTulalM4RlvjR0DJzL5WtMbVaIZO3m0maVa+PkmZEF5l37xM
-   g==;
-X-CSE-ConnectionGUID: O7dXPXn/TcCf2ofHMO8FCA==
-X-CSE-MsgGUID: G6Q0q9OsT0CPxNbmdRMGtA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11295"; a="164248049"
+  bh=2nM0HvPcU9Khy2OH4E683mEqnquJ+Z4u0LfPrR+uH8Q=;
+  b=MS/D/0BLx8NkGmdwck2J8UqTqARUggBtdNRrzPWzn/ed1D1lun5JLhJu
+   08wdM7k5+TYADQcE6WdBpxlc2aoM81gtOXjmMZrwYotQI9ntXgHSK3y9i
+   8phDv51jLlkgWmnF6A4URXE+IDO+MsmuUNFdtTZ2Xcb/+IJHy5rqXfbow
+   cv0xqoxj49Nb/mOike7rh7VKfKTzQASzjC2kp1dMc/TyRKwoynxpqDW9y
+   oIlpainK6GffnfcOnIkAZVBNDDX9hBEFSCS+GtSpQMLlQSOgOW3Kpi82l
+   3aA6glGmDbyyv3um6qGPCmXiuXhO8EH5pWufTfs250dVh7YLFGO1Gfet3
+   A==;
+X-CSE-ConnectionGUID: y1v5kymGR4O4FXngV7mlsw==
+X-CSE-MsgGUID: rg3WKGt7RLmx4h+al+ECGg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11295"; a="163714080"
 X-IronPort-AV: E=Sophos;i="6.12,259,1728918000"; 
-   d="scan'208";a="164248049"
-Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
-  by esa11.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Dec 2024 18:27:18 +0900
-Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
-	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 39FFFDBB84
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 18:27:15 +0900 (JST)
-Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 1373ED4C17
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 18:27:15 +0900 (JST)
+   d="scan'208";a="163714080"
+Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
+  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Dec 2024 18:27:27 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id A33F3D6EA1
+	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 18:27:25 +0900 (JST)
+Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 78AC2D39ED
+	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 18:27:25 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id A6FDB6B4DF
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 18:27:14 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 051A420071A3A
+	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 18:27:25 +0900 (JST)
 Received: from localhost.localdomain.localdomain (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 4DD6F1A006C;
-	Tue, 24 Dec 2024 17:27:14 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id A32761A006C;
+	Tue, 24 Dec 2024 17:27:24 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 05/67] nvmetcli: upgrade 0.7 -> 0.8
-Date: Tue, 24 Dec 2024 17:25:59 +0800
-Message-Id: <1735032421-13513-5-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 48/67] python3-pyproject-api: upgrade 1.7.2 -> 1.8.0
+Date: Tue, 24 Dec 2024 17:26:42 +0800
+Message-Id: <1735032421-13513-48-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1735032421-13513-1-git-send-email-wangmy@fujitsu.com>
 References: <1735032421-13513-1-git-send-email-wangmy@fujitsu.com>
@@ -56,62 +56,46 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28878.006
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28878.006
-X-TMASE-Result: 10--0.853200-10.000000
-X-TMASE-MatchedRID: wbL0rUvz+3Cjz0nOeth/yUIIxwDaU5mrTfK5j0EZbyvGsuYyb68ajB9s
-	SF9fYJNfeYUpRWZq07oKRuKRI67R4B77VnTa7axq/sUSFaCjTLyOhEhoAl74KAAheUymmndfM/H
-	HrxBahdcUe+gTY5Xymnn0x6scqY/TIRvqkRRE3o4D2WXLXdz+AdXLiEcLf+DIsrDwfHQQaK1yp+
-	gwY/4LBCL637QCIVpiRGqdJrOqGirlRxm3A2wKuhRFJJyf5BJe3QfwsVk0UbvqwGfCk7KUs4SZf
-	2K28YSonfUSqpAO5DzMLkL8gzrz6ZmW1Ok/sd4YJg+2N3mCxCVbYxDspyJ7s0eQQiPPIOrbU29J
-	ymvOPiPmhvArZgaogogeppQyntVe0v8srR3gjfRl7+AkHjVJOxuqkzsKv5+9ftwZ3X11IV0=
+X-TMASE-Result: 10-2.245600-10.000000
+X-TMASE-MatchedRID: 6e3s/u+cBDSjz0nOeth/yUIIxwDaU5mrVBDQSDMig9EH8UzOewTxw+79
+	DJRUi35pTQ0JkPG287/mn3xyPJAJorNUVnqixiMOuce7gFxhKa2YkAyCbA7KV1yqn5M9p8suo8W
+	MkQWv6iV3LAytsQR4e42j49Ftap9ExlblqLlYqXJYrhiOlrTtoelPrm+xcRefjoeMO1v+iy5egp
+	P0/GPCXxEw5/8Lh7VInZGroHVxmW2fvqRcCiHwaWABOHY4s1DbDhQLh6/+l/r+v9v52ZIoWjoAf
+	389xF3XFSk9HhUZnw7OGIWnws4LoyHWPYzouJUy
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 09:27:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114477
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Dec 2024 09:27:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114522
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-=============
-- fix common misspellings from codespell project
-- nvmetcli: set up the target only after the network is configured
-- nvmetcli: fixup ana groupid setting for namespaces
-- Documentation: fix typo
-- nvmetcli: add a tcp example json
-- nvmetcli: Correct xrange usage for py3
-- nvmetcli: Allow different devices for make test
-- nvmetcli: Report save name correctly
-- test_nvmet.py: test_invalid_input fails for py3
-- nvme.py: Make modprobe work for kmod lib too
-- nvme.py: Sync the containing directory
-- nvme.py: Explicit close is redundant
-- nvmetcli: Improve IOError handling on restore
-- README: Update URL for configshell-fb
-- nvmetcli: don't remove ANA Group 1 on clear
+ really drop python<3 support
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../nvmetcli/{nvmetcli_0.7.bb => nvmetcli_0.8.bb}               | 2 +-
+ ...n3-pyproject-api_1.7.2.bb => python3-pyproject-api_1.8.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/dynamic-layers/meta-python/recipes-support/nvmetcli/{nvmetcli_0.7.bb => nvmetcli_0.8.bb} (96%)
+ rename meta-python/recipes-devtools/python/{python3-pyproject-api_1.7.2.bb => python3-pyproject-api_1.8.0.bb} (87%)
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-support/nvmetcli/nvmetcli_0.7.bb b/meta-oe/dynamic-layers/meta-python/recipes-support/nvmetcli/nvmetcli_0.8.bb
-similarity index 96%
-rename from meta-oe/dynamic-layers/meta-python/recipes-support/nvmetcli/nvmetcli_0.7.bb
-rename to meta-oe/dynamic-layers/meta-python/recipes-support/nvmetcli/nvmetcli_0.8.bb
-index ec483321b6..ad9873563f 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-support/nvmetcli/nvmetcli_0.7.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-support/nvmetcli/nvmetcli_0.8.bb
-@@ -19,7 +19,7 @@ SYSTEMD_AUTO_ENABLE ?= "disable"
+diff --git a/meta-python/recipes-devtools/python/python3-pyproject-api_1.7.2.bb b/meta-python/recipes-devtools/python/python3-pyproject-api_1.8.0.bb
+similarity index 87%
+rename from meta-python/recipes-devtools/python/python3-pyproject-api_1.7.2.bb
+rename to meta-python/recipes-devtools/python/python3-pyproject-api_1.8.0.bb
+index 13dbd6b600..ddbddbea84 100644
+--- a/meta-python/recipes-devtools/python/python3-pyproject-api_1.7.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pyproject-api_1.8.0.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "https://pyproject-api.readthedocs.io"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=11610a9d8fd95649cf8159be12b98cb7"
  
- RDEPENDS:${PN} += "python3 python3-six python3-pyparsing python3-configshell-fb"
+-SRC_URI[sha256sum] = "dc5b0e0f6e291a4f22b46e182c9c6d4915c62b1f089b8de1b73f2d06ae453593"
++SRC_URI[sha256sum] = "77b8049f2feb5d33eefcc21b57f1e279636277a8ac8ad6b5871037b243778496"
  
--SRCREV = "0a6b088db2dc2e5de11e6f23f1e890e4b54fee64"
-+SRCREV = "d323d5a3091af490502c5d025ec7361a3a2cfbd9"
- SRC_URI = "git://git.infradead.org/users/hch/nvmetcli.git;branch=master"
- 
- S = "${WORKDIR}/git"
+ PYPI_PACKAGE = "pyproject_api"
+ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 -- 
 2.43.0
 
