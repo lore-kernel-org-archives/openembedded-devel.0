@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 313EEE7718F
-	for <webhook@archiver.kernel.org>; Fri, 27 Dec 2024 10:57:50 +0000 (UTC)
-Received: from mta-64-228.siemens.flowmailer.net (mta-64-228.siemens.flowmailer.net [185.136.64.228])
- by mx.groups.io with SMTP id smtpd.web11.11074.1735297060424576841
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A78DE7718B
+	for <webhook@archiver.kernel.org>; Fri, 27 Dec 2024 10:58:00 +0000 (UTC)
+Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
+ by mx.groups.io with SMTP id smtpd.web10.10953.1735297075360169928
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Dec 2024 02:57:42 -0800
+ Fri, 27 Dec 2024 02:57:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=lw4shqMe;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-256628-202412271057418b3c13a4f659286a5c-9xdoi6@rts-flowmailer.siemens.com)
-Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 202412271057418b3c13a4f659286a5c
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=RaErpGsD;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-202412271057535fe08eb89e37509629-ga61zv@rts-flowmailer.siemens.com)
+Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 202412271057535fe08eb89e37509629
         for <openembedded-devel@lists.openembedded.org>;
-        Fri, 27 Dec 2024 11:57:41 +0100
+        Fri, 27 Dec 2024 11:57:53 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=NTYHsXBf8zAhZ4jQ4kF2oIF+qacHczVSJQLUz8olCWY=;
- b=lw4shqMeB8HNeGnnU1EGvcNg607yGf4q+73l0LC4L5fVrJO3c29Jw6Cd4ioUubebASIzlW
- yzAAgr6gxI5ZxQo2wKTlvESDFq4ApsgmOImlSHFRtGD5km90ewgI1dFE2di3kaK9EZ08QKwi
- bKOSE+L9Fnod9SzTz5Y8VptbWLrmiIQO4jQFMi6gqaFJsl5TnSFq8uCw8+ur4YWwYRU+sGrF
- KtJ7g/UU/nODziqzgRpBNv6YNCyARaJM4ReyoI9GfCizx+YyYb01st07eeY1StnPxTKiCick
- NbaMYEgWPBoslaD9ySbOkmDzCnqHF2ey1yuofL+h04+YwkJt5uAWlNCg==;
+ bh=roaPX3lXbIM6olN99quXiZVeFuNx4TBdXspT0iyNXUM=;
+ b=RaErpGsDbMhmi6TmoLoc1XuVowFFOdbTm2PPxzPFbV1omg25Ah+08UPxmKkv0FH25SNqCH
+ nuvjV6rrMlN+j7GnlALGYHZKVi+gkxjNlvdYGZLPatKVwPI7RZnBnFTdzBPiQLo8rXKSHIZZ
+ f5v7op2VbD+82sk5LVVuxolEuQIYkHPNi2zSMu+xrnJPmC/dUT+SQ/ybVScvFVGvHr4ITbUC
+ CPKUZPCnbTOT9HYN8klV2Bv20QCSMnYORNrwz1TFJ49AqLkiJ5AWcoWT+jXCywCn2j8NVdOp
+ Z1kenvS6owE1+JO7ge/i3koLTfUnZVYRKZNHWpVH48JcFiA0E2kBCD3w==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH 05/15] procmail: patch CVE-2017-16844.
-Date: Fri, 27 Dec 2024 11:56:05 +0100
-Message-Id: <20241227105615.3303193-6-peter.marko@siemens.com>
+Subject: [meta-oe][PATCH 07/15] imagemagick: upgrade 7.1.1-26 -> 7.1.1-43
+Date: Fri, 27 Dec 2024 11:56:07 +0100
+Message-Id: <20241227105615.3303193-8-peter.marko@siemens.com>
 In-Reply-To: <20241227105615.3303193-1-peter.marko@siemens.com>
 References: <20241227105615.3303193-1-peter.marko@siemens.com>
 MIME-Version: 1.0
@@ -38,58 +38,34 @@ Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 27 Dec 2024 10:57:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114563
+ <openembedded-devel@lists.openembedded.org>; Fri, 27 Dec 2024 10:58:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114565
 
 From: Peter Marko <peter.marko@siemens.com>
 
-Take patch from Debian.
-https://sources.debian.org/data/main/p/procmail/3.22-26%2Bdeb10u1/debian/patches/30
+This fixes at least CVE-2024-41817 (in 7.1.1-36).
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../procmail/procmail/CVE-2017-16844.patch    | 20 +++++++++++++++++++
- .../recipes-support/procmail/procmail_3.22.bb |  1 +
- 2 files changed, 21 insertions(+)
- create mode 100644 meta-oe/recipes-support/procmail/procmail/CVE-2017-16844.patch
+ .../{imagemagick_7.1.1-26.bb => imagemagick_7.1.1-43.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/imagemagick/{imagemagick_7.1.1-26.bb => imagemagick_7.1.1-43.bb} (99%)
 
-diff --git a/meta-oe/recipes-support/procmail/procmail/CVE-2017-16844.patch b/meta-oe/recipes-support/procmail/procmail/CVE-2017-16844.patch
-new file mode 100644
-index 0000000000..6e04989c33
---- /dev/null
-+++ b/meta-oe/recipes-support/procmail/procmail/CVE-2017-16844.patch
-@@ -0,0 +1,20 @@
-+From: Santiago Vila <sanvila@debian.org>
-+Subject: Fix heap-based buffer overflow in loadbuf()
-+Bug-Debian: http://bugs.debian.org/876511
-+X-Debian-version: 3.22-26
-+
-+CVE: CVE-2017-16844
-+Upstream-Status: Inactive-Upstream [lastrelease: 2001]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+
-+--- a/src/formisc.c
-++++ b/src/formisc.c
-+@@ -103,7 +103,7 @@
-+ }
-+ 							    /* append to buf */
-+ void loadbuf(text,len)const char*const text;const size_t len;
-+-{ if(buffilled+len>buflen)			  /* buf can't hold the text */
-++{ while(buffilled+len>buflen)			  /* buf can't hold the text */
-+      buf=realloc(buf,buflen+=Bsize);
-+   tmemmove(buf+buffilled,text,len);buffilled+=len;
-+ }
-diff --git a/meta-oe/recipes-support/procmail/procmail_3.22.bb b/meta-oe/recipes-support/procmail/procmail_3.22.bb
-index efe716ea51..59b78c0a6a 100644
---- a/meta-oe/recipes-support/procmail/procmail_3.22.bb
-+++ b/meta-oe/recipes-support/procmail/procmail_3.22.bb
-@@ -14,6 +14,7 @@ SRC_URI = "http://www.ring.gr.jp/archives/net/mail/${BPN}/${BP}.tar.gz \
-     file://from-debian-to-fix-man-file.patch \
-     file://man-file-mailstat.1-from-debian.patch \
-     file://CVE-2014-3618.patch \
-+    file://CVE-2017-16844.patch \
- "
- SRC_URI[sha256sum] = "087c75b34dd33d8b9df5afe9e42801c9395f4bf373a784d9bc97153b0062e117"
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1-26.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1-43.bb
+similarity index 99%
+rename from meta-oe/recipes-support/imagemagick/imagemagick_7.1.1-26.bb
+rename to meta-oe/recipes-support/imagemagick/imagemagick_7.1.1-43.bb
+index 78cbb9ddea..f692370de0 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1-26.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1-43.bb
+@@ -13,7 +13,7 @@ BASE_PV = "${@d.getVar('PV').split('-')[0]}"
+ UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>([0-9][\.|_|-]?)+)"
+ 
+ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https"
+-SRCREV = "570a9a048bb0e3a5c221ca87be9408ae35f711e2"
++SRCREV = "a2d96f40e707ba54b57e7d98c3277d3ea6611ace"
+ 
+ S = "${WORKDIR}/git"
  
 -- 
 2.30.2
