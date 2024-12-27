@@ -1,252 +1,306 @@
-Return-Path: <yi.zhao@eng.windriver.com>
+Return-Path: <soumya.sambu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DD3EE7718E
-	for <webhook@archiver.kernel.org>; Thu, 26 Dec 2024 09:31:41 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.19398.1735205499515696593
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ABA9CE7718B
+	for <webhook@archiver.kernel.org>; Fri, 27 Dec 2024 08:07:29 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.9627.1735286840247365907
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Dec 2024 01:31:39 -0800
+ Fri, 27 Dec 2024 00:07:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=2090c61c71=yi.zhao@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BQ9LV8u003828
-	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Dec 2024 01:31:39 -0800
-Received: from nam02-bn1-obe.outbound.protection.outlook.com (mail-bn1nam02lp2044.outbound.protection.outlook.com [104.47.51.44])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 43nsub43qb-2
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=209189776c=soumya.sambu@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BR6jMou023819
+	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Dec 2024 08:07:19 GMT
+Received: from nam12-mw2-obe.outbound.protection.outlook.com (mail-mw2nam12lp2045.outbound.protection.outlook.com [104.47.66.45])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 43njw0wcjb-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Dec 2024 01:31:38 -0800 (PST)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Dec 2024 08:07:18 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=KmDUdK3wjUPDxzJ1IY52CR9JZ0z78/3edB+dtzo547kmb5ezcFc3W9R38hFxhQP3eW/hdEohdS04LUKn+rL14W3wE7+u36yMICkJEcS884YnHq3oaVOPedp2wEsfh30Rc6KN6phpY+ftgvVe7/5nOgHHX8vXGgD8hpMpVILNsOgKV4lgja9tVa37mjPrxCYoir8bO+43SScU8/EpIXcQtrfn/a5VwginWwdAYNn2zMOiTKnEMV4u2426W62Wrq95yEaVxPkCyl2Qbcsl48oMpZgYO2YO1HbT4gePKrCfQl+/BcWgOuFPXdEUGIILvJHgKjKOTiP4i+OkOQhGs0yhJw==
+ b=GHexo2VlU5eCP7bw21HpavKzPwRTyI9tuyiIwmkTB5LwYlm6FBlX78QYY4oTwqJ/jvHMNIOod3ZJTaxhKdUi+p+mRz9LpAzmIZpya2fr+MIo2PmOGcyNO0bGtgqezDiaF3uaD0TphqIFv7l5M5TX4nJpB6pauGH12OG7CAdQp10xOKgdqsY0k1/gfzo5EfMfhJWCcgO9XiJAcyTJ0QkBgDlVj/8NFjoD29BE5kFi672wy6JYEEXF5F/7Gms/dnziAFzR4nW8/xvDx56eOi8fXlLwfH4NiasiScKhvzzT5rfjvrRRg+fP+QKGTYfxgiYEnnaWS6wKtHR7H0mJZY56bw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZB4jEjVKOXt3TxRA/HLm4ztfOMbYcYh0Ef2D+nPZv+Q=;
- b=iBKZDOnCHoiUWdrfTl18E2C7FTQS1O7BJ6ZiLi1Z6CwIEsTYQQV7AepNOFiJ4g5VelIz+ABKEQq9brHNcSyfeXSRnm6VC6u48g2GVLbobZrkwzfdALuiv5mBfb/u5BVI4ISL8xgdkK0JSXqb/czqtIrLafU8QiloKcOrSoJLwxpVta2G/dcS2ZRCaRfDx/9eguD4WMSYu4Lo/esAJG+kdJ4cNR5Awm0CKEn1ujphIndCqnEmXnwTh/BpA0aNAUE9UQHVqYjY2RNXJyS4pdCFJjgrso7SBWVGJM3SvfxhdSvHFkk1EZvVYEv471fK8aho3t8Hl29/KaNBFcX41St/pA==
+ bh=JachLqcMnUGNAbsCqJnXTA7aRHFiMB3RzGXicA0iYZM=;
+ b=pnCh+KROf3Z71P0V8Bbm5LXXwY6GJHOT5yvZTII4tkYKCaHA5nt+sPAq8EbD0gmJ+dIL5Tkc1Y4bMX2hIO3f1dFukZho/pHledggq4CgG+4OX08S+Rbsn1spwczHUbPhIb66Wf/iNJa9VqnVzr8XNdme9hU6fpnSsLqmCCGIjKyHytsvl9Mx5a3MUsVDlTKhkk6eBrpBDILFe+2/ltCufURsHv3jZwxiCE8bDL0cy1rufjrlds9qX89P9ky0Ydb2euBiMxAmsx9GqxnsMMk0mYIJEb52FCgy/3+SteBSimTPFxJ/XB8K3/lZZeMkIMr9khnLW2iejgNuWAXx8UsNNg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5) by
- MW3PR11MB4668.namprd11.prod.outlook.com (2603:10b6:303:54::10) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8293.16; Thu, 26 Dec 2024 09:31:32 +0000
-Received: from DS0PR11MB6399.namprd11.prod.outlook.com
- ([fe80::2b44:787c:e7ee:bfad]) by DS0PR11MB6399.namprd11.prod.outlook.com
- ([fe80::2b44:787c:e7ee:bfad%7]) with mapi id 15.20.8293.000; Thu, 26 Dec 2024
- 09:31:32 +0000
-From: Yi Zhao <yi.zhao@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH 2/3] networkmanager: upgrade 1.48.10 -> 1.50.0
-Date: Thu, 26 Dec 2024 17:31:15 +0800
-Message-Id: <20241226093116.874361-2-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20241226093116.874361-1-yi.zhao@windriver.com>
-References: <20241226093116.874361-1-yi.zhao@windriver.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SI2PR01CA0033.apcprd01.prod.exchangelabs.com
- (2603:1096:4:192::23) To DS0PR11MB6399.namprd11.prod.outlook.com
- (2603:10b6:8:c8::5)
+Received: from CY8PR11MB7921.namprd11.prod.outlook.com (2603:10b6:930:7d::15)
+ by DM6PR11MB4756.namprd11.prod.outlook.com (2603:10b6:5:2a7::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8293.16; Fri, 27 Dec
+ 2024 08:07:12 +0000
+Received: from CY8PR11MB7921.namprd11.prod.outlook.com
+ ([fe80::9050:ad4d:49e1:e11a]) by CY8PR11MB7921.namprd11.prod.outlook.com
+ ([fe80::9050:ad4d:49e1:e11a%5]) with mapi id 15.20.8293.000; Fri, 27 Dec 2024
+ 08:07:12 +0000
+From: "Sambu, Soumya" <Soumya.Sambu@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+        "Sambu, Soumya"
+	<Soumya.Sambu@windriver.com>
+Subject: Re: [oe][meta-python][scarthgap][PATCH 1/1] python3-werkzeug: upgrade
+ 3.0.3 -> 3.0.6
+Thread-Topic: [oe][meta-python][scarthgap][PATCH 1/1] python3-werkzeug:
+ upgrade 3.0.3 -> 3.0.6
+Thread-Index: AQHbPMgKSxBMKpLb00O2du9VyfSTELL58ua1
+Date: Fri, 27 Dec 2024 08:07:12 +0000
+Message-ID: 
+ <CY8PR11MB7921968E5EE3685713612AC9810E2@CY8PR11MB7921.namprd11.prod.outlook.com>
+References: <180A43144C9B85E3.32265@lists.openembedded.org>
+In-Reply-To: <180A43144C9B85E3.32265@lists.openembedded.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: CY8PR11MB7921:EE_|DM6PR11MB4756:EE_
+x-ms-office365-filtering-correlation-id: a2122d2d-626b-47e0-1d70-08dd264d77e4
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230040|376014|1800799024|366016|7053199007|8096899003|38070700018;
+x-microsoft-antispam-message-info: 
+ =?us-ascii?Q?ZwO/q81aaZhQUqn9jn1w3NGq7E8Mo/hdDmJlQrgJYOfTcbALWKEEtcgxgxZ/?=
+ =?us-ascii?Q?jLywfRJt7rXVaapFJN20xqfQTUpXqFcvfUuf7jaQHFu6a0QHRFS5HoUd7553?=
+ =?us-ascii?Q?kH1sknp2va4c5lU1scmQuYbXcoKRRDxsli0gwK+wSCoS2x2xL9eJYFYbIHtO?=
+ =?us-ascii?Q?epWvjCvRkhVG2AuqwuFhTZ5jdDvlZ8R113uEWFkQrgX7IXb8fpGJ8Q+mjUIU?=
+ =?us-ascii?Q?Y1i5FW98798D3PYdMNvVYQyNpQqi0YZZmqFeNeGEwURMBGDuTXHeVkrWALCT?=
+ =?us-ascii?Q?QHDMnHYwj9D6Jn6Q2CbLj5JcDdxMeYPsa3d/4qMOTsyhPf6qcnQsInsLuM0l?=
+ =?us-ascii?Q?Ropc14iqCl6ID07QSwas7D4HEyQSWUkd2TlQG2uV6PRGkmLcsuwkc0iIRrVR?=
+ =?us-ascii?Q?1IRrd3YEgwa1SR20O+yUXNG7q86KoCd+4+i+xcpOD4N4mhS1BZv47enqsHL+?=
+ =?us-ascii?Q?2TxDHZQxgKbSuvBbJg6sxwMBJTS1qMBsQtOIPE5G7l2EgZM16cPbsGLJ45Qs?=
+ =?us-ascii?Q?0PqpbSj/rzqb/wlzGUqv844aZvXX10BlijoghOcbNpVotL6FNjIBkkF/BiX+?=
+ =?us-ascii?Q?rSD2Vc6HHYk47UgrUFXgPfgNlVgmZHvJ7wWoIB+nUtk9lUkA97qSKZVVhElv?=
+ =?us-ascii?Q?+tRRIxAHHSoZLy7hPhkarXl0J+SsXIjEDMNUSW9ux0MBV5/d2+uVCedy/4DK?=
+ =?us-ascii?Q?qdmaCJze58U1XtejGuWkND5Tuy+cJDYq0/gwKeYRHUdm6aWRXBa91YuovSos?=
+ =?us-ascii?Q?3vSblidzjSccnSebQkArVFD2D6KiONsMjvRJkM2Eb8zlEvbdY5AG8Frq+P/6?=
+ =?us-ascii?Q?Nd99F4tmF67s4yBSDy87ooGKawh8Q0kAxGFf58HEprpNzbuDWx9s96gQ188o?=
+ =?us-ascii?Q?nU7yf8dGKib+vETUPlGP+cR1tU/I1bqwraFHFNawViaE+DW8dLWI3XWy/MpX?=
+ =?us-ascii?Q?vki/RqEH268AS9ny67cC7WekYLdOvsUAj5AVi2zbpQP0bFp8gTpPWR/7DzZb?=
+ =?us-ascii?Q?eZjPgQdp8VYhQ4cnIB4vc1afkh7GGO68lUhuAVdHFtRndFJb9m3S6I9zs7Qb?=
+ =?us-ascii?Q?UAaWnn1rpQWR3OW2iltQMlorb7X8+KYiOD+/Fn7TqHVJ8IQBuyzFIanBgFz4?=
+ =?us-ascii?Q?uHIMSdpJWCw9KTekzlVGmC84s22ZC77O5sSpPPk0V3YZ4L6h0m8PctEH/pO3?=
+ =?us-ascii?Q?TRmNNoJUUWaRZ3gnYJsF0Sn1kRswHfVUFH6ybyE1v6Z7WpOPiFj8nZQNKDfL?=
+ =?us-ascii?Q?xATAVSjXEoUSdoSvwHnSPKZLiIMlRy+VCWqzCXmYrKA7w3TZcBBmUYt9EGTs?=
+ =?us-ascii?Q?a5kvSwW3GmcZuCrERu+BWWL2B0Dm08sj4llONVtui02Dxmuy0Can06pWxlh+?=
+ =?us-ascii?Q?s61hHNsko57Yu78eb+s1k4wq4Lx9?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CY8PR11MB7921.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(7053199007)(8096899003)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?us-ascii?Q?T2gL0ksY7nLsntqIYBCnk7jOUAu2/wLhebLnMPkjMP/XAJTCuiWi7JMqvoIV?=
+ =?us-ascii?Q?JkQOdVfEObxNX9bQttFdLTqfj0mmgAS/Uka7JH2aErhoFOxVjHnItl5EwPrP?=
+ =?us-ascii?Q?MJQwD0+j13gPcxpbaLnXsgSvbrc7vvNy1LbK/0xtKjK9Fr/EP4UliwBABJHy?=
+ =?us-ascii?Q?Jfel3a3XdMaw0Q6DyUTJhQgJxz6L6J2eA3+m7MKHKr++hDoaL94gU3gCtYhf?=
+ =?us-ascii?Q?g9oj1eURdDerLS4g9T/V77IqgFOmT+hyAScKN0YQfkV9XZAlCh64hyqNzl0N?=
+ =?us-ascii?Q?RW7TwPNhwxYgoCpQIHTMwq4F8AGHBxrG6eyJow7Kg4NXEfWaYGvVWTqiOQbm?=
+ =?us-ascii?Q?tI+jCS5hRZrdbtOO2OE9phHK9pGoehYYEGpRUJ4FOZtZ2ULlQjoPmFATXr0r?=
+ =?us-ascii?Q?ToNXY8JKNZa4tGMXV6wvXSDzgBtZfjG0/PVdB5y/7QMiWgazuomB88kCMnJh?=
+ =?us-ascii?Q?Wame3fWrhrmvncUxihN665HlUmFYNGUqWgVnff+8OjIbi+vAtZjKem4U5adQ?=
+ =?us-ascii?Q?+6fF4Ev+NrFkLJObILGkwgYqhfV9yQOt/nurE/LokgeLN7kjzAKGOHqZw/yt?=
+ =?us-ascii?Q?y2CQIW9yE129yla/N/NN4M26sVL0l2TUIOStEgUaGabPav5mNiVXJqS2Z27B?=
+ =?us-ascii?Q?mq50G9sxfIt4ui3+sxxMhwzLPXr6EaBT7LVbvtRySNOyCSi/6CtcPwYrswxm?=
+ =?us-ascii?Q?kWNEPr5gps9m+GvyhjWYwWWsukhNgmsJIYt7RlPMSvruRHsR94jlf/qCGVZD?=
+ =?us-ascii?Q?0cZq1sSxKNCq6RQjtSHFGX3EqqdbzoNOQQxBHvXlYMmKrDs43RSiHvi3/+Xr?=
+ =?us-ascii?Q?eI27Ws+NGbw37umV3IfikIpANWvW5HTTDOubGEcJ70VQff8PmCtMX6wFzhJf?=
+ =?us-ascii?Q?sYxKagvMzMXR4xwUo+avsq7pTSPpySZQFhsx3+CwJejppd1Fy2lvZ0XmVZYt?=
+ =?us-ascii?Q?Q3eplFXeev347wKMB/b060KhVmGqd7KYJdx5sD0AZQPrXf5boPSKcKChYDSC?=
+ =?us-ascii?Q?9hvY3pq/0HCo+yJf5lLKPFmt4Ei4dFs46le6j+oegT1pGNmx3lnDdr/rg6x1?=
+ =?us-ascii?Q?bIo1O2eFdfPgELKcFG2QKFFp4psvmAUpTAybZSZzAmpHORI0eDvtlcZu9h6z?=
+ =?us-ascii?Q?7dH55/srhD9SKz+Byu1d76tvqkp+XRg/K/MWWPO8zyDTu5iZih3/OeMqX3eM?=
+ =?us-ascii?Q?ogtaZxAI7xqXtX/lhlKzMACm+q79sMqHjW/unv0gyJOMGEcSPWErmUfI7wmN?=
+ =?us-ascii?Q?rQfTn5/LZlnW8HRmieKhKP+60g/gv/TH34J7dmUKQQSLAx2dT/dn45hVMw6a?=
+ =?us-ascii?Q?YPR3mnN2Qaqf1Q6jLCm0WQ74UDHGRR6EYIWtm75fuvCHg4rd7Ob9Bg1rERvT?=
+ =?us-ascii?Q?5W2Wmxr28sWzTsO7nzSyTXFNCx+crBLkyePZKoDbW/zBmG6PBVKWasdX8ENj?=
+ =?us-ascii?Q?sMpbZgUbVfzLcEjOMHtVo0gkzzXfuWt499HPGxwro4zT0djhToiqB4iOvcKQ?=
+ =?us-ascii?Q?QUtPG0EyQx6NCtbFZxb5juIaxK0XME3jLqUswSBw7X0s4pQjbVy5JY18huI9?=
+ =?us-ascii?Q?AR1K3P2TuqhlFkI2ULtAa5X8KGR5aFJGWTkeNiWL?=
+Content-Type: multipart/alternative;
+	boundary="_000_CY8PR11MB7921968E5EE3685713612AC9810E2CY8PR11MB7921namp_"
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|MW3PR11MB4668:EE_
-X-MS-Office365-Filtering-Correlation-Id: c8b430db-7af1-4ab1-2f65-08dd25901597
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|52116014|1800799024|366016|38350700014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?JDu5Z151GsWz62ihWAJ46+sIn3DWBhs/kTIQsIVVOHmlSU3h7+escREA+4L8?=
- =?us-ascii?Q?+aVtO+C0vXrxh/jonaMY+ieQ+vAjy8E+3DNa0cXqHW4NqEwsiR89XQYupoIL?=
- =?us-ascii?Q?6QeckEEyz2qPuTdCHneZX7Pq/WNx+jf+WBMFVXw/Cp0QC257ahwka8W8KvTE?=
- =?us-ascii?Q?2PddkWhZgznN0DTZ5V9qtJOX73SaDLexQTD1a1fYRt7/RvzqzDA/wrIew3Aj?=
- =?us-ascii?Q?uvD4N9Txdhhqeo6rOf0HzjbVDRe9a4BRmDAe2Ba+g3hVlFCewCAq7S/aI0nn?=
- =?us-ascii?Q?8/+t2/AFM48pv6I7gb9SG5Hr39G+XaixhhdE1zfDGwrHp2DerBwYxpavpWKu?=
- =?us-ascii?Q?qeu4q1HyQGfK7WzVT2U/sFECYX7ZOowISQVUlxWzoms1xFnSX+S926Um4kpq?=
- =?us-ascii?Q?JnkcPASmCoJBOS4Rtmil8gtYAT+polIikBx/eczPcJMjJy3F/7ZIBwXGnPK7?=
- =?us-ascii?Q?YeVpRzy6aRjz7pRg9puJN9oLpUkxV0xV6rhfYrLcKfcO1P44dgcUkq2bzDmz?=
- =?us-ascii?Q?Jo+RbAmOBYzZpc0zpOs7dbcmLH/+5uleAyMMbgvG7kINtZIYuO1BWU+tlOz8?=
- =?us-ascii?Q?5HkwyYpLEX6c5eV4izZDkUDmabt8LY+WF6BqQAKLALf9mclU2fSFFI85MHW7?=
- =?us-ascii?Q?nX0dVAb4ClnKcxkAU8EpeyMM1a1zbAxjfNGQedOtIM0vqbnR+y4UHybS4DjS?=
- =?us-ascii?Q?eVAOaAf+mSyQRNPL6Vi/mTQRTYRMAokrELGKwVuJf7+wuAdTDU3olLjpxvHq?=
- =?us-ascii?Q?PlQZ+2fL9lB/Hyepe4AzXQMVsxSTgxLPuBiGJTacRw48tUe4NmvuIixgB7XS?=
- =?us-ascii?Q?UDRzEBimUHa1a+OPNvahxWd4HxR+FGi4sOKMRivzNvKBgDoP+Rf6QziVjBSM?=
- =?us-ascii?Q?QaxNDScVWWMYQoDPOVx12Wa0EeBBnmN2f4B8k0jqqPd2e6Ce/2Wvr8AbPSao?=
- =?us-ascii?Q?V9wsDbsTmSi2bw7c6WsTTrysipwEPcTzD+6G6g6yJWNKBC7TjGq9l7qqEdZT?=
- =?us-ascii?Q?ATa9J3ZHfoejjVUFQt5hKwhsPc6BtAjEtmFDcKPx4KIWb2S2aWqz8PGzABqW?=
- =?us-ascii?Q?MYiDtYaDMjhB/vkrYs49p6d3fBP11hGrSSBc/UgeLowGNS02whHIpSUbfIm3?=
- =?us-ascii?Q?72/94c0Ablq4QgFktu/qk4EXU6nsUzQZsy8tDA/G1OBxCMC6tFq0Z/j4o/WQ?=
- =?us-ascii?Q?ESNArvLWG0HOftwEadfeBo1C+zKvk7H+bpjA/UcvfbX0MfY+tsKp95U0F/lI?=
- =?us-ascii?Q?ajepZtIOLsAemgrNl95eFtfmwAD5aGCq75vpFFgi4I/wRXTMhbxSJcqrWiHi?=
- =?us-ascii?Q?qDkB67/NA9LGa7xDg2fT4Efk3oqKBaOMQjXcvEfPq4JHIN/hMvU4NUI0j8/K?=
- =?us-ascii?Q?5/ptnPRYJB4ArKMrZxA/XmUKY4ec2/S+6YmSZTBA0j6ObvtK6g=3D=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(52116014)(1800799024)(366016)(38350700014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?/HDsV0cIESNeT7TRQLl+8VofhYx7zCXQFW1geloNufpcZ/2T8hYbSVAhk9ma?=
- =?us-ascii?Q?qkBMBCRc3BIwERKbBHL9UHMMLTgKpa4w3sSRV9yC0VhHMFzMZJsPNM0YUein?=
- =?us-ascii?Q?lRd2+poboOOQ49sDZnInF5aZ0cuPPBNxr8oPW9o1Gf3yfrKNtUOIZOV/ISMA?=
- =?us-ascii?Q?g/YibNDyD9nlrePJW6URbwO2wh4VoIocRUqQUUx+VAUgsd0c9AtiYEbeUU30?=
- =?us-ascii?Q?wxx4VotnZclGnLTMBtjVbKVxyMHmUB/NWzIn7cR8lljOe7hdrKBm9hXl2B91?=
- =?us-ascii?Q?/Ft0gLnfR5CoXQPsFkkBVfCLy+vovoDV5W3b2MB9QU45OmHlqSzFAFnPFaUf?=
- =?us-ascii?Q?9a8CnMK78FX5DlNCD+nJCNvAPglcL9VaVAKfnMFe+t7oOm7vkmeoyjMI7ZVF?=
- =?us-ascii?Q?/e0gboWXjxu5aGHHA1Ea2IqOp95hJiFne6zDJSucQvk53uYa8mcm9lfZuJ/T?=
- =?us-ascii?Q?yWbD/IeQec+6gA4yX0i9DSEtt5iGmC2tVb1RVBcgL2WNAXOeyF6ZtSuUN48H?=
- =?us-ascii?Q?EdhkBAivrskm6dBiWuCfxYkoVKC/F4O7B6lijwVqWpuGbP3ytiA4qQ8JG9qZ?=
- =?us-ascii?Q?5YPOA9M1WDyr2FQky3ai6/qQ7oIoJKj5eI3qqsyJkggBoA2G8Q3mOZffXMd3?=
- =?us-ascii?Q?0Yl2a8ryBLfjrgSVAmboGf1bJ82b/Xupnz0a5LG8Pe9qUnAiBFK5UuNP5cyb?=
- =?us-ascii?Q?tt55yUOqMBLjoulQmyYlJE/Qe7mvenYeg9cmIBdS+5SCbFwfZ9JHQpl1vrda?=
- =?us-ascii?Q?0oHGcyIv/iciKhPxjMo3U4RIt2wEPKnLpshyKOT5vsWFEEtTLh+xvww7WJ0j?=
- =?us-ascii?Q?Sq2pKOgylipElX6a9LNCTae72fzoMCh2ODexSDcQOTWvCZbH1UJt+feGHgVa?=
- =?us-ascii?Q?6MCiwdvSncxmS122DSGUGxWKv4G3POHNKwrfW873c6Cp6AiJHkWIAT51tJmQ?=
- =?us-ascii?Q?AQusOM9Ja2TYrztpj0zNRu9m4hBc2PUgS57SzJMYP4R1+X9mZsN2HNWxATgk?=
- =?us-ascii?Q?dS+gjz3Yshnx92NNMs1eogd3F8/b8onI7CCFerYEFgRjsU8w3GQSvBwbfrC/?=
- =?us-ascii?Q?wyVIjNp/Ma0LqCCdDThGjTqSgqc6vQ+mOiJPcWQpmWbzRjzll43AWwbhODa4?=
- =?us-ascii?Q?HapnZ7J3+cZO3LEDi0dxNlz8tgX8ovF3m3ls5KJeOUAYHKKEkaw2sZwCZuI3?=
- =?us-ascii?Q?2qHzJqdaT3D7xzb51jNPzw0CYzx6IVsG+H2VK4RnNKvrqxBlbbU1cDz+SzYz?=
- =?us-ascii?Q?6GUVKNI8TR2wKpUtc93Me9+dYP2GwcG+vq7adWsYH5FqGvjFwW1EzjPBNXnH?=
- =?us-ascii?Q?Lz0ZV9ZeagTg5U1ZHBjH1YswUYIzEMMFVFaBvoU6XADQLjOq46cmu5wh9JyA?=
- =?us-ascii?Q?3yN2KYp8iuU6U4LctEk9sfD0HBtTGkFZVkpaFoefzP7Tw19AL27IodkPA9YV?=
- =?us-ascii?Q?sOLG2nrcOSwZrWktljHkMahc419tPYLzCcQ9ZzKLPucK8VqMvjR9uqD9mS7t?=
- =?us-ascii?Q?6TiLjGT9DU9AlOUnpJHM054JX81rP+fcZGDR5nFG10Xu4xoqIHDlCmF0D9YU?=
- =?us-ascii?Q?O4FX3UoqGdY1hTYVSzF4vD3fyftdsSLQl6OjMjs2?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c8b430db-7af1-4ab1-2f65-08dd25901597
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6399.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Dec 2024 09:31:32.7164
+X-MS-Exchange-CrossTenant-AuthSource: CY8PR11MB7921.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a2122d2d-626b-47e0-1d70-08dd264d77e4
+X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Dec 2024 08:07:12.1735
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qsbxxvBUdyOjUz8eCkC3nWEXHlEHM0gIUM9LBp2uRjQ2FrO5Vchzsmhvlg5GpjrQKOT0Lj+8hn7ZluldzCnoFA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR11MB4668
-X-Authority-Analysis: v=2.4 cv=Ns8rc9dJ c=1 sm=1 tr=0 ts=676d227b cx=c_pps a=E4Q64eWPmlOcdHW0GAz4hQ==:117 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=RZcAm9yDv7YA:10 a=bRTqI5nwn0kA:10 a=e5mUnYsNAAAA:8
- a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8 a=bSMUa81cj67YOZ3HX3kA:9 a=Vxmtnl_E_bksehYqCbjh:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: oZnjaNbAYnccweq3K8C_JnNcjgnzx792
-X-Proofpoint-ORIG-GUID: oZnjaNbAYnccweq3K8C_JnNcjgnzx792
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Vl/GJ5/HcYvxfePQlbW8Q8HsrX3djyYPFM8hVs07PqA+0pke9HnU89Ykkm646FtgIb/sGOtabRO5ufDSFq+uEhuqML3bjf7rOZNBSvGsQHs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB4756
+X-Authority-Analysis: v=2.4 cv=Yc5H5xRf c=1 sm=1 tr=0 ts=676e6037 cx=c_pps a=smr7v+wKk2SgYJk0SwJNKg==:117 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=RZcAm9yDv7YA:10 a=bRTqI5nwn0kA:10 a=NEAV23lmAAAA:8
+ a=YPyeh4z1AAAA:8 a=Q4-j1AaZAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8 a=1LiM2mn5wCEHQ-l7AnwA:9 a=CjuIK1q_8ugA:10 a=AJekpf_JfDo_URcgYY4A:9 a=-YaznJJdmTcK5MRs:21 a=frz4AuCg-hUA:10 a=_W_S_7VecoQA:10 a=lqcHg5cX4UMA:10 a=T1a-OTYGVawA:10 a=ImwWUX5h3JJ3gRE9moBe:22
+ a=w8JrRwqxyiy52LetAMdd:22 a=9H3Qd4_ONW2Ztcrla5EB:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: Pvc7lw436v2izzbR3m_qCfbVhQ0rnqbO
+X-Proofpoint-GUID: Pvc7lw436v2izzbR3m_qCfbVhQ0rnqbO
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2024-12-26_04,2024-12-24_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 adultscore=0
- suspectscore=0 lowpriorityscore=0 mlxscore=0 clxscore=1015 mlxlogscore=999
- spamscore=0 priorityscore=1501 impostorscore=0 phishscore=0 bulkscore=0
- classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
- engine=8.21.0-2411120000 definitions=main-2412260083
+ definitions=2024-12-27_03,2024-12-24_01,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 phishscore=0
+ malwarescore=0 spamscore=0 impostorscore=0 mlxscore=0 mlxlogscore=999
+ adultscore=0 lowpriorityscore=0 priorityscore=1501 clxscore=1015
+ bulkscore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2411120000 definitions=main-2412270068
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Dec 2024 09:31:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114553
+ <openembedded-devel@lists.openembedded.org>; Fri, 27 Dec 2024 08:07:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114555
 
-ChangeLog:
-https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/blob/1.50.0/NEWS
+--_000_CY8PR11MB7921968E5EE3685713612AC9810E2CY8PR11MB7921namp_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Drop 0001-libnm-systemd-core-Disable-sd_dhcp6_client_set_duid_.patch as
-it has been merged upstream.
+Gentle reminder.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Regards,
+Soumya
+________________________________
+From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.o=
+penembedded.org> on behalf of Soumya via lists.openembedded.org <soumya.sam=
+bu=3Dwindriver.com@lists.openembedded.org>
+Sent: Friday, November 22, 2024 3:49 PM
+To: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.ope=
+nembedded.org>
+Subject: [oe][meta-python][scarthgap][PATCH 1/1] python3-werkzeug: upgrade =
+3.0.3 -> 3.0.6
+
+From: Soumya Sambu <soumya.sambu@windriver.com>
+
+Includes fix for CVE-2024-49767
+
+Changelog:
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+https://github.com/pallets/werkzeug/blob/3.0.6/CHANGES.rst
+
+Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...re-Disable-sd_dhcp6_client_set_duid_.patch | 65 -------------------
- ...er_1.48.10.bb => networkmanager_1.50.0.bb} |  3 +-
- 2 files changed, 1 insertion(+), 67 deletions(-)
- delete mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-libnm-systemd-core-Disable-sd_dhcp6_client_set_duid_.patch
- rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.48.10.bb => networkmanager_1.50.0.bb} (98%)
+ .../{python3-werkzeug_3.0.3.bb =3D> python3-werkzeug_3.0.6.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-werkzeug_3.0.3.bb =3D>=
+ python3-werkzeug_3.0.6.bb} (90%)
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-libnm-systemd-core-Disable-sd_dhcp6_client_set_duid_.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-libnm-systemd-core-Disable-sd_dhcp6_client_set_duid_.patch
-deleted file mode 100644
-index 8e246efe01..0000000000
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-libnm-systemd-core-Disable-sd_dhcp6_client_set_duid_.patch
-+++ /dev/null
-@@ -1,65 +0,0 @@
--From 34d7a6c9919a73c2e716835000944c17438b2ca1 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 7 Jun 2024 14:03:15 -0700
--Subject: [PATCH] libnm-systemd-core: Disable sd_dhcp6_client_set_duid_uuid
-- function
--
--When building on musl systems ( with out systemd ), and using LLD linker
--from LLVM project we fail to link with undefined symbols.
--
--This symbol is in sd_id128.c but its disabled, so let disable the functions
--which need this function.
--
--| x86_64-yoe-linux-musl-ld.lld: error: undefined symbol: sd_id128_get_machine_app_specific
--| >>> referenced by sd-dhcp-duid.c:202 (/usr/src/debug/networkmanager/1.48.0/../NetworkManager-1.48.0/src/libnm-systemd-core/src/libsystemd-network/sd-dhcp-duid.c:202)
--| >>>               libnm-systemd-core.a.p/src_libsystemd-network_sd-dhcp-duid.c.o:(sd_dhcp_duid_set_uuid) in archive src/libnm-systemd-core/libnm-systemd-core.a
--| x86_64-yoe-linux-musl-clang: error: linker command failed with exit code 1 (use -v to see invocation)
--
--Upstream-Status: Submitted [https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/merge_requests/1966]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/libnm-systemd-core/src/libsystemd-network/sd-dhcp-duid.c   | 2 ++
-- .../src/libsystemd-network/sd-dhcp6-client.c                   | 3 ++-
-- 2 files changed, 4 insertions(+), 1 deletion(-)
--
--diff --git a/src/libnm-systemd-core/src/libsystemd-network/sd-dhcp-duid.c b/src/libnm-systemd-core/src/libsystemd-network/sd-dhcp-duid.c
--index e664a4a..7ba5020 100644
----- a/src/libnm-systemd-core/src/libsystemd-network/sd-dhcp-duid.c
--+++ b/src/libnm-systemd-core/src/libsystemd-network/sd-dhcp-duid.c
--@@ -193,6 +193,7 @@ int sd_dhcp_duid_set_en(sd_dhcp_duid *duid) {
--         return 0;
-- }
-- 
--+#if 0
-- int sd_dhcp_duid_set_uuid(sd_dhcp_duid *duid) {
--         sd_id128_t machine_id;
--         int r;
--@@ -209,6 +210,7 @@ int sd_dhcp_duid_set_uuid(sd_dhcp_duid *duid) {
--         duid->size = offsetof(struct duid, uuid.uuid) + sizeof(machine_id);
--         return 0;
-- }
--+#endif
-- 
-- int dhcp_duid_to_string_internal(uint16_t type, const void *data, size_t data_size, char **ret) {
--         _cleanup_free_ char *p = NULL, *x = NULL;
--diff --git a/src/libnm-systemd-core/src/libsystemd-network/sd-dhcp6-client.c b/src/libnm-systemd-core/src/libsystemd-network/sd-dhcp6-client.c
--index 7c20116..08c1e96 100644
----- a/src/libnm-systemd-core/src/libsystemd-network/sd-dhcp6-client.c
--+++ b/src/libnm-systemd-core/src/libsystemd-network/sd-dhcp6-client.c
--@@ -244,6 +244,7 @@ int sd_dhcp6_client_set_duid_en(sd_dhcp6_client *client) {
--         return 0;
-- }
-- 
--+#if 0
-- int sd_dhcp6_client_set_duid_uuid(sd_dhcp6_client *client) {
--         int r;
-- 
--@@ -256,7 +257,7 @@ int sd_dhcp6_client_set_duid_uuid(sd_dhcp6_client *client) {
-- 
--         return 0;
-- }
+diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_3.0.3.bb =
+b/meta-python/recipes-devtools/python/python3-werkzeug_3.0.6.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-werkzeug_3.0.3.bb
+rename to meta-python/recipes-devtools/python/python3-werkzeug_3.0.6.bb
+index e79343034..7a56350ee 100644
+--- a/meta-python/recipes-devtools/python/python3-werkzeug_3.0.3.bb
++++ b/meta-python/recipes-devtools/python/python3-werkzeug_3.0.6.bb
+@@ -10,7 +10,7 @@ HOMEPAGE =3D "https://werkzeug.palletsprojects.com"
+ LICENSE =3D "BSD-3-Clause"
+ LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D5dc88300786f1c214c1e9827a52=
+29462"
+
+-SRC_URI[sha256sum] =3D "097e5bfda9f0aba8da6b8545146def481d06aa7d3266e7448e=
+2cccf67dd8bd18"
++SRC_URI[sha256sum] =3D "a8dd59d4de28ca70471a34cba79bed5f7ef2e036a76b3ab083=
+5474246eb41f8d"
+
+ inherit pypi python_flit_core
+
 --
--+#endif
-- int sd_dhcp6_client_set_duid_raw(sd_dhcp6_client *client, uint16_t duid_type, const uint8_t *duid, size_t duid_len) {
--         int r;
-- 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.48.10.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.50.0.bb
-similarity index 98%
-rename from meta-networking/recipes-connectivity/networkmanager/networkmanager_1.48.10.bb
-rename to meta-networking/recipes-connectivity/networkmanager/networkmanager_1.50.0.bb
-index a9b9233b7e..9d2b1f2670 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.48.10.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.50.0.bb
-@@ -40,11 +40,10 @@ SRC_URI = " \
-     file://${BPN}.initd \
-     file://enable-dhcpcd.conf \
-     file://enable-iwd.conf \
--    file://0001-libnm-systemd-core-Disable-sd_dhcp6_client_set_duid_.patch \
- "
- SRC_URI:append:libc-musl = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' file://0001-linker-scripts-Do-not-export-_IO_stdin_used.patch', '', d)}"
- 
--SRC_URI[sha256sum] = "5dc188fdffcf2d23c89d34b1e6319a6b20203e12eaec24b30037b7ea8ac8c613"
-+SRC_URI[sha256sum] = "fc03e7388a656cebc454c5d89481626122b1975d7c26babc64dc7e488faa66e3"
- 
- S = "${WORKDIR}/NetworkManager-${PV}"
- 
--- 
-2.25.1
+2.40.0
 
+
+--_000_CY8PR11MB7921968E5EE3685713612AC9810E2CY8PR11MB7921namp_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+Gentle reminder.<br>
+<br>
+</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+Regards,</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+Soumya</div>
+<div id=3D"appendonsend"></div>
+<hr style=3D"display:inline-block;width:98%" tabindex=3D"-1">
+<div id=3D"divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" st=
+yle=3D"font-size:11pt" color=3D"#000000"><b>From:</b> openembedded-devel@li=
+sts.openembedded.org &lt;openembedded-devel@lists.openembedded.org&gt; on b=
+ehalf of Soumya via lists.openembedded.org &lt;soumya.sambu=3Dwindriver.com=
+@lists.openembedded.org&gt;<br>
+<b>Sent:</b> Friday, November 22, 2024 3:49 PM<br>
+<b>To:</b> openembedded-devel@lists.openembedded.org &lt;openembedded-devel=
+@lists.openembedded.org&gt;<br>
+<b>Subject:</b> [oe][meta-python][scarthgap][PATCH 1/1] python3-werkzeug: u=
+pgrade 3.0.3 -&gt; 3.0.6</font>
+<div>&nbsp;</div>
+</div>
+<div class=3D"BodyFragment"><font size=3D"2"><span style=3D"font-size:11pt;=
+">
+<div class=3D"PlainText">From: Soumya Sambu &lt;soumya.sambu@windriver.com&=
+gt;<br>
+<br>
+Includes fix for CVE-2024-49767<br>
+<br>
+Changelog:<br>
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
+<a href=3D"https://github.com/pallets/werkzeug/blob/3.0.6/CHANGES.rst">http=
+s://github.com/pallets/werkzeug/blob/3.0.6/CHANGES.rst</a><br>
+<br>
+Signed-off-by: Soumya Sambu &lt;soumya.sambu@windriver.com&gt;<br>
+Signed-off-by: Khem Raj &lt;raj.khem@gmail.com&gt;<br>
+---<br>
+&nbsp;.../{python3-werkzeug_3.0.3.bb =3D&gt; python3-werkzeug_3.0.6.bb}&nbs=
+p;&nbsp;&nbsp; | 2 +-<br>
+&nbsp;1 file changed, 1 insertion(+), 1 deletion(-)<br>
+&nbsp;rename meta-python/recipes-devtools/python/{python3-werkzeug_3.0.3.bb=
+ =3D&gt; python3-werkzeug_3.0.6.bb} (90%)<br>
+<br>
+diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_3.0.3.bb =
+b/meta-python/recipes-devtools/python/python3-werkzeug_3.0.6.bb<br>
+similarity index 90%<br>
+rename from meta-python/recipes-devtools/python/python3-werkzeug_3.0.3.bb<b=
+r>
+rename to meta-python/recipes-devtools/python/python3-werkzeug_3.0.6.bb<br>
+index e79343034..7a56350ee 100644<br>
+--- a/meta-python/recipes-devtools/python/python3-werkzeug_3.0.3.bb<br>
++++ b/meta-python/recipes-devtools/python/python3-werkzeug_3.0.6.bb<br>
+@@ -10,7 +10,7 @@ HOMEPAGE =3D &quot;<a href=3D"https://werkzeug.palletspro=
+jects.com">https://werkzeug.palletsprojects.com</a>&quot;<br>
+&nbsp;LICENSE =3D &quot;BSD-3-Clause&quot;<br>
+&nbsp;LIC_FILES_CHKSUM =3D &quot;<a href=3D"file://LICENSE.txt;md5=3D5dc883=
+00786f1c214c1e9827a5229462">file://LICENSE.txt;md5=3D5dc88300786f1c214c1e98=
+27a5229462</a>&quot;<br>
+&nbsp;<br>
+-SRC_URI[sha256sum] =3D &quot;097e5bfda9f0aba8da6b8545146def481d06aa7d3266e=
+7448e2cccf67dd8bd18&quot;<br>
++SRC_URI[sha256sum] =3D &quot;a8dd59d4de28ca70471a34cba79bed5f7ef2e036a76b3=
+ab0835474246eb41f8d&quot;<br>
+&nbsp;<br>
+&nbsp;inherit pypi python_flit_core<br>
+&nbsp;<br>
+-- <br>
+2.40.0<br>
+<br>
+</div>
+</span></font></div>
+</body>
+</html>
+
+--_000_CY8PR11MB7921968E5EE3685713612AC9810E2CY8PR11MB7921namp_--
 
