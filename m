@@ -1,123 +1,128 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 33202E7718B
-	for <webhook@archiver.kernel.org>; Fri, 27 Dec 2024 10:58:30 +0000 (UTC)
-Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
- by mx.groups.io with SMTP id smtpd.web11.11094.1735297103750963454
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 02BE1E77188
+	for <webhook@archiver.kernel.org>; Sat, 28 Dec 2024 06:07:45 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web10.25587.1735366058786009877
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Dec 2024 02:58:24 -0800
+ Fri, 27 Dec 2024 22:07:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=M9aJECnP;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-256628-202412271058225c065a38cf23b8f522-hccmxg@rts-flowmailer.siemens.com)
-Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 202412271058225c065a38cf23b8f522
-        for <openembedded-devel@lists.openembedded.org>;
-        Fri, 27 Dec 2024 11:58:22 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=3hMTVwYbEdEHsJBpdro1b3xStP+apzX6Un0qQlgYL+w=;
- b=M9aJECnPe8BmSBp7TiskBsg/sEuMXUO1lsaLAdMI19bujSXdhNZGN6Qd9ev0BLKo4XSes4
- Vor2VRAFiJM5jZL2tI8f29P+MafGbZL6PKVyZNtW+63PQ+oIicsBvAzx3GluIEGmixwYaMQQ
- gTwx8Skhft0pAMVOsuq2ye7Jvz/6XHGNnLERb/tJERtcOUv74ZEN1HU5JjDqe1bczlBLzH8l
- /zU4xf9oR37O0QZn4PEUI4roX5/aD5oHhHZxKfgJn8rgs1Vr/VUjCH/zlReFhlc0sgRf31J6
- DqHfbBVIOUq+zWqSB3eflWxKV357zPVk/MhSFoOoOdGBjLwRMu8q3MRw==;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd88.aul.t-online.de (fwd88.aul.t-online.de [10.223.144.114])
+	by mailout03.t-online.de (Postfix) with SMTP id 597BB6CF
+	for <openembedded-devel@lists.openembedded.org>; Sat, 28 Dec 2024 07:07:36 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([79.219.235.40]) by fwd88.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1tRPz6-0jiF5V0; Sat, 28 Dec 2024 07:07:36 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH 14/15] audiofile: patch CVE-2017-6831
-Date: Fri, 27 Dec 2024 11:56:14 +0100
-Message-Id: <20241227105615.3303193-15-peter.marko@siemens.com>
-In-Reply-To: <20241227105615.3303193-1-peter.marko@siemens.com>
-References: <20241227105615.3303193-1-peter.marko@siemens.com>
+Subject: [meta-oe][PATCH] malcontent: update 0.12.0 -> 0.13.0
+Date: Sat, 28 Dec 2024 07:07:45 +0100
+Message-ID: <20241228060745.21207-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1735366056-63FFCA80-DE4CC314/0/0 CLEAN NORMAL
+X-TOI-MSGID: ec816f04-e6c6-45c8-8778-97911f13c4e7
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 27 Dec 2024 10:58:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114572
+ <openembedded-devel@lists.openembedded.org>; Sat, 28 Dec 2024 06:07:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114574
 
-From: Peter Marko <peter.marko@siemens.com>
+Overview of changes in malcontent 0.13.0
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-Use patch from buildroot:
-https://github.com/buildroot/buildroot/commit/bd5f84d301c4e74ca200a9336eca88468ec0e1f3
+* Bugs fixed:
+  - #48 Parental controls app: show the launcher, or merge into Settings?
+    (Philip Withnall)
+  - !172 Update fa.po
+  - !173 Update Czech translation
+  - !176 malcontent-control: Update metainfo file
+  - !177 Update Swedish translation
+  - !179 docs: Add list of legal references for relevant countries=E2=80=99=
+ laws
+  - !180 po: Update Slovenian translation
+  - !181 Update Polish translation 240909
+  - !182 Add Chinese translation
+  - !183 application: Fix opening Settings
+  - !184 malcontent-control: Call setlocale() earlier to fix early i18n
+  - !185 restrict-applications-selector: Fix pending changes being lost o=
+n
+    search
+  - !186 libmalcontent-ui: Port to libadwaita 1.6
+  - !187 app-filter: Fix logic for allowlist filtering on GAppInfo
 
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+* Translation updates:
+  - Chinese (China) (lumingzh)
+  - Czech (AsciiWolf)
+  - Persian (Danial Behzadi)
+  - Polish (Piotr Dr=C4=85g)
+  - Slovenian (Martin Srebotnjak)
+  - Swedish (Anders Jonsson)
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../audiofile/audiofile_0.3.6.bb              |  1 +
- ...ail-when-error-occurs-in-parseFormat.patch | 46 +++++++++++++++++++
- 2 files changed, 47 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/audiofile/files/0007-Actually-fail-when-error-occurs-in-parseFormat.patch
+ meta-oe/recipes-gnome/malcontent/malcontent-ui.bb | 5 +++--
+ meta-oe/recipes-gnome/malcontent/malcontent.inc   | 4 ++--
+ 2 files changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-index 66194fdc8b..08709a35e3 100644
---- a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-+++ b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-@@ -16,6 +16,7 @@ SRC_URI = " \
-     file://0004-Always-check-the-number-of-coefficients.patch \
-     file://0005-clamp-index-values-to-fix-index-overflow-in-IMA.cpp.patch \
-     file://0006-Check-for-multiplication-overflow-in-sfconvert.patch \
-+    file://0007-Actually-fail-when-error-occurs-in-parseFormat.patch \
- "
- SRC_URI[sha256sum] = "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8cb59782"
- 
-diff --git a/meta-oe/recipes-multimedia/audiofile/files/0007-Actually-fail-when-error-occurs-in-parseFormat.patch b/meta-oe/recipes-multimedia/audiofile/files/0007-Actually-fail-when-error-occurs-in-parseFormat.patch
-new file mode 100644
-index 0000000000..38294ca200
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/audiofile/files/0007-Actually-fail-when-error-occurs-in-parseFormat.patch
-@@ -0,0 +1,46 @@
-+From a2e9eab8ea87c4ffc494d839ebb4ea145eb9f2e6 Mon Sep 17 00:00:00 2001
-+From: Antonio Larrosa <larrosa@kde.org>
-+Date: Mon, 6 Mar 2017 18:59:26 +0100
-+Subject: [PATCH] Actually fail when error occurs in parseFormat
-+
-+When there's an unsupported number of bits per sample or an invalid
-+number of samples per block, don't only print an error message using
-+the error handler, but actually stop parsing the file.
-+
-+This fixes #35 (also reported at
-+https://bugzilla.opensuse.org/show_bug.cgi?id=1026983 and
-+https://blogs.gentoo.org/ago/2017/02/20/audiofile-heap-based-buffer-overflow-in-imadecodeblockwave-ima-cpp/
-+)
-+
-+Signed-off-by: Peter Korsgaard <peter@korsgaard.com>
-+
-+CVE: CVE-2017-6831
-+Upstream-Status: Inactive-Upstream [lastrelease: 2013]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ libaudiofile/WAVE.cpp | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/libaudiofile/WAVE.cpp b/libaudiofile/WAVE.cpp
-+index 0e81cf7..d762249 100644
-+--- a/libaudiofile/WAVE.cpp
-++++ b/libaudiofile/WAVE.cpp
-+@@ -326,6 +326,7 @@ status WAVEFile::parseFormat(const Tag &id, uint32_t size)
-+ 			{
-+ 				_af_error(AF_BAD_NOT_IMPLEMENTED,
-+ 					"IMA ADPCM compression supports only 4 bits per sample");
-++				return AF_FAIL;
-+ 			}
-+ 
-+ 			int bytesPerBlock = (samplesPerBlock + 14) / 8 * 4 * channelCount;
-+@@ -333,6 +334,7 @@ status WAVEFile::parseFormat(const Tag &id, uint32_t size)
-+ 			{
-+ 				_af_error(AF_BAD_CODEC_CONFIG,
-+ 					"Invalid samples per block for IMA ADPCM compression");
-++				return AF_FAIL;
-+ 			}
-+ 
-+ 			track->f.sampleWidth = 16;
-+-- 
-+2.11.0
-+
--- 
-2.30.2
+diff --git a/meta-oe/recipes-gnome/malcontent/malcontent-ui.bb b/meta-oe/=
+recipes-gnome/malcontent/malcontent-ui.bb
+index ca3bf081d6..8630822939 100644
+--- a/meta-oe/recipes-gnome/malcontent/malcontent-ui.bb
++++ b/meta-oe/recipes-gnome/malcontent/malcontent-ui.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd25=
+5951079008b364516c"
+=20
+ require malcontent.inc
+=20
+-DEPENDS =3D " \
++DEPENDS +=3D " \
+ 	malcontent \
+ 	accountsservice \
+ 	glib-2.0 \
+@@ -16,6 +16,7 @@ DEPENDS =3D " \
+ 	libpam \
+ 	polkit \
+ 	appstream \
++	appstream-native \
+ 	flatpak \
+ 	libadwaita \
+ 	gtk4 \
+@@ -40,7 +41,7 @@ do_install() {
+ 	ln -sf libmalcontent-ui-1.so.${PV} ${D}${libdir}/libmalcontent-ui-1.so.=
+1
+ 	install -m 0755 ${B}/malcontent-control/malcontent-control ${D}${bindir=
+}
+ 	install -m 0644 ${B}/malcontent-control/org.freedesktop.MalcontentContr=
+ol.policy ${D}${datadir}/polkit-1/actions
+-	install -m 0644 ${B}/malcontent-control/org.freedesktop.MalcontentContr=
+ol.appdata.xml ${D}${datadir}/metainfo
++	install -m 0644 ${B}/malcontent-control/org.freedesktop.MalcontentContr=
+ol.metainfo.xml ${D}${datadir}/metainfo
+ 	install -m 0644 ${B}/malcontent-control/org.freedesktop.MalcontentContr=
+ol.desktop ${D}${datadir}/applications
+ }
+=20
+diff --git a/meta-oe/recipes-gnome/malcontent/malcontent.inc b/meta-oe/re=
+cipes-gnome/malcontent/malcontent.inc
+index d48be08bbc..68523fa21e 100644
+--- a/meta-oe/recipes-gnome/malcontent/malcontent.inc
++++ b/meta-oe/recipes-gnome/malcontent/malcontent.inc
+@@ -1,4 +1,4 @@
+ SRC_URI =3D "git://gitlab.freedesktop.org/pwithnall/malcontent.git;proto=
+col=3Dhttps;branch=3Dmain"
+ S =3D "${WORKDIR}/git"
+-SRCREV =3D "3ba80995bb25b7aeda7e21d547f9e39ff9a81736"
+-PV =3D "0.12.0"
++SRCREV =3D "21f3ef7b6f984710a23b607d2298fe16e554f0c3"
++PV =3D "0.13.0"
+--=20
+2.47.1
 
 
