@@ -1,280 +1,216 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93E32E7718B
-	for <webhook@archiver.kernel.org>; Tue, 31 Dec 2024 12:15:58 +0000 (UTC)
-Received: from mail-yb1-f182.google.com (mail-yb1-f182.google.com [209.85.219.182])
- by mx.groups.io with SMTP id smtpd.web10.81409.1735647353631589699
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0F3AE77188
+	for <webhook@archiver.kernel.org>; Tue, 31 Dec 2024 13:32:18 +0000 (UTC)
+Received: from mx0b-000eb902.pphosted.com (mx0b-000eb902.pphosted.com [205.220.177.212])
+ by mx.groups.io with SMTP id smtpd.web10.71373.1735595320645254289
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 31 Dec 2024 04:15:53 -0800
+ Mon, 30 Dec 2024 13:48:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cc/gl8na;
- spf=pass (domain: gmail.com, ip: 209.85.219.182, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f182.google.com with SMTP id 3f1490d57ef6-e479e529ebcso11806086276.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 31 Dec 2024 04:15:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1735647353; x=1736252153; darn=lists.openembedded.org;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=0JG5PC4/tlYNeN+vbV2ZsGoHlvKRkQJkCih0NQmDmBU=;
-        b=cc/gl8nae4zQnvczGiuTiyCvlvtZrwO8oYX+nXkES5gQhPC6eIfy5wIQuyvDIi25Nk
-         /bFgB8Umye51LtdoRNLoLX7VyKFrNxZDG5cvNYg5EXZuwa/cJATaT6XZgrfsC4X1ah/m
-         Jc6cP7R3xV7pYDf7XH8olRN3YnJHc6NAfrGCg4FlCCkqcpdEKmSweL4wtimaIq4kChhU
-         +q66nIb4zLQrzPDSBADfjqqrRxELrl+DeN/jzCq+Ye5eGz3SjLkBPCNdNVM5bnuzmz9w
-         SnYdK0e6TM/5CWUVpJAdpneH+YbnsDExlJHkAnFGVZX/4010hK0vA3YVV16/BRu60hZV
-         qu4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1735647353; x=1736252153;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=0JG5PC4/tlYNeN+vbV2ZsGoHlvKRkQJkCih0NQmDmBU=;
-        b=UHmByhZW0BoC6qScaYDS3lAn5vswbTR+NUXt5+jOy/vCvuiGDWysEMJrPsiuMKFdQG
-         pfLddGbc2QZXT56BKa7t4zNTo5YTOucB7pdHtd9D/hDI5HZoHpDxYqRdjCeRvNy2pYm8
-         M3im3l9FgwDPUqVmk5MwqPJjU8RsFE6QKMc0+Up88KDqb/746ugWPsbullxUo5AsUUus
-         Jom2FH0XNEq5ldDa3O0L9h/h8KMLnXycLAP1PCR2bvwW5+GUQiySFnhqgHd/GEkYbmex
-         MOlmo5opbt54rzf49geWysjLyDJ8XQs4XWNcBT3wcXFAt9uC6eiCsrvy73DqU9u1Klx1
-         9hXw==
-X-Forwarded-Encrypted: i=1; AJvYcCXjEsz0IP2TLLSPiDbLsYcugXLprj5kcuNhaUionXmUykmC7EZRy7A48bS+ju6A9D07JHjRi02vwXRucAJQmXuqBkY=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzffGMqTsxAUP0ZEx/FKgR/fkvSSzW7OARLvr0FCfOJs8Qxk/8A
-	tpmHeovYMhRfpW+D+3sTqbSOOQBzlOKDLcLKCcMH2A4QqFUqQ9Mx
-X-Gm-Gg: ASbGncvvCLBatxnIhX08HAJXAmPCpngMwAbrxMi47Pcn++zjh7m8I1LhSb1F9kxF9fU
-	U/qesqn8AfToCoVwASHyS0mogZYZpv0/Szzm3Uuug0NI1/E4aVLxlyk82O5FsTDut4R+Q/TjJnA
-	HEDItThC6ARbTIZn5OZyvaxmtdETRXHksH9HSE+Nzq33DpdeuGcIkuEVpb2r3Twjp9ztecmvZ7b
-	wDF1Xx0BZ3MMOJ5b3VMMfpoKp5ZRSu2w27UzD1sAEp1LWs6PUr+dIajUqwf/yHFlWDBtNrGKrtp
-	wWaj9JousOSf1uW0X8raE2hEXSY=
-X-Google-Smtp-Source: AGHT+IECK73NfLGtC+5+or7S/QxxWYfcKoEcIJcEt9LB9AnSV8FC+cYx1dQWWOC3jr5vQTEGfVaCBg==
-X-Received: by 2002:a05:690c:4443:b0:6ef:5097:5daa with SMTP id 00721157ae682-6f3f820d006mr237848497b3.34.1735647352629;
-        Tue, 31 Dec 2024 04:15:52 -0800 (PST)
-Received: from ?IPV6:2600:1700:45dd:7000:c83e:ad2:5c14:ece? ([2600:1700:45dd:7000:c83e:ad2:5c14:ece])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6f3e783680csm61177687b3.100.2024.12.31.04.15.51
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 31 Dec 2024 04:15:52 -0800 (PST)
-Message-ID: <43576444-0a8a-4a50-baf9-5260bf0f2b33@gmail.com>
-Date: Tue, 31 Dec 2024 07:15:51 -0500
+ dkim=pass header.i=@garmin.com header.s=pps1 header.b=I1vNSwe8;
+ dkim=pass header.i=@garmin.com header.s=selector2 header.b=BwtcvhM8;
+ spf=pass (domain: garmin.com, ip: 205.220.177.212, mailfrom: prvs=4094ffb500=colin.mcallister@garmin.com)
+Received: from pps.filterd (m0220299.ppops.net [127.0.0.1])
+	by mx0a-000eb902.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BULChIS008374
+	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Dec 2024 15:48:39 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=garmin.com; h=cc
+	:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=pps1; bh=4S/GEpx09O3fWhvpcy+lMBNzQrH
+	sEQIIOay+2RtfrqA=; b=I1vNSwe8LRlYHPC/C96IHJdSd21RcxgOlxvWw3XWofG
+	nsEtWKW0u7+ZN4PORu+Se+0WfssINtGxe/GUuvckK+cfhysQeiBozr9JDoKMTF99
+	cExFnViAr1lEPZdPEDqgneOijIH9ERVnVFr+lCQnT1UK6JYzklTsegYHVOVLcKFc
+	hhTmYNOfgfBLWEHGJ/f/NaGMZX7aR5ZJo5DMh8YJjTbHBA9qYZt1c0FoKZdFKMO2
+	Rxp42L+b0yDutWSKyg2Cp76QKSRH+K0/ogsRv58YWpz95tIfO5FtwZA0otdqh9da
+	Y1/QDkBmrg0cNh6zQFWfSI3w1u8mTJYq8GXjtKJhm6g==
+Received: from nam04-bn8-obe.outbound.protection.outlook.com (mail-bn8nam04lp2046.outbound.protection.outlook.com [104.47.74.46])
+	by mx0a-000eb902.pphosted.com (PPS) with ESMTPS id 43v37cg1de-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Dec 2024 15:48:39 -0600 (CST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=J6eFcJ4CC86OJWYXyvq3oZnaHULIGND/VlQjkhIkbkt8OiWgwaDME4xcnioRQGiDPsdii4PWBASPmgb8U2fOfatLe6PQXnHs8htH34vgNf6YV8PCwAUiJJicLZ0od2IDunxCG20mxVbTOoIn7dcOTJFwAgP3/sIXkSMu3BcGOnaTJy6NDd1NLGCDWb2hBnNpdLbEQFxZ1qSH5jLraqyxT522Ttrr7qzyk51aFjWmGHE0djCHysNjCOHSkPtuX8U8oNNnX5THC9w/3oNH8OpANHeuubE7eOJ1BPUZON2O0r/g6w3SgRES6mJm5XJn/bv4eZU8y49xqR4ZOedqz/AcxA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4S/GEpx09O3fWhvpcy+lMBNzQrHsEQIIOay+2RtfrqA=;
+ b=MVCzaLpiGxXfBsKqJPers7ZghkH6rcot77nigLL/7ywarYJA1N+5pUM7YS/mUNgUneH6YTZg2fsmSgEWEBZUq0wXMKCHrjbvMS7iX7ADPx9rvAua1uKZ3uczHgQsEFYfxO7hWwwnUTMWAJ6nLAtgxra9nncw3aEbvaCPpZWFZs0x9/95A9kfgBqwHkrCmlrAPtxwqsUCyWIq+ikad8KgVhPE3h3OheMN0ZqZIqqWT/zrzr2dJW3bw8x3y1tCny3X9cr7ymydin8txEywdzEkHMBpxbTO1O6hSHP/br/WHzF1cz39r9w8VssT200E3IbvsE1xakFz+5HSOvG6r2nqJQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 5.145.180.36) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=garmin.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
+ action=none header.from=garmin.com; dkim=none (message not signed); arc=none
+ (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=garmin.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4S/GEpx09O3fWhvpcy+lMBNzQrHsEQIIOay+2RtfrqA=;
+ b=BwtcvhM8UxaS1y8g3VEnVh1RYEEOyD25HMRIDZzYlJEBRvCX3wyGM5Lis/DrMG97ZIa24y8fjSGwge4vwyb7rZg3NKksd5xWDzLLmKeXTvOSjLn23eu2JJq5LzAmYgWdKBQ+m7KPoRBuYTgrfmZaYv7Vkd3dprusspnqzznvFoxv1hiN0+jC5N0s764ZBkCf5zFBE+cjfRvN+EcE1xGgixVXZ2GlUPLqtGAaRHRiTqpRwyh17Y4CD339Z6uU7xnavwF+HjYqZ1zLVscRq+FPx2aT7KN8lws1Yb91N82CIdVqk5K16d+30CK63ADv81chtRjVcuRowpzUsvFLUemm4g==
+Received: from MN2PR04CA0024.namprd04.prod.outlook.com (2603:10b6:208:d4::37)
+ by CH2PR04MB6711.namprd04.prod.outlook.com (2603:10b6:610:94::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8293.20; Mon, 30 Dec
+ 2024 21:48:33 +0000
+Received: from BN2PEPF00004FBE.namprd04.prod.outlook.com
+ (2603:10b6:208:d4:cafe::3e) by MN2PR04CA0024.outlook.office365.com
+ (2603:10b6:208:d4::37) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8293.19 via Frontend Transport; Mon,
+ 30 Dec 2024 21:48:32 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 5.145.180.36)
+ smtp.mailfrom=garmin.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=garmin.com;
+Received-SPF: Pass (protection.outlook.com: domain of garmin.com designates
+ 5.145.180.36 as permitted sender) receiver=protection.outlook.com;
+ client-ip=5.145.180.36; helo=tw1wpa-edge4.garmin.com; pr=C
+Received: from tw1wpa-edge4.garmin.com (5.145.180.36) by
+ BN2PEPF00004FBE.mail.protection.outlook.com (10.167.243.184) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8314.11 via Frontend Transport; Mon, 30 Dec 2024 21:48:32 +0000
+Received: from LINWPA-EXMB1.ad.garmin.com (10.124.0.216) by
+ tw1wpa-edge4.garmin.com (10.176.28.36) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.2.1118.37; Tue, 31 Dec 2024 05:48:15 +0800
+Received: from cv1wpa-exmb2.ad.garmin.com (10.5.144.72) by
+ LINWPA-EXMB1.ad.garmin.com (10.124.0.216) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Tue, 31 Dec 2024 05:48:14 +0800
+Received: from cv1wpa-exmb3.ad.garmin.com (10.5.144.73) by
+ CV1WPA-EXMB2.ad.garmin.com (10.5.144.72) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Mon, 30 Dec 2024 15:48:11 -0600
+Received: from ola-jnrkg73.ad.garmin.com (10.5.209.17) by smtp.garmin.com
+ (10.5.144.73) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Mon, 30 Dec 2024 15:48:11 -0600
+From: "Colin McAllister" <colin.mcallister@garmin.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Colin McAllister <colin.mcallister@garmin.com>
+Subject: [meta-oe][kirkstone][PATCH] lldpd: Fix CVE-2023-41910
+Date: Mon, 30 Dec 2024 15:47:33 -0600
+Message-ID: <20241230214802.1332322-1-colin.mcallister@garmin.com>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: scarthgap merge request: Dec 31st
-Autocrypt: addr=akuster808@gmail.com; keydata=
- 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
- ApZ86eOP
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF00004FBE:EE_|CH2PR04MB6711:EE_
+X-MS-Office365-Filtering-Correlation-Id: 72e6ac0d-6fce-44b7-f68b-08dd291bb48c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700013;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?e9vHMErNviUynht7rXX0kbC7RCoQqnGwxANX/o1y4W1WPag/PKT4cyCfb+8v?=
+ =?us-ascii?Q?Qpd4HSXv1PHuFUcg16uA/6JI+eHA89A1gCkPeMjhK/y6qP7/GFGb7SZCExJs?=
+ =?us-ascii?Q?UJq0ZQPr6Em2BoOB9SwTWNqT7L1CXLcZoCkMzuiCgDWtU8UGbTZKYNIX4JjB?=
+ =?us-ascii?Q?iay0LizyXoa4Mbl2JDbiJsdph9pZX4La0PFzMw2Bk/QfdBxVcYdXuUzzj209?=
+ =?us-ascii?Q?PYxemB8f9PcfFs942WS4OzlafG1LT6HCH4JONx85ecximi57LDq835W3AMXA?=
+ =?us-ascii?Q?iLrWZ4icG4i70f9e03pPCqFl8i9CxeIUN7G19vlC2l1DniA3jiPS3WawEYcX?=
+ =?us-ascii?Q?GCff1oMwo3jQK5T/cD8kguqsrw703d+o3YYmRF9cqtv40A2PTI7GBni0ya+4?=
+ =?us-ascii?Q?t9JGpgyu/kNfjzMyQvN5zrw95zoZh9qr61Utw7bFv8zmxWy3x+UIdS3zu3qy?=
+ =?us-ascii?Q?0vwuiOS/JZxfUFnlSc1zyevp1GUNwaFeys73PUF/IDgt/XcutcAg+zFiVV20?=
+ =?us-ascii?Q?9Tp7TNpi437KhAgfd4/h2U4uy/ZowhtVgNxfMHOXDpVvSos3MQXfETuFlH4r?=
+ =?us-ascii?Q?AxLS21OzwT9StQ6dojCKYWT/eblTRxFRQbQFSPBKe4ffpYXrhKWjUab3iB/h?=
+ =?us-ascii?Q?3qGII0m0iAeDVzTilmDY7B4ZUZR9fWN+vV5ow4ER3QtBAx//JxURBz3HzFPY?=
+ =?us-ascii?Q?QEx2flgGKjVahDOAa/fwCTWwN/aEW730eNu0nqQUZYor1nZCpf/Rs2A9sec2?=
+ =?us-ascii?Q?WV3R5HdBWyYKvhqtKNNfRj3UOvhYdiz/kCvZkmSvWyMuDIGkrlZddUoCcLcs?=
+ =?us-ascii?Q?z14mwAoQmu5UK9XpkB6IQyuBb6ZxyvjvmHpiyXFM6sYQAej9JD85HxDMuCLV?=
+ =?us-ascii?Q?o7Wuy1Q4o28riJ9Qx/Cxgtf/NDXun6Snq/je8Rk9/j2frCrS1k1bn5q97nDG?=
+ =?us-ascii?Q?JqFVY71nk8I9hn4ROTS2pCaeOk5D0BHbEnEGDqfWqBnTlC0hLl34mMxB9xuD?=
+ =?us-ascii?Q?tBNwzfHZPGi9Dm3yeEZ85JqCx5/f0Xgejl8f3WbfD+LM+JeiXcQjc4PBMaz+?=
+ =?us-ascii?Q?n6S87viVLFC85uPmMX0GCtKR1jmUxfiGPCn/YPJ2eOmOC+CSKzL/3nHm+5bz?=
+ =?us-ascii?Q?9X1vSsJ2cvhss44yXe0hWfx2enNs+bHzAgnhqoEQux7ZSx7lUzIDcsSxZEMJ?=
+ =?us-ascii?Q?z6Ocbb0ug/GCgNVFd6PbWBXj17FZ5GvtDqM4C7e/ZCAoVH0QUUXuVGoFOK7o?=
+ =?us-ascii?Q?a9FqS81/CaUNTC/WGUtQb6GQbieMu2NfySh6czLGFkg1EbxYPn1Z/ZUB3Bic?=
+ =?us-ascii?Q?ILDkwZDPsku7XEXp4XlgbD9mj3EsoRN/7sDcBop4FtXNob/Z3TAReCpRnt8r?=
+ =?us-ascii?Q?0MrcIil5Tpp053HtKdQBb06+3AfWDRfhCxbt2tO13qo/VDYpaqw5vVlphrCw?=
+ =?us-ascii?Q?xL2S7Lu75Ms=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:5.145.180.36;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:tw1wpa-edge4.garmin.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013);DIR:OUT;SFP:1102;
+X-OriginatorOrg: garmin.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Dec 2024 21:48:32.2252
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 72e6ac0d-6fce-44b7-f68b-08dd291bb48c
+X-MS-Exchange-CrossTenant-Id: 38d0d425-ba52-4c0a-a03e-2a65c8e82e2d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=38d0d425-ba52-4c0a-a03e-2a65c8e82e2d;Ip=[5.145.180.36];Helo=[tw1wpa-edge4.garmin.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	BN2PEPF00004FBE.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR04MB6711
+X-Authority-Analysis: v=2.4 cv=YtH1R5YX c=1 sm=1 tr=0 ts=67731537 cx=c_pps a=G0EMd8eUBd5ElxF49Cdl+w==:117 a=x6SFi5dyMiEqRNQ9E5Nh/w==:17 a=h8e1o3o8w34MuCiiGQrqVE4VwXA=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=RZcAm9yDv7YA:10
+ a=FS7-D2N0u7gA:10 a=s63m1ICgrNkA:10 a=z79Jr5QO9ZoA:10 a=qm69fr9Wx_0A:10 a=NEAV23lmAAAA:8 a=0E3rUpu_AAAA:8 a=NbHB2C0EAAAA:8 a=ygfj4mVdMupMjk9-_ScA:9 a=gSyOOUxZfIhboqwmd29B:22
+X-Proofpoint-GUID: jS41lb6ee8eynN3kzfnYxcAEff75B97G
+X-Proofpoint-ORIG-GUID: jS41lb6ee8eynN3kzfnYxcAEff75B97G
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ phishscore=0 malwarescore=0 bulkscore=0 spamscore=0 mlxscore=0
+ lowpriorityscore=0 mlxlogscore=999 clxscore=1011 suspectscore=0
+ adultscore=0 impostorscore=0 classifier=spam authscore=0 adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2411120000
+ definitions=main-2412300187
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 31 Dec 2024 12:15:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114605
+ <openembedded-devel@lists.openembedded.org>; Tue, 31 Dec 2024 13:32:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114606
 
-The following changes since commit b8d1a14f7f3b76457c36752202ea7ae5881b6654:
+Adds patch to backport fix for CVE-2023-41910.
 
-   freeradius: upgrade 3.2.3 -> 3.2.5 (2024-11-24 17:38:31 -0500)
+Signed-off-by: Colin McAllister <colin.mcallister@garmin.com>
+Change-Id: Iab619f1f5ba26b1141dffea065c90ef0b180b46e
+---
+ .../lldpd/files/CVE-2023-41910.patch          | 26 +++++++++++++++++++
+ .../recipes-daemons/lldpd/lldpd_1.0.8.bb      |  1 +
+ 2 files changed, 27 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/lldpd/files/CVE-2023-41910.patch
 
-are available in the Git repository at:
-
-   https://git.openembedded.org/meta-openembedded scarthgap-next
-
-for you to fetch changes up to 3c293e14492f01e22a64004e2330fb620c27578a:
-
-   python3-tornado: Upgrade 6.4 -> 6.4.2 (2024-12-27 09:24:53 -0500)
-
-----------------------------------------------------------------
-AmateurECE (1):
-       pipewire: Add glib-2.0-native dep for bluez5
-
-Chen Qi (1):
-       protobuf: fix CVE-2024-7254
-
-Fabrice Aeschbacher (1):
-       mosquitto: upgrade 2.0.18 -> 2.0.19
-
-Jiaying Song (1):
-       xmlsec1: Switch SRC_URI to use github release
-
-Khem Raj (2):
-       ndisc: Remove buildpaths from binaries
-       ndisc6: Fix reproducible build
-
-Leon Anavi (1):
-       sip: Upgrade 6.8.3 -> 6.8.6
-
-Libo Chen (1):
-       grpc: Fix CVE-2024-7246
-
-Soumya Sambu (2):
-       python3-werkzeug: upgrade 3.0.3 -> 3.0.6
-       python3-tornado: Upgrade 6.4 -> 6.4.2
-
-Wang Mingyu (2):
-       redis: upgrade 7.2.4 -> 7.2.5
-       mosquitto: upgrade 2.0.19 -> 2.0.20
-
-Yi Zhao (2):
-       hostapd: Security fix for CVE-2023-52160
-       redis: upgrade 7.2.5 -> 7.2.6
-
-Yogita Urade (2):
-       php: upgrade 8.2.20 -> 8.2.24
-       postgresql: upgrade 16.4 -> 16.5
-
-Zhang Peng (6):
-       frr: fix CVE-2024-34088
-       frr: fix CVE-2024-31950
-       frr: fix CVE-2024-31951
-       frr: fix CVE-2024-31948
-       frr: fix CVE-2024-31949
-       libgsf: upgrade 1.14.52 -> 1.14.53
-
-hongxu (1):
-       p7zip: fix CVE-2023-52169 and CVE-2023-52168
-
-  .../libgsf/{libgsf_1.14.52.bb => libgsf_1.14.53.bb} |   4 +-
-  meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.5.bb   | 2 +-
-  meta-networking/recipes-connectivity/mosquitto/files/1571.patch | 22 -
-  meta-networking/recipes-connectivity/mosquitto/files/2894.patch | 25 -
-  .../mosquitto/{mosquitto_2.0.18.bb => mosquitto_2.0.20.bb} |   4 +-
-  meta-networking/recipes-protocols/frr/frr/CVE-2024-31948.patch  | 130 
-+++++
-  meta-networking/recipes-protocols/frr/frr/CVE-2024-31949.patch  | 163 
-++++++
-  meta-networking/recipes-protocols/frr/frr/CVE-2024-31950.patch  | 68 +++
-  meta-networking/recipes-protocols/frr/frr/CVE-2024-31951.patch  | 110 ++++
-  meta-networking/recipes-protocols/frr/frr/CVE-2024-34088.patch  | 83 +++
-  meta-networking/recipes-protocols/frr/frr_9.1.bb                | 5 +
-  ...1-Remove-use-of-variables-indicating-buildtime-informa.patch | 85 +++
-  meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb          | 5 +
-  .../recipes-connectivity/hostapd/hostapd/CVE-2023-52160.patch   | 198 
-+++++++
-  meta-oe/recipes-connectivity/hostapd/hostapd_2.10.bb            | 1 +
-  .../0003-configure.ac-bypass-autoconf-2.69-version-check.patch  | 6 +-
-  .../postgresql/{postgresql_16.4.bb => postgresql_16.5.bb} |   2 +-
-  meta-oe/recipes-devtools/grpc/grpc/CVE-2024-7246.patch          | 420 
-+++++++++++++++
-  meta-oe/recipes-devtools/grpc/grpc_1.60.1.bb                    | 1 +
-  .../php/php/0001-ext-opcache-config.m4-enable-opcache.patch     | 15 +-
-  meta-oe/recipes-devtools/php/{php_8.2.20.bb => php_8.2.24.bb} |   2 +-
-  ...1-Add-recursion-check-when-parsing-unknown-fields-in-J.patch | 794 
-++++++++++++++++++++++++++++
-  meta-oe/recipes-devtools/protobuf/protobuf_4.25.3.bb            | 1 +
-  meta-oe/recipes-devtools/sip/{sip_6.8.3.bb => sip_6.8.6.bb} |   8 +-
-  .../files/0001-Fix-two-buffer-overflow-vulnerabilities.patch    | 455 
-++++++++++++++++
-  meta-oe/recipes-extended/p7zip/p7zip_16.02.bb                   | 1 +
-  .../0001-hiredis-use-default-CC-if-it-is-set.patch}             | 7 +-
-  ...-lua-update-Makefile-to-use-environment-build-setting.patch} | 6 +-
-  .../0003-hack-to-force-use-of-libc-malloc.patch}                | 7 +-
-  .../0004-src-Do-not-reset-FINAL_LIBS.patch}                     | 4 +-
-  ...5-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch} | 6 +-
-  .../0006-Define-correct-gregs-for-RISCV32.patch                 | 4 +-
-  .../redis/{redis-7.2.4 => redis-7.2.6}/init-redis-server |   0
-  .../redis/{redis-7.2.4 => redis-7.2.6}/redis.conf |   0
-  .../redis/{redis-7.2.4 => redis-7.2.6}/redis.service |   0
-  .../recipes-extended/redis/{redis_7.2.4.bb => redis_7.2.6.bb} |  17 +-
-  meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.4.bb                | 2 +-
-  .../python/{python3-tornado_6.4.bb => python3-tornado_6.4.2.bb} |   4 +-
-  .../{python3-werkzeug_3.0.3.bb => python3-werkzeug_3.0.6.bb} |   2 +-
-  39 files changed, 2572 insertions(+), 97 deletions(-)
-  rename meta-gnome/recipes-gnome/libgsf/{libgsf_1.14.52.bb => 
-libgsf_1.14.53.bb} (72%)
-  delete mode 100644 
-meta-networking/recipes-connectivity/mosquitto/files/1571.patch
-  delete mode 100644 
-meta-networking/recipes-connectivity/mosquitto/files/2894.patch
-  rename 
-meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.18.bb => 
-mosquitto_2.0.20.bb} (95%)
-  create mode 100644 
-meta-networking/recipes-protocols/frr/frr/CVE-2024-31948.patch
-  create mode 100644 
-meta-networking/recipes-protocols/frr/frr/CVE-2024-31949.patch
-  create mode 100644 
-meta-networking/recipes-protocols/frr/frr/CVE-2024-31950.patch
-  create mode 100644 
-meta-networking/recipes-protocols/frr/frr/CVE-2024-31951.patch
-  create mode 100644 
-meta-networking/recipes-protocols/frr/frr/CVE-2024-34088.patch
-  create mode 100644 
-meta-networking/recipes-support/ndisc6/ndisc6/0001-Remove-use-of-variables-indicating-buildtime-informa.patch
-  create mode 100644 
-meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2023-52160.patch
-  rename meta-oe/recipes-dbs/postgresql/{postgresql_16.4.bb => 
-postgresql_16.5.bb} (86%)
-  create mode 100644 meta-oe/recipes-devtools/grpc/grpc/CVE-2024-7246.patch
-  rename meta-oe/recipes-devtools/php/{php_8.2.20.bb => php_8.2.24.bb} (99%)
-  create mode 100644 
-meta-oe/recipes-devtools/protobuf/protobuf/0001-Add-recursion-check-when-parsing-unknown-fields-in-J.patch
-  rename meta-oe/recipes-devtools/sip/{sip_6.8.3.bb => sip_6.8.6.bb} (64%)
-  create mode 100644 
-meta-oe/recipes-extended/p7zip/files/0001-Fix-two-buffer-overflow-vulnerabilities.patch
-  rename 
-meta-oe/recipes-extended/redis/{redis-7.2.4/hiredis-use-default-CC-if-it-is-set.patch 
-=> redis-7.2.6/0001-hiredis-use-default-CC-if-it-is-set.patch} (95%)
-  rename 
-meta-oe/recipes-extended/redis/{redis-7.2.4/lua-update-Makefile-to-use-environment-build-setting.patch 
-=> 
-redis-7.2.6/0002-lua-update-Makefile-to-use-environment-build-setting.patch} 
-(97%)
-  rename 
-meta-oe/recipes-extended/redis/{redis-7.2.4/oe-use-libc-malloc.patch => 
-redis-7.2.6/0003-hack-to-force-use-of-libc-malloc.patch} (94%)
-  rename 
-meta-oe/recipes-extended/redis/{redis-7.2.4/0001-src-Do-not-reset-FINAL_LIBS.patch 
-=> redis-7.2.6/0004-src-Do-not-reset-FINAL_LIBS.patch} (92%)
-  rename meta-oe/recipes-extended/redis/{redis-7.2.4/GNU_SOURCE-7.patch 
-=> 
-redis-7.2.6/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch} 
-(88%)
-  rename meta-oe/recipes-extended/redis/{redis-7.2.4 => 
-redis-7.2.6}/0006-Define-correct-gregs-for-RISCV32.patch (97%)
-  rename meta-oe/recipes-extended/redis/{redis-7.2.4 => 
-redis-7.2.6}/init-redis-server (100%)
-  mode change 100755 => 100644
-  rename meta-oe/recipes-extended/redis/{redis-7.2.4 => 
-redis-7.2.6}/redis.conf (100%)
-  rename meta-oe/recipes-extended/redis/{redis-7.2.4 => 
-redis-7.2.6}/redis.service (100%)
-  rename meta-oe/recipes-extended/redis/{redis_7.2.4.bb => 
-redis_7.2.6.bb} (81%)
-  rename meta-python/recipes-devtools/python/{python3-tornado_6.4.bb => 
-python3-tornado_6.4.2.bb} (90%)
-  rename meta-python/recipes-devtools/python/{python3-werkzeug_3.0.3.bb 
-=> python3-werkzeug_3.0.6.bb} (90%)
+diff --git a/meta-networking/recipes-daemons/lldpd/files/CVE-2023-41910.patch b/meta-networking/recipes-daemons/lldpd/files/CVE-2023-41910.patch
+new file mode 100644
+index 000000000..11f6fffd7
+--- /dev/null
++++ b/meta-networking/recipes-daemons/lldpd/files/CVE-2023-41910.patch
+@@ -0,0 +1,26 @@
++From ce7c3f84d80435a1bfad77ab8cb0e9ba401f1eea Mon Sep 17 00:00:00 2001
++From: Vincent Bernat <vincent@bernat.ch>
++Date: Wed, 12 Apr 2023 07:38:31 +0200
++Subject: [PATCH] daemon: fix read overflow when parsing CDP addresses
++
++Upstream-status: Backport [https://github.com/lldpd/lldpd/commit/a9aeabdf879c25c584852a0bb5523837632f099b]
++CVE: CVE-2023-41910
++---
++ src/daemon/protocols/cdp.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/src/daemon/protocols/cdp.c b/src/daemon/protocols/cdp.c
++index 4a14ff0..c3a7c22 100644
++--- a/src/daemon/protocols/cdp.c
+++++ b/src/daemon/protocols/cdp.c
++@@ -483,6 +483,7 @@ cdp_decode(struct lldpd *cfg, char *frame, int s,
++ 					goto malformed;
++ 				}
++ 				PEEK_DISCARD(address_len);
+++				addresses_len -= address_len;
++ 				(void)PEEK_SAVE(pos_next_address);
++ 				/* Next, we go back and try to extract
++ 				   IPv4 address */
++-- 
++2.47.1
++
+diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb
+index cf2b156fe..022bb62dd 100644
+--- a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb
++++ b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb
+@@ -9,6 +9,7 @@ SRC_URI = "\
+     http://media.luffy.cx/files/${BPN}/${BPN}-${PV}.tar.gz \
+     file://lldpd.init.d \
+     file://lldpd.default \
++    file://CVE-2023-41910.patch \
+     "
+ 
+ SRC_URI[md5sum] = "000042dbf5b445f750b5ba01ab25c8ba"
+-- 
+2.47.1
 
 
