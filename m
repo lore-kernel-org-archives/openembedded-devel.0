@@ -2,53 +2,53 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E9460E77194
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB785E77196
 	for <webhook@archiver.kernel.org>; Mon, 30 Dec 2024 07:30:49 +0000 (UTC)
-Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
- by mx.groups.io with SMTP id smtpd.web10.58740.1735543846399626492
+Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
+ by mx.groups.io with SMTP id smtpd.web10.58737.1735543844307724593
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 29 Dec 2024 23:30:49 -0800
+ Sun, 29 Dec 2024 23:30:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=OtP1YP2c;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=msSzga2I;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1735543848; x=1767079848;
+  t=1735543844; x=1767079844;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=UYqJ69wv63ZBlIpV6VJZvRSlD53fGzk1xMEidv401DE=;
-  b=OtP1YP2cjHgnAigPNCkyKRydXU8wn1nWb8Zzjy7BC/Dal2agGpfNIBX+
-   7FeKxp667lxa+NcNIKsAaLAc+algr7X0ugXoaecMsnhB/XOxM/oM+5R2B
-   i6zXJB3ImoI+SFWbW7zQ9NcM8cC/rD9jqDQU/g4yI1fhapPuqwz40fKN5
-   LV8zD6IuG3fWVj0F6+45zLcOEIiY63faCBmmT5n0VO/xX1y+/4CnsQZcs
-   jGOkQdcz6vuQhmF48k6ZCwpjKKDFR9rF9piKcGPQiyUfehmMK2/nXsW3g
-   FaELXQCZw6ujj4E/8LV0cFcOwTR3Dwago8eCB96jFmZ/9U8t/vB0pqyrL
-   g==;
-X-CSE-ConnectionGUID: 4Q1YDFeLSPe5pw5o+V+UWA==
-X-CSE-MsgGUID: auTDA3syRlSZ2E3TbHH+Ew==
-X-IronPort-AV: E=McAfee;i="6700,10204,11299"; a="173278784"
+  bh=tUxXoexf4IG+jkRqUuivUIHpSHvYS7qdA86azuEkZJ0=;
+  b=msSzga2IoMmz7q1qHPQjqQEh9jBnNLTeIiD7372WKeWl+RzJotBvw6X9
+   YlM01590CR4/xKqVR+YAZpVIdu/5HUb+LK5Fjx+0vP+0qnn1lLkg4kRVN
+   nZmZamMbcx28f5hWD9JgZELKsvXLVPnw9+S6nf+ExVSkugVVxhyliyI/1
+   NIKxRrDpNnFkrW9eeinNZGu218knxqNi6N7hrw5xlv8Roew/Ya+KfKr5Y
+   xD8OJk8S/vqTFcikghCLVD+NAyY0zRMH98Zo7I1tse1SWkpXaIJFMiQPO
+   FAetSRYIPCfz7LcoLl5Zvf61o+53Hbqk5/4L+0IdAOkjqReuRVncOrtbg
+   w==;
+X-CSE-ConnectionGUID: 1qg7H9NGT6ONErhAQaPSEA==
+X-CSE-MsgGUID: 1/LcBjOXSMKg4qPoVHJw8g==
+X-IronPort-AV: E=McAfee;i="6700,10204,11299"; a="184471575"
 X-IronPort-AV: E=Sophos;i="6.12,275,1728918000"; 
-   d="scan'208";a="173278784"
-Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
-  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Dec 2024 16:30:47 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id A82D3C2260
-	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Dec 2024 16:30:45 +0900 (JST)
-Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 7B89CBF3D5
-	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Dec 2024 16:30:45 +0900 (JST)
+   d="scan'208";a="184471575"
+Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
+  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Dec 2024 16:30:42 +0900
+Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
+	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 31FC0DBB80
+	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Dec 2024 16:30:40 +0900 (JST)
+Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
+	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 07A9CD753E
+	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Dec 2024 16:30:40 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 01EE370BE2
-	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Dec 2024 16:30:45 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id A004020074EB1
+	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Dec 2024 16:30:39 +0900 (JST)
 Received: from localhost.localdomain.localdomain (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id A1E681A0003;
-	Mon, 30 Dec 2024 15:30:44 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 4AE111A0003;
+	Mon, 30 Dec 2024 15:30:39 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 14/18] python3-pulsectl: upgrade 24.11.0 -> 24.12.0
-Date: Mon, 30 Dec 2024 15:30:32 +0800
-Message-Id: <1735543836-2512-14-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 02/18] doxygen: upgrade 1.12.0 -> 1.13.0
+Date: Mon, 30 Dec 2024 15:30:20 +0800
+Message-Id: <1735543836-2512-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1735543836-2512-1-git-send-email-wangmy@fujitsu.com>
 References: <1735543836-2512-1-git-send-email-wangmy@fujitsu.com>
@@ -56,43 +56,42 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28890.005
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28890.005
-X-TMASE-Result: 10-1.621100-10.000000
-X-TMASE-MatchedRID: pFlEBMmIVU6jz0nOeth/yQPZZctd3P4B1cuIRwt/4MiysPB8dBBorXKn
-	6DBj/gsEIvrftAIhWmIAf/HImzvCGEWNbZfbxvwGOwpfLMeBwRt9LQinZ4QefCP/VFuTOXUTae6
-	hIZpj4MuOhzOa6g8KrZ0ISD95D3EinyrZ4d14iAg2aQOPDA0jmlztFOlTI8zOYIeufjXAF82BvG
-	hZPbGnQHljoDhYudPhOcLZt94MkyIWM+yd3PfXLB0m4Rm5hspVxSSu8i52URmXTt0OuyJi/IIuE
-	VM/dBEMBtjAKW7+qHc=
+X-TMASE-Result: 10-0.085200-10.000000
+X-TMASE-MatchedRID: V7gFd1X8+4Wjz0nOeth/yQPZZctd3P4B1cuIRwt/4MiysPB8dBBorXKn
+	6DBj/gsEIvrftAIhWmLHBvqhRdA8sjcpdZ3fQiLdFEUknJ/kEl5q8/xv2Um1avoLR4+zsDTtB00
+	/kkeBTwAtZ1u2YJ3nkF2P/YSfEjw/lQJ06ZwMaYghRbf+9/E7LQO8+u1Nhks4LwPdT31MsnyY0A
+	A1DqDDGER8s2TkNqCqVXUzueSsIIDyDBYNCJzj6s+YAJ5mo7zlOKgonZY9TFMtLgAQ4uO3AA==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 30 Dec 2024 07:30:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114591
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114581
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...{python3-pulsectl_24.11.0.bb => python3-pulsectl_24.12.0.bb} | 2 +-
+ .../doxygen/{doxygen_1.12.0.bb => doxygen_1.13.0.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pulsectl_24.11.0.bb => python3-pulsectl_24.12.0.bb} (84%)
+ rename meta-oe/recipes-devtools/doxygen/{doxygen_1.12.0.bb => doxygen_1.13.0.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pulsectl_24.11.0.bb b/meta-python/recipes-devtools/python/python3-pulsectl_24.12.0.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-pulsectl_24.11.0.bb
-rename to meta-python/recipes-devtools/python/python3-pulsectl_24.12.0.bb
-index bd0e0b9602..43bdbd34d9 100644
---- a/meta-python/recipes-devtools/python/python3-pulsectl_24.11.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pulsectl_24.12.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/mk-fg/python-pulse-control"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f1d10048469ff90123263eb5e214061d"
+diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.12.0.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.13.0.bb
+similarity index 92%
+rename from meta-oe/recipes-devtools/doxygen/doxygen_1.12.0.bb
+rename to meta-oe/recipes-devtools/doxygen/doxygen_1.13.0.bb
+index 11ea116afc..81cae42fd6 100644
+--- a/meta-oe/recipes-devtools/doxygen/doxygen_1.12.0.bb
++++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.13.0.bb
+@@ -10,7 +10,7 @@ SRC_URI = "\
+     git://github.com/doxygen/doxygen.git;branch=master;protocol=https \
+ "
  
--SRC_URI[sha256sum] = "0ba32745d3f198d5657af19f7ee3eb007af5a86a306ec3cd45af42e767820d0d"
-+SRC_URI[sha256sum] = "288d6715232ac6f3dcdb123fbecaa2c0b9a50ea4087e6e87c3f841ab0a8a07fc"
+-SRCREV = "c73f5d30f9e8b1df5ba15a1d064ff2067cbb8267"
++SRCREV = "3fc9e7f98b8d1156ec627cd3ee6f23984bf4e1b1"
  
- RDEPENDS:${PN} += " \
- 	libpulse \
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.43.0
 
