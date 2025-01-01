@@ -1,115 +1,177 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 38E50E77188
-	for <webhook@archiver.kernel.org>; Tue, 31 Dec 2024 20:29:01 +0000 (UTC)
-Received: from mail-oa1-f50.google.com (mail-oa1-f50.google.com [209.85.160.50])
- by mx.groups.io with SMTP id smtpd.web10.2574.1735676931712104845
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 948E9E7718B
+	for <webhook@archiver.kernel.org>; Wed,  1 Jan 2025 14:13:08 +0000 (UTC)
+Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com [209.85.219.171])
+ by mx.groups.io with SMTP id smtpd.web10.14765.1735740784773855106
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 31 Dec 2024 12:28:51 -0800
+ Wed, 01 Jan 2025 06:13:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=DTAfr+TX;
- spf=pass (domain: gmail.com, ip: 209.85.160.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f50.google.com with SMTP id 586e51a60fabf-29fe7ff65e6so3747294fac.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 31 Dec 2024 12:28:51 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=B5FGy6MY;
+ spf=pass (domain: gmail.com, ip: 209.85.219.171, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f171.google.com with SMTP id 3f1490d57ef6-e398484b60bso12557067276.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Jan 2025 06:13:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1735676931; x=1736281731; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=pnz4NO9TtBut9luovNwlsi1I7TDMhubAF2k7i2+I10o=;
-        b=DTAfr+TX114nBHcwYAyN86Er42C2hAgxhGhSDLdnrbQEwd5PjwiRa7wSQnCBmdxrNu
-         vFtHsevRliZn4rl+Dof9uQg1J92xfvhptc6e4hOb6nhpAqhr8vq12wwjPI9DgFuK4fAc
-         R9tXRaTQA6G0vtAhr30BfqSePIAE4orhG+xuw5sEfz/cWaVDX41iDYutejHUVGWkqb+n
-         9juxeiYdKG0r/APemwBCM+WfKy2U8vVVIbxMjalsLhgMIlnpt2f4v43ysaFV0Jo/oIxw
-         zAa6Fql5zxVOx+FiN1HNJVvnGIUHiyE+nSAtuWDoe0W/bt3JYtvbk+g64NnLvBSd6s0x
-         MBcA==
+        d=gmail.com; s=20230601; t=1735740784; x=1736345584; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=RnRADRLuqh8HuqY6VSPQ+PxaTnS+Yu76RRvdxm/psOU=;
+        b=B5FGy6MYHgXEaad2cBypKcu4MFntBqWLVuYeG5uAu8bYPXVoSZZ43KC4JCPU4m/WSI
+         fIAAEgy12TLIvvxyzj9igH03VEmZZY+IpvXYEa8azUNbmENjfzlqbMPhl7YaMslf7W7f
+         pOPF6apNGHEyLh+5uGO7bDH50bjuLnQW5brBFj90LB76wsxlmMFOO6yr71khRRo+OzSg
+         7kGMwYbqTeMBRnSJe8UXIcqh3PTcKN6QJkXKSffUZWBRDJMochbrJ7zfd82RwkhcaLtY
+         XmuM60nDfSA2R7r+2eVphr7nhIc7uPvcMsr7yAW0qYKyW8O2PsvsLO8eaW//1+fQ8Uwa
+         kTkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1735676931; x=1736281731;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=pnz4NO9TtBut9luovNwlsi1I7TDMhubAF2k7i2+I10o=;
-        b=BbR74hi1PtTQSS+6aw216O///DEEBdtOaKRjrbsuPMWbJnmLH265z//8wSYNtgY9hD
-         16HDUgLTglWpSuXLmBsYOmSmasNFLSFLm1ni2eyTz2N2Dl19Lq5oQTHRzDrBYjuFFASF
-         1NLMpWP/m0/VbHThqhUCOkCI1JTt6apPDXu1rdj0qd2iGvGMeVuD1xkjODZr7yScocW+
-         w1avgVqiYfo0PYaWodmOBxYopjwxjksRv9HqnLChg+4osu40ic6vuC43c5cIdIgsYUh9
-         sbkRWOYemvcEB8zBsEaQu9ZP+JWNGOb8nbu+AxTAnVHt/B5EMwUr6Vt4HAli0H7wgvMS
-         /oHg==
-X-Gm-Message-State: AOJu0Yyll89VdCdTaHaWECc+PSqOpxRmvGfd0A7knd+bX0Hzju4nypVE
-	iVLY4jnlwr6v3zcAeS/dmWggBRiFGeBL6QCI/nbpc7q9ZNAAXo77x4LjcqYXJzN9XmXdqvUf930
-	DZ7Kg7r3YKH8tIjmAcx2ER+odb2URtib3
-X-Gm-Gg: ASbGnctQYMiA55k8gJP7CKNENKUHrd6xrEmVqDrYdbh9+RJEW6nfZyNMvqB7mO5/Gga
-	uqHJ2wbJBEqf9u2DtyR85oDDSK1MVGw5lVgBE
-X-Google-Smtp-Source: AGHT+IHJ2+Ni4qroUlUFYScAP+NHfoLbF8M9J5NvYehQhyDBVcJbiVdFX6zOOMVkQuLp90MluGnFAqq7lttL/bULUII=
-X-Received: by 2002:a05:6871:a113:b0:29e:76d1:db3b with SMTP id
- 586e51a60fabf-2a7fb002220mr25215928fac.5.1735676930972; Tue, 31 Dec 2024
- 12:28:50 -0800 (PST)
+        d=1e100.net; s=20230601; t=1735740784; x=1736345584;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=RnRADRLuqh8HuqY6VSPQ+PxaTnS+Yu76RRvdxm/psOU=;
+        b=JeZbrRQqg42863sHrRdMicK/zVbF7jkhE1MWLTaZ2Bu5T9XPIRRo7fih/NoWLIh1OW
+         XBB919o4v4UoMcykP7knTqHotxNFvPrikYz+LPGGoM8VBTPAMw1rvKwvv8Mv1eEWMlBz
+         A1R5jk2uCTIDVYlKTczLX07A5x1YGcLuVeJwZhCRb5+Alqa3niqYrjspdx8vls8zK38r
+         BnNXrcHo1A2mdem74KX7k7RPWhghkgn/klSwxJm6Pp2X7E1vFAjk3svwaSVKnPfG0o/L
+         NPWx5JykFOC5YS7IcSOampE4nsdjcl0dt2AEopWDApKyy53NPN70ZA1PGjFZIFq1+hLP
+         saYw==
+X-Gm-Message-State: AOJu0YwnzgRmpODQVPhJvQ4pG4DcnO17lHP9LvHjGI1Z9zmnNsMlziIk
+	912u37uWVCvGXllvfJGCAS2wMYyIIJKIpydf35YDePUzHuEk++No7eDJiQmI
+X-Gm-Gg: ASbGncsv3QLBxf/dfuOP3OXkY/RaZ0CT8f6cXxDv1O+Xqu80BOeAA130w670qdZpdG+
+	ved8hABC4YHBicn8lgx2YMeypR5MuxaaQMp7kckUPWih1Oc6rH7Zen6auaUJm+M+mwfHq8OYSb1
+	mS8GsSmB8RWzaDoCbQtQwn/2BfRHRZStA12Mf0dsNu6MwderomlsVgNBnMDhwhZr7VSVIbQVFTA
+	R9sTmaLXMBUac0AiXXRUb07YSer/4bIKCJzgyXrVwWMvOMT7CeQDZDdrtpy6Wi0AjjuS+s=
+X-Google-Smtp-Source: AGHT+IH3tgpf/W/ViCYRCgCp2ubcNOhquidC8npdQOdiJaEwbjoLr4RAS83zbiTaQrEJrEwT92WrLw==
+X-Received: by 2002:a05:690c:74c3:b0:6ef:738a:94b3 with SMTP id 00721157ae682-6f3f80d16c5mr250849877b3.4.1735740783801;
+        Wed, 01 Jan 2025 06:13:03 -0800 (PST)
+Received: from keaua.attlocal.net ([2600:1700:45dd:7000:96f5:c643:ece4:950a])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6f3e77ed577sm67775297b3.76.2025.01.01.06.13.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 01 Jan 2025 06:13:03 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-multimedia][kirkstone][PATCH
+Date: Wed,  1 Jan 2025 09:13:02 -0500
+Message-ID: <20250101141302.3853057-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <1735543836-2512-1-git-send-email-wangmy@fujitsu.com> <1735543836-2512-8-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1735543836-2512-8-git-send-email-wangmy@fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 31 Dec 2024 12:28:25 -0800
-Message-ID: <CAMKF1srEnG33FCXXCQDnBv14trH2Mf6smdg7rqXjzYa7AXOTdg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH 08/18] pocketpy: upgrade 2.0.3 -> 2.0.4
-To: wangmy@fujitsu.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 31 Dec 2024 20:29:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114608
+ <openembedded-devel@lists.openembedded.org>; Wed, 01 Jan 2025 14:13:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114609
 
-this fails to link with lld linker see
+From: Khem Raj <raj.khem@gmail.com>
 
-https://errors.yoctoproject.org/Errors/Details/839120/
+Because they get renamed, it is better to ignore them and let a
+dependency build them
 
-On Sun, Dec 29, 2024 at 11:30=E2=80=AFPM wangmy via lists.openembedded.org
-<wangmy=3Dfujitsu.com@lists.openembedded.org> wrote:
->
-> From: Wang Mingyu <wangmy@fujitsu.com>
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  .../pocketpy/{pocketpy_2.0.3.bb =3D> pocketpy_2.0.4.bb}           | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-oe/recipes-devtools/pocketpy/{pocketpy_2.0.3.bb =3D> pocketp=
-y_2.0.4.bb} (95%)
->
-> diff --git a/meta-oe/recipes-devtools/pocketpy/pocketpy_2.0.3.bb b/meta-o=
-e/recipes-devtools/pocketpy/pocketpy_2.0.4.bb
-> similarity index 95%
-> rename from meta-oe/recipes-devtools/pocketpy/pocketpy_2.0.3.bb
-> rename to meta-oe/recipes-devtools/pocketpy/pocketpy_2.0.4.bb
-> index 2c0ecf0e60..3544247b8c 100644
-> --- a/meta-oe/recipes-devtools/pocketpy/pocketpy_2.0.3.bb
-> +++ b/meta-oe/recipes-devtools/pocketpy/pocketpy_2.0.4.bb
-> @@ -14,7 +14,7 @@ LICENSE =3D "MIT"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D8cdfa87bc5e09bc07f8cf64135026=
-d91"
->
->  SRC_URI =3D "git://github.com/pocketpy/pocketpy.git;protocol=3Dhttps;bra=
-nch=3Dmain"
-> -SRCREV =3D "3be557f95dbc706716b9a9947e41c1f2db92e251"
-> +SRCREV =3D "416ee069fdd275b141e3b292fcfe913c8abfa194"
->
->  S =3D "${WORKDIR}/git"
->
-> --
-> 2.43.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#114587): https://lists.openembedded.org/g/openembedde=
-d-devel/message/114587
-> Mute This Topic: https://lists.openembedded.org/mt/110339904/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Fixes errors like
+ERROR: packagegroup-meta-multimedia-1.0-r0 do_package_write_ipk: An allarch packagegroup shouldn't depend on packages which are dynamically renamed (gssdp to libgssdp-1.2-0)
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit eafecde2aedae38879b4c45dd213ff9483f209ad)
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../packagegroup-meta-multimedia.bb           | 34 ++-----------------
+ 1 file changed, 2 insertions(+), 32 deletions(-)
+
+diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+index b0fce73b53..f4f5578bfb 100644
+--- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
++++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+@@ -25,67 +25,45 @@ RDEPENDS:packagegroup-meta-multimedia = "\
+     bluealsa \
+     caps \
+     cdparanoia \
+-    dcadec \
+     dleyna-connector-dbus \
+-    dleyna-core \
+     dleyna-renderer \
+     dleyna-server \
+     dvb-apps \
+-    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "faac fdk-aac mpd", "", d)} \
++    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "faac mpd", "", d)} \
+     gerbera \
+-    libao \
+     libavc1394 \
+-    libdc1394 \
+-    libdvbpsi \
+-    libdvdnav \
+     libiec61883 \
+-    fluidsynth \
+     libmusicbrainz \
+-    libmpdclient \
+     mpc \
+     ncmpc \
+-    libmpd \
+-    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "opencore-amr vo-aacenc vo-amrwbenc", "", d)} \
+-    gst-shark \
++    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "opencore-amr", "", d)} \
+     gstd \
+     rtmpdump \
+     bigbuckbunny-1080p \
+     bigbuckbunny-480p \
+     bigbuckbunny-720p \
+     tearsofsteel-1080p \
+-    schroedinger \
+     pipewire \
+     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", bb.utils.contains("DISTRO_FEATURES", "x11", "projucer", "", d), "", d)} \
+     libcamera \
+-    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "libde265 openh264", "", d)} \
+     vorbis-tools \
+-    libdvbcsa \
+     libopenmpt \
+-    libuvc \
+     mimic \
+     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "minidlna", "", d)} \
+     mycroft \
+     openal-soft \
+     opusfile \
+     opus-tools \
+-    libdvdcss \
+     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", bb.utils.contains("DISTRO_FEATURES", "x11", "vlc", "", d), "", d)} \
+     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "sox streamripper", "", d)} \
+     tinyalsa \
+-    tremor \
+-    webrtc-audio-processing \
+     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", bb.utils.contains_any("TRANSLATED_TARGET_ARCH", "i586 i686 x86-64", "x265", "", d), "", d)} \
+ "
+ RDEPENDS:packagegroup-meta-multimedia:remove:libc-musl = "projucer"
+-RDEPENDS:packagegroup-meta-multimedia:remove:powerpc64le = "openh264"
+ 
+ RDEPENDS:packagegroup-meta-multimedia-connectivity = "\
+-    gssdp \
+-    gupnp-av \
+     gupnp-dlna \
+-    gupnp-igd \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gupnp-tools", "", d)} \
+-    gupnp \
+     libupnp \
+     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "rygel", "", d)} \
+ "
+@@ -94,17 +72,9 @@ RDEPENDS:packagegroup-meta-multimedia-dvb = "\
+     tvheadend \
+ "
+ 
+-RDEPENDS:packagegroup-meta-multimedia-mkv = "\
+-    libebml \
+-    libmatroska \
+-"
+-
+ RDEPENDS:packagegroup-meta-multimedia-support = "\
+     crossguid \
+-    ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "libmediaart-2.0", "", d)} \
+     gst-instruments \
+-    libsrtp \
+-    srt \
+ "
+ # devel headers/libraries only packages
+ # libsquish
+-- 
+2.43.0
+
 
