@@ -2,105 +2,103 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ADC35E77199
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BEAC1E7719D
 	for <webhook@archiver.kernel.org>; Sun,  5 Jan 2025 23:24:06 +0000 (UTC)
-Received: from mail-yb1-f175.google.com (mail-yb1-f175.google.com [209.85.219.175])
- by mx.groups.io with SMTP id smtpd.web10.48446.1736119443920388930
+Received: from mail-yb1-f174.google.com (mail-yb1-f174.google.com [209.85.219.174])
+ by mx.groups.io with SMTP id smtpd.web10.48443.1736119442509255158
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Jan 2025 15:24:04 -0800
+ Sun, 05 Jan 2025 15:24:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PZ8/RhgS;
- spf=pass (domain: gmail.com, ip: 209.85.219.175, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f175.google.com with SMTP id 3f1490d57ef6-e53c9035003so16428123276.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Jan 2025 15:24:03 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IlUpInu2;
+ spf=pass (domain: gmail.com, ip: 209.85.219.174, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f174.google.com with SMTP id 3f1490d57ef6-e3983426f80so18816076276.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Jan 2025 15:24:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1736119443; x=1736724243; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1736119441; x=1736724241; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=6YkqacsNqjRS0q7KICUF23ed8wFeW2WwFv20k4DhJBc=;
-        b=PZ8/RhgSiZMayv90WnYtvMn4zwEldEn2H9k2IGGhsepuB8B5NT5Yo9KzUhJNNdSpSZ
-         KHKXFrYPvxXQwKcEFglqSQLrUpcFYViwbrBFIKoiIAqNKkQmItugLx2/Zs+KOEGUP274
-         YuBAXI7aF4F/oe0JfR6NwOsoz5Pd+Dmbz5pLkuSFezxJ9CLgNfEN1PgT9L/uXkIgw6tz
-         k4iYMXETP2c9fQ2yBoEpmIHSp9sV4QwVucygUQacd1uCxx1k79HqkAFqIbrFuUlf/C49
-         EvzKKtxtcndougwNTRs6awyt1mnFbi/hqGtjLxrHJjCcIqzwXhOGN2aruiRcqb+Pi+x6
-         062w==
+        bh=8HowMzID34hgb1UCyDHViLl3S26kmtrY5xwfXP9j8EM=;
+        b=IlUpInu2Qss/5FWL5K1yuNe8yWTHq4JVgwUdsgfx05nz93sT+2TIp+pd/5rAy8Hxct
+         ShbbZiku0Z0ZtJIraY1/tZZs5cOqmNwds1upDZhkCfgEfI+A8NvMggi0skejHxc/t8Sc
+         HesBlBFxnu99q5I+Ktzv8cTOyimtJdq5yzO64ovnQXw/z8KBWS1j1F8yk9k1PYStckc1
+         Uc/4mQiVscuF0udjys1lxfSBcKl8ziYSdvmJnsgMO4d4UtdWmaDrXogVT63CSCHZMC+z
+         NfrNApFNC6i6vwzNAHMSHUKU/InrimR/8Ju24+1+uGcvuA7KAg3N6CnLVyDwsam8fEi3
+         u4Ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736119443; x=1736724243;
+        d=1e100.net; s=20230601; t=1736119441; x=1736724241;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=6YkqacsNqjRS0q7KICUF23ed8wFeW2WwFv20k4DhJBc=;
-        b=H47Dny3Ae4lGx/+fZtj/hRxs/skthmzZ/WD8UtAefhHx8r+dZ4+AieIymnEoPxVJwM
-         WFKodqgeZXUeTtCnAMxKy3L2icwiuXF4bg/58EksalALQw1TppPhD5O0HkJXRD+bLG5j
-         6x1tzQKKSZX15KyqfJVKy61+YNRU7PAFxgtGtnExSbDYGJJpUuCHNFsrhzyGkPwjzjw+
-         OwGjFLD5fJzP0LbGufWgmsNvO8G13zvD+DiKi5DI64cRlXegDL6+M/+sG4Qfk81v+Gbm
-         TovUh9HQrMsV7L9S29KjKC/mD4BWIKL6jbv3svZv+L38TEReeZnO+udIxYIZkTbTV1JW
-         dAxw==
-X-Gm-Message-State: AOJu0YyMkWr/T+ZLUWd/5aZOXzyjrYQyZpRqtmDj1Vrx4LgpIz8XYulX
-	SGsSKWkA064x0YDyHVZflBltwMU8AW0CWHNG4urw5PBA26JUVohXV8GGpwMC
-X-Gm-Gg: ASbGnctn9b5RKcvvlUtAm7EeFfdenEm+xd1hwKFHvSWyxzSJV39rQ5PKifvzkpqiVsX
-	YUZUTyJG8e2qBEyQo/boBXn05og88481dujmzUzbGW0IsA5RQnHdpsP/DvnUL4THg5GI3T+Zh0T
-	8dGhvbPmBjLpArXZ4FWgBHAs8CcqNLpUliCTSQ10+fsB+1+jz1m6uLgkAP7ZMfAKxd2bcnfrWuH
-	9VCfSvSuGNTe6YwXYOVuhiBT79i36TERY61tnPzYqPDZmWKULqk9ugSnRp7fuOI6fXrVw==
-X-Google-Smtp-Source: AGHT+IHCh94VmsfDbls9Ok3scY54hxhlYPnde0j7+ctkNGwoiGIb48Gx8OZikKehAqbAY7PKj+AuzA==
-X-Received: by 2002:a25:5382:0:b0:e48:7efe:57a5 with SMTP id 3f1490d57ef6-e538c40be00mr31426733276.46.1736119442981;
-        Sun, 05 Jan 2025 15:24:02 -0800 (PST)
+        bh=8HowMzID34hgb1UCyDHViLl3S26kmtrY5xwfXP9j8EM=;
+        b=ZmmUeAaxHyJDLdSifOOal6qhaCdd1D8T1VB5bpb8JFjWIL2R3a9pvXs82jf4rc3w97
+         kuFhODha4JipQc9fdZj6tuYsTA5upYRso4tZNGynzjX5hbAYdddzjFM8VNLiBdGulo/M
+         Bm+iSW8tGO1DqoTKVKorVA9RUGeUGXqPpsjuyPJ5FPkEU4M8P9pqiF8sR1VC2+7vQHMU
+         AIO3xnzIT1y6oIw8d+R7vph1NwW0xnfnyoLKWRrEuH92+i2g/p2iM4YGT1M1CuNdvLKc
+         1mRBUAjQaWaOmNFEYHBUsUeliwaiQZU2u0iENklQilwEElr8DKMHTvbycG02x/cBj8tc
+         CcOw==
+X-Gm-Message-State: AOJu0Yzo5M+h8MowdIVwPHN6oSwhIcwWAUpYERz+ZY5fAmH8JPu3VAu2
+	8w5xW1YXcdeM66JPYofdvdTakOY6Za7lfgVe+SjXknw4ItTjnt6oIqS+FMcf
+X-Gm-Gg: ASbGnctc8+NEVFvUxXVZKqLRQ1GUsG1YmA6+lMVjQd1nCwpP3+IFceur/yiQWjbHw27
+	QKxfzjjS6bjrIg5UB346H4SFcOgYoGnbqaTkiHPXuOuSgr+yxioOhbgeDTOnUgn02h5Y7M/Skj7
+	/NK8mDyRJcBy/FdhISAF0qJL4XepY+ruWrNALJ87BXFKEjYlfVZEVUWimQ5uzCc3Ctex9eiCgnm
+	2NSEt4pwICAOigHJDKBkQ9WPw80eSbZ0HrlH/KN2SNlndlQkPWgam9LFwm/8S5rYJEsMg==
+X-Google-Smtp-Source: AGHT+IF4OnT/OggnQ7j8XwbONqSity1Z1ZCN2vFuhoa1ZiHkkVIUCSBqYiolui75UVaAy4B0vi90uw==
+X-Received: by 2002:a05:6902:11cf:b0:e46:e18:9e83 with SMTP id 3f1490d57ef6-e538c34f3ccmr39509773276.39.1736119441507;
+        Sun, 05 Jan 2025 15:24:01 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:45dd:7000:fdb3:610:ea25:f87f])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e537cc1e91dsm9043004276.19.2025.01.05.15.24.02
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e537cc1e91dsm9043004276.19.2025.01.05.15.24.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Jan 2025 15:24:02 -0800 (PST)
+        Sun, 05 Jan 2025 15:24:01 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>,
+Cc: =?UTF-8?q?Ghislain=20Mang=C3=A9?= <ghislain.mange@smile.fr>,
+	Yoann Congal <yoann.congal@smile.fr>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][styhead][PATCH 07/24] dash: set CVE_PRODUCT
-Date: Sun,  5 Jan 2025 18:23:40 -0500
-Message-ID: <20250105232358.1502946-7-akuster808@gmail.com>
+Subject: [meta-oe][styhead][PATCH 05/24] wireshark: use inherit_defer for conditional cases
+Date: Sun,  5 Jan 2025 18:23:38 -0500
+Message-ID: <20250105232358.1502946-5-akuster808@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250105232358.1502946-1-akuster808@gmail.com>
 References: <20250105232358.1502946-1-akuster808@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 05 Jan 2025 23:24:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114636
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114635
 
-From: Peter Marko <peter.marko@siemens.com>
+From: Ghislain Mangé <ghislain.mange@smile.fr>
 
-This removes false positive CVE-2024-21485 from cve reports.
+Conditionnal inherit may be missed when PACKAGECONFIG qt5 is activated
+after this inherit, eg in .bbappend. see patch [0]
 
-$ sqlite3 nvdcve_2-2.db
-sqlite> select * from products where product = 'dash';
-CVE-2009-0854|dash|dash|0.5.4|=||
-CVE-2024-21485|plotly|dash|||2.13.0|<
-CVE-2024-21485|plotly|dash|2.14.0|>=|2.15.0|<
+[0]: https://lists.openembedded.org/g/bitbake-devel/message/16815
 
-Our dash:dash did not reach major version 1 yet.
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
+Signed-off-by: Ghislain Mangé <ghislain.mange@smile.fr>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e1427013e01df44b9275908f7605e8e25fc3fd83)
+(cherry picked from commit 97318e27ebf9f528acf77fb0759c332bd83adb4b)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-shells/dash/dash_0.5.12.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-shells/dash/dash_0.5.12.bb b/meta-oe/recipes-shells/dash/dash_0.5.12.bb
-index 947ef702d7..1bf3625760 100644
---- a/meta-oe/recipes-shells/dash/dash_0.5.12.bb
-+++ b/meta-oe/recipes-shells/dash/dash_0.5.12.bb
-@@ -10,6 +10,8 @@ inherit autotools update-alternatives
- SRC_URI = "http://gondor.apana.org.au/~herbert/${BPN}/files/${BP}.tar.gz"
- SRC_URI[sha256sum] = "6a474ac46e8b0b32916c4c60df694c82058d3297d8b385b74508030ca4a8f28a"
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb b/meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb
+index 3fa293d0cd..9c93fd026c 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb
+@@ -48,7 +48,7 @@ PACKAGECONFIG[nghttp2] = "-DENABLE_NGHTTP2=ON,-DENABLE_NGHTTP2=OFF, nghttp2"
+ # these next two options require addional layers
+ PACKAGECONFIG[qt5] = "-DENABLE_QT5=ON -DBUILD_wireshark=ON, -DENABLE_QT5=OFF -DBUILD_wireshark=OFF, qttools-native qtmultimedia qtsvg"
  
-+CVE_PRODUCT = "dash:dash"
-+
- EXTRA_OECONF += "--bindir=${base_bindir}"
+-inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
++inherit_defer ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
  
- ALTERNATIVE:${PN} = "sh"
+ EXTRA_OECMAKE += "-DENABLE_NETLINK=ON \
+                   -DBUILD_mmdbresolve=OFF \
 -- 
 2.43.0
 
