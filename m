@@ -2,61 +2,61 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B0580E7719C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ADC35E77199
 	for <webhook@archiver.kernel.org>; Sun,  5 Jan 2025 23:24:06 +0000 (UTC)
-Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com [209.85.219.177])
- by mx.groups.io with SMTP id smtpd.web10.48447.1736119444572241927
+Received: from mail-yb1-f175.google.com (mail-yb1-f175.google.com [209.85.219.175])
+ by mx.groups.io with SMTP id smtpd.web10.48446.1736119443920388930
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 05 Jan 2025 15:24:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mAEjkgMI;
- spf=pass (domain: gmail.com, ip: 209.85.219.177, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f177.google.com with SMTP id 3f1490d57ef6-e3a0acba5feso15524882276.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Jan 2025 15:24:04 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PZ8/RhgS;
+ spf=pass (domain: gmail.com, ip: 209.85.219.175, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f175.google.com with SMTP id 3f1490d57ef6-e53c9035003so16428123276.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Jan 2025 15:24:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1736119443; x=1736724243; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=RV1omrnScDZSmkDW4SUE3yPGyKq7LEzn1FA+LVsp7RA=;
-        b=mAEjkgMInJHPb8NshNku0XMf69UX3x+fDhiaX+ZQA+iMehT53poOfvP6JTKUnoStwN
-         IaiYoQN8FIiDbEFsKdeBH4c9rCkhPtJ3yq+rnTiLJry0KKoVZHLGvUO7B3lYi+S6MFdE
-         prhPrthd++EgkwH5AOV002jUo6O9zC14Cea10S4QMDpBZz86hsbTKUSZh1cdcT3YWdeg
-         plnm/RMo0yCuRFiewEX3T4Guxfu/LHL8mP/d5tMvis9qroArQDIThOjI9V7VeEQxR4rC
-         AhbN5R8OSdMpIzDC3Ii8y/Sxunt1mPK5mLC+1amngjOQf0W8SH5K77Xq3kV0Buh0Ztl+
-         8uEg==
+        bh=6YkqacsNqjRS0q7KICUF23ed8wFeW2WwFv20k4DhJBc=;
+        b=PZ8/RhgSiZMayv90WnYtvMn4zwEldEn2H9k2IGGhsepuB8B5NT5Yo9KzUhJNNdSpSZ
+         KHKXFrYPvxXQwKcEFglqSQLrUpcFYViwbrBFIKoiIAqNKkQmItugLx2/Zs+KOEGUP274
+         YuBAXI7aF4F/oe0JfR6NwOsoz5Pd+Dmbz5pLkuSFezxJ9CLgNfEN1PgT9L/uXkIgw6tz
+         k4iYMXETP2c9fQ2yBoEpmIHSp9sV4QwVucygUQacd1uCxx1k79HqkAFqIbrFuUlf/C49
+         EvzKKtxtcndougwNTRs6awyt1mnFbi/hqGtjLxrHJjCcIqzwXhOGN2aruiRcqb+Pi+x6
+         062w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1736119443; x=1736724243;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=RV1omrnScDZSmkDW4SUE3yPGyKq7LEzn1FA+LVsp7RA=;
-        b=EcxrG91aIEsvyB47CwK/CpoXLmf0b//RTaRUE9dMQJtO84aOV00WtcvqYGq0JwZjgv
-         uITIbXE2PSHkIj8S4ySKZyfJ+INQFlUVp4OISYthvcTXHIW6L/xT6eh1DMagU2sbIVC0
-         fEXjokgSRDNqwuspBjLf+HJFMDl1ObVImULexgdXH8Sv9FZGyBn5Dr7xll5oF4o9Hpq/
-         +OeWAd0ohraAJ+ENCmibwGEaXCMU1rl6cWgECEzL992k5RDSUEScbCiy9ktcucJIKw2k
-         PUBwPfmuF25o7I0T6f2ecG50AmWoDjBmJCWIv6Yx5XoNo6ptPNAf8wh6z1vPTt9V3euX
-         0tJg==
-X-Gm-Message-State: AOJu0Yy5I2OrkuDGLiKfbvqEyI1CQm4zvaDCxxEJvue1+zARwL1f9RGQ
-	jnvp467CVaNOrQo6eW9qMl3Te5F1hwzq8uzoUnd7nfTSxmJRLdIiw+yU1rCL
-X-Gm-Gg: ASbGncsa51AIqZxU04u1O9XMuCNSwZ8o+IWcZ18ge0ZBZjQssUk8+L7mrtGl0Ud5N6P
-	yhV0BTvWYJKSWY1aOD+an3LcB93Sfuoe3i94Gd1KB0uCV02EgZdzVJSQ7V9Btfyn82eJeLv4Pws
-	XpbDAdyCk2LK86Eh7BNlUC6NJwxawJhe2M8hmb/WDZY2LzKQBlDWFmLJVzPuOb9kFoHa3wWeoit
-	xoztEEnVA4k2CYCdB4nhj/LkSOn8C/Pezj0YVozC+6pnnfYv7vP7vM2Bdb1JwyCTqZt+A==
-X-Google-Smtp-Source: AGHT+IGDmfig6IX8cud7VqcZfoaqCsujSUUCnSiYQgpH296ENIiwO1bl/CRrClogIC3w2fdvsko7jw==
-X-Received: by 2002:a25:aa6d:0:b0:e54:9a72:9a02 with SMTP id 3f1490d57ef6-e549a729bddmr4556156276.24.1736119443595;
-        Sun, 05 Jan 2025 15:24:03 -0800 (PST)
+        bh=6YkqacsNqjRS0q7KICUF23ed8wFeW2WwFv20k4DhJBc=;
+        b=H47Dny3Ae4lGx/+fZtj/hRxs/skthmzZ/WD8UtAefhHx8r+dZ4+AieIymnEoPxVJwM
+         WFKodqgeZXUeTtCnAMxKy3L2icwiuXF4bg/58EksalALQw1TppPhD5O0HkJXRD+bLG5j
+         6x1tzQKKSZX15KyqfJVKy61+YNRU7PAFxgtGtnExSbDYGJJpUuCHNFsrhzyGkPwjzjw+
+         OwGjFLD5fJzP0LbGufWgmsNvO8G13zvD+DiKi5DI64cRlXegDL6+M/+sG4Qfk81v+Gbm
+         TovUh9HQrMsV7L9S29KjKC/mD4BWIKL6jbv3svZv+L38TEReeZnO+udIxYIZkTbTV1JW
+         dAxw==
+X-Gm-Message-State: AOJu0YyMkWr/T+ZLUWd/5aZOXzyjrYQyZpRqtmDj1Vrx4LgpIz8XYulX
+	SGsSKWkA064x0YDyHVZflBltwMU8AW0CWHNG4urw5PBA26JUVohXV8GGpwMC
+X-Gm-Gg: ASbGnctn9b5RKcvvlUtAm7EeFfdenEm+xd1hwKFHvSWyxzSJV39rQ5PKifvzkpqiVsX
+	YUZUTyJG8e2qBEyQo/boBXn05og88481dujmzUzbGW0IsA5RQnHdpsP/DvnUL4THg5GI3T+Zh0T
+	8dGhvbPmBjLpArXZ4FWgBHAs8CcqNLpUliCTSQ10+fsB+1+jz1m6uLgkAP7ZMfAKxd2bcnfrWuH
+	9VCfSvSuGNTe6YwXYOVuhiBT79i36TERY61tnPzYqPDZmWKULqk9ugSnRp7fuOI6fXrVw==
+X-Google-Smtp-Source: AGHT+IHCh94VmsfDbls9Ok3scY54hxhlYPnde0j7+ctkNGwoiGIb48Gx8OZikKehAqbAY7PKj+AuzA==
+X-Received: by 2002:a25:5382:0:b0:e48:7efe:57a5 with SMTP id 3f1490d57ef6-e538c40be00mr31426733276.46.1736119442981;
+        Sun, 05 Jan 2025 15:24:02 -0800 (PST)
 Received: from keaua.attlocal.net ([2600:1700:45dd:7000:fdb3:610:ea25:f87f])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e537cc1e91dsm9043004276.19.2025.01.05.15.24.03
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e537cc1e91dsm9043004276.19.2025.01.05.15.24.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Jan 2025 15:24:03 -0800 (PST)
+        Sun, 05 Jan 2025 15:24:02 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][styhead][PATCH 08/24] proftpd: set status of CVE-2001-0027
-Date: Sun,  5 Jan 2025 18:23:41 -0500
-Message-ID: <20250105232358.1502946-8-akuster808@gmail.com>
+Subject: [meta-oe][styhead][PATCH 07/24] dash: set CVE_PRODUCT
+Date: Sun,  5 Jan 2025 18:23:40 -0500
+Message-ID: <20250105232358.1502946-7-akuster808@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250105232358.1502946-1-akuster808@gmail.com>
 References: <20250105232358.1502946-1-akuster808@gmail.com>
@@ -66,28 +66,41 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 05 Jan 2025 23:24:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114637
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114636
 
 From: Peter Marko <peter.marko@siemens.com>
 
-This ancient CVE [1] is unversioned ("*") in NVD DB.
-"mod_sqlpw module in ProFTPD does not reset a cached password..."
+This removes false positive CVE-2024-21485 from cve reports.
 
-Looking at history and changelog, the module was removed [2] around
-the time when this CVE was published, likely as reaction to this CVE.
-"mod_sqlpw.c, mod_mysql.c and mod_pgsql.c have been REMOVED from the
-distribution. They are currently unmaintained and have numerous bugs."
+$ sqlite3 nvdcve_2-2.db
+sqlite> select * from products where product = 'dash';
+CVE-2009-0854|dash|dash|0.5.4|=||
+CVE-2024-21485|plotly|dash|||2.13.0|<
+CVE-2024-21485|plotly|dash|2.14.0|>=|2.15.0|<
 
-Note: It was later re-introduced as mod_sql when it got fixed under
-new maintainer.
-
-[1] https://nvd.nist.gov/vuln/detail/CVE-2001-0027
-[2] https://github.com/proftpd/proftpd/blob/v1.3.8b/NEWS#L3362
+Our dash:dash did not reach major version 1 yet.
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 03a1b56bc7ce88a3b0ad6790606b0498899cc1e3)
+(cherry picked from commit e1427013e01df44b9275908f7605e8e25fc3fd83)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-oe/recipes-shells/dash/dash_0.5.12.bb | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/meta-oe/recipes-shells/dash/dash_0.5.12.bb b/meta-oe/recipes-shells/dash/dash_0.5.12.bb
+index 947ef702d7..1bf3625760 100644
+--- a/meta-oe/recipes-shells/dash/dash_0.5.12.bb
++++ b/meta-oe/recipes-shells/dash/dash_0.5.12.bb
+@@ -10,6 +10,8 @@ inherit autotools update-alternatives
+ SRC_URI = "http://gondor.apana.org.au/~herbert/${BPN}/files/${BP}.tar.gz"
+ SRC_URI[sha256sum] = "6a474ac46e8b0b32916c4c60df694c82058d3297d8b385b74508030ca4a8f28a"
+ 
++CVE_PRODUCT = "dash:dash"
++
+ EXTRA_OECONF += "--bindir=${base_bindir}"
+ 
+ ALTERNATIVE:${PN} = "sh"
 -- 
 2.43.0
 
