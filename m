@@ -2,53 +2,53 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 67E70C02186
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 716D1C3DA4A
 	for <webhook@archiver.kernel.org>; Tue,  7 Jan 2025 09:02:06 +0000 (UTC)
-Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
- by mx.groups.io with SMTP id smtpd.web11.16413.1736240518746565725
+Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
+ by mx.groups.io with SMTP id smtpd.web11.16410.1736240511075164031
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 07 Jan 2025 01:01:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=LoOojBxz;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=ZKzC6uP7;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1736240520; x=1767776520;
+  t=1736240519; x=1767776519;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=5M1MUm3bPN1YoeRjyJv1Nt4x/190iLIjTvwm3Cl2zfQ=;
-  b=LoOojBxz9B3T99RkLmXD/LG+jQ8flChU+lKCSrShGLWUWfPDGlumc52w
-   ZTAN3lkLS8o6bqWY5/hyhN0TPL81xEE205yNm8aEIYnkb23Q3mYkbR3e9
-   t88LDNqzldtLMkSmxl/3OUH/bK7rxM8zNHb2L4uH4e6L/7gq7jO6tYKb9
-   xxv1W2gz0ltlN4DoZzrgtehzivFkpdfSN/S+NPS5VgKH6S6IU23rLVSqS
-   +Hst0qo/4XeAhLpJVxJ0IUEZIMtiD4CcR77vyr6YyDEIOZDLOS95MjvVv
-   Q5rskrIY6knrU9oHbeZt1/PDiTsoWaGKydsIWaAe89eD+68QMGaUj2ugM
-   A==;
-X-CSE-ConnectionGUID: 3HKNDdrdQKSiqWjjIpHtfg==
-X-CSE-MsgGUID: EtuCb2bWTMqoG1iTADgc+A==
-X-IronPort-AV: E=McAfee;i="6700,10204,11307"; a="185768912"
+  bh=Fq4UWSaAVKju3iUC9mK44542h5FUSeFhgKE4l99KMtU=;
+  b=ZKzC6uP7IADHPQbjA0VndyoTL1vrF8LYd9ephyw/luOSIeaaZdElbVoW
+   GnOAw8tXgpJjfuIWI3Ogr04WzwpV+jvhi2l5FVtkvlbmDgb+pjXBJKdn5
+   L+RUuH7gGUHDHuqlUiusik8EJBksh1dl30jhidZc7DcKWH5SDn5OnYIiL
+   55Whb3pSPf4pBCwig24MOD8ypkyRnJdv3C8mcP7mzpMdOGHYQdgL94z0x
+   5pgla8Rq689W7RuJwND2qyhjcDt+7YyrXZmmlKK612NcGQnIjw1jCWdrR
+   2BpK0eum6gVyzLD5zQlq5Js0GQnV8lZzka96u0A4BpFY2go6BOrjRAYzM
+   g==;
+X-CSE-ConnectionGUID: jPA/9Gj/TGGFtgudNj+nCA==
+X-CSE-MsgGUID: NLisrM6HSXWbKggoSwqVag==
+X-IronPort-AV: E=McAfee;i="6700,10204,11307"; a="188263575"
 X-IronPort-AV: E=Sophos;i="6.12,295,1728918000"; 
-   d="scan'208";a="185768912"
-Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jan 2025 18:01:57 +0900
-Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
-	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 9D068C2264
-	for <openembedded-devel@lists.openembedded.org>; Tue,  7 Jan 2025 18:01:54 +0900 (JST)
-Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 7093CD8B6E
+   d="scan'208";a="188263575"
+Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
+  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jan 2025 18:01:58 +0900
+Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
+	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 2212FD4C3C
+	for <openembedded-devel@lists.openembedded.org>; Tue,  7 Jan 2025 18:01:55 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id ED7EFD4BD2
 	for <openembedded-devel@lists.openembedded.org>; Tue,  7 Jan 2025 18:01:54 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 067FE200930C2
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 8396A2235EE
 	for <openembedded-devel@lists.openembedded.org>; Tue,  7 Jan 2025 18:01:54 +0900 (JST)
 Received: from localhost.localdomain.localdomain (unknown [10.193.161.161])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id B5F971A0071;
-	Tue,  7 Jan 2025 17:01:53 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 5A7A51A0073;
+	Tue,  7 Jan 2025 17:01:54 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 07/18] libbpf: upgrade 1.4.7 -> 1.5.0
-Date: Tue,  7 Jan 2025 17:01:33 +0800
-Message-Id: <1736240504-5315-7-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 10/18] python3-grpcio: upgrade 1.68.1 -> 1.69.0
+Date: Tue,  7 Jan 2025 17:01:36 +0800
+Message-Id: <1736240504-5315-10-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1736240504-5315-1-git-send-email-wangmy@fujitsu.com>
 References: <1736240504-5315-1-git-send-email-wangmy@fujitsu.com>
@@ -56,49 +56,88 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28908.003
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28908.003
-X-TMASE-Result: 10--4.514900-10.000000
-X-TMASE-MatchedRID: R9NZgeCyXhKjz0nOeth/yUIIxwDaU5mr+KgiyLtJrSBoOe42HKVRDr6p
-	xbTOjavy+7QcRaVoa8nGKIf6hBf7VRvtxLq45qm9TuctSpiuWyU2ZWOmuJUS2WAN6i+va16ukWN
-	Ccn0XQOLhphqipnEX3PoZZi/IkGccL8Ur8C/ZRQaeAiCmPx4NwGmRqNBHmBveVDC1CbuJXmMqtq
-	5d3cxkNT9FMMFmEfceuZWXPoxSC2B9dFXrT8aoa240cq//sBh72ZgCvAe1TuxrHQu7fn6kW5btN
-	ksGxwIQtxWzw6XgIC2BPxgMyCs1mPzs1/e9oUcoU8mdcvbI1h2S6jzjuXTm0MTMzICazP4UehYt
-	aVdyxm8=
+X-TMASE-Result: 10-1.731200-10.000000
+X-TMASE-MatchedRID: hsQjHHSArR6jz0nOeth/yX84FZpy/6JVkdS3kPlaZyXfUZT83lbkENb2
+	e7N2CFQy+7QcRaVoa8nGKIf6hBf7VaGGOyqBK41vEXjPIvKd74AZskwWqoib3GSYicW3M8Of2bB
+	B17cIjBqpnGND0sWisCF7sdJartlTkfRhdidsajMURSScn+QSXt0H8LFZNFG76sBnwpOylLPc3e
+	CERlXMVgdwtOx43jTu10htCJdofahmgp3UIwMOymKSxIYzN337W+TgECOwXiRd94t54tr6oo1BV
+	uHrUlburEoYQZt7o1aIHqaUMp7VXtL/LK0d4I30Ze/gJB41STsbqpM7Cr+fvX7cGd19dSFd
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 07 Jan 2025 09:02:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114682
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114681
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
- https://github.com/libbpf/libbpf/releases/tag/v1.5.0
+0001-protobuf-Disable-musttail-attribute-on-mips.patch
+refreshed for 1.69.0
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libbpf/{libbpf_1.4.7.bb => libbpf_1.5.0.bb}               | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-kernel/libbpf/{libbpf_1.4.7.bb => libbpf_1.5.0.bb} (92%)
+ .../0001-protobuf-Disable-musttail-attribute-on-mips.patch  | 6 +++---
+ ...rpcio-tools_1.68.1.bb => python3-grpcio-tools_1.69.0.bb} | 2 +-
+ .../{python3-grpcio_1.68.1.bb => python3-grpcio_1.69.0.bb}  | 2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-grpcio-tools_1.68.1.bb => python3-grpcio-tools_1.69.0.bb} (86%)
+ rename meta-python/recipes-devtools/python/{python3-grpcio_1.68.1.bb => python3-grpcio_1.69.0.bb} (94%)
 
-diff --git a/meta-oe/recipes-kernel/libbpf/libbpf_1.4.7.bb b/meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb
-similarity index 92%
-rename from meta-oe/recipes-kernel/libbpf/libbpf_1.4.7.bb
-rename to meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb
-index 8df1c639ed..5f92939274 100644
---- a/meta-oe/recipes-kernel/libbpf/libbpf_1.4.7.bb
-+++ b/meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb
-@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://../LICENSE.LGPL-2.1;md5=b370887980db5dd40659b50909238
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-protobuf-Disable-musttail-attribute-on-mips.patch b/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-protobuf-Disable-musttail-attribute-on-mips.patch
+index 0f6844df57..cb12fb4983 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-protobuf-Disable-musttail-attribute-on-mips.patch
++++ b/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-protobuf-Disable-musttail-attribute-on-mips.patch
+@@ -1,4 +1,4 @@
+-From 7d2d5d39b7dcf9b6336d78b9e977b0550f7afe9e Mon Sep 17 00:00:00 2001
++From ded393c799d4d970d69a75c458f3672b03099aeb Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Fri, 16 Sep 2022 19:09:15 -0700
+ Subject: [PATCH] protobuf: Disable musttail attribute on mips
+@@ -13,10 +13,10 @@ Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+  1 file changed, 1 insertion(+)
  
- DEPENDS = "zlib elfutils"
+ diff --git a/third_party/protobuf/src/google/protobuf/port_def.inc b/third_party/protobuf/src/google/protobuf/port_def.inc
+-index 37d80e5..c136654 100644
++index 56f995e..4d36c2f 100644
+ --- a/third_party/protobuf/src/google/protobuf/port_def.inc
+ +++ b/third_party/protobuf/src/google/protobuf/port_def.inc
+-@@ -222,6 +222,7 @@ static_assert(PROTOBUF_ABSL_MIN(20230125, 3),
++@@ -227,6 +227,7 @@ static_assert(PROTOBUF_ABSL_MIN(20230125, 3),
+  #error PROTOBUF_TAILCALL was previously defined
+  #endif
+  #if ABSL_HAVE_CPP_ATTRIBUTE(clang::musttail) && !defined(__arm__) &&  \
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.68.1.bb b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.69.0.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-grpcio-tools_1.68.1.bb
+rename to meta-python/recipes-devtools/python/python3-grpcio-tools_1.69.0.bb
+index 88183189a3..76f5739f95 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.68.1.bb
++++ b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.69.0.bb
+@@ -15,7 +15,7 @@ DEPENDS += "python3-grpcio"
+ SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch \
+             file://0001-protobuf-Disable-musttail-attribute-on-mips.patch \
+             "
+-SRC_URI[sha256sum] = "2413a17ad16c9c821b36e4a67fc64c37b9e4636ab1c3a07778018801378739ba"
++SRC_URI[sha256sum] = "3e1a98f4d9decb84979e1ddd3deb09c0a33a84b6e3c0776d5bde4097e3ab66dd"
  
--SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https;branch=libbpf-1.4.7"
--SRCREV = "ca72d0731f8c693bd98caba70d951fc0bfe20788"
-+SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https;branch=master"
-+SRCREV = "09b9e83102eb8ab9e540d36b4559c55f3bcdb95d"
+ RDEPENDS:${PN} = "python3-grpcio"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- COMPATIBLE_HOST = "(x86_64|i.86|arm|aarch64|riscv64|powerpc|powerpc64|mips64).*-linux"
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.68.1.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.69.0.bb
+similarity index 94%
+rename from meta-python/recipes-devtools/python/python3-grpcio_1.68.1.bb
+rename to meta-python/recipes-devtools/python/python3-grpcio_1.69.0.bb
+index 6967483ace..617e982382 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio_1.68.1.bb
++++ b/meta-python/recipes-devtools/python/python3-grpcio_1.69.0.bb
+@@ -12,7 +12,7 @@ SRC_URI += "file://0001-Include-missing-cstdint-header.patch \
+            file://0001-crypto-use-_Generic-only-if-defined-__cplusplus.patch;patchdir=third_party/boringssl-with-bazel/src/ \
+            file://0001-target.h-define-proper-macro-for-ppc-ppc64.patch \
+            "
+-SRC_URI[sha256sum] = "44a8502dd5de653ae6a73e2de50a401d84184f0331d0ac3daeb044e66d5c5054"
++SRC_URI[sha256sum] = "936fa44241b5379c5afc344e1260d467bee495747eaf478de825bab2791da6f5"
+ 
+ RDEPENDS:${PN} = "python3-protobuf"
+ 
 -- 
 2.43.0
 
