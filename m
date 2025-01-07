@@ -1,86 +1,98 @@
-Return-Path: <preeti.sachan@intel.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 15ED2E77197
-	for <webhook@archiver.kernel.org>; Tue,  7 Jan 2025 06:36:35 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
- by mx.groups.io with SMTP id smtpd.web10.15083.1736231785567975995
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A20AE77197
+	for <webhook@archiver.kernel.org>; Tue,  7 Jan 2025 09:02:06 +0000 (UTC)
+Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
+ by mx.groups.io with SMTP id smtpd.web11.16410.1736240511075164031
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Jan 2025 22:36:25 -0800
+ Tue, 07 Jan 2025 01:01:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@intel.com header.s=Intel header.b=iprxb00s;
- spf=pass (domain: intel.com, ip: 198.175.65.13, mailfrom: preeti.sachan@intel.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1736231786; x=1767767786;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=8r7mIe2OrBqRVUou/yfK4ZLM0/j7qX2gzLaIHZcdOiA=;
-  b=iprxb00sipr+fA7JwCHcpgp9fW1DYw+gdfRuYc5mq9NuXYhi53KPGexc
-   0Mrp3gSvEkL0p/EAjwICeyxjuhuUIwMLBUKl+Ci4v5NZdzX02/zyyihmX
-   OHGJS9YTMDnzP/VIBb3oE9YAxDR47/4AMjBVXRydSUmohylCUZc4kdf/e
-   II+hwELVDb9YfSpCXsMj/vaVQkAeJ2yC+3IBhsti5fBGmyiGo3fEKirwO
-   Zc6NHkZXlJw//LA01SVJho34J7hmr0+8ezefrGYAHm8cnozyl/oKXYNUs
-   3SEfYegmi0959kuu3NwqZo6q0wq5myXzSrl3mfqFm8FnLKhmd+64IDZv3
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=ZUkd2Q9b;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1736240516; x=1767776516;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references;
+  bh=wEW1da+Oj+C6ZenIotTnprA0ovbrkQQXABEzOZXq9FM=;
+  b=ZUkd2Q9bPiLc8jQWVHcCW0/b8PV2HwCydYgzru4Ste+38wIPyc+zsojj
+   swJiTfnrGPi0xEs7jBAVI8qbmRgRqZFZUBeOf3q81JuGq8JfK/GtoD8Bg
+   RwummNkzj7qOO1MT3RXPHvaYD+YM4K+c/lehwEhQpxqBe6Tvb1foR4IMO
+   TOpj8AZn2AUPvTBQ4JtLLYd1231i6Gan6oa+tCnsvI+eyWOiJpckIGHL0
+   7UftIGxGvAGz38EmMwyEMvuBaEgQTtCK+9yGnr3EPn92ruaIvWcBFQU9L
+   W9yz81JwMOjv7kon23ZBhGxzoLncXdIrzgAXE/QSKAlXtOn0k5rIGPyCk
    Q==;
-X-CSE-ConnectionGUID: hoJugUPYTLi0g7S+sxmFBw==
-X-CSE-MsgGUID: iy9NpyZeT3yEyuGbV16pYQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11307"; a="47388344"
-X-IronPort-AV: E=Sophos;i="6.12,294,1728975600"; 
-   d="scan'208";a="47388344"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
-  by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Jan 2025 22:36:25 -0800
-X-CSE-ConnectionGUID: Ct6KzjlfQm+SMzNS1X9o8g==
-X-CSE-MsgGUID: yUCnVz5BQr+lUyj9ARSoeg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; 
-   d="scan'208";a="102537691"
-Received: from ubuntu-99586.iind.intel.com ([10.145.177.170])
-  by orviesa010.jf.intel.com with ESMTP; 06 Jan 2025 22:36:24 -0800
-From: preeti.sachan@intel.com
+X-CSE-ConnectionGUID: D/4HBNWTR72MCaUi9Cog2g==
+X-CSE-MsgGUID: kmc8pBXyQE6mkREb3iZG6w==
+X-IronPort-AV: E=McAfee;i="6700,10204,11307"; a="188263571"
+X-IronPort-AV: E=Sophos;i="6.12,295,1728918000"; 
+   d="scan'208";a="188263571"
+Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
+  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jan 2025 18:01:55 +0900
+Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
+	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id E124BDBB81
+	for <openembedded-devel@lists.openembedded.org>; Tue,  7 Jan 2025 18:01:52 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id B78C5D73B6
+	for <openembedded-devel@lists.openembedded.org>; Tue,  7 Jan 2025 18:01:52 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 58A1041185
+	for <openembedded-devel@lists.openembedded.org>; Tue,  7 Jan 2025 18:01:52 +0900 (JST)
+Received: from localhost.localdomain.localdomain (unknown [10.193.161.161])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 12ED21A0071;
+	Tue,  7 Jan 2025 17:01:52 +0800 (CST)
+From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][master][PATCH] bpftool: fix libelf.h not found error
-Date: Tue,  7 Jan 2025 12:07:04 +0800
-Message-Id: <20250107040704.107251-1-preeti.sachan@intel.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 02/18] doxygen: upgrade 1.13.0 -> 1.13.1
+Date: Tue,  7 Jan 2025 17:01:28 +0800
+Message-Id: <1736240504-5315-2-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1736240504-5315-1-git-send-email-wangmy@fujitsu.com>
+References: <1736240504-5315-1-git-send-email-wangmy@fujitsu.com>
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28908.003
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28908.003
+X-TMASE-Result: 10-0.085200-10.000000
+X-TMASE-MatchedRID: V7gFd1X8+4Wjz0nOeth/yQPZZctd3P4B1cuIRwt/4MiysPB8dBBorXKn
+	6DBj/gsEIvrftAIhWmLHBvqhRdA8sjcpdZ3fQiLdFEUknJ/kEl5q8/xv2Um1avoLR4+zsDTtB00
+	/kkeBTwAtZ1u2YJ3nkF2P/YSfEjw/lQJ06ZwMaYghRbf+9/E7Ld/i0vYZvVg7h3czA1P1YHimsW
+	hqrSRoLA2digqZZIf1Gd0gxh65+3fyDBYNCJzj6s+YAJ5mo7zlOKgonZY9TFMtLgAQ4uO3AA==
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Jan 2025 06:36:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114675
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Jan 2025 09:02:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114676
 
-From: Preeti Sachan <preeti.sachan@intel.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-When build host machine is not installed with elfutils-libelf-devel, it
-throws compile error "libelf.h: No such file or directory". Fix missing
-headers file by including path ${STAGING_INCDIR_NATIVE} via CFLAGS variable.
-Use headers file from ${STAGING_INCDIR_NATIVE} instead of host machine.
-
-Error:
-| libbpf_internal.h:19:10: fatal error: libelf.h: No such file or directory
-
-Signed-off-by: Preeti Sachan <preeti.sachan@intel.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-oe/recipes-kernel/bpftool/bpftool.bb | 2 +-
+ .../doxygen/{doxygen_1.13.0.bb => doxygen_1.13.1.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/doxygen/{doxygen_1.13.0.bb => doxygen_1.13.1.bb} (92%)
 
-diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
-index 8bddde945..ec778c6e7 100644
---- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
-+++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
-@@ -14,7 +14,7 @@ EXTRA_OEMAKE = "\
-     -C ${S}/tools/bpf/bpftool \
-     O=${B} \
-     CROSS=${TARGET_PREFIX} \
--    CC="${CC} ${DEBUG_PREFIX_MAP} -fdebug-prefix-map=${STAGING_KERNEL_DIR}=${KERNEL_SRC_PATH}" \
-+    CC="${CC} ${DEBUG_PREFIX_MAP} -fdebug-prefix-map=${STAGING_KERNEL_DIR}=${KERNEL_SRC_PATH} ${CFLAGS}" \
-     HOSTCC="${BUILD_CC} ${BUILD_CFLAGS}" \
-     LD="${LD}" \
-     AR=${AR} \
+diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.13.0.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.13.1.bb
+similarity index 92%
+rename from meta-oe/recipes-devtools/doxygen/doxygen_1.13.0.bb
+rename to meta-oe/recipes-devtools/doxygen/doxygen_1.13.1.bb
+index 81cae42fd6..6f71806250 100644
+--- a/meta-oe/recipes-devtools/doxygen/doxygen_1.13.0.bb
++++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.13.1.bb
+@@ -10,7 +10,7 @@ SRC_URI = "\
+     git://github.com/doxygen/doxygen.git;branch=master;protocol=https \
+ "
+ 
+-SRCREV = "3fc9e7f98b8d1156ec627cd3ee6f23984bf4e1b1"
++SRCREV = "cb7d0d0c90e66d1599f3526d46672bddaafc08d2"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.34.1
+2.43.0
 
 
