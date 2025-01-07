@@ -1,196 +1,129 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99052E77197
-	for <webhook@archiver.kernel.org>; Tue,  7 Jan 2025 19:11:35 +0000 (UTC)
-Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
- by mx.groups.io with SMTP id smtpd.web10.545.1736277091250576368
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6455E77197
+	for <webhook@archiver.kernel.org>; Tue,  7 Jan 2025 19:48:55 +0000 (UTC)
+Received: from mail-vs1-f43.google.com (mail-vs1-f43.google.com [209.85.217.43])
+ by mx.groups.io with SMTP id smtpd.web11.1492.1736279331170556650
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Jan 2025 11:11:31 -0800
+ Tue, 07 Jan 2025 11:48:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
-Received: from fwd88.aul.t-online.de (fwd88.aul.t-online.de [10.223.144.114])
-	by mailout07.t-online.de (Postfix) with SMTP id AF696B31;
-	Tue,  7 Jan 2025 20:11:29 +0100 (CET)
-Received: from [192.168.178.67] ([84.163.46.246]) by fwd88.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tVEzA-001eIC0; Tue, 7 Jan 2025 20:11:28 +0100
-Date: Tue, 07 Jan 2025 20:11:51 +0100
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-multimedia][PATCHv5] libheif: add recipe
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hnI89qBF;
+ spf=pass (domain: gmail.com, ip: 209.85.217.43, mailfrom: schonm@gmail.com)
+Received: by mail-vs1-f43.google.com with SMTP id ada2fe7eead31-4affab62589so4245119137.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Jan 2025 11:48:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1736279330; x=1736884130; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=vwwmV639zW3cH5qv0DgQgUta0Wy72FCGOnvz02skdEc=;
+        b=hnI89qBFIAFBWNP1jqYgKfUdTEKmZFVYr36GaKzOxyGITI39MwF50AiXGP+gW7oxCk
+         E7M6h1E2zcISJhiqDnmcBSkDE8pnHr766vLVUHMcRxOU012G0QyUKouVws7R+ORUxiZO
+         wrMdfzhr9OaQ9X7UjqDa44e6yznqcU+D4aO1ngSCAP1q4H1xnctl0+LJTFlTgt2J2GFV
+         DIubO03RvWRGei54AIfAOS0bKgbnrUyVg3N1HKISbkkmVjnzo8Izq7goApP+S96anD/y
+         4s2YrBW0pPnVTX4NEHi05yogDsw9gRd0jbLLoRxgYPqgPPkwlyviBoktwGIYALNnlQ8n
+         O59g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1736279330; x=1736884130;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=vwwmV639zW3cH5qv0DgQgUta0Wy72FCGOnvz02skdEc=;
+        b=EnABJJgRxxQ4O9+/by7HAgP1MsmyDLoudu4+LQuiPWjp9pAO0HeEM+AMaL56BakibX
+         1M5ud2fUas6VW/GR7UKlSkNCXXCcOXDcu6jJZyv+MUpLaaaPpem0UwbRH8boXX+tQoas
+         EeDsfaVySbvAb5nq6vn+98Zxz5xajazYC586o22MvaYnWozdz1RJHxznYEPIdd+OpaoM
+         DgkWgAtGJZFyjhsWP94V5FMnHG7aUUhL9VynknSiVjp1S7h8C9Nojx6XJ2G0bhF2WoJP
+         gh91msYmqSIMWpuQcrkcwZVXIOsw03+7OPCiRgbxflA9Ai4mjcZN4sbZT6Q24BdWQwDw
+         vXpA==
+X-Gm-Message-State: AOJu0Yx82QETgvtnwv241n7TsKcH34JkH7EfnhTp4Mp2TS7gIHe3kY7I
+	XVN6r+0aZCe7U7PZCnUH2YX1Iwv6459xl3w93GisBzaJFAIdiip1Wa4q0KGk
+X-Gm-Gg: ASbGncuOT4aXURaSUpX8+PKlC+Mziurdxx1CuqNuuFlTuLl34VH4F+KLTpnGckkl84P
+	HimIGhP3QA7qFUf42SrCuhLxhSoa4vwWiz02GOS7xfIFA80Hhhge+MAhKYlOUFLEdxCLLlceKzs
+	UX3VfsgxsFkHuswtpmDlSh97cXSOrbz0zI8G/Bwr2dpBBfEc21rnAdA5O21uWkipRXAO/GVN3mB
+	3o9PVSU0hO0qHIXbMrLua4TL62ZO6jSVMR/Tm99DqvTcGFsoUpHQhebnwYJy6I=
+X-Google-Smtp-Source: AGHT+IFrnPPDGnWg30MDrWa8vJPlL6gj7NVdC2nuK12ipTS/zBU+TIwhjc74LuRuJH1B7wxDFQLvfw==
+X-Received: by 2002:a05:6102:e10:b0:4af:c519:4e7f with SMTP id ada2fe7eead31-4b3d10485b5mr321958137.18.1736279329644;
+        Tue, 07 Jan 2025 11:48:49 -0800 (PST)
+Received: from localhost.localdomain ([71.215.2.167])
+        by smtp.gmail.com with ESMTPSA id a1e0cc1a2514c-8610ad582cdsm8087187241.32.2025.01.07.11.48.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 07 Jan 2025 11:48:49 -0800 (PST)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Message-Id: <RZFQPS.6XYQ6IIDAFBA1@t-online.de>
-In-Reply-To: <18187EC7B59FAA58.18084@lists.openembedded.org>
-References: <18187EC7B59FAA58.18084@lists.openembedded.org>
-X-Mailer: geary/46.0
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH] c-ares: upgrade 1.28.1 -> 1.29.0
+Date: Tue,  7 Jan 2025 14:48:06 -0500
+Message-ID: <20250107194806.19811-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-+V4zrr+MledCvY6o1bgR"
-X-TOI-EXPURGATEID: 150726::1736277088-0AFFAA80-564280C2/10/3626336762 SUSPECT URL
-X-TOI-MSGID: 4152f4c7-a6e1-48a3-99e2-d0288ad16510
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Jan 2025 19:11:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114724
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Jan 2025 19:48:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114725
 
---=-+V4zrr+MledCvY6o1bgR
-Content-Type: text/plain; charset=us-ascii; format=flowed
+Changelog : https://github.com/c-ares/c-ares/releases/tag/cares-1_29_0
 
-v5: add COMPATIBLE_MACHINE:powerpc64le = "null"
+Features:
 
-On Tue, Jan 7 2025 at 20:10:54 +01:00:00, Markus Volk 
-<f_l_k@t-online.de> wrote:
-> libheif is an ISO/IEC 23008-12:2017 HEIF and AVIF (AV1 Image File 
-> Format) file format decoder and encoder. There is partial support for 
-> ISO/IEC 23008-12:2022 (2nd Edition) capabilities.
-> 
-> HEIF and AVIF are new image file formats employing HEVC (H.265) or 
-> AV1 image coding, respectively, for the best compression ratios 
-> currently possible.
-> 
-> libheif makes use of libde265 for HEIF image decoding and x265 for 
-> encoding. For AVIF, libaom, dav1d, svt-av1, or rav1e are used as 
-> codecs.
-> 
-> Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com 
-> <mailto:raj.khem@gmail.com>>
-> ---
->  .../libheif/libheif_1.19.5.bb                 | 26 
-> +++++++++++++++++++
->  1 file changed, 26 insertions(+)
->  create mode 100644 
-> meta-multimedia/recipes-multimedia/libheif/libheif_1.19.5.bb
-> 
-> diff --git 
-> a/meta-multimedia/recipes-multimedia/libheif/libheif_1.19.5.bb 
-> b/meta-multimedia/recipes-multimedia/libheif/libheif_1.19.5.bb
-> new file mode 100644
-> index 0000000000..4610a60392
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-multimedia/libheif/libheif_1.19.5.bb
-> @@ -0,0 +1,26 @@
-> +SUMMARY = "libheif is an ISO/IEC 23008-12:2017 HEIF and AVIF (AV1 
-> Image File Format) file format decoder and encoder"
-> +HOMEPAGE = "<https://github.com/strukturag/libheif>"
-> +LICENSE = "LGPL-3.0-only"
-> +LIC_FILES_CHKSUM = 
-> "file://COPYING;md5=f07b2bc152eaee52edbd338825f474d4" 
-> <file://copying;md5=f07b2bc152eaee52edbd338825f474d4/>
-> +LICENSE_FLAGS = "commercial"
-> +
-> +COMPATIBLE_MACHINE:powerpc64le = "null"
-> +
-> +SRC_URI = 
-> "git://github.com/strukturag/libheif.git;protocol=https;branch=master"
-> +
-> +S = "${WORKDIR}/git"
-> +SRCREV = "cd95b113d78d0696105a9e678cbd19487ee13d6c"
-> +
-> +inherit cmake pkgconfig
-> +
-> +DEPENDS += "gdk-pixbuf openh264 x265 libde265 tiff zlib libpng 
-> libwebp"
-> +
-> +PACKAGECONFIG += "dav1d jpeg jpeg2000 ffmpeg aom"
-> +PACKAGECONFIG[aom] = "-DWITH_AOM_ENCODER=ON 
-> -DWITH_AOM_DECODER=ON,-DWITH_AOM_ENCODER=OFF 
-> -DWITH_AOM_DECODER=OFF,aom"
-> +PACKAGECONFIG[dav1d] = "-DWITH_DAV1D=ON, -DWITH_DAV1D=OFF,dav1d"
-> +PACKAGECONFIG[svt-av1] = "-DWITH_SvtEnc=ON,-DWITH_SvtEnc=OFF,svt-av1"
-> +PACKAGECONFIG[jpeg] = "-DWITH_JPEG_DECODER=ON 
-> -DWITH_JPEG_ENCODER=ON,-DWITH_JPEG_ENCODER=OFF 
-> -DWITH_JPEG_DECODER=OFF,jpeg"
-> +PACKAGECONFIG[ffmpeg] = 
-> "-DWITH_FFMPEG_DECODER=ON,-DWITH_FFMPEG_DECODER=OFF,ffmpeg"
-> +PACKAGECONFIG[jpeg2000] = "-DWITH_OpenJPEG_ENCODER=ON 
-> -DWITH_OpenJPEG_DECODER=ON,-DWITH_OpenJPEG_ENCODER=OFF 
-> -DWITH_OpenJPEG_DECODER=OFF,openjpeg"
-> +
-> +FILES:${PN} += "${libdir}/libheif ${datadir}/thumbnailers 
-> ${libdir}/gdk-pixbuf*"
-> --
-> 2.47.1
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#114723): 
-> <https://lists.openembedded.org/g/openembedded-devel/message/114723>
-> Mute This Topic: <https://lists.openembedded.org/mt/110483365/3618223>
-> Group Owner: openembedded-devel+owner@lists.openembedded.org 
-> <mailto:openembedded-devel+owner@lists.openembedded.org>
-> Unsubscribe: 
-> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
-> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
+    When using ARES_OPT_EVENT_THREAD, automatically reload system configuration
+    when network conditions change. PR #759
+    Apple: reimplement DNS configuration reading to more accurately pull DNS
+    settings. PR #750
+    Add observability into DNS server health via a server state callback, invoked
+    whenever a query finishes. PR #744
+    Add server failover retry behavior, where failed servers are retried with
+    small probability after a minimum delay. PR #731
 
+Changes:
 
---=-+V4zrr+MledCvY6o1bgR
-Content-Type: text/html; charset=us-ascii
+    Mark ares_channel_t * as const in more places in the public API. PR #758
 
-<div id="geary-body" dir="auto"><div>v5: add COMPATIBLE_MACHINE:powerpc64le = "null"</div></div><div id="geary-quote" dir="auto"><br>On Tue, Jan 7 2025 at 20:10:54 +01:00:00, Markus Volk &lt;f_l_k@t-online.de&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">libheif is an ISO/IEC 23008-12:2017 HEIF and AVIF (AV1 Image File Format) file format decoder and encoder. There is partial support for ISO/IEC 23008-12:2022 (2nd Edition) capabilities.
+Bugfixes:
 
-HEIF and AVIF are new image file formats employing HEVC (H.265) or AV1 image coding, respectively, for the best compression ratios currently possible.
+    Due to a logic flaw dns name compression writing was not properly implemented
+    which would result in the name prefix not being written for a partial match.
+    This could cause issues in various record types such as MX records when using
+    the deprecated API. Regression introduced in 1.28.0. Issue #757
+    Revert OpenBSD SOCK_DNS flag, it doesn't do what the docs say it does and
+    causes c-ares to become non-functional. PR #754
+    ares_getnameinfo(): loosen validation on salen parameter. Issue #752
+    cmake: Android requires C99. PR #748
+    ares_queue_wait_empty() does not honor timeout_ms >= 0. Issue #742
 
-libheif makes use of libde265 for HEIF image decoding and x265 for encoding. For AVIF, libaom, dav1d, svt-av1, or rav1e are used as codecs.
-
-Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
-Signed-off-by: Khem Raj &lt;<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- .../libheif/libheif_1.19.5.bb                 | 26 +++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/libheif/libheif_1.19.5.bb
+ .../c-ares/{c-ares_1.28.1.bb => c-ares_1.29.0.bb}           | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/c-ares/{c-ares_1.28.1.bb => c-ares_1.29.0.bb} (84%)
 
-diff --git a/meta-multimedia/recipes-multimedia/libheif/libheif_1.19.5.bb b/meta-multimedia/recipes-multimedia/libheif/libheif_1.19.5.bb
-new file mode 100644
-index 0000000000..4610a60392
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libheif/libheif_1.19.5.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "libheif is an ISO/IEC 23008-12:2017 HEIF and AVIF (AV1 Image File Format) file format decoder and encoder"
-+HOMEPAGE = "<a href="https://github.com/strukturag/libheif">https://github.com/strukturag/libheif</a>"
-+LICENSE = "LGPL-3.0-only"
-+LIC_FILES_CHKSUM = "<a href="file://COPYING;md5=f07b2bc152eaee52edbd338825f474d4" "="">file://COPYING;md5=f07b2bc152eaee52edbd338825f474d4"</a>
-+LICENSE_FLAGS = "commercial"
-+
-+COMPATIBLE_MACHINE:powerpc64le = "null"
-+
-+SRC_URI = "git://github.com/strukturag/libheif.git;protocol=https;branch=master"
-+
-+S = "${WORKDIR}/git"
-+SRCREV = "cd95b113d78d0696105a9e678cbd19487ee13d6c"
-+
-+inherit cmake pkgconfig
-+
-+DEPENDS += "gdk-pixbuf openh264 x265 libde265 tiff zlib libpng libwebp"
-+
-+PACKAGECONFIG += "dav1d jpeg jpeg2000 ffmpeg aom"
-+PACKAGECONFIG[aom] = "-DWITH_AOM_ENCODER=ON -DWITH_AOM_DECODER=ON,-DWITH_AOM_ENCODER=OFF -DWITH_AOM_DECODER=OFF,aom"
-+PACKAGECONFIG[dav1d] = "-DWITH_DAV1D=ON, -DWITH_DAV1D=OFF,dav1d"
-+PACKAGECONFIG[svt-av1] = "-DWITH_SvtEnc=ON,-DWITH_SvtEnc=OFF,svt-av1"
-+PACKAGECONFIG[jpeg] = "-DWITH_JPEG_DECODER=ON -DWITH_JPEG_ENCODER=ON,-DWITH_JPEG_ENCODER=OFF -DWITH_JPEG_DECODER=OFF,jpeg"
-+PACKAGECONFIG[ffmpeg] = "-DWITH_FFMPEG_DECODER=ON,-DWITH_FFMPEG_DECODER=OFF,ffmpeg"
-+PACKAGECONFIG[jpeg2000] = "-DWITH_OpenJPEG_ENCODER=ON -DWITH_OpenJPEG_DECODER=ON,-DWITH_OpenJPEG_ENCODER=OFF -DWITH_OpenJPEG_DECODER=OFF,openjpeg"
-+
-+FILES:${PN} += "${libdir}/libheif ${datadir}/thumbnailers ${libdir}/gdk-pixbuf*"
-<div>-- 
-</div>2.47.1
-
-</div><div class="plaintext" style="white-space: break-spaces;">
--=-=-=-=-=-=-=-=-=-=-=-
-Links: You receive all messages sent to this group.
-View/Reply Online (#114723): <a href="https://lists.openembedded.org/g/openembedded-devel/message/114723">https://lists.openembedded.org/g/openembedded-devel/message/114723</a>
-Mute This Topic: <a href="https://lists.openembedded.org/mt/110483365/3618223">https://lists.openembedded.org/mt/110483365/3618223</a>
-Group Owner: <a href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
--=-=-=-=-=-=-=-=-=-=-=-
-
-</div></blockquote></div>
---=-+V4zrr+MledCvY6o1bgR--
+diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.28.1.bb b/meta-oe/recipes-support/c-ares/c-ares_1.29.0.bb
+similarity index 84%
+rename from meta-oe/recipes-support/c-ares/c-ares_1.28.1.bb
+rename to meta-oe/recipes-support/c-ares/c-ares_1.29.0.bb
+index bfb46a54b..80a9a1b69 100644
+--- a/meta-oe/recipes-support/c-ares/c-ares_1.28.1.bb
++++ b/meta-oe/recipes-support/c-ares/c-ares_1.29.0.bb
+@@ -1,13 +1,13 @@
+ # Copyright (c) 2012-2014 LG Electronics, Inc.
+ SUMMARY = "c-ares is a C library that resolves names asynchronously."
+-HOMEPAGE = "http://daniel.haxx.se/projects/c-ares/"
++HOMEPAGE = "https://c-ares.org/"
+ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=fdbc58a6da11a9f68aa73c453818decc"
+ 
+-SRC_URI = "https://github.com/c-ares/c-ares/releases/download/cares-1_28_1/${BPN}-${PV}.tar.gz \
++SRC_URI = "https://github.com/c-ares/c-ares/releases/download/cares-1_29_0/${BPN}-${PV}.tar.gz \
+            file://run-ptest"
+-SRC_URI[sha256sum] = "675a69fc54ddbf42e6830bc671eeb6cd89eeca43828eb413243fd2c0a760809d"
++SRC_URI[sha256sum] = "0b89fa425b825c4c7bc708494f374ae69340e4d1fdc64523bdbb2750bfc02ea7"
+ 
+ PACKAGECONFIG ?= "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
+ PACKAGECONFIG[manpages] = ""
+-- 
+2.43.0
 
 
