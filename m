@@ -1,129 +1,137 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C6455E77197
-	for <webhook@archiver.kernel.org>; Tue,  7 Jan 2025 19:48:55 +0000 (UTC)
-Received: from mail-vs1-f43.google.com (mail-vs1-f43.google.com [209.85.217.43])
- by mx.groups.io with SMTP id smtpd.web11.1492.1736279331170556650
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D71AE77197
+	for <webhook@archiver.kernel.org>; Tue,  7 Jan 2025 21:14:06 +0000 (UTC)
+Received: from mail-ot1-f44.google.com (mail-ot1-f44.google.com [209.85.210.44])
+ by mx.groups.io with SMTP id smtpd.web10.3553.1736284437838639022
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Jan 2025 11:48:51 -0800
+ Tue, 07 Jan 2025 13:13:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=hnI89qBF;
- spf=pass (domain: gmail.com, ip: 209.85.217.43, mailfrom: schonm@gmail.com)
-Received: by mail-vs1-f43.google.com with SMTP id ada2fe7eead31-4affab62589so4245119137.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Jan 2025 11:48:51 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Dg2+2zxB;
+ spf=pass (domain: gmail.com, ip: 209.85.210.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f44.google.com with SMTP id 46e09a7af769-71df1f45b0cso114743a34.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Jan 2025 13:13:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1736279330; x=1736884130; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=vwwmV639zW3cH5qv0DgQgUta0Wy72FCGOnvz02skdEc=;
-        b=hnI89qBFIAFBWNP1jqYgKfUdTEKmZFVYr36GaKzOxyGITI39MwF50AiXGP+gW7oxCk
-         E7M6h1E2zcISJhiqDnmcBSkDE8pnHr766vLVUHMcRxOU012G0QyUKouVws7R+ORUxiZO
-         wrMdfzhr9OaQ9X7UjqDa44e6yznqcU+D4aO1ngSCAP1q4H1xnctl0+LJTFlTgt2J2GFV
-         DIubO03RvWRGei54AIfAOS0bKgbnrUyVg3N1HKISbkkmVjnzo8Izq7goApP+S96anD/y
-         4s2YrBW0pPnVTX4NEHi05yogDsw9gRd0jbLLoRxgYPqgPPkwlyviBoktwGIYALNnlQ8n
-         O59g==
+        d=gmail.com; s=20230601; t=1736284437; x=1736889237; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=WXqT2Mqb343ZFSNW11a81fCWdRs/p4S7n73U9USD3Uk=;
+        b=Dg2+2zxB6/Kpj/b1AQ6jTvOOw6sbh/si7ghLnnuLS2pMDTmCllkALL9cYvB+PBMxKp
+         oRiebsKVxfSikWFocd17RjlKyoRgsV3HRXyA5f/N3YSW+n8FK33EjnYVgfSTl9MV4Dp6
+         BdmC8TMMidtx+nwIZUI0EF0IKL9J0NjmXplNzsDXFPJcLu0r5JtvXlYUVqnV6q84hsgk
+         y9jmo/DYQlDjxlJDCZlSvCnaT4x6Eqop01t3+wljNHFUTBmKnlNWrjYGNQj6mv2DMC4X
+         EVgxSzbXGkYh58rw5QFQupcCglM/XKA91RcEUk7IK9ddtzUUq8ByzIIzFnwibEC8B63q
+         exUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736279330; x=1736884130;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=vwwmV639zW3cH5qv0DgQgUta0Wy72FCGOnvz02skdEc=;
-        b=EnABJJgRxxQ4O9+/by7HAgP1MsmyDLoudu4+LQuiPWjp9pAO0HeEM+AMaL56BakibX
-         1M5ud2fUas6VW/GR7UKlSkNCXXCcOXDcu6jJZyv+MUpLaaaPpem0UwbRH8boXX+tQoas
-         EeDsfaVySbvAb5nq6vn+98Zxz5xajazYC586o22MvaYnWozdz1RJHxznYEPIdd+OpaoM
-         DgkWgAtGJZFyjhsWP94V5FMnHG7aUUhL9VynknSiVjp1S7h8C9Nojx6XJ2G0bhF2WoJP
-         gh91msYmqSIMWpuQcrkcwZVXIOsw03+7OPCiRgbxflA9Ai4mjcZN4sbZT6Q24BdWQwDw
-         vXpA==
-X-Gm-Message-State: AOJu0Yx82QETgvtnwv241n7TsKcH34JkH7EfnhTp4Mp2TS7gIHe3kY7I
-	XVN6r+0aZCe7U7PZCnUH2YX1Iwv6459xl3w93GisBzaJFAIdiip1Wa4q0KGk
-X-Gm-Gg: ASbGncuOT4aXURaSUpX8+PKlC+Mziurdxx1CuqNuuFlTuLl34VH4F+KLTpnGckkl84P
-	HimIGhP3QA7qFUf42SrCuhLxhSoa4vwWiz02GOS7xfIFA80Hhhge+MAhKYlOUFLEdxCLLlceKzs
-	UX3VfsgxsFkHuswtpmDlSh97cXSOrbz0zI8G/Bwr2dpBBfEc21rnAdA5O21uWkipRXAO/GVN3mB
-	3o9PVSU0hO0qHIXbMrLua4TL62ZO6jSVMR/Tm99DqvTcGFsoUpHQhebnwYJy6I=
-X-Google-Smtp-Source: AGHT+IFrnPPDGnWg30MDrWa8vJPlL6gj7NVdC2nuK12ipTS/zBU+TIwhjc74LuRuJH1B7wxDFQLvfw==
-X-Received: by 2002:a05:6102:e10:b0:4af:c519:4e7f with SMTP id ada2fe7eead31-4b3d10485b5mr321958137.18.1736279329644;
-        Tue, 07 Jan 2025 11:48:49 -0800 (PST)
-Received: from localhost.localdomain ([71.215.2.167])
-        by smtp.gmail.com with ESMTPSA id a1e0cc1a2514c-8610ad582cdsm8087187241.32.2025.01.07.11.48.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Jan 2025 11:48:49 -0800 (PST)
-From: Jason Schonberg <schonm@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] c-ares: upgrade 1.28.1 -> 1.29.0
-Date: Tue,  7 Jan 2025 14:48:06 -0500
-Message-ID: <20250107194806.19811-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20230601; t=1736284437; x=1736889237;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=WXqT2Mqb343ZFSNW11a81fCWdRs/p4S7n73U9USD3Uk=;
+        b=D2o6hwBTy9IqZNNO+GcND+jlikUpEQsyyKCFPdr+B1krq/4XRM0oxqOY3Okyt3deiL
+         2YYp5I0XHMYUt9zcl2q+/btgLSrOecqZHxOb62lYufTlT1lRUvFZ8SDHpGAqMcvXMjao
+         +JaJxuIPrGca5q3852JVxE1k7MTbazCUQM8C3ySImYSRl79sG+qljtecd58CKdpoRzeM
+         8jKQAvAK2mOOh4F1+6LEEj5Mfl0HaWKwUUZ6vGL0V6sJcZSvNakS84zq+AI3R4sfrM76
+         sXf4ifyyie1wgtx7MZIaqQJULUR2jJhVPtrrmGjTCZcKhNltmskMbpvOA4ZojO55MhCZ
+         VPhA==
+X-Gm-Message-State: AOJu0YyopzkzxEK6pdvHmxkatn+8k0+YM6Zgq+qGab/LoprNFp8/gX4t
+	DZ4eeUCwbny8rBrNdR7CqUKnDS6lbbKd1xoYARwCgitbKieyyYbRCIIB1nqmPf5wSWDHgXS5ivJ
+	CmBA2DVE5blZKDMK+0hAzzEebiQk=
+X-Gm-Gg: ASbGncvlrtGFQdi7K1nQFgKwilMUJyJhm1Y5Zi87P95fkQoe12/O/Dpaw4RUOxR/Lv6
+	nlw6MsPrrN+k50QyJFh1wyAGi3e7JhMDvZzWWqg==
+X-Google-Smtp-Source: AGHT+IGDCCABYbYOl6CI4Yq3G1cOwCfYZKs78dERNaQlzW7kc7ERw3dH9E6shdQytpb05w/077GZdURpIM2W4clfCZw=
+X-Received: by 2002:a05:6870:ef02:b0:2a3:8330:3de4 with SMTP id
+ 586e51a60fabf-2a9eadea341mr2668237fac.18.1736284437065; Tue, 07 Jan 2025
+ 13:13:57 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <18187887BF14CFCD.5240@lists.openembedded.org> <5PAQPS.HDRNZM5FNZBD1@t-online.de>
+In-Reply-To: <5PAQPS.HDRNZM5FNZBD1@t-online.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 7 Jan 2025 13:13:31 -0800
+X-Gm-Features: AbW1kvbimmEEV1yT2dphHIWlB6dTZRZQFCfV7zG20Ab0YsirBaNasTcTJ26F994
+Message-ID: <CAMKF1sq+D3Uwz4oU2H0mK1Td0+LujU8Pz8Qy_Os7dfAqxUj2Rg@mail.gmail.com>
+Subject: Re: [oe] [meta-multimedia][PATCHv3] x265: update 3.2.1 -> 4.1
+To: f_l_k@t-online.de
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Jan 2025 19:48:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114725
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Jan 2025 21:14:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114726
 
-Changelog : https://github.com/c-ares/c-ares/releases/tag/cares-1_29_0
+We need to keep -DENABLE_PIC=3DON if we have -DENABLE_PIC=3DON
 
-Features:
-
-    When using ARES_OPT_EVENT_THREAD, automatically reload system configuration
-    when network conditions change. PR #759
-    Apple: reimplement DNS configuration reading to more accurately pull DNS
-    settings. PR #750
-    Add observability into DNS server health via a server state callback, invoked
-    whenever a query finishes. PR #744
-    Add server failover retry behavior, where failed servers are retried with
-    small probability after a minimum delay. PR #731
-
-Changes:
-
-    Mark ares_channel_t * as const in more places in the public API. PR #758
-
-Bugfixes:
-
-    Due to a logic flaw dns name compression writing was not properly implemented
-    which would result in the name prefix not being written for a partial match.
-    This could cause issues in various record types such as MX records when using
-    the deprecated API. Regression introduced in 1.28.0. Issue #757
-    Revert OpenBSD SOCK_DNS flag, it doesn't do what the docs say it does and
-    causes c-ares to become non-functional. PR #754
-    ares_getnameinfo(): loosen validation on salen parameter. Issue #752
-    cmake: Android requires C99. PR #748
-    ares_queue_wait_empty() does not honor timeout_ms >= 0. Issue #742
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
----
- .../c-ares/{c-ares_1.28.1.bb => c-ares_1.29.0.bb}           | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/c-ares/{c-ares_1.28.1.bb => c-ares_1.29.0.bb} (84%)
-
-diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.28.1.bb b/meta-oe/recipes-support/c-ares/c-ares_1.29.0.bb
-similarity index 84%
-rename from meta-oe/recipes-support/c-ares/c-ares_1.28.1.bb
-rename to meta-oe/recipes-support/c-ares/c-ares_1.29.0.bb
-index bfb46a54b..80a9a1b69 100644
---- a/meta-oe/recipes-support/c-ares/c-ares_1.28.1.bb
-+++ b/meta-oe/recipes-support/c-ares/c-ares_1.29.0.bb
-@@ -1,13 +1,13 @@
- # Copyright (c) 2012-2014 LG Electronics, Inc.
- SUMMARY = "c-ares is a C library that resolves names asynchronously."
--HOMEPAGE = "http://daniel.haxx.se/projects/c-ares/"
-+HOMEPAGE = "https://c-ares.org/"
- SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=fdbc58a6da11a9f68aa73c453818decc"
- 
--SRC_URI = "https://github.com/c-ares/c-ares/releases/download/cares-1_28_1/${BPN}-${PV}.tar.gz \
-+SRC_URI = "https://github.com/c-ares/c-ares/releases/download/cares-1_29_0/${BPN}-${PV}.tar.gz \
-            file://run-ptest"
--SRC_URI[sha256sum] = "675a69fc54ddbf42e6830bc671eeb6cd89eeca43828eb413243fd2c0a760809d"
-+SRC_URI[sha256sum] = "0b89fa425b825c4c7bc708494f374ae69340e4d1fdc64523bdbb2750bfc02ea7"
- 
- PACKAGECONFIG ?= "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
- PACKAGECONFIG[manpages] = ""
--- 
-2.43.0
-
+On Tue, Jan 7, 2025 at 9:17=E2=80=AFAM Markus Volk via lists.openembedded.o=
+rg
+<f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
+>
+> fix typo
+>
+> On Tue, Jan 7 2025 at 18:16:31 +01:00:00, Markus Volk <f_l_k@t-online.de>=
+ wrote:
+>
+> - add PACKAGECONFIG for hdr10plus and 10bit - add numa support - build sh=
+ared library by default - do manual packaging to avoid dev-elf error: x265-=
+4.1-r0 do_package_qa: QA Issue: -dev package x265-dev contains non-symlink =
+.so '/usr/lib/libhdr10plus.so' [dev-elf] Signed-off-by: Markus Volk <f_l_k@=
+t-online.de> --- .../recipes-multimedia/x265/x265_3.2.1.bb | 26 -----------=
+------ .../recipes-multimedia/x265/x265_4.1.bb | 29 +++++++++++++++++++ 2 f=
+iles changed, 29 insertions(+), 26 deletions(-) delete mode 100644 meta-mul=
+timedia/recipes-multimedia/x265/x265_3.2.1.bb create mode 100644 meta-multi=
+media/recipes-multimedia/x265/x265_4.1.bb diff --git a/meta-multimedia/reci=
+pes-multimedia/x265/x265_3.2.1.bb b/meta-multimedia/recipes-multimedia/x265=
+/x265_3.2.1.bb deleted file mode 100644 index 225fbdee87..0000000000 --- a/=
+meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb +++ /dev/null @@ -1,2=
+6 +0,0 @@ -SUMMARY =3D "H.265/HEVC video encoder" -DESCRIPTION =3D "A free =
+software library and application for encoding video streams into the H.265/=
+HEVC format." -HOMEPAGE =3D "http://www.videolan.org/developers/x265.html" =
+- -LICENSE =3D "GPL-2.0-only" -LICENSE_FLAGS =3D "commercial" -LIC_FILES_CH=
+KSUM =3D "file://../COPYING;md5=3Dc9e0427bc58f129f99728c62d4ad4091" - -DEPE=
+NDS =3D "nasm-native gnutls zlib libpcre" - -SRC_URI =3D "http://ftp.videol=
+an.org/pub/videolan/x265/x265_${PV}.tar.gz" - -S =3D "${WORKDIR}/x265_${PV}=
+/source" - -SRC_URI[sha256sum] =3D "fb9badcf92364fd3567f8b5aa0e5e952aeea7a3=
+9a2b864387cec31e3b58cbbcc" - -inherit lib_package pkgconfig cmake - -do_gen=
+erate_toolchain_file:append() { - echo "set(CMAKE_ASM_NASM_FLAGS --debug-pr=
+efix-map ${S}=3D${TARGET_DBGSRC_DIR})" >> ${WORKDIR}/toolchain.cmake -} - -=
+EXTRA_OECMAKE:append:x86 =3D " -DENABLE_ASSEMBLY=3DOFF" -EXTRA_OECMAKE:appe=
+nd:aarch64 =3D " -DENABLE_PIC=3DON" - -AS[unexport] =3D "1" diff --git a/me=
+ta-multimedia/recipes-multimedia/x265/x265_4.1.bb b/meta-multimedia/recipes=
+-multimedia/x265/x265_4.1.bb new file mode 100644 index 0000000000..176774e=
+359 --- /dev/null +++ b/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb=
+ @@ -0,0 +1,29 @@ +SUMMARY =3D "H.265/HEVC video encoder" +DESCRIPTION =3D =
+"A free software library and application for encoding video streams into th=
+e H.265/HEVC format." +HOMEPAGE =3D "https://bitbucket.org/multicoreware/x2=
+65_git" + +LICENSE =3D "GPL-2.0-only" +LICENSE_FLAGS =3D "commercial" +LIC_=
+FILES_CHKSUM =3D "file://../COPYING;md5=3Dc9e0427bc58f129f99728c62d4ad4091"=
+ + +DEPENDS =3D "nasm-native gnutls zlib libpcre numactl" + +SRC_URI =3D "h=
+ttps://bitbucket.org/multicoreware/x265_git/downloads/x265_${PV}.tar.gz" +S=
+RC_URI[sha256sum] =3D "a31699c6a89806b74b0151e5e6a7df65de4b49050482fe5ebf8a=
+4379d7af8f29" +S =3D "${WORKDIR}/x265_${PV}/source" + +inherit lib_package =
+cmake pkgconfig + +EXTRA_OECMAKE +=3D "-DENABLE_SHARED=3DON -DENABLE_CLI=3D=
+ON" + +do_generate_toolchain_file:append() { + echo "set(CMAKE_ASM_NASM_FLA=
+GS --debug-prefix-map ${S}=3D/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR})" =
+>> ${WORKDIR}/toolchain.cmake +} + +PACKAGECONFIG ?=3D "hdr10plus 10bit" +P=
+ACKAGECONFIG[hdr10plus] =3D "-DENABLE_HDR10_PLUS=3DON,-DENABLE_HDR10_PLUS=
+=3DOFF" +PACKAGECONFIG[10bit] =3D "-DHIGH_BIT_DEPTH=3DON,-DHIGH_BIT_DEPTH=
+=3DOFF" + +FILES:${PN} +=3D "${libdir}/libhdr10plus.so" +FILES:${PN}-dev =
+=3D "${includedir} ${libdir}/pkgconfig ${libdir}/libx265.so" +
+> --
+> 2.47.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#114719): https://lists.openembedded.org/g/openembedde=
+d-devel/message/114719
+> Mute This Topic: https://lists.openembedded.org/mt/110480967/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
