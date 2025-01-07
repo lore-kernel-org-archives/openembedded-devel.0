@@ -1,97 +1,99 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 45534E77197
-	for <webhook@archiver.kernel.org>; Tue,  7 Jan 2025 13:17:38 +0000 (UTC)
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.web10.19937.1736255856045095480
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C0F38E77197
+	for <webhook@archiver.kernel.org>; Tue,  7 Jan 2025 14:00:48 +0000 (UTC)
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web11.20733.1736258447646338164
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Jan 2025 05:17:36 -0800
+ Tue, 07 Jan 2025 06:00:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=adpsYgYX;
- spf=pass (domain: mvista.com, ip: 209.85.214.176, mailfrom: vanusuri@mvista.com)
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-216395e151bso165353235ad.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Jan 2025 05:17:36 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=DH8L5yAn;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.51, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-aaf8f0ea963so50933866b.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Jan 2025 06:00:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1736255855; x=1736860655; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1736258446; x=1736863246; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=7rirCmQQ91LZLeWPdJIAd1RaTB4/Dy8DDT6Sgr0zZ3U=;
-        b=adpsYgYXVrlvfqEYy3/0OlqYZ4qy7KfASt55Nxm0NaucJWIKkeyue0vV801F7HqLn2
-         omEvzBxoOzrswNiSSNJ7mhVYE13DQhQTtMNsW4byT37VOT7DD4ViH1JVFxm3P8v69R1r
-         Rn4kpoEsSY8h+uEigwcF7NAebgvTVUsU6s6S4=
+        bh=d6c3gU/ENuk/a17jAJ9yxLr3OXzXYTI80cCPUtMdo4o=;
+        b=DH8L5yAnMX2OkQTZoP0vmsRf9d9qypxpJcVQlXcRaCXfKwxoGB8axOh5CFroJhGXfP
+         wzEgQV01ZiZ+1+57aeTXidpz5svq1KpOJLvFHcp5SpT4IFoZuups+Gg/H5z8W4HouA03
+         +pfZeeM1AGMQNpSAixrUC02VM6mgdd9XX98HM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736255855; x=1736860655;
+        d=1e100.net; s=20230601; t=1736258446; x=1736863246;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=7rirCmQQ91LZLeWPdJIAd1RaTB4/Dy8DDT6Sgr0zZ3U=;
-        b=Wi8s4eXwmmc+fCij3MDA/EhnIbdQZLMAF1nyRct2hE3KkUq3znZwaGH97VqvWs9hm7
-         Z5K8h3Sqs9kXWRHFtQsdGle41LeuG9BTkUz01oHr4CFtE22JdjaLE4ShTcEZGkP9r1Qf
-         FRv04Ag24fZuNMH4Kata6ufDkzxp0UJQVOnWw6hgUNgIPtkL+uq8TuAPFSaRf0BoIDkU
-         /1ANJuo0XrNY/dgH/JdhoFKoBUOnzNxR8TABretuqfRFYSvIx7pix/KCcoWreLApgCyU
-         NJ6sz0wGt8stBdd/3Q6RxOFuo8mxDctQFRk4VUx2LUdpAF8y9hRJQjlahsr3C2M2Cek6
-         btRg==
-X-Gm-Message-State: AOJu0YxHBYWd5WCX/cAMu28RUXePBwoj/Yer2j/a157egVadWHeWvT3q
-	udeKa8wA7UWvfj/uXax//GnfGW6rJSfwyPbrc6QOnQZLKxqBVNMAondUf5RCsAaHBPqPB30Cu3x
-	0/Jo=
-X-Gm-Gg: ASbGncsvJOm+YkKhzFMY9o7SFVf80gd7fv5OJKP4sZd+JXxy2oBE5PzhefvFJN24ynd
-	BfTyLnibspsoeuwAC0ksYvz4CfKaEjERayyKvBqj6iB/xJT6FttXE1FVRlg5sTYjUo0L54/ySpL
-	MIpg0tnHWa3S+rZJt2ulNiEddKPLZ+SELecuPsnA37O8aNMVyiewfxkoXC+1FIXiUnMRSifK9Vb
-	Bop6Mm4Hk7VS6Xvspj5RiGtfmRKNy7JlXgF1BSsyi4mdhsEvf4iGpb5hitl81TijrwtAJSW
-X-Google-Smtp-Source: AGHT+IGv4qVoUNu4U4LhGYAX7QEsfA1+nHUM0DOhmRO6f9PPP0haWqyGICuahnUgHiZtmp3lROcK+Q==
-X-Received: by 2002:a17:903:1248:b0:216:5db1:5dc1 with SMTP id d9443c01a7336-21a7a201275mr42946445ad.1.1736255855078;
-        Tue, 07 Jan 2025 05:17:35 -0800 (PST)
-Received: from localhost.localdomain ([2401:4900:882e:e918:6f2c:302b:4ca0:14ca])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-219dc9f6156sm299698115ad.209.2025.01.07.05.17.33
+        bh=d6c3gU/ENuk/a17jAJ9yxLr3OXzXYTI80cCPUtMdo4o=;
+        b=Hs+pvhaPOElxd82IQMQL99Glc+dVittGG+N1ZrXM9Er9PDxGPjqVsQeIydAUQl2/2u
+         HGDuT7IMMDmNco0raEREB+654oS4aJLl/I0dbIZ85ArHfGj40x+4L5H0jAobtN3fnaLD
+         zVMriiqNLNSlwL7o+3Nxqt411gEHTCqIeYDVU+oUZ01R5OiiA5SWVs6GiV6StVA8T0eP
+         MtsJV7BU5Qxz4CroHX7nh+bphRBULlirGYPm/HckPdzCZN8aFIY0Paq/8rw66fJfA9t9
+         kSdBPZMZiESURI0fj64DpRBcwDj8EbEidCQIYkb1rKV92Dnfr+b0XNdnZ5ZLuCDSo3en
+         HzDQ==
+X-Gm-Message-State: AOJu0YzwYhw1zC3XEyl2ixUQBwDUCkFXEstgtvaU2KixfBIQRNkeMGMW
+	b+k7CsC0PsCyBRocamHpBqMYLCCckR4+hTntRqdf15RwaitfhNu3wgFCAT2NAJ3G6hdGXVgl1oR
+	D
+X-Gm-Gg: ASbGncsjY6Y+qYq9hCiK4ZraN41ZK4AlAX+n/y4PvFg+9OgXrkudu22d935rj0NHh91
+	FApljVRbY+ejUzHkPG1zZ3cXwcY6z55BTwIY7rV0QW16uE83RfiqGmMwa7WywuW2YzeOLRZmHRw
+	xGPjRwRBkfA6kkR/t9xqbVJ/k9EBju5AXMX1XESjTPeaFE1QziAyN1HwzVtAdC+fIq3KUNlKvmx
+	p+34PuQzWC0tZa0S77Kf5xHE4ixu3+8+n9XwpQBmmevTNyPMT9ndFilOLNBnveII4VqSc8=
+X-Google-Smtp-Source: AGHT+IGsaJpW8DAnfv1KSaH5Y4s72TBBV89WtlI2Y3g+YU//ZZJKytMvKUGWr+v7BZeaZaBRH5B6aw==
+X-Received: by 2002:a17:906:6a24:b0:aab:7467:3f6a with SMTP id a640c23a62f3a-aac2ad8446emr5030701766b.21.1736258443269;
+        Tue, 07 Jan 2025 06:00:43 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-aac0efe4b6bsm2403422166b.93.2025.01.07.06.00.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Jan 2025 05:17:34 -0800 (PST)
-From: vanusuri@mvista.com
+        Tue, 07 Jan 2025 06:00:42 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-oe][scarthgap][PATCH RESEND] php: upgrade 8.2.24 -> 8.2.26
-Date: Tue,  7 Jan 2025 18:47:23 +0530
-Message-Id: <20250107131723.5666-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-pydantic: Upgrade 2.10.2 -> 2.10.4
+Date: Tue,  7 Jan 2025 16:00:36 +0200
+Message-Id: <20250107140040.3330151-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Jan 2025 13:17:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114700
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Jan 2025 14:00:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114701
 
-From: Vijay Anusuri <vanusuri@mvista.com>
+Upgrade to release 2.10.4:
 
-Includes fix for CVE-2024-8929, CVE-2024-11236, CVE-2024-11234 and CVE-2024-11233
+- Fix for comparison of AnyUrl objects
+- Properly fetch PEP 695 type params for functions, do not fetch
+  annotations from signature
+- Include JSON Schema input core schema in function schemas
+- Add len to _BaseUrl to avoid TypeError
+- Make sure the type reference is removed from the seen references
 
-Changelog:
-https://www.php.net/ChangeLog-8.php#8.2.26
-
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-devtools/php/{php_8.2.24.bb => php_8.2.26.bb} | 2 +-
+ .../{python3-pydantic_2.10.2.bb => python3-pydantic_2.10.4.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/php/{php_8.2.24.bb => php_8.2.26.bb} (99%)
+ rename meta-python/recipes-devtools/python/{python3-pydantic_2.10.2.bb => python3-pydantic_2.10.4.bb} (96%)
 
-diff --git a/meta-oe/recipes-devtools/php/php_8.2.24.bb b/meta-oe/recipes-devtools/php/php_8.2.26.bb
-similarity index 99%
-rename from meta-oe/recipes-devtools/php/php_8.2.24.bb
-rename to meta-oe/recipes-devtools/php/php_8.2.26.bb
-index 034f3bef1..10ef2c36e 100644
---- a/meta-oe/recipes-devtools/php/php_8.2.24.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.2.26.bb
-@@ -34,7 +34,7 @@ SRC_URI:append:class-target = " \
-           "
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic_2.10.2.bb b/meta-python/recipes-devtools/python/python3-pydantic_2.10.4.bb
+similarity index 96%
+rename from meta-python/recipes-devtools/python/python3-pydantic_2.10.2.bb
+rename to meta-python/recipes-devtools/python/python3-pydantic_2.10.4.bb
+index bfc658e38a..adfce81b66 100644
+--- a/meta-python/recipes-devtools/python/python3-pydantic_2.10.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pydantic_2.10.4.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=09280955509d1c4ca14bae02f21d49a6"
  
- S = "${WORKDIR}/php-${PV}"
--SRC_URI[sha256sum] = "4cc76ec644eee97d17c92bfe8d0e84714fedf299a538b7dfadc0639dd0dc432f"
-+SRC_URI[sha256sum] = "be57c347d451c905bcb4336832a864d9928dd0e20989b872705fea0ba6476c6b"
+ inherit pypi python_hatchling
  
- CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
- CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
+-SRC_URI[sha256sum] = "2bc2d7f17232e0841cbba4641e65ba1eb6fafb3a08de3a091ff3ce14a197c4fa" 
++SRC_URI[sha256sum] = "82f12e9723da6de4fe2ba888b5971157b3be7ad914267dea8f05f82b28254f06" 
+ 
+ DEPENDS += "python3-hatch-fancy-pypi-readme-native"
+ 
 -- 
-2.25.1
+2.39.5
 
 
