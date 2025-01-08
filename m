@@ -2,58 +2,58 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 89453E77188
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A1EFE77199
 	for <webhook@archiver.kernel.org>; Wed,  8 Jan 2025 09:39:00 +0000 (UTC)
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
- by mx.groups.io with SMTP id smtpd.web11.15647.1736329138208213186
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
+ by mx.groups.io with SMTP id smtpd.web11.15648.1736329139642282745
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Jan 2025 01:38:58 -0800
+ Wed, 08 Jan 2025 01:38:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=e9wXAcby;
- spf=pass (domain: konsulko.com, ip: 209.85.208.54, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-5d27243ba8bso30894204a12.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Jan 2025 01:38:57 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=jTS1fyv0;
+ spf=pass (domain: konsulko.com, ip: 209.85.208.52, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-5d4e2aa7ea9so31123513a12.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Jan 2025 01:38:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1736329136; x=1736933936; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1736329138; x=1736933938; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Sqgj+BXJlHKHgS2x7kCvjlUY/Cs013rQWOoI7VFboj0=;
-        b=e9wXAcbyG6k7MW7KJbNrmcF8hlHg5/e99TpEUY6Kch6II9pA5YoLWJ3UUs6M86mqJw
-         vw35hVjTx1iaWTj46idgLvqf8LywGOluF6Zget97fIzWvghXHRMmwiCtx0joaPMvMXmr
-         Kbxvmc4FQN2vGeA+C61yVdWxhvz7zVIs3d2jQ=
+        bh=oLl5Gf1NIenPwi6WSrYA2qIyOQsCCJsJrJCPQD8pf6E=;
+        b=jTS1fyv0yJIeQdhGk133UNIW6JcAM0hm6J20LnnbE34HrvMlVsYE6pzCVUSEbwawhV
+         0IZ3ZyD07YQMfX78FMsWDrAxKGpH4Q2yW01JdQmn580Xz1s6F/gdKr8yD8OdLgZfkLKs
+         8cgI9dqL3WbrzBeTZluM+7VtgMbHB1ayOEW9c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736329136; x=1736933936;
+        d=1e100.net; s=20230601; t=1736329138; x=1736933938;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Sqgj+BXJlHKHgS2x7kCvjlUY/Cs013rQWOoI7VFboj0=;
-        b=DiPZ0pWZEXnWWduxovCeVK6OM84R5V5+z+6fOEsrEevO+Jyx7O62WVdoVWN/xPwA1Q
-         Ci6WAb+er46cJLE7d5XvwNArGuYsx9F8VhPiMxFWnURkmnBknzNFWX1fioETRHlW2E4n
-         7XLfJrVLJ99zy6jyQcv06UxGAiMCPZn/GwNLcp+CX1kGEHu+OORuYrlEKbfSulVNYvzG
-         Niqy1Nk1BwQu8q0wLw7Zh3OKAKrZ86I/PckTbM6CGNvvIAfxAapwKKxZnarfsqvTXcq9
-         yS2jJSBhdLbNiMlxk7o+J4Pd0nuBXTvSkkGesjbJU//xSM45CTE6hJg8kMYRQT6bczmG
-         BzDg==
-X-Gm-Message-State: AOJu0YxCsUJYMtS/SlEb9l3+5aHB43KAQNCJQQGoM8evtqPW76rN6vZW
-	xYyCzXLIqa0E1/cIoJqMnb4I1JKc04S3R85sXJhf6SdMV2PyzUY2z9BS8AAic2O6AJmdsBXN64J
-	M
-X-Gm-Gg: ASbGncv5VWNoJnyd2sXL9Xs2cx0K/E2R5Qiiwo1xZGwZl38I1oItls1VvN/KGROgrSW
-	PvGwMLtMOX1/STsRpM7yO626WDjIMXeZMF4xO+8v6p5na2fvZCkEK8euQJyEF8Vxyrl7YrVxydZ
-	U5uGEAnrzNjO9M1PPAOV9fOwvEVhi8dS3ztKsgGNRZEE6tk0tvfX5q7WQODtlAiQqYUrxZCJkzJ
-	d1wzJ8htnSekK28fwUnf6pF5YRRc+edqI/bxVahJQfwg0KPnDmpXnhqtVILzHEcO+Fw9To=
-X-Google-Smtp-Source: AGHT+IFTYXLbpZg/hVX3I7oCSv+pIzdfCpq89hERMkaw7Vh5/qxMUAKoulCtWW7g/RiAqjiV64lCUw==
-X-Received: by 2002:a05:6402:3604:b0:5d3:cfd0:8d46 with SMTP id 4fb4d7f45d1cf-5d972e6ade1mr1811378a12.30.1736329136280;
-        Wed, 08 Jan 2025 01:38:56 -0800 (PST)
+        bh=oLl5Gf1NIenPwi6WSrYA2qIyOQsCCJsJrJCPQD8pf6E=;
+        b=PhPdqWs8FLmbYzNtjs10ws2YXXlVAIkE8Nfe/WmYybXiLgMsv5w1su1+uS8+hlVbU3
+         TFq0cOv9cH/zq5ycPZyqBwXMipNcP723ONz8lYlqR5oHRK0FOKThsCrvvRHDaKDk0m6n
+         EgbF49OSRzR8lTh+fKFVGaYjRWTVJDF+pviIJlK8+ceEcvjcb3vsKMocxRuw8Y/xoFAH
+         Ca0ugVLcEcm+dILUCaGfiCXfJdhpuNrRCuXknKXW2jTdSHiyT1XEXmMLIMVj4CX/usLg
+         54KIiy2a9tjEKLs4QVF58hLEVs89++OiGEmOC/c+WntzYbdb6dNJrsH6XJpPmX/JOJof
+         rrqg==
+X-Gm-Message-State: AOJu0YzgGHH/qbkfKgsgTYJpeiwJ+iGMnmt4RYX07c41WeH9Yfjnn1lP
+	+SzvP17eWg1VBIidEuJN6Fb5vVaEa+o/BOxNiMYfcuUiFPBsuPIHEmejhQJDtc6JZ6zuGNW27Ac
+	s
+X-Gm-Gg: ASbGncs241CY2kzxXiF535RTKXJ2moyJ89a2ZHkKe8yzP3tB1fbLeZR87hDLIZXCD1B
+	cEy7oeCtGruVluscCX2Y2rN8etYacDor+N+4UoOzxPkSIvHVLg6SU9vkRNtFtdAP3k7HkBeII+K
+	NUc0kg/F7wBz/Mo2JWNKelzJ/H45XO809tJSgZIrB/mxxDJqOeBhCH/WHpOs3JZF4UG/81E8StB
+	QyBjpjWKwCPDAPq4R+8uHDT3aKCcWcKG4sdJ4WnAKYw0Zn30x+rjf6Wjykp0IN01OXrds0=
+X-Google-Smtp-Source: AGHT+IF7M9ziMiV3gBx4ss3N58Nhggl6G87uKq6sITm9WvpMn8WehZbPArA1BnCSd0GzQVcAykfuzA==
+X-Received: by 2002:a05:6402:50c6:b0:5d0:efaf:fb73 with SMTP id 4fb4d7f45d1cf-5d972e16517mr1790634a12.15.1736329137690;
+        Wed, 08 Jan 2025 01:38:57 -0800 (PST)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5d80676f496sm25179772a12.34.2025.01.08.01.38.54
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5d80676f496sm25179772a12.34.2025.01.08.01.38.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Jan 2025 01:38:55 -0800 (PST)
+        Wed, 08 Jan 2025 01:38:57 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-marshmallow: Upgrade 3.23.3 -> 3.24.1
-Date: Wed,  8 Jan 2025 11:38:48 +0200
-Message-Id: <20250108093851.1560110-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-a2wsgi: Upgrade 1.10.7 -> 1.10.8
+Date: Wed,  8 Jan 2025 11:38:49 +0200
+Message-Id: <20250108093851.1560110-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250108093851.1560110-1-leon.anavi@konsulko.com>
 References: <20250108093851.1560110-1-leon.anavi@konsulko.com>
@@ -63,40 +63,34 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 08 Jan 2025 09:39:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114738
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114739
 
-Upgrade to release 3.24.1:
+Upgrade to release 1.10.8:
 
-- Typing: Fix typing for class_registry.get_class
-
-From release 3.24.0:
-
-- Typing: Improve typings in marshmallow.fields
-- Typing: Replace type comments with inline typings
-- Typing: Fix type hint for nested parameter of Nested
+- Fix asgi.py's Task thread safety
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...hon3-marshmallow_3.23.3.bb => python3-marshmallow_3.24.1.bb} | 2 +-
+ .../{python3-a2wsgi_1.10.7.bb => python3-a2wsgi_1.10.8.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-marshmallow_3.23.3.bb => python3-marshmallow_3.24.1.bb} (92%)
+ rename meta-python/recipes-devtools/python/{python3-a2wsgi_1.10.7.bb => python3-a2wsgi_1.10.8.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-marshmallow_3.23.3.bb b/meta-python/recipes-devtools/python/python3-marshmallow_3.24.1.bb
-similarity index 92%
-rename from meta-python/recipes-devtools/python/python3-marshmallow_3.23.3.bb
-rename to meta-python/recipes-devtools/python/python3-marshmallow_3.24.1.bb
-index 3e01575df1..0d41e223dd 100644
---- a/meta-python/recipes-devtools/python/python3-marshmallow_3.23.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-marshmallow_3.24.1.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "\
-                     file://LICENSE;md5=27586b20700d7544c06933afe56f7df4 \
-                     file://docs/license.rst;md5=13da439ad060419fb7cf364523017cfb"
+diff --git a/meta-python/recipes-devtools/python/python3-a2wsgi_1.10.7.bb b/meta-python/recipes-devtools/python/python3-a2wsgi_1.10.8.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-a2wsgi_1.10.7.bb
+rename to meta-python/recipes-devtools/python/python3-a2wsgi_1.10.8.bb
+index 023f227909..b9daf044f0 100644
+--- a/meta-python/recipes-devtools/python/python3-a2wsgi_1.10.7.bb
++++ b/meta-python/recipes-devtools/python/python3-a2wsgi_1.10.8.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e10d05d29ec6d8be8bfc503683f1bc9a"
  
--SRC_URI[sha256sum] = "d586c8685ebdb80bf754e1f96e3f305aaf30951f1fc69175b977453633467e76"
-+SRC_URI[sha256sum] = "efdcb656ac8788f0e3d1d938f8dc0f237bf1a99aff8f6dfbffa594981641cea0"
+ inherit pypi python_setuptools_build_meta ptest
  
- inherit python_flit_core pypi ptest
+-SRC_URI[sha256sum] = "ce462ff7e1daac0bc57183c6f800f09a71c2a7a98ddd5cdeca149e3eabf3338e"
++SRC_URI[sha256sum] = "fc00bab1fc792f89a8ce1b491b2ad1717b145d8caefb75d0a8586946edc97cb2"
  
+ DEPENDS += " \
+         python3-pdm-native \
 -- 
 2.39.5
 
