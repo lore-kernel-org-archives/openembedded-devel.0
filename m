@@ -1,90 +1,679 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9879AE77188
-	for <webhook@archiver.kernel.org>; Wed,  8 Jan 2025 05:44:38 +0000 (UTC)
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web11.12669.1736315071941798929
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 532F1E77188
+	for <webhook@archiver.kernel.org>; Wed,  8 Jan 2025 07:46:39 +0000 (UTC)
+Received: from mta-64-228.siemens.flowmailer.net (mta-64-228.siemens.flowmailer.net [185.136.64.228])
+ by mx.groups.io with SMTP id smtpd.web11.14090.1736322388175470814
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Jan 2025 21:44:31 -0800
+ Tue, 07 Jan 2025 23:46:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Y/XARLq0;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-2167141dfa1so8649865ad.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Jan 2025 21:44:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1736315071; x=1736919871; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=YAqHx9vOUDCxwZk2N2VEWg5qTJVKJtjpSC7l0QdQdkk=;
-        b=Y/XARLq0HSC9/OvFNDPpPXbJiml6T/y4iiWTZpvANDlidOcjiSfI1DDp4eOZDJdCU+
-         ZNCSMGlCmDHMZWEev+LJfVMAhGXX7TxnL+j4f8q+NBIE2IAwsqzjFDS4Z2+opux7bYr+
-         SFKrEm11/IzUkbTBK89HSnKBttw49GVD+/WcTnMPs+0snh1IK/YgodzIRbB23220zCKX
-         sdG9CyuhRcV89sbEeSiOoGC/9cjBpk6jpRmFFuVwKkfPTjDXaB61hYDf3WrTIzlnET2R
-         mQwmYmhP+b2uUPOlL0R56+e8kjsHjkPZxdc92VzZJCRaea/Uy5flsLBnzQYz5vKsJT+t
-         vXaQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736315071; x=1736919871;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=YAqHx9vOUDCxwZk2N2VEWg5qTJVKJtjpSC7l0QdQdkk=;
-        b=I56aQf5SMgxFj7CS68QH905Pszpvbx2UZ90yO/QWfk3UWCB7LHRll2Dn/HuDvTwaOG
-         qdNE3UnSjO8cLVyIn6rnrpQiXong9igzZiTTvmSln5w7sN9MnfOYtwrHNKrYFpS4yu39
-         KSXn7vB2wSoKUZ6krUuwAIP7L/w6ZirrneJeATR++wj0Nh+BQ1YMrPYhzTqy4VcvBbZq
-         BYB7ABfKToSh0NEF5yO/AQC/0LCyRfq1cQsLGnvEBqK9Wq6yHvH687yzFoRc1Rb94Dvq
-         63q3dGMISqO6oWQbX6Xo46GhR9SV2YKtA89wGHam/+WirT0LWPe6IQbvlWlYh2Gnzugm
-         RCgw==
-X-Gm-Message-State: AOJu0YxRGGS13Ec1IhgP0jA/aPSY+vzbYg8g7pUCKN4spLdB+AmTi5Az
-	pxJaA13BDwUA1qQ2IhSibp1qkj65S1tuA15VNuR7srgTrY2ZDmRGTBkgqA==
-X-Gm-Gg: ASbGncvtoxuiBHI0lNdRn7ARaH0FZv0QlnhH4gaghA5P3xiSHUrH6+uNMFR1WCmWRCR
-	ppLsbCfr+/xa0/SBu3E14BKrvCof1bGieskBpqpkNE3ehm6qXI9TAKez48H297NJZGsYhGj6wT6
-	zkH6c5HwzjU10nQ4WbKu67/PZcyc9bovTZ2X+rztdjFLlrSzfk+Zc2MDmvoDwilw7sGe5mCXBJP
-	nMo3MBVISLG7DkDEYnOkJHVs8OEo7GStL9dJ4S9D6dYL6Ty
-X-Google-Smtp-Source: AGHT+IFKuPQxsqcvYAV+rv3EiGGTtWNgYSpXz5RoxD6FfAQ8aWAhuoIehtn7Rxb3PRb95FuYaE4B0A==
-X-Received: by 2002:a17:902:ea0e:b0:215:ba2b:cd55 with SMTP id d9443c01a7336-21a83bb9986mr25628525ad.2.1736315070967;
-        Tue, 07 Jan 2025 21:44:30 -0800 (PST)
-Received: from apollo.localdomain ([2601:646:8201:fd20::5bc2])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-219dc9f4406sm319551695ad.170.2025.01.07.21.44.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Jan 2025 21:44:30 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=AV+PXe0O;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-256628-2025010807462385077234ee04b1ce35-oqmhkz@rts-flowmailer.siemens.com)
+Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 2025010807462385077234ee04b1ce35
+        for <openembedded-devel@lists.openembedded.org>;
+        Wed, 08 Jan 2025 08:46:24 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=6SU57RL43Mi4fZ63jrwBggy77wzuusWW4LEoEI7VNgM=;
+ b=AV+PXe0O8zVl+gSVYUsd4PWX3STFbyR+5qwAzn0E9c83hcqjR6sgiJ6U1AeNzpA7VU6SLd
+ AK0XiWlj5Fs4xnYCWdYzqDuEmdqXc1dCGre1YX2e3faW6uj9IOX6cjvpDOzC93SY6/sBbHhl
+ 3YtrDxQr56hMH9SvPjKSPlUJiboziPqYVPXC13P3qweoKKJcLDdNnLwy6V7MdcrrfP9tFM7c
+ fhGX5xce6OXYVkicr9Teq0y0tvgAR/FMxMCMmQuSU7yjszDQXgmFWEZL2q5IEVIyqEBAeLrd
+ FQa8EOPa3FflWKWEpxxLl4BeAF4Ztx2+f3/zJ5hfvZGOggo6SpQpAPDA==;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH] x265: Fix build on x86
-Date: Tue,  7 Jan 2025 21:44:28 -0800
-Message-ID: <20250108054428.3149282-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.47.1
+Cc: Peter Marko <peter.marko@siemens.com>,
+	Stanislav Angelovic <stanislav.angelovic.ext@siemens.com>
+Subject: [meta-oe][scarthgap][PATCH] thrift: fix c++ generated code compilation with clang
+Date: Wed,  8 Jan 2025 08:45:12 +0100
+Message-Id: <20250108074512.711227-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Jan 2025 05:44:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114735
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Jan 2025 07:46:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114736
 
-Disable asm on x86
+From: Peter Marko <peter.marko@siemens.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Backport PR merged to thrift v0.21.0 to be able to compile thrift
+generated c++ code with C++20 clang 15+.
+
+Signed-off-by: Stanislav Angelovic <stanislav.angelovic.ext@siemens.com>
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- meta-multimedia/recipes-multimedia/x265/x265_4.1.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../thrift/thrift/0001-thrift-pr2755.patch    | 599 ++++++++++++++++++
+ .../thrift/thrift_0.20.0.bb                   |   4 +-
+ 2 files changed, 602 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-connectivity/thrift/thrift/0001-thrift-pr2755.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb b/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb
-index 268ccec167..23d6342d26 100644
---- a/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb
-+++ b/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb
-@@ -15,9 +15,9 @@ S = "${WORKDIR}/x265_${PV}/source"
- inherit lib_package cmake pkgconfig
+diff --git a/meta-oe/recipes-connectivity/thrift/thrift/0001-thrift-pr2755.patch b/meta-oe/recipes-connectivity/thrift/thrift/0001-thrift-pr2755.patch
+new file mode 100644
+index 0000000000..b685d42728
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/thrift/thrift/0001-thrift-pr2755.patch
+@@ -0,0 +1,599 @@
++From f02ac2fb573bed72e9a2d1875807c6ff7ac19ec8 Mon Sep 17 00:00:00 2001
++From: Lukas Barth <mail@tinloaf.de>
++Date: Wed, 8 Feb 2023 09:33:03 +0100
++Subject: [PATCH 1/5] Move default constructor and operator== implementation to
++ CPP file
++
++Both the default constructor and operator== implementations reference
++certain member functions of the class' members. As an example, the default
++constructor references (i.e., "uses") the default constructors of its
++members.
++
++If a class contains a std::vector<Foo>, and Foo has only been *forward*-
++declared (which happens often in Thrift-generated code), this creates
++undefined behavior: The std::vector specification states that as long as
++Foo is an incomplete type, it is fine to reference std::vector<Foo>, but
++not any members (such as its default constructor).
++
++Thus, we must defer our default constructor's implementation (which references
++the default constructor of std::vector<Foo>) to a point where Foo is a
++complete type. That is the case in the .cpp file.
++
++The same holds for operator==.
++
++Upstream-Status: Backport [https://github.com/apache/thrift/pull/2755]
++
++Signed-off-by: Stanislav Angelovic <stanislav.angelovic.ext@siemens.com>
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ .../src/thrift/generate/t_cpp_generator.cc    | 187 +++++++++++-------
++ 1 file changed, 121 insertions(+), 66 deletions(-)
++
++diff --git a/compiler/cpp/src/thrift/generate/t_cpp_generator.cc b/compiler/cpp/src/thrift/generate/t_cpp_generator.cc
++index 9724fae80..fecfa4bb5 100644
++--- a/compiler/cpp/src/thrift/generate/t_cpp_generator.cc
+++++ b/compiler/cpp/src/thrift/generate/t_cpp_generator.cc
++@@ -146,11 +146,13 @@ public:
++                                   bool is_user_struct = false);
++   void generate_copy_constructor(std::ostream& out, t_struct* tstruct, bool is_exception);
++   void generate_move_constructor(std::ostream& out, t_struct* tstruct, bool is_exception);
+++  void generate_default_constructor(std::ostream& out, t_struct* tstruct, bool is_exception);
++   void generate_constructor_helper(std::ostream& out,
++                                    t_struct* tstruct,
++                                    bool is_excpetion,
++                                    bool is_move);
++   void generate_assignment_operator(std::ostream& out, t_struct* tstruct);
+++  void generate_equality_operator(std::ostream& out, t_struct* tstruct);
++   void generate_move_assignment_operator(std::ostream& out, t_struct* tstruct);
++   void generate_assignment_helper(std::ostream& out, t_struct* tstruct, bool is_move);
++   void generate_struct_reader(std::ostream& out, t_struct* tstruct, bool pointers = false);
++@@ -914,6 +916,10 @@ void t_cpp_generator::generate_cpp_struct(t_struct* tstruct, bool is_exception)
++   generate_struct_reader(out, tstruct);
++   generate_struct_writer(out, tstruct);
++   generate_struct_swap(f_types_impl_, tstruct);
+++  if (!gen_no_default_operators_) {
+++    generate_equality_operator(f_types_impl_, tstruct);
+++  }
+++  generate_default_constructor(f_types_impl_, tstruct, is_exception);
++   generate_copy_constructor(f_types_impl_, tstruct, is_exception);
++   if (gen_moveable_) {
++     generate_move_constructor(f_types_impl_, tstruct, is_exception);
++@@ -934,6 +940,117 @@ void t_cpp_generator::generate_cpp_struct(t_struct* tstruct, bool is_exception)
++   has_members_ = true;
++ }
++ 
+++void t_cpp_generator::generate_equality_operator(std::ostream& out, t_struct* tstruct) {
+++  // Get members
+++  vector<t_field*>::const_iterator m_iter;
+++  const vector<t_field*>& members = tstruct->get_members();
+++
+++  out << indent() << "bool " << tstruct->get_name()
+++      << "::operator==(const " << tstruct->get_name() << " & "
+++      << (members.size() > 0 ? "rhs" : "/* rhs */") << ") const" << endl;
+++  scope_up(out);
+++  for (m_iter = members.begin(); m_iter != members.end(); ++m_iter) {
+++    // Most existing Thrift code does not use isset or optional/required,
+++    // so we treat "default" fields as required.
+++    if ((*m_iter)->get_req() != t_field::T_OPTIONAL) {
+++      out << indent() << "if (!(" << (*m_iter)->get_name() << " == rhs."
+++          << (*m_iter)->get_name() << "))" << endl << indent() << "  return false;" << endl;
+++    } else {
+++      out << indent() << "if (__isset." << (*m_iter)->get_name() << " != rhs.__isset."
+++          << (*m_iter)->get_name() << ")" << endl << indent() << "  return false;" << endl
+++          << indent() << "else if (__isset." << (*m_iter)->get_name() << " && !("
+++          << (*m_iter)->get_name() << " == rhs." << (*m_iter)->get_name() << "))" << endl
+++          << indent() << "  return false;" << endl;
+++    }
+++  }
+++  indent(out) << "return true;" << endl;
+++  scope_down(out);
+++  out << "\n";
+++}
+++
+++void t_cpp_generator::generate_default_constructor(ostream& out,
+++                                                   t_struct* tstruct,
+++                                                   bool is_exception) {
+++  // Get members
+++  vector<t_field*>::const_iterator m_iter;
+++  const vector<t_field*>& members = tstruct->get_members();
+++
+++  // TODO(barth) this is duplicated from generate_struct_declaration
+++  bool has_default_value = false;
+++  for (m_iter = members.begin(); m_iter != members.end(); ++m_iter) {
+++    t_type* t = get_true_type((*m_iter)->get_type());
+++    if (is_reference(*m_iter) || t->is_string()) {
+++      t_const_value* cv = (*m_iter)->get_value();
+++      if (cv != nullptr) {
+++        has_default_value = true;
+++        break;
+++      }
+++    }
+++  }
+++
+++  std::string clsname_ctor = tstruct->get_name() + "::" + tstruct->get_name() + "()";
+++  indent(out) << clsname_ctor << (has_default_value ? "" : " noexcept");
+++
+++  if (has_default_value || is_exception) {
+++    // We need an initializer block
+++
+++    bool init_ctor = false;
+++    std::string args_indent("   ");
+++
+++    // Default-initialize TException, if it is our base type
+++    if (is_exception)
+++    {
+++      out << "\n";
+++      indent(out) << " : ";
+++      out << "TException()";
+++      init_ctor = true;
+++    }
+++
+++    // Default-initialize all members that should be initialized in
+++    // the initializer block
+++    for (m_iter = members.begin(); m_iter != members.end(); ++m_iter) {
+++      t_type* t = get_true_type((*m_iter)->get_type());
+++      if (t->is_base_type() || t->is_enum() || is_reference(*m_iter)) {
+++        string dval;
+++        t_const_value* cv = (*m_iter)->get_value();
+++        if (cv != nullptr) {
+++          dval += render_const_value(out, (*m_iter)->get_name(), t, cv);
+++        } else if (t->is_enum()) {
+++          dval += "static_cast<" + type_name(t) + ">(0)";
+++        } else {
+++          dval += (t->is_string() || is_reference(*m_iter)) ? "" : "0";
+++        }
+++        if (!init_ctor) {
+++          out << "\n";
+++          indent(out) << " : ";
+++          init_ctor = true;
+++        } else {
+++          out << ",\n";
+++          indent(out) << args_indent;
+++        }
+++
+++        out << (*m_iter)->get_name() << "(" << dval << ")";
+++      }
+++    }
+++    out << " {" << endl;
+++    indent_up();
+++    // TODO(dreiss): When everything else in Thrift is perfect,
+++    // do more of these in the initializer list.
+++    for (m_iter = members.begin(); m_iter != members.end(); ++m_iter) {
+++      t_type* t = get_true_type((*m_iter)->get_type());
+++      if (!t->is_base_type() && !t->is_enum() && !is_reference(*m_iter)) {
+++        t_const_value* cv = (*m_iter)->get_value();
+++        if (cv != nullptr) {
+++          print_const_value(out, (*m_iter)->get_name(), t, cv);
+++        }
+++      }
+++    }
+++    scope_down(out);
+++  } else {
+++    out << " {}\n";
+++  }
+++}
+++
++ void t_cpp_generator::generate_copy_constructor(ostream& out,
++                                                 t_struct* tstruct,
++                                                 bool is_exception) {
++@@ -1168,52 +1285,7 @@ void t_cpp_generator::generate_struct_declaration(ostream& out,
++ 
++     // Default constructor
++     std::string clsname_ctor = tstruct->get_name() + "()";
++-    indent(out) << clsname_ctor << (has_default_value ? "" : " noexcept");
++-
++-    bool init_ctor = false;
++-    std::string args_indent(
++-      indent().size() + clsname_ctor.size() + (has_default_value ? 3 : -1), ' ');
++-
++-    for (m_iter = members.begin(); m_iter != members.end(); ++m_iter) {
++-      t_type* t = get_true_type((*m_iter)->get_type());
++-      if (t->is_base_type() || t->is_enum() || is_reference(*m_iter)) {
++-        string dval;
++-        t_const_value* cv = (*m_iter)->get_value();
++-        if (cv != nullptr) {
++-          dval += render_const_value(out, (*m_iter)->get_name(), t, cv);
++-        } else if (t->is_enum()) {
++-          dval += "static_cast<" + type_name(t) + ">(0)";
++-        } else {
++-          dval += (t->is_string() || is_reference(*m_iter)) ? "" : "0";
++-        }
++-        if (!init_ctor) {
++-          init_ctor = true;
++-          if(has_default_value) {
++-            out << " : ";
++-          } else {
++-            out << '\n' << args_indent << ": ";
++-            args_indent.append("  ");
++-          }
++-        } else {
++-          out << ",\n" << args_indent;
++-        }
++-        out << (*m_iter)->get_name() << "(" << dval << ")";
++-      }
++-    }
++-    out << " {" << endl;
++-    indent_up();
++-    // TODO(dreiss): When everything else in Thrift is perfect,
++-    // do more of these in the initializer list.
++-    for (m_iter = members.begin(); m_iter != members.end(); ++m_iter) {
++-      t_type* t = get_true_type((*m_iter)->get_type());
++-      if (!t->is_base_type() && !t->is_enum() && !is_reference(*m_iter)) {
++-        t_const_value* cv = (*m_iter)->get_value();
++-        if (cv != nullptr) {
++-          print_const_value(out, (*m_iter)->get_name(), t, cv);
++-        }
++-      }
++-    }
++-    scope_down(out);
+++    indent(out) << clsname_ctor << (has_default_value ? "" : " noexcept") << ";" << endl;
++   }
++ 
++   if (tstruct->annotations_.find("final") == tstruct->annotations_.end()) {
++@@ -1254,27 +1326,10 @@ void t_cpp_generator::generate_struct_declaration(ostream& out,
++   if (!pointers) {
++     // Should we generate default operators?
++     if (!gen_no_default_operators_) {
++-      // Generate an equality testing operator.  Make it inline since the compiler
++-      // will do a better job than we would when deciding whether to inline it.
+++      // Generate an equality testing operator.
++       out << indent() << "bool operator == (const " << tstruct->get_name() << " & "
++-          << (members.size() > 0 ? "rhs" : "/* rhs */") << ") const" << endl;
++-      scope_up(out);
++-      for (m_iter = members.begin(); m_iter != members.end(); ++m_iter) {
++-        // Most existing Thrift code does not use isset or optional/required,
++-        // so we treat "default" fields as required.
++-        if ((*m_iter)->get_req() != t_field::T_OPTIONAL) {
++-          out << indent() << "if (!(" << (*m_iter)->get_name() << " == rhs."
++-              << (*m_iter)->get_name() << "))" << endl << indent() << "  return false;" << endl;
++-        } else {
++-          out << indent() << "if (__isset." << (*m_iter)->get_name() << " != rhs.__isset."
++-              << (*m_iter)->get_name() << ")" << endl << indent() << "  return false;" << endl
++-              << indent() << "else if (__isset." << (*m_iter)->get_name() << " && !("
++-              << (*m_iter)->get_name() << " == rhs." << (*m_iter)->get_name() << "))" << endl
++-              << indent() << "  return false;" << endl;
++-        }
++-      }
++-      indent(out) << "return true;" << endl;
++-      scope_down(out);
+++          << (members.size() > 0 ? "rhs" : "/* rhs */") << ") const;" << endl;
+++
++       out << indent() << "bool operator != (const " << tstruct->get_name() << " &rhs) const {"
++           << endl << indent() << "  return !(*this == rhs);" << endl << indent() << "}" << endl
++           << endl;
++
++From cedcd0e6424a08dd6feeb2533810054c9aca2a9e Mon Sep 17 00:00:00 2001
++From: Lukas Barth <mail@tinloaf.de>
++Date: Wed, 8 Feb 2023 10:11:48 +0100
++Subject: [PATCH 2/5] Factor out duplicated code into helper function
++
++---
++ .../src/thrift/generate/t_cpp_generator.cc    | 43 ++++++++++---------
++ 1 file changed, 23 insertions(+), 20 deletions(-)
++
++diff --git a/compiler/cpp/src/thrift/generate/t_cpp_generator.cc b/compiler/cpp/src/thrift/generate/t_cpp_generator.cc
++index fecfa4bb5..a77982f61 100644
++--- a/compiler/cpp/src/thrift/generate/t_cpp_generator.cc
+++++ b/compiler/cpp/src/thrift/generate/t_cpp_generator.cc
++@@ -302,6 +302,12 @@ public:
++    */
++   bool is_struct_storage_not_throwing(t_struct* tstruct) const;
++ 
+++  /**
+++   * Helper function to determine whether any of the members of our struct
+++   * has a default value.
+++   */
+++  bool has_field_with_default_value(t_struct* tstruct);
+++
++ private:
++   /**
++    * Returns the include prefix to use for a file generated by program, or the
++@@ -968,26 +974,33 @@ void t_cpp_generator::generate_equality_operator(std::ostream& out, t_struct* ts
++   out << "\n";
++ }
++ 
++-void t_cpp_generator::generate_default_constructor(ostream& out,
++-                                                   t_struct* tstruct,
++-                                                   bool is_exception) {
++-  // Get members
+++bool t_cpp_generator::has_field_with_default_value(t_struct* tstruct)
+++{
++   vector<t_field*>::const_iterator m_iter;
++   const vector<t_field*>& members = tstruct->get_members();
++ 
++-  // TODO(barth) this is duplicated from generate_struct_declaration
++-  bool has_default_value = false;
++   for (m_iter = members.begin(); m_iter != members.end(); ++m_iter) {
++     t_type* t = get_true_type((*m_iter)->get_type());
++     if (is_reference(*m_iter) || t->is_string()) {
++       t_const_value* cv = (*m_iter)->get_value();
++       if (cv != nullptr) {
++-        has_default_value = true;
++-        break;
+++        return true;
++       }
++     }
++   }
++ 
+++  return false;
+++}
+++
+++void t_cpp_generator::generate_default_constructor(ostream& out,
+++                                                   t_struct* tstruct,
+++                                                   bool is_exception) {
+++  // Get members
+++  vector<t_field*>::const_iterator m_iter;
+++  const vector<t_field*>& members = tstruct->get_members();
+++
+++  bool has_default_value = has_field_with_default_value(tstruct);
+++
++   std::string clsname_ctor = tstruct->get_name() + "::" + tstruct->get_name() + "()";
++   indent(out) << clsname_ctor << (has_default_value ? "" : " noexcept");
++ 
++@@ -1271,18 +1284,8 @@ void t_cpp_generator::generate_struct_declaration(ostream& out,
++                   << endl;
++     }
++ 
++-    bool has_default_value = false;
++-    for (m_iter = members.begin(); m_iter != members.end(); ++m_iter) {
++-      t_type* t = get_true_type((*m_iter)->get_type());
++-      if (is_reference(*m_iter) || t->is_string()) {
++-        t_const_value* cv = (*m_iter)->get_value();
++-        if (cv != nullptr) {
++-          has_default_value = true;
++-          break;
++-        }
++-      }
++-    }
++-
+++    bool has_default_value = has_field_with_default_value(tstruct);
+++    
++     // Default constructor
++     std::string clsname_ctor = tstruct->get_name() + "()";
++     indent(out) << clsname_ctor << (has_default_value ? "" : " noexcept") << ";" << endl;
++
++From 16105fa1a1bb9ae633b805fcb7af3c7757beb6e0 Mon Sep 17 00:00:00 2001
++From: Lukas Barth <mail@tinloaf.de>
++Date: Fri, 24 Feb 2023 13:46:58 +0100
++Subject: [PATCH 3/5] Move generate_default_constructor call into
++ generate_struct_definition
++
++This makes sure that helper structs like _args and _result also have
++their default constructors defined.
++---
++ .../src/thrift/generate/t_cpp_generator.cc    | 19 +++++++++++++------
++ 1 file changed, 13 insertions(+), 6 deletions(-)
++
++diff --git a/compiler/cpp/src/thrift/generate/t_cpp_generator.cc b/compiler/cpp/src/thrift/generate/t_cpp_generator.cc
++index a77982f61..ccb79bc48 100644
++--- a/compiler/cpp/src/thrift/generate/t_cpp_generator.cc
+++++ b/compiler/cpp/src/thrift/generate/t_cpp_generator.cc
++@@ -143,7 +143,8 @@ public:
++                                   std::ostream& force_cpp_out,
++                                   t_struct* tstruct,
++                                   bool setters = true,
++-                                  bool is_user_struct = false);
+++                                  bool is_user_struct = false,
+++                                  bool pointers = false);
++   void generate_copy_constructor(std::ostream& out, t_struct* tstruct, bool is_exception);
++   void generate_move_constructor(std::ostream& out, t_struct* tstruct, bool is_exception);
++   void generate_default_constructor(std::ostream& out, t_struct* tstruct, bool is_exception);
++@@ -916,7 +917,7 @@ void t_cpp_generator::generate_forward_declaration(t_struct* tstruct) {
++  */
++ void t_cpp_generator::generate_cpp_struct(t_struct* tstruct, bool is_exception) {
++   generate_struct_declaration(f_types_, tstruct, is_exception, false, true, true, true, true);
++-  generate_struct_definition(f_types_impl_, f_types_impl_, tstruct, true, true);
+++  generate_struct_definition(f_types_impl_, f_types_impl_, tstruct, true, true, false);
++ 
++   std::ostream& out = (gen_templates_ ? f_types_tcc_ : f_types_impl_);
++   generate_struct_reader(out, tstruct);
++@@ -925,7 +926,6 @@ void t_cpp_generator::generate_cpp_struct(t_struct* tstruct, bool is_exception)
++   if (!gen_no_default_operators_) {
++     generate_equality_operator(f_types_impl_, tstruct);
++   }
++-  generate_default_constructor(f_types_impl_, tstruct, is_exception);
++   generate_copy_constructor(f_types_impl_, tstruct, is_exception);
++   if (gen_moveable_) {
++     generate_move_constructor(f_types_impl_, tstruct, is_exception);
++@@ -1408,7 +1408,8 @@ void t_cpp_generator::generate_struct_definition(ostream& out,
++                                                  ostream& force_cpp_out,
++                                                  t_struct* tstruct,
++                                                  bool setters,
++-                                                 bool is_user_struct) {
+++                                                 bool is_user_struct,
+++                                                 bool pointers) {
++   // Get members
++   vector<t_field*>::const_iterator m_iter;
++   const vector<t_field*>& members = tstruct->get_members();
++@@ -1423,6 +1424,11 @@ void t_cpp_generator::generate_struct_definition(ostream& out,
++     force_cpp_out << indent() << "}" << endl << endl;
++   }
++ 
+++  if (!pointers)
+++  {
+++    generate_default_constructor(out, tstruct, false);
+++  }
+++
++   // Create a setter function for each field
++   if (setters) {
++     for (m_iter = members.begin(); m_iter != members.end(); ++m_iter) {
++@@ -2058,9 +2064,10 @@ void t_cpp_generator::generate_service_helpers(t_service* tservice) {
++     generate_struct_definition(out, f_service_, ts, false);
++     generate_struct_reader(out, ts);
++     generate_struct_writer(out, ts);
+++
++     ts->set_name(tservice->get_name() + "_" + (*f_iter)->get_name() + "_pargs");
++     generate_struct_declaration(f_header_, ts, false, true, false, true);
++-    generate_struct_definition(out, f_service_, ts, false);
+++    generate_struct_definition(out, f_service_, ts, false, false, true);
++     generate_struct_writer(out, ts, true);
++     ts->set_name(name_orig);
++ 
++@@ -3508,7 +3515,7 @@ void t_cpp_generator::generate_function_helpers(t_service* tservice, t_function*
++ 
++   result.set_name(tservice->get_name() + "_" + tfunction->get_name() + "_presult");
++   generate_struct_declaration(f_header_, &result, false, true, true, gen_cob_style_);
++-  generate_struct_definition(out, f_service_, &result, false);
+++  generate_struct_definition(out, f_service_, &result, false, false, true);
++   generate_struct_reader(out, &result, true);
++   if (gen_cob_style_) {
++     generate_struct_writer(out, &result, true);
++
++From 4f56007baf46d4aa87eb7f8e5e34b773235c729a Mon Sep 17 00:00:00 2001
++From: Lukas Barth <mail@tinloaf.de>
++Date: Mon, 6 Mar 2023 11:37:09 +0100
++Subject: [PATCH 4/5] Always generate an initializer list
++
++---
++ .../src/thrift/generate/t_cpp_generator.cc    | 102 +++++++++---------
++ 1 file changed, 54 insertions(+), 48 deletions(-)
++
++diff --git a/compiler/cpp/src/thrift/generate/t_cpp_generator.cc b/compiler/cpp/src/thrift/generate/t_cpp_generator.cc
++index ccb79bc48..2a65bfb96 100644
++--- a/compiler/cpp/src/thrift/generate/t_cpp_generator.cc
+++++ b/compiler/cpp/src/thrift/generate/t_cpp_generator.cc
++@@ -1004,64 +1004,70 @@ void t_cpp_generator::generate_default_constructor(ostream& out,
++   std::string clsname_ctor = tstruct->get_name() + "::" + tstruct->get_name() + "()";
++   indent(out) << clsname_ctor << (has_default_value ? "" : " noexcept");
++ 
++-  if (has_default_value || is_exception) {
++-    // We need an initializer block
+++  //
+++  // Start generating initializer list
+++  //
++ 
++-    bool init_ctor = false;
++-    std::string args_indent("   ");
+++  bool init_ctor = false;
+++  std::string args_indent("   ");
++ 
++-    // Default-initialize TException, if it is our base type
++-    if (is_exception)
++-    {
++-      out << "\n";
++-      indent(out) << " : ";
++-      out << "TException()";
++-      init_ctor = true;
++-    }
+++  // Default-initialize TException, if it is our base type
+++  if (is_exception)
+++  {
+++    out << "\n";
+++    indent(out) << " : ";
+++    out << "TException()";
+++    init_ctor = true;
+++  }
++ 
++-    // Default-initialize all members that should be initialized in
++-    // the initializer block
++-    for (m_iter = members.begin(); m_iter != members.end(); ++m_iter) {
++-      t_type* t = get_true_type((*m_iter)->get_type());
++-      if (t->is_base_type() || t->is_enum() || is_reference(*m_iter)) {
++-        string dval;
++-        t_const_value* cv = (*m_iter)->get_value();
++-        if (cv != nullptr) {
++-          dval += render_const_value(out, (*m_iter)->get_name(), t, cv);
++-        } else if (t->is_enum()) {
++-          dval += "static_cast<" + type_name(t) + ">(0)";
++-        } else {
++-          dval += (t->is_string() || is_reference(*m_iter)) ? "" : "0";
++-        }
++-        if (!init_ctor) {
++-          out << "\n";
++-          indent(out) << " : ";
++-          init_ctor = true;
+++  // Default-initialize all members that should be initialized in
+++  // the initializer block
+++  for (m_iter = members.begin(); m_iter != members.end(); ++m_iter) {
+++    t_type* t = get_true_type((*m_iter)->get_type());
+++    if (t->is_base_type() || t->is_enum() || is_reference(*m_iter)) {
+++      string dval;
+++      t_const_value* cv = (*m_iter)->get_value();
+++      if (cv != nullptr) {
+++        dval += render_const_value(out, (*m_iter)->get_name(), t, cv);
+++      } else if (t->is_enum()) {
+++        dval += "static_cast<" + type_name(t) + ">(0)";
+++      } else {
+++        dval += (t->is_string() || is_reference(*m_iter)) ? "" : "0";
+++      }
+++      if (!init_ctor) {
+++        init_ctor = true;
+++        if(has_default_value) {
+++          out << " : ";
++         } else {
++-          out << ",\n";
++-          indent(out) << args_indent;
+++          out << '\n' << args_indent << ": ";
+++          args_indent.append("  ");
++         }
++-
++-        out << (*m_iter)->get_name() << "(" << dval << ")";
+++      } else {
+++        out << ",\n" << args_indent;
++       }
+++
+++      out << (*m_iter)->get_name() << "(" << dval << ")";
++     }
++-    out << " {" << endl;
++-    indent_up();
++-    // TODO(dreiss): When everything else in Thrift is perfect,
++-    // do more of these in the initializer list.
++-    for (m_iter = members.begin(); m_iter != members.end(); ++m_iter) {
++-      t_type* t = get_true_type((*m_iter)->get_type());
++-      if (!t->is_base_type() && !t->is_enum() && !is_reference(*m_iter)) {
++-        t_const_value* cv = (*m_iter)->get_value();
++-        if (cv != nullptr) {
++-          print_const_value(out, (*m_iter)->get_name(), t, cv);
++-        }
+++  }
+++
+++  //
+++  // Start generating body
+++  //
+++
+++  out << " {" << endl;
+++  indent_up();
+++  // TODO(dreiss): When everything else in Thrift is perfect,
+++  // do more of these in the initializer list.
+++  for (m_iter = members.begin(); m_iter != members.end(); ++m_iter) {
+++    t_type* t = get_true_type((*m_iter)->get_type());
+++    if (!t->is_base_type() && !t->is_enum() && !is_reference(*m_iter)) {
+++      t_const_value* cv = (*m_iter)->get_value();
+++      if (cv != nullptr) {
+++        print_const_value(out, (*m_iter)->get_name(), t, cv);
++       }
++     }
++-    scope_down(out);
++-  } else {
++-    out << " {}\n";
++   }
+++  scope_down(out);
++ }
++ 
++ void t_cpp_generator::generate_copy_constructor(ostream& out,
++
++From 9bd8f1e1acb23cb3ef134291e56b2605a7356b04 Mon Sep 17 00:00:00 2001
++From: Lukas Barth <mail@tinloaf.de>
++Date: Tue, 4 Apr 2023 16:25:06 +0200
++Subject: [PATCH 5/5] Fix ODR violations in cases where templates are involved
++
++---
++ compiler/cpp/src/thrift/generate/t_cpp_generator.cc | 5 ++++-
++ 1 file changed, 4 insertions(+), 1 deletion(-)
++
++diff --git a/compiler/cpp/src/thrift/generate/t_cpp_generator.cc b/compiler/cpp/src/thrift/generate/t_cpp_generator.cc
++index 2a65bfb96..a085ada0e 100644
++--- a/compiler/cpp/src/thrift/generate/t_cpp_generator.cc
+++++ b/compiler/cpp/src/thrift/generate/t_cpp_generator.cc
++@@ -1432,7 +1432,10 @@ void t_cpp_generator::generate_struct_definition(ostream& out,
++ 
++   if (!pointers)
++   {
++-    generate_default_constructor(out, tstruct, false);
+++		// 'force_cpp_out' always goes into the .cpp file, and never into a .tcc
+++		// file in case templates are involved. Since the constructor is not templated,
+++		// putting it into the (later included) .tcc file would cause ODR violations.
+++    generate_default_constructor(force_cpp_out, tstruct, false);
++   }
++ 
++   // Create a setter function for each field
+diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.20.0.bb b/meta-oe/recipes-connectivity/thrift/thrift_0.20.0.bb
+index 23db052b9e..c908eab7b3 100644
+--- a/meta-oe/recipes-connectivity/thrift/thrift_0.20.0.bb
++++ b/meta-oe/recipes-connectivity/thrift/thrift_0.20.0.bb
+@@ -9,7 +9,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c40a383cb3f747e0c7abbf1482f194f0 \
+ DEPENDS = "thrift-native boost flex-native bison-native openssl zlib"
  
- EXTRA_OECMAKE += "-DENABLE_PIC=ON -DENABLE_SHARED=ON -DENABLE_CLI=ON"
--
-+EXTRA_OECMAKE:append:x86 = " -DENABLE_ASSEMBLY=OFF"
- do_generate_toolchain_file:append() {
--   echo "set(CMAKE_ASM_NASM_FLAGS --debug-prefix-map ${S}=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR})" >> ${WORKDIR}/toolchain.cmake
-+   echo "set(CMAKE_ASM_NASM_FLAGS -DPIC --debug-prefix-map ${S}=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR})" >> ${WORKDIR}/toolchain.cmake
- }
+ SRC_URI = "https://downloads.apache.org/${BPN}/${PV}/${BP}.tar.gz \
+-           file://0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch"
++           file://0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch \
++           file://0001-thrift-pr2755.patch \
++"
+ SRC_URI[sha256sum] = "b5d8311a779470e1502c027f428a1db542f5c051c8e1280ccd2163fa935ff2d6"
  
- PACKAGECONFIG ?= "hdr10plus 10bit"
+ BBCLASSEXTEND = "native nativesdk"
+-- 
+2.30.2
+
 
