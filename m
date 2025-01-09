@@ -1,85 +1,103 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 60D78E7719A
-	for <webhook@archiver.kernel.org>; Thu,  9 Jan 2025 22:22:05 +0000 (UTC)
-Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
- by mx.groups.io with SMTP id smtpd.web11.5657.1736461319852342712
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B21C0E7719C
+	for <webhook@archiver.kernel.org>; Thu,  9 Jan 2025 23:29:55 +0000 (UTC)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.web10.7156.1736465392027500010
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Jan 2025 14:22:00 -0800
+ Thu, 09 Jan 2025 15:29:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
-Received: from fwd81.aul.t-online.de (fwd81.aul.t-online.de [10.223.144.107])
-	by mailout12.t-online.de (Postfix) with SMTP id EA87DC02
-	for <openembedded-devel@lists.openembedded.org>; Thu,  9 Jan 2025 23:21:57 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.154.173.41]) by fwd81.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tW0ua-16aKIr0; Thu, 9 Jan 2025 23:21:56 +0100
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=l0+vGAHX;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-21619108a6bso24495055ad.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Jan 2025 15:29:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1736465391; x=1737070191; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=OPODMQoOd8afuJn6Efv8ZEdW79+XW3zLMzfA8t2U+so=;
+        b=l0+vGAHXDrZstJ5GMckRxCLGXAXSNiaANsTnl0lILt2zPz/edCoMwRXf3t8ob7zi1C
+         5GJNTNPnWsYtDzkbDskX5qitGzvUQtRPuxDWrWuEZjyJuLv9KXzbVaIms3L944a1m5kG
+         h5TaoUlIbB0PlgwB9C+CppzsAN0qin/tP+bbgHCFE5nmaydTW1zU5+FovIsWBFYhPJR7
+         2DlOi2H8YCF/lJsy5ySoVessfcOSEiBYgIqOOY2YMa2nf/uTRiqC8BRxaY249NyAvMo8
+         UMKUhnAHmm1rOzJ6n9Vynh58zqkFg3xlchv6Zw4aam3xfTM88t/1klSFy2rfWXjxQ1JI
+         vBdQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1736465391; x=1737070191;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=OPODMQoOd8afuJn6Efv8ZEdW79+XW3zLMzfA8t2U+so=;
+        b=B/sVc4QwDybHbO+ldlZ9v8Q1QRdB2rAttfJutd80CE7/8+Y+PC7UYqgAjgTMcQjnkP
+         xxUUra4U2CNod8xL7eUoow7pEoDCTngSe/QkDa35g5nPLcDi0QeeClgrzyh7B2yI8kJp
+         Y8N/qXG0O4n+pDhdlHCCN9BP2ymFnC5gKv8c4UvOrJzyrockdBMImTvIN2AHiWJnE4r1
+         Yu8Pi4Jcr0ErzT4QTBOsuvYfFz0ETIkNS6mhmPyoegbK1tLOmPsLy3KWoGNWxpTxZFMy
+         4LUMPrABJJOogjMPbxrA5AlUj1syDIM4S9tPejRIuW/c7NK/R7Ev5FaSKPT1oHGZVtDa
+         QZSA==
+X-Gm-Message-State: AOJu0Yw9Bj/oY7FWnVKSoFe0KJUmGn+Kj7kL/Dfoq95vQOJ+AHHRoFVr
+	5+BQz6i/grjYq5Lpxv40kiBx9bRppBqR2Kw6B6SUS8gRQHJXio/1hOt86uwV
+X-Gm-Gg: ASbGncug+nSZuK87+o80gI0bPtPUbV/mCI1zGZuI9aZWZxcr4qDyLzCwuc+iLLPfI1w
+	lArkqOq38gcA1totPPdQjGWNcoy6T6umBB9Cdt2PzDVoiFDpbb6jQXrmvn64ZJoJzwDvi0Knvkg
+	O38D1vA4kLb3XpXA4YlpVLox/sEQwtkMG39sALScN3vQyodDJS5RvS/3IMdLJ8RfInteCbtH0Dg
+	y0KgEr9POXV5Pql7B8Fgx6Y6p1+yk0qmKhg60/EZ8BvZnfs
+X-Google-Smtp-Source: AGHT+IE1MiZoWqP5Qsb5HUl2SOBYFOhr0CEgep1aSu50dRdcplUm6pfMAF1WwPSGsIYBI85GeAnZ9Q==
+X-Received: by 2002:a05:6a21:7905:b0:1e8:a14a:7b67 with SMTP id adf61e73a8af0-1e8a14a7e5dmr5785613637.26.1736465391097;
+        Thu, 09 Jan 2025 15:29:51 -0800 (PST)
+Received: from apollo.localdomain ([2601:646:8201:fd20::1344])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-a31d6a0b140sm1804500a12.60.2025.01.09.15.29.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 09 Jan 2025 15:29:50 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] dav1d: update 1.4.3 -> 1.5.0
-Date: Thu,  9 Jan 2025 23:22:02 +0100
-Message-ID: <20250109222202.377795-1-f_l_k@t-online.de>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH 3/6] mpd: Use meson wrap for fmt
+Date: Thu,  9 Jan 2025 15:29:43 -0800
+Message-ID: <20250109232946.1556083-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250109232946.1556083-1-raj.khem@gmail.com>
+References: <20250109232946.1556083-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1736461316-6FFFC959-4FABC814/0/0 CLEAN NORMAL
-X-TOI-MSGID: 44ede1ef-92db-44f9-95a7-7385ca68518c
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Jan 2025 22:22:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114756
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Jan 2025 23:29:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114759
 
-Changes for 1.5.0 'Sonic':
---------------------------
+mpd still depends on fmt 11.0.x and oe-core has moved to 11.1.x
+until mpd is ported to use it, lets fall back to what mpd works with
+instead of using system provided fmt
 
-1.5.0 is a major release of dav1d, that:
- - WARNING: we removed some of the SSE2 optimizations, so if you care abo=
-ut
-            systems without SSSE3, you should be careful when updating!
- - Add Arm OpenBSD run-time CPU feature
- - Optimize index offset calculations for decode_coefs
- - picture: copy HDR10+ and T35 metadata only to visible frames
- - SSSE3 new optimizations for 6-tap (8bit and hbd)
- - AArch64/SVE: Add HBD subpel filters using 128-bit SVE2
- - AArch64: Add USMMLA implempentation for 6-tap H/HV
- - AArch64: Optimize Armv8.0 NEON for HBD horizontal filters and 6-tap fi=
-lters
- - Power9: Optimized ITX till 16x4.
- - Loongarch: numerous optimizations
- - RISC-V optimizations for pal, cdef_filter, ipred, mc_blend, mc_bdir, i=
-tx
- - Allow playing videos in full-screen mode in dav1dplay
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-multimedia/dav1d/{dav1d_1.4.3.bb =3D> dav1d_1.5.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/dav1d/{dav1d_1.4.3.bb =3D> dav=
-1d_1.5.0.bb} (91%)
+ meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.16.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.4.3.bb b/me=
-ta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.0.bb
-similarity index 91%
-rename from meta-multimedia/recipes-multimedia/dav1d/dav1d_1.4.3.bb
-rename to meta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.0.bb
-index 6b7f3090a3..408c6c3bfd 100644
---- a/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.4.3.bb
-+++ b/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.0.bb
-@@ -7,7 +7,7 @@ LICENSE =3D "BSD-2-Clause"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc8055cfe7548dfdaa3a6dc45d8793=
-669"
-=20
- SRC_URI =3D "git://code.videolan.org/videolan/dav1d.git;protocol=3Dhttps=
-;nobranch=3D1"
--SRCREV =3D "e9986de7f4264940af6fa1df1498fd2754077de4"
-+SRCREV =3D "32cf02af50f32af108a3b281c452788dccdac648"
-=20
- S =3D "${WORKDIR}/git"
-=20
---=20
-2.47.1
-
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.16.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.16.bb
+index 4d854d6fc5..51c459cffd 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.16.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.16.bb
+@@ -15,14 +15,18 @@ DEPENDS += " \
+     icu \
+     dbus \
+     expat \
+-    fmt \
+ "
+ 
+ PV .= "+git"
+ SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
++           https://github.com/mesonbuild/wrapdb/releases/download/fmt_11.0.2-1/fmt-11.0.2.tar.gz;name=fmt;subdir=git/subprojects \
++           https://wrapdb.mesonbuild.com/v2/fmt_11.0.2-1/get_patch;downloadfilename=fmt_11.0.2-1_patch.zip;name=fmt-meson;subdir=git/subprojects \
+            file://mpd.conf.in \
+            "
+ SRCREV = "b5bd294e5c88c062b1a9c0c4c60397fbf7f3f1c5"
++SRC_URI[fmt.sha256sum] = "6cb1e6d37bdcb756dbbe59be438790db409cdb4868c66e888d5df9f13f7c027f"
++SRC_URI[fmt-meson.sha256sum] = "90c9e3b8e8f29713d40ca949f6f93ad115d78d7fb921064112bc6179e6427c5e"
++
+ S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMESON += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd=enabled -Dsystemd_system_unit_dir=${systemd_system_unitdir} -Dsystemd_user_unit_dir=${systemd_system_unitdir}', '-Dsystemd=disabled', d)} \
 
