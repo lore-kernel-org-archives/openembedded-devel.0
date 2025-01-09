@@ -2,102 +2,92 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B21C0E7719C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B006BE7719A
 	for <webhook@archiver.kernel.org>; Thu,  9 Jan 2025 23:29:55 +0000 (UTC)
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web10.7156.1736465392027500010
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web11.7131.1736465390028770452
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Jan 2025 15:29:52 -0800
+ Thu, 09 Jan 2025 15:29:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=l0+vGAHX;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-21619108a6bso24495055ad.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Jan 2025 15:29:51 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nIVIqMXB;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2164b662090so22721615ad.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Jan 2025 15:29:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1736465391; x=1737070191; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=OPODMQoOd8afuJn6Efv8ZEdW79+XW3zLMzfA8t2U+so=;
-        b=l0+vGAHXDrZstJ5GMckRxCLGXAXSNiaANsTnl0lILt2zPz/edCoMwRXf3t8ob7zi1C
-         5GJNTNPnWsYtDzkbDskX5qitGzvUQtRPuxDWrWuEZjyJuLv9KXzbVaIms3L944a1m5kG
-         h5TaoUlIbB0PlgwB9C+CppzsAN0qin/tP+bbgHCFE5nmaydTW1zU5+FovIsWBFYhPJR7
-         2DlOi2H8YCF/lJsy5ySoVessfcOSEiBYgIqOOY2YMa2nf/uTRiqC8BRxaY249NyAvMo8
-         UMKUhnAHmm1rOzJ6n9Vynh58zqkFg3xlchv6Zw4aam3xfTM88t/1klSFy2rfWXjxQ1JI
-         vBdQ==
+        d=gmail.com; s=20230601; t=1736465389; x=1737070189; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=X4ocuRyUzgfMhotnEmUH2oBpHbbAbpMujxF3k5wzNF8=;
+        b=nIVIqMXBza7fL5/7G34We+TCnpLTDWdDsMi6nrS0m1GRnU4uLe1JltRvq8BVtGCL/R
+         8mw49RaQTFidK0ZvfuoGvbPZ+KaeY5SkgAUCXH2xSxHmeSXWCYN/Tgo3uafRHwmzOlqb
+         sN/VpY3o955RyoVTZFvQHHn6d4Gjntownq/G0XFR+l99HTa9VOAh17JPuzWNZeYD6ewh
+         JyQ0pKBrldJiw6mllGEN1Bx995tzGwTrG5ERX5GpUzThenk6l5qSFT5ARf0k4/lyRebi
+         kTEcNFZNkSPtbrEmn4mLrOuUxwoZNOTLo1UwCcgy7KtCr8BABP8uiKy5/ANQrYaleS2C
+         IeOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736465391; x=1737070191;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=OPODMQoOd8afuJn6Efv8ZEdW79+XW3zLMzfA8t2U+so=;
-        b=B/sVc4QwDybHbO+ldlZ9v8Q1QRdB2rAttfJutd80CE7/8+Y+PC7UYqgAjgTMcQjnkP
-         xxUUra4U2CNod8xL7eUoow7pEoDCTngSe/QkDa35g5nPLcDi0QeeClgrzyh7B2yI8kJp
-         Y8N/qXG0O4n+pDhdlHCCN9BP2ymFnC5gKv8c4UvOrJzyrockdBMImTvIN2AHiWJnE4r1
-         Yu8Pi4Jcr0ErzT4QTBOsuvYfFz0ETIkNS6mhmPyoegbK1tLOmPsLy3KWoGNWxpTxZFMy
-         4LUMPrABJJOogjMPbxrA5AlUj1syDIM4S9tPejRIuW/c7NK/R7Ev5FaSKPT1oHGZVtDa
-         QZSA==
-X-Gm-Message-State: AOJu0Yw9Bj/oY7FWnVKSoFe0KJUmGn+Kj7kL/Dfoq95vQOJ+AHHRoFVr
-	5+BQz6i/grjYq5Lpxv40kiBx9bRppBqR2Kw6B6SUS8gRQHJXio/1hOt86uwV
-X-Gm-Gg: ASbGncug+nSZuK87+o80gI0bPtPUbV/mCI1zGZuI9aZWZxcr4qDyLzCwuc+iLLPfI1w
-	lArkqOq38gcA1totPPdQjGWNcoy6T6umBB9Cdt2PzDVoiFDpbb6jQXrmvn64ZJoJzwDvi0Knvkg
-	O38D1vA4kLb3XpXA4YlpVLox/sEQwtkMG39sALScN3vQyodDJS5RvS/3IMdLJ8RfInteCbtH0Dg
-	y0KgEr9POXV5Pql7B8Fgx6Y6p1+yk0qmKhg60/EZ8BvZnfs
-X-Google-Smtp-Source: AGHT+IE1MiZoWqP5Qsb5HUl2SOBYFOhr0CEgep1aSu50dRdcplUm6pfMAF1WwPSGsIYBI85GeAnZ9Q==
-X-Received: by 2002:a05:6a21:7905:b0:1e8:a14a:7b67 with SMTP id adf61e73a8af0-1e8a14a7e5dmr5785613637.26.1736465391097;
-        Thu, 09 Jan 2025 15:29:51 -0800 (PST)
+        d=1e100.net; s=20230601; t=1736465389; x=1737070189;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=X4ocuRyUzgfMhotnEmUH2oBpHbbAbpMujxF3k5wzNF8=;
+        b=J10r0nRr05BkZajqpVTEDSThClZVbl4t+X3ujhjAjXp1hGhPBmUvA2iN/voDXjjCSo
+         2/81oaWbUU8+WARx+kntL7Q9gSjWPcOgpmDq7Gqosmcca1siMmB7e0miuVl75/5UfLl4
+         kpi+npL3LAFvihf8fwv6SuozFgcNkmOV+1maydHl0CLr4ocohc0DrK6qkJE/406gpGit
+         kUFCIqkq4Y3QVa/4+l4Q81WZP0CS/YUIQ5bpAEFGPNBim1+iUP+BdKWDGcdQZTR7LgiG
+         Sq/2AWvUJS6ha45vTfWKI7Z0G3y8QOEbuudyczkb9o1pZ5okP2oaLACqZentXdxL7N1K
+         id+A==
+X-Gm-Message-State: AOJu0YwYb/njsuGMz44RZEtQFaclj/CEMDh7OgpUN7OfmraMN6WhBg2g
+	QvqOOIvNWKMBeqsO8Si9+A9vDKDuLmi90zHh6DDBruPT5C3QTRUeCAZxmOQi
+X-Gm-Gg: ASbGncvwguE2hAw90iNb5jpwSaP20wbSpbEOvNooUGwnn/r74lJ+2dzMeTilB+StDvb
+	QzlBcWeX7ssR0MjvC4QoIdze1j1DCk8WN33KAELRD8HcDM86tmkeMpQgLy9GQIAGJCrK1qEj47s
+	ca6nw6/Fvb+BsX9VQB0eIBYL8PxyDUYpvSpz1vR/B0mXByVeeoUTDvJZe5dyV0kISWlLGLhlToe
+	mujrkzxp8HNFcvdH48XElcLCWpyfYevhD8tShM+oludXZGY
+X-Google-Smtp-Source: AGHT+IFDQuuHI8qhQFKxHPS9A2tolrF7SUbiJQvVXtV5os3XHEb0/AxdgKw+fg8uN+cD4eXsIMPv6g==
+X-Received: by 2002:a17:902:d552:b0:216:60a3:b3fd with SMTP id d9443c01a7336-21a83f4bbd3mr123620605ad.3.1736465389211;
+        Thu, 09 Jan 2025 15:29:49 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:8201:fd20::1344])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-a31d6a0b140sm1804500a12.60.2025.01.09.15.29.50
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-a31d6a0b140sm1804500a12.60.2025.01.09.15.29.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Jan 2025 15:29:50 -0800 (PST)
+        Thu, 09 Jan 2025 15:29:48 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 3/6] mpd: Use meson wrap for fmt
-Date: Thu,  9 Jan 2025 15:29:43 -0800
-Message-ID: <20250109232946.1556083-3-raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH 1/6] gerbera: Upgrade to 2.4.1
+Date: Thu,  9 Jan 2025 15:29:41 -0800
+Message-ID: <20250109232946.1556083-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250109232946.1556083-1-raj.khem@gmail.com>
-References: <20250109232946.1556083-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 09 Jan 2025 23:29:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114759
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114757
 
-mpd still depends on fmt 11.0.x and oe-core has moved to 11.1.x
-until mpd is ported to use it, lets fall back to what mpd works with
-instead of using system provided fmt
+https://github.com/gerbera/gerbera/releases/tag/v2.4.1
+https://github.com/gerbera/gerbera/releases/tag/v2.4.0
+https://github.com/gerbera/gerbera/releases/tag/v2.3.0
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.16.bb | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ .../gerbera/{gerbera_2.2.0.bb => gerbera_2.4.1.bb}              | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-multimedia/recipes-multimedia/gerbera/{gerbera_2.2.0.bb => gerbera_2.4.1.bb} (96%)
 
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.16.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.16.bb
-index 4d854d6fc5..51c459cffd 100644
---- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.16.bb
-+++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.16.bb
-@@ -15,14 +15,18 @@ DEPENDS += " \
-     icu \
-     dbus \
-     expat \
--    fmt \
- "
+diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera_2.2.0.bb b/meta-multimedia/recipes-multimedia/gerbera/gerbera_2.4.1.bb
+similarity index 96%
+rename from meta-multimedia/recipes-multimedia/gerbera/gerbera_2.2.0.bb
+rename to meta-multimedia/recipes-multimedia/gerbera/gerbera_2.4.1.bb
+index da2953ef21..c12be91664 100644
+--- a/meta-multimedia/recipes-multimedia/gerbera/gerbera_2.2.0.bb
++++ b/meta-multimedia/recipes-multimedia/gerbera/gerbera_2.4.1.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=25cdec9afe3f1f26212ead6bd2f7fac8"
  
- PV .= "+git"
- SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
-+           https://github.com/mesonbuild/wrapdb/releases/download/fmt_11.0.2-1/fmt-11.0.2.tar.gz;name=fmt;subdir=git/subprojects \
-+           https://wrapdb.mesonbuild.com/v2/fmt_11.0.2-1/get_patch;downloadfilename=fmt_11.0.2-1_patch.zip;name=fmt-meson;subdir=git/subprojects \
-            file://mpd.conf.in \
-            "
- SRCREV = "b5bd294e5c88c062b1a9c0c4c60397fbf7f3f1c5"
-+SRC_URI[fmt.sha256sum] = "6cb1e6d37bdcb756dbbe59be438790db409cdb4868c66e888d5df9f13f7c027f"
-+SRC_URI[fmt-meson.sha256sum] = "90c9e3b8e8f29713d40ca949f6f93ad115d78d7fb921064112bc6179e6427c5e"
-+
+ SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master"
+-SRCREV = "821d364d611dc30b3ef8a5e9beb0bf3e71b25199"
++SRCREV = "870dd32d42f626dc2246d34b2224ffb6fd73e205"
+ 
  S = "${WORKDIR}/git"
  
- EXTRA_OEMESON += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd=enabled -Dsystemd_system_unit_dir=${systemd_system_unitdir} -Dsystemd_user_unit_dir=${systemd_system_unitdir}', '-Dsystemd=disabled', d)} \
 
