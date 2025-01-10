@@ -1,221 +1,108 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E05A2E7719A
-	for <webhook@archiver.kernel.org>; Thu,  9 Jan 2025 23:33:35 +0000 (UTC)
-Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com [209.85.160.53])
- by mx.groups.io with SMTP id smtpd.web11.7216.1736465610593451727
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A8DCE7719C
+	for <webhook@archiver.kernel.org>; Fri, 10 Jan 2025 08:02:38 +0000 (UTC)
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com [209.85.167.47])
+ by mx.groups.io with SMTP id smtpd.web11.13975.1736496149884544130
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Jan 2025 15:33:30 -0800
+ Fri, 10 Jan 2025 00:02:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VTXT1w7G;
- spf=pass (domain: gmail.com, ip: 209.85.160.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f53.google.com with SMTP id 586e51a60fabf-27d0e994ae3so610412fac.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Jan 2025 15:33:30 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=H78leVGD;
+ spf=pass (domain: gmail.com, ip: 209.85.167.47, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-53df80eeeedso1700016e87.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Jan 2025 00:02:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1736465610; x=1737070410; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1736496148; x=1737100948; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=7jPYL8sjXtmOEFjxulYFVIgHw6j8fc7ROPwQuw0hMQo=;
-        b=VTXT1w7GjEM8UME6i+a58yiXlmFoSu6cDtkrYfPQwHh3rUp8me9KTRVJrNuCNvJHWW
-         9Jg5Cfie0AW2wk0+w366Khi6GqP93u1XvpdftsbWR/z7QvzAupRbwRrCy+LR24N/LPrz
-         B/EQpyDtPNzpqtHIueHww4+78dQ28OQ8JZ03B1f60WyBZPX39Pk17rcCDfaWfRC5Sv/T
-         DwGte0MvscWvfkGVlv6TyTWdu8uP8L7dgptfyzNBzkpWOsbS62JaTNCm3IOa05Ibteeg
-         wZUGgDFaag2BghL6ZjvzF45+REAplJT1HcE0SXYdN5NBn3LUm13mynA6icEa5lCRUCZa
-         fB4w==
+        bh=ySzzlYINyB/LvvjCXs8QtUa5Lul3dOVgarbgeKo71Wg=;
+        b=H78leVGD1JlumqFtjp9g9q0IB7q1x/39MpraHgimPy7TJ+a6va1wWOxRCIJ679yf8F
+         Ea+oAImePVjb0OfEbVfhWX4a0HswwrSmOGc/MaYKmLNCtqpaJpkMaXjdolz4Cejctx6v
+         f86f00PxOqh/H/9DawzIauN/rHr9LNnQZESug59rXlKcAPaFG4kBafeO/QBntCosuR4c
+         WrCMmaLoLT9FDpyPYfZNvQMAAu8EiZ9qKHCrbw2H18frgEbNAG8OAiSe20rH2HGPGyk0
+         nSei0rvM6CAChAqfx9X/jgYU9rMQhsFSUnqNPTVUfotP93hON9/s/EApcY4pD4XXo+KM
+         USUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736465610; x=1737070410;
+        d=1e100.net; s=20230601; t=1736496148; x=1737100948;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=7jPYL8sjXtmOEFjxulYFVIgHw6j8fc7ROPwQuw0hMQo=;
-        b=joahXTbweXOriZXNYpV8gll9HoPPeYvM9G1aNbn+hvqQggozyb43lrwcieOotQYzaQ
-         diEqbWVBYsxcKtoieV133dI3yMYJKR/tIfHuwIAfJ9SqkWd1nJzG0/gaX6/32yq2CTOz
-         ZhFb55At7ccOWsYSRRZPpA0+vGItLfKzNGiPar/EbXEOHD46MS4AMthrVPX4tEwfVUyC
-         yekYkO+xZHmo6hRkoREjYPspUMRhv4RKbAHag+weDv248JXTIcxdd8/Nlbcn+UEnKHmJ
-         KXpd9YgL0p9RT/EHTO4ebDn22KeBUwdYSTCIkavmoMBQy3mseuFZbvIVoLVSzjTYIMK8
-         u1kw==
-X-Gm-Message-State: AOJu0Yx9Lf+j5AO4pXSJTnCZLRhnxWgIW2q8WEbFRzBOLl793ZF+Xs4w
-	df43oPkPQwe1DqCeoLgfLy2gwL3Fi4/SsxonhNpDjoLRtpdvuFfzMB8IZTx/soitKrl1EFPfJd/
-	dl2LTJcSO88iXmOvrTP82ZZ0xg+AAxA==
-X-Gm-Gg: ASbGncv6IFps/WJrmuZQBTBMJW7HJeV8rVEZJvB5oh6MQfuUMH7F6fDl71EbSFnLMVg
-	CbnBhAkiPXc9q1dFJMX8x+YIlQIFRWzu6m7WbuOy/uhuTl8g7jj6p
-X-Google-Smtp-Source: AGHT+IGOiQiBwxYd/ET/XUBJsXx904TwYBjEyztZ38p6h2kIiYHkm5tcAeLCO2uuUaAl2SpDQR4O1XXlKD07XGFJqbE=
-X-Received: by 2002:a05:6870:ce91:b0:29e:19ee:4832 with SMTP id
- 586e51a60fabf-2aa066fbbeamr4352891fac.18.1736465609864; Thu, 09 Jan 2025
- 15:33:29 -0800 (PST)
+        bh=ySzzlYINyB/LvvjCXs8QtUa5Lul3dOVgarbgeKo71Wg=;
+        b=wDQLyNznEegCpPPL90FCbmli6b6BJV0WRAh9spd3qURk91rm/+cQ/Dg8OOdaQNL0mJ
+         FpNpVEsZVGx/Pj1v6f92X1aXKnjrIkJn/5CKTksx5N4NodnhD9n0sbpZ7IQhnfZJ/m54
+         zkrdG5Vzg5deZd4eoepQ8dRQ5xTBVabilwK3CrQ6B8MRAX99xAt+8VN6aqDCW/lmXRIu
+         YclavRYO+yaPGfuN/b8muaT5jKD3mgewV4PtmrWlErZpUdXFg41H/zs21g9oZaJl97e1
+         +GBmHm1rw0iv9bBOC6Z4lU+Zr72dSMdkUz+QUqVuIZ1CDKONk47qJ0YmIZcMHDbbyrV+
+         Htjg==
+X-Gm-Message-State: AOJu0YwM67ugX7CFaNk18d82fyS2i2eYD5A2S4DbkOK044+TnmtndppD
+	Amd/MqjpPlBxzgtWpjkJB0nL7ja64OyhlRvHmfATGYZXE8dRYdPN78cXphpHCIozbPjBefQKXv6
+	ZCowUI9XntfcMmNJeiOG4V6CaR8I=
+X-Gm-Gg: ASbGncs91RGKO8KAmsfm8ELIq9WcyuiifWpTj7Rlh0hL1csIfiO/mcn7B08KI/F9uhK
+	rL10TocvcmPtQKfsw4TCCxWhTOT/fbKfAqYkW2sec
+X-Google-Smtp-Source: AGHT+IGD/izif9JPQNmegNApbGMJkqOacl+l34JdBXpUwERaELtyU35pqKqvv066x0HtxovmSi5UjqhnKp8YVkr/GxY=
+X-Received: by 2002:a05:6512:33ca:b0:53d:f1cb:6266 with SMTP id
+ 2adb3069b0e04-54284546a9emr3047408e87.28.1736496147410; Fri, 10 Jan 2025
+ 00:02:27 -0800 (PST)
 MIME-Version: 1.0
-References: <ac413271-b152-499b-94f4-e04fab4ae9be@gmail.com>
-In-Reply-To: <ac413271-b152-499b-94f4-e04fab4ae9be@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 9 Jan 2025 15:33:03 -0800
-X-Gm-Features: AbW1kvYuxE7LM3aRC0i2PskCglp8nLQhh7fKjjk7v3gq1TJUI-WHcqkMQZjgXSM
-Message-ID: <CAMKF1spSecEje5N8sFheiVNcrh1Dvgh_Mx4u5v7=9fhGMe4N+w@mail.gmail.com>
-Subject: Re: kirkstone merge request: Jan 9th
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+References: <20250109232946.1556083-1-raj.khem@gmail.com> <20250109232946.1556083-4-raj.khem@gmail.com>
+In-Reply-To: <20250109232946.1556083-4-raj.khem@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 10 Jan 2025 09:02:14 +0100
+X-Gm-Features: AbW1kvb_v0Y4HviC5f5-I9yabN9gkvelw63TrRo39wFqVsxgOV191hqXWqju94I
+Message-ID: <CA+chaQf9R+nrtURSz-dBGv02syyf0_fB0cS+RSbrWMsZ5=5fGg@mail.gmail.com>
+Subject: Re: [oe] [meta-multimedia][PATCH 4/6] mpd: Drop adding +git to PR
+To: raj.khem@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Jan 2025 23:33:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114763
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 Jan 2025 08:02:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114764
 
-merged thanks Armin.
+Small typo in subject, PR->PV
 
-On Thu, Jan 9, 2025 at 5:05=E2=80=AFAM akuster808 <akuster808@gmail.com> wr=
-ote:
+On Fri, Jan 10, 2025 at 12:29=E2=80=AFAM Khem Raj via lists.openembedded.or=
+g
+<raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
 >
-> The following changes since commit 7b3fdcdfaab2fc964bbf9eec2cce4e03001fa8=
-cf:
+> We are using latest release SHA1
 >
->    libgsf: Upgrade 1.14.49 -> 1.14.53 (2024-12-08 15:04:56 -0500)
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.16.bb | 1 -
+>  1 file changed, 1 deletion(-)
 >
-> are available in the Git repository at:
+> diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.16.bb b/=
+meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.16.bb
+> index 51c459cffd..bf95f41b26 100644
+> --- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.16.bb
+> +++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.16.bb
+> @@ -17,7 +17,6 @@ DEPENDS +=3D " \
+>      expat \
+>  "
 >
->    https://git.openembedded.org/meta-openembedded kirkstone-next
+> -PV .=3D "+git"
+>  SRC_URI =3D "git://github.com/MusicPlayerDaemon/MPD;branch=3Dmaster;prot=
+ocol=3Dhttps \
+>             https://github.com/mesonbuild/wrapdb/releases/download/fmt_11=
+.0.2-1/fmt-11.0.2.tar.gz;name=3Dfmt;subdir=3Dgit/subprojects \
+>             https://wrapdb.mesonbuild.com/v2/fmt_11.0.2-1/get_patch;downl=
+oadfilename=3Dfmt_11.0.2-1_patch.zip;name=3Dfmt-meson;subdir=3Dgit/subproje=
+cts \
 >
-> for you to fetch changes up to 66ec16850573a7ec69248b81f9904cdfba79b930:
->
->    packagegroup-meta-multimedia: Remove library only packages from rdeps
-> (2025-01-01 09:13:52 -0500)
->
-> ----------------------------------------------------------------
-> Colin McAllister (1):
->        lldpd: Fix CVE-2023-41910
->
-> Fabrice Aeschbacher (1):
->        mosquitto: upgrade 2.0.18 -> 2.0.19
->
-> Khem Raj (2):
->        nspr: Fix build with clang16
->        packagegroup-meta-multimedia: Remove library only packages from rd=
-eps
->
-> Mingli Yu (1):
->        asio: Add ptest support
->
-> Peter Marko (2):
->        hostapd: Patch CVE-2024-3596
->        hostapd: Patch security advisory 2024-2
->
-> Soumya Sambu (2):
->        python3-werkzeug: Fix CVE-2024-34069
->        python3-werkzeug: Fix CVE-2024-49767
->
-> Vijay Anusuri (1):
->        php: upgrade 8.1.30 -> 8.1.31
->
-> Wang Mingyu (1):
->        mosquitto: upgrade 2.0.19 -> 2.0.20
->
-> Yogita Urade (1):
->        postgresql: upgrade 14.13 -> 14.14
->
->   .../packagegroups/packagegroup-meta-multimedia.bb               | 34
-> +-----
->   meta-networking/recipes-connectivity/mosquitto/files/1571.patch | 22 --=
---
->   meta-networking/recipes-connectivity/mosquitto/files/2894.patch | 25 --=
----
->   .../mosquitto/{mosquitto_2.0.18.bb =3D> mosquitto_2.0.20.bb} |   4 +-
->   .../recipes-daemons/lldpd/files/CVE-2023-41910.patch            | 26 ++=
-+++
->   meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb            | 1 +
->   ...1-SAE-Check-for-invalid-Rejected-Groups-element-length.patch | 52
-> +++++++++
->   ...3-SAE-Reject-invalid-Rejected-Groups-element-in-the-pa.patch | 38
-> +++++++
->   .../recipes-connectivity/hostapd/hostapd/CVE-2024-3596_00.patch | 82
-> ++++++++++++++
->   .../recipes-connectivity/hostapd/hostapd/CVE-2024-3596_01.patch | 165
-> ++++++++++++++++++++++++++++
->   .../recipes-connectivity/hostapd/hostapd/CVE-2024-3596_02.patch | 62
-> +++++++++++
->   .../recipes-connectivity/hostapd/hostapd/CVE-2024-3596_04.patch | 52
-> +++++++++
->   .../recipes-connectivity/hostapd/hostapd/CVE-2024-3596_05.patch | 51
-> +++++++++
->   .../recipes-connectivity/hostapd/hostapd/CVE-2024-3596_06.patch | 46
-> ++++++++
->   .../recipes-connectivity/hostapd/hostapd/CVE-2024-3596_07.patch | 105
-> ++++++++++++++++++
->   .../recipes-connectivity/hostapd/hostapd/CVE-2024-3596_08.patch | 47
-> ++++++++
->   meta-oe/recipes-connectivity/hostapd/hostapd_2.10.bb            | 10 ++
->   .../0001-configure.ac-bypass-autoconf-2.69-version-check.patch  | 7 +-
->   .../postgresql/{postgresql_14.13.bb =3D> postgresql_14.14.bb} |   2 +-
->   meta-oe/recipes-devtools/php/{php_8.1.30.bb =3D> php_8.1.31.bb} |   2 +=
--
->   .../asio/asio/0001-tests-Remove-blocking_adaptation.cpp.patch   | 45
-> ++++++++
->   meta-oe/recipes-support/asio/asio/run-ptest                     | 19 ++=
-++
->   meta-oe/recipes-support/asio/asio_1.20.0.bb                     | 21 ++=
-+-
->   .../nspr/0001-Fix-Wincompatible-function-pointer-types.patch    | 39
-> +++++++
->   meta-oe/recipes-support/nspr/nspr_4.29.bb                       | 1 +
->   .../python/python3-werkzeug/CVE-2024-34069-0001.patch           | 149
-> +++++++++++++++++++++++++
->   .../python/python3-werkzeug/CVE-2024-34069-0002.patch           | 120
-> ++++++++++++++++++++
->   .../python/python3-werkzeug/CVE-2024-49767.patch                | 87
-> +++++++++++++++
->   meta-python/recipes-devtools/python/python3-werkzeug_2.1.1.bb   | 5 +-
->   29 files changed, 1227 insertions(+), 92 deletions(-)
->   delete mode 100644
-> meta-networking/recipes-connectivity/mosquitto/files/1571.patch
->   delete mode 100644
-> meta-networking/recipes-connectivity/mosquitto/files/2894.patch
->   rename
-> meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.18.bb =3D>
-> mosquitto_2.0.20.bb} (95%)
->   create mode 100644
-> meta-networking/recipes-daemons/lldpd/files/CVE-2023-41910.patch
->   create mode 100644
-> meta-oe/recipes-connectivity/hostapd/hostapd/0001-SAE-Check-for-invalid-R=
-ejected-Groups-element-length.patch
->   create mode 100644
-> meta-oe/recipes-connectivity/hostapd/hostapd/0003-SAE-Reject-invalid-Reje=
-cted-Groups-element-in-the-pa.patch
->   create mode 100644
-> meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2024-3596_00.patch
->   create mode 100644
-> meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2024-3596_01.patch
->   create mode 100644
-> meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2024-3596_02.patch
->   create mode 100644
-> meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2024-3596_04.patch
->   create mode 100644
-> meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2024-3596_05.patch
->   create mode 100644
-> meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2024-3596_06.patch
->   create mode 100644
-> meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2024-3596_07.patch
->   create mode 100644
-> meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2024-3596_08.patch
->   rename meta-oe/recipes-dbs/postgresql/{postgresql_14.13.bb =3D>
-> postgresql_14.14.bb} (84%)
->   rename meta-oe/recipes-devtools/php/{php_8.1.30.bb =3D> php_8.1.31.bb} =
-(99%)
->   create mode 100644
-> meta-oe/recipes-support/asio/asio/0001-tests-Remove-blocking_adaptation.c=
-pp.patch
->   create mode 100644 meta-oe/recipes-support/asio/asio/run-ptest
->   create mode 100644
-> meta-oe/recipes-support/nspr/nspr/0001-Fix-Wincompatible-function-pointer=
--types.patch
->   create mode 100644
-> meta-python/recipes-devtools/python/python3-werkzeug/CVE-2024-34069-0001.=
-patch
->   create mode 100644
-> meta-python/recipes-devtools/python/python3-werkzeug/CVE-2024-34069-0002.=
-patch
->   create mode 100644
-> meta-python/recipes-devtools/python/python3-werkzeug/CVE-2024-49767.patch
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#114760): https://lists.openembedded.org/g/openembedde=
+d-devel/message/114760
+> Mute This Topic: https://lists.openembedded.org/mt/110526837/3617156
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
+artin.jansa@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 
