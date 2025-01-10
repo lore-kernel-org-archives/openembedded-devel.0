@@ -1,108 +1,100 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A64ECE7719C
-	for <webhook@archiver.kernel.org>; Fri, 10 Jan 2025 19:07:10 +0000 (UTC)
-Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
- by mx.groups.io with SMTP id smtpd.web11.360.1736536026564268741
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2F8DE77188
+	for <webhook@archiver.kernel.org>; Fri, 10 Jan 2025 20:09:01 +0000 (UTC)
+Received: from mail-io1-f53.google.com (mail-io1-f53.google.com [209.85.166.53])
+ by mx.groups.io with SMTP id smtpd.web10.671.1736539738621364096
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Jan 2025 11:07:06 -0800
+ Fri, 10 Jan 2025 12:08:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=kQg3/T2p;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-202501101907044d5f53f81d71ce6bed-ienizu@rts-flowmailer.siemens.com)
-Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 202501101907044d5f53f81d71ce6bed
-        for <openembedded-devel@lists.openembedded.org>;
-        Fri, 10 Jan 2025 20:07:04 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=1sKsuh2oS3gxq2fS2fhQhAEUteleBKg2+D3399fH72M=;
- b=kQg3/T2p3+iYoZLC5wPV1XvrDhvJyktljVMMLYUJWyfUjHJcnePFvZEDVcL/wmrzgkMs9F
- pSEoMeQwuQz8K6n3HAlYE8YlGX0hoWJ5Y1LpX0JHbe77bIGio7vYF7ranXOnVF0iNinrqKLg
- lG1L1fJMV5FNFs21HXQvd6j0mhH480JTc9sql66B/8TF9XZHBSLxDnRXYLCR856NBt27Upgg
- OG2ur2GdUed3v+Pte/rxic7zemiiFmQYAKOdJ7W1J9pxgfFVyGG69Dd4Z6qjFlIUblDKa/ab
- ky+xmURnFwdVB1+XNPRH7Nxvv8rYJo/eJV+3LRddkvlZk1GD9JBN/Zpw==;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.53, mailfrom: straka.derek@gmail.com)
+Received: by mail-io1-f53.google.com with SMTP id ca18e2360f4ac-844dfe4b136so61411539f.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Jan 2025 12:08:58 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1736539737; x=1737144537;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=LaDMlZuy14iuzp+EMGmMQx9ylU4wHgyF72Dg/hgioPs=;
+        b=dVt57EOKeoRu0oRj7PqRX40fZwr2/nR104mQweHmVEKAtkEhhnsk6dSlMB/kw3OtJk
+         CSWjkdovf2ScKM8y7d8uL0MDQhHFUkTFkK5GWqwMcfiZkTykG4wEp0+z1tnKpiLy0FFz
+         sF/CluxCW1R6aJW7K0JO5is+Rf/CVFSvUFegnDOxN5OnSaplqngGjYx+prr+zyXkR7bP
+         ung1yc+s0hDyZE3suTUHikl8WoOsBbGb/yicJonHF7pYwpJXPlFP1gZzk4un6pEFUSdU
+         gk6UmjlBeDGQrrQ1B4AKvElAgMalV5nUT3ReWe7t7WvLKlR/otEPkUupN1SHA6QLMWSB
+         a03Q==
+X-Gm-Message-State: AOJu0Yyem9tDVEWwl7hsqNgKRkimyPG5G1paHoeXbx7chxYOhJq+k17R
+	5rSq6ROgM0ksPvi5V3XaxFuZR6rOPtbGMN7PdjJXB8sw5+Ai2zkYjkCfDA==
+X-Gm-Gg: ASbGncv9WpL+5GcTZOyV9T/AE9qbrr3SXmJ1ENlfVCqGSCkKP/POZ5YjNu89ft/zsGR
+	M1qZzrYCGxwlfh93oEHENxXvPUm4G6SpRdoXho06F4m9cGt0r6r2FAky9/Ffu+zqv8sztj6inq8
+	OiVLfgjEpNIy45P30wNmM537ErItjCRLoRBauA0X1lP2T1+F0sI3TTBiddhtEhXEPKdUxJOlv8p
+	NQND6H9PfoQsNW7q9qpFLGQ+Cua9T+8MiIuZtLre/OtNybYRWgjgSNzG9dbaxOJsjfb5FZPweDM
+	ssVsTRaOhaRBSMehVAOwluB2Lw==
+X-Google-Smtp-Source: AGHT+IH9KJj0XGb3veyF2ru0CWmE/Hsif4EOeaLDsIHWi6yppgstHhWofUrPhpYlJN2suA4myjq1ug==
+X-Received: by 2002:a05:6602:36cf:b0:843:e9c1:930b with SMTP id ca18e2360f4ac-84ce0194e69mr1165516239f.14.1736539737293;
+        Fri, 10 Jan 2025 12:08:57 -0800 (PST)
+Received: from alpha.lab.asterius.io (c-24-118-24-24.hsd1.mn.comcast.net. [24.118.24.24])
+        by smtp.gmail.com with ESMTPSA id ca18e2360f4ac-84d61fc84dasm104467139f.46.2025.01.10.12.08.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 10 Jan 2025 12:08:56 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH 2/2] libtinyxml: patch CVE-2023-34194
-Date: Fri, 10 Jan 2025 20:06:04 +0100
-Message-Id: <20250110190604.772048-2-peter.marko@siemens.com>
-In-Reply-To: <20250110190604.772048-1-peter.marko@siemens.com>
-References: <20250110190604.772048-1-peter.marko@siemens.com>
+Cc: Derek Straka <derek@asterius.io>
+Subject: [oe][meta-python][PATCH 01/13] python3-yarl: update recipe to use the ptest-python-pytest class
+Date: Fri, 10 Jan 2025 20:08:10 +0000
+Message-Id: <20250110200822.3958062-1-derek@asterius.io>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 Jan 2025 19:07:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114790
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 Jan 2025 20:09:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114791
 
-From: Peter Marko <peter.marko@siemens.com>
-
-Take patch from Debian:
-https://salsa.debian.org/debian/tinyxml/-/commit/2366e1f23d059d4c20c43c54176b6bd78d6a83fc
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../libtinyxml/CVE-2023-34194.patch           | 31 +++++++++++++++++++
- .../libtinyxml/libtinyxml_2.6.2.bb            |  1 +
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-support/libtinyxml/libtinyxml/CVE-2023-34194.patch
+ .../recipes-devtools/python/python3-yarl/run-ptest        | 3 ---
+ .../recipes-devtools/python/python3-yarl_1.18.3.bb        | 8 +-------
+ 2 files changed, 1 insertion(+), 10 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-yarl/run-ptest
 
-diff --git a/meta-oe/recipes-support/libtinyxml/libtinyxml/CVE-2023-34194.patch b/meta-oe/recipes-support/libtinyxml/libtinyxml/CVE-2023-34194.patch
-new file mode 100644
-index 0000000000..a94806daad
---- /dev/null
-+++ b/meta-oe/recipes-support/libtinyxml/libtinyxml/CVE-2023-34194.patch
-@@ -0,0 +1,31 @@
-+From: Guilhem Moulin <guilhem@debian.org>
-+Date: Sat, 30 Dec 2023 14:15:54 +0100
-+Subject: Avoid reachable assertion via crafted XML document with a '\0'
-+ located after whitespace
-+
-+Bug: https://www.forescout.com/resources/sierra21-vulnerabilities
-+Bug-Debian: https://bugs.debian.org/1059315
-+Bug-Debian: https://security-tracker.debian.org/tracker/CVE-2023-34194
-+
-+CVE: CVE-2023-34194
-+Upstream-Status: Inactive-Upstream [lastrelease: 2011]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ tinyxmlparser.cpp | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/tinyxmlparser.cpp b/tinyxmlparser.cpp
-+index 8aa0dfa..1601962 100644
-+--- a/tinyxmlparser.cpp
-++++ b/tinyxmlparser.cpp
-+@@ -1606,6 +1606,10 @@ const char* TiXmlDeclaration::Parse( const char* p, TiXmlParsingData* data, TiXm
-+ 		}
-+ 
-+ 		p = SkipWhiteSpace( p, _encoding );
-++		if ( !p || !*p )
-++		{
-++			break;
-++		}
-+ 		if ( StringEqual( p, "version", true, _encoding ) )
-+ 		{
-+ 			TiXmlAttribute attrib;
-diff --git a/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb b/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
-index 0d18dd4a89..c99930f9e2 100644
---- a/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
-+++ b/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
-@@ -12,6 +12,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/tinyxml/tinyxml_${@'${PV}'.replace('.', '_')}.t
-            file://enforce-use-stl.patch \
-            file://entity-encoding.patch \
-            file://CVE-2021-42260.patch \
-+           file://CVE-2023-34194.patch \
- "
- SRC_URI[sha256sum] = "15bdfdcec58a7da30adc87ac2b078e4417dbe5392f3afb719f9ba6d062645593"
+diff --git a/meta-python/recipes-devtools/python/python3-yarl/run-ptest b/meta-python/recipes-devtools/python/python3-yarl/run-ptest
+deleted file mode 100644
+index 8d2017d39..000000000
+--- a/meta-python/recipes-devtools/python/python3-yarl/run-ptest
++++ /dev/null
+@@ -1,3 +0,0 @@
+-#!/bin/sh
+-
+-pytest --automake
+diff --git a/meta-python/recipes-devtools/python/python3-yarl_1.18.3.bb b/meta-python/recipes-devtools/python/python3-yarl_1.18.3.bb
+index 8db97093c..5370573a3 100644
+--- a/meta-python/recipes-devtools/python/python3-yarl_1.18.3.bb
++++ b/meta-python/recipes-devtools/python/python3-yarl_1.18.3.bb
+@@ -5,11 +5,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
+ SRC_URI[sha256sum] = "ac1801c45cbf77b6c99242eeff4fffb5e4e73a800b5c4ad4fc0be5def634d2e1"
+ 
+-SRC_URI += "file://run-ptest"
+-
+ PYPI_PACKAGE = "yarl"
+ 
+-inherit pypi ptest python_setuptools_build_meta cython
++inherit pypi ptest-python-pytest python_setuptools_build_meta cython
+ 
+ DEPENDS += " \
+     python3-expandvars-native \
+@@ -31,7 +29,3 @@ RDEPENDS:${PN}-ptest += " \
+     python3-unittest-automake-output \
+ "
+ 
+-do_install_ptest() {
+-    install -d ${D}${PTEST_PATH}/tests
+-    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+-}
 -- 
-2.30.2
+2.34.1
 
 
