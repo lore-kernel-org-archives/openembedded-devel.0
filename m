@@ -1,247 +1,194 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <Jiaying.Song.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0129FE77188
-	for <webhook@archiver.kernel.org>; Mon, 13 Jan 2025 01:02:12 +0000 (UTC)
-Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com [209.85.219.171])
- by mx.groups.io with SMTP id smtpd.web10.7164.1736730132520309653
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B57C9E77188
+	for <webhook@archiver.kernel.org>; Mon, 13 Jan 2025 03:38:53 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.9715.1736739525937977413
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Jan 2025 17:02:12 -0800
+ Sun, 12 Jan 2025 19:38:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Fq1fyP6k;
- spf=pass (domain: gmail.com, ip: 209.85.219.171, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f171.google.com with SMTP id 3f1490d57ef6-e54d268bc3dso6572161276.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jan 2025 17:02:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1736730131; x=1737334931; darn=lists.openembedded.org;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=1P8SvvDYMfWNcRyQHqxtr2t1YA23cUNTxhj5jm1N/nw=;
-        b=Fq1fyP6k5T4gTeN7QixsPfR9xsQB7Byjj8/p81G48N3npfEXw58WW5WkgRCXE/KR8Y
-         oG4OgUgNSpZjeC1Arb6J7Verx8IFltFc5Re0JJo14A2dvp+0ruEkv+a+dtqwyV5LEpHW
-         wCaj4nLOBvEZwA59tpiW+AYJaYl9qVQgYflNoxqg+eSfdC1E9MnlTpx2ld2to7EoGPth
-         nUuuYE5OIyJ6BcFhCmfRoJockZyS43M4/UMeNEfdaRogLeEWUexBGLynn00jqhzSf/WX
-         xhoYB5ys5srVd7rk4MIb3TrOUibQd9XoDI+212VtnPjEH7S0AOpVZ+caSF43t3UZiqHZ
-         OjGg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736730131; x=1737334931;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=1P8SvvDYMfWNcRyQHqxtr2t1YA23cUNTxhj5jm1N/nw=;
-        b=u1MJizVJ1XENHUM5/zuX+pGfGo22bIkk2IihfU8q7B8uTV4y2+3onnz14FNbQf9Egk
-         GBfGUpyz2WCKxuElFVyn0XF9AsQkhq+Y/i7Nw694D6W6EM305KD26502UAs4UjunPxAc
-         SpltzEjzJgwHXyRspIBOPlHCGmtQutrz/f4Jom0PLxzt5wX+Z1dqhIo2i1sSN5ECXHYi
-         4WTQfsS/1HZ3m7EMhZQf0VAu9BBC7DpTkDv/h/HKNOA4oJ9HoZDBiOU5IWfhvZuv7H6H
-         Q8CRdIYZF5l67mlM6TKJ90bcav2UCGZ0BBu3UyUcklVNud15fyxLj1TsaYjxIxYxlOBB
-         nB2Q==
-X-Forwarded-Encrypted: i=1; AJvYcCWJZFrXXBvsGNkDKF8VtGRDWpnegMv/MwSptqOwn75jCJFyAmCZQUSUkUaozeMR8pSxH6lv/6/motEXJK67FzdMEbw=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yz3o7o4Gug6lrc8ckUeAEQBRqq9i4BpepHM6xwV3J27i32+WawY
-	8C9GOzgDPXC7HJdksV/S4hZio8JL+qFSyUfs84ocAS7NVxV4auSh0t5OcqWE
-X-Gm-Gg: ASbGncvF67Lc62L3IRMqwkI15DEQwaH0jeyZfnYdUeNisuQl90JUGkWKI4m+hrFIgon
-	BJD9S2XX+YYY7er4gl7siNMFwsCITg0kSslXWzyHK4il6hznfsuajvj6YIqO57wU7jy4KmTEhVq
-	fdoiJx6zKQ5EiIT3fZ3WP76ZhwuVL9ImE6qdaPfDeI10oNTXxUvg8HLC8dsnPxBiAjmnTd/2vrs
-	48PDn4cXEroQmjJuyzWS8AxjYZWaanyu7xkizTjXRNUgc2LT1gRhqtUD5VDZnpR5scxrmyKOhRH
-	J6rMqZSMcE66b3wCyUQ7bhizoyhRdA==
-X-Google-Smtp-Source: AGHT+IEPaJivv0CL5PWSxkrdyt569vt4IZkXkk6CTv5fZZl09MDy15FZjJiM1L8Noh6Fq3DZLP99NQ==
-X-Received: by 2002:a05:6902:18ca:b0:e57:4167:477c with SMTP id 3f1490d57ef6-e5741675807mr3978751276.28.1736730131510;
-        Sun, 12 Jan 2025 17:02:11 -0800 (PST)
-Received: from ?IPV6:2600:1700:45dd:7000:9984:c5c:600f:f2e7? ([2600:1700:45dd:7000:9984:c5c:600f:f2e7])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e55a5979b50sm1351721276.28.2025.01.12.17.02.10
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 12 Jan 2025 17:02:11 -0800 (PST)
-Message-ID: <05f57241-f78b-441b-a352-39ebf6f8cabf@gmail.com>
-Date: Sun, 12 Jan 2025 20:02:10 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=31087dc864=jiaying.song.cn@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50D2ugCR017158
+	for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jan 2025 19:38:45 -0800
+Received: from nam11-bn8-obe.outbound.protection.outlook.com (mail-bn8nam11lp2173.outbound.protection.outlook.com [104.47.58.173])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 443mt71783-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jan 2025 19:38:45 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=OORN+d/G2ZBh2tPB24KXPFhWQoSGgwExfKd6UEC+6soldJrBRiM1D5ws0p2+CmEXLwgy9tniaK7k/d2aBEmrOkmzj3PR1GvELpDP90050g7luI6As8MJDto77ajc/t74hbMKP5wBKLh43pOsbp6nEBTxTwhPg8wmhrGaUqx06nZxPFH2whKOtHTSJOsfoPxVpfsh9GoOFnIW++BL6SpLZrO/KqbhOc8/9bhmj2vL8xFGype/QGd6hXprFO4W4l0S0mt5U+xbeTYH+6sD2DQcpdy37ZkeN17Cr5bPsmZBrerDFskxbkEYm4OU0Rs2D/5HBeu2hKuOxa9uxNSCEd9Rrw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mOZmoahtp+ShXzYEyOQUxhOAXB42bliQf64bzI70HFc=;
+ b=yfpec+KWEZyXPGDEb0qzy5X388fdxgTumseZqdOlnyPv4lnKnqIkwYO9HKth1jj7cOi0tr+Kv/7/OEYMRXWIXpDxYGMbLuDS0EYpHBleYndQjtTi6PIyONQGYK8iW1j9JmwWRaBHIn8L2FQ5i408IK6aVdvP9D8HJFoSOy2io+RZ/H0nVXQ5gv0zuM4NEfVJuNLoXdbHXjsHLsQlj3EMXQI0LBvE2jgHD3XuCuTAd9RB78sT3Wd/IZDzFC0aPXnhZg2w2cMhUppUGfixsnQQu9P42EP+KxNui1PjtaJ8TZYhPkJbf0xlBEFwHWb/4d+6OaUWwyjlxiBXb7NhKQO8Mw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from PH8PR11MB6928.namprd11.prod.outlook.com (2603:10b6:510:224::12)
+ by DS7PR11MB7689.namprd11.prod.outlook.com (2603:10b6:8:e2::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.17; Mon, 13 Jan
+ 2025 03:38:43 +0000
+Received: from PH8PR11MB6928.namprd11.prod.outlook.com
+ ([fe80::4f5d:1d96:e74c:2840]) by PH8PR11MB6928.namprd11.prod.outlook.com
+ ([fe80::4f5d:1d96:e74c:2840%2]) with mapi id 15.20.8335.015; Mon, 13 Jan 2025
+ 03:38:43 +0000
+From: "Song, Jiaying (CN)" <Jiaying.Song.CN@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] [meta-python][scarthgap][PATCH] python3-pylint: fix do_fetch
+ error
+Thread-Topic: [oe] [meta-python][scarthgap][PATCH] python3-pylint: fix
+ do_fetch error
+Thread-Index: AQHbXYmcSR9XwZJuGkuAmjbpG4WmibMUHhCw
+Date: Mon, 13 Jan 2025 03:38:43 +0000
+Message-ID: 
+ <PH8PR11MB692830F9689CDC91A16DDE3FB81F2@PH8PR11MB6928.namprd11.prod.outlook.com>
+References: <18170EB1DC0CE9D7.21892@lists.openembedded.org>
+In-Reply-To: <18170EB1DC0CE9D7.21892@lists.openembedded.org>
+Accept-Language: en-AS, zh-CN, en-US
 Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: styhead merge request: Jan 12th
-Autocrypt: addr=akuster808@gmail.com; keydata=
- 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
- ApZ86eOP
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PH8PR11MB6928:EE_|DS7PR11MB7689:EE_
+x-ms-office365-filtering-correlation-id: bccc9c01-1df8-47d8-ecc4-08dd3383c720
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230040|1800799024|376014|366016|7053199007|38070700018;
+x-microsoft-antispam-message-info: 
+ =?us-ascii?Q?MUaUaQIDLLt0V348V8a+J+3wPDeozhP4xHNSAXTKGUFem3D/R8JJsQNWnRTT?=
+ =?us-ascii?Q?IP/J9H1SRgQa6JgohNArlngyh1M9PgAlBWSo92RIZpJjk/CnsIHrn5T4V6hI?=
+ =?us-ascii?Q?sxGCKAMqe+OywNSxPI6/xOi1SXZ+X/iWWSQp6Xzj1a6mIlg7v2oqc4X38kEe?=
+ =?us-ascii?Q?NOTTHLeLg0nih2IBUHe/6S0f8R5revQp2QTssSE0d1zk7kmZkwdoKXs6zPp9?=
+ =?us-ascii?Q?3A17K8VDB9bRvSZbkq68ZpxrszkmCl2LMgB6Ji66mjYKzQtI8Fuqb6QVuibK?=
+ =?us-ascii?Q?dt9bdkVfL67jTHfPOVPEPP44WVd7RFyYO5FBa8WXm+ENkOOHpzWZ81IXJIL+?=
+ =?us-ascii?Q?djmIxGAsgRs1adHD01+d5hOAuxemLqDyiUWjzst+EMQ3L6W/sZl78rCGMCoz?=
+ =?us-ascii?Q?i31hS7eOEiF/WesjjJzmOZSN+5HnfuqqH++A4iOu0BXJ9KgwXYhdHvIAbq5z?=
+ =?us-ascii?Q?1uU8H81RlRwMw9oFiO4ITAZ8U8w1y9B2qHxMSf6uY9aUCUbzcTw0o2lAbERN?=
+ =?us-ascii?Q?74eR8RJVddMYsBvSwBOwY857D04QwIlNLNkTUo2olWtjwEvuEVJfaO+KwrhI?=
+ =?us-ascii?Q?TvfeD7mACgKlHzQzaAnAXV3T27+KjG2vExlwt4UBap93CcgJHekr1LXA6ZkJ?=
+ =?us-ascii?Q?DqaLOhBc0HH0A4PRTGXlpDFR0y3v/rZj8+JNoekw3XB6CY0YAtMovc2qwcn5?=
+ =?us-ascii?Q?NIiEpAkK/nr4eZcv7jdile7sMPZNWvGqa3b8riKeujVc8Zck1fkwjAk0i+Bu?=
+ =?us-ascii?Q?GWqBBXBQ1Su39lliKEE6vtsI/5/A68g9rJJzw4qNkFg//zvhVqmMRt2g0otf?=
+ =?us-ascii?Q?YNTozkLvuLX0WDNmhoR5KiQi6HdShaG41z7f1xIdeL1HX9Fwv2TXb/wZvTk6?=
+ =?us-ascii?Q?/eqcxbdLsdLAcFCTA8zuvhGYeW92BY5MxfEk+Fi1MXFNcwZZyfBvZptvibeZ?=
+ =?us-ascii?Q?dDUZ4oRCORDIrL54nDBDoNko6fqnO5tB4IJFqkrKacR1xgQnAdwzqXCpt4xS?=
+ =?us-ascii?Q?mwfx5P+7qvHP89+oZJppIwfpzZ363H7kxApnXF9ZWhYGsmeYXKUechpmCCOn?=
+ =?us-ascii?Q?qQ1Tsqjgx1f2d3mBTBejnMEPzoV1dMsg1lT0jvRYQoejSsGq3JsD3hlVd+F9?=
+ =?us-ascii?Q?JqorgRIRGeWDh3OZxoMOn/i6P8SZcrY/8ZUCpiI1jcc/3MtshnojoEN5nsB3?=
+ =?us-ascii?Q?IDjiiS5x+gZrQ5ahv1e7wQphAgGuH0vJWTGwfpy7bZxlqrWzLlMc2Y6Dcv/Z?=
+ =?us-ascii?Q?b1cgfWfBHJ81bqtpo+S3fOCoGn58sb9wYs3Sl8pJ6yufjJMD1Eb6Vx9exw6R?=
+ =?us-ascii?Q?bYxzAoAejSyx6JT1ciNo7RXxC8Cq05PoMt3GEjjnLY2guYJ12LZpQik/aK4k?=
+ =?us-ascii?Q?SkRVX9qYo05/KzLxmT5RSSmkC//U?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH8PR11MB6928.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(7053199007)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?us-ascii?Q?KbRe7B1nYPxnnT9E+5QnuXqSfwmjiFBMC9j/wJgVAHhvva85vzMDuZndStvm?=
+ =?us-ascii?Q?lsgN/gGm0Z4YkzEMFuFpUvpkezgS8TjtfOxW9SmanuDf8f2VB4zxUAE3AMIx?=
+ =?us-ascii?Q?aPwZS3FoxWkw4EBz9jMVZvYFNzmZXCVIaAknnY5+Xva8fgpheBQE3ZqxSEwT?=
+ =?us-ascii?Q?cfnAVTy9IMIcZ7Dtu3UyUCM8L8bNWcW9gJJz3xGp1/wU93+oZer6nAjhnIrJ?=
+ =?us-ascii?Q?0Vr+aUU9spCcYlQid/dgA3kwwaGgEmG3TChU9XB/DcFmvSUsnBGasOQK1ZrS?=
+ =?us-ascii?Q?trqg1OdoOQ+bmwJ9nvMUc/pphLr5HHwZRg9BFIZDfH3vH4sLpWJBM/9Us3ku?=
+ =?us-ascii?Q?LZ0wDU0Rp+9tjadjYKVR5Tzd05sX6TtC9uK592/eJFtdQnhu/iKkv3gjUD7D?=
+ =?us-ascii?Q?gFUWbGBXCmXSMFZ/eJdvnQQ6d2wdBvhjrXbUl+2L/h7LUO2SJtXnbj3jQcSE?=
+ =?us-ascii?Q?sA/ETFPjDi4UQa8+PFrAGV0DtckxLZwvxI9gNPmDXLftKXX5TFp3Atnsaf6F?=
+ =?us-ascii?Q?nadLH2LaIZjVVeo5sIjzv7CHVsz7r2dctFeemzZsCMxfYlCbVMztPyjtf289?=
+ =?us-ascii?Q?K6Cm1otINEtlwMYv9t/lzCarRaB0bjkeFfCY57yd0OPZTrrNfZgQS6odXG5B?=
+ =?us-ascii?Q?TgStHKj4OKm3j6t2PyV3y7dWe1Y42SYsByGcJM1tJSd+QbdupH34WPJyZoig?=
+ =?us-ascii?Q?iYVoSlkRI5Oslohr3uNBR7J71yJ7st1J+B3LCWVqFGTFIkFGfJ2h8bKoEZ+S?=
+ =?us-ascii?Q?sjH7R4WMIisrcbOuj5VHLgsTFKgPMCEM0bOHYF91649cm04mb1lpmUoco/2k?=
+ =?us-ascii?Q?qT+zl+0hdr95vx0FFEA/y8fFc79EheoDKQydm5ChGbMAJudRGKsNfSDieuPx?=
+ =?us-ascii?Q?Jpuwui1c2hJvGH7JbXcsd2+0XB0P9lgXjG2f9teENucGt6tv607h79t+ZAGH?=
+ =?us-ascii?Q?JvsA1EtU2L5/rqm1PhOEzT5Dlsj7PxjFEIMW2vTvBLzLzeQJfvnd6COnQ5Fa?=
+ =?us-ascii?Q?hNfoXNKtwsufrYCuSUQn1pw9/B/W7w8D+evQ7arXgIqgOrW9c97uZDttSOJG?=
+ =?us-ascii?Q?rZUlBhx3vJcxhP1ZbzfymQt4grg0lU6SFSZTMh5ijuK6gbAmCeo4QqLj/DvV?=
+ =?us-ascii?Q?SjhMt+QifLTR5pea5FgJBLkW7H+bsGucY5jG3qRUeAYY5GOdZQN0MIZ9P++e?=
+ =?us-ascii?Q?7E5/NoXm1QYmMaqorxG0GB+Yfi341IbUyFPo5g46PQCmO7dFLcbi9sUlRPZr?=
+ =?us-ascii?Q?I8/Q0F4bDtBxy6u/wBaAyoA0ns9+HGmHxRwaLq2e0M4/7W3gAKCO0W6JNcWT?=
+ =?us-ascii?Q?+to9GRWFAEH7/KQ0V3sOoghRBHZ4h+SYHFo4VZ2//aOg45s8tS5THYbEhaqF?=
+ =?us-ascii?Q?yZDvR1jAYx0JQQbZxw9vl67qClWHlMlM9oPFoGGkx1+GtQDEjiGyjQ9P4UVF?=
+ =?us-ascii?Q?fYdMKHdhnCOAXtH+k+chAaveaO27Nw3Q/8tT6WGTanyOrBCfzqMneoHxYEBY?=
+ =?us-ascii?Q?s1t+zsLbUaORyORzOT+tuO59os4Y8Ew2bZ+GEvDAEjQvKEgdtwPKDZ7haPxO?=
+ =?us-ascii?Q?DLf7EyYYPMbd+KZ1x/Q2kVD5fC6varIJQB7cONdSf1RQSAkE58al9YrIPdSR?=
+ =?us-ascii?Q?og=3D=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PH8PR11MB6928.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: bccc9c01-1df8-47d8-ecc4-08dd3383c720
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Jan 2025 03:38:43.0943
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: kqBoOAC51c5hGGX+tybRG7gPYK9GcKnfccAnyIfCCpNMrQC3p8E/K4A4H5BoFGmQWL/avg5g4m8bdYXmY3DBcNTTgK9PLf2iimCx2hnBTSc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR11MB7689
+X-Proofpoint-ORIG-GUID: raUjndj3DqIEX7XuCxrmxoriify4brb6
+X-Authority-Analysis: v=2.4 cv=SeoNduRu c=1 sm=1 tr=0 ts=67848ac5 cx=c_pps a=19K1aDEwnJ0RahI1emVHDw==:117 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10 a=VdSt8ZQiCzkA:10 a=bRTqI5nwn0kA:10
+ a=XHfBerL2AAAA:8 a=Q4-j1AaZAAAA:8 a=t7CeM3EgAAAA:8 a=bLZqKDXHAAAA:8 a=NEAV23lmAAAA:8 a=hfkZIEdAkf5ywNToyOsA:9 a=CjuIK1q_8ugA:10 a=qb9JOAHM4hE5jB-puYrx:22 a=9H3Qd4_ONW2Ztcrla5EB:22 a=FdTzh2GWekK77mhwV6Dw:22 a=SM0NOtVXJcAQk9PFKD3C:22
+X-Proofpoint-GUID: raUjndj3DqIEX7XuCxrmxoriify4brb6
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-13_01,2025-01-10_03,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 clxscore=1015
+ mlxlogscore=999 mlxscore=0 impostorscore=0 priorityscore=1501
+ lowpriorityscore=0 bulkscore=0 malwarescore=0 phishscore=0 suspectscore=0
+ adultscore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2411120000 definitions=main-2501130029
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Jan 2025 01:02:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114817
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Jan 2025 03:38:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114818
 
-The following changes since commit 7cd38212e73e0e9f42f4d92defb16dd81f71221d:
+Kindly ping for scarthgap branch.
+-----Original Message-----
+From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.o=
+penembedded.org> On Behalf Of Song, Jiaying (CN) via lists.openembedded.org
+Sent: Friday, January 3, 2025 10:46 AM
+To: openembedded-devel@lists.openembedded.org
+Cc: Li, Changqing <Changqing.Li@windriver.com>
+Subject: [oe] [meta-python][scarthgap][PATCH] python3-pylint: fix do_fetch =
+error
 
-   lvm2: Remove the lvm2-udevrules package (2024-11-25 15:32:56 -0500)
+From: Jiaying Song <jsong-cn@ala-lpggp7.wrs.com>
 
-are available in the Git repository at:
+Change the SRC_URI to the correct value due to the following error:
+WARNING: python3-pylint-3.1.0-r0 do_fetch: Failed to fetch URL git://github=
+.com/pylint-dev/pylint;branch=3Dmaintenance/3.1.x;protocol=3Dhttps, attempt=
+ing MIRRORS if available
 
-   https://git.openembedded.org/meta-openembedded styhead-next
+Signed-off-by: Jiaying Song <jsong-cn@ala-lpggp7.wrs.com>
+---
+ meta-python/recipes-devtools/python/python3-pylint_3.1.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-for you to fetch changes up to 31a24ab044a24936f50a80828ecd7048bf5b1f5e:
-
-   libmodule-build-tiny-perl: fix QA Issue: TMPDIR [buildpaths] 
-(2025-01-12 19:57:19 -0500)
-
-----------------------------------------------------------------
-Benjamin Bouvier (1):
-       bridge-utils: add CVE_PRODUCT
-
-Derek Straka (1):
-       nginx: Upgrade mainline release version 1.27.1 -> 1.27.3
-
-Ghislain Mangé (1):
-       wireshark: use inherit_defer for conditional cases
-
-Hongxu Jia (1):
-       ntfs-3g-ntfsprogs: fix CVE-2023-52890
-
-J. S. (4):
-       libhtml-tree-perl: Drop unnecessary SRC_URI md5sum
-       libhtml-tree-perl: update HOMEPAGE
-       libhtml-tree-perl: fix QA Issue: TMPDIR [buildpaths]
-       libmodule-build-tiny-perl: fix QA Issue: TMPDIR [buildpaths]
-
-Khem Raj (3):
-       mariadb: Fix build with clang-20/trunk
-       ghex,gnome-chess,gnome-photos: Add missing dep on itstool-native
-       mpd: Fix build with icu 76+
-
-Markus Volk (2):
-       geary: add itstool-native dependency
-       eog: add itstool-native dependency
-
-Peter Kjellerstedt (1):
-       abseil-cpp: Do not leak -Wnon-virtual-dtor into the .pc files
-
-Peter Marko (15):
-       proftpd: set status of CVE-2001-0027
-       dash: set CVE_PRODUCT
-       ace: ignore CVE-2009-1147
-       apache2: ignore CVE-1999-0678 and CVE-1999-1412
-       apache2: remove old version references from CVEs
-       spice: ignore CVE-2016-0749
-       gattlib: mark CVE-2019-6498 as fixed
-       monkey: ignore CVE-2013-1771
-       redis: ignore CVE-2022-0543
-       spice-gtk: mark CVE-2012-4425 as fixed
-       apache2: ignore disputed CVE CVE-2007-0086
-       memcached: ignore disputed CVE-2022-26635
-       emlog: set CVE_PRODUCT
-       php: upgrade 8.2.20 -> 8.2.26
-       wireshark: upgrade 4.2.8 -> 4.2.9
-
-Ruiqiang Hao (1):
-       mariadb: Ensure compatibility with ARMv9 by updating .arch directive
-
-Yoann Congal (1):
-       gimp: fix gimptool buildpaths errors
-
-Yogita Urade (1):
-       postgresql: upgrade 16.4 -> 16.5
-
-  ...0001-unistr.c-Fix-use-after-free-in-ntfs_uppercase_mbs.patch | 42 
-++++++++++++++
-  .../ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb            | 1 +
-  meta-gnome/recipes-connectivity/geary/geary_46.0.bb             | 1 +
-  .../gimp/gimp/0001-gimptool-allow-default-CC-override.patch     | 85 
-+++++++++++++++++++++++++++++
-  meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb                    | 21 
-+++++++
-  meta-gnome/recipes-gnome/eog/eog_47.0.bb                        | 1 +
-  meta-gnome/recipes-gnome/ghex/ghex_46.0.bb                      | 1 +
-  meta-gnome/recipes-gnome/gnome-chess/gnome-chess_47.0.bb        | 2 +-
-  meta-gnome/recipes-gnome/gnome-photos/gnome-photos_44.0.bb      | 1 +
-  .../mpd/0001-meson.build-support-building-with-ICU-76.patch     | 52 
-++++++++++++++++++
-  meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.15.bb       | 1 +
-  meta-networking/recipes-daemons/proftpd/proftpd_1.3.8b.bb       | 2 +
-  .../recipes-support/bridge-utils/bridge-utils_1.7.1.bb          | 2 +
-  meta-networking/recipes-support/memcached/memcached_1.6.17.bb   | 2 +
-  meta-networking/recipes-support/spice/spice-gtk_0.42.bb         | 2 +
-  meta-networking/recipes-support/spice/spice_git.bb              | 1 +
-  .../wireshark/{wireshark_4.2.7.bb => wireshark_4.2.9.bb} |  4 +-
-  meta-oe/recipes-connectivity/ace/ace_6.5.19.bb                  | 2 +
-  meta-oe/recipes-connectivity/gattlib/gattlib_git.bb             | 2 +
-  meta-oe/recipes-core/emlog/emlog.inc                            | 2 +
-  meta-oe/recipes-dbs/mysql/mariadb.inc                           | 2 +
-  ...1-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch | 44 
-+++++++++++++++
-  ...1-Use-a-lambda-function-as-deleter-prototype-in-unique.patch | 26 
-+++++++++
-  .../0003-configure.ac-bypass-autoconf-2.69-version-check.patch  | 6 +-
-  .../postgresql/{postgresql_16.4.bb => postgresql_16.5.bb} |  2 +-
-  ...5-Don-t-match-Wnon-virtual-dtor-in-the-flags-are-neede.patch | 30 
-++++++++++
-  meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240722.0.bb    | 1 +
-  .../php/php/0001-ext-opcache-config.m4-enable-opcache.patch     | 4 +-
-  .../php/php/0002-build-php.m4-don-t-unset-cache-variables.patch | 2 +-
-  .../0003-php-remove-host-specific-info-from-header-file.patch   | 2 +-
-  .../php/0006-ext-phar-Makefile.frag-Fix-phar-packaging.patch    | 4 +-
-  .../php/php/0008-ext-imap-config.m4-fix-include-paths.patch     | 4 +-
-  .../php/php/0009-php-don-t-use-broken-wrapper-for-mkdir.patch   | 3 +-
-  meta-oe/recipes-devtools/php/php/0010-iconv-fix-detection.patch | 2 +-
-  meta-oe/recipes-devtools/php/{php_8.2.20.bb => php_8.2.26.bb} |  2 +-
-  meta-oe/recipes-extended/redis/redis_7.2.5.bb                   | 1 +
-  meta-oe/recipes-shells/dash/dash_0.5.12.bb                      | 2 +
-  meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb        | 10 +++-
-  .../recipes-perl/libmodule/libmodule-build-tiny-perl_0.048.bb   | 7 +++
-  meta-webserver/recipes-httpd/apache2/apache2_2.4.62.bb          | 17 
-+++---
-  meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb             | 1 +
-  .../recipes-httpd/nginx/{nginx_1.27.1.bb => nginx_1.27.3.bb} |  4 +-
-  42 files changed, 374 insertions(+), 29 deletions(-)
-  create mode 100644 
-meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/0001-unistr.c-Fix-use-after-free-in-ntfs_uppercase_mbs.patch
-  create mode 100644 
-meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-default-CC-override.patch
-  create mode 100644 
-meta-multimedia/recipes-multimedia/musicpd/mpd/0001-meson.build-support-building-with-ICU-76.patch
-  rename meta-networking/recipes-support/wireshark/{wireshark_4.2.7.bb 
-=> wireshark_4.2.9.bb} (95%)
-  create mode 100644 
-meta-oe/recipes-dbs/mysql/mariadb/0001-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch
-  create mode 100644 
-meta-oe/recipes-dbs/mysql/mariadb/0001-Use-a-lambda-function-as-deleter-prototype-in-unique.patch
-  rename meta-oe/recipes-dbs/postgresql/{postgresql_16.4.bb => 
-postgresql_16.5.bb} (86%)
-  create mode 100644 
-meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0005-Don-t-match-Wnon-virtual-dtor-in-the-flags-are-neede.patch
-  rename meta-oe/recipes-devtools/php/{php_8.2.20.bb => php_8.2.26.bb} (99%)
-  rename meta-webserver/recipes-httpd/nginx/{nginx_1.27.1.bb => 
-nginx_1.27.3.bb} (53%)
+diff --git a/meta-python/recipes-devtools/python/python3-pylint_3.1.0.bb b/=
+meta-python/recipes-devtools/python/python3-pylint_3.1.0.bb
+index 12f4f908a..4c49acaf1 100644
+--- a/meta-python/recipes-devtools/python/python3-pylint_3.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pylint_3.1.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE=3D "http://www.pylint.org/"
+ LICENSE =3D "GPL-2.0-only"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dc107cf754550e65755c42985a5d4e9c=
+9"
+=20
+-SRC_URI +=3D "git://github.com/pylint-dev/pylint;branch=3Dmaintenance/3.1.=
+x;protocol=3Dhttps \
++SRC_URI +=3D "git://github.com/pylint-dev/pylint;branch=3Dmain;protocol=3D=
+https \
+            file://0001-Adjust-test-expectations-for-ptest.patch \
+            file://run-ptest \
+            "
+--=20
+2.25.1
 
 
