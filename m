@@ -1,140 +1,83 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C2A93E7719F
-	for <webhook@archiver.kernel.org>; Mon, 13 Jan 2025 10:04:55 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web11.13922.1736762688378122488
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E939E7719F
+	for <webhook@archiver.kernel.org>; Mon, 13 Jan 2025 12:22:56 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.15798.1736770972721350634
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Jan 2025 02:04:48 -0800
+ Mon, 13 Jan 2025 04:22:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=DjNSMDku;
- spf=pass (domain: mvista.com, ip: 209.85.214.171, mailfrom: vanusuri@mvista.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-21654fdd5daso66694065ad.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Jan 2025 02:04:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1736762687; x=1737367487; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=W5AX7GYbcuSERlFdWDLK1wkUkwyQ/vm0hghwNNDsGjQ=;
-        b=DjNSMDkupGiLLPYsXw3gznV6qaZsF8Rh3qPIP5nqO6if8bOVrX8zcYyL/YJe/zqa6x
-         SStOiDaoRyudXhlAgzyCiUyCfHSow+qi9aIdRerGvV4oX3UDN/iXiWOcwEl002DfRgT6
-         DYljUJDhh7KrYkFNjKbo/3zkGk6xRmjV+RwnA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736762687; x=1737367487;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=W5AX7GYbcuSERlFdWDLK1wkUkwyQ/vm0hghwNNDsGjQ=;
-        b=JNT4PawZjtmMJwMv1HT7i0a49n2Z1PAQZdmptr8Ad4B6AO3j6q3YgnSU6X2m+Se3Gx
-         Y+GB9ju/CMyLaQ207ntYsp6Myl16raPLaqWpl/TvxKg2No8upD+BSHOhXFSROu7iWsXD
-         hBzAn1xLRri3mz8K4u7fIU+ITf7CnRcQZZbtgPtxhhBdg/3uX/O4nzXFJcDL3NqS4Pnz
-         pAPU00uKz61C6q4AegH6DhMUk441NDNmz5POLOBBsVM2jbnYe8FD4y0fz8+ETwD3ZDG7
-         jocVNBTqbs+THIiAyAeaPKUFRZoWRhFX7Y5k2b2ax3h1vVqM0xEy2VIkxX6ND5mrEmTw
-         Z70g==
-X-Gm-Message-State: AOJu0YzcvIO4zXj+N1a2/SA58dkQjLCeuXa6+05cav83y4orzGkFWNId
-	77ibeb1s1bHcXIKawAAIaQgTztfxFFGnpeFMQ9Wc77A1G+Rrx8K11AJ4zlZv1nkxMN4s35F9L2H
-	7BMo=
-X-Gm-Gg: ASbGncuVdGutRwacavKWi9r/RHBsXCK1d6iP6f5xAoZI/0LGsmeiFtCTyEUIUT3l8ZO
-	N0N/UnMa/DyxHbgLGghkzHezw7Dty0ZgxogB5sH0hA96VJ5vF6N6n0dzK3axpnvMKn6r6xpCGEy
-	ghXMKPc/aZwT5GVlBw/8M3xwQJN3kWc9ejBNdeduFnLIow/Ebh78n//33JttS2dDRdvUQWvpygR
-	N0DF3d3EA1WAmIlauN8AXL9pxjXazf03yZRANyo1zE1WM53nx679xiGVt5fdjvdivb+va0=
-X-Google-Smtp-Source: AGHT+IGO6sExI9JCVKPUU+OSttYYbh9UwTS41RFE9QWfjcjXoROBUhhMGay/2cIXx4o9IWsyreUnRg==
-X-Received: by 2002:a05:6a21:3d87:b0:1e8:b17a:a556 with SMTP id adf61e73a8af0-1e8b17aaaf4mr15002675637.15.1736762686970;
-        Mon, 13 Jan 2025 02:04:46 -0800 (PST)
-Received: from MVIN00020.mvista.com ([2405:201:c01c:7015:4cda:bdeb:c2c0:3672])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-72d4065a544sm5805296b3a.96.2025.01.13.02.04.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 13 Jan 2025 02:04:46 -0800 (PST)
-From: vanusuri@mvista.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-oe][scarthgap][PATCH] openjpeg: upgrade 2.5.0 -> 2.5.3
-Date: Mon, 13 Jan 2025 15:34:35 +0530
-Message-Id: <20250113100435.141849-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3108b423bb=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50DCGaDZ005499
+	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Jan 2025 12:22:52 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 443fm89r5a-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Jan 2025 12:22:51 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Mon, 13 Jan 2025 04:22:49 -0800
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][kirkstone][PATCH 1/1] libsass: upgrade 3.6.5 -> 3.6.6
+Date: Mon, 13 Jan 2025 12:22:29 +0000
+Message-ID: <20250113122229.662327-1-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Authority-Analysis: v=2.4 cv=Mtmo63ae c=1 sm=1 tr=0 ts=6785059b cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=VdSt8ZQiCzkA:10 a=omOdbC7AAAAA:8 a=pGLkceISAAAA:8 a=t7CeM3EgAAAA:8 a=NEAV23lmAAAA:8
+ a=tSToJHe1_VnBJH02SlMA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: S1LJ1Rm4U-lLocfiTnRMfnKsMkRVbjyX
+X-Proofpoint-GUID: S1LJ1Rm4U-lLocfiTnRMfnKsMkRVbjyX
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-13_04,2025-01-13_02,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 mlxscore=0
+ phishscore=0 clxscore=1015 mlxlogscore=779 impostorscore=0
+ priorityscore=1501 adultscore=0 lowpriorityscore=0 malwarescore=0
+ bulkscore=0 spamscore=0 classifier=spam authscore=0 adjust=0 reason=mlx
+ scancount=1 engine=8.21.0-2411120000 definitions=main-2501130104
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Jan 2025 10:04:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114828
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Jan 2025 12:22:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114829
 
-From: Vijay Anusuri <vanusuri@mvista.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Includes fix for CVE-2024-56826 and CVE-2024-56827
+(master rev: 3f88224fb9c436bdd3ccd5d0268914f08625efbf)
 
-ChangeLog:
-https://github.com/uclouvain/openjpeg/blob/v2.5.3/NEWS.md
-
-* Refresh 0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch
-
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 ---
- ...sk-cmake-to-export-binaries-they-don-t-make-.patch} | 10 +++++-----
- .../openjpeg/{openjpeg_2.5.0.bb => openjpeg_2.5.3.bb}  |  4 ++--
- 2 files changed, 7 insertions(+), 7 deletions(-)
- rename meta-oe/recipes-graphics/openjpeg/openjpeg/{0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch => 0001-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch} (75%)
- rename meta-oe/recipes-graphics/openjpeg/{openjpeg_2.5.0.bb => openjpeg_2.5.3.bb} (82%)
+ meta-oe/recipes-support/sass/libsass_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch
-similarity index 75%
-rename from meta-oe/recipes-graphics/openjpeg/openjpeg/0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch
-rename to meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch
-index 0ba13cf88..2e25ecc7e 100644
---- a/meta-oe/recipes-graphics/openjpeg/openjpeg/0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch
-@@ -1,4 +1,4 @@
--From 4681de07e21f17aa28710d3a51fabe7da60463f9 Mon Sep 17 00:00:00 2001
-+From 805ce4d40c5aaae12aa73452ff07babe8eb43a62 Mon Sep 17 00:00:00 2001
- From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
- Date: Fri, 28 Sep 2018 00:38:50 +0200
- Subject: [PATCH] Do not ask cmake to export binaries - they don't make it
-@@ -15,17 +15,17 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-  1 file changed, 1 deletion(-)
+diff --git a/meta-oe/recipes-support/sass/libsass_git.bb b/meta-oe/recipes-support/sass/libsass_git.bb
+index 4d709fc52..f0824944b 100644
+--- a/meta-oe/recipes-support/sass/libsass_git.bb
++++ b/meta-oe/recipes-support/sass/libsass_git.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8f34396ca205f5e119ee77aae91fa27d"
+ inherit autotools
  
- diff --git a/src/bin/jp2/CMakeLists.txt b/src/bin/jp2/CMakeLists.txt
--index 4324c36d..2c11fe02 100644
-+index 26156bcb..9eff04aa 100644
- --- a/src/bin/jp2/CMakeLists.txt
- +++ b/src/bin/jp2/CMakeLists.txt
--@@ -66,7 +66,6 @@ foreach(exe opj_decompress opj_compress opj_dump)
-+@@ -64,7 +64,6 @@ foreach(exe opj_decompress opj_compress opj_dump)
-    endif()
-    # Install exe
-    install(TARGETS ${exe}
- -    EXPORT OpenJPEGTargets
--     DESTINATION ${OPENJPEG_INSTALL_BIN_DIR} COMPONENT Applications
-+     DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT Applications
-    )
-    if(OPJ_USE_DSYMUTIL)
- -- 
--2.14.4
-+2.25.1
+ SRC_URI = "git://github.com/sass/libsass.git;branch=master;protocol=https"
+-SRCREV = "f6afdbb9288d20d1257122e71d88e53348a53af3"
+-PV = "3.6.5"
++SRCREV = "7037f03fabeb2b18b5efa84403f5a6d7a990f460"
++PV = "3.6.6"
  
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.0.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.3.bb
-similarity index 82%
-rename from meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.0.bb
-rename to meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.3.bb
-index f2d74078e..231bf8457 100644
---- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.0.bb
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.3.bb
-@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c648878b4840d7babaade1303e7f108c"
- DEPENDS = "libpng tiff lcms zlib"
- 
- SRC_URI = "git://github.com/uclouvain/openjpeg.git;branch=master;protocol=https \
--           file://0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
-+           file://0001-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
-            "
--SRCREV = "a5891555eb49ed7cc26b2901ea680acda136d811"
-+SRCREV = "210a8a5690d0da66f02d49420d7176a21ef409dc"
  S = "${WORKDIR}/git"
  
- inherit cmake
 -- 
-2.25.1
+2.40.0
 
 
