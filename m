@@ -1,101 +1,103 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <Divya.Chellam@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B47BCC02180
-	for <webhook@archiver.kernel.org>; Mon, 13 Jan 2025 13:49:56 +0000 (UTC)
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
- by mx.groups.io with SMTP id smtpd.web10.16912.1736776181845699162
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C3A9C02184
+	for <webhook@archiver.kernel.org>; Mon, 13 Jan 2025 16:16:47 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.21084.1736785006883472866
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Jan 2025 05:49:42 -0800
+ Mon, 13 Jan 2025 08:16:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=IPQFcYWk;
- spf=pass (domain: konsulko.com, ip: 209.85.218.42, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-aab925654d9so110730366b.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Jan 2025 05:49:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1736776180; x=1737380980; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=yfOjaAvk5n9Lo8ev3hedDd8rXI5sk65QHUcLVHgSl5I=;
-        b=IPQFcYWktkwGF0VKNU7ErizLwxD1UJkjtjwcxjL3XZNmEl/ABE9/9gM0JNWpF/uerL
-         +ihnkWOtZOyqR2uNIX2iWvZp9EI3KwH50VQNRQ+IHMm/6eeu1jxZUrEQ+YniiAWDdyzu
-         Xsb28vwTICzvBv4lETRghB1Xz56QYDK9pQRB0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736776180; x=1737380980;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=yfOjaAvk5n9Lo8ev3hedDd8rXI5sk65QHUcLVHgSl5I=;
-        b=CBVAXpuPB8qr/9rEUb3zNwGISRyEKH4M0Gr6ZU6drDBiHVr/Xrgvb1XdlxdrsFmx9o
-         parfxHISb2lQnSGZkBmhSpCDThOr/uOMRp4xCs8Dv1bw5yp2i95MxilZXt67c3XQ5DzQ
-         NUiu//b0s0corYIYDfAeqlKj5njrlMdpiLQcIzW+XLerbrRntwhx8XGoNMnoJ3P4b/mS
-         VGr4HB0ZiJe03PDZUZtNI0oBqFBd2jTnotu1AyB2Ty2Sy2c7/t0V2IL3dCBj2X2l+obF
-         Q2iML4chrgnGUP2WAYTL4rh7z0mKzDebUS6r1mQU60A/RSG9v6u+nZISIGsaD7WU4lKO
-         qtJQ==
-X-Gm-Message-State: AOJu0YwQJ8lSYdefOb/zwJnTFsGr/rv9DmtkJywq6cWVxdkDH+QteVaW
-	oB2ZOVHwfDB7MYhqE1X2T6R2A9nXgGBUsG+uZ9pc35ZlC/l+6OOhXItardhvaXcMfmpcI6cKa5o
-	V
-X-Gm-Gg: ASbGnctAscBe90qEv46+PeUjIOQ1E+eRqcsxEfV8YFXaPZPRbvashetmGBYFVWlnJ/w
-	H3n2YXuWfu/h+XcycY8cECfuT4bGYL7nHyj8Xt3PTTlQNQV3V0nV5CLwd/3w5VQvM/shZKMdlB7
-	FD9oXCE1U8cO1ZPA4g7BnGA/WeTIX3G6Q6rdpE3eqqL8XbOsNdqlaX4fdJZcpGQQoD/biXoXPJF
-	knOcA9NC4nFPMxWj8oND6IPDBx8wnt1jrfOFHWFJsmYL/zQVpY1XcP1M9497fZr63JqIO0=
-X-Google-Smtp-Source: AGHT+IHU7qtc4AI76mQCb0kGvwx5K+mjhGuZNTU/esGqNmKrxMLRXql+UWqaKJxPZCj621ytt/tYig==
-X-Received: by 2002:a17:906:6a04:b0:aa6:800a:128c with SMTP id a640c23a62f3a-ab2ab6a8dc8mr2116350666b.11.1736776180054;
-        Mon, 13 Jan 2025 05:49:40 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ab2c90dad57sm509938366b.66.2025.01.13.05.49.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 13 Jan 2025 05:49:39 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/6] python3-inline-snapshot: Upgrade 0.18.2 -> 0.19.1
-Date: Mon, 13 Jan 2025 15:49:33 +0200
-Message-Id: <20250113134936.3594358-3-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250113134936.3594358-1-leon.anavi@konsulko.com>
-References: <20250113134936.3594358-1-leon.anavi@konsulko.com>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3108cece01=divya.chellam@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50DBNTnX023278
+	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Jan 2025 08:16:46 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 443s1php62-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Jan 2025 08:16:46 -0800 (PST)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Mon, 13 Jan 2025 08:16:44 -0800
+From: dchellam <divya.chellam@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-webserver][scarthgap][PATCH 1/1] nginx: upgrade 1.25.3 -> 1.25.4
+Date: Mon, 13 Jan 2025 16:16:22 +0000
+Message-ID: <20250113161622.942663-1-divya.chellam@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Authority-Analysis: v=2.4 cv=DdLtqutW c=1 sm=1 tr=0 ts=67853c6e cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HXCqcy9q75gA:10 a=HCiNrPZc1L8A:10 a=VdSt8ZQiCzkA:10 a=9bLDTSi9AAAA:8 a=t7CeM3EgAAAA:8 a=iSN79Ydmgtbt2V3N2b4A:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: jgyClOks5VEK_OkuFAJrK6TXG3r2F1UN
+X-Proofpoint-ORIG-GUID: jgyClOks5VEK_OkuFAJrK6TXG3r2F1UN
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-13_06,2025-01-13_02,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 adultscore=0
+ mlxlogscore=999 lowpriorityscore=0 mlxscore=0 priorityscore=1501
+ phishscore=0 malwarescore=0 bulkscore=0 spamscore=0 clxscore=1015
+ impostorscore=0 classifier=spam authscore=0 adjust=0 reason=mlx
+ scancount=1 engine=8.21.0-2411120000 definitions=main-2501130134
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Jan 2025 13:49:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114833
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Jan 2025 16:16:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114837
 
-Upgrade to release 0.19.1:
+From: Divya Chellam <divya.chellam@windriver.com>
 
-- added the optional inline-snapshot[dirty-equals] dependency to
-  depend on the dirty-equals version which works in combination
-  with inline-snapshot.
-- snapshots with pydantic models can now be compared multiple
-  times
+Changelog:
+===========
+https://nginx.org/en/CHANGES
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+*) Security: when using HTTP/3 a segmentation fault might occur in a
+worker process while processing a specially crafted QUIC session
+(CVE-2024-24989, CVE-2024-24990).
+
+*) Bugfix: connections with pending AIO operations might be closed
+prematurely during graceful shutdown of old worker processes.
+
+*) Bugfix: socket leak alerts no longer logged when fast shutdown was
+requested after graceful shutdown of old worker processes.
+
+*) Bugfix: a socket descriptor error, a socket leak, or a segmentation
+fault in a worker process (for SSL proxying) might occur if AIO was
+used in a subrequest.
+
+*) Bugfix: a segmentation fault might occur in a worker process if SSL
+proxying was used along with the "image_filter" directive and errors
+with code 415 were redirected with the "error_page" directive.
+
+*) Bugfixes and improvements in HTTP/3.
+
+Signed-off-by: Divya Chellam <divya.chellam@windriver.com>
 ---
- ...ine-snapshot_0.18.2.bb => python3-inline-snapshot_0.19.1.bb} | 2 +-
+ .../recipes-httpd/nginx/{nginx_1.25.3.bb => nginx_1.25.4.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-inline-snapshot_0.18.2.bb => python3-inline-snapshot_0.19.1.bb} (88%)
+ rename meta-webserver/recipes-httpd/nginx/{nginx_1.25.3.bb => nginx_1.25.4.bb} (74%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-inline-snapshot_0.18.2.bb b/meta-python/recipes-devtools/python/python3-inline-snapshot_0.19.1.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-inline-snapshot_0.18.2.bb
-rename to meta-python/recipes-devtools/python/python3-inline-snapshot_0.19.1.bb
-index 8ea777fcbc..049d8f25ce 100644
---- a/meta-python/recipes-devtools/python/python3-inline-snapshot_0.18.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-inline-snapshot_0.19.1.bb
-@@ -4,7 +4,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=7a35eb90dfdf03953dd2074d0fdba1d4"
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.25.3.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.25.4.bb
+similarity index 74%
+rename from meta-webserver/recipes-httpd/nginx/nginx_1.25.3.bb
+rename to meta-webserver/recipes-httpd/nginx/nginx_1.25.4.bb
+index d0371dd3c..1cd036bb4 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.25.3.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.25.4.bb
+@@ -6,5 +6,5 @@ DEFAULT_PREFERENCE = "-1"
  
- DEPENDS = "python3-hatchling-native"
--SRC_URI[sha256sum] = "1be34afa453b75d120e12e8fb4724e28cb23f71b8f0fb0a7bc822a78c97ff826"
-+SRC_URI[sha256sum] = "28b17612e12bc7012468e59c47aeb0e84ce6d6a392b3f78f3bafe8cbf0d77bff"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=79ad2eb837299421c4435dedc8897b3d"
  
- inherit pypi python_hatchling
+-SRC_URI[sha256sum] = "64c5b975ca287939e828303fa857d22f142b251f17808dfe41733512d9cded86"
++SRC_URI[sha256sum] = "c8b288cd8a25628a167a874261069302f3cd7548"
  
 -- 
-2.39.5
+2.40.0
 
 
