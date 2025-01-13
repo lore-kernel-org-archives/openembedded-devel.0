@@ -1,195 +1,247 @@
-Return-Path: <joerg.sommer@navimatix.de>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C74F7E7719A
-	for <webhook@archiver.kernel.org>; Sat, 11 Jan 2025 16:37:17 +0000 (UTC)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com (EUR05-AM6-obe.outbound.protection.outlook.com [40.107.22.127])
- by mx.groups.io with SMTP id smtpd.web10.18751.1736613433108478790
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0129FE77188
+	for <webhook@archiver.kernel.org>; Mon, 13 Jan 2025 01:02:12 +0000 (UTC)
+Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com [209.85.219.171])
+ by mx.groups.io with SMTP id smtpd.web10.7164.1736730132520309653
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Jan 2025 08:37:14 -0800
+ Sun, 12 Jan 2025 17:02:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=sy5a+c3d;
- spf=pass (domain: navimatix.de, ip: 40.107.22.127, mailfrom: joerg.sommer@navimatix.de)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VbADq3d3wnH80svg6DiiT4/5YLPDZRAWlPcVS1uHWBu6M/8QiCgIhZs94FsovvYEGz2BZPsGxA536LkEtC+hx48r4g5ym5VcjFP3WhUA2L6hN/i0izbqVC/Yp6l6BBZCWN4eHNij7td7KexEbaEywnLE+dC57QGtQ2KsXumB2baXxtKnPug8I21o7lTPgr7AVl/3aRY6xJ/bE+rDCN9edGugbfVb0a1SeLH4Au2bTIwMKLzsQn0ujs7uhHlxwMF9Ue0NjzJdLeLTG4cPD6ihLbzNGbh++J2813ZnTn+SIC3O3CgM2EhssXRzJdKlQm8jeDMLvPMO0nsV0+sAtc9OYQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=skOYKMsd6N/2Swv5ohY09ApPeemKd62leC2bAKA3gnk=;
- b=L2ey/PNUpSdexTA79sUyirvfXC5itQQ4yef+UwnnbldixIv+3jC1P0a2G0fkmhrSqtWyT6UELjrCp5F/ijl5NVvT3sD1AKaYuULdCuogHXPFidwCOzx+sxB7u0CpDGL99PsWQzqIRrAWzAgEoNrzJYxsqXvlqPoV4er5IggOhbvtqqO8iTUGzZUuHFvpLbLkYSDJ3TqEae8aT90fta5PBndVJCEEWZ5F9FK4b6Sl0YTYKoXAle1V5SQ5cj/SDr/uqqiE5r6yPj7mUWhIyRx7QLREUOlnNVYMI0c7tP2o2YJWaz6YfV+GNU6RB8A78kJyeMPtXwZejocGyqBwxXTBXg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
- dkim=pass header.d=navimatix.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=skOYKMsd6N/2Swv5ohY09ApPeemKd62leC2bAKA3gnk=;
- b=sy5a+c3dm5MMNf3QphYH9t0PPLNtNroXc175K0n7cc2ZXeTE1MhZemT+vu6qG/4NrzWRXis71tSOlbL3PdSVIu3vd4lw4xQnd/Zj2vn2zcUuw9/PmU+y72oXLyuFP+CjzMuueU4Lj2OQIcv4l9TMDmEKEuxBwSJg5xTvHKfNs28=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=navimatix.de;
-Received: from DU2PR01MB8293.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:2d4::5) by VI1PR01MB6367.eurprd01.prod.exchangelabs.com
- (2603:10a6:800:154::22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.14; Sat, 11 Jan
- 2025 16:37:08 +0000
-Received: from DU2PR01MB8293.eurprd01.prod.exchangelabs.com
- ([fe80::d520:1b9e:a30e:69a7]) by DU2PR01MB8293.eurprd01.prod.exchangelabs.com
- ([fe80::d520:1b9e:a30e:69a7%3]) with mapi id 15.20.8335.014; Sat, 11 Jan 2025
- 16:37:08 +0000
-Date: Sat, 11 Jan 2025 17:37:05 +0100
-From: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
-To: openembedded-devel@lists.openembedded.org, joerg.sommer@navimatix.de
-CC: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
-Subject: [meta-oe][PATCH] spectre-meltdown-checker: New recipe to check
- hardware vulnerability
-Message-ID: <e26acb8229abc26b88bcaa76a54829e9be2b2ee5.1736613424.git.joerg.sommer@navimatix.de>
-X-Mailer: git-send-email 2.45.2
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: BE1P281CA0107.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:7b::15) To DU2PR01MB8293.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:2d4::5)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Fq1fyP6k;
+ spf=pass (domain: gmail.com, ip: 209.85.219.171, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f171.google.com with SMTP id 3f1490d57ef6-e54d268bc3dso6572161276.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jan 2025 17:02:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1736730131; x=1737334931; darn=lists.openembedded.org;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=1P8SvvDYMfWNcRyQHqxtr2t1YA23cUNTxhj5jm1N/nw=;
+        b=Fq1fyP6k5T4gTeN7QixsPfR9xsQB7Byjj8/p81G48N3npfEXw58WW5WkgRCXE/KR8Y
+         oG4OgUgNSpZjeC1Arb6J7Verx8IFltFc5Re0JJo14A2dvp+0ruEkv+a+dtqwyV5LEpHW
+         wCaj4nLOBvEZwA59tpiW+AYJaYl9qVQgYflNoxqg+eSfdC1E9MnlTpx2ld2to7EoGPth
+         nUuuYE5OIyJ6BcFhCmfRoJockZyS43M4/UMeNEfdaRogLeEWUexBGLynn00jqhzSf/WX
+         xhoYB5ys5srVd7rk4MIb3TrOUibQd9XoDI+212VtnPjEH7S0AOpVZ+caSF43t3UZiqHZ
+         OjGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1736730131; x=1737334931;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=1P8SvvDYMfWNcRyQHqxtr2t1YA23cUNTxhj5jm1N/nw=;
+        b=u1MJizVJ1XENHUM5/zuX+pGfGo22bIkk2IihfU8q7B8uTV4y2+3onnz14FNbQf9Egk
+         GBfGUpyz2WCKxuElFVyn0XF9AsQkhq+Y/i7Nw694D6W6EM305KD26502UAs4UjunPxAc
+         SpltzEjzJgwHXyRspIBOPlHCGmtQutrz/f4Jom0PLxzt5wX+Z1dqhIo2i1sSN5ECXHYi
+         4WTQfsS/1HZ3m7EMhZQf0VAu9BBC7DpTkDv/h/HKNOA4oJ9HoZDBiOU5IWfhvZuv7H6H
+         Q8CRdIYZF5l67mlM6TKJ90bcav2UCGZ0BBu3UyUcklVNud15fyxLj1TsaYjxIxYxlOBB
+         nB2Q==
+X-Forwarded-Encrypted: i=1; AJvYcCWJZFrXXBvsGNkDKF8VtGRDWpnegMv/MwSptqOwn75jCJFyAmCZQUSUkUaozeMR8pSxH6lv/6/motEXJK67FzdMEbw=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yz3o7o4Gug6lrc8ckUeAEQBRqq9i4BpepHM6xwV3J27i32+WawY
+	8C9GOzgDPXC7HJdksV/S4hZio8JL+qFSyUfs84ocAS7NVxV4auSh0t5OcqWE
+X-Gm-Gg: ASbGncvF67Lc62L3IRMqwkI15DEQwaH0jeyZfnYdUeNisuQl90JUGkWKI4m+hrFIgon
+	BJD9S2XX+YYY7er4gl7siNMFwsCITg0kSslXWzyHK4il6hznfsuajvj6YIqO57wU7jy4KmTEhVq
+	fdoiJx6zKQ5EiIT3fZ3WP76ZhwuVL9ImE6qdaPfDeI10oNTXxUvg8HLC8dsnPxBiAjmnTd/2vrs
+	48PDn4cXEroQmjJuyzWS8AxjYZWaanyu7xkizTjXRNUgc2LT1gRhqtUD5VDZnpR5scxrmyKOhRH
+	J6rMqZSMcE66b3wCyUQ7bhizoyhRdA==
+X-Google-Smtp-Source: AGHT+IEPaJivv0CL5PWSxkrdyt569vt4IZkXkk6CTv5fZZl09MDy15FZjJiM1L8Noh6Fq3DZLP99NQ==
+X-Received: by 2002:a05:6902:18ca:b0:e57:4167:477c with SMTP id 3f1490d57ef6-e5741675807mr3978751276.28.1736730131510;
+        Sun, 12 Jan 2025 17:02:11 -0800 (PST)
+Received: from ?IPV6:2600:1700:45dd:7000:9984:c5c:600f:f2e7? ([2600:1700:45dd:7000:9984:c5c:600f:f2e7])
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e55a5979b50sm1351721276.28.2025.01.12.17.02.10
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 12 Jan 2025 17:02:11 -0800 (PST)
+Message-ID: <05f57241-f78b-441b-a352-39ebf6f8cabf@gmail.com>
+Date: Sun, 12 Jan 2025 20:02:10 -0500
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR01MB8293:EE_|VI1PR01MB6367:EE_
-X-MS-Office365-Filtering-Correlation-Id: dedc0ed7-07f9-4075-daef-08dd325e30d1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?8YKPYlrmVA5h0eCjHhQvqKcSSodr1Ntfk4Y1B1UODp4JXZqKtNLxnZvJfKk1?=
- =?us-ascii?Q?OoAaLodGhl/hnwD5nA74mXO+dNzS6pInTd9Ciy//DBCkmYy4KxVDXKxWZ9TU?=
- =?us-ascii?Q?I7Ex9HVG5WRMI9pTnl+Wuj3nLhTrkyiOBcwu6yYuK5CVBhbvR/OMspr6mO/E?=
- =?us-ascii?Q?2nZnUjkgY6rXoF3xAbWaJ78FId0MkxyXOEDXX0BA7Ar38N0br8oUP2mn7zjP?=
- =?us-ascii?Q?xwJ0v7GvfZW5TAJZuYXI+N46hstzLW8X89ZTL6DQJIVIoLiNsTrs2XTA6qOL?=
- =?us-ascii?Q?J5LnI0gfnoM7q6YD6TZaDGqKls4OfXxiljfUM01d4pP5O5WGV/07jRmWCJdH?=
- =?us-ascii?Q?mw1DJfRr2tCUXdMRtRi3Jh1eO7syNILaoe8nNmc+Z0n2onb6jlV80/ggaeTn?=
- =?us-ascii?Q?g/HgfLCJE/ZPmyZAY6J3xUjEKjvjZXbzj5YwzX/7rw/5EV6D2S+GAoKF5ELR?=
- =?us-ascii?Q?lBcDyTUu2YBIZUNVlQUTbkIEkl3Vc54mexayTu4wjnu8TCsbkKVhE05X4LDu?=
- =?us-ascii?Q?wfJ/1yZOkYBm3BPB6t51QNIS78ATXaIAqhBgjsMNUv5oBDvUCKZM2fN7p43A?=
- =?us-ascii?Q?9FxHJyHbW6tQhg9yyKE1dPLOUmr71YYclLWI2pBFb952vXJKTdCtrOEryvox?=
- =?us-ascii?Q?OgW+eFQ9a8PXq08fCpfow7pGXMnRW0Gqrxjed2ljTJXV5aU+6nOaySKUPjKF?=
- =?us-ascii?Q?lCp29xKRM0H8S/mGal2Y4eZz1WOXZpdtUpmh+xa4wyufcJWviXAUNL7uWkAm?=
- =?us-ascii?Q?mNOVS0YO48EQyPD6IPeknBhUeqmX+52/mVrGBjXr27pqjtb6o3A5dmXuItYv?=
- =?us-ascii?Q?6VdTXjdBwIfpmxjNyH57w/1nZdrnVdeT0u3zjXA/PRDDAXL4pasjejM2WjWb?=
- =?us-ascii?Q?FQYCRY6ceGbLxLYf+cjZypNKuibGIqDeg0WM+W5ovFAo+W2OLT3b8gbh1vuh?=
- =?us-ascii?Q?oxV2IoXm8ligh6zoIhNJs7Vrz68qA4qScSrO3fFJl9Pewy8xUNgRjB7lPLvh?=
- =?us-ascii?Q?yaGKjcqrjqs0Z7Jw5kLasV1LPTAgFmPymqrNlBd9rgET28kKtObA2f6jXYU1?=
- =?us-ascii?Q?isHNEZk8KHREx3OL6hAPlGaq+WqWI5uhKdA6qPOUSosVZjWon+mzCPk9NlxC?=
- =?us-ascii?Q?CqtipKwyYtw+n+0lfS2NOlWI7C1hkCuZCOyzVT1xEOuHGStBdOv2NMx/PPRp?=
- =?us-ascii?Q?KIGy2dONB+K1voAh2thJfUfzKMB4M7Nv1/CdnhINgcPcW8tlXcArDhe0ufiC?=
- =?us-ascii?Q?T0cKHEzn3MJ69HNVD9j+T61wktpmufjHrWarmOwfnY4iEa3UxB8Trn3Gi0ka?=
- =?us-ascii?Q?AE2VMM3jV/GUUxBA4CunIVau?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR01MB8293.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?W0O+yi/LBr8zSTZknvX0SHoHTwwJo9zdf5XHKnvWoyyG4KAt4kGLk2vvGwOx?=
- =?us-ascii?Q?XheF3Xaa6BcaZ0HQp7Ruk0DjWTz6bJG3jNGSxW1llkHuNlNDKUFTyJ1PR1Dv?=
- =?us-ascii?Q?iqVa/10xjiUlWbWCs2njQ4UCQoRW86ITYl+gvoFV45bJXd3E3w5KbRyo4hwX?=
- =?us-ascii?Q?IBi0e2GNnVZS+o/kgNqShi32jY8sOQpMIyXpHMSwA3K2YmQ4vqLfBbQXNbhg?=
- =?us-ascii?Q?AIbgFyonY8CRniZDB413eXDCVFz45eGV1NbZelTeFpaOuC2QgbMUFB+qFMIW?=
- =?us-ascii?Q?7MlQ59XPuapcT+2hSQQx/y1nFI2WkUctFWhBLGO4V7uZpZAu5kuhFA0SMVJR?=
- =?us-ascii?Q?jLBAQEdcUUNO1j6h1PNvc25CTsbx4FhcD0LhSqjqU+qkEcgOoFe1nv1w+SLG?=
- =?us-ascii?Q?zz5XE/gam0D4EeqyhRKPqSLJ8P4MasTWEZJWZbXf3TzmuP0TRwWELRNssqAj?=
- =?us-ascii?Q?DEKxwNNnXh+9Si4va0D3Fb63r5VJAhkjZSk0kdO8PlNaK6jhjQ+cn6eHWeoz?=
- =?us-ascii?Q?CLiAKmiNkNGoXb0zFFWES6BjFl5StejTWc0Ofz+ommW6OZlGl72tJuD6uYQW?=
- =?us-ascii?Q?kF6xYJzMuAzwXyCl7KQZpG7zorSnapA2kIUjMU38Swb64bip7U+wNmRux3+a?=
- =?us-ascii?Q?6+9GBpwvA/ZXH4kV5WFVn2UFHr+xjti+c/mvANk1cndXZmO7FhVFdUbb5/UB?=
- =?us-ascii?Q?KkaI3DBNW4xLxbP/9Rn688U6mR2FfzLtJEh5jLMK+nqr7RhZyxavp/9VaL79?=
- =?us-ascii?Q?bVpw1cxPdrrBmr4mxrSgUW+EwmnZwVvK+bSFirsfz+Vavr4b+qoORO3c8PgQ?=
- =?us-ascii?Q?fr+Vx71JlKl8u2hNLeKt1PT/tVi3fsurWBKps0x4Jve0t2rQE52JwzxE1RsF?=
- =?us-ascii?Q?BqWw0fjRGdvx55RrBECSK1nJ56qd0v8k+VoxwSUcDOEfYZ6dQ7SLN4/XbgoT?=
- =?us-ascii?Q?V3RebSGo+ZhTNRRJRdnsGKS9QTRjJdLwKFGepgYh/nJnZmFwGXEgXNEvEizK?=
- =?us-ascii?Q?kQweQ+W1c01u1bfIWjNL7oz4/cZydU/KgDTWoJwI5uAKSkOUrdnoKsc0df+8?=
- =?us-ascii?Q?O5HgmItopM1Ykh/FspR/6FHTlmmj0OHaCYVInb8SPbNWNaDfKr1EBtLErt8c?=
- =?us-ascii?Q?5QaU8xNIxLJ7tBnUZAXjk86qEcwXtvg8GnQJq270g9TF0iSTQYy6spX+ekzF?=
- =?us-ascii?Q?+WHYCiE1WnXN3ofjcHZT3/ARSMAvHiOfDnRx4SkjraxPGsHO71hoePKIXL6h?=
- =?us-ascii?Q?yF89DuLFyG+vDKpmLliG7FrDiHakPokbUkCJY2LE0sorKbx6cXzSb2LIh1td?=
- =?us-ascii?Q?Ha8IZoS+CSF55K8kRIBuK6dLzLKpJM77LwzihMoYSPMh8t2QhAAqdVG8Tp3w?=
- =?us-ascii?Q?crRWIIa8ppP6NusimA7kk41CqpM4KVHsoXbUtBF6/7/1oOdZbgyJ09u5VNSU?=
- =?us-ascii?Q?dSmTzUVqaPYlQXsL5LVhSYuX3BkrbO6DZ7zNByIuHikV0skLQGz4HFS1H4vf?=
- =?us-ascii?Q?M/+P14JdMf/tL9X0Whg4xBCQ/3icLzgvhte2TCIIbxjJoxpRAxjreRy1jP7N?=
- =?us-ascii?Q?uOxHumy2DaCgBRLczt4hWa39uuvSN0gKoRv1Wb027aikrof2VlJ1Mm/GUixK?=
- =?us-ascii?Q?dw=3D=3D?=
-X-OriginatorOrg: navimatix.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: dedc0ed7-07f9-4075-daef-08dd325e30d1
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR01MB8293.eurprd01.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jan 2025 16:37:08.4940
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: v38RJdMmXsoDpeilZ/YsCK0ruKCHzRQDo78JkEK4osZDzwhk9Sg1YfZHB42WOPDoQX03IOShBUVcOZIwHrWVZo53koW2aGtmDySX82SRwNA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR01MB6367
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Subject: styhead merge request: Jan 12th
+Autocrypt: addr=akuster808@gmail.com; keydata=
+ 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
+ ApZ86eOP
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Jan 2025 16:37:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114816
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Jan 2025 01:02:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114817
 
-From: J=F6rg Sommer <joerg.sommer@navimatix.de>
+The following changes since commit 7cd38212e73e0e9f42f4d92defb16dd81f71221d:
 
-Signed-off-by: J=F6rg Sommer <joerg.sommer@navimatix.de>
----
- .../spectre-meltdown-checker_0.46.bb          | 36 +++++++++++++++++++
- 1 file changed, 36 insertions(+)
- create mode 100644 meta-oe/recipes-security/spectre-meltdown-checker/spect=
-re-meltdown-checker_0.46.bb
+   lvm2: Remove the lvm2-udevrules package (2024-11-25 15:32:56 -0500)
 
-diff --git a/meta-oe/recipes-security/spectre-meltdown-checker/spectre-melt=
-down-checker_0.46.bb b/meta-oe/recipes-security/spectre-meltdown-checker/sp=
-ectre-meltdown-checker_0.46.bb
-new file mode 100644
-index 0000000000..c2996415ad
---- /dev/null
-+++ b/meta-oe/recipes-security/spectre-meltdown-checker/spectre-meltdown-ch=
-ecker_0.46.bb
-@@ -0,0 +1,36 @@
-+SUMMARY =3D "Hardware vulnerability and mitigation checker"
-+DESCRIPTION =3D "\
-+    Reptar, Downfall, Zenbleed, ZombieLoad, RIDL, Fallout, Foreshadow, Spe=
-ctre, \
-+    Meltdown vulnerability/mitigation checker for Linux & BSD \
-+"
-+HOMEPAGE =3D "https://github.com/speed47/spectre-meltdown-checker"
-+BUGTRACKER =3D "https://github.com/speed47/spectre-meltdown-checker/issues=
-"
-+LICENSE =3D "GPL-3.0-only"
-+LIC_FILES_CHKSUM =3D "file://spectre-meltdown-checker.sh;beginline=3D2;end=
-line=3D2;md5=3D3ae5399e70af7be9b93f72568069e2f4"
-+
-+SRC_URI =3D "git://github.com/speed47/spectre-meltdown-checker;protocol=3D=
-https;branch=3Dmaster"
-+SRCREV =3D "b8f8c81d519435c0871b13f02b5c4a72c5bffd5e"
-+
-+S =3D "${UNPACKDIR}/git"
-+
-+# binutils: readelf,objdump might be used for deeper analysis
-+# coreutils: dd with iflag=3Dskip_bytes oflag=3Dseek_bytes in some cases
-+# kernel-dev: /boot/config is used
-+# perl: sometimes used when other tools (dd, rdmsr/wdmsr) are missing
-+RRECOMMENDS:${PN} =3D "\
-+    binutils \
-+    coreutils \
-+    kernel-dev \
-+    msr-tools \
-+    perl \
-+"
-+
-+INHIBIT_DEFAULT_DEPS =3D "1"
-+
-+inherit allarch
-+
-+do_compile[noexec] =3D "1"
-+
-+do_install() {
-+    install -m 755 -D ${S}/${PN}.sh ${D}${bindir}/${PN}
-+}
---=20
-2.45.2
+are available in the Git repository at:
+
+   https://git.openembedded.org/meta-openembedded styhead-next
+
+for you to fetch changes up to 31a24ab044a24936f50a80828ecd7048bf5b1f5e:
+
+   libmodule-build-tiny-perl: fix QA Issue: TMPDIR [buildpaths] 
+(2025-01-12 19:57:19 -0500)
+
+----------------------------------------------------------------
+Benjamin Bouvier (1):
+       bridge-utils: add CVE_PRODUCT
+
+Derek Straka (1):
+       nginx: Upgrade mainline release version 1.27.1 -> 1.27.3
+
+Ghislain Mangé (1):
+       wireshark: use inherit_defer for conditional cases
+
+Hongxu Jia (1):
+       ntfs-3g-ntfsprogs: fix CVE-2023-52890
+
+J. S. (4):
+       libhtml-tree-perl: Drop unnecessary SRC_URI md5sum
+       libhtml-tree-perl: update HOMEPAGE
+       libhtml-tree-perl: fix QA Issue: TMPDIR [buildpaths]
+       libmodule-build-tiny-perl: fix QA Issue: TMPDIR [buildpaths]
+
+Khem Raj (3):
+       mariadb: Fix build with clang-20/trunk
+       ghex,gnome-chess,gnome-photos: Add missing dep on itstool-native
+       mpd: Fix build with icu 76+
+
+Markus Volk (2):
+       geary: add itstool-native dependency
+       eog: add itstool-native dependency
+
+Peter Kjellerstedt (1):
+       abseil-cpp: Do not leak -Wnon-virtual-dtor into the .pc files
+
+Peter Marko (15):
+       proftpd: set status of CVE-2001-0027
+       dash: set CVE_PRODUCT
+       ace: ignore CVE-2009-1147
+       apache2: ignore CVE-1999-0678 and CVE-1999-1412
+       apache2: remove old version references from CVEs
+       spice: ignore CVE-2016-0749
+       gattlib: mark CVE-2019-6498 as fixed
+       monkey: ignore CVE-2013-1771
+       redis: ignore CVE-2022-0543
+       spice-gtk: mark CVE-2012-4425 as fixed
+       apache2: ignore disputed CVE CVE-2007-0086
+       memcached: ignore disputed CVE-2022-26635
+       emlog: set CVE_PRODUCT
+       php: upgrade 8.2.20 -> 8.2.26
+       wireshark: upgrade 4.2.8 -> 4.2.9
+
+Ruiqiang Hao (1):
+       mariadb: Ensure compatibility with ARMv9 by updating .arch directive
+
+Yoann Congal (1):
+       gimp: fix gimptool buildpaths errors
+
+Yogita Urade (1):
+       postgresql: upgrade 16.4 -> 16.5
+
+  ...0001-unistr.c-Fix-use-after-free-in-ntfs_uppercase_mbs.patch | 42 
+++++++++++++++
+  .../ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb            | 1 +
+  meta-gnome/recipes-connectivity/geary/geary_46.0.bb             | 1 +
+  .../gimp/gimp/0001-gimptool-allow-default-CC-override.patch     | 85 
++++++++++++++++++++++++++++++
+  meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb                    | 21 
++++++++
+  meta-gnome/recipes-gnome/eog/eog_47.0.bb                        | 1 +
+  meta-gnome/recipes-gnome/ghex/ghex_46.0.bb                      | 1 +
+  meta-gnome/recipes-gnome/gnome-chess/gnome-chess_47.0.bb        | 2 +-
+  meta-gnome/recipes-gnome/gnome-photos/gnome-photos_44.0.bb      | 1 +
+  .../mpd/0001-meson.build-support-building-with-ICU-76.patch     | 52 
+++++++++++++++++++
+  meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.15.bb       | 1 +
+  meta-networking/recipes-daemons/proftpd/proftpd_1.3.8b.bb       | 2 +
+  .../recipes-support/bridge-utils/bridge-utils_1.7.1.bb          | 2 +
+  meta-networking/recipes-support/memcached/memcached_1.6.17.bb   | 2 +
+  meta-networking/recipes-support/spice/spice-gtk_0.42.bb         | 2 +
+  meta-networking/recipes-support/spice/spice_git.bb              | 1 +
+  .../wireshark/{wireshark_4.2.7.bb => wireshark_4.2.9.bb} |  4 +-
+  meta-oe/recipes-connectivity/ace/ace_6.5.19.bb                  | 2 +
+  meta-oe/recipes-connectivity/gattlib/gattlib_git.bb             | 2 +
+  meta-oe/recipes-core/emlog/emlog.inc                            | 2 +
+  meta-oe/recipes-dbs/mysql/mariadb.inc                           | 2 +
+  ...1-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch | 44 
++++++++++++++++
+  ...1-Use-a-lambda-function-as-deleter-prototype-in-unique.patch | 26 
++++++++++
+  .../0003-configure.ac-bypass-autoconf-2.69-version-check.patch  | 6 +-
+  .../postgresql/{postgresql_16.4.bb => postgresql_16.5.bb} |  2 +-
+  ...5-Don-t-match-Wnon-virtual-dtor-in-the-flags-are-neede.patch | 30 
+++++++++++
+  meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240722.0.bb    | 1 +
+  .../php/php/0001-ext-opcache-config.m4-enable-opcache.patch     | 4 +-
+  .../php/php/0002-build-php.m4-don-t-unset-cache-variables.patch | 2 +-
+  .../0003-php-remove-host-specific-info-from-header-file.patch   | 2 +-
+  .../php/0006-ext-phar-Makefile.frag-Fix-phar-packaging.patch    | 4 +-
+  .../php/php/0008-ext-imap-config.m4-fix-include-paths.patch     | 4 +-
+  .../php/php/0009-php-don-t-use-broken-wrapper-for-mkdir.patch   | 3 +-
+  meta-oe/recipes-devtools/php/php/0010-iconv-fix-detection.patch | 2 +-
+  meta-oe/recipes-devtools/php/{php_8.2.20.bb => php_8.2.26.bb} |  2 +-
+  meta-oe/recipes-extended/redis/redis_7.2.5.bb                   | 1 +
+  meta-oe/recipes-shells/dash/dash_0.5.12.bb                      | 2 +
+  meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb        | 10 +++-
+  .../recipes-perl/libmodule/libmodule-build-tiny-perl_0.048.bb   | 7 +++
+  meta-webserver/recipes-httpd/apache2/apache2_2.4.62.bb          | 17 
++++---
+  meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb             | 1 +
+  .../recipes-httpd/nginx/{nginx_1.27.1.bb => nginx_1.27.3.bb} |  4 +-
+  42 files changed, 374 insertions(+), 29 deletions(-)
+  create mode 100644 
+meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/0001-unistr.c-Fix-use-after-free-in-ntfs_uppercase_mbs.patch
+  create mode 100644 
+meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-default-CC-override.patch
+  create mode 100644 
+meta-multimedia/recipes-multimedia/musicpd/mpd/0001-meson.build-support-building-with-ICU-76.patch
+  rename meta-networking/recipes-support/wireshark/{wireshark_4.2.7.bb 
+=> wireshark_4.2.9.bb} (95%)
+  create mode 100644 
+meta-oe/recipes-dbs/mysql/mariadb/0001-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch
+  create mode 100644 
+meta-oe/recipes-dbs/mysql/mariadb/0001-Use-a-lambda-function-as-deleter-prototype-in-unique.patch
+  rename meta-oe/recipes-dbs/postgresql/{postgresql_16.4.bb => 
+postgresql_16.5.bb} (86%)
+  create mode 100644 
+meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0005-Don-t-match-Wnon-virtual-dtor-in-the-flags-are-neede.patch
+  rename meta-oe/recipes-devtools/php/{php_8.2.20.bb => php_8.2.26.bb} (99%)
+  rename meta-webserver/recipes-httpd/nginx/{nginx_1.27.1.bb => 
+nginx_1.27.3.bb} (53%)
 
 
