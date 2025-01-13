@@ -2,84 +2,1662 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 12640C02184
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 03DECC02181
 	for <webhook@archiver.kernel.org>; Mon, 13 Jan 2025 04:46:14 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.web11.10465.1736743569089322601
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.web10.10196.1736743568135091821
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Jan 2025 20:46:09 -0800
+ Sun, 12 Jan 2025 20:46:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Oar7wo6A;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-2ef87d24c2dso5071431a91.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jan 2025 20:46:09 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=amIksfOd;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-2f44353649aso5139804a91.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Jan 2025 20:46:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1736743568; x=1737348368; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=VP1h6RbLra2mBjrtYVCh3VEyNwG/+PGzrHUaDlXzM9k=;
-        b=Oar7wo6AYOLIJW6C8L0OfEwj59wk/baqLCjqYv0hsb12RqZOIPks97xeCWYKHNlh26
-         Jf9qCS9uVHdwQPEJvdi82fJUeu9v/HAHEjXbyJDXbeDxZ5XiW1yZEAaTDfyEZZ2lSPBQ
-         dvP+v/2kvnPnjqAWNJmvg4LscsszNuY5ucg2gt28PsjZj55vDbR9ZNNiatFp5W4lCVhy
-         Ez/tgqPzn/XHEhKSlGPl8BEvaRXxyB6UZ5i5G/wLu6XOUSrd89zqcz86eNeUM/7q9/EY
-         Kt/ATDeCPcF1HJzsf4/JUjtyhkETaMH8XdxC12sRC4nBwowY5K6I6IBMnrhvM5Bbktc5
-         0FNg==
+        d=gmail.com; s=20230601; t=1736743567; x=1737348367; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=94wvMZHwLX98CH+r3H5k4XuwzVUDRKUedvY8SThULQc=;
+        b=amIksfOd0/LPlp8Jb8BeEKDUk3qH10qAttdR3R4D8QPjKbZBel3qzjzYmmsLp0nzlX
+         wI0l3PrC4SGjlT5YsNdOolvY4wd5lGMa+pZxBxBv/4h4RXjr4lwTLFg5CYYjt52wTew7
+         eIJU1eUEBJC8zHoUfj3LsHhf9v5x+4X+mqW//fk8pJCq9u04uVHEPrjCOWECZ4Xx40tP
+         wicZ8dDKnBWA6Hxu9SMcFKzn5h2zKiXC4nisaB1q/PbesTot43Mbozrk5le3YgQTJSWx
+         gutLAL6eR7J4/70T6P9O2JHRwelrZbCkYupPFnAzIK3bdeZ3uR3hJk2iLOI5z1p1KVX2
+         Q3kA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1736743568; x=1737348368;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=VP1h6RbLra2mBjrtYVCh3VEyNwG/+PGzrHUaDlXzM9k=;
-        b=gQsFcFL0ZSUif4B3q5y4AixPr8Dd/691eBt29j9gYtSgcoslabMj4vsvOP8Y0L0TEo
-         tTufk/L74oKaIxShhFFNh0dN99V5YyQGFSkmzfET8y3PDiqXjnUQiu1YvGCAY5JPAshV
-         SBZKWJP1TAnS70gzHVNpOqj5x9vXva3yxLBsMpXDintMGRSCLyMLxuSdmvt0EYk+fHtm
-         HSFOGGvee3YutQL09QSBpxtuce76u+i/onIAVXMeulu4yURdZGLQ3ZzJ0rwIkj+YkQ1b
-         wuHantC14ON19TrbKgJS7/EG8RFkHl66gyHsvW2HcnvgEZsJuT0rourfuAF2RsYV5hTr
-         554g==
-X-Gm-Message-State: AOJu0YzWDhFE4DeiLLXsnrcKfTBuu+dXWNdHtHTHkOQknKsXW1JdoKaJ
-	gbKp3BiLb1h/W/zQO3QGaPniRPIoJYTeShqarXv73sCQSZa3l/0rEN3WUsxE
-X-Gm-Gg: ASbGncv7kCFaoz3iJVawnoT372fYsC0qgsmJ1px3hiP6DAC4cLvVEbe2u+9qvUL5FKC
-	ugIk8Bz4pc3dwEAbCd9TJxwbCSFGwX30djqk4se2y4Bvy3hmnw2GeCFgTnbTH9hDacpNg5trVlj
-	SC6c+wKSRgQqEP40iJygXC9x/dvIlA2upd25n7BHB25ENpdxc8S3NbrJJ31QHD7sPHzkjpQnLMU
-	wedJoWt+BkPmGeEv1haS4yk4C3uHlmEkKWyNjdz+onoxn5v
-X-Google-Smtp-Source: AGHT+IHMyYKwtwr2F99EV7Rdz9ld2Zh+WndyXR3wUszmeVSGGKukcQNQbcpjTm3v2vwCx6WKLBHDcw==
-X-Received: by 2002:a17:90b:2748:b0:2f1:30c8:6e75 with SMTP id 98e67ed59e1d1-2f5490e89e0mr23915081a91.32.1736743568163;
-        Sun, 12 Jan 2025 20:46:08 -0800 (PST)
+        d=1e100.net; s=20230601; t=1736743567; x=1737348367;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=94wvMZHwLX98CH+r3H5k4XuwzVUDRKUedvY8SThULQc=;
+        b=d3vTSLeLG3VkMdO+kUk+jZbfK2Jt7hriu4SHKqBR3YQsri+X36rPlI2nAMBk6E0fzn
+         tiKsRsz7lPeNfNBxbP0Mt/EGA4kEWnkUecE+Z9d/X+JiZa5LyPgs14lLbzn6GZJPXBlY
+         hoF0UlVCL1FpWcGoO5RL3NpfaTlHSGtmVeJfzED0uVg7yEPjHN65G3kpcbGwbS8xjzKG
+         7n6TUxrGUqVCLlfqK75eP6Zw1hPpjuDSMT0bBBcm+SUTXdP6zcv6oR0kU7P8acGJXXlZ
+         k0zM2eX/+WUbQn/EfjemoLiz/ikujmyCuyYgkBp6ixMoA2dedGQXiSLLTMmb1eSPKZJi
+         Apow==
+X-Gm-Message-State: AOJu0Yy2TVTD6crubbrbtzZ6KPp9suFPrHanp0TWDPnznCz4k4KCmmYL
+	SpO3zwAwPDIXn07bHhphL2O2GZTiXZk/d23Ld2zqDI+hGB5e+tSY0JyT/YAo
+X-Gm-Gg: ASbGncs+ZctqFVwluN3WicJw/YYiTzaeU0x68fKHqUkvxMrkass3svX1kOn8TTQUZg9
+	Gd5fHqHJmZiVhPtWxy3au5D3kzA40j4jw18MEy/nWdBPm1aXGqUCehTii1qPD19kYd57kj9dkgI
+	8UF574Wpg1a24zQwljwlcuS0mj2D7w0Nq8hZPV2zVmcRnjX+zDh2PCDJOvRQGYqrr1T5jwM7vHq
+	xBHriwn3sRzFfqlmC6JcZ3xTXeg5eQqgNE3t7TelEPYuxya
+X-Google-Smtp-Source: AGHT+IGO1VbeOrY3Nj4FeuqGk8aU5I0ut5X0UBCSbp+Z+JCsjansk8edjwCfcnO5agl4SdkEzz4Xlg==
+X-Received: by 2002:a17:90b:2483:b0:2f6:d266:f462 with SMTP id 98e67ed59e1d1-2f6d266fa06mr9339441a91.35.1736743566042;
+        Sun, 12 Jan 2025 20:46:06 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:8201:fd20::65e9])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2f559439ae4sm7614921a91.30.2025.01.12.20.46.07
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2f559439ae4sm7614921a91.30.2025.01.12.20.46.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Jan 2025 20:46:07 -0800 (PST)
+        Sun, 12 Jan 2025 20:46:05 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/5] cpp-netlib: Skip recipe, not buildable with boost >= 1.87
-Date: Sun, 12 Jan 2025 20:46:01 -0800
-Message-ID: <20250113044603.3467963-3-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 1/5] vsomeip: Upgrade to 3.5.3
+Date: Sun, 12 Jan 2025 20:45:59 -0800
+Message-ID: <20250113044603.3467963-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.48.0
-In-Reply-To: <20250113044603.3467963-1-raj.khem@gmail.com>
-References: <20250113044603.3467963-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 13 Jan 2025 04:46:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114823
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114822
+
+Drop backports and not needed patches
+Add local SRC_URI For googletests
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/cpp-netlib/cpp-netlib_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../vsomeip/0001-Update-to-C-17-560.patch     | 969 ------------------
+ ..._tests-Include-iomanip-system-header.patch | 324 ------
+ .../0003-Do-not-build-external-gtest.patch    | 187 ----
+ ...4-Do-not-specify-PIE-flag-explicitly.patch |  16 +-
+ .../{vsomeip_3.4.10.bb => vsomeip_3.5.3.bb}   |  11 +-
+ 5 files changed, 13 insertions(+), 1494 deletions(-)
+ delete mode 100644 meta-networking/recipes-protocols/vsomeip/vsomeip/0001-Update-to-C-17-560.patch
+ delete mode 100644 meta-networking/recipes-protocols/vsomeip/vsomeip/0002-network_tests-Include-iomanip-system-header.patch
+ delete mode 100644 meta-networking/recipes-protocols/vsomeip/vsomeip/0003-Do-not-build-external-gtest.patch
+ rename meta-networking/recipes-protocols/vsomeip/{vsomeip_3.4.10.bb => vsomeip_3.5.3.bb} (84%)
 
-diff --git a/meta-oe/recipes-support/cpp-netlib/cpp-netlib_git.bb b/meta-oe/recipes-support/cpp-netlib/cpp-netlib_git.bb
-index bda5177fc4..3cf166bd4a 100644
---- a/meta-oe/recipes-support/cpp-netlib/cpp-netlib_git.bb
-+++ b/meta-oe/recipes-support/cpp-netlib/cpp-netlib_git.bb
-@@ -28,3 +28,5 @@ do_install:append() {
-     sed -i -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/cmake/cppnetlib/cppnetlibConfig.cmake
-     sed -i -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/cmake/cppnetlib/cppnetlibTargets-noconfig.cmake
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0001-Update-to-C-17-560.patch b/meta-networking/recipes-protocols/vsomeip/vsomeip/0001-Update-to-C-17-560.patch
+deleted file mode 100644
+index c69a395f10..0000000000
+--- a/meta-networking/recipes-protocols/vsomeip/vsomeip/0001-Update-to-C-17-560.patch
++++ /dev/null
+@@ -1,969 +0,0 @@
+-From 7acb528db20c08d90f72fa317b8e1ccf4d270cdc Mon Sep 17 00:00:00 2001
+-From: Matthew Russell <matthew.g.russell@gmail.com>
+-Date: Wed, 10 Apr 2024 06:23:27 -0400
+-Subject: [PATCH 1/2] Update to C++17 (#560)
+-
+-* Upgrading to C++17
+-
+-* Code Quality: Address compiler warnings
+-
+-- Fixing narrowing issues
+-- Removing useless copies
+-- Removing unused lines
+-- unused-lambda-capture
+-- Removes unused variables
+-- Fix some casts (modernize c-style, or simply remove useless casts)
+-- Explicitly deleting unused endpoint_impl copy and move constructors
+-- Removing redundant std::bind
+-- Improving const correctness
+-- Moving thread init to constructor body
+-- Moved check_routing_credentials_ inside vsomeip security section where it's used
+-- Using =default destructor instead of empty destructor
+-
+-Thread init:
+-Moving the initialization of these threads into the constructor body to
+-ensure that they do not start with an incomplete "this".  As they
+-capture this, it is possible that if the new thread begins before the
+-object is fully constructed, the new thread might operate on
+-uninitialized members of "this".
+-
+-* Attempting to fix syntax error on MSVC
+-
+-* Adjusting PR to conform to Covesa style
+-
+-* Using curly brace initialization
+-
+-* Using static_cast to narrow its_device.size() to a socklen_t
+-
+-* Avoided double integer promotion
+-
+-Upstream-Status: Backport [https://github.com/COVESA/vsomeip/pull/560]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- Android.bp                                    |  2 +-
+- CMakeLists.txt                                | 11 ++-
+- examples/hello_world/hello_world_service.hpp  | 12 +--
+- .../configuration/include/internal.hpp.in     |  6 +-
+- .../include/internal_android.hpp              | 10 +--
+- .../configuration/src/configuration_impl.cpp  | 13 ++--
+- .../endpoints/include/endpoint_impl.hpp       |  3 +
+- .../local_server_endpoint_impl_receive_op.hpp |  4 +-
+- .../local_uds_client_endpoint_impl.hpp        |  2 +-
+- .../local_uds_server_endpoint_impl.hpp        |  2 +-
+- .../udp_server_endpoint_impl_receive_op.hpp   |  2 +-
+- .../endpoints/src/endpoint_manager_base.cpp   |  2 +-
+- .../src/local_uds_client_endpoint_impl.cpp    |  5 --
+- .../src/local_uds_server_endpoint_impl.cpp    |  6 --
+- .../src/tcp_client_endpoint_impl.cpp          |  2 +-
+- .../src/tcp_server_endpoint_impl.cpp          | 14 ++--
+- .../src/udp_client_endpoint_impl.cpp          |  2 +-
+- .../src/udp_server_endpoint_impl.cpp          |  4 +-
+- .../message/include/message_base_impl.hpp     |  2 -
+- implementation/message/src/deserializer.cpp   |  4 +-
+- .../plugin/src/plugin_manager_impl.cpp        |  2 +-
+- .../routing/src/routing_manager_base.cpp      | 10 +--
+- .../runtime/include/application_impl.hpp      |  4 +-
+- .../runtime/src/application_impl.cpp          |  7 +-
+- implementation/security/src/policy.cpp        |  4 +-
+- implementation/security/src/security.cpp      |  1 +
+- .../src/service_discovery_impl.cpp            | 34 +++++----
+- interface/vsomeip/constants.hpp               | 74 +++++++++----------
+- .../application_tests/application_test.cpp    |  1 +
+- tools/vsomeip_ctrl.cpp                        |  9 ++-
+- 30 files changed, 129 insertions(+), 125 deletions(-)
+-
+-diff --git a/Android.bp b/Android.bp
+-index c6caa4de..f314f22b 100644
+---- a/Android.bp
+-+++ b/Android.bp
+-@@ -30,9 +30,9 @@ libvsomeip_sd_srcs = [
+- 
+- cc_defaults {
+-     name: "vsomeip_defaults",
+-+    cpp_std: "c++17",
+- 
+-     cppflags: [
+--        "-std=c++14",
+-         "-fexceptions",
+-         "-Wno-non-virtual-dtor",
+-         "-Wno-unused-const-variable",
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index ab399a69..3d947055 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -64,6 +64,8 @@ if(NOT CMAKE_BUILD_TYPE)
+-   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+- endif()
+- 
+-+set(CMAKE_CXX_STANDARD 17)
+-+
+- # OS
+- if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+-     set(DL_LIBRARY "dl")
+-@@ -248,13 +250,13 @@ if (MSVC)
+-     # add_definitions(-DVSOMEIP_DLL_COMPILATION) now it is controlled per target
+-     SET(BOOST_WINDOWS_VERSION "0x600" CACHE STRING "Set the same Version as the Version with which Boost was built, otherwise there will be errors. (normaly 0x600 is for Windows 7 and 0x501 is for Windows XP)")
+-     # Disable warning C4250 since it warns that the compiler is correctly following the C++ Standard. It's a "We-Are-Doing-Things-By-The-Book" notice, not a real warning.
+--    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_CRT_SECURE_NO_WARNINGS -D_SCL_SECURE_NO_WARNINGS -D_WINSOCK_DEPRECATED_NO_WARNINGS -D_WIN32_WINNT=${BOOST_WINDOWS_VERSION} -DWIN32 -DBOOST_ASIO_DISABLE_IOCP /EHsc /std:c++14 /wd4250")
+-+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_CRT_SECURE_NO_WARNINGS -D_SCL_SECURE_NO_WARNINGS -D_WINSOCK_DEPRECATED_NO_WARNINGS -D_WIN32_WINNT=${BOOST_WINDOWS_VERSION} -DWIN32 -DBOOST_ASIO_DISABLE_IOCP /EHsc /wd4250")
+-     set(USE_RT "")
+-     link_directories(${Boost_LIBRARY_DIR_DEBUG})
+- elseif(${CMAKE_SYSTEM_NAME} MATCHES "QNX")
+-     set(USE_RT "")
+- else()
+--    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OS_CXX_FLAGS} -g ${OPTIMIZE} -std=c++14 ${NO_DEPRECATED} ${EXPORTSYMBOLS}")
+-+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OS_CXX_FLAGS} -g ${OPTIMIZE} ${NO_DEPRECATED} ${EXPORTSYMBOLS}")
+-     set(USE_RT "rt")
+- endif()
+- 
+-@@ -268,6 +270,7 @@ list(SORT ${VSOMEIP_NAME}-cfg_SRC)
+- if (VSOMEIP_ENABLE_MULTIPLE_ROUTING_MANAGERS EQUAL 0)
+-     add_library(${VSOMEIP_NAME}-cfg SHARED ${${VSOMEIP_NAME}-cfg_SRC})
+-     set_target_properties (${VSOMEIP_NAME}-cfg PROPERTIES VERSION ${VSOMEIP_VERSION} SOVERSION ${VSOMEIP_MAJOR_VERSION})
+-+    target_compile_features(${VSOMEIP_NAME}-cfg PRIVATE cxx_std_17)
+-     if (MSVC)
+-         set_target_properties(${VSOMEIP_NAME}-cfg PROPERTIES COMPILE_DEFINITIONS "VSOMEIP_DLL_COMPILATION_PLUGIN")
+-     endif()
+-@@ -302,6 +305,7 @@ list(SORT ${VSOMEIP_NAME}_SRC)
+- 
+- add_library(${VSOMEIP_NAME} SHARED ${${VSOMEIP_NAME}_SRC})
+- set_target_properties (${VSOMEIP_NAME} PROPERTIES VERSION ${VSOMEIP_VERSION} SOVERSION ${VSOMEIP_MAJOR_VERSION})
+-+target_compile_features(${VSOMEIP_NAME} PRIVATE cxx_std_17)
+- if (MSVC)
+-     set_target_properties(${VSOMEIP_NAME} PROPERTIES COMPILE_DEFINITIONS "VSOMEIP_DLL_COMPILATION")
+- else ()
+-@@ -331,6 +335,7 @@ file(GLOB ${VSOMEIP_NAME}-sd_SRC
+- list(SORT ${VSOMEIP_NAME}-sd_SRC)
+- 
+- add_library(${VSOMEIP_NAME}-sd SHARED ${${VSOMEIP_NAME}-sd_SRC})
+-+target_compile_features(${VSOMEIP_NAME}-sd PRIVATE cxx_std_17)
+- set_target_properties (${VSOMEIP_NAME}-sd PROPERTIES VERSION ${VSOMEIP_VERSION} SOVERSION ${VSOMEIP_MAJOR_VERSION})
+- if (MSVC)
+-     set_target_properties(${VSOMEIP_NAME}-sd PROPERTIES COMPILE_DEFINITIONS "VSOMEIP_DLL_COMPILATION_PLUGIN")
+-@@ -348,6 +353,7 @@ file(GLOB_RECURSE ${VSOMEIP_NAME}-e2e_SRC
+- list(SORT ${VSOMEIP_NAME}-e2e_SRC)
+- 
+- add_library(${VSOMEIP_NAME}-e2e SHARED ${${VSOMEIP_NAME}-e2e_SRC})
+-+target_compile_features(${VSOMEIP_NAME}-e2e PRIVATE cxx_std_17)
+- set_target_properties (${VSOMEIP_NAME}-e2e PROPERTIES VERSION ${VSOMEIP_VERSION} SOVERSION ${VSOMEIP_MAJOR_VERSION})
+- if (MSVC)
+-     set_target_properties(${VSOMEIP_NAME}-e2e PROPERTIES COMPILE_DEFINITIONS "VSOMEIP_DLL_COMPILATION_PLUGIN")
+-@@ -375,6 +381,7 @@ file(GLOB_RECURSE ${VSOMEIP_COMPAT_NAME}_SRC
+- list(SORT ${VSOMEIP_COMPAT_NAME}_SRC)
+- 
+- add_library(${VSOMEIP_COMPAT_NAME} SHARED ${${VSOMEIP_COMPAT_NAME}_SRC})
+-+target_compile_features(${VSOMEIP_COMPAT_NAME} PRIVATE cxx_std_17)
+- set_target_properties (${VSOMEIP_COMPAT_NAME} PROPERTIES VERSION ${VSOMEIP_COMPAT_VERSION} SOVERSION ${VSOMEIP_COMPAT_MAJOR_VERSION})
+- if (MSVC)
+-     set_target_properties(${VSOMEIP_COMPAT_NAME} PROPERTIES COMPILE_DEFINITIONS "VSOMEIP_DLL_COMPILATION_PLUGIN")
+-diff --git a/examples/hello_world/hello_world_service.hpp b/examples/hello_world/hello_world_service.hpp
+-index 7ac3b1e7..b04cacea 100644
+---- a/examples/hello_world/hello_world_service.hpp
+-+++ b/examples/hello_world/hello_world_service.hpp
+-@@ -11,12 +11,12 @@
+- #if defined ANDROID || defined __ANDROID__
+- #include "android/log.h"
+- #define LOG_TAG "hello_world_service"
+--#define LOG_INF(...) fprintf(stdout, __VA_ARGS__), fprintf(stdout, "\n"), (void)__android_log_print(ANDROID_LOG_INFO, LOG_TAG, ##__VA_ARGS__)
+--#define LOG_ERR(...) fprintf(stderr, __VA_ARGS__), fprintf(stderr, "\n"), (void)__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, ##__VA_ARGS__)
+-+#define LOG_INF(...) std::fprintf(stdout, __VA_ARGS__), std::fprintf(stdout, "\n"), (void)__android_log_print(ANDROID_LOG_INFO, LOG_TAG, ##__VA_ARGS__)
+-+#define LOG_ERR(...) std::fprintf(stderr, __VA_ARGS__), std::fprintf(stderr, "\n"), (void)__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, ##__VA_ARGS__)
+- #else
+- #include <cstdio>
+--#define LOG_INF(...) fprintf(stdout, __VA_ARGS__), fprintf(stdout, "\n")
+--#define LOG_ERR(...) fprintf(stderr, __VA_ARGS__), fprintf(stderr, "\n")
+-+#define LOG_INF(...) std::fprintf(stdout, __VA_ARGS__), std::fprintf(stdout, "\n")
+-+#define LOG_ERR(...) std::fprintf(stderr, __VA_ARGS__), std::fprintf(stderr, "\n")
+- #endif
+- 
+- static vsomeip::service_t service_id = 0x1111;
+-@@ -32,9 +32,9 @@ public:
+-     hello_world_service() :
+-                     rtm_(vsomeip::runtime::get()),
+-                     app_(rtm_->create_application()),
+--                    stop_(false),
+--                    stop_thread_(std::bind(&hello_world_service::stop, this))
+-+                    stop_(false)
+-     {
+-+        stop_thread_ = std::thread{&hello_world_service::stop, this};
+-     }
+- 
+-     ~hello_world_service()
+-diff --git a/implementation/configuration/include/internal.hpp.in b/implementation/configuration/include/internal.hpp.in
+-index 72c8d503..eff4efad 100644
+---- a/implementation/configuration/include/internal.hpp.in
+-+++ b/implementation/configuration/include/internal.hpp.in
+-@@ -141,14 +141,14 @@ typedef enum {
+-     IS_SUBSCRIBING
+- } subscription_state_e;
+- 
+--const std::uint32_t MESSAGE_SIZE_UNLIMITED = (std::numeric_limits<std::uint32_t>::max)();
+-+inline constexpr std::uint32_t MESSAGE_SIZE_UNLIMITED = (std::numeric_limits<std::uint32_t>::max)();
+- 
+--const std::uint32_t QUEUE_SIZE_UNLIMITED = (std::numeric_limits<std::uint32_t>::max)();
+-+inline constexpr std::uint32_t QUEUE_SIZE_UNLIMITED = (std::numeric_limits<std::uint32_t>::max)();
+- 
+- #define VSOMEIP_DEFAULT_NPDU_DEBOUNCING_NANO         2 * 1000 * 1000
+- #define VSOMEIP_DEFAULT_NPDU_MAXIMUM_RETENTION_NANO  5 * 1000 * 1000
+- 
+--const std::uint32_t MAX_RECONNECTS_UNLIMITED = (std::numeric_limits<std::uint32_t>::max)();
+-+inline constexpr std::uint32_t MAX_RECONNECTS_UNLIMITED = (std::numeric_limits<std::uint32_t>::max)();
+- 
+- const std::uint32_t ANY_UID = 0xFFFFFFFF;
+- const std::uint32_t ANY_GID = 0xFFFFFFFF;
+-diff --git a/implementation/configuration/include/internal_android.hpp b/implementation/configuration/include/internal_android.hpp
+-index f5425722..8757a85a 100644
+---- a/implementation/configuration/include/internal_android.hpp
+-+++ b/implementation/configuration/include/internal_android.hpp
+-@@ -128,17 +128,17 @@ typedef enum {
+-     IS_SUBSCRIBING
+- } subscription_state_e;
+- 
+--const std::uint32_t MESSAGE_SIZE_UNLIMITED = std::numeric_limits<std::uint32_t>::max();
+-+inline constexpr std::uint32_t MESSAGE_SIZE_UNLIMITED = std::numeric_limits<std::uint32_t>::max();
+- 
+--const std::uint32_t QUEUE_SIZE_UNLIMITED = std::numeric_limits<std::uint32_t>::max();
+-+inline constexpr std::uint32_t QUEUE_SIZE_UNLIMITED = std::numeric_limits<std::uint32_t>::max();
+- 
+- #define VSOMEIP_DEFAULT_NPDU_DEBOUNCING_NANO         2 * 1000 * 1000
+- #define VSOMEIP_DEFAULT_NPDU_MAXIMUM_RETENTION_NANO  5 * 1000 * 1000
+- 
+--const std::uint32_t MAX_RECONNECTS_UNLIMITED = std::numeric_limits<std::uint32_t>::max();
+-+inline constexpr std::uint32_t MAX_RECONNECTS_UNLIMITED = std::numeric_limits<std::uint32_t>::max();
+- 
+--const std::uint32_t ANY_UID = 0xFFFFFFFF;
+--const std::uint32_t ANY_GID = 0xFFFFFFFF;
+-+inline constexpr std::uint32_t ANY_UID = 0xFFFFFFFF;
+-+inline constexpr std::uint32_t ANY_GID = 0xFFFFFFFF;
+- 
+- enum class port_type_e {
+-     PT_OPTIONAL,
+-diff --git a/implementation/configuration/src/configuration_impl.cpp b/implementation/configuration/src/configuration_impl.cpp
+-index ca1bd1dc..380b2906 100644
+---- a/implementation/configuration/src/configuration_impl.cpp
+-+++ b/implementation/configuration/src/configuration_impl.cpp
+-@@ -333,7 +333,7 @@ bool configuration_impl::load(const std::string &_name) {
+- 
+-     // Tell, if reading of configuration file(s) failed.
+-     // (This may file if the logger configuration is incomplete/missing).
+--    for (auto f : its_failed)
+-+    for (const auto& f : its_failed)
+-         VSOMEIP_WARNING << "Reading of configuration file \""
+-             << f << "\" failed. Configuration may be incomplete.";
+- 
+-@@ -342,7 +342,7 @@ bool configuration_impl::load(const std::string &_name) {
+- 
+-     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+- 
+--    for (auto i : its_input) {
+-+    for (const auto& i : its_input) {
+-         if (utility::is_file(i))
+-             VSOMEIP_INFO << "Using configuration file: \"" << i << "\".";
+- 
+-@@ -561,7 +561,7 @@ bool configuration_impl::load_data(const std::vector<configuration_element> &_el
+- 
+-         if (is_logging_loaded_) {
+-             logger::logger_impl::init(shared_from_this());
+--            for (auto w : its_warnings)
+-+            for (const auto& w : its_warnings)
+-                 VSOMEIP_WARNING << w;
+-         }
+-     }
+-@@ -3255,7 +3255,7 @@ void configuration_impl::trim(std::string &_s) {
+-         std::find_if(
+-             _s.begin(),
+-             _s.end(),
+--            [](unsigned char ch) { return !std::isspace(ch); }
+-+            [](const auto ch) { return !std::isspace(ch); }
+-         )
+-     );
+- 
+-@@ -3263,8 +3263,9 @@ void configuration_impl::trim(std::string &_s) {
+-         std::find_if(
+-             _s.rbegin(),
+-             _s.rend(),
+--            [](unsigned char ch) { return !std::isspace(ch); }).base(),
+--            _s.end()
+-+            [](const auto ch) { return !std::isspace(ch); }
+-+        ).base(),
+-+        _s.end()
+-     );
+- }
+- 
+-diff --git a/implementation/endpoints/include/endpoint_impl.hpp b/implementation/endpoints/include/endpoint_impl.hpp
+-index 9d2b303c..685eba4e 100644
+---- a/implementation/endpoints/include/endpoint_impl.hpp
+-+++ b/implementation/endpoints/include/endpoint_impl.hpp
+-@@ -34,6 +34,9 @@ public:
+-                   std::uint32_t _max_message_size,
+-                   configuration::endpoint_queue_limit_t _queue_limit,
+-                   const std::shared_ptr<configuration>& _configuration);
+-+    endpoint_impl(endpoint_impl<Protocol> const&) = delete;
+-+    endpoint_impl(endpoint_impl<Protocol> const&&) = delete;
+-+
+-     virtual ~endpoint_impl();
+- 
+-     void enable_magic_cookies();
+-diff --git a/implementation/endpoints/include/local_server_endpoint_impl_receive_op.hpp b/implementation/endpoints/include/local_server_endpoint_impl_receive_op.hpp
+-index 53f4769a..b1d8991d 100644
+---- a/implementation/endpoints/include/local_server_endpoint_impl_receive_op.hpp
+-+++ b/implementation/endpoints/include/local_server_endpoint_impl_receive_op.hpp
+-@@ -25,8 +25,8 @@ struct storage :
+- {
+-     socket_type_t &socket_;
+-     receive_handler_t handler_;
+--    byte_t *buffer_;
+--    std::size_t length_;
+-+    byte_t *buffer_ = nullptr;
+-+    size_t length_;
+-     uid_t uid_;
+-     gid_t gid_;
+-     size_t bytes_;
+-diff --git a/implementation/endpoints/include/local_uds_client_endpoint_impl.hpp b/implementation/endpoints/include/local_uds_client_endpoint_impl.hpp
+-index d7eede3f..e1e1aaa2 100644
+---- a/implementation/endpoints/include/local_uds_client_endpoint_impl.hpp
+-+++ b/implementation/endpoints/include/local_uds_client_endpoint_impl.hpp
+-@@ -25,7 +25,7 @@ public:
+-                                    const endpoint_type& _remote,
+-                                    boost::asio::io_context &_io,
+-                                    const std::shared_ptr<configuration>& _configuration);
+--    virtual ~local_uds_client_endpoint_impl();
+-+    virtual ~local_uds_client_endpoint_impl() = default;
+- 
+-     void start();
+-     void stop();
+-diff --git a/implementation/endpoints/include/local_uds_server_endpoint_impl.hpp b/implementation/endpoints/include/local_uds_server_endpoint_impl.hpp
+-index 1e78822d..a4ed2eb5 100644
+---- a/implementation/endpoints/include/local_uds_server_endpoint_impl.hpp
+-+++ b/implementation/endpoints/include/local_uds_server_endpoint_impl.hpp
+-@@ -50,7 +50,7 @@ public:
+-             const std::shared_ptr<configuration>& _configuration,
+-             bool _is_routing_endpoint);
+- 
+--    virtual ~local_uds_server_endpoint_impl();
+-+    virtual ~local_uds_server_endpoint_impl() = default;
+- 
+-     void start();
+-     void stop();
+-diff --git a/implementation/endpoints/include/udp_server_endpoint_impl_receive_op.hpp b/implementation/endpoints/include/udp_server_endpoint_impl_receive_op.hpp
+-index 1e4f0fe0..35638cd7 100644
+---- a/implementation/endpoints/include/udp_server_endpoint_impl_receive_op.hpp
+-+++ b/implementation/endpoints/include/udp_server_endpoint_impl_receive_op.hpp
+-@@ -35,7 +35,7 @@ struct storage :
+-     socket_type_t &socket_;
+-     endpoint_type_t &sender_;
+-     receive_handler_t handler_;
+--    byte_t *buffer_;
+-+    byte_t *buffer_ = nullptr;
+-     size_t length_;
+-     std::uint8_t multicast_id_;
+-     bool is_v4_;
+-diff --git a/implementation/endpoints/src/endpoint_manager_base.cpp b/implementation/endpoints/src/endpoint_manager_base.cpp
+-index 9dff9785..4e484454 100644
+---- a/implementation/endpoints/src/endpoint_manager_base.cpp
+-+++ b/implementation/endpoints/src/endpoint_manager_base.cpp
+-@@ -38,7 +38,7 @@ std::shared_ptr<endpoint> endpoint_manager_base::create_local(client_t _client)
+-     return create_local_unlocked(_client);
+- }
+- 
+--void endpoint_manager_base::remove_local(client_t _client) {
+-+void endpoint_manager_base::remove_local(const client_t _client) {
+-     std::shared_ptr<endpoint> its_endpoint(find_local(_client));
+-     if (its_endpoint) {
+-         its_endpoint->register_error_handler(nullptr);
+-diff --git a/implementation/endpoints/src/local_uds_client_endpoint_impl.cpp b/implementation/endpoints/src/local_uds_client_endpoint_impl.cpp
+-index 0b7e261c..56c621db 100644
+---- a/implementation/endpoints/src/local_uds_client_endpoint_impl.cpp
+-+++ b/implementation/endpoints/src/local_uds_client_endpoint_impl.cpp
+-@@ -40,12 +40,7 @@ local_uds_client_endpoint_impl::local_uds_client_endpoint_impl(
+-     is_supporting_magic_cookies_ = false;
+- }
+- 
+--local_uds_client_endpoint_impl::~local_uds_client_endpoint_impl() {
+--
+--}
+--
+- bool local_uds_client_endpoint_impl::is_local() const {
+--
+-     return true;
+- }
+- 
+-diff --git a/implementation/endpoints/src/local_uds_server_endpoint_impl.cpp b/implementation/endpoints/src/local_uds_server_endpoint_impl.cpp
+-index 948fe925..33876c56 100644
+---- a/implementation/endpoints/src/local_uds_server_endpoint_impl.cpp
+-+++ b/implementation/endpoints/src/local_uds_server_endpoint_impl.cpp
+-@@ -104,17 +104,11 @@ local_uds_server_endpoint_impl::local_uds_server_endpoint_impl(
+- #endif
+- }
+- 
+--local_uds_server_endpoint_impl::~local_uds_server_endpoint_impl() {
+--
+--}
+--
+- bool local_uds_server_endpoint_impl::is_local() const {
+--
+-     return true;
+- }
+- 
+- void local_uds_server_endpoint_impl::start() {
+--
+-     std::lock_guard<std::mutex> its_lock(acceptor_mutex_);
+-     if (acceptor_.is_open()) {
+-         connection::ptr new_connection = connection::create(
+-diff --git a/implementation/endpoints/src/tcp_client_endpoint_impl.cpp b/implementation/endpoints/src/tcp_client_endpoint_impl.cpp
+-index f42d93d4..e6755157 100644
+---- a/implementation/endpoints/src/tcp_client_endpoint_impl.cpp
+-+++ b/implementation/endpoints/src/tcp_client_endpoint_impl.cpp
+-@@ -178,7 +178,7 @@ void tcp_client_endpoint_impl::connect() {
+-         std::string its_device(configuration_->get_device());
+-         if (its_device != "") {
+-             if (setsockopt(socket_->native_handle(),
+--                    SOL_SOCKET, SO_BINDTODEVICE, its_device.c_str(), (socklen_t)its_device.size()) == -1) {
+-+                    SOL_SOCKET, SO_BINDTODEVICE, its_device.c_str(), static_cast<socklen_t>(its_device.size())) == -1) {
+-                 VSOMEIP_WARNING << "TCP Client: Could not bind to device \"" << its_device << "\"";
+-             }
+-         }
+-diff --git a/implementation/endpoints/src/tcp_server_endpoint_impl.cpp b/implementation/endpoints/src/tcp_server_endpoint_impl.cpp
+-index f83252ae..5aef72be 100644
+---- a/implementation/endpoints/src/tcp_server_endpoint_impl.cpp
+-+++ b/implementation/endpoints/src/tcp_server_endpoint_impl.cpp
+-@@ -55,7 +55,7 @@ tcp_server_endpoint_impl::tcp_server_endpoint_impl(
+-     std::string its_device(configuration_->get_device());
+-     if (its_device != "") {
+-         if (setsockopt(acceptor_.native_handle(),
+--                SOL_SOCKET, SO_BINDTODEVICE, its_device.c_str(), (socklen_t)its_device.size()) == -1) {
+-+                SOL_SOCKET, SO_BINDTODEVICE, its_device.c_str(), static_cast<socklen_t>(its_device.size())) == -1) {
+-             VSOMEIP_WARNING << "TCP Server: Could not bind to device \"" << its_device << "\"";
+-         }
+-     }
+-@@ -295,8 +295,8 @@ void tcp_server_endpoint_impl::accept_cbk(const connection::ptr& _connection,
+-         auto its_ep = std::dynamic_pointer_cast<tcp_server_endpoint_impl>(
+-                 shared_from_this());
+-         its_timer->async_wait([its_timer, its_ep]
+--                               (const boost::system::error_code& _error) {
+--            if (!_error) {
+-+                               (const boost::system::error_code& _error_inner) {
+-+            if (!_error_inner) {
+-                 its_ep->start();
+-             }
+-         });
+-@@ -853,12 +853,12 @@ void tcp_server_endpoint_impl::connection::handle_recv_buffer_exception(
+-             << std::setfill('0') << std::hex;
+- 
+-     for (std::size_t i = 0; i < recv_buffer_size_ && i < 16; i++) {
+--        its_message << std::setw(2) << (int) (recv_buffer_[i]) << " ";
+-+        its_message << std::setw(2) << static_cast<int>(recv_buffer_[i]) << " ";
+-     }
+- 
+-     its_message << " Last 16 Bytes captured: ";
+-     for (int i = 15; recv_buffer_size_ > 15 && i >= 0; i--) {
+--        its_message << std::setw(2) <<  (int) (recv_buffer_[static_cast<size_t>(i)]) << " ";
+-+        its_message << std::setw(2) <<  static_cast<int>(recv_buffer_[static_cast<size_t>(i)]) << " ";
+-     }
+-     VSOMEIP_ERROR << its_message.str();
+-     recv_buffer_.clear();
+-@@ -954,7 +954,7 @@ void tcp_server_endpoint_impl::print_status() {
+-     std::lock_guard<std::mutex> its_lock(mutex_);
+-     connections_t its_connections;
+-     {
+--        std::lock_guard<std::mutex> its_lock(connections_mutex_);
+-+        std::lock_guard<std::mutex> its_lock_inner(connections_mutex_);
+-         its_connections = connections_;
+-     }
+- 
+-@@ -1027,7 +1027,7 @@ void tcp_server_endpoint_impl::connection::wait_until_sent(const boost::system::
+-         }
+-     }
+-     {
+--        std::lock_guard<std::mutex> its_lock(its_server->connections_mutex_);
+-+        std::lock_guard<std::mutex> its_lock_inner(its_server->connections_mutex_);
+-         stop();
+-     }
+-     its_server->remove_connection(this);
+-diff --git a/implementation/endpoints/src/udp_client_endpoint_impl.cpp b/implementation/endpoints/src/udp_client_endpoint_impl.cpp
+-index d6952228..f52b2354 100644
+---- a/implementation/endpoints/src/udp_client_endpoint_impl.cpp
+-+++ b/implementation/endpoints/src/udp_client_endpoint_impl.cpp
+-@@ -67,7 +67,7 @@ void udp_client_endpoint_impl::connect() {
+-                     << get_address_port_remote();
+-         }
+-         socket_->set_option(boost::asio::socket_base::receive_buffer_size(
+--                udp_receive_buffer_size_), its_error);
+-+                static_cast<int>(udp_receive_buffer_size_)), its_error);
+-         if (its_error) {
+-             VSOMEIP_WARNING << "udp_client_endpoint_impl::connect: couldn't set "
+-                     << "SO_RCVBUF: " << its_error.message()
+-diff --git a/implementation/endpoints/src/udp_server_endpoint_impl.cpp b/implementation/endpoints/src/udp_server_endpoint_impl.cpp
+-index 48e35c5d..587fb94c 100644
+---- a/implementation/endpoints/src/udp_server_endpoint_impl.cpp
+-+++ b/implementation/endpoints/src/udp_server_endpoint_impl.cpp
+-@@ -72,7 +72,7 @@ udp_server_endpoint_impl::udp_server_endpoint_impl(
+-     std::string its_device(configuration_->get_device());
+-     if (its_device != "") {
+-         if (setsockopt(unicast_socket_.native_handle(),
+--                SOL_SOCKET, SO_BINDTODEVICE, its_device.c_str(), (socklen_t)its_device.size()) == -1) {
+-+                SOL_SOCKET, SO_BINDTODEVICE, its_device.c_str(), static_cast<socklen_t>(its_device.size())) == -1) {
+-             VSOMEIP_WARNING << "UDP Server: Could not bind to device \"" << its_device << "\"";
+-         }
+-     }
+-@@ -108,7 +108,7 @@ udp_server_endpoint_impl::udp_server_endpoint_impl(
+-     const int its_udp_recv_buffer_size =
+-             configuration_->get_udp_receive_buffer_size();
+-     unicast_socket_.set_option(boost::asio::socket_base::receive_buffer_size(
+--            its_udp_recv_buffer_size), ec);
+-+            static_cast<int>(its_udp_recv_buffer_size)), ec);
+- 
+-     if (ec) {
+-         VSOMEIP_WARNING << "udp_server_endpoint_impl: couldn't set "
+-diff --git a/implementation/message/include/message_base_impl.hpp b/implementation/message/include/message_base_impl.hpp
+-index acad2e89..2c953e98 100644
+---- a/implementation/message/include/message_base_impl.hpp
+-+++ b/implementation/message/include/message_base_impl.hpp
+-@@ -6,8 +6,6 @@
+- #ifndef VSOMEIP_V3_MESSAGE_BASE_IMPL_HPP
+- #define VSOMEIP_V3_MESSAGE_BASE_IMPL_HPP
+- 
+--#include <boost/thread.hpp>
+--
+- #include <vsomeip/export.hpp>
+- #include <vsomeip/message.hpp>
+- 
+-diff --git a/implementation/message/src/deserializer.cpp b/implementation/message/src/deserializer.cpp
+-index 3c4eddfa..bfa723d3 100644
+---- a/implementation/message/src/deserializer.cpp
+-+++ b/implementation/message/src/deserializer.cpp
+-@@ -115,8 +115,8 @@ bool deserializer::deserialize(std::string &_target, std::size_t _length) {
+-     if (_length > remaining_ || _length > _target.capacity()) {
+-         return false;
+-     }
+--    _target.assign(position_, position_ + long(_length));
+--    position_ += long(_length);
+-+    _target.assign(position_, position_ + static_cast<std::vector<byte_t>::difference_type>(_length));
+-+    position_ += static_cast<std::vector<byte_t>::difference_type>(_length);
+-     remaining_ -= _length;
+- 
+-     return true;
+-diff --git a/implementation/plugin/src/plugin_manager_impl.cpp b/implementation/plugin/src/plugin_manager_impl.cpp
+-index bea96d01..23b7b892 100644
+---- a/implementation/plugin/src/plugin_manager_impl.cpp
+-+++ b/implementation/plugin/src/plugin_manager_impl.cpp
+-@@ -164,7 +164,7 @@ bool plugin_manager_impl::unload_plugin(plugin_type_e _type) {
+-         }
+-     } else {
+-         VSOMEIP_ERROR << "plugin_manager_impl::unload_plugin didn't find plugin"
+--                << " type:" << (int)_type;
+-+                << " type:" << static_cast<int>(_type);
+-         return false;
+-     }
+-     return plugins_.erase(_type);
+-diff --git a/implementation/routing/src/routing_manager_base.cpp b/implementation/routing/src/routing_manager_base.cpp
+-index dde6b260..047e6566 100644
+---- a/implementation/routing/src/routing_manager_base.cpp
+-+++ b/implementation/routing/src/routing_manager_base.cpp
+-@@ -1184,8 +1184,8 @@ void routing_manager_base::remove_local(client_t _client,
+-         std::lock_guard<std::mutex> its_lock(local_services_mutex_);
+-         // Finally remove all services that are implemented by the client.
+-         std::set<std::pair<service_t, instance_t>> its_services;
+--        for (auto& s : local_services_) {
+--            for (auto& i : s.second) {
+-+        for (const auto& s : local_services_) {
+-+            for (const auto& i : s.second) {
+-                 if (std::get<2>(i.second) == _client) {
+-                     its_services.insert({ s.first, i.first });
+-                     host_->on_availability(s.first, i.first, availability_state_e::AS_UNAVAILABLE,
+-@@ -1202,9 +1202,9 @@ void routing_manager_base::remove_local(client_t _client,
+- 
+-         // remove disconnected client from offer service history
+-         std::set<std::tuple<service_t, instance_t, client_t>> its_clients;
+--        for (auto& s : local_services_history_) {
+--            for (auto& i : s.second) {
+--                for (auto& c : i.second) {
+-+        for (const auto& s : local_services_history_) {
+-+            for (const auto& i : s.second) {
+-+                for (const auto& c : i.second) {
+-                     if (c == _client) {
+-                         its_clients.insert(std::make_tuple(s.first, i.first, c));
+-                     }
+-diff --git a/implementation/runtime/include/application_impl.hpp b/implementation/runtime/include/application_impl.hpp
+-index 67187a87..c647b531 100644
+---- a/implementation/runtime/include/application_impl.hpp
+-+++ b/implementation/runtime/include/application_impl.hpp
+-@@ -309,7 +309,7 @@ private:
+-     std::shared_ptr<sync_handler> get_next_handler();
+-     void reschedule_availability_handler(const std::shared_ptr<sync_handler> &_handler);
+-     bool has_active_dispatcher();
+--    bool is_active_dispatcher(const std::thread::id &_id);
+-+    bool is_active_dispatcher(const std::thread::id &_id) const;
+-     void remove_elapsed_dispatchers();
+- 
+-     void shutdown();
+-@@ -436,7 +436,7 @@ private:
+-     // Dispatcher threads that are running
+-     std::set<std::thread::id> running_dispatchers_;
+-     // Mutex to protect access to dispatchers_ & elapsed_dispatchers_
+--    std::mutex dispatcher_mutex_;
+-+    mutable std::mutex dispatcher_mutex_;
+- 
+-     // Condition to wakeup the dispatcher thread
+-     mutable std::condition_variable dispatcher_condition_;
+-diff --git a/implementation/runtime/src/application_impl.cpp b/implementation/runtime/src/application_impl.cpp
+-index aba906b7..db880b42 100644
+---- a/implementation/runtime/src/application_impl.cpp
+-+++ b/implementation/runtime/src/application_impl.cpp
+-@@ -426,7 +426,8 @@ void application_impl::start() {
+-             std::lock_guard<std::mutex> its_lock(dispatcher_mutex_);
+-             is_dispatching_ = true;
+-             auto its_main_dispatcher = std::make_shared<std::thread>(
+--                    std::bind(&application_impl::main_dispatch, shared_from_this()));
+-+                    &application_impl::main_dispatch, shared_from_this()
+-+            );
+-             dispatchers_[its_main_dispatcher->get_id()] = its_main_dispatcher;
+-         }
+- 
+-@@ -1792,7 +1793,7 @@ void application_impl::main_dispatch() {
+-             }
+-         } else {
+-             std::shared_ptr<sync_handler> its_handler;
+--            while (is_dispatching_  && is_active_dispatcher(its_id)
+-+            while (is_dispatching_ && is_active_dispatcher(its_id)
+-                    && (its_handler = get_next_handler())) {
+-                 its_lock.unlock();
+-                 invoke_handler(its_handler);
+-@@ -2048,7 +2049,7 @@ bool application_impl::has_active_dispatcher() {
+-     return false;
+- }
+- 
+--bool application_impl::is_active_dispatcher(const std::thread::id &_id) {
+-+bool application_impl::is_active_dispatcher(const std::thread::id &_id) const {
+-     while (is_dispatching_) {
+-         if (dispatcher_mutex_.try_lock()) {
+-             for (const auto &d : dispatchers_) {
+-diff --git a/implementation/security/src/policy.cpp b/implementation/security/src/policy.cpp
+-index 36341223..da0bbd86 100644
+---- a/implementation/security/src/policy.cpp
+-+++ b/implementation/security/src/policy.cpp
+-@@ -175,7 +175,7 @@ policy::deserialize_ids(const byte_t * &_data, uint32_t &_size,
+-         if (its_result == false)
+-             return false;
+- 
+--        for (const auto i : its_instances)
+-+        for (const auto& i : its_instances)
+-             its_ids += std::make_pair(i, its_methods);
+- 
+-         its_array_length -= (its_current_size - _size);
+-@@ -379,7 +379,7 @@ policy::serialize_interval_set(
+-     uint32_t its_interval_set_size(0);
+-     serialize_u32(its_interval_set_size, _data);
+- 
+--    for (const auto i : _intervals)
+-+    for (const auto& i : _intervals)
+-         serialize_interval(i, _data);
+- 
+-     its_interval_set_size = static_cast<uint32_t>(_data.size()
+-diff --git a/implementation/security/src/security.cpp b/implementation/security/src/security.cpp
+-index a3b6ab3f..19ff73da 100644
+---- a/implementation/security/src/security.cpp
+-+++ b/implementation/security/src/security.cpp
+-@@ -14,6 +14,7 @@
+- #include "../../plugin/include/plugin_manager.hpp"
+- 
+- #include <array>
+-+#include <iomanip>
+- #include <tuple>
+- 
+- #ifndef _WIN32
+-diff --git a/implementation/service_discovery/src/service_discovery_impl.cpp b/implementation/service_discovery/src/service_discovery_impl.cpp
+-index de6e8467..c3880457 100644
+---- a/implementation/service_discovery/src/service_discovery_impl.cpp
+-+++ b/implementation/service_discovery/src/service_discovery_impl.cpp
+-@@ -5,8 +5,10 @@
+- 
+- #include <vsomeip/constants.hpp>
+- 
+--#include <random>
+-+#include <chrono>
+-+#include <iomanip>
+- #include <forward_list>
+-+#include <random>
+- #include <thread>
+- 
+- #include <vsomeip/internal/logger.hpp>
+-@@ -869,7 +871,7 @@ service_discovery_impl::create_eventgroup_entry(
+-                 << std::setw(4) << _service << "."
+-                 << std::setw(4) << _instance << "."
+-                 << std::setw(4) << _eventgroup << "] "
+--                << (uint16_t) _reliability_type;
+-+                << static_cast<uint16_t>(_reliability_type);
+-         return its_data;
+-     }
+-     std::shared_ptr<eventgroupentry_impl> its_entry, its_other;
+-@@ -1074,7 +1076,7 @@ service_discovery_impl::insert_subscription_ack(
+-     // Selective
+-     if (_clients.size() > 1 || (*(_clients.begin())) != 0) {
+-         auto its_selective_option = std::make_shared<selective_option_impl>();
+--        (void)its_selective_option->set_clients(_clients);
+-+        static_cast<void>(its_selective_option->set_clients(_clients));
+- 
+-         its_data.options_.push_back(its_selective_option);
+-     }
+-@@ -1136,7 +1138,7 @@ service_discovery_impl::on_message(
+-         static bool must_start_last_msg_received_timer(true);
+-         boost::system::error_code ec;
+- 
+--        std::lock_guard<std::mutex> its_lock(last_msg_received_timer_mutex_);
+-+        std::lock_guard<std::mutex> its_lock_inner(last_msg_received_timer_mutex_);
+-         if (0 < last_msg_received_timer_.cancel(ec) || must_start_last_msg_received_timer) {
+-             must_start_last_msg_received_timer = false;
+-             last_msg_received_timer_.expires_from_now(
+-@@ -1272,7 +1274,7 @@ service_discovery_impl::on_message(
+-         }
+- 
+-         {
+--            std::unique_lock<std::recursive_mutex> its_lock(its_acknowledgement->get_lock());
+-+            std::unique_lock<std::recursive_mutex> its_lock_inner(its_acknowledgement->get_lock());
+-             its_acknowledgement->complete();
+-             // TODO: Check the following logic...
+-             if (its_acknowledgement->has_subscription()) {
+-@@ -1543,7 +1545,7 @@ service_discovery_impl::process_offerservice_serviceentry(
+-                                     << std::setw(4) << _instance << "."
+-                                     << std::setw(4) << eg << "]"
+-                                     << " using reliability type:  "
+--                                    << std::setw(4) << (uint16_t) offer_type;
+-+                                    << std::setw(4) << static_cast<uint16_t>(offer_type);
+-                         its_info->set_reliability(offer_type);
+-                     }
+-                 }
+-@@ -1947,7 +1949,7 @@ service_discovery_impl::process_eventgroupentry(
+-                     << ": SOME/IP length field in SubscribeEventGroup message header: ["
+-                     << std::dec << _entry->get_owning_message()->get_someip_length()
+-                     << "] bytes, is shorter than length of deserialized message: ["
+--                    << (uint32_t) _entry->get_owning_message()->get_length() << "] bytes. "
+-+                    << static_cast<uint32_t>(_entry->get_owning_message()->get_length()) << "] bytes. "
+-                     << its_sender.to_string(ec) << " session: "
+-                     << std::hex << std::setw(4) << std::setfill('0') << its_session;
+-             return;
+-@@ -2238,7 +2240,7 @@ service_discovery_impl::process_eventgroupentry(
+-                 boost::system::error_code ec;
+-                 VSOMEIP_WARNING << __func__
+-                     << ": Unsupported eventgroup option ["
+--                    << std::hex << (int)its_option->get_type() << "] "
+-+                    << std::hex << static_cast<int>(its_option->get_type()) << "] "
+-                     << its_sender.to_string(ec) << " session: "
+-                     << std::hex << std::setw(4) << std::setfill('0') << its_session;
+-                 if (its_ttl > 0) {
+-@@ -2332,7 +2334,7 @@ service_discovery_impl::handle_eventgroup_subscription(
+-                 << std::setw(4) << _instance << "."
+-                 << std::setw(4) << _eventgroup << "]"
+-                 << " not valid: Event configuration ("
+--                << (std::uint32_t)_info->get_reliability()
+-+                << static_cast<std::uint32_t>(_info->get_reliability())
+-                 << ") does not match the provided endpoint options: "
+-                 << _first_address.to_string(ec) << ":" << std::dec << _first_port << " "
+-                 << _second_address.to_string(ec) << ":" << _second_port;
+-@@ -2355,14 +2357,14 @@ service_discovery_impl::handle_eventgroup_subscription(
+-         boost::system::error_code ec;
+-         // TODO: Add session id
+-         VSOMEIP_ERROR << __func__
+--                << ": Requested major version:[" << (uint32_t) _major
+-+                << ": Requested major version:[" << static_cast<uint32_t>(_major)
+-                 << "] in subscription to service: ["
+-                 << std::hex << std::setfill('0')
+-                 << std::setw(4) << _service << "."
+-                 << std::setw(4) << _instance << "."
+-                 << std::setw(4) << _eventgroup << "]"
+-                 << " does not match with services major version:["
+--                << (uint32_t) _info->get_major() << "] subscriber: "
+-+                << static_cast<uint32_t>(_info->get_major()) << "] subscriber: "
+-                 << _first_address.to_string(ec) << ":" << std::dec << _first_port;
+-         if (_ttl > 0) {
+-             insert_subscription_ack(_acknowledgement, its_info, 0, nullptr, _clients);
+-@@ -3107,8 +3109,8 @@ service_discovery_impl::move_offers_into_main_phase(
+-     const auto its_timer = repetition_phase_timers_.find(_timer);
+-     if (its_timer != repetition_phase_timers_.end()) {
+-         for (const auto& its_service : its_timer->second) {
+--            for (const auto& instance : its_service.second) {
+--                instance.second->set_is_in_mainphase(true);
+-+            for (const auto& its_instance : its_service.second) {
+-+                its_instance.second->set_is_in_mainphase(true);
+-             }
+-         }
+-         repetition_phase_timers_.erase(_timer);
+-@@ -3125,7 +3127,7 @@ service_discovery_impl::stop_offer_service(
+-     bool stop_offer_required(false);
+-     // Delete from initial phase offers
+-     {
+--        std::lock_guard<std::mutex> its_lock(collected_offers_mutex_);
+-+        std::lock_guard<std::mutex> its_lock_inner(collected_offers_mutex_);
+-         if (collected_offers_.size()) {
+-             auto its_service_it = collected_offers_.find(its_service);
+-             if (its_service_it != collected_offers_.end()) {
+-@@ -3147,7 +3149,7 @@ service_discovery_impl::stop_offer_service(
+- 
+-     // Delete from repetition phase offers
+-     {
+--        std::lock_guard<std::mutex> its_lock(repetition_phase_timers_mutex_);
+-+        std::lock_guard<std::mutex> its_lock_inner(repetition_phase_timers_mutex_);
+-         for (auto rpt = repetition_phase_timers_.begin();
+-                 rpt != repetition_phase_timers_.end();) {
+-             auto its_service_it = rpt->second.find(its_service);
+-@@ -3866,7 +3868,7 @@ reliability_type_e service_discovery_impl::get_eventgroup_reliability(
+-                         << std::setw(4) << _instance << "."
+-                         << std::setw(4) << _eventgroup << "]"
+-                         << " using reliability type:  "
+--                        << std::setw(4) << (uint16_t) its_reliability;
+-+                        << std::setw(4) << static_cast<uint16_t>(its_reliability);
+-             its_info->set_reliability(its_reliability);
+-         }
+-     } else {
+-diff --git a/interface/vsomeip/constants.hpp b/interface/vsomeip/constants.hpp
+-index 2b040c5e..2519b57f 100644
+---- a/interface/vsomeip/constants.hpp
+-+++ b/interface/vsomeip/constants.hpp
+-@@ -13,54 +13,54 @@
+- 
+- namespace vsomeip_v3 {
+- 
+--const major_version_t DEFAULT_MAJOR = 0x00;
+--const minor_version_t DEFAULT_MINOR = 0x00000000;
+--const ttl_t DEFAULT_TTL = 0xFFFFFF; // "until next reboot"
+-+inline constexpr major_version_t DEFAULT_MAJOR = 0x00;
+-+inline constexpr minor_version_t DEFAULT_MINOR = 0x00000000;
+-+inline constexpr ttl_t DEFAULT_TTL = 0xFFFFFF; // "until next reboot"
+- 
+- const std::string DEFAULT_MULTICAST = "224.0.0.0";
+--const uint16_t DEFAULT_PORT = 30500;
+--const uint16_t ILLEGAL_PORT = 0xFFFF;
+--const uint16_t ANY_PORT = 0;
+--
+--const uint16_t NO_TRACE_FILTER_EXPRESSION = 0x0000;
+--
+--const service_t ANY_SERVICE = 0xFFFF;
+--const instance_t ANY_INSTANCE = 0xFFFF;
+--const eventgroup_t ANY_EVENTGROUP = 0xFFFF;
+--const method_t ANY_METHOD = 0xFFFF;
+--const major_version_t ANY_MAJOR = 0xFF;
+--const minor_version_t ANY_MINOR = 0xFFFFFFFF;
+--
+--const eventgroup_t DEFAULT_EVENTGROUP = 0x0001;
+--
+--const client_t ILLEGAL_CLIENT = 0x0000;
+--const method_t INVALID_METHOD = 0x0000;
+--
+--const byte_t MAGIC_COOKIE_CLIENT_MESSAGE = 0x00;
+--const byte_t MAGIC_COOKIE_SERVICE_MESSAGE = 0x80;
+--const length_t MAGIC_COOKIE_SIZE = 0x00000008;
+--const request_t MAGIC_COOKIE_REQUEST = 0xDEADBEEF;
+--const client_t MAGIC_COOKIE_CLIENT = 0xDEAD;
+--const protocol_version_t MAGIC_COOKIE_PROTOCOL_VERSION = 0x01;
+--const interface_version_t MAGIC_COOKIE_INTERFACE_VERSION = 0x01;
+--const message_type_e MAGIC_COOKIE_CLIENT_MESSAGE_TYPE =
+-+inline constexpr uint16_t DEFAULT_PORT = 30500;
+-+inline constexpr uint16_t ILLEGAL_PORT = 0xFFFF;
+-+inline constexpr uint16_t ANY_PORT = 0;
+-+
+-+inline constexpr uint16_t NO_TRACE_FILTER_EXPRESSION = 0x0000;
+-+
+-+inline constexpr service_t ANY_SERVICE = 0xFFFF;
+-+inline constexpr instance_t ANY_INSTANCE = 0xFFFF;
+-+inline constexpr eventgroup_t ANY_EVENTGROUP = 0xFFFF;
+-+inline constexpr method_t ANY_METHOD = 0xFFFF;
+-+inline constexpr major_version_t ANY_MAJOR = 0xFF;
+-+inline constexpr minor_version_t ANY_MINOR = 0xFFFFFFFF;
+-+
+-+inline constexpr eventgroup_t DEFAULT_EVENTGROUP = 0x0001;
+-+
+-+inline constexpr client_t ILLEGAL_CLIENT = 0x0000;
+-+inline constexpr method_t INVALID_METHOD = 0x0000;
+-+
+-+inline constexpr byte_t MAGIC_COOKIE_CLIENT_MESSAGE = 0x00;
+-+inline constexpr byte_t MAGIC_COOKIE_SERVICE_MESSAGE = 0x80;
+-+inline constexpr length_t MAGIC_COOKIE_SIZE = 0x00000008;
+-+inline constexpr request_t MAGIC_COOKIE_REQUEST = 0xDEADBEEF;
+-+inline constexpr client_t MAGIC_COOKIE_CLIENT = 0xDEAD;
+-+inline constexpr protocol_version_t MAGIC_COOKIE_PROTOCOL_VERSION = 0x01;
+-+inline constexpr interface_version_t MAGIC_COOKIE_INTERFACE_VERSION = 0x01;
+-+inline constexpr message_type_e MAGIC_COOKIE_CLIENT_MESSAGE_TYPE =
+-         message_type_e::MT_REQUEST_NO_RETURN;
+--const message_type_e MAGIC_COOKIE_SERVICE_MESSAGE_TYPE =
+-+inline constexpr message_type_e MAGIC_COOKIE_SERVICE_MESSAGE_TYPE =
+-         message_type_e::MT_NOTIFICATION;
+--const return_code_e MAGIC_COOKIE_RETURN_CODE = return_code_e::E_OK;
+-+inline constexpr return_code_e MAGIC_COOKIE_RETURN_CODE = return_code_e::E_OK;
+- 
+--const byte_t CLIENT_COOKIE[] = { 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08,
+-+inline constexpr byte_t CLIENT_COOKIE[] = { 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08,
+-         0xDE, 0xAD, 0xBE, 0xEF, 0x01, 0x01, 0x01, 0x00 };
+- 
+--const byte_t SERVICE_COOKIE[] = { 0xFF, 0xFF, 0x80, 0x00, 0x00, 0x00, 0x00,
+-+inline constexpr byte_t SERVICE_COOKIE[] = { 0xFF, 0xFF, 0x80, 0x00, 0x00, 0x00, 0x00,
+-         0x08, 0xDE, 0xAD, 0xBE, 0xEF, 0x01, 0x01, 0x02, 0x00 };
+- 
+--const event_t ANY_EVENT = 0xFFFF;
+--const client_t ANY_CLIENT = 0xFFFF;
+-+inline constexpr event_t ANY_EVENT = 0xFFFF;
+-+inline constexpr client_t ANY_CLIENT = 0xFFFF;
+- 
+--const int VSOMEIP_ALL = -1;
+-+inline constexpr int VSOMEIP_ALL = -1;
+- 
+--const pending_security_update_id_t DEFAULT_SECURITY_UPDATE_ID = 0x0;
+-+inline constexpr pending_security_update_id_t DEFAULT_SECURITY_UPDATE_ID = 0x0;
+- 
+- } // namespace vsomeip_v3
+- 
+-diff --git a/test/network_tests/application_tests/application_test.cpp b/test/network_tests/application_tests/application_test.cpp
+-index a4a1923d..c70b6cd5 100644
+---- a/test/network_tests/application_tests/application_test.cpp
+-+++ b/test/network_tests/application_tests/application_test.cpp
+-@@ -3,6 +3,7 @@
+- // License, v. 2.0. If a copy of the MPL was not distributed with this
+- // file, You can obtain one at http://mozilla.org/MPL/2.0/.
+- 
+-+#include <atomic>
+- #include <thread>
+- #include <mutex>
+- #include <condition_variable>
+-diff --git a/tools/vsomeip_ctrl.cpp b/tools/vsomeip_ctrl.cpp
+-index 74510427..3e74a832 100644
+---- a/tools/vsomeip_ctrl.cpp
+-+++ b/tools/vsomeip_ctrl.cpp
+-@@ -29,7 +29,6 @@ public:
+-         instance_(_instance),
+-         app_(vsomeip::runtime::get()->create_application("vsomeip_ctrl")),
+-         wait_service_available_(true),
+--        send_thread_(std::bind(&vsomeip_sender::send, this)),
+-         service_id_(0x0),
+-         method_id_(0x0),
+-         length_(0),
+-@@ -39,6 +38,8 @@ public:
+-         return_code_(vsomeip::return_code_e::E_UNKNOWN),
+-         wait_for_answer_(true)
+-     {
+-+        send_thread_ = std::thread{&vsomeip_sender::send, this};
+-+
+-         if (user_message_.size() < VSOMEIP_PAYLOAD_POS) {
+-             VSOMEIP_ERROR << "Provided message is to short, min. length "
+-                     "is 16 Bytes, exiting.";
+-@@ -117,11 +118,11 @@ public:
+-             << std::setw(4) << _response->get_instance() << "]:";
+-         VSOMEIP_INFO << "########## begin message";
+-         VSOMEIP_INFO << std::hex << std::setw(4)  << std::setfill('0')
+--                << _response->get_service() 
+-+                << _response->get_service()
+-                 << std::hex << std::setw(4) << std::setfill('0')
+-                 << _response->get_method()
+-                 << " # service id / instance id";
+--        VSOMEIP_INFO << std::hex << std::setw(8)  << std::setfill('0') 
+-+        VSOMEIP_INFO << std::hex << std::setw(8)  << std::setfill('0')
+-                 << _response->get_length() << " # length";
+-         VSOMEIP_INFO << std::hex << std::setw(4)  << std::setfill('0')
+-                 << _response->get_client()
+-@@ -243,7 +244,7 @@ private:
+-         }
+- 
+-         if (use_tcp_ && user_message_.size() > VSOMEIP_MAX_TCP_MESSAGE_SIZE) {
+--            VSOMEIP_WARNING << "Max allowed message size for TCP is " 
+-+            VSOMEIP_WARNING << "Max allowed message size for TCP is "
+-                     << std::dec << VSOMEIP_MAX_TCP_MESSAGE_SIZE
+-                     << ". Provided message size is: " << user_message_.size();
+-         }
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0002-network_tests-Include-iomanip-system-header.patch b/meta-networking/recipes-protocols/vsomeip/vsomeip/0002-network_tests-Include-iomanip-system-header.patch
+deleted file mode 100644
+index b15c8029ec..0000000000
+--- a/meta-networking/recipes-protocols/vsomeip/vsomeip/0002-network_tests-Include-iomanip-system-header.patch
++++ /dev/null
+@@ -1,324 +0,0 @@
+-From 9b806483d804ab335f7161fdd6248ae3e7ae3bde Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 9 Aug 2024 13:50:05 -0700
+-Subject: [PATCH 2/2] network_tests: Include iomanip system header
+-
+-Latest gcc-14/clang-18 needs this header for setfill and setw
+-
+-Upstream-Status: Submitted [https://github.com/COVESA/vsomeip/pull/751]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- .../network_tests/big_payload_tests/big_payload_test_service.hpp | 1 +
+- test/network_tests/cpu_load_tests/cpu_load_test_service.cpp      | 1 +
+- test/network_tests/e2e_tests/e2e_profile_04_test_client.hpp      | 1 +
+- test/network_tests/e2e_tests/e2e_profile_04_test_service.hpp     | 1 +
+- test/network_tests/e2e_tests/e2e_profile_07_test_client.hpp      | 1 +
+- test/network_tests/e2e_tests/e2e_profile_07_test_service.hpp     | 1 +
+- test/network_tests/e2e_tests/e2e_test_client.hpp                 | 1 +
+- test/network_tests/e2e_tests/e2e_test_service.hpp                | 1 +
+- test/network_tests/event_tests/event_test_service.cpp            | 1 +
+- .../header_factory_tests/header_factory_test_client.hpp          | 1 +
+- .../header_factory_tests/header_factory_test_service.hpp         | 1 +
+- test/network_tests/npdu_tests/npdu_test_client.hpp               | 1 +
+- test/network_tests/npdu_tests/npdu_test_service.hpp              | 1 +
+- test/network_tests/payload_tests/payload_test_client.hpp         | 1 +
+- test/network_tests/payload_tests/payload_test_service.hpp        | 1 +
+- .../restart_routing_tests/restart_routing_test_client.hpp        | 1 +
+- .../restart_routing_tests/restart_routing_test_service.hpp       | 1 +
+- .../routing_tests/external_local_routing_test_service.hpp        | 1 +
+- test/network_tests/routing_tests/local_routing_test_client.hpp   | 1 +
+- test/network_tests/routing_tests/local_routing_test_service.hpp  | 1 +
+- .../second_address_tests/second_address_test_service.cpp         | 1 +
+- test/network_tests/security_tests/security_test_client.hpp       | 1 +
+- test/network_tests/security_tests/security_test_service.hpp      | 1 +
+- .../suspend_resume_tests/suspend_resume_test_service.cpp         | 1 +
+- 24 files changed, 24 insertions(+)
+-
+-diff --git a/test/network_tests/big_payload_tests/big_payload_test_service.hpp b/test/network_tests/big_payload_tests/big_payload_test_service.hpp
+-index 44af28a9..101b6758 100644
+---- a/test/network_tests/big_payload_tests/big_payload_test_service.hpp
+-+++ b/test/network_tests/big_payload_tests/big_payload_test_service.hpp
+-@@ -14,6 +14,7 @@
+- #include <condition_variable>
+- #include <functional>
+- #include <queue>
+-+#include <iomanip>
+- 
+- #include "big_payload_test_globals.hpp"
+- #include <vsomeip/internal/logger.hpp>
+-diff --git a/test/network_tests/cpu_load_tests/cpu_load_test_service.cpp b/test/network_tests/cpu_load_tests/cpu_load_test_service.cpp
+-index 3d935e39..a98f3edf 100644
+---- a/test/network_tests/cpu_load_tests/cpu_load_test_service.cpp
+-+++ b/test/network_tests/cpu_load_tests/cpu_load_test_service.cpp
+-@@ -13,6 +13,7 @@
+- #include <functional>
+- #include <numeric>
+- #include <cmath> // for isfinite
+-+#include <iomanip>
+- 
+- #include "cpu_load_test_globals.hpp"
+- #include <vsomeip/internal/logger.hpp>
+-diff --git a/test/network_tests/e2e_tests/e2e_profile_04_test_client.hpp b/test/network_tests/e2e_tests/e2e_profile_04_test_client.hpp
+-index ad002913..82d5e7e2 100644
+---- a/test/network_tests/e2e_tests/e2e_profile_04_test_client.hpp
+-+++ b/test/network_tests/e2e_tests/e2e_profile_04_test_client.hpp
+-@@ -14,6 +14,7 @@
+- #include <mutex>
+- #include <condition_variable>
+- #include <atomic>
+-+#include <iomanip>
+- 
+- class e2e_profile_04_test_client {
+- public:
+-diff --git a/test/network_tests/e2e_tests/e2e_profile_04_test_service.hpp b/test/network_tests/e2e_tests/e2e_profile_04_test_service.hpp
+-index 25617917..17852b85 100644
+---- a/test/network_tests/e2e_tests/e2e_profile_04_test_service.hpp
+-+++ b/test/network_tests/e2e_tests/e2e_profile_04_test_service.hpp
+-@@ -17,6 +17,7 @@
+- #include <condition_variable>
+- #include <mutex>
+- #include <thread>
+-+#include <iomanip>
+- 
+- class e2e_profile_04_test_service {
+- public:
+-diff --git a/test/network_tests/e2e_tests/e2e_profile_07_test_client.hpp b/test/network_tests/e2e_tests/e2e_profile_07_test_client.hpp
+-index 9b10a589..30d889b5 100644
+---- a/test/network_tests/e2e_tests/e2e_profile_07_test_client.hpp
+-+++ b/test/network_tests/e2e_tests/e2e_profile_07_test_client.hpp
+-@@ -14,6 +14,7 @@
+- #include <mutex>
+- #include <condition_variable>
+- #include <atomic>
+-+#include <iomanip>
+- 
+- class e2e_profile_07_test_client {
+- public:
+-diff --git a/test/network_tests/e2e_tests/e2e_profile_07_test_service.hpp b/test/network_tests/e2e_tests/e2e_profile_07_test_service.hpp
+-index ad6488a5..ea1cc05c 100644
+---- a/test/network_tests/e2e_tests/e2e_profile_07_test_service.hpp
+-+++ b/test/network_tests/e2e_tests/e2e_profile_07_test_service.hpp
+-@@ -17,6 +17,7 @@
+- #include <condition_variable>
+- #include <mutex>
+- #include <thread>
+-+#include <iomanip>
+- 
+- class e2e_profile_07_test_service {
+- public:
+-diff --git a/test/network_tests/e2e_tests/e2e_test_client.hpp b/test/network_tests/e2e_tests/e2e_test_client.hpp
+-index 10f49784..c253f101 100644
+---- a/test/network_tests/e2e_tests/e2e_test_client.hpp
+-+++ b/test/network_tests/e2e_tests/e2e_test_client.hpp
+-@@ -18,6 +18,7 @@
+- #include <mutex>
+- #include <condition_variable>
+- #include <atomic>
+-+#include <iomanip>
+- 
+- class e2e_test_client {
+- public:
+-diff --git a/test/network_tests/e2e_tests/e2e_test_service.hpp b/test/network_tests/e2e_tests/e2e_test_service.hpp
+-index 7fd1c5a9..e839aacb 100644
+---- a/test/network_tests/e2e_tests/e2e_test_service.hpp
+-+++ b/test/network_tests/e2e_tests/e2e_test_service.hpp
+-@@ -16,6 +16,7 @@
+- #include <thread>
+- #include <mutex>
+- #include <condition_variable>
+-+#include <iomanip>
+- 
+- class e2e_test_service {
+- public:
+-diff --git a/test/network_tests/event_tests/event_test_service.cpp b/test/network_tests/event_tests/event_test_service.cpp
+-index 3728a827..d1f117e2 100644
+---- a/test/network_tests/event_tests/event_test_service.cpp
+-+++ b/test/network_tests/event_tests/event_test_service.cpp
+-@@ -10,6 +10,7 @@
+- #include <thread>
+- #include <map>
+- #include <atomic>
+-+#include <iomanip>
+- 
+- #include <gtest/gtest.h>
+- 
+-diff --git a/test/network_tests/header_factory_tests/header_factory_test_client.hpp b/test/network_tests/header_factory_tests/header_factory_test_client.hpp
+-index 79461b69..b72bbdca 100644
+---- a/test/network_tests/header_factory_tests/header_factory_test_client.hpp
+-+++ b/test/network_tests/header_factory_tests/header_factory_test_client.hpp
+-@@ -14,6 +14,7 @@
+- #include <mutex>
+- #include <condition_variable>
+- #include <functional>
+-+#include <iomanip>
+- 
+- #include "../someip_test_globals.hpp"
+- #include <common/vsomeip_app_utilities.hpp>
+-diff --git a/test/network_tests/header_factory_tests/header_factory_test_service.hpp b/test/network_tests/header_factory_tests/header_factory_test_service.hpp
+-index 7879946a..a553adde 100644
+---- a/test/network_tests/header_factory_tests/header_factory_test_service.hpp
+-+++ b/test/network_tests/header_factory_tests/header_factory_test_service.hpp
+-@@ -13,6 +13,7 @@
+- #include <mutex>
+- #include <condition_variable>
+- #include <functional>
+-+#include <iomanip>
+- 
+- #include "../someip_test_globals.hpp"
+- #include <common/vsomeip_app_utilities.hpp>
+-diff --git a/test/network_tests/npdu_tests/npdu_test_client.hpp b/test/network_tests/npdu_tests/npdu_test_client.hpp
+-index 2f469d40..7f615f14 100644
+---- a/test/network_tests/npdu_tests/npdu_test_client.hpp
+-+++ b/test/network_tests/npdu_tests/npdu_test_client.hpp
+-@@ -15,6 +15,7 @@
+- #include <condition_variable>
+- #include <functional>
+- #include <map>
+-+#include <iomanip>
+- 
+- #include "../npdu_tests/npdu_test_globals.hpp"
+- #include "../someip_test_globals.hpp"
+-diff --git a/test/network_tests/npdu_tests/npdu_test_service.hpp b/test/network_tests/npdu_tests/npdu_test_service.hpp
+-index bef06806..1caae785 100644
+---- a/test/network_tests/npdu_tests/npdu_test_service.hpp
+-+++ b/test/network_tests/npdu_tests/npdu_test_service.hpp
+-@@ -15,6 +15,7 @@
+- #include <functional>
+- #include <chrono>
+- #include <deque>
+-+#include <iomanip>
+- 
+- class npdu_test_service
+- {
+-diff --git a/test/network_tests/payload_tests/payload_test_client.hpp b/test/network_tests/payload_tests/payload_test_client.hpp
+-index 1bab6ba6..1754320c 100644
+---- a/test/network_tests/payload_tests/payload_test_client.hpp
+-+++ b/test/network_tests/payload_tests/payload_test_client.hpp
+-@@ -15,6 +15,7 @@
+- #include <mutex>
+- #include <condition_variable>
+- #include <functional>
+-+#include <iomanip>
+- 
+- #include "../someip_test_globals.hpp"
+- #include <common/vsomeip_app_utilities.hpp>
+-diff --git a/test/network_tests/payload_tests/payload_test_service.hpp b/test/network_tests/payload_tests/payload_test_service.hpp
+-index 7d3c01d5..06dbb684 100644
+---- a/test/network_tests/payload_tests/payload_test_service.hpp
+-+++ b/test/network_tests/payload_tests/payload_test_service.hpp
+-@@ -13,6 +13,7 @@
+- #include <mutex>
+- #include <condition_variable>
+- #include <functional>
+-+#include <iomanip>
+- 
+- #include "../someip_test_globals.hpp"
+- #include <common/vsomeip_app_utilities.hpp>
+-diff --git a/test/network_tests/restart_routing_tests/restart_routing_test_client.hpp b/test/network_tests/restart_routing_tests/restart_routing_test_client.hpp
+-index 8a7c9e70..6a758318 100644
+---- a/test/network_tests/restart_routing_tests/restart_routing_test_client.hpp
+-+++ b/test/network_tests/restart_routing_tests/restart_routing_test_client.hpp
+-@@ -19,6 +19,7 @@
+- #include <condition_variable>
+- #include <atomic>
+- #include <future>
+-+#include <iomanip>
+- 
+- class routing_restart_test_client {
+- public:
+-diff --git a/test/network_tests/restart_routing_tests/restart_routing_test_service.hpp b/test/network_tests/restart_routing_tests/restart_routing_test_service.hpp
+-index 7660b8fc..1fe4d86c 100644
+---- a/test/network_tests/restart_routing_tests/restart_routing_test_service.hpp
+-+++ b/test/network_tests/restart_routing_tests/restart_routing_test_service.hpp
+-@@ -16,6 +16,7 @@
+- #include <thread>
+- #include <mutex>
+- #include <condition_variable>
+-+#include <iomanip>
+- 
+- class routing_restart_test_service {
+- public:
+-diff --git a/test/network_tests/routing_tests/external_local_routing_test_service.hpp b/test/network_tests/routing_tests/external_local_routing_test_service.hpp
+-index 2499bc84..b1e2dfd8 100644
+---- a/test/network_tests/routing_tests/external_local_routing_test_service.hpp
+-+++ b/test/network_tests/routing_tests/external_local_routing_test_service.hpp
+-@@ -13,6 +13,7 @@
+- #include <mutex>
+- #include <condition_variable>
+- #include <functional>
+-+#include <iomanip>
+- 
+- #include "../someip_test_globals.hpp"
+- #include <common/vsomeip_app_utilities.hpp>
+-diff --git a/test/network_tests/routing_tests/local_routing_test_client.hpp b/test/network_tests/routing_tests/local_routing_test_client.hpp
+-index 09af0bf0..69ee6bfc 100644
+---- a/test/network_tests/routing_tests/local_routing_test_client.hpp
+-+++ b/test/network_tests/routing_tests/local_routing_test_client.hpp
+-@@ -14,6 +14,7 @@
+- #include <mutex>
+- #include <condition_variable>
+- #include <functional>
+-+#include <iomanip>
+- 
+- #include "../someip_test_globals.hpp"
+- #include <common/vsomeip_app_utilities.hpp>
+-diff --git a/test/network_tests/routing_tests/local_routing_test_service.hpp b/test/network_tests/routing_tests/local_routing_test_service.hpp
+-index 109dade4..932423d8 100644
+---- a/test/network_tests/routing_tests/local_routing_test_service.hpp
+-+++ b/test/network_tests/routing_tests/local_routing_test_service.hpp
+-@@ -13,6 +13,7 @@
+- #include <mutex>
+- #include <condition_variable>
+- #include <functional>
+-+#include <iomanip>
+- 
+- #include "../someip_test_globals.hpp"
+- #include <common/vsomeip_app_utilities.hpp>
+-diff --git a/test/network_tests/second_address_tests/second_address_test_service.cpp b/test/network_tests/second_address_tests/second_address_test_service.cpp
+-index fc9d0a28..3ffa493f 100644
+---- a/test/network_tests/second_address_tests/second_address_test_service.cpp
+-+++ b/test/network_tests/second_address_tests/second_address_test_service.cpp
+-@@ -9,6 +9,7 @@
+- #include <sstream>
+- #include <thread>
+- #include <map>
+-+#include <iomanip>
+- 
+- #include <gtest/gtest.h>
+- #include <vsomeip/vsomeip.hpp>
+-diff --git a/test/network_tests/security_tests/security_test_client.hpp b/test/network_tests/security_tests/security_test_client.hpp
+-index ab3d98b8..bd331138 100644
+---- a/test/network_tests/security_tests/security_test_client.hpp
+-+++ b/test/network_tests/security_tests/security_test_client.hpp
+-@@ -18,6 +18,7 @@
+- #include <mutex>
+- #include <condition_variable>
+- #include <atomic>
+-+#include <iomanip>
+- 
+- class security_test_client {
+- public:
+-diff --git a/test/network_tests/security_tests/security_test_service.hpp b/test/network_tests/security_tests/security_test_service.hpp
+-index 87fb94fd..1f227072 100644
+---- a/test/network_tests/security_tests/security_test_service.hpp
+-+++ b/test/network_tests/security_tests/security_test_service.hpp
+-@@ -16,6 +16,7 @@
+- #include <thread>
+- #include <mutex>
+- #include <condition_variable>
+-+#include <iomanip>
+- 
+- class security_test_service {
+- public:
+-diff --git a/test/network_tests/suspend_resume_tests/suspend_resume_test_service.cpp b/test/network_tests/suspend_resume_tests/suspend_resume_test_service.cpp
+-index 6f099ce7..dc9df239 100644
+---- a/test/network_tests/suspend_resume_tests/suspend_resume_test_service.cpp
+-+++ b/test/network_tests/suspend_resume_tests/suspend_resume_test_service.cpp
+-@@ -7,6 +7,7 @@
+- #include <mutex>
+- #include <thread>
+- #include <atomic>
+-+#include <iomanip>
+- 
+- #include <gtest/gtest.h>
+- 
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0003-Do-not-build-external-gtest.patch b/meta-networking/recipes-protocols/vsomeip/vsomeip/0003-Do-not-build-external-gtest.patch
+deleted file mode 100644
+index 09dab9a8b0..0000000000
+--- a/meta-networking/recipes-protocols/vsomeip/vsomeip/0003-Do-not-build-external-gtest.patch
++++ /dev/null
+@@ -1,187 +0,0 @@
+-From b1bf398015bc090020459954e5cd1ec3b51b8ac3 Mon Sep 17 00:00:00 2001
+-From: Yi Zhao <yi.zhao@windriver.com>
+-Date: Tue, 11 Jul 2023 16:53:46 +0800
+-Subject: [PATCH] Do not build external gtest
+-
+-We don't need to build external gtest since we already depend on
+-googletest.
+-
+-Upstream-Status: Inappropriate [embedded specific]
+-
+-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+----
+- CMakeLists.txt                    | 11 ----
+- test/CMakeLists.txt               | 22 +------
+- test/network_tests/CMakeLists.txt | 99 -------------------------------
+- 3 files changed, 3 insertions(+), 129 deletions(-)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index d791c12e..f1bcba27 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -18,17 +18,6 @@ set (VSOMEIP_VERSION ${VSOMEIP_MAJOR_VERSION}.${VSOMEIP_MINOR_VERSION}.${VSOMEIP
+- set (PACKAGE_VERSION ${VSOMEIP_VERSION}) # Used in documentation/doxygen.in
+- set (CMAKE_VERBOSE_MAKEFILE off)
+- 
+--if (NOT GTEST_ROOT)
+--    if (DEFINED ENV{GTEST_ROOT})
+--        set(GTEST_ROOT $ENV{GTEST_ROOT})
+--    else()
+--        include(FetchContent)
+--        FetchContent_Declare(googletest GIT_REPOSITORY https://github.com/google/googletest.git GIT_TAG v1.14.0) 
+--        FetchContent_Populate(googletest)
+--        set(GTEST_ROOT ${googletest_SOURCE_DIR})
+--    endif()
+--endif()
+--
+- ###################################################################################################
+- # see http://www.cmake.org/Wiki/CMake/Tutorials/How_to_create_a_ProjectConfig.cmake_file
+- ###################################################################################################
+-diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
+-index f66ac5d3..6f09bf40 100644
+---- a/test/CMakeLists.txt
+-+++ b/test/CMakeLists.txt
+-@@ -17,27 +17,11 @@ find_package(benchmark)
+- # remove export symbols from the cxx flags
+- string(REPLACE "${EXPORTSYMBOLS}" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+- 
+--# check for set environment variable
+--if(${GTEST_ROOT} STREQUAL "n/a")
+--    message(STATUS "GTEST_ROOT is not defined. For building the tests the variable
+--             GTEST_ROOT has to be defined. Tests can not be built.")
+--    # early exit
+--    return()  # test can not be build -> make commands build_tests and check are not available
+--else()
+--    message(STATUS "GTEST_ROOT is set. gtest root path set to ${GTEST_ROOT}")
+-+find_package(GTest)
+-+if (NOT GTest_FOUND)
+-+    message(WARNING "GTest is not found. Tests can not be built.")
+- endif()
+- 
+--# build google test as static library (always) -> therefore deactivate BUILD_SHARED_LIBS in case it is active
+--set(BUILD_SHARED_LIBS_AUTOMATIC_OFF 0)
+--if ("${BUILD_SHARED_LIBS}" STREQUAL "ON")
+--    set(BUILD_SHARED_LIBS OFF)
+--    set(BUILD_SHARED_LIBS_AUTOMATIC_OFF 1)
+--endif()
+--add_subdirectory(${GTEST_ROOT} ${CMAKE_CURRENT_BINARY_DIR}/gtest EXCLUDE_FROM_ALL)
+--if ("${BUILD_SHARED_LIBS_AUTOMATIC_OFF}" STREQUAL "1")
+--    set(BUILD_SHARED_LIBS ON)
+--    set(BUILD_SHARED_LIBS_AUTOMATIC_OFF 0)
+--endif()
+- 
+- ##############################################################################
+- # build tests
+-diff --git a/test/network_tests/CMakeLists.txt b/test/network_tests/CMakeLists.txt
+-index 883cc5cf..9a2a4f5e 100644
+---- a/test/network_tests/CMakeLists.txt
+-+++ b/test/network_tests/CMakeLists.txt
+-@@ -4116,105 +4116,6 @@ if(NOT ${TESTS_BAT})
+- 
+- endif()
+- 
+--##############################################################################
+--# Add for every test a dependency to gtest
+--##############################################################################
+--
+--if(NOT ${TESTS_BAT})
+--    add_dependencies(${TEST_CONFIGURATION} gtest)
+--    add_dependencies(${TEST_APPLICATION} gtest)
+--    add_dependencies(${TEST_APPLICATION_SINGLE_PROCESS_NAME} gtest)
+--    add_dependencies(${TEST_APPLICATION_AVAILABILITY_NAME} gtest)
+--    add_dependencies(${TEST_MAGIC_COOKIES_CLIENT} gtest)
+--    add_dependencies(${TEST_MAGIC_COOKIES_SERVICE} gtest)
+--    add_dependencies(${TEST_HEADER_FACTORY} gtest)
+--    add_dependencies(${TEST_HEADER_FACTORY_CLIENT} gtest)
+--    add_dependencies(${TEST_HEADER_FACTORY_SERVICE} gtest)
+--    add_dependencies(${TEST_LOCAL_ROUTING_SERVICE} gtest)
+--    add_dependencies(${TEST_LOCAL_ROUTING_CLIENT} gtest)
+--    add_dependencies(${TEST_EXTERNAL_LOCAL_ROUTING_SERVICE} gtest)
+--    add_dependencies(${TEST_PAYLOAD_SERVICE} gtest)
+--    add_dependencies(${TEST_PAYLOAD_CLIENT} gtest)
+--    add_dependencies(${TEST_BIG_PAYLOAD_SERVICE} gtest)
+--    add_dependencies(${TEST_BIG_PAYLOAD_CLIENT} gtest)
+--    add_dependencies(${TEST_CLIENT_ID_SERVICE} gtest)
+--    add_dependencies(${TEST_CLIENT_ID_UTILITY} gtest)
+--    add_dependencies(${TEST_DEBOUNCE_CLIENT} gtest)
+--    add_dependencies(${TEST_DEBOUNCE_SERVICE} gtest)
+--    add_dependencies(${TEST_DEBOUNCE_FILTER_CLIENT} gtest)
+--    add_dependencies(${TEST_DEBOUNCE_FILTER_SERVICE} gtest)
+--    add_dependencies(${TEST_DEBOUNCE_CALLBACK_CLIENT} gtest)
+--    add_dependencies(${TEST_DEBOUNCE_CALLBACK_SERVICE} gtest)
+--    add_dependencies(${TEST_DEBOUNCE_FREQUENCY_CLIENT} gtest)
+--    add_dependencies(${TEST_DEBOUNCE_FREQUENCY_SERVICE} gtest)
+--    add_dependencies(${TEST_SUBSCRIBE_NOTIFY_SERVICE} gtest)
+--    add_dependencies(${TEST_SUBSCRIBE_NOTIFY_ONE_EVENT_TWO_EVENTGROUPS_SERVICE} gtest)
+--    add_dependencies(${TEST_SUBSCRIBE_NOTIFY_ONE_EVENT_TWO_EVENTGROUPS_CLIENT} gtest)
+--    add_dependencies(${TEST_SUBSCRIBE_NOTIFY_ONE_SERVICE} gtest)
+--    add_dependencies(${TEST_CPU_LOAD_SERVICE} gtest)
+--    add_dependencies(${TEST_CPU_LOAD_CLIENT} gtest)
+--    add_dependencies(${TEST_INITIAL_EVENT_SERVICE} gtest)
+--    add_dependencies(${TEST_INITIAL_EVENT_CLIENT} gtest)
+--    add_dependencies(${TEST_INITIAL_EVENT_AVAILABILITY_CHECKER} gtest)
+--    add_dependencies(${TEST_INITIAL_EVENT_STOP_SERVICE} gtest)
+--    add_dependencies(${TEST_OFFER_SERVICE} gtest)
+--    add_dependencies(${TEST_OFFER_CLIENT} gtest)
+--    add_dependencies(${TEST_OFFER_SERVICE_EXTERNAL} gtest)
+--    add_dependencies(${TEST_OFFER_EXTERNAL_SD_MESSAGE_SENDER} gtest)
+--    add_dependencies(${TEST_OFFERED_SERVICES_INFO_CLIENT} gtest)
+--    add_dependencies(${TEST_OFFERED_SERVICES_INFO_SERVICE} gtest)
+--    add_dependencies(${TEST_PENDING_SUBSCRIPTION_SERVICE} gtest)
+--    add_dependencies(${TEST_PENDING_SUBSCRIPTION_CLIENT} gtest)
+--    add_dependencies(${TEST_MALICIOUS_DATA_SERVICE} gtest)
+--    add_dependencies(${TEST_MALICIOUS_DATA_CLIENT} gtest)
+--    if (${TEST_SECURITY})
+--        add_dependencies(${TEST_SECURITY_SERVICE} gtest)
+--        add_dependencies(${TEST_SECURITY_CLIENT} gtest)
+--    endif()
+--    add_dependencies(${TEST_E2E_SERVICE} gtest)
+--    add_dependencies(${TEST_E2E_CLIENT} gtest)
+--    if (${TEST_E2E_PROFILE_04})
+--    add_dependencies(${TEST_E2E_PROFILE_04_SERVICE} gtest)
+--    add_dependencies(${TEST_E2E_PROFILE_04_CLIENT} gtest)
+--    endif()
+--    if (${TEST_E2E_PROFILE_07})
+--    add_dependencies(${TEST_E2E_PROFILE_07_SERVICE} gtest)
+--    add_dependencies(${TEST_E2E_PROFILE_07_CLIENT} gtest)
+--    endif()
+--    add_dependencies(${TEST_EVENT_SERVICE} gtest)
+--    add_dependencies(${TEST_EVENT_CLIENT} gtest)
+--    if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "QNX")
+--    add_dependencies(${TEST_NPDU_SERVICE_ONE} gtest)
+--    add_dependencies(${TEST_NPDU_SERVICE_TWO} gtest)
+--    add_dependencies(${TEST_NPDU_SERVICE_THREE} gtest)
+--    add_dependencies(${TEST_NPDU_SERVICE_FOUR} gtest)
+--    add_dependencies(${TEST_NPDU_CLIENT_ONE} gtest)
+--    add_dependencies(${TEST_NPDU_CLIENT_TWO} gtest)
+--    add_dependencies(${TEST_NPDU_CLIENT_THREE} gtest)
+--    add_dependencies(${TEST_NPDU_CLIENT_FOUR} gtest)
+--    add_dependencies(${TEST_NPDU_DAEMON_CLIENT} gtest)
+--    add_dependencies(${TEST_NPDU_DAEMON_SERVICE} gtest)
+--    endif()
+--    add_dependencies(${TEST_SOMEIPTP_CLIENT} gtest)
+--    add_dependencies(${TEST_SOMEIPTP_SERVICE} gtest)
+--    if(${TEST_SECOND_ADDRESS})
+--        add_dependencies(${TEST_SECOND_ADDRESS_CLIENT} gtest)
+--        add_dependencies(${TEST_SECOND_ADDRESS_SERVICE} gtest)
+--    endif()
+--    add_dependencies(${TEST_SUSPEND_RESUME_CLIENT} gtest)
+--    add_dependencies(${TEST_SUSPEND_RESUME_SERVICE} gtest)
+--else()
+--    add_dependencies(${TEST_APPLICATION} gtest)
+--    add_dependencies(${TEST_HEADER_FACTORY} gtest)
+--    add_dependencies(${TEST_HEADER_FACTORY_CLIENT} gtest)
+--    add_dependencies(${TEST_HEADER_FACTORY_SERVICE} gtest)
+--    add_dependencies(${TEST_PAYLOAD_SERVICE} gtest)
+--    add_dependencies(${TEST_PAYLOAD_CLIENT} gtest)
+--    add_dependencies(${TEST_BIG_PAYLOAD_SERVICE} gtest)
+--    add_dependencies(${TEST_BIG_PAYLOAD_CLIENT} gtest)
+--    add_dependencies(${TEST_LOCAL_ROUTING_SERVICE} gtest)
+--    add_dependencies(${TEST_LOCAL_ROUTING_CLIENT} gtest)
+--endif()
+- 
+- ##############################################################################
+- # Add tests to the target build_network_tests
+--- 
+-2.25.1
+-
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Do-not-specify-PIE-flag-explicitly.patch b/meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Do-not-specify-PIE-flag-explicitly.patch
+index 4bb2318555..2d789627a3 100644
+--- a/meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Do-not-specify-PIE-flag-explicitly.patch
++++ b/meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Do-not-specify-PIE-flag-explicitly.patch
+@@ -23,11 +23,9 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+  CMakeLists.txt | 4 ++--
+  1 file changed, 2 insertions(+), 2 deletions(-)
+ 
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index f1bcba27..2653a4df 100644
+ --- a/CMakeLists.txt
+ +++ b/CMakeLists.txt
+-@@ -60,12 +60,12 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
++@@ -70,7 +70,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux"
+  if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+      # This is only relevant for GCC and causes warnings on Clang
+      set(EXPORTSYMBOLS "-Wl,-export-dynamic -Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/exportmap.gcc")
+@@ -36,12 +34,12 @@ index f1bcba27..2653a4df 100644
+  endif()
+  
+      set(NO_DEPRECATED "")
+-     set(OPTIMIZE "")
+--    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -pthread -O -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector-strong -fasynchronous-unwind-tables -fno-omit-frame-pointer -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Wpedantic -Werror -fPIE")
+-+    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -pthread -O -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector-strong -fasynchronous-unwind-tables -fno-omit-frame-pointer -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Wpedantic")
++@@ -78,7 +78,7 @@ endif()
++   if(NOT DEFINED _FORTIFY_SOURCE)
++       set(_FORTIFY_SOURCE 2)
++   endif()
++-    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -pthread -O -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector-strong -fasynchronous-unwind-tables -fno-omit-frame-pointer -D_FORTIFY_SOURCE=${_FORTIFY_SOURCE} -Wformat -Wformat-security -Wpedantic -Werror -fPIE")
+++    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -pthread -O -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector-strong -fasynchronous-unwind-tables -fno-omit-frame-pointer -D_FORTIFY_SOURCE=${_FORTIFY_SOURCE} -Wformat -Wformat-security -Wpedantic")
+  
+      # force all use of std::mutex and std::recursive_mutex to use runtime init
+      # instead of static initialization so mutexes can be hooked to enable PI as needed
+--- 
+-2.25.1
+-
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip_3.4.10.bb b/meta-networking/recipes-protocols/vsomeip/vsomeip_3.5.3.bb
+similarity index 84%
+rename from meta-networking/recipes-protocols/vsomeip/vsomeip_3.4.10.bb
+rename to meta-networking/recipes-protocols/vsomeip/vsomeip_3.5.3.bb
+index 36fa196a5f..14fc4190b8 100644
+--- a/meta-networking/recipes-protocols/vsomeip/vsomeip_3.4.10.bb
++++ b/meta-networking/recipes-protocols/vsomeip/vsomeip_3.5.3.bb
+@@ -7,17 +7,17 @@ SECTION = "net"
+ LICENSE = "MPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=9741c346eef56131163e13b9db1241b3"
+ 
++GTEST_VER = "1.15.2"
+ SRC_URI = "git://github.com/GENIVI/${BPN}.git;branch=master;protocol=https;name=vsomeip \
++           https://github.com/google/googletest/releases/download/v${GTEST_VER}/googletest-${GTEST_VER}.tar.gz;name=gtest;subdir=git/ \
+            file://0001-Fix-pkgconfig-dir-for-multilib.patch \
+            file://0002-Install-example-configuration-files-to-etc-vsomeip.patch \
+-           file://0003-Do-not-build-external-gtest.patch \
+            file://0004-Do-not-specify-PIE-flag-explicitly.patch \
+            file://0005-test-common-CMakeLists.txt-add-missing-link-with-dlt.patch \
+-           file://0001-Update-to-C-17-560.patch \
+-           file://0002-network_tests-Include-iomanip-system-header.patch \
+           "
+ 
+-SRCREV = "02c199dff8aba814beebe3ca417fd991058fe90c"
++SRCREV = "6461369b3874c844642c9adaac9d1b7406794ab8"
++SRC_URI[gtest.sha256sum] = "7b42b4d6ed48810c5362c265a17faebe90dc2373c885e5216439d37927f02926"
+ 
+ COMPATIBLE_HOST:mips = "null"
+ COMPATIBLE_HOST:mips64 = "null"
+@@ -32,6 +32,7 @@ inherit cmake pkgconfig
+ 
+ EXTRA_OECMAKE = "-DINSTALL_LIB_DIR:PATH=${baselib} \
+                  -DINSTALL_CMAKE_DIR:PATH=${baselib}/cmake/vsomeip3 \
++                 -DGTEST_ROOT=${S}/googletest-${GTEST_VER} \
+                 "
+ 
+ # For vsomeip-test
+@@ -63,7 +64,7 @@ do_install:append() {
+ 
+     for d in unit_tests network_tests; do
+         install -d ${D}/opt/${PN}-test/test/$d
+-        cp -f ${B}/test/$d/*test* ${D}/opt/${PN}-test/test/$d
++        cp -rf ${B}/test/$d/*_tests ${D}/opt/${PN}-test/test/$d
+     done
  }
-+
-+SKIP_RECIPE[cpp-netlib] = "Does not work with boost >= 1.87"
+ 
 
