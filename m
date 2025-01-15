@@ -1,222 +1,359 @@
-Return-Path: <peng.zhang1.cn@windriver.com>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 223A9E77188
-	for <webhook@archiver.kernel.org>; Tue, 14 Jan 2025 10:09:34 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.41100.1736849367546633979
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 75A83E77188
+	for <webhook@archiver.kernel.org>; Wed, 15 Jan 2025 02:08:45 +0000 (UTC)
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+ by mx.groups.io with SMTP id smtpd.web11.11943.1736906920385737671
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Jan 2025 02:09:27 -0800
+ Tue, 14 Jan 2025 18:08:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=310900c87a=peng.zhang1.cn@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50E7aek6016412
-	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Jan 2025 02:09:27 -0800
-Received: from nam02-bn1-obe.outbound.protection.outlook.com (mail-bn1nam02lp2042.outbound.protection.outlook.com [104.47.51.42])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 443mt72nc8-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Jan 2025 02:09:26 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rx5cdbyrDEHEymhxkCjRl731BSZYWpEMW8vLqIA2x+dK2CpThWHKd+DHRLkm1LQX+kZFwVv+37yeHKbsMQpgCvYrRu14dsRkNRurnnV4Dmu/d3/QG8wEyTmXx2vZJ9Yh6RU4zr8zB3V/zdh3+lDQI547cC6HSeOaCpS0ZghPqcCdN1IyfQP1uCGqO9n0itomjMD8ZgqrJ1FSCgbaUIUxh/MzlLEs8z1isW7YwEBrKxzAZRPP1ZvINWzhSFAvwwUqeY5y5wpy7rS6s3mGuP0UNKi0hrEuYDQMYoblpXb1eO9hYVXFmqplJvLmoYaCPhy6XCSNSs3Dn/seTNYgiB2Sdg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IFshQbyDoPenftY/9kO3LM/+n7LY/EmbnXJ3gYSUTgc=;
- b=iGBKWljT4L7Pgpo7kPdfu02Z5aztliONTk2nWUw1PKVxpQ+7t12ef/+jEO9lzTCHxDN+Mw3b33RiHCI6j/byP1FCEhyTEcdv3a9AEKOTO96ECyFvt3ODQD7ag4316gLlY8jmKrseF6YW8gb5D4VDkPljWDDlfNilweDFgGrRFtsCyKuHa+wde7/ko1fppNJwlfIqDmFf56mXa/WCnTzpqcfpN2KdA76ekjMFtw035li4m2z2o6/FMBXVwFBMru58c45SoEFhmIsz4e3hIxJIq4CQDB2JSbxvk0U6Dfmls8CyyJyKYNMmFAICaApZ538bjwlHKmLBiFUC4BWSxwCjfg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from CH3PR11MB8562.namprd11.prod.outlook.com (2603:10b6:610:1b8::13)
- by SJ0PR11MB6573.namprd11.prod.outlook.com (2603:10b6:a03:44d::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.17; Tue, 14 Jan
- 2025 10:09:24 +0000
-Received: from CH3PR11MB8562.namprd11.prod.outlook.com
- ([fe80::24c6:f8fc:1afe:179f]) by CH3PR11MB8562.namprd11.prod.outlook.com
- ([fe80::24c6:f8fc:1afe:179f%7]) with mapi id 15.20.8335.017; Tue, 14 Jan 2025
- 10:09:24 +0000
-From: peng.zhang1.cn@windriver.com
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 2/2] openjpeg: fix CVE-2024-56827
-Date: Tue, 14 Jan 2025 18:09:10 +0800
-Message-Id: <20250114100910.1538526-2-peng.zhang1.cn@windriver.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250114100910.1538526-1-peng.zhang1.cn@windriver.com>
-References: <20250114100910.1538526-1-peng.zhang1.cn@windriver.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SI2P153CA0030.APCP153.PROD.OUTLOOK.COM
- (2603:1096:4:190::15) To CH3PR11MB8562.namprd11.prod.outlook.com
- (2603:10b6:610:1b8::13)
+ dkim=pass header.i=@mvista.com header.s=google header.b=in+TZ1T4;
+ spf=pass (domain: mvista.com, ip: 209.85.208.42, mailfrom: vanusuri@mvista.com)
+Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-5d90a5581fcso10604258a12.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Jan 2025 18:08:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1736906919; x=1737511719; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=UXhIpNDEbd0ZMpBLGpbuzRpSvA60+0J9Yjrq1wUEDPI=;
+        b=in+TZ1T41TTMhYlEZUTZ5rhm8C3NncmHPEnoF16MixkeuhhqXuU9AZikX3piD5b+tm
+         4s1CrkjQoYO/7iOZ0nyTSBtG7j/dyU9Vcg4wtXag40R68fig3szLMn0TaCcOWP9kiaAc
+         SNMUfPBdSudGVYozwxzRCGWjsaOIMBVhQ1Qjw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1736906919; x=1737511719;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=UXhIpNDEbd0ZMpBLGpbuzRpSvA60+0J9Yjrq1wUEDPI=;
+        b=HOQP5DEKKFcq9bLUG1xYal69QeQVm4GTq3ngAQxcr5YHsGnNekumtWgEJt4sp/4KHj
+         6GAegBJ3BU1t0uAnNikpaxLEzFRLUffjoyK+VpXobS/gI6ML802MdJI220w76c9g+lEb
+         plYg4uUlZsCzXLSrV4wTIMWm0DkFfU4zDy7U3EDNwiL5ALM8gaoQKiG9lbanBzjy9CVv
+         FbsZOTogiqWGe09K3s+9v5OeLSLXjig12WEC35zxYCfv8UdFV8lwzryXeAQ1sbcFqtZq
+         XGIWRl3Sno0bcOhhP2cu1ghXbr2ZUf81zhUUhqxEcJNdNNuylOapqCx8gs9wfwOeVngy
+         BZvQ==
+X-Gm-Message-State: AOJu0YzSz0vzZR7oUGwOjw8f0xwBhru4USEJwO3hL4f2TM8TxOYKwQtJ
+	qGyKm62+sVZBUaIjKM1gxSIMNGk9Z71CdEbdukwQAjVXsFGN2uS6v/7N6I81Vp6stdJmw4fJRgF
+	pRFhNSZz3x2vf/T8ljejSmf2WvKhZ7mzpLNOGUg==
+X-Gm-Gg: ASbGncspkSCv+jqIRno4NrI/yfMFb7ZWehvBGbJA4M6SZvu2JV9TugGfcmE4WRMyGih
+	0xgaSBpSbBXbTnxCbSph4oHBjAVHOT5hpkxFrkN20evhUN0hjohmJkzjGrPQDvkEMOQs2nw==
+X-Google-Smtp-Source: AGHT+IG0p9UvTY+iwibnSSaSscINos1z/bLRlxCx6D2tQ48QCFwlkk1UyZnFTNDuzy7MnDDfF7klzUs0Gm93AFHHfQs=
+X-Received: by 2002:a05:6402:3550:b0:5d9:8877:895a with SMTP id
+ 4fb4d7f45d1cf-5d988778a53mr22781925a12.17.1736906918311; Tue, 14 Jan 2025
+ 18:08:38 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR11MB8562:EE_|SJ0PR11MB6573:EE_
-X-MS-Office365-Filtering-Correlation-Id: 151a2e62-41ad-4483-0533-08dd34838586
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|1800799024|52116014|376014|38350700014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?yW2fAOm0HuZ4t+k6eg3HZUSWY1k19sO1C57jeYZUEbc44B/lzTvwJSVvx+NJ?=
- =?us-ascii?Q?Wula5ZqAyoSyBWxGFzRQ+ZEEF6lppIxTnX/+O1EULVY58WWmRvXeWE9m+rJs?=
- =?us-ascii?Q?OpdY1FLdcjs+zsawELADhT6znrLwj5oL/m99qvDh51sF7ucso0O48aVN/Dn2?=
- =?us-ascii?Q?lgWjZI+LnE/CNElsgbM0Xd6oCmoAxmx+PRefs/RBBXkb24rBgofwsoEUWmMO?=
- =?us-ascii?Q?eLEcFTYfIn/NFsbpYEE5xrY3y9s1fBRVReeyAIt+1wvGRKKS9fNaMjeEvdd4?=
- =?us-ascii?Q?0e3W08UrzFB/GAax4rRsfg492axgNCAIPqy67csim2fcU6uL59UpJNTQTiiv?=
- =?us-ascii?Q?g2/LKDiMg1Bvd8/ZxIQ3daR3MaOmQDlAIdYIFyFTsT/F/E4HQn+BToUFkQ4E?=
- =?us-ascii?Q?fT8hv30qIrHnDUZRAOG+uLpKZj2ZTqHty+LgCjIZoJT/E9ja2Dxt/LSDbFdX?=
- =?us-ascii?Q?FaO/aU29cvLN4Bz1PdwiUELx1qDlsC+7YqU2dDcjR8vLM+3STaTd3geMufVs?=
- =?us-ascii?Q?xQSxTCuVPZ7I5RGqaqHuOvHr7ayWuc+VpiTqeGf9KiZKlTNqqgfnEhT6kd+7?=
- =?us-ascii?Q?hEhyDEBTb9GIA4XZ8Ic7hjePzL03CY4QJzT4Nzbvub4aq0a560jeq7L1FAdn?=
- =?us-ascii?Q?+cRrCrH+016jci34+N2GNtmnkrnnLfwk4crh9INZcfSh19loaIdFukma37Dz?=
- =?us-ascii?Q?bkLvBjdnXkoLD7lKJpgA3+hBN8m678CUxvf04W6pVkby3H5QSWv3RKxB2gWW?=
- =?us-ascii?Q?GA5wteFv6Nadb4wHX9Myi6XxNcuFS4kvr9oJT4suaZc1jIG01ipv71jXLOSX?=
- =?us-ascii?Q?MozsMEyZVqv6bZ7cKFROPJQ1aFfKD1S18vGLAU3lo5QUqUoSsNkzdcW7uWq2?=
- =?us-ascii?Q?hzw14lhehnXXAtPZ/kL18kA0Ip9HeUh803nQCRPCOldU0veAuHghwkonOJFn?=
- =?us-ascii?Q?03fWyWAtw3QW2QGU16dmKQi1YWsLDrEjXccmQTxax/eR3S8KdtAtgoAZPe8H?=
- =?us-ascii?Q?j9z+h/Nd5fF7vJBCMxWM7rjMBtJ5pl/jv2mp2PaMbWAwzjvMaCKha4/o1aHJ?=
- =?us-ascii?Q?HJFjnvhqcvUAdKvnCXc3RrmDiT5K4tP0oe7ty32lPcN9zkpK7uIzJgtedKPX?=
- =?us-ascii?Q?WKN9QnylOtgnv315Nh86Qvog0I9oUOXYwWJXQJD0qDjcWHctInjHfwICv4+v?=
- =?us-ascii?Q?S6JzMqyj1vgPzW5cLas7Rd5tgqqdPAsLQdSP9hm87rooD+KtUnV5547QQqVJ?=
- =?us-ascii?Q?BNgIUhcZpl0/e4AREgjKJ2okRWcvEskDX83sxzUdAp69DRhqhmQGSSDiZ0yE?=
- =?us-ascii?Q?sg+waXRyX579jqqvlCz+mw7O8i3bPeBixMqugzJChzMQcWUig5vo6NK8JylI?=
- =?us-ascii?Q?lDT9kyZ2RoIjrijEaGCbj2QkFnRoXn3+c6TMF6k9wPAORK6YxA=3D=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR11MB8562.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(52116014)(376014)(38350700014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?pkbKIjN3Jjr3XIAFXVLoNqRiX7yrN6wVg6vHWQk7C787UZtCwzvCBtmBCNQa?=
- =?us-ascii?Q?TGBcbl6+yxNMmJt9u6LH7iSk8ZAwV1n9E7w/dAxDY//AAryI19qW54llMCHK?=
- =?us-ascii?Q?Xz+/ks5FADSrsRGFYjk4DugvjrQwRYPt4MH48EN+3hKzsQ1koRHCR9q7MAwA?=
- =?us-ascii?Q?z7B4C75M0QqCw26X8RnIwDJbY7XYKrO5tH16l3SXJVhoKKi2knFEJL59mZTM?=
- =?us-ascii?Q?I4tyTF5z+1kShtOLqWJDjucijrO3/u98XwMLizXaVro7wIPqNvH5PotkswMI?=
- =?us-ascii?Q?pcpOuSxQZrN1STNATPBxLM4wk8Vvve9gnhsFX6zMK9oHSKcOKCX4IyP3jYio?=
- =?us-ascii?Q?CTAYInU3Zw/OSfQ9LfTj1zep02odHGjfx29gkGr1knueLWc5CAlBgKLroNLz?=
- =?us-ascii?Q?xE91/DlXql3MqoawSzV67C5WDuYZG2sWMCL1ijnRasAFmNHAQpePziy491mJ?=
- =?us-ascii?Q?6UQDAQ8AEbGM1ZGi9zqEq0mOkbiztKRPRnGw5N7QfmUbcfkPur2+Wi77M74+?=
- =?us-ascii?Q?LrcLsj5C0p3W9KQ6RsgeRH5TqGxwGu8b1ESqpTyEWndl5OMpULDdCDpv3A4d?=
- =?us-ascii?Q?VeVrFptd0jR/GruCUa8KQlsblAbB2KsaJfekRyKmyloqZ7TxaN5JB2+R9d+L?=
- =?us-ascii?Q?GRwO2Ojx80wVMidvqZHvG5gAo+fXFdIQ99fcm38aWdbn6NycMaFDfiB4qdCC?=
- =?us-ascii?Q?ad7qgO96732QApWw7HyiBjrn6jE0LCWGieg6hSgFZQY+khOofwEwXHoJsbn7?=
- =?us-ascii?Q?VAvq6Te4VUG7AeQp7UVMZNu/5HVylYpCXbkp2y7wFuWF2g8urwfQfowdBzyY?=
- =?us-ascii?Q?FKaW+oAwVhbJwfVzekiMFlGOvCzxm5iTUT5DlYg27VCrVa7h5Jj669dx80Ba?=
- =?us-ascii?Q?6JJRhxA4EjhAzfBfUoddEZFU+fZvWdf0JqaLJIX3UT52pQa7IQoTvg7rCoJ3?=
- =?us-ascii?Q?huFJNushI5kj3m2yHMgNbckaR0vftANGp9l8kQedr+LnFDzoPgwBQRAkuWuO?=
- =?us-ascii?Q?X5FJhI+gxAhEI8Wx8mKd0CrKyn9DDLW+Rpvr9gJtl0taigQBzHG02eK35y5C?=
- =?us-ascii?Q?i18tvtJkB8J9zzYSlEmvOMnhItZ46bUIYdN/xyfsNVv3/xjb+yMGLvYlvEE5?=
- =?us-ascii?Q?qrLkfmTeF2VHy5SmeSP3EZD6JFgjobSaSE8dXCBmpAt/1TWnUzZxQDmn0Qi1?=
- =?us-ascii?Q?pY/hFW67d/dYsKe14EAWH2Z9XC5Rt7yYrfzP6AheZ61r9O/6qWvjjnO1Ruv0?=
- =?us-ascii?Q?/QSCF2omf9QFjMpMWcZCqIFMrarovQ36XjKG4XyRTaoUXr/XW2ciuKG/RCp3?=
- =?us-ascii?Q?R+CqREpdGLI+yRsngX9xnoPxGuXJ9+SWvDsKbKqt5T0jAPGN9ed+yCzhyLJc?=
- =?us-ascii?Q?qco10AmG//dxzpAzBWm9DX0RqkzrODosrXVfQThT8LRCoBp/T+5t38pPg5F1?=
- =?us-ascii?Q?WIiEyPS2Rc2DJ0B1GSn0PmWpEPuIm3QHUlYtvTENgumR0NBPeHKTdQjeHmoL?=
- =?us-ascii?Q?JcFzYEXSATJVK/cHfDzDxv6gzF9zG8l7gAMO9rfRxA6HOYfypRqv+QiMkfLw?=
- =?us-ascii?Q?eyfDbNUDZD+B8rcOLJ284Spv5BD8A8niPaG/paam1MJZR5IDnxdQuwDXeWEx?=
- =?us-ascii?Q?zQ=3D=3D?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 151a2e62-41ad-4483-0533-08dd34838586
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB8562.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2025 10:09:24.3622
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: z06eGSfCsmLE4xU8XK5Wxi/samHMJlNhZD/DLqt6atQL3zWGPEW5VAq+QTKHo0OI+iLwDY0alei9AUC8WKO9kmx6GXFd8/kmK2TVPvNOjig=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB6573
-X-Proofpoint-ORIG-GUID: tqctb07j9Ef0SBLrSi1-Z_obtwwTz5xr
-X-Authority-Analysis: v=2.4 cv=SeoNduRu c=1 sm=1 tr=0 ts=678637d6 cx=c_pps a=x8A/wAfU1CBlff9R7r/2ew==:117 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=VdSt8ZQiCzkA:10 a=bRTqI5nwn0kA:10 a=PYnjg3YJAAAA:8
- a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=64SeUrbXAAAA:8 a=pMEJznBF0z_DQNz8OsMA:9 a=FdTzh2GWekK77mhwV6Dw:22 a=HLuTerElwpHB00cmObDT:22
-X-Proofpoint-GUID: tqctb07j9Ef0SBLrSi1-Z_obtwwTz5xr
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-01-14_02,2025-01-13_02,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 clxscore=1015
- mlxlogscore=999 mlxscore=0 impostorscore=0 priorityscore=1501
- lowpriorityscore=0 bulkscore=0 malwarescore=0 phishscore=0 suspectscore=0
- adultscore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
- engine=8.21.0-2411120000 definitions=main-2501140084
+References: <20250114061146.3313761-1-peng.zhang1.cn@windriver.com>
+In-Reply-To: <20250114061146.3313761-1-peng.zhang1.cn@windriver.com>
+From: Vijay Anusuri <vanusuri@mvista.com>
+Date: Wed, 15 Jan 2025 07:38:26 +0530
+X-Gm-Features: AbW1kvZXs7MURknAchCDsW8z56NV411PuNyGegmZeVpmV68FCUnzNP1QyN22f5I
+Message-ID: <CANQUz1-zm5dyHjMBCHo4Wi11T6djscsHAGdQFUMTPLPe76yCzw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][scarthgap][PATCH] openjpeg: Upgrade v2.5.0 to v2.5.3
+To: peng.zhang1.cn@windriver.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000dfd47c062bb527c0"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 14 Jan 2025 10:09:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114877
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Jan 2025 02:08:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114879
 
-From: Zhang Peng <peng.zhang1.cn@windriver.com>
+--000000000000dfd47c062bb527c0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-CVE-2024-56827:
-A flaw was found in the OpenJPEG project. A heap buffer overflow
-condition may be triggered when certain options are specified while
-using the opj_decompress utility. This can lead to an application crash
-or other undefined behavior.
+Hi Zhang peng,
 
-Reference:
-[https://nvd.nist.gov/vuln/detail/CVE-2024-56827]
-[https://github.com/uclouvain/openjpeg/issues/1564]
+Already a patch has been submitted for the upgrade .
 
-Upstream patches:
-[https://github.com/uclouvain/openjpeg/commit/e492644fbded4c820ca55b5e50e598d346e850e8]
+https://lists.openembedded.org/g/openembedded-devel/message/114828
 
-Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
----
- ...rker-validate-that-current-tile-part.patch | 33 +++++++++++++++++++
- .../openjpeg/openjpeg_2.4.0.bb                |  1 +
- 2 files changed, 34 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/0001-opj_j2k_add_tlmarker-validate-that-current-tile-part.patch
+https://patchwork.yoctoproject.org/project/oe/patch/20250113100435.141849-1=
+-vanusuri@mvista.com/
 
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/0001-opj_j2k_add_tlmarker-validate-that-current-tile-part.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/0001-opj_j2k_add_tlmarker-validate-that-current-tile-part.patch
-new file mode 100644
-index 000000000..f959a65d9
---- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/0001-opj_j2k_add_tlmarker-validate-that-current-tile-part.patch
-@@ -0,0 +1,33 @@
-+From b343d72eb4c4b776b4925b441d18abf6a20b42a7 Mon Sep 17 00:00:00 2001
-+From: Even Rouault <even.rouault@spatialys.com>
-+Date: Mon, 25 Nov 2024 22:02:54 +0100
-+Subject: [PATCH] opj_j2k_add_tlmarker(): validate that current tile-part
-+ number if smaller that total number of tile-parts
-+
-+Fixes #1564
-+
-+CVE: CVE-2024-56827
-+Upstream-Status: Backport [https://github.com/uclouvain/openjpeg/commit/e492644fbded4c820ca55b5e50e598d346e850e8]
-+
-+Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
-+---
-+ src/lib/openjp2/j2k.c | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/lib/openjp2/j2k.c b/src/lib/openjp2/j2k.c
-+index 8e343ab2..08f771a5 100644
-+--- a/src/lib/openjp2/j2k.c
-++++ b/src/lib/openjp2/j2k.c
-+@@ -8227,7 +8227,8 @@ static OPJ_BOOL opj_j2k_add_tlmarker(OPJ_UINT32 tileno,
-+     if (type == J2K_MS_SOT) {
-+         OPJ_UINT32 l_current_tile_part = cstr_index->tile_index[tileno].current_tpsno;
-+ 
-+-        if (cstr_index->tile_index[tileno].tp_index) {
-++        if (cstr_index->tile_index[tileno].tp_index &&
-++                l_current_tile_part < cstr_index->tile_index[tileno].nb_tps) {
-+             cstr_index->tile_index[tileno].tp_index[l_current_tile_part].start_pos = pos;
-+         }
-+ 
-+-- 
-+2.39.4
-+
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb
-index 9c0fe0e30..871b324df 100644
---- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb
-@@ -13,6 +13,7 @@ SRC_URI = " \
-     file://CVE-2022-1122.patch \
-     file://CVE-2021-3575.patch \
-     file://0001-sycc422_to_rgb-fix-out-of-bounds-read-accesses-when-.patch \
-+    file://0001-opj_j2k_add_tlmarker-validate-that-current-tile-part.patch \
- "
- SRCREV = "37ac30ceff6640bbab502388c5e0fa0bff23f505"
- S = "${WORKDIR}/git"
--- 
-2.34.1
+Thanks & Regards,
 
+Vijay
+
+
+
+
+
+On Tue, Jan 14, 2025 at 11:42=E2=80=AFAM Zhang, Peng (Paul) (CN) via
+lists.openembedded.org <peng.zhang1.cn=3Dwindriver.com@lists.openembedded.o=
+rg>
+wrote:
+
+> From: Zhang Peng <peng.zhang1.cn@windriver.com>
+>
+> This upgrade includes fix for CVE-2024-56826 and CVE-2024-56827.
+>
+> Changlog:
+> https://github.com/uclouvain/openjpeg/blob/v2.5.3/NEWS.md
+>
+> * Refresh  0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patc=
+h
+>
+> Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
+> ---
+>  ...t-ask-cmake-to-export-binaries-they-don-t-make-.patch} | 8 ++++----
+>  .../openjpeg/{openjpeg_2.5.0.bb =3D> openjpeg_2.5.3.bb}     | 4 ++--
+>  2 files changed, 6 insertions(+), 6 deletions(-)
+>  rename
+> meta-oe/recipes-graphics/openjpeg/openjpeg/{0002-Do-not-ask-cmake-to-expo=
+rt-binaries-they-don-t-make-.patch
+> =3D> 0001-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch} (82=
+%)
+>  rename meta-oe/recipes-graphics/openjpeg/{openjpeg_2.5.0.bb =3D>
+> openjpeg_2.5.3.bb} (82%)
+>
+> diff --git
+> a/meta-oe/recipes-graphics/openjpeg/openjpeg/0002-Do-not-ask-cmake-to-exp=
+ort-binaries-they-don-t-make-.patch
+> b/meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Do-not-ask-cmake-to-exp=
+ort-binaries-they-don-t-make-.patch
+> similarity index 82%
+> rename from
+> meta-oe/recipes-graphics/openjpeg/openjpeg/0002-Do-not-ask-cmake-to-expor=
+t-binaries-they-don-t-make-.patch
+> rename to
+> meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Do-not-ask-cmake-to-expor=
+t-binaries-they-don-t-make-.patch
+> index 0ba13cf88..47e4aebb4 100644
+> ---
+> a/meta-oe/recipes-graphics/openjpeg/openjpeg/0002-Do-not-ask-cmake-to-exp=
+ort-binaries-they-don-t-make-.patch
+> +++
+> b/meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Do-not-ask-cmake-to-exp=
+ort-binaries-they-don-t-make-.patch
+> @@ -1,4 +1,4 @@
+> -From 4681de07e21f17aa28710d3a51fabe7da60463f9 Mon Sep 17 00:00:00 2001
+> +From 805ce4d40c5aaae12aa73452ff07babe8eb43a62 Mon Sep 17 00:00:00 2001
+>  From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
+om>
+>  Date: Fri, 28 Sep 2018 00:38:50 +0200
+>  Subject: [PATCH] Do not ask cmake to export binaries - they don't make i=
+t
+> @@ -15,7 +15,7 @@ Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail=
+.com>
+>   1 file changed, 1 deletion(-)
+>
+>  diff --git a/src/bin/jp2/CMakeLists.txt b/src/bin/jp2/CMakeLists.txt
+> -index 4324c36d..2c11fe02 100644
+> +index 26156bcb..9eff04aa 100644
+>  --- a/src/bin/jp2/CMakeLists.txt
+>  +++ b/src/bin/jp2/CMakeLists.txt
+>  @@ -66,7 +66,6 @@ foreach(exe opj_decompress opj_compress opj_dump)
+> @@ -23,9 +23,9 @@ index 4324c36d..2c11fe02 100644
+>     # Install exe
+>     install(TARGETS ${exe}
+>  -    EXPORT OpenJPEGTargets
+> -     DESTINATION ${OPENJPEG_INSTALL_BIN_DIR} COMPONENT Applications
+> +     DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT Applications
+>     )
+>     if(OPJ_USE_DSYMUTIL)
+>  --
+> -2.14.4
+> +2.25.1
+>
+> diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.0.bb
+> b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.3.bb
+> similarity index 82%
+> rename from meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.0.bb
+> rename to meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.3.bb
+> index f2d74078e..231bf8457 100644
+> --- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.0.bb
+> +++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.3.bb
+> @@ -6,9 +6,9 @@ LIC_FILES_CHKSUM =3D
+> "file://LICENSE;md5=3Dc648878b4840d7babaade1303e7f108c"
+>  DEPENDS =3D "libpng tiff lcms zlib"
+>
+>  SRC_URI =3D "git://
+> github.com/uclouvain/openjpeg.git;branch=3Dmaster;protocol=3Dhttps \
+> -
+>  file://0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
+> +
+>  file://0001-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
+>             "
+> -SRCREV =3D "a5891555eb49ed7cc26b2901ea680acda136d811"
+> +SRCREV =3D "210a8a5690d0da66f02d49420d7176a21ef409dc"
+>  S =3D "${WORKDIR}/git"
+>
+>  inherit cmake
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#114845):
+> https://lists.openembedded.org/g/openembedded-devel/message/114845
+> Mute This Topic: https://lists.openembedded.org/mt/110603420/7301997
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> vanusuri@mvista.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--000000000000dfd47c062bb527c0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hi Zhang peng,<br><br></div>Already a patch has been =
+submitted for the upgrade .<br><br><pre class=3D"gmail-bz_comment_text" id=
+=3D"gmail-comment_text_3"><a href=3D"https://lists.openembedded.org/g/opene=
+mbedded-devel/message/114828">https://lists.openembedded.org/g/openembedded=
+-devel/message/114828</a><br><br><a href=3D"https://patchwork.yoctoproject.=
+org/project/oe/patch/20250113100435.141849-1-vanusuri@mvista.com/">https://=
+patchwork.yoctoproject.org/project/oe/patch/20250113100435.141849-1-vanusur=
+i@mvista.com/</a><br><br></pre><pre class=3D"gmail-bz_comment_text" id=3D"g=
+mail-comment_text_3"><font face=3D"arial,sans-serif">Thanks &amp; Regards,<=
+br></font></pre><pre class=3D"gmail-bz_comment_text" id=3D"gmail-comment_te=
+xt_3"><font face=3D"arial,sans-serif">Vijay<br></font></pre><br><br><br></d=
+iv><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" cl=
+ass=3D"gmail_attr">On Tue, Jan 14, 2025 at 11:42=E2=80=AFAM Zhang, Peng (Pa=
+ul) (CN) via <a href=3D"http://lists.openembedded.org">lists.openembedded.o=
+rg</a> &lt;<a href=3D"http://peng.zhang1.cn">peng.zhang1.cn</a>=3D<a href=
+=3D"mailto:windriver.com@lists.openembedded.org">windriver.com@lists.openem=
+bedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">From: Zhang Peng &lt;<a href=3D"mailto:peng.zhang1.cn@windriver.=
+com" target=3D"_blank">peng.zhang1.cn@windriver.com</a>&gt;<br>
+<br>
+This upgrade includes fix for CVE-2024-56826 and CVE-2024-56827.<br>
+<br>
+Changlog:<br>
+<a href=3D"https://github.com/uclouvain/openjpeg/blob/v2.5.3/NEWS.md" rel=
+=3D"noreferrer" target=3D"_blank">https://github.com/uclouvain/openjpeg/blo=
+b/v2.5.3/NEWS.md</a><br>
+<br>
+* Refresh=C2=A0 0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.p=
+atch<br>
+<br>
+Signed-off-by: Zhang Peng &lt;<a href=3D"mailto:peng.zhang1.cn@windriver.co=
+m" target=3D"_blank">peng.zhang1.cn@windriver.com</a>&gt;<br>
+---<br>
+=C2=A0...t-ask-cmake-to-export-binaries-they-don-t-make-.patch} | 8 ++++---=
+-<br>
+=C2=A0.../openjpeg/{<a href=3D"http://openjpeg_2.5.0.bb" rel=3D"noreferrer"=
+ target=3D"_blank">openjpeg_2.5.0.bb</a> =3D&gt; <a href=3D"http://openjpeg=
+_2.5.3.bb" rel=3D"noreferrer" target=3D"_blank">openjpeg_2.5.3.bb</a>}=C2=
+=A0 =C2=A0 =C2=A0| 4 ++--<br>
+=C2=A02 files changed, 6 insertions(+), 6 deletions(-)<br>
+=C2=A0rename meta-oe/recipes-graphics/openjpeg/openjpeg/{0002-Do-not-ask-cm=
+ake-to-export-binaries-they-don-t-make-.patch =3D&gt; 0001-Do-not-ask-cmake=
+-to-export-binaries-they-don-t-make-.patch} (82%)<br>
+=C2=A0rename meta-oe/recipes-graphics/openjpeg/{<a href=3D"http://openjpeg_=
+2.5.0.bb" rel=3D"noreferrer" target=3D"_blank">openjpeg_2.5.0.bb</a> =3D&gt=
+; <a href=3D"http://openjpeg_2.5.3.bb" rel=3D"noreferrer" target=3D"_blank"=
+>openjpeg_2.5.3.bb</a>} (82%)<br>
+<br>
+diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/0002-Do-not-ask-cma=
+ke-to-export-binaries-they-don-t-make-.patch b/meta-oe/recipes-graphics/ope=
+njpeg/openjpeg/0001-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.pa=
+tch<br>
+similarity index 82%<br>
+rename from meta-oe/recipes-graphics/openjpeg/openjpeg/0002-Do-not-ask-cmak=
+e-to-export-binaries-they-don-t-make-.patch<br>
+rename to meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Do-not-ask-cmake-=
+to-export-binaries-they-don-t-make-.patch<br>
+index 0ba13cf88..47e4aebb4 100644<br>
+--- a/meta-oe/recipes-graphics/openjpeg/openjpeg/0002-Do-not-ask-cmake-to-e=
+xport-binaries-they-don-t-make-.patch<br>
++++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Do-not-ask-cmake-to-e=
+xport-binaries-they-don-t-make-.patch<br>
+@@ -1,4 +1,4 @@<br>
+-From 4681de07e21f17aa28710d3a51fabe7da60463f9 Mon Sep 17 00:00:00 2001<br>
++From 805ce4d40c5aaae12aa73452ff07babe8eb43a62 Mon Sep 17 00:00:00 2001<br>
+=C2=A0From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D &lt;<a href=3D"mail=
+to:schnitzeltony@gmail.com" target=3D"_blank">schnitzeltony@gmail.com</a>&g=
+t;<br>
+=C2=A0Date: Fri, 28 Sep 2018 00:38:50 +0200<br>
+=C2=A0Subject: [PATCH] Do not ask cmake to export binaries - they don&#39;t=
+ make it<br>
+@@ -15,7 +15,7 @@ Signed-off-by: Andreas M=C3=BCller &lt;<a href=3D"mailto:=
+schnitzeltony@gmail.com" target=3D"_blank">schnitzeltony@gmail.com</a>&gt;<=
+br>
+=C2=A0 1 file changed, 1 deletion(-)<br>
+<br>
+=C2=A0diff --git a/src/bin/jp2/CMakeLists.txt b/src/bin/jp2/CMakeLists.txt<=
+br>
+-index 4324c36d..2c11fe02 100644<br>
++index 26156bcb..9eff04aa 100644<br>
+=C2=A0--- a/src/bin/jp2/CMakeLists.txt<br>
+=C2=A0+++ b/src/bin/jp2/CMakeLists.txt<br>
+=C2=A0@@ -66,7 +66,6 @@ foreach(exe opj_decompress opj_compress opj_dump)<b=
+r>
+@@ -23,9 +23,9 @@ index 4324c36d..2c11fe02 100644<br>
+=C2=A0 =C2=A0 # Install exe<br>
+=C2=A0 =C2=A0 install(TARGETS ${exe}<br>
+=C2=A0-=C2=A0 =C2=A0 EXPORT OpenJPEGTargets<br>
+-=C2=A0 =C2=A0 =C2=A0DESTINATION ${OPENJPEG_INSTALL_BIN_DIR} COMPONENT Appl=
+ications<br>
++=C2=A0 =C2=A0 =C2=A0DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT Applicat=
+ions<br>
+=C2=A0 =C2=A0 )<br>
+=C2=A0 =C2=A0 if(OPJ_USE_DSYMUTIL)<br>
+=C2=A0-- <br>
+-2.14.4<br>
++2.25.1<br>
+<br>
+diff --git a/meta-oe/recipes-graphics/openjpeg/<a href=3D"http://openjpeg_2=
+.5.0.bb" rel=3D"noreferrer" target=3D"_blank">openjpeg_2.5.0.bb</a> b/meta-=
+oe/recipes-graphics/openjpeg/<a href=3D"http://openjpeg_2.5.3.bb" rel=3D"no=
+referrer" target=3D"_blank">openjpeg_2.5.3.bb</a><br>
+similarity index 82%<br>
+rename from meta-oe/recipes-graphics/openjpeg/<a href=3D"http://openjpeg_2.=
+5.0.bb" rel=3D"noreferrer" target=3D"_blank">openjpeg_2.5.0.bb</a><br>
+rename to meta-oe/recipes-graphics/openjpeg/<a href=3D"http://openjpeg_2.5.=
+3.bb" rel=3D"noreferrer" target=3D"_blank">openjpeg_2.5.3.bb</a><br>
+index f2d74078e..231bf8457 100644<br>
+--- a/meta-oe/recipes-graphics/openjpeg/<a href=3D"http://openjpeg_2.5.0.bb=
+" rel=3D"noreferrer" target=3D"_blank">openjpeg_2.5.0.bb</a><br>
++++ b/meta-oe/recipes-graphics/openjpeg/<a href=3D"http://openjpeg_2.5.3.bb=
+" rel=3D"noreferrer" target=3D"_blank">openjpeg_2.5.3.bb</a><br>
+@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Dc648878b484=
+0d7babaade1303e7f108c&quot;<br>
+=C2=A0DEPENDS =3D &quot;libpng tiff lcms zlib&quot;<br>
+<br>
+=C2=A0SRC_URI =3D &quot;git://<a href=3D"http://github.com/uclouvain/openjp=
+eg.git;branch=3Dmaster;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blan=
+k">github.com/uclouvain/openjpeg.git;branch=3Dmaster;protocol=3Dhttps</a> \=
+<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0002-Do-not-ask-cmake-to-e=
+xport-binaries-they-don-t-make-.patch \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-Do-not-ask-cmake-to-e=
+xport-binaries-they-don-t-make-.patch \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
+-SRCREV =3D &quot;a5891555eb49ed7cc26b2901ea680acda136d811&quot;<br>
++SRCREV =3D &quot;210a8a5690d0da66f02d49420d7176a21ef409dc&quot;<br>
+=C2=A0S =3D &quot;${WORKDIR}/git&quot;<br>
+<br>
+=C2=A0inherit cmake<br>
+-- <br>
+2.34.1<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#114845): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/114845" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/114845</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/110603420/730=
+1997" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/110603420/7301997</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:vanusuri@mvista.com" tar=
+get=3D"_blank">vanusuri@mvista.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+
+--000000000000dfd47c062bb527c0--
 
