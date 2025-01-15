@@ -2,28 +2,28 @@ Return-Path: <peng.zhang1.cn@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 04ADDC02187
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B811C02183
 	for <webhook@archiver.kernel.org>; Wed, 15 Jan 2025 07:24:47 +0000 (UTC)
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.15861.1736925886102494084
+ by mx.groups.io with SMTP id smtpd.web11.15860.1736925885279071292
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Jan 2025 23:24:46 -0800
+ Tue, 14 Jan 2025 23:24:45 -0800
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3110a90dd8=peng.zhang1.cn@windriver.com)
 Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50F5fnon004599
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50F5fnom004599
 	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Jan 2025 23:24:45 -0800
 Received: from nam12-bn8-obe.outbound.protection.outlook.com (mail-bn8nam12lp2170.outbound.protection.outlook.com [104.47.55.170])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 443s1pkjj0-4
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 443s1pkjj0-3
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Jan 2025 23:24:45 -0800 (PST)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Jan 2025 23:24:44 -0800 (PST)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lFYfktUVB2oT5kejuFAOmZuLLW7xz0hvnm8nDABLvleTjtrwplq3RJPAqgRvzJxzr0ehWKe+G4a9I0VYvluHvLOJStTum8MJGAxhW4/nSwvcRpcJ3YiqC8YmfHHvdxrqBliLPah0eLBMAwoOj35mCScb1AVHYCGlTBQdnN79bUe/G5aKrtpYOTqxlcHVwpUjy7dY030hJw0Yb23Yc9YaEkIS1gXXTFDy05C9fr+gw8icRvJTpbMlqGRYne+0c/Vb096u33ydVMTZ1fjKcjVJ7DSFcU9fGGJsxRoKanjnBrfk+pQNm3jwGkhSL+PcAxTX66iYUmBP9vCAacwxb0o28w==
+ b=lIDxaASKvPioALwztmh8P/wYmt18NvG/IKd+jJvdvwoNHS3YrfKugdfL5RqXb2nsmLS6I7R1M5aDD0TntJqbJ4zWxj0Kc1mMiXZepo3oCX8lAr3+In1a1rZOwEm91K6yai0quC4NVjTN8I1D3VZc2pb1hbjMk00d4H/4qkMqa69sJlvbMKsa+Y3gFh95zy6wU3z3e1LNsoa/aF6EpiFCoFYgEnX2c4E2zbLBCGNQ+UupsRQ/DaxQpLwheA5UdMGocILDf15ZQriH+MtAo9q5P2S2FbB02aiELYm0IONTNsM2eFO5fkou4CWHl4hCVRVaW/D7LvYKNNAfUkok6r3UZg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=H6WWbRp9CFG2M7Lk6DEEIfjYvrwQ+k15OkqaJZCYfCc=;
- b=d28Xgz4DkWtUcBBQuu8qArUGynrl//E2qD/LDS2uEhR2pWrnOiKFz2EvyJ/Uf3g/balZjc1lEOaEVsVyJ6l44VuNSU707TDNmj0ITt9ejgGr7B+++OpfYpBUF9Qb1FybOGNIxGHLP2rvAnE5wW1h+pxQQlRrxtfBmQuV/4UUWsT3toO92R0zR0Qr3OFr8oBVWhDDr5NNjVDtTMFF75y1T893U9pAIsPNO6EqI11V5nyonfa1AFcfSR6JTQSqmsdkXjuS9uDaxBUIsekQC/U3RqJVR+jiwNLsskcL1ksvzE5b6v4OQ1KeOtGbtJknnVR3FWeDecedEMlc7ZVbDeUklw==
+ bh=b3ReJpwNiwdpvzzFwTl9AgjEckmPe7+sFK/4itGYSAM=;
+ b=YmLxyTd+0/NosXb4XIQe9ydb0rgV0EKeYe/dOpi9ZOjxjHA/WEyL9TQcmZV8KP2Odfvyw0aNilJA1Wkdw8O9gaVPeLLqKQjv4iZl66ZsT6eamf9L9GLhHAmaEcxcvCSR1roV4Qarhr/R16tboDaDg81Es78ohjO0V/AxlphCuaeowDRYr6Z9pMsWXlCu6MPod8WEdHOLPDRvDxOcGoqngx8r+gfNpd4BV4htGx5D2kRdZgJhACSThgtH4UewyxD+kiNCX6wIcL4XL465ivQVeKC8B589vVE2H0l/ji2JizqlTLgn2I7o86SDPo1g4iD0KP/dhiVe48vgAgr9yraIvA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -31,16 +31,16 @@ Received: from CH3PR11MB8562.namprd11.prod.outlook.com (2603:10b6:610:1b8::13)
  by SA3PR11MB8046.namprd11.prod.outlook.com (2603:10b6:806:2fb::22) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.18; Wed, 15 Jan
- 2025 07:24:44 +0000
+ 2025 07:24:42 +0000
 Received: from CH3PR11MB8562.namprd11.prod.outlook.com
  ([fe80::24c6:f8fc:1afe:179f]) by CH3PR11MB8562.namprd11.prod.outlook.com
  ([fe80::24c6:f8fc:1afe:179f%7]) with mapi id 15.20.8356.010; Wed, 15 Jan 2025
- 07:24:44 +0000
+ 07:24:42 +0000
 From: peng.zhang1.cn@windriver.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 4/8] opensc: fix CVE-2024-45616
-Date: Wed, 15 Jan 2025 15:24:24 +0800
-Message-Id: <20250115072428.3667416-4-peng.zhang1.cn@windriver.com>
+Subject: [meta-oe][kirkstone][PATCH 3/8] opensc: fix CVE-2024-45615
+Date: Wed, 15 Jan 2025 15:24:23 +0800
+Message-Id: <20250115072428.3667416-3-peng.zhang1.cn@windriver.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250115072428.3667416-1-peng.zhang1.cn@windriver.com>
 References: <20250115072428.3667416-1-peng.zhang1.cn@windriver.com>
@@ -52,83 +52,83 @@ X-ClientProxiedBy: SG2PR02CA0112.apcprd02.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: CH3PR11MB8562:EE_|SA3PR11MB8046:EE_
-X-MS-Office365-Filtering-Correlation-Id: 658c65dd-5c27-41e9-02c8-08dd3535aea6
+X-MS-Office365-Filtering-Correlation-Id: 331a3543-719e-417c-3a8d-08dd3535adba
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
 	BCL:0;ARA:13230040|52116014|366016|1800799024|376014|38350700014;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?JG28pJ4rzhRUjF5ZtJVJITueyW5JGyh6RQO89vYnbTsFa0O4GK6T3I61xj6p?=
- =?us-ascii?Q?GwwjANjSZCJbYJqRK0dN5KiCC5Cm1blbMiEKoXMvH9bK8M/A8lgfYOjXHuBJ?=
- =?us-ascii?Q?a+ZIcwYC8p7xnKvaJvTMnLKmqkSVydrvyrtL03sLOs78auURayViluu/Weu/?=
- =?us-ascii?Q?ckUWt/XWKt8tJwUrTZJunC3TOoxtjLjyLICiJ6HRUr+GAB5SUZF5qD98EDuh?=
- =?us-ascii?Q?AGfwuM46AQCC7AguYe3S+Gl1Al+ANT89b1HLPkyo+H1zvsiX0TQ1EjDw6qCQ?=
- =?us-ascii?Q?yXHNWK6FLH2A+yVYxclZkL4tNLqXmvrFoCtog/9nZpAkMX1qrNmEbPQiRUcR?=
- =?us-ascii?Q?3zqBQGF+JN+iw9GHMzrsdHjYEW+SeDhPCjPibm7Wydnh08ydXKkLBWmTUoBt?=
- =?us-ascii?Q?8vypho7W+KPg6lINFwX48pv6X/k5sKOJsTqmsWnGtKRCS6F82cCp+H1C9Xqh?=
- =?us-ascii?Q?oxGGRNJX2sBa8KmSjYohHH/rVQed3OvaA/VhOgfIEQ5nsMSP2Xc8hRe6FdWl?=
- =?us-ascii?Q?A2aIi4mOCfs6yJFMEvT1k3seTQThe7nnilBQ2hz28sl0WdG8MrxGY+NKBkpx?=
- =?us-ascii?Q?t724wAvjgFJqoNJN8j7O5MGWTJ/1AQpmtlNizJCbkXNmLCLkaa247QWTvAxI?=
- =?us-ascii?Q?4U4iwdW98Qy0gcupsF5LMGuneVNtiaZUNBVtbCdbK+95/qcfc8/nfdaD5+Fd?=
- =?us-ascii?Q?l5JWUy9N0R+hNN7NASOVqNWWvdxirXgEO7vqyGpu+BB7wbh2EeFV++CZWaLF?=
- =?us-ascii?Q?IfMd2oSJkKEAi1yNDVgBTIUC9sG6JF6i75etGkLC/YndfKkcUeOd0z0IdH4K?=
- =?us-ascii?Q?eSUtGsRM2CYi4RYL5Zvhd7O6qINTeXMCgchgpJtbZH6cs2qD4wOIXS1N2WS1?=
- =?us-ascii?Q?hLi/f/JM2A5KtEUFXJsCwCRm7iGUAtAdrtzAok6yQNDv4ifoLxCNjzsFt0eA?=
- =?us-ascii?Q?NkIsOkk1XwznP+M9Lj9rn0lyntR3zFiqHRk4Dp5JhDEk79h+fGv97ChZoqEY?=
- =?us-ascii?Q?c5fi/nAJpPyiX5A0s6b06rgBsW5DNjsPk0gQ47ntBEbffPHsyjDoj1Ql1FnB?=
- =?us-ascii?Q?VWeykVKUnKWIqq0X47/nbLz+Z+iAl0sJVWryE9NFROVtUFbX4WxmsBBwbO3C?=
- =?us-ascii?Q?UW7nI823Psf/XYUg+2dV/E3pwvIp5791+Gi0EGqBZroTBPvqeZv6SD1OGyd0?=
- =?us-ascii?Q?ae78Zr/L9lD2PhVAhJT+z0Ax87Hup/fFwGKxqqQ+LBBvZQl7x0ldVwNzomrE?=
- =?us-ascii?Q?ukbPjdxTotgllgBZI2t+zf5L2HcUFXt43i5FL3fHgZkwcN4PA/TLds4JI8fg?=
- =?us-ascii?Q?yRGRaHlrViljOm5HCzIK+xkVe2pwKCjRnV2IKpjv3JYMVQjZHdE6y02DN+ZO?=
- =?us-ascii?Q?ZPP33oyuxCi5ao0alOAA6kDar6W2Pw4C4hAOIrdnSR5AQ0vWYQ=3D=3D?=
+	=?us-ascii?Q?/hnZmBEr79f06Q5lWdic0ULUSuHtT6kec0M7GqxfxfYlLvEsp8PBtqoiKr0T?=
+ =?us-ascii?Q?bTgZvGk72ZuBUao6tkiTgZSpZIjJnl8hHfmCi7NEPs0dGkBzRQRRimhpQvyy?=
+ =?us-ascii?Q?ETmuvLlASsP/vUdP+5eJrFINRhyqOv+UjsH2Rx8FekaVjEsatnw0xYg8Cuvh?=
+ =?us-ascii?Q?VBVBs6gFlzZM+0e3V1dQOdTJr5/XQS4HQBtuc32GeNF18ZBEkSbqLZRF928Y?=
+ =?us-ascii?Q?t3yGUWjhHMmoH2IYNvqTQKV3tBp7yrIkLF+OaNfs+Vbydbz4eAPdomZbAX9B?=
+ =?us-ascii?Q?+BpusuyfN4+h9eMukT3aChehHYp+Z5s7Ru8i4KpdwEKL/kcKHu4PbDHgc8Hh?=
+ =?us-ascii?Q?uyScmMlFl/d5mnRwvq7xkuXoEziR1praY0ELyZgNntsH4U3CJ6vGX5EKy6HQ?=
+ =?us-ascii?Q?I6yjxK8VjAZdfUNYmQufy8xuMpuYjKDEGpTLaEnXYz5Y1Uoi/jQdMCI432LA?=
+ =?us-ascii?Q?dRQ8Chi9OzocXofv5feeGEoJyryPEWZfP3G3I5Y7gXy3lmhEJSTGGjIDt/Lv?=
+ =?us-ascii?Q?2giboXjsSRbCMzTO6sB0Xk8peJ5cwbAMLwSYFjPYVVxV9JckuVWd2NPc8pJM?=
+ =?us-ascii?Q?7yM2yoHA0CfZDR17SSCCyroko5kze92rq+Ab+C59IrWmq2wESOljL8OUN2vU?=
+ =?us-ascii?Q?PnvjWOhtVnijBUZUqksGdt8RlN6xuUqcPMHbQy0OgOAv8EyRnsxd1r6rlx0H?=
+ =?us-ascii?Q?PH+7dtEWdiZLZE1/TI8p1ud0+UgfkTPhpBpX1pVmQovOm7edJFcqKwvMEqVD?=
+ =?us-ascii?Q?9N5dVpyoKPOY+PUlYAdr//cCFO0mhLdYYVbDyKpqVvjuHk1JafdnMNSSCRJv?=
+ =?us-ascii?Q?gfwdp99WRWLeTCRT+xdP61ycyzWvK/jzVYZZnDu8iOsXhvYriPysvUBaPdLS?=
+ =?us-ascii?Q?1pQ6zowatjqyU+3RKnUd1K4QDs6ZzE3bxgghK2rH9R+1j1tfJECmU2pKQv+5?=
+ =?us-ascii?Q?GYc/1tz3iwT8v0V4y00tE8P+bLLzc9VcAabePyno00oDrNewBXInmEmifdnk?=
+ =?us-ascii?Q?xpFsZ9+CiBFDuQoL0K4GZEN71e1+8rxBKQ/dj1EB5MYhmVm2E3aGGJn1YYHH?=
+ =?us-ascii?Q?NWfJJVk6pjo2aO2C43h3Nc1FT7QmHoNAbYNWSz8lhKhcTdZWM+hbFIcmxGfm?=
+ =?us-ascii?Q?1tvHeLp6L6GPoV1Nmzd0oXVMTAIsDVSylf5xaC/+8+wKMg9fB2ryuahaMuF7?=
+ =?us-ascii?Q?u2rtQD2yap+ep18ETxNdXvK59yQAt4TsUya/0D5Lriz12es6FLTHS8RTgIrj?=
+ =?us-ascii?Q?bJMYesgma8uKuHwhliVKhPIUnI/SASuH7fNOPuSDjwLL6ndNsbuTpEMehcqi?=
+ =?us-ascii?Q?nyy3d7hhjwaJ5tIlo+yYd5VWxn4tAU1a7GrAweY2jqT5YwDvz3LEMw/I6mGr?=
+ =?us-ascii?Q?Utzu4HAw7F2N3It7qqsBRfODxR/dvQhE4oHNU3VfyyWMVW7VaQ=3D=3D?=
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR11MB8562.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(52116014)(366016)(1800799024)(376014)(38350700014);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?oh8rAfwUBKuBeYfM2TE5EdM4fUF0HbkOoSdpKcVmoNNrXIh++TmZXAurLjUH?=
- =?us-ascii?Q?h2EglWhTJK5ppbD8YwZJuoZOC+MdFcZOdd/Iw7JCtgJaYRUpwUU4H8Vb6r2c?=
- =?us-ascii?Q?L1Alkbl7e600kSj+eNkEspJvLmVnZySBo7bX+YSnN4oQoNU36LtCvVg/Jm+z?=
- =?us-ascii?Q?RNcS8xi2tyUsI7L6HPdGhA83cxO9B8FIYErNkTWihLCjCAy6RdYy4KLxmnql?=
- =?us-ascii?Q?BNJGw7uqfVhsNHvJ2BKM2kI4t1zkePWI4RMUpDRYCAWhEh/XWjMtcL2lopDZ?=
- =?us-ascii?Q?tQ8Qaeha9x0OZpTmwq+0eZXWbW/rE92Y+oUc5T7ClNPs1qTqkWYyUdRJBj6J?=
- =?us-ascii?Q?CIWMkD7dx1vevXblnvw99adwnF8opTn6GpEY0bi0sQljhNsIu8NIAGPU5GVM?=
- =?us-ascii?Q?ZT7Zr3uALBF3miBVEhO6nJjfVHa37x3KdqSnbdJlmr6lhbgj/rMS2LkEZFNs?=
- =?us-ascii?Q?p/uAQAz6sSSqfsJFClXPnh2ZurPAOWwjHRNE7+lCpJ+EzvvAetnku7sttgj4?=
- =?us-ascii?Q?v7Zf1fk7IJcdXbHyb5xYPs/cdYtqkyMqFFxoq7qIoyFd6e60nLX+37VfZ/VM?=
- =?us-ascii?Q?lb7QOmPcCdvQ7bEb8SNKA3gHHGkMIpti3qoNuCs/u7Ii0XzWTkoaWP2sbuhk?=
- =?us-ascii?Q?FALokfFqQIHgHqGQRT53hwFUAmoPjHDXmDk4SEcV8mmZ/8F6jkLnrBjdpjSI?=
- =?us-ascii?Q?TWW4nZK+7/ed8CSfqMgRBRI7IIhJJJkWV8Glp0d+E89ax9PkQ5G51oQnL7r8?=
- =?us-ascii?Q?5WUhpN2OyC8GUqeQTyqPWZjGaD09VL9k7nBaSkEV/GnRFtqd0RNe9DHz0zp1?=
- =?us-ascii?Q?eXA3lU/v6DcI94yBiLEmdBDFebfYMXKMeAlM1ZL26THk/L9kZikiBaIM1hxc?=
- =?us-ascii?Q?Ny08tabmV77dVZ5UwarxRsAyqUQsW0mpJPQptcFuHOX0Eyu1S2gWBlnQ7qxE?=
- =?us-ascii?Q?JZsiLrhEMYPI1I4WOLB8j9qaP1y+Po94TDFUWidBQO4vdaHAoddSm7tvNn/T?=
- =?us-ascii?Q?xuSaTWVSBhNhokMESb3/nFboYVhkXYAH8n3nT9u6ug9FqMFa1Ef1xhJm0q61?=
- =?us-ascii?Q?O5JFZV0825MIC2s1D2L+bp+wqIclnVu97JwSWdzkFwAb2i1/A164ZyNL4++W?=
- =?us-ascii?Q?7dpiBlVzX7Bmfd3/qVIdcu7/0yGJnWyO0OZTJknFjzK1tgeaaxGhhFKgQ8Fp?=
- =?us-ascii?Q?ftfsz9GS3dH72qXwQmYs/tczgDal7G5+PE0zNMmeHk17pVs4M+TGEq5fJ5EH?=
- =?us-ascii?Q?hos4EH/xih63cZvJ2PmoZkg0U3QjrtmRnNN3u7n81xJcwS895YGpMOkN1cu2?=
- =?us-ascii?Q?dAIVQnkFJbD1l7YHL5DldYjMv/rs5ANqkG9GTS33MNTJIng4NsUiRQAR79I6?=
- =?us-ascii?Q?mxZeS8nrbpEiYRR8oXyAJVhxPnuR9UcLUopYKazgFhyS/68w2d4wjOTBQpTg?=
- =?us-ascii?Q?dGJchEq0/1n+lM/XZgesnFfFpdCE1MHy9bRCA7Xw1s0Ky/HeRnyuJ4BMRQJV?=
- =?us-ascii?Q?eDOiMqyB81B9cX4Btpicrm36Mgu/gbUnMWQnjZjWL9QSOVKnagVkPgfPLqjw?=
- =?us-ascii?Q?ATE8iVVa3rzb97BY5uJnBGlVBeXkK0xE8K213+rOPU/i/pbBihpyVdYEEs/g?=
- =?us-ascii?Q?3w=3D=3D?=
+	=?us-ascii?Q?PupQ86JzewwoZeCTbZI2VgarSa9PKhP/V5uO6Nne2JPC3POewaTjyofeTgy6?=
+ =?us-ascii?Q?3GnDBjQ0mzQ5HBcksgclUo2sTOeYKo66J3Jq8UTLIEZdc6d7uVayW0jvONI0?=
+ =?us-ascii?Q?jNsvAZm1W67L+aZWty0+TFhn6M0Qd8kDOGXtcH6ERZqqEkacj0Sxos3k4bMC?=
+ =?us-ascii?Q?G0dxj9gnmSXK+YlturVMl/wvmEwQPjYxRmQhvHQIiH9uEQKzKUbHsIx7x6UB?=
+ =?us-ascii?Q?o0BjAhUXlhsgVFbNUl19IiKuN+jxLLeJTkVfJ/bnYU4n/ruf3ahO0kj+Gl9L?=
+ =?us-ascii?Q?gNpxE//XvHYLDQUoY92LC59i48xkdWY6RNP3umC7RaqL9XAV/BGw+a/+SVet?=
+ =?us-ascii?Q?wyNdYtmsaBIPITyqanoCV5WnUDDPglwrCDeQ6QGKJQm67vKhdOW4q8z+YKLs?=
+ =?us-ascii?Q?h2ix3+MNDL7R92xuCBd1FESX6o+c8xiOgHX7+5de9pPHBFmGGVlhdIDTGPoJ?=
+ =?us-ascii?Q?WSlnwxvaborn23tLxAsf5BJHPqjHkGKcs/puH/+hGI6wl44liI5C9gSgPE8d?=
+ =?us-ascii?Q?yGDTj7mnY/qgRxW/oyO6GLvjvdaVuhJCi1ZO+yMMlS+/aceOrySVxgAsT+G4?=
+ =?us-ascii?Q?a1gwE/4ch4ktPf4oVyviGBKKDWS3h7qck7lar5xy0xANCsVs1wtFBlEXnvpU?=
+ =?us-ascii?Q?IwFV1NUTXvU3CfszIJD59LXrx8dtmXOBtCCggNy6ZWlIXVUqghLmCWNJ2eqN?=
+ =?us-ascii?Q?Lje4r18qUmQAA7+fWKm02I57gq5kXYZNGniYJa56XafM9HSlA5aVX1V7gwN6?=
+ =?us-ascii?Q?O7vFWXDlIH1Znd6ovuYcvZ1ePuDszYoaXwDh3haIO+tkwA7U0/EWuzB34c6m?=
+ =?us-ascii?Q?lmBq6EP78f5hC7mk66aFZxMJHYhau2FELSCx0aOniBTGUDC2c4YX0OOw+ovb?=
+ =?us-ascii?Q?YY+TMXpE/RFiF2FTmD8ynKqRoZ9LzsRCLtkl/Ym+UCJfUuI29nrQzFiDgo/P?=
+ =?us-ascii?Q?8YA4n8KWaOqk48wOiBay85NgiofyWB0wq0WIRsLkJVSk6BEi/d/LmttoEyDD?=
+ =?us-ascii?Q?Ez3d4iJytKSy2Rwig05tvPRRK18yo8w8NzvuXqUjNr6hRKBYzgVl26O3DDz0?=
+ =?us-ascii?Q?Pn3msoTxUg28UoLL9icYLh/XXuPCmqp0X20qDXkvT0cQs6Kbw8Nj4HY2ltY1?=
+ =?us-ascii?Q?7t//ZqPERapMeM7dcT44+XGtuqSixXN5q5dCnSc7KuQjXdnBbUKy1IlO7WpX?=
+ =?us-ascii?Q?YOQfsOmFsXhSDWAzCpaiBOGF5HS/BX5qjPjYiza91HnXKbmHMqz9y+eP2z2+?=
+ =?us-ascii?Q?FrV9Ea35zr3QyZ7tD8JCWpLqopgQ/KN55jFFm+uXTJ43GXb40oZ8oKRjzPiR?=
+ =?us-ascii?Q?8jmXTkhGgO4qFhWfJPgqEAbtPMn/C7Zw5r1cpXSgsgCb74fx50lu7i/hv2Nf?=
+ =?us-ascii?Q?wl484QyB/DvnAQCMisI/yuwZGCPFg7fnUd1+FJnJ+MQzk+95a/aJpv1M9boc?=
+ =?us-ascii?Q?ue7lgXUzvDoSSD3QDMn+vpTIdiN7j5AmYp5Hvbhhp3Hko62ThNc/4FxVjsnn?=
+ =?us-ascii?Q?st1W5RegLlvQklOs2WOn0/IkzdGK3g3DAFHtW9V5bX/hN9TBRFQfjqALkVu4?=
+ =?us-ascii?Q?3lP6KE6oLWP6LtnDPXjx+MIoSP03A5l4kSJteh6bVZeGZQgzv1S4Y4m/gPDA?=
+ =?us-ascii?Q?dw=3D=3D?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 658c65dd-5c27-41e9-02c8-08dd3535aea6
+X-MS-Exchange-CrossTenant-Network-Message-Id: 331a3543-719e-417c-3a8d-08dd3535adba
 X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB8562.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2025 07:24:43.9798
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2025 07:24:42.4234
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GT1NcmO9qPKdn9JTlCnypERjJi8f51J7wgDAS5irABHl9sZfrLhgH6CsfO24cajsCD+3VxH1Royj/C1OiHbAW4zs7HojjKYA1Cp7dF9usNI=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 080enWK77cEuXvCxWL02f0Q5sXtqoV8zX599wH3AWwTzIBJxpJiq6oWTKdXphzvLPKd0MDuflrSQiFaSoAOGetk4AWEnL53VYYC00Ta/2Q8=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR11MB8046
-X-Authority-Analysis: v=2.4 cv=DdLtqutW c=1 sm=1 tr=0 ts=678762bd cx=c_pps a=2bhcDDF4uZIgm5IDeBgkqw==:117 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=VdSt8ZQiCzkA:10 a=bRTqI5nwn0kA:10 a=PYnjg3YJAAAA:8
- a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=20KFwNOVAAAA:8 a=tjrgz2z0AAAA:8 a=qwl3IdLvgAeI-KJpDYgA:9 a=FdTzh2GWekK77mhwV6Dw:22 a=5HwOr4AGAc3wyUkv9GHE:22
-X-Proofpoint-GUID: kCSCkCVeG1skyaTzf3LebhrDrhWqQDuZ
-X-Proofpoint-ORIG-GUID: kCSCkCVeG1skyaTzf3LebhrDrhWqQDuZ
+X-Authority-Analysis: v=2.4 cv=DdLtqutW c=1 sm=1 tr=0 ts=678762bc cx=c_pps a=2bhcDDF4uZIgm5IDeBgkqw==:117 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=VdSt8ZQiCzkA:10 a=bRTqI5nwn0kA:10 a=PYnjg3YJAAAA:8
+ a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=20KFwNOVAAAA:8 a=voaiVwKxfI1YsTQl_r8A:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: Es2q7STI-mwsfhJd3o7vaGHw66W3CfeU
+X-Proofpoint-ORIG-GUID: Es2q7STI-mwsfhJd3o7vaGHw66W3CfeU
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
  definitions=2025-01-15_02,2025-01-15_02,2024-11-22_01
@@ -141,635 +141,291 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 15 Jan 2025 07:24:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114888
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114887
 
 From: Zhang Peng <peng.zhang1.cn@windriver.com>
 
-CVE-2024-45616:
+CVE-2024-45615:
 A vulnerability was found in OpenSC, OpenSC tools, PKCS#11 module, minidriver, and CTK.
-An attacker could use a crafted USB Device or Smart Card, which would present the system
-with a specially crafted response to APDUs. The following problems were caused by
-insufficient control of the response APDU buffer and its length when communicating
-with the card.
+The problem is missing initialization of variables expected to be initialized
+(as arguments to other functions, etc.).
 
 Reference:
-[https://nvd.nist.gov/vuln/detail/CVE-2024-45616]
+[https://nvd.nist.gov/vuln/detail/CVE-2024-45615]
 
 Upstream patches:
-[https://github.com/OpenSC/OpenSC/commit/1d3b410e06d33cfc4c70e8a25386e456cfbd7bd1]
-[https://github.com/OpenSC/OpenSC/commit/265b28344d036a462f38002d957a0636fda57614]
-[https://github.com/OpenSC/OpenSC/commit/e7177c7ca00200afea820d155dca67f38b232967]
-[https://github.com/OpenSC/OpenSC/commit/ef7b10a18e6a4d4f03f0c47ea81aa8136f3eca60]
-[https://github.com/OpenSC/OpenSC/commit/76115e34799906a64202df952a8a9915d30bc89d]
-[https://github.com/OpenSC/OpenSC/commit/16ada9dc7cddf1cb99516aea67b6752c251c94a2]
-[https://github.com/OpenSC/OpenSC/commit/3562969c90a71b0bcce979f0e6d627546073a7fc]
-[https://github.com/OpenSC/OpenSC/commit/cccdfc46b10184d1eea62d07fe2b06240b7fafbc]
-[https://github.com/OpenSC/OpenSC/commit/5fa758767e517779fc5398b6b4faedc4e36d3de5]
-[https://github.com/OpenSC/OpenSC/commit/aa102cd9abe1b0eaf537d9dd926844a46060d8bc]
+[https://github.com/OpenSC/OpenSC/commit/5e4f26b510b04624386c54816bf26aacea0fe4a1]
+[https://github.com/OpenSC/OpenSC/commit/7d68a7f442e38e16625270a0fdc6942c9e9437e6]
+[https://github.com/OpenSC/OpenSC/commit/bb3dedb71e59bd17f96fd4e807250a5cf2253cb7]
+[https://github.com/OpenSC/OpenSC/commit/42d718dfccd2a10f6d26705b8c991815c855fa3b]
+[https://github.com/OpenSC/OpenSC/commit/bde991b0fe4f0250243b0e4960978b1043c13b03]
 
 Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
 ---
- .../opensc/files/CVE-2024-45616-0001.patch    | 52 +++++++++++++
- .../opensc/files/CVE-2024-45616-0002.patch    | 48 ++++++++++++
- .../opensc/files/CVE-2024-45616-0003.patch    | 42 +++++++++++
- .../opensc/files/CVE-2024-45616-0004.patch    | 43 +++++++++++
- .../opensc/files/CVE-2024-45616-0005.patch    | 34 +++++++++
- .../opensc/files/CVE-2024-45616-0006.patch    | 50 +++++++++++++
- .../opensc/files/CVE-2024-45616-0007.patch    | 56 ++++++++++++++
- .../opensc/files/CVE-2024-45616-0008.patch    | 74 +++++++++++++++++++
- .../opensc/files/CVE-2024-45616-0009.patch    | 68 +++++++++++++++++
- .../opensc/files/CVE-2024-45616-0010.patch    | 33 +++++++++
- .../recipes-support/opensc/opensc_0.22.0.bb   | 10 +++
- 11 files changed, 510 insertions(+)
- create mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-45616-0001.patch
- create mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-45616-0002.patch
- create mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-45616-0003.patch
- create mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-45616-0004.patch
- create mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-45616-0005.patch
- create mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-45616-0006.patch
- create mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-45616-0007.patch
- create mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-45616-0008.patch
- create mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-45616-0009.patch
- create mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-45616-0010.patch
+ .../opensc/files/CVE-2024-45615-0001.patch    | 67 +++++++++++++++++++
+ .../opensc/files/CVE-2024-45615-0002.patch    | 36 ++++++++++
+ .../opensc/files/CVE-2024-45615-0003.patch    | 35 ++++++++++
+ .../opensc/files/CVE-2024-45615-0004.patch    | 36 ++++++++++
+ .../opensc/files/CVE-2024-45615-0005.patch    | 34 ++++++++++
+ .../recipes-support/opensc/opensc_0.22.0.bb   |  5 ++
+ 6 files changed, 213 insertions(+)
+ create mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-45615-0001.patch
+ create mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-45615-0002.patch
+ create mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-45615-0003.patch
+ create mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-45615-0004.patch
+ create mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-45615-0005.patch
 
-diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0001.patch b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0001.patch
+diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-45615-0001.patch b/meta-oe/recipes-support/opensc/files/CVE-2024-45615-0001.patch
 new file mode 100644
-index 000000000..f4bebf039
+index 000000000..badb301b1
 --- /dev/null
-+++ b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0001.patch
-@@ -0,0 +1,52 @@
-+From 1d3b410e06d33cfc4c70e8a25386e456cfbd7bd1 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/opensc/files/CVE-2024-45615-0001.patch
+@@ -0,0 +1,67 @@
++From 5e4f26b510b04624386c54816bf26aacea0fe4a1 Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Thu, 11 Jul 2024 15:27:19 +0200
-+Subject: [PATCH] cardos: Fix uninitialized values
++Date: Thu, 11 Jul 2024 14:58:25 +0200
++Subject: [PATCH] cac: Fix uninitialized values
 +
 +Thanks Matteo Marini for report
 +https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
 +
-+fuzz_card/2
-+
-+CVE: CVE-2024-45616
-+Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/1d3b410e06d33cfc4c70e8a25386e456cfbd7bd1]
++fuzz_card/1,fuzz_pkcs11/6
++CVE: CVE-2024-45615
++Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/5e4f26b510b04624386c54816bf26aacea0fe4a1]
 +
 +Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
 +---
-+ src/libopensc/card-cardos.c | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
++ src/libopensc/card-cac.c | 12 ++++++------
++ 1 file changed, 6 insertions(+), 6 deletions(-)
 +
-+diff --git a/src/libopensc/card-cardos.c b/src/libopensc/card-cardos.c
-+index 2e2d524333..a0e2322478 100644
-+--- a/src/libopensc/card-cardos.c
-++++ b/src/libopensc/card-cardos.c
-+@@ -94,14 +94,14 @@ static void fixup_transceive_length(const struct sc_card *card,
-+ 
-+ static int cardos_match_card(sc_card_t *card)
++diff --git a/src/libopensc/card-cac.c b/src/libopensc/card-cac.c
++index 1d1b616c8..4c3bc89bd 100644
++--- a/src/libopensc/card-cac.c
+++++ b/src/libopensc/card-cac.c
++@@ -255,7 +255,7 @@ static int cac_apdu_io(sc_card_t *card, int ins, int p1, int p2,
++ 	size_t * recvbuflen)
 + {
-+-	unsigned char atr[SC_MAX_ATR_SIZE];
-++	unsigned char atr[SC_MAX_ATR_SIZE] = { 0 };
-+ 	int i;
-+ 
-+ 	i = _sc_match_atr(card, cardos_atrs, &card->type);
-+ 	if (i < 0)
-+ 		return 0;
-+ 
-+-	memcpy(atr, card->atr.value, sizeof(atr));
-++	memcpy(atr, card->atr.value, card->atr.len);
-+ 
-+ 	/* Do not change card type for CIE! */
-+ 	if (card->type == SC_CARD_TYPE_CARDOS_CIE_V1)
-+@@ -114,8 +114,8 @@ static int cardos_match_card(sc_card_t *card)
-+ 		return 1;
-+ 	if (card->type == SC_CARD_TYPE_CARDOS_M4_2) {
-+ 		int rv;
-+-		sc_apdu_t apdu;
-+-		u8 rbuf[SC_MAX_APDU_BUFFER_SIZE];
-++		sc_apdu_t apdu = { 0 };
-++		u8 rbuf[SC_MAX_APDU_BUFFER_SIZE] = { 0 };
-+ 		/* first check some additional ATR bytes */
-+ 		if ((atr[4] != 0xff && atr[4] != 0x02) ||
-+ 		    (atr[6] != 0x10 && atr[6] != 0x0a) ||
-+--
-+2.34.1
-diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0002.patch b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0002.patch
-new file mode 100644
-index 000000000..012a9ecdb
---- /dev/null
-+++ b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0002.patch
-@@ -0,0 +1,48 @@
-+From 265b28344d036a462f38002d957a0636fda57614 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Thu, 1 Aug 2024 10:32:40 +0200
-+Subject: [PATCH] card-cardos: Check length of APDU response
-+
-+CVE: CVE-2024-45616
-+Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/265b28344d036a462f38002d957a0636fda57614]
-+
-+Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
-+---
-+ src/libopensc/card-cardos.c | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
-+
-+diff --git a/src/libopensc/card-cardos.c b/src/libopensc/card-cardos.c
-+index 124752d78b..595ec099e3 100644
-+--- a/src/libopensc/card-cardos.c
-++++ b/src/libopensc/card-cardos.c
-+@@ -94,7 +94,7 @@ static void fixup_transceive_length(const struct sc_card *card,
-+ 
-+ static int cardos_match_card(sc_card_t *card)
++ 	int r;
++-	sc_apdu_t apdu;
+++	sc_apdu_t apdu = {0};
++ 	u8 rbufinitbuf[CAC_MAX_SIZE];
++ 	u8 *rbuf;
++ 	size_t rbuflen;
++@@ -392,13 +392,13 @@ fail:
++ static int cac_read_file(sc_card_t *card, int file_type, u8 **out_buf, size_t *out_len)
 + {
-+-	unsigned char atr[SC_MAX_ATR_SIZE] = { 0 };
-++	unsigned char atr[SC_MAX_ATR_SIZE] = {0};
-+ 	int i;
++ 	u8 params[2];
++-	u8 count[2];
+++	u8 count[2] = {0};
++ 	u8 *out = NULL;
++-	u8 *out_ptr;
+++	u8 *out_ptr = NULL;
++ 	size_t offset = 0;
++ 	size_t size = 0;
++ 	size_t left = 0;
++-	size_t len;
+++	size_t len = 0;
++ 	int r;
 + 
-+ 	i = _sc_match_atr(card, cardos_atrs, &card->type);
-+@@ -114,8 +114,8 @@ static int cardos_match_card(sc_card_t *card)
-+ 		return 1;
-+ 	if (card->type == SC_CARD_TYPE_CARDOS_M4_2) {
-+ 		int rv;
-+-		sc_apdu_t apdu = { 0 };
-+-		u8 rbuf[SC_MAX_APDU_BUFFER_SIZE] = { 0 };
-++		sc_apdu_t apdu = {0};
-++		u8 rbuf[SC_MAX_APDU_BUFFER_SIZE] = {0};
-+ 		/* first check some additional ATR bytes */
-+ 		if ((atr[4] != 0xff && atr[4] != 0x02) ||
-+ 		    (atr[6] != 0x10 && atr[6] != 0x0a) ||
-+@@ -131,7 +131,7 @@ static int cardos_match_card(sc_card_t *card)
-+ 		apdu.lc = 0;
-+ 		rv = sc_transmit_apdu(card, &apdu);
-+ 		LOG_TEST_RET(card->ctx, rv, "APDU transmit failed");
-+-		if (apdu.sw1 != 0x90 || apdu.sw2 != 0x00)
-++		if (apdu.sw1 != 0x90 || apdu.sw2 != 0x00 || apdu.resplen < 2)
-+ 			return 0;
-+ 		if (apdu.resp[0] != atr[10] ||
-+ 		    apdu.resp[1] != atr[11])
++ 	params[0] = file_type;
++@@ -461,7 +461,7 @@ static int cac_read_binary(sc_card_t *card, unsigned int idx,
++ 	const u8 *tl_ptr, *val_ptr, *tl_start;
++ 	u8 *tlv_ptr;
++ 	const u8 *cert_ptr;
++-	size_t tl_len, val_len, tlv_len;
+++	size_t tl_len = 0, val_len = 0, tlv_len;
++ 	size_t len, tl_head_len, cert_len;
++ 	u8 cert_type, tag;
++ 
++@@ -1528,7 +1528,7 @@ static int cac_parse_CCC(sc_card_t *card, cac_private_data_t *priv, const u8 *tl
++ static int cac_process_CCC(sc_card_t *card, cac_private_data_t *priv, int depth)
++ {
++ 	u8 *tl = NULL, *val = NULL;
++-	size_t tl_len, val_len;
+++	size_t tl_len = 0, val_len = 0;
++ 	int r;
++ 
++ 	if (depth > CAC_MAX_CCC_DEPTH) {
 +--
 +2.34.1
-diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0003.patch b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0003.patch
+diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-45615-0002.patch b/meta-oe/recipes-support/opensc/files/CVE-2024-45615-0002.patch
 new file mode 100644
-index 000000000..4c0d1ec30
+index 000000000..7e02df383
 --- /dev/null
-+++ b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0003.patch
-@@ -0,0 +1,42 @@
-+From e7177c7ca00200afea820d155dca67f38b232967 Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Mon, 20 May 2024 22:14:48 +0200
-+Subject: [PATCH] cac: Correctly calculate certificate length based on the
-+ resplen
-+
-+Thanks Matteo Marini for report
-+
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-h5f7-rjr5-vx54
-+
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+
-+CVE: CVE-2024-45616
-+Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/e7177c7ca00200afea820d155dca67f38b232967]
-+
-+Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
-+---
-+ src/libopensc/card-cac1.c | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/libopensc/card-cac1.c b/src/libopensc/card-cac1.c
-+index 50c0928f5..bbdbc0a8d 100644
-+--- a/src/libopensc/card-cac1.c
-++++ b/src/libopensc/card-cac1.c
-+@@ -95,12 +95,12 @@ static int cac_cac1_get_certificate(sc_card_t *card, u8 **out_buf, size_t *out_l
-+ 		if (apdu.sw1 != 0x63 || apdu.sw2 < 1)  {
-+ 			/* we've either finished reading, or hit an error, break */
-+ 			r = sc_check_sw(card, apdu.sw1, apdu.sw2);
-+-			left -= len;
-++			left -= apdu.resplen;
-+ 			break;
-+ 		}
-+ 		/* Adjust the lengths */
-+-		left -= len;
-+-		out_ptr += len;
-++		left -= apdu.resplen;
-++		out_ptr += apdu.resplen;
-+ 		len = MIN(left, apdu.sw2);
-+ 	}
-+ 	if (r < 0) {
-+--
-+2.34.1
-diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0004.patch b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0004.patch
-new file mode 100644
-index 000000000..603556388
---- /dev/null
-+++ b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0004.patch
-@@ -0,0 +1,43 @@
-+From ef7b10a18e6a4d4f03f0c47ea81aa8136f3eca60 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/opensc/files/CVE-2024-45615-0002.patch
+@@ -0,0 +1,36 @@
++From 7d68a7f442e38e16625270a0fdc6942c9e9437e6 Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Thu, 18 Jul 2024 15:39:15 +0200
-+Subject: [PATCH] card-oberthur: Check length of serial number
++Date: Tue, 16 Jul 2024 15:51:51 +0200
++Subject: [PATCH] card-piv: Initialize variables for tag and CLA
++
++In case they are not later initialize later by
++sc_asn1_read_tag() function.
 +
 +Thanks Matteo Marini for report
 +https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
 +
-+fuzz_pkcs11/1, fuzz_pkcs15init/2
++fuzz_pkcs11/21
 +
-+CVE: CVE-2024-45616
-+Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/ef7b10a18e6a4d4f03f0c47ea81aa8136f3eca60]
-+
-+Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
-+---
-+ src/libopensc/card-oberthur.c | 5 ++++-
-+ 1 file changed, 4 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/libopensc/card-oberthur.c b/src/libopensc/card-oberthur.c
-+index 1fc40f7b3..bd45b6ff5 100644
-+--- a/src/libopensc/card-oberthur.c
-++++ b/src/libopensc/card-oberthur.c
-+@@ -148,7 +148,7 @@ auth_select_aid(struct sc_card *card)
-+ {
-+ 	struct sc_apdu apdu;
-+ 	unsigned char apdu_resp[SC_MAX_APDU_BUFFER_SIZE];
-+-	struct auth_private_data *data =  (struct auth_private_data *) card->drv_data;
-++	struct auth_private_data *data = (struct auth_private_data *)card->drv_data;
-+ 	int rv, ii;
-+ 	struct sc_path tmp_path;
-+ 
-+@@ -165,6 +165,9 @@ auth_select_aid(struct sc_card *card)
-+ 
-+ 	rv = sc_transmit_apdu(card, &apdu);
-+ 	LOG_TEST_RET(card->ctx, rv, "APDU transmit failed");
-++	if (apdu.resplen < 20) {
-++		LOG_TEST_RET(card->ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED, "Serial number has incorrect length");
-++	}
-+ 	card->serialnr.len = 4;
-+ 	memcpy(card->serialnr.value, apdu.resp+15, 4);
-+ 
-+--
-+2.34.1
-diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0005.patch b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0005.patch
-new file mode 100644
-index 000000000..34e2a83d8
---- /dev/null
-+++ b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0005.patch
-@@ -0,0 +1,34 @@
-+From 76115e34799906a64202df952a8a9915d30bc89d Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Mon, 20 May 2024 21:19:15 +0200
-+Subject: [PATCH] gids: Avoid using uninitialized memory
-+
-+Thanks Matteo Marini for report
-+
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-h5f7-rjr5-vx54
-+
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+
-+CVE: CVE-2024-45616
-+Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/76115e34799906a64202df952a8a9915d30bc89d]
++CVE: CVE-2024-45615
++Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/7d68a7f442e38e16625270a0fdc6942c9e9437e6]
 +
 +Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
 +---
-+ src/libopensc/card-gids.c | 2 +-
++ src/libopensc/card-piv.c | 2 +-
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/libopensc/card-gids.c b/src/libopensc/card-gids.c
-+index f25e37de4..10960875d 100644
-+--- a/src/libopensc/card-gids.c
-++++ b/src/libopensc/card-gids.c
-+@@ -251,7 +251,7 @@ static int gids_get_DO(sc_card_t* card, int fileIdentifier, int dataObjectIdenti
-+ 	LOG_TEST_RET(card->ctx, r, "gids get data failed");
-+ 	LOG_TEST_RET(card->ctx,  sc_check_sw(card, apdu.sw1, apdu.sw2), "invalid return");
++diff --git a/src/libopensc/card-piv.c b/src/libopensc/card-piv.c
++index 6bf740221..0f07b2529 100644
++--- a/src/libopensc/card-piv.c
+++++ b/src/libopensc/card-piv.c
++@@ -2241,7 +2241,7 @@ static int piv_get_challenge(sc_card_t *card, u8 *rnd, size_t len)
++ 	const u8 *p;
++ 	size_t out_len = 0;
++ 	int r;
++-	unsigned int tag, cla;
+++	unsigned int tag = 0, cla = 0;
++ 	piv_private_data_t * priv = PIV_DATA(card);
 + 
-+-	p = sc_asn1_find_tag(card->ctx, buffer, sizeof(buffer), dataObjectIdentifier, &datasize);
-++	p = sc_asn1_find_tag(card->ctx, buffer, apdu.resplen, dataObjectIdentifier, &datasize);
-+ 	if (!p) {
-+ 		LOG_FUNC_RETURN(card->ctx, SC_ERROR_FILE_NOT_FOUND);
-+ 	}
++ 	LOG_FUNC_CALLED(card->ctx);
 +--
 +2.34.1
-diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0006.patch b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0006.patch
+diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-45615-0003.patch b/meta-oe/recipes-support/opensc/files/CVE-2024-45615-0003.patch
 new file mode 100644
-index 000000000..58b65b291
+index 000000000..3f57ca336
 --- /dev/null
-+++ b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0006.patch
-@@ -0,0 +1,50 @@
-+From 16ada9dc7cddf1cb99516aea67b6752c251c94a2 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/opensc/files/CVE-2024-45615-0003.patch
+@@ -0,0 +1,35 @@
++From bb3dedb71e59bd17f96fd4e807250a5cf2253cb7 Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Fri, 12 Jul 2024 15:04:19 +0200
-+Subject: [PATCH] card-gids: Use actual length of reponse buffer
++Date: Fri, 12 Jul 2024 14:35:47 +0200
++Subject: [PATCH] pkcs15-cert.c: Initialize OID length
++
++In case it is not set later.
 +
 +Thanks Matteo Marini for report
 +https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
 +
-+fuzz_pkcs11/11
++fuzz_pkcs11/7
 +
-+CVE: CVE-2024-45616
-+Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/16ada9dc7cddf1cb99516aea67b6752c251c94a2]
++CVE: CVE-2024-45615
++Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/bb3dedb71e59bd17f96fd4e807250a5cf2253cb7]
 +
 +Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
 +---
-+ src/libopensc/card-gids.c | 6 ++++--
-+ 1 file changed, 4 insertions(+), 2 deletions(-)
++ src/libopensc/pkcs15-cert.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/libopensc/card-gids.c b/src/libopensc/card-gids.c
-+index f25e37de4..91e1e0569 100644
-+--- a/src/libopensc/card-gids.c
-++++ b/src/libopensc/card-gids.c
-+@@ -231,6 +231,7 @@ static int gids_get_DO(sc_card_t* card, int fileIdentifier, int dataObjectIdenti
-+ 	size_t datasize = 0;
-+ 	const u8* p;
-+ 	u8 buffer[MAX_GIDS_FILE_SIZE];
-++	size_t buffer_len = sizeof(buffer);
++diff --git a/src/libopensc/pkcs15-cert.c b/src/libopensc/pkcs15-cert.c
++index 1777a85835..5e2dbb89d0 100644
++--- a/src/libopensc/pkcs15-cert.c
+++++ b/src/libopensc/pkcs15-cert.c
++@@ -169,7 +169,7 @@ sc_pkcs15_get_name_from_dn(struct sc_context *ctx, const u8 *dn, size_t dn_len,
++ 	for (next_ava = rdn, next_ava_len = rdn_len; next_ava_len; ) {
++ 		const u8 *ava, *dummy, *oidp;
++ 		struct sc_object_id oid;
++-		size_t ava_len, dummy_len, oid_len;
+++		size_t ava_len = 0, dummy_len, oid_len = 0;
 + 
-+ 	SC_FUNC_CALLED(card->ctx, SC_LOG_DEBUG_VERBOSE);
-+ 	sc_log(card->ctx, 
-+@@ -244,14 +245,15 @@ static int gids_get_DO(sc_card_t* card, int fileIdentifier, int dataObjectIdenti
-+ 	apdu.data = data;
-+ 	apdu.datalen = 04;
-+ 	apdu.resp = buffer;
-+-	apdu.resplen = sizeof(buffer);
-++	apdu.resplen = buffer_len;
-+ 	apdu.le = 256;
-+ 
-+ 	r = sc_transmit_apdu(card, &apdu);
-+ 	LOG_TEST_RET(card->ctx, r, "gids get data failed");
-+ 	LOG_TEST_RET(card->ctx,  sc_check_sw(card, apdu.sw1, apdu.sw2), "invalid return");
-++	buffer_len = apdu.resplen;
-+ 
-+-	p = sc_asn1_find_tag(card->ctx, buffer, apdu.resplen, dataObjectIdentifier, &datasize);
-++	p = sc_asn1_find_tag(card->ctx, buffer, buffer_len, dataObjectIdentifier, &datasize);
-+ 	if (!p) {
-+ 		LOG_FUNC_RETURN(card->ctx, SC_ERROR_FILE_NOT_FOUND);
-+ 	}
++ 		/* unwrap the set and point to the next ava */
++ 		ava = sc_asn1_skip_tag(ctx, &next_ava, &next_ava_len, SC_ASN1_TAG_SET | SC_ASN1_CONS, &ava_len);
 +--
 +2.34.1
-diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0007.patch b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0007.patch
+diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-45615-0004.patch b/meta-oe/recipes-support/opensc/files/CVE-2024-45615-0004.patch
 new file mode 100644
-index 000000000..d664e2133
+index 000000000..a477bb07e
 --- /dev/null
-+++ b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0007.patch
-@@ -0,0 +1,56 @@
-+From 3562969c90a71b0bcce979f0e6d627546073a7fc Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/opensc/files/CVE-2024-45615-0004.patch
+@@ -0,0 +1,36 @@
++From 42d718dfccd2a10f6d26705b8c991815c855fa3b Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Fri, 12 Jul 2024 14:16:24 +0200
-+Subject: [PATCH] card-mcrd: Check length of response buffer in select
++Date: Tue, 16 Jul 2024 16:32:45 +0200
++Subject: [PATCH] pkcs15-sc-hsm: Initialize variables for tag and CLA
++
++In case they are not later initialize later by
++sc_asn1_read_tag() function.
 +
 +Thanks Matteo Marini for report
 +https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
 +
-+fuzz_pkcs11/5,12 fuzz_pkcs15_crypt/9
++fuzz_pkcs15_crypt/12
 +
-+CVE: CVE-2024-45616
-+Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/3562969c90a71b0bcce979f0e6d627546073a7fc]
++CVE: CVE-2024-45615
++Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/42d718dfccd2a10f6d26705b8c991815c855fa3b]
 +
 +Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
 +---
-+ src/libopensc/card-mcrd.c | 11 +++++++----
-+ 1 file changed, 7 insertions(+), 4 deletions(-)
++ src/libopensc/pkcs15-sc-hsm.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/libopensc/card-mcrd.c b/src/libopensc/card-mcrd.c
-+index fb5d02f89..30812e8a6 100644
-+--- a/src/libopensc/card-mcrd.c
-++++ b/src/libopensc/card-mcrd.c
-+@@ -634,11 +634,13 @@ do_select(sc_card_t * card, u8 kind,
-+ 		}
-+ 	}
-+ 
-+-	if (p2 == 0x04 && apdu.resp[0] == 0x62) {
-++	if (p2 == 0x04 && apdu.resplen > 2 && apdu.resp[0] == 0x62) {
-+ 		*file = sc_file_new();
-+ 		if (!*file)
-+ 			LOG_FUNC_RETURN(card->ctx, SC_ERROR_OUT_OF_MEMORY);
-+ 		/* EstEID v3.0 cards are buggy and sometimes return a double 0x62 tag */
-++		if (apdu.resp[1] > apdu.resplen - 2)
-++			LOG_FUNC_RETURN(card->ctx, SC_ERROR_INVALID_DATA);
-+ 		if (card->type == SC_CARD_TYPE_MCRD_ESTEID_V30 && apdu.resp[2] == 0x62)
-+ 			process_fcp(card, *file, apdu.resp + 4, apdu.resp[3]);
-+ 		else
-+@@ -646,12 +648,13 @@ do_select(sc_card_t * card, u8 kind,
-+ 		return SC_SUCCESS;
-+ 	}
-+ 
-+-	if (p2 != 0x0C && apdu.resp[0] == 0x6F) {
-++	if (p2 != 0x0C && apdu.resplen > 2 && apdu.resp[0] == 0x6F) {
-+ 		*file = sc_file_new();
-+ 		if (!*file)
-+ 			LOG_FUNC_RETURN(card->ctx, SC_ERROR_OUT_OF_MEMORY);
-+-		if (apdu.resp[1] <= apdu.resplen)
-+-			process_fcp(card, *file, apdu.resp + 2, apdu.resp[1]);
-++		if (apdu.resp[1] > apdu.resplen - 2)
-++			LOG_FUNC_RETURN(card->ctx, SC_ERROR_INVALID_DATA);
-++		process_fcp(card, *file, apdu.resp + 2, apdu.resp[1]);
-+ 		return SC_SUCCESS;
-+ 	}
-+ 	return SC_SUCCESS;
++diff --git a/src/libopensc/pkcs15-sc-hsm.c b/src/libopensc/pkcs15-sc-hsm.c
++index 315cd74482..acdbee7054 100644
++--- a/src/libopensc/pkcs15-sc-hsm.c
+++++ b/src/libopensc/pkcs15-sc-hsm.c
++@@ -277,7 +277,7 @@ int sc_pkcs15emu_sc_hsm_decode_cvc(sc_pkcs15_card_t * p15card,
++ 	struct sc_asn1_entry asn1_cvcert[C_ASN1_CVCERT_SIZE];
++ 	struct sc_asn1_entry asn1_cvc_body[C_ASN1_CVC_BODY_SIZE];
++ 	struct sc_asn1_entry asn1_cvc_pubkey[C_ASN1_CVC_PUBKEY_SIZE];
++-	unsigned int cla,tag;
+++	unsigned int cla = 0, tag = 0;
++ 	size_t taglen;
++ 	size_t lenchr = sizeof(cvc->chr);
++ 	size_t lencar = sizeof(cvc->car);
 +--
 +2.34.1
-diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0008.patch b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0008.patch
+diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-45615-0005.patch b/meta-oe/recipes-support/opensc/files/CVE-2024-45615-0005.patch
 new file mode 100644
-index 000000000..bdd56fb47
+index 000000000..7826f7e71
 --- /dev/null
-+++ b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0008.patch
-@@ -0,0 +1,74 @@
-+From cccdfc46b10184d1eea62d07fe2b06240b7fafbc Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Fri, 12 Jul 2024 13:16:56 +0200
-+Subject: [PATCH] card-dnie: Check APDU response length and ASN1 lengths
++++ b/meta-oe/recipes-support/opensc/files/CVE-2024-45615-0005.patch
+@@ -0,0 +1,34 @@
++From bde991b0fe4f0250243b0e4960978b1043c13b03 Mon Sep 17 00:00:00 2001
++From: Jakub Jelen <jjelen@redhat.com>
++Date: Mon, 20 May 2024 21:31:38 +0200
++Subject: [PATCH] pkcs15init: Avoid using uninitialized memory
 +
 +Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
 +
-+fuzz_pkcs15_decode/10, fuzz_pkcs15_encode/12
++https://github.com/OpenSC/OpenSC/security/advisories/GHSA-h5f7-rjr5-vx54
 +
-+CVE: CVE-2024-45616
-+Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/cccdfc46b10184d1eea62d07fe2b06240b7fafbc]
++Signed-off-by: Jakub Jelen <jjelen@redhat.com>
++
++CVE: CVE-2024-45615
++Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/bde991b0fe4f0250243b0e4960978b1043c13b03]
 +
 +Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
 +---
-+ src/libopensc/asn1.c      | 4 +++-
-+ src/libopensc/card-dnie.c | 8 ++++++--
-+ 2 files changed, 9 insertions(+), 3 deletions(-)
++ src/pkcs15init/profile.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/libopensc/asn1.c b/src/libopensc/asn1.c
-+index 08ef56149c..548263a2da 100644
-+--- a/src/libopensc/asn1.c
-++++ b/src/libopensc/asn1.c
-+@@ -68,7 +68,7 @@ int sc_asn1_read_tag(const u8 ** buf, size_t buflen, unsigned int *cla_out,
-+ 
-+ 	*buf = NULL;
-+ 
-+-	if (left == 0 || !p)
-++	if (left == 0 || !p || buflen == 0)
-+ 		return SC_ERROR_INVALID_ASN1_OBJECT;
-+ 	if (*p == 0xff || *p == 0) {
-+ 		/* end of data reached */
-+@@ -83,6 +83,8 @@ int sc_asn1_read_tag(const u8 ** buf, size_t buflen, unsigned int *cla_out,
-+ 	 */
-+ 	cla = (*p & SC_ASN1_TAG_CLASS) | (*p & SC_ASN1_TAG_CONSTRUCTED);
-+ 	tag = *p & SC_ASN1_TAG_PRIMITIVE;
-++	if (left < 1)
-++		return SC_ERROR_INVALID_ASN1_OBJECT;
-+ 	p++;
-+ 	left--;
-+ 	if (tag == SC_ASN1_TAG_PRIMITIVE) {
-+diff --git a/src/libopensc/card-dnie.c b/src/libopensc/card-dnie.c
-+index 2c36ddf5c..25c15b2b7 100644
-+--- a/src/libopensc/card-dnie.c
-++++ b/src/libopensc/card-dnie.c
-+@@ -1185,12 +1185,16 @@ static int dnie_compose_and_send_apdu(sc_card_t *card, const u8 *path, size_t pa
-+ 
-+ 	if (file_out) {
-+ 		/* finally process FCI response */
-++		size_t len = apdu.resp[1];
-+ 		sc_file_free(*file_out);
-+ 		*file_out = sc_file_new();
-+ 		if (*file_out == NULL) {
-+ 			LOG_FUNC_RETURN(ctx, SC_ERROR_OUT_OF_MEMORY);
-+ 		}
-+-		res = card->ops->process_fci(card, *file_out, apdu.resp + 2, apdu.resp[1]);
-++		if (apdu.resplen - 2 < len || len < 1) {
-++			LOG_FUNC_RETURN(ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED);
-++		}
-++		res = card->ops->process_fci(card, *file_out, apdu.resp + 2, len);
-+ 	}
-+ 	LOG_FUNC_RETURN(ctx, res);
-+ }
-+@@ -1948,7 +1952,7 @@ static int dnie_process_fci(struct sc_card *card,
-+ 	int *op = df_acl;
-+ 	int n = 0;
-+ 	sc_context_t *ctx = NULL;
-+-	if ((card == NULL) || (card->ctx == NULL) || (file == NULL))
-++	if ((card == NULL) || (card->ctx == NULL) || (file == NULL) || buflen == 0)
-+ 		return SC_ERROR_INVALID_ARGUMENTS;
-+ 	ctx = card->ctx;
-+ 	LOG_FUNC_CALLED(ctx);
-+--
-+2.34.1
-diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0009.patch b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0009.patch
-new file mode 100644
-index 000000000..f4c3e231e
---- /dev/null
-+++ b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0009.patch
-@@ -0,0 +1,68 @@
-+From 5fa758767e517779fc5398b6b4faedc4e36d3de5 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Fri, 12 Jul 2024 14:03:59 +0200
-+Subject: [PATCH] muscle: Report invalid SW when reading object
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs11/20, fuzz_pkcs15init/10
-+
-+CVE: CVE-2024-45616
-+Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/5fa758767e517779fc5398b6b4faedc4e36d3de5]
-+
-+Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
-+---
-+ src/libopensc/muscle.c | 19 ++++++++++---------
-+ 1 file changed, 10 insertions(+), 9 deletions(-)
-+
-+diff --git a/src/libopensc/muscle.c b/src/libopensc/muscle.c
-+index a749657df..b30173ec6 100644
-+--- a/src/libopensc/muscle.c
-++++ b/src/libopensc/muscle.c
-+@@ -92,33 +92,34 @@ int msc_partial_read_object(sc_card_t *card, msc_id objectId, int offset, u8 *da
-+ 	apdu.resp = data; 
-+ 	r = sc_transmit_apdu(card, &apdu);
-+ 	LOG_TEST_RET(card->ctx, r, "APDU transmit failed");
-+-	if(apdu.sw1 == 0x90 && apdu.sw2 == 0x00)
-++	if (apdu.sw1 == 0x90 && apdu.sw2 == 0x00 && dataLength <= apdu.resplen)
-+ 		return dataLength;
-+-	if(apdu.sw1 == 0x9C) {
-+-		if(apdu.sw2 == 0x07) {
-++	if (apdu.sw1 == 0x9C) {
-++		if (apdu.sw2 == 0x07) {
-+ 			SC_FUNC_RETURN(card->ctx, SC_LOG_DEBUG_VERBOSE, SC_ERROR_FILE_NOT_FOUND);
-+-		} else if(apdu.sw2 == 0x06) {
-++		} else if (apdu.sw2 == 0x06) {
-+ 			SC_FUNC_RETURN(card->ctx, SC_LOG_DEBUG_VERBOSE, SC_ERROR_NOT_ALLOWED);
-+-		} else if(apdu.sw2 == 0x0F) {
-++		} else if (apdu.sw2 == 0x0F) {
-+ 			/* GUESSED */
-+ 			SC_FUNC_RETURN(card->ctx, SC_LOG_DEBUG_VERBOSE, SC_ERROR_INVALID_ARGUMENTS);
-+ 		}
-+ 	}
-+ 	sc_log(card->ctx, 
-+ 		"got strange SWs: 0x%02X 0x%02X\n", apdu.sw1, apdu.sw2);
-+-	return dataLength;
-+-	
-++	SC_FUNC_RETURN(card->ctx, SC_LOG_DEBUG_VERBOSE, SC_ERROR_UNKNOWN_DATA_RECEIVED);
-+ }
-+ 
-+ int msc_read_object(sc_card_t *card, msc_id objectId, int offset, u8 *data, size_t dataLength)
++diff --git a/src/pkcs15init/profile.c b/src/pkcs15init/profile.c
++index 74fbdcec1..16c2ddfea 100644
++--- a/src/pkcs15init/profile.c
+++++ b/src/pkcs15init/profile.c
++@@ -1807,7 +1807,7 @@ do_pin_storedlength(struct state *cur, int argc, char **argv)
++ static int
++ do_pin_flags(struct state *cur, int argc, char **argv)
 + {
-+-	int r;
-++	int r = 0;
-+ 	size_t i;
-+ 	size_t max_read_unit = MSC_MAX_READ;
++-	unsigned int	flags;
+++	unsigned int	flags = 0;
++ 	int		i, r;
 + 
-+-	for(i = 0; i < dataLength; i += max_read_unit) {
-++	for(i = 0; i < dataLength; i += r) {
-+ 		r = msc_partial_read_object(card, objectId, offset + i, data + i, MIN(dataLength - i, max_read_unit));
-+ 		LOG_TEST_RET(card->ctx, r, "Error in partial object read");
-++		if (r == 0)
-++			break;
-+ 	}
-+ 	return dataLength;
-+ }
-+--
-+2.34.1
-diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0010.patch b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0010.patch
-new file mode 100644
-index 000000000..4a7752b28
---- /dev/null
-+++ b/meta-oe/recipes-support/opensc/files/CVE-2024-45616-0010.patch
-@@ -0,0 +1,33 @@
-+From aa102cd9abe1b0eaf537d9dd926844a46060d8bc Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Veronika=20Hanul=C3=ADkov=C3=A1?= <vhanulik@redhat.com>
-+Date: Tue, 23 Jul 2024 10:48:32 +0200
-+Subject: [PATCH] card-entersafe: Check length of serial number
-+
-+Thanks Matteo Marini for report
-+https://github.com/OpenSC/OpenSC/security/advisories/GHSA-p3mx-7472-h3j8
-+
-+fuzz_pkcs15_reader/5
-+
-+CVE: CVE-2024-45616
-+Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/aa102cd9abe1b0eaf537d9dd926844a46060d8bc]
-+
-+Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
-+---
-+ src/libopensc/card-entersafe.c | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/src/libopensc/card-entersafe.c b/src/libopensc/card-entersafe.c
-+index 6372913d0..305323fd5 100644
-+--- a/src/libopensc/card-entersafe.c
-++++ b/src/libopensc/card-entersafe.c
-+@@ -1468,6 +1468,8 @@ static int entersafe_get_serialnr(sc_card_t *card, sc_serial_number_t *serial)
-+ 	r=entersafe_transmit_apdu(card, &apdu,0,0,0,0);
-+ 	LOG_TEST_RET(card->ctx, r, "APDU transmit failed");
-+ 	LOG_TEST_RET(card->ctx, sc_check_sw(card,apdu.sw1,apdu.sw2),"EnterSafe get SN failed");
-++	if (apdu.resplen != 8)
-++		LOG_TEST_RET(card->ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED, "Invalid length of SN");
-+ 
-+ 	card->serialnr.len=serial->len=8;
-+ 	memcpy(card->serialnr.value,rbuf,8);
++ 	if (cur->pin->pin.auth_type != SC_PKCS15_PIN_AUTH_TYPE_PIN)
 +--
 +2.34.1
 diff --git a/meta-oe/recipes-support/opensc/opensc_0.22.0.bb b/meta-oe/recipes-support/opensc/opensc_0.22.0.bb
-index 9446237a0..ec0149670 100644
+index 822e0ab97..9446237a0 100644
 --- a/meta-oe/recipes-support/opensc/opensc_0.22.0.bb
 +++ b/meta-oe/recipes-support/opensc/opensc_0.22.0.bb
-@@ -31,6 +31,16 @@ SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https \
-            file://CVE-2024-45615-0003.patch \
-            file://CVE-2024-45615-0004.patch \
-            file://CVE-2024-45615-0005.patch \
-+           file://CVE-2024-45616-0001.patch \
-+           file://CVE-2024-45616-0002.patch \
-+           file://CVE-2024-45616-0003.patch \
-+           file://CVE-2024-45616-0004.patch \
-+           file://CVE-2024-45616-0005.patch \
-+           file://CVE-2024-45616-0006.patch \
-+           file://CVE-2024-45616-0007.patch \
-+           file://CVE-2024-45616-0008.patch \
-+           file://CVE-2024-45616-0009.patch \
-+           file://CVE-2024-45616-0010.patch \
+@@ -26,6 +26,11 @@ SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https \
+            file://CVE-2024-1454.patch \
+            file://CVE-2024-8443-0001.patch \
+            file://CVE-2024-8443-0002.patch \
++           file://CVE-2024-45615-0001.patch \
++           file://CVE-2024-45615-0002.patch \
++           file://CVE-2024-45615-0003.patch \
++           file://CVE-2024-45615-0004.patch \
++           file://CVE-2024-45615-0005.patch \
            "
  
  # CVE-2021-34193 is a duplicate CVE covering the 5 individual
