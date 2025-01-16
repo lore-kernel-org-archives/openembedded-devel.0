@@ -1,359 +1,268 @@
-Return-Path: <peng.zhang1.cn@windriver.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B7EFC02183
-	for <webhook@archiver.kernel.org>; Thu, 16 Jan 2025 13:45:30 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.49031.1737035115114876043
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1307CC02183
+	for <webhook@archiver.kernel.org>; Thu, 16 Jan 2025 14:23:31 +0000 (UTC)
+Received: from mail-yb1-f176.google.com (mail-yb1-f176.google.com [209.85.219.176])
+ by mx.groups.io with SMTP id smtpd.web11.50356.1737037409288868689
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Jan 2025 05:45:15 -0800
+ Thu, 16 Jan 2025 06:23:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3111d49cac=peng.zhang1.cn@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50GD2q3S021049
-	for <openembedded-devel@lists.openembedded.org>; Thu, 16 Jan 2025 05:45:15 -0800
-Received: from nam12-mw2-obe.outbound.protection.outlook.com (mail-mw2nam12lp2040.outbound.protection.outlook.com [104.47.66.40])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 443mt75e1q-2
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 16 Jan 2025 05:45:14 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oR8/4DBe0BcSrYVbYEj2QOyjBdZfrBPHWD3OrtwqUrzwIeAyiSLSTnfzm28iKAvwRNlv9rJsLsCBmnPh1gaagm7m7hbWKbRHxHbcLvvtBV3BBt6o5KihRcrf0o05keDaPw4PF+9ocn92sNz5XqnhMMoHxH7As/53QZmgxH6XoaCPs9pVpIUFpu/J2OAjlg1aaIOuECHyUTC9I4LxPgTXWqxB0UFy7sr/no9/YTV1BfiEIezP13y+rHJM7IS1aov1LaiHjjv0Tpyo86v1CUL2Xv/+FGmZMNy0UZHGl7VCR0PRAOt5wai0NnPO7VFcY0aV+LtoLjUkjV8SXD6t1t3EIA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dkSrl6++cQBCwkF65TolIb+sYAhhk1otaeN7plFWPg0=;
- b=yq4z9V04Tq8EX30NPLLztCiqhRU4EFwXJjB055/fxs8y6zBZXT4YR5SfE5lhsIUq5dRVaAUGuPWHXHfm6VPiAg42SyLolG2JndpAFHuVcqwkC3yIKIhf4gSAJv/Wzxd6ydV/eJ5hCQt40PNhzoxKmT0u1QOgVtEE4woRnZOiFMzO34t2i/02pIIy0BrXWa8Zmb5SNEbDiGMXENZSgD6W5EjWH9QQe0PAD1Ic/qESpS9gcik9iLmueF4xyrtIjPp4sRkNpMVJh0LVfaEDRBw6dxfyHBJgZF95i+FX2ac/7OaBRYkwQOm7VIMtlcfRLsJpxQODsA0QQl9ztyXHMp24VQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from CH3PR11MB8562.namprd11.prod.outlook.com (2603:10b6:610:1b8::13)
- by DS0PR11MB7444.namprd11.prod.outlook.com (2603:10b6:8:146::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.12; Thu, 16 Jan
- 2025 13:45:12 +0000
-Received: from CH3PR11MB8562.namprd11.prod.outlook.com
- ([fe80::24c6:f8fc:1afe:179f]) by CH3PR11MB8562.namprd11.prod.outlook.com
- ([fe80::24c6:f8fc:1afe:179f%7]) with mapi id 15.20.8356.010; Thu, 16 Jan 2025
- 13:45:12 +0000
-From: peng.zhang1.cn@windriver.com
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 2/2] opensc: fix CVE-2024-8443
-Date: Thu, 16 Jan 2025 21:45:01 +0800
-Message-Id: <20250116134501.348974-2-peng.zhang1.cn@windriver.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250116134501.348974-1-peng.zhang1.cn@windriver.com>
-References: <20250116134501.348974-1-peng.zhang1.cn@windriver.com>
-Content-Type: text/plain; charset=UTF-8
-X-ClientProxiedBy: TY2PR06CA0024.apcprd06.prod.outlook.com
- (2603:1096:404:42::36) To CH3PR11MB8562.namprd11.prod.outlook.com
- (2603:10b6:610:1b8::13)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mvL0l73P;
+ spf=pass (domain: gmail.com, ip: 209.85.219.176, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f176.google.com with SMTP id 3f1490d57ef6-e549be93d5eso1854705276.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Jan 2025 06:23:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1737037408; x=1737642208; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=7ZsEd5LJLPNFd4AUxTbaZiP7vQxqQhWhn66slsNKqBk=;
+        b=mvL0l73P4UbWwyOG53Bgqr2durCrduX2n5zWTYXrU9D1Mz+IpxmtA6J1OBE3teW4ny
+         5l6pUtsbGl5JSHLGwIRVT7vAdKDiGWt/XodtGpLhjVYrrJLDuBWCCocyY0tAru3HfKXO
+         C0Bzz59YM+fai1pyPN8/RUp+EtuTn7h8OUZQK+hWC66kc+mZOD87LkQiHl71jZgru8V/
+         aRhNkM95fl7KF6nLtHcBypAopmFBCgKsJjIUl0XrjFshRw58AFSVslFHcibPwP8trLcN
+         Ep9d+Vm82dTPYoTwkSDMOzM1P/phQRgirZ99HmEZNOA+ZHHGRwpf4blUq1PsXZXMAWBy
+         bHTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1737037408; x=1737642208;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=7ZsEd5LJLPNFd4AUxTbaZiP7vQxqQhWhn66slsNKqBk=;
+        b=CO/LVPB7olWzEZV/3W41Mcgpy4wBb9QaRx2+B369zWi4U8zMibOMU/1795t58KB1bW
+         EtsyQKqk4P+O1H1S/fE1ZB5TaLoy96RhIp1yJ4xJirje12A84T9+Ja4VesXJFV6xG65y
+         0EAqzRpK6YoXv8dImA7BHHLj+C5w+KQgfQzEvxNUqh0qePL2207r5w21A/S2bvaUUxOI
+         Dr2LvMUw+Sjyht6eHI6gWenQTot4X+PNYuYtCTiafgqNUbWIpAWyVAUA7An3PvJlofoo
+         2rgbEgMgkjDEkn9V2QSvcH/i6rmwsQ/ThzYN8F7dGz3etAJTNU8nFtO1+L31qE2cIgmf
+         MBMA==
+X-Gm-Message-State: AOJu0YwPLv5Npswg3uUwaGEq7066mePy2VM5+KRW0+b0FEypzrF44RXy
+	hE66XTmAsZpg41G0BFZxaEvYi5lmKo+rJozmzQizMvh+dVr9w2o2sUtPOQla
+X-Gm-Gg: ASbGncvGfBhq/B9y57sVscenXaxDdB2//AWIDQV1nOYQiMR/UF0imv3hECZxLBWSS1X
+	d6/99+TTh3eYNmp+cWLquVPSDDUyE+gtrr+Z6otMpGQDPQVqgmVDA8EtHi7XlMFTLbExxJr1HQ2
+	zg8vvGbR2vFR2213SmoC5mjpznR5hdZ3Ty60jm1Qg6MNgGI4707FnVB0eDZBcUv2b/qm5pWYe2t
+	9bmOzZhKTlyr/g409Yg6XAASNsTDfgiQBPehq6n3TYu6ASJsONN5MBbefITliYKA40xLZuWMuEt
+	tREpiGYPX1ExW2zrzDC4xx6mWUT2hbD4
+X-Google-Smtp-Source: AGHT+IG1ZXSOvTyWHRQBP5hxP8AZwyghEZ3ZMMUKLv/2JS6oIWZatjg89xvRMgA1WD9UYb7Cr/4o3Q==
+X-Received: by 2002:a05:6902:12c9:b0:e57:3a14:a22d with SMTP id 3f1490d57ef6-e573a14a377mr16460798276.2.1737037408217;
+        Thu, 16 Jan 2025 06:23:28 -0800 (PST)
+Received: from ?IPV6:2600:1700:45dd:7000:3a5d:3b3f:a37c:dcbd? ([2600:1700:45dd:7000:3a5d:3b3f:a37c:dcbd])
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e57ab2a75e1sm43224276.3.2025.01.16.06.23.27
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 16 Jan 2025 06:23:27 -0800 (PST)
+Message-ID: <745edda5-7754-4761-aae4-1b87518322fb@gmail.com>
+Date: Thu, 16 Jan 2025 09:23:26 -0500
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR11MB8562:EE_|DS0PR11MB7444:EE_
-X-MS-Office365-Filtering-Correlation-Id: e406b434-5c3f-450a-b697-08dd3633ffd3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|52116014|366016|376014|1800799024|38350700014;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?WmhHZ0x6eEZrQ2UvUlJPMXlyMDRGbktXeHFRbm5WdWZvdTBaa3UvSUdrcnBU?=
- =?utf-8?B?U0RFdmpkTGlpOWxsM3haTk1jNHp2Q2F1TklHV2ZhOE1zVG1RY2xQNFBJTXVU?=
- =?utf-8?B?c0J3bzFUNFU5NFdhM0RKZzJIMTIzajdWakVrMVVZRzdJNDlBVTlENFFNMFE3?=
- =?utf-8?B?Vy9hQUFCc2p3WkhUaU4vaWtQanZUMVhvS0hQaHpNRkZ5MFNrRFlOd3Q4VG90?=
- =?utf-8?B?cHJBRU53WVZSTTJLanFteko5VVNPRkEzRmRabGl1eTJEZzNEcGswdlF6OXh5?=
- =?utf-8?B?M3UwSUZyRW1RZncydUFNN0NqSGJ0N2RnNlFiLzY0TGVoQlFJMXhwSmN3elor?=
- =?utf-8?B?azh1NDV5amJzZDVxYXI5MXRvbkZJeklCd0lTTHpHL1RDZVQxMUFjMFlqVUlC?=
- =?utf-8?B?VlFUalV5ZzFoU1dwQUN4SVJ4YVdETHdENVkzdzJqKzNVbUYxRUQ1MVNwTnYv?=
- =?utf-8?B?WndVTEpjRjEwWFk0S0pheWJ3cmYwSHhiZUpqcHcvYUhKbFlLUDh3bTM2TDIy?=
- =?utf-8?B?SHF4SzF0QTFvVVJ3d3VuaUEyd2JzRXI4UTRTVXdWRGxxbGF0eTkzMHFlalh2?=
- =?utf-8?B?L0k4Q3hQN0ZyNlZnV3R6aDQ2WlZIR0w5SW01R1l5S25rSXFvbUxwV2I4SEVm?=
- =?utf-8?B?cXJwSndLdUQwWG1DZ1F1ZUhLTWZ4VVVzWktreCtpREtjOWY4bEZtUjRpQW1m?=
- =?utf-8?B?TGN0NVFRUjJlN2YwNE1INTc5ZU1mQ0pnRVRESE1rVXJNZ2FMRzYwTkoxaVls?=
- =?utf-8?B?QzY2ZFY0aXBsL05IRXN1amlIV3pMdGR6Y0Z1dW9GSUdkV3haOFBLMFg1NlE2?=
- =?utf-8?B?MDl1OUhBNGFJRkFrUk0xcWd0WWNQREJoSStvd0xxN2VjcFdtVHBWdkVGT3NH?=
- =?utf-8?B?M0paRXRQY3lGNmNnbDliTXU3eUovMTRzQUQzWEd1bVAzMms3T3AxWGl3eGZC?=
- =?utf-8?B?RzJTM1ZPWUZ2OUl0WUk2WTNGU1ovT0VsSnRWU2RqYmlsdU12VTYrUktMSjlm?=
- =?utf-8?B?RGtlOTJEU0VwL2NOc2U4Y1l4b2VoYnpEZ1FzM1N2SGY2WTc3Q0liMFJ0QkdU?=
- =?utf-8?B?VDVPaVlxNXE0U0QrWjdaYkd5RXdZRXlrMExxeVpEejNVNlBFYWJmK045S05G?=
- =?utf-8?B?NkVvVDIzV0MwZjBRbzNYNzNteEVBYkl6c0VSM3FFL3RNVmt0WlpYSU95RUhR?=
- =?utf-8?B?a1ZDQmNyQnIwNEM0N2sxaGNMQTI4TGk1K2czblJteXl1c20rVWJpSXMxZVdX?=
- =?utf-8?B?bjJndEVtMlZZUkFqOVBRbGJLdm1vamtyQm5JeVp4emJoWmhZRVN0b0E2Qmdu?=
- =?utf-8?B?Zmp1TEZjelJ4dzBkMk9uaVZSYmhXNUFTOUhpNHVBZFdKaU45ejQ1a0pKakVa?=
- =?utf-8?B?dCtMR2d4UDhNbDdtQjM3OTgxaFZudkpCZkhlZktMZk9xK2t5bmNMUmxmdXVS?=
- =?utf-8?B?OGpmYVhiaE15SDNlR2ZDNWpwOFdHUFdPY2FDOG1KcXBwUFlOKzAvM3ZaN1BE?=
- =?utf-8?B?VUF6TlpwSlFzODEwemI4c2F4eDFtUTE2T0ovb3lsdzl5RzVlVHduS1VlbEUv?=
- =?utf-8?B?a0ZBc2N0alVHcnJWdkNBNXcvejlhQi8xMCtwVnFwYUhZU01MRC9Sb0lSNE1V?=
- =?utf-8?B?Nmg3UmQ5a3JabkdsMXJ2RmIxTVpLS2IyaTZBUTBMeTFrVXFzS2paTG14eFFD?=
- =?utf-8?B?RlpDUThzV09ObHFmWERGYkNaOWY5SzNxbkJ2U1hCTnd1OEdHZnRBcWtHekRQ?=
- =?utf-8?B?aEZnbHl6UmxjRzBZbVE3RStiOGZ2WGhuZ0hhTkhPMlpIMGhkT0tyTVc1dE9Y?=
- =?utf-8?B?ZTNwNjlhYjhISmVoclFNUXFnOUdiUzVVMUo4cTVGN2tESk5yb05wQ0FlODY4?=
- =?utf-8?B?Y2REQUNQS055YjFhb2hWNXJHc1RTOXNxeE4yLzZZS21OYkE9PQ==?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR11MB8562.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(52116014)(366016)(376014)(1800799024)(38350700014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?bHhFWGg4bUFPU2dnTXlqZElFTktqQnQ1Ky9EOGQ3anlLNG5NT0d3Y1YrSlpP?=
- =?utf-8?B?MjJ2eHc5SHdSTjVSbStaSTRSSHozU2NWQ2VlN3VjNVRickhneUkydUZLZit3?=
- =?utf-8?B?cWlkOHN3ZXhXbERPTnZlSTkzZVAvU1V3ZmNWdEI4cjFxR3FlNlJTOXhWTWha?=
- =?utf-8?B?OFo1cWdFRHBOVWZYOEplQ2ZzbFpBVHlmdytLenFEUzBJREJ0T3B5bHl3c3d0?=
- =?utf-8?B?cUJPUXZZNjFDUEhxSWdLQ2kxQTNXdFd3RkxYRmRHZGp4LzNpVXRsZzdBWU44?=
- =?utf-8?B?dGJhNTJQNEw3Y1NMNXI5bVFia2JLTjB6bExSMWdZcFQrTSs3Ykp0QTFiTnVQ?=
- =?utf-8?B?WW10ZW44TFdOWVRnWSs3L0JTMHQrMVFxMFM0azBqMU9NdFRsc0J4aktBTFRU?=
- =?utf-8?B?dTVIS0J1dm5HaStVYnFHQmJoT001M0NTaWQrb0J2VWFjU2daNmxpdHQxcEhv?=
- =?utf-8?B?L3dDUW9sREZsbjB5aDA2MzUwNVg2M1h6K1JsZHRaV2lVS3JqTk84N3VXVCts?=
- =?utf-8?B?MC9jTWdtWERZbGR0Z3dqSHZzczlvdW9scVhGOHNlcXd6NnI5b2F4V3RzRnJh?=
- =?utf-8?B?WDJkcW9oNVo3Y1JKQmorMGxqUWtaNHpnR2I4ZlZuaXQzb0lXbFZ1RmJ5azdw?=
- =?utf-8?B?WS9BOHpQQjlrOG8rNmRCNHhaOXQ2VWw4elBFVXZ6UkpXZjRvcVJWTDZsK1VC?=
- =?utf-8?B?RlBqU0ZqSGorM3A5aGxOTnF5cmo2VThNNUxZZi9nbTV3c0lUMTZLQmVSTHNp?=
- =?utf-8?B?SUhNK2pIZGpOMW0vUiswMDlDTVVzcE54YWhkZjNYMnpRempVK0xtM0xYRHpC?=
- =?utf-8?B?c05yUGp1cllnRmNUbkxnaVA5Q3ZxWjhGWUtXRGcxaDU3QStVckFpRjdLeW05?=
- =?utf-8?B?L05ZNFl1T3NkSmxkY1dyQndEYURGc3lXKzcvYlpaeklmVHJscFZxNERMTXY3?=
- =?utf-8?B?cjliM1dIRFNjM3JTcnk1cnpZcldHalVjMThNTmNuTEpWRlRmOUlnODlNUHZD?=
- =?utf-8?B?Q3g5Y2pDOG50QklIbFdxMFBodnZjRnZxMk10Tk1QWXQ4UUo1K2lpaFVOTFJh?=
- =?utf-8?B?dXE3WkpTd2Z5RDRtOEdadzFMcDErUEVtbGpVR0M4dTlOUVp2ZDU1ajdRTGpl?=
- =?utf-8?B?SkFQTXdiQjlxQlJRMTh4WHNteWNHQ0M4SXhyVnJ1K1l2WXY5aVJWSGFXeFZV?=
- =?utf-8?B?bEVuUzdUSFp3ZGlJenBHM1dUMXlnSzFjNWs1SjJ1NEJVQWZzTXV5L0pZUDhM?=
- =?utf-8?B?NW9WdE55RC96RTFkL05pOWtuM0dGdnVUQ1lhdDdLSWNVZCtWcjhxNFR4UWFk?=
- =?utf-8?B?UEhVeTdrN2dvakJ2eWw4Y0tzd3MvVVNac3AxT3RqcWhubTZmREpMZENCOEZs?=
- =?utf-8?B?L1pvNmhmNEd0NFFLai8vN1E2ckZWYS8xWHJPc1pET2ZjaDJ2andxbkU4TlVI?=
- =?utf-8?B?WDAwUklFdjBQZ0xTcWx6MG5Va1lSZ0liQythUmVOOFczcVkrU2x1a3JLajc0?=
- =?utf-8?B?R3l5WTNOTm9SWmlvcVlwenNTZ3NnZktjQ1Exa3h6QzhiUkozYkZUNU9PeVRi?=
- =?utf-8?B?bElyamNHd2VEVVBnUTQzYmdsRnFZWEovYk55NXZJd3pibGcxdVhKUVhVekIw?=
- =?utf-8?B?KzV1cEErWTFneWJDZ2ZmSmtZbjNDZ0ZPZEQ1RkZPVU9VT3BYR1laVHp4c0Rh?=
- =?utf-8?B?MzdCeGwrTHNRdlh5KzRlZHl3N1dsOVhudDJ3SUoyekZTWDhJREVUek1oRjVy?=
- =?utf-8?B?MXlFQmhJY3F4WmhldXVmcTFXNC9QdWNtZys3V0ZydGFORFNpNnVPdUNMT0JT?=
- =?utf-8?B?VVBoM01uQzJVY1lNYTJWTWFRVEV2QzZjbWhiMG90Vm1VQkd0ZkxWUmxtQWcz?=
- =?utf-8?B?TnJDbmVpRXUzaWE1K1dNZm9hT0dqampEMkl2SWhRa0I4VHV2RTdHTVBDK1Yy?=
- =?utf-8?B?c2lxREJ5enZhck9wNlppTFFnOEQ3NE1ueDV1Nm5KN1pBWG5lMnk1Y0FwZUxD?=
- =?utf-8?B?OXRiT09veThNZTFMbkM1RU9pK1dvY2xiZ3BsRVk2RDh3cFhiWjk1ZTl4SVI0?=
- =?utf-8?B?RW1aTnZwWjhoaHY0Z3h4b0NBWGQ0OEI1aUJoTVZpMTdROE8xaTVsWWR2Wjg3?=
- =?utf-8?B?YTc5OGZKUWF1VlVXZHBXRzhqdHg5eW4yR2c4TENySXBLbi8xWm5qWEtTdkwy?=
- =?utf-8?B?eHc9PQ==?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e406b434-5c3f-450a-b697-08dd3633ffd3
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB8562.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jan 2025 13:45:12.1404
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2NRjeunX/39bGClyGkQftpGTXatWOg+776Azxg5YUivAEpgdZyFon+98POftuv0GOQU32fStc0YFAGqvTkoj8iJlN+9384kYxQ1NL7nl1SA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR11MB7444
-X-Proofpoint-ORIG-GUID: 6ndl-s6Lkhe_wcroQeSDBWbi3-Lquh-m
-X-Authority-Analysis: v=2.4 cv=SeoNduRu c=1 sm=1 tr=0 ts=67890d6a cx=c_pps a=+kc2f53xTGsvuL7uaCOpcA==:117 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=VdSt8ZQiCzkA:10 a=bRTqI5nwn0kA:10
- a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8 a=cm27Pg_UAAAA:8 a=t7CeM3EgAAAA:8 a=20KFwNOVAAAA:8 a=7p7RPr-GalsxoHJJx9wA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: 6ndl-s6Lkhe_wcroQeSDBWbi3-Lquh-m
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-01-16_05,2025-01-16_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 clxscore=1015
- mlxlogscore=999 mlxscore=0 impostorscore=0 priorityscore=1501
- lowpriorityscore=0 bulkscore=0 malwarescore=0 phishscore=0 suspectscore=0
- adultscore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
- engine=8.21.0-2411120000 definitions=main-2501160104
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 50GD2q3S021049
+User-Agent: Mozilla Thunderbird
+Subject: Re: styhead merge request: Jan 12th
+To: Khem Raj <raj.khem@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+References: <05f57241-f78b-441b-a352-39ebf6f8cabf@gmail.com>
+ <CAMKF1srwrOi7Lh72+P0xYmGUs0a2GbvigduRYU6TqaijDt92og@mail.gmail.com>
+Content-Language: en-US
+From: akuster808 <akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; keydata=
+ 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
+ ApZ86eOP
+In-Reply-To: <CAMKF1srwrOi7Lh72+P0xYmGUs0a2GbvigduRYU6TqaijDt92og@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Jan 2025 13:45:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114914
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Jan 2025 14:23:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114915
 
-From: Zhang Peng <peng.zhang1.cn@windriver.com>
 
-CVE-2024-8443:
-The Easy Mega Menu Plugin for WordPress =E2=80=93 ThemeHunk plugin for Wo=
-rdPress is vulnerable
-to Stored Cross-Site Scripting via the =E2=80=98themehunk_megamenu_bg_ima=
-ge' parameter in all
-versions up to, and including, 1.1.0 due to insufficient input sanitizati=
-on and output
-escaping. This makes it possible for authenticated attackers, with subscr=
-iber-level
-access and above, to inject arbitrary web scripts in pages that will exec=
-ute whenever
-a user accesses an injected page. Please note that this was partially fix=
-ed in 1.1.0
-due to the missing authorization protection that was added.
 
-Reference:
-[https://nvd.nist.gov/vuln/detail/CVE-2024-8433]
 
-Upstream patches:
-[https://github.com/OpenSC/OpenSC/commit/02e847458369c08421fd2d5e9a16a5f2=
-72c2de9e]
-[https://github.com/OpenSC/OpenSC/commit/b28a3cef416fcfb92fbb9ea7fd3c71df=
-52c6c9fc]
+On 1/12/25 10:54 PM, Khem Raj wrote:
+> Hi Armin,
+>
+> This is not merging into styhead without conflicts
+>
+> CONFLICT (content): Merge conflict in
+> meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240722.0.bb
+> Can you take a look and perhaps update your baseline ?
 
-Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
----
- .../opensc/files/CVE-2024-8443-0001.patch     | 60 +++++++++++++++++++
- .../opensc/files/CVE-2024-8443-0002.patch     | 55 +++++++++++++++++
- .../recipes-support/opensc/opensc_0.25.1.bb   |  2 +
- 3 files changed, 117 insertions(+)
- create mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-8443-00=
-01.patch
- create mode 100644 meta-oe/recipes-support/opensc/files/CVE-2024-8443-00=
-02.patch
+Hmm.. rebase and pushed again.
 
-diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-8443-0001.patc=
-h b/meta-oe/recipes-support/opensc/files/CVE-2024-8443-0001.patch
-new file mode 100644
-index 000000000..7d80aba76
---- /dev/null
-+++ b/meta-oe/recipes-support/opensc/files/CVE-2024-8443-0001.patch
-@@ -0,0 +1,60 @@
-+From b28a3cef416fcfb92fbb9ea7fd3c71df52c6c9fc Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Mon, 12 Aug 2024 19:02:14 +0200
-+Subject: [PATCH] openpgp: Do not accept non-matching key responses
-+
-+When generating RSA key pair using PKCS#15 init, the driver could accept
-+responses relevant to ECC keys, which made further processing in the
-+pkcs15-init failing/accessing invalid parts of structures.
-+
-+Thanks oss-fuzz!
-+
-+https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=3D71010
-+
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+
-+CVE: CVE-2024-8443
-+Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/b28a3=
-cef416fcfb92fbb9ea7fd3c71df52c6c9fc]
-+
-+Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
-+---
-+ src/libopensc/card-openpgp.c | 10 ++++++++++
-+ 1 file changed, 10 insertions(+)
-+
-+diff --git a/src/libopensc/card-openpgp.c b/src/libopensc/card-openpgp.c
-+index fad32f0ce..f99ec0db9 100644
-+--- a/src/libopensc/card-openpgp.c
-++++ b/src/libopensc/card-openpgp.c
-+@@ -2877,6 +2877,9 @@ pgp_parse_and_set_pubkey_output(sc_card_t *card, u=
-8* data, size_t data_len,
-+=20
-+ 		/* RSA modulus */
-+ 		if (tag =3D=3D 0x0081) {
-++			if (key_info->algorithm !=3D SC_OPENPGP_KEYALGO_RSA) {
-++				LOG_FUNC_RETURN(card->ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED);
-++			}
-+ 			if ((BYTES4BITS(key_info->u.rsa.modulus_len) < len)  /* modulus_len =
-is in bits */
-+ 				|| key_info->u.rsa.modulus =3D=3D NULL) {
-+=20
-+@@ -2892,6 +2895,9 @@ pgp_parse_and_set_pubkey_output(sc_card_t *card, u=
-8* data, size_t data_len,
-+ 		}
-+ 		/* RSA public exponent */
-+ 		else if (tag =3D=3D 0x0082) {
-++			if (key_info->algorithm !=3D SC_OPENPGP_KEYALGO_RSA) {
-++				LOG_FUNC_RETURN(card->ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED);
-++			}
-+ 			if ((BYTES4BITS(key_info->u.rsa.exponent_len) < len)  /* exponent_le=
-n is in bits */
-+ 				|| key_info->u.rsa.exponent =3D=3D NULL) {
-+=20
-+@@ -2907,6 +2913,10 @@ pgp_parse_and_set_pubkey_output(sc_card_t *card, =
-u8* data, size_t data_len,
-+ 		}
-+ 		/* ECC public key */
-+ 		else if (tag =3D=3D 0x0086) {
-++			if (key_info->algorithm !=3D SC_OPENPGP_KEYALGO_ECDSA &&
-++					key_info->algorithm !=3D SC_OPENPGP_KEYALGO_ECDH) {
-++				LOG_FUNC_RETURN(card->ctx, SC_ERROR_UNKNOWN_DATA_RECEIVED);
-++			}
-+ 			/* set the output data */
-+ 			/* len is ecpoint length + format byte
-+ 			 * see section 7.2.14 of 3.3.1 specs */
-+--
-+2.34.1
-diff --git a/meta-oe/recipes-support/opensc/files/CVE-2024-8443-0002.patc=
-h b/meta-oe/recipes-support/opensc/files/CVE-2024-8443-0002.patch
-new file mode 100644
-index 000000000..30a7e63a7
---- /dev/null
-+++ b/meta-oe/recipes-support/opensc/files/CVE-2024-8443-0002.patch
-@@ -0,0 +1,55 @@
-+From 02e847458369c08421fd2d5e9a16a5f272c2de9e Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Thu, 15 Aug 2024 11:13:47 +0200
-+Subject: [PATCH] openpgp: Avoid buffer overflow when writing fingerprint
-+
-+Fix also surrounding code to return error (not just log it)
-+when some step fails.
-+
-+Thanks oss-fuzz
-+
-+https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=3D70933
-+
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+
-+CVE: CVE-2024-8443
-+Upstream-Status: Backport [https://github.com/OpenSC/OpenSC/commit/02e84=
-7458369c08421fd2d5e9a16a5f272c2de9e]
-+
-+Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
-+---
-+ src/libopensc/card-openpgp.c | 17 ++++++++++++-----
-+ 1 file changed, 12 insertions(+), 5 deletions(-)
-+
-+diff --git a/src/libopensc/card-openpgp.c b/src/libopensc/card-openpgp.c
-+index f99ec0db9..3957440de 100644
-+--- a/src/libopensc/card-openpgp.c
-++++ b/src/libopensc/card-openpgp.c
-+@@ -2756,14 +2756,21 @@ pgp_calculate_and_store_fingerprint(sc_card_t *c=
-ard, time_t ctime,
-+ 	/* update the blob containing fingerprints (00C5) */
-+ 	sc_log(card->ctx, "Updating fingerprint blob 00C5.");
-+ 	fpseq_blob =3D pgp_find_blob(card, 0x00C5);
-+-	if (fpseq_blob =3D=3D NULL)
-+-		LOG_TEST_GOTO_ERR(card->ctx, SC_ERROR_OUT_OF_MEMORY, "Cannot find blo=
-b 00C5");
-++	if (fpseq_blob =3D=3D NULL) {
-++		r =3D SC_ERROR_OUT_OF_MEMORY;
-++		LOG_TEST_GOTO_ERR(card->ctx, r, "Cannot find blob 00C5");
-++	}
-++	if (20 * key_info->key_id > fpseq_blob->len) {
-++		r =3D SC_ERROR_OBJECT_NOT_VALID;
-++		LOG_TEST_GOTO_ERR(card->ctx, r, "The 00C5 blob is not large enough");
-++	}
-+=20
-+ 	/* save the fingerprints sequence */
-+ 	newdata =3D malloc(fpseq_blob->len);
-+-	if (newdata =3D=3D NULL)
-+-		LOG_TEST_GOTO_ERR(card->ctx, SC_ERROR_OUT_OF_MEMORY,
-+-			"Not enough memory to update fingerprint blob 00C5");
-++	if (newdata =3D=3D NULL) {
-++		r =3D SC_ERROR_OUT_OF_MEMORY;
-++		LOG_TEST_GOTO_ERR(card->ctx, r, "Not enough memory to update fingerpr=
-int blob 00C5");
-++	}
-+=20
-+ 	memcpy(newdata, fpseq_blob->data, fpseq_blob->len);
-+ 	/* move p to the portion holding the fingerprint of the current key */
-+--
-+2.34.1
-diff --git a/meta-oe/recipes-support/opensc/opensc_0.25.1.bb b/meta-oe/re=
-cipes-support/opensc/opensc_0.25.1.bb
-index 74738247b..e41c457fa 100644
---- a/meta-oe/recipes-support/opensc/opensc_0.25.1.bb
-+++ b/meta-oe/recipes-support/opensc/opensc_0.25.1.bb
-@@ -15,6 +15,8 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dcb8aedd3bced=
-19bd8026d96a8b6876d7"
- SRCREV =3D "0a4b772d6fdab9bfaaa3123775a48a7cb6c5e7c6"
- SRC_URI =3D "git://github.com/OpenSC/OpenSC;branch=3Dstable-0.25;protoco=
-l=3Dhttps \
-            file://0001-PR-Fixes-for-uninitialized-memory-issues.patch \
-+           file://CVE-2024-8443-0001.patch \
-+           file://CVE-2024-8443-0002.patch \
-          "
- DEPENDS =3D "virtual/libiconv openssl"
-=20
---=20
-2.34.1
+- armin
+>
+> On Sun, Jan 12, 2025 at 5:02 PM akuster808 <akuster808@gmail.com> wrote:
+>> The following changes since commit 7cd38212e73e0e9f42f4d92defb16dd81f71221d:
+>>
+>>     lvm2: Remove the lvm2-udevrules package (2024-11-25 15:32:56 -0500)
+>>
+>> are available in the Git repository at:
+>>
+>>     https://git.openembedded.org/meta-openembedded styhead-next
+>>
+>> for you to fetch changes up to 31a24ab044a24936f50a80828ecd7048bf5b1f5e:
+>>
+>>     libmodule-build-tiny-perl: fix QA Issue: TMPDIR [buildpaths]
+>> (2025-01-12 19:57:19 -0500)
+>>
+>> ----------------------------------------------------------------
+>> Benjamin Bouvier (1):
+>>         bridge-utils: add CVE_PRODUCT
+>>
+>> Derek Straka (1):
+>>         nginx: Upgrade mainline release version 1.27.1 -> 1.27.3
+>>
+>> Ghislain Mangé (1):
+>>         wireshark: use inherit_defer for conditional cases
+>>
+>> Hongxu Jia (1):
+>>         ntfs-3g-ntfsprogs: fix CVE-2023-52890
+>>
+>> J. S. (4):
+>>         libhtml-tree-perl: Drop unnecessary SRC_URI md5sum
+>>         libhtml-tree-perl: update HOMEPAGE
+>>         libhtml-tree-perl: fix QA Issue: TMPDIR [buildpaths]
+>>         libmodule-build-tiny-perl: fix QA Issue: TMPDIR [buildpaths]
+>>
+>> Khem Raj (3):
+>>         mariadb: Fix build with clang-20/trunk
+>>         ghex,gnome-chess,gnome-photos: Add missing dep on itstool-native
+>>         mpd: Fix build with icu 76+
+>>
+>> Markus Volk (2):
+>>         geary: add itstool-native dependency
+>>         eog: add itstool-native dependency
+>>
+>> Peter Kjellerstedt (1):
+>>         abseil-cpp: Do not leak -Wnon-virtual-dtor into the .pc files
+>>
+>> Peter Marko (15):
+>>         proftpd: set status of CVE-2001-0027
+>>         dash: set CVE_PRODUCT
+>>         ace: ignore CVE-2009-1147
+>>         apache2: ignore CVE-1999-0678 and CVE-1999-1412
+>>         apache2: remove old version references from CVEs
+>>         spice: ignore CVE-2016-0749
+>>         gattlib: mark CVE-2019-6498 as fixed
+>>         monkey: ignore CVE-2013-1771
+>>         redis: ignore CVE-2022-0543
+>>         spice-gtk: mark CVE-2012-4425 as fixed
+>>         apache2: ignore disputed CVE CVE-2007-0086
+>>         memcached: ignore disputed CVE-2022-26635
+>>         emlog: set CVE_PRODUCT
+>>         php: upgrade 8.2.20 -> 8.2.26
+>>         wireshark: upgrade 4.2.8 -> 4.2.9
+>>
+>> Ruiqiang Hao (1):
+>>         mariadb: Ensure compatibility with ARMv9 by updating .arch directive
+>>
+>> Yoann Congal (1):
+>>         gimp: fix gimptool buildpaths errors
+>>
+>> Yogita Urade (1):
+>>         postgresql: upgrade 16.4 -> 16.5
+>>
+>>    ...0001-unistr.c-Fix-use-after-free-in-ntfs_uppercase_mbs.patch | 42
+>> ++++++++++++++
+>>    .../ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb            | 1 +
+>>    meta-gnome/recipes-connectivity/geary/geary_46.0.bb             | 1 +
+>>    .../gimp/gimp/0001-gimptool-allow-default-CC-override.patch     | 85
+>> +++++++++++++++++++++++++++++
+>>    meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb                    | 21
+>> +++++++
+>>    meta-gnome/recipes-gnome/eog/eog_47.0.bb                        | 1 +
+>>    meta-gnome/recipes-gnome/ghex/ghex_46.0.bb                      | 1 +
+>>    meta-gnome/recipes-gnome/gnome-chess/gnome-chess_47.0.bb        | 2 +-
+>>    meta-gnome/recipes-gnome/gnome-photos/gnome-photos_44.0.bb      | 1 +
+>>    .../mpd/0001-meson.build-support-building-with-ICU-76.patch     | 52
+>> ++++++++++++++++++
+>>    meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.15.bb       | 1 +
+>>    meta-networking/recipes-daemons/proftpd/proftpd_1.3.8b.bb       | 2 +
+>>    .../recipes-support/bridge-utils/bridge-utils_1.7.1.bb          | 2 +
+>>    meta-networking/recipes-support/memcached/memcached_1.6.17.bb   | 2 +
+>>    meta-networking/recipes-support/spice/spice-gtk_0.42.bb         | 2 +
+>>    meta-networking/recipes-support/spice/spice_git.bb              | 1 +
+>>    .../wireshark/{wireshark_4.2.7.bb => wireshark_4.2.9.bb} |  4 +-
+>>    meta-oe/recipes-connectivity/ace/ace_6.5.19.bb                  | 2 +
+>>    meta-oe/recipes-connectivity/gattlib/gattlib_git.bb             | 2 +
+>>    meta-oe/recipes-core/emlog/emlog.inc                            | 2 +
+>>    meta-oe/recipes-dbs/mysql/mariadb.inc                           | 2 +
+>>    ...1-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch | 44
+>> +++++++++++++++
+>>    ...1-Use-a-lambda-function-as-deleter-prototype-in-unique.patch | 26
+>> +++++++++
+>>    .../0003-configure.ac-bypass-autoconf-2.69-version-check.patch  | 6 +-
+>>    .../postgresql/{postgresql_16.4.bb => postgresql_16.5.bb} |  2 +-
+>>    ...5-Don-t-match-Wnon-virtual-dtor-in-the-flags-are-neede.patch | 30
+>> ++++++++++
+>>    meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240722.0.bb    | 1 +
+>>    .../php/php/0001-ext-opcache-config.m4-enable-opcache.patch     | 4 +-
+>>    .../php/php/0002-build-php.m4-don-t-unset-cache-variables.patch | 2 +-
+>>    .../0003-php-remove-host-specific-info-from-header-file.patch   | 2 +-
+>>    .../php/0006-ext-phar-Makefile.frag-Fix-phar-packaging.patch    | 4 +-
+>>    .../php/php/0008-ext-imap-config.m4-fix-include-paths.patch     | 4 +-
+>>    .../php/php/0009-php-don-t-use-broken-wrapper-for-mkdir.patch   | 3 +-
+>>    meta-oe/recipes-devtools/php/php/0010-iconv-fix-detection.patch | 2 +-
+>>    meta-oe/recipes-devtools/php/{php_8.2.20.bb => php_8.2.26.bb} |  2 +-
+>>    meta-oe/recipes-extended/redis/redis_7.2.5.bb                   | 1 +
+>>    meta-oe/recipes-shells/dash/dash_0.5.12.bb                      | 2 +
+>>    meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb        | 10 +++-
+>>    .../recipes-perl/libmodule/libmodule-build-tiny-perl_0.048.bb   | 7 +++
+>>    meta-webserver/recipes-httpd/apache2/apache2_2.4.62.bb          | 17
+>> +++---
+>>    meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb             | 1 +
+>>    .../recipes-httpd/nginx/{nginx_1.27.1.bb => nginx_1.27.3.bb} |  4 +-
+>>    42 files changed, 374 insertions(+), 29 deletions(-)
+>>    create mode 100644
+>> meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/0001-unistr.c-Fix-use-after-free-in-ntfs_uppercase_mbs.patch
+>>    create mode 100644
+>> meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-default-CC-override.patch
+>>    create mode 100644
+>> meta-multimedia/recipes-multimedia/musicpd/mpd/0001-meson.build-support-building-with-ICU-76.patch
+>>    rename meta-networking/recipes-support/wireshark/{wireshark_4.2.7.bb
+>> => wireshark_4.2.9.bb} (95%)
+>>    create mode 100644
+>> meta-oe/recipes-dbs/mysql/mariadb/0001-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch
+>>    create mode 100644
+>> meta-oe/recipes-dbs/mysql/mariadb/0001-Use-a-lambda-function-as-deleter-prototype-in-unique.patch
+>>    rename meta-oe/recipes-dbs/postgresql/{postgresql_16.4.bb =>
+>> postgresql_16.5.bb} (86%)
+>>    create mode 100644
+>> meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0005-Don-t-match-Wnon-virtual-dtor-in-the-flags-are-neede.patch
+>>    rename meta-oe/recipes-devtools/php/{php_8.2.20.bb => php_8.2.26.bb} (99%)
+>>    rename meta-webserver/recipes-httpd/nginx/{nginx_1.27.1.bb =>
+>> nginx_1.27.3.bb} (53%)
+>>
 
 
