@@ -2,48 +2,48 @@ Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C1BBC02185
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CEB5C02188
 	for <webhook@archiver.kernel.org>; Fri, 17 Jan 2025 19:00:12 +0000 (UTC)
-Received: from mail-il1-f181.google.com (mail-il1-f181.google.com [209.85.166.181])
- by mx.groups.io with SMTP id smtpd.web10.2746.1737140410253102479
+Received: from mail-io1-f41.google.com (mail-io1-f41.google.com [209.85.166.41])
+ by mx.groups.io with SMTP id smtpd.web11.2820.1737140409257631655
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Jan 2025 11:00:10 -0800
+ Fri, 17 Jan 2025 11:00:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.181, mailfrom: straka.derek@gmail.com)
-Received: by mail-il1-f181.google.com with SMTP id e9e14a558f8ab-3a9c9f2a569so16992675ab.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Jan 2025 11:00:10 -0800 (PST)
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.41, mailfrom: straka.derek@gmail.com)
+Received: by mail-io1-f41.google.com with SMTP id ca18e2360f4ac-84cdacbc3dbso192456039f.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Jan 2025 11:00:09 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737140409; x=1737745209;
+        d=1e100.net; s=20230601; t=1737140408; x=1737745208;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=SaVdBP7k/jbRl52KUwZefqnUoW51PCbAjqq0yu9KvhQ=;
-        b=hIfeH5Wexm1GhSNnFocGGsVRY6XuwHC2jHooSW7c5CrTrpnj3MUdc1z6OeAreBm0SI
-         /e1+Xvv5nItJpJtcTFQKWu9d4BQdb0ILEvKBhb8JqXpu6WV74+s5QwMVXBKB+gcoo0PR
-         uAhbC7cuos6UVnbeE4ojZBdrPFTBAw3VJAbNc1mWUOBOGGXRTzZZrWCAuJuYBOlHfwF9
-         rMrZSUzO8K8ZcYjInR9MUSdbH82UiXXT1n7McAZ1OuwCX+eYeLdigL3NLeJzQ2qas40v
-         kdm240pziDxUyXF4mggTnzHgwybXPrnKPojkg/e6w6H2whOBuVWGfgP9hSBpYH6Azq0A
-         C9Ug==
-X-Gm-Message-State: AOJu0YxPh0+uyz5cgxmzUFjBco3VIJ1gzCkQdOU0zwL6X4j2tFZgkmpv
-	A9EVravPyrEwA8VrkpxvsFQxmuvDE9KFliHBdos8KiSgGWgQ8bHx3VNhJQ==
-X-Gm-Gg: ASbGncv2pko8ge1Lx75hd6snZqq9TzJwpcpT+bLFDoo7DhtsQLWQnNduVY3fZ7wifUi
-	0OCjEU3MFD/PyDYqTjoowGsnq3KvaQ3NVPGJC+iqBHwUiimquSJs5d0nLqFOmD+bhghgSy7eMgD
-	IdtHKpgIqPQwOVNT5FHzvW/Z+qE1q0TGp1HOo+PKKiNTnipCoNcCDeSYNxUgT83XDHGqWUyXCzh
-	h+R+prjPZG92rdf9nhfrQCSVZu6W2WEnXERUJJI1OWJjN3MuhrUixWBzbx0PXdNdMl4MjLRLeq6
-	FGREM9S4NDPRStw7nTKlmiUpmw==
-X-Google-Smtp-Source: AGHT+IE0Z6IpO1rWvL1yKC2OCra3jRobnikn/iJSebZ3uzAL0vzJwMTKJTBteQuZDKxa/mKPbcKR+w==
-X-Received: by 2002:a05:6e02:1c23:b0:3ce:8ed9:ca94 with SMTP id e9e14a558f8ab-3cf744905d8mr26995705ab.14.1737140409048;
-        Fri, 17 Jan 2025 11:00:09 -0800 (PST)
+        bh=WVHXSZ4xVQbntbKXy4itOCsIgtRYU2+YdQc2eepkcxs=;
+        b=DhjWyMI2JoooP05o7CZMuv3Fl3qiCyTHFiPtU+zRZa+Rwhs5h3R6XHfQcJCK3U/aId
+         XUfaJTHrQMvlz4uW0nfHptbte9hhB28InxfEBKwDh5cTlXoaY05/Kky6xOAuSnFpXsX3
+         Wt8Xf+7Ge/+buHqXJFH2rMfJnKFLhnN3vxfLvC7du8YV1j1wh+o2zE8K6cn5iLqIxUnA
+         X4qMTXUQGvKonPvsCj0UcVYD09WezhvJwPaiYM227gkGF10NDGVqgmzobbAJlOuhoLMi
+         G+4Af08J8pxBxaUVGxtq5XDqLOVvZgw+mozj90pZyZJhTrSFUQHA1rJ8zgSF8m2wmO1E
+         jBew==
+X-Gm-Message-State: AOJu0YyD1cP0inr7D/MJWn5LIpemw8sl6a58mbxSBtQ+bK0RvXk2wpud
+	24SgEWR5QQWq/dRk2A/lDEj9bz7vG+ohxHlQ1JCoKNCPb0eB39I5isMSKg==
+X-Gm-Gg: ASbGnctOmhH9M5Wf6D+k3AWBQAfe9AqxxD0R9XHHvUKVajfAXegjoHHtScGySguvQzE
+	ou33HNxrhlpGHQnsQkpovUmz9JAIZF+QytfS7iHkkdMWDn7iFpRQgJA5nbpcInUVzBIKcG/G/u5
+	u12kgRlYtLK6Hid2peM+CxW7imWfOKWs+DpiAGlTG47nueMpTM+AqIP5Qnzy1I6V+vB4CJANKTs
+	FjBVPvFFiEQPLRdGb95mhVS7ccJj4s3FdQ5IXxm/kfKmVNpZjAkD7oNvcgZcfZT7QQUEjrHfnBU
+	clMIMSlAgIvFokAUbJDDTy4qMg==
+X-Google-Smtp-Source: AGHT+IFDjr6wH0wWfrZef7UT/y/Bj6IopZLWL3PIvOkjgGiJYn1rbRHC111kSaK8masbjW8di6JP3g==
+X-Received: by 2002:a05:6602:2c90:b0:84a:7963:7043 with SMTP id ca18e2360f4ac-851b6162861mr378222239f.1.1737140407961;
+        Fri, 17 Jan 2025 11:00:07 -0800 (PST)
 Received: from alpha.lab.asterius.io (c-24-118-24-24.hsd1.mn.comcast.net. [24.118.24.24])
-        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-4ea75495f5dsm761396173.60.2025.01.17.11.00.08
+        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-4ea75495f5dsm761396173.60.2025.01.17.11.00.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Jan 2025 11:00:08 -0800 (PST)
+        Fri, 17 Jan 2025 11:00:07 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 04/10] python3-requests-file: update recipe to use the ptest-python-pytest class
-Date: Fri, 17 Jan 2025 18:59:38 +0000
-Message-Id: <20250117185944.3434424-4-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 03/10] python3-requests-toolbelt: update recipe to use the ptest-python-pytest class
+Date: Fri, 17 Jan 2025 18:59:37 +0000
+Message-Id: <20250117185944.3434424-3-derek@asterius.io>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250117185944.3434424-1-derek@asterius.io>
 References: <20250117185944.3434424-1-derek@asterius.io>
@@ -53,54 +53,59 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 17 Jan 2025 19:00:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114925
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114924
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/python3-requests-file/run-ptest       |  3 ---
- .../python/python3-requests-file_2.1.0.bb        | 16 +---------------
- 2 files changed, 1 insertion(+), 18 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-requests-file/run-ptest
+ .../python/python3-requests-toolbelt/run-ptest            | 3 ---
+ .../python/python3-requests-toolbelt_1.0.0.bb             | 8 +++-----
+ 2 files changed, 3 insertions(+), 8 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest
 
-diff --git a/meta-python/recipes-devtools/python/python3-requests-file/run-ptest b/meta-python/recipes-devtools/python/python3-requests-file/run-ptest
+diff --git a/meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest b/meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest
 deleted file mode 100644
 index 8d2017d39..000000000
---- a/meta-python/recipes-devtools/python/python3-requests-file/run-ptest
+--- a/meta-python/recipes-devtools/python/python3-requests-toolbelt/run-ptest
 +++ /dev/null
 @@ -1,3 +0,0 @@
 -#!/bin/sh
 -
 -pytest --automake
-diff --git a/meta-python/recipes-devtools/python/python3-requests-file_2.1.0.bb b/meta-python/recipes-devtools/python/python3-requests-file_2.1.0.bb
-index 670a36a64..6e20a10f4 100644
---- a/meta-python/recipes-devtools/python/python3-requests-file_2.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-requests-file_2.1.0.bb
-@@ -8,24 +8,10 @@ SRC_URI[sha256sum] = "0f549a3f3b0699415ac04d167e9cb39bccfb730cb832b4d20be3d98673
- PYPI_PACKAGE = "requests_file"
- UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+diff --git a/meta-python/recipes-devtools/python/python3-requests-toolbelt_1.0.0.bb b/meta-python/recipes-devtools/python/python3-requests-toolbelt_1.0.0.bb
+index 9cbe4927a..8956dee1f 100644
+--- a/meta-python/recipes-devtools/python/python3-requests-toolbelt_1.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-requests-toolbelt_1.0.0.bb
+@@ -4,14 +4,14 @@ HOMEPAGE = "https://toolbelt.readthedocs.org"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=6f14302a4b4099009ab38b4dde5f1075"
  
--inherit pypi python_setuptools_build_meta ptest
--
--SRC_URI += " \
--        file://run-ptest \
--"
-+inherit pypi python_setuptools_build_meta ptest-python-pytest
+-SRC_URI = "file://run-ptest \
++SRC_URI = " \
+ 	   file://090856f4159c40a2927fb88546419f2e1697ad5f.patch \
+ 	   file://720240501dca0b4eacc3295665d7ced8719e11d2.patch \
+           "
  
- DEPENDS += "python3-setuptools-scm-native"
+ SRC_URI[sha256sum] = "7681a0a3d047012b5bdc0ee37d7f8f07ebe76ab08caeccfc3921ce23c88d5bc6"
  
--RDEPENDS:${PN}-ptest += " \
--    python3-pytest \
--    python3-unittest-automake-output \
--"
--
--do_install_ptest() {
--        install -d ${D}${PTEST_PATH}/tests
--        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
--}
--
+-inherit pypi setuptools3 ptest
++inherit pypi setuptools3 ptest-python-pytest
+ 
  RDEPENDS:${PN} += " \
-     python3-requests \
+     python3-requests (>=2.0.1) \
+@@ -21,12 +21,10 @@ RDEPENDS:${PN}-ptest += " \
+     python3-betamax \
+     python3-mock \
+     python3-multiprocessing \
+-    python3-pytest \
+     python3-trustme \
+-    python3-unittest-automake-output \
  "
+ 
+-do_install_ptest() {
++do_install_ptest:append() {
+ 	install -d ${D}${PTEST_PATH}/tests
+ 	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+ 	cp -rf ${S}/setup.py ${D}${PTEST_PATH}
 -- 
 2.34.1
 
