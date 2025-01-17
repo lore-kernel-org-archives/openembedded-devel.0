@@ -2,48 +2,48 @@ Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2ECBC3DA4A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB95BC02185
 	for <webhook@archiver.kernel.org>; Fri, 17 Jan 2025 20:30:52 +0000 (UTC)
-Received: from mail-io1-f45.google.com (mail-io1-f45.google.com [209.85.166.45])
- by mx.groups.io with SMTP id smtpd.web11.4849.1737145847923316378
+Received: from mail-il1-f169.google.com (mail-il1-f169.google.com [209.85.166.169])
+ by mx.groups.io with SMTP id smtpd.web10.4855.1737145843817906467
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Jan 2025 12:30:48 -0800
+ Fri, 17 Jan 2025 12:30:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.45, mailfrom: straka.derek@gmail.com)
-Received: by mail-io1-f45.google.com with SMTP id ca18e2360f4ac-84cdacbc3dbso198736439f.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Jan 2025 12:30:47 -0800 (PST)
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.169, mailfrom: straka.derek@gmail.com)
+Received: by mail-il1-f169.google.com with SMTP id e9e14a558f8ab-3ce7c4115e8so12607635ab.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Jan 2025 12:30:43 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737145847; x=1737750647;
+        d=1e100.net; s=20230601; t=1737145842; x=1737750642;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=XcUDlxDqV9b3kAAsOTwU8HhASAOhA4/q329rPwy8lyU=;
-        b=tWbPdbU/Ra/jYaugwO2uDkU37TtAa301VQ8frCB1+tiMfr0Gdi5LYdbDgQWEbFxqS7
-         as5z90FRizTBdA2CrdNhUxwDNgwoHTgrnhlFI/RDtmKnkxpMrADu3lhYLi2GjnuPW9VM
-         3iek6VlnFBx+P3t5mxsWOuXeOQV4psjj38OoBylquqQMY0F8gBas5kFMzrIqWigzaQgG
-         v8i/SNYis4PLS4P2CnL0hh/haN+zAuk1w0UXv42wKxG6435l4cVG0IpJTMum8iWSYPAS
-         Ih7ljf4XFDCnTYtqOj7adCGI8+XUyzxeXVcM6VqoP0RhKIQbwtNTrRXSqxp3x4cYRl0H
-         Q+iw==
-X-Gm-Message-State: AOJu0YwWjTNXAvL/LeyTBsoZ4t5sjlFr2qGhoCoC0XtClii9ZXsdP2I3
-	JVMP43W2y7/3lTJn5nyNog043pNJoCd1WWKx7z1vAc4vbVwH8AsggcfOvg==
-X-Gm-Gg: ASbGnctzTaX8b0tnXzm9TrHlOQkl2ToOiQpv3cTIR6GmHPyQ30V5BKMUxQndFoP9jLX
-	6OsNOzyX1qv2YC+Y1ceWGACVbtX3lYYmo44QRuU0v9HFJXyLXmO8bNGmdkuzNoMd6a0hBBbA3J4
-	fvKa3ye2Anc2Ewv3Q6hWO3x7sqfXwW8RwPdBa49UVrcQEhZUP5gd0WcvhxPlChJpbKICxYztY3v
-	eHLvGlCyothVwDHE/dDv0uKN9/tg2g0J65/QloWAN+29tKTgqe+YfVHsHP+WPnAHAHTJe4IAQnv
-	xcy509FeQlr0cBrx1WmFxYS+cw==
-X-Google-Smtp-Source: AGHT+IHK0tV09kxz9ZbswOHvU0GHZWoY3XMwsZzP3I0xWZm4wNwDZzXiZSlJIKiudlW2ss+5IcmRdg==
-X-Received: by 2002:a05:6e02:1608:b0:3ce:7e5d:6292 with SMTP id e9e14a558f8ab-3cf743f7c3fmr40253925ab.8.1737145846761;
-        Fri, 17 Jan 2025 12:30:46 -0800 (PST)
+        bh=/hReuyBwswIsANocHFd0MvTLW59W6R+pyjQ66iNMS98=;
+        b=eEQufBJHYg1gn5jZkvsIIKJzojQjtMqe03ITGU/gRKWZAcjlfufnLU+ITfWfeB1hRn
+         LPLNt4Q1yrWSHxVongttEbXRZX3g1C5+UUXXKdqgCM2aGeu5rJm9y29a1g+FxR84n/ih
+         I3SmsAtYJ7xX+5X6dAHiN6E35O7QOr3zvxmBctSVES1WN/rzdbEeG2ao+kwjA2n0z04T
+         XuPANeY6QoYsZqlUrTMI3CVty3ljsog9NSfTctlsMxB/EYWy/2air8A9jEwKScyqMwYB
+         N/Ez3Jz1bj93SiT90njQp9TqUEMjUaYmkVruRKOYN9EGzpC8o/rIPpCCseBTlm4G0cbp
+         GmfA==
+X-Gm-Message-State: AOJu0Yyinp9DfOyXPGwf3lKjeT2Swgz0d3BC10IZwa9k8m/8hfe3wSq8
+	CO9uObAV4YEQk4bNpRpzCUqpyT1Sk4b1mlCu3YYw1YEVEZI+IV1jRihnZg==
+X-Gm-Gg: ASbGnctQtjdLT+O00/5vegwoEgsrjkaiU+4b7PE7EQXWo1hybY1Azfp8JwjrGdrmrDz
+	Q0nphlFmRT+C+8w0yTaZzCAqjFEUWHr7cDAU3zbyrigEoF58l1SVv5hNTG0dYCKweqyIJplX+AG
+	Xc/aaJ1iJb+EYbjSlT2NsczpwHTyL5WzXa2aYiBpsnt6s5hCzcmAS6KdllukyFVaVPESd4M0GkJ
+	XwOvGUasxeO/kp3BiT4xRrZCcF63KhsRvZMnx0W6XN5IzGIVfjpZygnoF6unFF4hs0fofpSXtVQ
+	YQnrSx9C5EQhzpIneI9bU9TcZQ==
+X-Google-Smtp-Source: AGHT+IHbZGC6rClTVsjtebmjd2Hx0fvI4/HUfyh8eCazh84fRI5SDzoxyz0ZSivWMHEleUAUKrCNaA==
+X-Received: by 2002:a05:6e02:6cf:b0:3ce:7c7d:37b3 with SMTP id e9e14a558f8ab-3ce84a62d72mr97196915ab.9.1737145842189;
+        Fri, 17 Jan 2025 12:30:42 -0800 (PST)
 Received: from alpha.lab.asterius.io (c-24-118-24-24.hsd1.mn.comcast.net. [24.118.24.24])
-        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-4ea7566e687sm801814173.128.2025.01.17.12.30.45
+        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-4ea7566e687sm801814173.128.2025.01.17.12.30.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Jan 2025 12:30:45 -0800 (PST)
+        Fri, 17 Jan 2025 12:30:41 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 05/10] python3-py-cpuinfo: update recipe to use the ptest-python-pytest class
-Date: Fri, 17 Jan 2025 20:30:25 +0000
-Message-Id: <20250117203030.3648575-5-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 02/10] python3-pydantic: update recipe to use the ptest-python-pytest class
+Date: Fri, 17 Jan 2025 20:30:22 +0000
+Message-Id: <20250117203030.3648575-2-derek@asterius.io>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250117203030.3648575-1-derek@asterius.io>
 References: <20250117203030.3648575-1-derek@asterius.io>
@@ -53,56 +53,65 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 17 Jan 2025 20:30:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114938
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114935
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/python3-py-cpuinfo/run-ptest               |  3 ---
- .../python/python3-py-cpuinfo_9.0.0.bb                | 11 ++---------
- 2 files changed, 2 insertions(+), 12 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-py-cpuinfo/run-ptest
+ .../recipes-devtools/python/python3-pydantic/run-ptest    | 3 ---
+ .../recipes-devtools/python/python3-pydantic_2.10.5.bb    | 8 ++------
+ 2 files changed, 2 insertions(+), 9 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pydantic/run-ptest
 
-diff --git a/meta-python/recipes-devtools/python/python3-py-cpuinfo/run-ptest b/meta-python/recipes-devtools/python/python3-py-cpuinfo/run-ptest
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic/run-ptest b/meta-python/recipes-devtools/python/python3-pydantic/run-ptest
 deleted file mode 100644
 index 8d2017d39..000000000
---- a/meta-python/recipes-devtools/python/python3-py-cpuinfo/run-ptest
+--- a/meta-python/recipes-devtools/python/python3-pydantic/run-ptest
 +++ /dev/null
 @@ -1,3 +0,0 @@
 -#!/bin/sh
 -
 -pytest --automake
-diff --git a/meta-python/recipes-devtools/python/python3-py-cpuinfo_9.0.0.bb b/meta-python/recipes-devtools/python/python3-py-cpuinfo_9.0.0.bb
-index 2d59a99b1..8aef266e3 100644
---- a/meta-python/recipes-devtools/python/python3-py-cpuinfo_9.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-py-cpuinfo_9.0.0.bb
-@@ -8,9 +8,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d2379ecb0d7a8299101b1e4c160cd1f7"
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic_2.10.5.bb b/meta-python/recipes-devtools/python/python3-pydantic_2.10.5.bb
+index 019781d51..cf211972d 100644
+--- a/meta-python/recipes-devtools/python/python3-pydantic_2.10.5.bb
++++ b/meta-python/recipes-devtools/python/python3-pydantic_2.10.5.bb
+@@ -9,7 +9,7 @@ HOMEPAGE = "https://github.com/samuelcolvin/pydantic"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=09280955509d1c4ca14bae02f21d49a6"
  
- SRC_URI[sha256sum] = "3cdbbf3fac90dc6f118bfd64384f309edeadd902d7c8fb17f02ffa1fc3f49690"
+-inherit pypi python_hatchling
++inherit pypi python_hatchling ptest-python-pytest
  
--inherit ptest pypi python_setuptools_build_meta
-+inherit ptest-python-pytest pypi python_setuptools_build_meta
+ SRC_URI[sha256sum] = "278b38dbbaec562011d659ee05f63346951b3a248a6f3642e1bc68894ea2b4ff" 
  
--SRC_URI += "file://run-ptest \
-+SRC_URI += " \
-             file://0001-test_cli.py-disable.patch \
-            "
- 
-@@ -21,15 +21,8 @@ do_install:append() {
-     done
- }
- 
--do_install_ptest() {
--    install -d ${D}${PTEST_PATH}/tests
--    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
--}
--
- RDEPENDS:${PN}-ptest += "\
-     python3-compile \
--    python3-pytest \
--    python3-unittest-automake-output \
+@@ -35,8 +35,6 @@ RDEPENDS:${PN} += "\
+     python3-zoneinfo \
  "
  
- RDEPENDS:${PN} += "python3-core python3-ctypes python3-datetime python3-json python3-io python3-mmap python3-multiprocessing python3-netclient python3-pickle python3-pprint python3-shell"
+-inherit ptest
+-SRC_URI += "file://run-ptest"
+ RDEPENDS:${PN}-ptest += "\
+     python3-ansi2html \
+     python3-coverage \
+@@ -50,17 +48,15 @@ RDEPENDS:${PN}-ptest += "\
+     python3-mypy \
+     python3-packaging \
+     python3-pydoc \
+-    python3-pytest \
+     python3-pytest-codspeed \
+     python3-pytest-mock \
+     python3-pytz \
+     python3-rich \
+     python3-sqlalchemy \
+-    python3-unittest-automake-output \
+     python3-unixadmin \
+ "
+ 
+-do_install_ptest() {
++do_install_ptest:append() {
+     cp -rf ${S}/tests/ ${D}${PTEST_PATH}/
+     # Requires 'ruff' (python3-ruff) which we cannot build
+     # until we have Rust 1.71+ in oe-core
 -- 
 2.34.1
 
