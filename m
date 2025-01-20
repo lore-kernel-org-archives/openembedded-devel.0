@@ -1,112 +1,249 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D4835C02199
-	for <webhook@archiver.kernel.org>; Mon, 20 Jan 2025 08:14:31 +0000 (UTC)
-Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
- by mx.groups.io with SMTP id smtpd.web10.32745.1737360861831978250
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 46AACC02181
+	for <webhook@archiver.kernel.org>; Mon, 20 Jan 2025 12:14:13 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.35383.1737375242888804703
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Jan 2025 00:14:22 -0800
+ Mon, 20 Jan 2025 04:14:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=RgGCUXvY;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1737360863; x=1768896863;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references;
-  bh=4QiIhdtJpQPI/LWhmx1UwZnF+elAOhCU/WHzm7GhAlI=;
-  b=RgGCUXvYqbsijLQanftft4d55Xs6uBDWu0O+6fNnDw1mnupw2BR2frjJ
-   EETV+umbxVTPKwV20ZrJjTxm7sp4V+JFii7W8rGL24HOglwqW9O8YAEdl
-   r7UmxhJwGNW6deYScPi3PykJw69hTYpsnKPI70PeC+XzhtsDBtB8+NulT
-   cqAfdom02FkamqxqUCxzTQA2393AQcTzWmcDvZUGnamlJSUN2UO+bf9f4
-   QG6z43guEk2fahwdOYS4WtEQieD6mfM52InMNR08U+aDGu5Cb1aF+p2FJ
-   xgxGgk19jZMzieCFTRxRxyBS4GyeHtSz9nQG+w+m+Cl2lwj4IVat+kDh6
-   Q==;
-X-CSE-ConnectionGUID: fxc33G/uQ8yFgLf98nz7Uw==
-X-CSE-MsgGUID: DNTHNXXGT86s49dsQwqppQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11320"; a="186303495"
-X-IronPort-AV: E=Sophos;i="6.13,218,1732546800"; 
-   d="scan'208";a="186303495"
-Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
-  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Jan 2025 17:14:20 +0900
-Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
-	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 862E1C2266
-	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jan 2025 17:14:17 +0900 (JST)
-Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 575E1D4C11
-	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jan 2025 17:14:17 +0900 (JST)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id F16FC20071A22
-	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jan 2025 17:14:16 +0900 (JST)
-Received: from localhost.localdomain.localdomain (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 9F74A1A0071;
-	Mon, 20 Jan 2025 16:14:16 +0800 (CST)
-From: wangmy@fujitsu.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 18/32] python3-dbus-fast: upgrade 2.28.0 -> 2.30.2
-Date: Mon, 20 Jan 2025 16:13:52 +0800
-Message-Id: <1737360846-4824-18-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1737360846-4824-1-git-send-email-wangmy@fujitsu.com>
-References: <1737360846-4824-1-git-send-email-wangmy@fujitsu.com>
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28934.006
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28934.006
-X-TMASE-Result: 10-6.505600-10.000000
-X-TMASE-MatchedRID: R9NZgeCyXhKjz0nOeth/yUIIxwDaU5mrTfK5j0EZbyt5eyhu4TpIq34I
-	TrKeMNGNKqrQ7lLcMnygKELwwYMNFm0Xr+fj3ww/8t4fUUGeErTBOVz0JwcxlwV9fM+V9jt75wM
-	PMqdPNSyBkESMI05d4g1UuEJlsPFUkfRhdidsajMURSScn+QSXmVV1G+Ck2l7+gtHj7OwNO2FR9
-	Hau8GO7pzPtM5+sFTWdiLPTblOlpOKw7xuQU82Mx+fXEEMCcrMFONadUsS5sGNxWYw68HnNiO0K
-	w1mKRFfrISGr54uat7abx04d4iUk77rweoAIK8o
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=311573e853=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50KASK6I026761
+	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jan 2025 12:14:02 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4481h0ssdf-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jan 2025 12:14:01 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Mon, 20 Jan 2025 04:13:59 -0800
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][PATCH 1/1] poppler: upgrade 24.12.0 -> 25.01.0
+Date: Mon, 20 Jan 2025 12:13:36 +0000
+Message-ID: <20250120121337.3338282-1-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.44.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: onuSBm8PjEL5ZXV6Htr8DXEsOSM238cA
+X-Authority-Analysis: v=2.4 cv=Oua1yz/t c=1 sm=1 tr=0 ts=678e3e09 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=VdSt8ZQiCzkA:10 a=mDV3o1hIAAAA:8 a=e5mUnYsNAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8
+ a=1C6rGDo87biJVj6i5Z4A:9 a=Vxmtnl_E_bksehYqCbjh:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: onuSBm8PjEL5ZXV6Htr8DXEsOSM238cA
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-20_02,2025-01-20_03,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 malwarescore=0
+ mlxlogscore=999 spamscore=0 priorityscore=1501 clxscore=1015 mlxscore=0
+ suspectscore=0 bulkscore=0 phishscore=0 impostorscore=0 lowpriorityscore=0
+ classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2411120000 definitions=main-2501200102
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Jan 2025 08:14:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114980
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Jan 2025 12:14:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114995
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Yogita Urade <yogita.urade@windriver.com>
+
+Includes fix for CVE-2024-56378
 
 Changelog:
 ===========
-Fix
------
-Fetching release tag during build
-Void validate arguments/properties name
-Wheel builds on aarch64
+core:
+* TextOutputDev: Better detect fakebold words
+* TextOutputDev: Faster sorting algorithm
+* Internal code improvements
+* Fix crashes in malformed documents
 
-Feature
----------
-Migrate to using native arm runners for wheel builds
-introspect: Implement annotations
+cpp:
+* Remove rect parameter from image::copy, it was never implemented
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+qt6:
+* Fix crash in Submit Forms if document links to non existing field
+
+qt5:
+* Fix crash in Submit Forms if document links to non existing field
+
+glib:
+* mark transfer of poppler_page_get_selected_region
+
+utils:
+* pdfdetach: Make -savefile work with Unicode strings. Issue #1540
+
+build system:
+* Don't update pdfsig.pot when POT-Creation-date is the only change
+
+Droped 0001-Don-t-update-pdfsig.pot-when-POT-Creation-date-is-th.patch
+as this is available in 25.01.0
+
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 ---
- ...{python3-dbus-fast_2.28.0.bb => python3-dbus-fast_2.30.2.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-dbus-fast_2.28.0.bb => python3-dbus-fast_2.30.2.bb} (83%)
+ ...sig.pot-when-POT-Creation-date-is-th.patch | 127 ------------------
+ ...{poppler_24.12.0.bb => poppler_25.01.0.bb} |   3 +-
+ 2 files changed, 1 insertion(+), 129 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/poppler/poppler/0001-Don-t-update-pdfsig.pot-when-POT-Creation-date-is-th.patch
+ rename meta-oe/recipes-support/poppler/{poppler_24.12.0.bb => poppler_25.01.0.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-dbus-fast_2.28.0.bb b/meta-python/recipes-devtools/python/python3-dbus-fast_2.30.2.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-dbus-fast_2.28.0.bb
-rename to meta-python/recipes-devtools/python/python3-dbus-fast_2.30.2.bb
-index 0a08feb27f..8031023465 100644
---- a/meta-python/recipes-devtools/python/python3-dbus-fast_2.28.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-dbus-fast_2.30.2.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/bluetooth-devices/dbus-fast"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=729e372b5ea0168438e4fd4a00a04947"
+diff --git a/meta-oe/recipes-support/poppler/poppler/0001-Don-t-update-pdfsig.pot-when-POT-Creation-date-is-th.patch b/meta-oe/recipes-support/poppler/poppler/0001-Don-t-update-pdfsig.pot-when-POT-Creation-date-is-th.patch
+deleted file mode 100644
+index 4d929beb3..000000000
+--- a/meta-oe/recipes-support/poppler/poppler/0001-Don-t-update-pdfsig.pot-when-POT-Creation-date-is-th.patch
++++ /dev/null
+@@ -1,127 +0,0 @@
+-From 053acd5d2b310c696993dc97072d1f2b3b1dd7ac Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Nelson=20Ben=C3=ADtez=20Le=C3=B3n?= <nbenitezl@gmail.com>
+-Date: Fri, 5 Apr 2024 15:08:09 +0100
+-Subject: [PATCH] Don't update pdfsig.pot when POT-Creation-date is the only
+- change
+-
+-Everytime we perform a Poppler build the pdfsig.pot file is
+-updated with just a new timestamp in POT-Creation-date field.
+-
+-That is a nuance as we have to always discard that change in Git
+-prior to submitting a MR or just switching branches locally.
+-
+- - Fix it by only updating pdfsig.pot when there are changes
+-   other than the POT-Creation-date. Currently only done for
+-   platforms other than Windows as it requires 'diff' command.
+-
+- - Change the OUTPUT/DEPENDS to be pdfsig.pot.new instead of
+-   pdfsig.pot, which is more correct as the former is auto
+-   generated while the later is a repo checked-in file, this
+-   way we avoid pdfsig.pot from being marked as deleted by
+-   git when doing a 'make clean'.
+-
+-Other changes:
+- - Drop flag '-s' from msgmerge as it's deprecated, use
+-   instead sort flag '-F' for both msgmerge and xgettext
+-   so their output is more synced and so prevent useless
+-   diffs that only carry reordering changes.
+-
+- - Drop redundant flag '--language=C++' as xgettext will
+-   use that anyway by recognizing source extension '.cc'
+-
+- - Update 'pdfsig.pot' and 'ca/pdfsig.po' with the outputs
+-   generated with the new flags.
+-
+-Some related info:
+-https://savannah.gnu.org/bugs/?49654#comment1
+-
+-Fixes #1479
+-
+-Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/053acd5d2b310c696993dc97072d1f2b3b1dd7ac]
+-
+-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+----
+- utils/po/CMakeLists.txt | 24 +++++++++++++++++-------
+- utils/po/ca/pdfsig.po   | 10 ++++++----
+- utils/po/pdfsig.pot     |  6 ++++--
+- 3 files changed, 27 insertions(+), 13 deletions(-)
+-
+-diff --git a/utils/po/CMakeLists.txt b/utils/po/CMakeLists.txt
+-index 2eb7f0f0..38e1fd44 100644
+---- a/utils/po/CMakeLists.txt
+-+++ b/utils/po/CMakeLists.txt
+-@@ -13,16 +13,26 @@ macro(UPDATE_POT_FILE input)
+-   foreach(_lang ${_langs})
+-     set(_poFile "${CMAKE_CURRENT_SOURCE_DIR}/${_lang}/${input}.po")
+-     list(APPEND _commands
+--      COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet --update --backup=none -s ${_poFile} "${CMAKE_CURRENT_SOURCE_DIR}/${_potFile}")
+-+      COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet --update --backup=none -F ${_poFile} "${CMAKE_CURRENT_SOURCE_DIR}/${_potFile}")
+-   endforeach()
+--  add_custom_command(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/${_potFile}
+--                    COMMAND xgettext --keyword=_ --language=c++ --package-name=pdfsig --output-dir=po --output=${_potFile} ${input}.cc
+--                    ${_commands}
+--                    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../${input}.cc
+--                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/..)
+-+
+-+  set(COPY_NEW_POTFILE ${CMAKE_COMMAND} -E copy po/${_potFile}.new po/${_potFile})
+-+  if (NOT (${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Windows"))
+-+    # IF the new potfile carries changes other than an updated POT-creation-date (autogenerated) THEN proceed to use that new potfile
+-+    set(CM diff --brief --ignore-matching-lines="POT-Creation-Date.*" po/${_potFile} po/${_potFile}.new || ${COPY_NEW_POTFILE})
+-+  else ()
+-+    set(CM ${COPY_NEW_POTFILE})
+-+  endif ()
+-+
+-+  add_custom_command(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/${_potFile}.new
+-+                     COMMAND xgettext ${input}.cc --package-name=${input} --keyword=_ -F --output=po/${_potFile}.new
+-+                     COMMAND ${CM}
+-+                     ${_commands}
+-+                     DEPENDS ../${input}.cc
+-+                     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/..)
+-   add_custom_target(update_pot_${input}
+-                     ALL
+--                    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${_potFile})
+-+                    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${_potFile}.new)
+- endmacro()
+- 
+- UPDATE_POT_FILE(pdfsig)
+-diff --git a/utils/po/ca/pdfsig.po b/utils/po/ca/pdfsig.po
+-index fe6a14e7..0d83e42c 100644
+---- a/utils/po/ca/pdfsig.po
+-+++ b/utils/po/ca/pdfsig.po
+-@@ -18,9 +18,11 @@ msgstr ""
+- "X-Generator: Lokalize 22.12.3\n"
+- 
+- #: pdfsig.cc:544
+--msgid "Digitally signed by {0:s}"
+--msgstr "Signat digitalment per {0:s}"
+--
+--#: pdfsig.cc:544
+-+#, c++-format
+- msgid "Date: {0:s}"
+- msgstr "Data: {0:s}"
+-+
+-+#: pdfsig.cc:544
+-+#, c++-format
+-+msgid "Digitally signed by {0:s}"
+-+msgstr "Signat digitalment per {0:s}"
+-diff --git a/utils/po/pdfsig.pot b/utils/po/pdfsig.pot
+-index 83095113..ffe3bc2f 100644
+---- a/utils/po/pdfsig.pot
+-+++ b/utils/po/pdfsig.pot
+-@@ -18,9 +18,11 @@ msgstr ""
+- "Content-Transfer-Encoding: 8bit\n"
+- 
+- #: pdfsig.cc:544
+--msgid "Digitally signed by {0:s}"
+-+#, c++-format
+-+msgid "Date: {0:s}"
+- msgstr ""
+- 
+- #: pdfsig.cc:544
+--msgid "Date: {0:s}"
+-+#, c++-format
+-+msgid "Digitally signed by {0:s}"
+- msgstr ""
+--- 
+-2.34.1
+-
+diff --git a/meta-oe/recipes-support/poppler/poppler_24.12.0.bb b/meta-oe/recipes-support/poppler/poppler_25.01.0.bb
+similarity index 93%
+rename from meta-oe/recipes-support/poppler/poppler_24.12.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_25.01.0.bb
+index 152b0a057..f7f2ea6cc 100644
+--- a/meta-oe/recipes-support/poppler/poppler_24.12.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_25.01.0.bb
+@@ -7,9 +7,8 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://0001-Do-not-overwrite-all-our-build-flags.patch \
+            file://basename-include.patch \
+            file://0001-cmake-Do-not-use-isystem.patch \
+-           file://0001-Don-t-update-pdfsig.pot-when-POT-Creation-date-is-th.patch \
+            "
+-SRC_URI[sha256sum] = "1cf374c3146f3f685d9257701bf0c2866c61d6c202c14d1f5c01a1f3a089028a"
++SRC_URI[sha256sum] = "7eefc122207bbbd72a303c5e0743f4941e8ae861e24dcf0501e18ce1d1414112"
  
--SRC_URI[sha256sum] = "ed2612392a7df775256c67bfad8727607e8862541b3984585b016e464b020b23"
-+SRC_URI[sha256sum] = "87296315f4a2f2416d495f48cca019ba901d046989e94df2adda84c3170da7b3"
+ DEPENDS = "fontconfig zlib cairo lcms glib-2.0 glib-2.0-native"
  
- PYPI_PACKAGE = "dbus_fast"
- UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 -- 
-2.43.0
+2.40.0
 
 
