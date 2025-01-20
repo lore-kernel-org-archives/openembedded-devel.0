@@ -2,504 +2,295 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20329C02185
-	for <webhook@archiver.kernel.org>; Mon, 20 Jan 2025 17:45:25 +0000 (UTC)
-Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com [209.85.210.47])
- by mx.groups.io with SMTP id smtpd.web10.42129.1737395124366482103
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8AB3C02182
+	for <webhook@archiver.kernel.org>; Mon, 20 Jan 2025 19:11:55 +0000 (UTC)
+Received: from mail-oi1-f177.google.com (mail-oi1-f177.google.com [209.85.167.177])
+ by mx.groups.io with SMTP id smtpd.web11.43977.1737400308607480126
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Jan 2025 09:45:24 -0800
+ Mon, 20 Jan 2025 11:11:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=WOISCsVi;
- spf=pass (domain: gmail.com, ip: 209.85.210.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f47.google.com with SMTP id 46e09a7af769-71e10e6a1ceso1306692a34.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jan 2025 09:45:24 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fPS9xiyg;
+ spf=pass (domain: gmail.com, ip: 209.85.167.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f177.google.com with SMTP id 5614622812f47-3eba347aa6fso3081474b6e.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jan 2025 11:11:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1737395123; x=1737999923; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1737400308; x=1738005108; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=heJS38WCHfytKEbehRTtBFGNQ12vv6u6LoVacoR18Cs=;
-        b=WOISCsVi/NDXZ7QiV7Mx4oM4qnjjmwtQfBnsHu5P30LJ7zj1A7dOhri2Djyexc7j4G
-         4HM5LjjFPtTV7Rhi7d7WbIjKztFnKEhn5rhNYTU2zhZXtPi9SPvaNVT3Iz8wPcYL5myo
-         i87mbCFYfOG1LC0ye3TFlaCAxCc2NtIFTJrblPTn+iUe4/aMspXkztxl3lcgzQnpx+vr
-         ceb++euRmTo3QnR+0LgS9P2CpCwDyb7zTxFGCKz/vcLDTB0YkMnq100RS/5483dAd7hy
-         P/zeXfAmnCjAb96iylhW6Cpjl6xz3E+5yQilsqAbrydGYAfxekYLZuJJ/OhzT3FeSYYi
-         w9wA==
+        bh=+wzArzcs5pp+cXGhPv71B+6aNnVo8m9SnT99fSrp/xA=;
+        b=fPS9xiygTlZJaWhDwwyE25eY4zPq2gd6lho2kb9/X1Wu9UrCemWQsxmnXdXeJMgvcn
+         pG2Z03BaxwbiwEUO70WdA+3tDZqrI4D06UxTgQ/BkAIBBQj+60B+C3QL4yXpymPZk9Xo
+         bUleVWlXLeGk4+8+ifHjSefQqwGXDeY/z4PQV88zJHUAuGROkB5kLxeeXoCv7JpBgjR1
+         BQRyzD9+LLPOdodls6zdTbpf64q+XYPOWpkHV5kidFcSEEZtxhg0Eo20N5EukR4Lv/gZ
+         LYwyzXOW70X8IV/w59hhfQATuU+JO3dsSXvPaa6Ixz9u0FZ/aw3EV5y/JG40NF9jZkpC
+         Q8LA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737395123; x=1737999923;
+        d=1e100.net; s=20230601; t=1737400308; x=1738005108;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=heJS38WCHfytKEbehRTtBFGNQ12vv6u6LoVacoR18Cs=;
-        b=A9vTaoTuKQob8cGvqG3qqWftVGU6ik7gYWRRPrm9yg6qWzn+mW4LdN8LCVh5i0q+de
-         RpBRwDRYpmI13ma7Ax5aeVvNmUvicC9R7Cw5z//cLVNbixVqzv7fb8jkay2IXCiulhig
-         ohftOUbb6BxoIbF7ULkp3JvJqnS9nEco4MaxzPO4tKijuWfsnPftDRM6/b7pWRJvA4kt
-         lqCR20G19Ddwmm3KPpw3ZlbfyYHg1jwHz45x0z8xO4AiGpzvDsp6jZ4BgoBoug8YIah7
-         0YSA61TfkLrbU1+Epwja6yYJFH0Kj2GgMCB873366YwkrIAktorFb1DsVe8O+W8j6ehL
-         tqTw==
-X-Gm-Message-State: AOJu0YwkpMMcUt606RcBmZUEQ7TnTTQdwdO1XvGlQ6jPX5FdwFo4/vty
-	/+iUAc3SnYEeuHVIIymANW5UIQd/sHioTBM77z1BkLPQQnC6G4c9zgUQkpxKkDTYi0ZwbfS7VS0
-	qrxPKJoRdqxz37HAvGb4hWSH6kls=
-X-Gm-Gg: ASbGnctLmefGLpy94SYKC3y4U65wNZU6IBX4QvLOXXd+zoUX1xFvdHait/PTAoIpugv
-	VSyiGz1rTxxKihRSQ/LmqtKRaFZCJC2AOU5kYbPg6+JgJKdLK7yjn5RJ+6Sb1415alzHITNcP1R
-	s6+usNSxPH
-X-Google-Smtp-Source: AGHT+IHVmCGKE2dAcaoaIf3v+C7T6K3C9bRoB8HOv1NFpMhBu2bHnUh/0y2DijNYhyauXRG/nZC5qNoBU5Z6qz86r0Y=
-X-Received: by 2002:a05:6830:6288:b0:71d:4105:4053 with SMTP id
- 46e09a7af769-7249da57febmr8939239a34.5.1737395122555; Mon, 20 Jan 2025
- 09:45:22 -0800 (PST)
+        bh=+wzArzcs5pp+cXGhPv71B+6aNnVo8m9SnT99fSrp/xA=;
+        b=aiVIvPCYQLs30PJvWvEF5cDTLBBmbRUIvJrmZPTrKIrrRSB3VFVCXNnDDN0Yy+RAme
+         FDgZShzL7JQf2RTGgrJ6h/awcFwdDrZxkOaibvx/0yDxyVcFfGnv9v2SKJdJpHEaYPIm
+         J0uk7OkbVsJVWnHxGnQ8eW12XQbgvY+zp5/n2PWcmNjIPLgfrE6UDztJrj/TkWUuzl5s
+         rjVXiCINB1pj7U8Xs7IICOhuzfK4kvw/ENB7dHO4V1yfDTzgH/odzpPnarqtcqFCxJMp
+         /XK1Pgm4YaXrXe3Jky/0sdi0sKVSJzvihZe26x+IvV3g0MVL3V3MZ7t7ymkodGr07n5/
+         L/XQ==
+X-Gm-Message-State: AOJu0YyljjvgzGEGoJAH861qQFjCv4KExDNZNJ9WSRwrGwzeFSFjykcK
+	6B0VvdDkt9f6XQGClM68ViDb7aBZpGPucubm59ArkSZmaRzgOgDrwAWQY4wjd7XVM9UX/c0ej2l
+	EWtbYc3wvqDMmd4ZnTDUugGZ9cNA=
+X-Gm-Gg: ASbGncurnfI6iZMOMC8cFVwDvVX4s4GMLzvhyuGyRGCekNdx/JyCryZ8lqJOKxxjWSi
+	hy3x4/ztWZaPYy5X73tRuGGvYfBVLY/W4iTkijvsd76Vk7XIbrpFujrxSmMcVB9UIXPDD8oU0Lv
+	BD4qhPf3OE
+X-Google-Smtp-Source: AGHT+IEPNBbKg16B7AfJHDCTbqpe9/Tf7bJZEjtxf/0fN2Wb2IewpPnkeRHUJhip+XwtJNUn/0B1AzP8VcTAY/e1drs=
+X-Received: by 2002:a05:6871:d048:b0:29e:3d0b:834 with SMTP id
+ 586e51a60fabf-2b1c099e3c4mr8886991fac.5.1737400307344; Mon, 20 Jan 2025
+ 11:11:47 -0800 (PST)
 MIME-Version: 1.0
-References: <20250120145959.330141-1-throos@amazon.de>
-In-Reply-To: <20250120145959.330141-1-throos@amazon.de>
+References: <1737360846-4824-1-git-send-email-wangmy@fujitsu.com> <1737360846-4824-10-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1737360846-4824-10-git-send-email-wangmy@fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 20 Jan 2025 09:45:11 -0800
-X-Gm-Features: AbW1kvZqKLjq9KgBLgddWu10G6GHQux9_QybeG5_51ULCl6ktMpbAe7LatF32z8
-Message-ID: <CAMKF1sozfERMN-f6Hq7_LWjvazU26Qp1JNmbHGcY4_2LdxspYg@mail.gmail.com>
-Subject: Re: [oe] [PATCH] libcamera: backport 0.4.0 from master-next
-To: throos@amazon.de
+Date: Mon, 20 Jan 2025 11:11:35 -0800
+X-Gm-Features: AbW1kvZlJ21awo8bZ3Kf-6YgRc0M1w_1yvTbejNzgbpu-SRvv2lc7emP-rLADtY
+Message-ID: <CAMKF1soT=9aYRohsVCHa5VNuZ6gCVhteE0misfdfWwujZrN+AQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH 10/32] mariadb: upgrade 11.4.4 -> 11.8.0
+To: wangmy@fujitsu.com
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000001d54bb062c26d30a"
+Content-Type: multipart/alternative; boundary="00000000000026ef51062c2808c2"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Jan 2025 17:45:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114997
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Jan 2025 19:11:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/114998
 
---0000000000001d54bb062c26d30a
+--00000000000026ef51062c2808c2
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Which release is it for ?
-It=E2=80=99s good to mention it in subject line
+11.4 is LTS but I am not sure about 11.8can you confirm the release status
+please g 11.8
 
-On Mon, Jan 20, 2025 at 7:00=E2=80=AFAM Thomas Roos via lists.openembedded.=
-org
-<throos=3Damazon.de@lists.openembedded.org> wrote:
+On Mon, Jan 20, 2025 at 12:14=E2=80=AFAM wangmy via lists.openembedded.org =
+<wangmy=3D
+fujitsu.com@lists.openembedded.org> wrote:
 
-> From: Thomas Roos <throos@amazon.de>
+> From: Wang Mingyu <wangmy@fujitsu.com>
 >
-> This is done because libcamera 0.2. is broken,
-> probablay because of
-> 0001-rpi-Use-alloca-instead-of-variable-length-arrays.patch
-> Tested good with upstream version.
+> 0001-aio_linux-Check-if-syscall-exists-before-using-it.patch
+> 0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch
+> support-files-CMakeLists.txt-fix-do_populate_sysroot.patch
+> refreshed for 11.8.0
 >
-> See more details here:
-> https://github.com/openembedded/meta-openembedded/issues/919
-> and here:
-> https://github.com/raspberrypi/rpicam-apps/issues/654
->
-> Signed-off-by: Thomas Roos <throos@amazon.de>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 > ---
->  .../0001-ipu3-Use-posix-basename.patch        |  71 ----------
->  ...ca-instead-of-variable-length-arrays.patch |  43 ------
->  ...002-options-Replace-use-of-VLAs-in-C.patch | 128 ------------------
->  ...{libcamera_0.2.0.bb =3D> libcamera_0.4.0.bb} |  11 +-
->  4 files changed, 5 insertions(+), 248 deletions(-)
->  delete mode 100644
-> meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-ipu3-Use-posi=
-x-basename.patch
->  delete mode 100644
-> meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-rpi-Use-alloc=
-a-instead-of-variable-length-arrays.patch
->  delete mode 100644
-> meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-options-Repla=
-ce-use-of-VLAs-in-C.patch
->  rename meta-multimedia/recipes-multimedia/libcamera/{libcamera_0.2.0.bb
-> =3D> libcamera_0.4.0.bb} (84%)
+>  ...{mariadb-native_11.4.4.bb =3D> mariadb-native_11.8.0.bb} | 0
+>  meta-oe/recipes-dbs/mysql/mariadb.inc                     | 2 +-
+>  ...io_linux-Check-if-syscall-exists-before-using-it.patch | 8 ++++----
+>  ...-innobase-Define-__NR_futex-if-it-does-not-exist.patch | 6 +++---
+>  ...01-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch | 6 +++---
+>  ...ort-files-CMakeLists.txt-fix-do_populate_sysroot.patch | 6 +++---
+>  .../mysql/{mariadb_11.4.4.bb =3D> mariadb_11.8.0.bb}        | 0
+>  7 files changed, 14 insertions(+), 14 deletions(-)
+>  rename meta-oe/recipes-dbs/mysql/{mariadb-native_11.4.4.bb =3D>
+> mariadb-native_11.8.0.bb} (100%)
+>  rename meta-oe/recipes-dbs/mysql/{mariadb_11.4.4.bb =3D> mariadb_11.8.0.=
+bb}
+> (100%)
+>
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_11.4.4.bb
+> b/meta-oe/recipes-dbs/mysql/mariadb-native_11.8.0.bb
+> similarity index 100%
+> rename from meta-oe/recipes-dbs/mysql/mariadb-native_11.4.4.bb
+> rename to meta-oe/recipes-dbs/mysql/mariadb-native_11.8.0.bb
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc
+> b/meta-oe/recipes-dbs/mysql/mariadb.inc
+> index dae41d89aa..d924378531 100644
+> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
+> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+> @@ -25,7 +25,7 @@ SRC_URI =3D "
+> https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
+>             file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
+>
+> file://0001-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch \
+>            "
+> -SRC_URI[sha256sum] =3D
+> "96fbd2e6e93fb7e8b373eea75d85b6fea57c0e111a02090cbbefed52599dc77b"
+> +SRC_URI[sha256sum] =3D
+> "57456dbdd1d9ea6274c18d28500d27c95ea926ce6ba30a7ea81e1ddf4bef8515"
+>
+>  UPSTREAM_CHECK_URI =3D "https://github.com/MariaDB/server/tags"
 >
 > diff --git
-> a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-ipu3-Use-po=
-six-basename.patch
-> b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-ipu3-Use-po=
-six-basename.patch
-> deleted file mode 100644
-> index 9e4adf3d8d..0000000000
+> a/meta-oe/recipes-dbs/mysql/mariadb/0001-aio_linux-Check-if-syscall-exist=
+s-before-using-it.patch
+> b/meta-oe/recipes-dbs/mysql/mariadb/0001-aio_linux-Check-if-syscall-exist=
+s-before-using-it.patch
+> index eddfdaaf77..106c37a828 100644
 > ---
-> a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-ipu3-Use-po=
-six-basename.patch
-> +++ /dev/null
-> @@ -1,71 +0,0 @@
-> -From 35d2acc61b1b27c0810a80cd21de65f29dc79df7 Mon Sep 17 00:00:00 2001
-> -From: Khem Raj <raj.khem@gmail.com>
-> -Date: Sun, 24 Mar 2024 11:27:21 -0700
-> -Subject: [PATCH] ipu3: Use posix basename
-> -
-> -musl does not implement GNU basename extention and with latest musl
-> -the prototype from string.h is also removed [1] which now results in
-> -compile errors e.g.
-> -
-> -../git/utils/ipu3/ipu3-pack.c:21:47: error: call to undeclared function
-> 'basename'; ISO C99 and later do not support implicit function declaratio=
-ns
-> [-Wimplicit-function-declaration]
-> -
-> -These utilities are using this function in usage() which is used just
-> -before program exit. Always use the basename APIs from libgen.h which is
-> -posix implementation
-> -
-> -[1]
-> https://git.musl-libc.org/cgit/musl/commit/?id=3D725e17ed6dff4d0cd22487bb=
-64470881e86a92e7
-> -
-> -Upstream-Status: Submitted [
-> https://lists.libcamera.org/pipermail/libcamera-devel/2024-March/041180.h=
-tml
-> ]
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ----
-> - utils/ipu3/ipu3-pack.c   | 4 ++--
-> - utils/ipu3/ipu3-unpack.c | 3 ++-
-> - 2 files changed, 4 insertions(+), 3 deletions(-)
-> -
-> -diff --git a/utils/ipu3/ipu3-pack.c b/utils/ipu3/ipu3-pack.c
-> -index decbfc6c..23d2db8b 100644
-> ---- a/utils/ipu3/ipu3-pack.c
-> -+++ b/utils/ipu3/ipu3-pack.c
-> -@@ -8,6 +8,7 @@
-> -
-> - #include <errno.h>
-> - #include <fcntl.h>
-> -+#include <libgen.h>
-> - #include <stdint.h>
-> - #include <stdio.h>
-> - #include <string.h>
-> -@@ -15,9 +16,8 @@
-> - #include <sys/types.h>
-> - #include <unistd.h>
-> -
-> --static void usage(const char *argv0)
-> -+static void usage(char *argv0)
-> - {
+> a/meta-oe/recipes-dbs/mysql/mariadb/0001-aio_linux-Check-if-syscall-exist=
+s-before-using-it.patch
+> +++
+> b/meta-oe/recipes-dbs/mysql/mariadb/0001-aio_linux-Check-if-syscall-exist=
+s-before-using-it.patch
+> @@ -1,4 +1,4 @@
+> -From f9f019049a9bb09471e8303d4510afae07f225c8 Mon Sep 17 00:00:00 2001
+> +From 883f3b2c351dfc136ba81d4060b2e3bf4f4d7e7c Mon Sep 17 00:00:00 2001
+>  From: Khem Raj <raj.khem@gmail.com>
+>  Date: Wed, 18 Aug 2021 06:49:25 +0000
+>  Subject: [PATCH] aio_linux: Check if syscall exists before using it
+> @@ -17,10 +17,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>   1 file changed, 4 insertions(+)
+>
+>  diff --git a/tpool/aio_linux.cc b/tpool/aio_linux.cc
+> -index 507c6b92..a6adf1af 100644
+> +index abf37e22..2b75ed4a 100644
+>  --- a/tpool/aio_linux.cc
+>  +++ b/tpool/aio_linux.cc
+> -@@ -59,6 +59,7 @@ Foundation, Inc., 51 Franklin Street
+> <https://www.google.com/maps/search/51+Franklin+Street?entry=3Dgmail&sour=
+ce=3Dg>,
+> Fifth Floor, Boston, MA 02111 - 1301 USA*/
+> +@@ -60,6 +60,7 @@ Foundation, Inc., 51 Franklin Street
+> <https://www.google.com/maps/search/51+Franklin+Street?entry=3Dgmail&sour=
+ce=3Dg>,
+> Fifth Floor, Boston, MA 02111 - 1301 USA*/
+>   */
+>   static int my_getevents(io_context_t ctx, long min_nr, long nr, io_even=
+t
+> *ev)
+>   {
+> @@ -28,7 +28,7 @@ index 507c6b92..a6adf1af 100644
+>     int saved_errno=3D errno;
+>     int ret=3D syscall(__NR_io_getevents, reinterpret_cast<long>(ctx),
+>                      min_nr, nr, ev, 0);
+> -@@ -68,6 +69,9 @@ static int my_getevents(io_context_t ctx, long min_nr,
+> long nr, io_event *ev)
+> +@@ -69,6 +70,9 @@ static int my_getevents(io_context_t ctx, long min_nr,
+> long nr, io_event *ev)
+>       errno=3D saved_errno;
+>     }
+>     return ret;
+> diff --git
+> a/meta-oe/recipes-dbs/mysql/mariadb/0001-innobase-Define-__NR_futex-if-it=
+-does-not-exist.patch
+> b/meta-oe/recipes-dbs/mysql/mariadb/0001-innobase-Define-__NR_futex-if-it=
+-does-not-exist.patch
+> index bfcd45b64b..4152a604b0 100644
+> ---
+> a/meta-oe/recipes-dbs/mysql/mariadb/0001-innobase-Define-__NR_futex-if-it=
+-does-not-exist.patch
+> +++
+> b/meta-oe/recipes-dbs/mysql/mariadb/0001-innobase-Define-__NR_futex-if-it=
+-does-not-exist.patch
+> @@ -1,4 +1,4 @@
+> -From 3a29c2f7afe10bf0bc0529b5d9ea44866946ac5a Mon Sep 17 00:00:00 2001
+> +From 9ad66b45557ce95f8ee14335e4d3a5d081c958e2 Mon Sep 17 00:00:00 2001
+>  From: Khem Raj <raj.khem@gmail.com>
+>  Date: Sat, 14 Nov 2020 14:37:13 -0800
+>  Subject: [PATCH] innobase: Define __NR_futex if it does not exist
+> @@ -19,7 +19,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>   1 file changed, 3 insertions(+)
+>
+>  diff --git a/storage/innobase/log/log0sync.cc
+> b/storage/innobase/log/log0sync.cc
+> -index 0de283ca..265ab691 100644
+> +index f6ca440e..9a602b2a 100644
+>  --- a/storage/innobase/log/log0sync.cc
+>  +++ b/storage/innobase/log/log0sync.cc
+>  @@ -66,6 +66,9 @@ Note that if write operation is very fast, a) or b) ca=
+n
+> be fine as alternative.
+> @@ -31,4 +31,4 @@ index 0de283ca..265ab691 100644
+>  +#endif
+>   #endif
+>
+> - #include <atomic>
+> + #include <algorithm>
+> diff --git
+> a/meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fix-gen_lex_h=
+ash-not-found.patch
+> b/meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fix-gen_lex_h=
+ash-not-found.patch
+> index 1475bb1a51..b1d04e2b4e 100644
+> ---
+> a/meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fix-gen_lex_h=
+ash-not-found.patch
+> +++
+> b/meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fix-gen_lex_h=
+ash-not-found.patch
+> @@ -1,4 +1,4 @@
+> -From 360d41c1dd2d28d5102d66179095cedacaf5dc3a Mon Sep 17 00:00:00 2001
+> +From 003615e4290090c5e1944e0843b1017a0a975e92 Mon Sep 17 00:00:00 2001
+>  From: Mingli Yu <mingli.yu@windriver.com>
+>  Date: Fri, 23 Sep 2022 15:48:21 +0800
+>  Subject: [PATCH] sql/CMakeLists.txt: fix gen_lex_hash not found
+> @@ -15,7 +15,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+>   1 file changed, 22 insertions(+), 8 deletions(-)
+>
+>  diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
+> -index 0195555e..507136cb 100644
+> +index cb43f7ad..0fb8cd01 100644
+>  --- a/sql/CMakeLists.txt
+>  +++ b/sql/CMakeLists.txt
+>  @@ -64,11 +64,18 @@ ${CMAKE_BINARY_DIR}/sql
+> @@ -41,7 +41,7 @@ index 0195555e..507136cb 100644
+>
+>   FIND_PACKAGE(BISON 2.4)
+>
+> -@@ -405,11 +412,18 @@ IF(NOT CMAKE_CROSSCOMPILING OR DEFINED
+> CMAKE_CROSSCOMPILING_EMULATOR)
+> +@@ -411,11 +418,18 @@ IF(NOT CMAKE_CROSSCOMPILING OR DEFINED
+> CMAKE_CROSSCOMPILING_EMULATOR)
+>     ADD_EXECUTABLE(gen_lex_hash gen_lex_hash.cc)
+>   ENDIF()
+>
+> diff --git
+> a/meta-oe/recipes-dbs/mysql/mariadb/support-files-CMakeLists.txt-fix-do_p=
+opulate_sysroot.patch
+> b/meta-oe/recipes-dbs/mysql/mariadb/support-files-CMakeLists.txt-fix-do_p=
+opulate_sysroot.patch
+> index 30c9e2452a..8bf8ed8ddb 100644
+> ---
+> a/meta-oe/recipes-dbs/mysql/mariadb/support-files-CMakeLists.txt-fix-do_p=
+opulate_sysroot.patch
+> +++
+> b/meta-oe/recipes-dbs/mysql/mariadb/support-files-CMakeLists.txt-fix-do_p=
+opulate_sysroot.patch
+> @@ -1,4 +1,4 @@
+> -From 34713c3bba68cb94b373b750c1c8fcc0b04b2c45 Mon Sep 17 00:00:00 2001
+> +From 3fb7db413c5496ef5cb4f5415433acc8ea23db26 Mon Sep 17 00:00:00 2001
+>  From: Mingli Yu <mingli.yu@windriver.com>
+>  Date: Wed, 27 Feb 2019 22:41:26 -0800
+>  Subject: [PATCH] support-files/CMakeLists.txt: fix do_populate_sysroot
+> issue
+> @@ -15,10 +15,10 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+>   1 file changed, 7 deletions(-)
+>
+>  diff --git a/support-files/CMakeLists.txt b/support-files/CMakeLists.txt
+> -index ee1d420e..a99c0605 100644
+> +index ae7f9063..9f54d63e 100644
+>  --- a/support-files/CMakeLists.txt
+>  +++ b/support-files/CMakeLists.txt
+> -@@ -245,12 +245,5 @@ IF(UNIX AND NOT WITHOUT_SERVER)
+> +@@ -247,12 +247,5 @@ IF(UNIX AND NOT WITHOUT_SERVER)
+>         INSTALL(FILES rpm/enable_encryption.preset DESTINATION
+> ${INSTALL_SYSCONF2DIR}
+>                 COMPONENT IniFiles)
+>       ENDIF()
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb_11.4.4.bb
+> b/meta-oe/recipes-dbs/mysql/mariadb_11.8.0.bb
+> similarity index 100%
+> rename from meta-oe/recipes-dbs/mysql/mariadb_11.4.4.bb
+> rename to meta-oe/recipes-dbs/mysql/mariadb_11.8.0.bb
 > --
-> -       printf("Usage: %s input-file output-file\n", basename(argv0));
-> -       printf("Convert unpacked RAW10 Bayer data to the IPU3 packed Baye=
-r
-> formats\n");
-> -       printf("If the output-file '-', output data will be written to
-> standard output\n");
-> -diff --git a/utils/ipu3/ipu3-unpack.c b/utils/ipu3/ipu3-unpack.c
-> -index 9d2c1200..1505a970 100644
-> ---- a/utils/ipu3/ipu3-unpack.c
-> -+++ b/utils/ipu3/ipu3-unpack.c
-> -@@ -8,6 +8,7 @@
-> -
-> - #include <errno.h>
-> - #include <fcntl.h>
-> -+#include <libgen.h>
-> - #include <stdint.h>
-> - #include <stdio.h>
-> - #include <string.h>
-> -@@ -15,7 +16,7 @@
-> - #include <sys/types.h>
-> - #include <unistd.h>
-> -
-> --static void usage(const char *argv0)
-> -+static void usage(char *argv0)
-> - {
-> -       printf("Usage: %s input-file output-file\n", basename(argv0));
-> -       printf("Unpack the IPU3 raw Bayer format to 16-bit Bayer\n");
-> ---
-> -2.44.0
-> -
-> diff --git
-> a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-rpi-Use-all=
-oca-instead-of-variable-length-arrays.patch
-> b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-rpi-Use-all=
-oca-instead-of-variable-length-arrays.patch
-> deleted file mode 100644
-> index c336e92548..0000000000
-> ---
-> a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-rpi-Use-all=
-oca-instead-of-variable-length-arrays.patch
-> +++ /dev/null
-> @@ -1,43 +0,0 @@
-> -From 11cc6dbd45f0880beea64cdc514f57484b90bc39 Mon Sep 17 00:00:00 2001
-> -From: Khem Raj <raj.khem@gmail.com>
-> -Date: Tue, 20 Feb 2024 18:44:23 -0800
-> -Subject: [PATCH] rpi: Use malloc instead of variable length arrays
-> -
-> -Clang-18+ diagnoses this as error
-> -
-> -| ../git/src/ipa/rpi/controller/rpi/alsc.cpp:499:10: error: variable
-> length arrays in C++ are a Clang extension [-Werror,-Wvla-cxx-extension]
->  |   499 |         int xLo[X], xHi[X];
-> -|       |                 ^
-> -
-> -Upstream-Status: Submitted [
-> https://lists.libcamera.org/pipermail/libcamera-devel/2024-February/04052=
-9.html
-> ]
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> -
-> -s
-> ----
-> - src/ipa/rpi/controller/rpi/alsc.cpp | 7 +++++--
-> - 1 file changed, 5 insertions(+), 2 deletions(-)
-> -
-> -diff --git a/src/ipa/rpi/controller/rpi/alsc.cpp
-> b/src/ipa/rpi/controller/rpi/alsc.cpp
-> -index 8a205c60..a7d42614 100644
-> ---- a/src/ipa/rpi/controller/rpi/alsc.cpp
-> -+++ b/src/ipa/rpi/controller/rpi/alsc.cpp
-> -@@ -496,8 +496,8 @@ void resampleCalTable(const Array2D<double>
-> &calTableIn,
-> -        * Precalculate and cache the x sampling locations and phases to
-> save
-> -        * recomputing them on every row.
-> -        */
-> --      int xLo[X], xHi[X];
-> --      double xf[X];
-> -+      int *xLo =3D (int*)malloc(X), *xHi =3D (int*)malloc(X);
-> -+      double *xf =3D (double*)malloc(X);
-> -       double scaleX =3D cameraMode.sensorWidth /
-> -                       (cameraMode.width * cameraMode.scaleX);
-> -       double xOff =3D cameraMode.cropX / (double)cameraMode.sensorWidth=
-;
-> -@@ -539,6 +539,9 @@ void resampleCalTable(const Array2D<double>
-> &calTableIn,
-> -                       *(out++) =3D above * (1 - yf) + below * yf;
-> -               }
-> -       }
-> -+      free(xf);
-> -+      free(xHi);
-> -+      free(xLo);
-> - }
-> -
-> - /* Calculate chrominance statistics (R/G and B/G) for each region. */
-> diff --git
-> a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-options-Rep=
-lace-use-of-VLAs-in-C.patch
-> b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-options-Rep=
-lace-use-of-VLAs-in-C.patch
-> deleted file mode 100644
-> index 473820653e..0000000000
-> ---
-> a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-options-Rep=
-lace-use-of-VLAs-in-C.patch
-> +++ /dev/null
-> @@ -1,128 +0,0 @@
-> -From 6e4736180fcaffdb06acf52fd3eb50ba5baa3d2a Mon Sep 17 00:00:00 2001
-> -From: Khem Raj <raj.khem@gmail.com>
-> -Date: Wed, 31 Jan 2024 21:04:28 -0800
-> -Subject: [PATCH] options: Replace use of VLAs in C++
-> -
-> -Clang++ 18 is fussy about this with new warning checks.
-> -
-> -   ../git/src/apps/common/options.cpp:882:20: error: variable length
-> arrays in C++ are a Clang extension [-Werror,-Wvla-cxx-extension]
-> -      882 |         char shortOptions[optionsMap_.size() * 3 + 2];
-> -          |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
-> -
-> -Therefore replace using VLAs with alloca and malloc/free
-> -
-> -Upstream-Status: Submitted [
-> https://lists.libcamera.org/pipermail/libcamera-devel/2024-February/04038=
-1.html
-> ]
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ----
-> - src/apps/common/options.cpp      | 12 ++++++++++--
-> - src/libcamera/ipc_unixsocket.cpp | 13 +++++++++----
-> - 2 files changed, 19 insertions(+), 6 deletions(-)
-> -
-> -diff --git a/src/apps/common/options.cpp b/src/apps/common/options.cpp
-> -index 4f7e8691..3656f3c1 100644
-> ---- a/src/apps/common/options.cpp
-> -+++ b/src/apps/common/options.cpp
-> -@@ -879,8 +879,8 @@ OptionsParser::Options OptionsParser::parse(int argc=
-,
-> char **argv)
-> -        * Allocate short and long options arrays large enough to contain
-> all
-> -        * options.
-> -        */
-> --      char shortOptions[optionsMap_.size() * 3 + 2];
-> --      struct option longOptions[optionsMap_.size() + 1];
-> -+      char *shortOptions =3D (char*)malloc(optionsMap_.size() * 3 + 2);
-> -+      struct option *longOptions =3D (struct option*)malloc(sizeof(stru=
-ct
-> option) * (optionsMap_.size() + 1));
-> -       unsigned int ids =3D 0;
-> -       unsigned int idl =3D 0;
-> -
-> -@@ -935,12 +935,16 @@ OptionsParser::Options OptionsParser::parse(int
-> argc, char **argv)
-> -                       std::cerr << argv[optind - 1] << std::endl;
-> -
-> -                       usage();
-> -+                      free(shortOptions);
-> -+                      free(longOptions);
-> -                       return options;
-> -               }
-> -
-> -               const Option &option =3D *optionsMap_[c];
-> -               if (!parseValue(option, optarg, &options)) {
-> -                       usage();
-> -+                      free(shortOptions);
-> -+                      free(longOptions);
-> -                       return options;
-> -               }
-> -       }
-> -@@ -949,10 +953,14 @@ OptionsParser::Options OptionsParser::parse(int
-> argc, char **argv)
-> -               std::cerr << "Invalid non-option argument '" <<
-> argv[optind]
-> -                         << "'" << std::endl;
-> -               usage();
-> -+              free(shortOptions);
-> -+              free(longOptions);
-> -               return options;
-> -       }
-> -
-> -       options.valid_ =3D true;
-> -+      free(shortOptions);
-> -+      free(longOptions);
-> -       return options;
-> - }
-> -
-> -diff --git a/src/libcamera/ipc_unixsocket.cpp
-> b/src/libcamera/ipc_unixsocket.cpp
-> -index 1980d374..3bd861cb 100644
-> ---- a/src/libcamera/ipc_unixsocket.cpp
-> -+++ b/src/libcamera/ipc_unixsocket.cpp
-> -@@ -8,6 +8,7 @@
-> - #include "libcamera/internal/ipc_unixsocket.h"
-> -
-> - #include <array>
-> -+#include <cstdint>
-> - #include <poll.h>
-> - #include <string.h>
-> - #include <sys/socket.h>
-> -@@ -247,8 +248,8 @@ int IPCUnixSocket::sendData(const void *buffer,
-> size_t length,
-> -       iov[0].iov_base =3D const_cast<void *>(buffer);
-> -       iov[0].iov_len =3D length;
-> -
-> --      char buf[CMSG_SPACE(num * sizeof(uint32_t))];
-> --      memset(buf, 0, sizeof(buf));
-> -+      char *buf =3D (char*)malloc(CMSG_SPACE(num * sizeof(uint32_t)));
-> -+      memset((void*)buf, 0, sizeof(buf));
-> -
-> -       struct cmsghdr *cmsg =3D (struct cmsghdr *)buf;
-> -       cmsg->cmsg_len =3D CMSG_LEN(num * sizeof(uint32_t));
-> -@@ -270,9 +271,11 @@ int IPCUnixSocket::sendData(const void *buffer,
-> size_t length,
-> -               int ret =3D -errno;
-> -               LOG(IPCUnixSocket, Error)
-> -                       << "Failed to sendmsg: " << strerror(-ret);
-> -+              free(buf);
-> -               return ret;
-> -       }
-> -
-> -+      free(buf);
-> -       return 0;
-> - }
-> -
-> -@@ -283,8 +286,8 @@ int IPCUnixSocket::recvData(void *buffer, size_t
-> length,
-> -       iov[0].iov_base =3D buffer;
-> -       iov[0].iov_len =3D length;
-> -
-> --      char buf[CMSG_SPACE(num * sizeof(uint32_t))];
-> --      memset(buf, 0, sizeof(buf));
-> -+      char *buf =3D (char*)malloc(CMSG_SPACE(num * sizeof(uint32_t)));
-> -+      memset((void*)buf, 0, sizeof(buf));
-> -
-> -       struct cmsghdr *cmsg =3D (struct cmsghdr *)buf;
-> -       cmsg->cmsg_len =3D CMSG_LEN(num * sizeof(uint32_t));
-> -@@ -305,12 +308,14 @@ int IPCUnixSocket::recvData(void *buffer, size_t
-> length,
-> -               if (ret !=3D -EAGAIN)
-> -                       LOG(IPCUnixSocket, Error)
-> -                               << "Failed to recvmsg: " << strerror(-ret=
-);
-> -+              free(buf);
-> -               return ret;
-> -       }
-> -
-> -       if (fds)
-> -               memcpy(fds, CMSG_DATA(cmsg), num * sizeof(uint32_t));
-> -
-> -+      free(buf);
-> -       return 0;
-> - }
-> -
-> diff --git a/meta-multimedia/recipes-multimedia/libcamera/
-> libcamera_0.2.0.bb b/meta-multimedia/recipes-multimedia/libcamera/
-> libcamera_0.4.0.bb
-> similarity index 84%
-> rename from meta-multimedia/recipes-multimedia/libcamera/
-> libcamera_0.2.0.bb
-> rename to meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb
-> index 45d6be31ec..682e56739f 100644
-> --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.2.0.bb
-> +++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb
-> @@ -11,12 +11,9 @@ LIC_FILES_CHKSUM =3D "\
->  SRC_URI =3D " \
->          git://
-> git.libcamera.org/libcamera/libcamera.git;protocol=3Dhttps;branch=3Dmaste=
-r \
->          file://0001-media_device-Add-bool-return-type-to-unlock.patch \
-> -        file://0002-options-Replace-use-of-VLAs-in-C.patch \
-> -
-> file://0001-rpi-Use-alloca-instead-of-variable-length-arrays.patch \
-> -        file://0001-ipu3-Use-posix-basename.patch \
->  "
->
-> -SRCREV =3D "89227a428a82e724548399d35c98ea89566f9045"
-> +SRCREV =3D "35ed4b91291d9f3d08e4b51acfb51163e65df8f8"
->
->  PE =3D "1"
->
-> @@ -25,10 +22,11 @@ S =3D "${WORKDIR}/git"
->  DEPENDS =3D "python3-pyyaml-native python3-jinja2-native python3-ply-nat=
-ive
-> python3-jinja2-native udev gnutls chrpath-native libevent libyaml"
->  DEPENDS +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase
-> qtbase-native', '', d)}"
->
-> -PACKAGES =3D+ "${PN}-gst"
-> +PACKAGES =3D+ "${PN}-gst ${PN}-pycamera"
->
->  PACKAGECONFIG ??=3D ""
->  PACKAGECONFIG[gst] =3D
-> "-Dgstreamer=3Denabled,-Dgstreamer=3Ddisabled,gstreamer1.0
-> gstreamer1.0-plugins-base"
-> +PACKAGECONFIG[pycamera] =3D "-Dpycamera=3Denabled,-Dpycamera=3Ddisabled,=
-python3
-> python3-pybind11"
->
->  LIBCAMERA_PIPELINES ??=3D "auto"
->
-> @@ -46,7 +44,7 @@ RDEPENDS:${PN} =3D
-> "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayla
->  inherit meson pkgconfig python3native
->
->  do_configure:prepend() {
-> -    sed -i -e 's|py_compile=3DTrue,||'
-> ${S}/utils/ipc/mojo/public/tools/mojom/mojom/generate/template_expander.p=
-y
-> +    sed -i -e 's|py_compile=3DTrue,||'
-> ${S}/utils/codegen/ipc/mojo/public/tools/mojom/mojom/generate/template_ex=
-pander.py
->  }
->
->  do_install:append() {
-> @@ -72,6 +70,7 @@ do_package_recalculate_ipa_signatures() {
->
->  FILES:${PN} +=3D " ${libexecdir}/libcamera/v4l2-compat.so"
->  FILES:${PN}-gst =3D "${libdir}/gstreamer-1.0"
-> +FILES:${PN}-pycamera =3D "${PYTHON_SITEPACKAGES_DIR}/libcamera"
->
->  # libcamera-v4l2 explicitly sets _FILE_OFFSET_BITS=3D32 to get access to
->  # both 32 and 64 bit file APIs.
-> --
-> 2.34.1
+> 2.43.0
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#114996):
-> https://lists.openembedded.org/g/openembedded-devel/message/114996
-> Mute This Topic: https://lists.openembedded.org/mt/110715612/1997914
+> View/Reply Online (#114972):
+> https://lists.openembedded.org/g/openembedded-devel/message/114972
+> Mute This Topic: https://lists.openembedded.org/mt/110711735/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
 > raj.khem@gmail.com]
@@ -507,505 +298,259 @@ pander.py
 >
 >
 
---0000000000001d54bb062c26d30a
+--00000000000026ef51062c2808c2
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"auto">Which release is it for ?=C2=A0</div><div dir=3D"auto">It=
-=E2=80=99s good to mention it in subject line=C2=A0</div><div><br><div clas=
-s=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_att=
-r">On Mon, Jan 20, 2025 at 7:00=E2=80=AFAM Thomas Roos via <a href=3D"http:=
-//lists.openembedded.org">lists.openembedded.org</a> &lt;throos=3D<a href=
-=3D"mailto:amazon.de@lists.openembedded.org">amazon.de@lists.openembedded.o=
-rg</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margi=
-n:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">From: Thomas Roos=
- &lt;<a href=3D"mailto:throos@amazon.de" target=3D"_blank">throos@amazon.de=
-</a>&gt;<br>
+<div dir=3D"auto">11.4 is LTS but I am not sure about 11.8can you confirm t=
+he release status please g 11.8=C2=A0</div><div><br><div class=3D"gmail_quo=
+te gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Jan=
+ 20, 2025 at 12:14=E2=80=AFAM wangmy via <a href=3D"http://lists.openembedd=
+ed.org">lists.openembedded.org</a> &lt;wangmy=3D<a href=3D"mailto:fujitsu.c=
+om@lists.openembedded.org">fujitsu.com@lists.openembedded.org</a>&gt; wrote=
+:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bor=
+der-left:1px #ccc solid;padding-left:1ex">From: Wang Mingyu &lt;<a href=3D"=
+mailto:wangmy@fujitsu.com" target=3D"_blank">wangmy@fujitsu.com</a>&gt;<br>
 <br>
-This is done because libcamera 0.2. is broken,<br>
-probablay because of 0001-rpi-Use-alloca-instead-of-variable-length-arrays.=
-patch<br>
-Tested good with upstream version.<br>
+0001-aio_linux-Check-if-syscall-exists-before-using-it.patch<br>
+0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch<br>
+support-files-CMakeLists.txt-fix-do_populate_sysroot.patch<br>
+refreshed for 11.8.0<br>
 <br>
-See more details here:<br>
-<a href=3D"https://github.com/openembedded/meta-openembedded/issues/919" re=
-l=3D"noreferrer" target=3D"_blank">https://github.com/openembedded/meta-ope=
-nembedded/issues/919</a><br>
-and here:<br>
-<a href=3D"https://github.com/raspberrypi/rpicam-apps/issues/654" rel=3D"no=
-referrer" target=3D"_blank">https://github.com/raspberrypi/rpicam-apps/issu=
-es/654</a><br>
-<br>
-Signed-off-by: Thomas Roos &lt;<a href=3D"mailto:throos@amazon.de" target=
-=3D"_blank">throos@amazon.de</a>&gt;<br>
+Signed-off-by: Wang Mingyu &lt;<a href=3D"mailto:wangmy@fujitsu.com" target=
+=3D"_blank">wangmy@fujitsu.com</a>&gt;<br>
 ---<br>
-=C2=A0.../0001-ipu3-Use-posix-basename.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
-=C2=A0 71 ----------<br>
-=C2=A0...ca-instead-of-variable-length-arrays.patch |=C2=A0 43 ------<br>
-=C2=A0...002-options-Replace-use-of-VLAs-in-C.patch | 128 -----------------=
+=C2=A0...{<a href=3D"http://mariadb-native_11.4.4.bb" rel=3D"noreferrer" ta=
+rget=3D"_blank">mariadb-native_11.4.4.bb</a> =3D&gt; <a href=3D"http://mari=
+adb-native_11.8.0.bb" rel=3D"noreferrer" target=3D"_blank">mariadb-native_1=
+1.8.0.bb</a>} | 0<br>
+=C2=A0meta-oe/recipes-dbs/mysql/mariadb.inc=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 2 +-<br>
+=C2=A0...io_linux-Check-if-syscall-exists-before-using-it.patch | 8 ++++---=
 -<br>
-=C2=A0...{<a href=3D"http://libcamera_0.2.0.bb" rel=3D"noreferrer" target=
-=3D"_blank">libcamera_0.2.0.bb</a> =3D&gt; <a href=3D"http://libcamera_0.4.=
-0.bb" rel=3D"noreferrer" target=3D"_blank">libcamera_0.4.0.bb</a>} |=C2=A0 =
-11 +-<br>
-=C2=A04 files changed, 5 insertions(+), 248 deletions(-)<br>
-=C2=A0delete mode 100644 meta-multimedia/recipes-multimedia/libcamera/libca=
-mera/0001-ipu3-Use-posix-basename.patch<br>
-=C2=A0delete mode 100644 meta-multimedia/recipes-multimedia/libcamera/libca=
-mera/0001-rpi-Use-alloca-instead-of-variable-length-arrays.patch<br>
-=C2=A0delete mode 100644 meta-multimedia/recipes-multimedia/libcamera/libca=
-mera/0002-options-Replace-use-of-VLAs-in-C.patch<br>
-=C2=A0rename meta-multimedia/recipes-multimedia/libcamera/{<a href=3D"http:=
-//libcamera_0.2.0.bb" rel=3D"noreferrer" target=3D"_blank">libcamera_0.2.0.=
-bb</a> =3D&gt; <a href=3D"http://libcamera_0.4.0.bb" rel=3D"noreferrer" tar=
-get=3D"_blank">libcamera_0.4.0.bb</a>} (84%)<br>
+=C2=A0...-innobase-Define-__NR_futex-if-it-does-not-exist.patch | 6 +++---<=
+br>
+=C2=A0...01-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch | 6 +++---<=
+br>
+=C2=A0...ort-files-CMakeLists.txt-fix-do_populate_sysroot.patch | 6 +++---<=
+br>
+=C2=A0.../mysql/{<a href=3D"http://mariadb_11.4.4.bb" rel=3D"noreferrer" ta=
+rget=3D"_blank">mariadb_11.4.4.bb</a> =3D&gt; <a href=3D"http://mariadb_11.=
+8.0.bb" rel=3D"noreferrer" target=3D"_blank">mariadb_11.8.0.bb</a>}=C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 | 0<br>
+=C2=A07 files changed, 14 insertions(+), 14 deletions(-)<br>
+=C2=A0rename meta-oe/recipes-dbs/mysql/{<a href=3D"http://mariadb-native_11=
+.4.4.bb" rel=3D"noreferrer" target=3D"_blank">mariadb-native_11.4.4.bb</a> =
+=3D&gt; <a href=3D"http://mariadb-native_11.8.0.bb" rel=3D"noreferrer" targ=
+et=3D"_blank">mariadb-native_11.8.0.bb</a>} (100%)<br>
+=C2=A0rename meta-oe/recipes-dbs/mysql/{<a href=3D"http://mariadb_11.4.4.bb=
+" rel=3D"noreferrer" target=3D"_blank">mariadb_11.4.4.bb</a> =3D&gt; <a hre=
+f=3D"http://mariadb_11.8.0.bb" rel=3D"noreferrer" target=3D"_blank">mariadb=
+_11.8.0.bb</a>} (100%)<br>
 <br>
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-ip=
-u3-Use-posix-basename.patch b/meta-multimedia/recipes-multimedia/libcamera/=
-libcamera/0001-ipu3-Use-posix-basename.patch<br>
-deleted file mode 100644<br>
-index 9e4adf3d8d..0000000000<br>
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-ipu3-Use-=
-posix-basename.patch<br>
-+++ /dev/null<br>
-@@ -1,71 +0,0 @@<br>
--From 35d2acc61b1b27c0810a80cd21de65f29dc79df7 Mon Sep 17 00:00:00 2001<br>
--From: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank"=
->raj.khem@gmail.com</a>&gt;<br>
--Date: Sun, 24 Mar 2024 11:27:21 -0700<br>
--Subject: [PATCH] ipu3: Use posix basename<br>
--<br>
--musl does not implement GNU basename extention and with latest musl<br>
--the prototype from string.h is also removed [1] which now results in<br>
--compile errors e.g.<br>
--<br>
--../git/utils/ipu3/ipu3-pack.c:21:47: error: call to undeclared function &#=
-39;basename&#39;; ISO C99 and later do not support implicit function declar=
-ations [-Wimplicit-function-declaration]<br>
--<br>
--These utilities are using this function in usage() which is used just<br>
--before program exit. Always use the basename APIs from libgen.h which is<b=
-r>
--posix implementation<br>
--<br>
--[1] <a href=3D"https://git.musl-libc.org/cgit/musl/commit/?id=3D725e17ed6d=
-ff4d0cd22487bb64470881e86a92e7" rel=3D"noreferrer" target=3D"_blank">https:=
-//git.musl-libc.org/cgit/musl/commit/?id=3D725e17ed6dff4d0cd22487bb64470881=
-e86a92e7</a><br>
--<br>
--Upstream-Status: Submitted [<a href=3D"https://lists.libcamera.org/piperma=
-il/libcamera-devel/2024-March/041180.html" rel=3D"noreferrer" target=3D"_bl=
-ank">https://lists.libcamera.org/pipermail/libcamera-devel/2024-March/04118=
-0.html</a>]<br>
--Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=
-=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
-----<br>
-- utils/ipu3/ipu3-pack.c=C2=A0 =C2=A0| 4 ++--<br>
-- utils/ipu3/ipu3-unpack.c | 3 ++-<br>
-- 2 files changed, 4 insertions(+), 3 deletions(-)<br>
--<br>
--diff --git a/utils/ipu3/ipu3-pack.c b/utils/ipu3/ipu3-pack.c<br>
--index decbfc6c..23d2db8b 100644<br>
----- a/utils/ipu3/ipu3-pack.c<br>
--+++ b/utils/ipu3/ipu3-pack.c<br>
--@@ -8,6 +8,7 @@<br>
-- <br>
-- #include &lt;errno.h&gt;<br>
-- #include &lt;fcntl.h&gt;<br>
--+#include &lt;libgen.h&gt;<br>
-- #include &lt;stdint.h&gt;<br>
-- #include &lt;stdio.h&gt;<br>
-- #include &lt;string.h&gt;<br>
--@@ -15,9 +16,8 @@<br>
-- #include &lt;sys/types.h&gt;<br>
-- #include &lt;unistd.h&gt;<br>
-- <br>
---static void usage(const char *argv0)<br>
--+static void usage(char *argv0)<br>
-- {<br>
---<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0printf(&quot;Usage: %s input-file output-file\n=
-&quot;, basename(argv0));<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0printf(&quot;Convert unpacked RAW10 Bayer data =
-to the IPU3 packed Bayer formats\n&quot;);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0printf(&quot;If the output-file &#39;-&#39;, ou=
-tput data will be written to standard output\n&quot;);<br>
--diff --git a/utils/ipu3/ipu3-unpack.c b/utils/ipu3/ipu3-unpack.c<br>
--index 9d2c1200..1505a970 100644<br>
----- a/utils/ipu3/ipu3-unpack.c<br>
--+++ b/utils/ipu3/ipu3-unpack.c<br>
--@@ -8,6 +8,7 @@<br>
-- <br>
-- #include &lt;errno.h&gt;<br>
-- #include &lt;fcntl.h&gt;<br>
--+#include &lt;libgen.h&gt;<br>
-- #include &lt;stdint.h&gt;<br>
-- #include &lt;stdio.h&gt;<br>
-- #include &lt;string.h&gt;<br>
--@@ -15,7 +16,7 @@<br>
-- #include &lt;sys/types.h&gt;<br>
-- #include &lt;unistd.h&gt;<br>
-- <br>
---static void usage(const char *argv0)<br>
--+static void usage(char *argv0)<br>
-- {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0printf(&quot;Usage: %s input-file output-file\n=
-&quot;, basename(argv0));<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0printf(&quot;Unpack the IPU3 raw Bayer format t=
-o 16-bit Bayer\n&quot;);<br>
---- <br>
--2.44.0<br>
--<br>
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-rp=
-i-Use-alloca-instead-of-variable-length-arrays.patch b/meta-multimedia/reci=
-pes-multimedia/libcamera/libcamera/0001-rpi-Use-alloca-instead-of-variable-=
-length-arrays.patch<br>
-deleted file mode 100644<br>
-index c336e92548..0000000000<br>
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-rpi-Use-a=
-lloca-instead-of-variable-length-arrays.patch<br>
-+++ /dev/null<br>
-@@ -1,43 +0,0 @@<br>
--From 11cc6dbd45f0880beea64cdc514f57484b90bc39 Mon Sep 17 00:00:00 2001<br>
--From: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank"=
->raj.khem@gmail.com</a>&gt;<br>
--Date: Tue, 20 Feb 2024 18:44:23 -0800<br>
--Subject: [PATCH] rpi: Use malloc instead of variable length arrays<br>
--<br>
--Clang-18+ diagnoses this as error<br>
--<br>
--| ../git/src/ipa/rpi/controller/rpi/alsc.cpp:499:10: error: variable lengt=
-h arrays in C++ are a Clang extension [-Werror,-Wvla-cxx-extension]=C2=A0 =
-=C2=A0 =C2=A0|=C2=A0 =C2=A0499 |=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0int xLo[X=
-], xHi[X];<br>
--|=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0^<br>
--<br>
--Upstream-Status: Submitted [<a href=3D"https://lists.libcamera.org/piperma=
-il/libcamera-devel/2024-February/040529.html" rel=3D"noreferrer" target=3D"=
-_blank">https://lists.libcamera.org/pipermail/libcamera-devel/2024-February=
-/040529.html</a>]<br>
--Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=
-=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
--<br>
--s<br>
-----<br>
-- src/ipa/rpi/controller/rpi/alsc.cpp | 7 +++++--<br>
-- 1 file changed, 5 insertions(+), 2 deletions(-)<br>
--<br>
--diff --git a/src/ipa/rpi/controller/rpi/alsc.cpp b/src/ipa/rpi/controller/=
-rpi/alsc.cpp<br>
--index 8a205c60..a7d42614 100644<br>
----- a/src/ipa/rpi/controller/rpi/alsc.cpp<br>
--+++ b/src/ipa/rpi/controller/rpi/alsc.cpp<br>
--@@ -496,8 +496,8 @@ void resampleCalTable(const Array2D&lt;double&gt; &amp=
-;calTableIn,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 * Precalculate and cache the x sampling locati=
-ons and phases to save<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 * recomputing them on every row.<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
---=C2=A0 =C2=A0 =C2=A0 int xLo[X], xHi[X];<br>
---=C2=A0 =C2=A0 =C2=A0 double xf[X];<br>
--+=C2=A0 =C2=A0 =C2=A0 int *xLo =3D (int*)malloc(X), *xHi =3D (int*)malloc(=
-X);<br>
--+=C2=A0 =C2=A0 =C2=A0 double *xf =3D (double*)malloc(X);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0double scaleX =3D cameraMode.sensorWidth /<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0(cameraMode.width * cameraMode.scaleX);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0double xOff =3D cameraMode.cropX / (double)came=
-raMode.sensorWidth;<br>
--@@ -539,6 +539,9 @@ void resampleCalTable(const Array2D&lt;double&gt; &amp=
-;calTableIn,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0*(out++) =3D above * (1 - yf) + below * yf;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
--+=C2=A0 =C2=A0 =C2=A0 free(xf);<br>
--+=C2=A0 =C2=A0 =C2=A0 free(xHi);<br>
--+=C2=A0 =C2=A0 =C2=A0 free(xLo);<br>
-- }<br>
-- <br>
-- /* Calculate chrominance statistics (R/G and B/G) for each region. */<br>
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-op=
-tions-Replace-use-of-VLAs-in-C.patch b/meta-multimedia/recipes-multimedia/l=
-ibcamera/libcamera/0002-options-Replace-use-of-VLAs-in-C.patch<br>
-deleted file mode 100644<br>
-index 473820653e..0000000000<br>
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-options-R=
-eplace-use-of-VLAs-in-C.patch<br>
-+++ /dev/null<br>
-@@ -1,128 +0,0 @@<br>
--From 6e4736180fcaffdb06acf52fd3eb50ba5baa3d2a Mon Sep 17 00:00:00 2001<br>
--From: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank"=
->raj.khem@gmail.com</a>&gt;<br>
--Date: Wed, 31 Jan 2024 21:04:28 -0800<br>
--Subject: [PATCH] options: Replace use of VLAs in C++<br>
--<br>
--Clang++ 18 is fussy about this with new warning checks.<br>
--<br>
--=C2=A0 =C2=A0../git/src/apps/common/options.cpp:882:20: error: variable le=
-ngth arrays in C++ are a Clang extension [-Werror,-Wvla-cxx-extension]<br>
--=C2=A0 =C2=A0 =C2=A0 882 |=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0char shortOpti=
-ons[optionsMap_.size() * 3 + 2];<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0^~~~~~~~~~~~~~~~=
-~~~~~~~~~~<br>
--<br>
--Therefore replace using VLAs with alloca and malloc/free<br>
--<br>
--Upstream-Status: Submitted [<a href=3D"https://lists.libcamera.org/piperma=
-il/libcamera-devel/2024-February/040381.html" rel=3D"noreferrer" target=3D"=
-_blank">https://lists.libcamera.org/pipermail/libcamera-devel/2024-February=
-/040381.html</a>]<br>
--Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=
-=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
-----<br>
-- src/apps/common/options.cpp=C2=A0 =C2=A0 =C2=A0 | 12 ++++++++++--<br>
-- src/libcamera/ipc_unixsocket.cpp | 13 +++++++++----<br>
-- 2 files changed, 19 insertions(+), 6 deletions(-)<br>
--<br>
--diff --git a/src/apps/common/options.cpp b/src/apps/common/options.cpp<br>
--index 4f7e8691..3656f3c1 100644<br>
----- a/src/apps/common/options.cpp<br>
--+++ b/src/apps/common/options.cpp<br>
--@@ -879,8 +879,8 @@ OptionsParser::Options OptionsParser::parse(int argc, =
-char **argv)<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 * Allocate short and long options arrays large=
- enough to contain all<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 * options.<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
---=C2=A0 =C2=A0 =C2=A0 char shortOptions[optionsMap_.size() * 3 + 2];<br>
---=C2=A0 =C2=A0 =C2=A0 struct option longOptions[optionsMap_.size() + 1];<b=
-r>
--+=C2=A0 =C2=A0 =C2=A0 char *shortOptions =3D (char*)malloc(optionsMap_.siz=
-e() * 3 + 2);<br>
--+=C2=A0 =C2=A0 =C2=A0 struct option *longOptions =3D (struct option*)mallo=
-c(sizeof(struct option) * (optionsMap_.size() + 1));<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0unsigned int ids =3D 0;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0unsigned int idl =3D 0;<br>
-- <br>
--@@ -935,12 +935,16 @@ OptionsParser::Options OptionsParser::parse(int argc=
-, char **argv)<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0std::cerr &lt;&lt; argv[optind - 1] &lt;&lt; std::endl;<br>
-- <br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0usage();<br>
--+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 free(shortOptions);<br>
--+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 free(longOptions);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0return options;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-- <br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0const Option &amp;o=
-ption =3D *optionsMap_[c];<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (!parseValue(opt=
-ion, optarg, &amp;options)) {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0usage();<br>
--+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 free(shortOptions);<br>
--+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 free(longOptions);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0return options;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
--@@ -949,10 +953,14 @@ OptionsParser::Options OptionsParser::parse(int argc=
-, char **argv)<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0std::cerr &lt;&lt; =
-&quot;Invalid non-option argument &#39;&quot; &lt;&lt; argv[optind]<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0&lt;&lt; &quot;&#39;&quot; &lt;&lt; std::endl;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0usage();<br>
--+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 free(shortOptions);<br>
--+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 free(longOptions);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return options;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-- <br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0options.valid_ =3D true;<br>
--+=C2=A0 =C2=A0 =C2=A0 free(shortOptions);<br>
--+=C2=A0 =C2=A0 =C2=A0 free(longOptions);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0return options;<br>
-- }<br>
-- <br>
--diff --git a/src/libcamera/ipc_unixsocket.cpp b/src/libcamera/ipc_unixsock=
-et.cpp<br>
--index 1980d374..3bd861cb 100644<br>
----- a/src/libcamera/ipc_unixsocket.cpp<br>
--+++ b/src/libcamera/ipc_unixsocket.cpp<br>
--@@ -8,6 +8,7 @@<br>
-- #include &quot;libcamera/internal/ipc_unixsocket.h&quot;<br>
-- <br>
-- #include &lt;array&gt;<br>
--+#include &lt;cstdint&gt;<br>
-- #include &lt;poll.h&gt;<br>
-- #include &lt;string.h&gt;<br>
-- #include &lt;sys/socket.h&gt;<br>
--@@ -247,8 +248,8 @@ int IPCUnixSocket::sendData(const void *buffer, size_t=
- length,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0iov[0].iov_base =3D const_cast&lt;void *&gt;(bu=
-ffer);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0iov[0].iov_len =3D length;<br>
-- <br>
---=C2=A0 =C2=A0 =C2=A0 char buf[CMSG_SPACE(num * sizeof(uint32_t))];<br>
---=C2=A0 =C2=A0 =C2=A0 memset(buf, 0, sizeof(buf));<br>
--+=C2=A0 =C2=A0 =C2=A0 char *buf =3D (char*)malloc(CMSG_SPACE(num * sizeof(=
-uint32_t)));<br>
--+=C2=A0 =C2=A0 =C2=A0 memset((void*)buf, 0, sizeof(buf));<br>
-- <br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0struct cmsghdr *cmsg =3D (struct cmsghdr *)buf;=
-<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0cmsg-&gt;cmsg_len =3D CMSG_LEN(num * sizeof(uin=
-t32_t));<br>
--@@ -270,9 +271,11 @@ int IPCUnixSocket::sendData(const void *buffer, size_=
-t length,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0int ret =3D -errno;=
-<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0LOG(IPCUnixSocket, =
-Error)<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0&lt;&lt; &quot;Failed to sendmsg: &quot; &lt;&lt; strerror(-ret);=
-<br>
--+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 free(buf);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return ret;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-- <br>
--+=C2=A0 =C2=A0 =C2=A0 free(buf);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0return 0;<br>
-- }<br>
-- <br>
--@@ -283,8 +286,8 @@ int IPCUnixSocket::recvData(void *buffer, size_t lengt=
-h,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0iov[0].iov_base =3D buffer;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0iov[0].iov_len =3D length;<br>
-- <br>
---=C2=A0 =C2=A0 =C2=A0 char buf[CMSG_SPACE(num * sizeof(uint32_t))];<br>
---=C2=A0 =C2=A0 =C2=A0 memset(buf, 0, sizeof(buf));<br>
--+=C2=A0 =C2=A0 =C2=A0 char *buf =3D (char*)malloc(CMSG_SPACE(num * sizeof(=
-uint32_t)));<br>
--+=C2=A0 =C2=A0 =C2=A0 memset((void*)buf, 0, sizeof(buf));<br>
-- <br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0struct cmsghdr *cmsg =3D (struct cmsghdr *)buf;=
-<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0cmsg-&gt;cmsg_len =3D CMSG_LEN(num * sizeof(uin=
-t32_t));<br>
--@@ -305,12 +308,14 @@ int IPCUnixSocket::recvData(void *buffer, size_t len=
-gth,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (ret !=3D -EAGAI=
-N)<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0LOG(IPCUnixSocket, Error)<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&lt;&lt; &quot;Failed to recvmsg: &qu=
-ot; &lt;&lt; strerror(-ret);<br>
--+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 free(buf);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return ret;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-- <br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0if (fds)<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0memcpy(fds, CMSG_DA=
-TA(cmsg), num * sizeof(uint32_t));<br>
-- <br>
--+=C2=A0 =C2=A0 =C2=A0 free(buf);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0return 0;<br>
-- }<br>
-- <br>
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/<a href=3D"http:/=
-/libcamera_0.2.0.bb" rel=3D"noreferrer" target=3D"_blank">libcamera_0.2.0.b=
-b</a> b/meta-multimedia/recipes-multimedia/libcamera/<a href=3D"http://libc=
-amera_0.4.0.bb" rel=3D"noreferrer" target=3D"_blank">libcamera_0.4.0.bb</a>=
-<br>
-similarity index 84%<br>
-rename from meta-multimedia/recipes-multimedia/libcamera/<a href=3D"http://=
-libcamera_0.2.0.bb" rel=3D"noreferrer" target=3D"_blank">libcamera_0.2.0.bb=
-</a><br>
-rename to meta-multimedia/recipes-multimedia/libcamera/<a href=3D"http://li=
-bcamera_0.4.0.bb" rel=3D"noreferrer" target=3D"_blank">libcamera_0.4.0.bb</=
-a><br>
-index 45d6be31ec..682e56739f 100644<br>
---- a/meta-multimedia/recipes-multimedia/libcamera/<a href=3D"http://libcam=
-era_0.2.0.bb" rel=3D"noreferrer" target=3D"_blank">libcamera_0.2.0.bb</a><b=
-r>
-+++ b/meta-multimedia/recipes-multimedia/libcamera/<a href=3D"http://libcam=
-era_0.4.0.bb" rel=3D"noreferrer" target=3D"_blank">libcamera_0.4.0.bb</a><b=
-r>
-@@ -11,12 +11,9 @@ LIC_FILES_CHKSUM =3D &quot;\<br>
-=C2=A0SRC_URI =3D &quot; \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://git.libcamera.org=
-/libcamera/libcamera.git;protocol=3Dhttps;branch=3Dmaster" rel=3D"noreferre=
-r" target=3D"_blank">git.libcamera.org/libcamera/libcamera.git;protocol=3Dh=
-ttps;branch=3Dmaster</a> \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-media_device-Add-bool-return-=
-type-to-unlock.patch \<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0002-options-Replace-use-of-VLAs-in-C.p=
-atch \<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-rpi-Use-alloca-instead-of-variable=
--length-arrays.patch \<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-ipu3-Use-posix-basename.patch \<br=
+diff --git a/meta-oe/recipes-dbs/mysql/<a href=3D"http://mariadb-native_11.=
+4.4.bb" rel=3D"noreferrer" target=3D"_blank">mariadb-native_11.4.4.bb</a> b=
+/meta-oe/recipes-dbs/mysql/<a href=3D"http://mariadb-native_11.8.0.bb" rel=
+=3D"noreferrer" target=3D"_blank">mariadb-native_11.8.0.bb</a><br>
+similarity index 100%<br>
+rename from meta-oe/recipes-dbs/mysql/<a href=3D"http://mariadb-native_11.4=
+.4.bb" rel=3D"noreferrer" target=3D"_blank">mariadb-native_11.4.4.bb</a><br=
 >
-=C2=A0&quot;<br>
+rename to meta-oe/recipes-dbs/mysql/<a href=3D"http://mariadb-native_11.8.0=
+.bb" rel=3D"noreferrer" target=3D"_blank">mariadb-native_11.8.0.bb</a><br>
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/my=
+sql/mariadb.inc<br>
+index dae41d89aa..d924378531 100644<br>
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc<br>
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc<br>
+@@ -25,7 +25,7 @@ SRC_URI =3D &quot;<a href=3D"https://archive.mariadb.org/=
+$%7BBP%7D/source/$%7BBP%7D.tar.gz" rel=3D"noreferrer" target=3D"_blank">htt=
+ps://archive.mariadb.org/${BP}/source/${BP}.tar.gz</a> \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-Add-missing-includes-=
+cstdint-and-cstdio.patch \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-Ensure-compatibility-=
+with-ARMv9-by-updating-.arch-di.patch \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;<br>
+-SRC_URI[sha256sum] =3D &quot;96fbd2e6e93fb7e8b373eea75d85b6fea57c0e111a020=
+90cbbefed52599dc77b&quot;<br>
++SRC_URI[sha256sum] =3D &quot;57456dbdd1d9ea6274c18d28500d27c95ea926ce6ba30=
+a7ea81e1ddf4bef8515&quot;<br>
 <br>
--SRCREV =3D &quot;89227a428a82e724548399d35c98ea89566f9045&quot;<br>
-+SRCREV =3D &quot;35ed4b91291d9f3d08e4b51acfb51163e65df8f8&quot;<br>
+=C2=A0UPSTREAM_CHECK_URI =3D &quot;<a href=3D"https://github.com/MariaDB/se=
+rver/tags" rel=3D"noreferrer" target=3D"_blank">https://github.com/MariaDB/=
+server/tags</a>&quot;<br>
 <br>
-=C2=A0PE =3D &quot;1&quot;<br>
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-aio_linux-Check-if-sysc=
+all-exists-before-using-it.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-a=
+io_linux-Check-if-syscall-exists-before-using-it.patch<br>
+index eddfdaaf77..106c37a828 100644<br>
+--- a/meta-oe/recipes-dbs/mysql/mariadb/0001-aio_linux-Check-if-syscall-exi=
+sts-before-using-it.patch<br>
++++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-aio_linux-Check-if-syscall-exi=
+sts-before-using-it.patch<br>
+@@ -1,4 +1,4 @@<br>
+-From f9f019049a9bb09471e8303d4510afae07f225c8 Mon Sep 17 00:00:00 2001<br>
++From 883f3b2c351dfc136ba81d4060b2e3bf4f4d7e7c Mon Sep 17 00:00:00 2001<br>
+=C2=A0From: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_b=
+lank">raj.khem@gmail.com</a>&gt;<br>
+=C2=A0Date: Wed, 18 Aug 2021 06:49:25 +0000<br>
+=C2=A0Subject: [PATCH] aio_linux: Check if syscall exists before using it<b=
+r>
+@@ -17,10 +17,10 @@ Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@=
+gmail.com" target=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
+=C2=A0 1 file changed, 4 insertions(+)<br>
 <br>
-@@ -25,10 +22,11 @@ S =3D &quot;${WORKDIR}/git&quot;<br>
-=C2=A0DEPENDS =3D &quot;python3-pyyaml-native python3-jinja2-native python3=
--ply-native python3-jinja2-native udev gnutls chrpath-native libevent libya=
-ml&quot;<br>
-=C2=A0DEPENDS +=3D &quot;${@bb.utils.contains(&#39;DISTRO_FEATURES&#39;, &#=
-39;qt&#39;, &#39;qtbase qtbase-native&#39;, &#39;&#39;, d)}&quot;<br>
+=C2=A0diff --git a/tpool/aio_linux.cc b/tpool/aio_linux.cc<br>
+-index 507c6b92..a6adf1af 100644<br>
++index abf37e22..2b75ed4a 100644<br>
+=C2=A0--- a/tpool/aio_linux.cc<br>
+=C2=A0+++ b/tpool/aio_linux.cc<br>
+-@@ -59,6 +59,7 @@ Foundation, Inc., <a href=3D"https://www.google.com/maps=
+/search/51+Franklin+Street?entry=3Dgmail&amp;source=3Dg">51 Franklin Street=
+</a>, Fifth Floor, Boston, MA 02111 - 1301 USA*/<br>
++@@ -60,6 +60,7 @@ Foundation, Inc., <a href=3D"https://www.google.com/maps=
+/search/51+Franklin+Street?entry=3Dgmail&amp;source=3Dg">51 Franklin Street=
+</a>, Fifth Floor, Boston, MA 02111 - 1301 USA*/<br>
+=C2=A0 */<br>
+=C2=A0 static int my_getevents(io_context_t ctx, long min_nr, long nr, io_e=
+vent *ev)<br>
+=C2=A0 {<br>
+@@ -28,7 +28,7 @@ index 507c6b92..a6adf1af 100644<br>
+=C2=A0 =C2=A0 int saved_errno=3D errno;<br>
+=C2=A0 =C2=A0 int ret=3D syscall(__NR_io_getevents, reinterpret_cast&lt;lon=
+g&gt;(ctx),<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0min_nr, nr, ev, 0);<br>
+-@@ -68,6 +69,9 @@ static int my_getevents(io_context_t ctx, long min_nr, l=
+ong nr, io_event *ev)<br>
++@@ -69,6 +70,9 @@ static int my_getevents(io_context_t ctx, long min_nr, l=
+ong nr, io_event *ev)<br>
+=C2=A0 =C2=A0 =C2=A0 errno=3D saved_errno;<br>
+=C2=A0 =C2=A0 }<br>
+=C2=A0 =C2=A0 return ret;<br>
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-innobase-Define-__NR_fu=
+tex-if-it-does-not-exist.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-inn=
+obase-Define-__NR_futex-if-it-does-not-exist.patch<br>
+index bfcd45b64b..4152a604b0 100644<br>
+--- a/meta-oe/recipes-dbs/mysql/mariadb/0001-innobase-Define-__NR_futex-if-=
+it-does-not-exist.patch<br>
++++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-innobase-Define-__NR_futex-if-=
+it-does-not-exist.patch<br>
+@@ -1,4 +1,4 @@<br>
+-From 3a29c2f7afe10bf0bc0529b5d9ea44866946ac5a Mon Sep 17 00:00:00 2001<br>
++From 9ad66b45557ce95f8ee14335e4d3a5d081c958e2 Mon Sep 17 00:00:00 2001<br>
+=C2=A0From: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_b=
+lank">raj.khem@gmail.com</a>&gt;<br>
+=C2=A0Date: Sat, 14 Nov 2020 14:37:13 -0800<br>
+=C2=A0Subject: [PATCH] innobase: Define __NR_futex if it does not exist<br>
+@@ -19,7 +19,7 @@ Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gm=
+ail.com" target=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
+=C2=A0 1 file changed, 3 insertions(+)<br>
 <br>
--PACKAGES =3D+ &quot;${PN}-gst&quot;<br>
-+PACKAGES =3D+ &quot;${PN}-gst ${PN}-pycamera&quot;<br>
+=C2=A0diff --git a/storage/innobase/log/log0sync.cc b/storage/innobase/log/=
+log0sync.cc<br>
+-index 0de283ca..265ab691 100644<br>
++index f6ca440e..9a602b2a 100644<br>
+=C2=A0--- a/storage/innobase/log/log0sync.cc<br>
+=C2=A0+++ b/storage/innobase/log/log0sync.cc<br>
+=C2=A0@@ -66,6 +66,9 @@ Note that if write operation is very fast, a) or b)=
+ can be fine as alternative.<br>
+@@ -31,4 +31,4 @@ index 0de283ca..265ab691 100644<br>
+=C2=A0+#endif<br>
+=C2=A0 #endif<br>
 <br>
-=C2=A0PACKAGECONFIG ??=3D &quot;&quot;<br>
-=C2=A0PACKAGECONFIG[gst] =3D &quot;-Dgstreamer=3Denabled,-Dgstreamer=3Ddisa=
-bled,gstreamer1.0 gstreamer1.0-plugins-base&quot;<br>
-+PACKAGECONFIG[pycamera] =3D &quot;-Dpycamera=3Denabled,-Dpycamera=3Ddisabl=
-ed,python3 python3-pybind11&quot;<br>
+- #include &lt;atomic&gt;<br>
++ #include &lt;algorithm&gt;<br>
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fix-=
+gen_lex_hash-not-found.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-sql-C=
+MakeLists.txt-fix-gen_lex_hash-not-found.patch<br>
+index 1475bb1a51..b1d04e2b4e 100644<br>
+--- a/meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fix-gen_lex=
+_hash-not-found.patch<br>
++++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fix-gen_lex=
+_hash-not-found.patch<br>
+@@ -1,4 +1,4 @@<br>
+-From 360d41c1dd2d28d5102d66179095cedacaf5dc3a Mon Sep 17 00:00:00 2001<br>
++From 003615e4290090c5e1944e0843b1017a0a975e92 Mon Sep 17 00:00:00 2001<br>
+=C2=A0From: Mingli Yu &lt;<a href=3D"mailto:mingli.yu@windriver.com" target=
+=3D"_blank">mingli.yu@windriver.com</a>&gt;<br>
+=C2=A0Date: Fri, 23 Sep 2022 15:48:21 +0800<br>
+=C2=A0Subject: [PATCH] sql/CMakeLists.txt: fix gen_lex_hash not found<br>
+@@ -15,7 +15,7 @@ Signed-off-by: Mingli Yu &lt;<a href=3D"mailto:mingli.yu@=
+windriver.com" target=3D"_blank">mingli.yu@windriver.com</a>&gt;<br>
+=C2=A0 1 file changed, 22 insertions(+), 8 deletions(-)<br>
 <br>
-=C2=A0LIBCAMERA_PIPELINES ??=3D &quot;auto&quot;<br>
+=C2=A0diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt<br>
+-index 0195555e..507136cb 100644<br>
++index cb43f7ad..0fb8cd01 100644<br>
+=C2=A0--- a/sql/CMakeLists.txt<br>
+=C2=A0+++ b/sql/CMakeLists.txt<br>
+=C2=A0@@ -64,11 +64,18 @@ ${CMAKE_BINARY_DIR}/sql<br>
+@@ -41,7 +41,7 @@ index 0195555e..507136cb 100644<br>
 <br>
-@@ -46,7 +44,7 @@ RDEPENDS:${PN} =3D &quot;${@bb.utils.contains(&#39;DISTRO=
-_FEATURES&#39;, &#39;wayland qt&#39;, &#39;qtwayla<br>
-=C2=A0inherit meson pkgconfig python3native<br>
+=C2=A0 FIND_PACKAGE(BISON 2.4)<br>
 <br>
-=C2=A0do_configure:prepend() {<br>
--=C2=A0 =C2=A0 sed -i -e &#39;s|py_compile=3DTrue,||&#39; ${S}/utils/ipc/mo=
-jo/public/tools/mojom/mojom/generate/template_expander.py<br>
-+=C2=A0 =C2=A0 sed -i -e &#39;s|py_compile=3DTrue,||&#39; ${S}/utils/codege=
-n/ipc/mojo/public/tools/mojom/mojom/generate/template_expander.py<br>
-=C2=A0}<br>
+-@@ -405,11 +412,18 @@ IF(NOT CMAKE_CROSSCOMPILING OR DEFINED CMAKE_CROSSCO=
+MPILING_EMULATOR)<br>
++@@ -411,11 +418,18 @@ IF(NOT CMAKE_CROSSCOMPILING OR DEFINED CMAKE_CROSSCO=
+MPILING_EMULATOR)<br>
+=C2=A0 =C2=A0 ADD_EXECUTABLE(gen_lex_hash gen_lex_hash.cc)<br>
+=C2=A0 ENDIF()<br>
 <br>
-=C2=A0do_install:append() {<br>
-@@ -72,6 +70,7 @@ do_package_recalculate_ipa_signatures() {<br>
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/support-files-CMakeLists.txt=
+-fix-do_populate_sysroot.patch b/meta-oe/recipes-dbs/mysql/mariadb/support-=
+files-CMakeLists.txt-fix-do_populate_sysroot.patch<br>
+index 30c9e2452a..8bf8ed8ddb 100644<br>
+--- a/meta-oe/recipes-dbs/mysql/mariadb/support-files-CMakeLists.txt-fix-do=
+_populate_sysroot.patch<br>
++++ b/meta-oe/recipes-dbs/mysql/mariadb/support-files-CMakeLists.txt-fix-do=
+_populate_sysroot.patch<br>
+@@ -1,4 +1,4 @@<br>
+-From 34713c3bba68cb94b373b750c1c8fcc0b04b2c45 Mon Sep 17 00:00:00 2001<br>
++From 3fb7db413c5496ef5cb4f5415433acc8ea23db26 Mon Sep 17 00:00:00 2001<br>
+=C2=A0From: Mingli Yu &lt;<a href=3D"mailto:mingli.yu@windriver.com" target=
+=3D"_blank">mingli.yu@windriver.com</a>&gt;<br>
+=C2=A0Date: Wed, 27 Feb 2019 22:41:26 -0800<br>
+=C2=A0Subject: [PATCH] support-files/CMakeLists.txt: fix do_populate_sysroo=
+t issue<br>
+@@ -15,10 +15,10 @@ Signed-off-by: Mingli Yu &lt;<a href=3D"mailto:mingli.y=
+u@windriver.com" target=3D"_blank">mingli.yu@windriver.com</a>&gt;<br>
+=C2=A0 1 file changed, 7 deletions(-)<br>
 <br>
-=C2=A0FILES:${PN} +=3D &quot; ${libexecdir}/libcamera/v4l2-compat.so&quot;<=
-br>
-=C2=A0FILES:${PN}-gst =3D &quot;${libdir}/gstreamer-1.0&quot;<br>
-+FILES:${PN}-pycamera =3D &quot;${PYTHON_SITEPACKAGES_DIR}/libcamera&quot;<=
-br>
+=C2=A0diff --git a/support-files/CMakeLists.txt b/support-files/CMakeLists.=
+txt<br>
+-index ee1d420e..a99c0605 100644<br>
++index ae7f9063..9f54d63e 100644<br>
+=C2=A0--- a/support-files/CMakeLists.txt<br>
+=C2=A0+++ b/support-files/CMakeLists.txt<br>
+-@@ -245,12 +245,5 @@ IF(UNIX AND NOT WITHOUT_SERVER)<br>
++@@ -247,12 +247,5 @@ IF(UNIX AND NOT WITHOUT_SERVER)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 INSTALL(FILES rpm/enable_encryption.preset DEST=
+INATION ${INSTALL_SYSCONF2DIR}<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 COMPONENT IniFiles)=
 <br>
-=C2=A0# libcamera-v4l2 explicitly sets _FILE_OFFSET_BITS=3D32 to get access=
- to<br>
-=C2=A0# both 32 and 64 bit file APIs.<br>
+=C2=A0 =C2=A0 =C2=A0 ENDIF()<br>
+diff --git a/meta-oe/recipes-dbs/mysql/<a href=3D"http://mariadb_11.4.4.bb"=
+ rel=3D"noreferrer" target=3D"_blank">mariadb_11.4.4.bb</a> b/meta-oe/recip=
+es-dbs/mysql/<a href=3D"http://mariadb_11.8.0.bb" rel=3D"noreferrer" target=
+=3D"_blank">mariadb_11.8.0.bb</a><br>
+similarity index 100%<br>
+rename from meta-oe/recipes-dbs/mysql/<a href=3D"http://mariadb_11.4.4.bb" =
+rel=3D"noreferrer" target=3D"_blank">mariadb_11.4.4.bb</a><br>
+rename to meta-oe/recipes-dbs/mysql/<a href=3D"http://mariadb_11.8.0.bb" re=
+l=3D"noreferrer" target=3D"_blank">mariadb_11.8.0.bb</a><br>
 -- <br>
-2.34.1<br>
+2.43.0<br>
 <br>
 <br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 Links: You receive all messages sent to this group.<br>
-View/Reply Online (#114996): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/114996" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/114996</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/110715612/199=
+View/Reply Online (#114972): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/114972" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/114972</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/110711735/199=
 7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/110715612/1997914</a><br>
+t/110711735/1997914</a><br>
 Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
 d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
 ><br>
@@ -1017,5 +562,5 @@ et=3D"_blank">raj.khem@gmail.com</a>]<br>
 <br>
 </blockquote></div></div>
 
---0000000000001d54bb062c26d30a--
+--00000000000026ef51062c2808c2--
 
