@@ -1,479 +1,119 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8EFB3C02182
-	for <webhook@archiver.kernel.org>; Tue, 21 Jan 2025 17:43:34 +0000 (UTC)
-Received: from mail-oa1-f47.google.com (mail-oa1-f47.google.com [209.85.160.47])
- by mx.groups.io with SMTP id smtpd.web10.21911.1737481408918086069
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5B75C0218C
+	for <webhook@archiver.kernel.org>; Tue, 21 Jan 2025 18:31:54 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.web10.23205.1737484307710548935
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Jan 2025 09:43:29 -0800
+ Tue, 21 Jan 2025 10:31:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mGDJYIar;
- spf=pass (domain: gmail.com, ip: 209.85.160.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f47.google.com with SMTP id 586e51a60fabf-2a01bcd0143so4102297fac.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 21 Jan 2025 09:43:28 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FdBqedLI;
+ spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-436249df846so41480045e9.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 21 Jan 2025 10:31:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1737481408; x=1738086208; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1737484306; x=1738089106; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Lu8iTmt8/SZ5HjpcMTzUD2MjM62V3GdAghMEbxwX2+8=;
-        b=mGDJYIarKhVnMp2w0RIxD6jLdohkHGZREhr5BcWZWZB1BV9BFIifHpHjJ3rAcBSalT
-         PwjQaFjCgnZAMLleaF0e8CHQoZarq/dV84L7K7gnLjm/ZdKnk0MXTNupb/vpMNfVAnPI
-         wh131hVr1MwCrHvxiwq5m6to2EMkaPA7n6iNwZShbp34ag7SaydIltIVKeaXn3HUK0+E
-         dzMzPYiS9Upq5mo3wxYic7WXT01hiPPhdarWraG1O7m6RnsfHwiseSJLnk6JVL+GPat8
-         ETEuY0lj492srLqc6QK2eUz/2effPYCZtYkzltzD3aG5RP4lcb2TnMTm/ItH0RdnKVDw
-         BQaQ==
+        bh=wTn2cuf4X0ah9FjJlrxsCkCkxrRKAUvV+9UeSHWx81o=;
+        b=FdBqedLI/OAZS6fNEySnTuE0Q83aLpxAT2DeutqPMEwfaBlSDZ1vguKP361MNiGfAw
+         Ay7Xn7B0r+lMOr0P7IpcAlnQ8NFPsN6kiEgkhl4EqGbDc4ZrfVY52VgoHDj2yTGvJ+Y7
+         HEykYFL5dbqyO89T6DZbAc0oAmAlOJ7jmvA2LKIPqlqcAqa+6SIazO1V1AhQXYbXEEpj
+         xJeTREWSC31iWKpftafaixqsPTgE0aH/Kc6Z43FSaQJn46iCWkUx3WMxNmiY3vBlEKN8
+         KT7fJ2SVZrNPqxxkgiwQAjwcKtNoPbYr8Xtgwtw6HjdtbKn3cz0pYuU7jPrhnRoWcwJx
+         6BTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737481408; x=1738086208;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1737484306; x=1738089106;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Lu8iTmt8/SZ5HjpcMTzUD2MjM62V3GdAghMEbxwX2+8=;
-        b=cJBGchecBor9gARxLy07WX91WJDd4IfW50oIUxHFUmaFfCCll6sW+sN2LFfUH3wKGn
-         5i3HHRPcQn/c8xdpuvkvCTW2F3ZWz78FttBpAI9VYGRnkJ6ynI3CsFcVEBhBjTHM6zTb
-         v3DLZtiF9NlcfsNlrIBwu49XgmyTZLt2d0L+PciFz9FFz25CrMw21c9g3t2Lx5jOD6OX
-         4OzFBspRc35Z/sfGwuUl+zBTOT3E+udlm1Cnr6NyXLJ9IabCfIBKQGJjICjCnzJAId1T
-         T2YAWYoJjLW6pDL8+nJLAq10mLJJyBz2QZeYxZMAMUhaG11yX0RIKNOhfhHRo+9BPyrU
-         2Pog==
-X-Gm-Message-State: AOJu0Yw7+NwyLVbeOQNV+jchGVYMeVxNhbMDS+bUMtpDm8sQdUiu1PXg
-	v1SAEbzSVPBmU8b7KMvww4ljR2PJCZkkZc26kTdGcdWfKAxE35m/7eDn7hSuZSsevh8QaP+dZMz
-	18X2PwKFfx9yeNJBMZ+NgeMdXOSQ=
-X-Gm-Gg: ASbGncspu8fVZ3xfsqq/e4p24AHalhJcmjJednh66ickUVeFQAkz5Vz7BVimvwQ8m/u
-	6q5NNrgY2bwWe9sSVGwGD6LppgR/+Cei1NTRAma6bHpQvRYc2Zg==
-X-Google-Smtp-Source: AGHT+IHL46MZIM9Yd9LHJe8hGZOKJGmpm0+WS/FE92sxBPWOGemWvWsA5n3p7bZZU+vHa0/nJImOnJXOf/Z4U+KJzpM=
-X-Received: by 2002:a05:6870:4e07:b0:29e:3484:ae12 with SMTP id
- 586e51a60fabf-2b1c0b9f9b6mr11938977fac.33.1737481408004; Tue, 21 Jan 2025
- 09:43:28 -0800 (PST)
+        bh=wTn2cuf4X0ah9FjJlrxsCkCkxrRKAUvV+9UeSHWx81o=;
+        b=PnWPPBcsNcTeaiaf0emVASnucnukl+K4MfyXd8mLQHTCZK/CJQsHqOZZto2a6tviOl
+         uKGew6lWUqQEaN/iv12SZ2XK/Rgm9DXc6l40citlGIXCNNLcTfBhS+QLTSntNVP6VgJp
+         xm6GM9xQNVDxcRFp82x6yoLLj4t5BeL46jVFj7y7ggvRVfFwF/ZRydWKMGL5jE2YofJD
+         0cr3Sy8d3hVThHeWtprBmxQJPPSvcKt2EqIc1T9JFwcT9mQRyC964CwB7vxdsm4lFoFR
+         c1kyxGFQbOLC6w5GCKh82skjB7wYo7ZzsJ7TMonY9u4MDiuu78dq8ypL+A75kF3dZk/G
+         aggg==
+X-Gm-Message-State: AOJu0YwCiHyipvwXSfdrHfipe9SwAqGw2m2z7S8IWTAhQnexs1I2MFCo
+	Dc/Mhw3TSvQkj/S8jVcfce73P+qQcq8Gk74d/LTvFwITihlBhWLpVpfSeA==
+X-Gm-Gg: ASbGnctrRo6O5dU8ESNJnMa2xPCdr1QRiuyyCX/ulGSvg5g6U7iM4eA6M2C6WMnVk01
+	0gLMg3YBj/lsNiEsdxweoBoypWgNik5/W7GDgRHUa2ZB01WD9O4PsMaKeaAN/fksWnSnIIBkgM2
+	DtRjGdZ9dj5DAFbiMs12tL6iNx/vnY2OKPBrQZpg6du1Gfo2hzcqAf0dCQk7VZUWFX7A6GesueC
+	icwh+Hx4NH8ABp3E7dSJ7A31tQGtZ4KjCMd3jc7o80MVZHo/A5BTd68upAlAw9S+WEcNXMUEhzy
+	AxWtmeLd/BRW8B4EdlbOeehr6R0=
+X-Google-Smtp-Source: AGHT+IFapZdp0LazwCSxdlibC84l8VuJb5q39v43HzX5qUhRP4Piaq+QLOtPKDDis0Vu9JopZVo2tg==
+X-Received: by 2002:a05:600c:a03:b0:434:a902:97cd with SMTP id 5b1f17b1804b1-438913ed350mr178462515e9.12.1737484305899;
+        Tue, 21 Jan 2025 10:31:45 -0800 (PST)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-38bf321508esm14312664f8f.10.2025.01.21.10.31.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 21 Jan 2025 10:31:45 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: peng.zhang1.cn@windriver.com,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH 3/3] lapack: upgrade to latest 3.12.1
+Date: Tue, 21 Jan 2025 19:31:33 +0100
+Message-ID: <20250121183133.23102-3-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250121183133.23102-1-martin.jansa@gmail.com>
+References: <20250121183133.23102-1-martin.jansa@gmail.com>
 MIME-Version: 1.0
-References: <20250121065346.37236-1-throos@amazon.de>
-In-Reply-To: <20250121065346.37236-1-throos@amazon.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 21 Jan 2025 09:43:01 -0800
-X-Gm-Features: AbW1kvYWC7LPBTZVG6FoEYZBE44cUvAaXpWLpVX1DRv8Gqv4eLrA1QItJwwT_kk
-Message-ID: <CAMKF1srN1uZ65JjdyYU2qJMNY+-JnSY_SErP1hQb0tx07g2=Bg@mail.gmail.com>
-Subject: Re: [oe] [meta-multimedia] [scarthgap] [PATCH] libcamera: backport
- 0.4.0 from master-next
-To: throos@amazon.de
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 Jan 2025 17:43:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115006
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Jan 2025 18:31:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115009
 
-Hi Armin,
+* adjust the list of .f files to cover also newly used .f90 files, causing:
+  http://errors.yoctoproject.org/Errors/Details/840502/
 
-This patch should be fine to get into scarthgap, its gets it libcamera
-functional on release.
+ERROR: lapack-3.12.1-r0 do_package_qa: QA Issue: File /usr/lib/lapack/ptest/bin/xdmdeigtsts in package lapack-ptest contains reference to TMPDIR [buildpaths]
+ERROR: lapack-3.12.1-r0 do_package_qa: QA Issue: File /usr/lib/lapack/ptest/bin/xdmdeigtstd in package lapack-ptest contains reference to TMPDIR [buildpaths]
+ERROR: lapack-3.12.1-r0 do_package_qa: QA Issue: File /usr/lib/lapack/ptest/bin/xdmdeigtstz in package lapack-ptest contains reference to TMPDIR [buildpaths]
+ERROR: lapack-3.12.1-r0 do_package_qa: QA Issue: File /usr/lib/lapack/ptest/bin/xdmdeigtstc in package lapack-ptest contains reference to TMPDIR [buildpaths]
+ERROR: lapack-3.12.1-r0 do_package_qa: Fatal QA errors were found, failing task.
 
-On Mon, Jan 20, 2025 at 10:54=E2=80=AFPM Thomas Roos via
-lists.openembedded.org <throos=3Damazon.de@lists.openembedded.org>
-wrote:
->
-> From: Thomas Roos <throos@amazon.de>
->
-> This is done because libcamera 0.2. is broken,
-> probablay because of 0001-rpi-Use-alloca-instead-of-variable-length-array=
-s.patch
-> Tested good with upstream version.
->
-> See more details here:
-> https://github.com/openembedded/meta-openembedded/issues/919
-> and here:
-> https://github.com/raspberrypi/rpicam-apps/issues/654
->
-> Signed-off-by: Thomas Roos <throos@amazon.de>
-> ---
->  .../0001-ipu3-Use-posix-basename.patch        |  71 ----------
->  ...ca-instead-of-variable-length-arrays.patch |  43 ------
->  ...002-options-Replace-use-of-VLAs-in-C.patch | 128 ------------------
->  ...{libcamera_0.2.0.bb =3D> libcamera_0.4.0.bb} |  11 +-
->  4 files changed, 5 insertions(+), 248 deletions(-)
->  delete mode 100644 meta-multimedia/recipes-multimedia/libcamera/libcamer=
-a/0001-ipu3-Use-posix-basename.patch
->  delete mode 100644 meta-multimedia/recipes-multimedia/libcamera/libcamer=
-a/0001-rpi-Use-alloca-instead-of-variable-length-arrays.patch
->  delete mode 100644 meta-multimedia/recipes-multimedia/libcamera/libcamer=
-a/0002-options-Replace-use-of-VLAs-in-C.patch
->  rename meta-multimedia/recipes-multimedia/libcamera/{libcamera_0.2.0.bb =
-=3D> libcamera_0.4.0.bb} (84%)
->
-> diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-=
-ipu3-Use-posix-basename.patch b/meta-multimedia/recipes-multimedia/libcamer=
-a/libcamera/0001-ipu3-Use-posix-basename.patch
-> deleted file mode 100644
-> index 9e4adf3d8d..0000000000
-> --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-ipu3-Us=
-e-posix-basename.patch
-> +++ /dev/null
-> @@ -1,71 +0,0 @@
-> -From 35d2acc61b1b27c0810a80cd21de65f29dc79df7 Mon Sep 17 00:00:00 2001
-> -From: Khem Raj <raj.khem@gmail.com>
-> -Date: Sun, 24 Mar 2024 11:27:21 -0700
-> -Subject: [PATCH] ipu3: Use posix basename
-> -
-> -musl does not implement GNU basename extention and with latest musl
-> -the prototype from string.h is also removed [1] which now results in
-> -compile errors e.g.
-> -
-> -../git/utils/ipu3/ipu3-pack.c:21:47: error: call to undeclared function =
-'basename'; ISO C99 and later do not support implicit function declarations=
- [-Wimplicit-function-declaration]
-> -
-> -These utilities are using this function in usage() which is used just
-> -before program exit. Always use the basename APIs from libgen.h which is
-> -posix implementation
-> -
-> -[1] https://git.musl-libc.org/cgit/musl/commit/?id=3D725e17ed6dff4d0cd22=
-487bb64470881e86a92e7
-> -
-> -Upstream-Status: Submitted [https://lists.libcamera.org/pipermail/libcam=
-era-devel/2024-March/041180.html]
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ----
-> - utils/ipu3/ipu3-pack.c   | 4 ++--
-> - utils/ipu3/ipu3-unpack.c | 3 ++-
-> - 2 files changed, 4 insertions(+), 3 deletions(-)
-> -
-> -diff --git a/utils/ipu3/ipu3-pack.c b/utils/ipu3/ipu3-pack.c
-> -index decbfc6c..23d2db8b 100644
-> ---- a/utils/ipu3/ipu3-pack.c
-> -+++ b/utils/ipu3/ipu3-pack.c
-> -@@ -8,6 +8,7 @@
-> -
-> - #include <errno.h>
-> - #include <fcntl.h>
-> -+#include <libgen.h>
-> - #include <stdint.h>
-> - #include <stdio.h>
-> - #include <string.h>
-> -@@ -15,9 +16,8 @@
-> - #include <sys/types.h>
-> - #include <unistd.h>
-> -
-> --static void usage(const char *argv0)
-> -+static void usage(char *argv0)
-> - {
-> --
-> -       printf("Usage: %s input-file output-file\n", basename(argv0));
-> -       printf("Convert unpacked RAW10 Bayer data to the IPU3 packed Baye=
-r formats\n");
-> -       printf("If the output-file '-', output data will be written to st=
-andard output\n");
-> -diff --git a/utils/ipu3/ipu3-unpack.c b/utils/ipu3/ipu3-unpack.c
-> -index 9d2c1200..1505a970 100644
-> ---- a/utils/ipu3/ipu3-unpack.c
-> -+++ b/utils/ipu3/ipu3-unpack.c
-> -@@ -8,6 +8,7 @@
-> -
-> - #include <errno.h>
-> - #include <fcntl.h>
-> -+#include <libgen.h>
-> - #include <stdint.h>
-> - #include <stdio.h>
-> - #include <string.h>
-> -@@ -15,7 +16,7 @@
-> - #include <sys/types.h>
-> - #include <unistd.h>
-> -
-> --static void usage(const char *argv0)
-> -+static void usage(char *argv0)
-> - {
-> -       printf("Usage: %s input-file output-file\n", basename(argv0));
-> -       printf("Unpack the IPU3 raw Bayer format to 16-bit Bayer\n");
-> ---
-> -2.44.0
-> -
-> diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-=
-rpi-Use-alloca-instead-of-variable-length-arrays.patch b/meta-multimedia/re=
-cipes-multimedia/libcamera/libcamera/0001-rpi-Use-alloca-instead-of-variabl=
-e-length-arrays.patch
-> deleted file mode 100644
-> index c336e92548..0000000000
-> --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-rpi-Use=
--alloca-instead-of-variable-length-arrays.patch
-> +++ /dev/null
-> @@ -1,43 +0,0 @@
-> -From 11cc6dbd45f0880beea64cdc514f57484b90bc39 Mon Sep 17 00:00:00 2001
-> -From: Khem Raj <raj.khem@gmail.com>
-> -Date: Tue, 20 Feb 2024 18:44:23 -0800
-> -Subject: [PATCH] rpi: Use malloc instead of variable length arrays
-> -
-> -Clang-18+ diagnoses this as error
-> -
-> -| ../git/src/ipa/rpi/controller/rpi/alsc.cpp:499:10: error: variable len=
-gth arrays in C++ are a Clang extension [-Werror,-Wvla-cxx-extension]     |=
-   499 |         int xLo[X], xHi[X];
-> -|       |                 ^
-> -
-> -Upstream-Status: Submitted [https://lists.libcamera.org/pipermail/libcam=
-era-devel/2024-February/040529.html]
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> -
-> -s
-> ----
-> - src/ipa/rpi/controller/rpi/alsc.cpp | 7 +++++--
-> - 1 file changed, 5 insertions(+), 2 deletions(-)
-> -
-> -diff --git a/src/ipa/rpi/controller/rpi/alsc.cpp b/src/ipa/rpi/controlle=
-r/rpi/alsc.cpp
-> -index 8a205c60..a7d42614 100644
-> ---- a/src/ipa/rpi/controller/rpi/alsc.cpp
-> -+++ b/src/ipa/rpi/controller/rpi/alsc.cpp
-> -@@ -496,8 +496,8 @@ void resampleCalTable(const Array2D<double> &calTabl=
-eIn,
-> -        * Precalculate and cache the x sampling locations and phases to =
-save
-> -        * recomputing them on every row.
-> -        */
-> --      int xLo[X], xHi[X];
-> --      double xf[X];
-> -+      int *xLo =3D (int*)malloc(X), *xHi =3D (int*)malloc(X);
-> -+      double *xf =3D (double*)malloc(X);
-> -       double scaleX =3D cameraMode.sensorWidth /
-> -                       (cameraMode.width * cameraMode.scaleX);
-> -       double xOff =3D cameraMode.cropX / (double)cameraMode.sensorWidth=
-;
-> -@@ -539,6 +539,9 @@ void resampleCalTable(const Array2D<double> &calTabl=
-eIn,
-> -                       *(out++) =3D above * (1 - yf) + below * yf;
-> -               }
-> -       }
-> -+      free(xf);
-> -+      free(xHi);
-> -+      free(xLo);
-> - }
-> -
-> - /* Calculate chrominance statistics (R/G and B/G) for each region. */
-> diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-=
-options-Replace-use-of-VLAs-in-C.patch b/meta-multimedia/recipes-multimedia=
-/libcamera/libcamera/0002-options-Replace-use-of-VLAs-in-C.patch
-> deleted file mode 100644
-> index 473820653e..0000000000
-> --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-options=
--Replace-use-of-VLAs-in-C.patch
-> +++ /dev/null
-> @@ -1,128 +0,0 @@
-> -From 6e4736180fcaffdb06acf52fd3eb50ba5baa3d2a Mon Sep 17 00:00:00 2001
-> -From: Khem Raj <raj.khem@gmail.com>
-> -Date: Wed, 31 Jan 2024 21:04:28 -0800
-> -Subject: [PATCH] options: Replace use of VLAs in C++
-> -
-> -Clang++ 18 is fussy about this with new warning checks.
-> -
-> -   ../git/src/apps/common/options.cpp:882:20: error: variable length arr=
-ays in C++ are a Clang extension [-Werror,-Wvla-cxx-extension]
-> -      882 |         char shortOptions[optionsMap_.size() * 3 + 2];
-> -          |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
-> -
-> -Therefore replace using VLAs with alloca and malloc/free
-> -
-> -Upstream-Status: Submitted [https://lists.libcamera.org/pipermail/libcam=
-era-devel/2024-February/040381.html]
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ----
-> - src/apps/common/options.cpp      | 12 ++++++++++--
-> - src/libcamera/ipc_unixsocket.cpp | 13 +++++++++----
-> - 2 files changed, 19 insertions(+), 6 deletions(-)
-> -
-> -diff --git a/src/apps/common/options.cpp b/src/apps/common/options.cpp
-> -index 4f7e8691..3656f3c1 100644
-> ---- a/src/apps/common/options.cpp
-> -+++ b/src/apps/common/options.cpp
-> -@@ -879,8 +879,8 @@ OptionsParser::Options OptionsParser::parse(int argc=
-, char **argv)
-> -        * Allocate short and long options arrays large enough to contain=
- all
-> -        * options.
-> -        */
-> --      char shortOptions[optionsMap_.size() * 3 + 2];
-> --      struct option longOptions[optionsMap_.size() + 1];
-> -+      char *shortOptions =3D (char*)malloc(optionsMap_.size() * 3 + 2);
-> -+      struct option *longOptions =3D (struct option*)malloc(sizeof(stru=
-ct option) * (optionsMap_.size() + 1));
-> -       unsigned int ids =3D 0;
-> -       unsigned int idl =3D 0;
-> -
-> -@@ -935,12 +935,16 @@ OptionsParser::Options OptionsParser::parse(int ar=
-gc, char **argv)
-> -                       std::cerr << argv[optind - 1] << std::endl;
-> -
-> -                       usage();
-> -+                      free(shortOptions);
-> -+                      free(longOptions);
-> -                       return options;
-> -               }
-> -
-> -               const Option &option =3D *optionsMap_[c];
-> -               if (!parseValue(option, optarg, &options)) {
-> -                       usage();
-> -+                      free(shortOptions);
-> -+                      free(longOptions);
-> -                       return options;
-> -               }
-> -       }
-> -@@ -949,10 +953,14 @@ OptionsParser::Options OptionsParser::parse(int ar=
-gc, char **argv)
-> -               std::cerr << "Invalid non-option argument '" << argv[opti=
-nd]
-> -                         << "'" << std::endl;
-> -               usage();
-> -+              free(shortOptions);
-> -+              free(longOptions);
-> -               return options;
-> -       }
-> -
-> -       options.valid_ =3D true;
-> -+      free(shortOptions);
-> -+      free(longOptions);
-> -       return options;
-> - }
-> -
-> -diff --git a/src/libcamera/ipc_unixsocket.cpp b/src/libcamera/ipc_unixso=
-cket.cpp
-> -index 1980d374..3bd861cb 100644
-> ---- a/src/libcamera/ipc_unixsocket.cpp
-> -+++ b/src/libcamera/ipc_unixsocket.cpp
-> -@@ -8,6 +8,7 @@
-> - #include "libcamera/internal/ipc_unixsocket.h"
-> -
-> - #include <array>
-> -+#include <cstdint>
-> - #include <poll.h>
-> - #include <string.h>
-> - #include <sys/socket.h>
-> -@@ -247,8 +248,8 @@ int IPCUnixSocket::sendData(const void *buffer, size=
-_t length,
-> -       iov[0].iov_base =3D const_cast<void *>(buffer);
-> -       iov[0].iov_len =3D length;
-> -
-> --      char buf[CMSG_SPACE(num * sizeof(uint32_t))];
-> --      memset(buf, 0, sizeof(buf));
-> -+      char *buf =3D (char*)malloc(CMSG_SPACE(num * sizeof(uint32_t)));
-> -+      memset((void*)buf, 0, sizeof(buf));
-> -
-> -       struct cmsghdr *cmsg =3D (struct cmsghdr *)buf;
-> -       cmsg->cmsg_len =3D CMSG_LEN(num * sizeof(uint32_t));
-> -@@ -270,9 +271,11 @@ int IPCUnixSocket::sendData(const void *buffer, siz=
-e_t length,
-> -               int ret =3D -errno;
-> -               LOG(IPCUnixSocket, Error)
-> -                       << "Failed to sendmsg: " << strerror(-ret);
-> -+              free(buf);
-> -               return ret;
-> -       }
-> -
-> -+      free(buf);
-> -       return 0;
-> - }
-> -
-> -@@ -283,8 +286,8 @@ int IPCUnixSocket::recvData(void *buffer, size_t len=
-gth,
-> -       iov[0].iov_base =3D buffer;
-> -       iov[0].iov_len =3D length;
-> -
-> --      char buf[CMSG_SPACE(num * sizeof(uint32_t))];
-> --      memset(buf, 0, sizeof(buf));
-> -+      char *buf =3D (char*)malloc(CMSG_SPACE(num * sizeof(uint32_t)));
-> -+      memset((void*)buf, 0, sizeof(buf));
-> -
-> -       struct cmsghdr *cmsg =3D (struct cmsghdr *)buf;
-> -       cmsg->cmsg_len =3D CMSG_LEN(num * sizeof(uint32_t));
-> -@@ -305,12 +308,14 @@ int IPCUnixSocket::recvData(void *buffer, size_t l=
-ength,
-> -               if (ret !=3D -EAGAIN)
-> -                       LOG(IPCUnixSocket, Error)
-> -                               << "Failed to recvmsg: " << strerror(-ret=
-);
-> -+              free(buf);
-> -               return ret;
-> -       }
-> -
-> -       if (fds)
-> -               memcpy(fds, CMSG_DATA(cmsg), num * sizeof(uint32_t));
-> -
-> -+      free(buf);
-> -       return 0;
-> - }
-> -
-> diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.2.0=
-.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb
-> similarity index 84%
-> rename from meta-multimedia/recipes-multimedia/libcamera/libcamera_0.2.0.=
-bb
-> rename to meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb
-> index 45d6be31ec..682e56739f 100644
-> --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.2.0.bb
-> +++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb
-> @@ -11,12 +11,9 @@ LIC_FILES_CHKSUM =3D "\
->  SRC_URI =3D " \
->          git://git.libcamera.org/libcamera/libcamera.git;protocol=3Dhttps=
-;branch=3Dmaster \
->          file://0001-media_device-Add-bool-return-type-to-unlock.patch \
-> -        file://0002-options-Replace-use-of-VLAs-in-C.patch \
-> -        file://0001-rpi-Use-alloca-instead-of-variable-length-arrays.pat=
-ch \
-> -        file://0001-ipu3-Use-posix-basename.patch \
->  "
->
-> -SRCREV =3D "89227a428a82e724548399d35c98ea89566f9045"
-> +SRCREV =3D "35ed4b91291d9f3d08e4b51acfb51163e65df8f8"
->
->  PE =3D "1"
->
-> @@ -25,10 +22,11 @@ S =3D "${WORKDIR}/git"
->  DEPENDS =3D "python3-pyyaml-native python3-jinja2-native python3-ply-nat=
-ive python3-jinja2-native udev gnutls chrpath-native libevent libyaml"
->  DEPENDS +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtba=
-se-native', '', d)}"
->
-> -PACKAGES =3D+ "${PN}-gst"
-> +PACKAGES =3D+ "${PN}-gst ${PN}-pycamera"
->
->  PACKAGECONFIG ??=3D ""
->  PACKAGECONFIG[gst] =3D "-Dgstreamer=3Denabled,-Dgstreamer=3Ddisabled,gst=
-reamer1.0 gstreamer1.0-plugins-base"
-> +PACKAGECONFIG[pycamera] =3D "-Dpycamera=3Denabled,-Dpycamera=3Ddisabled,=
-python3 python3-pybind11"
->
->  LIBCAMERA_PIPELINES ??=3D "auto"
->
-> @@ -46,7 +44,7 @@ RDEPENDS:${PN} =3D "${@bb.utils.contains('DISTRO_FEATUR=
-ES', 'wayland qt', 'qtwayla
->  inherit meson pkgconfig python3native
->
->  do_configure:prepend() {
-> -    sed -i -e 's|py_compile=3DTrue,||' ${S}/utils/ipc/mojo/public/tools/=
-mojom/mojom/generate/template_expander.py
-> +    sed -i -e 's|py_compile=3DTrue,||' ${S}/utils/codegen/ipc/mojo/publi=
-c/tools/mojom/mojom/generate/template_expander.py
->  }
->
->  do_install:append() {
-> @@ -72,6 +70,7 @@ do_package_recalculate_ipa_signatures() {
->
->  FILES:${PN} +=3D " ${libexecdir}/libcamera/v4l2-compat.so"
->  FILES:${PN}-gst =3D "${libdir}/gstreamer-1.0"
-> +FILES:${PN}-pycamera =3D "${PYTHON_SITEPACKAGES_DIR}/libcamera"
->
->  # libcamera-v4l2 explicitly sets _FILE_OFFSET_BITS=3D32 to get access to
->  # both 32 and 64 bit file APIs.
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#115002): https://lists.openembedded.org/g/openembedde=
-d-devel/message/115002
-> Mute This Topic: https://lists.openembedded.org/mt/110729722/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+---
+ .../lapack/{lapack_3.12.0.bb => lapack_3.12.1.bb}         | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-devtools/lapack/{lapack_3.12.0.bb => lapack_3.12.1.bb} (90%)
+
+diff --git a/meta-oe/recipes-devtools/lapack/lapack_3.12.0.bb b/meta-oe/recipes-devtools/lapack/lapack_3.12.1.bb
+similarity index 90%
+rename from meta-oe/recipes-devtools/lapack/lapack_3.12.0.bb
+rename to meta-oe/recipes-devtools/lapack/lapack_3.12.1.bb
+index 4845d34106..87a5747246 100644
+--- a/meta-oe/recipes-devtools/lapack/lapack_3.12.0.bb
++++ b/meta-oe/recipes-devtools/lapack/lapack_3.12.1.bb
+@@ -16,7 +16,7 @@ DEPENDS = "libgfortran \
+           "
+ RDEPENDS:${PN}-ptest += "cmake"
+ 
+-SRCREV = "04b044e020a3560ccfa9988c8a80a1fb7083fc2e"
++SRCREV = "5ebe92156143a341ab7b14bf76560d30093cfc54"
+ SRC_URI = "git://github.com/Reference-LAPACK/lapack.git;protocol=https;branch=master \
+            ${@bb.utils.contains('PTEST_ENABLED', '1', 'file://run-ptest', '', d)} \
+           "
+@@ -63,9 +63,9 @@ do_configure:append(){
+         # for f in $(find ${S} -name \*.f -printf " %f" | sort -u); do
+         # would be more reliable with other optional PACKAGECONFIGs, but also very slow as there are
+         # ~ 3500 of them and this loop takes around 20 minutes
+-        for f in xerbla c_cblat1 c_cblat2 c_cblat3 c_dblat1 c_dblat2 c_dblat3 c_sblat1 c_sblat2 c_sblat3 c_zblat1 c_zblat2 c_zblat3; do
+-            sed -i -e "s#\(.*-c \).*\(/$f\.f \)#\1$(grep "\-c .*$f\.f" $file | awk -F'cd ' '{print $2}'| \
+-                awk "{src=\$1; sub(/.*-c /, \"\"); sub(/$f\.f.*/, \"\"); obj=\$0; print src, obj}" | \
++        for f in xerbla.f c_cblat1.f c_cblat2.f c_cblat3.f c_dblat1.f c_dblat2.f c_dblat3.f c_sblat1.f c_sblat2.f c_sblat3.f c_zblat1.f c_zblat2.f c_zblat3.f cchkdmd.f90 dchkdmd.f90 schkdmd.f90 zchkdmd.f90; do
++            sed -i -e "s#\(.*-c \).*\(/$f \)#\1$(grep "\-c .*$f" $file | awk -F'cd ' '{print $2}'| \
++                awk "{src=\$1; sub(/.*-c /, \"\"); sub(/$f.*/, \"\"); obj=\$0; print src, obj}" | \
+                 while read src obj; do echo "$(realpath --relative-to="$src" "$obj")"; done)\2#g" $file
+          done
+     done
+-- 
+2.48.1
+
 
