@@ -1,192 +1,479 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4487BC02182
-	for <webhook@archiver.kernel.org>; Tue, 21 Jan 2025 16:40:44 +0000 (UTC)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com (EUR05-AM6-obe.outbound.protection.outlook.com [40.107.22.87])
- by mx.groups.io with SMTP id smtpd.web10.20402.1737477639307582303
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8EFB3C02182
+	for <webhook@archiver.kernel.org>; Tue, 21 Jan 2025 17:43:34 +0000 (UTC)
+Received: from mail-oa1-f47.google.com (mail-oa1-f47.google.com [209.85.160.47])
+ by mx.groups.io with SMTP id smtpd.web10.21911.1737481408918086069
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Jan 2025 08:40:39 -0800
+ Tue, 21 Jan 2025 09:43:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@siemens.com header.s=selector2 header.b=Qdp3YMA/;
- spf=pass (domain: siemens.com, ip: 40.107.22.87, mailfrom: peter.marko@siemens.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RhgFJjvkfkefFRHzRYh21fZL/AU5tWvdsM/sF3taYJZhS+bzc9+pbkdVF7oBA/+FIfQSdE3pBqhpnsAKZCxBA/Y92aS5Ja9bXBTS6VtJkpVqrS464gfn12R4UUrAnTdXdRNNwHH5aNd0GHeSMTlRX8zYwx1WUrEm6bDwBzI10WaIEfkCcyLnrztxFy1iX9Nu5WHiVu3H393K1xQKbV98mJr5dtmpf/GGVfKn2gEE/Eg/hG+Pj/F6kzssr9iyG9qcEbqLp5iWk+fYDrL4RMTURNqyGph8mXong0s5FEV8fV52O/o8HaWwokzuEscdmyKZX+m1Q242VQmdWSnf9bbQNA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Ghb7jrKrAreefADeh7D9/5F9OmuHABxHwhP35FbAskY=;
- b=j6VlFLiierpfDSRlTMC5k9L8m9T8t0Kr0W0igmktpAUC27hdGWWvp0gE0ucT8DfYBcwIVCuAzWEX4pbCV6Sr5p4eAFUUnOEWgJ53jYJ2TDFM+y4FbuJH+fOe4VU/mFvKpjghUiNhSTdxwj15vYCsOmKXRRvwp531T8D8GB2EY61wNrkfMxMSP4cvhxi5GSffaYT7ZxDWYOfK3X8dHaMDeFI+BUfPATZNfUWPYWemYS60Tg33OCtd/eCnZVZ3acFde3BeDSZU7h/w4eSBpaDtD00IuF1WVV2nWJ3OyOWRyOJXzZEZSLwXAaNwfsFFh7HGc1UpCdpWC1nHpCvQTfc8fg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Ghb7jrKrAreefADeh7D9/5F9OmuHABxHwhP35FbAskY=;
- b=Qdp3YMA/Fldco9eWy3K8eJzTx9MewC5/WiLCdRNiRRO2rptDuuju1nl+yMnJnS7L9Mim2UjpcIhVx9psEOUG9R/C/yFqq3osQgR/5YWxlTM6b/N9ff/03wZVdaDQVgW9czLpq6CheAKD6gCG/RQsfRekNZStMdY6pHACW9qumBIeXg1IXplzSbEG8WlUIONPJBZb7hoHTh67uOhA+4RYUyH2SmKN7xiGcPS6UoRur3tp2MRf5hCbYEArIOM/DB65couoqwHb96NZQP8agc45bz/auMBtZVqWNkc96XL+aZxp2Nv+uKFH9f2UMHAnE5hRyKTd7aXSOeoKlO+E2pif9Q==
-Received: from AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:479::20)
- by AM0PR10MB3537.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:155::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8377.12; Tue, 21 Jan
- 2025 16:40:36 +0000
-Received: from AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::6c68:267b:6fd1:d3f2]) by AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::6c68:267b:6fd1:d3f2%3]) with mapi id 15.20.8377.009; Tue, 21 Jan 2025
- 16:40:36 +0000
-From: "Marko, Peter" <Peter.Marko@siemens.com>
-To: "liezhi.yang@windriver.com" <liezhi.yang@windriver.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] [meta-oe][scarthgap][PATCH] hostapd: Add CVE id to
- CVE-2024-3596_00.patch
-Thread-Topic: [oe] [meta-oe][scarthgap][PATCH] hostapd: Add CVE id to
- CVE-2024-3596_00.patch
-Thread-Index: AQHbawDomLaCLlPY6USTCGtAssnsS7Mhb7TQ
-Date: Tue, 21 Jan 2025 16:40:36 +0000
-Message-ID: 
- <AS1PR10MB5697787EAF1C45B1A500B1C4FDE62@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
-References: <20250120060231.570029-1-liezhi.yang@windriver.com>
-In-Reply-To: <20250120060231.570029-1-liezhi.yang@windriver.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
- MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_ActionId=f4ac3af0-bb0c-4607-879a-e9ed9369595a;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_ContentBits=0;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Enabled=true;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Method=Standard;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Name=restricted;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SetDate=2025-01-21T16:38:09Z;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SiteId=38ae3bcd-9579-4fd4-adda-b42e1495d55a;
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS1PR10MB5697:EE_|AM0PR10MB3537:EE_
-x-ms-office365-filtering-correlation-id: dd1ccde1-8c91-4d5c-a25f-08dd3a3a54e9
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|366016|1800799024|376014|38070700018;
-x-microsoft-antispam-message-info: 
- =?us-ascii?Q?tf80GaUqbx1TKLOiSaieNPBCSBWvxs/7ZwHbVc020wPkWUNMAeBR2h+DA2aZ?=
- =?us-ascii?Q?37nNfg1ExE+I4bDJwnbzQBsKyRJdtdsbVsLtaQrdEn0M2skYl0gxkz96eBIf?=
- =?us-ascii?Q?ZX+R7qofA9SGHZIdHlfdHlqp64Z8TICgEQk1Bx2/p/spsLyBaf/1ebTudOdG?=
- =?us-ascii?Q?TQQtFXV/P5/NlFL9WWCOtYrKNhN3h1a0KqwuzsvZI0kU0ebwnhJdd18YziBR?=
- =?us-ascii?Q?9WchexmWwP/63eWYQ3akiKoGsISyqTkkDQYPE2cpjpl3GL6zLUHJCHxdpB4V?=
- =?us-ascii?Q?j1hCsgQNVRugvtfsAQgPVj7iH7mRnGajKc6gyuB45TknYoTcVOQqJyMyw6/T?=
- =?us-ascii?Q?exquKI1/ZedkLVl8/3wHjNFQvIMNFivtU5rv8rtpju03+yeIxXsS31BqF7z/?=
- =?us-ascii?Q?Kp0UbBgf9e/qLZIDnURK11uQcO6n5yEPslG+PtRZnS98nAYdT6fUcCHgCBgE?=
- =?us-ascii?Q?J4ny2pEdqJ4FUISNf1tW/RsNgT5StMwNeQUvvl7uTMBWNCsUpyG+P3K5TMYm?=
- =?us-ascii?Q?Gejn0ddPeVjQpGA3t78s7mXA9PM14KMGTqne277569EDnf93J1kxcPDYGh5d?=
- =?us-ascii?Q?VPQr8IuEHDOeZ1jWn9xESS50pTl8qdNVHYDLKGcwWoPc215G2j56E1iLlzaA?=
- =?us-ascii?Q?pt49wIp2g/AgZrrmQ2cRDTgCbI8Z9K3VNX4KcgD9C28nr2hYiu0AlTP8WsNZ?=
- =?us-ascii?Q?qM46r581+r1bWA4OhVjP/Q/IMYhtuoRhuaVW1/qRx9yasiQtWORYqhwwoHmf?=
- =?us-ascii?Q?dbu56QQrOsEOOQYVP4UEhv85z9DryBZbToeBWZ5LQGOqNleJpWs+ifxusS1D?=
- =?us-ascii?Q?HkpLIj8buj7jZwcrILbuH4rzk1MYLgr23gZiqhbbTffy186xc915Ahke2bBI?=
- =?us-ascii?Q?cX3UorA9SxQAwrrjyrM9DHd0FMCj3+yScFeCCRofECC5jLyOPNuYVmhqW6r/?=
- =?us-ascii?Q?KMPJJ5cB/Tn0w19+Bg1t57I2iQZK+U+I+/LYCaTprhp3fXZPOZ+bTZagK6YU?=
- =?us-ascii?Q?OEBr4L2TR+TvMELIAdcjr+0exsA9+SPneWFlc+/HIqL8jTmYbzw3ZpVxUyi1?=
- =?us-ascii?Q?sfq+DwFSCjWpr5vmfMNo2bN2MyrpuECFo0EV4moZu5TJ9fEHcfrXL21mO5tL?=
- =?us-ascii?Q?UU8b4Z+9sKu9RR9QuN4aSEDqJK+BztoZfgeP8iXnfa6wMA7EgMJDttW4maV1?=
- =?us-ascii?Q?JJJqmKijFUz9t5wNsr2/qqOHCHdCB/GyItHvduEyP7Oy0p+DRUMhlITObzXn?=
- =?us-ascii?Q?fHxXGJKmSxphibiJmLblwBGlRT+dVpMpHGEzPORE+2lqcr2LjVpJwdxW4lul?=
- =?us-ascii?Q?Kf0j7nbUtwgNamvnpP15fX1ZWCgFVOvjTK1Er1kxEgrYtFP613jeBuAq9a/k?=
- =?us-ascii?Q?l22GC2dBwaXSDl6pGaNPX6yBbVTp?=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(38070700018);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?us-ascii?Q?VHIWPWBSo1VbdGiQO5PFPoZqJTbv/vrODXBYiFmILkQtc+2VyosGHvh9KWGh?=
- =?us-ascii?Q?aafy4XWxwe+bZSw6ss5ZXiCxayNkQyiSxCHrzyDWCS+xC85k8L6JJ01JqEPP?=
- =?us-ascii?Q?NNydXjtKyEyZ64CsJySTfXSDxcVh7DxGFEUvgUn2uKCRbAx+6w2AePLwMQ8L?=
- =?us-ascii?Q?WAmjxzBzkaqs57Gj+zFeMVx+7X0Wf8LeqUAfSHZ/ReKmsOg8/wKUGpqFURB0?=
- =?us-ascii?Q?UHQWcMT9TSXvgDooEDs+KstRviEK2kG00rbKW+vPj2/g1cS4Wh1adtPELwee?=
- =?us-ascii?Q?7JEaMyaiVa0jl5P257oPtR4s73w1HnULvVrrbDFViQ+wa70Cr4ynfHqHLIPj?=
- =?us-ascii?Q?/Ly9vOPLr7hDvqovZnCuOsO5fYclYXzyYz41dSv8bn+NabKVEiMB3il386tk?=
- =?us-ascii?Q?9k9FdFfN2USZEv/jLgPnDAf0rRRd3zenN1e87GoaWmY1TwmcTxrwwYvhI6EU?=
- =?us-ascii?Q?+55F0weqp6RpZbuiHPO8LY3Mooy5+GwUl76UReLXLwqKekaCYekK+uoSXqSe?=
- =?us-ascii?Q?EEwIqMSFfzGTvi6yQ7nRHyTIz/dOheE9LYrf4Bmg1NV5qNXLLqucs59aZ6hd?=
- =?us-ascii?Q?nVwq1uGYBmv8wrs2N/AA+bRx2O/acEKSr+FIxVafOmIeM62yZfp8f4u8TbSq?=
- =?us-ascii?Q?FHKRkhV4PNgiOzoU/bbz4J2Ccj3gTf6KMMOO5gte2iSmfFR5mAjq/byac0b+?=
- =?us-ascii?Q?NXfzTimn1RqWQZpkxuJuxczByS/zRjhsVNgPnym0GMwhjKPXxT0LyFuTjuIF?=
- =?us-ascii?Q?US1G6MHoZCHNS5NLRmKrW1zZTypCbc9AVQgnZ8bJC/acWPUx5e4i46ma5XNt?=
- =?us-ascii?Q?7mEb9En44h7Gos5PwDGbd7buv9KpQcPloZZQkHaE52pWDliQQZxb58e0idPt?=
- =?us-ascii?Q?YBZD17n3B1GQtF9to4620qQvAGKBRotj47rP48aJUGzjPRX8YQ7JN3K4c9C2?=
- =?us-ascii?Q?ynXOvV8zLoQwO20etOyc8SSAkMsgK9OvqpUBLtgwBa1mzNvtM5GS8qhwYtmV?=
- =?us-ascii?Q?zTVISh5/aDriTtdDz21yEa6I8Y4lWeX5Buyr6nJWpWWo225cEzetK5OZXVIk?=
- =?us-ascii?Q?3fwHwn5gVeAAZ2zJhlALrxhC/230IvEz8TeGIUx0gR5FWID1+lXy98UwPNIA?=
- =?us-ascii?Q?9/x8rzO38yEt1czIvT70rVDtNWnTpPZHz6H3XnNTkO7pLDwrZLKNVktv9sKH?=
- =?us-ascii?Q?Jf4pjYpALLXvmjkO8FhcaCBbHT9n8M9tgMWK5RZ3fXyIUWzIEsSZOu2K6+pA?=
- =?us-ascii?Q?ry/XYmfpc5sddJlcmB5w8U7DJIT1tnO9ku4XOKlm294TNErCAKBI/tVdjK4P?=
- =?us-ascii?Q?p7FbH6+xQBn1LhoEKBppuGST+EtFqBzS8lNOkp652ZMUjh7zORXZCnoE9j9J?=
- =?us-ascii?Q?a5g7fxbkoG4dfVPERtBxXWc1VO5YzbgReAPiQnhEeiS+PczDf29xHcQIq0w6?=
- =?us-ascii?Q?vVTB3DnOMyjN1hc56CNadc/rjkt0n0JFqkWWBBx6IiBhJydaoj0fV1LJRO2D?=
- =?us-ascii?Q?18F0cQyJhdtl17MgYIX6C4ABzSoBAPByppMjelhrcstIUNM8h/u3XzniLWra?=
- =?us-ascii?Q?9Dk0YZy44iIZDbXKQgeasOmPEWs05LlJIAaUNKG3?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mGDJYIar;
+ spf=pass (domain: gmail.com, ip: 209.85.160.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f47.google.com with SMTP id 586e51a60fabf-2a01bcd0143so4102297fac.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 21 Jan 2025 09:43:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1737481408; x=1738086208; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Lu8iTmt8/SZ5HjpcMTzUD2MjM62V3GdAghMEbxwX2+8=;
+        b=mGDJYIarKhVnMp2w0RIxD6jLdohkHGZREhr5BcWZWZB1BV9BFIifHpHjJ3rAcBSalT
+         PwjQaFjCgnZAMLleaF0e8CHQoZarq/dV84L7K7gnLjm/ZdKnk0MXTNupb/vpMNfVAnPI
+         wh131hVr1MwCrHvxiwq5m6to2EMkaPA7n6iNwZShbp34ag7SaydIltIVKeaXn3HUK0+E
+         dzMzPYiS9Upq5mo3wxYic7WXT01hiPPhdarWraG1O7m6RnsfHwiseSJLnk6JVL+GPat8
+         ETEuY0lj492srLqc6QK2eUz/2effPYCZtYkzltzD3aG5RP4lcb2TnMTm/ItH0RdnKVDw
+         BQaQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1737481408; x=1738086208;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Lu8iTmt8/SZ5HjpcMTzUD2MjM62V3GdAghMEbxwX2+8=;
+        b=cJBGchecBor9gARxLy07WX91WJDd4IfW50oIUxHFUmaFfCCll6sW+sN2LFfUH3wKGn
+         5i3HHRPcQn/c8xdpuvkvCTW2F3ZWz78FttBpAI9VYGRnkJ6ynI3CsFcVEBhBjTHM6zTb
+         v3DLZtiF9NlcfsNlrIBwu49XgmyTZLt2d0L+PciFz9FFz25CrMw21c9g3t2Lx5jOD6OX
+         4OzFBspRc35Z/sfGwuUl+zBTOT3E+udlm1Cnr6NyXLJ9IabCfIBKQGJjICjCnzJAId1T
+         T2YAWYoJjLW6pDL8+nJLAq10mLJJyBz2QZeYxZMAMUhaG11yX0RIKNOhfhHRo+9BPyrU
+         2Pog==
+X-Gm-Message-State: AOJu0Yw7+NwyLVbeOQNV+jchGVYMeVxNhbMDS+bUMtpDm8sQdUiu1PXg
+	v1SAEbzSVPBmU8b7KMvww4ljR2PJCZkkZc26kTdGcdWfKAxE35m/7eDn7hSuZSsevh8QaP+dZMz
+	18X2PwKFfx9yeNJBMZ+NgeMdXOSQ=
+X-Gm-Gg: ASbGncspu8fVZ3xfsqq/e4p24AHalhJcmjJednh66ickUVeFQAkz5Vz7BVimvwQ8m/u
+	6q5NNrgY2bwWe9sSVGwGD6LppgR/+Cei1NTRAma6bHpQvRYc2Zg==
+X-Google-Smtp-Source: AGHT+IHL46MZIM9Yd9LHJe8hGZOKJGmpm0+WS/FE92sxBPWOGemWvWsA5n3p7bZZU+vHa0/nJImOnJXOf/Z4U+KJzpM=
+X-Received: by 2002:a05:6870:4e07:b0:29e:3484:ae12 with SMTP id
+ 586e51a60fabf-2b1c0b9f9b6mr11938977fac.33.1737481408004; Tue, 21 Jan 2025
+ 09:43:28 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: dd1ccde1-8c91-4d5c-a25f-08dd3a3a54e9
-X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Jan 2025 16:40:36.3066
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: RezqEqbcxLKO0dMdWWyrXILB+jM0huxfkie3PcqZjhxpwmo8JZvviez0ecJQEmiAMzwC3lbWUQdYXgor7R3EIA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR10MB3537
+References: <20250121065346.37236-1-throos@amazon.de>
+In-Reply-To: <20250121065346.37236-1-throos@amazon.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 21 Jan 2025 09:43:01 -0800
+X-Gm-Features: AbW1kvYWC7LPBTZVG6FoEYZBE44cUvAaXpWLpVX1DRv8Gqv4eLrA1QItJwwT_kk
+Message-ID: <CAMKF1srN1uZ65JjdyYU2qJMNY+-JnSY_SErP1hQb0tx07g2=Bg@mail.gmail.com>
+Subject: Re: [oe] [meta-multimedia] [scarthgap] [PATCH] libcamera: backport
+ 0.4.0 from master-next
+To: throos@amazon.de
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 Jan 2025 16:40:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115005
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Jan 2025 17:43:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115006
 
-This is not correct.
+Hi Armin,
 
-The patch CVE-2024-3596_00 does not fix any part of that CVE.
-As the commit message says, it's a style commit so that real CVE patches ap=
-ply cleanly.
-If it bothers you that it has CVE in filename but no CVE, maybe rename it i=
-nstead adding incorrect tag?
+This patch should be fine to get into scarthgap, its gets it libcamera
+functional on release.
 
-Peter
-
-> -----Original Message-----
-> From: openembedded-devel@lists.openembedded.org <openembedded-
-> devel@lists.openembedded.org> On Behalf Of Robert Yang via
-> lists.openembedded.org
-> Sent: Monday, January 20, 2025 7:03
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] [meta-oe][scarthgap][PATCH] hostapd: Add CVE id to CVE-2024=
--
-> 3596_00.patch
->=20
-> From: Robert Yang <liezhi.yang@windriver.com>
->=20
-> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+On Mon, Jan 20, 2025 at 10:54=E2=80=AFPM Thomas Roos via
+lists.openembedded.org <throos=3Damazon.de@lists.openembedded.org>
+wrote:
+>
+> From: Thomas Roos <throos@amazon.de>
+>
+> This is done because libcamera 0.2. is broken,
+> probablay because of 0001-rpi-Use-alloca-instead-of-variable-length-array=
+s.patch
+> Tested good with upstream version.
+>
+> See more details here:
+> https://github.com/openembedded/meta-openembedded/issues/919
+> and here:
+> https://github.com/raspberrypi/rpicam-apps/issues/654
+>
+> Signed-off-by: Thomas Roos <throos@amazon.de>
 > ---
->  .../recipes-connectivity/hostapd/hostapd/CVE-2024-3596_00.patch  | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2024-
-> 3596_00.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2024-
-> 3596_00.patch
-> index 7a8197d2b4..58e1327f2b 100644
-> --- a/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2024-3596_00.patch
-> +++ b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2024-3596_00.patch
-> @@ -6,6 +6,7 @@ Subject: [PATCH 1/9] ieee802_11_auth: Coding style cleanu=
-p -
-> no string
->=20
->  Signed-off-by: Jouni Malinen <j@w1.fi>
->=20
-> +CVE: CVE-2024-3596
->  Upstream-Status: Backport
-> [https://w1.fi/cgit/hostap/commit/?id=3D945acf3ef06a6c312927da4fa055693db=
-ac
-> 432d1]
->  Signed-off-by: Peter Marko <peter.marko@siemens.com>
->  ---
+>  .../0001-ipu3-Use-posix-basename.patch        |  71 ----------
+>  ...ca-instead-of-variable-length-arrays.patch |  43 ------
+>  ...002-options-Replace-use-of-VLAs-in-C.patch | 128 ------------------
+>  ...{libcamera_0.2.0.bb =3D> libcamera_0.4.0.bb} |  11 +-
+>  4 files changed, 5 insertions(+), 248 deletions(-)
+>  delete mode 100644 meta-multimedia/recipes-multimedia/libcamera/libcamer=
+a/0001-ipu3-Use-posix-basename.patch
+>  delete mode 100644 meta-multimedia/recipes-multimedia/libcamera/libcamer=
+a/0001-rpi-Use-alloca-instead-of-variable-length-arrays.patch
+>  delete mode 100644 meta-multimedia/recipes-multimedia/libcamera/libcamer=
+a/0002-options-Replace-use-of-VLAs-in-C.patch
+>  rename meta-multimedia/recipes-multimedia/libcamera/{libcamera_0.2.0.bb =
+=3D> libcamera_0.4.0.bb} (84%)
+>
+> diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-=
+ipu3-Use-posix-basename.patch b/meta-multimedia/recipes-multimedia/libcamer=
+a/libcamera/0001-ipu3-Use-posix-basename.patch
+> deleted file mode 100644
+> index 9e4adf3d8d..0000000000
+> --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-ipu3-Us=
+e-posix-basename.patch
+> +++ /dev/null
+> @@ -1,71 +0,0 @@
+> -From 35d2acc61b1b27c0810a80cd21de65f29dc79df7 Mon Sep 17 00:00:00 2001
+> -From: Khem Raj <raj.khem@gmail.com>
+> -Date: Sun, 24 Mar 2024 11:27:21 -0700
+> -Subject: [PATCH] ipu3: Use posix basename
+> -
+> -musl does not implement GNU basename extention and with latest musl
+> -the prototype from string.h is also removed [1] which now results in
+> -compile errors e.g.
+> -
+> -../git/utils/ipu3/ipu3-pack.c:21:47: error: call to undeclared function =
+'basename'; ISO C99 and later do not support implicit function declarations=
+ [-Wimplicit-function-declaration]
+> -
+> -These utilities are using this function in usage() which is used just
+> -before program exit. Always use the basename APIs from libgen.h which is
+> -posix implementation
+> -
+> -[1] https://git.musl-libc.org/cgit/musl/commit/?id=3D725e17ed6dff4d0cd22=
+487bb64470881e86a92e7
+> -
+> -Upstream-Status: Submitted [https://lists.libcamera.org/pipermail/libcam=
+era-devel/2024-March/041180.html]
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ----
+> - utils/ipu3/ipu3-pack.c   | 4 ++--
+> - utils/ipu3/ipu3-unpack.c | 3 ++-
+> - 2 files changed, 4 insertions(+), 3 deletions(-)
+> -
+> -diff --git a/utils/ipu3/ipu3-pack.c b/utils/ipu3/ipu3-pack.c
+> -index decbfc6c..23d2db8b 100644
+> ---- a/utils/ipu3/ipu3-pack.c
+> -+++ b/utils/ipu3/ipu3-pack.c
+> -@@ -8,6 +8,7 @@
+> -
+> - #include <errno.h>
+> - #include <fcntl.h>
+> -+#include <libgen.h>
+> - #include <stdint.h>
+> - #include <stdio.h>
+> - #include <string.h>
+> -@@ -15,9 +16,8 @@
+> - #include <sys/types.h>
+> - #include <unistd.h>
+> -
+> --static void usage(const char *argv0)
+> -+static void usage(char *argv0)
+> - {
 > --
-> 2.25.1
-
+> -       printf("Usage: %s input-file output-file\n", basename(argv0));
+> -       printf("Convert unpacked RAW10 Bayer data to the IPU3 packed Baye=
+r formats\n");
+> -       printf("If the output-file '-', output data will be written to st=
+andard output\n");
+> -diff --git a/utils/ipu3/ipu3-unpack.c b/utils/ipu3/ipu3-unpack.c
+> -index 9d2c1200..1505a970 100644
+> ---- a/utils/ipu3/ipu3-unpack.c
+> -+++ b/utils/ipu3/ipu3-unpack.c
+> -@@ -8,6 +8,7 @@
+> -
+> - #include <errno.h>
+> - #include <fcntl.h>
+> -+#include <libgen.h>
+> - #include <stdint.h>
+> - #include <stdio.h>
+> - #include <string.h>
+> -@@ -15,7 +16,7 @@
+> - #include <sys/types.h>
+> - #include <unistd.h>
+> -
+> --static void usage(const char *argv0)
+> -+static void usage(char *argv0)
+> - {
+> -       printf("Usage: %s input-file output-file\n", basename(argv0));
+> -       printf("Unpack the IPU3 raw Bayer format to 16-bit Bayer\n");
+> ---
+> -2.44.0
+> -
+> diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-=
+rpi-Use-alloca-instead-of-variable-length-arrays.patch b/meta-multimedia/re=
+cipes-multimedia/libcamera/libcamera/0001-rpi-Use-alloca-instead-of-variabl=
+e-length-arrays.patch
+> deleted file mode 100644
+> index c336e92548..0000000000
+> --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-rpi-Use=
+-alloca-instead-of-variable-length-arrays.patch
+> +++ /dev/null
+> @@ -1,43 +0,0 @@
+> -From 11cc6dbd45f0880beea64cdc514f57484b90bc39 Mon Sep 17 00:00:00 2001
+> -From: Khem Raj <raj.khem@gmail.com>
+> -Date: Tue, 20 Feb 2024 18:44:23 -0800
+> -Subject: [PATCH] rpi: Use malloc instead of variable length arrays
+> -
+> -Clang-18+ diagnoses this as error
+> -
+> -| ../git/src/ipa/rpi/controller/rpi/alsc.cpp:499:10: error: variable len=
+gth arrays in C++ are a Clang extension [-Werror,-Wvla-cxx-extension]     |=
+   499 |         int xLo[X], xHi[X];
+> -|       |                 ^
+> -
+> -Upstream-Status: Submitted [https://lists.libcamera.org/pipermail/libcam=
+era-devel/2024-February/040529.html]
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> -
+> -s
+> ----
+> - src/ipa/rpi/controller/rpi/alsc.cpp | 7 +++++--
+> - 1 file changed, 5 insertions(+), 2 deletions(-)
+> -
+> -diff --git a/src/ipa/rpi/controller/rpi/alsc.cpp b/src/ipa/rpi/controlle=
+r/rpi/alsc.cpp
+> -index 8a205c60..a7d42614 100644
+> ---- a/src/ipa/rpi/controller/rpi/alsc.cpp
+> -+++ b/src/ipa/rpi/controller/rpi/alsc.cpp
+> -@@ -496,8 +496,8 @@ void resampleCalTable(const Array2D<double> &calTabl=
+eIn,
+> -        * Precalculate and cache the x sampling locations and phases to =
+save
+> -        * recomputing them on every row.
+> -        */
+> --      int xLo[X], xHi[X];
+> --      double xf[X];
+> -+      int *xLo =3D (int*)malloc(X), *xHi =3D (int*)malloc(X);
+> -+      double *xf =3D (double*)malloc(X);
+> -       double scaleX =3D cameraMode.sensorWidth /
+> -                       (cameraMode.width * cameraMode.scaleX);
+> -       double xOff =3D cameraMode.cropX / (double)cameraMode.sensorWidth=
+;
+> -@@ -539,6 +539,9 @@ void resampleCalTable(const Array2D<double> &calTabl=
+eIn,
+> -                       *(out++) =3D above * (1 - yf) + below * yf;
+> -               }
+> -       }
+> -+      free(xf);
+> -+      free(xHi);
+> -+      free(xLo);
+> - }
+> -
+> - /* Calculate chrominance statistics (R/G and B/G) for each region. */
+> diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-=
+options-Replace-use-of-VLAs-in-C.patch b/meta-multimedia/recipes-multimedia=
+/libcamera/libcamera/0002-options-Replace-use-of-VLAs-in-C.patch
+> deleted file mode 100644
+> index 473820653e..0000000000
+> --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-options=
+-Replace-use-of-VLAs-in-C.patch
+> +++ /dev/null
+> @@ -1,128 +0,0 @@
+> -From 6e4736180fcaffdb06acf52fd3eb50ba5baa3d2a Mon Sep 17 00:00:00 2001
+> -From: Khem Raj <raj.khem@gmail.com>
+> -Date: Wed, 31 Jan 2024 21:04:28 -0800
+> -Subject: [PATCH] options: Replace use of VLAs in C++
+> -
+> -Clang++ 18 is fussy about this with new warning checks.
+> -
+> -   ../git/src/apps/common/options.cpp:882:20: error: variable length arr=
+ays in C++ are a Clang extension [-Werror,-Wvla-cxx-extension]
+> -      882 |         char shortOptions[optionsMap_.size() * 3 + 2];
+> -          |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+> -
+> -Therefore replace using VLAs with alloca and malloc/free
+> -
+> -Upstream-Status: Submitted [https://lists.libcamera.org/pipermail/libcam=
+era-devel/2024-February/040381.html]
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ----
+> - src/apps/common/options.cpp      | 12 ++++++++++--
+> - src/libcamera/ipc_unixsocket.cpp | 13 +++++++++----
+> - 2 files changed, 19 insertions(+), 6 deletions(-)
+> -
+> -diff --git a/src/apps/common/options.cpp b/src/apps/common/options.cpp
+> -index 4f7e8691..3656f3c1 100644
+> ---- a/src/apps/common/options.cpp
+> -+++ b/src/apps/common/options.cpp
+> -@@ -879,8 +879,8 @@ OptionsParser::Options OptionsParser::parse(int argc=
+, char **argv)
+> -        * Allocate short and long options arrays large enough to contain=
+ all
+> -        * options.
+> -        */
+> --      char shortOptions[optionsMap_.size() * 3 + 2];
+> --      struct option longOptions[optionsMap_.size() + 1];
+> -+      char *shortOptions =3D (char*)malloc(optionsMap_.size() * 3 + 2);
+> -+      struct option *longOptions =3D (struct option*)malloc(sizeof(stru=
+ct option) * (optionsMap_.size() + 1));
+> -       unsigned int ids =3D 0;
+> -       unsigned int idl =3D 0;
+> -
+> -@@ -935,12 +935,16 @@ OptionsParser::Options OptionsParser::parse(int ar=
+gc, char **argv)
+> -                       std::cerr << argv[optind - 1] << std::endl;
+> -
+> -                       usage();
+> -+                      free(shortOptions);
+> -+                      free(longOptions);
+> -                       return options;
+> -               }
+> -
+> -               const Option &option =3D *optionsMap_[c];
+> -               if (!parseValue(option, optarg, &options)) {
+> -                       usage();
+> -+                      free(shortOptions);
+> -+                      free(longOptions);
+> -                       return options;
+> -               }
+> -       }
+> -@@ -949,10 +953,14 @@ OptionsParser::Options OptionsParser::parse(int ar=
+gc, char **argv)
+> -               std::cerr << "Invalid non-option argument '" << argv[opti=
+nd]
+> -                         << "'" << std::endl;
+> -               usage();
+> -+              free(shortOptions);
+> -+              free(longOptions);
+> -               return options;
+> -       }
+> -
+> -       options.valid_ =3D true;
+> -+      free(shortOptions);
+> -+      free(longOptions);
+> -       return options;
+> - }
+> -
+> -diff --git a/src/libcamera/ipc_unixsocket.cpp b/src/libcamera/ipc_unixso=
+cket.cpp
+> -index 1980d374..3bd861cb 100644
+> ---- a/src/libcamera/ipc_unixsocket.cpp
+> -+++ b/src/libcamera/ipc_unixsocket.cpp
+> -@@ -8,6 +8,7 @@
+> - #include "libcamera/internal/ipc_unixsocket.h"
+> -
+> - #include <array>
+> -+#include <cstdint>
+> - #include <poll.h>
+> - #include <string.h>
+> - #include <sys/socket.h>
+> -@@ -247,8 +248,8 @@ int IPCUnixSocket::sendData(const void *buffer, size=
+_t length,
+> -       iov[0].iov_base =3D const_cast<void *>(buffer);
+> -       iov[0].iov_len =3D length;
+> -
+> --      char buf[CMSG_SPACE(num * sizeof(uint32_t))];
+> --      memset(buf, 0, sizeof(buf));
+> -+      char *buf =3D (char*)malloc(CMSG_SPACE(num * sizeof(uint32_t)));
+> -+      memset((void*)buf, 0, sizeof(buf));
+> -
+> -       struct cmsghdr *cmsg =3D (struct cmsghdr *)buf;
+> -       cmsg->cmsg_len =3D CMSG_LEN(num * sizeof(uint32_t));
+> -@@ -270,9 +271,11 @@ int IPCUnixSocket::sendData(const void *buffer, siz=
+e_t length,
+> -               int ret =3D -errno;
+> -               LOG(IPCUnixSocket, Error)
+> -                       << "Failed to sendmsg: " << strerror(-ret);
+> -+              free(buf);
+> -               return ret;
+> -       }
+> -
+> -+      free(buf);
+> -       return 0;
+> - }
+> -
+> -@@ -283,8 +286,8 @@ int IPCUnixSocket::recvData(void *buffer, size_t len=
+gth,
+> -       iov[0].iov_base =3D buffer;
+> -       iov[0].iov_len =3D length;
+> -
+> --      char buf[CMSG_SPACE(num * sizeof(uint32_t))];
+> --      memset(buf, 0, sizeof(buf));
+> -+      char *buf =3D (char*)malloc(CMSG_SPACE(num * sizeof(uint32_t)));
+> -+      memset((void*)buf, 0, sizeof(buf));
+> -
+> -       struct cmsghdr *cmsg =3D (struct cmsghdr *)buf;
+> -       cmsg->cmsg_len =3D CMSG_LEN(num * sizeof(uint32_t));
+> -@@ -305,12 +308,14 @@ int IPCUnixSocket::recvData(void *buffer, size_t l=
+ength,
+> -               if (ret !=3D -EAGAIN)
+> -                       LOG(IPCUnixSocket, Error)
+> -                               << "Failed to recvmsg: " << strerror(-ret=
+);
+> -+              free(buf);
+> -               return ret;
+> -       }
+> -
+> -       if (fds)
+> -               memcpy(fds, CMSG_DATA(cmsg), num * sizeof(uint32_t));
+> -
+> -+      free(buf);
+> -       return 0;
+> - }
+> -
+> diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.2.0=
+.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb
+> similarity index 84%
+> rename from meta-multimedia/recipes-multimedia/libcamera/libcamera_0.2.0.=
+bb
+> rename to meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb
+> index 45d6be31ec..682e56739f 100644
+> --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.2.0.bb
+> +++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb
+> @@ -11,12 +11,9 @@ LIC_FILES_CHKSUM =3D "\
+>  SRC_URI =3D " \
+>          git://git.libcamera.org/libcamera/libcamera.git;protocol=3Dhttps=
+;branch=3Dmaster \
+>          file://0001-media_device-Add-bool-return-type-to-unlock.patch \
+> -        file://0002-options-Replace-use-of-VLAs-in-C.patch \
+> -        file://0001-rpi-Use-alloca-instead-of-variable-length-arrays.pat=
+ch \
+> -        file://0001-ipu3-Use-posix-basename.patch \
+>  "
+>
+> -SRCREV =3D "89227a428a82e724548399d35c98ea89566f9045"
+> +SRCREV =3D "35ed4b91291d9f3d08e4b51acfb51163e65df8f8"
+>
+>  PE =3D "1"
+>
+> @@ -25,10 +22,11 @@ S =3D "${WORKDIR}/git"
+>  DEPENDS =3D "python3-pyyaml-native python3-jinja2-native python3-ply-nat=
+ive python3-jinja2-native udev gnutls chrpath-native libevent libyaml"
+>  DEPENDS +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtba=
+se-native', '', d)}"
+>
+> -PACKAGES =3D+ "${PN}-gst"
+> +PACKAGES =3D+ "${PN}-gst ${PN}-pycamera"
+>
+>  PACKAGECONFIG ??=3D ""
+>  PACKAGECONFIG[gst] =3D "-Dgstreamer=3Denabled,-Dgstreamer=3Ddisabled,gst=
+reamer1.0 gstreamer1.0-plugins-base"
+> +PACKAGECONFIG[pycamera] =3D "-Dpycamera=3Denabled,-Dpycamera=3Ddisabled,=
+python3 python3-pybind11"
+>
+>  LIBCAMERA_PIPELINES ??=3D "auto"
+>
+> @@ -46,7 +44,7 @@ RDEPENDS:${PN} =3D "${@bb.utils.contains('DISTRO_FEATUR=
+ES', 'wayland qt', 'qtwayla
+>  inherit meson pkgconfig python3native
+>
+>  do_configure:prepend() {
+> -    sed -i -e 's|py_compile=3DTrue,||' ${S}/utils/ipc/mojo/public/tools/=
+mojom/mojom/generate/template_expander.py
+> +    sed -i -e 's|py_compile=3DTrue,||' ${S}/utils/codegen/ipc/mojo/publi=
+c/tools/mojom/mojom/generate/template_expander.py
+>  }
+>
+>  do_install:append() {
+> @@ -72,6 +70,7 @@ do_package_recalculate_ipa_signatures() {
+>
+>  FILES:${PN} +=3D " ${libexecdir}/libcamera/v4l2-compat.so"
+>  FILES:${PN}-gst =3D "${libdir}/gstreamer-1.0"
+> +FILES:${PN}-pycamera =3D "${PYTHON_SITEPACKAGES_DIR}/libcamera"
+>
+>  # libcamera-v4l2 explicitly sets _FILE_OFFSET_BITS=3D32 to get access to
+>  # both 32 and 64 bit file APIs.
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#115002): https://lists.openembedded.org/g/openembedde=
+d-devel/message/115002
+> Mute This Topic: https://lists.openembedded.org/mt/110729722/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
