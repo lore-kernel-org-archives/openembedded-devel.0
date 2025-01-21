@@ -1,395 +1,126 @@
-Return-Path: <throos@amazon.de>
+Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 26719C02185
-	for <webhook@archiver.kernel.org>; Tue, 21 Jan 2025 06:54:11 +0000 (UTC)
-Received: from smtp-fw-80009.amazon.com (smtp-fw-80009.amazon.com [99.78.197.220])
- by mx.groups.io with SMTP id smtpd.web11.10693.1737442443073692790
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DEFD1C02187
+	for <webhook@archiver.kernel.org>; Tue, 21 Jan 2025 06:55:10 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.10786.1737442503301569740
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Jan 2025 22:54:03 -0800
+ Mon, 20 Jan 2025 22:55:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@amazon.de header.s=amazon201209 header.b=WrvpHMl6;
- spf=pass (domain: amazon.de, ip: 99.78.197.220, mailfrom: prvs=109346909=throos@amazon.de)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
-  t=1737442443; x=1768978443;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=syPD4IuNYbJlx9469hInAMLs2C9tHey/xeaZ97GIr0s=;
-  b=WrvpHMl6kUfXv57mF+YWh8ZMFYR0xNzwCjUmuIpFj7yE40V2YKHfkFCH
-   aCCvePzMh+DGHVlu27ezbLUVzlNGvtlbw42040LJGFaDUgXEwErT66awO
-   XpNR/vaBWHx56anE/n5aJhnQOnYfqdDep9oTq0XtVXBbLEgvxv5QPEJVL
-   w=;
-X-IronPort-AV: E=Sophos;i="6.13,221,1732579200"; 
-   d="scan'208";a="165687471"
-Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO smtpout.prod.us-west-2.prod.farcaster.email.amazon.dev) ([10.25.36.210])
-  by smtp-border-fw-80009.pdx80.corp.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Jan 2025 06:54:01 +0000
-Received: from EX19MTAEUB001.ant.amazon.com [10.0.17.79:3789]
- by smtpin.naws.eu-west-1.prod.farcaster.email.amazon.dev [10.0.13.19:2525] with esmtp (Farcaster)
- id 4d4a3e78-1d5f-4692-923c-54f501773081; Tue, 21 Jan 2025 06:54:00 +0000 (UTC)
-X-Farcaster-Flow-ID: 4d4a3e78-1d5f-4692-923c-54f501773081
-Received: from EX19D016EUC001.ant.amazon.com (10.252.51.169) by
- EX19MTAEUB001.ant.amazon.com (10.252.51.28) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.1258.39;
- Tue, 21 Jan 2025 06:54:00 +0000
-Received: from u182adcbddbfb55.ant.amazon.com (10.1.212.24) by
- EX19D016EUC001.ant.amazon.com (10.252.51.169) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.1258.39;
- Tue, 21 Jan 2025 06:53:58 +0000
-From: <throos@amazon.de>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3116fd578f=changqing.li@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50L5g3Z1023257
+	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jan 2025 22:55:03 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 448cpq25ys-3
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jan 2025 22:55:02 -0800 (PST)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Mon, 20 Jan 2025 22:55:02 -0800
+Received: from pek-lpg-core6.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Mon, 20 Jan 2025 22:55:01 -0800
+From: <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Thomas Roos <throos@amazon.de>
-Subject: [meta-multimedia] [scarthgap] [PATCH] libcamera: backport 0.4.0 from master-next
-Date: Tue, 21 Jan 2025 07:53:46 +0100
-Message-ID: <20250121065346.37236-1-throos@amazon.de>
+Subject: [meta-oe][PATCH] dlt-daemon: make DLT_WatchdogSec configurable
+Date: Tue, 21 Jan 2025 14:55:00 +0800
+Message-ID: <20250121065500.2419472-1-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Originating-IP: [10.1.212.24]
-X-ClientProxiedBy: EX19D040UWB003.ant.amazon.com (10.13.138.8) To
- EX19D016EUC001.ant.amazon.com (10.252.51.169)
+X-Proofpoint-ORIG-GUID: ynVTvPTFvisAYQ6hcJq-zOJ55Q-3g-Qq
+X-Proofpoint-GUID: ynVTvPTFvisAYQ6hcJq-zOJ55Q-3g-Qq
+X-Authority-Analysis: v=2.4 cv=TdtstQQh c=1 sm=1 tr=0 ts=678f44c6 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=VdSt8ZQiCzkA:10 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=Qc0wC0M0WH6gsc5hBfAA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-21_03,2025-01-21_01,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 phishscore=0
+ spamscore=0 priorityscore=1501 mlxscore=0 clxscore=1015 impostorscore=0
+ malwarescore=0 lowpriorityscore=0 bulkscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2411120000 definitions=main-2501210055
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 Jan 2025 06:54:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115002
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Jan 2025 06:55:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115003
 
-From: Thomas Roos <throos@amazon.de>
+From: Changqing Li <changqing.li@windriver.com>
 
-This is done because libcamera 0.2. is broken,
-probablay because of 0001-rpi-Use-alloca-instead-of-variable-length-arrays.patch
-Tested good with upstream version.
+On slow system, dlt service may fail since watchdog timeout, backport a
+patch to make DLT_WatchdogSec configurable, so that this service can
+start successfully during boot.
 
-See more details here:
-https://github.com/openembedded/meta-openembedded/issues/919
-and here:
-https://github.com/raspberrypi/rpicam-apps/issues/654
-
-Signed-off-by: Thomas Roos <throos@amazon.de>
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- .../0001-ipu3-Use-posix-basename.patch        |  71 ----------
- ...ca-instead-of-variable-length-arrays.patch |  43 ------
- ...002-options-Replace-use-of-VLAs-in-C.patch | 128 ------------------
- ...{libcamera_0.2.0.bb => libcamera_0.4.0.bb} |  11 +-
- 4 files changed, 5 insertions(+), 248 deletions(-)
- delete mode 100644 meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-ipu3-Use-posix-basename.patch
- delete mode 100644 meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-rpi-Use-alloca-instead-of-variable-length-arrays.patch
- delete mode 100644 meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-options-Replace-use-of-VLAs-in-C.patch
- rename meta-multimedia/recipes-multimedia/libcamera/{libcamera_0.2.0.bb => libcamera_0.4.0.bb} (84%)
+ ...e-DLT_WatchdogSec-can-be-set-by-user.patch | 40 +++++++++++++++++++
+ .../dlt-daemon/dlt-daemon_2.18.10.bb          |  1 +
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-CMakeLists-txt-make-DLT_WatchdogSec-can-be-set-by-user.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-ipu3-Use-posix-basename.patch b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-ipu3-Use-posix-basename.patch
-deleted file mode 100644
-index 9e4adf3d8d..0000000000
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-ipu3-Use-posix-basename.patch
-+++ /dev/null
-@@ -1,71 +0,0 @@
--From 35d2acc61b1b27c0810a80cd21de65f29dc79df7 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sun, 24 Mar 2024 11:27:21 -0700
--Subject: [PATCH] ipu3: Use posix basename
--
--musl does not implement GNU basename extention and with latest musl
--the prototype from string.h is also removed [1] which now results in
--compile errors e.g.
--
--../git/utils/ipu3/ipu3-pack.c:21:47: error: call to undeclared function 'basename'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
--
--These utilities are using this function in usage() which is used just
--before program exit. Always use the basename APIs from libgen.h which is
--posix implementation
--
--[1] https://git.musl-libc.org/cgit/musl/commit/?id=725e17ed6dff4d0cd22487bb64470881e86a92e7
--
--Upstream-Status: Submitted [https://lists.libcamera.org/pipermail/libcamera-devel/2024-March/041180.html]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- utils/ipu3/ipu3-pack.c   | 4 ++--
-- utils/ipu3/ipu3-unpack.c | 3 ++-
-- 2 files changed, 4 insertions(+), 3 deletions(-)
--
--diff --git a/utils/ipu3/ipu3-pack.c b/utils/ipu3/ipu3-pack.c
--index decbfc6c..23d2db8b 100644
----- a/utils/ipu3/ipu3-pack.c
--+++ b/utils/ipu3/ipu3-pack.c
--@@ -8,6 +8,7 @@
-- 
-- #include <errno.h>
-- #include <fcntl.h>
--+#include <libgen.h>
-- #include <stdint.h>
-- #include <stdio.h>
-- #include <string.h>
--@@ -15,9 +16,8 @@
-- #include <sys/types.h>
-- #include <unistd.h>
-- 
---static void usage(const char *argv0)
--+static void usage(char *argv0)
-- {
---
-- 	printf("Usage: %s input-file output-file\n", basename(argv0));
-- 	printf("Convert unpacked RAW10 Bayer data to the IPU3 packed Bayer formats\n");
-- 	printf("If the output-file '-', output data will be written to standard output\n");
--diff --git a/utils/ipu3/ipu3-unpack.c b/utils/ipu3/ipu3-unpack.c
--index 9d2c1200..1505a970 100644
----- a/utils/ipu3/ipu3-unpack.c
--+++ b/utils/ipu3/ipu3-unpack.c
--@@ -8,6 +8,7 @@
-- 
-- #include <errno.h>
-- #include <fcntl.h>
--+#include <libgen.h>
-- #include <stdint.h>
-- #include <stdio.h>
-- #include <string.h>
--@@ -15,7 +16,7 @@
-- #include <sys/types.h>
-- #include <unistd.h>
-- 
---static void usage(const char *argv0)
--+static void usage(char *argv0)
-- {
-- 	printf("Usage: %s input-file output-file\n", basename(argv0));
-- 	printf("Unpack the IPU3 raw Bayer format to 16-bit Bayer\n");
---- 
--2.44.0
--
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-rpi-Use-alloca-instead-of-variable-length-arrays.patch b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-rpi-Use-alloca-instead-of-variable-length-arrays.patch
-deleted file mode 100644
-index c336e92548..0000000000
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-rpi-Use-alloca-instead-of-variable-length-arrays.patch
-+++ /dev/null
-@@ -1,43 +0,0 @@
--From 11cc6dbd45f0880beea64cdc514f57484b90bc39 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 20 Feb 2024 18:44:23 -0800
--Subject: [PATCH] rpi: Use malloc instead of variable length arrays
--
--Clang-18+ diagnoses this as error
--
--| ../git/src/ipa/rpi/controller/rpi/alsc.cpp:499:10: error: variable length arrays in C++ are a Clang extension [-Werror,-Wvla-cxx-extension]     |   499 |         int xLo[X], xHi[X];
--|       |                 ^
--
--Upstream-Status: Submitted [https://lists.libcamera.org/pipermail/libcamera-devel/2024-February/040529.html]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
--s
-----
-- src/ipa/rpi/controller/rpi/alsc.cpp | 7 +++++--
-- 1 file changed, 5 insertions(+), 2 deletions(-)
--
--diff --git a/src/ipa/rpi/controller/rpi/alsc.cpp b/src/ipa/rpi/controller/rpi/alsc.cpp
--index 8a205c60..a7d42614 100644
----- a/src/ipa/rpi/controller/rpi/alsc.cpp
--+++ b/src/ipa/rpi/controller/rpi/alsc.cpp
--@@ -496,8 +496,8 @@ void resampleCalTable(const Array2D<double> &calTableIn,
-- 	 * Precalculate and cache the x sampling locations and phases to save
-- 	 * recomputing them on every row.
-- 	 */
---	int xLo[X], xHi[X];
---	double xf[X];
--+	int *xLo = (int*)malloc(X), *xHi = (int*)malloc(X);
--+	double *xf = (double*)malloc(X);
-- 	double scaleX = cameraMode.sensorWidth /
-- 			(cameraMode.width * cameraMode.scaleX);
-- 	double xOff = cameraMode.cropX / (double)cameraMode.sensorWidth;
--@@ -539,6 +539,9 @@ void resampleCalTable(const Array2D<double> &calTableIn,
-- 			*(out++) = above * (1 - yf) + below * yf;
-- 		}
-- 	}
--+	free(xf);
--+	free(xHi);
--+	free(xLo);
-- }
-- 
-- /* Calculate chrominance statistics (R/G and B/G) for each region. */
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-options-Replace-use-of-VLAs-in-C.patch b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-options-Replace-use-of-VLAs-in-C.patch
-deleted file mode 100644
-index 473820653e..0000000000
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-options-Replace-use-of-VLAs-in-C.patch
-+++ /dev/null
-@@ -1,128 +0,0 @@
--From 6e4736180fcaffdb06acf52fd3eb50ba5baa3d2a Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 31 Jan 2024 21:04:28 -0800
--Subject: [PATCH] options: Replace use of VLAs in C++
--
--Clang++ 18 is fussy about this with new warning checks.
--
--   ../git/src/apps/common/options.cpp:882:20: error: variable length arrays in C++ are a Clang extension [-Werror,-Wvla-cxx-extension]
--      882 |         char shortOptions[optionsMap_.size() * 3 + 2];
--          |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
--
--Therefore replace using VLAs with alloca and malloc/free
--
--Upstream-Status: Submitted [https://lists.libcamera.org/pipermail/libcamera-devel/2024-February/040381.html]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/apps/common/options.cpp      | 12 ++++++++++--
-- src/libcamera/ipc_unixsocket.cpp | 13 +++++++++----
-- 2 files changed, 19 insertions(+), 6 deletions(-)
--
--diff --git a/src/apps/common/options.cpp b/src/apps/common/options.cpp
--index 4f7e8691..3656f3c1 100644
----- a/src/apps/common/options.cpp
--+++ b/src/apps/common/options.cpp
--@@ -879,8 +879,8 @@ OptionsParser::Options OptionsParser::parse(int argc, char **argv)
-- 	 * Allocate short and long options arrays large enough to contain all
-- 	 * options.
-- 	 */
---	char shortOptions[optionsMap_.size() * 3 + 2];
---	struct option longOptions[optionsMap_.size() + 1];
--+	char *shortOptions = (char*)malloc(optionsMap_.size() * 3 + 2);
--+	struct option *longOptions = (struct option*)malloc(sizeof(struct option) * (optionsMap_.size() + 1));
-- 	unsigned int ids = 0;
-- 	unsigned int idl = 0;
-- 
--@@ -935,12 +935,16 @@ OptionsParser::Options OptionsParser::parse(int argc, char **argv)
-- 			std::cerr << argv[optind - 1] << std::endl;
-- 
-- 			usage();
--+			free(shortOptions);
--+			free(longOptions);
-- 			return options;
-- 		}
-- 
-- 		const Option &option = *optionsMap_[c];
-- 		if (!parseValue(option, optarg, &options)) {
-- 			usage();
--+			free(shortOptions);
--+			free(longOptions);
-- 			return options;
-- 		}
-- 	}
--@@ -949,10 +953,14 @@ OptionsParser::Options OptionsParser::parse(int argc, char **argv)
-- 		std::cerr << "Invalid non-option argument '" << argv[optind]
-- 			  << "'" << std::endl;
-- 		usage();
--+		free(shortOptions);
--+		free(longOptions);
-- 		return options;
-- 	}
-- 
-- 	options.valid_ = true;
--+	free(shortOptions);
--+	free(longOptions);
-- 	return options;
-- }
-- 
--diff --git a/src/libcamera/ipc_unixsocket.cpp b/src/libcamera/ipc_unixsocket.cpp
--index 1980d374..3bd861cb 100644
----- a/src/libcamera/ipc_unixsocket.cpp
--+++ b/src/libcamera/ipc_unixsocket.cpp
--@@ -8,6 +8,7 @@
-- #include "libcamera/internal/ipc_unixsocket.h"
-- 
-- #include <array>
--+#include <cstdint>
-- #include <poll.h>
-- #include <string.h>
-- #include <sys/socket.h>
--@@ -247,8 +248,8 @@ int IPCUnixSocket::sendData(const void *buffer, size_t length,
-- 	iov[0].iov_base = const_cast<void *>(buffer);
-- 	iov[0].iov_len = length;
-- 
---	char buf[CMSG_SPACE(num * sizeof(uint32_t))];
---	memset(buf, 0, sizeof(buf));
--+	char *buf = (char*)malloc(CMSG_SPACE(num * sizeof(uint32_t)));
--+	memset((void*)buf, 0, sizeof(buf));
-- 
-- 	struct cmsghdr *cmsg = (struct cmsghdr *)buf;
-- 	cmsg->cmsg_len = CMSG_LEN(num * sizeof(uint32_t));
--@@ -270,9 +271,11 @@ int IPCUnixSocket::sendData(const void *buffer, size_t length,
-- 		int ret = -errno;
-- 		LOG(IPCUnixSocket, Error)
-- 			<< "Failed to sendmsg: " << strerror(-ret);
--+		free(buf);
-- 		return ret;
-- 	}
-- 
--+	free(buf);
-- 	return 0;
-- }
-- 
--@@ -283,8 +286,8 @@ int IPCUnixSocket::recvData(void *buffer, size_t length,
-- 	iov[0].iov_base = buffer;
-- 	iov[0].iov_len = length;
-- 
---	char buf[CMSG_SPACE(num * sizeof(uint32_t))];
---	memset(buf, 0, sizeof(buf));
--+	char *buf = (char*)malloc(CMSG_SPACE(num * sizeof(uint32_t)));
--+	memset((void*)buf, 0, sizeof(buf));
-- 
-- 	struct cmsghdr *cmsg = (struct cmsghdr *)buf;
-- 	cmsg->cmsg_len = CMSG_LEN(num * sizeof(uint32_t));
--@@ -305,12 +308,14 @@ int IPCUnixSocket::recvData(void *buffer, size_t length,
-- 		if (ret != -EAGAIN)
-- 			LOG(IPCUnixSocket, Error)
-- 				<< "Failed to recvmsg: " << strerror(-ret);
--+		free(buf);
-- 		return ret;
-- 	}
-- 
-- 	if (fds)
-- 		memcpy(fds, CMSG_DATA(cmsg), num * sizeof(uint32_t));
-- 
--+	free(buf);
-- 	return 0;
-- }
-- 
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.2.0.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb
-similarity index 84%
-rename from meta-multimedia/recipes-multimedia/libcamera/libcamera_0.2.0.bb
-rename to meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb
-index 45d6be31ec..682e56739f 100644
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.2.0.bb
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb
-@@ -11,12 +11,9 @@ LIC_FILES_CHKSUM = "\
- SRC_URI = " \
-         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
-         file://0001-media_device-Add-bool-return-type-to-unlock.patch \
--        file://0002-options-Replace-use-of-VLAs-in-C.patch \
--        file://0001-rpi-Use-alloca-instead-of-variable-length-arrays.patch \
--        file://0001-ipu3-Use-posix-basename.patch \
- "
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-CMakeLists-txt-make-DLT_WatchdogSec-can-be-set-by-user.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-CMakeLists-txt-make-DLT_WatchdogSec-can-be-set-by-user.patch
+new file mode 100644
+index 000000000..335872c40
+--- /dev/null
++++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-CMakeLists-txt-make-DLT_WatchdogSec-can-be-set-by-user.patch
+@@ -0,0 +1,40 @@
++From bc03f142507da92add8ba325fdf8187d47a7d719 Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Fri, 13 Dec 2024 16:37:24 +0800
++Subject: [PATCH] CMakeLists.txt: make DLT_WatchdogSec can be set by user
++
++In my test env, WatchdogSec default value 2 is not enough, manually
++changed to 3 is ok. This makes dlt.service/dlt-system.service start
++failed during boot time. So, make DLT_WatchdogSec can be set by user, so
++user can set them to proper value at build time, then service can start
++successfully in boot time.
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++
++Upstream-Status: Backport [https://github.com/COVESA/dlt-daemon/pull/720/commits/bc03f142507da92add8ba325fdf8187d47a7d719]
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ systemd/CMakeLists.txt | 8 ++++++--
++ 1 file changed, 6 insertions(+), 2 deletions(-)
++
++diff --git a/systemd/CMakeLists.txt b/systemd/CMakeLists.txt
++index 16cbe86b5..659378d16 100644
++--- a/systemd/CMakeLists.txt
+++++ b/systemd/CMakeLists.txt
++@@ -18,10 +18,14 @@ if(WITH_SYSTEMD)
++     set(SYSTEMD_CONFIGURATIONS_FILES_DIR ${SYSTEMD_UNITDIR} )
++ 
++     if(WITH_SYSTEMD_WATCHDOG)
++-        set( DLT_WatchdogSec 2 )
+++        if(NOT DEFINED DLT_WatchdogSec)
+++            set(DLT_WatchdogSec 2 CACHE STRING "Watchdog timeout in seconds")
+++        endif()
++         message( STATUS "The systemd watchdog is enabled - timeout is set to ${DLT_WatchdogSec} seconds")
++     else(WITH_SYSTEMD_WATCHDOG)
++-        set( DLT_WatchdogSec 0 )
+++        if(NOT DEFINED DLT_WatchdogSec)
+++             set(DLT_WatchdogSec 0 CACHE STRING "Watchdog timeout in seconds")
+++        endif()
++         message( STATUS "The systemd watchdog is disabled")
++     endif(WITH_SYSTEMD_WATCHDOG)
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
+index 3d2e4a73f..888289b35 100644
+--- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
++++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
+@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/COVESA/${BPN}.git;protocol=https;branch=master \
+            file://0004-Modify-systemd-config-directory.patch \
+            file://544.patch \
+            file://567.patch \
++           file://0001-CMakeLists-txt-make-DLT_WatchdogSec-can-be-set-by-user.patch \
+            "
+ SRCREV = "0f2d4cfffada6f8448a2cb27995b38eb4271044f"
  
--SRCREV = "89227a428a82e724548399d35c98ea89566f9045"
-+SRCREV = "35ed4b91291d9f3d08e4b51acfb51163e65df8f8"
- 
- PE = "1"
- 
-@@ -25,10 +22,11 @@ S = "${WORKDIR}/git"
- DEPENDS = "python3-pyyaml-native python3-jinja2-native python3-ply-native python3-jinja2-native udev gnutls chrpath-native libevent libyaml"
- DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
- 
--PACKAGES =+ "${PN}-gst"
-+PACKAGES =+ "${PN}-gst ${PN}-pycamera"
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[gst] = "-Dgstreamer=enabled,-Dgstreamer=disabled,gstreamer1.0 gstreamer1.0-plugins-base"
-+PACKAGECONFIG[pycamera] = "-Dpycamera=enabled,-Dpycamera=disabled,python3 python3-pybind11"
- 
- LIBCAMERA_PIPELINES ??= "auto"
- 
-@@ -46,7 +44,7 @@ RDEPENDS:${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayla
- inherit meson pkgconfig python3native
- 
- do_configure:prepend() {
--    sed -i -e 's|py_compile=True,||' ${S}/utils/ipc/mojo/public/tools/mojom/mojom/generate/template_expander.py
-+    sed -i -e 's|py_compile=True,||' ${S}/utils/codegen/ipc/mojo/public/tools/mojom/mojom/generate/template_expander.py
- }
- 
- do_install:append() {
-@@ -72,6 +70,7 @@ do_package_recalculate_ipa_signatures() {
- 
- FILES:${PN} += " ${libexecdir}/libcamera/v4l2-compat.so"
- FILES:${PN}-gst = "${libdir}/gstreamer-1.0"
-+FILES:${PN}-pycamera = "${PYTHON_SITEPACKAGES_DIR}/libcamera"
- 
- # libcamera-v4l2 explicitly sets _FILE_OFFSET_BITS=32 to get access to
- # both 32 and 64 bit file APIs.
 -- 
 2.34.1
 
