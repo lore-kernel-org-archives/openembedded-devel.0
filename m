@@ -1,150 +1,153 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4DF54C02181
-	for <webhook@archiver.kernel.org>; Tue, 21 Jan 2025 00:37:09 +0000 (UTC)
-Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com [209.85.219.180])
- by mx.groups.io with SMTP id smtpd.web11.5565.1737419828481829103
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9623BC02181
+	for <webhook@archiver.kernel.org>; Tue, 21 Jan 2025 01:43:59 +0000 (UTC)
+Received: from AM0PR83CU005.outbound.protection.outlook.com (AM0PR83CU005.outbound.protection.outlook.com [52.101.69.43])
+ by mx.groups.io with SMTP id smtpd.web10.6703.1737423835290308937
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Jan 2025 16:37:08 -0800
+ Mon, 20 Jan 2025 17:43:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=R3X1VAG0;
- spf=pass (domain: gmail.com, ip: 209.85.219.180, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f180.google.com with SMTP id 3f1490d57ef6-e53ef7462b6so7814299276.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Jan 2025 16:37:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1737419827; x=1738024627; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=SPt7ZHhPjDZkmuXPRFmTOenuP4ikF1Y9nIPf1E3vYgM=;
-        b=R3X1VAG0diAif/ymJucPs6jV3r4pGp2BZjEDx2MAXxuGgN546B3/yCFts03aDK2L51
-         x9RkZC6/YcCOPCEl1MgoK3wUMa0zRz1hGZ0/jkDXd+ioPscSewaEA7tNatWpPsOPSyWy
-         JY11n0q+FKGX33HymxG+GHuxGHu+Su+yZQuOCa6vSv7J+K9dP6q21T0IPkANZJ9DsmNk
-         Jq2g1OjTyTyKwayn6wzgqjLabRUdKBUscLwVoeS1CWyFy1WqLDatvnjw8vzrAEKuUrR/
-         d3u3YZ6SopWPVMkNriGXcivgYg4OHt6stesDGpgP9/Ratv+oBrCbeTI6+i4bkPwRbKQR
-         K5cw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737419827; x=1738024627;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=SPt7ZHhPjDZkmuXPRFmTOenuP4ikF1Y9nIPf1E3vYgM=;
-        b=vy65yZ1gMWcS7yixOQ74poqTCzWnLLmhST8WpMaSDSYs9+TQhaTdVn3Me6nvGiAxGF
-         o9RxFGDYLHDlc0iDDKGuuDl9XDGlD8kYi0EpcLzFGFUEu43o0erBbTL+Ysk8mLgzwj+8
-         vManwXSyBDPww8ysXCiB1vcsqf8gh6pbu7CPUYqqENxPOUo9jqyGzB4j+j2avqrKc1U5
-         YmSnCBcswa/BQ3o/UX29CUakghB+5kK8sKSoLTwG5qzeEHxxriPq38JphkDHO9URK24y
-         1ZtH9M62SgiMWBk3oZhiTSwCQQpUMpifVuouruaqG3/KqPIVpnvHe81Hu6z1V+crOh94
-         SjLQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXRoqBJeM++YqZPiM0JDUPLEr0HILDRP2uPvYD3ZuMvf4PbsWQJQmCQa+isJiGiZYRVjLtBYj4Vx0Ug9D61M3wuSG0=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YxNsGmwLRqVdYJ/ORbl7AU96lbDyAhtL4aoLDG3VXrbBIPWI8qV
-	Tsa2h2FOxoRj3gvUBoJctiyMP2btgBoRb5QVzBssK43T94fsZNHls/1qAmP5
-X-Gm-Gg: ASbGnctFik3vbzAhAiEHg5n+tPpUtDi6VpphoGV6lL7VXbh5iysoOodWjPxAM9+Qulc
-	kjA23NbjxmiIAKZZilNyWrjI3nQu8qWEpzWcsfNlZaWyWUHxtT7ZZwZFyYyEGEtMslNqqLFQbC5
-	OyZMHOE/RLMlHe2vnV2s80f0HMW+L6FoIO5Q2N115mEuoIqHsbM9obxmH48b9NT+03DM53ulex1
-	gJoX/Db0HzyYrsmPESBW16CSj/P4XPe8fjLr6JdKELHpMLnG7CASAi9MdvD3OTujoT5AMidZrPj
-	fvBDdM+SanmCmir2YUOdRpusPI+dr385cmKn58rbAUbf+w==
-X-Google-Smtp-Source: AGHT+IGwYAEpPmUAzC5H1+BO5dU3P6qze+N0BovuG/vcLZ9wxi7d8J+C1BxJTD2j7tCFRMmI/TZPng==
-X-Received: by 2002:a05:690c:45c8:b0:6ef:6601:14b4 with SMTP id 00721157ae682-6f6eb904bbfmr116842777b3.26.1737419827617;
-        Mon, 20 Jan 2025 16:37:07 -0800 (PST)
-Received: from ?IPV6:2600:1700:45dd:7000:77b0:6fb4:f583:48be? ([2600:1700:45dd:7000:77b0:6fb4:f583:48be])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6f6e63a8a07sm15893167b3.2.2025.01.20.16.37.06
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 20 Jan 2025 16:37:07 -0800 (PST)
-Message-ID: <dafa6bb4-dff9-434b-8608-d6f70ef6bf63@gmail.com>
-Date: Mon, 20 Jan 2025 19:37:06 -0500
+ dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=Oa1EIwEH;
+ spf=pass (domain: axis.com, ip: 52.101.69.43, mailfrom: peter.kjellerstedt@axis.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=k+/DdfhbklFtRaumGTzC7ay9kEtU26GyzzFkd2tSW9Y27yEZQin7Y1V6wOEwWMewBGnzL5+5MmWgQqbHW/Cz+/0q7nOQRwCRiUGUwlRKu3aYrZmxSSd/nGKbg5HM6MofE/qFX90mg8xqFXfIYgjg7cEqZoIrkpv7e09mSJwyxB8O1H0EAWPoas2ur82n7UN/P476ezGIjtPolq7WMTaqTq0VqXh5Bt0F2i0EXUgM4D/NyS8Wy/Kq2LCVqaG45Pvk/5Jotcg6pdVH/2YEVLhEA8LORA8rvYeVUZWTjGvkkhHLLyrcwGAOiqfuLU+GrR05JiwwRk1SsuujWNS/Crv9SQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=CdYO2Nt+5K+lQ0otedgfNOxUatZOdSAzpoJvSUe4qeM=;
+ b=UmOb9RB+x2SXKiVWGQNLqHVxiRIZUxJ06aCRwxB/dyB7FW1zplRplMaxlABcm1OZYg1jJO009Ft77Hfzgcj4DqHlXX/1aw8OMQsJChyWGtroXR6FaBlgVf1MEPs0ZFyK14YLzuBVw/YbyqDxCQTeyyJ86++T47rNOU5Tz0qMwecB2yCzJ1M/+Ti3UT6tknPQh2B/WEifz4Ki1Rj5DewF+p00AI/GqqChNHalPSxBwV63HBaBctYKWxWJqEX5el9gulauviCkDsPu4SKYWCv1t5u2DAI4MRkLLPWskcY8KM9gqTyNkCG4dEzsA0zG0TUGY8BVsMXUQ/6zz8H3iUh7zg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
+ header.from=axis.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CdYO2Nt+5K+lQ0otedgfNOxUatZOdSAzpoJvSUe4qeM=;
+ b=Oa1EIwEH39vDFSIPr/T3bvKpmKD+KtxKXiJ3GTVQELXpqIhvqYEg37sUaJbmqns8L+0U+ZinlyNt3b3PnprP9KmpVgX/EfQLWDK0AuUEWkNFCFftQ0VKB846iURZE164aCCzvfcfmA5EI5yEaIvfMOFZPdcVCTJLOETbAALtAfw=
+Received: from DU2PR04CA0312.eurprd04.prod.outlook.com (2603:10a6:10:2b5::17)
+ by PA4PR02MB7021.eurprd02.prod.outlook.com (2603:10a6:102:103::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.22; Tue, 21 Jan
+ 2025 01:43:51 +0000
+Received: from DB5PEPF00014B9F.eurprd02.prod.outlook.com
+ (2603:10a6:10:2b5:cafe::d4) by DU2PR04CA0312.outlook.office365.com
+ (2603:10a6:10:2b5::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8356.23 via Frontend Transport; Tue,
+ 21 Jan 2025 01:43:50 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
+ smtp.mailfrom=axis.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=axis.com;
+Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
+ 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
+ client-ip=195.60.68.100; helo=mail.axis.com; pr=C
+Received: from mail.axis.com (195.60.68.100) by
+ DB5PEPF00014B9F.mail.protection.outlook.com (10.167.8.169) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8377.8 via Frontend Transport; Tue, 21 Jan 2025 01:43:50 +0000
+Received: from se-mail01w.axis.com (10.20.40.7) by se-mail01w.axis.com
+ (10.20.40.7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Tue, 21 Jan
+ 2025 02:43:49 +0100
+Received: from se-intmail02x.se.axis.com (10.4.0.28) by se-mail01w.axis.com
+ (10.20.40.7) with Microsoft SMTP Server id 15.1.2507.44 via Frontend
+ Transport; Tue, 21 Jan 2025 02:43:49 +0100
+Received: from saur (saur.se.axis.com [10.92.3.10])
+	by se-intmail02x.se.axis.com (Postfix) with ESMTP id DA55D24A
+	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Jan 2025 02:43:49 +0100 (CET)
+Received: from saur.se.axis.com (localhost [127.0.0.1])
+	by saur (8.17.1/8.15.2) with ESMTPS id 50L1hnZX289856
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Jan 2025 02:43:49 +0100
+Received: (from pkj@localhost)
+	by saur.se.axis.com (8.17.1/8.17.1/Submit) id 50L1hnm1289853
+	for openembedded-devel@lists.openembedded.org; Tue, 21 Jan 2025 02:43:49 +0100
+From: Peter Kjellerstedt <pkj@axis.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] php: Define ACLOCALDIR
+Date: Tue, 21 Jan 2025 02:43:44 +0100
+Message-ID: <20250121014344.289823-1-pkj@axis.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-python][scarthgap][PATCH v1] pytesseract: add recipe to
- scarthgap
-To: a-christidis@ti.com, openembedded-devel@lists.openembedded.org
-References: <20250107161121.2046968-1-a-christidis@ti.com>
-Content-Language: en-US
-From: akuster808 <akuster808@gmail.com>
-Autocrypt: addr=akuster808@gmail.com; keydata=
- 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
- ApZ86eOP
-In-Reply-To: <20250107161121.2046968-1-a-christidis@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB5PEPF00014B9F:EE_|PA4PR02MB7021:EE_
+X-MS-Office365-Filtering-Correlation-Id: a0fc8624-1892-4a9b-da20-08dd39bd0e18
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|36860700013|376014|82310400026;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?tUM29ZCMk4h8APxgqRW1Ld/hZQm/4GmTN5LCicL9BJvGYeQUfMuLdwQor5F/?=
+ =?us-ascii?Q?H2rGv9Ox/ymdmYtltE0eHdLXu3+wyQ0OZrN9he/JHy0OhxCmhDabrkPK8ZyD?=
+ =?us-ascii?Q?tRlIFS4qk0eB0PPidleR9N5seE0hQ9tuFJMIFJcUOzm9HiYA7+ydrXx3uBDP?=
+ =?us-ascii?Q?DOi/rOPqELMiV4AwXLMBLcaNHyqfI9I3DGcz21L2S5n9g3X4RzvaKz+Q+ajH?=
+ =?us-ascii?Q?UL+fqdfgNcUbtUCR+updIP3unyNdeXf6J7mMkl1m+Ra3ohia1QyGdmMN6dbv?=
+ =?us-ascii?Q?seae9kzUnucPpUnYS9qImn4NGZqmUMCeRCaPUNowkkCGkt3TP8MjmjS3e0OL?=
+ =?us-ascii?Q?2fq6barGiBzXA2rHjwdSg9g5GoACncI40EFEyFHjVjiGm2aXTQyebqI7Uh/i?=
+ =?us-ascii?Q?sUv76pi7OGKbIksW33SRS6TC/p5mORpgnwVgZbDyn4wI3rbOBJUXgOrXDUbF?=
+ =?us-ascii?Q?3xTRPjRYmq5keYWuTNGHFhakcXEDNcvV6QXtaySEvVyX5JSLfMLFsW+bCfAf?=
+ =?us-ascii?Q?4dq/blA7DWm/K4sDfmiJ1Fo5zVoktegf/JZXvfgWdmmAN+jtAyD5TWXxofJV?=
+ =?us-ascii?Q?D17zlKNFzKVHLGCOcWM3zEm3hB705a/4irnh44m1ynoMgrC92TrcArytFfxK?=
+ =?us-ascii?Q?//1nhdo2YpDsKhRHtKGJtylGwwvuP+nliVotz6FjkWpAQm9uGTJ56EIX6VWp?=
+ =?us-ascii?Q?EOYOi5ulyHnkr/RmesxIjxOxBWz/ei970dovVhL0FifLBBxw3DeHxarzvln5?=
+ =?us-ascii?Q?+V/7FtLUEOj0QxpSvatWdI332obr5lhlfMVwszB7m6vc/DtTFFXR+q5g4UCj?=
+ =?us-ascii?Q?rQ2WbKHvQWMjTvb6SV+OxkZUQenEji3JCFvyqASx1tv6x7I133bXdIJMl9mb?=
+ =?us-ascii?Q?eAiMynbF4tLl3MKIGengbzZcn0HjZO6Xz345ZtjkPOpobrRN9yns2OJe9XAf?=
+ =?us-ascii?Q?LsYlAl0vcqPDiNV4t6Zw9SJ2ZoVfiUl9goVGGOMXD37Ugk4ZmcNdFJF7urEF?=
+ =?us-ascii?Q?8lfX7biKiMODAEARt654SfPHl0xXFGU3ZVy60G1HDKtkvcZgjlcOTwNaKgnV?=
+ =?us-ascii?Q?YxgUS5/UZS9m3STgrX4kitoNs4PYYD7l2hKE9+S+6ZbFqQiTcb+ON2AX+oGY?=
+ =?us-ascii?Q?bPVuOPfHzO3rASe4hnMB++EUt8rIFLTPF6vdMxmJdJJsgSdcHQB0hNEWBRvz?=
+ =?us-ascii?Q?/cz8pxpLyC01T+wAQkVZ+NMfKn8hoab77d/pmzWAhw8GwMXzR9LGizREPp+G?=
+ =?us-ascii?Q?YdDDYocgRqvpEKSQif16EUjR/5tVjg41jmfR1AsqvGvbpnIt2A1YX4kLqcuU?=
+ =?us-ascii?Q?1p6wtKRlSe+c0TKg108ZvK4m++P2O371O/3Koewxk/7BwPdMJgWfKk5UkKUI?=
+ =?us-ascii?Q?ap69aKS0iH6tHqtXJK8RD8USyXFLMMNQbUVswHC8nxYKZKlSumOzItLxTjgx?=
+ =?us-ascii?Q?MvsebQFOMLubqVt6AITzxozrXMcogH3gr2mNsRDc7KXD3jDI8ghP96plXE77?=
+ =?us-ascii?Q?l0CoXjGlq9DkUak=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026);DIR:OUT;SFP:1101;
+X-OriginatorOrg: axis.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jan 2025 01:43:50.3965
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a0fc8624-1892-4a9b-da20-08dd39bd0e18
+X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DB5PEPF00014B9F.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR02MB7021
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 Jan 2025 00:37:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115000
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Jan 2025 01:43:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115001
 
+The common definition of ACLOCALDIR has been removed from OE-Core.
+Add a local definition since it is still needed.
 
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+---
+ meta-oe/recipes-devtools/php/php_8.2.26.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-
-On 1/7/25 11:11 AM, a-christidis@ti.com wrote:
-> From: Antonios Christidis <christidis-a@ti.com>
->
-> Recipe builds the python module pytessereact, version 0.3.13.
->
-> The module is a wrapper for Google's Tesseract-OCR engine.
->
-> Signed-off-by: Antonios Christidis <a-christidis@ti.com>
-
-Adding new packages is not allowed per LTS process.
-
-- armin
-> ---
->   .../python-pytesseract/pytesseract_0.3.13.bb       | 14 ++++++++++++++
->   1 file changed, 14 insertions(+)
->   create mode 100644 meta-python/recipes-extended/python-pytesseract/pytesseract_0.3.13.bb
->
-> diff --git a/meta-python/recipes-extended/python-pytesseract/pytesseract_0.3.13.bb b/meta-python/recipes-extended/python-pytesseract/pytesseract_0.3.13.bb
-> new file mode 100644
-> index 000000000..ff2814f8c
-> --- /dev/null
-> +++ b/meta-python/recipes-extended/python-pytesseract/pytesseract_0.3.13.bb
-> @@ -0,0 +1,14 @@
-> +SUMMARY = "Python-tesseract is an optical character recognition (OCR) tool for python. That is, it will recognize and "read" the text embedded in images."
-> +
-> +HOMEPAGE = "https://github.com/madmaze/pytesseract"
-> +
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
-> +
-> +SRC_URI[md5sum] = "73f9645e59b437f064d05882b95832ce"
-> +
-> +PYPI_PACKAGE = "pytesseract"
-> +
-> +inherit pypi setuptools3
-> +
-> +BBCLASSEXTEND = "native"
-
+diff --git a/meta-oe/recipes-devtools/php/php_8.2.26.bb b/meta-oe/recipes-d=
+evtools/php/php_8.2.26.bb
+index f5e57ab36a..61b127373a 100644
+--- a/meta-oe/recipes-devtools/php/php_8.2.26.bb
++++ b/meta-oe/recipes-devtools/php/php_8.2.26.bb
+@@ -162,6 +162,8 @@ do_install:append:class-native() {
+     rm -rf ${D}/${PHP_LIBDIR}/php/.[a-z]*
+ }
+=20
++ACLOCALDIR =3D "${STAGING_DATADIR}/aclocal"
++
+ do_install:prepend() {
+     cat ${ACLOCALDIR}/libtool.m4 ${ACLOCALDIR}/lt~obsolete.m4 ${ACLOCALDIR=
+}/ltoptions.m4 \
+         ${ACLOCALDIR}/ltsugar.m4 ${ACLOCALDIR}/ltversion.m4 > ${S}/build/l=
+ibtool.m4
 
