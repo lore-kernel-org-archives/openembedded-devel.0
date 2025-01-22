@@ -1,103 +1,101 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2268FC02182
-	for <webhook@archiver.kernel.org>; Wed, 22 Jan 2025 16:54:52 +0000 (UTC)
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.web11.48578.1737564885292745293
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90F59C02181
+	for <webhook@archiver.kernel.org>; Wed, 22 Jan 2025 19:23:46 +0000 (UTC)
+Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
+ by mx.groups.io with SMTP id smtpd.web10.2542.1737573816969262220
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Jan 2025 08:54:45 -0800
+ Wed, 22 Jan 2025 11:23:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cnSg4/4B;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-436202dd7f6so82495895e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Jan 2025 08:54:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1737564884; x=1738169684; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=N2pAIL3ABxoqkENA/fc7pmvH5lPN0S0ovH+0pswYJzw=;
-        b=cnSg4/4B4CottObDQrY//LilyyXPKJdVtjKlxXjI5cdQaNWPGwMfLhiVK31Zgpiygn
-         4BxRIhFB3hKIUsa0fGosUl4dOf9QAqYZoVWlV/1ZEGlcJKv+P28shH9C1jZIVTTtggSA
-         URKO6efq0mVZQb5Z7xWls8QIJjr/4eYWYujjJ7sf8PGVnCzGcIAuLdWLiN460NpEJ6Gb
-         uHC2v8WL0kljwh5LcRWFkDtVQSXrLN7juETrG/rsOSanxGjc+cXdwnJHk7BoJztk6og5
-         BdVklz5R1LiytZNlupYcOa3rxnv0XhtQ0RGN256h1cqFuaxGUWZXeFz/JMAF94RqqVs1
-         Omvg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737564884; x=1738169684;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=N2pAIL3ABxoqkENA/fc7pmvH5lPN0S0ovH+0pswYJzw=;
-        b=fc4fggKK73VuE7a5e8tD8uZHpUh7xG6Gik/+oM8vMvQDvok8352LDdXYMLT94vuUdm
-         pijR/Mf6JOQQ12dLz1Zq3urctZgM86ETIkiNFB5qyZDb6pFqIF6Q8o3Lm4IJhWYSbEcu
-         kL3ATU9Z+g3n0RmhXSU7wHTDd7+bQx0NzXNRrMmH7SAAtvt+m7H5WeTvq/uDrJt+CtO/
-         xiCilYOIuVX48arYGO4nwDzpp8OsTAkwTE+2DWhU2W4C/vRolGYRlSswfxR5r5d5hxkj
-         I2mILvwJkgSmHh6izzfp57nza3MeuLs+91zRqd1qnaCuL7k9kG0n0Cy1vKS+TaxGzWQY
-         ISSQ==
-X-Gm-Message-State: AOJu0YxZsDiZfBL/Ezmq2Fw07ZRRNtW3Ky7MLRAf4Hc2zj7I72byvTpo
-	yaMNQGmEaMv1lT7T9YMffie9B9jwvHd2uWCtjZUeKwa0uOkDe8DzXsIMYw==
-X-Gm-Gg: ASbGnctxOmN+4z5ABiTdj5q0vZilFaC0yqHCx31ll3UJiMhHes62Byy98bzbqz3W5ys
-	ODnUSxSwpb6znIUlHkGd95rJjvtFUiBQzavZfLY7F95N2O4RxNsbTRSBa0ubdhqWN7MvKm1i5YF
-	JuURjgWlWDKeQq7Tdai4GsM0/c84VBHbDWFTNmTBENolYbg8gyPqCNNNFbzkXK8Fv/1AyA3gClI
-	y5kyUqFujkBkyAUWjy2RFgOVdxqabsUn/gAimIhGntix4yHF+FwE3YBWuT1M4dUTq0eAuh5+u/W
-	jBHv/YrW9Q==
-X-Google-Smtp-Source: AGHT+IG6YrJ9qHhSWkOmUC79TZHuGi6PBZ70J2e88kfjAP49N8Kcu8dbiyHxM8FOeZR3MoJbHxPI+w==
-X-Received: by 2002:a05:600c:4fd6:b0:436:18e5:6917 with SMTP id 5b1f17b1804b1-438912d3aa3mr223106895e9.0.1737564883375;
-        Wed, 22 Jan 2025 08:54:43 -0800 (PST)
-Received: from localhost.localdomain ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-438b318c010sm33167265e9.2.2025.01.22.08.54.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Jan 2025 08:54:42 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
+Received: from fwd76.aul.t-online.de (fwd76.aul.t-online.de [10.223.144.102])
+	by mailout12.t-online.de (Postfix) with SMTP id 6B109630
+	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Jan 2025 20:23:02 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.37.54]) by fwd76.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1tagJZ-3Hgq7W0; Wed, 22 Jan 2025 20:23:01 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gyorgy Sarvari <skandigraun@gmail.com>
-Subject: [meta-oe][PATCH 1/2] ndctl: fix compiling without including tests
-Date: Wed, 22 Jan 2025 17:54:21 +0100
-Message-ID: <20250122165422.2750317-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.48.1
+Subject: [meta-gnome][PATCH 2/2] gnome-control-center: update 47.2 -> 47.3
+Date: Wed, 22 Jan 2025 20:23:09 +0100
+Message-ID: <20250122192309.935004-2-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250122192309.935004-1-f_l_k@t-online.de>
+References: <20250122192309.935004-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1737573781-AF7FD9C7-2314AADF/0/0 CLEAN NORMAL
+X-TOI-MSGID: f94c9d76-d9cf-4b4b-8d4c-afd857a37648
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 22 Jan 2025 16:54:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115019
+ <openembedded-devel@lists.openembedded.org>; Wed, 22 Jan 2025 19:23:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115022
 
-In case "tests" PACKAGECONFIG is not included, do_configure fails
-with the following error message:
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Version 47.3
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
- ../git/ndctl/meson.build:51:4: ERROR: Problem encountered: '-D=destructive=enabled' requires '-Dtest=enabled'
+- Various translation updates
 
-Since "destructive" option only enables an extra set of tests, it only
-makes sense to use along with including the tests. In case tests
-are not required, this option can be left on its default value (disabled).
+About
+- Fix wrong GPU names when g-c-c is launched using dGPU
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Color
+- Various fixes to the color calibration tool
+
+Notifications
+- Update UI when underlying gsetting changes
+
+Network
+- Make metered connection and hotspot settings adaptive to small screens
+
+Power
+- Handle when tuned-ppd has an unsupported power profile
+
+Sound
+- Prevent crash in Volume Levels when stream has no name
+
+Users
+- Make screen reader read avatar file names when there are no names
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-core/ndctl/ndctl_v79.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ ...nome-control-center_47.2.bb =3D> gnome-control-center_47.3.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gnome-control-center/{gnome-control-cent=
+er_47.2.bb =3D> gnome-control-center_47.3.bb} (95%)
 
-diff --git a/meta-oe/recipes-core/ndctl/ndctl_v79.bb b/meta-oe/recipes-core/ndctl/ndctl_v79.bb
-index 9a4bc49d1..90f6d13fd 100644
---- a/meta-oe/recipes-core/ndctl/ndctl_v79.bb
-+++ b/meta-oe/recipes-core/ndctl/ndctl_v79.bb
-@@ -20,11 +20,11 @@ DEPENDS = "kmod udev json-c keyutils iniparser libtraceevent libtracefs"
- 
- S = "${WORKDIR}/git"
- 
--EXTRA_OEMESON += "-Ddestructive=enabled -Diniparserdir=${STAGING_INCDIR}/iniparser"
-+EXTRA_OEMESON += "-Diniparserdir=${STAGING_INCDIR}/iniparser"
- 
- PACKAGECONFIG ??= "tests ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
- PACKAGECONFIG[systemd] = "-Dsystemd=enabled,-Dsystemd=disabled,systemd"
--PACKAGECONFIG[tests] = "-Dtest=enabled, -Dtest=disabled,"
-+PACKAGECONFIG[tests] = "-Dtest=enabled -Ddestructive=enabled, -Dtest=disabled,"
- PACKAGECONFIG[docs] = "-Ddocs=enabled -Dasciidoctor=enabled,-Ddocs=disabled -Dasciidoctor=disabled, asciidoc-native"
- 
- SYSTEMD_PACKAGES = "${@bb.utils.contains('DISTRO_FEATURES','systemd','${PN}','',d)}"
--- 
-2.48.1
+diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-=
+center_47.2.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-cont=
+rol-center_47.3.bb
+similarity index 95%
+rename from meta-gnome/recipes-gnome/gnome-control-center/gnome-control-c=
+enter_47.2.bb
+rename to meta-gnome/recipes-gnome/gnome-control-center/gnome-control-cen=
+ter_47.3.bb
+index a2decc13e3..a73183f0f8 100644
+--- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_=
+47.2.bb
++++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_=
+47.3.bb
+@@ -39,7 +39,7 @@ inherit gtk-icon-cache pkgconfig gnomebase gsettings ge=
+ttext gi-docgen upstream-
+ REQUIRED_DISTRO_FEATURES +=3D "opengl polkit pulseaudio systemd x11"
+=20
+ SRC_URI +=3D "file://0001-Add-meson-option-to-pass-sysroot.patch"
+-SRC_URI[archive.sha256sum] =3D "434a322dc3743858b89d8165d89f89dc05968b6b=
+7be3400944ced4271250d3e9"
++SRC_URI[archive.sha256sum] =3D "78381d5a7f1d5b297c9a19611145ee5e0584f06a=
+c575ed08ad070a0c07bbeaa2"
+=20
+ PACKAGECONFIG ??=3D "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland=
+', d)}"
+ PACKAGECONFIG[cups] =3D ",,cups,cups system-config-printer cups-pk-helpe=
+r"
+--=20
+2.47.1
 
 
