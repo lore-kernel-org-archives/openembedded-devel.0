@@ -1,171 +1,129 @@
-Return-Path: <Yogita.Urade@windriver.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41D9DC02181
-	for <webhook@archiver.kernel.org>; Wed, 22 Jan 2025 05:00:28 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.35988.1737522026565603886
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5295EC02182
+	for <webhook@archiver.kernel.org>; Wed, 22 Jan 2025 08:37:49 +0000 (UTC)
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com [209.85.128.65])
+ by mx.groups.io with SMTP id smtpd.web10.38812.1737535067331138406
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Jan 2025 21:00:26 -0800
+ Wed, 22 Jan 2025 00:37:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=31172c7a84=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50M3wIgp016447
-	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Jan 2025 21:00:26 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 44aqjg84px-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Jan 2025 21:00:26 -0800 (PST)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Tue, 21 Jan 2025 21:00:23 -0800
-From: yurade <yogita.urade@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][scarthgap][PATCH 1/1] poppler: fix CVE-2024-56378
-Date: Wed, 22 Jan 2025 05:00:04 +0000
-Message-ID: <20250122050004.1172584-1-yogita.urade@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@smile.fr header.s=google header.b=sg2/ansA;
+ spf=pass (domain: smile.fr, ip: 209.85.128.65, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f65.google.com with SMTP id 5b1f17b1804b1-436326dcb1cso45914685e9.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Jan 2025 00:37:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=smile.fr; s=google; t=1737535065; x=1738139865; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=QCTo478PGYAGG5hp+AUam6LiFmBtOuO3+Ew+zLrGxyY=;
+        b=sg2/ansAkNUYh5wLcidumOstUbuTRQyp0GxPA9nFfG93/m+KZJ5dQYcBp0eKGljJiK
+         ITKOgT0Cya3v3QfWfb3nrHJeSLAd6slrkKy/+Sam+bc8QFwLeGeSITxqd/I0ThiVcxhj
+         9eYSe4vjTBPYarF9q2+jt/iGf/K6Ylufm/0Eo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1737535065; x=1738139865;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=QCTo478PGYAGG5hp+AUam6LiFmBtOuO3+Ew+zLrGxyY=;
+        b=UzUW8uvQCSOISk6FOwelpu1tQlEANBeqIWGQsmge6M9P5DY6TfbcqlUPnwwqj7sGer
+         iadqNMEIODrtJx4yAb1Pc5s38aV8dpPa8RYca9aBVIFBPgk2Oa9BXNZyoiIoMjSz1Uhv
+         mSL7O36r4uGTww46+WysoAqUaAkVRKkkoL60r7ec1jVckXfKT11+ykv2vvqW7qpo8eb8
+         tNMOWZR87V9RqFZTL53alvDNxCOUQFgOcvBOlwOPReMV0OUT6kyIOfkcOQaugRGLYmwU
+         FshyL5TDpE9iZCw54p7NW9vC669oXVbOlLnw/w5OVpJeRiaopD6pEwGd9QOQIW80PDS7
+         fWSg==
+X-Gm-Message-State: AOJu0YzsBX6cXM/AciHNOuYN6LTg4VyTOoP7G7wagPqrHHwrsvpFB/u8
+	DTESpV5asWbkAzTVt6zdXsYIfN0PnSiSpVWE6VNvMuB0LwMbfYZZe9pwGxesAqfimZwExnt8ep+
+	BjicQ7g==
+X-Gm-Gg: ASbGncvFZJc4QOAeQwciyCA0rPgDgaH89yNhVQvPlWpTrxANPSyg2UELN6/Vm2+xeXZ
+	oYsSbA5aSmZR7ZmVkI1wPfOeSiqi4kCF2reXvSGgG56tS7uXkFaokF4UD7kBubS21Gl/geLf/jR
+	bzgBHo33+bF7oJSSWq6pvgWFYdnaS+p6GwPy0dSXNQ9fCtT/Kds5MZyPegEdJsM9Y//zCMFUfNi
+	W9buVaYKvbbm30xX4/xYovSqPD/b0Dq6d9XYi7gvceGdSj9h2eCQyOfL7QiUJ8NFOX1R0/UOiCQ
+	vBs/PE9W3JTWLl2Sj+06An+EeYU7+epoVGOeIOICnQcztrZtCwff4SXa6VqUe12l1HjpwX41xjH
+	UUA==
+X-Google-Smtp-Source: AGHT+IHvPbUpBOOVhVI/mDNn3i8oVVeqvg34EuYMwNpzS8jSwY4nBBz7gMWX4eajIvSe8P7ZsDL79w==
+X-Received: by 2002:a05:600c:1f86:b0:436:faeb:2a1b with SMTP id 5b1f17b1804b1-438913db2cfmr180166445e9.13.1737535065349;
+        Wed, 22 Jan 2025 00:37:45 -0800 (PST)
+Received: from P-ASN-ECS-830T8C3.local (2a01cb000deef0002cff7470e58ff5dc.ipv6.abo.wanadoo.fr. [2a01:cb00:dee:f000:2cff:7470:e58f:f5dc])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-438b3189ba8sm15848035e9.5.2025.01.22.00.37.44
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 22 Jan 2025 00:37:45 -0800 (PST)
+From: Yoann Congal <yoann.congal@smile.fr>
+To: openembedded-devel@lists.openembedded.org
+Cc: Yoann Congal <yoann.congal@smile.fr>,
+	Alexandre Truong <alexandre.truong@smile.fr>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][scarthgap][PATCH] mdio-tools: fix mdio-netlink kernel module reproducibility
+Date: Wed, 22 Jan 2025 09:37:20 +0100
+Message-Id: <20250122083720.1449084-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: FOjV7Dq0BCTJ8QaDHikRA_rL3UWn8dll
-X-Proofpoint-ORIG-GUID: FOjV7Dq0BCTJ8QaDHikRA_rL3UWn8dll
-X-Authority-Analysis: v=2.4 cv=d7QPyQjE c=1 sm=1 tr=0 ts=67907b6a cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=VdSt8ZQiCzkA:10 a=PYnjg3YJAAAA:8 a=e5mUnYsNAAAA:8 a=t7CeM3EgAAAA:8 a=3fyaaF4VAAAA:8
- a=6VemWM0d_1GYB7LaR6kA:9 a=Vxmtnl_E_bksehYqCbjh:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-01-22_01,2025-01-21_03,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 impostorscore=0
- malwarescore=0 lowpriorityscore=0 priorityscore=1501 adultscore=0
- bulkscore=0 mlxlogscore=796 mlxscore=0 phishscore=0 clxscore=1015
- suspectscore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
- engine=8.21.0-2411120000 definitions=main-2501220035
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 22 Jan 2025 05:00:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115012
+ <openembedded-devel@lists.openembedded.org>; Wed, 22 Jan 2025 08:37:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115013
 
-From: Yogita Urade <yogita.urade@windriver.com>
+From: Yoann Congal <yoann.congal@smile.fr>
 
-libpoppler.so in Poppler through 24.12.0 has an out-of-bounds
-read vulnerability within the JBIG2Bitmap::combine function
-in JBIG2Stream.cc.
+mdio-netlink source make reference to ${S}/.. which breaks
+-fdebug-prefix-map and results in the full TMPDIR path being present in
+the -dbg package and, also, change a related CRC in the main package.
 
-Reference:
-https://nvd.nist.gov/vuln/detail/CVE-2024-56378
+This changes ${S} to enclose the whole SRC_URI repo and adapt relative paths to
+build (MODULES_MODULE_SYMVERS_LOCATION)
 
-Upstream patch:
-https://gitlab.freedesktop.org/poppler/poppler/-/commit/ade9b5ebed44b0c15522c27669ef6cdf93eff84e
+This make mdio-netlink reproducible and fixes this warning:
+WARNING: mdio-netlink-1.3.1-r0 do_package_qa: QA Issue: File /lib/modules/6.6.29-yocto-standard/updates/.debug/mdio-netlink.ko in package mdio-netlink-dbg contains reference to TMPDIR [buildpaths]
 
-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+Reviewed-by: Alexandre Truong <alexandre.truong@smile.fr>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit d161de0b00b91cd0c286fbbc1190f87cf20fe088)
 ---
- .../poppler/poppler/CVE-2024-56378.patch      | 77 +++++++++++++++++++
- .../poppler/poppler_23.04.0.bb                |  1 +
- 2 files changed, 78 insertions(+)
- create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2024-56378.patch
+ meta-networking/conf/include/non-repro-meta-networking.inc   | 2 --
+ .../recipes-support/mdio-tools/mdio-netlink_1.3.1.bb         | 5 +++--
+ 2 files changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2024-56378.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2024-56378.patch
-new file mode 100644
-index 000000000..f94b8fed1
---- /dev/null
-+++ b/meta-oe/recipes-support/poppler/poppler/CVE-2024-56378.patch
-@@ -0,0 +1,77 @@
-+From ade9b5ebed44b0c15522c27669ef6cdf93eff84e Mon Sep 17 00:00:00 2001
-+From: Albert Astals Cid <aacid@kde.org>
-+Date: Tue, 17 Dec 2024 18:59:01 +0100
-+Subject: [PATCH] JBIG2Bitmap::combine: Fix crash on malformed files
-+
-+Fixes #1553
-+
-+CVE: CVE-2024-56378
-+Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/ade9b5ebed44b0c15522c27669ef6cdf93eff84e]
-+
-+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
-+---
-+ poppler/JBIG2Stream.cc | 15 +++++++++------
-+ 1 file changed, 9 insertions(+), 6 deletions(-)
-+
-+diff --git a/poppler/JBIG2Stream.cc b/poppler/JBIG2Stream.cc
-+index 77ffeb2..bdc51d0 100644
-+--- a/poppler/JBIG2Stream.cc
-++++ b/poppler/JBIG2Stream.cc
-+@@ -765,7 +765,7 @@ void JBIG2Bitmap::duplicateRow(int yDest, int ySrc)
-+
-+ void JBIG2Bitmap::combine(JBIG2Bitmap *bitmap, int x, int y, unsigned int combOp)
-+ {
-+-    int x0, x1, y0, y1, xx, yy;
-++    int x0, x1, y0, y1, xx, yy, yyy;
-+     unsigned char *srcPtr, *destPtr;
-+     unsigned int src0, src1, src, dest, s1, s2, m1, m2, m3;
-+     bool oneByte;
-+@@ -812,14 +812,17 @@ void JBIG2Bitmap::combine(JBIG2Bitmap *bitmap, int x, int y, unsigned int combOp
-+     oneByte = x0 == ((x1 - 1) & ~7);
-+
-+     for (yy = y0; yy < y1; ++yy) {
-+-        if (unlikely((y + yy >= h) || (y + yy < 0))) {
-++        if (unlikely(checkedAdd(y, yy, &yyy))) {
-++            continue;
-++        }
-++        if (unlikely((yyy >= h) || (yyy < 0))) {
-+             continue;
-+         }
-+
-+         // one byte per line -- need to mask both left and right side
-+         if (oneByte) {
-+             if (x >= 0) {
-+-                destPtr = data + (y + yy) * line + (x >> 3);
-++                destPtr = data + yyy * line + (x >> 3);
-+                 srcPtr = bitmap->data + yy * bitmap->line;
-+                 dest = *destPtr;
-+                 src1 = *srcPtr;
-+@@ -842,7 +845,7 @@ void JBIG2Bitmap::combine(JBIG2Bitmap *bitmap, int x, int y, unsigned int combOp
-+                 }
-+                 *destPtr = dest;
-+             } else {
-+-                destPtr = data + (y + yy) * line;
-++                destPtr = data + yyy * line;
-+                 srcPtr = bitmap->data + yy * bitmap->line + (-x >> 3);
-+                 dest = *destPtr;
-+                 src1 = *srcPtr;
-+@@ -872,7 +875,7 @@ void JBIG2Bitmap::combine(JBIG2Bitmap *bitmap, int x, int y, unsigned int combOp
-+
-+             // left-most byte
-+             if (x >= 0) {
-+-                destPtr = data + (y + yy) * line + (x >> 3);
-++                destPtr = data + yyy * line + (x >> 3);
-+                 srcPtr = bitmap->data + yy * bitmap->line;
-+                 src1 = *srcPtr++;
-+                 dest = *destPtr;
-+@@ -896,7 +899,7 @@ void JBIG2Bitmap::combine(JBIG2Bitmap *bitmap, int x, int y, unsigned int combOp
-+                 *destPtr++ = dest;
-+                 xx = x0 + 8;
-+             } else {
-+-                destPtr = data + (y + yy) * line;
-++                destPtr = data + yyy * line;
-+                 srcPtr = bitmap->data + yy * bitmap->line + (-x >> 3);
-+                 src1 = *srcPtr++;
-+                 xx = x0;
-+--
-+2.40.0
-diff --git a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
-index e57760d85..e76692bbe 100644
---- a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
-@@ -11,6 +11,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            file://CVE-2023-34872.patch \
-            file://CVE-2024-6239-0001.patch \
-            file://CVE-2024-6239-0002.patch \
-+           file://CVE-2024-56378.patch \
-            "
- SRC_URI[sha256sum] = "b6d893dc7dcd4138b9e9df59a13c59695e50e80dc5c2cacee0674670693951a1"
+diff --git a/meta-networking/conf/include/non-repro-meta-networking.inc b/meta-networking/conf/include/non-repro-meta-networking.inc
+index e0f448fe31..45eed5398e 100755
+--- a/meta-networking/conf/include/non-repro-meta-networking.inc
++++ b/meta-networking/conf/include/non-repro-meta-networking.inc
+@@ -15,7 +15,6 @@ KNOWN_NON_REPRO_META_NETWORKING = " \
+     htpdate-doc \
+     keepalived \
+     keepalived-dbg \
+-    kernel-module-mdio-netlink-6.6.17-yocto-standard \
+     libbearssl-staticdev \
+     libfko3 \
+     libfko-client \
+@@ -25,7 +24,6 @@ KNOWN_NON_REPRO_META_NETWORKING = " \
+     libowfat-staticdev \
+     libruli-staticdev \
+     libsamba-util0 \
+-    mdio-netlink-dbg \
+     mosquitto \
+     mosquitto-dbg \
+     ncftp \
+diff --git a/meta-networking/recipes-support/mdio-tools/mdio-netlink_1.3.1.bb b/meta-networking/recipes-support/mdio-tools/mdio-netlink_1.3.1.bb
+index b50d33f908..3867b89052 100644
+--- a/meta-networking/recipes-support/mdio-tools/mdio-netlink_1.3.1.bb
++++ b/meta-networking/recipes-support/mdio-tools/mdio-netlink_1.3.1.bb
+@@ -3,11 +3,12 @@ require mdio-tools.inc
+ DEPENDS += "virtual/kernel libmnl"
+ # This module requires Linux 5.6 higher
  
--- 
-2.40.0
-
+-S = "${WORKDIR}/git/kernel"
++S = "${WORKDIR}/git"
+ 
+ inherit module
+ 
+-EXTRA_OEMAKE = "KDIR=${STAGING_KERNEL_DIR}"
++EXTRA_OEMAKE = "-C kernel/ KDIR=${STAGING_KERNEL_DIR}"
++MODULES_MODULE_SYMVERS_LOCATION="kernel"
+ MODULES_INSTALL_TARGET = "install"
+ 
+ RPROVIDES:${PN} += "kernel-module-mdio-netlink"
 
