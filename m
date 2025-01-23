@@ -1,98 +1,108 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E09AC0218F
-	for <webhook@archiver.kernel.org>; Thu, 23 Jan 2025 08:13:59 +0000 (UTC)
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
- by mx.groups.io with SMTP id smtpd.web10.6455.1737620035066315224
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4642BC02182
+	for <webhook@archiver.kernel.org>; Thu, 23 Jan 2025 13:40:21 +0000 (UTC)
+Received: from mail-yb1-f170.google.com (mail-yb1-f170.google.com [209.85.219.170])
+ by mx.groups.io with SMTP id smtpd.web11.10501.1737639607245407084
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Jan 2025 00:13:55 -0800
+ Thu, 23 Jan 2025 05:40:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=Y5dTqfG0;
- spf=pass (domain: konsulko.com, ip: 209.85.218.54, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-ab651f1dd36so137808466b.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Jan 2025 00:13:54 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JatBKpi/;
+ spf=pass (domain: gmail.com, ip: 209.85.219.170, mailfrom: schonm@gmail.com)
+Received: by mail-yb1-f170.google.com with SMTP id 3f1490d57ef6-e545c1e8a15so1425823276.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Jan 2025 05:40:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1737620033; x=1738224833; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=OP4cGL2mz7wm2UyvCoABQEC6/osxKUZRlYaio+TUV3U=;
-        b=Y5dTqfG0CgWJ3DAiP45iIo3x+1Q0lYGKotKD1UHhDqUtY8ZsmXb8pnmnmhShxb6NOJ
-         0mzuye0yoeL/9dswLdl/OHtA15mhPmM1aZLWxowP+Ua6Vheeykk9s/OR1KILAiyssbEA
-         Z8OKZD7avSMdXO92nD7UING8vYsMaH8JrIkL8=
+        d=gmail.com; s=20230601; t=1737639606; x=1738244406; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=17LzoMaCQoxYpmrTbUTNJNksxCWV9yzCMJpsxKHpkYc=;
+        b=JatBKpi/8DPXJMSjqmt8YlKvYPVzZWvJKWypnfr6Q6zKg91yc6Psh366DO+hdsnLgt
+         ZoAOKhGPxN8jfNJYc5dnnk9Yb1DnJJ2dPMSzy0Npg5ljf5/bDS+TOgiJ3LTPqHZn9UAW
+         yGahq7nOka/H2FmjdgV+/HzI6fsOEq59BQ+BqxxHMVBkLLoKUTqG4pl6CluFUHDWfmlb
+         AKJS8rrkJNfcZcfCwssVzyH6FRzwLCUE1s6ZEUpqoVeu0a8YM6YSUCnCs1gC6jOVsuAX
+         eqjVy1qRQGrbCsV+oEmG739xDC2IumPDyMTEhFUJMBcuExJqyl9Eh34vUpBB1rtWzSMJ
+         hb8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737620033; x=1738224833;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=OP4cGL2mz7wm2UyvCoABQEC6/osxKUZRlYaio+TUV3U=;
-        b=fMzbSczM61cI6niR2J17EC1TExM+MjEjdIvg8gJ++JcZPK1rBxLHYX1/CHlsNDPjgo
-         Pyyfp1NwH4heqKZP1mmJkMP2shDpWL0ciOOQn5gBjepWKmEkp287RqA+OMTna0lepWun
-         XpR5NnZLSDWz1Cfu+u6UnU1q7O1NUqPVJqKU5vlV/pkvekcopNzpc2DMJztmK9kCXGid
-         zqFNVt3nEjBboxbIs+fGPLBRLf/qm6S12KGjMMXPOZIE6rvEG6C5BYG1F9tp377w5CQ+
-         s4UJxKC+mCeSXXq2MCetFMRMctCD93P9VZUZnih+CM4wHo+u+8zH5Kyk6f7MlxocU+iS
-         +Qgw==
-X-Gm-Message-State: AOJu0Yz8/zPvbaZoWpUeXszbivezzh9GbWC5tlTa6x9k8NfUUac0mzWm
-	5mP0A+erywHWpiZKpPI8xglOoERxlSrXDShdmKYmy0Wv1U4kB1NiNnw3V42O8w+Nc/Do9IqYmKd
-	v
-X-Gm-Gg: ASbGncso1XEfnhAx7Jm8YH9R3fbg21gsC5WLwvTd8eAdJkOp71OEwhi01cybmUq4/RU
-	xCImQzJ0tC7ikjVxsqG/kojcbdG+CyL5uKb1T0uf/CT/aiG4R1MMzLfJ4Y+dOxgqAw9scMJbC08
-	p4z6btlnVUgOp26ySBeLUZEnoEUA/7FYjgLzWVHhmhfGxxw2uCRaNjgk2mta1f6cB368gVcG/1O
-	nD2t7FSMgrNeNkcPf5h3fUMOITGr9OIsvrXseIcXuCueAE+j60KlfMfSr15e/aF75N2IsI+w1aV
-	UXERofGt0UWYFReL6m0=
-X-Google-Smtp-Source: AGHT+IEffKdfc8RPCLS+hl+Xy2rq4dpp2pP1GrD1bmR28pY/JFCCM0cr/Y7mrTKag5H72k8Nmrr/0A==
-X-Received: by 2002:a17:907:7eaa:b0:aac:439:10ce with SMTP id a640c23a62f3a-ab38b2cef0bmr2544219766b.27.1737620033241;
-        Thu, 23 Jan 2025 00:13:53 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ab384f290fasm1040414966b.103.2025.01.23.00.13.52
+        d=1e100.net; s=20230601; t=1737639606; x=1738244406;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=17LzoMaCQoxYpmrTbUTNJNksxCWV9yzCMJpsxKHpkYc=;
+        b=A8AtcXg8ynpUukZ6A49/hRR+umGZJw+rMyj60GGQW0x7bWX9k6fD4Ym7Wt7XgFzp2s
+         ns9EBNHiiphDpDt8u0l6CJbvk/sfavNpI666kFnPVx/ZfV/uHPIy3chUQJFefpGsTOvl
+         lUC8FyY7KqxsrdkvlV7GtRrMqz5hoyNiqtYnHCY4drVoYqLiT+GAbyoaTwv2my0xoaDv
+         ezjoj9z/6zzTrBpRcJTFyzMbOwu35wtqO6GCr3mXk3vxdZq0zqL3UQKRNPuYC40NyR9k
+         qMsldLHLh5H6CATbFP/qzJ4JBGM4A7Gpe+7d8btPAI2139GCZtWwikdXndcnoMfO2QR1
+         9XoQ==
+X-Gm-Message-State: AOJu0YwQRazzRJy6VrLUZ1zor0Xg0qOkdz92R8+zDRityV7nTiDYdgY8
+	2JLgbuQlHRn9W+TTKPRD1bzvn7VwKGeZ40uRmZKFM9HD6OXIqzPH+ziUhgUM
+X-Gm-Gg: ASbGncta5tgPdyJoGCt0wMukNQoFlXeES97yXnoARKUuGKqNtS+PBbwAa5pIh8868Ru
+	GmqaaTu70fWnmDktyeCDQyqLD/txQ+G5C9dXpvxBCDCpQXJbZgLysomwOMUFwdLnruL9sg9g8RN
+	Xotat9RadZorPKuc+saC+3l1as/X7I+mqUrQcCxSbtc9l/4TTUd6z+4v2ihSYJMurPVaVAoRbN+
+	kwOlSNzqDU9zglhpgSE+X7oILCMD4qWMSjQmctz+F0ZmPe2nl1ywIbNRsYtJtiH2zbxk1IsNymD
+	sA1mDoHmDnx/qkvFKZsuLOFaL91nxSj/6rXNlL4=
+X-Google-Smtp-Source: AGHT+IFpvd2EIee+3BlDp3/vr3bdi62JAhDKs3xZDGgy+aanlhbxYGJzuDkhZpJELJEoqFM04r1TXQ==
+X-Received: by 2002:a05:6902:248d:b0:e57:cca4:2688 with SMTP id 3f1490d57ef6-e58380808e3mr483793276.21.1737639605644;
+        Thu, 23 Jan 2025 05:40:05 -0800 (PST)
+Received: from localhost.localdomain (71-208-20-57.ftmy.qwest.net. [71.208.20.57])
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e57ab313b53sm2482192276.31.2025.01.23.05.40.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Jan 2025 00:13:52 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Thu, 23 Jan 2025 05:40:05 -0800 (PST)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/5] python3-zeroconf: Upgrade 0.140.1 -> 0.141.0
-Date: Thu, 23 Jan 2025 10:13:47 +0200
-Message-Id: <20250123081349.3440231-3-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250123081349.3440231-1-leon.anavi@konsulko.com>
-References: <20250123081349.3440231-1-leon.anavi@konsulko.com>
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-webserver][PATCH] hiawatha: upgrade 10.12 -> 11.0
+Date: Thu, 23 Jan 2025 08:39:56 -0500
+Message-ID: <20250123133956.21170-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 23 Jan 2025 08:13:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115030
+ <openembedded-devel@lists.openembedded.org>; Thu, 23 Jan 2025 13:40:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115033
 
-Upgrade to release 0.141.0:
+The https://www.hiawatha-webserver.org/ site is defunct.  So move SRC_URI to use
+https://hiawatha.leisink.net/ instead.  Update to 11.0 while we are here.
 
-- Speed up adding and expiring records in the DNSCache
+Changelog: https://hiawatha.leisink.net/changelog
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+    mbed TLS updated to 3.0.0.
+    Dropped support for TLSv1.0 and TLSv1.1. Configuration option MinTLSversion removed.
+    Dropped support for HTTP Public Key Pinning (HPKP). Configuration option PublicKeyPins removed.
+
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- ...{python3-zeroconf_0.140.1.bb => python3-zeroconf_0.141.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-zeroconf_0.140.1.bb => python3-zeroconf_0.141.0.bb} (81%)
+ .../hiawatha/{hiawatha_10.12.bb => hiawatha_11.0.bb}         | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-webserver/recipes-httpd/hiawatha/{hiawatha_10.12.bb => hiawatha_11.0.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-zeroconf_0.140.1.bb b/meta-python/recipes-devtools/python/python3-zeroconf_0.141.0.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-zeroconf_0.140.1.bb
-rename to meta-python/recipes-devtools/python/python3-zeroconf_0.141.0.bb
-index ced5e31f49..f545f2b550 100644
---- a/meta-python/recipes-devtools/python/python3-zeroconf_0.140.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-zeroconf_0.141.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/jstasiak/python-zeroconf"
- LICENSE = "LGPL-2.1-or-later"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=93e84222c4bfa3e70c20bb48ae9893b1"
+diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_11.0.bb
+similarity index 93%
+rename from meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb
+rename to meta-webserver/recipes-httpd/hiawatha/hiawatha_11.0.bb
+index 1111ef6f5..51177185f 100644
+--- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb
++++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_11.0.bb
+@@ -6,12 +6,11 @@ DEPENDS = "libxml2 libxslt virtual/crypt"
  
--SRC_URI[sha256sum] = "477d396cb712247aa5859e59249aabdad3fab1139097794e70b2e4b1625047bf"
-+SRC_URI[sha256sum] = "c0c41cfe1331cf885f132dd2400e4091f59ae0a571cae14f3db66919a055489b"
+ SECTION = "net"
  
- inherit pypi python_poetry_core cython
+-SRC_URI = "http://hiawatha-webserver.org/files/hiawatha-10/${BP}.tar.gz \
++SRC_URI = "https://hiawatha.leisink.net/files/hiawatha-${PV}.tar.gz \
+            file://hiawatha-init \
+            file://hiawatha.service "
  
+-SRC_URI[md5sum] = "d9e282be06ed456207726b7ac0df9d48"
+-SRC_URI[sha256sum] = "61bf41146c51244769984135529fcffd0f6cb92be18dc12d460effc42f19f50d"
++SRC_URI[sha256sum] = "d6fffbe6938951b62f9e02b5382a810fdb83b1e1328f5333c1c733342a890b4b"
+ 
+ INITSCRIPT_NAME = "hiawatha"
+ INITSCRIPT_PARAMS = "defaults 70"
 -- 
-2.39.5
+2.43.0
 
 
