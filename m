@@ -2,25 +2,25 @@ Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BBB35C02181
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3D06C0218B
 	for <webhook@archiver.kernel.org>; Fri, 24 Jan 2025 14:34:13 +0000 (UTC)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web11.13243.1737729248370106236
+ by mx.groups.io with SMTP id smtpd.web10.13341.1737729246972195874
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Jan 2025 06:34:08 -0800
+ Fri, 24 Jan 2025 06:34:07 -0800
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C8C83497
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 06:34:35 -0800 (PST)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6D27F497
+	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 06:34:34 -0800 (PST)
 Received: from cesw-amp-gbt-1s-m12830-04.oss.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 802003F694
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 06:34:07 -0800 (PST)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 2A7683F694
+	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 06:34:06 -0800 (PST)
 From: Ross Burton <ross.burton@arm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 4/4] ntp: set CONFIG_SITE in do_compile
-Date: Fri, 24 Jan 2025 14:34:01 +0000
-Message-ID: <20250124143401.1635224-4-ross.burton@arm.com>
+Subject: [PATCH 2/4] php: cleanup autoconf fettling
+Date: Fri, 24 Jan 2025 14:33:59 +0000
+Message-ID: <20250124143401.1635224-2-ross.burton@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250124143401.1635224-1-ross.burton@arm.com>
 References: <20250124143401.1635224-1-ross.burton@arm.com>
@@ -30,35 +30,47 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 14:34:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115065
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115063
 
-Recent changes in to the autotools class in core means that it no longer
-sets CONFIG_SITE for compile tasks.  However, ntp decides to reconfigure
-itself mid-build, so the CONFIG_SITE values are lost.
+This autoconf manipulation is very old and appears to be obsolete now.
 
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- meta-networking/recipes-support/ntp/ntp_4.2.8p18.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-oe/recipes-devtools/php/php_8.2.26.bb | 8 --------
+ 1 file changed, 8 deletions(-)
 
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p18.bb b/meta-n=
-etworking/recipes-support/ntp/ntp_4.2.8p18.bb
-index 302cf9915f..6fae993482 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.8p18.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p18.bb
-@@ -55,6 +55,11 @@ CVE_STATUS_NTP =3D " \
+diff --git a/meta-oe/recipes-devtools/php/php_8.2.26.bb b/meta-oe/recipes=
+-devtools/php/php_8.2.26.bb
+index f5e57ab36a..f2363c8e54 100644
+--- a/meta-oe/recipes-devtools/php/php_8.2.26.bb
++++ b/meta-oe/recipes-devtools/php/php_8.2.26.bb
+@@ -136,10 +136,7 @@ LDFLAGS:append:riscv64 =3D " -latomic"
 =20
- inherit autotools update-rc.d useradd systemd pkgconfig
+ EXTRA_OEMAKE =3D "INSTALL_ROOT=3D${D}"
 =20
-+# For some reason this recipe reconfigures the nested configure.ac files=
- in
-+# do_compile because libtool.m4 is newer than aclocal.m4, and that then
-+# doesn't know about the site configuration.
-+do_compile[prefuncs] +=3D "autotools_sitefiles"
-+
- # The ac_cv_header_readline_history is to stop ntpdc depending on either
- # readline or curses
- EXTRA_OECONF +=3D "--with-net-snmp-config=3Dno \
+-acpaths =3D ""
+-
+ do_configure:prepend () {
+-    rm -f ${S}/build/libtool.m4 ${S}/ltmain.sh ${S}/aclocal.m4
+     find ${S} -name config.m4 | xargs -n1 sed -i 's!APXS_HTTPD=3D.*!APXS=
+_HTTPD=3D${STAGING_SBINDIR_NATIVE}/httpd!'
+ }
+=20
+@@ -162,11 +159,6 @@ do_install:append:class-native() {
+     rm -rf ${D}/${PHP_LIBDIR}/php/.[a-z]*
+ }
+=20
+-do_install:prepend() {
+-    cat ${ACLOCALDIR}/libtool.m4 ${ACLOCALDIR}/lt~obsolete.m4 ${ACLOCALD=
+IR}/ltoptions.m4 \
+-        ${ACLOCALDIR}/ltsugar.m4 ${ACLOCALDIR}/ltversion.m4 > ${S}/build=
+/libtool.m4
+-}
+-
+ do_install:prepend:class-target() {
+     if ${@bb.utils.contains('PACKAGECONFIG', 'apache2', 'true', 'false',=
+ d)}; then
+         # Install dummy config file so apxs doesn't fail
 --=20
 2.43.0
 
