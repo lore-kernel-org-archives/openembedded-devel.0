@@ -1,121 +1,117 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 54E51C02181
-	for <webhook@archiver.kernel.org>; Fri, 24 Jan 2025 10:32:52 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.web11.8920.1737714770029998506
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A596C0218D
+	for <webhook@archiver.kernel.org>; Fri, 24 Jan 2025 10:58:52 +0000 (UTC)
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web11.9326.1737716330668053193
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Jan 2025 02:32:50 -0800
+ Fri, 24 Jan 2025 02:58:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ACx6Juf8;
- spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-385eed29d17so1027781f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 02:32:49 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=dgxzYxAd;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.48, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-aab925654d9so359071566b.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 02:58:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1737714768; x=1738319568; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=fC/eEmTTgvmeL+e64RAIzr24JMUJt102t5p5o51EYHQ=;
-        b=ACx6Juf8uAcoliLDobgkRNC5PWNMqA9NQePUDbToZuKdXYoPD1mT3Zepx9iRZpoKB+
-         xjDIqJGJIXAnj6upVtQnG7LbqsK85QV/3VI+hpcT5gkiK9XByuHvWHDxQUL8eahOrGe6
-         ZOnj+OOh13kx0pdVNO3jLzRL+rQKqwa3Uey1bI9gNoWV9Cf7D/JEX9Q9G0wKvR8Cj7mn
-         v3q9PSVjDYgSbAw6N3cY6slHGQkC3ro2xt8acOzuFooQEZXZVOq9lziOaj2qqNWMk8IE
-         0t0fYrJcyrMP/MsOQOSe6KVGvXrVyNRwaqKITwAlNfASo6SvH8U8CqpPSnQvpGQJPGUP
-         8DNg==
+        d=konsulko.com; s=google; t=1737716329; x=1738321129; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=mGG7sfxiT8yCoBGbA9WXI9MnAnWPLLCGfNGufmzICrI=;
+        b=dgxzYxAdIt7IZlR9nW+cqrAQqsQhpfuJuRz3kYHpqfspUxjnse65Dc3qkowVsfbWhG
+         NSWL9A1yQTvFZmZWQ35nNJWtEZTLUKIt8DtBBaB8rYFY6DaiiG6p5ZVHonWh6mIh21k5
+         S2WY2jlp/+ufIrJE6FwOc/j+qeZA8wlhcvlCY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737714768; x=1738319568;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=fC/eEmTTgvmeL+e64RAIzr24JMUJt102t5p5o51EYHQ=;
-        b=kG7zuGtBWG7gPrHRn1BWlRhtAYHyQ8V32xxrdZmIO44X4r/ChQ1Ua56Bo58xvIRFRT
-         KCkFJkGd7wmN7rW+plaglan8PMHE82+QB2DzBZFa6ZbU7a1Py3hwRexjGbzbJwg+QAri
-         YF0WliYppaqCOnyzTy/KIJmehB9iiuREn0kFEDsUJBunvgNdL5uu+aPH1l3y+1M1AzHH
-         XoZoB3y/7tg4poD55g5/cbVqhwDxxp0YXtxTZLiovoJ+CoKZbw578ojbJIt0URrwXK/E
-         YcCRwBRvtJ+QANoB4FeFIbnntEKtxFOHeurFHWf2AnhyHxsgwsi/rvenyFeuVqaU5A6H
-         IHJA==
-X-Gm-Message-State: AOJu0YxNui/o1tX6jiBo2XyiUm2bicq5gLDD1muPgcrBfL+WxA4SnYxo
-	rArdb2dzlHxterCEJm1qFADaYsjNJAIr4QTsi0ZKmRCtIIAfILqf3PuL+A==
-X-Gm-Gg: ASbGncuzq2prju042c3XTMLfit61NYikojGmyEFZobv4j0Js6yvWjKpoh6MZkn3rj40
-	AvdVMwB/AuQ8NGnzuztJg4HKd58Q15HafqKllSbmm0zHb0KZ1DXufIfj82qndd7nO+IYaSnKBSS
-	VjFQh+lxG5BRuq/fCdOYEyZGcqQImUCbIFGaTLkZCTUSPUqoepqoy5TWNyJYAL+obPctVAg/rX1
-	4FlevFkEJYqguBipGaxmluGbWegYMi+9Gn68lhDlYuum04er8p5H4uDVZKGtEWuy0S8RFteGFOh
-	Vd6jKhXDHfUfGU4j3Uib
-X-Google-Smtp-Source: AGHT+IFeHe4gmBfrkmWei/5DL/yu7n1sNPVHbMiBxKFOAXC5P5m56KylMK2vZWXG/yl5CV93Whrdkw==
-X-Received: by 2002:adf:ed50:0:b0:38a:9f7d:9339 with SMTP id ffacd0b85a97d-38bf566fe7amr23222258f8f.28.1737714768195;
-        Fri, 24 Jan 2025 02:32:48 -0800 (PST)
-Received: from localhost.localdomain ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38c2a188915sm2246642f8f.41.2025.01.24.02.32.47
+        d=1e100.net; s=20230601; t=1737716329; x=1738321129;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=mGG7sfxiT8yCoBGbA9WXI9MnAnWPLLCGfNGufmzICrI=;
+        b=dkM1fV3Ie4UJYDccpV8GYCoCJrQpd0hAm59wtfrbbBnjKwD2u2UAeGdJaNO3KtgLCZ
+         CQsKJ42eU0HEuyg/a9yuFHzTVT4zlezx7Hob+lN1TeYT0cYlSZ11S+Vo/bDPEmUSgm3e
+         txhXDGTutuHsuQrhYmjuUNGqmex2PoUBecgjbI9h/kv1B5QYiFvqHlKdlVn8l3x59rp5
+         hBfPeuKr2bYhUn0kEB5fgI5xu6mqYAIgVD9MoXL903j/SYgoa+ZTGjvSpwXNL8O6B1yn
+         69a28A2PM7LVrlnDGMCjCu8p1LQuKVsduodNCoitQ0m9aiS8Cff8LH34Qz/tNHbDPueh
+         bQ4Q==
+X-Gm-Message-State: AOJu0YxuW7gacL9qNJEEYm139ZM/N6aVHVeSh45zBxOTyNIUXUgEaG0X
+	5wdAXVx0Bog+2J1cUTqKT78HUkh82TDllqJLe4q3gBzbI8rzRas7C+RYcUuuYTdf5z16O9vjRU/
+	t
+X-Gm-Gg: ASbGnctADfy3TxzYqDlP9f5amgc7IMsMVsl93AaRFbIaWseFULwHeKo0uQ6FBf+sUD0
+	eBmmkUsa4jH1BaaqEpOdHn3gnBnhw9wLUL2fqLRp6jMj9im9Q/e6vSTAQfbHRyblTbwj3pEoV2i
+	7feYr3+UqWwuH6L+EsmoIkVPQfrHInB8hLItPGRK73EDiwsAJqXxeDhfH0ag3PhaXGHW9OWXoGI
+	FWIcZW4SSQ6c14bA2q2oYXCCPwJP4SDdMMnjUDu0wq76IJ0O5AKtU3/FjfNXFtF75K2LzXLgreF
+	7v2NG7omrM+3Q2U/QY0J5BvCGpRcgQ==
+X-Google-Smtp-Source: AGHT+IFNJUntBmnyxtveOKabdMjCkAcottTl2ppHpqZ7es6V3Dy+MQhDb9FKESmzFlzBErOPTtrOiQ==
+X-Received: by 2002:a17:907:3f11:b0:ab2:aea7:510f with SMTP id a640c23a62f3a-ab38b320310mr2924027766b.30.1737716328724;
+        Fri, 24 Jan 2025 02:58:48 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ab676117260sm107842766b.185.2025.01.24.02.58.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Jan 2025 02:32:47 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Fri, 24 Jan 2025 02:58:48 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gyorgy Sarvari <skandigraun@gmail.com>
-Subject: [meta-networking][PATCH] civetweb: fix pathes in cmake file
-Date: Fri, 24 Jan 2025 11:32:44 +0100
-Message-ID: <20250124103244.3904639-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.48.1
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/5] python3-hpack: Upgrade 4.0.0 -> 4.1.0
+Date: Fri, 24 Jan 2025 12:58:42 +0200
+Message-Id: <20250124105843.2035512-4-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250124105843.2035512-1-leon.anavi@konsulko.com>
+References: <20250124105843.2035512-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 10:32:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115051
+ <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 10:58:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115055
 
-1. The do_install:append() deleted the TMPDIR from the cmake file,
-however that left two absolute pathes in the file: /usr/lib/libssl.so
-and /usr/lib/libcrypto.so. In case another project is trying to link
-to civetweb-server with cmake, it fails with the following error:
+Upgrade to release 4.1.0:
 
-ninja: error: '/usr/lib/libssl.so', needed by 'examples/prometheus/prometheus_example', missing and no known rule to make it
+API Changes (Backward Incompatible)
 
-Instead of only deleting the TMPDIR, change it to ${CMAKE_SYSROOT} -
-a variable set by cmake.bbclass. This allows other projects to find
-the required interfacing libraries successfully.
+- Support for Python 3.6 has been removed.
+- Support for Python 3.7 has been removed.
+- Support for Python 3.8 has been removed.
+- Renamed InvalidTableIndex exception to InvalidTableIndexError.
 
-2. When linking to civetweb-server from another project using cmake,
-the cmake file verifies if the /usr/bin/civetweb binary exists. When using
-the class-target package, this file is not included in the sysroot during
-build-time, so this check fails with the following error:
+API Changes (Backward Compatible)
 
- CMake Error at ${RECIPE_SYSROOT}/usr/lib/cmake/civetweb/civetweb-targets.cmake:97 (message):
-   The imported target "civetweb::server" references the file
+- Support for Python 3.9 has been added.
+- Support for Python 3.10 has been added.
+- Support for Python 3.11 has been added.
+- Support for Python 3.12 has been added.
+- Support for Python 3.13 has been added.
+- Optimized bytes encoding of headers.
+- Updated packaging and testing infrastructure.
+- Code cleanup and linting.
+- Added type hints.
 
-      "${RECIPE_SYSROOT}/usr/bin/civetweb"
-
-   but this file does not exist.  Possible reasons include:
-
-To avoid this error, this check is deleted for class-target.
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-connectivity/civetweb/civetweb_1.16.bb       | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+ .../{python3-hpack_4.0.0.bb => python3-hpack_4.1.0.bb}        | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-connectivity/python-hpack/{python3-hpack_4.0.0.bb => python3-hpack_4.1.0.bb} (64%)
 
-diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb b/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
-index f5a699d5b..d061e1a81 100644
---- a/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
-+++ b/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
-@@ -41,8 +41,13 @@ PACKAGECONFIG[ssl] = "-DCIVETWEB_ENABLE_SSL=ON -DCIVETWEB_SSL_OPENSSL_API_1_1=OF
- PACKAGECONFIG[websockets] = "-DCIVETWEB_ENABLE_WEBSOCKETS=ON,-DCIVETWEB_ENABLE_WEBSOCKETS=OFF,"
+diff --git a/meta-python/recipes-connectivity/python-hpack/python3-hpack_4.0.0.bb b/meta-python/recipes-connectivity/python-hpack/python3-hpack_4.1.0.bb
+similarity index 64%
+rename from meta-python/recipes-connectivity/python-hpack/python3-hpack_4.0.0.bb
+rename to meta-python/recipes-connectivity/python-hpack/python3-hpack_4.1.0.bb
+index 9fc1d6c0d5..a5b9130d00 100644
+--- a/meta-python/recipes-connectivity/python-hpack/python3-hpack_4.0.0.bb
++++ b/meta-python/recipes-connectivity/python-hpack/python3-hpack_4.1.0.bb
+@@ -4,8 +4,8 @@ LICENSE = "MIT"
  
- do_install:append() {
--    sed -i -e 's|${RECIPE_SYSROOT_NATIVE}||g' \
--        -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/cmake/civetweb/civetweb-targets.cmake
-+    sed -i -e 's|${RECIPE_SYSROOT_NATIVE}|\$\{CMAKE_SYSROOT\}|g' \
-+        -e 's|${RECIPE_SYSROOT}|\$\{CMAKE_SYSROOT\}|g' ${D}${libdir}/cmake/civetweb/civetweb-targets.cmake
-+}
-+
-+do_install:append:class-target() {
-+    sed -i '/list(APPEND _cmake_import_check_files_for_civetweb::server "\${_IMPORT_PREFIX}\/bin\/civetweb" )/d' \
-+        ${D}${libdir}/cmake/civetweb/civetweb-targets-noconfig.cmake
- }
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5bf1c68e73fbaec2b1687b7e71514393"
  
- BBCLASSEXTEND = "native"
+-SRC_URI[sha256sum] = "fc41de0c63e687ebffde81187a948221294896f6bdc0ae2312708df339430095"
++SRC_URI[sha256sum] = "ec5eca154f7056aa06f196a557655c5b009b382873ac8d1e66e79e87535f1dca"
+ 
+-inherit pypi setuptools3
++inherit pypi python_setuptools_build_meta
+ 
+ RDEPENDS:${PN} += "python3-logging"
 -- 
-2.48.1
+2.39.5
 
 
