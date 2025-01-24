@@ -1,164 +1,170 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C99EC02182
-	for <webhook@archiver.kernel.org>; Fri, 24 Jan 2025 02:53:49 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.web11.3428.1737687225364197879
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B6B09C0218B
+	for <webhook@archiver.kernel.org>; Fri, 24 Jan 2025 03:57:29 +0000 (UTC)
+Received: from mail-oa1-f48.google.com (mail-oa1-f48.google.com [209.85.160.48])
+ by mx.groups.io with SMTP id smtpd.web10.4215.1737691035841702370
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Jan 2025 18:53:45 -0800
+ Thu, 23 Jan 2025 19:57:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=cJHerVUS;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1737687226; x=1769223226;
-  h=from:to:cc:subject:date:message-id;
-  bh=/XLBFYlKQHxIaJfAoGv8bqeaRcmcGPeTSas8CpmDMUU=;
-  b=cJHerVUSU6BH9mAeyeWX7HD8PHXagnJ4HwgiToB4KLegd0XeEo8/px8f
-   k1Tz/hgGqM34apqC7FlCINs8f3esFFQvHUH7RGjG9FPe6EKPrZQgpnkVt
-   97O7uRchNIOEe/MIKkvKWtcBTcKb+y+NAY9BZAB/YaRiw/YwybVTMb2PM
-   +wkvfKrrGfqv9NOW+yXtWK3JcmacZRFwAZMrdP/jfFFd9vVAfatHp8wBe
-   AOuBIFvdHT4PxsWSTgIRsVXJAz53yBjZdgDkD6lAAPuRyNovzYFTRswRK
-   Yt4Jx0cTVG8vqubzJt/h0ajRlSeUS/StO18xjo6qHLH/oByt/Da5XSeH+
-   g==;
-X-CSE-ConnectionGUID: Y6AW3uPiTPO8Ulzl0Jt1Rg==
-X-CSE-MsgGUID: wkfylQFgQcaK+dNDWaBFmQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11324"; a="190107962"
-X-IronPort-AV: E=Sophos;i="6.13,230,1732546800"; 
-   d="scan'208";a="190107962"
-Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
-  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Jan 2025 11:53:43 +0900
-Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 52440D500C
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 11:53:40 +0900 (JST)
-Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 1E20FD50FB
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 11:53:40 +0900 (JST)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 865B76B4EE
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 11:53:39 +0900 (JST)
-Received: from localhost.localdomain.localdomain (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 0989C1A000B;
-	Fri, 24 Jan 2025 10:53:38 +0800 (CST)
-From: wangmy@fujitsu.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH v2] smarty: update 4.5.5 -> 5.4.2
-Date: Fri, 24 Jan 2025 10:53:35 +0800
-Message-Id: <1737687215-11485-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28942.004
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28942.004
-X-TMASE-Result: 10--6.863000-10.000000
-X-TMASE-MatchedRID: B4VcMIpPJ83RhEyb9f1sjvLeH1FBnhK0CZa9cSpBObmkob0Y35+HFOvn
-	/O99cHKFlHVH/UHDB9Hmn3xyPJAJoo3oygjMeK7eSs47mbT7SAQXjfR3d0weRllDV0KgHSWHh+t
-	oLLKXwRFaXB4a+1zK4ndNoXv6UJm+uEVa2AYyQQm3D7EeeyZCM5iQDIJsDspXsp5O052MzLqbV4
-	X+HXCyWRh5GPceNmDj6OG4wZVzsQH3FZ31mJ166AvBTB90+he+fS0Ip2eEHnyFh/DzryTTljOrH
-	oO19Vm2joczmuoPCq0Y3lWAXSb8w/tjj+6hcX3Goi3QbzxLfPR5lcKOQ1xSg8Qn7PUS8cgYj/iM
-	yh0meCNhRyTmXlK7djN0AWnpB297JGeZfctgEsUdJuEZuYbKVcUkrvIudlEZl07dDrsiYvyCLhF
-	TP3QRDAbYwClu/qh3
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=K2SCvVfL;
+ spf=pass (domain: gmail.com, ip: 209.85.160.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f48.google.com with SMTP id 586e51a60fabf-2a0206590a7so1021857fac.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Jan 2025 19:57:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1737691035; x=1738295835; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=VZgAaAPSPFRQRJkL+K9vCl9eMo0gvQsYUa063DX655U=;
+        b=K2SCvVfL1Te8Jf5HZ5SFATaogPilacFZo81l0vJeppc/IUsHtJA29XBLQXvvgljAbq
+         N1xa/yeP9mP+JH550XQGYTlkZTotCHM7WnSBMBdkiJ5uYXxrhTII0iIj5mc2k7mkhlKw
+         4WEV9k2boW1iaC+i12h6KRlviLbFv9Y7EaS7C6sHxrrD33vGAiUPjlOwcwsShVkdTNXo
+         6Sqqy/oFZ1K62VhHETaaEc0plpPDvwe9IisuJ1mRsWUvjMayMzwvmXlklv30TAhpHF+9
+         AnDEVhOcX/fMLjAC0uUwqRY9vAxCeFQ65ZKm+n9d8A24lR9JUw/2/y4/bRqFGnZNMq7E
+         bxNA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1737691035; x=1738295835;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=VZgAaAPSPFRQRJkL+K9vCl9eMo0gvQsYUa063DX655U=;
+        b=Y3tK4fpDdqn6ckDt2fm8EMNkLDgnNKH/HNfZEgxFgMbc3iVNV3HjLdQitAAw9Wbcbj
+         oSA1HJQrk2EHZWf/YwZY8/dv9zAfLFoayxz00gs4WnvQttUccv6ms6/LLwidTjNOapCm
+         T5/3kvC9ulp8N1tqOQZ4Sm/5SZeawNsY7i054luOPFw/2rEuTjkOTX5D3EJ7r2ziOXQp
+         acjVnjZruUTQgTKpKiuwOSL+8lZJdNfoUn9aCyeIIfqM5V1olUB+4rGY47WPH5VAqECO
+         SGP3UkTw09yaW1aCc5r2sZx9QeVFTljF3Q7o4j/fkYxenvQ0bJlkwQtu1jK9d1+TbyeG
+         RnUw==
+X-Gm-Message-State: AOJu0YxJ0JGab6/dimw/MiOfiNHlCXdyul4LkY3+xICWKjcg1hRCRZxP
+	1D7jeJ+7bwwhqXpxyrW4nw3qDPWZ71XG9AH2zwuMXGqhTmsL7UHCZ8vc2Eb8cgLVmF0hWf+JJRh
+	kcAGSYYHGcgcGY08QpHQtSkpfWAA=
+X-Gm-Gg: ASbGncv/HUJu0mNJuVpOczys6O1EvpM+/sF1VE73bZAsQiXLhgi7fa5uOe93R43iXEi
+	CXhOuxvE018lQhuDyytifO0G5vTl6vI8emFZHfzacl+NHuGqGq/1pydX5JIA+d3YC5a2f1VoeJX
+	XL
+X-Google-Smtp-Source: AGHT+IHY3/CCYtfuPAJasBXE6mN6VnwKST5ZKWPCsQEKeSsYLI4yUEazDBwgqVYHirxrEvbVc+8HQHPfFhnFag1KkmM=
+X-Received: by 2002:a05:6871:5317:b0:29e:d36:6e39 with SMTP id
+ 586e51a60fabf-2b1c08c6401mr18950511fac.10.1737691035032; Thu, 23 Jan 2025
+ 19:57:15 -0800 (PST)
+MIME-Version: 1.0
+References: <1737360846-4824-1-git-send-email-wangmy@fujitsu.com> <1737360846-4824-26-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1737360846-4824-26-git-send-email-wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 23 Jan 2025 19:56:49 -0800
+X-Gm-Features: AWEUYZl5LzI4J3IPaSBZUj5eEe8M677jrtKCeSyORSlrk9BucOUnCqUm2xDPiYk
+Message-ID: <CAMKF1soSF+zmrhhmZMXgUE883P=YROM3Gbw0iXe4-pC7bhLoPg@mail.gmail.com>
+Subject: Re: [oe] [meta-python] [PATCH 26/32] python3-semver: upgrade 3.0.2 -> 3.0.3
+To: wangmy@fujitsu.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 02:53:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115046
+ <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 03:57:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115047
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+ptests fails with this version
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- .../recipes-support/smarty/smarty_4.5.5.bb    | 28 -------------
- .../recipes-support/smarty/smarty_5.4.2.bb    | 40 +++++++++++++++++++
- 2 files changed, 40 insertions(+), 28 deletions(-)
- delete mode 100644 meta-oe/recipes-support/smarty/smarty_4.5.5.bb
- create mode 100644 meta-oe/recipes-support/smarty/smarty_5.4.2.bb
+file /usr/lib/python3-semver/ptest/tests/test_semver.py, line 27
+  def test_should_versioninfo_to_dict(version):
+E       fixture 'version' not found
+>       available fixtures: cache, capfd, capfdbinary, caplog, capsys, caps=
+ysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, re=
+cord_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_=
+factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
 
-diff --git a/meta-oe/recipes-support/smarty/smarty_4.5.5.bb b/meta-oe/recipes-support/smarty/smarty_4.5.5.bb
-deleted file mode 100644
-index e8a63a74a7..0000000000
---- a/meta-oe/recipes-support/smarty/smarty_4.5.5.bb
-+++ /dev/null
-@@ -1,28 +0,0 @@
--DESCRIPTION = "the compiling PHP template engine"
--SECTION = "console/network"
--HOMEPAGE = "https://www.smarty.net/"
--
--LICENSE = "GPL-3.0-only"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=2c0f216b2120ffc367e20f2b56df51b3"
--
--DEPENDS += "php"
--
--SRC_URI = "git://github.com/smarty-php/smarty.git;protocol=https;branch=support/4"
--
--SRCREV = "c4851c12e34ff80073ddeb7d98b059d57dea9de2"
--
--S = "${WORKDIR}/git"
--
--do_install() {
--        install -d ${D}${datadir}/php/smarty3/libs/
--        install -m 0644 ${S}/libs/*.php ${D}${datadir}/php/smarty3/libs/
--
--        install -d ${D}${datadir}/php/smarty3/libs/plugins
--        install -m 0644 ${S}/libs/plugins/*.php ${D}${datadir}/php/smarty3/libs/plugins/
--
--        install -d ${D}${datadir}/php/smarty3/libs/sysplugins
--        install -m 0644 ${S}/libs/sysplugins/*.php ${D}${datadir}/php/smarty3/libs/sysplugins/
--}
--FILES:${PN} = "${datadir}/php/smarty3/"
--
--CVE_STATUS[CVE-2020-10375] = "cpe-incorrect: The recipe used in the meta-openembedded is a different smarty package compared to the one which has the CVE issue."
-diff --git a/meta-oe/recipes-support/smarty/smarty_5.4.2.bb b/meta-oe/recipes-support/smarty/smarty_5.4.2.bb
-new file mode 100644
-index 0000000000..95673e2bb9
---- /dev/null
-+++ b/meta-oe/recipes-support/smarty/smarty_5.4.2.bb
-@@ -0,0 +1,40 @@
-+SUMMARY = "Template engine for PHP"
-+DESCRIPTION = "\
-+    Smarty facilitates the separation of presentation (HTML/CSS) from \
-+    application logic. This implies that PHP code is application logic, and is \
-+    separated from the presentation. \
-+"
-+HOMEPAGE = "https://smarty-php.github.io/smarty/"
-+BUGTRACKER = "https://github.com/smarty-php/smarty/issues"
-+
-+LICENSE = "GPL-3.0-only"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=2c0f216b2120ffc367e20f2b56df51b3"
-+
-+SRC_URI = "git://github.com/smarty-php/smarty.git;protocol=https;branch=master"
-+
-+SRCREV = "642a97adcc2bf6c1b2458d6afeeb36ae001c1c2f"
-+
-+S = "${UNPACKDIR}/git"
-+
-+INHIBIT_DEFAULT_DEPS = "1"
-+
-+inherit allarch
-+
-+# `make clean` removes files, they can't be rebuild with `make all` 
-+CLEANBROKEN = "1"
-+
-+do_configure[noexec] = "1"
-+do_compile[noexec] = "1"
-+
-+do_install() {
-+        install -d ${D}${datadir}/php/smarty3/libs/
-+        install -m 0644 ${S}/libs/*.php ${D}${datadir}/php/smarty3/libs/
-+
-+        install -d ${D}${datadir}/php/smarty3/src/
-+        cp -rf ${S}/src/* ${D}${datadir}/php/smarty3/src/
-+}
-+FILES:${PN} += "${datadir}/php/smarty3/"
-+
-+RDEPENDS:${PN} = "php"
-+
-+CVE_STATUS[CVE-2020-10375] = "cpe-incorrect: The recipe used in the meta-openembedded is a different smarty package compared to the one which has the CVE issue."
--- 
-2.43.0
+/usr/lib/python3-semver/ptest/tests/test_semver.py:27
+ERROR: tests/test_semver.py:test_should_versioninfo_to_dict
 
+file /usr/lib/python3-semver/ptest/tests/test_semver.py, line 33
+  def test_should_versioninfo_to_tuple(version):
+E       fixture 'version' not found
+>       available fixtures: cache, capfd, capfdbinary, caplog, capsys, caps=
+ysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, re=
+cord_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_=
+factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/usr/lib/python3-semver/ptest/tests/test_semver.py:33
+ERROR: tests/test_semver.py:test_should_versioninfo_to_tuple
+
+file /usr/lib/python3-semver/ptest/tests/test_semver.py, line 39
+  def test_version_info_should_be_iterable(version):
+E       fixture 'version' not found
+>       available fixtures: cache, capfd, capfdbinary, caplog, capsys, caps=
+ysbinary, doctest_namespace, monkeypatch, pytestconfig, record_property, re=
+cord_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_=
+factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/usr/lib/python3-semver/ptest/tests/test_semver.py:39
+ERROR: tests/test_semver.py:test_version_info_should_be_iterable
+
+On Mon, Jan 20, 2025 at 12:14=E2=80=AFAM wangmy via lists.openembedded.org
+<wangmy=3Dfujitsu.com@lists.openembedded.org> wrote:
+>
+> From: Wang Mingyu <wangmy@fujitsu.com>
+>
+> License-Update: Replace organization placeholder
+>
+> Changelog:
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> - Use meta directive for SEO
+> - Move search box more at the top
+> - Update workflow file
+> - Improve type hints to fix TODOs
+> - Gha add python313
+> - Improve private _nat_cmp() method
+> - Modernize project configs with pyproject.toml
+> - Turn our Markdown issue templates into YAML
+> - Fix comparison with subclasses
+>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  .../{python3-semver_3.0.2.bb =3D> python3-semver_3.0.3.bb}      | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python3-semver_3.0.2.bb =3D>=
+ python3-semver_3.0.3.bb} (67%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-semver_3.0.2.bb =
+b/meta-python/recipes-devtools/python/python3-semver_3.0.3.bb
+> similarity index 67%
+> rename from meta-python/recipes-devtools/python/python3-semver_3.0.2.bb
+> rename to meta-python/recipes-devtools/python/python3-semver_3.0.3.bb
+> index b329d65e1f..6767c70da2 100644
+> --- a/meta-python/recipes-devtools/python/python3-semver_3.0.2.bb
+> +++ b/meta-python/recipes-devtools/python/python3-semver_3.0.3.bb
+> @@ -2,9 +2,9 @@ DESCRIPTION =3D "Python module for Semantic Versioning"
+>  HOMEPAGE =3D "https://github.com/python-semver/python-semver"
+>  BUGTRACKER =3D "https://github.com/python-semver/python-semver"
+>  LICENSE =3D "BSD-3-Clause"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Dd9da679db3bdce30a1b4328d5=
+c474f98"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D3ce011bad2c5218ddd4973952=
+a6db93a"
+>
+> -SRC_URI[sha256sum] =3D "6253adb39c70f6e51afed2fa7152bcd414c411286088fb4b=
+9effb133885ab4cc"
+> +SRC_URI[sha256sum] =3D "8769a03a93507fecdf19b6eefb08d5e95b462504871a61e2=
+9e09798822888c94"
+>
+>  inherit pypi python_setuptools_build_meta ptest-python-pytest
+>
+> --
+> 2.43.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#114988): https://lists.openembedded.org/g/openembedde=
+d-devel/message/114988
+> Mute This Topic: https://lists.openembedded.org/mt/110711751/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
