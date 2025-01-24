@@ -2,61 +2,61 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B74EAC02181
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CC012C0218C
 	for <webhook@archiver.kernel.org>; Fri, 24 Jan 2025 18:46:39 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.web11.337.1737744396761261814
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.web10.321.1737744397849271483
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Jan 2025 10:46:37 -0800
+ Fri, 24 Jan 2025 10:46:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=B83+Tq84;
- spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-385ddcfc97bso2148658f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 10:46:36 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=BzhMzOIq;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-438a39e659cso15867645e9.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 10:46:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1737744395; x=1738349195; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1737744396; x=1738349196; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=eHI8itXC7ILDEQnkNxYSks1P8XIZqa4JWJ0iKATDndM=;
-        b=B83+Tq845cpH7+vkYfN13owKuv0k2xgtFVdVt3t+cuC4foPLCgsLo4X7ZK/jeHyejr
-         BcI+40cZcxJmpDuTd+USTh4w8o+g9QD7dkO3pWIf5qtHjArFM7Ujig1Aw0wLDn8X9P00
-         iZ8bTJPd2o6QY3+B3dRPPQiWZgpveFpobf78T/SDRca4QIIU9tQ8b//BCrgQSrMOXJwb
-         S9QAd/RkHdaMMFX1LPe1/PwCGmND5B2fWE4OnUaQZ5ZMaWV/J41WYOFVAjNsGp8whChL
-         lJfx9Xm85eEf7Gz/Rqwh1ebzmULePXWRCrDqyw2c3i7huuAgdTtOTt9c411YUtgNSsit
-         ibMg==
+        bh=2wJEj0UIujTYhTAZeNNlsk81saLCbFGEgnqC+WqUlpU=;
+        b=BzhMzOIqijLTiC2T0QmYGZTYoxzEPsaConXgsvzHgRNGiAUq/Sxwl3XBZAXMX2zfqn
+         8HBUC/I64+rfjhjzjOFSyWx9U7t/Y2glMeP8E6x1LgcE7VUg3b+5FgpVIi6k7EZWJuXf
+         IBfjOhRIELRplHgWo1EmZwp5tQIKvBAowIeIoiA6KR63spbDvZ0lDFuGUySwfoBiG36G
+         tMF5VJtSoFLvltEiSYr7Na+sDU3VERCRGeHnAfLZ44nYtwkrJJ+qZ+GrqRw/ZTZ6DQp9
+         uvSkItd/Bgv3bDL1OwHoHj2VA5jmMPVXGB0kOss+DD7PdZfql2Lbg55Njf3ckJRsbNGv
+         logg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737744395; x=1738349195;
+        d=1e100.net; s=20230601; t=1737744396; x=1738349196;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=eHI8itXC7ILDEQnkNxYSks1P8XIZqa4JWJ0iKATDndM=;
-        b=RlKjHNxskhkvuu9W6NlxHKVGl8zBiv8QbB+jv2bGmECyw+AZtsl9irxkPfJvhzUwSB
-         UfkCLZMjfiXIa7RZPQqThwI298gQEOA/FzTZNtEcIxQ/Z+U/UDYC+zCUccAfp8ym5xKZ
-         KIhtKQ7vqryFy441dzFJPEPhPFrsBc5H9fq69JB+bwV8BuYinvLuQSrPe5ylzUDbnoyy
-         Hb7IHgyA/dpIqZu1MNVGtrxTseu8ACApPn7cxUATtqX0kgy8jbHqW2dI+e/Z9xXaYQww
-         CfbJfpTLnxt02NvV/KXcPYPwCozXnCbGWQBXr+nsJMlx/jsjQr/rxgKZxXsTdO+ElfZX
-         ZZtQ==
-X-Gm-Message-State: AOJu0YyGTtudDxBBDRIbp1uBdxcgqB8f8EdW2wzfjnM87mIJAHK1ZapE
-	/5oKzhJKWB3icWD8PugHJZWTXbj6qfDE2hOd7d0JyL/VVoUIBAZE2BJc9g==
-X-Gm-Gg: ASbGnctBHG9+/a2apFjh7fy2D+p4thB/+KxER/9TRZ6/CCvgyeUoi3TSlTwyKGTfHlY
-	RZHplQ2ijZLxLte6rfZtIP6XoasveiLQBC4g0lc4aBlLD5AcZBpfXAms+Q8kfaGpPkx2VOsxoyi
-	9KtQjN/6Xfmgwyzp/G4gQrWFjmbBtIZUfm+kTo/t6giisNncBJ7oKzxnDzDa7F5jT1VtXdCNgxx
-	YPq9PLkFgY6l3aq7HT0amYmW+LD40lMePz+Iip3YXmc6ixHpS0Ha1j+d7GP6l1UdfMjKeCxpcbD
-	1py2aWqmIAOWctncdQgU
-X-Google-Smtp-Source: AGHT+IESHxzb5B6cP3jATh9ZKqxA6TErOqQN9JASTKUpwR4Wn1ABhBg2931dr5v6m5ARLQAGVpqz7w==
-X-Received: by 2002:a05:6000:1aca:b0:385:fb8d:8658 with SMTP id ffacd0b85a97d-38bf57b7fbdmr33095416f8f.40.1737744394879;
-        Fri, 24 Jan 2025 10:46:34 -0800 (PST)
+        bh=2wJEj0UIujTYhTAZeNNlsk81saLCbFGEgnqC+WqUlpU=;
+        b=diqYFzT3jBUWx76JWim2KIP5ig4DWhfTRnTs1j/mfi8TtBeAHqnlHvLwV6WOQ07SU2
+         SkBUpZTFqUrH2v2Xt5G3QhLge2Nh5LstiytyYP3NA7OqlbLYNRVjFlnm0j3VcEM+BzU1
+         sSPWAnWIv71wStAKKh9eNa3GjOqZLKz2kGIl+HVlbLgd/kwvaCD5LzW62C5BmnAyJ4yU
+         QOmqHHBxK6FUftA+3ob/jjl1s4MeoDWNw/JMqI/pdhZSNWXY6zSenfK2Ts2xXoaFbte9
+         u4kfpqJr1fDALZqRsFYS8m47LFlEOCvhD4Kxyv3mgVskzFvNR4yK//ptQzz3+3K70QY9
+         H7qA==
+X-Gm-Message-State: AOJu0YwFr4j5spfq7DtbvaCpWbg8lQFqyH1ddAZBAJ3LW7/1c0CADHV6
+	/nmNALwOXiZXaB40KJ5drQcwtsz5Yzj0XzxGV5NUE947dX+QBclcUB+w9Q==
+X-Gm-Gg: ASbGncs7kHmgfqqgkZE1D8pdSSxqRzfH0EJYwlHKY1vwAT4RFVbCBQsK7pD9O1PwQOs
+	gSEHrJ/V31vtDn/N9r/izeVgQ4l4qrNZsL2/wW1uNEjUa24pzrfvUsRy0M7kYp/0OWFTkCU8Q9+
+	RoQg/VK/mechiKf7ijgLZrNhZ9P40cIs/68M82M6S9DjHfdlaLODv7BmzOGFL+reL/06/02edmq
+	A6+4zQGxsrdoh/KCzBwia3ExeN/Zqf2xPOieX8hbTPiG9Z7yCfSmXVy1ejoDFGvqZj3IC2Td8y/
+	aq+p7sedSrmFguw5R3Xa
+X-Google-Smtp-Source: AGHT+IG5qFefntvPq3QoQN3dErPdUdhHSlFhiiOjsexoLxOHI7hiel7oirZUfMmU3OOHlQ9466er0g==
+X-Received: by 2002:a05:600c:511b:b0:432:d797:404a with SMTP id 5b1f17b1804b1-4389142e0e8mr272758615e9.22.1737744396101;
+        Fri, 24 Jan 2025 10:46:36 -0800 (PST)
 Received: from localhost.localdomain ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-438bd4fa46esm35676385e9.1.2025.01.24.10.46.34
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-438bd4fa46esm35676385e9.1.2025.01.24.10.46.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Jan 2025 10:46:34 -0800 (PST)
+        Fri, 24 Jan 2025 10:46:35 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Gyorgy Sarvari <skandigraun@gmail.com>
-Subject: [meta-python][PATCH 2/4] python3-oletools: correct license file and checksum
-Date: Fri, 24 Jan 2025 19:46:29 +0100
-Message-ID: <20250124184631.35956-2-skandigraun@gmail.com>
+Subject: [meta-python][PATCH 4/4] python3-robotframework-seriallibrary: correct license file and checksum
+Date: Fri, 24 Jan 2025 19:46:31 +0100
+Message-ID: <20250124184631.35956-4-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250124184631.35956-1-skandigraun@gmail.com>
 References: <20250124184631.35956-1-skandigraun@gmail.com>
@@ -66,30 +66,30 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 18:46:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115070
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115072
 
 The PKG-INFO line referenced in the LIC_FILES_CHKSUM variable
 is outdated, and points to a non-license related detail.
 
-Instead use LICENSE.md to verify the license.
+Instead use the LICENSE file to verify the license.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-oletools_0.60.2.bb | 2 +-
+ .../python/python3-robotframework-seriallibrary_0.4.3.bb        | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-oletools_0.60.2.bb b/meta-python/recipes-devtools/python/python3-oletools_0.60.2.bb
-index 162ebcab2..991d0d1ba 100644
---- a/meta-python/recipes-devtools/python/python3-oletools_0.60.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-oletools_0.60.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.4.3.bb b/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.4.3.bb
+index 0f34a1366..c48c3e2ce 100644
+--- a/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.4.3.bb
++++ b/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.4.3.bb
 @@ -1,7 +1,7 @@
- SUMMARY = "Python tools to analyze security characteristics of MS Office and OLE files"
- HOMEPAGE = "https://github.com/decalage2/olefile"
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=181754d317256f1b037529d3e994e1b4"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=062477247e75fcb78ae3e1280be9e4e1"
+ SUMMARY = "Robot Framework test library for serial connection"
+ HOMEPAGE = "https://github.com/whosaysni/robotframework-seriallibrary"
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=1af2e051b493d9552af443cf2f99d480"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=ad407cda031a6aaf51a1fecaaa6e7d29"
  
- SRC_URI[sha256sum] = "ad452099f4695ffd8855113f453348200d195ee9fa341a09e197d66ee7e0b2c3"
+ SRC_URI[sha256sum] = "f20befe5c1106dd8ddca9f60a2f18bf5ec7d5f06f6f09a03fa66bae54777e6bb"
  
 -- 
 2.48.1
