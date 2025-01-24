@@ -2,202 +2,306 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE553C02181
-	for <webhook@archiver.kernel.org>; Fri, 24 Jan 2025 17:12:34 +0000 (UTC)
-Received: from mail-oa1-f41.google.com (mail-oa1-f41.google.com [209.85.160.41])
- by mx.groups.io with SMTP id smtpd.web10.17925.1737738749137170816
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 510ABC02181
+	for <webhook@archiver.kernel.org>; Fri, 24 Jan 2025 18:31:25 +0000 (UTC)
+Received: from mail-oa1-f52.google.com (mail-oa1-f52.google.com [209.85.160.52])
+ by mx.groups.io with SMTP id smtpd.web10.20010.1737743483902113935
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Jan 2025 09:12:29 -0800
+ Fri, 24 Jan 2025 10:31:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=i1rVpnON;
- spf=pass (domain: gmail.com, ip: 209.85.160.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f41.google.com with SMTP id 586e51a60fabf-29f7b5fbc9aso856353fac.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 09:12:29 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hTUx+pvE;
+ spf=pass (domain: gmail.com, ip: 209.85.160.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f52.google.com with SMTP id 586e51a60fabf-2a3939a758dso814550fac.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 10:31:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1737738748; x=1738343548; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=Tfh+qmzr0QwZztXHe33UDO9Z5HQ3636ZBFAH/5R6cU8=;
-        b=i1rVpnONQpiYQKBS6shmRyA78g9MgiEpIsX03+e7lGBitYytR16lEcQG50IAaFxfol
-         6BYdV1cCE+w6wOToP9R2cbKLrmeTo+IDvRtMC1WWi3RkTh75REGxB1iwS0hZ9umNLGbB
-         ncMdGVNIDc5EdbTQZ6jhl5R4OBvZlbOoZmVlOs7Z7nJHLAAYYUPCrnuW/WsLI3XEjsiV
-         RMqomSX1C/Zk0eYnJm8L1mM0lHF4B66LLugofTUk2W7NmiSkEoLTS8EpVh5dX3PftI9d
-         FrRd/h8VCDwnyi9SLl+Vb+QJVy4xqdMwA3NisMrUd1iBG1khk3ge1wUWfdpof68VAzzS
-         MmAQ==
+        d=gmail.com; s=20230601; t=1737743483; x=1738348283; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=4HH314DDq72IDnjyegS6iWh9aVq8K7dV9tWh0kvng/0=;
+        b=hTUx+pvEeZMgBAqB1lIF9v6jMCJWtcWaAyOu8LD2YK1+h1M0OAs35OGE8Q4JbOhkFr
+         8rj+wO7rzJVvQLwK1bEB/9KjR82BvcLenS3lkmLyBbJS7wNY8jbEW+oFnMVuS0HA0Ge4
+         h5NrMSfGc+ey/rmGuMKriKzaCZYTC6Ioy79omf/VcHml/dHWhEvPgjKcFFaGwiIvI+nm
+         28RJJ/+rTPN9AqjSIRWCpXnBtwc6zgmh5X9ZTN7NJLD9gjtE1rFHdUlDkbIhMxho3drC
+         mbfP20LTJXcFxUvVFX/dkNjfHg7ujEwwm3XpeHiH05oMN2Ee43CdWq4RMmFMeYIYMBqX
+         npoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737738748; x=1738343548;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Tfh+qmzr0QwZztXHe33UDO9Z5HQ3636ZBFAH/5R6cU8=;
-        b=MLo2i8ZZhgJAr3cJANdsQF0I7hOVk1f5eo5U6tfX/hhmlI/OiqY0EbDJHrNFABcmBT
-         7AkefxhMnWafr3ceGm2HKc3yvp4gDYbS8zi2ROkuLUevTmKXfTLjrWBVMCqLk0VwriND
-         CJBn8aymu+PM45gzt2e/h6j5mBFbpTsHenP/IHUkuGHnt1f6tO3Lmd7XMnq6ek15TZGy
-         8CIlyGKCI9JgsIcd2sh7CXi9HBWIJ4RvVNSD2bq0kH3ZZebZjkbJL5upbE74SoKs0lpk
-         Nmq/q815N8uu2kOyNvx1p6gBkwytnxWbB/z6ByY+ZXm/K8R51nNmkGZP2c7c17cWzMBN
-         i/xw==
-X-Gm-Message-State: AOJu0YwPc7HCFeF3Chg0ZDlpBXMonBzvBjFK5r5szXijr6SPpH6jpB7w
-	+hQjuw5pYAJc3ulO/Nzi3X7Hh9DhoQg1JTS5CZ/ZgTUelSVaDnKhkBZ9xmdKCwWFBFJ95CooYOE
-	cT7moFwItECThTJUZLOIuRTmcVDo=
-X-Gm-Gg: ASbGncuE3t1xMOzR/ljDt6vdK8KrVwIiQLfcngIoNZ5GUX30cI3sDP1yltjVtUbFl2O
-	IizIgyfHhwNxajnG9nbvFNssEAza85kU5vZizWsWpGOaQem5nJFRIzUKxKXEFtM80H/hfsA5rVa
-	CgR/jwCG/kmsol8qB4gg==
-X-Google-Smtp-Source: AGHT+IEyybFK/roUUQUUiT9TIvXG5Ojb/ZVq77YB2P9S9YyFvzQeWM8NBAfVpmrqQL92am2ymH8EiPKi7LUB9mWA3P0=
-X-Received: by 2002:a05:6871:a917:b0:296:c3cf:39ed with SMTP id
- 586e51a60fabf-2b1c0ce70a4mr17172608fac.38.1737738748298; Fri, 24 Jan 2025
- 09:12:28 -0800 (PST)
+        d=1e100.net; s=20230601; t=1737743483; x=1738348283;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=4HH314DDq72IDnjyegS6iWh9aVq8K7dV9tWh0kvng/0=;
+        b=Pzxr60CKCdqnDMP6KJnTaXSWnWgUf4ORgf0ThZU+zk77Y1IL+AkWpu5O/3fCqeSE6K
+         Jgeha/tQQZ06gMZMp5hLJ90TPV/qjfaGOrOItYRsJNygpmromiZF6yjJLri14lHnSt13
+         AdmIZIExRZ/0U8d+LZEKc5GavuA78/K6W6U56rC/aOrCwJzW14JenEYMnLUBsA9eZ/qO
+         Q+N6bwt12ZzkmrQ1W1MTxiUgTTHXnMwJ74GHb5Rd9oZkT3uQdao3f61zthwf38nmiz+e
+         KBfRT5jCegvY8vUfXr195B0chhigqlMWNUHTLx2PF/y8GtRoEFWt8520w2o6tQrL4JlF
+         PWfw==
+X-Gm-Message-State: AOJu0YyB/7wTXYqwenkXj0tw/m3oT7KuIJnCRUu2ufrryIkLcLCUs8yP
+	AuVCJrxeCF/gxNBUMmbOHY6Uw4NnpxPVBAsi8AWY+xFisW9kk79Kiv5pebrIAOZ678934EoTTDA
+	8rm4o+zi6dC2clcFEmFMApp1sMLE=
+X-Gm-Gg: ASbGncvMM7b55qY91AkZ8WqmciKInN3l3VeblJYgeeBBkUrOruxuvwjDivVhpQ+uRgj
+	6GEY8PpHG6zWy8vOSr5VMBN4PAlO8bmOt0aXReZKfEaDwlAlNhw998q7+1hS6
+X-Google-Smtp-Source: AGHT+IGWdMYq0nw3dqj0dyu+DC0eFEya2yXlyp4FOX9jHeebYGf2+O/XCE6jVzupSZcguxAcac69yAuunF9bSLxUulE=
+X-Received: by 2002:a05:6870:6f17:b0:29e:20c4:2217 with SMTP id
+ 586e51a60fabf-2b1c0c83509mr19481212fac.33.1737743483043; Fri, 24 Jan 2025
+ 10:31:23 -0800 (PST)
 MIME-Version: 1.0
-References: <20250124143401.1635224-1-ross.burton@arm.com> <20250124143401.1635224-4-ross.burton@arm.com>
-In-Reply-To: <20250124143401.1635224-4-ross.burton@arm.com>
+References: <c36f58fb-8afd-4540-983a-d54e19fbe324@gmail.com>
+In-Reply-To: <c36f58fb-8afd-4540-983a-d54e19fbe324@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 24 Jan 2025 09:12:17 -0800
-X-Gm-Features: AWEUYZkEoVmo1X5TiQ1hGzjiaWX26fBp8HQpAL2k56cLJ6_8AwBm1ntbxmHE2ws
-Message-ID: <CAMKF1sqVG+O1-5M611OipKDkLB37XSfG3o8Z1d7tvWex-spQbw@mail.gmail.com>
-Subject: Re: [oe] [PATCH 4/4] ntp: set CONFIG_SITE in do_compile
-To: ross.burton@arm.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000ce2666062c76d4b2"
+Date: Fri, 24 Jan 2025 10:30:56 -0800
+X-Gm-Features: AWEUYZnGXgWRiKMroz1_mL3t-3LMsZdpNwqOfg9FFfoRWDUsteHPiNmK5ZNk_tA
+Message-ID: <CAMKF1sqnMhvwc3OY=EF8_=xNOS7AtpSzuPu=ZkvT8_-NDjJPLQ@mail.gmail.com>
+Subject: Re: kirkstone merge request: Jan 24th
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 17:12:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115067
+ <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 18:31:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115068
 
---000000000000ce2666062c76d4b2
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+merged now thanks Armin
 
-On Fri, Jan 24, 2025 at 6:34=E2=80=AFAM Ross Burton via lists.openembedded.=
-org
-<ross.burton=3Darm.com@lists.openembedded.org> wrote:
-
-> Recent changes in to the autotools class in core means that it no longer
-> sets CONFIG_SITE for compile tasks.  However, ntp decides to reconfigure
-> itself mid-build, so the CONFIG_SITE values are lost.
+On Fri, Jan 24, 2025 at 8:24=E2=80=AFAM akuster808 <akuster808@gmail.com> w=
+rote:
 >
-
-This looks ok but larger question is have we looked at other recipes which
-maybe doing this eg I remember gcc and binutils do call configure scripts
-doing make
-
-What is the advantage of hiding site config from compile tasks ?
-
+> The following changes since commit 66ec16850573a7ec69248b81f9904cdfba79b9=
+30:
 >
-> Signed-off-by: Ross Burton <ross.burton@arm.com>
-> ---
->  meta-networking/recipes-support/ntp/ntp_4.2.8p18.bb | 5 +++++
->  1 file changed, 5 insertions(+)
+>    packagegroup-meta-multimedia: Remove library only packages from rdeps
+> (2025-01-01 09:13:52 -0500)
 >
-> diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p18.bb
-> b/meta-networking/recipes-support/ntp/ntp_4.2.8p18.bb
-> index 302cf9915f..6fae993482 100644
-> --- a/meta-networking/recipes-support/ntp/ntp_4.2.8p18.bb
-> +++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p18.bb
-> @@ -55,6 +55,11 @@ CVE_STATUS_NTP =3D " \
+> are available in the Git repository at:
 >
->  inherit autotools update-rc.d useradd systemd pkgconfig
+>    https://git.openembedded.org/meta-openembedded kirkstone-next
 >
-> +# For some reason this recipe reconfigures the nested configure.ac files
-> in
-> +# do_compile because libtool.m4 is newer than aclocal.m4, and that then
-> +# doesn't know about the site configuration.
-> +do_compile[prefuncs] +=3D "autotools_sitefiles"
-> +
->  # The ac_cv_header_readline_history is to stop ntpdc depending on either
->  # readline or curses
->  EXTRA_OECONF +=3D "--with-net-snmp-config=3Dno \
-> --
-> 2.43.0
+> for you to fetch changes up to de8681b4a2a101b99dd2c48d89a7de2ccd9a961f:
 >
+>    python3-sqlparse: Fix CVE-2024-4340 (2025-01-22 19:29:37 -0500)
 >
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#115065):
-> https://lists.openembedded.org/g/openembedded-devel/message/115065
-> Mute This Topic: https://lists.openembedded.org/mt/110790899/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> ----------------------------------------------------------------
+> Soumya Sambu (11):
+>        python3-django: Fix CVE-2024-38875
+>        python3-django: upgrade 4.2.15 -> 4.2.17
+>        python3-django: Fix CVE-2023-23969
+>        python3-django: Fix CVE-2024-39614
+>        python3-django: Fix CVE-2024-41989
+>        python3-django: Fix CVE-2024-41990
+>        python3-django: Fix CVE-2024-41991
+>        python3-django: Fix CVE-2024-45230
+>        python3-django: Fix CVE-2024-45231
+>        python3-django: Fix CVE-2024-53907
+>        python3-sqlparse: Fix CVE-2024-4340
 >
+> Wang Mingyu (1):
+>        libsass: upgrade 3.6.5 -> 3.6.6
 >
-
---000000000000ce2666062c76d4b2
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote gmail_quote_container"><d=
-iv dir=3D"ltr" class=3D"gmail_attr">On Fri, Jan 24, 2025 at 6:34=E2=80=AFAM=
- Ross Burton via <a href=3D"http://lists.openembedded.org">lists.openembedd=
-ed.org</a> &lt;ross.burton=3D<a href=3D"mailto:arm.com@lists.openembedded.o=
-rg">arm.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote clas=
-s=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;pad=
-ding-left:1ex">Recent changes in to the autotools class in core means that =
-it no longer<br>
-sets CONFIG_SITE for compile tasks.=C2=A0 However, ntp decides to reconfigu=
-re<br>
-itself mid-build, so the CONFIG_SITE values are lost.<br>
-</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">This looks ok bu=
-t larger question is have we looked at other recipes which maybe doing this=
- eg I remember gcc and binutils do call configure scripts doing make=C2=A0<=
-/div><div dir=3D"auto"><br></div><div dir=3D"auto">What is the advantage of=
- hiding site config from compile tasks ?</div><blockquote class=3D"gmail_qu=
-ote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex=
-"><br>
-Signed-off-by: Ross Burton &lt;<a href=3D"mailto:ross.burton@arm.com" targe=
-t=3D"_blank">ross.burton@arm.com</a>&gt;<br>
----<br>
-=C2=A0meta-networking/recipes-support/ntp/<a href=3D"http://ntp_4.2.8p18.bb=
-" rel=3D"noreferrer" target=3D"_blank">ntp_4.2.8p18.bb</a> | 5 +++++<br>
-=C2=A01 file changed, 5 insertions(+)<br>
-<br>
-diff --git a/meta-networking/recipes-support/ntp/<a href=3D"http://ntp_4.2.=
-8p18.bb" rel=3D"noreferrer" target=3D"_blank">ntp_4.2.8p18.bb</a> b/meta-ne=
-tworking/recipes-support/ntp/<a href=3D"http://ntp_4.2.8p18.bb" rel=3D"nore=
-ferrer" target=3D"_blank">ntp_4.2.8p18.bb</a><br>
-index 302cf9915f..6fae993482 100644<br>
---- a/meta-networking/recipes-support/ntp/<a href=3D"http://ntp_4.2.8p18.bb=
-" rel=3D"noreferrer" target=3D"_blank">ntp_4.2.8p18.bb</a><br>
-+++ b/meta-networking/recipes-support/ntp/<a href=3D"http://ntp_4.2.8p18.bb=
-" rel=3D"noreferrer" target=3D"_blank">ntp_4.2.8p18.bb</a><br>
-@@ -55,6 +55,11 @@ CVE_STATUS_NTP =3D &quot; \<br>
-<br>
-=C2=A0inherit autotools update-rc.d useradd systemd pkgconfig<br>
-<br>
-+# For some reason this recipe reconfigures the nested <a href=3D"http://co=
-nfigure.ac" rel=3D"noreferrer" target=3D"_blank">configure.ac</a> files in<=
-br>
-+# do_compile because libtool.m4 is newer than aclocal.m4, and that then<br=
+> Yogita Urade (2):
+>        poppler: fix CVE-2024-6239
+>        poppler: fix CVE-2024-56378
 >
-+# doesn&#39;t know about the site configuration.<br>
-+do_compile[prefuncs] +=3D &quot;autotools_sitefiles&quot;<br>
-+<br>
-=C2=A0# The ac_cv_header_readline_history is to stop ntpdc depending on eit=
-her<br>
-=C2=A0# readline or curses<br>
-=C2=A0EXTRA_OECONF +=3D &quot;--with-net-snmp-config=3Dno \<br>
--- <br>
-2.43.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#115065): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/115065" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/115065</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/110790899/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/110790899/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---000000000000ce2666062c76d4b2--
+> Zhang Peng (11):
+>        glade: fix CVE-2020-36774
+>        openjpeg: fix CVE-2024-56826
+>        openjpeg: fix CVE-2024-56827
+>        opensc: fix CVE-2024-1454
+>        opensc: fix CVE-2024-8443
+>        opensc: fix CVE-2024-45615
+>        opensc: fix CVE-2024-45616
+>        opensc: fix CVE-2024-45617
+>        opensc: fix CVE-2024-45618
+>        opensc: fix CVE-2024-45619
+>        opensc: fix CVE-2024-45620
+>
+> akash hadke (1):
+>        meta-oe: Remove True option to getVar calls
+>
+>   meta-oe/recipes-devtools/glade/glade/CVE-2020-36774.patch       | 54 ++
+>   meta-oe/recipes-devtools/glade/glade_3.22.2.bb |    1 +
+>   meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb |    2 +-
+>   meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb      | 12 +-
+>   ...1-opj_j2k_add_tlmarker-validate-that-current-tile-part.patch | 33 +
+>   ...1-sycc422_to_rgb-fix-out-of-bounds-read-accesses-when-.patch | 130 +=
+++
+>   meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb |    2 +
+>   meta-oe/recipes-kernel/spidev-test/spidev-test.bb |    2 +-
+>   meta-oe/recipes-kernel/usbip-tools/usbip-tools.bb |    2 +-
+>   meta-oe/recipes-support/opensc/files/CVE-2024-1454.patch        | 37 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45615-0001.patch  | 67 ++
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45615-0002.patch  | 36 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45615-0003.patch  | 35 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45615-0004.patch  | 36 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45615-0005.patch  | 34 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45616-0001.patch  | 52 ++
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45616-0002.patch  | 48 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45616-0003.patch  | 42 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45616-0004.patch  | 43 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45616-0005.patch  | 34 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45616-0006.patch  | 50 ++
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45616-0007.patch  | 56 ++
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45616-0008.patch  | 74 ++
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45616-0009.patch  | 68 ++
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45616-0010.patch  | 33 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45617-0001.patch  | 38 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45617-0002.patch  | 33 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45617-0003.patch  | 33 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45618-0001.patch  | 42 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45618-0002.patch  | 42 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45619-0001.patch  | 34 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45619-0002.patch  | 91 ++
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45619-0003.patch  | 83 ++
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45619-0004.patch  | 49 ++
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45619-0005.patch  | 33 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45619-0006.patch  | 63 ++
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45620-0001.patch  | 42 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45620-0002.patch  | 34 +
+>   meta-oe/recipes-support/opensc/files/CVE-2024-45620-0003.patch  | 50 ++
+>   meta-oe/recipes-support/opensc/files/CVE-2024-8443-0001.patch   | 60 ++
+>   meta-oe/recipes-support/opensc/files/CVE-2024-8443-0002.patch   | 55 ++
+>   meta-oe/recipes-support/opensc/opensc_0.22.0.bb                 | 32 +
+>   meta-oe/recipes-support/poppler/poppler/CVE-2024-56378.patch    | 78 ++
+>   .../recipes-support/poppler/poppler/CVE-2024-6239-0001.patch    | 1255
+> +++++++++++++++++++++++++++
+>   .../recipes-support/poppler/poppler/CVE-2024-6239-0002.patch    | 112 +=
+++
+>   meta-oe/recipes-support/poppler/poppler_22.04.0.bb |    5 +-
+>   meta-oe/recipes-support/sass/libsass_git.bb |    4 +-
+>   .../recipes-devtools/python/python3-django/CVE-2023-23969.patch | 108 +=
+++
+>   .../recipes-devtools/python/python3-django/CVE-2024-38875.patch | 161 +=
++++
+>   .../recipes-devtools/python/python3-django/CVE-2024-39614.patch | 138 +=
+++
+>   .../python/python3-django/CVE-2024-41989-0001.patch             | 48 +
+>   .../python/python3-django/CVE-2024-41989-0002.patch             | 48 +
+>   .../python/python3-django/CVE-2024-41989-0003.patch             | 57 ++
+>   .../python/python3-django/CVE-2024-41989-0004.patch             | 81 ++
+>   .../recipes-devtools/python/python3-django/CVE-2024-41990.patch | 69 ++
+>   .../recipes-devtools/python/python3-django/CVE-2024-41991.patch | 122 +=
+++
+>   .../recipes-devtools/python/python3-django/CVE-2024-45230.patch | 137 +=
+++
+>   .../recipes-devtools/python/python3-django/CVE-2024-45231.patch | 120 +=
+++
+>   .../recipes-devtools/python/python3-django/CVE-2024-53907.patch | 92 ++
+>   meta-python/recipes-devtools/python/python3-django_2.2.28.bb    | 12 +
+>   .../{python3-django_4.2.15.bb =3D> python3-django_4.2.17.bb} |    4 +-
+>   .../python/python3-sqlparse/CVE-2024-4340.patch                 | 48 +
+>   meta-python/recipes-devtools/python/python3-sqlparse_0.4.2.bb |    1 +
+>   63 files changed, 4483 insertions(+), 14 deletions(-)
+>   create mode 100644
+> meta-oe/recipes-devtools/glade/glade/CVE-2020-36774.patch
+>   create mode 100644
+> meta-oe/recipes-graphics/openjpeg/openjpeg/0001-opj_j2k_add_tlmarker-vali=
+date-that-current-tile-part.patch
+>   create mode 100644
+> meta-oe/recipes-graphics/openjpeg/openjpeg/0001-sycc422_to_rgb-fix-out-of=
+-bounds-read-accesses-when-.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-1454.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45615-0001.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45615-0002.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45615-0003.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45615-0004.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45615-0005.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45616-0001.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45616-0002.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45616-0003.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45616-0004.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45616-0005.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45616-0006.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45616-0007.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45616-0008.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45616-0009.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45616-0010.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45617-0001.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45617-0002.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45617-0003.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45618-0001.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45618-0002.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45619-0001.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45619-0002.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45619-0003.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45619-0004.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45619-0005.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45619-0006.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45620-0001.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45620-0002.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-45620-0003.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-8443-0001.patch
+>   create mode 100644
+> meta-oe/recipes-support/opensc/files/CVE-2024-8443-0002.patch
+>   create mode 100644
+> meta-oe/recipes-support/poppler/poppler/CVE-2024-56378.patch
+>   create mode 100644
+> meta-oe/recipes-support/poppler/poppler/CVE-2024-6239-0001.patch
+>   create mode 100644
+> meta-oe/recipes-support/poppler/poppler/CVE-2024-6239-0002.patch
+>   create mode 100644
+> meta-python/recipes-devtools/python/python3-django/CVE-2023-23969.patch
+>   create mode 100644
+> meta-python/recipes-devtools/python/python3-django/CVE-2024-38875.patch
+>   create mode 100644
+> meta-python/recipes-devtools/python/python3-django/CVE-2024-39614.patch
+>   create mode 100644
+> meta-python/recipes-devtools/python/python3-django/CVE-2024-41989-0001.pa=
+tch
+>   create mode 100644
+> meta-python/recipes-devtools/python/python3-django/CVE-2024-41989-0002.pa=
+tch
+>   create mode 100644
+> meta-python/recipes-devtools/python/python3-django/CVE-2024-41989-0003.pa=
+tch
+>   create mode 100644
+> meta-python/recipes-devtools/python/python3-django/CVE-2024-41989-0004.pa=
+tch
+>   create mode 100644
+> meta-python/recipes-devtools/python/python3-django/CVE-2024-41990.patch
+>   create mode 100644
+> meta-python/recipes-devtools/python/python3-django/CVE-2024-41991.patch
+>   create mode 100644
+> meta-python/recipes-devtools/python/python3-django/CVE-2024-45230.patch
+>   create mode 100644
+> meta-python/recipes-devtools/python/python3-django/CVE-2024-45231.patch
+>   create mode 100644
+> meta-python/recipes-devtools/python/python3-django/CVE-2024-53907.patch
+>   rename meta-python/recipes-devtools/python/{python3-django_4.2.15.bb
+> =3D> python3-django_4.2.17.bb} (61%)
+>   create mode 100644
+> meta-python/recipes-devtools/python/python3-sqlparse/CVE-2024-4340.patch
+>
 
