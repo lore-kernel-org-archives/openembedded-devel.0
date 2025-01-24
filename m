@@ -2,115 +2,98 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 833DCC0218C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 95E21C0218E
 	for <webhook@archiver.kernel.org>; Fri, 24 Jan 2025 10:58:52 +0000 (UTC)
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
- by mx.groups.io with SMTP id smtpd.web11.9327.1737716331448851206
+Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
+ by mx.groups.io with SMTP id smtpd.web11.9324.1737716329083366200
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Jan 2025 02:58:51 -0800
+ Fri, 24 Jan 2025 02:58:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=epBcbzQ8;
- spf=pass (domain: konsulko.com, ip: 209.85.218.54, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-aab6fa3e20eso342106166b.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 02:58:51 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=m7dJe9pt;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.49, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-aaf57c2e0beso419067466b.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 02:58:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1737716330; x=1738321130; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=G3JnWEfWmtFIvCZugAGkc6fKF8vwChO/Vi/lzZLxm0s=;
-        b=epBcbzQ8S+MhYD2IspkPIqfkBi6FuVQxHbEgDs7L5JweXsbF4fcilQ0cPKfktUsiQm
-         l1BZzaiPd4quywMK9QkUQSfjBNZciLF8si4u75Po4ppp5Oy/9Lv5gLc8u9DIBt8o8TtE
-         yAU7Z/xAvC/dKiduvtJukeXs6qRt2qzYSxtWs=
+        d=konsulko.com; s=google; t=1737716327; x=1738321127; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=483/p8ymbFE0TEPp/CdeeobBXHZg5fBZ0QRKL2kzpp0=;
+        b=m7dJe9ptZKVJgLlpneIi1kw+qImRikGsUt11/Bx0AiT74zJREcj4rMyyp4Jb/VovmG
+         1h173oJKCfw8FGMRMqxeOFmNNvZZMPObULHT0p1u5EVFfjsDuy81zsNPdbeYcLer4iVc
+         bJtdyvSHrTMX4UwXPgkNOFXt1jfH3X1/mgDHY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737716330; x=1738321130;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=G3JnWEfWmtFIvCZugAGkc6fKF8vwChO/Vi/lzZLxm0s=;
-        b=B2go5cKa4Bk+O4RSaK63Cavrhcxgdaq9vPwSAKmQuQ3Lta/yDuqBCuTz1BHA4AURDE
-         HjmJ7cmfyO1vl+zWo6S23wyoa/YNkaoIwV4p/VB3WlySDeIx/aiHfpNXmy4236o2bQQZ
-         RJ6EaloBOOCkOtSRJmvkr0PdkN6WYcHDV6iYtnpE5qvipGm15q+/Q9igYkOLd1lNXaUC
-         kCsmC1Sw27XCBdevGCqq4Y2CVjrNz3qs/oKf0ushQ8VMsNy+M2rRFPRfUEFZEH31ZTxY
-         7DDKoQIxQ4WFtUzF1MMIJMVaR9rwVPZB1KbV/kYK1JVeqDHULtwHLCEFwL5m04G/28nu
-         TcKQ==
-X-Gm-Message-State: AOJu0YwNgLgD8PpMLlXZNPZ3s1sssxWqe29z/0a5JqCPHAubZ4RBgT8f
-	GCrpE1ZeEhtGOnWh9Kd3DmaRU8TWF6jRbU5JmQrTl3k7Ho0oBXDiv5S2QC+UktGO9fEs1XnEl7A
-	i
-X-Gm-Gg: ASbGncuY0kqEFVO3hyPGiZ0Qi62XEj6lXxGrDmT/Nq/cr7ty0iwd+ZCFpfy2mbAua72
-	n/oqwles08urWfq1f/wD0qVN+kMtqfBzLH4ROUbQGwWq84/WedGro2h7LkyiqxcutfydOyzOUOH
-	MbHzGtkqNkrX0R+IKI1DcRbL+UQHFCmj+IZaEppIXSrmGVWobjqc9BR0umrFPl4MO7PILuod20G
-	OYm3mV/A5qC7g6oHV5mKqhknWf1IuvQpfFoBW75i3WL2JQBVt2n4gB3yYn+QRbg7wvclFHgRsiL
-	p2j/VCBUqHSYZr74n3ZORQKShSXmAg==
-X-Google-Smtp-Source: AGHT+IH9pbiHUs3GVGkO2rDRslnRxJudjY6jwr8VKUk1WAqY+4tMs7VDSw7Ar5jjl3uEUFZDwoCn2A==
-X-Received: by 2002:a17:907:3f23:b0:aae:e784:55c5 with SMTP id a640c23a62f3a-ab38b2a3eb9mr2603231866b.33.1737716329581;
-        Fri, 24 Jan 2025 02:58:49 -0800 (PST)
+        d=1e100.net; s=20230601; t=1737716327; x=1738321127;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=483/p8ymbFE0TEPp/CdeeobBXHZg5fBZ0QRKL2kzpp0=;
+        b=nPXzFlu4ZoX/lZseKQOrLOo5Tn4E3CG68VZSIMVSP5rkn6oNEyTDd1F0GFKFeSG4CW
+         7by0qbImWzG5F94bPMo4G+tNGEnhOWHYrcgBv4d5Om1ZzmDwb1kFtRUydLvbdvQvFdJv
+         fPhM/tHMF9QoCVc1W2Xd4UsTqnqy9fHMQyNgvM7ETXtvdDAQFcpU0HmHSR6IJbCttauV
+         1y+SNvmF1RtnaA9ycbLoTyHhGDG0IPjpSQzKhsSj4e7tvd0bLfPPW+kKDSZfbuMc3ODT
+         Ogo6F55sZhMq0pNpwpiHOhTfmNDMfQeynxRmqf+2S5uOgnbvsz9yrTJUFrawYYHvKrWP
+         xIhA==
+X-Gm-Message-State: AOJu0YxMIS7BYtmLnLi4sYEgyPfIigDG1xIR1nE8pINkzSkJtDXQ1coN
+	xewmH9GzWY+Oq6DoWNVQoczZKxUe4RHFmzA/2WMIVY8zEMaj5Ae1CsGcw27PVIeEpOsI1JmSgeE
+	s
+X-Gm-Gg: ASbGncvIywI+ad2B6swq0B/spCL+tuw8x2qQyzGgVfjJ6MO6E45wa4EAb4VfAmHHHZj
+	mOoUkj1ZlnTH6Li6vgNdDQvyQN9eheaahCvxZDdJbFLa/yTTVbK+snmaWM7m0UXqlUbtxI5Tghu
+	SKV992SPY39ABusoW6z7IecIsgO9wjZ9AWA2ncsmAwqIBJ88qIsMqpprXBHLlNzF5Oi3rrd+fAq
+	nNxUl3sNrFgfDg08yUXKVbqcafUJv8kb+u3gsYuXnTCpXIIw4YjIK8KVhTKxchIF2HvRRvELzJy
+	1ZinM6XF3ATYbjEVR3g=
+X-Google-Smtp-Source: AGHT+IFm6mBUqZkYEWEvgcevwa52jbgIIgsh/kgU16r3CGRif2XeJTk+ldUVYQ9aESUfmiJtRA7ZVg==
+X-Received: by 2002:a17:906:dc8c:b0:ab2:f937:b3aa with SMTP id a640c23a62f3a-ab38b4cff42mr2777798566b.56.1737716326150;
+        Fri, 24 Jan 2025 02:58:46 -0800 (PST)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ab676117260sm107842766b.185.2025.01.24.02.58.48
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ab676117260sm107842766b.185.2025.01.24.02.58.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Jan 2025 02:58:49 -0800 (PST)
+        Fri, 24 Jan 2025 02:58:45 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-hyperframe: Upgrade 6.0.1 -> 6.1.0
-Date: Fri, 24 Jan 2025 12:58:43 +0200
-Message-Id: <20250124105843.2035512-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-pocketsphinx: Upgrade 5.0.3 -> 5.0.4
+Date: Fri, 24 Jan 2025 12:58:39 +0200
+Message-Id: <20250124105843.2035512-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250124105843.2035512-1-leon.anavi@konsulko.com>
-References: <20250124105843.2035512-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 10:58:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115056
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115053
 
-Upgrade to release 6.1.0:
+Upgrade to release 5.0.4:
 
-API Changes (Backward Incompatible)
-
-- Support for Python 3.6 has been removed.
-- Support for Python 3.7 has been removed.
-- Support for Python 3.8 has been removed.
-
-API Changes (Backward Compatible)
-
-- Support for Python 3.10 has been added.
-- Support for Python 3.11 has been added.
-- Support for Python 3.12 has been added.
-- Support for Python 3.13 has been added.
-- Updated packaging and testing infrastructure.
-- Code cleanup and linting.
-- Improved type hints.
-
-Fixes:
-WARNING: python3-hyperframe-6.1.0-r0 do_check_backend: QA Issue:
-inherits setuptools3 but has pyproject.toml with
-setuptools.build_meta, use the correct class [pep517-backend]
+- Fix _pocketsphinx.pyx's set_alignment example
+- fix: evil version pinning must die.die.die
+- Fix typos discovered by codespell
+- GitHub Actions: Add Python 3.13 to the testing
+- Add a simple language model maker script
+- Add suggested packages to README.md
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ython3-hyperframe_6.0.1.bb => python3-hyperframe_6.1.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-connectivity/python-hyperframe/{python3-hyperframe_6.0.1.bb => python3-hyperframe_6.1.0.bb} (60%)
+ ...hon3-pocketsphinx_5.0.3.bb => python3-pocketsphinx_5.0.4.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pocketsphinx_5.0.3.bb => python3-pocketsphinx_5.0.4.bb} (90%)
 
-diff --git a/meta-python/recipes-connectivity/python-hyperframe/python3-hyperframe_6.0.1.bb b/meta-python/recipes-connectivity/python-hyperframe/python3-hyperframe_6.1.0.bb
-similarity index 60%
-rename from meta-python/recipes-connectivity/python-hyperframe/python3-hyperframe_6.0.1.bb
-rename to meta-python/recipes-connectivity/python-hyperframe/python3-hyperframe_6.1.0.bb
-index 2d46e96112..0d4bfcc584 100644
---- a/meta-python/recipes-connectivity/python-hyperframe/python3-hyperframe_6.0.1.bb
-+++ b/meta-python/recipes-connectivity/python-hyperframe/python3-hyperframe_6.1.0.bb
-@@ -4,6 +4,6 @@ LICENSE = "MIT"
+diff --git a/meta-python/recipes-devtools/python/python3-pocketsphinx_5.0.3.bb b/meta-python/recipes-devtools/python/python3-pocketsphinx_5.0.4.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-pocketsphinx_5.0.3.bb
+rename to meta-python/recipes-devtools/python/python3-pocketsphinx_5.0.4.bb
+index 4391da177e..2276ea8571 100644
+--- a/meta-python/recipes-devtools/python/python3-pocketsphinx_5.0.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pocketsphinx_5.0.4.bb
+@@ -6,7 +6,7 @@ LICENSE = "BSD-2-Clause | BSD-3-Clause | MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c4d720cdc9c6953091f65e8b01524bb4"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5bf1c68e73fbaec2b1687b7e71514393"
+ SRC_URI += "file://0001-cython-Use-cythyon3-in-cmake-check.patch"
+-SRC_URI[sha256sum] = "27f4de0ca2d2bce391ce87eaab84fe6f0bc059b306fd1702d5fe6549b66e1586"
++SRC_URI[sha256sum] = "17d2971e998490def9554b6ba41886708422af5b4ae888723b1b077aab0fe8d4"
  
--SRC_URI[sha256sum] = "ae510046231dc8e9ecb1a6586f63d2347bf4c8905914aa84ba585ae85f28a914"
-+SRC_URI[sha256sum] = "f630908a00854a7adeabd6382b43923a4c4cd4b821fcb527e6ab9e15382a3b08"
+ inherit cmake pkgconfig pypi python3native cython
  
--inherit pypi setuptools3
-+inherit pypi python_setuptools_build_meta
 -- 
 2.39.5
 
