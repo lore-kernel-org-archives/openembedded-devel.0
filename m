@@ -2,97 +2,106 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 95E21C0218E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 72B0EC0218B
 	for <webhook@archiver.kernel.org>; Fri, 24 Jan 2025 10:58:52 +0000 (UTC)
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web11.9324.1737716329083366200
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
+ by mx.groups.io with SMTP id smtpd.web11.9323.1737716328971233628
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 24 Jan 2025 02:58:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=m7dJe9pt;
- spf=pass (domain: konsulko.com, ip: 209.85.218.49, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-aaf57c2e0beso419067466b.3
+ dkim=pass header.i=@konsulko.com header.s=google header.b=tLxRKsFy;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.43, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-aaf60d85238so339389466b.0
         for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 02:58:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=konsulko.com; s=google; t=1737716327; x=1738321127; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=483/p8ymbFE0TEPp/CdeeobBXHZg5fBZ0QRKL2kzpp0=;
-        b=m7dJe9ptZKVJgLlpneIi1kw+qImRikGsUt11/Bx0AiT74zJREcj4rMyyp4Jb/VovmG
-         1h173oJKCfw8FGMRMqxeOFmNNvZZMPObULHT0p1u5EVFfjsDuy81zsNPdbeYcLer4iVc
-         bJtdyvSHrTMX4UwXPgkNOFXt1jfH3X1/mgDHY=
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=z+ylDCBuGMwCe9ILgAGqjrV6QZNODv7FRbbxeb3mcNM=;
+        b=tLxRKsFysfKVH0404KTTGppJrBFeRDYSCwbaPTirwXF7Zrc7McWbpeAG58y/YOlbqd
+         OKohi5tTmu+KUmfK+6ZeMi4on+y5CE1F7VL/LTPOpnpLxeweZupJP7k9HFOsb+UGvPSw
+         Z8hc4MecYmmV7AWN8gQUIe9H5TFmSIK+ZJV14=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1737716327; x=1738321127;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=483/p8ymbFE0TEPp/CdeeobBXHZg5fBZ0QRKL2kzpp0=;
-        b=nPXzFlu4ZoX/lZseKQOrLOo5Tn4E3CG68VZSIMVSP5rkn6oNEyTDd1F0GFKFeSG4CW
-         7by0qbImWzG5F94bPMo4G+tNGEnhOWHYrcgBv4d5Om1ZzmDwb1kFtRUydLvbdvQvFdJv
-         fPhM/tHMF9QoCVc1W2Xd4UsTqnqy9fHMQyNgvM7ETXtvdDAQFcpU0HmHSR6IJbCttauV
-         1y+SNvmF1RtnaA9ycbLoTyHhGDG0IPjpSQzKhsSj4e7tvd0bLfPPW+kKDSZfbuMc3ODT
-         Ogo6F55sZhMq0pNpwpiHOhTfmNDMfQeynxRmqf+2S5uOgnbvsz9yrTJUFrawYYHvKrWP
-         xIhA==
-X-Gm-Message-State: AOJu0YxMIS7BYtmLnLi4sYEgyPfIigDG1xIR1nE8pINkzSkJtDXQ1coN
-	xewmH9GzWY+Oq6DoWNVQoczZKxUe4RHFmzA/2WMIVY8zEMaj5Ae1CsGcw27PVIeEpOsI1JmSgeE
-	s
-X-Gm-Gg: ASbGncvIywI+ad2B6swq0B/spCL+tuw8x2qQyzGgVfjJ6MO6E45wa4EAb4VfAmHHHZj
-	mOoUkj1ZlnTH6Li6vgNdDQvyQN9eheaahCvxZDdJbFLa/yTTVbK+snmaWM7m0UXqlUbtxI5Tghu
-	SKV992SPY39ABusoW6z7IecIsgO9wjZ9AWA2ncsmAwqIBJ88qIsMqpprXBHLlNzF5Oi3rrd+fAq
-	nNxUl3sNrFgfDg08yUXKVbqcafUJv8kb+u3gsYuXnTCpXIIw4YjIK8KVhTKxchIF2HvRRvELzJy
-	1ZinM6XF3ATYbjEVR3g=
-X-Google-Smtp-Source: AGHT+IFm6mBUqZkYEWEvgcevwa52jbgIIgsh/kgU16r3CGRif2XeJTk+ldUVYQ9aESUfmiJtRA7ZVg==
-X-Received: by 2002:a17:906:dc8c:b0:ab2:f937:b3aa with SMTP id a640c23a62f3a-ab38b4cff42mr2777798566b.56.1737716326150;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=z+ylDCBuGMwCe9ILgAGqjrV6QZNODv7FRbbxeb3mcNM=;
+        b=eZc5pJ0GyfEF9tAgW9VD9pRXQD0Oy/tdlx52bLs9PJEPFRXZx4v+phxeLkCgtsG5BN
+         hICAhhVnZlX/u8MG+VKM2N2Is93g8EMP5ux7lN7mp13k1ujkZlug3/rPc7xMAZgBc++z
+         hxMVuaxXk07JEkyDnJkEGZwzEdg6xrXqL6OycGb8SrteSGbqOT2ow/UQXV9YRBn4L82T
+         Dwr8Yt/M+YBedUF0Usag0e05BXEBSf+N6VXE371fd7M7AfHXeRjqstQ6NILrGDWKIb61
+         486LkW/l1qIoSlqE5f6Amk/VZxp3r0wxdtFVSRzcAai1kWG1mZC95O2sWXBHxGxY+TmC
+         /MGw==
+X-Gm-Message-State: AOJu0YzwgBvv2Wk+yD4tcynw0KgYxx1NO/YCFm+U0YGAySAZ5HnRzOL+
+	dMdTYTuqzB2shSt8V9P1XmffoNmbv4DJsarmZM63sgd6doea2zjMwljmv/tOffsmJPc09P9ZXKt
+	W
+X-Gm-Gg: ASbGncu7JmpfSxO2p13Jue+OKsNA2S3V0J+nJKe3CWPAsQ+m71cUipf9S2GWY15PxSB
+	YOdxV3NoG5qJ2Xia5KaRZSrdhDUfO/jT16RGqqyTC3zQSQFSeVOMPrJjT1w98wxdUbOSKA3Piz9
+	Z3l71tPoRkLghg1EbSAKKg0AphuQdz0d0N9k2TWB7tT66xu1QHD+v1m/s0wmxV2wJiFiW/d6VWA
+	/zCAfMt2xFMIR8Qk39UwMetVhM6A870bneoSqyNuVU/WO9EQe1LyCWqP/0I0KgreEarSq4OteDw
+	60nrnHEH0PXOJk+3CBo=
+X-Google-Smtp-Source: AGHT+IGpev6f1PgvosxpHsI3ig+B6nHhPCEdorcO61Ufpb+nJ2PfU6djPPaqHU+0nBkbKa4G+6F/iw==
+X-Received: by 2002:a17:907:7da2:b0:aa6:8a1b:8b84 with SMTP id a640c23a62f3a-ab38b5342demr3058742566b.57.1737716326918;
         Fri, 24 Jan 2025 02:58:46 -0800 (PST)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ab676117260sm107842766b.185.2025.01.24.02.58.45
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ab676117260sm107842766b.185.2025.01.24.02.58.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Jan 2025 02:58:45 -0800 (PST)
+        Fri, 24 Jan 2025 02:58:46 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-pocketsphinx: Upgrade 5.0.3 -> 5.0.4
-Date: Fri, 24 Jan 2025 12:58:39 +0200
-Message-Id: <20250124105843.2035512-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-marshmallow: Upgrade 3.25.1 -> 3.26.0
+Date: Fri, 24 Jan 2025 12:58:40 +0200
+Message-Id: <20250124105843.2035512-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250124105843.2035512-1-leon.anavi@konsulko.com>
+References: <20250124105843.2035512-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 10:58:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115053
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115052
 
-Upgrade to release 5.0.4:
+Upgrade to release 3.26.0:
 
-- Fix _pocketsphinx.pyx's set_alignment example
-- fix: evil version pinning must die.die.die
-- Fix typos discovered by codespell
-- GitHub Actions: Add Python 3.13 to the testing
-- Add a simple language model maker script
-- Add suggested packages to README.md
+- Typing: Add type annotations and improved documentation for class
+  Meta <marshmallow.Schema.Meta> options.
+- Typing: Improve type coverage of marshmallow.Schema.SchemaMeta.
+- Typing: marshmallow.Schema.loads parameter allows bytes and
+  bytesarray.
+- Respect data_key when schema validators raise a ValidationError
+  <marshmallow.exceptions.ValidationError> with a field_name
+  argument.
+- Correctly handle multiple @post_load <marshmallow.post_load>
+  methods where one method appends to the data and another passes
+  pass_original=True.
+- URL fields now properly validate file paths.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...hon3-pocketsphinx_5.0.3.bb => python3-pocketsphinx_5.0.4.bb} | 2 +-
+ ...hon3-marshmallow_3.25.1.bb => python3-marshmallow_3.26.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pocketsphinx_5.0.3.bb => python3-pocketsphinx_5.0.4.bb} (90%)
+ rename meta-python/recipes-devtools/python/{python3-marshmallow_3.25.1.bb => python3-marshmallow_3.26.0.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pocketsphinx_5.0.3.bb b/meta-python/recipes-devtools/python/python3-pocketsphinx_5.0.4.bb
-similarity index 90%
-rename from meta-python/recipes-devtools/python/python3-pocketsphinx_5.0.3.bb
-rename to meta-python/recipes-devtools/python/python3-pocketsphinx_5.0.4.bb
-index 4391da177e..2276ea8571 100644
---- a/meta-python/recipes-devtools/python/python3-pocketsphinx_5.0.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pocketsphinx_5.0.4.bb
-@@ -6,7 +6,7 @@ LICENSE = "BSD-2-Clause | BSD-3-Clause | MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c4d720cdc9c6953091f65e8b01524bb4"
+diff --git a/meta-python/recipes-devtools/python/python3-marshmallow_3.25.1.bb b/meta-python/recipes-devtools/python/python3-marshmallow_3.26.0.bb
+similarity index 92%
+rename from meta-python/recipes-devtools/python/python3-marshmallow_3.25.1.bb
+rename to meta-python/recipes-devtools/python/python3-marshmallow_3.26.0.bb
+index ec7eff705c..a421a93e4c 100644
+--- a/meta-python/recipes-devtools/python/python3-marshmallow_3.25.1.bb
++++ b/meta-python/recipes-devtools/python/python3-marshmallow_3.26.0.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "\
+                     file://LICENSE;md5=27586b20700d7544c06933afe56f7df4 \
+                     file://docs/license.rst;md5=13da439ad060419fb7cf364523017cfb"
  
- SRC_URI += "file://0001-cython-Use-cythyon3-in-cmake-check.patch"
--SRC_URI[sha256sum] = "27f4de0ca2d2bce391ce87eaab84fe6f0bc059b306fd1702d5fe6549b66e1586"
-+SRC_URI[sha256sum] = "17d2971e998490def9554b6ba41886708422af5b4ae888723b1b077aab0fe8d4"
+-SRC_URI[sha256sum] = "f4debda3bb11153d81ac34b0d582bf23053055ee11e791b54b4b35493468040a"
++SRC_URI[sha256sum] = "eb36762a1cc76d7abf831e18a3a1b26d3d481bbc74581b8e532a3d3a8115e1cb"
  
- inherit cmake pkgconfig pypi python3native cython
+ inherit python_flit_core pypi ptest
  
 -- 
 2.39.5
