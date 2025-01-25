@@ -1,130 +1,90 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <richard.purdie@linuxfoundation.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E8CFC02181
-	for <webhook@archiver.kernel.org>; Fri, 24 Jan 2025 19:42:50 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.web10.1627.1737747764150098660
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E29BC0218C
+	for <webhook@archiver.kernel.org>; Sat, 25 Jan 2025 10:39:15 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.web10.7787.1737801550291830038
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Jan 2025 11:42:44 -0800
+ Sat, 25 Jan 2025 02:39:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=j989lMLh;
- spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-3862d16b4f5so1555639f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 11:42:43 -0800 (PST)
+ dkim=pass header.i=@linuxfoundation.org header.s=google header.b=hJ8IKwJe;
+ spf=pass (domain: linuxfoundation.org, ip: 209.85.128.45, mailfrom: richard.purdie@linuxfoundation.org)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-436ce2ab251so18612345e9.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Jan 2025 02:39:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1737747762; x=1738352562; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=TCNuhmZU1vvhv1VB5rXfLGzQPN8Wvmr5tDm/WGQw6gs=;
-        b=j989lMLhrxyUJxIvVDhSKT4dViYd1BB+2ZQC2aTHOTahcVAjhjwcYdpzsXYJf6bX+Q
-         QwsMP2JqPNkN6Cu8BlT0dhAo+St+fHL4wlzk+67J43/gFjzT9xwxO4qf+chPauX4BYn8
-         kB4XGR8E03vodzsoq8bccpkilbDMwIHkkuR2ZA+y2N0bnnu7BgxSC6EPZqqlKO7Jwb5k
-         UK6ObJFumayEhOrgTQb0rhlEJO1X8UzwdqtmFC9uevWHGi/9B8+4yCEicL25CFMBKU7f
-         ss8d84aeXvFYBWyUatWltwDT8IZh85pn6yahcHR7fvwTOP5Sn72iu+qsNWHi+GGo+e1k
-         dUVw==
+        d=linuxfoundation.org; s=google; t=1737801548; x=1738406348; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=s2D5VuJzabmKRrpiVgwJSi8m5su/EkjfS+gb35+rtZE=;
+        b=hJ8IKwJe7qmqYBYyERKuVLwqPou1A3uYpbDM+RrTqYcK2ak3SoMnPAaFSjin8A8xzK
+         SIOzOTTAwBew3kzN9e4QE5kRGqbhRHYR66kRgFVV8ediHLLrHrYBv+RxfoePzn3lb9VS
+         IaXPgOp4ly83rjpsOk8sYNdy0x+JZ6oDhvNlY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737747762; x=1738352562;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=TCNuhmZU1vvhv1VB5rXfLGzQPN8Wvmr5tDm/WGQw6gs=;
-        b=bkduO4yCFMD9zwv4Zrfkrw3AbIhes2AIZNaasZpmY1uCNkKxAGgodY3QMo+pla9y1O
-         eKOiBW1Es+0ZbwyRqaaEPjKNOflsZOUD5eYOjSfLXJDFai4MPy0Ubmt0GKN3b7u/KeT9
-         YnQrJqWGfsehLISQiihXPtbJv4KCEPjiOOELJ9+ZYvfyufC1DQ8p9vnobsGLXEqxofww
-         LTEqs2LpmTwSzVBqZpWe0t8WXMGDEGti8x2rbBYlTQLMLAqPQ6x2bUgh29horb1z7AEg
-         lC7XKKHFVS5+EaUds1Oc4FnAz/xqmuA1tzq7XplMat+YRrVM7pUt48uM6txFkowmQ+/E
-         lMsg==
-X-Gm-Message-State: AOJu0YyM4Gv4O9LpnJj/S60hIR/pBxvNaFbwmumEZbm3AY9hhzYfo166
-	8Kpv+nlI0RCY+y4WFGM+Vw4gf0pefF0cfYpNxU2cCdTpNZrLYVPDopye5Q==
-X-Gm-Gg: ASbGncuPR7B94MUFbTvA7dNORxPlYThQ2sikHKbf0B7V8dyxso6e9NBFOXy4e+icJsz
-	aMSYHizG22hUCX0NsGfqBzlob4ekVTmsPa/ZJhlDl9Mqr2UTHzPzNkAPbcasu9DnEWG+tDzovab
-	ixjNFdCtPxRh3AFRVMFBR+ZGo/G/d8FJBJx9G1OQ5G9pB8XUIpQJPJEMaWnYf0hk5D1S5o+ftZb
-	Q8RGjWw27ThSLttZl0UXLGIQpEbziKkghEdQ/VALiGabNWUZ8wG/Fmr0Bi5o/2Lil8i67e2fC8r
-	ISdZEm98wOYpSBLkifFA
-X-Google-Smtp-Source: AGHT+IFPVO29cWHcTbxFPb0iww/rHp2Z/mem5IwG8goSvlP4iTchBd+x5CQ/sXtSNE4lXSMjhojI9A==
-X-Received: by 2002:adf:f250:0:b0:38a:5dc4:6dcd with SMTP id ffacd0b85a97d-38c22279dafmr7413715f8f.22.1737747762425;
-        Fri, 24 Jan 2025 11:42:42 -0800 (PST)
-Received: from localhost.localdomain ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38c2a1c4199sm3475096f8f.89.2025.01.24.11.42.41
+        d=1e100.net; s=20230601; t=1737801548; x=1738406348;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=s2D5VuJzabmKRrpiVgwJSi8m5su/EkjfS+gb35+rtZE=;
+        b=GKK8QDm1VyXXsmFAzc2xwWi9Jk9a2rTUVuntcQwyx5kvMk1/m27rD19Cygqv5Ei4SG
+         RMbniziRHjfk27V3dvkrQewomUVy5w+M+0nMPR2k9jK4bqPJqbolmY+vkyWXWvQgmbyh
+         nHzvkeRKPDRTOmIcMAsWVP+Mdr0y22mSQYfJBODYBa790xqFkFWzwmiXCIb9Vk/LuJpu
+         zU4VH9/QmvQI+cT+sOML/UrD8aNlPANFHYO3gzW1kwqnhhRCJZkg7aOhDUMsp47PBOkY
+         g+sPQ5KcElt25kIUrhojrHBrPo8Xc6iVrK5A8aZ27EEU2Isjhvf38vxRXf25Q4J1UiDA
+         5SLg==
+X-Gm-Message-State: AOJu0Yzo/ZdKmX9pN9kds6oaSmL3i4P6PivBEe/zcuWPeE49I97uGMj7
+	DN0VcOAauga7YX9jIaAiQ/fvhA0aOjVDLSi+o7/c/6PaNB/wYkldLqIbbS3d6J7BIEcMhiuw/U4
+	466o=
+X-Gm-Gg: ASbGncsHA+yMm1t6EXlvENOQAClYEIrZZNePL/6s797FNXvVq3FRFXy1W+qgcF0h5Qa
+	DnVBsiME1S/JVTbgrrr5sN70BzQw8O+Fy2Ai7IfoWb9OG08ShyX/99oKDw5QS/yPYzijuJG2GkG
+	tag8XnXvlzPm/MtmjlPYhBv2Vqb0bjxHhW3ekn5vbFNHOO7rmXbb81S5C41+xwlVJf2HYZLYn7G
+	cFB3v9iHIvP6bRdk7ac01t60k+LHy8aklxiKgSZJEaa52eom6QqDlgO/UCZrWpWDnZoFK762GHG
+	bLYDcVhaKwqhPuYJJ0KFoSLTmWy8WaMP
+X-Google-Smtp-Source: AGHT+IG9Bj3sAKCCaLvp5UHLVW40DKZYmsqYhSXYOSoVmyZucOrGhaseeCdPMWLlpdGOjH2NA4fs6Q==
+X-Received: by 2002:a05:600c:138f:b0:436:ed50:4f8a with SMTP id 5b1f17b1804b1-438913caeb9mr351667005e9.10.1737801547002;
+        Sat, 25 Jan 2025 02:39:07 -0800 (PST)
+Received: from max.int.rpsys.net ([2001:8b0:aba:5f3c:ac79:b32:597e:d068])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-438bd4900e2sm56718965e9.24.2025.01.25.02.39.04
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Jan 2025 11:42:42 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Sat, 25 Jan 2025 02:39:05 -0800 (PST)
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gyorgy Sarvari <skandigraun@gmail.com>
-Subject: [meta-oe][PATCH] opentelemetry-cpp: fix non-default PACKAGECONFIG options
-Date: Fri, 24 Jan 2025 20:42:36 +0100
-Message-ID: <20250124194236.56533-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.48.1
+Subject: [meta-openembedded] [PATCH] crash-cross-canadian: Update to match OE-Core virtual provider changes
+Date: Sat, 25 Jan 2025 10:39:04 +0000
+Message-ID: <20250125103904.2455885-1-richard.purdie@linuxfoundation.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 24 Jan 2025 19:42:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115074
+ <openembedded-devel@lists.openembedded.org>; Sat, 25 Jan 2025 10:39:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115075
 
-1. Delete the build_package PACKAGECONFIG - it is used to build a deb/rpm package,
-which is handled by Yocto.
-2. Add the required build time dependencies for the other PACKAGECONFIG options,
-as many of them were broken, and the build failed when they were enabled. (otlp_grpc,
-otlp_http, otlp_prometheus, testing).
-3. Switch to gitsm:// protocol in SRC_URI, as some of the PACKAGECONFIG options
-do use some of the submodules included in the main repository.
-4. Add EXTRA_OECMAKE arguments: OTELCPP_VERSIONED_LIBS and BUILD_SHARED_LIBS are
-required to generated versioned libraries, and avoid triggering the dev-elf qa check
-with the PACKAGECONFIG options that generate a SO file.
-PROTOBUF_PROTOC_EXECUTABLE is used by otlp_grpc and otlp_http PACKAGECONFIGs only,
-however this long option makes PACKAGECONFIG very hard to read - so added here.
+OE-Core changed to to use virtual/nativesdk-cross-XXX replace the older
+more complex cross providers. Update the recipes to match.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+This fixes check layer failures on the autobuilder.
+
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 ---
- .../opentelemetry/opentelemetry-cpp_1.17.0.bb | 25 +++++++++++--------
- 1 file changed, 15 insertions(+), 10 deletions(-)
+ meta-oe/recipes-kernel/crash/crash-cross-canadian_8.0.5.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.17.0.bb b/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.17.0.bb
-index 04e43d99c..50e6bbeba 100644
---- a/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.17.0.bb
-+++ b/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.17.0.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+diff --git a/meta-oe/recipes-kernel/crash/crash-cross-canadian_8.0.5.bb b/meta-oe/recipes-kernel/crash/crash-cross-canadian_8.0.5.bb
+index 54883cef38..1ef643af58 100644
+--- a/meta-oe/recipes-kernel/crash/crash-cross-canadian_8.0.5.bb
++++ b/meta-oe/recipes-kernel/crash/crash-cross-canadian_8.0.5.bb
+@@ -15,8 +15,8 @@ DEPENDS = "\
+     nativesdk-mpfr \
+     nativesdk-readline \
+     nativesdk-zlib \
+-    virtual/${HOST_PREFIX}gcc \
+-    virtual/${HOST_PREFIX}binutils \
++    virtual/nativesdk-cross-cc \
++    virtual/nativesdk-cross-binutils \
+     virtual/nativesdk-${HOST_PREFIX}compilerlibs \
+     virtual/nativesdk-libc"
  
- DEPENDS = "nlohmann-json"
- 
--SRC_URI = "git://github.com/open-telemetry/opentelemetry-cpp.git;protocol=https;branch=main \
-+SRC_URI = "gitsm://github.com/open-telemetry/opentelemetry-cpp.git;protocol=https;branch=main \
-            file://0001-Fix-build-with-clang-19.patch"
- SRCREV = "fa0a5200ddbe9ae6f487a228e658aedc102dab56"
- 
-@@ -17,13 +17,18 @@ inherit cmake pkgconfig lib_package
- 
- LDFLAGS:append:riscv32 = " -latomic"
- 
--PACKAGECONFIG ?= "opentelemety_install otlp_api"
- 
--PACKAGECONFIG[opentelemety_install]="-DOPENTELEMETRY_INSTALL=ON,-DOPENTELEMETRY_INSTALL=OFF"
--PACKAGECONFIG[build_package]="-DBUILD_PACKAGE=ON,-DBUILD_PACKAGE=OFF"
--PACKAGECONFIG[otlp_api]="-DWITH_OTLP_API=ON,-DWITH_OTLP_API=OFF"
--PACKAGECONFIG[otlp_grpc]="-DWITH_OTLP_GRPC=ON,-DWITH_OTLP_GRPC=OFF"
--PACKAGECONFIG[otlp_http]="-DWITH_OTLP_HTTP=ON,-DWITH_OTLP_HTTP=OFF"
--PACKAGECONFIG[otlp_prometheus]="-DWITH_PROMETHEUS=ON,-DWITH_PROMETHEUS=OFF"
--PACKAGECONFIG[benchmark]="-DWITH_BENCHMARK=ON,-DWITH_BENCHMARK=OFF"
--PACKAGECONFIG[testing]="-DBUILD_TESTING=ON,-DBUILD_TESTING=OFF"
-+EXTRA_OECMAKE:append = " -DPROTOBUF_PROTOC_EXECUTABLE=${RECIPE_SYSROOT_NATIVE}${bindir}/protoc \
-+                         -DOTELCPP_VERSIONED_LIBS=ON \
-+                         -DBUILD_SHARED_LIBS=ON "
-+
-+PACKAGECONFIG ?= "opentelemetry_install otlp_api"
-+
-+PACKAGECONFIG[opentelemetry_install]="-DOPENTELEMETRY_INSTALL=ON, -DOPENTELEMETRY_INSTALL=OFF"
-+PACKAGECONFIG[otlp_api]="-DWITH_OTLP_API=ON, -DWITH_OTLP_API=OFF"
-+PACKAGECONFIG[otlp_grpc]="-DWITH_OTLP_GRPC=ON -DWITH_ABSEIL=ON, -DWITH_OTLP_GRPC=OFF, grpc grpc-native protobuf-native"
-+PACKAGECONFIG[otlp_http]="-DWITH_OTLP_HTTP=ON -DWITH_ABSEIL=ON, -DWITH_OTLP_HTTP=OFF, protobuf protobuf-native curl"
-+PACKAGECONFIG[otlp_prometheus]="-DWITH_PROMETHEUS=ON -DUSE_THIRDPARTY_LIBRARIES=OFF, \
-+                                -DWITH_PROMETHEUS=OFF, civetweb curl"
-+PACKAGECONFIG[benchmark]="-DWITH_BENCHMARK=ON, -DWITH_BENCHMARK=OFF"
-+PACKAGECONFIG[testing]="-DBUILD_TESTING=ON, -DBUILD_TESTING=OFF, gtest"
--- 
-2.48.1
-
 
