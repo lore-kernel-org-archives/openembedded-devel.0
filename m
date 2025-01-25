@@ -1,92 +1,96 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
+Return-Path: <gavrosc@yahoo.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9803EC0218E
-	for <webhook@archiver.kernel.org>; Sat, 25 Jan 2025 11:07:05 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web11.7858.1737803220624669591
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CC9FEC0218E
+	for <webhook@archiver.kernel.org>; Sat, 25 Jan 2025 11:56:25 +0000 (UTC)
+Received: from sonic302-2.consmr.mail.bf2.yahoo.com (sonic302-2.consmr.mail.bf2.yahoo.com [74.6.135.41])
+ by mx.groups.io with SMTP id smtpd.web11.8288.1737806185002435679
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Jan 2025 03:07:00 -0800
+ Sat, 25 Jan 2025 03:56:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linuxfoundation.org header.s=google header.b=QOwCoScc;
- spf=pass (domain: linuxfoundation.org, ip: 209.85.128.49, mailfrom: richard.purdie@linuxfoundation.org)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-437a92d7b96so29799985e9.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Jan 2025 03:07:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linuxfoundation.org; s=google; t=1737803218; x=1738408018; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=nJvDRErvL6FvmwDzbnKM5H+HbIDcZcIW79VtcBy+wUM=;
-        b=QOwCoSccXv792DglfTlIY/YDjPIgUs/TCdm7ZET8p5zXGqQPK3hkY1PIimGX6StuJP
-         bpcc04mTOnLx0ipCvCaPEzs1CmB1B5AbI63zzklcE1ZduVzvmgNX6KPEcfrsfxIe1PrK
-         XXElpSaLb+puWhJ1AxnHA69oSXx/MbU48x1Mg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737803218; x=1738408018;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=nJvDRErvL6FvmwDzbnKM5H+HbIDcZcIW79VtcBy+wUM=;
-        b=pLOiphpY2Pfb4FbsGCwzAzwelykdWhXumm0W1XSgvi5pCfWyGLst2Cgiw/mhSXlOdV
-         RCo9oMqb2lkhvAY8ae0od8e97SI4Snmiii4JefF9VXqmlV+0mvgFVzCHUhw+nBLEUVQH
-         1X2YhCuAcaPnNVT+LQxT76HJMylHCR1wvjihYzWFJNHaH+hkrwYeSfSwJR4Ce1c9QLUa
-         wuL3u/4ZJbMaxf2x897bFT8GMo19CRzNcVSCA5N+2aWJvYhVJmMKZPw8OeYmHqJfZJYe
-         3tvVme2Ib+l8VS0pEvMd7Xv9L28063yrQgSqpmYep7AiSM1A3M0+GfnIvDOkKZGzFCPH
-         6izg==
-X-Gm-Message-State: AOJu0YxQcbV5jd0DV5Al9hNEtujjQdBIO8/IfT4KZ9OBM1kgelmUYeHQ
-	eynRprdgKLHyC31mCGFirxV7KS0nPEqtzlUaM76aKhVCUWvl+txgmtdW1YhPWMS7eK5+ZquS1By
-	bY/U=
-X-Gm-Gg: ASbGncsBHAtn/Nx03T8PfhfxJ6pZkpyiAIITk5ty2yPlAhxvKY3etlLkNne6pitPF5f
-	QDWi8tWPX+dJC5SH/zV8KwO/cFR2BOCZsqK24pYfbNpFvoaMcKivZSD/16CtBcNTe1ElBLOrn61
-	eAxjYh8fD47KR+f2VL1jnCK+ESeDWq9UHKnmqIjg7kPkjYxk+Rlg+UaDa8AmsrWlFDx/QQsVUVR
-	64ZAgU4PoCgbxJOq8VyyOCMnM4imj2dXmofCQXb7qLqgrSkkDDu3cCaFj3bm01DHvyDVNnmzcAQ
-	XTzo+5025x0kpscBFmeA+1YzqyyBOWqu
-X-Google-Smtp-Source: AGHT+IHrr2E4dYnoenBiSdTRxhcbCj8pyCk0apAaafIRPYy6OwGIp4Q5vUsW+ivAwGN16UeHOua9sQ==
-X-Received: by 2002:a05:600c:3b26:b0:434:a0bf:98ea with SMTP id 5b1f17b1804b1-438913cd4a1mr290687595e9.9.1737803218181;
-        Sat, 25 Jan 2025 03:06:58 -0800 (PST)
-Received: from max.int.rpsys.net ([2001:8b0:aba:5f3c:ac79:b32:597e:d068])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38c2a1bb057sm5308179f8f.62.2025.01.25.03.06.57
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 25 Jan 2025 03:06:57 -0800 (PST)
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
+ dkim=pass header.i=@yahoo.com header.s=s2048 header.b=kIwqShh9;
+ spf=neutral (domain: yahoo.com, ip: 74.6.135.41, mailfrom: gavrosc@yahoo.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1737806184; bh=KFlC04yMxb3j2yOj2y3Tq/uydiNG7lJtzp/RlPjKeSM=; h=From:To:Cc:Subject:Date:References:From:Subject:Reply-To; b=kIwqShh9XSLTbheYbs2/JKlZC4XxIWFXReJRzyvAqhxMiJH14ROL7WvwThiABnTekFF/CueGZlEVCOR2ZUqMOYGYrkW8mOQNt1hhkuNCOQDvp20Ztmp7NTUF465S9Qpu7lhKJhf3p8rKNijKui49TlqWTb699Fl6UDzkS2hBJOrmS+fwboLBguJoorwUipxsYG/oE9yyTeyRUdVhWGvI29iPu9b+E33Mb3im0ASdfurHi4+iahbaC82WSja60T68/czpG/vRhUZyWI2NOga/IVa1MjCQk2+H9vqFdYpmeS3sF7tvR53bmWF0ahGHCuFQPnWhrjAyzXav/J9/uZ4SUA==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1737806184; bh=wZluNpy55ji3SgAKFDennG+ZPrCFlZqvHa7rtvB2/Id=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=ZJW3XX94SevRDB8M09i3jZgr0WdYiFWlj1AHbWOR03BYQgURh0u98ZxCs7V6xxwmYHac/fv6UY7+ylx37re+c+URLWbeowfLQvwjljhfwvhLMDFBp+Bh3bNO3Z6JwUDT+UNL8Rbvi1Uwb5jxMtnrOBE0QI8hN76QjsuSVB9mvWb6oa/0h4pARQoJDnlGPvMCGRb+6imBSQ3OL7kTSMFqsf2k3VgTjI1PzFPvgXKq9d9KtwCPHErjM850JKDFrf7ySwTQ881xgTeLsrWKnId7tpiwSDxdHINb75/drKfHr6nmA01ZUdDVbbQIcWjwW5XDl3qx+jViTFY85veLFPBrBg==
+X-YMail-OSG: _8S5iYkVM1mVvzEteGdVUKzzFamFANdgNYdTEGXkWhrit0pYC.y4TLfHIk95b6b
+ 7zWQo.vook6dqzFSe6wlsTAdnxiys47_lK7rlBn_FLTdgJ1uNItvVE1SEzVoqBGIYiK6XiCbEFF4
+ cQPav6F0tQKTHC8G_K8tlvQ4Hk49UdmANBxHnDV6f0_3uQ8vUGa2OtMjjw2YASRHI8HXfag8x5Fp
+ XCWPsDfywphSU81gi6v9LmGqWDPPt3bFbE8lLSqGIGSdjTgEU1px5t9XsmRtavaujlb3SjPyMiyG
+ cZcDl2KL85NsGZzubexD0YGJCcyui9hiAITzauIkqY3tuXHAcZ2oz29uG8D.99p0whc.EGkGf0g6
+ rkPSJU81i7cM07J6uMAjSavEdb134j19JE6sWthTs5AbqiOpdr0w3JX6ZUuLb9NiVBcQWPoD1e0S
+ VnTn4iR.hJYYrysCku4IOIf3Hj4XTfj.cCAXFRCZExnqaZP97MyqxNCVZv7hrCgeMzM8rI2M9S5u
+ NgZBDkiDbbWE5YQbtn3lPtkynAgbhUMAs04tPuYe.VWGNqVIajg4bxFnYA3zwfYuMOURnDpKRSMQ
+ n1MdT8tH9b580aJ8RUwUoPEh_30ytTbH0yZrYkQizaF27XlREcpcVYh84u5N0qFEXsvc_Nq1yU9i
+ ICMsbdDhv9AIG1xhc4qJvXac4VkCJAq96tVlB1exZcyF_gXNIL6OsmUysYEUqjzSzIqVT5l1nfgq
+ x.Vr2wIP.kPat_9OBO7OQMU542b_sYCy8BVkn_va7ctCCN.d3oqcN9YszFNOvFk4Xzl6cRnxX6ro
+ 89tggB87Hgm1EQadtUXSXdYNFjbITtWUDki89PBUx8K6ai.n8SANlYW.4Sanybhq_yFSmotaWI6K
+ 7xUxijQzJXXC6b_8rFZOk5ISZ5Pp4Rl7InOSdbg0l6wHMP4QPrpoiSzWjNXwv0IxZdvtR3jlMBuN
+ 0YmnA1WGT3etpTDVY92kwe4_vcATujoEmL3x1DodfhHQTfG89dv5q0oIPRpoU5D5hE1MkvLbIg5I
+ fCxNZ2XKyUSlykLH6CtblC3C5vk13LsowELEe0dCEvFeA4cVAzvQWj8XknseEq4raBZTjbcRCwGJ
+ CXNsr_TcI_bg_sz1TSFbVN_SNPpyvR_5gutJKErRRkAm_RF_ZAgMZE81dGR.QeFSJ6.b758q7WMV
+ bZiziDf2Z__OAwJyMFlXz71wJivZI0_sdbbP16Gbg_t2lHx8FZUGjAkhhoLPrv40bos20pRlM0oi
+ S.jPOSSQwrCruzl4G2z9Bp48WdgPs.kp7cQAHE8KneEyqwKx6a4xCdL7va4mZCvf.3tmRApze2c.
+ Ue1VAsrKNJ9bCzXq8rfWn4EDHO9.DlCW8tv_g9ORhMudQRf_Ag9s4nAeJxqhdw2MDxlcRArZCk1o
+ DY1dUc7xhOqMuBDvn.AEo_7MN6k0hND2IzwT8eGlPPBvhNWswWReHZk11FfEfu8s37Tf5C5pO_I5
+ aKLaMaqx7_KyUQJSkDRPXfFiKLQ0_Z8bwE2ya8a5p9ulOQaDa4jCdiIzmbqoiHurHWhC1cnRftla
+ QzQ.nI2m4iQar0UfHT_MOCaOXd2hZfMmPnqp69PrGSugzxAFPoBd6z5ZgJ_qGfCufliW36CphXwA
+ k3ghqJ7TEnN4Emc9XyXTN_4NpaDtoYwYj8VitKwjfHX8muoJ7mLf_Nid7bfuEUI3K5MvbRJ1.dxu
+ ENOJYj3zFO8QtocjXGDfHMlEGNn9Vq.skKrvttoOM5dWI2JW47kdwgIAfGTy31Ms8v0NABdH3hPi
+ gWdx8qbhK5DEHGdt65MFh9.o0b7LmHAHqbpuzUEL2wDwLQhtOuXwCyvb4HxloR3IRxMonMdviYYt
+ vBX8og3vYiVQE9fBGD9GAgQn90pPIgaHvhBlHcuNads96j1_ZxIsaC5l5vZK8JP8CmR6IYLP3Hnf
+ 6R9IoOI.s_PbCMMMpLf.dYiXfn0VXVemytdwcZ64p.HP8zF_a4iNL5yAzPR143FwBWk6zg9rrd1P
+ pp_suEpw_iB8LEi4XL5q7ylb_gtoVj3zOABd0ehizYS1kj5kG8XQL.umBU4IgvsiFLwjSau0swTb
+ IciEzAfzClflbK6nMzEQGBnma8B3FzH6l5RjE3tDceq9Q1i9xNNpyuDCBDair236NI_xQJ7zZLnR
+ h8w7AcYPDIyggGSTRAAaRFkpsFrZatdp4jBDyQB3o_yai4B77TvL6nB7AuSzgV25eIs0M_4OPmzo
+ OO9qoSaoMZu2ENPKfpwLbUpuo3uk4peEJgougiSbGJJoJkpMRlbwmaImOV.w-
+X-Sonic-MF: <gavrosc@yahoo.com>
+X-Sonic-ID: f7ea3cb8-258c-4142-b498-b783c9ddd0d8
+Received: from sonic.gate.mail.ne1.yahoo.com by sonic302.consmr.mail.bf2.yahoo.com with HTTP; Sat, 25 Jan 2025 11:56:24 +0000
+Received: by hermes--production-ir2-c694d79d9-rpm9f (Yahoo Inc. Hermes SMTP Server) with ESMTPA ID 6fff5891475b44f865d399a636c49304;
+          Sat, 25 Jan 2025 11:56:23 +0000 (UTC)
+From: Christos Gavros <gavrosc@yahoo.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-openembedded] [PATCH v2] crash-cross-canadian: Update to match OE-Core virtual provider changes
-Date: Sat, 25 Jan 2025 11:06:56 +0000
-Message-ID: <20250125110656.2464673-1-richard.purdie@linuxfoundation.org>
-X-Mailer: git-send-email 2.45.2
+Cc: yoann.congal@smile.fr,
+	randy.macleod@windriver.com,
+	Christos Gavros <gavrosc@yahoo.com>
+Subject: [meta-networking][PATCH] net-snmp-native: dependency with libpci
+Date: Sat, 25 Jan 2025 12:55:43 +0100
+Message-Id: <20250125115543.7605-1-gavrosc@yahoo.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+References: <20250125115543.7605-1-gavrosc.ref@yahoo.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 25 Jan 2025 11:07:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115076
+ <openembedded-devel@lists.openembedded.org>; Sat, 25 Jan 2025 11:56:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115077
 
-OE-Core changed to to use virtual/nativesdk-cross-XXX replace the older
-more complex cross providers. Update the recipes to match.
+Building of net-snmp-native aborted due to
+missing dependency with libpci-native.
+Fixed by changing the name to 'libpciaccess'
+which is recipe's name
 
-This fixes check layer failures on the autobuilder.
-
-Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+Signed-off-by: Christos Gavros <gavrosc@yahoo.com>
 ---
- meta-oe/recipes-kernel/crash/crash-cross-canadian_8.0.5.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-kernel/crash/crash-cross-canadian_8.0.5.bb b/meta-oe/recipes-kernel/crash/crash-cross-canadian_8.0.5.bb
-index 54883cef38..bafe56d2c4 100644
---- a/meta-oe/recipes-kernel/crash/crash-cross-canadian_8.0.5.bb
-+++ b/meta-oe/recipes-kernel/crash/crash-cross-canadian_8.0.5.bb
-@@ -15,9 +15,9 @@ DEPENDS = "\
-     nativesdk-mpfr \
-     nativesdk-readline \
-     nativesdk-zlib \
--    virtual/${HOST_PREFIX}gcc \
--    virtual/${HOST_PREFIX}binutils \
--    virtual/nativesdk-${HOST_PREFIX}compilerlibs \
-+    virtual/nativesdk-cross-cc \
-+    virtual/nativesdk-cross-binutils \
-+    virtual/nativesdk-compilerlibs \
-     virtual/nativesdk-libc"
- 
- RDEPENDS:${PN} = "nativesdk-liblzma"
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb
+index 06decbe852..cde1c1dfe8 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb
+@@ -268,7 +268,7 @@ RDEPENDS:${PN}-server-snmpd += "net-snmp-mibs"
+ RDEPENDS:${PN}-server-snmptrapd += "net-snmp-server-snmpd ${PN}-lib-trapd"
+ RDEPENDS:${PN}-server += "net-snmp-server-snmpd net-snmp-server-snmptrapd"
+ RDEPENDS:${PN}-client += "net-snmp-mibs net-snmp-libs"
+-RDEPENDS:${PN}-libs += "libpci \
++RDEPENDS:${PN}-libs += "libpciaccess \
+                         ${PN}-lib-netsnmp \
+                         ${PN}-lib-agent \
+                         ${PN}-lib-helpers \
+-- 
+2.34.1
+
 
