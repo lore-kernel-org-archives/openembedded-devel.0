@@ -2,142 +2,100 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AFE47C0218D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5A2FC02192
 	for <webhook@archiver.kernel.org>; Sat, 25 Jan 2025 18:03:17 +0000 (UTC)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web10.15099.1737828196581361181
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
+ by mx.groups.io with SMTP id smtpd.web10.15097.1737828193503621451
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Jan 2025 10:03:16 -0800
+ Sat, 25 Jan 2025 10:03:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=OWhJpj1Z;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-21654fdd5daso53395995ad.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Jan 2025 10:03:16 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Jm04mJtf;
+ spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-215770613dbso39511035ad.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Jan 2025 10:03:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1737828196; x=1738432996; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1737828193; x=1738432993; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jw6nbnLBmHgy24SLxl+KcZ/Dk15QS4RYEzVXiOodHAA=;
-        b=OWhJpj1Z5A4FLcVp3vR9sofREDkUr45ocNDrlDABrzyYOnzsNYPKq0bPma4UjgeORP
-         MyWSS2LB6y6WMnEaZwP4eY+B9YhCs3izilBsQ06pjsmb1VdQHpAsJBe/i2tjFu9XAP6j
-         IwVoYWHKs/Du43nVV9pv0tAjtNE9AKGYSQrBXfCi0tPfGDgtd0Mew8lPoLT1Cq0bWLzI
-         3x0XkHTG11dABwePFof5LYNFyNFBEE/Do3WB447syOWKSv9uWgLzDlfDMbxzBGMKRG1L
-         H6t3RgDi8xp3uuVJnLEIpAso5YYo5SFV/5f/Eyr/O52n2Ak/7jpnSgHvgu2+hYGZDYY6
-         Mq+A==
+        bh=lkTIVVPGP4tPFczzakKxnSbRj6fRyfUZ7TZRqqFJWOI=;
+        b=Jm04mJtfKRkT+uaaKrnfY2BzMN7PMyJIaALWMUhOnTyWftKOaa9/alhbCgPC1qQ3bl
+         bQqsORx8nVHCougRI8ZsT7occog8DoaEmQECXq08nj7DfHgGrsg1eIRz7Hutmkh7MKlO
+         ObvincwbyOt1WKbX8Ca1hi2xjKbV0wb8o2htSqJPSJ4AjF+ly+YKdWSxrzFo6ShWjbL2
+         0IT+8hy4xkewFAQzJIqmbtX6iv0v5VwzHZrMCTzdmBGvL6AhXQjIbHfoEukjbG0yl122
+         Yg9lSCjjCNFUJrVwMt0H40B+168k2x1sfR8iiT5iRgRXjxNkI7dK3s49YsAzuaG/vApg
+         rjmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737828196; x=1738432996;
+        d=1e100.net; s=20230601; t=1737828193; x=1738432993;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=jw6nbnLBmHgy24SLxl+KcZ/Dk15QS4RYEzVXiOodHAA=;
-        b=oNG49yGPbUAN7hfFJzaY7e81gKF7rd6uky+3pU36OgI6xtvI/Wtv0YonzcoYcD5A+z
-         tl5Tw/evtmx1h00LXDMnVgF9xt+Sy4vTkvsSZfft4oBeMyjJCzKp+odHQo007jIXQ+/1
-         zM7jVUST9hl2XZEQdkNcGmTe4Pnofalr30SLFUHs3YUI5jXqz+ToAOteNm0ZrFDhsBEa
-         F1SXvH5FZC/4/PcvNzv+6tGL3Pox+Og6LCirKtcGQ5IfXi33P+vn0IRYMDWLtR5i4djZ
-         zNbisfZcB8ndWQvAVhYFGO0xFR3Rc+CZsgBvFlHPqY4/0LTSgYSAoGqRLTpd/MDlWEC+
-         o4Rw==
-X-Gm-Message-State: AOJu0Yy9nSz+Hk0N5e2/OttFz2RiQTea/kUrLD3PRCQCkMubD3vyKq1i
-	Q1uSrCKxO+sng46lDFGmtMGPB6tOcoZgLq5Wmi5lhGFDSfRFyWtore9BBg==
-X-Gm-Gg: ASbGncsKP2n7BQrEZ8PTU+Q87Yu6FaJDQKoXHcM9R0s2zPByhj78E+a1Qfj27okLwAa
-	ntcbzBUbHptdyD+HQWUej27TjpcnucK133wT/+FmRoLquz/Kd/lTs661pN/22LHc317Ze5PRgGx
-	OMeQQR4iKa3HhSZQX2i2ztCY0eNqWoyYyUVxLskLM/lxrUZ7Jse3bFIN+6mi6zh12EH/ClLS8mD
-	Xm/2nGQZ8m9/+tzYl9id4Ga0KTGl9lNSayN5E3o6ryn3Z+ncvnddjfln0hsoG915pG/bcsTqJw2
-	Q+ome12+Ksx4Zbabo1yi0VFGSUE=
-X-Google-Smtp-Source: AGHT+IEgszlWBHq+wbRcHEEGsg/r41eVAU1ImQk+hxSG6GiYSGWSU9v2HGcJed1iEnfxOBiYHFDtDg==
-X-Received: by 2002:a05:6a00:2183:b0:72a:bc6a:3a87 with SMTP id d2e1a72fcca58-72daf86eb81mr48261032b3a.0.1737828195790;
-        Sat, 25 Jan 2025 10:03:15 -0800 (PST)
+        bh=lkTIVVPGP4tPFczzakKxnSbRj6fRyfUZ7TZRqqFJWOI=;
+        b=PWn18CUf4gtdG69YILQMbuRidqUbu9TWmyvj9i5dOOiKVoc2Muh6wPCUHxbj5KqeHK
+         nDIIWDwFD8oNFSl7KQtWEC+wiqgXPuDet4wdsC/p7drS3LeD3iA+Q1f/rzYQ+6QnuQw8
+         zgNSFdeVXvtw+KgMhPmCfQBbIjoVgVOBmhohUXIm/uPepc8k9Tnabsw06ouKYKI/9gv+
+         kHR3E6lhd6uhCLW9DBXP98KSzYlkJmCIUhvytD/Rdgox1fw4mFBkDTeK908WKEMP27Ki
+         53tviuNbXJm6KlSRxlqTmP+KYM6eEiBoIPi2vd3iYUvzSEnJyVx7YKiRBXyU04X4Ovej
+         ZgLQ==
+X-Gm-Message-State: AOJu0YxuAcSCC9DoYK5vIXX1/Pith5O9BFLCOYm9eKB0EjkBylFBHEox
+	pkSYnrzfLKsMxX4ZkXwRuBkX6N21NUqetsvN7jDpKwAKerM5Cf4p8/km7w==
+X-Gm-Gg: ASbGncvQgGQJ5+q2/VqPK2HDbHIes6rWgReRLKOWxoJCcv5P21SHFdSuKbECUqClaM9
+	jPcQj+y14spuamYoEChPaa3QaxnIC3vbHZERt2Zu3LyYJBguw0ddUjsc8N1B3FsCHb8p6WbTcD9
+	E1u15VJRCPIKOKGxSX0l2Hu+BrubPK6+4XE98ahzafhH7v8AeERxN/9n3BHiW9gXLNldIefhYS4
+	h+ui873vqED4TZc7LkZ99GoFmyqadBCe9m+blhATxSlU0LpE5b3XhvKtMHRzJOGbbEx+vPiDbKC
+	yrQ0Ox0tY7F1Z0qD2o+bf2pmYWA=
+X-Google-Smtp-Source: AGHT+IHV110Y2icvvZfyfN4sOcG45Ch92AVEYLLTOHQ2kypnqRUo1w9lKLuRkY1g3c88siAwiIYwJA==
+X-Received: by 2002:a05:6a20:3d87:b0:1e1:af74:a235 with SMTP id adf61e73a8af0-1eb214ea4a4mr59389026637.24.1737828192759;
+        Sat, 25 Jan 2025 10:03:12 -0800 (PST)
 Received: from keaua.hsd1.ca.comcast.net ([2601:646:8182:b790:f137:fcfb:97fc:71bd])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-72f8a6b51e7sm4108906b3a.69.2025.01.25.10.03.14
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-72f8a6b51e7sm4108906b3a.69.2025.01.25.10.03.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 25 Jan 2025 10:03:15 -0800 (PST)
+        Sat, 25 Jan 2025 10:03:12 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Zhang Peng <peng.zhang1.cn@windriver.com>,
+Cc: =?UTF-8?q?J=C3=B6rg=20Sommer?= <joerg.sommer@navimatix.de>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][styhead][PATCH 06/14] lapack: fix TMPDIR reference in do_package_qa
-Date: Sat, 25 Jan 2025 10:03:00 -0800
-Message-ID: <20250125180308.7856-6-akuster808@gmail.com>
+Subject: [meta-oe][styhead][PATCH 03/14] libtinyxml: set CVE product to tinyxml
+Date: Sat, 25 Jan 2025 10:02:57 -0800
+Message-ID: <20250125180308.7856-3-akuster808@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250125180308.7856-1-akuster808@gmail.com>
 References: <20250125180308.7856-1-akuster808@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 25 Jan 2025 18:03:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115089
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115086
 
-From: Zhang Peng <peng.zhang1.cn@windriver.com>
+From: Jörg Sommer <joerg.sommer@navimatix.de>
 
-When building the `lapack` package, the following QA error occurs:
-"File /usr/lib64/libblas.so.3.12.0 in package lapack contains reference to TMPDIR [buildpaths]"
+This library gets tracked with the product name tinyxml:
 
-The issue arises because the `xerbla.o` object file embeds the absolute host path of `xerbla.f`.
-This occurs during compilation, where the build command in `build.make` (generated by CMake) specifies:
-`gfortran -c <absolute path>/xerbla.f -o`.
+https://nvd.nist.gov/products/cpe/detail/95BDA29F-257C-4C44-8847-25CFC107228D
 
-As a result, the absolute path is included in `xerbla.o`. Unfortunately,  `gfortran` does not support
-flags like `-fdebug-prefix-map` or `-ffile-prefix-map` to remove such paths.
-
-To resolve this, the fix involves replacing the absolute path of `xerbla.f` in the generated
-`build.make` file with a relative path before the compilation step. This ensures that the
-resulting `xerbla.o` does not contain any references to TMPDIR, passing the `do_package_qa` check.
-
-For ptest code, the solution is to replace `${WORKDIR}` with `../../..` in the generated `build.make`
-files located in the TESTING directory.
-
-Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
+Signed-off-by: Jörg Sommer <joerg.sommer@navimatix.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit b617496fb08950c155e75c8f21bafb10e301095c)
+(cherry picked from commit c5ef63d685b291b648c364dcd880dca39b13b538)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-devtools/lapack/lapack_3.12.0.bb  | 31 +++++++++++++++++++
- 1 file changed, 31 insertions(+)
+ meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-devtools/lapack/lapack_3.12.0.bb b/meta-oe/recipes-devtools/lapack/lapack_3.12.0.bb
-index fef9d3a80e..4357515b71 100644
---- a/meta-oe/recipes-devtools/lapack/lapack_3.12.0.bb
-+++ b/meta-oe/recipes-devtools/lapack/lapack_3.12.0.bb
-@@ -33,6 +33,37 @@ OECMAKE_GENERATOR = "Unix Makefiles"
- inherit cmake pkgconfig ptest
- EXCLUDE_FROM_WORLD = "1"
+diff --git a/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb b/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
+index 6fbdd071e8..2a7ca30a9d 100644
+--- a/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
++++ b/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
+@@ -5,6 +5,7 @@ HOMEPAGE = "http://www.sourceforge.net/projects/tinyxml"
+ LICENSE = "Zlib"
+ LIC_FILES_CHKSUM = "file://readme.txt;md5=f8f366f3370dda889f60faa7db162cf4"
+ SECTION = "libs"
++CVE_PRODUCT = "tinyxml"
  
-+# The `xerbla.o` file contains an absolute path in `xerbla.f.o`, but the options
-+# `-fdebug-prefix-map` and `-ffile-prefix-map` cannot be used because gfortran does not support them.
-+# To address this issue, we manually replace the absolute path with a relative path
-+# in the generated `build.make` file.
-+#
-+# An issue has been reported: https://github.com/Reference-LAPACK/lapack/issues/1087,
-+# requesting a fix in the source code.
-+#
-+# This workaround resolves the TMPDIR [buildpaths] issue by converting the absolute path
-+# of `xerbla.f` to a relative path. The steps are as follows:
-+#
-+# 1. Locate all `build.make` files after the `do_configure` step is completed.
-+# 2. Compute the relative path for `xerbla.f` based on the current build directory.
-+# 3. Replace the absolute path with the calculated relative path in the `build.make` files
-+#
-+# Additionally, when ptests are enabled, apply a simpler workaround for ptest code:
-+# - Replace occurrences of `${WORKDIR}` in all `build.make` files under the TESTING directory, excluding
-+#   the MATGEN subdirectory, with a relative path prefix of `"../../.."`.
-+do_configure:append(){
-+    for file in `find ${B} -name build.make`; do
-+        sed -i -e "s#\(.*-c \).*\(/xerbla\.f \)#\1$(grep '\-c .*xerbla\.f' $file | awk -F'cd ' '{print $2}'| \
-+            awk '{src=$1; sub(/.*-c /, ""); sub(/xerbla\.f.*/, ""); obj=$0; print src, obj}' | \
-+            while read src obj; do echo "$(realpath --relative-to="$src" "$obj")"; done)\2#g" $file
-+    done
-+    if (${@bb.utils.contains('PTEST_ENABLED', '1', 'true', 'false', d)});then
-+        for file in `find . -name build.make -path '*TESTING*' -not -path '*MATGEN*'`; do
-+            sed -i -e "s#\(.*-c \)\(${WORKDIR}\)\(.*.[f|F] \)#\1../../..\3#g" $file
-+        done
-+    fi
-+}
-+
- do_install_ptest () {
-     rsync -a ${B}/TESTING ${D}${PTEST_PATH} \
-           --exclude CMakeFiles \
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/tinyxml/tinyxml_${@'${PV}'.replace('.', '_')}.tar.gz \
 -- 
 2.43.0
 
