@@ -2,65 +2,65 @@ Return-Path: <richard.purdie@linuxfoundation.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E29BC0218C
-	for <webhook@archiver.kernel.org>; Sat, 25 Jan 2025 10:39:15 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.web10.7787.1737801550291830038
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9803EC0218E
+	for <webhook@archiver.kernel.org>; Sat, 25 Jan 2025 11:07:05 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.web11.7858.1737803220624669591
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Jan 2025 02:39:10 -0800
+ Sat, 25 Jan 2025 03:07:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linuxfoundation.org header.s=google header.b=hJ8IKwJe;
- spf=pass (domain: linuxfoundation.org, ip: 209.85.128.45, mailfrom: richard.purdie@linuxfoundation.org)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-436ce2ab251so18612345e9.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Jan 2025 02:39:10 -0800 (PST)
+ dkim=pass header.i=@linuxfoundation.org header.s=google header.b=QOwCoScc;
+ spf=pass (domain: linuxfoundation.org, ip: 209.85.128.49, mailfrom: richard.purdie@linuxfoundation.org)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-437a92d7b96so29799985e9.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Jan 2025 03:07:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linuxfoundation.org; s=google; t=1737801548; x=1738406348; darn=lists.openembedded.org;
+        d=linuxfoundation.org; s=google; t=1737803218; x=1738408018; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=s2D5VuJzabmKRrpiVgwJSi8m5su/EkjfS+gb35+rtZE=;
-        b=hJ8IKwJe7qmqYBYyERKuVLwqPou1A3uYpbDM+RrTqYcK2ak3SoMnPAaFSjin8A8xzK
-         SIOzOTTAwBew3kzN9e4QE5kRGqbhRHYR66kRgFVV8ediHLLrHrYBv+RxfoePzn3lb9VS
-         IaXPgOp4ly83rjpsOk8sYNdy0x+JZ6oDhvNlY=
+        bh=nJvDRErvL6FvmwDzbnKM5H+HbIDcZcIW79VtcBy+wUM=;
+        b=QOwCoSccXv792DglfTlIY/YDjPIgUs/TCdm7ZET8p5zXGqQPK3hkY1PIimGX6StuJP
+         bpcc04mTOnLx0ipCvCaPEzs1CmB1B5AbI63zzklcE1ZduVzvmgNX6KPEcfrsfxIe1PrK
+         XXElpSaLb+puWhJ1AxnHA69oSXx/MbU48x1Mg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737801548; x=1738406348;
+        d=1e100.net; s=20230601; t=1737803218; x=1738408018;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=s2D5VuJzabmKRrpiVgwJSi8m5su/EkjfS+gb35+rtZE=;
-        b=GKK8QDm1VyXXsmFAzc2xwWi9Jk9a2rTUVuntcQwyx5kvMk1/m27rD19Cygqv5Ei4SG
-         RMbniziRHjfk27V3dvkrQewomUVy5w+M+0nMPR2k9jK4bqPJqbolmY+vkyWXWvQgmbyh
-         nHzvkeRKPDRTOmIcMAsWVP+Mdr0y22mSQYfJBODYBa790xqFkFWzwmiXCIb9Vk/LuJpu
-         zU4VH9/QmvQI+cT+sOML/UrD8aNlPANFHYO3gzW1kwqnhhRCJZkg7aOhDUMsp47PBOkY
-         g+sPQ5KcElt25kIUrhojrHBrPo8Xc6iVrK5A8aZ27EEU2Isjhvf38vxRXf25Q4J1UiDA
-         5SLg==
-X-Gm-Message-State: AOJu0Yzo/ZdKmX9pN9kds6oaSmL3i4P6PivBEe/zcuWPeE49I97uGMj7
-	DN0VcOAauga7YX9jIaAiQ/fvhA0aOjVDLSi+o7/c/6PaNB/wYkldLqIbbS3d6J7BIEcMhiuw/U4
-	466o=
-X-Gm-Gg: ASbGncsHA+yMm1t6EXlvENOQAClYEIrZZNePL/6s797FNXvVq3FRFXy1W+qgcF0h5Qa
-	DnVBsiME1S/JVTbgrrr5sN70BzQw8O+Fy2Ai7IfoWb9OG08ShyX/99oKDw5QS/yPYzijuJG2GkG
-	tag8XnXvlzPm/MtmjlPYhBv2Vqb0bjxHhW3ekn5vbFNHOO7rmXbb81S5C41+xwlVJf2HYZLYn7G
-	cFB3v9iHIvP6bRdk7ac01t60k+LHy8aklxiKgSZJEaa52eom6QqDlgO/UCZrWpWDnZoFK762GHG
-	bLYDcVhaKwqhPuYJJ0KFoSLTmWy8WaMP
-X-Google-Smtp-Source: AGHT+IG9Bj3sAKCCaLvp5UHLVW40DKZYmsqYhSXYOSoVmyZucOrGhaseeCdPMWLlpdGOjH2NA4fs6Q==
-X-Received: by 2002:a05:600c:138f:b0:436:ed50:4f8a with SMTP id 5b1f17b1804b1-438913caeb9mr351667005e9.10.1737801547002;
-        Sat, 25 Jan 2025 02:39:07 -0800 (PST)
+        bh=nJvDRErvL6FvmwDzbnKM5H+HbIDcZcIW79VtcBy+wUM=;
+        b=pLOiphpY2Pfb4FbsGCwzAzwelykdWhXumm0W1XSgvi5pCfWyGLst2Cgiw/mhSXlOdV
+         RCo9oMqb2lkhvAY8ae0od8e97SI4Snmiii4JefF9VXqmlV+0mvgFVzCHUhw+nBLEUVQH
+         1X2YhCuAcaPnNVT+LQxT76HJMylHCR1wvjihYzWFJNHaH+hkrwYeSfSwJR4Ce1c9QLUa
+         wuL3u/4ZJbMaxf2x897bFT8GMo19CRzNcVSCA5N+2aWJvYhVJmMKZPw8OeYmHqJfZJYe
+         3tvVme2Ib+l8VS0pEvMd7Xv9L28063yrQgSqpmYep7AiSM1A3M0+GfnIvDOkKZGzFCPH
+         6izg==
+X-Gm-Message-State: AOJu0YxQcbV5jd0DV5Al9hNEtujjQdBIO8/IfT4KZ9OBM1kgelmUYeHQ
+	eynRprdgKLHyC31mCGFirxV7KS0nPEqtzlUaM76aKhVCUWvl+txgmtdW1YhPWMS7eK5+ZquS1By
+	bY/U=
+X-Gm-Gg: ASbGncsBHAtn/Nx03T8PfhfxJ6pZkpyiAIITk5ty2yPlAhxvKY3etlLkNne6pitPF5f
+	QDWi8tWPX+dJC5SH/zV8KwO/cFR2BOCZsqK24pYfbNpFvoaMcKivZSD/16CtBcNTe1ElBLOrn61
+	eAxjYh8fD47KR+f2VL1jnCK+ESeDWq9UHKnmqIjg7kPkjYxk+Rlg+UaDa8AmsrWlFDx/QQsVUVR
+	64ZAgU4PoCgbxJOq8VyyOCMnM4imj2dXmofCQXb7qLqgrSkkDDu3cCaFj3bm01DHvyDVNnmzcAQ
+	XTzo+5025x0kpscBFmeA+1YzqyyBOWqu
+X-Google-Smtp-Source: AGHT+IHrr2E4dYnoenBiSdTRxhcbCj8pyCk0apAaafIRPYy6OwGIp4Q5vUsW+ivAwGN16UeHOua9sQ==
+X-Received: by 2002:a05:600c:3b26:b0:434:a0bf:98ea with SMTP id 5b1f17b1804b1-438913cd4a1mr290687595e9.9.1737803218181;
+        Sat, 25 Jan 2025 03:06:58 -0800 (PST)
 Received: from max.int.rpsys.net ([2001:8b0:aba:5f3c:ac79:b32:597e:d068])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-438bd4900e2sm56718965e9.24.2025.01.25.02.39.04
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38c2a1bb057sm5308179f8f.62.2025.01.25.03.06.57
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 25 Jan 2025 02:39:05 -0800 (PST)
+        Sat, 25 Jan 2025 03:06:57 -0800 (PST)
 From: Richard Purdie <richard.purdie@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-openembedded] [PATCH] crash-cross-canadian: Update to match OE-Core virtual provider changes
-Date: Sat, 25 Jan 2025 10:39:04 +0000
-Message-ID: <20250125103904.2455885-1-richard.purdie@linuxfoundation.org>
+Subject: [meta-openembedded] [PATCH v2] crash-cross-canadian: Update to match OE-Core virtual provider changes
+Date: Sat, 25 Jan 2025 11:06:56 +0000
+Message-ID: <20250125110656.2464673-1-richard.purdie@linuxfoundation.org>
 X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 25 Jan 2025 10:39:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115075
+ <openembedded-devel@lists.openembedded.org>; Sat, 25 Jan 2025 11:07:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115076
 
 OE-Core changed to to use virtual/nativesdk-cross-XXX replace the older
 more complex cross providers. Update the recipes to match.
@@ -69,22 +69,24 @@ This fixes check layer failures on the autobuilder.
 
 Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 ---
- meta-oe/recipes-kernel/crash/crash-cross-canadian_8.0.5.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-kernel/crash/crash-cross-canadian_8.0.5.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/meta-oe/recipes-kernel/crash/crash-cross-canadian_8.0.5.bb b/meta-oe/recipes-kernel/crash/crash-cross-canadian_8.0.5.bb
-index 54883cef38..1ef643af58 100644
+index 54883cef38..bafe56d2c4 100644
 --- a/meta-oe/recipes-kernel/crash/crash-cross-canadian_8.0.5.bb
 +++ b/meta-oe/recipes-kernel/crash/crash-cross-canadian_8.0.5.bb
-@@ -15,8 +15,8 @@ DEPENDS = "\
+@@ -15,9 +15,9 @@ DEPENDS = "\
      nativesdk-mpfr \
      nativesdk-readline \
      nativesdk-zlib \
 -    virtual/${HOST_PREFIX}gcc \
 -    virtual/${HOST_PREFIX}binutils \
+-    virtual/nativesdk-${HOST_PREFIX}compilerlibs \
 +    virtual/nativesdk-cross-cc \
 +    virtual/nativesdk-cross-binutils \
-     virtual/nativesdk-${HOST_PREFIX}compilerlibs \
++    virtual/nativesdk-compilerlibs \
      virtual/nativesdk-libc"
  
+ RDEPENDS:${PN} = "nativesdk-liblzma"
 
