@@ -1,92 +1,152 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <a-christidis@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 146F2C02191
-	for <webhook@archiver.kernel.org>; Mon, 27 Jan 2025 08:54:49 +0000 (UTC)
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
- by mx.groups.io with SMTP id smtpd.web11.47419.1737968083575297754
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EC6FFC02188
+	for <webhook@archiver.kernel.org>; Mon, 27 Jan 2025 14:55:40 +0000 (UTC)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ by mx.groups.io with SMTP id smtpd.web11.53238.1737989736206140207
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Jan 2025 00:54:43 -0800
+ Mon, 27 Jan 2025 06:55:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=U/0E4FCT;
- spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-aaee2c5ee6eso866100166b.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Jan 2025 00:54:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1737968082; x=1738572882; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=sgL/MWkyPWn8EMnrS+R2bO/mPx+210UH3ezVRBlcidk=;
-        b=U/0E4FCTpwTk/k/xW6uFDfccmwxdZkXz/9MCkbqSDyjkbLT0sozkV9cHJaHVSdlFl9
-         gZH3HSSe0ttZNvYStIP+0D/UZi6EF8VBOkIup5wFjCZpt/aVArGdmG18NDb51A3om+YL
-         vc2Rx9+pHvSp6fYxK12jl/1gn87HKJ2dtRuuZYBune5hkxG27xOT2+g910Wczg7gY7jY
-         nw3wZU4kWj/M55F/w7eqZ6JXCAKHmVTvxtu4MMJB+iwsQaclwroyD1/ZI5w0EPP2ojVx
-         vED1XDeyUWhChejp2k3SJs/uNCYhMIrusU6/cVmqTavbuwvtG1BrcmSLlJO6GlIOjGiT
-         JN1Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737968082; x=1738572882;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=sgL/MWkyPWn8EMnrS+R2bO/mPx+210UH3ezVRBlcidk=;
-        b=Z/mpCXe3JDZKXIk2AJo7CuzGRcNRRhStT+tBqzPr4OwylpIiMhYGSZ+R73PDKu4Z+R
-         /XD0n5NdJ29Vkh5nWVtixcWRUzzc0vG/EysPF6T9Y5yvWqMXyR8gD0Gt87TWvy9p4fu5
-         E+X+Rs+ZoNvYsqzmx4h7IKOzGqbVeoVwWL0lLkT7Ei9qx+VLispQ+Dw+WuQ/9pJrC6ky
-         HKm4G4h4zlh/OEokuIWoudyqM/9nPM3BBxXzstKMaR2a5iPQ/3MyrwRCrdan7Nj5+UIU
-         JG+Em4vaMH9ePqWOCKqt0ZRp6NgNagsJMRlgpkVtfVIzvbKipI7ze0HBeKxz1zfa2/g+
-         dUaw==
-X-Gm-Message-State: AOJu0YwWrOdrwZVyc9GuwJUKAwXHvmAAYt/Bb6Qf1ZA3067weL281bH9
-	Rdk8SJ/5VYBbjZwbGBicx8lA+SFebiIXhrbVvlKEGn5vMqXkbD/q/E+N4g==
-X-Gm-Gg: ASbGncuGAfrJBTagGz6bUhs9YfQiZjk2gGKVQO6tjhkOilBBfbOGpbdIxSjtDl5v063
-	4y7JjRE08FD3jYvoV544OzDHQ+TVCz/YAIrQ3aRRB4jVx+m0P+JWyZjQrlFt9ssJujQU+VRno57
-	qjyaog3VE0U4uRV4CQgKsDW0msp4OE1zRnofX+cuENtYbMMzrhAz7jBGSYuvHHhq3qxBRwm9AvT
-	pnHyGCiZdyesaz04PloHJ3a1dPrQk+rHQTH01Sew+NWfnqVYEDdL33yr/kC9wAOWB1APHBeYH7k
-	YKw4vz8+cc8QhjQJrTsp6i+8u1eYNZZOIzLbEMegAWBQmDPz
-X-Google-Smtp-Source: AGHT+IGxvuB1A3yW2FH8Hvz7ZtSnXzbVc5x3iXbCDFZBDxGPSscrfGCxb4WVy4e5qtGJJXVfe3bJwg==
-X-Received: by 2002:a17:907:60d2:b0:aa6:82ea:69d6 with SMTP id a640c23a62f3a-ab38b10cfbfmr3432063466b.18.1737968081592;
-        Mon, 27 Jan 2025 00:54:41 -0800 (PST)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with UTF8SMTPSA id a640c23a62f3a-ab6760b76b7sm542137466b.87.2025.01.27.00.54.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Jan 2025 00:54:41 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: akuster808@gmail.com,
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][scarthgap][PATCH 2/3] lapack: add PACKAGECONFIG for cblas
-Date: Mon, 27 Jan 2025 09:54:36 +0100
-Message-ID: <20250127085437.54643-2-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250127085437.54643-1-martin.jansa@gmail.com>
-References: <20250127085437.54643-1-martin.jansa@gmail.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=jyZdE4Xo;
+ spf=pass (domain: ti.com, ip: 198.47.19.245, mailfrom: a-christidis@ti.com)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50REtYx01806120
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Mon, 27 Jan 2025 08:55:34 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1737989734;
+	bh=siSIAFsWF4XenN4PtGrM9mwr4bJGBFGKdzbxDNHJX+c=;
+	h=From:To:Subject:Date;
+	b=jyZdE4XokIaz6luDXx0K7WzIBpngwzQ7H7Yqb5du/dUMHKRGXUPHiwHPQlvRCelpF
+	 2ZnWtBnFs6QKXcm2td5EpATwkcTqEJ1Y8ivVhbYZ/TLsuYjsCVpqmjkqskWkLkidxQ
+	 aDa24nx5JEA1xarW9BcLcCWUaR3ZJLx69LWbxFbE=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50REtYEI008530
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 27 Jan 2025 08:55:34 -0600
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 27
+ Jan 2025 08:55:33 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 27 Jan 2025 08:55:33 -0600
+Received: from antonios-ThinkStation-P3-Tower.dhcp.ti.com (antonios-thinkstation-p3-tower.dhcp.ti.com [128.247.81.112])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50REtXZk094492;
+	Mon, 27 Jan 2025 08:55:33 -0600
+From: <a-christidis@ti.com>
+To: <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
+Subject: [master][PATCH] opencl-cts: add recipe
+Date: Mon, 27 Jan 2025 08:55:33 -0600
+Message-ID: <20250127145533.1510728-1-a-christidis@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Jan 2025 08:54:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115107
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Jan 2025 14:55:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115109
 
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+From: Antonios Christidis <a-christidis@ti.com>
+
+This recipe provides the opecl-cts suite.  This is a pre-release version
+v2024-08-08, which I have tested to work with opencl-headers version v2024.05.08
+. The pre-release version was picked due to incompatibility issues with other
+versions of headers.
+
+The recipe also includes a patch, to allow it to compile and build properly.
+Further information below.
+
+Signed-off-by: Antonios Christidis <a-christidis@ti.com>
 ---
- meta-oe/recipes-devtools/lapack/lapack_3.12.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../files/0001-Ignore-Compiler-Warnings.patch | 37 +++++++++++++++++++
+ .../opencl/opencl-cts_2024.08.08.bb           | 26 +++++++++++++
+ 2 files changed, 63 insertions(+)
+ create mode 100644 meta-oe/recipes-core/opencl/files/0001-Ignore-Compiler-Warnings.patch
+ create mode 100644 meta-oe/recipes-core/opencl/opencl-cts_2024.08.08.bb
 
-diff --git a/meta-oe/recipes-devtools/lapack/lapack_3.12.0.bb b/meta-oe/recipes-devtools/lapack/lapack_3.12.0.bb
-index 4357515b71..aafcdef681 100644
---- a/meta-oe/recipes-devtools/lapack/lapack_3.12.0.bb
-+++ b/meta-oe/recipes-devtools/lapack/lapack_3.12.0.bb
-@@ -24,6 +24,7 @@ S = "${WORKDIR}/git"
- 
- PACKAGECONFIG ?= ""
- PACKAGECONFIG[lapacke] = "-DLAPACKE=ON,-DLAPACKE=OFF"
-+PACKAGECONFIG[cblas] = "-DCBLAS=ON,-DCBLAS=OFF"
- 
- EXTRA_OECMAKE = " -DBUILD_SHARED_LIBS=ON \
-                   ${@bb.utils.contains('PTEST_ENABLED', '1', ' -DBUILD_TESTING=ON', '', d)} \
+diff --git a/meta-oe/recipes-core/opencl/files/0001-Ignore-Compiler-Warnings.patch b/meta-oe/recipes-core/opencl/files/0001-Ignore-Compiler-Warnings.patch
+new file mode 100644
+index 000000000..2515c7f16
+--- /dev/null
++++ b/meta-oe/recipes-core/opencl/files/0001-Ignore-Compiler-Warnings.patch
+@@ -0,0 +1,37 @@
++From 082ce10dd191f036f5a6e1fb31134e9736ba3643 Mon Sep 17 00:00:00 2001
++From: Antonios Christidis <a-christidis@ti.com>
++Date: Fri, 17 Jan 2025 15:05:39 -0600
++Subject: [PATCH] Ignore Compiler Warnings
++
++
++Within the cmake build system, the compiler -Werror flag is enabeled.  This
++turns all warnings into errors and doens't allow the system to compile
++correctly.  Change the system to ignore the 3 warning rules that show up when
++compiling.
++
++Upstream-Status: Inappropriate [oe specific - compilation errors due to cross-compiling]
++
++Signed-off-by: Antonios Christidis <a-christidis@ti.com>
++
++---
++ CMakeLists.txt | 4 +++-
++ 1 file changed, 3 insertions(+), 1 deletion(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 5cfef6b3..71b6ddb4 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -109,7 +109,9 @@ if(CMAKE_COMPILER_IS_GNUCC OR "${CMAKE_CXX_COMPILER_ID}" MATCHES "(Apple)?Clang"
++     add_cxx_flag_if_supported(-Wno-error=cpp) # Allow #warning directive
++     add_cxx_flag_if_supported(-Wno-unknown-pragmas) # Issue #785
++     add_cxx_flag_if_supported(-Wno-error=asm-operand-widths) # Issue #784
++-
+++    add_cxx_flag_if_supported(-Wno-maybe-uninitialized)
+++    add_cxx_flag_if_supported(-Wno-stringop-truncation)
+++    add_cxx_flag_if_supported(-Wno-strict-aliasing)
++     # -msse -mfpmath=sse to force gcc to use sse for float math,
++     # avoiding excess precision problems that cause tests like int2float
++     # to falsely fail. -ffloat-store also works, but WG suggested
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-core/opencl/opencl-cts_2024.08.08.bb b/meta-oe/recipes-core/opencl/opencl-cts_2024.08.08.bb
+new file mode 100644
+index 000000000..f6f4e9466
+--- /dev/null
++++ b/meta-oe/recipes-core/opencl/opencl-cts_2024.08.08.bb
+@@ -0,0 +1,26 @@
++SUMMARY = "OpenCL CTS"
++DESCRIPTION = "OpenCL CTS test suite"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
++
++inherit pkgconfig cmake
++
++DEPENDS += "opencl-headers opencl-icd-loader"
++RDEPENDS:${PN} += "python3-core python3-io"
++
++S = "${WORKDIR}/git"
++
++SRC_URI = "git://github.com/KhronosGroup/OpenCL-CTS.git;protocol=https;branch=main;lfs=0 \
++	   file://0001-Ignore-Compiler-Warnings.patch"
++
++SRCREV = "a406b340913f622da089b00f284a597656c10239"
++
++EXTRA_OECMAKE:append = " -DCL_INCLUDE_DIR=${STAGING_INCDIR} -DCL_LIB_DIR=${STAGING_LIBDIR} -DOPENCL_LIBRARIES=OpenCL"
++
++do_install() {
++        install -d ${D}${bindir}/opencl_test_conformance
++        cp -r ${B}/test_conformance/* ${D}${bindir}/opencl_test_conformance
++        sed -i 's:/usr/bin/python:/usr/bin/python3:g' ${D}${bindir}/opencl_test_conformance/run_conformance.py
++	 find "${D}${bindir}/opencl_test_conformance" -name cmake_install.cmake -type f -delete
++        find "${D}${bindir}/opencl_test_conformance" -name CMakeFiles -type d -exec rm -rf "{}" \; -depth
++}
 -- 
-2.48.1
+2.34.1
 
 
