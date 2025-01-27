@@ -1,120 +1,196 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 49C94C02188
-	for <webhook@archiver.kernel.org>; Mon, 27 Jan 2025 17:14:34 +0000 (UTC)
-Received: from mail-yb1-f170.google.com (mail-yb1-f170.google.com [209.85.219.170])
- by mx.groups.io with SMTP id smtpd.web11.1295.1737998065805629559
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1724C02188
+	for <webhook@archiver.kernel.org>; Mon, 27 Jan 2025 19:50:52 +0000 (UTC)
+Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com [209.85.160.46])
+ by mx.groups.io with SMTP id smtpd.web10.509.1738007450386550320
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Jan 2025 09:14:25 -0800
+ Mon, 27 Jan 2025 11:50:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=hPLpUSDN;
- spf=pass (domain: gmail.com, ip: 209.85.219.170, mailfrom: schonm@gmail.com)
-Received: by mail-yb1-f170.google.com with SMTP id 3f1490d57ef6-e46c6547266so6886851276.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Jan 2025 09:14:25 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OHznBmmH;
+ spf=pass (domain: gmail.com, ip: 209.85.160.46, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f46.google.com with SMTP id 586e51a60fabf-2a3d8857a2bso2710742fac.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Jan 2025 11:50:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1737998065; x=1738602865; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ayWRUO1xvf+GsboGJFjdNExZYDRVnIEnPw/ddTNgNBA=;
-        b=hPLpUSDNMjteZqGP+Q/LgRehH4Cee84kiWLIJr3AVJGju+NIgh6Qb3zmvDAV5slvJl
-         FwyGWNa5n4qSDbShv0fMkCf61VD8TwmeNWC++KayKWAFkGAJj+t5DrQqmVBgwWIpkkop
-         +4aXAT9fxlh7H/lpKq4U6LuYIUOnG5BOjz3CrZnwfH9LoYEyN0GSsDliv7Z1xl+0vFet
-         SeMUaAqrJfqpxhh/O+mCRKY9tKJt1yPONOkjgPft2JDAoBHBqpwqpRA48ueXwQ56BdtQ
-         enVhsCdWHMPH3Y2Cm9DMWhof45B/LWuLyq2GJXbpmhhasIwv5AtTgvNt177ZPoqq0G7e
-         hXRw==
+        d=gmail.com; s=20230601; t=1738007449; x=1738612249; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=veBZwb1G9eTEhThWP0lLPcKIgjQ6n5dI5GzU3dMJHbA=;
+        b=OHznBmmHTQ7Kr6d799YQMpJymXAQhRHZugV5b+MZusou7yofMit55RdTEYzcsW2nxA
+         /r2zb2+bN3TIn013TrIM2z9lsX7F0tmh5kTNk7cQOckJRB6eHeEz3fqUv5LtHQgQ6mIz
+         QNPphTBXtO/C/DFQml879HtaXiopRVU8OZnVswFkudP9ko0vsnhwYGSXzrQ3uYX7sauW
+         iVCH9OGLb3tkbbKK+wrGeiEV+qmtJgtR5veHe+e4gS6xetqam/SMTPm8hlSmEkkUjJiz
+         zuEMJHeuA/RAOyB4WfVepYmCctW350qNCD9XAP4J4nMzY99hz3BvPMu4vPOIjpHlKcVn
+         ydSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1737998065; x=1738602865;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ayWRUO1xvf+GsboGJFjdNExZYDRVnIEnPw/ddTNgNBA=;
-        b=CZA8GO2c0mLDhbN1Lczv7a1pTxjEe9hMWtwb9rzk36qgAPDc1g+dViuJaeHBIMu4aM
-         4J01TQi/4kiQFFs4sx24gtmr0+yRUFt3Ak6f/AAnEeWACQfPU6mjLn/zNrN+dSyWUTLV
-         7lIrPGo6lDnCGpvem0PzXq2VxY3E6l9a0taV2eGW8pQp4ZUv0Siy/KJI+wmiy5tSXG7g
-         xbnc8nI78mXsToYl4bZoHUia727Vwq1uXKLOVAcWxvtge7tQdIfu8cHIrObao0SyJsiH
-         d3HvG0WOLgUhHwEwk/IV5Nr//yJDGlj7n3HhzE29/oe+MQ8QdFm/KaAuMrt1ohO37045
-         XhuQ==
-X-Gm-Message-State: AOJu0YwGNP+fbaV0XjisgkHq8FJDvBGCbbgGLdNrxbBG+3OVcW5ZiaUf
-	3keHisc6CKywTG+gDWNRyHH2TMwV/Jgj5maA8IhjZHLmcwbTA9h7nqAi2i/g
-X-Gm-Gg: ASbGncvKPtdcvWAM+E2iNeGcWebBU7pupuXeC0Qu1wqhDfeypCtHUK10GtwVqbDy2zv
-	SZ6yoY3NdTaJmZ5UtBfer8eubShf4lok+l/BvmtlzA351QidbZPRa3jUdZ3uO1cod9LwdGJBwPq
-	o6bIUX5lXUuSEtpl4fb0gcIutLyoFpZpabWPk5e2pJB9g267pAot8RgaO0jC8ooP8f5IUyJS4c/
-	f9e7oZp32vsGtU88C2krZFRaVJ4Iq7yj3gdX4UYPYwfaGIyz4orgA9OjuhoIS5nzFC3kLk3W0mX
-	9pGIyMMdYU5+ICwxbgAoyt4tM5YjTn7yb6sZenY=
-X-Google-Smtp-Source: AGHT+IEBeWuS6VAfkZ+Ehm25i/5NrXoziy2VxZdScI0E/HeyyfYrmxulsgKsfRubIBzmtJL8EQSk2g==
-X-Received: by 2002:a05:6902:2605:b0:e57:f6be:2ab2 with SMTP id 3f1490d57ef6-e57f6be30b3mr24087296276.33.1737998063329;
-        Mon, 27 Jan 2025 09:14:23 -0800 (PST)
-Received: from localhost.localdomain (71-208-20-57.ftmy.qwest.net. [71.208.20.57])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e583b862558sm1688457276.43.2025.01.27.09.14.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Jan 2025 09:14:22 -0800 (PST)
-From: Jason Schonberg <schonm@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] c-ares: upgrade 1.32.3 -> 1.33.0
-Date: Mon, 27 Jan 2025 12:14:07 -0500
-Message-ID: <20250127171407.299528-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20230601; t=1738007449; x=1738612249;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=veBZwb1G9eTEhThWP0lLPcKIgjQ6n5dI5GzU3dMJHbA=;
+        b=Gz+AhXwxrzleoyDb5EqBDiTvao9zPKjUZIfeDblMePYWKQJ3dshYb4qFaDUKx7zb4w
+         L8SC83lfU28oxyIBWGYA3BEOU+cSnanIq/x5mUOuB/i0FFLTvC4TFZhziZRrzLSbu3rx
+         5yBHzVSmbN2U8PcgEsHNSdcQ21I7jYau1Vjer56mDEbuqIai12aQbQU+aUkwsNsNbI+C
+         jXOb6cx01w9TOpQ0eEZkaA8Azkg4HYd3jpov/etYOf2A8Q2qHKBTpjXdxuF5uWlClcuP
+         ofsUfI2d0NkLOdxl0qHcORacVP9rRcM38Gdp27EJ3HdFz8/pRWuJKUFqN1sOjDoDyrsw
+         Nkdg==
+X-Gm-Message-State: AOJu0Yzye6vHfBs+LPqhx5z6NaIrTPmsMpnL39kPGqrQdy08+LU53/6G
+	6poCWICroIaUtjhQ64zcgmaSvhNkBgfWVyh3r3RNyPQVu16h1QlIc+kFQc6X/VMvHhWP2X3cVkO
+	jg0seMZHLjaqznQngv0f35nLZhUM=
+X-Gm-Gg: ASbGncuCUUCNGkZR0BqntXlzG+Ohm7WX3rybJ75lABgkuqOsif4DAqylUQs98st0ooz
+	Zi0vGZt7ghspR/QN3UytmGJVHgrDvp3cBcDwXmuxL82ff0GZJBIWpqh7rGUSV
+X-Google-Smtp-Source: AGHT+IE0Pu9h1AkrRam/QEn0vIRhdjWIfxIIFjK1WyDarGu5o+LxkUO/HePyw3prAg4IX2a/UOX/m14n1oovW79DacE=
+X-Received: by 2002:a05:6870:2a42:b0:287:886:2e62 with SMTP id
+ 586e51a60fabf-2b1c08c63ddmr22158935fac.12.1738007449608; Mon, 27 Jan 2025
+ 11:50:49 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250127145533.1510728-1-a-christidis@ti.com>
+In-Reply-To: <20250127145533.1510728-1-a-christidis@ti.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 27 Jan 2025 11:50:23 -0800
+X-Gm-Features: AWEUYZkDY4N4V2vLp5cmIuLIajIKTfM7HM0h3EbGCo8FN7Fy65FAYPZwSYg0zxc
+Message-ID: <CAMKF1sq-vDu4S5jPPH6yxHX=SGuK3syJ+0oOjeEdyUcCc-iL1A@mail.gmail.com>
+Subject: Re: [master][PATCH] opencl-cts: add recipe
+To: a-christidis@ti.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Jan 2025 17:14:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115110
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Jan 2025 19:50:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115111
 
-License-Update: Still MIT licensed.  Just removed a header from the license file.
-  https://github.com/c-ares/c-ares/commit/595cf2133488d2e02c6389577a1b511971dba1ba
+fails with master here
 
-Changelog: https://github.com/c-ares/c-ares/releases/tag/v1.33.0
+https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/320/step=
+s/14/logs/stdio
 
-Features:
+cc1plus: error: '-Wformat-security' ignored without '-Wformat'
+[-Werror=3Dformat-security]
+| cc1plus: all warnings being treated as errors
 
-    Add DNS cookie support (RFC7873 + RFC9018) to help prevent off-path cache poisoning attacks. PR #833
-    Implement TCP FastOpen (TFO) RFC7413, which will make TCP reconnects 0-RTT on supported systems. PR #840
-
-Changes:
-
-    Reorganize source tree. PR #822
-    Refactoring of connection handling to prevent code duplication. PR #839
-    New dynamic array data structure to prevent simple logic flaws in array handling in various code paths. PR #841
-
-Bugfixes:
-
-    ares_destroy() race condition during shutdown due to missing lock. PR #831
-    Android: Preserve thread name after attaching it to JVM. PR #838
-    Windows UWP (Store) support fix. PR #845
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
----
- .../c-ares/{c-ares_1.32.3.bb => c-ares_1.33.0.bb}             | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/c-ares/{c-ares_1.32.3.bb => c-ares_1.33.0.bb} (84%)
-
-diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.32.3.bb b/meta-oe/recipes-support/c-ares/c-ares_1.33.0.bb
-similarity index 84%
-rename from meta-oe/recipes-support/c-ares/c-ares_1.32.3.bb
-rename to meta-oe/recipes-support/c-ares/c-ares_1.33.0.bb
-index 8bc22f9970..44c5834695 100644
---- a/meta-oe/recipes-support/c-ares/c-ares_1.32.3.bb
-+++ b/meta-oe/recipes-support/c-ares/c-ares_1.33.0.bb
-@@ -3,11 +3,11 @@ SUMMARY = "c-ares is a C library that resolves names asynchronously."
- HOMEPAGE = "https://c-ares.org/"
- SECTION = "libs"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.md;md5=2047e36c793a8e9c3d3f4b66f8934a19"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=d3e72a10e08191f2ca1be3f3228d78f3"
- 
- SRC_URI = "https://github.com/c-ares/c-ares/releases/download/v${PV}/${BPN}-${PV}.tar.gz \
-            file://run-ptest"
--SRC_URI[sha256sum] = "5f02cc809aac3f6cc5edc1fac6c4423fd5616d7406ce47b904c24adf0ff2cd0f"
-+SRC_URI[sha256sum] = "3e41df2f172041eb4ecb754a464c11ccc5046b2a1c8b1d6a40dac45d3a3b2346"
- 
- PACKAGECONFIG ?= "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
- PACKAGECONFIG[manpages] = ""
--- 
-2.43.0
-
+On Mon, Jan 27, 2025 at 6:55=E2=80=AFAM <a-christidis@ti.com> wrote:
+>
+> From: Antonios Christidis <a-christidis@ti.com>
+>
+> This recipe provides the opecl-cts suite.  This is a pre-release version
+> v2024-08-08, which I have tested to work with opencl-headers version v202=
+4.05.08
+> . The pre-release version was picked due to incompatibility issues with o=
+ther
+> versions of headers.
+>
+> The recipe also includes a patch, to allow it to compile and build proper=
+ly.
+> Further information below.
+>
+> Signed-off-by: Antonios Christidis <a-christidis@ti.com>
+> ---
+>  .../files/0001-Ignore-Compiler-Warnings.patch | 37 +++++++++++++++++++
+>  .../opencl/opencl-cts_2024.08.08.bb           | 26 +++++++++++++
+>  2 files changed, 63 insertions(+)
+>  create mode 100644 meta-oe/recipes-core/opencl/files/0001-Ignore-Compile=
+r-Warnings.patch
+>  create mode 100644 meta-oe/recipes-core/opencl/opencl-cts_2024.08.08.bb
+>
+> diff --git a/meta-oe/recipes-core/opencl/files/0001-Ignore-Compiler-Warni=
+ngs.patch b/meta-oe/recipes-core/opencl/files/0001-Ignore-Compiler-Warnings=
+.patch
+> new file mode 100644
+> index 000000000..2515c7f16
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/opencl/files/0001-Ignore-Compiler-Warnings.pat=
+ch
+> @@ -0,0 +1,37 @@
+> +From 082ce10dd191f036f5a6e1fb31134e9736ba3643 Mon Sep 17 00:00:00 2001
+> +From: Antonios Christidis <a-christidis@ti.com>
+> +Date: Fri, 17 Jan 2025 15:05:39 -0600
+> +Subject: [PATCH] Ignore Compiler Warnings
+> +
+> +
+> +Within the cmake build system, the compiler -Werror flag is enabeled.  T=
+his
+> +turns all warnings into errors and doens't allow the system to compile
+> +correctly.  Change the system to ignore the 3 warning rules that show up=
+ when
+> +compiling.
+> +
+> +Upstream-Status: Inappropriate [oe specific - compilation errors due to =
+cross-compiling]
+> +
+> +Signed-off-by: Antonios Christidis <a-christidis@ti.com>
+> +
+> +---
+> + CMakeLists.txt | 4 +++-
+> + 1 file changed, 3 insertions(+), 1 deletion(-)
+> +
+> +diff --git a/CMakeLists.txt b/CMakeLists.txt
+> +index 5cfef6b3..71b6ddb4 100644
+> +--- a/CMakeLists.txt
+> ++++ b/CMakeLists.txt
+> +@@ -109,7 +109,9 @@ if(CMAKE_COMPILER_IS_GNUCC OR "${CMAKE_CXX_COMPILER_=
+ID}" MATCHES "(Apple)?Clang"
+> +     add_cxx_flag_if_supported(-Wno-error=3Dcpp) # Allow #warning direct=
+ive
+> +     add_cxx_flag_if_supported(-Wno-unknown-pragmas) # Issue #785
+> +     add_cxx_flag_if_supported(-Wno-error=3Dasm-operand-widths) # Issue =
+#784
+> +-
+> ++    add_cxx_flag_if_supported(-Wno-maybe-uninitialized)
+> ++    add_cxx_flag_if_supported(-Wno-stringop-truncation)
+> ++    add_cxx_flag_if_supported(-Wno-strict-aliasing)
+> +     # -msse -mfpmath=3Dsse to force gcc to use sse for float math,
+> +     # avoiding excess precision problems that cause tests like int2floa=
+t
+> +     # to falsely fail. -ffloat-store also works, but WG suggested
+> +--
+> +2.34.1
+> +
+> diff --git a/meta-oe/recipes-core/opencl/opencl-cts_2024.08.08.bb b/meta-=
+oe/recipes-core/opencl/opencl-cts_2024.08.08.bb
+> new file mode 100644
+> index 000000000..f6f4e9466
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/opencl/opencl-cts_2024.08.08.bb
+> @@ -0,0 +1,26 @@
+> +SUMMARY =3D "OpenCL CTS"
+> +DESCRIPTION =3D "OpenCL CTS test suite"
+> +LICENSE =3D "Apache-2.0"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc=
+3c6bd57"
+> +
+> +inherit pkgconfig cmake
+> +
+> +DEPENDS +=3D "opencl-headers opencl-icd-loader"
+> +RDEPENDS:${PN} +=3D "python3-core python3-io"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +SRC_URI =3D "git://github.com/KhronosGroup/OpenCL-CTS.git;protocol=3Dhtt=
+ps;branch=3Dmain;lfs=3D0 \
+> +          file://0001-Ignore-Compiler-Warnings.patch"
+> +
+> +SRCREV =3D "a406b340913f622da089b00f284a597656c10239"
+> +
+> +EXTRA_OECMAKE:append =3D " -DCL_INCLUDE_DIR=3D${STAGING_INCDIR} -DCL_LIB=
+_DIR=3D${STAGING_LIBDIR} -DOPENCL_LIBRARIES=3DOpenCL"
+> +
+> +do_install() {
+> +        install -d ${D}${bindir}/opencl_test_conformance
+> +        cp -r ${B}/test_conformance/* ${D}${bindir}/opencl_test_conforma=
+nce
+> +        sed -i 's:/usr/bin/python:/usr/bin/python3:g' ${D}${bindir}/open=
+cl_test_conformance/run_conformance.py
+> +        find "${D}${bindir}/opencl_test_conformance" -name cmake_install=
+.cmake -type f -delete
+> +        find "${D}${bindir}/opencl_test_conformance" -name CMakeFiles -t=
+ype d -exec rm -rf "{}" \; -depth
+> +}
+> --
+> 2.34.1
+>
 
