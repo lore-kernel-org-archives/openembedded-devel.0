@@ -2,169 +2,191 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B99D5C0218A
-	for <webhook@archiver.kernel.org>; Tue, 28 Jan 2025 17:14:28 +0000 (UTC)
-Received: from mail-oa1-f54.google.com (mail-oa1-f54.google.com [209.85.160.54])
- by mx.groups.io with SMTP id smtpd.web11.2567.1738084463177494938
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68FB8C0218A
+	for <webhook@archiver.kernel.org>; Tue, 28 Jan 2025 19:02:29 +0000 (UTC)
+Received: from mail-oo1-f50.google.com (mail-oo1-f50.google.com [209.85.161.50])
+ by mx.groups.io with SMTP id smtpd.web11.5299.1738090943694539207
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Jan 2025 09:14:23 -0800
+ Tue, 28 Jan 2025 11:02:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=h/yuQulc;
- spf=pass (domain: gmail.com, ip: 209.85.160.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f54.google.com with SMTP id 586e51a60fabf-2b29662f823so1166184fac.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jan 2025 09:14:23 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JhGEks+0;
+ spf=pass (domain: gmail.com, ip: 209.85.161.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f50.google.com with SMTP id 006d021491bc7-5f89aa7a101so2320358eaf.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jan 2025 11:02:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738084462; x=1738689262; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1738090943; x=1738695743; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=MA2zP7rzo/NLdKwm3j1yRcNCp6wLqqmBvYP1DmEARBY=;
-        b=h/yuQulc+Tl2I491m2JQ56GR0sNZOZR5m+qZR3qT+3UENuPxxnkwlthAUcFIxKdZNt
-         zpbFN/XcueqJaS5n+qjVFoWdtwZkShNyDkxumPlIZWrBwur8FZ1qLAClADV91V7nXyb4
-         rYrwURIlL3Yb21J6+Ti5o9whdPLLmB5jDU1AGvLSqX0GkfYURrUqZ1wYTvmcNgNFSuif
-         whgDq0TYNnL4hbDrIBSCC87ZOjmf7b6jcxmZR1bPkfxcONw6x8DlpY0G57mbzoo19kF4
-         BFW4kJW5TFgVnxrEC9Wys4QwlpeVHse3qu8gj6kIXoYhWYev4NmnPfEgN6P9gyISy7pl
-         1I4Q==
+        bh=x8Bxd9pawWdDjagBi9ndrIus+Nuy3NtERBG6vrWv+hg=;
+        b=JhGEks+0/TZ1OWkl0YjA95QrNZxzgkIkkK5czUpml1lYmZ1aJtUEjUpu92rFy3eZki
+         MmeiIH+1p5yr4muqtbyGhxam5ter57s8IkmW722sa53ID5SpCiid2/swsZ/TQNiadEYX
+         396W74mKErMdPsAGpI80lPgfozUXOvYN85Xt+WFLoFzfvd1YTCPUGsXWQrrHuVZn/a2e
+         MUjK6VX3O97OTa0UcaNayPJM5kO3fn1Q5U5ubP5mXVbP00W/3SeiYtiXpQjugmBOsIhI
+         FCbVHARi3ndQkNzuyDyapjSwpNSVCO6vBupdyD4RMRcoEjTVnB2eKR3aB42BqYW/XZBh
+         sc9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738084462; x=1738689262;
+        d=1e100.net; s=20230601; t=1738090943; x=1738695743;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=MA2zP7rzo/NLdKwm3j1yRcNCp6wLqqmBvYP1DmEARBY=;
-        b=dh+oZmrk8uZ4ZVtcWNtM62azP3YMJbwqy2b8+A97l8gp/7G6/Eg5HRkfLxzNWQiBf8
-         UalyvyFpEp/RH2VnGs5BBtBBHWG8o8AP9PLQA+K18euVip8IPVREHZ9DZOwFEgRzAoly
-         iXJ3DHvZYUyYGfbMbSTFT04nRZ/mtR2uvVq8shgPMqMJipRkt0DeDQEe4XiraOgiT1Av
-         L+HrfiO62/DIJxOzP7wXPgr5lQy3rV1X4z/R6XJdNc5HgkqDa7CM5I8Z05QGCExTbsIR
-         /VR/8Vm8FFcMFFZzFNzV0L8FucyVDQljYrzZt3zGCNviQwaSv1GG719iy5UrDldR43rQ
-         VRaA==
-X-Forwarded-Encrypted: i=1; AJvYcCUS69F38AY21Cn4aEDxzgHVoq6wFZgqZCzdcmU3Tu9wtzvGmXxCNkz97s+FqrghA6IRhWb1DZZTDH1Cy/eJKUsShaM=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzOoPcKLqyVPA7dEbZ/mAazem7oHBRSxxLr6VkvU1Pinm4bq2Zw
-	xw4pDoheDmKOEUDPTvds8ttQkRSQX2jfe5qThU+IRle2anHaCQzBD+flJgGLBZf03zkedRFQ+m+
-	KQUJHRJz8lff5k9NNtiv46I5u1sA=
-X-Gm-Gg: ASbGncvdDCc5wkv9RxZ6uR/jpGNgy4XRpnvJXjRJ4cFKwoGwKK+STR5+PwzDmc75yxy
-	PebhzLs4/YLGNpVMYpsrlTe+zzRIK7JnTIv11d/jm/xR4pklnddAQIORuQpQoviN8+aiYbRA=
-X-Google-Smtp-Source: AGHT+IGXW4Wh3Yqtu6Qhx0B54ITTNOTZ/6racnEmHYT8qwCgpebL6EhdlBemiGc29fw9RLrNm9X0rLwoXZCUM8m8Lf8=
-X-Received: by 2002:a05:6871:7a09:b0:29e:5e83:150e with SMTP id
- 586e51a60fabf-2b1c0aee5fcmr26117131fac.27.1738084462393; Tue, 28 Jan 2025
- 09:14:22 -0800 (PST)
+        bh=x8Bxd9pawWdDjagBi9ndrIus+Nuy3NtERBG6vrWv+hg=;
+        b=Jk71Zz7WHyaCERnSeIo32X9S37+g/MspMYGWUGGE91Q4VLHsk8EF3dF3NK7vxxjqIT
+         gGwdRCnFhfU5xkry1w9I5iY8InXtAY27gL9J86N0DlHayepf7Fur3kIFCKF7EDFOjGyT
+         A0lpTf3QdTxtEd6FYtm0p1HyA+t9dMH0otBto9Tz93uwBUs6U91/p+ofRDe0D01v1L+i
+         upWv56aJvde5lgHC7zUopTmehB4RZDY0b/zK0NTiGCcTZUOgzC0hi8gLv49YlrIe9ffU
+         di0/7OUsOkQyprnqlj+92QMQAJJEC/tM8JuIS8gfaVXpXlhKPxo30c1cjIe8oYV9EcK8
+         0+XA==
+X-Gm-Message-State: AOJu0YyhZe7/Sv1iiGOT1M9plZKh99x6W9i5YUKwL+/ouqPU19GluD2s
+	TBv9ksXyeMb+Hfz/njxVE0VDB2iumd6v/C/5Kz/WFpgAAZ1ySbYc1a/2yKPhrhzUjL3a0JK7fXW
+	kFLuVhCKyOV/dHz1jkORbauBnHdM=
+X-Gm-Gg: ASbGnctRg2C0mti8PM2EhR5v/PF3+nPaOYULfgTUYDkPc2GZPMwwDYa/yzhxLEoQbOL
+	dy0PMRKUdogSNcAlBzhFPSDnV1bcmEUEtymzSbe0IqH2WRpB+boa41YARKbsUlwY2S3SHGqn90c
+	jGjtyXTsIiA8PfloIZO2T0sOQBSg==
+X-Google-Smtp-Source: AGHT+IE5Lq31zLMHWknGym5Zat03Jp07GDGln5q3P/qaISUCwy6PRdQETxVinwzyzzxBwhw6WnM3mxEt3thEFqgIeKw=
+X-Received: by 2002:a05:6870:17a2:b0:29d:c86b:cdec with SMTP id
+ 586e51a60fabf-2b32f37097emr183477fac.29.1738090942815; Tue, 28 Jan 2025
+ 11:02:22 -0800 (PST)
 MIME-Version: 1.0
-References: <20250128131656.61467-1-brgl@bgdev.pl>
-In-Reply-To: <20250128131656.61467-1-brgl@bgdev.pl>
+References: <20250127145533.1510728-1-a-christidis@ti.com>
+In-Reply-To: <20250127145533.1510728-1-a-christidis@ti.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 28 Jan 2025 09:13:56 -0800
-X-Gm-Features: AWEUYZnimy15owYDY7W7OXFtyPHGLQEBDe6hk-s7X3Vn983TcoZ5uvQ0VQAlyjo
-Message-ID: <CAMKF1sqBLaSbN4XtB+XPjYk82Q3twJiOvA68b9-sMd5VC+bbfw@mail.gmail.com>
-Subject: Re: [meta-gnome][PATCH] cheese: new recipe
-To: Bartosz Golaszewski <brgl@bgdev.pl>
-Cc: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>, 
-	openembedded-devel@lists.openembedded.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Date: Tue, 28 Jan 2025 11:01:57 -0800
+X-Gm-Features: AWEUYZl5G2HMTp6Kbz2zaHf0hj9_kEhPUwNhr3hQxzTISaooonxmWA85nHVabww
+Message-ID: <CAMKF1spxHVe8Y1jCzFUY_1BG9WkwAmQz4ngjyNxSsa3=YLfE8Q@mail.gmail.com>
+Subject: Re: [master][PATCH] opencl-cts: add recipe
+To: a-christidis@ti.com
+Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 28 Jan 2025 17:14:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115120
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 Jan 2025 19:02:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115121
 
-On Tue, Jan 28, 2025 at 5:17=E2=80=AFAM Bartosz Golaszewski <brgl@bgdev.pl>=
- wrote:
+it is not yet supported in RISCV so please add COMPATIBLE_HOST accordingly
+
+see - https://errors.yoctoproject.org/Errors/Details/841674/
+
+On Mon, Jan 27, 2025 at 6:55=E2=80=AFAM <a-christidis@ti.com> wrote:
 >
-> From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+> From: Antonios Christidis <a-christidis@ti.com>
 >
-> Add a recipe for cheese - a Gnome application for taking photos and
-> videos with webcams.
+> This recipe provides the opecl-cts suite.  This is a pre-release version
+> v2024-08-08, which I have tested to work with opencl-headers version v202=
+4.05.08
+> . The pre-release version was picked due to incompatibility issues with o=
+ther
+> versions of headers.
 >
-> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+> The recipe also includes a patch, to allow it to compile and build proper=
+ly.
+> Further information below.
+>
+> Signed-off-by: Antonios Christidis <a-christidis@ti.com>
 > ---
->  ...kWidget-cast-to-avoid-an-incompatibl.patch | 29 +++++++++++++++++++
->  .../recipes-gnome/cheese/cheese_44.1.bb       | 26 +++++++++++++++++
->  2 files changed, 55 insertions(+)
->  create mode 100644 meta-gnome/recipes-gnome/cheese/cheese/0001-libcheese=
--Add-GtkWidget-cast-to-avoid-an-incompatibl.patch
->  create mode 100644 meta-gnome/recipes-gnome/cheese/cheese_44.1.bb
+>  .../files/0001-Ignore-Compiler-Warnings.patch | 37 +++++++++++++++++++
+>  .../opencl/opencl-cts_2024.08.08.bb           | 26 +++++++++++++
+>  2 files changed, 63 insertions(+)
+>  create mode 100644 meta-oe/recipes-core/opencl/files/0001-Ignore-Compile=
+r-Warnings.patch
+>  create mode 100644 meta-oe/recipes-core/opencl/opencl-cts_2024.08.08.bb
 >
-> diff --git a/meta-gnome/recipes-gnome/cheese/cheese/0001-libcheese-Add-Gt=
-kWidget-cast-to-avoid-an-incompatibl.patch b/meta-gnome/recipes-gnome/chees=
-e/cheese/0001-libcheese-Add-GtkWidget-cast-to-avoid-an-incompatibl.patch
+> diff --git a/meta-oe/recipes-core/opencl/files/0001-Ignore-Compiler-Warni=
+ngs.patch b/meta-oe/recipes-core/opencl/files/0001-Ignore-Compiler-Warnings=
+.patch
 > new file mode 100644
-> index 0000000000..8d2d413149
+> index 000000000..2515c7f16
 > --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/cheese/cheese/0001-libcheese-Add-GtkWidget=
--cast-to-avoid-an-incompatibl.patch
-> @@ -0,0 +1,29 @@
-> +From d8b8f27730cca948a5e5346b8ed2db0793bb16e7 Mon Sep 17 00:00:00 2001
-> +From: Florian Weimer <fweimer@redhat.com>
-> +Date: Fri, 19 Jan 2024 21:31:33 +0100
-> +Subject: [PATCH] libcheese: Add GtkWidget cast to avoid an
-> + incompatible-pointer-types error
+> +++ b/meta-oe/recipes-core/opencl/files/0001-Ignore-Compiler-Warnings.pat=
+ch
+> @@ -0,0 +1,37 @@
+> +From 082ce10dd191f036f5a6e1fb31134e9736ba3643 Mon Sep 17 00:00:00 2001
+> +From: Antonios Christidis <a-christidis@ti.com>
+> +Date: Fri, 17 Jan 2025 15:05:39 -0600
+> +Subject: [PATCH] Ignore Compiler Warnings
 > +
-> +This is required for compilation with GCC 14.
 > +
-> +Upstream-Status: Submitted [https://gitlab.gnome.org/GNOME/cheese/-/merg=
-e_requests/70]
+> +Within the cmake build system, the compiler -Werror flag is enabeled.  T=
+his
+> +turns all warnings into errors and doens't allow the system to compile
+> +correctly.  Change the system to ignore the 3 warning rules that show up=
+ when
+> +compiling.
+> +
+> +Upstream-Status: Inappropriate [oe specific - compilation errors due to =
+cross-compiling]
+> +
+> +Signed-off-by: Antonios Christidis <a-christidis@ti.com>
+> +
 > +---
-> + libcheese/cheese-flash.c | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> + CMakeLists.txt | 4 +++-
+> + 1 file changed, 3 insertions(+), 1 deletion(-)
 > +
-> +diff --git a/libcheese/cheese-flash.c b/libcheese/cheese-flash.c
-> +index 59959dbd..e4023221 100644
-> +--- a/libcheese/cheese-flash.c
-> ++++ b/libcheese/cheese-flash.c
-> +@@ -132,7 +132,7 @@ cheese_flash_set_property (GObject      *object,
-> +       GObject *parent;
-> +       parent =3D g_value_get_object (value);
-> +       if (object !=3D NULL)
-> +-        priv->parent =3D g_object_ref (parent);
-> ++        priv->parent =3D GTK_WIDGET (g_object_ref (parent));
-> +       else
-> +         priv->parent =3D NULL;
-> +     }
+> +diff --git a/CMakeLists.txt b/CMakeLists.txt
+> +index 5cfef6b3..71b6ddb4 100644
+> +--- a/CMakeLists.txt
+> ++++ b/CMakeLists.txt
+> +@@ -109,7 +109,9 @@ if(CMAKE_COMPILER_IS_GNUCC OR "${CMAKE_CXX_COMPILER_=
+ID}" MATCHES "(Apple)?Clang"
+> +     add_cxx_flag_if_supported(-Wno-error=3Dcpp) # Allow #warning direct=
+ive
+> +     add_cxx_flag_if_supported(-Wno-unknown-pragmas) # Issue #785
+> +     add_cxx_flag_if_supported(-Wno-error=3Dasm-operand-widths) # Issue =
+#784
+> +-
+> ++    add_cxx_flag_if_supported(-Wno-maybe-uninitialized)
+> ++    add_cxx_flag_if_supported(-Wno-stringop-truncation)
+> ++    add_cxx_flag_if_supported(-Wno-strict-aliasing)
+> +     # -msse -mfpmath=3Dsse to force gcc to use sse for float math,
+> +     # avoiding excess precision problems that cause tests like int2floa=
+t
+> +     # to falsely fail. -ffloat-store also works, but WG suggested
 > +--
-> +2.45.2
+> +2.34.1
 > +
-> diff --git a/meta-gnome/recipes-gnome/cheese/cheese_44.1.bb b/meta-gnome/=
-recipes-gnome/cheese/cheese_44.1.bb
+> diff --git a/meta-oe/recipes-core/opencl/opencl-cts_2024.08.08.bb b/meta-=
+oe/recipes-core/opencl/opencl-cts_2024.08.08.bb
 > new file mode 100644
-> index 0000000000..c58d475675
+> index 000000000..f6f4e9466
 > --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/cheese/cheese_44.1.bb
+> +++ b/meta-oe/recipes-core/opencl/opencl-cts_2024.08.08.bb
 > @@ -0,0 +1,26 @@
-> +SUMMARY =3D "Take photos and videos with your webcam, with fun graphical=
- effects"
-> +SECTION =3D "x11/gnome"
-> +LICENSE =3D "GPL-2.0-or-later"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Da17cb0a873d252440acfdf9b3d0e7=
-fbf"
+> +SUMMARY =3D "OpenCL CTS"
+> +DESCRIPTION =3D "OpenCL CTS test suite"
+> +LICENSE =3D "Apache-2.0"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc=
+3c6bd57"
 > +
-> +inherit gnomebase gobject-introspection vala itstool gtk-icon-cache gset=
-tings gnome-help gtk-doc
+> +inherit pkgconfig cmake
 > +
-> +SRC_URI +=3D "file://0001-libcheese-Add-GtkWidget-cast-to-avoid-an-incom=
-patibl.patch"
+> +DEPENDS +=3D "opencl-headers opencl-icd-loader"
+> +RDEPENDS:${PN} +=3D "python3-core python3-io"
 > +
-> +SRC_URI[archive.sha256sum] =3D "5f2185c4c99e54ddf2b8baf60c82819950e54952=
-e132e8639875f3edcbf8f68e"
+> +S =3D "${WORKDIR}/git"
 > +
-> +DEPENDS +=3D " \
-> +    clutter-1.0 \
-> +    clutter-gst-3.0 \
-> +    clutter-gtk-1.0 \
-> +    gnome-desktop \
-> +    libcanberra \
-> +    libxslt-native \
-> +"
+> +SRC_URI =3D "git://github.com/KhronosGroup/OpenCL-CTS.git;protocol=3Dhtt=
+ps;branch=3Dmain;lfs=3D0 \
+> +          file://0001-Ignore-Compiler-Warnings.patch"
 > +
-> +GTKDOC_MESON_OPTION =3D "gtk_doc"
+> +SRCREV =3D "a406b340913f622da089b00f284a597656c10239"
 > +
-> +# Man page build wants to access sourceforge
-> +EXTRA_OEMESON +=3D "-Dman=3Dfalse"
+> +EXTRA_OECMAKE:append =3D " -DCL_INCLUDE_DIR=3D${STAGING_INCDIR} -DCL_LIB=
+_DIR=3D${STAGING_LIBDIR} -DOPENCL_LIBRARIES=3DOpenCL"
 > +
-> +FILES:${PN} +=3D "/usr/share/"
-
-perhaps use ${datadir} here instead of hardcoding /usr/share
-
+> +do_install() {
+> +        install -d ${D}${bindir}/opencl_test_conformance
+> +        cp -r ${B}/test_conformance/* ${D}${bindir}/opencl_test_conforma=
+nce
+> +        sed -i 's:/usr/bin/python:/usr/bin/python3:g' ${D}${bindir}/open=
+cl_test_conformance/run_conformance.py
+> +        find "${D}${bindir}/opencl_test_conformance" -name cmake_install=
+.cmake -type f -delete
+> +        find "${D}${bindir}/opencl_test_conformance" -name CMakeFiles -t=
+ype d -exec rm -rf "{}" \; -depth
+> +}
 > --
-> 2.45.2
+> 2.34.1
 >
 
