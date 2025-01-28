@@ -1,185 +1,154 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1D2FC0218A
-	for <webhook@archiver.kernel.org>; Tue, 28 Jan 2025 12:54:27 +0000 (UTC)
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
- by mx.groups.io with SMTP id smtpd.web11.16562.1738068865994590205
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 06F28C0218A
+	for <webhook@archiver.kernel.org>; Tue, 28 Jan 2025 13:17:08 +0000 (UTC)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.web10.17040.1738070225672186798
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Jan 2025 04:54:26 -0800
+ Tue, 28 Jan 2025 05:17:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=BDpp5uWy;
- spf=pass (domain: mvista.com, ip: 209.85.216.50, mailfrom: vanusuri@mvista.com)
-Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-2f43d17b0e3so9766458a91.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jan 2025 04:54:25 -0800 (PST)
+ dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=KtEeK3sZ;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.52, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4363ae65100so62092155e9.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jan 2025 05:17:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1738068865; x=1738673665; darn=lists.openembedded.org;
+        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1738070224; x=1738675024; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=npnjn1NNg2yoFaJH75kqEFAKTT8XmOFdLUVH2oYc434=;
-        b=BDpp5uWyB6RGsJAgWGGS/amPFitbifC6HlepyTWWQ0IeZCVFBOoNhUtaUk+ctu8XmR
-         WTkCaUPSzRQk74PuM6LKeH9H3b6jb6a0aHmWU5H3YikiOoFS9oif7qD1COKYJ0wD5nI+
-         jqRzIGBgISBzBZGcFAIJEoctCmObXeMxVbpdQ=
+        bh=puBm+AGKogudcDwkhVOX49J3W6rd9EMNNEc74WIMu0o=;
+        b=KtEeK3sZwNyiT31mA0zKoTjiLUxx4ArF+ZdqO29nt1Ex/sTTqC5PjWeRw6IJbvsxBl
+         0wB9K44ubXpLs8DldaBY9toDgt1eiVIBzjwoB/5gdi7pTN+ZI6OLIuZOIbN6M4GKITxi
+         5hxkvo7WqOjcA96uaDpz6vBedNHhLt1tbWcdX+dTdTphKKu7/lq+5gCXvUGl4nBkZ348
+         5C8KN0A/6djO0XcWz/8iKSzL7m1i2Hdq0963t0HNNfR2vcuLgfufi0XhWsbazt7WlSQk
+         v1iew4pE+1SOSNaTwD5f9bELTalBMrdEE3mYBPOVsTlQJuVVwH2LYtZF9bdyX+WoqbJu
+         p2hg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738068865; x=1738673665;
+        d=1e100.net; s=20230601; t=1738070224; x=1738675024;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=npnjn1NNg2yoFaJH75kqEFAKTT8XmOFdLUVH2oYc434=;
-        b=BEB2h2T7fwutEL8rCHSSmYK4c8o21YyCd5sUzBmTQbDq6ubS3J1t0bwkUsbdv2WO7h
-         BC39jQEuzeeyvwQ65vpSpcrGdJbL3Pba4MeAl7B7STEHYK7akmmSvH+dcE6T52tximvu
-         lJURj3JfQJprpVytIM2B4P9l2bNeHzeXFGQ+CdOb2NAOyP8mPKddeb2QwzblcKMKIXWo
-         N2lZsFQ5uyWpOUCOk/uyqzvtzpCDqIuweGQsczthjHVGvdYTe9TWyVr62oyfRWZKkIYi
-         Qi3GdoyxupOzfS6DgVZzPv9PPJYo7euMeo9OQO4Xidg17W5lnEviucupvyxm1gm7UDKe
-         08fQ==
-X-Gm-Message-State: AOJu0YxQE9uVe4uZNFg6jSj7dmj1fRED47/xtku05isZLxk7yztUyWMu
-	p9IM1vmtuSpZSnSorGK2XgdqmsQthBy1uhoEqwGg5PwdSCrFtf7xJMVxqqdwIQ5lN04sTnPfS62
-	Y
-X-Gm-Gg: ASbGncuWRqd0XwoR2irPfkshMUi38YMvowwJn7cA7IgM4TvDfg16l/A6XeJQDD+/fcm
-	9+GkIOGAz2M+WPZMmAAPko4jCtnFkfEeJG9VIMM6r6YNvdX85CQwOKfbfe1xC/ItwxFXHJKGZAA
-	yVqejMjpj6x/YDSMmqs/inTOj280DtYmXatkqWf/upQyVRky1WhrhJPIaLzU9Txp5l6i64dj4fj
-	uJxTYS+sWbENnav2pkVJP6zCudZVEy17e/w8VWU+DDV23BaYeRZ2a5GoEP7LJqSPm7BCuZ0UGAK
-	qr+8cCZnS93cEnul9sEGCK2sNwxuviY++LTpZMCR
-X-Google-Smtp-Source: AGHT+IH0alhonJ473nLZXoliqTAQ5NY4wJSPZuOVJYp2yH8fNMCe/ywcKLBNXJfVcCXj+6R6x6R/FA==
-X-Received: by 2002:a05:6a20:4d95:b0:1e1:bf32:7d3a with SMTP id adf61e73a8af0-1eb215ec4c4mr50145803637.26.1738068864885;
-        Tue, 28 Jan 2025 04:54:24 -0800 (PST)
-Received: from MVIN00020.mvista.com ([2401:4900:882d:66eb:b0a6:9042:2182:e2f9])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-ac968413350sm4659687a12.72.2025.01.28.04.54.22
+        bh=puBm+AGKogudcDwkhVOX49J3W6rd9EMNNEc74WIMu0o=;
+        b=iNc8emKA+TrzuGxoVwbd9yMfmJagfk7CN0UtPbPeQSySHVGAKXdcRY8BJOJhj8fQDM
+         tqvh7pzZgLmPelDkUEa//kF+Vlx3Lq9ChKgw93/iYwlYXNozi55f61BkvO7z2yo5BAsK
+         Ob4d5Bftu32qf7c/j7xRe38KKGoP8D5uKz0wS514ZHh+P+KyzsTgSC7Fy4Xaj9TrLWvm
+         C7ezyZ7rvAZakSHvydFUsUd7GS276qEVUBpkSgZzotWhDZrSPogQ6XxZnq7i5VpxdHos
+         yjXQju1V2H9xj2bcorusRNZ5A9qT7VcrijGK/Nnc1flH37j3A3n5o11t2JenDSOEnYQO
+         cOsA==
+X-Forwarded-Encrypted: i=1; AJvYcCW65PsZnXvqFz3MBR9v87sWWiqwDWQSTpiQpew8BCD5FIelHZT3H3wsGqwcxhR5lSApOckuC0lhF8PgKr1sUnvRTac=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YyyQxTjFWvLV0eR4dBXhGnBp5+b12wMqOBNo1Pq5rTvVUnR2S62
+	49VYURznsEh9P0gSeToedYdRk0O2xqPv0vfjyZ+nu3xVjZ5+kMgLWepi9pfqueY=
+X-Gm-Gg: ASbGnctV1A0rU/ik8F5NfQ8Zr9KmwfiUq4Eococohl8spdYRrTxYKeYcLx3/iK2Y1ak
+	Aj7apu4xDbSsvj44Kl396fG169lYBTF0exUrPgnyd457QqsYurK3nAlEcVzXWgpmUNizkpoSRUy
+	fHBNPFwK0JL0NV/X/lqpRXD4SZDVRqYfXJ25dLvkSq6jQPYpYzBjyh+4c/z+OUXYmeZCWcqQaJU
+	mJNUlQnrNnfyBGxHgTNtiEd3ZvWT7Y1I7foDa+55LzNG2mjX516p8EprPQX/3lQP39bkjK8g5js
+	MfAtEKFKp+qzQ4E=
+X-Google-Smtp-Source: AGHT+IHjXvqXlrBTmT426cptPfOkH72fEMyKgZUwD9/J3ikfvEtsLc5Nw1dqIagjm2JpTZpZAQIE0w==
+X-Received: by 2002:a05:600c:3548:b0:434:a1d3:a321 with SMTP id 5b1f17b1804b1-438913c6150mr416551465e9.3.1738070223977;
+        Tue, 28 Jan 2025 05:17:03 -0800 (PST)
+Received: from brgl-uxlite.home ([2a01:cb1d:dc:7e00:9138:73f8:bd73:cdf9])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-438bd47f355sm166398695e9.4.2025.01.28.05.17.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 Jan 2025 04:54:24 -0800 (PST)
-From: vanusuri@mvista.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-oe][kirkstone][PATCH] openjpeg: Backport fix CVE-2023-39327
-Date: Tue, 28 Jan 2025 18:24:12 +0530
-Message-Id: <20250128125412.101087-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.25.1
+        Tue, 28 Jan 2025 05:17:03 -0800 (PST)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	=?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [meta-gnome][PATCH] cheese: new recipe
+Date: Tue, 28 Jan 2025 14:16:56 +0100
+Message-ID: <20250128131656.61467-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 28 Jan 2025 12:54:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115118
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 Jan 2025 13:17:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115119
 
-From: Vijay Anusuri <vanusuri@mvista.com>
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-Upstream commit:
-https://github.com/uclouvain/openjpeg/commit/c58bc128b4f770e7c89bc8ba3d0273b9a3904aad
+Add a recipe for cheese - a Gnome application for taking photos and
+videos with webcams.
 
-Reference:
-https://github.com/uclouvain/openjpeg/pull/1547
-
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 ---
- .../openjpeg/openjpeg/CVE-2023-39327.patch    | 82 +++++++++++++++++++
- .../openjpeg/openjpeg_2.4.0.bb                |  1 +
- 2 files changed, 83 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2023-39327.patch
+ ...kWidget-cast-to-avoid-an-incompatibl.patch | 29 +++++++++++++++++++
+ .../recipes-gnome/cheese/cheese_44.1.bb       | 26 +++++++++++++++++
+ 2 files changed, 55 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/cheese/cheese/0001-libcheese-Add-GtkWidget-cast-to-avoid-an-incompatibl.patch
+ create mode 100644 meta-gnome/recipes-gnome/cheese/cheese_44.1.bb
 
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2023-39327.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2023-39327.patch
+diff --git a/meta-gnome/recipes-gnome/cheese/cheese/0001-libcheese-Add-GtkWidget-cast-to-avoid-an-incompatibl.patch b/meta-gnome/recipes-gnome/cheese/cheese/0001-libcheese-Add-GtkWidget-cast-to-avoid-an-incompatibl.patch
 new file mode 100644
-index 0000000000..2d485c050d
+index 0000000000..8d2d413149
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2023-39327.patch
-@@ -0,0 +1,82 @@
-+From c58bc128b4f770e7c89bc8ba3d0273b9a3904aad Mon Sep 17 00:00:00 2001
-+From: mayeut <mayeut@users.noreply.github.com>
-+Date: Sat, 17 Aug 2024 15:59:56 +0200
-+Subject: [PATCH] fix: when EPH markers are specified, they are required.
++++ b/meta-gnome/recipes-gnome/cheese/cheese/0001-libcheese-Add-GtkWidget-cast-to-avoid-an-incompatibl.patch
+@@ -0,0 +1,29 @@
++From d8b8f27730cca948a5e5346b8ed2db0793bb16e7 Mon Sep 17 00:00:00 2001
++From: Florian Weimer <fweimer@redhat.com>
++Date: Fri, 19 Jan 2024 21:31:33 +0100
++Subject: [PATCH] libcheese: Add GtkWidget cast to avoid an
++ incompatible-pointer-types error
 +
-+reference from Rec. ITU-T T.800 (06/2019):
-+- Table A.13 – Coding style parameter values for the Scod parameter
-+- Section A.8.1 Start of packet (SOP)
-+- Section A.8.2 End of packet header (EPH)
++This is required for compilation with GCC 14.
 +
-+Upstream-Status: Backport [https://github.com/uclouvain/openjpeg/commit/c58bc128b4f770e7c89bc8ba3d0273b9a3904aad]
-+CVE: CVE-2023-39327
-+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
++Upstream-Status: Submitted [https://gitlab.gnome.org/GNOME/cheese/-/merge_requests/70]
 +---
-+ src/lib/openjp2/t2.c                    | 19 +++++++++++++------
-+ tests/nonregression/test_suite.ctest.in |  3 +++
-+ 2 files changed, 16 insertions(+), 6 deletions(-)
++ libcheese/cheese-flash.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/lib/openjp2/t2.c b/src/lib/openjp2/t2.c
-+index 1481e16f..b7ffd5fb 100644
-+--- a/src/lib/openjp2/t2.c
-++++ b/src/lib/openjp2/t2.c
-+@@ -1110,6 +1110,7 @@ static OPJ_BOOL opj_t2_read_packet_header(opj_t2_t* p_t2,
-+     /* SOP markers */
-+ 
-+     if (p_tcp->csty & J2K_CP_CSTY_SOP) {
-++        /* SOP markers are allowed (i.e. optional), just warn */
-+         if (p_max_length < 6) {
-+             opj_event_msg(p_manager, EVT_WARNING,
-+                           "Not enough space for expected SOP marker\n");
-+@@ -1162,12 +1163,15 @@ static OPJ_BOOL opj_t2_read_packet_header(opj_t2_t* p_t2,
-+ 
-+         /* EPH markers */
-+         if (p_tcp->csty & J2K_CP_CSTY_EPH) {
-++            /* EPH markers are required */
-+             if ((*l_modified_length_ptr - (OPJ_UINT32)(l_header_data -
-+                     *l_header_data_start)) < 2U) {
-+-                opj_event_msg(p_manager, EVT_WARNING,
-+-                              "Not enough space for expected EPH marker\n");
-++                opj_event_msg(p_manager, EVT_ERROR,
-++                              "Not enough space for required EPH marker\n");
-++                return OPJ_FALSE;
-+             } else if ((*l_header_data) != 0xff || (*(l_header_data + 1) != 0x92)) {
-+-                opj_event_msg(p_manager, EVT_WARNING, "Expected EPH marker\n");
-++                opj_event_msg(p_manager, EVT_ERROR, "Expected EPH marker\n");
-++                return OPJ_FALSE;
-+             } else {
-+                 l_header_data += 2;
-+             }
-+@@ -1301,12 +1305,15 @@ static OPJ_BOOL opj_t2_read_packet_header(opj_t2_t* p_t2,
-+ 
-+     /* EPH markers */
-+     if (p_tcp->csty & J2K_CP_CSTY_EPH) {
-++        /* EPH markers are required */
-+         if ((*l_modified_length_ptr - (OPJ_UINT32)(l_header_data -
-+                 *l_header_data_start)) < 2U) {
-+-            opj_event_msg(p_manager, EVT_WARNING,
-+-                          "Not enough space for expected EPH marker\n");
-++            opj_event_msg(p_manager, EVT_ERROR,
-++                          "Not enough space for required EPH marker\n");
-++            return OPJ_FALSE;
-+         } else if ((*l_header_data) != 0xff || (*(l_header_data + 1) != 0x92)) {
-+-            opj_event_msg(p_manager, EVT_WARNING, "Expected EPH marker\n");
-++            opj_event_msg(p_manager, EVT_ERROR, "Expected EPH marker\n");
-++            return OPJ_FALSE;
-+         } else {
-+             l_header_data += 2;
-+         }
-+diff --git a/tests/nonregression/test_suite.ctest.in b/tests/nonregression/test_suite.ctest.in
-+index 72155329..78a7a783 100644
-+--- a/tests/nonregression/test_suite.ctest.in
-++++ b/tests/nonregression/test_suite.ctest.in
-+@@ -647,3 +647,6 @@ opj_decompress -i @INPUT_NR_PATH@/tnsot_zero.jp2 -o @TEMP_PATH@/tnsot_zero.png
-+ !opj_decompress -i @INPUT_NR_PATH@/oss-fuzz2785.jp2 -o @TEMP_PATH@/oss-fuzz2785.png
-+ 
-+ opj_decompress -i @INPUT_NR_PATH@/tnsot_zero_missing_eoc.jp2 -o @TEMP_PATH@/tnsot_zero_missing_eoc.png
-++
-++# missing EPH Marker
-++!opj_decompress -i @INPUT_NR_PATH@/issue1472-bigloop.j2k -o @TEMP_PATH@/issue1472-bigloop.raw
++diff --git a/libcheese/cheese-flash.c b/libcheese/cheese-flash.c
++index 59959dbd..e4023221 100644
++--- a/libcheese/cheese-flash.c
+++++ b/libcheese/cheese-flash.c
++@@ -132,7 +132,7 @@ cheese_flash_set_property (GObject      *object,
++       GObject *parent;
++       parent = g_value_get_object (value);
++       if (object != NULL)
++-        priv->parent = g_object_ref (parent);
+++        priv->parent = GTK_WIDGET (g_object_ref (parent));
++       else
++         priv->parent = NULL;
++     }
 +-- 
-+2.25.1
++2.45.2
 +
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb
-index 871b324dff..feecb957ba 100644
---- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb
-@@ -14,6 +14,7 @@ SRC_URI = " \
-     file://CVE-2021-3575.patch \
-     file://0001-sycc422_to_rgb-fix-out-of-bounds-read-accesses-when-.patch \
-     file://0001-opj_j2k_add_tlmarker-validate-that-current-tile-part.patch \
-+    file://CVE-2023-39327.patch \
- "
- SRCREV = "37ac30ceff6640bbab502388c5e0fa0bff23f505"
- S = "${WORKDIR}/git"
+diff --git a/meta-gnome/recipes-gnome/cheese/cheese_44.1.bb b/meta-gnome/recipes-gnome/cheese/cheese_44.1.bb
+new file mode 100644
+index 0000000000..c58d475675
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/cheese/cheese_44.1.bb
+@@ -0,0 +1,26 @@
++SUMMARY = "Take photos and videos with your webcam, with fun graphical effects"
++SECTION = "x11/gnome"
++LICENSE = "GPL-2.0-or-later"
++LIC_FILES_CHKSUM = "file://COPYING;md5=a17cb0a873d252440acfdf9b3d0e7fbf"
++
++inherit gnomebase gobject-introspection vala itstool gtk-icon-cache gsettings gnome-help gtk-doc
++
++SRC_URI += "file://0001-libcheese-Add-GtkWidget-cast-to-avoid-an-incompatibl.patch"
++
++SRC_URI[archive.sha256sum] = "5f2185c4c99e54ddf2b8baf60c82819950e54952e132e8639875f3edcbf8f68e"
++
++DEPENDS += " \
++    clutter-1.0 \
++    clutter-gst-3.0 \
++    clutter-gtk-1.0 \
++    gnome-desktop \
++    libcanberra \
++    libxslt-native \
++"
++
++GTKDOC_MESON_OPTION = "gtk_doc"
++
++# Man page build wants to access sourceforge
++EXTRA_OEMESON += "-Dman=false"
++
++FILES:${PN} += "/usr/share/"
 -- 
-2.25.1
+2.45.2
 
 
