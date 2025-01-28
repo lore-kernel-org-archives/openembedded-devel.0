@@ -1,207 +1,156 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <Divya.Chellam@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6320AC0218D
-	for <webhook@archiver.kernel.org>; Tue, 28 Jan 2025 04:38:55 +0000 (UTC)
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.web11.11027.1738039130056334957
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4DD7C0218A
+	for <webhook@archiver.kernel.org>; Tue, 28 Jan 2025 09:00:26 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.13574.1738054817617781126
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Jan 2025 20:38:50 -0800
+ Tue, 28 Jan 2025 01:00:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dx/0379M;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-2f43da61ba9so6847810a91.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Jan 2025 20:38:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738039129; x=1738643929; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=cIdxniZcNP5iAiQipnrFL4meu+FUEInK1WV42TRAzQI=;
-        b=dx/0379MdvuAX+Dw4Z1MMZs/Ss2F5SN/LNnECuzRh2DJY1H6Wf0QrjoLd27+uzYbkW
-         MxzMmeN0mx5RacYRPP2wzNACVG+WQpcJWQttQxExOOf6os+djhbe2g7rmGc34Ypu0EG0
-         755vva4rptWOk6Vo2aT46Iv8OUW7iZHCpV3ztJxH0MraWvC+d/abMV+lz8JdCWAGbsdK
-         NP36+z+EGWiISVlmz6Bk4CUzduhrARDcoFNPgu1qy63QCThqN5Ihktitl1IA2emIvivj
-         oPGvGaOzuG7F6yKub8CR9HL3/ol+jzqrHFOGnqojSTapUOlEAyg8k5RmZGmBpsTCSEuC
-         ZL6g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738039129; x=1738643929;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=cIdxniZcNP5iAiQipnrFL4meu+FUEInK1WV42TRAzQI=;
-        b=wEifQHPAlaFAkR1B7tiCqoqBeNyIQyLTszic1WSiTNMyCmiGPgyGU4FS/Ji967lClV
-         zl4dCb7CflLQ0ppiIANpj96ha9Fp+gPs4laZg6GtOoBTgVwZ8qGT/+VXjrHgkY6hoRey
-         +0DiQBs0GVGALGazVveeNe8d/nOw6z+QV1vQdDRuq6rM8CcEgP83fRzPAYdreAziLFt0
-         ENJod8MfLBbn12Q2O/SN7Tvs04/wez+OxMTRfWce76k7wvRZq675jB0MwZX9GhLP10Yl
-         rEcm8a8ofxzld0CK85mJ4YjqXW8A0eTvUU9PEZ5dtKIPspKd0utnw73PG1Z5Io3pjKq3
-         NScw==
-X-Gm-Message-State: AOJu0Yz6LczI/iPffHpRAr5fUngH6nH3oZzYZXau58m5oK30oQvwMSZz
-	1xs/a0A+i+wLNPU4BxqIbxrNiup+nIiaXr8AdIMlgLvHl61dAkk9uceTYWiPRxPMa5LskAl3jzn
-	5xjLJaOGDGLb3RrzditlOW6C8EjBzYDr5
-X-Gm-Gg: ASbGncv5Z5csNUU4i7T4K3seReFsUUh8YohULnJLOh/1+TiN0hvEQ3Z/pOy9oyvz/Mw
-	oHKbbYmIvNwScfOZI/fusfuvNJX9b0SSA0RT1kLH6y7F0qXw/gCN8ERqCNgJLPlatZ/mQA58MBJ
-	w+lJoc3nBbplpabvPmQ3m2R48pvFyuTGI=
-X-Google-Smtp-Source: AGHT+IHC73t2VbUSDFDWwCntWvlfdaJLmP4VmRqGXqTknEazNrO1kR6ZlA8VJ2O93b8VBFUG7mIGuS+5ShBSN+UzMow=
-X-Received: by 2002:a17:90b:1f91:b0:2f1:4715:5987 with SMTP id
- 98e67ed59e1d1-2f782c92749mr64286208a91.9.1738039128349; Mon, 27 Jan 2025
- 20:38:48 -0800 (PST)
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3123582112=divya.chellam@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50S6mCsg004787
+	for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jan 2025 09:00:16 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 44eny707m6-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jan 2025 09:00:01 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Tue, 28 Jan 2025 00:59:58 -0800
+From: dchellam <divya.chellam@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][scarthgap][PATCH 1/1] redis: upgrade 7.2.6 -> 7.2.7
+Date: Tue, 28 Jan 2025 08:59:35 +0000
+Message-ID: <20250128085935.1006079-1-divya.chellam@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Mon, 27 Jan 2025 21:38:38 -0700
-X-Gm-Features: AWEUYZnzJ7z0PqxqReLauHL8VLtiVtOSJtOzSfceDAcb9OZhZZgbxge-IThJXFw
-Message-ID: <CAK5yBb8oneL4CG2-W3tHDpoZ_NTgm_LkKceZKSda2tYrMoJuHA@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="000000000000d9e34e062cbcc422"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: rssqo6nwgP2yzoHz1GioOIVYwUD_Cqhv
+X-Authority-Analysis: v=2.4 cv=fYZXy1QF c=1 sm=1 tr=0 ts=67989c91 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=VdSt8ZQiCzkA:10 a=NEAV23lmAAAA:8 a=7UKGVgRVAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8
+ a=Mfa7FrdpKmAY6cI46FIA:9 a=8Ox4Rr8FuIIqx5qz5MW0:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: rssqo6nwgP2yzoHz1GioOIVYwUD_Cqhv
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-28_03,2025-01-27_01,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 mlxscore=0
+ bulkscore=0 priorityscore=1501 mlxlogscore=999 impostorscore=0
+ lowpriorityscore=0 phishscore=0 clxscore=1015 spamscore=0 suspectscore=0
+ malwarescore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2411120000 definitions=main-2501280069
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 28 Jan 2025 04:38:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115114
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 Jan 2025 09:00:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115115
 
---000000000000d9e34e062cbcc422
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Divya Chellam <divya.chellam@windriver.com>
 
-All,
+ChangeLog:
+https://github.com/redis/redis/releases/tag/7.2.7
 
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
+Upgrade urgency SECURITY: See security fixes below.
 
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
+Security fixes
+====================
+* (CVE-2024-46981) Lua script commands may lead to remote code execution
+* (CVE-2024-51741) Denial-of-service due to malformed ACL selectors
 
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 415
-unassigned or newcomer bugs.
+Bug fixes
+====================
+* #13380 Possible crash due to OOM panic on invalid command
+* #13338 Streams: XINFO lag field is wrong when tombstone is after the last_id of the consume group
+* #13473 Streams: XTRIM does not update the maximal tombstone, leading to an incorrect lag
+* #13311 Cluster: crash due to unblocking client during slot migration
+* #13443 Cluster: crash when loading cluster config
+* #13422 Cluster: CLUSTER SHARDS returns empty array
+* #13465 Cluster: incompatibility with older node versions
 
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.2=E2=80=9D, =E2=80=9C5.3", "5.99" and "Future=
-", the more
-pressing/urgent issues being in "5.2" and then =E2=80=9C5.3=E2=80=9D.
+Signed-off-by: Divya Chellam <divya.chellam@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../0001-hiredis-use-default-CC-if-it-is-set.patch              | 0
+ ...2-lua-update-Makefile-to-use-environment-build-setting.patch | 0
+ .../0003-hack-to-force-use-of-libc-malloc.patch                 | 0
+ .../0004-src-Do-not-reset-FINAL_LIBS.patch                      | 0
+ ...05-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch | 0
+ .../0006-Define-correct-gregs-for-RISCV32.patch                 | 0
+ .../redis/{redis-7.2.6 => redis-7.2.7}/init-redis-server        | 0
+ .../redis/{redis-7.2.6 => redis-7.2.7}/redis.conf               | 0
+ .../redis/{redis-7.2.6 => redis-7.2.7}/redis.service            | 0
+ .../recipes-extended/redis/{redis_7.2.6.bb => redis_7.2.7.bb}   | 2 +-
+ 10 files changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.6 => redis-7.2.7}/0001-hiredis-use-default-CC-if-it-is-set.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.6 => redis-7.2.7}/0002-lua-update-Makefile-to-use-environment-build-setting.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.6 => redis-7.2.7}/0003-hack-to-force-use-of-libc-malloc.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.6 => redis-7.2.7}/0004-src-Do-not-reset-FINAL_LIBS.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.6 => redis-7.2.7}/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.6 => redis-7.2.7}/0006-Define-correct-gregs-for-RISCV32.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.6 => redis-7.2.7}/init-redis-server (100%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.6 => redis-7.2.7}/redis.conf (100%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.6 => redis-7.2.7}/redis.service (100%)
+ rename meta-oe/recipes-extended/redis/{redis_7.2.6.bb => redis_7.2.7.bb} (96%)
 
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.6/0001-hiredis-use-default-CC-if-it-is-set.patch b/meta-oe/recipes-extended/redis/redis-7.2.7/0001-hiredis-use-default-CC-if-it-is-set.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.6/0001-hiredis-use-default-CC-if-it-is-set.patch
+rename to meta-oe/recipes-extended/redis/redis-7.2.7/0001-hiredis-use-default-CC-if-it-is-set.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.6/0002-lua-update-Makefile-to-use-environment-build-setting.patch b/meta-oe/recipes-extended/redis/redis-7.2.7/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.6/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+rename to meta-oe/recipes-extended/redis/redis-7.2.7/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.6/0003-hack-to-force-use-of-libc-malloc.patch b/meta-oe/recipes-extended/redis/redis-7.2.7/0003-hack-to-force-use-of-libc-malloc.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.6/0003-hack-to-force-use-of-libc-malloc.patch
+rename to meta-oe/recipes-extended/redis/redis-7.2.7/0003-hack-to-force-use-of-libc-malloc.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.6/0004-src-Do-not-reset-FINAL_LIBS.patch b/meta-oe/recipes-extended/redis/redis-7.2.7/0004-src-Do-not-reset-FINAL_LIBS.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.6/0004-src-Do-not-reset-FINAL_LIBS.patch
+rename to meta-oe/recipes-extended/redis/redis-7.2.7/0004-src-Do-not-reset-FINAL_LIBS.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.6/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch b/meta-oe/recipes-extended/redis/redis-7.2.7/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.6/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+rename to meta-oe/recipes-extended/redis/redis-7.2.7/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.6/0006-Define-correct-gregs-for-RISCV32.patch b/meta-oe/recipes-extended/redis/redis-7.2.7/0006-Define-correct-gregs-for-RISCV32.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.6/0006-Define-correct-gregs-for-RISCV32.patch
+rename to meta-oe/recipes-extended/redis/redis-7.2.7/0006-Define-correct-gregs-for-RISCV32.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.6/init-redis-server b/meta-oe/recipes-extended/redis/redis-7.2.7/init-redis-server
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.6/init-redis-server
+rename to meta-oe/recipes-extended/redis/redis-7.2.7/init-redis-server
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.6/redis.conf b/meta-oe/recipes-extended/redis/redis-7.2.7/redis.conf
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.6/redis.conf
+rename to meta-oe/recipes-extended/redis/redis-7.2.7/redis.conf
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.6/redis.service b/meta-oe/recipes-extended/redis/redis-7.2.7/redis.service
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.6/redis.service
+rename to meta-oe/recipes-extended/redis/redis-7.2.7/redis.service
+diff --git a/meta-oe/recipes-extended/redis/redis_7.2.6.bb b/meta-oe/recipes-extended/redis/redis_7.2.7.bb
+similarity index 96%
+rename from meta-oe/recipes-extended/redis/redis_7.2.6.bb
+rename to meta-oe/recipes-extended/redis/redis_7.2.7.bb
+index 6d076e3131..2f5e45ca0c 100644
+--- a/meta-oe/recipes-extended/redis/redis_7.2.6.bb
++++ b/meta-oe/recipes-extended/redis/redis_7.2.7.bb
+@@ -18,7 +18,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://0006-Define-correct-gregs-for-RISCV32.patch \
+           "
+ 
+-SRC_URI[sha256sum] = "fb10d67a2fe2b4556f6cb840064dd6e6e3175ce8ca035f0726990ec2da9f3d0e"
++SRC_URI[sha256sum] = "72c081e3b8cfae7144273d26d76736f08319000af46c01515cad5d29765cead5"
+ 
+ inherit autotools-brokensep pkgconfig update-rc.d systemd useradd
+ 
+-- 
+2.40.0
 
-Thanks,
-
-
-
-*Stephen K. Jolley*
-
-*Yocto Project Program Manager*
-
-(    *Cell*:                (208) 244-4460
-
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
-
---000000000000d9e34e062cbcc422
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div><span style=3D"font-size:11pt;font-family:Calibri,Ari=
-al">All,<br><br>The triage team is starting to try and collect up and class=
-ify bugs which a newcomer to the project would be able to work on in a way =
-which means people can find them. They&#39;re being listed on the triage pa=
-ge under the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/=
-wiki/Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triag=
-e#Newcomer_Bugs</a>  Also please review: <a href=3D"https://www.openembedde=
-d.org/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.=
-org/wiki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugz=
-illa account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount=
-.cgi">https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The id=
-ea is these bugs should be straight forward for a person to help work on wh=
-o doesn&#39;t have deep experience with the project.  If anyone can help, p=
-lease take ownership of the bug and send patches!  If anyone needs help/adv=
-ice there are people on irc who can likely do so, or some of the more exper=
-ienced contributors will likely be happy to help too.<br><br>Also, the tria=
-ge team meets weekly and does its best to handle the bugs reported into the=
- Bugzilla. The number of people attending that meeting has fallen, as have =
-the number of people available to help fix bugs. One of the things we hear =
-users report is they don&#39;t know how to help. We (the triage team) are t=
-herefore going to start reporting out the currently 415 unassigned or newco=
-mer bugs.<br><br>We&#39;re hoping people may be able to spare some time now=
- and again to help out with these.  Bugs are split into two types, &quot;tr=
-ue bugs&quot; where things don&#39;t work as they should and &quot;enhancem=
-ents&quot; which are features we&#39;d want to add to the system.  There ar=
-e also roughly four different &quot;priority&quot; classes right now, =E2=
-=80=9C5.2=E2=80=9D, =E2=80=9C5.3&quot;, &quot;5.99&quot; and &quot;Future&q=
-uot;, the more pressing/urgent issues being in &quot;5.2&quot; and then =E2=
-=80=9C5.3=E2=80=9D.<br><br>Please review this link and if a bug is somethin=
-g you would be able to help with either take ownership of the bug, or send =
-me (<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>)=
- an e-mail with the bug number you would like and I will assign it to you (=
-please make sure you have a Bugzilla account).  The list is at: <a href=3D"=
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or=
-_Newcomer_Bugs</a></span></div><div dir=3D"ltr" class=3D"gmail_signature" d=
-ata-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p clas=
-s=3D"MsoNormal" style=3D"background-image:initial;background-position:initi=
-al;background-repeat:initial"><span style=3D"font-size:12pt;font-family:Ari=
-al,sans-serif">Thanks,<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
-
---000000000000d9e34e062cbcc422--
 
