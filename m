@@ -1,262 +1,207 @@
-Return-Path: <a-christidis@ti.com>
+Return-Path: <sjolley.yp.pm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AB10FC02188
-	for <webhook@archiver.kernel.org>; Mon, 27 Jan 2025 22:21:03 +0000 (UTC)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- by mx.groups.io with SMTP id smtpd.web10.4322.1738016454081579584
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6320AC0218D
+	for <webhook@archiver.kernel.org>; Tue, 28 Jan 2025 04:38:55 +0000 (UTC)
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web11.11027.1738039130056334957
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Jan 2025 14:20:54 -0800
+ Mon, 27 Jan 2025 20:38:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=XTRmGMJZ;
- spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: a-christidis@ti.com)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50RMKrxs1903170
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Mon, 27 Jan 2025 16:20:53 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1738016453;
-	bh=jWMIR9+Gh0LbkFGDJV0q1QKX4CxKv5mvEoAtjw5eA5A=;
-	h=Date:Subject:From:To:CC:References:In-Reply-To;
-	b=XTRmGMJZaA0g4sjlaRp9oZR98Op9gO4kjHP9cXSn9J8H9o8jokEIdLTVjlzgIsmYD
-	 ImbbctuXOxvkzGeBgiDNWBck9TFRyzfHYh2sdYpkwK4E1qH2CHUwHDZyVRazvqXpHk
-	 wC7JCV8X4dWH30PZ4kboBjaCbja+MMb1KbJ2VSd0=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50RMKrQM022886
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 27 Jan 2025 16:20:53 -0600
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 27
- Jan 2025 16:20:52 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 27 Jan 2025 16:20:52 -0600
-Received: from [128.247.81.112] (antonios-thinkstation-p3-tower.dhcp.ti.com [128.247.81.112])
-	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50RMKq16102117;
-	Mon, 27 Jan 2025 16:20:52 -0600
-Message-ID: <da0dcacc-368f-4c54-a73a-0bf16e93e767@ti.com>
-Date: Mon, 27 Jan 2025 16:20:52 -0600
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dx/0379M;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: sjolley.yp.pm@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-2f43da61ba9so6847810a91.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Jan 2025 20:38:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1738039129; x=1738643929; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=cIdxniZcNP5iAiQipnrFL4meu+FUEInK1WV42TRAzQI=;
+        b=dx/0379MdvuAX+Dw4Z1MMZs/Ss2F5SN/LNnECuzRh2DJY1H6Wf0QrjoLd27+uzYbkW
+         MxzMmeN0mx5RacYRPP2wzNACVG+WQpcJWQttQxExOOf6os+djhbe2g7rmGc34Ypu0EG0
+         755vva4rptWOk6Vo2aT46Iv8OUW7iZHCpV3ztJxH0MraWvC+d/abMV+lz8JdCWAGbsdK
+         NP36+z+EGWiISVlmz6Bk4CUzduhrARDcoFNPgu1qy63QCThqN5Ihktitl1IA2emIvivj
+         oPGvGaOzuG7F6yKub8CR9HL3/ol+jzqrHFOGnqojSTapUOlEAyg8k5RmZGmBpsTCSEuC
+         ZL6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1738039129; x=1738643929;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=cIdxniZcNP5iAiQipnrFL4meu+FUEInK1WV42TRAzQI=;
+        b=wEifQHPAlaFAkR1B7tiCqoqBeNyIQyLTszic1WSiTNMyCmiGPgyGU4FS/Ji967lClV
+         zl4dCb7CflLQ0ppiIANpj96ha9Fp+gPs4laZg6GtOoBTgVwZ8qGT/+VXjrHgkY6hoRey
+         +0DiQBs0GVGALGazVveeNe8d/nOw6z+QV1vQdDRuq6rM8CcEgP83fRzPAYdreAziLFt0
+         ENJod8MfLBbn12Q2O/SN7Tvs04/wez+OxMTRfWce76k7wvRZq675jB0MwZX9GhLP10Yl
+         rEcm8a8ofxzld0CK85mJ4YjqXW8A0eTvUU9PEZ5dtKIPspKd0utnw73PG1Z5Io3pjKq3
+         NScw==
+X-Gm-Message-State: AOJu0Yz6LczI/iPffHpRAr5fUngH6nH3oZzYZXau58m5oK30oQvwMSZz
+	1xs/a0A+i+wLNPU4BxqIbxrNiup+nIiaXr8AdIMlgLvHl61dAkk9uceTYWiPRxPMa5LskAl3jzn
+	5xjLJaOGDGLb3RrzditlOW6C8EjBzYDr5
+X-Gm-Gg: ASbGncv5Z5csNUU4i7T4K3seReFsUUh8YohULnJLOh/1+TiN0hvEQ3Z/pOy9oyvz/Mw
+	oHKbbYmIvNwScfOZI/fusfuvNJX9b0SSA0RT1kLH6y7F0qXw/gCN8ERqCNgJLPlatZ/mQA58MBJ
+	w+lJoc3nBbplpabvPmQ3m2R48pvFyuTGI=
+X-Google-Smtp-Source: AGHT+IHC73t2VbUSDFDWwCntWvlfdaJLmP4VmRqGXqTknEazNrO1kR6ZlA8VJ2O93b8VBFUG7mIGuS+5ShBSN+UzMow=
+X-Received: by 2002:a17:90b:1f91:b0:2f1:4715:5987 with SMTP id
+ 98e67ed59e1d1-2f782c92749mr64286208a91.9.1738039128349; Mon, 27 Jan 2025
+ 20:38:48 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [EXTERNAL] Re: [master][PATCH] opencl-cts: add recipe
-From: Antonios Christidis <a-christidis@ti.com>
-To: Khem Raj <raj.khem@gmail.com>
-CC: <openembedded-devel@lists.openembedded.org>
-References: <20250127145533.1510728-1-a-christidis@ti.com>
- <CAMKF1sq-vDu4S5jPPH6yxHX=SGuK3syJ+0oOjeEdyUcCc-iL1A@mail.gmail.com>
- <f170e856-3e9d-498a-8758-18b26c3ecf18@ti.com>
-Content-Language: en-US
-In-Reply-To: <f170e856-3e9d-498a-8758-18b26c3ecf18@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by lelvem-ot01.ext.ti.com id 50RMKrxs1903170
+From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
+Date: Mon, 27 Jan 2025 21:38:38 -0700
+X-Gm-Features: AWEUYZnzJ7z0PqxqReLauHL8VLtiVtOSJtOzSfceDAcb9OZhZZgbxge-IThJXFw
+Message-ID: <CAK5yBb8oneL4CG2-W3tHDpoZ_NTgm_LkKceZKSda2tYrMoJuHA@mail.gmail.com>
+Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
+To: openembedded-devel@lists.openembedded.org, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="000000000000d9e34e062cbcc422"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Jan 2025 22:21:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115113
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 Jan 2025 04:38:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115114
 
-Hello,
+--000000000000d9e34e062cbcc422
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Typo error, meant to say replicate not replace.
+All,
 
-Apologies,
+The triage team is starting to try and collect up and classify bugs which a
+newcomer to the project would be able to work on in a way which means
+people can find them. They're being listed on the triage page under the
+appropriate heading:
+https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
+review:
+https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
+how to create a bugzilla account at:
+https://bugzilla.yoctoproject.org/createaccount.cgi
 
-Antonios
+The idea is these bugs should be straight forward for a person to help work
+on who doesn't have deep experience with the project. If anyone can help,
+please take ownership of the bug and send patches! If anyone needs
+help/advice there are people on irc who can likely do so, or some of the
+more experienced contributors will likely be happy to help too.
 
-On 1/27/25 4:14 PM, Antonios Christidis wrote:
-> Hello,
->
-> I am not able to replace those errors on my end. Are there any=20
-> references describing the build environment of the auto builder?=20
-> Hoping to follow those and then be able to replicate those errors on=20
-> my end.
->
-> Side note: This is interesting, as in the logs I'm seeing=20
-> "[-Werror=3Dmaybe-uninitialized]" errors which my patch targeted to fix.
->
-> Regards,
->
-> Antonios
->
->
-> On 1/27/25 1:50 PM, Khem Raj wrote:
->> fails with master here=20
->> https:=E2=80=8A//urldefense.=E2=80=8Acom/v3/__https:=E2=80=8A//autobui=
-lder.=E2=80=8Ayoctoproject.=E2=80=8Aorg/valkyrie/*/builders/81/builds/320=
-/steps/14/logs/stdio__;Iw!!G3vK!U1telv7G4EdWNd8Q7mT2lxwrfCEr8VY9ZJDDTdQDw=
-d5SwarmDepPE58aL0--mucfFnOkooRNNbihy_k$=20
->> cc1plus:=E2=80=8A
->> ZjQcmQRYFpfptBannerStart
->> This message was sent from outside of Texas Instruments.
->> Do not click links or open attachments unless you recognize the=20
->> source of this email and know the content is safe.
->> Report=C2=A0Suspicious
->> <https://us-phishalarm-ewt.proofpoint.com/EWT/v1/G3vK!tDdkczggGK0zQiXM=
-8lsjUIw0foiJ4oL-lS26WbF22UijSS0Ba7zdDBO_8mMm1n2WN9uSVrZzguSdX1Wt-sbhjuKEJ=
-9lw_kgnhg9nodQmtYJ2kfTSN9lkr0sCjv4$>=20
->>
->> ZjQcmQRYFpfptBannerEnd
->> fails with master here
->>
->> https://urldefense.com/v3/__https://autobuilder.yoctoproject.org/valky=
-rie/*/builders/81/builds/320/steps/14/logs/stdio__;Iw!!G3vK!U1telv7G4EdWN=
-d8Q7mT2lxwrfCEr8VY9ZJDDTdQDwd5SwarmDepPE58aL0--mucfFnOkooRNNbihy_k$=20
->>
->>
->> cc1plus: error: '-Wformat-security' ignored without '-Wformat'
->> [-Werror=3Dformat-security]
->> | cc1plus: all warnings being treated as errors
->>
->> On Mon, Jan 27, 2025 at 6:55=E2=80=AFAM <a-christidis@ti.com> wrote:
->> >
->> > From: Antonios Christidis <a-christidis@ti.com>
->> >
->> > This recipe provides the opecl-cts suite.=C2=A0 This is a pre-releas=
-e=20
->> version
->> > v2024-08-08, which I have tested to work with opencl-headers=20
->> version v2024.05.08
->> > . The pre-release version was picked due to incompatibility issues=20
->> with other
->> > versions of headers.
->> >
->> > The recipe also includes a patch, to allow it to compile and build=20
->> properly.
->> > Further information below.
->> >
->> > Signed-off-by: Antonios Christidis <a-christidis@ti.com>
->> > ---
->> >=C2=A0 .../files/0001-Ignore-Compiler-Warnings.patch | 37=20
->> +++++++++++++++++++
->> >=C2=A0 .../opencl/opencl-cts_2024.08.08.bb=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 26 +++++++++++++
->> >=C2=A0 2 files changed, 63 insertions(+)
->> >=C2=A0 create mode 100644=20
->> meta-oe/recipes-core/opencl/files/0001-Ignore-Compiler-Warnings.patch
->> >=C2=A0 create mode 100644=20
->> meta-oe/recipes-core/opencl/opencl-cts_2024.08.08.bb
->> >
->> > diff --git=20
->> a/meta-oe/recipes-core/opencl/files/0001-Ignore-Compiler-Warnings.patc=
-h=20
->> b/meta-oe/recipes-core/opencl/files/0001-Ignore-Compiler-Warnings.patc=
-h
->> > new file mode 100644
->> > index 000000000..2515c7f16
->> > --- /dev/null
->> > +++=20
->> b/meta-oe/recipes-core/opencl/files/0001-Ignore-Compiler-Warnings.patc=
-h
->> > @@ -0,0 +1,37 @@
->> > +From 082ce10dd191f036f5a6e1fb31134e9736ba3643 Mon Sep 17 00:00:00=20
->> 2001
->> > +From: Antonios Christidis <a-christidis@ti.com>
->> > +Date: Fri, 17 Jan 2025 15:05:39 -0600
->> > +Subject: [PATCH] Ignore Compiler Warnings
->> > +
->> > +
->> > +Within the cmake build system, the compiler -Werror flag is=20
->> enabeled.=C2=A0 This
->> > +turns all warnings into errors and doens't allow the system to=20
->> compile
->> > +correctly.=C2=A0 Change the system to ignore the 3 warning rules th=
-at=20
->> show up when
->> > +compiling.
->> > +
->> > +Upstream-Status: Inappropriate [oe specific - compilation errors=20
->> due to cross-compiling]
->> > +
->> > +Signed-off-by: Antonios Christidis <a-christidis@ti.com>
->> > +
->> > +---
->> > + CMakeLists.txt | 4 +++-
->> > + 1 file changed, 3 insertions(+), 1 deletion(-)
->> > +
->> > +diff --git a/CMakeLists.txt b/CMakeLists.txt
->> > +index 5cfef6b3..71b6ddb4 100644
->> > +--- a/CMakeLists.txt
->> > ++++ b/CMakeLists.txt
->> > +@@ -109,7 +109,9 @@ if(CMAKE_COMPILER_IS_GNUCC OR=20
->> "${CMAKE_CXX_COMPILER_ID}" MATCHES "(Apple)?Clang"
->> > +=C2=A0=C2=A0=C2=A0=C2=A0 add_cxx_flag_if_supported(-Wno-error=3Dcpp=
-) # Allow #warning=20
->> directive
->> > +=C2=A0=C2=A0=C2=A0=C2=A0 add_cxx_flag_if_supported(-Wno-unknown-pra=
-gmas) # Issue #785
->> > + add_cxx_flag_if_supported(-Wno-error=3Dasm-operand-widths) # Issue=
-=20
->> #784
->> > +-
->> > ++=C2=A0=C2=A0=C2=A0 add_cxx_flag_if_supported(-Wno-maybe-uninitiali=
-zed)
->> > ++=C2=A0=C2=A0=C2=A0 add_cxx_flag_if_supported(-Wno-stringop-truncat=
-ion)
->> > ++=C2=A0=C2=A0=C2=A0 add_cxx_flag_if_supported(-Wno-strict-aliasing)
->> > +=C2=A0=C2=A0=C2=A0=C2=A0 # -msse -mfpmath=3Dsse to force gcc to use=
- sse for float math,
->> > +=C2=A0=C2=A0=C2=A0=C2=A0 # avoiding excess precision problems that =
-cause tests like=20
->> int2float
->> > +=C2=A0=C2=A0=C2=A0=C2=A0 # to falsely fail. -ffloat-store also work=
-s, but WG suggested
->> > +--
->> > +2.34.1
->> > +
->> > diff --git a/meta-oe/recipes-core/opencl/opencl-cts_2024.08.08.bb=20
->> b/meta-oe/recipes-core/opencl/opencl-cts_2024.08.08.bb
->> > new file mode 100644
->> > index 000000000..f6f4e9466
->> > --- /dev/null
->> > +++ b/meta-oe/recipes-core/opencl/opencl-cts_2024.08.08.bb
->> > @@ -0,0 +1,26 @@
->> > +SUMMARY =3D "OpenCL CTS"
->> > +DESCRIPTION =3D "OpenCL CTS test suite"
->> > +LICENSE =3D "Apache-2.0"
->> > +LIC_FILES_CHKSUM =3D=20
->> "file://LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57"
->> > +
->> > +inherit pkgconfig cmake
->> > +
->> > +DEPENDS +=3D "opencl-headers opencl-icd-loader"
->> > +RDEPENDS:${PN} +=3D "python3-core python3-io"
->> > +
->> > +S =3D "${WORKDIR}/git"
->> > +
->> > +SRC_URI =3D=20
->> "git://github.com/KhronosGroup/OpenCL-CTS.git;protocol=3Dhttps;branch=3D=
-main;lfs=3D0=20
->> \
->> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 file://0001-=
-Ignore-Compiler-Warnings.patch"
->> > +
->> > +SRCREV =3D "a406b340913f622da089b00f284a597656c10239"
->> > +
->> > +EXTRA_OECMAKE:append =3D " -DCL_INCLUDE_DIR=3D${STAGING_INCDIR}=20
->> -DCL_LIB_DIR=3D${STAGING_LIBDIR} -DOPENCL_LIBRARIES=3DOpenCL"
->> > +
->> > +do_install() {
->> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 install -d ${D}${bindir}=
-/opencl_test_conformance
->> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 cp -r ${B}/test_conforma=
-nce/*=20
->> ${D}${bindir}/opencl_test_conformance
->> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 sed -i 's:/usr/bin/pytho=
-n:/usr/bin/python3:g'=20
->> ${D}${bindir}/opencl_test_conformance/run_conformance.py
->> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 find "${D}${bindir}/open=
-cl_test_conformance" -name=20
->> cmake_install.cmake -type f -delete
->> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 find "${D}${bindir}/open=
-cl_test_conformance" -name=20
->> CMakeFiles -type d -exec rm -rf "{}" \; -depth
->> > +}
->> > --
->> > 2.34.1
->> >
+Also, the triage team meets weekly and does its best to handle the bugs
+reported into the Bugzilla. The number of people attending that meeting has
+fallen, as have the number of people available to help fix bugs. One of the
+things we hear users report is they don't know how to help. We (the triage
+team) are therefore going to start reporting out the currently 415
+unassigned or newcomer bugs.
+
+We're hoping people may be able to spare some time now and again to help
+out with these. Bugs are split into two types, "true bugs" where things
+don't work as they should and "enhancements" which are features we'd want
+to add to the system. There are also roughly four different "priority"
+classes right now, =E2=80=9C5.2=E2=80=9D, =E2=80=9C5.3", "5.99" and "Future=
+", the more
+pressing/urgent issues being in "5.2" and then =E2=80=9C5.3=E2=80=9D.
+
+Please review this link and if a bug is something you would be able to help
+with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
+an e-mail with the bug number you would like and I will assign it to you
+(please make sure you have a Bugzilla account). The list is at:
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs
+
+Thanks,
+
+
+
+*Stephen K. Jolley*
+
+*Yocto Project Program Manager*
+
+(    *Cell*:                (208) 244-4460
+
+* *Email*:                 *s
+<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
+*
+
+--000000000000d9e34e062cbcc422
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><span style=3D"font-size:11pt;font-family:Calibri,Ari=
+al">All,<br><br>The triage team is starting to try and collect up and class=
+ify bugs which a newcomer to the project would be able to work on in a way =
+which means people can find them. They&#39;re being listed on the triage pa=
+ge under the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/=
+wiki/Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triag=
+e#Newcomer_Bugs</a>  Also please review: <a href=3D"https://www.openembedde=
+d.org/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.=
+org/wiki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugz=
+illa account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount=
+.cgi">https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The id=
+ea is these bugs should be straight forward for a person to help work on wh=
+o doesn&#39;t have deep experience with the project.  If anyone can help, p=
+lease take ownership of the bug and send patches!  If anyone needs help/adv=
+ice there are people on irc who can likely do so, or some of the more exper=
+ienced contributors will likely be happy to help too.<br><br>Also, the tria=
+ge team meets weekly and does its best to handle the bugs reported into the=
+ Bugzilla. The number of people attending that meeting has fallen, as have =
+the number of people available to help fix bugs. One of the things we hear =
+users report is they don&#39;t know how to help. We (the triage team) are t=
+herefore going to start reporting out the currently 415 unassigned or newco=
+mer bugs.<br><br>We&#39;re hoping people may be able to spare some time now=
+ and again to help out with these.  Bugs are split into two types, &quot;tr=
+ue bugs&quot; where things don&#39;t work as they should and &quot;enhancem=
+ents&quot; which are features we&#39;d want to add to the system.  There ar=
+e also roughly four different &quot;priority&quot; classes right now, =E2=
+=80=9C5.2=E2=80=9D, =E2=80=9C5.3&quot;, &quot;5.99&quot; and &quot;Future&q=
+uot;, the more pressing/urgent issues being in &quot;5.2&quot; and then =E2=
+=80=9C5.3=E2=80=9D.<br><br>Please review this link and if a bug is somethin=
+g you would be able to help with either take ownership of the bug, or send =
+me (<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>)=
+ an e-mail with the bug number you would like and I will assign it to you (=
+please make sure you have a Bugzilla account).  The list is at: <a href=3D"=
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or=
+_Newcomer_Bugs</a></span></div><div dir=3D"ltr" class=3D"gmail_signature" d=
+ata-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p clas=
+s=3D"MsoNormal" style=3D"background-image:initial;background-position:initi=
+al;background-repeat:initial"><span style=3D"font-size:12pt;font-family:Ari=
+al,sans-serif">Thanks,<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
+ily:Arial,sans-serif">=C2=A0<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
+lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
+ont-family:Arial,sans-serif"><span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
+amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
+an></b></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
+&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
+<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
+:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
+s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
+-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
+><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
+/span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
+t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
+=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
+color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
+uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
+ lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
+erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
+phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
+.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
+u></p></div></div></div></div>
+
+--000000000000d9e34e062cbcc422--
 
