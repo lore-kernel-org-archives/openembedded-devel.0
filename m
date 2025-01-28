@@ -1,88 +1,98 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0EE88C0218D
-	for <webhook@archiver.kernel.org>; Tue, 28 Jan 2025 10:06:07 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.web11.14236.1738058760680899682
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B5E3BC0218D
+	for <webhook@archiver.kernel.org>; Tue, 28 Jan 2025 12:27:47 +0000 (UTC)
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+ by mx.groups.io with SMTP id smtpd.web10.16260.1738067262173951289
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Jan 2025 02:06:00 -0800
+ Tue, 28 Jan 2025 04:27:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=aKIBeE5E;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-436202dd7f6so62220215e9.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jan 2025 02:06:00 -0800 (PST)
+ dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=VJI58nl1;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.54, mailfrom: brgl@bgdev.pl)
+Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-385deda28b3so3852157f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Jan 2025 04:27:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738058759; x=1738663559; darn=lists.openembedded.org;
+        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1738067260; x=1738672060; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=jOjwKs1utIgmdnMlbm6PoCqhgF4eXBnpsQhrD5MFCLQ=;
-        b=aKIBeE5EBcalGnHy0dD0miz3TYz48yVPM8JDcG1Ycrq2mb9uC0H8SuVU/AA/7cO3Fd
-         7olpsIDfyXjshWEeRrD5/ysobl8Cn51fXP1qpIbNeFmgaroKfv7lzroRj7fQSJwFNaod
-         I5XndWT6XbOMkHMLfP2SDrg55K1qbU7NBgk+E4jQJAPd463CY2YfWX/DWzJgi/hf4Aul
-         z5Ep1lM1m5PvWahW9PS+PGahfl9cPnxsvdPRe7apnorUAnuj1WXceDMzNUh3l9sdjVEF
-         /ufHwnJJnhMD5Y6CNNWlXNzrcLLyX9vFYcaF13B/HQw67a7+wDIc2HXhGVzIFaGvRtPA
-         7vJg==
+        bh=NOj35AJIZ9B3PY28m9m2RB6eHXN3S7XAK03ns9cDLCA=;
+        b=VJI58nl1b9sAr+0kVVdPL3soUDsZczO0FMQKo9xlIXpQJsU5YdBQw21CNe/9jjdQy6
+         hQ4uIpuuHPS7AvMy2RLQzv6boDWpTre6fBJLCOQ43YkEcKBC42CQpBO1Ab+3z0WfBzxz
+         Ye2sUZm8XHcVUFGJifQ4Ye/292KqIgUX5pjsOomyIRL4XPJdvlWF+0aLMr0QFWZIST/N
+         Ij/KZrDoOmx89a+XmyThCFukbHs5X8AACGD2QfZ21/YLxgAvsJZwdZSrQPRVGWBr8gTM
+         JPzT61j2Hk/X12nW2SDR9lIF+9tL/MfA4fQKPPVa0OqwkyHsv9hXm6ryygM9YD83QDN2
+         3lnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738058759; x=1738663559;
+        d=1e100.net; s=20230601; t=1738067260; x=1738672060;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=jOjwKs1utIgmdnMlbm6PoCqhgF4eXBnpsQhrD5MFCLQ=;
-        b=EfD6zys4mBopxcXHajZQEUPeUpydLgsq8U3F3w2ZmQ9u4xFHRjvqYlXLO9qGN2/xIb
-         QsDDIobZdEISbOjYWf5s+JoXq5Jd4nqNE/g+16bvHbQZf9/2KXN8Tva51FJObqHIAdz6
-         kkdAxZJZEs/nlkHKb/1GgTvSS+MxCkkj9sU3seIVMKwNa9btEQst9VRncECQazFK0Us0
-         dGti72xRKUB0xfP6/1+oEwJVVWUsxb0HJ95k+EuNPDqGgiMCbZqVHg7g8Ri6tCd5M4rO
-         LiSrE+EGs+FRPUlNzLUFYCzdoHMzI0LmZ/yPbSDENE756RXI0tcHROEmbrtm6Ca/ypzv
-         MRTw==
-X-Gm-Message-State: AOJu0Yzkzkh9DRjMNxIoKnsJSshaLCgkEQ94xF7D/nvzODqr/g6aQssT
-	bDB15nWXFZ4CGmpzQc27agtC/QJxJMjryao7mWH8Sde6J64Crt0TWXiuverJ
-X-Gm-Gg: ASbGncuIDUbTbGRxMjskVmjYUvXXIX5O4cSNHdkojWlU/QI9rSZB0gGvpd5YUdDMFRl
-	eh4t+lCbbEIpJUhDuGK3NjcHV+TQHJlZS9/fDSpQmq93+tJusfCtErR4+LVjzPl0SW2JHLpao1m
-	W8BHL+n9PexLMVB/6rmoaJ6V41gAviYhFI2d8AYZIwylBo7zkqcpColxYPPFogUmnMyJm30m7+9
-	RUk+yrt/CZC/YV1DLhgAoYMWFVwMwHLqrU5faqIVrCzf4V0SdajGSYMoEyX5S3Au/cRupIbDieq
-	t93iX5OUORprHx6CXpQn8iT7xOJed2A=
-X-Google-Smtp-Source: AGHT+IGP3/zpLPOz/p2bVml8k7p9UJzGPAVkaJJYXNlMpvHoL2ToZOgy6ZNiDNkb0c2D8cmyJLSPVQ==
-X-Received: by 2002:a05:600c:46cb:b0:436:1b96:7072 with SMTP id 5b1f17b1804b1-438913bebe7mr405047355e9.5.1738058758627;
-        Tue, 28 Jan 2025 02:05:58 -0800 (PST)
-Received: from localhost.localdomain ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-438bd47f269sm166040335e9.8.2025.01.28.02.05.58
+        bh=NOj35AJIZ9B3PY28m9m2RB6eHXN3S7XAK03ns9cDLCA=;
+        b=mNRwLIY0DmQHv//nHpFNngDmOaYhaLlvEVF6A9IQ0ofR4kQUzUum8dDdWWlkiGNYFc
+         wd84V2an7wAs9eys7cR0Nl2Y3s7WvMsxZsr0wgH2WuBM7yow8jBN54EITWNNihj0rpHo
+         y8M6yynXLmgJK2MR+CRKXsvRgfPR/97mFZwKMCRwU/E/0D/WBwgr/xo+buOuMuV0cJ1G
+         LtBKhRKVfI6NUfw1u1SzqiJ53uYo6G/PfgOQzQLbw3TCDDNlbPGgsfjhWrZWw84PfDV3
+         scSXogNWeHCtHPqkC5SyaK/Kd8qRNgT2FH5b4jjj6+6IWyQXSMJyB2PVAQWWinRVpSQ5
+         asRg==
+X-Forwarded-Encrypted: i=1; AJvYcCW5eZhMeDhzlQWX19dqy6+zIdbNk91vjAuKM0jNRyvu3dMvaLyNLplHq5oOTpYFd/T80odgH7egfvLB1AifRX2FVDU=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yy+K+N1BB8oAX7sBSKX6RYvZR1ZmzhxiLqSgFtLS7ltu/wIebrN
+	qVyt/BK2LBbTR3wB+0ZHDJ0lhksVNMA7n/r5T9wYBNely3HMdX2+dc30FJTZ3DU=
+X-Gm-Gg: ASbGncsJvfSmmaSxbAyoVdgDMTzXmpVhifDejxkO+Tb3rzWoz0FMmXiiG7lrtsZAsHd
+	TSP76FS6FJ9YLAcAMUQv0jSFoHaHiyUPcFjTA6MvpOIRSyrROStXqJPF1c0yTSbSeG5Z4KG2gDz
+	x4CTVdtVOaPCwkk0aJC/xfJCfAAQ2MDa5NppxLCkmTsYqbbOGV7iRob9LbJe3zEwmPoG7ZoD133
+	vcVVk94AGaJjMzVdPwDC9MztWk8ym64/7qfwkaR1PXg2WJNViIeJL388Lnh7o1hL8+dXEkqDnXp
+	5zHOLcteZcEoB28=
+X-Google-Smtp-Source: AGHT+IFeArFPC80V/blj86oBhk946qGQtpL1KapGz1LvrUgCS1M2igy4eIPu8BTe9lh80bKiZFJcmg==
+X-Received: by 2002:a05:6000:1788:b0:385:ea2b:12cc with SMTP id ffacd0b85a97d-38bf56628e4mr41069639f8f.13.1738067260429;
+        Tue, 28 Jan 2025 04:27:40 -0800 (PST)
+Received: from brgl-uxlite.home ([2a01:cb1d:dc:7e00:9138:73f8:bd73:cdf9])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38c2a188a61sm14198547f8f.52.2025.01.28.04.27.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 Jan 2025 02:05:58 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Gyorgy Sarvari <skandigraun@gmail.com>
-Subject: [meta-python][PATCH] python3-pydantic-core: remove not needed INSANE_SKIP
-Date: Tue, 28 Jan 2025 11:05:56 +0100
-Message-ID: <20250128100556.3125022-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.48.1
+        Tue, 28 Jan 2025 04:27:39 -0800 (PST)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [meta-oe][PATCH] libgpiod: unduplicate the EXTRA_OECONF assignment
+Date: Tue, 28 Jan 2025 13:27:35 +0100
+Message-ID: <20250128122735.55051-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 28 Jan 2025 10:06:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115116
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 Jan 2025 12:27:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115117
 
-The current version of the recipe passes the "buildpaths"
-QA check, it is not needed to skip it.
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+We already set EXTRA_OECONF in libgpiod.inc, drop the second assignment.
+
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 ---
- .../recipes-devtools/python/python3-pydantic-core_2.27.2.bb      | 1 -
- 1 file changed, 1 deletion(-)
+ meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core_2.27.2.bb b/meta-python/recipes-devtools/python/python3-pydantic-core_2.27.2.bb
-index 5dd76f99f..063730372 100644
---- a/meta-python/recipes-devtools/python/python3-pydantic-core_2.27.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pydantic-core_2.27.2.bb
-@@ -25,7 +25,6 @@ RDEPENDS:${PN} += " \
- "
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
+index dac7dd36fc..009cf9897a 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
+@@ -14,10 +14,6 @@ inherit python3native
+ PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev glib-2.0 catch2"
+ PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3"
  
- INSANE_SKIP:${PN} = "already-stripped"
--INSANE_SKIP:${PN} += "buildpaths"
- 
- # python3-misc is for Lib/timeit.py which is not split out elsewhere
- RDEPENDS:${PN}-ptest += "\
+-# Always build tools - they don't have any additional
+-# requirements over the library.
+-EXTRA_OECONF = "--enable-tools"
+-
+ PACKAGES =+ "${PN}-python"
+ FILES:${PN}-tools += "${bindir}/gpiofind"
+ FILES:${PN}-ptest += " \
+-- 
+2.45.2
+
 
