@@ -2,90 +2,132 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0FB7EC02196
-	for <webhook@archiver.kernel.org>; Wed, 29 Jan 2025 11:41:06 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.web10.10682.1738150844859758935
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F349AC0218D
+	for <webhook@archiver.kernel.org>; Wed, 29 Jan 2025 11:41:05 +0000 (UTC)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+ by mx.groups.io with SMTP id smtpd.web11.10498.1738150843990228137
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Jan 2025 03:40:45 -0800
+ Wed, 29 Jan 2025 03:40:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=SQMvEV1q;
- spf=pass (domain: konsulko.com, ip: 209.85.128.53, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-43618283dedso70575025e9.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jan 2025 03:40:44 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=kzhJ4Saq;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.43, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-388cae9eb9fso3996865f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jan 2025 03:40:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1738150843; x=1738755643; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=cmon5yUJMX2KGk5RzXdT3s5wcErRM1Xhyig45CB7NZA=;
-        b=SQMvEV1qhuLUCD4Ow20RKVRgu9o/2OxduClBcapvXsYYOSUrQmJnBhWAZs3cn5SW14
-         wbTuO6glqpbmobxEhD0Wetc946fSorYgk55yDit0xKDhyA1ErnjIfdssXs5k/dDykjNv
-         0F9WUhh+H+rFRvlmztNuuFj58VX/ic1smZLs0=
+        d=konsulko.com; s=google; t=1738150842; x=1738755642; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=BebjJCupH84XsGH4AZ/RxD5d/Y1TbvlT52PU+DXz+UM=;
+        b=kzhJ4SaqmrpYO0lWqOzr4t3BPoO2Kreh2sysqWlS0+foYnnLHvGj6OEwtpvm24aXJx
+         myUDUvaMY19NI4N87lQjY1lD6HIu4eouZjnysfjnDBcPN+H6pCEdrmoJn4SHcgbAsKzO
+         s5pltUjbxHjVjdV5IKJnjZFk/ze8Bn5fwY3Fg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738150843; x=1738755643;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=cmon5yUJMX2KGk5RzXdT3s5wcErRM1Xhyig45CB7NZA=;
-        b=jprE3vei4Nu9yH+WXqpajMP376HvnWaazDgoHvnoQ/J9OZanCJs8ngo+v5PO3XRe24
-         aUCdWMTBtoYE84wTwba0fNnr81M4td/E8Q6OpabS7g80SIG7PcZ/yLiBduRmgDXFZZ6I
-         HVf3UItw7T722MtzmWBSzv3ylZOlx3UZrZfYLNkwj1zFBObdt/TGKUFzeDKSnbdu/CLz
-         HxezhMocVSXcJBU5idB/zlXkv0iOCgznfgztaOewuFsLQRagy8UbVTbaXYD5eaYYGmd8
-         V27DyEZAkRQxQc6bfZKrfd0wNGhptWnNHGq7DucuJDOfm1hzkdkvoTMWBV84B9kulBFO
-         7gNA==
-X-Gm-Message-State: AOJu0YzGO4vViJLfJpnhh6a7GNpLzM8TGdaGQC7+5pcCcH+w4M1/pHce
-	M02NEhkrT0tfkjxDxX4VYUSbjfhVcfMko0oTUx19bKmx7mbxuv7qsn1jebqjZbZDPQCCINF+bk7
-	0
-X-Gm-Gg: ASbGncu5/LbqpBbZkYA9Z8B8TKh2Tft1ERJQO+lQXCP6HHlOyd9geJMrQ/1wH62I75V
-	Y/v8TFq7Plg09msqvmbIIY9AgAYK+PXx/pms3X4VJzqSISRBFNBSzMLVVkFUpeVIKZL2PtUWFi8
-	jmbSiAEOSwd0ylAB8EnbDVQ4Mnl7R6q4AeghBES2Xrft1SV28DJhWEghxm6vwD5Fb7pVy7m/NUt
-	4tX3HLUJ6AacbyVnqZSIMb+oVNZ6ZpB44dUJqopKnWbIsDcl3c8d4987pgJAmSyS1F2U7U/ZXQ9
-	hQ5bAsqiNvWuY2wCxtR/ddnT2rbUwA==
-X-Google-Smtp-Source: AGHT+IF/4WExlWejHEVBfm7qHZBJW63eSeqpHCDW/5Cq3oc6KCV5XJ0RXA4zo//qxxhWLlCoFDdwKw==
-X-Received: by 2002:a5d:64a3:0:b0:385:ddd2:6ab7 with SMTP id ffacd0b85a97d-38c520af7f9mr2192150f8f.52.1738150842952;
+        d=1e100.net; s=20230601; t=1738150842; x=1738755642;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=BebjJCupH84XsGH4AZ/RxD5d/Y1TbvlT52PU+DXz+UM=;
+        b=ms6ok17DkY13c2fBadprHkDaoVHSp7pSQxYBzqTW/G1iJ6Tw3a+gJoaxSJFJkcB6ou
+         SFZYomKQC5M6fx2nuUxmTkfXNFIjxkeuFy5wDhHGznRSUzZXkchRseiOepCKVgpU/TdC
+         3RMHkw2RIVZofypWIKFxq8ZDhUm3RZ8gQuB+AByPCTa0VXbqSrSZeEXOq+RYHgj7VR/L
+         aXxzTO8kwnQawbCPlEscD3DiMpH1gBXET4Bgr0fVxnTdY8N5c/E2Vfs4ER4WgUuDIjXA
+         R+tUxJi2PV3bNk0cZooB6UxCedAEUpgu3SPjIZUIYiW7rFv7roLRMzfndNxDqkfYqp08
+         wBpQ==
+X-Gm-Message-State: AOJu0YxTcaJNZv+w5jgpK4gvQ/atiM8Rs4im3hvmGAWndgzrSF9bpqKK
+	+QXrwlOJ0DtryqPedbXLY/ShO98cBOtX4y9opRXdNRCVlMj6FUXJECcOdmyLZDbExoEG7sieLa2
+	K
+X-Gm-Gg: ASbGncssETmXXV4yNuaq3tEyEXp+aApaDGXxK+Z3tMc8VeF3gBbDD5Cxj8Ig2ImMtmH
+	oxE89PWzvaB8+X0G8vxt+U/Q1I0/gT0MN5ePrTNrxXXCg3FTkb2KfxxhEJgupRyGAuCRvuZEmmf
+	MJL/hjbv4H5JE0s7Rgk+rr99xhxzj2DNb2s6zYxEbpg5xSaw9oc75JSGfJbyKO+O06/mlpbGtj1
+	tbMkWpmY6Z56o8JxLuhj8PhKRRJW+jkL0/3k7MxLFh/GhL11g49pwC624CFMKdqjJXmMPRm4JE4
+	NLYCEn1oaaz7JjnyM+KDKzQiXdDWDQ==
+X-Google-Smtp-Source: AGHT+IHUDpK53Ff3CaMD9C/gpawgZn1TiEE9Bfsf7WFRTGH/ZziT4ovazmgtmBykLc6eT2bo6Gb71A==
+X-Received: by 2002:a5d:4904:0:b0:387:8752:5691 with SMTP id ffacd0b85a97d-38c520b964emr1623934f8f.47.1738150842123;
         Wed, 29 Jan 2025 03:40:42 -0800 (PST)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38c2a176449sm16982283f8f.11.2025.01.29.03.40.42
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38c2a176449sm16982283f8f.11.2025.01.29.03.40.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Jan 2025 03:40:42 -0800 (PST)
+        Wed, 29 Jan 2025 03:40:41 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/7] python3-annotated-types: Add native and nativesdk
-Date: Wed, 29 Jan 2025 13:40:34 +0200
-Message-Id: <20250129114039.3562870-2-leon.anavi@konsulko.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>,
+	Stephan Kulow <stephan.kulow@siemens.com>
+Subject: [meta-python][PATCH 1/7] python3-scikit-build-core: Use PYTHON_INCLUDE_DIR
+Date: Wed, 29 Jan 2025 13:40:33 +0200
+Message-Id: <20250129114039.3562870-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250129114039.3562870-1-leon.anavi@konsulko.com>
-References: <20250129114039.3562870-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 29 Jan 2025 11:41:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115132
+ <openembedded-devel@lists.openembedded.org>; Wed, 29 Jan 2025 11:41:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115131
 
-To build python3-lief we need python3-pydantic-native.
-To build python3-pydantic-native we need python3-annotated-types-native.
+Add a patch to use PYTHON_INCLUDE_DIR to find Python Interpreter
+and Development.Module as suggested by Stephan Kulow:
+https://github.com/scikit-build/scikit-build-core/issues/952#issuecomment-2554058930
 
 This work was sponsored by GOVCERT.LU.
 
+Suggested-by: Stephan Kulow <stephan.kulow@siemens.com>
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python3-annotated-types_0.7.0.bb    | 2 ++
- 1 file changed, 2 insertions(+)
+ ...-builder.py-Check-PYTHON_INCLUDE_DIR.patch | 32 +++++++++++++++++++
+ .../python3-scikit-build-core_0.10.7.bb       |  1 +
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-scikit-build-core/0001-builder.py-Check-PYTHON_INCLUDE_DIR.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-annotated-types_0.7.0.bb b/meta-python/recipes-devtools/python/python3-annotated-types_0.7.0.bb
-index 7b1bb11a1e..79e26e7ae3 100644
---- a/meta-python/recipes-devtools/python/python3-annotated-types_0.7.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-annotated-types_0.7.0.bb
-@@ -14,3 +14,5 @@ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+diff --git a/meta-python/recipes-devtools/python/python3-scikit-build-core/0001-builder.py-Check-PYTHON_INCLUDE_DIR.patch b/meta-python/recipes-devtools/python/python3-scikit-build-core/0001-builder.py-Check-PYTHON_INCLUDE_DIR.patch
+new file mode 100644
+index 0000000000..13cb7b1e7f
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-scikit-build-core/0001-builder.py-Check-PYTHON_INCLUDE_DIR.patch
+@@ -0,0 +1,32 @@
++From 5bc2d175c6a31a3de04444e5e22af310799ab10d Mon Sep 17 00:00:00 2001
++From: Leon Anavi <leon.anavi@konsulko.com>
++Date: Mon, 27 Jan 2025 19:17:48 +0200
++Subject: [PATCH] builder.py: Check PYTHON_INCLUDE_DIR
++
++Use PYTHON_INCLUDE_DIR to find Python Interpreter and
++Development.Module.
++
++Upstream-Status: Inappropriate [oe specific]
++
++Suggested-by: Stephan Kulow <stephan.kulow@siemens.com>
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
++---
++ src/scikit_build_core/builder/builder.py | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/scikit_build_core/builder/builder.py b/src/scikit_build_core/builder/builder.py
++index b19173f..f4fb2af 100644
++--- a/src/scikit_build_core/builder/builder.py
+++++ b/src/scikit_build_core/builder/builder.py
++@@ -203,7 +203,7 @@ class Builder:
++         python_sabi_library = (
++             get_python_library(self.config.env, abi3=True) if limited_api else None
++         )
++-        python_include_dir = get_python_include_dir()
+++        python_include_dir = os.getenv("PYTHON_INCLUDE_DIR") or get_python_include_dir()
++         numpy_include_dir = get_numpy_include_dir()
++ 
++         # Classic Find Python
++-- 
++2.39.5
++
+diff --git a/meta-python/recipes-devtools/python/python3-scikit-build-core_0.10.7.bb b/meta-python/recipes-devtools/python/python3-scikit-build-core_0.10.7.bb
+index 7c6c9ddda3..4df47c3c5d 100644
+--- a/meta-python/recipes-devtools/python/python3-scikit-build-core_0.10.7.bb
++++ b/meta-python/recipes-devtools/python/python3-scikit-build-core_0.10.7.bb
+@@ -9,6 +9,7 @@ DEPENDS = "python3-hatch-vcs-native"
+ 
  inherit pypi python_hatchling
  
- RDEPENDS:${PN} = "python3-typing-extensions"
-+
-+BBCLASSEXTEND = "native nativesdk"
++SRC_URI += "file://0001-builder.py-Check-PYTHON_INCLUDE_DIR.patch"
+ SRC_URI[sha256sum] = "04cbb59fe795202a7eeede1849112ee9dcbf3469feebd9b8b36aa541336ac4f8"
+ 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.39.5
 
