@@ -1,110 +1,101 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AD11C0218A
-	for <webhook@archiver.kernel.org>; Thu, 30 Jan 2025 16:17:01 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
- by mx.groups.io with SMTP id smtpd.web10.19121.1738253812822532511
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 63677C0218A
+	for <webhook@archiver.kernel.org>; Thu, 30 Jan 2025 21:58:06 +0000 (UTC)
+Received: from mail-io1-f53.google.com (mail-io1-f53.google.com [209.85.166.53])
+ by mx.groups.io with SMTP id smtpd.web11.6213.1738274284707145361
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Jan 2025 08:16:53 -0800
+ Thu, 30 Jan 2025 13:58:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=qL/E87ub;
- spf=pass (domain: konsulko.com, ip: 209.85.218.47, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-ab6da1bb1a8so34344766b.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Jan 2025 08:16:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1738253811; x=1738858611; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=NhPVV58j4nnAtLh6zCiGtD9C5tZk+G64pQUzKD7Hauw=;
-        b=qL/E87ubxiU37YAO1BAjuw0gib8lx/zWjmenN5i5BEgTeDvWYA+xndda+5IiqAp1j+
-         MWvJzKUvhuR0tPzIhkOjgVeUf7B0EHDjKfZdDOutSo8buQkt4wKfR5YjJgmpUwyiBTLx
-         aXYWfMHVCQ7P9axG6AjEHUHwpJWdJYXpOjaxo=
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.53, mailfrom: straka.derek@gmail.com)
+Received: by mail-io1-f53.google.com with SMTP id ca18e2360f4ac-844eac51429so93233339f.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Jan 2025 13:58:04 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738253811; x=1738858611;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=NhPVV58j4nnAtLh6zCiGtD9C5tZk+G64pQUzKD7Hauw=;
-        b=xH2h8ykzgiNpSg7cZ1HYfcjdG3Ns0y7CMwYt1vELb6rSm1zEgoOsj8R50v6Ng4I+t/
-         P17q+Q4Z7qpxtxazF3dzCBFC3hLIKQJynIMuxBwtIxzWln4kPHk/uJSlYK/PqtDncubv
-         cg+RR2akBwghpYQkOlh8dWL7wLdxZkmC0XKK4Qwp9k9oNV/iSmQCefqR0XFL4C7blFh1
-         d5RVsU6jjM4gvCOS+5ZMGdc0G6C3ji7t/EyfRw71qDpJFZjZGkQjeYFvSs9csCuBI5ug
-         Lv0gpVNvWGFfSJa+b7ygFc/CLXNv1182u9OuqyEt64gZk+sFKO3g6m3avPeGb4sMq2Wn
-         wQFg==
-X-Forwarded-Encrypted: i=1; AJvYcCXBY/+V0gi4474RbCh5sXGv6d0EmPIhlb2V+QmhebmOIhfYXT4G/YfO6LSVg6Kk495KmqpdIKDsZ1okrddCz0BuSa8=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzJo+6WUI7+rJmuodT1iiTA2g7oO+TKIDl5zmJpAT5hc+FLr0Q5
-	F5BoPsw1jtDN90LgXvFauzalpZHMl9aTt5w33ofJE+MCpNuPYTaGTrPs+ii/9cpBTd/YwzEff8A
-	/mnw=
-X-Gm-Gg: ASbGnctwCl01CaGnlfIjiAc6bhkgJd0yMflUF38EjOGT49AKNwizsogZROmWGuHFeBz
-	Fb6DuhW32PEFpWtC/xuat7WAF/tONk4R6kl0DuY2o5DqrBUF5Ejx8dcc365gSROFxnuHDJRDsIm
-	GBpOslc8jdiRB0DIK6NP/pgh35u31ye4TUCnC4VUXeSHrcdLPy1Iqsn+JEV4KxxXg0nIAEM4XC3
-	yrJ5pQSu06u3Bc2RvSL5DBp6J1KNkfN8IFDRrU1RQWLeZjmBDOLj1VeDXKevmx9IRZeRMOmgHzV
-	UVcAqD/L2RmFAssRI2yf8ig=
-X-Google-Smtp-Source: AGHT+IFE22VExwkKzZaB7XCtv7zifXNKFhQ/gsT0mHiymMJ0Spa4tUQH66SVG2kYHMpN3ctSM4Mg9A==
-X-Received: by 2002:a17:907:6d15:b0:ab6:f6a4:ebc6 with SMTP id a640c23a62f3a-ab6f6a4ec35mr20366466b.53.1738253811101;
-        Thu, 30 Jan 2025 08:16:51 -0800 (PST)
-Received: from [192.168.5.161] ([46.55.231.62])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ab6e47a7b04sm141481366b.27.2025.01.30.08.16.50
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 30 Jan 2025 08:16:50 -0800 (PST)
-Message-ID: <b6b23990-7a63-413c-847c-8ea2988647df@konsulko.com>
-Date: Thu, 30 Jan 2025 18:16:49 +0200
+        d=1e100.net; s=20230601; t=1738274283; x=1738879083;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=8vjPdIsrssoi94kvSq2TdaJE1/jMECWm3NjUaBW6MS4=;
+        b=O2f2e3/E+VQsCp/zTEAeXCrPyR9XJXku6NSMgm1lnoscMgookeORLZ7HO95vCppQVF
+         bxOvR/lEFjEnQE5lDBcO2/dN65pyzdqvGTc7iGTlXATZgOr5lavZrZiBdTOFMrxCDh0Q
+         ofw9BD72H738CfvbscVMxl8Bk7ne5naOQaUqAreE7yV3gr7BkbGXpL7uALC5Zihobiab
+         uAwq0QvvhC5hwvKnxaPXM4ICqPIWuFNrGTgFL1c7lfbo3y03oNz1pceZt/W6kb0p8Qvh
+         11mzGnF+0dlfJ3OmWFb6XDeba0z/1cWx2oDD54kD5WbmhafkoBIpGM3WwBkT8DsCalvL
+         Uopw==
+X-Gm-Message-State: AOJu0Yx0E/T9guhqPqbSPcTxiLCjJPQv9I8Ae97paH7rEreDuKksF1PQ
+	+PaKR63twxKDGMH8zT1CxWgpYodSwZf3J2gHpd9MH6iM+XMx/KrrPNKSC3k9rYo=
+X-Gm-Gg: ASbGnctr9ATMudNrZYPPteOpNCg+/840s/B54GYtcamwzIo14NXXJiUh3RgJyKQsHdh
+	HpEpuDcCgj1jkeRImPH0jBJnY5z3czgMxly0zzZSKJ1AfbI92adxaEUvJFAWuLHVVtmB+j8xuqe
+	xfmn2X/g2hBtlbpbarUpprdt9eSOk1kW4ShKAu6xrRXHpqZmS6AdRcJZU2lGChlMi3Didt7NAaB
+	lCxDFXgPP6ifSgR32Z0CuCc3Y4M6VHezI/3lUTJRvNwxQU1jXNZxHKlziJEvBDtcIYxh9tDQL+k
+	oB0nkHRU3TzboQUJX4buuTNq/qjokbvAZwfHefpT2SuIydTetZ0t8N79RbwE
+X-Google-Smtp-Source: AGHT+IGMMF0FYX2V3Wm/EWh84migxLkT6wyGbGB+2PglGwClt/cZKHm8tnETkigZhbiUMd1gExVbcQ==
+X-Received: by 2002:a05:6e02:b25:b0:3cf:a0fc:5388 with SMTP id e9e14a558f8ab-3cffe486d6fmr81348455ab.19.1738274283208;
+        Thu, 30 Jan 2025 13:58:03 -0800 (PST)
+Received: from alpha.lab.asterius.io (c-24-118-24-24.hsd1.mn.comcast.net. [24.118.24.24])
+        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-4ec746e3e63sm519071173.144.2025.01.30.13.58.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 30 Jan 2025 13:58:02 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Cc: Derek Straka <derek@asterius.io>
+Subject: [oe][meta-python][PATCH 01/23] python3-inflection: update recipe to use the ptest-python-pytest class
+Date: Thu, 30 Jan 2025 21:57:16 +0000
+Message-Id: <20250130215738.3280576-1-derek@asterius.io>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][styhead][PATCH] sip: Upgrade 6.8.3 -> 6.8.6
-To: skandigraun@gmail.com, openembedded-devel@lists.openembedded.org
-References: <20250130142940.2771682-1-leon.anavi@konsulko.com>
- <df9d3d5c-aa4c-4de2-a6fe-c0e83733885e@gmail.com>
-Content-Language: en-US
-From: Leon Anavi <leon.anavi@konsulko.com>
-In-Reply-To: <df9d3d5c-aa4c-4de2-a6fe-c0e83733885e@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Jan 2025 16:17:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115154
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 Jan 2025 21:58:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115155
 
-Hi Gyorgy,
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../python/python3-inflection/run-ptest             |  4 ----
+ .../python/python3-inflection_0.5.1.bb              | 13 ++-----------
+ 2 files changed, 2 insertions(+), 15 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-inflection/run-ptest
 
-On 30.01.25 г. 16:58 ч., Gyorgy Sarvari via lists.openembedded.org wrote:
->> @@ -6,12 +6,14 @@ SUMMARY = "A Python bindings generator for C/C++ 
->> libraries"
->>   HOMEPAGE = "https://www.riverbankcomputing.com/software/sip/"
->>   LICENSE = "GPL-2.0-or-later"
->>   SECTION = "devel"
->> -LIC_FILES_CHKSUM = 
->> "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
->> +LIC_FILES_CHKSUM = 
->> "file://LICENSE;md5=ed1d69a33480ebf4ff8a7a760826d84e"
-> That license hash change looks significant: apparently it was 
-> relicensed to BSD at version 6.8.4[1].
+diff --git a/meta-python/recipes-devtools/python/python3-inflection/run-ptest b/meta-python/recipes-devtools/python/python3-inflection/run-ptest
+deleted file mode 100644
+index f1c8729f0e..0000000000
+--- a/meta-python/recipes-devtools/python/python3-inflection/run-ptest
++++ /dev/null
+@@ -1,4 +0,0 @@
+-#!/bin/sh
+-
+-pytest --automake
+-
+diff --git a/meta-python/recipes-devtools/python/python3-inflection_0.5.1.bb b/meta-python/recipes-devtools/python/python3-inflection_0.5.1.bb
+index ba1d0ec539..368b9e49b7 100644
+--- a/meta-python/recipes-devtools/python/python3-inflection_0.5.1.bb
++++ b/meta-python/recipes-devtools/python/python3-inflection_0.5.1.bb
+@@ -6,18 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2fb6fa1a6f1792d78de19ad1bb653c31"
+ 
+ SRC_URI[sha256sum] = "1a29730d366e996aaacffb2f1f1cb9593dc38e2ddd30c91250c6dde09ea9b417"
+ 
+-inherit pypi setuptools3 ptest
++inherit pypi setuptools3 ptest-python-pytest
+ 
+-SRC_URI +=" \
+-	file://run-ptest \
+-"
+-
+-RDEPENDS:${PN}-ptest +=" \
+-    python3-pytest \
+-    python3-unittest-automake-output \
+-"
+-
+-do_install_ptest() {
++do_install_ptest:append () {
+ 	cp -f ${S}/test_inflection.py ${D}${PTEST_PATH}/
+ }
+ 
+-- 
+2.34.1
 
-Hm, this is cherry-picked patch from branch master and Scarthgap as it 
-is needed PyQt 6.8. I will have a look at the license change as it will 
-require modification of the recipe in other branches, too.
-
-> Also, it has a new homepage: https://github.com/Python-SIP/sip
-
-OK, probably worth changing this too. I see in the mean time the 
-homepage has been also updated in the pypi.org info.
-
-Best regards, Leon
-
->
-> [1]: 
-> https://github.com/Python-SIP/sip/commit/f32039b07c47280039dcdcd0f8a2b1323fda912e
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#115153): https://lists.openembedded.org/g/openembedded-devel/message/115153
-> Mute This Topic: https://lists.openembedded.org/mt/110897852/2167311
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [leon.anavi@konsulko.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
 
