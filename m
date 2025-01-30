@@ -1,84 +1,123 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BA532C0218A
-	for <webhook@archiver.kernel.org>; Thu, 30 Jan 2025 11:09:29 +0000 (UTC)
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.web10.13094.1738235363703615963
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9212FC0218A
+	for <webhook@archiver.kernel.org>; Thu, 30 Jan 2025 14:30:00 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.web10.16419.1738247391625774724
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Jan 2025 03:09:24 -0800
+ Thu, 30 Jan 2025 06:29:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Sz0/W7CD;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-43618283d48so4691655e9.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Jan 2025 03:09:23 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=DOCdGkWL;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.44, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-43618283d48so6854755e9.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Jan 2025 06:29:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738235362; x=1738840162; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=OoPHYJ9ztzdzg2ss+dwzq0dmgN7bUnn9X8LxMhYsGgQ=;
-        b=Sz0/W7CD6q2bk5C4sQTh3N7TdxaA8FmaxohUmW8jdQMDLgjkEkvZXxt1jECdZalYsR
-         ZSbxxP8CQ2d7gnwo8y/y8Q0hTxeVlzz1LOH6zZbbCse3p2jYIt4tnEfEXr2eGoZkiDP5
-         Sf4E9hSLD8QeXM+AstdcXGWP1aWYQW4dgTrtg/OGMHgWd+jYcIoI+ozVDTwAYxIjfr2J
-         BHXuGa2K/ajVNT1oTO5uC6KQ1aOkASKAP8Z3rwJBwedoqN4RsifIkvXswnrFrN0UNjHy
-         HwzIdNNDcLHYJscrka5oMciRjUKvhrwoaDLkG0qsgJASQRNmbcXHkzCbWFeinHuqQQG1
-         E5Bg==
+        d=konsulko.com; s=google; t=1738247390; x=1738852190; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=NO6jhcOwNC9/eLDMwxmz9IyW+PLDNnxAclQABOu+DTg=;
+        b=DOCdGkWL8QD5wZPyyu779XFeC8MkJaasb3Gtdn5mHFPebqn7vSDSt+ESW1KefNl2Cr
+         IRcFiHxZ9T5jyFwUI5a3/6Kpc6kxwh6rgffM+NglyQa5Oq1EjtADagQjn0qOwQLaqZNx
+         H+WdpQdtlXiVXVOWRZGPMkhzAkK+K1tjx2Sy8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738235362; x=1738840162;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=OoPHYJ9ztzdzg2ss+dwzq0dmgN7bUnn9X8LxMhYsGgQ=;
-        b=cZQhARtlZXhdxTS4bdYEWzC/ZWaRLSG0Xke3CcKMtoj5/BzaMiBl+UdyxkaZrVLRHP
-         5ffQP8shrwl1Lml234ISrESQAD0rEMumiEDtmM/6UtzyaaNTi5vbwnFLFY4cqV7fLNPe
-         n1pJFhAX8knJvAOHippAOkRuWYu6+n2n3fFmN5FjLBz4UHi0TU1fsaw0LA+uqAHtUBCU
-         U8o2BclzzDpck1afrdHVu43mNYj76+UjFm6FkvJbdD88g9l/nWc6aInoHNi1FMmsht9a
-         u1LF8S3U22nTbfa+hpIx6R3QRuAzmDwQh88s2ldJKBZ3etqUWCjynCFxviozwVKc0wzE
-         qHxA==
-X-Gm-Message-State: AOJu0YyvRLnlrerlxmxCjZ239bT15X+91gqbEQArkuG1PGsbinez/T8r
-	c73XN4QAA2ln+J+Y/s0x+FevTQmvRNXGBTXqMgbFL1w3kMs2gy/aLh87Cg==
-X-Gm-Gg: ASbGnctog5ibT7dGN4sG17ZDnpKF7JB5lMn7jOja/tCNFLmfz2oottSOrKTsVRYPx1P
-	IbkisS9IZrnoqm+ZfEErSjDwME0xiG//GRl1NZsZ0qPM+9eclC/Wv0oyhp8ec8NmSgT6s73+MrP
-	ILSfP3onUdvw58VE/kRge8vO8f8o3p2RugH6cTvPAYDStLBQjDAK2suvk1I410rTkZScPUMb8la
-	LmPP115yVU23u1xSd/BQ+grGClI4Ph9wmkjFPQittiekaC8cURJVTk3PUrzxhvRfdv/yBfRrRZ5
-	86+nf1zqD5YOIyAKzR9/2zk=
-X-Google-Smtp-Source: AGHT+IHSQON1l05gE/12URKo1KQ6EaabLcMD3aZ8CwcESIPsnG11oKLa4wdfJ5Stp5eqUOMYWFGuDw==
-X-Received: by 2002:a5d:648b:0:b0:385:fc97:9c63 with SMTP id ffacd0b85a97d-38c51930c8dmr4764923f8f.9.1738235361478;
-        Thu, 30 Jan 2025 03:09:21 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38c5c1b595asm1653072f8f.66.2025.01.30.03.09.20
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 30 Jan 2025 03:09:21 -0800 (PST)
-Message-ID: <714ff79d-329b-4da9-ac74-2b3cf6891eab@gmail.com>
-Date: Thu, 30 Jan 2025 12:09:20 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [PATCH] can-utils: RRECOMMENDS only ip from iproute2
+        d=1e100.net; s=20230601; t=1738247390; x=1738852190;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=NO6jhcOwNC9/eLDMwxmz9IyW+PLDNnxAclQABOu+DTg=;
+        b=rCRlERWOmi6JhSWopyQPBl7KL8a43HuSA4qHkVC8jMEn5S5aRBnr7doPEW1c4O6VYP
+         besPOkUxdnv+AHjrbZk/Vh146CYwk1/iVUoKhxdQ1Qz3bHBFkSE03Sk2CXzxqTrJlkwV
+         Z63AqGoRW5LAtoPrkKNrujgS1TMFatuJSQxiF2tuZI0nNk3J1K6s4Upwud38cH/5NUWU
+         YfQAs2iiBSSyf/KfNFRa7kjzXQz6DcE67DZnWCH3m4YBmkl90dAS34oTiMHON/BLrFsH
+         qcbJ0SlyoA2LAGeHl3Zdfbjw6XMfTjQY7NKaVrNuimzIcdBwaZejvbgG52/Mbv9nFgwP
+         pGug==
+X-Gm-Message-State: AOJu0YyZUQLUQb9XkcHAb1o4pZ99sVJ9ZUhvherN6/k/As9QZTKiZk52
+	Uo1Hnj6XqKBW8lRPJgGfOET6eDu90BNLmRbpgZIjtTFrkLwJ+MkSJjsb7KRnzvvPSMqaM17fa8I
+	/
+X-Gm-Gg: ASbGncvZD5w07XL84yG6bQxyhTesw4+E+zAMahTI5ALL3xo9hkDdKCopLn/3EPo/2A/
+	cop/0vnpbWVOR3kDAM2Vfac1DCD8mQHibT7Euzc8W+ZtHLxDIUlUo4lwoHpU5X0eQ8Vh+a1Lh2n
+	YpA8zm8b6eaHBUfYGkPRz73D2Y5SpKJF5L9jGwzwbrYn34cZODhzrMgh8AVUS2E0420ebIlHIbc
+	zfj2qiDhKX/FGCNnCuhWMqXiPgAY4hiHHldmxtg9oJGbGe/Aco0Noa8eudtbt2Xw8yNvUOih76b
+	7hmc0mH1aOu0lN1QYbbKFs7g0Ede9w==
+X-Google-Smtp-Source: AGHT+IEhD+ZFhLvefptUrTA60op4lkrwGvxpjYSWBD0CFpfO/qUAhMa9bya0ZdObzP3X7saPxHEB+g==
+X-Received: by 2002:a05:6000:1faa:b0:385:e879:45cc with SMTP id ffacd0b85a97d-38c5194b78bmr6004704f8f.19.1738247389588;
+        Thu, 30 Jan 2025 06:29:49 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38c5c1b57b6sm2139422f8f.72.2025.01.30.06.29.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 30 Jan 2025 06:29:49 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20250130071432.2946804-1-sean@geanix.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20250130071432.2946804-1-sean@geanix.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Cc: Leon Anavi <leon.anavi@konsulko.com>,
+	Khem Raj <raj.khem@gmail.com>,
+	Armin Kuster <akuster@mvista.com>
+Subject: [meta-oe][styhead][PATCH] sip: Upgrade 6.8.3 -> 6.8.6
+Date: Thu, 30 Jan 2025 16:29:40 +0200
+Message-Id: <20250130142940.2771682-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.5
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Jan 2025 11:09:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115151
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 Jan 2025 14:30:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115152
 
->   # busybox ip fails to configure can interfaces, so we need iproute2 to do so.
->   # See details in http://www.armadeus.com/wiki/index.php?title=CAN_bus_Linux_driver.
-> -RRECOMMENDS:${PN} += "iproute2"
-> +RRECOMMENDS:${PN} += "iproute2-ip"
-I wonder if the comment is still true with oe-core master. One of the 
-features[1] that made their way to Busybox 1.37 is CAN support for the 
-"ip" command. (Unfortunately have no CAN hw at my hand to try , so I 
-just keep wondering)
+Upgrade to version 6.8.6:
 
-[1]: 
-https://git.busybox.net/busybox/commit/?h=1_37_stable&id=f873c63085e3f3745040286999779077ccc03987
+- Handle single number macOS deployment targets
+- Support for architectures where `char` is unsigned
+- Support for building from git archives
+- Run the tests using the current Python version
+
+The project has a proper pyproject.toml which declares the
+setuptools.build.meta PEP-517 backend.
+
+Fixes:
+WARNING: sip-6.8.6-r0 do_check_backend: QA Issue: inherits
+setuptools3 but has pyproject.toml with setuptools.build_meta,
+use the correct class [pep517-backend]
+
+The work was sponsored by GOVCERT.LU.
+
+License-Update: Update years
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Armin Kuster <akuster@mvista.com>
+---
+ .../recipes-devtools/sip/{sip_6.8.3.bb => sip_6.8.6.bb}   | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-devtools/sip/{sip_6.8.3.bb => sip_6.8.6.bb} (64%)
+
+diff --git a/meta-oe/recipes-devtools/sip/sip_6.8.3.bb b/meta-oe/recipes-devtools/sip/sip_6.8.6.bb
+similarity index 64%
+rename from meta-oe/recipes-devtools/sip/sip_6.8.3.bb
+rename to meta-oe/recipes-devtools/sip/sip_6.8.6.bb
+index d12130af43..157e404515 100644
+--- a/meta-oe/recipes-devtools/sip/sip_6.8.3.bb
++++ b/meta-oe/recipes-devtools/sip/sip_6.8.6.bb
+@@ -6,12 +6,14 @@ SUMMARY = "A Python bindings generator for C/C++ libraries"
+ HOMEPAGE = "https://www.riverbankcomputing.com/software/sip/"
+ LICENSE = "GPL-2.0-or-later"
+ SECTION = "devel"
+-LIC_FILES_CHKSUM = "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=ed1d69a33480ebf4ff8a7a760826d84e"
+ 
+-inherit pypi setuptools3 python3native
++inherit pypi python_setuptools_build_meta python3native
+ 
+ PYPI_PACKAGE = "sip"
+-SRC_URI[sha256sum] = "888547b018bb24c36aded519e93d3e513d4c6aa0ba55b7cc1affbd45cf10762c"
++SRC_URI[sha256sum] = "7fc959e48e6ec5d5af8bd026f69f5e24d08b3cb8abb342176f5ab8030cc07d7a"
++
++DEPENDS += "python3-setuptools-scm-native"
+ 
+ RDEPENDS:${PN} = " \
+     python3-core \
+-- 
+2.39.5
+
 
