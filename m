@@ -2,61 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5EA19C02193
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D4A1C0218D
 	for <webhook@archiver.kernel.org>; Thu, 30 Jan 2025 01:44:06 +0000 (UTC)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web10.6653.1738201440615274146
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.web11.6576.1738201441428125406
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Jan 2025 17:44:00 -0800
+ Wed, 29 Jan 2025 17:44:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QMFrGrQ1;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-21619108a6bso3647965ad.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jan 2025 17:44:00 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=J/hxVXSy;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2164b662090so4756935ad.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Jan 2025 17:44:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738201440; x=1738806240; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1738201441; x=1738806241; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=7GQyMNNE3IzEIkbPvbTd5hpRVMqrNXcoariNlpmSQRY=;
-        b=QMFrGrQ1XWZBDAU/20wpXRaeTfILTENj2MDdyhovHAq27shzT5MH1sYlM0pB7rqISR
-         aP5mvxVdxVzmAWsiX0d4DL+RVNev97OowFZjdRDA5P6nR10XebCvpAT9xF+SMo1kTlR+
-         B41oBZ+Blm2frLOyQRdWphyhfYEDaIBcBi9Z5LOawYEFN8TcDVHdgILcQw6iLOgtz490
-         BNITN2gRI90v5mg87xUAkb4A1w9FecB671eIeZVhKHeG8HFm8GKGT6CZqrc/axp913DR
-         TOUjWatV0aD1z79Wqx7U9oeQ49IXvBLkL6K+tKmdGunKanA2I2j4uIQJIurVqvHgPrZR
-         3Vdg==
+        bh=ASLWOMChtm/BWHamdM7Gavo54SwFdqrEfRe+vKtfQG4=;
+        b=J/hxVXSyeKNgc0UofhhYqod3Bmy1u1ZxUWun01lMRmSdWYk86lqqXnKLtAS89RnEZZ
+         /hEhy8Cs3OIaAxW6+XAacZnp7n5s+1UW3BMba50hjB/bCQcCddES71dCYdVYlsrEf+wl
+         Rlsdhej2Q6PzU+9c01O8dkmGJs8STR0IjpMLcZx8Am8sLAShExr6zVmvuJVt17tfTMir
+         YdYsBe2rf5Yq7c2pf5iN4tRkQtMbIW4l/mgdKTNgQxJbr5LOSRcJxu4iPZ9499H+1qTt
+         O7k5YObuNniOQzY/gFfg7vOgTrDbusV65WC9kc6lFebj1oxRf3O7qXYmSKBq3fhNGWLi
+         wjiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738201440; x=1738806240;
+        d=1e100.net; s=20230601; t=1738201441; x=1738806241;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=7GQyMNNE3IzEIkbPvbTd5hpRVMqrNXcoariNlpmSQRY=;
-        b=Ek6ejtPdL+T8P1WmOAtL9+4zSbZQhG4c4zToYQzhtBQRY0pmdgNymQCLDXmmsvC8Yl
-         LvBSar36arOSLPAsabw36TeMllgJqhS9QaAxeeEo8dxtwy77r6xg1Cb9qvXLlUiqrnHA
-         6ijcBUMEmmvh+kPuEy0RlHUcYmSXp1DALLf+JT3zewQQu/WgXkWb6CFL4Hr91q6QUwTK
-         Fdd3PzjPKNWIpU8MzGeL396aJwB086OkFApU3q/F2NI/A1VTvEY6pBtvrrqJA5g4MtZg
-         ebASlPH5qn6Ipp4LGkRbX0RWgNgsyOoDKW6ctiTU/IdFUPoxyZ77v4KgGFvy30g/jPR2
-         F5dw==
-X-Gm-Message-State: AOJu0YyZ14UCuG7hluno66M46Qf3o7mA+byMyaJ+mmMKnfNiDJ6XGCIX
-	3YUWki6F0cMSqTPD6eE0msOhY7Pg45Foiarq4pYFGOcjmE/+pVeAcy5pIxnr
-X-Gm-Gg: ASbGnctZNo6iJ3SdTikI9y+l6enToAZ57KN5iuI3ozFMA2VFFu5KN1kbycMWQZozAaP
-	lTD7W8tKTkCeupt7M4zXU3KzULp4+VAgy5OW31IwLIzZnsEKNZsqaXtntQMCkq/fKsvycF6GMPs
-	h9omtiwq92k7V2Myd5g64+6rWt1QcAcjm4/WW2Lm4yeux4HFTVt7DMmtPcwI05/2x3DdF4KbRg6
-	YTGrZSD5+wrx7qvnJT11hrJutCS2wsQoKDb0ERiFwTn/k9Tzr28zfmatYgPF9fGAjFeVJRKaboM
-	Iq2UnyA=
-X-Google-Smtp-Source: AGHT+IF3jAkNfx19pJ2Jclzy19+G0MW58eA1Lo6AlyeZrWwtjMSOAyG5VKrS3syBRC5Y31DEozeuZA==
-X-Received: by 2002:a05:6a20:6a05:b0:1eb:48e2:2c2f with SMTP id adf61e73a8af0-1ed7a5efa87mr10520728637.30.1738201439768;
-        Wed, 29 Jan 2025 17:43:59 -0800 (PST)
+        bh=ASLWOMChtm/BWHamdM7Gavo54SwFdqrEfRe+vKtfQG4=;
+        b=DMw5Lp22d0tRgnPwkaN9W3yCz0tQwdRpscRyXBBC8beMevflsDOLvNGNpSvFo4cB0B
+         osBngDo6v4EIy92p+M0KrhCSaoEmeOmZiOjlMtVTbBp+zrgDJSsPIF32RdhqXU21nuEn
+         +6rdzcJaXCTxBba2vq0eexe8SIzOsV5RkZtqce0Z1ojN+7sfnyMZdi2Jp0NJWY83gAai
+         Vfrm5m9a7Qj5siO8DV3hvKnWsQUOtfu1V4kI05LORMej9tjvExA8WX6nw/xCUEK4onCq
+         gn9ob7fSY0gTGlDxxdH47jOe/i0KGyCIEOpFPdCq7hfBbFys3Oz4oAqaC6tLGYkkiGKS
+         2PhA==
+X-Gm-Message-State: AOJu0YwBFkdrIBpYa+gYAlNhqX6TTCWFbj5fj1CgpAxOfJN9nwPgdSJv
+	wPv8FJbMnk2vIvwgF+NICcy0SL+oUp678eqzQGYm+USqKfn6AWFKKwGCw8He
+X-Gm-Gg: ASbGncuu0nmUWoXWJ6bJZMRfFXmEa1f3qtMxbP+87jKAip7yV4l+PoFDTF4ZI5yldVT
+	Whp9j36Jqb14FpZN/0hiY/DHQWw7ooZb828hXOdIn5gwWSLsnTPdhKEVGDmAovRbaQAqlp51HVW
+	UtVZwjff/4+5vjCyIAfyHXldunVgTIsZlWIjxQbeym7gvCTQ4FHY2OnBtVtDGDy1sehyzDOudDu
+	7Bb/wWGaFuULlGNPdfoxwvtFFmR62RxDCtkQBoSROwTiNHb571S8dRVLRfImOsTLSRsY9C3dhy6
+	mqbnD98=
+X-Google-Smtp-Source: AGHT+IFs3yxzmYIH39N/ivQa3tt66uTAt0DXrChfFurEHxEK0t/q5ddGLnQgLhviBNtPaU45MIxAkA==
+X-Received: by 2002:a05:6a20:7f84:b0:1ed:5247:f385 with SMTP id adf61e73a8af0-1ed7a6e0689mr8041576637.38.1738201440594;
+        Wed, 29 Jan 2025 17:44:00 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:8201:fd20::c09e])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-72fe6427abdsm188532b3a.59.2025.01.29.17.43.58
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-72fe6427abdsm188532b3a.59.2025.01.29.17.43.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Jan 2025 17:43:59 -0800 (PST)
+        Wed, 29 Jan 2025 17:44:00 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 2/3] python3-pandas: Inherit pkgconfig class
-Date: Wed, 29 Jan 2025 17:43:55 -0800
-Message-ID: <20250130014356.1610566-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/3] luaposix: Fix LUA_INCDIR path
+Date: Wed, 29 Jan 2025 17:43:56 -0800
+Message-ID: <20250130014356.1610566-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250130014356.1610566-1-raj.khem@gmail.com>
 References: <20250130014356.1610566-1-raj.khem@gmail.com>
@@ -66,26 +66,29 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 30 Jan 2025 01:44:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115145
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115146
 
-Ensure pkg-config is found during the build.
+If not specified on build commandline for luke, it results in
+pulling it from build host development headers under /usr/include
+this was always happening but with recent fixes to GCC poisoning
+host includes patch, this issue has come to fore.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-pandas_2.2.2.bb | 2 +-
+ meta-oe/recipes-devtools/luaposix/luaposix_36.2.1.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pandas_2.2.2.bb b/meta-python/recipes-devtools/python/python3-pandas_2.2.2.bb
-index 1e7bb1f3f6..c12a237653 100644
---- a/meta-python/recipes-devtools/python/python3-pandas_2.2.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pandas_2.2.2.bb
-@@ -13,7 +13,7 @@ SRC_URI += " \
+diff --git a/meta-oe/recipes-devtools/luaposix/luaposix_36.2.1.bb b/meta-oe/recipes-devtools/luaposix/luaposix_36.2.1.bb
+index 1d27eb2588..7fb0965813 100644
+--- a/meta-oe/recipes-devtools/luaposix/luaposix_36.2.1.bb
++++ b/meta-oe/recipes-devtools/luaposix/luaposix_36.2.1.bb
+@@ -16,7 +16,7 @@ B = "${S}"
+ inherit pkgconfig
  
- SRC_URI[sha256sum] = "9e79019aba43cb4fda9e4d983f8e88ca0373adbb697ae9c6c43093218de28b54"
+ do_compile() {
+-    ${S}/build-aux/luke
++    ${S}/build-aux/luke LUA_INCDIR=${STAGING_INCDIR}
+ }
  
--inherit pypi python_mesonpy cython
-+inherit pkgconfig pypi python_mesonpy cython
- 
- DEPENDS += " \
-     python3-numpy-native \
+ do_install() {
 
