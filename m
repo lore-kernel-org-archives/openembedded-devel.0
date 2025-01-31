@@ -1,85 +1,111 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C235C0218F
-	for <webhook@archiver.kernel.org>; Fri, 31 Jan 2025 15:36:42 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.web10.21994.1738337794630921349
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7BEDC02190
+	for <webhook@archiver.kernel.org>; Fri, 31 Jan 2025 17:22:42 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.24491.1738344156490205773
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 31 Jan 2025 07:36:34 -0800
+ Fri, 31 Jan 2025 09:22:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=N1j7rWNK;
- spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4361815b96cso14980925e9.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jan 2025 07:36:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738337793; x=1738942593; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=4hDgYKMoGYYBtPk1TaKCIxLGMICQ2NTcHauFGA5rMAE=;
-        b=N1j7rWNKgJHu1NpRjwYnPLBgHBMmk48dqYCFdMtJtG4QH4bPXuwW2+/esauoEag5rX
-         1x4UtSm6RNOIk1W3TJYFuG+dTzjBxcUeDpTOJJyn80dzujziQOQYN1y7DGvczRO27ojS
-         Fs2TLeFxdzX5XtVjAC+za5tNdGfT2ngdk0XKgWMnxIJ72t/xvNrW3VOBEtZCYsYO76T2
-         gFQkpaQJ/OSeMFfSUPlVM8/U7WR+CVlGoWCMXMKPENyT23X3EdYqkh/arfx/yH5OUkKQ
-         Y1m0PqG3Hyz0Tw8sV3QwXmuqDywaoG8JgaWRb4C+Fk6+9CAca/b+eZbcmcev0iVrCzIW
-         +txA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738337793; x=1738942593;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=4hDgYKMoGYYBtPk1TaKCIxLGMICQ2NTcHauFGA5rMAE=;
-        b=ttx1mWaGPVi0n9MKsPRllWY3r44iydGTjFCP0MmY5COdRXQHIn5Gyu1dK6lp/0owh6
-         LNliLQSTxl0cqdl7sd1hGz2wDZdm2cbC3osOhT4smKJwVVyZ3HbsJbGne3NZmD92nbeR
-         tpt4rSqgzmTBUNk92J7ygG0VFer0BESeW7PnQjm0A186zV5cdahKaEqdcEYXeuXQwL9E
-         Pjm/C79Ymu3TVTAMeUAezpUM1xt0xE7peUHR9+5PZoNmcRQeYKDMl8OUykfqVLBJPgx5
-         0hdeV9Cj/hfM1Y6TuomYIkmnynrszynNV9+BXTcHEnAGbS9lq0mPz3eZ+Ml3d7EMPB0u
-         K7nA==
-X-Gm-Message-State: AOJu0Yz1cynk8eiVlJcXzeGsghJOXUROi+ztHuEVIJ7t1srPz0SPmC1O
-	41IVEJDUreeV210NHL9KLoEFYvW8lc/OnRC1tzlRrUXwq2r41rsXMsOD6bEz
-X-Gm-Gg: ASbGncscW58DFhSpF79LHkIA6Z0RXSjFDgOaGlrEB2i67/UgY8FuJ+qXV87imHwM7qK
-	2cfjvzJrPkekDlVNvplrmj58a2tol8Qk2GpNQcledjITLQp/RjFgBSZogu+km7Sssv0F9p7kgYF
-	PQ92soPNnHHU83ManIu9K5Ap8/8vqwSOOxjFycJP0AHEAC1t0hactsAIADz3LyxcJ1zB5c4CA2K
-	ar5iqoyK47agg6DuP12GDK/X5yr/WQQ0k6umSitZVaU22tS//pYti6czo2OgZQaqoQuBocG9JiM
-	ZxZFykRRdt3G1Y4ZlUTZVUb98G42Kx8=
-X-Google-Smtp-Source: AGHT+IG7v70q34F51ZGvdKTTlebuX86+IZO5CLHtg9wb76Iif1v8BJao0uNzEywqzn1/stfI9u5w0Q==
-X-Received: by 2002:a05:600c:3494:b0:434:a315:19c with SMTP id 5b1f17b1804b1-438dc3a85b3mr100179785e9.3.1738337792798;
-        Fri, 31 Jan 2025 07:36:32 -0800 (PST)
-Received: from localhost.localdomain ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38c5c1cf571sm4849646f8f.82.2025.01.31.07.36.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 31 Jan 2025 07:36:32 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Gyorgy Sarvari <skandigraun@gmail.com>
-Subject: [meta-multimedia][PATCH] libdvbcsa: set correct LICENSE
-Date: Fri, 31 Jan 2025 16:36:31 +0100
-Message-ID: <20250131153631.313990-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.48.1
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=41264e9b27=archana.polampalli@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50VDUpwP007342
+	for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jan 2025 17:22:35 GMT
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 44gf7d0xmj-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jan 2025 17:22:35 +0000 (GMT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Fri, 31 Jan 2025 09:22:34 -0800
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Fri, 31 Jan 2025 09:22:32 -0800
+From: <archana.polampalli@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][scarthgap][PATCH 1/7] nodejs: Upgrade to 20.13.0 release
+Date: Fri, 31 Jan 2025 17:22:24 +0000
+Message-ID: <20250131172230.687050-1-archana.polampalli@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=TfBstQQh c=1 sm=1 tr=0 ts=679d06db cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=VdSt8ZQiCzkA:10 a=-LCu6K_DAAAA:8 a=NEAV23lmAAAA:8 a=pGLkceISAAAA:8 a=t7CeM3EgAAAA:8 a=19RDG04orJZLT5jqiVEA:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: fiKTZ_iWH-RMRke8vvAzNq9YKYBfvobp
+X-Proofpoint-ORIG-GUID: fiKTZ_iWH-RMRke8vvAzNq9YKYBfvobp
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-31_06,2025-01-31_02,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 mlxlogscore=905
+ impostorscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0 phishscore=0
+ priorityscore=1501 mlxscore=0 suspectscore=0 spamscore=0 clxscore=1015
+ classifier=spam authscore=0 authtc=n/a authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.21.0-2501170000
+ definitions=main-2501310132
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 31 Jan 2025 15:36:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115200
+ <openembedded-devel@lists.openembedded.org>; Fri, 31 Jan 2025 17:22:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115201
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+
+nodejs release notes [1]
+
+License-Update: Copyright year changed for Unicode License [2]
+
+[1] https://nodejs.org/en/blog/release/v20.13.0
+[2] https://github.com/nodejs/node/commit/d5a316f5ea3fade3140c2ae35c144b500fb5d758
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 ---
- meta-multimedia/recipes-multimedia/libdvbcsa/libdvbcsa_1.1.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../oe-npm-cache                                              | 0
+ ...-cache-native_20.12.bb => nodejs-oe-cache-native_20.13.bb} | 0
+ .../nodejs/{nodejs_20.12.2.bb => nodejs_20.13.0.bb}           | 4 ++--
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-20.12 => nodejs-oe-cache-20.13}/oe-npm-cache (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_20.12.bb => nodejs-oe-cache-native_20.13.bb} (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_20.12.2.bb => nodejs_20.13.0.bb} (97%)
 
-diff --git a/meta-multimedia/recipes-multimedia/libdvbcsa/libdvbcsa_1.1.0.bb b/meta-multimedia/recipes-multimedia/libdvbcsa/libdvbcsa_1.1.0.bb
-index 1e5381bb2..bfa6de90d 100644
---- a/meta-multimedia/recipes-multimedia/libdvbcsa/libdvbcsa_1.1.0.bb
-+++ b/meta-multimedia/recipes-multimedia/libdvbcsa/libdvbcsa_1.1.0.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Open implementation of the DVB Common Scrambling Algorithm, encrypt and decrypt "
- SECTION = "libs/multimedia"
--LICENSE = "LGPL-2.1-or-later"
-+LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.12/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.13/oe-npm-cache
+similarity index 100%
+rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.12/oe-npm-cache
+rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.13/oe-npm-cache
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.12.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.13.bb
+similarity index 100%
+rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.12.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.13.bb
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_20.12.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_20.13.0.bb
+similarity index 97%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_20.12.2.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_20.13.0.bb
+index d86c38f2fc..25b59495e2 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_20.12.2.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.13.0.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
+ HOMEPAGE = "http://nodejs.org"
+ LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=9a7fcce64128730251dbc58aa41b4674"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=cef54676c547a5bbab44aa8be3be9ef7"
  
- SRCREV = "bc6c0b164a87ce05e9925785cc6fb3f54c02b026"
+ CVE_PRODUCT = "nodejs node.js"
+ 
+@@ -36,7 +36,7 @@ SRC_URI:append:toolchain-clang:x86 = " \
+ SRC_URI:append:toolchain-clang:powerpc64le = " \
+            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
+            "
+-SRC_URI[sha256sum] = "d7cbcc5fbfb31e9001f3f0150bbeda59abe5dd7137aaa6273958cd59ce35ced7"
++SRC_URI[sha256sum] = "11d229fcad7e6e10f450301223c602043f021cda51259ffafc7e55e484b37dc7"
+ 
+ S = "${WORKDIR}/node-v${PV}"
+ 
+-- 
+2.40.0
+
 
