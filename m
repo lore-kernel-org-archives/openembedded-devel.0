@@ -1,293 +1,129 @@
-Return-Path: <archana.polampalli@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DE8F4C02190
-	for <webhook@archiver.kernel.org>; Fri, 31 Jan 2025 17:22:52 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.24781.1738344163856864996
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 34F4AC0218F
+	for <webhook@archiver.kernel.org>; Fri, 31 Jan 2025 18:03:13 +0000 (UTC)
+Received: from mail-oi1-f173.google.com (mail-oi1-f173.google.com [209.85.167.173])
+ by mx.groups.io with SMTP id smtpd.web10.25792.1738346590236678204
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 31 Jan 2025 09:22:44 -0800
+ Fri, 31 Jan 2025 10:03:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=41264e9b27=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50VCi0t4024022
-	for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jan 2025 17:22:43 GMT
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 44gf780xpx-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jan 2025 17:22:42 +0000 (GMT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Fri, 31 Jan 2025 09:22:41 -0800
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Fri, 31 Jan 2025 09:22:40 -0800
-From: <archana.polampalli@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][scarthgap][PATCH 5/7] nodejs: Fix build with libc++ 19
-Date: Fri, 31 Jan 2025 17:22:28 +0000
-Message-ID: <20250131172230.687050-5-archana.polampalli@windriver.com>
-X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20250131172230.687050-1-archana.polampalli@windriver.com>
-References: <20250131172230.687050-1-archana.polampalli@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WEMInQDB;
+ spf=pass (domain: gmail.com, ip: 209.85.167.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f173.google.com with SMTP id 5614622812f47-3f314ff6ffdso1302220b6e.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 31 Jan 2025 10:03:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1738346589; x=1738951389; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=2QRhs7XkxKfBtzVDY1/Pn3fL2uR3pe+Pb+5cqnuXWzA=;
+        b=WEMInQDBtvrIEFqq8nLcp7c2QDRj0Lcok4OrMW4iStNW7iMzVUMSvKooJU3h8UnoGf
+         E1z5HCLlkkvSKDSQutWMNwQThk3XNzKlNc6JlPDcsm7oXG6fXiYc0UYXD7GjwMk2BKv+
+         KR/HMCFFFXs4K0sg7ioJzSq9zmm1ZI3ajBCvOmwa05sSj0K5UtbqFS89VxQi7w6oHqmu
+         bQ84gkNII8sWJTWE7vFDVqsF8CkNwB+mRITf6WfGDH58makwp4gCLMr2//deH4BulDmw
+         kinaugyI8Ft76IW6+bHNkC96m0zhPia8eKK5Nelp0To2fMVDhzCtCGlcr5CEArvHEGzo
+         kTeA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1738346589; x=1738951389;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=2QRhs7XkxKfBtzVDY1/Pn3fL2uR3pe+Pb+5cqnuXWzA=;
+        b=fPhzbhCx4vHxZQZXJm7zEfqiXkrwh1C629dCLe1GLvHmEfue7+7h+ca3eDpuFxY9J7
+         Hri1S7WtHceuRi0b3F7JPm8HQCHgHwgu7XMVd6HfdvWSyieYNFHjs/JpnykpOpL/ImFE
+         iPMqMmc46dsdqjaZNDn5tOCIKzKbzkIwici24g4dqF6IIT8rDeFxpgG3/h5p8vzE/pz0
+         d7mxuzv9hLSbEOTmYVnqPT73kFM5XnMq9XuFZ5apTzfiagnad87dod/rwq4GgqyVXxUH
+         pRzBgjy3B0Vvz98asGObj3X54ZiQB7zC3e/tf2ex9YpGd/2sEwicF2HXsEjtPcDcktav
+         4ZEw==
+X-Gm-Message-State: AOJu0Ywik2BmE3MfwbzTnIQhjAHKfVe6Ex0VO5QAJYTcZvUtbKy+9PMY
+	wugWrHPH6bKD7oDfJ4T4ZPS1ZnbX7s1Fkudzzn3M+s5Agfdc62cybAWa+bFZ2hZEkzXU5Hbj5UW
+	uebqRwLtTb7S6OBbE5tLjp87HXCI=
+X-Gm-Gg: ASbGnctaGsbYL6rAk4n5qSPeryx+yf9rVRahBr3fcHyQCW7gdv91bDcFMPI8YR9Fvk+
+	ZzQmhtHZwQJsrgZCgOYd3/LCRnOwuTqqDDjhPff8ssdlOt5aNZGvsl2jUNG8YFmmiiFKN5M0=
+X-Google-Smtp-Source: AGHT+IGj9qhXNAcq1IggVPVJNFWH6VAU/Or4BFxhdT0wAHxnLvaf7qHMKxiYbbE+05wwmcG8xvcqWwrx2QoGtSDQkJ0=
+X-Received: by 2002:a05:6870:1c7:b0:27c:a414:b907 with SMTP id
+ 586e51a60fabf-2b32f2f8587mr8458850fac.33.1738346589313; Fri, 31 Jan 2025
+ 10:03:09 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=JOrBs9Kb c=1 sm=1 tr=0 ts=679d06e3 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=VdSt8ZQiCzkA:10 a=Twlkf-z8AAAA:8 a=Oh2cFVv5AAAA:8 a=-LCu6K_DAAAA:8 a=pGLkceISAAAA:8 a=t7CeM3EgAAAA:8 a=cm27Pg_UAAAA:8
- a=z4qFTBnbxKX3v4yr1lEA:9 a=W-gb19_dOTsA:10 a=-74SuR6ZdpOK_LpdRCUo:22 a=7KeoIwV6GZqOttXkcoxL:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: k-UbQQcO6DiPkXGe6UwQpwAt8EfqK9tj
-X-Proofpoint-GUID: k-UbQQcO6DiPkXGe6UwQpwAt8EfqK9tj
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-01-31_06,2025-01-31_02,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- suspectscore=0 malwarescore=0 mlxscore=0 adultscore=0 spamscore=0
- clxscore=1015 phishscore=0 impostorscore=0 priorityscore=1501
- mlxlogscore=999 bulkscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2501170000
- definitions=main-2501310132
+References: <20250131070656.1000591-1-quic_ptak@quicinc.com>
+In-Reply-To: <20250131070656.1000591-1-quic_ptak@quicinc.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 31 Jan 2025 10:02:43 -0800
+X-Gm-Features: AWEUYZld_p8_vnx1aSESZwaP5Ev84BGPhMNLeBxWG5VAI0Kd6_ioq713iJ6Lr8E
+Message-ID: <CAMKF1sqXPdtVmmpWg7kVZUdCcOhfq=qEL-cuM6REmKUm2X2+QA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] opencv: upgrade 4.10.0 -> 4.11.0
+To: quic_ptak@quicinc.com
+Cc: openembedded-devel@lists.openembedded.org, quic_sssanjee@quicinc.com, 
+	quic_vkaruchu@quicinc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 31 Jan 2025 17:22:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115205
+ <openembedded-devel@lists.openembedded.org>; Fri, 31 Jan 2025 18:03:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115208
 
-From: Khem Raj <raj.khem@gmail.com>
+On Thu, Jan 30, 2025 at 11:07=E2=80=AFPM Pulkit Singh Tak (Temp) (QUIC) via
+lists.openembedded.org <quic_ptak=3Dquicinc.com@lists.openembedded.org>
+wrote:
+>
+> Disable FASTCV HAL implementation
+>
 
-As noted in the libc++ 19 release notes [1], std::char_traits<> is now
-only provided for char, char8_t, char16_t, char32_t and wchar_t, and any
-instantiation for other types will fail.
+We need a better commit message with reasoning behind disabling it.
+Secondly, converting it
+to a packageconfig option would be preferred. We can decide to enable
+or disable it by default.
 
-This causes nodejs-20 to fail to compile with clang 19 and libc++ 19,
-resulting in errors similar to:
-
-    /usr/include/c++/v1/string:820:42: error: implicit instantiation of undefined template 'std::char_traits<unsigned short>'
-      820 |   static_assert(is_same<_CharT, typename traits_type::char_type>::value,
-          |                                          ^
-    ../deps/v8/src/inspector/string-16.h:114:28: note: in instantiation of template class 'std::basic_string<unsigned short>' requested here
-      114 |   std::basic_string<UChar> m_impl;
-          |                            ^
-    /usr/include/c++/v1/__fwd/string.h:23:29: note: template is declared here
-       23 | struct _LIBCPP_TEMPLATE_VIS char_traits;
-          |                             ^
-
-Upstream v8 has fixed this in commit 182d9c05e78 [2], so add it as a
-backported patch, until the next version of node is released.
-
-[1] https://libcxx.llvm.org/ReleaseNotes/19.html#deprecations-and-removals
-[2] https://chromium.googlesource.com/v8/v8.git/+/182d9c05e78
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
----
- .../nodejs/nodejs/182d9c05e78.patch           | 182 ++++++++++++++++++
- .../recipes-devtools/nodejs/nodejs_20.17.0.bb |   1 +
- 2 files changed, 183 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/182d9c05e78.patch
-
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/182d9c05e78.patch b/meta-oe/recipes-devtools/nodejs/nodejs/182d9c05e78.patch
-new file mode 100644
-index 0000000000..9b3fc566c8
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/182d9c05e78.patch
-@@ -0,0 +1,182 @@
-+From 182d9c05e78b1ddb1cb8242cd3628a7855a0336f Mon Sep 17 00:00:00 2001
-+From: Andrey Kosyakov <caseq@chromium.org>
-+Date: Thu, 17 Aug 2023 13:50:11 -0700
-+Subject: [PATCH] Define UChar as char16_t
-+
-+We used to have UChar defined as uint16_t which does not go along
-+with STL these days if you try to have an std::basic_string<> of it,
-+as there are no standard std::char_traits<> specialization for uint16_t.
-+
-+This switches UChar to char16_t where practical, introducing a few
-+compatibility shims to keep CL size small, as (1) this would likely
-+have to be back-ported and (2) crdtp extensively uses uint16_t for
-+wide chars.
-+
-+Bug: b:296390693
-+Change-Id: I66a32d8f0050915225b187de56896c26dd76163d
-+Reviewed-on: https://chromium-review.googlesource.com/c/v8/v8/+/4789966
-+Reviewed-by: Jaroslav Sevcik <jarin@chromium.org>
-+Commit-Queue: Jaroslav Sevcik <jarin@chromium.org>
-+Auto-Submit: Andrey Kosyakov <caseq@chromium.org>
-+Cr-Commit-Position: refs/heads/main@{#89559}
-+
-+Upstream-Status: Backport [https://chromium-review.googlesource.com/c/v8/v8/+/4789966]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/inspector/string-16.cc                             |  8 +++++++-
-+ src/inspector/string-16.h                              | 10 ++++++++--
-+ src/inspector/v8-string-conversions.cc                 |  6 +++---
-+ src/inspector/v8-string-conversions.h                  |  6 ++++--
-+ .../inspector_protocol/crdtp/test_platform_v8.cc       |  9 ++++++---
-+ 5 files changed, 28 insertions(+), 11 deletions(-)
-+
-+--- a/deps/v8/src/inspector/string-16.cc
-++++ b/deps/v8/src/inspector/string-16.cc
-+@@ -27,7 +27,7 @@ bool isSpaceOrNewLine(UChar c) {
-+   return isASCII(c) && c <= ' ' && (c == ' ' || (c <= 0xD && c >= 0x9));
-+ }
-+
-+-int64_t charactersToInteger(const UChar* characters, size_t length,
-++int64_t charactersToInteger(const uint16_t* characters, size_t length,
-+                             bool* ok = nullptr) {
-+   std::vector<char> buffer;
-+   buffer.reserve(length + 1);
-+@@ -50,6 +50,8 @@ int64_t charactersToInteger(const UChar*
-+
-+ String16::String16(const UChar* characters, size_t size)
-+     : m_impl(characters, size) {}
-++String16::String16(const uint16_t* characters, size_t size)
-++    : m_impl(reinterpret_cast<const UChar*>(characters), size) {}
-+
-+ String16::String16(const UChar* characters) : m_impl(characters) {}
-+
-+@@ -241,6 +243,10 @@ String16 String16::fromUTF16LE(const UCh
-+ #endif  // V8_TARGET_BIG_ENDIAN
-+ }
-+
-++String16 String16::fromUTF16LE(const uint16_t* stringStart, size_t length) {
-++  return fromUTF16LE(reinterpret_cast<const UChar*>(stringStart), length);
-++}
-++
-+ std::string String16::utf8() const {
-+   return UTF16ToUTF8(m_impl.data(), m_impl.size());
-+ }
-+--- a/deps/v8/src/inspector/string-16.h
-++++ b/deps/v8/src/inspector/string-16.h
-+@@ -6,6 +6,7 @@
-+ #define V8_INSPECTOR_STRING_16_H_
-+
-+ #include <stdint.h>
-++#include <uchar.h>
-+
-+ #include <cctype>
-+ #include <climits>
-+@@ -17,7 +18,7 @@
-+
-+ namespace v8_inspector {
-+
-+-using UChar = uint16_t;
-++using UChar = char16_t;
-+
-+ class String16 {
-+  public:
-+@@ -27,6 +28,7 @@ class String16 {
-+   String16(const String16&) V8_NOEXCEPT = default;
-+   String16(String16&&) V8_NOEXCEPT = default;
-+   String16(const UChar* characters, size_t size);
-++  String16(const uint16_t* characters, size_t size);
-+   V8_EXPORT String16(const UChar* characters);
-+   V8_EXPORT String16(const char* characters);
-+   String16(const char* characters, size_t size);
-+@@ -48,7 +50,9 @@ class String16 {
-+   int toInteger(bool* ok = nullptr) const;
-+   std::pair<size_t, size_t> getTrimmedOffsetAndLength() const;
-+   String16 stripWhiteSpace() const;
-+-  const UChar* characters16() const { return m_impl.c_str(); }
-++  const uint16_t* characters16() const {
-++    return reinterpret_cast<const uint16_t*>(m_impl.c_str());
-++  }
-+   size_t length() const { return m_impl.length(); }
-+   bool isEmpty() const { return !m_impl.length(); }
-+   UChar operator[](size_t index) const { return m_impl[index]; }
-+@@ -78,6 +82,8 @@ class String16 {
-+   // On Big endian architectures, byte order needs to be flipped.
-+   V8_EXPORT static String16 fromUTF16LE(const UChar* stringStart,
-+                                         size_t length);
-++  V8_EXPORT static String16 fromUTF16LE(const uint16_t* stringStart,
-++                                        size_t length);
-+
-+   std::size_t hash() const {
-+     if (!hash_code) {
-+--- a/deps/v8/src/inspector/v8-string-conversions.cc
-++++ b/deps/v8/src/inspector/v8-string-conversions.cc
-+@@ -12,7 +12,7 @@
-+
-+ namespace v8_inspector {
-+ namespace {
-+-using UChar = uint16_t;
-++using UChar = char16_t;
-+ using UChar32 = uint32_t;
-+
-+ bool isASCII(UChar c) { return !(c & ~0x7F); }
-+@@ -386,7 +386,7 @@ std::string UTF16ToUTF8(const UChar* str
-+
-+ std::basic_string<UChar> UTF8ToUTF16(const char* stringStart, size_t length) {
-+   if (!stringStart || !length) return std::basic_string<UChar>();
-+-  std::vector<uint16_t> buffer(length);
-++  std::vector<UChar> buffer(length);
-+   UChar* bufferStart = buffer.data();
-+
-+   UChar* bufferCurrent = bufferStart;
-+@@ -395,7 +395,7 @@ std::basic_string<UChar> UTF8ToUTF16(con
-+                          reinterpret_cast<const char*>(stringStart + length),
-+                          &bufferCurrent, bufferCurrent + buffer.size(), nullptr,
-+                          true) != conversionOK)
-+-    return std::basic_string<uint16_t>();
-++    return std::basic_string<UChar>();
-+   size_t utf16Length = bufferCurrent - bufferStart;
-+   return std::basic_string<UChar>(bufferStart, bufferStart + utf16Length);
-+ }
-+--- a/deps/v8/src/inspector/v8-string-conversions.h
-++++ b/deps/v8/src/inspector/v8-string-conversions.h
-+@@ -5,14 +5,16 @@
-+ #ifndef V8_INSPECTOR_V8_STRING_CONVERSIONS_H_
-+ #define V8_INSPECTOR_V8_STRING_CONVERSIONS_H_
-+
-++#include <uchar.h>
-++
-+ #include <cstdint>
-+ #include <string>
-+
-+ // Conversion routines between UT8 and UTF16, used by string-16.{h,cc}. You may
-+ // want to use string-16.h directly rather than these.
-+ namespace v8_inspector {
-+-std::basic_string<uint16_t> UTF8ToUTF16(const char* stringStart, size_t length);
-+-std::string UTF16ToUTF8(const uint16_t* stringStart, size_t length);
-++std::basic_string<char16_t> UTF8ToUTF16(const char* stringStart, size_t length);
-++std::string UTF16ToUTF8(const char16_t* stringStart, size_t length);
-+ }  // namespace v8_inspector
-+
-+ #endif  // V8_INSPECTOR_V8_STRING_CONVERSIONS_H_
-+--- a/deps/v8/third_party/inspector_protocol/crdtp/test_platform_v8.cc
-++++ b/deps/v8/third_party/inspector_protocol/crdtp/test_platform_v8.cc
-+@@ -11,13 +11,16 @@
-+ namespace v8_crdtp {
-+
-+ std::string UTF16ToUTF8(span<uint16_t> in) {
-+-  return v8_inspector::UTF16ToUTF8(in.data(), in.size());
-++  return v8_inspector::UTF16ToUTF8(reinterpret_cast<const char16_t*>(in.data()),
-++                                   in.size());
-+ }
-+
-+ std::vector<uint16_t> UTF8ToUTF16(span<uint8_t> in) {
-+-  std::basic_string<uint16_t> utf16 = v8_inspector::UTF8ToUTF16(
-++  std::basic_string<char16_t> utf16 = v8_inspector::UTF8ToUTF16(
-+       reinterpret_cast<const char*>(in.data()), in.size());
-+-  return std::vector<uint16_t>(utf16.begin(), utf16.end());
-++  return std::vector<uint16_t>(
-++      reinterpret_cast<const uint16_t*>(utf16.data()),
-++      reinterpret_cast<const uint16_t*>(utf16.data()) + utf16.size());
-+ }
-+
-+ }  // namespace v8_crdtp
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_20.17.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_20.17.0.bb
-index 0c07915167..be1802f292 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_20.17.0.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.17.0.bb
-@@ -25,6 +25,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://system-c-ares.patch \
-            file://0001-liftoff-Correct-function-signatures.patch \
-            file://libatomic.patch \
-+           file://182d9c05e78.patch \
-            file://run-ptest \
-            "
- SRC_URI:append:class-target = " \
--- 
-2.40.0
-
+> Signed-off-by: Pulkit Singh Tak <quic_ptak@quicinc.com>
+> ---
+>  .../opencv/{opencv_4.10.0.bb =3D> opencv_4.11.0.bb}            | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-support/opencv/{opencv_4.10.0.bb =3D> opencv_4.11=
+.0.bb} (98%)
+>
+> diff --git a/meta-oe/recipes-support/opencv/opencv_4.10.0.bb b/meta-oe/re=
+cipes-support/opencv/opencv_4.11.0.bb
+> similarity index 98%
+> rename from meta-oe/recipes-support/opencv/opencv_4.10.0.bb
+> rename to meta-oe/recipes-support/opencv/opencv_4.11.0.bb
+> index 5e54ab636f..90f5faf28a 100644
+> --- a/meta-oe/recipes-support/opencv/opencv_4.10.0.bb
+> +++ b/meta-oe/recipes-support/opencv/opencv_4.11.0.bb
+> @@ -10,8 +10,8 @@ ARM_INSTRUCTION_SET:armv5 =3D "arm"
+>
+>  DEPENDS =3D "libtool swig-native bzip2 zlib glib-2.0 libwebp"
+>
+> -SRCREV_opencv =3D "a7d942b681c5edd0cc27407d8e4d3dbf36c7a40e"
+> -SRCREV_contrib =3D "1aab1f34815a58a5a63aee6d510fe234129754a2"
+> +SRCREV_opencv =3D "31b0eeea0b44b370fd0712312df4214d4ae1b158"
+> +SRCREV_contrib =3D "0e5254ebf54d2aed6e7eaf6660bf3b797cf50a02"
+>  SRCREV_boostdesc =3D "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
+>  SRCREV_vgg =3D "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
+>  SRCREV_face =3D "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
+> @@ -70,6 +70,7 @@ EXTRA_OECMAKE =3D "-DOPENCV_EXTRA_MODULES_PATH=3D${S}/c=
+ontrib/modules \
+>      -DENABLE_PRECOMPILED_HEADERS=3DOFF \
+>      -DCMAKE_SKIP_RPATH=3DON \
+>      -DWITH_IPP=3DOFF \
+> +    -DWITH_FASTCV=3DOFF \
+>      -DOPENCV_GENERATE_PKGCONFIG=3DON \
+>      -DOPENCV_DOWNLOAD_PATH=3D${OPENCV_DLDIR} \
+>      -DOPENCV_ALLOW_DOWNLOADS=3DOFF \
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#115189): https://lists.openembedded.org/g/openembedde=
+d-devel/message/115189
+> Mute This Topic: https://lists.openembedded.org/mt/110912097/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
