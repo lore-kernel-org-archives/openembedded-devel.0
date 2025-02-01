@@ -2,91 +2,85 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93F1DC0218A
-	for <webhook@archiver.kernel.org>; Sat,  1 Feb 2025 15:16:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C0629C0218A
+	for <webhook@archiver.kernel.org>; Sat,  1 Feb 2025 15:56:16 +0000 (UTC)
 Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.web11.44628.1738422993769826044
+ by mx.groups.io with SMTP id smtpd.web10.45575.1738425369238286595
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 Feb 2025 07:16:34 -0800
+ Sat, 01 Feb 2025 07:56:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LsKkf2Vh;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QiqyNVZv;
  spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4361b0ec57aso30562105e9.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Feb 2025 07:16:33 -0800 (PST)
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-436281c8a38so21573635e9.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Feb 2025 07:56:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738422992; x=1739027792; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1738425367; x=1739030167; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=LqmeJzpiD8YZ1xvymTNQrsOQlg/IaFv47yCbvup3U4c=;
-        b=LsKkf2VhPhIwX98ascQOsE1tXFV3pKkQkFqLrbZF976AIy9P6TgFDx3Np8LjiMQ+16
-         /11M6rrYsxc4cqPrmbAk0IPsK++mqak1mS1VtWrrSpEbUk1zfCNuqZzcL1yGPVM0ffk5
-         tMambjGPmZSGv5cMNh38zp+AysVftzDzdrNnoBL96cYxE2aYY+CkFSirj9x+4C789Y0E
-         BOvZXUfSYfma4J82nRSXoZLCERREajEagjVnFP1jwjsJU+iepZuhuZfTJTsZV16eBivA
-         3wlKuMEs7p9srFEHVdqux/O3X9x4aq1AccQnZEvVF8wnGhhvAHi42wi6wrZ1lQoskRaj
-         85Ag==
+        bh=N+jJuRPN30h2HP8VNdovQQB2/BA4FMH4xrfCG1cRLFQ=;
+        b=QiqyNVZv5g0bq4eUOVybtmLvVEd4lRkuOgjHia1oxLFtJ/UKi2qstxykQsRhXtaljW
+         V9EgQAxbv1VnFtdbE7vOu08yvyKQFk0YxQVTgJKesZLFY0zeCxQVADYX1UuIXzSbaFzJ
+         OJp7Pdjn2HL82a338w9/zkdOovzM6GuIKKcbIacqTUIN9hmMZhF1T/PscrSSLWSmuviU
+         P0vwilBcEeyWuQkJo4UiT+VKWgv1FRevUyx1SgpUH+BgyCNJMUePlpiKJCwjGUfAQwen
+         PWjqreBEJ8XhhQ7OvYp/rTnriD+qB1PKNSEdPIURWlMRE26RNmkNk04EiyWttSxPV1uy
+         57Bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738422992; x=1739027792;
+        d=1e100.net; s=20230601; t=1738425367; x=1739030167;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=LqmeJzpiD8YZ1xvymTNQrsOQlg/IaFv47yCbvup3U4c=;
-        b=uF5tKDLmjl79ALFqSb0n2oHU+ypSFRIRAutL6YDKp5OsmAJiQ3EHYv3l11GhsdmlZ/
-         Ku60ob9mhw4PsvZ7eRm7it3Ilg15ryfIIyLAf2PiTxqNjzTZILNV0VRIxWSsy1AvGTEn
-         uG+zBrWIocexV//Qsdf9ZlSkkDkk2KMIbAVSkt6fBTP0Ij5wCoFOOzoQAZVigEM0QqqE
-         iXP0DWhV1Cs9ZYV6+WkbIc8MSj7HRskFoZm8iaKUeAgtINEYjLUm1O9bJaP8WUIXlQyo
-         hQboawhKFQVWbyP1/mYfn6SVOgXaJMHi8BMRpA1LxNG7CiHmdhWoGlk/TPzgVFCF47z/
-         D2ng==
-X-Gm-Message-State: AOJu0YyLUmrNkxBnLVYUCnUvrsQEZ+FXT1D+lbTgYzR+LNxzhO7NSOv2
-	XX7v58/TjMAtfj6VrubGUPdlCgxc2w9jy4G1xnRpn2hLzmfyQ1+POXHxIu2h
-X-Gm-Gg: ASbGncuMsUl2VKLjghapABFpDAPjsIVCDpshddUH9KAIlrxtnGx2ichSdOvGYZICHtK
-	4xpB3jdmqKMaEy6GXhR6DJjGn7/scPUr4p6O8ZR570rARo9El7P+J82Zp4cuKfRWQ01Z9yOVy4X
-	1NcO1hQKJxqPToOKALShTS6zLbHlkznYzoc5o/NHONPKtZJoQkkiwQUgHz4mDLFD1NeSP3Y6qkg
-	59mVhk09r05qnxcQrUtGep+wdi68ssAWCp6i2JtEJfJ8UWdxAIoM4SZv/9cEvYYx2rUcQI9/It8
-	J3i/uxv6Cwwzuv8bhWk1NgzxyDWr4P0=
-X-Google-Smtp-Source: AGHT+IHUSRrydIS7WKaX9buLY27ZIQevzpc8GcO7sfD53MmeVb3d7eprvLJGXjz0/liVdd4RmSAgXg==
-X-Received: by 2002:a05:6000:154e:b0:38a:88bc:d57d with SMTP id ffacd0b85a97d-38c5192f555mr11672222f8f.2.1738422992139;
-        Sat, 01 Feb 2025 07:16:32 -0800 (PST)
+        bh=N+jJuRPN30h2HP8VNdovQQB2/BA4FMH4xrfCG1cRLFQ=;
+        b=gvoJa6aKJMVAENSN5bHQ7Rn7uMwK3pjTp0AqEkI/x5RCYmgQ/qw28XaAh2dxaZ5jPf
+         iz6ridlcL374TIwDWDmsscgdf67AGd9t1IaEUiwMm4E1BhQYFIdlyMsgFirp9eM/w9dj
+         B217GuzBzkO44mm60jRHgrRQnjkCGD1OQOxkIKJfhU0JAPWtlevq57Hk8m18lmWBHDzS
+         2wa0bPstblKKKiauE5/1AFuu9wvbO/Spb25E7KZB7YNYhUC4sV1Clnx3OGcRVJDa2xus
+         yJKy2iSgNtnXLQr3VSKX4PpoTi30spABf16ahsZ0iUQtH4edGQXCGErW3dhNi/f1hJOa
+         +4TQ==
+X-Gm-Message-State: AOJu0Yy5byNDO1NCV2JKNCowcZLEb/gac6kHk596TKMCrySmKkTWlEHp
+	P84mquE/d7rdzq7jOhDhBNSutQUBZ9v6O1UqKosf6jWbP50iSDRgm5oicE2t
+X-Gm-Gg: ASbGnctUeOti2aiK2fRHezTGUGW1+ajhsffW7DeDllOMia5AoqB30PC7O7arsqg/epC
+	o9iGkzChfSmId3jIHGTmnVFCwDCEg5LvGv8ynr/mHdvk5JXyNVurZ9vAG5I/Ywb3dKrYNgN6Zbq
+	piLbeDKnO9fQNafoNgWq7DuSNfRuaU+kieiuBDl9reVM/cspEHm2Bb0WSaYBp7zRW+r1M9m6DMz
+	RsaHZvXlsoAFCmlEyfKO1l6Ko1l5yaXdoYR2RhQR6gkqT7hZAP1ruodkoUEN+42HoADBxJrsBEy
+	2vUYojHqdyL5fm3Zhqyf4Sr7gOUwKM8=
+X-Google-Smtp-Source: AGHT+IFdK2TcbrwA1+Be3piWKUjxDa5EPs2HaXliSRpYR7US8NsEwGdXUzeMArcqFytKktDUmmDVgQ==
+X-Received: by 2002:a05:600c:4e01:b0:434:f3d8:62d0 with SMTP id 5b1f17b1804b1-438dc3a3e77mr130093015e9.3.1738425367226;
+        Sat, 01 Feb 2025 07:56:07 -0800 (PST)
 Received: from localhost.localdomain ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38c5c102bc0sm7603025f8f.35.2025.02.01.07.16.30
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-438dcc6de7csm128445175e9.32.2025.02.01.07.56.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 01 Feb 2025 07:16:31 -0800 (PST)
+        Sat, 01 Feb 2025 07:56:06 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Gyorgy Sarvari <skandigraun@gmail.com>
-Subject: [meta-networking][PATCH] open62541: fix qa error with encryption-openssl PACKAGECONFIG
-Date: Sat,  1 Feb 2025 16:16:24 +0100
-Message-ID: <20250201151624.1314816-1-skandigraun@gmail.com>
+Subject: [meta-networking][PATCH] ndpi: correct LICENSE value
+Date: Sat,  1 Feb 2025 16:56:03 +0100
+Message-ID: <20250201155603.1323418-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 01 Feb 2025 15:16:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115211
-
-In case "encryption-openssl" PACKAGECONFIG is enabled, do_package_qa fails:
-
-ERROR: open62541-1.3.8-r0 do_package_qa: QA Issue: File /usr/lib/cmake/open62541/open62541Targets.cmake in package open62541-dev contains reference to TMPDIR [buildpaths]
-
-Fix it by changing the value of RECIPE_SYSROOT to CMAKE_SYSROOT variable,
-so the qa check passes, and other CMake projects should be still able to find the
-CMake package provided by this recipe.
+ <openembedded-devel@lists.openembedded.org>; Sat, 01 Feb 2025 15:56:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115212
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-networking/recipes-protocols/opcua/open62541_1.3.8.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-networking/recipes-support/ntopng/ndpi_4.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-protocols/opcua/open62541_1.3.8.bb b/meta-networking/recipes-protocols/opcua/open62541_1.3.8.bb
-index 19a50aee3..1be0fc4ec 100644
---- a/meta-networking/recipes-protocols/opcua/open62541_1.3.8.bb
-+++ b/meta-networking/recipes-protocols/opcua/open62541_1.3.8.bb
-@@ -51,3 +51,6 @@ do_configure:prepend:toolchain-clang:riscv32() {
-     sed -i -e 's/set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)/set(CMAKE_INTERPROCEDURAL_OPTIMIZATION OFF)/' ${S}/CMakeLists.txt
- }
+diff --git a/meta-networking/recipes-support/ntopng/ndpi_4.2.bb b/meta-networking/recipes-support/ntopng/ndpi_4.2.bb
+index 13c3398c2..ae5139c94 100644
+--- a/meta-networking/recipes-support/ntopng/ndpi_4.2.bb
++++ b/meta-networking/recipes-support/ntopng/ndpi_4.2.bb
+@@ -5,7 +5,7 @@ inspection. Based on OpenDPI it includes ntop extensions"
+ SECTION = "libdevel"
+ DEPENDS = "libpcap json-c"
+ RDEPENDS:${PN} += " libpcap"
+-LICENSE = "GPL-3.0-only"
++LICENSE = "LGPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
  
-+do_install:append(){
-+    sed -i 's|${RECIPE_SYSROOT}|\$\{CMAKE_SYSROOT\}|g' ${D}${libdir}/cmake/open62541/open62541Targets.cmake
-+}
+ SRCREV = "8b5c6af71b562549f8416b31803daae223e09f46"
 
