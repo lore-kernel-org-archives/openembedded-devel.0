@@ -1,98 +1,177 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <joerg.sommer@navimatix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 37ECEC02192
-	for <webhook@archiver.kernel.org>; Mon,  3 Feb 2025 12:11:59 +0000 (UTC)
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.web11.86177.1738584709003173340
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EF70DC02192
+	for <webhook@archiver.kernel.org>; Mon,  3 Feb 2025 16:48:11 +0000 (UTC)
+Received: from EUR02-VI1-obe.outbound.protection.outlook.com (EUR02-VI1-obe.outbound.protection.outlook.com [40.107.241.124])
+ by mx.groups.io with SMTP id smtpd.web10.92852.1738601283247600422
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Feb 2025 04:11:49 -0800
+ Mon, 03 Feb 2025 08:48:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=UGU4yMFA;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4361815b96cso29326715e9.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Feb 2025 04:11:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738584707; x=1739189507; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=2j1oI8XuWAjnerqBmMdKtQ47DaS9bot1fXwfEcURARc=;
-        b=UGU4yMFAJF8hQL90R+YIUigIu9a1fPOwiD7ZvNfPC3tf/h3jJsToEMz7VG1ZL5bo8H
-         RZ9viuPuW5SUOXppBe8glunxZt0fEfwSk0ugpv3Zzofl24RjUVsxG4McoOqLyWSTPWI+
-         jxA1jLGpfhyXlpsRACuMIt01ZQDLZ0rk1FbNuN7K5n1Biz5QmyHqP05JlSRpukERLZaj
-         JOyUuu1uF33uzbct16kIdJrwVXPUG9CyHAzQTwtvOPn/0LDpEHk5Kh83lhiZFbnO5HHo
-         HtQ6QGeuPnfFqqzZWcQ/Il+6d/JOxj5eNKJ+eVXi5N/dJoq4zXbU6lEavll4PqnJY8oG
-         QUcg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738584707; x=1739189507;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=2j1oI8XuWAjnerqBmMdKtQ47DaS9bot1fXwfEcURARc=;
-        b=JnyUGLypP0XQXLQqXA2DPMKzQrgbq4yoGqK7kj41/9TVwKnBd0af+sD47uGCmOcyh7
-         CtwYENraWnEav2puaAhdMnWCwRb2juLwf/7WMhsdVvpkDa/WH6cnZsdPA3ZETsq0mgwg
-         Wv639pmEPM37YLDhK01p2NMOi9D5js8+LYtGv1Fj3BMtlDRBOBsWY17YXCkfcc1Igyqh
-         uZOCrFPFh6YnEAc2xqkcPIlSwS8keZ52e0DNPo/ggfio048wfkSAyREKS1oKJIKqZot2
-         Xf/ccn3QLaZ8HwPiU7RITTqm5Ar7ywkp6YYNaD3Rj1oAaZKZGSeGUCLzqaeOs3iGy2z7
-         DiLg==
-X-Gm-Message-State: AOJu0YzCi3xW4gRW/CZO4er3Atwa2KqTlzVL1HM5GU70OGcn7q0Gt7oR
-	xBiZtUJEykkaHkZchlOmhtQ0sHJLhLBic8fMqrLGQSsi+hWQnqyOKennGhSw
-X-Gm-Gg: ASbGncuphPlNWkukWJl7qiHbGSLyINcT1DjXu4mUwHMtOuuaXrmtfRu0iLTmxy/jeOH
-	H+mGUgniE1ij9XmuMjIRQ79vLSbGuBxo/WG2yNLfqIrKFgzNV58ouLzA0UbIBhwGlQS86rla2DC
-	5+xOKxHtvqkP4RE8LkisvN/Y8tdWfIxsvWuWAxjb4WSwtoXydABXdgMbhYj9MEN9gAzYjvckw/s
-	UNaEB/OD5Ig+uSHaxDHwzjmXaH+nYOEhrBY/Vo1EMZUkvw2VHvxe5xPH7ek3J2pJ81Y0PMmAKpA
-	ure9gYEC6VZmrGsvOvoeUrc=
-X-Google-Smtp-Source: AGHT+IGy6x/75CZw0AEs6BL2iCGMQXlH/uhnd1Cl9knwbvUGdyYP9WyBbLgQNLf09j1rYzcRUeSWdA==
-X-Received: by 2002:a7b:cb41:0:b0:434:ff9d:a370 with SMTP id 5b1f17b1804b1-438e62f98dfmr141404835e9.0.1738584707156;
-        Mon, 03 Feb 2025 04:11:47 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38c5c0ec7aasm12516673f8f.5.2025.02.03.04.11.46
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 03 Feb 2025 04:11:46 -0800 (PST)
-Message-ID: <b74c1960-4f13-4758-8a80-22f025577c79@gmail.com>
-Date: Mon, 3 Feb 2025 13:11:46 +0100
+ dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=JQDAqmnY;
+ spf=pass (domain: navimatix.de, ip: 40.107.241.124, mailfrom: joerg.sommer@navimatix.de)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ycQdrpMvjmSOQNamolPd5hX2EPPOceaQfzmAscmRmPyhrNqE1z/t207/VTHNrGfCxN2sGs04YQ7Z1nbuy0WTq14uO6NhEFwiJixef6LrtaEyOgQrR1iGGqP0Uk0Pb0FiVPlD1LeWq2x2uOQfQaSece6kSH8J93rnN3dt6scbNameygfP9R7iB6j2+2BWG9nZLeZJhVadGbUkPKdODFXFQa35CcOhiJrPhjeqXv8fmNNwi3hGxx575sbU/ZkRgTpbw0Zmh0Lrf9pANT8dwiB0CqljhxnJ2mSMECBl/GR4cZYnNqRhI8qhMGd7wI+YXG6frjRbFAQilfaX4rSf3aeF+g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0mCJ5euwGaADwZpKLxOMoDiypxlvvTvtXS1suE1NRUI=;
+ b=Lo5KCUiAF8O5LAn3f4vhbBjYU3YdVJS2LIieklkU3JUZvMmdxz3VymZcotikM+vxqnlotQBb4X0kXnVpSAkKka4zMmlOgMPDkydKdsLxWUJ8+KuFXCKu+8UXZZp1M6wV2KxIK+ZED75YVaR4gzYyBh5bL7AtZF0wiR5+20Z6WeuLHT+JGp0TnuYa5bDg8waxghAnpx7tMFlaH7NUoiVPLqFz97cEWcTODERQHWj/FQJ7um7PatkeM6zDHEA/C+2HWXrq1aUzyJIwatWkRVMsLotnPmGyiPtYolr0Vj2tAy21LKoFwlN6CZ9r1SmGF1f5VWDl6QaaIvSV06tZTaRvgQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
+ dkim=pass header.d=navimatix.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0mCJ5euwGaADwZpKLxOMoDiypxlvvTvtXS1suE1NRUI=;
+ b=JQDAqmnYh+FWxNLIfwv1OCdJGb3LIL4i1KBmw/im+jgWYOmuTFRn/UAfkVmkAvcoJcn/lknwpPMqAA8a5QDUajWsy7dTiBShBJsxuR38AsP8dHUPMyMPAiXePpUQVbVKOpO4KZ8+3gsF44b1TibcnFe/4wLkY109oaRj4lawgBg=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=navimatix.de;
+Received: from DU2PR01MB8293.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:2d4::5) by AS8PR01MB8290.eurprd01.prod.exchangelabs.com
+ (2603:10a6:20b:421::11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.25; Mon, 3 Feb
+ 2025 16:47:59 +0000
+Received: from DU2PR01MB8293.eurprd01.prod.exchangelabs.com
+ ([fe80::d520:1b9e:a30e:69a7]) by DU2PR01MB8293.eurprd01.prod.exchangelabs.com
+ ([fe80::d520:1b9e:a30e:69a7%4]) with mapi id 15.20.8398.021; Mon, 3 Feb 2025
+ 16:47:59 +0000
+Date: Mon, 3 Feb 2025 17:47:56 +0100
+From: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
+To: thakur.virendra1810@gmail.com
+CC: openembedded-devel@lists.openembedded.org, 
+	Virendra Thakur <virendrak@kpit.com>
+Subject: Re: [oe] [meta-oe][kirkstone][PATCH] libssh: Add ptest
+Message-ID: <5bvglj7uv2pq7n7l642r7ddpxxodsys5rkhm4p5u7vnm65pabc@acdzrd4nliko>
+References: <20250203075610.238451-1-thakur.virendra1810@gmail.com>
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20250203075610.238451-1-thakur.virendra1810@gmail.com>
+X-ClientProxiedBy: BE1P281CA0217.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:88::20) To DU2PR01MB8293.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:2d4::5)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH v2] capnproto: remove binaries from
- target-build, add bbclass
-To: openembedded-devel@lists.openembedded.org
-References: <1820B183AA0ABC96.15786@lists.openembedded.org>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <1820B183AA0ABC96.15786@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR01MB8293:EE_|AS8PR01MB8290:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9ec9e00e-bb7e-4cc5-aa32-08dd4472840a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?VMXWJZTkF7XXBXiT1jyA8G0yfmulM2K1/lTKotzBNbvBsEoplpgBPIAJkQaO?=
+ =?us-ascii?Q?M2AdheoSpv1Zlhs/YBMGbWjAvcFtb8Aa4VNOQuC68WwN+FzK/EdGwQVvt23X?=
+ =?us-ascii?Q?ZwmPPDwO7TJNjVhEagWsmhFercg94MUdJCN81+c44afJEwkAu042NyYP2Bu3?=
+ =?us-ascii?Q?24IyZg9F+ZWSXq5XxXu+Yz4l3TOH061kPs7oIw4g66DI056Y4tl6JJEJpvj0?=
+ =?us-ascii?Q?zyIpa0nOK0XZJRBqEGIuQvffW+4QpbchD9g5wM97CaRDwzP+ThTixVT/fPT+?=
+ =?us-ascii?Q?/pi/emx90ln+lqTnd4ZXWsvP9Ev5im972QLNgVM2TlYC78wpykWLtjyWtMRj?=
+ =?us-ascii?Q?xekaey0J2kkehS4sbfvQqiz9/6Z6nIWg5vtrj9l/fVeRf/DmwY7MfV2WSvlC?=
+ =?us-ascii?Q?FfWtv9pmQJBMpRL0PFTk+0oFkQLDtVU3mkxS3xcw9MZSF3KnOLK/vbtMWOwA?=
+ =?us-ascii?Q?D+wWm5jDxgMf07s7hib8Y0OJVPA0SPR3D2yaKC4DrcZkx7TIhf2258pZ3ioo?=
+ =?us-ascii?Q?fzsTslcFIv8zlzj+4HN+6ZzB/rSGgvcdI9QWhGKW/1BQ8BM/fzsefwZ9p73F?=
+ =?us-ascii?Q?M+Ykx2EOFrZnW8uiEL6Mm+J5y4m5Yl7CDTGVWUuYz6miULU+ZkdGHZ3HPC+m?=
+ =?us-ascii?Q?N6VIB+BFz3o+2Vj2KjTWKpQ7c8GQI0uwRxOgN6XG14gJX5lrrPQ3Wwxp80fI?=
+ =?us-ascii?Q?RXuYLYaVkkFAmkV8z+CsLtYv2guYFgLLSz9AR4eFsSXmTXIlmG3ueiAdXNJW?=
+ =?us-ascii?Q?6xkRi9w1eGKdzXIE9NJhi3dGFckgxX3bh63WXyFwIgux2xaHWu3QwJVzn2KJ?=
+ =?us-ascii?Q?ZtpjlrN8nyOpMXX4bMyuwmWfWnpuqUGPRbCrI2pjuccRQXvhZSV1+qNg6jjQ?=
+ =?us-ascii?Q?bd9VZX6r5MKh84Ls6Q6W2WQ8vpmdJD/AeXkda8mYlT9hCJjUWiXBrFHz6wXz?=
+ =?us-ascii?Q?kFl++/NftKX1O+DkeIkJpXm180x2Vb73SMTlUmRBKiv+4bh+jaD3et1/2aO/?=
+ =?us-ascii?Q?G1j+9Df7CUzFIVv2wWJd0Jdvq/irIkDa2fZjET0PURwRqTBiIECNGYGYQv5k?=
+ =?us-ascii?Q?VeUxotq0ryzy1v9HKqoiN+Nyy7cu1AxOMOV4hEP7CPBvWv1YbZyOZza+uKoS?=
+ =?us-ascii?Q?NY38h+PRGmGz4zaFTvjJE+lFFaOexEVDD6xniAxMHUi8haZj9fCVTfl3+lIS?=
+ =?us-ascii?Q?ZWTXFNnqzWcFfVYLqhiaugZd4Qi5xa8TqkhkgldQM5vpMRev1/wskEYCZuKQ?=
+ =?us-ascii?Q?dR2HVUVw7Wp2qPOe8g5Oq7lzjsZlEwKdt7ju1ijjT5b4aJZQfvM5zVZCPjcX?=
+ =?us-ascii?Q?tyfyTQFUju0leJj+OAS6mBsX?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR01MB8293.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?GH5mvSf60/FWzbnQWhQQvorIj3CQqQ+rZkYAioJLQyBNUbUgaAMYLXopV/01?=
+ =?us-ascii?Q?cMHe7XoSF6jxAZ8HE4r1mKSpXeR/t/ksk3nRfrFI6H/23GD7bhKpjQ7/HIKG?=
+ =?us-ascii?Q?N/pWbRluYBM+rpJub1/ry9IaGVp7Bjnpsx0Wncb6Gm7dDnAwm39VM97TbNML?=
+ =?us-ascii?Q?9txd2H+ogtf/wQen/Cdflp+WbbIvVBMjRuRe8v8s1wZrk6Nx3JkD91ai1Ua9?=
+ =?us-ascii?Q?WSRtvlKGJCMxhx8hUzedgDYm+o6hx87Yrw7wg6nW2WDv71IPANv7/VY6YJPz?=
+ =?us-ascii?Q?Tyex+aro9mFECqiet2f7aRbEk8WHZHen+sb2cxuIakS6QA9Wb3tSEn3i1JK/?=
+ =?us-ascii?Q?0HAB/Dod87Qz21Nlnx0gubE14WMWfNu8/YZRy6VyPqLfpqcwkLDs7nW523Hs?=
+ =?us-ascii?Q?EgUCJs2fPVgivh3Won45V95vn5JBREIeM/c+/c/JjmhQGNGOmXzEyW6nWQYe?=
+ =?us-ascii?Q?kCgP5sH9W2Yi24kKV4Oqp7EU47+wLn3ciwYfZ29rqJVt+N4TXfSLOgr2FMVE?=
+ =?us-ascii?Q?mv57nhxOtBHUJUS4lUizP/tYfxeOisS9+W/xDVfR0nEXG+DAsUJ9mT6qqpMX?=
+ =?us-ascii?Q?OVnEHzo4U95UblrilyWI6/mI0LLAzsq7iRIZ4VL4Wz3Z3YplL1lQZZ9cxfE8?=
+ =?us-ascii?Q?1E/UHZA23ABZ1bcFow/uHpAE6NkXwUc4GUe2rWmF8xc+3z8uZauo5bGba/As?=
+ =?us-ascii?Q?RzKW8TmDPYvmdLikSEkRzkAqxKMiKCQmMV3tJgz/LjMnNWHJLyV919oc8yE0?=
+ =?us-ascii?Q?A2SUCe2gjouUEr5++qLaNuL3RNlmIqtY0YCCkv5PiBL+qCCxldg8s06oLoDJ?=
+ =?us-ascii?Q?jBGYgi9vMgnWrRISQpv66fyadElM/Z5N0FoMjYyn+pzfuacDoLO4KDO5Ebis?=
+ =?us-ascii?Q?zxrOh3mKqxYLEq0Kgu+f5qcyO18wRDqwy2bXRRXqAQUnfiwqity6GQ8ATMO/?=
+ =?us-ascii?Q?ndAFdVe3+A0wQENDU18Rw2QKvuckx7B/DME0K0sY+d5ldTDCbr4JuoX5XJZF?=
+ =?us-ascii?Q?h9J/u3MfcVxtZkzKh6xE4coXI6FVfYwu8YDevubozcsTT3OiEgosOkIspLVW?=
+ =?us-ascii?Q?Hv4JzvTRyOmVAVaAoya8lIGLsoqeCDShtN8y9yO9jQSOur8No6cFAlrpCnDn?=
+ =?us-ascii?Q?agrZs+2vN88azZ9nYE97k4N27e48qRuSZ8KY9meqwfm/NlfGNucUuiZjRmKo?=
+ =?us-ascii?Q?8RRWUUEARZaqcRARSu1B70/yYe9gNZHIuCHrlgPg5Mznz89oQXpslmqG8zfa?=
+ =?us-ascii?Q?8xoXhIpZpGaWPiszifdqEJ/psmuZpLrx1gkvJWYyUfgHFDVCjcg+D89ETU1A?=
+ =?us-ascii?Q?FJ3fmq0se3+q4PRZrW8BfX8nwdKe8C8n1uxRcFWi7L5y5BDATgrZVa2Iw/bk?=
+ =?us-ascii?Q?OgO6YqeSginKAbfUrIhoIu7qp9pqKkksQXVwhaJWnrji6HXzDoouer/ywUvV?=
+ =?us-ascii?Q?werqyu0iCc7gjls7G5Mc4XS8dVGHUT/la8zQ7QWcoKu5OUICdeVRheFeVdO5?=
+ =?us-ascii?Q?npOwjZndllv/ZV034QULq87/b5VJEjRRE8A06HNN5DUJ1XPp8Ufi+N+CLwrC?=
+ =?us-ascii?Q?rORxAZwCyGZzSLLYg6uhnIkxXpoxHTWLVZ0eDU8C4+5En+7XheCoiww16mZd?=
+ =?us-ascii?Q?3Q=3D=3D?=
+X-OriginatorOrg: navimatix.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9ec9e00e-bb7e-4cc5-aa32-08dd4472840a
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR01MB8293.eurprd01.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2025 16:47:59.0249
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: /4fh3k03hdT/koHvNEROZKpejBNeiQLRiO6F7EXNNyB41DEZK0kIdI40uE/h2E5D9qn5AcAo1XnnFWGqC+7Qk3/6oU3GQ4WsLt1Tr2ik3/w=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR01MB8290
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 03 Feb 2025 12:11:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115239
+ <openembedded-devel@lists.openembedded.org>; Mon, 03 Feb 2025 16:48:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115240
 
-While looking into Ross' feedback about the first version, I realized 
-that my
-sed regex didn't only have superficial problems (namely being an 
-eyesore, and
-likely brittle), but it also only solved a part of the problem - it 
-allowed to
-link to the cross-compiled libs, but code-generation during class-target
-compilation from capnproto definitions was still broken.
+virendra thakur via lists.openembedded.org schrieb am Mo 03. Feb, 13:26 (+0=
+530):
+> diff --git a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb b/meta-oe/rec=
+ipes-support/libssh/libssh_0.8.9.bb
+> index 98910d3068..7d0fc2d32f 100644
+> --- a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
+> +++ b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
+> @@ -18,17 +18,19 @@ SRC_URI =3D "git://git.libssh.org/projects/libssh.git=
+;protocol=3Dhttps;branch=3Dstable
+>             file://004_CVE-2023-6004.patch \
+>             file://005_CVE-2023-6004.patch \
+>             file://006_CVE-2023-6004.patch \
+> +           file://0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-comma=
+nds.patch \
+> +           file://run-ptest \
+>            "
+>  SRCREV =3D "04685a74df9ce1db1bc116a83a0da78b4f4fa1f8"
+> =20
+>  S =3D "${WORKDIR}/git"
+> =20
+> -inherit cmake
+> +inherit cmake ptest
+> =20
+> -PACKAGECONFIG ??=3D "gcrypt"
+> +PACKAGECONFIG ??=3D "gcrypt ${@bb.utils.contains('PTEST_ENABLED', '1', '=
+tests', '', d)}"
 
-This patch supposed to remediate this too.
+Would `oe.utils.vartrue()` be better?
 
-If you think that having a new class is overcomplicating the issue, I 
-can be easily
-convinced about it (but please leave an alternative suggestion also).
 
-There is 1 known caveat however: if someone would want to install the 
-binaries
-from ${bindir} on the target machine, that won't work after this change. 
-(Can't
-really think of any reasons however, why would one do that - this is not 
-a user-application.)
+Regards J=F6rg
 
-Let me know if there's anything you'd like to change in this patch.
 
+--=20
+MCSE =3D Minesweeper Consultant & Solitaire Expert
+
+Navimatix GmbH           T: 03641 - 327 99 0
+Tatzendpromenade 2       F: 03641 - 526 306
+07745 Jena               www.navimatix.de
+
+Gesch=E4ftsf=FChrer: Steffen Sp=E4the, Jan Rommeley
+Registergericht: Amtsgericht Jena, HRB 501480
 
