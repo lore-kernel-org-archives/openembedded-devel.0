@@ -2,119 +2,117 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 94C3DC02193
-	for <webhook@archiver.kernel.org>; Mon,  3 Feb 2025 06:58:57 +0000 (UTC)
-Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
- by mx.groups.io with SMTP id smtpd.web10.82522.1738565932061612757
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 91F36C02195
+	for <webhook@archiver.kernel.org>; Mon,  3 Feb 2025 07:05:17 +0000 (UTC)
+Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com [209.85.210.45])
+ by mx.groups.io with SMTP id smtpd.web10.82606.1738566308954705004
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 02 Feb 2025 22:58:52 -0800
+ Sun, 02 Feb 2025 23:05:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=W5UncoF2;
- spf=pass (domain: gmail.com, ip: 209.85.160.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-29fc424237bso2665611fac.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Feb 2025 22:58:51 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=iHl7lmSi;
+ spf=pass (domain: gmail.com, ip: 209.85.210.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f45.google.com with SMTP id 46e09a7af769-71e15717a2dso2282153a34.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Feb 2025 23:05:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738565931; x=1739170731; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1738566308; x=1739171108; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=HbXdkKsFk7C+4PXTfEAUQPaeBAjL1bp3d4rQCbY70yE=;
-        b=W5UncoF2h9ZX2bmKw/hB6zDMFqMgUeWZUCbX8gy2CTbswicjP3/imC6m25DvYO5g70
-         vl9baxCrXixFXhDLguaXAnW2yCndapPQmNntz1CLYVuAOrKu5o/DbusU//6K5M/WqWDm
-         /WXYCJmugY2G7zAzVDtaxDaMZOz5Ufy85mVh+30UQZancJzR0Ww+Vuzrmpw7JgBld/si
-         aKbvxfJlMRFzWex17C8ecxFKxXXEQZ5tzW3uyp4oMuCaq9h90nzDQ7eWqZeyFfQ1Pdms
-         gXoygbJTc8Q77c5tiKrFpa1ab1BC4/r1HHeHIShRC+gqALbbahT+ZJmw/ulpjn25IR/w
-         1LlA==
+        bh=KjSYiB3J8Yo6kLp0+SaLCV6LEp4T1LwDVzhr0ygKcWk=;
+        b=iHl7lmSifMv2kOG/RixCW6pBuRAZTqP6qAYgngXpFM/OmxtOzaHt9nQFcw27UhzSSB
+         UmQRp/i//tDj1YDRigpCyYJZb38Wi/DwSXAMvxvJppkW0hAIFF49l9OMRpldVFLthX6n
+         nAjYkKApocWiXLwV7EJqoZisd0YP6DlMyHeHOTvqas88hE3ATs0j0eUMJDo5vyznwsrq
+         yvpO8KHcqVg6ft6o3YrDUMgZV/xUD2wd0azmUuhfn6C1Y7e19pkK1c+HpTmUyZcFGYJR
+         zbLq259GXI8VOhA0GCvV+nYt+xBikFiyOWO7zTvBmwfTnSxOVf6tErYjfzoMgPYHwtCt
+         P8kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738565931; x=1739170731;
+        d=1e100.net; s=20230601; t=1738566308; x=1739171108;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=HbXdkKsFk7C+4PXTfEAUQPaeBAjL1bp3d4rQCbY70yE=;
-        b=l3CmCL2HiYlr0Xhwf3TYlr7TavjdlIDL2c5+CGiXSHqgm90+3EmwjIsp8gO01y+rL6
-         zbz+qyDy9fEJYnjR57PzqhTjbv3SzMXctP0VJwbeSfELBDgcq0o1F7tEbk+OXs3QOAcO
-         +gDqmB5v94oa/nSTsUTaL3veXN+T+AhHaL3rtxNvuh1jlnu2b3HPuKmOVoOysNacPuNQ
-         bCyj0Ke/ovdLpImaLvfIYJ1vvj/9QNmLxp0Mjv5uWY8bhLuHMC+lJT6tManRm5Lz+WmX
-         RpCHyN2ftBmDqTUWpu/5FZE79v7Ff61JtzcRJ6jgkq30g/59MGFWjo2H7l8WxEXAWbl3
-         Tgjg==
-X-Gm-Message-State: AOJu0Yw6mn9KHALtlrAgsMqVPmL8+MFpZtXtDAYJQ+wutdpGT4CKC1xA
-	17ihmv8VXaPE+yZnON9YnsAWRfeTttMhRoC5MvqE9PPgioxIwlPCH228Eg4XjsggAv/4jlsBExq
-	mttIoz/Zu/C/81BA0gGt7aRMRIrY=
-X-Gm-Gg: ASbGncvwwBGkTNEZgOzOl3+BFZx6Dgp6drwVBiW6tbng7vCKwkjK/oYTRkghhYylkSl
-	kwlcTbnmIhoZMtmvBNGba2HoaaUz9TQvleDFZY44qXB52rgjRbjjTSOuIA6+6nvlqqcOAcMlq
-X-Google-Smtp-Source: AGHT+IE6vGLJGwgf1S0ty3rcaVr0syH4W+1j3jvfUjTH+LkN0eX9trSaiGjXOwItFXvDVnz0FfqevWiEOUttMA8tCjk=
-X-Received: by 2002:a05:6870:d38f:b0:29e:60c9:9dd8 with SMTP id
- 586e51a60fabf-2b32f2642c5mr15464426fac.29.1738565931246; Sun, 02 Feb 2025
- 22:58:51 -0800 (PST)
+        bh=KjSYiB3J8Yo6kLp0+SaLCV6LEp4T1LwDVzhr0ygKcWk=;
+        b=q9a+Q/ASFbOoU9BxqKtoUGKb8tFbbCsRwMFvXFYdK25z5QbIb0lcrS+xgJY+e/MkX2
+         eCnNbKHitOlxtB3+tM1c1vt/hVDoPuQvjesOkVHJRmyVM0DMiOuoWL2CqbB++ZzDnJge
+         i7AUMGEJKdSzFM+HSZs/n11AUIyHQbZSK79kZ7YiB8vE5v3dGSQFaz60JDI03vLPHbDa
+         yzT0lQGiTAkflqdpI7a9eZR/jUJlMAb4dyarOLRgkl6rbPoYK5JXO0MFkt3O5RzBTWiu
+         MCHnUUvWYjpGXbdjrX+njL3D22RJcfsTur0RgJHCM3LHE2jkWtf5iz4Ofv0fEU9XNn9V
+         QGuQ==
+X-Gm-Message-State: AOJu0YwTUmPsAaGQTrlubTr+zGYvjIXNHoXiTAkh8eC6wHc9Qc5TTpEA
+	G3o5UqCk1ObFyco04WFpLvYXsagBIRp7N3BCxgwh/Yb7tPe2u0+B6oKlodUsxt/IcxemXGm9Hm6
+	sgGIZat/hH9izj0QMO6NhxyqCAH8=
+X-Gm-Gg: ASbGncsymieh2npcjJCYSLgoAyFhVDjW8HNrX5jxDsGN/G65Bux3f3fSIG93z4e3wQO
+	QOu4/RNwxbHYIh60K/Z8YhVXkHMBJb+qvPyfDPJTj0AMqgG8xUH1psl5QkZdVwfQQcNknoc49
+X-Google-Smtp-Source: AGHT+IGabgRMZHLO8DsIDkaLQW1qwKsHLDub/FYan/4PqdU++Djrby0TRt8OTgMvdTLDQcsXD7nUBNbhNaYh5Ckwmy0=
+X-Received: by 2002:a05:6830:6316:b0:71d:f361:5cfb with SMTP id
+ 46e09a7af769-7265672f5f7mr14111750a34.5.1738566308088; Sun, 02 Feb 2025
+ 23:05:08 -0800 (PST)
 MIME-Version: 1.0
-References: <20250202213910.284312-1-peter.marko@siemens.com> <20250202213910.284312-3-peter.marko@siemens.com>
-In-Reply-To: <20250202213910.284312-3-peter.marko@siemens.com>
+References: <20250201170240.2880-1-alex.kiernan@gmail.com>
+In-Reply-To: <20250201170240.2880-1-alex.kiernan@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 2 Feb 2025 22:58:25 -0800
-X-Gm-Features: AWEUYZnixw-nHhNC-xCjcE9om1lxnZ1dihGsb_H1haWQfMLm0g-IeYfYFcU1xeQ
-Message-ID: <CAMKF1squvrD1YQsFv3jJRJgbfEArPSm-5KcG-SKMBruLHdLs0g@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 3/8] protobuf: use system jsoncpp
-To: peter.marko@siemens.com
+Date: Sun, 2 Feb 2025 23:04:42 -0800
+X-Gm-Features: AWEUYZn7losEyCKm8XJGkTR8-WiGwNK7gYlbj5yd6XbQBnOfGD72SOSJu2KPFdU
+Message-ID: <CAMKF1sqj9fCQr8rwXHDi0CSp-+tqGW+6GWPzuRu_hmgBsqVwOg@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH 1/3] mdns: Upgrade 2559.40.32 -> 2559.60.39.0.1
+To: alex.kiernan@gmail.com
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 03 Feb 2025 06:58:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115233
+ <openembedded-devel@lists.openembedded.org>; Mon, 03 Feb 2025 07:05:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115234
 
-ERROR: Nothing PROVIDES 'nativesdk-jsoncpp' (but
-virtual:nativesdk:/mnt/b/yoe/master/sources/meta-openembedded/meta-oe/recip=
-es-devtools/protobuf/protobuf_4.25.5.bb
-DEPENDS on or otherwise requires it). Close matches:
-  nativesdk-cjson
-  nativesdk-json-c
-  nativesdk-ncp
+I am seeing
 
-On Sun, Feb 2, 2025 at 1:40=E2=80=AFPM Peter Marko via lists.openembedded.o=
-rg
-<peter.marko=3Dsiemens.com@lists.openembedded.org> wrote:
+NOTE: Multiple providers are available for runtime libnss-mdns
+(libnss-mdns, mdns)
+Consider defining a PREFERRED_RPROVIDER entry to match libnss-mdns
+
+Does this need to apply along with relevant patches you sent to oe-core ml =
+?
+
+On Sat, Feb 1, 2025 at 9:03=E2=80=AFAM Alex Kiernan via lists.openembedded.=
+org
+<alex.kiernan=3Dgmail.com@lists.openembedded.org> wrote:
 >
-> From: Peter Marko <peter.marko@siemens.com>
->
-> We should not use additional vendored jsoncpp unless required due to
-> compatibility issues.
->
-> Signed-off-by: Peter Marko <peter.marko@siemens.com>
+> Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 > ---
->  meta-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  .../mdns/{mdns_2559.40.32.bb =3D> mdns_2559.60.39.0.1.bb}         | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-networking/recipes-protocols/mdns/{mdns_2559.40.32.bb =3D> m=
+dns_2559.60.39.0.1.bb} (99%)
 >
-> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb b/meta-=
-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb
-> index c7e9408870..470c368cf3 100644
-> --- a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb
-> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb
-> @@ -7,7 +7,7 @@ SECTION =3D "console/tools"
->  LICENSE =3D "BSD-3-Clause"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D37b5762e07f0af8c74ce80a8bda42=
-66b"
+> diff --git a/meta-networking/recipes-protocols/mdns/mdns_2559.40.32.bb b/=
+meta-networking/recipes-protocols/mdns/mdns_2559.60.39.0.1.bb
+> similarity index 99%
+> rename from meta-networking/recipes-protocols/mdns/mdns_2559.40.32.bb
+> rename to meta-networking/recipes-protocols/mdns/mdns_2559.60.39.0.1.bb
+> index 9cc6708d18c5..6fea434de81a 100644
+> --- a/meta-networking/recipes-protocols/mdns/mdns_2559.40.32.bb
+> +++ b/meta-networking/recipes-protocols/mdns/mdns_2559.60.39.0.1.bb
+> @@ -28,7 +28,7 @@ SRC_URI =3D "git://github.com/apple-oss-distributions/m=
+DNSResponder;protocol=3Dhttps
+>             file://0004-Add-definition-for-MAX.patch \
+>             "
+>  BRANCH =3D "rel/mDNSResponder-2559"
+> -SRCREV =3D "0b8a5dbcefd6cc72846385aebfe4f6111f2814cb"
+> +SRCREV =3D "e8a63bd04dda3f83a80f1dbc6db03e7806d87c11"
 >
-> -DEPENDS =3D "zlib abseil-cpp"
-> +DEPENDS =3D "zlib abseil-cpp jsoncpp"
->  DEPENDS:append:class-target =3D " protobuf-native"
+>  # We install a stub Makefile in the top directory so that the various ch=
+ecks
+>  # in base.bbclass pass their tests for a Makefile, this ensures (that am=
+ongst
+> --
+> 2.25.1
 >
->  SRCREV =3D "9d0ec0f92b5b5fdeeda11f9dcecc1872ff378014"
-> @@ -37,6 +37,7 @@ EXTRA_OECMAKE +=3D "\
->      -Dprotobuf_BUILD_TESTS=3DOFF \
->      -Dprotobuf_BUILD_EXAMPLES=3DOFF \
->      -Dprotobuf_ABSL_PROVIDER=3D"package" \
-> +    -Dprotobuf_JSONCPP_PROVIDER=3D"package" \
->  "
->
->  TEST_SRC_DIR =3D "examples"
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#115222): https://lists.openembedded.org/g/openembedde=
-d-devel/message/115222
-> Mute This Topic: https://lists.openembedded.org/mt/110959919/1997914
+> View/Reply Online (#115213): https://lists.openembedded.org/g/openembedde=
+d-devel/message/115213
+> Mute This Topic: https://lists.openembedded.org/mt/110937760/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
