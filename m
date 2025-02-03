@@ -2,182 +2,97 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BC4EC02192
-	for <webhook@archiver.kernel.org>; Mon,  3 Feb 2025 12:10:39 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.web11.86164.1738584634837392646
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 37ECEC02192
+	for <webhook@archiver.kernel.org>; Mon,  3 Feb 2025 12:11:59 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.web11.86177.1738584709003173340
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Feb 2025 04:10:35 -0800
+ Mon, 03 Feb 2025 04:11:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=YOP1IELW;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-43618283d48so31808915e9.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Feb 2025 04:10:34 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=UGU4yMFA;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4361815b96cso29326715e9.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Feb 2025 04:11:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738584633; x=1739189433; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Y4lmOpsnTotnGa8QCqzp9DYwTrEcSdO/yE5++rNboKU=;
-        b=YOP1IELWgahZUlo4bAtwtrUQwvC9DyvzPksOi6XHRL3+2/lr1myjr1kYGhKQ80NolG
-         AJFmQgH7bwrTfOCoNDg74f1SBuCmZ6Qo+5wqabYl9HH6YjV/Rqliv3uhjOjil7xTDJK9
-         b0RMtRWdrAym9lCSp+58/Qm0QB61wvhdsIQq01x/XNibTNyiAv3rIL1zQTFWXQv4/OX5
-         hDhJwD36Nvnrg/gK0AL1bqgtaoakLXlPzO1GTSV17p1sPBcQVn1rh6lO9yXIecIPivXS
-         oBfdGBxwwP0mcsPu42fElfikDqoMt1g6F2zXcAU1l+g/EJbA+dEtdKPw7711NOYwcRED
-         4qrg==
+        d=gmail.com; s=20230601; t=1738584707; x=1739189507; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=2j1oI8XuWAjnerqBmMdKtQ47DaS9bot1fXwfEcURARc=;
+        b=UGU4yMFAJF8hQL90R+YIUigIu9a1fPOwiD7ZvNfPC3tf/h3jJsToEMz7VG1ZL5bo8H
+         RZ9viuPuW5SUOXppBe8glunxZt0fEfwSk0ugpv3Zzofl24RjUVsxG4McoOqLyWSTPWI+
+         jxA1jLGpfhyXlpsRACuMIt01ZQDLZ0rk1FbNuN7K5n1Biz5QmyHqP05JlSRpukERLZaj
+         JOyUuu1uF33uzbct16kIdJrwVXPUG9CyHAzQTwtvOPn/0LDpEHk5Kh83lhiZFbnO5HHo
+         HtQ6QGeuPnfFqqzZWcQ/Il+6d/JOxj5eNKJ+eVXi5N/dJoq4zXbU6lEavll4PqnJY8oG
+         QUcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738584633; x=1739189433;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Y4lmOpsnTotnGa8QCqzp9DYwTrEcSdO/yE5++rNboKU=;
-        b=mT+qeE0brWhJ5MjAD0PeggSAnSGfMK8LN6vOjQpCoJBh/m4I8UxfvgfCSoKm6+/6Gq
-         Rz4g7WpdWdmxCNxjVUbekESqZR6aOJnKNFwgHyVnYsYGJ5uicY0SfrK9a/2efo8OrvYM
-         +4f0NDazamE66SJiqfMP/5c14bA+SCDwrhOTSCTqNp/BZHrg9sNI7LcwJpzV6yq8Hr90
-         n3hRHtpEQG2L4L8h12c99IJ682I3ddZ52+1cJJ3qOyt/D9ETRpyG9Z6HX6w4kdvFnFdO
-         AYK/ript9xMdN+xzv950u6jST9N1Ouwl+ayKpYbhZmM9iidV8fr+GGr2DkG2PBZdLNYg
-         AP2A==
-X-Gm-Message-State: AOJu0YzS/y6McJIisKfeoPGMdw8XsukB9WABZi6PwS3MUiNh867pXUbk
-	6t2G8mfAWlMOiymtO1p5DK10VLeCK8hiZN5cmUs5uKtV+klt+zU1ZJcmps+a
-X-Gm-Gg: ASbGncu9z0frF/9InaiglIEOKsSZ4zk+1kYLPIu8OtGbSmVaUYbCDToela3pUoYAcGi
-	GhUMpxHYaopEHdkg1gtjkGDSkz9PZOntXGbsvQ0/oEo50cTc/QRFLhU6u1+grMXI5VBcQ0o7XUx
-	uWV5ySyVkl8ZyxZpOY/hoPChNfrajtx2wexYc3sdAt4PLaE7ggCElUpx9nW69VbskHDGvoYVvAZ
-	5G6qg7DQfC6dWTEDI3wHOFgVuYIsovRCnLskfDE/YPE0txeqgpqNPQff0eE54IVbBmg72VYTz9i
-	EBO1eCQ2wErIEg5rb+HtGQzdJ2X+eFc=
-X-Google-Smtp-Source: AGHT+IF8kCmSNkL5FUsiCBKkaMyNGpLt2+R5SEbEjf6cDbUWV2bzHjbratedb+/gPPTlwFa4d/NzKg==
-X-Received: by 2002:a05:600c:3488:b0:434:a711:ace4 with SMTP id 5b1f17b1804b1-438dc3cb049mr192548725e9.17.1738584632614;
-        Mon, 03 Feb 2025 04:10:32 -0800 (PST)
-Received: from localhost.localdomain ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-438dcc2f73asm189591285e9.24.2025.02.03.04.10.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Feb 2025 04:10:32 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Gyorgy Sarvari <skandigraun@gmail.com>
-Subject: [meta-oe][PATCH v2] capnproto: remove binaries from target-build, add bbclass
-Date: Mon,  3 Feb 2025 13:10:23 +0100
-Message-ID: <20250203121023.49178-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.48.1
+        d=1e100.net; s=20230601; t=1738584707; x=1739189507;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=2j1oI8XuWAjnerqBmMdKtQ47DaS9bot1fXwfEcURARc=;
+        b=JnyUGLypP0XQXLQqXA2DPMKzQrgbq4yoGqK7kj41/9TVwKnBd0af+sD47uGCmOcyh7
+         CtwYENraWnEav2puaAhdMnWCwRb2juLwf/7WMhsdVvpkDa/WH6cnZsdPA3ZETsq0mgwg
+         Wv639pmEPM37YLDhK01p2NMOi9D5js8+LYtGv1Fj3BMtlDRBOBsWY17YXCkfcc1Igyqh
+         uZOCrFPFh6YnEAc2xqkcPIlSwS8keZ52e0DNPo/ggfio048wfkSAyREKS1oKJIKqZot2
+         Xf/ccn3QLaZ8HwPiU7RITTqm5Ar7ywkp6YYNaD3Rj1oAaZKZGSeGUCLzqaeOs3iGy2z7
+         DiLg==
+X-Gm-Message-State: AOJu0YzCi3xW4gRW/CZO4er3Atwa2KqTlzVL1HM5GU70OGcn7q0Gt7oR
+	xBiZtUJEykkaHkZchlOmhtQ0sHJLhLBic8fMqrLGQSsi+hWQnqyOKennGhSw
+X-Gm-Gg: ASbGncuphPlNWkukWJl7qiHbGSLyINcT1DjXu4mUwHMtOuuaXrmtfRu0iLTmxy/jeOH
+	H+mGUgniE1ij9XmuMjIRQ79vLSbGuBxo/WG2yNLfqIrKFgzNV58ouLzA0UbIBhwGlQS86rla2DC
+	5+xOKxHtvqkP4RE8LkisvN/Y8tdWfIxsvWuWAxjb4WSwtoXydABXdgMbhYj9MEN9gAzYjvckw/s
+	UNaEB/OD5Ig+uSHaxDHwzjmXaH+nYOEhrBY/Vo1EMZUkvw2VHvxe5xPH7ek3J2pJ81Y0PMmAKpA
+	ure9gYEC6VZmrGsvOvoeUrc=
+X-Google-Smtp-Source: AGHT+IGy6x/75CZw0AEs6BL2iCGMQXlH/uhnd1Cl9knwbvUGdyYP9WyBbLgQNLf09j1rYzcRUeSWdA==
+X-Received: by 2002:a7b:cb41:0:b0:434:ff9d:a370 with SMTP id 5b1f17b1804b1-438e62f98dfmr141404835e9.0.1738584707156;
+        Mon, 03 Feb 2025 04:11:47 -0800 (PST)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38c5c0ec7aasm12516673f8f.5.2025.02.03.04.11.46
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 03 Feb 2025 04:11:46 -0800 (PST)
+Message-ID: <b74c1960-4f13-4758-8a80-22f025577c79@gmail.com>
+Date: Mon, 3 Feb 2025 13:11:46 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH v2] capnproto: remove binaries from
+ target-build, add bbclass
+To: openembedded-devel@lists.openembedded.org
+References: <1820B183AA0ABC96.15786@lists.openembedded.org>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <1820B183AA0ABC96.15786@lists.openembedded.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 03 Feb 2025 12:10:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115238
+ <openembedded-devel@lists.openembedded.org>; Mon, 03 Feb 2025 12:11:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115239
 
-When linking to capnproto from another project, cmake fails to
-find this package with the following error:
+While looking into Ross' feedback about the first version, I realized 
+that my
+sed regex didn't only have superficial problems (namely being an 
+eyesore, and
+likely brittle), but it also only solved a part of the problem - it 
+allowed to
+link to the cross-compiled libs, but code-generation during class-target
+compilation from capnproto definitions was still broken.
 
-| CMake Error at ${RECIPE_SYSROOT}/usr/lib/cmake/CapnProto/CapnProtoTargets.cmake:176 (message):
-|   The imported target "CapnProto::capnp_tool" references the file
-|
-|      "${RECIPE_SYSROOT}/usr/bin/capnp"
-|
-|   but this file does not exist.  Possible reasons include:
+This patch supposed to remediate this too.
 
-To solve this, this change includes the following:
+If you think that having a new class is overcomplicating the issue, I 
+can be easily
+convinced about it (but please leave an alternative suggestion also).
 
-1. Add a patch that removes the files installed (and exported) in
-${bindir} from the target build. The CMake file originally verified
-that these files exist when another recipe tried to use it, however
-the ${RECIPE_SYSROOT} does not contain the binaries in ${bindir},
-so it failed quick in the do_configure step. (This alone is enough
-to link against the cross-compiled libraries of capnproto successfully,
-but code-generation from capnproto definition fails)
+There is 1 known caveat however: if someone would want to install the 
+binaries
+from ${bindir} on the target machine, that won't work after this change. 
+(Can't
+really think of any reasons however, why would one do that - this is not 
+a user-application.)
 
-2. Add a new bbclass for capnproto. To cross-compile an application
-that uses capnproto, the application needs to be linked against the
-cross-compiled version of the libraries, however the native version
-of the binaries need to be used to generate C++ code from the
-capnproto definitions. This class sets the correct CMake arguments, to
-use the capnproto binaries from the native package, instead of looking
-for the non-existent cross-compiled binaries. (These variables can
-be found in ${libdir}/cmake/CapnProto/CapnProtoConfig.cmake file)
+Let me know if there's anything you'd like to change in this patch.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- meta-oe/classes/capnproto.bbclass             |  8 ++++
- ...n-t-check-usr-bin-content-from-cmake.patch | 43 +++++++++++++++++++
- .../capnproto/capnproto_1.0.2.bb              |  3 +-
- 3 files changed, 53 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/classes/capnproto.bbclass
- create mode 100644 meta-oe/recipes-devtools/capnproto/capnproto/0001-Don-t-check-usr-bin-content-from-cmake.patch
-
-diff --git a/meta-oe/classes/capnproto.bbclass b/meta-oe/classes/capnproto.bbclass
-new file mode 100644
-index 000000000..a698f41c9
---- /dev/null
-+++ b/meta-oe/classes/capnproto.bbclass
-@@ -0,0 +1,8 @@
-+# Inherit this class in your recipe to compile against 
-+# Cap'N Proto (capnproto) with CMake
-+
-+DEPENDS:append = " capnproto-native "
-+DEPENDS:append:class-target = " capnproto "
-+
-+EXTRA_OECMAKE:append:class-target = " -DCAPNP_EXECUTABLE=${RECIPE_SYSROOT_NATIVE}${bindir}/capnp \
-+                                      -DCAPNPC_CXX_EXECUTABLE=${RECIPE_SYSROOT_NATIVE}${bindir}/capnpc-c++ "
-diff --git a/meta-oe/recipes-devtools/capnproto/capnproto/0001-Don-t-check-usr-bin-content-from-cmake.patch b/meta-oe/recipes-devtools/capnproto/capnproto/0001-Don-t-check-usr-bin-content-from-cmake.patch
-new file mode 100644
-index 000000000..6447fadcf
---- /dev/null
-+++ b/meta-oe/recipes-devtools/capnproto/capnproto/0001-Don-t-check-usr-bin-content-from-cmake.patch
-@@ -0,0 +1,43 @@
-+From 43573472a62ff68ba6b1180d6551ef536471a99f Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Mon, 3 Feb 2025 11:52:01 +0100
-+Subject: [PATCH] Don't install files in bindir
-+
-+This patch prevents the generated binary executables from being
-+installed into the /usr/bin folder.
-+
-+By default, cmake installs these binaries into the /usr/bin folder,
-+(e.g. binaries used to generate C++ source from the capnproto definition
-+files) however with Yocto, when using the cross-compiled version of this
-+application, the /usr/bin folder is not populated in the sysroot.
-+The generated cmake file however tries to verify that these binaries
-+exist, and since it cannot find them, it fails the build.
-+
-+But even in case these files would exist, they are not usable on the build
-+machine, as these are cross-compiled for the target machine. When another
-+recipe it built against the capnproto cmake package, the application can
-+link against the cross-compiled libraries as expected, but for code
-+generation the capnproto-native package's binaries need to be used.
-+
-+This patch is only applicable on the cross-compiled version of capnproto.
-+
-+Upstream-Status: Inappropriate [oe specific: see above message]
-+
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ c++/src/capnp/CMakeLists.txt | 2 --
-+ 1 file changed, 2 deletions(-)
-+
-+diff --git a/c++/src/capnp/CMakeLists.txt b/c++/src/capnp/CMakeLists.txt
-+index 9980fde6..101a7091 100644
-+--- a/src/capnp/CMakeLists.txt
-++++ b/src/capnp/CMakeLists.txt
-+@@ -210,8 +210,6 @@ if(NOT CAPNP_LITE)
-+   target_link_libraries(capnpc_capnp capnp kj)
-+   set_target_properties(capnpc_capnp PROPERTIES OUTPUT_NAME capnpc-capnp)
-+ 
-+-  install(TARGETS capnp_tool capnpc_cpp capnpc_capnp ${INSTALL_TARGETS_DEFAULT_ARGS})
-+-
-+   if(WIN32)
-+     # On Windows platforms symlinks are not guaranteed to support. Also different version of CMake handle create_symlink in a different way.
-+     # The most portable way in this case just copy the file.
-diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_1.0.2.bb b/meta-oe/recipes-devtools/capnproto/capnproto_1.0.2.bb
-index daeeb975f..6136ff20f 100644
---- a/meta-oe/recipes-devtools/capnproto/capnproto_1.0.2.bb
-+++ b/meta-oe/recipes-devtools/capnproto/capnproto_1.0.2.bb
-@@ -5,7 +5,8 @@ SECTION = "console/tools"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://../LICENSE;md5=a05663ae6cca874123bf667a60dca8c9"
- 
--SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV};protocol=https"
-+SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV};protocol=https \
-+           file://0001-Don-t-check-usr-bin-content-from-cmake.patch"
- SRCREV = "1a0e12c0a3ba1f0dbbad45ddfef555166e0a14fc"
- 
- S = "${WORKDIR}/git/c++"
 
