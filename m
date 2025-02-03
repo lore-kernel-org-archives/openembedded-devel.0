@@ -1,143 +1,205 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1ADBC02192
-	for <webhook@archiver.kernel.org>; Mon,  3 Feb 2025 19:28:42 +0000 (UTC)
-Received: from mail-oa1-f52.google.com (mail-oa1-f52.google.com [209.85.160.52])
- by mx.groups.io with SMTP id smtpd.web10.97272.1738610919236706002
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DB1D3C02192
+	for <webhook@archiver.kernel.org>; Mon,  3 Feb 2025 19:47:12 +0000 (UTC)
+Received: from mail-lj1-f170.google.com (mail-lj1-f170.google.com [209.85.208.170])
+ by mx.groups.io with SMTP id smtpd.web10.97751.1738612022698898516
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Feb 2025 11:28:39 -0800
+ Mon, 03 Feb 2025 11:47:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=nXdkTNp1;
- spf=pass (domain: gmail.com, ip: 209.85.160.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f52.google.com with SMTP id 586e51a60fabf-29fcbf3d709so1488997fac.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Feb 2025 11:28:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FtUN6exI;
+ spf=pass (domain: gmail.com, ip: 209.85.208.170, mailfrom: ticotimo@gmail.com)
+Received: by mail-lj1-f170.google.com with SMTP id 38308e7fff4ca-303548a933aso41409251fa.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Feb 2025 11:47:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738610918; x=1739215718; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=NkPdxbGaL6wtUkQRkayl/gp9N5HMek14w+AT66XKr+o=;
-        b=nXdkTNp16c9z3/oisMH5VvHQe4gSfrD9W3QFqQlmSzNcEgkUBy07C//GF3d6aMPqFK
-         /gVP3v5rEbc+HBBJEz4x0OOXMgyyLzhSBoP06CLSTXLIPh04sXLl1fbD45KynpiOZaBu
-         XPfNu2G3mRSJuGOeKnB2TbNtsBccANe62g3NQ9HAp5CVHpNuEVv9t88IOJqWSXtS4+Ga
-         BQzA23/jMuXxo2fDWKtgOohcv5UxojBYrBe+en3CDYw9NgIbPiAm4cZRHrfLuXCfJZX8
-         5/PCoiOFIwjt0ydHUWMFthCQ+7sLqnFABt3eSZNO9VJBQqq2vYFbMythFWkXogV+Z0Nh
-         syBw==
+        d=gmail.com; s=20230601; t=1738612021; x=1739216821; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=jxrygVvoMDa/a3536xUaB5i9WsaESu5ALlXoQR49Eq4=;
+        b=FtUN6exIM7+SGy9uryFSwnrddFI6O0q7Y5h2qt+d2YfHvle8hpeS7PmUNL2H/iJGgb
+         Ue04UR+dYAiP68DDhq9pE5N9jKXUAFaprQ6WOHgD9Vf6lNdtqSgF+XnoJjHxBjsYvssP
+         tytbj+a1E7qWP2uR8DvT0X3+YUrTW0pSJxWu9TNGKmDNgzr3D9QTtu4d1CAl9UJHYrP9
+         7FTqIkUPdBjcx/rYzLGkYYKE+GjiIMxLg98C2wOD9B7e1qBoRDpj6EH0U6FExvLqw798
+         KY+U8R2gcWH5bu6eGD8GezCmh/dvu/B+KTRAOiFW98aCcT0o4kYP1HmY7sYDsFikRx72
+         LELw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738610918; x=1739215718;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=NkPdxbGaL6wtUkQRkayl/gp9N5HMek14w+AT66XKr+o=;
-        b=UNu5O4o/zf0QXe1DXKHC9ijJN7/a8oQLJ8KVgWG+VFWz+c6yiasgZFCjVKf/N3Uil2
-         krByYSQUtWfOIPXM8v4FPJwGHwGsKkzsjXzAUdaLd1vVftQMIqNHQ+TFlTIH7ZfEBV0v
-         N9Ci+yRqicfW3d+sCsI7ahMFHassta0cCaX6eim2h3oIp2uxSLbrxUj6of5gTukMu91v
-         Ihi6txXQSvteGDX1Z56ow94r1tQSOfS43r3wWyuouUbbv91RSX5focv2T/NcTvkfWdO3
-         rnCMAofd6AHktZ0QnhAcybolaIHgmGU9X0q6x4K/MaFTIQfrbteURZTCGThk0ElLX/Rl
-         N3KQ==
-X-Gm-Message-State: AOJu0YxgdTCdDgYZQWLpJ29KXQYH5QC9txLS0cOcBM/CbnucWPMIrRsI
-	czUpoGWDWrAqkMkgH+3mAi3QvReuN+Ns+b9WT1npZge5XyX+PquSH6ZzsNQpO0hFKboKi8kSC9B
-	3Nmhns9K8C6IZfaYofoohKRZsQbU=
-X-Gm-Gg: ASbGnctCFZSpyeYCpKcXq0+5FjQxxaIxauFioRtizaWJi1cZRv0KJYxKZuzzFXP4Nzi
-	0dXdKPPiswImnvD0LU8jFL0PIM5YlQAZhKjpsMfxE1e9boUx4MqifOsWEr7EKPUQjGCphMkELTE
-	UkabJbbfc6r1Imy6saqxdaMJjD0g==
-X-Google-Smtp-Source: AGHT+IHyPYny+ltVUQ4CRW3kGn3eg40FdT6q02Lg0I+Dww4QNWKNPdKe51QsjNnIKC874kUyXsvZGbhzYTjr43soreA=
-X-Received: by 2002:a05:6870:1592:b0:29e:76d1:db3b with SMTP id
- 586e51a60fabf-2b32efdc0f6mr15333852fac.5.1738610918370; Mon, 03 Feb 2025
- 11:28:38 -0800 (PST)
+        d=1e100.net; s=20230601; t=1738612021; x=1739216821;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=jxrygVvoMDa/a3536xUaB5i9WsaESu5ALlXoQR49Eq4=;
+        b=qMjdcTA+1uVQJJeCq/b9zEor+G0MRjUSgDAGxT69s6xJ9t+fVT/80A9qM+xjU8xWqb
+         pde9tac3CNt4O+3hZhW4oGvVJpNyp335tTlBcnukv+Q1fl8laTdaHonX4o6mUrKsmeua
+         597aqXak4IZnGpX55LOhqG6HiLjrH+bhdKCtPKp6Itk+YRvadmLQVjw5TYn+UxB6f2LV
+         kFgShTakkGbaxDqkLKIAq7860GxjYRqMzg3xp359+lDIHR/+RBpgFej0m5KcetIW9hWj
+         tSBMOV+QKw6itJK3drNW1pJ/6euEvLzthFQHUJexWPAO7rbTFlkMIhYjSCI6Qdwf7q++
+         ocMw==
+X-Gm-Message-State: AOJu0YwjcCNMXjjpLYbC3s0Zl+f6gKpSqmBgpxI6RUFEcIUe1pT4J5n9
+	V+ikW7GQz0ii6uSUdb1NX8YLVOKvtcDawH6xxxpYdG7qV+OzsrcWi2xJwT3VtBDZC/gPx0kXco+
+	rgdxt+Wigz9usKro7ByIHRGoOQ2g=
+X-Gm-Gg: ASbGncuqMCiKXVGJl7peqv4AZxDc14WOwd+ZhWqiUaXKgmwmNvhcmK5/lnr2hJKWeHh
+	mxXtXVvQKqFWUXWrvQOfGuJd0XGmIWMGxT3fRi3HKHFldmEnigmL1dMzUfhxSihsEt+W6gMlTaB
+	BnzEbLm0XUK/5G4GHtQcUympskXPsFJw==
+X-Google-Smtp-Source: AGHT+IHWM9QhmAyDsoaJWmsUwI992lxDYddoslM3fwnA1mH6BgbiaVQruB7cFeDCFf4NiU7I+xHjicAWxYXVrpimA1o=
+X-Received: by 2002:a2e:b889:0:b0:300:3307:389d with SMTP id
+ 38308e7fff4ca-30796856d8bmr77591501fa.19.1738612020350; Mon, 03 Feb 2025
+ 11:47:00 -0800 (PST)
 MIME-Version: 1.0
 References: <20250202213910.284312-1-peter.marko@siemens.com>
- <CAMKF1srD+9NqL9ntuMrGDa3ys_Gn3YnqazO_7KWb8cTnwk1CHQ@mail.gmail.com> <AS1PR10MB5697FF5346CE3E966DD5D32CFDF52@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
-In-Reply-To: <AS1PR10MB5697FF5346CE3E966DD5D32CFDF52@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 3 Feb 2025 11:28:12 -0800
-X-Gm-Features: AWEUYZnA694BBvikKTkknHwBeNFIAuqh3v8NGj5E3W4J2T6E9cE3DsVxtfjho60
-Message-ID: <CAMKF1sopyF-z1Pvhm4dZo2A3-K9Zc_VG5OrU7SN-REcLWBdh5Q@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/8] protobuf: remove unneeded atomic linker flag
-To: "Marko, Peter" <Peter.Marko@siemens.com>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <20250203182210.574300-1-peter.marko@siemens.com> <20250203182210.574300-7-peter.marko@siemens.com>
+In-Reply-To: <20250203182210.574300-7-peter.marko@siemens.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Mon, 3 Feb 2025 11:46:48 -0800
+X-Gm-Features: AWEUYZmqHSg-ekjd2u1TPr0coGVZbzocndWQnbyRWQnbSBthgDwj6mdyhlliT5M
+Message-ID: <CANx9H-Bu6-zUepwWm7jrT8-ZTbbufYPuNhtGbLj8JbmR15H9EQ@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH v2 7/9] python3-protobuf: add MIT to license
+To: peter.marko@siemens.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000e017d4062d4227c5"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 03 Feb 2025 19:28:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115254
+ <openembedded-devel@lists.openembedded.org>; Mon, 03 Feb 2025 19:47:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115255
 
-On Mon, Feb 3, 2025 at 10:14=E2=80=AFAM Marko, Peter <Peter.Marko@siemens.c=
-om> wrote:
->
-> Test build with arm+clang was successful.
-> I hope that helps and remaining archs will be checked on autobuilder.
->
-> Note that build with ptest enabled fails with clang in do_compile_ptest d=
-uring linking with absl, but the same happens without this patch, too.
+--000000000000e017d4062d4227c5
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thanks for build testing, the CI builds are usually with ptest turned
-on, so if it fails with ptest enabled without this patch we should
-have been failing on CI
+On Mon, Feb 3, 2025 at 10:23=E2=80=AFAM Peter Marko via lists.openembedded.=
+org
+<peter.marko=3Dsiemens.com@lists.openembedded.org> wrote:
+
+> From: Peter Marko <peter.marko@siemens.com>
+>
+> utf_range is MIT licensed.
+> Although the LICENSE file is not distributed in python protobuf,
+> this can be read in c++ protobuf recipe where all files are present.
+
+
+Shouldn=E2=80=99t we include a beginline/end line clause for at least one s=
+ource
+file? Otherwise only this commit log explains why MIT is present. We want
+traceability fir our future forgetful selves.
 
 >
-> Peter
 >
-> > -----Original Message-----
-> > From: Khem Raj <raj.khem@gmail.com>
-> > Sent: Monday, February 3, 2025 1:36
-> > To: Marko, Peter (FT D EU SK BFS1) <Peter.Marko@siemens.com>
-> > Cc: openembedded-devel@lists.openembedded.org
-> > Subject: Re: [oe] [meta-oe][PATCH 1/8] protobuf: remove unneeded atomic=
- linker
-> > flag
-> >
-> > On Sun, Feb 2, 2025 at 1:40=E2=80=AFPM Peter Marko via lists.openembedd=
-ed.org
-> > <peter.marko=3Dsiemens.com@lists.openembedded.org> wrote:
-> > >
-> > > From: Peter Marko <peter.marko@siemens.com>
-> > >
-> > > This is handled in protofuf cmake since 3.15:
-> > >
-> > https://github.com/protocolbuffers/protobuf/commit/55ed1d427ccc0d200927=
-74
-> > 6329ac9b811dee77b9
-> > >
-> > > Signed-off-by: Peter Marko <peter.marko@siemens.com>
-> > > ---
-> > >  meta-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb | 6 ------
-> > >  1 file changed, 6 deletions(-)
-> > >
-> > > diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb b/m=
-eta-
-> > oe/recipes-devtools/protobuf/protobuf_4.25.5.bb
-> > > index 89e1071b59..efd70d6474 100644
-> > > --- a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb
-> > > +++ b/meta-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb
-> > > @@ -115,9 +115,3 @@ RDEPENDS:${PN}-ptest =3D "bash
-> > ${@bb.utils.contains('PACKAGECONFIG', 'python', 'py
-> > >  MIPS_INSTRUCTION_SET =3D "mips"
-> > >
-> > >  BBCLASSEXTEND =3D "native nativesdk"
-> > > -
-> > > -LDFLAGS:append:arm =3D " -latomic"
-> > > -LDFLAGS:append:mips =3D " -latomic"
-> > > -LDFLAGS:append:powerpc =3D " -latomic"
-> > > -LDFLAGS:append:mipsel =3D " -latomic"
-> > > -LDFLAGS:append:riscv32 =3D " -latomic"
-> >
-> > They were needed with clang IIRC, does it work without it now ?
-> >
-> > >
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > > Links: You receive all messages sent to this group.
-> > > View/Reply Online (#115220):
-> > https://lists.openembedded.org/g/openembedded-devel/message/115220
-> > > Mute This Topic: https://lists.openembedded.org/mt/110959917/1997914
-> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsu=
-b
-> > [raj.khem@gmail.com]
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > >
+> Signed-off-by: Peter Marko <peter.marko@siemens.com>
+> ---
+>  .../recipes-devtools/python/python3-protobuf_4.25.3.bb        | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-python/recipes-devtools/python/
+> python3-protobuf_4.25.3.bb b/meta-python/recipes-devtools/python/
+> python3-protobuf_4.25.3.bb
+> index b92f91b714..fb95340f7b 100644
+> --- a/meta-python/recipes-devtools/python/python3-protobuf_4.25.3.bb
+> +++ b/meta-python/recipes-devtools/python/python3-protobuf_4.25.3.bb
+> @@ -1,8 +1,8 @@
+>  DESCRIPTION =3D "Protocol Buffers"
+>  HOMEPAGE =3D "https://developers.google.com/protocol-buffers/"
+>  SECTION =3D "devel/python"
+> -
+> -LICENSE =3D "BSD-3-Clause"
+> +# MIT license is from utf8_range
+> +LICENSE =3D "BSD-3-Clause & MIT"
+>  LIC_FILES_CHKSUM =3D
+> "file://PKG-INFO;beginline=3D8;endline=3D8;md5=3D53dbfa56f61b90215a9f8f0d=
+527c043d"
+>
+>  inherit pypi setuptools3
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#115251):
+> https://lists.openembedded.org/g/openembedded-devel/message/115251
+> Mute This Topic: https://lists.openembedded.org/mt/110976773/924729
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> ticotimo@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--000000000000e017d4062d4227c5
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote gmail_quote_container"><d=
+iv dir=3D"ltr" class=3D"gmail_attr">On Mon, Feb 3, 2025 at 10:23=E2=80=AFAM=
+ Peter Marko via <a href=3D"http://lists.openembedded.org">lists.openembedd=
+ed.org</a> &lt;peter.marko=3D<a href=3D"mailto:siemens.com@lists.openembedd=
+ed.org">siemens.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockqu=
+ote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-wid=
+th:1px;border-left-style:solid;padding-left:1ex;border-left-color:rgb(204,2=
+04,204)">From: Peter Marko &lt;<a href=3D"mailto:peter.marko@siemens.com" t=
+arget=3D"_blank">peter.marko@siemens.com</a>&gt;<br>
+<br>
+utf_range is MIT licensed.<br>
+Although the LICENSE file is not distributed in python protobuf,<br>
+this can be read in c++ protobuf recipe where all files are present.</block=
+quote><div dir=3D"auto"><br></div><div dir=3D"auto">Shouldn=E2=80=99t we in=
+clude a beginline/end line clause for at least one source file? Otherwise o=
+nly this commit log explains why MIT is present. We want traceability fir o=
+ur future forgetful selves.</div><blockquote class=3D"gmail_quote" style=3D=
+"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;pad=
+ding-left:1ex;border-left-color:rgb(204,204,204)" dir=3D"auto"><br>
+<br>
+Signed-off-by: Peter Marko &lt;<a href=3D"mailto:peter.marko@siemens.com" t=
+arget=3D"_blank">peter.marko@siemens.com</a>&gt;<br>
+---<br>
+=C2=A0.../recipes-devtools/python/<a href=3D"http://python3-protobuf_4.25.3=
+.bb" rel=3D"noreferrer" target=3D"_blank">python3-protobuf_4.25.3.bb</a>=C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 | 4 ++--<br>
+=C2=A01 file changed, 2 insertions(+), 2 deletions(-)<br>
+<br>
+diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
+protobuf_4.25.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-protobuf_4=
+.25.3.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python=
+3-protobuf_4.25.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-protobuf=
+_4.25.3.bb</a><br>
+index b92f91b714..fb95340f7b 100644<br>
+--- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-protobu=
+f_4.25.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-protobuf_4.25.3.b=
+b</a><br>
++++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-protobu=
+f_4.25.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-protobuf_4.25.3.b=
+b</a><br>
+@@ -1,8 +1,8 @@<br>
+=C2=A0DESCRIPTION =3D &quot;Protocol Buffers&quot;<br>
+=C2=A0HOMEPAGE =3D &quot;<a href=3D"https://developers.google.com/protocol-=
+buffers/" rel=3D"noreferrer" target=3D"_blank">https://developers.google.co=
+m/protocol-buffers/</a>&quot;<br>
+=C2=A0SECTION =3D &quot;devel/python&quot;<br>
+-<br>
+-LICENSE =3D &quot;BSD-3-Clause&quot;<br>
++# MIT license is from utf8_range<br>
++LICENSE =3D &quot;BSD-3-Clause &amp; MIT&quot;<br>
+=C2=A0LIC_FILES_CHKSUM =3D &quot;file://PKG-INFO;beginline=3D8;endline=3D8;=
+md5=3D53dbfa56f61b90215a9f8f0d527c043d&quot;<br>
+<br>
+=C2=A0inherit pypi setuptools3<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#115251): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/115251" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/115251</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/110976773/924=
+729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/110976773/924729</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
+et=3D"_blank">ticotimo@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--000000000000e017d4062d4227c5--
 
