@@ -1,121 +1,88 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 91F36C02195
-	for <webhook@archiver.kernel.org>; Mon,  3 Feb 2025 07:05:17 +0000 (UTC)
-Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com [209.85.210.45])
- by mx.groups.io with SMTP id smtpd.web10.82606.1738566308954705004
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C03B4C02195
+	for <webhook@archiver.kernel.org>; Mon,  3 Feb 2025 07:48:27 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.web10.83016.1738568904563156465
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 02 Feb 2025 23:05:09 -0800
+ Sun, 02 Feb 2025 23:48:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=iHl7lmSi;
- spf=pass (domain: gmail.com, ip: 209.85.210.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f45.google.com with SMTP id 46e09a7af769-71e15717a2dso2282153a34.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Feb 2025 23:05:08 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=MTjar4fM;
+ spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-38637614567so1736289f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Feb 2025 23:48:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738566308; x=1739171108; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=KjSYiB3J8Yo6kLp0+SaLCV6LEp4T1LwDVzhr0ygKcWk=;
-        b=iHl7lmSifMv2kOG/RixCW6pBuRAZTqP6qAYgngXpFM/OmxtOzaHt9nQFcw27UhzSSB
-         UmQRp/i//tDj1YDRigpCyYJZb38Wi/DwSXAMvxvJppkW0hAIFF49l9OMRpldVFLthX6n
-         nAjYkKApocWiXLwV7EJqoZisd0YP6DlMyHeHOTvqas88hE3ATs0j0eUMJDo5vyznwsrq
-         yvpO8KHcqVg6ft6o3YrDUMgZV/xUD2wd0azmUuhfn6C1Y7e19pkK1c+HpTmUyZcFGYJR
-         zbLq259GXI8VOhA0GCvV+nYt+xBikFiyOWO7zTvBmwfTnSxOVf6tErYjfzoMgPYHwtCt
-         P8kw==
+        d=gmail.com; s=20230601; t=1738568903; x=1739173703; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=TJDlbYV5iPpWMlM2c00yV6+vd818bZpgA/FAxbnlhGY=;
+        b=MTjar4fMbU950Q0agzNHVXsaGby0Z/qTORowd8FBp//VlKHQmrn/I0Gp01HyZ7Wv17
+         psJle4x4BiPuv7m5NrpfCULUra6SOcvrB5vzmFaGfB+H7BuPANpdoQacpgV4OudiRuoj
+         KdQnatnSDFsA1K5NNmHdp1V2Vwq6MFD/vn0wt/qkufzTJ7V2aFp5U2M6qB7R/e1yz+6U
+         HHn3kqfACijyawc7X9x1Xo3v/QCmgwLdyHM1pU1fePoC5c5mNbfXwc7eWNkfwnEV2dlb
+         iWKKkclybaUquuTjJSB+OyvXM9hJsEkWHQHYpGDSDfNRjfBaQ5QKUMyfYfoqfUxIC8iL
+         HokQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738566308; x=1739171108;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=KjSYiB3J8Yo6kLp0+SaLCV6LEp4T1LwDVzhr0ygKcWk=;
-        b=q9a+Q/ASFbOoU9BxqKtoUGKb8tFbbCsRwMFvXFYdK25z5QbIb0lcrS+xgJY+e/MkX2
-         eCnNbKHitOlxtB3+tM1c1vt/hVDoPuQvjesOkVHJRmyVM0DMiOuoWL2CqbB++ZzDnJge
-         i7AUMGEJKdSzFM+HSZs/n11AUIyHQbZSK79kZ7YiB8vE5v3dGSQFaz60JDI03vLPHbDa
-         yzT0lQGiTAkflqdpI7a9eZR/jUJlMAb4dyarOLRgkl6rbPoYK5JXO0MFkt3O5RzBTWiu
-         MCHnUUvWYjpGXbdjrX+njL3D22RJcfsTur0RgJHCM3LHE2jkWtf5iz4Ofv0fEU9XNn9V
-         QGuQ==
-X-Gm-Message-State: AOJu0YwTUmPsAaGQTrlubTr+zGYvjIXNHoXiTAkh8eC6wHc9Qc5TTpEA
-	G3o5UqCk1ObFyco04WFpLvYXsagBIRp7N3BCxgwh/Yb7tPe2u0+B6oKlodUsxt/IcxemXGm9Hm6
-	sgGIZat/hH9izj0QMO6NhxyqCAH8=
-X-Gm-Gg: ASbGncsymieh2npcjJCYSLgoAyFhVDjW8HNrX5jxDsGN/G65Bux3f3fSIG93z4e3wQO
-	QOu4/RNwxbHYIh60K/Z8YhVXkHMBJb+qvPyfDPJTj0AMqgG8xUH1psl5QkZdVwfQQcNknoc49
-X-Google-Smtp-Source: AGHT+IGabgRMZHLO8DsIDkaLQW1qwKsHLDub/FYan/4PqdU++Djrby0TRt8OTgMvdTLDQcsXD7nUBNbhNaYh5Ckwmy0=
-X-Received: by 2002:a05:6830:6316:b0:71d:f361:5cfb with SMTP id
- 46e09a7af769-7265672f5f7mr14111750a34.5.1738566308088; Sun, 02 Feb 2025
- 23:05:08 -0800 (PST)
+        d=1e100.net; s=20230601; t=1738568903; x=1739173703;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=TJDlbYV5iPpWMlM2c00yV6+vd818bZpgA/FAxbnlhGY=;
+        b=BqyGTE/lwsUxthgOc7BSrXiURxNBgV4p/6mEQCkwzZYgLlUuSpeMmF+T1NmCVrjyQU
+         riYsiuon59cRZ7htv9esaYUKU5sOt3duSWjJ7dvGW+05DtN/wNhTBddCzifGynWr9+MY
+         Qi8UkydDBmb0KzYso1DTmttLuWMLEX9Er9t0NhJjYOS9Cf8aDv747eHvQLYFmBEdpQlA
+         5OuXpjLbp3QzsJxIdTaVU3D/RSEXaLvQ9/zSGZ3sfs6HTCqHDlVPjcr55v2qmmY4Nc8v
+         2vyiP1/AaXEmYVPBdbHRWbYmqJQ5Iqbl4W7Q6q01MDHItA32omS4o01aoZpQkIaItPrI
+         vrGA==
+X-Gm-Message-State: AOJu0Yzx/LWbN5vVIgfzeKOerPDf9W5x70OzbJMIHNU50qXghpT8UuGm
+	LttVLJ8CKiwWpHJFsigbb07/GSCU0WsbaqUtom0D+DXzGBSEqcYp
+X-Gm-Gg: ASbGncv3WLZIf3A/uaMEW3vzWGyTWBLxv8RNGXLwXxJzniUMZbyjKR2GAjElPNwDHns
+	r36ISiU1NaKqxxbxv96WkIDc7Z0qwPEQTjdhIVLhXfpaijQPyDhnEEwENpyqq6mVREdCvQhFfsH
+	TT5f0/B1mo9EZ45CxYnCtPFubLGephKbZdem6I8Q8vWKel2nWMa8NOliwS0ke6Jn/qZjZmwr6xV
+	mALYXc+Crv3jQWMtq/IURHmRsOjF06lbeJVZdsajvOZGLqPqC5IEAJVa8omemIWvAcj6ExWp2x6
+	C7+DqeR3Brm4txwYUIsg8NE=
+X-Google-Smtp-Source: AGHT+IF/Cn+91s3mCyAKbYRJRghS7GOjSzNXfQZlYukOIbus4N3CdtgfS/iPZfJi1sp/nEuY7Qmj9A==
+X-Received: by 2002:a5d:5987:0:b0:38a:5122:5a07 with SMTP id ffacd0b85a97d-38c5194a22emr17256045f8f.15.1738568902629;
+        Sun, 02 Feb 2025 23:48:22 -0800 (PST)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38c5c1b61f1sm12182949f8f.68.2025.02.02.23.48.20
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 02 Feb 2025 23:48:21 -0800 (PST)
+Message-ID: <3defd464-87cd-40ad-bace-bdf12b96731a@gmail.com>
+Date: Mon, 3 Feb 2025 08:48:20 +0100
 MIME-Version: 1.0
-References: <20250201170240.2880-1-alex.kiernan@gmail.com>
-In-Reply-To: <20250201170240.2880-1-alex.kiernan@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 2 Feb 2025 23:04:42 -0800
-X-Gm-Features: AWEUYZn7losEyCKm8XJGkTR8-WiGwNK7gYlbj5yd6XbQBnOfGD72SOSJu2KPFdU
-Message-ID: <CAMKF1sqj9fCQr8rwXHDi0CSp-+tqGW+6GWPzuRu_hmgBsqVwOg@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH 1/3] mdns: Upgrade 2559.40.32 -> 2559.60.39.0.1
-To: alex.kiernan@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH] capnproto: remove binary checking from
+ target cmake file
+To: Ross Burton <Ross.Burton@arm.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>
+References: <20250202190608.1521989-1-skandigraun@gmail.com>
+ <D0A3556C-EE0D-409C-9DD1-229006AEA692@arm.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <D0A3556C-EE0D-409C-9DD1-229006AEA692@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 03 Feb 2025 07:05:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115234
+ <openembedded-devel@lists.openembedded.org>; Mon, 03 Feb 2025 07:48:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115235
 
-I am seeing
-
-NOTE: Multiple providers are available for runtime libnss-mdns
-(libnss-mdns, mdns)
-Consider defining a PREFERRED_RPROVIDER entry to match libnss-mdns
-
-Does this need to apply along with relevant patches you sent to oe-core ml =
-?
-
-On Sat, Feb 1, 2025 at 9:03=E2=80=AFAM Alex Kiernan via lists.openembedded.=
-org
-<alex.kiernan=3Dgmail.com@lists.openembedded.org> wrote:
+On 02.02.25 21:33, Ross Burton wrote:
+> On 2 Feb 2025, at 20:06, Gyorgy Sarvari via lists.openembedded.org <skandigraun=gmail.com@lists.openembedded.org> wrote:
+>> +do_install:append:class-target() {
+>> +  # delete lines checking files in bindir, e.g. this:
+>> +  # list(APPEND _cmake_import_check_files_for_CapnProto::capnp_tool "${_IMPORT_PREFIX}/bin/capnp" )
+>> +  sed -i "/.*_cmake_import_check_files_for_CapnProto.*bin\/.*/d" ${D}${libdir}/cmake/CapnProto/CapnProtoTargets-noconfig.cmake
+>> +}
+> A sed like this is incredibly fragile and will silently stop working if the cmake files changes. I recommend using a patch instead, as they fail fast instead of silently.
 >
-> Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-> ---
->  .../mdns/{mdns_2559.40.32.bb =3D> mdns_2559.60.39.0.1.bb}         | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-networking/recipes-protocols/mdns/{mdns_2559.40.32.bb =3D> m=
-dns_2559.60.39.0.1.bb} (99%)
+> Ross
 >
-> diff --git a/meta-networking/recipes-protocols/mdns/mdns_2559.40.32.bb b/=
-meta-networking/recipes-protocols/mdns/mdns_2559.60.39.0.1.bb
-> similarity index 99%
-> rename from meta-networking/recipes-protocols/mdns/mdns_2559.40.32.bb
-> rename to meta-networking/recipes-protocols/mdns/mdns_2559.60.39.0.1.bb
-> index 9cc6708d18c5..6fea434de81a 100644
-> --- a/meta-networking/recipes-protocols/mdns/mdns_2559.40.32.bb
-> +++ b/meta-networking/recipes-protocols/mdns/mdns_2559.60.39.0.1.bb
-> @@ -28,7 +28,7 @@ SRC_URI =3D "git://github.com/apple-oss-distributions/m=
-DNSResponder;protocol=3Dhttps
->             file://0004-Add-definition-for-MAX.patch \
->             "
->  BRANCH =3D "rel/mDNSResponder-2559"
-> -SRCREV =3D "0b8a5dbcefd6cc72846385aebfe4f6111f2814cb"
-> +SRCREV =3D "e8a63bd04dda3f83a80f1dbc6db03e7806d87c11"
->
->  # We install a stub Makefile in the top directory so that the various ch=
-ecks
->  # in base.bbclass pass their tests for a Makefile, this ensures (that am=
-ongst
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#115213): https://lists.openembedded.org/g/openembedde=
-d-devel/message/115213
-> Mute This Topic: https://lists.openembedded.org/mt/110937760/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Looking into it...
 
