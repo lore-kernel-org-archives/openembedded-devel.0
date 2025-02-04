@@ -1,154 +1,134 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ts@ferncast.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C1695C02194
-	for <webhook@archiver.kernel.org>; Tue,  4 Feb 2025 15:55:08 +0000 (UTC)
-Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
- by mx.groups.io with SMTP id smtpd.web11.119503.1738684505192837626
- for <Openembedded-devel@lists.openembedded.org>;
- Tue, 04 Feb 2025 07:55:05 -0800
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3E03C02193
+	for <webhook@archiver.kernel.org>; Tue,  4 Feb 2025 16:25:28 +0000 (UTC)
+Received: from smtprelay08.ispgateway.de (smtprelay08.ispgateway.de [134.119.228.107])
+ by mx.groups.io with SMTP id smtpd.web10.120751.1738686327580649080
+ for <openembedded-devel@lists.openembedded.org>;
+ Tue, 04 Feb 2025 08:25:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KBAEw3dX;
- spf=pass (domain: gmail.com, ip: 209.85.160.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-2b7cd4d784dso273165fac.3
-        for <Openembedded-devel@lists.openembedded.org>; Tue, 04 Feb 2025 07:55:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738684504; x=1739289304; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=USUMeHtVEmVNZOT+7UsjG91TOEj2jBfWIUhRdvOK1bM=;
-        b=KBAEw3dX0TBYqAkoyalm2qQTFSybNaqxsqFvV3muYAE68/iwTCHeabG0hZGd1nmu+G
-         KpJOBFdfPN+kKpjACLEjm7y9FLb56ldJl8JZT8AVakfk0mfoeKQRA2o9iOXsfs0NUkQj
-         uwYdkzIedvRm2/ftO1sO6zTefG5NTJbGPtSlf7e/mfejpEhTNNWDHpnhfJJL8yDOUYjZ
-         P5BOI2jWZB3zoGqfvKKRm6RJ3WBNSVq41SZpLmUcVIUs0rh364wKoNvTeBggupf3X7/g
-         gm3v2v8TKVb2Iw7Z7001/34TgEVLvcre3SAbRRlymVEWbZXG2UNvPfFF3HOSaDJ9pGIH
-         kxgw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738684504; x=1739289304;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=USUMeHtVEmVNZOT+7UsjG91TOEj2jBfWIUhRdvOK1bM=;
-        b=I1QZVDI6Ryoi3YhvCvJ+EBES/qsek6+F5KoZLavyzg/hbQVx+YcXdUG3BST7I+ovJI
-         pevMXvKV0Wr4xr86BQs2rXfGpu5cp/7iu95UK4aoG1w9+2RlvltqTz0IZDMj+qAQIfDn
-         ndp44wRdsAyh3oiDjWOZaQBxdGiOoaWH66GmpDUQSiMq9AT+btIrsGxpvpzT08MlPdFe
-         5Ecdt2Uv0XoPIQu5HV1XM/whIpMNnsogTPUazaq2lFEMedFAa1lZM8ZwEkvuv3NaoQqA
-         LDi5oGvZG7hS/N70WwuxVQIui6hJAfwkndQUTTqzPivwd2wgKwzzMOhhbxmj+nRpYWxq
-         C/XA==
-X-Forwarded-Encrypted: i=1; AJvYcCXtV761Ss1V87pD2VWIMKbcK3jS8EhmZoWPe8rsR53VJfChvvw3zeba1nJ8mHTLOkj65dp6yYGovW309JkZ3OGeQzY=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yw2WrouKwi7IdQM8klEAuE+QOyrx5J20yPJqa6pgVhn+3pG7b5Z
-	vLIFfTvBvPYOgQFj+EkmYVwwbOtruGZrw1/8sgpdt1yJhnmQXtxvAOrG3QF74gehRZL1aJBz8dx
-	rZXQ8XCDNKh5pm9Y8jLQcCQD9Q64=
-X-Gm-Gg: ASbGncvuPRENSjBOxfmQu3wNYsC70a5dy5f8sn2JrxWmYhSn2OGo1mtcPYdKhlw7T79
-	fINv2+wv+uvWw751L97N0bkGGsFpx//npTT5rDnzonUdFsfuzm961aOZuyHXc/wOAPbd4jBlhRw
-	XYxUkZUm1bLwBBUfrENr8JUZo+McZowQ==
-X-Google-Smtp-Source: AGHT+IEtvee5jlVrpAmg7WPEIUnvTdLXjC+UhNlJAbgNekzW2NRGMaHMhLPq5EsJQ7wmbOma/UD0LlZFKPAllSa9sGM=
-X-Received: by 2002:a05:6870:414b:b0:29e:6f32:6da1 with SMTP id
- 586e51a60fabf-2b32f3c333emr17561030fac.31.1738684504329; Tue, 04 Feb 2025
- 07:55:04 -0800 (PST)
+ dkim=none (message not signed); spf=pass (domain: ferncast.de, ip: 134.119.228.107, mailfrom: ts@ferncast.de)
+Received: from [78.35.226.16] (helo=ferncast-thomas.fritz.box)
+	by smtprelay08.ispgateway.de with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.98)
+	(envelope-from <ts@ferncast.de>)
+	id 1tfLjp-000000004Gt-14yZ;
+	Tue, 04 Feb 2025 17:25:25 +0100
+From: Thomas Schlien <ts@ferncast.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Thomas Schlien <ts@ferncast.de>
+Subject: [PATCH] python3-gevent: upgrade 24.2.1 -> 24.11.1
+Date: Tue,  4 Feb 2025 17:24:07 +0100
+Message-ID: <20250204162406.1577665-2-ts@ferncast.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <CAMKF1soU+KeFrAxhanq=ysnHkg5v8ZBCGY8i6AenE52dD8jeaw@mail.gmail.com>
- <CAMRc=Mdn436ofF=LfsOxqU_rDsLHjryPZWPNXcSzeuW8AOfN6w@mail.gmail.com>
-In-Reply-To: <CAMRc=Mdn436ofF=LfsOxqU_rDsLHjryPZWPNXcSzeuW8AOfN6w@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 4 Feb 2025 07:54:53 -0800
-X-Gm-Features: AWEUYZlvcSs4c_XLQnolrizT3Tm9n0jBwHiP7HXTbMcpLFZO9gMR6rqbvygf_zc
-Message-ID: <CAMKF1soCXuW4x2P4R1Z_vyqkGSXQn=yQJPgVoqWJxyo=ogW=2Q@mail.gmail.com>
-Subject: Re: [oe] python3-gpiod ptest failures
-To: Bartosz Golaszewski <brgl@bgdev.pl>
-Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>, 
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="00000000000041d59a062d5308c9"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Df-Sender: dHNAZmVybmNhc3QuZGU=
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Feb 2025 15:55:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115273
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Feb 2025 16:25:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115274
 
---00000000000041d59a062d5308c9
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Changelog:
+=========
+24.11.1 (2024-11-11)
+Bugfixes
+- Remove some legacy code that supported Python 2 for compatibility with the
+  upcoming releases of Cython 3.1.
+- Also, the PeriodicMonitorThreadStartedEvent now properly implements the
+  IPeriodicMonitorThreadStartedEvent interface. The EventLoopBlocked event
+  includes the hub which was blocked, and it is notified before the report
+  is printed so that event listeners can modify the report. See issue #2076.
 
-On Tue, Feb 4, 2025 at 12:49=E2=80=AFAM Bartosz Golaszewski <brgl@bgdev.pl>=
- wrote:
+24.10.3 (2024-10-18)
+Bugfixes
+- Fix clearing stack frames on Python 3.13. This is invoked when you fork
+  after having used the thread pool. See issue #2067.
+- Distribute manylinux2014 wheels for x86_64. See issue #2068.
+- Stop switching to the hub in the after fork hook in a child process. This
+  could lead to strange behaviour, and is different than what all other
+  versions of Python do.
 
-> On Tue, Feb 4, 2025 at 5:36=E2=80=AFAM Khem Raj via lists.openembedded.or=
-g
-> <raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
-> >
-> > Hi Bartosz
-> >
-> > I have been observing ptest failing on qemux86-64 lately. Here is log
-> output
-> >
-> > https://0x0.st/8K2Y.out
-> >
-> > enable ptest in distro features and then for MACHINE=3Dqemux86-64
-> > bitbake meta-python-image-ptest-python3-gpiod
-> >
-> > will show the problem.
-> >
-> > Do you have some insights into this?
-> >
->
-> Hi Khem!
->
-> I just sent out two fixes (for this and C++ bindings which also fail).
-> It's a correct fix in the kernel for the gpio-sim module that
-> uncovered bugs in libgpiod.
->
-> The patches will be part of the next libgpiod release.
->
+24.10.2 (2024-10-11)
+Bugfixes
+- Workaround a Cython bug compiling on GCC14. See issue #2049.
 
-Thanks for quick turnaround
+24.10.1 (2024-10-09)
+Features
+- Update the bundled c-ares to 1.33.1.
+- Add support for Python 3.13.
+  - The functions and classes in gevent.subprocess no longer accept
+    stdout=STDOUT and raise a ValueError.
+  Several additions and changes to the queue module, including:
+  -  Queue.shutdown is available on all versions of Python.
+  -  LifoQueue is now a joinable queue.
+- gevent.monkey changed from a module to a package. The public API remains
+  the same.
+  For this release, private APIs (undocumented, marked internal, or
+  beginning with an underscore) are also preserved. However, these may be
+  changed or removed at any time in the future. If you are using one of
+  these APIs and cannot replace it, please contact the gevent team.
 
->
-> Bart
->
+Bugfixes
+- For platforms that don’t have socketpair, upgrade our fallback code to
+  avoid a security issue. See issue #2048.
 
---00000000000041d59a062d5308c9
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Deprecations and Removals
+- Remove support for Python 3.8, which has reached the end of its support
+  lifecycle. See issue #remove_py38.
 
-<div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" =
-class=3D"gmail_attr">On Tue, Feb 4, 2025 at 12:49=E2=80=AFAM Bartosz Golasz=
-ewski &lt;<a href=3D"mailto:brgl@bgdev.pl">brgl@bgdev.pl</a>&gt; wrote:<br>=
-</div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-l=
-eft:1px #ccc solid;padding-left:1ex">On Tue, Feb 4, 2025 at 5:36=E2=80=AFAM=
- Khem Raj via <a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" =
-target=3D"_blank">lists.openembedded.org</a><br>
-&lt;raj.khem=3D<a href=3D"mailto:gmail.com@lists.openembedded.org" target=
-=3D"_blank">gmail.com@lists.openembedded.org</a>&gt; wrote:<br>
-&gt;<br>
-&gt; Hi Bartosz<br>
-&gt;<br>
-&gt; I have been observing ptest failing on qemux86-64 lately. Here is log =
-output<br>
-&gt;<br>
-&gt; <a href=3D"https://0x0.st/8K2Y.out" rel=3D"noreferrer" target=3D"_blan=
-k">https://0x0.st/8K2Y.out</a><br>
-&gt;<br>
-&gt; enable ptest in distro features and then for MACHINE=3Dqemux86-64<br>
-&gt; bitbake meta-python-image-ptest-python3-gpiod<br>
-&gt;<br>
-&gt; will show the problem.<br>
-&gt;<br>
-&gt; Do you have some insights into this?<br>
-&gt;<br>
-<br>
-Hi Khem!<br>
-<br>
-I just sent out two fixes (for this and C++ bindings which also fail).<br>
-It&#39;s a correct fix in the kernel for the gpio-sim module that<br>
-uncovered bugs in libgpiod.<br>
-<br>
-The patches will be part of the next libgpiod release.<br>
-</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Thanks for quick=
- turnaround=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0 =
-0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><br>
-Bart<br>
-</blockquote></div></div>
+Signed-off-by: Thomas Schlien <ts@ferncast.de>
+---
+ .../python/python3-gevent/not-final.patch        | 16 ----------------
+ ...event_24.2.1.bb => python3-gevent_24.11.1.bb} |  5 ++---
+ 2 files changed, 2 insertions(+), 19 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-gevent/not-final.patch
+ rename meta-python/recipes-devtools/python/{python3-gevent_24.2.1.bb => python3-gevent_24.11.1.bb} (92%)
 
---00000000000041d59a062d5308c9--
+diff --git a/meta-python/recipes-devtools/python/python3-gevent/not-final.patch b/meta-python/recipes-devtools/python/python3-gevent/not-final.patch
+deleted file mode 100644
+index 444a195da4..0000000000
+--- a/meta-python/recipes-devtools/python/python3-gevent/not-final.patch
++++ /dev/null
+@@ -1,16 +0,0 @@
+-gevent fails to build with Cython 3.0.10.  As per
+-https://github.com/gevent/gevent/issues/2031, removing the
+-cython.final decorator works around this.
+-
+-Upstream-Status: Pending
+-Signed-off-by: Ross Burton <ross.burton@arm.com>
+-
+---- a/src/gevent/_gevent_cqueue.pxd
+-+++ b/src/gevent/_gevent_cqueue.pxd
+-@@ -75,7 +75,6 @@ cdef class ItemWaiter(Waiter):
+-     cdef readonly Queue queue
+- 
+- 
+--@cython.final
+- cdef class UnboundQueue(Queue):
+-     pass
+diff --git a/meta-python/recipes-devtools/python/python3-gevent_24.2.1.bb b/meta-python/recipes-devtools/python/python3-gevent_24.11.1.bb
+similarity index 92%
+rename from meta-python/recipes-devtools/python/python3-gevent_24.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-gevent_24.11.1.bb
+index 9f96b00953..1a96892fb5 100644
+--- a/meta-python/recipes-devtools/python/python3-gevent_24.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-gevent_24.11.1.bb
+@@ -13,10 +13,9 @@ RDEPENDS:${PN} = "python3-greenlet \
+ 		  python3-zopeinterface \
+ 		 "
+ 
+-SRC_URI += "file://0001-_setuputils.py-Do-not-add-sys_inc_dir.patch \
+-	        file://not-final.patch"
++SRC_URI += "file://0001-_setuputils.py-Do-not-add-sys_inc_dir.patch"
+ 
+-SRC_URI[sha256sum] = "432fc76f680acf7cf188c2ee0f5d3ab73b63c1f03114c7cd8a34cebbe5aa2056"
++SRC_URI[sha256sum] = "8bd1419114e9e4a3ed33a5bad766afff9a3cf765cb440a582a1b3a9bc80c1aca"
+ 
+ inherit pypi python_setuptools_build_meta cython
+ 
 
