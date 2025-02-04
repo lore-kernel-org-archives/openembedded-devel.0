@@ -1,207 +1,147 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 49469C02197
-	for <webhook@archiver.kernel.org>; Tue,  4 Feb 2025 07:29:26 +0000 (UTC)
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.web10.111039.1738654157046123528
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9559DC0218F
+	for <webhook@archiver.kernel.org>; Tue,  4 Feb 2025 08:47:56 +0000 (UTC)
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+ by mx.groups.io with SMTP id smtpd.web11.111550.1738658870302085003
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Feb 2025 23:29:17 -0800
+ Tue, 04 Feb 2025 00:47:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=BbY9+A0P;
- spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-21c2f1b610dso123056555ad.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Feb 2025 23:29:17 -0800 (PST)
+ dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=XFsJusZR;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.54, mailfrom: brgl@bgdev.pl)
+Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-385dece873cso2461336f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Feb 2025 00:47:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738654156; x=1739258956; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=1BFCXEtgIaSPe0FEOw4jzT1lUUWQb+LKuTkbMIOjbKg=;
-        b=BbY9+A0PDOlToNqWyDJvk3nKM29vEX0/UuH+9OE+32LZBQXg+C0FPeANCRc8rwPUGO
-         2ERLiNjZH9foO5fd7iN6BtI47CzblcSqt2Jh2wx86OfUjz2GEDvq5YoNShqglq3sN2M5
-         fUzuzlyvXKRint6HHxYrOhe5WRxQtFEk0SHhNTsDisBNY699mCLpnrY1piJtcxA2Q5mN
-         z/cLK+dP9KET+iVeTOXfJIyBcNvM9+dB0UvPCNu8myxBaaJZjUy2ysA7zOih1r0W8nWu
-         ZR7TarrfPFT1gjTn2zoxq/oP+VMnLyWL5mQPiqKVSFo7+EVcn1PVX/vTERLSymWo5nkY
-         XDrg==
+        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1738658868; x=1739263668; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=eUvNDuK2KeGICqfgaStTgyWwXNRLoLy7XA9E2FucFQ4=;
+        b=XFsJusZRjTrouNCT2J5aSJI4IWXHokklhn9X4i/ME8+y/POcd/Ak1vZ7MeGLaKdpRd
+         PGDZNTj3+7UCaFQpkqUv28vAYOQLV8PKBSIluiGqoWO2moSrCw45vv3snZ/3Tvrwf5qR
+         fwyOjirSVsGCfatrQe7Io0XmRMv+l+JIUHVw+E1DfcOWrMq4SaXWOrKFoepNK65cfxD+
+         PlR+AqcJyLGQPzf0zQQ+M7RwnCLQ5a3G+HgTkg89pFuIlwrFIl38FCWj+FZTDqkw4j7L
+         ZLOVkLL/MKHS0p/TiafK7a+B/adYSMFUkKBgJohO3XuBVHixynApy4gCEh+lMCtktHDB
+         RTJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738654156; x=1739258956;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=1BFCXEtgIaSPe0FEOw4jzT1lUUWQb+LKuTkbMIOjbKg=;
-        b=TRLeGBKdLcwXZhmfC3sEtcyea18/LkFbDO6Cvekk2lZBSjEWZkkG4OL/f+sUGHMt+C
-         KnfXJESxEV9W6CfA4tmJOd0ZOLbP2ZEDb2GmxYpjN2MqFQPZt7fv+RPsLfKUtidUXNU0
-         +hoKXsFhj0EpXTkcGCT0lTjTANaV58+V7tls48q14g0yINPtcbJuZ8xq1z1pujZOehPV
-         qkiqNdsTd8WXfjraHjSHwjLIga9RPwRRGo+E3akexnzgpmBOhbl8W5o2br+R8h2blU4U
-         ARqiM1xGWxUqi3uFsefumIGWq5Yfc6+/66JmLZTrKWkHcqKZYvUdWRRKznf1zs5tcVfd
-         yIcg==
-X-Gm-Message-State: AOJu0YyoD24fJR40XLEPJF5oDpI9gt2L1h97pKaA1B5JW3Nl9mCP7Nlu
-	iFAjsgy2/Oxo6vnP5rawy5XjHUu+3ZoTpWUBrJU/du9kMIlnVYio0aS0+96B3FiE4p9gZUlSeRY
-	WkTbYn4UefOJinV8Az7cl2q4KHapiwnTh
-X-Gm-Gg: ASbGncurc+G3m4WOi0SZPUy9UC60MIGXo+lmPdeJaZv0erF24x+bS4sx/kqGIvGQSvq
-	dP8KEefmbU6SKSWR6t8l0s5SDIScN9BdgTTJdZ3te+9XHqof0q9IjP/CFNwtZg/H4NhgloVg0Ip
-	T9js6aK9gp9/uj0NFMQC3nNspZ901zq60=
-X-Google-Smtp-Source: AGHT+IEFgHOckwWFD8YlvSPMnFrdDJ2PjFHrXr9gJy76X3JwO7/88RzZ+5nVghJHunEssFuyVx3fvRNGn4ia4lrIibA=
-X-Received: by 2002:a17:902:e951:b0:21f:78f:c178 with SMTP id
- d9443c01a7336-21f078fc4d3mr10199015ad.3.1738654155963; Mon, 03 Feb 2025
- 23:29:15 -0800 (PST)
+        d=1e100.net; s=20230601; t=1738658868; x=1739263668;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=eUvNDuK2KeGICqfgaStTgyWwXNRLoLy7XA9E2FucFQ4=;
+        b=fPivMJcy2eU2RlrE/P5txsE312zpVK32M7jKG5Bl/ofPub8iPMTum/0vqH2/6wWTnW
+         xwp15Q/ba4kFZDo4dKxbDOavV/U3sbOsX00CIRgqJPX0gBbqTNv3II6TrXiOqfUW2h0i
+         YxzMsggYvznLeEMun6HoWAbv9eB1GprXQaSiKW6i5sHaHyJ1ZjHLR8SMdViPI4GQDOFa
+         yaBa23SnfOPMOFX4Y0of/44ea2BQ0lG6UyLU13tFGC1aqQYebvu+2masvg2O2CcPBZ9R
+         eAo0iv5sdo4ytBMV+p8LUgjuOabjFxa3jPvuSlY0ecLftBCVY4RCS6+LJg3Le2zERrg4
+         ExDQ==
+X-Forwarded-Encrypted: i=1; AJvYcCU6UwGRXuV6sASX1vJ5kv2NxXWO8QZaKMskzHPFzdRUx4pIMtHbwL746ewxVywnwAMS6oRy+DgN3H0cHyYKB2YREEk=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yx/kpnf1dIW5OQQNgIfLBvBdCPlUMgE5tqufiF5/2nCrRASo0K3
+	5F2uXa1FaUI1dVrDGk0m+qxvBcEIWLgGq7o2qqYLqzWCDU85kluBM0lFehgsUEs=
+X-Gm-Gg: ASbGnct1RpEW6LGRAHk4bttJIxWc5cglIxXtnvrzpmDo+DhPwrLrq6wQwQL5O6UWhDZ
+	m/uA4/MVDhafef7nu6IUVeq6zEP1tEqoBkHVKmAYOWfgGUa/bRxayTCX0urU0TD5qHb5U4E1/XV
+	Gtk/3mwslBTPEDtGsds+vdy1w3H16yX5VbbvbI68wGiKbe8viw/m2oFJAZii5dtPmLkkGHwrtuP
+	LmsE6hUevPCQE7I4kSV57KCIuOMYnLV/C7urSZzSW02Ybq48radRu40JKSLeVrf8BpUmCTAVhTx
+	v2oxCWsaRpnW/jg=
+X-Google-Smtp-Source: AGHT+IEz8raHIO5tARHsLxl7vwwRjNinVjoT6E9EAC6WklUAB70IV/6cFzcItpMW9P41H7X0i0QamQ==
+X-Received: by 2002:a05:6000:178a:b0:385:fa2e:a33e with SMTP id ffacd0b85a97d-38c5208fadfmr20131529f8f.43.1738658868462;
+        Tue, 04 Feb 2025 00:47:48 -0800 (PST)
+Received: from brgl-uxlite.home ([2a01:cb1d:dc:7e00:4fb0:17c9:a494:227f])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38c5c1cf831sm15350283f8f.90.2025.02.04.00.47.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 04 Feb 2025 00:47:48 -0800 (PST)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [meta-oe][PATCH 1/2] libgpiod: fix ptests failure
+Date: Tue,  4 Feb 2025 09:47:41 +0100
+Message-ID: <20250204084742.26325-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Tue, 4 Feb 2025 00:29:05 -0700
-X-Gm-Features: AWEUYZkvPyCsZWYtnHXNKVLazVgYofHVDIRzcSOGQRkbUOI9WXk8vu0IbZQihgM
-Message-ID: <CAK5yBb8MPFFddT2=XGit3SAhymz=3g-227SuxoYi_-c+ZdX-OA@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="0000000000005a84ba062d4bf78d"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Feb 2025 07:29:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115265
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Feb 2025 08:47:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115266
 
---0000000000005a84ba062d4bf78d
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-All,
+Linux kernel commit 8bd76b3d3f3a ("gpio: sim: lock up configfs that an
+instantiated device depends on") revealed an issue in libgpiod bindings
+tests where a GPIO simulator device is not disabled before removing its
+configfs entries.
 
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
+Add a patch (already submitted upstream) that fixes the observed ptest
+failures.
 
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+---
+ ...ts-disable-GPIO-simulator-before-rel.patch | 34 +++++++++++++++++++
+ .../recipes-support/libgpiod/libgpiod_2.2.bb  |  5 ++-
+ 2 files changed, 38 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-tests-disable-GPIO-simulator-before-rel.patch
 
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 415
-unassigned or newcomer bugs.
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-tests-disable-GPIO-simulator-before-rel.patch b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-tests-disable-GPIO-simulator-before-rel.patch
+new file mode 100644
+index 0000000000..9747613aa6
+--- /dev/null
++++ b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-tests-disable-GPIO-simulator-before-rel.patch
+@@ -0,0 +1,34 @@
++From 7df2bb4f51281166633d4acbcff5763150add3fa Mon Sep 17 00:00:00 2001
++From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
++Date: Mon, 3 Feb 2025 13:20:41 +0100
++Subject: [PATCH] bindings: cxx: tests: disable GPIO simulator before releasing it
++
++Linux kernel commit 8bd76b3d3f3a ("gpio: sim: lock up configfs that an
++instantiated device depends on") uncovered an issue in C++ bindings
++tests where the GPIO simulator device is not disabled before removing its
++configfs entries. Add a call to gpiosim_dev_disable() to the
++gpiosim::chip's destructor.
++
++Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
++
++Upstream-Status: Submitted [https://lore.kernel.org/all/20250203-fix-gpiosim-in-bindings-v1-1-d2c9e0f3a29d@linaro.org/]
++---
++ bindings/cxx/tests/gpiosim.cpp | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/bindings/cxx/tests/gpiosim.cpp b/bindings/cxx/tests/gpiosim.cpp
++index 4bda5a2..cdecd8d 100644
++--- a/bindings/cxx/tests/gpiosim.cpp
+++++ b/bindings/cxx/tests/gpiosim.cpp
++@@ -115,7 +115,7 @@ chip::chip(chip&& other)
++ 
++ chip::~chip()
++ {
++-
+++	::gpiosim_dev_disable(this->_m_priv->dev.get());
++ }
++ 
++ chip& chip::operator=(chip&& other)
++-- 
++2.45.2
++
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
+index 259ee04d28..054d378451 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.bb
+@@ -11,7 +11,10 @@ LIC_FILES_CHKSUM = " \
+ 
+ FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}-2.x:"
+ 
+-SRC_URI += "file://gpio-manager.init"
++SRC_URI += " \
++    file://gpio-manager.init \
++    file://0001-bindings-cxx-tests-disable-GPIO-simulator-before-rel.patch \
++"
+ 
+ SRC_URI[sha256sum] = "ee29735890eb1cc0e4b494001da5163d1a9c4735343201d22485db313601ca07"
+ 
+-- 
+2.45.2
 
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.2=E2=80=9D, =E2=80=9C5.3", "5.99" and "Future=
-", the more
-pressing/urgent issues being in "5.2" and then =E2=80=9C5.3=E2=80=9D.
-
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
-
-Thanks,
-
-
-
-*Stephen K. Jolley*
-
-*Yocto Project Program Manager*
-
-(    *Cell*:                (208) 244-4460
-
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
-
---0000000000005a84ba062d4bf78d
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div><span style=3D"font-size:11pt;font-family:Calibri,Ari=
-al">All,<br><br>The triage team is starting to try and collect up and class=
-ify bugs which a newcomer to the project would be able to work on in a way =
-which means people can find them. They&#39;re being listed on the triage pa=
-ge under the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/=
-wiki/Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triag=
-e#Newcomer_Bugs</a>  Also please review: <a href=3D"https://www.openembedde=
-d.org/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.=
-org/wiki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugz=
-illa account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount=
-.cgi">https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The id=
-ea is these bugs should be straight forward for a person to help work on wh=
-o doesn&#39;t have deep experience with the project.  If anyone can help, p=
-lease take ownership of the bug and send patches!  If anyone needs help/adv=
-ice there are people on irc who can likely do so, or some of the more exper=
-ienced contributors will likely be happy to help too.<br><br>Also, the tria=
-ge team meets weekly and does its best to handle the bugs reported into the=
- Bugzilla. The number of people attending that meeting has fallen, as have =
-the number of people available to help fix bugs. One of the things we hear =
-users report is they don&#39;t know how to help. We (the triage team) are t=
-herefore going to start reporting out the currently 415 unassigned or newco=
-mer bugs.<br><br>We&#39;re hoping people may be able to spare some time now=
- and again to help out with these.  Bugs are split into two types, &quot;tr=
-ue bugs&quot; where things don&#39;t work as they should and &quot;enhancem=
-ents&quot; which are features we&#39;d want to add to the system.  There ar=
-e also roughly four different &quot;priority&quot; classes right now, =E2=
-=80=9C5.2=E2=80=9D, =E2=80=9C5.3&quot;, &quot;5.99&quot; and &quot;Future&q=
-uot;, the more pressing/urgent issues being in &quot;5.2&quot; and then =E2=
-=80=9C5.3=E2=80=9D.<br><br>Please review this link and if a bug is somethin=
-g you would be able to help with either take ownership of the bug, or send =
-me (<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>)=
- an e-mail with the bug number you would like and I will assign it to you (=
-please make sure you have a Bugzilla account).  The list is at: <a href=3D"=
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or=
-_Newcomer_Bugs</a></span></div><div dir=3D"ltr" class=3D"gmail_signature" d=
-ata-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p clas=
-s=3D"MsoNormal" style=3D"background-image:initial;background-position:initi=
-al;background-repeat:initial"><span style=3D"font-size:12pt;font-family:Ari=
-al,sans-serif">Thanks,<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
-
---0000000000005a84ba062d4bf78d--
 
