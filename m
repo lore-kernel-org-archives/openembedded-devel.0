@@ -1,171 +1,97 @@
-Return-Path: <Yogita.Urade@windriver.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 90033C02192
-	for <webhook@archiver.kernel.org>; Wed,  5 Feb 2025 05:25:15 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.5637.1738733105999060020
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D79AC02192
+	for <webhook@archiver.kernel.org>; Wed,  5 Feb 2025 08:26:46 +0000 (UTC)
+Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
+ by mx.groups.io with SMTP id smtpd.web11.7588.1738744000589141323
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Feb 2025 21:25:06 -0800
+ Wed, 05 Feb 2025 00:26:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=41316edb0e=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5155FUTH020964
-	for <openembedded-devel@lists.openembedded.org>; Wed, 5 Feb 2025 05:25:05 GMT
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 44hak8br9r-6
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 05 Feb 2025 05:25:04 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Tue, 4 Feb 2025 21:25:01 -0800
-From: yurade <yogita.urade@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][kirkstone][PATCH 1/1] mbedtls: fix CVE-2024-28755 and CVE-2024-28836
-Date: Wed, 5 Feb 2025 05:24:22 +0000
-Message-ID: <20250205052423.2690996-1-yogita.urade@windriver.com>
-X-Mailer: git-send-email 2.44.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Authority-Analysis: v=2.4 cv=ecXHf6EH c=1 sm=1 tr=0 ts=67a2f631 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=T2h4t0Lz3GQA:10 a=xNf9USuDAAAA:8 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=7CQSdrXTAAAA:8
- a=jI1CY6Bas43v8jQcPBUA:9 a=FdTzh2GWekK77mhwV6Dw:22 a=a-qgeE7W1pNrGK8U0ZQC:22
-X-Proofpoint-ORIG-GUID: K5iJVPqxu_s9kp1QoLXjmPvdsIvnbshz
-X-Proofpoint-GUID: K5iJVPqxu_s9kp1QoLXjmPvdsIvnbshz
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-02-05_02,2025-02-05_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 suspectscore=0
- adultscore=0 malwarescore=0 mlxlogscore=924 priorityscore=1501
- impostorscore=0 clxscore=1015 lowpriorityscore=0 spamscore=0 bulkscore=0
- phishscore=0 classifier=spam authscore=0 authtc=n/a authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.21.0-2501170000
- definitions=main-2502050040
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=relez6GR;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1738744001; x=1770280001;
+  h=from:to:cc:subject:date:message-id;
+  bh=5Qg7OR7nXzQhIsLpH+HmpOU/i8jYFr39FBOtG53da3w=;
+  b=relez6GRhHexEgK4PiJroDgV5fAo1aRBnJbT+aaWcxAq81wRIOltgdPs
+   QELnT0HJBmSjBdETmB784WsTqXSZPLUOATw5RZeA2yBYE/cniaKvUzHfg
+   egiCYymM78Mf/M9y3EWQ262KUqaPIANRSoHdadAn/UkJQyYzANKQjNegU
+   lxk7IQluRR5cjKMGocCYio1C++Wol2NZvrXPWVHMB2yvLAL1551loGEQa
+   wCLiLdlYwqiGV9R9aFKypuRBBcvkOb3capm0BEV0zZwrmqnvtNXbiSHhX
+   9AWLNm6gV+/oIaweeG5IR58SHVkQKAWAYBXl9gnxRpZGbGOr69keMLYLx
+   A==;
+X-CSE-ConnectionGUID: OJNDHoy9Qf6JJtrH4z/FrA==
+X-CSE-MsgGUID: jvH9z2b8QwqQZK/wo3l3Ag==
+X-IronPort-AV: E=McAfee;i="6700,10204,11336"; a="188982730"
+X-IronPort-AV: E=Sophos;i="6.13,260,1732546800"; 
+   d="scan'208";a="188982730"
+Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
+  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Feb 2025 17:26:38 +0900
+Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
+	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 4A56C7C24E
+	for <openembedded-devel@lists.openembedded.org>; Wed,  5 Feb 2025 17:26:36 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 11FBDD8B7D
+	for <openembedded-devel@lists.openembedded.org>; Wed,  5 Feb 2025 17:26:36 +0900 (JST)
+Received: from localhost.localdomain.localdomain (unknown [10.193.128.200])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 8626D1A000B;
+	Wed,  5 Feb 2025 16:26:35 +0800 (CST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] gjs: Fix install conflict when  enable multilib.
+Date: Wed,  5 Feb 2025 16:26:29 +0800
+Message-Id: <1738743989-16870-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 05 Feb 2025 05:25:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115281
+ <openembedded-devel@lists.openembedded.org>; Wed, 05 Feb 2025 08:26:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115282
 
-From: Yogita Urade <yogita.urade@windriver.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-An issue was discovered in Mbed TLS 3.5.x before 3.6.0. When
-an SSL context was reset with the mbedtls_ssl_session_reset()
-API, the maximum TLS version to be negotiated was not restored
-to the configured one. An attacker was able to prevent an Mbed
-TLS server from establishing any TLS 1.3 connection, potentially
-resulting in a Denial of Service or forced version downgrade from
-TLS 1.3 to TLS 1.2.
+Error: Transaction test error:
+  file /usr/libexec/installed-tests/gjs/GIMarshallingTests-1.0.typelib conflicts between attempted installs of lib32-gjs-1.82.1-r0.core2_32 and gjs-1.82.1-r0.core2_64
+  file /usr/libexec/installed-tests/gjs/Regress-1.0.typelib conflicts between attempted installs of lib32-gjs-1.82.1-r0.core2_32 and gjs-1.82.1-r0.core2_64
+  file /usr/libexec/installed-tests/gjs/Utility-1.0.typelib conflicts between attempted installs of lib32-gjs-1.82.1-r0.core2_32 and gjs-1.82.1-r0.core2_64
+  file /usr/libexec/installed-tests/gjs/WarnLib-1.0.typelib conflicts between attempted installs of lib32-gjs-1.82.1-r0.core2_32 and gjs-1.82.1-r0.core2_64
 
-fix indent issue in mbedtls_3.5.2.bb file.
+The .typelib file is a binary file that contains runtime information for the GObject type system.
+These information include function signature, type size, alignment, etc., which may vary depending on the architecture (32-bit vs 64 bit).
 
-Reference:
-https://security-tracker.debian.org/tracker/CVE-2024-28755
-https://security-tracker.debian.org/tracker/CVE-2024-28836
-
-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../CVE-2024-28755-and-CVE-2024-28836.patch   | 67 +++++++++++++++++++
- .../mbedtls/mbedtls_3.5.2.bb                  |  6 +-
- 2 files changed, 71 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls/CVE-2024-28755-and-CVE-2024-28836.patch
+ meta-gnome/recipes-gnome/gjs/gjs_1.82.1.bb | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls/CVE-2024-28755-and-CVE-2024-28836.patch b/meta-networking/recipes-connectivity/mbedtls/mbedtls/CVE-2024-28755-and-CVE-2024-28836.patch
-new file mode 100644
-index 0000000000..8a2d38c23f
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls/CVE-2024-28755-and-CVE-2024-28836.patch
-@@ -0,0 +1,67 @@
-+From ad736991bb59211118a29fe115367c24495300c2 Mon Sep 17 00:00:00 2001
-+From: Janos Follath <janos.follath@arm.com>
-+Date: Fri, 9 Feb 2024 16:04:59 +0000
-+Subject: [PATCH] Merge pull request #1177 from
-+ ronald-cron-arm/tls-max-version-reset
-+
-+Reset properly the TLS maximum negotiable version
-+
-+CVE: CVE-2024-28755
-+CVE: CVE-2024-28836
-+Upstream-Status: Backport [https://github.com/Mbed-TLS/mbedtls/commit/ad736991bb59211118a29fe115367c24495300c2]
-+
-+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
-+---
-+ library/ssl_tls.c |  1 +
-+ tests/ssl-opt.sh  | 24 ++++++++++++++++++++++++
-+ 2 files changed, 25 insertions(+)
-+
-+diff --git a/library/ssl_tls.c b/library/ssl_tls.c
-+index cfb2798182..f3c701818b 100644
-+--- a/library/ssl_tls.c
-++++ b/library/ssl_tls.c
-+@@ -1539,6 +1539,7 @@ int mbedtls_ssl_session_reset_int(mbedtls_ssl_context *ssl, int partial)
-+     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
-+
-+     ssl->state = MBEDTLS_SSL_HELLO_REQUEST;
-++    ssl->tls_version = ssl->conf->max_tls_version;
-+
-+     mbedtls_ssl_session_reset_msg_layer(ssl, partial);
-+
-+diff --git a/tests/ssl-opt.sh b/tests/ssl-opt.sh
-+index 48b3c0cb26..448bd3825f 100755
-+--- a/tests/ssl-opt.sh
-++++ b/tests/ssl-opt.sh
-+@@ -11307,6 +11307,30 @@ run_test    "TLS 1.3: Default" \
-+             -s "ECDH/FFDH group: " \
-+             -s "selected signature algorithm ecdsa_secp256r1_sha256"
-+
-++requires_config_enabled MBEDTLS_SSL_PROTO_TLS1_2
-++requires_config_enabled MBEDTLS_SSL_PROTO_TLS1_3
-++requires_config_enabled MBEDTLS_SSL_TLS1_3_KEY_EXCHANGE_MODE_EPHEMERAL_ENABLED
-++requires_any_configs_enabled $TLS1_2_KEY_EXCHANGES_WITH_CERT
-++run_test    "Establish TLS 1.2 then TLS 1.3 session" \
-++            "$P_SRV" \
-++            "( $P_CLI force_version=tls12; \
-++               $P_CLI force_version=tls13 )" \
-++            0 \
-++            -s "Protocol is TLSv1.2" \
-++            -s "Protocol is TLSv1.3" \
-++
-++requires_config_enabled MBEDTLS_SSL_PROTO_TLS1_2
-++requires_config_enabled MBEDTLS_SSL_PROTO_TLS1_3
-++requires_config_enabled MBEDTLS_SSL_TLS1_3_KEY_EXCHANGE_MODE_EPHEMERAL_ENABLED
-++requires_any_configs_enabled $TLS1_2_KEY_EXCHANGES_WITH_CERT
-++run_test    "Establish TLS 1.3 then TLS 1.2 session" \
-++            "$P_SRV" \
-++            "( $P_CLI force_version=tls13; \
-++               $P_CLI force_version=tls12 )" \
-++            0 \
-++            -s "Protocol is TLSv1.3" \
-++            -s "Protocol is TLSv1.2" \
-++
-+ requires_openssl_tls1_3_with_compatible_ephemeral
-+ requires_config_enabled MBEDTLS_DEBUG_C
-+ requires_config_enabled MBEDTLS_SSL_CLI_C
-+--
-+2.40.0
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.5.2.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.5.2.bb
-index 2fedac48cf..829d54307a 100644
---- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.5.2.bb
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.5.2.bb
-@@ -25,8 +25,10 @@ SECTION = "libs"
- S = "${WORKDIR}/git"
- SRCREV = "daca7a3979c22da155ec9dce49ab1abf3b65d3a9"
- SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=master \
--	file://0001-AES-NI-use-target-attributes-for-x86-32-bit-intrinsi.patch \
--	file://run-ptest"
-+           file://0001-AES-NI-use-target-attributes-for-x86-32-bit-intrinsi.patch \
-+           file://run-ptest \
-+           file://CVE-2024-28755-and-CVE-2024-28836.patch \
-+          "
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.82.1.bb b/meta-gnome/recipes-gnome/gjs/gjs_1.82.1.bb
+index 55af04e4a5..fd4e9c6f8a 100644
+--- a/meta-gnome/recipes-gnome/gjs/gjs_1.82.1.bb
++++ b/meta-gnome/recipes-gnome/gjs/gjs_1.82.1.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8dcea832f6acf45d856abfeb2d51ec48"
  
- inherit cmake update-alternatives ptest
+ DEPENDS = "mozjs-128 cairo"
+ 
+-inherit gnomebase gobject-introspection gettext features_check upstream-version-is-even pkgconfig
++inherit gnomebase gobject-introspection gettext features_check upstream-version-is-even pkgconfig multilib_script
+ 
+ SRC_URI[archive.sha256sum] = "fb39aa5636576de0e5a1171f56a1a5825e2bd1a69972fb120ba78bd109b5693c"
+ SRC_URI += " \
+@@ -37,3 +37,9 @@ RDEPENDS:${PN}-valgrind += "valgrind"
+ # Valgrind not yet available on rv32/rv64
+ RDEPENDS:${PN}-valgrind:remove:riscv32 = "valgrind"
+ RDEPENDS:${PN}-valgrind:remove:riscv64 = "valgrind"
++
++MULTILIB_SCRIPTS:append = "${PN}:${libexecdir}/installed-tests/gjs/GIMarshallingTests-1.0.typelib \
++                    ${PN}:${libexecdir}/installed-tests/gjs/Regress-1.0.typelib \
++                    ${PN}:${libexecdir}/installed-tests/gjs/Utility-1.0.typelib \
++                    ${PN}:${libexecdir}/installed-tests/gjs/WarnLib-1.0.typelib \
++                    "
 -- 
-2.40.0
+2.43.0
 
 
