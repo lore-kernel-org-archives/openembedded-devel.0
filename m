@@ -1,92 +1,97 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20F3EC02192
-	for <webhook@archiver.kernel.org>; Thu,  6 Feb 2025 03:19:52 +0000 (UTC)
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.web11.31795.1738811984935561553
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A898C02199
+	for <webhook@archiver.kernel.org>; Thu,  6 Feb 2025 12:37:05 +0000 (UTC)
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+ by mx.groups.io with SMTP id smtpd.web11.39774.1738845415211364465
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Feb 2025 19:19:44 -0800
+ Thu, 06 Feb 2025 04:36:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=edHxE2xF;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-21effc750d2so7667845ad.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Feb 2025 19:19:44 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=RIYrwhvt;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.54, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-aaec61d0f65so203972666b.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 06 Feb 2025 04:36:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738811984; x=1739416784; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=B2RS/merrWlTYe5wyoRJTj3mRCwgqcMNKUbsWtsg5TU=;
-        b=edHxE2xFc1pFQ4oyaEKQlOjsxwvJo5xiDfUTAd22EVnUUCPWa54a48ZIiTIiATHivh
-         sPnXKWPhfkUvkfzT5bm3E/6lAxiE9hFX6fP7soVADFYyijc3MHEhh6mYKDAldV9Btu2s
-         IiRBYPRHS5/b2Tcyhhd4vNg3VbmqaVFxz+uhqDhQznncvdu+uoAdB5PMx2tV3F/6Aki6
-         fd9AjRt2JC0k9FIRXw0KDMEwwh79t7STBOJosXGmrGrsFTJS61Ov0tddsxjnW6lzxaGF
-         7GhyIK8llzrRFEc5Ul3XGX3G5y0Bga2yGLMAtL4aIUuO1wyrOWeJVY2kVDBF5GJkcpcO
-         Nkbw==
+        d=konsulko.com; s=google; t=1738845413; x=1739450213; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=4TjuYyZosfitZNp9IrwPEkMOcnLwnHA8MpirUKAO65M=;
+        b=RIYrwhvtHYNDJaGt+M6at3nc9HpX6UES/n5yhgtcrGubWG2vNoc3IvKvZYcRS5Hb8S
+         uQKADyvw9MgsrT6QIbuM05MZCeYxJCMvWah0NdsDauZ/7OXQpKvshYNiW0hWpsl9GhA8
+         XFLVa1/svHaCxIAlomCfUayLv2f7F34T4vhaI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738811984; x=1739416784;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=B2RS/merrWlTYe5wyoRJTj3mRCwgqcMNKUbsWtsg5TU=;
-        b=stvdinK8RosLW7MZkxHPTlybW9DcpANkduanOi5nYDrrNytbGis1ZMbLtXfAHARcwW
-         IFnxm0M4GP1yDZ7bsqV0G7vPFre3adxR852geDVUJMQhJERiLlC+CqPlGEe0WHhe32tp
-         yDD4cNLxYPI1IF2ORWphnwoDIo2jbj2UT5dE7DjDz91mYbh7snD6KI+faqla7MyX8k8N
-         vY9KKFHPLWKWf52IliG5N6C/LhD4ILZTjVvUNatqn0HJg+KXDnMZsP65vx1dtMis3um3
-         SuBJKJWu7pM3pUvxAnibAQ6FVcLamTLpyBay4sQvMu2F5f/AMSxbIrXMJ7uPtKFwl/Ei
-         jtLw==
-X-Gm-Message-State: AOJu0Yy1uVZ1gKJbCnHoOpDCs7HQkVTw4tgjfWHohrI8cG3i9FGItdgn
-	DfBrpuu9feBTpYboXd95DFU40JCkH1Tl4LNTVLzIww4l6z15FGxbX1M/58Vt
-X-Gm-Gg: ASbGncs3q9ve5/gm2yl6hRzG+Qn770Gv/SkjNgMjIsg2hMT3YhXcc5lB3W9ThC2RES2
-	KdCGBEtouDaYJ9SToRAEIXgvy7pahqynSGhjhYoFbvvK4QmOntERJBq7HZiRYa6xdlcHVWC3DRP
-	Tf81V3t/Djo1VLhYHUq7ZEgY1j/DOMhQnQl9QRXnGeMvsv3rmtALilvfCfEO8vz+l4pUK7CH4ef
-	DqjLFnjlIsov7g3OMBOz6rr/yXVWyiZn5yZmZ7VIOjTZL9mUsn40wLY+BZ1BU/k79lQxW9pnHMi
-	rkHmwk4=
-X-Google-Smtp-Source: AGHT+IFjHleQMmlv93HGGIpJhY6QCCDep9iIPnB9N5ZMfgwBXajOCCbF4QOpEt10UVgYGiQnO6OXMg==
-X-Received: by 2002:a17:902:da8c:b0:21f:1549:a562 with SMTP id d9443c01a7336-21f17ed0ddamr88606315ad.46.1738811983965;
-        Wed, 05 Feb 2025 19:19:43 -0800 (PST)
-Received: from apollo.localdomain ([2601:646:8201:fd20::f923])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-21f3650f435sm1632305ad.16.2025.02.05.19.19.43
+        d=1e100.net; s=20230601; t=1738845413; x=1739450213;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=4TjuYyZosfitZNp9IrwPEkMOcnLwnHA8MpirUKAO65M=;
+        b=SYDn0lkGQJ6VaXqCpzegW+N3JVwgc8GrXj2CX/MM9xLMT/17YYfwdRaoqNQwb6FE5T
+         VM5JYNMawewp08dZBlODZoTkgeA9pgeoJtvI9Lxh9NTeAaFcWm4aM1xUS4hgZ3rP6LkW
+         G/P6SItL/yEQ035l5LLHjK1mahC4oYDh80FuPnxYTvM+45NuzhjVEvzKuyIiXL/TjOMi
+         WhPLLy87DzR9O9HSZicYnFtVk5875fmjyapbSfAwFmlOrqMgZ/t38vykD30LLO3dv94B
+         z3t1P2eBsfUFOnO+hALWwnL04aDp+Exs+D+8sCVwLKizkTMYMhriqlgi7uM+6faoe8jZ
+         wCRg==
+X-Gm-Message-State: AOJu0YwtbYST5BqRMhG8/j9HAyU16Lz8nq7S9GuTJqz2BgwcV/Kc6bwb
+	hEd1++m9DT/9xCqkel/VfH873y2vn+dI6mGDaH2L/ERGE+SXM+xQriv85C1u2Qz/g4Pmpd8tGGc
+	1
+X-Gm-Gg: ASbGncsfIX2O2uyZnx3ny9Ok67vgk0lTTMTcmwuQB9VNRyo/i4HXMDoirJxYYr2Hk+L
+	0bgxWCTBBsUe+hkFeM1lXnYmw/hDqay7sg/c1snJVrp+8R89EA5fauU+iSdK9IeapeFPyZcug4C
+	PDhGq54Q2HBXVegqLVXg9iGHVzRkfoQg6FbC7jUUbD8mkPLdPdSebnpgIbf36MeMZ0OYRNXtiR9
+	OjSB6HoFu+drFVXoy00RRrAlcH4libylOIlGqFD5zm9Jyv/R4fvTi9QeeL/fjHAHFitvoZ2iS7F
+	mo9Xos5A0bRww96pcmfa3JNvslHwVQ==
+X-Google-Smtp-Source: AGHT+IE5GkZfRmQbOZhSRzdP1Spv9erz67dfJsJvxY9J0z26ZNWlfvVGJeCC0K76YNm7hKyJyH7uFA==
+X-Received: by 2002:a17:907:7d90:b0:aaf:74d6:6467 with SMTP id a640c23a62f3a-ab75e347a2dmr731578866b.42.1738845413192;
+        Thu, 06 Feb 2025 04:36:53 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ab779832909sm56927066b.49.2025.02.06.04.36.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Feb 2025 19:19:43 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+        Thu, 06 Feb 2025 04:36:52 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 2/3] python3-lief: Disable build on 32bit x86
-Date: Wed,  5 Feb 2025 19:19:39 -0800
-Message-ID: <20250206031940.2247517-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250206031940.2247517-1-raj.khem@gmail.com>
-References: <20250206031940.2247517-1-raj.khem@gmail.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-oe][scarthgap][PATCH] sip: Fix homepage and license
+Date: Thu,  6 Feb 2025 14:36:50 +0200
+Message-Id: <20250206123650.118049-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 06 Feb 2025 03:19:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115285
+ <openembedded-devel@lists.openembedded.org>; Thu, 06 Feb 2025 12:37:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115287
 
-Asserts fail, need upstream to validate the right approach to fix it [1]
+After the migration from Mercurial to GitHub the homepage has
+changed and SIP has been licensed under the BSD-2-Clause license
+since Feb 9, 2024, including for release 6.8.6.
 
-[1] https://github.com/lief-project/LIEF/commit/3def579f75965aa19c021d840a759bce2afc0a31#r152197203
+This work was sponsored by GOVCERT.LU.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+License-Update: SIP is licensed under the BSD-2-Clause license.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-python/recipes-devtools/python/python3-lief_0.16.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-devtools/sip/sip_6.8.6.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-lief_0.16.2.bb b/meta-python/recipes-devtools/python/python3-lief_0.16.2.bb
-index 47216d4e0e..ff3010de14 100644
---- a/meta-python/recipes-devtools/python/python3-lief_0.16.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-lief_0.16.2.bb
-@@ -26,5 +26,7 @@ DEPENDS += "\
-     ninja-native \
-     ccache-native \
- "
-+# https://github.com/lief-project/LIEF/commit/3def579f75965aa19c021d840a759bce2afc0a31#r152197203
-+COMPATIBLE_HOST:x86 = "null"
+diff --git a/meta-oe/recipes-devtools/sip/sip_6.8.6.bb b/meta-oe/recipes-devtools/sip/sip_6.8.6.bb
+index 157e404515..1defe29b08 100644
+--- a/meta-oe/recipes-devtools/sip/sip_6.8.6.bb
++++ b/meta-oe/recipes-devtools/sip/sip_6.8.6.bb
+@@ -3,8 +3,8 @@
  
- BBCLASSEXTEND = "native nativesdk"
+ SUMMARY = "A Python bindings generator for C/C++ libraries"
+ 
+-HOMEPAGE = "https://www.riverbankcomputing.com/software/sip/"
+-LICENSE = "GPL-2.0-or-later"
++HOMEPAGE = "https://github.com/Python-SIP/sip"
++LICENSE = "BSD-2-Clause"
+ SECTION = "devel"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=ed1d69a33480ebf4ff8a7a760826d84e"
+ 
+-- 
+2.39.5
+
 
