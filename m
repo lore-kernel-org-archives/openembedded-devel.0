@@ -1,77 +1,66 @@
-Return-Path: <hongxu.jia@eng.windriver.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C6DBC02198
-	for <webhook@archiver.kernel.org>; Sat,  8 Feb 2025 13:04:02 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.8363.1739019831795289461
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10FAAC02198
+	for <webhook@archiver.kernel.org>; Sat,  8 Feb 2025 15:04:13 +0000 (UTC)
+Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
+ by mx.groups.io with SMTP id smtpd.web10.10237.1739027047509623758
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 08 Feb 2025 05:03:52 -0800
+ Sat, 08 Feb 2025 07:04:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=4134b2c382=hongxu.jia@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 518Ce1Xa020468
-	for <openembedded-devel@lists.openembedded.org>; Sat, 8 Feb 2025 13:03:51 GMT
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 44nx88rakt-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Sat, 08 Feb 2025 13:03:50 +0000 (GMT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Sat, 8 Feb 2025 05:03:49 -0800
-Received: from pek-lpg-core5.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Sat, 8 Feb 2025 05:03:48 -0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][PATCH] net-snmp: correct typo on RDEPENDS
-Date: Sat, 8 Feb 2025 21:03:48 +0800
-Message-ID: <20250208130348.1451762-1-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=ASnMsHL1;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-20250208150405e9aaf5447c92eecb50-feqa2_@rts-flowmailer.siemens.com)
+Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 20250208150405e9aaf5447c92eecb50
+        for <openembedded-devel@lists.openembedded.org>;
+        Sat, 08 Feb 2025 16:04:05 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
+ bh=YzQ8cFJe2iUIScWULkELap2jrNKHpcTjXX0Szr4CZWk=;
+ b=ASnMsHL1fulKjKIOVO8D7rXxGK+pdjJmrMA9prWA0iT5h/aeYudLqWlcylM75R2Qfypm97
+ dvne67NBKoZlzSTYRKQ9H9OQLxS8Vgpc2fEtIfufq5CfUBSYY/FSivSuy8ID/REEXGhi6NBi
+ gsURTyBIk0HEaqNUb2F6IpVzglMtCh8JaHqvjP4PLwJxtwcriZ2PR6MEmyTYZJ+MjXBKhzfD
+ 3uQdth2nZR7xow50dMgGypsOUlhQx/+L1c33R+XQX9/rcPKWon4FB83CeuLgv3VpryDgPfSD
+ odV4DmrWSEexaEAiPR2H6FQ3hRDOI4JJiWJq2CBC4wVeeCtQG9FAWF8A==;
+From: Peter Marko <peter.marko@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-oe][PATCH 2/4] grpc: remove workaround for GCC 4.8 in Ubuntu-14.04
+Date: Sat,  8 Feb 2025 16:03:06 +0100
+Message-Id: <20250208150308.2451484-2-peter.marko@siemens.com>
+In-Reply-To: <20250208150308.2451484-1-peter.marko@siemens.com>
+References: <20250208150308.2451484-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: P-foXcWshfIX8QkfF4o4q6cRnaw8NGfn
-X-Authority-Analysis: v=2.4 cv=VZANPEp9 c=1 sm=1 tr=0 ts=67a75636 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=T2h4t0Lz3GQA:10 a=t7CeM3EgAAAA:8 a=tlFIOqNmLYePjUy9mksA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: P-foXcWshfIX8QkfF4o4q6cRnaw8NGfn
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-02-08_05,2025-02-07_03,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0
- priorityscore=1501 impostorscore=0 mlxscore=0 mlxlogscore=894 spamscore=0
- phishscore=0 lowpriorityscore=0 adultscore=0 clxscore=1015 suspectscore=0
- bulkscore=0 classifier=spam authscore=0 authtc=n/a authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.21.0-2501170000
- definitions=main-2502080108
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 08 Feb 2025 13:04:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115308
+ <openembedded-devel@lists.openembedded.org>; Sat, 08 Feb 2025 15:04:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115310
 
-Move `append' to the behind of RDEPENDS:${PN}-libs
+From: Peter Marko <peter.marko@siemens.com>
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Minimum distro version and gcc version is now higher.
+
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb
-index 61a2a3d1a8..d4945e482d 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb
-@@ -273,7 +273,7 @@ RDEPENDS:${PN}-libs += "${PN}-lib-netsnmp \
-                         ${PN}-lib-helpers \
-                         ${PN}-lib-mibs \
- "
--RDEPENDS:append:${PN}-libs:class-target = " libpci"
-+RDEPENDS:${PN}-libs:append:class-target = " libpci"
- RDEPENDS:${PN}-ptest += "perl \
-                          perl-module-test \
-                          perl-module-file-basename \
--- 
-2.34.1
-
+diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb b/meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb
+index b82b802e3c..1524168c78 100644
+--- a/meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb
++++ b/meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb
+@@ -25,8 +25,6 @@ BRANCH = "v1.68.x"
+ SRC_URI = "gitsm://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
+            file://0001-cmake-Link-with-libatomic-on-rv32-rv64.patch \
+            "
+-# Fixes build with older compilers 4.8 especially on ubuntu 14.04
+-CXXFLAGS:append:class-native = " -Wl,--no-as-needed"
+ 
+ inherit cmake pkgconfig
+ 
 
