@@ -2,35 +2,35 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 03055C0219E
-	for <webhook@archiver.kernel.org>; Sat,  8 Feb 2025 15:04:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B483C02198
+	for <webhook@archiver.kernel.org>; Sat,  8 Feb 2025 15:23:13 +0000 (UTC)
 Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
- by mx.groups.io with SMTP id smtpd.web10.10241.1739027057435342980
+ by mx.groups.io with SMTP id smtpd.web11.10611.1739028184817777718
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 08 Feb 2025 07:04:17 -0800
+ Sat, 08 Feb 2025 07:23:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=YSwZ6+my;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-202502081504158852714bd0f4281523-cxc64x@rts-flowmailer.siemens.com)
-Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 202502081504158852714bd0f4281523
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=XlK6lteP;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-202502081523014bd0826537eb255d18-wylov2@rts-flowmailer.siemens.com)
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 202502081523014bd0826537eb255d18
         for <openembedded-devel@lists.openembedded.org>;
-        Sat, 08 Feb 2025 16:04:15 +0100
+        Sat, 08 Feb 2025 16:23:01 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=HbS+Bz1QKcicYX8plMrBiNa3uyV540LvAoDU0z+OvRU=;
- b=YSwZ6+myCFjyhWsKP27hdwAVqCya4iIhWxJ9xDammyM+xpopq5GJb2BxRAY33tEZWRq+2V
- o0WQPjUlYlma88iPGTykmftEh8MCYTQQkCP63dvYXehm0YQXbS9j6f3uVNKc9GhSKcN8emiy
- Wn+B4mVp+6hrH/21ICz5acndyrltvy6nFD0UDj45dvmeGg1nynJrrAar7/9jwiMyEbWtJi5u
- 6yfZekFgHBh+dp2htnJ8yfSPquA612lU5sfaqnHyntmPmHDD9q7RLgBHeeVbwrjG9GsdOk28
- tMWLsRvSuufZYn1sFtkwNP5qqT58TlQjEov6vFEAmPJ6z6QNEXfm15Ow==;
+ bh=61x8blEIwkD8DZ4t1bRQh7Um1rCa8cTuiOJhC48fJH8=;
+ b=XlK6ltePAiXeSZO3BVGY/PI/87GUX1bMx4f3HuyyeELVzGgYpJQFM/8YGtSXTuDP7j3zD3
+ 9eQ/e/f6Zvb5ca/Swnf82abI5ajNXYUeQwtcR1py9JbPuQj5p1FqPfZfSKMuEHwSeIxjQKZJ
+ n3NXVqQuXzxFzEKmqQA7yxQnjHbaYgpNpDXY4VlaO3V72Ljw0nGuj2tTVhKjG9reemDqeLfg
+ Q1WRtIBwutKC/1018vp3w00pmVHq3fmDNzXiOtIoUBFd4vOXAir2ge0ruAQ/UhZrY8Xb4RXS
+ i6fKARu/VX6cg1JXwrrPKxBwn6VmU5OFHzsR1814l1ZMls6vWKJ3M2ig==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH 4/4] grpc: add licenses from third party components
-Date: Sat,  8 Feb 2025 16:03:08 +0100
-Message-Id: <20250208150308.2451484-4-peter.marko@siemens.com>
-In-Reply-To: <20250208150308.2451484-1-peter.marko@siemens.com>
-References: <20250208150308.2451484-1-peter.marko@siemens.com>
+Subject: [meta-oe][PATCH v2 4/4] grpc: add licenses from third party components
+Date: Sat,  8 Feb 2025 16:22:13 +0100
+Message-Id: <20250208152213.2471440-1-peter.marko@siemens.com>
+In-Reply-To: <20250208150308.2451484-4-peter.marko@siemens.com>
+References: <20250208150308.2451484-4-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -38,8 +38,8 @@ Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 08 Feb 2025 15:04:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115312
+ <openembedded-devel@lists.openembedded.org>; Sat, 08 Feb 2025 15:23:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115313
 
 From: Peter Marko <peter.marko@siemens.com>
 
@@ -90,22 +90,32 @@ SUB third_party/zlib                  .. not used (unbundled)
 * xxhash - BSD-2-Clause
   https://github.com/grpc/grpc/blob/master/third_party/xxhash/LICENSE
 
+License-Update: added missing licenses
+
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+v2: added missing LIC_FILES_CHKSUM update
+
+ meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
 diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb b/meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb
-index 6e729e9734..131f33a75e 100644
+index 6e729e9734..f47a933afc 100644
 --- a/meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb
 +++ b/meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb
-@@ -3,7 +3,7 @@ Provides gRPC libraries for multiple languages written on top of shared C core l
+@@ -3,8 +3,12 @@ Provides gRPC libraries for multiple languages written on top of shared C core l
  (C++, Node.js, Python, Ruby, Objective-C, PHP, C#)"
  HOMEPAGE = "https://github.com/grpc/grpc"
  SECTION = "libs"
 -LICENSE = "Apache-2.0 & BSD-3-Clause & MPL-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=731e401b36f8077ae0c134b59be5c906"
 +LICENSE = "Apache-2.0 & BSD-3-Clause & MPL-2.0 & MIT & BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=731e401b36f8077ae0c134b59be5c906"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE;md5=731e401b36f8077ae0c134b59be5c906 \
++    file://third_party/utf8_range/LICENSE;md5=d4974d297231477b2ff507c35d61c13c \
++    file://third_party/xxhash/LICENSE;md5=cdfe7764d5685d8e08b3df302885d7f3 \
++"
  
  DEPENDS = "abseil-cpp c-ares openssl protobuf protobuf-native re2 zlib"
+ DEPENDS:append:class-target = " grpc-native"
 
