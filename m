@@ -1,121 +1,79 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B483C02198
-	for <webhook@archiver.kernel.org>; Sat,  8 Feb 2025 15:23:13 +0000 (UTC)
-Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
- by mx.groups.io with SMTP id smtpd.web11.10611.1739028184817777718
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C91DEC02198
+	for <webhook@archiver.kernel.org>; Sat,  8 Feb 2025 17:42:23 +0000 (UTC)
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web10.13774.1739036537055865080
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 08 Feb 2025 07:23:05 -0800
+ Sat, 08 Feb 2025 09:42:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=XlK6lteP;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-202502081523014bd0826537eb255d18-wylov2@rts-flowmailer.siemens.com)
-Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 202502081523014bd0826537eb255d18
-        for <openembedded-devel@lists.openembedded.org>;
-        Sat, 08 Feb 2025 16:23:01 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=61x8blEIwkD8DZ4t1bRQh7Um1rCa8cTuiOJhC48fJH8=;
- b=XlK6ltePAiXeSZO3BVGY/PI/87GUX1bMx4f3HuyyeELVzGgYpJQFM/8YGtSXTuDP7j3zD3
- 9eQ/e/f6Zvb5ca/Swnf82abI5ajNXYUeQwtcR1py9JbPuQj5p1FqPfZfSKMuEHwSeIxjQKZJ
- n3NXVqQuXzxFzEKmqQA7yxQnjHbaYgpNpDXY4VlaO3V72Ljw0nGuj2tTVhKjG9reemDqeLfg
- Q1WRtIBwutKC/1018vp3w00pmVHq3fmDNzXiOtIoUBFd4vOXAir2ge0ruAQ/UhZrY8Xb4RXS
- i6fKARu/VX6cg1JXwrrPKxBwn6VmU5OFHzsR1814l1ZMls6vWKJ3M2ig==;
-From: Peter Marko <peter.marko@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH v2 4/4] grpc: add licenses from third party components
-Date: Sat,  8 Feb 2025 16:22:13 +0100
-Message-Id: <20250208152213.2471440-1-peter.marko@siemens.com>
-In-Reply-To: <20250208150308.2451484-4-peter.marko@siemens.com>
-References: <20250208150308.2451484-4-peter.marko@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=AC03kOkC;
+ spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-5dcef33eeceso5728223a12.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 08 Feb 2025 09:42:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1739036535; x=1739641335; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=kvsT9MjnqPnNwy+mp6MwtyYqTvhWW+K/aeC7UKnIXKw=;
+        b=AC03kOkCMm4f+pyVdJB6yfIqkWRE5dkn0gS/OAlvo6fuR90ju217L0M1EKzUgcaqFP
+         j6OYXqQkUn43jQXXYMRG4U03Opt8GXno0DHt3sOO/rX2VAWRqrbKQQut1Se05bNq1lVW
+         BkYlLFEKtMC0g8O5xfMnDckEqwCBGBh/KjuNnJVP937Z/ZC4VN/3X1NlC21WeZ8roqHg
+         6ZRBoECulgcXjtmYR/2+6IblFCOzYa59p+g3rEcOseHqQPQxC+QKMLPGNSxqcCJrGXFb
+         Xu1UR7pTrOXOTbqbevRsId9bP5LKK0yELHgxQ1ISlShEElhvOz809rkV7H4xGP3NvLV7
+         Xy0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1739036535; x=1739641335;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=kvsT9MjnqPnNwy+mp6MwtyYqTvhWW+K/aeC7UKnIXKw=;
+        b=KQUxP3yPaqrjrNmOVmra0Um/qwr4Y/0GmOiRCUBMl69WOJlXCfsHj0giIn323woCn5
+         OlblnJOeAYDGOjOu0JBrHs+VvGXBrSlrTTf7K1Fq/5gwWo2gBSsm6a0aHN9qePbA4hEZ
+         Ec5yQOs44OLOe1ise73FOwLo8diFgxz0OAAGmMnVSRmmdq81pmJPAoLQBJcEuyX31wf5
+         YZCLKmF4iIbeLuii1N3vjm6RVOoeZRV4K9xI/tnr7i/w3g7AMalLeM5KCUwsFgNNAKSU
+         RLtt9Ctz50c4UV6SMErrvn4i62SB1max9JHNcT9Grnlvq23ahX76VQfvRVXlOIgc88Bq
+         XJmg==
+X-Forwarded-Encrypted: i=1; AJvYcCWIcikXZRf9RSveFGTwvLTUg0+qUHOdiING1q3lnoHdbq6aE5FgO/p3LEHFJjsmOOfBfxSHlQ0ZdDbKvTbbuHz7KZ4=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YwuwDfLtywa4msG7Uza5dPjllTakQG9Lt/1WyTn8mUmVpwPCOiz
+	YCSiGYQ6OsboY4lw+V9zao/Anw8CzIsZr8XJf2uzuSBG8nH3t50Y
+X-Gm-Gg: ASbGncsxQMxGVWuEO8g9P7p9DscHvRqq5y12pp+vqo8mTKLiY2iwGWVPVBhS0HzCEeo
+	MbkbI57gp62OmqyrrbYd4uRVseftCiTyp91blzZvThZ9pYzvtFLHX9iD8LNlkHbmCRz3A4KtobH
+	ERmLU0AJ7IqkhSYpvp9Rv7i87BfF7PznRFK2MLCEafcAaietQWO5g3VrVosk2HaGosVHG4la+mG
+	WysryCBvW/FysVVFFSFM0r4H/AQHjNge6mIxMMZq041MNOr0Dg+5QsDRFJ9kGRHgIOFyltJj5Gt
+	TTigahmaC1ZfWN8xMOHSKeQ=
+X-Google-Smtp-Source: AGHT+IFyPsentZpSkx4zTqI/GIsOY4BPJC47Wo7lWiVwVuHpVGfSu4T9wZZyUeuf84k882OcfHws3Q==
+X-Received: by 2002:a05:6402:4605:b0:5d1:1f1:a283 with SMTP id 4fb4d7f45d1cf-5de4503ffdbmr7787780a12.4.1739036534946;
+        Sat, 08 Feb 2025 09:42:14 -0800 (PST)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5dcf9f6c77esm4698325a12.69.2025.02.08.09.42.11
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 08 Feb 2025 09:42:12 -0800 (PST)
+Message-ID: <8abe2241-03de-405c-a862-d4c4c5e754c7@gmail.com>
+Date: Sat, 8 Feb 2025 18:42:10 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH 3/4] grpc: fix protobuf-lite package config
+To: peter.marko@siemens.com, openembedded-devel@lists.openembedded.org
+References: <20250208150308.2451484-1-peter.marko@siemens.com>
+ <20250208150308.2451484-3-peter.marko@siemens.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20250208150308.2451484-3-peter.marko@siemens.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 08 Feb 2025 15:23:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115313
+ <openembedded-devel@lists.openembedded.org>; Sat, 08 Feb 2025 17:42:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115314
 
-From: Peter Marko <peter.marko@siemens.com>
-
-There are 9 (out of 24) third party components used for build.
-Add their licenses.
-
-SUB third_party/abseil-cpp            .. not used (unbundled)
-    third_party/address_sorting       .. USED
-SUB third_party/benchmark             .. not used (testing)
-SUB third_party/bloaty                .. not used (testing)
-SUB third_party/boringssl-with-bazel  .. not used (unbundled; openssl)
-    third_party/cares                 .. not used (unbundled)
-SUB third_party/envoy-api             .. USED
-SUB third_party/googleapis            .. USED
-SUB third_party/googletest            .. not used (testing)
-    third_party/objective_c           .. not used (build helpers)
-SUB third_party/opencensus-proto      .. USED
-SUB third_party/opentelemetry         .. not used (gRPC_BUILD_GRPCPP_OTEL_PLUGIN)
-SUB third_party/opentelemetry-cpp     .. not used (gRPC_BUILD_GRPCPP_OTEL_PLUGIN)
-SUB third_party/protobuf              .. not used (unbundled)
-SUB third_party/protoc-gen-validate   .. USED
-    third_party/py                    .. not used (build helpers)
-    third_party/rake-compiler-dock    .. not used (build helpers)
-SUB third_party/re2                   .. not used (unbundled)
-    third_party/toolchains            .. not used (build helpers)
-    third_party/upb                   .. USED
-    third_party/utf8_range            .. USED
-SUB third_party/xds                   .. USED
-    third_party/xxhash                .. USED
-SUB third_party/zlib                  .. not used (unbundled)
-
-* address_sorting - BSD-3-CLAUSE (already in main license)
-  https://github.com/grpc/grpc/blob/master/third_party/address_sorting/LICENSE
-* envoy-api - Apache-2.0 (already in main license)
-  https://github.com/envoyproxy/data-plane-api/blob/4de3c74cf21a9958c1cf26d8993c55c6e0d28b49/LICENSE
-* googleapis - Apache-2.0 (already in main license)
-  https://github.com/googleapis/googleapis/blob/fe8ba054ad4f7eca946c2d14a63c3f07c0b586a0/LICENSE
-* opencensus-proto - Apache-2.0 (already in main license)
-  https://github.com/census-instrumentation/opencensus-proto/blob/4aa53e15cbf1a47bc9087e6cfdca214c1eea4e89/LICENSE
-* protoc-gen-validate - Apache-2.0 (already in main license)
-  https://github.com/bufbuild/protoc-gen-validate/blob/32c2415389a3538082507ae537e7edd9578c64ed/LICENSE
-* upb - BSD-3-Clause (already present in main LICENSE)
-  there is a note in all files
-* utf8_range - MIT
-  https://github.com/grpc/grpc/blob/master/third_party/utf8_range/LICENSE
-* xds - Apache-2.0 (already in main license)
-  https://github.com/cncf/xds/blob/3a472e524827f72d1ad621c4983dd5af54c46776/LICENSE
-* xxhash - BSD-2-Clause
-  https://github.com/grpc/grpc/blob/master/third_party/xxhash/LICENSE
-
-License-Update: added missing licenses
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
----
-v2: added missing LIC_FILES_CHKSUM update
-
- meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb b/meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb
-index 6e729e9734..f47a933afc 100644
---- a/meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb
-+++ b/meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb
-@@ -3,8 +3,12 @@ Provides gRPC libraries for multiple languages written on top of shared C core l
- (C++, Node.js, Python, Ruby, Objective-C, PHP, C#)"
- HOMEPAGE = "https://github.com/grpc/grpc"
- SECTION = "libs"
--LICENSE = "Apache-2.0 & BSD-3-Clause & MPL-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=731e401b36f8077ae0c134b59be5c906"
-+LICENSE = "Apache-2.0 & BSD-3-Clause & MPL-2.0 & MIT & BSD-2-Clause"
-+LIC_FILES_CHKSUM = " \
-+    file://LICENSE;md5=731e401b36f8077ae0c134b59be5c906 \
-+    file://third_party/utf8_range/LICENSE;md5=d4974d297231477b2ff507c35d61c13c \
-+    file://third_party/xxhash/LICENSE;md5=cdfe7764d5685d8e08b3df302885d7f3 \
-+"
- 
- DEPENDS = "abseil-cpp c-ares openssl protobuf protobuf-native re2 zlib"
- DEPENDS:append:class-target = " grpc-native"
+> Note: for native, this packageconfig does not even compile and for
+> target it fails to link.
+Since it couldn't be more broken even if it tried, what do you think 
+about dropping this conf altogether and simply hard-disabling it in 
+EXTRA_OECMAKE (if it's not off by default)?
 
