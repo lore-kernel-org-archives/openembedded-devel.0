@@ -2,92 +2,91 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5841EC0219B
-	for <webhook@archiver.kernel.org>; Sun,  9 Feb 2025 17:06:31 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.web11.32338.1739120784586772782
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B56AC0219E
+	for <webhook@archiver.kernel.org>; Sun,  9 Feb 2025 17:59:51 +0000 (UTC)
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.web11.33373.1739123981562662478
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 09 Feb 2025 09:06:24 -0800
+ Sun, 09 Feb 2025 09:59:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=A1t+LoM2;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-436341f575fso42575155e9.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Feb 2025 09:06:24 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mCvlfn9Y;
+ spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-38dc660b56cso2579511f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Feb 2025 09:59:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1739120783; x=1739725583; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1739123980; x=1739728780; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=JVrQ+cWQnRqj3AkGPfVnBWqtRTAivm+UMSX9uca4tTM=;
-        b=A1t+LoM2RK93ZqytXjxxULSgPhLqXEDoMh/w9rptg7ihwpHLo9KsQAsq5tGT4363fn
-         rCICL13X7rlJFcwHPRa5+NKd5x6oLS5SpQwELqoRLz80PCkYaAVrvC7lNLAeOwA4bk7c
-         BIg58hhH3lCBXx2AdF6Ch41EzvZkVjGnFn7Jn3MFdgFFRojKQsnogkOCzWTm+pMbQkn0
-         Vx+bYiaNupChwYpTZNWE6pzaPd9cpib7p6hTUa1pnvqUAz+wdeM9UYdQM6/I188pR1Ag
-         kzJqUhfE8NKdYNUP4NqGDiU9CI0iVHWRvInkLC6zibCFG+9xiOpQz3AqrLcBSTblwu31
-         f1nQ==
+        bh=SRJGVes7amoxu7/FE1DiwTvsNq9uhudQW6fXrD42Kjg=;
+        b=mCvlfn9YbD47he7rNL8WmRjfGIyZ+oWTfEVJ6w6qp9S3DcSUExspWGuoDh5BGnyGDy
+         5KfdnIS/RzANYJSioEGTdTBVkXBZjW1NEK4iyeFAsMvHEjlxGFFyitTQYL/YdI4FEpG/
+         uKLgohbK6A2dakNgJdD3+gjjEbiFiMOvkVV19qHvXTvoARx7ycAuK7ihQKIVpgBCEJib
+         20J1/d1l0jnTGFD3uvWWfYdfBGqoQTi1+OXnTc2DFpZE+hXyx9KmGnhiXkL3i7us+9oW
+         pjXUfYJipFg9lRGj+nyZ2exLcFRiv9fWKPXZuZoKdyl5UCLm/Ki+b8IVHUaJip5ID88+
+         r9xw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739120783; x=1739725583;
+        d=1e100.net; s=20230601; t=1739123980; x=1739728780;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=JVrQ+cWQnRqj3AkGPfVnBWqtRTAivm+UMSX9uca4tTM=;
-        b=BP6Rhlep+IRlG6csgxcBqViTH2wnoTL/IoXiDxKWyR67ypn/rjpFDhQOoAHIgtgflW
-         MsoPpcrDs06EzgPaN7CT4ECfGZO/GLgArjVojAB8EbJh7OgPEyKOz+/+QcwAEBxoSFl3
-         eY7k3PdtoqrZioug0NXQKWNV6tkxEViGQT/4xxrmS4VEVluBpn5Qe98b74dJs7bwYt3R
-         +RcCKxqCxaclFVAGJ2ogzWcrIFQW0u9ZBS0d86iw832KhGj8lZ6rhR9JnqOpo+fz4EPX
-         LKBl58c2IcActmaELg8moJ/IClC0u4s5jdow7SSJV/ZWPdJeyvtSA0BC3GW35h8OJApi
-         bGlw==
-X-Gm-Message-State: AOJu0YwG9aJeVICXHDW1pxVxWclUoY3wsO6T7OFk7eDjo08FvE5OQJ63
-	Lri5HSzetHRCB/9B3DSM5D4PH1NLe2PoahpFeizjqeAypYJcnzZPy8h2pQ==
-X-Gm-Gg: ASbGncuphxKWhm5PZauamfKDyUevg6eF/jlvIxrS5sbcXlxvVvMyWlZPQg3O8ZsxbkF
-	kZLug9JWoBGbkYOx1pDO7coloJxKiChEoYsLx5hOhzOsf3ocgpuall2scLZwsvVlLUN2atInKle
-	w6PYkVgbb94UnuINgcxL+dmN4uITi1siHkWFsA4aMe1AFslOWOdg+p5gWfWYxxMhSKFpY3aAWEq
-	Lb31ClzRzV9nhrhiBIR3xnMreOb1P8eo1nlTqIyWrtdRNY35HJz6yBt2yr4KD7kT4X0/nMzoxJ2
-	JYZ6s3PvIWC8xhnDvdT2jnRu7P2utCs=
-X-Google-Smtp-Source: AGHT+IEinH6/eHO/MKD/IZ8KUUd3Aj6hrL1a/rQTKHSuZlYE29PZICFmhsd2RXDYhAh89vyqvYz1UA==
-X-Received: by 2002:a05:600c:458e:b0:430:57e8:3c7e with SMTP id 5b1f17b1804b1-439249bd34fmr84786885e9.28.1739120782672;
-        Sun, 09 Feb 2025 09:06:22 -0800 (PST)
+        bh=SRJGVes7amoxu7/FE1DiwTvsNq9uhudQW6fXrD42Kjg=;
+        b=Q8v7HHrYfaop0YMreLz58v8NrNAlvOAFK+RaFPTpJ6G2MVHhcX18HND9yFuhuhVYk+
+         wE0ZuYeoNj0L85Zjczz1Rt7gTNzdqb8ps6z4Ndp6OXFnHaOAXV5ywOmkVj+if2NJ7WEE
+         RBPSLT1l0bR5uNEyyfDagGvd2EuTfiUQkQJiIMJiZb/UKxn6vyoo23q+zyOwsFQsw6vm
+         9ApOhPlcSxj5DWb0iKNAca0TLmVANW2PhkskC0e2zFH3rFO35vNbR9bs8Ejv+cHVctoD
+         j6moZ63CzMs5qHJ7Xdp/RNUPNriFGAYzAmUwVOuOeRhfmj2cdS+qKEwedTD/LLywQUJ+
+         garQ==
+X-Gm-Message-State: AOJu0YwSFW3J4n8JEvezB9ZGzMSK8U6mn+eO/SzTni1qijJaIrAJPKLR
+	r2aRV47ErdbMUbuPxPiX6fRkgvNP+KarHRIZCcVyHU9fKz76KoYtsANRUQ==
+X-Gm-Gg: ASbGnctVXQJc86T5XovEZEaJuvWQQjXL4eSaAvSt3+GfmzxCjExiMOh+Dp1cuj4W+0h
+	JeztFxF1D3NV2Owi4RunXwI8aZoNCPFtSS8vEPTbHBamUUQO72n5hWuULlx1y/mZ8T4YxgAwiMU
+	GCmOKdAh+hEWSBo2AP0Vfg6Y1SNECgBAWJZcqaynXlkVObRRax5YXvy12GZtsZ0BjiEcyCzrYSH
+	4KLNtAMdNXvOww+bUXdDRgYCIJBvGaSj+2XzvfIf3Q5PuvrMMpCz1Z8hLWpc7GEnoewIJw7MUki
+	x+Yu0Lf184dOyZw8drDE0NIrIrMnKJ8=
+X-Google-Smtp-Source: AGHT+IGH2Bcoz/zE+aGET9moqCYaktXzy72JeoljqSg0pP/NpRWTtp1I5hOhWti0D8ROadGq9ZR3Xw==
+X-Received: by 2002:a05:6000:400d:b0:38d:dce1:f207 with SMTP id ffacd0b85a97d-38ddce1f3eemr1845012f8f.44.1739123979600;
+        Sun, 09 Feb 2025 09:59:39 -0800 (PST)
 Received: from localhost.localdomain ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4390d93379fsm157916355e9.5.2025.02.09.09.06.21
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38dbf2ed900sm9976590f8f.53.2025.02.09.09.59.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 09 Feb 2025 09:06:21 -0800 (PST)
+        Sun, 09 Feb 2025 09:59:39 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Gyorgy Sarvari <skandigraun@gmail.com>
-Subject: [meta-gnome][PATCH] ibus: missing installed file w/ gtk2 PACKAGECONFIG
-Date: Sun,  9 Feb 2025 18:06:19 +0100
-Message-ID: <20250209170619.3727086-1-skandigraun@gmail.com>
+Subject: [meta-gnome][PATCH] gnome-commander: missing dependency for tests PACKAGECONFIG
+Date: Sun,  9 Feb 2025 18:59:37 +0100
+Message-ID: <20250209175937.3947017-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 09 Feb 2025 17:06:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115319
+ <openembedded-devel@lists.openembedded.org>; Sun, 09 Feb 2025 17:59:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115320
 
-In case gtk2 PACKAGECONFIG is enabled, do_package task fails
-with the following error:
+If tests PACKAGECONFIG is enabled, do_configure errors out:
 
-ERROR: ibus-1.5.26-r0 do_package: QA Issue: ibus: Files/directories were installed but not shipped in any package:
-  /usr/lib/gtk-2.0/2.10.0/immodules/im-ibus.so
+../gnome-commander-1.16.1/meson.build:179:8: ERROR: Dependency "gtest" not found, tried pkgconfig and system
 
-This patch adds the missing folder to the FILES variable.
+Fix it by adding the missing dependency.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-gnome/recipes-support/ibus/ibus.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../recipes-gnome/gnome-commander/gnome-commander_1.16.1.bb     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-support/ibus/ibus.bb b/meta-gnome/recipes-support/ibus/ibus.bb
-index 141341e34..479498d82 100644
---- a/meta-gnome/recipes-support/ibus/ibus.bb
-+++ b/meta-gnome/recipes-support/ibus/ibus.bb
-@@ -30,6 +30,7 @@ FILES:${PN} += " \
-     ${datadir}/dbus-1 \
-     ${datadir}/GConf \
-     ${datadir}/glib-2.0 \
-+    ${libdir}/gtk-2.0 \
-     ${libdir}/gtk-3.0 \
-     ${libdir}/gtk-4.0 \
-     ${systemd_user_unitdir} \
+diff --git a/meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.16.1.bb b/meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.16.1.bb
+index bb36d59e5..d96371de3 100644
+--- a/meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.16.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.16.1.bb
+@@ -25,7 +25,7 @@ PACKAGECONFIG[taglib] = "-Dtaglib=enabled,-Dtaglib=disabled,taglib"
+ PACKAGECONFIG[libgsf] = "-Dlibgsf=enabled,-Dlibgsf=disabled,libgsf"
+ PACKAGECONFIG[poppler] = "-Dpoppler=enabled,-Dpoppler=disabled,poppler"
+ PACKAGECONFIG[samba] = "-Dsamba=enabled,-Dsamba=disabled,samba"
+-PACKAGECONFIG[tests] = "-Dtests=enabled,-Dtests=disabled,"
++PACKAGECONFIG[tests] = "-Dtests=enabled,-Dtests=disabled,googletest"
+ 
+ FILES:${PN} += "${datadir}/metainfo"
+ FILES:${PN}-dev += "${libdir}/${BPN}/lib*${SOLIBSDEV}"
 
