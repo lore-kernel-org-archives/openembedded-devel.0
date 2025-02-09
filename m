@@ -1,127 +1,127 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 96949C02199
-	for <webhook@archiver.kernel.org>; Sun,  9 Feb 2025 04:32:47 +0000 (UTC)
-Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
- by mx.groups.io with SMTP id smtpd.web11.23759.1739075561740848939
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DE980C02199
+	for <webhook@archiver.kernel.org>; Sun,  9 Feb 2025 15:35:50 +0000 (UTC)
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.web11.30638.1739115341450660406
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 08 Feb 2025 20:32:41 -0800
+ Sun, 09 Feb 2025 07:35:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=W9izi4AA;
- spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-2a9ef75a20dso3493950fac.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 08 Feb 2025 20:32:41 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YrkyY9k2;
+ spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-43932b9b09aso10684055e9.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Feb 2025 07:35:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1739075561; x=1739680361; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=6jQlpmhUiK59hks+vNRt7/7fvPADL1UQAoeIxVaKN6Q=;
-        b=W9izi4AAyGFFP7gnjJHK5wctrrwaiftuEIpIZjU9Jdc9ATqEewoIMm7rNFnsWK4EXz
-         4Aj+jaqB2g6yRN25oewAj0T1ToCdIjoxcaSPgaJ2Ev4zrHks9DWVzU9EFL3w01Eb1EYO
-         trEXbsCDLZtG9jOV33MX2qLTr+iI8vFuUc+2R5aXCrrUGndl80tFTpz1lAW19IcCOQnl
-         kAjKBq6UwkuG6EzRHqnLqA9pJ5uy25b7ZiNT96ko8y69G0mTixCiDKY9ZHzTsVajduMS
-         V24FNnMrvh5NViphUJJGvEpCsxEypt3UGB2OYVC4YRpkDZYPNByvGOfJReMewTKGDOMk
-         5cXg==
+        d=gmail.com; s=20230601; t=1739115340; x=1739720140; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=DlL/D7P6aOsdKhSsgcphwsXuIR2sJnFH6iGi0o4HI+o=;
+        b=YrkyY9k24aZypRDodChWBOsMYwR3lBEPWzu4ta0kqTYdOoS5YStucm0xcwVdS3wrGp
+         NI+j6LhNvon4m/wztv0vfm2xghubrY4eGCyfBHaf2Y4idPh1XVPi9DirypIN5/vYv37N
+         u/RaRTAn4Zjh9S+GtaHJ8tH+faw8iBMu4m1FZPbi90beZi1ra8r21m2O1RlgnndyRhm5
+         8CV/ptC/PfgXgbppdedTqbhyFoaQUEwL3KlEajjPXlI2BkVjZxZ3zq7CrhOjdQxpZIef
+         4jiGifvL1C6irFbi5t0OYfRDs7QhFlFLWgdxxKR1Y3iK5wMcBC/WWfyFM5GR+RLx9uls
+         68BQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739075561; x=1739680361;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=6jQlpmhUiK59hks+vNRt7/7fvPADL1UQAoeIxVaKN6Q=;
-        b=W5n5ydQuNbxSDmBQg8v+3eV91N3dxadZCvKGpesMi82tkem0t3wSLJr1kp+il9BBSt
-         4oaspX0o6RpuiCYw35Cg2HK7Ctp3j4rtP/t2wRCn2Pou1byPl1Hr32L39v2yBsTl/817
-         zfjfNlkk+qIgrCnkGlcLCXca+1e4tyUow2Da9WaB+bQaqL3ShSe+X80glGQKL5hkZ5Vc
-         y6huVGa/juXrX7BiQy/QvLkydYEJ3AeBL8iNHeCV65jJ2jEJ5nRsH0BQbidPo3wQT2xL
-         pjk8sC8nYmTlzpBlHNVVCGlEqXyZfBNdw+H2QACvY/MMIAcWJ7i/jSqZu1FX25HY1Q1t
-         imdg==
-X-Forwarded-Encrypted: i=1; AJvYcCVmDdylvgNBXSl5/kYahMhEBlPUd5cXXuah0q+TA4qN5rwdM0O8GEbamcgZ1FBMvYDi8az6gtWsJnY03+mveKpgGP8=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yz+39H5d0iCouyqI/Y52bcjJkkQOPuX71W/FycLdZ5JQZTr2P4U
-	DSAKkb8SrL+Z9WAGkgxYwfL01Q/ql5PUUyjCAkrAacAKy4A3M11gaxwtgBHRJRpcg9Tc/p9XH6V
-	t1I40+zbCrSRsnh3qCqTndoNUrqY=
-X-Gm-Gg: ASbGncv0GaYJaMNZCZfJtsGl+6tZfClQnRxZFMFul+WmV+9YbZ4KVoAVnm+hjhVFyAY
-	nGpdRQKFOfzrlPL0d7gU6MmnTqTx8NQBHAvM5Ut47nQoNoo+n+cjMVSCLfuqLPM9TOLe+sBh4vY
-	ZL3tjf60mCqJ4=
-X-Google-Smtp-Source: AGHT+IExgs/bz29Q0vlM92fDEnTe3vOUfjuECkJNWW5F4TXcMV1aviMEEk9REEpSkoyK/SmCZZtHotAVawonCgy4WxA=
-X-Received: by 2002:a05:6870:82aa:b0:29e:509c:3711 with SMTP id
- 586e51a60fabf-2b83ec22ce7mr5023713fac.15.1739075560984; Sat, 08 Feb 2025
- 20:32:40 -0800 (PST)
+        d=1e100.net; s=20230601; t=1739115340; x=1739720140;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=DlL/D7P6aOsdKhSsgcphwsXuIR2sJnFH6iGi0o4HI+o=;
+        b=ossKoAZ+9ZWeG9oqZxr2rVJHbdXR/6KyeoupvR68K+Tu9Ewk8b7VAzX2Q8tf9TuKxW
+         sgj9lVeG9adXczjsKeWTgA7nrDEaE97iV6ThjfyoBCtbg8CKzRo2PgCjF8q2vTOu0YGe
+         SJuS8xIn8MxwIOkUKCbjrddW6Yfy1GqgcaLeRQbkS7wnF9pEHh0uOQ8kNcn9IdGMfa+o
+         7fo9Jr+D8wCn+PjFycVRduxugZbYS4bMm5XSbvYvuW06UyvVpjxsAiTtuwElZb6MmMws
+         SL1wEPLg/Pty4x8ElW1dWqRfaLm/1D6z5/q5vJUtvuPLUwJ6aiRNVn7twQb/eXlD1exd
+         u5TQ==
+X-Gm-Message-State: AOJu0YxrFMaHTLas1lbeU8xE9TCLamvA269q0WYDoFDgucIzY4nMx3eQ
+	1YvkPHcctBOIE72GTwz7z8+NTeWwXv4gspwSfE6+m5L83g/DA7EU+RgVcg==
+X-Gm-Gg: ASbGncv5xB1U89QxIGdee7VZl6acFFqzCQWIfPDTXmensgwP8Bmy0cCZQ5hkVR9fDKw
+	J9DzSFuQ49JNgDXSMcS8xeoeYu9P/l/5piVIGFm2wDZd/FphsVXmJiYxSQ/aitxsJlzwLgV10L8
+	bnAeeoD0QRZYWtdo45SLD6ENPw16KjEntNef1XbSEGOQ5oxjwkbSkfEtNWkcDNAOshR892B+VZo
+	DTrJBp/5pseSsSn0P/NJRBHUbTOyJp7dtHGbyv4DZyKZgzg8LpzBWWBCdejm21+nZfkiSZEY5RP
+	k7F7TDFJhqWp2n00H9jVqJnw88QdU+4=
+X-Google-Smtp-Source: AGHT+IFdg+Xza9TASLk54wGCfVkTWDnBU8EOr8SerIstTyQOHXMC71V9TgEyC94xD7vuQDv9bTNjow==
+X-Received: by 2002:a05:600c:1da8:b0:431:5c3d:1700 with SMTP id 5b1f17b1804b1-439249a7534mr77383255e9.21.1739115339727;
+        Sun, 09 Feb 2025 07:35:39 -0800 (PST)
+Received: from localhost.localdomain ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38dbde1dfaesm10036738f8f.90.2025.02.09.07.35.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 09 Feb 2025 07:35:39 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Gyorgy Sarvari <skandigraun@gmail.com>
+Subject: [meta-gnome][PATCH] gegl: Clean up PACKAGECONFIG
+Date: Sun,  9 Feb 2025 16:35:37 +0100
+Message-ID: <20250209153537.3382225-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <20250208150308.2451484-1-peter.marko@siemens.com>
- <20250208150308.2451484-3-peter.marko@siemens.com> <8abe2241-03de-405c-a862-d4c4c5e754c7@gmail.com>
- <AS1PR10MB569711835D42CC78E89BC505FDF02@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
-In-Reply-To: <AS1PR10MB569711835D42CC78E89BC505FDF02@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 8 Feb 2025 20:32:15 -0800
-X-Gm-Features: AWEUYZlBVOO0hJ4-HKcMVxW2XX-wxNviBEdy8ahxMKTNIv9XDs4-I4H8oYqX7x8
-Message-ID: <CAMKF1soseB8dBa1gKeteKBZAWySCDQBrEEs3uJP3PyeMkkxZqw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 3/4] grpc: fix protobuf-lite package config
-To: peter.marko@siemens.com
-Cc: Gyorgy Sarvari <skandigraun@gmail.com>, 
-	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 09 Feb 2025 04:32:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115316
+ <openembedded-devel@lists.openembedded.org>; Sun, 09 Feb 2025 15:35:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115317
 
-On Sat, Feb 8, 2025 at 10:04=E2=80=AFAM Peter Marko via lists.openembedded.=
-org
-<peter.marko=3Dsiemens.com@lists.openembedded.org> wrote:
->
->
->
-> > -----Original Message-----
-> > From: Gyorgy Sarvari <skandigraun@gmail.com>
-> > Sent: Saturday, February 8, 2025 18:42
-> > To: Marko, Peter (FT D EU SK BFS1) <Peter.Marko@siemens.com>;
-> > openembedded-devel@lists.openembedded.org
-> > Subject: Re: [oe] [meta-oe][PATCH 3/4] grpc: fix protobuf-lite package =
-config
-> >
-> > > Note: for native, this packageconfig does not even compile and for
-> > > target it fails to link.
-> > Since it couldn't be more broken even if it tried, what do you think
-> > about dropping this conf altogether and simply hard-disabling it in
-> > EXTRA_OECMAKE (if it's not off by default)?
->
-> Since I'm not using it, I don't have strong opinion on this.
-> Removing broken features is good, but maybe this works
-> in all other releases and it's broken only temporarily?
->
-> I'd defer this question to Khem.
->
-> In general, this is a problem with most of non-default
-> packageconfig options - not tested things are slowly rotting.
-> Ideally there would be autobuilder test with alternative configuration fo=
-r all recipes...
->
+1. Correct the compile-time dependency name for "webp"
+PACKAGECONFIG (webp -> libwebp)
 
-since its not enable in default set of packageconfig, so it wont break
-common usecase
-but if someone wants to use it, then they will have to fix it before
-using it. So in a way
-its a bad taste on one end but perhaps an opportunity to fix it on the
-other. So I am
-ambivalent, this change makes things better syntactically so I will
-accept this patch
-but if you send me another one to remove the packageconfig that can be
-considered too.
+2. Remove jpeg and libpng PACKAGECONFIGS, and add jpeg
+and libpng to DEPENDS: both libjpeg and libpng are mandatory
+dependencies since 0.4.30, and the corresponding meson
+options have no effect.
+(This didn't fail the compilation in the past when these
+PACKAGECONFIGs were disabled, because these packages are
+pulled into the sysroot also by other dependent packages,
+which are usually not disabled. E.g. jpeg is pulled in by
+babl, libpng is pulled in by cairo)
 
-> Peter
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#115315): https://lists.openembedded.org/g/openembedde=
-d-devel/message/115315
-> Mute This Topic: https://lists.openembedded.org/mt/111070545/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ meta-gnome/recipes-gimp/gegl/gegl_0.4.52.bb | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/meta-gnome/recipes-gimp/gegl/gegl_0.4.52.bb b/meta-gnome/recipes-gimp/gegl/gegl_0.4.52.bb
+index b993386e3..2717b3fa8 100644
+--- a/meta-gnome/recipes-gimp/gegl/gegl_0.4.52.bb
++++ b/meta-gnome/recipes-gimp/gegl/gegl_0.4.52.bb
+@@ -11,6 +11,8 @@ DEPENDS = " \
+     zlib \
+     \
+     json-glib \
++    libpng \
++    jpeg \
+ "
+ 
+ DEPENDS:append:toolchain-clang  = " openmp"
+@@ -28,16 +30,14 @@ SHPV = "${@gnome_verdir("${PV}")}"
+ SRC_URI = "https://download.gimp.org/pub/${BPN}/${SHPV}/${BP}.tar.xz"
+ SRC_URI[sha256sum] = "ca212a0fc3e0448c5058c51ca6a0d30fdfb02971f21f28820da2b4901396000a"
+ 
+-PACKAGECONFIG ??= "gexiv2 jpeg libpng libraw librsvg pango poppler sdl2"
+-PACKAGECONFIG:class-native = "libpng librsvg"
++PACKAGECONFIG ??= "gexiv2 libraw librsvg pango poppler sdl2"
++PACKAGECONFIG:class-native = "librsvg"
+ 
+ PACKAGECONFIG[jasper] = "-Djasper=enabled,-Djasper=disabled,jasper"
+ PACKAGECONFIG[gexiv2] = "-Dgexiv2=enabled,-Dgexiv2=disabled,gexiv2"
+ PACKAGECONFIG[graphviz] = "-Dgraphviz=enabled,-Dgraphviz=disabled,graphviz"
+-PACKAGECONFIG[jpeg] = "-Dlibjpeg=enabled,-Dlibjpeg=disabled,jpeg"
+ PACKAGECONFIG[lcms] = "-Dlcms=enabled,-Dlcms=disabled,lcms"
+ PACKAGECONFIG[libav] = "-Dlibav=enabled,-Dlibav=disabled,libav"
+-PACKAGECONFIG[libpng] = "-Dlibpng=enabled,-Dlibpng=disabled,libpng"
+ PACKAGECONFIG[libraw] = "-Dlibraw=enabled,-Dlibraw=disabled,libraw"
+ PACKAGECONFIG[librsvg] = "-Dlibrsvg=enabled,-Dlibrsvg=disabled,librsvg"
+ PACKAGECONFIG[pango] = "-Dpango=enabled -Dpangocairo=enabled,-Dpango=disabled -Dpangocairo=disabled,pango"
+@@ -45,7 +45,7 @@ PACKAGECONFIG[poppler] = "-Dpoppler=enabled,-Dpoppler=disabled,poppler"
+ PACKAGECONFIG[sdl] = "-Dsdl1=enabled,-Dsdl1=disabled,libsdl"
+ PACKAGECONFIG[sdl2] = "-Dsdl2=enabled,-Dsdl2=disabled,libsdl2"
+ PACKAGECONFIG[tiff] = "-Dlibtiff=enabled,-Dlibtiff=disabled,tiff"
+-PACKAGECONFIG[webp] = "-Dwebp=enabled,-Dwebp=disabled,webp"
++PACKAGECONFIG[webp] = "-Dwebp=enabled,-Dwebp=disabled,libwebp"
+ 
+ # There are a couple of non-symlink .so files installed into libdir, which need to go into main package
+ FILES:${PN} += " \
 
