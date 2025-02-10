@@ -2,50 +2,50 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AEC02C021B5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C260EC021B6
 	for <webhook@archiver.kernel.org>; Mon, 10 Feb 2025 09:02:07 +0000 (UTC)
-Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
- by mx.groups.io with SMTP id smtpd.web10.46620.1739178111221225344
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.web10.46625.1739178119825938406
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Feb 2025 01:01:57 -0800
+ Mon, 10 Feb 2025 01:02:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=p3sE9uKI;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Q9PNlIDc;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1739178118; x=1770714118;
+  t=1739178120; x=1770714120;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=qJ1LX6lLk4kehyM0B+XlobIedQHiLyBEndGloXy0ljU=;
-  b=p3sE9uKI1SBLDIce/+RZ5PMX7Qaxl36OlrKsonebBW6WbYfbfc8/9a06
-   uyJ2qLVbY2guJJ+25aK5WCdqFmz1atpfhlCQcUnUP7cFUJDbegIlMna3E
-   mutjLQKufp3OOlggAlG7WQtx1JbI6HeC+C/tJJE6HGILBS8kgyGA68toe
-   lQG6nzcjmj2eCPbhX2wGy8eEPOmScpNhRAah0GygTRB0aNEzsTe6jZgYO
-   nJftKfrtNs/Q4gYjjmTYYuYkIE+/ZSp35u5zm86uyTpLZtcPGE/wN68eF
-   eS+oAQqyat2bcn6s6gMuSRDA84a5XnsnX0LWw4Z6wJhpeFoqIVH5N0YSj
-   w==;
-X-CSE-ConnectionGUID: 2L0bAQE7Q7yH06GZqSZ/tw==
-X-CSE-MsgGUID: urnWH59OSoqOnku8+fcNng==
-X-IronPort-AV: E=McAfee;i="6700,10204,11340"; a="189426335"
+  bh=IFaqAj29jNp9qfL4kTD8oTfc/TCRvfC7O8JIFphtQEQ=;
+  b=Q9PNlIDcGPBOHGOxX/m9wnXwghBy/86BzUCDbQWG65vo1nLE/lUVRaTk
+   OKeUpaREXhVCEezVYe3R977hYFRvzufXsdUqktZbq2lTWwTxV8bvrKdu6
+   EvNtyh4EP9XPrkNxckqXW/Zl22SYqD/StSct1ZVWIxlMXzmw+MvdMBpP/
+   sThb1MCL+V7LRNvb1XTl1aOLwgAENnuDa/Tuk/GKt3g4ItdVC8rek4Zoh
+   HK/MV0kS7iogybBMnB3FXKEmm2iMzgE38BRjQMW+5HOm7tgdI43v4x5vb
+   2lXxMpJhoITEBqEkKgfwj55gnn2qbGtBT4QGm1NDsjR05SU3wOfZjzzNp
+   g==;
+X-CSE-ConnectionGUID: okRKtldmQEe6/d4SOtBioA==
+X-CSE-MsgGUID: JnnyfzM+QwuEtSOClPq2tg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11340"; a="177845823"
 X-IronPort-AV: E=Sophos;i="6.13,274,1732546800"; 
-   d="scan'208";a="189426335"
-Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Feb 2025 18:01:57 +0900
-Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
-	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id AC1E0DC6A0
-	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 18:01:53 +0900 (JST)
+   d="scan'208";a="177845823"
+Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Feb 2025 18:01:57 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 776FCD6EA5
+	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 18:01:55 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 6C476D4C33
-	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 18:01:53 +0900 (JST)
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 3FF48D9695
+	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 18:01:55 +0900 (JST)
 Received: from localhost.localdomain.localdomain (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 124501A006C;
-	Mon, 10 Feb 2025 17:01:53 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 064D51A006C;
+	Mon, 10 Feb 2025 17:01:54 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH 20/66] nautilus: upgrade 47.1 -> 47.2
-Date: Mon, 10 Feb 2025 17:00:49 +0800
-Message-Id: <1739178095-26432-20-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 26/66] python3-beautifulsoup4: upgrade 4.12.3 -> 4.13.3
+Date: Mon, 10 Feb 2025 17:00:55 +0800
+Message-Id: <1739178095-26432-26-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1739178095-26432-1-git-send-email-wangmy@fujitsu.com>
 References: <1739178095-26432-1-git-send-email-wangmy@fujitsu.com>
@@ -53,43 +53,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 09:02:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115348
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115353
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-==========
-* Enhancements:
-- Adopt CI release workflow
- - Speed up batch file deletions
- - Speed up simple recursive search through mount monitors
-* Bugfixes:
- - Fix thumbnails for changed files
- - Fix parent path URIs for remote path
- - Fix potential crashes in directory callbacks
-* Translation updates (GNOME Translation Project contributors)
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../nautilus/{nautilus_47.1.bb => nautilus_47.2.bb}             | 2 +-
+ ...eautifulsoup4_4.12.3.bb => python3-beautifulsoup4_4.13.3.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/nautilus/{nautilus_47.1.bb => nautilus_47.2.bb} (93%)
+ rename meta-python/recipes-devtools/python/{python3-beautifulsoup4_4.12.3.bb => python3-beautifulsoup4_4.13.3.bb} (83%)
 
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_47.1.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_47.2.bb
-similarity index 93%
-rename from meta-gnome/recipes-gnome/nautilus/nautilus_47.1.bb
-rename to meta-gnome/recipes-gnome/nautilus/nautilus_47.2.bb
-index 4baa8c2944..9f44dcb114 100644
---- a/meta-gnome/recipes-gnome/nautilus/nautilus_47.1.bb
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus_47.2.bb
-@@ -24,7 +24,7 @@ DEPENDS = " \
+diff --git a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.12.3.bb b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.13.3.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-beautifulsoup4_4.12.3.bb
+rename to meta-python/recipes-devtools/python/python3-beautifulsoup4_4.13.3.bb
+index d08017d003..a36c22e6f1 100644
+--- a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.12.3.bb
++++ b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.13.3.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = " https://www.crummy.com/software/BeautifulSoup/bs4"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=96e0034f7c9443910c486773aa1ed9ac"
  
- inherit gnomebase gsettings gobject-introspection gi-docgen gettext features_check mime-xdg gtk-icon-cache
+-SRC_URI[sha256sum] = "74e3d1928edc070d21748185c46e3fb33490f22f52a3addee9aee0f4f7781051"
++SRC_URI[sha256sum] = "1bd32405dacc920b42b83ba01644747ed77456a65760e285fbc47633ceddaf8b"
  
--SRC_URI[archive.sha256sum] = "15450ebc7aa61ed2fae63130af9ebbbae14ce706a547f594c66bb8cca724d74c"
-+SRC_URI[archive.sha256sum] = "7f3203474f2e6374a11c6754ef33f3360eaf7f5b5e85f5e477e8a0ae0fa764d9"
- 
- REQUIRED_DISTRO_FEATURES = "x11 opengl gobject-introspection-data"
+ inherit pypi python_hatchling
  
 -- 
 2.43.0
