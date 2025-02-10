@@ -1,104 +1,165 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <hongxu.jia@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17A28C02198
-	for <webhook@archiver.kernel.org>; Mon, 10 Feb 2025 10:10:39 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
- by mx.groups.io with SMTP id smtpd.web10.47442.1739182230806302661
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F288C0219D
+	for <webhook@archiver.kernel.org>; Mon, 10 Feb 2025 10:13:59 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.47489.1739182435068355032
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Feb 2025 02:10:31 -0800
+ Mon, 10 Feb 2025 02:13:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=U/iAxU/v;
- spf=pass (domain: konsulko.com, ip: 209.85.218.47, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-ab7c14b880dso147286566b.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 02:10:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1739182229; x=1739787029; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Xz3hFOZa6UF/iIL7NUOJrCIb4b4c08WORQ3kJ7pCC0g=;
-        b=U/iAxU/vuAfpW6HEsUF+QlSYHN2DH+Fh5j0QvRu7+GumJLXXTJFo1kmiJDk20plyPl
-         /+nBeAIR8l41Tm25qTpMI31Lih64CZUJKPuckw4mbsSFJGy8qOhc4+psqtSjXYF8qYSK
-         /XHmMk6GiXK4ri/Ed3TuiQTLcsN9jaOs3CVmw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739182229; x=1739787029;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Xz3hFOZa6UF/iIL7NUOJrCIb4b4c08WORQ3kJ7pCC0g=;
-        b=II2fRAPvJfRQbfHo/N6EGZ3kTOL1jpCpe0wne4u+rXh8F5sVMlHo1QlH07MjlR34A9
-         0CNjzIYqIZ5gkdNcMvUZNgOGL/ujAWNJTZzka0M55oeMcwvHyWdv5v1NfOTnr56jRxa9
-         26JXBACpYcOpYELCvfJiGjKHsQPuxBRKQcJk5IT5Uv+TCmJiCA4I0O+RxxUglv8KkprK
-         7AVaEjeVFKTUEwNvyy5a8EdwFUDeWiio01rO06gHU4EOR3Jpv/kPWV/6fo4KztJt4cHI
-         D4dLoDQJCGcnjsn5KPg3KSOeK6HtEdFev6R7kP3vDLezdd5I6ZgafpoQd4s+SMGgQ1e2
-         JKUA==
-X-Gm-Message-State: AOJu0YwCP/1oJbnvyzmNfw+2ZQgbGDmXLJ2MllvraufQcdCQtReaIwtu
-	yQ8tq6oUe/ZReYPOnFl+XrDiPRiZZSzKbZvSoSJ3V7kDJiEXzu0UYQaRQEEt7AVHLdKeUOs1hUp
-	Y
-X-Gm-Gg: ASbGncuHGBaGbwxtLGPAmT7qqzgN9JexnXfs7bXep5HRmBXWt61tlhSd4Z/ScKUKEGr
-	GkQ5nxrbdd06OlyadXNVAHggiW+G0elGSSJk5Fv+gdLSwT59vsY38mos2o14Yy5E7jLRCBVRE9t
-	MPn3LPvDCxaxcaZ6GftBt/Uze+LizIofzBEI5Z+GTltHruH2q2/449hOdfvDs/5gaY7yXESe+np
-	PR/ikNNJa1Zpd7DXkl5YxQAYTuEhbzc/zaJdj0Q2UuTxbDXTYrKxOVsmf6nd3PLpBNlvYQCIiwc
-	drNSo67tWb9zjcPXgmlv76mc2ZUKAA==
-X-Google-Smtp-Source: AGHT+IF0gpiHi6faOJY1GiDbV/0KAX2tAZ7WwqNrUjQEtKWChkrD6nWz6uiyFcFZ3YpOmjvfeR4RJQ==
-X-Received: by 2002:a17:907:980d:b0:ab6:b9c0:1ea2 with SMTP id a640c23a62f3a-ab789b1f985mr1253187766b.25.1739182228928;
-        Mon, 10 Feb 2025 02:10:28 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ab7bb9cc86fsm242747066b.140.2025.02.10.02.10.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Feb 2025 02:10:28 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/4] python3-semver: Upgrade 3.0.2 -> 3.0.4
-Date: Mon, 10 Feb 2025 12:10:23 +0200
-Message-Id: <20250210101023.1204349-4-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250210101023.1204349-1-leon.anavi@konsulko.com>
-References: <20250210101023.1204349-1-leon.anavi@konsulko.com>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=413644b4c0=hongxu.jia@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51A6Q9Lo031384
+	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 10:13:54 GMT
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 44nx88ss4t-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 10:13:54 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Mon, 10 Feb 2025 02:13:52 -0800
+Received: from pek-lpg-core5.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Mon, 10 Feb 2025 02:13:52 -0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH v2] nmap: fix racing issue at do_compile
+Date: Mon, 10 Feb 2025 18:13:51 +0800
+Message-ID: <20250210101351.2729667-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: JLKqkWBvhwn1qg6SNt0xZABGtk81K-Kg
+X-Authority-Analysis: v=2.4 cv=VZANPEp9 c=1 sm=1 tr=0 ts=67a9d162 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=T2h4t0Lz3GQA:10 a=NEAV23lmAAAA:8 a=auHYCxwYAAAA:8 a=t7CeM3EgAAAA:8 a=31k68eeUTyp9DnZEi88A:9 a=67XU6oJk2Lrwzah0vfu5:22
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: JLKqkWBvhwn1qg6SNt0xZABGtk81K-Kg
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-02-10_05,2025-02-10_01,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0
+ priorityscore=1501 impostorscore=0 mlxscore=0 mlxlogscore=999 spamscore=0
+ phishscore=0 lowpriorityscore=0 adultscore=0 clxscore=1015 suspectscore=0
+ bulkscore=0 classifier=spam authscore=0 authtc=n/a authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.21.0-2501170000
+ definitions=main-2502100085
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 10:10:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115398
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 10:13:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115399
 
-Upgrade to release 3.0.4:
+There are two build-lua rules, one in Makefile.in, another in
+ncat/Makefile.in which is required by build-ncat
 
-- Re-enable Trove license identifier
-- Fix source dist file
+Build them may cause potential racing
 
-License-Update: Replaced organization placeholder in LICENSE
+$ bitbake lib32-nmap
+$ grep -e "Compiling liblua" -e 'nmap-7.95/liblua' -e ": error" -n patch-to/temp/log.do_compile
+Compiling liblua
+make[1]: Entering directory 'path-to/build/tmp/work/corei7-32-wrsmllib32-linux/lib32-nmap/7.95/nmap-7.95/liblua'
+Compiling liblua
+make[2]: Entering directory 'path-to/build/tmp/work/corei7-32-wrsmllib32-linux/lib32-nmap/7.95/nmap-7.95/liblua'
+make[2]: Leaving directory 'path-to/tmp/work/corei7-32-wrsmllib32-linux/lib32-nmap/7.95/nmap-7.95/liblua'
+path-to/tmp/work/corei7-32-wrsmllib32-linux/lib32-nmap/7.95/recipe-sysroot-native/usr/bin/i686-wrsmllib32-linux/../../libexec/i686-wrsmllib32-linux/gcc/i686-wrsmllib32-linux/14.2.0/ld: ./../liblua/liblua.a: error adding symbols: no more archived files
+collect2: error: ld returned 1 exit status
+make[1]: Leaving directory 'path-to/tmp/work/corei7-32-wrsmllib32-linux/lib32-nmap/7.95/nmap-7.95/liblua'
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Explicitly make build-ncat depends on build-lua to avoid racing,
+after applying the patch
+...
+Compiling liblua
+make[1]: Entering directory 'path-to/tmp/work/corei7-32-wrsmllib32-linux/lib32-nmap/7.95/nmap-7.95/liblua'
+make[1]: Leaving directory 'path-to/tmp/work/corei7-32-wrsmllib32-linux/lib32-nmap/7.95/nmap-7.95/liblua'
+Compiling liblua
+make[2]: Entering directory 'path-to/tmp/work/corei7-32-wrsmllib32-linux/lib32-nmap/7.95/nmap-7.95/liblua'
+make[2]: Leaving directory 'path-to/tmp/work/corei7-32-wrsmllib32-linux/lib32-nmap/7.95/nmap-7.95/liblua'
+...
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../{python3-semver_3.0.2.bb => python3-semver_3.0.4.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-semver_3.0.2.bb => python3-semver_3.0.4.bb} (67%)
+ ...ing-between-build-ncat-and-build-lua.patch | 55 +++++++++++++++++++
+ meta-oe/recipes-security/nmap/nmap_7.95.bb    |  1 +
+ 2 files changed, 56 insertions(+)
+ create mode 100644 meta-oe/recipes-security/nmap/files/0001-fix-racing-between-build-ncat-and-build-lua.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-semver_3.0.2.bb b/meta-python/recipes-devtools/python/python3-semver_3.0.4.bb
-similarity index 67%
-rename from meta-python/recipes-devtools/python/python3-semver_3.0.2.bb
-rename to meta-python/recipes-devtools/python/python3-semver_3.0.4.bb
-index b329d65e1f..acac3bf3ca 100644
---- a/meta-python/recipes-devtools/python/python3-semver_3.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-semver_3.0.4.bb
-@@ -2,9 +2,9 @@ DESCRIPTION = "Python module for Semantic Versioning"
- HOMEPAGE = "https://github.com/python-semver/python-semver"
- BUGTRACKER = "https://github.com/python-semver/python-semver"
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d9da679db3bdce30a1b4328d5c474f98"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3ce011bad2c5218ddd4973952a6db93a"
- 
--SRC_URI[sha256sum] = "6253adb39c70f6e51afed2fa7152bcd414c411286088fb4b9effb133885ab4cc"
-+SRC_URI[sha256sum] = "afc7d8c584a5ed0a11033af086e8af226a9c0b206f313e0301f8dd7b6b589602"
- 
- inherit pypi python_setuptools_build_meta ptest-python-pytest
- 
+diff --git a/meta-oe/recipes-security/nmap/files/0001-fix-racing-between-build-ncat-and-build-lua.patch b/meta-oe/recipes-security/nmap/files/0001-fix-racing-between-build-ncat-and-build-lua.patch
+new file mode 100644
+index 0000000000..aad8b1ee92
+--- /dev/null
++++ b/meta-oe/recipes-security/nmap/files/0001-fix-racing-between-build-ncat-and-build-lua.patch
+@@ -0,0 +1,55 @@
++From 0cde425abfcacdde725dccff29d01c9fce7c3888 Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Sun, 9 Feb 2025 00:45:36 +0000
++Subject: [PATCH] fix racing between build-ncat and build-lua
++
++There are two build-lua rules, one in Makefile.in, another in
++ncat/Makefile.in which is required by build-ncat
++
++Build them may cause potential racing
++
++$ bitbake lib32-nmap
++$ grep -e "Compiling liblua" -e 'nmap-7.95/liblua' -e ": error" -n patch-to/temp/log.do_compile
++Compiling liblua
++make[1]: Entering directory 'path-to/build/tmp/work/corei7-32-wrsmllib32-linux/lib32-nmap/7.95/nmap-7.95/liblua'
++Compiling liblua
++make[2]: Entering directory 'path-to/build/tmp/work/corei7-32-wrsmllib32-linux/lib32-nmap/7.95/nmap-7.95/liblua'
++make[2]: Leaving directory 'path-to/tmp/work/corei7-32-wrsmllib32-linux/lib32-nmap/7.95/nmap-7.95/liblua'
++path-to/tmp/work/corei7-32-wrsmllib32-linux/lib32-nmap/7.95/recipe-sysroot-native/usr/bin/i686-wrsmllib32-linux/../../libexec/i686-wrsmllib32-linux/gcc/i686-wrsmllib32-linux/14.2.0/ld: ./../liblua/liblua.a: error adding symbols: no more archived files
++collect2: error: ld returned 1 exit status
++make[1]: Leaving directory 'path-to/tmp/work/corei7-32-wrsmllib32-linux/lib32-nmap/7.95/nmap-7.95/liblua'
++
++Explicitly make build-ncat depends on build-lua to avoid racing,
++after applying the patch
++...
++Compiling liblua
++make[1]: Entering directory 'path-to/tmp/work/corei7-32-wrsmllib32-linux/lib32-nmap/7.95/nmap-7.95/liblua'
++make[1]: Leaving directory 'path-to/tmp/work/corei7-32-wrsmllib32-linux/lib32-nmap/7.95/nmap-7.95/liblua'
++Compiling liblua
++make[2]: Entering directory 'path-to/tmp/work/corei7-32-wrsmllib32-linux/lib32-nmap/7.95/nmap-7.95/liblua'
++make[2]: Leaving directory 'path-to/tmp/work/corei7-32-wrsmllib32-linux/lib32-nmap/7.95/nmap-7.95/liblua'
++...
++
++Upstream-Status: Submitted [https://github.com/nmap/nmap/pull/3025]
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ Makefile.in | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Makefile.in b/Makefile.in
++index e2f79c9..0e634a3 100644
++--- a/Makefile.in
+++++ b/Makefile.in
++@@ -159,7 +159,7 @@ build-netutil: libnetutil/Makefile
++ 	@echo Compiling libnetutil;
++ 	cd libnetutil && $(MAKE)
++ 
++-build-ncat: $(NCATDIR)/Makefile build-nbase build-nsock $(NCATDIR)/ncat.h @PCAP_BUILD@
+++build-ncat: $(NCATDIR)/Makefile build-nbase build-nsock build-lua $(NCATDIR)/ncat.h @PCAP_BUILD@
++ 	cd $(NCATDIR) && $(MAKE)
++ 
++ build-lua: $(LIBLUADIR)/Makefile
++-- 
++2.47.1
++
+diff --git a/meta-oe/recipes-security/nmap/nmap_7.95.bb b/meta-oe/recipes-security/nmap/nmap_7.95.bb
+index a319be4fb0..f165e47bf5 100644
+--- a/meta-oe/recipes-security/nmap/nmap_7.95.bb
++++ b/meta-oe/recipes-security/nmap/nmap_7.95.bb
+@@ -11,6 +11,7 @@ SRC_URI = "http://nmap.org/dist/${BP}.tar.bz2 \
+            file://0001-Include-time.h-header-to-pass-clang-compilation.patch \
+            file://0002-Fix-building-with-libc.patch \
+            file://0003-Fix-off-by-one-overflow-in-the-IP-protocol-table.patch \
++           file://0001-fix-racing-between-build-ncat-and-build-lua.patch \
+            "
+ SRC_URI[sha256sum] = "e14ab530e47b5afd88f1c8a2bac7f89cd8fe6b478e22d255c5b9bddb7a1c5778" 
+ inherit autotools-brokensep pkgconfig python3native
 -- 
-2.39.5
+2.34.1
 
 
