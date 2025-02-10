@@ -1,99 +1,112 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F197C021A1
-	for <webhook@archiver.kernel.org>; Mon, 10 Feb 2025 16:10:31 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.web10.55416.1739203826156368635
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 40336C02198
+	for <webhook@archiver.kernel.org>; Mon, 10 Feb 2025 16:42:01 +0000 (UTC)
+Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
+ by mx.groups.io with SMTP id smtpd.web10.56361.1739205714323489991
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Feb 2025 08:10:26 -0800
+ Mon, 10 Feb 2025 08:41:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QkVg1XMN;
- spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-38a8b17d7a7so2333685f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 08:10:25 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dhoMCFEI;
+ spf=pass (domain: gmail.com, ip: 209.85.160.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-2b86794e3abso1047413fac.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 08:41:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1739203824; x=1739808624; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=5ODAfQRKtfxbj+5EmYXUewYqOoIypxiT6U+Ucvxcc0Q=;
-        b=QkVg1XMNmXh+hjaVEisM5gBRSZ0djbkPbXjwAeMnMmomjDBG77paagyo1ougjVDUSH
-         sDg3jKMLUdmbH/ndVBceiBiPgrWZn1lSC05MI3Jt3gmcmhvnQiJgsj4o6z7LU7R4s7R7
-         X/Aq5t+kPFjVTZ9ITEKT6UOdjyZtUSn6HQzrHMps1jfZ8Ls13sLI8b+p/2tNU3qOb5vR
-         Iw88W5DqMLbou72n9YGp+2m57s5m2WRCm2GLYupayQVYd8xl8Rixrz/MseLkUbXIj6pn
-         IkH8ds3vGzTEdBAu7biXmfL9WmgeNMtxvKaa38spkblyt2nmMEKpmKP57X8v5/q2lWsn
-         yGTA==
+        d=gmail.com; s=20230601; t=1739205713; x=1739810513; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=U9luO5kWPeiykxf6Csh0NKWs790IDlSEvCPAN/DC7a0=;
+        b=dhoMCFEIwrD2W/vgbgqumsV+prhXiGSgfO1E+68Z3k4bArnO2WGZAktbz79pKA0YBM
+         f1aNHtndx9mIDtbhsFbRPE0zxGqDGuQY0vuyRZ/K3KYNtc9+noTrhBkO+kgkGLHUF3bS
+         XusWe/X3f4xtiY054t7gMj2De/oC1k1KH5hvd50+9/ZE1FS4I1mA2XtiV6iNP81Q0bq5
+         1KwZKyQ+7dUCA3qxod/NEEQEahNT+x7WjoRrriWn6fk29YVK1pxXE3AHHfkVVUR98gzK
+         iqtSQ9zdsEYrTh/HsT8FWPFVjr7Ma1S1HJZTDhOYeSF+val6NGHBYh4PVrJASiuiTwxh
+         pPIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739203824; x=1739808624;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=5ODAfQRKtfxbj+5EmYXUewYqOoIypxiT6U+Ucvxcc0Q=;
-        b=kEvRTnI55qtWCbWruDIva6NfVglvp1UtDimaiFlDekdLLZ++7A5nEBDPgsfv7+XINA
-         aSwlHAxu7mqD5Q1AzqwYEYvu+8woDxM29z3ASeoNF/SSW0K4FtGz0ej03V9Ip4AqZLY7
-         6I9KkLCBWuRs8qQeEa/UStWw01nK+A80XmBmpLj7J5uZ+cDe/uBUlduBDMiLgv3PG+gV
-         /PXjhL4M4+E2aqBB2CdDDSuRWjoXGx34roZ52/gCO5CvjaECKamdtJ49A+7Hwqa8Ig8W
-         BxCopyxU1CEKi8zSnGVNvMtsWa1ecxCk58ewMoQsfo7hg8CifBRF719YMTca063znrel
-         VhPg==
-X-Gm-Message-State: AOJu0YxCJJ7PvDG6JKh6k3Xk1qkXSX39TIV6ey/Ks9VYPiaAVe6pp3DJ
-	yEaTV5N4Oy9elK87kzIRl4hVIYtRHchxsfGAumXp5iCP1gtYDE4YE5ezINOa
-X-Gm-Gg: ASbGncsc6NBd6QQt5Om1uiQ9zd0jpYkNFCb4EqcAgcN0BldGL6QglTMzM3sdzdy16JR
-	JxzVy5TsLzNExxQCP31ZLjLaaiifd67dmfsF3ggxkQ+rKA/8WutQ2agHfRrfbylMQ76kR/8vMta
-	/8ve3vU+M2aJzU9lTCHacqrxrupkJsVv8k/EZMsoIDLl43wQI2EmnBN+LOVhI/K69pwe36ST65q
-	YxMuUa1ff2IgMjY8+ZGLWKcVKBPd1RGTZlOtPdigDstW1bOWTmJOjpBh/KK9ygupiETimBd3eZ5
-	q8T8CzT0ICWkTaspBlT7tHJDYayLIVE=
-X-Google-Smtp-Source: AGHT+IF96rb1zJmLX8riu851613rZpBrkO8c1TsvEVX80doNw3Mf2bLVoh/bjGJTpw6ud1+B90r+UQ==
-X-Received: by 2002:a05:6000:2c2:b0:38a:88b8:97a9 with SMTP id ffacd0b85a97d-38dc8d91f1fmr10720203f8f.2.1739203824337;
-        Mon, 10 Feb 2025 08:10:24 -0800 (PST)
-Received: from localhost.localdomain ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38dc672b55bsm10928004f8f.79.2025.02.10.08.10.23
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Feb 2025 08:10:23 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] grilo: remove obsolete comment
-Date: Mon, 10 Feb 2025 17:10:22 +0100
-Message-ID: <20250210161022.2904524-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.48.1
+        d=1e100.net; s=20230601; t=1739205713; x=1739810513;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=U9luO5kWPeiykxf6Csh0NKWs790IDlSEvCPAN/DC7a0=;
+        b=gj8tafmBB9uppj+gRaWsevsOz9hAn0SGLhIkK+IS/wypD6yTgzjSjPbnw665SD/9/2
+         2dlZWz5xvmr96GTi8fvzGsVxhW/fJlmVeim3FwzwLBA6lAVKBXH0xUsyhje6wiIrAev8
+         96CW6xKWsp+iJLxhT8iNE8n2M2P8vB131ObcbCufGrF9u5kMIxc6qYpCd8YVL7qeHJue
+         xx9IpTGGDk2Gz35+44W6j//v48jDht9+L0FcDWAadkk+l+Cc5bxULkHUhbtQOyUfF2hr
+         U3lMs5CLlU1NCUzogL94bWdHsFy+HSysWSllWBgdIG0yT9JKyUfs+fnWJNOedvlaSW/u
+         ANXQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUhxHZ64NLqcOhi1XlMd/EcJIwGXxUv/nt5ExlJgvC0WJ4hRUUKTTO5M9goAlq/AI8jbjrt1YTJ+qzh1hQ8LismW70=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yz8K3EFzy6wzM5QbidUtC4BpcwVg0H2lWKYqnpy2hN0lxYGJuRW
+	8Zz+Q872nqPjP7e8qk2SYgfRpTzKSjXG94H8bEuLUiUffeaxxHxzse6jqlG7ITEOOqa86huNFJb
+	Chfe3vHIwzWQcdieO62a431i4FAY=
+X-Gm-Gg: ASbGnctmSlVdorg5+b6uF4qLOEoHPayyIKrEohu+Hja+Uc1MP7E0LNiCPt76aD0+Oxw
+	VxhZ6ZAxrIoOyO9Yj7uPebJX/kF+32V3ZEgzOor6KMHw/bUgJAoRvi7sN+F558itFIItYsABj6f
+	5H3mCynUe5wMxgaKk5mC6PEImWYZKqwg==
+X-Google-Smtp-Source: AGHT+IHH+fw05kKfDtTKkrvOkI8SR4tCXTyOjwFJ6+KwJYWfLpB4nepnda1cdX4qdAnK+QTz9FB5h+rY334QJTBofWg=
+X-Received: by 2002:a05:6870:169d:b0:29e:4340:b1b with SMTP id
+ 586e51a60fabf-2b83ed06682mr9260457fac.9.1739205713540; Mon, 10 Feb 2025
+ 08:41:53 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250210075352.3942800-1-quic_ptak@quicinc.com> <70985d7a-1c09-48f9-a04e-049ffb7c4a74@gmail.com>
+In-Reply-To: <70985d7a-1c09-48f9-a04e-049ffb7c4a74@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 10 Feb 2025 08:41:27 -0800
+X-Gm-Features: AWEUYZmSuqmrYOSL9gQNk7p03MHBEIswuGwiE4jv1uDQpyDnZYJi5QcagqcQnYY
+Message-ID: <CAMKF1soKQ+1pceqKqdH=3PW8XaxKpN3YfwGSeieSAah9TGJ5bQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] Disable FASTCV HAL implementation
+To: skandigraun@gmail.com
+Cc: quic_ptak@quicinc.com, openembedded-devel@lists.openembedded.org, 
+	quic_sssanjee@quicinc.com, quic_vkaruchu@quicinc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 16:10:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115406
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 16:42:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115407
 
-grilo can be built without the "net" PACKAGECONFIG,
-it has been fixed in the upstream project[1] in version
-0.3.14. Remove the comment referring to that bug.
+On Mon, Feb 10, 2025 at 12:45=E2=80=AFAM Gyorgy Sarvari via
+lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
+wrote:
+>
+> > +#Fastcv based Opencv HAL/Extensions are not supported on all platforms=
+, hence disabling it by default
+> > +PACKAGECONFIG[fastcv] =3D "-DWITH_FASTCV=3DON,-DWITH_FASTCV=3DOFF,,"
+> Is there a dependency missing? Using this new packageconfig fails with
+> the following error during do_configuration:
 
-Also, fix a typo.
+I think we need to download it along with other dependencies in
+SRC_URI or provide a separate recipe for fastcv, at times we have
+housed dependencies in packageconfig which may come
+from other layers as long as they are off by default. In fastcv's case
+I think the recipe does not exist in any known layer either.
+my intention was to add a note so we remember why we disabled it so
+perhaps just adding a comment would be fine.
 
-[1]: https://gitlab.gnome.org/GNOME/grilo/-/commit/9995169ab01c6a274a471b6f6d5f560683b0ae99
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- meta-gnome/recipes-gnome/grilo/grilo_0.3.16.bb | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
-
-diff --git a/meta-gnome/recipes-gnome/grilo/grilo_0.3.16.bb b/meta-gnome/recipes-gnome/grilo/grilo_0.3.16.bb
-index f6ea21eb5..786274818 100644
---- a/meta-gnome/recipes-gnome/grilo/grilo_0.3.16.bb
-+++ b/meta-gnome/recipes-gnome/grilo/grilo_0.3.16.bb
-@@ -1,4 +1,4 @@
--SUMMARY = "Grilo is a framework forsearching media content from various sources"
-+SUMMARY = "Grilo is a framework for searching media content from various sources"
- LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
- 
-@@ -14,8 +14,6 @@ SRC_URI[archive.sha256sum] = "884580e8c5ece280df23aa63ff5234b7d48988a404df7d6bfc
- GIR_MESON_OPTION = "enable-introspection"
- GTKDOC_MESON_OPTION = "enable-gtk-doc"
- 
--# Note: removing 'net' from PACKAGECONFIG causes
--# | bindings/vala/meson.build:15:0: ERROR: Unknown variable "grlnet_gir".
- PACKAGECONFIG ??= "net"
- 
- PACKAGECONFIG[net] = "-Denable-grl-net=true, -Denable-grl-net=false, libsoup-3.0"
+>
+> | -- FASTCV: Downloading fastcv_linux_aarch64_2024_12_11.tgz from
+> https://raw.githubusercontent.com/opencv/opencv_3rdparty/dc5d58018f3af915=
+a8d209386d2c58c0501c0f2c/fastcv/fastcv_linux_aarch64_2024_12_11.tgz
+> | CMake Error at cmake/OpenCVDownload.cmake:210 (message):
+> |   Not going to download fastcv_linux_aarch64_2024_12_11.tgz
+> | Call Stack (most recent call first):
+> |   3rdparty/fastcv/fastcv.cmake:29 (ocv_download)
+> |   cmake/OpenCVFindLibsPerf.cmake:188 (download_fastcv)
+> |   CMakeLists.txt:800 (include)
+> |
+> |
+> | -- Configuring incomplete, errors occurred!
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#115328): https://lists.openembedded.org/g/openembedde=
+d-devel/message/115328
+> Mute This Topic: https://lists.openembedded.org/mt/111098636/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
