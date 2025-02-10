@@ -2,50 +2,50 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD0F6C021A6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 938D4C021A3
 	for <webhook@archiver.kernel.org>; Mon, 10 Feb 2025 09:01:56 +0000 (UTC)
-Received: from esa11.hc1455-7.c3s2.iphmx.com (esa11.hc1455-7.c3s2.iphmx.com [207.54.90.137])
- by mx.groups.io with SMTP id smtpd.web10.46621.1739178111389260159
+Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
+ by mx.groups.io with SMTP id smtpd.web10.46623.1739178114780922744
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Feb 2025 01:01:51 -0800
+ Mon, 10 Feb 2025 01:01:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=TjK+9unF;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.137, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=sQbYtGxR;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1739178112; x=1770714112;
+  t=1739178115; x=1770714115;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=eQA/1WBHoBufbJC92uIjU0i2FTVGuaNmvZP58CSGt+I=;
-  b=TjK+9unFISVJcl1f2O/rom/7xB1FbS0E69Oew4Z4XYMILoeOc60Qwj0r
-   hP0ctm/dsnV+2Hc2WmM8ODZNf7u6K/0C2bleNBOcRaQK7n4AkM7cmaHuo
-   D5tSpLPPYsAEcRsMWgbNXqAFjDUH9TAOJTVHPk3vYPurby6uTaZqcFhJW
-   IWwCDWvh7awai+Gc9vKHfsvWEE1dQzpGLgiap0oHVzp0EWojZxDWUTy++
-   q5OIot/jygAzobtjwiDqczJUp7LV7qb/ngGdYO/Y9gNyihD4+qfXQfshw
-   SphdROdMz4rD2VR48d8VCo2eS3HdcCxzhF9g2Xnslmx3UduLHYudPKN5t
-   g==;
-X-CSE-ConnectionGUID: IHmIBOk5SXecCRNjrWxAsg==
-X-CSE-MsgGUID: AIb1o8AHRZazLX1/Bvrqyg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11340"; a="168935917"
+  bh=UTtj3s121yW0KeiKRH5kHIzYVuBYnpDHv89/My26gg0=;
+  b=sQbYtGxRbY3fed/PDL51nf17SChi+fq4wxRNPP4nscZjN43Ex8Un1iXR
+   HSaHghLvXM9F69bSEmEscIemL+QkR3KZPnxDFVt23L43p03jc0wADqZMq
+   EXlOJH+p6LOUK/ahkz73ozZSk4exN2pLkk7P0S3qHrlHmcsJEJ0vyp66p
+   sgS45gxJM0/Z0WCFYZrkublglr7fcpx82YY9cSOipUrY836qxoL0OCkac
+   rD5Mg7+digLAhGMxu7bFrb/ANHcYUTXmvMMrqOVJ0IiX9nzbD1T8DPUpc
+   4kDtGQQijUqw/jH+IW0v80juGceO0MNmoTmHtOR/qH9I+7b9jNdn5wI2R
+   w==;
+X-CSE-ConnectionGUID: Bgfo3eCGQ+KEyEyyIYlDzA==
+X-CSE-MsgGUID: 6agOjKWWTZWBR1xuA7uhqA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11340"; a="192032028"
 X-IronPort-AV: E=Sophos;i="6.13,274,1732546800"; 
-   d="scan'208";a="168935917"
-Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
-  by esa11.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Feb 2025 18:01:49 +0900
-Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
-	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 4961ED6EA1
-	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 18:01:47 +0900 (JST)
+   d="scan'208";a="192032028"
+Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
+  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Feb 2025 18:01:53 +0900
+Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
+	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id B2EBBD4F55
+	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 18:01:49 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 10DA2D968C
-	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 18:01:47 +0900 (JST)
+	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 78204D3F09
+	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 18:01:49 +0900 (JST)
 Received: from localhost.localdomain.localdomain (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id A6E661A006C;
-	Mon, 10 Feb 2025 17:01:46 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 1AE5E1A000B;
+	Mon, 10 Feb 2025 17:01:49 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH 06/66] gnome-system-monitor: upgrade 47.0 -> 47.1
-Date: Mon, 10 Feb 2025 17:00:35 +0800
-Message-Id: <1739178095-26432-6-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 11/66] libmxml: upgrade 4.0.3 -> 4.0.4
+Date: Mon, 10 Feb 2025 17:00:40 +0800
+Message-Id: <1739178095-26432-11-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1739178095-26432-1-git-send-email-wangmy@fujitsu.com>
 References: <1739178095-26432-1-git-send-email-wangmy@fujitsu.com>
@@ -53,32 +53,40 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 09:01:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115334
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115341
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+Changelog:
+==========
+- Added Linux-specific build files and dropped unused 'long long' config tests
+- Documentation fixes
+- Fixed an issue when reporting errors with a 'NULL' options pointer
+- Fixed some compiler warnings
+- Fixed installation on MingW
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...nome-system-monitor_47.0.bb => gnome-system-monitor_47.1.bb} | 2 +-
+ .../libmxml/{libmxml_4.0.3.bb => libmxml_4.0.4.bb}              | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gnome-system-monitor/{gnome-system-monitor_47.0.bb => gnome-system-monitor_47.1.bb} (88%)
+ rename meta-oe/recipes-support/libmxml/{libmxml_4.0.3.bb => libmxml_4.0.4.bb} (95%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_47.0.bb b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_47.1.bb
-similarity index 88%
-rename from meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_47.0.bb
-rename to meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_47.1.bb
-index 721ae5a943..e26ae991ff 100644
---- a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_47.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_47.1.bb
-@@ -22,7 +22,7 @@ inherit gnomebase gsettings gnome-help itstool gtk-icon-cache features_check get
- ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
- REQUIRED_DISTRO_FEATURES = "polkit"
+diff --git a/meta-oe/recipes-support/libmxml/libmxml_4.0.3.bb b/meta-oe/recipes-support/libmxml/libmxml_4.0.4.bb
+similarity index 95%
+rename from meta-oe/recipes-support/libmxml/libmxml_4.0.3.bb
+rename to meta-oe/recipes-support/libmxml/libmxml_4.0.4.bb
+index 54582e7047..a271b697cd 100644
+--- a/meta-oe/recipes-support/libmxml/libmxml_4.0.3.bb
++++ b/meta-oe/recipes-support/libmxml/libmxml_4.0.4.bb
+@@ -5,7 +5,7 @@ HOMEPAGE = "https://www.msweet.org/mxml/"
+ BUGTRACKER = "https://github.com/michaelrsweet/mxml/issues"
  
--SRC_URI[archive.sha256sum] = "ede7b925eb714d8b3c2bfbf7405a1b714494fe47e02f0af08f5837b3e256547f"
-+SRC_URI[archive.sha256sum] = "d3c5714fd91fa7f05d6775e6797ccdab3149f131d1aa776a3352e2addb110f01"
+ SRC_URI = "git://github.com/michaelrsweet/mxml.git;branch=master;protocol=https"
+-SRCREV = "804c4f4d922e4ca240ce2cad3ec7bc5d00c08691"
++SRCREV = "0d5afc4278d7a336d554602b951c2979c3f8f296"
+ S = "${WORKDIR}/git"
  
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
- PACKAGECONFIG[systemd] = "-Dsystemd=true, -Dsystemd=false, systemd"
+ # Package does not support out of tree builds.
 -- 
 2.43.0
 
