@@ -1,196 +1,404 @@
-Return-Path: <rasmus.villemoes@prevas.dk>
+Return-Path: <ecordonnier@snap.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BFA3C02198
-	for <webhook@archiver.kernel.org>; Mon, 10 Feb 2025 13:29:40 +0000 (UTC)
-Received: from EUR02-AM0-obe.outbound.protection.outlook.com (EUR02-AM0-obe.outbound.protection.outlook.com [40.107.247.53])
- by mx.groups.io with SMTP id smtpd.web11.50421.1739194171707354893
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4FBFC02198
+	for <webhook@archiver.kernel.org>; Mon, 10 Feb 2025 14:55:40 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.web11.52622.1739199335106628146
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Feb 2025 05:29:33 -0800
+ Mon, 10 Feb 2025 06:55:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@prevas.dk header.s=selector1 header.b=P66QB2he;
- spf=pass (domain: prevas.dk, ip: 40.107.247.53, mailfrom: rasmus.villemoes@prevas.dk)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dElIgTvESmH1jMNIKrXldCeiI0QMCy8+gmdMbJNGayqln1oKiYzdLmUL692XrDreAAKDw1vmLS9wq8lSOuriUbUMtN5Lwwu3j1cA+e5TBbJ/ATI+O1NGTsc7LuYiVPiFhZjvUw8IJE/ICemeCqRTt0QbHvHo7jDUZjL04zysWq9I3aa4w2MaaLHD/zV7Ja60cLoQxEYZHyOp3oPmDidipZWCEaD1ePvw5tXUYuHidqxQ67FDzL2kYQ0nW2mViFTjEjzonQpfxvtVR8cLdIrZ8q7Q/u0yYV7tSBRBa5Kjtsf2SUn+cQpnYuRf6MwuTIUPfkUs9sDCnjEVD/7azymRug==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cUzVN5Sv2sGl3iMot88OOvz3nlA8hFVfyfFM+dQGqLA=;
- b=FlpZnXsgmsVDqRXAUH/jgHzYeSIPR26K275ZKzkJ1HrYOZjqCuzJnLTIrlMoxZuMS1ZM5IzE6LsGthh0UpgBUWMGRN+HhTQD4i9+iJE8bo9Hd+wE4Rj3h75+JWv0cY3KB+pBTKOeeYVV3YxdosKL1rcQzKbIGknal1G/qFshoo4m6A/jI6Ji8OW+U5DNilK6025HNQyX6rJtQzAQp2CsLdzeY0NKQoolvzdYkb7a7gW6MVgS093hzl8Hh+0cyv87Qm+yZCzmKdyV//YktwWGIkT2YaCy5tw7rwGq5Jm8DuWcLc9UjU7W8P9kAhWe0RIlfWI5XgC8IjJ6ZJPIkOTsrg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cUzVN5Sv2sGl3iMot88OOvz3nlA8hFVfyfFM+dQGqLA=;
- b=P66QB2hecHaeGHckqyHvA395IYSzVNpJC7uZkq6OcVV1im5t1d0EREtJWtpOrYVPkhzPQmBNkWTUbHYmw+CYoJzMotkchVqb/ijJ8OQx0jP8wXDknMniY9MuDwgs/C4AoQPrBC/uo1rahIqvAlw/9Mn3AGj/pgNaafXT8YllwRc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:41::17)
- by VI0PR10MB8933.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:23a::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.7; Mon, 10 Feb
- 2025 13:29:26 +0000
-Received: from DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::7e2c:5309:f792:ded4]) by DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::7e2c:5309:f792:ded4%5]) with mapi id 15.20.8445.005; Mon, 10 Feb 2025
- 13:29:25 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
+ dkim=pass header.i=@snap.com header.s=google header.b=HmLb+tCy;
+ spf=pass (domain: snapchat.com, ip: 209.85.128.53, mailfrom: ecordonnier@snapchat.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-43937cf2131so11445885e9.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 06:55:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=snap.com; s=google; t=1739199333; x=1739804133; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=WTsIMehrrK3G0uv46Ulsmrtq9b4CB6C7rRt+Pky7TrM=;
+        b=HmLb+tCyQLynwB+q/FjQjDaIdTCxs7cQr6RuE39cQ4J4mOzaf8UqcC9HAOgNcs7du+
+         OSHOu5hM48hycwNo54PnK+kgA3V3JrCFf2yPvrGVx51PuJ3mijK4p0+QWyrqmgFNNt5U
+         H0U8usa3RTJgl5Lf4bd25RYHZIBeQ4qUt9fk8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1739199333; x=1739804133;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=WTsIMehrrK3G0uv46Ulsmrtq9b4CB6C7rRt+Pky7TrM=;
+        b=rz/gKLLcqFakaCjgiAnYIsVIJ4ZSG2fWN5s233AtU89POyxeiSymYHA30a4MuHubux
+         Qdk1op7W6G2kG9fGZ2gcfoXj8saYlwGNO8j4hMgE1V4BJMo2dWBshIaysH8P8xCbjNMN
+         9Fz2YHb1fl1jV+c8tFmr81jhEL4sG/+LGbdP96SdjKsT20bKclXnC1rQSepiKtvTNzLT
+         LRpWpyEru7fskOTWak/rc37oV4gQqKNVyNgJyO2hAu/f6T/sZuFZhMPpMTJsbXCw51f7
+         cKvgcsG0Y2wAKuJ470j1+QrSkDLsI+4qJ0gMn2l/ZwGzKjM/shgsGC10ycL0hlmft3TR
+         rRIA==
+X-Gm-Message-State: AOJu0Ywh8tFozANlVrDYiMRF8LqHyVyIUC8Cdyo4grMhgBwCYvQw5gjI
+	ie5yBSv9tN10WgNT2qyIAdhYUJQGw5vKwAziqhQDKYeAwrxxiJy8dTby/8gGo90udw7YufVP7+5
+	G
+X-Gm-Gg: ASbGnctt1ytp14frgQ6uL5yg9L2/rsiNY/ArxhY2lpwBMIy1kCzwYaamdJ3nAmFquAy
+	9L2oDM3UGW4R/cDRfqpPMVcyFZ8nEU0370OHqmAHPF3GgBmr6DQRxtH8vLEQuG6alIXH+iUVjCi
+	O2FwTfc6UosT2hII6voIAZb6YB0+U84QdwxKz88ZcHZdUlofC7fR/eNLImRKO2RDDpoYGA6/bUy
+	RYqqz93F0n1BI77xa2U2pBk6zbPTGNQ0vitoz4LeK0Ms75MrEvRA5wSu98GhRV1gWsjAcl01awp
+	JF1o24OEbYBPylgVvX73SsTv+5E=
+X-Google-Smtp-Source: AGHT+IFv6ya5FX9LWEip7ms5CQMncrAVaaWHFNXqL53i4e1KTujl0Aa+9qj+T46G6wCvqir67cE44A==
+X-Received: by 2002:a5d:598f:0:b0:38d:e250:d960 with SMTP id ffacd0b85a97d-38de250dc0emr1893000f8f.8.1739199332752;
+        Mon, 10 Feb 2025 06:55:32 -0800 (PST)
+Received: from lj8k2dq3.sc-core.net ([85.237.126.22])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38dd4c8ca52sm6836753f8f.89.2025.02.10.06.55.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 Feb 2025 06:55:32 -0800 (PST)
+From: ecordonnier@snap.com
 To: openembedded-devel@lists.openembedded.org
-CC: Khem Raj <raj.khem@gmail.com>,
-	Rasmus Villemoes <ravi@prevas.dk>
-Subject: [meta-oe][PATCH] systemd-netlogd: new recipe
-Date: Mon, 10 Feb 2025 14:29:23 +0100
-Message-ID: <20250210132923.933209-1-ravi@prevas.dk>
-X-Mailer: git-send-email 2.48.1
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0017.SWEP280.PROD.OUTLOOK.COM (2603:10a6:190:a::6)
- To DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:41::17)
+Cc: Etienne Cordonnier <ecordonnier@snap.com>
+Subject: [meta-oe][scarthgap][PATCH] uutils-coreutils: fix compilation with selinux
+Date: Mon, 10 Feb 2025 15:55:13 +0100
+Message-ID: <20250210145513.1049195-1-ecordonnier@snap.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB7PR10MB2475:EE_|VI0PR10MB8933:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5f9df96c-7f90-4fe6-3d57-08dd49d6f02d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|366016|1800799024|52116014|38350700014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?bDKwoLmybjlY7rxSy0PpCwaRrcqC8zErLgjvNwbptBLfxJw3TGpJHOS4hdVY?=
- =?us-ascii?Q?3M07IHuIB5WSKWPRES12tLsKYtjUk3t74dlUa1JlhmF0IEj3LRzJw90GkTLq?=
- =?us-ascii?Q?wOIfJ/QZFjJNyzVEeUdJTWhmOGgZbQTUkB2lqGHbx7j62zRwZZ+u80EMVZ6g?=
- =?us-ascii?Q?2tXlsqa/4N8h8nz9gNC7YIEcPnX0JAbafeDF5esVwRaRl8aHZdPJ27iokUSs?=
- =?us-ascii?Q?22Jomj8lcw3BNG3QtMmJPDPyYNWg1XNu9mTcEUhMZK2sDM5Ij4u6pAZ+wjtg?=
- =?us-ascii?Q?HZnaIjpVBKvmqhSCGscU4iIFOlRXaOnJ9aWxsX+X8Py4dS0pMxtKyh9OrRzL?=
- =?us-ascii?Q?ZSYKjWdFWjTOv3RMeMJHpH/erg76S4/GHnF7ovPsXuO/8Ecxkf2AbvB+ZivO?=
- =?us-ascii?Q?66OYqEEUE+zx4iXvL2/ad0wqhRQM+SpNcnSlgICpgx4RXTxAbUNHX57W5oCJ?=
- =?us-ascii?Q?G0CxK6yyjfPpNKKuOVBHIXLXwQhVBOTpeGKtK7pER8dRblVq4M8MsAUhPQDK?=
- =?us-ascii?Q?jYUL7nTCEzUKUUFRHlK+JTpW/P9WE/8zzvwDcvhQlvMOriHGTGQAwSXmjTGH?=
- =?us-ascii?Q?T7d9fBBa4TeLOkTczgl8laCIKwpknoztIXjkNaIsLUD6RpvmRvGPEu6Jh8pr?=
- =?us-ascii?Q?MJpyz79EeCOKoP3XIG4r5y3UgAF46Wa6tU/AuZdoSVe3MCf/Gp4K/ZGCUHO3?=
- =?us-ascii?Q?HK7ic6LFTeqfCMrj5RreCLUZcQLX1uGfCfPLfmyeVSEDfvpoml+hHXWNtCjJ?=
- =?us-ascii?Q?bXdJ77bSfgZPa6M4GOO36FHo5/wu8HGJyeOxPrRKTaKh9g0yr+E0g7HmMo/0?=
- =?us-ascii?Q?1tgN0YwM54uMho8o0K1ZILmkHo4Fu3s2oCrCWtlrAvIhV8HHXdBioEQgbcOS?=
- =?us-ascii?Q?nkE47fG0drLUo5kmkfcqVywzl8SQlu1XFWdIDd2z2LXGo/iBsYfAAZRrJ0Ol?=
- =?us-ascii?Q?J6aigwgnjh2eunZf8I2pHjbB3bA3nRPvhAd2BlBOY84+eAZdUt5CxmRMCXcA?=
- =?us-ascii?Q?nwlc8QyHk8vHwMKJLcsETZ+gJZtCUPJWZ9IrBJIOKPnMq2lQWdZJrNzXb7xh?=
- =?us-ascii?Q?7iT/2YnoMzCGYEJBLwj4Hr8oo02FPxiAWUhdyICWI8BO4Atc/sO1QIF68/4A?=
- =?us-ascii?Q?B4aqjcgm7Fn5Cp70wwSPBWQhaO3tbVQtobafR7b3rHoIoHkm0/BMdAb8G7tV?=
- =?us-ascii?Q?04D/pqRjj676FLCPFpuJdac/JDUOEWZaJ+ILd7t+yiGKEferW1CUyZSSUHUK?=
- =?us-ascii?Q?mEYNnT98YvQ/H9EhZZ8EJL+mI5gzNkOt4r9PVFRdSitnD5HAc4coNtX16I3r?=
- =?us-ascii?Q?DVe/aVbv9+gah7AM+1F4GcvzGTdtmY5RgY5AMJ9aoghjPWX5BFrM68adrs8w?=
- =?us-ascii?Q?HVEcxt5da0q/gqxyjhdeDg7C9KWmYLaEDMTRZo6PTtcVaRyLsHfJXcRLk6tb?=
- =?us-ascii?Q?8Nm3Q0jYU8dQ34elnzlTAyIwLRtHMVFx?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(52116014)(38350700014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?gqZy3SbosbC/AxlhMr2uz7Gt/yDzaJXPE5RTSNc7bHA8NRyQKbi4ndK3I5Sr?=
- =?us-ascii?Q?+MsGt34N1SZEmA4s73yAnxl9NXv28ptEoGp9Rhh95EWVxs6yfT4u00yJv/4j?=
- =?us-ascii?Q?FQBsMJMTetd60ZlRBn1Q3KMQcIESL7pn6QoClY9DpdkDYteSHwhn20oYFFny?=
- =?us-ascii?Q?juxnqr1b513md0WDPaXhZlnQAY6BwB0S0y0BzpoiicCci8iC6GoB5B8z5TDA?=
- =?us-ascii?Q?3X0iF0IbJQXBoM9Q9oHk9cL96EmK69+nHBh8SxTxTCxGndwIpXTKZhM5aLy2?=
- =?us-ascii?Q?vEPrrQun1D0BkavA7OmI+j4Ks8nX/zD0bDgBY5EFf/pFXNkMougFpvLvtXsG?=
- =?us-ascii?Q?1kSOlwiG+MOsb07cg21TEF6IlpEVk53cUTVsHwMRMfsINuhatKwMjvIOBzMc?=
- =?us-ascii?Q?o+Q12SB8cndDHNVdwit/XtrpGkue6eyh9DTSUuLkr1AQRsjPaVjAGpIim7Za?=
- =?us-ascii?Q?Fu4vVD29jUVvXSK4/kTEqPvwD0OlXcOutbMYz2i4bR8r7b6yy72HSdKVew/j?=
- =?us-ascii?Q?LcZKbtKWWsJxohQp4NQj8jy9djpiI2LDF6IfFaR670uhT1cBw3jqJfO0uuTC?=
- =?us-ascii?Q?zo5vFfULLkjpwz/rDi168uEJTtDPVVxNTVFRWG0OH/uBEEaNLSpD1cdt26eQ?=
- =?us-ascii?Q?5Foqoo0o3kZEatcwk4mWxSf7Bb+lJk8lxJPpOuh4VJgmMlPWytrunFjjvi0t?=
- =?us-ascii?Q?wiWcq/fbHJ3mGOXUVGwyhPpEiHM0Sl8zQgV1OGZ8bmzHhqUfSJEyfG/et7/z?=
- =?us-ascii?Q?gS5HacxxZv1n5p5Ye4GtZUKsFEoZFcd8nFJ+DNJ4jYftj2GVk4axPpilq9M3?=
- =?us-ascii?Q?2NcrzCyzpPe9gQIoqQeHzOMyLq9tfIf5Dy05P6f6slrpC/073GOovvX4Zo7O?=
- =?us-ascii?Q?kpQdeFZTR5UcDntFgdYUlfgzFpjzu1JQb4AMOgPXCYlAhZ9dPUoF5p9esiSx?=
- =?us-ascii?Q?Ngk35EqER8AZ5RK4pUdwdHnPE6EnhkJp51cWsI4GptwVr5AXGzJQCKfNayv/?=
- =?us-ascii?Q?4CF23i9813cIzRU1i31T15vEdBXZ3WSd8jAcuO0uVs2emfqA521d7wzpQEme?=
- =?us-ascii?Q?/MQAevUvAFnQ80rZOOvXjvG+KhA+95SCdomYFdGoV0zbUcXe4GNvOiOaJ0P4?=
- =?us-ascii?Q?BkveEnQzWTETNd6RwWwpxirLh46//hbXnzrWHeAwEg8Ht6lZ2rZ/fGHycZ+i?=
- =?us-ascii?Q?z33RQasvkXBZZxVACJkadWoiRTRsDVOCwr7qc8morzFTN31MyycEqXRJUi+c?=
- =?us-ascii?Q?BJzvkUA4HbylMqhLDFRXicZOQ9tk1Yv7QGKXPkKKmHWNpqPbIaFsViXk3Lwv?=
- =?us-ascii?Q?ovTWF6BVmDhmkx5qXw45VtlESEIO/zE62x42WKPyJy3EGraMD2U7uqgA8vrO?=
- =?us-ascii?Q?T9BF3bEwDOYMA4oQvMs2Zcuovh+P6Q8HoCj0VYaUt2a4KgoB50f4z08CbIhY?=
- =?us-ascii?Q?TpUm/O5IyFi/q3mJ6yCXjWBn4b3r86Jp0+RYuRFJn8UY9bLXPdk7QJSRlrJZ?=
- =?us-ascii?Q?oiGjEhI+HDbtQYrAAGs8dvJA22risTMg1636Ys21NoaxuOqXAh7DKkWEHN28?=
- =?us-ascii?Q?6qnp9AKmlpkodwy92Noa940m23n5OUQkcMfb0qeCLN5aK+p+9e06L93e6gQC?=
- =?us-ascii?Q?IA=3D=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5f9df96c-7f90-4fe6-3d57-08dd49d6f02d
-X-MS-Exchange-CrossTenant-AuthSource: DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Feb 2025 13:29:25.9081
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +Pft3pe2Z9hzbkuqdJeuj15HSUabbuUOLvMPjQ5biw08yjxypTnU03TsRp2kKbqPEaIpyXU3ALhMeHc1Cw95InO5ipYIc+GWlXzXOXRSppc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR10MB8933
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 13:29:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115403
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Feb 2025 14:55:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115404
 
-From: Rasmus Villemoes <ravi@prevas.dk>
+From: Etienne Cordonnier <ecordonnier@snap.com>
 
-In some deployments, the log aggregator collects log messages in the
-syslog format, so systemd-journal-upload and friends can not be
-used.
+- The scarthgap branch of poky contains Rust 1.75.
+- uutils-coreutils 0.0.28 requires rust 1.77 when selinux is enabled, even though the project's README.md
+  of release 0.0.28 mistakenly indicates 1.70 as MSRV.
+This fixes the build of uutils-coreutils 0.0.28 when meta-selinux is included.
 
-systemd-netlogd is a daemon for filling that gap.
-
-Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
 ---
-Originally sent to oe-core, but it was suggested the meta-oe might be
-a better place for this.
+ ...t-to-selinux-sys-0.6.9-and-fts-sys-0.patch | 178 ++++++++++++++++++
+ .../uutils-coreutils-crates.inc               |  20 +-
+ .../uutils-coreutils_0.0.28.bb                |   3 +-
+ 3 files changed, 194 insertions(+), 7 deletions(-)
+ create mode 100644 meta-oe/recipes-core/uutils-coreutils/files/0001-Cargo.lock-revert-to-selinux-sys-0.6.9-and-fts-sys-0.patch
 
-https://lore.kernel.org/openembedded-core/20250207120628.909410-1-ravi@prev=
-as.dk/
-
- .../systemd-netlogd/systemd-netlogd_1.4.4.bb  | 25 +++++++++++++++++++
- 1 file changed, 25 insertions(+)
- create mode 100644 meta-oe/recipes-support/systemd-netlogd/systemd-netlogd=
-_1.4.4.bb
-
-diff --git a/meta-oe/recipes-support/systemd-netlogd/systemd-netlogd_1.4.4.=
-bb b/meta-oe/recipes-support/systemd-netlogd/systemd-netlogd_1.4.4.bb
+diff --git a/meta-oe/recipes-core/uutils-coreutils/files/0001-Cargo.lock-revert-to-selinux-sys-0.6.9-and-fts-sys-0.patch b/meta-oe/recipes-core/uutils-coreutils/files/0001-Cargo.lock-revert-to-selinux-sys-0.6.9-and-fts-sys-0.patch
 new file mode 100644
-index 0000000000..851817e9be
+index 0000000000..d91c368891
 --- /dev/null
-+++ b/meta-oe/recipes-support/systemd-netlogd/systemd-netlogd_1.4.4.bb
-@@ -0,0 +1,25 @@
-+SUMMARY =3D "Forwards messages from the journal to other hosts over the ne=
-twork using the Syslog Protocol"
++++ b/meta-oe/recipes-core/uutils-coreutils/files/0001-Cargo.lock-revert-to-selinux-sys-0.6.9-and-fts-sys-0.patch
+@@ -0,0 +1,178 @@
++From 2b578f1c2eee4e3552300d672eceea0804118896 Mon Sep 17 00:00:00 2001
++From: Etienne Cordonnier <ecordonnier@snap.com>
++Date: Mon, 10 Feb 2025 14:43:54 +0100
++Subject: [PATCH] Cargo.lock: revert to selinux-sys 0.6.9 and fts-sys 0.2.9
 +
-+LICENSE =3D "LGPL-2.1-or-later"
-+LIC_FILES_CHKSUM =3D "file://LICENSE.LGPL2.1;md5=3D4fbd65380cdd25595107900=
-8b364516c"
++selinux-sys 0.6.12 and fts-sys 0.2.11 uses offset_of which requires Rust 1.77.
++selinux 0.6.9 and fts-sys 0.2.9 compile with Rust 1.70.
 +
-+SRC_URI =3D "git://github.com/systemd/systemd-netlogd.git;protocol=3Dhttps=
-;branch=3Dmain"
-+SRCREV =3D "b03cc3b1a75048c7cf19467d8918a4b7320767e6"
++This fixes the compilation of uutils-coreutils when meta-selinux is included.
 +
-+inherit meson systemd pkgconfig useradd
++This reverts https://github.com/uutils/coreutils/commit/10d3e98eda9342cf8d5f56d5082e38096743eb80
 +
-+S =3D "${WORKDIR}/git"
++Upstream-Status: Inappropriate [OE Specific]
 +
-+DEPENDS +=3D "systemd"
-+DEPENDS +=3D "openssl"
-+DEPENDS +=3D "gperf-native"
-+DEPENDS +=3D "python3-sphinx-native"
++Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
++---
++ Cargo.lock | 61 ++++++++++++++++++++++++++++++++++++++++++++----------
++ 1 file changed, 50 insertions(+), 11 deletions(-)
 +
-+# systemd-netlogd uses prefix and sysconfdir in a weird way.
-+EXTRA_OEMESON +=3D "--prefix ${libdir}/systemd --sysconfdir ${sysconfdir}/=
-systemd"
++diff --git a/Cargo.lock b/Cargo.lock
++index b59405071..5f7b420fc 100644
++--- a/Cargo.lock
+++++ b/Cargo.lock
++@@ -167,14 +167,16 @@ dependencies = [
++ 
++ [[package]]
++ name = "bindgen"
++-version = "0.70.1"
+++version = "0.69.5"
++ source = "registry+https://github.com/rust-lang/crates.io-index"
++-checksum = "f49d8fed880d473ea71efb9bf597651e77201bdd4893efe54c9e5d65ae04ce6f"
+++checksum = "271383c67ccabffb7381723dea0672a673f292304fcb45c01cc648c7a8d58088"
++ dependencies = [
++  "bitflags 2.6.0",
++  "cexpr",
++  "clang-sys",
++- "itertools",
+++ "itertools 0.12.1",
+++ "lazy_static",
+++ "lazycell",
++  "log",
++  "prettyplease",
++  "proc-macro2",
++@@ -183,6 +185,7 @@ dependencies = [
++  "rustc-hash",
++  "shlex",
++  "syn 2.0.86",
+++ "which",
++ ]
++ 
++ [[package]]
++@@ -961,9 +964,9 @@ dependencies = [
++ 
++ [[package]]
++ name = "fts-sys"
++-version = "0.2.11"
+++version = "0.2.9"
++ source = "registry+https://github.com/rust-lang/crates.io-index"
++-checksum = "28ab6a6dfd9184fe8a5097924dea6e7648f499121b3e933bb8486a17f817122e"
+++checksum = "4e184d5f593d19793f26afb6f9a58d25f0bc755c4e48890ffcba6db416153ebb"
++ dependencies = [
++  "bindgen",
++  "libc",
++@@ -1156,6 +1159,15 @@ version = "0.4.1"
++ source = "registry+https://github.com/rust-lang/crates.io-index"
++ checksum = "6fe2267d4ed49bc07b63801559be28c718ea06c4738b7a03c94df7386d2cde46"
++ 
+++[[package]]
+++name = "home"
+++version = "0.5.9"
+++source = "registry+https://github.com/rust-lang/crates.io-index"
+++checksum = "e3d1354bf6b7235cb4a0576c2619fd4ed18183f689b12b006a0ee7329eeff9a5"
+++dependencies = [
+++ "windows-sys 0.52.0",
+++]
+++
++ [[package]]
++ name = "hostname"
++ version = "0.4.0"
++@@ -1244,6 +1256,15 @@ dependencies = [
++  "windows-sys 0.48.0",
++ ]
++ 
+++[[package]]
+++name = "itertools"
+++version = "0.12.1"
+++source = "registry+https://github.com/rust-lang/crates.io-index"
+++checksum = "ba291022dbbd398a455acf126c1e341954079855bc60dfdda641363bd6922569"
+++dependencies = [
+++ "either",
+++]
+++
++ [[package]]
++ name = "itertools"
++ version = "0.13.0"
++@@ -1303,6 +1324,12 @@ version = "1.4.0"
++ source = "registry+https://github.com/rust-lang/crates.io-index"
++ checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
++ 
+++[[package]]
+++name = "lazycell"
+++version = "1.3.0"
+++source = "registry+https://github.com/rust-lang/crates.io-index"
+++checksum = "830d08ce1d1d941e6b30645f1a0eb5643013d835ce3779a5fc208261dbe10f55"
+++
++ [[package]]
++ name = "libc"
++ version = "0.2.161"
++@@ -2120,9 +2147,9 @@ dependencies = [
++ 
++ [[package]]
++ name = "selinux-sys"
++-version = "0.6.12"
+++version = "0.6.9"
++ source = "registry+https://github.com/rust-lang/crates.io-index"
++-checksum = "8d557667087c5b4791e180b80979cd1a92fdb9bfd92cfd4b9ab199c4d7402423"
+++checksum = "89d45498373dc17ec8ebb72e1fd320c015647b0157fc81dddf678e2e00205fec"
++ dependencies = [
++  "bindgen",
++  "cc",
++@@ -3100,7 +3127,7 @@ version = "0.0.28"
++ dependencies = [
++  "chrono",
++  "clap",
++- "itertools",
+++ "itertools 0.13.0",
++  "quick-error 2.0.1",
++  "regex",
++  "uucore",
++@@ -3236,7 +3263,7 @@ dependencies = [
++  "compare",
++  "ctrlc",
++  "fnv",
++- "itertools",
+++ "itertools 0.13.0",
++  "memchr",
++  "nix",
++  "rand",
++@@ -3520,7 +3547,7 @@ name = "uu_yes"
++ version = "0.0.28"
++ dependencies = [
++  "clap",
++- "itertools",
+++ "itertools 0.13.0",
++  "nix",
++  "uucore",
++ ]
++@@ -3539,7 +3566,7 @@ dependencies = [
++  "dunce",
++  "glob",
++  "hex",
++- "itertools",
+++ "itertools 0.13.0",
++  "libc",
++  "md-5",
++  "memchr",
++@@ -3687,6 +3714,18 @@ dependencies = [
++  "wasm-bindgen",
++ ]
++ 
+++[[package]]
+++name = "which"
+++version = "4.4.2"
+++source = "registry+https://github.com/rust-lang/crates.io-index"
+++checksum = "87ba24419a2078cd2b0f2ede2691b6c66d8e47836da3b6db8265ebad47afbfc7"
+++dependencies = [
+++ "either",
+++ "home",
+++ "once_cell",
+++ "rustix 0.38.37",
+++]
+++
++ [[package]]
++ name = "wild"
++ version = "2.2.1"
++-- 
++2.43.0
 +
-+FILES:${PN} +=3D "${libdir}"
-+
-+USERADD_PACKAGES =3D "${PN}"
-+GROUPADD_PARAM:${PN} =3D "-r systemd-journal"
-+USERADD_PARAM:${PN} =3D "--system -d / -M --shell /sbin/nologin -g systemd=
--journal systemd-journal-netlog"
---=20
-2.48.1
+diff --git a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils-crates.inc b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils-crates.inc
+index 162b60182a..f2b00f27bd 100644
+--- a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils-crates.inc
++++ b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils-crates.inc
+@@ -21,7 +21,7 @@ SRC_URI += " \
+     crate://crates.io/bigdecimal/0.4.6 \
+     crate://crates.io/binary-heap-plus/0.5.0 \
+     crate://crates.io/bincode/1.3.3 \
+-    crate://crates.io/bindgen/0.70.1 \
++    crate://crates.io/bindgen/0.69.5 \
+     crate://crates.io/bit-set/0.5.3 \
+     crate://crates.io/bit-vec/0.6.3 \
+     crate://crates.io/bitflags/1.3.2 \
+@@ -92,7 +92,7 @@ SRC_URI += " \
+     crate://crates.io/fnv/1.0.7 \
+     crate://crates.io/fs_extra/1.3.0 \
+     crate://crates.io/fsevent-sys/4.1.0 \
+-    crate://crates.io/fts-sys/0.2.11 \
++    crate://crates.io/fts-sys/0.2.9 \
+     crate://crates.io/fundu/2.0.1 \
+     crate://crates.io/fundu-core/0.3.1 \
+     crate://crates.io/funty/2.0.0 \
+@@ -115,6 +115,7 @@ SRC_URI += " \
+     crate://crates.io/hermit-abi/0.3.2 \
+     crate://crates.io/hex/0.4.3 \
+     crate://crates.io/hex-literal/0.4.1 \
++    crate://crates.io/home/0.5.9 \
+     crate://crates.io/hostname/0.4.0 \
+     crate://crates.io/iana-time-zone/0.1.53 \
+     crate://crates.io/iana-time-zone-haiku/0.1.2 \
+@@ -123,6 +124,7 @@ SRC_URI += " \
+     crate://crates.io/inotify/0.9.6 \
+     crate://crates.io/inotify-sys/0.1.5 \
+     crate://crates.io/io-lifetimes/1.0.11 \
++    crate://crates.io/itertools/0.12.1 \
+     crate://crates.io/itertools/0.13.0 \
+     crate://crates.io/itoa/1.0.4 \
+     crate://crates.io/js-sys/0.3.64 \
+@@ -130,6 +132,7 @@ SRC_URI += " \
+     crate://crates.io/kqueue/1.0.7 \
+     crate://crates.io/kqueue-sys/1.0.3 \
+     crate://crates.io/lazy_static/1.4.0 \
++    crate://crates.io/lazycell/1.3.0 \
+     crate://crates.io/libc/0.2.161 \
+     crate://crates.io/libloading/0.7.4 \
+     crate://crates.io/libm/0.2.7 \
+@@ -217,7 +220,7 @@ SRC_URI += " \
+     crate://crates.io/scopeguard/1.2.0 \
+     crate://crates.io/self_cell/1.0.4 \
+     crate://crates.io/selinux/0.4.6 \
+-    crate://crates.io/selinux-sys/0.6.12 \
++    crate://crates.io/selinux-sys/0.6.9 \
+     crate://crates.io/semver/1.0.14 \
+     crate://crates.io/serde/1.0.214 \
+     crate://crates.io/serde-big-array/0.5.1 \
+@@ -276,6 +279,7 @@ SRC_URI += " \
+     crate://crates.io/wasm-bindgen-macro-support/0.2.87 \
+     crate://crates.io/wasm-bindgen-shared/0.2.87 \
+     crate://crates.io/web-time/1.1.0 \
++    crate://crates.io/which/4.4.2 \
+     crate://crates.io/wild/2.2.1 \
+     crate://crates.io/winapi/0.3.9 \
+     crate://crates.io/winapi-i686-pc-windows-gnu/0.4.0 \
+@@ -341,7 +345,7 @@ SRC_URI[autocfg-1.1.0.sha256sum] = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f
+ SRC_URI[bigdecimal-0.4.6.sha256sum] = "8f850665a0385e070b64c38d2354e6c104c8479c59868d1e48a0c13ee2c7a1c1"
+ SRC_URI[binary-heap-plus-0.5.0.sha256sum] = "e4551d8382e911ecc0d0f0ffb602777988669be09447d536ff4388d1def11296"
+ SRC_URI[bincode-1.3.3.sha256sum] = "b1f45e9417d87227c7a56d22e471c6206462cba514c7590c09aff4cf6d1ddcad"
+-SRC_URI[bindgen-0.70.1.sha256sum] = "f49d8fed880d473ea71efb9bf597651e77201bdd4893efe54c9e5d65ae04ce6f"
++SRC_URI[bindgen-0.69.5.sha256sum] = "271383c67ccabffb7381723dea0672a673f292304fcb45c01cc648c7a8d58088"
+ SRC_URI[bit-set-0.5.3.sha256sum] = "0700ddab506f33b20a03b13996eccd309a48e5ff77d0d95926aa0210fb4e95f1"
+ SRC_URI[bit-vec-0.6.3.sha256sum] = "349f9b6a179ed607305526ca489b34ad0a41aed5f7980fa90eb03160b69598fb"
+ SRC_URI[bitflags-1.3.2.sha256sum] = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
+@@ -412,7 +416,7 @@ SRC_URI[flate2-1.0.28.sha256sum] = "46303f565772937ffe1d394a4fac6f411c6013172fad
+ SRC_URI[fnv-1.0.7.sha256sum] = "3f9eec918d3f24069decb9af1554cad7c880e2da24a9afd88aca000531ab82c1"
+ SRC_URI[fs_extra-1.3.0.sha256sum] = "42703706b716c37f96a77aea830392ad231f44c9e9a67872fa5548707e11b11c"
+ SRC_URI[fsevent-sys-4.1.0.sha256sum] = "76ee7a02da4d231650c7cea31349b889be2f45ddb3ef3032d2ec8185f6313fd2"
+-SRC_URI[fts-sys-0.2.11.sha256sum] = "28ab6a6dfd9184fe8a5097924dea6e7648f499121b3e933bb8486a17f817122e"
++SRC_URI[fts-sys-0.2.9.sha256sum] = "4e184d5f593d19793f26afb6f9a58d25f0bc755c4e48890ffcba6db416153ebb"
+ SRC_URI[fundu-2.0.1.sha256sum] = "2ce12752fc64f35be3d53e0a57017cd30970f0cffd73f62c791837d8845badbd"
+ SRC_URI[fundu-core-0.3.1.sha256sum] = "e463452e2d8b7600d38dcea1ed819773a57f0d710691bfc78db3961bd3f4c3ba"
+ SRC_URI[funty-2.0.0.sha256sum] = "e6d5a32815ae3f33302d95fdcb2ce17862f8c65363dcfd29360480ba1001fc9c"
+@@ -435,6 +439,7 @@ SRC_URI[hashbrown-0.14.3.sha256sum] = "290f1a1d9242c78d09ce40a5e87e7554ee637af13
+ SRC_URI[hermit-abi-0.3.2.sha256sum] = "443144c8cdadd93ebf52ddb4056d257f5b52c04d3c804e657d19eb73fc33668b"
+ SRC_URI[hex-0.4.3.sha256sum] = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
+ SRC_URI[hex-literal-0.4.1.sha256sum] = "6fe2267d4ed49bc07b63801559be28c718ea06c4738b7a03c94df7386d2cde46"
++SRC_URI[home-0.5.9.sha256sum] = "e3d1354bf6b7235cb4a0576c2619fd4ed18183f689b12b006a0ee7329eeff9a5"
+ SRC_URI[hostname-0.4.0.sha256sum] = "f9c7c7c8ac16c798734b8a24560c1362120597c40d5e1459f09498f8f6c8f2ba"
+ SRC_URI[iana-time-zone-0.1.53.sha256sum] = "64c122667b287044802d6ce17ee2ddf13207ed924c712de9a66a5814d5b64765"
+ SRC_URI[iana-time-zone-haiku-0.1.2.sha256sum] = "f31827a206f56af32e590ba56d5d2d085f558508192593743f16b2306495269f"
+@@ -443,6 +448,7 @@ SRC_URI[indicatif-0.17.9.sha256sum] = "cbf675b85ed934d3c67b5c5469701eec7db22689d
+ SRC_URI[inotify-0.9.6.sha256sum] = "f8069d3ec154eb856955c1c0fbffefbf5f3c40a104ec912d4797314c1801abff"
+ SRC_URI[inotify-sys-0.1.5.sha256sum] = "e05c02b5e89bff3b946cedeca278abc628fe811e604f027c45a8aa3cf793d0eb"
+ SRC_URI[io-lifetimes-1.0.11.sha256sum] = "eae7b9aee968036d54dce06cebaefd919e4472e753296daccd6d344e3e2df0c2"
++SRC_URI[itertools-0.12.1.sha256sum] = "ba291022dbbd398a455acf126c1e341954079855bc60dfdda641363bd6922569"
+ SRC_URI[itertools-0.13.0.sha256sum] = "413ee7dfc52ee1a4949ceeb7dbc8a33f2d6c088194d9f922fb8318faf1f01186"
+ SRC_URI[itoa-1.0.4.sha256sum] = "4217ad341ebadf8d8e724e264f13e593e0648f5b3e94b3896a5df283be015ecc"
+ SRC_URI[js-sys-0.3.64.sha256sum] = "c5f195fe497f702db0f318b07fdd68edb16955aed830df8363d837542f8f935a"
+@@ -450,6 +456,7 @@ SRC_URI[keccak-0.1.4.sha256sum] = "8f6d5ed8676d904364de097082f4e7d240b571b67989c
+ SRC_URI[kqueue-1.0.7.sha256sum] = "2c8fc60ba15bf51257aa9807a48a61013db043fcf3a78cb0d916e8e396dcad98"
+ SRC_URI[kqueue-sys-1.0.3.sha256sum] = "8367585489f01bc55dd27404dcf56b95e6da061a256a666ab23be9ba96a2e587"
+ SRC_URI[lazy_static-1.4.0.sha256sum] = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
++SRC_URI[lazycell-1.3.0.sha256sum] = "830d08ce1d1d941e6b30645f1a0eb5643013d835ce3779a5fc208261dbe10f55"
+ SRC_URI[libc-0.2.161.sha256sum] = "8e9489c2807c139ffd9c1794f4af0ebe86a828db53ecdc7fea2111d0fed085d1"
+ SRC_URI[libloading-0.7.4.sha256sum] = "b67380fd3b2fbe7527a606e18729d21c6f3951633d0500574c4dc22d2d638b9f"
+ SRC_URI[libm-0.2.7.sha256sum] = "f7012b1bbb0719e1097c47611d3898568c546d597c2e74d66f6087edd5233ff4"
+@@ -537,7 +544,7 @@ SRC_URI[same-file-1.0.6.sha256sum] = "93fc1dc3aaa9bfed95e02e6eadabb4baf7e3078b0b
+ SRC_URI[scopeguard-1.2.0.sha256sum] = "94143f37725109f92c262ed2cf5e59bce7498c01bcc1502d7b9afe439a4e9f49"
+ SRC_URI[self_cell-1.0.4.sha256sum] = "d369a96f978623eb3dc28807c4852d6cc617fed53da5d3c400feff1ef34a714a"
+ SRC_URI[selinux-0.4.6.sha256sum] = "0139b2436c81305eb6bda33af151851f75bd62783817b25f44daa371119c30b5"
+-SRC_URI[selinux-sys-0.6.12.sha256sum] = "8d557667087c5b4791e180b80979cd1a92fdb9bfd92cfd4b9ab199c4d7402423"
++SRC_URI[selinux-sys-0.6.9.sha256sum] = "89d45498373dc17ec8ebb72e1fd320c015647b0157fc81dddf678e2e00205fec"
+ SRC_URI[semver-1.0.14.sha256sum] = "e25dfac463d778e353db5be2449d1cce89bd6fd23c9f1ea21310ce6e5a1b29c4"
+ SRC_URI[serde-1.0.214.sha256sum] = "f55c3193aca71c12ad7890f1785d2b73e1b9f63a0bbc353c08ef26fe03fc56b5"
+ SRC_URI[serde-big-array-0.5.1.sha256sum] = "11fc7cc2c76d73e0f27ee52abbd64eec84d46f370c88371120433196934e4b7f"
+@@ -596,6 +603,7 @@ SRC_URI[wasm-bindgen-macro-0.2.87.sha256sum] = "dee495e55982a3bd48105a7b947fd2a9
+ SRC_URI[wasm-bindgen-macro-support-0.2.87.sha256sum] = "54681b18a46765f095758388f2d0cf16eb8d4169b639ab575a8f5693af210c7b"
+ SRC_URI[wasm-bindgen-shared-0.2.87.sha256sum] = "ca6ad05a4870b2bf5fe995117d3728437bd27d7cd5f06f13c17443ef369775a1"
+ SRC_URI[web-time-1.1.0.sha256sum] = "5a6580f308b1fad9207618087a65c04e7a10bc77e02c8e84e9b00dd4b12fa0bb"
++SRC_URI[which-4.4.2.sha256sum] = "87ba24419a2078cd2b0f2ede2691b6c66d8e47836da3b6db8265ebad47afbfc7"
+ SRC_URI[wild-2.2.1.sha256sum] = "a3131afc8c575281e1e80f36ed6a092aa502c08b18ed7524e86fbbb12bb410e1"
+ SRC_URI[winapi-0.3.9.sha256sum] = "5c839a674fcd7a98952e593242ea400abe93992746761e38641405d28b00f419"
+ SRC_URI[winapi-i686-pc-windows-gnu-0.4.0.sha256sum] = "ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6"
+diff --git a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.28.bb b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.28.bb
+index 151ffedf08..76cecac5a6 100644
+--- a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.28.bb
++++ b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.28.bb
+@@ -7,7 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e74349878141b240070458d414ab3b64"
+ 
+ inherit cargo cargo-update-recipe-crates
+ 
+-SRC_URI += "git://github.com/uutils/coreutils.git;protocol=https;branch=main"
++SRC_URI += "git://github.com/uutils/coreutils.git;protocol=https;branch=main \
++    file://0001-Cargo.lock-revert-to-selinux-sys-0.6.9-and-fts-sys-0.patch"
+ 
+ # musl not supported because the libc crate does not support functions like "endutxent" at the moment,
+ # so src/uucore/src/lib/features.rs disables utmpx when targetting musl.
+-- 
+2.43.0
 
 
