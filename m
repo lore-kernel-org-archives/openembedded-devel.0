@@ -1,106 +1,137 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 83F7AC021A2
-	for <webhook@archiver.kernel.org>; Tue, 11 Feb 2025 12:57:40 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.web11.11601.1739278655949093871
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 975E2C0219D
+	for <webhook@archiver.kernel.org>; Tue, 11 Feb 2025 13:25:50 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.web11.12277.1739280341170909007
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Feb 2025 04:57:36 -0800
+ Tue, 11 Feb 2025 05:25:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=Fk+5kojk;
- spf=pass (domain: konsulko.com, ip: 209.85.221.53, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-38a25d4b9d4so2895933f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Feb 2025 04:57:35 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bWMM0vy9;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-38ddfee3ba9so1772768f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Feb 2025 05:25:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1739278654; x=1739883454; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Zln5aiHib7WUhSovCu97K3y6kjXwx29oKKOn8j5UrpY=;
-        b=Fk+5kojkwRbw264xbFSATrU07AIwNvztApfNlDq6Id2xPHN5Iahlk/7Jg0J2jbEHJg
-         gT+HJK+RMx1EI1RFEw85j3nONNJVk/xq3HWQvwvwAyCooXqW6S9BcewB34tYb+GZSTEf
-         eKCUnT1KZ+1tLM5e3M6nVDRdHHyejpxOHN2Gc=
+        d=gmail.com; s=20230601; t=1739280339; x=1739885139; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=QMK5KwfxyD8WMJq2qgeBBG2R/PnC10HcN41eigybn1I=;
+        b=bWMM0vy9in3pf+sJcM9/vj3oDoeY26TUPpchGz3kkGJWxJpE9vw08onMS8WC0XxY/v
+         gTo6iMpE5yh+bztvA0lLna7ULLTtG3s997FxyNn/jcDjFm6+AgsdJ8G2MvjSmmefAwNO
+         MSAYPRA1NCn+UGhJch273rfgDa5u9Ei43coxXEbfTelj3WnI8o+y3FiFrucfdt7TbzHa
+         8gFdEAfA1HC2dA77k8ykOyo1RMPhFqe+v3beahIWchjYq4AAK1g3AXBImZvFzSrr9M+T
+         TY7XtRWcZ7SGPezyfUsjX5mffXa3Mrr/86qf6vCvMELvRKrlngNX6sSBYhrllb6j3UWQ
+         4IOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739278654; x=1739883454;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Zln5aiHib7WUhSovCu97K3y6kjXwx29oKKOn8j5UrpY=;
-        b=eZDX4sw1PW5QbbiSL99AZ6z8bd4mNxBjQOXsGCiORh3rRLNvHLKSyaJYxo37Q/4OGP
-         xfqqWQDZBJO/4JS+VegJrwVcpPPCCLm83xmi3US0YPp0OJVTV+g5rCMh8o5949MN3KEi
-         uR4U7EipO/HixT+tcZwzg/tM2c7OwrXW5mWgN/wSKDgRCVhw/VybYd22riAqUP4F+vdq
-         R6Dyn9hrxsWTjrsYPv0RoWR+H7+kbQzLhr/5U/Ki8vhIBV7B3o8Y7x5CiWmhH1Sd7K0W
-         AYY6AFC4CQNrty0QwwRUo/NbFNAoBcB6uZlqeUj8fI2ESnJO56Cwc/B0E524/Z9+1ndr
-         nQOA==
-X-Gm-Message-State: AOJu0YxT7WIR4ofqoDalEIGVUusRXdCBBfadp6QRbiTZhWBffGiXyri+
-	aBdDrBlZ+EUm8Z+M3HU6Mn2C1QQXf8GC4opvg0Y4Pr2sW1c3VG9ymPXRJftK0lCX1jEDPFMUp/U
-	M
-X-Gm-Gg: ASbGncviafjdU/Zq9pvI9be4/qyz1r7S524MRZPuenNxPgAkuM0waj5Z1HTQ+48xAnX
-	BUL9bb/ZadElSPQg+7eq6ZqTXZPIe2mlXk+Wpxy57lGreUf53ClyK4+X8NgigwEsMD1UHo+mdjd
-	6SE4rnS6UHx5vxzSsQfZ0FOuiZnGRb6mlEX8vsIeBji81yCl2x+RqRVR9nh2xn2xMVH27EOFrnl
-	tBnGkWk8N4arWt+Xq19LzI6LGZBEtN4m4E4ING2BTDW5YP6Xc8WM8r1Z4I0prZNXsYcdlOozJW+
-	U6k4H/nVmOESBXo8rhNkTO2toIakLw==
-X-Google-Smtp-Source: AGHT+IEu+Evm32FhwmuvQiHX8AGwCcMafSIfzhEVtOy2M//ml1+3wMqZk/OGhRTm5Dt9VSZh/bdTLg==
-X-Received: by 2002:a5d:5f85:0:b0:38d:dc57:854b with SMTP id ffacd0b85a97d-38ddc5785cemr8240999f8f.36.1739278654089;
-        Tue, 11 Feb 2025 04:57:34 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38dc09fc2d9sm13929843f8f.6.2025.02.11.04.57.33
+        d=1e100.net; s=20230601; t=1739280339; x=1739885139;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=QMK5KwfxyD8WMJq2qgeBBG2R/PnC10HcN41eigybn1I=;
+        b=JNXu0OS4plxjYBrk6AscsIKxkIYwrBSRBorpjjSNVPll6dFLUEm78yBlmt9KAFI2qE
+         gUcFAiSaShJKzU3lMRX6IZNLPh4eBh5Z0Moas+bc81WMFiBHvTF/IJdkfnCBEhW9g52+
+         sVnq61Dw3zJEcUMhC2WcIqaJXOnJRChxRW9WQcClliVakGKT+MvBL61v8FPIns0WP5uV
+         erOLa8tz4g9ii7WKuetGjd359j9dyme1IehTUvUqaCceM/cYmgala5ODczGgrmJyLM5a
+         FDP14tSRWgI5ZGT2VpRRfF+wHjia8a8FZv/NuFAzKTaASC8nv6TUFh/byFJCFUv19kgy
+         5I7A==
+X-Gm-Message-State: AOJu0YyJhoeQHXlInTsiEYBkTdAiWYiBSnnDAFev8rooXLauSBY/RR+R
+	RvFMEu2rMnQ3z2/9R0AWY8UhZcCuzQvJN3BN/JP6rm2Cs5dThA1KwJHIKQ==
+X-Gm-Gg: ASbGncvU1qWs3I0QELcrFTCiYI1tilsGn7dRvJUbqgKwu3Mo7EC/jOzrdO+ou2mGhrY
+	TVi0pL1B3PmB7Z/vcL+Umfc86H94yZgPlIruMSmNm3mFhFQ2o9cMIAyAg0+SeWUnvherM205qcR
+	3yD6obkwynPTYhfllART70kIGXXC2I9YK6d14SheMJqZWdI5GOSXwCLtd0xZDfclsCgK2GHKXHY
+	z0YpgjE28N4VFkSx4i+BjgLYOigGxFchY6gaK5wl/X7T+rnPeozPuS9SbyLYizSxATRt8kKbad+
+	zKQHefd6/UIc71+YUJWEdN4fgV9GzoQ=
+X-Google-Smtp-Source: AGHT+IEZEnEs8iRwREl/fBLbzibg+yiuvDpVDORplnCJV9u0Kr53TiYrUDtHNDGsgHUFx1vwz4dDTQ==
+X-Received: by 2002:a5d:59af:0:b0:38d:dfaa:57be with SMTP id ffacd0b85a97d-38ddfaa59bcmr6446332f8f.52.1739280339224;
+        Tue, 11 Feb 2025 05:25:39 -0800 (PST)
+Received: from localhost.localdomain ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4390daf4453sm209405745e9.31.2025.02.11.05.25.38
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 11 Feb 2025 04:57:33 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Tue, 11 Feb 2025 05:25:38 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-python-vlc: Upgrade 3.0.2012 -> 3.0.21203
-Date: Tue, 11 Feb 2025 14:57:29 +0200
-Message-Id: <20250211125730.3477099-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250211125730.3477099-1-leon.anavi@konsulko.com>
-References: <20250211125730.3477099-1-leon.anavi@konsulko.com>
+Subject: [meta-gnome][PATCH] mutter: fix profiler PACKAGECONFIG
+Date: Tue, 11 Feb 2025 14:25:37 +0100
+Message-ID: <20250211132537.4080671-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 11 Feb 2025 12:57:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115425
+ <openembedded-devel@lists.openembedded.org>; Tue, 11 Feb 2025 13:25:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115427
 
-Upgrade to release 3.0.21203:
+In case "profiler" PACKAGECONFIG is enabled, the build fails with
+the following error:
 
-- Update to pyproject.toml build system configuration
-- Update doc generation to sphinx-autoapi
-- Add missing rtd theme to requirements
-- Add defined enum symbols in generated docstring
+| ninja: error: '/usr/share/dbus-1/interfaces/org.gnome.Sysprof3.Profiler.xml', needed by 'src/meta-dbus-sysprof3-profiler.c', >
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+meson.build script is looking explicitly for a required file using the
+sysroot of the build system instead of ${RECIPE_SYSROOT}. To avoid this,
+patch meson.build to prefix this path with ${RECIPE_SYSROOT}.
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...hon-vlc_3.0.20123.bb => python3-python-vlc_3.0.21203.bb} | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-python-vlc_3.0.20123.bb => python3-python-vlc_3.0.21203.bb} (66%)
+ ...-Dont-use-system-sysprof-dbus-folder.patch | 35 +++++++++++++++++++
+ .../recipes-gnome/mutter/mutter_47.4.bb       |  2 ++
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/mutter/files/0001-Dont-use-system-sysprof-dbus-folder.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.20123.bb b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.21203.bb
-similarity index 66%
-rename from meta-python/recipes-devtools/python/python3-python-vlc_3.0.20123.bb
-rename to meta-python/recipes-devtools/python/python3-python-vlc_3.0.21203.bb
-index 960da1437c..44a14348b2 100644
---- a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.20123.bb
-+++ b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.21203.bb
-@@ -3,9 +3,11 @@ HOMEPAGE = "wiki.videolan.org/PythonBinding"
- LICENSE = "LGPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- 
--SRC_URI[sha256sum] = "244fbb9e392a0326841fca926d6d12a2a36c546982191f493f148fa19e66b1d4"
-+SRC_URI[sha256sum] = "52d0544b276b11e58b6c0b748c3e0518f94f74b1b4cd328c83a59eacabead1ec"
- 
--inherit pypi setuptools3
-+PYPI_PACKAGE = "python_vlc"
+diff --git a/meta-gnome/recipes-gnome/mutter/files/0001-Dont-use-system-sysprof-dbus-folder.patch b/meta-gnome/recipes-gnome/mutter/files/0001-Dont-use-system-sysprof-dbus-folder.patch
+new file mode 100644
+index 000000000..2f09c3299
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/mutter/files/0001-Dont-use-system-sysprof-dbus-folder.patch
+@@ -0,0 +1,35 @@
++From 790177e2a89aa0710b570d595223bdb511241c56 Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Tue, 11 Feb 2025 13:39:54 +0100
++Subject: [PATCH] Don't use system sysprof dbus folder
 +
-+inherit pypi python_setuptools_build_meta
++In case Mutter is built with profiler support, it requires
++org.gnome.Sysprof3.Profiler.xml file to be available - however
++the meson build file is trying to access it on the build machine's
++system ($datadir/dbus-1/interfaces) instead of searching for it
++in the $RECIPE_SYSROOT.
++
++To ensure that it looks for this file in the correct folder, prefix
++the search path with the value of the sys_root property, which is set 
++in the meson.cross file (by meson.bbclass).
++
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++
++Upstream-Status: Inappropriate [oe-specific: only related to cross-compiling]
++---
++ meson.build | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/meson.build b/meson.build
++index 551cb23..5199be6 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -446,7 +446,7 @@ if have_profiler
++ 
++   if libsysprof_capture_dep.type_name() == 'pkgconfig'
++     sysprof_dep = dependency('sysprof-6', 'sysprof-4')
++-    sysprof_dbus_interfaces_dir = sysprof_dep.get_variable('datadir') / 'dbus-1' / 'interfaces'
+++    sysprof_dbus_interfaces_dir = meson.get_external_property('sys_root') + sysprof_dep.get_variable('datadir') / 'dbus-1' / 'interfaces'
++   else
++     sysprof_dbus_interfaces_dir = mutter_srcdir / 'subprojects' / 'sysprof' / 'src'
++   endif
+diff --git a/meta-gnome/recipes-gnome/mutter/mutter_47.4.bb b/meta-gnome/recipes-gnome/mutter/mutter_47.4.bb
+index 30301dac2..fe30aa60c 100644
+--- a/meta-gnome/recipes-gnome/mutter/mutter_47.4.bb
++++ b/meta-gnome/recipes-gnome/mutter/mutter_47.4.bb
+@@ -24,6 +24,8 @@ DEPENDS = " \
  
- RDEPENDS:${PN} += " \
-     python3-ctypes \
--- 
-2.39.5
-
+ inherit gnomebase gsettings gobject-introspection gettext features_check
+ 
++SRC_URI += "file://0001-Dont-use-system-sysprof-dbus-folder.patch"
++
+ SRC_URI[archive.sha256sum] = "f531fc00e6ec6dbb570b3bf942b6490f7a93df91c4c267a918b4d2afe9211bda"
+ 
+ # x11 is still manadatory - see meson.build
 
