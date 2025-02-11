@@ -2,40 +2,40 @@ Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E7C5C0219E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42E2FC021A2
 	for <webhook@archiver.kernel.org>; Tue, 11 Feb 2025 00:30:16 +0000 (UTC)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com (EUR05-AM6-obe.outbound.protection.outlook.com [40.107.22.78])
- by mx.groups.io with SMTP id smtpd.web10.725.1739233810447262908
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.64])
+ by mx.groups.io with SMTP id smtpd.web11.734.1739233813853021098
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Feb 2025 16:30:10 -0800
+ Mon, 10 Feb 2025 16:30:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=nSnqKA3c;
- spf=pass (domain: axis.com, ip: 40.107.22.78, mailfrom: peter.kjellerstedt@axis.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=NwJLU8Nd;
+ spf=pass (domain: axis.com, ip: 40.107.21.64, mailfrom: peter.kjellerstedt@axis.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SR3sPNF69BaphFvrL4SzhVb0RiB/nTEAxzIOkR0cbmFghIsZgDQ9EkgNJW7D2c8ZOl1kNlRv/9oIb2FF634jU/iFJI73dGxbE83YV0wvWrUrkdyuNUWLycWwfNOh36qyPr8qulSLP+wn6NaK+vuaD3OMrl/0Tvtyop0o2soSXcK4audKLZcZmxIQ0SQZpEJOT/F9FzvHlZKMBPkgrYlRs/qvoKqe8RhJxdrZn544692KwYLN8VxWNSPiYsph7doatJUKuHCcKZA/HI3RP+PIF42aYxpz9NbM0iEA3jvZ7m0VHzPOB69YcZrmbwQlYTbOUceu9hfCVNlt6H9JSZhFCQ==
+ b=W6Nh3yL8C9bgwWy/2wWMgP8t+HrwBw8Q4Ux3CcbuppdOt/TufhqERcwHsqC7vALEyXbKCj7JunhbRUUeTDl/lNF1DSLIUtaCNqUD2OXMBZkHZgAbPI6rbpBd3HzqpUgPZ8Jw+otm6mK/Q23841xHmqTZLAu7Ykc/FYcHutkDSNoYNk6oJliqi/6jjrPvN1pfsQ4PSHrN4pO6mTu2zALIpg/URb7bE03rthWkMENneyqQb+beX8eD206lmzG4oNj+Xivx/ueX+BIax0qtg1G8ZpPflsPGym4J0Gg8HSpA8G1/rVvvxnQ/sG2sG3sf75qnvIiojlpS+kFraSmr87DoKQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ANDzq31nwmZNnvLAJ1ZyzqcjZb0AxJSJXb6QmCMO/qA=;
- b=JoKyRSUbHTjTZOjc3bjjF5IKAXs4meQweEyu0+9RaFQKuV5x9ItzfuuZOGrQ989K+EAK77L6IljK29fhuinoJWIpel0ywCrqQDe7wNIYbJvOy8QiIZvRv7+51YlOCtGfQbZHbgYoIu4M2B59DzZUteyft6khJAY3It5oVWxmXkTvntgNvXXNodXIBO5mXkWVtJgnGh30RQJp9oUfz/O8l84cosAguS4Z25TY+P3sxzWYVJLCUvtMoZDy0nbt86Kvu2qlzc7QiIvO1rEy/maRF2nzOXuD0j3DHHPMgV/51ccWFYpOvVQVbr9Z5Lk+759EhyMQR/LR40o4oALLVcQozA==
+ bh=O2Lg42GYyXYs5SQD+hrJfBD36hcRq5ivL2xCfP/YirI=;
+ b=fBX8gtIMetQz/GpSejSjRQAAUVB+PDSQrCNXSDi6mOrA2NcmeXBrSZODbOt4CMc/9tgxnEPL6QgvgM7nAIqaAl47OgsVX35HxCkWjNF1EsRaGVA8TnPzh+gUDMsy1PUD9Cxtdh0wiuI3ZLjWdJamyzwJwxjryX/wAauh8ya8YOtcGFXEo+/7wdYjtNd/ni+FUkwgjybWdV4d/mttaafZejdtxfCO0ntLGA40ITDlzOG+0XsDK8fGou4b5Ohm02EC+DV3dgyKAalH9o0GiGVI9Z2raSAJQjilKvm9gWHyakdr6l1kwTqzIAeIPMbdAk/rm96YSysqZn8aVhAcVHlHsw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
  smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
  header.from=axis.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ANDzq31nwmZNnvLAJ1ZyzqcjZb0AxJSJXb6QmCMO/qA=;
- b=nSnqKA3cuYihdXEfWml/CYvFAQeGcTWclJH27AtvnZ6DOcCBPxqf/sRcLuKcirQ1mFEj+2xCVsBPFWOCkQ3GOx1Y5TR3653d64gRYhha50vUs97rn2LGSJybvj4mW1dv5h8Nq1vxJ9TkZt81NGieLw3DJeXH23t/km8TNNYhSj0=
-Received: from DUZPR01CA0243.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:4b5::11) by PA4PR02MB7987.eurprd02.prod.outlook.com
- (2603:10a6:102:2a2::14) with Microsoft SMTP Server (version=TLS1_2,
+ bh=O2Lg42GYyXYs5SQD+hrJfBD36hcRq5ivL2xCfP/YirI=;
+ b=NwJLU8Ndxq8gad9vUox9Am7iy9It5C+ykw1nqYbzlE+B0ZlgXAoYQrQfO3mSHPz1DaANl3JSEEXfwDtqK37xAlgcfy6pOw6jh5xKq4RjlhA1oRylklNTyi9JuuEkibmctuDZv323JZkmgZ5tcRMxpwExuxzFNnGbvorJhTMMJtY=
+Received: from DUZPR01CA0241.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4b5::24) by AS2PR02MB9238.eurprd02.prod.outlook.com
+ (2603:10a6:20b:5fc::20) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.18; Tue, 11 Feb
  2025 00:30:06 +0000
 Received: from DU2PEPF00028D0C.eurprd03.prod.outlook.com
- (2603:10a6:10:4b5:cafe::d9) by DUZPR01CA0243.outlook.office365.com
- (2603:10a6:10:4b5::11) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10a6:10:4b5:cafe::3c) by DUZPR01CA0241.outlook.office365.com
+ (2603:10a6:10:4b5::24) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.31 via Frontend Transport; Tue,
- 11 Feb 2025 00:30:05 +0000
+ 11 Feb 2025 00:30:24 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
  smtp.mailfrom=axis.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=axis.com;
@@ -45,29 +45,33 @@ Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
 Received: from mail.axis.com (195.60.68.100) by
  DU2PEPF00028D0C.mail.protection.outlook.com (10.167.242.20) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8445.10 via Frontend Transport; Tue, 11 Feb 2025 00:30:05 +0000
-Received: from se-mail02w.axis.com (10.20.40.8) by se-mail02w.axis.com
+ 15.20.8445.10 via Frontend Transport; Tue, 11 Feb 2025 00:30:06 +0000
+Received: from SE-MAIL21W.axis.com (10.20.40.16) by se-mail02w.axis.com
  (10.20.40.8) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Tue, 11 Feb
+ 2025 01:30:05 +0100
+Received: from se-mail01w.axis.com (10.20.40.7) by SE-MAIL21W.axis.com
+ (10.20.40.16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Tue, 11 Feb
  2025 01:30:04 +0100
-Received: from se-intmail01x.se.axis.com (10.4.0.28) by se-mail02w.axis.com
- (10.20.40.8) with Microsoft SMTP Server id 15.1.2507.44 via Frontend
+Received: from se-intmail02x.se.axis.com (10.4.0.28) by se-mail01w.axis.com
+ (10.20.40.7) with Microsoft SMTP Server id 15.1.2507.44 via Frontend
  Transport; Tue, 11 Feb 2025 01:30:04 +0100
 Received: from saur (saur.se.axis.com [10.92.3.10])
-	by se-intmail01x.se.axis.com (Postfix) with ESMTP id 1C271282
+	by se-intmail02x.se.axis.com (Postfix) with ESMTP id 4D22D235
 	for <openembedded-devel@lists.openembedded.org>; Tue, 11 Feb 2025 01:30:04 +0100 (CET)
 Received: from saur.se.axis.com (localhost [127.0.0.1])
-	by saur (8.17.1/8.15.2) with ESMTPS id 51B0U38s4186209
+	by saur (8.17.1/8.15.2) with ESMTPS id 51B0U4XN4186213
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>; Tue, 11 Feb 2025 01:30:04 +0100
 Received: (from pkj@localhost)
-	by saur.se.axis.com (8.17.1/8.17.1/Submit) id 51B0U3Vg4186208
-	for openembedded-devel@lists.openembedded.org; Tue, 11 Feb 2025 01:30:03 +0100
+	by saur.se.axis.com (8.17.1/8.17.1/Submit) id 51B0U47l4186212
+	for openembedded-devel@lists.openembedded.org; Tue, 11 Feb 2025 01:30:04 +0100
 From: Peter Kjellerstedt <pkj@axis.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [scarthgap][meta-networking][PATCH 1/2] ebtables: Remove the dependecy on bash
-Date: Tue, 11 Feb 2025 01:29:57 +0100
-Message-ID: <20250211002958.4186149-2-pkj@axis.com>
+Subject: [scarthgap][meta-oe][PATCH 2/2] libeigen: Remove LGPL code
+Date: Tue, 11 Feb 2025 01:29:58 +0100
+Message-ID: <20250211002958.4186149-3-pkj@axis.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20250211002958.4186149-1-pkj@axis.com>
 References: <20250211002958.4186149-1-pkj@axis.com>
@@ -76,137 +80,1229 @@ Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PEPF00028D0C:EE_|PA4PR02MB7987:EE_
-X-MS-Office365-Filtering-Correlation-Id: d9c52758-2c94-4bcd-11a1-08dd4a333b80
+X-MS-TrafficTypeDiagnostic: DU2PEPF00028D0C:EE_|AS2PR02MB9238:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0d18c61e-9fe1-4bf3-21b8-08dd4a333bd1
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|36860700013|82310400026|1800799024;
+	BCL:0;ARA:13230040|1800799024|376014|82310400026|36860700013|13003099007;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?AAEcyy7TKt/9PqE7gt9gAr0CRKJQHFtaA20yXGEb5hRrHhbwW+i6HUFgia7e?=
- =?us-ascii?Q?11O6LSGhWaRwillgPtYJdU6vgI81bknb2Hngu2nvgt0q0fAQzpSOEEgS71V9?=
- =?us-ascii?Q?MGkTj7kOZ5PFABGEFoC0AvusTnEmLD4Jvv1kjjwTn/Up/KUQ1Ti3sqSlrJIy?=
- =?us-ascii?Q?FLlNq8rE8GLy7Axsp5SbAeOpIAYYgFbKKJ6J0ABIPJCgNdmTMPwJ4d8lXfS3?=
- =?us-ascii?Q?PxWstZ4VWrdfHc4jbwfRNtwN3O0Zq+ddBWwB8k50o7uUZbDVOZ2wGdECTVsq?=
- =?us-ascii?Q?G6DeJvGSoJfjJCdH6Psf3yNW3Mqy60DUe8ba5QHnbiVkv3eIfSzW2jHmdeK7?=
- =?us-ascii?Q?Ky+CGaJPb++S/vQojQbQR6F9eDV/3dbNpiDuvVAjLQcm7TEiniyoz1YynTa6?=
- =?us-ascii?Q?6oE3ryA09/BSh+UEM1PiS2yB3MSbZo8uh0ao7JYJfR7RIAAvpUg6adxv7EWQ?=
- =?us-ascii?Q?O0p6PtLttp+82PrYFPS1l796Q0bmMaLKgEnaYWzlELUE0nihkKWcc/TFw2og?=
- =?us-ascii?Q?mt0CkuGUwzWudfurE5c/+joOWrwWkdTXjkxAtIIXZGa++LJwlJa/epWs03Pp?=
- =?us-ascii?Q?RIUGIJIILsGR0UgAN+vZehazZOcQ9LIsdnU7DqXl8efDfxE212mxig0STf+q?=
- =?us-ascii?Q?pYVGjBGbDW+kOJdCxqWCt99uerKqIDJMYlM8ui9WFITkOaMMEskU0myJd2zk?=
- =?us-ascii?Q?+uKfazKGCDrhogTDq2tu+ztmhF/DbvtwU+oJO4X7FKw19zCuT3YTsQEdSHgf?=
- =?us-ascii?Q?x4+kNx+3gFa8xy5LrANf3p0ndJB1d/jJHg6yDqY64xJTOfQmgMEIVQhXKhUJ?=
- =?us-ascii?Q?1JEYm+8glzGTktxReaxZVa9+ALu29AM27SZMR79A+W8k+DYVmrsAybkLEN8k?=
- =?us-ascii?Q?3wXe0K3WXpRrsKJOv4117gauEMGEo8OqZmLm3PSnUSh+XCMxkHHnYHTgRD4Q?=
- =?us-ascii?Q?bzkbN6ZIO8F/eBSToR/Q1q2yUO7fJczZHRnkE0bZZ2hJ8mwHnl4/iy0sC8P9?=
- =?us-ascii?Q?MyaUog0500rqaQQ/D6abyTR+sGA0vAMwjIV2SCY7M9bYcTcM2WASURYHGRwi?=
- =?us-ascii?Q?LFruM3kOCVr1OoWYmGK9LGayYKEzd+by+rchH3kZBBcZOk0lgPIEJ59+rVrf?=
- =?us-ascii?Q?2/Z5TbQxbxi5EaGAD6SBPo+I4lQAWSgKKIFejFjDrkE8ql345wMV11u9I/RJ?=
- =?us-ascii?Q?1sAVXFfN/8QMaJZBox8QnavS2MfOXjd0tkkWExdKRwYDloHKJo11IL80QS7E?=
- =?us-ascii?Q?JdIKyPDRddYuZavzt/7deWN1CFyDk9yimhMiyjE1XnUjcN6SClG+ZjQgTcXA?=
- =?us-ascii?Q?vnaSveW2L6+xGO6d3t16ms1/3F84ojpQnhRP+h7SE15eQzDtk5U3cToxenrA?=
- =?us-ascii?Q?kEWP7yvw42K+lJgd1kU61nWrLPin4YJDyMHq/WFjxl9yVRRR5qko0HINxCFK?=
- =?us-ascii?Q?oJfpbSVpMFl0fDTjy9GZepHG99xz2EDNwUzbH2T+X4FMRFVmqyfJBOEQ6EBE?=
- =?us-ascii?Q?61CaY2jOVoH/fAM=3D?=
+	=?us-ascii?Q?JbnJIughHMbkcEgXjg6VPGmf5VBmg7GrpSq7tqgg7dpqH54lUstoBe7l8XML?=
+ =?us-ascii?Q?UFEOfwU6v7OgRVc6B76JiAeDurfUmCQQyOvNOL6rwsD+eCrl6r9DK60jRyQB?=
+ =?us-ascii?Q?CvJ1kwgSogzteKPeBgZTbnPcn88GsWq3+8JHMzPq3Pkxr1xsHqaFUphfueIX?=
+ =?us-ascii?Q?r6YQl0Cv9fZEG8SYItXdHGdVT+ah5HbJNRKCMBgrm1T6LmRGAOKJpSzgRjBy?=
+ =?us-ascii?Q?a1+RqKv+hb/mcopkuCBsp9PUafpBav7ReQtdisiiRXwSgaPvuj3CDhY1S9Y9?=
+ =?us-ascii?Q?+cbqOvXq4Y7bLnHts1WXJTmVVR7qTX3DsYmTUGJpMMhFC1lkxs+/DjUvnNOv?=
+ =?us-ascii?Q?iaNlkKRJWceXE57rC6Orwo/5Lt8b4XJrjPKPD2fNrcl1rwVFUMQLLDrH8h9Z?=
+ =?us-ascii?Q?WFTYgRrnskQ3RbvtAvWPHIb9pMTsebFixJsv42oXtPi3Il39X5Sjz/jNoXYj?=
+ =?us-ascii?Q?LVng8fif2EEw73ux54R5jbq+EeLSJvQiWxZ2+fBpfviWgl+735WqJ8ew2KUj?=
+ =?us-ascii?Q?No8DQq9uJl36eJcUGkW9i5ewLSgNXkH3QbNwFp76K94fsTB7T8xDh1aGHb1W?=
+ =?us-ascii?Q?oIw1cR71WKb1d5UGGCQGqgYOjeodzYUm54IkEHlzSwIqapuWnxbMFIIU9DNh?=
+ =?us-ascii?Q?thRsHU1ZXAZHlqmhTVHhtnkkw1gGDE9/BhwJjaFs3Caz4uVeWBQ0FTJrtgxV?=
+ =?us-ascii?Q?QJ8KHKdhL6au6wnJJwwIO2O64x0gGG/lf03F5B/OpiIjHpXKGtRRvbxxGMRO?=
+ =?us-ascii?Q?V+ZN+yLCAilxFb8QahdLJGkCja9y270ohcw3ZoVgpGifrrRi8h+le6BpRlfQ?=
+ =?us-ascii?Q?fgeXCFYXUEe6ko+fgG0YsMIBn2y20Srvb6ecjVgqyYqtWE32Lb43PJfz7B+d?=
+ =?us-ascii?Q?jIZ6PpEZzu/z3beWh/WqEYTe6nA53FvZT3WfLyPFaeFf/9VIehrFvMR57cyS?=
+ =?us-ascii?Q?QK8a3xfxZM/escvk6w8bA2KeQ1TNWqxUwyetsh3TTvJZPHjKD+6Kk9oxVQMo?=
+ =?us-ascii?Q?9V77yPxUX2pAGa9IArFcefOc5SstTMmVRRiHBUjs82JJhD0NDT+YA4401wxz?=
+ =?us-ascii?Q?HWL+vqtiy+O0F+jY4foLko4OR0SZcScosgNs3zIkWhbQq3wfGPo99Hndv14l?=
+ =?us-ascii?Q?PPkxvhnHBRmWY1SiMyFRmbY5SPPGyacAajVqrOBbxc6qA5EP5wXPPjsO1k9s?=
+ =?us-ascii?Q?fZoEXtIX/pMd16bKepSTfBcQiX6pJZy9tPVSKGqDuyQTMiLeNd8bCyLPwKT7?=
+ =?us-ascii?Q?x/Ldsi80X4mPVuVLamdJcIMZhEd3DIN2JEFRZ/6hq0brh03mwlKoQFpr4tJo?=
+ =?us-ascii?Q?Cco0+iLZP+cMARxSKGyIOV42wMRlUvqqDMdX5OC9P0IpX1kZ21S75pYcYGhe?=
+ =?us-ascii?Q?mUPOtw7k7PmGyZL91xk6gCEzb1ahELd4VHKR449iFlLXAh2fRYqoKPF9by7K?=
+ =?us-ascii?Q?gUCfq5Vez2Q=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024);DIR:OUT;SFP:1101;
+	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013)(13003099007);DIR:OUT;SFP:1101;
 X-OriginatorOrg: axis.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Feb 2025 00:30:05.7889
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Feb 2025 00:30:06.3202
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d9c52758-2c94-4bcd-11a1-08dd4a333b80
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0d18c61e-9fe1-4bf3-21b8-08dd4a333bd1
 X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
 	DU2PEPF00028D0C.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR02MB7987
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR02MB9238
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 11 Feb 2025 00:30:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115418
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115419
 
-Rewrite ebtables-legacy-save to avoid using bashisms.
+Since libeigen is a header-only library, LGPL effectively has the same
+properties as GPL when it comes to affecting the licensing of the code
+that uses libeigen. To avoid the problem, backport a patch to remove all
+LGPL-2.1 code from the library.
 
+Also correct the licenses for ${PN}, ${PN}-dbg and ${PN}-dev to reflect
+that they do not contain any GPL code (the GPL code is only used for
+benchmark tests and does not affect what is installed).
+
+License-Update: Correct the license information
 Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
- .../ebtables-2.0.11/ebtables-legacy-save      | 19 +++++++++----------
- .../ebtables/ebtables_2.0.11.bb               |  2 --
- 2 files changed, 9 insertions(+), 12 deletions(-)
+ ...0002-Remove-LGPL-Code-and-references.patch | 1040 +++++++++++++++++
+ .../libeigen/libeigen_3.4.0.bb                |    9 +-
+ 2 files changed, 1047 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-support/libeigen/libeigen/0002-Remove-L=
+GPL-Code-and-references.patch
 
-diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.11/ebtabl=
-es-legacy-save b/meta-networking/recipes-filter/ebtables/ebtables-2.0.11/eb=
-tables-legacy-save
-index 2133600f77..0b39c23deb 100644
---- a/meta-networking/recipes-filter/ebtables/ebtables-2.0.11/ebtables-lega=
-cy-save
-+++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.11/ebtables-lega=
-cy-save
-@@ -1,4 +1,4 @@
--#!/bin/bash
-+#!/bin/sh
+diff --git a/meta-oe/recipes-support/libeigen/libeigen/0002-Remove-LGPL-Cod=
+e-and-references.patch b/meta-oe/recipes-support/libeigen/libeigen/0002-Rem=
+ove-LGPL-Code-and-references.patch
+new file mode 100644
+index 0000000000..2d19bc23c8
+--- /dev/null
++++ b/meta-oe/recipes-support/libeigen/libeigen/0002-Remove-LGPL-Code-and-r=
+eferences.patch
+@@ -0,0 +1,1040 @@
++From e63a6950dbebf4dd95e5c74c423c06fd65df5182 Mon Sep 17 00:00:00 2001
++From: =3D?UTF-8?q?Antonio=3D20S=3DC3=3DA1nchez?=3D <cantonios@google.com>
++Date: Wed, 8 Feb 2023 01:25:06 +0000
++Subject: [PATCH] Remove LGPL Code and references.
++
++Upstream-Status: Backport [https://gitlab.com/libeigen/eigen/-/commit/e256=
+ad1823c2eddd6954241ddc99bfeb7bb29cb3]
++---
++ COPYING.LGPL                                  | 502 ------------------
++ COPYING.README                                |  16 +-
++ Eigen/src/Core/util/NonMPL2.h                 |   3 -
++ .../IncompleteCholesky.h                      |   3 +-
++ bench/tensors/eigen_sycl_bench.sh             |   1 -
++ bench/tensors/eigen_sycl_bench_contract.sh    |   2 +-
++ doc/PreprocessorDirectives.dox                |   3 -
++ test/CMakeLists.txt                           |   1 -
++ test/mpl2only.cpp                             |  24 -
++ unsupported/Eigen/IterativeSolvers            |   6 -
++ .../IterativeSolvers/ConstrainedConjGrad.h    | 187 -------
++ .../IterativeSolvers/IterationController.h    | 154 ------
++ 12 files changed, 4 insertions(+), 898 deletions(-)
++ delete mode 100644 COPYING.LGPL
++ delete mode 100644 Eigen/src/Core/util/NonMPL2.h
++ delete mode 100644 test/mpl2only.cpp
++ delete mode 100644 unsupported/Eigen/src/IterativeSolvers/ConstrainedConj=
+Grad.h
++ delete mode 100644 unsupported/Eigen/src/IterativeSolvers/IterationContro=
+ller.h
++
++diff --git a/COPYING.LGPL b/COPYING.LGPL
++deleted file mode 100644
++index 4362b4915..000000000
++--- a/COPYING.LGPL
+++++ /dev/null
++@@ -1,502 +0,0 @@
++-                  GNU LESSER GENERAL PUBLIC LICENSE
++-                       Version 2.1, February 1999
++-
++- Copyright (C) 1991, 1999 Free Software Foundation, Inc.
++- 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++- Everyone is permitted to copy and distribute verbatim copies
++- of this license document, but changing it is not allowed.
++-
++-[This is the first released version of the Lesser GPL.  It also counts
++- as the successor of the GNU Library Public License, version 2, hence
++- the version number 2.1.]
++-
++-                            Preamble
++-
++-  The licenses for most software are designed to take away your
++-freedom to share and change it.  By contrast, the GNU General Public
++-Licenses are intended to guarantee your freedom to share and change
++-free software--to make sure the software is free for all its users.
++-
++-  This license, the Lesser General Public License, applies to some
++-specially designated software packages--typically libraries--of the
++-Free Software Foundation and other authors who decide to use it.  You
++-can use it too, but we suggest you first think carefully about whether
++-this license or the ordinary General Public License is the better
++-strategy to use in any particular case, based on the explanations below.
++-
++-  When we speak of free software, we are referring to freedom of use,
++-not price.  Our General Public Licenses are designed to make sure that
++-you have the freedom to distribute copies of free software (and charge
++-for this service if you wish); that you receive source code or can get
++-it if you want it; that you can change the software and use pieces of
++-it in new free programs; and that you are informed that you can do
++-these things.
++-
++-  To protect your rights, we need to make restrictions that forbid
++-distributors to deny you these rights or to ask you to surrender these
++-rights.  These restrictions translate to certain responsibilities for
++-you if you distribute copies of the library or if you modify it.
++-
++-  For example, if you distribute copies of the library, whether gratis
++-or for a fee, you must give the recipients all the rights that we gave
++-you.  You must make sure that they, too, receive or can get the source
++-code.  If you link other code with the library, you must provide
++-complete object files to the recipients, so that they can relink them
++-with the library after making changes to the library and recompiling
++-it.  And you must show them these terms so they know their rights.
++-
++-  We protect your rights with a two-step method: (1) we copyright the
++-library, and (2) we offer you this license, which gives you legal
++-permission to copy, distribute and/or modify the library.
++-
++-  To protect each distributor, we want to make it very clear that
++-there is no warranty for the free library.  Also, if the library is
++-modified by someone else and passed on, the recipients should know
++-that what they have is not the original version, so that the original
++-author's reputation will not be affected by problems that might be
++-introduced by others.
++-=0C
++-  Finally, software patents pose a constant threat to the existence of
++-any free program.  We wish to make sure that a company cannot
++-effectively restrict the users of a free program by obtaining a
++-restrictive license from a patent holder.  Therefore, we insist that
++-any patent license obtained for a version of the library must be
++-consistent with the full freedom of use specified in this license.
++-
++-  Most GNU software, including some libraries, is covered by the
++-ordinary GNU General Public License.  This license, the GNU Lesser
++-General Public License, applies to certain designated libraries, and
++-is quite different from the ordinary General Public License.  We use
++-this license for certain libraries in order to permit linking those
++-libraries into non-free programs.
++-
++-  When a program is linked with a library, whether statically or using
++-a shared library, the combination of the two is legally speaking a
++-combined work, a derivative of the original library.  The ordinary
++-General Public License therefore permits such linking only if the
++-entire combination fits its criteria of freedom.  The Lesser General
++-Public License permits more lax criteria for linking other code with
++-the library.
++-
++-  We call this license the "Lesser" General Public License because it
++-does Less to protect the user's freedom than the ordinary General
++-Public License.  It also provides other free software developers Less
++-of an advantage over competing non-free programs.  These disadvantages
++-are the reason we use the ordinary General Public License for many
++-libraries.  However, the Lesser license provides advantages in certain
++-special circumstances.
++-
++-  For example, on rare occasions, there may be a special need to
++-encourage the widest possible use of a certain library, so that it become=
+s
++-a de-facto standard.  To achieve this, non-free programs must be
++-allowed to use the library.  A more frequent case is that a free
++-library does the same job as widely used non-free libraries.  In this
++-case, there is little to gain by limiting the free library to free
++-software only, so we use the Lesser General Public License.
++-
++-  In other cases, permission to use a particular library in non-free
++-programs enables a greater number of people to use a large body of
++-free software.  For example, permission to use the GNU C Library in
++-non-free programs enables many more people to use the whole GNU
++-operating system, as well as its variant, the GNU/Linux operating
++-system.
++-
++-  Although the Lesser General Public License is Less protective of the
++-users' freedom, it does ensure that the user of a program that is
++-linked with the Library has the freedom and the wherewithal to run
++-that program using a modified version of the Library.
++-
++-  The precise terms and conditions for copying, distribution and
++-modification follow.  Pay close attention to the difference between a
++-"work based on the library" and a "work that uses the library".  The
++-former contains code derived from the library, whereas the latter must
++-be combined with the library in order to run.
++-=0C
++-                  GNU LESSER GENERAL PUBLIC LICENSE
++-   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
++-
++-  0. This License Agreement applies to any software library or other
++-program which contains a notice placed by the copyright holder or
++-other authorized party saying it may be distributed under the terms of
++-this Lesser General Public License (also called "this License").
++-Each licensee is addressed as "you".
++-
++-  A "library" means a collection of software functions and/or data
++-prepared so as to be conveniently linked with application programs
++-(which use some of those functions and data) to form executables.
++-
++-  The "Library", below, refers to any such software library or work
++-which has been distributed under these terms.  A "work based on the
++-Library" means either the Library or any derivative work under
++-copyright law: that is to say, a work containing the Library or a
++-portion of it, either verbatim or with modifications and/or translated
++-straightforwardly into another language.  (Hereinafter, translation is
++-included without limitation in the term "modification".)
++-
++-  "Source code" for a work means the preferred form of the work for
++-making modifications to it.  For a library, complete source code means
++-all the source code for all modules it contains, plus any associated
++-interface definition files, plus the scripts used to control compilation
++-and installation of the library.
++-
++-  Activities other than copying, distribution and modification are not
++-covered by this License; they are outside its scope.  The act of
++-running a program using the Library is not restricted, and output from
++-such a program is covered only if its contents constitute a work based
++-on the Library (independent of the use of the Library in a tool for
++-writing it).  Whether that is true depends on what the Library does
++-and what the program that uses the Library does.
++-
++-  1. You may copy and distribute verbatim copies of the Library's
++-complete source code as you receive it, in any medium, provided that
++-you conspicuously and appropriately publish on each copy an
++-appropriate copyright notice and disclaimer of warranty; keep intact
++-all the notices that refer to this License and to the absence of any
++-warranty; and distribute a copy of this License along with the
++-Library.
++-
++-  You may charge a fee for the physical act of transferring a copy,
++-and you may at your option offer warranty protection in exchange for a
++-fee.
++-=0C
++-  2. You may modify your copy or copies of the Library or any portion
++-of it, thus forming a work based on the Library, and copy and
++-distribute such modifications or work under the terms of Section 1
++-above, provided that you also meet all of these conditions:
++-
++-    a) The modified work must itself be a software library.
++-
++-    b) You must cause the files modified to carry prominent notices
++-    stating that you changed the files and the date of any change.
++-
++-    c) You must cause the whole of the work to be licensed at no
++-    charge to all third parties under the terms of this License.
++-
++-    d) If a facility in the modified Library refers to a function or a
++-    table of data to be supplied by an application program that uses
++-    the facility, other than as an argument passed when the facility
++-    is invoked, then you must make a good faith effort to ensure that,
++-    in the event an application does not supply such function or
++-    table, the facility still operates, and performs whatever part of
++-    its purpose remains meaningful.
++-
++-    (For example, a function in a library to compute square roots has
++-    a purpose that is entirely well-defined independent of the
++-    application.  Therefore, Subsection 2d requires that any
++-    application-supplied function or table used by this function must
++-    be optional: if the application does not supply it, the square
++-    root function must still compute square roots.)
++-
++-These requirements apply to the modified work as a whole.  If
++-identifiable sections of that work are not derived from the Library,
++-and can be reasonably considered independent and separate works in
++-themselves, then this License, and its terms, do not apply to those
++-sections when you distribute them as separate works.  But when you
++-distribute the same sections as part of a whole which is a work based
++-on the Library, the distribution of the whole must be on the terms of
++-this License, whose permissions for other licensees extend to the
++-entire whole, and thus to each and every part regardless of who wrote
++-it.
++-
++-Thus, it is not the intent of this section to claim rights or contest
++-your rights to work written entirely by you; rather, the intent is to
++-exercise the right to control the distribution of derivative or
++-collective works based on the Library.
++-
++-In addition, mere aggregation of another work not based on the Library
++-with the Library (or with a work based on the Library) on a volume of
++-a storage or distribution medium does not bring the other work under
++-the scope of this License.
++-
++-  3. You may opt to apply the terms of the ordinary GNU General Public
++-License instead of this License to a given copy of the Library.  To do
++-this, you must alter all the notices that refer to this License, so
++-that they refer to the ordinary GNU General Public License, version 2,
++-instead of to this License.  (If a newer version than version 2 of the
++-ordinary GNU General Public License has appeared, then you can specify
++-that version instead if you wish.)  Do not make any other change in
++-these notices.
++-=0C
++-  Once this change is made in a given copy, it is irreversible for
++-that copy, so the ordinary GNU General Public License applies to all
++-subsequent copies and derivative works made from that copy.
++-
++-  This option is useful when you wish to copy part of the code of
++-the Library into a program that is not a library.
++-
++-  4. You may copy and distribute the Library (or a portion or
++-derivative of it, under Section 2) in object code or executable form
++-under the terms of Sections 1 and 2 above provided that you accompany
++-it with the complete corresponding machine-readable source code, which
++-must be distributed under the terms of Sections 1 and 2 above on a
++-medium customarily used for software interchange.
++-
++-  If distribution of object code is made by offering access to copy
++-from a designated place, then offering equivalent access to copy the
++-source code from the same place satisfies the requirement to
++-distribute the source code, even though third parties are not
++-compelled to copy the source along with the object code.
++-
++-  5. A program that contains no derivative of any portion of the
++-Library, but is designed to work with the Library by being compiled or
++-linked with it, is called a "work that uses the Library".  Such a
++-work, in isolation, is not a derivative work of the Library, and
++-therefore falls outside the scope of this License.
++-
++-  However, linking a "work that uses the Library" with the Library
++-creates an executable that is a derivative of the Library (because it
++-contains portions of the Library), rather than a "work that uses the
++-library".  The executable is therefore covered by this License.
++-Section 6 states terms for distribution of such executables.
++-
++-  When a "work that uses the Library" uses material from a header file
++-that is part of the Library, the object code for the work may be a
++-derivative work of the Library even though the source code is not.
++-Whether this is true is especially significant if the work can be
++-linked without the Library, or if the work is itself a library.  The
++-threshold for this to be true is not precisely defined by law.
++-
++-  If such an object file uses only numerical parameters, data
++-structure layouts and accessors, and small macros and small inline
++-functions (ten lines or less in length), then the use of the object
++-file is unrestricted, regardless of whether it is legally a derivative
++-work.  (Executables containing this object code plus portions of the
++-Library will still fall under Section 6.)
++-
++-  Otherwise, if the work is a derivative of the Library, you may
++-distribute the object code for the work under the terms of Section 6.
++-Any executables containing that work also fall under Section 6,
++-whether or not they are linked directly with the Library itself.
++-=0C
++-  6. As an exception to the Sections above, you may also combine or
++-link a "work that uses the Library" with the Library to produce a
++-work containing portions of the Library, and distribute that work
++-under terms of your choice, provided that the terms permit
++-modification of the work for the customer's own use and reverse
++-engineering for debugging such modifications.
++-
++-  You must give prominent notice with each copy of the work that the
++-Library is used in it and that the Library and its use are covered by
++-this License.  You must supply a copy of this License.  If the work
++-during execution displays copyright notices, you must include the
++-copyright notice for the Library among them, as well as a reference
++-directing the user to the copy of this License.  Also, you must do one
++-of these things:
++-
++-    a) Accompany the work with the complete corresponding
++-    machine-readable source code for the Library including whatever
++-    changes were used in the work (which must be distributed under
++-    Sections 1 and 2 above); and, if the work is an executable linked
++-    with the Library, with the complete machine-readable "work that
++-    uses the Library", as object code and/or source code, so that the
++-    user can modify the Library and then relink to produce a modified
++-    executable containing the modified Library.  (It is understood
++-    that the user who changes the contents of definitions files in the
++-    Library will not necessarily be able to recompile the application
++-    to use the modified definitions.)
++-
++-    b) Use a suitable shared library mechanism for linking with the
++-    Library.  A suitable mechanism is one that (1) uses at run time a
++-    copy of the library already present on the user's computer system,
++-    rather than copying library functions into the executable, and (2)
++-    will operate properly with a modified version of the library, if
++-    the user installs one, as long as the modified version is
++-    interface-compatible with the version that the work was made with.
++-
++-    c) Accompany the work with a written offer, valid for at
++-    least three years, to give the same user the materials
++-    specified in Subsection 6a, above, for a charge no more
++-    than the cost of performing this distribution.
++-
++-    d) If distribution of the work is made by offering access to copy
++-    from a designated place, offer equivalent access to copy the above
++-    specified materials from the same place.
++-
++-    e) Verify that the user has already received a copy of these
++-    materials or that you have already sent this user a copy.
++-
++-  For an executable, the required form of the "work that uses the
++-Library" must include any data and utility programs needed for
++-reproducing the executable from it.  However, as a special exception,
++-the materials to be distributed need not include anything that is
++-normally distributed (in either source or binary form) with the major
++-components (compiler, kernel, and so on) of the operating system on
++-which the executable runs, unless that component itself accompanies
++-the executable.
++-
++-  It may happen that this requirement contradicts the license
++-restrictions of other proprietary libraries that do not normally
++-accompany the operating system.  Such a contradiction means you cannot
++-use both them and the Library together in an executable that you
++-distribute.
++-=0C
++-  7. You may place library facilities that are a work based on the
++-Library side-by-side in a single library together with other library
++-facilities not covered by this License, and distribute such a combined
++-library, provided that the separate distribution of the work based on
++-the Library and of the other library facilities is otherwise
++-permitted, and provided that you do these two things:
++-
++-    a) Accompany the combined library with a copy of the same work
++-    based on the Library, uncombined with any other library
++-    facilities.  This must be distributed under the terms of the
++-    Sections above.
++-
++-    b) Give prominent notice with the combined library of the fact
++-    that part of it is a work based on the Library, and explaining
++-    where to find the accompanying uncombined form of the same work.
++-
++-  8. You may not copy, modify, sublicense, link with, or distribute
++-the Library except as expressly provided under this License.  Any
++-attempt otherwise to copy, modify, sublicense, link with, or
++-distribute the Library is void, and will automatically terminate your
++-rights under this License.  However, parties who have received copies,
++-or rights, from you under this License will not have their licenses
++-terminated so long as such parties remain in full compliance.
++-
++-  9. You are not required to accept this License, since you have not
++-signed it.  However, nothing else grants you permission to modify or
++-distribute the Library or its derivative works.  These actions are
++-prohibited by law if you do not accept this License.  Therefore, by
++-modifying or distributing the Library (or any work based on the
++-Library), you indicate your acceptance of this License to do so, and
++-all its terms and conditions for copying, distributing or modifying
++-the Library or works based on it.
++-
++-  10. Each time you redistribute the Library (or any work based on the
++-Library), the recipient automatically receives a license from the
++-original licensor to copy, distribute, link with or modify the Library
++-subject to these terms and conditions.  You may not impose any further
++-restrictions on the recipients' exercise of the rights granted herein.
++-You are not responsible for enforcing compliance by third parties with
++-this License.
++-=0C
++-  11. If, as a consequence of a court judgment or allegation of patent
++-infringement or for any other reason (not limited to patent issues),
++-conditions are imposed on you (whether by court order, agreement or
++-otherwise) that contradict the conditions of this License, they do not
++-excuse you from the conditions of this License.  If you cannot
++-distribute so as to satisfy simultaneously your obligations under this
++-License and any other pertinent obligations, then as a consequence you
++-may not distribute the Library at all.  For example, if a patent
++-license would not permit royalty-free redistribution of the Library by
++-all those who receive copies directly or indirectly through you, then
++-the only way you could satisfy both it and this License would be to
++-refrain entirely from distribution of the Library.
++-
++-If any portion of this section is held invalid or unenforceable under any
++-particular circumstance, the balance of the section is intended to apply,
++-and the section as a whole is intended to apply in other circumstances.
++-
++-It is not the purpose of this section to induce you to infringe any
++-patents or other property right claims or to contest validity of any
++-such claims; this section has the sole purpose of protecting the
++-integrity of the free software distribution system which is
++-implemented by public license practices.  Many people have made
++-generous contributions to the wide range of software distributed
++-through that system in reliance on consistent application of that
++-system; it is up to the author/donor to decide if he or she is willing
++-to distribute software through any other system and a licensee cannot
++-impose that choice.
++-
++-This section is intended to make thoroughly clear what is believed to
++-be a consequence of the rest of this License.
++-
++-  12. If the distribution and/or use of the Library is restricted in
++-certain countries either by patents or by copyrighted interfaces, the
++-original copyright holder who places the Library under this License may a=
+dd
++-an explicit geographical distribution limitation excluding those countrie=
+s,
++-so that distribution is permitted only in or among countries not thus
++-excluded.  In such case, this License incorporates the limitation as if
++-written in the body of this License.
++-
++-  13. The Free Software Foundation may publish revised and/or new
++-versions of the Lesser General Public License from time to time.
++-Such new versions will be similar in spirit to the present version,
++-but may differ in detail to address new problems or concerns.
++-
++-Each version is given a distinguishing version number.  If the Library
++-specifies a version number of this License which applies to it and
++-"any later version", you have the option of following the terms and
++-conditions either of that version or of any later version published by
++-the Free Software Foundation.  If the Library does not specify a
++-license version number, you may choose any version ever published by
++-the Free Software Foundation.
++-=0C
++-  14. If you wish to incorporate parts of the Library into other free
++-programs whose distribution conditions are incompatible with these,
++-write to the author to ask for permission.  For software which is
++-copyrighted by the Free Software Foundation, write to the Free
++-Software Foundation; we sometimes make exceptions for this.  Our
++-decision will be guided by the two goals of preserving the free status
++-of all derivatives of our free software and of promoting the sharing
++-and reuse of software generally.
++-
++-                            NO WARRANTY
++-
++-  15. BECAUSE THE LIBRARY IS LICENSED FREE OF CHARGE, THERE IS NO
++-WARRANTY FOR THE LIBRARY, TO THE EXTENT PERMITTED BY APPLICABLE LAW.
++-EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR
++-OTHER PARTIES PROVIDE THE LIBRARY "AS IS" WITHOUT WARRANTY OF ANY
++-KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE
++-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
++-PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE
++-LIBRARY IS WITH YOU.  SHOULD THE LIBRARY PROVE DEFECTIVE, YOU ASSUME
++-THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
++-
++-  16. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN
++-WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY
++-AND/OR REDISTRIBUTE THE LIBRARY AS PERMITTED ABOVE, BE LIABLE TO YOU
++-FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR
++-CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE
++-LIBRARY (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
++-RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
++-FAILURE OF THE LIBRARY TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
++-SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
++-DAMAGES.
++-
++-                     END OF TERMS AND CONDITIONS
++-=0C
++-           How to Apply These Terms to Your New Libraries
++-
++-  If you develop a new library, and you want it to be of the greatest
++-possible use to the public, we recommend making it free software that
++-everyone can redistribute and change.  You can do so by permitting
++-redistribution under these terms (or, alternatively, under the terms of t=
+he
++-ordinary General Public License).
++-
++-  To apply these terms, attach the following notices to the library.  It =
+is
++-safest to attach them to the start of each source file to most effectivel=
+y
++-convey the exclusion of warranty; and each file should have at least the
++-"copyright" line and a pointer to where the full notice is found.
++-
++-    <one line to give the library's name and a brief idea of what it does=
+.>
++-    Copyright (C) <year>  <name of author>
++-
++-    This library is free software; you can redistribute it and/or
++-    modify it under the terms of the GNU Lesser General Public
++-    License as published by the Free Software Foundation; either
++-    version 2.1 of the License, or (at your option) any later version.
++-
++-    This library is distributed in the hope that it will be useful,
++-    but WITHOUT ANY WARRANTY; without even the implied warranty of
++-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++-    Lesser General Public License for more details.
++-
++-    You should have received a copy of the GNU Lesser General Public
++-    License along with this library; if not, write to the Free Software
++-    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-=
+1301  USA
++-
++-Also add information on how to contact you by electronic and paper mail.
++-
++-You should also get your employer (if you work as a programmer) or your
++-school, if any, to sign a "copyright disclaimer" for the library, if
++-necessary.  Here is a sample; alter the names:
++-
++-  Yoyodyne, Inc., hereby disclaims all copyright interest in the
++-  library `Frob' (a library for tweaking knobs) written by James Random H=
+acker.
++-
++-  <signature of Ty Coon>, 1 April 1990
++-  Ty Coon, President of Vice
++-
++-That's all there is to it!
++diff --git a/COPYING.README b/COPYING.README
++index de5b63215..11af93ca7 100644
++--- a/COPYING.README
+++++ b/COPYING.README
++@@ -2,17 +2,5 @@ Eigen is primarily MPL2 licensed. See COPYING.MPL2 and th=
+ese links:
++   http://www.mozilla.org/MPL/2.0/
++   http://www.mozilla.org/MPL/2.0/FAQ.html
++=20
++-Some files contain third-party code under BSD or LGPL licenses, whence th=
+e other
++-COPYING.* files here.
++-
++-All the LGPL code is either LGPL 2.1-only, or LGPL 2.1-or-later.
++-For this reason, the COPYING.LGPL file contains the LGPL 2.1 text.
++-
++-If you want to guarantee that the Eigen code that you are #including is l=
+icensed
++-under the MPL2 and possibly more permissive licenses (like BSD), #define =
+this
++-preprocessor symbol:
++-  EIGEN_MPL2_ONLY
++-For example, with most compilers, you could add this to your project CXXF=
+LAGS:
++-  -DEIGEN_MPL2_ONLY
++-This will cause a compilation error to be generated if you #include any c=
+ode that is
++-LGPL licensed.
+++Some files contain third-party code under BSD or other MPL2-compatible li=
+censes,
+++whence the other COPYING.* files here.
++\ No newline at end of file
++diff --git a/Eigen/src/Core/util/NonMPL2.h b/Eigen/src/Core/util/NonMPL2.h
++deleted file mode 100644
++index 1af67cf18..000000000
++--- a/Eigen/src/Core/util/NonMPL2.h
+++++ /dev/null
++@@ -1,3 +0,0 @@
++-#ifdef EIGEN_MPL2_ONLY
++-#error Including non-MPL2 code in EIGEN_MPL2_ONLY mode
++-#endif
++diff --git a/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h b/Eigen=
+/src/IterativeLinearSolvers/IncompleteCholesky.h
++index 7803fd817..1a5d7faeb 100644
++--- a/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h
+++++ b/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h
++@@ -24,8 +24,7 @@ namespace Eigen {
++   * \tparam Scalar the scalar type of the input matrices
++   * \tparam _UpLo The triangular part that will be used for the computati=
+ons. It can be Lower
++     *               or Upper. Default is Lower.
++-  * \tparam _OrderingType The ordering method to use, either AMDOrdering<=
+> or NaturalOrdering<>. Default is AMDOrdering<int>,
++-  *                       unless EIGEN_MPL2_ONLY is defined, in which cas=
+e the default is NaturalOrdering<int>.
+++  * \tparam _OrderingType The ordering method to use, either AMDOrdering<=
+> or NaturalOrdering<>. Default is AMDOrdering<int>.
++   *
++   * \implsparsesolverconcept
++   *
++diff --git a/bench/tensors/eigen_sycl_bench.sh b/bench/tensors/eigen_sycl_=
+bench.sh
++index 3f67b3d86..4cb8f7be4 100755
++--- a/bench/tensors/eigen_sycl_bench.sh
+++++ b/bench/tensors/eigen_sycl_bench.sh
++@@ -10,7 +10,6 @@ benchmark_main.cc \
++ -march=3Dnative \
++ -O3 \
++ -DNDEBUG \
++--DEIGEN_MPL2_ONLY \
++ -DEIGEN_USE_SYCL=3D1 \
++ -DEIGEN_SYCL_LOCAL_MEM=3D1 \
++ -no-serial-memop \
++diff --git a/bench/tensors/eigen_sycl_bench_contract.sh b/bench/tensors/ei=
+gen_sycl_bench_contract.sh
++index 73fd6c4a0..3ab0138a1 100644
++--- a/bench/tensors/eigen_sycl_bench_contract.sh
+++++ b/bench/tensors/eigen_sycl_bench_contract.sh
++@@ -1,7 +1,7 @@
++ rm -f tensor_contract_sycl_bench
++ : "${COMPUTECPP_PACKAGE_ROOT_DIR:?Need to set COMPUTECPP_PACKAGE_ROOT_DIR=
+}"
++ echo "COMPUTECPP_PACKAGE_ROOT_DIR is set to: "$COMPUTECPP_PACKAGE_ROOT_DI=
+R
++-${COMPUTECPP_PACKAGE_ROOT_DIR}/bin/compute++  tensor_contract_sycl_bench.=
+cc -I ../../ -I ${COMPUTECPP_PACKAGE_ROOT_DIR}/include/ -std=3Dc++11 -O3 -D=
+NDEBUG -DEIGEN_MPL2_ONLY -DEIGEN_USE_SYCL=3D1 -no-serial-memop -mllvm -inli=
+ne-threshold=3D10000 -fsycl-ih-last -sycl-driver -Xclang -cl-mad-enable -lO=
+penCL -lComputeCpp -lpthread -o tensor_contract_sycl_bench ${@:1}
+++${COMPUTECPP_PACKAGE_ROOT_DIR}/bin/compute++  tensor_contract_sycl_bench.=
+cc -I ../../ -I ${COMPUTECPP_PACKAGE_ROOT_DIR}/include/ -std=3Dc++11 -O3 -D=
+NDEBUG -DEIGEN_USE_SYCL=3D1 -no-serial-memop -mllvm -inline-threshold=3D100=
+00 -fsycl-ih-last -sycl-driver -Xclang -cl-mad-enable -lOpenCL -lComputeCpp=
+ -lpthread -o tensor_contract_sycl_bench ${@:1}
++ export LD_LIBRARY_PATH=3D${COMPUTECPP_PACKAGE_ROOT_DIR}/lib:$LD_LIBRARY_P=
+ATH
++ ./tensor_contract_sycl_bench
++=20
++diff --git a/doc/PreprocessorDirectives.dox b/doc/PreprocessorDirectives.d=
+ox
++index 0f545b086..b7d59ccbc 100644
++--- a/doc/PreprocessorDirectives.dox
+++++ b/doc/PreprocessorDirectives.dox
++@@ -92,9 +92,6 @@ run time. However, these assertions do cost time and can=
+ thus be turned off.
++  - \b eigen_assert - macro with one argument that is used inside %Eigen f=
+or assertions. By default, it is
++    basically defined to be \c assert, which aborts the program if the ass=
+ertion is violated. Redefine this
++    macro if you want to do something else, like throwing an exception.
++- - \b EIGEN_MPL2_ONLY - disable non MPL2 compatible features, or in other=
+ words disable the features which
++-   are still under the LGPL.
++-
++=20
++ \section TopicPreprocessorDirectivesPerformance Alignment, vectorization =
+and performance tweaking
++=20
++diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
++index 5136f82aa..9f557743a 100644
++--- a/test/CMakeLists.txt
+++++ b/test/CMakeLists.txt
++@@ -277,7 +277,6 @@ ei_add_test(special_numbers)
++ ei_add_test(rvalue_types)
++ ei_add_test(dense_storage)
++ ei_add_test(ctorleak)
++-ei_add_test(mpl2only)
++ ei_add_test(inplace_decomposition)
++ ei_add_test(half_float)
++ ei_add_test(bfloat16_float)
++diff --git a/test/mpl2only.cpp b/test/mpl2only.cpp
++deleted file mode 100644
++index 296350d08..000000000
++--- a/test/mpl2only.cpp
+++++ /dev/null
++@@ -1,24 +0,0 @@
++-// This file is part of Eigen, a lightweight C++ template library
++-// for linear algebra.
++-//
++-// Copyright (C) 2015 Gael Guennebaud <gael.guennebaud@inria.fr>
++-//
++-// This Source Code Form is subject to the terms of the Mozilla
++-// Public License v. 2.0. If a copy of the MPL was not distributed
++-// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
++-
++-#ifndef EIGEN_MPL2_ONLY
++-#define EIGEN_MPL2_ONLY
++-#endif
++-#include <Eigen/Dense>
++-#include <Eigen/SparseCore>
++-#include <Eigen/SparseLU>
++-#include <Eigen/SparseQR>
++-#include <Eigen/Sparse>
++-#include <Eigen/IterativeLinearSolvers>
++-#include <Eigen/Eigen>
++-
++-int main()
++-{
++-  return 0;
++-}
++diff --git a/unsupported/Eigen/IterativeSolvers b/unsupported/Eigen/Iterat=
+iveSolvers
++index a3f58d676..f045fb607 100644
++--- a/unsupported/Eigen/IterativeSolvers
+++++ b/unsupported/Eigen/IterativeSolvers
++@@ -19,7 +19,6 @@
++   * \defgroup IterativeLinearSolvers_Module Iterative solvers module
++   * This module aims to provide various iterative linear and non linear s=
+olver algorithms.
++   * It currently provides:
++-  *  - a constrained conjugate gradient
++   *  - a Householder GMRES implementation
++   *  - an IDR(s) implementation
++   *  - a DGMRES implementation
++@@ -33,11 +32,6 @@
++=20
++ #include "../../Eigen/src/Core/util/DisableStupidWarnings.h"
++=20
++-#ifndef EIGEN_MPL2_ONLY
++-#include "src/IterativeSolvers/IterationController.h"
++-#include "src/IterativeSolvers/ConstrainedConjGrad.h"
++-#endif
++-
++ #include "src/IterativeSolvers/IncompleteLU.h"
++ #include "src/IterativeSolvers/GMRES.h"
++ #include "src/IterativeSolvers/DGMRES.h"
++diff --git a/unsupported/Eigen/src/IterativeSolvers/ConstrainedConjGrad.h =
+b/unsupported/Eigen/src/IterativeSolvers/ConstrainedConjGrad.h
++deleted file mode 100644
++index e7d70f39d..000000000
++--- a/unsupported/Eigen/src/IterativeSolvers/ConstrainedConjGrad.h
+++++ /dev/null
++@@ -1,187 +0,0 @@
++-// This file is part of Eigen, a lightweight C++ template library
++-// for linear algebra.
++-//
++-// Copyright (C) 2008 Gael Guennebaud <gael.guennebaud@inria.fr>
++-
++-/* NOTE The functions of this file have been adapted from the GMM++ libra=
+ry */
++-
++-//=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++-//
++-// Copyright (C) 2002-2007 Yves Renard
++-//
++-// This file is a part of GETFEM++
++-//
++-// Getfem++ is free software; you can redistribute it and/or modify
++-// it under the terms of the GNU Lesser General Public License as
++-// published by the Free Software Foundation; version 2.1 of the License.
++-//
++-// This program is distributed in the hope that it will be useful,
++-// but WITHOUT ANY WARRANTY; without even the implied warranty of
++-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++-// GNU Lesser General Public License for more details.
++-// You should have received a copy of the GNU Lesser General Public
++-// License along with this program; if not, write to the Free Software
++-// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301,
++-// USA.
++-//
++-//=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++-
++-#include "../../../../Eigen/src/Core/util/NonMPL2.h"
++-
++-#ifndef EIGEN_CONSTRAINEDCG_H
++-#define EIGEN_CONSTRAINEDCG_H
++-
++-#include "../../../../Eigen/Core"
++-
++-namespace Eigen {=20
++-
++-namespace internal {
++-
++-/** \ingroup IterativeLinearSolvers_Module
++-  * Compute the pseudo inverse of the non-square matrix C such that
++-  * \f$ CINV =3D (C * C^T)^{-1} * C \f$ based on a conjugate gradient met=
+hod.
++-  *
++-  * This function is internally used by constrained_cg.
++-  */
++-template <typename CMatrix, typename CINVMatrix>
++-void pseudo_inverse(const CMatrix &C, CINVMatrix &CINV)
++-{
++-  // optimisable : copie de la ligne, precalcul de C * trans(C).
++-  typedef typename CMatrix::Scalar Scalar;
++-  typedef typename CMatrix::Index Index;
++-  // FIXME use sparse vectors ?
++-  typedef Matrix<Scalar,Dynamic,1> TmpVec;
++-
++-  Index rows =3D C.rows(), cols =3D C.cols();
++-
++-  TmpVec d(rows), e(rows), l(cols), p(rows), q(rows), r(rows);
++-  Scalar rho, rho_1, alpha;
++-  d.setZero();
++-
++-  typedef Triplet<double> T;
++-  std::vector<T> tripletList;
++-   =20
++-  for (Index i =3D 0; i < rows; ++i)
++-  {
++-    d[i] =3D 1.0;
++-    rho =3D 1.0;
++-    e.setZero();
++-    r =3D d;
++-    p =3D d;
++-
++-    while (rho >=3D 1e-38)
++-    { /* conjugate gradient to compute e             */
++-      /* which is the i-th row of inv(C * trans(C))  */
++-      l =3D C.transpose() * p;
++-      q =3D C * l;
++-      alpha =3D rho / p.dot(q);
++-      e +=3D  alpha * p;
++-      r +=3D -alpha * q;
++-      rho_1 =3D rho;
++-      rho =3D r.dot(r);
++-      p =3D (rho/rho_1) * p + r;
++-    }
++-
++-    l =3D C.transpose() * e; // l is the i-th row of CINV
++-    // FIXME add a generic "prune/filter" expression for both dense and s=
+parse object to sparse
++-    for (Index j=3D0; j<l.size(); ++j)
++-      if (l[j]<1e-15)
++-	tripletList.push_back(T(i,j,l(j)));
++-
++-=09
++-    d[i] =3D 0.0;
++-  }
++-  CINV.setFromTriplets(tripletList.begin(), tripletList.end());
++-}
++-
++-
++-
++-/** \ingroup IterativeLinearSolvers_Module
++-  * Constrained conjugate gradient
++-  *
++-  * Computes the minimum of \f$ 1/2((Ax).x) - bx \f$ under the constraint=
+ \f$ Cx \le f \f$
++-  */
++-template<typename TMatrix, typename CMatrix,
++-         typename VectorX, typename VectorB, typename VectorF>
++-void constrained_cg(const TMatrix& A, const CMatrix& C, VectorX& x,
++-                       const VectorB& b, const VectorF& f, IterationContr=
+oller &iter)
++-{
++-  using std::sqrt;
++-  typedef typename TMatrix::Scalar Scalar;
++-  typedef typename TMatrix::Index Index;
++-  typedef Matrix<Scalar,Dynamic,1>  TmpVec;
++-
++-  Scalar rho =3D 1.0, rho_1, lambda, gamma;
++-  Index xSize =3D x.size();
++-  TmpVec  p(xSize), q(xSize), q2(xSize),
++-          r(xSize), old_z(xSize), z(xSize),
++-          memox(xSize);
++-  std::vector<bool> satured(C.rows());
++-  p.setZero();
++-  iter.setRhsNorm(sqrt(b.dot(b))); // gael vect_sp(PS, b, b)
++-  if (iter.rhsNorm() =3D=3D 0.0) iter.setRhsNorm(1.0);
++-
++-  SparseMatrix<Scalar,RowMajor> CINV(C.rows(), C.cols());
++-  pseudo_inverse(C, CINV);
++-
++-  while(true)
++-  {
++-    // computation of residual
++-    old_z =3D z;
++-    memox =3D x;
++-    r =3D b;
++-    r +=3D A * -x;
++-    z =3D r;
++-    bool transition =3D false;
++-    for (Index i =3D 0; i < C.rows(); ++i)
++-    {
++-      Scalar al =3D C.row(i).dot(x) - f.coeff(i);
++-      if (al >=3D -1.0E-15)
++-      {
++-        if (!satured[i])
++-        {
++-          satured[i] =3D true;
++-          transition =3D true;
++-        }
++-        Scalar bb =3D CINV.row(i).dot(z);
++-        if (bb > 0.0)
++-          // FIXME: we should allow that: z +=3D -bb * C.row(i);
++-          for (typename CMatrix::InnerIterator it(C,i); it; ++it)
++-            z.coeffRef(it.index()) -=3D bb*it.value();
++-      }
++-      else
++-        satured[i] =3D false;
++-    }
++-
++-    // descent direction
++-    rho_1 =3D rho;
++-    rho =3D r.dot(z);
++-
++-    if (iter.finished(rho)) break;
++-    if (transition || iter.first()) gamma =3D 0.0;
++-    else gamma =3D (std::max)(0.0, (rho - old_z.dot(z)) / rho_1);
++-    p =3D z + gamma*p;
++-
++-    ++iter;
++-    // one dimensionnal optimization
++-    q =3D A * p;
++-    lambda =3D rho / q.dot(p);
++-    for (Index i =3D 0; i < C.rows(); ++i)
++-    {
++-      if (!satured[i])
++-      {
++-        Scalar bb =3D C.row(i).dot(p) - f[i];
++-        if (bb > 0.0)
++-          lambda =3D (std::min)(lambda, (f.coeff(i)-C.row(i).dot(x)) / bb=
+);
++-      }
++-    }
++-    x +=3D lambda * p;
++-    memox -=3D x;
++-  }
++-}
++-
++-} // end namespace internal
++-
++-} // end namespace Eigen
++-
++-#endif // EIGEN_CONSTRAINEDCG_H
++diff --git a/unsupported/Eigen/src/IterativeSolvers/IterationController.h =
+b/unsupported/Eigen/src/IterativeSolvers/IterationController.h
++deleted file mode 100644
++index a116e09e2..000000000
++--- a/unsupported/Eigen/src/IterativeSolvers/IterationController.h
+++++ /dev/null
++@@ -1,154 +0,0 @@
++-// This file is part of Eigen, a lightweight C++ template library
++-// for linear algebra.
++-//
++-// Copyright (C) 2008-2009 Gael Guennebaud <gael.guennebaud@inria.fr>
++-
++-/* NOTE The class IterationController has been adapted from the iteration
++- *      class of the GMM++ and ITL libraries.
++- */
++-
++-//=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++-// Copyright (C) 1997-2001
++-// Authors: Andrew Lumsdaine <lums@osl.iu.edu>=20
++-//          Lie-Quan Lee     <llee@osl.iu.edu>
++-//
++-// This file is part of the Iterative Template Library
++-//
++-// You should have received a copy of the License Agreement for the
++-// Iterative Template Library along with the software;  see the
++-// file LICENSE. =20
++-//
++-// Permission to modify the code and to distribute modified code is
++-// granted, provided the text of this NOTICE is retained, a notice that
++-// the code was modified is included with the above COPYRIGHT NOTICE and
++-// with the COPYRIGHT NOTICE in the LICENSE file, and that the LICENSE
++-// file is distributed with the modified code.
++-//
++-// LICENSOR MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED.
++-// By way of example, but not limitation, Licensor MAKES NO
++-// REPRESENTATIONS OR WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY
++-// PARTICULAR PURPOSE OR THAT THE USE OF THE LICENSED SOFTWARE COMPONENTS
++-// OR DOCUMENTATION WILL NOT INFRINGE ANY PATENTS, COPYRIGHTS, TRADEMARKS
++-// OR OTHER RIGHTS.
++-//=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++-
++-//=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++-//
++-// Copyright (C) 2002-2007 Yves Renard
++-//
++-// This file is a part of GETFEM++
++-//
++-// Getfem++ is free software; you can redistribute it and/or modify
++-// it under the terms of the GNU Lesser General Public License as
++-// published by the Free Software Foundation; version 2.1 of the License.
++-//
++-// This program is distributed in the hope that it will be useful,
++-// but WITHOUT ANY WARRANTY; without even the implied warranty of
++-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++-// GNU Lesser General Public License for more details.
++-// You should have received a copy of the GNU Lesser General Public
++-// License along with this program; if not, write to the Free Software
++-// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301,
++-// USA.
++-//
++-//=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++-
++-#include "../../../../Eigen/src/Core/util/NonMPL2.h"
++-
++-#ifndef EIGEN_ITERATION_CONTROLLER_H
++-#define EIGEN_ITERATION_CONTROLLER_H
++-
++-namespace Eigen {=20
++-
++-/** \ingroup IterativeLinearSolvers_Module
++-  * \class IterationController
++-  *
++-  * \brief Controls the iterations of the iterative solvers
++-  *
++-  * This class has been adapted from the iteration class of GMM++ and ITL=
+ libraries.
++-  *
++-  */
++-class IterationController
++-{
++-  protected :
++-    double m_rhsn;        ///< Right hand side norm
++-    size_t m_maxiter;     ///< Max. number of iterations
++-    int m_noise;          ///< if noise > 0 iterations are printed
++-    double m_resmax;      ///< maximum residual
++-    double m_resminreach, m_resadd;
++-    size_t m_nit;         ///< iteration number
++-    double m_res;         ///< last computed residual
++-    bool m_written;
++-    void (*m_callback)(const IterationController&);
++-  public :
++-
++-    void init()
++-    {
++-      m_nit =3D 0; m_res =3D 0.0; m_written =3D false;
++-      m_resminreach =3D 1E50; m_resadd =3D 0.0;
++-      m_callback =3D 0;
++-    }
++-
++-    IterationController(double r =3D 1.0E-8, int noi =3D 0, size_t mit =
+=3D size_t(-1))
++-      : m_rhsn(1.0), m_maxiter(mit), m_noise(noi), m_resmax(r) { init(); =
+}
++-
++-    void operator ++(int) { m_nit++; m_written =3D false; m_resadd +=3D m=
+_res; }
++-    void operator ++() { (*this)++; }
++-
++-    bool first() { return m_nit =3D=3D 0; }
++-
++-    /* get/set the "noisyness" (verbosity) of the solvers */
++-    int noiseLevel() const { return m_noise; }
++-    void setNoiseLevel(int n) { m_noise =3D n; }
++-    void reduceNoiseLevel() { if (m_noise > 0) m_noise--; }
++-
++-    double maxResidual() const { return m_resmax; }
++-    void setMaxResidual(double r) { m_resmax =3D r; }
++-
++-    double residual() const { return m_res; }
++-
++-    /* change the user-definable callback, called after each iteration */
++-    void setCallback(void (*t)(const IterationController&))
++-    {
++-      m_callback =3D t;
++-    }
++-
++-    size_t iteration() const { return m_nit; }
++-    void setIteration(size_t i) { m_nit =3D i; }
++-
++-    size_t maxIterarions() const { return m_maxiter; }
++-    void setMaxIterations(size_t i) { m_maxiter =3D i; }
++-
++-    double rhsNorm() const { return m_rhsn; }
++-    void setRhsNorm(double r) { m_rhsn =3D r; }
++-
++-    bool converged() const { return m_res <=3D m_rhsn * m_resmax; }
++-    bool converged(double nr)
++-    {
++-      using std::abs;
++-      m_res =3D abs(nr);=20
++-      m_resminreach =3D (std::min)(m_resminreach, m_res);
++-      return converged();
++-    }
++-    template<typename VectorType> bool converged(const VectorType &v)
++-    { return converged(v.squaredNorm()); }
++-
++-    bool finished(double nr)
++-    {
++-      if (m_callback) m_callback(*this);
++-      if (m_noise > 0 && !m_written)
++-      {
++-        converged(nr);
++-        m_written =3D true;
++-      }
++-      return (m_nit >=3D m_maxiter || converged(nr));
++-    }
++-    template <typename VectorType>
++-    bool finished(const MatrixBase<VectorType> &v)
++-    { return finished(double(v.squaredNorm())); }
++-
++-};
++-
++-} // end namespace Eigen
++-
++-#endif // EIGEN_ITERATION_CONTROLLER_H
+diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb b/meta-oe/r=
+ecipes-support/libeigen/libeigen_3.4.0.bb
+index 72044427dd..d7c117120b 100644
+--- a/meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb
++++ b/meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb
+@@ -1,15 +1,20 @@
+ DESCRIPTION =3D "Eigen is a C++ template library for linear algebra: matri=
+ces, vectors, numerical solvers, and related algorithms."
+ HOMEPAGE =3D "http://eigen.tuxfamily.org/"
+-LICENSE =3D "MPL-2.0 & Apache-2.0 & BSD-3-Clause & GPL-2.0-only & LGPL-2.1=
+-only & MINPACK"
++LICENSE =3D "MPL-2.0 & Apache-2.0 & BSD-3-Clause & GPL-2.0-only & MINPACK"
++# The GPL code is only used for benchmark tests and does not affect what i=
+s installed.
++LICENSE:${PN} =3D "MPL-2.0 & Apache-2.0 & BSD-3-Clause & MINPACK"
++LICENSE:${PN}-dbg =3D "MPL-2.0 & Apache-2.0 & BSD-3-Clause & MINPACK"
++LICENSE:${PN}-dev =3D "MPL-2.0 & Apache-2.0 & BSD-3-Clause & MINPACK"
+ LIC_FILES_CHKSUM =3D "file://COPYING.MPL2;md5=3D815ca599c9df247a0c7f619bab=
+123dad \
++                    file://COPYING.APACHE;md5=3D8de23b8e93c63005353056b247=
+5e9aa5 \
+                     file://COPYING.BSD;md5=3D2dd0510ee95e59ca28834b875bc96=
+596 \
+                     file://COPYING.GPL;md5=3Dd32239bcb673463ab874e80d47fae=
+504 \
+-                    file://COPYING.LGPL;md5=3D4fbd65380cdd255951079008b364=
+516c \
+                     file://COPYING.MINPACK;md5=3D71d91b0f75ce79a75d3108a72=
+bef8116 \
+ "
 =20
- EBTABLES=3D"/usr/sbin/ebtables-legacy"
+ SRC_URI =3D "git://gitlab.com/libeigen/eigen.git;protocol=3Dhttp;branch=3D=
+3.4 \
+     file://0001-Default-eigen_packet_wrapper-constructor.patch \
++    file://0002-Remove-LGPL-Code-and-references.patch \
+ "
 =20
-@@ -11,7 +11,7 @@ cnt=3D""
-=20
- for table_name in $(grep -E '^ebtable_' /proc/modules | cut -f1 -d' ' | se=
-d s/ebtable_//); do
-     table=3D$($EBTABLES -t $table_name -L $cnt)
--    [ $? -eq 0 ] || { echo "$table"; exit -1; }
-+    [ $? -eq 0 ] || { echo "$table"; exit 1; }
-=20
-     chain=3D""
-     rules=3D""
-@@ -20,24 +20,23 @@ for table_name in $(grep -E '^ebtable_' /proc/modules |=
- cut -f1 -d' ' | sed s/eb
-=20
- 	case "$line" in=20
- 	    Bridge\ table:\ *)
--		echo "*${line:14}"
-+		echo "*${line#Bridge table: }"
- 		;;
- 	    Bridge\ chain:\ *)
--		chain=3D"${line:14}"
-+		chain=3D"${line#Bridge chain: }"
- 		chain=3D"${chain%%,*}"
- 		policy=3D"${line##*policy: }"
- 		echo ":$chain $policy"
- 		;;
- 	    *)
--		if [ "$cnt" =3D "--Lc" ]; then
--		    line=3D${line/, pcnt \=3D/ -c}
--		    line=3D${line/-- bcnt \=3D/}
--		fi
--		rules=3D"$rules-A $chain $line\n"
-+		[ "$cnt" !=3D "--Lc" ] ||
-+                    line=3D$(echo "$line" | sed -e 's/, pcnt =3D/-c/' -e '=
-s/ -- bcnt =3D//')
-+		rules=3D"$rules-A $chain $line
-+"
- 		;;
- 	esac
-     done <<EOF
- $table
- EOF
--    echo -e $rules
-+    echo "$rules"
- done
-diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.11.bb b/m=
-eta-networking/recipes-filter/ebtables/ebtables_2.0.11.bb
-index d522b514f6..30a4c79477 100644
---- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.11.bb
-+++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.11.bb
-@@ -6,8 +6,6 @@ LICENSE =3D "GPL-2.0-only"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D53b4a999993871a28ab1488fdbd2e73=
-e"
- SECTION =3D "net"
-=20
--RDEPENDS:${PN} +=3D "bash"
--
- RRECOMMENDS:${PN} +=3D "kernel-module-ebtables \
-     "
-=20
+ SRCREV =3D "3147391d946bb4b6c68edd901f2add6ac1f31f8c"
 
