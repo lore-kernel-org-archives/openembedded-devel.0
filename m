@@ -1,164 +1,167 @@
-Return-Path: <brgl@bgdev.pl>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E0AEC0219B
-	for <webhook@archiver.kernel.org>; Tue, 11 Feb 2025 14:46:53 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web11.683.1739285211939376811
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 48DCBC021A1
+	for <webhook@archiver.kernel.org>; Tue, 11 Feb 2025 16:26:46 +0000 (UTC)
+Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com [209.85.161.42])
+ by mx.groups.io with SMTP id smtpd.web11.3506.1739291200867322688
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Feb 2025 06:46:52 -0800
+ Tue, 11 Feb 2025 08:26:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=fiqy/UPb;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.49, mailfrom: brgl@bgdev.pl)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-43690d4605dso38911825e9.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Feb 2025 06:46:51 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ACzSG5yx;
+ spf=pass (domain: gmail.com, ip: 209.85.161.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f42.google.com with SMTP id 006d021491bc7-5fc9e64d96dso220073eaf.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Feb 2025 08:26:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1739285210; x=1739890010; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=hw9xpiZOcGSXkGHnVv3kO6/Lza99pKfwLMZUekIDy1k=;
-        b=fiqy/UPb6j389b/UECwef5h1fB1ZpOcBElLQ3DerjzF8bEJRqKxgsClGpprjZW2XkM
-         3bkD/A9GpFjKACbwvFgsScW80DsZ2eUORQImfh+EAE86uRzpPDK7rqndFhI2LfuvoXfG
-         SQ2UGCu0I75UuIHhwyvmykh5FCMWhGhf3uKrkrrhS7zFWjGctqsDtuuJtDHeao8cdsIH
-         PsTQoMjZNSKCm4vFVcHPdUuqKjK71bV11zekp1yj9j+1d2Q3D1XMyv8IvPMME5S1Q7sy
-         N1HAV5vxTgjMEbR4h//NWas7zZFFhToFVorBVDETIKd+yV2hflmTeFWIYqEAyWOFEq7R
-         mFVA==
+        d=gmail.com; s=20230601; t=1739291200; x=1739896000; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=bcDGaZPvEFmlb8BLy2zQj50IaItNWK0MtnllJFpgB68=;
+        b=ACzSG5yxy5/21fD0UG7aewh+GxBK3hQ8IYEvlQq3JjA/04NJW3CndCQltG6Qa+LNZG
+         E7mN36LtZiWUaprun+tcZeTgNuRdCa4xJfoCjaRR988SlHSSgGWmlxUnD+tKZe3Siym8
+         4TKuKrZYjyaOWBLMsw4yS49zHg7QfkYq3CCLvEqyHmGeq5p1SZwdhGw21iqSUT8xqUQi
+         Ve6PTkNveHPtvv0FQZOrX34SLsuq6k55DYBltOeYbXLQTwKdFVr88tWuIesVmYSAofo2
+         foaGrc90Y4mRA6cAW3otIO5UPMwwYQPXxEW0/wgcZqPVCOvStGnnQ7q7H85Gcn6rSoNP
+         X1XA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739285210; x=1739890010;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=hw9xpiZOcGSXkGHnVv3kO6/Lza99pKfwLMZUekIDy1k=;
-        b=xQd7daUzMcJFMvXyf1qEqqGYDLYVWBCKWL1Z0L3aVcOz7qFonRlY9MRq9Slm5/VKPK
-         fQnJ6QJgPpN/a7tV3yFT5H7U9QnbDISCrqxptpD1eS4q1CnAgyr3jTR/42KG4MJtHGv3
-         gzsbegRytNRz3HcC8a7Xm5b2ke3hYZvc98kY1RiNNdt1UuhzzOkLLDVEtar44H8Xmvqj
-         mtssL6oi4Ue5N06aKcXzMetknOHPL6I8viTsRnw2Bw7kclFuuoIu+gqzC5U+G+3gb20F
-         BD1CH3CTF0ubldDFV0qkUTC3sj+4GrhlnVhHgQik+k+XXzmwnJqLmVrGnDUTUqRQ+Cpm
-         l7ag==
-X-Forwarded-Encrypted: i=1; AJvYcCXHzfhti7ABmBQocsFghhxA6ftQo4M2tgvdutr7zscY2w+Nu6eBvY999STil4KJ9CEHFIMeofPmwcaINjmrD0m3YBA=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yz/Z78EMiD23j20ADvAGm9fExR0gT3N8JSAekT2leBacA21Orzs
-	mn48k2Y2OqVndYKFHA7/DMhcfEO/SU6w5kNjI7ycLOVVCX0GoPE3oxj25gSXqe4=
-X-Gm-Gg: ASbGnctXfIn4iKUyIiogYh8DKmZb2htEwtvVPPPlpnpVbSOIijM1x2E5UzOKrueEF9d
-	TyTOSw79JiA6z3HBqJ+NdKxLgXj34KuKO2LXBekwLnhi3+r4xRwZ0ON2ZTIM72jH1sv3VtOFm55
-	TqcW4jlViVRHXPJGiit6J1VLBun9hIHuAHf5JdugSj5xQIvH3xeUgRs/KWROLc2o526jutExIfW
-	S7udigEU0R8Yr9o+wSDvkPoOUWLzYhFjJP3KU62oLHlc1w+q3hTJoZ2uhFIrwZfkkZ+3K59mGxS
-	evS7rnrSFQUQ1A==
-X-Google-Smtp-Source: AGHT+IGbOpTc8dRqrUN/XSvMNXRYpbixh186Bn+X0rDFy6HPx/cgsnn3kWTPjhp6SYGJoaqIWoF1TQ==
-X-Received: by 2002:a05:600c:cc8:b0:434:f5c0:328d with SMTP id 5b1f17b1804b1-43930663d82mr112203385e9.23.1739285210146;
-        Tue, 11 Feb 2025 06:46:50 -0800 (PST)
-Received: from brgl-uxlite.home ([2a01:cb1d:dc:7e00:561:8978:1d41:636a])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4391da964e2sm181405105e9.4.2025.02.11.06.46.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 11 Feb 2025 06:46:49 -0800 (PST)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>,
-	Bruce Ashfield <bruce.ashfield@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Subject: [meta-python][PATCH] python3-gpiod: update to v2.2.4
-Date: Tue, 11 Feb 2025 15:46:47 +0100
-Message-ID: <20250211144647.140369-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.45.2
+        d=1e100.net; s=20230601; t=1739291200; x=1739896000;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=bcDGaZPvEFmlb8BLy2zQj50IaItNWK0MtnllJFpgB68=;
+        b=QxOzGaTNzqmIPHkrpqCn6NtgxZ37WfKWXVYrYvlAnDccAF4P7z16Xy2CreK56Yacb/
+         UQhx13NkKwF9RGvGxDWecmmYBa1zbcVjnzlK2XtJTwLHmf7k3fxQIvxBxz4vc10JXI0w
+         oif20eW8F8mCR5T6e4l73AivUw8hqP54hkEJJSa+BoHauJ7eojq4WK1hc1y+DGxWAr63
+         AX3bHJr5vwJzbVe2FfAOyIiA8uhTiejxej3D2s5nUOIseZn9uCyp+2VsbLl5CalU5YvI
+         8pM8tP2A/ePB3GO5lqsJpLBBswnP2AxDgO7JooJsnez5bnR1+LzAM2FCOjKG+4kPp+We
+         Xq/A==
+X-Gm-Message-State: AOJu0Yxw9EjQls5NIZ5+36TgX2v6llOVaYDhuvAaASd8S9DSSl+chNKy
+	e3WviJou//hGO+HUNXIkOLkoT4bvQQq4BkFv58Zvc0WyLVkdycet6IZPkwX656eclHCiirajIOu
+	ZbrDUJY77ZB+wZWe0ct+Q5C5hkZ8=
+X-Gm-Gg: ASbGncvpgsXkI6G+441zsDtOaxnwmC71H81Yf9BGnA0mSYSP5taneLfocUYCZbmPz+h
+	nWpWfnzYFfUJwt6GfqCHvb0S60MlSJogZNmnQYJyJD8qaEIe+ZMAuU79vm9uOLek1ayBOUoDg
+X-Google-Smtp-Source: AGHT+IE14Ssz63hmoPRTCPyVqwowNjxT/UuaG30AUykaS6VcWrQEdErJjZ2hAKoYTTBMgMZFXxDGLlys9p/CawRXYks=
+X-Received: by 2002:a05:6870:c6a8:b0:29f:8a1b:f76b with SMTP id
+ 586e51a60fabf-2b8d64a4bc4mr8542fac.9.1739291199863; Tue, 11 Feb 2025 08:26:39
+ -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250211133155.4081059-1-skandigraun@gmail.com>
+In-Reply-To: <20250211133155.4081059-1-skandigraun@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 11 Feb 2025 08:26:14 -0800
+X-Gm-Features: AWEUYZnFYz9U2g0XzLNf-QIKDhkci3XbjYh9x6w7C2WGd0xRcdTfC8qDwXifBb0
+Message-ID: <CAMKF1sqEKiL9HiGevbZ_6tu3rf3sn0XfhpUmcax33CuKbBXSjA@mail.gmail.com>
+Subject: Re: [oe] [meta-gnome][PATCH v2] mutter: fix profiler PACKAGECONFIG
+To: skandigraun@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 11 Feb 2025 14:46:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115429
+ <openembedded-devel@lists.openembedded.org>; Tue, 11 Feb 2025 16:26:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115430
 
-From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+I have 47.5 staged in master-next, do we need this patch on 47.5 ? if
+we do then please rebase it on master-next and resend please.
 
-Bugfix release containing a fix for tests failing with recent kernels.
-This allows us to remove the patch we're carrying.
-
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
----
- ...tests-disable-device-before-releasin.patch | 49 -------------------
- ...-gpiod_2.2.3.bb => python3-gpiod_2.2.4.bb} |  7 +--
- 2 files changed, 2 insertions(+), 54 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-gpiod/0001-bindings-python-tests-disable-device-before-releasin.patch
- rename meta-python/recipes-devtools/python/{python3-gpiod_2.2.3.bb => python3-gpiod_2.2.4.bb} (86%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-gpiod/0001-bindings-python-tests-disable-device-before-releasin.patch b/meta-python/recipes-devtools/python/python3-gpiod/0001-bindings-python-tests-disable-device-before-releasin.patch
-deleted file mode 100644
-index 9025e0d72d..0000000000
---- a/meta-python/recipes-devtools/python/python3-gpiod/0001-bindings-python-tests-disable-device-before-releasin.patch
-+++ /dev/null
-@@ -1,49 +0,0 @@
--From ad91b034e7575074998b3e480b592e3ae6d00def Mon Sep 17 00:00:00 2001
--From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
--Date: Tue, 4 Feb 2025 09:36:13 +0100
--Subject: [PATCH] bindings: python: tests: disable device before releasing the
-- bank
--
--Linux kernel commit 8bd76b3d3f3a ("gpio: sim: lock up configfs that an
--instantiated device depends on") uncovered an issue in Python bindings
--tests where the GPIO simulator device is not disabled before removing its
--configfs entries. Reorder the operations in chip_finalize() in order to
--disable the device first (if needed) before releasing any other
--resources.
--
--Upstream-Status: Submitted [https://lore.kernel.org/all/20250203-fix-gpiosim-in-bindings-v1-2-d2c9e0f3a29d@linaro.org/]
--
--Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-----
-- tests/gpiosim/ext.c | 11 ++++++-----
-- 1 file changed, 6 insertions(+), 5 deletions(-)
--
--diff --git a/tests/gpiosim/ext.c b/tests/gpiosim/ext.c
--index 272e6f7..cb5611a 100644
----- a/tests/gpiosim/ext.c
--+++ b/tests/gpiosim/ext.c
--@@ -96,15 +96,16 @@ static int chip_init(chip_object *self,
-- 
-- static void chip_finalize(chip_object *self)
-- {
---	if (self->bank)
---		gpiosim_bank_unref(self->bank);
---
-- 	if (self->dev) {
-- 		if (gpiosim_dev_is_live(self->dev))
-- 			gpiosim_dev_disable(self->dev);
---
---		gpiosim_dev_unref(self->dev);
-- 	}
--+
--+	if (self->bank)
--+		gpiosim_bank_unref(self->bank);
--+
--+	if (self->dev)
--+		gpiosim_dev_unref(self->dev);
-- }
-- 
-- static void chip_dealloc(PyObject *self)
---- 
--2.45.2
--
-diff --git a/meta-python/recipes-devtools/python/python3-gpiod_2.2.3.bb b/meta-python/recipes-devtools/python/python3-gpiod_2.2.4.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-gpiod_2.2.3.bb
-rename to meta-python/recipes-devtools/python/python3-gpiod_2.2.4.bb
-index bdc7e52ca5..7efbc5b80a 100644
---- a/meta-python/recipes-devtools/python/python3-gpiod_2.2.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-gpiod_2.2.4.bb
-@@ -5,12 +5,9 @@ LICENSE = "GPL-2.0-or-later & LGPL-2.1-or-later & CC-BY-SA-4.0"
- # package is spun out.
- LIC_FILES_CHKSUM = "file://setup.py;beginline=241;endline=241;md5=f5ddb56912b7f20bf94aa4d1bdcd3533"
- 
--SRC_URI += " \
--    file://run-ptest \
--    file://0001-bindings-python-tests-disable-device-before-releasin.patch \
--"
-+SRC_URI += "file://run-ptest"
- 
--SRC_URI[sha256sum] = "b916c3741dfc4dbcf6224b39e50765f672b137896287715709d49e9f063304c5"
-+SRC_URI[sha256sum] = "4923c27262c70815054fe7a1962b98dd1d6822a541c103d0acd7f42fc9aabae9"
- 
- inherit python_setuptools_build_meta python_pep517 ptest pypi
- 
--- 
-2.45.2
-
+On Tue, Feb 11, 2025 at 5:32=E2=80=AFAM Gyorgy Sarvari via
+lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
+wrote:
+>
+> In case "profiler" PACKAGECONFIG is enabled, the build fails with
+> the following error:
+>
+> | ninja: error: '/usr/share/dbus-1/interfaces/org.gnome.Sysprof3.Profiler=
+.xml', needed by 'src/meta-dbus-sysprof3-profiler.c', missing and no known =
+rule to make it
+>
+> meson.build script is looking explicitly for a required file using the
+> sysroot of the build system instead of ${RECIPE_SYSROOT}. To avoid this,
+> patch meson.build to prefix this path with ${RECIPE_SYSROOT}.
+>
+> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> ---
+>  ...-Dont-use-system-sysprof-dbus-folder.patch | 35 +++++++++++++++++++
+>  .../recipes-gnome/mutter/mutter_47.4.bb       |  2 ++
+>  2 files changed, 37 insertions(+)
+>  create mode 100644 meta-gnome/recipes-gnome/mutter/files/0001-Dont-use-s=
+ystem-sysprof-dbus-folder.patch
+>
+> diff --git a/meta-gnome/recipes-gnome/mutter/files/0001-Dont-use-system-s=
+ysprof-dbus-folder.patch b/meta-gnome/recipes-gnome/mutter/files/0001-Dont-=
+use-system-sysprof-dbus-folder.patch
+> new file mode 100644
+> index 000000000..2f09c3299
+> --- /dev/null
+> +++ b/meta-gnome/recipes-gnome/mutter/files/0001-Dont-use-system-sysprof-=
+dbus-folder.patch
+> @@ -0,0 +1,35 @@
+> +From 790177e2a89aa0710b570d595223bdb511241c56 Mon Sep 17 00:00:00 2001
+> +From: Gyorgy Sarvari <skandigraun@gmail.com>
+> +Date: Tue, 11 Feb 2025 13:39:54 +0100
+> +Subject: [PATCH] Don't use system sysprof dbus folder
+> +
+> +In case Mutter is built with profiler support, it requires
+> +org.gnome.Sysprof3.Profiler.xml file to be available - however
+> +the meson build file is trying to access it on the build machine's
+> +system ($datadir/dbus-1/interfaces) instead of searching for it
+> +in the $RECIPE_SYSROOT.
+> +
+> +To ensure that it looks for this file in the correct folder, prefix
+> +the search path with the value of the sys_root property, which is set
+> +in the meson.cross file (by meson.bbclass).
+> +
+> +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> +
+> +Upstream-Status: Inappropriate [oe-specific: only related to cross-compi=
+ling]
+> +---
+> + meson.build | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/meson.build b/meson.build
+> +index 551cb23..5199be6 100644
+> +--- a/meson.build
+> ++++ b/meson.build
+> +@@ -446,7 +446,7 @@ if have_profiler
+> +
+> +   if libsysprof_capture_dep.type_name() =3D=3D 'pkgconfig'
+> +     sysprof_dep =3D dependency('sysprof-6', 'sysprof-4')
+> +-    sysprof_dbus_interfaces_dir =3D sysprof_dep.get_variable('datadir')=
+ / 'dbus-1' / 'interfaces'
+> ++    sysprof_dbus_interfaces_dir =3D meson.get_external_property('sys_ro=
+ot') + sysprof_dep.get_variable('datadir') / 'dbus-1' / 'interfaces'
+> +   else
+> +     sysprof_dbus_interfaces_dir =3D mutter_srcdir / 'subprojects' / 'sy=
+sprof' / 'src'
+> +   endif
+> diff --git a/meta-gnome/recipes-gnome/mutter/mutter_47.4.bb b/meta-gnome/=
+recipes-gnome/mutter/mutter_47.4.bb
+> index 30301dac2..fe30aa60c 100644
+> --- a/meta-gnome/recipes-gnome/mutter/mutter_47.4.bb
+> +++ b/meta-gnome/recipes-gnome/mutter/mutter_47.4.bb
+> @@ -24,6 +24,8 @@ DEPENDS =3D " \
+>
+>  inherit gnomebase gsettings gobject-introspection gettext features_check
+>
+> +SRC_URI +=3D "file://0001-Dont-use-system-sysprof-dbus-folder.patch"
+> +
+>  SRC_URI[archive.sha256sum] =3D "f531fc00e6ec6dbb570b3bf942b6490f7a93df91=
+c4c267a918b4d2afe9211bda"
+>
+>  # x11 is still manadatory - see meson.build
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#115428): https://lists.openembedded.org/g/openembedde=
+d-devel/message/115428
+> Mute This Topic: https://lists.openembedded.org/mt/111121898/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
