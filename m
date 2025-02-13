@@ -1,226 +1,195 @@
-Return-Path: <mark.jonas@de.bosch.com>
+Return-Path: <rasmus.villemoes@prevas.dk>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D8F6C021A0
-	for <webhook@archiver.kernel.org>; Thu, 13 Feb 2025 11:59:11 +0000 (UTC)
-Received: from AS8PR04CU009.outbound.protection.outlook.com (AS8PR04CU009.outbound.protection.outlook.com [52.101.70.10])
- by mx.groups.io with SMTP id smtpd.web10.9526.1739447941119922441
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DE6B6C0219D
+	for <webhook@archiver.kernel.org>; Thu, 13 Feb 2025 14:20:01 +0000 (UTC)
+Received: from EUR02-VI1-obe.outbound.protection.outlook.com (EUR02-VI1-obe.outbound.protection.outlook.com [40.107.241.41])
+ by mx.groups.io with SMTP id smtpd.web10.12058.1739456393314594790
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Feb 2025 03:59:01 -0800
+ Thu, 13 Feb 2025 06:19:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@de.bosch.com header.s=selector2 header.b=rA7rFdUE;
- spf=pass (domain: de.bosch.com, ip: 52.101.70.10, mailfrom: mark.jonas@de.bosch.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@prevas.dk header.s=selector1 header.b=MoNGWlNH;
+ spf=pass (domain: prevas.dk, ip: 40.107.241.41, mailfrom: rasmus.villemoes@prevas.dk)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rjjqnGUje4GLMS71fHyMfG4j9AMbl48mJUX+AtirHWsWMQBjLmApX0/LFcok3B1xYe0w1UMdJ98D779fsLberi+Z1rp5VPYXQCrbF0TMQjbBfdCLQX9K8WsEI4nEhMJrseo+6bHrzd/a42df8ATF8UPW5mQod5P4VLivgmJfdM7yXbPxWff3hNCG/Ayr/qYJeylihMO2vIjFN3xMEJcQJ7v4d7VGHkUI4GEFzCgjtZGi/gzaFwv1GNFT0CImC0IZLwfSAAMyK/xz7v7raFznR4nEX7bC4KdYHi8QM87vwsLnC4RXAj9zNPfRYmpwy5/h3DCgL0buyEJNzeTDG41h/g==
+ b=acU3qttyfNmQAWHg8cBFeGGo+iKqc9bMIFQX3nU/B3MmnfsLHdIaMc42ww4UblZSCkiyAQLxzBwcu+C24rV/v3G/6HtY4svAY2Jp/Qda+ZouYTeEp4g0SbS/kaJRkyyo/qtAFciKJZ05+CDXriKrDjdKv7SRiPY4BM56zISpGcyRL+Av3rKD6L7qMO0hVfDgUtt35+HbMmoOiDG40EIbp1Is0x2g0fv50F9HQ+yCnhHuXk+CkihM8tKUKVfuh3XvOrEApv+ryRJgv8Ihygj8NauxFiaC13vDcCjseHA75Pv9Zbphm8c9tFdmsgO1sjxqX7GmF05Vk5cRDDYEbRBcbw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=K/6B8bVj9r2DukOAWyif9uRakBS70xG33PlCFLb6V8o=;
- b=MZ7B7jXhAPLQ2zh+RPWQtF3geLEcv516nnnfEx3Ok/xBRkXwB6sDkQ3bqyNnfsONxzQKXpjG7Z7XrM3VRDw2ozaJw2MZqxt5QgiYCl3FWrvOFe6RYNQjWc2J50sVOvmJthDPgMhR54JdYtyqhhBlVU5USG2PmSFz4LoH1Gwy9nfHC8Vbj+vlVUK4ppzM2Ml4+blweY/gvULjdYgj40SArXcXzbpeKA5T0LbCDFlpkD3MUE/XGk0+A6b+YsCNPLDpPLzxfIPLDcIRLvSFDohLvlCkzIbgQ1J59krh/REbdeLiFA4zihz2voC5+Mf7gAJMA0fqbom7z8xQ/YsY5nU9wQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 139.15.153.205) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=de.bosch.com; dmarc=pass (p=reject sp=none pct=100) action=none
- header.from=de.bosch.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=de.bosch.com;
- s=selector2;
+ bh=q9/yh9gKkhzH7qe2SWDhG2hCu/Ri2FsjmdDh1/E9e4g=;
+ b=OIjJsukswQ0HCgLDRUUB7nWCtb8pfXl1NFCbUiNhHAzDC+MEOhHge5UylecCFWkV3tEnOXgy2e6y2Yk1fL2FyiOR7dLzzoKhXd78ZShUQou2i20P9q6k2h4WOSjR/6pDvSYtyyiGzSDHiulkNfOZgECWvzN9v0xS7Vn4PkdTERVDVfNeBQuAUF0RTYM+9yhnQqDLQbJCpV9SHb3Y9BEuyeXU6uzKdggIK1Em7R1MvoJo+kyfQYL+7LlkdjtSuRuVOOYROaeyEHBddNv35ZW9t4yf3JbzIohqGQ/gsEhl8v9Ybp/wgxV8a5SZS117xDUlN/5KP78Iezlto4ysJAWKkQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=K/6B8bVj9r2DukOAWyif9uRakBS70xG33PlCFLb6V8o=;
- b=rA7rFdUEt2+EMs7KxtHHivQabmNchnCg+SXU64zPSNPOMrS9XAM/3dbjZHDc9neRAn+Skcwq+vUUTlDNQxVt+S5H13X6e6x6oYg2JThbnNfq6+BShTdwo1kCcJn+EwA3nRrDiFNM5SPIAZSjl4hTSUpVTp1viH29JcTEjOZRcmWQvgAdf0aTxZAb71qqW/j+ROMK/3p8WyOQ99pJNl4sNxCqmjCKEaiMrE7+umBpN1EskT4Lo/Aq0ZWap/eupnDLA6p8MkE/kzYoiTbkylgM7zfwNLxlfKwwBdH3jB1pNIg7m6q74xcD+Cv9jlM8F5c3QXnyo6v1uQdfSlymgjhEiQ==
-Received: from AS9PR05CA0174.eurprd05.prod.outlook.com (2603:10a6:20b:496::6)
- by DB9PR10MB5236.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:33b::10) with
+ bh=q9/yh9gKkhzH7qe2SWDhG2hCu/Ri2FsjmdDh1/E9e4g=;
+ b=MoNGWlNHC046KU6tED891D0K2Xui5f9qyf5jiP4/KPuKgLTJdYnmgUQls8o3WnrUJktQUlPzq5Sw1PjGTf4RlvOjrONooPY6PIRPjrS0lh5Odr848v1UeTqX/y0nISkMC8GrZg10AaztL/dH4c3ELXS7KIvM6WwoyeIDyL11xCo=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:41::17)
+ by PRAPR10MB5204.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:299::15) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.11; Thu, 13 Feb
- 2025 11:58:54 +0000
-Received: from AM2PEPF0001C70E.eurprd05.prod.outlook.com
- (2603:10a6:20b:496:cafe::55) by AS9PR05CA0174.outlook.office365.com
- (2603:10a6:20b:496::6) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8445.14 via Frontend Transport; Thu,
- 13 Feb 2025 11:58:54 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 139.15.153.205)
- smtp.mailfrom=de.bosch.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=de.bosch.com;
-Received-SPF: Pass (protection.outlook.com: domain of de.bosch.com designates
- 139.15.153.205 as permitted sender) receiver=protection.outlook.com;
- client-ip=139.15.153.205; helo=eop.bosch-org.com; pr=C
-Received: from eop.bosch-org.com (139.15.153.205) by
- AM2PEPF0001C70E.mail.protection.outlook.com (10.167.16.202) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8445.10 via Frontend Transport; Thu, 13 Feb 2025 11:58:53 +0000
-Received: from SI-EXCAS2001.de.bosch.com (10.139.217.202) by eop.bosch-org.com
- (139.15.153.205) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.13; Thu, 13 Feb
- 2025 12:58:53 +0100
-Received: from GRB-C-0009M.ot.de.bosch.com (10.139.217.196) by
- SI-EXCAS2001.de.bosch.com (10.139.217.202) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.43; Thu, 13 Feb 2025 12:58:53 +0100
-From: <mark.jonas@de.bosch.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <raj.khem@gmail.com>, <wangmy@fujitsu.com>, <socketcan@hartkopp.net>,
-	<mkl@blackshift.org>, Ricardo Simoes <ricardo.simoes@pt.bosch.com>, "Mark
- Jonas" <mark.jonas@de.bosch.com>
-Subject: [meta-oe][PATCH 1/2] can-utils: Upgrade 2023.03 -> 2025.01
-Date: Thu, 13 Feb 2025 12:58:25 +0100
-Message-ID: <20250213115826.38194-2-mark.jonas@de.bosch.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250213115826.38194-1-mark.jonas@de.bosch.com>
-References: <20250213115826.38194-1-mark.jonas@de.bosch.com>
-MIME-Version: 1.0
+ 2025 14:19:48 +0000
+Received: from DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::7e2c:5309:f792:ded4]) by DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::7e2c:5309:f792:ded4%5]) with mapi id 15.20.8445.005; Thu, 13 Feb 2025
+ 14:19:47 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: openembedded-devel@lists.openembedded.org
+CC: Khem Raj <raj.khem@gmail.com>,
+	Rasmus Villemoes <ravi@prevas.dk>
+Subject: [meta-oe][PATCH v2] systemd-netlogd: new recipe
+Date: Thu, 13 Feb 2025 15:19:40 +0100
+Message-ID: <20250213141940.1231925-1-ravi@prevas.dk>
+X-Mailer: git-send-email 2.48.1
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
-X-Originating-IP: [10.139.217.196]
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: MM0P280CA0056.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:b::29) To DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:41::17)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM2PEPF0001C70E:EE_|DB9PR10MB5236:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7088c2ca-be92-4bc1-1efa-08dd4c25c9cf
+X-MS-TrafficTypeDiagnostic: DB7PR10MB2475:EE_|PRAPR10MB5204:EE_
+X-MS-Office365-Filtering-Correlation-Id: c9d54841-c9ce-4672-6467-08dd4c3978a8
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700013|376014|1800799024|82310400026|13003099007;
+	BCL:0;ARA:13230040|1800799024|376014|52116014|366016|38350700014;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?uEzHBKa3lZPGxdKNZ8vqQnUzO3c4c87pUXBbSGrNYDobPHMtjEbULPfIECog?=
- =?us-ascii?Q?JCuNeyR1vKqE1OU0i+gamAXOEQpDgfC5VCMevVUQvTfahZoTZ0wzOwJF8vzp?=
- =?us-ascii?Q?mfD8sVFPqlAy0x4hYB9z3f/3drOQmOE8Jh2xS/V79KyJiewsvW4xbzTwuAxd?=
- =?us-ascii?Q?HVWj96yZQfu6R2pfm98J6oyZ4zpGhw9Zax7dcCwQgoBWIW4MCBbchHRXpLYV?=
- =?us-ascii?Q?hi9g1el8wUGTyTsj8IO+0q2jQFLicdvBdmOyfJlm9k2wyCBXkV7Kpdqm7maB?=
- =?us-ascii?Q?VDkutt1zfl+oRd9890ReEgwl/bjJCNHLSchIuuJdozNQ9A8MUzkJuCCNFrw0?=
- =?us-ascii?Q?RE56U9Ocg0xQBSywAbF7E7ZneEvgZhGHscFMIsmt9O4gUxiVIb1QmDtJPxUD?=
- =?us-ascii?Q?zZVW2hOoKdAPN9hu54UaN3w/uvwmCe+wOuagsHm5mBjf/ceSCPKsKRalaGqD?=
- =?us-ascii?Q?RAhpdv6IXfs6k3UT/5QkHYpI+UatvATNMQjh1MPJLEWEAVorC7YNoz4mCT1Y?=
- =?us-ascii?Q?Tl0x6wse5JVcxp5K/AUUJGlIo1tSe7EjvKLtdj3mQE+o4yO60syQxFBgIg4N?=
- =?us-ascii?Q?4jwqZ8VEHf8beZ5vIZ5rl8WsOlVZHHrOXU0LHj9Ti8K5CD3lkI7enS9qYIoO?=
- =?us-ascii?Q?4eDhUQUJahhvYOFM9BVdbOQqvFZXsuEyEipcxZC6qO4EFRYV9y0MCEopiC+T?=
- =?us-ascii?Q?ap6e05YpC6eZI6gDFgDpRs24v4s/IpLCRAvjyNvFXjnWxgERRMrmnhQS6Cds?=
- =?us-ascii?Q?oGn1SXggSLkFaxk0PUT67rnMKahw9sBk+Si4D5BQgc6Uka5SUhKnwdRkFNSQ?=
- =?us-ascii?Q?G1UYAfKM8yBF/5Rm1XJ3MDw5+bjJY2DDrMeElE2ZIIDaKtZEPJwNZEzRA2DS?=
- =?us-ascii?Q?uRTTnFDOnFbsuuN8FNTC9vFW/4enzMxbqz+SEAjF9h9mj0vfuft7ieu3mGgA?=
- =?us-ascii?Q?GiEVAZAYuK5znL45ofGF1Kzp2e8Ne1/8EY7GF7xsBTNgjzhewBllmi6bQ9P4?=
- =?us-ascii?Q?ExYs/xVRn/Ct9D7NgQh5Ywbtb6xxif+yAO3UAm2DpLRKGv8yiyV5sCW/vsVA?=
- =?us-ascii?Q?mY6vAJnPIyn8OV1fd7H7qT1aamjt8qVB4/VSl3UATXu5jY0xc1Om4esEDJ9s?=
- =?us-ascii?Q?Vowp2BMvfuJPkCdNNIyRQIazrm+6eXftqgRI5LCueXtWqOidk9UIMx7kxyod?=
- =?us-ascii?Q?KTooE4lHcV0+g6LBq9eW5+0i3mjZaoLNVjiSekJ6JY/x2+pcl4sk1XP2pqYI?=
- =?us-ascii?Q?Dnv1oRr6VBH5gzyYTQnXiiFl8Gt7Utb2RVD3fV6xtTY+ci7oD7kdWS1VTdod?=
- =?us-ascii?Q?Zcv6P7psQXs2+9/3nE4vZVeq+osBFen/DVQ87A7TZpJeVWCVy2cdEd/83frV?=
- =?us-ascii?Q?sSQYBki0Dezb1fvIK/v9uezAlAdf3PVz7sbE7uENjTbss/EbHSURKTzl8Uxb?=
- =?us-ascii?Q?YckfF3E54gU=3D?=
+	=?us-ascii?Q?mvAAZy15OIi/yimrFqyvPOyyp9ju7XFHiwK+mmpE97FvJbpM39Boh14lwA26?=
+ =?us-ascii?Q?aZ6I7FZV2oNihC7CqkFbA4dNuWfgmzW1M7VC2SczRamnQhKHF2fv11XL1dru?=
+ =?us-ascii?Q?PAtOv2tbwmpARbYifR3FWh0lIId3nZDcmfcE82HPFIFnJQzS/cVva87Ay+JI?=
+ =?us-ascii?Q?mhNlPWI9X54GH25JEXMlAF74WpqCD8WgsMP0SghY93xHJd8giQPBPQSQgBSB?=
+ =?us-ascii?Q?aNF7BJrSAlysUx/qDe91+Kua/6ktodsi+cVr4jVPt8kOLAtaNnPwoTfi9wIa?=
+ =?us-ascii?Q?PWWrM2fK/efgC9PaiiJTzME/Kj2hqYFssvFCZLo5Sopjni96/IYbJJDM9Jry?=
+ =?us-ascii?Q?O+VERweEeZ1ff8e+HLYvRnHz2emoTQyaZJ+tQ7fkFdZ6GnUQIRkWrB3YjAuj?=
+ =?us-ascii?Q?HTFNwFtuM47AiZVbNqLpqap1XTEUVWcw2I8JN7NqP75NWVTy24qDW8DpAdwe?=
+ =?us-ascii?Q?oDfsEQ0kza1L+xqvIqggnmU3dHfAmTX3+rrbEQbx2Xi9Ji9WuVbF5ywJiO5a?=
+ =?us-ascii?Q?QBAXDx7W7BWk+VFRnzRTiTU0r3vzLT550stxPRkqnQnVgd+RmTmtIZJ5i0lz?=
+ =?us-ascii?Q?c6SBubF/iykOxQUoRuAoMw/8j2wpCcpjg+tFDG+TgqTWTy3mhSo6igHxHjm4?=
+ =?us-ascii?Q?ibY1ti9N+28dAAoJFsbds7n7K2AW/QZkD44XohUN6mbXBDwLslx7hBSl69fx?=
+ =?us-ascii?Q?93eDS8elR3/eUAszV76dJ28lnxU3vMWYHC/e8NzLt+2VTvKCD26SUyw6aZmR?=
+ =?us-ascii?Q?v9BfnbLTj8JiiuLNxCWdqcRsyUU3HfYIVREnrLZuvI+pO4b2381LhVNGHyjM?=
+ =?us-ascii?Q?gobSO/SIYGkJ5QxYzYOGvIMNh3oVr4556nvuwnU/AwUVYmGkeC7zDWWUN7Fk?=
+ =?us-ascii?Q?ZlkcFAtnrq01zzFPJWVL7TAAM3GX6wnVGCk3obqaeWvOwSCfbhCek52K2+1q?=
+ =?us-ascii?Q?9skq6lpDkamJe/u3KcxQdm2fhxWV8xTfJ4fmOhrWjQGBEhXtV+ULQja86Q40?=
+ =?us-ascii?Q?Q/eA6U5YM2o1R0DpzUhskxSZiS60SRuWqNC0IqhCpGUPKqdjnJ+fKLHNTgI9?=
+ =?us-ascii?Q?ue2WVWil/SawkwuOZEfQMM6ybBFZAgvAE42LyConsk0urKHkAWRucp/hHCfh?=
+ =?us-ascii?Q?0hWUZ60l8moPnD2QRioXqTSp6Qf9IQPcuhooO8Q/bGBPQuWlmPKvkHaspG07?=
+ =?us-ascii?Q?x3eHTol5a5Hh8isj5Kp3IZ2ZrqTSUD2k3lippVFagV3BKFGxaf+2o54n9Vrw?=
+ =?us-ascii?Q?dNq4GPRtZMrQ+iHhr8QOS0auSC6nzlEO3jhORuqRsV7B6HCkDX3uy0dyehWm?=
+ =?us-ascii?Q?OyKHlEQHNW0QOpFnsJwfDMuAmMWGPrzLuzJqcAv2I8YPuE95D3WgfMYKkeEX?=
+ =?us-ascii?Q?x7mmzw1BLS3jf09VSq7rQVszNu+P33MxVa0LElJ+7UOwxGlXXNrzhZLw3QBl?=
+ =?us-ascii?Q?HFiCIhNrqqA=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:139.15.153.205;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:eop.bosch-org.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026)(13003099007);DIR:OUT;SFP:1101;
-X-OriginatorOrg: de.bosch.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Feb 2025 11:58:53.9148
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(52116014)(366016)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?6l2byC2VdQiW6pGm+za1GD2pIJ1/5UjFm6mEFqCGkLLqkhtnDS+GLug75poR?=
+ =?us-ascii?Q?dvrPhIE9VJmuOWykFb6s9wlJKYPeBnerLfbG1p88Kd84GwI4lFI5BTGisyNu?=
+ =?us-ascii?Q?I+iTi6f0hiwM1B6plT2iRuA16ddc4XQkVkVSHn61e750BtvvWDH4uZJauo+q?=
+ =?us-ascii?Q?K4TMIMKm1+yR58/gEFIkv8RIO2KI7QF4HQALIJgR9R8QGkqFPpfEGPwLc63P?=
+ =?us-ascii?Q?KIJiw4lJsN+K55sev0RxaMnDMjCEOnRm39JvwNBK3ViBhayo9ONJYGY7GpZG?=
+ =?us-ascii?Q?eEx39lt22q6dXSR1JSqTkA8Tf8hm3loCHJFGN5QcGK2zYF99POstZ2Uz1GT0?=
+ =?us-ascii?Q?3SGHalGsTGXB7OSzpO3+oKiXXkErw8OqKskeRBTY6f7k8mHUhA6542Mse5de?=
+ =?us-ascii?Q?w5CMCXG8BRAwVi1C3rcD8FzOMcVjA8YM56vpIMYBeKy8eQohR0K78ihkdYe3?=
+ =?us-ascii?Q?1KzqmeZGXj+uyp3RRgMJHwWRFY7LN8u/dQlXpWXg1AxnCBzLRTelizhk55VS?=
+ =?us-ascii?Q?Ydf6vkSkCEbtYikaI8iBsQlkQL4nPPQJPtVe/e4aHv+IMluQw0iu7oX1t+2n?=
+ =?us-ascii?Q?Oz6QYVnTcPa6K1tzcV8TrShzKUz02BZTwFYJVXVE1KRa3vzN+Wt3pID89jtz?=
+ =?us-ascii?Q?3D0ow0iynEr3asToHGch9uOXNvZzJeQGf94tGiPqAle8QbxFXlGKvG16RqQy?=
+ =?us-ascii?Q?PMrJn9oKIus5nhkO+uI8RG2YjI8sQi/6ndkGs1WMYGFJHPNBcD3GAHQTFzOV?=
+ =?us-ascii?Q?hnHwmNXIiFeDggcT75T43kv70dGKqANGPcDrPKTU2+STDuN545RW2uIg2otq?=
+ =?us-ascii?Q?4cZQCX6cf2RZVd6a9Nb+Y5LH2zJqaNHV5jBtk29Z2bof+gPCSOoEYRT/I3Mv?=
+ =?us-ascii?Q?D0FHlGEwfVQ8yGNvKZvozGFWNMYb1oy+SFRud+o98sZziJJhkQieNY5Cpp/q?=
+ =?us-ascii?Q?GJDVEiBnDvogTJk2ZUJi8Z0zbc9oPY18MbC0X/l7NuZLF8x5ZdJBc4o7IwfJ?=
+ =?us-ascii?Q?m2WwvTpFG3cGRcFo0z8JFmWeoMq8r9TBGbLys3n72MG9k6pCCcnWHb0D8qnU?=
+ =?us-ascii?Q?H7YJI4BEO50Ea4GoOC+qJQk0LS+obvW6e4vqJa82HrHU28GUNm5r4nO68NqQ?=
+ =?us-ascii?Q?LvDK/XpirzEAh4U6AGcm/8EN5iQiVc1BRc119Q+xkBlxQukGnnkKQKf9RmB4?=
+ =?us-ascii?Q?swgfsYl+D00NCYv5eGnAAqXXqqYIPJD89AXoq/C1DTIQNzhOQW2wLXTJExju?=
+ =?us-ascii?Q?fGALse60J7WTaqmV5T6bDdyKtXBRRZNgPbAdu66D8tf6MZTwgONgMAtZz+Li?=
+ =?us-ascii?Q?d8n6k+fHF2Msqnk+SnOqYR5DN/J2IWbUgPkZo9N6EBqr/9Szkh3oteEErNHN?=
+ =?us-ascii?Q?Cq1SYljkp1/ztsh2KkZ8hpfWrdz47BmyfdZUJm9ESrKAi98CqKkOOj3RHwSl?=
+ =?us-ascii?Q?k65HhCfB9PTWWxU0GpaBNOUl7cHI1fxOlWaPRlT+bKCVur7/sMT2RYKQqkST?=
+ =?us-ascii?Q?SjeIHEBm7fUDnBOTF2hT5SGBbDH/n24F+J7cYwXO5oHxHodNGKnp0rrjeJ+N?=
+ =?us-ascii?Q?vCurvGD8lFK3Zq6AaXDOsrhjl8tHcXSXfZ/yQgcdTQG4N9upjUG26o5PfSb4?=
+ =?us-ascii?Q?kQ=3D=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: c9d54841-c9ce-4672-6467-08dd4c3978a8
+X-MS-Exchange-CrossTenant-AuthSource: DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Feb 2025 14:19:47.9201
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7088c2ca-be92-4bc1-1efa-08dd4c25c9cf
-X-MS-Exchange-CrossTenant-Id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=0ae51e19-07c8-4e4b-bb6d-648ee58410f4;Ip=[139.15.153.205];Helo=[eop.bosch-org.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AM2PEPF0001C70E.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR10MB5236
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: czhMqwZ8zfpPnS+lrRHJ5sLa7n1dcykJXh7hF6R33/l2Azj/o/E/oHS8AughOkp1PDjuAcNtR/VS9TB5ZIu0UBaBmyz9GZ5wlGcH6undz3k=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PRAPR10MB5204
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Feb 2025 11:59:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115464
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Feb 2025 14:20:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115466
 
-From: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
+From: Rasmus Villemoes <ravi@prevas.dk>
 
-Changelog: https://github.com/linux-can/can-utils/releases/tag/v2025.01
+In some deployments, the log aggregator collects log messages in the
+syslog format, so systemd-journal-upload and friends can not be
+used.
 
-Signed-off-by: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
-Signed-off-by: Mark Jonas <mark.jonas@de.bosch.com>
+systemd-netlogd is a daemon for filling that gap.
+
+Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 ---
- ...-utils_2023.03.bb =3D> can-utils_2025.01.bb} | 40 ++++++++++++++-----
- 1 file changed, 29 insertions(+), 11 deletions(-)
- rename meta-oe/recipes-extended/socketcan/{can-utils_2023.03.bb =3D> can-u=
-tils_2025.01.bb} (72%)
+v2: add systemd as required distro feature
 
-diff --git a/meta-oe/recipes-extended/socketcan/can-utils_2023.03.bb b/meta=
--oe/recipes-extended/socketcan/can-utils_2025.01.bb
-similarity index 72%
-rename from meta-oe/recipes-extended/socketcan/can-utils_2023.03.bb
-rename to meta-oe/recipes-extended/socketcan/can-utils_2025.01.bb
-index 51d6327b75..cad41944ec 100644
---- a/meta-oe/recipes-extended/socketcan/can-utils_2023.03.bb
-+++ b/meta-oe/recipes-extended/socketcan/can-utils_2025.01.bb
-@@ -6,13 +6,22 @@ DEPENDS =3D "libsocketcan"
-=20
- SRC_URI =3D "git://github.com/linux-can/${BPN}.git;protocol=3Dhttps;branch=
-=3Dmaster"
-=20
--SRCREV =3D "cfe41963f3425e9adb01a70cfaddedf5e5982720"
-+SRCREV =3D "01083a64ebf28cc716efe2d2fd51c141042ae34b"
-=20
- S =3D "${WORKDIR}/git"
-=20
--inherit autotools pkgconfig update-alternatives
-+inherit cmake pkgconfig update-alternatives
-=20
--PACKAGES =3D+ "${PN}-access ${PN}-isotp ${PN}-j1939 ${PN}-cantest ${PN}-sl=
-can ${PN}-log"
-+PACKAGES =3D+ " \
-+    ${PN}-access \
-+    ${PN}-cantest \
-+    ${PN}-isobusfs \
-+    ${PN}-isobusfs-dev \
-+    ${PN}-isotp \
-+    ${PN}-j1939 \
-+    ${PN}-log \
-+    ${PN}-slcan \
-+"
-=20
- FILES:${PN}-access =3D " \
-     ${bindir}/cangw \
-@@ -22,6 +31,22 @@ FILES:${PN}-access =3D " \
-     ${bindir}/cannelloni \
- "
-=20
-+FILES:${PN}-cantest =3D " \
-+    ${bindir}/canbusload \
-+    ${bindir}/can-calc-bit-timing \
-+    ${bindir}/canfdtest \
-+"
+ .../systemd-netlogd/systemd-netlogd_1.4.4.bb  | 27 +++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 meta-oe/recipes-support/systemd-netlogd/systemd-netlogd=
+_1.4.4.bb
+
+diff --git a/meta-oe/recipes-support/systemd-netlogd/systemd-netlogd_1.4.4.=
+bb b/meta-oe/recipes-support/systemd-netlogd/systemd-netlogd_1.4.4.bb
+new file mode 100644
+index 0000000000..6b609a0f5f
+--- /dev/null
++++ b/meta-oe/recipes-support/systemd-netlogd/systemd-netlogd_1.4.4.bb
+@@ -0,0 +1,27 @@
++SUMMARY =3D "Forwards messages from the journal to other hosts over the ne=
+twork using the Syslog Protocol"
 +
-+FILES:${PN}-isobusfs =3D " \
-+    ${bindir}/isobusfs-cli \
-+    ${bindir}/isobusfs-srv \
-+    ${libdir}/libisobusfs.so \
-+"
++LICENSE =3D "LGPL-2.1-or-later"
++LIC_FILES_CHKSUM =3D "file://LICENSE.LGPL2.1;md5=3D4fbd65380cdd25595107900=
+8b364516c"
 +
-+FILES:${PN}-isobusfs-dev =3D " \
-+    ${includedir}/isobusfs* \
-+"
++SRC_URI =3D "git://github.com/systemd/systemd-netlogd.git;protocol=3Dhttps=
+;branch=3Dmain"
++SRCREV =3D "b03cc3b1a75048c7cf19467d8918a4b7320767e6"
 +
- FILES:${PN}-isotp =3D "${bindir}/isotp*"
-=20
- FILES:${PN}-j1939 =3D " \
-@@ -29,16 +54,10 @@ FILES:${PN}-j1939 =3D " \
-     ${bindir}/testj1939 \
- "
-=20
--FILES:${PN}-cantest =3D " \
--    ${bindir}/canbusload \
--    ${bindir}/can-calc-bit-timing \
--    ${bindir}/canfdtest \
--"
-+FILES:${PN}-log =3D "${bindir}/*log*"
-=20
- FILES:${PN}-slcan =3D "${bindir}/slcan*"
-=20
--FILES:${PN}-log =3D "${bindir}/*log*"
--
- ALTERNATIVE:${PN} =3D "candump cansend cansequence"
- ALTERNATIVE_LINK_NAME[candump] =3D "${bindir}/candump"
- ALTERNATIVE_LINK_NAME[cansend] =3D "${bindir}/cansend"
-@@ -47,4 +66,3 @@ ALTERNATIVE_LINK_NAME[cansequence] =3D "${bindir}/cansequ=
-ence"
- # busybox ip fails to configure can interfaces, so we need iproute2 to do =
-so.
- # See details in http://www.armadeus.com/wiki/index.php?title=3DCAN_bus_Li=
-nux_driver.
- RRECOMMENDS:${PN} +=3D "iproute2-ip"
--
++inherit meson systemd pkgconfig useradd
++
++REQUIRED_DISTRO_FEATURES =3D "systemd"
++
++S =3D "${WORKDIR}/git"
++
++DEPENDS +=3D "systemd"
++DEPENDS +=3D "openssl"
++DEPENDS +=3D "gperf-native"
++DEPENDS +=3D "python3-sphinx-native"
++
++# systemd-netlogd uses prefix and sysconfdir in a weird way.
++EXTRA_OEMESON +=3D "--prefix ${libdir}/systemd --sysconfdir ${sysconfdir}/=
+systemd"
++
++FILES:${PN} +=3D "${libdir}"
++
++USERADD_PACKAGES =3D "${PN}"
++GROUPADD_PARAM:${PN} =3D "-r systemd-journal"
++USERADD_PARAM:${PN} =3D "--system -d / -M --shell /sbin/nologin -g systemd=
+-journal systemd-journal-netlog"
 --=20
-2.34.1
+2.48.1
 
 
