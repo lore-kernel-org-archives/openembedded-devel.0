@@ -1,97 +1,103 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FA3CC021A4
-	for <webhook@archiver.kernel.org>; Thu, 13 Feb 2025 07:05:19 +0000 (UTC)
-Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
- by mx.groups.io with SMTP id smtpd.web11.5650.1739430313194645487
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F3D2C021A0
+	for <webhook@archiver.kernel.org>; Thu, 13 Feb 2025 09:04:40 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.web11.6962.1739437478702902741
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Feb 2025 23:05:13 -0800
+ Thu, 13 Feb 2025 01:04:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
-Received: from fwd89.aul.t-online.de (fwd89.aul.t-online.de [10.223.144.115])
-	by mailout06.t-online.de (Postfix) with SMTP id F2C40148F;
-	Thu, 13 Feb 2025 08:05:10 +0100 (CET)
-Received: from [192.168.178.67] ([84.163.47.27]) by fwd89.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tiTHY-2bKU0O0; Thu, 13 Feb 2025 08:05:08 +0100
-Date: Thu, 13 Feb 2025 08:05:43 +0100
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-gnome][PATCH] gegl: update 0.4.52 -> 0.4.54
-To: raj.khem@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Message-Id: <J11MRS.2Z2Y82T4C0G1@t-online.de>
-In-Reply-To: <dc7d6bd8-fdab-4550-b55d-17dfb0a4a6b2@gmail.com>
-References: <20250212045238.56929-1-f_l_k@t-online.de>
-	<dc7d6bd8-fdab-4550-b55d-17dfb0a4a6b2@gmail.com>
-X-Mailer: geary/46.0
+ dkim=pass header.i=@konsulko.com header.s=google header.b=BlhRTdNF;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.50, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-438a3216fc2so6640115e9.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Feb 2025 01:04:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1739437476; x=1740042276; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Cs2Lpytk++TAmjUbkAVFu62/SZBrdQgnH+CFKRbtzLI=;
+        b=BlhRTdNFL8AZoQrUIFAxSw5fna73fJxdWRwOKBK+lzWWATHtjFC9zUE9bEzystJDjd
+         WeNq+Fx2FpFITSHVnn9tI+QEnH+hcaYFtRsZCKiQ5ESOYvDH8jh6ope34Gvfx9pVmYmp
+         AQ4QlC56VT+ppAU4ZUSI5p0skhXXKvtZlY+KY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1739437476; x=1740042276;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Cs2Lpytk++TAmjUbkAVFu62/SZBrdQgnH+CFKRbtzLI=;
+        b=dahh6r4wDTyBykzspS+x4rlMlqaLQg8ZET4OKEmoyaP95fdtivNAM2x8SU1RNE9JLc
+         LatHaeWO4u2F/iJvc46kHRTeQ4rsDHqy26R+Z/eUXjvzEVf+ee7Ab5t2k9LuhdIf+TtT
+         QcDedaUdz6VbwSrlsMNfejaxOzGjzOC6l8ELc2esKkxRhGrjEoSXsNeEFSkIgRy204TX
+         avVnzP0hyuQUXS3Q7Q5vNUhGTSEwF64CrF3gbZKxltYn/Rmq8Qgmle4ALUP8nC5ommbE
+         3GC34WbIitQ5xU6zMD2jGJw1+eHs64QOJQQC/KUlFUP2kay853KQKrNJwDfKvKUdrfrj
+         UEyg==
+X-Gm-Message-State: AOJu0Yw4IDJ4F3LSNj3p+Vm6saM1mQM0F7hxv7rfySUeJ+okCRvVA7JF
+	Da9DDR8YFsav3C6mIXCmv34GmO4/r2qIT9SvqEEOf+9kOCKnJvmk5h97mCPKrhQvfHMyEBVqOUQ
+	1
+X-Gm-Gg: ASbGncv6rgk/tYSdz+zfdUEr/K4vtYre0uRuysjuefXYr2bZWxNtuWciyZKg6h2KT7Q
+	oTwnOMcQtZy7DYyRBahbbiwdntB95RKKnNMcbx4uDJFIAj58YMjUiVGCjvJmncyn7SqMMAmjKVX
+	2ak/YW+eykcAFS76sHtrUMYNKneex3dWhJ2txh7K9xyQQXVSCbSrdiNNsonnZrXgLOE/sO8YpAp
+	F+IBg8qkfFMGhpDBiGHt8SCaBvVScv1Yq5oRv6/0OtePBcuOJ5B+cJgLK5jBOFgClbqmeE/0uRa
+	qolpD4lf+0L8z4UudDov+20JZYGkQw==
+X-Google-Smtp-Source: AGHT+IFyG5GXZV1S0KDqbvWxN288wb9i69lpG6cpa3mKJC3g8wHttp9e6tvxeJaTZtPqE1DR7sVL2w==
+X-Received: by 2002:a05:600c:5007:b0:439:4d39:99f1 with SMTP id 5b1f17b1804b1-439581c9be2mr53234775e9.26.1739437476518;
+        Thu, 13 Feb 2025 01:04:36 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4395a06e309sm42507005e9.24.2025.02.13.01.04.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 13 Feb 2025 01:04:35 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-evdev: Upgrade 1.8.0 -> 1.9.0
+Date: Thu, 13 Feb 2025 11:04:27 +0200
+Message-Id: <20250213090430.3750793-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250213090430.3750793-1-leon.anavi@konsulko.com>
+References: <20250213090430.3750793-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-8G6OZAcJ1QaX+d5YTFpA"
-X-TOI-EXPURGATEID: 150726::1739430308-D27FBADA-7A150CAE/0/0 CLEAN NORMAL
-X-TOI-MSGID: 266f5d6a-6796-49a0-8f16-3a7664958764
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Feb 2025 07:05:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115454
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Feb 2025 09:04:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115456
 
---=-8G6OZAcJ1QaX+d5YTFpA
-Content-Type: text/plain; charset=us-ascii; format=flowed
+Upgrade to release 1.9.0:
 
-On Tue, Feb 11 2025 at 22:24:44 -08:00:00, Khem Raj via 
-lists.openembedded.org <raj.khem=gmail.com@lists.openembedded.org> 
-wrote:
-> this patch is not captured by lore and I do get
-> 
-> strange value in author field of the patch when I grab it from mail
-> and OE git refuses to accept '=' in author email address.
-> 
-> Please check your mail agent something is off
+- Fix for CPATH/C_INCLUDE_PATH being ignored during build.
+- Slightly faster reading of events in device.read() and
+  device.read_one().
+- Fix FreeBSD support.
+- Drop deprecated InputDevice.fn (use InputDevice.path instead).
+- Improve type hint coverage and add a py.typed file to the sdist.
 
-Thanks for the hint. I used git-send-email via the terminal as I always 
-do.
-The problem was probably that I carelessly updated my build host with 
-up to date poky/master and got a consistency issue with glibc.
-I had been able to create a rootfs without error, probably because of 
-existing sstate cache, but after installing it onto my build host,
-some runtime issues have arisen. Only ansi was available (what may have 
-caused the broken email) and I also locked me out because the
-yocto build system stopped working. After deleting sstate cache, I got 
-a message that sstate-cache will be disabled due to uninative
-incompatibility glibc-2.40 <-> glibc-2.41. Later, the rust installation 
-aborted because cargo-native was not executable.
-I had to rewind the poky master to a state before the glibc update and 
-rebuilt my rootfs externally. That seems to have fixed the issues
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../python/{python3-evdev_1.8.0.bb => python3-evdev_1.9.0.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-evdev_1.8.0.bb => python3-evdev_1.9.0.bb} (86%)
 
-
---=-8G6OZAcJ1QaX+d5YTFpA
-Content-Type: text/html; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-
-<div id=3D"geary-body" dir=3D"auto">On Tue, Feb 11 2025 at 22:24:44 -08:00:=
-00, Khem Raj via lists.openembedded.org &lt;raj.khem=3Dgmail.com@lists.open=
-embedded.org&gt; wrote:<br><blockquote type=3D"cite"><div class=3D"plaintex=
-t" style=3D"white-space: break-spaces;">this patch is not captured by lore =
-and I do get
-
-strange value in author field of the patch when I grab it from mail
-and OE git refuses to accept '=3D' in author email address.
-
-Please check your mail agent something is off</div></blockquote><div><br></=
-div><div><div>Thanks for the hint. I used git-send-email via the terminal a=
-s I always do.</div><div>The problem was probably that I carelessly updated=
- my build host with up to date poky/master and got a consistency issue with=
- glibc.</div><div>I had been able to create a rootfs without error, probabl=
-y because of existing sstate cache, but after installing it onto my build h=
-ost,</div><div>some runtime issues have arisen. Only ansi was available (wh=
-at may have caused the broken email) and I also locked me out because the</=
-div><div>yocto build system stopped working. After deleting sstate cache, I=
- got a message that sstate-cache will be disabled due to uninative</div><di=
-v>incompatibility glibc-2.40 &lt;-&gt; glibc-2.41. Later, the rust installa=
-tion aborted because cargo-native was not executable.</div><div>I had to re=
-wind the poky master to a state before the glibc update and rebuilt my root=
-fs externally. That seems to have fixed the issues</div></div></div>
---=-8G6OZAcJ1QaX+d5YTFpA--
+diff --git a/meta-python/recipes-devtools/python/python3-evdev_1.8.0.bb b/meta-python/recipes-devtools/python/python3-evdev_1.9.0.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-evdev_1.8.0.bb
+rename to meta-python/recipes-devtools/python/python3-evdev_1.9.0.bb
+index 1a382f49dd..82849e0006 100644
+--- a/meta-python/recipes-devtools/python/python3-evdev_1.8.0.bb
++++ b/meta-python/recipes-devtools/python/python3-evdev_1.9.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/gvalkov/python-evdev"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d7bd1cc4c71b706c7e2d4053aef50f2a"
+ 
+-SRC_URI[sha256sum] = "45598eee1ae3876a3122ca1dc0ec8049c01931672d12478b5c610afc24e47d75"
++SRC_URI[sha256sum] = "38218bc95507cad756bc621a5fe7a77a41eb8d9c1213855de8e4ba0aba28e79f"
+ 
+ inherit pypi python_setuptools_build_meta
+ 
+-- 
+2.39.5
 
 
