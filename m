@@ -1,97 +1,141 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <mark.jonas@de.bosch.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 34F12C0219D
-	for <webhook@archiver.kernel.org>; Thu, 13 Feb 2025 09:23:20 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.7146.1739438590855660210
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B1D0C0219D
+	for <webhook@archiver.kernel.org>; Thu, 13 Feb 2025 11:59:01 +0000 (UTC)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com (EUR02-AM0-obe.outbound.protection.outlook.com [40.107.247.50])
+ by mx.groups.io with SMTP id smtpd.web11.9426.1739447932347538851
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Feb 2025 01:23:10 -0800
+ Thu, 13 Feb 2025 03:58:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=413993aef9=changqing.li@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51D8WXSQ013778
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Feb 2025 01:23:10 -0800
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 44qwtqasm7-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Feb 2025 01:23:10 -0800 (PST)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Thu, 13 Feb 2025 01:23:09 -0800
-Received: from pek-lpg-core6.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Thu, 13 Feb 2025 01:23:09 -0800
-From: <changqing.li@windriver.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@de.bosch.com header.s=selector2 header.b=hX3c9REe;
+ spf=pass (domain: de.bosch.com, ip: 40.107.247.50, mailfrom: mark.jonas@de.bosch.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ekRJQI4nCWGsgbnvNF4+gZx5Q64QzvaSrlyBbLNBFZyuhR+6QiyyWs02JUUj58idwLedqPvqsRtrbyAiV5xGEFIGmwqHf314u9mL2iBzByVruhTvAM1x44iR3JGE8+reOrtGMz71dEUM/r/8vrazjFHxB6B7tbI77BxUBjc+J+7ydN9JUbadIgYkdOs0JjXSgp7eLScYsawB4V6vr59ft0W+BgTgNAFPdoIcWlGBT/xm3C/W6X16mpAn8czWII3b2coQU6V3Wi0CU+pjK6N0lxuD7eGeUhK7a7kpEzPHRevF6tAHhX/mmy09BDL2wsLLKnluY2zLUploRbX6ERMgew==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=THFFFX/tJYDipOBWBRz9y9Tk+UKyLEfuHVgZ6NBmANs=;
+ b=XX0qoaFdTit++qrUaLnRWuUinOzyU11rosgwb644EWdm2QhQ4YSlvkPPnMi2doVB6TyG7HsZwyOuzfsm4p74N4XiMvSZxte8V58i3mFzvjsD03YtiScBYUppg12ldzxCK9WFTrXhKe+QyOeoujYkoOZd/w+x6O/MTzOMRSIh/TX4F7+TIFHHLM8hhz6sJARGTpcbOEBaQ6uS/QHKUJnrDMzc6z+rxN+gM+q2SxaT+qArFj3bQyrOYH+9v+h2pGuMdezNqN0xG9rbCqySwooaZ3HD5eW47BJYLlaLPtQFz8ZwiOthLIBRSi+p+stny+c6vFSGDQWaihu8XsbQev7Uqw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 139.15.153.206) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=de.bosch.com; dmarc=pass (p=reject sp=none pct=100) action=none
+ header.from=de.bosch.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=de.bosch.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=THFFFX/tJYDipOBWBRz9y9Tk+UKyLEfuHVgZ6NBmANs=;
+ b=hX3c9REegeetPIYEJ6N9RzPzURe2qSGv/iiZlRp8m3qMaM43NRduQ51qPgAo63tdG/iFxhr1TateqS8sACOgaKzu/lhG4N9w2Y10K/xBM1tChDu7QhE8Wnib9Iew0UFV3emEe3IF7sibWhEUOKMZ45r03ekqhX62cAcPDIX/vbb45j+0+EDd35Qg8LfETL5mj2W1epDVeJI2S2PFaXrqkCx/CKzIKY4tGIjFg86qsUoGtdddtXnTfFo3rPyWy6TS94OeyG2r6GsgTH0Rp05k4NqBA6f/MyQSqi8i7ve0a/IrTa74HW1/MT9vJYIDrgPYqboakJ5Yt/AxAlTKMYg2Uw==
+Received: from AS9PR06CA0250.eurprd06.prod.outlook.com (2603:10a6:20b:45f::8)
+ by VI1PR10MB3309.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:803:13b::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.9; Thu, 13 Feb
+ 2025 11:58:48 +0000
+Received: from AMS0EPF000001A3.eurprd05.prod.outlook.com
+ (2603:10a6:20b:45f:cafe::14) by AS9PR06CA0250.outlook.office365.com
+ (2603:10a6:20b:45f::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8445.16 via Frontend Transport; Thu,
+ 13 Feb 2025 11:58:48 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 139.15.153.206)
+ smtp.mailfrom=de.bosch.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=de.bosch.com;
+Received-SPF: Pass (protection.outlook.com: domain of de.bosch.com designates
+ 139.15.153.206 as permitted sender) receiver=protection.outlook.com;
+ client-ip=139.15.153.206; helo=eop.bosch-org.com; pr=C
+Received: from eop.bosch-org.com (139.15.153.206) by
+ AMS0EPF000001A3.mail.protection.outlook.com (10.167.16.228) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8445.10 via Frontend Transport; Thu, 13 Feb 2025 11:58:47 +0000
+Received: from SI-EXCAS2001.de.bosch.com (10.139.217.202) by eop.bosch-org.com
+ (139.15.153.206) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.13; Thu, 13 Feb
+ 2025 12:58:47 +0100
+Received: from GRB-C-0009M.ot.de.bosch.com (10.139.217.196) by
+ SI-EXCAS2001.de.bosch.com (10.139.217.202) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.43; Thu, 13 Feb 2025 12:58:46 +0100
+From: <mark.jonas@de.bosch.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH 3/3] mariadb: correct STACK_DIRECTION setting
-Date: Thu, 13 Feb 2025 17:23:06 +0800
-Message-ID: <20250213092306.1491935-3-changqing.li@windriver.com>
+CC: <raj.khem@gmail.com>, <wangmy@fujitsu.com>, <socketcan@hartkopp.net>,
+	<mkl@blackshift.org>, Mark Jonas <mark.jonas@de.bosch.com>
+Subject: [meta-oe][PATCH 0/2] Update can-utils to 2025.01
+Date: Thu, 13 Feb 2025 12:58:24 +0100
+Message-ID: <20250213115826.38194-1-mark.jonas@de.bosch.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250213092306.1491935-1-changqing.li@windriver.com>
-References: <20250213092306.1491935-1-changqing.li@windriver.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: 3Vf0iNsD4AZfhJCh8WMfgjpvigDdA25_
-X-Authority-Analysis: v=2.4 cv=DNd14zNb c=1 sm=1 tr=0 ts=67adb9fe cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=T2h4t0Lz3GQA:10 a=NEAV23lmAAAA:8 a=hkEv4HZQAAAA:8 a=t7CeM3EgAAAA:8 a=3g5HAAR2qpCr_H2gY-YA:9 a=NA03pvyaApPJG5valX87:22
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: 3Vf0iNsD4AZfhJCh8WMfgjpvigDdA25_
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-02-13_03,2025-02-13_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 mlxscore=0
- bulkscore=0 phishscore=0 malwarescore=0 clxscore=1015 lowpriorityscore=0
- mlxlogscore=921 adultscore=0 spamscore=0 suspectscore=0 priorityscore=1501
- classifier=spam authscore=0 authtc=n/a authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.21.0-2501170000
- definitions=main-2502130071
+X-Originating-IP: [10.139.217.196]
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AMS0EPF000001A3:EE_|VI1PR10MB3309:EE_
+X-MS-Office365-Filtering-Correlation-Id: c8be1f45-915d-4f41-6559-08dd4c25c642
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|36860700013|376014|82310400026;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?bnK0LEQ5T7iG8jEzvLmtQpYH4wfGu9vQ69fxpf/h8z4XpDWR5eBDM33gabXW?=
+ =?us-ascii?Q?L6x3lLBnYX4a7YtN1V5F0OX54ngGQXYcul5mszLvyFUHqhzAmn1kLU4hyvlI?=
+ =?us-ascii?Q?4mfj7u358A1SFmB5UBdpxzxLlRO2OXk5Zwaq8uzPjD+poN3uUO7Kb4+e+IRz?=
+ =?us-ascii?Q?jAKk7BVmvSanI/qn8vXWJ8DScTgpK6H3AhyvIoFuOrswqZ9NnYnN//0PukSJ?=
+ =?us-ascii?Q?Tfdog9KkVFm7A++9Gyg0drTJIBsMCkaS3ppvGRRig74Te7FKDtZjd2EMiMLX?=
+ =?us-ascii?Q?423/Ru2xFqaGuc5Jh1XpX0T+nMLjHQ9XzbroDOHyZAF0SopADRKrkX+dPdjj?=
+ =?us-ascii?Q?9OQWL2LGFt1plzG4m3BeG2YWbq5TT+pIXIjBK8COQDK7qw34J7zOWf03YhIX?=
+ =?us-ascii?Q?z1G5JR2reHJIkXI3swWapdD4prqxSj2fWfkRR6FTEKlqkkA25CzqNxRcaSdU?=
+ =?us-ascii?Q?qe8eDG+N1LQ8DXTwuRdkZZXkTb9n8JYIiR0clWoVqzHiIlYwfQwa2psxhae0?=
+ =?us-ascii?Q?WUvpGqIZlzM152lxi0Ugg138vnD0MvjjmWNqiT/sLyRpIvi1Ht7R8tAHiy34?=
+ =?us-ascii?Q?3cZ3NCK+WUJgz/UF3PbNfzTF9StxxppQMI9Snp7eN3ZIW6iI5ZkQja8oULlI?=
+ =?us-ascii?Q?mpjYhzXcpXwMniUdmqsovtVwwW7qrJB8M+n8uF8tgg+cIRG1tdLkprEFqpM7?=
+ =?us-ascii?Q?kgwY0VWX7jpK+9Ax0H/cd6W6F88qAzahHpxSSVXsxr1O21wgZ4adDSR32Fyp?=
+ =?us-ascii?Q?k6PWo7kOZW/cVKNSV8hj0ixQX1iE/BkKz6LbTlk00RTYmBddelNvrrKH32jw?=
+ =?us-ascii?Q?VaGade6GZYWDWfsfvM5DISKS6iDq74jt97n9wIUK0+pFR5ZGk612AE89WD0O?=
+ =?us-ascii?Q?6yCaacYcUFQOiWuP8P/AWlsvJ+HKR4ggMzwJJdiEqsJnl+oFlO76V3+qHnkT?=
+ =?us-ascii?Q?XnVDs8bwZQ4dExrkMAogiVNfW6fYR4Gm59C1G1TPK3Bh8CrCpLlUgSlkmYXJ?=
+ =?us-ascii?Q?K+pPvWJZhMggVk03oLpqzeJ5EZ2V69CT7TB7Cn78HyksZfmjesDLO2nG3BgQ?=
+ =?us-ascii?Q?fuMdlz3cAhncnS5+H7Wp0nbtxpHQKdu9l5H0ZbTVIhX5VTC4Uc6JkJxkDcob?=
+ =?us-ascii?Q?BG0A6ojWieISUd9tw+G6r+XsiD3UFiMr6lTOHpRtJhVFk5TQSyILVYQLMhMG?=
+ =?us-ascii?Q?v2ifOIwyOWvLOX4c0iL2Dx7LTgWMkdH1IEQzCjttvEXWUApN9jej6+Vighc4?=
+ =?us-ascii?Q?o4EN13gYYiHzeo2xcXJ++ULHIPCia/9Q7iSB3WBYKprcKrcT/cxEjXQnmDl4?=
+ =?us-ascii?Q?lhL8h0BRFowczKk8o74Q2L3u+FSvkqhW5o7t4VmPqMNHQgsPwfKPv81hhUr0?=
+ =?us-ascii?Q?8a/XHlMcR4sE1a4du9PlmPN/kT++xeUa2yX29ZdN3UjECvGBk6HkDd3pFxPV?=
+ =?us-ascii?Q?TfeJt9d+/3Lnv1CDIrPfLf8/RfVORBVeKKmQPaI/78yOcOy8unPj9vByGf1w?=
+ =?us-ascii?Q?4YAsWrpuHRrrj1k=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:139.15.153.206;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:eop.bosch-org.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026);DIR:OUT;SFP:1101;
+X-OriginatorOrg: de.bosch.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Feb 2025 11:58:47.9594
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c8be1f45-915d-4f41-6559-08dd4c25c642
+X-MS-Exchange-CrossTenant-Id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=0ae51e19-07c8-4e4b-bb6d-648ee58410f4;Ip=[139.15.153.206];Helo=[eop.bosch-org.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	AMS0EPF000001A3.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB3309
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Feb 2025 09:23:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115462
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Feb 2025 11:59:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115463
 
-From: Changqing Li <changqing.li@windriver.com>
+From: Mark Jonas <mark.jonas@de.bosch.com>
 
-STACK_DIRECTION = 1 means stack grow upwards
-STACK_DIRECTION = -1 means stack grow downwards
+- Update can-utils to version 2025.01
+- Split out the mcp251fd tools to into a can-utils-mcp251fd package
 
-In the majority of modern architectures, stack grows downwards. So set
-STACK_DIRECTION = 1 is not right. But the failure is not exposed before,
-mysqld can start normally, and simple runtime operation like create db,
-table, select info, works well. But it is exposed after commit [1] is
-merged, mysqld will start failed with error:
-2025-02-12  3:18:19 0 [ERROR] Could not open mysql.plugin table: "Thread stack overrun:  16752824 bytes used of a 299008 byte stack, and 81920 bytes needed
+Ricardo Simoes (2):
+  can-utils: Upgrade 2023.03 -> 2025.01
+  can-utils: Split mcp251fd* into sub-package
 
-Since commit [2], mariadb started to determine the default
-STACK_DIRECTION in CMake based on the ISA, and we have set correct
-CMAKE_SYSTEM_PROCESSOR in cmake.bbclass, so just don't pass it.
+ ...-utils_2023.03.bb =3D> can-utils_2025.01.bb} | 43 ++++++++++++++-----
+ 1 file changed, 33 insertions(+), 10 deletions(-)
+ rename meta-oe/recipes-extended/socketcan/{can-utils_2023.03.bb =3D> can-u=
+tils_2025.01.bb} (69%)
 
-[1] https://github.com/MariaDB/server/commit/bddbef3573349b0565c43c27beba47c89358f39f
-[2] https://github.com/MariaDB/server/commit/d0abbdf56e11ccc88447c1dc80caaf355c94be3b
-[3] https://jira.mariadb.org/browse/MDEV-36051
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- meta-oe/recipes-dbs/mysql/mariadb.inc | 1 -
- 1 file changed, 1 deletion(-)
-
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index c90e17e129..b620355730 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -96,7 +96,6 @@ EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
-                  -DINSTALL_SYSCONFDIR:PATH=${sysconfdir} \
-                  -DMYSQL_DATADIR:PATH=/var/mysql \
-                  -DCAT_EXECUTABLE=`which cat` \
--                 -DSTACK_DIRECTION=1 \
-                  -DHAVE_SYSTEM_LIBFMT_EXITCODE=0 \
-                  -DLSTAT_FOLLOWS_SLASHED_SYMLINK_EXITCODE=0 \
-                  -DSTAT_EMPTY_STRING_BUG_EXITCODE=0 \
--- 
+--=20
 2.34.1
 
 
