@@ -1,168 +1,100 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 23391C3DA4A
-	for <webhook@archiver.kernel.org>; Thu, 13 Feb 2025 09:04:50 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.web10.7022.1739437481862123177
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 50786C021A0
+	for <webhook@archiver.kernel.org>; Thu, 13 Feb 2025 09:23:10 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.7227.1739438589809820121
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Feb 2025 01:04:42 -0800
+ Thu, 13 Feb 2025 01:23:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=Ygqwjjx3;
- spf=pass (domain: konsulko.com, ip: 209.85.128.52, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4395561ab71so6410435e9.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Feb 2025 01:04:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1739437480; x=1740042280; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QIgJTACPfAtjVfDD0893RkedbyoGoYPsscDGadHbEJM=;
-        b=Ygqwjjx3osXv0CvZ3dNYIeE6YVQZiTxgLqJvILZ9bc9MU1nfk2I7RyAvFalgNZgf27
-         POi3QK9Jkd8xP4CJcWK1dqnwO3PacSlLUY9PXQ5lXUOu8PF6Z45boqbkobk19Vxl4+wn
-         HY3fDrodK6g3/UzkVTG3v4iX+sSjvdv1nVyvw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739437480; x=1740042280;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=QIgJTACPfAtjVfDD0893RkedbyoGoYPsscDGadHbEJM=;
-        b=LKnrTb53lW4v8BFikCp+ZhhA64mvzshi/QSHP/KstaNYhOpZgEtODsSzNNzmbo0wCp
-         Tgua4oZFNFT9iCsEyMIzyPnx8MBjkudNHyOXBEtEWMpXxUneOek6+P4b4s1cv8eQUPiz
-         eCLHQzcKoWTjz5yXkUrRNJc+6e7KtOLeqvfn9c5VgY0dtJouYhqnraIYTJVHJyiuwWuQ
-         W1YjOnIo9P+lJWkP7qOBP6mP9bohSdkgL5cFmBk/tewqKiOxOlWIuLTyb7ssCeelMHty
-         FyM1U9NTLwQGAPc0ihTss74MrmsY2iA44QUpOJps4XyN+9/aroJ9TuHhNW6Ugu2RNb8h
-         VOug==
-X-Gm-Message-State: AOJu0Yy06IQtPJUTjlqMzCcEYlrOoJOC9KbnDFD6qngWAI3ky1bSciCb
-	DfWhE21YrDYgmzFs8rjrs2fY3YdiG1wcp/oMwNLpLapgWRJYPCqMcnzqpGGPcCIiRB/JcUlb7St
-	b
-X-Gm-Gg: ASbGncuJyyiUlrP0/816t6PkvC2FHPIfWvZcueuOnVTVs4ego2gyisa45rzpdYxbcOE
-	vRLkfMaGM1OHRkoJ7+bSPAYwLIwBtQjnPP25haCTmFOCZzodrD0yuPAwboBY36diAPO1t/lkc7x
-	8jQSLlahPRX6wqQvv/YMu3ufZFGvDRbwJJb58nuuQQwpct3Q29o82fwSSn7qpB5h76bhbzH2p4j
-	hZlc+J3ad7vdceuCqiY2IvGlqC2+lCBSak/l7t6UnaExU5V66AGcPhCj2CU/rUuVkQjGOfUOaUH
-	VadENfyzmw7CPpIx1CHGEn6dVfHtfA==
-X-Google-Smtp-Source: AGHT+IEUbDommA8C6//PMWQiNCpIfkakseB/Gq4H9DAB+jIc7wxF3aeIHuMO7edIMOAQqYkdZMgyAw==
-X-Received: by 2002:a05:600c:3590:b0:439:4871:afea with SMTP id 5b1f17b1804b1-439601cfab2mr30982155e9.30.1739437479400;
-        Thu, 13 Feb 2025 01:04:39 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4395a06e309sm42507005e9.24.2025.02.13.01.04.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Feb 2025 01:04:38 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-daemon: Upgrade 3.0.1 -> 3.1.2
-Date: Thu, 13 Feb 2025 11:04:29 +0200
-Message-Id: <20250213090430.3750793-4-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250213090430.3750793-1-leon.anavi@konsulko.com>
-References: <20250213090430.3750793-1-leon.anavi@konsulko.com>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=413993aef9=changqing.li@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51D8WXSP013778
+	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Feb 2025 01:23:09 -0800
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 44qwtqasm6-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Feb 2025 01:23:09 -0800 (PST)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Thu, 13 Feb 2025 01:23:08 -0800
+Received: from pek-lpg-core6.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Thu, 13 Feb 2025 01:23:08 -0800
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH 2/3] mariadb: move /usr/share/mysql to /usr/share/mariadb
+Date: Thu, 13 Feb 2025 17:23:05 +0800
+Message-ID: <20250213092306.1491935-2-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250213092306.1491935-1-changqing.li@windriver.com>
+References: <20250213092306.1491935-1-changqing.li@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: lCcLtoHrDWOIwxEhCgc68JU6J115i9n4
+X-Authority-Analysis: v=2.4 cv=DNd14zNb c=1 sm=1 tr=0 ts=67adb9fd cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=T2h4t0Lz3GQA:10 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=g-6KINPEN2XXFAQI1RYA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: lCcLtoHrDWOIwxEhCgc68JU6J115i9n4
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-02-13_03,2025-02-13_01,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 mlxscore=0
+ bulkscore=0 phishscore=0 malwarescore=0 clxscore=1015 lowpriorityscore=0
+ mlxlogscore=999 adultscore=0 spamscore=0 suspectscore=0 priorityscore=1501
+ classifier=spam authscore=0 authtc=n/a authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.21.0-2501170000
+ definitions=main-2502130071
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Feb 2025 09:04:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115458
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Feb 2025 09:23:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115461
 
-Upgrade to release 3.1.2:
+From: Changqing Li <changqing.li@windriver.com>
 
-- In wheel, distribute only the Python packages that should be
-  installed.
-- Migrate project code base from "flat layout" to "src layout"
+Fix error:
+$mariadb-install-db --basedir=/usr
+FATAL ERROR: Could not find /usr/share/mariadb/fill_help_tables.sql
 
-License-Update: Use COPYING file
+Upstream commit [1] move /usr/share/mysql to /usr/share/mariadb, this
+make related files split into wrong package, and not installed by
+default, so cause above error
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+[1] https://github.com/MariaDB/server/commit/320a4b52c9c73a37b3553cec6a9d170924957c36
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- ...-packaging-module-instead-of-setupto.patch | 44 -------------------
- ...aemon_3.0.1.bb => python3-daemon_3.1.2.bb} |  9 ++--
- 2 files changed, 4 insertions(+), 49 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-daemon/0001-Use-version-from-packaging-module-instead-of-setupto.patch
- rename meta-python/recipes-devtools/python/{python3-daemon_3.0.1.bb => python3-daemon_3.1.2.bb} (52%)
+ meta-oe/recipes-dbs/mysql/mariadb.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-daemon/0001-Use-version-from-packaging-module-instead-of-setupto.patch b/meta-python/recipes-devtools/python/python3-daemon/0001-Use-version-from-packaging-module-instead-of-setupto.patch
-deleted file mode 100644
-index 316f7d9618..0000000000
---- a/meta-python/recipes-devtools/python/python3-daemon/0001-Use-version-from-packaging-module-instead-of-setupto.patch
-+++ /dev/null
-@@ -1,44 +0,0 @@
--From b7418ab4a3232431373bf0680c6b74fef06910de Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 10 Aug 2024 22:44:08 -0700
--Subject: [PATCH] Use version from packaging module instead of setuptools extern
--
--Fixes build problems when using PEP-575 build backend
--
--
--Drop the patch on upgrading to >= 3.0.2
--
--Upstream-Status: Backport [https://pagure.io/fork/khemraj/python-daemon/c/3bbc46967d35cd7e05677018bdc9d552efaeea3e?branch=main]
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- test_version.py | 2 +-
-- version.py      | 2 +-
-- 2 files changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/test_version.py b/test_version.py
--index c43cd36..d0a124d 100644
----- a/test_version.py
--+++ b/test_version.py
--@@ -23,7 +23,7 @@ import docutils.writers
-- import setuptools
-- import setuptools.command
-- import setuptools.dist
---from setuptools.extern.packaging.version import InvalidVersion
--+from packaging.version import InvalidVersion
-- import testscenarios
-- import testtools
-- 
--diff --git a/version.py b/version.py
--index 20d3ef3..fbdc462 100644
----- a/version.py
--+++ b/version.py
--@@ -36,7 +36,7 @@ import setuptools.command.build
-- import setuptools.command.build_py
-- import setuptools.command.egg_info
-- import setuptools.dist
---import setuptools.extern.packaging.version
--+import packaging.version
-- 
-- 
-- def ensure_class_bases_begin_with(namespace, class_name, base_class):
-diff --git a/meta-python/recipes-devtools/python/python3-daemon_3.0.1.bb b/meta-python/recipes-devtools/python/python3-daemon_3.1.2.bb
-similarity index 52%
-rename from meta-python/recipes-devtools/python/python3-daemon_3.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-daemon_3.1.2.bb
-index cb85262b41..8cf5697d10 100644
---- a/meta-python/recipes-devtools/python/python3-daemon_3.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-daemon_3.1.2.bb
-@@ -2,18 +2,17 @@ DESCRIPTION = "Library to implement a well-behaved Unix daemon process"
- HOMEPAGE = "https://pagure.io/python-daemon/"
- SECTION = "devel/python"
- 
--DEPENDS += "python3-docutils-native"
-+DEPENDS += "python3-docutils-native python3-changelog-chug-native"
- RDEPENDS:${PN} = "python3-docutils \
-                   python3-lockfile (>= 0.10) \
-                   python3-resource \
- "
- 
- LICENSE = "Apache-2.0 & GPL-3.0-only"
--LIC_FILES_CHKSUM = "file://README;md5=a3a94c615dc969a70525f1eebbacf235"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=55f76b1b31719284caf4bc3ecbb70d6f"
- 
- inherit pypi python_setuptools_build_meta
- 
--SRC_URI += "file://0001-Use-version-from-packaging-module-instead-of-setupto.patch"
--SRC_URI[sha256sum] = "6c57452372f7eaff40934a1c03ad1826bf5e793558e87fef49131e6464b4dae5"
-+SRC_URI[sha256sum] = "f7b04335adc473de877f5117e26d5f1142f4c9f7cd765408f0877757be5afbf4"
- 
--PYPI_PACKAGE = "python-daemon"
-+PYPI_PACKAGE = "python_daemon"
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index dae41d89aa..c90e17e129 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -186,8 +186,8 @@ do_install() {
+     # mini-benchmark used for Gitlab-CI to run on every commit to catch
+     # if there are severe performance regressions.
+     # remove it to avoid introducing bash dependency
+-    if [ -f ${D}${datadir}/mysql/mini-benchmark ]; then
+-        rm -rf ${D}${datadir}/mysql/mini-benchmark
++    if [ -f ${D}${datadir}/mariadb/mini-benchmark ]; then
++        rm -rf ${D}${datadir}/mariadb/mini-benchmark
+     fi
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
+         pam_so=$(find ${D} -name pam_user_map.so)
+@@ -349,7 +349,7 @@ FILES:${PN}-server = "\
+     ${libdir}/plugin/*.so \
+     ${base_libdir}/security/*.so \
+     ${libdir}/plugin/auth_pam_tool_dir/auth_pam_tool \
+-    ${datadir}/mysql/ \
++    ${datadir}/mariadb/ \
+     ${localstatedir}/mysql/ \
+     ${sysconfdir}/init.d/mysqld \
+     ${sysconfdir}/my.cnf \
 -- 
-2.39.5
+2.34.1
 
 
