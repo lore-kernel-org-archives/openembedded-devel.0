@@ -1,196 +1,199 @@
-Return-Path: <rasmus.villemoes@prevas.dk>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F81BC02198
-	for <webhook@archiver.kernel.org>; Fri, 14 Feb 2025 08:52:08 +0000 (UTC)
-Received: from EUR03-AM7-obe.outbound.protection.outlook.com (EUR03-AM7-obe.outbound.protection.outlook.com [40.107.105.51])
- by mx.groups.io with SMTP id smtpd.web10.17062.1739523125471391807
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 35540C02198
+	for <webhook@archiver.kernel.org>; Fri, 14 Feb 2025 09:02:28 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.web11.16969.1739523738387157986
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Feb 2025 00:52:07 -0800
+ Fri, 14 Feb 2025 01:02:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@prevas.dk header.s=selector1 header.b=Emvdo3Mj;
- spf=pass (domain: prevas.dk, ip: 40.107.105.51, mailfrom: rasmus.villemoes@prevas.dk)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Gwqepn0UeavnQ0w/uTUcapk1f6AF/OelBeSd4zgRB5JhR+3pc8G4KlPgMDkpBAIe9j00YrDZnj5rNhRURBxqM8M0AF/Ad90vWjzMgUUaehr0EzlEu33yX69BH1NkUCk9Hx+LBImGDLvwcpLmZu4QI0Q2ZJUGeePp5UnGHjdU8a3DAhy7Pq6hNo5MGMXZu+2GHxtoO9RjlZQTCURCF4J1h/2HZkPIBqk6GXL/f/WBo/dtZrLua+PPWZLIaRhRH5pNdJmnbTdcZBDhAC5sIW39AGBeQNms8bfpV00ak5fWRJFWnLlpHX90fRw/Cxj1O6ICEB7wt9IpdEKOKEVFWsKGKw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PZbkmF+EODv8RjkcoPWij15X3RQa71VGEtsoCAetjWg=;
- b=BA1+Sdf8muKQ8aUDaZ+uk7bvVdYQSpGIV5Vh6J1fw8WmRDivyoX0gNHpgXZ5ZBJh60JVlPnHFNAHf3HdhD5hd9FswTlr6HmM6Z9oXT/+Cx2DE0lw8di1CsNqRCFalMeYQ2APQHpCYKaBb1l74l4Ci5FZIes3PJTiltC42Cr4E1MkWDIkgjuDr8W1HNIaHQJdT06ViNXexsw+OPaYubJ3xSV4RWe2TCRBHiSKdYLfxcitXy5OUIu8rHHlNUR/WwW2KSUQj9NfsegqRRiXqQ2v9K9NWb97aCQtI8SbX/niExpDZCdGC4y+PeXMVm/u9S3CMWMb0w5AYjXdhdxgwjWeBQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PZbkmF+EODv8RjkcoPWij15X3RQa71VGEtsoCAetjWg=;
- b=Emvdo3MjsGbn5Y1Iqw7lf5me/0hGFvzy5IFlgWpBLXXnZFPUOAJHKTO4ty8VGKW5TSTPzgZZ80qvErQHdTHZ/BUp/acZi/s2lzkeC8+dshsJWBVysl7tGly/IEqQTYu1zkdiP+ecpY4Dv3vLu/X66qb4cBOcduOGabdCHHajkIA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:41::17)
- by PAVPR10MB7540.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:2f7::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.10; Fri, 14 Feb
- 2025 08:51:57 +0000
-Received: from DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::7e2c:5309:f792:ded4]) by DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::7e2c:5309:f792:ded4%5]) with mapi id 15.20.8466.008; Fri, 14 Feb 2025
- 08:51:56 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: openembedded-devel@lists.openembedded.org
-CC: Khem Raj <raj.khem@gmail.com>,
-	Rasmus Villemoes <ravi@prevas.dk>
-Subject: [meta-oe][PATCH v3] systemd-netlogd: new recipe
-Date: Fri, 14 Feb 2025 09:51:52 +0100
-Message-ID: <20250214085152.1273827-1-ravi@prevas.dk>
-X-Mailer: git-send-email 2.48.1
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0068.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:8::35) To DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:41::17)
+ dkim=pass header.i=@smile.fr header.s=google header.b=OMbThfjd;
+ spf=pass (domain: smile.fr, ip: 209.85.221.51, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-38dd14c9a66so847874f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Feb 2025 01:02:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=smile.fr; s=google; t=1739523737; x=1740128537; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=0bXC+1IDHcveDlevu/iTx0opk/09JnuKXLKWypM85bk=;
+        b=OMbThfjdt44r+KJyPYjHl/kJbMs1mneqweWKMh3cl+zOsteGNEgbB3bbBW4ztLsQH4
+         tiFqiDTV6j2hx6FSJXJsAlRj/AwLD4P/P/aUrxkl82aysdMVlEXJDFKCW7IKPDaX3ESI
+         5+aI1NctPhZ19ekZVUNcTtmBSEpON3DAtr3xE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1739523737; x=1740128537;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=0bXC+1IDHcveDlevu/iTx0opk/09JnuKXLKWypM85bk=;
+        b=g2fzizPMNr1FPAQXlpKegMP+SkdiOR/jWugINwXOAFiUeK7gpcGVaGcNGWgrgnudsI
+         2DhXNgwxgUR4i0Gzz4BI3ihiZIjdgOcMxLPVzi3sgTw+UnfY4TQUZscXt3651FAJRYNa
+         HVrkpwrDveUDA0dI3tkb9bJxWogEVrKXsJ7WIh8V0CMPdxezJ6mA6VNEBSSgebToCZXX
+         USeRfh9aHf9UTrRRk1dEDQfGlGiqGSuhek3YYsaEzkHdJha4QRCM5dtM3O48W4gIxj8C
+         sjJSaSrlIpbIOv+kjfy6JlfaQjMLPX4zp2A90zUDvfS9XeKVmaEpzcc9js9o2jpi5Ec+
+         BNpw==
+X-Gm-Message-State: AOJu0YxizAkfHP0xzhMRQDShAl58I7nceoTa0LefAmdph6JKYaatzK2H
+	/+0LjgPG5aQAmoyioJy8YDZflKmlrKnDaJiLqApLLXgZR+n8ik4i1Wxh8O30GZtfi0G2mZo1HBc
+	p1FsXRy3sloer5FwokVBxwk+EGj9mG1GaJannuA==
+X-Gm-Gg: ASbGncsapkEuOAc9h+G65Y9ThrMhk27KFeSwVbdgPPPocNz3/M2A+mwngckUvhJ6TbX
+	sP3c/2kY05H9lKxc57geQzoHoJ+BaSY2rxoLF4Sqa54nZdcm1d6GEwn/9rIcfnZH7Ov+/eX7B8o
+	MJOckeyCrNUTn6/zxVCOVtoFGHyRcl
+X-Google-Smtp-Source: AGHT+IF+TrOqBgTAGcuHX7nI8i0sJV3qXPd/HwnemQKTWls48g9Y48felYvhL5395NUJuY+YZuqc4xkvoFK4BfZaNGo=
+X-Received: by 2002:a05:6000:144f:b0:38d:d0ea:b04c with SMTP id
+ ffacd0b85a97d-38dea2eadfamr13949278f8f.38.1739523736671; Fri, 14 Feb 2025
+ 01:02:16 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB7PR10MB2475:EE_|PAVPR10MB7540:EE_
-X-MS-Office365-Filtering-Correlation-Id: d8725499-985f-411d-ff72-08dd4cd4d632
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|376014|52116014|1800799024|38350700014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?gOekZk8Sqh5j7/34eNc7B6pBV6krIldp/RJzD6IK16tPRfATEZMjhFheUlH2?=
- =?us-ascii?Q?MTQEpGd/rlBP+8hp8fwwKaKLoeziJhMayWB23pA10IPra8iGrhhwnPZcmZhV?=
- =?us-ascii?Q?9QDZd7afaXBgV16J/fnYzIytENmkzK5iR1WhxL1Mf0QYWTxo/xD6bkZ+60Y8?=
- =?us-ascii?Q?wsHjUAHKTQJ5N/6ht+VII8CBI4OhQWUbIYzLX1do9JHjJ2SqnPFFO+Z+xkXa?=
- =?us-ascii?Q?WZoTY1W64lMBJZGAr//p7/Vo7lG3ub00CzMldafzGks09TywsXR4jo7W54lX?=
- =?us-ascii?Q?s/KChhnXPodSKEZgWDUPa3Mx2MEp2m6ieH6d5TQxN3550rdNDzRw040z5MPx?=
- =?us-ascii?Q?JCwTrLSj1LUY7kqb5alvC2h79Dkt/rH0jF016kU1fbktUH8wOxEruqE3l99g?=
- =?us-ascii?Q?ZMUcbMq4DHz5aC55d9Hi8ByA+YpqxEXvjYtLMDO/qan7CGaZjwcFfa4LMykc?=
- =?us-ascii?Q?Jl8uURCVKN0WqNtog+PqkUxVbN4GouYM2xg9BUNHUIRzn4sFf2zZ8pzDQyqW?=
- =?us-ascii?Q?PYaTjHASeZIDrJDqcoSDp6TNdxwlHCEw2jIoJN25UwPt5NRDDgvzoxq2egkc?=
- =?us-ascii?Q?8eYUueTBluqh/0Ucnsoh9PmS25AYuWngletokY2zdbxCqreSa3ucKRH4maFc?=
- =?us-ascii?Q?+g68sTzHyvJJub6V79L5pZySwd0y2EnErJXu8jOs/RHlTuwG4XEVGU9TD+ik?=
- =?us-ascii?Q?aToeM5865SnBeivRU07dPRUJP6pOiuH2cfxS2SwkKwoM0+PtgG/rA89AXQ/I?=
- =?us-ascii?Q?Qgp9whpKeob2ytKxzrjR/rvcFAttoC+AIKXdbhc6S2sLTeB+F4l+tfcO2G1J?=
- =?us-ascii?Q?s/AtdOvASQYuVnpu+5tHppyn3UGTAe4oVmls10K488fA7lOz2HSC13mxZ1Nd?=
- =?us-ascii?Q?GN7h2lN6gdgGYRmgDc0vJg7SVZbO9BfopxgbJFf9PzPjGMr7nOY5965jFCHZ?=
- =?us-ascii?Q?ME9URkTkJMU9+aipwD4LPXYNt7ja27fbssoEA+zR6l6pq7Uzb9qE85EB3iQf?=
- =?us-ascii?Q?KqXEORgs2qZnPq2THqdGcJ/hlEZJFH/KwNbVMYtwEsDgz/n3fxDDvncPCq8d?=
- =?us-ascii?Q?JbWbEQLNVc2/fbSxkCDzY0PtWvItx5tfdAL7MjEkIRrf1nSvXgVTcSbXHG+J?=
- =?us-ascii?Q?ISgLRs+CMOljg/KoGAg3PQJbnM4nCgp312sQBQw5nUs5tGdgrLNjXHYkWhdL?=
- =?us-ascii?Q?wR/pj00x3D9WoxiKu1lDzGEBQoRqzvAHHIYCkBEjB0SJ1tU4ARAprs7scNjj?=
- =?us-ascii?Q?EopmJzhja+AtAXt2GpTKwr1ls/909TFz9yhZyhiCO3Z64PCP2/3knOtLpG9V?=
- =?us-ascii?Q?8k4GENaOK6T1pfNgfBoCOL1xymmdnRlfmUOXIQ1jYr5eT8eASMXcIyBFhy6v?=
- =?us-ascii?Q?bdbOvQEuX4qVA3w19oLbB4+lbjASg01zMziB9/e25WkdR+XvDINqJatVvyv9?=
- =?us-ascii?Q?RyBhJrdYSh0/zLfrml45eGyIIfpsuTB9?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(52116014)(1800799024)(38350700014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?LOORcoq0eO+wkNFHMOiP5hMvtRq+MEZpjqbJk4MRGsU4E5SpCk2huLP1jWnu?=
- =?us-ascii?Q?C0i+4Nt2jEmybWmjh8otk6NRi3rY88IZFxmSuD+sHU1qTwK0cUvUip7WGvNG?=
- =?us-ascii?Q?nCqMit/r33OWzE/8VP+hL/8HAW3Kz5TlRlnQEIqyY0H0x5heZeTBN7M0HwWe?=
- =?us-ascii?Q?Vb29uK4NDA0lcV+aUG74M1OIHKd5K8JTR1HxLphrcy1axLFFTDPggQHBPCuv?=
- =?us-ascii?Q?886fxJ8V0UOsgkXe8Ul2jF0mD5toaWcPshHvVuZRjWmFcK9+MHMSnVGEN3sz?=
- =?us-ascii?Q?PHo784WVxSWmRgHtCKVjK+o+i6Q0G3NJ8wXvQRz+lizHYpEYgkYR0kk7ISaM?=
- =?us-ascii?Q?7oZqbOjSlWLQWTGY09VkxLkSi7ir/rv8iUMAwRtTbjQM0y5ok9DpE3o6TKgO?=
- =?us-ascii?Q?shE77/tFCh9AjENWVVzlEYlxKLBwXflYJwRChW4KoW1AiEj1V7ZXIYTHtHUF?=
- =?us-ascii?Q?YSqyUhY9CZZtRBv3nd5QniF0BBaZx+eQM/ToTu35MM0verr80VqSavoDzgnk?=
- =?us-ascii?Q?MGwaoVUzFMwxewa1kA2RMOokm4lInFarS8dgqSdjX9Beno7ge92rNV82I8Yv?=
- =?us-ascii?Q?QqLLpEkXSRWE/7jo8+dwhVhLFYiEX/eCmo8jC6MXpzF4QqiRk9Wqg0aktA5m?=
- =?us-ascii?Q?8Xwy7kJA2TZ7KXP6C46fFagAkkpwmQVspB9U2KqChReisCGepev/xWo5gRFs?=
- =?us-ascii?Q?SO5S8KI65o3EsXBWOVs+EEiroYzB3qmmIMI53Z9iSZ0tbROLDhG8WvanYfUy?=
- =?us-ascii?Q?OrmJzl5zQQDtdQdKgtp6VAAYLfXW0n4GhLvMa28S0MFCkUUu89uV/qHZQQiI?=
- =?us-ascii?Q?bvWECd4TU3ok8CyaUxLnNr9IjKGB6vzDIMAMocH+fy1q0v1QWTqBCv8Y+aSx?=
- =?us-ascii?Q?ZTeYcRkxJc3WbX7tRgcrWvwlZWPF1Qt2LSzHfvTc6zMxTqcmWZamMqWTlb6V?=
- =?us-ascii?Q?7ppOjXr3CgfEIF2tvBjq6SjxnH2DSYIb3KR/eJnQ+Emp0a+ouOO/lrmrQdvS?=
- =?us-ascii?Q?mMM608lqjlEnLKPGq4F4f5ALyfo1AS9WmyCI0w+haUZLz/vyPpZTqrk7fSDb?=
- =?us-ascii?Q?AfgtS2ENwiDVv1U0Am/h5WwVMkaW61fvSxSnRNJF7RTBuINfQAPv/0iJHzMW?=
- =?us-ascii?Q?l82UCNttBKZNco8SZ8S41zYFGIb36Bz5gl4Pav+aiiVfFSR133Gwctmn4WTX?=
- =?us-ascii?Q?l5q5aG+ZB+/erRZesQKga/pwF4qq0UgYf/Wjk9StWn7Pspc/bSuFFq+mfe/v?=
- =?us-ascii?Q?VdasU2YylxeTGWypKFoOerZC2/nU9j1Z+hiKZtoQB6mD7MUipqcXuEf+QBkE?=
- =?us-ascii?Q?lP1njJeD9o8x4vMSmnJPGX6K1lB9k8U1UuFdaq/8VeG2C7YxXZcax86TgNFZ?=
- =?us-ascii?Q?RqamZfy7IY3Y3AW4whpqKSOfiw2boc7X9KEB5EvzNClwZGB6tSeshpXHsS8L?=
- =?us-ascii?Q?ojxbzl9Zr0wYnly8KXGtgJavjaVByAjSlFaeq4820Otamxe8QYaI5C08rXzZ?=
- =?us-ascii?Q?bnmr3Fa/7GH+j6AdEnw+JT0NrXwalXP2DHLzHIqSY3L5yNJf/Ok8JynMkFur?=
- =?us-ascii?Q?dlQQdAxgkNAkrRoFalXTH8AfRRhgaKiWEI4JiJ5Z4KfDVCa9yCAR5UTkv88V?=
- =?us-ascii?Q?tA=3D=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: d8725499-985f-411d-ff72-08dd4cd4d632
-X-MS-Exchange-CrossTenant-AuthSource: DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Feb 2025 08:51:56.8451
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ivzC0meJ2EicIJM5V/cTE2wmQsrr9BdoPI9R+4+RdLb2m4iT6hDUNqkVO/vKb9lwYq4KrK6Nr25MLQhPp/3YprGvjME4mQv7DkLe9C7HOK4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR10MB7540
+References: <CAMSfU+413shmiBy9cc1yep+JMfFdkLKm_xhbfuZJ0METTGkPMg@mail.gmail.com>
+ <18350.1739522720980592260@lists.openembedded.org>
+In-Reply-To: <18350.1739522720980592260@lists.openembedded.org>
+From: Yoann Congal <yoann.congal@smile.fr>
+Date: Fri, 14 Feb 2025 10:01:50 +0100
+X-Gm-Features: AWEUYZnENJuoxmaJ-DNPhjFfUwXQnFfGQKVXKkDUc58txMjhDyzwXdomfvSC3Os
+Message-ID: <CAMSfU+6V1djUu+mt_BeCdcb=3-GuLAtZjFaqrmaPRPf7nrSBmA@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH v2] corosync: reproducibility issue
+To: gavrosc@yahoo.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000674b8a062e166ef4"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Feb 2025 08:52:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115482
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Feb 2025 09:02:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115483
 
-From: Rasmus Villemoes <ravi@prevas.dk>
+--000000000000674b8a062e166ef4
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-In some deployments, the log aggregator collects log messages in the
-syslog format, so systemd-journal-upload and friends can not be
-used.
+Le ven. 14 f=C3=A9vr. 2025 =C3=A0 09:45, Christos Gavros via lists.openembe=
+dded.org
+<gavrosc=3Dyahoo.com@lists.openembedded.org> a =C3=A9crit :
 
-systemd-netlogd is a daemon for filling that gap.
+> hi
+>
+> the patch is merged in master-next, can I still change it and submit v3?
+>
+> https://git.openembedded.org/meta-openembedded/commit/?h=3Dmaster-next&id=
+=3Dbb138b9f6b0ae7a77b5be468356a9ed0d7787c88
+>
 
-Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
----
-v2: add systemd as required distro feature
-v3: also inherit the features_check class to make that have effect
+master-next is the branch under test. It's not too late to send a v3. That
+is not a major issue anyway...
 
- .../systemd-netlogd/systemd-netlogd_1.4.4.bb  | 27 +++++++++++++++++++
- 1 file changed, 27 insertions(+)
- create mode 100644 meta-oe/recipes-support/systemd-netlogd/systemd-netlogd=
-_1.4.4.bb
 
-diff --git a/meta-oe/recipes-support/systemd-netlogd/systemd-netlogd_1.4.4.=
-bb b/meta-oe/recipes-support/systemd-netlogd/systemd-netlogd_1.4.4.bb
-new file mode 100644
-index 0000000000..f95cfdb418
---- /dev/null
-+++ b/meta-oe/recipes-support/systemd-netlogd/systemd-netlogd_1.4.4.bb
-@@ -0,0 +1,27 @@
-+SUMMARY =3D "Forwards messages from the journal to other hosts over the ne=
-twork using the Syslog Protocol"
-+
-+LICENSE =3D "LGPL-2.1-or-later"
-+LIC_FILES_CHKSUM =3D "file://LICENSE.LGPL2.1;md5=3D4fbd65380cdd25595107900=
-8b364516c"
-+
-+SRC_URI =3D "git://github.com/systemd/systemd-netlogd.git;protocol=3Dhttps=
-;branch=3Dmain"
-+SRCREV =3D "b03cc3b1a75048c7cf19467d8918a4b7320767e6"
-+
-+inherit meson systemd pkgconfig useradd features_check
-+
-+REQUIRED_DISTRO_FEATURES =3D "systemd"
-+
-+S =3D "${WORKDIR}/git"
-+
-+DEPENDS +=3D "systemd"
-+DEPENDS +=3D "openssl"
-+DEPENDS +=3D "gperf-native"
-+DEPENDS +=3D "python3-sphinx-native"
-+
-+# systemd-netlogd uses prefix and sysconfdir in a weird way.
-+EXTRA_OEMESON +=3D "--prefix ${libdir}/systemd --sysconfdir ${sysconfdir}/=
-systemd"
-+
-+FILES:${PN} +=3D "${libdir}"
-+
-+USERADD_PACKAGES =3D "${PN}"
-+GROUPADD_PARAM:${PN} =3D "-r systemd-journal"
-+USERADD_PARAM:${PN} =3D "--system -d / -M --shell /sbin/nologin -g systemd=
--journal systemd-journal-netlog"
+> I was thinking the same... but we ended up that the issue is coming from
+> this macro NETSNMP_SYS_CONTACT by looking the diffoscope
+>
+> https://valkyrie.yocto.io/pub/repro-fail-openembedded/meta-networking/oe-=
+reproducible-20250201-4tpvm0li/packages/diff-html/#reproducibleA-tmp---repr=
+oducibleA-tmp-deploy---reproducibleA-tmp-deploy-deb---reproducibleA-tmp-dep=
+loy-deb-core-------reproducibleA-tmp-deploy-deb-core-----corosync-dbg_-.-.-=
+-r-_amd--.deb---data.tar.xz---data.tar---.-usr-sbin-.debug-corosync-notifyd=
+---readelf---wide---debug-dump-macro---
+>
+> NETSNMP_SYS_CONTACT is defined and used in 'net-snmp' in build directory.
+> Then I checked net-snmp source code and find that this macro is defined a=
+nd
+> assigned there as explained in patch.
+>
+> Shall we wait for autobuilder to test it and take further actions from
+> there?
+>
+
+Yes, I would do that.
+Remember that since this reproducibility issue is host distro related, we
+will have to wait some reproducibility (weekly) runs to be sure it was
+tested on different host distro.
+
+
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#115480):
+> https://lists.openembedded.org/g/openembedded-devel/message/115480
+> Mute This Topic: https://lists.openembedded.org/mt/111173431/4316185
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> yoann.congal@smile.fr]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
 --=20
-2.48.1
+Yoann Congal
+Smile ECS - Tech expert
 
+--000000000000674b8a062e166ef4
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
+mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">Le=C2=A0ven. 14=
+ f=C3=A9vr. 2025 =C3=A0=C2=A009:45, Christos Gavros via <a href=3D"http://l=
+ists.openembedded.org">lists.openembedded.org</a> &lt;gavrosc=3D<a href=3D"=
+mailto:yahoo.com@lists.openembedded.org">yahoo.com@lists.openembedded.org</=
+a>&gt; a =C3=A9crit=C2=A0:<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex"><div>hi</div>
+<div>=C2=A0</div>
+<div>the patch is merged in master-next, can I still change it and submit v=
+3?</div>
+<div><a href=3D"https://git.openembedded.org/meta-openembedded/commit/?h=3D=
+master-next&amp;id=3Dbb138b9f6b0ae7a77b5be468356a9ed0d7787c88" target=3D"_b=
+lank">https://git.openembedded.org/meta-openembedded/commit/?h=3Dmaster-nex=
+t&amp;id=3Dbb138b9f6b0ae7a77b5be468356a9ed0d7787c88</a></div></blockquote><=
+div><br></div><div>master-next is the branch under test. It&#39;s not too l=
+ate to send a v3. That is not a major issue anyway...</div><div>=C2=A0</div=
+><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border=
+-left:1px solid rgb(204,204,204);padding-left:1ex"><div>I was thinking the =
+same... but we ended up that the issue is coming from this macro NETSNMP_SY=
+S_CONTACT by looking the diffoscope</div>
+<div><a href=3D"https://valkyrie.yocto.io/pub/repro-fail-openembedded/meta-=
+networking/oe-reproducible-20250201-4tpvm0li/packages/diff-html/#reproducib=
+leA-tmp---reproducibleA-tmp-deploy---reproducibleA-tmp-deploy-deb---reprodu=
+cibleA-tmp-deploy-deb-core-------reproducibleA-tmp-deploy-deb-core-----coro=
+sync-dbg_-.-.--r-_amd--.deb---data.tar.xz---data.tar---.-usr-sbin-.debug-co=
+rosync-notifyd---readelf---wide---debug-dump-macro---" target=3D"_blank">ht=
+tps://valkyrie.yocto.io/pub/repro-fail-openembedded/meta-networking/oe-repr=
+oducible-20250201-4tpvm0li/packages/diff-html/#reproducibleA-tmp---reproduc=
+ibleA-tmp-deploy---reproducibleA-tmp-deploy-deb---reproducibleA-tmp-deploy-=
+deb-core-------reproducibleA-tmp-deploy-deb-core-----corosync-dbg_-.-.--r-_=
+amd--.deb---data.tar.xz---data.tar---.-usr-sbin-.debug-corosync-notifyd---r=
+eadelf---wide---debug-dump-macro---</a></div>
+<div>=C2=A0</div>
+<div>NETSNMP_SYS_CONTACT is defined and used in &#39;net-snmp&#39; in build=
+ directory. Then I checked net-snmp source code and find that this macro is=
+ defined and assigned there as explained in patch.</div>
+<div>=C2=A0</div>
+<div>Shall we wait for autobuilder to test it and take further actions from=
+ there?</div></blockquote><div><br></div><div>Yes, I would do that.</div><d=
+iv>Remember that since this reproducibility issue is host distro related, w=
+e will have to wait some reproducibility (weekly) runs to be sure it was te=
+sted on different host distro.</div><div>=C2=A0</div><blockquote class=3D"g=
+mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
+,204,204);padding-left:1ex">
+
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#115480): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/115480" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/115480</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/111173431/431=
+6185" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/111173431/4316185</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:yoann.congal@smile.fr" t=
+arget=3D"_blank">yoann.congal@smile.fr</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div><div><br clear=3D"all"></div><br><span class=3D"gmail_si=
+gnature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><d=
+iv dir=3D"ltr"><font face=3D"Raleway, regular">Yoann Congal</font><div><fon=
+t face=3D"Raleway, regular">Smile ECS - Tech expert<br></font></div></div><=
+/div></div>
+
+--000000000000674b8a062e166ef4--
 
