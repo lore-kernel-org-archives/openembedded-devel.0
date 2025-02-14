@@ -1,84 +1,94 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B2F74C021A6
-	for <webhook@archiver.kernel.org>; Fri, 14 Feb 2025 17:42:50 +0000 (UTC)
-Received: from mta-65-228.siemens.flowmailer.net (mta-65-228.siemens.flowmailer.net [185.136.65.228])
- by mx.groups.io with SMTP id smtpd.web10.27150.1739554966107935241
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C999C021A4
+	for <webhook@archiver.kernel.org>; Fri, 14 Feb 2025 19:04:41 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.web10.29059.1739559876593161579
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Feb 2025 09:42:47 -0800
+ Fri, 14 Feb 2025 11:04:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=W3CaPGRb;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.228, mailfrom: fm-256628-20250214174241aae68106962d0b68ef-sxkodk@rts-flowmailer.siemens.com)
-Received: by mta-65-228.siemens.flowmailer.net with ESMTPSA id 20250214174241aae68106962d0b68ef
-        for <openembedded-devel@lists.openembedded.org>;
-        Fri, 14 Feb 2025 18:42:43 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=S2DIRDfB2z/DruIea7WBwds5coIxaO8+qVpXYPhVH6M=;
- b=W3CaPGRbK+f94SrHlceADotbIh11EKynWLo20f9McleIoigDiUR+11UPEx3Q9YgEBfEZpL
- lOLsN8mVhKkuOQqhBdccS8GNAphYNXzZV98aoD9EJjCusKfhFV5VkUv9OkmPRSPEDU+Arm8r
- Hht60lu1hcK0ZW6VwPG6/yQ2I5WYUXrYZgRWQaRF6VcUhZnd+qOcDj3F5Cceux1XQImWoY0R
- tp3klfo0GoEaTWchk0TIGRDIhzBlYbzBtd13xBmG35/SCjBzcB4tdUvfSePWxQp3Y9SjrnEA
- nA/QRoMaXj6Ymsp4GCvUPONRS19WQlSoKlvJ7zXEjtLFgUboEDN3j6IQ==;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=j78NfmQC;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-43964e79314so18782625e9.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Feb 2025 11:04:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1739559875; x=1740164675; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=RkRvKolwka5Lc9/Vfaf9ZHwfmkuJsQAgibalheQMyTQ=;
+        b=j78NfmQCM4uG5b5NPq4VZ+0BEqHanuZD1mggv5WKQiJ2/mQG0dYaLQn34x+fGQCYma
+         FrQz4N4rDeiTnSOfB/3PhnA4IXlFQJfGg3+qkZdv1Tc/qVfZ5zFhrlt55cUWGoQGn4cE
+         ogyC6cfTnqIsp4RTtCkL8E/Wb7UTyIf3kVfJkg13ELbRXHrkG0iDhb9y8NtjY681xkUi
+         bDGkD4s75vNI8mV9GnvXInxJ/31t4yTd7WmFcza/iCd1L1Ft02Xw5RHCX7vZMLIag1Sa
+         41gDWjZgY2glhKaDUAjMZp4sj3qnWpbDC+yzg7uGjYgU0Kj3Z/Q7MSE1y4fr7is+QcJg
+         F65Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1739559875; x=1740164675;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=RkRvKolwka5Lc9/Vfaf9ZHwfmkuJsQAgibalheQMyTQ=;
+        b=r04oH2UBBxOgVR2FRa7+rp6ay8twvcYuvuhSA6qvpk52EXeqYdOzZB3+bMKtPmGgCl
+         SE2pW1sdKWwvhqu2lsGqOCT/3aLiUG72b2go+MBcmDJA6qX0aRn8apPrzsAo8rGV9Oj2
+         /spIacBmafpng5EEPzvlmGbUgJY1z8q7HNnfX7mzQ9ToUUcfiR7k6AVNChA/hwb/ISyc
+         kA8bIp0zj1pAXN20f5YCcXB1bPRVf3RXn5FnSws28J6q1TL2a2vIL9DCWBDLjZgT5hOV
+         bKVX3iB+oa9h2vyhVCYWeibjXfepg6ZlW8PuR0ntb7r0IHdXf1wXHAY4s1fRMPAnchho
+         FzZQ==
+X-Gm-Message-State: AOJu0YzWwdzn7pp1OsvnSsCrEIWCFjz3/YcWT0tqwdpL6L2VTUOipauJ
+	KKOJYsV0FqA6eRWI98lrKypIjXGzvTWnO9LB7jNqiBtZRMLsoF46nKXHSg==
+X-Gm-Gg: ASbGnctWS4zYi6AwCWdJ9QqVZpUaPBGW3ijrtjdJqsmX8xETDI6n1LlMbeP4sapx0p+
+	bQ5ZeMDFxg0unlJGalXnv87lzdFtEZEsvbpGgJ2K71F6uK7fze37ejvwyyU3+8hB7+aC+aSkDSR
+	Xa61khn8tt8zctScye3OyuBvsYWH15UJggfCKf3ghcTwbiZUELFMYHBWkFIycqpvvEWHJhfZewa
+	bl4Sch+fD/IGw5xTZ93zuKSyyoLcjV3msTpfOBr6NNvU2pwOIfIx6LbJipRdTys1G371JqzcBPG
+	GJh/mLYotxIAs9fWbSCN3Uy7za1vuRg=
+X-Google-Smtp-Source: AGHT+IHSFw8ZLFEUv6Q7P2N7HvLQwsfTbr20TMcSK7D1i28jn18ET/IuMS51hg8VHKdPdTlkcKmmoA==
+X-Received: by 2002:a05:600c:3b25:b0:439:5573:9348 with SMTP id 5b1f17b1804b1-4396e745ac2mr4875725e9.22.1739559874458;
+        Fri, 14 Feb 2025 11:04:34 -0800 (PST)
+Received: from localhost.localdomain ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4395a1aa7e8sm83350375e9.26.2025.02.14.11.04.33
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 14 Feb 2025 11:04:33 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-python][PATCH] python-grpcio(-tools): add grpc:grpc to cve product
-Date: Fri, 14 Feb 2025 18:41:54 +0100
-Message-Id: <20250214174154.13911-1-peter.marko@siemens.com>
+Subject: [meta-multimedia][PATCH] rygel: drop obsolete PACKAGECONFIG
+Date: Fri, 14 Feb 2025 20:04:33 +0100
+Message-ID: <20250214190433.388836-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Feb 2025 17:42:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115490
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Feb 2025 19:04:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115491
 
-From: Peter Marko <peter.marko@siemens.com>
+"lms" plugin has been dropped by the project starting version 0.43.0.
 
-These grpc python modules contain parts of grpc core.
-Each CVE needs to be assessed if the patch applies also to core parts
-included in each module.
-
-Note that so far there was never a CVE specific for python module, only
-for grpc:grpc and many of those needed to be fixed at leasts in grpcio:
-
-sqlite> select vendor, product, count(*) from products where product like '%grpc%' group by vendor, product;
-grpc|grpc|21
-grpck|grpck|1
-linuxfoundation|grpc_swift|9
-microsoft|grpconv|1
-opentelemetry|configgrpc|1
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-devtools/python/python3-grpcio-tools_1.70.0.bb      | 2 ++
- meta-python/recipes-devtools/python/python3-grpcio_1.70.0.bb    | 2 ++
- 2 files changed, 4 insertions(+)
+ meta-multimedia/recipes-connectivity/rygel/rygel_0.44.1.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.70.0.bb b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.70.0.bb
-index e295e0329e..8af6bb5714 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.70.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.70.0.bb
-@@ -20,3 +20,5 @@ SRC_URI[sha256sum] = "e578fee7c1c213c8e471750d92631d00f178a15479fb2cb3b939a07fc1
- RDEPENDS:${PN} = "python3-grpcio"
+diff --git a/meta-multimedia/recipes-connectivity/rygel/rygel_0.44.1.bb b/meta-multimedia/recipes-connectivity/rygel/rygel_0.44.1.bb
+index 9bede50233..6423d51a31 100644
+--- a/meta-multimedia/recipes-connectivity/rygel/rygel_0.44.1.bb
++++ b/meta-multimedia/recipes-connectivity/rygel/rygel_0.44.1.bb
+@@ -35,7 +35,6 @@ PACKAGECONFIG[mpris] = ""
+ PACKAGECONFIG[ruih] = ""
+ PACKAGECONFIG[media-export] = ""
+ PACKAGECONFIG[gst-launch] = ""
+-PACKAGECONFIG[lms] = ""
+ PACKAGECONFIG[tracker3] = ""
+ PACKAGECONFIG[gtk+3] = ",-Dgtk=disabled,gtk+3"
  
- BBCLASSEXTEND = "native nativesdk"
-+
-+CVE_PRODUCT += "grpc:grpc"
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.70.0.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.70.0.bb
-index bebfa51be1..c9edc1d541 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio_1.70.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio_1.70.0.bb
-@@ -35,3 +35,5 @@ CLEANBROKEN = "1"
- BBCLASSEXTEND = "native nativesdk"
- 
- CCACHE_DISABLE = "1"
-+
-+CVE_PRODUCT += "grpc:grpc"
+@@ -44,7 +43,6 @@ RYGEL_PLUGINS:append = "${@bb.utils.contains('PACKAGECONFIG', 'external', ',exte
+ RYGEL_PLUGINS:append = "${@bb.utils.contains('PACKAGECONFIG', 'mpris', ',mpris', '', d)}"
+ RYGEL_PLUGINS:append = "${@bb.utils.contains('PACKAGECONFIG', 'ruih', ',ruih', '', d)}"
+ RYGEL_PLUGINS:append = "${@bb.utils.contains('PACKAGECONFIG', 'gst-launch', ',gst-launch', '', d)}"
+-RYGEL_PLUGINS:append = "${@bb.utils.contains('PACKAGECONFIG', 'lms', ',lms', '', d)}"
+ RYGEL_PLUGINS:append = "${@bb.utils.contains('PACKAGECONFIG', 'media-export', ',media-export', '', d)}"
+ RYGEL_PLUGINS:append = "${@bb.utils.contains('PACKAGECONFIG', 'tracker3', ',tracker3', '', d)}"
+ RYGEL_PLUGINS:append = "${@bb.utils.contains('PACKAGECONFIG', 'playbin', ',playbin', '', d)}"
 
