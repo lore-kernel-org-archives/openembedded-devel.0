@@ -1,141 +1,196 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <rasmus.villemoes@prevas.dk>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 246CAC02198
-	for <webhook@archiver.kernel.org>; Fri, 14 Feb 2025 08:49:38 +0000 (UTC)
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web10.17038.1739522964410046089
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F81BC02198
+	for <webhook@archiver.kernel.org>; Fri, 14 Feb 2025 08:52:08 +0000 (UTC)
+Received: from EUR03-AM7-obe.outbound.protection.outlook.com (EUR03-AM7-obe.outbound.protection.outlook.com [40.107.105.51])
+ by mx.groups.io with SMTP id smtpd.web10.17062.1739523125471391807
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Feb 2025 00:49:24 -0800
+ Fri, 14 Feb 2025 00:52:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=b86L8tEv;
- spf=pass (domain: mvista.com, ip: 209.85.214.178, mailfrom: vanusuri@mvista.com)
-Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-21f61b01630so46345765ad.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Feb 2025 00:49:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1739522963; x=1740127763; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=W5AX7GYbcuSERlFdWDLK1wkUkwyQ/vm0hghwNNDsGjQ=;
-        b=b86L8tEvzZuJM9Xq7ZvbgxQmlWti2UY7NChMy9UrFOVIja6EdyhC7PzQppn3HvmNPQ
-         NyLpt8ed4RyGLBQ1iOzWkZtNFtSNklRSbpYLlT4ZsSqd6oE+mi5PNfTFScnDT1SYpc5u
-         3KMOUmFnTCeySM2InpkNk0zCpUUKNWD8oFk/c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739522963; x=1740127763;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=W5AX7GYbcuSERlFdWDLK1wkUkwyQ/vm0hghwNNDsGjQ=;
-        b=jkGYO8BA9fP/3wGKigHh0yNjQIuLeH1gUFevr151n27C39RpSsb0ZIgPs+bp67U1uf
-         p2dCHfxLC6d7+0Y9+LypKOA7U+fKupDPAX8UxK4A2suEW5z3aMQjy3O5VIjBnY9h2cbJ
-         lHmTJbnwmg2wVDPMStSt3aHm10Jf/zK4KnakD/H0+oK5CXJr2lFRW50jHvzsoMoi9ybe
-         yPsCJtOcJn+WQhcYDLSUHkA4DgmRmSGw6Weopx6LCZ48av58Bz0OK0fAEfLVZbsAeohc
-         ep49xp+2YFml8l25wlhfqy8QPR1SeVgBy5vEqU34dQMBbCd6EfTc+rgZ/5z+0eGUaBK5
-         Nbmg==
-X-Gm-Message-State: AOJu0YzgpIsBG4t9nVS/L5lNf7JVCGImqkfBLpk13eAzBVp2lvOh4fxt
-	9KKxpnOQ87b+ZiXO/wk+eHBX+AHkCz3NSW0c9+MqsFnS1EbBI05i7xXbqg8d5KbP66Mqn2pASDs
-	tC14=
-X-Gm-Gg: ASbGncvfrFRJuY0GlXRmh4voE7aBFr5UvKQ0gvuNLMXAcOQ1rTaU21F6F3VrXw7EDnx
-	ykjAskjriznWqY2MZknKuF91g6JhPG+v5wB7y5yJDrIiCPg7mHnGJ4WQLQuLZokg5v5f6tB3t1A
-	re8zIO9ly0zMwv1QRAoVH51VaCE0c2pcF/syb+yoh/MXg2GVeagJKELxejo9NyUCnQRGHFHyewV
-	u3e8aVa8dF7M12lG29idFPaJFzr3+e4YxeJICzH+E+/4d4NKlooaulu8vaWlPAB8E0ZfO7ELxGY
-	Q3M5ynYVO2h3HL06t14DYvJ6XCYgcQ==
-X-Google-Smtp-Source: AGHT+IElTN4caVHrNCzjDNYcVAMABPHSNvI580WEvkolxL89m3vBcvVHPVwTHyqybuM/eaOGyqyGhw==
-X-Received: by 2002:a05:6a00:6187:b0:727:39a4:30cc with SMTP id d2e1a72fcca58-7323c45a4f4mr8288360b3a.1.1739522962508;
-        Fri, 14 Feb 2025 00:49:22 -0800 (PST)
-Received: from MVIN00020.mvista.com ([2401:4900:882c:7b82:62b9:1b34:c9f8:f260])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7324275bbb0sm2610719b3a.121.2025.02.14.00.49.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Feb 2025 00:49:21 -0800 (PST)
-From: vanusuri@mvista.com
+ dkim=fail reason="dkim: body hash did not verify" header.i=@prevas.dk header.s=selector1 header.b=Emvdo3Mj;
+ spf=pass (domain: prevas.dk, ip: 40.107.105.51, mailfrom: rasmus.villemoes@prevas.dk)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Gwqepn0UeavnQ0w/uTUcapk1f6AF/OelBeSd4zgRB5JhR+3pc8G4KlPgMDkpBAIe9j00YrDZnj5rNhRURBxqM8M0AF/Ad90vWjzMgUUaehr0EzlEu33yX69BH1NkUCk9Hx+LBImGDLvwcpLmZu4QI0Q2ZJUGeePp5UnGHjdU8a3DAhy7Pq6hNo5MGMXZu+2GHxtoO9RjlZQTCURCF4J1h/2HZkPIBqk6GXL/f/WBo/dtZrLua+PPWZLIaRhRH5pNdJmnbTdcZBDhAC5sIW39AGBeQNms8bfpV00ak5fWRJFWnLlpHX90fRw/Cxj1O6ICEB7wt9IpdEKOKEVFWsKGKw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PZbkmF+EODv8RjkcoPWij15X3RQa71VGEtsoCAetjWg=;
+ b=BA1+Sdf8muKQ8aUDaZ+uk7bvVdYQSpGIV5Vh6J1fw8WmRDivyoX0gNHpgXZ5ZBJh60JVlPnHFNAHf3HdhD5hd9FswTlr6HmM6Z9oXT/+Cx2DE0lw8di1CsNqRCFalMeYQ2APQHpCYKaBb1l74l4Ci5FZIes3PJTiltC42Cr4E1MkWDIkgjuDr8W1HNIaHQJdT06ViNXexsw+OPaYubJ3xSV4RWe2TCRBHiSKdYLfxcitXy5OUIu8rHHlNUR/WwW2KSUQj9NfsegqRRiXqQ2v9K9NWb97aCQtI8SbX/niExpDZCdGC4y+PeXMVm/u9S3CMWMb0w5AYjXdhdxgwjWeBQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PZbkmF+EODv8RjkcoPWij15X3RQa71VGEtsoCAetjWg=;
+ b=Emvdo3MjsGbn5Y1Iqw7lf5me/0hGFvzy5IFlgWpBLXXnZFPUOAJHKTO4ty8VGKW5TSTPzgZZ80qvErQHdTHZ/BUp/acZi/s2lzkeC8+dshsJWBVysl7tGly/IEqQTYu1zkdiP+ecpY4Dv3vLu/X66qb4cBOcduOGabdCHHajkIA=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:41::17)
+ by PAVPR10MB7540.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:2f7::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.10; Fri, 14 Feb
+ 2025 08:51:57 +0000
+Received: from DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::7e2c:5309:f792:ded4]) by DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::7e2c:5309:f792:ded4%5]) with mapi id 15.20.8466.008; Fri, 14 Feb 2025
+ 08:51:56 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
 To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-oe][kirkstone][PATCH RESEND] openjpeg: upgrade 2.5.0 -> 2.5.3
-Date: Fri, 14 Feb 2025 14:19:05 +0530
-Message-Id: <20250214084905.19009-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.25.1
+CC: Khem Raj <raj.khem@gmail.com>,
+	Rasmus Villemoes <ravi@prevas.dk>
+Subject: [meta-oe][PATCH v3] systemd-netlogd: new recipe
+Date: Fri, 14 Feb 2025 09:51:52 +0100
+Message-ID: <20250214085152.1273827-1-ravi@prevas.dk>
+X-Mailer: git-send-email 2.48.1
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-ClientProxiedBy: MM0P280CA0068.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:8::35) To DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:41::17)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB7PR10MB2475:EE_|PAVPR10MB7540:EE_
+X-MS-Office365-Filtering-Correlation-Id: d8725499-985f-411d-ff72-08dd4cd4d632
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|366016|376014|52116014|1800799024|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?gOekZk8Sqh5j7/34eNc7B6pBV6krIldp/RJzD6IK16tPRfATEZMjhFheUlH2?=
+ =?us-ascii?Q?MTQEpGd/rlBP+8hp8fwwKaKLoeziJhMayWB23pA10IPra8iGrhhwnPZcmZhV?=
+ =?us-ascii?Q?9QDZd7afaXBgV16J/fnYzIytENmkzK5iR1WhxL1Mf0QYWTxo/xD6bkZ+60Y8?=
+ =?us-ascii?Q?wsHjUAHKTQJ5N/6ht+VII8CBI4OhQWUbIYzLX1do9JHjJ2SqnPFFO+Z+xkXa?=
+ =?us-ascii?Q?WZoTY1W64lMBJZGAr//p7/Vo7lG3ub00CzMldafzGks09TywsXR4jo7W54lX?=
+ =?us-ascii?Q?s/KChhnXPodSKEZgWDUPa3Mx2MEp2m6ieH6d5TQxN3550rdNDzRw040z5MPx?=
+ =?us-ascii?Q?JCwTrLSj1LUY7kqb5alvC2h79Dkt/rH0jF016kU1fbktUH8wOxEruqE3l99g?=
+ =?us-ascii?Q?ZMUcbMq4DHz5aC55d9Hi8ByA+YpqxEXvjYtLMDO/qan7CGaZjwcFfa4LMykc?=
+ =?us-ascii?Q?Jl8uURCVKN0WqNtog+PqkUxVbN4GouYM2xg9BUNHUIRzn4sFf2zZ8pzDQyqW?=
+ =?us-ascii?Q?PYaTjHASeZIDrJDqcoSDp6TNdxwlHCEw2jIoJN25UwPt5NRDDgvzoxq2egkc?=
+ =?us-ascii?Q?8eYUueTBluqh/0Ucnsoh9PmS25AYuWngletokY2zdbxCqreSa3ucKRH4maFc?=
+ =?us-ascii?Q?+g68sTzHyvJJub6V79L5pZySwd0y2EnErJXu8jOs/RHlTuwG4XEVGU9TD+ik?=
+ =?us-ascii?Q?aToeM5865SnBeivRU07dPRUJP6pOiuH2cfxS2SwkKwoM0+PtgG/rA89AXQ/I?=
+ =?us-ascii?Q?Qgp9whpKeob2ytKxzrjR/rvcFAttoC+AIKXdbhc6S2sLTeB+F4l+tfcO2G1J?=
+ =?us-ascii?Q?s/AtdOvASQYuVnpu+5tHppyn3UGTAe4oVmls10K488fA7lOz2HSC13mxZ1Nd?=
+ =?us-ascii?Q?GN7h2lN6gdgGYRmgDc0vJg7SVZbO9BfopxgbJFf9PzPjGMr7nOY5965jFCHZ?=
+ =?us-ascii?Q?ME9URkTkJMU9+aipwD4LPXYNt7ja27fbssoEA+zR6l6pq7Uzb9qE85EB3iQf?=
+ =?us-ascii?Q?KqXEORgs2qZnPq2THqdGcJ/hlEZJFH/KwNbVMYtwEsDgz/n3fxDDvncPCq8d?=
+ =?us-ascii?Q?JbWbEQLNVc2/fbSxkCDzY0PtWvItx5tfdAL7MjEkIRrf1nSvXgVTcSbXHG+J?=
+ =?us-ascii?Q?ISgLRs+CMOljg/KoGAg3PQJbnM4nCgp312sQBQw5nUs5tGdgrLNjXHYkWhdL?=
+ =?us-ascii?Q?wR/pj00x3D9WoxiKu1lDzGEBQoRqzvAHHIYCkBEjB0SJ1tU4ARAprs7scNjj?=
+ =?us-ascii?Q?EopmJzhja+AtAXt2GpTKwr1ls/909TFz9yhZyhiCO3Z64PCP2/3knOtLpG9V?=
+ =?us-ascii?Q?8k4GENaOK6T1pfNgfBoCOL1xymmdnRlfmUOXIQ1jYr5eT8eASMXcIyBFhy6v?=
+ =?us-ascii?Q?bdbOvQEuX4qVA3w19oLbB4+lbjASg01zMziB9/e25WkdR+XvDINqJatVvyv9?=
+ =?us-ascii?Q?RyBhJrdYSh0/zLfrml45eGyIIfpsuTB9?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(52116014)(1800799024)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?LOORcoq0eO+wkNFHMOiP5hMvtRq+MEZpjqbJk4MRGsU4E5SpCk2huLP1jWnu?=
+ =?us-ascii?Q?C0i+4Nt2jEmybWmjh8otk6NRi3rY88IZFxmSuD+sHU1qTwK0cUvUip7WGvNG?=
+ =?us-ascii?Q?nCqMit/r33OWzE/8VP+hL/8HAW3Kz5TlRlnQEIqyY0H0x5heZeTBN7M0HwWe?=
+ =?us-ascii?Q?Vb29uK4NDA0lcV+aUG74M1OIHKd5K8JTR1HxLphrcy1axLFFTDPggQHBPCuv?=
+ =?us-ascii?Q?886fxJ8V0UOsgkXe8Ul2jF0mD5toaWcPshHvVuZRjWmFcK9+MHMSnVGEN3sz?=
+ =?us-ascii?Q?PHo784WVxSWmRgHtCKVjK+o+i6Q0G3NJ8wXvQRz+lizHYpEYgkYR0kk7ISaM?=
+ =?us-ascii?Q?7oZqbOjSlWLQWTGY09VkxLkSi7ir/rv8iUMAwRtTbjQM0y5ok9DpE3o6TKgO?=
+ =?us-ascii?Q?shE77/tFCh9AjENWVVzlEYlxKLBwXflYJwRChW4KoW1AiEj1V7ZXIYTHtHUF?=
+ =?us-ascii?Q?YSqyUhY9CZZtRBv3nd5QniF0BBaZx+eQM/ToTu35MM0verr80VqSavoDzgnk?=
+ =?us-ascii?Q?MGwaoVUzFMwxewa1kA2RMOokm4lInFarS8dgqSdjX9Beno7ge92rNV82I8Yv?=
+ =?us-ascii?Q?QqLLpEkXSRWE/7jo8+dwhVhLFYiEX/eCmo8jC6MXpzF4QqiRk9Wqg0aktA5m?=
+ =?us-ascii?Q?8Xwy7kJA2TZ7KXP6C46fFagAkkpwmQVspB9U2KqChReisCGepev/xWo5gRFs?=
+ =?us-ascii?Q?SO5S8KI65o3EsXBWOVs+EEiroYzB3qmmIMI53Z9iSZ0tbROLDhG8WvanYfUy?=
+ =?us-ascii?Q?OrmJzl5zQQDtdQdKgtp6VAAYLfXW0n4GhLvMa28S0MFCkUUu89uV/qHZQQiI?=
+ =?us-ascii?Q?bvWECd4TU3ok8CyaUxLnNr9IjKGB6vzDIMAMocH+fy1q0v1QWTqBCv8Y+aSx?=
+ =?us-ascii?Q?ZTeYcRkxJc3WbX7tRgcrWvwlZWPF1Qt2LSzHfvTc6zMxTqcmWZamMqWTlb6V?=
+ =?us-ascii?Q?7ppOjXr3CgfEIF2tvBjq6SjxnH2DSYIb3KR/eJnQ+Emp0a+ouOO/lrmrQdvS?=
+ =?us-ascii?Q?mMM608lqjlEnLKPGq4F4f5ALyfo1AS9WmyCI0w+haUZLz/vyPpZTqrk7fSDb?=
+ =?us-ascii?Q?AfgtS2ENwiDVv1U0Am/h5WwVMkaW61fvSxSnRNJF7RTBuINfQAPv/0iJHzMW?=
+ =?us-ascii?Q?l82UCNttBKZNco8SZ8S41zYFGIb36Bz5gl4Pav+aiiVfFSR133Gwctmn4WTX?=
+ =?us-ascii?Q?l5q5aG+ZB+/erRZesQKga/pwF4qq0UgYf/Wjk9StWn7Pspc/bSuFFq+mfe/v?=
+ =?us-ascii?Q?VdasU2YylxeTGWypKFoOerZC2/nU9j1Z+hiKZtoQB6mD7MUipqcXuEf+QBkE?=
+ =?us-ascii?Q?lP1njJeD9o8x4vMSmnJPGX6K1lB9k8U1UuFdaq/8VeG2C7YxXZcax86TgNFZ?=
+ =?us-ascii?Q?RqamZfy7IY3Y3AW4whpqKSOfiw2boc7X9KEB5EvzNClwZGB6tSeshpXHsS8L?=
+ =?us-ascii?Q?ojxbzl9Zr0wYnly8KXGtgJavjaVByAjSlFaeq4820Otamxe8QYaI5C08rXzZ?=
+ =?us-ascii?Q?bnmr3Fa/7GH+j6AdEnw+JT0NrXwalXP2DHLzHIqSY3L5yNJf/Ok8JynMkFur?=
+ =?us-ascii?Q?dlQQdAxgkNAkrRoFalXTH8AfRRhgaKiWEI4JiJ5Z4KfDVCa9yCAR5UTkv88V?=
+ =?us-ascii?Q?tA=3D=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: d8725499-985f-411d-ff72-08dd4cd4d632
+X-MS-Exchange-CrossTenant-AuthSource: DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Feb 2025 08:51:56.8451
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ivzC0meJ2EicIJM5V/cTE2wmQsrr9BdoPI9R+4+RdLb2m4iT6hDUNqkVO/vKb9lwYq4KrK6Nr25MLQhPp/3YprGvjME4mQv7DkLe9C7HOK4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR10MB7540
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Feb 2025 08:49:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115481
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Feb 2025 08:52:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115482
 
-From: Vijay Anusuri <vanusuri@mvista.com>
+From: Rasmus Villemoes <ravi@prevas.dk>
 
-Includes fix for CVE-2024-56826 and CVE-2024-56827
+In some deployments, the log aggregator collects log messages in the
+syslog format, so systemd-journal-upload and friends can not be
+used.
 
-ChangeLog:
-https://github.com/uclouvain/openjpeg/blob/v2.5.3/NEWS.md
+systemd-netlogd is a daemon for filling that gap.
 
-* Refresh 0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch
-
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 ---
- ...sk-cmake-to-export-binaries-they-don-t-make-.patch} | 10 +++++-----
- .../openjpeg/{openjpeg_2.5.0.bb => openjpeg_2.5.3.bb}  |  4 ++--
- 2 files changed, 7 insertions(+), 7 deletions(-)
- rename meta-oe/recipes-graphics/openjpeg/openjpeg/{0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch => 0001-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch} (75%)
- rename meta-oe/recipes-graphics/openjpeg/{openjpeg_2.5.0.bb => openjpeg_2.5.3.bb} (82%)
+v2: add systemd as required distro feature
+v3: also inherit the features_check class to make that have effect
 
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch
-similarity index 75%
-rename from meta-oe/recipes-graphics/openjpeg/openjpeg/0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch
-rename to meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch
-index 0ba13cf88..2e25ecc7e 100644
---- a/meta-oe/recipes-graphics/openjpeg/openjpeg/0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch
-@@ -1,4 +1,4 @@
--From 4681de07e21f17aa28710d3a51fabe7da60463f9 Mon Sep 17 00:00:00 2001
-+From 805ce4d40c5aaae12aa73452ff07babe8eb43a62 Mon Sep 17 00:00:00 2001
- From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
- Date: Fri, 28 Sep 2018 00:38:50 +0200
- Subject: [PATCH] Do not ask cmake to export binaries - they don't make it
-@@ -15,17 +15,17 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-  1 file changed, 1 deletion(-)
- 
- diff --git a/src/bin/jp2/CMakeLists.txt b/src/bin/jp2/CMakeLists.txt
--index 4324c36d..2c11fe02 100644
-+index 26156bcb..9eff04aa 100644
- --- a/src/bin/jp2/CMakeLists.txt
- +++ b/src/bin/jp2/CMakeLists.txt
--@@ -66,7 +66,6 @@ foreach(exe opj_decompress opj_compress opj_dump)
-+@@ -64,7 +64,6 @@ foreach(exe opj_decompress opj_compress opj_dump)
-    endif()
-    # Install exe
-    install(TARGETS ${exe}
- -    EXPORT OpenJPEGTargets
--     DESTINATION ${OPENJPEG_INSTALL_BIN_DIR} COMPONENT Applications
-+     DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT Applications
-    )
-    if(OPJ_USE_DSYMUTIL)
- -- 
--2.14.4
-+2.25.1
- 
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.0.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.3.bb
-similarity index 82%
-rename from meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.0.bb
-rename to meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.3.bb
-index f2d74078e..231bf8457 100644
---- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.0.bb
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.3.bb
-@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c648878b4840d7babaade1303e7f108c"
- DEPENDS = "libpng tiff lcms zlib"
- 
- SRC_URI = "git://github.com/uclouvain/openjpeg.git;branch=master;protocol=https \
--           file://0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
-+           file://0001-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
-            "
--SRCREV = "a5891555eb49ed7cc26b2901ea680acda136d811"
-+SRCREV = "210a8a5690d0da66f02d49420d7176a21ef409dc"
- S = "${WORKDIR}/git"
- 
- inherit cmake
--- 
-2.25.1
+ .../systemd-netlogd/systemd-netlogd_1.4.4.bb  | 27 +++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 meta-oe/recipes-support/systemd-netlogd/systemd-netlogd=
+_1.4.4.bb
+
+diff --git a/meta-oe/recipes-support/systemd-netlogd/systemd-netlogd_1.4.4.=
+bb b/meta-oe/recipes-support/systemd-netlogd/systemd-netlogd_1.4.4.bb
+new file mode 100644
+index 0000000000..f95cfdb418
+--- /dev/null
++++ b/meta-oe/recipes-support/systemd-netlogd/systemd-netlogd_1.4.4.bb
+@@ -0,0 +1,27 @@
++SUMMARY =3D "Forwards messages from the journal to other hosts over the ne=
+twork using the Syslog Protocol"
++
++LICENSE =3D "LGPL-2.1-or-later"
++LIC_FILES_CHKSUM =3D "file://LICENSE.LGPL2.1;md5=3D4fbd65380cdd25595107900=
+8b364516c"
++
++SRC_URI =3D "git://github.com/systemd/systemd-netlogd.git;protocol=3Dhttps=
+;branch=3Dmain"
++SRCREV =3D "b03cc3b1a75048c7cf19467d8918a4b7320767e6"
++
++inherit meson systemd pkgconfig useradd features_check
++
++REQUIRED_DISTRO_FEATURES =3D "systemd"
++
++S =3D "${WORKDIR}/git"
++
++DEPENDS +=3D "systemd"
++DEPENDS +=3D "openssl"
++DEPENDS +=3D "gperf-native"
++DEPENDS +=3D "python3-sphinx-native"
++
++# systemd-netlogd uses prefix and sysconfdir in a weird way.
++EXTRA_OEMESON +=3D "--prefix ${libdir}/systemd --sysconfdir ${sysconfdir}/=
+systemd"
++
++FILES:${PN} +=3D "${libdir}"
++
++USERADD_PACKAGES =3D "${PN}"
++GROUPADD_PARAM:${PN} =3D "-r systemd-journal"
++USERADD_PARAM:${PN} =3D "--system -d / -M --shell /sbin/nologin -g systemd=
+-journal systemd-journal-netlog"
+--=20
+2.48.1
 
 
