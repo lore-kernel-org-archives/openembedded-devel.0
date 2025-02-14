@@ -2,114 +2,97 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 56BF4C021A7
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 55917C021A4
 	for <webhook@archiver.kernel.org>; Fri, 14 Feb 2025 16:18:30 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.web11.24848.1739549900003599989
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.web10.24901.1739549901502462037
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Feb 2025 08:18:20 -0800
+ Fri, 14 Feb 2025 08:18:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=a0kyA5mk;
- spf=pass (domain: konsulko.com, ip: 209.85.221.47, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-38f24fc466aso1562956f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Feb 2025 08:18:19 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=Bgxrsi7f;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.44, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-38dd93a6f0aso1854562f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Feb 2025 08:18:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1739549898; x=1740154698; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=uT188DMGi1iVMza5mnZjVn+sWqIPAJSiTeefF2qyDo0=;
-        b=a0kyA5mk6QxLEFVzWaJk2OZDzDm2R6dNtnnXBnN+zqKC62CW1qUzKj4fVN9kcmy2Ij
-         TQDtNmufuWiYv/1LtE/Utyb5V+F+stpZatkv6HHO2/EnaaHyEuHg/EnfZbp/aFjT+nD9
-         fdMskmqPBIKz7bDGGgM1XHt9C6+XQLigzokcA=
+        d=konsulko.com; s=google; t=1739549900; x=1740154700; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=dA+kYZdztZbNy1pO1cnq8EYQqemeWnOabGC+9wLndvQ=;
+        b=Bgxrsi7fRCpMavsSMxqJZsnJ8vOUqFpYuagmpJn84cC9zSdNF+lTc6toSnOWOaIEn3
+         SpFCfJtmwTm9hzmrqOCGiUnGJAnxEKiYbrJLSrnE5sQ/eGVCfN6IHn00dJSrfsUyAKxB
+         mqXB9LZgv46xIK/fykwauDkM5Tfx1qHWewwlU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739549898; x=1740154698;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=uT188DMGi1iVMza5mnZjVn+sWqIPAJSiTeefF2qyDo0=;
-        b=IruVub2pWuKHFgW8KyPhKX4dX/8JKVrNoDL+0FkSQnAct7SyzG+Fbe07kCqowowb0N
-         /4Fnzt/pAKxGLjSSlKPMCSa7+gsCWyu9U7ZFyA6A/KYktosRTPEobAB228nkO5L8EE4V
-         VnrppikbU7g02gMTxgD0eDXYpWw5HTN7p+rVbiCelJlrEO9V6kswJl0Dn1m5Rzzw0mCl
-         cuGObpVnNYbLFHr1Jghlg/qF75y9AcSF9zJCXo5F2DPTbkj4nfedgy7gE5SjRDIukx+j
-         pKounr5mqC+3odtO0a/07cTPOnQ6wooDpZA8ixI8ctmUtg5cCbgoI5s8SbGgYkcXfOyb
-         Bb4g==
-X-Gm-Message-State: AOJu0Yz2ZnZ6ldQd3PkY6550JSma53oBqo22v0Gbey3CvfinNoTC6cCH
-	tXvQQ48BLR7pZ5Yqyu3ev0ONG+/LW81KbxcnTEvtSOy0o6YqHi5EJNycx7wIOTvjugsXcaS1bmv
-	R
-X-Gm-Gg: ASbGncuMsWyAmcOMQZA5jQ9ocjYG/UeTQxD3QVpjTPcIOc3NbWYS7kmSqEzARgpsEvS
-	+qsEhgLX1vgGWzkCboTRP+eUihOQrVmSa/6i1lawxAWvsuMvarGwgchZedmw8WYs/koGX+PzGY/
-	SShqHyUbJjmU0bWcCP9mUYZiubExjDS+ACXYoQE7047z3Xzo35Hrb1LTvTBZvTuxx2yYap3zKiS
-	ugl1HUKsuATAwkAUxTyCB5OcIQEzetukO9WwmQGM4QAsPnDv3x2+0WRPzqsibaxyeugXFqeX95q
-	DAx9cGexjoBsHN+nieZYvFk9zPNlBA==
-X-Google-Smtp-Source: AGHT+IGEJmEd+qKJdN/dlr2XyARSgGR7UFQgxR8U2rABXv4hPqUqC2beXaOxHgXLxFEAyIF4ObSwag==
-X-Received: by 2002:a5d:6dd0:0:b0:38d:e304:7470 with SMTP id ffacd0b85a97d-38dea28e862mr11511438f8f.25.1739549898013;
-        Fri, 14 Feb 2025 08:18:18 -0800 (PST)
+        d=1e100.net; s=20230601; t=1739549900; x=1740154700;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=dA+kYZdztZbNy1pO1cnq8EYQqemeWnOabGC+9wLndvQ=;
+        b=kGMWtUur6Ng5tAlsmzrUZZx5gF9LB7jML1/kCFJVeNiV5Pd9BeTaCc789KcS2f4Q3j
+         QK/D5kzX9/pvvyU88GkHfqB8y5IC9g1efhJsXwleY8hfnX+SrQy4D2tOV0BSI558j5Tu
+         FZLf4xKIKA9FyqA82cJoNzTyTmv0w7Sg6Zdeiwn+83pgQicRggVZKd0nQFI/I6X7Emq/
+         8/mXn7IRtk4NrGxe3xMuW2ioJS5viNWGhI7+gTaZcSEVlIKgjafDSwZFtnDdkTgklosI
+         p3vqj5/Qxtf0nXEUwgCdZRlTfnZINgEQ6azWqz1tXn/w/hGort5ajlNj4CGgvxGaZoRe
+         xiYg==
+X-Gm-Message-State: AOJu0YxSRmMJ6ZG5JuOtM6AUoutMVhm+6JbBrJa3djKttBIDGr0D2gMX
+	FTAowbkHmGSvjHyDsKHbiUUv42TVIM03ZxQxf94/En5PchGQ0qRaTGnlAnpWQl299RgAV1wv0aG
+	B
+X-Gm-Gg: ASbGncuKLOAu5v1cbBjBXrK9ldRnDlE03ri6ijgv7S3jQ2uMy2FgkQrSAzRxUdBr2pF
+	iPOVZjorJK4s34wfK7O2X4kfcucRyDf/cKdb8Efpft24bsIt44wf5SjxwBt8HItxXJOjaWvvtNh
+	6iuhGlvEr0QO8erA7wwn+Rur3iYhlarjuiW7mcaROtcgQUJizNokbog1e7zW8A0SFUF3CKsd+j3
+	MP/Pe6nnTrIe4D30o/dILgyQBu6IUcSffpEyKeH/XdTedZSFIhADmZsqohM20EnOtRA5rL+q2FK
+	rXG3x63WHwnKAszzTtjxxP3m4N5nuA==
+X-Google-Smtp-Source: AGHT+IHF/0b47UJIn2SOuFDiZjbsaJYUPcGiLAboyc0NwePFF2riLNIVMvNNJPhgSUeqT8Ddi1KZRA==
+X-Received: by 2002:a05:6000:1f82:b0:38f:2766:759f with SMTP id ffacd0b85a97d-38f27667d4emr10300005f8f.41.1739549899758;
+        Fri, 14 Feb 2025 08:18:19 -0800 (PST)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38f258f5fb6sm4915287f8f.44.2025.02.14.08.18.17
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38f258f5fb6sm4915287f8f.44.2025.02.14.08.18.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Feb 2025 08:18:17 -0800 (PST)
+        Fri, 14 Feb 2025 08:18:19 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/3] python3-trio: Upgrade 0.28.0 -> 0.29.0
-Date: Fri, 14 Feb 2025 18:18:13 +0200
-Message-Id: <20250214161815.3120205-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-requests-futures: Upgrade 1.0.1 -> 1.0.2
+Date: Fri, 14 Feb 2025 18:18:15 +0200
+Message-Id: <20250214161815.3120205-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250214161815.3120205-1-leon.anavi@konsulko.com>
+References: <20250214161815.3120205-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Feb 2025 16:18:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115486
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115488
 
-Upgrade to release 0.29.0:
+Upgrade to release 1.0.2:
 
-- Add trio.lowlevel.in_trio_run() and trio.lowlevel.in_trio_task()
-  and document the semantics (and differences) thereof. See the
-  documentation.
-- If trio.testing.RaisesGroup does not get the expected exceptions
-  it now raises an AssertionError with a helpful message, instead
-  of letting the raised exception/group fall through. The raised
-  exception is available in the __context__ of the AssertionError
-  and can be seen in the traceback.
-- Clear Trio's cache of worker threads upon os.fork.
-- Stop using ctypes to mutate tracebacks for
-  strict_exception_groups=False's exception collapsing.
-- Fixed spelling error in Windows error code enum for
-  ERROR_INVALID_PARAMETER.
-- Publicly re-export __version__ for type checking purposes.
-- The typing of trio.abc.HostnameResolver.getaddrinfo() has been
-  corrected to match that of the stdlib socket.getaddrinfo, which
-  was updated in mypy 1.15 (via a typeshed update) to include the
-  possibility of tuple[int, bytes] for the sockaddr field of the
-  result. This happens in situations where Python was compiled with
-  --disable-ipv6.
-- Additionally, the static typing of trio.to_thread.run_sync(),
-  trio.from_thread.run() and trio.from_thread.run_sync() has been
-  improved and should reflect the underlying function being run.
+- Correct setup.py email addr
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-trio_0.28.0.bb => python3-trio_0.29.0.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-trio_0.28.0.bb => python3-trio_0.29.0.bb} (86%)
+ ...sts-futures_1.0.1.bb => python3-requests-futures_1.0.2.bb} | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-requests-futures_1.0.1.bb => python3-requests-futures_1.0.2.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-trio_0.28.0.bb b/meta-python/recipes-devtools/python/python3-trio_0.29.0.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-trio_0.28.0.bb
-rename to meta-python/recipes-devtools/python/python3-trio_0.29.0.bb
-index 04458b766c..35fd05a199 100644
---- a/meta-python/recipes-devtools/python/python3-trio_0.28.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-trio_0.29.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=447ea202d14d2aee40d8a2c26c865da9 \
-                     file://LICENSE.APACHE2;md5=3b83ef96387f14655fc854ddc3c6bd57 \
-                     file://LICENSE.MIT;md5=5f229c828e5a6f0a2ce90c7d3c054721"
+diff --git a/meta-python/recipes-devtools/python/python3-requests-futures_1.0.1.bb b/meta-python/recipes-devtools/python/python3-requests-futures_1.0.2.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-requests-futures_1.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-requests-futures_1.0.2.bb
+index 28f034f7e3..5714c3498d 100644
+--- a/meta-python/recipes-devtools/python/python3-requests-futures_1.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-requests-futures_1.0.2.bb
+@@ -3,7 +3,9 @@ HOMEPAGE = "https://github.com/ross/requests-futures"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e1e50798d0afe0e1f87594c6619a2fa5"
  
--SRC_URI[sha256sum] = "4e547896fe9e8a5658e54e4c7c5fa1db748cbbbaa7c965e7d40505b928c73c05"
-+SRC_URI[sha256sum] = "ea0d3967159fc130acb6939a0be0e558e364fee26b5deeecc893a6b08c361bdf"
+-SRC_URI[sha256sum] = "f55a4ef80070e2858e7d1e73123d2bfaeaf25b93fd34384d8ddf148e2b676373"
++SRC_URI[sha256sum] = "6b7eb57940336e800faebc3dab506360edec9478f7b22dc570858ad3aa7458da"
++
++PYPI_PACKAGE = "requests_futures"
  
- inherit pypi python_setuptools_build_meta
+ inherit pypi setuptools3
  
 -- 
 2.39.5
