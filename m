@@ -1,104 +1,91 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 54852C02198
-	for <webhook@archiver.kernel.org>; Fri, 14 Feb 2025 16:18:30 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.web10.24900.1739549900754552666
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76014C02198
+	for <webhook@archiver.kernel.org>; Fri, 14 Feb 2025 16:47:00 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.web10.25675.1739551618256976374
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Feb 2025 08:18:21 -0800
+ Fri, 14 Feb 2025 08:46:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=hk5pM3A+;
- spf=pass (domain: konsulko.com, ip: 209.85.221.49, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-38dd9b3419cso1199920f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Feb 2025 08:18:20 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=HaCuhT6t;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-43963935585so21134995e9.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Feb 2025 08:46:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1739549899; x=1740154699; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=RH5UB37F+qrqkPEPrBvRX9EsUpVzkvEWUArayQTAMuw=;
-        b=hk5pM3A+p6R/2mfanswj1zPdDPqZf2Z++rNaAwrenfF+Ol71FjdfJbJ0yqafoC9d1R
-         hPuQzTYBX8s3hyNrPz+Fx5KGpRKT9zQCR3LT4UaCukP9FNoGNPe2AfVzDhqPFvVkQZ1H
-         5/BHzPgU1fcghIEulStxd+MgfSRHE0Qk4sdAI=
+        d=gmail.com; s=20230601; t=1739551617; x=1740156417; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=8CTK4NsYJEcAnyL0OpqGv9PCS7x+Ud4b4mu0O8tHDOg=;
+        b=HaCuhT6t2VvuxhnrDrVVFmdGm001zjVQgEY4shhHzuh7T7nwIrlWI21Wl4fChz7zBI
+         bieU+oyEl98tkKrnpDOgDYOWZ+JuSQSEW9U6Ri4h8okxyjLp8WgUC8L8uRUmO7FLqcPv
+         8TqUOZACohOr3tgjO3zSYraJZl0db+7I03WD3Jo1f3/yca3sNGG7TV/O+bwh9b7LXs4A
+         Bx7WxK+kR/lqkvLOrhvOS95ieVY6cloEDj45tiVE8/M3JIPWu8HqDZtdPbzV2ZkGZgoN
+         VJEj+ETOi9lOAtCQz0mjRbdgEhTEZd2GnRXmeR+hjbnLWE9GvbEXXupDqxTVNrJzLNwC
+         J3bQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739549899; x=1740154699;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=RH5UB37F+qrqkPEPrBvRX9EsUpVzkvEWUArayQTAMuw=;
-        b=ZJmqakVFWWLYQacn7vBwxpQo4ppV05WuJ4lsPuMcNOM1RLcKE+w/RxkJu7sJfXBI/r
-         jjVTALhnqw6NN490tdioMXseOykq3JDEUXT+SOFziELXxQ/1VOS8BDzKevgrQ80tED3Z
-         wza6YHZRr+YfyazofrT5L9K88Bph7E7q6bOsdletf4s8BkUa+a6QmFApuCZDs5ZaaoWE
-         lvm0PPqYhmWp2dSpmZdqbxUzeFDCXYcBDuY5wwR2FynkM4J4Sqez3yWWeURIM8CbgP3m
-         C3oLyDPkL3xpUVEqS7E4rqboW9enROL0gRIc3ypS+8ymxHSO5CjZATFPxXlw70FjTIdD
-         AZEg==
-X-Gm-Message-State: AOJu0YzLmVDVAJPRCAxky/bdlYXNblEzhw/ZaRPiWtoGzh7/bJpFNzK8
-	QpHuODu8CPytC+PxC109WTlHoESQN5braMoYJw9EZEb7IbKdItEpWcmBOdHUFES6LUCfyocOttp
-	w
-X-Gm-Gg: ASbGnct5dWtVm5Pks9FmVSASXb7hHirdRVlCR3Ivu5gbNB6Z/j4CtHhTmh4shJIug4k
-	QpsM+eQ+ONDX41OoZjnL2X0afXvruR5EsoGTwn4Wq8OB6UVYlNypCRgXFAsYUU965QNin0abh5R
-	RJYYvMNViZ9pchbhVmehZ9egZrfMc01WYfU41eFRAZrPf9vAdATjKrIoXOsaozpQPBguBreylE6
-	lG7rFHdiM3s4NdHBPNu6ldauFbbEoPjlJiOKh8lDQI4Rb0ueEgYKlfIenXZrTqSbA/F/BK0mnow
-	IQzKcOMq3TMQ+dRClu3Hc2PN7obiJA==
-X-Google-Smtp-Source: AGHT+IGt6we20fFfmeW/qhfaCe7KdwFCPQLCV72XojAuCtG4ZRO0vnuYg4jEcVp0FKlfmQZu8AM8RA==
-X-Received: by 2002:a05:6000:8c:b0:38f:3311:ec49 with SMTP id ffacd0b85a97d-38f3311eed1mr492236f8f.50.1739549898921;
-        Fri, 14 Feb 2025 08:18:18 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38f258f5fb6sm4915287f8f.44.2025.02.14.08.18.18
+        d=1e100.net; s=20230601; t=1739551617; x=1740156417;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=8CTK4NsYJEcAnyL0OpqGv9PCS7x+Ud4b4mu0O8tHDOg=;
+        b=dj4tj0LsUXMqtLJfqINbv8nJyFLBNiOe12piTDTD7SET0crGTkDyne+0XJd902ukbV
+         fP/ET8y4tCu0TQYdUQxbROs06EZYgWRyBoMuf2I5ZF9Fj2cTbhTkpDdxoYtXcVq5JFc3
+         62Gt/ZqXh8bPDhl9p1ygTWWX2/KwXlSWUAO5Nh2HrwlOuNUWPMFncc9mvKRH8ZEjSTl9
+         xH8QweDwIYX7CWweKUNVqMzxgKJqLB6GCxUiOfP/HnktqtvsKeT3qQ3d6rLt6sjGZ4r/
+         vkOlili44QxqFBVTqjzFtM1AJtH50kZqxyc3SEgn0LMOo8Q6dvYy6NDmtf7XFIHV6b7B
+         xIMw==
+X-Gm-Message-State: AOJu0YxVDZa4Kh1BLarM7KldI4KOBGWUv8DZinnvBbXe5Lm953TEvtjU
+	cluaPh5HmQpt2VPqYG48mfKRWSWO8zFzkstj3HQKOUyjmJQ21aYqE/pXmQ==
+X-Gm-Gg: ASbGnctqWCyHkI1T+XxFwpEh9JBjHHdyyu3x0WGvjpvGxoQu33b/XfDS9kBk1gGOTHL
+	mJEG5VotV/bBOWYsNjT35s+SLidM3nV18TovscU1+C2D9+fyrIPfrrBl8o6S6wK11QV/1qpcUcw
+	BfV9BC+O/ufS5Fpbz790Mz7Oonu/5vOTRN+1o58cq+TuG5VCx/pjc3MVqVyVrTLRhvb8KAUgEIG
+	O6pNmmjHiIDutqp/gHR9qXyiQUPZM5txy9SxZHo74/HGxJfvHYMcA65qghzd5ijIu+pA24sAZoO
+	4Ynaasio4qKe42nH5HmpTutAYLE1xbI=
+X-Google-Smtp-Source: AGHT+IE54wdRZhwfXh7v2+008/oTNqkLFzQH9lf124frC9ayzDM3vBWp6JehEFn55oyX83AJ/N3Snw==
+X-Received: by 2002:a05:600c:3d99:b0:439:614b:1c15 with SMTP id 5b1f17b1804b1-439614b1f2emr99895535e9.13.1739551616243;
+        Fri, 14 Feb 2025 08:46:56 -0800 (PST)
+Received: from localhost.localdomain ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4395a04f8a2sm79518275e9.2.2025.02.14.08.46.55
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Feb 2025 08:18:18 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Fri, 14 Feb 2025 08:46:55 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-mypy: Upgrade 1.10.0 -> 1.15.0
-Date: Fri, 14 Feb 2025 18:18:14 +0200
-Message-Id: <20250214161815.3120205-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250214161815.3120205-1-leon.anavi@konsulko.com>
-References: <20250214161815.3120205-1-leon.anavi@konsulko.com>
+Subject: [meta-multimedia][PATCH] pipewire: remove WORKDIR from documentation
+Date: Fri, 14 Feb 2025 17:46:55 +0100
+Message-ID: <20250214164655.97821-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Feb 2025 16:18:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115487
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Feb 2025 16:47:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115489
 
-Upgrade to release 1.15.0:
+In case docs PACKAGECONFIG is enabled, do_package_qa task fails
+due to some of the generated html files are referencing the ${WORKDIR}.
 
-- Performance improvements
-- Mypyc accelerated Mypy Wheels for ARM Linux
-- Improvements to reachability analysis and partial type handling
-  in loops
-- Better discovery of configuration files
-- Better line numbers for decorators and slice expressions
-- Drop support for Python 3.8
+Delete it from these files.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../python/{python3-mypy_1.10.0.bb => python3-mypy_1.15.0.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-mypy_1.10.0.bb => python3-mypy_1.15.0.bb} (86%)
+ .../recipes-multimedia/pipewire/pipewire_1.2.7.bb           | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-mypy_1.10.0.bb b/meta-python/recipes-devtools/python/python3-mypy_1.15.0.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-mypy_1.10.0.bb
-rename to meta-python/recipes-devtools/python/python3-mypy_1.15.0.bb
-index 534ff90666..ebcac51ea1 100644
---- a/meta-python/recipes-devtools/python/python3-mypy_1.10.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-mypy_1.15.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8d62fd8f8648cb018e52857347e340b9"
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.7.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.7.bb
+index d2aede6d49..8c486b9c5e 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.7.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.7.bb
+@@ -391,3 +391,9 @@ FILES:gstreamer1.0-pipewire = " \
+ "
  
- inherit pypi python_setuptools_build_meta
- 
--SRC_URI[sha256sum] = "3d087fcbec056c4ee34974da493a826ce316947485cef3901f511848e687c131"
-+SRC_URI[sha256sum] = "404534629d51d3efea5c800ee7c42b72a6554d6c400e6a79eafe15d11341fd43"
- 
- BBCLASSEXTEND = "native"
- 
--- 
-2.39.5
-
+ BBCLASSEXTEND = "native nativesdk"
++
++do_install:append() {
++  if ls ${D}${datadir}/doc/pipewire/html/dir_*html; then
++    sed -i "s,${WORKDIR},,g" ${D}${datadir}/doc/pipewire/html/dir_*html
++  fi
++}
 
