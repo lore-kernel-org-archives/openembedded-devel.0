@@ -2,71 +2,67 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66D5FC02198
-	for <webhook@archiver.kernel.org>; Sun, 16 Feb 2025 14:02:13 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.web11.29091.1739714529590422141
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CB99C02198
+	for <webhook@archiver.kernel.org>; Sun, 16 Feb 2025 14:08:23 +0000 (UTC)
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.web11.29210.1739714895641710741
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 16 Feb 2025 06:02:09 -0800
+ Sun, 16 Feb 2025 06:08:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ciUOekQm;
- spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-38f325dd9e6so738881f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Feb 2025 06:02:09 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CaFkZ2GL;
+ spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-388cae9eb9fso1733609f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Feb 2025 06:08:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1739714528; x=1740319328; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=NKb6m7uYnHZ+N6feC1QUsUOPOAeru230h8ccb56bmvo=;
-        b=ciUOekQmtDzjDSl6/cEcs+YvIY05CgAXJOaYU56SmAhPt7wsA/wjQ9Ni5bvFJk6+pj
-         90BlSt+NHY/n81YhS6tegPdHF8Z1cEO+sp7H8qVDR730n80l0tqOx7maVp6FCXdXtrmk
-         CtPpBELgKhDRvVSKuHVbAAS+xtCWRxzLeqG1wX+e9mxyLJAz8mgeFHrS3cLg++otZUeu
-         5e1NctFl83+ldh0XBj5i4d3IbSV2GDwIwqxuJdSyiofApUREVtEasdSf2oROtuuj1aT5
-         WVdTN7g3ZNasOyf6wilpA9LbxMRx/9sI4FPnzWIKa0AgIyaCM1icbLGFMSxrnfOWyAi1
-         hI1Q==
+        d=gmail.com; s=20230601; t=1739714894; x=1740319694; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=KcjqAJQquGYAmkL8i6fHSDJBxaU2PUOZa1A4RLLWytU=;
+        b=CaFkZ2GLVGCTZwapFxkOB11qe2X03UAvKWSDhP3Gphh3JxVDLcnUD4piqtrL2aI1oe
+         dTBZ4WUVJcLiHfDoD8FR4MdyaFejsWwwaU1phIqnVb84sdOGhR1tFnJ1faKAb9c94VNr
+         N2p/qMoLN7HCGePkqzIG8wBmTxwMWKK2vfr1gocuAc2K/cTB7F85d6qoA5lAs7W3GHhz
+         dcA1GOHv89RBPUzmrA4I8FI/pMzGuBOOyDXuxnIqme1pLcrFWOMZGlt02aa833DsY/1k
+         75BrjAjYsLlUY0xyktf27Dt1CUvMovgyUr0Y2rUCeULjx1idU/OxEQSS7cmco87Z0lsK
+         pbpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739714528; x=1740319328;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=NKb6m7uYnHZ+N6feC1QUsUOPOAeru230h8ccb56bmvo=;
-        b=NOf0scczepoJ39dGFbBY0rzOMHnNcGf8NQ1cvINLnSRx+IjkQ2YkSLYQGBQebXceaw
-         yNeZBXvXn2exz0n6Ja7NKDc0rRj1VOxVhxuMG2ywzeTqy6P+gsudXbwmRhU5+ZdyfKsA
-         RwNnDzhj/2tiB11zXxpIl8B8hsreGq1eiM4/BzGVx4g4hV9I7Pqj1evHSIV26Wyujkzg
-         dGho2vA6cppTOslqeRnTWzh4X/9FR8/t766is2+4KSFvLfe1MQX0vF5GdByM8qMAHhZI
-         TYKGKreig1A0I7Zc5MeSOWFqDHJV7w/9+oO0aDL846K7wlc/93p1dE1dUbJ9YKWOrZ3K
-         ynEg==
-X-Gm-Message-State: AOJu0YyD/JS0eISdQ0AwJu7ica8SsYjGOMvWhNzS1fimKhzR15KWpogc
-	D8mKHb5Sr0kq82PNzXHwdVxcDWJoARePijXa2siFGqFRVxC8zXDHTP0Ipw==
-X-Gm-Gg: ASbGncvqKEQ1a16/Wp1Kwh3aqcH3Zup90FXIOWy2oux6v2m0wLQT1ZPnXQtS4xBj+qI
-	95sjvlnDpiDbkPM+0zIHKH9VAoU5OH3GahUE+xURYg0wr3qs+esXMah2+x+fOpZDINevQ3u3F56
-	XHhnemReRBxLlAgQS79gmLcYf1vXe2ZzkRz3iU2hMQlTYHi+BKpIZE8eQC5stz2pNuOSXF3m9JH
-	LNHoPdlDVTLb+6OukZzEhPNL7a8bNhR9iSTP5GiwZdHY41zJx80RO+PBD39+gRHVWp1weq2e3JW
-	FkvgMVskr/fb8qBjECxbThJ6DbIjpG0=
-X-Google-Smtp-Source: AGHT+IEM94+Yn6L9+/DnbYXafrqqAR9CzDhJGXsSAEIyOWP/Qvb6lBke/TMhgpP4RqOpZfM60s2hLw==
-X-Received: by 2002:a5d:5f47:0:b0:38f:3791:c1d3 with SMTP id ffacd0b85a97d-38f3791c27emr5448360f8f.54.1739714527456;
-        Sun, 16 Feb 2025 06:02:07 -0800 (PST)
+        d=1e100.net; s=20230601; t=1739714894; x=1740319694;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=KcjqAJQquGYAmkL8i6fHSDJBxaU2PUOZa1A4RLLWytU=;
+        b=X+YHrEA3mj4NHyVnFBnXdOJLkY3CFZ4yfNBVsgd4eASFBr2QP6MlyRzbrQAZuotnqz
+         r6RPbVP+AnTutqwi7TcxU7ZM4xvkkT7tl/Wl9seHRWJEeo02QTpK6GK2StPUORkG0FTQ
+         c7VktIJ+MZK59pDpbdTGHDfC0VWjwXjQ3gFL6qUr08kj+JpariWsJEJFPTA+v8xxulXE
+         EPIvyLK26q0QvXtSIL88pDTBm020hnkHU8QioURVacPLVPaHqsc5v1Ujv6pjIq9EbW+I
+         3oMOGeCiojWFYX2eApumolUKkhPuOb81QjxbC94xxq+VvJcyXm5TD26KhwdousmYckpw
+         /TKA==
+X-Gm-Message-State: AOJu0YxJftkRND2b5g0zLY1LCvKT3m7bWVgDeQ/QtWjNT6YTu0ciMjAD
+	Az5GiLk2Z9L8CBsnglaSL3DbjaQ8KilPbw9fitNRgy5aOviKIbkFeGuTvA==
+X-Gm-Gg: ASbGnctNnJUg6cDRWZZ6NiEe9cilx2/sTZQ+9W+bF4cPeJ0slaeg+H7gqGync9LCSTF
+	j87YiaHEbMORzU94oBG7LXAEaEjtFPvoUZxWd18B/f76G0FJjmpdPu8crUcX8ZcpTIBIk7f1OFw
+	/4ZDboHqEowFV/L0ytNZ+TY0MD7301sp2ayHe7d259vYo0DGIglfP2g525ofYiRhfB6M2oSIpVq
+	jd8plBezALPzSUBMQkAlCmPthH7IFtfR3enSe+qchKzL2ELWhxfzL9W/L1VjSANhB4dusc1rsxH
+	APPaejbwZTAwkm81yId1OiD+ckneY2o=
+X-Google-Smtp-Source: AGHT+IFc8lHxLa5XIPY1AtrgFf/6ehW4kA0CNVcdVR8ov0ZJyuVgSozz2kZsGAT4tAPwUthXS7gmMw==
+X-Received: by 2002:a5d:4684:0:b0:38d:d8c0:1f8c with SMTP id ffacd0b85a97d-38f3406cb07mr6566709f8f.38.1739714893927;
+        Sun, 16 Feb 2025 06:08:13 -0800 (PST)
 Received: from localhost.localdomain ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38f258ddba7sm9854640f8f.38.2025.02.16.06.02.06
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38f259f8115sm9840684f8f.92.2025.02.16.06.08.13
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 16 Feb 2025 06:02:07 -0800 (PST)
+        Sun, 16 Feb 2025 06:08:13 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] libplacebo: fix demos PACKAGECONFIG
-Date: Sun, 16 Feb 2025 15:02:05 +0100
-Message-ID: <20250216140205.1527859-2-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH v2] libplacebo: fix demos PACKAGECONFIG
+Date: Sun, 16 Feb 2025 15:08:12 +0100
+Message-ID: <20250216140812.1528278-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250216140205.1527859-1-skandigraun@gmail.com>
-References: <20250216140205.1527859-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 16 Feb 2025 14:02:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115503
+ <openembedded-devel@lists.openembedded.org>; Sun, 16 Feb 2025 14:08:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115504
 
 In case the demos PACKAGECONFIG is enabled, linking fails with
 the following error:
@@ -83,6 +79,8 @@ avoid the build failure.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
+v2: fix incorrect SRC_URI
+
  ...-Fix-compiling-demos-without-nuklear.patch | 40 +++++++++++++++++++
  .../mplayer/libplacebo_7.349.0.bb             |  3 +-
  2 files changed, 42 insertions(+), 1 deletion(-)
@@ -135,7 +133,7 @@ index 0000000000..bd849a75dd
 + {
 +     if (!hook)
 diff --git a/meta-oe/recipes-multimedia/mplayer/libplacebo_7.349.0.bb b/meta-oe/recipes-multimedia/mplayer/libplacebo_7.349.0.bb
-index a5b38db335..e79ab2e983 100644
+index a5b38db335..aaeaad1455 100644
 --- a/meta-oe/recipes-multimedia/mplayer/libplacebo_7.349.0.bb
 +++ b/meta-oe/recipes-multimedia/mplayer/libplacebo_7.349.0.bb
 @@ -5,7 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=435ed639f84d4585d93824e7da3d85da"
@@ -144,7 +142,7 @@ index a5b38db335..e79ab2e983 100644
  SRC_URI = "git://code.videolan.org/videolan/libplacebo.git;protocol=https;branch=v7.349 \
 -           file://0001-meson-add-glslang-lib-for-15.0.0-linking.patch"
 +           file://0001-meson-add-glslang-lib-for-15.0.0-linking.patch \
-+           file:///0001-Fix-compiling-demos-without-nuklear.patch"
++           file://0001-Fix-compiling-demos-without-nuklear.patch"
  SRCREV = "1fd3c7bde7b943fe8985c893310b5269a09b46c5"
  
  inherit meson pkgconfig
