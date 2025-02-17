@@ -1,149 +1,85 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CB99C02198
-	for <webhook@archiver.kernel.org>; Sun, 16 Feb 2025 14:08:23 +0000 (UTC)
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
- by mx.groups.io with SMTP id smtpd.web11.29210.1739714895641710741
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C74A7C021A4
+	for <webhook@archiver.kernel.org>; Mon, 17 Feb 2025 05:26:47 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.45065.1739769999834394598
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 16 Feb 2025 06:08:15 -0800
+ Sun, 16 Feb 2025 21:26:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CaFkZ2GL;
- spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-388cae9eb9fso1733609f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Feb 2025 06:08:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1739714894; x=1740319694; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=KcjqAJQquGYAmkL8i6fHSDJBxaU2PUOZa1A4RLLWytU=;
-        b=CaFkZ2GLVGCTZwapFxkOB11qe2X03UAvKWSDhP3Gphh3JxVDLcnUD4piqtrL2aI1oe
-         dTBZ4WUVJcLiHfDoD8FR4MdyaFejsWwwaU1phIqnVb84sdOGhR1tFnJ1faKAb9c94VNr
-         N2p/qMoLN7HCGePkqzIG8wBmTxwMWKK2vfr1gocuAc2K/cTB7F85d6qoA5lAs7W3GHhz
-         dcA1GOHv89RBPUzmrA4I8FI/pMzGuBOOyDXuxnIqme1pLcrFWOMZGlt02aa833DsY/1k
-         75BrjAjYsLlUY0xyktf27Dt1CUvMovgyUr0Y2rUCeULjx1idU/OxEQSS7cmco87Z0lsK
-         pbpw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739714894; x=1740319694;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=KcjqAJQquGYAmkL8i6fHSDJBxaU2PUOZa1A4RLLWytU=;
-        b=X+YHrEA3mj4NHyVnFBnXdOJLkY3CFZ4yfNBVsgd4eASFBr2QP6MlyRzbrQAZuotnqz
-         r6RPbVP+AnTutqwi7TcxU7ZM4xvkkT7tl/Wl9seHRWJEeo02QTpK6GK2StPUORkG0FTQ
-         c7VktIJ+MZK59pDpbdTGHDfC0VWjwXjQ3gFL6qUr08kj+JpariWsJEJFPTA+v8xxulXE
-         EPIvyLK26q0QvXtSIL88pDTBm020hnkHU8QioURVacPLVPaHqsc5v1Ujv6pjIq9EbW+I
-         3oMOGeCiojWFYX2eApumolUKkhPuOb81QjxbC94xxq+VvJcyXm5TD26KhwdousmYckpw
-         /TKA==
-X-Gm-Message-State: AOJu0YxJftkRND2b5g0zLY1LCvKT3m7bWVgDeQ/QtWjNT6YTu0ciMjAD
-	Az5GiLk2Z9L8CBsnglaSL3DbjaQ8KilPbw9fitNRgy5aOviKIbkFeGuTvA==
-X-Gm-Gg: ASbGnctNnJUg6cDRWZZ6NiEe9cilx2/sTZQ+9W+bF4cPeJ0slaeg+H7gqGync9LCSTF
-	j87YiaHEbMORzU94oBG7LXAEaEjtFPvoUZxWd18B/f76G0FJjmpdPu8crUcX8ZcpTIBIk7f1OFw
-	/4ZDboHqEowFV/L0ytNZ+TY0MD7301sp2ayHe7d259vYo0DGIglfP2g525ofYiRhfB6M2oSIpVq
-	jd8plBezALPzSUBMQkAlCmPthH7IFtfR3enSe+qchKzL2ELWhxfzL9W/L1VjSANhB4dusc1rsxH
-	APPaejbwZTAwkm81yId1OiD+ckneY2o=
-X-Google-Smtp-Source: AGHT+IFc8lHxLa5XIPY1AtrgFf/6ehW4kA0CNVcdVR8ov0ZJyuVgSozz2kZsGAT4tAPwUthXS7gmMw==
-X-Received: by 2002:a5d:4684:0:b0:38d:d8c0:1f8c with SMTP id ffacd0b85a97d-38f3406cb07mr6566709f8f.38.1739714893927;
-        Sun, 16 Feb 2025 06:08:13 -0800 (PST)
-Received: from localhost.localdomain ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38f259f8115sm9840684f8f.92.2025.02.16.06.08.13
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 16 Feb 2025 06:08:13 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH v2] libplacebo: fix demos PACKAGECONFIG
-Date: Sun, 16 Feb 2025 15:08:12 +0100
-Message-ID: <20250216140812.1528278-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.48.1
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=414386c018=changqing.li@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51H51F2o012767
+	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Feb 2025 05:26:39 GMT
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 44tg51hn04-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Feb 2025 05:26:38 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Sun, 16 Feb 2025 21:26:37 -0800
+Received: from pek-lpg-core6.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Sun, 16 Feb 2025 21:26:36 -0800
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-webserver][PATCH 1/2] nginx: upgrade 1.26.2 to 1.26.3
+Date: Mon, 17 Feb 2025 13:26:34 +0800
+Message-ID: <20250217052635.2557382-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=T4B2T+KQ c=1 sm=1 tr=0 ts=67b2c88e cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=T2h4t0Lz3GQA:10 a=9bLDTSi9AAAA:8 a=t7CeM3EgAAAA:8 a=oPh7IJYHrtGQQRNRCg4A:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: j7ron9M2eUHClTo9H29Qq8aqlo1PUXzR
+X-Proofpoint-ORIG-GUID: j7ron9M2eUHClTo9H29Qq8aqlo1PUXzR
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-02-17_02,2025-02-13_01,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ malwarescore=0 mlxscore=0 impostorscore=0 phishscore=0 mlxlogscore=999
+ suspectscore=0 adultscore=0 spamscore=0 bulkscore=0 clxscore=1015
+ lowpriorityscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2501170000
+ definitions=main-2502170045
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 16 Feb 2025 14:08:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115504
+ <openembedded-devel@lists.openembedded.org>; Mon, 17 Feb 2025 05:26:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115505
 
-In case the demos PACKAGECONFIG is enabled, linking fails with
-the following error:
+From: Changqing Li <changqing.li@windriver.com>
 
-| /usr/src/debug/libplacebo/7.349.0/demos/plplay.c:669:(.text.startup+0x90): undefined reference to `parse_args'
-| collect2: error: ld returned 1 exit status
+Solves:
+* CVE-2025-23419
 
-The implementation of the missing function is guarded erroneously by
-an ifdef flag (HAVE_NUKLEAR, which is only true in case headers from the nuklear
-library are present - but in this recipe they are not included).
+CHANGES:
+https://nginx.org/en/CHANGES-1.26
 
-This patch moves the implementation of this function outside of the ifdef to
-avoid the build failure.
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
-v2: fix incorrect SRC_URI
+ .../recipes-httpd/nginx/{nginx_1.26.2.bb => nginx_1.26.3.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-webserver/recipes-httpd/nginx/{nginx_1.26.2.bb => nginx_1.26.3.bb} (51%)
 
- ...-Fix-compiling-demos-without-nuklear.patch | 40 +++++++++++++++++++
- .../mplayer/libplacebo_7.349.0.bb             |  3 +-
- 2 files changed, 42 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-multimedia/mplayer/libplacebo/0001-Fix-compiling-demos-without-nuklear.patch
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.26.2.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.26.3.bb
+similarity index 51%
+rename from meta-webserver/recipes-httpd/nginx/nginx_1.26.2.bb
+rename to meta-webserver/recipes-httpd/nginx/nginx_1.26.3.bb
+index a279a3cf9b..7eab7ecdf5 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.26.2.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.26.3.bb
+@@ -2,5 +2,5 @@ require nginx.inc
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a6547d7e5628787ee2a9c5a3480eb628"
+ 
+-SRC_URI[sha256sum] = "627fe086209bba80a2853a0add9d958d7ebbdffa1a8467a5784c9a6b4f03d738"
++SRC_URI[sha256sum] = "69ee2b237744036e61d24b836668aad3040dda461fe6f570f1787eab570c75aa"
+ 
+-- 
+2.34.1
 
-diff --git a/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-Fix-compiling-demos-without-nuklear.patch b/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-Fix-compiling-demos-without-nuklear.patch
-new file mode 100644
-index 0000000000..bd849a75dd
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-Fix-compiling-demos-without-nuklear.patch
-@@ -0,0 +1,40 @@
-+From ad0bbc5099d99bbb0c914b39cb5ab4920fd6eeda Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Sun, 16 Feb 2025 14:23:40 +0100
-+Subject: [PATCH] Fix compiling demos without nuklear
-+
-+Demos can't be compiled if nuklear headers are not present, because
-+the implementation of parse_args function is guarded by HAVE_NUKLEAR macro.
-+
-+To allow compiling demos without the Nuklear headers, move the implementation
-+outside of this ifdef.
-+
-+Upstream-Status: Submitted [https://github.com/haasn/libplacebo/pull/315]
-+---
-+ demos/settings.c | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/demos/settings.c b/demos/settings.c
-+index 197e8b7e..73f0e5b9 100644
-+--- a/demos/settings.c
-++++ b/demos/settings.c
-+@@ -14,9 +14,6 @@
-+ #define PL_BASENAME basename
-+ #endif
-+ 
-+-#ifdef HAVE_NUKLEAR
-+-#include "ui.h"
-+-
-+ bool parse_args(struct plplay_args *args, int argc, char *argv[])
-+ {
-+     static struct option long_options[] = {
-+@@ -89,6 +86,9 @@ error:
-+     return false;
-+ }
-+ 
-++#ifdef HAVE_NUKLEAR
-++#include "ui.h"
-++
-+ static void add_hook(struct plplay *p, const struct pl_hook *hook, const char *path)
-+ {
-+     if (!hook)
-diff --git a/meta-oe/recipes-multimedia/mplayer/libplacebo_7.349.0.bb b/meta-oe/recipes-multimedia/mplayer/libplacebo_7.349.0.bb
-index a5b38db335..aaeaad1455 100644
---- a/meta-oe/recipes-multimedia/mplayer/libplacebo_7.349.0.bb
-+++ b/meta-oe/recipes-multimedia/mplayer/libplacebo_7.349.0.bb
-@@ -5,7 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=435ed639f84d4585d93824e7da3d85da"
- DEPENDS += "fastfloat glad-native python3-mako-native python3-jinja2-native vulkan-headers"
- 
- SRC_URI = "git://code.videolan.org/videolan/libplacebo.git;protocol=https;branch=v7.349 \
--           file://0001-meson-add-glslang-lib-for-15.0.0-linking.patch"
-+           file://0001-meson-add-glslang-lib-for-15.0.0-linking.patch \
-+           file://0001-Fix-compiling-demos-without-nuklear.patch"
- SRCREV = "1fd3c7bde7b943fe8985c893310b5269a09b46c5"
- 
- inherit meson pkgconfig
 
