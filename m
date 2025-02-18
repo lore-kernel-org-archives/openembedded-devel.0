@@ -2,61 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A06E4C02198
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9BAFEC021AA
 	for <webhook@archiver.kernel.org>; Tue, 18 Feb 2025 05:43:57 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web11.13504.1739857429195077971
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web11.13503.1739857428085557874
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Feb 2025 21:43:49 -0800
+ Mon, 17 Feb 2025 21:43:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QgitoDj/;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-221206dbd7eso32561525ad.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Feb 2025 21:43:49 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=l7UADNV7;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-2fc291f7ddbso5760665a91.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Feb 2025 21:43:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1739857428; x=1740462228; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1739857427; x=1740462227; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=JWJdBy+wkddUwX9ZpFg5Q0YJNokGJnEQO1ShuW4yUuI=;
-        b=QgitoDj/seDYbrSDWcZhlmnR1aC445rOkuxFALwyLOKUlkewxA41TllXgyiXc2Py1F
-         vOdFGxvdgfk2m7NmbDzMcTyy191ANbwp/KCl6R27RgSV5ddgEILdz//8SXvX8tzz6jyS
-         Imdof0H+nOFaQUQHb67OPKSSYPMRNf5k5Cc5pBtY0i3JMBevP78fhlD45KQHVVMJsyTp
-         HMPyamuig0tJs3ohoUaHfAXhMj95Mw3UcmG5r5HrdoHyN7GdOmvJrip92kEGQXaoxAlj
-         QfkCehWOi4xe6FYseOiqEAFJ6xP7dop3Bw5Htd24Z4FchI33ZMJkwaCNrQ9xJW29Y8AZ
-         jvSQ==
+        bh=RxxRqa3o2OAx2IyWmEw5F+azckWBtMbXEdzxryLEcHk=;
+        b=l7UADNV7d+S7sK0nCshl7hyZAYTVCFpFOZuUxJJ5P2AckzJDP3kmxfxyGCemEHpsKC
+         JWeAw6DDIMkO7rZDtXTIiOehWzbe8a4zvgpvYR8J/lhcmCtnpavuSQoWnfsiKbNIrtzV
+         by7T//J1Osgs1/rWyrc4Huj6opjMTkQamAd2oksynKOJqrVcdOJuRvWRjnGBiSoYC741
+         QSGM7Wx+tSoxeMT2xyH0rDBJKjXF9UCLAY9ZNtTHTbECUGd1cfFzpZ0aYdHu8117Stkn
+         lZHFwNmQQRoe2Q8Woq7ch36FMKXdW4n0jVHkM1ov4v93tzkWaCC4asfmwjzqGy04yyzD
+         QBLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739857428; x=1740462228;
+        d=1e100.net; s=20230601; t=1739857427; x=1740462227;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=JWJdBy+wkddUwX9ZpFg5Q0YJNokGJnEQO1ShuW4yUuI=;
-        b=VUA5Sgh9d1yX6CVefvhivMK85r6V9yqduHzLLkeYLLhX0UlsFd8gre4d0JaCrHs2Oy
-         tvs1sfr6LV+pecy1uOoM9zNyPjvgWUyZ1+9N2gqqpyuOaZEWGyNhy4ram840xgKr/c3K
-         K/CI5DeMNPpaaMDMyK/yFuDY1ZQYaTh/iZ+86YM+vSzr2jjX359Lax2TOqLp/GGt0tl0
-         ZDuMh8tQT5+gpaQL/mgvJimUPmPMj7sq9YGnc8Pw04bpRJT65Li6jJwlVPE/7l+oA4U5
-         SBYDl9cITPqZILu1lk4bBrgHFyVBzcJw3ohahrJkTZkIV26gSKNtdZM9r+sT+6S0KPf7
-         /vKA==
-X-Gm-Message-State: AOJu0YyJlvUUSU4JCoygSFy1mYZDVDtSVSdl45sbMd7bEViZ2CETaYV2
-	B87AraCigTuJ6W6YBBDmXqAYC0PV2Vg2zyDwHovwESiwbGlxYUZOzImjRn6+
-X-Gm-Gg: ASbGncvonysydXmqoknSdkuKzy3z6a0FCS9AeutpB3XCqOCQCEFJbb9FboP4YNI7bWF
-	8o3EI8vyePk1K9rioXjKOwaIPggb6PzUicEybOgJqi7wigkKC+C0YJRbAKCJLHRCBRzqA8EP/KZ
-	5DMoDpWkrqVLq1vPfhsBLbfRyItr1YssBzPUfNEnsWQbOPizOEPJ6rojgQ4xs6n6i9u0aB3add8
-	EvbA6+YfaPHpW1HSi3lx5uqLeIUUZqItQTk5A/Zz76FbM+CU7tN+tJfv3s/+Cld9iydCrYu4jlC
-	fOKfP2o=
-X-Google-Smtp-Source: AGHT+IE7pKZJBnov50SjvQNtUVbcFN74lMvGZKHRUYxoaR1v8aP28vbLZu8qR9/1MzR3lDMS6GM0pw==
-X-Received: by 2002:a05:6a00:739d:b0:732:6248:8f5f with SMTP id d2e1a72fcca58-73262488fabmr12907436b3a.5.1739857428096;
-        Mon, 17 Feb 2025 21:43:48 -0800 (PST)
-Received: from apollo.localdomain ([2601:646:8201:fd20::dd76])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-73285a7bfbfsm2276217b3a.154.2025.02.17.21.43.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        bh=RxxRqa3o2OAx2IyWmEw5F+azckWBtMbXEdzxryLEcHk=;
+        b=kC5hqxl4f5SKC4Ta+TZAwCKctCi76ni3fTC00zHcD0WoHIPoUE7KV1r6Z9wZ9YtiZY
+         VRBcNNyWktEoh6eC7C4c6Ff82d+0iRTHnjPxBqSl7IAjNsBYg68NTvNA8Ema+XNrQrmu
+         CyH58dQNz+UtT0/S40iPd2gw8YhEttVjr/pGb2BtDDYLl0smjJS49MsfBtmLMaXC3cjI
+         X+r5aFDfZL+vjtgffJJY/YhjuLEIBck8il5jr3kCzk/hY86DmOU3OucWVTwhP8ZzrLUu
+         mR9w+jRJnig4DrdxfOh6Fsri+sF0PVuBGbcrJ9vyDVTI7EXhzc0bxESyLHkMU83u5vI5
+         AKUQ==
+X-Gm-Message-State: AOJu0YxCDP/kgHLzvAfGInZCRjD6g6LIc2FkQeZobZoyKrYrrzTDzBej
+	YOXPVDkrr/dvLlmq99uSBnEniaPhuxjInUtfzXFdxmNNg1ra79rIOUzX4wEV
+X-Gm-Gg: ASbGncsIqvsSYzPe7Kq0s1GpriAtDKhxY1+qEAXuAr03uLyEZ769YbpV4SIdDEMkNfP
+	nN9forowhILnmv64ziFOGbwOLxoSja3jV5T6OjIVIhPkzTBtYBBD4yweyxlBzcRE1q9S/z/eilW
+	G64WnXYhH3/aVpS/nNtboUrceMWrZgPmQATOREkSKjZDnmbcGoXOseU4JTMc3y/SfKE2xs7Bhh2
+	Ahl0RQXpp3j+yD7fwv0ry4ydaou3ilx5F31/SkcaNt8cp/X4ADSXY7DDfwyMourMQytBPTAYLHa
+	aOveGqk=
+X-Google-Smtp-Source: AGHT+IHV5zbFqV1CYm3Ex8mNRsxfpcww1f92gha6Y5vkK/2nSfg/RjO4/oMMjaC7rHR3mIO6jY2wUA==
+X-Received: by 2002:a05:6a00:3cc1:b0:72d:8af9:bc64 with SMTP id d2e1a72fcca58-732617b77abmr17945688b3a.9.1739857427156;
         Mon, 17 Feb 2025 21:43:47 -0800 (PST)
+Received: from apollo.localdomain ([2601:646:8201:fd20::dd76])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-73285a7bfbfsm2276217b3a.154.2025.02.17.21.43.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 17 Feb 2025 21:43:46 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/4] sblim-sfcb: Include string.h for memcpy
-Date: Mon, 17 Feb 2025 21:43:43 -0800
-Message-ID: <20250218054344.2476688-3-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/4] multipath-tools: Fix build with latest musl
+Date: Mon, 17 Feb 2025 21:43:42 -0800
+Message-ID: <20250218054344.2476688-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250218054344.2476688-1-raj.khem@gmail.com>
 References: <20250218054344.2476688-1-raj.khem@gmail.com>
@@ -66,144 +66,59 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 18 Feb 2025 05:43:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115518
-
-Fixes build with latest musl
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115517
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-include-missing-system-headers.patch | 53 +++++++++++--------
- 1 file changed, 31 insertions(+), 22 deletions(-)
+ ...uxsock.c-Include-string.h-for-memcpy.patch | 28 +++++++++++++++++++
+ .../multipath-tools/multipath-tools_0.11.0.bb |  1 +
+ 2 files changed, 29 insertions(+)
+ create mode 100644 meta-oe/recipes-support/multipath-tools/files/0001-libmpathutils-uxsock.c-Include-string.h-for-memcpy.patch
 
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-include-missing-system-headers.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-include-missing-system-headers.patch
-index c16e393f49..f9083e7934 100644
---- a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-include-missing-system-headers.patch
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-include-missing-system-headers.patch
-@@ -18,8 +18,6 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  trace.h             | 3 ++-
-  9 files changed, 12 insertions(+), 3 deletions(-)
- 
--diff --git a/brokerEnc.c b/brokerEnc.c
--index 9115e71..889afcd 100644
- --- a/brokerEnc.c
- +++ b/brokerEnc.c
- @@ -25,6 +25,8 @@
-@@ -31,8 +29,6 @@ index 9115e71..889afcd 100644
-  extern const char *opGetClassNameChars(const CMPIObjectPath * cop);
-  extern const char *opGetNameSpaceChars(const CMPIObjectPath * cop);
-  extern CMPIConstClass *getConstClass(const char *ns, const char *cn);
--diff --git a/brokerOs.c b/brokerOs.c
--index 8d73a0b..b1427fd 100644
- --- a/brokerOs.c
- +++ b/brokerOs.c
- @@ -22,6 +22,7 @@
-@@ -43,8 +39,6 @@ index 8d73a0b..b1427fd 100644
-  
-  static char    *
-  resolveFileName(const char *filename)
--diff --git a/mlog.c b/mlog.c
--index a2d9eb7..6d9cd29 100644
- --- a/mlog.c
- +++ b/mlog.c
- @@ -26,6 +26,7 @@ const char     *_mlog_id =
-@@ -55,8 +49,6 @@ index a2d9eb7..6d9cd29 100644
-  #include <errno.h>
-  #include <signal.h>
-  #include "trace.h"              /* for setSignal() */
--diff --git a/mofc/backend_sfcb.c b/mofc/backend_sfcb.c
--index 614abcd..99d4061 100644
- --- a/mofc/backend_sfcb.c
- +++ b/mofc/backend_sfcb.c
- @@ -29,7 +29,7 @@
-@@ -68,8 +60,6 @@ index 614abcd..99d4061 100644
-  
-  extern CMPIStatus sfcb_simpleArrayAdd(CMPIArray * array, CMPIValue * val, CMPIType type);
-  extern CMPIObjectPath *getObjectPath(char *path, char **msg);
--diff --git a/sfcbdump.c b/sfcbdump.c
--index 8a9c335..aa8559c 100644
- --- a/sfcbdump.c
- +++ b/sfcbdump.c
- @@ -23,6 +23,7 @@
-@@ -80,8 +70,6 @@ index 8a9c335..aa8559c 100644
-  #include "objectImpl.h"
-  
-  #define BINARY_NAME argv[0]
--diff --git a/sfcbdumpP32onI32.c b/sfcbdumpP32onI32.c
--index ccf87dc..3540751 100644
- --- a/sfcbdumpP32onI32.c
- +++ b/sfcbdumpP32onI32.c
- @@ -22,6 +22,7 @@
-@@ -92,8 +80,6 @@ index ccf87dc..3540751 100644
-  #include <getopt.h>
-  #include "objectImpl.h"
-  #include <byteswap.h>
--diff --git a/sfcbsem.c b/sfcbsem.c
--index 3f8de7f..1e6358b 100644
- --- a/sfcbsem.c
- +++ b/sfcbsem.c
- @@ -21,6 +21,7 @@
-@@ -104,8 +90,6 @@ index 3f8de7f..1e6358b 100644
-  #include <getopt.h>
-  #include <errno.h>
-  
--diff --git a/trace.c b/trace.c
--index 23597e1..c4f8011 100644
- --- a/trace.c
- +++ b/trace.c
- @@ -25,6 +25,7 @@
-@@ -125,8 +109,6 @@ index 23597e1..c4f8011 100644
-  int             terminating = 0;
-  int             colorTrace;
-  
--diff --git a/trace.h b/trace.h
--index ea39850..52d408d 100644
- --- a/trace.h
- +++ b/trace.h
- @@ -25,6 +25,7 @@
-@@ -137,7 +119,7 @@ index ea39850..52d408d 100644
-  extern unsigned long _sfcb_trace_mask;
-  /* use pointer indirect _sfcb_trace_mask to allow shared memory flag */
-  extern unsigned long *_ptr_sfcb_trace_mask;
--@@ -162,7 +163,7 @@ extern sigHandler *setSignal(int sn, sigHandler * sh, int flags);
-+@@ -162,7 +163,7 @@ extern sigHandler *setSignal(int sn, sig
-  
-  extern char    *processName;
-  extern int      providerProcess;
-@@ -146,6 +128,33 @@ index ea39850..52d408d 100644
-  extern int      terminating;
-  
-  #endif
---- 
--2.37.3
--
-+--- a/support.c
-++++ b/support.c
-+@@ -39,6 +39,7 @@
-+ #include <err.h>
-+ #endif
-+ #include <errno.h>
-++#include <string.h> /* memcpy */
-+ #include "native.h"
-+ #include "trace.h"
-+ #include "control.h"
-+--- a/qualifier.c
-++++ b/qualifier.c
-+@@ -19,6 +19,7 @@
-+  *
-+  */
-+ 
-++#include <string.h> /* memcpy */
-+ #include "objectImpl.h"
-+ #include "qualifier.h"
-+ 
-+--- a/objectImplSwapI32toP32.c
-++++ b/objectImplSwapI32toP32.c
-+@@ -24,6 +24,7 @@
-+ #include <byteswap.h>
-+ #include <stdio.h>
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0001-libmpathutils-uxsock.c-Include-string.h-for-memcpy.patch b/meta-oe/recipes-support/multipath-tools/files/0001-libmpathutils-uxsock.c-Include-string.h-for-memcpy.patch
+new file mode 100644
+index 0000000000..128a0c4d8d
+--- /dev/null
++++ b/meta-oe/recipes-support/multipath-tools/files/0001-libmpathutils-uxsock.c-Include-string.h-for-memcpy.patch
+@@ -0,0 +1,28 @@
++From 1d444772db14f4acb8d47b874462b0cc171ab672 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 17 Feb 2025 12:01:59 -0800
++Subject: [PATCH] libmpathutils/uxsock.c: Include string.h for memcpy
++
++Fixes
++uxsock.c:72:2: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
++
++Upstream-Status: Submitted [https://lore.kernel.org/dm-devel/20250217200503.4166910-1-raj.khem@gmail.com/T/#u]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Cc: Benjamin Marzinski <bmarzins@redhat.com>
++Cc: Martin Wilck <mwilck@suse.com>
++---
++ libmpathutil/uxsock.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/libmpathutil/uxsock.c b/libmpathutil/uxsock.c
++index 2135476d..a474874e 100644
++--- a/libmpathutil/uxsock.c
+++++ b/libmpathutil/uxsock.c
++@@ -8,6 +8,7 @@
 + #include <stdlib.h>
-++#include <string.h> /* memcpy */
-+ #include <sfcCommon/utilft.h>
-+ #include <sys/utsname.h>
-+ 
++ #include <unistd.h>
++ #include <stdarg.h>
+++#include <string.h>
++ #include <fcntl.h>
++ #include <sys/ioctl.h>
++ #include <sys/types.h>
+diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.11.0.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.11.0.bb
+index 9f95361063..67e293dac2 100644
+--- a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.11.0.bb
++++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.11.0.bb
+@@ -44,6 +44,7 @@ SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;branch=ma
+            file://0010-Always-use-devmapper.patch \
+            file://0011-fix-bug-of-do_compile-and-do_install.patch \
+            file://0012-add-explicit-dependency-on-libraries.patch \
++           file://0001-libmpathutils-uxsock.c-Include-string.h-for-memcpy.patch \
+            "
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=9ec28527f3d544b51ceb0e1907d0bf3f"
 
