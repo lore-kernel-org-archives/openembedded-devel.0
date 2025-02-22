@@ -1,84 +1,100 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <beniaminsandu@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D7ABC021B2
-	for <webhook@archiver.kernel.org>; Sat, 22 Feb 2025 17:00:44 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web11.50333.1740243637880664499
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 875FDC021B2
+	for <webhook@archiver.kernel.org>; Sat, 22 Feb 2025 21:15:55 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.web10.54690.1740258945227312135
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 22 Feb 2025 09:00:37 -0800
+ Sat, 22 Feb 2025 13:15:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=YVv8NyOE;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-219f8263ae0so65933745ad.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 22 Feb 2025 09:00:37 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ay5ARW+e;
+ spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: beniaminsandu@gmail.com)
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-38f325dd9e6so1662163f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 22 Feb 2025 13:15:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1740243637; x=1740848437; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1740258943; x=1740863743; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=1GnEAXHOZ2PDVomgrKnJ24m3yh9aHo5VjafVaaxlRTM=;
-        b=YVv8NyOE+ZCwmiNhnAzsvxxwCO8X1E3MUD+DBsLf6QbBCGfwEnlJH1XOmN9wgqSRJ+
-         DY5Hfv30jlIX5342QI+/zrOybAFI0TmrxPOGjwDMcK5rDvq7wNuVIP+uLz1RossiHSuo
-         AHp49PWH5pXwUYz5aZPC2ssN5zskgZ9uP9JclmiH5ygNv/Rcq2rJbHbNf51V+1X4+lSh
-         ArVfUrQao9u9vs5SAQJPDjvOXpCC0IgYHOEeGjL5lo+LBUT+1yCM/pAt3V/IQrAbnsxM
-         ZIDpteen23vLnaIO7jCQuG51ttJ8ZF0rwUnTTdKMlNowRsajFO5JzpEO1UNuJjgVrfJK
-         qiyw==
+        bh=Ushhl+OpAhxylXzxTBDma8h6hcbVliX6YoZCrKwObRI=;
+        b=Ay5ARW+etYkTDj9Lh3Gpkiv8ACXwfNNetODIs9t8Q18JIJ3AfrY/C7HqFDub+4DWXn
+         ZALI0bQAE9gb6wOyJZNPrI7Xn8GldAwZjbEiL99SR+dqL9/rMyTvanXKiDzWLIJ6PTl8
+         Go8r3N8UEyz0aggkTFXifk5sXy3WwYZiazZbCeF2pjGPs1XRNbB2DTtMLnUbYvr5Qppe
+         DiKlWFZuzvHuK1SzKNct4DwBWBiSBR5ggJsVEYaSF20tJfyQ14nIMXN/g8SVJiAjDsYL
+         CS7Tgbx3EzI+pYV/5efqOyKYf6ctDuITO9Ru5prJSo3rEbL0OdDfDvDU0d5+UqEOsdEt
+         4VTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740243637; x=1740848437;
+        d=1e100.net; s=20230601; t=1740258943; x=1740863743;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=1GnEAXHOZ2PDVomgrKnJ24m3yh9aHo5VjafVaaxlRTM=;
-        b=MYsCiHA2dzU0Lcof2lX55K8GOFLYb34D3TldySvWl8DsVn1ktb4/oRBHEfOAWaazRx
-         6Svb1HJSeW9lbIWDpkUH4ma/RlhkNGJzt/qFYOwisP+BWmXclOCgYLoS2X/G6GpanBKN
-         MEPAnOjP5Fk8TI26ypl7ZO+6Aj82jCTZKu/+fjHndpsFAvRJu7CYuq3O+yvlhG2sks5W
-         kOy+aWZbnPAvpKGou1BrTiN22hDGxxPW6R5pII4XawTwlqJe8xqe+m+TTrPLBHgghXt3
-         hxFe65o7R3tpAfxbXMfc47yhoiZrcriHzFLIJVRab9Ehl06ZsyYt+kVvTBYEWfd4PSn+
-         pthg==
-X-Gm-Message-State: AOJu0YwubKweeODhM3OQgH8m2Stlewh2csvlnqyUWxNzx0TdeXav4iD6
-	/uQ+8LXXuiYg8EQNU4XPwti+XOkSYUapNCFzVfjdf8izsEmxsaTcsCWO6X2Z
-X-Gm-Gg: ASbGncuXMWFWNfhT6BBlOQNFdLI9WwJCUAmjDYJUTMcqFwq5DEA2xNKWOB1ef6/L/pR
-	hXRyc+O5EAmFQvT3861Oz/YMgK0LRxRCAtiifcYC/Co/CxPQsTAHf8nPEXFkstzW/HEwvLQwepg
-	rbdSklIzlWmBhChzNkN3BsH1toZk9QSp30clpQBCeionMvVtdHTHQoc3OYCYBEyirlDkEeRcanT
-	k5YXr+G53O/K3G90itpgEkOTlVr1qR7rl0Gr22UY225/TR35IBXX16eFxy4pswMtgDxrXSsdUyr
-	mB0JsS4mNuOhn63sRg==
-X-Google-Smtp-Source: AGHT+IFYsjG98KuO84+PmXlnQ0+jLvePsWih1VhD3IwEIewW2PGdQaC2h0u/cnTv1u9BkPdTmP1dnA==
-X-Received: by 2002:a17:902:ce8c:b0:21f:522b:690f with SMTP id d9443c01a7336-221a11b9bfdmr116813445ad.46.1740243636846;
-        Sat, 22 Feb 2025 09:00:36 -0800 (PST)
-Received: from apollo.localdomain ([2601:646:8201:fd20::b976])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-220d545d643sm152366465ad.126.2025.02.22.09.00.36
+        bh=Ushhl+OpAhxylXzxTBDma8h6hcbVliX6YoZCrKwObRI=;
+        b=dGF2IAYfbbempExh87QIFgIocZDc68BnWT1579G1PRcyihMkN/LhyUYMG9EyqJpuRZ
+         YG15lgzlMX90Ms/u17iQX/+DU9RMK2jjxvXQ5Igjx1WQYY/HAncRPVb2bWN7h0NGPtl+
+         LEy832dvEYDbTqe8RW3dOXps951xNWD+3EKImunaDLARbUnzhsTf2GwgnQkQE3t6tGPO
+         Mr3ThnUPltKiwCOY4EkOYeOh0ffyRm438Aejqx68V4FLHH1qit/volcyN7DOCMnll5kq
+         ywvTDRYTQGeqex7HuOYEflPUnpSYpiKmdKLcmLERY0jRY2jH7/MlUzddCcpKFuzxX7kC
+         KSkw==
+X-Gm-Message-State: AOJu0Yw+sNBMeJM/FDY3xCuYwXkdnR36DVslxD55Frlf8eFlrqdmPufL
+	0Lec59oOZxNQrTUTOQ1yRXDT6vL5PjftXaeSbM0ebtBNNMrR8ys6ZGPG2g==
+X-Gm-Gg: ASbGncsLuUWCYZVMXvNQAwoqoe4zI83HAeU8BeFsO9ONMKhLqrj1lRWyXe4Erh6KsR5
+	A+NQfTU0+flxmfGJtt8ii8tdkOCvFPyE/+befuD+kEEPGB2vO5RS0r9O04JA7rjCGCrsR8Ab9Cd
+	lGd7i8U7wbnyjuOZsjwm0pcB2JFfAhL8pz1YTM4Q2g3pq4IaxY/fy1ZfRwq6wJWGkPyMxhGLAdy
+	EM5/55RBECScEQxyszUfKgZj+MTikPUx/35p2cmbIsn2i2oKZA0rPna2UAj1PbMV/4aYHhZa7Kz
+	FrETHdEthBs1T3/K2/TyAYBCZoB4IKD5OLPytSvpPD8MpfR7rB/4
+X-Google-Smtp-Source: AGHT+IHwiQMbwPMRGgY0bfhwe8hAlbDkTPl2hFuHsDsleAOTEiPQ4jjMyj2g2V14MJ+tSNOjTdtcbw==
+X-Received: by 2002:a05:6000:1ac7:b0:38f:48ee:ddc2 with SMTP id ffacd0b85a97d-38f6f0b238amr5345032f8f.37.1740258943342;
+        Sat, 22 Feb 2025 13:15:43 -0800 (PST)
+Received: from swi-bsandu-l1.corp.ad.wrs.com ([5.13.133.239])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38f258b434fsm27588231f8f.16.2025.02.22.13.15.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 22 Feb 2025 09:00:36 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+        Sat, 22 Feb 2025 13:15:42 -0800 (PST)
+From: Beniamin Sandu <beniaminsandu@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] gphoto: Fix the sed expression to remove --sysroot from config.h
-Date: Sat, 22 Feb 2025 09:00:33 -0800
-Message-ID: <20250222170033.1061080-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.48.1
+Cc: Beniamin Sandu <beniaminsandu@gmail.com>
+Subject: [meta-oe][PATCH] rasdaemon: upgrade 0.8.0 -> 0.8.2
+Date: Sat, 22 Feb 2025 23:10:35 +0200
+Message-Id: <20250222211035.405019-1-beniaminsandu@gmail.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 22 Feb 2025 17:00:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115541
+ <openembedded-devel@lists.openembedded.org>; Sat, 22 Feb 2025 21:15:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115542
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
 ---
- meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.28.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../rasdaemon/{rasdaemon_0.8.0.bb => rasdaemon_0.8.2.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/{rasdaemon_0.8.0.bb => rasdaemon_0.8.2.bb} (94%)
 
-diff --git a/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.28.bb b/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.28.bb
-index c53504378a..6a2f7164b5 100644
---- a/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.28.bb
-+++ b/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.28.bb
-@@ -20,5 +20,5 @@ EXTRA_OECONF += "--with-jpeg-prefix=${STAGING_INCDIR} \
- "
+diff --git a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.8.0.bb b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.8.2.bb
+similarity index 94%
+rename from meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.8.0.bb
+rename to meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.8.2.bb
+index a7a3bf12c5..333d75a4f5 100644
+--- a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.8.0.bb
++++ b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.8.2.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Tools to provide a way to get Platform Reliability, Availability and Serviceability (RAS) reports made via the Kernel tracing events"
+-HOMEPAGE = "http://git.infradead.org/users/mchehab/rasdaemon.git"
++HOMEPAGE = "https://github.com/mchehab/rasdaemon"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d3070efe0afa3dc41608bd82c00bb0dc"
  
- do_configure:append() {
--	sed -i -E 's/--sysroot=[^ "]*([" ])/\1/g' ${B}/config.h
-+	sed -i 's/--sysroot[^ "]*//g' ${B}/config.h
- }
+@@ -7,7 +7,7 @@ SRC_URI = "git://github.com/mchehab/rasdaemon.git;branch=master;protocol=https \
+            file://rasdaemon.service \
+            file://init"
+ 
+-SRCREV = "4e83b848e7961af25028f3a2cecf37a63279a2bf"
++SRCREV = "e6cc13e37a17843a2a82313928cd6deed9918649"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.39.5
+
 
