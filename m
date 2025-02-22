@@ -1,94 +1,96 @@
-Return-Path: <soumya.sambu@windriver.com>
+Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 141A1C021B5
-	for <webhook@archiver.kernel.org>; Fri, 21 Feb 2025 18:11:26 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.30162.1740161483582637110
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F36FCC021B2
+	for <webhook@archiver.kernel.org>; Sat, 22 Feb 2025 12:15:32 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.web10.45006.1740226530790593995
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Feb 2025 10:11:23 -0800
+ Sat, 22 Feb 2025 04:15:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=414712dd93=soumya.sambu@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51LDEIAH019820
-	for <openembedded-devel@lists.openembedded.org>; Fri, 21 Feb 2025 10:11:23 -0800
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 44w00kc30k-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 21 Feb 2025 10:11:23 -0800 (PST)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Fri, 21 Feb 2025 10:11:22 -0800
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Fri, 21 Feb 2025 10:11:21 -0800
-From: ssambu <soumya.sambu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-python][scarthgap][PATCH 1/1] python3-django: upgrade 4.2.17 -> 4.2.18
-Date: Fri, 21 Feb 2025 18:11:17 +0000
-Message-ID: <20250221181117.1015311-1-soumya.sambu@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=b41WQk1p;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: jan.vermaete@gmail.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4398e839cd4so23622455e9.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 22 Feb 2025 04:15:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1740226529; x=1740831329; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=GoKxY9H2leytt40gTiksvQ8tsiA1Ml1+e9NYKVtqx+4=;
+        b=b41WQk1puhmcvkSoMTO7P2IYTZ132AUAtKjtzWdsveMiI8DkDXqpl+spivpmg5DdWZ
+         Es5SaZd+qsNNr5lP607ykq57OQBsvP3RNqiNlhIIoZGgufj4t+2ai7yho5WenOMNhRc8
+         XV+vr7IoDZSeajOkmuldOdKWmn9M46ubXcLvRq0zbwE4LWn1hZqUsu7JKFksKVAKtN+H
+         38ko2tdbkwKjqUmhpoxoPnW2eYSNcW4RvDD0c/xfjY80HnA5swZ4sEws7etq1wdOCO1d
+         VGFfPlMvw/lZjbHe+wFehMnL8lzywfk7j854Kduy5ZqMwc+lKcvsLT00Q8uaNFOOv4OS
+         PCrw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1740226529; x=1740831329;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=GoKxY9H2leytt40gTiksvQ8tsiA1Ml1+e9NYKVtqx+4=;
+        b=Bso5AlI8NwasFkDJ6/o7Xx53Tz41lKhh7kZCACFOJRYHSSlgpVWT/bmz/fNMLRkvK5
+         bOquk55SobO4PbznQkPuSKignecObcQx3hSb6VYg2Apmx1pwCgz/F0Rve+cApHwx/2ps
+         5vbKPDymiFlrM8UIeCCF215sUA2L+xfYvrvPnH3eqGkXmLfyZhkPndSRdkoHDv44h+4U
+         T93IfoLfcVFxuvQX2McizJqM5RhdjJ3cZ4atcyFyubj1ShM+yXYT7EjqtaT1azfOSF9/
+         TpdWJpOjOJM2PfuawWH8vWa/DyoyexZDBrdnpDVqtaE29EC5onAj5VAFd9nVWFVh338D
+         ablQ==
+X-Gm-Message-State: AOJu0Yx8GmAlWRyWshEG1nc1ajAWn55rr03q4iRtPzuWvlMw3Q94VONo
+	hsZI1XWTLBoVe+1MqCTJHNewt7iyfS45nOtFyo4oWORUrKBt2nlc4gv6Cg==
+X-Gm-Gg: ASbGnctJCoz8Xdzf3moVNyw999bLkVL7qnyPv8losuINf36LjU2zpDXu8qY7UPkfFsV
+	zkkDtZqf9hVVakldI3A+nEaz6c6LxqTIa/bgI+EHV1qyYIoRLG+10XQCOPCWQHLXgypFZ5pDLGS
+	pq8zR/s0LWyVzq5hBZe6es1jUxEBuxosulay8dBw4NOblHrStsnf3R8gjdkHLEv3xZpKGyCnJj+
+	Gp81na/hHwy0i7zAKy/WNiv7A7GSOqHb4cOqG0O7y5fDiGihC1xDWE3olWVcejWR5HLiYalKRHq
+	yVzhyYNTBwlFaK/IMjyijvkUgbS3pwCMzwDcSMNq3ANb43TVDlbVp+qRuVRzhJ5RMKRPngl2+8C
+	1cWiAz16gfOD7rZW2Mf1ehp0YlOHneHYf
+X-Google-Smtp-Source: AGHT+IE/OEJzfTKalxsnFuD+HfloGJ0Tv8VeJaVdqqodXSFfB8qC7sDdNHWyE+IRjDqVyniYnaNq9w==
+X-Received: by 2002:a5d:5f90:0:b0:38d:c6b8:9fe1 with SMTP id ffacd0b85a97d-38f6f51d885mr6159379f8f.24.1740226528822;
+        Sat, 22 Feb 2025 04:15:28 -0800 (PST)
+Received: from localhost.localdomain (ptr-fij45qxtdobqrxrcewr.18120a2.ip6.access.telenet.be. [2a02:1812:512:2c00:6021:e9a4:5aa0:257b])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38f258ddbb2sm25612758f8f.40.2025.02.22.04.15.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 22 Feb 2025 04:15:28 -0800 (PST)
+From: Jan Vermaete <jan.vermaete@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jan Vermaete <jan.vermaete@gmail.com>
+Subject: [meta-networking][PATCH 1/1] wireshark: version bump 4.2.10 -> 4.2.11
+Date: Sat, 22 Feb 2025 13:15:05 +0100
+Message-Id: <20250222121505.291425-1-jan.vermaete@gmail.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=N67TF39B c=1 sm=1 tr=0 ts=67b8c1cb cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=q7AoBUq9l0gA:10 a=T2h4t0Lz3GQA:10 a=ArP49Si0AAAA:8 a=t7CeM3EgAAAA:8 a=ht-RS04COxeCjgQ2BIUA:9 a=glZLBWN_5F3qvmUqPDV8:22
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: Sufy8t_cgcvO1--8VgP6qA84silVEMEj
-X-Proofpoint-GUID: Sufy8t_cgcvO1--8VgP6qA84silVEMEj
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-02-21_05,2025-02-20_02,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 phishscore=0
- adultscore=0 lowpriorityscore=0 malwarescore=0 mlxlogscore=999
- suspectscore=0 clxscore=1015 bulkscore=0 spamscore=0 priorityscore=1501
- mlxscore=0 classifier=spam authscore=0 authtc=n/a authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.21.0-2502100000
- definitions=main-2502210126
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Feb 2025 18:11:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115536
+ <openembedded-devel@lists.openembedded.org>; Sat, 22 Feb 2025 12:15:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115537
 
-From: Soumya Sambu <soumya.sambu@windriver.com>
+The 4.2.10 was not longer available at the SRC_URI
 
-Fixes CVE-2024-56374
-
-Release Notes:
-https://docs.djangoproject.com/en/dev/releases/4.2.18/
-
-Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
+Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
 ---
- .../{python3-django_4.2.17.bb => python3-django_4.2.18.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-django_4.2.17.bb => python3-django_4.2.18.bb} (63%)
+ .../wireshark/{wireshark_4.2.10.bb => wireshark_4.2.11.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_4.2.10.bb => wireshark_4.2.11.bb} (97%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.17.bb b/meta-python/recipes-devtools/python/python3-django_4.2.18.bb
-similarity index 63%
-rename from meta-python/recipes-devtools/python/python3-django_4.2.17.bb
-rename to meta-python/recipes-devtools/python/python3-django_4.2.18.bb
-index fce4ebeedc..c9be3c0462 100644
---- a/meta-python/recipes-devtools/python/python3-django_4.2.17.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_4.2.18.bb
-@@ -1,7 +1,7 @@
- require python-django.inc
- inherit setuptools3
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_4.2.10.bb b/meta-networking/recipes-support/wireshark/wireshark_4.2.11.bb
+similarity index 97%
+rename from meta-networking/recipes-support/wireshark/wireshark_4.2.10.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_4.2.11.bb
+index 4739c3961c..2e02f29eb2 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_4.2.10.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_4.2.11.bb
+@@ -17,7 +17,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz \
  
--SRC_URI[sha256sum] = "6b56d834cc94c8b21a8f4e775064896be3b4a4ca387f2612d4406a5927cd2fdc"
-+SRC_URI[sha256sum] = "52ae8eacf635617c0f13b44f749e5ea13dc34262819b2cc8c8636abb08d82c4b"
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
  
- RDEPENDS:${PN} += "\
-     python3-sqlparse \
-@@ -10,5 +10,5 @@ RDEPENDS:${PN} += "\
+-SRC_URI[sha256sum] = "3fc5f88ae420bc5856d056324efb023abc4654eed4742140b0d0d36cb032b894"
++SRC_URI[sha256sum] = "dd80f30e9853105dacb5357e5832d960437160bbb4b147e8f1a7ead168afaa18"
  
- # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
- # default. To build the 4.x branch, 
--# PREFERRED_VERSION_python3-django = "4.2.17" can be added to local.conf
-+# PREFERRED_VERSION_python3-django = "4.2.18" can be added to local.conf
- DEFAULT_PREFERENCE = "-1"
+ PE = "1"
+ 
 -- 
-2.40.0
+2.39.5
 
 
