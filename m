@@ -1,203 +1,85 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 72BD5C021B2
-	for <webhook@archiver.kernel.org>; Sun, 23 Feb 2025 11:04:29 +0000 (UTC)
-Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
- by mx.groups.io with SMTP id smtpd.web10.64403.1740308666840917611
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7FD7C021B3
+	for <webhook@archiver.kernel.org>; Sun, 23 Feb 2025 12:24:09 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.web10.65235.1740313443505023165
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Feb 2025 03:04:27 -0800
+ Sun, 23 Feb 2025 04:24:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=UAq3huZd;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-256628-20250223110423f9e61ae1b7ab8389ef-ci3c9i@rts-flowmailer.siemens.com)
-Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 20250223110423f9e61ae1b7ab8389ef
-        for <openembedded-devel@lists.openembedded.org>;
-        Sun, 23 Feb 2025 12:04:23 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=RsYmVtvDRGxeQyUJ0Npj5aZ8QmUhMJLPNsSVCHnw+8E=;
- b=UAq3huZd8dHROfC23D7h+1Nhnb2FNdIWJxrcqmknhASZ8FKOke55kPl+usENvGImHMc6eA
- ONgM4OZAu/lkXnHedSUxQVKziVWIwBu6vB7W82t2YVE4pMZ5fxAJg64N3hSyDiSA2K/q39Y5
- 082c4/w6bY8OyEgRSDw18JDs9rPG+ercjjy6eyl2mlA7nTO0B6HCxZ6QJ0AUpAl71Mcr8wRl
- yLSAKa6sffiJqkLckBarB9qbEt3ydkhNimIY4uH1CGCcRNErE2lXvoUrEkPGQj3iZUf+nDfM
- brgQjWa7pS3tFo8MwHXzOYkcDnXrFPhw6qUMHAZ59MELhCobuI5jLunw==;
-From: Peter Marko <peter.marko@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-python][PATCH] python3-grpcio: revert unbundling abseil-cpp
-Date: Sun, 23 Feb 2025 12:03:35 +0100
-Message-Id: <20250223110335.2594039-1-peter.marko@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mPPXoR7/;
+ spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4394a0c65fcso35248635e9.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 23 Feb 2025 04:24:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1740313442; x=1740918242; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=4XWobOcKOAAzjCNtIUnvrxSChZ9Emfcf1rgmC4WPaXs=;
+        b=mPPXoR7/1LReKFnPVKfaaBDRS9k3tN/o24bzPvyubxk06Dy1NbafbiaRyib7SEKIsH
+         c+2mK+hdB+5w80YaAW3Y896QUrwY3gbidNo8nhSImcCjzbr4kVeGr8K6lIl93NQAfN2i
+         KCd5mzuOpAIJkI8Yv08+P2Kpc9US3gbojK0GEgZiTrn41UHR0dtBAKYl15/8PeUd+Upz
+         YxruhKmTwun9wBvc4tBias+F0Hw5DnKy3MSFvviwD7WlTNCOGSBZhBUBhvkuHw/1wWs6
+         KIkiX7W7dXhuDHhkJkzEJ6qCwcGlKkmGJMqmXGD066lGXOHnGNKO2esFxn16001tsoAr
+         jn8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1740313442; x=1740918242;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=4XWobOcKOAAzjCNtIUnvrxSChZ9Emfcf1rgmC4WPaXs=;
+        b=nXtMbSn312bWXxg7ziKGuHkYGOGXJJ3NdnZfPGul5fTEbkwxuJgyYmytOwSsLxpBV3
+         Oy+UwJ5aP6/2wFrRInkL0GwZ/3FNEBMMd3p8E5W6+A/NUvwJpxKn/7X43SjBRhH8G09H
+         yVf1UtDBYCZTUS/IWPkpWbItM8DNzNYk2jTEVo/KWrqek9mP/KrjCWlzRHtdr1eMzfOD
+         WhBfeHL+rDutiLinjDgtEPmylVdy6H/W9W4J5c2RudAxmu8hxFxLxEQa7OE5H0/P1fkE
+         ynocEHRkpmvuUYTPocjz0yxPHEAIfV+cIGqCV+wPGHNa9QzqG4h9y4ncQbfBPjqHWrZm
+         nsXA==
+X-Forwarded-Encrypted: i=1; AJvYcCWae83j05/wY/U1RoFJ629YcvWtA4+ZHGzp5nHobLTpKw+TtIzBG7RvmLUSf5+w41Ztm/64mIQgSumHXiTiFsW1Atw=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yyc3dIKaGvO/hDs0NWmPb4YahbTQml2Q6e8mvbodEkFN4ShRnGO
+	x6GK4b7KbthXsjWIike7ypl2bhVeBbWH9MkqnG5PbuCW6k5yOja5
+X-Gm-Gg: ASbGnctRz/z6Tr/pqjF3YuDUhm+PTKouTwPJ6FiKYoT3azIptKniG09hHykFx5gGAvG
+	io+TmOXe7H76hUslcOy5Zz+iRBy+XbRqSSiuOWQDlg5tOIqdwKfQrioHgTjlzPhRStMwAyR+U5c
+	hoJrBVPdtDEB2jKVSREAEylR4Bz5hrxnS+D2osU4WE94sB3J4Fv25OoOglkn3sPS1gE1bJeNOdH
+	1GrWVZnn+h6aq9zFMCUWV6nOtaAeFWOHhi/gNdcBNDvPmBn/ESxOMJAKR7fvZn1px8I2xqe9aWl
+	rQswZKDln75w26bW1GtZlYPiqwopbtyxVw==
+X-Google-Smtp-Source: AGHT+IFdpkMlzoGDvvkdrddLJ52plEnOo9tQbvZv/ikXVGGaz32W7cKc7IGQ1MWFOWyRC3+vPeMH4A==
+X-Received: by 2002:a5d:6c63:0:b0:38f:4f62:7e29 with SMTP id ffacd0b85a97d-38f6eb6bd1cmr7846745f8f.26.1740313441531;
+        Sun, 23 Feb 2025 04:24:01 -0800 (PST)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38f259f771dsm28584587f8f.81.2025.02.23.04.24.00
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 23 Feb 2025 04:24:01 -0800 (PST)
+Message-ID: <1876f871-5f8b-4365-8fc6-4e1904dc6fed@gmail.com>
+Date: Sun, 23 Feb 2025 13:24:00 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH] gphoto: Fix the sed expression to remove
+ --sysroot from config.h
+To: hieu2.nguyen@lge.com, openembedded-devel@lists.openembedded.org
+References: <CAMKF1sr5_pemR2VogAwgbopYDudLSvi0Yvy4dYX4eydVndOjFA@mail.gmail.com>
+ <23323.1740301221091041675@lists.openembedded.org>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <23323.1740301221091041675@lists.openembedded.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 23 Feb 2025 11:04:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115546
+ <openembedded-devel@lists.openembedded.org>; Sun, 23 Feb 2025 12:24:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115547
 
-From: Peter Marko <peter.marko@siemens.com>
-
-This reverts commit 990b03b6165808cebe59886e4941bb86b05744e2.
-
->>> import grpc
-Traceback (most recent call last):
-  File "<python-input-0>", line 1, in <module>
-    import grpc
-  File "/usr/lib/python3.13/site-packages/grpc/__init__.py", line 22, in <module>
-    from grpc import _compression
-  File "/usr/lib/python3.13/site-packages/grpc/_compression.py", line 20, in <module>
-    from grpc._cython import cygrpc
-ImportError: /usr/lib/python3.13/site-packages/grpc/_cython/cygrpc.cpython-313-x86_64-linux-gnu.so: undefined symbol: _ZN4absl12lts_2024072212log_internal17kUnsignedCharNullE
-
-Even installing whole abseil-ccp does not solve this.
-ldd on this library does not include libraries containing this symbol.
-Some work in linking upstram would be needed.
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
----
- .../python3-grpcio/abseil-ppc-fixes.patch     | 102 ++++++++++++++++++
- .../python/python3-grpcio_1.70.0.bb           |   9 +-
- 2 files changed, 108 insertions(+), 3 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-grpcio/abseil-ppc-fixes.patch
-
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio/abseil-ppc-fixes.patch b/meta-python/recipes-devtools/python/python3-grpcio/abseil-ppc-fixes.patch
-new file mode 100644
-index 0000000000..69e06a7918
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-grpcio/abseil-ppc-fixes.patch
-@@ -0,0 +1,102 @@
-+From a2ec96a96ff7ba016e800212a942b9f29f255415 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com> 
-+Date: Sat, 13 Mar 2021 10:26:25 -0800
-+Subject: [PATCH] An all-in-one patch that fixes several issues:
-+
-+1) UnscaledCycleClock not fully implemented for ppc*-musl (disabled on musl)
-+2) powerpc stacktrace implementation only works on glibc (disabled on musl)
-+3) powerpc stacktrace implementation has ppc64 assumptions (fixed)
-+4) examine_stack.cpp makes glibc assumptions on powerpc (fixed)
-+
-+Sourced from void linux
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
-+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-+---
-+ .../abseil-cpp/absl/base/internal/unscaledcycleclock.cc   | 4 ++--
-+ .../absl/base/internal/unscaledcycleclock_config.h        | 3 ++-
-+ .../abseil-cpp/absl/debugging/internal/examine_stack.cc   | 8 +++++++-
-+ .../absl/debugging/internal/stacktrace_config.h           | 2 +-
-+ 4 files changed, 12 insertions(+), 5 deletions(-)
-+
-+diff --git a/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock.cc b/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock.cc
-+index a0bf3a6..103b4f6 100644
-+--- a/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock.cc
-++++ b/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock.cc
-+@@ -20,7 +20,7 @@
-+ #include <intrin.h>
-+ #endif
-+ 
-+-#if defined(__powerpc__) || defined(__ppc__)
-++#if (defined(__powerpc__) || defined(__ppc__)) && defined(__GLIBC__)
-+ #ifdef __GLIBC__
-+ #include <sys/platform/ppc.h>
-+ #elif defined(__FreeBSD__)
-+@@ -58,7 +58,7 @@ double UnscaledCycleClock::Frequency() {
-+   return base_internal::NominalCPUFrequency();
-+ }
-+ 
-+-#elif defined(__powerpc__) || defined(__ppc__)
-++#elif (defined(__powerpc__) || defined(__ppc__)) && defined(__GLIBC__)
-+ 
-+ int64_t UnscaledCycleClock::Now() {
-+ #ifdef __GLIBC__
-+diff --git a/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock_config.h b/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock_config.h
-+index 43a3dab..196a853 100644
-+--- a/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock_config.h
-++++ b/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock_config.h
-+@@ -21,7 +21,8 @@
-+ 
-+ // The following platforms have an implementation of a hardware counter.
-+ #if defined(__i386__) || defined(__x86_64__) || defined(__aarch64__) || \
-+-    defined(__powerpc__) || defined(__ppc__) || defined(_M_IX86) ||     \
-++    ((defined(__powerpc__) || defined(__ppc__)) && defined(__GLIBC__)) || \
-++    defined(_M_IX86) ||     \
-+     (defined(_M_X64) && !defined(_M_ARM64EC))
-+ #define ABSL_HAVE_UNSCALED_CYCLECLOCK_IMPLEMENTATION 1
-+ #else
-+diff --git a/third_party/abseil-cpp/absl/debugging/internal/examine_stack.cc b/third_party/abseil-cpp/absl/debugging/internal/examine_stack.cc
-+index 3dd6ba1..9f0601c 100644
-+--- a/third_party/abseil-cpp/absl/debugging/internal/examine_stack.cc
-++++ b/third_party/abseil-cpp/absl/debugging/internal/examine_stack.cc
-+@@ -36,6 +36,10 @@
-+ #include <csignal>
-+ #include <cstdio>
-+ 
-++#if defined(__powerpc__)
-++#include <asm/ptrace.h>
-++#endif
-++
-+ #include "absl/base/attributes.h"
-+ #include "absl/base/internal/raw_logging.h"
-+ #include "absl/base/macros.h"
-+@@ -177,8 +181,10 @@ void* GetProgramCounter(void* const vuc) {
-+     return reinterpret_cast<void*>(context->uc_mcontext.pc);
-+ #elif defined(__powerpc64__)
-+     return reinterpret_cast<void*>(context->uc_mcontext.gp_regs[32]);
-+-#elif defined(__powerpc__)
-++#elif defined(__powerpc__) && defined(__GLIBC__)
-+     return reinterpret_cast<void*>(context->uc_mcontext.uc_regs->gregs[32]);
-++#elif defined(__powerpc__)
-++    return reinterpret_cast<void*>(((struct pt_regs *)context->uc_regs)->gregs[32]);
-+ #elif defined(__riscv)
-+     return reinterpret_cast<void*>(context->uc_mcontext.__gregs[REG_PC]);
-+ #elif defined(__s390__) && !defined(__s390x__)
-+diff --git a/third_party/abseil-cpp/absl/debugging/internal/stacktrace_config.h b/third_party/abseil-cpp/absl/debugging/internal/stacktrace_config.h
-+index 3929b1b..23d5e50 100644
-+--- a/third_party/abseil-cpp/absl/debugging/internal/stacktrace_config.h
-++++ b/third_party/abseil-cpp/absl/debugging/internal/stacktrace_config.h
-+@@ -60,7 +60,7 @@
-+ #elif defined(__i386__) || defined(__x86_64__)
-+ #define ABSL_STACKTRACE_INL_HEADER \
-+   "absl/debugging/internal/stacktrace_x86-inl.inc"
-+-#elif defined(__ppc__) || defined(__PPC__)
-++#elif (defined(__ppc__) || defined(__PPC__)) && defined(__GLIBC__)
-+ #define ABSL_STACKTRACE_INL_HEADER \
-+   "absl/debugging/internal/stacktrace_powerpc-inl.inc"
-+ #elif defined(__aarch64__)
-+-- 
-+2.43.0
-+
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.70.0.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.70.0.bb
-index c9edc1d541..5af05ca2c9 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio_1.70.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio_1.70.0.bb
-@@ -8,9 +8,11 @@ LIC_FILES_CHKSUM = " \
-     file://third_party/xxhash/xxhash.h;beginline=1;endline=34;md5=d41d564db2353fc80a713956d85b1690 \
- "
- 
--DEPENDS += "abseil-cpp c-ares openssl python3-protobuf re2 zlib"
-+DEPENDS += "c-ares openssl python3-protobuf re2 zlib"
- 
--SRC_URI += "file://0001-python-enable-unbundled-cross-compilation.patch"
-+SRC_URI += "file://0001-python-enable-unbundled-cross-compilation.patch \
-+           file://abseil-ppc-fixes.patch \
-+           "
- SRC_URI[sha256sum] = "8d1584a68d5922330025881e63a6c1b54cc8117291d382e4fa69339b6d914c56"
- 
- RDEPENDS:${PN} = "python3-protobuf"
-@@ -20,7 +22,8 @@ inherit pypi
- 
- CFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
- 
--export GRPC_PYTHON_BUILD_SYSTEM_ABSL = "1"
-+# unbundling abseil-cpp needs work on dynamic linker issue
-+#export GRPC_PYTHON_BUILD_SYSTEM_ABSL = "1"
- export GRPC_PYTHON_BUILD_SYSTEM_CARES = "1"
- export GRPC_PYTHON_BUILD_SYSTEM_OPENSSL = "1"
- export GRPC_PYTHON_BUILD_SYSTEM_RE2 = "1"
+On 23.02.25 10:00, Hieu Van Nguyen via lists.openembedded.org wrote:
+> oh sorry, I understand this patch is to fix your commit before:
+> https://git.openembedded.org/meta-openembedded/commit/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.28.bb?id=bdbc71f61a86b598fc72bcc167e6bf1f7cc33b08
+> I meant do we really need to remove "--sysrooot="? What happens when I
+> remove ${RECIPE_SYSROOT} only?
+>
+>     #define HAVE_CC "...... -Werror=format-security --sysroot="
+>
+At the first sight it looks like it used only as part of the string
+output when invoking "gphoto2 -v" - otherwise this macro seems to be unused.
 
