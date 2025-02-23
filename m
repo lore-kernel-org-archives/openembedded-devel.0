@@ -2,84 +2,92 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C7FD7C021B3
-	for <webhook@archiver.kernel.org>; Sun, 23 Feb 2025 12:24:09 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web10.65235.1740313443505023165
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E35EAC021B2
+	for <webhook@archiver.kernel.org>; Sun, 23 Feb 2025 12:41:09 +0000 (UTC)
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.web11.65889.1740314465398416393
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Feb 2025 04:24:03 -0800
+ Sun, 23 Feb 2025 04:41:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mPPXoR7/;
- spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4394a0c65fcso35248635e9.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 23 Feb 2025 04:24:03 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=g+6esJnw;
+ spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-38f3486062eso3053407f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 23 Feb 2025 04:41:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1740313442; x=1740918242; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=4XWobOcKOAAzjCNtIUnvrxSChZ9Emfcf1rgmC4WPaXs=;
-        b=mPPXoR7/1LReKFnPVKfaaBDRS9k3tN/o24bzPvyubxk06Dy1NbafbiaRyib7SEKIsH
-         c+2mK+hdB+5w80YaAW3Y896QUrwY3gbidNo8nhSImcCjzbr4kVeGr8K6lIl93NQAfN2i
-         KCd5mzuOpAIJkI8Yv08+P2Kpc9US3gbojK0GEgZiTrn41UHR0dtBAKYl15/8PeUd+Upz
-         YxruhKmTwun9wBvc4tBias+F0Hw5DnKy3MSFvviwD7WlTNCOGSBZhBUBhvkuHw/1wWs6
-         KIkiX7W7dXhuDHhkJkzEJ6qCwcGlKkmGJMqmXGD066lGXOHnGNKO2esFxn16001tsoAr
-         jn8w==
+        d=gmail.com; s=20230601; t=1740314464; x=1740919264; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Mvj5i7u7ffklDA7i3j5LHjUxP3iR1QLqwZCdxCPhrSI=;
+        b=g+6esJnw8y83rUUYuBnVliAViEtRpp9t8yHENiKNui+o+zrMdPUP9O78lAbsT3P5//
+         xu5TmpbB+/nKdrJYOfKhi/7sOE8YGOawidfJtTb32pK2EkAoBBoVslbIS0oaunsOnKwJ
+         wP3DRkBzJrpDWpASoG5N0cigXX0jtIkqB5ydiH0nOC9UCpU9dvsMGZ9Q/6yKDlNDPV3T
+         xYdnEZ9nz7s/I10RuytnHDdl/+JHwq8nnx4hgcZEXQyzy8gyCKKSPINr2uWncoj16ZkL
+         mWqpQ8S5r4p98vSHENVnUqgLmrvsYOfr68ybGaLs1qBznXG8Nadj2tpmJQH5QJfiwUt0
+         BoMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740313442; x=1740918242;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=4XWobOcKOAAzjCNtIUnvrxSChZ9Emfcf1rgmC4WPaXs=;
-        b=nXtMbSn312bWXxg7ziKGuHkYGOGXJJ3NdnZfPGul5fTEbkwxuJgyYmytOwSsLxpBV3
-         Oy+UwJ5aP6/2wFrRInkL0GwZ/3FNEBMMd3p8E5W6+A/NUvwJpxKn/7X43SjBRhH8G09H
-         yVf1UtDBYCZTUS/IWPkpWbItM8DNzNYk2jTEVo/KWrqek9mP/KrjCWlzRHtdr1eMzfOD
-         WhBfeHL+rDutiLinjDgtEPmylVdy6H/W9W4J5c2RudAxmu8hxFxLxEQa7OE5H0/P1fkE
-         ynocEHRkpmvuUYTPocjz0yxPHEAIfV+cIGqCV+wPGHNa9QzqG4h9y4ncQbfBPjqHWrZm
-         nsXA==
-X-Forwarded-Encrypted: i=1; AJvYcCWae83j05/wY/U1RoFJ629YcvWtA4+ZHGzp5nHobLTpKw+TtIzBG7RvmLUSf5+w41Ztm/64mIQgSumHXiTiFsW1Atw=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yyc3dIKaGvO/hDs0NWmPb4YahbTQml2Q6e8mvbodEkFN4ShRnGO
-	x6GK4b7KbthXsjWIike7ypl2bhVeBbWH9MkqnG5PbuCW6k5yOja5
-X-Gm-Gg: ASbGnctRz/z6Tr/pqjF3YuDUhm+PTKouTwPJ6FiKYoT3azIptKniG09hHykFx5gGAvG
-	io+TmOXe7H76hUslcOy5Zz+iRBy+XbRqSSiuOWQDlg5tOIqdwKfQrioHgTjlzPhRStMwAyR+U5c
-	hoJrBVPdtDEB2jKVSREAEylR4Bz5hrxnS+D2osU4WE94sB3J4Fv25OoOglkn3sPS1gE1bJeNOdH
-	1GrWVZnn+h6aq9zFMCUWV6nOtaAeFWOHhi/gNdcBNDvPmBn/ESxOMJAKR7fvZn1px8I2xqe9aWl
-	rQswZKDln75w26bW1GtZlYPiqwopbtyxVw==
-X-Google-Smtp-Source: AGHT+IFdpkMlzoGDvvkdrddLJ52plEnOo9tQbvZv/ikXVGGaz32W7cKc7IGQ1MWFOWyRC3+vPeMH4A==
-X-Received: by 2002:a5d:6c63:0:b0:38f:4f62:7e29 with SMTP id ffacd0b85a97d-38f6eb6bd1cmr7846745f8f.26.1740313441531;
-        Sun, 23 Feb 2025 04:24:01 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38f259f771dsm28584587f8f.81.2025.02.23.04.24.00
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 23 Feb 2025 04:24:01 -0800 (PST)
-Message-ID: <1876f871-5f8b-4365-8fc6-4e1904dc6fed@gmail.com>
-Date: Sun, 23 Feb 2025 13:24:00 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH] gphoto: Fix the sed expression to remove
- --sysroot from config.h
-To: hieu2.nguyen@lge.com, openembedded-devel@lists.openembedded.org
-References: <CAMKF1sr5_pemR2VogAwgbopYDudLSvi0Yvy4dYX4eydVndOjFA@mail.gmail.com>
- <23323.1740301221091041675@lists.openembedded.org>
-Content-Language: en-US
+        d=1e100.net; s=20230601; t=1740314464; x=1740919264;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Mvj5i7u7ffklDA7i3j5LHjUxP3iR1QLqwZCdxCPhrSI=;
+        b=Xe4+w3cJgwBHOb04XV0G89qxFpO3vy0x2MAM6nbeRiwXbRpMeh3n8tYKPdZwXiDZMk
+         EHlupErSlD4HOqJhMVVzT4tNDoNYLSXMUKXzH5f8FAlNNPkVLxsr1920K157uH18sYQx
+         jUaDAWjEcMZdLJrKKO9UJRKNjg9C6F/E+qDzykkGoZb64gIQN+1ZMmuDZNTC+6DyFReq
+         IkPEd8W69E2jCEKJWZCFmnt/4+MR/U8KOovwKqrU+woYDDkQNjydbiBoQCaQR45IQ/Rt
+         vD4cejzf09zjubW2DnIdPEYoCXmmkdMUb1CNfNNL704KFzRfMHhjygq8ECvIauk2AVU1
+         KVNA==
+X-Gm-Message-State: AOJu0Yz5tjqg0KY92q4LKbJvxL62EI1kDlAE15kNjj2RXA4hi0mx4ggf
+	mtyK/SnIQDZCCASgEWz558rEokMeLurR40lHum+49C+1W/+dN5+phLnIiA==
+X-Gm-Gg: ASbGnct80asutJ9ieR0aPdpb85O7c781+IFceUts9WZi4TziaoLfgDJDPviHrPcOM2H
+	20wztCPoHvPD0Aqku5RIrsuVWSa1zzOS+JUIoX+a3zzuHmQQJD1izpm2BKC3dAIvK3X95R4lb8z
+	P+1eB/BzGNUmLoHo3HjvEF9S8zHdKB2wMvdhQYj9vdGPaGnwMPfJKXCUiInFzcmpdE/K/XL6lFU
+	79am0XCeM8U8JsXrD0yYwlTubpThA4sjehITSnaX9J0DNZ5AdYEFHoiH/QzpJrYMJ9/Qvr2n0Zg
+	TqoIgG80i5LSKWkGwJ95EFbpjluIZLiwAE8IIXsf7Q==
+X-Google-Smtp-Source: AGHT+IGhXUt0CMuy4ejvogY88GU/LVcfUFGAhixK2YhcLrCyHOqZXLSz0LJ7bRdd+5QnnxDwOK1AQg==
+X-Received: by 2002:a05:6000:2ac:b0:38f:4e50:8b1a with SMTP id ffacd0b85a97d-38f6e9791a1mr9485289f8f.25.1740314463585;
+        Sun, 23 Feb 2025 04:41:03 -0800 (PST)
+Received: from localhost.localdomain ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-439b02ce4e9sm78150795e9.4.2025.02.23.04.41.02
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 23 Feb 2025 04:41:03 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <23323.1740301221091041675@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH] wireshark: fix SRC_URI
+Date: Sun, 23 Feb 2025 13:41:01 +0100
+Message-ID: <20250223124101.3777597-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.48.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 23 Feb 2025 12:24:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115547
+ <openembedded-devel@lists.openembedded.org>; Sun, 23 Feb 2025 12:41:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115548
 
-On 23.02.25 10:00, Hieu Van Nguyen via lists.openembedded.org wrote:
-> oh sorry, I understand this patch is to fix your commit before:
-> https://git.openembedded.org/meta-openembedded/commit/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.28.bb?id=bdbc71f61a86b598fc72bcc167e6bf1f7cc33b08
-> I meant do we really need to remove "--sysrooot="? What happens when I
-> remove ${RECIPE_SYSROOT} only?
->
->     #define HAVE_CC "...... -Werror=format-security --sysroot="
->
-At the first sight it looks like it used only as part of the string
-output when invoking "gphoto2 -v" - otherwise this macro seems to be unused.
+The original SRC_URI's content seems to be deleted regurarly,
+when a new version is published, making the previous version
+unavailable.
+
+The new SRC_URI ("all-versions" folder) seems to be more
+stable, the previous versions of Wireshark are not deleted from
+there.
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ meta-networking/recipes-support/wireshark/wireshark_4.2.11.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_4.2.11.bb b/meta-networking/recipes-support/wireshark/wireshark_4.2.11.bb
+index e3e210cfed..62aec8f732 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_4.2.11.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_4.2.11.bb
+@@ -8,7 +8,7 @@ DEPENDS = "pcre2 expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 b
+ 
+ DEPENDS:append:class-target = " wireshark-native chrpath-replacement-native "
+ 
+-SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz \
++SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz \
+            file://0001-wireshark-src-improve-reproducibility.patch \
+            file://0002-flex-Remove-line-directives.patch \
+            file://0004-lemon-Remove-line-directives.patch \
 
