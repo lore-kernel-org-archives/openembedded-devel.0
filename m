@@ -2,255 +2,247 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DCA66C021A4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DDA64C021B6
 	for <webhook@archiver.kernel.org>; Tue, 25 Feb 2025 01:01:32 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web11.1102.1740445283722928818
+Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
+ by mx.groups.io with SMTP id smtpd.web11.1104.1740445288905295782
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Feb 2025 17:01:24 -0800
+ Mon, 24 Feb 2025 17:01:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
 Received: from fwd87.aul.t-online.de (fwd87.aul.t-online.de [10.223.144.113])
-	by mailout05.t-online.de (Postfix) with SMTP id CD26AF50
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Feb 2025 02:01:21 +0100 (CET)
+	by mailout11.t-online.de (Postfix) with SMTP id 1F6FC170D
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Feb 2025 02:01:25 +0100 (CET)
 Received: from intel-corei7-64.fritz.box ([79.219.235.213]) by fwd87.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tmjK5-3RwbC50; Tue, 25 Feb 2025 02:01:21 +0100
+	esmtp id 1tmjK5-3RwbC70; Tue, 25 Feb 2025 02:01:22 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 1/3] flatpak: update 1.15.10 -> 1.16.0
-Date: Tue, 25 Feb 2025 02:01:13 +0100
-Message-ID: <20250225010115.31203-1-f_l_k@t-online.de>
+Subject: [meta-oe][PATCH 3/3] xdg-desktop-portal: update 1.18.4 -> 1.20.0
+Date: Tue, 25 Feb 2025 02:01:15 +0100
+Message-ID: <20250225010115.31203-3-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250225010115.31203-1-f_l_k@t-online.de>
+References: <20250225010115.31203-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1740445281-D67FA479-9F518043/0/0 CLEAN NORMAL
-X-TOI-MSGID: 8692d5ec-4d63-4b09-8fd0-469872188577
+X-TOI-EXPURGATEID: 150726::1740445282-92FFB479-77D464F8/10/3626336762 SUSPECT URL
+X-TOI-MSGID: 48782f24-b282-4f46-9daf-88b18f8c123f
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 25 Feb 2025 01:01:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115553
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115555
 
-Changes in 1.16.1
-~~~~~~~~~~~~~~~~~~
-Released: not yet
+Changes in 1.20.0
 
-...
-
-Changes in 1.16.0
-~~~~~~~~~~~~~~~~~~
-Released: 2025-01-09
-
-Bug fixes:
-
- * Update libglnx to 2024-12-06:
-    - Fix an assertion failure if creating a parent directory encounters =
-a
-      dangling symlink (GNOME/libglnx#1)
-    - Fix a Meson warning
-
-* Don't emit terminal progress indicator escape sequences by default. The=
-y are
-  interpreted as notifications by some terminal emulators. (#6052)
-
-* Fix introspection annotations in libflatpak
+Released: 2025-02-19
 
 Enhancements:
 
-* Add the `FLATPAK_TTY_PROGRESS` environment variable, which re-enables t=
-he
-  terminal progress indicator escape sequences added in 1.15.91.
+    Document how the test suite works.
+    Improve the test runner script.
 
-* Document the `FLATPAK_FANCY_OUTPUT` environment variable, which allows
-  disabling the fancy formatting when outputting to a terminal.
+Changes in 1.19.4
 
-Changes in 1.15.91
-~~~~~~~~~~~~~~~~~~
-Released: 2024-12-19
+Released: 2025-02-15
+
+New Features:
+
+    Introduce the host app registry. This interface allows host system ap=
+ps (i.e. apps not running under a sandboxing mechanism like Flatpak) regi=
+ster themselves with XDG Desktop Portal. This allows XDG Desktop Portal t=
+o use a proper app id, and desktop file, improving the interaction with p=
+ortal backends.
 
 Enhancements:
 
- * Add the `FLATPAK_DATA_DIR` environment variable, which allows overridi=
-ng
-   at runtime the data directory location that Flatpak uses to search for
-   configuration files such as remotes. This is useful for running tests,
-   and for when installing using Flatpak in a chroot.
+    Use a new internal script to simplify running tests.
 
- * Add a `FLATPAK_DOWNLOAD_TMPDIR` variable. This allows using download
-   directories other than /var/tmp.
+Bug Fixes:
 
- * Emit progress escape sequence. This can be used by terminal emulators
-   to detect and display progress of Flatpak operations on their graphica=
-l
-   user interfaces.
+    Properly escape notification body in the Notification portal.
+    Fix various documentation links in the USB portal documentation page.
 
-Bug fixes:
+Changes in 1.19.3
 
- * Install missing test data. This should fix "as-installed" tests via
-   `ginsttest-runner`, used for example in Debian's autopkgtest framework=
-.
+Released: 2025-02-12
 
- * Unify and improve how the Wayland socket is passed to the sandboxed ap=
-p.
-   This should fix a regression that is triggered by compositors that bot=
-h
-   implement the security-context-v1 protocol, and sets the `WAYLAND_DISP=
-LAY`
-   environment variable when launching Flatpak apps. (#5863)
+Bug Fixes:
 
- * Fix the plural form of a translatable string.
+    Fix documentation links in the USB portal page.
+    Make the Document portal track open files, and release them when shut=
+ting down. This should fix some harmless leak reports.
+    Fix a memory leak, a crash, and improve robustness against non-existi=
+ng folders in the Dynamic Launcher portal.
+    Fix build with PipeWire 1.3.82
 
-Changes in 1.15.12
-~~~~~~~~~~~~~~~~~~
-Released: 2024-11-28
+Enhancements:
 
-Bug fixes:
+    Make the host path xattr more useful by removing the trailing end cha=
+racter, and also reporting the xattr of files inside folders added to the=
+ document store.
+    Remove libportal-based integrated tests. This should remove the cycli=
+c dependency between libportal, and xdg-desktop-portal. All tests are now=
+ based on the Python testing framework.
 
- * Return to using the process ID of the Flatpak app in the cgroup name.
-   Using the instance ID in 1.15.11 caused crashes when installing apps,
-   extensions or runtimes that use the "extra data" mechanism, which
-   does not set up an instance ID. (#6009)
+Changes in 1.19.2
 
-Changes in 1.15.11
-~~~~~~~~~~~~~~~~~~
-Released: 2024-11-26
+Released: 2025-01-20
+
+Bug Fixes:
+
+    Fix permission check for host system apps in the Camera portal.
+    Do not expose the Settings portal if there are no backends available.
+    Disable sounds-related notification tests if the project is built wit=
+hout wavparse.
+
+Enhancements:
+
+    Start porting the test suite to Python tests. Once finished, this sho=
+uld break the cyclic dependency between xdg-desktop-portal and libportal.
+    Install Python-based tests. This is mostly useful for distributions t=
+o run tests as part of their packaging process.
+
+Changes in 1.19.1
+
+Released: 2024-12-21
 
 Dependencies:
 
- * In distributions that compile Flatpak to use a separate bubblewrap
-   executable, version 0.11.0 is recommended (but not required).
-   The minimum bubblewrap continues to be 0.10.0.
+    XDG Desktop Portal now requires GLib 2.72 or higher.
 
- * In distributions that compile Flatpak to use a separate xdg-dbus-proxy
-   executable, version 0.1.6 is recommended (but not required).
-   The minimum xdg-dbus-proxy continues to be 0.1.0.
+New Features:
+
+    Introduce the Notification v2 portal. This updated version of the Not=
+ification portal supports a plethora of new fields for notifications, suc=
+h as sounds, categories, purpose, and more.
+    Introduce the USB portal. This portal allows apps with relevant permi=
+ssions to enumerate and acquire access to specific USB devices.
+    Introduce a new SchemeSupported method to the OpenURI portal. This ne=
+w method allows apps to know ahead of time if the host system is able to =
+deal with a particular scheme.
 
 Enhancements:
 
- * Allow applications like WebKit to connect the AT-SPI accessibility tre=
-e
-   of processes in a sub-sandbox with the tree in the main process (#5898=
-)
+    Continued the move towards Python-based tests. This should simplify t=
+he test setup in the project quite significantly, and also will allow rem=
+oving the cyclic dependency between libportal and XDG Desktop Portal.
+    Introduce umockdev-based tests.
+    Improve the icon validator so it can deal with memfd-based icons.
+    Clarify behavior of the Settings portal for non-standardized keys.
+    In the Global Shortcuts portal, clarify that the result the BindShort=
+cuts of may be a subset of all requested shortcuts.
+    Add a documentation page about icon validation requirements.
 
-     * New sandboxing parameter `flatpak run --a11y-own-name`, which is
-       like `--own-name` but for the accessibility bus
+Bug Fixes:
 
-     * flatpak-portal API v7: add new sandbox-a11y-own-names option, whic=
-h
-       accepts names matching `${FLATPAK_ID}.*`
+    Fix memory leaks in the Background, Email, and Global Shortcuts porta=
+ls.
+    Fix a general file descriptor & memory leak.
+    Fix a regression in the Settings portal.
+    New and updated translations.
 
-     * Apps may call the `org.a11y.atspi.Socket.Embedded` method on names
-       matching `${FLATPAK_ID}.Sandboxed.*` by default
+Changes in 1.19.0
 
- * `flatpak run -vv $app_id` shows all applicable sandboxing parameters
-   and their source, including overrides, as debug messages (#5895)
+Released: 2024-10-09
 
- * Add --device=3Dusb, a subset of --device=3Dall
-
- * Introduce USB device listing
-
-   * Apps can list which USB devices they want to access ahead of time by
-     using the `--usb` parameter. Check the manpages for the more informa=
-tion
-     about the accepted syntax.
-
-   * Denying access to USB devices is also possible with the `--no-usb`
-     parameter. The syntax is equal to `--usb`.
-
-   * Both options merely store metadata, and aren't used by Flatpak itsel=
-f.
-     This metadata is intended to be used by the (as of now, still in
-     progress) USB portal to decide which devices the app can enumerate a=
-nd
-     request access.
-
- * Add support for KDE search completion
-
- * Use the instance id of the Flatpak app as part of the cgroup name. Thi=
-s
-   better matches the naming conventions for cgroup.
-
- * Preconfigured repositories can now be set up by OS vendors using
-   `${datadir}/flatpak/remotes.d` (typically /usr/share/flatpak/remotes.d=
-),
-   in addition to `${sysconfdir}/flatpak/remotes.d` (typically
-   /etc/flatpak/remotes.d) which is intended for local sysadmin use
-
-Bug fixes:
-
- * Update libglnx to 2024-08-23 (#5918)
-
-     * fix build in environments that use -Werror=3Dreturn-type, such as
-       openSUSE Tumbleweed (#5778)
-
-     * add a fallback definition for G_PID_FORMAT with older GLib
-
-     * avoid warnings for g_steal_fd() with newer GLib
-
-     * improve compatibility of g_closefrom() backport with newer GLib
-
- * Update meson wrap file for bubblewrap to version 0.11.0:
-
-     * drop Autotools build system
-
-     * improve handling of EINTR
-
-     * improve handling of socket control messages
-
-     * improve compatibility with busybox
-
-     * improve compatibility with older Meson
-
-     * fix deprecation warnings
-
- * Update meson wrap file for xdg-dbus-proxy to version 0.1.6:
-
-     * compatibility with D-Bus implementations that pipeline the
-       authentication handshake, such as sd-bus and zbus
-
-     * compatibility with D-Bus implementations that use non-consecutive
-       serial numbers, such as godbus and zbus
-
-     * broadcast signals can be allowed without having to add TALK permis=
-sion
-       (#5828)
-
-     * fix memory leaks
-
- * Fix some memory leaks
-
- * Translation updates: cs, pl, zh_CN
-
-Internal changes:
-
- * Better const-correctness (#5913)
- * Fix a shellcheck warning in the tests (#5914)
+    Completely rework and restructure the documentation website. Document=
+ation is now segmented by target audience (app developers, desktop develo=
+pers, and contributors). It also documents how the Document portal operat=
+es, the FUSE filesystem, and custom file attributes. This is available in=
+ the following address: https://flatpak.github.io/xdg-desktop-portal/docs=
+/index.html
+    The portals.conf parser is now able to handle fallback backends bette=
+r, and respects the order of backends in the config file.
+    Try to use the xdg-desktop-portal-gtk backend as a last resort backen=
+d, if everything else fails.
+    Implement getlk and setlk, and honour O_NOFOLLOW, in the Document por=
+tal's FUSE filesystem.
+    Neutralize the Devices portal. Originally the Devices portal was intr=
+oduced so that services like PulseAudio or PipeWire could request access =
+to microphones and cameras on the behalf of apps. It was not meant to be =
+used by sandboxed apps directly, which is unusual for a portal. Practical=
+ly, however, it didn't take off.
+    Implement PID/TID mapping for host system apps.
+    Add a new "supported_output_file_formats" option to the Print portal.=
+ This can be used by apps like browsers to limit the output file formats =
+presented by the Print portal backend. For example, an app can limit file=
+ printing to PDF files.
+    Add a new "GetHostPaths" method to the Document portal, which allows =
+mapping file descriptors to paths on the host system. This can be used by=
+ apps to show more meaningful file paths in the user interface.
+    Like the new method above, the Document portal sets the "user.documen=
+t-portal.host-path" xattr on files, pointing to the the host system file =
+path. The use case is similar to "GetHostPaths".
+    Make the Background portal more robust when validating autostart file=
+s.
+    Clarify behavior of the File Chooser portal in the documentation page=
+s.
+    Improve robustness against deleted o_path fds in the Document portal.
+    Fix a warning in some systems while trying to load Request D-Bus obje=
+ct properties.
+    Fix a physical inode leak in the Document portal.
+    Various improvements to the test suite. Python-based tests now run in=
+ parallel and are more careful when setting up the mock D-Bus server. Tes=
+ts also start dbus-monitor if necessary now. FUSE tests of the Document p=
+ortal have been made more TAP-alike now.
+    Memory leak fixes in a variety of portals and services, including the=
+ permissions database, the Document portal, the File Transfer portal, the=
+ Location portal, the Background portal, tests, and the icon validator. A=
+nd more. There's a lot of memory leak fixes everywhere, really.
+    Major refactorings of the icon validator. Icons are now limited to 4M=
+B files.
+    Update XML specification specifying session handle type to match curr=
+ent actual ABI in GlobalShortcuts, Inhibit, RemoteDesktop, and ScreenCast=
+ portals.
+    New and updated translations.
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../flatpak/{flatpak_1.15.10.bb =3D> flatpak_1.16.0.bb}           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/flatpak/{flatpak_1.15.10.bb =3D> flatpak=
-_1.16.0.bb} (97%)
+ ...desktop-portal_1.18.4.bb =3D> xdg-desktop-portal_1.20.0.bb} | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/xdg-desktop-portal/{xdg-desktop-portal_1.=
+18.4.bb =3D> xdg-desktop-portal_1.20.0.bb} (93%)
 
-diff --git a/meta-oe/recipes-extended/flatpak/flatpak_1.15.10.bb b/meta-o=
-e/recipes-extended/flatpak/flatpak_1.16.0.bb
-similarity index 97%
-rename from meta-oe/recipes-extended/flatpak/flatpak_1.15.10.bb
-rename to meta-oe/recipes-extended/flatpak/flatpak_1.16.0.bb
-index c9d04e9261..1f0e649eea 100644
---- a/meta-oe/recipes-extended/flatpak/flatpak_1.15.10.bb
-+++ b/meta-oe/recipes-extended/flatpak/flatpak_1.16.0.bb
-@@ -8,7 +8,7 @@ SRC_URI =3D " \
-     file://0001-flatpak-pc-add-pc_sysrootdir.patch \
+diff --git a/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-porta=
+l_1.18.4.bb b/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-port=
+al_1.20.0.bb
+similarity index 93%
+rename from meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal=
+_1.18.4.bb
+rename to meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1=
+.20.0.bb
+index 87e8f1f5e9..800624bd90 100644
+--- a/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1.18.=
+4.bb
++++ b/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1.20.=
+0.bb
+@@ -27,18 +27,19 @@ RDEPENDS:${PN} =3D "bubblewrap rtkit ${PORTAL_BACKEND=
+S} fuse3-utils"
+ inherit meson pkgconfig python3native features_check
+=20
+ SRC_URI =3D " \
+-	git://github.com/flatpak/xdg-desktop-portal.git;protocol=3Dhttps;branch=
+=3Dxdg-desktop-portal-1.18 \
++	git://github.com/flatpak/xdg-desktop-portal.git;protocol=3Dhttps;branch=
+=3Dmain \
+ 	file://0001-meson.build-add-a-hack-for-crosscompile.patch \
  "
 =20
--SRCREV =3D "8b4f523c4f8287d57f1a84a3a8216efe200c5fbf"
-+SRCREV =3D "1440f4faa67ebf69c7559f31d2cab59e6ec6fe2b"
-=20
  S =3D "${WORKDIR}/git"
+-SRCREV =3D "11c8a96b147aeae70e3f770313f93b367d53fedd"
++SRCREV =3D "85df26fb1c53334969fea3f15c2a06a14831094b"
 =20
+ FILES:${PN} +=3D "${libdir}/systemd ${datadir}/dbus-1"
+=20
+ EXTRA_OEMESON +=3D " \
+ 	--cross-file=3D${WORKDIR}/meson-${PN}.cross \
+ 	-Ddbus-service-dir=3D${datadir}/dbus-1/services \
++	-Dtests=3Ddisabled \
+ "
+=20
+ do_write_config:append() {
 --=20
 2.48.1
 
