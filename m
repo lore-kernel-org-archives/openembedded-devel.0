@@ -2,50 +2,50 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DF34C28B22
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3C51C28B26
 	for <webhook@archiver.kernel.org>; Tue, 25 Feb 2025 23:25:06 +0000 (UTC)
-Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
- by mx.groups.io with SMTP id smtpd.web10.2298.1740525897826058160
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.web10.2308.1740525905856819302
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Feb 2025 15:25:04 -0800
+ Tue, 25 Feb 2025 15:25:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=mCcgWZ1m;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=DyFcoFWt;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1740525904; x=1772061904;
+  t=1740525906; x=1772061906;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=VlW3jXgOcVzxdkn5lsrXL1qOFOc0i5inqbw5N8ronXI=;
-  b=mCcgWZ1mIuFg/s52xsEXpy5O/KPi0ykpNhcfkAVz2f8yuWml39WWaYDL
-   nesOIecYRYNFEkvYUkyGGTsio5LIy0yEBDGucPSpxgst6j4TvYRnazTl+
-   Hldgiljd53tRA6S0vK1mx5AmFE+bqxVMcdl8GKH7ixmKhUjF7v/3Oe0jQ
-   0T8SVrclgIePhqTZQqcAhGNBWzlswI08H+0BiLvsiwKTcnCshvlMQM2j1
-   pRLOzJVTv6Mg5fbHUjRhQKE7Vp8v7Uh8Fglv6COXDb1SWD3DieTiRT1ZV
-   oE1uEjzTIE9vQdW7MdtjHizvO2iiQBkIpDNvCiJxdxdIMt1y9KAEXNTKj
-   g==;
-X-CSE-ConnectionGUID: HFtW8TIWSVqEeG/1avovuA==
-X-CSE-MsgGUID: ETx4BrQMQC2yDMrpQj8YwA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11356"; a="178507192"
+  bh=ZSMOM+uug0VG7naSr89cu4nLr2YYOUiwbQmlMB7pedI=;
+  b=DyFcoFWtj7HF3znWg6xD4P5/uxeTWEpwf4FMilMkrt9djueticmzg0rU
+   e66hxyluIp2AeQHmQPj7WvhKM5L/jp890My1o1rBbZXthywNADoDH0wif
+   7f17Wp1AUcVyz5igzRa+nfH+jMyKPegS6shWnGtV4ShvMMfo6YSF/Z980
+   GoKEt5Eqz712FvjmTMARBL1hWXl7j+BB84NtnoyakCOm47yY5aDOW+BH5
+   QcUMhUMmEan7ti4Aet+SISEO2U0pRjc60k3DQt+4xqD02unrQ38Oa4DUv
+   oucZ5hccXGL/H/MrJSF8N/zDDjP2bnh/6IOVxqx3DBel8TUgJWE8kLlFX
+   w==;
+X-CSE-ConnectionGUID: +3COeCacQG+BuazSK8cshQ==
+X-CSE-MsgGUID: aidqvsIsQT23zYF3da2Cwg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11356"; a="179538606"
 X-IronPort-AV: E=Sophos;i="6.13,314,1732546800"; 
-   d="scan'208";a="178507192"
-Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
-  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Feb 2025 08:25:03 +0900
-Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
-	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 2DEC9E445A
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 08:25:01 +0900 (JST)
+   d="scan'208";a="179538606"
+Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Feb 2025 08:25:04 +0900
+Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
+	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 2FCD2C2262
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 08:25:02 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id E0618C8BF5
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 08:25:00 +0900 (JST)
+	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id E7491D4BEB
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 08:25:01 +0900 (JST)
 Received: from localhost.localdomain.localdomain (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id A49DB1A0073;
-	Wed, 26 Feb 2025 07:25:00 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 8B9C21A000B;
+	Wed, 26 Feb 2025 07:25:01 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 42/51] python3-snagboot: upgrade 2.1 -> 2.2
-Date: Wed, 26 Feb 2025 07:24:32 +0800
-Message-Id: <1740525881-21103-42-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 46/51] python3-virtualenv: upgrade 20.29.1 -> 20.29.2
+Date: Wed, 26 Feb 2025 07:24:36 +0800
+Message-Id: <1740525881-21103-46-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1740525881-21103-1-git-send-email-wangmy@fujitsu.com>
 References: <1740525881-21103-1-git-send-email-wangmy@fujitsu.com>
@@ -53,41 +53,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 25 Feb 2025 23:25:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115639
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115645
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-docs:
-provide some performance indicators for Snagfactory
-
-snagflash:
-add a Fastboot command to flash Android Sparse Image files
-
-snagrecover:
-add support for AM62Lx platforms
+Changelog:
+==============
+- Remove old virtualenv wheel
+- Bump pip to 25.0.1
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../python/{python3-snagboot_2.1.bb => python3-snagboot_2.2.bb} | 2 +-
+ ...hon3-virtualenv_20.29.1.bb => python3-virtualenv_20.29.2.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-snagboot_2.1.bb => python3-snagboot_2.2.bb} (86%)
+ rename meta-python/recipes-devtools/python/{python3-virtualenv_20.29.1.bb => python3-virtualenv_20.29.2.bb} (87%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-snagboot_2.1.bb b/meta-python/recipes-devtools/python/python3-snagboot_2.2.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-snagboot_2.1.bb
-rename to meta-python/recipes-devtools/python/python3-snagboot_2.2.bb
-index db9bb82054..07b9a5208c 100644
---- a/meta-python/recipes-devtools/python/python3-snagboot_2.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-snagboot_2.2.bb
-@@ -3,7 +3,7 @@ SUMMARY = "Snagboot intends to be an open-source replacement vendor-specific too
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-python/recipes-devtools/python/python3-virtualenv_20.29.1.bb b/meta-python/recipes-devtools/python/python3-virtualenv_20.29.2.bb
+similarity index 87%
+rename from meta-python/recipes-devtools/python/python3-virtualenv_20.29.1.bb
+rename to meta-python/recipes-devtools/python/python3-virtualenv_20.29.2.bb
+index dc42b4c79f..c9f20d44e3 100644
+--- a/meta-python/recipes-devtools/python/python3-virtualenv_20.29.1.bb
++++ b/meta-python/recipes-devtools/python/python3-virtualenv_20.29.2.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/pypa/virtualenv"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0ce089158cf60a8ab6abb452b6405538"
  
--SRC_URI[sha256sum] = "cfd5e80db6010768d129eb123c4de6a8f3661fac353e20cc6e103e731d13c8d8"
-+SRC_URI[sha256sum] = "00f4933cb52fb73dcf61a0723d77d9d6bc509affb7cd5d5dcd875d2c333e8b08"
+-SRC_URI[sha256sum] = "b8b8970138d32fb606192cb97f6cd4bb644fa486be9308fb9b63f81091b5dc35"
++SRC_URI[sha256sum] = "fdaabebf6d03b5ba83ae0a02cfe96f48a716f4fae556461d180825866f75b728"
  
- inherit pypi python_setuptools_build_meta
- 
+ BBCLASSEXTEND = "native nativesdk"
+ inherit pypi python_hatchling
 -- 
 2.43.0
 
