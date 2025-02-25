@@ -1,93 +1,93 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9904AC021BC
-	for <webhook@archiver.kernel.org>; Tue, 25 Feb 2025 13:37:11 +0000 (UTC)
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
- by mx.groups.io with SMTP id smtpd.web11.8002.1740490629135517038
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5F01C021BC
+	for <webhook@archiver.kernel.org>; Tue, 25 Feb 2025 13:49:21 +0000 (UTC)
+Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
+ by mx.groups.io with SMTP id smtpd.web10.8170.1740491360049637814
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Feb 2025 05:37:09 -0800
+ Tue, 25 Feb 2025 05:49:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=iLMqoOSm;
- spf=pass (domain: gmail.com, ip: 209.85.208.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-5dca468c5e4so10029602a12.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Feb 2025 05:37:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1740490627; x=1741095427; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=CCx2kioOS13F7WaX+srV4xD4R/5e+rCAp+2OXzI9oNw=;
-        b=iLMqoOSmAOkLR0eF7BbkN4/X9c+xK+la7P+zWtP2jDfa1/bMJF65qG6OonSOYPL1Hv
-         qjYqz3OtetUCVyOwkuP/+lYVxaS3py8Bfh/9cGHmyF86tLeA0trsXabN9X5qJUzOvIvh
-         C/ennPEOkNJx6X0enm0HV3CeC6nHBAYz1Z5LSAMomKkSFFvViBQAIEemMFOnTFnZ6O0B
-         pobaaCgxsBk1eHp+EMVziQW5HKmYUTcjcTUUdHkis/Wk7/M0LOiVlFIF6qX2XTRjcKNw
-         6TmyE+s7zxnJ6GVn+5M4RpabFEpLGkYzMtfuFkwKPLljoui01K1S4yDGuSOxx+9Ck8dY
-         S48g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740490627; x=1741095427;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=CCx2kioOS13F7WaX+srV4xD4R/5e+rCAp+2OXzI9oNw=;
-        b=t1HfyJu+J/IosD4hUZ8nSTS0DDj9k8PQEkyLAhZPIfunEkrKbEncTtfaSdgmJJC0Od
-         8+ssLDKS8CsEEIpi7qFZsugGJt35+WzSkhlskpnigIbyWsRxuL4LCJqxy4S04kYhE7c3
-         aXroDaw2RDZPzopmilU5WWPUVw8PjIfIX5uCVc54ua5x7VKK8RQm6VLcQ+0RpTpVnwTU
-         UncXIM76xcI+Pz51O1s3RQDBF0uaMJrT7vY/Ff/eKZg7iPhnEmLMyLtfVFM3a6hf7vKM
-         OvcRNNRFDe/e9/R/D+PwLfotTXEZdBtXqUj858CRCTFn9NTq8XrPQS5WYg2ITEwsZJ/f
-         wYgg==
-X-Forwarded-Encrypted: i=1; AJvYcCWwae8ecMdegbfXG5gOcMpBWz7LeCCySYBAqPNNuMdK8aeq+78Q13JIl/KSjdMHFmN7WtOzWcrUEIXcpcgQycnC1/s=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzKix22e2GCg+RC84x0byKsC2N0jwz++Nldz2CDyAu7XJC2RmDT
-	mFihRDUeYknNEM9crD3Yqbyl3yx9D/gwUHPI6pC55xIirUaq+zWmWaWz7A==
-X-Gm-Gg: ASbGncvkbibJdFYBnmtNPjbtTJlfFARgde1qeXDSz45K+nlpJC2hqBXmBeMfZjEHjJW
-	7QbdKLptWb6i3zlQNTyJZPeJY4f/0w625Tkmi7WJF+JZ6RK6qEW3fMb/rtmamDFOcChAWvCV2RF
-	1Waaekpb5FMimgRgm+m3geDCZOOTpta3szGWjO7WTMKijdQwvQPkBasscaU3IpIGkpIfQ/4fR0X
-	bp0dGS2YVgvdpddXEFU2dLbNrZ9I5irt/YLfYPZkgVJ/6/4B47zvbf9ky7JBsNqAR2MCtDTQxHW
-	fIU26Rvjz3edsV1idx4iiFm9xx7C0G6Qtg==
-X-Google-Smtp-Source: AGHT+IFB/KBufWNCVGZ5AEYGYB02Xw4mHcD/qlHMh8QHGjzIBAhHafY82TlU06fpLbpLNU5hPkuMpQ==
-X-Received: by 2002:a05:6402:2791:b0:5dc:8fb1:d43e with SMTP id 4fb4d7f45d1cf-5e4457abc8dmr3270667a12.12.1740490627327;
-        Tue, 25 Feb 2025 05:37:07 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5e459c3fa2fsm1226383a12.5.2025.02.25.05.37.06
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 25 Feb 2025 05:37:06 -0800 (PST)
-Message-ID: <184545a8-1f4c-49c5-b1aa-51bf62cd0a42@gmail.com>
-Date: Tue, 25 Feb 2025 14:37:06 +0100
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
+Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
+	by mailout05.t-online.de (Postfix) with SMTP id 2936D12F6
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Feb 2025 14:49:18 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.41.232]) by fwd86.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1tmvJC-3sgT3Z0; Tue, 25 Feb 2025 14:49:14 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [RFC][meta-gnome][PATCH 1/7] xdg-desktop-portal-gnome: update 47.3 -> 48.beta
+Date: Tue, 25 Feb 2025 14:49:31 +0100
+Message-ID: <20250225134937.2085793-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH v2] capnproto: remove binaries from
- target-build, add bbclass
-To: Thomas Schlien <ts@ferncast.de>, openembedded-devel@lists.openembedded.org
-References: <1820B183AA0ABC96.15786@lists.openembedded.org>
- <b74c1960-4f13-4758-8a80-22f025577c79@gmail.com>
- <7258a928-31f9-43ec-af76-26af4e331bd5@ferncast.de>
- <8c1f9454-f0f1-4d4c-a3a9-3757694b8c4c@gmail.com>
- <85a846dd-3b22-46e6-9f3c-6d014268e46f@ferncast.de>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <85a846dd-3b22-46e6-9f3c-6d014268e46f@ferncast.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-TOI-EXPURGATEID: 150726::1740491354-C0C5D97F-3431E10F/0/0 CLEAN NORMAL
+X-TOI-MSGID: 3833a743-f839-4728-907d-e48693989186
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Feb 2025 13:37:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115572
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Feb 2025 13:49:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115575
 
-On 25.02.25 11:24, Thomas Schlien wrote:
-> I like the idea of the class-target, but we were not able to get it 
-> running in our environment for now, even when removing the patch file. 
-> Everything looks correct, but the "find_package..." in cmake is not able 
-> to find the capnp binaries. It would be nice to have this working since 
-> when then could remove our ugly hack. ;-)
->
-I have submitted a new version, please feel free to give it a go.
-The relevant capnproto binaries should be installed now for both
-class-native and class-target also (but only on the actual
-target-machine of course, not in RECIPE_SYSROOT).
+Changes in 48.beta.2
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+ - Add USB portal backend
+ - Fix screen cast portal done signal emission
+Changes in 48.beta
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+- Use the new AdwInlineViewSwitcher widget in the screencast dialog
+- Update apps list properly in the screencast dialog
+- Generate systemd sysexts in CI
+- Fix an issue with the Notification portal implementation
+- Depend on libadwaita >=3D 1.7.alpha
+- Translation updates
+Changes in 48.alpha
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+- Outsource external window management to libgxdp
+- Fix the capabilities for the print dialog
+- Fix memory leak in screencast widget
+- Implement a signal handler to help with ASAN
+- Use Adwaita widgets in the app chooser dialog
+- Fix a memory management issue with the screencast widget
+- Depend on xdg-desktop-portal >=3D 1.19.1
+- Translation updates
 
-Though I couldn't try to use the generated cmake files on a target
-machine, I think it will need the same cmake arguments (with the correct
-value) that you can find specified in capnproto.bbclass also.
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ ...portal-gnome_47.3.bb =3D> xdg-desktop-portal-gnome_48.beta.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-support/xdg-desktop-portal/{xdg-desktop-portal=
+-gnome_47.3.bb =3D> xdg-desktop-portal-gnome_48.beta.bb} (89%)
+
+diff --git a/meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-po=
+rtal-gnome_47.3.bb b/meta-gnome/recipes-support/xdg-desktop-portal/xdg-de=
+sktop-portal-gnome_48.beta.bb
+similarity index 89%
+rename from meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-por=
+tal-gnome_47.3.bb
+rename to meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-porta=
+l-gnome_48.beta.bb
+index 215560ed4d..3d19060c2a 100644
+--- a/meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-portal-gn=
+ome_47.3.bb
++++ b/meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-portal-gn=
+ome_48.beta.bb
+@@ -21,7 +21,7 @@ inherit gnomebase pkgconfig gsettings features_check
+=20
+ REQUIRED_DISTRO_FEATURES =3D "polkit"
+=20
+-SRC_URI[archive.sha256sum] =3D "9f6e4b14b583367c915e9494764f27cb84927faa=
+3f9e6e018b93bbbcf3361e44"
++SRC_URI[archive.sha256sum] =3D "17f2bc70cc693f85c93b436449d25b26b58ca348=
+7cf61fa1c860366cee05dba1"
+=20
+ PACKAGECONFIG ?=3D "screenshot screencast ${@bb.utils.filter('DISTRO_FEA=
+TURES', 'wayland', d)}"
+ PACKAGECONFIG[wayland] =3D ",,wayland-native"
+--=20
+2.48.1
+
 
