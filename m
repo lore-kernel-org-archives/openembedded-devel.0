@@ -1,455 +1,329 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 50AB1C021B2
-	for <webhook@archiver.kernel.org>; Tue, 25 Feb 2025 15:58:13 +0000 (UTC)
-Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
- by mx.groups.io with SMTP id smtpd.web10.11721.1740499083765485039
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A90D9C021B2
+	for <webhook@archiver.kernel.org>; Tue, 25 Feb 2025 17:15:13 +0000 (UTC)
+Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
+ by mx.groups.io with SMTP id smtpd.web10.14148.1740503712239881510
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Feb 2025 07:58:04 -0800
+ Tue, 25 Feb 2025 09:15:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
-Received: from fwd78.aul.t-online.de (fwd78.aul.t-online.de [10.223.144.104])
-	by mailout09.t-online.de (Postfix) with SMTP id 5D1C07644
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Feb 2025 16:58:01 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.41.232]) by fwd78.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tmxJl-0jjLHd0; Tue, 25 Feb 2025 16:57:57 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCHv2] accountsservice: update 22.08.8 -> 23.13.9
-Date: Tue, 25 Feb 2025 16:58:36 +0100
-Message-ID: <20250225155836.639196-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.48.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fDnPbysp;
+ spf=pass (domain: gmail.com, ip: 209.85.210.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f51.google.com with SMTP id 46e09a7af769-7273c07149fso2839078a34.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Feb 2025 09:15:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1740503711; x=1741108511; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=2QQjtt8sleCjGzOB8qk6pbYpSy4vCCM1qEDXMpP4zIM=;
+        b=fDnPbysp6H1b7RLKfIZgYwe5fjEIWU317b3m4FK9frvQZ6RNHDE6jjPtKILy6HCd3J
+         DxPkXo6aRjc49gtplJbKHaK6ZH6J7oREehkOAWXJHzo1tCmB2ehrJGvdrVgr2TEAunNd
+         prrmpreYYbkohC6tlmLX/FDKE1bJUGQYOTYL0nG+69bDTnPXanB7+7ZkbdQol5uHxELW
+         nU50pre/y/AB38Gg0nGfcZRs9IQYXai6JAuwEEpqx3sT5BO98xPRqxe5KM3tEJVDD2/c
+         P4yZDpznqVvxpBxW5L8rETKQF0yYpXd1LvrFF6oOrnc+gX3WHgGLE/ZJ5Jn+rdu2ta6K
+         OTQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1740503711; x=1741108511;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=2QQjtt8sleCjGzOB8qk6pbYpSy4vCCM1qEDXMpP4zIM=;
+        b=tqcNYgWNwqH0RTGKDoaXHJokXvEWgRwI8ZBqSQ84uQP9Ow4OKrw1GmhPup61rrWhhm
+         E0T7Y+5fSp2NnwSJOxLDS92Nx2ietgTtvaGCjy/USX65u8ufZlHgtL0WGIM5KS4+SvNP
+         U2Ubk+Ja0fVlXBuccvKoY5zA90vJ5gCqGO9xxXzQoDMOtxtAJMoqIepcEaDCyMDSxytP
+         E7UN0L92qqeevrnidN/m46VvpptF1tm4QgMbp5Zj3l9rXHzNMGMGRhSxmVGe8ayMq7XN
+         GrENqy+k+kUb6cbhwrP3QMcYaRFl/ccEyHlhwS3KyaUcgOfVyc7KyJEy72EIIl62Iw1D
+         13aQ==
+X-Gm-Message-State: AOJu0YxKtJYTmncGLXeIXobm+cBAziU3paApyN1oqEuI4bWpLJZwbwkw
+	iVBZlrYzf9PPVChPRRADi9RUAreSAGMAov39TqKxZaGtkLSGmqUF1mgs65ZErEji40ei4oeOCNO
+	4RydGLfnDcWXxqV4qqK2LNJXNLhI=
+X-Gm-Gg: ASbGnct/9ZaodNQAyUmTcqQG7iMpWz6vCDFM0sMK7h1iSDGxV6c5xkgc7KxTJVYvLjC
+	QrCemgZtO8XJocGYA2QZ8MNb8xqKW9RZZ7UJjeR31/Gf7t7e1gWmF96xu5SJoiBQMi+4p2VXPDR
+	/HLupHzxD2dLWjRqsKrlYAxA/0iO+/o5lZW9aBi/iyQA==
+X-Google-Smtp-Source: AGHT+IFh504mmwIOTGnUUMp72yKGuABEX/uax2doo88De1YtFesI7QEgs+A+MrkYT/0JztguwzTsj9Fahya209A41Eo=
+X-Received: by 2002:a05:6808:3847:b0:3f4:95b:b12b with SMTP id
+ 5614622812f47-3f547e54310mr110113b6e.33.1740503711351; Tue, 25 Feb 2025
+ 09:15:11 -0800 (PST)
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1740499077-1985C983-A2DF8321/10/3626336762 SUSPECT URL
-X-TOI-MSGID: f6bcac9e-aeda-4d10-b407-6baa79e2a2bb
-Content-Transfer-Encoding: quoted-printable
+References: <20250225134937.2085793-1-f_l_k@t-online.de> <20250225134937.2085793-4-f_l_k@t-online.de>
+In-Reply-To: <20250225134937.2085793-4-f_l_k@t-online.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 25 Feb 2025 09:15:00 -0800
+X-Gm-Features: AWEUYZlFdk5ygVvOB6FMzsZhS9FeQpnVTZL6hGgNuhkzMEWbbk1nx9xRXdefvvc
+Message-ID: <CAMKF1spA7v-Bv-HcyPcS2TLJg5TDEfs6Bbqsk-rVchuXAif52w@mail.gmail.com>
+Subject: Re: [oe] [RFC][meta-gnome][PATCH 4/7] gnome-software_: update 47.2 -> 48.beta
+To: f_l_k@t-online.de
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000720c67062efa99fb"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Feb 2025 15:58:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115583
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Feb 2025 17:15:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115584
 
-- backport a patch to add meson options for wtmp and tests (needed for mu=
-sl build)
-- refresh musl patch
-- add PACKAGECONFIGS for admin_group and elogind
-- update dependencies
-- inherit pkgconfig
-- add backport patch to fix:
+--000000000000720c67062efa99fb
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-| ../accountsservice-23.13.9/subprojects/mocklibc-1.0/src/netgroup-debug.=
-c:25:3: error: implicit declaration of function 'print_indent' [-Wimplici=
-t-function-declaration]
-|    25 |   print_indent(stream, indent);
+Should we wait for final 48 release ?
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../0001-musl-Hack-to-fix-build.patch         |  36 ------
- .../0002-musl-add-missing-fgetspent_r.patch   |  23 ++--
- ...e12ad4044d33cc54c71c75773c5a653dad09.patch | 115 ++++++++++++++++++
- .../accountsservice-23.13.9-c99-fixes.patch   |  51 ++++++++
- ..._22.08.8.bb =3D> accountsservice_23.13.9.bb} |  25 ++--
- 5 files changed, 197 insertions(+), 53 deletions(-)
- delete mode 100644 meta-gnome/recipes-support/accountsservice/accountsse=
-rvice/0001-musl-Hack-to-fix-build.patch
- create mode 100644 meta-gnome/recipes-support/accountsservice/accountsse=
-rvice/00b6e12ad4044d33cc54c71c75773c5a653dad09.patch
- create mode 100644 meta-gnome/recipes-support/accountsservice/accountsse=
-rvice/accountsservice-23.13.9-c99-fixes.patch
- rename meta-gnome/recipes-support/accountsservice/{accountsservice_22.08=
-.8.bb =3D> accountsservice_23.13.9.bb} (50%)
+On Tue, Feb 25, 2025 at 5:49=E2=80=AFAM Markus Volk via lists.openembedded.=
+org
+<f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
 
-diff --git a/meta-gnome/recipes-support/accountsservice/accountsservice/0=
-001-musl-Hack-to-fix-build.patch b/meta-gnome/recipes-support/accountsser=
-vice/accountsservice/0001-musl-Hack-to-fix-build.patch
-deleted file mode 100644
-index 944d2f9165..0000000000
---- a/meta-gnome/recipes-support/accountsservice/accountsservice/0001-mus=
-l-Hack-to-fix-build.patch
-+++ /dev/null
-@@ -1,36 +0,0 @@
--From ff0718174faf1167fb4765ebe4bd280bbe8d2ac6 Mon Sep 17 00:00:00 2001
--From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
-om>
--Date: Sun, 8 Dec 2019 23:42:00 +0100
--Subject: [PATCH] musl: Hack to fix configure
--
--Upstream-Status: Inappropriate [Musl Specific]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- meson.build | 11 ++++++++---
-- 1 file changed, 8 insertions(+), 3 deletions(-)
--
--diff --git a/meson.build b/meson.build
--index 075776f..dfd7421 100644
----- a/meson.build
--+++ b/meson.build
--@@ -101,9 +101,14 @@ elif cc.has_header_symbol('paths.h', '_PATH_WTMPX')
--=20
--   config_h.set('PATH_WTMP', '_PATH_WTMPX')
-- else
---  path_wtmp =3D '/var/log/utx.log'
---  assert(run_command('test', '-e', path_wtmp).returncode() =3D=3D 0, 'D=
-o not know which filename to watch for wtmp changes')
---  config_h.set_quoted('PATH_WTMP', path_wtmp)
--+  # musl: This is just a build fix hack.
--+  # As usual they know better, consider all other projects crap and off=
-er zero
--+  # alternatives: So wtmp is a dead stub only [1] (=3D /dev/null/wtmp -=
- taken
--+  # from musl sources).
--+  # Maybe a hero comes along and adds utmps [2] to make accountsservice=
- useful for musl
--+  # [1] https://wiki.musl-libc.org/faq.html#Q:-Why-is-the-utmp/wtmp-fun=
-ctionality-only-implemented-as-stubs?
--+  # [2] https://github.com/skarnet/utmps
--+  config_h.set_quoted('PATH_WTMP', '/dev/null/wtmp')
-- endif
--=20
-- # compiler flags
----=20
--2.34.1
--
-diff --git a/meta-gnome/recipes-support/accountsservice/accountsservice/0=
-002-musl-add-missing-fgetspent_r.patch b/meta-gnome/recipes-support/accou=
-ntsservice/accountsservice/0002-musl-add-missing-fgetspent_r.patch
-index 2b0924b2e4..dfc27b7302 100644
---- a/meta-gnome/recipes-support/accountsservice/accountsservice/0002-mus=
-l-add-missing-fgetspent_r.patch
-+++ b/meta-gnome/recipes-support/accountsservice/accountsservice/0002-mus=
-l-add-missing-fgetspent_r.patch
-@@ -1,27 +1,29 @@
--From 7401e682400df87f3258f795bb1d143f64a35a9f Mon Sep 17 00:00:00 2001
-+From 87c5c711f6f828053abd754628a0067696cfd54d Mon Sep 17 00:00:00 2001
- From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
-om>
--Date: Mon, 9 Dec 2019 00:12:08 +0100
-+Date: Mon, 9 Dec 2019 09:36:12 +0100
- Subject: [PATCH] musl: add missing fgetspent_r
-=20
-+From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
-om>
-+
- Stolen from void-linux
-=20
- Upstream-Status: Inappropriate [musl-specific]
--
- ---
-- src/daemon.c | 20 ++++++++++++++++++++
-- 1 file changed, 20 insertions(+)
-+ src/daemon.c | 22 ++++++++++++++++++++++
-+ 1 file changed, 22 insertions(+)
-=20
- diff --git a/src/daemon.c b/src/daemon.c
--index c52bda3..a7676fe 100644
-+index aa9d050..cc53eae 100644
- --- a/src/daemon.c
- +++ b/src/daemon.c
--@@ -164,6 +164,26 @@ remove_cache_files (const gchar *user_name)
-+@@ -215,6 +215,28 @@ remove_cache_files (const gchar *user_name)
-          g_remove (icon_filename);
-  }
- =20
--+/* Musl libc does not support fgetspent_r(), write own
--+ * wrapper
--+ */
-++#ifndef __GLIBC__
-++ /* Musl libc does not support fgetspent_r(), write own
-++  * wrapper
-++  */
- +static int fgetspent_r(FILE *fp, struct spwd *spbuf, char *buf, size_t =
-buflen, struct spwd **spbufp) {
- +       struct spwd *shadow_entry =3D fgetspent(fp);
- +       if(!shadow_entry)
-@@ -38,6 +40,7 @@ index c52bda3..a7676fe 100644
- +
- +       return 0;
- +}
-++#endif
- +
-  static struct passwd *
-  entry_generator_fgetpwent (Daemon       *daemon,
-diff --git a/meta-gnome/recipes-support/accountsservice/accountsservice/0=
-0b6e12ad4044d33cc54c71c75773c5a653dad09.patch b/meta-gnome/recipes-suppor=
-t/accountsservice/accountsservice/00b6e12ad4044d33cc54c71c75773c5a653dad0=
-9.patch
-new file mode 100644
-index 0000000000..f016057562
---- /dev/null
-+++ b/meta-gnome/recipes-support/accountsservice/accountsservice/00b6e12a=
-d4044d33cc54c71c75773c5a653dad09.patch
-@@ -0,0 +1,115 @@
-+From 747d781c1ccf3b8112ec6a098f23f26ccadc5880 Mon Sep 17 00:00:00 2001
-+From: oreo639 <oreo6391@gmail.com>
-+Date: Sun, 9 Feb 2025 23:24:08 -0800
-+Subject: [PATCH] build: Disable tests when cross compiling and allow
-+
-+ specifying path_wtmp
-+=20
-+ Upstream-Status: Backport [https://gitlab.freedesktop.org/accountsservi=
-ce/accountsservice/-/commit/00b6e12ad4044d33cc54c71c75773c5a653dad09]
-+
-+Signed-off-by: Markus Volk <f_l_k@t-online.de>
-+---
-+ meson.build       | 64 ++++++++++++++++++++++++++---------------------
-+ meson_options.txt |  2 ++
-+ 2 files changed, 38 insertions(+), 28 deletions(-)
-+
-+diff --git a/meson.build b/meson.build
-+index 4a509e7..2a56627 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -77,34 +77,40 @@ foreach func: check_functions
-+   config_h.set('HAVE_' + func.underscorify().to_upper(), cc.has_functio=
-n(func))
-+ endforeach
-+=20
-+-if cc.has_header_symbol('utmpx.h', 'WTMPX_FILENAME', prefix: '#define _=
-GNU_SOURCE')
-+-  code =3D '''#define _GNU_SOURCE
-+-  #include <stdio.h>
-+-  #include <utmpx.h>
-+-  int main (int argc, char **argv) {
-+-    printf ("%s\n", WTMPX_FILENAME);
-+-    return 0;
-+-  }
-+-  '''
-+-  result =3D cc.run(code, name : 'value of WTMPX_FILENAME')
-+-  path_wtmp =3D result.stdout().strip()
-+-
-+-  config_h.set('PATH_WTMP', 'WTMPX_FILENAME')
-+-elif cc.has_header_symbol('paths.h', '_PATH_WTMPX')
-+-  code =3D '''#include <paths.h>
-+-  #include <stdio.h>
-+-  int main (int argc, char **argv) {
-+-    printf ("%s\n", _PATH_WTMPX);
-+-    return 0;
-+-  }
-+-  '''
-+-  result =3D cc.run(code, name : 'value of _PATH_WTMPX')
-+-  path_wtmp =3D result.stdout().strip()
-+-
-+-  config_h.set('PATH_WTMP', '_PATH_WTMPX')
-++path_wtmp =3D get_option('wtmpfile')
-++if path_wtmp =3D=3D ''
-++  if cc.has_header_symbol('utmpx.h', 'WTMPX_FILENAME', prefix: '#define=
- _GNU_SOURCE') and meson.can_run_host_binaries()
-++    code =3D '''#define _GNU_SOURCE
-++    #include <stdio.h>
-++    #include <utmpx.h>
-++    int main (int argc, char **argv) {
-++      printf ("%s\n", WTMPX_FILENAME);
-++      return 0;
-++    }
-++    '''
-++    result =3D cc.run(code, name : 'value of WTMPX_FILENAME')
-++    path_wtmp =3D result.stdout().strip()
-++
-++    config_h.set('PATH_WTMP', 'WTMPX_FILENAME')
-++  elif cc.has_header_symbol('paths.h', '_PATH_WTMPX') and meson.can_run=
-_host_binaries()
-++    code =3D '''#include <paths.h>
-++    #include <stdio.h>
-++    int main (int argc, char **argv) {
-++      printf ("%s\n", _PATH_WTMPX);
-++      return 0;
-++    }
-++    '''
-++    result =3D cc.run(code, name : 'value of _PATH_WTMPX')
-++    path_wtmp =3D result.stdout().strip()
-++
-++    config_h.set('PATH_WTMP', '_PATH_WTMPX')
-++  else
-++    assert(not meson.is_cross_build(), 'Cannot determine wtmp for this =
-cross compile, please specify -Dwtmpfile=3D')
-++    path_wtmp =3D '/var/log/utx.log'
-++    assert(run_command('test', '-e', path_wtmp, check: false).returncod=
-e() =3D=3D 0, 'Do not know which filename to watch for wtmp changes')
-++    config_h.set_quoted('PATH_WTMP', path_wtmp)
-++  endif
-+ else
-+-  path_wtmp =3D '/var/log/utx.log'
-+-  assert(run_command('test', '-e', path_wtmp, check: false).returncode(=
-) =3D=3D 0, 'Do not know which filename to watch for wtmp changes')
-+   config_h.set_quoted('PATH_WTMP', path_wtmp)
-+ endif
-+=20
-+@@ -232,7 +238,9 @@ if get_option('gtk_doc')
-+   subdir('doc/libaccountsservice')
-+ endif
-+=20
-+-subdir('tests')
-++if get_option('tests') and meson.can_run_host_binaries()
-++  subdir('tests')
-++endif
-+=20
-+ configure_file(
-+   output: 'config.h',
-+diff --git a/meson_options.txt b/meson_options.txt
-+index b34a0fa..e25c61e 100644
-+--- a/meson_options.txt
-++++ b/meson_options.txt
-+@@ -1,6 +1,7 @@
-+ option('systemdsystemunitdir', type: 'string', value: '', description: =
-'custom directory for systemd system units')
-+ option('gdmconffile', type: 'string', value: '/etc/gdm/custom.conf', de=
-scription: 'GDM configuration file')
-+ option('lightdmconffile', type: 'string', value: '/etc/lightdm/lightdm.=
-conf', description: 'LightDM configuration file')
-++option('wtmpfile', type: 'string', value: '', description: 'override fi=
-lepath of wtmp file')
-+=20
-+ option('admin_group', type: 'string', value: '', description: 'Set grou=
-p for administrative accounts')
-+ option('extra_admin_groups', type: 'array', value: [], description: 'Co=
-mma-separated list of extra groups that administrator users are part of')
-+@@ -13,3 +14,4 @@ option('vapi', type: 'boolean', value: true, descripti=
-on : 'Enable Vala bindings
-+=20
-+ option('docbook', type: 'boolean', value: false, description: 'build do=
-cumentation (requires xmlto)')
-+ option('gtk_doc', type: 'boolean', value: false, description: 'use gtk-=
-doc to build documentation')
-++option('tests',   type: 'boolean', value: true, description: 'run accou=
-ntservice tests if possible')
-diff --git a/meta-gnome/recipes-support/accountsservice/accountsservice/a=
-ccountsservice-23.13.9-c99-fixes.patch b/meta-gnome/recipes-support/accou=
-ntsservice/accountsservice/accountsservice-23.13.9-c99-fixes.patch
-new file mode 100644
-index 0000000000..ffb6ffca18
---- /dev/null
-+++ b/meta-gnome/recipes-support/accountsservice/accountsservice/accounts=
-service-23.13.9-c99-fixes.patch
-@@ -0,0 +1,51 @@
-+From 97ff4512ea17600d390d67b59e6d0058d1b0b7d5 Mon Sep 17 00:00:00 2001
-+From: Ray Strode <rstrode@redhat.com>
-+Date: Tue, 11 Apr 2023 10:09:07 -0400
-+Subject: [PATCH] mocklibc: Fix compiler warning
-+
-+https://bugs.gentoo.org/930715
-+https://gitlab.freedesktop.org/accountsservice/accountsservice/-/commit/=
-da65bee12d9118fe1a49c8718d428fe61d232339
-+
-+print_indent is defined in one file and used in another without a
-+forward declaration. That leads to a compiler warning/error.
-+
-+This commit fixes that.
-+
-+Upstream-Status: Backport [https://gitweb.gentoo.org/repo/gentoo.git/tre=
-e/sys-apps/accountsservice/files/accountsservice-23.13.9-c99-fixes.patch]
-+
-+Signed-off-by: Markus Volk <f_l_k@t-online.de>
-+---
-+ subprojects/mocklibc.wrap                           |  2 ++
-+ subprojects/packagefiles/mocklibc-print-indent.diff | 13 +++++++++++++
-+ 2 files changed, 15 insertions(+)
-+ create mode 100644 subprojects/packagefiles/mocklibc-print-indent.diff
-+
-+diff --git a/subprojects/mocklibc.wrap b/subprojects/mocklibc.wrap
-+index af82298..539ee83 100644
-+--- a/subprojects/mocklibc.wrap
-++++ b/subprojects/mocklibc.wrap
-+@@ -8,3 +8,5 @@ source_hash =3D b2236a6af1028414783e9734a46ea051916ec226=
-479d6a55a3bb823bff68f120
-+ patch_url =3D https://wrapdb.mesonbuild.com/v1/projects/mocklibc/1.0/2/=
-get_zip
-+ patch_filename =3D mocklibc-1.0-2-wrap.zip
-+ patch_hash =3D 0280f96a2eeb3c023e5acf4e00cef03d362868218d4a85347ea45137=
-c0ef6c56
-++
-++diff_files =3D mocklibc-print-indent.diff
-+diff --git a/subprojects/packagefiles/mocklibc-print-indent.diff b/subpr=
-ojects/packagefiles/mocklibc-print-indent.diff
-+new file mode 100644
-+index 0000000..4aaed40
-+--- /dev/null
-++++ b/subprojects/packagefiles/mocklibc-print-indent.diff
-+@@ -0,0 +1,13 @@
-++diff -up mocklibc-1.0/src/netgroup-debug.c.print-indent mocklibc-1.0/sr=
-c/netgroup-debug.c
-++--- mocklibc-1.0/src/netgroup-debug.c.print-indent	2023-04-11 10:20:53.=
-717381559 -0400
-+++++ mocklibc-1.0/src/netgroup-debug.c	2023-04-11 10:21:02.296270333 -04=
-00
-++@@ -21,6 +21,9 @@
-++ #include <stdio.h>
-++ #include <stdlib.h>
-++=20
-+++void print_indent (FILE        *stream,
-+++                   unsigned int indent);
-+++
-++ void netgroup_debug_print_entry(struct entry *entry, FILE *stream, uns=
-igned int indent) {
-++   print_indent(stream, indent);
-++=20
-diff --git a/meta-gnome/recipes-support/accountsservice/accountsservice_2=
-2.08.8.bb b/meta-gnome/recipes-support/accountsservice/accountsservice_23=
-.13.9.bb
-similarity index 50%
-rename from meta-gnome/recipes-support/accountsservice/accountsservice_22=
-.08.8.bb
-rename to meta-gnome/recipes-support/accountsservice/accountsservice_23.1=
-3.9.bb
-index 439958c7d2..e3dfcfffff 100644
---- a/meta-gnome/recipes-support/accountsservice/accountsservice_22.08.8.=
-bb
-+++ b/meta-gnome/recipes-support/accountsservice/accountsservice_23.13.9.=
-bb
-@@ -5,24 +5,35 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673=
-463ab874e80d47fae504"
-=20
- DEPENDS =3D " \
-     dbus \
-+    glib-2.0 \
-+    json-c \
-     polkit \
-+    virtual/crypt \
- "
-=20
--inherit meson gobject-introspection gtk-doc features_check systemd vala
-+inherit meson gobject-introspection gtk-doc features_check systemd vala =
-pkgconfig
-=20
- REQUIRED_DISTRO_FEATURES =3D "polkit"
-=20
--SRC_URI =3D "https://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.ta=
-r.xz"
-+SRC_URI =3D " \
-+	https://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
-+	file://accountsservice-23.13.9-c99-fixes.patch \
-+	file://00b6e12ad4044d33cc54c71c75773c5a653dad09.patch \
-+"
- SRC_URI:append:libc-musl =3D " \
--    file://0001-musl-Hack-to-fix-build.patch \
--    file://0002-musl-add-missing-fgetspent_r.patch \
-+	file://0002-musl-add-missing-fgetspent_r.patch \
- "
--SRC_URI[sha256sum] =3D "909997a76919fe7dc138a9a01cea70bd622d5a932dbc9fb1=
-3010113023a7a391"
-+
-+EXTRA_OEMESON:libc-musl +=3D "-Dwtmpfile=3D/var/log/wtmp -Dtests=3Dfalse=
-"
-+
-+SRC_URI[sha256sum] =3D "adda4cdeae24fa0992e7df3ffff9effa7090be3ac233a3ed=
-fdf69d5a9c9b924f"
-=20
- GTKDOC_MESON_OPTION =3D "gtk_doc"
-=20
--PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)=
-}"
--PACKAGECONFIG[systemd] =3D ", -Dsystemdsystemunitdir=3D'no', systemd"
-+PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)=
-} admin_group"
-+PACKAGECONFIG[systemd] =3D ",,systemd"
-+PACKAGECONFIG[elogind] =3D "-Delogind=3Dtrue,-Delogind=3Dfalse,elogind"
-+PACKAGECONFIG[admin_group] =3D "-Dadmin_group=3Dwheel"
-=20
- SYSTEMD_SERVICE:${PN} =3D "accounts-daemon.service"
-=20
---=20
-2.48.1
+> Version 48~beta
+> ~~~~~~~~~~~~~~~
+> Released: 2025-01-31
+> This is an unstable release with the following changes:
+>  * Support installing flatpaks via a flatpak+https: link
+>  * Fix notifying about outdated updates when in power saver mode or offli=
+ne
+>  * Prioritise verified apps in source list
+> This release also updates translations:
+>  * Bulgarian (twlvnn kraftwerk)
+>  * Czech (Daniel Rusek)
+>  * Russian (Artur S0)
+>  * Slovenian (Martin)
+> Version 48~alpha3
+> ~~~~~~~~~~~~~~~~~
+> Released: 2025-01-14
+> This is an unstable release with the following changes:
+>  * Fix downloads of firmware updates
+>  * Fix the release process
+> This release also updates translations:
+>  * Belarusian (Vasil Pupkin)
+>  * Slovenian (Martin)
+> Version 48~alpha2
+> ~~~~~~~~~~~~~~~~~
+> Released: 2025-01-04
+> This is an unstable release with the following changes:
+>  * Fix the release process
+> Version 48~alpha
+> ~~~~~~~~~~~~~~~~
+> Released: 2025-01-04
+> This is an unstable release with the following changes:
+>  * Include dependencies in estimated download size
+>  * Improve performance when loading updates
+>  * Fix interface freeze when upvoting/downvoting reviews
+>  * Various minor interface improvements for keyboard navigation and small
+> screens
+>  * Fix crash when uninstalling snaps
+>  * Add experimental systemd-sysupdate plugin
+>  * Warn about microphone permissions if an app has PipeWire access
+> This release also updates translations:
+>  * Belarusian (Vasil Pupkin)
+>  * Catalan (Jordi Mas i Hernandez, Jordi Mas)
+>  * Dutch (Nathan Follens)
+>  * French (Vincent Chatelain)
+>  * Friulian (Fabio Tomat)
+>  * German (J=C3=BCrgen Benvenuti)
+>  * Hebrew (Yaron Shahrabani)
+>  * Kabyle (Athmane MOKRAOUI)
+>  * Latvian (R=C5=ABdolfs Mazurs)
+>  * Portuguese (Hugo Carvalho)
+>  * Portuguese (Brazil) (Rafael Fontenelle)
+>  * Russian (Artur S0)
+>  * Serbian (=D0=9C=D0=B0=D1=80=D0=BA=D0=BE =D0=9A=D0=BE=D1=81=D1=82=D0=B8=
+=D1=9B, =D0=9C=D0=B8=D0=BB=D0=BE=D1=88 =D0=9F=D0=BE=D0=BF=D0=BE=D0=B2=D0=B8=
+=D1=9B)
+>  * Slovak (Jose Riha)
+>  * Slovenian (Martin)
+>  * Thai (Aefgh Threenine)
+>  * Turkish (Sabri =C3=9Cnal)
+>  * Ukrainian (Yuri Chornoivan)
+>
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> ---
+>  .../{gnome-software_47.2.bb =3D> gnome-software_48.beta.bb}     | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-gnome/recipes-gnome/gnome-software/{gnome-software_47.2.bb
+> =3D> gnome-software_48.beta.bb} (90%)
+>
+> diff --git a/meta-gnome/recipes-gnome/gnome-software/
+> gnome-software_47.2.bb b/meta-gnome/recipes-gnome/gnome-software/
+> gnome-software_48.beta.bb
+> similarity index 90%
+> rename from meta-gnome/recipes-gnome/gnome-software/gnome-software_47.2.b=
+b
+> rename to meta-gnome/recipes-gnome/gnome-software/
+> gnome-software_48.beta.bb
+> index 31b13accf8..1b48708595 100644
+> --- a/meta-gnome/recipes-gnome/gnome-software/gnome-software_47.2.bb
+> +++ b/meta-gnome/recipes-gnome/gnome-software/gnome-software_48.beta.bb
+> @@ -26,9 +26,9 @@ DEPENDS +=3D " \
+>
+>  RDEPENDS:${PN} =3D "iso-codes"
+>
+> -EXTRA_OEMESON +=3D "-Dtests=3Dfalse -Dsoup2=3Dfalse"
+> +EXTRA_OEMESON +=3D "-Dtests=3Dfalse"
+>
+> -SRC_URI[archive.sha256sum] =3D
+> "112338f8a98e7e5125de3f57229873534215b77eeef37d3fd4262f02151c7cea"
+> +SRC_URI[archive.sha256sum] =3D
+> "798c48912788b3ff700fd483fe805f3e0f0912cf2e46b7f7334c8a9c6f883296"
+>
+>  PACKAGECONFIG ?=3D "flatpak"
+>  PACKAGECONFIG[flatpak] =3D "-Dflatpak=3Dtrue,-Dflatpak=3Dfalse,flatpak o=
+stree"
+> --
+> 2.48.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#115573):
+> https://lists.openembedded.org/g/openembedded-devel/message/115573
+> Mute This Topic: https://lists.openembedded.org/mt/111376787/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
+--000000000000720c67062efa99fb
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto">Should we wait for final 48 release ?=C2=A0</div><div><br=
+><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D=
+"gmail_attr">On Tue, Feb 25, 2025 at 5:49=E2=80=AFAM Markus Volk via <a hre=
+f=3D"http://lists.openembedded.org">lists.openembedded.org</a> &lt;f_l_k=3D=
+<a href=3D"mailto:t-online.de@lists.openembedded.org">t-online.de@lists.ope=
+nembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" sty=
+le=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">Versio=
+n 48~beta<br>
+~~~~~~~~~~~~~~~<br>
+Released: 2025-01-31<br>
+This is an unstable release with the following changes:<br>
+=C2=A0* Support installing flatpaks via a flatpak+https: link<br>
+=C2=A0* Fix notifying about outdated updates when in power saver mode or of=
+fline<br>
+=C2=A0* Prioritise verified apps in source list<br>
+This release also updates translations:<br>
+=C2=A0* Bulgarian (twlvnn kraftwerk)<br>
+=C2=A0* Czech (Daniel Rusek)<br>
+=C2=A0* Russian (Artur S0)<br>
+=C2=A0* Slovenian (Martin)<br>
+Version 48~alpha3<br>
+~~~~~~~~~~~~~~~~~<br>
+Released: 2025-01-14<br>
+This is an unstable release with the following changes:<br>
+=C2=A0* Fix downloads of firmware updates<br>
+=C2=A0* Fix the release process<br>
+This release also updates translations:<br>
+=C2=A0* Belarusian (Vasil Pupkin)<br>
+=C2=A0* Slovenian (Martin)<br>
+Version 48~alpha2<br>
+~~~~~~~~~~~~~~~~~<br>
+Released: 2025-01-04<br>
+This is an unstable release with the following changes:<br>
+=C2=A0* Fix the release process<br>
+Version 48~alpha<br>
+~~~~~~~~~~~~~~~~<br>
+Released: 2025-01-04<br>
+This is an unstable release with the following changes:<br>
+=C2=A0* Include dependencies in estimated download size<br>
+=C2=A0* Improve performance when loading updates<br>
+=C2=A0* Fix interface freeze when upvoting/downvoting reviews<br>
+=C2=A0* Various minor interface improvements for keyboard navigation and sm=
+all screens<br>
+=C2=A0* Fix crash when uninstalling snaps<br>
+=C2=A0* Add experimental systemd-sysupdate plugin<br>
+=C2=A0* Warn about microphone permissions if an app has PipeWire access<br>
+This release also updates translations:<br>
+=C2=A0* Belarusian (Vasil Pupkin)<br>
+=C2=A0* Catalan (Jordi Mas i Hernandez, Jordi Mas)<br>
+=C2=A0* Dutch (Nathan Follens)<br>
+=C2=A0* French (Vincent Chatelain)<br>
+=C2=A0* Friulian (Fabio Tomat)<br>
+=C2=A0* German (J=C3=BCrgen Benvenuti)<br>
+=C2=A0* Hebrew (Yaron Shahrabani)<br>
+=C2=A0* Kabyle (Athmane MOKRAOUI)<br>
+=C2=A0* Latvian (R=C5=ABdolfs Mazurs)<br>
+=C2=A0* Portuguese (Hugo Carvalho)<br>
+=C2=A0* Portuguese (Brazil) (Rafael Fontenelle)<br>
+=C2=A0* Russian (Artur S0)<br>
+=C2=A0* Serbian (=D0=9C=D0=B0=D1=80=D0=BA=D0=BE =D0=9A=D0=BE=D1=81=D1=82=D0=
+=B8=D1=9B, =D0=9C=D0=B8=D0=BB=D0=BE=D1=88 =D0=9F=D0=BE=D0=BF=D0=BE=D0=B2=D0=
+=B8=D1=9B)<br>
+=C2=A0* Slovak (Jose Riha)<br>
+=C2=A0* Slovenian (Martin)<br>
+=C2=A0* Thai (Aefgh Threenine)<br>
+=C2=A0* Turkish (Sabri =C3=9Cnal)<br>
+=C2=A0* Ukrainian (Yuri Chornoivan)<br>
+<br>
+Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" target=
+=3D"_blank">f_l_k@t-online.de</a>&gt;<br>
+---<br>
+=C2=A0.../{<a href=3D"http://gnome-software_47.2.bb" rel=3D"noreferrer" tar=
+get=3D"_blank">gnome-software_47.2.bb</a> =3D&gt; <a href=3D"http://gnome-s=
+oftware_48.beta.bb" rel=3D"noreferrer" target=3D"_blank">gnome-software_48.=
+beta.bb</a>}=C2=A0 =C2=A0 =C2=A0| 4 ++--<br>
+=C2=A01 file changed, 2 insertions(+), 2 deletions(-)<br>
+=C2=A0rename meta-gnome/recipes-gnome/gnome-software/{<a href=3D"http://gno=
+me-software_47.2.bb" rel=3D"noreferrer" target=3D"_blank">gnome-software_47=
+.2.bb</a> =3D&gt; <a href=3D"http://gnome-software_48.beta.bb" rel=3D"noref=
+errer" target=3D"_blank">gnome-software_48.beta.bb</a>} (90%)<br>
+<br>
+diff --git a/meta-gnome/recipes-gnome/gnome-software/<a href=3D"http://gnom=
+e-software_47.2.bb" rel=3D"noreferrer" target=3D"_blank">gnome-software_47.=
+2.bb</a> b/meta-gnome/recipes-gnome/gnome-software/<a href=3D"http://gnome-=
+software_48.beta.bb" rel=3D"noreferrer" target=3D"_blank">gnome-software_48=
+.beta.bb</a><br>
+similarity index 90%<br>
+rename from meta-gnome/recipes-gnome/gnome-software/<a href=3D"http://gnome=
+-software_47.2.bb" rel=3D"noreferrer" target=3D"_blank">gnome-software_47.2=
+.bb</a><br>
+rename to meta-gnome/recipes-gnome/gnome-software/<a href=3D"http://gnome-s=
+oftware_48.beta.bb" rel=3D"noreferrer" target=3D"_blank">gnome-software_48.=
+beta.bb</a><br>
+index 31b13accf8..1b48708595 100644<br>
+--- a/meta-gnome/recipes-gnome/gnome-software/<a href=3D"http://gnome-softw=
+are_47.2.bb" rel=3D"noreferrer" target=3D"_blank">gnome-software_47.2.bb</a=
+><br>
++++ b/meta-gnome/recipes-gnome/gnome-software/<a href=3D"http://gnome-softw=
+are_48.beta.bb" rel=3D"noreferrer" target=3D"_blank">gnome-software_48.beta=
+.bb</a><br>
+@@ -26,9 +26,9 @@ DEPENDS +=3D &quot; \<br>
+<br>
+=C2=A0RDEPENDS:${PN} =3D &quot;iso-codes&quot;<br>
+<br>
+-EXTRA_OEMESON +=3D &quot;-Dtests=3Dfalse -Dsoup2=3Dfalse&quot;<br>
++EXTRA_OEMESON +=3D &quot;-Dtests=3Dfalse&quot;<br>
+<br>
+-SRC_URI[archive.sha256sum] =3D &quot;112338f8a98e7e5125de3f57229873534215b=
+77eeef37d3fd4262f02151c7cea&quot;<br>
++SRC_URI[archive.sha256sum] =3D &quot;798c48912788b3ff700fd483fe805f3e0f091=
+2cf2e46b7f7334c8a9c6f883296&quot;<br>
+<br>
+=C2=A0PACKAGECONFIG ?=3D &quot;flatpak&quot;<br>
+=C2=A0PACKAGECONFIG[flatpak] =3D &quot;-Dflatpak=3Dtrue,-Dflatpak=3Dfalse,f=
+latpak ostree&quot;<br>
+-- <br>
+2.48.1<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#115573): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/115573" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/115573</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/111376787/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/111376787/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--000000000000720c67062efa99fb--
 
