@@ -1,163 +1,219 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AF0AC021B2
-	for <webhook@archiver.kernel.org>; Tue, 25 Feb 2025 13:16:41 +0000 (UTC)
-Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
- by mx.groups.io with SMTP id smtpd.web10.7562.1740489392927054584
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 72897C021B2
+	for <webhook@archiver.kernel.org>; Tue, 25 Feb 2025 13:33:41 +0000 (UTC)
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
+ by mx.groups.io with SMTP id smtpd.web11.7929.1740490418491833352
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Feb 2025 05:16:33 -0800
+ Tue, 25 Feb 2025 05:33:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
-Received: from fwd78.aul.t-online.de (fwd78.aul.t-online.de [10.223.144.104])
-	by mailout12.t-online.de (Postfix) with SMTP id 95C141E64
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Feb 2025 14:16:30 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.41.232]) by fwd78.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tmunV-0FPq090; Tue, 25 Feb 2025 14:16:29 +0100
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=EU9drQsW;
+ spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-abb81285d33so1076636266b.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Feb 2025 05:33:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1740490417; x=1741095217; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=73vooR4b6eFGJ0lKQj/ul4k9dEsWq0BNyxyr66dmXa8=;
+        b=EU9drQsWsHoGIVXqOt1aXDtYMNSZj/ng1V3NezfCTidDy1g2rdtrvUTe/LSnBMH1EC
+         L8gy9/WWzbqLxzjFaihde1nKJhFix7FP5bf1nvgmG0LXh+vg24sW8iqPym+CxlfkDuY3
+         ok06tU1FfkFg2RBznh4cur1R91cLL/Mym7PUXTkJRBzPt/uniPt27jAEN6s8YeXx7jNX
+         ZkjUSB/A0RoHAc2FWmI0Eg6a8rbJvv3MndbqIr+9SBMU9QtjqbHWOZ8vvFAXYX8/whke
+         soW/5ddN0uTPS39VvDqRr3YEryzGRznXcTC8Uw/w9m7pwx+BswCkZ9GsAhT4F/d5vJDe
+         g2Pw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1740490417; x=1741095217;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=73vooR4b6eFGJ0lKQj/ul4k9dEsWq0BNyxyr66dmXa8=;
+        b=euT9931p7uRMw326zE5BDjDHn4dT/ReLH71gUfUcd8pZzLyT31SJ/qjxyUkszbei5R
+         CDInH9Ks5YZVN1jlAi/2TjoQg4OUQUdNBMZ4K/5mutKyYqHQ5J3rX/4ff1iqW+2FzRr+
+         y+X6svkBb9HlFWkQfxYp3b1XmEz+Wt/Bu2M0Vr69DobhZ/lR5LefY1WgULC9HE90RvKN
+         KNlaI9+ZKauAuorJn/rtf4bDPOYMiuIt4dHmmeCbt8l7rCmf1SGZ1fEQ7VoKZ7TLw5+S
+         3XZY9yifzoGEXBc/R0m2GEakMLlwuvrefei3ZCLkH3QGQSs9YO7WDsTX14OAy04WoFF6
+         VppQ==
+X-Gm-Message-State: AOJu0YxT//j2ZMOmyd1C/X9cVpSkPsx4AE/kZnvJk/sM2rfEnWCYj4Uy
+	zHGslYlY1OibNkV/OQkBneczWVWGeEPU4IMpcPOeA3X1oZg5mdwvKxM2jg==
+X-Gm-Gg: ASbGncuvYOZ7Ne2C8FVomge6CCrhEiHI0+6su21GVFwkehYD5q67oAoz3GQYFYHN/g/
+	bBq+ryvWi9MxFcSWbZZc2kVfgwfYHc1B4vrbW3WXm52fPLU2t5d06KGZ9GZMS7yGYj0kfqBqGFZ
+	KbzaQoGTr2GCoZK5cSovmbMPqXT9FZvGXx/zHYb0EKyggzepF0/htKBh8ewK8bHIkl3sZy+6yzu
+	eTA/oMaHTF258ytw2mghXZyg5jm0d/w3MEtj10iCgF5uowq6UHt26w3XwMajz5gD/8jUYmSWV4E
+	aV3vmG1n65LpfBfHwvAT308XL8TexsxyHfPVXKm/zQ==
+X-Google-Smtp-Source: AGHT+IGxpODEmI4yz/FoRbgpqttUO2N8ZoLCfGDbKmmGR/xQg4ufF5QH1wAiWVY6FLaRFOev9sXc4w==
+X-Received: by 2002:a17:907:c29:b0:ab7:86ae:4bb8 with SMTP id a640c23a62f3a-abc09a0bc37mr1634441366b.23.1740490416602;
+        Tue, 25 Feb 2025 05:33:36 -0800 (PST)
+Received: from localhost.localdomain ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-abed204647fsm141646766b.124.2025.02.25.05.33.35
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 25 Feb 2025 05:33:36 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] accountsservice: update 22.08.8 -> 23.13.9
-Date: Tue, 25 Feb 2025 14:17:04 +0100
-Message-ID: <20250225131704.1792461-1-f_l_k@t-online.de>
+Subject: [meta-oe][PATCH] capnproto: only export binaries for native build
+Date: Tue, 25 Feb 2025 14:33:35 +0100
+Message-ID: <20250225133335.520207-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1740489389-017F9983-D4083C4F/0/0 CLEAN NORMAL
-X-TOI-MSGID: 794bde45-02d3-4622-8ad7-1dca9f41b2a4
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Feb 2025 13:16:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115570
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Feb 2025 13:33:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115571
 
-- add backport patch to fix:
+The base problem this is trying to solve: capnproto has two main
+components: libraries that can be linked against, and binary files
+that can generate c++ code from capnproto definitions. When cross-compiling
+one needs to use the cross-compiled libraries, but with the native
+definition-compilers.
+When linking against capnproto from another recipe, cross-compilation
+fails, because the cmake files generated by capnproto verify the
+existence of binary files in $bindir. When using a cross-compiled
+version of capnproto, these binary files do not exist in RECIPE_SYSROOT, so
+the compilation fails.
 
-| ../accountsservice-23.13.9/subprojects/mocklibc-1.0/src/netgroup-debug.=
-c:25:3: error: implicit declaration of function 'print_indent' [-Wimplici=
-t-function-declaration]
-|    25 |   print_indent(stream, indent);
+The previous patch: the previous solution patched the CMakeLists.txt
+file in a way that it didn't export nor install the generated binary files.
+Accidentally this also happened with native build (and happened knowingly with
+target builds).
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+The new patch: instead of not installing and not exporting the binaries,
+just install them without exporting, when creating a target build.
+During compilation check is CMAKE_CROSSCOMPILING is set (coming from
+cmake.bbclass) - if it is set, only install the binaries, without
+exporting. When it is not set, resort to the original behavior.
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../accountsservice-23.13.9-c99-fixes.patch   | 54 +++++++++++++++++++
- ..._22.08.8.bb =3D> accountsservice_23.13.9.bb} |  7 ++-
- 2 files changed, 59 insertions(+), 2 deletions(-)
- create mode 100644 meta-gnome/recipes-support/accountsservice/accountsse=
-rvice/accountsservice-23.13.9-c99-fixes.patch
- rename meta-gnome/recipes-support/accountsservice/{accountsservice_22.08=
-.8.bb =3D> accountsservice_23.13.9.bb} (79%)
+ ...n-t-check-usr-bin-content-from-cmake.patch | 43 ---------------
+ ...xport-binaries-only-for-native-build.patch | 53 +++++++++++++++++++
+ .../capnproto/capnproto_1.0.2.bb              |  2 +-
+ 3 files changed, 54 insertions(+), 44 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/capnproto/capnproto/0001-Don-t-check-usr-bin-content-from-cmake.patch
+ create mode 100644 meta-oe/recipes-devtools/capnproto/capnproto/0001-Export-binaries-only-for-native-build.patch
 
-diff --git a/meta-gnome/recipes-support/accountsservice/accountsservice/a=
-ccountsservice-23.13.9-c99-fixes.patch b/meta-gnome/recipes-support/accou=
-ntsservice/accountsservice/accountsservice-23.13.9-c99-fixes.patch
+diff --git a/meta-oe/recipes-devtools/capnproto/capnproto/0001-Don-t-check-usr-bin-content-from-cmake.patch b/meta-oe/recipes-devtools/capnproto/capnproto/0001-Don-t-check-usr-bin-content-from-cmake.patch
+deleted file mode 100644
+index 6447fadcf9..0000000000
+--- a/meta-oe/recipes-devtools/capnproto/capnproto/0001-Don-t-check-usr-bin-content-from-cmake.patch
++++ /dev/null
+@@ -1,43 +0,0 @@
+-From 43573472a62ff68ba6b1180d6551ef536471a99f Mon Sep 17 00:00:00 2001
+-From: Gyorgy Sarvari <skandigraun@gmail.com>
+-Date: Mon, 3 Feb 2025 11:52:01 +0100
+-Subject: [PATCH] Don't install files in bindir
+-
+-This patch prevents the generated binary executables from being
+-installed into the /usr/bin folder.
+-
+-By default, cmake installs these binaries into the /usr/bin folder,
+-(e.g. binaries used to generate C++ source from the capnproto definition
+-files) however with Yocto, when using the cross-compiled version of this
+-application, the /usr/bin folder is not populated in the sysroot.
+-The generated cmake file however tries to verify that these binaries
+-exist, and since it cannot find them, it fails the build.
+-
+-But even in case these files would exist, they are not usable on the build
+-machine, as these are cross-compiled for the target machine. When another
+-recipe it built against the capnproto cmake package, the application can
+-link against the cross-compiled libraries as expected, but for code
+-generation the capnproto-native package's binaries need to be used.
+-
+-This patch is only applicable on the cross-compiled version of capnproto.
+-
+-Upstream-Status: Inappropriate [oe specific: see above message]
+-
+-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+----
+- c++/src/capnp/CMakeLists.txt | 2 --
+- 1 file changed, 2 deletions(-)
+-
+-diff --git a/c++/src/capnp/CMakeLists.txt b/c++/src/capnp/CMakeLists.txt
+-index 9980fde6..101a7091 100644
+---- a/src/capnp/CMakeLists.txt
+-+++ b/src/capnp/CMakeLists.txt
+-@@ -210,8 +210,6 @@ if(NOT CAPNP_LITE)
+-   target_link_libraries(capnpc_capnp capnp kj)
+-   set_target_properties(capnpc_capnp PROPERTIES OUTPUT_NAME capnpc-capnp)
+- 
+--  install(TARGETS capnp_tool capnpc_cpp capnpc_capnp ${INSTALL_TARGETS_DEFAULT_ARGS})
+--
+-   if(WIN32)
+-     # On Windows platforms symlinks are not guaranteed to support. Also different version of CMake handle create_symlink in a different way.
+-     # The most portable way in this case just copy the file.
+diff --git a/meta-oe/recipes-devtools/capnproto/capnproto/0001-Export-binaries-only-for-native-build.patch b/meta-oe/recipes-devtools/capnproto/capnproto/0001-Export-binaries-only-for-native-build.patch
 new file mode 100644
-index 0000000000..596f7b7d3f
+index 0000000000..7677d96b23
 --- /dev/null
-+++ b/meta-gnome/recipes-support/accountsservice/accountsservice/accounts=
-service-23.13.9-c99-fixes.patch
-@@ -0,0 +1,54 @@
-+https://bugs.gentoo.org/930715
-+https://gitlab.freedesktop.org/accountsservice/accountsservice/-/commit/=
-da65bee12d9118fe1a49c8718d428fe61d232339
++++ b/meta-oe/recipes-devtools/capnproto/capnproto/0001-Export-binaries-only-for-native-build.patch
+@@ -0,0 +1,53 @@
++From e654a7015f5e8f20bf7681681cc2b80082303007 Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Tue, 25 Feb 2025 13:43:42 +0100
++Subject: [PATCH] Export binaries only for native build
 +
-+From da65bee12d9118fe1a49c8718d428fe61d232339 Mon Sep 17 00:00:00 2001
-+From: Ray Strode <rstrode@redhat.com>
-+Date: Tue, 11 Apr 2023 10:09:07 -0400
-+Subject: [PATCH] mocklibc: Fix compiler warning
++By default, the cmake configuratione exports all generated files,
++so when using the generated cmake file with a find_package command,
++it verifies that these files actually exist.
 +
-+print_indent is defined in one file and used in another without a
-+forward declaration. That leads to a compiler warning/error.
++When using the cross-compiled version of capnproto, the generated
++binaries are not available in RECIPE_SYSROOT (since they can be
++used as RDEPENDS only, but not usable as DEPENDS), and due to
++this the compilation fails.
 +
-+This commit fixes that.
++To avoid this, check during the compilation of capnproto if it is
++being cross-compiled, or not. If is it cross-compiled, then only
++install the generated binary files in their final location, but
++don't export them. When not cross-compiling, do the same, but also
++export the files (which is the default behavior).
 +
-+Upstream-Status: Backport [https://gitweb.gentoo.org/repo/gentoo.git/tre=
-e/sys-apps/accountsservice/files/accountsservice-23.13.9-c99-fixes.patch]
++Upstream-Status: Inappropriate [oe specific: see above message]
 +
-+Signed-off-by: Markus Volk <f_l_k@t-online.de>
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ subprojects/mocklibc.wrap                           |  2 ++
-+ subprojects/packagefiles/mocklibc-print-indent.diff | 13 +++++++++++++
-+ 2 files changed, 15 insertions(+)
-+ create mode 100644 subprojects/packagefiles/mocklibc-print-indent.diff
++ c++/src/capnp/CMakeLists.txt | 15 ++++++++++++++-
++ 1 file changed, 14 insertions(+), 1 deletion(-)
 +
-+diff --git a/subprojects/mocklibc.wrap b/subprojects/mocklibc.wrap
-+index af82298..539ee83 100644
-+--- a/subprojects/mocklibc.wrap
-++++ b/subprojects/mocklibc.wrap
-+@@ -8,3 +8,5 @@ source_hash =3D b2236a6af1028414783e9734a46ea051916ec226=
-479d6a55a3bb823bff68f120
-+ patch_url =3D https://wrapdb.mesonbuild.com/v1/projects/mocklibc/1.0/2/=
-get_zip
-+ patch_filename =3D mocklibc-1.0-2-wrap.zip
-+ patch_hash =3D 0280f96a2eeb3c023e5acf4e00cef03d362868218d4a85347ea45137=
-c0ef6c56
++diff --git a/c++/src/capnp/CMakeLists.txt b/c++/src/capnp/CMakeLists.txt
++index 9980fde6..8732db93 100644
++--- a/src/capnp/CMakeLists.txt
+++++ b/src/capnp/CMakeLists.txt
++@@ -210,7 +210,20 @@ if(NOT CAPNP_LITE)
++   target_link_libraries(capnpc_capnp capnp kj)
++   set_target_properties(capnpc_capnp PROPERTIES OUTPUT_NAME capnpc-capnp)
++ 
++-  install(TARGETS capnp_tool capnpc_cpp capnpc_capnp ${INSTALL_TARGETS_DEFAULT_ARGS})
+++  if(NOT CMAKE_CROSSCOMPILING)
+++    install(TARGETS capnp_tool capnpc_cpp capnpc_capnp ${INSTALL_TARGETS_DEFAULT_ARGS})
+++  else()
+++    # INSTALL_TARGETS_CROSS_COMPILED_BINARY_ARGS is identical to INSTALL_TARGETS_DEFAULT_ARGS,
+++    # except that the installed files are not exported, so when the generated cmake file
+++    # is used by a find_package command, it won't try to find these files.
+++    set(INSTALL_TARGETS_CROSS_COMPILED_BINARY_ARGS
+++      ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+++      LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+++      RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+++    )
 ++
-++diff_files =3D mocklibc-print-indent.diff
-+diff --git a/subprojects/packagefiles/mocklibc-print-indent.diff b/subpr=
-ojects/packagefiles/mocklibc-print-indent.diff
-+new file mode 100644
-+index 0000000..4aaed40
-+--- /dev/null
-++++ b/subprojects/packagefiles/mocklibc-print-indent.diff
-+@@ -0,0 +1,13 @@
-++diff -up mocklibc-1.0/src/netgroup-debug.c.print-indent mocklibc-1.0/sr=
-c/netgroup-debug.c
-++--- mocklibc-1.0/src/netgroup-debug.c.print-indent	2023-04-11 10:20:53.=
-717381559 -0400
-+++++ mocklibc-1.0/src/netgroup-debug.c	2023-04-11 10:21:02.296270333 -04=
-00
-++@@ -21,6 +21,9 @@
-++ #include <stdio.h>
-++ #include <stdlib.h>
-++=20
-+++void print_indent (FILE        *stream,
-+++                   unsigned int indent);
-+++
-++ void netgroup_debug_print_entry(struct entry *entry, FILE *stream, uns=
-igned int indent) {
-++   print_indent(stream, indent);
-++=20
-+--=20
-+GitLab
-+
-diff --git a/meta-gnome/recipes-support/accountsservice/accountsservice_2=
-2.08.8.bb b/meta-gnome/recipes-support/accountsservice/accountsservice_23=
-.13.9.bb
-similarity index 79%
-rename from meta-gnome/recipes-support/accountsservice/accountsservice_22=
-.08.8.bb
-rename to meta-gnome/recipes-support/accountsservice/accountsservice_23.1=
-3.9.bb
-index 439958c7d2..ba8c4f24d7 100644
---- a/meta-gnome/recipes-support/accountsservice/accountsservice_22.08.8.=
-bb
-+++ b/meta-gnome/recipes-support/accountsservice/accountsservice_23.13.9.=
-bb
-@@ -12,12 +12,15 @@ inherit meson gobject-introspection gtk-doc features_=
-check systemd vala
-=20
- REQUIRED_DISTRO_FEATURES =3D "polkit"
-=20
--SRC_URI =3D "https://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.ta=
-r.xz"
-+SRC_URI =3D " \
-+	https://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
-+	file://accountsservice-23.13.9-c99-fixes.patch \
-+"
- SRC_URI:append:libc-musl =3D " \
-     file://0001-musl-Hack-to-fix-build.patch \
-     file://0002-musl-add-missing-fgetspent_r.patch \
- "
--SRC_URI[sha256sum] =3D "909997a76919fe7dc138a9a01cea70bd622d5a932dbc9fb1=
-3010113023a7a391"
-+SRC_URI[sha256sum] =3D "adda4cdeae24fa0992e7df3ffff9effa7090be3ac233a3ed=
-fdf69d5a9c9b924f"
-=20
- GTKDOC_MESON_OPTION =3D "gtk_doc"
-=20
---=20
-2.48.1
-
+++    install(TARGETS capnp_tool capnpc_cpp capnpc_capnp ${INSTALL_TARGETS_CROSS_COMPILED_BINARY_ARGS})
+++  endif()
++ 
++   if(WIN32)
++     # On Windows platforms symlinks are not guaranteed to support. Also different version of CMake handle create_symlink in a different way.
+diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_1.0.2.bb b/meta-oe/recipes-devtools/capnproto/capnproto_1.0.2.bb
+index 6136ff20fb..77bde79217 100644
+--- a/meta-oe/recipes-devtools/capnproto/capnproto_1.0.2.bb
++++ b/meta-oe/recipes-devtools/capnproto/capnproto_1.0.2.bb
+@@ -6,7 +6,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://../LICENSE;md5=a05663ae6cca874123bf667a60dca8c9"
+ 
+ SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV};protocol=https \
+-           file://0001-Don-t-check-usr-bin-content-from-cmake.patch"
++           file://0001-Export-binaries-only-for-native-build.patch"
+ SRCREV = "1a0e12c0a3ba1f0dbbad45ddfef555166e0a14fc"
+ 
+ S = "${WORKDIR}/git/c++"
 
