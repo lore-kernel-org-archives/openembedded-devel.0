@@ -2,294 +2,193 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B9F3FC021B2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BA002C021BB
 	for <webhook@archiver.kernel.org>; Tue, 25 Feb 2025 13:49:31 +0000 (UTC)
 Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web10.8171.1740491362004886659
+ by mx.groups.io with SMTP id smtpd.web11.8247.1740491361935598885
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 25 Feb 2025 05:49:22 -0800
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
 Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
-	by mailout05.t-online.de (Postfix) with SMTP id 3409212FC
+	by mailout05.t-online.de (Postfix) with SMTP id 3228812FB
 	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Feb 2025 14:49:18 +0100 (CET)
 Received: from intel-corei7-64.fritz.box ([84.163.41.232]) by fwd86.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tmvJD-3sgT3f0; Tue, 25 Feb 2025 14:49:15 +0100
+	esmtp id 1tmvJC-3sgT3e0; Tue, 25 Feb 2025 14:49:15 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [RFC][meta-gnome][PATCH 7/7] gnome-control-center: update 47.3 -> 48.beta
-Date: Tue, 25 Feb 2025 14:49:37 +0100
-Message-ID: <20250225134937.2085793-7-f_l_k@t-online.de>
+Subject: [RFC][meta-gnome][PATCH 6/7] gnome-shell: update 47.3 -> 48.beta
+Date: Tue, 25 Feb 2025 14:49:36 +0100
+Message-ID: <20250225134937.2085793-6-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250225134937.2085793-1-f_l_k@t-online.de>
 References: <20250225134937.2085793-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1740491355-C245E97F-C1DE829A/0/0 CLEAN NORMAL
-X-TOI-MSGID: f40b78ac-83c1-4d53-b8d8-40d658081f88
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1740491355-627FB97F-358E4681/0/0 CLEAN NORMAL
+X-TOI-MSGID: 3edc01c7-b4cf-454e-b62d-3b7ea161315d
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 25 Feb 2025 13:49:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115579
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115578
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Version 48.beta
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-- Various translation updates
-- Make search bar always grab focus with shortcuts
-- Fix a memory leak in CcMaskPaintable (used for illustrations)
-- Fix missing icons in Mouse/Wacom/WWAN settings (ship our own icons)
-- Add single-panel-mode for distros to launch Settings in a single panel =
-(without sidebar)
-- Use static hostname instead of pretty hostname (hostnamed) in URLs
-Dependency updates
-- gnome-settings-daemon >=3D 48.alpha.1
-Device Security
-- Don't hardcode height of "help" dialog
-Display
-- Add monitor HDR setting
-Keyboard
-- Rename old "logout" media key name to "Power Off"
-- Add new media keys shortcuts for "Restart" and "Logout"
-- Port shortcuts dialog to AdwDialog
-Mouse
-- Use AdwToggleGroup in the "Primary Button" settings
-Region
-- Port Format Chooser to AdwPreferencesPage
-- Inform accountsservice of all configured languages
-Sound
-- Filter out NULL stream names in Volume Levels settings
-Thunderbolt
-- Fix unescaped string in device status dialog
-Wellbeing
-- Add screen time support
-- Use gtk_widget_set_child_visible in allocate
-- Various accessibility/navigation/esthetic improvements
-- Split data collection and limits settings
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Version 48.alpha
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-- Various translation updates
-- Start using the new GNOME release service
-- Prevent crash on CcSplitRow related to Gtk size group changes
-- Use accessible-role=3Dpresentation for illustrative icons/images
-- Use gtk_list_box_remove_all instead of iterating GTK widget children
-- Import developer docs from gitlab wiki to the docs/ source folder
-- Various improvements to our development Flatpak build
-- Various style/consistency updates to gobject creations
-- Stop calling "gtk_widget_get_root()" incorrectly
-- Various improvements to CcPermissionInfobar
-- Use luminance masking for webm assets
-- Introduce follow-accent property to CcMaskPaintable
-- Allow FQDN hostnames
-Dependency updates
-- upower >=3D 1.90.6
-- gsettings-desktop-schema >=3D 47.0
-- libadwaita >=3D 1.7.alpha
-About
-- Fixes wrong GPU names when g-c-c is launched using dGPU
+48.beta
+=3D=3D=3D=3D=3D=3D=3D
+* Fix overlapping tiles in app grid on hover [Sam; !3551]
+* Improve screen time limit support
+  [Philip, Florian; !3597, !3603, !3604, !3606]
+* Fix default user avatar with light stsyle [Sam; !3596]
+* Transition to new BoxLayout.orientation property
+  [Florian, Carlos; !3614, !3618]
+* Allow tracking screen time history with no limit set [Philip; !3610]
+* Fix Extensions app losing state after shell restart [Florian; !3463]
+* Support loading login banner message from file [Florian; !3558]
+* Misc. bug fixes and cleanups [Florian, Daniel, Bilal, Philip, Adam, Car=
+los,
+  Julian; !3600, !3601, !3528, !3510, !3605, !3607, !3609, !3613, !3615, =
+!3598,
+  !3617, !3599, !3612, !3621, !3619, !3429, !3627]
+Contributors:
+  Bilal Elmoussaoui, Carlos Garnacho, Sam Hewitt, Florian M=C3=BCllner,
+  Julian Sparber, Daniel van Vugt, Adam Williamson, Philip Withnall
+Translators:
+  Rafael Fontenelle [pt_BR], Artur S0 [ru], Quentin PAG=C3=88S [oc],
+  Emilio Sep=C3=BAlveda [ia], Martin [sl], Philipp Kiemle [de]
+48.alpha
+=3D=3D=3D=3D=3D=3D=3D=3D
+* Improve quick settings accessibility [Luk=C3=A1=C5=A1; !3477, !3481, !3=
+484, !3485]
+* Use accent color in tablet configuration UI [Alice; !3480]
+* Improve accuracy of inset box shadows [Daniel; !3488]
+* Fix `PopupSwitchMenuItem::toggled` passing wrong state [Andrew; !3493]
+* Consider text direction when handling arrow keys in sliders [Sundeep; !=
+3500]
+* Fix layout issues with new dialog style [Sam; !3473]
+* Fix uneven padding in notification headers [Sam; !3486]
+* Fix graphical artifacts in partially-rounded buttons [Sebastian; #7996]
+* Do not depend on gnome-menus for folder translations [Pablo; !3526]
+* Fix caret tracking in magnifier [Bilal; !3522]
+* Show OSD notification for headphone connection [Sundeep; !3531]
+* Improve accessibility of keyboard backlight quick settings toggle
+  [Luk=C3=A1=C5=A1, Florian; !3538, !3545]
+* Fix resetting non-caps shift key in on-screen keyboard [Jonas; !3286]
+* Improve contrast of notification placeholder [Sam; !3557]
+* Add support for screen time / health breaks [Philip; !3251]
+* Add sysext support to toolbox tooling [Florian; !3498]
+* Modernize spinner [Florian; !3565]
+* extensions-app: Allow closing with ctrl+w [Maximiliano; !3577]
+* Fix Escape handling in run dialog [Florian; !3585]
+* Fix custom text-scaling-factor getting reset [Matthijs; !3574]
+* Tweak ibus candidate popover appearance [AuralRay; !3584]
+* Add convenience logging API for extensions [Florian; !3586]
+* Improve on-screen keyboard appearance [Sam; !3555, !3553]
+* Tweak quick settings appearance [Sam; !3554]
+* Add support for screen time limits [Philip; !3397]
+* Fixed crash [Florian; !3476]
+* Misc. bug fixes and cleanups [Florian, Robert, Bilal, Marco, Guacamolie=
+,
+  Automeris, Daniel, Jonas, Georges, Michel, Bart=C5=82omiej, Alberto, As=
+ciiWolf,
+  Jakub, Sam; !3478, !3479, !3482, !3490, !3099, !3494, !3495, !3497, !34=
+99,
+  !3504, !3503, !3502, !3505, !3507, !3508, !3506, !3379, !3511, !3514, !=
+3515,
+  !3519, !3520, !3518, !3521, !3524, !3527, !3501, !3529, !3535, !3532, !=
+3542,
+  !3540, !3543, !3541, !3549, !3548, !3539, !3563, !3567, !3569, !3570, !=
+3547,
+  !3573, !3525, !3546, !3575, !3572, !3544, !3580, !3578, !3576, !3579, !=
+3589,
+  !3587, !3552, !3593]
+Contributors:
+  AsciiWolf, AuralRay, Georges Basile Stavracas Neto, Pablo Correa G=C3=B3=
+mez,
+  Jonas Dre=C3=9Fler, Michel D=C3=A4nzer, Bilal Elmoussaoui, Guacamolie, =
+Sam Hewitt,
+  Sebastian Keller, Robert Mader, Sundeep Mediratta, Alice Mikhaylenko,
+  Florian M=C3=BCllner, Bogi Napoleon Wennerstr=C3=B6m, Automeris naranja=
+,
+  Bart=C5=82omiej Piotrowski, Alberto Ruiz, Daniel Rusek, Maximiliano San=
+doval,
+  Jakub Steiner, Marco Trevisan (Trevi=C3=B1o), Luk=C3=A1=C5=A1 Tyrychtr,=
+ Daniel van Vugt,
+  Matthijs Velsink, Philip Withnall, Andrew Zaech
+Translators:
 
-Accessibility
-- Turn CcCursorSizeDialog into a page
-- Remove "screen" mark labels in zoom page
-- Simplify cursor size subtitle
-Apps
-- Avoid crash when parsing invalid app permissions
-- Handle Epiphany webapps
-- Various memory leak fixes
-- Remove .circular style class from some buttons
-Appearance
-- Load GnomeBG thumbnails async
-- Internally handle scale-factor
-- Allow for concurrent cache updates
-- Generate one background thumbnail at a time
-- Don't accidentally reset accent colors
-- Add "undo" option when deleting a wallpaper
-- Load async wallpapers in order
-Color
-- Fix "Show details" link on profile warning
-- Fix row expansion and button visibility
-- Port "Add Profile" to AdwDialog
-- Rename "Color" panel to "Color Management"
-- Various code style improvements
-- Port add profile page from GtkTreeView to GtkListView
-- Ensure profile is connected before setting system-wide
-- Various fixes to the color calibration tool
-Date and Time
-- Fix incorrect disabling of auto timezone without location services
-- Use AdwToggleGroup in the "Time Format" row
-Display
-- Snap monitors after updating prefer mode to current config when enable =
-join mode
-- Port "Scale" and "Multiple Displays" rows to AdwToggleGroup
-- Use real color temp in night light scale widget
-Keyboard
-- Port Shortcut editor to AdwDialog
-- Use "--parent-handle" option when launching Tecla (keyboard layout prev=
-iewer)
-- Fix compose key example string
-Network
-- Make metered connection and hotspot settings adaptive to small screens
-- Fix memory leaks in wireguard page
-Notifications
-- Update UI when underlying gsetting changes
-Mouse
-- Convert VP9 webm with alpha to monochrome variants (so we don't need gs=
-treamer-bad-pluggins)
-- Update webm illustration assets to latest versions
-Mobile Networks
-- Fix status pages alignments
-- Use header capitalization in the "Turn off Airplane Mode" button
-Multitasking
-- Make workspace settings insensitive for single workspace
-Online Accounts
-- Track goa changes in PresentationIdentity and update the UI accordingly
-Power
-- Add support for battery charge limiting
-- Split panel into "General" and "Power Saving" pages
-- Split "Black Screen" setting in switch and delay
-- Remove separate dialog for "Automatic Suspend"
-
-- Various improvements on code readability and refactors
-- Fix conflicting mnemonics
-- Handle when tuned-ppd has an unsupported power profile
-Printers
-- Remove "search as you type" feature as it conflicts with global search
-- Add a confirmation dialog when attempting to clear all jobs
-- Add "No Results" page when nothing to show on search
-- Use a consistent printer icon in several status pages
-- Set "Driver" row after selecting ppd file in Printer Details dialog
-- Port "Install PPD" dialog to GtkFileDialog
-Region
-- Update language row after closing lang selector
-- Port format chooser dialog to AdwDialog
-- Show locale name in format chooser preview
-- Reset format chooser preview when uncollapsing
-Sound
-- Turn sound alert dialog into a subpage
-- Prevent crash in Volume Levels when stream has no name
-Search
-- Add a button to open custom search locations
-Sharing
-- Fix saving of new shared folders in "Media Sharing" settings
-- Make "Media Sharing" dialog use GtkFileDialog for new folders
-Tests
-- Disable randomly failing network panel test
-- Improve waiting on NM device/client changes
-- Add FQDN hostname tests
-Thunderbolt
-- Use AdwToast to display transient notifications
-- Use property-rows style in device dialog
-Users
-- Use a dialog to confirm fingerprint removal
-- Stop shipping legacy avatar images
-- Fix conflicting mnemonic in "Add User" dialog
-- Port "Remove User" button to AdwButtonRow
-- Make screen reader read avatar file names when there are no names
-- Port fingerprint dialog to AdwDialog
-Wacom
-- Do not crash when handling an unknown stylus ID
-- Support hidpi for tablet/stylus images
-- Make assets recolorable
-- Rename visible entry to "Graphics Tablet"
-- Change from "left handed orientation" to "location of buttons"
-- Various style tweaks to stylus page
-Wellbeing
-- Add initial Wellbeing panel (disabled by default)
-Wifi
-- Fix crash on wifi adapter removal
-- Fix using wifi hotspot with multiple wifi adapters
-- Don't disable wireless globally when toggling one Wifi connection OFF
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Version 47.beta
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-- Various translation updates
-- Various CI fixes
-- Various ports to modern libadwaita widgets
-- Various mnemonics additions
-
-- Use GtkWindow.set_default_icon_name for legacy sessions
-Accessibility
-- Rename "Reduce Animation" setting to "Animation Effects"
-Apps
-- Rename "File and Link Associations" page to "Files and Links"
-- Show status page when Parental Controls aren't available
-- Don't show "App is not sandboxed" banner for system components
-Display
-- Adapt rotation labels to the screen ratio
-- Don't set automatic Night Light when Location Services are unavailable
-Keyboard
-- Load input choice locales asynchronously
-- Fix "Move" buttons in input rows
-Location
-- Remove reference to now retired Mozilla Location Services
-Mouse
-- Use monochrome assets to support different accent colors
-- Separate "Touchpad" row into its own preferences row group
-Network
-- Don't set empty ignored hosts
-Notifications
-- Turn "App Notifications" dialog into a subpage
-Online Accounts
-- Add a toast overlay for panel notifications/error messages
-Users
-- Modernize the "Add User" dialog
-- Respect password "enforcing" based on /etc/security/pwquality.conf
-- Avoid user names with underscores being interpreted as mnemonics
-- Show correctly the remaining list of fingerprints to enroll
-- Reverse sorting of finger names list to prioritize most used ones
-Printers
-- Various tweaks for the PPD Selection dialog
-- Add button instead of link to open printer cups web page
-Privacy
-- Don't leak Bolt and Location subpages
-- Fix visibility of Bolt settings when Bolt isn't available
-Remote Desktop
-- Fix loop resetting credentials
-- Use new gnome-remote-desktop server configuration DBUs interface
-Sound
-- Add an empty state page for when no sound device is available
-Wacom
-- Set up Wacom stylus keyboard shortcuts and switch monitor
-WWAN
-- Fix crash preventing the load of the SIM Unlock dialog
+  Aefgh Threenine [th], Daniel Mustieles [es], Mahdi Hasan [bn],
+  Brage Fuglseth [nb], Athmane MOKRAOUI [kab], Fabio Tomat [fur],
+  Bogi Napoleon Wennerstr=C3=B6m [fo], Martin [sl], Emilio Sep=C3=BAlveda=
+ [ia],
+  Vasil Pupkin [be], Nathan Follens [nl], Artur S0 [ru],
+  =D0=9C=D0=B0=D1=80=D0=BA=D0=BE =D0=9A=D0=BE=D1=81=D1=82=D0=B8=D1=9B [sr=
+], Yaron Shahrabani [he], Cas Pascal [vi],
+  Sabri =C3=9Cnal [tr]
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- ...e-control-center_47.3.bb =3D> gnome-control-center_48.beta.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gnome-control-center/{gnome-control-cent=
-er_47.3.bb =3D> gnome-control-center_48.beta.bb} (95%)
+ ...ll-extensions_47.3.bb =3D> gnome-shell-extensions_48.beta.bb} | 2 +-
+ .../{gnome-shell_47.3.bb =3D> gnome-shell_48.beta.bb}            | 3 ++-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+ rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell-extensions_47.3=
+.bb =3D> gnome-shell-extensions_48.beta.bb} (84%)
+ rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell_47.3.bb =3D> gn=
+ome-shell_48.beta.bb} (94%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-=
-center_47.3.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-cont=
-rol-center_48.beta.bb
-similarity index 95%
-rename from meta-gnome/recipes-gnome/gnome-control-center/gnome-control-c=
-enter_47.3.bb
-rename to meta-gnome/recipes-gnome/gnome-control-center/gnome-control-cen=
-ter_48.beta.bb
-index a73183f0f8..e6db259494 100644
---- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_=
-47.3.bb
-+++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_=
-48.beta.bb
-@@ -39,7 +39,7 @@ inherit gtk-icon-cache pkgconfig gnomebase gsettings ge=
-ttext gi-docgen upstream-
- REQUIRED_DISTRO_FEATURES +=3D "opengl polkit pulseaudio systemd x11"
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_=
+47.3.bb b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_48.=
+beta.bb
+similarity index 84%
+rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_4=
+7.3.bb
+rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_48.=
+beta.bb
+index 151e57e887..175520d771 100644
+--- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_47.3.bb
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_48.beta=
+.bb
+@@ -6,7 +6,7 @@ inherit gnomebase gettext gsettings features_check
 =20
- SRC_URI +=3D "file://0001-Add-meson-option-to-pass-sysroot.patch"
--SRC_URI[archive.sha256sum] =3D "78381d5a7f1d5b297c9a19611145ee5e0584f06a=
-c575ed08ad070a0c07bbeaa2"
-+SRC_URI[archive.sha256sum] =3D "0ef7b2d3004e6eb418fce7080bb18d1b2426fb29=
-61b39fed9c2118bab01e6c24"
+ REQUIRED_DISTRO_FEATURES =3D "x11 polkit systemd pam gobject-introspecti=
+on-data"
 =20
- PACKAGECONFIG ??=3D "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland=
-', d)}"
- PACKAGECONFIG[cups] =3D ",,cups,cups system-config-printer cups-pk-helpe=
-r"
+-SRC_URI[archive.sha256sum] =3D "1a9142a4e85d7a2b7dc5bad37e34df9eebb38e84=
+96f4938be2d7b2b35883d139"
++SRC_URI[archive.sha256sum] =3D "5cc565a79540e2fb3bab041708ecbef28c83319d=
+e54388f5dabe9d7c35788c62"
+=20
+ EXTRA_OEMESON +=3D " \
+     -Dextension_set=3Dall \
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_47.3.bb b/m=
+eta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.beta.bb
+similarity index 94%
+rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell_47.3.bb
+rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.beta.bb
+index b3fba01eee..26fa8b4a72 100644
+--- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_47.3.bb
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.beta.bb
+@@ -33,7 +33,7 @@ GIR_MESON_OPTION =3D ""
+ # gobject-introspection is mandatory and cannot be configured
+ REQUIRED_DISTRO_FEATURES +=3D "gobject-introspection-data"
+=20
+-SRC_URI[archive.sha256sum] =3D "783deb9a086511e4a53db10574bfbba695576f69=
+8078218ca6c80cb1efec293e"
++SRC_URI[archive.sha256sum] =3D "e0c2bee1a1674c622847f353cae59ec36bfb122d=
+2c117834aff120445d7c5b2b"
+=20
+ PACKAGECONFIG ??=3D "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', =
+'systemd', d)}"
+ PACKAGECONFIG[bluetooth] =3D ",,gnome-bluetooth"
+@@ -67,6 +67,7 @@ FILES:${PN} +=3D " \
+     ${datadir}/dbus-1 \
+     ${datadir}/gnome-control-center \
+     ${datadir}/xdg-desktop-portal \
++    ${datadir}/desktop-directories \
+     ${systemd_user_unitdir} \
+ "
+=20
 --=20
 2.48.1
 
