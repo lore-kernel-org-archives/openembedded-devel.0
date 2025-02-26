@@ -1,56 +1,69 @@
-Return-Path: <denis@denix.org>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B5D0C19F32
-	for <webhook@archiver.kernel.org>; Wed, 26 Feb 2025 17:15:03 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.11262.1740590098578986942
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE087C021B8
+	for <webhook@archiver.kernel.org>; Wed, 26 Feb 2025 17:22:32 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by mx.groups.io with SMTP id smtpd.web11.11466.1740590552311056949
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Feb 2025 09:14:59 -0800
+ Wed, 26 Feb 2025 09:22:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id C886840C21;
-	Wed, 26 Feb 2025 17:14:57 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Swz54LNHUUwc; Wed, 26 Feb 2025 17:14:57 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 97C93407DA;
-	Wed, 26 Feb 2025 17:14:54 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id C63981642AF; Wed, 26 Feb 2025 12:14:53 -0500 (EST)
-Date: Wed, 26 Feb 2025 12:14:53 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	Yocto Project <yocto@lists.yoctoproject.org>,
-	openembedded-members@lists.openembedded.org
-Subject: OpenEmbedded Happy Hour February 26 9pm/2100 UTC
-Message-ID: <20250226171453.GG1879@denix.org>
+ dkim=none (message not signed); spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 478071516
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 09:22:47 -0800 (PST)
+Received: from cesw-amp-gbt-1s-m12830-04.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 041733F673
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 09:22:30 -0800 (PST)
+From: Ross Burton <ross.burton@arm.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH 1/4] ifenslave: remove manpages class
+Date: Wed, 26 Feb 2025 17:22:16 +0000
+Message-ID: <20250226172220.1033779-1-ross.burton@arm.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 17:15:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115677
+ <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 17:22:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115678
 
-All,
+This recipe doesn't ship any manpages since 2.10, so remove the manpage
+support.
 
-Please join us for our monthly OpenEmbedded Happy Hour today, Wednesday 
-February 26 at 2100/9pm UTC (4pm ET/1pm PT).
+Signed-off-by: Ross Burton <ross.burton@arm.com>
+---
+ meta-networking/recipes-support/ifenslave/ifenslave_2.14.bb | 5 -----
+ 1 file changed, 5 deletions(-)
 
-https://www.openembedded.org/wiki/Calendar
-https://www.openembedded.org/wiki/Happy_Hours
-https://www.timeanddate.com/worldclock/fixedtime.html?msg=OpenEmbedded+Happy+Hour+February+26&iso=20250226T21
+diff --git a/meta-networking/recipes-support/ifenslave/ifenslave_2.14.bb =
+b/meta-networking/recipes-support/ifenslave/ifenslave_2.14.bb
+index 02a5520a97..b41eb78374 100644
+--- a/meta-networking/recipes-support/ifenslave/ifenslave_2.14.bb
++++ b/meta-networking/recipes-support/ifenslave/ifenslave_2.14.bb
+@@ -5,9 +5,6 @@ SECTION =3D "net"
+ LICENSE =3D "GPL-3.0-only"
+ LIC_FILES_CHKSUM =3D "file://debian/copyright;md5=3Dacc89812938cf9ad6b1d=
+ebc37cea0253"
+=20
+-inherit manpages
+-MAN_PKG =3D "${PN}"
+-
+ SRCREV =3D "62e60904afbe58fda0c7104fdad1c4f618266ba6"
+ SRC_URI =3D "git://salsa.debian.org/debian/ifenslave.git;protocol=3Dhttp=
+s;branch=3Dmain"
+=20
+@@ -18,5 +15,3 @@ do_install() {
+     install -m 0755 -D ${S}/debian/ifenslave.if-post-down ${D}${sysconfd=
+ir}/network/if-post-down.d/ifenslave
+     install -m 0755 -D ${S}/debian/ifenslave.if-up ${D}${sysconfdir}/net=
+work/if-up.d/ifenslave
+ }
+-
+-FILES:${PN}-doc:remove =3D "${mandir}"
+--=20
+2.43.0
 
-Best regards,
-Denys Dmytriyenko
-OpenEmbedded Board of Directors
 
