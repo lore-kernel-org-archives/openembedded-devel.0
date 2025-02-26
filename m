@@ -2,25 +2,25 @@ Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 70351C282C4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A0F6C282C9
 	for <webhook@archiver.kernel.org>; Wed, 26 Feb 2025 15:50:42 +0000 (UTC)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web11.9156.1740585040470126690
+ by mx.groups.io with SMTP id smtpd.web11.9150.1740585033923076014
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Feb 2025 07:50:40 -0800
+ Wed, 26 Feb 2025 07:50:34 -0800
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 187A61516
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 07:50:56 -0800 (PST)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 85893FEC
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 07:50:49 -0800 (PST)
 Received: from cesw-amp-gbt-1s-m12830-04.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id C2D163F673
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 07:50:39 -0800 (PST)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 45E693F673
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 07:50:33 -0800 (PST)
 From: Ross Burton <ross.burton@arm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH v2 22/23] cgdb: fix autoreconf
-Date: Wed, 26 Feb 2025 15:50:19 +0000
-Message-ID: <20250226155022.1989209-22-ross.burton@arm.com>
+Subject: [PATCH v2 12/23] tigervnc: fix systemd unit packaging
+Date: Wed, 26 Feb 2025 15:50:09 +0000
+Message-ID: <20250226155022.1989209-12-ross.burton@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250226155022.1989209-1-ross.burton@arm.com>
 References: <20250226155022.1989209-1-ross.burton@arm.com>
@@ -30,33 +30,55 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 15:50:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115674
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115664
 
-autoreconf needs to be told where to find macros as the Makefile.am does
-not do this.
+Pass the correct path so the unit is installed where it should be, and
+use the systemd class to ensure the unit is enabled correctly.
 
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- meta-oe/recipes-devtools/cgdb/cgdb_0.8.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-graphics/tigervnc/tigervnc_1.14.1.bb | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/cgdb/cgdb_0.8.0.bb b/meta-oe/recipe=
-s-devtools/cgdb/cgdb_0.8.0.bb
-index 922dfc7763..fbd3618b4f 100644
---- a/meta-oe/recipes-devtools/cgdb/cgdb_0.8.0.bb
-+++ b/meta-oe/recipes-devtools/cgdb/cgdb_0.8.0.bb
-@@ -13,6 +13,8 @@ SRC_URI =3D "http://cgdb.me/files/${BP}.tar.gz \
-            file://0001-cgdb-Do-not-search-for-cgdb.txt-in-build-dir.patc=
-h"
- SRC_URI[sha256sum] =3D "0d38b524d377257b106bad6d856d8ae3304140e1ee240853=
-43e6ddf1b65811f1"
+diff --git a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.14.1.bb b/meta-=
+oe/recipes-graphics/tigervnc/tigervnc_1.14.1.bb
+index 4d2bb1f063..6e4d4a7b0c 100644
+--- a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.14.1.bb
++++ b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.14.1.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM =3D "file://LICENCE.TXT;md5=3D75b02c2872=
+421380bbd47781d2bd75d3"
 =20
-+EXTRA_AUTORECONF +=3D "-I config"
+ S =3D "${WORKDIR}/git"
+=20
+-inherit autotools cmake features_check pkgconfig
++inherit autotools cmake features_check pkgconfig systemd
+=20
+ REQUIRED_DISTRO_FEATURES =3D "x11 pam"
+=20
+@@ -79,7 +79,7 @@ EXTRA_OECONF =3D "--disable-xorg --disable-xnest --disa=
+ble-xvfb --disable-dmx \
+         --disable-xwayland \
+ "
+=20
+-EXTRA_OECMAKE +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '=
+-DCMAKE_INSTALL_UNITDIR=3D${systemd_unitdir}', '-DINSTALL_SYSTEMD_UNITS=3D=
+OFF', d)}"
++EXTRA_OECMAKE +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '=
+-DCMAKE_INSTALL_UNITDIR=3D${systemd_system_unitdir}', '-DINSTALL_SYSTEMD_=
+UNITS=3DOFF', d)}"
+=20
+ do_configure:append () {
+     olddir=3D`pwd`
+@@ -124,7 +124,8 @@ FILES:${PN} +=3D " \
+     ${libdir}/xorg/modules/extensions \
+     ${datadir}/icons \
+     ${datadir}/metainfo \
+-    ${systemd_unitdir} \
+ "
+=20
+ FILES:${PN}-dbg +=3D "${libdir}/xorg/modules/extensions/.debug"
 +
- CACHED_CONFIGUREVARS =3D "ac_cv_file__dev_ptmx=3Dyes ac_cv_rl_version=3D=
-6.2 ac_cv_file__proc_self_status=3Dyes"
- EXTRA_OECONF =3D "--with-readline=3D${STAGING_LIBDIR} \
-     --with-ncurses=3D${STAGING_LIBDIR}"
++SYSTEMD_SERVICE:${PN} =3D "vncserver@.service"
 --=20
 2.43.0
 
