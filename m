@@ -2,156 +2,158 @@ Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A0CBC282C8
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E253C282C7
 	for <webhook@archiver.kernel.org>; Wed, 26 Feb 2025 15:50:42 +0000 (UTC)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web11.9151.1740585034660066606
+ by mx.groups.io with SMTP id smtpd.web11.9149.1740585033291570044
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Feb 2025 07:50:34 -0800
+ Wed, 26 Feb 2025 07:50:33 -0800
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2BE9AFEC
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 07:50:50 -0800 (PST)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E092BFEC
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 07:50:48 -0800 (PST)
 Received: from cesw-amp-gbt-1s-m12830-04.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id E09793F673
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 07:50:33 -0800 (PST)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 9FB0A3F673
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 07:50:32 -0800 (PST)
 From: Ross Burton <ross.burton@arm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH v2 13/23] tigervnc: simplify xserver unpack and build
-Date: Wed, 26 Feb 2025 15:50:10 +0000
-Message-ID: <20250226155022.1989209-13-ross.burton@arm.com>
+Subject: [PATCH v2 11/23] libgphoto2: remove redundant autoconfing
+Date: Wed, 26 Feb 2025 15:50:08 +0000
+Message-ID: <20250226155022.1989209-11-ross.burton@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250226155022.1989209-1-ross.burton@arm.com>
 References: <20250226155022.1989209-1-ross.burton@arm.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 15:50:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115665
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115663
 
-When unpacking, just use cp to hardlink the xserver source tree into the
-tigervnc source tree.
+The configure scripts do the right thing now, so there's no need to
+patch configure.ac or manually invoke the sub-configure.
 
-When configuring, instead of replicating complicated logic, we can
-simply set the variable AUTOTOOLS_SCRIPT_PATH and just call
-autotools_do_configure.  Some of the options passed to the xserver
-configure are obsolete so remove them.
+Also remove obsolete FILES, -dbg is packaged automatically and we don't
+install .la files.
 
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- .../tigervnc/tigervnc_1.14.1.bb               | 59 +++----------------
- 1 file changed, 8 insertions(+), 51 deletions(-)
+ ...01-configure.ac-remove-AM_PO_SUBDIRS.patch | 41 -------------------
+ .../gphoto2/libgphoto2_2.5.31.bb              | 15 -------
+ 2 files changed, 56 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2/0001-conf=
+igure.ac-remove-AM_PO_SUBDIRS.patch
 
-diff --git a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.14.1.bb b/meta-=
-oe/recipes-graphics/tigervnc/tigervnc_1.14.1.bb
-index 6e4d4a7b0c..ab9edd9ee0 100644
---- a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.14.1.bb
-+++ b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.14.1.bb
-@@ -33,32 +33,17 @@ SRC_URI[xorg.sha256sum] =3D "841c82901282902725762df0=
-3adbbcd68153d4cdfb0d61df0cfd7
- # It is the directory containing the Xorg source for the
- # machine on which you are building TigerVNC.
- XSERVER_SOURCE_DIR=3D"${S}/unix/xserver"
-+AUTOTOOLS_SCRIPT_PATH =3D "${XSERVER_SOURCE_DIR}"
+diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2/0001-configure.a=
+c-remove-AM_PO_SUBDIRS.patch b/meta-oe/recipes-graphics/gphoto2/libgphoto=
+2/0001-configure.ac-remove-AM_PO_SUBDIRS.patch
+deleted file mode 100644
+index fd647b7386..0000000000
+--- a/meta-oe/recipes-graphics/gphoto2/libgphoto2/0001-configure.ac-remov=
+e-AM_PO_SUBDIRS.patch
++++ /dev/null
+@@ -1,41 +0,0 @@
+-From 31a5d2f7db18737aef08c34e8707b4f69f7e5156 Mon Sep 17 00:00:00 2001
+-From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@googlem=
+ail.com>
+-Date: Sun, 21 Oct 2012 17:59:20 +0200
+-Subject: [PATCH] configure.ac: remove AM_PO_SUBDIRS
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=3DUTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-together with oe autotools.bbclass this is done twice and causes:
+-
+-| autoreconf: running: aclocal --system-acdir=3D/home/Superandy/tmp/oe-c=
+ore-eglibc/work/armv7a-vfp-neon-angstrom-linux-gnueabi/libgphoto2-2.4.11-=
+r2/libgphoto2-2.4.11/aclocal-copy/ --automake-acdir=3D/home/Superandy/tmp=
+/oe-core-eglibc/sysroots/x86_64-linux/usr/share/aclocal-1.12 -I /home/Sup=
+erandy/tmp/oe-core-eglibc/work/armv7a-vfp-neon-angstrom-linux-gnueabi/lib=
+gphoto2-2.4.11-r2/libgphoto2-2.4.11/auto-m4/ -I /home/Superandy/tmp/oe-co=
+re-eglibc/work/armv7a-vfp-neon-angstrom-linux-gnueabi/libgphoto2-2.4.11-r=
+2/libgphoto2-2.4.11/m4m/ -I /home/Superandy/tmp/oe-core-eglibc/work/armv7=
+a-vfp-neon-angstrom-linux-gnueabi/libgphoto2-2.4.11-r2/libgphoto2-2.4.11/=
+auto-m4/ -I /home/Superandy/tmp/oe-core-eglibc/work/armv7a-vfp-neon-angst=
+rom-linux-gnueabi/libgphoto2-2.4.11-r2/libgphoto2-2.4.11/m4m/ --force -I =
+auto-m4 -I m4m
+-| configure.ac:230: error: `po-directories' is already registered with A=
+C_CONFIG_COMMANDS.
+-
+-Upstream-Status: Inappropriate [configuration]
+-
+-Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+----
+- configure.ac                 |    1 -
+- libgphoto2_port/configure.ac |    1 -
+- 2 files changed, 0 insertions(+), 2 deletions(-)
+-
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -282,7 +282,6 @@ dnl ------------------------------------
+- GP_GETTEXT_SETUP([GETTEXT_PACKAGE_LIBGPHOTO2],
+-                  [${PACKAGE}-${LIBGPHOTO2_CURRENT_MIN}],
+-                  [po])
+--AM_PO_SUBDIRS()
+- AM_GNU_GETTEXT_VERSION([0.19.1])
+- AM_GNU_GETTEXT([external])
+- AM_ICONV()
+---- a/libgphoto2_port/configure.ac
+-+++ b/libgphoto2_port/configure.ac
+-@@ -122,7 +122,6 @@ dnl ------------------------------------
+- GP_GETTEXT_SETUP([GETTEXT_PACKAGE_LIBGPHOTO2_PORT],
+-                  [${PACKAGE}-${LIBGPHOTO2_PORT_CURRENT_MIN}],
+-                  [po])
+--AM_PO_SUBDIRS()
+- AM_GNU_GETTEXT_VERSION([0.19.1])
+- AM_GNU_GETTEXT([external])
+- AM_ICONV()
+diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.31.bb b/meta=
+-oe/recipes-graphics/gphoto2/libgphoto2_2.5.31.bb
+index 57c9d199eb..0b58e8e75f 100644
+--- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.31.bb
++++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.31.bb
+@@ -11,7 +11,6 @@ DEPENDS =3D "libtool jpeg virtual/libusb0 libexif zlib =
+libxml2"
 =20
- do_patch[postfuncs] +=3D "do_patch_xserver"
- do_patch_xserver () {
--    subdirs=3D"Xext xkb GL hw/xquartz/bundle hw/xfree86/common man doc"
--    for i in ${subdirs}; do
--        install -d ${XSERVER_SOURCE_DIR}/$i
--    done
--
--    sources=3D"hw/xquartz/bundle/cpprules.in man/Xserver.man doc/smartsc=
-hed \
--             xserver.ent.in xkb/README.compiled \
--             hw/xfree86/xorgconf.cpp hw/xfree86/Xorg.sh.in"
--    for i in ${sources}; do
--        install -m 0644 ${XORG_S}/$i ${XSERVER_SOURCE_DIR}/$i;
--    done
--
--    cd ${XORG_S}
--    find . -type f | egrep '.*\.(c|h|am|ac|inc|m4|h.in|pc.in|man.pre|pl|=
-txt)$' | \
--    xargs tar cf - | (cd ${XSERVER_SOURCE_DIR} && tar xf -)
--
--    cd ${XSERVER_SOURCE_DIR}
--    xserverpatch=3D"${S}/unix/xserver21.patch"
--    echo "Apply $xserverpatch"
--    patch -p1 -b --suffix .vnc < $xserverpatch
-+    # Put the xserver source in the right place in the tigervnc source t=
-ree
-+    cp -rfl ${XORG_S}/* ${XSERVER_SOURCE_DIR}
-+    # Apply the patch to integrate the vnc server
-+    patch -p1 -b --suffix .vnc --directory ${XSERVER_SOURCE_DIR} <${S}/u=
-nix/xserver21.patch
- }
-=20
--EXTRA_OECONF =3D "--disable-xorg --disable-xnest --disable-xvfb --disabl=
-e-dmx \
-+EXTRA_OECONF =3D "--disable-xorg --disable-xnest --disable-xvfb \
-         --disable-xwin --disable-xephyr --disable-kdrive --with-pic \
-         --disable-static --disable-xinerama \
-         --with-xkb-output=3D${localstatedir}/lib/xkb \
-@@ -76,48 +61,20 @@ EXTRA_OECONF =3D "--disable-xorg --disable-xnest --di=
-sable-xvfb --disable-dmx \
-         --without-xmlto \
-         --enable-systemd-logind=3Dno \
-         --disable-xinerama \
--        --disable-xwayland \
+ SRC_URI =3D "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${PV}.tar.bz2;name=3D=
+libgphoto2 \
+            file://40-libgphoto2.rules \
+-           file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
+            file://0001-configure-Filter-out-buildpaths-from-CC.patch \
+            file://fix-build-with-gcc-14.patch \
  "
+@@ -25,18 +24,6 @@ PACKAGECONFIG ??=3D ""
+ PACKAGECONFIG[gd] =3D ",--without-gdlib,gd"
+ PACKAGECONFIG[serial] =3D "--enable-serial,--disable-serial,lockdev"
 =20
- EXTRA_OECMAKE +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '=
--DCMAKE_INSTALL_UNITDIR=3D${systemd_system_unitdir}', '-DINSTALL_SYSTEMD_=
-UNITS=3DOFF', d)}"
-=20
- do_configure:append () {
--    olddir=3D`pwd`
--    cd ${XSERVER_SOURCE_DIR}
+-do_configure:prepend() {
+-    rm -rf ${S}/libgphoto2_port/auto-m4/*
+-    rm -rf ${S}/auto-m4/*
+-}
 -
--    rm -rf aclocal-copy/
--    rm -f aclocal.m4
+-do_configure:append() {
+-    cp ${STAGING_DATADIR_NATIVE}/gettext/po/Makefile.in.in ${S}/libgphot=
+o2_port/po/
+-    cd ${S}/libgphoto2_port/
+-    autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECONF} $=
+acpaths
+-    cd ${S}
+-}
 -
--    export ACLOCALDIR=3D"${XSERVER_SOURCE_DIR}/aclocal-copy"
--    mkdir -p ${ACLOCALDIR}/
--    if [ -d ${STAGING_DATADIR_NATIVE}/aclocal ]; then
--        cp-noerror ${STAGING_DATADIR_NATIVE}/aclocal/ ${ACLOCALDIR}/
--    fi
--    if [ -d ${STAGING_DATADIR}/aclocal -a "${STAGING_DATADIR_NATIVE}/acl=
-ocal" !=3D "${STAGING_DATADIR}/aclocal" ]; then
--        cp-noerror ${STAGING_DATADIR}/aclocal/ ${ACLOCALDIR}/
--    fi
--    ACLOCAL=3D"aclocal --aclocal-path=3D${ACLOCALDIR}/" autoreconf -Wcro=
-ss --verbose --install --force ${EXTRA_AUTORECONF} $acpaths || bbfatal "a=
-utoreconf execution failed."
--    chmod +x ./configure
--    ${CACHED_CONFIGUREVARS} ./configure ${CONFIGUREOPTS} ${EXTRA_OECONF}
--    cd $olddir
-+    autotools_do_configure
- }
-=20
- do_compile:append () {
--    olddir=3D`pwd`
--    cd ${XSERVER_SOURCE_DIR}
--
-     oe_runmake
--
--    cd $olddir
- }
-=20
  do_install:append() {
--    olddir=3D`pwd`
--    cd ${XSERVER_SOURCE_DIR}/hw/vnc
--
--    oe_runmake 'DESTDIR=3D${D}' install
--
--    cd $olddir
-+    oe_runmake -C ${B}/hw/vnc 'DESTDIR=3D${D}' install
- }
+     install -d ${D}${sysconfdir}/udev/rules.d/
+     install -m 0644 ${UNPACKDIR}/*.rules ${D}${sysconfdir}/udev/rules.d/
+@@ -49,6 +36,4 @@ RRECOMMENDS:${PN} =3D "libgphoto2-camlibs"
+ FILES:libgphotoport =3D "${libdir}/libgphoto2_port.so.*"
 =20
- FILES:${PN} +=3D " \
+ FILES:${PN} +=3D "${nonarch_base_libdir}/udev/*"
+-FILES:${PN}-dbg +=3D "${libdir}/*/*/.debug"
+-FILES:${PN}-dev +=3D "${libdir}/*/*/*.la"
+ FILES:${PN}-doc +=3D "${datadir}/libgphoto2_port/0.12.?/vcamera/README.t=
+xt"
 --=20
 2.43.0
 
