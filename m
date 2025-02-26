@@ -2,25 +2,25 @@ Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F718C19F2E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 277C6C19F32
 	for <webhook@archiver.kernel.org>; Wed, 26 Feb 2025 15:50:42 +0000 (UTC)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web10.8943.1740585035220614848
+ by mx.groups.io with SMTP id smtpd.web11.9152.1740585036060620470
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Feb 2025 07:50:35 -0800
+ Wed, 26 Feb 2025 07:50:36 -0800
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C63AFFEC
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 07:50:50 -0800 (PST)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 756F21516
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 07:50:51 -0800 (PST)
 Received: from cesw-amp-gbt-1s-m12830-04.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 86D463F673
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 07:50:34 -0800 (PST)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 2D1043F673
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 07:50:35 -0800 (PST)
 From: Ross Burton <ross.burton@arm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH v2 14/23] tigervnc: small cleanups
-Date: Wed, 26 Feb 2025 15:50:11 +0000
-Message-ID: <20250226155022.1989209-14-ross.burton@arm.com>
+Subject: [PATCH v2 15/23] neon: fix autoreconf
+Date: Wed, 26 Feb 2025 15:50:12 +0000
+Message-ID: <20250226155022.1989209-15-ross.burton@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250226155022.1989209-1-ross.burton@arm.com>
 References: <20250226155022.1989209-1-ross.burton@arm.com>
@@ -30,50 +30,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 15:50:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115666
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115667
 
-Add some implicit dependencies which are explicitly checked for, a small
-comment, and remove an obsolete FILES:PN-dbg.
+autoreconf needs to be told where to find macros as the Makefile.am does
+not do this.
 
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- meta-oe/recipes-graphics/tigervnc/tigervnc_1.14.1.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-oe/recipes-support/neon/neon_0.33.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.14.1.bb b/meta-=
-oe/recipes-graphics/tigervnc/tigervnc_1.14.1.bb
-index ab9edd9ee0..ca737e48ba 100644
---- a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.14.1.bb
-+++ b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.14.1.bb
-@@ -2,7 +2,7 @@ DESCRIPTION =3D "TigerVNC remote display system"
- HOMEPAGE =3D "http://www.tigervnc.com/"
- LICENSE =3D "GPL-2.0-or-later"
- SECTION =3D "x11/utils"
--DEPENDS =3D "xserver-xorg gnutls jpeg libxtst gettext-native fltk libpam=
-"
-+DEPENDS =3D "gettext-native xserver-xorg gnutls nettle jpeg pixman libxt=
-st fltk libpam libx11 libxdamage libxfixes libxrandr"
- RDEPENDS:${PN} =3D "coreutils hicolor-icon-theme perl bash xkbcomp"
+diff --git a/meta-oe/recipes-support/neon/neon_0.33.0.bb b/meta-oe/recipe=
+s-support/neon/neon_0.33.0.bb
+index a0333f4560..0b8bee0efe 100644
+--- a/meta-oe/recipes-support/neon/neon_0.33.0.bb
++++ b/meta-oe/recipes-support/neon/neon_0.33.0.bb
+@@ -15,6 +15,8 @@ SRC_URI[sha256sum] =3D "659a5cc9cea05e6e7864094f1e13a77=
+abbbdbab452f04d751a8c16a944
 =20
- LIC_FILES_CHKSUM =3D "file://LICENCE.TXT;md5=3D75b02c2872421380bbd47781d=
-2bd75d3"
-@@ -13,6 +13,8 @@ inherit autotools cmake features_check pkgconfig system=
-d
+ inherit autotools-brokensep binconfig-disabled lib_package pkgconfig pte=
+st
 =20
- REQUIRED_DISTRO_FEATURES =3D "x11 pam"
-=20
-+# For ease we do in-tree builds right now. It should be possible to do
-+# out-of-tree builds.
- B =3D "${S}"
-=20
- SRCREV =3D "1b4af5c586eb7a30a38c82fd088c1fa47a83e72f"
-@@ -83,6 +85,4 @@ FILES:${PN} +=3D " \
-     ${datadir}/metainfo \
- "
-=20
--FILES:${PN}-dbg +=3D "${libdir}/xorg/modules/extensions/.debug"
--
- SYSTEMD_SERVICE:${PN} =3D "vncserver@.service"
++EXTRA_AUTORECONF +=3D "-I macros"
++
+ # Enable gnutls or openssl, not both
+ PACKAGECONFIG ?=3D "expat gnutls libproxy webdav zlib nls"
+ PACKAGECONFIG:class-native =3D "expat gnutls webdav zlib nls"
 --=20
 2.43.0
 
