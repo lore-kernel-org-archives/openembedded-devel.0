@@ -1,97 +1,146 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5044FC021BE
-	for <webhook@archiver.kernel.org>; Thu, 27 Feb 2025 12:04:19 +0000 (UTC)
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
- by mx.groups.io with SMTP id smtpd.web11.9057.1740657855303916570
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 71040C021BE
+	for <webhook@archiver.kernel.org>; Thu, 27 Feb 2025 12:53:59 +0000 (UTC)
+Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
+ by mx.groups.io with SMTP id smtpd.web10.9863.1740660831288783606
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Feb 2025 04:04:15 -0800
+ Thu, 27 Feb 2025 04:53:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jUP21ooI;
- spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-5ded46f323fso1083392a12.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 04:04:15 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=iC1L3y0Y;
+ spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-6fcd8090fe7so7231447b3.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 04:53:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1740657854; x=1741262654; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=eC6rwgB7pgrgubiwH9uXhBTmPjCxN5z4HgKie5ObMuI=;
-        b=jUP21ooI1i9vYNn9gNKYucbSoyuEz9PBKB5X4ET5gpbIGeWc40MJ1ailcrC9ydJJP/
-         +ka0GSnxWG5GXjPOqKTaZskI3ZpIy/N3qnaL4EnfF7bWSWC1roDrDPqweSj5r5tDmYeA
-         RmgA1neEbdgvOV0nzXAO6WXJStAPQmvqkjmaTsWBLdCKH8sz1Rhb1Rcx+IiwtanRgl1v
-         bV+e8IeiE7iw3NioKaQNBqGCPD8Vow8MQw632AHlnsKW9L74hWYJ3iQ+nmetB/xrdGHV
-         aWQF6OOlDs86ER0zhK5P65LwHcGGvOxH10FtmVyigyqRKSo19a8UXdHDgoI4KVe3rZ83
-         s0Rw==
+        d=gmail.com; s=20230601; t=1740660830; x=1741265630; darn=lists.openembedded.org;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=t8b+hHA8UhiFbeCbWLWn8uBKFt+glmyhPYejIa+k2sQ=;
+        b=iC1L3y0YgVW+2qs06Yz7O2S0mQHItHPK2Zx7U8onar/Xr4QBC5q27EqXhy4peK5nqu
+         mbxp1TrfnCBxQuxNCek5toyDMtTLLgbEPYopdHaf/MWNWuKJh0mlrh3EEH1BerO4oqpr
+         mrkk8tXVv5lKD0ygjREVfVOGKd//VNN3vG7UQ/M8iI/PkgZQApnkv29FHQnGTooCVW+e
+         9yE6DaHiw+RRKfFM+XaYmHKYq+9aIIgO/yuNSzTm1R9c8SJpo5RVVqXh66uYoMSwCMyP
+         nvNghrB/svOZlHaJtU7mwOSmQ38BQPjyDgwzvMOeCoTFl2VbKIHLVqcbO/1irkql4y9l
+         FP9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740657854; x=1741262654;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=eC6rwgB7pgrgubiwH9uXhBTmPjCxN5z4HgKie5ObMuI=;
-        b=utJg0xDeI0vk51jr/Ccw7f8hS1Z72FUV8UgV78oferbp7MLLGBvvhmCY7AjgSVBg8E
-         r3cDIGENY2QTrNKtqN8NTjWOYEjC/CgpaoGCDkv1R1E04R8ZlW9jInARSyHGfauqK7rv
-         8ezF+Zz8p7D94LZNRXpdDBu/dpajYokgQ967m7IDUJN2YQ0BK9l2fYiYDAIyNcFrWW1m
-         8gpGlT1I5YAKNcVHToEuE0CueTrV02GteMAhhMvfAZK0yDO6zMf9YS4IDa6Xd5Qk4R5t
-         Ss+by/aVS1QUzb47Gpqr/xpO0slYmbYubYK2Q1lgJr5dd3JDpstK6un9sS8IBbsItSsS
-         nYzw==
-X-Gm-Message-State: AOJu0YygqgeSvkeSkPtAXJ9anGOLPx1MUz+11LP/oGGXm3h/GeBkT41q
-	XFLRH/aobs4JXCBr4ZmGdEinnyt+Mj85lDEa3EArmXSS7qMVBbpfeBmK8Q==
-X-Gm-Gg: ASbGncspeJiiee8KsE/Do1j2/xsJKm/verbhAV1UcwNDUD1tJsvyZF7hKshLhpxMI8g
-	n0+TLX8OtiIPjvRChDdqMZEFenDbD6vNeGAjkQ3hesuc29SSMnZL4clWt/SmAVnS9wJR/5+ZDRD
-	kMDke39BrRKw/va9ssVK9kSWIwbDIK+wnE4rmUUMgk770OHJ0C7DSXvvLUNuS8QBsdR5eybo6Hn
-	BztFGYKQ71yFFvPRwCoe+meZ5BcH8PoYgaI6tOCq/Kw/aTDieesZPd0eKqOyL1UHIk4jo507mJC
-	ZGEocl4o2ARo7AOzLiYaKiGN0LV54AbS17WmolDevA==
-X-Google-Smtp-Source: AGHT+IHiMC9Un0q4xLo6IlWETy5RCRA56mxaVozsMlacw3kHZBpRFZUzCf0arDiTCdSRE4rsOAqprQ==
-X-Received: by 2002:a05:6402:501a:b0:5de:a6a8:5ecc with SMTP id 4fb4d7f45d1cf-5e4a0d490aamr9851214a12.5.1740657853423;
-        Thu, 27 Feb 2025 04:04:13 -0800 (PST)
-Received: from localhost.localdomain ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5e4c3b6d252sm1014954a12.26.2025.02.27.04.04.12
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 27 Feb 2025 04:04:13 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] thin-provisioning-tools: add target and sysroot to bindgen flags
-Date: Thu, 27 Feb 2025 13:04:12 +0100
-Message-ID: <20250227120412.1465709-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.48.1
+        d=1e100.net; s=20230601; t=1740660830; x=1741265630;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=t8b+hHA8UhiFbeCbWLWn8uBKFt+glmyhPYejIa+k2sQ=;
+        b=a29jMpVxQE5B1fYUezLEsF2UJ5WfQQV+3WNFa7QuD8DctFGKeykRPOgMMa2cu1RHso
+         vxvTvnhTq3utj0ZYn9/K5RFWS7IX4p09HXbKxO5JWXkljYsPFfSjLNI/i0d+Sjpd22PM
+         Jf9oyFcvPHJCe7n8mwdkHmIOj82mBWfwF+YqX32yB6tyKsmXz9gbY263/SMkFaqs6eYn
+         0ReSiv0C7EEfOKszJHb8BX4PZeDuu74iiyqpmYcerP/qHErO606QXdcO1IUh9NPUhtVW
+         PH9c910kdmO2acziptRWSkPaVGvgEs/uz7YLZhoV9mD0y5ruOEVtYg0tV/tbkJvtlCNR
+         dcaA==
+X-Forwarded-Encrypted: i=1; AJvYcCXz19HgupRNK9/3JWY1/UTmGdtcFx5HSbwyuzIdWEDgLlgjSWRWaiBuoP3GL7zkBDTjBS7kO9Dn5GL/ACFCuTHmvqA=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YwBVbXk1NA/DC38jyECBhvzyCry/OV+4K9vOl89EUt9WBzfFCHq
+	ZiP8rrxLpyXWtG/40VnoZXiMGwDMSpDcOIwM+zn3pN2QyYmPaLMZ
+X-Gm-Gg: ASbGnct9+WAd1oUKI56gvuZ9keFSahi6m1zz2Ehwhjpw48zTNgn2Dmh6N02Fev5Jri/
+	DhT/4D8FoFa/PKw4fKu2eykNJ/S1Zf652O4pWTLcPDGetJa9PYzL/MMBTqfnBg/BMNEXa/lVieb
+	IpvqAgmMpkl3xfxOR0uliv4PHb+K5SgQShl0wOLGqKsBXarUl97wlGH92KtXPvvHP7p50whi2PB
+	g/SpOkzld7YB8sSYOEUmrGAGjDLatbcZ9810c3K10+crVaTaY5z0c7bB2w4/JtzCgmJ6/FYkKtE
+	HVBuZJ93oXAouACnG6EufBRHxgrcVrelwhxVuU4/gOtgAdTFVf9kgD3vYCUfN69fQDbtADqrQHD
+	SpA==
+X-Google-Smtp-Source: AGHT+IFrtdCI1zdHBtBQ0s53tvJAnvoCxGoP7pqRRF+bpZ0AqHJTxc8NUrYx2ob9sYzev34XrNEKGg==
+X-Received: by 2002:a05:690c:4885:b0:6fb:a376:3848 with SMTP id 00721157ae682-6fd10b183ddmr107632067b3.34.1740660830425;
+        Thu, 27 Feb 2025 04:53:50 -0800 (PST)
+Received: from ?IPV6:2600:1700:45dd:7000:5ead:a50c:2cdd:8974? ([2600:1700:45dd:7000:5ead:a50c:2cdd:8974])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6fd3cbc5ac9sm2624877b3.121.2025.02.27.04.53.49
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 27 Feb 2025 04:53:49 -0800 (PST)
+Message-ID: <56818ccb-b03d-4ed9-a7e1-267876ef8cb5@gmail.com>
+Date: Thu, 27 Feb 2025 07:53:49 -0500
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Subject: styhead merge request: Feb 27th
+Autocrypt: addr=akuster808@gmail.com; keydata=
+ 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
+ ApZ86eOP
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 12:04:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115688
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 12:53:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115689
 
-BUILD_CFLAGS doesn't contain information about the recipe sysroot nor about the target
-system - and in case these are not specified for bindgen, then it builds against
-the build system's headers, using the build system's arch.
+The following changes since commit 6851cbf026088a13b2b45f684838d3dc4d7ccfdd:
 
-Specify these attributes in BINDGEN_EXTRA_CLANG_ARGS to use the correct headers.
+   lapack: fix buildpaths in ptest also when CBLAS is enabled 
+(2025-02-04 14:29:37 -0800)
 
-Fixes the following do_compile error:
+are available in the Git repository at:
 
-|   /usr/include/linux/types.h:5:10: fatal error: 'asm/types.h' file not found
-|   thread 'main' panicked at /yocto/sandbox/build/tmp/work/cortexa72-poky-linux/thin-provisioning-tools/1.1.0/sources-unpack/cargo_home/bitbake/devicemapper-sys-0.3.0/build.rs:24:10:
-|   Could not generate dm.h bindings: ClangDiagnostic("/usr/include/linux/types.h:5:10: fatal error: 'asm/types.h' file not found\n")
+   https://git.openembedded.org/meta-openembedded styhead-next
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- .../thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+for you to fetch changes up to c93994f1bb601c57548b588d4f77a044d90822cf:
 
-diff --git a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb b/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
-index bb4b53c28b..72543e60f4 100644
---- a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
-+++ b/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
-@@ -21,7 +21,7 @@ inherit pkgconfig
- DEPENDS += "udev libdevmapper libdevmapper-native clang-native"
- 
- export LIBCLANG_PATH = "${WORKDIR}/recipe-sysroot-native${libdir}"
--export BINDGEN_EXTRA_CLANG_ARGS = "${BUILD_CFLAGS}"
-+export BINDGEN_EXTRA_CLANG_ARGS = "${BUILD_CFLAGS} --sysroot=${RECIPE_SYSROOT} --target=${TARGET_SYS}"
- 
- require ${BPN}-crates.inc
- require ${BPN}-git-crates.inc
+   sip: Upgrade 6.8.3 -> 6.8.6 (2025-02-25 08:45:21 -0500)
+
+----------------------------------------------------------------
+Leon Anavi (1):
+       sip: Upgrade 6.8.3 -> 6.8.6
+
+Peter Kjellerstedt (5):
+       ebtables: Remove the dependecy on bash
+       tbb: Re-enable hwloc support
+       lvm2: Remove a lingering reference to ${PN}-udevrules
+       libeigen: Remove LGPL code
+       licenses/MINPACK: Remove
+
+  .../ebtables/ebtables-2.0.11/ebtables-legacy-save               | 19 +-
+  meta-networking/recipes-filter/ebtables/ebtables_2.0.11.bb |    2 -
+  meta-oe/licenses/MINPACK                                        | 51 --
+  meta-oe/recipes-devtools/sip/{sip_6.8.3.bb => sip_6.8.6.bb} |   12 +-
+  .../libeigen/0002-Remove-LGPL-Code-and-references.patch         | 1040 
++++++++++++++++++++++++++++
+  meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb |    9 +-
+  meta-oe/recipes-support/lvm2/lvm2.bb |    2 +-
+  meta-oe/recipes-support/tbb/tbb_2021.13.0.bb |    1 +
+  8 files changed, 1065 insertions(+), 71 deletions(-)
+  delete mode 100644 meta-oe/licenses/MINPACK
+  rename meta-oe/recipes-devtools/sip/{sip_6.8.3.bb => sip_6.8.6.bb} (53%)
+  create mode 100644 
+meta-oe/recipes-support/libeigen/libeigen/0002-Remove-LGPL-Code-and-references.patch
+
 
