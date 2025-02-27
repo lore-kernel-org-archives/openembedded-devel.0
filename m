@@ -1,146 +1,116 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <fbberton@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 71040C021BE
-	for <webhook@archiver.kernel.org>; Thu, 27 Feb 2025 12:53:59 +0000 (UTC)
-Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
- by mx.groups.io with SMTP id smtpd.web10.9863.1740660831288783606
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B2AAC19F2E
+	for <webhook@archiver.kernel.org>; Thu, 27 Feb 2025 14:34:00 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.web11.11738.1740666836697598989
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Feb 2025 04:53:51 -0800
+ Thu, 27 Feb 2025 06:33:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=iC1L3y0Y;
- spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-6fcd8090fe7so7231447b3.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 04:53:51 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Emu/+FPK;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: fbberton@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-43995b907cfso6682425e9.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 06:33:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1740660830; x=1741265630; darn=lists.openembedded.org;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=t8b+hHA8UhiFbeCbWLWn8uBKFt+glmyhPYejIa+k2sQ=;
-        b=iC1L3y0YgVW+2qs06Yz7O2S0mQHItHPK2Zx7U8onar/Xr4QBC5q27EqXhy4peK5nqu
-         mbxp1TrfnCBxQuxNCek5toyDMtTLLgbEPYopdHaf/MWNWuKJh0mlrh3EEH1BerO4oqpr
-         mrkk8tXVv5lKD0ygjREVfVOGKd//VNN3vG7UQ/M8iI/PkgZQApnkv29FHQnGTooCVW+e
-         9yE6DaHiw+RRKfFM+XaYmHKYq+9aIIgO/yuNSzTm1R9c8SJpo5RVVqXh66uYoMSwCMyP
-         nvNghrB/svOZlHaJtU7mwOSmQ38BQPjyDgwzvMOeCoTFl2VbKIHLVqcbO/1irkql4y9l
-         FP9Q==
+        d=gmail.com; s=20230601; t=1740666835; x=1741271635; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=gY0OQP6sSvM2QyldUH2ofTKp7Zk1N6WnVdbQEm8YEHk=;
+        b=Emu/+FPK3CDIArrVubDb6QdywQLTmwBaS6tMw8/7KtmV/96p2lKUdO9qcKj/xtvBRz
+         VKrRtN2CSFiqLv1wO8QfEEC+XbFI+Rlb71Jvuzy1bEMwdxpmWNRefNHCQ4LYgyqV0fBp
+         mo+gJ/gRkgjs7ei/xcIQ0bINZeGKMUYLQLnzLEuZPsKyCUnP07u8k381pokqmvQUYPfD
+         7NqhABjlNCrGszCc+vbjwxzBvqTwumGYQD9YvMTf8j5zHJkRekc9QT7dbLGE+aAgr58j
+         gueQBbaKE+ly4pkOBhrdq2/UTaCAdVWvwVfj0BJrfoE3OYErZ5leI2G0jLhzZ6J03VUn
+         rh3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740660830; x=1741265630;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=t8b+hHA8UhiFbeCbWLWn8uBKFt+glmyhPYejIa+k2sQ=;
-        b=a29jMpVxQE5B1fYUezLEsF2UJ5WfQQV+3WNFa7QuD8DctFGKeykRPOgMMa2cu1RHso
-         vxvTvnhTq3utj0ZYn9/K5RFWS7IX4p09HXbKxO5JWXkljYsPFfSjLNI/i0d+Sjpd22PM
-         Jf9oyFcvPHJCe7n8mwdkHmIOj82mBWfwF+YqX32yB6tyKsmXz9gbY263/SMkFaqs6eYn
-         0ReSiv0C7EEfOKszJHb8BX4PZeDuu74iiyqpmYcerP/qHErO606QXdcO1IUh9NPUhtVW
-         PH9c910kdmO2acziptRWSkPaVGvgEs/uz7YLZhoV9mD0y5ruOEVtYg0tV/tbkJvtlCNR
-         dcaA==
-X-Forwarded-Encrypted: i=1; AJvYcCXz19HgupRNK9/3JWY1/UTmGdtcFx5HSbwyuzIdWEDgLlgjSWRWaiBuoP3GL7zkBDTjBS7kO9Dn5GL/ACFCuTHmvqA=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YwBVbXk1NA/DC38jyECBhvzyCry/OV+4K9vOl89EUt9WBzfFCHq
-	ZiP8rrxLpyXWtG/40VnoZXiMGwDMSpDcOIwM+zn3pN2QyYmPaLMZ
-X-Gm-Gg: ASbGnct9+WAd1oUKI56gvuZ9keFSahi6m1zz2Ehwhjpw48zTNgn2Dmh6N02Fev5Jri/
-	DhT/4D8FoFa/PKw4fKu2eykNJ/S1Zf652O4pWTLcPDGetJa9PYzL/MMBTqfnBg/BMNEXa/lVieb
-	IpvqAgmMpkl3xfxOR0uliv4PHb+K5SgQShl0wOLGqKsBXarUl97wlGH92KtXPvvHP7p50whi2PB
-	g/SpOkzld7YB8sSYOEUmrGAGjDLatbcZ9810c3K10+crVaTaY5z0c7bB2w4/JtzCgmJ6/FYkKtE
-	HVBuZJ93oXAouACnG6EufBRHxgrcVrelwhxVuU4/gOtgAdTFVf9kgD3vYCUfN69fQDbtADqrQHD
-	SpA==
-X-Google-Smtp-Source: AGHT+IFrtdCI1zdHBtBQ0s53tvJAnvoCxGoP7pqRRF+bpZ0AqHJTxc8NUrYx2ob9sYzev34XrNEKGg==
-X-Received: by 2002:a05:690c:4885:b0:6fb:a376:3848 with SMTP id 00721157ae682-6fd10b183ddmr107632067b3.34.1740660830425;
-        Thu, 27 Feb 2025 04:53:50 -0800 (PST)
-Received: from ?IPV6:2600:1700:45dd:7000:5ead:a50c:2cdd:8974? ([2600:1700:45dd:7000:5ead:a50c:2cdd:8974])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6fd3cbc5ac9sm2624877b3.121.2025.02.27.04.53.49
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 27 Feb 2025 04:53:49 -0800 (PST)
-Message-ID: <56818ccb-b03d-4ed9-a7e1-267876ef8cb5@gmail.com>
-Date: Thu, 27 Feb 2025 07:53:49 -0500
+        d=1e100.net; s=20230601; t=1740666835; x=1741271635;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=gY0OQP6sSvM2QyldUH2ofTKp7Zk1N6WnVdbQEm8YEHk=;
+        b=BLZGLVmbLDL5Mnu+evHmr5hwufXlWwQ2ULfM4A7/AnomYJlqJ/06JuP4wbwNKxCFFq
+         UcBXbjJb58IVMXx0DDcX71kewGRsEfoKTYvFT9PRQmiu7S3DjyGAVQjZZjHh+AaGg6kU
+         dptr4wXq2AA7CNllHRjKDIVcHvthOyMhSx+5IvG0kc+TCk8F6d+Xt2EB7hxwePAv5Msp
+         mGxQitWEYPUV8SmS5z9Wnf3AlxHyzk+/Ydx++yGQBDFhDlGSIVKL7YdVhf3zLmS2RYd0
+         codnRldc0ID8VSD2GZvPU+I47QF8Jb6SA68mAqrrgFeQ9XJSW6uW8QJqDIvuxBC/NY23
+         Di6A==
+X-Gm-Message-State: AOJu0YxQuxWE5zb1jRy20GDXOs2tpSGBRB3x0lRk4vYfKNE4oUuQetf5
+	9aCnCYTY0adVB545STCBhRz6VhLZ8zOVh1WmM2k4lC9ngPiHpyKlVgxrhQ==
+X-Gm-Gg: ASbGnct0RwK+15R+ONZv1QzGOPG13cPh9rOnfgQS9jBKvuf7vttT+D8DoeXiokyDodV
+	2FOIVRNMYVGUDV+QRKKI9OM61BxvKQfrYGHssdzw2c9/3OY8ig4pOPMSQMaxKL/TsFP6GgzHtgb
+	UcaCyoOHqIF7A5FdShyvqeYevb56+qCVu9NsOsSawFFI1/9UoWQc76+DQnBktBwl9C92Tdu1UI1
+	4m8Ovn9hKsyX0q6bL284GBKC9budjSJA8vBWhYuuK8jcvP9OEyzg/ceAnXdLo4/IcKglE0Iaiqh
+	IrAGc8IKnTS+kFIqN9htHkk6DSiejqDriNsNqoqF2DXTXdPijQ==
+X-Google-Smtp-Source: AGHT+IH6VunYKdTbzsQ6RpgL5e0A4KY3mkPruxCipAtpmKpo52FkPag7B4GdnUDx0nUw7VGKYWgYcw==
+X-Received: by 2002:a05:600c:4ecf:b0:439:a88f:8538 with SMTP id 5b1f17b1804b1-43ab0f277efmr106932725e9.5.1740666834363;
+        Thu, 27 Feb 2025 06:33:54 -0800 (PST)
+Received: from CTW01359.criticaltechworks.com ([213.205.68.220])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-43aba5871f4sm58768295e9.39.2025.02.27.06.33.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 27 Feb 2025 06:33:53 -0800 (PST)
+From: Fabio Berton <fbberton@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: steve@sakoman.com
+Subject: [OE-core][scarthgap][PATCH] ccache.conf: Add include_file_ctime to sloppiness
+Date: Thu, 27 Feb 2025 14:33:52 +0000
+Message-ID: <20250227143352.1896473-1-fbberton@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: styhead merge request: Feb 27th
-Autocrypt: addr=akuster808@gmail.com; keydata=
- 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
- ApZ86eOP
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 12:53:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115689
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 14:34:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115690
 
-The following changes since commit 6851cbf026088a13b2b45f684838d3dc4d7ccfdd:
+From: Fabio Berton <fabio.berton@criticaltechworks.com>
 
-   lapack: fix buildpaths in ptest also when CBLAS is enabled 
-(2025-02-04 14:29:37 -0800)
+When multiple recipes are built in parallel, Ccache sometimes refuses to
+lookup some objects in cache, leading to undesired cache misses. The
+root cause of this is an interaction between the way how bitbake
+constructs a recipe sysroot and Ccache's `include_file_ctime` check.
 
-are available in the Git repository at:
+Whenever bitbake creates a recipe's sysroot it hardlinks the files
+provided by a recipes dependencies. Adding a hardlink to a file changes
+it's ctime which in turn leads Ccache to believe that the file was
+modified thus aborting the cache lookup.
 
-   https://git.openembedded.org/meta-openembedded styhead-next
+To avoid this situation, add `include_file_ctime` to the list of checks
+that should be ignored using the Ccache sloppiness configuration option
+[1].
 
-for you to fetch changes up to c93994f1bb601c57548b588d4f77a044d90822cf:
+Example of a log entry that Ccache ignores a file:
+/
+|recipe-sysroot/usr/include/bits/pthread_stack_min.h had status change
+|near or after invocation (ctime 1739822508.107677255, invocation time
+|1739822507.970071107)
+\
 
-   sip: Upgrade 6.8.3 -> 6.8.6 (2025-02-25 08:45:21 -0500)
+1 - https://ccache.dev/manual/4.10.2.html#config_sloppiness
 
-----------------------------------------------------------------
-Leon Anavi (1):
-       sip: Upgrade 6.8.3 -> 6.8.6
+Signed-off-by: Fabio Berton <fabio.berton@criticaltechworks.com>
+Signed-off-by: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+(cherry picked from commit 4899698297c7783e02aba5388e0469cc83bd2f70)
+---
+ meta/conf/ccache.conf | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-Peter Kjellerstedt (5):
-       ebtables: Remove the dependecy on bash
-       tbb: Re-enable hwloc support
-       lvm2: Remove a lingering reference to ${PN}-udevrules
-       libeigen: Remove LGPL code
-       licenses/MINPACK: Remove
-
-  .../ebtables/ebtables-2.0.11/ebtables-legacy-save               | 19 +-
-  meta-networking/recipes-filter/ebtables/ebtables_2.0.11.bb |    2 -
-  meta-oe/licenses/MINPACK                                        | 51 --
-  meta-oe/recipes-devtools/sip/{sip_6.8.3.bb => sip_6.8.6.bb} |   12 +-
-  .../libeigen/0002-Remove-LGPL-Code-and-references.patch         | 1040 
-+++++++++++++++++++++++++++
-  meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb |    9 +-
-  meta-oe/recipes-support/lvm2/lvm2.bb |    2 +-
-  meta-oe/recipes-support/tbb/tbb_2021.13.0.bb |    1 +
-  8 files changed, 1065 insertions(+), 71 deletions(-)
-  delete mode 100644 meta-oe/licenses/MINPACK
-  rename meta-oe/recipes-devtools/sip/{sip_6.8.3.bb => sip_6.8.6.bb} (53%)
-  create mode 100644 
-meta-oe/recipes-support/libeigen/libeigen/0002-Remove-LGPL-Code-and-references.patch
+diff --git a/meta/conf/ccache.conf b/meta/conf/ccache.conf
+index 4406ae561b..499e5327b8 100644
+--- a/meta/conf/ccache.conf
++++ b/meta/conf/ccache.conf
+@@ -1 +1,7 @@
+ max_size = 0
++
++# Avoid spurious cache misses caused by recipe sysroot creation: Creating a
++# recipe sysroot hardlinks all dependent files into place. Hardlinking updates
++# the file's ctime which in turn interferes with ccache's include_file_ctime
++# check.
++sloppiness = include_file_ctime
+-- 
+2.48.1
 
 
