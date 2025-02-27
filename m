@@ -1,62 +1,221 @@
-Return-Path: <ross.burton@arm.com>
+Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F0DC5C021B8
-	for <webhook@archiver.kernel.org>; Wed, 26 Feb 2025 17:22:42 +0000 (UTC)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web10.11334.1740590553020531198
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A87B2C19776
+	for <webhook@archiver.kernel.org>; Thu, 27 Feb 2025 01:16:35 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.906.1740618989941380015
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Feb 2025 09:22:33 -0800
+ Wed, 26 Feb 2025 17:16:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 994521516
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 09:22:48 -0800 (PST)
-Received: from cesw-amp-gbt-1s-m12830-04.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 578B33F673
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 09:22:32 -0800 (PST)
-From: Ross Burton <ross.burton@arm.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 3/4] pureftp: fix autoreconf
-Date: Wed, 26 Feb 2025 17:22:18 +0000
-Message-ID: <20250226172220.1033779-3-ross.burton@arm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250226172220.1033779-1-ross.burton@arm.com>
-References: <20250226172220.1033779-1-ross.burton@arm.com>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=4153b328b7=changqing.li@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51R0mW7P024017
+	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 01:16:28 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 451pu21gj3-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 01:16:28 +0000 (GMT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Wed, 26 Feb 2025 17:16:27 -0800
+Received: from pek-lpg-core6.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Wed, 26 Feb 2025 17:16:26 -0800
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] postgresql: upgrade 16.8 -> 17.4
+Date: Thu, 27 Feb 2025 09:16:25 +0800
+Message-ID: <20250227011625.1260215-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=K7bYHzWI c=1 sm=1 tr=0 ts=67bfbcec cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=T2h4t0Lz3GQA:10 a=epTmVMiNAAAA:8 a=vbk3tyzFAAAA:8 a=t7CeM3EgAAAA:8 a=HlEqEPtTPEwg_P5fVj4A:9 a=WAVeIemCYAVnJZFawouv:22
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: a1Oy5VRwluJZ13vz8jgFbtdXFKzj6Z9a
+X-Proofpoint-GUID: a1Oy5VRwluJZ13vz8jgFbtdXFKzj6Z9a
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-02-27_01,2025-02-26_01,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 malwarescore=0
+ lowpriorityscore=0 mlxlogscore=999 adultscore=0 spamscore=0
+ priorityscore=1501 mlxscore=0 bulkscore=0 clxscore=1015 impostorscore=0
+ suspectscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2502100000
+ definitions=main-2502270009
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Feb 2025 17:22:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115680
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 01:16:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115682
 
-autoreconf needs to be told where to find macros as the Makefile.am does
-not do this.
+From: Changqing Li <changqing.li@windriver.com>
 
-Signed-off-by: Ross Burton <ross.burton@arm.com>
+This is a major version upgrade, see release note:
+https://www.postgresql.org/docs/release/
+
+* Refresh patches:
+0003-configure.ac-bypass-autoconf-2.69-version-check.patch
+0005-postgresql-fix-ptest-failure-of-sysviews.patch
+* Removed dropped option --enable-thread-safety
+* Add depends for bison-native
+* Fix do_packge_qa error:
+  *.c *.h generated by bison or flex leave full paths in comment,
+rewrite those before *-src packaging
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.52.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ ...ac-bypass-autoconf-2.69-version-check.patch | 12 ++++++------
+ ...tgresql-fix-ptest-failure-of-sysviews.patch | 18 +++++++++---------
+ meta-oe/recipes-dbs/postgresql/postgresql.inc  |  9 +++++++--
+ .../{postgresql_16.8.bb => postgresql_17.4.bb} |  2 +-
+ 4 files changed, 23 insertions(+), 18 deletions(-)
+ rename meta-oe/recipes-dbs/postgresql/{postgresql_16.8.bb => postgresql_17.4.bb} (87%)
 
-diff --git a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.52.b=
-b b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.52.bb
-index 1ce3c468b7..8a56ad5078 100644
---- a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.52.bb
-+++ b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.52.bb
-@@ -15,5 +15,7 @@ SRC_URI[sha256sum] =3D "1126f3a95856d08889ff89703cb1aa9=
-ec9924d939d154e96904c920f05
-=20
- inherit autotools
-=20
-+EXTRA_AUTORECONF +=3D "-I m4"
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
+index 9584cfcb16..92ac335a7b 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
+@@ -1,7 +1,7 @@
+-From 30b1b37d309f67ba6d58f2197bd917107bc7d56c Mon Sep 17 00:00:00 2001
++From 5ce7d8398f6aff41eee8c8c80eeaad2fcb3da1fc Mon Sep 17 00:00:00 2001
+ From: Yi Fan Yu <yifan.yu@windriver.com>
+ Date: Fri, 5 Feb 2021 17:15:42 -0500
+-Subject: [PATCH 3/5] configure.ac: bypass autoconf 2.69 version check
++Subject: [PATCH] configure.ac: bypass autoconf 2.69 version check
+ 
+ for upgrade to autoconf 2.71
+ 
+@@ -13,20 +13,20 @@ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+  1 file changed, 4 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index df61ab4..b795f8c 100644
++index a8a61c5..27c2760 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+ @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch undefined macros
+  
+- AC_INIT([PostgreSQL], [16.8], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
++ AC_INIT([PostgreSQL], [17.4], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
+  
+ -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
+ -Untested combinations of 'autoconf' and PostgreSQL versions are not
+ -recommended.  You can remove the check from 'configure.ac' but it is then
+ -your responsibility whether the result works or not.])])
+- AC_COPYRIGHT([Copyright (c) 1996-2023, PostgreSQL Global Development Group])
++ AC_COPYRIGHT([Copyright (c) 1996-2024, PostgreSQL Global Development Group])
+  AC_CONFIG_SRCDIR([src/backend/access/common/heaptuple.c])
+  AC_CONFIG_AUX_DIR(config)
+ -- 
+-2.40.0
++2.34.1
+ 
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch b/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch
+index af36da4927..8219fc80e9 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch
+@@ -1,7 +1,7 @@
+-From 1a8b94140988d2ee5ff987b0bb3e7c3e936b8c01 Mon Sep 17 00:00:00 2001
++From d1fb37569b5a8c21968f69164e8bc6e4bb0185eb Mon Sep 17 00:00:00 2001
+ From: Manoj Saun <manojsingh.saun@windriver.com>
+ Date: Wed, 22 Mar 2023 08:07:26 +0000
+-Subject: [PATCH 5/5] postgresql: fix ptest failure of sysviews
++Subject: [PATCH] postgresql: fix ptest failure of sysviews
+ 
+ The patch "0001-config_info.c-not-expose-build-info.patch" hides the debug info
+ in pg_config table which reduces the count of rows from pg_config and leads to
+@@ -19,12 +19,12 @@ Signed-off-by: Manoj Saun <manojsingh.saun@windriver.com>
+  2 files changed, 2 insertions(+), 2 deletions(-)
+ 
+ diff --git a/src/test/regress/expected/sysviews.out b/src/test/regress/expected/sysviews.out
+-index 001c6e7..8256898 100644
++index 2176a54..a84bc27 100644
+ --- a/src/test/regress/expected/sysviews.out
+ +++ b/src/test/regress/expected/sysviews.out
+-@@ -29,7 +29,7 @@ select name, ident, parent, level, total_bytes >= free_bytes
+- (1 row)
++@@ -52,7 +52,7 @@ from pg_backend_memory_contexts where name = 'Caller tuples';
+  
++ rollback;
+  -- At introduction, pg_config had 23 entries; it may grow
+ -select count(*) > 20 as ok from pg_config;
+ +select count(*) > 13 as ok from pg_config;
+@@ -32,11 +32,11 @@ index 001c6e7..8256898 100644
+  ----
+   t
+ diff --git a/src/test/regress/sql/sysviews.sql b/src/test/regress/sql/sysviews.sql
+-index 351e469..84c113e 100644
++index b047fb5..d1e3999 100644
+ --- a/src/test/regress/sql/sysviews.sql
+ +++ b/src/test/regress/sql/sysviews.sql
+-@@ -18,7 +18,7 @@ select name, ident, parent, level, total_bytes >= free_bytes
+-   from pg_backend_memory_contexts where level = 0;
++@@ -33,7 +33,7 @@ from pg_backend_memory_contexts where name = 'Caller tuples';
++ rollback;
+  
+  -- At introduction, pg_config had 23 entries; it may grow
+ -select count(*) > 20 as ok from pg_config;
+@@ -45,5 +45,5 @@ index 351e469..84c113e 100644
+  -- We expect no cursors in this test; see also portals.sql
+  select count(*) = 0 as ok from pg_cursors;
+ -- 
+-2.25.1
++2.34.1
+ 
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+index e19f2f48e2..7bbcaca443 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
++++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+@@ -19,7 +19,7 @@ DESCRIPTION = "\
+ "
+ HOMEPAGE = "http://www.postgresql.com"
+ LICENSE = "0BSD"
+-DEPENDS = "libnsl2 tzcode-native perl"
++DEPENDS = "libnsl2 tzcode-native perl bison-native"
+ 
+ ARM_INSTRUCTION_SET = "arm"
+ 
+@@ -73,7 +73,7 @@ PACKAGECONFIG[openssl] = "--with-ssl=openssl,ac_cv_file__dev_urandom=yes,openssl
+ PACKAGECONFIG[icu] = "--with-icu,--without-icu,icu,icu"
+ PACKAGECONFIG[readline] = "--with-readline,--without-readline,readline"
+ 
+-EXTRA_OECONF += "--enable-thread-safety --disable-rpath \
++EXTRA_OECONF += "--disable-rpath \
+     --datadir=${datadir}/${BPN} \
+     --sysconfdir=${sysconfdir}/${BPN} \
+ "
+@@ -175,6 +175,11 @@ do_configure() {
+ 
+ do_compile:append() {
+     oe_runmake -C contrib all
 +
- PACKAGECONFIG[libsodium] =3D"ac_cv_lib_sodium_crypto_pwhash_scryptsalsa2=
-08sha256_str=3Dyes, \
-                            ac_cv_lib_sodium_crypto_pwhash_scryptsalsa208=
-sha256_str=3Dno, libsodium"
---=20
-2.43.0
++    for f in `find ${B} -name "*.[c|h]"`;
++    do
++        sed -i -e 's,${B}/../,,' $f
++    done
+ }
+ 
+ # server needs to configure user and group
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_16.8.bb b/meta-oe/recipes-dbs/postgresql/postgresql_17.4.bb
+similarity index 87%
+rename from meta-oe/recipes-dbs/postgresql/postgresql_16.8.bb
+rename to meta-oe/recipes-dbs/postgresql/postgresql_17.4.bb
+index 0843d90750..b1c95ed244 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_16.8.bb
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_17.4.bb
+@@ -12,6 +12,6 @@ SRC_URI += "\
+    file://0001-tcl.m4-Recognize-tclsh9.patch \
+ "
+ 
+-SRC_URI[sha256sum] = "9468083a56ce0ee7d294601b74dad3dd9fc69d87aff61f0a9fb63c813ff7efd8"
++SRC_URI[sha256sum] = "c4605b73fea11963406699f949b966e5d173a7ee0ccaef8938dec0ca8a995fe7"
+ 
+ CVE_STATUS[CVE-2017-8806] = "not-applicable-config: Ddoesn't apply to out configuration of postgresql so we can safely ignore it."
+-- 
+2.34.1
 
 
