@@ -1,107 +1,236 @@
-Return-Path: <philip@balister.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EBF40C282C1
-	for <webhook@archiver.kernel.org>; Thu, 27 Feb 2025 15:54:00 +0000 (UTC)
-Received: from mail.savoirfairelinux.com (mail.savoirfairelinux.com [208.88.110.44])
- by mx.groups.io with SMTP id smtpd.web11.13442.1740670538243125843
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 38A3CC19F32
+	for <webhook@archiver.kernel.org>; Thu, 27 Feb 2025 16:33:41 +0000 (UTC)
+Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com [209.85.167.179])
+ by mx.groups.io with SMTP id smtpd.web10.15164.1740674016941761526
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Feb 2025 07:35:38 -0800
+ Thu, 27 Feb 2025 08:33:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@savoirfairelinux.com header.s=DFC430D2-D198-11EC-948E-34200CB392D2 header.b=JkUvk7N/;
- spf=pass (domain: savoirfairelinux.com, ip: 208.88.110.44, mailfrom: paul.leguendekerneizon@savoirfairelinux.com)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.savoirfairelinux.com (Postfix) with ESMTP id 5ACF79C689B
-	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 10:35:37 -0500 (EST)
-Received: from mail.savoirfairelinux.com ([127.0.0.1])
- by localhost (mail.savoirfairelinux.com [127.0.0.1]) (amavis, port 10032)
- with ESMTP id 9PZ04J-YrCgy; Thu, 27 Feb 2025 10:35:36 -0500 (EST)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.savoirfairelinux.com (Postfix) with ESMTP id DF24C9C68D6;
-	Thu, 27 Feb 2025 10:35:36 -0500 (EST)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.savoirfairelinux.com DF24C9C68D6
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=eMUT9CS/;
+ spf=pass (domain: gmail.com, ip: 209.85.167.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f179.google.com with SMTP id 5614622812f47-3f419eea844so578490b6e.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 08:33:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=savoirfairelinux.com; s=DFC430D2-D198-11EC-948E-34200CB392D2;
-	t=1740670536; bh=j7jJMHGEf/yxmZ9h2iVvh9/C9KnW3vk6giqi2pu1vvU=;
-	h=From:To:Date:Message-Id:MIME-Version;
-	b=JkUvk7N//D9r3f7VriXX40ahog6krViqQen5E9H4+nUwpi69hzBqug6c6WQSzhUoa
-	 Su5YV3L2INOEOsEza0Tgm2FhGIb3UfkJmHm2GVMQdTOcxYCLRgmRA11vzemJuJ9kew
-	 dhCYFWTTOB1zOg+BTj1bYYngb8tNVhss0sDxLWgxF91kOwCytUTFJW/WKqhhzmxmuh
-	 ppUmxCCEIRcdLD5PMXoIoCy4tx1se9syW3XVg0ZouldhLsf1T1su6xWQhXltgbp2Im
-	 jM4BKCGr4S34qBIRPTVlQ+hovU99hViBZRRnZtr4XXvnFLJ8hb5I/HzaQFwLl2UStP
-	 JNO1RL0RIJ1cA==
-X-Virus-Scanned: amavis at mail.savoirfairelinux.com
-Received: from mail.savoirfairelinux.com ([127.0.0.1])
- by localhost (mail.savoirfairelinux.com [127.0.0.1]) (amavis, port 10026)
- with ESMTP id EqjdBoXMafgu; Thu, 27 Feb 2025 10:35:36 -0500 (EST)
-Received: from pleguen-ThinkPad-P14s-Gen-2a.rennes.sfl (80-15-101-118.ftth.fr.orangecustomers.net [80.15.101.118])
-	by mail.savoirfairelinux.com (Postfix) with ESMTPSA id 76B899C689B;
-	Thu, 27 Feb 2025 10:35:36 -0500 (EST)
-From: "Paul Le Guen de Kerneizon" <paul.leguendekerneizon@savoirfairelinux.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Paul Le Guen de Kerneizon <paul.leguendekerneizon@savoirfairelinux.com>
-Subject: [meta-oe][PATCH] gnuplot: add x11 PACKAGECONFIG
-Date: Thu, 27 Feb 2025 16:35:29 +0100
-Message-Id: <20250227153529.82380-1-paul.leguendekerneizon@savoirfairelinux.com>
-X-Mailer: git-send-email 2.34.1
+        d=gmail.com; s=20230601; t=1740674016; x=1741278816; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=/9eBczNIHmlcvJ+SvD2qncXI2Bd+2JlEJ2p24SVZ2ZA=;
+        b=eMUT9CS/mOkTelo3B+BIprDefTiVA9DgsNwMZk7vQfjGQMkHfKL7jYPs8yW6iKVAKe
+         JgULUS3qR0SPsqyW4Fiu1RtPwnx21ZLhPM8dMiJtW27BxPytxrDSd7/3bUamWAvNIS/C
+         jmxkKWjGI6wJ6PUCaoTK68Ft0qfpSb25Zv4Kr7mrCuN2Juxel/s4cx3kl378RvO0Ovgm
+         fSH5IQsVrRY8ILjZATdY0ix35ETRInFVE+V1+eTlzD2KzcTH8zanbyL4PKeoDQbFwknM
+         JAeTFVIOLrEnq1yILC/oe5FDSz9iLgO4Yly3n702GV/MVz4oSAOZPnC79zn4P+bckKWz
+         yCmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1740674016; x=1741278816;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=/9eBczNIHmlcvJ+SvD2qncXI2Bd+2JlEJ2p24SVZ2ZA=;
+        b=FQhDwFY0spk6CYEUKezLnbr3lE6fyG6BCc6wHfg/pMgj6DWf+/HXiJDXppl1Kg8gC0
+         KdjEjr1L+OwmTQrnFI9cJqC4HU/FFc19/4zuSGCcI3imkWx5AZPmpX19v1LjUYq1AR5Q
+         sUIi4Kgo1b9QhOL7LUiYaoec650kNXVOz295Vzyl4eA5OP8Zfp1gCzCnijh8Ze2BSdsM
+         V1rG6el3unlXk4kn+BbkGWCZBtVVLurSfXHR7qyEY/r2phZz2Ri+oWhRwrnMnt3/Wc5z
+         VFE4VfrmDTiQ4wJhGI+y6OAUVSmG+XOTBRqAX0AcL72bsebEwu49P311NYwyMebL6mFa
+         3ARg==
+X-Gm-Message-State: AOJu0YwI51cS2UziGyKGcbLvQYZGk8uMuJ0Oxj8smDMYgWofSyQayCKt
+	+j9q6YU/CZUNuQfTQFmiYcB3cg+6nHhrBTKSyTvvzxp2QWcp32I/cHA8RZw7LCgkkXIGnBGEgf2
+	HpRA/4G2H+6p8qLPmTXGWRuj4y/A=
+X-Gm-Gg: ASbGnctcsffypBVF1DQmPSV454o9OZzsvBYWgve0eLnb5w/BRs5MvOUlIOIxE2GbJrI
+	raHqX9sHOO8FeDF5krg2Po9F2QtB+dm4W3FPLBUgtOBOTvDH4JBAzckFyB0CRhciBy+18OdW/tJ
+	h3TpDNcOOrGYiHeUn6kmPLvw771IHrcI9HlGsYplUCTQ==
+X-Google-Smtp-Source: AGHT+IHA1cx59r+qspw5E4QsRJ6i5zTQzWIDBx+jsEK5jpCWZ8X+JrzPEhzxiYznvxNLdjI2gOJBXrJzlK/YNTl5gEw=
+X-Received: by 2002:a05:6808:10c9:b0:3f4:11b3:6215 with SMTP id
+ 5614622812f47-3f425a8f4f5mr17915650b6e.23.1740674016080; Thu, 27 Feb 2025
+ 08:33:36 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+References: <20250227120412.1465709-1-skandigraun@gmail.com>
+In-Reply-To: <20250227120412.1465709-1-skandigraun@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 27 Feb 2025 08:33:25 -0800
+X-Gm-Features: AQ5f1JpMyYtF7FbEdPHcEuCFG4e2zuRzVpTkqNJQBNOrFREs1WezNpsDWQJ8vfE
+Message-ID: <CAMKF1sreKdR6d2x35f80pKGo6nxQKPj4dR4v8AGiEFLVZrth3Q@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] thin-provisioning-tools: add target and
+ sysroot to bindgen flags
+To: skandigraun@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000065fe0e062f224046"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 15:54:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115692
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 16:33:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115693
 
-Currently, gnuplot recipe requires the x11 distro feature to be built.
-However, X11 is not needed for running gnuplot as long as we don't use
-a gnuplot X11 terminal.
-This commit adds the x11 package config used to make the need of x11
-distro feature optional to build gnuplot.
+--00000000000065fe0e062f224046
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Paul Le Guen de Kerneizon <paul.leguendekerneizon@savoirfa=
-irelinux.com>
----
- meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+On Thu, Feb 27, 2025 at 4:04=E2=80=AFAM Gyorgy Sarvari via lists.openembedd=
+ed.org
+<skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
 
-diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb b/meta-oe/=
-recipes-extended/gnuplot/gnuplot_5.4.3.bb
-index fe5e5c067d..ba79534cb9 100644
---- a/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb
-+++ b/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb
-@@ -5,11 +5,10 @@ HOMEPAGE =3D "http://www.gnuplot.info/"
- SECTION =3D "console/scientific"
- LICENSE =3D "gnuplot"
- LIC_FILES_CHKSUM =3D "file://Copyright;md5=3D243a186fc2fd3b992125d60d5b1=
-bab8f"
--DEPENDS =3D "${BPN}-native virtual/libx11 gd readline"
-+DEPENDS =3D "${BPN}-native gd readline"
+> BUILD_CFLAGS doesn't contain information about the recipe sysroot nor
+> about the target
+> system - and in case these are not specified for bindgen, then it builds
+> against
+> the build system's headers, using the build system's arch.
+>
+> Specify these attributes in BINDGEN_EXTRA_CLANG_ARGS to use the correct
+> headers.
+>
+> Fixes the following do_compile error:
+>
+> |   /usr/include/linux/types.h:5:10: fatal error: 'asm/types.h' file not
+> found
+> |   thread 'main' panicked at
+> /yocto/sandbox/build/tmp/work/cortexa72-poky-linux/thin-provisioning-tool=
+s/1.1.0/sources-unpack/cargo_home/bitbake/devicemapper-sys-0.3.0/build.rs:2=
+4
+> :10:
+> |   Could not generate dm.h bindings:
+> ClangDiagnostic("/usr/include/linux/types.h:5:10: fatal error:
+> 'asm/types.h' file not found\n")
 
- inherit autotools features_check pkgconfig
- # depends on virtual/libx11
--REQUIRED_DISTRO_FEATURES =3D "x11"
 
- SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar=
-.gz;name=3Darchive \
-            http://www.mneuroth.de/privat/zaurus/qtplot-0.2.tar.gz;name=3D=
-qtplot \
-@@ -37,11 +36,11 @@ do_install:class-native() {
- 	install ${B}/docs/*doc* ${D}${bindir}
-     rm ${D}${bindir}/*.o
- }
--
--PACKAGECONFIG ??=3D "cairo"
-+PACKAGECONFIG ??=3D "cairo ${@bb.utils.filter('DISTRO_FEATURES', 'x11', =
-d)}"
- PACKAGECONFIG[cairo] =3D "--with-cairo,--without-cairo,cairo pango"
- PACKAGECONFIG[lua] =3D "--with-lua,--without-lua,lua"
- PACKAGECONFIG[qt5] =3D "--with-qt --with-qt5nativesysroot=3D${STAGING_DI=
-R_NATIVE},--without-qt,qtbase-native qtbase qtsvg qttools-native"
-+PACKAGECONFIG[x11] =3D ",,virtual/libx11"
+Good catch I forgot about target vs build here once we point it to target
+sysroot we should not need build flags perhaps passing TOOLCHAIN_OPTIONS
+would suffice
 
- EXTRA_OECONF =3D " \
-     --with-readline=3D${STAGING_LIBDIR}/.. \
---
-2.34.1
+>
+>
+> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> ---
+>  .../thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb    | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git
+> a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-to=
+ols/
+> thin-provisioning-tools_1.1.0.bb
+> b/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-to=
+ols/
+> thin-provisioning-tools_1.1.0.bb
+> index bb4b53c28b..72543e60f4 100644
+> ---
+> a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-to=
+ols/
+> thin-provisioning-tools_1.1.0.bb
+> +++
+> b/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-to=
+ols/
+> thin-provisioning-tools_1.1.0.bb
+> @@ -21,7 +21,7 @@ inherit pkgconfig
+>  DEPENDS +=3D "udev libdevmapper libdevmapper-native clang-native"
+>
+>  export LIBCLANG_PATH =3D "${WORKDIR}/recipe-sysroot-native${libdir}"
+> -export BINDGEN_EXTRA_CLANG_ARGS =3D "${BUILD_CFLAGS}"
+> +export BINDGEN_EXTRA_CLANG_ARGS =3D "${BUILD_CFLAGS}
+> --sysroot=3D${RECIPE_SYSROOT} --target=3D${TARGET_SYS}"
+>
+>  require ${BPN}-crates.inc
+>  require ${BPN}-git-crates.inc
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#115688):
+> https://lists.openembedded.org/g/openembedded-devel/message/115688
+> Mute This Topic: https://lists.openembedded.org/mt/111413493/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--00000000000065fe0e062f224046
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote gmail_quote_container"><d=
+iv dir=3D"ltr" class=3D"gmail_attr">On Thu, Feb 27, 2025 at 4:04=E2=80=AFAM=
+ Gyorgy Sarvari via <a href=3D"http://lists.openembedded.org">lists.openemb=
+edded.org</a> &lt;skandigraun=3D<a href=3D"mailto:gmail.com@lists.openembed=
+ded.org">gmail.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc so=
+lid;padding-left:1ex">BUILD_CFLAGS doesn&#39;t contain information about th=
+e recipe sysroot nor about the target<br>
+system - and in case these are not specified for bindgen, then it builds ag=
+ainst<br>
+the build system&#39;s headers, using the build system&#39;s arch.<br>
+<br>
+Specify these attributes in BINDGEN_EXTRA_CLANG_ARGS to use the correct hea=
+ders.<br>
+<br>
+Fixes the following do_compile error:<br>
+<br>
+|=C2=A0 =C2=A0/usr/include/linux/types.h:5:10: fatal error: &#39;asm/types.=
+h&#39; file not found<br>
+|=C2=A0 =C2=A0thread &#39;main&#39; panicked at /yocto/sandbox/build/tmp/wo=
+rk/cortexa72-poky-linux/thin-provisioning-tools/1.1.0/sources-unpack/cargo_=
+home/bitbake/devicemapper-sys-0.3.0/build.rs:24:10:<br>
+|=C2=A0 =C2=A0Could not generate dm.h bindings: ClangDiagnostic(&quot;/usr/=
+include/linux/types.h:5:10: fatal error: &#39;asm/types.h&#39; file not fou=
+nd\n&quot;)</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Good =
+catch I forgot about target vs build here once we point it to target sysroo=
+t we should not need build flags perhaps passing TOOLCHAIN_OPTIONS would su=
+ffice=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8=
+ex;border-left:1px #ccc solid;padding-left:1ex" dir=3D"auto"><br>
+<br>
+Signed-off-by: Gyorgy Sarvari &lt;<a href=3D"mailto:skandigraun@gmail.com" =
+target=3D"_blank">skandigraun@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0.../thin-provisioning-tools/<a href=3D"http://thin-provisioning-tools=
+_1.1.0.bb" rel=3D"noreferrer" target=3D"_blank">thin-provisioning-tools_1.1=
+.0.bb</a>=C2=A0 =C2=A0 | 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+<br>
+diff --git a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provis=
+ioning-tools/<a href=3D"http://thin-provisioning-tools_1.1.0.bb" rel=3D"nor=
+eferrer" target=3D"_blank">thin-provisioning-tools_1.1.0.bb</a> b/meta-oe/d=
+ynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/<a href=
+=3D"http://thin-provisioning-tools_1.1.0.bb" rel=3D"noreferrer" target=3D"_=
+blank">thin-provisioning-tools_1.1.0.bb</a><br>
+index bb4b53c28b..72543e60f4 100644<br>
+--- a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-=
+tools/<a href=3D"http://thin-provisioning-tools_1.1.0.bb" rel=3D"noreferrer=
+" target=3D"_blank">thin-provisioning-tools_1.1.0.bb</a><br>
++++ b/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-=
+tools/<a href=3D"http://thin-provisioning-tools_1.1.0.bb" rel=3D"noreferrer=
+" target=3D"_blank">thin-provisioning-tools_1.1.0.bb</a><br>
+@@ -21,7 +21,7 @@ inherit pkgconfig<br>
+=C2=A0DEPENDS +=3D &quot;udev libdevmapper libdevmapper-native clang-native=
+&quot;<br>
+<br>
+=C2=A0export LIBCLANG_PATH =3D &quot;${WORKDIR}/recipe-sysroot-native${libd=
+ir}&quot;<br>
+-export BINDGEN_EXTRA_CLANG_ARGS =3D &quot;${BUILD_CFLAGS}&quot;<br>
++export BINDGEN_EXTRA_CLANG_ARGS =3D &quot;${BUILD_CFLAGS} --sysroot=3D${RE=
+CIPE_SYSROOT} --target=3D${TARGET_SYS}&quot;<br>
+<br>
+=C2=A0require ${BPN}-crates.inc<br>
+=C2=A0require ${BPN}-git-crates.inc<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#115688): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/115688" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/115688</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/111413493/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/111413493/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--00000000000065fe0e062f224046--
 
