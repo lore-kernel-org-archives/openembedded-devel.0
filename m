@@ -2,219 +2,132 @@ Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A87B2C19776
-	for <webhook@archiver.kernel.org>; Thu, 27 Feb 2025 01:16:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FDB1C021BE
+	for <webhook@archiver.kernel.org>; Thu, 27 Feb 2025 03:14:46 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.906.1740618989941380015
+ by mx.groups.io with SMTP id smtpd.web10.2869.1740626081448913582
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Feb 2025 17:16:30 -0800
+ Wed, 26 Feb 2025 19:14:41 -0800
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=4153b328b7=changqing.li@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51R0mW7P024017
-	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 01:16:28 GMT
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51R2mmU1002414
+	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 03:14:40 GMT
 Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 451pu21gj3-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 451pub9k7g-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 01:16:28 +0000 (GMT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 03:14:40 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Wed, 26 Feb 2025 17:16:27 -0800
+ 15.1.2507.43; Wed, 26 Feb 2025 19:14:39 -0800
 Received: from pek-lpg-core6.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Wed, 26 Feb 2025 17:16:26 -0800
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Wed, 26 Feb 2025 19:14:38 -0800
 From: <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] postgresql: upgrade 16.8 -> 17.4
-Date: Thu, 27 Feb 2025 09:16:25 +0800
-Message-ID: <20250227011625.1260215-1-changqing.li@windriver.com>
+Subject: [meta-oe][PATCH] abseil-cpp: upgrade 20240722.0 -> 20250127.0
+Date: Thu, 27 Feb 2025 11:14:37 +0800
+Message-ID: <20250227031437.3580059-1-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=K7bYHzWI c=1 sm=1 tr=0 ts=67bfbcec cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=T2h4t0Lz3GQA:10 a=epTmVMiNAAAA:8 a=vbk3tyzFAAAA:8 a=t7CeM3EgAAAA:8 a=HlEqEPtTPEwg_P5fVj4A:9 a=WAVeIemCYAVnJZFawouv:22
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: a1Oy5VRwluJZ13vz8jgFbtdXFKzj6Z9a
-X-Proofpoint-GUID: a1Oy5VRwluJZ13vz8jgFbtdXFKzj6Z9a
+X-Authority-Analysis: v=2.4 cv=S9sjwJsP c=1 sm=1 tr=0 ts=67bfd8a0 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=T2h4t0Lz3GQA:10 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=1XWaLZrsAAAA:8 a=J_Yf4bcsfNkuTo6Hu0YA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: WZ_Z02iP1fML2Idalae8M7uObkdpTAFF
+X-Proofpoint-ORIG-GUID: WZ_Z02iP1fML2Idalae8M7uObkdpTAFF
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
  definitions=2025-02-27_01,2025-02-26_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 malwarescore=0
- lowpriorityscore=0 mlxlogscore=999 adultscore=0 spamscore=0
- priorityscore=1501 mlxscore=0 bulkscore=0 clxscore=1015 impostorscore=0
- suspectscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2502100000
- definitions=main-2502270009
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=999
+ lowpriorityscore=0 malwarescore=0 phishscore=0 priorityscore=1501
+ mlxscore=0 spamscore=0 bulkscore=0 suspectscore=0 adultscore=0
+ clxscore=1015 impostorscore=0 classifier=spam authscore=0 authtc=n/a
+ authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2502100000 definitions=main-2502270023
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 01:16:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115682
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Feb 2025 03:14:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115683
 
 From: Changqing Li <changqing.li@windriver.com>
 
-This is a major version upgrade, see release note:
-https://www.postgresql.org/docs/release/
+Upgrade to the latest new LTS release, release note:
+https://github.com/abseil/abseil-cpp/releases?page=1
 
-* Refresh patches:
-0003-configure.ac-bypass-autoconf-2.69-version-check.patch
-0005-postgresql-fix-ptest-failure-of-sysviews.patch
-* Removed dropped option --enable-thread-safety
-* Add depends for bison-native
-* Fix do_packge_qa error:
-  *.c *.h generated by bison or flex leave full paths in comment,
-rewrite those before *-src packaging
+* drop 0005-Don-t-match-Wnon-virtual-dtor-in-the-flags-are-neede.patch,
+already include in this LTS release
+* Include security fix for CVE-2025-0838
 
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- ...ac-bypass-autoconf-2.69-version-check.patch | 12 ++++++------
- ...tgresql-fix-ptest-failure-of-sysviews.patch | 18 +++++++++---------
- meta-oe/recipes-dbs/postgresql/postgresql.inc  |  9 +++++++--
- .../{postgresql_16.8.bb => postgresql_17.4.bb} |  2 +-
- 4 files changed, 23 insertions(+), 18 deletions(-)
- rename meta-oe/recipes-dbs/postgresql/{postgresql_16.8.bb => postgresql_17.4.bb} (87%)
+ ...-virtual-dtor-in-the-flags-are-neede.patch | 30 -------------------
+ ...20240722.0.bb => abseil-cpp_20250127.0.bb} |  5 ++--
+ 2 files changed, 2 insertions(+), 33 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0005-Don-t-match-Wnon-virtual-dtor-in-the-flags-are-neede.patch
+ rename meta-oe/recipes-devtools/abseil-cpp/{abseil-cpp_20240722.0.bb => abseil-cpp_20250127.0.bb} (90%)
 
-diff --git a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
-index 9584cfcb16..92ac335a7b 100644
---- a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
-+++ b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
-@@ -1,7 +1,7 @@
--From 30b1b37d309f67ba6d58f2197bd917107bc7d56c Mon Sep 17 00:00:00 2001
-+From 5ce7d8398f6aff41eee8c8c80eeaad2fcb3da1fc Mon Sep 17 00:00:00 2001
- From: Yi Fan Yu <yifan.yu@windriver.com>
- Date: Fri, 5 Feb 2021 17:15:42 -0500
--Subject: [PATCH 3/5] configure.ac: bypass autoconf 2.69 version check
-+Subject: [PATCH] configure.ac: bypass autoconf 2.69 version check
+diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0005-Don-t-match-Wnon-virtual-dtor-in-the-flags-are-neede.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0005-Don-t-match-Wnon-virtual-dtor-in-the-flags-are-neede.patch
+deleted file mode 100644
+index 9a4fc0b43f..0000000000
+--- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0005-Don-t-match-Wnon-virtual-dtor-in-the-flags-are-neede.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From 9cb5e5d15c142e5cc43a2c1db87c8e4e5b6d38a5 Mon Sep 17 00:00:00 2001
+-From: Derek Mauro <dmauro@google.com>
+-Date: Mon, 5 Aug 2024 07:35:05 -0700
+-Subject: [PATCH] Don't match -Wnon-virtual-dtor in the "flags are needed to
+- suppress warnings in headers". It should fall through to the "don't impose
+- our warnings on others" case. Do this by matching on "-Wno-*" instead of
+- "-Wno*".
+-
+-Fixes #1737
+-
+-PiperOrigin-RevId: 659548798
+-Change-Id: I49d7ba7ddcd7be30f946fca90ba9be467181e854
+-Upstream-Status: Backport [https://github.com/abseil/abseil-cpp/commit/9cb5e5d15c142e5cc43a2c1db87c8e4e5b6d38a5]
+----
+- CMake/AbseilHelpers.cmake | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/CMake/AbseilHelpers.cmake b/CMake/AbseilHelpers.cmake
+-index b177e590..3c4c92fe 100644
+---- a/CMake/AbseilHelpers.cmake
+-+++ b/CMake/AbseilHelpers.cmake
+-@@ -195,7 +195,7 @@ function(absl_cc_library)
+-         # specified platform. Filter both of them out before the successor
+-         # reaches the "^-m" filter.
+-         set(skip_next_cflag ON)
+--      elseif(${cflag} MATCHES "^(-Wno|/wd)")
+-+      elseif(${cflag} MATCHES "^(-Wno-|/wd)")
+-         # These flags are needed to suppress warnings that might fire in our headers.
+-         set(PC_CFLAGS "${PC_CFLAGS} ${cflag}")
+-       elseif(${cflag} MATCHES "^(-W|/w[1234eo])")
+diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240722.0.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250127.0.bb
+similarity index 90%
+rename from meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240722.0.bb
+rename to meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250127.0.bb
+index 4bfc2100e4..88e20c0577 100644
+--- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240722.0.bb
++++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250127.0.bb
+@@ -7,14 +7,13 @@ SECTION = "libs"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=df52c6edb7adc22e533b2bacc3bd3915"
  
- for upgrade to autoconf 2.71
+-SRCREV = "4447c7562e3bc702ade25105912dce503f0c4010"
+-BRANCH = "lts_2024_07_22"
++SRCREV = "9ac7062b1860d895fb5a8cbf58c3e9ef8f674b5f"
++BRANCH = "lts_2025_01_27"
+ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH};protocol=https \
+            file://0001-absl-always-use-asm-sgidefs.h.patch             \
+            file://0002-Remove-maes-option-from-cross-compilation.patch \
+            file://0003-Remove-neon-option-from-cross-compilation.patch \
+            file://0004-abseil-ppc-fixes.patch \
+-           file://0005-Don-t-match-Wnon-virtual-dtor-in-the-flags-are-neede.patch \
+           "
  
-@@ -13,20 +13,20 @@ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
-  1 file changed, 4 deletions(-)
- 
- diff --git a/configure.ac b/configure.ac
--index df61ab4..b795f8c 100644
-+index a8a61c5..27c2760 100644
- --- a/configure.ac
- +++ b/configure.ac
- @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch undefined macros
-  
-- AC_INIT([PostgreSQL], [16.8], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
-+ AC_INIT([PostgreSQL], [17.4], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
-  
- -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
- -Untested combinations of 'autoconf' and PostgreSQL versions are not
- -recommended.  You can remove the check from 'configure.ac' but it is then
- -your responsibility whether the result works or not.])])
-- AC_COPYRIGHT([Copyright (c) 1996-2023, PostgreSQL Global Development Group])
-+ AC_COPYRIGHT([Copyright (c) 1996-2024, PostgreSQL Global Development Group])
-  AC_CONFIG_SRCDIR([src/backend/access/common/heaptuple.c])
-  AC_CONFIG_AUX_DIR(config)
- -- 
--2.40.0
-+2.34.1
- 
-diff --git a/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch b/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch
-index af36da4927..8219fc80e9 100644
---- a/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch
-+++ b/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch
-@@ -1,7 +1,7 @@
--From 1a8b94140988d2ee5ff987b0bb3e7c3e936b8c01 Mon Sep 17 00:00:00 2001
-+From d1fb37569b5a8c21968f69164e8bc6e4bb0185eb Mon Sep 17 00:00:00 2001
- From: Manoj Saun <manojsingh.saun@windriver.com>
- Date: Wed, 22 Mar 2023 08:07:26 +0000
--Subject: [PATCH 5/5] postgresql: fix ptest failure of sysviews
-+Subject: [PATCH] postgresql: fix ptest failure of sysviews
- 
- The patch "0001-config_info.c-not-expose-build-info.patch" hides the debug info
- in pg_config table which reduces the count of rows from pg_config and leads to
-@@ -19,12 +19,12 @@ Signed-off-by: Manoj Saun <manojsingh.saun@windriver.com>
-  2 files changed, 2 insertions(+), 2 deletions(-)
- 
- diff --git a/src/test/regress/expected/sysviews.out b/src/test/regress/expected/sysviews.out
--index 001c6e7..8256898 100644
-+index 2176a54..a84bc27 100644
- --- a/src/test/regress/expected/sysviews.out
- +++ b/src/test/regress/expected/sysviews.out
--@@ -29,7 +29,7 @@ select name, ident, parent, level, total_bytes >= free_bytes
-- (1 row)
-+@@ -52,7 +52,7 @@ from pg_backend_memory_contexts where name = 'Caller tuples';
-  
-+ rollback;
-  -- At introduction, pg_config had 23 entries; it may grow
- -select count(*) > 20 as ok from pg_config;
- +select count(*) > 13 as ok from pg_config;
-@@ -32,11 +32,11 @@ index 001c6e7..8256898 100644
-  ----
-   t
- diff --git a/src/test/regress/sql/sysviews.sql b/src/test/regress/sql/sysviews.sql
--index 351e469..84c113e 100644
-+index b047fb5..d1e3999 100644
- --- a/src/test/regress/sql/sysviews.sql
- +++ b/src/test/regress/sql/sysviews.sql
--@@ -18,7 +18,7 @@ select name, ident, parent, level, total_bytes >= free_bytes
--   from pg_backend_memory_contexts where level = 0;
-+@@ -33,7 +33,7 @@ from pg_backend_memory_contexts where name = 'Caller tuples';
-+ rollback;
-  
-  -- At introduction, pg_config had 23 entries; it may grow
- -select count(*) > 20 as ok from pg_config;
-@@ -45,5 +45,5 @@ index 351e469..84c113e 100644
-  -- We expect no cursors in this test; see also portals.sql
-  select count(*) = 0 as ok from pg_cursors;
- -- 
--2.25.1
-+2.34.1
- 
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
-index e19f2f48e2..7bbcaca443 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
-@@ -19,7 +19,7 @@ DESCRIPTION = "\
- "
- HOMEPAGE = "http://www.postgresql.com"
- LICENSE = "0BSD"
--DEPENDS = "libnsl2 tzcode-native perl"
-+DEPENDS = "libnsl2 tzcode-native perl bison-native"
- 
- ARM_INSTRUCTION_SET = "arm"
- 
-@@ -73,7 +73,7 @@ PACKAGECONFIG[openssl] = "--with-ssl=openssl,ac_cv_file__dev_urandom=yes,openssl
- PACKAGECONFIG[icu] = "--with-icu,--without-icu,icu,icu"
- PACKAGECONFIG[readline] = "--with-readline,--without-readline,readline"
- 
--EXTRA_OECONF += "--enable-thread-safety --disable-rpath \
-+EXTRA_OECONF += "--disable-rpath \
-     --datadir=${datadir}/${BPN} \
-     --sysconfdir=${sysconfdir}/${BPN} \
- "
-@@ -175,6 +175,11 @@ do_configure() {
- 
- do_compile:append() {
-     oe_runmake -C contrib all
-+
-+    for f in `find ${B} -name "*.[c|h]"`;
-+    do
-+        sed -i -e 's,${B}/../,,' $f
-+    done
- }
- 
- # server needs to configure user and group
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_16.8.bb b/meta-oe/recipes-dbs/postgresql/postgresql_17.4.bb
-similarity index 87%
-rename from meta-oe/recipes-dbs/postgresql/postgresql_16.8.bb
-rename to meta-oe/recipes-dbs/postgresql/postgresql_17.4.bb
-index 0843d90750..b1c95ed244 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql_16.8.bb
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql_17.4.bb
-@@ -12,6 +12,6 @@ SRC_URI += "\
-    file://0001-tcl.m4-Recognize-tclsh9.patch \
- "
- 
--SRC_URI[sha256sum] = "9468083a56ce0ee7d294601b74dad3dd9fc69d87aff61f0a9fb63c813ff7efd8"
-+SRC_URI[sha256sum] = "c4605b73fea11963406699f949b966e5d173a7ee0ccaef8938dec0ca8a995fe7"
- 
- CVE_STATUS[CVE-2017-8806] = "not-applicable-config: Ddoesn't apply to out configuration of postgresql so we can safely ignore it."
+ S = "${WORKDIR}/git"
 -- 
 2.34.1
 
