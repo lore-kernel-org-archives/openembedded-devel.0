@@ -2,85 +2,138 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C084BC282C6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C203CC282D0
 	for <webhook@archiver.kernel.org>; Sat,  1 Mar 2025 02:25:04 +0000 (UTC)
 Received: from mail.savoirfairelinux.com (mail.savoirfairelinux.com [208.88.110.44])
- by mx.groups.io with SMTP id smtpd.web11.16958.1740753475266009959
+ by mx.groups.io with SMTP id smtpd.web11.14813.1740747907038605684
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 Feb 2025 06:37:55 -0800
+ Fri, 28 Feb 2025 05:05:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@savoirfairelinux.com header.s=DFC430D2-D198-11EC-948E-34200CB392D2 header.b=yjCzOLJq;
+ dkim=pass header.i=@savoirfairelinux.com header.s=DFC430D2-D198-11EC-948E-34200CB392D2 header.b=CR8+9JuJ;
  spf=pass (domain: savoirfairelinux.com, ip: 208.88.110.44, mailfrom: paul.leguendekerneizon@savoirfairelinux.com)
 Received: from localhost (localhost [127.0.0.1])
-	by mail.savoirfairelinux.com (Postfix) with ESMTP id E0BE59C8950
-	for <openembedded-devel@lists.openembedded.org>; Fri, 28 Feb 2025 09:37:53 -0500 (EST)
+	by mail.savoirfairelinux.com (Postfix) with ESMTP id 5637B9C8A25;
+	Fri, 28 Feb 2025 08:05:06 -0500 (EST)
 Received: from mail.savoirfairelinux.com ([127.0.0.1])
  by localhost (mail.savoirfairelinux.com [127.0.0.1]) (amavis, port 10032)
- with ESMTP id cfh-rJiAewnQ; Fri, 28 Feb 2025 09:37:53 -0500 (EST)
+ with ESMTP id KxqVFHA3LVgR; Fri, 28 Feb 2025 08:05:06 -0500 (EST)
 Received: from localhost (localhost [127.0.0.1])
-	by mail.savoirfairelinux.com (Postfix) with ESMTP id 90D8D9C89DC;
-	Fri, 28 Feb 2025 09:37:53 -0500 (EST)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.savoirfairelinux.com 90D8D9C89DC
+	by mail.savoirfairelinux.com (Postfix) with ESMTP id 099959C8A26;
+	Fri, 28 Feb 2025 08:05:06 -0500 (EST)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.savoirfairelinux.com 099959C8A26
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=savoirfairelinux.com; s=DFC430D2-D198-11EC-948E-34200CB392D2;
-	t=1740753473; bh=wpI/qhYMSaJBSzm96FGE36PWk4I6PPKJeoXBSAYo28c=;
-	h=From:To:Date:Message-Id:MIME-Version;
-	b=yjCzOLJqFKL5iRZJPL15f8S7qZirLO7keE2vhWYsemywkCiefFlJUfFt9IVvBk3wC
-	 3020lDzmOG9YEhUkKwRHK4l8giqtAU5bOPwRowO51u/9nS7Xwt7rJY6cAaGQQpIiXp
-	 TgvRepEerO3CL/179hsdKlclBgO3EW4LnTrLIDTgO+eHJMZCIaR+pB7R4YgH2yFjou
-	 mn3fTT4iT4+yt0CDH9H8qdCKIr3XEP4aBq+D/MNvps20r3RliDKGMkbV58sI+WAE1c
-	 V6Ou5KZIwHHjE/mNYxkQMDzSo4ay/tqYjbkt5T0rVLi+OPH+3J7oxwOzgmBbGDsDJK
-	 vGz6sdjSp8DPg==
+	t=1740747906; bh=4UVHpWxMVUL8AlW044kOuDJ9QNiRLigT0k7Mk2VbVqw=;
+	h=Message-ID:Date:MIME-Version:To:From;
+	b=CR8+9JuJVkr+Dbsje0wxekeych9ATjkqpvXNQaH3v/Q5Vkz4cEIfjRg4EsBEROVS8
+	 69Ks0vwmYmQSAeiY8p9GMFoImP9bCns7pr9IepuJIUcheXQu7T1iKV1aBv0hMZvIyI
+	 J3NPpF8NeIEGfBSER0007c3i3k3nC7MupePfGBYJ9cKY7/MSV+llCqv8/+BC/3127X
+	 UQoGVl68aMgA4StBirtHaLoWqfLWsOJkYyYbZDF5eBap+xmy/jCpKWZeJTGcfcweOX
+	 DAPZqcMaezfr+Pqj3uUKSWSIt/xbgd5nXIzQZaoGCOnpCP1kjFLwFZP8qhBcA8fwBb
+	 9RqkncrQ2bqjA==
 X-Virus-Scanned: amavis at mail.savoirfairelinux.com
 Received: from mail.savoirfairelinux.com ([127.0.0.1])
  by localhost (mail.savoirfairelinux.com [127.0.0.1]) (amavis, port 10026)
- with ESMTP id zJAgrgheBEc9; Fri, 28 Feb 2025 09:37:53 -0500 (EST)
-Received: from pleguen-ThinkPad-P14s-Gen-2a.rennes.sfl (80-15-101-118.ftth.fr.orangecustomers.net [80.15.101.118])
-	by mail.savoirfairelinux.com (Postfix) with ESMTPSA id 27A569C8950;
-	Fri, 28 Feb 2025 09:37:53 -0500 (EST)
-From: "Paul Le Guen de Kerneizon" <paul.leguendekerneizon@savoirfairelinux.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Paul Le Guen de Kerneizon <paul.leguendekerneizon@savoirfairelinux.com>
-Subject: [meta-oe][PATCH] phoronix-test-suite: add missing font
-Date: Fri, 28 Feb 2025 15:37:26 +0100
-Message-Id: <20250228143726.69944-1-paul.leguendekerneizon@savoirfairelinux.com>
-X-Mailer: git-send-email 2.34.1
+ with ESMTP id FXAbmt1A1ZbG; Fri, 28 Feb 2025 08:05:05 -0500 (EST)
+Received: from [192.168.216.61] (80-15-101-118.ftth.fr.orangecustomers.net [80.15.101.118])
+	by mail.savoirfairelinux.com (Postfix) with ESMTPSA id 99ED89C8A25;
+	Fri, 28 Feb 2025 08:05:05 -0500 (EST)
+Message-ID: <4073d1cc-d36d-4ab9-ae24-c29229a20de5@savoirfairelinux.com>
+Date: Fri, 28 Feb 2025 14:05:04 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH] gnuplot: add x11 PACKAGECONFIG
+To: Gyorgy Sarvari <skandigraun@gmail.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20250227153529.82380-1-paul.leguendekerneizon@savoirfairelinux.com>
+ <d290aab6-a3cd-402d-a1dc-a6ab2278e377@gmail.com>
+From: "Paul Le Guen de Kerneizon" <paul.leguendekerneizon@savoirfairelinux.com>
+In-Reply-To: <d290aab6-a3cd-402d-a1dc-a6ab2278e377@gmail.com>
+Content-Type: multipart/alternative;
+ boundary="------------RJBi5VDTltacualT4LdfUIVA"
+Content-Language: en-US
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 01 Mar 2025 02:25:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115715
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115714
 
-The `ttf-dejavu-sans` font is needed by SVG charts rendered in
-phoronix-test-suite PDF reports.
+--------------RJBi5VDTltacualT4LdfUIVA
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Paul Le Guen de Kerneizon <paul.leguendekerneizon@savoirfa=
-irelinux.com>
----
- .../phoronix-test-suite/phoronix-test-suite_10.8.4.bb          | 3 +++
- 1 file changed, 3 insertions(+)
+Thanks for your reply; I saw these args after, I did the needed 
+modification in the v2 patch.
 
-diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-=
-suite_10.8.4.bb b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-=
-test-suite_10.8.4.bb
-index 8de3314b3c..7ca80c02af 100644
---- a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_1=
-0.8.4.bb
-+++ b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_1=
-0.8.4.bb
-@@ -25,6 +25,9 @@ do_install() {
-     fi
- }
+Thanks,
 
-+PACKAGECONFIG ??=3D ""
-+PACKAGECONFIG[pdf] =3D ",,,ttf-dejavu-sans"
-+
- # It is not advisable to enable these services by default since they can=
- cause
- # continual target reboots if they encounter network problems.
- #
---
-2.34.1
+On 27/02/2025 18:15, Gyorgy Sarvari wrote:
+> On 27.02.25 16:35, Paul Le Guen de Kerneizon via lists.openembedded.org
+> wrote:
+>> +PACKAGECONFIG[x11] = ",,virtual/libx11"
+> You could also pass --with-x/--without-x to explicitly control the
+> inclusion of x11-specific parts (though I'm writing this without trying
+> the resulting package - if this config options not the wisest thing to
+> do, then I won't push it any further...)
+-- 
+Logo Savoir-faire Linux inc.
+Paul Le Guen de Kerneizon
+Free software consultant | Rennes, France
+Logo Jami pleguendekerneizon
+
+--------------RJBi5VDTltacualT4LdfUIVA
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p>Thanks for your reply; I saw these args after, I did the needed
+      modification in the v2 patch.</p>
+    <p>Thanks,<br>
+    </p>
+    <div class="moz-cite-prefix">On 27/02/2025 18:15, Gyorgy Sarvari
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:d290aab6-a3cd-402d-a1dc-a6ab2278e377@gmail.com">
+      <pre class="moz-quote-pre" wrap="">On 27.02.25 16:35, Paul Le Guen de Kerneizon via lists.openembedded.org
+wrote:
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">+PACKAGECONFIG[x11] = ",,virtual/libx11"
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">You could also pass --with-x/--without-x to explicitly control the
+inclusion of x11-specific parts (though I'm writing this without trying
+the resulting package - if this config options not the wisest thing to
+do, then I won't push it any further...)
+</pre>
+    </blockquote>
+    <div class="moz-signature">-- <br>
+      <div class="wrapper"
+style="font: 14px arial, sans-serif; font-weight: normal; max-width: 480px;">
+        <div class="logo" style="margin-bottom: 10px; width: 100%;"><img
+src="https://static.savoirfairelinux.com/img/signature-courriel/logo-signature-sfl.png"
+            alt="Logo Savoir-faire Linux inc." width="138" height="39"></div>
+        <div class="wrapper-name" style="margin-bottom: 20px;">
+          <div
+style="font: 18px arial, sans-serif; font-weight: bold; color: #2b2e30; margin-bottom: 5px;">Paul
+            Le Guen de Kerneizon</div>
+          <div style="color: #768089;">Free software consultant |
+            Rennes, France</div>
+        </div>
+        <div class="phone-ring"><img
+src="https://static.savoirfairelinux.com/img/signature-courriel/jami-picto.png"
+            alt="Logo Jami" title="Jami" width="14" height="13"> <span
+            style="color: #768089;">pleguendekerneizon</span></div>
+      </div>
+    </div>
+  </body>
+</html>
+
+--------------RJBi5VDTltacualT4LdfUIVA--
 
