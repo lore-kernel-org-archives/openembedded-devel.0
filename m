@@ -1,139 +1,136 @@
-Return-Path: <philip@balister.org>
+Return-Path: <alex.kiernan@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C203CC282D0
-	for <webhook@archiver.kernel.org>; Sat,  1 Mar 2025 02:25:04 +0000 (UTC)
-Received: from mail.savoirfairelinux.com (mail.savoirfairelinux.com [208.88.110.44])
- by mx.groups.io with SMTP id smtpd.web11.14813.1740747907038605684
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 03409C021B8
+	for <webhook@archiver.kernel.org>; Sat,  1 Mar 2025 10:39:57 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.web11.6318.1740825591020767287
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 Feb 2025 05:05:07 -0800
+ Sat, 01 Mar 2025 02:39:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@savoirfairelinux.com header.s=DFC430D2-D198-11EC-948E-34200CB392D2 header.b=CR8+9JuJ;
- spf=pass (domain: savoirfairelinux.com, ip: 208.88.110.44, mailfrom: paul.leguendekerneizon@savoirfairelinux.com)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.savoirfairelinux.com (Postfix) with ESMTP id 5637B9C8A25;
-	Fri, 28 Feb 2025 08:05:06 -0500 (EST)
-Received: from mail.savoirfairelinux.com ([127.0.0.1])
- by localhost (mail.savoirfairelinux.com [127.0.0.1]) (amavis, port 10032)
- with ESMTP id KxqVFHA3LVgR; Fri, 28 Feb 2025 08:05:06 -0500 (EST)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.savoirfairelinux.com (Postfix) with ESMTP id 099959C8A26;
-	Fri, 28 Feb 2025 08:05:06 -0500 (EST)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.savoirfairelinux.com 099959C8A26
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DKeThnKV;
+ spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-38f403edb4eso1692062f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Mar 2025 02:39:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=savoirfairelinux.com; s=DFC430D2-D198-11EC-948E-34200CB392D2;
-	t=1740747906; bh=4UVHpWxMVUL8AlW044kOuDJ9QNiRLigT0k7Mk2VbVqw=;
-	h=Message-ID:Date:MIME-Version:To:From;
-	b=CR8+9JuJVkr+Dbsje0wxekeych9ATjkqpvXNQaH3v/Q5Vkz4cEIfjRg4EsBEROVS8
-	 69Ks0vwmYmQSAeiY8p9GMFoImP9bCns7pr9IepuJIUcheXQu7T1iKV1aBv0hMZvIyI
-	 J3NPpF8NeIEGfBSER0007c3i3k3nC7MupePfGBYJ9cKY7/MSV+llCqv8/+BC/3127X
-	 UQoGVl68aMgA4StBirtHaLoWqfLWsOJkYyYbZDF5eBap+xmy/jCpKWZeJTGcfcweOX
-	 DAPZqcMaezfr+Pqj3uUKSWSIt/xbgd5nXIzQZaoGCOnpCP1kjFLwFZP8qhBcA8fwBb
-	 9RqkncrQ2bqjA==
-X-Virus-Scanned: amavis at mail.savoirfairelinux.com
-Received: from mail.savoirfairelinux.com ([127.0.0.1])
- by localhost (mail.savoirfairelinux.com [127.0.0.1]) (amavis, port 10026)
- with ESMTP id FXAbmt1A1ZbG; Fri, 28 Feb 2025 08:05:05 -0500 (EST)
-Received: from [192.168.216.61] (80-15-101-118.ftth.fr.orangecustomers.net [80.15.101.118])
-	by mail.savoirfairelinux.com (Postfix) with ESMTPSA id 99ED89C8A25;
-	Fri, 28 Feb 2025 08:05:05 -0500 (EST)
-Message-ID: <4073d1cc-d36d-4ab9-ae24-c29229a20de5@savoirfairelinux.com>
-Date: Fri, 28 Feb 2025 14:05:04 +0100
+        d=gmail.com; s=20230601; t=1740825589; x=1741430389; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=xg3r8RV7fasaGlrud+sXTugARRe0foHSRZJF+cu4hPI=;
+        b=DKeThnKVzY7d0ihJl4pAVPN1aVPpi2LMRkNBpn8vqusumetKdwqq1UakVEJUG3KHd9
+         s2trXKBBefGN/qRoKYOZ5lX3xAu0v6y+RerRxXuTlwT8A9BBxgyG96BpqwWLrlcDK1xc
+         eSdZvc5LAU6ksVPixcQDrZjpyDJG5v7Xoss2LwP5LHswXL2gVe0sdIZDUDRTyy8dd90Z
+         8JI576yOcOgq6u2W+C2hFYouWzCBUUrBqpl/x125Fz9O0Y7zw2CAQQ1/JvF9+vEHms/m
+         +W58kxeICRTuUKwNx6onG3sRLJO7fGcfeOY7AZIUuyoqYLW6XgqRsOsO31cL1YV4qXi6
+         X1DA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1740825589; x=1741430389;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=xg3r8RV7fasaGlrud+sXTugARRe0foHSRZJF+cu4hPI=;
+        b=L/PX8/G3IrbFRWNf/yVI22UreteoQL1Z/yTJUDAjBZc2BCsUqVuSa/ujuaP/vnTGEN
+         XrpaSaShV4lborP+v6XBSlq25tcXI91NxlTlc1Upy/syB9CDJ24cGuMvbrPDomyj0ltK
+         7z4mOCYYgE1F7E0CS7QcE+TBFY2G7cUwk4162DWkm6avTyX5rkNSqJ/Ootw0i1Dtm5VQ
+         Vwvxqbvx0qq4a0TXfr03E47ahBDovPKppPJUJ0uIUVpBoLjSUCNGkgUmKecqf4y8/jQa
+         jo62ODoAXuc2D57DZDN0YaMxIIYHP1Opw4KEw7O1EyA8v/UF+UjyNPRkhzK9ctHpdxPn
+         h7Zw==
+X-Gm-Message-State: AOJu0YyNkRljoCD/hxYR8m/w24Ty1JNG58zUtpU9yhpPtCCSm2W9yJ2d
+	OBg1y9nmDSoVMHHi9hwSFUMWEo6KsfwI18ANYHrdCIiQ0AOnTBVhL21hzy+B
+X-Gm-Gg: ASbGncsnvcK4gG2nt3MQj5xkbDAVgnx8zQU3YPzCudLKic0P/4YBSz45zbV13Jv1Z7z
+	AF/prRQnIPvzlCJGvhudic3D6w1a4A3rujkcaAS37ONVbA11ZP2kxZ5dJsTzuOTn5RTAaJA9eom
+	rsZG47+WA2lXJbRsIDkMZlNM8XSzqiAuuOMplECwT6lBE+lKVYJN/vFH/02/ReXIiSlE9MzeuVO
+	EVGZ9i1Ew6i67GeRgufzHbAJkaQSlcoFa4CeOqsj279SCnEZFuZDqjo6Rcg4YJvWnFba+CGbcFR
+	MWHqNlf7xaVfkXeCA4QUOrSYQf6bWoSZggavnsUDv/8kIHtVqJHAV7qEm8m7hAXjTPSOaXdV5u6
+	+jpktExFGkMFw
+X-Google-Smtp-Source: AGHT+IGDy9m5uMi4uDL0pTz+zdzNfMKZzg8A1gpA2LkwmNBXbRtjQqFy3GVmAV4jnczNkPGueDXCBA==
+X-Received: by 2002:a5d:598d:0:b0:38d:de45:bf98 with SMTP id ffacd0b85a97d-390ec7c6adbmr5397614f8f.8.1740825588853;
+        Sat, 01 Mar 2025 02:39:48 -0800 (PST)
+Received: from ip-10-0-0-134.eu-west-1.compute.internal ([2a05:d018:db1:fb00:c4f8:7a97:b7aa:1bfd])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-390e4844892sm7993225f8f.64.2025.03.01.02.39.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 01 Mar 2025 02:39:48 -0800 (PST)
+From: Alex Kiernan <alex.kiernan@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alex Kiernan <alex.kiernan@gmail.com>,
+	Alex Kiernan <alexk@a-squared-projects.uk>
+Subject: [meta-oe][PATCH] abseil-cpp: Backport `xpaclri` asm fix
+Date: Sat,  1 Mar 2025 10:36:12 +0000
+Message-Id: <20250301103611.28262-1-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH] gnuplot: add x11 PACKAGECONFIG
-To: Gyorgy Sarvari <skandigraun@gmail.com>,
- openembedded-devel@lists.openembedded.org
-References: <20250227153529.82380-1-paul.leguendekerneizon@savoirfairelinux.com>
- <d290aab6-a3cd-402d-a1dc-a6ab2278e377@gmail.com>
-From: "Paul Le Guen de Kerneizon" <paul.leguendekerneizon@savoirfairelinux.com>
-In-Reply-To: <d290aab6-a3cd-402d-a1dc-a6ab2278e377@gmail.com>
-Content-Type: multipart/alternative;
- boundary="------------RJBi5VDTltacualT4LdfUIVA"
-Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 01 Mar 2025 02:25:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115714
+ <openembedded-devel@lists.openembedded.org>; Sat, 01 Mar 2025 10:39:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115716
 
---------------RJBi5VDTltacualT4LdfUIVA
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Native build on aarch64 breaks with:
 
-Thanks for your reply; I saw these args after, I did the needed 
-modification in the v2 patch.
+| {standard input}: Assembler messages:
+| {standard input}:169: Error: selected processor does not support `xpaclri'
+| {standard input}:411: Error: selected processor does not support `xpaclri'
+| {standard input}:859: Error: selected processor does not support `xpaclri'
+| {standard input}:1140: Error: selected processor does not support `xpaclri'
 
-Thanks,
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Signed-off-by: Alex Kiernan <alexk@a-squared-projects.uk>
+---
+ ...-hint-space-instruction-to-strip-PAC.patch | 32 +++++++++++++++++++
+ .../abseil-cpp/abseil-cpp_20250127.0.bb       |  1 +
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Actually-use-the-hint-space-instruction-to-strip-PAC.patch
 
-On 27/02/2025 18:15, Gyorgy Sarvari wrote:
-> On 27.02.25 16:35, Paul Le Guen de Kerneizon via lists.openembedded.org
-> wrote:
->> +PACKAGECONFIG[x11] = ",,virtual/libx11"
-> You could also pass --with-x/--without-x to explicitly control the
-> inclusion of x11-specific parts (though I'm writing this without trying
-> the resulting package - if this config options not the wisest thing to
-> do, then I won't push it any further...)
--- 
-Logo Savoir-faire Linux inc.
-Paul Le Guen de Kerneizon
-Free software consultant | Rennes, France
-Logo Jami pleguendekerneizon
-
---------------RJBi5VDTltacualT4LdfUIVA
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p>Thanks for your reply; I saw these args after, I did the needed
-      modification in the v2 patch.</p>
-    <p>Thanks,<br>
-    </p>
-    <div class="moz-cite-prefix">On 27/02/2025 18:15, Gyorgy Sarvari
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:d290aab6-a3cd-402d-a1dc-a6ab2278e377@gmail.com">
-      <pre class="moz-quote-pre" wrap="">On 27.02.25 16:35, Paul Le Guen de Kerneizon via lists.openembedded.org
-wrote:
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+PACKAGECONFIG[x11] = ",,virtual/libx11"
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">You could also pass --with-x/--without-x to explicitly control the
-inclusion of x11-specific parts (though I'm writing this without trying
-the resulting package - if this config options not the wisest thing to
-do, then I won't push it any further...)
-</pre>
-    </blockquote>
-    <div class="moz-signature">-- <br>
-      <div class="wrapper"
-style="font: 14px arial, sans-serif; font-weight: normal; max-width: 480px;">
-        <div class="logo" style="margin-bottom: 10px; width: 100%;"><img
-src="https://static.savoirfairelinux.com/img/signature-courriel/logo-signature-sfl.png"
-            alt="Logo Savoir-faire Linux inc." width="138" height="39"></div>
-        <div class="wrapper-name" style="margin-bottom: 20px;">
-          <div
-style="font: 18px arial, sans-serif; font-weight: bold; color: #2b2e30; margin-bottom: 5px;">Paul
-            Le Guen de Kerneizon</div>
-          <div style="color: #768089;">Free software consultant |
-            Rennes, France</div>
-        </div>
-        <div class="phone-ring"><img
-src="https://static.savoirfairelinux.com/img/signature-courriel/jami-picto.png"
-            alt="Logo Jami" title="Jami" width="14" height="13"> <span
-            style="color: #768089;">pleguendekerneizon</span></div>
-      </div>
-    </div>
-  </body>
-</html>
-
---------------RJBi5VDTltacualT4LdfUIVA--
+diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Actually-use-the-hint-space-instruction-to-strip-PAC.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Actually-use-the-hint-space-instruction-to-strip-PAC.patch
+new file mode 100644
+index 000000000000..a235797de917
+--- /dev/null
++++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Actually-use-the-hint-space-instruction-to-strip-PAC.patch
+@@ -0,0 +1,32 @@
++From 5852b47a81e5334a667d1e12dbfa55c0f8111100 Mon Sep 17 00:00:00 2001
++From: Derek Mauro <dmauro@google.com>
++Date: Fri, 7 Feb 2025 08:49:06 -0800
++Subject: [PATCH] Actually use the hint space instruction to strip PAC bits for
++ return addresses in stack traces as the comment says
++
++https://android.googlesource.com/platform/libcore/+/71f2c75111e87091616f0f3b86bea6c4d345dad1/src/hotspot/os_cpu/linux_aarch64/pauth_linux_aarch64.inline.hpp
++
++PiperOrigin-RevId: 724360415
++Change-Id: I691160e43354131a04919765ce283e07c3c933a9
++Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
++Signed-off-by: Alex Kiernan <alexk@a-squared-projects.uk>
++Upstream-Status: Backport [https://github.com/abseil/abseil-cpp/commit/5852b47a81e5334a667d1e12dbfa55c0f8111100]
++---
++ absl/debugging/internal/stacktrace_aarch64-inl.inc | 4 +++-
++ 1 file changed, 3 insertions(+), 1 deletion(-)
++
++diff --git a/absl/debugging/internal/stacktrace_aarch64-inl.inc b/absl/debugging/internal/stacktrace_aarch64-inl.inc
++index 4490c4e13cae..dccadaeb7c24 100644
++--- a/absl/debugging/internal/stacktrace_aarch64-inl.inc
+++++ b/absl/debugging/internal/stacktrace_aarch64-inl.inc
++@@ -188,7 +188,9 @@ inline void* ClearPacBits(void* ptr) {
++   // compatibility with ARM platforms that do not support pointer
++   // authentication, we use the hint space instruction XPACLRI instead. Hint
++   // space instructions behave as NOPs on unsupported platforms.
++-  asm("xpaclri" : "+r"(x30));
+++#define ABSL_XPACLRI_HINT "hint #0x7;"
+++  asm(ABSL_XPACLRI_HINT : "+r"(x30));  // asm("xpaclri" : "+r"(x30));
+++#undef ABSL_XPACLRI_HINT
++   return x30;
++ }
++ 
+diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250127.0.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250127.0.bb
+index 88e20c05776e..f217d4daf889 100644
+--- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250127.0.bb
++++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250127.0.bb
+@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH};protocol=https \
+            file://0002-Remove-maes-option-from-cross-compilation.patch \
+            file://0003-Remove-neon-option-from-cross-compilation.patch \
+            file://0004-abseil-ppc-fixes.patch \
++           file://0001-Actually-use-the-hint-space-instruction-to-strip-PAC.patch \
+           "
+ 
+ S = "${WORKDIR}/git"
 
