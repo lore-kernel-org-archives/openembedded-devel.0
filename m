@@ -1,91 +1,104 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A4D5C282C5
-	for <webhook@archiver.kernel.org>; Fri, 28 Feb 2025 20:58:06 +0000 (UTC)
-Received: from mta-65-226.siemens.flowmailer.net (mta-65-226.siemens.flowmailer.net [185.136.65.226])
- by mx.groups.io with SMTP id smtpd.web11.4704.1740776283889962688
- for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 Feb 2025 12:58:05 -0800
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D0DBC282C5
+	for <webhook@archiver.kernel.org>; Sat,  1 Mar 2025 00:58:54 +0000 (UTC)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ by mx.groups.io with SMTP id smtpd.web10.928.1740790727142881757
+ for <Openembedded-devel@lists.openembedded.org>;
+ Fri, 28 Feb 2025 16:58:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=Im/eJ2oS;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.226, mailfrom: fm-256628-20250228205800b65c3d439e35f3b2e9-xam3vf@rts-flowmailer.siemens.com)
-Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id 20250228205800b65c3d439e35f3b2e9
-        for <openembedded-devel@lists.openembedded.org>;
-        Fri, 28 Feb 2025 21:58:01 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=RxE3TNBIE3tn0SQCpnMgKznotFbuQs6eL9sI+DG7Ru0=;
- b=Im/eJ2oS96Q4Z6xrS361BhJlQ6X6PD8jrCz/llo62e0dHJboiVBRPU0N2JY4HZzzE4uNcH
- Uk4jV5zDLA5CfVNmu53kGa/w61Viqc9mMd0b+egKHHiAfo0tgyPHfY60/epAU94hOFZSFnNa
- ljsGTW3dQ05A/Fx6P6ofIvyZeBh64Ap9aKf2qQy3OS3G9nUfdvzqRinNmzMJzi5NCyal24tX
- TlOoirJoqdjNruCGafvnh1WB+u4MJ6sADWnIe5Pqc277TT2N+Iok4QqaDMANgKKvD8AakzB+
- rLg9sncxOAqovBrWbC/0C6EslCp4Cmol1btnYoFoxRQDdgV2KTG7M6sg==;
-From: Peter Marko <peter.marko@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-python][PATCH] python3-grpcio(-tools): fix build concurrency issue
-Date: Fri, 28 Feb 2025 21:57:10 +0100
-Message-Id: <20250228205710.1739487-1-peter.marko@siemens.com>
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=WVpy9H63;
+ spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: rs@ti.com)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5210wjtF2271409
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Fri, 28 Feb 2025 18:58:46 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1740790726;
+	bh=RWcc/uqOv6yn6nBv5yRSzXdytWVrSjW3wUw5ztn2vy4=;
+	h=From:To:CC:Subject:Date;
+	b=WVpy9H63ioEPtzT5Z7YRK8Hilit4Fn1tA494BO1126HYk2jhOUyJ2XMja6svJuPt5
+	 m69veDnzjUpFxGbV4o45spwb8YxJcLw9aJzVU0hIv3Qy7uKNJOvEQvLu70y3wGLDqa
+	 vUJNUbn0RQkcNlZnwYEmVuoW96Ed1lfqUxg92Z8c=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5210wjsk115526
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 28 Feb 2025 18:58:45 -0600
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 28
+ Feb 2025 18:58:45 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 28 Feb 2025 18:58:45 -0600
+Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.144])
+	by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5210wjXF036144;
+	Fri, 28 Feb 2025 18:58:45 -0600
+From: <rs@ti.com>
+To: <akuster808@gmail.com>
+CC: <Openembedded-devel@lists.openembedded.org>, <afd@ti.com>,
+        <a-christidis@ti.com>, <detheridge@ti.com>, <raj.khem@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH] clpeak: add version 1.1.4
+Date: Fri, 28 Feb 2025 18:56:34 -0600
+Message-ID: <20250301005633.824506-2-rs@ti.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 28 Feb 2025 20:58:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115711
+ <openembedded-devel@lists.openembedded.org>; Sat, 01 Mar 2025 00:58:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115712
 
-From: Peter Marko <peter.marko@siemens.com>
+From: Randolph Sapp <rs@ti.com>
 
-Set GRPC_PYTHON_BUILD_EXT_COMPILER_JOBS to limit spawned compiler
-processes. Without this it uses all available CPUs (via
-multiprocessing.cpu_count()) and can exhaust build host since there are
-lot of files to compile (e.g. with 128 cores it manages to spawn 128 gcc
-processes)
+As of right now there are no applications available for benchmarking
+OpenCL. Clpeak is a simple synthetic benchmark for OpenCL that is
+designed to determine the peak capabilities of OpenCL devices.
 
-Note that this is a general problem for all setuptools based builds with
-build_ext compilation which can either compile with 1 thread or
-cpu_count threads. grpcio hot-patches setuptools and allows to set
-specific build concurrency value.
+It's currently one of the more popular CL benchmarks supported by
+OpenBenchmarking.org and licensed Apache-2.0.
 
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Randolph Sapp <rs@ti.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-devtools/python/python3-grpcio-tools_1.70.0.bb    | 4 ++++
- meta-python/recipes-devtools/python/python3-grpcio_1.70.0.bb  | 4 ++++
- 2 files changed, 8 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.70.0.bb b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.70.0.bb
-index 8af6bb5714..38440edbee 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.70.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.70.0.bb
-@@ -19,6 +19,10 @@ SRC_URI[sha256sum] = "e578fee7c1c213c8e471750d92631d00f178a15479fb2cb3b939a07fc1
- 
- RDEPENDS:${PN} = "python3-grpcio"
- 
-+do_compile:prepend() {
-+    export GRPC_PYTHON_BUILD_EXT_COMPILER_JOBS="${@oe.utils.parallel_make(d, False)}"
-+}
+I'd like to request a backport of this patch to scarthgap. It applies cleanly,
+builds without issue, and runs fine under this LTS as is. Please let me know if
+this is unwanted so we can carry this package under our distro layer for this
+LTS release.
+
+ meta-oe/recipes-core/opencl/clpeak_1.1.4.bb | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-oe/recipes-core/opencl/clpeak_1.1.4.bb
+
+diff --git a/meta-oe/recipes-core/opencl/clpeak_1.1.4.bb b/meta-oe/recipes-core/opencl/clpeak_1.1.4.bb
+new file mode 100644
+index 0000000000..8c05ad6d02
+--- /dev/null
++++ b/meta-oe/recipes-core/opencl/clpeak_1.1.4.bb
+@@ -0,0 +1,15 @@
++SUMMARY  = "OpenCL synthetic benchmarking tool"
++DESCRIPTION = "OpenCL benchmarking tool to measure peak capabilities"
 +
- BBCLASSEXTEND = "native nativesdk"
- 
- CVE_PRODUCT += "grpc:grpc"
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.70.0.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.70.0.bb
-index 5af05ca2c9..b858a3b050 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio_1.70.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio_1.70.0.bb
-@@ -29,6 +29,10 @@ export GRPC_PYTHON_BUILD_SYSTEM_OPENSSL = "1"
- export GRPC_PYTHON_BUILD_SYSTEM_RE2 = "1"
- export GRPC_PYTHON_BUILD_SYSTEM_ZLIB = "1"
- 
-+do_compile:prepend() {
-+    export GRPC_PYTHON_BUILD_EXT_COMPILER_JOBS="${@oe.utils.parallel_make(d, False)}"
-+}
++SRC_URI = "git://github.com/krrishnarraj/clpeak.git;protocol=https;branch=master"
 +
- GRPC_CFLAGS ?= ""
- GRPC_CFLAGS:append:toolchain-clang = " -fvisibility=hidden -fno-wrapv -fno-exceptions"
- export GRPC_PYTHON_CFLAGS = "${GRPC_CFLAGS}"
++LICENSE  = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
++
++SRCREV = "527695de8393a3144863a0a07f9b92f1c734d1c4"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
++
++DEPENDS += "opencl-clhpp virtual/opencl-icd"
+-- 
+2.48.1
+
 
