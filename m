@@ -2,148 +2,107 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 11C8AC282C6
-	for <webhook@archiver.kernel.org>; Mon,  3 Mar 2025 19:13:29 +0000 (UTC)
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
- by mx.groups.io with SMTP id smtpd.web11.3614.1741029198796990220
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0ACCAC282CD
+	for <webhook@archiver.kernel.org>; Mon,  3 Mar 2025 19:16:39 +0000 (UTC)
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
+ by mx.groups.io with SMTP id smtpd.web10.3690.1741029389926657338
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Mar 2025 11:13:19 -0800
+ Mon, 03 Mar 2025 11:16:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dTx4md8S;
- spf=pass (domain: gmail.com, ip: 209.85.167.53, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-54954fa61c8so3458139e87.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Mar 2025 11:13:18 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cCzhTaUH;
+ spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-5e52c1c3599so3185842a12.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Mar 2025 11:16:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741029197; x=1741633997; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=KbmQQF+Jhbzc9c28/kmlMp7sG+JmUuoeCKC8QOcwyHk=;
-        b=dTx4md8S0Bfl/ymNrOofNbsKvMiKMXeL5Q5Ww5ZJGcsEQx/UXRjpHwyFepCjmSF4we
-         RACRjHQeNcKe4TBv7ugnRIUWl+6DWa0qqPUXiWi7FcLPvGFVRgSHFu7qHKxvcmFKQ9Jc
-         gknNZ8hes6OGS3WXmADYiTeyzMZUj9wFkus1STiM2L2ii4g4eIHdbkWaLOBKdJTfx3Df
-         IS6SbfIuqQbAeW3BgF9BDi0Pz4Y4UOawElrRPBHIeMSDEyFHmHPXctt5iD0g06Bsk+Ix
-         CaKBwZ01qShRCkpEBiOkreK60r4LkhKK7NF6POzt6KCqxlTkUlwe5Uts1+nS8dQ+omfM
-         yNdw==
+        d=gmail.com; s=20230601; t=1741029388; x=1741634188; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=sL6hzzve97N88E5xaV0RbxL9JqZpgZSLfMHiQmYrWK8=;
+        b=cCzhTaUHGhrSPkyly/yRB7gf86TfEdJS1n2J3T7IL+Yx8qNH/VlmcX+tQsbKkK3ZhK
+         IYJHt3eOVCt+shMbNL+9dR+n2fHfb6y8ikVkR5Pn8niz1Roxk3XGc7IVi6WV6ZTNoc4o
+         qpB41GCxrSxEXqvoWcxbMqN+P9Lw5t5d87dZR5DIJt1GdjS0FM5ll5a2o/7qNRaPkluA
+         WW+CxXoIAP32uMS67gLi4bNKYYYpO1gek4ucBwZ05iQ/hMMDyvVh0EohJFYkN1sdsBzC
+         zYiRIPfyBVfu2Wtg7uf1pFYSWk6ZZG7UcwkCwHrHr3KxspVXqWjWrSrNGxGW+IbdFNGh
+         l//A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741029197; x=1741633997;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=KbmQQF+Jhbzc9c28/kmlMp7sG+JmUuoeCKC8QOcwyHk=;
-        b=vwNqz7agDIUEBRNJF0ap7pxiGui2SmNQe1gPq8goH72a3Lou9wSbvyFVqLIj5Km66r
-         nkQe20dv4kWUdMhnPR9DzzyPaNjGIjOwHyPfSsKv1YhUW+6oU3PkSWFCv9tHCSOU3uRc
-         d5azL10ZMsMfGYmUfFVMU+MWzfVRTssl4CGOmbTCaqiFSJ3Eoj6/5H7QWXfxVOOwLTl5
-         oeyFzXsd4E5KXG7MrmcV4CAG56o5QC+A3Z89zhh5hM/8Jkv51WCZuxS0K7e19ezhV1e7
-         xJjoOhtPxswD9eDqR/V9WB6X9n2uxrDsrEDPWA6qDZPCRSx2Ar+MGdTw5RgGMi/Yc3MH
-         nlwg==
-X-Gm-Message-State: AOJu0YypgDfQIb9bUAD8MgyPWDkaanI19dv+8GSuzujWcMB4bcdfoEeV
-	3hNP5BdkCOawMav1iogCL0hhF6OVywpLx1IzOmg0tevUsSwBuvy0MnZokQBYhrCkdOENozz5c88
-	x8Nc0Jz2bcGDBKCQzBk754TZZRR9XLKuOj2M=
-X-Gm-Gg: ASbGncu25shd7+JkoD9DHL9prh0bDroKAPEfRJqrmpkHogmnTCmZt368CL8NS2TLJaT
-	54wYlSImJozjkHZA1DJXPllxmedd85vJVHI5nG2CHk+o5saUNWPolhBsru/Du4qkDPg2OV3XSNY
-	vSfYTQByLUcufDOHLAaap3wsIsFfsj
-X-Google-Smtp-Source: AGHT+IHvN1ivuOd0DmhdAdsjeu/IYGRV9SHV/D8OtBId65WsID3ibdmOzFu20qzoLEu/0GHaE1QrN/oyobAd2QuPj3Y=
-X-Received: by 2002:a05:6512:398e:b0:546:2f7a:38c4 with SMTP id
- 2adb3069b0e04-5494c3235d3mr5608202e87.13.1741029196348; Mon, 03 Mar 2025
- 11:13:16 -0800 (PST)
-MIME-Version: 1.0
-References: <20250225034557.2148517-1-liezhi.yang@windriver.com> <20250225034557.2148517-2-liezhi.yang@windriver.com>
-In-Reply-To: <20250225034557.2148517-2-liezhi.yang@windriver.com>
+        d=1e100.net; s=20230601; t=1741029388; x=1741634188;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=sL6hzzve97N88E5xaV0RbxL9JqZpgZSLfMHiQmYrWK8=;
+        b=cdXQ2L/89YsPGx+BuVU67RRNcZToebiSHSrFjNU7hLgZl6luM9vqXAKmLAqZPH8gld
+         C9CiDP7hVFCu/VLLQ2OheO1JC42ApZCTtfE2SEyboUngONFDVpRSEv+pem44luHs33lC
+         mlxAUqUFcZTyzw2auilRdeofr1Owg6GzPneZiibsdcL6wfXFFBAX4lcfSDMj9fRzR7N6
+         J4Vv4Bi8+OghzTUm0WQJ6AlGZJkrqjlXA5Aj5A29mqYkzqg1W586eOFkXGLJ73bxtzjL
+         AYH1Vds2t91vI4Xs9nbqSfVjCPPAnbpFgo6siZxpkYwm2YQ3y2XSwYq3Cy5lDdgP5NNp
+         ReIw==
+X-Gm-Message-State: AOJu0YyqcV3IQsRUG+kDqdr5qgFR1kw65AwAFxXhhg03l+11S8W4KCrP
+	8TX6tm4g+EsEj+4WMVElbI4hgBRhgZ89R/9KRsihVs9ssuia0qH+qxIkpOlo
+X-Gm-Gg: ASbGncuOlvMcvfdDz2gmm27rXlfK8cVU5weGvwTM2RImpqCpwCtT3bZRNMWpYB5kH9H
+	4JLEk2mersB1sKXDvFg9kXXPoqNXXRGtNL/MxOmrPnAtUL3y8dSyfXOcmS9c3y6GpwsrJkATWH2
+	h0WJ/6MzZoEClyQfn1hBEVgd6d7pKAbHqfVAEjP2JK894m39ZcnvGgAeO5efpMvQhxPIJ6z0Vjq
+	Fs8TgRR+fngZDG/kVmMwo8vcdKmo/v4aZqYqTKuBh7oPORCX39EipDyioqMFFCfeH5gcB2TgC9J
+	Ccwnwuy4bywY3ZzSnfMWHqrLTGQeOEWROR8ub89Sg0SW3JY=
+X-Google-Smtp-Source: AGHT+IFAkYAhO+DRuc+I7zjiO+/mZ85LpUOi/iuDx7Zvj2HJeb9Du4swa8oBESLERtghJDe5WSM2QQ==
+X-Received: by 2002:a17:907:7f1f:b0:ac1:dde7:a80b with SMTP id a640c23a62f3a-ac1dde7ab19mr278591266b.43.1741029387909;
+        Mon, 03 Mar 2025 11:16:27 -0800 (PST)
+Received: from localhost ([109.238.218.228])
+        by smtp.gmail.com with UTF8SMTPSA id a640c23a62f3a-abf7981482csm220511966b.122.2025.03.03.11.16.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 03 Mar 2025 11:16:27 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 3 Mar 2025 20:13:02 +0100
-X-Gm-Features: AQ5f1JqBjNz6Koc4BBheGwx4xWcHP8Dc3EFBW_hSTob5JXHGOY21oaRvhHH5crg
-Message-ID: <CA+chaQc87vMUKzdBsCe5amkpMuqsbgwQaM+F+uN6SknWvS=uJQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 2/2] thin-provisioning-tools: 1.0.13 -> 1.0.14
-To: liezhi.yang@windriver.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Robert Yang <liezhi.yang@windriver.com>,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] thin-provisioning-tools: use STAGING_LIBDIR_NATIVE variable for LIBCLANG_PATH
+Date: Mon,  3 Mar 2025 20:16:21 +0100
+Message-ID: <20250303191621.2421906-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.48.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 03 Mar 2025 19:13:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115728
+ <openembedded-devel@lists.openembedded.org>; Mon, 03 Mar 2025 19:16:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115729
 
-On Tue, Feb 25, 2025 at 4:46=E2=80=AFAM Robert Yang via lists.openembedded.=
-org
-<liezhi.yang=3Dwindriver.com@lists.openembedded.org> wrote:
->
-> From: Robert Yang <liezhi.yang@windriver.com>
->
-> * License-Update: Update links in GPLv3 (http -> https)
->
-> * It need depend on pkg-config, udev and clang-native to build
->
-> * Move it to dynamic-layers since now it depends on meta-clang.
->
-> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-> ---
->  .../thin-provisioning-tools-crates.inc        | 124 +++++++++++++-----
->  .../thin-provisioning-tools-git-crates.inc    |   0
->  .../thin-provisioning-tools_1.0.14.bb}        |  10 +-
->  3 files changed, 102 insertions(+), 32 deletions(-)
-...
+* hardcoding:
+  ${WORKDIR}/recipe-sysroot-native${libdir}
+  is just wrong when there is a better variable
 
-> rename from meta-oe/recipes-support/thin-provisioning-tools/thin-provisio=
-ning-tools_1.0.13.bb
-> rename to meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisi=
-oning-tools/thin-provisioning-tools_1.0.14.bb
-> index 1d3c797244..e5a683aa0f 100644
-> --- a/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-t=
-ools_1.0.13.bb
-> +++ b/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisionin=
-g-tools/thin-provisioning-tools_1.0.14.bb
-> @@ -4,17 +4,23 @@ HOMEPAGE =3D "https://github.com/jthornber/thin-provisi=
-oning-tools"
->  LICENSE =3D "GPL-3.0-only"
->  SECTION =3D "devel"
->
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
-504"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D1ebbd3e34237af26da5dc08a4e440=
-464"
->  S =3D "${WORKDIR}/git"
->
->  SRC_URI =3D " \
->      git://github.com/jthornber/thin-provisioning-tools;branch=3Dmain;pro=
-tocol=3Dhttps \
->      "
->
-> -SRCREV =3D "116c05345bed5fe727992c3458311606d5443ff6"
-> +# v1.0.14
-> +SRCREV =3D "6be3e0937800cb947f1be7c0150825f155cfca14"
->  UPSTREAM_CHECK_GITTAGREGEX =3D "v(?P<pver>\d+(\.\d+)+)"
->
->  inherit cargo cargo-update-recipe-crates
-> +inherit pkgconfig
-> +
-> +DEPENDS +=3D "udev clang-native"
-> +
-> +export LIBCLANG_PATH =3D "${WORKDIR}/recipe-sysroot-native${libdir}"
+* This path won't be correct for multilib builds where target ${libdir}
+  might be e.g. /usr/lib32 while native libdir is /usr/lib.
 
-This path won't be correct for multilib builds where target ${libdir}
-might be e.g. /usr/lib32 while native libdir is /usr/lib.
+* use STAGING_LIBDIR_NATIVE variable which uses correct ${libdir_native}
 
-Is there a reason why you haven't used STAGING_LIBDIR_NATIVE variable
-which uses correct ${libdir_native}?
+* fixes:
+  error: failed to run custom build command for `devicemapper-sys v0.3.0`
 
-Regards,
+  Caused by:
+    process didn't exit successfully: `lib32-thin-provisioning-tools/1.1.0/build/target/release/build/devicemapper-sys-88de590bc55acb43/build-script-build` (exit status: 101)
+    --- stderr
+    thread 'main' panicked at lib32-thin-provisioning-tools/1.1.0/sources-unpack/cargo_home/bitbake/bindgen-0.69.4/lib.rs:622:31:
+    Unable to find libclang: "couldn't find any valid shared libraries matching: ['libclang.so', 'libclang-*.so', 'libclang.so.*', 'libclang-*.so.*'], set the `LIBCLANG_PATH` environment variable to a path where one of these files can be found (invalid: [])"
 
->  require ${BPN}-crates.inc
->  require ${BPN}-git-crates.inc
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#115557): https://lists.openembedded.org/g/openembedde=
-d-devel/message/115557
-> Mute This Topic: https://lists.openembedded.org/mt/111371873/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+---
+ .../thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb b/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
+index d0241c7016..1981a35934 100644
+--- a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
++++ b/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
+@@ -20,7 +20,7 @@ inherit pkgconfig
+ 
+ DEPENDS += "udev libdevmapper libdevmapper-native clang-native"
+ 
+-export LIBCLANG_PATH = "${WORKDIR}/recipe-sysroot-native${libdir}"
++export LIBCLANG_PATH = "${STAGING_LIBDIR_NATIVE}"
+ export BINDGEN_EXTRA_CLANG_ARGS = "${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS} --target=${TARGET_SYS}"
+ 
+ require ${BPN}-crates.inc
+-- 
+2.48.1
+
 
