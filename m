@@ -2,90 +2,106 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1C44C19F32
-	for <webhook@archiver.kernel.org>; Sun,  2 Mar 2025 05:21:45 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.web10.25606.1740892898095941341
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A251C282C6
+	for <webhook@archiver.kernel.org>; Mon,  3 Mar 2025 06:15:33 +0000 (UTC)
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
+ by mx.groups.io with SMTP id smtpd.web11.47379.1740982526579206414
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 Mar 2025 21:21:38 -0800
+ Sun, 02 Mar 2025 22:15:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=X9LRgaQX;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-2feaca4e99cso4638991a91.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Mar 2025 21:21:38 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nQv3nnfO;
+ spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-2235908a30aso51247015ad.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Mar 2025 22:15:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1740892897; x=1741497697; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1740982525; x=1741587325; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=aMjMklGPNz0xr0lla+tKwzS8qTuA2zQENUUAYhb8TFA=;
-        b=X9LRgaQXc3JRBj5EATIXhz5wBBpA4Gd3KeJ6K6g2b40CfEeaPoUoWKRgTFgBNoErJw
-         h7jED6T2Mu2RR9JVHMvXUSQF6fgzI0O7pcxkNHtpthL8E0bKq4ZKUWaYpV/aw0vr/dCt
-         9UZRqMf/R0xjJxqLdi5NkSNlxj45Hga2fI97srpBY2gFREN2TEwwpUzi0SlYwOt8RhWy
-         a4r45IojSQnwdVnLGJvvhl3n2wQ7GeyrR0GilnvfbNGlpZeam6SFzXQkSDaadq9XjX3t
-         7W7lojiPMt1Zamre8cOBEzuoGwMPKsfSwNaS/iSei538P+biz+mqM9KE29PD/d6DtMSx
-         vXGg==
+        bh=QH+KG+i4VBYs3Gratb0SvwNaoRa/pxv/9CvCmlGEsOg=;
+        b=nQv3nnfOb4hdlZhoOC4/OmOWfzvpTS0CIygVGXgrUl+j+PMOyONQLlrj/b/LJwjPR3
+         cXPfyT74p3U2A6n867BHFAfdDsc4j3dsyerV+VSx83Zlz9z2IGP/p9j2WQnwo6z5F8re
+         VMuYmWQmgAuQLy1zHr1H4jh9qiPuSE3Px/T6JUYie1IyEXmoa9fzPAGuT9EkUIPAffsy
+         +GDE9pKgEr5+EggiKHU58Gt7F9HE/N9pKdkGYuHN/mXwJFUU20yVemeTodLfKOXj9fEx
+         L2mIS34QjKibANEVNfrGIdiMLXm/u5n/xx7mjzbAlR0e7EqWBsCO2+5i6mopTmxvm3ag
+         jSkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740892897; x=1741497697;
+        d=1e100.net; s=20230601; t=1740982525; x=1741587325;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=aMjMklGPNz0xr0lla+tKwzS8qTuA2zQENUUAYhb8TFA=;
-        b=T8HJ5aMJJlUbPVd7UKr4FN9EF4UYI6KNS20iNta+rsMWloTMWhkILj44/jpFn8jSAK
-         cR5sqsQ2FhmNgfoap05ofnHdUftSO4HPtIit44BCvwW9kse57E2sU9pke2I5t1WhJyD8
-         2g2ikQyXxCM3mlRB9XKqy2DQyl5jOYlk+bnY5gzyagFkb/Pc4LgbZyLyi0AEl/BsAI0m
-         Tc3G34vTno4V31xucLJvgivt0ymBbfkSH8TCfFAfDsGx+NJjXVMLPf4VOAiqDdNrsjf3
-         cMRKwGBPvsmi7yPWI8V2i6QwMnu9iUam8CZaAI8Zh+K5m5KiVE2hAGcWMs3GCOJYG/2L
-         rayg==
-X-Gm-Message-State: AOJu0Ywzxn5DKKWKk6PryTI+FOTqakFg69hPGBjKVdUSQYRa+QZsMkNe
-	F3HF2TAhP2JU3IJo86X9OX7cwY9Qk/LAusnblSBOrs07zizXNOzSf42yQc0m
-X-Gm-Gg: ASbGncuq/tRRyzVFrc7J5Pttl5qUZLtSM8hFY3S1omM8Gc9w0+Ycxr2tR+xQr8Tmv/W
-	UgCDyUSBeFS/a3DhRlhC6g8jC44LfgXM8gX69FNoE565c7deJSWUIzXLMmMamJSGP5r4+dDRiRW
-	DWFemVkFiz446y9undN4ROMNSyX83tSWUNXCS38nflsVKTosd1hezWUHG1QFPTVi/4x3Ty6iNiF
-	kaaMJnA4Vudn2wN9hjuA5NIz35hWZW7fHNR7NVDZzNM4YufUu8s7lnwvCr+ktlKlYmHFBQiIL6K
-	8kObauvKO4hH4VO0AemqcdQVaqoIO6hdQVbV
-X-Google-Smtp-Source: AGHT+IG3G06Svcyw7WPF+kCZgGNrAQcQttSUWhFc9AM5iigfsH7ddoKhP1Lw4kbQdl70/jwHhvvh7g==
-X-Received: by 2002:a17:90b:1845:b0:2fe:6942:370e with SMTP id 98e67ed59e1d1-2febab2ff84mr14421966a91.7.1740892897093;
-        Sat, 01 Mar 2025 21:21:37 -0800 (PST)
+        bh=QH+KG+i4VBYs3Gratb0SvwNaoRa/pxv/9CvCmlGEsOg=;
+        b=VJIv2NAkeDDlY+9jMpJtBNua5Ptapkj7vwOE3k1eLD1jHmJuajhBF04dWVk71WiPQL
+         hyN23ox2LxBhFWU9FZpvfOjwqJShGL1GUgVYf2cUDcoE/7V69YL7PgJwqBHwCeCRtD6E
+         tdboHOSLQpvi//3KlT0+klHl8C+Hl9HQ7MkdTgs9pvQoKbBL9/XUnikmjYEaWtL9AFxG
+         /+gN4Ce8JmnLrKfEfYrkC7OlqP3ef5RsqHs/Jk1X2M71FB3RzP5hBDoXmYPD4UUGTNxd
+         Z5VylVImHugWo14HztnMHk1QrKZuSgRpoa7m4G4c7hTpfe4JSMIVEZpEFqx/uQ322l+H
+         OoEQ==
+X-Gm-Message-State: AOJu0Yz/7VD9gwR5cdxmssrnWm8M6hzGHVhV9Tj70SHleboEkzrVpdZp
+	xj9UR/xpOUze9Z8+RvekVoZSYqg7jF4lDqTV+wZ9kpZDYq+tKpDbdMOUJnIK
+X-Gm-Gg: ASbGncvAFgYBUVT1V/MwHSuh4P5VgTqGcR76wmjrr15D2kfg2IPwqU097aw1OBqmf1o
+	F7uKY5GB+maRMWo2p1TxKRsgMvw62zwxNPNJRULNydwKcgSVlpapxEcqK+hkwxV4ROsLFMGjQ/e
+	7IS+TJx4ONV0JXbjD0elQ3lJyTsnQrrLDkakxIlRUL2U6FAQXtu+yk2xasCZ85LwN7WkJS50rh4
+	W3Kf5iU7VazuCm6cLxoAmzxsmU45t8uqErdHSAunK9L/DZffHvWV6PznSMTpO1GQNALh46q9k6o
+	yK9x5xRhMOU03nBIN4zwoKdZtKYvSc06kHOW
+X-Google-Smtp-Source: AGHT+IEt6Yh4BpFjIvStd3qVvEZ9R5ftPI5nBKoaAiOwDUDXcpP/lUUMtbna+vR7clB4qyKmICjsjA==
+X-Received: by 2002:a05:6a00:14c9:b0:736:3768:6d74 with SMTP id d2e1a72fcca58-73637686f7emr11100230b3a.7.1740982525444;
+        Sun, 02 Mar 2025 22:15:25 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:8201:fd20::c3fe])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2fea698ffb4sm6360069a91.47.2025.03.01.21.21.36
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-736550edf72sm1143526b3a.167.2025.03.02.22.15.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 01 Mar 2025 21:21:36 -0800 (PST)
+        Sun, 02 Mar 2025 22:15:25 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH] clutter: Add m4 dir to autoconf macro search paths
-Date: Sat,  1 Mar 2025 21:21:34 -0800
-Message-ID: <20250302052134.4053799-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-pyasyncore: Add recipe
+Date: Sun,  2 Mar 2025 22:15:22 -0800
+Message-ID: <20250303061522.577597-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 02 Mar 2025 05:21:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115721
+ <openembedded-devel@lists.openembedded.org>; Mon, 03 Mar 2025 06:15:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115722
 
-autotools bblass do not search for the .m4 files in srctree anymore [1]
-
-[1] https://git.yoctoproject.org/poky/commit/?id=a4b1fa2b22794d59fee716afe6e269dae7f87ace
+This module was dropped in 3.12, therefore provide it as separate module
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-gnome/recipes-graphics/clutter/clutter-1.0.inc | 3 +++
- 1 file changed, 3 insertions(+)
+ .../conf/include/ptest-packagelists-meta-python.inc  |  1 +
+ .../python/python3-pyasyncore_1.0.4.bb               | 12 ++++++++++++
+ 2 files changed, 13 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyasyncore_1.0.4.bb
 
-diff --git a/meta-gnome/recipes-graphics/clutter/clutter-1.0.inc b/meta-gnome/recipes-graphics/clutter/clutter-1.0.inc
-index ce6b8a0f49..48e9d134ae 100644
---- a/meta-gnome/recipes-graphics/clutter/clutter-1.0.inc
-+++ b/meta-gnome/recipes-graphics/clutter/clutter-1.0.inc
-@@ -21,6 +21,9 @@ EDEPENDS_WAYLAND = "wayland libxkbcommon gdk-pixbuf"
- EDEPENDS_EVDEV = "libxkbcommon"
- ERDEPENDS_EVDEV = "xkeyboard-config"
- 
-+# Needed for finding introspection.m4
-+EXTRA_AUTORECONF += "-I m4"
+diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+index ee8f957cca..3a1fb13ba7 100644
+--- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
++++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+@@ -53,6 +53,7 @@ PTESTS_FAST_META_PYTHON = "\
+     python3-precise-runner \
+     python3-prettytable \
+     python3-propcache \
++    python3-pyasyncore \
+     python3-pydantic \
+     python3-pydantic-core \
+     python3-pylint \
+diff --git a/meta-python/recipes-devtools/python/python3-pyasyncore_1.0.4.bb b/meta-python/recipes-devtools/python/python3-pyasyncore_1.0.4.bb
+new file mode 100644
+index 0000000000..cf91d7ebb2
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pyasyncore_1.0.4.bb
+@@ -0,0 +1,12 @@
++SUMMARY = "Make asyncore available for Python 3.12 onwards"
++HOMEPAGE = "https://github.com/simonrob/pyasyncore"
++LICENSE = "Python-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=d5605fc335ce1bab614032468d0a1e00"
 +
- # Disable pretty much everything, override in platform specific set up
- EXTRA_OECONF += "--disable-quartz-backend	\
- 	     	 --disable-win32-backend	\
++inherit pypi setuptools3 ptest-python-pytest
++
++SRC_URI[sha256sum] = "2c7a8b9b750ba6260f1e5a061456d61320a80579c6a43d42183417da89c7d5d6"
++
++RDEPENDS:${PN} += "python3-core python3-io"
++
++BBCLASSEXTEND = "native nativesdk"
 
