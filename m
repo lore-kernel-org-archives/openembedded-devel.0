@@ -1,176 +1,149 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2312C282C6
-	for <webhook@archiver.kernel.org>; Mon,  3 Mar 2025 18:29:38 +0000 (UTC)
-Received: from mail-oa1-f48.google.com (mail-oa1-f48.google.com [209.85.160.48])
- by mx.groups.io with SMTP id smtpd.web11.2413.1741026572576310528
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 11C8AC282C6
+	for <webhook@archiver.kernel.org>; Mon,  3 Mar 2025 19:13:29 +0000 (UTC)
+Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
+ by mx.groups.io with SMTP id smtpd.web11.3614.1741029198796990220
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Mar 2025 10:29:32 -0800
+ Mon, 03 Mar 2025 11:13:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=fbB9s0Kq;
- spf=pass (domain: gmail.com, ip: 209.85.160.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f48.google.com with SMTP id 586e51a60fabf-2bcbfad2f8cso2390018fac.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Mar 2025 10:29:32 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dTx4md8S;
+ spf=pass (domain: gmail.com, ip: 209.85.167.53, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-54954fa61c8so3458139e87.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Mar 2025 11:13:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741026572; x=1741631372; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=JSmzXhfDSgbHfmfyVYmGEkzPr32LYbmNZEBf9clJYl4=;
-        b=fbB9s0KqYOn1V80skRBTsZrrLZT/rNC9ZNZWFEvnf9lty5fdC0FgFh2D9Qctjh3K8w
-         9xbUyJ1ypDj3q6ANANvOxXhi68sL3LOm1K5v27lLb06geo/QAT9HZQP3X/20gsPJVjlY
-         U/muUQYm1ig1jgw1qhkABby7cG3e6KpffKzt4roHzbre+obD6YVlLCHa7wwnfceIJUOc
-         FklxmYMhzS84Wt72VLY/NVVxUi5ynVW33Fy551mKuN0KJJKg+0/hrG4NALoGHTxZz4wQ
-         4ZGdJOKWfixAVLCQIg1Tmq24Z4AvUYzCnIDdU4ThlxY6Yk7EQ7L/SgmNA8KoDJ4W4Gar
-         ssKw==
+        d=gmail.com; s=20230601; t=1741029197; x=1741633997; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=KbmQQF+Jhbzc9c28/kmlMp7sG+JmUuoeCKC8QOcwyHk=;
+        b=dTx4md8S0Bfl/ymNrOofNbsKvMiKMXeL5Q5Ww5ZJGcsEQx/UXRjpHwyFepCjmSF4we
+         RACRjHQeNcKe4TBv7ugnRIUWl+6DWa0qqPUXiWi7FcLPvGFVRgSHFu7qHKxvcmFKQ9Jc
+         gknNZ8hes6OGS3WXmADYiTeyzMZUj9wFkus1STiM2L2ii4g4eIHdbkWaLOBKdJTfx3Df
+         IS6SbfIuqQbAeW3BgF9BDi0Pz4Y4UOawElrRPBHIeMSDEyFHmHPXctt5iD0g06Bsk+Ix
+         CaKBwZ01qShRCkpEBiOkreK60r4LkhKK7NF6POzt6KCqxlTkUlwe5Uts1+nS8dQ+omfM
+         yNdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741026572; x=1741631372;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=JSmzXhfDSgbHfmfyVYmGEkzPr32LYbmNZEBf9clJYl4=;
-        b=N43wrgGJrzofGfefQ7HJt92wMCd62oDTrMpjAQrnGoKruvETWrw8uQHhURrNVv8inr
-         RuNmpbru+lb8t5ewVFfIlnRnnEVnGSK+RxlsZpRxv/Q5jDiMezM+5L/4TOQKPhnjYGzM
-         ZVO8BUN7vBczNMOFdSq2gJsGkZu0//vYKT+NycH/y0ktu/7XM9N9rmDxFmkbJMA7pH9M
-         bon0gyDqQHw3mtgaeIAU/d/mYcs7U52+xCArdCAaf8lUcVO9DTMiaXXMoR31d9vZ7p2C
-         27nlGXRgQ1gDXGJT0Kw8fRYUmWSm86j4pk6t8kw3hMKNgKcTm6X7RlQnzaZSZeOdc6kL
-         +PzQ==
-X-Gm-Message-State: AOJu0Yzq4gcrflzyeLM1yvE5+g3vexLBv1zSjwf2IOZuhTagf23JA5co
-	N8w7z0SD1BZXCg2n6eWrs3LUtKGR6ktgsC6GDCCSp2LXk4NKdgnTnlVNdh8YTbC50YcLdPXJR79
-	bSD39x2k34A8SOienPDpLggDeYW8=
-X-Gm-Gg: ASbGncutmd0CEGJBSuBLKuQydRF2f/cPv5UGMwTOB/QmWd6f8MQtZLl8GbJh5mHUakG
-	G85IWTbc7hs3eFo2jBdDhwSVXIsVhFLsnzNrMR6B1+eXBgm8WqM1dvalSzQf/hFlHCv1V5q+is+
-	gCboDtxMmJ5RUa7NZlc4Y0Ra/JEhjIvuvv9VrfsZd/KZQrNYYN/S3hTVwM8c4=
-X-Google-Smtp-Source: AGHT+IG4vhS3lCht+EvAwRu/TqvwKehkYNBYA8I8IfRdsfFgUzA36B9YbfX+hLWMqQLL540sQGaLe93oXX7zxW4axA0=
-X-Received: by 2002:a05:6870:b909:b0:29f:8a1b:f76b with SMTP id
- 586e51a60fabf-2c17836b07dmr9605241fac.9.1741026571764; Mon, 03 Mar 2025
- 10:29:31 -0800 (PST)
+        d=1e100.net; s=20230601; t=1741029197; x=1741633997;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=KbmQQF+Jhbzc9c28/kmlMp7sG+JmUuoeCKC8QOcwyHk=;
+        b=vwNqz7agDIUEBRNJF0ap7pxiGui2SmNQe1gPq8goH72a3Lou9wSbvyFVqLIj5Km66r
+         nkQe20dv4kWUdMhnPR9DzzyPaNjGIjOwHyPfSsKv1YhUW+6oU3PkSWFCv9tHCSOU3uRc
+         d5azL10ZMsMfGYmUfFVMU+MWzfVRTssl4CGOmbTCaqiFSJ3Eoj6/5H7QWXfxVOOwLTl5
+         oeyFzXsd4E5KXG7MrmcV4CAG56o5QC+A3Z89zhh5hM/8Jkv51WCZuxS0K7e19ezhV1e7
+         xJjoOhtPxswD9eDqR/V9WB6X9n2uxrDsrEDPWA6qDZPCRSx2Ar+MGdTw5RgGMi/Yc3MH
+         nlwg==
+X-Gm-Message-State: AOJu0YypgDfQIb9bUAD8MgyPWDkaanI19dv+8GSuzujWcMB4bcdfoEeV
+	3hNP5BdkCOawMav1iogCL0hhF6OVywpLx1IzOmg0tevUsSwBuvy0MnZokQBYhrCkdOENozz5c88
+	x8Nc0Jz2bcGDBKCQzBk754TZZRR9XLKuOj2M=
+X-Gm-Gg: ASbGncu25shd7+JkoD9DHL9prh0bDroKAPEfRJqrmpkHogmnTCmZt368CL8NS2TLJaT
+	54wYlSImJozjkHZA1DJXPllxmedd85vJVHI5nG2CHk+o5saUNWPolhBsru/Du4qkDPg2OV3XSNY
+	vSfYTQByLUcufDOHLAaap3wsIsFfsj
+X-Google-Smtp-Source: AGHT+IHvN1ivuOd0DmhdAdsjeu/IYGRV9SHV/D8OtBId65WsID3ibdmOzFu20qzoLEu/0GHaE1QrN/oyobAd2QuPj3Y=
+X-Received: by 2002:a05:6512:398e:b0:546:2f7a:38c4 with SMTP id
+ 2adb3069b0e04-5494c3235d3mr5608202e87.13.1741029196348; Mon, 03 Mar 2025
+ 11:13:16 -0800 (PST)
 MIME-Version: 1.0
-References: <20250303104252.3045713-1-f_l_k@t-online.de>
-In-Reply-To: <20250303104252.3045713-1-f_l_k@t-online.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 3 Mar 2025 10:29:08 -0800
-X-Gm-Features: AQ5f1JoMM6-_-Ywp022caGCSeqk6fK6hqfCatxV2RfNKGwkMykD3wusN7F6SADo
-Message-ID: <CAMKF1sqZx1C2=kUT_VYb3CpScnP2eAwDdx3OLexGWEHv-oUwwQ@mail.gmail.com>
-Subject: Re: [oe] [meta-gnome][PATCH] mypaint: add m4 dir to autoconf macro
- search paths
-To: f_l_k@t-online.de
+References: <20250225034557.2148517-1-liezhi.yang@windriver.com> <20250225034557.2148517-2-liezhi.yang@windriver.com>
+In-Reply-To: <20250225034557.2148517-2-liezhi.yang@windriver.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 3 Mar 2025 20:13:02 +0100
+X-Gm-Features: AQ5f1JqBjNz6Koc4BBheGwx4xWcHP8Dc3EFBW_hSTob5JXHGOY21oaRvhHH5crg
+Message-ID: <CA+chaQc87vMUKzdBsCe5amkpMuqsbgwQaM+F+uN6SknWvS=uJQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 2/2] thin-provisioning-tools: 1.0.13 -> 1.0.14
+To: liezhi.yang@windriver.com
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000005accbd062f745658"
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 03 Mar 2025 18:29:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115727
+ <openembedded-devel@lists.openembedded.org>; Mon, 03 Mar 2025 19:13:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115728
 
---0000000000005accbd062f745658
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-I have already sent a fix for this couple of days back
-
-On Mon, Mar 3, 2025 at 2:42=E2=80=AFAM Markus Volk via lists.openembedded.o=
-rg
-<f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
-
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> ---
->  meta-gnome/recipes-gimp/mypaint/libmypaint_git.bb | 3 +++
->  1 file changed, 3 insertions(+)
+On Tue, Feb 25, 2025 at 4:46=E2=80=AFAM Robert Yang via lists.openembedded.=
+org
+<liezhi.yang=3Dwindriver.com@lists.openembedded.org> wrote:
 >
-> diff --git a/meta-gnome/recipes-gimp/mypaint/libmypaint_git.bb
-> b/meta-gnome/recipes-gimp/mypaint/libmypaint_git.bb
-> index d509aa3dd0..ca6a115dd3 100644
-> --- a/meta-gnome/recipes-gimp/mypaint/libmypaint_git.bb
-> +++ b/meta-gnome/recipes-gimp/mypaint/libmypaint_git.bb
-> @@ -19,6 +19,9 @@ SRCREV =3D "2768251dacce3939136c839aeca413f4aa4241d0"
->  PV =3D "1.6.1"
+> From: Robert Yang <liezhi.yang@windriver.com>
+>
+> * License-Update: Update links in GPLv3 (http -> https)
+>
+> * It need depend on pkg-config, udev and clang-native to build
+>
+> * Move it to dynamic-layers since now it depends on meta-clang.
+>
+> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> ---
+>  .../thin-provisioning-tools-crates.inc        | 124 +++++++++++++-----
+>  .../thin-provisioning-tools-git-crates.inc    |   0
+>  .../thin-provisioning-tools_1.0.14.bb}        |  10 +-
+>  3 files changed, 102 insertions(+), 32 deletions(-)
+...
+
+> rename from meta-oe/recipes-support/thin-provisioning-tools/thin-provisio=
+ning-tools_1.0.13.bb
+> rename to meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisi=
+oning-tools/thin-provisioning-tools_1.0.14.bb
+> index 1d3c797244..e5a683aa0f 100644
+> --- a/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-t=
+ools_1.0.13.bb
+> +++ b/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisionin=
+g-tools/thin-provisioning-tools_1.0.14.bb
+> @@ -4,17 +4,23 @@ HOMEPAGE =3D "https://github.com/jthornber/thin-provisi=
+oning-tools"
+>  LICENSE =3D "GPL-3.0-only"
+>  SECTION =3D "devel"
+>
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
+504"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D1ebbd3e34237af26da5dc08a4e440=
+464"
 >  S =3D "${WORKDIR}/git"
 >
-> +# Needed for introspection.m4
-> +EXTRA_AUTORECONF +=3D "-I m4"
+>  SRC_URI =3D " \
+>      git://github.com/jthornber/thin-provisioning-tools;branch=3Dmain;pro=
+tocol=3Dhttps \
+>      "
+>
+> -SRCREV =3D "116c05345bed5fe727992c3458311606d5443ff6"
+> +# v1.0.14
+> +SRCREV =3D "6be3e0937800cb947f1be7c0150825f155cfca14"
+>  UPSTREAM_CHECK_GITTAGREGEX =3D "v(?P<pver>\d+(\.\d+)+)"
+>
+>  inherit cargo cargo-update-recipe-crates
+> +inherit pkgconfig
 > +
->  do_configure:append() {
->      # autogen uses python2 so generate headers ourselves
->      cd ${S}
+> +DEPENDS +=3D "udev clang-native"
+> +
+> +export LIBCLANG_PATH =3D "${WORKDIR}/recipe-sysroot-native${libdir}"
+
+This path won't be correct for multilib builds where target ${libdir}
+might be e.g. /usr/lib32 while native libdir is /usr/lib.
+
+Is there a reason why you haven't used STAGING_LIBDIR_NATIVE variable
+which uses correct ${libdir_native}?
+
+Regards,
+
+>  require ${BPN}-crates.inc
+>  require ${BPN}-git-crates.inc
 > --
-> 2.48.1
+> 2.25.1
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#115724):
-> https://lists.openembedded.org/g/openembedded-devel/message/115724
-> Mute This Topic: https://lists.openembedded.org/mt/111485620/1997914
+> View/Reply Online (#115557): https://lists.openembedded.org/g/openembedde=
+d-devel/message/115557
+> Mute This Topic: https://lists.openembedded.org/mt/111371873/3617156
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
+artin.jansa@gmail.com]
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
->
-
---0000000000005accbd062f745658
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto">I have already sent a fix for this couple of days back=C2=
-=A0</div><div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=
-=3D"ltr" class=3D"gmail_attr">On Mon, Mar 3, 2025 at 2:42=E2=80=AFAM Markus=
- Volk via <a href=3D"http://lists.openembedded.org">lists.openembedded.org<=
-/a> &lt;f_l_k=3D<a href=3D"mailto:t-online.de@lists.openembedded.org">t-onl=
-ine.de@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"=
-gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-=
-left:1ex">Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.d=
-e" target=3D"_blank">f_l_k@t-online.de</a>&gt;<br>
----<br>
-=C2=A0meta-gnome/recipes-gimp/mypaint/<a href=3D"http://libmypaint_git.bb" =
-rel=3D"noreferrer" target=3D"_blank">libmypaint_git.bb</a> | 3 +++<br>
-=C2=A01 file changed, 3 insertions(+)<br>
-<br>
-diff --git a/meta-gnome/recipes-gimp/mypaint/<a href=3D"http://libmypaint_g=
-it.bb" rel=3D"noreferrer" target=3D"_blank">libmypaint_git.bb</a> b/meta-gn=
-ome/recipes-gimp/mypaint/<a href=3D"http://libmypaint_git.bb" rel=3D"norefe=
-rrer" target=3D"_blank">libmypaint_git.bb</a><br>
-index d509aa3dd0..ca6a115dd3 100644<br>
---- a/meta-gnome/recipes-gimp/mypaint/<a href=3D"http://libmypaint_git.bb" =
-rel=3D"noreferrer" target=3D"_blank">libmypaint_git.bb</a><br>
-+++ b/meta-gnome/recipes-gimp/mypaint/<a href=3D"http://libmypaint_git.bb" =
-rel=3D"noreferrer" target=3D"_blank">libmypaint_git.bb</a><br>
-@@ -19,6 +19,9 @@ SRCREV =3D &quot;2768251dacce3939136c839aeca413f4aa4241d0=
-&quot;<br>
-=C2=A0PV =3D &quot;1.6.1&quot;<br>
-=C2=A0S =3D &quot;${WORKDIR}/git&quot;<br>
-<br>
-+# Needed for introspection.m4<br>
-+EXTRA_AUTORECONF +=3D &quot;-I m4&quot;<br>
-+<br>
-=C2=A0do_configure:append() {<br>
-=C2=A0 =C2=A0 =C2=A0# autogen uses python2 so generate headers ourselves<br=
->
-=C2=A0 =C2=A0 =C2=A0cd ${S}<br>
--- <br>
-2.48.1<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#115724): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/115724" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/115724</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/111485620/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/111485620/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---0000000000005accbd062f745658--
 
