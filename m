@@ -1,216 +1,93 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8410AC282DC
-	for <webhook@archiver.kernel.org>; Tue,  4 Mar 2025 13:54:25 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.web11.22214.1741096463106208587
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B9A1C021B8
+	for <webhook@archiver.kernel.org>; Tue,  4 Mar 2025 19:02:47 +0000 (UTC)
+Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
+ by mx.groups.io with SMTP id smtpd.web10.30274.1741114958307962151
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Mar 2025 05:54:23 -0800
+ Tue, 04 Mar 2025 11:02:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=hZlBSHFO;
- spf=pass (domain: konsulko.com, ip: 209.85.221.49, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-390d98ae34dso4590374f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Mar 2025 05:54:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1741096461; x=1741701261; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=SrhdAiE9JGkuiWYGSuZQW6QfFk/O+dTaCiRR0pOB3L0=;
-        b=hZlBSHFOjA1QdN7x68JNxXzltXRHSp29P/K392vdAp/YMlvKPilrrfxBXcMHNVOA31
-         L4wTGJH6UivtN/9RGi2hitPdg7hxXGZ6HhEMuvwKRlKC/P5gtvo0G+hSqv7EBS4sX/ZT
-         DW26eNDJSxHU1jhG2yRzaCnC49fU077v3mVZc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741096461; x=1741701261;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=SrhdAiE9JGkuiWYGSuZQW6QfFk/O+dTaCiRR0pOB3L0=;
-        b=wdQRD3tV8DNbFpayRNcsb8om4R7T1JHsQMu6aDjNPf6k4kiJsmB4tUhqXqzm7qlpsV
-         GWQfDccm3ix4lFqkpFBR3mpR3bVgL+UzkjHi8yu+VnS6+hqjmcw9gBoVwOaT+z6IRt0i
-         tov2jBwQA+WE9m8G2z5RpkCg1W6oAPmO6Ukz3u41wsbgGtbm92Gq7qNOki//da34TG8T
-         fEiPKou6HkY24nLVdrjUFwQGVnC6Q3RZpq2kvQIuPxLA7/BviC/JBzAsb+7LsTUSXGyN
-         WHpXAne5jsrNsln4V+RXtbdgOBKnKn7BHf59XRBcpwmMu8nqA4tHn4TOJ6/y9D7WtJM9
-         tYxA==
-X-Gm-Message-State: AOJu0YwLM+dbZoaeuFYZblq7NHm3Y855L831fNX47VlzfW1jvleAf2Xq
-	y1O5cf7l+VMY5B8JwLhDezc5lhFS/Q4OQ2PxqeNCaEsetbBS4a939iLKJ1R+2WBtuBwg/g5DCml
-	E
-X-Gm-Gg: ASbGncvoMBc0vget/vlfE0lyJuIqmHpJ71VfGD0qInqHLtJCSw0JZjnR0C+M9mTr41k
-	i1wns9fQbdGB8atvVbaCV61GHImsuCgODzbgjs7MTxBFC8034TrZajF0j6EzocI5h+60mkvfeeP
-	kNgYlMTYeP3+aEFFOGUB+u1IEmR8xCbIkiebTJtva7Xue4Tr6vWhzmm+DZAsizlECaI+WIAE00W
-	JjiyfDzZflhIr81hJ/rSZOIlF9lxnP94tFOiLYa6EbOCNTXv3SvsmqiYnuSPV4eX/58Ei4jRVig
-	tuvB0He+rdthWlUDsir1IMzIdXGMvBrqKjE8xetZDc7VDAXwmfmhSE+6M1g=
-X-Google-Smtp-Source: AGHT+IGMrSPH6Dmkh8akjVkvacqap0AQS1pe56I52KOMyT5osRDN8qNmoefGNey9ypStIG7H19SuNg==
-X-Received: by 2002:a5d:584d:0:b0:391:12a5:3cb3 with SMTP id ffacd0b85a97d-39112a53f00mr5291372f8f.3.1741096460853;
-        Tue, 04 Mar 2025 05:54:20 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-390e4795d30sm17979983f8f.10.2025.03.04.05.54.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 04 Mar 2025 05:54:20 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=g+f8Kid6;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-256628-20250304190235e323582dfa7ef04878-q8sxqa@rts-flowmailer.siemens.com)
+Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 20250304190235e323582dfa7ef04878
+        for <openembedded-devel@lists.openembedded.org>;
+        Tue, 04 Mar 2025 20:02:35 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=V9c5bGCK0OURlmdlHeY8sOcpokee99IQhxzQZhpPRzA=;
+ b=g+f8Kid6ufEA5fTMll7Azw7D+K8PuaQAAlhY2pMZRhPrSyl2vZ9/3csDDZf+XO6N780vPO
+ xrXEulCkNcr3MHaKt3aWY3HHptjDvo1Gi3mDd8GphrhJlARnvoibry18qJGJ7ImhIWXm+7mO
+ n6P4/xc5A45HSTvhmqeExijN/ebY7FSc2lgxQ8SJtgStFdkWRK/S5tWWHzZnoA96YQXzoSWJ
+ LiacLH5H6jiAc0jx0PK+VObPT0S56umBruwIxU50h5KVV/HYABP23PoL3cyFKIPBzEzmvyJ0
+ /caboxXkWpfF+crsLURQ7LeRo6YcDEWqmEYFm2E7b3KEW6uuSXA3uG/A==;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-gcovr: Upgrade 8.2 -> 8.3
-Date: Tue,  4 Mar 2025 15:54:16 +0200
-Message-Id: <20250304135416.2142742-3-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250304135416.2142742-1-leon.anavi@konsulko.com>
-References: <20250304135416.2142742-1-leon.anavi@konsulko.com>
+Cc: Peter Marko <peter.marko@siemens.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][kirkstone][PATCH] python3-grpcio(-tools): fix build concurrency issue
+Date: Tue,  4 Mar 2025 19:59:58 +0100
+Message-Id: <20250304185958.894117-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Mar 2025 13:54:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115741
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Mar 2025 19:02:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115742
 
-Upgrade to release 8.3:
+From: Peter Marko <peter.marko@siemens.com>
 
-- Replace setup.py with hatchling. To install from source at least
-  version 21.3 of pip is needed.
-- Drop support for Python 3.8.
-- Add condition coverage to text summary report.
-- Add --include to search files in search paths which should be
-  added to report.
-- Add option to generate LCOV format produced by version 1.x of
-  LCOV tool.
-- Extend logging for data merge errors with info about the data
-  sources.
-- Add condition coverage merge mode option --merge-mode-conditions
-- Add --gcov-suspicious-hits-threshold to configure the value for
-  detecting suspicious hits in GCOV files.
-- Renamed JSON element destination_blockno to destination_block_id.
-- Add --html-block-ids to show the block ids of the lines and
-  branches in HTML report.
-- Fixed an error handling bug throwing a TypeError exception on a
-  gcov merge assertion failure instead of reporting the error and
-  (if requested by the user) continuing execution
-- Check format version of external generated gcov JSON files.
-- Fix crash on Windows when trying to fix the case of the files.
-- Fix LCOV report. Excluded lines where added with a count of 0.
-- Fix line exclusion not clearing all child coverage data.
-- Fix summary stats in JaCoCo report.
-- Fix path issue when reading/writing Coveralls report.
-- Fix issue with negative counters in GCOV JSON export.
+Set GRPC_PYTHON_BUILD_EXT_COMPILER_JOBS to limit spawned compiler
+processes. Without this it uses all available CPUs (via
+multiprocessing.cpu_count()) and can exhaust build host since there are
+lot of files to compile (e.g. with 128 cores it manages to spawn 128 gcc
+processes)
 
-License-Update: Update year
+Note that this is a general problem for all setuptools based builds with
+build_ext compilation which can either compile with 1 thread or
+cpu_count threads. grpcio hot-patches setuptools and allows to set
+specific build concurrency value.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+(From master rev: fe582374d3ba474164005942799eb2bddc52a080)
+
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...yproject.toml-Support-newer-versions.patch | 30 +++++++++++++++++
- .../python/python3-gcovr_8.2.bb               | 23 -------------
- .../python/python3-gcovr_8.3.bb               | 32 +++++++++++++++++++
- 3 files changed, 62 insertions(+), 23 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-gcovr/0001-pyproject.toml-Support-newer-versions.patch
- delete mode 100644 meta-python/recipes-devtools/python/python3-gcovr_8.2.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-gcovr_8.3.bb
+ .../recipes-devtools/python/python3-grpcio-tools_1.45.0.bb    | 4 ++++
+ meta-python/recipes-devtools/python/python3-grpcio_1.45.0.bb  | 4 ++++
+ 2 files changed, 8 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-gcovr/0001-pyproject.toml-Support-newer-versions.patch b/meta-python/recipes-devtools/python/python3-gcovr/0001-pyproject.toml-Support-newer-versions.patch
-new file mode 100644
-index 0000000000..cf5ddf31cc
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-gcovr/0001-pyproject.toml-Support-newer-versions.patch
-@@ -0,0 +1,30 @@
-+From 7963caede294c7615ab0a60900e37790731279cc Mon Sep 17 00:00:00 2001
-+From: Leon Anavi <leon.anavi@konsulko.com>
-+Date: Tue, 4 Mar 2025 13:30:48 +0000
-+Subject: [PATCH] pyproject.toml: Support newer versions
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.45.0.bb b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.45.0.bb
+index 1e919dd3af..be851ba990 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.45.0.bb
++++ b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.45.0.bb
+@@ -14,4 +14,8 @@ SRC_URI[sha256sum] = "a016cfc21e0d91b3b036d3d4f968d1fdea865dfa03524cb1fbeca84719
+ 
+ RDEPENDS:${PN} = "${PYTHON_PN}-grpcio"
+ 
++do_compile:prepend() {
++    export GRPC_PYTHON_BUILD_EXT_COMPILER_JOBS="${@oe.utils.parallel_make(d, False)}"
++}
 +
-+Support newer versions when building through bitbake.
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.45.0.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.45.0.bb
+index ca55a7f091..56b84dab72 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio_1.45.0.bb
++++ b/meta-python/recipes-devtools/python/python3-grpcio_1.45.0.bb
+@@ -35,6 +35,10 @@ BORING_SSL:arm = "1"
+ BORING_SSL ?= "0"
+ export GRPC_BUILD_WITH_BORING_SSL_ASM = "${BORING_SSL}"
+ 
++do_compile:prepend() {
++    export GRPC_PYTHON_BUILD_EXT_COMPILER_JOBS="${@oe.utils.parallel_make(d, False)}"
++}
 +
-+Upstream-Status: Inappropriate [oe specific]
-+
-+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-+---
-+ pyproject.toml | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/pyproject.toml b/pyproject.toml
-+index e162ba062..89798fa23 100644
-+--- a/pyproject.toml
-++++ b/pyproject.toml
-+@@ -1,7 +1,7 @@
-+ 
-+ [build-system]
-+ requires = [
-+-    "hatchling==1.26.1",
-++    "hatchling>=1.26.1",
-+     "hatch-vcs==0.4.0",
-+     "hatch-fancy-pypi-readme==24.1.0"
-+ ]
-+-- 
-+2.39.5
-+
-diff --git a/meta-python/recipes-devtools/python/python3-gcovr_8.2.bb b/meta-python/recipes-devtools/python/python3-gcovr_8.2.bb
-deleted file mode 100644
-index bbafa36acf..0000000000
---- a/meta-python/recipes-devtools/python/python3-gcovr_8.2.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--DESCRIPTION = "generate GCC code coverage reports"
--HOMEPAGE = "https://gcovr.com"
--SECTION = "devel/python"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b307623752f2e1189349885b95b326e5"
--
--SRC_URI = "git://github.com/gcovr/gcovr.git;branch=main;protocol=https"
--SRCREV = "045fb8d51806bd7f9e3df4e4edffa3bb816cf77f"
--
--S = "${WORKDIR}/git"
--
--inherit setuptools3
--
--RDEPENDS:${PN} += " \
--    python3-colorlog \
--    python3-jinja2 \
--    python3-lxml \
--    python3-multiprocessing \
--    python3-pygments \
--    python3-setuptools \
--"
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-gcovr_8.3.bb b/meta-python/recipes-devtools/python/python3-gcovr_8.3.bb
-new file mode 100644
-index 0000000000..a9b29a4458
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-gcovr_8.3.bb
-@@ -0,0 +1,32 @@
-+DESCRIPTION = "generate GCC code coverage reports"
-+HOMEPAGE = "https://gcovr.com"
-+SECTION = "devel/python"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ae27363fce24765bc79a095313a3b002"
-+
-+SRC_URI = " \
-+    git://github.com/gcovr/gcovr.git;branch=main;protocol=https \
-+    file://0001-pyproject.toml-Support-newer-versions.patch \
-+"
-+SRCREV = "fe536afac4da31e86909191ef31708755ab8cf83"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit python_hatchling
-+
-+DEPENDS += " \
-+    python3-hatchling-native \
-+    python3-hatch-vcs-native \
-+    python3-hatch-fancy-pypi-readme-native \
-+"
-+
-+RDEPENDS:${PN} += " \
-+    python3-colorlog \
-+    python3-jinja2 \
-+    python3-lxml \
-+    python3-multiprocessing \
-+    python3-pygments \
-+    python3-setuptools \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.39.5
-
+ GRPC_CFLAGS ?= ""
+ GRPC_CFLAGS:append:toolchain-clang = " -fvisibility=hidden -fno-wrapv -fno-exceptions"
+ export GRPC_PYTHON_CFLAGS = "${GRPC_CFLAGS}"
 
