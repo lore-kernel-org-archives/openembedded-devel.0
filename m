@@ -1,196 +1,207 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <sjolley.yp.pm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9145DC282C6
-	for <webhook@archiver.kernel.org>; Tue,  4 Mar 2025 00:50:40 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.11434.1741049431477395800
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AA13AC282D1
+	for <webhook@archiver.kernel.org>; Tue,  4 Mar 2025 01:04:10 +0000 (UTC)
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.web11.11841.1741050248491169390
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Mar 2025 16:50:31 -0800
+ Mon, 03 Mar 2025 17:04:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=5158e9477a=changqing.li@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 523MftmR029003
-	for <openembedded-devel@lists.openembedded.org>; Mon, 3 Mar 2025 16:50:31 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 453xd7tvfy-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 03 Mar 2025 16:50:30 -0800 (PST)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Mon, 3 Mar 2025 16:50:30 -0800
-Received: from pek-lpg-core6.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Mon, 3 Mar 2025 16:50:29 -0800
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [kirkstone][meta-webserver][PATCH] nginx: fix CVE-2025-23419
-Date: Tue, 4 Mar 2025 08:50:28 +0800
-Message-ID: <20250304005028.2047363-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FDC04OOF;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: sjolley.yp.pm@gmail.com)
+Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-223959039f4so43308395ad.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Mar 2025 17:04:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1741050248; x=1741655048; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=e7XTeMceI5cQqfKVMYtSgCvlWquSZpe/dLub6hEXbMA=;
+        b=FDC04OOFPLaL2hGvbP4KzMUgwhL0qDJLfLcCyFkNOjfuOaKUIjZlvdnUvWftcViMt4
+         9E3FzYygWTK83zfYW7NCHgJbEZQjSgIg6qs4V8MCJfBAKU5scR80TFnRUE+/XVDqrdk1
+         aXuYjCdpAOPhcmJh7Y6JwZGnzeBlrCNvIZmk0TOi6axW8gjrti/bF2/E1yavCTEDH29k
+         a5dBqIB0XqWjgd6Pta3+ytvJ/JHT2zHOyZx+to6TDnWxfOFhLtbeTfRkUPhTgMb2FdhL
+         wA2iaZrEPcQifu4qLnED4Qn9aZ/v5Zn/FrV0YwjRg9KWkEq/fY8J/iLMWbgaRNI8NBQE
+         j4Ew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1741050248; x=1741655048;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=e7XTeMceI5cQqfKVMYtSgCvlWquSZpe/dLub6hEXbMA=;
+        b=LDcQOf8bNsMZgemi5B84HzS4dOaHE6aqy5EDCqqAkflF/CLRZRzVmc2FDTmZOlWO/U
+         XZS85nL9fhHCogbPIQ94InJJlNC5XNYjfPd2EqK1WTmj2FpIcWDVYsO4C2aOqDlA/gDW
+         CrOvWFk6ALBGrlhuub3cq97p8I+DFtP1wtKzAL6OsmKLC3NuqtIBKQ7Eu0fvwKrXBe7k
+         nxHeT+PkndUJmjZLCqKdadR819nNeX2rScfWmdpwTr7N0ERM9uEqLGpZMWmLH+aelJyW
+         Ln6rP70ZidPJyXp/+uKeRaEaiw4TXGoDvZLHArQSXekazkYeDz//9AuttTgnvnQDaUh6
+         dtHg==
+X-Gm-Message-State: AOJu0YxoL1B4X9YcfHKXqASynxEgesoIH6KGwSF/813j1RnJb9xWA67m
+	wCMqDSI0MjqBW8SgNpWq6QyRQADZNjAeGB8ViJpWMd3KoZwQDL4xoP6L5e4eajafqKWQIEzwTES
+	V9Hs8SemwLmFvLxr1sQZf+DljA5Lc2PxLCX8=
+X-Gm-Gg: ASbGncs5oICMYwoaMOc0oF/gMYr6IeBoIpowAJOy62ypO8G55vID8UXdJe6itqeXy1z
+	GQLbCv/iF110HIRwlccfnRPJAIGdeNAdryo25Bs8pxkbjI8pAEprasmWkc6CbxUusj58o2Pd5/z
+	8MkSKRjqnx0h33QZaZESEHKdwqOAhA6nGaXmIhhdazqn2DoXaV45gO89SXFFYL
+X-Google-Smtp-Source: AGHT+IGRI+NvDf4vUMSaL5l/S5f8aSLxe7wcb7fJVMxvCjWh11H8i8w3MZfIziz2N1TIgLIr18vJnFW5wyDWHVo1lmk=
+X-Received: by 2002:a17:90b:3d8c:b0:2ee:96a5:721c with SMTP id
+ 98e67ed59e1d1-2febab7a592mr20706639a91.21.1741050247467; Mon, 03 Mar 2025
+ 17:04:07 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=KICgDEFo c=1 sm=1 tr=0 ts=67c64e56 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=Vs1iUdzkB0EA:10 a=9bLDTSi9AAAA:8 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=L4EWI0dvAAAA:8 a=QIhr-27iAAAA:8
- a=A1X0JdhQAAAA:8 a=MiapE9bPtLE7ltoY1RgA:9 a=F_6uwoolVa4A:10 a=FdTzh2GWekK77mhwV6Dw:22 a=cgaYBWEFosGJW4rWv5Lf:22
-X-Proofpoint-ORIG-GUID: Fq2x0i3xzfKNmZqmGm_IDwQTLThhU90i
-X-Proofpoint-GUID: Fq2x0i3xzfKNmZqmGm_IDwQTLThhU90i
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-03-03_11,2025-03-03_04,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 phishscore=0
- clxscore=1015 priorityscore=1501 lowpriorityscore=0 mlxlogscore=999
- suspectscore=0 spamscore=0 mlxscore=0 malwarescore=0 impostorscore=0
- adultscore=0 classifier=spam authscore=0 authtc=n/a authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.21.0-2502100000
- definitions=main-2503040005
+From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
+Date: Mon, 3 Mar 2025 18:03:56 -0700
+X-Gm-Features: AQ5f1Jqm6xNHYPBJg1Y9xKjNSl_jKRkAdG1lWgKa0T9XoF9Vyj7ZcEScLfV_xVM
+Message-ID: <CAK5yBb8EVN6OAWprYAY5W2H1qs+8k30UYT=4Q_Z2iZTMFK12UA@mail.gmail.com>
+Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
+To: openembedded-devel@lists.openembedded.org, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="0000000000008958d5062f79d996"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Mar 2025 00:50:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115736
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Mar 2025 01:04:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115737
 
-From: Changqing Li <changqing.li@windriver.com>
+--0000000000008958d5062f79d996
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-CVE-2025-23419:
-When multiple server blocks are configured to share the same IP address
-and port, an attacker can use session resumption to bypass client
-certificate authentication requirements on these servers. This
-vulnerability arises when TLS Session Tickets
-https://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_session_ticket_key
-are used and/or the SSL session cache
-https://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_session_cache
-are used in the default server and the default server is performing
-client certificate authentication.   Note: Software versions which have
-reached End of Technical Support (EoTS) are not evaluated.
+All,
 
-Refer:
-https://nvd.nist.gov/vuln/detail/CVE-2025-23419
+The triage team is starting to try and collect up and classify bugs which a
+newcomer to the project would be able to work on in a way which means
+people can find them. They're being listed on the triage page under the
+appropriate heading:
+https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
+review:
+https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
+how to create a bugzilla account at:
+https://bugzilla.yoctoproject.org/createaccount.cgi
 
-This partially cherry picked from commit
-13935cf9fdc3c8d8278c70716417d3b71c36140e, the original patch had 2
-parts. One fixed problem in `http/ngx_http_request` module and the
-second fixed problem in `stream/ngx_stream_ssl_module` module.  The fix
-for `stream/ngx_stream_ssl_module can't be aplied because, the 'stream
-virtual servers' funcionality was added later in this commit:
-https://github.com/nginx/nginx/commit/d21675228a0ba8d4331e05c60660228a5d3326de.
-Therefore only `http/ngx_http_request` part was backported.
+The idea is these bugs should be straight forward for a person to help work
+on who doesn't have deep experience with the project. If anyone can help,
+please take ownership of the bug and send patches! If anyone needs
+help/advice there are people on irc who can likely do so, or some of the
+more experienced contributors will likely be happy to help too.
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- .../nginx/files/CVE-2025-23419.patch          | 87 +++++++++++++++++++
- .../recipes-httpd/nginx/nginx_1.24.0.bb       |  2 +
- 2 files changed, 89 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2025-23419.patch
+Also, the triage team meets weekly and does its best to handle the bugs
+reported into the Bugzilla. The number of people attending that meeting has
+fallen, as have the number of people available to help fix bugs. One of the
+things we hear users report is they don't know how to help. We (the triage
+team) are therefore going to start reporting out the currently 430
+unassigned or newcomer bugs.
 
-diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2025-23419.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2025-23419.patch
-new file mode 100644
-index 0000000000..e42664f11a
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2025-23419.patch
-@@ -0,0 +1,87 @@
-+From bc23d3cdf98e855a5409d3584a241d4d773ab306 Mon Sep 17 00:00:00 2001
-+From: Sergey Kandaurov <pluknet@nginx.com>
-+Date: Wed, 22 Jan 2025 18:55:44 +0400
-+Subject: [PATCH] SNI: added restriction for TLSv1.3 cross-SNI session
-+ resumption.
-+
-+In OpenSSL, session resumption always happens in the default SSL context,
-+prior to invoking the SNI callback.  Further, unlike in TLSv1.2 and older
-+protocols, SSL_get_servername() returns values received in the resumption
-+handshake, which may be different from the value in the initial handshake.
-+Notably, this makes the restriction added in b720f650b insufficient for
-+sessions resumed with different SNI server name.
-+
-+Considering the example from b720f650b, previously, a client was able to
-+request example.org by presenting a certificate for example.org, then to
-+resume and request example.com.
-+
-+The fix is to reject handshakes resumed with a different server name, if
-+verification of client certificates is enabled in a corresponding server
-+configuration.
-+
-+CVE: CVE-2025-23419
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/13935cf9fdc3c8d8278c70716417d3b71c36140e]
-+
-+This patch is partially cherry picked from commit
-+13935cf9fdc3c8d8278c70716417d3b71c36140e, the original patch had 2
-+parts. One fixed problem in `http/ngx_http_request` module and the 
-+second fixed problem in `stream/ngx_stream_ssl_module` module.  The fix 
-+for `stream/ngx_stream_ssl_module can't be aplied because, the 'stream
-+virtual servers' funcionality was added later in this commit:
-+https://github.com/nginx/nginx/commit/d21675228a0ba8d4331e05c60660228a5d3326de.
-+Therefore only `http/ngx_http_request` part was backported.
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+
-+---
-+ src/http/ngx_http_request.c | 27 +++++++++++++++++++++++++--
-+ 1 file changed, 25 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/http/ngx_http_request.c b/src/http/ngx_http_request.c
-+index 5e0340b..514c021 100644
-+--- a/src/http/ngx_http_request.c
-++++ b/src/http/ngx_http_request.c
-+@@ -907,6 +907,31 @@ ngx_http_ssl_servername(ngx_ssl_conn_t *ssl_conn, int *ad, void *arg)
-+         goto done;
-+     }
-+ 
-++    sscf = ngx_http_get_module_srv_conf(cscf->ctx, ngx_http_ssl_module);
-++
-++#if (defined TLS1_3_VERSION                                                   \
-++     && !defined LIBRESSL_VERSION_NUMBER && !defined OPENSSL_IS_BORINGSSL)
-++
-++    /*
-++     * SSL_SESSION_get0_hostname() is only available in OpenSSL 1.1.1+,
-++     * but servername being negotiated in every TLSv1.3 handshake
-++     * is only returned in OpenSSL 1.1.1+ as well
-++     */
-++
-++    if (sscf->verify) {
-++        const char  *hostname;
-++
-++        hostname = SSL_SESSION_get0_hostname(SSL_get0_session(ssl_conn));
-++
-++        if (hostname != NULL && ngx_strcmp(hostname, servername) != 0) {
-++            c->ssl->handshake_rejected = 1;
-++            *ad = SSL_AD_ACCESS_DENIED;
-++            return SSL_TLSEXT_ERR_ALERT_FATAL;
-++        }
-++    }
-++
-++#endif
-++
-+     hc->ssl_servername = ngx_palloc(c->pool, sizeof(ngx_str_t));
-+     if (hc->ssl_servername == NULL) {
-+         goto error;
-+@@ -920,8 +945,6 @@ ngx_http_ssl_servername(ngx_ssl_conn_t *ssl_conn, int *ad, void *arg)
-+ 
-+     ngx_set_connection_log(c, clcf->error_log);
-+ 
-+-    sscf = ngx_http_get_module_srv_conf(hc->conf_ctx, ngx_http_ssl_module);
-+-
-+     c->ssl->buffer_size = sscf->buffer_size;
-+ 
-+     if (sscf->ssl.ctx) {
-+-- 
-+2.34.1
-+
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
-index 2e865e400e..e288b19da3 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
-@@ -2,5 +2,7 @@ require nginx.inc
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=175abb631c799f54573dc481454c8632"
- 
-+SRC_URI:append = " file://CVE-2025-23419.patch"
-+
- SRC_URI[sha256sum] = "77a2541637b92a621e3ee76776c8b7b40cf6d707e69ba53a940283e30ff2f55d"
- 
--- 
-2.34.1
+We're hoping people may be able to spare some time now and again to help
+out with these. Bugs are split into two types, "true bugs" where things
+don't work as they should and "enhancements" which are features we'd want
+to add to the system. There are also roughly four different "priority"
+classes right now, =E2=80=9C5.2=E2=80=9D, =E2=80=9C5.3", "5.99" and "Future=
+", the more
+pressing/urgent issues being in "5.2" and then =E2=80=9C5.3=E2=80=9D.
 
+Please review this link and if a bug is something you would be able to help
+with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
+an e-mail with the bug number you would like and I will assign it to you
+(please make sure you have a Bugzilla account). The list is at:
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs
+
+Thanks,
+
+
+
+*Stephen K. Jolley*
+
+*Yocto Project Program Manager*
+
+(    *Cell*:                (208) 244-4460
+
+* *Email*:                 *s
+<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
+*
+
+--0000000000008958d5062f79d996
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><span style=3D"font-size:11pt;font-family:Calibri,Ari=
+al">All,<br><br>The triage team is starting to try and collect up and class=
+ify bugs which a newcomer to the project would be able to work on in a way =
+which means people can find them. They&#39;re being listed on the triage pa=
+ge under the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/=
+wiki/Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triag=
+e#Newcomer_Bugs</a>  Also please review: <a href=3D"https://www.openembedde=
+d.org/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.=
+org/wiki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugz=
+illa account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount=
+.cgi">https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The id=
+ea is these bugs should be straight forward for a person to help work on wh=
+o doesn&#39;t have deep experience with the project.  If anyone can help, p=
+lease take ownership of the bug and send patches!  If anyone needs help/adv=
+ice there are people on irc who can likely do so, or some of the more exper=
+ienced contributors will likely be happy to help too.<br><br>Also, the tria=
+ge team meets weekly and does its best to handle the bugs reported into the=
+ Bugzilla. The number of people attending that meeting has fallen, as have =
+the number of people available to help fix bugs. One of the things we hear =
+users report is they don&#39;t know how to help. We (the triage team) are t=
+herefore going to start reporting out the currently 430 unassigned or newco=
+mer bugs.<br><br>We&#39;re hoping people may be able to spare some time now=
+ and again to help out with these.  Bugs are split into two types, &quot;tr=
+ue bugs&quot; where things don&#39;t work as they should and &quot;enhancem=
+ents&quot; which are features we&#39;d want to add to the system.  There ar=
+e also roughly four different &quot;priority&quot; classes right now, =E2=
+=80=9C5.2=E2=80=9D, =E2=80=9C5.3&quot;, &quot;5.99&quot; and &quot;Future&q=
+uot;, the more pressing/urgent issues being in &quot;5.2&quot; and then =E2=
+=80=9C5.3=E2=80=9D.<br><br>Please review this link and if a bug is somethin=
+g you would be able to help with either take ownership of the bug, or send =
+me (<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>)=
+ an e-mail with the bug number you would like and I will assign it to you (=
+please make sure you have a Bugzilla account).  The list is at: <a href=3D"=
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or=
+_Newcomer_Bugs</a></span></div><div dir=3D"ltr" class=3D"gmail_signature" d=
+ata-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p clas=
+s=3D"MsoNormal" style=3D"background-image:initial;background-position:initi=
+al;background-repeat:initial"><span style=3D"font-size:12pt;font-family:Ari=
+al,sans-serif">Thanks,<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
+ily:Arial,sans-serif">=C2=A0<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
+lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
+ont-family:Arial,sans-serif"><span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
+amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
+an></b></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
+&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
+<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
+:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
+s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
+-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
+><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
+/span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
+t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
+=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
+color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
+uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
+ lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
+erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
+phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
+.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
+u></p></div></div></div></div>
+
+--0000000000008958d5062f79d996--
 
