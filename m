@@ -2,220 +2,115 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 57AD2C282E5
-	for <webhook@archiver.kernel.org>; Wed,  5 Mar 2025 15:00:44 +0000 (UTC)
-Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com [209.85.208.177])
- by mx.groups.io with SMTP id smtpd.web10.14967.1741186838834347983
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59A64C19F32
+	for <webhook@archiver.kernel.org>; Wed,  5 Mar 2025 15:03:14 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.web11.15109.1741186993241279676
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Mar 2025 07:00:39 -0800
+ Wed, 05 Mar 2025 07:03:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LObIflgb;
- spf=pass (domain: gmail.com, ip: 209.85.208.177, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lj1-f177.google.com with SMTP id 38308e7fff4ca-30ba563a6d1so10778101fa.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Mar 2025 07:00:38 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=KfSeuHnG;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-390dd35c78dso627790f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Mar 2025 07:03:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741186837; x=1741791637; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=lxVFPBteg+5Idhu1A9QXvjZ5yoyAbiZpqncmIjHvm1I=;
-        b=LObIflgbXXkkowiuLUnT77kNtlUXfgFk/LWAa7K2SDp2eqLYO96sZaOxH2o5EOssq4
-         yHP5Md1dYyVq+kcBWJ+kfwyRIdkL5iUHF4PyjxNCKxSzrIrF8L8W6dD4jRYvbQKPkPEh
-         MdeyvgWjqItU5Qab7Dgvph0PwBD+Ti8EDWvwpF4ARb1d0CIYY/Cn/bXImhQ9lId++s6l
-         ysJ52gGcu3D5CHaKJFE6vfQ8OfWuDydRcKqWum0aXnUBpeJxfZEK8kP4FF7GGIXKA0Va
-         FjiAJS2riIqOmKu+cltNmEc7FV8+U0leYqywjWG9RXRTSoM0FoXIaxUL0Bg+eGOngdbi
-         sO9g==
+        d=gmail.com; s=20230601; t=1741186991; x=1741791791; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=/1bDwdCpsKr67V0Mk0qwUuJKOMS08b67pdFaScMz2kY=;
+        b=KfSeuHnGchw20xQuxY/6WnUDu36ksABB612KXId3qwN6lZKfY1E9Kjn47lFYiKdK6s
+         VgceiWVkRPcNYYa4WcpxFML2ZU0ktY04+NO2Q0gkPXXeZduLGszeFvaNIhaPVbgTTRm2
+         gr8UjIa+XYdLOl4JaZWeEkuZDk3TvQlBHIM2IBMAe8PSkIf9LjvYH9GYRbVv92tT/iG6
+         C+M5Dd+khQlqVihbtnDN6fjlrcaE6GeZnG8+AaURpb9UMIsxz0pPbAv66hI8DfTLEBc0
+         +bji5l4vYaQrLQpe6VzyN6EUEhTWEku4bnDnHDOLdj+4fT6u2Ij/F3AVse7gilqqNrkG
+         aXxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741186837; x=1741791637;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=lxVFPBteg+5Idhu1A9QXvjZ5yoyAbiZpqncmIjHvm1I=;
-        b=uPKc7NBAUTw6WMVsmhOqSBpRWCr2tBOCDrdAw1qL3etwNReBqKFLYFdN1XrnS+74zl
-         EZrkiUZwz3vdKxcEpRnPLcyfebtXtNV0/gmvgtQd8ZGiD80a7jKMaM7xZVmlsw9OrIqQ
-         q6gTnw+zJWKeVIJlOaSH+TNJ6+erqNO14RXv3weCIV02BHqMUVMsKgMISoQmhiPVdaVQ
-         ECbL9A/SSIqpRxJqGFSwH393OnVdkgpioWap2ha3rcDi+J3JCa2D9BJgfqqdD4EMDxdB
-         4YXh8CRdRRr7Vj+Q+Wl1EsoP9QLLcyaAujPueQB5YF9Gm6qnSF6VU25YobcgjklT6Br5
-         IAQA==
-X-Gm-Message-State: AOJu0YzJuecDqDSTLwrper9XmxP3O9aFQ8iJb/2sWfL/M/l15+ucrYzf
-	WqrYNhCGGGovxstpcCAWxDie/PNqX9IiDcOrDuCnjlrdqDL0PjhFW/KwVjQsG1jygFIlXRVpZOo
-	Q7L7ZG4Le8W/f01Bf+J4wxR2YWnw=
-X-Gm-Gg: ASbGnctyDb1aQssxlJRh+aHXZnuX5VsPdsIH5+G1fm1IZY/p9Rajn7iylVZdJszXXvN
-	fqytSKrcuGFYYnprLBSX99s7EY+aLKQeABHwXRFZDuqnYTi/Aw+YAq33yNILuLYqc5BYRhMuzt6
-	QAq95lYaPrYJJ9upBaXvJuXiOsljgo
-X-Google-Smtp-Source: AGHT+IGz52fN5yK/HAxXfh5zVoDkX5ulHG+NF1FBI4mHkx0aKZGL3vple2KNgwxiMsuiVzb8N1Ax7HYz22ue8Es61WU=
-X-Received: by 2002:a2e:a98b:0:b0:308:eabd:297b with SMTP id
- 38308e7fff4ca-30bd7b0d4a9mr13541261fa.4.1741186836520; Wed, 05 Mar 2025
- 07:00:36 -0800 (PST)
-MIME-Version: 1.0
-References: <20250305105253.3545398-1-martin.jansa@gmail.com> <CAHUKmYYEF972DY5sKtG3iUOQPB9Y9YNTHJicMF_xOVP0j4F4rQ@mail.gmail.com>
-In-Reply-To: <CAHUKmYYEF972DY5sKtG3iUOQPB9Y9YNTHJicMF_xOVP0j4F4rQ@mail.gmail.com>
+        d=1e100.net; s=20230601; t=1741186991; x=1741791791;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=/1bDwdCpsKr67V0Mk0qwUuJKOMS08b67pdFaScMz2kY=;
+        b=W1Jg1JKSnQ2DZQhup1mNCbhVqcAvhWTUYPdjcUhq49ZMVETF6q74WL31YPKxu/dNwy
+         QNiEQdP8tuzsCZEC7wjz27Hqf0KA8iKwBuT1a5Y2I1eNcAIxtDAJXSFefCDgnAIWVYPU
+         /X/NFxaw6HwGOZ32ZGne4N9Zc2YpzMoHsfnsO30fLR0hoD1N1f81Ipdxqri18ieLfNme
+         5G1WRJ6K5YhDuIHgFTdFTNd48UG0N5DmmfATpoF9I+R9smYUE5bbwUn9gizMZsYsax6W
+         kq+iA+UtvXy8bDk+FLum834DXsLI62fPcMeie7xzuOxQeKtMNibT3YzXsMc2KzJlbaAO
+         gbTg==
+X-Gm-Message-State: AOJu0YwjQxNdu7HYPxGrSOWcAND/CzDRgBBGK9TilOQxjv2H0lth7Pfv
+	Ycirzht0+fYs7ALXxubkQNDz9Mo+oEly1dWTuiNC2sq6L2NY68CvQf/zmg==
+X-Gm-Gg: ASbGncv5BJo9vaX5OYOArCve24MHSO3gdxbiyN9MT7SZHRDYGfJ6oUTKyPIuC1Ox059
+	0wZB4ufxKweZ1FOeaEvOfz+1Xk445f9sK4hiqbMuMRL/eRgL50jANwEKRFsIpHr4oCCelkhP+il
+	e7jiSuqQcpweALHbLP5GxzHvkLvXuDPAABWKZYAYpe8IBtBL8QNb5dLsTvlBPEVWNk0SeOI1AkN
+	xwKVoK8dNFzfvaRAleaSqbTjZDh4nyEVurzOBVNDXxIaeToMgyZPXwBd9aX1mIHBqOTD/HbNExv
+	HZU09X+ufi4TuQYy97YbN+AzRohPUUJas7tZv+uHOfZBCkw=
+X-Google-Smtp-Source: AGHT+IE+p9AdVWAbogJKtTtIDSQ6PIezJHYtvXQPirx9NevnOd5AZIfGfuGkS7RN+I8riOqFiy0+0Q==
+X-Received: by 2002:a05:6000:4025:b0:38f:23c4:208c with SMTP id ffacd0b85a97d-3911561aba1mr6411782f8f.18.1741186991153;
+        Wed, 05 Mar 2025 07:03:11 -0800 (PST)
+Received: from localhost ([109.238.218.228])
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-43bd426c01bsm20136605e9.2.2025.03.05.07.03.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 05 Mar 2025 07:03:10 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 5 Mar 2025 16:00:24 +0100
-X-Gm-Features: AQ5f1JoZXK_aRBz6d9wqEY9SL_bojo1xv7t4_P7S268_FEbtAOqp55TChgqTk4o
-Message-ID: <CA+chaQfLJZe4tPh_xj65B-dBOrfJDFBz3GqSEWd1CT-9W+4rxQ@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH] uutils-coreutils: use correct variables
-To: Etienne Cordonnier <ecordonnier@snap.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Etienne Cordonnier <ecordonnier@snap.com>,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] uutils-coreutils: remove LIBCLANG_PATH, SELINUX_LIB_DIR, SELINUX_INCLUDE_DIR variables
+Date: Wed,  5 Mar 2025 16:03:06 +0100
+Message-ID: <20250305150306.2628246-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.48.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 05 Mar 2025 15:00:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115757
+ <openembedded-devel@lists.openembedded.org>; Wed, 05 Mar 2025 15:03:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115758
 
-Hi Etienne,
+* don't seem to be needed, I don't see any failures or changes after removing them
 
-I've tried to remove all 3 variables and it still builds for me fine.
-I'll send review to do that shortly, please test it in your setup as I
-don't use uutils-coreutils, I was updating it just to prevent people
-copy-pasting ${WORKDIR}/recipe-sysroot-native${libdir} like Robert did
-in thin-provisioning-tools:
-https://lists.openembedded.org/g/openembedded-devel/message/115743
+* they were needed before in older version as explained by Etienne in:
+  https://lists.openembedded.org/g/openembedded-devel/message/115756
 
-On Wed, Mar 5, 2025 at 3:28=E2=80=AFPM Etienne Cordonnier <ecordonnier@snap=
-.com> wrote:
->
-> Hi Martin,
-> regarding SELINUX_INCLUDE_DIR, it was definitely needed as I implemented =
-the recipe. During implementation I submitted this patch to selinux-sys ( h=
-ttps://github.com/koutheir/selinux-sys/commit/a6667c404ecc33266f66e9516bb8e=
-30150c41ec2 ) to correctly use this variable, and was getting a build error=
- without this fix because the rust crate selinux-sys was not finding the se=
-linux header-file (specifically, the bindgen tool).
->
-> However, this was in 2022, and since then there has been this patch in se=
-linux-sys: https://github.com/koutheir/selinux-sys/commit/d3ea4674e18c52409=
-18348bea4ec6248e50516e5 , and it seems that the variable is not needed any =
-more.
-> At least I'm not able to reproduce the build error which I was getting, e=
-ven with commenting out SELINUX_LIB_DIR and SELINUX_INCLUDE_DIR.
->
-> The header-file is used for generating rust code from the C header-file u=
-sing bindgen, so I don't think it makes a difference whether the native ver=
-sion or the target version is used.
->
-> This is the old build error I was getting:
->   process didn't exit successfully: `/workdir/build/tmp-glibc/work/armv8a=
--linux/uutils-coreutils/0.0.14.AUTOINC+43a5b8c7d7-r0/build/target/release/b=
-uild/selinux-sys-0849198bc1fef4a4/build-script-build` (exit status: 101)
->   --- stdout
->   cargo:root=3D/workdir/build/tmp-glibc/work/armv8a-linux/uutils-coreutil=
-s/0.0.14.AUTOINC+43a5b8c7d7-r0/build/target/aarch64-snap-linux/release/buil=
-d/selinux-sys-d96748d49908959f/out
->   cargo:rerun-if-env-changed=3DSELINUX_STATIC_aarch64-snap-linux
->   cargo:rerun-if-env-changed=3DSELINUX_STATIC_aarch64_snap_linux
->   cargo:rerun-if-env-changed=3DTARGET_SELINUX_STATIC
->
-> |   --- stderr
-> |   src/selinux-sys.h:1:10: fatal error: 'selinux/selinux.h' file not fou=
-nd
-> |   src/selinux-sys.h:1:10: fatal error: 'selinux/selinux.h' file not fou=
-nd, err: true
->
-> =C3=89tienne
->
->
-> On Wed, Mar 5, 2025 at 11:53=E2=80=AFAM Martin Jansa <martin.jansa@gmail.=
-com> wrote:
->>
->> * use STAGING_LIBDIR_NATIVE variable for LIBCLANG_PATH and SELINUX_LIB_D=
-IR
->>   and STAGING_INCDIR_NATIVE variable for SELINUX_INCLUDE_DIR
->>   not sure why it uses native version and not target, but at least use
->>   correct variable
->>
->> * hardcoding:
->>   ${WORKDIR}/recipe-sysroot-native${libdir}
->>   is just wrong when there is a better variable
->>
->> * This path won't be correct for multilib builds where target ${libdir}
->>   might be e.g. /usr/lib32 while native libdir is /usr/lib.
->>
->> * even with meta-selinux added to my builds I don't see any failure
->>   maybe these variables aren't really used?
->>
->> * use STAGING_LIBDIR_NATIVE variable which uses correct ${libdir_native}
->>
->> OE qemuarm64-multilib@ /OE/build/oe-core $ bitbake-getvar LIBCLANG_PATH =
--r uutils-coreutils
->>   #
->>   # $LIBCLANG_PATH [2 operations]
->>   #   exported /OE/build/oe-core/meta-openembedded/meta-oe/recipes-core/=
-uutils-coreutils/uutils-coreutils_0.0.29.bb:33
->>   #     [export] "1"
->>   #   set /OE/build/oe-core/meta-openembedded/meta-oe/recipes-core/uutil=
-s-coreutils/uutils-coreutils_0.0.29.bb:33
->>   #     "${WORKDIR}/recipe-sysroot-native${libdir}"
->>   # pre-expansion value:
->>   #   "${WORKDIR}/recipe-sysroot-native${libdir}"
->> export LIBCLANG_PATH=3D"/OE/build/oe-core/tmp/work/cortexa57-oe-linux/uu=
-tils-coreutils/0.0.29/recipe-sysroot-native/usr/lib64"
->>
->> OE qemuarm64-multilib@ /OE/build/oe-core $ bitbake-getvar STAGING_LIBDIR=
-_NATIVE -r uutils-coreutils
->>   #
->>   # $STAGING_LIBDIR_NATIVE
->>   #   set /OE/build/oe-core/openembedded-core/meta/conf/bitbake.conf:425
->>   #     "${STAGING_DIR_NATIVE}${libdir_native}"
->> STAGING_LIBDIR_NATIVE=3D"/OE/build/oe-core/tmp/work/cortexa57-oe-linux/u=
-utils-coreutils/0.0.29/recipe-sysroot-native/usr/lib"
->>
->> OE qemuarm64-multilib@ /OE/build/oe-core $ bitbake-getvar LIBCLANG_PATH =
--r lib32-uutils-coreutils
->>   #
->>   # $LIBCLANG_PATH [2 operations]
->>   #   exported /OE/build/oe-core/meta-openembedded/meta-oe/recipes-core/=
-uutils-coreutils/uutils-coreutils_0.0.29.bb:33
->>   #     [export] "1"
->>   #   set /OE/build/oe-core/meta-openembedded/meta-oe/recipes-core/uutil=
-s-coreutils/uutils-coreutils_0.0.29.bb:33
->>   #     "${WORKDIR}/recipe-sysroot-native${libdir}"
->>   # pre-expansion value:
->>   #   "${WORKDIR}/recipe-sysroot-native${libdir}"
->> export LIBCLANG_PATH=3D"/OE/build/oe-core/tmp/work/armv7at2-neon-oemllib=
-32-linux-gnueabi/lib32-uutils-coreutils/0.0.29/recipe-sysroot-native/usr/li=
-b32"
->>
->> OE qemuarm64-multilib@ /OE/build/oe-core $ bitbake-getvar STAGING_LIBDIR=
-_NATIVE -r lib32-uutils-coreutils
->>   #
->>   # $STAGING_LIBDIR_NATIVE
->>   #   set /OE/build/oe-core/openembedded-core/meta/conf/bitbake.conf:425
->>   #     "${STAGING_DIR_NATIVE}${libdir_native}"
->> STAGING_LIBDIR_NATIVE=3D"/OE/build/oe-core/tmp/work/armv7at2-neon-oemlli=
-b32-linux-gnueabi/lib32-uutils-coreutils/0.0.29/recipe-sysroot-native/usr/l=
-ib"
->>
->> Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
->> ---
->>  .../uutils-coreutils/uutils-coreutils_0.0.29.bb             | 6 +++---
->>  1 file changed, 3 insertions(+), 3 deletions(-)
->>
->> diff --git a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.=
-29.bb b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.29.bb
->> index 19d628f735..d0a7532984 100644
->> --- a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.29.bb
->> +++ b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.29.bb
->> @@ -30,9 +30,9 @@ CARGO_BUILD_FLAGS +=3D "${@bb.utils.contains('PACKAGEC=
-ONFIG', 'selinux', '--featur
->>
->>  DEPENDS +=3D "${@bb.utils.contains('PACKAGECONFIG', 'selinux', 'clang-n=
-ative libselinux-native', '', d)}"
->>
->> -export LIBCLANG_PATH =3D "${WORKDIR}/recipe-sysroot-native${libdir}"
->> -export SELINUX_LIB_DIR =3D "${WORKDIR}/recipe-sysroot-native${libdir}"
->> -export SELINUX_INCLUDE_DIR =3D "${WORKDIR}/recipe-sysroot-native${inclu=
-dedir}"
->> +export LIBCLANG_PATH =3D "${STAGING_LIBDIR_NATIVE}"
->> +export SELINUX_LIB_DIR =3D "${STAGING_LIBDIR_NATIVE}"
->> +export SELINUX_INCLUDE_DIR =3D "${STAGING_INCDIR_NATIVE}"
->>
->>  # The code which follows is strongly inspired from the GNU coreutils bi=
-tbake recipe:
->>
->> --
->> 2.48.1
->>
+regarding SELINUX_INCLUDE_DIR, it was definitely needed as I implemented the recipe. During implementation I submitted this patch to selinux-sys ( https://github.com/koutheir/selinux-sys/commit/a6667c404ecc33266f66e9516bb8e30150c41ec2 ) to correctly use this variable, and was getting a build error without this fix because the rust crate selinux-sys was not finding the selinux header-file (specifically, the bindgen tool).
+
+However, this was in 2022, and since then there has been this patch in selinux-sys: https://github.com/koutheir/selinux-sys/commit/d3ea4674e18c5240918348bea4ec6248e50516e5 , and it seems that the variable is not needed any more.
+At least I'm not able to reproduce the build error which I was getting, even with commenting out SELINUX_LIB_DIR and SELINUX_INCLUDE_DIR.
+
+The header-file is used for generating rust code from the C header-file using bindgen, so I don't think it makes a difference whether the native version or the target version is used.
+
+This is the old build error I was getting:
+  process didn't exit successfully: `/workdir/build/tmp-glibc/work/armv8a-linux/uutils-coreutils/0.0.14.AUTOINC+43a5b8c7d7-r0/build/target/release/build/selinux-sys-0849198bc1fef4a4/build-script-build` (exit status: 101)
+  --- stdout
+  cargo:root=/workdir/build/tmp-glibc/work/armv8a-linux/uutils-coreutils/0.0.14.AUTOINC+43a5b8c7d7-r0/build/target/aarch64-snap-linux/release/build/selinux-sys-d96748d49908959f/out
+  cargo:rerun-if-env-changed=SELINUX_STATIC_aarch64-snap-linux
+  cargo:rerun-if-env-changed=SELINUX_STATIC_aarch64_snap_linux
+  cargo:rerun-if-env-changed=TARGET_SELINUX_STATIC
+
+|   --- stderr
+|   src/selinux-sys.h:1:10: fatal error: 'selinux/selinux.h' file not found
+|   src/selinux-sys.h:1:10: fatal error: 'selinux/selinux.h' file not found, err: true
+
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+---
+ .../recipes-core/uutils-coreutils/uutils-coreutils_0.0.29.bb  | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.29.bb b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.29.bb
+index d0a7532984..09f6071e71 100644
+--- a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.29.bb
++++ b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.29.bb
+@@ -30,10 +30,6 @@ CARGO_BUILD_FLAGS += "${@bb.utils.contains('PACKAGECONFIG', 'selinux', '--featur
+ 
+ DEPENDS += "${@bb.utils.contains('PACKAGECONFIG', 'selinux', 'clang-native libselinux-native', '', d)}"
+ 
+-export LIBCLANG_PATH = "${STAGING_LIBDIR_NATIVE}"
+-export SELINUX_LIB_DIR = "${STAGING_LIBDIR_NATIVE}"
+-export SELINUX_INCLUDE_DIR = "${STAGING_INCDIR_NATIVE}"
+-
+ # The code which follows is strongly inspired from the GNU coreutils bitbake recipe:
+ 
+ # [ df mktemp nice printenv base64 gets a special treatment and is not included in this
+-- 
+2.48.1
+
 
