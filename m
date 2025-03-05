@@ -1,116 +1,205 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 59A64C19F32
-	for <webhook@archiver.kernel.org>; Wed,  5 Mar 2025 15:03:14 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.web11.15109.1741186993241279676
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE216C19F32
+	for <webhook@archiver.kernel.org>; Wed,  5 Mar 2025 15:52:34 +0000 (UTC)
+Received: from mail-yb1-f172.google.com (mail-yb1-f172.google.com [209.85.219.172])
+ by mx.groups.io with SMTP id smtpd.web11.16519.1741189948733402882
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Mar 2025 07:03:13 -0800
+ Wed, 05 Mar 2025 07:52:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KfSeuHnG;
- spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-390dd35c78dso627790f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Mar 2025 07:03:13 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CqXOexNl;
+ spf=pass (domain: gmail.com, ip: 209.85.219.172, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f172.google.com with SMTP id 3f1490d57ef6-e5dc299dee9so6476116276.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Mar 2025 07:52:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741186991; x=1741791791; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=/1bDwdCpsKr67V0Mk0qwUuJKOMS08b67pdFaScMz2kY=;
-        b=KfSeuHnGchw20xQuxY/6WnUDu36ksABB612KXId3qwN6lZKfY1E9Kjn47lFYiKdK6s
-         VgceiWVkRPcNYYa4WcpxFML2ZU0ktY04+NO2Q0gkPXXeZduLGszeFvaNIhaPVbgTTRm2
-         gr8UjIa+XYdLOl4JaZWeEkuZDk3TvQlBHIM2IBMAe8PSkIf9LjvYH9GYRbVv92tT/iG6
-         C+M5Dd+khQlqVihbtnDN6fjlrcaE6GeZnG8+AaURpb9UMIsxz0pPbAv66hI8DfTLEBc0
-         +bji5l4vYaQrLQpe6VzyN6EUEhTWEku4bnDnHDOLdj+4fT6u2Ij/F3AVse7gilqqNrkG
-         aXxA==
+        d=gmail.com; s=20230601; t=1741189948; x=1741794748; darn=lists.openembedded.org;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=0w9WPwuGvWbHhawquJW/7BnBfWYnzFvj6b5FFXKKB6g=;
+        b=CqXOexNlVT078Gde8CVxwebRNzBa53eCmPZ2zK1GknYdhkcyF8bu6UXlpYRbrbwTCT
+         JVJ3nEdLN+8sAiewpRw4vCVMXRBeMSiCdKv8FaFCelDB8rKFSIjEUZyVwsUcxrtIK/ov
+         GSt+wV/07vosXYcN+Ccpm8MmTc8zwdmeq5UNI7plTwjQ2oJUTnT8YLc2Jq2SkKYeXs6S
+         Nlrkv6H3NTliBcaEEBjO2nB04lgOTcJ/1Kj8CS8MzFlAaDSyjWNt1bHt2305z7JTCZpr
+         2mWYyz/uyHdwnhNck+ZHEHhuBTmRBD8kCWtGzx9bm/UsxuZQPhkV4r5c38ByFZ5bry77
+         YPtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741186991; x=1741791791;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=/1bDwdCpsKr67V0Mk0qwUuJKOMS08b67pdFaScMz2kY=;
-        b=W1Jg1JKSnQ2DZQhup1mNCbhVqcAvhWTUYPdjcUhq49ZMVETF6q74WL31YPKxu/dNwy
-         QNiEQdP8tuzsCZEC7wjz27Hqf0KA8iKwBuT1a5Y2I1eNcAIxtDAJXSFefCDgnAIWVYPU
-         /X/NFxaw6HwGOZ32ZGne4N9Zc2YpzMoHsfnsO30fLR0hoD1N1f81Ipdxqri18ieLfNme
-         5G1WRJ6K5YhDuIHgFTdFTNd48UG0N5DmmfATpoF9I+R9smYUE5bbwUn9gizMZsYsax6W
-         kq+iA+UtvXy8bDk+FLum834DXsLI62fPcMeie7xzuOxQeKtMNibT3YzXsMc2KzJlbaAO
-         gbTg==
-X-Gm-Message-State: AOJu0YwjQxNdu7HYPxGrSOWcAND/CzDRgBBGK9TilOQxjv2H0lth7Pfv
-	Ycirzht0+fYs7ALXxubkQNDz9Mo+oEly1dWTuiNC2sq6L2NY68CvQf/zmg==
-X-Gm-Gg: ASbGncv5BJo9vaX5OYOArCve24MHSO3gdxbiyN9MT7SZHRDYGfJ6oUTKyPIuC1Ox059
-	0wZB4ufxKweZ1FOeaEvOfz+1Xk445f9sK4hiqbMuMRL/eRgL50jANwEKRFsIpHr4oCCelkhP+il
-	e7jiSuqQcpweALHbLP5GxzHvkLvXuDPAABWKZYAYpe8IBtBL8QNb5dLsTvlBPEVWNk0SeOI1AkN
-	xwKVoK8dNFzfvaRAleaSqbTjZDh4nyEVurzOBVNDXxIaeToMgyZPXwBd9aX1mIHBqOTD/HbNExv
-	HZU09X+ufi4TuQYy97YbN+AzRohPUUJas7tZv+uHOfZBCkw=
-X-Google-Smtp-Source: AGHT+IE+p9AdVWAbogJKtTtIDSQ6PIezJHYtvXQPirx9NevnOd5AZIfGfuGkS7RN+I8riOqFiy0+0Q==
-X-Received: by 2002:a05:6000:4025:b0:38f:23c4:208c with SMTP id ffacd0b85a97d-3911561aba1mr6411782f8f.18.1741186991153;
-        Wed, 05 Mar 2025 07:03:11 -0800 (PST)
-Received: from localhost ([109.238.218.228])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-43bd426c01bsm20136605e9.2.2025.03.05.07.03.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Mar 2025 07:03:10 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Etienne Cordonnier <ecordonnier@snap.com>,
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] uutils-coreutils: remove LIBCLANG_PATH, SELINUX_LIB_DIR, SELINUX_INCLUDE_DIR variables
-Date: Wed,  5 Mar 2025 16:03:06 +0100
-Message-ID: <20250305150306.2628246-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.48.1
+        d=1e100.net; s=20230601; t=1741189948; x=1741794748;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=0w9WPwuGvWbHhawquJW/7BnBfWYnzFvj6b5FFXKKB6g=;
+        b=WwDNJwEpfwgjwKWXQQMxsiNNTGK/Pk+FgW5H9qxdJGws+vbjbu2sNW3/OgX2t1QLg7
+         wOlHn+MRYAEUIwmF7gZd36Qg+zKBrwrge0jUaqHPalgvOdWMkJvzhevK4j853g9cDGfo
+         af989P8aWzfc8n26TmsdpZ03kR4efwrYwTpzP0J9EjuxOViOoh/6Uc50ZHfrwFAxAzBa
+         +E0Sq5nEVwzOk+m0ofZtfHgJDst9jXkznLT/gKs84jY4V4yLuqZNqIMyX4Ql/mtvfuSH
+         +gqMi8YnAV+XfzVZBdJlluBW8AzE4MyvtwWy0/UTaadPfB3+imcrYJ67/Gp/glQVscAM
+         aDxA==
+X-Forwarded-Encrypted: i=1; AJvYcCXNwT5W3tqRC9+n7c3dpHVMGQ69Y4ltGZ9B3aYui/ijC3kw4EQNMe893pQz8xaQRti2DWyb3JAaxk+WvLSQjf64hw0=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YxFVh+481VO9rptj9wwQdqIaPg3FtKc/+rCL1LLyVWuRzfBBvaA
+	ZbzFWhlGtTnyTtq/tDNfDOpeVvrKSOza0CZyOhMI41VbpuKTBEEdXQOY6eGf
+X-Gm-Gg: ASbGncv1Xsv6hw/zuhyqS3ABTyv2ndm1q0Xm3HIcEHn3+JhQQJSM/CQChMAis3dPcK5
+	XraQRncbE77SHwz3+f+zZaCgMJ1OHev3bYmOjPxsT6bFsPNvafZvIp9yrYHtVwqXL7xnNDtT/76
+	x/vWx/dcf5c6HON3iR/pYfs9v5Gm/Ycdz1AG9yALBk3EVJg9VT16UI2tgMG4I5u71ifZAjjogOR
+	rdkyduHJCHy8XCYACM4sYbLK2t39YLCDtsKuwnGWC5WXk+R2vFJMYU/7/qUj0eWfblvLM9D8a8j
+	A21aTvCDazaWt2ni28JLdaexgwwR8ldaLIdjR56yLP/hZbcoRMy37fO8xeH2PO7Je7Saj6FmDVd
+	cjHlkO/xOE4qdKzI87Yyu
+X-Google-Smtp-Source: AGHT+IFdYZRFD78fBIQvKd736r+E2iT5PAn27lu2rLhH9GLH9ZYk2O8+zjKxIMuc6wl5XLo7+Pntlg==
+X-Received: by 2002:a05:6902:918:b0:e5d:de0e:57f5 with SMTP id 3f1490d57ef6-e611e1dc5d2mr5640894276.28.1741189947798;
+        Wed, 05 Mar 2025 07:52:27 -0800 (PST)
+Received: from ?IPV6:2600:1700:45dd:7000:17d1:9b04:7e9e:50d7? ([2600:1700:45dd:7000:17d1:9b04:7e9e:50d7])
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e60a3a335a8sm4303290276.22.2025.03.05.07.52.27
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 05 Mar 2025 07:52:27 -0800 (PST)
+Message-ID: <6096f37f-7ec2-4816-baf0-97973927b279@gmail.com>
+Date: Wed, 5 Mar 2025 10:52:26 -0500
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Subject: scarthgap merge request: March 5th
+Autocrypt: addr=akuster808@gmail.com; keydata=
+ xsDNBGNNaZMBDAC6/Mhpw3EGOOTPtIpcUHT4lI974zN/QqccMPxH4oyBPRJbjVImYs9avXwV
+ Ae9xoWKMM/vocEZWm6SOESZSGf+7l05Eo6MxU50cIQh0/bcOcdDAtFRDk4pZIL6X7vGzvFe6
+ 17tfNwKrTPgDFSSvq6XLUOqukInaVMHPeZum5GNnfuJswSDEQdxGTgudLWhCYwwoJ1AsVhg1
+ nJXjQLOGUHFAZPYMhTak5jFXwG+CFzJ1OPpoAfcjQGYEYY5k5Yr1dESl/zgZSwwRLAAXo6JZ
+ lm1rdd0c54XG4ah6fvZkd8r05uBVvbvmrdw5OohqqWzMq7RB9DAsszLvOaxN1epwUYnpkQ6x
+ yYRBQxt766hLxtW6+bIXUZdinUsc0cD+MlLfynTzpT3eJPhvU9EtpTkA7hlFtHrhENRlT5rE
+ F1ZCGykIhg5J/BL/JO3AISgliu0pPLg9r6tgZKu8r2LBf05LJ1vT2P1wVwlzpAdgHKAmTDF8
+ MFEASfeJ4o9TrVFGbt8+cA0AEQEAAc0hYWt1c3RlcjgwOCA8YWt1c3RlcjgwOEBnbWFpbC5j
+ b20+wsEHBBMBCAAxFiEEztCAddKAZuvtYngBeSnycbzrke8FAmNNaZQCGwMECwkIBwUVCAkK
+ CwUWAgMBAAAKCRB5KfJxvOuR703oDAC4coUucV3gE+pNQAJcNWqIQwZHiwxbMy2fBgvTP0bx
+ TQj6ZFl4tkiXGydUy9c2lcOj4XfaJuG85Z24IIJE0d8hWZMOZkSv5bmyB/NxbM5xRnPkHb6M
+ n58wMSRCfNj/fsOoJE9nj5s41ktg1CA9QFBl9Dt0/8J/Mq+TxOKqYvzL4L8KEIw9nsi/yHQX
+ ukXDwI2V01hTPZ6P7a4cZsjuvzCVN/WK2N3LzoVhQZHOOHGgx3h8XmsXMZ2ZxKjIdFTO2gFS
+ 48zXa4+LW/ZyJIUlnBIUdSnpS826wSq6Zn3TyvLJrFD3KSviX0N48htIfiYFJmTcGdDU+Zqr
+ wKnPQWdZXgWLsv+3deGZ8z0UCdt3n/OSwRML3gFfYd7QBLazXIkFyplFmgOLwXkf+YifwSbu
+ P3KTOpYN9bcl1Og2zU1dPTEg7RndDAvRUUA+XWrp7VM5gZgc0UFRNkrf4CZhxuMwATCJQVPj
+ aII+TOxThBkx6NJqXD3tvlNozjLy4fLNZd8sAsrOwM0EY01plAEMAJ5IoQo1AbOAoMYUytqx
+ zi1uOQa+ak48yVg4llEs55D9h9ANFEY8C5CyEYyXYKjHCgepUUHDRKIMIMxxzYLKDkd8bgvt
+ +cmi1Jj36Wrzrf9qGFq5SvGL66IoUBCTsN64UexxbnNWMDF8qO2aXLvJZtfFJfYGc1ATDw8i
+ 96pv+FpjE3N76RdYRSFv5UGRqSKhT6jGlVMHb+Z/h1BOIsEBmbtgCozzJ45zhOY9635B4D7w
+ i6CB2Aau3/FycPrKk/ZvkSq28tGYWwuhr/fvfvowg+IeClP1oCdKbaWsEwkGTN/PsRM8dPPe
+ n07jesJUgpiHCUTF9oY3wJ1a86otszmWbvtJieM7vOxP3YnzF/VVFgDhTzRS0VqAjNRNOMoF
+ E7ENS8o7uj7jrrGPuuM9cOhuDqqHwla3Rh0VX+W0//8qGZJ61oGV9paoGUb4PoRqC8ZpLrMB
+ Z+f1VQ4iH7rzSQTOLEqGMZ+A34266TtKZKgmBxyqgNFd1HEeO4PD46ycLpnZAQARAQABwsD2
+ BBgBCAAgFiEEztCAddKAZuvtYngBeSnycbzrke8FAmNNaZUCGwwACgkQeSnycbzrke+SWgv/
+ QvvX84fAHEl7dkhla/oPdqY2bULh+hOxpo3WZmFhHi+41z2GhOJ78S3mY3yD+O7rdXkQIgIu
+ bZDOIBMJc0lY/qKfXGpFOg5b8/hW3pYdjmUP1NQmdFK4XRLRL4OhLttgxVgO2yqDtlt9x1o3
+ RLgTSJNsy/gQzUJw4m1zYs9qPRz7xglHwrn0OdDwgk6UofiS31cTZgz7txdNJ5pMNEOcjsaD
+ KE+3jd6mAOz/VTG7mH3/5z0t+g9onQmfxBFpgxSM8HVtmjT4KWkqqUJzyXLtawbxhdv+fcUv
+ 5qUSr9ktwA8NJHmIHHcXBqiZLtLWFMJrdsgTFvjCXmTpm3ncsHS9L+JLVwIVCmUQUUCN1LhG
+ itDSpYIEGrZObj82rX1wvxf/ZQ8VXS+owIR2F4yeeqPH/CyrPA1ASdtt+Am28/dJ2krr72at
+ J++uLxA0cein1kjcosFDpQscnDcPzohnGyyjgEd6VwelZboIS1jt4lIa1badtV+cWMGMgM8W
+ ApZ86eOP
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 05 Mar 2025 15:03:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115758
+ <openembedded-devel@lists.openembedded.org>; Wed, 05 Mar 2025 15:52:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115759
 
-* don't seem to be needed, I don't see any failures or changes after removing them
+The following changes since commit 4f11a12b2352bbdfafb6b7d956bf424af4992977:
 
-* they were needed before in older version as explained by Etienne in:
-  https://lists.openembedded.org/g/openembedded-devel/message/115756
+   modejs: upgrade 20.18.0 -> 20.18.2 (2025-02-04 15:04:57 -0800)
 
-regarding SELINUX_INCLUDE_DIR, it was definitely needed as I implemented the recipe. During implementation I submitted this patch to selinux-sys ( https://github.com/koutheir/selinux-sys/commit/a6667c404ecc33266f66e9516bb8e30150c41ec2 ) to correctly use this variable, and was getting a build error without this fix because the rust crate selinux-sys was not finding the selinux header-file (specifically, the bindgen tool).
+are available in the Git repository at:
 
-However, this was in 2022, and since then there has been this patch in selinux-sys: https://github.com/koutheir/selinux-sys/commit/d3ea4674e18c5240918348bea4ec6248e50516e5 , and it seems that the variable is not needed any more.
-At least I'm not able to reproduce the build error which I was getting, even with commenting out SELINUX_LIB_DIR and SELINUX_INCLUDE_DIR.
+   https://git.openembedded.org/meta-openembedded scarthgap-next
 
-The header-file is used for generating rust code from the C header-file using bindgen, so I don't think it makes a difference whether the native version or the target version is used.
+for you to fetch changes up to 6c9f1f8d4538119803bf793747b65e4d23c33544:
 
-This is the old build error I was getting:
-  process didn't exit successfully: `/workdir/build/tmp-glibc/work/armv8a-linux/uutils-coreutils/0.0.14.AUTOINC+43a5b8c7d7-r0/build/target/release/build/selinux-sys-0849198bc1fef4a4/build-script-build` (exit status: 101)
-  --- stdout
-  cargo:root=/workdir/build/tmp-glibc/work/armv8a-linux/uutils-coreutils/0.0.14.AUTOINC+43a5b8c7d7-r0/build/target/aarch64-snap-linux/release/build/selinux-sys-d96748d49908959f/out
-  cargo:rerun-if-env-changed=SELINUX_STATIC_aarch64-snap-linux
-  cargo:rerun-if-env-changed=SELINUX_STATIC_aarch64_snap_linux
-  cargo:rerun-if-env-changed=TARGET_SELINUX_STATIC
+   nginx: fix CVE-2025-23419 (2025-03-03 08:09:03 -0500)
 
-|   --- stderr
-|   src/selinux-sys.h:1:10: fatal error: 'selinux/selinux.h' file not found
-|   src/selinux-sys.h:1:10: fatal error: 'selinux/selinux.h' file not found, err: true
+----------------------------------------------------------------
+Alexandre Truong (1):
+       source-han-sans-*-fonts: Switch away from SVN fetcher in SRC_URI
 
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
----
- .../recipes-core/uutils-coreutils/uutils-coreutils_0.0.29.bb  | 4 ----
- 1 file changed, 4 deletions(-)
+Changqing Li (3):
+       dlt-daemon: make DLT_WatchdogSec configurable
+       abseil-cpp: upgrade 20240116.2 -> 20240116.3
+       nginx: fix CVE-2025-23419
 
-diff --git a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.29.bb b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.29.bb
-index d0a7532984..09f6071e71 100644
---- a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.29.bb
-+++ b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.29.bb
-@@ -30,10 +30,6 @@ CARGO_BUILD_FLAGS += "${@bb.utils.contains('PACKAGECONFIG', 'selinux', '--featur
- 
- DEPENDS += "${@bb.utils.contains('PACKAGECONFIG', 'selinux', 'clang-native libselinux-native', '', d)}"
- 
--export LIBCLANG_PATH = "${STAGING_LIBDIR_NATIVE}"
--export SELINUX_LIB_DIR = "${STAGING_LIBDIR_NATIVE}"
--export SELINUX_INCLUDE_DIR = "${STAGING_INCDIR_NATIVE}"
--
- # The code which follows is strongly inspired from the GNU coreutils bitbake recipe:
- 
- # [ df mktemp nice printenv base64 gets a special treatment and is not included in this
--- 
-2.48.1
+Chris Laplante (1):
+       poco: fix branch: master => poco-1.12.5
+
+Etienne Cordonnier (1):
+       uutils-coreutils: fix compilation with selinux
+
+Leon Anavi (1):
+       sip: Fix homepage and license
+
+Peter Kjellerstedt (2):
+       ebtables: Remove the dependecy on bash
+       libeigen: Remove LGPL code
+
+Peter Marko (1):
+       python3-grpcio(-tools): fix build concurrency issue
+
+Soumya Sambu (2):
+       python3-django: upgrade 5.0.10 -> 5.0.11
+       python3-django: upgrade 4.2.17 -> 4.2.18
+
+Trevor Woerner (1):
+       iperf3: throughput fix
+
+Vijay Anusuri (1):
+       openjpeg: upgrade 2.5.0 -> 2.5.3
+
+  .../ebtables/ebtables-2.0.11/ebtables-legacy-save               | 19 +-
+  meta-networking/recipes-filter/ebtables/ebtables_2.0.11.bb |    2 -
+  .../iperf3/iperf3/do-not-listen-to-old-udp-prot-listener.patch  | 30 +
+  meta-oe/recipes-benchmark/iperf3/iperf3_3.16.bb |    1 +
+  ...1-Cargo.lock-revert-to-selinux-sys-0.6.9-and-fts-sys-0.patch | 178 
++++++
+  .../recipes-core/uutils-coreutils/uutils-coreutils-crates.inc   | 20 +-
+  .../recipes-core/uutils-coreutils/uutils-coreutils_0.0.28.bb |    3 +-
+  .../{abseil-cpp_20240116.2.bb => abseil-cpp_20240116.3.bb} |    2 +-
+  meta-oe/recipes-devtools/sip/sip_6.8.6.bb |    4 +-
+  ...CMakeLists-txt-make-DLT_WatchdogSec-can-be-set-by-user.patch | 40 ++
+  meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb |    1 +
+  ...-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch} | 10 +-
+  .../openjpeg/{openjpeg_2.5.0.bb => openjpeg_2.5.3.bb} |    4 +-
+  .../ttf-fonts/source-han-sans-cn-fonts_2.004.bb |    7 +-
+  .../ttf-fonts/source-han-sans-jp-fonts_2.004.bb |    7 +-
+  .../ttf-fonts/source-han-sans-kr-fonts_2.004.bb |    7 +-
+  .../ttf-fonts/source-han-sans-tw-fonts_2.004.bb |    7 +-
+  .../libeigen/0002-Remove-LGPL-Code-and-references.patch         | 1040 
++++++++++++++++++++++++++++
+  meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb |    9 +-
+  meta-oe/recipes-support/poco/poco_1.12.5p2.bb |    2 +-
+  .../{python3-django_4.2.17.bb => python3-django_4.2.18.bb} |    4 +-
+  .../{python3-django_5.0.10.bb => python3-django_5.0.11.bb} |    2 +-
+  .../recipes-devtools/python/python3-grpcio-tools_1.62.2.bb |    4 +
+  meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb |    4 +
+  meta-webserver/recipes-httpd/nginx/files/CVE-2025-23419.patch   | 87 +++
+  meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb |    3 +-
+  26 files changed, 1441 insertions(+), 56 deletions(-)
+  create mode 100644 
+meta-oe/recipes-benchmark/iperf3/iperf3/do-not-listen-to-old-udp-prot-listener.patch
+  create mode 100644 
+meta-oe/recipes-core/uutils-coreutils/files/0001-Cargo.lock-revert-to-selinux-sys-0.6.9-and-fts-sys-0.patch
+  rename meta-oe/recipes-devtools/abseil-cpp/{abseil-cpp_20240116.2.bb 
+=> abseil-cpp_20240116.3.bb} (97%)
+  create mode 100644 
+meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-CMakeLists-txt-make-DLT_WatchdogSec-can-be-set-by-user.patch
+  rename 
+meta-oe/recipes-graphics/openjpeg/openjpeg/{0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch 
+=> 0001-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch} (75%)
+  rename meta-oe/recipes-graphics/openjpeg/{openjpeg_2.5.0.bb => 
+openjpeg_2.5.3.bb} (82%)
+  create mode 100644 
+meta-oe/recipes-support/libeigen/libeigen/0002-Remove-LGPL-Code-and-references.patch
+  rename meta-python/recipes-devtools/python/{python3-django_4.2.17.bb 
+=> python3-django_4.2.18.bb} (63%)
+  rename meta-python/recipes-devtools/python/{python3-django_5.0.10.bb 
+=> python3-django_5.0.11.bb} (56%)
+  create mode 100644 
+meta-webserver/recipes-httpd/nginx/files/CVE-2025-23419.patch
 
 
