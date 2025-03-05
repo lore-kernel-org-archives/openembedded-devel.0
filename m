@@ -2,108 +2,452 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5274DC19F32
-	for <webhook@archiver.kernel.org>; Wed,  5 Mar 2025 08:16:11 +0000 (UTC)
-Received: from mail-lj1-f182.google.com (mail-lj1-f182.google.com [209.85.208.182])
- by mx.groups.io with SMTP id smtpd.web11.8722.1741162567180065229
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ACE37C19F32
+	for <webhook@archiver.kernel.org>; Wed,  5 Mar 2025 09:15:11 +0000 (UTC)
+Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com [209.85.208.172])
+ by mx.groups.io with SMTP id smtpd.web11.9485.1741166106211261499
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Mar 2025 00:16:07 -0800
+ Wed, 05 Mar 2025 01:15:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QQCKJcRq;
- spf=pass (domain: gmail.com, ip: 209.85.208.182, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lj1-f182.google.com with SMTP id 38308e7fff4ca-30ba563a6d1so6502721fa.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Mar 2025 00:16:06 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mmZhKCvc;
+ spf=pass (domain: gmail.com, ip: 209.85.208.172, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lj1-f172.google.com with SMTP id 38308e7fff4ca-30bab0ad5a8so36351171fa.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Mar 2025 01:15:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741162565; x=1741767365; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1741166104; x=1741770904; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9mKv/zSsMgRGSgh510qQrrN1j/2hg4XW75C+mq0wL5g=;
-        b=QQCKJcRqk0FFfVf2aaXPOSRc4QzOb1eOD10cVJLxQUt6QTm5/pnb5I0YrnFY/7G6TD
-         iD99S5tbeHL0X4sI8ArTV2o6VaXrEmQSFmWZmmwWVsHYarabjdesfyAd0rWQoLkuI33J
-         RRBIN0k71XxvYWTdeH3cgSAFYOiCuDVT1LtdFaPV0nSEOVUsOIGLaC3F2wW03fUZYIpH
-         qnmOtAFvw3lE9SqrOv/a4bMBnO2QdU4BltkQAx9LW5lL1KH9KcPOd9DlOa8haVOUHu61
-         PA3xHKqRKRwk784T8HEk3Ypl+LN7n02VufLgxQcQf2UNEVn8G2zPzqw5n9HayrsWE4O+
-         omjQ==
+        bh=D6+ZNqbf+wK+A/IKK+sioDmnfnEn+ccE5ovz0O+a5ZM=;
+        b=mmZhKCvcOJHJY9naDONBA72Rqd2uKMsaoXazNBqSl4cFwQ9nlvOzJXi2b/heLBlyfU
+         MzguEBjrA0TlFulXvkBJnzfdy354xJXXjV0vq/VO8azo5Z5sDDj1L6vF3l5Fosgdmm1g
+         UCg4EfNYcRk4Uq8xEmo9eB+GkVFxP1z0T93nUf9OO1vT27uoOLQoJfxt9KM2OLrPkXVc
+         L24peToxujOqLSpziULL3aBQRC3sELPTaJwxr5gB2Gt4BxPfT6xLVyadsY3anNIQytke
+         ztBVFhwRb9Ao+CFOJUQgrex8qXChOhpLdAmC/c+k2wgNiKxeCmKu2oRXA6/lbFA8jCic
+         ACwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741162565; x=1741767365;
+        d=1e100.net; s=20230601; t=1741166104; x=1741770904;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=9mKv/zSsMgRGSgh510qQrrN1j/2hg4XW75C+mq0wL5g=;
-        b=SaeBGdf8SSXgM5ruM+o7XiEgbmgxs6xJxi4WoqVKSz01zXtZvOYP2FyC9VE1WR45pB
-         00VyR62TFUlEKyTCCdZScQHJdR6WlHT+9reWP9ehrVNYWNtFFXLl2S1w8ldJ6Owp+vuZ
-         0MhJM1nYNPoiA8N9fYqcvLSmV09xqeEtptcRWKZfm6d/IGxYh4U1rDOsEbkmwkrOO77U
-         sur7NAczWoglTsBjjhX59iApfLoxsxmzk9oqfTg0Bo4K+Vr/Op/ObNlDVuqw2MtJs80g
-         TWkiLqx6uv8cVB/7HWWWQO3TS36eoNg6Jhb+CpzZiAJbjZpFo660giRS6ZsV02X/XdRb
-         Dj/A==
-X-Gm-Message-State: AOJu0Yx0RWOunxe13yGc9ZcKY3of6T5sY91qNkco0yhnRlUqYzcM+6E1
-	ijVgixJpSb1GeYvFyjvdMAxgHqx//s0C+ZbHEo1ce1G5X9esQMWRNzr5D/m7mu7/5IWUR6TgxSh
-	EfklND1xI3crS67LNZR1obu6h85R2yNDh
-X-Gm-Gg: ASbGncv/8Xj1AxUkEyj0P+NdtsNgqJgMjO+BnjoIY7GT5RioUrV2FyEaavCoRkEPFBB
-	FDPkGfw3+JjoWoHyDxbVd9BAMlim7y+85BuzMrUjUTNoEBajq8bbBo3HVWKoYibHFETqmLcq/1U
-	RJ9k2N77qYYN6jFlX80obSQPDD3WsZ
-X-Google-Smtp-Source: AGHT+IH++HRh3x4EDI4pJuxtiuVzb4GNaC18DvaCzOxe7m2JQtwEFmgcP3X28QlMK6L5SfnCx2ZI4cBt4808KsVkMJY=
-X-Received: by 2002:a2e:b6cd:0:b0:30b:8f90:bdda with SMTP id
- 38308e7fff4ca-30bd7b2798fmr7722361fa.7.1741162564793; Wed, 05 Mar 2025
- 00:16:04 -0800 (PST)
+        bh=D6+ZNqbf+wK+A/IKK+sioDmnfnEn+ccE5ovz0O+a5ZM=;
+        b=FxGJGL9L2iUmXfDVx3g/wRirACcE8U6m+1mufTZdVC0EAjpIUOTaIZn6ATZSkki4az
+         qn5Fu8MrNcM23QrRhkqxj3EcSJnQjRLB33duQlsV03THltd1/1VQzhUeesJac67+AmHa
+         PYDjWeusQEFFsZGCJ9+FXWRkyN9vSOveEiI84MxRBOcpxjT4YXa7dyAdkYiaS8jck3rc
+         qjSEw0/h8RtTzv3cFgHB4JVpHTYNYyLVqF2dH4XQpnUkqiyDK89bZy240lc0u4xhoH7n
+         i1Y7GWxWKHRP+hm+nTSmPQ4OTujDtJp4jemQO30DYHp75SviqZByyk86jyaDX77aTniT
+         qiFg==
+X-Gm-Message-State: AOJu0Yzi71lp0vHOfZgPsoEaQ1X60N2cL/HvOWWTkilVbA5pYuJx0gBP
+	0HeJIbqqp7sh41P5fzACMuJiBWBI9vd6KN9LZEV2cfYRv562WsmYt4GAoJO8ThVq6w5q+d4UM5e
+	LLwaUtBM4o3BfLw6L+8dGXJyNs7Y=
+X-Gm-Gg: ASbGncsNpWxMF1XGkMHdgZcScZSu0so1xejtluJFXUwEU2pt5ZVmWf+3F8Sm7bePVDe
+	NEt16bEYNhmQOayuS1nlqqhgPpdgWqgi9J7HemNcmwCjyufHhBT3WVN3MNMm9A0MmOKfzT//pQK
+	NXjpqsM6b9LEOAM7im9vWwDThv9mPK
+X-Google-Smtp-Source: AGHT+IFyYOxZIec8+9nT66+BxMMcemg2PHhWBJr7nC13ugOBRj3KyjpMeOBG8N6e6AZfdLXAwlePOVP25HAIbXiTwWk=
+X-Received: by 2002:a2e:be1e:0:b0:30b:b987:b676 with SMTP id
+ 38308e7fff4ca-30bd7a1e197mr7619761fa.2.1741166103469; Wed, 05 Mar 2025
+ 01:15:03 -0800 (PST)
 MIME-Version: 1.0
-References: <20250225034557.2148517-1-liezhi.yang@windriver.com>
- <20250225034557.2148517-2-liezhi.yang@windriver.com> <CA+chaQc87vMUKzdBsCe5amkpMuqsbgwQaM+F+uN6SknWvS=uJQ@mail.gmail.com>
- <1de5ac33-7f40-4cb8-9b0f-d95c5139870f@windriver.com>
-In-Reply-To: <1de5ac33-7f40-4cb8-9b0f-d95c5139870f@windriver.com>
+References: <20250303192705.2429629-1-martin.jansa@gmail.com> <CAKmqyKPAQ+rprG0YfE+6k-JgOzwoH5J_mDaxvDr2Oz_gr1iHXA@mail.gmail.com>
+In-Reply-To: <CAKmqyKPAQ+rprG0YfE+6k-JgOzwoH5J_mDaxvDr2Oz_gr1iHXA@mail.gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 5 Mar 2025 09:15:52 +0100
-X-Gm-Features: AQ5f1JrVI1XgvG901y6MRdiSe0iarNzfj27Wl4Ox59SOw1ZLPqeHyxsiT1HGwNg
-Message-ID: <CA+chaQfTaun+JBhxEgvWwOPMdBtWnLPzbNwc1FaVvUG3-p+w0Q@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 2/2] thin-provisioning-tools: 1.0.13 -> 1.0.14
-To: Robert Yang <liezhi.yang@windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
+Date: Wed, 5 Mar 2025 10:14:51 +0100
+X-Gm-Features: AQ5f1JqUaA3bYO6eDXfV0RkRDmFyZj-7MeV_j2Icu90x96pmHBvCsOr51rdHS7s
+Message-ID: <CA+chaQe1rEVa61HF=rTachMfS-uY1XJsEMMbZmPVQF6PMqUY9w@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] spdm-utils: use STAGING_DIR_HOST/STAGING_INCDIR
+ variables
+To: Alistair Francis <alistair23@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, 
+	Alistair Francis <alistair.francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 05 Mar 2025 08:16:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115744
+ <openembedded-devel@lists.openembedded.org>; Wed, 05 Mar 2025 09:15:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115745
 
-On Wed, Mar 5, 2025 at 8:58=E2=80=AFAM Robert Yang <liezhi.yang@windriver.c=
-om> wrote:
+Using correct variable fixes build with multilib where
+${WORKDIR}/recipe-sysroot doesn't exists as it's
+${WORKDIR}/lib32-recipe-sysroot and the build was failing to find
+libpci:
+
+http://errors.yoctoproject.org/Errors/Details/845301/
+
+  --- stderr
+  wrapper.h:6:10: fatal error: 'pci/pci.h' file not found
+  thread 'main' panicked at build.rs:104:10:
+  Unable to generate bindings: ClangDiagnostic("wrapper.h:6:10: fatal
+error: 'pci/pci.h' file not found\n")
+
+On Tue, Mar 4, 2025 at 12:32=E2=80=AFAM Alistair Francis <alistair23@gmail.=
+com> wrote:
 >
-> >> +
-> >> +export LIBCLANG_PATH =3D "${WORKDIR}/recipe-sysroot-native${libdir}"
+> On Tue, Mar 4, 2025 at 5:27=E2=80=AFAM Martin Jansa via lists.openembedde=
+d.org
+> <martin.jansa=3Dgmail.com@lists.openembedded.org> wrote:
 > >
-> > This path won't be correct for multilib builds where target ${libdir}
-> > might be e.g. /usr/lib32 while native libdir is /usr/lib.
+> > * there is no need to hardcode 'recipe-sysroot' path which is wrong in =
+multilib builds
+> >   where it will be 'lib32-recipe-sysroot' use standard variables
+> >   STAGING_DIR_HOST and STAGING_INCDIR
 > >
-> > Is there a reason why you haven't used STAGING_LIBDIR_NATIVE variable
-> > which uses correct ${libdir_native}?
+> > * it is still failing in some builds (with or without multilib enabled)=
+ with:
+> >
+> > error: linking with `spdm-utils/0.7.2/wrapper/target-rust-ccld` failed:=
+ exit status: 1
+> >   |
+> >   =3D note: LC_ALL=3D"C" PATH=3D"spdm-utils/0.7.2/recipe-sysroot-native=
+/usr/lib/rustlib/x86_64-unknown-linux-gnu/bin:spdm-utils/0.7.2/recipe-sysro=
+ot-native/usr/lib/rustlib/x86_64-unknown-linux-gnu/bin:spdm-utils/0.7.2/rec=
+ipe-sysroot-native/usr/lib/rustlib/x86_64-unknown-linux-gnu/bin:TOPDIR/BUIL=
+D/sysroots-uninative/x86_64-linux/usr/bin:spdm-utils/0.7.2/recipe-sysroot-n=
+ative/usr/bin/python3-native:TOPDIR/oe-core/scripts:spdm-utils/0.7.2/recipe=
+-sysroot-native/usr/bin/aarch64-oe-linux:spdm-utils/0.7.2/recipe-sysroot/us=
+r/bin/crossscripts:spdm-utils/0.7.2/recipe-sysroot-native/usr/sbin:spdm-uti=
+ls/0.7.2/recipe-sysroot-native/usr/bin:spdm-utils/0.7.2/recipe-sysroot-nati=
+ve/sbin:spdm-utils/0.7.2/recipe-sysroot-native/bin:TOPDIR/bitbake/bin:TOPDI=
+R/BUILD/hosttools" VSLANG=3D"1033" "spdm-utils/0.7.2/wrapper/target-rust-cc=
+ld" "/tmp/rustcwOPmo4/symbols.o" "spdm-utils/0.7.2/build/target/aarch64-oe-=
+linux-gnu/release/deps/spdm_utils-bde42d4d198f7a3b.spdm_utils.10963d2e3c952=
+6dc-cgu.00.rcgu.o" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/rele=
+ase/deps/spdm_utils-bde42d4d198f7a3b.spdm_utils.10963d2e3c9526dc-cgu.01.rcg=
+u.o" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/spdm_=
+utils-bde42d4d198f7a3b.spdm_utils.10963d2e3c9526dc-cgu.02.rcgu.o" "spdm-uti=
+ls/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/spdm_utils-bde42d4d=
+198f7a3b.spdm_utils.10963d2e3c9526dc-cgu.03.rcgu.o" "spdm-utils/0.7.2/build=
+/target/aarch64-oe-linux-gnu/release/deps/spdm_utils-bde42d4d198f7a3b.spdm_=
+utils.10963d2e3c9526dc-cgu.04.rcgu.o" "spdm-utils/0.7.2/build/target/aarch6=
+4-oe-linux-gnu/release/deps/spdm_utils-bde42d4d198f7a3b.spdm_utils.10963d2e=
+3c9526dc-cgu.05.rcgu.o" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu=
+/release/deps/spdm_utils-bde42d4d198f7a3b.spdm_utils.10963d2e3c9526dc-cgu.0=
+6.rcgu.o" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/=
+spdm_utils-bde42d4d198f7a3b.spdm_utils.10963d2e3c9526dc-cgu.07.rcgu.o" "spd=
+m-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/spdm_utils-bde=
+42d4d198f7a3b.spdm_utils.10963d2e3c9526dc-cgu.08.rcgu.o" "spdm-utils/0.7.2/=
+build/target/aarch64-oe-linux-gnu/release/deps/spdm_utils-bde42d4d198f7a3b.=
+spdm_utils.10963d2e3c9526dc-cgu.09.rcgu.o" "spdm-utils/0.7.2/build/target/a=
+arch64-oe-linux-gnu/release/deps/spdm_utils-bde42d4d198f7a3b.spdm_utils.109=
+63d2e3c9526dc-cgu.10.rcgu.o" "spdm-utils/0.7.2/build/target/aarch64-oe-linu=
+x-gnu/release/deps/spdm_utils-bde42d4d198f7a3b.spdm_utils.10963d2e3c9526dc-=
+cgu.11.rcgu.o" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/=
+deps/spdm_utils-bde42d4d198f7a3b.spdm_utils.10963d2e3c9526dc-cgu.12.rcgu.o"=
+ "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/spdm_util=
+s-bde42d4d198f7a3b.spdm_utils.10963d2e3c9526dc-cgu.13.rcgu.o" "spdm-utils/0=
+.7.2/build/target/aarch64-oe-linux-gnu/release/deps/spdm_utils-bde42d4d198f=
+7a3b.spdm_utils.10963d2e3c9526dc-cgu.14.rcgu.o" "spdm-utils/0.7.2/build/tar=
+get/aarch64-oe-linux-gnu/release/deps/spdm_utils-bde42d4d198f7a3b.spdm_util=
+s.10963d2e3c9526dc-cgu.15.rcgu.o" "spdm-utils/0.7.2/build/target/aarch64-oe=
+-linux-gnu/release/deps/spdm_utils-bde42d4d198f7a3b.a5lxpbrgiyije3w5cbqbylh=
+b7.rcgu.o" "-Wl,--as-needed" "-Wl,-Bstatic" "spdm-utils/0.7.2/build/target/=
+aarch64-oe-linux-gnu/release/deps/libserialport-6eeca887df603c96.rlib" "spd=
+m-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libunescaper-c=
+ea3830d0f2d8e36.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/r=
+elease/deps/libnix-dac1a1693ab17db3.rlib" "spdm-utils/0.7.2/build/target/aa=
+rch64-oe-linux-gnu/release/deps/libbitflags-d74b49e427459ea6.rlib" "spdm-ut=
+ils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/liblibudev-c60e422=
+d317a6d2a.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release=
+/deps/liblibudev_sys-c703eeb5c735a38c.rlib" "spdm-utils/0.7.2/build/target/=
+aarch64-oe-linux-gnu/release/deps/liblibmctp-fead11c09f728867.rlib" "spdm-u=
+tils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libsmbus_pec-3bd5=
+4e240597f305.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/rele=
+ase/deps/libembedded_crc_macros-a6fe57f0f48ef874.rlib" "spdm-utils/0.7.2/bu=
+ild/target/aarch64-oe-linux-gnu/release/deps/libbitfield-d004b2e82a12be5c.r=
+lib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libx5=
+09_parser-362699415348d972.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-=
+linux-gnu/release/deps/libdata_encoding-bb06fc446846a769.rlib" "spdm-utils/=
+0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/liboid_registry-02fd47=
+2405fe8fe9.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/releas=
+e/deps/libder_parser-d1f98822897a57b2.rlib" "spdm-utils/0.7.2/build/target/=
+aarch64-oe-linux-gnu/release/deps/libnum_bigint-688b27e66bf0b68f.rlib" "spd=
+m-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libnum_integer=
+-7f827874f05600ee.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu=
+/release/deps/libasn1_rs-e74a43291d44175f.rlib" "spdm-utils/0.7.2/build/tar=
+get/aarch64-oe-linux-gnu/release/deps/libtime-017b51bb919318e7.rlib" "spdm-=
+utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libitoa-8ab99d38=
+28099a8e.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/=
+deps/libtime_core-a0a3e07ea9d65e2b.rlib" "spdm-utils/0.7.2/build/target/aar=
+ch64-oe-linux-gnu/release/deps/libnum_conv-06fec1ec684a87e1.rlib" "spdm-uti=
+ls/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libderanged-ffd9c21=
+dd9532c1a.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release=
+/deps/libpowerfmt-c282310c9539410f.rlib" "spdm-utils/0.7.2/build/target/aar=
+ch64-oe-linux-gnu/release/deps/libasn1_rs-086351c4156f8c45.rlib" "spdm-util=
+s/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libthiserror-250ffbb=
+3eb5075a0.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release=
+/deps/librusticata_macros-b29e91a256e7f339.rlib" "spdm-utils/0.7.2/build/ta=
+rget/aarch64-oe-linux-gnu/release/deps/libnom-14d1f6f55899cc7f.rlib" "spdm-=
+utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libnum_traits-ff=
+021baaff61b6dd.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/re=
+lease/deps/libenv_logger-4d971d97d3d2728a.rlib" "spdm-utils/0.7.2/build/tar=
+get/aarch64-oe-linux-gnu/release/deps/libtermcolor-5f5920ebd06dd4f0.rlib" "=
+spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libis_termi=
+nal-cf7edf7fdc93135c.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-=
+gnu/release/deps/libhumantime-0544f8a004168f5a.rlib" "spdm-utils/0.7.2/buil=
+d/target/aarch64-oe-linux-gnu/release/deps/libregex-9e2dcd075c834f8f.rlib" =
+"spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libregex_a=
+utomata-5467380482e473a6.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-li=
+nux-gnu/release/deps/libaho_corasick-2fff436f7eb72e62.rlib" "spdm-utils/0.7=
+.2/build/target/aarch64-oe-linux-gnu/release/deps/libregex_syntax-5235f377a=
+0d736ba.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/d=
+eps/libsha2-70c395dc600e20f3.rlib" "spdm-utils/0.7.2/build/target/aarch64-o=
+e-linux-gnu/release/deps/libdigest-b291496809a77a8f.rlib" "spdm-utils/0.7.2=
+/build/target/aarch64-oe-linux-gnu/release/deps/libblock_buffer-9693dc4f01c=
+47a6a.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/dep=
+s/libcrypto_common-a0e27511fe62f6c0.rlib" "spdm-utils/0.7.2/build/target/aa=
+rch64-oe-linux-gnu/release/deps/libgeneric_array-038d5582acbd4525.rlib" "sp=
+dm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libtypenum-e5=
+3790c6af30a73c.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/re=
+lease/deps/libnix-1bf3ed0ea4e2e7fd.rlib" "spdm-utils/0.7.2/build/target/aar=
+ch64-oe-linux-gnu/release/deps/liblibc-948e68f25c1ea920.rlib" "spdm-utils/0=
+.7.2/build/target/aarch64-oe-linux-gnu/release/deps/liblibspdm-cd3bb7cf97ef=
+1ede.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps=
+/libcolored-4b424f8b8a8a8f3a.rlib" "spdm-utils/0.7.2/build/target/aarch64-o=
+e-linux-gnu/release/deps/liblazy_static-e4af7fc9cda932b7.rlib" "spdm-utils/=
+0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libwhich-ed452b9a8575f=
+9c2.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/=
+libhome-025b3253d2c9a761.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-li=
+nux-gnu/release/deps/libeither-a74c6c4f425b42e6.rlib" "spdm-utils/0.7.2/bui=
+ld/target/aarch64-oe-linux-gnu/release/deps/libminicbor-6dd2ce82a1c6ab80.rl=
+ib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libhal=
+f-60173e3c67bb51d7.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gn=
+u/release/deps/libfutures-a895171bccbbf729.rlib" "spdm-utils/0.7.2/build/ta=
+rget/aarch64-oe-linux-gnu/release/deps/libfutures_executor-08de71c30d20f215=
+.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/lib=
+futures_util-80b02b35afdeac60.rlib" "spdm-utils/0.7.2/build/target/aarch64-=
+oe-linux-gnu/release/deps/libfutures_channel-130545631c2db438.rlib" "spdm-u=
+tils/0.7.2/build/target/aarch64-oe-linux-gnurelease/deps/libfutures_sink-7d=
+e21ab1b2977f12.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/re=
+lease/deps/libfutures_task-8f358783b3a90d2e.rlib" "spdm-utils/0.7.2/build/t=
+arget/aarch64-oe-linux-gnu/release/deps/libpin_utils-725b87fa7f052d76.rlib"=
+ "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libclap-9=
+f603ab24f4e6ac8.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/r=
+elease/deps/libclap_builder-b02ec4f395c2d49a.rlib" "spdm-utils/0.7.2/build/=
+target/aarch64-oe-linux-gnu/release/deps/libstrsim-6c18ac20b99f1e62.rlib" "=
+spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libanstream=
+-be4ed5ec629d6cf6.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu=
+/release/deps/libanstyle_query-a6d9f9bb2f22fde2.rlib" "spdm-utils/0.7.2/bui=
+ld/target/aarch64-oe-linux-gnu/release/deps/libis_terminal_polyfill-cd48d67=
+605f06b34.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release=
+/deps/libcolorchoice-1daf6f02b9c525b9.rlib" "spdm-utils/0.7.2/build/target/=
+aarch64-oe-linux-gnu/release/deps/libanstyle_parse-bc9ba3dd88b60c4d.rlib" "=
+spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libutf8pars=
+e-123ec8d013c1be9c.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gn=
+u/release/deps/libclap_lex-d099f14881092c47.rlib" "spdm-utils/0.7.2/build/t=
+arget/aarch64-oe-linux-gnu/release/deps/libanstyle-134885157f6b20ae.rlib" "=
+spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libasync_st=
+d-276f6efc8eb7aa08.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gn=
+u/release/deps/libmemchr-4bada5f9ce95ee71.rlib" "spdm-utils/0.7.2/build/tar=
+get/aarch64-oe-linux-gnu/release/deps/libasync_global_executor-3d81cc78f05b=
+b9b7.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps=
+/libblocking-a150ec06774df238.rlib" "spdm-utils/0.7.2/build/target/aarch64-=
+oe-linux-gnu/release/deps/libpiper-122e031690ac2eee.rlib" "spdm-utils/0.7.2=
+/build/target/aarch64-oe-linux-gnu/release/deps/libatomic_waker-d518cd59482=
+59228.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/dep=
+s/libasync_channel-43c9dc6a1c77de5b.rlib" "spdm-utils/0.7.2/build/target/aa=
+rch64-oe-linux-gnu/release/deps/libasync_executor-6b9f64980735686f.rlib" "s=
+pdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libasync_tas=
+k-d172452ce8e6e7c2.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gn=
+u/release/deps/libonce_cell-d237059d66b9fe37.rlib" "spdm-utils/0.7.2/build/=
+target/aarch64-oe-linux-gnu/release/deps/libasync_io-b7f857a36a0f6858.rlib"=
+ "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libslab-f=
+4bedd7227c6bf84.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/r=
+elease/deps/libpolling-2541f97ca1b9ab98.rlib" "spdm-utils/0.7.2/build/targe=
+t/aarch64-oe-linux-gnu/release/deps/libtracing-27d8bd1a07ee47ac.rlib" "spdm=
+-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libtracing_core=
+-1b1f84d2a95f3932.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu=
+/release/deps/libcfg_if-fdb0d11c6dd44f87.rlib" "spdm-utils/0.7.2/build/targ=
+et/aarch64-oe-linux-gnu/release/deps/librustix-a2f9a72310cd063a.rlib" "spdm=
+-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libbitflags-9ca=
+1a1f0de518834.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/rel=
+ease/deps/liblinux_raw_sys-99651370baf8c855.rlib" "spdm-utils/0.7.2/build/t=
+arget/aarch64-oe-linux-gnu/release/deps/libfutures_lite-3bb954336e1d8cfb.rl=
+ib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libfas=
+trand-4612045bc9988b72.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linu=
+x-gnu/release/deps/libfutures_io-cf70903f61e9b6cf.rlib" "spdm-utils/0.7.2/b=
+uild/target/aarch64-oe-linux-gnu/release/deps/libasync_channel-3a4688c43a4b=
+bab6.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps=
+/libevent_listener-34ab001d39450d29.rlib" "spdm-utils/0.7.2/build/target/aa=
+rch64-oe-linux-gnu/release/deps/libconcurrent_queue-0f9cfddcdb7c1ab5.rlib" =
+"spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libcrossbe=
+am_utils-224ded61ddaf0891.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-l=
+inux-gnu/release/deps/libasync_lock-da4cb138055e51a7.rlib" "spdm-utils/0.7.=
+2/build/target/aarch64-oe-linux-gnu/release/deps/libevent_listener_strategy=
+-43c86a853439156a.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu=
+/release/deps/libevent_listener-844e677a0da51119.rlib" "spdm-utils/0.7.2/bu=
+ild/target/aarch64-oe-linux-gnu/release/deps/libparking-3dffb30da11a1f47.rl=
+ib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libpin=
+_project_lite-5503e04d7a85db18.rlib" "spdm-utils/0.7.2/build/target/aarch64=
+-oe-linux-gnu/release/deps/libfutures_core-7153e7ad780e0572.rlib" "spdm-uti=
+ls/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libkv_log_macro-912=
+53cf35f2bf00b.rlib" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/rel=
+ease/deps/liblog-ca2be10f58adc31a.rlib" "spdm-utils/0.7.2/build/target/aarc=
+h64-oe-linux-gnu/release/deps/libvalue_bag-e7a2a4594b6dbc84.rlib" "spdm-uti=
+ls/0.7.2/recipe-sysroot/usr/lib/rustlib/aarch64-oe-linux-gnu/lib/libstd.rli=
+b" "spdm-utils/0.7.2/recipe-sysroot/usr/lib/rustlib/aarch64-oe-linux-gnu/li=
+b/libpanic_unwind-2af724e74f58518c.rlib" "spdm-utils/0.7.2/recipe-sysroot/u=
+sr/lib/rustlib/aarch64-oe-linux-gnu/lib/libobject-a0d3363d4c06b170.rlib" "s=
+pdm-utils/0.7.2/recipe-sysroot/usr/lib/rustlib/aarch64-oe-linux-gnu/lib/lib=
+memchr-d448e3cd48ffb56d.rlib" "spdm-utils/0.7.2/recipe-sysroot/usr/lib/rust=
+lib/aarch64-oe-linux-gnu/lib/libaddr2line-be185de14bda170a.rlib" "spdm-util=
+s/0.7.2/recipe-sysroot/usr/lib/rustlib/aarch64-oe-linux-gnu/lib/libgimli-4f=
+87816ac4c3936c.rlib" "spdm-utils/0.7.2/recipe-sysroot/usr/lib/rustlib/aarch=
+64-oe-linux-gnu/lib/librustc_demangle-fb519111ad364b3c.rlib" "spdm-utils/0.=
+7.2/recipe-sysroot/usr/lib/rustlib/aarch64-oe-linux-gnu/lib/libstd_detect-4=
+a789f348ecae68d.rlib" "spdm-utils/0.7.2/recipe-sysroot/usr/lib/rustlib/aarc=
+h64-oe-linux-gnu/lib/libhashbrown-53fc84a5893e74d4.rlib" "spdm-utils/0.7.2/=
+recipe-sysroot/usr/lib/rustlib/aarch64-oe-linux-gnu/lib/librustc_std_worksp=
+ace_alloc-863b1a9dcca1e102.rlib" "spdm-utils/0.7.2/recipe-sysroot/usr/lib/r=
+ustlib/aarch64-oe-linux-gnu/lib/libminiz_oxide-99398dbf0d70cd1a.rlib" "spdm=
+-utils/0.7.2/recipe-sysroot/usr/lib/rustlib/aarch64-oe-linux-gnu/lib/libadl=
+er-819f47a85e2a506f.rlib" "spdm-utils/0.7.2/recipe-sysroot/usr/lib/rustlib/=
+aarch64-oe-linux-gnu/lib/libunwind-8a40409cdcc36a8f.rlib" "spdm-utils/0.7.2=
+/recipe-sysroot/usr/lib/rustlib/aarch64-oe-linux-gnu/lib/libcfg_if-dd2ea6c2=
+7f046e56.rlib" "spdm-utils/0.7.2/recipe-sysroot/usr/lib/rustlib/aarch64-oe-=
+linux-gnu/lib/liblibc-a298ccd8ac6da714.rlib" "spdm-utils/0.7.2/recipe-sysro=
+ot/usr/lib/rustlib/aarch64-oe-linux-gnu/lib/liballoc-056aaf2e033bde1c.rlib"=
+ "spdm-utils/0.7.2/recipe-sysroot/usr/lib/rustlib/aarch64-oe-linux-gnu/lib/=
+librustc_std_workspace_core-285c3174480c42d6.rlib" "spdm-utils/0.7.2/recipe=
+-sysroot/usr/lib/rustlib/aarch64-oe-linux-gnu/lib/libcore-df89ffd20f73d501.=
+rlib" "spdm-utils/0.7.2/recipe-sysroot/usr/lib/rustlib/aarch64-oe-linux-gnu=
+/lib/libcompiler_builtins-f7db086d3d9fb6b3.rlib" "-Wl,-Bdynamic" "-ludev" "=
+-lgcc_s" "-lutil" "-lrt" "-lpthread" "-lm" "-ldl" "-lc" "-Wl,--eh-frame-hdr=
+" "-Wl,-z,noexecstack" "-L" "spdm-utils/0.7.2/recipe-sysroot/usr/lib/rustli=
+b/aarch64-oe-linux-gnu/lib" "-L" "spdm-utils/0.7.2/recipe-sysroot/usr/lib" =
+"-L" "spdm-utils/0.7.2/recipe-sysroot-native/usr/lib/rustlib/aarch64-oe-lin=
+ux-gnu/lib" "-o" "spdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/releas=
+e/deps/spdm_utils-bde42d4d198f7a3b" "-Wl,--gc-sections" "-pie" "-Wl,-O1" "-=
+Wl,--strip-debug" "-nodefaultlibs" "-Wl,--start-group" "-lpci" "-lmemlib" "=
+-lmalloclib" "-ldebuglib" "-lplatform_lib" "-lssl" "-lcrypto" "-lcryptlib_o=
+penssl" "-lrnglib" "-lspdm_common_lib" "-lspdm_requester_lib" "-lspdm_respo=
+nder_lib" "-lspdm_secured_message_lib" "-lspdm_secured_message_lib" "-lspdm=
+_crypt_lib" "-lspdm_crypt_ext_lib" "-lspdm_transport_pcidoe_lib" "-lspdm_tr=
+ansport_mctp_lib" "-Wl,--end-group"
+> >   =3D note: spdm-utils/0.7.2/recipe-sysroot-native/usr/bin/aarch64-oe-l=
+inux/../../libexec/aarch64-oe-linux/gcc/aarch64-oe-linux/14.2.0/ld: spdm-ut=
+ils/0.7.2/recipe-sysroot/usr/lib/libmemlib.a(zero_mem.c.o): undefined refer=
+ence to symbol '__stack_chk_guard@@GLIBC_2.17'
+> >           spdm-utils/0.7.2/recipe-sysroot-native/usr/bin/aarch64-oe-lin=
+ux/../../libexec/aarch64-oe-linux/gcc/aarch64-oe-linux/14.2.0/ld: spdm-util=
+s/0.7.2/recipe-sysroot/usr/lib/ld-linux-aarch64.so.1: error adding symbols:=
+ DSO missing from command line
+> >           collect2: error: ld returned 1 exit status
+> >
+> >   =3D note: some `extern` functions couldn't be found; some native libr=
+aries may need to be installed or have their path specified
+> >   =3D note: use the `-l` flag to specify native libraries to link
+> >   =3D note: use the `cargo:rustc-link-lib` directive to specify the nat=
+ive libraries to link with Cargo (see https://doc.rust-lang.org/cargo/refer=
+ence/build-scripts.html#rustc-link-lib)
+> >
+> > error: could not compile `SPDM-Utils` (bin "spdm_utils") due to 1 previ=
+ous error
+> >
+> > Caused by:
+> >   process didn't exit successfully: `rustc --crate-name spdm_utils --ed=
+ition=3D2021 src/main.rs --error-format=3Djson --json=3Ddiagnostic-rendered=
+-ansi,artifacts,future-incompat --crate-type bin --emit=3Ddep-info,link -C =
+opt-level=3D3 -C embed-bitcode=3Dno --cfg 'feature=3D"asn1-rs"' --cfg 'feat=
+ure=3D"async-std"' --cfg 'feature=3D"clap"' --cfg 'feature=3D"colored"' --c=
+fg 'feature=3D"default"' --cfg 'feature=3D"env_logger"' --cfg 'feature=3D"f=
+utures"' --cfg 'feature=3D"lazy_static"' --cfg 'feature=3D"memmap2"' --cfg =
+'feature=3D"minicbor"' --cfg 'feature=3D"minicbor-derive"' --cfg 'feature=
+=3D"nix"' --cfg 'feature=3D"once_cell"' --cfg 'feature=3D"serialport"' --cf=
+g 'feature=3D"sha2"' --cfg 'feature=3D"std"' --cfg 'feature=3D"which"' --cf=
+g 'feature=3D"x509-parser"' --check-cfg 'cfg(docsrs)' --check-cfg 'cfg(feat=
+ure, values("asn1-rs", "async-std", "clap", "colored", "default", "env_logg=
+er", "futures", "lazy_static", "libspdm_tests", "memmap2", "minicbor", "min=
+icbor-derive", "nix", "no_std", "once_cell", "serialport", "sha2", "std", "=
+which", "x509-parser"))' -C metadata=3Dbde42d4d198f7a3b -C extra-filename=
+=3D-bde42d4d198f7a3b --out-dir spdm-utils/0.7.2/build/target/aarch64-oe-lin=
+ux-gnu/release/deps --target aarch64-oe-linux-gnu -C linker=3Dspdm-utils/0.=
+7.2/wrapper/target-rust-ccld -C strip=3Ddebuginfo -L dependency=3Dspdm-util=
+s/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps -L dependency=3Dspdm=
+-utils/0.7.2/build/target/release/deps --extern libspdm=3Dspdm-utils/0.7.2/=
+build/target/aarch64-oe-linux-gnu/release/deps/liblibspdm-cd3bb7cf97ef1ede.=
+rlib --extern asn1_rs=3Dspdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/=
+release/deps/libasn1_rs-086351c4156f8c45.rlib --extern async_std=3Dspdm-uti=
+ls/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libasync_std-276f6e=
+fc8eb7aa08.rlib --extern clap=3Dspdm-utils/0.7.2/build/target/aarch64-oe-li=
+nux-gnu/release/deps/libclap-9f603ab24f4e6ac8.rlib --extern colored=3Dspdm-=
+utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libcolored-4b424=
+f8b8a8a8f3a.rlib --extern env_logger=3Dspdm-utils/0.7.2/build/target/aarch6=
+4-oe-linux-gnu/release/deps/libenv_logger-4d971d97d3d2728a.rlib --extern fu=
+tures=3Dspdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/lib=
+futures-a895171bccbbf729.rlib --extern lazy_static=3Dspdm-utils/0.7.2/build=
+/target/aarch64-oe-linux-gnu/release/deps/liblazy_static-e4af7fc9cda932b7.r=
+lib --extern libmctp=3Dspdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/r=
+elease/deps/liblibmctp-fead11c09f728867.rlib --extern log=3Dspdm-utils/0.7.=
+2/build/target/aarch64-oe-linux-gnu/release/deps/liblog-ca2be10f58adc31a.rl=
+ib --extern memmap2=3Dspdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/re=
+lease/deps/libmemmap2-1e722f3ca1cb9a40.rlib --extern minicbor=3Dspdm-utils/=
+0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libminicbor-6dd2ce82a1=
+c6ab80.rlib --extern minicbor_derive=3Dspdm-utils/0.7.2/build/target/releas=
+e/deps/libminicbor_derive-1ac8504d13b7a0c4.so --extern nix=3Dspdm-utils/0.7=
+.2/build/target/aarch64-oe-linux-gnu/release/deps/libnix-1bf3ed0ea4e2e7fd.r=
+lib --extern once_cell=3Dspdm-utils/0.7.2/build/target/aarch64-oe-linux-gnu=
+/release/deps/libonce_cell-d237059d66b9fe37.rlib --extern serialport=3Dspdm=
+-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libserialport-6=
+eeca887df603c96.rlib --extern sha2=3Dspdm-utils/0.7.2/build/target/aarch64-=
+oe-linux-gnu/release/deps/libsha2-70c395dc600e20f3.rlib --extern which=3Dsp=
+dm-utils/0.7.2/build/target/aarch64-oe-linux-gnu/release/deps/libwhich-ed45=
+2b9a8575f9c2.rlib --extern x509_parser=3Dspdm-utils/0.7.2/build/target/aarc=
+h64-oe-linux-gnu/release/deps/libx509_parser-362699415348d972.rlib -L spdm-=
+utils/0.7.2/recipe-sysroot/usr/lib/rustlib/aarch64-oe-linux-gnu/lib --remap=
+-path-prefix=3Dspdm-utils/0.7.2=3D/usr/src/debug/spdm-utils/0.7.2 -C link-a=
+rg=3D-Wl,--start-group -C link-arg=3D-lpci -C link-arg=3D-lmemlib -C link-a=
+rg=3D-lmalloclib -C link-arg=3D-ldebuglib -C link-arg=3D-lplatform_lib -C l=
+ink-arg=3D-lssl -C link-arg=3D-lcrypto -C link-arg=3D-lcryptlib_openssl -C =
+link-arg=3D-lrnglib -C link-arg=3D-lspdm_common_lib -C link-arg=3D-lspdm_re=
+quester_lib -C link-arg=3D-lspdm_responder_lib -C link-arg=3D-lspdm_secured=
+_message_lib -C link-arg=3D-lspdm_secured_message_lib -C link-arg=3D-lspdm_=
+crypt_lib -C link-arg=3D-lspdm_crypt_ext_lib -C link-arg=3D-lspdm_transport=
+_pcidoe_lib -C link-arg=3D-lspdm_transport_mctp_lib -C link-arg=3D-Wl,--end=
+-group -L native=3Dspdm-utils/0.7.2/recipe-sysroot/usr/lib` (exit status: 1=
+)
+> >
+> > Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 >
-> I copied it from meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0=
-.0.29.bb.
-
-Hi,
-
-ok, will send fix for uutils-coreutils as well (will check why it
-wasn't shown in my world builds yet).
-
-> How can I reproduce the multilib errors, please? I tried to build
-> lib32-thin-provisioning-tools with poky, it works well.
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 >
-> local.conf:
+> Alistair
 >
-> MACHINE =3D "qemux86-64"
-> require conf/multilib.conf
-> MULTILIBS =3D "multilib:lib32"
-> DEFAULTTUNE:virtclass-multilib-lib32 =3D "x86"
-
-What is STAGING_LIBDIR_NATIVE and libdir in
-lib32-thin-provisioning-tools for you?
-
-Try to add:
-BASELIB =3D "lib32"
-
-that's what we're using with:
-https://git.openembedded.org/openembedded-core-contrib/commit/?h=3Djansa/ma=
-ster&id=3D13bdeecb4b54fde63444edbeaaa23bea9cc7b40b
+> > ---
+> >  .../clang-layer/recipes-devtools/spdm-utils/spdm-utils_0.7.2.bb | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/meta-oe/dynamic-layers/clang-layer/recipes-devtools/spdm-u=
+tils/spdm-utils_0.7.2.bb b/meta-oe/dynamic-layers/clang-layer/recipes-devto=
+ols/spdm-utils/spdm-utils_0.7.2.bb
+> > index 800f9629c1..64cd1d928a 100644
+> > --- a/meta-oe/dynamic-layers/clang-layer/recipes-devtools/spdm-utils/sp=
+dm-utils_0.7.2.bb
+> > +++ b/meta-oe/dynamic-layers/clang-layer/recipes-devtools/spdm-utils/sp=
+dm-utils_0.7.2.bb
+> > @@ -9,7 +9,7 @@ LIC_FILES_CHKSUM =3D "\
+> >  inherit cargo cargo-update-recipe-crates pkgconfig
+> >
+> >  export BINDGEN_EXTRA_CLANG_ARGS
+> > -BINDGEN_EXTRA_CLANG_ARGS =3D "--sysroot=3D${WORKDIR}/recipe-sysroot -I=
+${WORKDIR}/recipe-sysroot/usr/include"
+> > +BINDGEN_EXTRA_CLANG_ARGS =3D "--sysroot=3D${STAGING_DIR_HOST} -I${STAG=
+ING_INCDIR}"
+> >
+> >  SRC_URI +=3D "git://github.com/westerndigitalcorporation/spdm-utils.gi=
+t;protocol=3Dhttps;branch=3Dmaster"
+> >
+> > --
+> > 2.48.1
+> >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#115730): https://lists.openembedded.org/g/openembed=
+ded-devel/message/115730
+> > Mute This Topic: https://lists.openembedded.org/mt/111495409/3619028
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[alistair23@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
 
