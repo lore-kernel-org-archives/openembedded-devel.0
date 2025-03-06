@@ -1,108 +1,226 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E49DC282EC
-	for <webhook@archiver.kernel.org>; Thu,  6 Mar 2025 10:59:42 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.web10.10396.1741258773500404234
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 360EFC28B23
+	for <webhook@archiver.kernel.org>; Thu,  6 Mar 2025 14:16:13 +0000 (UTC)
+Received: from mail-yb1-f173.google.com (mail-yb1-f173.google.com [209.85.219.173])
+ by mx.groups.io with SMTP id smtpd.web11.14335.1741270572248390601
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 Mar 2025 02:59:33 -0800
+ Thu, 06 Mar 2025 06:16:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=cBqnVGG3;
- spf=pass (domain: konsulko.com, ip: 209.85.128.41, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-43bc31227ecso2852465e9.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 06 Mar 2025 02:59:33 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=LRgs0T8H;
+ spf=pass (domain: gmail.com, ip: 209.85.219.173, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f173.google.com with SMTP id 3f1490d57ef6-e53c9035003so644706276.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 06 Mar 2025 06:16:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1741258772; x=1741863572; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=XnZIBj/NhN9jj62albEJbKYIIb9KdMW4ZIAM8QUUTw0=;
-        b=cBqnVGG3wGH5yPJgxUdRtaqXF92HO8PAUd42APUKZoHSz9r/T55OkwjXE2tpUcvO1f
-         UdakxR5hBSszag/8PlnNdAUV7NFjuY409fzGzKyaYxtJzxsilq8gEyLhWgLbnw5c5RGN
-         cOciVKB5u5xFCXCY7SdHjCDzE+lZ/hbYuJPdo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741258772; x=1741863572;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=gmail.com; s=20230601; t=1741270571; x=1741875371; darn=lists.openembedded.org;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=XnZIBj/NhN9jj62albEJbKYIIb9KdMW4ZIAM8QUUTw0=;
-        b=ZdM1VKtAmQXgcy2NhcUEKYXpT5N/ICnnOMiCdvIsV+2SB63KF5TlI3bo6ZBNK2uRhm
-         y/LVVPGYkDXTvZ2AF+XHYVK/2qdOY22hrkN45bBNRzTD8eDfJoYDhMD5ewhbw9jGWcM4
-         tyCnlGWppKtB7PUIVue8f+hq5yOtrDoJzq3LERjRlWaFF75byADJx0aNt5AjcUrdtH2Z
-         I9WQ26YCWRLKe0LQiQbm0mdid5lpRBNt5pfbtzODcZEpDu5t6cIOQawJ3RhKU2hpymtx
-         5k0iq37lSaXEBTp93irkC4Wv0jtT7vGiTCfqx4hT8hlpFq4bIa4ygBYNdP01rxpRMAX2
-         yJTg==
-X-Gm-Message-State: AOJu0YwfvkWQjNhhMsmHvLUypa04KfxTz/H7wtpDbEupHALrjzWlfqOT
-	rNeh45U30jnWwNvzeWM0Vov2VsBxX4tK49IsherkV3z75aV5g+saLmqxUBRwY57Tog7vGPRkWD1
-	y
-X-Gm-Gg: ASbGncud79uPO4riLLZVeRxX9zKEzjP0QVGOQloKsaJQo0KuH7bs7yXp4GKbywAm7oN
-	DnQjQ9O2eWT/4Ajx9j7NlCKTflKCVmoOg4M/Eacio4cHgCn3TxysfAtFhPbw6pXFAejNUhwlIzE
-	tptVtmDl5sKmg/y76GqnCEJe/KbrNVw7VfxM72k75siBm1tS5YqpMi0B3AoDRAHTgl6e6d9Sm4g
-	ibOk4vMBqeORiapmIs+Vm9dn7aLahAkj71bRqKDOQoo8Rm2Usgc1hyVJsD7titD8CebTX2hAMue
-	UZ2xQCt+t2Vu0vAFyvnNrVdJ+As++mF0tKE719qcASfxCg/Nx1zx+NP5WD4=
-X-Google-Smtp-Source: AGHT+IEtDatQZZNY9Z1iXQmZNmZgD3nUGwnJup3rNlbCpSqgN/jR9XvsIG0u4n5j89e0S7THGUApCg==
-X-Received: by 2002:a05:600c:468e:b0:434:fa55:eb56 with SMTP id 5b1f17b1804b1-43bd293f76cmr61030505e9.7.1741258771742;
-        Thu, 06 Mar 2025 02:59:31 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-43bd4352ed7sm46244835e9.26.2025.03.06.02.59.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 06 Mar 2025 02:59:31 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-h2: Upgrade 4.1.0 -> 4.2.0
-Date: Thu,  6 Mar 2025 12:59:28 +0200
-Message-Id: <20250306105928.3735026-3-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250306105928.3735026-1-leon.anavi@konsulko.com>
-References: <20250306105928.3735026-1-leon.anavi@konsulko.com>
+        bh=zgUqkK35xPSzbN+RbbXT89DhS6NdE49xDPrClWcBEoc=;
+        b=LRgs0T8HA1v5zILgLXObFFCcj4HhVQn5glHF/tPvnPRHku4QDfAhWgDjkfMu/4H1jB
+         Lw+Qrw51q0uLEQ8taU60NbkPiTxuOapspRNENPT6EUZ30luBZXVJh9ZgQIQqHygOQcXR
+         N1FKhK6OsXqYxxs6eYUn8WJM5vF5KVmaq27LtvP/xtUGQOx8NQaMhqumsjIEGs/Ompel
+         DCxtmu3WdldoXW6tGIxsUvT4hjRRm3CzAvqAmCGc7isQS954EQ+ahSAMqzoA3hFA15am
+         2HGuGl4gEZIm4QWonLkzUkOuhXDgUCwl1C2CEUOJUbXwo8EdkdaJlXcLCDwl9kLD6/2l
+         nCGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1741270571; x=1741875371;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=zgUqkK35xPSzbN+RbbXT89DhS6NdE49xDPrClWcBEoc=;
+        b=idlTfGTGRHA9K8IcQOif5UVxNjRbF+buoA1X0/M31m/Gks9Hj8vbCLsE8k5/D6WiDw
+         0yVBONL/h9rmfdt6q9/JOtmbOqRv5kfj9huLdLsPUxguYopCI1UMugeSGrB0OgYfAxIh
+         1z5WpVWmFnygAeOKzLvxwSrHFUscY6KO4Ti5pREwDicGFz5+vg1YBYcXpACX0T3WYfpi
+         i6TqvofOzPW4ejwvtJ85Wv5jufyyTyKSlCI+EPh1ufhLgMNJtI0AGG4QMotDidiTbrNn
+         +47FpInQUmXLPEid+D6zSeYH/fab703sJ6kt/DY9WffMTxEzhfubVLNemYG/GTt2d4Hd
+         98Kw==
+X-Forwarded-Encrypted: i=1; AJvYcCWHC85MlhuJuKpqU11XC6/3KaqNjJyXqmSdAm27X4wCe74QrCjdbM1WBl1yrvPWNu5Ix45Zvza75hvj/fDln/3AO6g=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yx1baBjuUCNAKQ7cdrkre1WUcs6tvJsCCsTQ3+/hAhXQi30zqw4
+	bZ20kJGkuqE4x5R0wCK8BVHEUaNsr0rqJ5/GCcN2SEt0hvjpVblXf6MXApxH
+X-Gm-Gg: ASbGnct+D6pveBSr6raL9nVpWkuyRp8IkLlBKjnrTcf/P+w+hmU0xCE12/7bQDc8v6F
+	P6dmLkkY5OnbjNBXFkpLS4yovoYHifEe87xFvMWNG8DegOtO5zp2MK5WdX/yOLvHtjPIbd8fggp
+	arfMxsJbX+c7FhFYN5lgamD/3O7GNgtJeCRcXdywhjXZvzxjHMf8tfHWq+IYDV9Aj40PpgDXzbw
+	O2VZs17TevaOOYeOPJSFgoB0pA4BprBg4qXf5yzmNUvl+uApvryEONaSa7tQ6O78b8sw33KVfxt
+	jaFRdMid4VXhUiQw4J+20L7ohjhhmzbrwsfhHXBGJbK8p4xhIRzGGgtvtK78SyGwrX9bqxGVBEM
+	pxFCuLJ4iEUpQqLo9iXyD
+X-Google-Smtp-Source: AGHT+IG5GhOAmoaIufyxaGPfkp09Kvh/8uPHH5Pn5uEBnMMVE7pKs3u2T45tKAbuALj1GreR+N+vOA==
+X-Received: by 2002:a05:6902:100d:b0:e5e:6fa:80a7 with SMTP id 3f1490d57ef6-e611e19a0b4mr9749860276.9.1741270569848;
+        Thu, 06 Mar 2025 06:16:09 -0800 (PST)
+Received: from ?IPV6:2600:1700:45dd:7000:e881:39b2:ebad:452e? ([2600:1700:45dd:7000:e881:39b2:ebad:452e])
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e634b735a87sm331151276.11.2025.03.06.06.16.09
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 06 Mar 2025 06:16:09 -0800 (PST)
+Message-ID: <06c0f429-d13a-49bb-8289-e80b49f4be76@gmail.com>
+Date: Thu, 6 Mar 2025 09:16:09 -0500
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Subject: kirkstone merge request: March 6th
+Autocrypt: addr=akuster808@gmail.com; keydata=
+ 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
+ ApZ86eOP
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 06 Mar 2025 10:59:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115770
+ <openembedded-devel@lists.openembedded.org>; Thu, 06 Mar 2025 14:16:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115771
 
-Upgrade to release 4.2.0:
+Clearly I missed sending this earlier.
 
-- Support for Python 3.11 has been added.
-- Support for Python 3.12 has been added.
-- Support for Python 3.13 has been added.
-- Add an ability to send outbound cookies separately to improve
-  headers compression.
-- Updated packaging and testing infrastructure.
-- Fix repr() checks for Python 3.11
-- Fix asyncio / wsgi examples.
-- Clarify docs on using curl with http2.
+The following changes since commit de8681b4a2a101b99dd2c48d89a7de2ccd9a961f:
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../python-h2/{python3-h2_4.1.0.bb => python3-h2_4.2.0.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-connectivity/python-h2/{python3-h2_4.1.0.bb => python3-h2_4.2.0.bb} (67%)
+   python3-sqlparse: Fix CVE-2024-4340 (2025-01-22 19:29:37 -0500)
 
-diff --git a/meta-python/recipes-connectivity/python-h2/python3-h2_4.1.0.bb b/meta-python/recipes-connectivity/python-h2/python3-h2_4.2.0.bb
-similarity index 67%
-rename from meta-python/recipes-connectivity/python-h2/python3-h2_4.1.0.bb
-rename to meta-python/recipes-connectivity/python-h2/python3-h2_4.2.0.bb
-index 6b3ce25371..55b534ebbf 100644
---- a/meta-python/recipes-connectivity/python-h2/python3-h2_4.1.0.bb
-+++ b/meta-python/recipes-connectivity/python-h2/python3-h2_4.2.0.bb
-@@ -4,8 +4,8 @@ LICENSE = "MIT"
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=aa3b9b4395563dd427be5f022ec321c1"
- 
--SRC_URI[sha256sum] = "a83aca08fbe7aacb79fec788c9c0bac936343560ed9ec18b82a13a12c28d2abb"
-+SRC_URI[sha256sum] = "c8a52129695e88b1a0578d8d2cc6842bbd79128ac685463b887ee278126ad01f"
- 
--inherit pypi setuptools3
-+inherit pypi python_setuptools_build_meta
- 
- RDEPENDS:${PN} += "python3-hpack python3-hyperframe"
--- 
-2.39.5
+are available in the Git repository at:
+
+   https://git.openembedded.org/meta-openembedded kirkstone-next
+
+for you to fetch changes up to 880df90c865b57d38f1ff836fe8900c94434322f:
+
+   phpmyadmin: fix CVE-2025-24529/CVE-2025-24530 (2025-02-09 07:58:44 -0800)
+
+----------------------------------------------------------------
+Changqing Li (1):
+       phpmyadmin: fix CVE-2025-24529/CVE-2025-24530
+
+Divya Chellam (7):
+       redis: fix CVE-2023-41056
+       redis: fix CVE-2023-45145
+       redis: fix CVE-2024-31227
+       redis: fix CVE-2024-31228
+       redis: fix CVE-2024-31449
+       redis: fix CVE-2024-46981
+       redis: fix CVE-2024-51741
+
+Martin Jansa (2):
+       hdf5: add -Wno-error to allow building native with gcc-14 on host
+       python3-h5py: add -Wno-error to allow building native with gcc-14 
+on host
+
+Vijay Anusuri (1):
+       openjpeg: Backport fix CVE-2023-39327
+
+Virendra Thakur (1):
+       libssh: Add ptest
+
+Yogita Urade (1):
+       mbedtls: fix CVE-2024-28755 and CVE-2024-28836
+
+  .../mbedtls/mbedtls/CVE-2024-28755-and-CVE-2024-28836.patch     | 67 
+++++++++++++++++++++++
+  meta-networking/recipes-connectivity/mbedtls/mbedtls_3.5.2.bb   | 6 +-
+  .../recipes-extended/redis/redis-7.0.13/CVE-2023-41056.patch    | 63 
+++++++++++++++++++++
+  .../recipes-extended/redis/redis-7.0.13/CVE-2023-45145.patch    | 72 
++++++++++++++++++++++++
+  .../recipes-extended/redis/redis-7.0.13/CVE-2024-31227.patch    | 33 
++++++++++++
+  .../recipes-extended/redis/redis-7.0.13/CVE-2024-31228.patch    | 68 
+++++++++++++++++++++++
+  .../recipes-extended/redis/redis-7.0.13/CVE-2024-31449.patch    | 49 
+++++++++++++++++
+  .../recipes-extended/redis/redis-7.0.13/CVE-2024-46981.patch    | 32 
++++++++++++
+  .../recipes-extended/redis/redis-7.0.13/CVE-2024-51741.patch    | 89 
++++++++++++++++++++++++++++++
+  meta-oe/recipes-extended/redis/redis/CVE-2023-45145.patch       | 72 
++++++++++++++++++++++++
+  meta-oe/recipes-extended/redis/redis/CVE-2024-31228.patch       | 68 
+++++++++++++++++++++++
+  meta-oe/recipes-extended/redis/redis/CVE-2024-31449.patch       | 49 
+++++++++++++++++
+  meta-oe/recipes-extended/redis/redis/CVE-2024-46981.patch       | 39 
++++++++++++++
+  meta-oe/recipes-extended/redis/redis_6.2.12.bb                  | 4 ++
+  meta-oe/recipes-extended/redis/redis_7.0.13.bb                  | 7 +++
+  meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2023-39327.patch | 82 
+++++++++++++++++++++++++++
+  meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb             | 1 +
+  meta-oe/recipes-support/hdf5/hdf5_1.8.21.bb                     | 6 ++
+  ...1-tests-CMakeLists.txt-do-not-search-ssh-sshd-commands.patch | 38 
+++++++++++++
+  meta-oe/recipes-support/libssh/libssh/run-ptest                 | 45 
++++++++++++++++
+  meta-oe/recipes-support/libssh/libssh_0.8.9.bb                  | 19 
++++++-
+  meta-python/recipes-devtools/python/python3-h5py_3.6.0.bb       | 4 ++
+  .../recipes-php/phpmyadmin/phpmyadmin/CVE-2025-24529.patch      | 36 
+++++++++++++
+  .../recipes-php/phpmyadmin/phpmyadmin/CVE-2025-24530.patch      | 42 
+++++++++++++++
+  meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.1.3.bb       | 4 +-
+  25 files changed, 989 insertions(+), 6 deletions(-)
+  create mode 100644 
+meta-networking/recipes-connectivity/mbedtls/mbedtls/CVE-2024-28755-and-CVE-2024-28836.patch
+  create mode 100644 
+meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2023-41056.patch
+  create mode 100644 
+meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2023-45145.patch
+  create mode 100644 
+meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2024-31227.patch
+  create mode 100644 
+meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2024-31228.patch
+  create mode 100644 
+meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2024-31449.patch
+  create mode 100644 
+meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2024-46981.patch
+  create mode 100644 
+meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2024-51741.patch
+  create mode 100644 
+meta-oe/recipes-extended/redis/redis/CVE-2023-45145.patch
+  create mode 100644 
+meta-oe/recipes-extended/redis/redis/CVE-2024-31228.patch
+  create mode 100644 
+meta-oe/recipes-extended/redis/redis/CVE-2024-31449.patch
+  create mode 100644 
+meta-oe/recipes-extended/redis/redis/CVE-2024-46981.patch
+  create mode 100644 
+meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2023-39327.patch
+  create mode 100644 
+meta-oe/recipes-support/libssh/libssh/0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-commands.patch
+  create mode 100644 meta-oe/recipes-support/libssh/libssh/run-ptest
+  create mode 100644 
+meta-webserver/recipes-php/phpmyadmin/phpmyadmin/CVE-2025-24529.patch
+  create mode 100644 
+meta-webserver/recipes-php/phpmyadmin/phpmyadmin/CVE-2025-24530.patch
 
 
