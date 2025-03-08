@@ -1,415 +1,183 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AFD56C19F32
-	for <webhook@archiver.kernel.org>; Fri,  7 Mar 2025 19:19:21 +0000 (UTC)
-Received: from mail-ua1-f47.google.com (mail-ua1-f47.google.com [209.85.222.47])
- by mx.groups.io with SMTP id smtpd.web11.19532.1741375152252221551
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3C01C282DE
+	for <webhook@archiver.kernel.org>; Sat,  8 Mar 2025 00:20:18 +0000 (UTC)
+Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com [209.85.128.169])
+ by mx.groups.io with SMTP id smtpd.web11.391.1741393215747657808
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 07 Mar 2025 11:19:12 -0800
+ Fri, 07 Mar 2025 16:20:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mQDkDPRC;
- spf=pass (domain: gmail.com, ip: 209.85.222.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-ua1-f47.google.com with SMTP id a1e0cc1a2514c-86c29c0acdfso960252241.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 07 Mar 2025 11:19:12 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=LxU/7DEH;
+ spf=pass (domain: gmail.com, ip: 209.85.128.169, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-6feb0742878so23521517b3.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 07 Mar 2025 16:20:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741375151; x=1741979951; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=u2ELEMOj6e94nSpayI8FYAkGzRYc6QeAk77udNki8Ak=;
-        b=mQDkDPRC3q2STkCFqFOHha4AgyES+gbkgnMtJplDGbp45wVA3iL94PjutjcNA8IE8x
-         b0KCGmL1mr5wYT8LydypScIrBxEFZxM/+EXH0/J6bC+KDur13EyOEtilvEfbOmpZOxGT
-         jNcZBaV9DU8fxQ9T14/gZYh8RhF6Zyan9Yr0ldP8yWn8FRUItqYFK8hgNLzBOL2kTClj
-         iQ8IiKJyZ8+szxKCT7j0LJk5RjXWh4VtgtoJGCRn03BPNennRfHIfj/6ZgrrqtwZ07AB
-         kkAzaeTx+2vRxCTRW4iEcDcl7M5/iFGneQNgSe2KgQxkSiIbfopKpcPEmR3LnoUCFjGy
-         Wjrw==
+        d=gmail.com; s=20230601; t=1741393215; x=1741998015; darn=lists.openembedded.org;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=IcrtiDJrC9KzoYhEwPzz24Uk6uC+QWSxxHwuKGw5gEE=;
+        b=LxU/7DEHZ6iPuhIRgHNjTBhBUD5XuyEbF3XwYwBIZzeUFtoVfAp5QBaj+9psd/DQl0
+         1FKag1Xl7TRoVOef/6DVlsOTEb72Ve+VX11ZUMWxeXOb4EWN11IwJdbp7uW+Oj6sMBtA
+         pD62XADdNOgc5TmuaoVcUkL4XbSyPCepOqdYZRW7ehjm28DJ/cMaojB5Aie1VOah8pd7
+         GQcQQeWKLJ+9yPo95mv93UgRgVGFnzEEveS9rxUf8LUHOYIGlr1919wljxCAslCeM+yt
+         uSOHCKtjj8CTLQbnLoybUPwKR0wGmFOLVZ6ACPf5aFvhXFJ9tkCUQEJEdxnrIbDRd/En
+         BdDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741375151; x=1741979951;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=u2ELEMOj6e94nSpayI8FYAkGzRYc6QeAk77udNki8Ak=;
-        b=j3fAqwOc7zk1T3S4S3sOq/QmcMS5mDOsHIeN20n/LKIBlJM0qjLYOATxgP6KOl1wgK
-         imzUnPtwzQVkhNSTdwB2BqdNKSTh8pckq1Bu48IFU4VOwtbwGx8OalpV2XG6wCQi+i1a
-         i94vnXKVZhbfm4JA8MgdHu12ZdGmXIe+uD6ZTbsqJ/pTusZRGol/aUYXf054a85pX3x1
-         SpDbwjjcDzb1gmI3OGu0VEKfhMlOETBTOK03nIuGGVvBItfhyF0s+aj2qEtQzW0zQ10L
-         ybAfU6UMnbBwv06YaqugZjIWrBSOLLnt8AUESdQ//ceoHqFcfBd2n/bwXGrK0QssBMvO
-         /m0Q==
-X-Gm-Message-State: AOJu0Yyaq+sajmVmBI/29wEJqaM9+FklbniiTE4mkQG6LR4kwLziTG2u
-	EmNMBU/shuOLej+rFIjwjr9q5RYoOth/0itOAPvl5L05bmZSnLHEe1M6U3WPXSoCleRMedStIzQ
-	2EnsbXmGBq5I0URg/2lvhRbIq8yk=
-X-Gm-Gg: ASbGncutnOW8wvPvmsBzxW//Dk6MHKaIu5z+efytq9Nw1RurD6FtxFkMCnuBNW9voIl
-	jD6D0mWVaFhOJ1Ic9guydQyZboe+gya2J2CDJndeDfctoUuzcGkyoTKwfedB4504AGDO3mFL5M7
-	fOONgKObRj76zmQjrl6axwsQw0
-X-Google-Smtp-Source: AGHT+IGEILGOq0p4YXIXewn3OIj15Pfp89jgkLkmuTmoASc/9NDaUufXVRuN3M/j5W+FWK/gLoPYxhiYLHLT04ICGx4=
-X-Received: by 2002:a05:6102:f06:b0:4c1:b0ad:a0bd with SMTP id
- ada2fe7eead31-4c30a69175emr3364306137.23.1741375151102; Fri, 07 Mar 2025
- 11:19:11 -0800 (PST)
+        d=1e100.net; s=20230601; t=1741393215; x=1741998015;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=IcrtiDJrC9KzoYhEwPzz24Uk6uC+QWSxxHwuKGw5gEE=;
+        b=hVd3oa4dqMzTqT4ZNBkG3yA3nsiUyLcrh4ddsSC3pE4wf4aQgc7iTew828aLN9siEb
+         LsAiePvfVXmQi9bZL6CKokAUzPmhwskjsgNoq2imDi9zSOXoUt1jM3K8Fm+6lctqBmEY
+         ne+fHSCa/9fzNrYqeeLczw55iaj34HitzHA7VajL+B4fhMd0sG+eNGi6QU/7aOURprE/
+         nhBCgbTHXH+r3bBSYz/BdHljjd5xBtTTuDP+V6+QFIrW0gqi0EZdNlNhtz81ZBeQolf/
+         FhQEc+Mq7yrWiAhm4LKPBZWjw+xvCMAgJCRNUCjVRPwkpcKdOdbWojBURaMUa9F4RFCe
+         DkTQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXighLG4IPHpwCmi6Ir/RGQkB8wIpfc1/7GnE4uNdTnK57cL8qDYkEGfw3oEga8Qkcyll5U7jKFBFriNUctr37WyrU=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YwDr9QlYgWZ2D8JcGZ5/7dvL7lofDf2X3x0qpWgq3SRrr2Xw6IJ
+	H98edjRAlv+xiKzsb4+rPCkjytlYtbHD8N97XHBVm7galiBAR388k7k5D8Uj
+X-Gm-Gg: ASbGnctzmh8P+WUJ83wDNX48k6Z8y2kUJ6e/kq2+F2RmKCk/dm9d+h3jB86TouHP3V/
+	INmfltxd58tvaYmQ95NswJvvrKL/RSK+zqKzoGMsfK9GqLOgdQ20fOgrKOvec+BR63x0KitMNta
+	02W9Eh0pXwyM54fG162dV43EtopcTGJSMEjlL6rtUrpP+1AS8TvQQR4StXFWBoI9VsqoaXfTBmU
+	rp8DCSpElOF+ATLMTj9lPu6UtWyNvP00ghcXyBAoSaRpkenKKQJw13WvgrfXnQqYkkp3Bd2Puq+
+	dqJwL7BKJhTD3JjlQIs4IJz/dWPGFqB6SBNZrVSHEw44szlmJ7Oz6E6T4KElebnwBagNHFDF0kM
+	Fv7bLu9UUxPraxbfjTD8e
+X-Google-Smtp-Source: AGHT+IF5ClT+jFJOFWWN+swpKgqoy5P/WC/tBm0ZeTqSB+ht2XqV+tdq4l1jWqI0joYLTCqze6MH/Q==
+X-Received: by 2002:a05:690c:2d85:b0:6fe:c803:b471 with SMTP id 00721157ae682-6fec803f955mr40140227b3.16.1741393214808;
+        Fri, 07 Mar 2025 16:20:14 -0800 (PST)
+Received: from ?IPV6:2600:1700:45dd:7000:1e21:dfd9:6403:66c9? ([2600:1700:45dd:7000:1e21:dfd9:6403:66c9])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6feb2a5be9esm9675507b3.35.2025.03.07.16.20.14
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 07 Mar 2025 16:20:14 -0800 (PST)
+Message-ID: <25c3cee9-ab12-4db6-b5bd-96a435557f59@gmail.com>
+Date: Fri, 7 Mar 2025 19:20:13 -0500
 MIME-Version: 1.0
-References: <PA2PR06MB922472DD11FB75D7BC1C90BDAAD52@PA2PR06MB9224.eurprd06.prod.outlook.com>
-In-Reply-To: <PA2PR06MB922472DD11FB75D7BC1C90BDAAD52@PA2PR06MB9224.eurprd06.prod.outlook.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 7 Mar 2025 11:18:42 -0800
-X-Gm-Features: AQ5f1JrFk6qudRnVulu0bvGFk5TNGO9s5ZiQQA7atdly93YEqAu-yEmsiQdXMLc
-Message-ID: <CAMKF1sq1Gz3=H_FoVjJxRQCt3cT1GQ5_km1CA-QOJxvXZoaK9Q@mail.gmail.com>
-Subject: Re: [oe] [meta-python]recipes python3-pandas not getting built
- properly for arm 32 bit
-To: prasad.mulay@in.abb.com
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="0000000000004d66f4062fc57f5f"
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Subject: kirkstone merge request: March 7th
+Autocrypt: addr=akuster808@gmail.com; keydata=
+ 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
+ ApZ86eOP
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 07 Mar 2025 19:19:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115800
+ <openembedded-devel@lists.openembedded.org>; Sat, 08 Mar 2025 00:20:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115801
 
---0000000000004d66f4062fc57f5f
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit 880df90c865b57d38f1ff836fe8900c94434322f:
 
-is it same as https://github.com/pandas-dev/pandas/issues/55305
+   phpmyadmin: fix CVE-2025-24529/CVE-2025-24530 (2025-02-09 07:58:44 -0800)
 
-On Thu, Mar 6, 2025 at 8:23=E2=80=AFPM Prasad Mulay via lists.openembedded.=
-org
-<prasad.mulay=3Din.abb.com@lists.openembedded.org> wrote:
+are available in the Git repository at:
 
-> Hello
->
-> https://github.com/pandas-dev/pandas/issues/55305
->
-> this is reported on pandas repo. looking at the comments looks to be bug
-> from build system. I have tried the solution specified there. but still
-> problem is persisting.
->
-> I am using custom IMX6 board.
->
->
->
-> Below is rspose from my board.
->
-> root@imx6dldau:~# python
->
-> Python 3.12.6 (main, Sep  6 2024, 19:03:47) [GCC 13.3.0] on linux
->
-> Type "help", "copyright", "credits" or "license" for more information.
->
-> >>> import pandas as pd
->
-> >>> # Create a list of data
->
-> >>> data =3D [["Alice", 25], ["Bob", 30], ["Carol", 35]]
->
-> >>> # Create a Pandas DataFrame from the list of data
->
-> >>> df =3D pd.DataFrame(data, columns=3D["Name", "Age"])
->
-> >>> # Print the DataFrame
->
-> >>> print(df)
->
-> Traceback (most recent call last):
->
->   File "<stdin>", line 1, in <module>
->
->   File "/usr/lib/python3.12/site-packages/pandas/core/frame.py", line
-> 1094, in __repr__
->
->     return self.to_string(**repr_params)
->
->            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->
->   File "/usr/lib/python3.12/site-packages/pandas/core/frame.py", line
-> 1271, in to_string
->
->     return fmt.DataFrameRenderer(formatter).to_string(
->
->            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->
->   File "/usr/lib/python3.12/site-packages/pandas/io/formats/format.py",
-> line 1134, in to_string
->
->     string =3D string_formatter.to_string()
->
->              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->
->   File "/usr/lib/python3.12/site-packages/pandas/io/formats/string.py",
-> line 30, in to_string
->
->     text =3D self._get_string_representation()
->
->            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->
->   File "/usr/lib/python3.12/site-packages/pandas/io/formats/string.py",
-> line 45, in _get_string_representation
->
->     strcols =3D self._get_strcols()
->
->               ^^^^^^^^^^^^^^^^^^^
->
->   File "/usr/lib/python3.12/site-packages/pandas/io/formats/string.py",
-> line 36, in _get_strcols
->
->     strcols =3D self.fmt.get_strcols()
->
->               ^^^^^^^^^^^^^^^^^^^^^^
->
->   File "/usr/lib/python3.12/site-packages/pandas/io/formats/format.py",
-> line 615, in get_strcols
->
->     strcols =3D self._get_strcols_without_index()
->
->               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->
->   File "/usr/lib/python3.12/site-packages/pandas/io/formats/format.py",
-> line 870, in _get_strcols_without_index
->
->     str_columns =3D self._get_formatted_column_labels(self.tr_frame)
->
->                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->
->   File "/usr/lib/python3.12/site-packages/pandas/io/formats/format.py",
-> line 949, in _get_formatted_column_labels
->
->     dtypes =3D self.frame.dtypes
->
->              ^^^^^^^^^^^^^^^^^
->
->   File "/usr/lib/python3.12/site-packages/pandas/core/generic.py", line
-> 6158, in dtypes
->
->     data =3D self._mgr.get_dtypes()
->
->            ^^^^^^^^^^^^^^^^^^^^^^
->
->   File
-> "/usr/lib/python3.12/site-packages/pandas/core/internals/managers.py", li=
-ne
-> 278, in get_dtypes
->
->     return dtypes.take(self.blknos)
->
->                        ^^^^^^^^^^^
->
->   File
-> "/usr/lib/python3.12/site-packages/pandas/core/internals/managers.py", li=
-ne
-> 179, in blknos
->
->     self._rebuild_blknos_and_blklocs()
->
->   File "pandas/_libs/internals.pyx", line 755, in
-> pandas._libs.internals.BlockManager._rebuild_blknos_and_blklocs
->
-> ValueError: Buffer dtype mismatch, expected 'intp_t' but got 'long long'
->
-> >>>
->
->
->
-> Any help would be appreciated.
->
-> Thank you
->
-> Regards
->
-> Prasad Mulay
->
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#115777):
-> https://lists.openembedded.org/g/openembedded-devel/message/115777
-> Mute This Topic: https://lists.openembedded.org/mt/111562623/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+   https://git.openembedded.org/meta-openembedded kirkstone-next
 
---0000000000004d66f4062fc57f5f
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+for you to fetch changes up to 7e18b3fc774b7efabf9a20ae3cd6abd0e0715b59:
 
-<div dir=3D"ltr">is it same as=C2=A0<a href=3D"https://github.com/pandas-de=
-v/pandas/issues/55305">https://github.com/pandas-dev/pandas/issues/55305</a=
-></div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr=
-" class=3D"gmail_attr">On Thu, Mar 6, 2025 at 8:23=E2=80=AFPM Prasad Mulay =
-via <a href=3D"http://lists.openembedded.org">lists.openembedded.org</a> &l=
-t;prasad.mulay=3D<a href=3D"mailto:in.abb.com@lists.openembedded.org">in.ab=
-b.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"g=
-mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
-,204,204);padding-left:1ex"><div class=3D"msg1849040215300757331">
+   lapack: upgrade 3.10.0 -> 3.10.1 (2025-03-07 19:18:02 -0500)
 
+----------------------------------------------------------------
+Changqing Li (2):
+       abseil-cpp: fix CVE-2025-0838
+       nginx: fix CVE-2025-23419
 
+Haixiao Yan (1):
+       freediameter: fix do_fetch warning
 
+Jinfeng Wang (1):
+       net-snmp: fix memory leak
 
+Peter Marko (1):
+       python3-grpcio(-tools): fix build concurrency issue
 
-<div lang=3D"EN-US" style=3D"overflow-wrap: break-word;">
-<div class=3D"m_1849040215300757331WordSection1">
-<p class=3D"MsoNormal">Hello <u></u><u></u></p>
-<p class=3D"MsoNormal"><a href=3D"https://github.com/pandas-dev/pandas/issu=
-es/55305" target=3D"_blank">https://github.com/pandas-dev/pandas/issues/553=
-05</a><u></u><u></u></p>
-<p class=3D"MsoNormal">this is reported on pandas repo. looking at the comm=
-ents looks to be bug from build system. I have tried the solution specified=
- there. but still problem is persisting.<u></u><u></u></p>
-<p class=3D"MsoNormal">I am using custom IMX6 board.<u></u><u></u></p>
-<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
-<p class=3D"MsoNormal">Below is rspose from my board.<u></u><u></u></p>
-<p class=3D"MsoNormal">root@imx6dldau:~# python<u></u><u></u></p>
-<p class=3D"MsoNormal">Python 3.12.6 (main, Sep=C2=A0 6 2024, 19:03:47) [GC=
-C 13.3.0] on linux<u></u><u></u></p>
-<p class=3D"MsoNormal">Type &quot;help&quot;, &quot;copyright&quot;, &quot;=
-credits&quot; or &quot;license&quot; for more information.<u></u><u></u></p=
->
-<p class=3D"MsoNormal">&gt;&gt;&gt; import pandas as pd<u></u><u></u></p>
-<p class=3D"MsoNormal">&gt;&gt;&gt; # Create a list of data<u></u><u></u></=
-p>
-<p class=3D"MsoNormal">&gt;&gt;&gt; data =3D [[&quot;Alice&quot;, 25], [&qu=
-ot;Bob&quot;, 30], [&quot;Carol&quot;, 35]]<u></u><u></u></p>
-<p class=3D"MsoNormal">&gt;&gt;&gt; # Create a Pandas DataFrame from the li=
-st of data<u></u><u></u></p>
-<p class=3D"MsoNormal">&gt;&gt;&gt; df =3D pd.DataFrame(data, columns=3D[&q=
-uot;Name&quot;, &quot;Age&quot;])<u></u><u></u></p>
-<p class=3D"MsoNormal">&gt;&gt;&gt; # Print the DataFrame<u></u><u></u></p>
-<p class=3D"MsoNormal">&gt;&gt;&gt; print(df)<u></u><u></u></p>
-<p class=3D"MsoNormal">Traceback (most recent call last):<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0 File &quot;&lt;stdin&gt;&quot;, line 1, in &l=
-t;module&gt;<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0 File &quot;/usr/lib/python3.12/site-packages/=
-pandas/core/frame.py&quot;, line 1094, in __repr__<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0 return self.to_string(**repr_para=
-ms)<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0 File &quot;/usr/lib/python3.12/site-packages/=
-pandas/core/frame.py&quot;, line 1271, in to_string<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0 return fmt.DataFrameRenderer(form=
-atter).to_string(<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0 File &quot;/usr/lib/python3.12/site-packages/=
-pandas/io/formats/format.py&quot;, line 1134, in to_string<u></u><u></u></p=
->
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0 string =3D string_formatter.to_st=
-ring()<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0 File &quot;/usr/lib/python3.12/site-packages/=
-pandas/io/formats/string.py&quot;, line 30, in to_string<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0 text =3D self._get_string_represe=
-ntation()<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0 File &quot;/usr/lib/python3.12/site-packages/=
-pandas/io/formats/string.py&quot;, line 45, in _get_string_representation<u=
-></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0 strcols =3D self._get_strcols()<u=
-></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 ^^^^^^^^^^^^^^^^^^^<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0 File &quot;/usr/lib/python3.12/site-packages/=
-pandas/io/formats/string.py&quot;, line 36, in _get_strcols<u></u><u></u></=
-p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0 strcols =3D self.fmt.get_strcols(=
-)<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 ^^^^^^^^^^^^^^^^^^^^^^<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0 File &quot;/usr/lib/python3.12/site-packages/=
-pandas/io/formats/format.py&quot;, line 615, in get_strcols<u></u><u></u></=
-p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0 strcols =3D self._get_strcols_wit=
-hout_index()<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<u></u><u></u>=
-</p>
-<p class=3D"MsoNormal">=C2=A0 File &quot;/usr/lib/python3.12/site-packages/=
-pandas/io/formats/format.py&quot;, line 870, in _get_strcols_without_index<=
-u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0 str_columns =3D self._get_formatt=
-ed_column_labels(self.tr_frame)<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ^^^^^^^^^^^^^^^^^^^^^^^=
-^^^^^^^^^^^^^^^^^^^^^^^^^<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0 File &quot;/usr/lib/python3.12/site-packages/=
-pandas/io/formats/format.py&quot;, line 949, in _get_formatted_column_label=
-s<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0 dtypes =3D self.frame.dtypes<u></=
-u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 ^^^^^^^^^^^^^^^^^<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0 File &quot;/usr/lib/python3.12/site-packages/=
-pandas/core/generic.py&quot;, line 6158, in dtypes<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0 data =3D self._mgr.get_dtypes()<u=
-></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 ^^^^^^^^^^^^^^^^^^^^^^<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0 File &quot;/usr/lib/python3.12/site-packages/=
-pandas/core/internals/managers.py&quot;, line 278, in get_dtypes<u></u><u><=
-/u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0 return dtypes.take(self.blknos)<u=
-></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0 ^^^^^^^^^^^<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0 File &quot;/usr/lib/python3.12/site-packages/=
-pandas/core/internals/managers.py&quot;, line 179, in blknos<u></u><u></u><=
-/p>
-<p class=3D"MsoNormal">=C2=A0=C2=A0=C2=A0 self._rebuild_blknos_and_blklocs(=
-)<u></u><u></u></p>
-<p class=3D"MsoNormal">=C2=A0 File &quot;pandas/_libs/internals.pyx&quot;, =
-line 755, in pandas._libs.internals.BlockManager._rebuild_blknos_and_blkloc=
-s<u></u><u></u></p>
-<p class=3D"MsoNormal">ValueError: Buffer dtype mismatch, expected &#39;int=
-p_t&#39; but got &#39;long long&#39;<u></u><u></u></p>
-<p class=3D"MsoNormal">&gt;&gt;&gt;<u></u>=C2=A0<u></u></p>
-<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
-<p class=3D"MsoNormal">Any help would be appreciated. <u></u><u></u></p>
-<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" summary=3D"Email si=
-gnature" width=3D"100%" style=3D"width:100%;border-collapse:collapse">
-<tbody>
-<tr>
-<td width=3D"100%" style=3D"width:100%;padding:0in">
-<div id=3D"m_1849040215300757331signature">
-<div style=3D"margin-bottom:15pt">
-<div>
-<p class=3D"MsoNormal" style=3D"margin-top:15pt;line-height:12pt">Thank you=
-<u></u><u></u></p>
-<p class=3D"MsoNormal">Regards <u></u><u></u></p>
-<p class=3D"MsoNormal">Prasad Mulay<u></u><u></u></p>
-</div>
-</div>
-</div>
-</td>
-</tr>
-</tbody>
-</table>
-<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
-</div>
-</div>
+Vijay Anusuri (1):
+       postgresql: upgrade 14.14 -> 14.17
 
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#115777): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/115777" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/115777</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/111562623/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/111562623/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</div></blockquote></div>
+Wang Mingyu (1):
+       python3-future: upgrade 0.18.2 -> 0.18.3
 
---0000000000004d66f4062fc57f5f--
+Yogita Urade (2):
+       dlt-daemon: fix CVE-2022-39836 and CVE-2022-39837
+       dlt-daemon: fix CVE-2023-36321
+
+wangmy (1):
+       lapack: upgrade 3.10.0 -> 3.10.1
+
+  .../recipes-protocols/freediameter/freediameter_1.4.0.bb        | 8 +-
+  ...0001-unload_all_mibs-fix-memory-leak-by-freeing-tclist.patch | 40 +++++
+  meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.3.bb    | 1 +
+  .../0001-configure.ac-bypass-autoconf-2.69-version-check.patch  | 2 +-
+  .../postgresql/{postgresql_14.14.bb => postgresql_14.17.bb} |   4 +-
+  .../recipes-devtools/abseil-cpp/abseil-cpp/CVE-2025-0838.patch  | 114 
++++++++++++++
+  meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb           | 1 +
+  .../lapack/{lapack_3.10.0.bb => lapack_3.10.1.bb} |   4 +-
+  .../dlt-daemon/dlt-daemon/CVE-2022-39836-CVE-2022-39837.patch   | 251 
+++++++++++++++++++++++++++++
+  .../recipes-extended/dlt-daemon/dlt-daemon/CVE-2023-36321.patch | 32 ++++
+  meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.8.bb        | 2 +
+  .../{python3-future_0.18.2.bb => python3-future_0.18.3.bb} |   3 +-
+  .../recipes-devtools/python/python3-grpcio-tools_1.45.0.bb      | 4 +
+  meta-python/recipes-devtools/python/python3-grpcio_1.45.0.bb    | 4 +
+  meta-webserver/recipes-httpd/nginx/files/CVE-2025-23419.patch   | 87 
+++++++++++
+  meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb              | 2 +
+  16 files changed, 547 insertions(+), 12 deletions(-)
+  create mode 100644 
+meta-networking/recipes-protocols/net-snmp/net-snmp/0001-unload_all_mibs-fix-memory-leak-by-freeing-tclist.patch
+  rename meta-oe/recipes-dbs/postgresql/{postgresql_14.14.bb => 
+postgresql_14.17.bb} (71%)
+  create mode 100644 
+meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/CVE-2025-0838.patch
+  rename meta-oe/recipes-devtools/lapack/{lapack_3.10.0.bb => 
+lapack_3.10.1.bb} (86%)
+  create mode 100644 
+meta-oe/recipes-extended/dlt-daemon/dlt-daemon/CVE-2022-39836-CVE-2022-39837.patch
+  create mode 100644 
+meta-oe/recipes-extended/dlt-daemon/dlt-daemon/CVE-2023-36321.patch
+  rename meta-python/recipes-devtools/python/{python3-future_0.18.2.bb 
+=> python3-future_0.18.3.bb} (70%)
+  create mode 100644 
+meta-webserver/recipes-httpd/nginx/files/CVE-2025-23419.patch
+
 
