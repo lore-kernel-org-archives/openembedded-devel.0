@@ -1,120 +1,249 @@
-Return-Path: <akash.hadke27@gmail.com>
+Return-Path: <rob.woolleywr@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 093C5C282EC
-	for <webhook@archiver.kernel.org>; Sat,  8 Mar 2025 09:04:51 +0000 (UTC)
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.web10.6122.1741424684155656892
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B943C282EC
+	for <webhook@archiver.kernel.org>; Sat,  8 Mar 2025 13:28:52 +0000 (UTC)
+Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com [209.85.219.180])
+ by mx.groups.io with SMTP id smtpd.web11.8877.1741440531053124965
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 08 Mar 2025 01:04:44 -0800
+ Sat, 08 Mar 2025 05:28:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=bwZLvw+E;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: akash.hadke27@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-22435603572so17262915ad.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 08 Mar 2025 01:04:44 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XotvsgWL;
+ spf=pass (domain: gmail.com, ip: 209.85.219.180, mailfrom: rob.woolleywr@gmail.com)
+Received: by mail-yb1-f180.google.com with SMTP id 3f1490d57ef6-e6343c68b8fso2076028276.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 08 Mar 2025 05:28:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741424683; x=1742029483; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=fyCqPfR7C7MFd4MVbfeFA9xfS41rcGB2YFQVzV11FqI=;
-        b=bwZLvw+E1YkfPq/xNTNX12WWD8AxLHiGNR8j7qiWrQyOcPtQlvr+BaJZ7f9drU/SBz
-         EBCTtlIHwacozqE49nCYPyePG11dKIypR2i1Ta8+g2GiSF9RKejA1iKMERhcZ8JbVQPK
-         pUVi87jfOmQql795SgiaFQ+JwFL11rqlcQJdkZ8dZQp1gu+H0OnE3okyaEYbejCok2TV
-         trarut2VPa23RVa6Z1CFHALoSZ0vfsbPt1rR8ogAvqQsWzV2zd4jXowcU6d4CUz2hv7P
-         Nnm04nf+S6RcIHrODvuZAgITbVmRQXkYg73lffbUjpK6FdlSgsEsQC/rN6xhjZ2RTxeS
-         Btsw==
+        d=gmail.com; s=20230601; t=1741440530; x=1742045330; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=/zun5Bj588mDmbab5+0CyPQf500LDnscrot9At7CEmQ=;
+        b=XotvsgWLwWFds2bAWUz48hrVYQxKF2EpCYW0IfoDrslm31RsZy09cN6aj3zS5hOFN+
+         YDYaBAEkjSdWRhYr5V4nv9DXAIbNUSja2dLiSbqgTDM4BV0GxVcDUVCgP/sg6ex1yHY1
+         tSGHJpzGakmZ8BKJaqIDOZXt+nJAlSfkx7trOmZoptpCAxC2Yy4MPnZj19ZWbTJjSpRe
+         KxTLH7MVxKZ1Qw6VHivT+ZrwWwkGgy+2tAlLHt77yvW65E9FMRyl5kFx1d4NMLe3YSY7
+         pXciq0S/27ubFwdkqPdltaNxAT9cINT7yz1y8xGQaRPkuN+43hk3SNdZfpFsgUkSDw66
+         i4yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741424683; x=1742029483;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=fyCqPfR7C7MFd4MVbfeFA9xfS41rcGB2YFQVzV11FqI=;
-        b=TkSLFCHZ2Lhjh6eLmQJ4+Xn3Lmt7KTkkv0RPT5Jy5XmsOOsNzXB1ITxa7XV3JAXjhl
-         jnlZe5TDMAOhggIq0LdKWX587Ut9tb6hO4fKLDd4t4n19zvLdkNwf1JBs9jUzCIPrNas
-         Sed9HdotwvsVRjUC7mpPKAG0fsuFMjnrEOh35caFiXhNc5YSNrS/4QDplQB6m8/lCNZ4
-         t+GfKN5hrDZrWWz1d0fMsxVhgCPa8ur8WDCcji8WyZLAdegr3vr1rkuaVGLSRLpbuJYA
-         lquAbSCbkXpEToFMegTmQfgecwp/NCj5nKU/YUAPy7M1qCj1pKtnIiM1owZLdfZ01U+m
-         cxAw==
-X-Gm-Message-State: AOJu0YwSTjZmk0aDPOu4/ZHgtu/t4649sHo6Y2Jf0v2mAy5G2m7L+GQk
-	4MqFwUHFMpYjqztzr21ylizpqJldhR0vWDMyNef8KJiRfQ7DHfiARVpebw==
-X-Gm-Gg: ASbGnctsa52JwqHnkhlh70PGf9J7YtbMZvH0lVi1oOA0zQjhdY0UV0XKdECAfF9U5XX
-	BX2AleZ5SfSKjBRJ6cvDZbAterFf2fCJQokJfdYgoJTvlLPOXMmOGEmA+BkQCjuDZFWS9DbFZGk
-	lJRB3vaRpF157sieihl3gUOxFc7UTbfrB7Xo/SMlo4bqINktVGTFsF6EQ0/BF2gt7Op86tRh+G9
-	9vSWUv8SR4nG9cbWipyNXWUfR8KDzu544nLlF3MitPL7B1P56p4IVw2iWQylIqo+GryA0i5Sz8Y
-	eRgmahUCUOx+XyDOAbgUoyonni/dgUjbqWzmxWf/uUhlsliH6e+19A==
-X-Google-Smtp-Source: AGHT+IEbxXo8atxDBCpX1h1tfW+FfpB54EPu789HrOtDBAjfC0s3drvsauc4SOTj3JZCyuZJBIqhlw==
-X-Received: by 2002:a17:903:192:b0:224:1ec0:8a16 with SMTP id d9443c01a7336-22428a97f21mr109823725ad.21.1741424682941;
-        Sat, 08 Mar 2025 01:04:42 -0800 (PST)
-Received: from L-18010.kpit.com ([49.36.57.235])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-af50bc9b28fsm2124984a12.60.2025.03.08.01.04.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 08 Mar 2025 01:04:42 -0800 (PST)
-From: Akash Hadke <akash.hadke27@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Claus Stovgaard <claus.stovgaard@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 3/3] lcov: Add missing RDEPENDS
-Date: Sat,  8 Mar 2025 14:34:05 +0530
-Message-Id: <20250308090405.345593-3-akash.hadke27@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250308090405.345593-1-akash.hadke27@gmail.com>
-References: <20250308090405.345593-1-akash.hadke27@gmail.com>
+        d=1e100.net; s=20230601; t=1741440530; x=1742045330;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=/zun5Bj588mDmbab5+0CyPQf500LDnscrot9At7CEmQ=;
+        b=UGbmj0kc8cDkcQSU1cdptimOLo/lsbpKnNgBltvHCHZOgeKXH7jVOHWSeF9whHYP2b
+         r9BT4xIMknuzYwHBW6D8U2cFx9RQdGBoj7SNqx3D8hcbtGn5v7w9SgMj8+bWMWXYiQY0
+         hQC/9CevP1OR57L8fFxYrnAD8t81dhwcGqk4s4a6Ppaqitpjew8t7s+mzm1yRmAkj71W
+         8C3eN7BQmw7YWZZuPV3PP1HFYHfZjwF1LPqUrSMs+6xuSNkRFTL4ZXL5EVLGP/rd2xfA
+         e4O6k+EPapwfrCaP+WbUTKal18MU5MkfFfZgFwDjDGaR/3ARscnigiMpjmxt9sJGh2PL
+         DiFg==
+X-Forwarded-Encrypted: i=1; AJvYcCUKM2XRjcK3LfkV6HIc+yfN+9ybrQ8zdvkIZfuB09fF+iogtPvUN58pbugliSQhbUJnE4huSUnj0RE0OvN6uyt4NxA=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YzQjXClQwmvPiwb8/Z1RalwzN7pbrjNUdm1P4dos/3vmX5/xFO7
+	dknrPkt+up0Q2lg/OJq4KMN0PCMXcBhAU1nUlAs6pEwNbPCzMmA+7jF/cqBzbqc+3T9LR8eZKTl
+	TnnuTDT3iMNtoIZ/dkqj2HOc6DWI=
+X-Gm-Gg: ASbGnct/TV5mBg+X+uEVqSGFL83oNhqJkfleOwuG+A/zXAGJDUkMpkW5yYMyASqz8I4
+	fB/XFIYdNWvUuChes5sV4vO+Vv0Nzd4rpxP3msPWYzwgPyuJbusUrNpLAP2P6/q8om/ldCuPjvi
+	MtgcVnBbwqkZZLgKwgw2NUQqporfo=
+X-Google-Smtp-Source: AGHT+IFaojJscXQraikETN4Z2BbluMX3+zwGPBkCkehAUJRhVIvuI1JNeh290jUGgJc8ZF71Jl28aYm54dnqbJZ3MJw=
+X-Received: by 2002:a05:6902:705:b0:e63:5bdd:f46d with SMTP id
+ 3f1490d57ef6-e635c179cddmr8313178276.25.1741440529953; Sat, 08 Mar 2025
+ 05:28:49 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CAGAhMBz9zz0K8Fnj__NkEVvbsD8SibEs=BKR8YFE9mv+mG6tsw@mail.gmail.com>
+ <17fde519-38d7-4c44-8592-a0ff6efd56fe@balister.org> <CA+chaQdAgNa4V-c9B48CkLOAxYhGcc2bcmb=mUMqe2U+gFf+Hg@mail.gmail.com>
+ <CAMKF1sprcWE99WFDtfF1SeMYzZ_M5RbkeJtN4DACTyyB0WKcwg@mail.gmail.com>
+In-Reply-To: <CAMKF1sprcWE99WFDtfF1SeMYzZ_M5RbkeJtN4DACTyyB0WKcwg@mail.gmail.com>
+From: Rob Woolley <rob.woolleywr@gmail.com>
+Date: Sat, 8 Mar 2025 08:28:40 -0500
+X-Gm-Features: AQ5f1JpC363LWfXe4Zu9eGk4_sE3qbCwlb5dE2mezdvuqPej5osQp_9cJgMhCto
+Message-ID: <CAGAhMBzDoS9ihpnbFBW3wLmxCkxyO9fxgwZnfGBYWtd4OmGGzQ@mail.gmail.com>
+Subject: Re: [oe] [meta-python] python3-scipy
+To: Khem Raj <raj.khem@gmail.com>
+Cc: martin.jansa@gmail.com, philip@balister.org, 
+	openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000002f7d5f062fd4b84d"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 08 Mar 2025 09:04:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115806
+ <openembedded-devel@lists.openembedded.org>; Sat, 08 Mar 2025 13:28:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115807
 
-From: Claus Stovgaard <claus.stovgaard@gmail.com>
+--0000000000002f7d5f062fd4b84d
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Found by just adding lcov to core-image-minimal, running geninfo and
-getting errors like.
+I don't mind signing up to help maintain it in meta-python.  I need to make
+sure they keep building either way.
 
-Can't locate Module/Load.pm in @INC (you may need to install the Module::Load module)
-... at /usr/bin/geninfo line 63.
-BEGIN failed--compilation aborted at /usr/bin/geninfo line 63.
+I have some other Python recipes in meta-ros that are not specific to ROS
+itself, that I'd prefer to maintain upstream.
 
-Can't locate Module/Metadata.pm in @INC (you may need to install the Module::Metadata module)
-... at /usr/lib/perl5/5.38.2/Module/Load/Conditional.pm line 14.
-BEGIN failed--compilation aborted at /usr/lib/perl5/5.38.2/Module/Load/Conditional.pm line 14.
-Compilation failed in require at /usr/bin/geninfo line 64.
+Are new recipes allowed in meta-openembedded for all supported branches or
+just the development release?
 
-Signed-off-by: Claus Stovgaard <claus.stovgaard@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e7f560b9b8dacf7aadf59d6321c2e869dcd5831e)
-Signed-off-by: Akash Hadke <akash.hadke27@gmail.com>
----
- meta-oe/recipes-support/lcov/lcov_1.16.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+Regards,
+Rob
 
-diff --git a/meta-oe/recipes-support/lcov/lcov_1.16.bb b/meta-oe/recipes-support/lcov/lcov_1.16.bb
-index 53e1921054..81b80790fe 100755
---- a/meta-oe/recipes-support/lcov/lcov_1.16.bb
-+++ b/meta-oe/recipes-support/lcov/lcov_1.16.bb
-@@ -9,7 +9,9 @@ LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
- RDEPENDS:${PN} += " \
-+    libjson-perl \
-     perl \
-+    perl-module-compress-zlib \
-     perl-module-constant \
-     perl-module-cwd \
-     perl-module-digest-md5 \
-@@ -27,6 +29,8 @@ RDEPENDS:${PN} += " \
-     perl-module-getopt-long \
-     perl-module-getopt-std \
-     perl-module-list-util \
-+    perl-module-load \
-+    perl-module-metadata \    
-     perl-module-mro \
-     perl-module-overload \
-     perl-module-overload-numbers \
--- 
-2.25.1
+On Fri, Mar 7, 2025 at 2:08=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrote:
 
+> On Fri, Mar 7, 2025 at 10:55=E2=80=AFAM Martin Jansa via
+> lists.openembedded.org <martin.jansa=3Dgmail.com@lists.openembedded.org>
+> wrote:
+> >
+> > On Fri, Mar 7, 2025 at 7:38=E2=80=AFPM Philip Balister via
+> > lists.openembedded.org <philip=3Dbalister.org@lists.openembedded.org>
+> > wrote:
+> > >
+> > > On 3/6/25 1:07 PM, Rob Woolley via lists.openembedded.org wrote:
+> > > > The meta-scipy layer was archived on Nov 30, 2023 (
+> https://github.com/
+> > > > tuxable-ltd/meta-scipy <https://github.com/tuxable-ltd/meta-scipy>)
+> > > >
+> > > > I need python3-scipy for some recipes in ROS 2 (notably pinocchio),
+> so I
+> > > > patched it up and got it building again:
+> https://github.com/robwoolley/
+> > > > meta-scipy <https://github.com/robwoolley/meta-scipy>
+> > > >
+> > > > I don't know the history behind why it was in a separate layer.
+> Would
+> > > > it be worth submitting to meta-python instead of resurrecting the
+> meta-
+> > > > scipy layer?
+> > >
+> > > I want to say because scipy needs fortran and that is not built by
+> > > default. So world builds woul dneed to skip scipy unless fortran was
+> > > enabled.
+> > >
+> > > Does this sound right?
+> >
+> > Which is the same as meta-oe/recipes-devtools/lapack/lapack_3.12.1.bb
+> > which also depends on libgfortran and only has:
+> > EXCLUDE_FROM_WORLD =3D "1"
+> > and comment about how to enable fortran in gcc.
+> >
+> > Just depending on fortran shouldn't eliminate it from meta-python.
+>
+> I think, I will need someone to signup to maintain it there, there are
+> changes always
+> happening that will require fixing these packages, In the end it falls
+> on my plate whenever
+> there is a python upgrade in core or something else which breaks it,
+>
+> >
+> > Cheers,
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#115798):
+> https://lists.openembedded.org/g/openembedded-devel/message/115798
+> > Mute This Topic: https://lists.openembedded.org/mt/111555507/1997914
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[
+> raj.khem@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
+>
+
+--0000000000002f7d5f062fd4b84d
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">I don&#39;t mind signing up to help maintain it in meta-py=
+thon.=C2=A0 I need to make sure they keep building either way.<br><br>I hav=
+e some other Python recipes in meta-ros that are not specific to ROS itself=
+, that I&#39;d prefer to maintain upstream.<div><br></div><div>Are new reci=
+pes allowed in meta-openembedded for all supported branches or just the dev=
+elopment release?<br><br>Regards,<br>Rob</div></div><br><div class=3D"gmail=
+_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Fri,=
+ Mar 7, 2025 at 2:08=E2=80=AFPM Khem Raj &lt;<a href=3D"mailto:raj.khem@gma=
+il.com">raj.khem@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gma=
+il_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,2=
+04,204);padding-left:1ex">On Fri, Mar 7, 2025 at 10:55=E2=80=AFAM Martin Ja=
+nsa via<br>
+<a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" target=3D"_bla=
+nk">lists.openembedded.org</a> &lt;martin.jansa=3D<a href=3D"mailto:gmail.c=
+om@lists.openembedded.org" target=3D"_blank">gmail.com@lists.openembedded.o=
+rg</a>&gt;<br>
+wrote:<br>
+&gt;<br>
+&gt; On Fri, Mar 7, 2025 at 7:38=E2=80=AFPM Philip Balister via<br>
+&gt; <a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" target=3D=
+"_blank">lists.openembedded.org</a> &lt;philip=3D<a href=3D"mailto:balister=
+.org@lists.openembedded.org" target=3D"_blank">balister.org@lists.openembed=
+ded.org</a>&gt;<br>
+&gt; wrote:<br>
+&gt; &gt;<br>
+&gt; &gt; On 3/6/25 1:07 PM, Rob Woolley via <a href=3D"http://lists.openem=
+bedded.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.org</a>=
+ wrote:<br>
+&gt; &gt; &gt; The meta-scipy layer was archived on Nov 30, 2023 (<a href=
+=3D"https://github.com/" rel=3D"noreferrer" target=3D"_blank">https://githu=
+b.com/</a><br>
+&gt; &gt; &gt; tuxable-ltd/meta-scipy &lt;<a href=3D"https://github.com/tux=
+able-ltd/meta-scipy" rel=3D"noreferrer" target=3D"_blank">https://github.co=
+m/tuxable-ltd/meta-scipy</a>&gt;)<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; I need python3-scipy for some recipes in ROS 2 (notably pino=
+cchio), so I<br>
+&gt; &gt; &gt; patched it up and got it building again: <a href=3D"https://=
+github.com/robwoolley/" rel=3D"noreferrer" target=3D"_blank">https://github=
+.com/robwoolley/</a><br>
+&gt; &gt; &gt; meta-scipy &lt;<a href=3D"https://github.com/robwoolley/meta=
+-scipy" rel=3D"noreferrer" target=3D"_blank">https://github.com/robwoolley/=
+meta-scipy</a>&gt;<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; I don&#39;t know the history behind why it was in a separate=
+ layer.=C2=A0 Would<br>
+&gt; &gt; &gt; it be worth submitting to meta-python instead of resurrectin=
+g the meta-<br>
+&gt; &gt; &gt; scipy layer?<br>
+&gt; &gt;<br>
+&gt; &gt; I want to say because scipy needs fortran and that is not built b=
+y<br>
+&gt; &gt; default. So world builds woul dneed to skip scipy unless fortran =
+was<br>
+&gt; &gt; enabled.<br>
+&gt; &gt;<br>
+&gt; &gt; Does this sound right?<br>
+&gt;<br>
+&gt; Which is the same as meta-oe/recipes-devtools/lapack/<a href=3D"http:/=
+/lapack_3.12.1.bb" rel=3D"noreferrer" target=3D"_blank">lapack_3.12.1.bb</a=
+><br>
+&gt; which also depends on libgfortran and only has:<br>
+&gt; EXCLUDE_FROM_WORLD =3D &quot;1&quot;<br>
+&gt; and comment about how to enable fortran in gcc.<br>
+&gt;<br>
+&gt; Just depending on fortran shouldn&#39;t eliminate it from meta-python.=
+<br>
+<br>
+I think, I will need someone to signup to maintain it there, there are<br>
+changes always<br>
+happening that will require fixing these packages, In the end it falls<br>
+on my plate whenever<br>
+there is a python upgrade in core or something else which breaks it,<br>
+<br>
+&gt;<br>
+&gt; Cheers,<br>
+&gt;<br>
+&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt; Links: You receive all messages sent to this group.<br>
+&gt; View/Reply Online (#115798): <a href=3D"https://lists.openembedded.org=
+/g/openembedded-devel/message/115798" rel=3D"noreferrer" target=3D"_blank">=
+https://lists.openembedded.org/g/openembedded-devel/message/115798</a><br>
+&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/11155550=
+7/1997914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.=
+org/mt/111555507/1997914</a><br>
+&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
+bedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.o=
+rg</a><br>
+&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
+devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedde=
+d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com"=
+ target=3D"_blank">raj.khem@gmail.com</a>]<br>
+&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt;<br>
+</blockquote></div>
+
+--0000000000002f7d5f062fd4b84d--
 
