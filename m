@@ -1,327 +1,271 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63968C282EC
-	for <webhook@archiver.kernel.org>; Sat,  8 Mar 2025 16:24:03 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.web11.11920.1741451042570846501
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C2A1C282EC
+	for <webhook@archiver.kernel.org>; Sat,  8 Mar 2025 17:00:23 +0000 (UTC)
+Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
+ by mx.groups.io with SMTP id smtpd.web10.12420.1741453219156813971
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 08 Mar 2025 08:24:02 -0800
+ Sat, 08 Mar 2025 09:00:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=frErSf1v;
- spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-43bd03ed604so24497205e9.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 08 Mar 2025 08:24:02 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OI79Rcep;
+ spf=pass (domain: gmail.com, ip: 209.85.167.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f182.google.com with SMTP id 5614622812f47-3f675d848c4so1599785b6e.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 08 Mar 2025 09:00:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741451041; x=1742055841; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=10m+WEnZFkWjFebYrwpqv7yi4EcC7uhKERuDzoCNd1w=;
-        b=frErSf1v4h/+de6zqB6fC90oJTxpeD4DaUrU4nya24U7sdng3oBy2mZh+7H1AauSFZ
-         w66shp9hvjbGTZThytAPKue8lI/Ke3xd9c9F/30F5ZcnSwSMUjkSSd519DoxXrhh71QP
-         GRhbROuVTqAWARriJyQa8YjIxAz2fKT7IosZeEtdfyjrLXg6WcjTFAs/tFnHlZCDn3X9
-         8BCatky6hWQFBNUP1KrFP1keDIJzv813HSnNWBKyXk19p1JtbCQECPSWZJzGNfCuiwui
-         do74q9dpV8xPikc8rTjr65rRZ0pr/4/D3sEjc9cZT2mwIzVeANn8MJTH1o2HKRys8EiH
-         Wrqw==
+        d=gmail.com; s=20230601; t=1741453218; x=1742058018; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=rwQgtfPUOzb8jtzCd0ealezrlCFlz6bYsAV6FJPZubg=;
+        b=OI79RcepNatS+/3TNYdP2digWGv0Is676yzAlif2ix4gXPytb8Y5CA7qT6qFNIRigP
+         7bpvIxr3hc0f3VwU4vrgXfjdpJAknMx7yABTbcZwHcNkmA6ZLD8vfSudLw/2dLHnMPKj
+         L9kghs1iopq4MRSBLZT7+xoNiJ1V7iQ51nLTguKhdvCM8paTcmxKuMOrMEYZbdWV50Fz
+         EQcvSe+Un+daC4YB49XRbelqFlFWe4BKyA+rNLL6MZxI0nkV+2KIBxWTkUgL1SnhJRae
+         ynnoyhobyJZmm6vaf4jXjmzlRd6sSRDH/BaneMq05AZhHGF+Sr/o9Q2P3pHdKC2Nj7ZR
+         B6Sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741451041; x=1742055841;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=10m+WEnZFkWjFebYrwpqv7yi4EcC7uhKERuDzoCNd1w=;
-        b=TRcxg7uLBE18bhpZ+eVCH/YZWViMQQOrkFk1eVEojPB+hYhcWtncn/AEJtIy0mbd78
-         wA2gG/ntWBrqFeUPHeCRLhybO432SiFVbdmcFtKY0lD6aIR5CpIVSbi1FiGhFkNtMx65
-         2oCsEOA3OLv6GQ+HnksVul9KWdhsxqIglCZnPre1s+MUm4AR+6TCPRfU1avNUJB3To9H
-         Mmu40gjzkpNR/QgWr822j1sl4aI4MGYgXEJhEI75S1KiXEuRE4IuFQ4n0a+6XgZBvinB
-         NBizY0ImxqW1ke1dyEcD+/DsDJ/a674M2l2lv8UYEtX/Qew5S1P1Vl2RNr0Pc1i6d41n
-         T6Cg==
-X-Gm-Message-State: AOJu0YzUwwnQVsaDVPV54Ge3uhpFjJGX+Vla3l+sRDI5qdJ0eEDgE/CK
-	XTibs7rmSzNVpjIrK9MTHYI75t87VC4WKWU3PreGb/HHWwyz3Zzs
-X-Gm-Gg: ASbGncs4rMNZrS75KgkV7Qs3fxoReAUxEzqJ39ayQT90lKXaW0Oxqg+SIa6A+NYqYN5
-	cXgoV97HJ/zuWNxaqFJqfmPIu1CBbeJbO1/V0+TGOPhyvVQnjGQQH5z+iHFPccoZd/Lm7Re36ge
-	x5ieA/UX7TQQ21KxJYInNKVnH9QsMkkrLKxtplOcZ6sTXwPB0wGhVNcKSNIt3Zt+bGPwhZvV6q2
-	+7YtCRZxVS9XJAGbXDYt0n4cLkRLCCtg3z/qtZNcglTkUVJRei2uyr52pm4+bLRJy2td1MW88P2
-	e12JGGUOOYvpEU7Wsi1Ea1V/n8K9vMbahcVV2ZkJrcDMBv430A15
-X-Google-Smtp-Source: AGHT+IF5fglrSm2nkngMfAb9zq8XeJqOLnIglxfBSpgmqNsgpg+ydWBSa1nrfYktyjJ2bPCqRawXag==
-X-Received: by 2002:a05:600c:3b1a:b0:43b:c316:1fee with SMTP id 5b1f17b1804b1-43c601e1134mr51909135e9.15.1741451040434;
-        Sat, 08 Mar 2025 08:24:00 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-43bd42c6203sm117842765e9.24.2025.03.08.08.23.59
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 08 Mar 2025 08:23:59 -0800 (PST)
-Message-ID: <a2876316-9a43-45f7-890a-ac1b8d840cf1@gmail.com>
-Date: Sat, 8 Mar 2025 17:23:59 +0100
+        d=1e100.net; s=20230601; t=1741453218; x=1742058018;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=rwQgtfPUOzb8jtzCd0ealezrlCFlz6bYsAV6FJPZubg=;
+        b=Bkm/i51cVUSmu0QOAlttXTN/gGk4OgdEHXk/A3N/FSmFpB3msqDtGidr7WXFF0HsLR
+         doQZmL4ey4mcqKiYIXJungi74as12aAEuZA7Ri196KmhQ2I6+S2x4tiz3LrPeILBkIvA
+         QsrmXgwVxhEWFqyUhX8rs5H2bfvidz7yW861xfMt2+9fXVGjBcDnenMGK++YXeS7SUez
+         zAKQpIZHrsv86EYAbWaw4WwMTDav33MNwrpLc+YawBWm6MClhpYmkPWBkSpPLjnrowXc
+         30Lf9iTvX5K+uUN2Ccm8d8Z+4Ot3Yl5TFlFBThtqB3UqWtIeTF7jH46137+cQ617nSkE
+         J0rQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXmuvBgQ9MuexWmU8eck62vFuX4sD7PXsp28nUvDyTpv8V7F07mzr8pC5QN517mUCW82gpD3qQK4YUHJpevjtaTxNM=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YynkNgeH3HSgrlHLTj3702xf1PU2v5SnKFIg9MS+a5Z9uUXbf/r
+	n+9mBmggswEPVBalk6hxjGwpg1mNKlocX1tQEQ0sN8laaKdiQJjamnaxcU58Wu/J/ZY79wMxSRi
+	D1DQZLwid1myNv5mzZ5ZlBVIEBEA=
+X-Gm-Gg: ASbGncsnJVfH/hBneSFZ4sxqDHeHLeeQ2qYpqOuX3zCTc9YFCoCX6IgUZkG73PrLvgE
+	jGEXdthPADozi7lmZejeeAFQ87JbO/+QsAwd6iut6Ri+j6fFNXVNMIFSbdfE+7tKiW4+VKRzjec
+	W0nps0fehSB2VKKevaKhe5Hh51wnxO/eBSUJvaMGzXrlz6/rghFC4VvsJrZU4=
+X-Google-Smtp-Source: AGHT+IE0ZS42ntx27KxgalJ1bt9S5Xv/DLF5L+XXWS5zCrwvD9hBA1Q743LgydFlALzb6KCr3QBP9ooDUpBNIV40QZQ=
+X-Received: by 2002:aca:1c07:0:b0:3f7:11b0:80f0 with SMTP id
+ 5614622812f47-3f711b0835dmr312392b6e.16.1741453218324; Sat, 08 Mar 2025
+ 09:00:18 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-python]recipes python3-pandas not getting built
- properly for arm 32 bit
-To: prasad.mulay@in.abb.com, Raj Khem <raj.khem@gmail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-References: <PA2PR06MB922472DD11FB75D7BC1C90BDAAD52@PA2PR06MB9224.eurprd06.prod.outlook.com>
- <CAMKF1sq1Gz3=H_FoVjJxRQCt3cT1GQ5_km1CA-QOJxvXZoaK9Q@mail.gmail.com>
- <7A6AC60C-85E3-402E-B66F-F7F1614AE45E@in.abb.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <7A6AC60C-85E3-402E-B66F-F7F1614AE45E@in.abb.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <CAGAhMBz9zz0K8Fnj__NkEVvbsD8SibEs=BKR8YFE9mv+mG6tsw@mail.gmail.com>
+ <17fde519-38d7-4c44-8592-a0ff6efd56fe@balister.org> <CA+chaQdAgNa4V-c9B48CkLOAxYhGcc2bcmb=mUMqe2U+gFf+Hg@mail.gmail.com>
+ <CAMKF1sprcWE99WFDtfF1SeMYzZ_M5RbkeJtN4DACTyyB0WKcwg@mail.gmail.com> <CAGAhMBzDoS9ihpnbFBW3wLmxCkxyO9fxgwZnfGBYWtd4OmGGzQ@mail.gmail.com>
+In-Reply-To: <CAGAhMBzDoS9ihpnbFBW3wLmxCkxyO9fxgwZnfGBYWtd4OmGGzQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 8 Mar 2025 09:00:07 -0800
+X-Gm-Features: AQ5f1Jo19lxNN8rdfnAmgHHm-0ZeKCVJivWCX-iTN1EPZDxudyuyekDiOeKgkhM
+Message-ID: <CAMKF1soNROe1bhvn0oWWyv7iKapJLxPPbqcvrdpGFuH1+B4q4A@mail.gmail.com>
+Subject: Re: [oe] [meta-python] python3-scipy
+To: Rob Woolley <rob.woolleywr@gmail.com>
+Cc: martin.jansa@gmail.com, philip@balister.org, 
+	openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000078ab78062fd7acc4"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 08 Mar 2025 16:24:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115808
+ <openembedded-devel@lists.openembedded.org>; Sat, 08 Mar 2025 17:00:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115809
 
-I assume that you are using Scarthgap, based on the versions mentioned
-in your logs. The below is most probably not completely valid for
-Styhead and newer.
-    
-My theory: Panda relies fairly heavily on numpy, however the recipe uses
-python3-numpy-native as a build time dependency - so 32-bit pandas is
-built on top of 64-bit numpy, but at runtime, you are providing 32-bit
-numpy. Apparently this is causing issues. (I assume your build host is
-x86_64)
+--00000000000078ab78062fd7acc4
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Could you please give the following a try? The below is an attempt to
-compile pandas against the target version of numpy, not the native. (All
-changes are in the pandas recipe)
+On Sat, Mar 8, 2025 at 5:28=E2=80=AFAM Rob Woolley <rob.woolleywr@gmail.com=
+> wrote:
 
-(If anyone can see something very bad/wrong in the below, please go
-ahead and post...)
-
-1. Remove python3-numpy-native from DEPENDS, and add python3-numpy instead
-
-2. Add the following variable declarations/exports to the recipe:
-PYTHONPATH:prepend = "${RECIPE_SYSROOT}${PYTHON_SITEPACKAGES_DIR}:"
-export PYTHONPATH
-export NUMPY_INCLUDE_DIR =
-"${RECIPE_SYSROOT}${PYTHON_SITEPACKAGES_DIR}/numpy/core/include"
-
-(We want to the non-native numpy module to use for the compilation, so
-prepend pythonpath with non-native pythonpath, and export it. The
-NUMPY_INCLUDE_DIR is used by the next step.)
-
-3. Add a small patch[1] to the SRC_URI - setup.py imports numpy to get
-the includes' folder only, this is why it required the
-python3-numpy-native package as a dependency. However it only needs a
-single line, and later it should be able to use the target version. The
-above variable contains the value of the get_include() call. Afterwards
-it seems to be happy with the target version of numpy.
-
-Please keep in mind that this is untested, and may explode (I did build
-it, and it worked, but didn't go farther than your example. If it works,
-possibly the changes should/could be limited to class-target still,
-etc). If you could validate it with a non-trivial exercise on your end
-(and let us know the results), that would be really helpful.
-
-Output on my end, in qemuarm:
-
-root@qemuarm:~# uname -a
-Linux qemuarm 6.6.35-yocto-standard #1 SMP PREEMPT Fri Jun 28 17:07:38
-UTC 2024 armv7l GNU/Linux
-root@qemuarm:~# python3
-Python 3.12.4 (main, Jun  6 2024, 18:26:44) [GCC 13.3.0] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> import pandas as pd
->>> data = [["Alice", 25], ["Bob", 30], ["Carol", 35]]
->>> df = pd.DataFrame(data, columns=["Name", "Age"])
->>> print(df)
-    Name  Age
-0  Alice   25
-1    Bob   30
-2  Carol   35
->>>
-
-[1]:
-https://gist.github.com/OldManYellsAtCloud/9e935907807b6ddcd0900bfb1455e343
-
-On 08.03.25 02:39, Prasad Mulay via lists.openembedded.org wrote:
-> Yes
-> Regards 
-> Prasad
+> I don't mind signing up to help maintain it in meta-python.  I need to
+> make sure they keep building either way.
 >
->> On 8 Mar 2025, at 12:49 AM, Khem Raj <raj.khem@gmail.com> wrote:
->>
->> ﻿
->> *BeSecure!* 	This email comes from outside of ABB. Make sure you
->> *verify the sender* before clicking any links or downloading/opening
->> attachments.
->> If this email looks suspicious, *report it* by clicking 'Report
->> Phishing' button in Outlook or raising a ticket on MyIS.
->>
->>
->> is it same as https://github.com/pandas-dev/pandas/issues/55305
->> <https://urldefense.com/v3/__https://github.com/pandas-dev/pandas/issues/55305__;!!NLW3fF9v!OUYYcu2Q4z_H5Rh4neEKv96hYlEy0JMDjitJievvFo0JnWxRJhZoppO4D-z80bb4q9SUXr_oDD0mXTMFqaY$>
->>
->> On Thu, Mar 6, 2025 at 8:23 PM Prasad Mulay via
->> lists.openembedded.org
->> <https://urldefense.com/v3/__http://lists.openembedded.org__;!!NLW3fF9v!OUYYcu2Q4z_H5Rh4neEKv96hYlEy0JMDjitJievvFo0JnWxRJhZoppO4D-z80bb4q9SUXr_oDD0mSnQQb9A$>
->> <prasad.mulay=in.abb.com@lists.openembedded.org> wrote:
->>
->>     Hello
->>
->>     https://github.com/pandas-dev/pandas/issues/55305
->>     <https://urldefense.com/v3/__https://github.com/pandas-dev/pandas/issues/55305__;!!NLW3fF9v!OUYYcu2Q4z_H5Rh4neEKv96hYlEy0JMDjitJievvFo0JnWxRJhZoppO4D-z80bb4q9SUXr_oDD0mXTMFqaY$>
->>
->>     this is reported on pandas repo. looking at the comments looks to
->>     be bug from build system. I have tried the solution specified
->>     there. but still problem is persisting.
->>
->>     I am using custom IMX6 board.
->>
->>      
->>
->>     Below is rspose from my board.
->>
->>     root@imx6dldau:~# python
->>
->>     Python 3.12.6 (main, Sep  6 2024, 19:03:47) [GCC 13.3.0] on linux
->>
->>     Type "help", "copyright", "credits" or "license" for more
->>     information.
->>
->>     >>> import pandas as pd
->>
->>     >>> # Create a list of data
->>
->>     >>> data = [["Alice", 25], ["Bob", 30], ["Carol", 35]]
->>
->>     >>> # Create a Pandas DataFrame from the list of data
->>
->>     >>> df = pd.DataFrame(data, columns=["Name", "Age"])
->>
->>     >>> # Print the DataFrame
->>
->>     >>> print(df)
->>
->>     Traceback (most recent call last):
->>
->>       File "<stdin>", line 1, in <module>
->>
->>       File "/usr/lib/python3.12/site-packages/pandas/core/frame.py",
->>     line 1094, in __repr__
->>
->>         return self.to_string(**repr_params)
->>
->>                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->>
->>       File "/usr/lib/python3.12/site-packages/pandas/core/frame.py",
->>     line 1271, in to_string
->>
->>         return fmt.DataFrameRenderer(formatter).to_string(
->>
->>                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->>
->>       File
->>     "/usr/lib/python3.12/site-packages/pandas/io/formats/format.py",
->>     line 1134, in to_string
->>
->>         string = string_formatter.to_string()
->>
->>                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->>
->>       File
->>     "/usr/lib/python3.12/site-packages/pandas/io/formats/string.py",
->>     line 30, in to_string
->>
->>         text = self._get_string_representation()
->>
->>                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->>
->>       File
->>     "/usr/lib/python3.12/site-packages/pandas/io/formats/string.py",
->>     line 45, in _get_string_representation
->>
->>         strcols = self._get_strcols()
->>
->>                   ^^^^^^^^^^^^^^^^^^^
->>
->>       File
->>     "/usr/lib/python3.12/site-packages/pandas/io/formats/string.py",
->>     line 36, in _get_strcols
->>
->>         strcols = self.fmt.get_strcols()
->>
->>                   ^^^^^^^^^^^^^^^^^^^^^^
->>
->>       File
->>     "/usr/lib/python3.12/site-packages/pandas/io/formats/format.py",
->>     line 615, in get_strcols
->>
->>         strcols = self._get_strcols_without_index()
->>
->>                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->>
->>       File
->>     "/usr/lib/python3.12/site-packages/pandas/io/formats/format.py",
->>     line 870, in _get_strcols_without_index
->>
->>         str_columns = self._get_formatted_column_labels(self.tr_frame)
->>
->>                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->>
->>       File
->>     "/usr/lib/python3.12/site-packages/pandas/io/formats/format.py",
->>     line 949, in _get_formatted_column_labels
->>
->>         dtypes = self.frame.dtypes
->>
->>                  ^^^^^^^^^^^^^^^^^
->>
->>       File
->>     "/usr/lib/python3.12/site-packages/pandas/core/generic.py", line
->>     6158, in dtypes
->>
->>         data = self._mgr.get_dtypes()
->>
->>                ^^^^^^^^^^^^^^^^^^^^^^
->>
->>       File
->>     "/usr/lib/python3.12/site-packages/pandas/core/internals/managers.py",
->>     line 278, in get_dtypes
->>
->>         return dtypes.take(self.blknos)
->>
->>                            ^^^^^^^^^^^
->>
->>       File
->>     "/usr/lib/python3.12/site-packages/pandas/core/internals/managers.py",
->>     line 179, in blknos
->>
->>         self._rebuild_blknos_and_blklocs()
->>
->>       File "pandas/_libs/internals.pyx", line 755, in
->>     pandas._libs.internals.BlockManager._rebuild_blknos_and_blklocs
->>
->>     ValueError: Buffer dtype mismatch, expected 'intp_t' but got
->>     'long long'
->>
->>     >>> 
->>
->>      
->>
->>     Any help would be appreciated.
->>
->>     Thank you
->>
->>     Regards
->>
->>     Prasad Mulay
->>
->>      
->>
->>
->>
+> I have some other Python recipes in meta-ros that are not specific to ROS
+> itself, that I'd prefer to maintain upstream.
+>
+> Are new recipes allowed in meta-openembedded for all supported branches o=
+r
+> just the development release?
+>
+
+For development sure for backports it=E2=80=99s not in LTS policy sadly
+
+
+>
+> Regards,
+> Rob
+>
+> On Fri, Mar 7, 2025 at 2:08=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrot=
+e:
+>
+>> On Fri, Mar 7, 2025 at 10:55=E2=80=AFAM Martin Jansa via
+>> lists.openembedded.org <martin.jansa=3Dgmail.com@lists.openembedded.org>
+>> wrote:
+>> >
+>> > On Fri, Mar 7, 2025 at 7:38=E2=80=AFPM Philip Balister via
+>> > lists.openembedded.org <philip=3Dbalister.org@lists.openembedded.org>
+>> > wrote:
+>> > >
+>> > > On 3/6/25 1:07 PM, Rob Woolley via lists.openembedded.org wrote:
+>> > > > The meta-scipy layer was archived on Nov 30, 2023 (
+>> https://github.com/
+>> > > > tuxable-ltd/meta-scipy <https://github.com/tuxable-ltd/meta-scipy>=
+)
+>> > > >
+>> > > > I need python3-scipy for some recipes in ROS 2 (notably pinocchio)=
+,
+>> so I
+>> > > > patched it up and got it building again:
+>> https://github.com/robwoolley/
+>> > > > meta-scipy <https://github.com/robwoolley/meta-scipy>
+>> > > >
+>> > > > I don't know the history behind why it was in a separate layer.
+>> Would
+>> > > > it be worth submitting to meta-python instead of resurrecting the
+>> meta-
+>> > > > scipy layer?
+>> > >
+>> > > I want to say because scipy needs fortran and that is not built by
+>> > > default. So world builds woul dneed to skip scipy unless fortran was
+>> > > enabled.
+>> > >
+>> > > Does this sound right?
+>> >
+>> > Which is the same as meta-oe/recipes-devtools/lapack/lapack_3.12.1.bb
+>> > which also depends on libgfortran and only has:
+>> > EXCLUDE_FROM_WORLD =3D "1"
+>> > and comment about how to enable fortran in gcc.
+>> >
+>> > Just depending on fortran shouldn't eliminate it from meta-python.
+>>
+>> I think, I will need someone to signup to maintain it there, there are
+>> changes always
+>> happening that will require fixing these packages, In the end it falls
+>> on my plate whenever
+>> there is a python upgrade in core or something else which breaks it,
+>>
+>> >
+>> > Cheers,
+>> >
+>> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> > Links: You receive all messages sent to this group.
+>> > View/Reply Online (#115798):
+>> https://lists.openembedded.org/g/openembedded-devel/message/115798
+>> > Mute This Topic: https://lists.openembedded.org/mt/111555507/1997914
+>> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub
+>> [raj.khem@gmail.com]
+>> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> >
 >>
 >
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#115803): https://lists.openembedded.org/g/openembedded-devel/message/115803
-> Mute This Topic: https://lists.openembedded.org/mt/111562623/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+
+--00000000000078ab78062fd7acc4
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote gmail_quote_container"><d=
+iv dir=3D"ltr" class=3D"gmail_attr">On Sat, Mar 8, 2025 at 5:28=E2=80=AFAM =
+Rob Woolley &lt;<a href=3D"mailto:rob.woolleywr@gmail.com">rob.woolleywr@gm=
+ail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"=
+margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><div dir=3D"=
+ltr">I don&#39;t mind signing up to help maintain it in meta-python.=C2=A0 =
+I need to make sure they keep building either way.<br><br>I have some other=
+ Python recipes in meta-ros that are not specific to ROS itself, that I&#39=
+;d prefer to maintain upstream.<div><br></div><div>Are new recipes allowed =
+in meta-openembedded for all supported branches or just the development rel=
+ease?</div></div></blockquote><div dir=3D"auto"><br></div><div dir=3D"auto"=
+>For development sure for backports it=E2=80=99s not in LTS policy sadly</d=
+iv><div dir=3D"auto"><br></div><blockquote class=3D"gmail_quote" style=3D"m=
+argin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><div dir=3D"l=
+tr"><div dir=3D"auto"><br><br>Regards,<br>Rob</div></div><br><div class=3D"=
+gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Mar 7, 2025 at 2=
+:08=E2=80=AFPM Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D=
+"_blank">raj.khem@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gm=
+ail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,=
+204,204);padding-left:1ex">On Fri, Mar 7, 2025 at 10:55=E2=80=AFAM Martin J=
+ansa via<br>
+<a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" target=3D"_bla=
+nk">lists.openembedded.org</a> &lt;martin.jansa=3D<a href=3D"mailto:gmail.c=
+om@lists.openembedded.org" target=3D"_blank">gmail.com@lists.openembedded.o=
+rg</a>&gt;<br>
+wrote:<br>
+&gt;<br>
+&gt; On Fri, Mar 7, 2025 at 7:38=E2=80=AFPM Philip Balister via<br>
+&gt; <a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" target=3D=
+"_blank">lists.openembedded.org</a> &lt;philip=3D<a href=3D"mailto:balister=
+.org@lists.openembedded.org" target=3D"_blank">balister.org@lists.openembed=
+ded.org</a>&gt;<br>
+&gt; wrote:<br>
+&gt; &gt;<br>
+&gt; &gt; On 3/6/25 1:07 PM, Rob Woolley via <a href=3D"http://lists.openem=
+bedded.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.org</a>=
+ wrote:<br>
+&gt; &gt; &gt; The meta-scipy layer was archived on Nov 30, 2023 (<a href=
+=3D"https://github.com/" rel=3D"noreferrer" target=3D"_blank">https://githu=
+b.com/</a><br>
+&gt; &gt; &gt; tuxable-ltd/meta-scipy &lt;<a href=3D"https://github.com/tux=
+able-ltd/meta-scipy" rel=3D"noreferrer" target=3D"_blank">https://github.co=
+m/tuxable-ltd/meta-scipy</a>&gt;)<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; I need python3-scipy for some recipes in ROS 2 (notably pino=
+cchio), so I<br>
+&gt; &gt; &gt; patched it up and got it building again: <a href=3D"https://=
+github.com/robwoolley/" rel=3D"noreferrer" target=3D"_blank">https://github=
+.com/robwoolley/</a><br>
+&gt; &gt; &gt; meta-scipy &lt;<a href=3D"https://github.com/robwoolley/meta=
+-scipy" rel=3D"noreferrer" target=3D"_blank">https://github.com/robwoolley/=
+meta-scipy</a>&gt;<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; I don&#39;t know the history behind why it was in a separate=
+ layer.=C2=A0 Would<br>
+&gt; &gt; &gt; it be worth submitting to meta-python instead of resurrectin=
+g the meta-<br>
+&gt; &gt; &gt; scipy layer?<br>
+&gt; &gt;<br>
+&gt; &gt; I want to say because scipy needs fortran and that is not built b=
+y<br>
+&gt; &gt; default. So world builds woul dneed to skip scipy unless fortran =
+was<br>
+&gt; &gt; enabled.<br>
+&gt; &gt;<br>
+&gt; &gt; Does this sound right?<br>
+&gt;<br>
+&gt; Which is the same as meta-oe/recipes-devtools/lapack/<a href=3D"http:/=
+/lapack_3.12.1.bb" rel=3D"noreferrer" target=3D"_blank">lapack_3.12.1.bb</a=
+><br>
+&gt; which also depends on libgfortran and only has:<br>
+&gt; EXCLUDE_FROM_WORLD =3D &quot;1&quot;<br>
+&gt; and comment about how to enable fortran in gcc.<br>
+&gt;<br>
+&gt; Just depending on fortran shouldn&#39;t eliminate it from meta-python.=
+<br>
+<br>
+I think, I will need someone to signup to maintain it there, there are<br>
+changes always<br>
+happening that will require fixing these packages, In the end it falls<br>
+on my plate whenever<br>
+there is a python upgrade in core or something else which breaks it,<br>
+<br>
+&gt;<br>
+&gt; Cheers,<br>
+&gt;<br>
+&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt; Links: You receive all messages sent to this group.<br>
+&gt; View/Reply Online (#115798): <a href=3D"https://lists.openembedded.org=
+/g/openembedded-devel/message/115798" rel=3D"noreferrer" target=3D"_blank">=
+https://lists.openembedded.org/g/openembedded-devel/message/115798</a><br>
+&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/11155550=
+7/1997914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.=
+org/mt/111555507/1997914</a><br>
+&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
+bedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.o=
+rg</a><br>
+&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
+devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedde=
+d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com"=
+ target=3D"_blank">raj.khem@gmail.com</a>]<br>
+&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt;<br>
+</blockquote></div>
+</blockquote></div></div>
+
+--00000000000078ab78062fd7acc4--
 
