@@ -1,464 +1,345 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <prasad.mulay@in.abb.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B650EC282D1
-	for <webhook@archiver.kernel.org>; Sun,  9 Mar 2025 07:57:48 +0000 (UTC)
-Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
- by mx.groups.io with SMTP id smtpd.web11.11773.1741507063804186880
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5EA4C28B2F
+	for <webhook@archiver.kernel.org>; Sun,  9 Mar 2025 15:16:10 +0000 (UTC)
+Received: from PA4PR04CU001.outbound.protection.outlook.com (PA4PR04CU001.outbound.protection.outlook.com [40.107.162.68])
+ by mx.groups.io with SMTP id smtpd.web10.17092.1741533354423488931
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 08 Mar 2025 23:57:44 -0800
+ Sun, 09 Mar 2025 08:15:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
-Received: from fwd81.aul.t-online.de (fwd81.aul.t-online.de [10.223.144.107])
-	by mailout07.t-online.de (Postfix) with SMTP id E6A4529F
-	for <openembedded-devel@lists.openembedded.org>; Sun,  9 Mar 2025 08:57:41 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.154.173.73]) by fwd81.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1trBXU-2PgNZh0; Sun, 9 Mar 2025 08:57:36 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH 1/2] pipewire: update 1.2.7 -> 1.4.0
-Date: Sun,  9 Mar 2025 08:58:09 +0100
-Message-ID: <20250309075810.552098-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.48.1
+ dkim=pass header.i=@in.abb.com header.s=selector2 header.b=2L879HMj;
+ spf=pass (domain: in.abb.com, ip: 40.107.162.68, mailfrom: prasad.mulay@in.abb.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=wuX1hiQecEMwVSXALSyXb0+UVGDYLvMkvLY29OkIeEclZkLVxEnfeBEuOyVwjWTorjkZWg9PnB1SyQcdvQl9gre2cyllii4W/BlU8NlxJhtAO7GKECXBIG6g2F0samXRDc+Zt57OvoB+jLFAYnoENVOtTSR8ONmF402r9cukv5fI3I0QQF0bJTF2nQkVK8SWitm7L8c1Ldciq0XvnB+nd4ZmfMkzom+IgMRG2yH9bPFbk2Eq51E3d6lXChmtzpJmBYsETulHWcjHp5xdRe5pEYUJX7TRYnKnfE3NyUtSQr0FJW+BwMqb4sZsMl08jxmeroBOmeAcr0u+xMyhnjFCvA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=1CDgu8oNhk7pIQI0GdB9dm1suZF1mXGXnHEjBIGxPSU=;
+ b=JUclLw/LpuQAWoaFsZ3jILiye3Ui90B229X1oisFpqFBanrSU1RGP0xwkfBfhSwRC1sviOPaiI1qQjwB0EZsMTmPKIyw+EqJbVNPfnA6iNuGCXTq55ztf/fkzLmguzQljjd4B64gNoXTjWa6vTkbcJgCRvXaPjS10vaBJllMdlbAFWzecF+YfRH0hWhUtilINya0rD2K6MyKrpMCI99xur9EUGsotQul7X7bRfRiaO31RR4oBnTyVGLZ2GZlxlFwDfQE/hI39PW6o3hboyN0ye9uRwBruEnlsmi8/d5XwspebymYtgBg4VrWBmpaWHkmWvQ4YBr6HNf4lvnqcwvJMg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=in.abb.com; dmarc=pass action=none header.from=in.abb.com;
+ dkim=pass header.d=in.abb.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=in.abb.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1CDgu8oNhk7pIQI0GdB9dm1suZF1mXGXnHEjBIGxPSU=;
+ b=2L879HMjq4d6NZOgGyRc2sHVhjSju/LCBlF/MNzsXNqL/br3VRmF7RIx3beok5R5KOkjKTfnnSiaYwlqUY4ld48xVDYZN6RDdoFEWOhP86iae6eWfv5XGo5e0Cc8FasyGYSQKKJYbVP5AUltMANSpTKVAzXXX2cM7wzx150j/zqmesA5B8kMnrS3HY1digPrfUCYNUeNBcDJUxCi08mVIX/v+ZDNVjC2KAsGbiPLi2TBRZgp+cU2pWo4nZLqfcGO0JRAaboyquQjsX37u7z2vPjwxVTaqRTg0dM3qDlXSJyd3+Hah3C1tOaFq57+GVDsxzq7MndEiUNwV59TZOd4+w==
+Received: from PA2PR06MB9224.eurprd06.prod.outlook.com (2603:10a6:102:409::9)
+ by PAXPR06MB8110.eurprd06.prod.outlook.com (2603:10a6:102:1a0::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8511.26; Sun, 9 Mar
+ 2025 15:15:50 +0000
+Received: from PA2PR06MB9224.eurprd06.prod.outlook.com
+ ([fe80::d7a2:e0ea:f70e:4c5b]) by PA2PR06MB9224.eurprd06.prod.outlook.com
+ ([fe80::d7a2:e0ea:f70e:4c5b%5]) with mapi id 15.20.8511.025; Sun, 9 Mar 2025
+ 15:15:50 +0000
+From: Prasad Mulay <prasad.mulay@in.abb.com>
+To: Gyorgy Sarvari <skandigraun@gmail.com>, Raj Khem <raj.khem@gmail.com>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] [meta-python]recipes python3-pandas not getting built
+ properly for arm 32 bit
+Thread-Topic: [oe] [meta-python]recipes python3-pandas not getting built
+ properly for arm 32 bit
+Thread-Index: AduPGG5wFlE1CArYQ/yPe3dOufbUCgAfU54AAA1Lh6QAHuT9gAAv5htA
+Date: Sun, 9 Mar 2025 15:15:50 +0000
+Message-ID: 
+ <PA2PR06MB92240B215E70D7474BE465EAAAD72@PA2PR06MB9224.eurprd06.prod.outlook.com>
+References: 
+ <PA2PR06MB922472DD11FB75D7BC1C90BDAAD52@PA2PR06MB9224.eurprd06.prod.outlook.com>
+ <CAMKF1sq1Gz3=H_FoVjJxRQCt3cT1GQ5_km1CA-QOJxvXZoaK9Q@mail.gmail.com>
+ <7A6AC60C-85E3-402E-B66F-F7F1614AE45E@in.abb.com>
+ <a2876316-9a43-45f7-890a-ac1b8d840cf1@gmail.com>
+In-Reply-To: <a2876316-9a43-45f7-890a-ac1b8d840cf1@gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+ MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_ActionId=5a2e968b-c2da-47a2-8f4a-909b074f63cf;MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_ContentBits=0;MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_Enabled=true;MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_Method=Standard;MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_Name=d792d246-d363-40e2-82bc-6f0655128b68;MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_SetDate=2025-03-09T15:15:28Z;MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_SiteId=372ee9e0-9ce0-4033-a64a-c07073a91ecd;MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_Tag=10,
+ 3, 0, 1;
+x-processedbytemplafy: true
+x-templafyemailsigvstoversion: 9.7.0.0
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=in.abb.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PA2PR06MB9224:EE_|PAXPR06MB8110:EE_
+x-ms-office365-filtering-correlation-id: ee0af17e-162a-4289-6734-08dd5f1d46c0
+x-abb-o365-outbound: ABBOUTBOUND1
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230040|376014|366016|1800799024|4022899009|13003099007|38070700018;
+x-microsoft-antispam-message-info: 
+ =?utf-8?B?UmhJVDliQ1lNbFh1NkdudG1yNm1LQk5xTERhTlFRZ3RJRVk5M3lSb0VvT1kr?=
+ =?utf-8?B?VElPWDZWOEpFeWFnU1NvcFZ2Y0xJK0VYUGVobnRHL0w4MlhuUHUrQ1p2a0lJ?=
+ =?utf-8?B?WWRKWks0TFMxREllb0xWWWhLdUNDbC83UGczREgyWDlJUG9NM3gybTN0MG0v?=
+ =?utf-8?B?TnZETnJiYVljRkxGR1RUN0ZnWk5lSWJqMVNjQzVRbnd0VFlIeXpTc01Pam9h?=
+ =?utf-8?B?RzNTVG01V2Q3UVBSY09PS0swN0lBMWdtcnFWcGwxbURxK1lWdGtkanNFSXgr?=
+ =?utf-8?B?MlkzdktWUnIwTHJDRFF0bFgvczQvTUV0cmxHaWZpWVhCTjNpOW1hYmY4YnYr?=
+ =?utf-8?B?YmpZUEtQcm9WK2I2b0ErQXBhcStBSTV4NDArblloVnNoNnZUbENja2RPRWk3?=
+ =?utf-8?B?L0daQ0VwSktrb1A5U0MvREU1TkxvSDVKVjdCVjk3YmtyT1lrNHVnNFEwMmVw?=
+ =?utf-8?B?Mmg5MXpadzdSNVFCZFovdnpwd1I3dC9lSWhra3lBcmdmb1FCKytGU2ozdTM0?=
+ =?utf-8?B?S2dwQ044RXJQQURJcGorVHBBMUJVVG1IeGJ1eC9nY3d4cnpGTm1GTmFoSW4z?=
+ =?utf-8?B?dHhhOFFhTFhkK1JTelJ6eExCSDRrcHREU3FMaTRnKzBTY1Vwa2VZeGhqdTRE?=
+ =?utf-8?B?QmlJT0FXYjY3azBUL0ZhTWVycmd1aDIvMFptaXM2M1Jnak1jWS9BazRobUVl?=
+ =?utf-8?B?eWt6ZnBMNjhyYWdxNWxTNFgyLzFWTVpsVGdrREFVeGF1a0MvUUFpbXlzTENU?=
+ =?utf-8?B?K3QrZ3JnUGFGNWJTeEN6K24vd25vSzVkK1FFWDI2RTRBVERsNnBua3NpdGNr?=
+ =?utf-8?B?bndMTFdXdnowWktmR0hMbCtvSmFVbFlmYk9QN3RTbE05M2U0cVh5ckF1SG9z?=
+ =?utf-8?B?WGs4WEJLMkdPenJFdUo3YmVQbDVvbWgyQk9lK0VZR1RzNDArcXB4K1pSZjRW?=
+ =?utf-8?B?b0ZmNXRtWGxKTHpvbDZyTGFieG5SWGtPUUhqbVptaE1FN2daa01tVDJiaHlL?=
+ =?utf-8?B?L01EVit0SVd5dk5kbHhmRHFyYVg5bzlsTUhHUk1rRTNpWGNSYjRIbHAwQUhH?=
+ =?utf-8?B?WVBwcktDQkJCTWRqRk1SK01FTEw1c1YrcmlRVWc2TVBZbW53cWhvaVlQTnMx?=
+ =?utf-8?B?cGtVeEVxWGZXSkYzVjAwQ3JsMXlLcW81MUZwY21QQU9ZUkZpQndFbzhMeERv?=
+ =?utf-8?B?cG9BWFNVckplanlVSWdwZUJKTXdxeHNDMDFQSHYzVTFBNGh5UDAxMGQwM1p2?=
+ =?utf-8?B?WkhRMEJOWkF6Sjk1a3NkYW1mYVNDdEhub3FSNk5tdEU2QjkwRVFTdHUxRXVM?=
+ =?utf-8?B?bDF6QVc4ZXpCTllJM3ZBcTBWNGs1Smlhd1ZzUCsyNWQyTnd1SzFZVVM5M1Zk?=
+ =?utf-8?B?aGIrd2tYMlhCQ0xoVEQ2WGdvckQrVU9hRFpwQWpQSTRBMG9GUEEyRTJFU1BL?=
+ =?utf-8?B?KzltZzlBcThhN29oNnBrMUwvT3h6Z2tIYmp0TUwra3huRHBIMDhzVkdHYkRn?=
+ =?utf-8?B?VlIrYmxYS1FaemlkUnpVZEo0dWVsbStjQmExODFwWnBka0Z1V0FBd2trQnNV?=
+ =?utf-8?B?UXhTUDRQc2VpWk5IQTJUR29WWkJTRUE2d1dvTnFzaGpVRHpNeFVNbVU2ajIw?=
+ =?utf-8?B?VWNiYUZ1Uk43L2JiTjA4R0VSNnZ3TjlFVCtnY25NK2hkMlpNUUl6V0JXZEpx?=
+ =?utf-8?B?WDNIZWpBMFpmRWtGRk5FRHVmd1lYeG0yOS82bnZzNXZnMjFEMWxSQzN4R2JM?=
+ =?utf-8?B?SEZMbHFuZmlQMkNRNm9mRm5iaEFNaDZvNnZpOHRLY3g1UUtaOWd1RnBzOE9x?=
+ =?utf-8?B?WEltY1F0M0pPdENveDBYY3dTVjNmc2NzRnhsR3RvSTIxYVFKVHM5dTQ2Z01F?=
+ =?utf-8?B?RTg0bjdzNjc2eVY0bkxMNDNZSmdYUEFOYjY3L2tmdGtDMWc9PQ==?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA2PR06MB9224.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(4022899009)(13003099007)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?NDUvYkh6S0ZyMTFsdytHd2VPWC9uTnVHZmxTeXQveTF2RDhKQm1HZzNSaDV3?=
+ =?utf-8?B?cGsxR3kwQ00vSm0vNWNBVmVGWEJKMEszLzJBUkNNekZHd2hGL1pZdlFQQ3Nw?=
+ =?utf-8?B?UElsTW83UUdnTHJJTVBRYWxNSkdMTHpjeE80L0F2N3hZN0xUTHo1V2RrN2ZN?=
+ =?utf-8?B?VVQ5T3dXeG5EYlZLd29JYnU0MG5MUnp4azhEZFlaU3NTaklWOG1qYkMrdzFR?=
+ =?utf-8?B?SXY3eWwyd1VqekJsYnc0Z1ZqNDZ6MWdFOUpBbnM1R3g2OTlYV3dXWmVuQmlO?=
+ =?utf-8?B?UVhoOXFBUTdiM1UxRFBtNGR2SHNKSmMrME81c1ZxcWlsNlFXSlZLQ1p4L1I0?=
+ =?utf-8?B?UG8raDVpQTBPajhNSDRKa2xMSVVOY2pGSm9JeTdETklvKzRJWC9qNFg1YVZT?=
+ =?utf-8?B?dk5YaUNjMzV3MEhadWZwLzMyTHpQeW5FdS9nQWhHK21ZUHhWcjZkMm5JcmdG?=
+ =?utf-8?B?Rkk4eGZvbXFMOEtGYmxBdmJCaVFyT2RYUm1PVlhIdWRLc1A5RTljRmNKM2FN?=
+ =?utf-8?B?dStPNTVVT2RrNGY0NlFnYkRpQjBwUHhxNXQzTmpkTlBhYTVQdytKMlBlMWFr?=
+ =?utf-8?B?LzVuWUdOT3duSEMwSkJSVFlJb3JGV3k0eXFROWJKL3pHUjA3UDlXVlhLODdn?=
+ =?utf-8?B?aGxYbWdnbElrS0JlSUMxVUI3OS9PYlAzc0FYcG1meXhXUVFTbndaL2JZT3Nm?=
+ =?utf-8?B?WkVWQ0gvOXBiUzZEWFFiRzQrT0N4VFlZNFBRcXI5d1lxcWZYVGwzTi92Y05v?=
+ =?utf-8?B?ZVFLV05Oa1cxMzcwK1lUbjRnOXhQWVlOVHUwaTFoUmVobkR6V3Zwbm1tRWFY?=
+ =?utf-8?B?ZHhPWFZuazlsR2lWVEdIREViYkFaVTc3UjFKNFBPazV0TUkzY0UyaVVubXkx?=
+ =?utf-8?B?OGRyQmtuSmh4YVVlcGlZTXJSeUJrRzQ4NHNtS2pORWFqeWttRit2OU5XTmxV?=
+ =?utf-8?B?bFZCZllubWU0R01WQXpwa2x1aHpad0lyYm8weUhHYWdkNy9RejVPTUk1a1BI?=
+ =?utf-8?B?SXNrRVJpNlFXSDE2bVdNZGNuVllUejNoQ3dqOWpYblFDdXFyaFFhRUlOK2Rs?=
+ =?utf-8?B?UFV0UVFWaWxnTWM1WlBQN2FLcnVyYXhuQk82VHV4NERDNjVPMW8zVEtVcjk1?=
+ =?utf-8?B?VklsRlRYTERVcXk2NlQ2UllhekN6cXpyWisvQmdpQzBxckVkRm1rWDY5OUNB?=
+ =?utf-8?B?TEJTQzVGeEdvNTJvL1V0NytlRTdFOEtoWXBFaFJPMW84TzQ4NGwxczhVZmhx?=
+ =?utf-8?B?VmNsWkNmaHpHa2ExbWEwMFNuWFpUVlppdGlBMVN5bENOcmMyaFZlMDdmT0ZC?=
+ =?utf-8?B?dUppc0psK3hIOGNPYUhOTUFiRHZ6NzRJR0t4bkZRblM3Q2Q2UUt0U25HaVFr?=
+ =?utf-8?B?UHZYcXo3YjFjYzQrVFgxS3hoT0pTZnhjSG8wN2Y2NW5uSFdrTzdZL2loejlJ?=
+ =?utf-8?B?d3Bua00yU3Y2Tk01R0ZqR3FMODdFNGYwb01XTmtnNzdwZWRmbm5ZbG8zTnBz?=
+ =?utf-8?B?YVhVMHppYllxRW9EamRaUVZQa1JnSllTdXZJem9GZVBpRXRWVmFhR2pJenBG?=
+ =?utf-8?B?UU1LZEFpUU51Vi9hN2I1YjZ2QnFtcmtnbzZDUlVJNUNvT0cyYnBIRnE0Wjdq?=
+ =?utf-8?B?US9ETTFVcmZDc044Q2FtZHdvODM3OWNHYzNUUEh0OXlpbmpEZVp3MGEyWkFL?=
+ =?utf-8?B?cDNrWUFjMmxNR21ad3kvb3RrUE5mWVJHODMwUGdwRzJTRkhEZ3FXcW1VYXBL?=
+ =?utf-8?B?aVNFUS9hbFYweWlFWUZ0L2l6UDR0aVpTOFlsK25KTUcrQ1Z4ZG92QWtBZVU2?=
+ =?utf-8?B?OHNDVkpPaTI1ZlZNVGRtWE9aR1pnOTdDQ2k2L1N2OGhMeVA0VTBrWE8rSmFB?=
+ =?utf-8?B?RUpzL00wWHFHMW1wdnhrZ3pjdTBEODcvbUhLK1Z0M2VSYnM0aDg2TXZjUWhw?=
+ =?utf-8?B?ZFJ1eS9SS2JPWVZsMlRsdXdmUVp0WmVSTXlXdklsaTBWc1pLVHprVWF1SWRM?=
+ =?utf-8?B?OU1sSng1MHVZdVNCNmN5bFdpcEVwZFNTT3ExWkdBbVhxQ2grTjdNSjFybXZB?=
+ =?utf-8?B?Sks5Z2o5MldFZzZLUnBId2hGOGJoaHh5SzVGT296MGRCeU12MUd4MmJhdUl5?=
+ =?utf-8?Q?InAN/GwgxkPb79mMBxHoUOXDz?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1741507056-B37FD970-0AE26D30/0/0 CLEAN NORMAL
-X-TOI-MSGID: d6c85393-e146-44ab-bcfd-99e5d4a3ef76
-Content-Transfer-Encoding: quoted-printable
+X-OriginatorOrg: in.abb.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PA2PR06MB9224.eurprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ee0af17e-162a-4289-6734-08dd5f1d46c0
+X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Mar 2025 15:15:50.1640
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 372ee9e0-9ce0-4033-a64a-c07073a91ecd
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Q4MsoZ+C6de5IXDm/gYYKlaUL7wV3vBix3J4xAQshY8RTyrhQolkG4Uiai1lha3z7O6LP0gMq6vxi807D1dJCw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR06MB8110
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 09 Mar 2025 07:57:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115814
+ <openembedded-devel@lists.openembedded.org>; Sun, 09 Mar 2025 15:16:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115815
 
-- remove backport patch
-- install libspa.so to libpipewire package
-
-PipeWire 1.4.0 (2025-03-06)
-
-This is the 1.4 release that is API and ABI compatible with previous
-1.2.x and 1.0.x releases.
-
-This release contains some of the bigger changes that happened since
-the 1.2 release last year, including:
-
-  * client-rt.conf was removed, all clients now use client.conf and
-    are given RT priority in the data threads.
-  * UMP (aka MIDI2) support was added and is now the default format
-    to carry MIDI1 and MIDI2 around in PipeWire. There are helper
-    functions to convert between legacy MIDI and UMP.
-  * The resampler can now precompute (at compile time) some common
-    conversion filters. Delay reporting in the resampler was fixed and
-    improved.
-  * Bluetooth support for BAP broadcast links and support for hearing aid=
-s
-    using ASHA was added. A new G722 codec was also added.
-    Delay reporting and configuration in Bluetooth was improved.
-  * The ALSA plugin now supports DSD playback when explicitly allowed
-    with the alsa.formats property.
-  * A PipeWire JACK control API was added.
-  * A system service was added for pipewire-pulse.
-  * Many documentation and translation updates.
-  * Many of the SPA macros are converted to inline functions.  All SPA
-    inline functions are now also compiled into a libspa.so library to
-    make it easier to access them from bindings.
-  * The module-filter-chain graph code was moved to a separate
-    filter-graph SPA plugin so that it becomes usable in more places.
-    EBUR128, param_eq and dcblock plugins were added to filter-graph.
-    The filter graph can now also use fftw for doing convolutions.
-    The audioconvert plugin was optimized and support was added to
-    audioconvert to insert extra filter-graphs in the processing pipeline=
-.
-  * New helper functions were added to parse JSON format descriptions.
-  * The profiler now also includes the clock of the followers.
-  * RISCV CPU support and assembler optimisations were added.
-  * The clock used for logging timestamps can be configured now.
-  * The JSON parser was split into core functions and helper.
-  * Support for UCM split PCMs was added. Instead of alsa-lib splitting
-    up PCMs, PipeWire can mark the PCMs with the correct metadata so that
-    the session manager can use native PipeWire features to do this.
-  * Support for webrtc2 was added to echo-cancel.
-  * IEC958 codecs are now detected from the HDMI ELD data.
-  * Conversion between floating point and 32 bits now preserve 25 bits of
-    precision instead of 24 bits.
-  * A new Telephony D-BUS API compatible with ofono was added.
-  * The invoke queues are now more efficient and can be called from multi=
-ple
-    threads concurrently.
-  * Clock information in v4l2 was improved.
-  * An ffmpeg based videoconvert plugin was added that can be used with t=
-he
-    videoadapter.
-  * The GStreamer elements have improved buffer pool handling and rate
-    matching.
-  * The combine-stream module can now also mix streams.
-  * link-factory now checks that the port and node belong together.
-  * The netjack-manager module has support for autoconnecting streams.
-  * The native-protocol has support for abstract sockets.
-  * The pulse server has support for blocking playback and capture in
-    pulse.rules.
-  * The corked state of stream is now reported correctly in pulse-server.
-  * Fix backwards jumps in pulse-server.
-  * Latency configuration support was added in loopback and raop-sink.
-  * The ROC module has more configuration options.
-  * The SAP module now only send updated SDP when something changed.
-  * RTP source now has a standby mode where it idles when there is no
-    data received.
-  * Support for PTP clocking was added the RTP streams.
-  * The VBAN receiver can now dynamically create streams when they are
-    detected.
-  * Error reporting when making links was improved.
-  * Support for returning (canceling) a dequeued buffer in pw-stream.
-  * Support for emiting events in pw-stream was added.
-  * pw-cat now support stdin and stdout.
-
-Highlights (since the previous 1.3.83 release)
-  - Small fixes and improvements.
-
-PipeWire
-  - Fix some missing includes in metadata.h
-  - Pass the current error in errno when a stream is in error (#4574)
-
-modules
-  - Evaluate node rules before loading adapter follower to ensure
-    properties are set correctly. (#4562)
-
-SPA
-  - Avoid a use after free when building PODs. (#4445)
-  - Take headroom into account when calculating resync.
-
-Bluetooth
-  - Fix +CLCC parsing.
-
-GStreamer
-  - Notify about default device changes in deviceprovider.
-  - Copy frames between pools and avoid splitting video buffers.
-
-JACK
-  - Add an option to disable the MIDI2 port flags. (#4584)
-
-Older versions:
-
-PipeWire 1.3.83 (2025-02-20)
-
-This is the third and hopefully last 1.4 release candidate that
-is (almost) API and (entirely) ABI compatible with previous 1.2.x
-and 1.0.x releases.
-
-We note that in the 1.3.x series, the API is slighty not backwards
-compatible because some methods previously used to accept void* as
-a parameter while they now require the correct type. We think this
-is however a good kind of API breakage and expect projects to patch
-their code to get things compiled with newer version (which will also
-compile for older versions). Note also that this is not an ABI break.
-
-  - Handle JACK transport updates in a better way.
-  - Fix a SAP regression when starting.
-  - Fix regression in rate scaling.
-  - Improve bluetooth source rate handling.
-  - More small bugfixes and improvements.
-
-  - Handle JACK transport updates in a better way. (#4543)
-
-  - Check that the link factory port and nodes match. Deprecate the
-    port.id when making links.
-  - Improve profiler output by scaling the quantum with the node
-    rate so that we don't end up with confusing information. (#4555)
-  - Fix sending of the SAP SDP. Handle some SDP parsing errors.
-  - Add some more options to the ROC source module. (#4516)
-
-  - Fix firewire quirks in udev rules. (#4528)
-  - Fix a bug in the rate scaling in some cases that would make things
-    run with the wrong samplerate.
-  - Improve introspection of control types.
-
-  - Use the G722 codec from Android instead of FFmpeg for ASHA.
-  - Use the A2DP source rate as the graph rate. (#4555)
-  - Specify the bluetooth source latency property in the rate of the
-    stream to avoid conversions and rounding errors.
-
-This is the second 1.4 release candidate that is API and ABI
-compatible with previous 1.2.x and 1.0.x releases.
-
-  - Various pw-stream improvements: timing information fixes,
-    avoid locking buffers in some cases and an improved drain
-    event.
-  - A new Telephony D-BUS API compatible with ofono.
-  - Documentation fixes and updates.
-  - More small fixes and improvements.
-
-  - Improve timing information when rate is unknown.
-  - Avoid locked buffers in pw_stream in some cases.
-  - Improve pw_stream drain event emission.
-  - Improve manager socket handling. Applications can avoid hardcoding
-    the sockets so that they will respect the config settings.
-
-  - Fix header size calculation when using ipv6. (#4524)
-
-  - Optimize byteswapped s16 conversions.
-  - Improve event handling for internal events.
-  - Optimize negiotiation when in convert mode, prefer the format
-    of the follower in adapter.
-  - Fix EnumPortConfig for videoadapter without converter.
-  - Fix libcamera property buffer size.
-
-  - Add systemwide systemd files.
-
-  - Add a UMP example.
-  - Use the new JackPortMIDI2 flag to mark UMP ports to JACK.
-
-  - Support BAP hardware volume.
-  - Add a Telephony DBUS API.
-
-  - Disable buffer pools for audio by default.
-
-  - Improve the module documentation.
-
-This is the first 1.4 release candidate that is API and ABI
-compatible with previous 1.2.x and 1.0.x releases.
-
-In addition to all the changes backported to 1.2.x, this release
-also contains some new features:
-
-  - UMP support was added with MIDI 1.0 and MIDI 2.0 support in the ALSA
-    sequencer plugin. By default PipeWire will now use MIDI 2.0 in UMP
-    messages to transport MIDI in the graph, with conversions to/from leg=
-acy
-    MIDI where required. This requires UMP support in the kernel.
-  - client-rt.conf is no longer supported. Custom changes made to this
-    config should be moved to client.conf. Clients that try to load the
-    client-rt.conf will emit a warning and be directed to client.conf
-    automatically for backwards compatibility.
-  - The module-filter-chain code was moved to a new filter-graph plugin. =
-This
-    made it possible to add filter-graph support directly in audioconvert=
-. It
-    is now possible to run up to 8 run-time swappable filter-graphs insid=
-e
-    streams and nodes. This should make it easier to add effects to strea=
-ms
-    and device nodes.
-  - Bluetooth support for BAP broadcast links and support for hearing aid=
-s
-    using ASHA was added.
-  - Many more bugfixes and improvements.
-
-  - Nodes are now only scheduled when ready to signal the driver.
-  - Add slovenian translation. (#4156)
-  - Link errors are handled better.
-  - The videoadapter is now enabled by default but no videoconverter
-    is loaded yet by default.
-  - Streams now have support for ProcessLatency.
-  - Streams now have a method to emit events.
-  - The RequestProcess event and command can now pass around extra
-    properties.
-  - Local timestamps are now used for logging.
-  - client-rt.conf is no longer supported. Custom changes made to this
-    config should be moved to client.conf. Clients that try to load the
-    client-rt.conf will emit a warning and be directed to cliert.conf
-    automatically to preserve backwards compatibility.
-  - pw_stream now has an API to return unused buffers.
-
-  - module-combine-stream can now mix streams.
-  - Links in error are now destroyed by link-factory.
-  - The netjack2 driver can now also create streams that autoconnect when
-    specified. (#4125)
-  - Many updates and bugfixes to the RTP modules.
-  - The netjack2 driver can now bind to a custom IP and port pair. (#4144=
-)
-  - The loopback module and module-raop have support for ProcessLatency, =
-which
-    can be used to query and update the latency.
-  - The profiler module can now reduce the sampling rate.
-  - The filter-chain was optimized some more.
-  - The filter-chain gained some more plugins: param_eq, ebur128, dcblock=
-.
-  - Support for fftw based convolver was added.
-  - Some module arguments can now be overridden.
-  - The VBAN receiver now creates new streams per stream name. (#4400)
-  - The RTP SAP module is now smarter with generating new SAP messages.
-  - The RTP source can now be paused when no data is received. (#4456)
-
-  - pw-cat can now stream most formats from stdin/stdout.
-  - pw-profiler has a JSON dump option to dump the raw profiler data.
-  - pw-cli now supports unload-module. (#4276)
-
-  - The resampler can precompute some common coeficients now at compile
-    time.
-  - UMP support was added with MIDI 1.0 and MIDI 2.0 support in the ALSA
-    sequencer plugin. By default PipeWire will now use MIDI 2.0 in UMP
-    messages to transport MIDI in the graph, with conversions to/from leg=
-acy
-    MIDI where required.
-  - Control types can now be negotiated.
-  - Support for writing ALSA bind controls was added.
-  - The ALSA sequencer now has better names for the ports.
-  - The F32 to S32 conversion now uses 25 bits for an extra bit of
-    precision.
-  - libcamera controls can now be set in all cases.
-  - The videoadapter has been improved and a dummy and ffmpeg based
-    videoconverter plugin was added.
-  - Negotiation was improved in audioadapter. First a passthrough format
-    is tried.
-  - Some JSON helper functions were added and some duplicate code removed
-    or simplified.
-  - Add support for RISC V CPU detection and add many optimizations in
-    the audio converters.
-  - Add an option to disable ALSA mixer path select. (#4311)
-  - Fix a potential bug with the cleanup of the loop queues.
-  - ALSA nodes now dynamically adjust the DLL bandwidth based on average
-    measured variance.
-  - The loop invoke queue was made more efficient and make it possible to
-    invoke from multiple threads.
-  - The filter-chain code was moved to a new filter-graph plugin.
-  - Most function macros are now static inlined and can also be built int=
-o a
-    libspa.so file. This should improve language bindings.
-  - V4l2 clock information was improved.
-  - Supported IEC958 codecs are now autodetected via ELD info.
-  - Audioconvert was optimized some more.
-  - Audioconvert can now include filter-graphs in its processing.
-  - webrtc-audio-processing-2 is now supported in AEC.
-  - The resampler now reports the delay and subsample delay. Also the
-    delay is reported in the samplerate of the input.
-  - The ALSA sequencer now handle kernels without UMP support. (#4507)
-
-  - Add quirk to block clients from making record and playback streams.
-  - The corked state is now set on stream to always report this state
-    correctly to other clients.
-  - Readiness notification was added to the pulse server with the
-    PIPEWIRE_PULSE_NOTIFICATION_FD environment variable. (#4347)
-  - The pulse.cmd config now supports conditions.
-  - A bug in clearing the ringbuffer was fixed. (#4464)
-
-  - Support for the default devices was added to the deviceprovider. (#42=
-68)
-  - The graph clock is now used as the source for the GStreamer clock.
-  - The sink now does some rate control.
-
-  - The ALSA plugin now supports DSD when explicitly enabled.
-
-  - JACK now supports 2 new extension formats for OSC and UMP.
-  - JACK clients can receive UMP MIDI1 or MIDI2 messages when using
-    the new UMP port format extension.
-  - JACK now reports the PipeWire version in the minor/micro/proto.
-  - Implement more jackserver functions.
-
-  - Support BAP broadcast links.
-  - Support for ASHA was added.
-  - Delay reporting in A2DP sources was improved.
-
-  - 2 new examples of pw-stream using spa_ringbuffer were added.
-
-  - Many updates to the man pages.
-  - More documentation about thread safety of functions in stream
-    and filters. (#4521)
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- ...4277b317b4836beccaa3248ab9055526811c.patch | 46 -------------------
- .../{pipewire_1.2.7.bb =3D> pipewire_1.4.0.bb}  |  6 +--
- 2 files changed, 3 insertions(+), 49 deletions(-)
- delete mode 100644 meta-multimedia/recipes-multimedia/pipewire/files/0ca=
-64277b317b4836beccaa3248ab9055526811c.patch
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_1.2.7.bb =3D=
-> pipewire_1.4.0.bb} (99%)
-
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/files/0ca64277b3=
-17b4836beccaa3248ab9055526811c.patch b/meta-multimedia/recipes-multimedia=
-/pipewire/files/0ca64277b317b4836beccaa3248ab9055526811c.patch
-deleted file mode 100644
-index 9b05e9e4c3..0000000000
---- a/meta-multimedia/recipes-multimedia/pipewire/files/0ca64277b317b4836=
-beccaa3248ab9055526811c.patch
-+++ /dev/null
-@@ -1,46 +0,0 @@
--From 0ca64277b317b4836beccaa3248ab9055526811c Mon Sep 17 00:00:00 2001
--From: Wim Taymans <wtaymans@redhat.com>
--Date: Mon, 30 Sep 2024 10:06:30 +0200
--Subject: [PATCH] spa: initialize all fields explicitly
--
--Patch by Petar Popovic
--
--Fixes #4325
--
--Upstream-Status: Backport [https://gitlab.freedesktop.org/pipewire/pipew=
-ire/-/commit/0ca64277b317b4836beccaa3248ab9055526811c]
--
--Signed-off-by: Markus Volk <f_l_k@t-online.de>
-----
-- spa/include/spa/pod/builder.h | 2 +-
-- spa/include/spa/pod/parser.h  | 2 +-
-- 2 files changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/spa/include/spa/pod/builder.h b/spa/include/spa/pod/builder=
-.h
--index 0564d94ea2..6d3e9d54af 100644
----- a/spa/include/spa/pod/builder.h
--+++ b/spa/include/spa/pod/builder.h
--@@ -49,7 +49,7 @@ struct spa_pod_builder {
-- 	struct spa_callbacks callbacks;
-- };
--=20
---#define SPA_POD_BUILDER_INIT(buffer,size)  ((struct spa_pod_builder){ (=
-buffer), (size), 0, {0}, {0} })
--+#define SPA_POD_BUILDER_INIT(buffer,size)  ((struct spa_pod_builder){ (=
-buffer), (size), 0, {0,0,NULL},{NULL,NULL}})
--=20
-- static inline void
-- spa_pod_builder_get_state(struct spa_pod_builder *builder, struct spa_p=
-od_builder_state *state)
--diff --git a/spa/include/spa/pod/parser.h b/spa/include/spa/pod/parser.h
--index 083f911713..4c1e72acce 100644
----- a/spa/include/spa/pod/parser.h
--+++ b/spa/include/spa/pod/parser.h
--@@ -33,7 +33,7 @@ struct spa_pod_parser {
-- 	struct spa_pod_parser_state state;
-- };
--=20
---#define SPA_POD_PARSER_INIT(buffer,size)  ((struct spa_pod_parser){ (bu=
-ffer), (size), 0, {0} })
--+#define SPA_POD_PARSER_INIT(buffer,size)  ((struct spa_pod_parser){ (bu=
-ffer), (size), 0, {0,0,NULL}})
--=20
-- static inline void spa_pod_parser_init(struct spa_pod_parser *parser,
-- 				       const void *data, uint32_t size)
----=20
--GitLab
--
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.7.b=
-b b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.0.bb
-similarity index 99%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.7.bb
-rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.0.bb
-index 8c486b9c5e..d897ddb25d 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.2.7.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.0.bb
-@@ -12,9 +12,8 @@ LIC_FILES_CHKSUM =3D " \
-=20
- DEPENDS =3D "dbus ncurses"
-=20
--SRCREV =3D "cc7439187f61dd73b81ca69f5dbccbb52ce970b2"
--SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
-1.2;protocol=3Dhttps"
--SRC_URI +=3D "file://0ca64277b317b4836beccaa3248ab9055526811c.patch"
-+SRCREV =3D "df1c36aec2aaf9e2eb1596b6b55e72c15fb2088a"
-+SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
-master;protocol=3Dhttps"
-=20
- S =3D "${WORKDIR}/git"
-=20
-@@ -283,6 +282,7 @@ CONFFILES:libpipewire +=3D "${datadir}/pipewire/clien=
-t.conf"
- FILES:libpipewire =3D " \
-     ${datadir}/pipewire/client.conf \
-     ${libdir}/libpipewire-*.so.* \
-+    ${libdir}/${SPA_SUBDIR}/libspa.so \
- "
- # Add the bare minimum modules and plugins required to be able
- # to use libpipewire. Without these, it is essentially unusable.
---=20
-2.48.1
-
+VGhhbmtzIGl0IHdvcmtzLg0KDQrigJQNClByYXNhZCBNdWxheQ0KUu+8hkQgU2VuaW9yIFByaW5j
+aXBhbCBFbmdpbmVlcg0KTW9iaWxlOiArOTE5MDA0MDk2NTIzDQpQaG9uZTogKzkxMjI2MTI3MzQ1
+NA0KLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCkZyb206IEd5b3JneSBTYXJ2YXJpIDxza2Fu
+ZGlncmF1bkBnbWFpbC5jb20+IA0KU2VudDogU2F0dXJkYXksIE1hcmNoIDgsIDIwMjUgOTo1NCBQ
+TQ0KVG86IFByYXNhZCBNdWxheSA8cHJhc2FkLm11bGF5QGluLmFiYi5jb20+OyBSYWogS2hlbSA8
+cmFqLmtoZW1AZ21haWwuY29tPg0KQ2M6IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1i
+ZWRkZWQub3JnDQpTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1weXRob25dcmVjaXBlcyBweXRob24z
+LXBhbmRhcyBub3QgZ2V0dGluZyBidWlsdCBwcm9wZXJseSBmb3IgYXJtIDMyIGJpdA0KDQpCZVNl
+Y3VyZSEgICAgICAgVGhpcyBlbWFpbCBjb21lcyBmcm9tIG91dHNpZGUgb2YgQUJCLiBNYWtlIHN1
+cmUgeW91IHZlcmlmeSB0aGUgc2VuZGVyIGJlZm9yZSBjbGlja2luZyBhbnkgbGlua3Mgb3IgZG93
+bmxvYWRpbmcvb3BlbmluZyBhdHRhY2htZW50cy4NCklmIHRoaXMgZW1haWwgbG9va3Mgc3VzcGlj
+aW91cywgcmVwb3J0IGl0IGJ5IGNsaWNraW5nICdSZXBvcnQgUGhpc2hpbmcnIGJ1dHRvbiBpbiBP
+dXRsb29rIG9yIHJhaXNpbmcgYSB0aWNrZXQgb24gTXlJUy4NCg0KDQpJIGFzc3VtZSB0aGF0IHlv
+dSBhcmUgdXNpbmcgU2NhcnRoZ2FwLCBiYXNlZCBvbiB0aGUgdmVyc2lvbnMgbWVudGlvbmVkIGlu
+IHlvdXIgbG9ncy4gVGhlIGJlbG93IGlzIG1vc3QgcHJvYmFibHkgbm90IGNvbXBsZXRlbHkgdmFs
+aWQgZm9yIFN0eWhlYWQgYW5kIG5ld2VyLg0KDQpNeSB0aGVvcnk6IFBhbmRhIHJlbGllcyBmYWly
+bHkgaGVhdmlseSBvbiBudW1weSwgaG93ZXZlciB0aGUgcmVjaXBlIHVzZXMgcHl0aG9uMy1udW1w
+eS1uYXRpdmUgYXMgYSBidWlsZCB0aW1lIGRlcGVuZGVuY3kgLSBzbyAzMi1iaXQgcGFuZGFzIGlz
+IGJ1aWx0IG9uIHRvcCBvZiA2NC1iaXQgbnVtcHksIGJ1dCBhdCBydW50aW1lLCB5b3UgYXJlIHBy
+b3ZpZGluZyAzMi1iaXQgbnVtcHkuIEFwcGFyZW50bHkgdGhpcyBpcyBjYXVzaW5nIGlzc3Vlcy4g
+KEkgYXNzdW1lIHlvdXIgYnVpbGQgaG9zdCBpcw0KeDg2XzY0KQ0KDQpDb3VsZCB5b3UgcGxlYXNl
+IGdpdmUgdGhlIGZvbGxvd2luZyBhIHRyeT8gVGhlIGJlbG93IGlzIGFuIGF0dGVtcHQgdG8gY29t
+cGlsZSBwYW5kYXMgYWdhaW5zdCB0aGUgdGFyZ2V0IHZlcnNpb24gb2YgbnVtcHksIG5vdCB0aGUg
+bmF0aXZlLiAoQWxsIGNoYW5nZXMgYXJlIGluIHRoZSBwYW5kYXMgcmVjaXBlKQ0KDQooSWYgYW55
+b25lIGNhbiBzZWUgc29tZXRoaW5nIHZlcnkgYmFkL3dyb25nIGluIHRoZSBiZWxvdywgcGxlYXNl
+IGdvIGFoZWFkIGFuZCBwb3N0Li4uKQ0KDQoxLiBSZW1vdmUgcHl0aG9uMy1udW1weS1uYXRpdmUg
+ZnJvbSBERVBFTkRTLCBhbmQgYWRkIHB5dGhvbjMtbnVtcHkgaW5zdGVhZA0KDQoyLiBBZGQgdGhl
+IGZvbGxvd2luZyB2YXJpYWJsZSBkZWNsYXJhdGlvbnMvZXhwb3J0cyB0byB0aGUgcmVjaXBlOg0K
+UFlUSE9OUEFUSDpwcmVwZW5kID0gIiR7UkVDSVBFX1NZU1JPT1R9JHtQWVRIT05fU0lURVBBQ0tB
+R0VTX0RJUn06Ig0KZXhwb3J0IFBZVEhPTlBBVEgNCmV4cG9ydCBOVU1QWV9JTkNMVURFX0RJUiA9
+DQoiJHtSRUNJUEVfU1lTUk9PVH0ke1BZVEhPTl9TSVRFUEFDS0FHRVNfRElSfS9udW1weS9jb3Jl
+L2luY2x1ZGUiDQoNCihXZSB3YW50IHRvIHRoZSBub24tbmF0aXZlIG51bXB5IG1vZHVsZSB0byB1
+c2UgZm9yIHRoZSBjb21waWxhdGlvbiwgc28gcHJlcGVuZCBweXRob25wYXRoIHdpdGggbm9uLW5h
+dGl2ZSBweXRob25wYXRoLCBhbmQgZXhwb3J0IGl0LiBUaGUgTlVNUFlfSU5DTFVERV9ESVIgaXMg
+dXNlZCBieSB0aGUgbmV4dCBzdGVwLikNCg0KMy4gQWRkIGEgc21hbGwgcGF0Y2hbMV0gdG8gdGhl
+IFNSQ19VUkkgLSBzZXR1cC5weSBpbXBvcnRzIG51bXB5IHRvIGdldCB0aGUgaW5jbHVkZXMnIGZv
+bGRlciBvbmx5LCB0aGlzIGlzIHdoeSBpdCByZXF1aXJlZCB0aGUgcHl0aG9uMy1udW1weS1uYXRp
+dmUgcGFja2FnZSBhcyBhIGRlcGVuZGVuY3kuIEhvd2V2ZXIgaXQgb25seSBuZWVkcyBhIHNpbmds
+ZSBsaW5lLCBhbmQgbGF0ZXIgaXQgc2hvdWxkIGJlIGFibGUgdG8gdXNlIHRoZSB0YXJnZXQgdmVy
+c2lvbi4gVGhlIGFib3ZlIHZhcmlhYmxlIGNvbnRhaW5zIHRoZSB2YWx1ZSBvZiB0aGUgZ2V0X2lu
+Y2x1ZGUoKSBjYWxsLiBBZnRlcndhcmRzIGl0IHNlZW1zIHRvIGJlIGhhcHB5IHdpdGggdGhlIHRh
+cmdldCB2ZXJzaW9uIG9mIG51bXB5Lg0KDQpQbGVhc2Uga2VlcCBpbiBtaW5kIHRoYXQgdGhpcyBp
+cyB1bnRlc3RlZCwgYW5kIG1heSBleHBsb2RlIChJIGRpZCBidWlsZCBpdCwgYW5kIGl0IHdvcmtl
+ZCwgYnV0IGRpZG4ndCBnbyBmYXJ0aGVyIHRoYW4geW91ciBleGFtcGxlLiBJZiBpdCB3b3Jrcywg
+cG9zc2libHkgdGhlIGNoYW5nZXMgc2hvdWxkL2NvdWxkIGJlIGxpbWl0ZWQgdG8gY2xhc3MtdGFy
+Z2V0IHN0aWxsLCBldGMpLiBJZiB5b3UgY291bGQgdmFsaWRhdGUgaXQgd2l0aCBhIG5vbi10cml2
+aWFsIGV4ZXJjaXNlIG9uIHlvdXIgZW5kIChhbmQgbGV0IHVzIGtub3cgdGhlIHJlc3VsdHMpLCB0
+aGF0IHdvdWxkIGJlIHJlYWxseSBoZWxwZnVsLg0KDQpPdXRwdXQgb24gbXkgZW5kLCBpbiBxZW11
+YXJtOg0KDQpyb290QHFlbXVhcm06fiMgdW5hbWUgLWENCkxpbnV4IHFlbXVhcm0gNi42LjM1LXlv
+Y3RvLXN0YW5kYXJkICMxIFNNUCBQUkVFTVBUIEZyaSBKdW4gMjggMTc6MDc6MzggVVRDIDIwMjQg
+YXJtdjdsIEdOVS9MaW51eCByb290QHFlbXVhcm06fiMgcHl0aG9uMyBQeXRob24gMy4xMi40ICht
+YWluLCBKdW4gIDYgMjAyNCwgMTg6MjY6NDQpIFtHQ0MgMTMuMy4wXSBvbiBsaW51eCBUeXBlICJo
+ZWxwIiwgImNvcHlyaWdodCIsICJjcmVkaXRzIiBvciAibGljZW5zZSIgZm9yIG1vcmUgaW5mb3Jt
+YXRpb24uDQo+Pj4gaW1wb3J0IHBhbmRhcyBhcyBwZA0KPj4+IGRhdGEgPSBbWyJBbGljZSIsIDI1
+XSwgWyJCb2IiLCAzMF0sIFsiQ2Fyb2wiLCAzNV1dIGRmID0gDQo+Pj4gcGQuRGF0YUZyYW1lKGRh
+dGEsIGNvbHVtbnM9WyJOYW1lIiwgIkFnZSJdKQ0KPj4+IHByaW50KGRmKQ0KICAgIE5hbWUgIEFn
+ZQ0KMCAgQWxpY2UgICAyNQ0KMSAgICBCb2IgICAzMA0KMiAgQ2Fyb2wgICAzNQ0KPj4+DQoNClsx
+XToNCmh0dHBzOi8vdXJsZGVmZW5zZS5jb20vdjMvX19odHRwczovL2dpc3QuZ2l0aHViLmNvbS9P
+bGRNYW5ZZWxsc0F0Q2xvdWQvOWU5MzU5MDc4MDdiNmRkY2QwOTAwYmZiMTQ1NWUzNDNfXzshIU5M
+VzNmRjl2IU9LQ1JnVUZTOEF4eDVpdGlaMGtKNF9OSzNJYkNMbFJ5ZGRJZ3FDT1oyNnJQZkVVMk5z
+YU9GU0dsbXVwZGJ5N3pZcVp0RjVRQ2pseXZ3eUkyQXlmWVlZQSQNCg0KT24gMDguMDMuMjUgMDI6
+MzksIFByYXNhZCBNdWxheSB2aWEgbGlzdHMub3BlbmVtYmVkZGVkLm9yZyB3cm90ZToNCj4gWWVz
+DQo+IFJlZ2FyZHMNCj4gUHJhc2FkDQo+DQo+PiBPbiA4IE1hciAyMDI1LCBhdCAxMjo0OeKAr0FN
+LCBLaGVtIFJhaiA8cmFqLmtoZW1AZ21haWwuY29tPiB3cm90ZToNCj4+DQo+PiDvu78NCj4+ICpC
+ZVNlY3VyZSEqICBUaGlzIGVtYWlsIGNvbWVzIGZyb20gb3V0c2lkZSBvZiBBQkIuIE1ha2Ugc3Vy
+ZSB5b3UgDQo+PiAqdmVyaWZ5IHRoZSBzZW5kZXIqIGJlZm9yZSBjbGlja2luZyBhbnkgbGlua3Mg
+b3IgZG93bmxvYWRpbmcvb3BlbmluZyANCj4+IGF0dGFjaG1lbnRzLg0KPj4gSWYgdGhpcyBlbWFp
+bCBsb29rcyBzdXNwaWNpb3VzLCAqcmVwb3J0IGl0KiBieSBjbGlja2luZyAnUmVwb3J0IA0KPj4g
+UGhpc2hpbmcnIGJ1dHRvbiBpbiBPdXRsb29rIG9yIHJhaXNpbmcgYSB0aWNrZXQgb24gTXlJUy4N
+Cj4+DQo+Pg0KPj4gaXMgaXQgc2FtZSBhcyANCj4+IGh0dHBzOi8vdXJsZGVmZW5zZS5jb20vdjMv
+X19odHRwczovL2dpdGh1Yi5jb20vcGFuZGFzLWRldi9wYW5kYXMvaXNzdQ0KPj4gZXMvNTUzMDVf
+XzshIU5MVzNmRjl2IU9LQ1JnVUZTOEF4eDVpdGlaMGtKNF9OSzNJYkNMbFJ5ZGRJZ3FDT1oyNnJQ
+ZkVVDQo+PiAyTnNhT0ZTR2xtdXBkYnk3ellxWnRGNVFDamx5dnd5STJHcDhJMV9BJA0KPj4gPGh0
+dHBzOi8vdXJsZGVmZW5zZS5jb20vdjMvX19odHRwczovL2dpdGh1Yi5jb20vcGFuZGFzLWRldi9w
+YW5kYXMvaXNzDQo+PiB1ZXMvNTUzMDVfXzshIU5MVzNmRjl2IU9VWVljdTJRNHpfSDVSaDRuZUVL
+djk2aFlsRXkwSk1Eaml0SmlldnZGbzBKblcNCj4+IHhSSmhab3BwTzRELXo4MGJiNHE5U1VYcl9v
+REQwbVhUTUZxYVkkPg0KPj4NCj4+IE9uIFRodSwgTWFyIDYsIDIwMjUgYXQgODoyM+KAr1BNIFBy
+YXNhZCBNdWxheSB2aWEgDQo+PiBsaXN0cy5vcGVuZW1iZWRkZWQub3JnIA0KPj4gPGh0dHBzOi8v
+dXJsZGVmZW5zZS5jb20vdjMvX19odHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZ19fOyEhTkxX
+M2ZGDQo+PiA5diFPVVlZY3UyUTR6X0g1Umg0bmVFS3Y5NmhZbEV5MEpNRGppdEppZXZ2Rm8wSm5X
+eFJKaFpvcHBPNEQtejgwYmI0cTkNCj4+IFNVWHJfb0REMG1TblFRYjlBJD4gPHByYXNhZC5tdWxh
+eT1pbi5hYmIuY29tQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc+IA0KPj4gd3JvdGU6DQo+Pg0KPj4g
+ICAgIEhlbGxvDQo+Pg0KPj4gICAgIGh0dHBzOi8vdXJsZGVmZW5zZS5jb20vdjMvX19odHRwczov
+L2dpdGh1Yi5jb20vcGFuZGFzLWRldi9wYW5kYXMvaXNzdWVzLzU1MzA1X187ISFOTFczZkY5diFP
+S0NSZ1VGUzhBeHg1aXRpWjBrSjRfTkszSWJDTGxSeWRkSWdxQ09aMjZyUGZFVTJOc2FPRlNHbG11
+cGRieTd6WXFadEY1UUNqbHl2d3lJMkdwOEkxX0EkDQo+PiAgICAgDQo+PiA8aHR0cHM6Ly91cmxk
+ZWZlbnNlLmNvbS92My9fX2h0dHBzOi8vZ2l0aHViLmNvbS9wYW5kYXMtZGV2L3BhbmRhcy9pc3MN
+Cj4+IHVlcy81NTMwNV9fOyEhTkxXM2ZGOXYhT1VZWWN1MlE0el9INVJoNG5lRUt2OTZoWWxFeTBK
+TURqaXRKaWV2dkZvMEpuVw0KPj4geFJKaFpvcHBPNEQtejgwYmI0cTlTVVhyX29ERDBtWFRNRnFh
+WSQ+DQo+Pg0KPj4gICAgIHRoaXMgaXMgcmVwb3J0ZWQgb24gcGFuZGFzIHJlcG8uIGxvb2tpbmcg
+YXQgdGhlIGNvbW1lbnRzIGxvb2tzIHRvDQo+PiAgICAgYmUgYnVnIGZyb20gYnVpbGQgc3lzdGVt
+LiBJIGhhdmUgdHJpZWQgdGhlIHNvbHV0aW9uIHNwZWNpZmllZA0KPj4gICAgIHRoZXJlLiBidXQg
+c3RpbGwgcHJvYmxlbSBpcyBwZXJzaXN0aW5nLg0KPj4NCj4+ICAgICBJIGFtIHVzaW5nIGN1c3Rv
+bSBJTVg2IGJvYXJkLg0KPj4NCj4+DQo+Pg0KPj4gICAgIEJlbG93IGlzIHJzcG9zZSBmcm9tIG15
+IGJvYXJkLg0KPj4NCj4+ICAgICByb290QGlteDZkbGRhdTp+IyBweXRob24NCj4+DQo+PiAgICAg
+UHl0aG9uIDMuMTIuNiAobWFpbiwgU2VwICA2IDIwMjQsIDE5OjAzOjQ3KSBbR0NDIDEzLjMuMF0g
+b24gbGludXgNCj4+DQo+PiAgICAgVHlwZSAiaGVscCIsICJjb3B5cmlnaHQiLCAiY3JlZGl0cyIg
+b3IgImxpY2Vuc2UiIGZvciBtb3JlDQo+PiAgICAgaW5mb3JtYXRpb24uDQo+Pg0KPj4gICAgID4+
+PiBpbXBvcnQgcGFuZGFzIGFzIHBkDQo+Pg0KPj4gICAgID4+PiAjIENyZWF0ZSBhIGxpc3Qgb2Yg
+ZGF0YQ0KPj4NCj4+ICAgICA+Pj4gZGF0YSA9IFtbIkFsaWNlIiwgMjVdLCBbIkJvYiIsIDMwXSwg
+WyJDYXJvbCIsIDM1XV0NCj4+DQo+PiAgICAgPj4+ICMgQ3JlYXRlIGEgUGFuZGFzIERhdGFGcmFt
+ZSBmcm9tIHRoZSBsaXN0IG9mIGRhdGENCj4+DQo+PiAgICAgPj4+IGRmID0gcGQuRGF0YUZyYW1l
+KGRhdGEsIGNvbHVtbnM9WyJOYW1lIiwgIkFnZSJdKQ0KPj4NCj4+ICAgICA+Pj4gIyBQcmludCB0
+aGUgRGF0YUZyYW1lDQo+Pg0KPj4gICAgID4+PiBwcmludChkZikNCj4+DQo+PiAgICAgVHJhY2Vi
+YWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOg0KPj4NCj4+ICAgICAgIEZpbGUgIjxzdGRpbj4i
+LCBsaW5lIDEsIGluIDxtb2R1bGU+DQo+Pg0KPj4gICAgICAgRmlsZSAiL3Vzci9saWIvcHl0aG9u
+My4xMi9zaXRlLXBhY2thZ2VzL3BhbmRhcy9jb3JlL2ZyYW1lLnB5IiwNCj4+ICAgICBsaW5lIDEw
+OTQsIGluIF9fcmVwcl9fDQo+Pg0KPj4gICAgICAgICByZXR1cm4gc2VsZi50b19zdHJpbmcoKipy
+ZXByX3BhcmFtcykNCj4+DQo+PiAgICAgICAgICAgICAgICBeXl5eXl5eXl5eXl5eXl5eXl5eXl5e
+Xl5eXl5eXg0KPj4NCj4+ICAgICAgIEZpbGUgIi91c3IvbGliL3B5dGhvbjMuMTIvc2l0ZS1wYWNr
+YWdlcy9wYW5kYXMvY29yZS9mcmFtZS5weSIsDQo+PiAgICAgbGluZSAxMjcxLCBpbiB0b19zdHJp
+bmcNCj4+DQo+PiAgICAgICAgIHJldHVybiBmbXQuRGF0YUZyYW1lUmVuZGVyZXIoZm9ybWF0dGVy
+KS50b19zdHJpbmcoDQo+Pg0KPj4gICAgICAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5e
+Xl5eXl5eXl5eXl5eXl5eXl5eXl5eXg0KPj4NCj4+ICAgICAgIEZpbGUNCj4+ICAgICAiL3Vzci9s
+aWIvcHl0aG9uMy4xMi9zaXRlLXBhY2thZ2VzL3BhbmRhcy9pby9mb3JtYXRzL2Zvcm1hdC5weSIs
+DQo+PiAgICAgbGluZSAxMTM0LCBpbiB0b19zdHJpbmcNCj4+DQo+PiAgICAgICAgIHN0cmluZyA9
+IHN0cmluZ19mb3JtYXR0ZXIudG9fc3RyaW5nKCkNCj4+DQo+PiAgICAgICAgICAgICAgICAgIF5e
+Xl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl4NCj4+DQo+PiAgICAgICBGaWxlDQo+PiAgICAgIi91
+c3IvbGliL3B5dGhvbjMuMTIvc2l0ZS1wYWNrYWdlcy9wYW5kYXMvaW8vZm9ybWF0cy9zdHJpbmcu
+cHkiLA0KPj4gICAgIGxpbmUgMzAsIGluIHRvX3N0cmluZw0KPj4NCj4+ICAgICAgICAgdGV4dCA9
+IHNlbGYuX2dldF9zdHJpbmdfcmVwcmVzZW50YXRpb24oKQ0KPj4NCj4+ICAgICAgICAgICAgICAg
+IF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXg0KPj4NCj4+ICAgICAgIEZpbGUNCj4+
+ICAgICAiL3Vzci9saWIvcHl0aG9uMy4xMi9zaXRlLXBhY2thZ2VzL3BhbmRhcy9pby9mb3JtYXRz
+L3N0cmluZy5weSIsDQo+PiAgICAgbGluZSA0NSwgaW4gX2dldF9zdHJpbmdfcmVwcmVzZW50YXRp
+b24NCj4+DQo+PiAgICAgICAgIHN0cmNvbHMgPSBzZWxmLl9nZXRfc3RyY29scygpDQo+Pg0KPj4g
+ICAgICAgICAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXg0KPj4NCj4+ICAgICAgIEZpbGUN
+Cj4+ICAgICAiL3Vzci9saWIvcHl0aG9uMy4xMi9zaXRlLXBhY2thZ2VzL3BhbmRhcy9pby9mb3Jt
+YXRzL3N0cmluZy5weSIsDQo+PiAgICAgbGluZSAzNiwgaW4gX2dldF9zdHJjb2xzDQo+Pg0KPj4g
+ICAgICAgICBzdHJjb2xzID0gc2VsZi5mbXQuZ2V0X3N0cmNvbHMoKQ0KPj4NCj4+ICAgICAgICAg
+ICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl4NCj4+DQo+PiAgICAgICBGaWxlDQo+PiAg
+ICAgIi91c3IvbGliL3B5dGhvbjMuMTIvc2l0ZS1wYWNrYWdlcy9wYW5kYXMvaW8vZm9ybWF0cy9m
+b3JtYXQucHkiLA0KPj4gICAgIGxpbmUgNjE1LCBpbiBnZXRfc3RyY29scw0KPj4NCj4+ICAgICAg
+ICAgc3RyY29scyA9IHNlbGYuX2dldF9zdHJjb2xzX3dpdGhvdXRfaW5kZXgoKQ0KPj4NCj4+ICAg
+ICAgICAgICAgICAgICAgIF5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXg0KPj4NCj4+
+ICAgICAgIEZpbGUNCj4+ICAgICAiL3Vzci9saWIvcHl0aG9uMy4xMi9zaXRlLXBhY2thZ2VzL3Bh
+bmRhcy9pby9mb3JtYXRzL2Zvcm1hdC5weSIsDQo+PiAgICAgbGluZSA4NzAsIGluIF9nZXRfc3Ry
+Y29sc193aXRob3V0X2luZGV4DQo+Pg0KPj4gICAgICAgICBzdHJfY29sdW1ucyA9IA0KPj4gc2Vs
+Zi5fZ2V0X2Zvcm1hdHRlZF9jb2x1bW5fbGFiZWxzKHNlbGYudHJfZnJhbWUpDQo+Pg0KPj4gICAg
+ICAgICAgICAgICAgICAgICAgIA0KPj4gXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5e
+Xl5eXl5eXl5eXl5eXl5eDQo+Pg0KPj4gICAgICAgRmlsZQ0KPj4gICAgICIvdXNyL2xpYi9weXRo
+b24zLjEyL3NpdGUtcGFja2FnZXMvcGFuZGFzL2lvL2Zvcm1hdHMvZm9ybWF0LnB5IiwNCj4+ICAg
+ICBsaW5lIDk0OSwgaW4gX2dldF9mb3JtYXR0ZWRfY29sdW1uX2xhYmVscw0KPj4NCj4+ICAgICAg
+ICAgZHR5cGVzID0gc2VsZi5mcmFtZS5kdHlwZXMNCj4+DQo+PiAgICAgICAgICAgICAgICAgIF5e
+Xl5eXl5eXl5eXl5eXl5eDQo+Pg0KPj4gICAgICAgRmlsZQ0KPj4gICAgICIvdXNyL2xpYi9weXRo
+b24zLjEyL3NpdGUtcGFja2FnZXMvcGFuZGFzL2NvcmUvZ2VuZXJpYy5weSIsIGxpbmUNCj4+ICAg
+ICA2MTU4LCBpbiBkdHlwZXMNCj4+DQo+PiAgICAgICAgIGRhdGEgPSBzZWxmLl9tZ3IuZ2V0X2R0
+eXBlcygpDQo+Pg0KPj4gICAgICAgICAgICAgICAgXl5eXl5eXl5eXl5eXl5eXl5eXl5eXg0KPj4N
+Cj4+ICAgICAgIEZpbGUNCj4+ICAgICAiL3Vzci9saWIvcHl0aG9uMy4xMi9zaXRlLXBhY2thZ2Vz
+L3BhbmRhcy9jb3JlL2ludGVybmFscy9tYW5hZ2Vycy5weSIsDQo+PiAgICAgbGluZSAyNzgsIGlu
+IGdldF9kdHlwZXMNCj4+DQo+PiAgICAgICAgIHJldHVybiBkdHlwZXMudGFrZShzZWxmLmJsa25v
+cykNCj4+DQo+PiAgICAgICAgICAgICAgICAgICAgICAgICAgICBeXl5eXl5eXl5eXg0KPj4NCj4+
+ICAgICAgIEZpbGUNCj4+ICAgICAiL3Vzci9saWIvcHl0aG9uMy4xMi9zaXRlLXBhY2thZ2VzL3Bh
+bmRhcy9jb3JlL2ludGVybmFscy9tYW5hZ2Vycy5weSIsDQo+PiAgICAgbGluZSAxNzksIGluIGJs
+a25vcw0KPj4NCj4+ICAgICAgICAgc2VsZi5fcmVidWlsZF9ibGtub3NfYW5kX2Jsa2xvY3MoKQ0K
+Pj4NCj4+ICAgICAgIEZpbGUgInBhbmRhcy9fbGlicy9pbnRlcm5hbHMucHl4IiwgbGluZSA3NTUs
+IGluDQo+PiAgICAgcGFuZGFzLl9saWJzLmludGVybmFscy5CbG9ja01hbmFnZXIuX3JlYnVpbGRf
+Ymxrbm9zX2FuZF9ibGtsb2NzDQo+Pg0KPj4gICAgIFZhbHVlRXJyb3I6IEJ1ZmZlciBkdHlwZSBt
+aXNtYXRjaCwgZXhwZWN0ZWQgJ2ludHBfdCcgYnV0IGdvdA0KPj4gICAgICdsb25nIGxvbmcnDQo+
+Pg0KPj4gICAgID4+Pg0KPj4NCj4+DQo+Pg0KPj4gICAgIEFueSBoZWxwIHdvdWxkIGJlIGFwcHJl
+Y2lhdGVkLg0KPj4NCj4+ICAgICBUaGFuayB5b3UNCj4+DQo+PiAgICAgUmVnYXJkcw0KPj4NCj4+
+ICAgICBQcmFzYWQgTXVsYXkNCj4+DQo+Pg0KPj4NCj4+DQo+Pg0KPj4NCj4NCj4gLT0tPS09LT0t
+PS09LT0tPS09LT0tPS0NCj4gTGlua3M6IFlvdSByZWNlaXZlIGFsbCBtZXNzYWdlcyBzZW50IHRv
+IHRoaXMgZ3JvdXAuDQo+IFZpZXcvUmVwbHkgT25saW5lICgjMTE1ODAzKTogDQo+IGh0dHBzOi8v
+dXJsZGVmZW5zZS5jb20vdjMvX19odHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVu
+ZW1iZWQNCj4gZGVkLWRldmVsL21lc3NhZ2UvMTE1ODAzX187ISFOTFczZkY5diFPS0NSZ1VGUzhB
+eHg1aXRpWjBrSjRfTkszSWJDTGxSeQ0KPiBkZElncUNPWjI2clBmRVUyTnNhT0ZTR2xtdXBkYnk3
+ellxWnRGNVFDamx5dnd5STI5OW9pdGtzJA0KPiBNdXRlIFRoaXMgVG9waWM6IA0KPiBodHRwczov
+L3VybGRlZmVuc2UuY29tL3YzL19faHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL210LzEx
+MTU2MjYyDQo+IDMvNjA4NDQ0NV9fOyEhTkxXM2ZGOXYhT0tDUmdVRlM4QXh4NWl0aVowa0o0X05L
+M0liQ0xsUnlkZElncUNPWjI2clBmRVUNCj4gMk5zYU9GU0dsbXVwZGJ5N3pZcVp0RjVRQ2pseXZ3
+eUkyNEZ4UlJ1YyQNCj4gR3JvdXAgT3duZXI6IG9wZW5lbWJlZGRlZC1kZXZlbCtvd25lckBsaXN0
+cy5vcGVuZW1iZWRkZWQub3JnDQo+IFVuc3Vic2NyaWJlOiANCj4gaHR0cHM6Ly91cmxkZWZlbnNl
+LmNvbS92My9fX2h0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZA0KPiBk
+ZWQtZGV2ZWwvdW5zdWJfXzshIU5MVzNmRjl2IU9LQ1JnVUZTOEF4eDVpdGlaMGtKNF9OSzNJYkNM
+bFJ5ZGRJZ3FDT1oyDQo+IDZyUGZFVTJOc2FPRlNHbG11cGRieTd6WXFadEY1UUNqbHl2d3lJMmgt
+U0c3YlkkICANCj4gW3NrYW5kaWdyYXVuQGdtYWlsLmNvbV0NCj4gLT0tPS09LT0tPS09LT0tPS09
+LT0tPS0NCj4NCg==
 
