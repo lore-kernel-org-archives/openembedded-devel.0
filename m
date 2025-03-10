@@ -1,153 +1,199 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A947C28B2E
-	for <webhook@archiver.kernel.org>; Mon, 10 Mar 2025 12:34:37 +0000 (UTC)
-Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com [209.85.167.180])
- by mx.groups.io with SMTP id smtpd.web10.36423.1741610075370830788
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 896E7C282EC
+	for <webhook@archiver.kernel.org>; Mon, 10 Mar 2025 13:31:27 +0000 (UTC)
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
+ by mx.groups.io with SMTP id smtpd.web11.37306.1741613485928121984
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Mar 2025 05:34:35 -0700
+ Mon, 10 Mar 2025 06:31:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XfPVOpuB;
- spf=pass (domain: gmail.com, ip: 209.85.167.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f180.google.com with SMTP id 5614622812f47-3f3d1280f3dso1129822b6e.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Mar 2025 05:34:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SIvW4miC;
+ spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-5e614da8615so3881835a12.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Mar 2025 06:31:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741610074; x=1742214874; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=Pc4km4aIVllT4H8iHo4VAXXtH8yzKyOWklwJLs19QXY=;
-        b=XfPVOpuB7/JqsFAxxg2HlVOw5DQBXBw+bcdardVik17+TpWvmlylc9Nt+cd++5gpf0
-         h3sxgQ/28YUHXW4sCtF0DqunELDX2VOQ0rkrSZm6u+98gzxtard6Jskg3wA++K76ZE2K
-         9xDYU5JSQEFxlacN92CZ1QcHu9Ff8hmBmI9QK2Pm2Wkzn025iDWVcTgj/Vm+MrUHqPPv
-         RGgy2FGrUZUV0UEyLLLXgEsfn0KQaB2EPo2VHlh252gcncSJJoUWfd8WXWFdWXgP8JQy
-         qigsQljw84eqOjeCpttIAcgfQO/oIMU4QIxjkENEuDgn2Y3/3WtvCjIQ995MlroeRQwB
-         mMuw==
+        d=gmail.com; s=20230601; t=1741613484; x=1742218284; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=/xM85zt00ByoIMrOOBMlxC+K1oKz1oISWBV9nhOnuhg=;
+        b=SIvW4miCFrBYbJJWTxmEQvhSf7JUswUSaGNzTQHzl0TXPI0DOq8y7XFeRfUsGCVSbk
+         eNIRhxmlt4QvbqN1KZd5hDLq8j37b2rzhWQZjXT0qpNZVu84EgEoBdHbOTIzePAIi5Bu
+         CxV/VwaDwWPexN0KIAjsbibAKhSCgU3CkEnWgWh+O+4zFHQe4f5pY2DhnH4EiQXUcxRA
+         mv7g4H45CuX2ZvAEI1XsuuIkv03yT1+IcWGvqiRYwJjH2ud9nont25oEtllTFtRUI9Mz
+         VBxlDvERPXvx2w1aIYsAOYkEri+mwxBW1256MvxaGzcIFExkz3nzHgnNd1ryZx+bKpuv
+         jvCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741610074; x=1742214874;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Pc4km4aIVllT4H8iHo4VAXXtH8yzKyOWklwJLs19QXY=;
-        b=oeZTtXmGY6k036K0fng8TKlGZOwaXtsFf0y/GcG2iciJbqtYygJ8VZVGlS2Olyg7J9
-         FiMtvFjg/1Mg6IbGpoNi7yA4w+RIChz9NXY+Yd54H01pbNX5QHB6Q9E+A396dvubOssH
-         QRrBxs4T91e7YZz/JVfxCp0UAIFW4aUlkhidS0vs40ozS1ru2tw2yfaIPfg3O9kt9Bvi
-         +ZtdW9MOCb42VEKfa3koThFt1ETG6aoOciHQMyFjfB7xlvcjB9Kof+JGfw8p9EDkNXao
-         ivv+JHvHV7AARznGMFPqaYE2yeF6ZWHR1oZZAUxCZ/miqS9sdupeD7n8ahbr2iADD7DN
-         aY0A==
-X-Gm-Message-State: AOJu0Yz6RLP4NFfXQlCPLcuj6ACGNWtDblnbF12eujrzhJxSADmFhAvR
-	3RtVbMPZG6T6CVdOfQFcYqvimg0rSZSi7/KcBuo5T+3+EdOdLFqkqGwAxkA0SVnOdouH+9pOe/Y
-	4VbXhfue8H8ROiW3Yc0shydeKY3A=
-X-Gm-Gg: ASbGncundquu6pk1Rk6xfLiYuP/yofwN0hqkwAGWaRQwhcT4tRq8LatTgl0NaiLoESS
-	dEjVc0eO1ljl6+95yanCwsc+qo11DePqk1d+xqve6H8EJMoqEgTFJnAdEw3tg9nFz5iOVpEt5wz
-	DgxyRbpXAUtniKQcg35wZPHi8F4VmhPaoSf7Qch/bYsKEo4F5sFe/1jNl/zg==
-X-Google-Smtp-Source: AGHT+IHd0gYGmjdOReZEXNpRLBnxUjOUCEuHtGHIQ78h/KcQuv7cQj+kxONtGRoPMk4W94lzV48wsEkt+41LWFoTo3s=
-X-Received: by 2002:a05:6808:f0a:b0:3f6:7651:d24a with SMTP id
- 5614622812f47-3f697b5d606mr6909039b6e.16.1741610074571; Mon, 10 Mar 2025
- 05:34:34 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1741613484; x=1742218284;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=/xM85zt00ByoIMrOOBMlxC+K1oKz1oISWBV9nhOnuhg=;
+        b=BhkBDWFtIFFnGXgsSsuNuYoYk8n0kNnAmiHfAuoILXK49BrQRRsQShsdQP7wzOeA/G
+         zxYQ5VYOmhXcMl4ZgIP4TwH5GFIKVietnaUfkHKkUOXEiJ0Qa7GFPQi3pzy7EHzV0L8+
+         YaqDignZ5Yyv0SxweqaRqUp/zOGJ8jMzeAC8Bs4pxK2rPFxA8k4Y7YxXoeUK4skQzbaS
+         qOuQJvkWBczcrHFl0F9hVL0of6icdY4TjH/sGZ6RrgykyJxiPV/QIZkTx4HkXobNtKZh
+         tdkljSgXQBft4yHkvQkWz0fiUbCrDPEE6mi8q+7gdmFmOCEC5DmNynAAhR0J/o5zpoY7
+         Bemw==
+X-Gm-Message-State: AOJu0YzZLtQfsIPg3iVPC4mwUwWtfPvLvIWQuUM/TnjMhGXeNu92iv1L
+	8L1R5vvStLmvOsagDUWIoYrlmmOlGAiPkM2Ql9qXVePszGVtu2FKfmRafA==
+X-Gm-Gg: ASbGnctjn3P1ZJR+5R2R2Kk3YHhlnUNdyx4Moqf3MSJzzBSTgO6OghAgyVVEfulg/6I
+	aW3LSH/cKeSD11gtjL1TY8hnMxb6BfiTCK8J1RWvShTINdqaxu1hjHypTU1PZ8JHsyZoxJc6Kvc
+	UEo94qnfnS9Z5GDWK3qQ15lDy0yFRDQeX1RjLHhFhd6FBwOu/aLWXmRX/eSMkv/K0HBQ50VBj1w
+	PGQu6rFKhTQbEGAtvNQ006mleshLU1TMltutC49EMS3OcZWhse6XeFfLJT5Fq4TbIvgIo01Gjzp
+	wPZHNwJ0A6ZMX0fxJJLsS1S/Rt8ZvwgopXrF7lKqi11p7BbA8sP5/eTjrXVW
+X-Google-Smtp-Source: AGHT+IE79zsMI661FDW9WYYYYFZB/PXkBteA7J7cRHwEYYmU6WSltNprTnmMqx9K3QzInFW9EGlClg==
+X-Received: by 2002:a05:6402:845:b0:5e4:d2c2:b8e8 with SMTP id 4fb4d7f45d1cf-5e61508b46amr8624721a12.16.1741613478940;
+        Mon, 10 Mar 2025 06:31:18 -0700 (PDT)
+Received: from localhost.localdomain ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5e5c733f39fsm7113671a12.11.2025.03.10.06.31.18
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 Mar 2025 06:31:18 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH v3] python3-pandas: compile against target version of numpy
+Date: Mon, 10 Mar 2025 14:31:17 +0100
+Message-ID: <20250310133117.1356742-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <20250307093255.1110778-1-awais.belal@gmail.com>
- <20250307093255.1110778-2-awais.belal@gmail.com> <CAMKF1spsyTBdgD_we=X2Q9vpGFhBi-0E59ArdGyKr3KB-8g3Gg@mail.gmail.com>
- <CAM=5Amb6u5-8pmud11do97X4UAwLToizR9SiGjPD=4+Zqet6Rw@mail.gmail.com>
-In-Reply-To: <CAM=5Amb6u5-8pmud11do97X4UAwLToizR9SiGjPD=4+Zqet6Rw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 10 Mar 2025 05:34:23 -0700
-X-Gm-Features: AQ5f1JrTvvLg5axY8GODrl-Wjb0dR9m3MDodmmkMagVF4ngKPrOhUYTfchovXKQ
-Message-ID: <CAMKF1sroz=jLxp9PfMkZoQwtRjyvDZhK15kGLS32q5vu7dxcHA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][scarthgap][PATCH 2/2] mongodb: update to 4.4.29
-To: Awais Belal <awais.belal@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000d5092f062ffc31f2"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Mar 2025 12:34:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115833
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Mar 2025 13:31:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115834
 
---000000000000d5092f062ffc31f2
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+python3-numpy headers are required by pandas to compile successfully.
+By default, this recipe used python3-numpy-native for compilation,
+which usually works. However in case the bitness of the build-host
+differs from the target, then problems arise.
 
-On Mon, Mar 10, 2025 at 2:24=E2=80=AFAM Awais Belal <awais.belal@gmail.com>=
- wrote:
+For example when compiling for 32-bit ARM on a x86-64 machine, the following
+error appears when trying to import the module:
 
->
->> I am seeing this  build failure on master
->>
->> | File
->> "/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-=
-linux/mongodb/4.4.29/git/src/mongo/base/generate_error_codes.py",
->> line 31, in <module>
->> | from Cheetah.Template import Template
->> | File
->> "/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-=
-linux/mongodb/4.4.29/recipe-sysroot-native/usr/lib/python3.13/site-packages=
-/Cheetah/Template.py",
->> line 24, in <module>
->> | import cgi # Used by .webInput() if the template is a CGI script.
->> | ^^^^^^^^^^
->> | ModuleNotFoundError: No module named 'cgi'
->> | Generating build/59f4f0dd/mongo/db/repl/repl_settings_gen.cpp
->> | scons: *** [build/59f4f0dd/mongo/base/error_codes.h] Error 1
->> | scons: building terminated because of errors.
->> | build/59f4f0dd/mongo/base/error_codes.h failed: Error 1
->>
->>
->  The changeset was intended for scarthgap and I haven't made sure if
-> master builds. Is that a requirement? The cgi module was dropped in pytho=
-n
-> 3.13 which is what master is following at this point. I might send a
-> separate series for master once I move on to that.
->
+ValueError: Buffer dtype mismatch, expected 'const int64_t' but got 'long long'
 
-Patches are routed by master to release branches if they are needed in
-master. They are done for master and then backported
+When running a diff on all numpy headers across native and target,
+only one header differs, _numpyconfig.h, in a significant way.
+This header defines the sizes of different datatypes used by numpy,
+and these sizes strongly depend on the arch bitness.
 
->
+This change switches from python3-numpy-native dependency to python3-numpy to
+ensure that the correct headers are used. Beside this also patch the meson script,
+so it accepts an option (numpy_inc_dir) to specify the location of these headers,
+since it is not able to query them from the class-target module
 
---000000000000d5092f062ffc31f2
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+The PYTHONPATH variable is extended with the target's RECIPE_SYSROOT, because
+numpy is specified as a dependency in meson, and it needs to find the module
+to continue successfully.
 
-<div><br></div><div><br><div class=3D"gmail_quote gmail_quote_container"><d=
-iv dir=3D"ltr" class=3D"gmail_attr">On Mon, Mar 10, 2025 at 2:24=E2=80=AFAM=
- Awais Belal &lt;<a href=3D"mailto:awais.belal@gmail.com">awais.belal@gmail=
-.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"mar=
-gin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;padding=
--left:1ex;border-left-color:rgb(204,204,204)"><div dir=3D"ltr"><div class=
-=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
-0px 0.8ex;border-left-width:1px;border-left-style:solid;padding-left:1ex;bo=
-rder-left-color:rgb(204,204,204)"><br>I am seeing this=C2=A0 build failure =
-on master<br>
-<br>
-| File &quot;/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2=
--64-poky-linux/mongodb/4.4.29/git/src/mongo/base/generate_error_codes.py&qu=
-ot;,<br>
-line 31, in &lt;module&gt;<br>
-| from Cheetah.Template import Template<br>
-| File &quot;/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2=
--64-poky-linux/mongodb/4.4.29/recipe-sysroot-native/usr/lib/python3.13/site=
--packages/Cheetah/Template.py&quot;,<br>
-line 24, in &lt;module&gt;<br>
-| import cgi # Used by .webInput() if the template is a CGI script.<br>
-| ^^^^^^^^^^<br>
-| ModuleNotFoundError: No module named &#39;cgi&#39;<br>
-| Generating build/59f4f0dd/mongo/db/repl/repl_settings_gen.cpp<br>
-| scons: *** [build/59f4f0dd/mongo/base/error_codes.h] Error 1<br>
-| scons: building terminated because of errors.<br>
-| build/59f4f0dd/mongo/base/error_codes.h failed: Error 1<br><br></blockquo=
-te><div><br>=C2=A0The changeset was intended for scarthgap and I haven&#39;=
-t made sure if master builds. Is that a requirement? The cgi module was dro=
-pped in python 3.13 which is what master is following at this point. I migh=
-t send a separate series for master once I move on to that.</div></div></di=
-v></blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Patches are ro=
-uted by master to release branches if they are needed in master. They are d=
-one for master and then backported=C2=A0</div><blockquote class=3D"gmail_qu=
-ote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-st=
-yle:solid;padding-left:1ex;border-left-color:rgb(204,204,204)"><div dir=3D"=
-ltr"><div class=3D"gmail_quote"><div dir=3D"auto"></div></div></div>
-</blockquote></div></div>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ ...ion-to-specify-numpy-header-location.patch | 66 +++++++++++++++++++
+ .../python/python3-pandas_2.2.2.bb            |  9 ++-
+ 2 files changed, 74 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pandas/0001-BLD-add-option-to-specify-numpy-header-location.patch
 
---000000000000d5092f062ffc31f2--
+diff --git a/meta-python/recipes-devtools/python/python3-pandas/0001-BLD-add-option-to-specify-numpy-header-location.patch b/meta-python/recipes-devtools/python/python3-pandas/0001-BLD-add-option-to-specify-numpy-header-location.patch
+new file mode 100644
+index 0000000000..87023a24ec
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pandas/0001-BLD-add-option-to-specify-numpy-header-location.patch
+@@ -0,0 +1,66 @@
++From 16dd09e6c79768a24f5a50ec5985e0b6fdf17f35 Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Mon, 10 Mar 2025 13:52:11 +0100
++Subject: [PATCH] BLD: add option to specify numpy header location
++
++In some cases the numpy module might not be usable during build-time,
++especially when cross-compiling. (E.g. when compiling for arm32 on a
++x86-64 machine, the arm32 module is not usable at build time).
++
++This makes meson fail, as it isn't able to figure out the location of
++numpy headers.
++
++To allow an alternative way to find these headers, introduce a meson
++build option, where the location of the numpy headers can be specified.
++
++In case numpy module cannot be loaded for some reason to query the
++include folder location, fall back to the value of this meson option.
++
++Upstream-Status: Submitted [https://github.com/pandas-dev/pandas/pull/61095]
++
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ meson.options      |  1 +
++ pandas/meson.build | 13 ++++++++++---
++ 2 files changed, 11 insertions(+), 3 deletions(-)
++ create mode 100644 meson.options
++
++diff --git a/meson.options b/meson.options
++new file mode 100644
++index 0000000000..3d3a18d145
++--- /dev/null
+++++ b/meson.options
++@@ -0,0 +1 @@
+++option('numpy_inc_dir', type : 'string', description : 'The absolute path to the numpy headers')
++diff --git a/pandas/meson.build b/pandas/meson.build
++index 435103a..a08c77a 100644
++--- a/pandas/meson.build
+++++ b/pandas/meson.build
++@@ -3,17 +3,24 @@ incdir_numpy = run_command(py,
++     '-c',
++     '''
++ import os
++-import numpy as np
+++
+++try:
+++    import numpy as np
+++    base_incdir = np.get_include()
+++except Exception:
+++    base_incdir = os.getenv('NUMPY_INC_DIR')
+++
++ try:
++     # Check if include directory is inside the pandas dir
++     # e.g. a venv created inside the pandas dir
++     # If so, convert it to a relative path
++-    incdir = os.path.relpath(np.get_include())
+++    incdir = os.path.relpath(base_incdir)
++ except Exception:
++-    incdir = np.get_include()
+++    incdir = base_incdir
++ print(incdir)
++      '''
++   ],
+++  env: {'NUMPY_INC_DIR': get_option('numpy_inc_dir')},
++   check: true
++ ).stdout().strip()
++ 
+diff --git a/meta-python/recipes-devtools/python/python3-pandas_2.2.2.bb b/meta-python/recipes-devtools/python/python3-pandas_2.2.2.bb
+index c12a237653..ad9482e7dd 100644
+--- a/meta-python/recipes-devtools/python/python3-pandas_2.2.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pandas_2.2.2.bb
+@@ -11,12 +11,14 @@ SRC_URI += " \
+             file://0001-pyproject.toml-Downgrade-numpy-version-needs-to-1.x.patch \
+             "
+ 
++SRC_URI:append:class-target = " file://0001-BLD-add-option-to-specify-numpy-header-location.patch "
++
+ SRC_URI[sha256sum] = "9e79019aba43cb4fda9e4d983f8e88ca0373adbb697ae9c6c43093218de28b54"
+ 
+ inherit pkgconfig pypi python_mesonpy cython
+ 
+ DEPENDS += " \
+-    python3-numpy-native \
++    python3-numpy \
+     python3-versioneer-native \
+ "
+ 
+@@ -30,3 +32,8 @@ RDEPENDS:${PN} += " \
+     python3-pytz \
+     python3-profile \
+ "
++
++PYTHONPATH:prepend:class-target = "${RECIPE_SYSROOT}${PYTHON_SITEPACKAGES_DIR}:"
++export PYTHONPATH
++
++EXTRA_OEMESON:append:class-target = " -Dnumpy_inc_dir=${RECIPE_SYSROOT}${PYTHON_SITEPACKAGES_DIR}/numpy/_core/include "
 
