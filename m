@@ -1,179 +1,153 @@
-Return-Path: <philip@balister.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 03BBDC28B2E
-	for <webhook@archiver.kernel.org>; Mon, 10 Mar 2025 12:23:17 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.web10.33376.1741597666221187112
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A947C28B2E
+	for <webhook@archiver.kernel.org>; Mon, 10 Mar 2025 12:34:37 +0000 (UTC)
+Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com [209.85.167.180])
+ by mx.groups.io with SMTP id smtpd.web10.36423.1741610075370830788
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Mar 2025 02:07:46 -0700
+ Mon, 10 Mar 2025 05:34:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=yIqJI1eX;
- spf=pass (domain: smile.fr, ip: 209.85.221.48, mailfrom: sofiane.hamam@smile.fr)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-3911748893aso2417232f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Mar 2025 02:07:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XfPVOpuB;
+ spf=pass (domain: gmail.com, ip: 209.85.167.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f180.google.com with SMTP id 5614622812f47-3f3d1280f3dso1129822b6e.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Mar 2025 05:34:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1741597664; x=1742202464; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=aqYt+oOnaSP6I404FwWrZMH12P0l4SA7HXfpTxlTDGc=;
-        b=yIqJI1eXMkVfYhLZNgp9+hBRsQez2riht3gaGLqmS1xy4z2dFpv2k+HL+qAHnQficf
-         1dqXxTVufRA/vD3ghnNMzb+QphRDj4APGGXZyefmU3fD1hhJHDdLS9AXidFdP83FANCW
-         RPVFTudpYBCzysuCCCRyrG7ORALqWl8jcDPlQ=
+        d=gmail.com; s=20230601; t=1741610074; x=1742214874; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=Pc4km4aIVllT4H8iHo4VAXXtH8yzKyOWklwJLs19QXY=;
+        b=XfPVOpuB7/JqsFAxxg2HlVOw5DQBXBw+bcdardVik17+TpWvmlylc9Nt+cd++5gpf0
+         h3sxgQ/28YUHXW4sCtF0DqunELDX2VOQ0rkrSZm6u+98gzxtard6Jskg3wA++K76ZE2K
+         9xDYU5JSQEFxlacN92CZ1QcHu9Ff8hmBmI9QK2Pm2Wkzn025iDWVcTgj/Vm+MrUHqPPv
+         RGgy2FGrUZUV0UEyLLLXgEsfn0KQaB2EPo2VHlh252gcncSJJoUWfd8WXWFdWXgP8JQy
+         qigsQljw84eqOjeCpttIAcgfQO/oIMU4QIxjkENEuDgn2Y3/3WtvCjIQ995MlroeRQwB
+         mMuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741597664; x=1742202464;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1741610074; x=1742214874;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=aqYt+oOnaSP6I404FwWrZMH12P0l4SA7HXfpTxlTDGc=;
-        b=h1fOCdE06GmRDNQK079CoHfrF3/7SserXN4/SNiQ2pw3Fc34gY/SV3+HtXUBU4oDa7
-         rE1Ag4u4WmKEl/d9A7BnbRbqSJB7hpAMaVXXbq0cG20ya4bIp2GTuThAOUtXKn0z2MB+
-         qBvZu+jFjto/EnSiYBq5NOVFZ0YgyvQxMShZ88SMiI0FRNPKXFW5JytcezscDtaiEb5p
-         LKvZOm0NHa5NZeUIiInimfxGiBYAmiO2HHc79E8EFvIfAY/TBw1OPmXVKqGy7JFWx3aU
-         sJl6M+Lt2NUBLYEYcuJFnX8b5PVn77pfDz0XgbK+0Hu0kPvYxyqDNnZmK4+j7OY61dRn
-         xwFQ==
-X-Gm-Message-State: AOJu0YyTSVWTVW+i1k3NY+y2+midNrqeUo3Wl5y3iv4ozl7tF8GKBGBS
-	OJx820zoEOV80XNV1B1wbU/EkL5qNTFN1hmNRjo9EQmLBo2CSvnyQwm6GUBzwTyX59+JzFo4Xpp
-	T
-X-Gm-Gg: ASbGncuhJsjesvi/lA+M/RZJzgsYt4XYPNkaouRFQYq03U/MJjgCEP8Tlfp6q0lJpyu
-	iCA+iQP/7oVjvhZzrVofarFaEInEGrsqzvcTqj4AbaaNnqlSIuq/EhwdQVdK35n7TZuVhA1IfZz
-	vzcRUmmH0jb9qvLIS+3PtdlqNavR9RHHAdOlXK/xFtw19E4l7LWD25Y8vw4KCxi5E+1Xnt7/Srl
-	6qbg38ZTqcP7zLqVSl0m5jmC3kflyD161lGjwnn56PcsQmXtGvkIOxkm4HTTtk7vQI0AE5wFHem
-	+c9o2dNafc3CDFCXiEYGVRstY6gbvqiHIqS/E9BdQX1sr6eiS27upGLYiWKkPHBE6Er4lg1yZTq
-	98OsEXleeRvz8EZdd9AphN5rEBX9GokClgZFAGDKT+RkncNE6MulN8A==
-X-Google-Smtp-Source: AGHT+IHnS3Tbdg2LTm0VtsdHUoXd3ISAr1m63P3DTmDjxax+yEcvhBmUFyiKPdAtN0pIDr0C/YckAA==
-X-Received: by 2002:a5d:47cd:0:b0:391:300f:7474 with SMTP id ffacd0b85a97d-39132d8b726mr7976447f8f.18.1741597664509;
-        Mon, 10 Mar 2025 02:07:44 -0700 (PDT)
-Received: from FRSMI25-BPYTOP.idf.intranet (static-css-ccs-204145.business.bouyguestelecom.com. [176.157.204.145])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3912c0193bfsm14440776f8f.55.2025.03.10.02.07.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Mar 2025 02:07:44 -0700 (PDT)
-From: "Sofiane HAMAM" <sofiane.hamam@smile.fr>
-To: openembedded-devel@lists.openembedded.org
-Cc: Sofiane HAMAM <sofiane.hamam@smile.fr>
-Subject: [meta-networking][scarthgap][PATCH 1/2] Wolfssl: add ptest
-Date: Mon, 10 Mar 2025 10:06:52 +0100
-Message-ID: <20250310090653.2985649-1-sofiane.hamam@smile.fr>
-X-Mailer: git-send-email 2.43.0
+        bh=Pc4km4aIVllT4H8iHo4VAXXtH8yzKyOWklwJLs19QXY=;
+        b=oeZTtXmGY6k036K0fng8TKlGZOwaXtsFf0y/GcG2iciJbqtYygJ8VZVGlS2Olyg7J9
+         FiMtvFjg/1Mg6IbGpoNi7yA4w+RIChz9NXY+Yd54H01pbNX5QHB6Q9E+A396dvubOssH
+         QRrBxs4T91e7YZz/JVfxCp0UAIFW4aUlkhidS0vs40ozS1ru2tw2yfaIPfg3O9kt9Bvi
+         +ZtdW9MOCb42VEKfa3koThFt1ETG6aoOciHQMyFjfB7xlvcjB9Kof+JGfw8p9EDkNXao
+         ivv+JHvHV7AARznGMFPqaYE2yeF6ZWHR1oZZAUxCZ/miqS9sdupeD7n8ahbr2iADD7DN
+         aY0A==
+X-Gm-Message-State: AOJu0Yz6RLP4NFfXQlCPLcuj6ACGNWtDblnbF12eujrzhJxSADmFhAvR
+	3RtVbMPZG6T6CVdOfQFcYqvimg0rSZSi7/KcBuo5T+3+EdOdLFqkqGwAxkA0SVnOdouH+9pOe/Y
+	4VbXhfue8H8ROiW3Yc0shydeKY3A=
+X-Gm-Gg: ASbGncundquu6pk1Rk6xfLiYuP/yofwN0hqkwAGWaRQwhcT4tRq8LatTgl0NaiLoESS
+	dEjVc0eO1ljl6+95yanCwsc+qo11DePqk1d+xqve6H8EJMoqEgTFJnAdEw3tg9nFz5iOVpEt5wz
+	DgxyRbpXAUtniKQcg35wZPHi8F4VmhPaoSf7Qch/bYsKEo4F5sFe/1jNl/zg==
+X-Google-Smtp-Source: AGHT+IHd0gYGmjdOReZEXNpRLBnxUjOUCEuHtGHIQ78h/KcQuv7cQj+kxONtGRoPMk4W94lzV48wsEkt+41LWFoTo3s=
+X-Received: by 2002:a05:6808:f0a:b0:3f6:7651:d24a with SMTP id
+ 5614622812f47-3f697b5d606mr6909039b6e.16.1741610074571; Mon, 10 Mar 2025
+ 05:34:34 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250307093255.1110778-1-awais.belal@gmail.com>
+ <20250307093255.1110778-2-awais.belal@gmail.com> <CAMKF1spsyTBdgD_we=X2Q9vpGFhBi-0E59ArdGyKr3KB-8g3Gg@mail.gmail.com>
+ <CAM=5Amb6u5-8pmud11do97X4UAwLToizR9SiGjPD=4+Zqet6Rw@mail.gmail.com>
+In-Reply-To: <CAM=5Amb6u5-8pmud11do97X4UAwLToizR9SiGjPD=4+Zqet6Rw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 10 Mar 2025 05:34:23 -0700
+X-Gm-Features: AQ5f1JrTvvLg5axY8GODrl-Wjb0dR9m3MDodmmkMagVF4ngKPrOhUYTfchovXKQ
+Message-ID: <CAMKF1sroz=jLxp9PfMkZoQwtRjyvDZhK15kGLS32q5vu7dxcHA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][scarthgap][PATCH 2/2] mongodb: update to 4.4.29
+To: Awais Belal <awais.belal@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000d5092f062ffc31f2"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Mar 2025 12:23:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115831
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Mar 2025 12:34:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115833
 
-Add ptest for Wolfssl package.
-Set IMAGE_ROOTFS_EXTRA_SPACE:virtclass-mcextend-wolfssl to 700M
-enough to avoid a "No space left on device".
+--000000000000d5092f062ffc31f2
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-BEGIN: /usr/lib/wolfssl/ptest
-Wolfssl ptest logs are stored in /tmp/wolfss_temp.qvuQ9h/ptest.log
-Test script returned: 0
-unit_test: Success for all configured tests.
-PASS: Wolfssl
-DURATION: 7
-END: /usr/lib/wolfssl/ptest
+On Mon, Mar 10, 2025 at 2:24=E2=80=AFAM Awais Belal <awais.belal@gmail.com>=
+ wrote:
 
-Signed-off-by: Sofiane HAMAM <sofiane.hamam@smile.fr>
----
- .../ptest-packagelists-meta-networking.inc    |  1 +
- .../wolfssl/files/run-ptest                   | 24 +++++++++++++++++++
- .../wolfssl/wolfssl_5.7.0.bb                  | 23 ++++++++++++++++--
- .../images/meta-networking-image-ptest.bb     |  1 +
- 4 files changed, 47 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/run-ptest
+>
+>> I am seeing this  build failure on master
+>>
+>> | File
+>> "/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-=
+linux/mongodb/4.4.29/git/src/mongo/base/generate_error_codes.py",
+>> line 31, in <module>
+>> | from Cheetah.Template import Template
+>> | File
+>> "/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-=
+linux/mongodb/4.4.29/recipe-sysroot-native/usr/lib/python3.13/site-packages=
+/Cheetah/Template.py",
+>> line 24, in <module>
+>> | import cgi # Used by .webInput() if the template is a CGI script.
+>> | ^^^^^^^^^^
+>> | ModuleNotFoundError: No module named 'cgi'
+>> | Generating build/59f4f0dd/mongo/db/repl/repl_settings_gen.cpp
+>> | scons: *** [build/59f4f0dd/mongo/base/error_codes.h] Error 1
+>> | scons: building terminated because of errors.
+>> | build/59f4f0dd/mongo/base/error_codes.h failed: Error 1
+>>
+>>
+>  The changeset was intended for scarthgap and I haven't made sure if
+> master builds. Is that a requirement? The cgi module was dropped in pytho=
+n
+> 3.13 which is what master is following at this point. I might send a
+> separate series for master once I move on to that.
+>
 
-diff --git a/meta-networking/conf/include/ptest-packagelists-meta-networking.inc b/meta-networking/conf/include/ptest-packagelists-meta-networking.inc
-index 7ec6f9063..c3a2202de 100644
---- a/meta-networking/conf/include/ptest-packagelists-meta-networking.inc
-+++ b/meta-networking/conf/include/ptest-packagelists-meta-networking.inc
-@@ -19,6 +19,7 @@ PTESTS_FAST_META_NETWORKING = "\
-     openhpi \
-     squid \
-     tcpdump \
-+    wolfssl \
- "
- 
- # firewalld currently hangs forever so disable it for now
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/run-ptest b/meta-networking/recipes-connectivity/wolfssl/files/run-ptest
-new file mode 100644
-index 000000000..ff66f4ef6
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/wolfssl/files/run-ptest
-@@ -0,0 +1,24 @@
-+#!/bin/sh
-+
-+echo "############ Running Wolfssl Ptest ##########"
-+
-+log_file=ptest.log
-+temp_dir=$(mktemp -d /tmp/wolfss_temp.XXXXXX)
-+echo "Wolfssl ptest logs are stored in ${temp_dir}/${log_file}"
-+
-+./test/unit.test > "$temp_dir/$log_file" 2>&1  
-+
-+echo "Test script returned: $?"
-+
-+MAGIC_SENTENCE=$(grep "unit_test: Success for all configured tests." $temp_dir/$log_file)
-+
-+if [ -n "$MAGIC_SENTENCE" ]; then
-+    echo "$MAGIC_SENTENCE"
-+    echo "PASS: Wolfssl"
-+else
-+    echo "#### Issue with at least one test !####"
-+    echo "FAIL: Wolfssl"
-+fi
-+NUM_FAILS=$(grep -c "Failed" $temp_dir/$log_file)
-+
-+exit $NUM_FAILS
-diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.0.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.0.bb
-index 47c14dd1a..119d76abb 100644
---- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.0.bb
-+++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.0.bb
-@@ -12,11 +12,30 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- PROVIDES += "cyassl"
- RPROVIDES:${PN} = "cyassl"
- 
--SRC_URI = "git://github.com/wolfSSL/wolfssl.git;protocol=https;branch=master"
-+SRC_URI = " \
-+    git://github.com/wolfSSL/wolfssl.git;protocol=https;branch=master \
-+    file://run-ptest \
-+"
- SRCREV = "8970ff4c34034dbb3594943d11f8c9d4c5512bd5"
- 
- S = "${WORKDIR}/git"
- 
--inherit autotools
-+inherit autotools ptest
- 
- BBCLASSEXTEND += "native nativesdk"
-+
-+RDEPENDS:${PN}-ptest += " bash"
-+
-+do_install_ptest() {
-+    # Prevent QA Error "package contains reference to TMPDIR [buildpaths]" for unit.test script
-+    # Replace the occurences of ${B}/src with '${PTEST_PATH}'
-+    sed -i 's|${B}/src|${PTEST_PATH}|g' ${B}/tests/unit.test
-+
-+    install -d ${D}${PTEST_PATH}/test
-+
-+    # create an empty folder examples, needed in wolfssl's tests/api.c to "Test loading path with no files"
-+    install -d ${D}${PTEST_PATH}/examples
-+    cp -rf ${B}/tests/. ${D}${PTEST_PATH}/test
-+    cp -rf ${S}/certs  ${D}${PTEST_PATH}
-+    cp -rf ${S}/tests  ${D}${PTEST_PATH}
-+}
-diff --git a/meta-networking/recipes-core/images/meta-networking-image-ptest.bb b/meta-networking/recipes-core/images/meta-networking-image-ptest.bb
-index 295da982e..b6238d610 100644
---- a/meta-networking/recipes-core/images/meta-networking-image-ptest.bb
-+++ b/meta-networking/recipes-core/images/meta-networking-image-ptest.bb
-@@ -20,6 +20,7 @@ BBCLASSEXTEND = "${@' '.join(['mcextend:'+x for x in d.getVar('PTESTS_META_NETWO
- # box) and explicitly add up to 1500MB.
- IMAGE_OVERHEAD_FACTOR = "1.0"
- IMAGE_ROOTFS_EXTRA_SPACE = "324288"
-+IMAGE_ROOTFS_EXTRA_SPACE:virtclass-mcextend-wolfssl = "714288" 
- # If a particular ptest needs more space, it can be customized:
- #IMAGE_ROOTFS_EXTRA_SPACE:virtclass-mcextend-<pn> = "1024288"
- 
+Patches are routed by master to release branches if they are needed in
+master. They are done for master and then backported
+
+>
+
+--000000000000d5092f062ffc31f2
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote gmail_quote_container"><d=
+iv dir=3D"ltr" class=3D"gmail_attr">On Mon, Mar 10, 2025 at 2:24=E2=80=AFAM=
+ Awais Belal &lt;<a href=3D"mailto:awais.belal@gmail.com">awais.belal@gmail=
+.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"mar=
+gin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;padding=
+-left:1ex;border-left-color:rgb(204,204,204)"><div dir=3D"ltr"><div class=
+=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
+0px 0.8ex;border-left-width:1px;border-left-style:solid;padding-left:1ex;bo=
+rder-left-color:rgb(204,204,204)"><br>I am seeing this=C2=A0 build failure =
+on master<br>
+<br>
+| File &quot;/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2=
+-64-poky-linux/mongodb/4.4.29/git/src/mongo/base/generate_error_codes.py&qu=
+ot;,<br>
+line 31, in &lt;module&gt;<br>
+| from Cheetah.Template import Template<br>
+| File &quot;/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2=
+-64-poky-linux/mongodb/4.4.29/recipe-sysroot-native/usr/lib/python3.13/site=
+-packages/Cheetah/Template.py&quot;,<br>
+line 24, in &lt;module&gt;<br>
+| import cgi # Used by .webInput() if the template is a CGI script.<br>
+| ^^^^^^^^^^<br>
+| ModuleNotFoundError: No module named &#39;cgi&#39;<br>
+| Generating build/59f4f0dd/mongo/db/repl/repl_settings_gen.cpp<br>
+| scons: *** [build/59f4f0dd/mongo/base/error_codes.h] Error 1<br>
+| scons: building terminated because of errors.<br>
+| build/59f4f0dd/mongo/base/error_codes.h failed: Error 1<br><br></blockquo=
+te><div><br>=C2=A0The changeset was intended for scarthgap and I haven&#39;=
+t made sure if master builds. Is that a requirement? The cgi module was dro=
+pped in python 3.13 which is what master is following at this point. I migh=
+t send a separate series for master once I move on to that.</div></div></di=
+v></blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Patches are ro=
+uted by master to release branches if they are needed in master. They are d=
+one for master and then backported=C2=A0</div><blockquote class=3D"gmail_qu=
+ote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-st=
+yle:solid;padding-left:1ex;border-left-color:rgb(204,204,204)"><div dir=3D"=
+ltr"><div class=3D"gmail_quote"><div dir=3D"auto"></div></div></div>
+</blockquote></div></div>
+
+--000000000000d5092f062ffc31f2--
 
