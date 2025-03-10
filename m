@@ -1,124 +1,185 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87CE9C28B2E
-	for <webhook@archiver.kernel.org>; Mon, 10 Mar 2025 08:08:15 +0000 (UTC)
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.web11.32361.1741594087919030646
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ABD07C282DE
+	for <webhook@archiver.kernel.org>; Mon, 10 Mar 2025 08:19:15 +0000 (UTC)
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+ by mx.groups.io with SMTP id smtpd.web10.32830.1741594753204144110
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Mar 2025 01:08:07 -0700
+ Mon, 10 Mar 2025 01:19:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=AucKjsSw;
- spf=pass (domain: mvista.com, ip: 209.85.216.41, mailfrom: vanusuri@mvista.com)
-Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-2ff6e91cff5so5408131a91.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Mar 2025 01:08:07 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=eWDSFfOC;
+ spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-391342fc0b5so3037668f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Mar 2025 01:19:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1741594087; x=1742198887; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=B7I5FBanFayck/4h74icGJx7PyWXaP4gxOMFHjrY490=;
-        b=AucKjsSwmxUW2d2hTj5cT2uFiZe2QBPJ6C7L138E15jJju+1hKZuOoLJhK0oAmnMt/
-         hxPk0c4B7BlG3hXUf9pcmDznOrempqq6IhfoXhPhYp7sj95BPFuC9LxlPvM8441o7uMx
-         rouQzDEZl/k/b/Bm0d0UYW2uaJ+CTiHTiccMY=
+        d=gmail.com; s=20230601; t=1741594752; x=1742199552; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=52nAyUidObv+JqG1sZPMOLBhJgsDzwL6KOhzLkIi55E=;
+        b=eWDSFfOC0BoPd7Tb3Kfo89e9StE/g8/XP4y35R+nVWX7y6seDzq8sUlBcDke//gaqv
+         s6PNFHk0IDWCSccuDbt5jA6QGcghXFN2ww8TIXaWWFCggSzy/Jp8yzHAJtUtJuTgksxo
+         pTtNsMFxudJlXjXKV5SmYZlNOEsb7rSWpvWuX2+L1FStgIoxndLw8l1XhBbB9Prxv0t2
+         KgQVeasKQ1CNW24lzcyN5JvSkQG65On3t+w9qRL0yM7jmc27pWNSqo9MDdx/8DNTa5hX
+         5AqO+7lrQSjQ9JsBRNVq5klcsdtAAJzJs/OKJWe328dRqYAXEtH6QhJ1JEAJWhumaNBm
+         YLLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741594087; x=1742198887;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=B7I5FBanFayck/4h74icGJx7PyWXaP4gxOMFHjrY490=;
-        b=pTBpA2XJTRAOPm9Ah59o32bec/JRvGfGXwjVgAVudkiCAFqwmZpwGUbHDB5Ym0eNdk
-         FjIZvgyi+qo+JP9jw9dMpsrAfAFyalNzZ2FX2aWCkEczAprvq02i8DTXw0O+PThf/s87
-         +0qEGRG2a5BS0ZNVVzekkyI307bBnZH+DOVUPnFmVSk1VoNyTcp76ISTv9hH0wn1/0xC
-         0eETk1ojJHIf4CC9ygme0U0J0tBiiMOJTVXzGCgP/AR7lXmiKDCeOdzD3O2+0BNkYzOk
-         eQGaKfK3Ue1l3+JaztJLQScaxs7cUXp6/bmShWkB+zrmT04P6SNX/uG2mvVSO0XL20Ve
-         U2vg==
-X-Gm-Message-State: AOJu0YzJURfds6OlzQFjzK5WE+AfWQDayipl//IMQd0a/x0aE0ILCYZg
-	Bu7wwNfDOjhPSbp64vTr1huW8xfKdSUZ/mCkgUf1HtjtsthwwSBY2fB0nFXFN/v3jJsoENMq+jM
-	wWZI=
-X-Gm-Gg: ASbGnctXl7+R4PChw6twMZSPRhog6foEpOeY6/Ys2moRuv06mGJ+ZYXtgutkG+n1itq
-	Qm/dxKsCrPOU8WtVIoMP83wj24buW+m2AGMTCsq+zLjqXXoF9B9rwRCjzRH09GjnAIcFwCEXPFd
-	yXsJvqj1NTfCTAXovyZPKDqrpPL4NTTPG84yed3nH8HDMQcAQTAWZ5TOP8HqC/o86sgHdyQTqa4
-	ftdBWH0axldPXqWIhbpO3DDrNuGuxpNpKwJT2lBe9x3l3g/InuKl03OWT0hZ8q4oiugImhV8ZD0
-	gknaYcteEES1LFOvFDyYjfvFPwAn8TFLb34dYaRNUwKQpNn28g16fMd/
-X-Google-Smtp-Source: AGHT+IEOfkd6vCMyiBOoaIBHA2C9zx2VJesIX3jF3lDrmMNQqDhnLx2ZvfyzQkg17Wo6ai40JICHNQ==
-X-Received: by 2002:a17:90b:180b:b0:2ff:5357:1c7f with SMTP id 98e67ed59e1d1-2ff7cf3d0bfmr18054945a91.30.1741594086827;
-        Mon, 10 Mar 2025 01:08:06 -0700 (PDT)
-Received: from MVIN00020.mvista.com ([49.207.233.190])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2ff4e7ff96esm9187409a91.35.2025.03.10.01.08.04
+        d=1e100.net; s=20230601; t=1741594752; x=1742199552;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=52nAyUidObv+JqG1sZPMOLBhJgsDzwL6KOhzLkIi55E=;
+        b=lFxqIBY1yLCzAksgEyoKUuw7J+eF6DoIjYUAc13tb9A9B7+KXPF9TDEqeWBBORDkyR
+         1chMLqt9Ntf819p99Ht496Qx4O4nE2kxycwAgV18duTPrtn6g2ZEAEJwrIm3JzuOsgwb
+         ay6Ascd65Dpf5PbKKkVjiq+GZfSqy2AVoRAAOOyoMmjd7y9Sja2sOXQj3f4J6lmdDDKJ
+         9WsBiwASu0O035yyCigCgekkw4Sa5drXUxSbGlb1RQGvHu1SA/1KxuXqaYz7+APwd5Xy
+         +PCAetQYsa2ocPukOtH9rNBebRNmjGl/vBNeDqOrMBOxThrHHkvXXv+kf1QRtuSafBn9
+         RDvw==
+X-Gm-Message-State: AOJu0YwJL90oMBQHAMpn0ZKCZjPMuLdcJ+RQ33DYUI6hoDfc4e3fjHzZ
+	8t/fzHLyflbaKfimFPrFtwK0RpaYyD7j7q3wOzyLqdpIDDcE24JRx6T/3g==
+X-Gm-Gg: ASbGncu1U+S6/7TCZ7jcVKbgENQdu4jW/2OMN8+fcUPVxXs458LzdxYFIpSlfv0O19a
+	1Jgdtx9Q0JoQTtorwE0cpwEAw7KAI6AgOusqCPhuYTexOIQp4X0cj0eD99WFZq2doeKojBe14vw
+	b2FN8l/0Q8pvRXicw4R77ordO0JlTFBZ8MMBdmO0kMRERWsGWYP7fjJcw1t/Twllcdn7fxWIvrJ
+	ilPF5CpjTCAeuA1W142PMzlID4PbXM1QT4XyhiyEcN9SnRdB9IbkhqijMwCVychwTGgJ7ngVpxw
+	sEVBilg+1lExwtJBEW9tu4tCv9RErQf4C2TDHkCI5TLkxixhrCDD4fzoAEiA
+X-Google-Smtp-Source: AGHT+IFcZFW0IlfnxbfyuPG5EntmMZYqhCV4UlvkxAVY6yBF4T3XkPth+EcLYLklARFk5sbFUdLUXQ==
+X-Received: by 2002:a05:6000:4106:b0:391:47d8:de2d with SMTP id ffacd0b85a97d-39147d8e011mr2334728f8f.23.1741594751314;
+        Mon, 10 Mar 2025 01:19:11 -0700 (PDT)
+Received: from localhost.localdomain ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3912c01cd62sm13839212f8f.46.2025.03.10.01.19.10
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Mar 2025 01:08:06 -0700 (PDT)
-From: vanusuri@mvista.com
+        Mon, 10 Mar 2025 01:19:10 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-oe][scarthgap][PATCH v2] postgresql: upgrade 16.5 -> 16.8
-Date: Mon, 10 Mar 2025 13:37:57 +0530
-Message-Id: <20250310080757.166674-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.25.1
+Subject: [meta-python][PATCH v2] python3-pandas: compile against target version of numpy
+Date: Mon, 10 Mar 2025 09:19:10 +0100
+Message-ID: <20250310081910.3106973-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Mar 2025 08:08:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115822
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Mar 2025 08:19:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115823
 
-From: Vijay Anusuri <vanusuri@mvista.com>
+python3-numpy headers are required by pandas to compile successfully.
+By default, this recipe used python3-numpy-native for compilation,
+which usually works. However in case the bitness of the build-host
+differs from the target, then problems arise.
 
-License-Update: Update license year to 2025
+For example when compiling for 32-bit ARM on a x86-64 machine, the following
+error appears when trying to import the module:
 
-Includes fix for CVE-2025-1094
+ValueError: Buffer dtype mismatch, expected 'const int64_t' but got 'long long'
 
-Changelog:
-https://www.postgresql.org/docs/release/16.8/
+When running a diff on all numpy headers across native and target,
+only one header differs, _numpyconfig.h, in a significant way.
+This header defines the sizes of different datatypes used by numpy,
+and these sizes strongly depend on the arch bitness.
 
-Refreshed 0003-configure.ac-bypass-autoconf-2.69-version-check.patch for
-16.8
+This change switches from python3-numpy-native dependency to python3-numpy to
+ensure that the correct headers are used. Beside this also patch the meson script,
+so it accepts an option (numpy_inc_dir) to specify the location of these headers,
+since it is not able to query them from the class-target module
 
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+The PYTHONPATH variable is extended with the target's RECIPE_SYSROOT, because
+numpy is specified as a dependency in meson, and it needs to find the module
+to continue successfully.
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...0003-configure.ac-bypass-autoconf-2.69-version-check.patch | 2 +-
- .../postgresql/{postgresql_16.5.bb => postgresql_16.8.bb}     | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-dbs/postgresql/{postgresql_16.5.bb => postgresql_16.8.bb} (75%)
+ ...fy-numpy-header-path-as-meson-option.patch | 52 +++++++++++++++++++
+ .../python/python3-pandas_2.2.2.bb            |  9 +++-
+ 2 files changed, 60 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pandas/0001-specify-numpy-header-path-as-meson-option.patch
 
-diff --git a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
-index 0388bc1b40..9584cfcb16 100644
---- a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
-+++ b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
-@@ -18,7 +18,7 @@ index df61ab4..b795f8c 100644
- +++ b/configure.ac
- @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch undefined macros
-  
-- AC_INIT([PostgreSQL], [16.5], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
-+ AC_INIT([PostgreSQL], [16.8], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
-  
- -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
- -Untested combinations of 'autoconf' and PostgreSQL versions are not
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_16.5.bb b/meta-oe/recipes-dbs/postgresql/postgresql_16.8.bb
-similarity index 75%
-rename from meta-oe/recipes-dbs/postgresql/postgresql_16.5.bb
-rename to meta-oe/recipes-dbs/postgresql/postgresql_16.8.bb
-index 76498375b7..918ad13e63 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql_16.5.bb
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql_16.8.bb
-@@ -1,6 +1,6 @@
- require postgresql.inc
+diff --git a/meta-python/recipes-devtools/python/python3-pandas/0001-specify-numpy-header-path-as-meson-option.patch b/meta-python/recipes-devtools/python/python3-pandas/0001-specify-numpy-header-path-as-meson-option.patch
+new file mode 100644
+index 0000000000..039f116ff1
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pandas/0001-specify-numpy-header-path-as-meson-option.patch
+@@ -0,0 +1,52 @@
++From 46b3c3ee68f271acbc178260939ca8423f9244a5 Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Sun, 9 Mar 2025 19:57:26 +0100
++Subject: [PATCH] specify numpy header path as meson option
++
++In case pandas is compiled against the class-target version of numpy, it is
++not possible to import the module, due to target-compiled binary files - 
++it just fails with an error. However this also means that meson isn't
++able to query the include folder location, so the compilation fails.
++
++To avoid this, the new "numpy_inc_dir" meson option allows specifying the
++location of the required headers.
++
++Upstream-Status: Inappropriate [oe-specific]
++---
++ meson.options      | 1 +
++ pandas/meson.build | 6 +++---
++ 2 files changed, 4 insertions(+), 3 deletions(-)
++ create mode 100644 meson.options
++
++diff --git a/meson.options b/meson.options
++new file mode 100644
++index 0000000000..3d3a18d145
++--- /dev/null
+++++ b/meson.options
++@@ -0,0 +1 @@
+++option('numpy_inc_dir', type : 'string', description : 'The absolute path to the numpy headers')
++diff --git a/pandas/meson.build b/pandas/meson.build
++index 435103a954..32ad04bd8e 100644
++--- a/pandas/meson.build
+++++ b/pandas/meson.build
++@@ -3,17 +3,17 @@ incdir_numpy = run_command(py,
++     '-c',
++     '''
++ import os
++-import numpy as np
++ try:
++     # Check if include directory is inside the pandas dir
++     # e.g. a venv created inside the pandas dir
++     # If so, convert it to a relative path
++-    incdir = os.path.relpath(np.get_include())
+++    incdir = os.path.relpath(os.getenv('NUMPY_INC_DIR'))
++ except Exception:
++-    incdir = np.get_include()
+++    incdir = os.getenv('NUMPY_INC_DIR')
++ print(incdir)
++      '''
++   ],
+++  env: {'NUMPY_INC_DIR': get_option('numpy_inc_dir')},
++   check: true
++ ).stdout().strip()
++ 
+diff --git a/meta-python/recipes-devtools/python/python3-pandas_2.2.2.bb b/meta-python/recipes-devtools/python/python3-pandas_2.2.2.bb
+index c12a237653..5676d98cd0 100644
+--- a/meta-python/recipes-devtools/python/python3-pandas_2.2.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pandas_2.2.2.bb
+@@ -11,12 +11,14 @@ SRC_URI += " \
+             file://0001-pyproject.toml-Downgrade-numpy-version-needs-to-1.x.patch \
+             "
  
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=89afbb2d7716371015101c2b2cb4297a"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=d5dd73e90ee1a572679460ee67233fcc"
++SRC_URI:append:class-target = " file://0001-specify-numpy-header-path-as-meson-option.patch "
++
+ SRC_URI[sha256sum] = "9e79019aba43cb4fda9e4d983f8e88ca0373adbb697ae9c6c43093218de28b54"
  
- SRC_URI += "\
-    file://not-check-libperl.patch \
-@@ -11,6 +11,6 @@ SRC_URI += "\
-    file://0005-postgresql-fix-ptest-failure-of-sysviews.patch \
+ inherit pkgconfig pypi python_mesonpy cython
+ 
+ DEPENDS += " \
+-    python3-numpy-native \
++    python3-numpy \
+     python3-versioneer-native \
  "
  
--SRC_URI[sha256sum] = "a6cbbb7037f98cb8afa7d3970b7c48040cf02b115e39253a0c037a8bb8e778f0"
-+SRC_URI[sha256sum] = "9468083a56ce0ee7d294601b74dad3dd9fc69d87aff61f0a9fb63c813ff7efd8"
- 
- CVE_STATUS[CVE-2017-8806] = "not-applicable-config: Ddoesn't apply to out configuration of postgresql so we can safely ignore it."
--- 
-2.25.1
-
+@@ -30,3 +32,8 @@ RDEPENDS:${PN} += " \
+     python3-pytz \
+     python3-profile \
+ "
++
++PYTHONPATH:prepend:class-target = "${RECIPE_SYSROOT}${PYTHON_SITEPACKAGES_DIR}:"
++export PYTHONPATH
++
++EXTRA_OEMESON:append:class-target = " -Dnumpy_inc_dir=${RECIPE_SYSROOT}${PYTHON_SITEPACKAGES_DIR}/numpy/_core/include "
 
