@@ -1,98 +1,94 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 210CCC28B30
-	for <webhook@archiver.kernel.org>; Tue, 11 Mar 2025 08:49:08 +0000 (UTC)
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web11.4124.1741682939700664678
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 30664C35FF1
+	for <webhook@archiver.kernel.org>; Tue, 11 Mar 2025 08:55:28 +0000 (UTC)
+Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
+ by mx.groups.io with SMTP id smtpd.web10.4161.1741683323029923077
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Mar 2025 01:49:00 -0700
+ Tue, 11 Mar 2025 01:55:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=br3dxwfz;
- spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-ac28e66c0e1so342759766b.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Mar 2025 01:48:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741682938; x=1742287738; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=uzIZf/lFJBdkNnJlcrQ1M4AksealcnaXcUM24OZ6yWk=;
-        b=br3dxwfzkge8qVrzs5GMn56JZ5qGTG1FyaVyL4+rWS2zVDL9lnqlmUl4wd7LongFrU
-         rUKh/Vft5AKBABTsCojedu/k6kyYpUmdlMgieSegnNFO6uWx/EjCOn+2T2oK1pZWJ9wr
-         AuUV/w0ZK1TOtx39R6JIkmg2svwMZJFTjWMYUshdXwy+yQISQqgr/q9vO24kZRAM9zM6
-         M8rEynnjZ+JhxMcgUK8sfhfqe1NYcr81eAdQJf/gSRjfYS8AgQVQZywGbJDmcXyv2Bmd
-         Gjvz1ABOiZfkD5xk3meL2vM/Pm2KPB/MFdzZzOCdDwi0b1G3x+cZVO8n/o1KXiiqzYfD
-         CCbw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741682938; x=1742287738;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=uzIZf/lFJBdkNnJlcrQ1M4AksealcnaXcUM24OZ6yWk=;
-        b=BEEmwtIFBYxAtSJ7r3DYR/gcvIFAk18ydZPvbVWrIqeMKdSLx6Gxg2n85FbpnCn8SU
-         0gnSu5IpdHmVJeQKKjFsaDUtDo1A5YocdsHgiXDPLQJSebohrsQY7Trf2StDQClfSg0G
-         2p1aACZNmXTbYz1k4XNQg4mr7oa0QNy0kgIS/kgOEv3Ihwl+xk34unUi2t7Wg7VRyLF2
-         n3RphNurcMybkVNmGKYpl5woMo0AkK/3i2clVIZaCLisNl5kahAfcn+jPVyq06Z3t65P
-         nJGHCKGcIOL52bDH/e2RHQ9CSOQUGcJmLQvowqu9uFwcOO987JnXn5cvXmuuzLpE/v1S
-         aBWQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXDpiYyxZ6Fy4mh/QmWneWZ4rPJ6MdAi0wgZC5Vqy6PDeaMQ0/fQf+KheiRWC3ybY9nPz8CA6mLreyDko20XEmANU0=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyU1TCeD2KyTvoA187VHeioRwZELah8X4BerWqj11lgu7ZMyaGE
-	Me9NPZYpevUo47KGoIKpAs+a+JVhcURavfuFz4ZTJkLRm1fn1PW6n99pcRh2
-X-Gm-Gg: ASbGncslVzX5LHRBQyzwE1BFZx+LDYXT5EteNL/YihBSxvIaCUmOh9XpT8c7k5tsl5T
-	rj8VCW43DvM1b2NQZPiq1F6p8yCyZCJaOanbgXys5jgm/LZxROyJrSP8nSjJABaRtTCRqkO8CDA
-	Cqj4y3KcAPcsLoZ7O/aayJsTZLPXiJ6M0s1mfqMonrymhyUV/jhpXXRfGoKPMJy4QwRk+Tyg0G/
-	sO4x+hQRE6hF9mciq9qViFweYkGrOFJtKQGPHwbJUwdxXatrKArUDX01Q9nARsVgE85migfY131
-	6XxpaTFnrj8WzyDqWzCemyJVrLRux59JlcHT3WH0XKWNRITqL0+s
-X-Google-Smtp-Source: AGHT+IG3MSy0NIM7xOFu60M8X63L0+mUlPZzenx4Eu6H803cPLCJsRXtKX+srnEZUcrcKrPHx4ZFgQ==
-X-Received: by 2002:a17:907:7e94:b0:ac1:ed96:56d9 with SMTP id a640c23a62f3a-ac252f5c917mr1866893466b.40.1741682937668;
-        Tue, 11 Mar 2025 01:48:57 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ac297b72989sm357540266b.80.2025.03.11.01.48.57
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 11 Mar 2025 01:48:57 -0700 (PDT)
-Message-ID: <36ed2d0e-fe5f-4705-84b8-43b1155f42e6@gmail.com>
-Date: Tue, 11 Mar 2025 09:48:56 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH] hiredis: remove runtime dependency on redis
-To: yi.zhao@eng.windriver.com, openembedded-devel@lists.openembedded.org
-References: <20250311070202.229491-1-yi.zhao@windriver.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20250311070202.229491-1-yi.zhao@windriver.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Zbm63cep;
+ spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1741683323; x=1773219323;
+  h=from:to:cc:subject:date:message-id;
+  bh=ASxolgnXanq2fr+WNlBSI5X2o1Mc+YnIac/vfvpgbYU=;
+  b=Zbm63cepeX18XAxFW11Ue/LgjzyYhnP/+PhGQbgoQMiLzyZ3wlmVf/rZ
+   zCZPgTamPucaWjWdo8jCOTzu/MdGUoogFjqwG5GqC9iW2Go6RJmRSMs4S
+   D/ZFHvJ1Ns3ypTyNksQqTWmEfK/NoYl3VSGF2+Ys6gGFRS43+h9qNqb5v
+   6sH6Vgg5ARPUrC9QaJd1loMDnnQvmDv0Iay7u9CR2IJT+6nqqj1Q6z55h
+   5y5/u6OHk/jQZklOKuQuHNUTc/5j5UI+OWe2VPewml1Po+/lY6QgYXssL
+   YcEYetBtmlLp3KA9PgwCn2TUK3BjmBRvISU+CldnmeyJv7dWqWRc0497B
+   Q==;
+X-CSE-ConnectionGUID: 7JtHxnFjT4mISQACVyT9Ww==
+X-CSE-MsgGUID: 9s5JSnDuR8ud5lEO+PXVFQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11369"; a="171602356"
+X-IronPort-AV: E=Sophos;i="6.14,238,1736780400"; 
+   d="scan'208";a="171602356"
+Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
+  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Mar 2025 17:55:20 +0900
+Received: from yto-m1.gw.nic.fujitsu.com (yto-nat-yto-m1.gw.nic.fujitsu.com [192.168.83.64])
+	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 54914E0765
+	for <openembedded-devel@lists.openembedded.org>; Tue, 11 Mar 2025 17:55:18 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 1ABD8CF7E1
+	for <openembedded-devel@lists.openembedded.org>; Tue, 11 Mar 2025 17:55:18 +0900 (JST)
+Received: from localhost.localdomain.localdomain (unknown [10.193.128.200])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id A9DAD1A0071;
+	Tue, 11 Mar 2025 16:55:17 +0800 (CST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 01/36] asyncmqtt: upgrade 10.0.0 -> 10.1.0
+Date: Tue, 11 Mar 2025 16:54:35 +0800
+Message-Id: <1741683310-8681-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 11 Mar 2025 08:49:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115851
+ <openembedded-devel@lists.openembedded.org>; Tue, 11 Mar 2025 08:55:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115852
 
-On 11.03.25 08:02, Yi Zhao via lists.openembedded.org wrote:
-> Now hiredis can be used not only with Redis, but also with Valkey, an
-> open source key/value datastore that is fully compatible with Redis. As
-> Redis changed its license, many users have switched to Valkey. Therefore
-> remove this specified runtime dependency.
->
-> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> ---
->  meta-oe/recipes-extended/hiredis/hiredis_1.2.0.bb | 1 -
->  1 file changed, 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-extended/hiredis/hiredis_1.2.0.bb b/meta-oe/recipes-extended/hiredis/hiredis_1.2.0.bb
-> index d081242736..93273919e5 100644
-> --- a/meta-oe/recipes-extended/hiredis/hiredis_1.2.0.bb
-> +++ b/meta-oe/recipes-extended/hiredis/hiredis_1.2.0.bb
-> @@ -35,5 +35,4 @@ do_install_ptest() {
->  
->  FILES:${PN}-dev += "${datadir}/hiredis_ssl ${prefix}/build"
->  
-> -RDEPENDS:${PN} = "redis"
->  RDEPENDS:${PN}-ptest = "${@bb.utils.contains('PACKAGECONFIG', 'testssl', 'openssl-bin', '', d)}"
-It still depends on either valkey or redis at runtime, is it not?
-If yes, wouldn't it be better to set something like 'RPROVIDES =
-"virtual-redis"' (or something like that) in both valkey and redis
-recipes, and set that as RDEPENDS here?
+From: Wang Mingyu <wangmy@fujitsu.com>
+
+Changelog:
+=============
+* Added C++20 coroutine version of broker (experimental).
+* Fixed connection status updating timing.
+* Refined CI.
+* Refined log level.
+* Refined documentr. Added coding rule to navigation bar.
+* Refined broker.
+* Changed the broker auth JSON file comment syntax.
+* Fixed broker websocket connection.
+* Refined documents.
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ .../asyncmqtt/{asyncmqtt_10.0.0.bb => asyncmqtt_10.1.0.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-connectivity/asyncmqtt/{asyncmqtt_10.0.0.bb => asyncmqtt_10.1.0.bb} (87%)
+
+diff --git a/meta-oe/recipes-connectivity/asyncmqtt/asyncmqtt_10.0.0.bb b/meta-oe/recipes-connectivity/asyncmqtt/asyncmqtt_10.1.0.bb
+similarity index 87%
+rename from meta-oe/recipes-connectivity/asyncmqtt/asyncmqtt_10.0.0.bb
+rename to meta-oe/recipes-connectivity/asyncmqtt/asyncmqtt_10.1.0.bb
+index e44ddc58f9..3a02c714c1 100644
+--- a/meta-oe/recipes-connectivity/asyncmqtt/asyncmqtt_10.0.0.bb
++++ b/meta-oe/recipes-connectivity/asyncmqtt/asyncmqtt_10.1.0.bb
+@@ -5,7 +5,7 @@ LICENSE = "BSL-1.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e4224ccaecb14d942c71d31bef20d78c"
+ 
+ SRC_URI = "git://github.com/redboltz/async_mqtt;protocol=http;branch=main;protocol=https"
+-SRCREV = "d802dc5491bfb17ea88c04bf9187a62252d64ddc"
++SRCREV = "21046ebc4a5475c14cea446715734c88fe33d276"
+ 
+ DEPENDS = "openssl boost"
+ 
+-- 
+2.43.0
+
 
