@@ -1,215 +1,223 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 26595C28B2F
-	for <webhook@archiver.kernel.org>; Tue, 11 Mar 2025 15:44:32 +0000 (UTC)
-Received: from mail-oi1-f171.google.com (mail-oi1-f171.google.com [209.85.167.171])
- by mx.groups.io with SMTP id smtpd.web10.12393.1741707869631423047
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 30493C282EC
+	for <webhook@archiver.kernel.org>; Tue, 11 Mar 2025 15:52:02 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.web11.12764.1741708316503691843
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Mar 2025 08:44:29 -0700
+ Tue, 11 Mar 2025 08:51:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=nbOAIC4x;
- spf=pass (domain: gmail.com, ip: 209.85.167.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f171.google.com with SMTP id 5614622812f47-3fa0eb29cebso724416b6e.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Mar 2025 08:44:29 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=lxN6318d;
+ spf=pass (domain: smile.fr, ip: 209.85.128.54, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-43cf0d787eeso25794265e9.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Mar 2025 08:51:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741707869; x=1742312669; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Kf/A2g0O6VbKr3nZHSl7LUYE94qzh/+nMR4Z00jkSIg=;
-        b=nbOAIC4xs5eTY3bvJYQcd80DKLmh6hPFtE5GotcrAaKq9lwA1id2Tbljw+/gxFpg+G
-         /GfibQmfnRxkFlKACYPiLFmc+H/Awsad6dJnaRf+Vqy2QEonK7xV7rwlsSYtyfarNn35
-         n35tOdeOesKKY/pN8NsQ2kIFjo7JQ6ryLLILFKs5Z53lkRzxXUUGHe2B9Uvd+X4rmq+9
-         Be5RTEV/jSs0VJpGCD7OGisM7n3oZTHamCCOYG4zbOaG863Ecni8KoVdqr8wD0Sxd/tn
-         yJ9xADS+EE6agnoOqysGS3ZfDTdUkDg+9U/LDKnvNe5SFTh1VBq1+xsqx60JzbNOcg2h
-         dzvg==
+        d=smile.fr; s=google; t=1741708314; x=1742313114; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=DaK1dlQiEYUL0XXtMBZswBaUEsdjvi9pxtMeEl0VSsc=;
+        b=lxN6318dAkYI+pmxpvZMZokF829pPkr+i1xM97EZEGxpzs5DU2wz7gpbDbK5tTk4Z6
+         FyQXNGEqlbztj5Fub5nSgSn9x57mx9QTwhG1R/Zzb2A633Th1xZ12QdCMTH2jXRvVd7r
+         Y6BihdSqvldQSuLxoqIHi6AalgixH+4mf0D4k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741707869; x=1742312669;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Kf/A2g0O6VbKr3nZHSl7LUYE94qzh/+nMR4Z00jkSIg=;
-        b=TCx9mu7Ul09sykLmOW36I4TdO4O7br9mVxk48TRh94CVZKSIaVHAKjSRNtd/SXauj+
-         IeouwIlBkr/Km8SNtmERohw5vd76QHO9j8R1/J0cgSstF/ueI3yDvZrj0NC05kDRxbMO
-         KXfK1X6XF93KPVB3YUMFJpcgilvE8rm/3NfM5YEfOw9iVwVsUNqV4lyn0whgeJ0ZmBzy
-         PZ9oe7j+kQcKRYk7pXShUgH1CBxZwVnv1qFJbAwdqZBC0SGHhxkMRpYTyHtJ6RF6cNqC
-         /1khPPA0oV4U3tqj7uYPuKQk3MiT8q8sduo0OAzHulS7lzkv3wBYzCPS1eLmDX5rEtz3
-         rvUQ==
-X-Gm-Message-State: AOJu0YxkbxfM0vQaafVvZ4D6DLTkkRycInCQvyyE7ezTSHxb6YLEi5MR
-	CxKs+i5+//Ty5yGJW8MkBjvROQKsKGQVQIFhZgwADrFcut65w+6MFDFmnkXo/WFoNJlzA5i2rQJ
-	xQiWBmeW9MEMYHy9O/40FV3YtVTQ=
-X-Gm-Gg: ASbGncslgPlZu+hy0d5uN6jHDjM5mGkN1NqgrsFDYWg1dLA5rMYapqg4PP6x0vfvRVq
-	ZR7SCvH1ATIlX+vQAr2Iu60K3K3mihTDLoGVEflkS2SmJGZIPC+xS5nq+ksYOwjBn1TY29WKPbC
-	tAe5pO4Mx7c43Woehgga+BN08y
-X-Google-Smtp-Source: AGHT+IHNnX71Fma5cdpMpw7YQ1ZlaVorF91280hqsaddWQLrb0+O7c+VJ5JB1lOjSevZxOYso/SclZOqVWq2BxS2nH4=
-X-Received: by 2002:a05:6808:3083:b0:3f6:6be0:1f8a with SMTP id
- 5614622812f47-3fa2b50426amr2427454b6e.8.1741707868699; Tue, 11 Mar 2025
- 08:44:28 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1741708314; x=1742313114;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=DaK1dlQiEYUL0XXtMBZswBaUEsdjvi9pxtMeEl0VSsc=;
+        b=Q+0VDqA/cQh2UXxepRrWiWg0Bst9B3RVsvIeU79XjTBRgMQLRFI1XUVFrusk640ShK
+         nhC92BT0OWJah9xA4tsq9+ebIZKf6horaapYi78DS3tFQOsPoF4KkCyuHtLwu1ne2jtP
+         j4XTfffpevEkjxfPkSWyycLgFdv0/rwu7tRjoeuPjsdKTUn3lBHxrWEz7H7sdLLcFYxq
+         w5cmvSGW/Q2UN79J3ChJrHV71+Kn5W8duSbndSNtEmWagUcUvXzT7uq1Q7mXTr0AniMy
+         Is9HPoWivStqT48bNxkrB4c4NygNTHbfzcDjOTKvB+s3WVK+bSYDi6KQTP0cPC4P8SB+
+         J4Yw==
+X-Gm-Message-State: AOJu0Yw20ZYZzrQQIGFW5QATYxUllNeLr3zvwzguRcxNFhuudNFLidXL
+	/D+20gTs349mjxqo62R1pWuT74xl5IiyWxYsjZN6Rz5a0X5v7Vv8dZ+fVbksBx4YXD0KX3j+ndX
+	o
+X-Gm-Gg: ASbGncvCzZW4iKo7VOAGw0sRYkgAKnE8hzv1ofGwt5tMXq35nKTwwoq7cN0XpXtlNHi
+	TdKWmUpghgIA77GBjDe/29uw1RauBSH/o0RV4aL+vVJJ80SBVXoi5edVtsFpyKYEUEXcupMEV8O
+	nc5txZBz+kAcwW53KZLKW2VRrMc2V8cuf10pSMmSJQxAvKQxHOZnR8Vdl0PGrzpY9cFi39GWQj4
+	SGCYjriUxcSrlILhoJP4g9RTbCZBjvhuWlfOAnAO/pex3XQSeMzhFRcnKpjhIwJVNcXQGXfFi5r
+	xQc2tOznqsNVhEJ4i1S3Tfws2s89/HGQac7hIkHqCEX9YrA001WfME+0Lw1CMPYK58zq2OpJue/
+	KQ/uhrJdvrGUdVZPnIqtoOLiQ6EQIcbd3f7cQtCCV8lVdoeGlzAg=
+X-Google-Smtp-Source: AGHT+IHK6Sr9RIgmgOKPcRW0j0raHdSU2SbbPJDpTqZ6PYD0ctuir8v4BbMZ8hHxKt3YK6Y9vDIsAQ==
+X-Received: by 2002:a05:600c:1ca0:b0:43c:f895:cb4e with SMTP id 5b1f17b1804b1-43cf895cdb0mr85956535e9.17.1741708314413;
+        Tue, 11 Mar 2025 08:51:54 -0700 (PDT)
+Received: from P-ASN-ECS-830T8C3.home (2a01cb000deef0002cff7470e58ff5dc.ipv6.abo.wanadoo.fr. [2a01:cb00:dee:f000:2cff:7470:e58f:f5dc])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-43d073555e5sm14739345e9.4.2025.03.11.08.51.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 11 Mar 2025 08:51:53 -0700 (PDT)
+From: Yoann Congal <yoann.congal@smile.fr>
+To: openembedded-devel@lists.openembedded.org
+Cc: Yoann Congal <yoann.congal@smile.fr>,
+	Christos Gavros <gavrosc@yahoo.com>,
+	Dan McGregor <dan.mcgregor@usask.ca>
+Subject: [PATCH] reproducibility: update known non-reproducible packages
+Date: Tue, 11 Mar 2025 16:51:36 +0100
+Message-Id: <20250311155136.3192261-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-References: <20250311085756.1136319-1-kai.kang@windriver.com>
-In-Reply-To: <20250311085756.1136319-1-kai.kang@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 11 Mar 2025 08:44:02 -0700
-X-Gm-Features: AQ5f1Jr7Zg6yXQ6awUGSkSstA_j7bRu-IeydzcNO0HJSznXzSizll6TnRXfu9UY
-Message-ID: <CAMKF1srN0CvRNrfA4bm=jMbLwTN5va3kb9Nt-8KqVv7oYDWAVA@mail.gmail.com>
-Subject: Re: [oe] [meta-python][scarthgap][PATCH] python3-pykickstart: fix
- options parse error
-To: kai.kang@windriver.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 11 Mar 2025 15:44:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115893
+ <openembedded-devel@lists.openembedded.org>; Tue, 11 Mar 2025 15:52:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115894
 
-This is needed on master as well. Please add [master] to the subject
-line as well in future, else I might end up ignoring such patches
-accidentally thinking they are backports to stable branches.
+From: Yoann Congal <yoann.congal@smile.fr>
 
-On Tue, Mar 11, 2025 at 1:58=E2=80=AFAM Kai Kang via lists.openembedded.org
-<kai.kang=3Dwindriver.com@lists.openembedded.org> wrote:
->
-> From: Kai Kang <kai.kang@windriver.com>
->
-> Backport a patch for python3-pykickstart to fix option parse error:
->
->     File "/usr/lib64/python3.12/site-packages/pykickstart/options.py", li=
-ne 185, in _parse_optional
->       option =3D action.option_strings[0]
->                ^^^^^^^^^^^^^^^^^^^^^
->   AttributeError: 'tuple' object has no attribute 'option_strings'
->
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->  ...o-behavior-change-in-upstream-_parse.patch | 71 +++++++++++++++++++
->  .../python3-pykickstart_3.48.bb               |  1 +
->  2 files changed, 72 insertions(+)
->  create mode 100644 meta-python/recipes-extended/python-pykickstart/files=
-/0005-options-adjust-to-behavior-change-in-upstream-_parse.patch
->
-> diff --git a/meta-python/recipes-extended/python-pykickstart/files/0005-o=
-ptions-adjust-to-behavior-change-in-upstream-_parse.patch b/meta-python/rec=
-ipes-extended/python-pykickstart/files/0005-options-adjust-to-behavior-chan=
-ge-in-upstream-_parse.patch
-> new file mode 100644
-> index 0000000000..e2b34ab937
-> --- /dev/null
-> +++ b/meta-python/recipes-extended/python-pykickstart/files/0005-options-=
-adjust-to-behavior-change-in-upstream-_parse.patch
-> @@ -0,0 +1,71 @@
-> +From f753d4d6ad1f4846d14735beb3d1b157b9914b51 Mon Sep 17 00:00:00 2001
-> +From: Adam Williamson <awilliam@redhat.com>
-> +Date: Wed, 2 Oct 2024 09:48:39 -0700
-> +Subject: [PATCH] options: adjust to behavior change in upstream
-> + _parse_optional
-> +
-> +In Python 3.13 and 3.12.7, the behavior of _parse_optional has
-> +changed. It used to raise an error on multiple matching actions
-> +itself, and only ever return None or an option tuple. Now the
-> +"raise error on multiple matching actions" code was moved out
-> +into consume_optional, and _parse_optional returns either None
-> +or a *list* of option tuples, which contains more than one if
-> +multiple actions match. See:
-> +
-> +https://github.com/python/cpython/pull/124631
-> +https://github.com/python/cpython/issues/58573
-> +
-> +This adapts to the change in a way that should work on both older
-> +and newer Pythons.
-> +
-> +Signed-off-by: Adam Williamson <awilliam@redhat.com>
-> +
-> +Upstream-Status: Backport [https://github.com/pykickstart/pykickstart/co=
-mmit/f753d4d]
-> +
-> +Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> +---
-> + pykickstart/options.py | 20 +++++++++++++++++---
-> + 1 file changed, 17 insertions(+), 3 deletions(-)
-> +
-> +diff --git a/pykickstart/options.py b/pykickstart/options.py
-> +index 2e3a0721..ca0e18af 100644
-> +--- a/pykickstart/options.py
-> ++++ b/pykickstart/options.py
-> +@@ -177,9 +177,23 @@ class KSOptionParser(ArgumentParser):
-> +         self.lineno =3D None
-> +
-> +     def _parse_optional(self, arg_string):
-> +-        option_tuple =3D ArgumentParser._parse_optional(self, arg_strin=
-g)
-> ++        # Before 3.13 and 3.12.7, this returned None or a single
-> ++        # option tuple. From 3.13 / 3.12.7 onwards it returns None
-> ++        # or a *list* of option tuples
-> ++        option_tuple_or_tuples =3D ArgumentParser._parse_optional(self,=
- arg_string)
-> ++        # all we want to do here is a custom warning if the action is
-> ++        # deprecated. we can only safely do this if there's exactly
-> ++        # one matching action
-> ++        if isinstance(option_tuple_or_tuples, list):
-> ++            if len(option_tuple_or_tuples) =3D=3D 1:
-> ++                option_tuple =3D option_tuple_or_tuples[0]
-> ++            else:
-> ++                return option_tuple_or_tuples
-> ++        else:
-> ++            option_tuple =3D option_tuple_or_tuples
-> ++
-> +         if option_tuple is None or option_tuple[0] is None:
-> +-            return option_tuple
-> ++            return option_tuple_or_tuples
-> +
-> +         action =3D option_tuple[0]
-> +         option =3D action.option_strings[0]
-> +@@ -191,7 +205,7 @@ class KSOptionParser(ArgumentParser):
-> +                             "kickstart. Please modify your kickstart fi=
-le to remove this option.")
-> +                           % {"lineno": self.lineno, "option": option}, =
-KickstartDeprecationWarning)
-> +
-> +-        return option_tuple
-> ++        return option_tuple_or_tuples
-> +
-> +     def add_argument(self, *args, **kwargs):
-> +         if "introduced" in kwargs:
-> +--
-> +2.47.1
-> +
-> diff --git a/meta-python/recipes-extended/python-pykickstart/python3-pyki=
-ckstart_3.48.bb b/meta-python/recipes-extended/python-pykickstart/python3-p=
-ykickstart_3.48.bb
-> index 953068f7c3..657d0df539 100644
-> --- a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart=
-_3.48.bb
-> +++ b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart=
-_3.48.bb
-> @@ -17,6 +17,7 @@ SRC_URI =3D "git://github.com/rhinstaller/pykickstart.g=
-it;protocol=3Dhttps;branch=3Dma
->             file://0002-pykickstart-parser.py-add-lock-for-readKickstart-=
-and.patch \
->             file://0003-comment-out-sections-shutdown-and-environment-in-=
-gen.patch \
->             file://0004-load.py-retry-to-invoke-request-with-timeout.patc=
-h \
-> +           file://0005-options-adjust-to-behavior-change-in-upstream-_pa=
-rse.patch \
->             "
->  SRCREV =3D "fa6c80c0e5c6bee29d089899a10d26e6f7f8afd8"
->
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#115888): https://lists.openembedded.org/g/openembedde=
-d-devel/message/115888
-> Mute This Topic: https://lists.openembedded.org/mt/111636553/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Those reproducible failures are from AB runs:
+* https://autobuilder.yoctoproject.org/valkyrie/#/builders/87/builds/34
+* https://autobuilder.yoctoproject.org/valkyrie/#/builders/87/builds/35
+
+NB: diffoscope output can be found in
+https://valkyrie.yocto.io/pub/repro-fail-openembedded/
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+---
+With this I hope to finally get a green reproducible build and start
+noticing when updates/patches break reproducibility.
+
+Cc: Christos Gavros <gavrosc@yahoo.com>
+
+Cc: Dan McGregor <dan.mcgregor@usask.ca>
+FYI, this revert part of your commit 065abae6cf40 ("hplip: Address reproducibility issues")
+on hplip.
+---
+ .../include/non-repro-meta-networking.inc     |  2 ++
+ meta-oe/conf/include/non-repro-meta-oe.inc    | 30 +++++++++++++++++++
+ .../conf/include/non-repro-meta-python.inc    |  6 ++++
+ 3 files changed, 38 insertions(+)
+
+diff --git a/meta-networking/conf/include/non-repro-meta-networking.inc b/meta-networking/conf/include/non-repro-meta-networking.inc
+index 7497ed4b03..139ff40b99 100755
+--- a/meta-networking/conf/include/non-repro-meta-networking.inc
++++ b/meta-networking/conf/include/non-repro-meta-networking.inc
+@@ -30,6 +30,8 @@ KNOWN_NON_REPRO_META_NETWORKING = " \
+     opensaf \
+     postfix-cfg \
+     rp-pppoe \
++    traceroute \
++    traceroute-dbg \
+     udpcast-doc \
+     unbound-doc \
+     znc \
+diff --git a/meta-oe/conf/include/non-repro-meta-oe.inc b/meta-oe/conf/include/non-repro-meta-oe.inc
+index 5575b12c33..88dcedc268 100755
+--- a/meta-oe/conf/include/non-repro-meta-oe.inc
++++ b/meta-oe/conf/include/non-repro-meta-oe.inc
+@@ -1,6 +1,9 @@
+ # List of known non-reproducible package of the meta-oe layer
+ # Please keep this list sorted
+ KNOWN_NON_REPRO_META_OE = " \
++    asio-dbg \
++    asio-ptest \
++    asio-src \
+     boinc-client-dev \
+     cjson-ptest \
+     cpuid-doc \
+@@ -14,13 +17,18 @@ KNOWN_NON_REPRO_META_OE = " \
+     directfb \
+     directfb-dbg \
+     doxygen-src \
++    edid-decode \
++    edid-decode-dbg \
+     editorconfig-core-c-dev \
+     etcd-cpp-apiv3-dev \
++    evemu-tools-python \
+     fbgrab-doc \
+     fluentbit-src \
+     fvwm-dbg \
+     fvwm-doc \
+     fvwm-extra \
++    fwupd-dbg \
++    fwupd-ptest \
+     gcab-src \
+     gosu \
+     gosu-dbg \
+@@ -33,20 +41,30 @@ KNOWN_NON_REPRO_META_OE = " \
+     hdf5-dbg \
+     hdf5-src \
+     hdf5-staticdev \
++    hplip-dbg \
++    hplip-filter \
++    hplip-src \
++    iotop \
++    iotop-dbg \
+     jpnevulator-doc \
+     jsonrpc-dev \
+     kpatch-build \
+     kpatch-doc \
+     ldns \
++    libass9 \
++    libass-dbg \
+     libbotan-3-bin \
+     libbotan-3-dbg \
+     libbotan-3-dev \
+     libck-doc \
+     libdbus-cxx-dev \
+     libforms \
++    libhugetlbfs-doc \
+     libiio-src \
+     libjcat-dbg \
+     libjcat-ptest \
++    librelp-dbg \
++    librelp-ptest \
+     libthrift-c-glib-zlib-src \
+     libvncserver-dev \
+     libwebsockets-testapps \
+@@ -74,6 +92,7 @@ KNOWN_NON_REPRO_META_OE = " \
+     nbench-byte-dbg \
+     nbench-byte-src \
+     nspr-staticdev \
++    obconf-locale-es \
+     openocd \
+     openocd-dbg \
+     pcp \
+@@ -86,13 +105,24 @@ KNOWN_NON_REPRO_META_OE = " \
+     pidgin \
+     pidgin-dbg \
+     pim435-staticdev \
++    poco-ptest \
+     postgresql-server-dev \
+     qcbor-staticdev \
++    qperf-doc \
+     sharutils \
+     sharutils-dbg \
+     smemstat-doc \
+     soci-dev \
++    switchtec-user \
++    switchtec-user-dbg \
++    switchtec-user-staticdev \
+     thin-provisioning-tools-dev \
++    toybox-inittab \
++    toybox-inittab-dbg \
++    toybox-inittab-dev \
++    transmission-dbg \
++    transmission-gtk \
++    transmission-src \
+     vulkan-cts \
+     vulkan-cts-dbg \
+     waylandpp-dev \
+diff --git a/meta-python/conf/include/non-repro-meta-python.inc b/meta-python/conf/include/non-repro-meta-python.inc
+index 64dc69ed55..03d3fefba5 100755
+--- a/meta-python/conf/include/non-repro-meta-python.inc
++++ b/meta-python/conf/include/non-repro-meta-python.inc
+@@ -7,9 +7,15 @@ KNOWN_NON_REPRO_META_PYTHON = " \
+     python3-frozenlist \
+     python3-frozenlist-dbg \
+     python3-kivy-src \
++    python3-lief \
++    python3-mlcommons-loadgen \
++    python3-mlcommons-loadgen-dbg \
++    python3-mlcommons-loadgen-src \
+     python3-pandas \
+     python3-pandas-dbg \
+     python3-pandas-src \
++    python3-propcache \
++    python3-propcache-dbg \
+     python3-pybind11-json-dev \
+     python3-pycocotools-src \
+     python3-pydantic-core \
 
