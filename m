@@ -1,118 +1,109 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C7F7C28B2F
-	for <webhook@archiver.kernel.org>; Wed, 12 Mar 2025 15:26:51 +0000 (UTC)
-Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com [209.85.167.172])
- by mx.groups.io with SMTP id smtpd.web11.40182.1741793203920881103
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B626C28B28
+	for <webhook@archiver.kernel.org>; Wed, 12 Mar 2025 16:26:14 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.web10.806.1741796764748261802
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Mar 2025 08:26:44 -0700
+ Wed, 12 Mar 2025 09:26:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=OMNXWA9S;
- spf=pass (domain: gmail.com, ip: 209.85.167.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f172.google.com with SMTP id 5614622812f47-3fa0eb29cebso601796b6e.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 08:26:43 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=tso/utHL;
+ spf=pass (domain: smile.fr, ip: 209.85.221.53, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-3914a5def6bso23918f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 09:26:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741793203; x=1742398003; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=cPIMoIr2SGLnQmWRXVGbSTwh7t5Xk8GZLVmPd/X69js=;
-        b=OMNXWA9S/XYLA//LCD7u/I9yGW3manYO6iNRT+tihS69bp2g0UhEN2dITmi4c5xGka
-         M7IiKW7bariZbqJ9OlxudSJF4JmOvYRRNk2n3mk+fmC3as+qFWQadXgxQWc7HQ1Qh131
-         +tp2vCr+3aShP1iuCnJk2g6TUEg7T+Be/KNHaF4TiC8TefZb0oQxCWhRN3W+GZ6U88Uy
-         1AHl+AySfULdteX6PJ/Ve1nETdwMLF8V4Wv0GNTicw5NcO+5R2gCvKTqt/SFJVm2zTs7
-         7yu47uoeyBCmMjNB24eZ3Rmw7rOlF1uMSYqzq9gvGaepxAmMdNaQBsmsv2+gYNx3r/gv
-         ugPw==
+        d=smile.fr; s=google; t=1741796763; x=1742401563; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=mO1mWjSegynmNAoJk0qrtBecOWJzPAf/d9gexxwb84w=;
+        b=tso/utHL6Ew4EcAZ3FlVOCaYlGyWs8lbBwXDKexdaqXipkdx3PfH45WS3ONPU4j1sw
+         ZGiROGivERBRSjw3BfZUzuo2A7qb3EooTF2SQIFxEY3tajy2z57VKj0p/PH7+Nlcc2jj
+         kFsuwRuRz0mtUPf4mIGk62l2vVsT9Z47fga9w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741793203; x=1742398003;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=cPIMoIr2SGLnQmWRXVGbSTwh7t5Xk8GZLVmPd/X69js=;
-        b=Bl/iTGo5EU4Sy6wHo4rcY/SHJJc4hkoddKvX32Ptxsuv0yloA/r1kfOhd0l2cRvfnA
-         fm+IklGZGOsw5Bsj3HIwDKcD30PP+fq4zr+aMThWDrpR4tqWRb236h14/abjrnr1bzBD
-         8AiU8LlPW4FwWffPHPCqHMkYJulNWTMlEQ/AW5sWAwbb1pTCJJ1LOlKPDd8n7iq1BCLq
-         NaX+WGUsLNHOkPsxeYDzy3xbg7T+WPK3eXuZi18HhFV96jg2HV6VyIy09SPXHZyN2mdX
-         UN+DJsjF1C5vVLiZlmgRT0vlTuONrGX61cdLkzv+C9QVAS9s5YzMT4dbLAlm5uSoGiAQ
-         HZsw==
-X-Gm-Message-State: AOJu0YxGtdmn1oMwhlC9QCUSGxix9u/nMLMSnA84ixopqZVKucjE6qTB
-	WvKDlwcR9SvOd2FBY4V6J2Nw8GBqaFIbI8EZ8DtfF33lR4niGMdLF6bz26apbu07JFXbs3KsvoJ
-	XCnAM/m8WrlxlNk4eOqTa3skgKZU=
-X-Gm-Gg: ASbGncu4DKLgZfYH2y60gUcsuXbZ/E81056GA2QKlV2743n5ITmpPOCw7Hh8bTdIMXT
-	k+VuP3iSYe5wvGdKnMa6T/EHP025uUSphV0X//+8evVVFaDLq/GGo8OKonD+ItZ7M0ZTPAHhZuI
-	RhjyOldVGIRbXumbH/zkvIKMkU8+/I4FJR9qyn
-X-Google-Smtp-Source: AGHT+IFGQuQDboFkmroAal6UNFa8ubKjdnfzi80djXiWj2Qk/HD2l+1K8Tj2mKhFleGbgW4Eb/hvE4dx50Bm4yGB7V0=
-X-Received: by 2002:a05:6808:144e:b0:3f9:28b9:7021 with SMTP id
- 5614622812f47-3fc752a6b04mr49469b6e.5.1741793203087; Wed, 12 Mar 2025
- 08:26:43 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1741796763; x=1742401563;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=mO1mWjSegynmNAoJk0qrtBecOWJzPAf/d9gexxwb84w=;
+        b=ZL7pMtLsNV332K0lgA4n9hckgdpFPdrq9s7HVGdPjmblmiaiR1ayNaH0/YhGpoJJyv
+         JhuhCgjVklz3z26iNhBC1wY85exuK6MJzTxLH+6fqyVVGZ5+pzGaSbmz28+T1Y7UW0cm
+         b6pWW+8Ac9zF4a/wGEZe/01L3ATWB8B3pBVU5pmLbUlaECWvsA5RrQZTfOB1O+2stLJ1
+         ER6/Gr15VsURLzIQgV8HuP9tZZxEV6wRThj7yQdQeqsrUOZLD/X0/ZUs+76rPTXeOCI3
+         /z84aJozHPzI4PCDsfDFqCcNg5nlOMsfSXEde1qnUafD43+GJiQDhK1n4k5CsA74rUAs
+         t9Qw==
+X-Gm-Message-State: AOJu0YzekkqdxFPmae3G2cK2U95DjjEPxigfF4xPuyv4Lys6eE/3B3Pz
+	UhqNWJhPzet8T0tiLRNgM7EfsgvokFuIZK9XcQdJJi9jWT3bwSLDEJMwGqiGJb3qOHr9JzcgyGv
+	x
+X-Gm-Gg: ASbGncuaMkNR4DTqtJeHBRs8BGw5wvpIjXRWoIbkYF38SgC+aCsV7P/VIizS0iHWSFp
+	TuVNSi9k437W341LbRdaQ89YcnDPZqHowMQf4TUMnGM80VdWKJtkp7SXhJ/LWnbvoo1hW2uhgIn
+	u50jlxNYwVRTHG218DNFfTOYgShiNi6Hs/MoAimFV8YSussMTUmHLIoVtc3cjtfasFghNQGHoyh
+	cDzKQRZrn0l5yWAlWMbCaL81dDM2UCfd4qn9c1U2JxMyuSnyS5saBZhTLyeQxowh0pknz259p8N
+	DgPJ2BEl3r52c4YaIU1QzLy64gew62UU9M1KsGiiZxYV6ViQMJPmyT5Ing4VpOicYZIHiK1BUeo
+	kP87nhqdlbkETEVGbDOqFQuJW+4FRAEfE3SPG55Qk2kEpyX1eRPphM1SPN9so
+X-Google-Smtp-Source: AGHT+IHUJdsyzxsqE9WHROPtW5nVTVG/OsUodJf2s9RiWfrn0z1aceTi8BFWp6CRyMZx9dgzmEFwmQ==
+X-Received: by 2002:a5d:5f93:0:b0:391:2e6a:30fe with SMTP id ffacd0b85a97d-39132da07d0mr18768810f8f.39.1741796762801;
+        Wed, 12 Mar 2025 09:26:02 -0700 (PDT)
+Received: from P-ASN-ECS-830T8C3.local (2a02-8440-3340-7b2b-cb9c-b08a-0091-a0a9.rev.sfr.net. [2a02:8440:3340:7b2b:cb9c:b08a:91:a0a9])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3912c01d2cdsm21840047f8f.57.2025.03.12.09.26.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 12 Mar 2025 09:26:02 -0700 (PDT)
+From: Yoann Congal <yoann.congal@smile.fr>
+To: openembedded-devel@lists.openembedded.org
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-oe][PATCH v2] packagegroup-meta-oe: move thin-provisioning-tools inclusion to clang dynamic layer
+Date: Wed, 12 Mar 2025 17:25:51 +0100
+Message-Id: <20250312162551.3257541-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-References: <20250312093324.3238381-1-yoann.congal@smile.fr>
-In-Reply-To: <20250312093324.3238381-1-yoann.congal@smile.fr>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 12 Mar 2025 08:26:15 -0700
-X-Gm-Features: AQ5f1JrifDuvgvGdASk92Hd2gsA0LdMfi8hzzP63vdrCAkeQYtF562_SGKhUXdE
-Message-ID: <CAMKF1sqVKVR7TsCuGtJfmbBL=vYe4jhgFXtzjuDLmALGxXQxXw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] packagegroup-meta-oe: remove thin-provisioning-tools
-To: yoann.congal@smile.fr
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 15:26:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115928
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 16:26:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115929
 
-On Wed, Mar 12, 2025 at 2:33=E2=80=AFAM Yoann Congal via
-lists.openembedded.org <yoann.congal=3Dsmile.fr@lists.openembedded.org>
-wrote:
->
-> From: Yoann Congal <yoann.congal@smile.fr>
->
-> Since commit e19b4c9755fd ("thin-provisioning-tools: 1.0.13 -> 1.0.14"),
-> thin-provisioning-tools is in the clang dynamic layer.
->
-> This triggers warnings on AB:
-> https://autobuilder.yoctoproject.org/valkyrie/#/builders/82/builds/213/st=
-eps/12/logs/warnings
->
-> So, remove thin-provisioning-tools from packagegroup-meta-oe-extended.
->
+From: Yoann Congal <yoann.congal@smile.fr>
 
-yeah, this will fail when meta-clang is not used. Perhaps it can be
-moved to a bbappend under
-meta-oe/dynamic-layers/clang-layer/
-but I would not sweat over it
+Since commit e19b4c9755fd ("thin-provisioning-tools: 1.0.13 -> 1.0.14"),
+thin-provisioning-tools is in the clang dynamic layer.
 
-> Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
-> ---
->  meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 1 -
->  1 file changed, 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b=
-/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> index 449f671f7a..70d05c44bc 100644
-> --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> @@ -878,7 +878,6 @@ RDEPENDS:packagegroup-meta-oe-support =3D "\
->      syslog-ng \
->      system-config-keyboard \
->      tbb \
-> -    thin-provisioning-tools \
->      tokyocabinet \
->      tree \
->      uchardet \
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#115917): https://lists.openembedded.org/g/openembedde=
-d-devel/message/115917
-> Mute This Topic: https://lists.openembedded.org/mt/111656730/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+This triggers warnings on AB:
+https://autobuilder.yoctoproject.org/valkyrie/#/builders/82/builds/213/steps/12/logs/warnings
+
+So, move the thin-provisioning-tools packagegroup inclusion to the clang
+dynamic layer.
+
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+---
+v1->v2:
+* Move to the dynamic layer instead of plainly remove it.
+---
+ .../recipes-core/packagegroups/packagegroup-meta-oe.bbappend   | 3 +++
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb     | 1 -
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+ create mode 100755 meta-oe/dynamic-layers/clang-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
+
+diff --git a/meta-oe/dynamic-layers/clang-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend b/meta-oe/dynamic-layers/clang-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
+new file mode 100755
+index 0000000000..d3fc8d3254
+--- /dev/null
++++ b/meta-oe/dynamic-layers/clang-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
+@@ -0,0 +1,3 @@
++RDEPENDS:packagegroup-meta-oe-support += " \
++    thin-provisioning-tools \
++"
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 449f671f7a..70d05c44bc 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -878,7 +878,6 @@ RDEPENDS:packagegroup-meta-oe-support = "\
+     syslog-ng \
+     system-config-keyboard \
+     tbb \
+-    thin-provisioning-tools \
+     tokyocabinet \
+     tree \
+     uchardet \
 
