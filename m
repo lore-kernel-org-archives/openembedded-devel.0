@@ -1,61 +1,61 @@
-Return-Path: <festevam@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EDC9BC28B28
-	for <webhook@archiver.kernel.org>; Wed, 12 Mar 2025 14:02:19 +0000 (UTC)
-Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com [209.85.167.49])
- by mx.groups.io with SMTP id smtpd.web11.37999.1741788137857516312
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 02597C28B2F
+	for <webhook@archiver.kernel.org>; Wed, 12 Mar 2025 14:09:00 +0000 (UTC)
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web11.38129.1741788437118441618
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Mar 2025 07:02:18 -0700
+ Wed, 12 Mar 2025 07:07:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CJQc/qDs;
- spf=pass (domain: gmail.com, ip: 209.85.167.49, mailfrom: festevam@gmail.com)
-Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-549644ae382so8020351e87.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 07:02:17 -0700 (PDT)
+ dkim=pass header.i=@9elements.com header.s=google header.b=Gt8wwl+B;
+ spf=pass (domain: 9elements.com, ip: 209.85.216.52, mailfrom: naresh.solanki@9elements.com)
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-2ff6cf448b8so13689379a91.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 07:07:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741788136; x=1742392936; darn=lists.openembedded.org;
+        d=9elements.com; s=google; t=1741788436; x=1742393236; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=437Zn3x4neBC+xCUcLE2UHJW3omN4txaE2+F70T5Qp8=;
-        b=CJQc/qDsLb7czI1UggzCSwsWSxN2Si7NZq2Di8TRPSaFMlNQuiWnKDg20rU6RHIRKx
-         AIIHFwTqfI9/2bN5hUflu4Sxt0PKWGkdHVKL0JOO9c3odfVI5RHAdyLIaFBe7Ns+jpke
-         U5jGMC3P5HKq/E3V2XZ2ui2rLwfIVOxnzyRwmqzQr0QciX3/Wnu2XocrcQV0eELRaJVT
-         HjKth7FJBUtVSgct5KjQnp726KVW/BHC36dU9EWDkKnGyoiHmZBUXUnjPblmIes3O/aE
-         gsFf75vUfWEY6+Ei0AJvOc9x+OuRTIygDwnu68olezftzDrLXagDZhVk9ISsc7YTEPV8
-         jakw==
+        bh=KH3wp93Ri05thIPW6RJDRPjNZtEwM1LH6l3DniegfWA=;
+        b=Gt8wwl+BJkmPS1V5kpjG0F/w/anHbiIa6dyZGMdw4ecwGhRS8xMbZ5f9HfYC1MWCd8
+         7KLiUWiIyacTgwxoNRtw3cthZddgZaBa/Ljx+2okbY9bJY/l03Nb7S7OJTHB4Z73mab7
+         XRX0iVNcraUMHoyFrI28dJ/jkr33u4uaUcA35vAEZTu+aMJy+ciObrZ7fINs3IFyfveW
+         HojbLnWYDFHFp9HrJsSyxJ5yLauCGTRkpwHDb84TuCqq00nRLc/TaRFb/Ipe1nqvVZru
+         uIBpWG8nSZcTWQehjJMQasAE24OCXNuYlPQQ8xPUgSR+BoxgN1esy/nypUeboksLI7BW
+         dFwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741788136; x=1742392936;
+        d=1e100.net; s=20230601; t=1741788436; x=1742393236;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=437Zn3x4neBC+xCUcLE2UHJW3omN4txaE2+F70T5Qp8=;
-        b=KqvJLtBqqPcHQ1MsKKMTxjZtgbYPBjmIDHBhv/1USv2U/ury2isRqHG9bkjGSyBtxT
-         9HOaah7h0NT4SH2pAlMc9h2en0C8y+XBC2BKWainS/BLqd91c8VPbcTGZPJCAcJbwCZL
-         sut5lA9P94gXFk+kVKfDjE903J2Nok5LOcbuHLcQ3FVLpJcUIEdvQsg7cqp/vjonfEIW
-         jVxlrIFVGd0qpd2qAvTm6okFuK/qyncLTnK4Gm+06B76OQl60xCIbFJ6W+vqYl1pErwO
-         wgR5fQySLsgvRXuk6tU5YVCPTxFxVSZF9BLhi/yVI+Sd1YyZ5TWqmzzVq3/NqJhTe4t1
-         CO6w==
-X-Gm-Message-State: AOJu0Yy1NW9JhvYsf4hfNJnmpfVZZIWaSNCod6rclBkz3fNMYvueIOdI
-	CnDpW/fawzbxJc5hd/3BnRkd8+qEHEwJYoG2kyiMGA64aAq14RkDXDncNsSrCRo4yiDx6J6FjPs
-	fpsg7Iv6TRCH28vT0j4d7Z4mYyN0=
-X-Gm-Gg: ASbGncsEZtDZ1IdoHDnc+5rXhGvtPmsZymfbxyr1MLWO5FhmF380+jw4OGfZrtGFgcw
-	GUjxYydiEOQl6p6JY7wp+GpAB1fGlGq+AvI13qMhH/2iRCTctJD8BROrl8X7S5n2PTMehZzV9FO
-	bBBedmJlmE5E+nDXweXM9X5LFQuR1/lS5X2gOoXirK8eAdCBc1n3qLXi/Piw==
-X-Google-Smtp-Source: AGHT+IES9MRtVBJGIf3uaFiDmcTHRHJ1Tz/y7CI96FKA+qwRFJjbPQ679borrFKUcnbPg+cs5kYVM3GySsyQiNz0Eyw=
-X-Received: by 2002:a05:6512:3c9e:b0:549:5866:6489 with SMTP id
- 2adb3069b0e04-54990ec654dmr7358475e87.47.1741788135371; Wed, 12 Mar 2025
- 07:02:15 -0700 (PDT)
+        bh=KH3wp93Ri05thIPW6RJDRPjNZtEwM1LH6l3DniegfWA=;
+        b=FieGHQl84bKPupAJ0auX31uMOkvJ8AGjD4FCbmFxjpJDfHqbmoM8cwU2tHTxrhz9c9
+         AkPOsUEY7+2fwL+AyrzzMs4nPL20exnKASdRqGdcu+lhP2kcfEcZw+SABxjpJP6UuNSY
+         NOPRwpSsySJTniWXDgzljE2WCW7vm+oCXuqLZnkXmQzeebY2oZqvcF/d9Cr5BPBOKmAX
+         kkWI1q3Awxrs2maH9VTZaKbOKpiCLMIeYLgFk5G0aqfwl55LKZDNFw/UKZkE12hu58BF
+         zfXkkOSeepR14f+voo26v+ChZacPa0wQDzHFmc5RNR89iHOPr6i1skvc5atOfztMJYP5
+         lt7A==
+X-Gm-Message-State: AOJu0YySzSvECS98kQ4PAMb4vSxklEVqb12TcRWLFgx3BBpbTK5T7ZPY
+	9lVJmYUKKxliHT2OWjbyXFcUiwa4tPOW9OMVC4CnuwmE0o/lSbkGloy3K5QLkE5bmRbDa2dtT03
+	yPkppCEhX8DwjrDj+ooT4TeQcKwaEzDNsIA9Uhw==
+X-Gm-Gg: ASbGncsMASqfBd/YVIQEECQJGILiC5EAdavVpfR7ajlRK8XbBTrpbWWw5+ZTSPiMG9C
+	n8ppugqCZ5D6M7hJ4UUKiUyQe2OmGKmkvxFgoQQ9ufYNrunAMiqZEDKHZMvyCZXIcDzcBtoVv3O
+	8Dc+PUCPLy2B0ryO+VfywjTDYUIg==
+X-Google-Smtp-Source: AGHT+IHvsbHGW07mRzank2wkSniIRevs65V3VVz0HyVfxMy8xVMhSSK6Sbh0HLmTu5lUXvhQGvZKTLI0sTvU1IgXHfQ=
+X-Received: by 2002:a17:90b:3b50:b0:2ff:7c2d:6ff3 with SMTP id
+ 98e67ed59e1d1-2ff7cf4f88amr32677988a91.35.1741788435176; Wed, 12 Mar 2025
+ 07:07:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250312111915.2970032-1-naresh.solanki@9elements.com>
-In-Reply-To: <20250312111915.2970032-1-naresh.solanki@9elements.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 12 Mar 2025 11:02:03 -0300
-X-Gm-Features: AQ5f1JpciHVWFRomOcoZuMN99CiqjtQxpLaObbaR3c272u59VIpf0Q44vUTW2lQ
-Message-ID: <CAOMZO5DaZbRXuv4vgWk9evNcV4iW6gXy2Vjv7oWsnMo_R9ku4Q@mail.gmail.com>
+References: <20250312111915.2970032-1-naresh.solanki@9elements.com> <CAOMZO5DaZbRXuv4vgWk9evNcV4iW6gXy2Vjv7oWsnMo_R9ku4Q@mail.gmail.com>
+In-Reply-To: <CAOMZO5DaZbRXuv4vgWk9evNcV4iW6gXy2Vjv7oWsnMo_R9ku4Q@mail.gmail.com>
+From: Naresh Solanki <naresh.solanki@9elements.com>
+Date: Wed, 12 Mar 2025 19:37:03 +0530
+X-Gm-Features: AQ5f1JoWqkrBy2LymfmpbHG_gHAHW6gefRY0T0On-nuBPMD3fer0bQ_5dHG3ls0
+Message-ID: <CABqG17gS-kiB73tTC+u-TER2+ABLYPDVM5YyjiqpEzLTb0LbJQ@mail.gmail.com>
 Subject: Re: [oe] [meta-oe][PATCH] meta-openembedded: flashrom: Update to v1.4.0
-To: naresh.solanki@9elements.com
+To: Fabio Estevam <festevam@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org, linux-kernel@vger.kernel.org, 
 	"Signed-off-by: Patrick Rudolph" <patrick.rudolph@9elements.com>
 Content-Type: text/plain; charset="UTF-8"
@@ -63,18 +63,25 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 14:02:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115924
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 14:08:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115925
 
-On Wed, Mar 12, 2025 at 10:52=E2=80=AFAM Naresh Solanki via
-lists.openembedded.org
-<naresh.solanki=3D9elements.com@lists.openembedded.org> wrote:
+Hi,
+
+On Wed, 12 Mar 2025 at 19:32, Fabio Estevam <festevam@gmail.com> wrote:
 >
-> From: "Signed-off-by: Patrick Rudolph" <patrick.rudolph@9elements.com>
-
-This From line is incorrect.
-
-It should be:
-
-From: Patrick Rudolph <patrick.rudolph@9elements.com>
+> On Wed, Mar 12, 2025 at 10:52=E2=80=AFAM Naresh Solanki via
+> lists.openembedded.org
+> <naresh.solanki=3D9elements.com@lists.openembedded.org> wrote:
+> >
+> > From: "Signed-off-by: Patrick Rudolph" <patrick.rudolph@9elements.com>
+>
+> This From line is incorrect.
+>
+> It should be:
+>
+> From: Patrick Rudolph <patrick.rudolph@9elements.com>
+Correct. Not sure why the tool picked it that way. Will check.
+Thanks
+Naresh
 
