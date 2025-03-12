@@ -2,91 +2,105 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D7613C28B28
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D8905C2BA1B
 	for <webhook@archiver.kernel.org>; Wed, 12 Mar 2025 08:13:17 +0000 (UTC)
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.web10.31631.1741767193877492215
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web10.31632.1741767194957743121
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Mar 2025 01:13:13 -0700
+ Wed, 12 Mar 2025 01:13:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QCye6TKq;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-224019ad9edso143016285ad.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 01:13:13 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=KP5GJ6OZ;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2232aead377so28638425ad.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 01:13:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741767193; x=1742371993; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=wvCvm8RIVmd00WkShqkivrz07RORXtPh/3afUahyU9k=;
-        b=QCye6TKqiN6w0L3h5Rix2WMVt0t2mDO77vhQ1gYtthib6DNDI4TeX+fx08j78No9V5
-         xLASPklHsmBadfoEFcfKMsbWRADeTcDFt1Acrcson7mZuOhkQkDNuxpBM0RSFP4jRAT2
-         shJG9njxPOdmf0y6Fh11z6y8LS6ynxI0779ODiM8UrpdtrrwLM0BYPaIVQ+hBWXENr0W
-         WKvNLrRSB2l0Z7fHtYb/oDBBbCGklYRnRFpll+E9d503y0OBrfOl5A/NMwOzDjEsCth8
-         JJtf03YYTf/hSCRlfLVo0zYXX8ARaZeQHvyVysyvVOeREM0SMD3c+slSbthp0bXeo0sr
-         l+GQ==
+        d=gmail.com; s=20230601; t=1741767194; x=1742371994; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ZsGKdlBy1fHcBl1OYW/+nM1AS4OUtyfSRLpTYtOHtQs=;
+        b=KP5GJ6OZBe0Lir8ElGsv6unTnBxUqNQD82GIEgbidNo9C6AclCYd6oEym+Qjq0Hq3k
+         XbqaovjiCCgSNGWtTcvYkSisda1ZgXL3djBpLx5JZT9kLnXxH3g9NeLj9oV0krgksWWC
+         HHgO9cJ5/XloSsSvy3Rff9I5j6QekVWANQ6fqIigteyVGcM5XZ2rPoWxi9bf0xPGeJAK
+         E5kw03CG6hy9oryhgHAJ1k1Zam4t1cs3zXsKYd5jstFCYv7l5ltSz3YGWGvJzhUIStbK
+         w4NOKPRjKhmKKR6lwZTIXnUNolP65t0zDm5TJmYRzpmzvLlo3YVIKqYURLBHinF5UwRM
+         BRkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741767193; x=1742371993;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=wvCvm8RIVmd00WkShqkivrz07RORXtPh/3afUahyU9k=;
-        b=UeKTNYU9nBHsQEgkx0KpZjjsd/cTuvR5iCapiD2dqGTQMolw8X8MZpmendIUjMS2i8
-         LvKNxPdaRaFsMN45fz16QWgBwWJ8T4kJtJoMHi6SmhdZfdIfadOZNxiPcyMKCNHDNqrk
-         Acnn/3pm7vOyFyvuY8R654p0mUz5GDoCyJ+Q5G6h2t0eOkIukfKr8XDUiaBLQX4RwRMU
-         WWy7Yzc3+N9/B2GjAlEXArBzhtkjTIxKMUmjzxedV+0Ul5klAkoWZBBjRBtuCRTkaoG1
-         QK0ijcdEUs/a+Xx4Tt79FSc1uSOD14xWoTA4ah9+C8CKxije1d3yfb7685J7dnIkNl07
-         2t7Q==
-X-Gm-Message-State: AOJu0Yy1NbIgjF1F81nOaCeODHTRO2kTdJiV34WGqwSUIuzCgIia9pmH
-	fGMyubTgoevzdfTHGps4TjI4GZAOLnlNUKwe2omKFB0I4DhZ3cm6TqAxPsfo
-X-Gm-Gg: ASbGncse6nmsT17l0OvvdTOF1SCkGpK0ZNwlzqXXYd4zx+DUnwxtAv7KmA1AkT2wf21
-	3oHOtkSo0UV4ekbJENWDO0CTo1odzXG7vcDMk+8ODoZw2XYR+qb6Pn8V5U4tZw+tdtMfTC87voS
-	ctfG6JFLARduxS7XT/5Q0zmuQXosbdnNTQjMV9QGXGFq6aiRbSRluNPFDGkRXKfw/b60up5+kht
-	XHhI+DU8pD7PvWVl7KgsaAJ7A2oOJW5YalEQiEKzUDhcWEiCTC101jygwXwjr5iFMLudqVkdEhy
-	eHR0RVUxBy09xFIwEl6WDmWG+VH0aqZNKpV1AwhvtXJQ/vY=
-X-Google-Smtp-Source: AGHT+IGs7qME7/17DwIvrgLGAplFIqAmsLHHBsSLe9qC8VdCBmNcOd+Yq6/2Atf2jWfidHwvrJ/k3A==
-X-Received: by 2002:a17:903:283:b0:21f:1bd:efd4 with SMTP id d9443c01a7336-2242888ab0cmr337476145ad.19.1741767192900;
-        Wed, 12 Mar 2025 01:13:12 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1741767194; x=1742371994;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ZsGKdlBy1fHcBl1OYW/+nM1AS4OUtyfSRLpTYtOHtQs=;
+        b=vOe9mkXQtNP05E6NNpCZHKhsXl2DUCf87uy6yZJruQFvVWikVYsM5TR6//NJxNuKLq
+         Rm+pdrKJaE3OaqzrT/RJDYF1G5IRHxF6c35n1QsE+YJPNEOUvTZEfG73lcAJOtgPnZIP
+         XgWHGh7ACHujgnuKGeiARsFe9tWiiRH/HZiAVYlJdKaNOEBzvqAlMka9rHV8ccuXxTuO
+         6XZypb763JIA2nIwTlBhGeOx3nfT0YhJhwIZeQJio0wt48E1cyHdb3LM4F+d1DOXdX4X
+         mLfOvBc7IfohHB5BEqLJ1BrMpbl6KvTEzF4t+2NU4LeqsQn5vYbDl4fl3VuGqIBzx/Hn
+         uDtg==
+X-Gm-Message-State: AOJu0Ywlqx8rnIAcx8cxyKXHH/KhRMOzVGNtVYXWnYNZ+byyRqoZgwnX
+	IVZ5p6GNv2HSAizAIUhi1MrVkUcxW86FNfab19V/f0BJQQkatfQ8XWrh+yp+
+X-Gm-Gg: ASbGncuVL5dZkwFacJBOn8WKvNdglwARamGZN+WiHVDniNzz9VEiHudu+5hMaD60veo
+	VCQnZ0JoCi1uo5X3plYj5p2p07/sHxdvVFczaEgY6vqQP4c4Y6gXU5tgqiPaLLRB2xEox26qYZO
+	muM4IAliGA97L3pyU8qmibmiOuQK8T5IJhAEoyzAPuuvcQl11ucbih/aBWb9x7yXDtBqI04IONP
+	0T/pLsWd5gMUs+YOzKPCTb0FGudXPjIKHJxTAUW7GVi+/8lWOporHGQeWo890jTgTjoNzo3dcGY
+	oOzbZfTf+8hfU6u7DVI6lU8IAC6Z4X/ZgSeC
+X-Google-Smtp-Source: AGHT+IG1NOmUxt5opi5i1IVe/cHDUcoKLC3JxG/MKpGbb4MG1RJE39M5SqnucKpskN36/lncV5yvaQ==
+X-Received: by 2002:a17:902:cf07:b0:224:192a:9154 with SMTP id d9443c01a7336-22428a8cf90mr318605275ad.26.1741767193976;
+        Wed, 12 Mar 2025 01:13:13 -0700 (PDT)
 Received: from apollo.localdomain ([2601:646:8201:fd20::6874])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22410a7f5dasm109986665ad.137.2025.03.12.01.13.12
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22410a7f5dasm109986665ad.137.2025.03.12.01.13.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Mar 2025 01:13:12 -0700 (PDT)
+        Wed, 12 Mar 2025 01:13:13 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/3] grpc: Upgrade to 1.71.0 Release
-Date: Wed, 12 Mar 2025 01:13:04 -0700
-Message-ID: <20250312081309.3413533-1-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 2/3] keepalived: Make keepalived cross compile reproducible
+Date: Wed, 12 Mar 2025 01:13:05 -0700
+Message-ID: <20250312081309.3413533-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250312081309.3413533-1-raj.khem@gmail.com>
+References: <20250312081309.3413533-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 08:13:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115913
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115914
+
+This should help with not emitting configure commandline into
+binaries, these may contain absolute build paths
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-devtools/grpc/{grpc_1.68.0.bb => grpc_1.71.0.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/grpc/{grpc_1.68.0.bb => grpc_1.71.0.bb} (97%)
+ .../recipes-daemons/keepalived/keepalived_2.3.2.bb          | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb b/meta-oe/recipes-devtools/grpc/grpc_1.71.0.bb
-similarity index 97%
-rename from meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb
-rename to meta-oe/recipes-devtools/grpc/grpc_1.71.0.bb
-index f47a933afc..6b1a6e5453 100644
---- a/meta-oe/recipes-devtools/grpc/grpc_1.68.0.bb
-+++ b/meta-oe/recipes-devtools/grpc/grpc_1.71.0.bb
-@@ -24,8 +24,8 @@ RDEPENDS:${PN}-dev:append:class-native = " ${PN}-compiler"
- # RDEPENDS:${PN}-dev += "${PN}-compiler"
+diff --git a/meta-networking/recipes-daemons/keepalived/keepalived_2.3.2.bb b/meta-networking/recipes-daemons/keepalived/keepalived_2.3.2.bb
+index c0a2e57bfb..6fb4886b96 100644
+--- a/meta-networking/recipes-daemons/keepalived/keepalived_2.3.2.bb
++++ b/meta-networking/recipes-daemons/keepalived/keepalived_2.3.2.bb
+@@ -21,10 +21,11 @@ DEPENDS = "libnfnetlink openssl"
  
- S = "${WORKDIR}/git"
--SRCREV_grpc = "6b49ae626bc9cd7033e062f89dbe0e0576b1110e"
--BRANCH = "v1.68.x"
-+SRCREV_grpc = "4e9357bca1408596663a218c0c608a4c0560a867"
-+BRANCH = "v1.71.x"
- SRC_URI = "gitsm://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
-            file://0001-cmake-Link-with-libatomic-on-rv32-rv64.patch \
-            "
+ inherit autotools pkgconfig systemd
+ 
+-PACKAGECONFIG ??= "libnl snmp \
++PACKAGECONFIG ??= "libnl snmp reproducible \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
+ "
+ PACKAGECONFIG[libnl] = "--enable-libnl,--disable-libnl,libnl"
++PACKAGECONFIG[reproducible] = "--enable-reproducible-build,,"
+ PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp,net-snmp"
+ PACKAGECONFIG[systemd] = "--with-init=systemd --with-systemdsystemunitdir=${systemd_system_unitdir},--with-init=SYSV,systemd"
+ 
+@@ -45,6 +46,9 @@ do_install:append() {
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+         install -D -m 0644 ${B}/${BPN}/${BPN}.service ${D}${systemd_system_unitdir}/${BPN}.service
+     fi
++    if [ -n "${@bb.utils.filter('PACKAGECONFIG', 'reproducible', d)}" ]; then
++        sed -i -e 's|${WORKDIR}|<scrubbed>|g' ${D}${sysconfdir}/keepalived/keepalived.config-opts
++    fi
+ }
+ 
+ PACKAGE_BEFORE_PN = "${PN}-samples"
 
