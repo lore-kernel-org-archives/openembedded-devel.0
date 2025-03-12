@@ -1,130 +1,176 @@
-Return-Path: <awais.belal@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0D4CC28B28
-	for <webhook@archiver.kernel.org>; Wed, 12 Mar 2025 18:52:06 +0000 (UTC)
-Received: from mail-oa1-f49.google.com (mail-oa1-f49.google.com [209.85.160.49])
- by mx.groups.io with SMTP id smtpd.web11.3182.1741805518488173742
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 14EBAC28B28
+	for <webhook@archiver.kernel.org>; Wed, 12 Mar 2025 20:23:48 +0000 (UTC)
+Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com [209.85.167.178])
+ by mx.groups.io with SMTP id smtpd.web10.5225.1741811025142792526
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Mar 2025 11:51:58 -0700
+ Wed, 12 Mar 2025 13:23:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=far8wL56;
- spf=pass (domain: gmail.com, ip: 209.85.160.49, mailfrom: awais.belal@gmail.com)
-Received: by mail-oa1-f49.google.com with SMTP id 586e51a60fabf-2c2ada8264aso92762fac.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 11:51:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hSY1E3h8;
+ spf=pass (domain: gmail.com, ip: 209.85.167.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f178.google.com with SMTP id 5614622812f47-3f3ecfa7a76so150345b6e.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 13:23:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741805518; x=1742410318; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=+iqPzX9liNXlwvKZiDTimMZ3PrGxHatp99VScXech4c=;
-        b=far8wL564AHl8F28G/oGOHmyxxgf8gx5A+YA83dq/DvUx01A/vEiXLf3f+MJpKVJTQ
-         nqZXrZmQ1iWB9Epthg/fBWmMs2raOAWrAYNWn84DXJrqGZaQPKoGfrvPAZh/bD91i5gb
-         3NSkoxZz3ssWeFdLfuP0K+91n6awnAHbFN1OIZ8Euw+qTqS7zgCp6siETBr/i32ZnkUV
-         0pk5QowkPVhus+INVxvQh30aOzFE8xmm5Ef+VFQF0KZb70/OLG224i4AvG2bpxVjNwoi
-         skOCRWLM7D1opiX/2rL47h5kD5OnQZSDt3+vttQoEfu5wHhBsa5nt9IX+kxfbqoft7n1
-         rUBA==
+        d=gmail.com; s=20230601; t=1741811024; x=1742415824; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lzjQBUkuoTZRSuFMPqkCfq50FDqMbIBR7cl3wkpeEyA=;
+        b=hSY1E3h8hbymMBY6boAKb/FKqKLpvVMeq0bidYsy2a7XooK83kVkteAErIpxm2n7ud
+         aC/FvVnJ/m4webiBbA/hqSmwAgWau7X7HuevGzcx5MqbCQ2L9IqAGJqevfsONsY8B0/4
+         kQo7vLoJjLgYBdSTBemPxSXvPwEvEtE4PnfszmtNllOE+ofoSkXQaMxlV1f8ILCThwPg
+         Ec/aEKUdE5ZIqIzo6KT4r1U/qnszuLVO7s47L7l2Y/coCdcXchgYN5cPAWjS6JCOBa2D
+         TnfbMmT3jJgNV0+LcjIrlTjCAWT0AUv5K4dWT2WR7IFkonPwM6+Z7phry+yy/0d8tBi2
+         FYVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741805518; x=1742410318;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=+iqPzX9liNXlwvKZiDTimMZ3PrGxHatp99VScXech4c=;
-        b=LmtdeUhJ5AJ01wAEhcCHv46H4eCNYtapcRy0d28TH1C9f/AzYma2FuikBYVm+SkYHE
-         EQxdBBIfWHopYgug4AKMejtpZRW2OvFmt0Tnjif4Y8uj0yoxdHIZNnmBHtc3P+pZnkRL
-         vVd2rGcw+pOVZsz//P4cC7WjwEwR9vZKNtkEMKepKYn60XZxQdwbDMokU7vOFDWYsl2v
-         v/B9WOgRKuFbZH8QEEHjKG57t3VbWmKsUIxEVk4FLPwi/HCkX6QV4GQuXQ01plbmINK7
-         FGCO1L8YFXOFQ8/oXDiMPK2K46/S+iVM8kRoaihU15MscQCb0uanVZT9YsmFnezhOmsJ
-         BXRg==
-X-Gm-Message-State: AOJu0Yx0zQEa4yBBHziMRHi1UEOj8O6RrVwJb/EzbBZBxdLJ1X2A/nhI
-	AseAK9tonGEjFeaKlmpeoGkW16xXWlcNajCBEcB1UG9VD2u7jGMPNhJU252/h6FxW5lOUoHf15Z
-	ocUAChbEw04Z7AkrZpXQPL6u+50Y=
-X-Gm-Gg: ASbGncvLGKah2rFzx5sZi6RmU2sgnVHt7VJ+kK5EmIxCyUUHprh61z4xkcpBLyKtREv
-	BNq4Sxht0YdQ8o5yxZIs/8Hr13Rl8udTnI5k7ySISRs3DHJIJrr7vqOeFFxlfILXekp5dceo4u0
-	2IAPH8DsNX/h1fyovIRotLnGvXP0s=
-X-Google-Smtp-Source: AGHT+IFES9w9+teh8HsmIktBarpNzVYAif/JWZTccm+k0ddT3mMnPkWSlGnfM6uwZ3zeMXkiaO2KewJUQJkFP9A4hh8=
-X-Received: by 2002:a05:6870:ef03:b0:29e:62e5:9b55 with SMTP id
- 586e51a60fabf-2c2610da07amr11729103fac.20.1741805517622; Wed, 12 Mar 2025
- 11:51:57 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1741811024; x=1742415824;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=lzjQBUkuoTZRSuFMPqkCfq50FDqMbIBR7cl3wkpeEyA=;
+        b=bRzpvRJFaLjUf8kOxKcWyQ+OoeVGE9NZe+rmF/RT2n7o3uQhHQBceWn7Z4s6RfN2IG
+         aVPS6A83XZF7bResPvFKMtt4JJlnwmENSBom0CabmOzsbjc4Jfk1Lm4y25QZGXeiir4e
+         tHNOTP+lYdbDkCLx+KyZtg53n0a6bePbAIRBcPrML5Zp8u15NxuK8jocnVeeebmFZc1y
+         vepVH9guZERNJyipfD21u/fNoPncSLY4zj8+hMB2UD5ALdMtNJDzr21HIjGg8T4gGQL0
+         9g3srXTm3c9o+ywVWmMNGLpKzHzYvQwe2HS/SdEIMAQ9X9qivHLUUr+9TXiSyCrZsT3u
+         l/hg==
+X-Gm-Message-State: AOJu0YyR8xtdiWvk4I7g/EOdK/842Rp+zYSJ3b0fedKIzZUt3vz5uU7p
+	qFNXZUBhc0v/BYTsbimjnv6Yswf6PtomfH2PjtXMnQ1Lnv0wn2m965bCjGD86dPKn3hbX6lYZ9L
+	CMEjt2DLTlLOPsP1r3+4uQ9BLBnQ6k9vj
+X-Gm-Gg: ASbGnctbHCEsxwYuyd+xxsblZJLP81HpkKsNfaw+cXq+s7v67NR4VkSvnYMD1pgOMBE
+	aTwfN9RgnMYwhYLuebqc3TVxZAWZqyzNZBjZGPEjEXwde73MKQGutXWO7sEqTGlY7aU1xQuwCKE
+	jBUvBQlzNWvW6LSuimg+4R7vqO5E6CHWYTJCjBVKmEtXw1DjYYzw5SYYc=
+X-Google-Smtp-Source: AGHT+IHY9cbNPuYfgyyuVhmKTP344qzVOy0wA1NKhkLo755A0BMamYr+i/AkmMOEzsEl3/rbBRK1noS0X7KB2G9jdaM=
+X-Received: by 2002:a05:6808:2393:b0:3fa:c549:cff6 with SMTP id
+ 5614622812f47-3fac549f07amr3197272b6e.36.1741811024318; Wed, 12 Mar 2025
+ 13:23:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250307093255.1110778-1-awais.belal@gmail.com>
- <20250307093255.1110778-2-awais.belal@gmail.com> <CAMKF1spsyTBdgD_we=X2Q9vpGFhBi-0E59ArdGyKr3KB-8g3Gg@mail.gmail.com>
- <CAM=5Amb6u5-8pmud11do97X4UAwLToizR9SiGjPD=4+Zqet6Rw@mail.gmail.com> <CAMKF1sroz=jLxp9PfMkZoQwtRjyvDZhK15kGLS32q5vu7dxcHA@mail.gmail.com>
-In-Reply-To: <CAMKF1sroz=jLxp9PfMkZoQwtRjyvDZhK15kGLS32q5vu7dxcHA@mail.gmail.com>
-From: Awais Belal <awais.belal@gmail.com>
-Date: Wed, 12 Mar 2025 23:51:45 +0500
-X-Gm-Features: AQ5f1JougYiXWV4Zg-SzmY5hN1C3hQVDhilo6WmLK36GohAHj_CgkgBCaKFFeyA
-Message-ID: <CAM=5AmYtt81oiNVQqYMbu--Z0vTfGpQ5eHUpdJeV2KqoUdT4Ww@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][scarthgap][PATCH 2/2] mongodb: update to 4.4.29
-To: Khem Raj <raj.khem@gmail.com>
+References: <20250312183133.3403868-1-awais.belal@gmail.com>
+In-Reply-To: <20250312183133.3403868-1-awais.belal@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 12 Mar 2025 13:23:18 -0700
+X-Gm-Features: AQ5f1Jq3-y9CdjOSqeQYcSaXuiOE6prp7mmhCT_DvC-D6PB1-n18siLRcWkiPWo
+Message-ID: <CAMKF1srLtOMByK_sE=Xd48nB+B=7bu-P+HmKz5WRR2DbMnxBog@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][meta-python][PATCH 1/2] python3-legacy-cgi:
+ introduce recipe
+To: awais.belal@gmail.com
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000255796063029b326"
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 18:52:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115940
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 20:23:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115941
 
---000000000000255796063029b326
-Content-Type: text/plain; charset="UTF-8"
+On Wed, Mar 12, 2025 at 11:31=E2=80=AFAM Awais Belal via
+lists.openembedded.org <awais.belal=3Dgmail.com@lists.openembedded.org>
+wrote:
+>
+> With the cgi module being dropped in python3.13 a stop
+> gap solution for modules relying on cgi is to use the
+> legacy-cgi module. Introduce the recipe so it could be
+> leveraged in the upcoming changes.
+>
+> Signed-off-by: Awais Belal <awais.belal@gmail.com>
+> ---
+>  ...py-fixup-interpreter-according-to-OE.patch | 28 +++++++++++++++++++
+>  .../python/python3-legacy-cgi_2.6.2.bb        | 22 +++++++++++++++
+>  2 files changed, 50 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-legacy-cg=
+i/0001-cgi.py-fixup-interpreter-according-to-OE.patch
+>  create mode 100644 meta-python/recipes-devtools/python/python3-legacy-cg=
+i_2.6.2.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-legacy-cgi/0001-=
+cgi.py-fixup-interpreter-according-to-OE.patch b/meta-python/recipes-devtoo=
+ls/python/python3-legacy-cgi/0001-cgi.py-fixup-interpreter-according-to-OE.=
+patch
+> new file mode 100644
+> index 0000000000..0af8ef4842
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-legacy-cgi/0001-cgi.py-=
+fixup-interpreter-according-to-OE.patch
+> @@ -0,0 +1,28 @@
+> +From eaa9964cd6d22564fa5f1270d194eb65ebaef57c Mon Sep 17 00:00:00 2001
+> +From: Your Name <you@example.com>
+> +Date: Wed, 12 Mar 2025 17:44:39 +0000
+> +Subject: [PATCH] cgi.py: fixup interpreter according to OE
+> +
+> +The underlying distribution is required to update the interpreter
+> +by design. This can be referenced from the notice that is found
+> +on top of the same file being patched here.
+> +
+> +Upstream-Status: Inappropriate [OE specific]
 
+I think you could try sending this patch upstream, it should make
+things better for the legacy-cgi project.
+
+> +Signed-off-by: Awais Belal <awais.belal@gmail.com>
+> +---
+> + cgi.py | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/cgi.py b/cgi.py
+> +index 22897a1..f86db84 100755
+> +--- a/cgi.py
+> ++++ b/cgi.py
+> +@@ -1,4 +1,4 @@
+> +-#! /usr/local/bin/python
+> ++#!/usr/bin/env python
+> +
+> + # NOTE: the above "/usr/local/bin/python" is NOT a mistake.  It is
+> + # intentionally NOT "/usr/bin/env python".  On many systems
+> +--
+> +2.43.0
+> +
+> diff --git a/meta-python/recipes-devtools/python/python3-legacy-cgi_2.6.2=
+.bb b/meta-python/recipes-devtools/python/python3-legacy-cgi_2.6.2.bb
+> new file mode 100644
+> index 0000000000..2b2840ae14
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-legacy-cgi_2.6.2.bb
+> @@ -0,0 +1,22 @@
+> +SUMMARY =3D "Fork of the standard library cgi and cgitb modules, being d=
+eprecated in PEP-594"
+> +HOMEPAGE =3D "https://github.com/jackrosenthal/legacy-cgi"
+> +LICENSE =3D "PSF-2.0"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4b8801e752a2c70ac41a5f9aa243f=
+766"
+> +
+> +PYPI_PACKAGE =3D "legacy_cgi"
+> +
+> +inherit python_poetry_core pypi
+> +
+> +SRC_URI +=3D "\
+> +    file://0001-cgi.py-fixup-interpreter-according-to-OE.patch \
+> +"
+> +
+> +DEPENDS +=3D "\
+> +    ${PYTHON_PN}-setuptools-scm-native \
+> +"
+> +
+> +#RDEPENDS:${PN} =3D "python3-core"
+> +
+> +BBCLASSEXTEND =3D "native nativesdk"
+> +
+> +SRC_URI[sha256sum] =3D "9952471ceb304043b104c22d00b4f333cac27a6abe446d8a=
+528fc437cf13c85f"
+> --
+> 2.34.1
 >
 >
->>>
->>  The changeset was intended for scarthgap and I haven't made sure if
->> master builds. Is that a requirement? The cgi module was dropped in python
->> 3.13 which is what master is following at this point. I might send a
->> separate series for master once I move on to that.
->>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#115938): https://lists.openembedded.org/g/openembedde=
+d-devel/message/115938
+> Mute This Topic: https://lists.openembedded.org/mt/111665521/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
-> Patches are routed by master to release branches if they are needed in
-> master. They are done for master and then backported
->
->>
-Hi Khem,
-I've just sent
-https://patchwork.yoctoproject.org/project/oe/list/?series=32428 which
-coupled with the changes here fixes mongodb build for master as well.
-Kindly note that the other series (
-https://patchwork.yoctoproject.org/project/oe/list/?series=32428) is not
-needed for scarthgap.
-
--- 
-Regards,
-Awais Belal
-
---000000000000255796063029b326
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div class=3D"gmail_quote gmail_quote_container"><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
-solid rgb(204,204,204);padding-left:1ex"><div><div class=3D"gmail_quote"><b=
-lockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-le=
-ft:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div class=
-=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
-0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><br></bl=
-ockquote><div><br>=C2=A0The changeset was intended for scarthgap and I have=
-n&#39;t made sure if master builds. Is that a requirement? The cgi module w=
-as dropped in python 3.13 which is what master is following at this point. =
-I might send a separate series for master once I move on to that.</div></di=
-v></div></blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Patches =
-are routed by master to release branches if they are needed in master. They=
- are done for master and then backported=C2=A0</div><blockquote class=3D"gm=
-ail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,=
-204,204);padding-left:1ex"><div dir=3D"ltr"><div class=3D"gmail_quote"><div=
- dir=3D"auto"></div></div></div>
-</blockquote></div></div>
-</blockquote></div><div><br clear=3D"all"></div><div>Hi Khem,</div><div>I&#=
-39;ve just sent=C2=A0<a href=3D"https://patchwork.yoctoproject.org/project/=
-oe/list/?series=3D32428">https://patchwork.yoctoproject.org/project/oe/list=
-/?series=3D32428</a> which coupled with the changes here fixes mongodb buil=
-d for master as well. Kindly note that the other series (<a href=3D"https:/=
-/patchwork.yoctoproject.org/project/oe/list/?series=3D32428">https://patchw=
-ork.yoctoproject.org/project/oe/list/?series=3D32428</a>) is not needed for=
- scarthgap.</div><div><br></div><span class=3D"gmail_signature_prefix">-- <=
-/span><br><div dir=3D"ltr" class=3D"gmail_signature">Regards,<br>Awais Bela=
-l</div></div>
-
---000000000000255796063029b326--
 
