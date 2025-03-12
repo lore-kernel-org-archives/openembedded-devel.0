@@ -2,216 +2,378 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CB2E4C28B28
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F095BC28B30
 	for <webhook@archiver.kernel.org>; Wed, 12 Mar 2025 13:52:49 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.34651.1741779296158753907
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.web10.34367.1741778375658255018
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Mar 2025 04:34:56 -0700
+ Wed, 12 Mar 2025 04:19:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=516685422e=libo.chen.cn@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52C6viRw028315
-	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 04:34:56 -0700
-Received: from nam11-bn8-obe.outbound.protection.outlook.com (mail-bn8nam11lp2169.outbound.protection.outlook.com [104.47.58.169])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45b0j4rfu4-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 04:34:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nkC1KHcyHdTGc4hhAWrrvZ06AMstaQmUXB9kuvSrx9r9Mc5Al0iojDfw6xrtXkFnEWE8ScDX5hYhdi3HKHBZLyw/TEzn3GvhOjbDXtq8fDehH2ErsZYnINOePxNPmgcn4IxFpdumJCxS1y2MYyG/4mlqEdu4Qbj3jgxIIhQEXWYdngQ3pBhFyP/46vFNce0gDcTTV454F9Xw4J9zXux114ILRFPwJMp8up8NQIV1M/xEPj/6BUUtGOxQZd9CCHX4ppKZNShlXapb9g4MlaAyngZACUaCf0blUtmQPGPwOcdSnMZGOBUjloVTzzRN0TbwZIEdRRdmXz+V4cIzM2LOiA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UiCMuSSBtUg9uRRtFUQHwDyeQkl1+SFFSimo4v1fVxQ=;
- b=fQmZdGrQjHxnfJodga7sk/A/V42FqZpZC1UgCZv9wben+E8sKcozo0/EFIOE6GusDTt50WJtHsPd3lTYCbqZbrSjVRCDBp4GO/CTM/nROwZ4WMGWhRQF2K6Z2PQhuXyZPgXtfoKuTImCYXju3BPdzZq+ITOivYhctfzIWkZ2SF9giAeA2+yGeb7repRCZlRC9oLrnen9yD2WR7et+/DL9nwUZaHX7S5QnBzgE+iitryYbqM1GLudkuDJ7oky97LU08eDs3IVqx6RDKi/7FonhTRHDRED22urTzi/dCRE3A9+YYFgnuuqT/PGtd8b+MYzgt7y1mYOHJKHuw6yOtaVHw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=eng.windriver.com; dkim=pass header.d=eng.windriver.com; arc=none
-Received: from BN9PR11MB5354.namprd11.prod.outlook.com (2603:10b6:408:11b::7)
- by CY5PR11MB6138.namprd11.prod.outlook.com (2603:10b6:930:2a::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8511.27; Wed, 12 Mar
- 2025 11:34:53 +0000
-Received: from BN9PR11MB5354.namprd11.prod.outlook.com
- ([fe80::5e9:ab74:5c12:ee2d]) by BN9PR11MB5354.namprd11.prod.outlook.com
- ([fe80::5e9:ab74:5c12:ee2d%5]) with mapi id 15.20.8511.026; Wed, 12 Mar 2025
- 11:34:53 +0000
-From: libo.chen.cn@eng.windriver.com
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH v2] libgpiod: fix gpiod-cxx-test failed test case
-Date: Wed, 12 Mar 2025 19:34:39 +0800
-Message-Id: <20250312113439.2956645-1-libo.chen.cn@eng.windriver.com>
-X-Mailer: git-send-email 2.34.1
-X-ClientProxiedBy: SG2PR02CA0010.apcprd02.prod.outlook.com
- (2603:1096:3:17::22) To BN9PR11MB5354.namprd11.prod.outlook.com
- (2603:10b6:408:11b::7)
+ dkim=pass header.i=@9elements.com header.s=google header.b=hJigaCnb;
+ spf=pass (domain: 9elements.com, ip: 209.85.128.42, mailfrom: naresh.solanki@9elements.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4393dc02b78so39200165e9.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 04:19:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=9elements.com; s=google; t=1741778374; x=1742383174; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=rXmxl7+GLhH0gQY+K7P03YejOUhiC3cgihFu2sKSnz4=;
+        b=hJigaCnbmXxefomZ5Bi5ojNNnCLOacT2S31XAMxZMaNDIr8EEGpQIPlU2u+TTgD1VL
+         8e8J3bi/q9q9m40nGG858cNaBt2MZgdTl6aFcZ71rAaGNuRiciwL8mN0ASd3IJNltZui
+         hj47wkvBSMzGI2EGttB8aGikY2c9E/j5Ex/Ez/+YMR3TFZZqJOcIbH3P20YMbDMinbu7
+         TAf9t2W/631JzKB5wTz5dH1IcvcaL7HwGBQFcFkicHWjy6uwLPlwqvtgpqCUhJJoIFnN
+         olnSyLxDib2estKq1D/SHmzv2WIRmT0UXW5l2d3V9Hu3noxg1+72nChydvUTjoN4gQES
+         Pipg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1741778374; x=1742383174;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=rXmxl7+GLhH0gQY+K7P03YejOUhiC3cgihFu2sKSnz4=;
+        b=YaH0/wFPJFiE7T2t9ZBatZ6X5dOvm01qvYApORh2ZTLKju8+ItIufo9eQQ3RE3Qoou
+         b7wbcYS9iCcFkc4DkemtcAJrY43DAdweD9ZBo0alt7L58kCrn6+g5SVJ/kiQws6sd+Na
+         HbEuMniOOQCO/dcbBNOeBF2zJvSlkizA+EKWlFu1025IBlmfrXPxutv7jpMrOzkCawMO
+         t0bRRuSg8RCJ5K/ZVZ7ivcWfqYIXmvOQ0V/bfG4ZPpdLn9kuhCEt1/WaPdOVw3rbrGBv
+         IkTqmO9DD22OwCw78Ui3Czufjj9bIGcBPYmKsOY8vUZrn1znf19bZhtdSNoZerOc950o
+         M7hQ==
+X-Gm-Message-State: AOJu0Yyj+xfvKNionHezdUJF8Ne9vczy+I1Nyyo5grbDM5eGZjXq+8E9
+	eC+j6SvGk/38vSE8unur/e+IoIUEPfve2vQtioQg4Tg/KwlXJ+Jkn79tktfTUg5dcrNrhI90ROQ
+	4wIc=
+X-Gm-Gg: ASbGncvlm92KTKKwXio0j6CE1m7ZksLtoICP/CmB47CmxK4VCfW/wyqTcMtjER0K6S4
+	/RZYdZ/iZ9mSllA8XDqiSQtegysqYdbpfuDDHym636bJlBi1jVcTX+NYtB5qfgYFXw6OTn4sKbZ
+	6dmqHs8VjdkKyzI0zAcXzxI0vK7cZk8PSanD5rwTO6AsXJSU7vNxJoFLbLIOW2WSJ8IihzYPL4f
+	1H6hyP3um/F60t4mcoJqXK54wmmhS6gZh6alhV6xAjVRLHJtJhf7okPxlIWAPwZCZ+Yvauvbr9U
+	MT3hjXcCiObRVBXQZNmaOeawjDqa0BoVb1IWDfq23yy5wWHGB4NayCIO0hq4WAYxIXKm9qWLTth
+	pllEyxFNqayQ8la8jYwjMSj4qN9SnJex1gB6n7MjRdGWrC6P+wbE=
+X-Google-Smtp-Source: AGHT+IGcgvmbyodvcoPpbCUAdgD/v+nV+RfP03rhPaBlbH974jQPsIIB5qDTf/peFKrAMdaa/Dyfew==
+X-Received: by 2002:a05:600c:1c06:b0:43c:fa0e:4713 with SMTP id 5b1f17b1804b1-43d01bd1c94mr73802535e9.2.1741778373413;
+        Wed, 12 Mar 2025 04:19:33 -0700 (PDT)
+Received: from stroh80.lab.9e.network (ip-078-094-000-050.um19.pools.vodafone-ip.de. [78.94.0.50])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3912c0195casm21190414f8f.53.2025.03.12.04.19.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 12 Mar 2025 04:19:32 -0700 (PDT)
+From: Naresh Solanki <naresh.solanki@9elements.com>
+To: openembedded-devel@lists.openembedded.org,
+	linux-kernel@vger.kernel.org
+Cc: "Signed-off-by: Patrick Rudolph" <patrick.rudolph@9elements.com>,
+	Naresh Solanki <naresh.solanki@9elements.com>
+Subject: [meta-oe][PATCH] meta-openembedded: flashrom: Update to v1.4.0
+Date: Wed, 12 Mar 2025 16:49:15 +0530
+Message-ID: <20250312111915.2970032-1-naresh.solanki@9elements.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN9PR11MB5354:EE_|CY5PR11MB6138:EE_
-X-MS-Office365-Filtering-Correlation-Id: f833d43a-89bf-4643-d18e-08dd6159e7ff
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|52116014|376014|366016|1800799024|13003099007|38350700014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?gIMbfbi1JhwQL4NNTU+aDWuEwgYzISf9/tWY09hS8PqpGt16+k4cwgIRRWvT?=
- =?us-ascii?Q?EVci8fQ4CcHhd4PcyPmNpOzaa8keJP4KOylybfygvF3yIVpsjMZCe6T6f6P+?=
- =?us-ascii?Q?exgk8qKYHGj1fXWVWjzdEnoqsKC2mgNaRxAsUt3RtD0pIldMTbUGTNDr/AwP?=
- =?us-ascii?Q?KWupqRAWOP6FZxBrMktpXD/O8oEonc/CILjGTtZvdRUV9s83k6M3+Y292oTZ?=
- =?us-ascii?Q?WsC3+2XPFikLLv6WRXImtszE/QY03KK06FoS7IJlBqphnq9Z+qkhANE+xGvW?=
- =?us-ascii?Q?lbQ7+vMbdLR8wxGTKwB/ux54gD1yS36M647hQihLMSjk9Fs2rLnjHGVVbj4H?=
- =?us-ascii?Q?EDvfPSjoH5VMTymOQR4QTdSH6eHwtCIejnqjSQ4W5f/6QGy3pNDkpN/pIsYv?=
- =?us-ascii?Q?zAOEYV64D/GnJcgixZtO3yY6xm8uqKW4Ucytxn0VX6rrz/CArATJHQ1Ilm4I?=
- =?us-ascii?Q?jUfTRupq3R4IZD50IQ95pLxJtR0sZF1MsNz/sRml9PcNiGbbS4BX+wxO5tZo?=
- =?us-ascii?Q?fwdy46C0ihORr0X+rUaaX7U+5Ig5oElb1h2N3ZNODwb/ZRWdmzhTwbkl4bAI?=
- =?us-ascii?Q?daXaKkksUASe8gkaW5S4hhy/OBxum9eqiBoKNxcAq/0VgWTU6m5AgmNfSt7b?=
- =?us-ascii?Q?zZS0yxTKcnTbKiV+prsfueqCdSISTYYtWh+kQ2jz2eYoqQGbDQSoBhfOvUNf?=
- =?us-ascii?Q?K8dxxfJrhGb4iPBqqm6q+S1yQLXTkaZ+C4kh8Frvn4bMtGtUJi+Q0FRjBsWV?=
- =?us-ascii?Q?oOj8jIUoo1ZTcfu55zhVv1G8tju3eXfQr6N3B52LejKUVk570EPA4IP7yQAx?=
- =?us-ascii?Q?CrhwD0uoOaIK0lhTBMUUmWGjpvKt/dsAB15Q5XCYvvTXG4xm5kDnHwyY94Xx?=
- =?us-ascii?Q?wbIsYeAx8LzdxVQQ1Xvk/hyztZAH1l1W+ut9+vgiji11dq/aP0Uv/vtPuy0z?=
- =?us-ascii?Q?w68gE25R2lG2VJG4ytAiV92Z3iPfvbs/h+GSNo72UVaQQIcQLTP1vHqm5CXP?=
- =?us-ascii?Q?0VArHakxtrqRXUHE4MvQSprxvC8BebCyU0tx8YJLtUvedp5ybII58Acfz5AW?=
- =?us-ascii?Q?pFM9VemZHc+jX9pZnxnN2uycaHFfszFFbP0RFMNUzfaLy6/gvixipkw0yOg/?=
- =?us-ascii?Q?Sm8+yzZganAwWmrrEa4JWu5hamEOyZ5eASuKcfMRgVghuK+F/ovpKcMU1KOt?=
- =?us-ascii?Q?dGMeUTWZEXhHJt0DValEwIYw/KnZW68+T1s/ixI15lXVdnvsRPDyZyhvOwjR?=
- =?us-ascii?Q?1bIcLkcMqsTZf4dYmBQdZEojCl7HCKLCyI+fFx0hvy+447Msw8PkvVf7j3hn?=
- =?us-ascii?Q?ZrxZYfpp/xpt4ytWnZ0EAM6Hj+EDUWhXg3ijeGDkw8FVUovFUf1ZjTM1Jqnz?=
- =?us-ascii?Q?xrX32sy9KDCDiRRLu+3ANWR3ZJgGQQ90pqZnYEZnvIoU0piIOA=3D=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN9PR11MB5354.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(52116014)(376014)(366016)(1800799024)(13003099007)(38350700014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?owbZwSY2iUzQREc01NMLG7iyshY3oDiwu9qRsX5gHG5EaKQUx8Kkn8SlQ16L?=
- =?us-ascii?Q?Bv0g75s1dNh8YteZE0pM1XEcrgNC2c6p+R0dCQ7SyISSWZgFczZIvLcn2G0z?=
- =?us-ascii?Q?ewbI1bJBPi81OwH6U5CCn6TQbTp6D5oUlOhU1Fs3qdakbEOjGm+IzH9F+FDx?=
- =?us-ascii?Q?FmnD/BCT/1O9ov3z3/+3d0T8per74INYT9Tk74GR067QeKw+BD8MM3gVh5s2?=
- =?us-ascii?Q?roGOOoUxI2tc2kpKQuhqWawIKnMb8xX7+IUjByqUqOTSndr84yo+hpB1kDMd?=
- =?us-ascii?Q?VNiS0XahQmVliah/9PjMEWlvh7gccd8VW4J30+8dfYnuyAkpiYiBLPQ+isTl?=
- =?us-ascii?Q?xsVYHVAIiyTNqDiKhvB2KFYbS/os8Z6d48JEhoOTYuYgQA/RNk3XHDgkEKKW?=
- =?us-ascii?Q?5jn/aK61isdv+CUMikNED8Ix4U1gnNIH3BG3YUVTaRDe4nKP3WN1y2OFhtDP?=
- =?us-ascii?Q?zO+FDv0ocxXnGzjwW04Sbi6fl3aTbWycsMB8JHobzQdd0HCtSbK7ok+16+Dw?=
- =?us-ascii?Q?HNfWM1gefcqBGWHmZOJ2G69wZ3AJPBkadpZjHpxTpiOYlnvmPvMSP2JbYPlJ?=
- =?us-ascii?Q?Q6fNU/nTMYO848fwDchk3tb/mbhkKo9kR1T0RnoqpGQNHagg6m5pu15+cxh7?=
- =?us-ascii?Q?G0sb+cOJ1LRBqL271sXIh01pgVVuI+9hOGR/jAJeJBHsKS0GhhVdpBxE79l2?=
- =?us-ascii?Q?J+g3/oe8VhHbCoiM1riTuyCDs+aB5Djmz4rVwo5PYz1/2M9s3TeCvegFUsfp?=
- =?us-ascii?Q?BhEwYGzjKACPmfDEDsIKjizSPNqdau0IwH/C/wtp9TyKre7UTrs97gxO7ujO?=
- =?us-ascii?Q?vM3UL12RnjAMzy2nwmNK6WP42Cc0FsIIatG0QDtQ9kivOUixsHFXIaSSCe3/?=
- =?us-ascii?Q?yPHxSX/pXA5TP1ZpnU39wpYtcIxiRt22sYwkL2EsRfPX9FEZsDfdsu1n+wUO?=
- =?us-ascii?Q?4GceThXo7s8CFRCBkw8MdtEsuCMahoSAski20eY+32yPh5hVFqUvVj10C4ko?=
- =?us-ascii?Q?UwHDLdtaKiGqNtG2aDSWn/rHoxYI65r/aZdzu6DnkwDvGELUgZIH+ee9v765?=
- =?us-ascii?Q?FvoEnmzmHD+opHrw6erCot17Chz/J8GUjtSsjt3KeWMpHpZGQHOdseGyR3rW?=
- =?us-ascii?Q?3r8fpiKeQ+TcAwa/RBXjQNMyPcPQUoDZQnfhjrcVBpNpda0/lgH24yd3KYdY?=
- =?us-ascii?Q?cd09pEZarRDS3QyZpMoCd84A0CSJlnJz47ts3S+GHsuRpV57a5bH+F5VXNOm?=
- =?us-ascii?Q?Jq5P3lF4DSlO4mGkWvARbOYTG7vbUQeBCSMd7Ktdz4GB7sB97UEDMh3XFL8a?=
- =?us-ascii?Q?hMdsQUTRziHENveaLiPAbTKNDWZ4ezDGmnxBUpbrPQjtWVJKhYbMpt8MoKes?=
- =?us-ascii?Q?OqW334MlpU5UK9dw0hGeZ3Y3wUTdVnOJNgSpx6D9cuipPHtRgcWzlSbFqAJq?=
- =?us-ascii?Q?r1CU1+r2Yrd0yk8Pn9pjlpCSo8dAQZv5gzTII0crc36YNLdXLSnq5J9WXQi8?=
- =?us-ascii?Q?sYXZiKD60X9NzvqU2se19yxXs99Uvby47xLFjrCDedJI3sGISav8pfIQ5d8I?=
- =?us-ascii?Q?TLpOQuZeauPPWCeVPVnpqrdAR9emRCTVVMR1ebNNdRm0OIawwul1oukvKeoK?=
- =?us-ascii?Q?/A=3D=3D?=
-X-OriginatorOrg: eng.windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f833d43a-89bf-4643-d18e-08dd6159e7ff
-X-MS-Exchange-CrossTenant-AuthSource: BN9PR11MB5354.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2025 11:34:53.0307
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Hu8+jb4Ye791cVgXgp6NOOc4V+sJ3RPk8IRnpuA+yKP4OnhWxlG+yg2C2cwJ+MEQcg5UAy9TvI+JW7ZMrG/l02+kY35g7wD5Xr+4bHJWO7c=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR11MB6138
-X-Authority-Analysis: v=2.4 cv=Cc0I5Krl c=1 sm=1 tr=0 ts=67d1715f cx=c_pps a=NZTPE88KBhpz0z3fOSYQ1w==:117 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=Vs1iUdzkB0EA:10
- a=H5OGdu5hBBwA:10 a=VwQbUJbxAAAA:8 a=t7CeM3EgAAAA:8 a=KKAkSRfTAAAA:8 a=pGLkceISAAAA:8 a=8-fp0lg8t2R_pjxA5IUA:9 a=FdTzh2GWekK77mhwV6Dw:22 a=cvBusfyB2V15izCimMoJ:22 a=Omh45SbU8xzqK50xPoZQ:22
-X-Proofpoint-ORIG-GUID: -KkP6OWkegBtzL_uuAELDSlMobuLELSt
-X-Proofpoint-GUID: -KkP6OWkegBtzL_uuAELDSlMobuLELSt
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-03-12_04,2025-03-11_02,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- phishscore=0 lowpriorityscore=0 malwarescore=0 suspectscore=0
- clxscore=1015 impostorscore=0 spamscore=0 bulkscore=0 mlxscore=0
- mlxlogscore=999 adultscore=0 classifier=spam authscore=0 authtc=n/a
- authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.21.0-2502280000 definitions=main-2503120080
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 13:52:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115923
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115922
 
-From: Libo Chen <libo.chen.cn@windriver.com>
+From: "Signed-off-by: Patrick Rudolph" <patrick.rudolph@9elements.com>
 
-Patch from:
-https://web.git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/commit/?id=3e224d885b1de54fe5510b9c5e7296260a1a4507
+Flashrom Release note:
+https://www.flashrom.org/release_notes/v_1_4.html
 
-Signed-off-by: Libo Chen <libo.chen.cn@windriver.com>
+Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+Tested-by: Naresh Solanki <naresh.solanki@9elements.com>
 ---
- ...ts-set-direction-when-reconfiguring-.patch | 38 +++++++++++++++++++
- .../libgpiod/libgpiod_2.1.2.bb                |  2 +
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-tests-set-direction-when-reconfiguring-.patch
+ ...SCV-as-non-memory-mapped-I-O-archite.patch | 54 ++++++---------
+ ...ess-use-__asm__-as-is-done-elsewhere.patch | 52 --------------
+ ...-meson-Add-options-pciutils-ftdi-usb.patch | 48 +++++++++++++
+ .../flashrom/flashrom/meson-fixes.patch       | 68 -------------------
+ .../{flashrom_1.2.1.bb => flashrom_1.4.0.bb}  | 10 +--
+ 5 files changed, 74 insertions(+), 158 deletions(-)
+ delete mode 100644 meta-oe/recipes-bsp/flashrom/flashrom/0001-hwaccess-use-__asm__-as-is-done-elsewhere.patch
+ create mode 100644 meta-oe/recipes-bsp/flashrom/flashrom/0002-meson-Add-options-pciutils-ftdi-usb.patch
+ delete mode 100644 meta-oe/recipes-bsp/flashrom/flashrom/meson-fixes.patch
+ rename meta-oe/recipes-bsp/flashrom/{flashrom_1.2.1.bb => flashrom_1.4.0.bb} (74%)
 
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-tests-set-direction-when-reconfiguring-.patch b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-tests-set-direction-when-reconfiguring-.patch
+diff --git a/meta-oe/recipes-bsp/flashrom/flashrom/0001-flashrom-Mark-RISCV-as-non-memory-mapped-I-O-archite.patch b/meta-oe/recipes-bsp/flashrom/flashrom/0001-flashrom-Mark-RISCV-as-non-memory-mapped-I-O-archite.patch
+index e481c5a161..58f1aa4d43 100644
+--- a/meta-oe/recipes-bsp/flashrom/flashrom/0001-flashrom-Mark-RISCV-as-non-memory-mapped-I-O-archite.patch
++++ b/meta-oe/recipes-bsp/flashrom/flashrom/0001-flashrom-Mark-RISCV-as-non-memory-mapped-I-O-archite.patch
+@@ -1,44 +1,30 @@
+-From 2c777126765b4095bf481d5cfe4a21470374d940 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 30 Mar 2021 15:12:09 -0700
+-Subject: [PATCH] flashrom: Mark RISCV as non memory-mapped I/O architecture
++From bf5a30ef30818973eb2cfac792b80c642df8a721 Mon Sep 17 00:00:00 2001
++From: Patrick Rudolph <patrick.rudolph@9elements.com>
++Date: Mon, 14 Oct 2024 11:01:37 +0200
++Subject: [PATCH 1/2] flashrom: Mark RISCV as non memory-mapped I/O
++ architecture
+ 
+-Upstream-Status: Submitted [https://review.coreboot.org/c/flashrom/+/51960]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-Change-Id: I55c4e8529d36f0850dd56441c3fb8602c5d889fd
++Upstream-Status: Inactive-Upstream
++
++Change-Id: I46d7ede7af61e7fca631e1d465100e65c6ddeee9
++Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+ ---
+- Makefile   | 2 +-
+- hwaccess.h | 4 ++++
+- 2 files changed, 5 insertions(+), 1 deletion(-)
++ Makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/Makefile b/Makefile
+-index 6d37d55..203e04b 100644
++index 97f56b83..08e4c595 100644
+ --- a/Makefile
+ +++ b/Makefile
+-@@ -559,7 +559,7 @@ endif
+- # Disable all drivers needing raw access (memory, PCI, port I/O) on
+- # architectures with unknown raw access properties.
++@@ -372,7 +372,7 @@ endif
++ # Additionally disable all drivers needing raw access (memory, PCI, port I/O)
++ # on architectures with unknown raw access properties.
+  # Right now those architectures are alpha hppa m68k sh s390
+--ifneq ($(ARCH),$(filter $(ARCH),x86 mips ppc arm sparc arc))
+-+ifneq ($(ARCH),$(filter $(ARCH),x86 mips ppc arm sparc arc riscv))
+- ifeq ($(CONFIG_RAYER_SPI), yes)
+- UNSUPPORTED_FEATURES += CONFIG_RAYER_SPI=yes
+- else
+-diff --git a/hwaccess.h b/hwaccess.h
+-index 5602c15..e79988a 100644
+---- a/hwaccess.h
+-+++ b/hwaccess.h
+-@@ -295,6 +295,10 @@ int libpayload_wrmsr(int addr, msr_t msr);
+- 
+- /* Non memory mapped I/O is not supported on ARC. */
+- 
+-+#elif IS_RISCV
+-+
+-+/* Non memory mapped I/O is not supported on RISCV. */
+-+
+- #else
++-ifneq ($(ARCH), $(filter $(ARCH), x86 mips ppc arm sparc arc e2k))
+++ifneq ($(ARCH), $(filter $(ARCH), x86 mips ppc arm sparc arc e2k riscv))
++ $(call mark_unsupported,$(DEPENDS_ON_RAW_MEM_ACCESS))
++ endif
+  
+- #error Unknown architecture, please check if it supports PCI port IO.
+ -- 
+-2.31.1
++2.46.2
+ 
+diff --git a/meta-oe/recipes-bsp/flashrom/flashrom/0001-hwaccess-use-__asm__-as-is-done-elsewhere.patch b/meta-oe/recipes-bsp/flashrom/flashrom/0001-hwaccess-use-__asm__-as-is-done-elsewhere.patch
+deleted file mode 100644
+index f3316aa264..0000000000
+--- a/meta-oe/recipes-bsp/flashrom/flashrom/0001-hwaccess-use-__asm__-as-is-done-elsewhere.patch
++++ /dev/null
+@@ -1,52 +0,0 @@
+-From 3334dd4e9fc34c79c3925c3c24869939d8955f21 Mon Sep 17 00:00:00 2001
+-From: Rosen Penev <rosenp@gmail.com>
+-Date: Sat, 18 Jul 2020 12:16:00 -0700
+-Subject: [PATCH] hwaccess: use __asm__ as is done elsewhere
+-
+-Fixes compilation under powerpc platform. Made the change for the SPARC
+-platform as well.
+-
+-../hwaccess.c: In function 'sync_primitive':
+-../hwaccess.c:74:2: warning: implicit declaration of function 'asm'
+- [-Wimplicit-function-declaration]
+-   74 |  asm("eieio" : : : "memory");
+-      |  ^~~
+-../hwaccess.c:74:13: error: expected ')' before ':' token
+-   74 |  asm("eieio" : : : "memory");
+-
+-Upstream-Status: Submitted [https://github.com/flashrom/flashrom/pull/155]
+-Signed-off-by: Rosen Penev <rosenp@gmail.com>
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- hwaccess.c | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/hwaccess.c b/hwaccess.c
+-index 48ccb34..2a39989 100644
+---- a/hwaccess.c
+-+++ b/hwaccess.c
+-@@ -71,18 +71,18 @@ static inline void sync_primitive(void)
+-  * See also https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/memory-barriers.txt
+-  */
+- #if IS_PPC // cf. http://lxr.free-electrons.com/source/arch/powerpc/include/asm/barrier.h
+--	asm("eieio" : : : "memory");
+-+	__asm__ ("eieio" : : : "memory");
+- #elif IS_SPARC
+- #if defined(__sparc_v9__) || defined(__sparcv9)
+- 	/* Sparc V9 CPUs support three different memory orderings that range from x86-like TSO to PowerPC-like
+- 	 * RMO. The modes can be switched at runtime thus to make sure we maintain the right order of access we
+- 	 * use the strongest hardware memory barriers that exist on Sparc V9. */
+--	asm volatile ("membar #Sync" ::: "memory");
+-+	__asm__ volatile ("membar #Sync" ::: "memory");
+- #elif defined(__sparc_v8__) || defined(__sparcv8)
+- 	/* On SPARC V8 there is no RMO just PSO and that does not apply to I/O accesses... but if V8 code is run
+- 	 * on V9 CPUs it might apply... or not... we issue a write barrier anyway. That's the most suitable
+- 	 * operation in the V8 instruction set anyway. If you know better then please tell us. */
+--	asm volatile ("stbar");
+-+	__asm__ volatile ("stbar");
+- #else
+- 	#error Unknown and/or unsupported SPARC instruction set version detected.
+- #endif
+--- 
+-2.32.0
+-
+diff --git a/meta-oe/recipes-bsp/flashrom/flashrom/0002-meson-Add-options-pciutils-ftdi-usb.patch b/meta-oe/recipes-bsp/flashrom/flashrom/0002-meson-Add-options-pciutils-ftdi-usb.patch
 new file mode 100644
-index 0000000000..f8b94f0b99
+index 0000000000..bc43f17e9a
 --- /dev/null
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-tests-set-direction-when-reconfiguring-.patch
-@@ -0,0 +1,38 @@
-+From 8c7126b7b5dee0ed5433cf9265ccc79095d53939 Mon Sep 17 00:00:00 2001
-+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-+Date: Mon, 8 Jul 2024 11:48:27 +0200
-+Subject: [PATCH] bindings: cxx: tests: set direction when reconfiguring lines
++++ b/meta-oe/recipes-bsp/flashrom/flashrom/0002-meson-Add-options-pciutils-ftdi-usb.patch
+@@ -0,0 +1,48 @@
++From 3ea99c117aa4c7a3502c93e4e4df50b3623e46c3 Mon Sep 17 00:00:00 2001
++From: Patrick Rudolph <patrick.rudolph@9elements.com>
++Date: Tue, 15 Oct 2024 10:42:05 +0200
++Subject: [PATCH 2/2] meson: Add options pciutils, ftdi, usb
 +
-+Linux kernel commit b44039638741 ("gpiolib: cdev: Ignore reconfiguration
-+without direction") made the direction setting mandatory for line config
-+passed to the kernel when reconfiguring requested lines. Fix the C++ test
-+case which doesn't do it and now fails due to the rest of the settings
-+being ignored.
++The options have been dropped in favor of an array option called programmer.
++Since this doesn't integrate well into yocto add back the old options.
 +
-+Reviewed-by: Kent Gibson <warthog618@gmail.com>
-+Link: https://lore.kernel.org/r/20240708094827.84986-1-brgl@bgdev.pl
-+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
++Upstream-Status: Inappropriate Just to fix yocto build system
 +
-+Upstream-Status: Backport
-+[https://web.git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/commit/?id=3e224d885b1de54fe5510b9c5e7296260a1a4507]
-+
-+Signed-off-by: Libo Chen <libo.chen.cn@windriver.com>
++Change-Id: Ib697b9f7cc7fc553cfdeb75ae9d49a367badd286
++Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 +---
-+ bindings/cxx/tests/tests-line-request.cpp | 1 +
-+ 1 file changed, 1 insertion(+)
++ meson.build       | 6 +++---
++ meson_options.txt | 3 +++
++ 2 files changed, 6 insertions(+), 3 deletions(-)
 +
-+diff --git a/bindings/cxx/tests/tests-line-request.cpp b/bindings/cxx/tests/tests-line-request.cpp
-+index 9632ae0..6e29532 100644
-+--- a/bindings/cxx/tests/tests-line-request.cpp
-++++ b/bindings/cxx/tests/tests-line-request.cpp
-+@@ -208,6 +208,7 @@ TEST_CASE("values can be read", "[line-request]")
-+ 				.add_line_settings(
-+ 					offs,
-+ 					::gpiod::line_settings()
-++						.set_direction(direction::INPUT)
-+ 						.set_active_low(true))
-+ 		);
++diff --git a/meson.build b/meson.build
++index ae56b26c..21093a7f 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -151,9 +151,9 @@ systems_serial     = [ 'linux', 'openbsd', 'freebsd', 'dragonfly', 'netbsd', 'da
 + 
++ cpus_port_io = [ 'x86', 'x86_64' ]
++ 
++-group_ftdi   = get_option('programmer').contains('group_ftdi')
++-group_pci    = get_option('programmer').contains('group_pci')
++-group_usb    = get_option('programmer').contains('group_usb')
+++group_ftdi   = get_option('programmer').contains('group_ftdi') or get_option('ftdi')
+++group_pci    = get_option('programmer').contains('group_pci') or get_option('pciutils')
+++group_usb    = get_option('programmer').contains('group_usb') or get_option('usb')
++ group_i2c    = get_option('programmer').contains('group_i2c')
++ group_serial = get_option('programmer').contains('group_serial')
++ group_jlink  = get_option('programmer').contains('group_jlink')
++diff --git a/meson_options.txt b/meson_options.txt
++index 8a04114d..ae722509 100644
++--- a/meson_options.txt
+++++ b/meson_options.txt
++@@ -25,3 +25,6 @@ option('ni845x_search_path', type : 'string', value : 'C:\Program Files (x86)\Na
++ option('delay_minimum_sleep_us', type : 'integer', min : 0, value : 100000,
++        description : 'Minimum time in microseconds to suspend execution for (rather than polling) when a delay is required.'
++                    + ' Larger values may perform better on machines with low timer resolution, at the cost of increased power.')
+++option('pciutils', type : 'boolean', value : false, description : 'Select programmer group pci')
+++option('usb', type : 'boolean', value : false, description : 'Select programmer group usb')
+++option('ftdi', type : 'boolean', value : false, description : 'Select programmer group ftdi')
 +-- 
-+2.44.1
++2.46.2
 +
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.1.2.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.1.2.bb
-index 6e4fbd2a3b..edbde0f7a7 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_2.1.2.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.1.2.bb
-@@ -7,6 +7,8 @@ LIC_FILES_CHKSUM = " \
-     file://LICENSES/CC-BY-SA-4.0.txt;md5=fba3b94d88bfb9b81369b869a1e9a20f \
- "
+diff --git a/meta-oe/recipes-bsp/flashrom/flashrom/meson-fixes.patch b/meta-oe/recipes-bsp/flashrom/flashrom/meson-fixes.patch
+deleted file mode 100644
+index e45236ee07..0000000000
+--- a/meta-oe/recipes-bsp/flashrom/flashrom/meson-fixes.patch
++++ /dev/null
+@@ -1,68 +0,0 @@
+-Add a ftdi option alongside USB and PCI to control the external dependency, and
+-ensure that the build is successful in all combinations of options.
+-
+-Upstream-Status: Pending
+-Signed-off-by: Ross Burton <ross.burton@arm.com>
+-
+-diff --git a/meson.build b/meson.build
+-index 375089c..0df9d69 100644
+---- a/meson.build
+-+++ b/meson.build
+-@@ -91,6 +91,8 @@ else
+-   config_digilent_spi = false
+-   config_developerbox_spi = false
+-   config_pickit2_spi = false
+-+  config_stlinkv3_spi = false
+-+  config_usbblaster_spi = false
+- endif
+- 
+- # some programmers require libpci
+-@@ -118,6 +120,21 @@ else
+-   config_satasii = false
+- endif
+- 
+-+# some programmers require libftdi
+-+if get_option('ftdi')
+-+  deps += dependency('libftdi1')
+-+else
+-+  config_ft2232_spi = false
+-+  config_usbblaster_spi = false
+-+endif
+-+
+-+if not (target_machine.cpu_family() == 'x86' or target_machine.cpu_family() == 'x86_64')
+-+  config_satamv = false
+-+  config_nic3com = false
+-+  config_rayer_spi = false
+-+  config_nicrealtek = false
+-+endif
+-+
+- # set defines for configured programmers
+- if config_atahpt
+-   srcs += 'atahpt.c'
+-@@ -163,7 +180,6 @@ endif
+- if config_ft2232_spi
+-   srcs += 'ft2232_spi.c'
+-   cargs += '-DCONFIG_FT2232_SPI=1'
+--  deps += dependency('libftdi1')
+-   cargs += '-DHAVE_FT232H=1'
+- endif
+- if config_gfxnvidia
+-@@ -216,6 +232,7 @@ endif
+- if config_nicintel
+-   srcs += 'nicintel.c'
+-   cargs += '-DCONFIG_NICINTEL=1'
+-+  need_raw_access = true
+- endif
+- if config_nicintel_eeprom
+-   srcs += 'nicintel_eeprom.c'
+-diff --git a/meson_options.txt b/meson_options.txt
+-index ea87311..b6b842d 100644
+---- a/meson_options.txt
+-+++ b/meson_options.txt
+-@@ -1,5 +1,6 @@
+- option('pciutils', type : 'boolean', value : true, description : 'use pciutils')
+- option('usb', type : 'boolean', value : true, description : 'use libusb1')
+-+option('ftdi', type : 'boolean', value : true, description : 'use libftdi')
+- 
+- option('config_atahpt', type : 'boolean', value : false, description : 'Highpoint (HPT) ATA/RAID controllers')
+- option('config_atapromise', type : 'boolean', value : false, description : 'Promise ATA controller')
+diff --git a/meta-oe/recipes-bsp/flashrom/flashrom_1.2.1.bb b/meta-oe/recipes-bsp/flashrom/flashrom_1.4.0.bb
+similarity index 74%
+rename from meta-oe/recipes-bsp/flashrom/flashrom_1.2.1.bb
+rename to meta-oe/recipes-bsp/flashrom/flashrom_1.4.0.bb
+index b2592d294b..b650e15872 100644
+--- a/meta-oe/recipes-bsp/flashrom/flashrom_1.2.1.bb
++++ b/meta-oe/recipes-bsp/flashrom/flashrom_1.4.0.bb
+@@ -3,12 +3,12 @@ LICENSE = "GPL-2.0-or-later"
+ HOMEPAGE = "http://flashrom.org"
  
-+SRC_URI += "file://0001-bindings-cxx-tests-set-direction-when-reconfiguring-.patch"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+-SRC_URI = "https://download.flashrom.org/releases/flashrom-v${PV}.tar.bz2 \
+-           file://meson-fixes.patch \
++SRC_URI = "https://download.flashrom.org/releases/flashrom-v${PV}.tar.xz \
+            file://0001-flashrom-Mark-RISCV-as-non-memory-mapped-I-O-archite.patch \
+-           file://0001-hwaccess-use-__asm__-as-is-done-elsewhere.patch \
++           file://0002-meson-Add-options-pciutils-ftdi-usb.patch \
+            "
+-SRC_URI[sha256sum] = "89a7ff5beb08c89b8795bbd253a51b9453547a864c31793302296b56bbc56d65"
 +
- FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-2.x:"
++SRC_URI[sha256sum] = "eb0eb3e61a57fd1926c66f08664cf04a96f92cee23b600cf563087c2178d70d8"
  
- SRC_URI[sha256sum] = "7a148a5a7d1c97a1abb40474b9a392b6edd7a42fe077dfd7ff42cfba24308548"
+ S = "${WORKDIR}/flashrom-v${PV}"
+ 
+@@ -18,3 +18,5 @@ PACKAGECONFIG ??= "pci usb ftdi"
+ PACKAGECONFIG[pci] = "-Dpciutils=true,-Dpciutils=false,pciutils"
+ PACKAGECONFIG[usb] = "-Dusb=true,-Dusb=false,libusb"
+ PACKAGECONFIG[ftdi] = "-Dftdi=true,-Dftdi=false,libftdi"
++
++EXTRA_OEMESON="-Dbash_completion=disabled -Dtests=disabled"
 -- 
-2.34.1
+2.42.0
 
 
