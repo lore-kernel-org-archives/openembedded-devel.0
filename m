@@ -1,379 +1,302 @@
-Return-Path: <philip@balister.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E375C2BA1B
-	for <webhook@archiver.kernel.org>; Wed, 12 Mar 2025 17:07:56 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web10.807.1741796766215042527
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51B96C28B28
+	for <webhook@archiver.kernel.org>; Wed, 12 Mar 2025 17:15:16 +0000 (UTC)
+Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com [209.85.210.46])
+ by mx.groups.io with SMTP id smtpd.web10.582.1741799707782219544
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Mar 2025 09:26:06 -0700
+ Wed, 12 Mar 2025 10:15:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@9elements.com header.s=google header.b=MZX1zrw+;
- spf=pass (domain: 9elements.com, ip: 209.85.128.49, mailfrom: naresh.solanki@9elements.com)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-43cf680d351so7298355e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 09:26:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Jps3DeEa;
+ spf=pass (domain: gmail.com, ip: 209.85.210.46, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f46.google.com with SMTP id 46e09a7af769-7272f3477e9so16346a34.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 10:15:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=9elements.com; s=google; t=1741796764; x=1742401564; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=4gXcPZeObi6yJciefRIfYmMTBvloyXiUV7+3fAfw3Vc=;
-        b=MZX1zrw+0TkCkeYldiZLjfOrZX39cQe0b47QT+65f2Iwgx7hcyKbGl4jF48g7XcgAj
-         pNxfcDOFvbRW45nb7Otq7AK2t/4i3SzNgV7mklVD9RfsRv66eijCbIT72MoMCDdcv6C4
-         st5ReKZmOCewKREsjdPaWyfkQc47cS8tpoU9ECvwnjDhoUk0E6uxDZpiMi4oaaRyY4dg
-         f0/54xlVm+CLhu2IUY8svGmT6M3Pb1V+IRo6x0A5USqcq0zSviPmzGhhCjSxGezH8iNc
-         67OIX5RMj1h9E2lwUs/aEG2rOQIyuxSKeZNjmtR7avgVT89jFNhyQUdTYd0yAJLoo47F
-         jHDA==
+        d=gmail.com; s=20230601; t=1741799707; x=1742404507; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=phPxC3xSS3s6cqscyw8uBqIAMB4CmUpDAilSp9Cs330=;
+        b=Jps3DeEaqa8+MFFxFmQdwszbeb6MxogPQvnBWUbg3WtBLMd5Spol+kuMFxnZ7C5cGC
+         rTNl9tjOmZo5hvXGJgdOj/uk8o9HiB0All6F+qwfBGi7atxrfCuRPaPOylQXEjfZ7XgI
+         ldbc95p2PARPyb88yEtLobWkKNqmRiB/nkf6r5jQbNiIzShCpJTj5gkbQ1xJbkpMOZPk
+         mBZSnQOffTrQJtfwU9C7/JX+W5MSmA6uqG4jf3XXRjez3Nz+4G4Ud6uMoRoASP1g8cRB
+         Yz5qXR8HSeD4e8Eq+sf37Yv2m+jLWZmziv54GMrtVl8G6pVQTdNqniCOaCi5dAd8Sc7h
+         Pc+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741796764; x=1742401564;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=4gXcPZeObi6yJciefRIfYmMTBvloyXiUV7+3fAfw3Vc=;
-        b=uTr6tGjR3W3O8+YhPL1zHURp6fDNCOGTnfhognxKBq4YxUQBp1mr0ChfEqccSHMPOT
-         xN1e2K4mqO4Poi5EpA9ggN4rFAPTy9V+1qm6v/9sTQ7SWeMOFo4ZiuInXT7uNAAo5Pi5
-         hthTN7pIXHvhTolVdswihlVNpXijBwdN/nheyLPG+iYBLs6wILi3aj+CbkfAeqaJ47aH
-         dd9fZ1EabBrSb3msZVFqaY+DNPkpXT9szWQpNV79U0enI33aK4FdBYei2JqzTM+a4Sdu
-         FmLAKZMny0uDuRPhc6pcrtd2dlYruAjsp1FW9LMXccQfEEqb/Aydb3G5sn+BHQE8Grcc
-         novQ==
-X-Gm-Message-State: AOJu0YyAGlcYm7SOvAaQhBTPy9ZIxq4xyVkqG+wadCkpMQ98Own139XC
-	lW9nCnvNjPOjnNJqQzPowB7puGMtsbcRcyN1ze4kXTf9eN2M2ocaxW97z5lIdwQZOe0tXGcVFmM
-	RtVQ=
-X-Gm-Gg: ASbGncs1WnD1LPpmoOQ5V2Qn+1ZZXRvIw7REUSMGIg+E7sW9mgNOU7LE8/9UqgY0kuM
-	iV17b0i4wwUhcF72xJ62llolgchxpJqYsWIHpxP8ruEywtBR9W0MG9GT4DWqCqFLYGoDX3UNQ1c
-	t6ykDDVvGvJ8TbXT6AxyKFpWKV1PYIcB2mcggFMalS4wM8dh1VTYnxdrMRZJWzdbGGv3waNUi6H
-	wrIAqOkWND2xe1PnCsGloT756OcIhokvcfuGR7ah+KGYmprnd3RAhHQ4g0iu/v4kSZrzVfFMxCy
-	QLsEBJshzBZ6I/if1iZLC5qLC1NeVp7RbKft57wIQHFx1RHg73OuPpnB2KnDOB7JKC/YvtzCwe+
-	VIrt/wF+VOWKbX4Pjs03H7TOGTqFp+UqFkjbgb7h6uE3ALl9wTLk=
-X-Google-Smtp-Source: AGHT+IHvYoVz9zAIRqFJIYNnzOyZa5TsOXIZd8XIocFqIh/lVGBn7UsxPOBoiuMGZAUDmKWT+SGlnw==
-X-Received: by 2002:a05:6000:1449:b0:391:2a79:a110 with SMTP id ffacd0b85a97d-3956e1f6b4fmr174000f8f.29.1741796763780;
-        Wed, 12 Mar 2025 09:26:03 -0700 (PDT)
-Received: from stroh80.lab.9e.network (ip-078-094-000-050.um19.pools.vodafone-ip.de. [78.94.0.50])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3912c0e2f10sm21672019f8f.65.2025.03.12.09.26.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Mar 2025 09:26:03 -0700 (PDT)
-From: Naresh Solanki <naresh.solanki@9elements.com>
-To: openembedded-devel@lists.openembedded.org,
-	linux-kernel@vger.kernel.org
-Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
-	Naresh Solanki <naresh.solanki@9elements.com>
-Subject: [meta-oe][PATCH v2] meta-openembedded: flashrom: Update to v1.4.0
-Date: Wed, 12 Mar 2025 21:55:05 +0530
-Message-ID: <20250312162505.3021308-1-naresh.solanki@9elements.com>
-X-Mailer: git-send-email 2.42.0
+        d=1e100.net; s=20230601; t=1741799707; x=1742404507;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=phPxC3xSS3s6cqscyw8uBqIAMB4CmUpDAilSp9Cs330=;
+        b=sfbg4Z2c6nvZdgfFUZ7xj++6TJN8rcNvxIBv9xsrd/nj7rtPHdfzy0YXIew+KYcQzx
+         W2/w+Fie7tTlwBydsD+KmQC7o1zRElyCCChRlcGQLSui3dImrOBjzuwqp99BLDN5TXCc
+         PicDgSkRclhaWSQFO3dmW7loHvYtvG7d16P5iqDn09RGMjrtY0AJrKoVV2ONBSIPB8hl
+         Hr1a9CcSryYRBoJ0JvYhml1VJDjPcuZIqLzFSnqb6oSv/T03qETNtYCw7yz0wOaGy4di
+         JumSisyMikDG7VF/w/xBay7lxTA/cVKVYOpmSp+2lEoY5sqtg84q8gcZxy1x+QJhj6/2
+         fBmA==
+X-Gm-Message-State: AOJu0YykdiP268YSl55p3cnxodSszHxhjOPetUsNvJDZaGhFoskbum/g
+	YL9RRZL15Q867pvGxV2hrKIQSl7lGyHZJK3mxyKL8QFbr03cf564/jqlUDAO94GZ3GEs0x4ONJS
+	YVblX8LMRt4RwH1B5r3MSaa7beQA=
+X-Gm-Gg: ASbGnctEw9TyqyuICQ3l+LYu5XXTXfKf3RnOWGs5XShuztgALLOWOlmznYHOamkg6UB
+	j1gRzGClzDYyoJM+8o3Ds8n4xHTdPWatKqadT/rP75SXGczqyHH/8gzOhwjgEHEr0LErIp9tKj3
+	Yvt6BC5zIus4YAb0fSjwdNkPUHjA==
+X-Google-Smtp-Source: AGHT+IHo5rC6IJw0hICR8Y5BelFcdM+psEnfjUZfCVOoEAbd7j/Q7bBS49JQecOoemQaXmxlvBIy70iQ7oPEhcWpvPk=
+X-Received: by 2002:a05:6808:118e:b0:3fa:25c8:a037 with SMTP id
+ 5614622812f47-3fa25c8aae2mr4612029b6e.29.1741799706794; Wed, 12 Mar 2025
+ 10:15:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250311084128.2366058-1-hongxu.jia@windriver.com> <CAMKF1srsD=LQz0XT_awW74PN-pyf9ZgbgV2V1=Z+xemkdpNtcg@mail.gmail.com>
+In-Reply-To: <CAMKF1srsD=LQz0XT_awW74PN-pyf9ZgbgV2V1=Z+xemkdpNtcg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 12 Mar 2025 10:14:40 -0700
+X-Gm-Features: AQ5f1Jpx8_gUz5sqjj-Tukr8vGUHvrLwxX50cEFRMCdEd16-aHiZqix9GtdGgvw
+Message-ID: <CAMKF1so2Zi6xorwFRrVTbjnBBbKifH72tT-JRfX-PNY1V-TCHg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v2] protobuf: 4.25.5 -> 4.30.0
+To: hongxu.jia@eng.windriver.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 17:07:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115935
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Mar 2025 17:15:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115937
 
-From: Patrick Rudolph <patrick.rudolph@9elements.com>
+ptest build fails see -
+https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/448/step=
+s/14/logs/stdio
 
-Flashrom Release note:
-https://www.flashrom.org/release_notes/v_1_4.html
-
-Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-Tested-by: Naresh Solanki <naresh.solanki@9elements.com>
----
- ...SCV-as-non-memory-mapped-I-O-archite.patch | 54 ++++++---------
- ...ess-use-__asm__-as-is-done-elsewhere.patch | 52 --------------
- ...-meson-Add-options-pciutils-ftdi-usb.patch | 48 +++++++++++++
- .../flashrom/flashrom/meson-fixes.patch       | 68 -------------------
- .../{flashrom_1.2.1.bb => flashrom_1.4.0.bb}  | 10 +--
- 5 files changed, 74 insertions(+), 158 deletions(-)
- delete mode 100644 meta-oe/recipes-bsp/flashrom/flashrom/0001-hwaccess-use-__asm__-as-is-done-elsewhere.patch
- create mode 100644 meta-oe/recipes-bsp/flashrom/flashrom/0002-meson-Add-options-pciutils-ftdi-usb.patch
- delete mode 100644 meta-oe/recipes-bsp/flashrom/flashrom/meson-fixes.patch
- rename meta-oe/recipes-bsp/flashrom/{flashrom_1.2.1.bb => flashrom_1.4.0.bb} (74%)
-
-diff --git a/meta-oe/recipes-bsp/flashrom/flashrom/0001-flashrom-Mark-RISCV-as-non-memory-mapped-I-O-archite.patch b/meta-oe/recipes-bsp/flashrom/flashrom/0001-flashrom-Mark-RISCV-as-non-memory-mapped-I-O-archite.patch
-index e481c5a161..58f1aa4d43 100644
---- a/meta-oe/recipes-bsp/flashrom/flashrom/0001-flashrom-Mark-RISCV-as-non-memory-mapped-I-O-archite.patch
-+++ b/meta-oe/recipes-bsp/flashrom/flashrom/0001-flashrom-Mark-RISCV-as-non-memory-mapped-I-O-archite.patch
-@@ -1,44 +1,30 @@
--From 2c777126765b4095bf481d5cfe4a21470374d940 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 30 Mar 2021 15:12:09 -0700
--Subject: [PATCH] flashrom: Mark RISCV as non memory-mapped I/O architecture
-+From bf5a30ef30818973eb2cfac792b80c642df8a721 Mon Sep 17 00:00:00 2001
-+From: Patrick Rudolph <patrick.rudolph@9elements.com>
-+Date: Mon, 14 Oct 2024 11:01:37 +0200
-+Subject: [PATCH 1/2] flashrom: Mark RISCV as non memory-mapped I/O
-+ architecture
- 
--Upstream-Status: Submitted [https://review.coreboot.org/c/flashrom/+/51960]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--Change-Id: I55c4e8529d36f0850dd56441c3fb8602c5d889fd
-+Upstream-Status: Inactive-Upstream
-+
-+Change-Id: I46d7ede7af61e7fca631e1d465100e65c6ddeee9
-+Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
- ---
-- Makefile   | 2 +-
-- hwaccess.h | 4 ++++
-- 2 files changed, 5 insertions(+), 1 deletion(-)
-+ Makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/Makefile b/Makefile
--index 6d37d55..203e04b 100644
-+index 97f56b83..08e4c595 100644
- --- a/Makefile
- +++ b/Makefile
--@@ -559,7 +559,7 @@ endif
-- # Disable all drivers needing raw access (memory, PCI, port I/O) on
-- # architectures with unknown raw access properties.
-+@@ -372,7 +372,7 @@ endif
-+ # Additionally disable all drivers needing raw access (memory, PCI, port I/O)
-+ # on architectures with unknown raw access properties.
-  # Right now those architectures are alpha hppa m68k sh s390
---ifneq ($(ARCH),$(filter $(ARCH),x86 mips ppc arm sparc arc))
--+ifneq ($(ARCH),$(filter $(ARCH),x86 mips ppc arm sparc arc riscv))
-- ifeq ($(CONFIG_RAYER_SPI), yes)
-- UNSUPPORTED_FEATURES += CONFIG_RAYER_SPI=yes
-- else
--diff --git a/hwaccess.h b/hwaccess.h
--index 5602c15..e79988a 100644
----- a/hwaccess.h
--+++ b/hwaccess.h
--@@ -295,6 +295,10 @@ int libpayload_wrmsr(int addr, msr_t msr);
-- 
-- /* Non memory mapped I/O is not supported on ARC. */
-- 
--+#elif IS_RISCV
--+
--+/* Non memory mapped I/O is not supported on RISCV. */
--+
-- #else
-+-ifneq ($(ARCH), $(filter $(ARCH), x86 mips ppc arm sparc arc e2k))
-++ifneq ($(ARCH), $(filter $(ARCH), x86 mips ppc arm sparc arc e2k riscv))
-+ $(call mark_unsupported,$(DEPENDS_ON_RAW_MEM_ACCESS))
-+ endif
-  
-- #error Unknown architecture, please check if it supports PCI port IO.
- -- 
--2.31.1
-+2.46.2
- 
-diff --git a/meta-oe/recipes-bsp/flashrom/flashrom/0001-hwaccess-use-__asm__-as-is-done-elsewhere.patch b/meta-oe/recipes-bsp/flashrom/flashrom/0001-hwaccess-use-__asm__-as-is-done-elsewhere.patch
-deleted file mode 100644
-index f3316aa264..0000000000
---- a/meta-oe/recipes-bsp/flashrom/flashrom/0001-hwaccess-use-__asm__-as-is-done-elsewhere.patch
-+++ /dev/null
-@@ -1,52 +0,0 @@
--From 3334dd4e9fc34c79c3925c3c24869939d8955f21 Mon Sep 17 00:00:00 2001
--From: Rosen Penev <rosenp@gmail.com>
--Date: Sat, 18 Jul 2020 12:16:00 -0700
--Subject: [PATCH] hwaccess: use __asm__ as is done elsewhere
--
--Fixes compilation under powerpc platform. Made the change for the SPARC
--platform as well.
--
--../hwaccess.c: In function 'sync_primitive':
--../hwaccess.c:74:2: warning: implicit declaration of function 'asm'
-- [-Wimplicit-function-declaration]
--   74 |  asm("eieio" : : : "memory");
--      |  ^~~
--../hwaccess.c:74:13: error: expected ')' before ':' token
--   74 |  asm("eieio" : : : "memory");
--
--Upstream-Status: Submitted [https://github.com/flashrom/flashrom/pull/155]
--Signed-off-by: Rosen Penev <rosenp@gmail.com>
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- hwaccess.c | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/hwaccess.c b/hwaccess.c
--index 48ccb34..2a39989 100644
----- a/hwaccess.c
--+++ b/hwaccess.c
--@@ -71,18 +71,18 @@ static inline void sync_primitive(void)
--  * See also https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/memory-barriers.txt
--  */
-- #if IS_PPC // cf. http://lxr.free-electrons.com/source/arch/powerpc/include/asm/barrier.h
---	asm("eieio" : : : "memory");
--+	__asm__ ("eieio" : : : "memory");
-- #elif IS_SPARC
-- #if defined(__sparc_v9__) || defined(__sparcv9)
-- 	/* Sparc V9 CPUs support three different memory orderings that range from x86-like TSO to PowerPC-like
-- 	 * RMO. The modes can be switched at runtime thus to make sure we maintain the right order of access we
-- 	 * use the strongest hardware memory barriers that exist on Sparc V9. */
---	asm volatile ("membar #Sync" ::: "memory");
--+	__asm__ volatile ("membar #Sync" ::: "memory");
-- #elif defined(__sparc_v8__) || defined(__sparcv8)
-- 	/* On SPARC V8 there is no RMO just PSO and that does not apply to I/O accesses... but if V8 code is run
-- 	 * on V9 CPUs it might apply... or not... we issue a write barrier anyway. That's the most suitable
-- 	 * operation in the V8 instruction set anyway. If you know better then please tell us. */
---	asm volatile ("stbar");
--+	__asm__ volatile ("stbar");
-- #else
-- 	#error Unknown and/or unsupported SPARC instruction set version detected.
-- #endif
---- 
--2.32.0
--
-diff --git a/meta-oe/recipes-bsp/flashrom/flashrom/0002-meson-Add-options-pciutils-ftdi-usb.patch b/meta-oe/recipes-bsp/flashrom/flashrom/0002-meson-Add-options-pciutils-ftdi-usb.patch
-new file mode 100644
-index 0000000000..bc43f17e9a
---- /dev/null
-+++ b/meta-oe/recipes-bsp/flashrom/flashrom/0002-meson-Add-options-pciutils-ftdi-usb.patch
-@@ -0,0 +1,48 @@
-+From 3ea99c117aa4c7a3502c93e4e4df50b3623e46c3 Mon Sep 17 00:00:00 2001
-+From: Patrick Rudolph <patrick.rudolph@9elements.com>
-+Date: Tue, 15 Oct 2024 10:42:05 +0200
-+Subject: [PATCH 2/2] meson: Add options pciutils, ftdi, usb
-+
-+The options have been dropped in favor of an array option called programmer.
-+Since this doesn't integrate well into yocto add back the old options.
-+
-+Upstream-Status: Inappropriate Just to fix yocto build system
-+
-+Change-Id: Ib697b9f7cc7fc553cfdeb75ae9d49a367badd286
-+Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-+---
-+ meson.build       | 6 +++---
-+ meson_options.txt | 3 +++
-+ 2 files changed, 6 insertions(+), 3 deletions(-)
-+
-+diff --git a/meson.build b/meson.build
-+index ae56b26c..21093a7f 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -151,9 +151,9 @@ systems_serial     = [ 'linux', 'openbsd', 'freebsd', 'dragonfly', 'netbsd', 'da
-+ 
-+ cpus_port_io = [ 'x86', 'x86_64' ]
-+ 
-+-group_ftdi   = get_option('programmer').contains('group_ftdi')
-+-group_pci    = get_option('programmer').contains('group_pci')
-+-group_usb    = get_option('programmer').contains('group_usb')
-++group_ftdi   = get_option('programmer').contains('group_ftdi') or get_option('ftdi')
-++group_pci    = get_option('programmer').contains('group_pci') or get_option('pciutils')
-++group_usb    = get_option('programmer').contains('group_usb') or get_option('usb')
-+ group_i2c    = get_option('programmer').contains('group_i2c')
-+ group_serial = get_option('programmer').contains('group_serial')
-+ group_jlink  = get_option('programmer').contains('group_jlink')
-+diff --git a/meson_options.txt b/meson_options.txt
-+index 8a04114d..ae722509 100644
-+--- a/meson_options.txt
-++++ b/meson_options.txt
-+@@ -25,3 +25,6 @@ option('ni845x_search_path', type : 'string', value : 'C:\Program Files (x86)\Na
-+ option('delay_minimum_sleep_us', type : 'integer', min : 0, value : 100000,
-+        description : 'Minimum time in microseconds to suspend execution for (rather than polling) when a delay is required.'
-+                    + ' Larger values may perform better on machines with low timer resolution, at the cost of increased power.')
-++option('pciutils', type : 'boolean', value : false, description : 'Select programmer group pci')
-++option('usb', type : 'boolean', value : false, description : 'Select programmer group usb')
-++option('ftdi', type : 'boolean', value : false, description : 'Select programmer group ftdi')
-+-- 
-+2.46.2
-+
-diff --git a/meta-oe/recipes-bsp/flashrom/flashrom/meson-fixes.patch b/meta-oe/recipes-bsp/flashrom/flashrom/meson-fixes.patch
-deleted file mode 100644
-index e45236ee07..0000000000
---- a/meta-oe/recipes-bsp/flashrom/flashrom/meson-fixes.patch
-+++ /dev/null
-@@ -1,68 +0,0 @@
--Add a ftdi option alongside USB and PCI to control the external dependency, and
--ensure that the build is successful in all combinations of options.
--
--Upstream-Status: Pending
--Signed-off-by: Ross Burton <ross.burton@arm.com>
--
--diff --git a/meson.build b/meson.build
--index 375089c..0df9d69 100644
----- a/meson.build
--+++ b/meson.build
--@@ -91,6 +91,8 @@ else
--   config_digilent_spi = false
--   config_developerbox_spi = false
--   config_pickit2_spi = false
--+  config_stlinkv3_spi = false
--+  config_usbblaster_spi = false
-- endif
-- 
-- # some programmers require libpci
--@@ -118,6 +120,21 @@ else
--   config_satasii = false
-- endif
-- 
--+# some programmers require libftdi
--+if get_option('ftdi')
--+  deps += dependency('libftdi1')
--+else
--+  config_ft2232_spi = false
--+  config_usbblaster_spi = false
--+endif
--+
--+if not (target_machine.cpu_family() == 'x86' or target_machine.cpu_family() == 'x86_64')
--+  config_satamv = false
--+  config_nic3com = false
--+  config_rayer_spi = false
--+  config_nicrealtek = false
--+endif
--+
-- # set defines for configured programmers
-- if config_atahpt
--   srcs += 'atahpt.c'
--@@ -163,7 +180,6 @@ endif
-- if config_ft2232_spi
--   srcs += 'ft2232_spi.c'
--   cargs += '-DCONFIG_FT2232_SPI=1'
---  deps += dependency('libftdi1')
--   cargs += '-DHAVE_FT232H=1'
-- endif
-- if config_gfxnvidia
--@@ -216,6 +232,7 @@ endif
-- if config_nicintel
--   srcs += 'nicintel.c'
--   cargs += '-DCONFIG_NICINTEL=1'
--+  need_raw_access = true
-- endif
-- if config_nicintel_eeprom
--   srcs += 'nicintel_eeprom.c'
--diff --git a/meson_options.txt b/meson_options.txt
--index ea87311..b6b842d 100644
----- a/meson_options.txt
--+++ b/meson_options.txt
--@@ -1,5 +1,6 @@
-- option('pciutils', type : 'boolean', value : true, description : 'use pciutils')
-- option('usb', type : 'boolean', value : true, description : 'use libusb1')
--+option('ftdi', type : 'boolean', value : true, description : 'use libftdi')
-- 
-- option('config_atahpt', type : 'boolean', value : false, description : 'Highpoint (HPT) ATA/RAID controllers')
-- option('config_atapromise', type : 'boolean', value : false, description : 'Promise ATA controller')
-diff --git a/meta-oe/recipes-bsp/flashrom/flashrom_1.2.1.bb b/meta-oe/recipes-bsp/flashrom/flashrom_1.4.0.bb
-similarity index 74%
-rename from meta-oe/recipes-bsp/flashrom/flashrom_1.2.1.bb
-rename to meta-oe/recipes-bsp/flashrom/flashrom_1.4.0.bb
-index b2592d294b..98447809cf 100644
---- a/meta-oe/recipes-bsp/flashrom/flashrom_1.2.1.bb
-+++ b/meta-oe/recipes-bsp/flashrom/flashrom_1.4.0.bb
-@@ -3,12 +3,12 @@ LICENSE = "GPL-2.0-or-later"
- HOMEPAGE = "http://flashrom.org"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
--SRC_URI = "https://download.flashrom.org/releases/flashrom-v${PV}.tar.bz2 \
--           file://meson-fixes.patch \
-+SRC_URI = "https://download.flashrom.org/releases/flashrom-v${PV}.tar.xz \
-            file://0001-flashrom-Mark-RISCV-as-non-memory-mapped-I-O-archite.patch \
--           file://0001-hwaccess-use-__asm__-as-is-done-elsewhere.patch \
-+           file://0002-meson-Add-options-pciutils-ftdi-usb.patch \
-            "
--SRC_URI[sha256sum] = "89a7ff5beb08c89b8795bbd253a51b9453547a864c31793302296b56bbc56d65"
-+
-+SRC_URI[sha256sum] = "eb0eb3e61a57fd1926c66f08664cf04a96f92cee23b600cf563087c2178d70d8"
- 
- S = "${WORKDIR}/flashrom-v${PV}"
- 
-@@ -18,3 +18,5 @@ PACKAGECONFIG ??= "pci usb ftdi"
- PACKAGECONFIG[pci] = "-Dpciutils=true,-Dpciutils=false,pciutils"
- PACKAGECONFIG[usb] = "-Dusb=true,-Dusb=false,libusb"
- PACKAGECONFIG[ftdi] = "-Dftdi=true,-Dftdi=false,libftdi"
-+
-+EXTRA_OEMESON = "-Dbash_completion=disabled -Dtests=disabled"
--- 
-2.42.0
-
+On Tue, Mar 11, 2025 at 4:31=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrote=
+:
+>
+> This causes protobuf-c to not build see
+>
+> https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/446/st=
+eps/14/logs/stdio
+>
+> On Tue, Mar 11, 2025 at 1:41=E2=80=AFAM hongxu via lists.openembedded.org
+> <hongxu.jia=3Deng.windriver.com@lists.openembedded.org> wrote:
+> >
+> > Refresh local patches
+> > - 0001-Fix-build-on-mips-clang.patch
+> > - 0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+> >
+> > Drop the fix for gold linker build
+> >
+> > Changelog:
+> > https://github.com/protocolbuffers/protobuf/releases/tag/v30.0
+> >
+> > Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> > ---
+> >  .../0001-Fix-build-on-mips-clang.patch        | 26 ++++++++-----
+> >  ...e-respect-CXX-LDFLAGS-variables-fix-.patch | 37 ++++++-------------
+> >  ...{protobuf_4.25.5.bb =3D> protobuf_4.30.0.bb} |  4 +-
+> >  3 files changed, 31 insertions(+), 36 deletions(-)
+> >  rename meta-oe/recipes-devtools/protobuf/{protobuf_4.25.5.bb =3D> prot=
+obuf_4.30.0.bb} (98%)
+> >
+> > diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-Fix-build-=
+on-mips-clang.patch b/meta-oe/recipes-devtools/protobuf/protobuf/0001-Fix-b=
+uild-on-mips-clang.patch
+> > index 9f6116c4c4..6db22c26d3 100644
+> > --- a/meta-oe/recipes-devtools/protobuf/protobuf/0001-Fix-build-on-mips=
+-clang.patch
+> > +++ b/meta-oe/recipes-devtools/protobuf/protobuf/0001-Fix-build-on-mips=
+-clang.patch
+> > @@ -1,6 +1,6 @@
+> > -From 08e46feb6553af670754e65d94c3bb6fcd4e0cf9 Mon Sep 17 00:00:00 2001
+> > +From fd5a966a6385165506a1b84298465cbb9f44222d Mon Sep 17 00:00:00 2001
+> >  From: Khem Raj <raj.khem@gmail.com>
+> > -Date: Sun, 31 Oct 2021 23:39:44 -0700
+> > +Date: Mon, 10 Mar 2025 19:59:19 -0700
+> >  Subject: [PATCH] Fix build on mips/clang
+> >
+> >  clang13 crashes on mips, until its fixed upstream disable tailcall on
+> > @@ -10,17 +10,25 @@ https://bugs.llvm.org/show_bug.cgi?id=3D52367
+> >
+> >  Upstream-Status: Inappropriate [Clang workaround]
+> >  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > +
+> > +Rebase to v4.30.0
+> > +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> >  ---
+> > - src/google/protobuf/port_def.inc | 2 +-
+> > - 1 file changed, 1 insertion(+), 1 deletion(-)
+> > + src/google/protobuf/port_def.inc | 1 +
+> > + 1 file changed, 1 insertion(+)
+> >
+> > +diff --git a/src/google/protobuf/port_def.inc b/src/google/protobuf/po=
+rt_def.inc
+> > +index 35f49afb4..e9597af0d 100644
+> >  --- a/src/google/protobuf/port_def.inc
+> >  +++ b/src/google/protobuf/port_def.inc
+> > -@@ -255,6 +255,7 @@
+> > +@@ -222,6 +222,7 @@ static_assert(PROTOBUF_ABSL_MIN(20230125, 3),
+> >   #error PROTOBUF_TAILCALL was previously defined
+> >   #endif
+> > - #if __has_cpp_attribute(clang::musttail) && !defined(__arm__) && \
+> > + #if ABSL_HAVE_CPP_ATTRIBUTE(clang::musttail) && !defined(__arm__) && =
+ \
+> >  +    !defined(__mips__) && \
+> > -     !defined(_ARCH_PPC) && !defined(__wasm__) &&                 \
+> > -     !(defined(_MSC_VER) && defined(_M_IX86)) &&                  \
+> > -     !(defined(__NDK_MAJOR__) && __NDK_MAJOR <=3D 24)
+> > +     !defined(_ARCH_PPC) && !defined(__wasm__) &&                     =
+ \
+> > +     !(defined(_MSC_VER) && defined(_M_IX86)) && !defined(__i386__)
+> > + // Compilation fails on ARM32: b/195943306
+> > +--
+> > +2.25.1
+> > +
+> > diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-M=
+akefile-respect-CXX-LDFLAGS-variables-fix-.patch b/meta-oe/recipes-devtools=
+/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix=
+-.patch
+> > index 7c4bf260eb..5457d0d6bc 100644
+> > --- a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile=
+-respect-CXX-LDFLAGS-variables-fix-.patch
+> > +++ b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile=
+-respect-CXX-LDFLAGS-variables-fix-.patch
+> > @@ -1,36 +1,23 @@
+> > -From e3fa241637ab5a7fa78c0d474802134cff75f91e Mon Sep 17 00:00:00 2001
+> > +From 88d4e5afb2c3b56933c529216cd8b733e10a5b7b Mon Sep 17 00:00:00 2001
+> >  From: Martin Jansa <Martin.Jansa@gmail.com>
+> > -Date: Fri, 28 Jun 2019 13:50:52 +0000
+> > -Subject: [PATCH] examples/Makefile: respect CXX,LDFLAGS variables, fix=
+ build
+> > - with gold
+> > +Date: Tue, 11 Mar 2025 16:35:39 +0800
+> > +Subject: [PATCH] examples/Makefile: respect CXX,LDFLAGS variables
+> >
+> >  * move pkg-config call to separate variable, so that the final version
+> >    of the whole command so it's shown in log.do_compile_ptest_base
+> > -* add ../src/google/protobuf/.libs/timestamp.pb.o when linking
+> > -  add_person_cpp otherwise it fails to link with gold:
+> > -  i686-oe-linux-g++  -m32 -march=3Dcore2 -mtune=3Dcore2 -msse3 -mfpmat=
+h=3Dsse --sysroot=3Dcore2-32-oe-linux/protobuf/3.8.0-r0/recipe-sysroot -Wl,=
+-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed add_person.cc addressbook.pb.cc =
+-o add_person_cpp `pkg-config --cflags --libs protobuf`
+> > -  /tmp/cccjSJQs.o:addressbook.pb.cc:scc_info_Person_addressbook_2eprot=
+o: error: undefined reference to 'scc_info_Timestamp_google_2fprotobuf_2fti=
+mestamp_2eproto'
+> > -  /tmp/cccjSJQs.o:addressbook.pb.cc:descriptor_table_addressbook_2epro=
+to_deps: error: undefined reference to 'descriptor_table_google_2fprotobuf_=
+2ftimestamp_2eproto'
+> > -  collect2: error: ld returned 1 exit status
+> > -  Makefile:43: recipe for target 'add_person_cpp' failed
+> > -
+> > -* and the same with list_people_cpp this time with pkg-config already =
+through the variable:
+> > -  i686-oe-linux-g++  -m32 -march=3Dcore2 -mtune=3Dcore2 -msse3 -mfpmat=
+h=3Dsse --sysroot=3Dcore2-32-oe-linux/protobuf/3.8.0-r0/recipe-sysroot -Wl,=
+-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -pthread -Icore2-32-oe-linux/pro=
+tobuf/3.8.0-r0/git/src -Lcore2-32-oe-linux/protobuf/3.8.0-r0/git/src/.libs =
+-Lcore2-32-oe-linux/protobuf/3.8.0-r0/recipe-sysroot/usr/lib -lprotobuf lis=
+t_people.cc addressbook.pb.cc -o list_people_cpp
+> > -  /tmp/ccpaI5Su.o:addressbook.pb.cc:scc_info_Person_addressbook_2eprot=
+o: error: undefined reference to 'scc_info_Timestamp_google_2fprotobuf_2fti=
+mestamp_2eproto'
+> > -  /tmp/ccpaI5Su.o:addressbook.pb.cc:descriptor_table_addressbook_2epro=
+to_deps: error: undefined reference to 'descriptor_table_google_2fprotobuf_=
+2ftimestamp_2eproto'
+> > -  collect2: error: ld returned 1 exit status
+> > -  Makefile:49: recipe for target 'list_people_cpp' failed
+> >
+> >  Upstream-Status: Pending
+> >  Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> >  Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> >
+> > +Rebase to v4.30.0
+> > +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> >  ---
+> >   examples/Makefile | 6 ++++--
+> >   1 file changed, 4 insertions(+), 2 deletions(-)
+> >
+> >  diff --git a/examples/Makefile b/examples/Makefile
+> > -index ef7a4ef58..7206e14e1 100644
+> > +index 5290fdb03f..b695b03707 100644
+> >  --- a/examples/Makefile
+> >  +++ b/examples/Makefile
+> >  @@ -2,6 +2,8 @@
+> > @@ -42,20 +29,20 @@ index ef7a4ef58..7206e14e1 100644
+> >   all: cpp java python
+> >
+> >   cpp:    add_person_cpp    list_people_cpp
+> > -@@ -41,11 +43,11 @@ protoc_middleman_dart: addressbook.proto
+> > +@@ -46,11 +48,11 @@ protoc_middleman_ruby: addressbook.proto
+> >
+> >   add_person_cpp: add_person.cc protoc_middleman
+> >         pkg-config --cflags protobuf  # fails if protobuf is not instal=
+led
+> > --      c++ -std=3Dc++14 add_person.cc addressbook.pb.cc -o add_person_=
+cpp `pkg-config --cflags --libs protobuf`
+> > -+      $(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf/.libs/time=
+stamp.pb.o $(PROTOBUF) add_person.cc addressbook.pb.cc -o add_person_cpp #$=
+(CXX) -std=3Dc++17 $(PROTOBUF) add_person.cc addressbook.pb.cc -o add_perso=
+n_cpp
+> > +-      c++ add_person.cc addressbook.pb.cc -o add_person_cpp `pkg-conf=
+ig --cflags --libs protobuf`
+> > ++      $(CXX) $(CXXFLAGS) $(LDFLAGS) $(PROTOBUF) add_person.cc address=
+book.pb.cc -o add_person_cpp
+> >
+> >   list_people_cpp: list_people.cc protoc_middleman
+> >         pkg-config --cflags protobuf  # fails if protobuf is not instal=
+led
+> > --      c++ -std=3Dc++14 list_people.cc addressbook.pb.cc -o list_peopl=
+e_cpp `pkg-config --cflags --libs protobuf`
+> > -+      $(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf/.libs/time=
+stamp.pb.o $(PROTOBUF) list_people.cc addressbook.pb.cc -o list_people_cpp =
+#$(CXX) -std=3Dc++17 $(PROTOBUF) list_people.cc addressbook.pb.cc -o list_p=
+eople_cpp
+> > +-      c++ list_people.cc addressbook.pb.cc -o list_people_cpp `pkg-co=
+nfig --cflags --libs protobuf`
+> > ++      $(CXX) $(CXXFLAGS) $(LDFLAGS) $(PROTOBUF) list_people.cc addres=
+sbook.pb.cc -o list_people_cpp
+> >
+> >   add_person_dart: add_person.dart protoc_middleman_dart
+> >
+> > ---
+> > +--
+> >  2.34.1
+> >
+> > diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb b/met=
+a-oe/recipes-devtools/protobuf/protobuf_4.30.0.bb
+> > similarity index 98%
+> > rename from meta-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb
+> > rename to meta-oe/recipes-devtools/protobuf/protobuf_4.30.0.bb
+> > index a470a7c643..f899a1dc07 100644
+> > --- a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb
+> > +++ b/meta-oe/recipes-devtools/protobuf/protobuf_4.30.0.bb
+> > @@ -14,9 +14,9 @@ LIC_FILES_CHKSUM =3D " \
+> >  DEPENDS =3D "zlib abseil-cpp jsoncpp"
+> >  DEPENDS:append:class-target =3D " protobuf-native"
+> >
+> > -SRCREV =3D "9d0ec0f92b5b5fdeeda11f9dcecc1872ff378014"
+> > +SRCREV =3D "d295af5c3002c08e1bfd9d7f9e175d0a4d015f1e"
+> >
+> > -SRC_URI =3D "git://github.com/protocolbuffers/protobuf.git;branch=3D25=
+.x;protocol=3Dhttps \
+> > +SRC_URI =3D "git://github.com/protocolbuffers/protobuf.git;branch=3D30=
+.x;protocol=3Dhttps \
+> >             file://run-ptest \
+> >             file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables=
+-fix-.patch \
+> >             "
+> > --
+> > 2.34.1
+> >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#115849): https://lists.openembedded.org/g/openembed=
+ded-devel/message/115849
+> > Mute This Topic: https://lists.openembedded.org/mt/111636359/1997914
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[raj.khem@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
 
