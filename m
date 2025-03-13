@@ -2,55 +2,57 @@ Return-Path: <hongxu.jia@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 119DAC28B28
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 135B8C28B2F
 	for <webhook@archiver.kernel.org>; Thu, 13 Mar 2025 03:17:37 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.6474.1741835846960045663
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.6475.1741835848355859758
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Mar 2025 20:17:26 -0700
+ Wed, 12 Mar 2025 20:17:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=516707848e=hongxu.jia@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52D0VI8G023468;
-	Wed, 12 Mar 2025 20:17:25 -0700
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=516707848e=hongxu.jia@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52D1wwAO000593;
+	Thu, 13 Mar 2025 03:17:27 GMT
 Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45b0j4sf23-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45b0ga1fpm-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
-	Wed, 12 Mar 2025 20:17:25 -0700 (PDT)
+	Thu, 13 Mar 2025 03:17:26 +0000 (GMT)
 Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Wed, 12 Mar 2025 20:17:24 -0700
+ 15.1.2507.43; Wed, 12 Mar 2025 20:17:25 -0700
 Received: from pek-lpg-core5.wrs.com (147.11.136.210) by
  ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Wed, 12 Mar 2025 20:17:23 -0700
+ 15.1.2507.43 via Frontend Transport; Wed, 12 Mar 2025 20:17:24 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH V3] protobuf: 4.25.5 -> 4.30.0
-Date: Thu, 13 Mar 2025 11:17:21 +0800
-Message-ID: <20250313031722.2954589-1-hongxu.jia@windriver.com>
+Subject: [PATCH] protobuf: 4.25.5 -> 4.30.0
+Date: Thu, 13 Mar 2025 11:17:22 +0800
+Message-ID: <20250313031722.2954589-2-hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250313031722.2954589-1-hongxu.jia@windriver.com>
+References: <20250313031722.2954589-1-hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=Cc0I5Krl c=1 sm=1 tr=0 ts=67d24e45 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=Vs1iUdzkB0EA:10 a=NEAV23lmAAAA:8 a=Twlkf-z8AAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8 a=k-42gJp3AAAA:8
+X-Proofpoint-GUID: 2t78_oGG-hZL9CA8Ekrv8am6vLcPQwNf
+X-Proofpoint-ORIG-GUID: 2t78_oGG-hZL9CA8Ekrv8am6vLcPQwNf
+X-Authority-Analysis: v=2.4 cv=ZrXtK87G c=1 sm=1 tr=0 ts=67d24e46 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=Vs1iUdzkB0EA:10 a=NEAV23lmAAAA:8 a=Twlkf-z8AAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8 a=k-42gJp3AAAA:8
  a=NbgBM54gC2aFTEyWLUkA:9 a=-74SuR6ZdpOK_LpdRCUo:22 a=FdTzh2GWekK77mhwV6Dw:22 a=uCSXFHLys93vLW5PjgO_:22
-X-Proofpoint-ORIG-GUID: 4-1nMSi1vHpUIYQicohEKqhmkPt3uWvI
-X-Proofpoint-GUID: 4-1nMSi1vHpUIYQicohEKqhmkPt3uWvI
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
  definitions=2025-03-13_02,2025-03-11_02,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- phishscore=0 lowpriorityscore=0 malwarescore=0 suspectscore=0
- clxscore=1015 impostorscore=0 spamscore=0 bulkscore=0 mlxscore=0
- mlxlogscore=999 adultscore=0 classifier=spam authscore=0 authtc=n/a
- authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.21.0-2502280000 definitions=main-2503130024
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 bulkscore=0
+ mlxlogscore=999 priorityscore=1501 mlxscore=0 phishscore=0 spamscore=0
+ malwarescore=0 lowpriorityscore=0 adultscore=0 suspectscore=0
+ impostorscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
+ definitions=main-2503130024
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 03:17:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115947
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115948
 
 Refresh local patches
 - 0001-Fix-build-on-mips-clang.patch
