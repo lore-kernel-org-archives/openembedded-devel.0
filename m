@@ -2,93 +2,121 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B70DC28B2E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ADC4BC28B28
 	for <webhook@archiver.kernel.org>; Thu, 13 Mar 2025 07:43:48 +0000 (UTC)
 Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
- by mx.groups.io with SMTP id smtpd.web10.9438.1741851819866511795
+ by mx.groups.io with SMTP id smtpd.web10.9441.1741851821844113789
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Mar 2025 00:43:40 -0700
+ Thu, 13 Mar 2025 00:43:42 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
 Received: from fwd77.aul.t-online.de (fwd77.aul.t-online.de [10.223.144.103])
-	by mailout12.t-online.de (Postfix) with SMTP id EF033101D;
-	Thu, 13 Mar 2025 08:43:37 +0100 (CET)
+	by mailout12.t-online.de (Postfix) with SMTP id 081251031
+	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 08:43:38 +0100 (CET)
 Received: from intel-corei7-64.fritz.box ([79.219.231.110]) by fwd77.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tsdE8-4WdEZ70; Thu, 13 Mar 2025 08:43:36 +0100
+	esmtp id 1tsdE9-4WdEZD0; Thu, 13 Mar 2025 08:43:37 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [RFC][gnome48][meta-gnome][PATCH 1/8] xdg-desktop-portal-gnome: update 47.3 -> 48.rc
-Date: Thu, 13 Mar 2025 08:44:04 +0100
-Message-ID: <20250313074411.5600-1-f_l_k@t-online.de>
+Subject: [RFC][gnome48][meta-gnome][PATCH 7/8] gtksourceview: update 5.12.0 -> 5.15.1
+Date: Thu, 13 Mar 2025 08:44:10 +0100
+Message-ID: <20250313074411.5600-7-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250313074411.5600-1-f_l_k@t-online.de>
+References: <20250313074411.5600-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1741851816-0D7F8466-B5C2D731/0/0 CLEAN NORMAL
-X-TOI-MSGID: a120e4b8-ec3c-4a03-9707-0ba90e99ffd0
+X-TOI-EXPURGATEID: 150726::1741851817-BE7FA466-4A9CD199/0/0 CLEAN NORMAL
+X-TOI-MSGID: b6e5b94d-983e-48c9-b031-61bad39c2473
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 07:43:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115955
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115958
 
-Changes in 48.beta.rc
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
- - Add USB portal backend
- - Fix screen cast portal done signal emission
-Changes in 48.beta
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-- Use the new AdwInlineViewSwitcher widget in the screencast dialog
-- Update apps list properly in the screencast dialog
-- Generate systemd sysexts in CI
-- Fix an issue with the Notification portal implementation
-- Depend on libadwaita >=3D 1.7.alpha
-- Translation updates
-Changes in 48.alpha
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-- Outsource external window management to libgxdp
-- Fix the capabilities for the print dialog
-- Fix memory leak in screencast widget
-- Implement a signal handler to help with ASAN
-- Use Adwaita widgets in the app chooser dialog
-- Fix a memory management issue with the screencast widget
-- Depend on xdg-desktop-portal >=3D 1.19.1
-- Translation updates
+News in 5.15.1, 2025-02-24
+--------------------------
+ * Remove use of various GTK deprecations
+ * Testsuite improvements
+ * Translation updates
+News in 5.15.0, 2025-02-02
+--------------------------
+This is a beta release for GNOME 48.beta
+ * Various introspection fixes
+ * Improvements to GtkSourceAssistants
+ * Various GtkTextIter performance improvements
+ * Deduplication fixes when sorting
+ * Alter paths for resource:// usage so that resources take priority
+   over system installations other than the current one
+ * Adwaita.xml, Adwaita-dark.xml style updates
+ * Quantize Y position for gutter line numbers
+ * New and updated languages: meson.lang, zig.lang
+ * Translation updates
+News in 5.14.1, 2024-10-04
+--------------------------
+This is a bug-fix release for GNOME 47
+ * Ensure you cannot show context menu from GtkSourceMap which otherwise
+   has a limited FontMap containing only the BuilderBlocks font.
+News in 5.14.0, 2024-09-13
+--------------------------
+This is a stable release for GNOME 47.0
+ * Fix an issue where the gutter would not redraw when focus changes.
+ * Add support for Groff syntax
+News in 5.13.1, 2024-08-04
+--------------------------
+This is an unstable release update for GNOME 47.beta
+ * Documentation improvements
+ * Improve performance of BuilderBlocks font loading. Some of this
+   effort required changes to the TTF, so user testing with a wide
+   variety of languages is desired. This should reduce startup time
+   of GtkSourceView using applications.
+ * gtk-doc.lang: highlight `backtick` spans
+ * c.lang: highlight [[]] style attributes
+ * java.lang: improve escaped character matching
+ * Adwaita.xml, Adwaita-dark.xml: style updates to track platform
+   changes for GNOME 47.
+News in 5.13.0, 2024-06-28
+--------------------------
+This is an unstable release update for GNOME 47.alpha
+ * Ensure gutter renderers are released during dispose
+ * Make default auto-indenter keep indentation when cursor is at line sta=
+rt
+ * python3.lang: Fix f-string in curly braces to have no-spellcheck appli=
+ed
+ * Translation updates
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...p-portal-gnome_47.3.bb =3D> xdg-desktop-portal-gnome_48.rc.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-support/xdg-desktop-portal/{xdg-desktop-portal=
--gnome_47.3.bb =3D> xdg-desktop-portal-gnome_48.rc.bb} (89%)
+ .../{gtksourceview5_5.12.0.bb =3D> gtksourceview5_5.15.1.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-gnome/recipes-gnome/gtksourceview/{gtksourceview5_5.12.0.bb =
+=3D> gtksourceview5_5.15.1.bb} (84%)
 
-diff --git a/meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-po=
-rtal-gnome_47.3.bb b/meta-gnome/recipes-support/xdg-desktop-portal/xdg-de=
-sktop-portal-gnome_48.rc.bb
-similarity index 89%
-rename from meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-por=
-tal-gnome_47.3.bb
-rename to meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-porta=
-l-gnome_48.rc.bb
-index 215560ed4d..e386213e7e 100644
---- a/meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-portal-gn=
-ome_47.3.bb
-+++ b/meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-portal-gn=
-ome_48.rc.bb
-@@ -21,7 +21,7 @@ inherit gnomebase pkgconfig gsettings features_check
+diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.12.0=
+.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.15.1.bb
+similarity index 84%
+rename from meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.12.0.=
+bb
+rename to meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.15.1.bb
+index f3267acbeb..33a4832fcd 100644
+--- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.12.0.bb
++++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.15.1.bb
+@@ -23,8 +23,8 @@ inherit gnomebase lib_package gettext features_check gi=
+-docgen gtk-icon-cache go
 =20
- REQUIRED_DISTRO_FEATURES =3D "polkit"
+ REQUIRED_DISTRO_FEATURES =3D "opengl"
 =20
--SRC_URI[archive.sha256sum] =3D "9f6e4b14b583367c915e9494764f27cb84927faa=
-3f9e6e018b93bbbcf3361e44"
-+SRC_URI[archive.sha256sum] =3D "fe86fea673759e4974b2b10e27f5aa3e568d8ef6=
-88f7d7d80cabcab90a869f0b"
+-SRC_URI =3D "https://download.gnome.org/sources/gtksourceview/5.12/${PNA=
+ME}-${PV}.tar.xz"
+-SRC_URI[sha256sum] =3D "daf32ff5d3150d6385917d3503a85b9e047ba158b2b03079=
+314c9c00813fa01f"
++SRC_URI =3D "https://download.gnome.org/sources/gtksourceview/5.15/${PNA=
+ME}-${PV}.tar.xz"
++SRC_URI[sha256sum] =3D "39c0c82148c088a7a65765c4fb8f9f045590bf0b464930ba=
+32c9f709b2a5f40e"
 =20
- PACKAGECONFIG ?=3D "screenshot screencast ${@bb.utils.filter('DISTRO_FEA=
-TURES', 'wayland', d)}"
- PACKAGECONFIG[wayland] =3D ",,wayland-native"
+ GIR_MESON_ENABLE_FLAG =3D 'enabled'
+ GIR_MESON_DISABLE_FLAG =3D 'disabled'
 --=20
 2.48.1
 
