@@ -2,35 +2,35 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E358AC282DE
-	for <webhook@archiver.kernel.org>; Thu, 13 Mar 2025 11:56:40 +0000 (UTC)
-Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
- by mx.groups.io with SMTP id smtpd.web11.12710.1741866999627609272
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EFEBDC282DE
+	for <webhook@archiver.kernel.org>; Thu, 13 Mar 2025 12:03:10 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web11.12828.1741867386448069919
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Mar 2025 04:56:39 -0700
+ Thu, 13 Mar 2025 05:03:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
-Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
-	by mailout02.t-online.de (Postfix) with SMTP id A20144AA
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 12:56:37 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([79.219.231.110]) by fwd74.t-online.de
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd75.aul.t-online.de (fwd75.aul.t-online.de [10.223.144.101])
+	by mailout03.t-online.de (Postfix) with SMTP id 78683C24
+	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 13:03:04 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([79.219.231.110]) by fwd75.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tshAv-1cNwy90; Thu, 13 Mar 2025 12:56:33 +0100
+	esmtp id 1tshHB-2354LJ0; Thu, 13 Mar 2025 13:03:01 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] libsdl3: add recipe
-Date: Thu, 13 Mar 2025 12:57:18 +0100
-Message-ID: <20250313115718.176488-1-f_l_k@t-online.de>
+Subject: [meta-oe][PATCHv2] libsdl3: add recipe
+Date: Thu, 13 Mar 2025 13:03:40 +0100
+Message-ID: <20250313120340.176779-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1741866993-DFFFD450-E4030E07/0/0 CLEAN NORMAL
-X-TOI-MSGID: 1d68fdf3-25f3-4962-9246-e73a9bb2a966
+X-TOI-EXPURGATEID: 150726::1741867381-4F7FC5A1-F51D54B7/0/0 CLEAN NORMAL
+X-TOI-MSGID: 6a5b4ddf-8ad4-4346-8932-3fbb850e2dbf
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 11:56:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115966
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 12:03:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115967
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
@@ -41,7 +41,7 @@ Signed-off-by: Markus Volk <f_l_k@t-online.de>
 diff --git a/meta-oe/recipes-graphics/libsdl3/libsdl3_3.2.8.bb b/meta-oe/=
 recipes-graphics/libsdl3/libsdl3_3.2.8.bb
 new file mode 100644
-index 0000000000..a6062b5f62
+index 0000000000..9c4fa317a2
 --- /dev/null
 +++ b/meta-oe/recipes-graphics/libsdl3/libsdl3_3.2.8.bb
 @@ -0,0 +1,83 @@
@@ -115,8 +115,8 @@ is-even
  'x11', d)} ${PACKAGECONFIG_GL}"
 +PACKAGECONFIG ??=3D " \
 +	${PACKAGECONFIG_GL} \
-+	${@bb.utils.filter('DISTRO_FEATURES', 'alsa directfb pulseaudio pipewir=
-e x11 vulkan', d)} \
++	${@bb.utils.filter('DISTRO_FEATURES', 'alsa pulseaudio pipewire x11 vul=
+kan', d)} \
 +	${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland gles2', '',=
  d)} \
 +	${@bb.utils.contains("TUNE_FEATURES", "neon","arm-neon","",d)} \
