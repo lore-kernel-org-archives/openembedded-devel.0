@@ -2,131 +2,157 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DDD9DC282DE
-	for <webhook@archiver.kernel.org>; Thu, 13 Mar 2025 10:32:09 +0000 (UTC)
-Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
- by mx.groups.io with SMTP id smtpd.web11.11229.1741861928308704331
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E358AC282DE
+	for <webhook@archiver.kernel.org>; Thu, 13 Mar 2025 11:56:40 +0000 (UTC)
+Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
+ by mx.groups.io with SMTP id smtpd.web11.12710.1741866999627609272
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Mar 2025 03:32:08 -0700
+ Thu, 13 Mar 2025 04:56:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
-Received: from fwd88.aul.t-online.de (fwd88.aul.t-online.de [10.223.144.114])
-	by mailout11.t-online.de (Postfix) with SMTP id F3D28FFE
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 11:32:05 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([79.219.231.110]) by fwd88.t-online.de
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
+Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
+	by mailout02.t-online.de (Postfix) with SMTP id A20144AA
+	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 12:56:37 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([79.219.231.110]) by fwd74.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tsfrB-3UGxs30; Thu, 13 Mar 2025 11:32:05 +0100
+	esmtp id 1tshAv-1cNwy90; Thu, 13 Mar 2025 12:56:33 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [RFC][gnome48][meta-gnome][PATCH 3/3] nautilus: update 47.2 ->> 48.rc
-Date: Thu, 13 Mar 2025 11:32:48 +0100
-Message-ID: <20250313103248.2116871-3-f_l_k@t-online.de>
+Subject: [meta-oe][PATCH] libsdl3: add recipe
+Date: Thu, 13 Mar 2025 12:57:18 +0100
+Message-ID: <20250313115718.176488-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250313103248.2116871-1-f_l_k@t-online.de>
-References: <20250313103248.2116871-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-TOI-EXPURGATEID: 150726::1741861925-E17F8459-7C1B2149/0/0 CLEAN NORMAL
-X-TOI-MSGID: 905b381e-fff5-4e7c-9e8e-2ce2af3c21b8
+X-TOI-EXPURGATEID: 150726::1741866993-DFFFD450-E4030E07/0/0 CLEAN NORMAL
+X-TOI-MSGID: 1d68fdf3-25f3-4962-9246-e73a9bb2a966
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 10:32:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115964
-
-Major Changes in 48.rc
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-* Enhancements:
-- Run code formatting in parallel (Khalid Abu Shawarib)
-- Rework CI image job to freedesktop template (Khalid Abu Shawarib)
-- Rework and speedup adding of files to view (Khalid Abu Shawarib)
-- Add basic unit tests for files view (Khalid Abu Shawarib)
-- Load thumbnail info separate from other file infos (Khalid Abu Shawarib=
-)
-
-* Reversals:
-- Revert port of properties dialog to AdwDialog due to outstanding issues
-
-* Bugfixes:
-- Fix app chooser widget sizing (Automeris naranja)
-- Fix free space calculation for archive extraction (Peter Eisenmann)
-- Fix shell sesrch result order (Khalid Abu Shawarib)
-- Fix floating bar style when unfocused (Peter Eisenmann)
-
-* Cleanups:
-- Rework view switching code of window-slot (Ant=C3=B3nio Fernandes)
-- Use AdwSpinner in floating bar (Automeris naranja)
-
-* Translation updates (GNOME Translation Project contributors)
-
-Major Changes in 48.beta
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-* Enhancements:
-- Improve directory loading performance (Khalid Abu Shawarib, Peter Eisen=
-mann)
-- Use AdwDialog for list view column chooser and properties dialog (Autom=
-eris naranja)
-- Change tab behavior for the sidebar (Luk=C3=A1=C5=A1 Tyrychtr)
-- Create about dialog from appdata (Felipe Borges, Matthijs Velsink, Pete=
-r Eisenmann)
-- Port various dialogs to AdwAlertDialog (Automeris naranja)
-- Keep mount monitor around for caching in gvfs to work (Khalid Abu Shawa=
-rib)
-- Adjust to localsearch changes (Bobby Rong, Carlos Garnacho, Khalid Abu =
-Shawarib, Sam Thursfield)
-- Hide Trash banner when empty (Isaac Yeo)
-- Ellipsize sidebar labels in the middle (Peter Eisenmann)
-- Add a CONTRIBUTING file (Corey Berla)
-- Allow removing bookmarks from pathbar (Isaac Yeo)
-- Various UI tweaks and label changes (Automeris naranja, Brage Fuglseth,=
- Jamie Gravendeel, Khalid Abu Shawarib)
-- Various speedups (Corey Berla, Khalid Abu Shawarib)
-
-* Bugfixes:
-- Fix unintended grid relayouting on thumbnail loading (Calvin Walton)
-- Fix double a11y presentation of the filename in grid view (Luk=C3=A1=C5=
-=A1 Tyrychtr)
-- Keep CI running (Khalid Abu Shawarib, Peter Eisenmann)
-- Fix query editor translation (Aleksandr Melman)
-- Hide empty extensions list in properties (Khalid Abu Shawarib)
-- Fix NULL dereference with extensions (Philipp Unger)
-
-* Cleanups:
-- Improve grid selection implementation (Adrien Plazas)
-- Avoid setting up unnecessary directory monitors (Corey Berla)
-- Replace uselocale with Glib gettext variant (Khalid Abu Shawarib)
-- Stop setting invisible menu icons (Khalid Abu Shawarib)
-
-* Translation updates (GNOME Translation Project contributors)
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 11:56:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115966
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../nautilus/{nautilus_47.2.bb =3D> nautilus_48.rc.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/nautilus/{nautilus_47.2.bb =3D> nautilus=
-_48.rc.bb} (93%)
+ .../recipes-graphics/libsdl3/libsdl3_3.2.8.bb | 83 +++++++++++++++++++
+ 1 file changed, 83 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/libsdl3/libsdl3_3.2.8.bb
 
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_47.2.bb b/meta-gn=
-ome/recipes-gnome/nautilus/nautilus_48.rc.bb
-similarity index 93%
-rename from meta-gnome/recipes-gnome/nautilus/nautilus_47.2.bb
-rename to meta-gnome/recipes-gnome/nautilus/nautilus_48.rc.bb
-index 9f44dcb114..9bbf5e26dd 100644
---- a/meta-gnome/recipes-gnome/nautilus/nautilus_47.2.bb
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus_48.rc.bb
-@@ -24,7 +24,7 @@ DEPENDS =3D " \
-=20
- inherit gnomebase gsettings gobject-introspection gi-docgen gettext feat=
-ures_check mime-xdg gtk-icon-cache
-=20
--SRC_URI[archive.sha256sum] =3D "7f3203474f2e6374a11c6754ef33f3360eaf7f5b=
-5e85f5e477e8a0ae0fa764d9"
-+SRC_URI[archive.sha256sum] =3D "8131b37f46eb4aa61aac997d6ce8a1facbd3604d=
-177f61bd3b17620435baa99e"
-=20
- REQUIRED_DISTRO_FEATURES =3D "x11 opengl gobject-introspection-data"
-=20
+diff --git a/meta-oe/recipes-graphics/libsdl3/libsdl3_3.2.8.bb b/meta-oe/=
+recipes-graphics/libsdl3/libsdl3_3.2.8.bb
+new file mode 100644
+index 0000000000..a6062b5f62
+--- /dev/null
++++ b/meta-oe/recipes-graphics/libsdl3/libsdl3_3.2.8.bb
+@@ -0,0 +1,83 @@
++SUMMARY =3D "Simple DirectMedia Layer"
++DESCRIPTION =3D "Simple DirectMedia Layer is a cross-platform multimedia=
+ \
++library designed to provide low level access to audio, keyboard, mouse, =
+\
++joystick, 3D hardware via OpenGL, and 2D video framebuffer."
++HOMEPAGE =3D "http://www.libsdl.org"
++BUGTRACKER =3D "http://bugzilla.libsdl.org/"
++
++SECTION =3D "libs"
++
++LICENSE =3D "Zlib & BSD-2-Clause"
++LIC_FILES_CHKSUM =3D "\
++    file://LICENSE.txt;md5=3Dcbf0e3161523f9a9315b6b915c5c4457 \
++    file://src/hidapi/LICENSE.txt;md5=3D7c3949a631240cb6c31c50f3eb696077=
+ \
++    file://src/hidapi/LICENSE-bsd.txt;md5=3Db5fa085ce0926bb50d0621620a82=
+361f \
++    file://src/video/yuv2rgb/LICENSE;md5=3D79f8f3418d91531e05f0fc94ca67e=
+071 \
++"
++
++# arm-neon adds MIT license
++LICENSE:append =3D " ${@bb.utils.contains('PACKAGECONFIG', 'arm-neon', '=
+& MIT', '', d)}"
++LIC_FILES_CHKSUM:append =3D " ${@bb.utils.contains('PACKAGECONFIG', 'arm=
+-neon', 'file://src/video/arm/pixman-arm-neon-asm.h;md5=3D9a9cc1e51abbf1d=
+a58f4d9528ec9d49b;beginline=3D1;endline=3D24', '', d)}"
++
++PROVIDES =3D "virtual/libsdl3"
++
++SRC_URI =3D "http://www.libsdl.org/release/SDL3-${PV}.tar.gz"
++
++S =3D "${WORKDIR}/SDL3-${PV}"
++
++SRC_URI[sha256sum] =3D "13388fabb361de768ecdf2b65e52bb27d1054cae6ccb6942=
+ba926e378e00db03"
++
++inherit cmake lib_package binconfig-disabled pkgconfig upstream-version-=
+is-even
++
++CVE_PRODUCT =3D "simple_directmedia_layer sdl"
++
++EXTRA_OECMAKE =3D " \
++	-DSDL_OSS_DEFAULT=3DOFF \
++	-DSDL_DISKAUDIO=3DOFF \
++	-DSDL_DUMMYVIDEO=3DOFF \
++	-DSDL_RPI=3DOFF \
++	-DSDL_PTHREADS=3DON \
++	-DSDL_RPATH=3DOFF \
++	-DSDL_SNDIO=3DOFF \
++	-DSDL_X11_XCURSOR=3DOFF \
++	-DSDL_X11_XDBE=3DOFF \
++	-DSDL_X11_XFIXES=3DOFF \
++	-DSDL_X11_XINPUT=3DOFF \
++	-DSDL_X11_XRANDR=3DOFF \
++	-DSDL_X11_XSCRNSAVER=3DOFF \
++	-DSDL_X11_XSHAPE=3DOFF \
++"
++
++# opengl packageconfig factored out to make it easy for distros
++# and BSP layers to pick either (desktop) opengl, gles2, or no GL
++PACKAGECONFIG_GL ?=3D "${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d=
+)}"
++
++PACKAGECONFIG:class-native =3D "x11 ${PACKAGECONFIG_GL}"
++PACKAGECONFIG:class-nativesdk =3D "${@bb.utils.filter('DISTRO_FEATURES',=
+ 'x11', d)} ${PACKAGECONFIG_GL}"
++PACKAGECONFIG ??=3D " \
++	${PACKAGECONFIG_GL} \
++	${@bb.utils.filter('DISTRO_FEATURES', 'alsa directfb pulseaudio pipewir=
+e x11 vulkan', d)} \
++	${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland gles2', '',=
+ d)} \
++	${@bb.utils.contains("TUNE_FEATURES", "neon","arm-neon","",d)} \
++"
++PACKAGECONFIG[alsa]       =3D "-DSDL_ALSA=3DON,-DSDL_ALSA=3DOFF,alsa-lib=
+,"
++PACKAGECONFIG[arm-neon]   =3D "-DSDL_ARMNEON=3DON,-DSDL_ARMNEON=3DOFF"
++PACKAGECONFIG[gles2]      =3D "-DSDL_OPENGLES=3DON,-DSDL_OPENGLES=3DOFF,=
+virtual/libgles2"
++PACKAGECONFIG[jack]       =3D "-DSDL_JACK=3DON,-DSDL_JACK=3DOFF,jack"
++PACKAGECONFIG[kmsdrm]     =3D "-DSDL_KMSDRM=3DON,-DSDL_KMSDRM=3DOFF,libd=
+rm virtual/libgbm"
++# The hidraw support doesn't catch Xbox, PS4 and Nintendo controllers,
++#  so we'll just use libusb when it's available.
++PACKAGECONFIG[libusb] =3D "-DSDL_HIDAPI_LIBUSB=3DON,-DSDL_HIDAPI_LIBUSB=3D=
+OFF,libusb1"
++PACKAGECONFIG[libdecor] =3D "-DSDL_WAYLAND_LIBDECOR=3DON,-DSDL_WAYLAND_L=
+IBDECOR=3DOFF,libdecor,libdecor"
++PACKAGECONFIG[opengl]     =3D "-DSDL_OPENGL=3DON,-DSDL_OPENGL=3DOFF,virt=
+ual/egl"
++PACKAGECONFIG[pipewire] =3D "-DSDL_PIPEWIRE_SHARED=3DON,-DSDL_PIPEWIRE_S=
+HARED=3DOFF,pipewire"
++PACKAGECONFIG[pulseaudio] =3D "-DSDL_PULSEAUDIO=3DON,-DSDL_PULSEAUDIO=3D=
+OFF,pulseaudio"
++PACKAGECONFIG[vulkan]    =3D "-DSDL_VULKAN=3DON -DSDL_RENDER_VULKAN=3DON=
+,-DSDL_VULKAN=3DOFF -DSDL_RENDER_VULKAN=3DOFF"
++PACKAGECONFIG[wayland]    =3D "-DSDL_WAYLAND=3DON,-DSDL_WAYLAND=3DOFF,wa=
+yland-native wayland wayland-protocols libxkbcommon"
++PACKAGECONFIG[x11]        =3D "-DSDL_X11=3DON,-DSDL_X11=3DOFF,virtual/li=
+bx11 libxext libxrandr libxrender"
++
++CFLAGS:append:class-native =3D " -DNO_SHARED_MEMORY"
++
++FILES:${PN} +=3D "${datadir}/licenses/SDL3/LICENSE.txt"
++
++BBCLASSEXTEND =3D "native nativesdk"
 --=20
 2.48.1
 
