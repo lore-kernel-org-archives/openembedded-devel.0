@@ -2,65 +2,151 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 90138C282DE
-	for <webhook@archiver.kernel.org>; Thu, 13 Mar 2025 14:09:41 +0000 (UTC)
-Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
- by mx.groups.io with SMTP id smtpd.web10.15836.1741874976306645097
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97350C282EC
+	for <webhook@archiver.kernel.org>; Thu, 13 Mar 2025 14:13:11 +0000 (UTC)
+Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
+ by mx.groups.io with SMTP id smtpd.web11.15799.1741875184288981248
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Mar 2025 07:09:36 -0700
+ Thu, 13 Mar 2025 07:13:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
-Received: from fwd71.aul.t-online.de (fwd71.aul.t-online.de [10.223.144.97])
-	by mailout11.t-online.de (Postfix) with SMTP id 2A896A34;
-	Thu, 13 Mar 2025 15:09:34 +0100 (CET)
-Received: from [192.168.178.20] ([79.219.231.110]) by fwd71.t-online.de
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
+Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
+	by mailout12.t-online.de (Postfix) with SMTP id 8AA5968B
+	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 15:12:38 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([79.219.231.110]) by fwd86.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tsjFc-1LfXdY0; Thu, 13 Mar 2025 15:09:32 +0100
-Date: Thu, 13 Mar 2025 15:10:13 +0100
+	esmtp id 1tsjIU-0eVPfd0; Thu, 13 Mar 2025 15:12:30 +0100
 From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-oe][PATCHv2] libsdl3: add recipe
-To: Gyorgy Sarvari <skandigraun@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Message-Id: <1DF2TS.Y8WAY5YN9AW73@t-online.de>
-In-Reply-To: <d74fe178-d5ae-4bb9-b77d-5197bbbaae66@gmail.com>
-References: <20250313120340.176779-1-f_l_k@t-online.de>
-	<d74fe178-d5ae-4bb9-b77d-5197bbbaae66@gmail.com>
-X-Mailer: geary/46.0
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCHv3] libsdl3: add recipe
+Date: Thu, 13 Mar 2025 15:13:09 +0100
+Message-ID: <20250313141309.605889-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-tsf0JbEvUlX04aXZZq7L"
-X-TOI-EXPURGATEID: 150726::1741874972-80FF7594-94CBF1FD/10/3626336762 SUSPECT URL
-X-TOI-MSGID: 04fa2dd8-f521-4563-bada-a326018d0f38
+X-TOI-EXPURGATEID: 150726::1741875150-01FF9450-531A8331/0/0 CLEAN NORMAL
+X-TOI-MSGID: e4031fc1-f9dc-4b30-8a3c-0206d66a418c
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 14:09:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115972
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 14:13:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115973
 
---=-tsf0JbEvUlX04aXZZq7L
-Content-Type: text/plain; charset=us-ascii; format=flowed
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../recipes-graphics/libsdl3/libsdl3_3.2.8.bb | 79 +++++++++++++++++++
+ 1 file changed, 79 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/libsdl3/libsdl3_3.2.8.bb
 
-yes, thanks!
-
-It was rmeoved in:
-<https://github.com/libsdl-org/SDL/commit/0f351cd6af832663ebd00e20719010d15c853417>
-
-On Thu, Mar 13 2025 at 13:44:36 +01:00:00, Gyorgy Sarvari 
-<skandigraun@gmail.com> wrote:
-> On 13.03.25 13:03, Markus Volk via lists.openembedded.org wrote:
->>  +LIC_FILES_CHKSUM:append = " ${@bb.utils.contains 
->> <mailto:${@bb.utils.contains>('PACKAGECONFIG', 'arm-neon', 
->> '<file://src/video/arm/pixman-arm-neon-asm.h;md5=9a9cc1e51abbf1da58f4d9528ec9d49b;beginline=1;endline=24',> 
->> '', d)}"
-> This file doesn't seem to exist.
-
-
---=-tsf0JbEvUlX04aXZZq7L
-Content-Type: text/html; charset=us-ascii
-
-<div id="geary-body" dir="auto"><div>yes, thanks!</div><div><br></div><div>It was rmeoved in:</div><div><a href="https://github.com/libsdl-org/SDL/commit/0f351cd6af832663ebd00e20719010d15c853417">https://github.com/libsdl-org/SDL/commit/0f351cd6af832663ebd00e20719010d15c853417</a></div></div><div id="geary-quote" dir="auto"><br>On Thu, Mar 13 2025 at 13:44:36 +01:00:00, Gyorgy Sarvari &lt;skandigraun@gmail.com&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">On 13.03.25 13:03, Markus Volk via lists.openembedded.org wrote:
-<blockquote> +LIC_FILES_CHKSUM:append = " <a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('PACKAGECONFIG', 'arm-neon', '<a href="file://src/video/arm/pixman-arm-neon-asm.h;md5=9a9cc1e51abbf1da58f4d9528ec9d49b;beginline=1;endline=24',">file://src/video/arm/pixman-arm-neon-asm.h;md5=9a9cc1e51abbf1da58f4d9528ec9d49b;beginline=1;endline=24',</a> '', d)}"
-</blockquote>This file doesn't seem to exist.
-</div></blockquote></div>
---=-tsf0JbEvUlX04aXZZq7L--
+diff --git a/meta-oe/recipes-graphics/libsdl3/libsdl3_3.2.8.bb b/meta-oe/=
+recipes-graphics/libsdl3/libsdl3_3.2.8.bb
+new file mode 100644
+index 0000000000..63a78907b0
+--- /dev/null
++++ b/meta-oe/recipes-graphics/libsdl3/libsdl3_3.2.8.bb
+@@ -0,0 +1,79 @@
++SUMMARY =3D "Simple DirectMedia Layer"
++DESCRIPTION =3D "Simple DirectMedia Layer is a cross-platform multimedia=
+ \
++library designed to provide low level access to audio, keyboard, mouse, =
+\
++joystick, 3D hardware via OpenGL, and 2D video framebuffer."
++HOMEPAGE =3D "http://www.libsdl.org"
++BUGTRACKER =3D "http://bugzilla.libsdl.org/"
++
++SECTION =3D "libs"
++
++LICENSE =3D "Zlib & BSD-2-Clause"
++LIC_FILES_CHKSUM =3D "\
++    file://LICENSE.txt;md5=3Dcbf0e3161523f9a9315b6b915c5c4457 \
++    file://src/hidapi/LICENSE.txt;md5=3D7c3949a631240cb6c31c50f3eb696077=
+ \
++    file://src/hidapi/LICENSE-bsd.txt;md5=3Db5fa085ce0926bb50d0621620a82=
+361f \
++    file://src/video/yuv2rgb/LICENSE;md5=3D79f8f3418d91531e05f0fc94ca67e=
+071 \
++"
++
++PROVIDES =3D "virtual/libsdl3"
++
++SRC_URI =3D "http://www.libsdl.org/release/SDL3-${PV}.tar.gz"
++
++S =3D "${WORKDIR}/SDL3-${PV}"
++
++SRC_URI[sha256sum] =3D "13388fabb361de768ecdf2b65e52bb27d1054cae6ccb6942=
+ba926e378e00db03"
++
++inherit cmake lib_package binconfig-disabled pkgconfig upstream-version-=
+is-even
++
++CVE_PRODUCT =3D "simple_directmedia_layer sdl"
++
++EXTRA_OECMAKE =3D " \
++	-DSDL_OSS_DEFAULT=3DOFF \
++	-DSDL_DISKAUDIO=3DOFF \
++	-DSDL_DUMMYVIDEO=3DOFF \
++	-DSDL_RPI=3DOFF \
++	-DSDL_PTHREADS=3DON \
++	-DSDL_RPATH=3DOFF \
++	-DSDL_SNDIO=3DOFF \
++	-DSDL_X11_XCURSOR=3DOFF \
++	-DSDL_X11_XDBE=3DOFF \
++	-DSDL_X11_XFIXES=3DOFF \
++	-DSDL_X11_XINPUT=3DOFF \
++	-DSDL_X11_XRANDR=3DOFF \
++	-DSDL_X11_XSCRNSAVER=3DOFF \
++	-DSDL_X11_XSHAPE=3DOFF \
++"
++
++# opengl packageconfig factored out to make it easy for distros
++# and BSP layers to pick either (desktop) opengl, gles2, or no GL
++PACKAGECONFIG_GL ?=3D "${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d=
+)}"
++
++PACKAGECONFIG:class-native =3D "x11 ${PACKAGECONFIG_GL}"
++PACKAGECONFIG:class-nativesdk =3D "${@bb.utils.filter('DISTRO_FEATURES',=
+ 'x11', d)} ${PACKAGECONFIG_GL}"
++PACKAGECONFIG ??=3D " \
++	${PACKAGECONFIG_GL} \
++	${@bb.utils.filter('DISTRO_FEATURES', 'alsa pulseaudio pipewire x11 vul=
+kan', d)} \
++	${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland gles2', '',=
+ d)} \
++	${@bb.utils.contains("TUNE_FEATURES", "neon","arm-neon","",d)} \
++"
++PACKAGECONFIG[alsa]       =3D "-DSDL_ALSA=3DON,-DSDL_ALSA=3DOFF,alsa-lib=
+,"
++PACKAGECONFIG[arm-neon]   =3D "-DSDL_ARMNEON=3DON,-DSDL_ARMNEON=3DOFF"
++PACKAGECONFIG[gles2]      =3D "-DSDL_OPENGLES=3DON,-DSDL_OPENGLES=3DOFF,=
+virtual/libgles2"
++PACKAGECONFIG[jack]       =3D "-DSDL_JACK=3DON,-DSDL_JACK=3DOFF,jack"
++PACKAGECONFIG[kmsdrm]     =3D "-DSDL_KMSDRM=3DON,-DSDL_KMSDRM=3DOFF,libd=
+rm virtual/libgbm"
++# The hidraw support doesn't catch Xbox, PS4 and Nintendo controllers,
++#  so we'll just use libusb when it's available.
++PACKAGECONFIG[libusb] =3D "-DSDL_HIDAPI_LIBUSB=3DON,-DSDL_HIDAPI_LIBUSB=3D=
+OFF,libusb1"
++PACKAGECONFIG[libdecor] =3D "-DSDL_WAYLAND_LIBDECOR=3DON,-DSDL_WAYLAND_L=
+IBDECOR=3DOFF,libdecor,libdecor"
++PACKAGECONFIG[opengl]     =3D "-DSDL_OPENGL=3DON,-DSDL_OPENGL=3DOFF,virt=
+ual/egl"
++PACKAGECONFIG[pipewire] =3D "-DSDL_PIPEWIRE_SHARED=3DON,-DSDL_PIPEWIRE_S=
+HARED=3DOFF,pipewire"
++PACKAGECONFIG[pulseaudio] =3D "-DSDL_PULSEAUDIO=3DON,-DSDL_PULSEAUDIO=3D=
+OFF,pulseaudio"
++PACKAGECONFIG[vulkan]    =3D "-DSDL_VULKAN=3DON -DSDL_RENDER_VULKAN=3DON=
+,-DSDL_VULKAN=3DOFF -DSDL_RENDER_VULKAN=3DOFF"
++PACKAGECONFIG[wayland]    =3D "-DSDL_WAYLAND=3DON,-DSDL_WAYLAND=3DOFF,wa=
+yland-native wayland wayland-protocols libxkbcommon"
++PACKAGECONFIG[x11]        =3D "-DSDL_X11=3DON,-DSDL_X11=3DOFF,virtual/li=
+bx11 libxext libxrandr libxrender"
++
++CFLAGS:append:class-native =3D " -DNO_SHARED_MEMORY"
++
++FILES:${PN} +=3D "${datadir}/licenses/SDL3/LICENSE.txt"
++
++BBCLASSEXTEND =3D "native nativesdk"
+--=20
+2.48.1
 
 
