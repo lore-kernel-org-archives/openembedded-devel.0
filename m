@@ -1,100 +1,88 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5F14C282DE
-	for <webhook@archiver.kernel.org>; Thu, 13 Mar 2025 15:48:41 +0000 (UTC)
-Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com [209.85.210.53])
- by mx.groups.io with SMTP id smtpd.web11.18255.1741880916995495666
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 298CDC282DE
+	for <webhook@archiver.kernel.org>; Thu, 13 Mar 2025 16:16:02 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.web11.17829.1741879910259833545
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Mar 2025 08:48:37 -0700
+ Thu, 13 Mar 2025 08:31:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=e8ygcZ9z;
- spf=pass (domain: gmail.com, ip: 209.85.210.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f53.google.com with SMTP id 46e09a7af769-728a433ec30so1111958a34.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 08:48:36 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=h/Ffhpx6;
+ spf=pass (domain: smile.fr, ip: 209.85.221.42, mailfrom: sofiane.hamam@smile.fr)
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-391342fc148so762335f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 08:31:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741880916; x=1742485716; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=9hHQBeRR7KQ7jYKWtbnk4J2F0nJDlYVggIbk8G8sNNM=;
-        b=e8ygcZ9zvD3d3ci3AHdseuTrjtqKF9I8j3aez4kWNLKF+aSirLIpkufdBDovZUKRxP
-         Z3Zi62wv4NncOMJRNBmNNGOd5mkRVosyuLHRY/YmSOAxiCZL1r27AOocFbWZQpZyRINL
-         j5z6UQ/XBH3XFMcbFRl1CRUanVlxq2iEIxWs7gHgccoWTjEFbDeOnCF5kYD21LzWtinN
-         0/wk3VD9EATyNdGGJXjdgDfLRwh4A5bFXNRupy4KcnI8pWElJRska2pbjffPI1qYzMRm
-         xyEwehSjjlBN2KhLnAgEawuSYg9Vs7m3+eOSIX7Btq7Kyot1Y5v+mSLl1DOTPisqu/tZ
-         TQaQ==
+        d=smile.fr; s=google; t=1741879908; x=1742484708; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=72hqLRnD+8DwAFsMN4o9kEz/5hvdyVRbMNZiZXWwSn0=;
+        b=h/Ffhpx6+yWr4tjxW6WT46WR0wb5g+6d1qIkzz/B+hZdg+t0UuXEabu62MnKyz8LR6
+         0KGw84QWn9OFfexDIx+P7aDtxb4M52XZAdf1qfBtkE0GyHNKkIXk+vyuidQmydiG8ZD8
+         hFDx/5Dz3LZeqXVDabOINTPimYtcEF93clPxQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741880916; x=1742485716;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=9hHQBeRR7KQ7jYKWtbnk4J2F0nJDlYVggIbk8G8sNNM=;
-        b=ojgM7FRTw79ydf7kVpklfhLmhAfPfP0+P65cXVusfernznP4it8hZsf/MSkGqIN7uc
-         x8FEPtIU8ldlN4DpVZ92QVJu47979dQ897G99t5e+YoNTmu0J2DUXFN0ZS2iGxeYjxNa
-         FYhCxY/KbbHr8S4k8NeMhdtinz6J/6P2CaekhlpeiXSDK3bWFfM11XMSY0Dhlx3IvkUM
-         kdRKOTKuD9IvGV+PJgWu+z+yd1YNR4LwhRVYY7LbUv++/7KmDGiDxVEqeAwGUUPLOsj/
-         QbbtJpTEuFaOyEJbvH6Edfn8SNcwfw26btKxROfrpC2v/0yd/4RzoMr483yI4IbEQ7SS
-         AUAg==
-X-Gm-Message-State: AOJu0YzHQw5qk9GgOGZlyvtpIi1cr7c9mphiBmkznsBiOVs0z9p66m/r
-	ecXYMO7rXX/g5Qgi9hg57RsqKKbTXl7ZkXoWTkNqLxcVtidDva3BTg/j5z58Ny0z7qsSOURRPg0
-	zjrQmpKt0grhJ4UKvHyN6Ye2mZnI=
-X-Gm-Gg: ASbGnctw0eemYevcE8gAwU+p+VBKbQi6p9Ka0f4hKVOQQFc9P+S6AaPTH/2WsiVuEQO
-	o4+RSZ8UHHDt56FTpJXdRDp7Mplh903RZ0qK9pdgug2eWSb28CiX0WkAcV6nwp1/i3LleNlQ4RR
-	RwkH5sCP4QcD7CQlDkjmh2IoER0z7epDAS+yVzHE06
-X-Google-Smtp-Source: AGHT+IHbHlcnsyRDMud+/n7IikXfOg0s0AuBXfWC8rgtF8xwTPvW9d3B5ybbFnhH5b5EsMC6prWqlItm9boc/M7bC5M=
-X-Received: by 2002:a05:6830:6d85:b0:72b:9965:d994 with SMTP id
- 46e09a7af769-72b9965e590mr7419911a34.23.1741880916179; Thu, 13 Mar 2025
- 08:48:36 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1741879908; x=1742484708;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=72hqLRnD+8DwAFsMN4o9kEz/5hvdyVRbMNZiZXWwSn0=;
+        b=t1rdDJmSBLg49sPXzP5+YpFHhf3FSG4E06Lj0mpglTxfb6dyWbLjKITS03WHrKXrvN
+         txHPN6gpOgedfv8Sylq045X/E8D1q97frOjJU/NzOxyC68PhcGNr21/sI16KCtZ3GuTS
+         nxWezW4aLXsnXx+kYQ2O6X96CxBNL4B5AichGsv6ZYGwZKLR6Ff6NR0jStT3yDJuNADE
+         LPv5mw7tIpAuZkB2OxcUY+kYzIDveyG1E564sBZMjvnjK/QnsLXuB6rAxy/+37OSoPwo
+         wbWVCWV3WX5zZ0aAjcp3MaXoHMkYzpRBC+kuWILi+rJ7bB+UfY2aFlAhWHarZd/KjPF3
+         FGqQ==
+X-Gm-Message-State: AOJu0YyvRUk2f6qdxjadD/mY35lFQOX7RJYErt9MyWVBq+rzqGdIGDbo
+	PcwIJm818TwJkVbRJNNtChUxfzRCbgchkHqVUNgEsZM2TZ8T3YelMx88RFAJgm9Yrd1nGxw2WUa
+	u
+X-Gm-Gg: ASbGncuqkJ/8UCpf94ddOncgbMOgZFo9haaVkaQFvUfKw9C3Ss5DP9YRSlPmTQvs4i/
+	hvsEm+epAGBRa12+bGgtbdgVvpIAFHoLRF8Hml1oPeqx3bRuwy0P51Gd6JLgqGfGaActcjEx5mP
+	IgmY4pYBdEvs28CKdTRdcun4tssrpu7UQobFv9h6F5kQObnEnkzRPLTnt8UMVqx/i7qqYMDnI2j
+	9hwN1Z/v2W++8slYGo+GUotP9xSO+0+l8dEFEhcTkxHukOjFZNc+v9kFJLN3AjW3olGkE/CBzTi
+	VTs0sYU5Mp/+RYAeBREGYzO1XOZs8jnqW7q9xjqgvachdxIEmLNnbsO3mtpb7F7O/Nb+DA4FsKI
+	nn4rUW1Xjcg==
+X-Google-Smtp-Source: AGHT+IEahpOZxcwUEdOLU4SrJR91m++WsHNdqa+dnol0GTNnBsG9/6pWdkhobXfsxlWVbidj/lzezQ==
+X-Received: by 2002:a05:6000:1faa:b0:391:22a9:4408 with SMTP id ffacd0b85a97d-392641bd0f0mr13319565f8f.16.1741879908030;
+        Thu, 13 Mar 2025 08:31:48 -0700 (PDT)
+Received: from FRSMI25-BPYTOP.. (205.226.7.93.rev.sfr.net. [93.7.226.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-395c7df34eesm2498231f8f.18.2025.03.13.08.31.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 13 Mar 2025 08:31:47 -0700 (PDT)
+From: "Sofiane HAMAM" <sofiane.hamam@smile.fr>
+To: openembedded-devel@lists.openembedded.org
+Cc: Sofiane HAMAM <sofiane.hamam@smile.fr>
+Subject: [meta-oe][PATCH] neon: fix broken SRC_URI
+Date: Thu, 13 Mar 2025 16:30:57 +0100
+Message-ID: <20250313153057.3925895-1-sofiane.hamam@smile.fr>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250307093255.1110778-1-awais.belal@gmail.com>
- <20250307093255.1110778-2-awais.belal@gmail.com> <CAMKF1spsyTBdgD_we=X2Q9vpGFhBi-0E59ArdGyKr3KB-8g3Gg@mail.gmail.com>
- <CAM=5Amb6u5-8pmud11do97X4UAwLToizR9SiGjPD=4+Zqet6Rw@mail.gmail.com>
- <CAMKF1sroz=jLxp9PfMkZoQwtRjyvDZhK15kGLS32q5vu7dxcHA@mail.gmail.com> <CAM=5AmYtt81oiNVQqYMbu--Z0vTfGpQ5eHUpdJeV2KqoUdT4Ww@mail.gmail.com>
-In-Reply-To: <CAM=5AmYtt81oiNVQqYMbu--Z0vTfGpQ5eHUpdJeV2KqoUdT4Ww@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 13 Mar 2025 08:48:09 -0700
-X-Gm-Features: AQ5f1JoyYWdDtIiU-c3Muv9wJCE8wqrOg4OvdDqmw2nFV9Acx7yOHHv7-8dpQaI
-Message-ID: <CAMKF1srDnbOc3LGOJ0YBVNGbxJ8-7bzSZMowWZ=WuONeFbvuiQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][scarthgap][PATCH 2/2] mongodb: update to 4.4.29
-To: Awais Belal <awais.belal@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 15:48:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115976
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 16:16:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115977
 
-there still are errors see
+Update neon v0.33.0 SRC_URI, old one is not found in DEBIAN_MIRROR
+at the time of commiting.
 
-https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/452/step=
-s/15/logs/stdio
+Signed-off-by: Sofiane HAMAM <sofiane.hamam@smile.fr>
+---
+ meta-oe/recipes-support/neon/neon_0.33.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Wed, Mar 12, 2025 at 11:51=E2=80=AFAM Awais Belal <awais.belal@gmail.com=
-> wrote:
->>>>
->>>>
->>>
->>>  The changeset was intended for scarthgap and I haven't made sure if ma=
-ster builds. Is that a requirement? The cgi module was dropped in python 3.=
-13 which is what master is following at this point. I might send a separate=
- series for master once I move on to that.
->>
->>
->> Patches are routed by master to release branches if they are needed in m=
-aster. They are done for master and then backported
->
->
-> Hi Khem,
-> I've just sent https://patchwork.yoctoproject.org/project/oe/list/?series=
-=3D32428 which coupled with the changes here fixes mongodb build for master=
- as well. Kindly note that the other series (https://patchwork.yoctoproject=
-.org/project/oe/list/?series=3D32428) is not needed for scarthgap.
->
-> --
-> Regards,
-> Awais Belal
+diff --git a/meta-oe/recipes-support/neon/neon_0.33.0.bb b/meta-oe/recipes-support/neon/neon_0.33.0.bb
+index 66398c6de..0ab6d25f5 100644
+--- a/meta-oe/recipes-support/neon/neon_0.33.0.bb
++++ b/meta-oe/recipes-support/neon/neon_0.33.0.bb
+@@ -5,7 +5,7 @@ LICENSE = "LGPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://src/COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a \
+                     file://src/ne_utils.h;beginline=1;endline=20;md5=34c8e338bfa0237561e68d30c3c71133"
+ 
+-SRC_URI = "${DEBIAN_MIRROR}/main/n/neon27/neon27_${PV}.orig.tar.gz \
++SRC_URI = "https://notroj.github.io/neon/neon-${PV}.tar.gz \
+            file://pkgconfig.patch \
+            file://0001-Disable-installing-documentation.patch \
+            file://run-ptest \
 
