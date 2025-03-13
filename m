@@ -2,310 +2,226 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C42CC2BA1B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B67E7C35FF1
 	for <webhook@archiver.kernel.org>; Thu, 13 Mar 2025 07:43:48 +0000 (UTC)
 Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
- by mx.groups.io with SMTP id smtpd.web10.9436.1741851819862776802
+ by mx.groups.io with SMTP id smtpd.web10.9440.1741851819952067555
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 13 Mar 2025 00:43:40 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
 Received: from fwd77.aul.t-online.de (fwd77.aul.t-online.de [10.223.144.103])
-	by mailout12.t-online.de (Postfix) with SMTP id 019041024;
+	by mailout12.t-online.de (Postfix) with SMTP id 03EA61026;
 	Thu, 13 Mar 2025 08:43:38 +0100 (CET)
 Received: from intel-corei7-64.fritz.box ([79.219.231.110]) by fwd77.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tsdE8-4WdEZA0; Thu, 13 Mar 2025 08:43:36 +0100
+	esmtp id 1tsdE8-4WdEZB0; Thu, 13 Mar 2025 08:43:36 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [RFC][gnome48][meta-gnome][PATCH 4/8] mutter: update 47.5 -> 48.rc
-Date: Thu, 13 Mar 2025 08:44:07 +0100
-Message-ID: <20250313074411.5600-4-f_l_k@t-online.de>
+Subject: [RFC][gnome48][meta-gnome][PATCH 5/8] gnome-shell: update 47.3 -> 48.rc
+Date: Thu, 13 Mar 2025 08:44:08 +0100
+Message-ID: <20250313074411.5600-5-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250313074411.5600-1-f_l_k@t-online.de>
 References: <20250313074411.5600-1-f_l_k@t-online.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-X-TOI-EXPURGATEID: 150726::1741851816-2D7F8466-C2EE85D7/0/0 CLEAN NORMAL
-X-TOI-MSGID: 67c552bb-e085-4b37-a2cc-d888c365a25b
+X-TOI-EXPURGATEID: 150726::1741851816-AE7FA466-E18D239C/0/0 CLEAN NORMAL
+X-TOI-MSGID: 22129373-92c7-42fe-89a8-cfde3402896c
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 07:43:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115953
-
-- libdisplay-info is not optional anymore
-- add dependencies to fix api-documentation and bash-completion
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115957
 
 48.rc
 =3D=3D=3D=3D=3D
-* Support presentation-time version 2 [Dudemanguy; !4227]
-* Honor wl_surface.offset on cursor surfaces [Carlos; !4239]
-* Allow to activate the overview with either Super key [Alessandro B.; !4=
-050]
-* Implement dynamic triple buffering [Daniel; !1441]
-* Implement the cursor_shape_v1 protocol [Sebastian; !3668]
-* Improve window placement when centering new windows [Mattia; !4202]
-* Fix sharable surfaces with nvidia as primary [Daniel; !4284]
-* Default to sticky drag lock [Peter; !4292]
-* Implement a11y keyboard monitoring support [Luk=C3=A1=C5=A1; !4217]
-* Support wp_color_management_v1 protocol [Sebastian; !4291]
-* Fix dma-bufs support for headless sessions [Jonas; !4281]
-* Allow to mark monitors for lease via gdctl [Jos=C3=A9; !4300]
-* Fixed confused IM focus state after closing some windows [Keyu; !4164]
-* Center new windows by default [Mattia; !4294]
-* Add output luminance settings [Jonas; !4271]
-* Do not use triple buffering when update time fits into refresh interval
-  [Michel; !4282]
-* Fixed crashes [Peter, Alban, Michel, Sebastian; !4247, !4257, !4272, !4=
-298]
-* Misc. bug fixes and cleanups [Peter, Nick, Jeremy, Michel, Corentin, Fl=
-orian,
-  Sebastian, Marco, Bilal, Alessandro A., Daniel, Jos=C3=A9, Jonas, Joan,=
- Mattia,
-  Carlos, Robert, Philip; !4248, !4220, !4253, !4254, !4224, !4255, !4244=
-,
-  !4259, !4268, !4270, !4267, !4256, !4279, !4280, !4277, !4278, !4285, !=
-4276,
-  !4289, !4288, !4290, !4252, !4235, !4209, !4260, !4251, !4274, !4302, !=
-4230,
-  !4183, !4299, !4308, !4297, !4310, !4311, !4312, !4314]
+* Fix integer scaling for spinner [Daniel v. V.; !3634]
+* Group notifications by app [Julian; !3012]
+* Fix tracking inactive time for screen time limits [Florian; !3636]
+* Fix occasional stacking glitch during overview transition [Keyu; !3460]
+* Reorganize default dash/grid/folder apps [Florian, Allan; !3642]
+* Handle suspend/resume when tracking screen time [Philip; !3643]
+* Misc. bug fixes and cleanups [Marco, Florian, Sebastian, Daniel R.,
+  Alessandro; !3629, !3630, !3631] !3620, !3637, !3635, !3632, !3616, !36=
+33,
+  !3639, !3649, !3646, !3647, !3651]
 Contributors:
-  Alessandro Astone, Alessandro Bono, Alban Browaeys, Jeremy B=C3=ADcha,
-  Nick Diego Yamane, Dudemanguy, Michel D=C3=A4nzer, Bilal Elmoussaoui,
-  Jos=C3=A9 Exp=C3=B3sito, Mattia Formichetti, Carlos Garnacho, Peter Hut=
-terer,
-  Robert Mader, Florian M=C3=BCllner, Corentin No=C3=ABl, Keyu Tao, Joan =
-Torres,
-  Marco Trevisan (Trevi=C3=B1o), Luk=C3=A1=C5=A1 Tyrychtr, Daniel van Vug=
-t, Sebastian Wick,
-  Philip Withnall, Jonas =C3=85dahl
+  Alessandro Astone, Allan Day, Florian M=C3=BCllner, Daniel Rusek, Julia=
+n Sparber,
+  Keyu Tao, Marco Trevisan (Trevi=C3=B1o), Daniel van Vugt, Sebastian Wic=
+k,
+  Philip Withnall
 Translators:
-  Martin [sl], Sabri =C3=9Cnal [tr], Artur S0 [ru], Daniel Rusek [cs],
-  Piotr Dr=C4=85g [pl], J=C3=BCrgen Benvenuti [de], Ekaterine Papava [ka]=
+  Cheng-Chia Tseng [zh_TW], Jordi Mas i Hernandez [ca], Sabri =C3=9Cnal [=
+tr],
+  Jordi Mas [ca], Aurimas =C4=8Cernius [lt], Piotr Dr=C4=85g [pl], Aefgh =
+Threenine [th],
+  Ekaterine Papava [ka], Andika Triwidada [id], Daniel Rusek [cs],
+  Danial Behzadi [fa], Yuri Chornoivan [uk], Asier Sarasua Garmendia [eu]=
 ,
-  Alexander Shopov [bg], Alexandre Franke [fr], Jordi Mas [ca],
-  Yuri Chornoivan [uk], Yosef Or Boczko [he], Danial Behzadi [fa],
-  Luming Zh [zh_CN], Aurimas =C4=8Cernius [lt], Quentin PAG=C3=88S [oc],
-  Hugo Carvalho [pt], Rafael Fontenelle [pt_BR], Jordi Mas i Hernandez [c=
-a],
-  Fran Dieguez [gl], =C3=81lvaro Burns [pt_BR], Asier Sarasua Garmendia [=
-eu],
-  Vincent Chatelain [fr], Yaron Shahrabani [he], Brage Fuglseth [nb],
-  Daniel Mustieles [es]
+  Yosef Or Boczko [he], twlvnn kraftwerk [bg], Quentin PAG=C3=88S [oc],
+  Luming Zh [zh_CN], Jiri Gr=C3=B6nroos [fi], Hugo Carvalho [pt], Fran Di=
+eguez [gl],
+  A S Alam [pa], Brage Fuglseth [nb], Giannis Antypas [el]
 
 48.beta
 =3D=3D=3D=3D=3D=3D=3D
-* Update cursors via the frame clock in virtual monitors [Jonas; !4067]
-* Synchronize device enabled state when adding device [Yao; !4188]
-* Do not use modifiers if surface should be sharable [Michel; !4219]
-* Add accessible state tracking in Clutter [Bilal; !4089]
-* Introduce GNOME Display Control (gdctl) utility [Jonas; !4190]
-* Fix notifying shell about modifier-only keyboard layout switches
-  [Olivier; !4232, !4237]
-* Configure HDR via DisplayConfig D-Bus API [Jonas; !4192]
-* Fixed crashes [Philip, Jonas; !4222, !4210]
-* Misc. bug fixes and cleanups [Michel, Sebastian W., Jonas, Jos=C3=A9, A=
-lessandro,
-  Sebastian K., Daniel, Philip, Carlos, Florian, Alberto, Bilal; !4208, !=
-4022,
-  !4005, !4218, !4225, !4229, !4228, !4231, !4223, !3972, !4233, !4234, !=
-4242,
-  !4198]
+* Fix overlapping tiles in app grid on hover [Sam; !3551]
+* Improve screen time limit support
+  [Philip, Florian; !3597, !3603, !3604, !3606]
+* Fix default user avatar with light stsyle [Sam; !3596]
+* Transition to new BoxLayout.orientation property
+  [Florian, Carlos; !3614, !3618]
+* Allow tracking screen time history with no limit set [Philip; !3610]
+* Fix Extensions app losing state after shell restart [Florian; !3463]
+* Support loading login banner message from file [Florian; !3558]
+* Misc. bug fixes and cleanups [Florian, Daniel, Bilal, Philip, Adam, Car=
+los,
+  Julian; !3600, !3601, !3528, !3510, !3605, !3607, !3609, !3613, !3615, =
+!3598,
+  !3617, !3599, !3612, !3621, !3619, !3429, !3627]
 Contributors:
-  Alessandro Astone, Michel D=C3=A4nzer, Bilal Elmoussaoui, Jos=C3=A9 Exp=
-=C3=B3sito,
-  Olivier Fourdan, Carlos Garnacho, Sebastian Keller, Florian M=C3=BCllne=
-r,
-  Alberto Ruiz, Daniel van Vugt, Yao Wei (=E9=AD=8F=E9=8A=98=E5=BB=B7), S=
-ebastian Wick,
-  Philip Withnall, Jonas =C3=85dahl
+  Bilal Elmoussaoui, Carlos Garnacho, Sam Hewitt, Florian M=C3=BCllner,
+  Julian Sparber, Daniel van Vugt, Adam Williamson, Philip Withnall
+Translators:
+  Rafael Fontenelle [pt_BR], Artur S0 [ru], Quentin PAG=C3=88S [oc],
+  Emilio Sep=C3=BAlveda [ia], Martin [sl], Philipp Kiemle [de]
 48.alpha
 =3D=3D=3D=3D=3D=3D=3D=3D
-* gwakeup: Reduce wake-ups to only first item in queue [Christian; !4007]
-* x11: Reduce chances XPending does recvmsg() syscall [Christian; !4006]
-* Fix grabbing tablet devices [Jonas =C3=85.; !4033]
-* Improve color-management support [Joan; !3913, !3948, !4020, !4062, !41=
-44]
-* Fix misplaced windows and random resizes on scaled monitors [Jonas =C3=85=
-.; !4041]
-* Improve detecting preferred primary devices [Kamil; !4055]
-* Merge CoglPango into Clutter [Bilal; !4004]
-* Always depend on libdisplay-info for EDID parsing [Sebastian W.; !3602]
-* Fix explicit sync with virtual monitors w/o pipewire streams [Do=C4=9Fu=
-kan; !4056]
-* Introspect `event` parameter in MetaKeyHandlerFunc [Guacamolie; !4079]
-* Fix warping pointer after releasing pointer constraints [Sebastian K.; =
-!4098]
-* Avoid CPU stalls with NVIDIA secondary GPUs with directly-attached moni=
-tors
-  [Gert-dev; !4015]
-* Fix updating cursor immediately when starting window drag [Olivier; !36=
-39]
-* Add pipeline hooks to user program pipelines [Sebastian W.; !4037]
-* Allow to configure monitors as for-lease [Jos=C3=A9; !4112, !4121]
-* Add support for system bell protocol [Jonas =C3=85.; !3675]
-* Prefer GPUs with built-in panels connected as primary GPU [Mario; !4114=
-]
-* Add `configure` signal to allow tweaking original window configuration
-  [Olivier; !4076]
-* Fix cursor glitches when using virtual monitors [Jonas =C3=85.; !4066]
-* Default to high thread instead of realtime priority for KMS thread
-  [Jonas =C3=85.; !4124]
-* Add built-in renderdoc support [Sebastian W.; !4061]
-* Ensure frame events are sent for cursor surfaces [Michel; !4113]
-* Allow BGRX8888 format on big endian [Jocelyn; !4088]
-* Fix touchscreen drag-and-drop on wayland [Alessandro; !4091]
-* Fix maximized X11 when using native Xwayland scaling [Jonas =C3=85.; !4=
-147]
-* Implement xdg-toplevel-drag-v1 protocol [Nick; !4107]
-* Fix blank screen in remote headless sessions [Jonas =C3=85.; !4152]
-* Query screen cast format modifiers via CoglRenderer [Jonas =C3=85.; !39=
-00]
-* Also request high priority secondary EGL context [Jonas =C3=85.; !2973]
-* Fix Xwayland DND coordinates when using fractional scaling [Jonas =C3=85=
-.; !4169]
-* Remove ClutterImage [Bilal; !4133]
-* Fix applying initial _NET_WM_WINDOW_OPACITY on Xwayland [Olivier; !4170=
-]
-* Implement wp_viewport support for cursor surfaces [Jonas =C3=85., Rober=
-t; !3859]
-* Improve input =E2=86=92 output latency of cursor movements [Michel; !39=
-64]
-* Make font-rendering support optional [Bilal; !4106]
-* Improve frame rate on monitors attached to secondary GPUs in copy mode
-  [Gert-dev; !4027]
-* Add support for commit-timing-v1 and fifo-v1 protocols [Derek; !3355]
-* Use BT709 coefficients and limited range for YUV conversion by default
-  [Robert; !4204]
-* Send preferred scales to all surface roles [Jonas =C3=85.; !4205]
-* Fixed crashes [Michel, Joan, Daniel, Jos=C3=A9, Jason, Bilal, Robert, J=
-onas D.,
-  Peter; !4028, !4032, !4019, !4029, !4030, !4059, !4070, !4034, !3176, !=
-3650,
-
-  !4117, !4136]
-* Misc. bug fixes and cleanups [Sebastian W., Florian, Joan, Jonas =C3=85=
-., Jos=C3=A9,
-  Christian, Robert, Marco, Michel, Bilal, Daniel, Sebastian K., Jakub, J=
-onas D,
-  Takao, Ikey, Georges, Carlos, Corentin, Philip, Bart=C5=82omiej; !4036,=
- !4040,
-  !4042, !3965, !4016, !3926, !4031, !4011, !3424, !4047, !4049, !4058, !=
-4068,
-  !4048, !4071, !4074, !3980, !4078, !4080, !4035, !4075, !4090, !4093, !=
-4060,
-  !4069, !3961, !4101, !4057, !4104, !4105, !4108, !4109, !4077, !4111, !=
-4115,
-  !4116, !4087, !4018, !3943, !4123, !4122, !4103, !4064, !4100, !4065, !=
-4125,
-  !4128, !4127, !4129, !4126, !3604, !4150, !4161, !4162, !4160, !4137, !=
-4148,
-  !4166, !4157, !4156, !4158, !4168, !4149, !4165, !4155, !4174, !4163, !=
-4173,
-  !4175, !4176, !4131, !4132, !4179, !4178, !4130, !4180, !4177, !4184, !=
-4186,
-  !4189, !4187, !4197, !4199, !4194, !4181, !4200, !4196, !3878, !4201]
-Contributors:
-  Alessandro Astone, Georges Basile Stavracas Neto, Nick Diego Yamane,
-  Ikey Doherty, Jonas Dre=C3=9Fler, Michel D=C3=A4nzer, Bilal Elmoussaoui=
+* Improve quick settings accessibility [Luk=C3=A1=C5=A1; !3477, !3481, !3=
+484, !3485]
+* Use accent color in tablet configuration UI [Alice; !3480]
+* Improve accuracy of inset box shadows [Daniel; !3488]
+* Fix `PopupSwitchMenuItem::toggled` passing wrong state [Andrew; !3493]
+* Consider text direction when handling arrow keys in sliders [Sundeep; !=
+3500]
+* Fix layout issues with new dialog style [Sam; !3473]
+* Fix uneven padding in notification headers [Sam; !3486]
+* Fix graphical artifacts in partially-rounded buttons [Sebastian; #7996]
+* Do not depend on gnome-menus for folder translations [Pablo; !3526]
+* Fix caret tracking in magnifier [Bilal; !3522]
+* Show OSD notification for headphone connection [Sundeep; !3531]
+* Improve accessibility of keyboard backlight quick settings toggle
+  [Luk=C3=A1=C5=A1, Florian; !3538, !3545]
+* Fix resetting non-caps shift key in on-screen keyboard [Jonas; !3286]
+* Improve contrast of notification placeholder [Sam; !3557]
+* Add support for screen time / health breaks [Philip; !3251]
+* Add sysext support to toolbox tooling [Florian; !3498]
+* Modernize spinner [Florian; !3565]
+* extensions-app: Allow closing with ctrl+w [Maximiliano; !3577]
+* Fix Escape handling in run dialog [Florian; !3585]
+* Fix custom text-scaling-factor getting reset [Matthijs; !3574]
+* Tweak ibus candidate popover appearance [AuralRay; !3584]
+* Add convenience logging API for extensions [Florian; !3586]
+* Improve on-screen keyboard appearance [Sam; !3555, !3553]
+* Tweak quick settings appearance [Sam; !3554]
+* Add support for screen time limits [Philip; !3397]
+* Fixed crash [Florian; !3476]
+* Misc. bug fixes and cleanups [Florian, Robert, Bilal, Marco, Guacamolie=
 ,
-  Jos=C3=A9 Exp=C3=B3sito, Jocelyn Falempe, Derek Foreman, Olivier Fourda=
-n,
-  Takao Fujiwara, Carlos Garnacho, Jason Gerecke, Gert-dev, Guacamolie,
-  Christian Hergert, Peter Hutterer, Sebastian Keller, Do=C4=9Fukan Korkm=
-azt=C3=BCrk,
-  Mario Limonciello, Robert Mader, Florian M=C3=BCllner, Corentin No=C3=AB=
-l,
-  Robert Obkircher, Bart=C5=82omiej Piotrowski, Jakub Steiner, Kamil Szcz=
-=C4=99k,
-  Joan Torres, Marco Trevisan (Trevi=C3=B1o), Daniel van Vugt, Sebastian =
-Wick,
-  Philip Withnall, Jonas =C3=85dahl
+  Automeris, Daniel, Jonas, Georges, Michel, Bart=C5=82omiej, Alberto, As=
+ciiWolf,
+  Jakub, Sam; !3478, !3479, !3482, !3490, !3099, !3494, !3495, !3497, !34=
+99,
+  !3504, !3503, !3502, !3505, !3507, !3508, !3506, !3379, !3511, !3514, !=
+3515,
+  !3519, !3520, !3518, !3521, !3524, !3527, !3501, !3529, !3535, !3532, !=
+3542,
+  !3540, !3543, !3541, !3549, !3548, !3539, !3563, !3567, !3569, !3570, !=
+3547,
+  !3573, !3525, !3546, !3575, !3572, !3544, !3580, !3578, !3576, !3579, !=
+3589,
+  !3587, !3552, !3593]
+Contributors:
+  AsciiWolf, AuralRay, Georges Basile Stavracas Neto, Pablo Correa G=C3=B3=
+mez,
+  Jonas Dre=C3=9Fler, Michel D=C3=A4nzer, Bilal Elmoussaoui, Guacamolie, =
+Sam Hewitt,
+  Sebastian Keller, Robert Mader, Sundeep Mediratta, Alice Mikhaylenko,
+  Florian M=C3=BCllner, Bogi Napoleon Wennerstr=C3=B6m, Automeris naranja=
+,
+  Bart=C5=82omiej Piotrowski, Alberto Ruiz, Daniel Rusek, Maximiliano San=
+doval,
+  Jakub Steiner, Marco Trevisan (Trevi=C3=B1o), Luk=C3=A1=C5=A1 Tyrychtr,=
+ Daniel van Vugt,
+  Matthijs Velsink, Philip Withnall, Andrew Zaech
 Translators:
-  Vincent Chatelain [fr], Jordi Mas i Hernandez [ca], Daniel Mustieles [e=
-s],
-  J=C3=BCrgen Benvenuti [de], Nathan Follens [nl], Danial Behzadi [fa],
+
+  Aefgh Threenine [th], Daniel Mustieles [es], Mahdi Hasan [bn],
+  Brage Fuglseth [nb], Athmane MOKRAOUI [kab], Fabio Tomat [fur],
+  Bogi Napoleon Wennerstr=C3=B6m [fo], Martin [sl], Emilio Sep=C3=BAlveda=
+ [ia],
+  Vasil Pupkin [be], Nathan Follens [nl], Artur S0 [ru],
   =D0=9C=D0=B0=D1=80=D0=BA=D0=BE =D0=9A=D0=BE=D1=81=D1=82=D0=B8=D1=9B [sr=
-], Scrambled 777 [hi], Cas Pascal [vi]
+], Yaron Shahrabani [he], Cas Pascal [vi],
+  Sabri =C3=9Cnal [tr]
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../mutter/{mutter_47.5.bb =3D> mutter_48.rc.bb}           | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
- rename meta-gnome/recipes-gnome/mutter/{mutter_47.5.bb =3D> mutter_48.rc=
-.bb} (93%)
+ ...hell-extensions_47.3.bb =3D> gnome-shell-extensions_48.rc.bb} | 2 +-
+ .../gnome-shell/{gnome-shell_47.3.bb =3D> gnome-shell_48.rc.bb}  | 3 ++-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+ rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell-extensions_47.3=
+.bb =3D> gnome-shell-extensions_48.rc.bb} (84%)
+ rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell_47.3.bb =3D> gn=
+ome-shell_48.rc.bb} (94%)
 
-diff --git a/meta-gnome/recipes-gnome/mutter/mutter_47.5.bb b/meta-gnome/=
-recipes-gnome/mutter/mutter_48.rc.bb
-similarity index 93%
-rename from meta-gnome/recipes-gnome/mutter/mutter_47.5.bb
-rename to meta-gnome/recipes-gnome/mutter/mutter_48.rc.bb
-index ca28a679cd..5400b803b1 100644
---- a/meta-gnome/recipes-gnome/mutter/mutter_47.5.bb
-+++ b/meta-gnome/recipes-gnome/mutter/mutter_48.rc.bb
-@@ -14,9 +14,12 @@ DEPENDS =3D " \
-     pango \
-     gsettings-desktop-schemas \
-     json-glib \
-+    libdisplay-info \
-     libei \
-     libxtst \
-     libxkbfile \
-+    python3-argcomplete-native \
-+    python3-docutils-native \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xinerama', '', d)} \
-     xwayland \
- "
-@@ -24,7 +27,7 @@ DEPENDS =3D " \
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_=
+47.3.bb b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_48.=
+rc.bb
+similarity index 84%
+rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_4=
+7.3.bb
+rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_48.=
+rc.bb
+index 151e57e887..13b58cf068 100644
+--- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_47.3.bb
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_48.rc.b=
+b
+@@ -6,7 +6,7 @@ inherit gnomebase gettext gsettings features_check
 =20
- inherit gnomebase gsettings gobject-introspection gettext features_check
+ REQUIRED_DISTRO_FEATURES =3D "x11 polkit systemd pam gobject-introspecti=
+on-data"
 =20
--SRC_URI[archive.sha256sum] =3D "6551a33ce887e68415b13952af6d6b430e95306f=
-9297adc8c111953e995c515b"
-+SRC_URI[archive.sha256sum] =3D "4338d8542426a708d80427f5b19f1f86683c04ec=
-6e2f43479abb28b115aba86f"
+-SRC_URI[archive.sha256sum] =3D "1a9142a4e85d7a2b7dc5bad37e34df9eebb38e84=
+96f4938be2d7b2b35883d139"
++SRC_URI[archive.sha256sum] =3D "1ede570d43b61e28a1f0eaf7472cb5cef3e52255=
+c4e43fe64695b2eded2b97a2"
 =20
- SRC_URI +=3D "file://0001-Dont-use-system-sysprof-dbus-folder.patch"
+ EXTRA_OEMESON +=3D " \
+     -Dextension_set=3Dall \
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_47.3.bb b/m=
+eta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.rc.bb
+similarity index 94%
+rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell_47.3.bb
+rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.rc.bb
+index b3fba01eee..e64e4eadf7 100644
+--- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_47.3.bb
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.rc.bb
+@@ -33,7 +33,7 @@ GIR_MESON_OPTION =3D ""
+ # gobject-introspection is mandatory and cannot be configured
+ REQUIRED_DISTRO_FEATURES +=3D "gobject-introspection-data"
 =20
-@@ -54,7 +57,6 @@ EXTRA_OEMESON +=3D " \
- PACKAGECONFIG[native-backend] =3D "-Dnative_backend=3Dtrue -Dudev=3Dtrue=
-, -Dnative_backend=3Dfalse -Dudev=3Dfalse, libdrm virtual/libgbm libinput=
- ${LOGIND} virtual/egl virtual/libgles2 udev"
- PACKAGECONFIG[opengl] =3D "-Dopengl=3Dtrue, -Dopengl=3Dfalse, virtual/li=
-bgl"
- PACKAGECONFIG[glx] =3D "-Dglx=3Dtrue, -Dglx=3Dfalse"
--PACKAGECONFIG[libdisplay-info] =3D "-Dlibdisplay_info=3Denabled, -Dlibdi=
-splay_info=3Ddisabled, libdisplay-info"
- PACKAGECONFIG[libwacom] =3D "-Dlibwacom=3Dtrue, -Dlibwacom=3Dfalse, libw=
-acom"
- # Remove depending on pipewire-0.2 when mutter is upgraded to 3.36+
- PACKAGECONFIG[remote-desktop] =3D "-Dremote_desktop=3Dtrue, -Dremote_des=
-ktop=3Dfalse, pipewire"
-@@ -64,7 +66,7 @@ PACKAGECONFIG[sound-player] =3D "-Dsound_player=3Dtrue,=
- -Dsound_player=3Dfalse, libcan
- PACKAGECONFIG[profiler] =3D "-Dprofiler=3Dtrue,-Dprofiler=3Dfalse,syspro=
-f"
- PACKAGECONFIG[startup-notification] =3D "-Dstartup_notification=3Dtrue, =
--Dstartup_notification=3Dfalse, startup-notification, startup-notificatio=
-n"
+-SRC_URI[archive.sha256sum] =3D "783deb9a086511e4a53db10574bfbba695576f69=
+8078218ca6c80cb1efec293e"
++SRC_URI[archive.sha256sum] =3D "dd5b1c73d460819ca683aaae0caf1f126bbd55f6=
+1abc872d44c8a6fcd5b59bc7"
 =20
--MUTTER_API_NAME =3D "mutter-15"
-+MUTTER_API_NAME =3D "mutter-16"
-=20
- do_install:prepend() {
-     sed -i -e 's|${B}/||g' ${B}/cogl/cogl/cogl-enum-types.c
-@@ -88,6 +90,7 @@ GSETTINGS_PACKAGE =3D "${PN}-gsettings"
- PACKAGES =3D+ "${PN}-tests ${PN}-gsettings"
-=20
- FILES:${PN} +=3D " \
-+    ${datadir}/bash-completion \
+ PACKAGECONFIG ??=3D "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', =
+'systemd', d)}"
+ PACKAGECONFIG[bluetooth] =3D ",,gnome-bluetooth"
+@@ -67,6 +67,7 @@ FILES:${PN} +=3D " \
+     ${datadir}/dbus-1 \
      ${datadir}/gnome-control-center \
-     ${datadir}/gir-1.0 \
-     ${libdir}/${MUTTER_API_NAME}/lib*${SOLIBS} \
+     ${datadir}/xdg-desktop-portal \
++    ${datadir}/desktop-directories \
+     ${systemd_user_unitdir} \
+ "
+=20
 --=20
 2.48.1
 
