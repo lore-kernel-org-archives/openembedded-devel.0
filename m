@@ -1,88 +1,101 @@
-Return-Path: <philip@balister.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 298CDC282DE
-	for <webhook@archiver.kernel.org>; Thu, 13 Mar 2025 16:16:02 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.web11.17829.1741879910259833545
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C1B7C35FF3
+	for <webhook@archiver.kernel.org>; Thu, 13 Mar 2025 16:35:52 +0000 (UTC)
+Received: from mail-oi1-f173.google.com (mail-oi1-f173.google.com [209.85.167.173])
+ by mx.groups.io with SMTP id smtpd.web11.19586.1741883749777400652
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Mar 2025 08:31:50 -0700
+ Thu, 13 Mar 2025 09:35:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=h/Ffhpx6;
- spf=pass (domain: smile.fr, ip: 209.85.221.42, mailfrom: sofiane.hamam@smile.fr)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-391342fc148so762335f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 08:31:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YyB6HNo8;
+ spf=pass (domain: gmail.com, ip: 209.85.167.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f173.google.com with SMTP id 5614622812f47-3f546cbf71cso507313b6e.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 09:35:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1741879908; x=1742484708; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=72hqLRnD+8DwAFsMN4o9kEz/5hvdyVRbMNZiZXWwSn0=;
-        b=h/Ffhpx6+yWr4tjxW6WT46WR0wb5g+6d1qIkzz/B+hZdg+t0UuXEabu62MnKyz8LR6
-         0KGw84QWn9OFfexDIx+P7aDtxb4M52XZAdf1qfBtkE0GyHNKkIXk+vyuidQmydiG8ZD8
-         hFDx/5Dz3LZeqXVDabOINTPimYtcEF93clPxQ=
+        d=gmail.com; s=20230601; t=1741883749; x=1742488549; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ogC+Rpqonm1prCqjW4isPVjWvrNXxRCZjwpwgSqQJMs=;
+        b=YyB6HNo8e2iEuA0JmGvDTA832U2dwhkeHwOyJBr2KnvaIJdp1ySjZBogu2gZ+RE+KU
+         s7mC4MLxtbdcjqwQrvUnHzd6nUK/pMnfujRwgofPRB+bP+C9ZXWM6Wkqp+PvwXspMPNA
+         263mL7Ck2/y//i94ioF3RIe8bULCI7jQz+OGwW5xf1/1VpA1k4gTzT9EmOQcPl0gqs/h
+         4vVEosXZftqbP5fP7EwPa5lF/kTzweYZCsQG6lFg7QWJHtBXEl4CnMCDTyqnFbTRD9S1
+         hXzbAW0QhVtLX4Orjr99cB6fz6HW2IezdA/3tb4zlplmUGzrxvH3jiz6XINESBX8qbwN
+         yvLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741879908; x=1742484708;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=72hqLRnD+8DwAFsMN4o9kEz/5hvdyVRbMNZiZXWwSn0=;
-        b=t1rdDJmSBLg49sPXzP5+YpFHhf3FSG4E06Lj0mpglTxfb6dyWbLjKITS03WHrKXrvN
-         txHPN6gpOgedfv8Sylq045X/E8D1q97frOjJU/NzOxyC68PhcGNr21/sI16KCtZ3GuTS
-         nxWezW4aLXsnXx+kYQ2O6X96CxBNL4B5AichGsv6ZYGwZKLR6Ff6NR0jStT3yDJuNADE
-         LPv5mw7tIpAuZkB2OxcUY+kYzIDveyG1E564sBZMjvnjK/QnsLXuB6rAxy/+37OSoPwo
-         wbWVCWV3WX5zZ0aAjcp3MaXoHMkYzpRBC+kuWILi+rJ7bB+UfY2aFlAhWHarZd/KjPF3
-         FGqQ==
-X-Gm-Message-State: AOJu0YyvRUk2f6qdxjadD/mY35lFQOX7RJYErt9MyWVBq+rzqGdIGDbo
-	PcwIJm818TwJkVbRJNNtChUxfzRCbgchkHqVUNgEsZM2TZ8T3YelMx88RFAJgm9Yrd1nGxw2WUa
-	u
-X-Gm-Gg: ASbGncuqkJ/8UCpf94ddOncgbMOgZFo9haaVkaQFvUfKw9C3Ss5DP9YRSlPmTQvs4i/
-	hvsEm+epAGBRa12+bGgtbdgVvpIAFHoLRF8Hml1oPeqx3bRuwy0P51Gd6JLgqGfGaActcjEx5mP
-	IgmY4pYBdEvs28CKdTRdcun4tssrpu7UQobFv9h6F5kQObnEnkzRPLTnt8UMVqx/i7qqYMDnI2j
-	9hwN1Z/v2W++8slYGo+GUotP9xSO+0+l8dEFEhcTkxHukOjFZNc+v9kFJLN3AjW3olGkE/CBzTi
-	VTs0sYU5Mp/+RYAeBREGYzO1XOZs8jnqW7q9xjqgvachdxIEmLNnbsO3mtpb7F7O/Nb+DA4FsKI
-	nn4rUW1Xjcg==
-X-Google-Smtp-Source: AGHT+IEahpOZxcwUEdOLU4SrJR91m++WsHNdqa+dnol0GTNnBsG9/6pWdkhobXfsxlWVbidj/lzezQ==
-X-Received: by 2002:a05:6000:1faa:b0:391:22a9:4408 with SMTP id ffacd0b85a97d-392641bd0f0mr13319565f8f.16.1741879908030;
-        Thu, 13 Mar 2025 08:31:48 -0700 (PDT)
-Received: from FRSMI25-BPYTOP.. (205.226.7.93.rev.sfr.net. [93.7.226.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-395c7df34eesm2498231f8f.18.2025.03.13.08.31.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Mar 2025 08:31:47 -0700 (PDT)
-From: "Sofiane HAMAM" <sofiane.hamam@smile.fr>
-To: openembedded-devel@lists.openembedded.org
-Cc: Sofiane HAMAM <sofiane.hamam@smile.fr>
-Subject: [meta-oe][PATCH] neon: fix broken SRC_URI
-Date: Thu, 13 Mar 2025 16:30:57 +0100
-Message-ID: <20250313153057.3925895-1-sofiane.hamam@smile.fr>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20230601; t=1741883749; x=1742488549;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ogC+Rpqonm1prCqjW4isPVjWvrNXxRCZjwpwgSqQJMs=;
+        b=kH9pz21oHqrkCCceJPpskOs6+d3xaHoTa9izOKHjVplRwIy0VboNUilDsARxgEnG8y
+         sYPIUZFf5olxfMD5ZrEv/yNqkumYx24BwQ5xvFgo2lTLaAddbP2GrHyNdt97fiZKk+/f
+         E+xNWck9XQxnkrdVMaevzccgVlEth3Lakg+MUhWWjD33KIN+ScJdCttroT2H6rOnlxJt
+         Eu34eW01x1jErul5ig9RJmdtLVK2GIhBuAFY3Xg2mYODiAce2fHQmwWdXrKy7JrO3tpt
+         iIzGwW4penyoYDpwKu6OmGnz/2ekMnvphmRGcjvsjgJ5nz3XUFSz5WJesipygUbt6vbT
+         VqGA==
+X-Gm-Message-State: AOJu0YyPjJONPj0DFb4/TUlkQUUVHcMrHMZpEHPS83M2EymjQpilVMMF
+	+rVBjgbhJdd99gbTyGEk5EEDT9BnboAU/jJS0bLiFhxr6p1yj4lHZC6Lvsj6OR4pDVEHYq/+hEa
+	Sro1/YpXbQAZR3OU94v39aqCRDpTuy06g18Q=
+X-Gm-Gg: ASbGncvpBV8/AnN/gRAPBLGj5rRQ+XhsXSYAHv3rTQtMlqqTuffhA7zR+P2/iCL/8+W
+	cp4HuhGnaHgWF1NqVDwX3SIDiq/vmy1xWtiA3QnnRGXZdfd3JFvBKFgD3TX81PbFEogy6EWkzMb
+	VER3q8soaE1cArFHHvJqgjRjCe
+X-Google-Smtp-Source: AGHT+IHGEKgvJ+hOOAscSbT8Txbk4dLOiIBv+NDTTGRmfRT85hheAXBNL7uERL6ljmIKfCBzyRMuNmTHWrcC+9Hw9YQ=
+X-Received: by 2002:a05:6808:398a:b0:3fb:3059:3789 with SMTP id
+ 5614622812f47-3fda352a506mr147534b6e.32.1741883748929; Thu, 13 Mar 2025
+ 09:35:48 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250313031722.2954589-2-hongxu.jia@windriver.com> <29623.1741835951970054920@lists.openembedded.org>
+In-Reply-To: <29623.1741835951970054920@lists.openembedded.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 13 Mar 2025 09:35:23 -0700
+X-Gm-Features: AQ5f1JpwAqkAchnT6xAlzFzQG9IE9HSEiilbr5C3fleyCndGVIHhCVD24bVrmU4
+Message-ID: <CAMKF1srT8wnQR6+7Ep7ciOEA6P=eV5JE=VdF8n5wCRmvTJqEJQ@mail.gmail.com>
+Subject: Re: [oe] [PATCH] protobuf: 4.25.5 -> 4.30.0
+To: hongxu.jia@eng.windriver.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 16:16:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115977
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Mar 2025 16:35:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115978
 
-Update neon v0.33.0 SRC_URI, old one is not found in DEBIAN_MIRROR
-at the time of commiting.
+I am still seeing a protobuf-native build failure on ubuntu 20.04
+which has gcc 10
 
-Signed-off-by: Sofiane HAMAM <sofiane.hamam@smile.fr>
----
- meta-oe/recipes-support/neon/neon_0.33.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+protobuf-native/4.30.0/git/src/google/protobuf/port_def.inc:105:48:
+error: static assertion failed: Protobuf only supports C+
+   =E2=86=AA +17 and newer.
+   |   105 | #define PROTOBUF_CPLUSPLUS_MIN(x) (__cplusplus >=3D x)
+   |       |                                   ~~~~~~~~~~~~~^~~~~
+   | /home/kraj01/yoe/build/tmp/work/x86_64-linux/protobuf-native/4.30.0/gi=
+t/src/google/protobuf/port_def.inc:119:15:
+note: in expansion of macro =E2=80=98PROTOBUF_CPLUSPLUS_MIN=E2=80=99
+   |   119 | static_assert(PROTOBUF_CPLUSPLUS_MIN(201703L),
+   |       |               ^~~~~~~~~~~~~~~~~~~~~~
 
-diff --git a/meta-oe/recipes-support/neon/neon_0.33.0.bb b/meta-oe/recipes-support/neon/neon_0.33.0.bb
-index 66398c6de..0ab6d25f5 100644
---- a/meta-oe/recipes-support/neon/neon_0.33.0.bb
-+++ b/meta-oe/recipes-support/neon/neon_0.33.0.bb
-@@ -5,7 +5,7 @@ LICENSE = "LGPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://src/COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a \
-                     file://src/ne_utils.h;beginline=1;endline=20;md5=34c8e338bfa0237561e68d30c3c71133"
- 
--SRC_URI = "${DEBIAN_MIRROR}/main/n/neon27/neon27_${PV}.orig.tar.gz \
-+SRC_URI = "https://notroj.github.io/neon/neon-${PV}.tar.gz \
-            file://pkgconfig.patch \
-            file://0001-Disable-installing-documentation.patch \
-            file://run-ptest \
+
+On Wed, Mar 12, 2025 at 8:19=E2=80=AFPM hongxu via lists.openembedded.org
+<hongxu.jia=3Deng.windriver.com@lists.openembedded.org> wrote:
+>
+> Sorry for the duplicated noisy, please ignore this one and keep '[meta-oe=
+][PATCH V3] protobuf: 4.25.5 -> 4.30.0'
+>
+> //Hongxu
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#115949): https://lists.openembedded.org/g/openembedde=
+d-devel/message/115949
+> Mute This Topic: https://lists.openembedded.org/mt/111673625/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
