@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F4E1C35FF6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DB32C28B2F
 	for <webhook@archiver.kernel.org>; Fri, 14 Mar 2025 20:52:24 +0000 (UTC)
-Received: from mta-64-228.siemens.flowmailer.net (mta-64-228.siemens.flowmailer.net [185.136.64.228])
- by mx.groups.io with SMTP id smtpd.web11.4450.1741985533457889545
+Received: from mta-65-226.siemens.flowmailer.net (mta-65-226.siemens.flowmailer.net [185.136.65.226])
+ by mx.groups.io with SMTP id smtpd.web11.4453.1741985539596148229
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Mar 2025 13:52:15 -0700
+ Fri, 14 Mar 2025 13:52:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=FF3nyppk;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-256628-20250314205215d1e7b505179623eb88-auo963@rts-flowmailer.siemens.com)
-Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 20250314205215d1e7b505179623eb88
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=aWrhGq8L;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.226, mailfrom: fm-256628-202503142052172bc927be86215666bd-6yfosn@rts-flowmailer.siemens.com)
+Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id 202503142052172bc927be86215666bd
         for <openembedded-devel@lists.openembedded.org>;
-        Fri, 14 Mar 2025 21:52:15 +0100
+        Fri, 14 Mar 2025 21:52:17 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=d7eqyQIm60NraOLU0W/wTxvfUCUsUjE+H4lcPyQzuwM=;
- b=FF3nyppkIyNT+xYe88Fg8gggKMp0rHSIuK1AVqxEQjvdmFqSdTHnr8C4fMe+UM7ar9/2u/
- E1YhAcpruZjkau4RIs2+XPYgwJqr/4c21OyGdY9CHx1wbzp02Z7bgpYGO03yqOmNKQ5nJfhJ
- 66yzCJsvLk3FkZ4A9PQUazEVOKJsWlU4c0Q4k+rhsjbatjOHQ/pknGgezWAQzZ26uzoHaZGQ
- j+abMwF+Rl/r36r7sYG0WiVLDV1xWpgVp5nLUEVnM6tk0hbpfoTl063tCVNsGi6DmAWmYIZw
- b2bJ9q6nlWIWyJQ94CL34LazfPx/Y3F0Rhp6SFm9VEfAR7CCCKBHV74Q==;
+ bh=4zoA4kCxwqoqAsQm9rh+MOZjWDrW7Kxe2Aj07Xxt3Q0=;
+ b=aWrhGq8L1G8fpyLl404kq6jD89GGMzXECo7q1aGsn+01Hgn6iFSWt6fYVF8FYDcNAqRPaY
+ DpT4/AMM/C8+Q76rXXYNKmFHAgGcSLmu9Fu+WxzRtUJL5kifIPdRoiyD57mFxNZC8n8BSU1+
+ Qm0SsTJexpw6v5YLcbg2piwgkpaR/mAgXV/lB/fesCP8t/0WH6XTj8grdCiJv1PoL5B8Llf8
+ Hx0TwhqCGaSjF/zNfIYwci+qleBtZAMWeeoxeipdclt3vvUwQtUaXVPHgSVrdj8oarjSwRst
+ xSLZ/5+G9BbcNktEtzC8GJ4uOm3fU0s3xo5C9P0UXpzN0R8BsjGe9u2Q==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH 4/7] fluentbit: fix valgrind package config
-Date: Fri, 14 Mar 2025 21:50:32 +0100
-Message-Id: <20250314205035.386919-4-peter.marko@siemens.com>
+Subject: [meta-oe][PATCH 5/7] fluentbit: fix shared-lib package config
+Date: Fri, 14 Mar 2025 21:50:33 +0100
+Message-Id: <20250314205035.386919-5-peter.marko@siemens.com>
 In-Reply-To: <20250314205035.386919-1-peter.marko@siemens.com>
 References: <20250314205035.386919-1-peter.marko@siemens.com>
 MIME-Version: 1.0
@@ -39,29 +39,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Mar 2025 20:52:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115991
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115992
 
 From: Peter Marko <peter.marko@siemens.com>
 
-Add valgrind dependency to fix:
-fatal error: valgrind/valgrind.h: No such file or directory
+Add library to packaged files to fix:
+
+ERROR: fluentbit-3.2.8-r0 do_package: QA Issue: fluentbit: Files/directories were installed but not shipped in any package:
+  /usr/lib/fluent-bit
+  /usr/lib/fluent-bit/libfluent-bit.so
+Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+fluentbit: 2 installed and not shipped files. [installed-vs-shipped]
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- meta-oe/recipes-extended/fluentbit/fluentbit_3.2.8.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-extended/fluentbit/fluentbit_3.2.8.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_3.2.8.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_3.2.8.bb
-index 94fbed0962..cd4cba6a14 100644
+index cd4cba6a14..c7fc7d1e19 100644
 --- a/meta-oe/recipes-extended/fluentbit/fluentbit_3.2.8.bb
 +++ b/meta-oe/recipes-extended/fluentbit/fluentbit_3.2.8.bb
-@@ -97,7 +97,7 @@ PACKAGECONFIG[tests-runtime] = "-DFLB_TESTS_RUNTIME=Yes,-DFLB_TESTS_RUNTIME=No"
- PACKAGECONFIG[tls] = "-DFLB_TLS=Yes,-DFLB_TLS=No"
- PACKAGECONFIG[trace] = "-DFLB_TRACE=Yes,-DFLB_TRACE=No"
- PACKAGECONFIG[utf8-encoder] = "-DFLB_UTF8_ENCODER=Yes,-DFLB_UTF8_ENCODER=No"
--PACKAGECONFIG[valgrind] = "-DFLB_VALGRIND=Yes,-DFLB_VALGRIND=No"
-+PACKAGECONFIG[valgrind] = "-DFLB_VALGRIND=Yes,-DFLB_VALGRIND=No,valgrind"
- PACKAGECONFIG[wamrc] = "-DFLB_WAMRC=Yes,-DFLB_WAMRC=No"
- PACKAGECONFIG[wasm-stack-protect] = "-DFLB_WASM_STACK_PROTECT=Yes,-DFLB_WASM_STACK_PROTECT=No"
- PACKAGECONFIG[wasm] = "-DFLB_WASM=Yes,-DFLB_WASM=No"
+@@ -139,3 +139,6 @@ do_configure:prepend() {
+ do_compile:append() {
+     find ${B} -name '*.c' -or -name '*.h' | xargs sed -i -e 's|${TMPDIR}|${TARGET_DBGSRC_DIR}/|g'
+ }
++
++# needed for shared-lib package config
++FILES:${PN} += "${libdir}/fluent-bit"
 
