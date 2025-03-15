@@ -1,258 +1,193 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BAEFC28B28
-	for <webhook@archiver.kernel.org>; Sat, 15 Mar 2025 16:06:15 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.web11.12532.1742054765051331196
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 260DAC28B28
+	for <webhook@archiver.kernel.org>; Sat, 15 Mar 2025 22:22:27 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.web10.19288.1742077343505297689
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 15 Mar 2025 09:06:05 -0700
+ Sat, 15 Mar 2025 15:22:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=H5PJL3EO;
- spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-43cfebc343dso4675605e9.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 15 Mar 2025 09:06:04 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=taIqSARV;
+ spf=pass (domain: smile.fr, ip: 209.85.128.47, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-43cfba466b2so9239795e9.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 15 Mar 2025 15:22:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1742054763; x=1742659563; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=T4jl9FV6Vgqd6Nf6dpg6iVYYzSkgLnkYZ45Mp01bu5U=;
-        b=H5PJL3EOovtMy+C/hr2RGaSpp0uEjfmFQTSS5JuOxxeGiw3I67j0fDjHPndc0nY/ik
-         La5nx0qeSxyM5Ov0HhzaZLaSJl0lzsfj6ltgZU/PVfxZsBg438bVi8MIvAyK4z0reCe+
-         sfBGMt2NrtASplWo9XH84uiQhYBf/rBJPf2rKUiLrhQ+WyKKX4vN/4Mdem8eKmf+UQmI
-         uvTVTOb1fbflvGM0DBx0c999kb5bPXPnA3uPf9dKK/jGPaIWkim3chLOH/eImEqy3hEk
-         OxvJ2klC8D3nLrw4wvi0LzwUSncPCsdK/Gf25lgdU+Hagm/N2VXZMNWaa6eQeEJqBiAz
-         7feQ==
+        d=smile.fr; s=google; t=1742077341; x=1742682141; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=csJHm7hlR9Wa+BJ0BRZPsHbMM5FSzHJAEYbNgQTKRDY=;
+        b=taIqSARV4AhR/2hx4USpEJFiGSoM2i9Xw4cisyjb0ockNSHCPIVGWbxP/WOG1AzWj8
+         PfYQI8yU/EldqFGblFlHFuzJvifWGDSpxPZNb2hvx7xhBwvWGZ5jOeDh56AQVy42tl8F
+         5A6tRSOE/EsAaf6BEL401YfVIkOFyz8KKtq1A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742054763; x=1742659563;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=T4jl9FV6Vgqd6Nf6dpg6iVYYzSkgLnkYZ45Mp01bu5U=;
-        b=kPHN1q8T/+RSqYV2KP1q0qbM2WxMXYuePD47OASybB0/bLgt391T2f3iSTaj8h0FW7
-         B1n4wsgdq8O46hP8l2l4nglHmxT77SL3zgpy8VGhRBbwFsKS1KaYAvGXW6QhbwIL+655
-         ZW7XqMBSL5R6v5yRTyBO+TIqiUTWLCZ+DTcuOTf3HPJ0bctZ5o6D1RN9MdnSU7Tu07KK
-         XijVh/YHRR5CMdsG8DyXKvG2wyRVzprIW+Zytk71TpfzvjPlo+cHxApX7PDI5qIkTscx
-         zKpREEQJGoLlbI85eu6T3fXI/miBeg8cE+d6ZxXHv9AXpEYNj/aJkDoSisPgiRF2bHMr
-         lFig==
-X-Gm-Message-State: AOJu0Yzxahi267NgLSbvhXK2e28J2zz/mjeJmSBwgU9IK16VJ6HRm9T0
-	F/fSPkF4Dk7E/j86k0uz7YKdzkeyvehvRFgGMhNRwNjPUbVpJTYy2Rj1Yg==
-X-Gm-Gg: ASbGncuu0metRySJ2HOcvj49l9bG9RIdN6IavYDS/FwAkNHh+dQFyu1kwqs2DUZjp8x
-	oE6HbuhISZD6+y2SPDE3ZPZMVz9X7sGuerScO4IbZfyUZ9YrUhF4hDl4BSZdUDJMhtvsFhyIy2T
-	/lQ9fsI3sfbEI7G88/V22UDpOjsiJuqgwVoOdZrb2NH3kVzW2Umf0dewTtHgtLCKEu2ZMt4amiF
-	McSYLDBAKlRLUNdxkcoivZE9dB0jSJCchfflEgzBsw12EHkN3ReXX2/vvmH0T81dRXfwqOfEIOE
-	EXDxOLp4A2Fiavn2BbWK0zMRoT36usbFTk9/u6MTAkAq8HJFaNtK/iCSmgkuLVQ=
-X-Google-Smtp-Source: AGHT+IGn9TQijSTmkFIncIlZw4P6mqronT99bKIlUM9oMWPwnrlZnHtt7KHPJma8DOTN/Fu24MHW4w==
-X-Received: by 2002:a05:600c:46c5:b0:43c:ec4c:25b4 with SMTP id 5b1f17b1804b1-43d1ec7a33dmr91039505e9.10.1742054763200;
-        Sat, 15 Mar 2025 09:06:03 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-43d1ffbcf00sm53417425e9.10.2025.03.15.09.06.02
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 15 Mar 2025 09:06:02 -0700 (PDT)
-Message-ID: <4087dbe6-4a90-421a-8a10-856c308d9dc7@gmail.com>
-Date: Sat, 15 Mar 2025 17:06:02 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH] nftw: rename dirstreamlist to dirlist
+        d=1e100.net; s=20230601; t=1742077341; x=1742682141;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=csJHm7hlR9Wa+BJ0BRZPsHbMM5FSzHJAEYbNgQTKRDY=;
+        b=cJBmEoViql/EdAV1ZVaELFuc6sbWVy4ozM0mjklKHMiMl3AP/yxPLMrSg7UlFTbZG9
+         lYf/XqSGKciSWJVjQA/0VCMyGchH21trOwx6Hfhs6HldI20AbZ37qacTEPaLJOeQgAV/
+         qQxUI6ZoCj05moYhVuBBwWT8lJ5D8IqtR+kZt2ynFX8YVp3K+s73qchHHwVHgCRjn67W
+         b4VtMtbnYjiaGF6AdYs6+8el4Cuy/0bPc4GuR1vYo9Z7Lf+nV8lQ0EZvtZO+bI/j9I/E
+         yoFNKmoM5v9Ql2p5SrJITuOr06zm2b4S13PZW8iMLN9UO758zfJBYMn6V/5F4juAyzVd
+         iBHQ==
+X-Gm-Message-State: AOJu0Yw+DIWaHkJ2WzBLPQDtkH0/epT+2NoyFI97WKW9IrrjDOjHJEvG
+	NqH1dElpy4aXcYxZ7vLzYxFWgLZ7pP7uisEH3/tjZfhMJX16u5H56ePwOpu+yrP5mK1Y4V/07Nc
+	6
+X-Gm-Gg: ASbGnctXF4OiKz+ica8kO8gp/7+EgqsXJEdiTrEr+8c2EVxzIOvoGJbNFBw3KiDhPm+
+	oudYJ2sQrKTy094Ci8fgHwEX6IX4+8zV/Lai1Z+PEjRYf31X2TRdAy379LyVPK6F1CzQ856h4nP
+	+dgXZGxa+mrIIow0vN178dmVfNorHkh1NbqRzmB4zfM2yckqs5P93195bkzVlIjqIqsxL+6gUfY
+	KikQ/TebiRRyHnRkdhlA/6KB9zPuSVJBuvPxFiAWUh1KABljSTaQU6S1/nSeFD/Zqf1V8d4Wv10
+	p6PWQDmmMiTjja2jsG9h/Zh7beQJ+8aerEOdgZcQ47OeCiMT3TizWW8M0C6FPwuCT3brEzDXiNe
+	BRWT5mg4JEWgkpM4wJaUpD2xaNdO/0gs27TnGYHkZ3h5gr4ZqYkQ=
+X-Google-Smtp-Source: AGHT+IFkTgi52r/6+RdSvi5A5kNNm7KD89gXQd+G8cysCIfDJLz5wO5im7iwbB+NwI+7v9lKRu5wpw==
+X-Received: by 2002:a05:600c:4fd4:b0:43c:f8fe:dd82 with SMTP id 5b1f17b1804b1-43d1ec8e682mr81903515e9.18.1742077341185;
+        Sat, 15 Mar 2025 15:22:21 -0700 (PDT)
+Received: from P-ASN-ECS-830T8C3.home (2a01cb000deef0002cff7470e58ff5dc.ipv6.abo.wanadoo.fr. [2a01:cb00:dee:f000:2cff:7470:e58f:f5dc])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-43d1ffc3ee7sm60989165e9.19.2025.03.15.15.22.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 15 Mar 2025 15:22:20 -0700 (PDT)
+From: Yoann Congal <yoann.congal@smile.fr>
 To: openembedded-devel@lists.openembedded.org
-References: <182D05849CEDED15.29351@lists.openembedded.org>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <182D05849CEDED15.29351@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-multimedia][PATCH] pipewire-media-session: Fix for incompatible-pointer-types build errors
+Date: Sat, 15 Mar 2025 23:22:06 +0100
+Message-Id: <20250315222206.2778609-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.5
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 15 Mar 2025 16:06:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115996
+ <openembedded-devel@lists.openembedded.org>; Sat, 15 Mar 2025 22:22:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/115997
 
-This was a fatfinger mistake - please ignore. Sorry for the spam.
+From: Yoann Congal <yoann.congal@smile.fr>
 
-On 15.03.25 17:04, Gyorgy Sarvari via lists.openembedded.org wrote:
-> ---
->  ports/unix/guts/nftw.c | 59 +++++++++++++++++++++---------------------
->  1 file changed, 29 insertions(+), 30 deletions(-)
->
-> diff --git a/ports/unix/guts/nftw.c b/ports/unix/guts/nftw.c
-> index 16fe197..5893de2 100644
-> --- a/ports/unix/guts/nftw.c
-> +++ b/ports/unix/guts/nftw.c
-> @@ -152,9 +152,9 @@
->      struct stat st; // stat to send to "fn"
->      dev_t orig_dev; // the device of the top "path"
->  
-> -    struct dirstream_path* dirstreamlist = NULL; // list of currently processed folders,
-> +    struct dirstream_path* dirlist = NULL; // list of currently processed folders,
->                                                   // used along with FTW_DEPTH flag
-> -    size_t dirstreamlist_size = 0;
-> +    size_t dirlist_size = 0;
->  
->      ino_t *inode_list = NULL;
->      size_t inode_list_size = 0, inode_list_capacity = 0;
-> @@ -210,9 +210,9 @@
->  /*  NO FTW_DEPTH walking code section starts here                   */
->  /* ******************************************************************/
->  
-> -    dirstreamlist = malloc(sizeof(struct dirstream_path));
-> +    dirlist = malloc(sizeof(struct dirstream_path));
->      // kickstart the first element with the top folder path
-> -    NFTW_APPEND_DIRSTREAMPATH_TO_ARRAY(path, dirstreamlist, dirstreamlist_size, NFTW_DONT_OPEN_DIRSTREAM);
-> +    NFTW_APPEND_DIRSTREAMPATH_TO_ARRAY(path, dirlist, dirlist_size, NFTW_DONT_OPEN_DIRSTREAM);
->  
->      /*
->       * Walk the tree, without FTW_DEPTH flag.
-> @@ -222,13 +222,13 @@
->       * 4. Collect all folders from the folder, and add them to the end of the list
->       * 5. Repeat until the list if empty
->       */
-> -    while (dirstreamlist_size > 0) {
-> +    while (dirlist_size > 0) {
->          ftw.level = -base_level;
->          ftw.base = 0;
->  
->          // 1. take the last folder from the list
-> -        strcpy(folder_pathbuf, dirstreamlist[dirstreamlist_size - 1].path);
-> -        NFTW_REMOVE_LAST_DIRSTREAM_FROM_LIST(dirstreamlist, dirstreamlist_size);
-> +        strcpy(folder_pathbuf, dirlist[dirlist_size - 1].path);
-> +        NFTW_REMOVE_LAST_DIRSTREAM_FROM_LIST(dirlist, dirlist_size);
->          NFTW_CALCULATE_FTW_BASE_AND_LEVEL(folder_pathbuf, ftw);
->  
->          if (flag & FTW_ACTIONRETVAL){
-> @@ -313,7 +313,7 @@
->              // 4. Collect all folders from the folder, and add them to the list
->              // (in the same loop with step 3)
->              if (d->d_type == DT_DIR) {
-> -                NFTW_APPEND_DIRSTREAMPATH_TO_ARRAY(file_pathbuf, dirstreamlist, dirstreamlist_size, NFTW_DONT_OPEN_DIRSTREAM);
-> +                NFTW_APPEND_DIRSTREAMPATH_TO_ARRAY(file_pathbuf, dirlist, dirlist_size, NFTW_DONT_OPEN_DIRSTREAM);
->                  continue;
->              }
->  
-> @@ -392,8 +392,8 @@ nftw_ftw_depth: ;
->      stat(path, &st);
->  
->      if (S_ISDIR(st.st_mode)){
-> -        dirstreamlist = malloc(sizeof(struct dirstream_path));
-> -        NFTW_APPEND_DIRSTREAMPATH_TO_ARRAY(path, dirstreamlist, dirstreamlist_size, NFTW_OPEN_DIRSTREAM);
-> +        dirlist = malloc(sizeof(struct dirstream_path));
-> +        NFTW_APPEND_DIRSTREAMPATH_TO_ARRAY(path, dirlist, dirlist_size, NFTW_OPEN_DIRSTREAM);
->      } else {
->          // otherwise it's a single file, just send it off, and we are done
->          ftw.level = -base_level;
-> @@ -423,23 +423,23 @@ nftw_ftw_depth: ;
->       *     send it to fn, and remove it from dirstreamlist.
->       * 4.  Repeat until the list is empty.
->       */
-> -    while (dirstreamlist_size > 0){
-> +    while (dirlist_size > 0){
->          // 1. Get the last dirstream from dirstreamlist
->          // and
->          // 2. Read the next entry from it
-> -        if ((d = readdir(dirstreamlist[dirstreamlist_size - 1].dirstream)) != NULL){
-> +        if ((d = readdir(dirlist[dirlist_size - 1].dirstream)) != NULL){
->              if ((strcmp(d->d_name, ".") == 0) || strcmp(d->d_name, "..") == 0){
->                  continue;
->              }
->  
->              NFTW_CONCAT_PATH_WITH_SEPARATOR(file_pathbuf,
-> -                                            dirstreamlist[dirstreamlist_size - 1].path,
-> +                                            dirlist[dirlist_size - 1].path,
->                                              "/",
->                                              d->d_name);
->              // 3b. If the entry is a folder, open a directort stream with it, and append
->              //     it to dirstreamlist
->              if (d->d_type == DT_DIR){
-> -                NFTW_APPEND_DIRSTREAMPATH_TO_ARRAY(file_pathbuf, dirstreamlist, dirstreamlist_size, NFTW_OPEN_DIRSTREAM);
-> +                NFTW_APPEND_DIRSTREAMPATH_TO_ARRAY(file_pathbuf, dirlist, dirlist_size, NFTW_OPEN_DIRSTREAM);
->                  continue;
->              }
->  
-> @@ -491,25 +491,25 @@ nftw_ftw_depth: ;
->  
->              ftw.level = -base_level;
->              ftw.base = 0;
-> -            NFTW_CALCULATE_FTW_BASE_AND_LEVEL(dirstreamlist[dirstreamlist_size - 1].path, ftw);
-> +            NFTW_CALCULATE_FTW_BASE_AND_LEVEL(dirlist[dirlist_size - 1].path, ftw);
->  
->              if (flag & FTW_ACTIONRETVAL){
-> -                if (NFTW_SHOULD_SKIP_PATH(dirstreamlist[dirstreamlist_size - 1].path, skiplist, skiplist_size)) {
-> -                    NFTW_REMOVE_LAST_DIRSTREAM_FROM_LIST(dirstreamlist, dirstreamlist_size);
-> +                if (NFTW_SHOULD_SKIP_PATH(dirlist[dirlist_size - 1].path, skiplist, skiplist_size)) {
-> +                    NFTW_REMOVE_LAST_DIRSTREAM_FROM_LIST(dirlist, dirlist_size);
->                      continue;
->                  }
->              }
->  
->              if (flag & FTW_CHDIR){
-> -                chdir(dirstreamlist[dirstreamlist_size - 1].path);
-> +                chdir(dirlist[dirlist_size - 1].path);
->                  chdir("..");
->              }
->  
->              // stat it, and send it to fn
->              if (((flag & FTW_PHYS)
-> -                  ? lstat(dirstreamlist[dirstreamlist_size - 1].path, &st)
-> -                  : stat(dirstreamlist[dirstreamlist_size - 1].path, &st)) < 0) {
-> -                NFTW_HANDLE_BROKEN_SYMLINK(dirstreamlist[dirstreamlist_size - 1].path);
-> +                  ? lstat(dirlist[dirlist_size - 1].path, &st)
-> +                  : stat(dirlist[dirlist_size - 1].path, &st)) < 0) {
-> +                NFTW_HANDLE_BROKEN_SYMLINK(dirlist[dirlist_size - 1].path);
->              } else {
->                  if ((flag & FTW_MOUNT) && orig_dev != st.st_dev)
->                      continue;
-> @@ -531,21 +531,21 @@ nftw_ftw_depth: ;
->                  } else {
->                      ent_flag = S_ISDIR(st.st_mode) ? FTW_DP : FTW_F;
->                  }
-> -                rc = fn(dirstreamlist[dirstreamlist_size - 1].path, &st, ent_flag, &ftw);
-> +                rc = fn(dirlist[dirlist_size - 1].path, &st, ent_flag, &ftw);
->              }
->  
-> -            NFTW_REMOVE_LAST_DIRSTREAM_FROM_LIST(dirstreamlist, dirstreamlist_size);
-> +            NFTW_REMOVE_LAST_DIRSTREAM_FROM_LIST(dirlist, dirlist_size);
->          }
->  
->          if (flag & FTW_ACTIONRETVAL){
->              if (rc == FTW_SKIP_SIBLINGS){
->  
-> -                NFTW_APPEND_STRING_TO_ARRAY(dirstreamlist[dirstreamlist_size - 1].path,
-> -                                            strlen(dirstreamlist[dirstreamlist_size - 1].path) + 1,
-> +                NFTW_APPEND_STRING_TO_ARRAY(dirlist[dirlist_size - 1].path,
-> +                                            strlen(dirlist[dirlist_size - 1].path) + 1,
->                                              skiplist,
->                                              skiplist_size);
->  
-> -                skiplist[skiplist_size - 1][strlen(dirstreamlist[dirstreamlist_size - 1].path)] = '/';
-> +                skiplist[skiplist_size - 1][strlen(dirlist[dirlist_size - 1].path)] = '/';
->                  rc = 0;
->              } else if (rc == FTW_STOP) {
->                  goto nftw_out;
-> @@ -579,12 +579,11 @@ nftw_out: ;
->  
->      free(skiplist);
->  
-> -    for (size_t i = 0; i < dirstreamlist_size; ++i){
-> -        closedir(dirstreamlist[i].dirstream);
-> -        free(dirstreamlist[i].path);
-> +    for (size_t i = 0; i < dirlist_size; ++i){
-> +        NFTW_REMOVE_LAST_DIRSTREAM_FROM_LIST(dirlist, dirlist_size);
->      }
->  
-> -    free(dirstreamlist);
-> +    free(dirlist);
->      free(inode_list);
->  
->      errno = save_errno;
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#115995): https://lists.openembedded.org/g/openembedded-devel/message/115995
-> Mute This Topic: https://lists.openembedded.org/mt/111718780/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Backport a fix from master branch to fix these errors:
+| FAILED: src/pipewire-media-session.p/access-flatpak.c.o
+| x86_64-poky-linux-gcc [...] -o src/pipewire-media-session.p/access-flatpak.c.o -c ../git/src/access-flatpak.c
+| ../git/src/access-flatpak.c: In function 'object_update':
+| ../git/src/access-flatpak.c:117:62: error: passing argument 1 of 'pw_client_update_permissions' from incompatible pointer type [-Wincompatible-pointer-types]
+|   117 |                 pw_client_update_permissions(client->obj->obj.proxy,
+|       |                                              ~~~~~~~~~~~~~~~~^~~~~~
+|       |                                                              |
+|       |                                                              struct pw_proxy *
+| In file included from .../tmp/work/core2-64-poky-linux/pipewire-media-session/0.4.2/recipe-sysroot/usr/include/pipewire-0.3/pipewire/pipewire.h:15,
+|                  from ../git/src/access-flatpak.c:35:
+| .../tmp/work/core2-64-poky-linux/pipewire-media-session/0.4.2/recipe-sysroot/usr/include/pipewire-0.3/pipewire/client.h:191:71: note: expected 'struct pw_client *' but argument is of type 'struct pw_proxy *'
+|   191 | PW_API_CLIENT_IMPL int pw_client_update_permissions(struct pw_client *object, uint32_t n_permissions,
+|       |                                                     ~~~~~~~~~~~~~~~~~~^~~~~~
+
+| FAILED: src/pipewire-media-session.p/default-routes.c.o
+| x86_64-poky-linux-gcc [...] -o src/pipewire-media-session.p/default-routes.c.o -c ../git/src/default-routes.c
+| ../git/src/default-routes.c: In function 'restore_route_params':
+| ../git/src/default-routes.c:482:29: error: passing argument 1 of 'pw_device_set_param' from incompatible pointer type [-Wincompatible-pointer-types]
+|   482 |         pw_device_set_param((struct pw_node*)dev->obj->obj.proxy,
+|       |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|       |                             |
+|       |                             struct pw_node *
+| In file included from .../tmp/work/core2-64-poky-linux/pipewire-media-session/0.4.2/recipe-sysroot/usr/include/pipewire-0.3/pipewire/pipewire.h:18,
+|                  from ../git/src/default-routes.c:43:
+| .../tmp/work/core2-64-poky-linux/pipewire-media-session/0.4.2/recipe-sysroot/usr/include/pipewire-0.3/pipewire/device.h:179:62: note: expected 'struct pw_device *' but argument is of type 'struct pw_node *'
+|   179 | PW_API_DEVICE_IMPL int pw_device_set_param(struct pw_device *object, uint32_t id, uint32_t flags,
+|       |                                            ~~~~~~~~~~~~~~~~~~^~~~~~
+
+| FAILED: src/pipewire-media-session.p/access-portal.c.o
+| x86_64-poky-linux-gcc [...] -o src/pipewire-media-session.p/access-portal.c.o -c ../git/src/access-portal.c
+| ../git/src/access-portal.c: In function 'set_global_permissions':
+| ../git/src/access-portal.c:268:62: error: passing argument 1 of 'pw_client_update_permissions' from incompatible pointer type [-Wincompatible-pointer-types]
+|   268 |                 pw_client_update_permissions(client->obj->obj.proxy,
+|       |                                              ~~~~~~~~~~~~~~~~^~~~~~
+|       |                                                              |
+|       |                                                              struct pw_proxy *
+| In file included from .../tmp/work/core2-64-poky-linux/pipewire-media-session/0.4.2/recipe-sysroot/usr/include/pipewire-0.3/pipewire/pipewire.h:15,
+|                  from ../git/src/access-portal.c:39:
+| .../tmp/work/core2-64-poky-linux/pipewire-media-session/0.4.2/recipe-sysroot/usr/include/pipewire-0.3/pipewire/client.h:191:71: note: expected 'struct pw_client *' but argument is of type 'struct pw_proxy *'
+|   191 | PW_API_CLIENT_IMPL int pw_client_update_permissions(struct pw_client *object, uint32_t n_permissions,
+|       |                                                     ~~~~~~~~~~~~~~~~~~^~~~~~
+
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+---
+ .../0001-pass-right-types-to-methods.patch    | 53 +++++++++++++++++++
+ .../pipewire/pipewire-media-session_0.4.2.bb  |  4 +-
+ 2 files changed, 56 insertions(+), 1 deletion(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session/0001-pass-right-types-to-methods.patch
+
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session/0001-pass-right-types-to-methods.patch b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session/0001-pass-right-types-to-methods.patch
+new file mode 100644
+index 0000000000..e7a3e52617
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session/0001-pass-right-types-to-methods.patch
+@@ -0,0 +1,53 @@
++From 97e0d7646c873ea3badfa604b3f084ed6208af97 Mon Sep 17 00:00:00 2001
++From: Wim Taymans <wtaymans@redhat.com>
++Date: Tue, 26 Nov 2024 13:37:06 +0100
++Subject: [PATCH] pass right types to methods
++
++
++Upstream-Status: Backport [https://gitlab.freedesktop.org/pipewire/media-session/-/commit/e6243381cf2b7d0d33707627b4186f5580908752]
++Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
++---
++ src/access-flatpak.c | 2 +-
++ src/access-portal.c  | 2 +-
++ src/default-routes.c | 2 +-
++ 3 files changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/src/access-flatpak.c b/src/access-flatpak.c
++index afe780b2d..dd802d6eb 100644
++--- a/src/access-flatpak.c
+++++ b/src/access-flatpak.c
++@@ -114,7 +114,7 @@ static void object_update(void *data)
++ 		pw_log_info("%p: flatpak client %d granted 0x%08x permissions"
++ 				, impl, client->id, perms);
++ 		permissions[0] = PW_PERMISSION_INIT(PW_ID_ANY, perms);
++-		pw_client_update_permissions(client->obj->obj.proxy,
+++		pw_client_update_permissions((struct pw_client*)client->obj->obj.proxy,
++ 				1, permissions);
++ 		client->active = true;
++ 	}
++diff --git a/src/access-portal.c b/src/access-portal.c
++index 92d95a26b..4e3a9f52a 100644
++--- a/src/access-portal.c
+++++ b/src/access-portal.c
++@@ -265,7 +265,7 @@ set_global_permissions(void *data, struct sm_object *object)
++ 		permissions[n_permissions++] =
++ 			PW_PERMISSION_INIT(object->id, allowed ? PW_PERM_ALL : 0);
++ 		pw_log_info("%p: object %d allowed:%d", impl, object->id, allowed);
++-		pw_client_update_permissions(client->obj->obj.proxy,
+++		pw_client_update_permissions((struct pw_client*)client->obj->obj.proxy,
++ 				n_permissions, permissions);
++ 	}
++ 	return 0;
++diff --git a/src/default-routes.c b/src/default-routes.c
++index 5a842faf7..86f9e217b 100644
++--- a/src/default-routes.c
+++++ b/src/default-routes.c
++@@ -479,7 +479,7 @@ static int restore_route_params(struct device *dev, const char *val, const struc
++ 	if (pw_log_level_enabled(SPA_LOG_LEVEL_DEBUG))
++ 		spa_debug_pod(2, NULL, param);
++ 
++-	pw_device_set_param((struct pw_node*)dev->obj->obj.proxy,
+++	pw_device_set_param((struct pw_device*)dev->obj->obj.proxy,
++ 			SPA_PARAM_Route, 0, param);
++ 
++ 	sm_media_session_schedule_rescan(dev->impl->session);
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.2.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.2.bb
+index 8ae0624135..184ed45d2d 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.2.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.2.bb
+@@ -10,7 +10,9 @@ DEPENDS = " \
+ 	dbus \
+ "
+ 
+-SRC_URI = "git://gitlab.freedesktop.org/pipewire/media-session.git;protocol=https;branch=master"
++SRC_URI = "git://gitlab.freedesktop.org/pipewire/media-session.git;protocol=https;branch=master \
++           file://0001-pass-right-types-to-methods.patch \
++           "
+ 
+ S = "${WORKDIR}/git"
+ SRCREV = "80dae7e24bec02b2befe09a72fbac6e2b38ccb5c"
 
