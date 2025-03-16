@@ -1,109 +1,95 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A10AFC28B28
-	for <webhook@archiver.kernel.org>; Sat, 15 Mar 2025 23:54:37 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.web10.20664.1742082875225773093
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A68D3C282DE
+	for <webhook@archiver.kernel.org>; Sun, 16 Mar 2025 21:27:04 +0000 (UTC)
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
+ by mx.groups.io with SMTP id smtpd.web11.38235.1742160421630075611
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 15 Mar 2025 16:54:35 -0700
+ Sun, 16 Mar 2025 14:27:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=3Q4WD6EK;
- spf=pass (domain: smile.fr, ip: 209.85.128.53, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-43690d4605dso5946075e9.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 15 Mar 2025 16:54:34 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WySK2Qy+;
+ spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-225e3002dffso29896855ad.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Mar 2025 14:27:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1742082873; x=1742687673; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=0t+VME6DX3D4MdgM2W9uLrEtf7nMWTbBy09rUzmlJwM=;
-        b=3Q4WD6EKKKBe8L2jhCFOfZ+W7sQmqrxv0qXQIR2B0nAG8MIpxNSbo33O4KVqllSeOT
-         Hieqln2I5dP1qU7iinyXw4Nq5VIiYr03We9XzRXzgf20umxeTkZ/6etQaC4sE3HqrMcC
-         WuzpwiSneLlLsAazqWA31CERLlDsiKbf/c1XI=
+        d=gmail.com; s=20230601; t=1742160421; x=1742765221; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=8ztUSnYymc/mGwgFh/FknGw01giwo0Mn8cB6qLfsJN4=;
+        b=WySK2Qy+Uc/We/IwXSXF/CY/m7QEO9rURH20NZJl/IJ7e0nexm60kM6mEqmM5ck/+0
+         gVNQ779L1riase5X6XkZXFExpAN7BY4DwPKG93+L9Jeb/ZEe9hCO4fqJlcKnk8IXEZ7m
+         IaomZCnWCKaBChfB19KzO6qW/v5w89HKqP50UXTSU2lrbVIgPMukmOGXwotuHYpO/7wb
+         GnvGzoClGksVqQlnYwHeTSkTKXNWopgAUipUhzCnS719CE1fd1e4rFRwKFlDiTxUNlRT
+         btSrPOk+zTHX5v1limuxYoXnFJjRQQc5ZcRvLeV1fLUXhfH98De5iHqNnfINYJAuJgJH
+         B0sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742082873; x=1742687673;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=0t+VME6DX3D4MdgM2W9uLrEtf7nMWTbBy09rUzmlJwM=;
-        b=Lg5ahs/je7ps3bi61EpBix8Ry2aKUq+QaDqkQbL0VkEyw9p8zlE726qzJLhbRTbIUs
-         F6ApY1U4WbEBgThSrXrknTnU2zNAmvM3ndxYexJz+W2Qtz9HUZLcFgTSnxoeWndBHDMJ
-         2jTB8ymDWp8Ak9m8ncN9Q431Hpc86K96e6x5l+qzJfhad3s2k5XIeLbG+iCpUqssSTlr
-         5WS/9w/et7XxTohXNCuqO0ylCZmWP7rM6rUJDHZUDOSHP+0LPV7LJPe0di1P3Pqf/YiG
-         N8ArOwq56Z0uZYbdGO4NgDgjWq1jgOtGtveXFMas/U+Dg/E/SxqYNYnKwfcVj9oQKViS
-         cW6A==
-X-Gm-Message-State: AOJu0YykehyMZ15uj5qfMDynHsml0wL2vP0I4HGNSv4RDvveq8+fT8Oy
-	a/V0ib9VcFxn5pTDNrF3zaZfLiQCKvktepR8Wf/jRWNh6Pg/1oNSLQP3g2wlclWlx2OeYyHclJ3
-	7
-X-Gm-Gg: ASbGncvQ7IcMm9UJYzxJgbyRiseLQZ29JToN/nVzC32cYryFAgIjRh7rCO7bR3516jw
-	Uw6arnakuNfXeNgxFB4HHapCRVe9FQAui91UNazXRUutk+QIFpPlG9XDGUkbQrWq5yvx/e2+gZM
-	ZEVjkmOFkxlVR0Vr2Gx1M1+5yXAgf05HjZO3GXuau3oq72WU2lMbvgR9Rdyp6/tuaoz2o6B3/qq
-	AVKOFfS2CF2zknxfxETtGibTYOKmRLjqoFm3ETuzOdtVje951ZiKVHyhQ12EdEwdJpalKsiiITR
-	vka6X41uxGzf0hjx1UJbbisFofcEcHBqLWajMZoId4tfmNqUYIkPDgE7v+2SHWyZ6wQZlMd4TdG
-	b6Bvcs9DX9HoKmtp0AEqC3QunyezhjeVUMlvLj4zfLUnijRwXMQhoS0iqHF4Dqw==
-X-Google-Smtp-Source: AGHT+IEvKjQUkVa1+K8jcxShZ8otR6jZ3QhvS3JqXxtLea+P6NmJKh5HQrmn5jkcQElZgrNZYjNZbQ==
-X-Received: by 2002:a05:600c:4eca:b0:43d:bb9:ad00 with SMTP id 5b1f17b1804b1-43d1ecc7d78mr96582415e9.15.1742082873041;
-        Sat, 15 Mar 2025 16:54:33 -0700 (PDT)
-Received: from P-ASN-ECS-830T8C3.home (2a01cb000deef0002cff7470e58ff5dc.ipv6.abo.wanadoo.fr. [2a01:cb00:dee:f000:2cff:7470:e58f:f5dc])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-43d1fe2a263sm63503585e9.22.2025.03.15.16.54.32
+        d=1e100.net; s=20230601; t=1742160421; x=1742765221;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=8ztUSnYymc/mGwgFh/FknGw01giwo0Mn8cB6qLfsJN4=;
+        b=Re5tTzp7oiAzIhy7awT8dlumnEdChHzr+6bULMoRhT3i6jAGGcJZjBXrOx5XvlOz7r
+         mf1p35kHV3FUzC0zxCZLSQqojtWwfdcAkCFLXpf/JetjtsPnBXSi8gU2pOffNqeZyIzR
+         xb/vy6ON488OVzXYpECgggaypLRvF1MqZDMOyxhXHTwU7E/3SfbV30saRqquKdLU6+v0
+         C7UBheRIOFMZCG7mAqUuRzjSwWrkUibOeDiVRlCv0WIZYLSeE1XIukL8zFVFv1z8MDEa
+         xVwqG68KGdbKBA3kqJ5ZrjA9BXbS3tMm6TTm5eyPQ0gipAWViwBSQQEadc99JIzfLaAa
+         iRtA==
+X-Gm-Message-State: AOJu0YwlAjIp5S/Cu8kQdJ0vSTif4ikrC4eRvRDOuLfOWvXMuK1yLe1X
+	ZV5r8YOMmB81CsIMsxCgliwxSmZMbB0pMLUfjcaC7sEYk+PkKSwfw+YGcmda
+X-Gm-Gg: ASbGncsedGch9olIVaG46NTggGjs5v23sZmrkmpX68TCQxxNMQwa8HtiV1sABZgNHD0
+	+DeyO0WRxCo5U3NEwTePLavQ1YBp7rd0liOZ3s+q2h7QsD502Y3Mt5t1kFCJWr2ivyRWilntahD
+	QHOr83cl0RM/+yuVvqJKl5AV1xDXz+Ii7xaEMBP3ZimneOtTM2wFev5ZdkZCdlPNjOFyGK9tMPq
+	jY3+csp2MNdZy/6p7xCAwFQ9uSthQ2kPi9610CFByxNiFdwRksazik2XUOq+abg/3uPkrZbgesA
+	vbXw7XKRabsYgOdUA3x9LcP9G42wP9gqDM2VtIfwF2zkBWk=
+X-Google-Smtp-Source: AGHT+IFMvc9WBJyDVJM4pfTdRlIZTGxW2o56vxrdX/tA3mnBv72az0LVbh3hFOYD6diak8T1wjwBtg==
+X-Received: by 2002:a17:902:e844:b0:220:c813:dfd1 with SMTP id d9443c01a7336-225e0aeea45mr109916655ad.36.1742160420754;
+        Sun, 16 Mar 2025 14:27:00 -0700 (PDT)
+Received: from apollo.localdomain ([2601:646:8201:fd20::6874])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-225c68a4063sm62071105ad.65.2025.03.16.14.26.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 15 Mar 2025 16:54:32 -0700 (PDT)
-From: Yoann Congal <yoann.congal@smile.fr>
+        Sun, 16 Mar 2025 14:27:00 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-oe][PATCH] reproducibility: Mark fsverity, libsdl2 packages as known non-reproducible
-Date: Sun, 16 Mar 2025 00:54:26 +0100
-Message-Id: <20250315235426.2876555-1-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.5
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/4] uim: Upgrade to 1.9.0
+Date: Sun, 16 Mar 2025 14:26:55 -0700
+Message-ID: <20250316212656.3179516-3-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250316212656.3179516-1-raj.khem@gmail.com>
+References: <20250316212656.3179516-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 15 Mar 2025 23:54:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116001
+ <openembedded-devel@lists.openembedded.org>; Sun, 16 Mar 2025 21:27:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116004
 
-From: Yoann Congal <yoann.congal@smile.fr>
+Changelog - https://github.com/uim/uim/releases/tag/1.9.0
 
-From AB run:
-https://autobuilder.yoctoproject.org/valkyrie/#/builders/87/builds/36/steps/32/logs/stdio
-
-Diffoscope output is at:
-https://valkyrie.yocto.io/pub/repro-fail-openembedded/meta-oe/oe-reproducible-20250315-8_7ama2q/packages/diff-html/
-
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/conf/include/non-repro-meta-oe.inc | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-oe/recipes-support/uim/{uim_1.8.9.bb => uim_1.9.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/uim/{uim_1.8.9.bb => uim_1.9.0.bb} (98%)
 
-diff --git a/meta-oe/conf/include/non-repro-meta-oe.inc b/meta-oe/conf/include/non-repro-meta-oe.inc
-index 88dcedc268..b012c49310 100755
---- a/meta-oe/conf/include/non-repro-meta-oe.inc
-+++ b/meta-oe/conf/include/non-repro-meta-oe.inc
-@@ -24,6 +24,8 @@ KNOWN_NON_REPRO_META_OE = " \
-     evemu-tools-python \
-     fbgrab-doc \
-     fluentbit-src \
-+    fsverity-utils-dbg \
-+    fsverity-utils-staticdev \
-     fvwm-dbg \
-     fvwm-doc \
-     fvwm-extra \
-@@ -59,12 +61,15 @@ KNOWN_NON_REPRO_META_OE = " \
-     libck-doc \
-     libdbus-cxx-dev \
-     libforms \
-+    libfsverity0 \
-     libhugetlbfs-doc \
-     libiio-src \
-     libjcat-dbg \
-     libjcat-ptest \
-     librelp-dbg \
-     librelp-ptest \
-+    libsdl2-compat \
-+    libsdl2-compat-dbg \
-     libthrift-c-glib-zlib-src \
-     libvncserver-dev \
-     libwebsockets-testapps \
+diff --git a/meta-oe/recipes-support/uim/uim_1.8.9.bb b/meta-oe/recipes-support/uim/uim_1.9.0.bb
+similarity index 98%
+rename from meta-oe/recipes-support/uim/uim_1.8.9.bb
+rename to meta-oe/recipes-support/uim/uim_1.9.0.bb
+index 9d2068c6d6..5ed61fd098 100644
+--- a/meta-oe/recipes-support/uim/uim_1.8.9.bb
++++ b/meta-oe/recipes-support/uim/uim_1.9.0.bb
+@@ -8,7 +8,7 @@ SRC_URI = "https://github.com/uim/uim/releases/download/${PV}/uim-${PV}.tar.bz2"
+ SRC_URI:append:class-target = "\
+     file://uim-module-manager.patch \
+ "
+-SRC_URI[sha256sum] = "dbbd983768bf748449551644f330dbebe859bfeb6f024fea6697ac75131c7aa4"
++SRC_URI[sha256sum] = "271f0ed5f455e5bffa859f01b2d0f7fb966554ebd4822657afb67a0431dd85a8"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
