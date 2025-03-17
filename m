@@ -1,204 +1,251 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BE16C282EC
-	for <webhook@archiver.kernel.org>; Mon, 17 Mar 2025 08:09:38 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.web10.47122.1742198974788518318
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3E76C282EC
+	for <webhook@archiver.kernel.org>; Mon, 17 Mar 2025 09:16:58 +0000 (UTC)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.web11.48039.1742203010251729922
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Mar 2025 01:09:35 -0700
+ Mon, 17 Mar 2025 02:16:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=0qCg6Tnc;
- spf=pass (domain: smile.fr, ip: 209.85.221.43, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-3912fdddf8fso3172444f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Mar 2025 01:09:34 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=EASROPBS;
+ spf=pass (domain: mvista.com, ip: 209.85.214.178, mailfrom: vanusuri@mvista.com)
+Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-22548a28d0cso112314175ad.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Mar 2025 02:16:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1742198973; x=1742803773; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=5YUjyg+hG//W6cxn7+klEp7qM8QakuSn9qAVtVVpqqI=;
-        b=0qCg6Tnc7KV+I3NkVbnDfEGV9EfWIhosaoG/zIymcZ6zVn0pUyXTs8JmwFIanQOdZA
-         vvD6YIxZblxSVqxABrYV6ai7EYaa5C3+Ln0oeXr4VymEhjLK4jHBiGMT+1+mpTU2xPPW
-         Kw6dBteXvMJ5MSLQH+YbMBSC8UvsiELCH2NGA=
+        d=mvista.com; s=google; t=1742203009; x=1742807809; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=WdX5m2E3Wwwq9X1FE+KIB9iDZaxthMU/UKPiP9I8yzs=;
+        b=EASROPBSSQ23r79I/I6LhptnWQkzo6yueRHEbusOzL5KEV/jqMQ1uOtCMLkHgzrWK/
+         NavGQaD13+Xm+2DaJ6II4iL6Z+i7dRBw7fOWqHRQMDDjkSN6f/QCmm/oPDIJT1nA/Mo8
+         N/arNAbDG0rwYExOTZjpRldwiW2RaKiHcPhCc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742198973; x=1742803773;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=5YUjyg+hG//W6cxn7+klEp7qM8QakuSn9qAVtVVpqqI=;
-        b=RD5eiCAlTiyG97p2mQYqNyQi3bv+AVkWHdwBCQXmWdVl7EGfwajBU1UIQ5AWgvdFPl
-         F1X94bCTIjrGVlAME58smcxrY3o768X4Uni4HoiMvi7xvbu3XoGP4vEpLOd7IysmwGWI
-         8KIeBh6gsYDEy+nChv3Yy9KYViIqp2jLfKBWy5mTd9M7qW13iYf2H/XrM3u48ynDz1LC
-         +tNb9dCNs7Jzk39HkJ5mgei1FVhodi4eXoJ0g5P5uelFIMKzsvoaebASuBCZGJvr/zSm
-         PQOjKH51yKQ2k4tw9QCbXs7h3v1uHxyLQ6hLD44Fw/k8N/wPKs+vF5FfzdkzybOYC/0A
-         rNhQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUjxsxwIC5HLOT6kIX/SE3NjS3pGjC0gq3E9UrIi1qb1/5D3jg+xhkHhRA/ACUuc775vYbnCmWDJ/rifmOX90Ws674=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyFEeT9b464NvwgOhnI9qriF1b/AR5fBwi8P0VLOW0WC/feDhA/
-	lt9oybh6VNQCd+9BgchG1IEqCxktqW2ThfTKxHesrC5vFUzhN6NC/KiUTIaMgbuuVD3kxfL2fFq
-	cpjNIz/0U8fmpECS0cLG84na+1yLwLC1pPB5ccg==
-X-Gm-Gg: ASbGncvtAu6HK2ArpgVVBKTuEuaP1cpce7MusKWx91ZhJi33XVnnCQHGNU+/zhsU+Wg
-	mUAxsyVR/d0CKOh66k/IkkhgoExIZS26HA1GfRIx/zuwAxK3U8N0GlQi8ys5Btp9HpLkuG08h53
-	I+oiBhWeSlHUdlKoXR8Wph3i4c8AMEbG/flpe6C+4L4IhgT2rcNw3xKRSqbU/MFQXDd+arqw==
-X-Google-Smtp-Source: AGHT+IFpS4394eO7zvtRmYm/dEFamEtTKW3f4T+Wuf7GFB6hXbKaOZ78t70Mczt+ocidZ7wkt5vMPlxEyZKmHVIkAAU=
-X-Received: by 2002:a05:6000:2cf:b0:390:f116:d220 with SMTP id
- ffacd0b85a97d-3971c97ba0cmr10199743f8f.17.1742198973089; Mon, 17 Mar 2025
- 01:09:33 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1742203009; x=1742807809;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=WdX5m2E3Wwwq9X1FE+KIB9iDZaxthMU/UKPiP9I8yzs=;
+        b=SD3ySQrTHD3Q9xEtXL+/ZFSR8dYmCynBn0gFmKfAlJwxGBEF4tyFcq5FX7EV3Hw2Vi
+         aY9TwMcB2nu7R/QlASEAlaG9TM3NtaSlPc+jfvAgz0mBpY1jYgkE4XCax038e/soed5N
+         3yDSx653rCXTTxyfuqaxDSLywIBHVGVcFJRGEmzCqIr2O6QwbwyIHwlDmxGkxU3hgM24
+         O2IJp3Ume7UW9xn0vXM+OPJ+ewDGmBRiiDu0Y+4nBFwhsujESLAbPEXBuWCzRb3ewUQg
+         6t3zK4IFsyuBqGXePcOG1uWzpXnh2VhTJffC2jckFG/rjx/a7KXDMHCmQEBmvhsfQ+5Z
+         WHtg==
+X-Gm-Message-State: AOJu0YyCa26+gz3iHUbGz5S9+lOZtQLe0OZeoXlHgoi931DnW/RNPa3p
+	ZNVLebGygncY4n1AfkVUcY+6+DK9RQ63JblZjxXAkr+qtyTIoLN21M+ECNQJwQUdpM8A7aoXUJl
+	VE6M=
+X-Gm-Gg: ASbGncueqAJ1Rp9vF/DqsDcPy1BOGkX++eiGIu1TWAJoTnc33NkRDbA69y59k+lzgIw
+	j9hq1yk3OC16TpvGk6Ub/SHseHP/F4iMl8i0AbJ32NJaWNHMxUxJ7mGnOhYMjevVPsUMDr+cekx
+	UIpOKX/9bqALH/ThDyJn7Ixwjt9r69wgns2gn8BjfxtzGzsObPGSCGgo1B9TKRF3uodi8ErXyfs
+	ue1HX7bpt/LcshEl9ed3HvQwhUebYSYSwZLRthxyTTJ4dQgs/1YPXcxBYssXzKbl/QQTm6N8TQO
+	sOD0Puj0vgXDWgMhm1QTHF2TXP0WGpXPVJV8P6SL0p1TIX6ZqUyj8CQ=
+X-Google-Smtp-Source: AGHT+IHRrbaKIr0HqPSyb153e/2WiE1zdubOqaxInmQrAHc1d8s6dUGZLUc83p1fS9QwjnzMbzLlqQ==
+X-Received: by 2002:a05:6a21:394c:b0:1f5:a3e8:64d3 with SMTP id adf61e73a8af0-1f5c118e786mr15659741637.21.1742203008989;
+        Mon, 17 Mar 2025 02:16:48 -0700 (PDT)
+Received: from MVIN00020.mvista.com ([49.207.233.26])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7371152931bsm7091964b3a.3.2025.03.17.02.16.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 17 Mar 2025 02:16:48 -0700 (PDT)
+From: vanusuri@mvista.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Vijay Anusuri <vanusuri@mvista.com>
+Subject: [oe][meta-networking][scarthgap][PATCH] wireshark: upgrade 4.2.7 -> 4.2.9
+Date: Mon, 17 Mar 2025 14:46:38 +0530
+Message-Id: <20250317091638.64066-1-vanusuri@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20250123002818.2770480-1-schonm@gmail.com> <Z9dc6ONKShAo3V3j@smile.fr>
- <CAMKF1so1M_nMJtdygux5UFt1JWShb6gHp838cwJsa=dNAJAOMA@mail.gmail.com>
-In-Reply-To: <CAMKF1so1M_nMJtdygux5UFt1JWShb6gHp838cwJsa=dNAJAOMA@mail.gmail.com>
-From: Yoann Congal <yoann.congal@smile.fr>
-Date: Mon, 17 Mar 2025 09:09:07 +0100
-X-Gm-Features: AQ5f1Jqze9lHbuG7G3zksOVOPRkA0SB4iyxwKhBuYQFRS0LhehPgVLUHulr3tP4
-Message-ID: <CAMSfU+459ZUrUCtMgM0nueTao6qsb+8ewm0nxvPMTkrZf+PcMA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] nodejs: upgrade 22.12.0 -> 22.13.1 (build
- failure on Ubuntu 20.04)
-To: Khem Raj <raj.khem@gmail.com>
-Cc: schonm@gmail.com, openembedded-devel@lists.openembedded.org, 
-	martin.jansa@gmail.com, changqing.li@windriver.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 17 Mar 2025 08:09:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116021
+ <openembedded-devel@lists.openembedded.org>; Mon, 17 Mar 2025 09:16:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116022
 
-Le lun. 17 mars 2025 =C3=A0 00:34, Khem Raj <raj.khem@gmail.com> a =C3=A9cr=
-it :
->
-> On Sun, Mar 16, 2025 at 4:21=E2=80=AFPM Yoann Congal via
-> lists.openembedded.org <yoann.congal=3Dsmile.fr@lists.openembedded.org>
-> wrote:
-> >
-> > Hello,
-> >
-> > Le Wed, Jan 22, 2025 at 07:28:18PM -0500, J. S. via lists.openembedded.=
-org a =C3=A9crit :
-> > > Changelog for 22.13.0 : https://github.com/nodejs/node/blob/main/doc/=
-changelogs/CHANGELOG_V22.md#22.13.0
-> > > Changelog for 22.13.1 : https://github.com/nodejs/node/blob/main/doc/=
-changelogs/CHANGELOG_V22.md#22.13.1
-> > >
-> > > The 22.13.1 release is a security fix addressing four CVEs.
-> > >
-> > >     CVE-2025-23083 - src,loader,permission: throw on InternalWorker u=
-se when permission model is enabled (High)
-> > >     CVE-2025-23085 - src: fix HTTP2 mem leak on premature close and E=
-RR_PROTO (Medium)
-> > >     CVE-2025-23084 - path: fix path traversal in normalize() on Windo=
-ws (Medium)
-> > >     CVE-2025-22150 - Use of Insufficiently Random Values in undici fe=
-tch() (Medium)
-> > >
-> > > I introduce a new patch with this recipe 0001-Do-not-use-glob-in-deps=
-.patch to revert https://github.com/nodejs/node/commit/77e2869ca6
-> > >
-> > > I restored 0001-deps-disable-io_uring-support-in-libuv.patch as sugge=
-sted here : https://lore.kernel.org/all/20241207140642.181134-1-martin.jans=
-a@gmail.com/
-> > >
-> > > Signed-off-by: Jason Schonberg <schonm@gmail.com>
-> >
-> > nodejs_22.13.1 has now been merged for a long time but it appears that
-> > it fails to build on Ubuntu 20.04:
-> >     g++  -o $TOPDIR/tmp/work/core2-64-poky-linux/nodejs/22.13.1/node-v2=
-2.13.1/out/Release/obj.host/simdutf/deps/simdutf/simdutf.o ../deps/simdutf/=
-simdutf.cpp '-D_GLIBCXX_USE_CXX11_ABI=3D1' '-DNODE_OPENSSL_CONF_NAME=3Dnode=
-js_conf' '-DICU_NO_USER_DATA_OVERRIDE' '-D__STDC_FORMAT_MACROS' -I../deps/s=
-imdutf  -pthread -Wall -Wextra -Wno-unused-parameter -m64 -O3 -fno-omit-fra=
-me-pointer -fno-rtti -fno-exceptions -fno-strict-aliasing -std=3Dgnu++20 -M=
-MD -MF $TOPDIR/tmp/work/core2-64-poky-linux/nodejs/22.13.1/node-v22.13.1/ou=
-t/Release/.deps/$TOPDIR/tmp/work/core2-64-poky-linux/nodejs/22.13.1/node-v2=
-2.13.1/out/Release/obj.host/simdutf/deps/simdutf/simdutf.o.d.raw  -isystem$=
-TOPDIR/tmp/work/core2-64-poky-linux/nodejs/22.13.1/recipe-sysroot-native/us=
-r/include -O2 -pipe -c
-> >   g++: error: unrecognized command line option =E2=80=98-std=3Dgnu++20=
-=E2=80=99; did you mean =E2=80=98-std=3Dgnu++2a=E2=80=99?
-> >   make[1]: *** [deps/simdutf/simdutf.host.mk:80: /home/yocon/Documents/=
-projets/yocto/contribution-yocto/builds/build-qemux86-64/tmp/work/core2-64-=
-poky-linux/nodejs/22.13.1/node-v22.13.1/out/Release/obj.host/simdutf/deps/s=
-imdutf/simdutf.o] Error 1
-> >   make: *** [Makefile:135: node] Error 2
-> >   ERROR: oe_runmake failed
-> >   WARNING: ./tmp/work/core2-64-poky-linux/nodejs/22.13.1/temp/run.do_co=
-mpile:182 exit 1 from 'exit 1'
-> >
-> > I interpret this as "nodejs wants to build a native binary using g++ bu=
-t
-> > with the wrong std=3Dgnu++20 option for the Ubuntu 20.04 g++ (which is =
-9.4
-> > and only has --std=3Dgnu++2a)"
-> >
-> > This has been seen on autobuilder each time the meta-oe reproducibility
-> > test happens on a ubuntu 20.04 worker :
-> >  * https://autobuilder.yoctoproject.org/valkyrie/#/builders/87/builds/3=
-6/steps/32/logs/stdio
-> >  * https://autobuilder.yoctoproject.org/valkyrie/#/builders/87/builds/3=
-3/steps/32/logs/stdio
-> >
-> > I've tried to look around but the nodejs build system does not look
-> > trivial... I've tried to patch the generated Makefiles to use std=3Dgnu=
-++2a
-> > but it broke on a syntax error. So, in the end, I doubt that Ubuntu 20.=
-04
-> > can build this nodejs.
-> >
-> > Does anyone has any idea on how to approach this?
+From: Vijay Anusuri <vanusuri@mvista.com>
 
-Hi Khem,
+Fixes CVE-2024-11595 CVE-2024-11596
+Removed CVE-2024-9781.patch which is already fixed in 4.2.8 version
 
-> yeah it came up before as well, you have two options, there is a gcc10
-> available for ubuntu 20.04
->
-> sudo apt update -y
-> sudo apt upgrade -y
-> sudo apt install -y build-essential
-> sudo apt install -y gcc-10 g++-10 cpp-10
-> sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10
-> 100 --slave /usr/bin/g++ g++ /usr/bin/g++-10 --slave /usr/bin/gcov
-> gcov /usr/bin/gcov-10
->
-> another approach is to use buildtools tarball.
->
-> I would recommend to use buildtools tarball,  packages like protobuf,
-> grpc are now expecting c++ compiler to support C++17 std by default
-> and it will
-> only get worse.
+Release notes:
+https://www.wireshark.org/docs/relnotes/wireshark-4.2.8.html
+https://www.wireshark.org/docs/relnotes/wireshark-4.2.9.html
 
-Thanks!
+Reference:
+https://www.wireshark.org/security/wnpa-sec-2024-15.html
+https://www.wireshark.org/security/wnpa-sec-2024-14.html
+https://www.wireshark.org/security/wnpa-sec-2024-13.html
 
-Ok, so that is a known problem.
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+---
+ .../wireshark/files/CVE-2024-9781.patch       | 133 ------------------
+ ...{wireshark_4.2.7.bb => wireshark_4.2.9.bb} |   3 +-
+ 2 files changed, 1 insertion(+), 135 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2024-9781.patch
+ rename meta-networking/recipes-support/wireshark/{wireshark_4.2.7.bb => wireshark_4.2.9.bb} (96%)
 
-Should we try to avoid the Ubuntu 20.04 workers for the meta-oe
-reproducibility test?
-And maybe document somewhere that, while Ubunutu 20.04 is tested for
-OE-Core, it does not work for meta-openembedded?
+diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2024-9781.patch b/meta-networking/recipes-support/wireshark/files/CVE-2024-9781.patch
+deleted file mode 100644
+index eb8c733da7..0000000000
+--- a/meta-networking/recipes-support/wireshark/files/CVE-2024-9781.patch
++++ /dev/null
+@@ -1,133 +0,0 @@
+-From f32965be7c80ca6eb330d0e9b34f0c563db7d869 Mon Sep 17 00:00:00 2001
+-From: Gerald Combs <gerald@wireshark.org>
+-Date: Tue, 8 Oct 2024 11:56:28 -0700
+-Subject: [PATCH] AppleTalk: Make sure we have valid addresses
+-
+-Make sure ATP, ZIP, and ASP have valid addresses. Use sizeof instead of
+-a hard-coded value in a few places.
+-
+-Fixes #20114
+-
+-(cherry picked from commit 3de741321f85c205c0a8266c40f33cb0013bd1d2)
+-
+-Conflicts:
+-	epan/dissectors/packet-atalk.c
+-
+-CVE: CVE-2024-9781
+-Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/cad248ce3bf5]
+-
+-(cherry picked from commit cad248ce3bf53026cc837fedeaca65d0f20ea3b5)
+-Signed-off-by: Shubham Pushpkar <spushpka@cisco.com>
+----
+- epan/dissectors/packet-atalk.c | 44 ++++++++++++++++++++++++----------
+- 1 file changed, 32 insertions(+), 12 deletions(-)
+-
+-diff --git a/epan/dissectors/packet-atalk.c b/epan/dissectors/packet-atalk.c
+-index 396e7af519..065d6aedb6 100644
+---- a/epan/dissectors/packet-atalk.c
+-+++ b/epan/dissectors/packet-atalk.c
+-@@ -232,9 +232,18 @@ static int hf_asp_attn_code     = -1;
+- static int hf_asp_seq           = -1;
+- static int hf_asp_size          = -1;
+- 
+-+/*
+-+ * Structure used to represent a DDP address; gives the layout of the
+-+ * data pointed to by an Appletalk "address" structure.
+-+ */
+-+struct atalk_ddp_addr {
+-+  guint16 net;
+-+  guint8 node;
+-+};
+-+
+- typedef struct {
+-   guint32 conversation;
+--  guint8  src[4];
+-+  guint8  src[sizeof(struct atalk_ddp_addr)];
+-   guint16 tid;
+- } asp_request_key;
+- 
+-@@ -502,6 +511,10 @@ static const value_string asp_error_vals[] = {
+-   {0,                   NULL } };
+- value_string_ext asp_error_vals_ext = VALUE_STRING_EXT_INIT(asp_error_vals);
+- 
+-+static bool is_ddp_address(address *addr) {
+-+  return addr->type == atalk_address_type && addr->len == sizeof(struct atalk_ddp_addr);
+-+}
+-+
+- /*
+-  * hf_index must be a FT_UINT_STRING type
+-  * Are these always in a Mac extended character set?  Should we have a
+-@@ -744,6 +757,12 @@ dissect_atp(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, void* data _U_)
+-   conversation_t  *conversation;
+-   asp_request_val *request_val   = NULL;
+- 
+-+  // ATP is carried over DDP
+-+  if (!(is_ddp_address(&pinfo->src) && is_ddp_address(&pinfo->dst))) {
+-+    return 0;
+-+  }
+-+
+-+
+-   col_set_str(pinfo->cinfo, COL_PROTOCOL, "ATP");
+- 
+-   ctrlinfo = tvb_get_guint8(tvb, offset);
+-@@ -770,7 +789,7 @@ dissect_atp(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, void* data _U_)
+-     asp_request_key request_key;
+- 
+-     request_key.conversation = conversation->conv_index;
+--    memcpy(request_key.src, (!atp_asp_dsi_info.reply)?pinfo->src.data:pinfo->dst.data, 4);
+-+    memcpy(request_key.src, (!atp_asp_dsi_info.reply)?pinfo->src.data:pinfo->dst.data, sizeof(struct atalk_ddp_addr));
+-     request_key.tid = atp_asp_dsi_info.tid;
+- 
+-     request_val = (asp_request_val *) wmem_map_lookup(atp_request_hash, &request_key);
+-@@ -1018,7 +1037,7 @@ get_transaction(tvbuff_t *tvb, packet_info *pinfo, struct atp_asp_dsi_info *atp_
+-   conversation = find_or_create_conversation(pinfo);
+- 
+-   request_key.conversation = conversation->conv_index;
+--  memcpy(request_key.src, (!atp_asp_dsi_info->reply)?pinfo->src.data:pinfo->dst.data, 4);
+-+  memcpy(request_key.src, (!atp_asp_dsi_info->reply)?pinfo->src.data:pinfo->dst.data, sizeof(struct atalk_ddp_addr));
+-   request_key.tid = atp_asp_dsi_info->tid;
+- 
+-   request_val = (asp_request_val *) wmem_map_lookup(asp_request_hash, &request_key);
+-@@ -1051,6 +1070,11 @@ dissect_asp(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, void *data)
+-   if (data == NULL)
+-     return 0;
+- 
+-+  // ASP is carried over ATP/DDP
+-+  if (!(is_ddp_address(&pinfo->src) && is_ddp_address(&pinfo->dst))) {
+-+    return 0;
+-+  }
+-+
+-   col_set_str(pinfo->cinfo, COL_PROTOCOL, "ASP");
+-   col_clear(pinfo->cinfo, COL_INFO);
+- 
+-@@ -1183,15 +1207,6 @@ dissect_asp(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, void *data)
+- /* -----------------------------
+-    ZIP protocol cf. inside appletalk chap. 8
+- */
+--/*
+-- * Structure used to represent a DDP address; gives the layout of the
+-- * data pointed to by an Appletalk "address" structure.
+-- */
+--struct atalk_ddp_addr {
+--    guint16 net;
+--    guint8  node;
+--};
+--
+- 
+- static int atalk_str_len(const address* addr _U_)
+- {
+-@@ -1241,6 +1256,11 @@ dissect_atp_zip(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, void* data)
+-   if (data == NULL)
+-     return 0;
+- 
+-+  // ATP ZIP is carried over DDP
+-+  if (!(is_ddp_address(&pinfo->src) && is_ddp_address(&pinfo->dst))) {
+-+    return 0;
+-+  }
+-+
+-   col_set_str(pinfo->cinfo, COL_PROTOCOL, "ZIP");
+-   col_clear(pinfo->cinfo, COL_INFO);
+- 
+--- 
+-2.44.1
+-
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb b/meta-networking/recipes-support/wireshark/wireshark_4.2.9.bb
+similarity index 96%
+rename from meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_4.2.9.bb
+index d68b082bb3..c561179c68 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_4.2.7.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_4.2.9.bb
+@@ -13,12 +13,11 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz \
+            file://0002-flex-Remove-line-directives.patch \
+            file://0004-lemon-Remove-line-directives.patch \
+            file://0001-UseLemon.cmake-do-not-use-lemon-data-from-the-host.patch \
+-           file://CVE-2024-9781.patch \
+            "
+ 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+ 
+-SRC_URI[sha256sum] = "2c5de08e19081bd666a2ce3f052c023274d06acaabc5d667a3c3051a9c618f86"
++SRC_URI[sha256sum] = "62c2b6652d7f9a50668867bd57b21609c9a9b6950f26e7f30a24b2de0e72ded3"
+ 
+ PE = "1"
+ 
+-- 
+2.25.1
 
-> >
-> > Regards,
-> >
-> > --
-> > Yoann Congal
-> > Smile ECS
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#116018): https://lists.openembedded.org/g/openembed=
-ded-devel/message/116018
-> > Mute This Topic: https://lists.openembedded.org/mt/111740469/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[raj.khem@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
-
-
-
---=20
-Yoann Congal
-Smile ECS - Tech expert
 
