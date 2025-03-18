@@ -2,405 +2,111 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1931C282EC
-	for <webhook@archiver.kernel.org>; Tue, 18 Mar 2025 09:18:23 +0000 (UTC)
-Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
- by mx.groups.io with SMTP id smtpd.web11.7352.1742289495174558850
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CFFCAC282EC
+	for <webhook@archiver.kernel.org>; Tue, 18 Mar 2025 09:18:43 +0000 (UTC)
+Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
+ by mx.groups.io with SMTP id smtpd.web10.7354.1742289521607405426
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Mar 2025 02:18:15 -0700
+ Tue, 18 Mar 2025 02:18:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
 Received: from fwd78.aul.t-online.de (fwd78.aul.t-online.de [10.223.144.104])
-	by mailout12.t-online.de (Postfix) with SMTP id 4F2BE142E
+	by mailout11.t-online.de (Postfix) with SMTP id 4EC1EA41
 	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Mar 2025 10:17:51 +0100 (CET)
 Received: from intel-corei7-64.fritz.box ([79.219.234.59]) by fwd78.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tuT52-2eYOYt0; Tue, 18 Mar 2025 10:17:48 +0100
+	esmtp id 1tuT52-2eYOYu0; Tue, 18 Mar 2025 10:17:48 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 3/4] gvfs: update 1.56.1 -> 1.57.2
-Date: Tue, 18 Mar 2025 10:18:26 +0100
-Message-ID: <20250318091827.831270-3-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH 4/4] gnome-text-editor: update 47.2 -> 48.1
+Date: Tue, 18 Mar 2025 10:18:27 +0100
+Message-ID: <20250318091827.831270-4-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250318091827.831270-1-f_l_k@t-online.de>
 References: <20250318091827.831270-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1742289468-A27F25D8-3A1F97F1/0/0 CLEAN NORMAL
-X-TOI-MSGID: 2f94225c-a0b4-4b6a-8ad9-234345de02e1
+X-TOI-EXPURGATEID: 150726::1742289468-A17F05D8-3F78ED46/0/0 CLEAN NORMAL
+X-TOI-MSGID: 6257761e-f1a0-4707-9e56-27ab81716eb9
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Mar 2025 09:18:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116053
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Mar 2025 09:18:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116055
 
-Major changes in 1.57.2
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-* onedrive: Use presentation id as host to adapt to the change in GOA (Ja=
-n-Michael Brummer)
-* onedrive: Fix incorrect include path for msgraph header (sid)
-Major changes in 1.57.1
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-* nfs: Support libnfs 6 (Jan Alexander Steffens)
-* onedrive: Support Sharepoint drives (Jan-Michael Brummer)
-* trash/udisks: Port from g_unix_mount_ to g_unix_mount_entry_ (Ondrej Ho=
-ly)
-* afp/mtp/nfs/sftp/smb: Add edit mode implementation (Ondrej Holy)
-* fuse: Use edit mode when neither O_TRUNC, nor O_APPEND is used (Ondrej =
-Holy)
-* afp/mtp/nfs/smb: Various output stream related fixes (Ondrej Holy)
-* udisks2: Update volume when setting/unsetting mount (Ondrej Holy)
-* Translation updates (GNOME Translation Project contributors)
+ * Fix accessibility properties on search entry
+ * Translation updates
+
+ * Defaults for markdown no longer imply 80 char right margin and
+   it is instead inherted from gsetting defaults.
+ * Fallback indentation selection is in preferences now.
+ * Translation updates
+
+ * Slight UI tweaks to the open button to allow for better shrinking
+   of the window to narrow sizes
+ * Search bar cancellation bug fixes
+ * Fix right-margin-position in preferences not working on some
+   distributions
+ * Translation updates
+
+ * More refinement on design updates
+ * Search bar moved to bottom of text area
+ * Track changes in xdg-portal
+ * Translation updates
+
+ * The view menu has been removed in favor of a new properties panel
+   based on feedback from users over the past couple of years.
+ * The indention selection menu has also been removed for the same
+   reason.
+ * More options in preferences have been exposed.
+ * The 'grid' option has been removed from preferences as it has had
+   a number of issues. Though if you've enabled it, it will continue
+   to be visible to allow turning it off.
+ * Opening files with encoding errors will present the option to select
+   an encoding from the infobar.
+ * Text Editor now uses the new "text" GtkFileDialog APIs from GTK.
+   This should allow using portals and thus, Nautilus as a file chooser.
+ * Document statistics can be updated as you type in the new panel.
+ * The language selection dialog shows recent languages above other
+   languages to make common changes quicker.
+ * The position label is now displayed above the editor view when the
+   cursor moves for reasons other than typing such as jumping by arrow
+   movement or mouse/touch press to move the cursor.
+ * Fix alignment/sizing of zoom buttons.
+ * A new fullscreen mode similar to Ptyxis/Epiphany.
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- ...fs-Support-libnfs-6-backport-to-1.56.patch | 278 ------------------
- .../gvfs/{gvfs_1.56.1.bb =3D> gvfs_1.57.2.bb}   |   3 +-
- 2 files changed, 1 insertion(+), 280 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/gvfs/gvfs/0001-nfs-Support-l=
-ibnfs-6-backport-to-1.56.patch
- rename meta-gnome/recipes-gnome/gvfs/{gvfs_1.56.1.bb =3D> gvfs_1.57.2.bb=
-} (95%)
+ .../{gnome-text-editor_47.2.bb =3D> gnome-text-editor_48.1.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gnome-text-editor/{gnome-text-editor_47.=
+2.bb =3D> gnome-text-editor_48.1.bb} (83%)
 
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs/0001-nfs-Support-libnfs-6=
--backport-to-1.56.patch b/meta-gnome/recipes-gnome/gvfs/gvfs/0001-nfs-Sup=
-port-libnfs-6-backport-to-1.56.patch
-deleted file mode 100644
-index 63fb5a0e89..0000000000
---- a/meta-gnome/recipes-gnome/gvfs/gvfs/0001-nfs-Support-libnfs-6-backpo=
-rt-to-1.56.patch
-+++ /dev/null
-@@ -1,278 +0,0 @@
--From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
--From: "Jan Alexander Steffens (heftig)" <heftig@archlinux.org>
--Date: Sun, 19 Jan 2025 14:28:25 +0100
--Subject: [PATCH] nfs: Support libnfs 6 (backport to 1.56)
--
--Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gvfs/-/commit/=
-50c0845928983830ebe12d1d2ba82a6735cec77b]
--
--Signed-off-by: Markus Volk <f_l_k@t-online.de>
-----
-- daemon/gvfsbackendnfs.c | 79 +++++++++++++++++++++++++++++++++++++++++
-- 1 file changed, 79 insertions(+)
--
--diff --git a/daemon/gvfsbackendnfs.c b/daemon/gvfsbackendnfs.c
--index c9e9ed60b938..1b66bb040e1d 100644
----- a/daemon/gvfsbackendnfs.c
--+++ b/daemon/gvfsbackendnfs.c
--@@ -407,27 +407,33 @@ read_cb (int err, struct nfs_context *ctx, void *d=
-ata, void *private_data)
--     {
--       GVfsJobRead *op_job =3D G_VFS_JOB_READ (job);
--=20
--+#ifndef LIBNFS_API_V2
--       memcpy (op_job->buffer, data, err);
--+#endif
--       g_vfs_job_read_set_size (op_job, err);
--       g_vfs_job_succeeded (job);
--     }
--   else
--     {
--       g_vfs_job_failed_from_errno (job, -err);
--     }
-- }
--=20
-- static gboolean
-- try_read (GVfsBackend *backend,
--           GVfsJobRead *job,
--           GVfsBackendHandle _handle,
--           char *buffer,
--           gsize bytes_requested)
-- {
--   GVfsBackendNfs *op_backend =3D G_VFS_BACKEND_NFS (backend);
--   struct nfsfh *fh =3D _handle;
--=20
--+#ifdef LIBNFS_API_V2
--+  nfs_read_async (op_backend->ctx, fh, buffer, bytes_requested, read_cb=
-, job);
--+#else
--   nfs_read_async (op_backend->ctx, fh, bytes_requested, read_cb, job);
--+#endif
--   return TRUE;
-- }
--=20
--@@ -755,29 +761,40 @@ try_append_to (GVfsBackend *backend,
-- {
--   GVfsBackendNfs *op_backend =3D G_VFS_BACKEND_NFS (backend);
--=20
--+#ifdef LIBNFS_API_V2
--+  nfs_open2_async (op_backend->ctx,
--+                   filename,
--+                   O_CREAT | O_APPEND,
--+                   (flags & G_FILE_CREATE_PRIVATE ? 0600 : 0666) & ~op_=
-backend->umask,
--+                   append_cb, job);
--+#else
--   nfs_create_async (op_backend->ctx,
--                     filename,
--                     O_APPEND,
--                     (flags & G_FILE_CREATE_PRIVATE ? 0600 : 0666) & ~op=
-_backend->umask,
--                     append_cb, job);
--+#endif
--   return TRUE;
-- }
--=20
-- /* The following types and functions implement an asynchronous copy whi=
-ch calls
--  * a callback function with a boolean success or failure.  This is used=
- in some
--  * cases for backup files when replacing. */
-- #define COPY_BLKSIZE (64 * 1024)
--=20
-- typedef void (*CopyFileCallback) (gboolean success, void *private_data)=
-;
--=20
-- typedef struct
-- {
--   struct nfsfh *srcfh;
--   struct nfsfh *destfh;
--   char *dest;
--   int mode;
--   CopyFileCallback cb;
--   void *private_data;
--+#ifdef LIBNFS_API_V2
--+  char buffer[COPY_BLKSIZE];
--+#endif
-- } CopyHandle;
--=20
-- static void
--@@ -805,56 +822,74 @@ copy_write_cb (int err,
--   CopyHandle *handle =3D private_data;
--=20
--   if (err > 0)
--+#ifdef LIBNFS_API_V2
--+    nfs_read_async (ctx, handle->srcfh, handle->buffer, COPY_BLKSIZE, c=
-opy_read_cb, handle);
--+#else
--     nfs_read_async (ctx, handle->srcfh, COPY_BLKSIZE, copy_read_cb, han=
-dle);
--+#endif
--   else
--     copy_handle_complete (ctx, handle, FALSE);
-- }
--=20
-- static void
-- copy_read_cb (int err, struct nfs_context *ctx, void *data, void *priva=
-te_data)
-- {
--   CopyHandle *handle =3D private_data;
--=20
--   if (err =3D=3D 0)
--     copy_handle_complete (ctx, handle, TRUE);
--   else if (err > 0)
--+#ifdef LIBNFS_API_V2
--+    nfs_write_async (ctx, handle->destfh, handle->buffer, err, copy_wri=
-te_cb, handle);
--+#else
--     nfs_write_async (ctx, handle->destfh, err, data, copy_write_cb, han=
-dle);
--+#endif
--   else
--     copy_handle_complete (ctx, handle, FALSE);
-- }
--=20
-- static void
-- copy_open_dest_cb (int err,
--                    struct nfs_context *ctx,
--                    void *data, void *private_data)
-- {
--   CopyHandle *handle =3D private_data;
--=20
--   if (err =3D=3D 0)
--     {
--       handle->destfh =3D data;
--=20
--+#ifdef LIBNFS_API_V2
--+      nfs_read_async (ctx, handle->srcfh, handle->buffer, COPY_BLKSIZE,=
- copy_read_cb, handle);
--+#else
--       nfs_read_async (ctx, handle->srcfh, COPY_BLKSIZE, copy_read_cb, h=
-andle);
--+#endif
--     }
--   else
--     {
--       copy_handle_complete (ctx, handle, FALSE);
--     }
-- }
--=20
-- static void
-- copy_open_source_cb (int err,
--                      struct nfs_context *ctx,
--                      void *data, void *private_data)
-- {
--   CopyHandle *handle =3D private_data;
--=20
--   if (err =3D=3D 0)
--     {
--       handle->srcfh =3D data;
--+#ifdef LIBNFS_API_V2
--+      nfs_open2_async (ctx,
--+                       handle->dest, O_CREAT | O_TRUNC, handle->mode & =
-0777,
--+                       copy_open_dest_cb, handle);
--+#else
--       nfs_create_async (ctx,
--                         handle->dest, O_TRUNC, handle->mode & 0777,
--                         copy_open_dest_cb, handle);
--+#endif
--       g_free (handle->dest);
--     }
--   else
--@@ -935,11 +970,19 @@ replace_backup_chown_cb (int err,
--       GVfsJobOpenForWrite *op_job =3D G_VFS_JOB_OPEN_FOR_WRITE (job);
--       GVfsBackendNfs *op_backend =3D G_VFS_BACKEND_NFS (op_job->backend=
-);
--=20
--+#ifdef LIBNFS_API_V2
--+      nfs_open2_async (op_backend->ctx,
--+                       op_job->filename,
--+                       O_CREAT | O_TRUNC,
--+                       (op_job->flags & G_FILE_CREATE_PRIVATE ? 0600 : =
-0666) & ~op_backend->umask,
--+                       replace_trunc_cb, handle);
--+#else
--       nfs_create_async (op_backend->ctx,
--                         op_job->filename,
--                         O_TRUNC,
--                         (op_job->flags & G_FILE_CREATE_PRIVATE ? 0600 :=
- 0666) & ~op_backend->umask,
--                         replace_trunc_cb, handle);
--+#endif
--     }
--   else
--     {
--@@ -1019,11 +1062,19 @@ replace_truncate (struct nfs_context *ctx, Write=
-Handle *handle)
--     }
--   else
--     {
--+#ifdef LIBNFS_API_V2
--+      nfs_open2_async (ctx,
--+                       op_job->filename,
--+                       O_CREAT | O_TRUNC,
--+                       (op_job->flags & G_FILE_CREATE_PRIVATE ? 0600 : =
-0666) & ~op_backend->umask,
--+                       replace_trunc_cb, handle);
--+#else
--       nfs_create_async (ctx,
--                         op_job->filename,
--                         O_TRUNC,
--                         (op_job->flags & G_FILE_CREATE_PRIVATE ? 0600 :=
- 0666) & ~op_backend->umask,
--                         replace_trunc_cb, handle);
--+#endif
--     }
-- }
--=20
--@@ -1211,11 +1262,19 @@ replace_stat_cb (int err,
--               handle->tempname =3D g_build_filename (dirname, basename,=
- NULL);
--               g_free (dirname);
--=20
--+#ifdef LIBNFS_API_V2
--+              nfs_open2_async (ctx,
--+                               handle->tempname,
--+                               O_CREAT | O_EXCL,
--+                               (op_job->flags & G_FILE_CREATE_PRIVATE ?=
- 0600 : 0666) & ~op_backend->umask,
--+                               replace_temp_cb, handle);
--+#else
--               nfs_create_async (ctx,
--                                 handle->tempname,
--                                 O_EXCL,
--                                 (op_job->flags & G_FILE_CREATE_PRIVATE =
-? 0600 : 0666) & ~op_backend->umask,
--                                 replace_temp_cb, handle);
--+#endif
--             }
--           else
--             {
--@@ -1299,11 +1358,19 @@ try_replace (GVfsBackend *backend,
-- {
--   GVfsBackendNfs *op_backend =3D G_VFS_BACKEND_NFS (backend);
--=20
--+#ifdef LIBNFS_API_V2
--+  nfs_open2_async (op_backend->ctx,
--+                   filename,
--+                   O_CREAT | O_EXCL,
--+                   (flags & G_FILE_CREATE_PRIVATE ? 0600 : 0666) & ~op_=
-backend->umask,
--+                   replace_create_cb, job);
--+#else
--   nfs_create_async (op_backend->ctx,
--                     filename,
--                     O_EXCL,
--                     (flags & G_FILE_CREATE_PRIVATE ? 0600 : 0666) & ~op=
-_backend->umask,
--                     replace_create_cb, job);
--+#endif
--   return TRUE;
-- }
--=20
--@@ -1337,11 +1404,19 @@ try_create (GVfsBackend *backend,
-- {
--   GVfsBackendNfs *op_backend =3D G_VFS_BACKEND_NFS (backend);
--=20
--+#ifdef LIBNFS_API_V2
--+  nfs_open2_async (op_backend->ctx,
--+                   filename,
--+                   O_CREAT | O_EXCL,
--+                   (flags & G_FILE_CREATE_PRIVATE ? 0600 : 0666) & ~op_=
-backend->umask,
--+                   create_cb, job);
--+#else
--   nfs_create_async (op_backend->ctx,
--                     filename,
--                     O_EXCL,
--                     (flags & G_FILE_CREATE_PRIVATE ? 0600 : 0666) & ~op=
-_backend->umask,
--                     create_cb, job);
--+#endif
--   return TRUE;
-- }
--=20
--@@ -1372,7 +1447,11 @@ try_write (GVfsBackend *backend,
--   WriteHandle *handle =3D _handle;
--   struct nfsfh *fh =3D handle->fh;
--=20
--+#ifdef LIBNFS_API_V2
--+  nfs_write_async (op_backend->ctx, fh, buffer, buffer_size, write_cb, =
-job);
--+#else
--   nfs_write_async (op_backend->ctx, fh, buffer_size, buffer, write_cb, =
-job);
--+#endif
--   return TRUE;
-- }
--=20
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.56.1.bb b/meta-gnome/re=
-cipes-gnome/gvfs/gvfs_1.57.2.bb
-similarity index 95%
-rename from meta-gnome/recipes-gnome/gvfs/gvfs_1.56.1.bb
-rename to meta-gnome/recipes-gnome/gvfs/gvfs_1.57.2.bb
-index 97c83f751c..72afefb275 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.56.1.bb
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.57.2.bb
-@@ -18,8 +18,7 @@ DEPENDS +=3D "\
- RDEPENDS:${PN} +=3D "gsettings-desktop-schemas"
+diff --git a/meta-gnome/recipes-gnome/gnome-text-editor/gnome-text-editor=
+_47.2.bb b/meta-gnome/recipes-gnome/gnome-text-editor/gnome-text-editor_4=
+8.1.bb
+similarity index 83%
+rename from meta-gnome/recipes-gnome/gnome-text-editor/gnome-text-editor_=
+47.2.bb
+rename to meta-gnome/recipes-gnome/gnome-text-editor/gnome-text-editor_48=
+.1.bb
+index aad4842e52..317d082940 100644
+--- a/meta-gnome/recipes-gnome/gnome-text-editor/gnome-text-editor_47.2.b=
+b
++++ b/meta-gnome/recipes-gnome/gnome-text-editor/gnome-text-editor_48.1.b=
+b
+@@ -18,7 +18,7 @@ inherit gnomebase gtk-icon-cache itstool gnome-help mim=
+e-xdg features_check
 =20
- SRC_URI =3D "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("=
-${PV}")}/${BPN}-${PV}.tar.xz;name=3Darchive"
--SRC_URI +=3D "file://0001-nfs-Support-libnfs-6-backport-to-1.56.patch"
--SRC_URI[archive.sha256sum] =3D "86731ccec679648f8734e237b1de190ebdee6e4c=
-8c0f56f454c31588e509aa10"
-+SRC_URI[archive.sha256sum] =3D "f16bef8eca1fd6c117e85db011d21e915669790d=
-55867349c5f1b291299e9585"
+ REQUIRED_DISTRO_FEATURES =3D "opengl"
 =20
- ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
+-SRC_URI[archive.sha256sum] =3D "7d04039b16174ec5fd65fea2f447f3febd9fdf2a=
+a36e9997abc6ff992cc31e38"
++SRC_URI[archive.sha256sum] =3D "52089ba978a665841803b1b69e0e7be75b09a7d5=
+4e01e8d0bb29926e0f342437"
 =20
+ FILES:${PN} +=3D " \
+     ${datadir}/metainfo \
 --=20
 2.48.1
 
