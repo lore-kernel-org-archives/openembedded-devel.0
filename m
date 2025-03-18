@@ -2,193 +2,128 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 91047C36000
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83BF3C35FFF
 	for <webhook@archiver.kernel.org>; Tue, 18 Mar 2025 08:34:13 +0000 (UTC)
 Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web11.6801.1742286843288667051
+ by mx.groups.io with SMTP id smtpd.web10.6842.1742286845286249722
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Mar 2025 01:34:03 -0700
+ Tue, 18 Mar 2025 01:34:05 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
 Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
-	by mailout05.t-online.de (Postfix) with SMTP id 39ABF1543;
+	by mailout05.t-online.de (Postfix) with SMTP id 43CBF1574;
 	Tue, 18 Mar 2025 09:33:50 +0100 (CET)
 Received: from intel-corei7-64.fritz.box ([79.219.234.59]) by fwd86.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tuSOS-2EPvLn0; Tue, 18 Mar 2025 09:33:48 +0100
+	esmtp id 1tuSOS-2EPvLr0; Tue, 18 Mar 2025 09:33:48 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH 03/11] gnome-software: update 47.2 -> 48.0
-Date: Tue, 18 Mar 2025 09:34:22 +0100
-Message-ID: <20250318083430.544906-3-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH 07/11] gtksourceview: update 5.12.0 -> 5.16.0
+Date: Tue, 18 Mar 2025 09:34:26 +0100
+Message-ID: <20250318083430.544906-7-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250318083430.544906-1-f_l_k@t-online.de>
 References: <20250318083430.544906-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-TOI-EXPURGATEID: 150726::1742286828-22984450-E2E5C080/0/0 CLEAN NORMAL
-X-TOI-MSGID: 9f1853e7-d732-4d22-a615-93c169b02edf
+X-TOI-EXPURGATEID: 150726::1742286828-22183450-C68F25C2/0/0 CLEAN NORMAL
+X-TOI-MSGID: 8a3a99b7-437b-4b5c-9b31-8f7e3b8528ac
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 18 Mar 2025 08:34:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116045
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116047
 
-Version 48.0
-~~~~~~~~~~~~
-Released: 2025-03-14
+News in 5.16.0, 2025-03-15
+--------------------------
+This is a stable release for GNOME 48.0
+ * Translation updates
 
-This is a stable release with the following changes:
- * Correctly show update detail text not provided in markdown
-
-This release also updates translations:
- * Basque (Asier Saratsua Garmendia)
- * Belarusian (Vasil Pupkin)
- * Bokm=C3=A5l, Norwegian (Brage Fuglseth)
- * Catalan (Jordi Mas i Hernandez, Francesc Busquets)
- * Danish (Alan Mortensen)
- * Filipino (Iverson Briones)
- * Hungarian (Bal=C3=A1zs =C3=9Ar)
- * Indonesian (Andika Triwidada)
- * Nepali (Pawan Chitrakar)
- * Panjabi (A S Alam)
- * Polish (Piotr Dr=C4=85g)
- * Romanian (Antonio Marin)
- * Russian (Artur S0)
- * Spanish (Daniel Mustieles)
-
-Version 48~rc
-~~~~~~~~~~~~~
-Released: 2025-02-28
-
-This is an unstable release with the following changes:
- * Minor interface improvements on the updates page
- * Various minor performance improvements
- * Improve error handling for app launches and distribution upgrades
- * Fix a crash on the app review dialog
- * Fix version checks preventing some firmware updates when historical up=
-dates are also listed
- * Fix a crash when copying error details
- * Minor interface improvements to search
- * Improvements to flatpak permissions checking for D-Bus
-
-This release also updates translations:
- * Bulgarian (twlvnn kraftwerk)
- * Catalan (Jordi Mas)
- * Chinese (China) (Luming Zh)
- * Chinese (Taiwan) (Cheng-Chia Tseng)
- * Czech (Daniel Rusek)
- * Finnish (Jiri Gr=C3=B6nroos)
- * French (Vincent Chatelain)
- * Galician (Fran Dieguez)
- * Georgian (Ekaterine Papava)
- * Hebrew (Yaron Shahrabani)
- * Korean (Seong-ho Cho)
- * Lithuanian (Aurimas =C4=8Cernius)
- * Persian (Danial Behzadi)
- * Portuguese (Hugo Carvalho)
- * Portuguese (Brazil) (Rafael Fontenelle)
- * Russian (Artur S0)
- * Slovenian (Martin)
- * Swedish (Anders Jonsson)
- * Turkish (Sabri =C3=9Cnal)
- * Ukrainian (Yuri Chornoivan)
-
-Version 48~beta
-~~~~~~~~~~~~~~~
-Released: 2025-01-31
-This is an unstable release with the following changes:
- * Support installing flatpaks via a flatpak+https: link
- * Fix notifying about outdated updates when in power saver mode or offli=
-ne
- * Prioritise verified apps in source list
-This release also updates translations:
- * Bulgarian (twlvnn kraftwerk)
- * Czech (Daniel Rusek)
- * Russian (Artur S0)
- * Slovenian (Martin)
-Version 48~alpha3
-~~~~~~~~~~~~~~~~~
-Released: 2025-01-14
-This is an unstable release with the following changes:
- * Fix downloads of firmware updates
- * Fix the release process
-This release also updates translations:
- * Belarusian (Vasil Pupkin)
- * Slovenian (Martin)
-Version 48~alpha2
-~~~~~~~~~~~~~~~~~
-Released: 2025-01-04
-This is an unstable release with the following changes:
- * Fix the release process
-Version 48~alpha
-~~~~~~~~~~~~~~~~
-Released: 2025-01-04
-This is an unstable release with the following changes:
- * Include dependencies in estimated download size
- * Improve performance when loading updates
- * Fix interface freeze when upvoting/downvoting reviews
- * Various minor interface improvements for keyboard navigation and small=
- screens
- * Fix crash when uninstalling snaps
- * Add experimental systemd-sysupdate plugin
- * Warn about microphone permissions if an app has PipeWire access
-This release also updates translations:
- * Belarusian (Vasil Pupkin)
- * Catalan (Jordi Mas i Hernandez, Jordi Mas)
- * Dutch (Nathan Follens)
- * French (Vincent Chatelain)
- * Friulian (Fabio Tomat)
- * German (J=C3=BCrgen Benvenuti)
- * Hebrew (Yaron Shahrabani)
- * Kabyle (Athmane MOKRAOUI)
- * Latvian (R=C5=ABdolfs Mazurs)
- * Portuguese (Hugo Carvalho)
- * Portuguese (Brazil) (Rafael Fontenelle)
- * Russian (Artur S0)
- * Serbian (=D0=9C=D0=B0=D1=80=D0=BA=D0=BE =D0=9A=D0=BE=D1=81=D1=82=D0=B8=
-=D1=9B, =D0=9C=D0=B8=D0=BB=D0=BE=D1=88 =D0=9F=D0=BE=D0=BF=D0=BE=D0=B2=D0=B8=
-=D1=9B)
- * Slovak (Jose Riha)
- * Slovenian (Martin)
- * Thai (Aefgh Threenine)
- * Turkish (Sabri =C3=9Cnal)
- * Ukrainian (Yuri Chornoivan)
+News in 5.15.1, 2025-02-24
+--------------------------
+ * Remove use of various GTK deprecations
+ * Testsuite improvements
+ * Translation updates
+News in 5.15.0, 2025-02-02
+--------------------------
+This is a beta release for GNOME 48.beta
+ * Various introspection fixes
+ * Improvements to GtkSourceAssistants
+ * Various GtkTextIter performance improvements
+ * Deduplication fixes when sorting
+ * Alter paths for resource:// usage so that resources take priority
+   over system installations other than the current one
+ * Adwaita.xml, Adwaita-dark.xml style updates
+ * Quantize Y position for gutter line numbers
+ * New and updated languages: meson.lang, zig.lang
+ * Translation updates
+News in 5.14.1, 2024-10-04
+--------------------------
+This is a bug-fix release for GNOME 47
+ * Ensure you cannot show context menu from GtkSourceMap which otherwise
+   has a limited FontMap containing only the BuilderBlocks font.
+News in 5.14.0, 2024-09-13
+--------------------------
+This is a stable release for GNOME 47.0
+ * Fix an issue where the gutter would not redraw when focus changes.
+ * Add support for Groff syntax
+News in 5.13.1, 2024-08-04
+--------------------------
+This is an unstable release update for GNOME 47.beta
+ * Documentation improvements
+ * Improve performance of BuilderBlocks font loading. Some of this
+   effort required changes to the TTF, so user testing with a wide
+   variety of languages is desired. This should reduce startup time
+   of GtkSourceView using applications.
+ * gtk-doc.lang: highlight `backtick` spans
+ * c.lang: highlight [[]] style attributes
+ * java.lang: improve escaped character matching
+ * Adwaita.xml, Adwaita-dark.xml: style updates to track platform
+   changes for GNOME 47.
+News in 5.13.0, 2024-06-28
+--------------------------
+This is an unstable release update for GNOME 47.alpha
+ * Ensure gutter renderers are released during dispose
+ * Make default auto-indenter keep indentation when cursor is at line sta=
+rt
+ * python3.lang: Fix f-string in curly braces to have no-spellcheck appli=
+ed
+ * Translation updates
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../{gnome-software_47.2.bb =3D> gnome-software_48.0.bb}        | 4 ++--
+ .../{gtksourceview5_5.12.0.bb =3D> gtksourceview5_5.16.0.bb}    | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/gnome-software/{gnome-software_47.2.bb =3D=
-> gnome-software_48.0.bb} (90%)
+ rename meta-gnome/recipes-gnome/gtksourceview/{gtksourceview5_5.12.0.bb =
+=3D> gtksourceview5_5.16.0.bb} (84%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-software/gnome-software_47.2.=
-bb b/meta-gnome/recipes-gnome/gnome-software/gnome-software_48.0.bb
-similarity index 90%
-rename from meta-gnome/recipes-gnome/gnome-software/gnome-software_47.2.b=
-b
-rename to meta-gnome/recipes-gnome/gnome-software/gnome-software_48.0.bb
-index 31b13accf8..8dae95dddb 100644
---- a/meta-gnome/recipes-gnome/gnome-software/gnome-software_47.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-software/gnome-software_48.0.bb
-@@ -26,9 +26,9 @@ DEPENDS +=3D " \
+diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.12.0=
+.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.16.0.bb
+similarity index 84%
+rename from meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.12.0.=
+bb
+rename to meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.16.0.bb
+index f3267acbeb..deab259299 100644
+--- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.12.0.bb
++++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.16.0.bb
+@@ -23,8 +23,8 @@ inherit gnomebase lib_package gettext features_check gi=
+-docgen gtk-icon-cache go
 =20
- RDEPENDS:${PN} =3D "iso-codes"
+ REQUIRED_DISTRO_FEATURES =3D "opengl"
 =20
--EXTRA_OEMESON +=3D "-Dtests=3Dfalse -Dsoup2=3Dfalse"
-+EXTRA_OEMESON +=3D "-Dtests=3Dfalse"
+-SRC_URI =3D "https://download.gnome.org/sources/gtksourceview/5.12/${PNA=
+ME}-${PV}.tar.xz"
+-SRC_URI[sha256sum] =3D "daf32ff5d3150d6385917d3503a85b9e047ba158b2b03079=
+314c9c00813fa01f"
++SRC_URI =3D "https://download.gnome.org/sources/gtksourceview/5.16/${PNA=
+ME}-${PV}.tar.xz"
++SRC_URI[sha256sum] =3D "ab35d420102f3e8b055dd3b8642d3a48209f888189e6254d=
+0ffb4b6a7e8c3566"
 =20
--SRC_URI[archive.sha256sum] =3D "112338f8a98e7e5125de3f57229873534215b77e=
-eef37d3fd4262f02151c7cea"
-+SRC_URI[archive.sha256sum] =3D "e607af554e838fd6d07c1631f634b20e8bd4e6ad=
-f16fc7535c4520874af544f7"
-=20
- PACKAGECONFIG ?=3D "flatpak"
- PACKAGECONFIG[flatpak] =3D "-Dflatpak=3Dtrue,-Dflatpak=3Dfalse,flatpak o=
-stree"
+ GIR_MESON_ENABLE_FLAG =3D 'enabled'
+ GIR_MESON_DISABLE_FLAG =3D 'disabled'
 --=20
 2.48.1
 
