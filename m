@@ -1,119 +1,114 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DF55C28B2F
-	for <webhook@archiver.kernel.org>; Tue, 18 Mar 2025 17:54:15 +0000 (UTC)
-Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
- by mx.groups.io with SMTP id smtpd.web10.1739.1742320448906808389
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EEE66C282EC
+	for <webhook@archiver.kernel.org>; Tue, 18 Mar 2025 19:26:16 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.web10.1048.1742315093214832962
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Mar 2025 10:54:09 -0700
+ Tue, 18 Mar 2025 09:24:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=iQtSbSrS;
- spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-6ff27ad48beso51510617b3.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Mar 2025 10:54:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1742320448; x=1742925248; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=2ygrEP0k9KDCZaSUnJU5Z5AoKfPedk1jn01Gco6mDYM=;
-        b=iQtSbSrSZw32/19MdRtOnx4rRVmw+lWhbNa62oUxwRZDz6jrdX/ixNRY8tyUtT13ra
-         BDtqrtQ6GIK5cw8PG2DX3jWtBJ6eC7jV4oKVYj4yFzlYMreBy/ZVX9oqyty55cl9TmUI
-         1x+UD4qxhV11RCwSK2g1o6c01OLuZ/dGwtDZ1ItTNZ5yAL2855QSk85eG1JXCLDS5/d1
-         Ovi/1m/wj47b/oD/xzj0EPcgpGlAPozyay3+5PKk3hQz9aHHFdbvst45uXcGa9ozS6w3
-         x6DqffpqRQMQYll7/24wGvKiHObpdSI1H++zfbfyLKmNbwU6C8VV7Et7d2bmDzUIc8c3
-         R3jw==
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=CkPtI74L;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: koen.kooi@oss.qualcomm.com)
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52I9akus013293
+	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Mar 2025 16:24:52 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=DSlMHaBALqEjbfTHnAM5ykJNK8ecDNWOmNE
+	LYg7tGi4=; b=CkPtI74LO74YM55qLrU4BMa+nPdt+sqNA7FVp0M+1vwpnSUs1VU
+	pKoYYPeIGgJjt/colRhouy4s/4OW0YICidpBssgbZEwS8mUFyny1bGNLf87Dq4/q
+	WfISki4vX18dXHXzeuWWZNoF2/lf1h0sKrGpOl5tIXJ0qi2u0qut1fJn+lur/EuZ
+	Bu4qH5TT+UUbM1h1mR99RL4nEMpFXqaLRi8KPC8Lq8y8q8thY+EusZpxVI2tHPWV
+	MLiVbkIbCiFTtPHskSP9ufrfjTKIVigp4paocIcbB70/BnhB+ZvMEc8faPp6If24
+	AxlnjoxW6Vf3KX7yAvhMlHprUBk4YrOp+rg==
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com [209.85.219.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 45d1uu0u3m-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Mar 2025 16:24:52 +0000 (GMT)
+Received: by mail-qv1-f71.google.com with SMTP id 6a1803df08f44-6eb0ee99252so42621076d6.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Mar 2025 09:24:52 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742320448; x=1742925248;
+        d=1e100.net; s=20230601; t=1742315091; x=1742919891;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=2ygrEP0k9KDCZaSUnJU5Z5AoKfPedk1jn01Gco6mDYM=;
-        b=nFxwffkhUcWbYUxqVe5Q8CyP7bl/PC5MVScki54wm/pqq2Gp+RoYrjOkHO57Qi94DQ
-         rmWVILr1DKVAO5QK2KgklDKNmljKLVfGXHlj0yjrQKGSKaiFaXZKv1ub4r9Nr7Q1I7tA
-         av8ewmeX9Jj1VyzTHadENXgu9TvhqN6AF4AXkl0ROnRPbj3/yPWE4RJ4G/2mj131aPGN
-         14+RU0QafvE5SRnETbQeHoecvlFM+x1M5Tg7ZEt1HNfA5sC+Z+lNAX816rl/pFrQ56H+
-         6fgNZt3VQD59h0cigReijMY+Wgl3ImL57ZyTsMJnaHMdV2i6LZixxv35sw+YCTBMQL01
-         dMLQ==
-X-Gm-Message-State: AOJu0YwgLIVKFJ2ppOZAfq9Vr6fiW9Tnbs4qo7tVZefMVrEUOcHR3PSz
-	nhIRS8d9aS+OrHjkD2ICIEuABWPkFXpwwkZ+DrHK3rjkBWpwtzuHAISpyYkQ
-X-Gm-Gg: ASbGncsAC11jnL7nuLW1fc9E+L0+gvdosFOBfJgB1LAYEBcnp/MksqmKEEGW7XC7cIa
-	Poadt3MGZNMdxpbFVOxumdAOPUJrlfU0K7gHLeziDFp27eOi2q9Hb7dgSdo6/gXIjcNiP+aMjCX
-	P2LHmz1w/6/GR8dPe+fCIWcYX/N5isAeZVzCqZxyQSKdNWaT38fPkl02SXgiAzF20wYy8Pge92K
-	iI3YQiaSZ92jU+IKIwDHq+cvUNHVGn8smRaMsXGUW8MAifYC84DS31aQ6TI615U9kA3CXyitdCO
-	1CX3rpBIE44CkO6aoOHEgyY+p3f6cQMm6n84Jia+PLOfH0a+yg==
-X-Google-Smtp-Source: AGHT+IHDoYHTqP+qv7P0nIyO0+yk7ng5E8aqKTJ2isHESU/Fv+GTZCAPHorcxUxqmIvLGCxZamHrsg==
-X-Received: by 2002:a05:690c:4b0b:b0:6fd:63e9:a441 with SMTP id 00721157ae682-6ffdcdba724mr64246717b3.28.1742320447331;
-        Tue, 18 Mar 2025 10:54:07 -0700 (PDT)
-Received: from localhost.localdomain ([71.215.9.36])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ff3286006fsm27785457b3.33.2025.03.18.10.54.06
+        bh=DSlMHaBALqEjbfTHnAM5ykJNK8ecDNWOmNELYg7tGi4=;
+        b=DmzkC9gi6369AnUBPMG355D0KsdiZQSidGuNBMPVB70B7aWmHP2AFeFnlGAc8bbZ3W
+         3RFCk8CV8LSwad8KVzX/miMso3g4zW1MNZEHbDk+vSTQY78FnHZvgL13+3bO5G//D++/
+         w5jAOGwZryTWU2lCc85/iPGWVB1IHm62H1LjZq57VlDuRV8r7Wl53bddVsOmJ/v+Mw7y
+         nnIyXyHnviejf01MOyxo+atEmkiiXYhejeH3gDwqh6t/NK54kNBZADyjb/Fq/+GoWOnV
+         8i/uyFDAqTUG1o8gysQYgUdbDVqZGBXsmQsJvGnpxibfIoR10PQV1R/tsNjUFbdyKC0r
+         XkZg==
+X-Gm-Message-State: AOJu0YzJPiQXl5siUD5PNX/fK7wAW1TxiqW7YutKuby1TIpbPMynVBpK
+	3X9qB/F8d0Yzs6KJ++qoj8qPSh/U3KOhstWDvAedU1JwoJRmeIv5Jk3XRhE4oWTy01ex8w1D9V4
+	nLmoI7v8nTxD0EmtMzi7aZfyTtBLTyEKGEBy7AIBq5SVd9ZjB6EYon1eMdzH4rKfevm6E1ovoHK
+	Y1v9SI6cdPRssWHVk=
+X-Gm-Gg: ASbGncuZDKwXUUQEJWTKnXMAv9i7dFPW+Wv+kbkABVhhGKiGhIKPphCbnhbS9uEC3EA
+	HcEwk4y4TjKsw2Xpd6NK2GSvzMN2cpfwyi45deNG26HEh1wRrGRwL19FZ4Awx+2ohE+mX4XDMth
+	IE1nGIfrg6SPScDmQJT9Xk1f8dwiRYd6ksUrkqDElACm3Cm57bQlDrjN4BCPxk8lu6TO3UJ+ySj
+	u5ojBabFQdAQ7NLz0ZlONxG3EVA2Z8xiTzmk2mLFii4n0puuel16BwavF3pDKsWhjrWAASgVxWq
+	CLMd234ODmuvpveWG3xrh4dDS6JosHkmF6ZKX2U=
+X-Received: by 2002:a05:6214:76a:b0:6e8:efd0:2dad with SMTP id 6a1803df08f44-6eaea9eda58mr212473186d6.12.1742315091293;
+        Tue, 18 Mar 2025 09:24:51 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGYqTNuMuAWSy49yDFBnRvxw/opBqcbXcnmbGplnFCoDAW1WGjqN5y29U3I0BbMNQRFfCPdJw==
+X-Received: by 2002:a05:6214:76a:b0:6e8:efd0:2dad with SMTP id 6a1803df08f44-6eaea9eda58mr212472796d6.12.1742315090856;
+        Tue, 18 Mar 2025 09:24:50 -0700 (PDT)
+Received: from hu-kkooi-ams.qualcomm.com ([212.136.9.4])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5e816ad3914sm7892659a12.64.2025.03.18.09.24.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 Mar 2025 10:54:07 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+        Tue, 18 Mar 2025 09:24:49 -0700 (PDT)
+From: "Koen Kooi" <koen.kooi@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] nodejs: upgrade 22.13.0 -> 22.14.0
-Date: Tue, 18 Mar 2025 13:53:42 -0400
-Message-ID: <20250318175342.3629-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Koen Kooi <koen.kooi@oss.qualcomm.com>
+Subject: [meta-multimedia][PATCH] libcamera: add support for DNG files
+Date: Tue, 18 Mar 2025 17:24:43 +0100
+Message-Id: <20250318162443.2274637-1-koen.kooi@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+X-Authority-Analysis: v=2.4 cv=H8Pbw/Yi c=1 sm=1 tr=0 ts=67d99e54 cx=c_pps a=UgVkIMxJMSkC9lv97toC5g==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17 a=Vs1iUdzkB0EA:10 a=EUspDBNiAAAA:8 a=ZUClY4TkZ6IoiiERboEA:9 a=1HOtulTD9v-eNWfpl4qZ:22
+X-Proofpoint-GUID: bYvta9rKLtij_Q7gkmUoixyOZlFf9AV-
+X-Proofpoint-ORIG-GUID: bYvta9rKLtij_Q7gkmUoixyOZlFf9AV-
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-03-18_07,2025-03-17_03,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=795
+ lowpriorityscore=0 bulkscore=0 adultscore=0 spamscore=0 priorityscore=1501
+ mlxscore=0 suspectscore=0 malwarescore=0 clxscore=1011 impostorscore=0
+ phishscore=0 classifier=spam authscore=0 authtc=n/a authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.19.0-2502280000
+ definitions=main-2503180120
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Mar 2025 17:54:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116060
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Mar 2025 19:26:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116061
 
-    License-Update: Change the location of the inspector_protocol
-      https://github.com/nodejs/node/commit/a48430d4d34eb9f598522410dd7723f069c574d0
+The 'cam' app in libcamera will turn on DNG support if it finds libtiff,
+but it has no way to explicitly disable it. Add a 'dng' PACKAGECONFIG to
+reliably enable it, disabling it will take more effort when using
+gstreamer.
 
-    Changelog: https://github.com/nodejs/node/releases/tag/v22.14.0
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Koen Kooi <koen.kooi@oss.qualcomm.com>
 ---
- .../oe-npm-cache                                              | 0
- ...-cache-native_22.13.bb => nodejs-oe-cache-native_22.14.bb} | 0
- .../nodejs/{nodejs_22.13.1.bb => nodejs_22.14.0.bb}           | 4 ++--
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-22.13 => nodejs-oe-cache-22.14}/oe-npm-cache (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_22.13.bb => nodejs-oe-cache-native_22.14.bb} (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_22.13.1.bb => nodejs_22.14.0.bb} (98%)
+ meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.13/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.14/oe-npm-cache
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.13/oe-npm-cache
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.14/oe-npm-cache
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.13.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.14.bb
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.13.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.14.bb
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.13.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.14.0.bb
-similarity index 98%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_22.13.1.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_22.14.0.bb
-index 9c145695f7..dee4c9df4f 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_22.13.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.14.0.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
- HOMEPAGE = "http://nodejs.org"
- LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=0bd28a461eccad39f85a29e33e8f879f"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=da350b022352bee62fe22feb6ad681c8"
+diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb
+index 682e56739f..ef424c84e6 100644
+--- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb
++++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb
+@@ -25,6 +25,7 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native'
+ PACKAGES =+ "${PN}-gst ${PN}-pycamera"
  
- CVE_PRODUCT = "nodejs node.js"
- 
-@@ -37,7 +37,7 @@ SRC_URI:append:class-target = " \
- SRC_URI:append:toolchain-clang:powerpc64le = " \
-            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
-            "
--SRC_URI[sha256sum] = "cfce282119390f7e0c2220410924428e90dadcb2df1744c0c4a0e7baae387cc2"
-+SRC_URI[sha256sum] = "c609946bf793b55c7954c26582760808d54c16185d79cb2fb88065e52de21914"
- 
- S = "${WORKDIR}/node-v${PV}"
+ PACKAGECONFIG ??= ""
++PACKAGECONFIG[dng] = ",,tiff"
+ PACKAGECONFIG[gst] = "-Dgstreamer=enabled,-Dgstreamer=disabled,gstreamer1.0 gstreamer1.0-plugins-base"
+ PACKAGECONFIG[pycamera] = "-Dpycamera=enabled,-Dpycamera=disabled,python3 python3-pybind11"
  
 -- 
-2.43.0
+2.34.1
 
 
