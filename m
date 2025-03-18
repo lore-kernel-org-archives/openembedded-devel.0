@@ -1,122 +1,119 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C434C35FFA
-	for <webhook@archiver.kernel.org>; Tue, 18 Mar 2025 14:03:05 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.web11.12593.1742306576514069410
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DF55C28B2F
+	for <webhook@archiver.kernel.org>; Tue, 18 Mar 2025 17:54:15 +0000 (UTC)
+Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
+ by mx.groups.io with SMTP id smtpd.web10.1739.1742320448906808389
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Mar 2025 07:02:56 -0700
+ Tue, 18 Mar 2025 10:54:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=Ja6cvu/5;
- spf=pass (domain: konsulko.com, ip: 209.85.128.43, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-43ce71582e9so22667495e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Mar 2025 07:02:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=iQtSbSrS;
+ spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-6ff27ad48beso51510617b3.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Mar 2025 10:54:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1742306575; x=1742911375; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1742320448; x=1742925248; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=++w2iPKIpLG4zbpMrWrrHHtHv8P7dK6PGP0lCxjqMYE=;
-        b=Ja6cvu/57aqY684dsaGtMdwnmJ1KD8hiVL5UItr2J6fM35IxIm5GQeOTHrwj3SjuJT
-         tWP5BKlStXsxOjK/Xfw+ytIyj81LiIQhs6M+MB43XsJ9u49ZklARKzhdyWCqafUC+sZy
-         0f6TGOddeZ+lNTHF3MF5nhS/JKk7NJ71Fakt0=
+        bh=2ygrEP0k9KDCZaSUnJU5Z5AoKfPedk1jn01Gco6mDYM=;
+        b=iQtSbSrSZw32/19MdRtOnx4rRVmw+lWhbNa62oUxwRZDz6jrdX/ixNRY8tyUtT13ra
+         BDtqrtQ6GIK5cw8PG2DX3jWtBJ6eC7jV4oKVYj4yFzlYMreBy/ZVX9oqyty55cl9TmUI
+         1x+UD4qxhV11RCwSK2g1o6c01OLuZ/dGwtDZ1ItTNZ5yAL2855QSk85eG1JXCLDS5/d1
+         Ovi/1m/wj47b/oD/xzj0EPcgpGlAPozyay3+5PKk3hQz9aHHFdbvst45uXcGa9ozS6w3
+         x6DqffpqRQMQYll7/24wGvKiHObpdSI1H++zfbfyLKmNbwU6C8VV7Et7d2bmDzUIc8c3
+         R3jw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742306575; x=1742911375;
+        d=1e100.net; s=20230601; t=1742320448; x=1742925248;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=++w2iPKIpLG4zbpMrWrrHHtHv8P7dK6PGP0lCxjqMYE=;
-        b=LcZV0COnvWRvKSG8WelD988gD6dA11IqUGTuuG5KMnALED3FPE5OrBFdD34nKt2H6g
-         VN6cuZYJUrjMIKvPQLAy5cL9PhFVkVoY1M1o6LSxDQCCR+C3Yh0HlF7YeWrg8DqIOYv/
-         skVYvc8J9q28P2b80F1kKQDcricAJUMQr2epu/w2NJ7xpph5gAwtOkYW5vprFZiY0I6z
-         fbeJvEAkVzUdJhh4Wzn/MDEOoQs1sNgCgz8YITLqake4vrAMQB1EiL3ZyEfvJ0cpw4TS
-         QVKDNya5D2+2iHqE5ysQnmlEtL1ukTUZKlQI9ukD1Ikkcno/n1ncROEgzXyVCj34+hVP
-         AUww==
-X-Gm-Message-State: AOJu0YxlqtLLDXlE/OtpnsObqDG9f7CWa81MJ2OTv3OU0PEEf/L5jPIT
-	mGMc+iU31jH7UDOnCOmgt6k/Az6+8RdMqpi705rLNyCJodPnig5qZ6fsfeCg9dzDEy/cD4li5Jc
-	E
-X-Gm-Gg: ASbGnctVShYl0PHg4F74wGP20WrkIyakEt7fIqPvj1b1JC/vSurtUOF1TjSrD9/ByQZ
-	Hcev5g5f0gGRHlAWIqT2VX68RinWuX4TJ+F9tm7sn5HJpCMBe9b0iTdaefMtXVYZcw5Ox1Je16H
-	O8xvXPJhBnA7mAymwManHIEFs/dWJHtDRK0Yp6vNXHpZlbpGw2YUd4DgRTVJ/FVzrwEOmNcn6Jj
-	V89YlhOypmA3BYIIybleYpj+fF9EcpEVM096hvPBXZFKHbPal6cq0SClqApQB1wS8KNVRHul0bf
-	RlknME4jUIl4rcQ5UaU68on6SgtgiBUng95lnKyG3SiSDH5kx2/lv1QADy1N52+V4ngvSw==
-X-Google-Smtp-Source: AGHT+IHgoZz31u3jW2by/8/l6laPkiXIYlWyq/O2rjPkncmI9nzq4vbYJQFUppp2/Lr5SQ9Zn1ShxQ==
-X-Received: by 2002:a05:600c:5106:b0:43b:c857:e9c8 with SMTP id 5b1f17b1804b1-43d3ba2a07fmr26151845e9.31.1742306574314;
-        Tue, 18 Mar 2025 07:02:54 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-43d20e29a38sm131345035e9.37.2025.03.18.07.02.53
+        bh=2ygrEP0k9KDCZaSUnJU5Z5AoKfPedk1jn01Gco6mDYM=;
+        b=nFxwffkhUcWbYUxqVe5Q8CyP7bl/PC5MVScki54wm/pqq2Gp+RoYrjOkHO57Qi94DQ
+         rmWVILr1DKVAO5QK2KgklDKNmljKLVfGXHlj0yjrQKGSKaiFaXZKv1ub4r9Nr7Q1I7tA
+         av8ewmeX9Jj1VyzTHadENXgu9TvhqN6AF4AXkl0ROnRPbj3/yPWE4RJ4G/2mj131aPGN
+         14+RU0QafvE5SRnETbQeHoecvlFM+x1M5Tg7ZEt1HNfA5sC+Z+lNAX816rl/pFrQ56H+
+         6fgNZt3VQD59h0cigReijMY+Wgl3ImL57ZyTsMJnaHMdV2i6LZixxv35sw+YCTBMQL01
+         dMLQ==
+X-Gm-Message-State: AOJu0YwgLIVKFJ2ppOZAfq9Vr6fiW9Tnbs4qo7tVZefMVrEUOcHR3PSz
+	nhIRS8d9aS+OrHjkD2ICIEuABWPkFXpwwkZ+DrHK3rjkBWpwtzuHAISpyYkQ
+X-Gm-Gg: ASbGncsAC11jnL7nuLW1fc9E+L0+gvdosFOBfJgB1LAYEBcnp/MksqmKEEGW7XC7cIa
+	Poadt3MGZNMdxpbFVOxumdAOPUJrlfU0K7gHLeziDFp27eOi2q9Hb7dgSdo6/gXIjcNiP+aMjCX
+	P2LHmz1w/6/GR8dPe+fCIWcYX/N5isAeZVzCqZxyQSKdNWaT38fPkl02SXgiAzF20wYy8Pge92K
+	iI3YQiaSZ92jU+IKIwDHq+cvUNHVGn8smRaMsXGUW8MAifYC84DS31aQ6TI615U9kA3CXyitdCO
+	1CX3rpBIE44CkO6aoOHEgyY+p3f6cQMm6n84Jia+PLOfH0a+yg==
+X-Google-Smtp-Source: AGHT+IHDoYHTqP+qv7P0nIyO0+yk7ng5E8aqKTJ2isHESU/Fv+GTZCAPHorcxUxqmIvLGCxZamHrsg==
+X-Received: by 2002:a05:690c:4b0b:b0:6fd:63e9:a441 with SMTP id 00721157ae682-6ffdcdba724mr64246717b3.28.1742320447331;
+        Tue, 18 Mar 2025 10:54:07 -0700 (PDT)
+Received: from localhost.localdomain ([71.215.9.36])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ff3286006fsm27785457b3.33.2025.03.18.10.54.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 Mar 2025 07:02:53 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Tue, 18 Mar 2025 10:54:07 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/3] python3-anyio: Upgrade 4.8.0 -> 4.9.0
-Date: Tue, 18 Mar 2025 16:02:49 +0200
-Message-Id: <20250318140251.522768-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.5
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH] nodejs: upgrade 22.13.0 -> 22.14.0
+Date: Tue, 18 Mar 2025 13:53:42 -0400
+Message-ID: <20250318175342.3629-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Mar 2025 14:03:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116057
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Mar 2025 17:54:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116060
 
-Upgrade to release 4.9.0:
+    License-Update: Change the location of the inspector_protocol
+      https://github.com/nodejs/node/commit/a48430d4d34eb9f598522410dd7723f069c574d0
 
-- Added async support for temporary file handling
-- Added 4 new fixtures for the AnyIO pytest plugin:
-  - free_tcp_port_factory: session scoped fixture returning a
-    callable that generates unused TCP port numbers
-  - free_udp_port_factory: session scoped fixture returning a
-    callable that generates unused UDP port numbers
-  - free_tcp_port: function scoped fixture that invokes the
-    free_tcp_port_factory fixture to generate a free TCP port number
-  - free_udp_port: function scoped fixture that invokes the
-    free_udp_port_factory fixture to generate a free UDP port number
-- Added stdin argument to anyio.run_process() akin to what
-  anyio.open_process(), asyncio.create_subprocess(),
-  trio.run_process(), and subprocess.run()
-- Added the info property to anyio.Path on Python 3.14
-- Changed anyio.getaddrinfo() to ignore (invalid) IPv6 name
-  resolution results when IPv6 support is disabled in Python
-- Changed EndOfStream raised from MemoryObjectReceiveStream.receive()
-  to leave out the AttributeError from the exception chain which
-  was merely an implementation detail and caused some confusion
-- Fixed traceback formatting growing quadratically with level of
-  TaskGroup nesting on asyncio due to exception chaining when
-  raising ExceptionGroups in TaskGroup.__aexit__
-- Fixed anyio.Path.iterdir() making a blocking call in Python 3.13
-- Fixed connect_tcp() producing cyclic references in tracebacks when
-  raising exceptions
-- Fixed anyio.to_thread.run_sync() needlessly holding on to
-  references of the context, function, arguments and others until
-  the next work item on asyncio
+    Changelog: https://github.com/nodejs/node/releases/tag/v22.14.0
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- .../python/{python3-anyio_4.8.0.bb => python3-anyio_4.9.0.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-anyio_4.8.0.bb => python3-anyio_4.9.0.bb} (88%)
+ .../oe-npm-cache                                              | 0
+ ...-cache-native_22.13.bb => nodejs-oe-cache-native_22.14.bb} | 0
+ .../nodejs/{nodejs_22.13.1.bb => nodejs_22.14.0.bb}           | 4 ++--
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-22.13 => nodejs-oe-cache-22.14}/oe-npm-cache (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_22.13.bb => nodejs-oe-cache-native_22.14.bb} (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_22.13.1.bb => nodejs_22.14.0.bb} (98%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-anyio_4.8.0.bb b/meta-python/recipes-devtools/python/python3-anyio_4.9.0.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-anyio_4.8.0.bb
-rename to meta-python/recipes-devtools/python/python3-anyio_4.9.0.bb
-index c103eba46d..9cbe26a6d5 100644
---- a/meta-python/recipes-devtools/python/python3-anyio_4.8.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-anyio_4.9.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c0a769411d2af7894099e8ff75058c9f"
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.13/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.14/oe-npm-cache
+similarity index 100%
+rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.13/oe-npm-cache
+rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.14/oe-npm-cache
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.13.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.14.bb
+similarity index 100%
+rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.13.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.14.bb
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.13.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.14.0.bb
+similarity index 98%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_22.13.1.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_22.14.0.bb
+index 9c145695f7..dee4c9df4f 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_22.13.1.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.14.0.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
+ HOMEPAGE = "http://nodejs.org"
+ LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=0bd28a461eccad39f85a29e33e8f879f"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=da350b022352bee62fe22feb6ad681c8"
  
- inherit pypi python_setuptools_build_meta
+ CVE_PRODUCT = "nodejs node.js"
  
--SRC_URI[sha256sum] = "1d9fe889df5212298c0c0723fa20479d1b94883a2df44bd3897aa91083316f7a"
-+SRC_URI[sha256sum] = "673c0c244e15788651a4ff38710fea9675823028a6f08a5eda409e0c9840a028"
+@@ -37,7 +37,7 @@ SRC_URI:append:class-target = " \
+ SRC_URI:append:toolchain-clang:powerpc64le = " \
+            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
+            "
+-SRC_URI[sha256sum] = "cfce282119390f7e0c2220410924428e90dadcb2df1744c0c4a0e7baae387cc2"
++SRC_URI[sha256sum] = "c609946bf793b55c7954c26582760808d54c16185d79cb2fb88065e52de21914"
  
- DEPENDS += " \
- 	python3-setuptools-scm-native \
+ S = "${WORKDIR}/node-v${PV}"
+ 
 -- 
-2.39.5
+2.43.0
 
 
