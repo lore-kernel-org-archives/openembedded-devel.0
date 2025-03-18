@@ -2,272 +2,151 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C69DC28B28
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 674A2C35FFA
 	for <webhook@archiver.kernel.org>; Tue, 18 Mar 2025 08:34:13 +0000 (UTC)
 Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web11.6804.1742286845379819542
+ by mx.groups.io with SMTP id smtpd.web11.6806.1742286845470136847
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 18 Mar 2025 01:34:05 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
 Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
-	by mailout05.t-online.de (Postfix) with SMTP id BE9A215AF;
+	by mailout05.t-online.de (Postfix) with SMTP id C09A615B0;
 	Tue, 18 Mar 2025 09:33:51 +0100 (CET)
 Received: from intel-corei7-64.fritz.box ([79.219.234.59]) by fwd86.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tuSOT-2EPvLu0; Tue, 18 Mar 2025 09:33:49 +0100
+	esmtp id 1tuSOT-2EPvLv0; Tue, 18 Mar 2025 09:33:49 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH 10/11] tinysparql: update 3.8.2 -> 3.9.1
-Date: Tue, 18 Mar 2025 09:34:29 +0100
-Message-ID: <20250318083430.544906-10-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH 11/11] nautilus: update 47.2 ->> 48.0
+Date: Tue, 18 Mar 2025 09:34:30 +0100
+Message-ID: <20250318083430.544906-11-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250318083430.544906-1-f_l_k@t-online.de>
 References: <20250318083430.544906-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1742286829-50FF7450-DD858CD9/0/0 CLEAN NORMAL
-X-TOI-MSGID: 6a479bf2-2224-4a0b-a864-f84ebc7106f5
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1742286829-72FFB450-601A303D/0/0 CLEAN NORMAL
+X-TOI-MSGID: 6e97e229-dee4-44c2-92d9-809b55a3547e
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 18 Mar 2025 08:34:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116050
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116049
 
-- rework patches after directory refactor
-- use gi-docgen instead of gtk-doc
-- add graphviz-native as a dependency for api-documentation as we now nee=
-d to provide dot
+Major Changes in 48
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+* Reversals:
+- Replace uselocale with Glib gettext variant (Khalid Abu Shawarib)
+* Bugfixes:
+- Generate thumbnails by order in view (Khalid Abu Shawarib)
+- Try more icons before using generic fallback (Khalid Abu Shawarib)
+- Focus filename entry in save mode by default (Ian Off)
+- Fix tree view and outdated file info crashes introduced in 48.rc (Khali=
+d Abu Shawarib)
+- Use colored icon for filesystem root properties (Khalid Abu Shawarib)
+- Set search popover row heights (Khalid Abu Shawarib)
+* Cleanups:
+- Various performance enhancements around sorting, hidden files and image=
+ decoding (Khalid Abu Shawarib)
+- Add build summary (Khalid Abu Shawarib)
+* Translation updates (GNOME Translation Project contributors)
 
-NEW in 3.9.1 - 2025-03-17
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-  * Brown paper bag release
-NEW in 3.9.0 - 2025-03-16
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-  * Many fuzzing fixes
-  * Multiple coverity fixes
+Major Changes in 48.rc
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+* Enhancements:
+- Run code formatting in parallel (Khalid Abu Shawarib)
+- Rework CI image job to freedesktop template (Khalid Abu Shawarib)
+- Rework and speedup adding of files to view (Khalid Abu Shawarib)
+- Add basic unit tests for files view (Khalid Abu Shawarib)
+- Load thumbnail info separate from other file infos (Khalid Abu Shawarib=
+)
 
-NEW in 3.9.rc - 2025-03-02
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
-  * Multiple fixes to issues found by OSS fuzz
-  * Restructure project directories
-  * Error handling fixes in SPARQL updates via D-Bus
-NEW in 3.9.alpha - 2025-01-11
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
-  * Hide again unintentionally leaked tracker_http_* symbols
-  * A number of fixes to static linking
+* Reversals:
+- Revert port of properties dialog to AdwDialog due to outstanding issues
+
+* Bugfixes:
+- Fix app chooser widget sizing (Automeris naranja)
+- Fix free space calculation for archive extraction (Peter Eisenmann)
+- Fix shell sesrch result order (Khalid Abu Shawarib)
+- Fix floating bar style when unfocused (Peter Eisenmann)
+
+* Cleanups:
+- Rework view switching code of window-slot (Ant=C3=B3nio Fernandes)
+- Use AdwSpinner in floating bar (Automeris naranja)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 48.beta
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+* Enhancements:
+- Improve directory loading performance (Khalid Abu Shawarib, Peter Eisen=
+mann)
+- Use AdwDialog for list view column chooser and properties dialog (Autom=
+eris naranja)
+- Change tab behavior for the sidebar (Luk=C3=A1=C5=A1 Tyrychtr)
+- Create about dialog from appdata (Felipe Borges, Matthijs Velsink, Pete=
+r Eisenmann)
+- Port various dialogs to AdwAlertDialog (Automeris naranja)
+- Keep mount monitor around for caching in gvfs to work (Khalid Abu Shawa=
+rib)
+- Adjust to localsearch changes (Bobby Rong, Carlos Garnacho, Khalid Abu =
+Shawarib, Sam Thursfield)
+- Hide Trash banner when empty (Isaac Yeo)
+- Ellipsize sidebar labels in the middle (Peter Eisenmann)
+- Add a CONTRIBUTING file (Corey Berla)
+- Allow removing bookmarks from pathbar (Isaac Yeo)
+- Various UI tweaks and label changes (Automeris naranja, Brage Fuglseth,=
+ Jamie Gravendeel, Khalid Abu Shawarib)
+- Various speedups (Corey Berla, Khalid Abu Shawarib)
+
+* Bugfixes:
+- Fix unintended grid relayouting on thumbnail loading (Calvin Walton)
+- Fix double a11y presentation of the filename in grid view (Luk=C3=A1=C5=
+=A1 Tyrychtr)
+- Keep CI running (Khalid Abu Shawarib, Peter Eisenmann)
+- Fix query editor translation (Aleksandr Melman)
+- Hide empty extensions list in properties (Khalid Abu Shawarib)
+- Fix NULL dereference with extensions (Philipp Unger)
+
+* Cleanups:
+- Improve grid selection implementation (Adrien Plazas)
+- Avoid setting up unnecessary directory monitors (Corey Berla)
+- Replace uselocale with Glib gettext variant (Khalid Abu Shawarib)
+- Stop setting invisible menu icons (Khalid Abu Shawarib)
+
+* Translation updates (GNOME Translation Project contributors)
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../tinysparql/0001-fix-reproducibility.patch | 46 +++++++++----------
- ...parql-meson.build-dont-create-compat.patch |  8 ++--
- ...inysparql_3.8.2.bb =3D> tinysparql_3.9.1.bb} | 15 ++++--
- 3 files changed, 37 insertions(+), 32 deletions(-)
- rename meta-gnome/recipes-gnome/tracker/{tinysparql_3.8.2.bb =3D> tinysp=
-arql_3.9.1.bb} (70%)
+ .../nautilus/{nautilus_47.2.bb =3D> nautilus_48.0.bb}             | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/nautilus/{nautilus_47.2.bb =3D> nautilus=
+_48.0.bb} (93%)
 
-diff --git a/meta-gnome/recipes-gnome/tracker/tinysparql/0001-fix-reprodu=
-cibility.patch b/meta-gnome/recipes-gnome/tracker/tinysparql/0001-fix-rep=
-roducibility.patch
-index 28e66af7d6..20211cecf4 100644
---- a/meta-gnome/recipes-gnome/tracker/tinysparql/0001-fix-reproducibilit=
-y.patch
-+++ b/meta-gnome/recipes-gnome/tracker/tinysparql/0001-fix-reproducibilit=
-y.patch
-@@ -1,4 +1,4 @@
--From dd163864c5ee28e153e982e47502039dad2f3787 Mon Sep 17 00:00:00 2001
-+From 186d91759dd0e0815f5a9d3a709e2ececa24ff3d Mon Sep 17 00:00:00 2001
- From: Markus Volk <f_l_k@t-online.de>
- Date: Mon, 18 Sep 2023 02:47:55 +0200
- Subject: [PATCH] tracker: fix reproducibility issue
-@@ -12,17 +12,17 @@ Upstream-Status: Inappropriate [oe-specific]
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_47.2.bb b/meta-gn=
+ome/recipes-gnome/nautilus/nautilus_48.0.bb
+similarity index 93%
+rename from meta-gnome/recipes-gnome/nautilus/nautilus_47.2.bb
+rename to meta-gnome/recipes-gnome/nautilus/nautilus_48.0.bb
+index 9f44dcb114..4b9f9fcf26 100644
+--- a/meta-gnome/recipes-gnome/nautilus/nautilus_47.2.bb
++++ b/meta-gnome/recipes-gnome/nautilus/nautilus_48.0.bb
+@@ -24,7 +24,7 @@ DEPENDS =3D " \
 =20
- Signed-off-by: Markus Volk <f_l_k@t-online.de>
- ---
-- meson.build                        | 6 +++---
-- src/libtracker-common/meson.build  | 4 ++--
-- src/libtracker-http/tracker-http.c | 2 +-
-- src/libtracker-sparql/meson.build  | 4 ++--
-+ meson.build                   | 6 +++---
-+ src/common/meson.build        | 4 ++--
-+ src/http/tracker-http.c       | 2 +-
-+ src/libtinysparql/meson.build | 4 ++--
-  4 files changed, 8 insertions(+), 8 deletions(-)
+ inherit gnomebase gsettings gobject-introspection gi-docgen gettext feat=
+ures_check mime-xdg gtk-icon-cache
 =20
- diff --git a/meson.build b/meson.build
--index 3a624ad..8c02aad 100644
-+index 308ada3..0120be7 100644
- --- a/meson.build
- +++ b/meson.build
--@@ -333,7 +333,7 @@ have_rtld_noload =3D cc.has_header_symbol('dlfcn.h',=
- 'RTLD_NOLOAD')
-+@@ -341,7 +341,7 @@ have_rtld_noload =3D cc.has_header_symbol('dlfcn.h',=
- 'RTLD_NOLOAD')
-  conf.set('HAVE_RTLD_NOLOAD', have_rtld_noload)
- =20
-  # Config that goes in some other generated files (.desktop, .service, e=
-tc)
-@@ -31,8 +31,8 @@ index 3a624ad..8c02aad 100644
-  conf.set('libexecdir', join_paths(get_option('prefix'), get_option('lib=
-execdir')))
- =20
-  configure_file(input: 'config.h.meson.in',
--@@ -372,8 +372,8 @@ subdir('docs')
-- subdir('utils')
-+@@ -382,8 +382,8 @@ subdir('utils')
-+ subdir('fuzzing')
- =20
-  test_c_args =3D tracker_c_args + [
- -    '-DTOP_BUILDDIR=3D"@0@"'.format(build_root),
-@@ -41,12 +41,12 @@ index 3a624ad..8c02aad 100644
- +    '-DTOP_SRCDIR=3D"@0@/"'.format('/usr/src/debug/tracker'),
-  ]
- =20
-- tracker_uninstalled_cli_dir =3D join_paths(meson.current_build_dir(), '=
-src', 'tracker')
--diff --git a/src/libtracker-common/meson.build b/src/libtracker-common/m=
-eson.build
--index 72c2ae0..12218c8 100644
----- a/src/libtracker-common/meson.build
--+++ b/src/libtracker-common/meson.build
--@@ -51,10 +51,10 @@ libtracker_common =3D static_library('tracker-common=
-',
-+ tracker_uninstalled_testutils_dir =3D join_paths(meson.current_source_d=
-ir(), 'utils')
-+diff --git a/src/common/meson.build b/src/common/meson.build
-+index b961ec3..edd76ce 100644
-+--- a/src/common/meson.build
-++++ b/src/common/meson.build
-+@@ -70,10 +70,10 @@ libtracker_common =3D static_library('tracker-common=
-',
-    dependencies: [tracker_common_dependencies, gmodule],
-    c_args: [
-      '-DPRIVATE_LIBDIR=3D"@0@"'.format(tracker_internal_libs_dir),
-@@ -59,10 +59,10 @@ index 72c2ae0..12218c8 100644
-    ] + tracker_c_args,
-    include_directories: [configinc, srcinc],
-    gnu_symbol_visibility: 'hidden',
--diff --git a/src/libtracker-http/tracker-http.c b/src/libtracker-http/tr=
-acker-http.c
-+diff --git a/src/http/tracker-http.c b/src/http/tracker-http.c
- index dd82e99..cb3f1f7 100644
----- a/src/libtracker-http/tracker-http.c
--+++ b/src/libtracker-http/tracker-http.c
-+--- a/src/http/tracker-http.c
-++++ b/src/http/tracker-http.c
- @@ -53,7 +53,7 @@ ensure_types (void)
- =20
-  		current_dir =3D g_get_current_dir ();
-@@ -72,13 +72,13 @@ index dd82e99..cb3f1f7 100644
-  			/* Detect in-build runtime of this code, this may happen
-  			 * building introspection information or running tests.
-  			 * We want the in-tree modules to be loaded then.
--diff --git a/src/libtracker-sparql/meson.build b/src/libtracker-sparql/m=
-eson.build
--index bafc2ac..859da3e 100644
----- a/src/libtracker-sparql/meson.build
--+++ b/src/libtracker-sparql/meson.build
-+diff --git a/src/libtinysparql/meson.build b/src/libtinysparql/meson.bui=
-ld
-+index e229b51..031f7e1 100644
-+--- a/src/libtinysparql/meson.build
-++++ b/src/libtinysparql/meson.build
- @@ -103,10 +103,10 @@ libtracker_sparql_private =3D static_library('trac=
-ker-sparql-private',
-      c_args: [
-- 	'-include', 'libtracker-sparql/tracker-private.h',
-+ 	'-include', 'tracker-private.h',
-          '-DPRIVATE_LIBDIR=3D"@0@"'.format(tracker_internal_libs_dir),
- -        '-DBUILD_LIBDIR=3D"@0@"'.format(meson.current_build_dir()),
- +        '-DBUILD_LIBDIR=3D"@0@"'.format('/usr/src/debug/tracker'),
-diff --git a/meta-gnome/recipes-gnome/tracker/tinysparql/0001-src-libtrac=
-ker-sparql-meson.build-dont-create-compat.patch b/meta-gnome/recipes-gnom=
-e/tracker/tinysparql/0001-src-libtracker-sparql-meson.build-dont-create-c=
-ompat.patch
-index d6cc4f45d2..e8c1904565 100644
---- a/meta-gnome/recipes-gnome/tracker/tinysparql/0001-src-libtracker-spa=
-rql-meson.build-dont-create-compat.patch
-+++ b/meta-gnome/recipes-gnome/tracker/tinysparql/0001-src-libtracker-spa=
-rql-meson.build-dont-create-compat.patch
-@@ -12,13 +12,13 @@ Upstream-Status: Inappropriate [oe-specific]
+-SRC_URI[archive.sha256sum] =3D "7f3203474f2e6374a11c6754ef33f3360eaf7f5b=
+5e85f5e477e8a0ae0fa764d9"
++SRC_URI[archive.sha256sum] =3D "f9e6a4cbe1d5bb7ad59ac44f0d439edd4b0507bf=
+07d3d90a2e7e7e6d3f416d57"
 =20
- Signed-off-by: Markus Volk <f_l_k@t-online.de>
- ---
-- src/libtracker-sparql/meson.build | 2 +-
-+ src/libtinysparql/meson.build | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
+ REQUIRED_DISTRO_FEATURES =3D "x11 opengl gobject-introspection-data"
 =20
--diff --git a/src/libtracker-sparql/meson.build b/src/libtracker-sparql/m=
-eson.build
-+diff --git a/src/libtinysparql/meson.build b/src/libtinysparql/meson.bui=
-ld
- index 5eccb92fc..6ed7c2b1f 100644
----- a/src/libtracker-sparql/meson.build
--+++ b/src/libtracker-sparql/meson.build
-+--- a/src/libtinysparql/meson.build
-++++ b/src/libtinysparql/meson.build
- @@ -247,6 +247,6 @@ endif
- =20
-  tracker_sparql_uninstalled_dir =3D meson.current_build_dir()
-diff --git a/meta-gnome/recipes-gnome/tracker/tinysparql_3.8.2.bb b/meta-=
-gnome/recipes-gnome/tracker/tinysparql_3.9.1.bb
-similarity index 70%
-rename from meta-gnome/recipes-gnome/tracker/tinysparql_3.8.2.bb
-rename to meta-gnome/recipes-gnome/tracker/tinysparql_3.9.1.bb
-index 16c7bfd0d1..b254253a5d 100644
---- a/meta-gnome/recipes-gnome/tracker/tinysparql_3.8.2.bb
-+++ b/meta-gnome/recipes-gnome/tracker/tinysparql_3.9.1.bb
-@@ -16,11 +16,11 @@ DEPENDS =3D " \
-     libstemmer \
- "
-=20
--inherit gettext gnomebase gobject-introspection vala gtk-doc bash-comple=
-tion
-+inherit gettext gnomebase gobject-introspection vala gi-docgen bash-comp=
-letion
-=20
- SRC_URI +=3D "file://0001-fix-reproducibility.patch"
- SRC_URI +=3D "file://0001-src-libtracker-sparql-meson.build-dont-create-=
-compat.patch"
--SRC_URI[archive.sha256sum] =3D "bb8643386c8edc591a03205d4a0eda661dcdd209=
-4473bffb9bbdb94e93589cb2"
-+SRC_URI[archive.sha256sum] =3D "98e8933b946d8c54a77eadabd7f1d14cddd88fa4=
-3eef0d0ace3c0fcce646722b"
-=20
- # text search is not an option anymore and requires sqlite3 build with
- # PACKAGECONFIG[fts5] set (default)
-@@ -43,13 +43,18 @@ EXTRA_OEMESON =3D " \
-=20
- GIR_MESON_ENABLE_FLAG =3D 'enabled'
- GIR_MESON_DISABLE_FLAG =3D 'disabled'
-+GIDOCGEN_MESON_OPTION =3D "docs"
-=20
--PACKAGECONFIG ??=3D "${@bb.utils.contains("DISTRO_FEATURES", "zeroconf",=
- "avahi", "", d)}"
-+PACKAGECONFIG ??=3D " \
-+	${@bb.utils.contains("DISTRO_FEATURES", "zeroconf", "avahi", "", d)} \
-+	${@bb.utils.contains("DISTRO_FEATURES", "api-documentation", "docs", ""=
-, d)} \
-+"
- PACKAGECONFIG[avahi] =3D "-Davahi=3Denabled,-Davahi=3Ddisabled,avahi,"
-+PACKAGECONFIG[docs] =3D ",,graphviz-native"
-=20
- do_install:prepend() {
--    sed -i -e 's|${B}|${TARGET_DBGSRC_DIR}|g' ${B}/src/libtracker-sparql=
-/tracker-sparql-enum-types.c
--    sed -i -e 's|${B}|${TARGET_DBGSRC_DIR}|g' ${B}/src/libtracker-sparql=
-/core/tracker-data-enum-types.c
-+    sed -i -e 's|${B}|${TARGET_DBGSRC_DIR}|g' ${B}/src/libtinysparql/tra=
-cker-sparql-enum-types.c
-+    sed -i -e 's|${B}|${TARGET_DBGSRC_DIR}|g' ${B}/src/libtinysparql/cor=
-e/tracker-data-enum-types.c
- }
-=20
- FILES:${PN} +=3D " \
 --=20
 2.48.1
 
