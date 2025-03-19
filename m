@@ -2,59 +2,59 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78794C36000
-	for <webhook@archiver.kernel.org>; Wed, 19 Mar 2025 16:27:22 +0000 (UTC)
-Received: from mail-oi1-f174.google.com (mail-oi1-f174.google.com [209.85.167.174])
- by mx.groups.io with SMTP id smtpd.web11.12310.1742401635321166065
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 84B73C35FFC
+	for <webhook@archiver.kernel.org>; Wed, 19 Mar 2025 16:38:02 +0000 (UTC)
+Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com [209.85.167.180])
+ by mx.groups.io with SMTP id smtpd.web10.12899.1742402279898339802
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Mar 2025 09:27:15 -0700
+ Wed, 19 Mar 2025 09:38:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ljT+jXv6;
- spf=pass (domain: gmail.com, ip: 209.85.167.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f174.google.com with SMTP id 5614622812f47-3fa6c54cc1aso4282692b6e.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 09:27:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fGCSZByp;
+ spf=pass (domain: gmail.com, ip: 209.85.167.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f180.google.com with SMTP id 5614622812f47-3feaedb4085so420397b6e.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 09:37:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1742401634; x=1743006434; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1742402279; x=1743007079; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=6negdEZY31LKXelVyQQIc6qbA4hVC3Yp0pFYHNnQhw0=;
-        b=ljT+jXv6oS08Dm7V0DQ9po3tGdGkMEWFmpz2Q0DWze5NnUwdIphocrg6FM728HVHRT
-         v3CKaKJNKKxNF4u5Ugv3QxevWQ+3mIxGG23uzjxtIynXB3kLDn9ft1OwrGoF9+l01pUV
-         SknFKsb82NwM/9G9j4bWiEcLvznwVIPpYHnOLkZvspJE3/FKvrDJKT703eH4om7wWcug
-         9OKdio7h4bVEDgQyVAlAOlRYsxPCPGO0tphsdTUa9zlElF1a1YENDA5xO69GlDPKNmgZ
-         U7z2BcH2t5dGO0X56ZkYEghq9xGymgcsGaMM9EJW10c3PQL2YVeuIgu1ZTe4BxyrcQFV
-         9NLw==
+        bh=BbPc6YMQjxGTjc5VB7XMoSgcHRVWRv7DZ7U8A0+T9Bg=;
+        b=fGCSZBypMm1dseDp72lfv/JjVBt/yr8aEJn8BdZ9WVQBZ9H/xgkmhkz6JhvIb1cmG4
+         H5yLYDBIjASZbuTa37zQCwe4EtDKO4kp56d0sPfSsAMdGUlXjBy4RWkfqlsoXGF9DFXg
+         Q27K4XDuy/9+NVi5dhI1BtTCVhARlflMpaLLdSCJFg4HLmbQbUN4g/Linqt6DTPf2sLi
+         ghcErFuPSK9qIAq7e0Yt1yiH5wS25W5xvKhl42DgA60+6GMzKZIsphYhjHFZfsq/PA3w
+         F9fF3O5z+GfhzJL2Va7SHagKZLeKEMGkrsM8YR2iuUYwa9BvN5fgoyj9zRnGWd6pvzui
+         wqOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742401634; x=1743006434;
+        d=1e100.net; s=20230601; t=1742402279; x=1743007079;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=6negdEZY31LKXelVyQQIc6qbA4hVC3Yp0pFYHNnQhw0=;
-        b=IOFXAcKGj9pk49yFHJk/G0mi8NbPd82kH/m/dKeQthCOFfAgtheo4rn+pC6S4Cm+dk
-         fQ5W1n1p+nvzLhuHQ2kc44v8txbarpg8gjiKyBBy/5nO3im3g2/18Fq/OQXN2LkIRjBm
-         Zgey4YZgdqL12dMgA3Pi9y/lEtZRPnpYrjKgEwy6dOzXjycoaANfExvrJV7mghbnMVId
-         byYARcj+DAOLMXRuZqYOnR+jKohWXyC+jIlgW3PLhiiSTs4SC6uPteyU5ejNZXZZDk4x
-         Eycfan8/SubdQd1pYYDAd2afoIR8jCBq/Y2TSMR8yz76MFDVkFCwJzBtERUMZCebYnxZ
-         7vMQ==
-X-Gm-Message-State: AOJu0YwTI7pcF/qXSmhPfFlxYPUTVQwitdfpJ+0SpSJB7nS9uNMKWOOe
-	cXiWQp/QkclQTHjaQmrgmZJxv/iqyM7vrsbpp6Isr7FYlmSLUrMpWz7K4F2WnycBWJYA1i7IFKv
-	xosxRw96S/vv00c53vH/7tZQV6sYip/wo
-X-Gm-Gg: ASbGncuC648dOxU/XI0pbcpcZ1z2N7Y18RiEAFOev6R2lTgwmVlOlQQsGiQAoUY/EPP
-	p9DDOxpDYtDHsPN/agJbbK0Mk1obpmm8Fq2kAcpCm3Q6YnDWDDL/XG6ybbgWILv7Ctrjs45Ky3D
-	CCanX2jeVZHLncQt3dAPLAHCQk
-X-Google-Smtp-Source: AGHT+IFbDh5HX4QeyLNAwWrVHSe7dyc5qV4K5WnspSEQFdbrKX+7XdLlBSW3NKtPlNi4ZhGnTL/t6lnVlXtn2V3Gq+U=
+        bh=BbPc6YMQjxGTjc5VB7XMoSgcHRVWRv7DZ7U8A0+T9Bg=;
+        b=mLQEvB3Bzt6P+PFcQS/+2X9nLlj3XqgpZ4sB+DdQr0wI2+3C/53hG7fB2JofMcHqrW
+         rxmIFw1357XytFwr3rUAQmPv1Cz7wC842a0IFxW6LqmvxLIGa11iczlCJ5DAL3GzXGD0
+         ZKxYeoQanWuaiicC5m30z4wY7Hx/MUsx19tcMBJbTCLjGFE+SxaOBF8nPAzbRxkI5nmO
+         WKp14whKcW0tSr3DxzFWUg9QYUdIHJDwV5VXTQ8dHkpyL+vxPKzgjU+4RRfFGaPlxhD3
+         lYmLtRvQTf+EXjUjodD4/C9+NqwywzO44JC7SXflAS9morgAldFiBbxjWRUGWztjyq5h
+         9ebA==
+X-Gm-Message-State: AOJu0YwTv9xprxK/Jwl99GaS2NRqfo6+x5czXRmPBp1zMKLW4FzeyNdE
+	10FPP+FFsL284X5o7QZUkgztv+iF+qG6nrqxE2mp/+jiJ/6wu2oaXadavWgVoxStGCE1UUZiIyC
+	BzcTRHEkphZh17MqVFVGeg8mCob8=
+X-Gm-Gg: ASbGncthPHwN19FpgoJQdCS2iR5EWuSyNEuRv/7KwVl4LgNwLzhPczHh+A7xOck8TNC
+	AaJhgcu+FrnVz6UUP+B86CJq75moWEpEpYYMhy0nPxMYikRnLtSL6m35F6J9Fzw54XDvkM7ggxW
+	Xj1KmAJl+pCHHr4wwiB7QoBQ7o2w==
+X-Google-Smtp-Source: AGHT+IGu1lp2UdwV30bonsDi8pL81k3XkriAwuboLbttp1FgcLW9kDCT74WXkUnrzrv0fbobRlqkV+/zeAZTCsg3iOI=
 X-Received: by 2002:a05:6808:2104:b0:3fb:49cd:6bf5 with SMTP id
- 5614622812f47-3fead60e5camr2660923b6e.32.1742401634588; Wed, 19 Mar 2025
- 09:27:14 -0700 (PDT)
+ 5614622812f47-3fead60e5camr2694122b6e.32.1742402279098; Wed, 19 Mar 2025
+ 09:37:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250319120836.982987-1-ross.burton@arm.com> <20250319120836.982987-6-ross.burton@arm.com>
-In-Reply-To: <20250319120836.982987-6-ross.burton@arm.com>
+References: <20250319120836.982987-1-ross.burton@arm.com>
+In-Reply-To: <20250319120836.982987-1-ross.burton@arm.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 19 Mar 2025 09:26:48 -0700
-X-Gm-Features: AQ5f1JqNR-8eVta1sBGefOQsZ1sICqN3flnWnXQVcLQFVkeVQGmeMF_fiW0DGww
-Message-ID: <CAMKF1spY08R8zh1A=+pkegEoyX1y5RFv9OUpEJiKuNOQXNV2Bw@mail.gmail.com>
-Subject: Re: [oe] [PATCH 6/9] valkey: don't inherit autotools
+Date: Wed, 19 Mar 2025 09:37:33 -0700
+X-Gm-Features: AQ5f1JqOVvOmCCsO80YTfyCg-TQFp5bfVWp79dGhjbA9IWQ93RJHEylkWP3ati0
+Message-ID: <CAMKF1sruo+mPQyxkVU_=xq1QZ2_pTBU+UU9Lg-E4VpGGYb5mTw@mail.gmail.com>
+Subject: Re: [oe] [PATCH 1/9] rdisk: don't inherit autotools
 To: ross.burton@arm.com
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
@@ -62,62 +62,53 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 16:27:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116081
+ <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 16:38:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116082
 
-On Wed, Mar 19, 2025 at 5:09=E2=80=AFAM Ross Burton via lists.openembedded.=
+typo in subject, I have taken care of it.
+
+On Wed, Mar 19, 2025 at 5:08=E2=80=AFAM Ross Burton via lists.openembedded.=
 org
 <ross.burton=3Darm.com@lists.openembedded.org> wrote:
 >
 > This upstream does not in fact use autotools, so remove the inherit and
-> clean up do_compile().
+> implement the required do_install directly.
 >
-
-I had a similar fix for this in master-next and I squashed both of the
-patches together
-thanks for the series.
-
 > Signed-off-by: Ross Burton <ross.burton@arm.com>
 > ---
->  meta-oe/recipes-extended/valkey/valkey_8.0.2.bb | 7 ++++---
->  1 file changed, 4 insertions(+), 3 deletions(-)
+>  meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
 >
-> diff --git a/meta-oe/recipes-extended/valkey/valkey_8.0.2.bb b/meta-oe/re=
-cipes-extended/valkey/valkey_8.0.2.bb
-> index af56e54590..04ed342556 100644
-> --- a/meta-oe/recipes-extended/valkey/valkey_8.0.2.bb
-> +++ b/meta-oe/recipes-extended/valkey/valkey_8.0.2.bb
-> @@ -23,7 +23,7 @@ S =3D "${WORKDIR}/git"
+> diff --git a/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb b/=
+meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb
+> index e6d99431be..abe23cb46e 100644
+> --- a/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb
+> +++ b/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb
+> @@ -36,9 +36,11 @@ UPSTREAM_CHECK_REGEX =3D "/rdist/(?P<pver>\d+(\.\d+)+)=
+"
 >
->  RPROVIDES:${PN} =3D "virtual-redis"
+>  DEPENDS =3D "bison-native"
 >
-> -inherit autotools-brokensep pkgconfig update-rc.d systemd useradd
-> +inherit pkgconfig update-rc.d systemd useradd
+> -inherit autotools-brokensep
+> -
+>  EXTRA_OEMAKE =3D "CPPFLAGS=3D'${CFLAGS}' BIN_GROUP=3Droot MAN_GROUP=3Dro=
+ot RDIST_MODE=3D755 RDISTD_MODE=3D755 MAN_MODE=3D644"
 >
->  FINAL_LIBS:x86:toolchain-clang =3D "-latomic"
->  FINAL_LIBS:riscv32:toolchain-clang =3D "-latomic"
-> @@ -42,8 +42,9 @@ PACKAGECONFIG[systemd] =3D "USE_SYSTEMD=3Dyes,USE_SYSTE=
-MD=3Dno,systemd"
->
->  EXTRA_OEMAKE +=3D "${PACKAGECONFIG_CONFARGS}"
->
-> -do_compile:prepend() {
-> -    (cd deps && oe_runmake hiredis lua linenoise)
-> +do_compile() {
-> +    oe_runmake -C deps hiredis lua linenoise
-> +    oe_runmake
->  }
->
->  do_install() {
+> +do_install() {
+> +    oe_runmake 'DESTDIR=3D${D}' install
+> +}
+> +
+>  # http://errors.yoctoproject.org/Errors/Details/186972/
+>  COMPATIBLE_HOST:libc-musl =3D 'null'
 > --
 > 2.43.0
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#116073): https://lists.openembedded.org/g/openembedde=
-d-devel/message/116073
-> Mute This Topic: https://lists.openembedded.org/mt/111787466/1997914
+> View/Reply Online (#116068): https://lists.openembedded.org/g/openembedde=
+d-devel/message/116068
+> Mute This Topic: https://lists.openembedded.org/mt/111787461/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
