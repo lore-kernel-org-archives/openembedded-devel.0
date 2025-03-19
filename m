@@ -1,117 +1,169 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <richard.purdie@linuxfoundation.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 84B73C35FFC
-	for <webhook@archiver.kernel.org>; Wed, 19 Mar 2025 16:38:02 +0000 (UTC)
-Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com [209.85.167.180])
- by mx.groups.io with SMTP id smtpd.web10.12899.1742402279898339802
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7037CC36000
+	for <webhook@archiver.kernel.org>; Wed, 19 Mar 2025 16:45:22 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.web11.12834.1742402715174614892
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Mar 2025 09:38:00 -0700
+ Wed, 19 Mar 2025 09:45:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=fGCSZByp;
- spf=pass (domain: gmail.com, ip: 209.85.167.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f180.google.com with SMTP id 5614622812f47-3feaedb4085so420397b6e.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 09:37:59 -0700 (PDT)
+ dkim=pass header.i=@linuxfoundation.org header.s=google header.b=hc8s0o0s;
+ spf=pass (domain: linuxfoundation.org, ip: 209.85.221.53, mailfrom: richard.purdie@linuxfoundation.org)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-3995ff6b066so2788561f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 09:45:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1742402279; x=1743007079; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=BbPc6YMQjxGTjc5VB7XMoSgcHRVWRv7DZ7U8A0+T9Bg=;
-        b=fGCSZBypMm1dseDp72lfv/JjVBt/yr8aEJn8BdZ9WVQBZ9H/xgkmhkz6JhvIb1cmG4
-         H5yLYDBIjASZbuTa37zQCwe4EtDKO4kp56d0sPfSsAMdGUlXjBy4RWkfqlsoXGF9DFXg
-         Q27K4XDuy/9+NVi5dhI1BtTCVhARlflMpaLLdSCJFg4HLmbQbUN4g/Linqt6DTPf2sLi
-         ghcErFuPSK9qIAq7e0Yt1yiH5wS25W5xvKhl42DgA60+6GMzKZIsphYhjHFZfsq/PA3w
-         F9fF3O5z+GfhzJL2Va7SHagKZLeKEMGkrsM8YR2iuUYwa9BvN5fgoyj9zRnGWd6pvzui
-         wqOQ==
+        d=linuxfoundation.org; s=google; t=1742402713; x=1743007513; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=N3PD/ln2q4J+QC7JFehVCEbuz31bk4ou86amwD9UxZA=;
+        b=hc8s0o0sjf6eDaDbuDvuAHfte8er/jrehzmqENlsI6k420Cmniyf/oPPrHD0yjd8Qq
+         BVSJ2V0i9pEElMeIUf0QEz8yi+phJ9EqKRVFt4byv0UtKM47QDaysNksdZnQlTufrZ0m
+         MiAhy+5YqvH2AGslNDeMTkkx3lFYGycvxjm1I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742402279; x=1743007079;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=BbPc6YMQjxGTjc5VB7XMoSgcHRVWRv7DZ7U8A0+T9Bg=;
-        b=mLQEvB3Bzt6P+PFcQS/+2X9nLlj3XqgpZ4sB+DdQr0wI2+3C/53hG7fB2JofMcHqrW
-         rxmIFw1357XytFwr3rUAQmPv1Cz7wC842a0IFxW6LqmvxLIGa11iczlCJ5DAL3GzXGD0
-         ZKxYeoQanWuaiicC5m30z4wY7Hx/MUsx19tcMBJbTCLjGFE+SxaOBF8nPAzbRxkI5nmO
-         WKp14whKcW0tSr3DxzFWUg9QYUdIHJDwV5VXTQ8dHkpyL+vxPKzgjU+4RRfFGaPlxhD3
-         lYmLtRvQTf+EXjUjodD4/C9+NqwywzO44JC7SXflAS9morgAldFiBbxjWRUGWztjyq5h
-         9ebA==
-X-Gm-Message-State: AOJu0YwTv9xprxK/Jwl99GaS2NRqfo6+x5czXRmPBp1zMKLW4FzeyNdE
-	10FPP+FFsL284X5o7QZUkgztv+iF+qG6nrqxE2mp/+jiJ/6wu2oaXadavWgVoxStGCE1UUZiIyC
-	BzcTRHEkphZh17MqVFVGeg8mCob8=
-X-Gm-Gg: ASbGncthPHwN19FpgoJQdCS2iR5EWuSyNEuRv/7KwVl4LgNwLzhPczHh+A7xOck8TNC
-	AaJhgcu+FrnVz6UUP+B86CJq75moWEpEpYYMhy0nPxMYikRnLtSL6m35F6J9Fzw54XDvkM7ggxW
-	Xj1KmAJl+pCHHr4wwiB7QoBQ7o2w==
-X-Google-Smtp-Source: AGHT+IGu1lp2UdwV30bonsDi8pL81k3XkriAwuboLbttp1FgcLW9kDCT74WXkUnrzrv0fbobRlqkV+/zeAZTCsg3iOI=
-X-Received: by 2002:a05:6808:2104:b0:3fb:49cd:6bf5 with SMTP id
- 5614622812f47-3fead60e5camr2694122b6e.32.1742402279098; Wed, 19 Mar 2025
- 09:37:59 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1742402713; x=1743007513;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=N3PD/ln2q4J+QC7JFehVCEbuz31bk4ou86amwD9UxZA=;
+        b=PE+v/laqin8uHSgzrdY4U62aWQ8NBNPYOxU45xdIyLtIr965eRu+UK5VgA4jo7hVM1
+         JLrDUbm/5VtGcnkuUGLiKTRFdiHNK23jWlnYBBA6o3utB/f8mTByVLseRExGAL4f52C0
+         WRr8QPshNQO6dcdunRvmI0H6Asyd00EyEJXIeWGlf4UMFQRkGvBNaptqtz2m+6q2kOzH
+         rq5R41NcbNX6XRwuvbt2pNZwKM2/81YuCoLeW0PmG3seGuxHTTXSBxpD5Vm7EFVGoAyU
+         pRopS4lZ/NNOHfaGDKVTU9FwA6bfQ1qpicCu0tdSBx5oF817rQ48c9dQ2K872tKJKkEy
+         zOzA==
+X-Gm-Message-State: AOJu0YzYLYFfbo9DL9KWOa3AXSHlJBwmJJDOnLCVNhbdksfzryhndgKc
+	nG37oiS07oN/3N0Yy821qDIv6ckuY3UKu4zWYBmNWXPf2Q2r5x3CXA2xdWnm7KHhrdRgnwFzjlz
+	v
+X-Gm-Gg: ASbGncuaDlru1E4YcI4H9t6h/NH9Pnm4gsQt+atmXbjSwtRPN4Nm4zoQaiDLVHVMkof
+	p1iTVeDs59ZURi6YQC3F2fgQK5KaXyLQAEHGAqeeEZ4DEoYHV7yOKX/jK35SUuO3qZVIQxGY1Zj
+	AAJD8/Jsq1/VX4KHeQ23loUjNDOqf56EWoAv/apfc5jJ/Gz23hAhSusS4bXZ8ADMWCBa/iVSFHO
+	D/XFbnMrGqwPvn9ELTadCMXRNwGW76KURmTgAucOpitWmedUEEQNPZ1Sju6SuQUu71+Aow8VrrB
+	R9m/FIHnqDUUytiNvSkDIyviXPHd54g2Sx9KSUl1JoAYepeIz2CmfXHXNIcz+izcBDHsyuCO
+X-Google-Smtp-Source: AGHT+IEFeRYjqaoF7xDkQmZk7VWfXNLmNVdJVxWxSct6dkZ8c5DE6yQf0eYrvheVmplIFMy5QHV20w==
+X-Received: by 2002:a05:6000:4029:b0:391:1806:e23f with SMTP id ffacd0b85a97d-399739beb1bmr3010773f8f.17.1742402712963;
+        Wed, 19 Mar 2025 09:45:12 -0700 (PDT)
+Received: from max.int.rpsys.net ([2001:8b0:aba:5f3c:dad:b471:9c34:4577])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-43d43f55721sm23617585e9.20.2025.03.19.09.45.12
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 19 Mar 2025 09:45:12 -0700 (PDT)
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-openembedded] [PATCH] gitpkgver: Update to match bitbake fetcher changes
+Date: Wed, 19 Mar 2025 16:45:11 +0000
+Message-ID: <20250319164511.832211-1-richard.purdie@linuxfoundation.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-References: <20250319120836.982987-1-ross.burton@arm.com>
-In-Reply-To: <20250319120836.982987-1-ross.burton@arm.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 19 Mar 2025 09:37:33 -0700
-X-Gm-Features: AQ5f1JqOVvOmCCsO80YTfyCg-TQFp5bfVWp79dGhjbA9IWQ93RJHEylkWP3ati0
-Message-ID: <CAMKF1sruo+mPQyxkVU_=xq1QZ2_pTBU+UU9Lg-E4VpGGYb5mTw@mail.gmail.com>
-Subject: Re: [oe] [PATCH 1/9] rdisk: don't inherit autotools
-To: ross.burton@arm.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 16:38:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116082
+ <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 16:45:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116083
 
-typo in subject, I have taken care of it.
+The bitbake fetcher dropped support for multiple revisions on a single
+url. Update the gitpkgver code to match.
 
-On Wed, Mar 19, 2025 at 5:08=E2=80=AFAM Ross Burton via lists.openembedded.=
-org
-<ross.burton=3Darm.com@lists.openembedded.org> wrote:
->
-> This upstream does not in fact use autotools, so remove the inherit and
-> implement the required do_install directly.
->
-> Signed-off-by: Ross Burton <ross.burton@arm.com>
-> ---
->  meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb b/=
-meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb
-> index e6d99431be..abe23cb46e 100644
-> --- a/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb
-> +++ b/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb
-> @@ -36,9 +36,11 @@ UPSTREAM_CHECK_REGEX =3D "/rdist/(?P<pver>\d+(\.\d+)+)=
-"
->
->  DEPENDS =3D "bison-native"
->
-> -inherit autotools-brokensep
-> -
->  EXTRA_OEMAKE =3D "CPPFLAGS=3D'${CFLAGS}' BIN_GROUP=3Droot MAN_GROUP=3Dro=
-ot RDIST_MODE=3D755 RDISTD_MODE=3D755 MAN_MODE=3D644"
->
-> +do_install() {
-> +    oe_runmake 'DESTDIR=3D${D}' install
-> +}
-> +
->  # http://errors.yoctoproject.org/Errors/Details/186972/
->  COMPATIBLE_HOST:libc-musl =3D 'null'
-> --
-> 2.43.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#116068): https://lists.openembedded.org/g/openembedde=
-d-devel/message/116068
-> Mute This Topic: https://lists.openembedded.org/mt/111787461/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+---
+ meta-oe/classes/gitpkgv.bbclass | 73 +++++++++++++++------------------
+ 1 file changed, 34 insertions(+), 39 deletions(-)
+
+diff --git a/meta-oe/classes/gitpkgv.bbclass b/meta-oe/classes/gitpkgv.bbclass
+index 5ab507969c..8c99518d5d 100644
+--- a/meta-oe/classes/gitpkgv.bbclass
++++ b/meta-oe/classes/gitpkgv.bbclass
+@@ -67,57 +67,52 @@ def get_git_pkgv(d, use_tags):
+     #
+     format = d.getVar('SRCREV_FORMAT')
+     if not format:
+-        names = []
+-        for url in ud.values():
+-            if url.type == 'git' or url.type == 'gitsm':
+-                names.extend(url.revisions.keys())
+-        if len(names) > 0:
+-            format = '_'.join(names)
++        if ud.name:
++            format = ud.name
+         else:
+             format = 'default'
+ 
+     found = False
+     for url in ud.values():
+         if url.type == 'git' or url.type == 'gitsm':
+-            for name, rev in url.revisions.items():
+-                if not os.path.exists(url.localpath):
+-                    return None
++            if not os.path.exists(url.localpath):
++                return None
+ 
+-                found = True
++            found = True
+ 
+-                vars = { 'repodir' : quote(url.localpath),
+-                         'rev' : quote(rev) }
++            vars = { 'repodir' : quote(url.localpath),
++                     'rev' : quote(ud.revision) }
+ 
+-                rev = bb.fetch2.get_srcrev(d).split('+')[1]
+-                rev_file = os.path.join(url.localpath, "oe-gitpkgv_" + rev)
++            rev = bb.fetch2.get_srcrev(d).split('+')[1]
++            rev_file = os.path.join(url.localpath, "oe-gitpkgv_" + ud.revision)
+ 
+-                if not os.path.exists(rev_file) or os.path.getsize(rev_file)==0:
+-                    commits = bb.fetch2.runfetchcmd(
+-                        "git --git-dir=%(repodir)s rev-list %(rev)s -- 2>/dev/null | wc -l"
+-                        % vars, d, quiet=True).strip().lstrip('0')
++            if not os.path.exists(rev_file) or os.path.getsize(rev_file)==0:
++                commits = bb.fetch2.runfetchcmd(
++                    "git --git-dir=%(repodir)s rev-list %(rev)s -- 2>/dev/null | wc -l"
++                    % vars, d, quiet=True).strip().lstrip('0')
+ 
+-                    if commits != "":
+-                        oe.path.remove(rev_file, recurse=False)
+-                        with open(rev_file, "w") as f:
+-                            f.write("%d\n" % int(commits))
+-                    else:
+-                        commits = "0"
++                if commits != "":
++                    oe.path.remove(rev_file, recurse=False)
++                    with open(rev_file, "w") as f:
++                        f.write("%d\n" % int(commits))
+                 else:
+-                    with open(rev_file, "r") as f:
+-                        commits = f.readline(128).strip()
+-
+-                if use_tags:
+-                    try:
+-                        output = bb.fetch2.runfetchcmd(
+-                            "git --git-dir=%(repodir)s describe %(rev)s --tags --exact-match 2>/dev/null"
+-                            % vars, d, quiet=True).strip()
+-                        ver = gitpkgv_drop_tag_prefix(d, output)
+-                    except Exception:
+-                        ver = "0.0-%s-g%s" % (commits, vars['rev'][:7])
+-                else:
+-                    ver = "%s+%s" % (commits, vars['rev'][:7])
+-
+-                format = format.replace(name, ver)
++                    commits = "0"
++            else:
++                with open(rev_file, "r") as f:
++                    commits = f.readline(128).strip()
++
++            if use_tags:
++                try:
++                    output = bb.fetch2.runfetchcmd(
++                        "git --git-dir=%(repodir)s describe %(rev)s --tags --exact-match 2>/dev/null"
++                        % vars, d, quiet=True).strip()
++                    ver = gitpkgv_drop_tag_prefix(d, output)
++                except Exception:
++                    ver = "0.0-%s-g%s" % (commits, vars['rev'][:7])
++            else:
++                ver = "%s+%s" % (commits, vars['rev'][:7])
++
++            format = format.replace(ud.name, ver)
+ 
+     if found:
+         return format
 
