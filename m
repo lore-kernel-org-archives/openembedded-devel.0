@@ -1,774 +1,633 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <Jinfeng.Wang.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 69A5BC282EC
-	for <webhook@archiver.kernel.org>; Wed, 19 Mar 2025 02:01:48 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web10.3384.1742349700916419558
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B866BC35FF3
+	for <webhook@archiver.kernel.org>; Wed, 19 Mar 2025 03:14:38 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.4303.1742354075739106407
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Mar 2025 19:01:41 -0700
+ Tue, 18 Mar 2025 20:14:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=S9L97VsH;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-22398e09e39so135736385ad.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Mar 2025 19:01:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1742349700; x=1742954500; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=tE3TiFORErY5QtllM/sLtt8BLKOIW/ovX9UJJEreN18=;
-        b=S9L97VsH3hMZl1NJIbxF0P0ygYU+S3YH2OwYLKcXo03+OskDOGClAqy6ykI9fTAQ+O
-         e0JBxX9k1K/NZZtc7ztk15c8n0InpKbkszbdutKVeG9Uu3ZurXbCTOsp9VAgvp8p8oeB
-         Z9otLSnwwCV8ljC2p/JpkbOMgeExjNePcVx/pBxlydnoiExC5bAaeVq6Bw+DeFax0owj
-         XA2yhqGVhPGaBG34nOqvi6+qEQ2vUipJ5fj3JN+wUUqlgHehnztDK35loRN/x7tNkm1a
-         tNNlvIFpRuPEEsvox9bWZUMHNjytRmTIWF9t210B8yyP+Wxpn3WYA561lv06+mcOowJf
-         eRIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742349700; x=1742954500;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=tE3TiFORErY5QtllM/sLtt8BLKOIW/ovX9UJJEreN18=;
-        b=k5xBUyNv9bH3XOKPIaHoTjk02tHDsSoWONqGBPUigcQYhhS+TslG7uqXfpAiSlvfo5
-         8+uSBCSzoEhKbMdDBF8gqV0w4mcR8PylmShqK0c4zPvewk70uX8f4fIMsk9bEOvWLSuD
-         QOgsZROn97xo5qYVOBdpbyxX8b1bbvw9qTjUyVLKw8EKq/Dli1RJuJilBgd7O7fCQl6K
-         lS0LRhjHyRvwjfK8aEQw2ozXS8OcdBEGb7pAT3EQ8CZHxJnbB5JFxKURfCAkgEDyC8pR
-         0t5WQkOshRLMhPsjCuYlHA3AYrOpUxIFDh18SLxOaEafwVSQ2QhbZ5Om5Dx0hYgshuAz
-         7paQ==
-X-Gm-Message-State: AOJu0YwJ53uE2JLItfzDj8pJqTTp263jpFo6IHWKdarvtcb38LaYhs8Z
-	1DJd22ZM3c56XxruvDKHB9kFXzfljfGunqgKrcYk9sKDgjF2jTGJ9pIqWPbT
-X-Gm-Gg: ASbGnctJuS9LrvW5EOMyvIdBX7JZwThQ4vB0YSnDG8LBsjwq45x+F5kmwQzWuNjtUwN
-	g320tJQVps0TgIntt+vosCPvhX8jABnYFx5bO53CWYB2wEBnMnAsM2+ZiAsI4sOoFsVm8ZZFkgU
-	jxjF8qB0uPGLXIy20J/lkrdGkhukb4PklYvXBojauel/+Ygo6nBKmVqcF24NvaciwwruYg/Gbk9
-	d/1EnMdfnVGXv5feFcKUbflgrUME41dfpIqTG4vsvjmDCWhWNNOy3ywy3Ih673ErvoEdL7Ux/ai
-	0ckcAxUskJ9ZObvc3WgudCo8D7i/KOVnnz//
-X-Google-Smtp-Source: AGHT+IFfvx02IyVwol0mtXBQAF3A3fnwAW+aG4BWHeMGCLg9leey2WwaCChbwH95BxWj84B/uoWFiA==
-X-Received: by 2002:a05:6a21:6d8a:b0:1f5:81bc:c72e with SMTP id adf61e73a8af0-1fbecd35b05mr1261952637.33.1742349699286;
-        Tue, 18 Mar 2025 19:01:39 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:8201:fd20::6874])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-737115293desm10330822b3a.9.2025.03.18.19.01.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 Mar 2025 19:01:38 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=517397307f=jinfeng.wang.cn@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52J2QvxC004413
+	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 03:14:35 GMT
+Received: from nam12-bn8-obe.outbound.protection.outlook.com (mail-bn8nam12lp2170.outbound.protection.outlook.com [104.47.55.170])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45cxs0v5tr-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 03:14:34 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mlbdgcD/nE2AfHLjhYx5Fgw/awQhsypbArULeDJwnNZUQynp1Q3C1NRRMVwO293hSD/1c0jFK3YYz/lIL4qPEM/3vgjQyotUHQLVZocOhriyad5VbRIufrKl3UMD+wItoVQxwGAh1hWifb/dc4xl7a9dx/k3UCof9BhQtWWfmK0gVfO/k/wt/NeXcsaUTLJ2vOSMNw2aS7OefYb2VVDeznBU7KuX7mh4SNZ6CgMZLfLcp4nMKpxjSr6AeYAl0ZetmTlPM0qL2JzErNfov02g3FFlk/aUa4g/Tr8ijQhkZqlQiO+wPhljM0XTXwan913/aigmdgfv5cluWWfNiTFr7w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Nxdx60YuTLIHuFpvCaVGX9IY3PnkQtopa2dMiciLQf0=;
+ b=Hloz84hP8Zz/l/KuNti6irfI4W2PSu/sCNu1fDXw4nkNcmbFOpu3OWKe6hFfmDLHDrbpaLDhdVAtscIhmTl4a16HR/eEt3tWTI61OHMvy+BfpaUKiI1YxkosIlADfmALk/ddiNJhBx0tcYEcYo3l4Uuu26PlMQwBEeex2ilwd96lT7zgDAlqMDQ0uZjqV0shQglUkeI7I51e83NMclP7Zw4L8/VDYTEev039mVxy1D4NveuaF8yZRoCIFyy8HU4DuWwh4YFcJS4XvpLMbAG0hgQYLHZu/JcvP6/jaejm43z0s0dT73KCQOHceZYusSjmk/ujT2TqUPCtLrezUZylzw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from BN9PR11MB5531.namprd11.prod.outlook.com (2603:10b6:408:104::18)
+ by BL1PR11MB5302.namprd11.prod.outlook.com (2603:10b6:208:312::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.33; Wed, 19 Mar
+ 2025 03:14:31 +0000
+Received: from BN9PR11MB5531.namprd11.prod.outlook.com
+ ([fe80::2d59:8261:c261:1d9e]) by BN9PR11MB5531.namprd11.prod.outlook.com
+ ([fe80::2d59:8261:c261:1d9e%7]) with mapi id 15.20.8534.034; Wed, 19 Mar 2025
+ 03:14:31 +0000
+From: jinfeng.wang.cn@windriver.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] webkitgtk3: Upgrade to 2.48.0
-Date: Tue, 18 Mar 2025 19:01:35 -0700
-Message-ID: <20250319020135.4001406-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.49.0
-MIME-Version: 1.0
+Subject: [meta-oe][scarthgap][PATCH] netplan: Fix CVE-2022-4968
+Date: Wed, 19 Mar 2025 11:14:11 +0800
+Message-Id: <20250319031411.3194592-1-jinfeng.wang.cn@windriver.com>
+X-Mailer: git-send-email 2.34.1
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TYWP286CA0027.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:262::11) To BN9PR11MB5531.namprd11.prod.outlook.com
+ (2603:10b6:408:104::18)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN9PR11MB5531:EE_|BL1PR11MB5302:EE_
+X-MS-Office365-Filtering-Correlation-Id: 064ee4c0-1e07-42bc-d384-08dd66942a98
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|376014|52116014|366016|1800799024|38350700014|13003099007;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?8/DaxtBvtYXKIQUafirOzMVxNjOM1cVPU9C7bLRNcfrUaWTSsiNAR0lbIUMu?=
+ =?us-ascii?Q?FmTbt56KmA2P9SBgany+7eFOmGLSfuTSc7qMwwUx3U8+8UlnPpOCCTG02j8v?=
+ =?us-ascii?Q?I6ofd+X5pBbrd2s6y9fqfA/rnVyINar2vAnMAQuidQCAPJC/ycTW/W0p6AzI?=
+ =?us-ascii?Q?WwrD157ZbLJgjyoo0SlI3Pcq34M7yCHsUY9GfjqsVLPGzcgHhk2z8Xoo04tT?=
+ =?us-ascii?Q?EHrvGNF8c2dQpRPt50rpGsSP8IcmxzBJ38EPAHN5jhvlgM57ImYjFls0v6y1?=
+ =?us-ascii?Q?BQWCR46wQcX3CiQsSa03H3hOoxNlGlHj8Qatz2Qb1uCZM6JKc+aflhS/Rj2u?=
+ =?us-ascii?Q?1y81Dx+AGzu6F+PHeiyoAsvixy5jpEAr5/OdVq8GRRXR8VDihTkNYFCMZAIE?=
+ =?us-ascii?Q?sZpfMtuT8Qarp4vf1pyNbL/86H8XMliDrajBSDRPYPMcjBUJrCgazh/PrU9T?=
+ =?us-ascii?Q?rSa/A2A5PygP1RYTUpeYVNM48nOvciu6qp4gNG72OYjJkUcbbU1ogu/cOr2R?=
+ =?us-ascii?Q?YHd8q5Sl67jxUFFDoZRoEQcnkqz8clV/47EB8w1h6hGfAxvC+SCF8tLibsru?=
+ =?us-ascii?Q?BsFz/jpK7y5YZKPo4nUUVr8xfDkD8juV804uctE+Q2zUiswI32MBZq7TRnsy?=
+ =?us-ascii?Q?pwds59z/GU3GdjYA1HmXL6HSrV0G5MD+DqqCE8ahRVvWdCp0rOOtV4Z9t6EE?=
+ =?us-ascii?Q?JDGLsJuLpqgDm7/eZ6DTSEXHb2DcFVnrH6V++Sze2ucBsS5VlA291yTWRmls?=
+ =?us-ascii?Q?+yFWYTRFgy+HPhVyFno/8eM4A33tRzuAL836xrm+aOOGDRgnSvDPxsLWnNdb?=
+ =?us-ascii?Q?gvq/M6+AYiEH+yMESwIGmHUROwRRtnYZh4OEbwTjjSIDMkoRiA14CwKtNAk7?=
+ =?us-ascii?Q?GBFqhWsYVLEVTGOYCkF9KeE7sxZzeaegFp0bG6++OGsyBSFoHubwche7XqCY?=
+ =?us-ascii?Q?6f13O/IvBqhUGgylM8lze7vOTlH1AJqg4QOUClJf1g9oNFKoiQNyhJzySwCq?=
+ =?us-ascii?Q?OBXBLWTSJQjLGohsw0Yzu2U6+0lQRWdB34/ToB/1g4tk1gjxvLO5QP+k2MbY?=
+ =?us-ascii?Q?OBT+DmCkfqZNQ2V/Zy8yQ0OB3lBvrrQnmVGEE0//UuqBKmIzNT9UIsArYdIv?=
+ =?us-ascii?Q?DSFy1YXOzH7xyw/WxP47d+iBXi9Iwad+CZMKv+8OLew8DcUSp89CTZFibbmi?=
+ =?us-ascii?Q?MZb8S5sPBoG4+NcGm3xxq7iIMcefY5nj930G8KTjFXAH6tp6Vn7zd329+yBN?=
+ =?us-ascii?Q?vbK9G0TkpB0RYhMjS1Vje5VoGN/dYgW6DJIvEyxLrcBq8J9f9dkNUBMisAP9?=
+ =?us-ascii?Q?dEv6bdt6uLw56uWDdQ37DdcBfNBXygvsyM5pK3uLETS/5LOlLF/WjPl/sCoC?=
+ =?us-ascii?Q?F9lz4IUkegvhqMuvOeuHUOCqSX5WeReFYxOuUDGrHzTVfb7wAQ=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN9PR11MB5531.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(52116014)(366016)(1800799024)(38350700014)(13003099007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?MN/m1N9tk7Hfqrmd+66cSLWXPKcu+brTlEtxQxDWdTRvXxM0AHIGWIu+a7hM?=
+ =?us-ascii?Q?6aMMcWPtd4DmLXw4vZtKOZIWAQWmhaQtsMHw4g6KHR2fIri9PmBxxJMQPJ+m?=
+ =?us-ascii?Q?1Y0gNI1ZFQmIiZBGg6uWVb0Ewu3Q9dHDQFfin04vdg3ShM9G8aKb00F9EQl2?=
+ =?us-ascii?Q?fHdcFpKhNVelQgk3H/7cvq4yPhMEWeb4T/s6UwvUIO03nj2M9R3Fi3ypwGX3?=
+ =?us-ascii?Q?dlVdx7bmzFX42lQ2W64vP8pwMkc4mjUuKLTrSyhCEWbCXIv+tZXGcDbQyCYO?=
+ =?us-ascii?Q?gPF+XdetEDyHno5/o4pbOXw3pfiBGLznwC33wOGT4N9iJ7iuGop+67gCx0Jy?=
+ =?us-ascii?Q?ZVbh+qvPeK2j5SpErHp00SSXEXPabg9fZElFS07mXvo7PYqnc1HcdsOXYQ7t?=
+ =?us-ascii?Q?7qa5i1IkRbhlslOre6SjT3X3IKiER1K6F752dEb5UQQo8RJbVnTqxwrPnxwp?=
+ =?us-ascii?Q?QqX5+07tGbvRcwKJhu17w/WACJ+wdSolSXv6LehPTYf3JZNMY0K97BSeytCe?=
+ =?us-ascii?Q?h8yhTYb58CWEokBkY+U9oi864EWuNCJUMjt5IQ8U+T0jWBFxCbRFiE9NUkZa?=
+ =?us-ascii?Q?LmspaVB8brSLxEusnbcq/ADlD8t72oIQ4kN3qoRIDSMb0v+cNxdGOsYFufwP?=
+ =?us-ascii?Q?X95aN7otgMcG4zEwVHkuM7fBUXKa3JP3fStkxrT2YGrbzwUmEal4PH4O42gZ?=
+ =?us-ascii?Q?uO1s2l5e+djGZO+B6uVUFerWZgvNN9CnP9oWuovRME18j73L/suFkPbAA3ur?=
+ =?us-ascii?Q?bBeS1Kuf14ZHmT2sS11zfavgk/qDhuR9/mGVzZh1KVR0mrk4UOkeTI/YTnEH?=
+ =?us-ascii?Q?TU88Kq04/PS9diwvKDJG4VMsMoa5CW7AhoH/N/AfqZL4WIM9/GZEkqdDZdiL?=
+ =?us-ascii?Q?EI5war5s7nGGrwBtNPfMKA/tRa/pLrC5GS3uGkP9g6Jf6pgHS/g0D29oyPW7?=
+ =?us-ascii?Q?jAaSLoAeNj1DPSEvNwiTIBcOL4wtIzX5srGsFVoyuBfdct+8dEFC/HQ7W4FX?=
+ =?us-ascii?Q?feKPGrBfYf2nb/jz2kHLq/dvCyvs91cnIfPovLv7zeOJp62ap+IPGWXRBdRy?=
+ =?us-ascii?Q?42GJFMQG/fBa0VpVnfaW+BqunLNvo0wGAUt0vbwIEUoff72KpyaVZWXVjfPX?=
+ =?us-ascii?Q?d5Fbcp5rkoF0mrP6XDI7fDTtrlSrLHqGbUrBgm7w4rrIgelfpXN32sPYvQKv?=
+ =?us-ascii?Q?wmKjxJoJu+pDFHGRYHyQaw5cmBdn2MCS25ICCjbAbxxQ0gEtrDejedzKtpEz?=
+ =?us-ascii?Q?PqDF3TlnF/7NmJ52v3vqqqzZ6LTrQuFT6zVeJVTl/h+fJXHzItcwYUpMwQsU?=
+ =?us-ascii?Q?MAnURvchu00AfRyJ7lLjhsgaVYrbCP7l3nCuyBD/pBDQKEke8FhmmDCokcxx?=
+ =?us-ascii?Q?/LDHJt5OoSuu2jupCMMOxeCjkrxti/yIn+DL09yh0URgmTONgSlXhXYPo9hN?=
+ =?us-ascii?Q?NMNFC4AIjAM+9n3+LuYcw0i873rP3AzitN7d92TLjTf/uV9kPKVumbj9Qsaj?=
+ =?us-ascii?Q?RbIWd6dckXNAxbJvAlvGVxnWs52vHqLLrMBrvXKbQs88bdNMfTL0FmU1VLUZ?=
+ =?us-ascii?Q?zR2bZDchBzmCl6zdjVHRRfqMvZ0AgoGDdMrwpF8ab/itBIPBM5D0Uq+HFWAv?=
+ =?us-ascii?Q?Xg=3D=3D?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 064ee4c0-1e07-42bc-d384-08dd66942a98
+X-MS-Exchange-CrossTenant-AuthSource: BN9PR11MB5531.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Mar 2025 03:14:31.7494
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: xkfrSH354ytuttcY68cFu5ui+EU4FW4vfedC4hONBswTrEGOgb0hzgiksCmwa/+B5/4h4FoHhgdwDIaJiELe8iHxehBmh8Y4psvl/E/7lAw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR11MB5302
+X-Proofpoint-ORIG-GUID: Qvsfeo35G_gQrnUWQq44jk0uhO2RI7Pr
+X-Proofpoint-GUID: Qvsfeo35G_gQrnUWQq44jk0uhO2RI7Pr
+X-Authority-Analysis: v=2.4 cv=NY/m13D4 c=1 sm=1 tr=0 ts=67da369a cx=c_pps a=2bhcDDF4uZIgm5IDeBgkqw==:117 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=Vs1iUdzkB0EA:10
+ a=H5OGdu5hBBwA:10 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8 a=OsAU_ew6WyES5pdP810A:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-03-18_10,2025-03-17_03,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 bulkscore=0
+ spamscore=0 mlxscore=0 phishscore=0 lowpriorityscore=0 suspectscore=0
+ clxscore=1015 mlxlogscore=999 impostorscore=0 adultscore=0
+ priorityscore=1501 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
+ definitions=main-2503190020
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 02:01:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116062
+ <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 03:14:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116063
 
-* Drop backports already present in this release
-* Add couple of patches to fix build with clang-20
-* Refresh patches e.g. no-musttail-arm.patch
+From: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Reference:
+https://nvd.nist.gov/vuln/detail/CVE-2022-4968
+
+Upstream-patch:
+https://github.com/canonical/netplan/commit/4c39b75b5c6ae7d976bda6da68da60d9a7f085ee
+
+Signed-off-by: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
 ---
- ...04-main-7ffc29624258-.-https-bugs.we.patch |  75 ++++++
- ...or-no-matching-function-for-call-to-.patch |  77 ++++++
- ...1-Fix-build-issues-with-latest-Clang.patch | 237 ------------------
- ...ter.cpp-339-21-error-t6-was-not-decl.patch |  35 ---
- .../0001-Support-ICU-76.1-build.patch         |  36 ---
- ...d5e22213fdaca2a29ec3400c927d710a37a8.patch |  65 -----
- ...b1773bff2ef7c3b867ab019d69faa36c010d.patch |  33 ---
- .../webkitgtk3/no-musttail-arm.patch          |  24 +-
- ...kitgtk3_2.44.3.bb => webkitgtk3_2.48.0.bb} |  11 +-
- 9 files changed, 171 insertions(+), 422 deletions(-)
- create mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Cherry-pick-292304-main-7ffc29624258-.-https-bugs.we.patch
- create mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-EnumTraits.h-error-no-matching-function-for-call-to-.patch
- delete mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-build-issues-with-latest-Clang.patch
- delete mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-LowLevelInterpreter.cpp-339-21-error-t6-was-not-decl.patch
- delete mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Support-ICU-76.1-build.patch
- delete mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/30e1d5e22213fdaca2a29ec3400c927d710a37a8.patch
- delete mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/fff1b1773bff2ef7c3b867ab019d69faa36c010d.patch
- rename meta-oe/recipes-support/webkitgtk/{webkitgtk3_2.44.3.bb => webkitgtk3_2.48.0.bb} (95%)
+ .../netplan/netplan/CVE-2022-4968.patch       | 452 ++++++++++++++++++
+ .../netplan/netplan_1.0.bb                    |   1 +
+ 2 files changed, 453 insertions(+)
+ create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/CVE-2022-4968.patch
 
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Cherry-pick-292304-main-7ffc29624258-.-https-bugs.we.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Cherry-pick-292304-main-7ffc29624258-.-https-bugs.we.patch
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/CVE-2022-4968.patch b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/CVE-2022-4968.patch
 new file mode 100644
-index 0000000000..5cbb1035b2
+index 0000000000..a7a3c28f3f
 --- /dev/null
-+++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Cherry-pick-292304-main-7ffc29624258-.-https-bugs.we.patch
-@@ -0,0 +1,75 @@
-+From 83093455d02d73a327cea502d974aac82b59ad17 Mon Sep 17 00:00:00 2001
-+From: Adrian Perez de Castro <aperez@igalia.com>
-+Date: Tue, 18 Mar 2025 07:39:01 -0700
-+Subject: [PATCH] Cherry-pick 292304@main (7ffc29624258).
-+ https://bugs.webkit.org/show_bug.cgi?id=289953
++++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/CVE-2022-4968.patch
+@@ -0,0 +1,452 @@
++From 9d9a67b00b18708ce190b806686065a6c7b73527 Mon Sep 17 00:00:00 2001
++From: Danilo Egea Gondolfo <danilogondolfo@gmail.com>
++Date: Wed, 22 May 2024 15:44:16 +0100
++Subject: [PATCH] libnetplan: use more restrictive file permissions
 +
-+    [GTK][WPE] Use _LIBCPP_HARDENING_MODE with newer libc++ versions
-+    https://bugs.webkit.org/show_bug.cgi?id=289953
++A new util.c:_netplan_g_string_free_to_file_with_permissions() was added
++and accepts the owner, group and file mode as arguments. When these
++properties can't be set, when the generator is called by a non-root user
++for example, it will not hard-fail. This function is called by unit
++tests where we can't set the owner to a privileged account for example.
 +
-+    Reviewed by Alicia Boya Garcia.
++When generating backend files, use more restrictive permissions:
 +
-+    * Source/cmake/OptionsCommon.cmake: Add a new check for the libc++
-+      version, if it is 19 or newer, use the new _LIBCPP_HARDENING_MODE
-+      macro, otherwise for older versions keep _LIBCPP_ENABLE_ASSERTIONS.
++networkd related files will be owned by root:systemd-network and have
++mode 0640.
 +
-+    Canonical link: https://commits.webkit.org/292304@main
++service unit files will be owned by root:root and have mode 0640.
++udevd files will be owned by root:root with mode 0640.
 +
-+Upstream-Status: Backport [https://github.com/WebKit/WebKit/commit/2c105443d41e5ce3de3a4cac2ed8a07ebd134459]
++wpa_supplicant and Network Manager files will continue with the existing
++permissions.
 +
-+Canonical link: https://commits.webkit.org/290945.71@webkitglib/2.48
++Autopkgtests will check if the permissions are set as expected when
++calling the generator.
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++CVE: CVE-2022-4968
++
++Upstream-Status: Backport [https://github.com/canonical/netplan/commit/4c39b75b5c6ae7d976bda6da68da60d9a7f085ee]
++
++Signed-off-by: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
 +---
-+ Source/cmake/OptionsCommon.cmake | 24 +++++++++++++++++++-----
-+ 1 file changed, 19 insertions(+), 5 deletions(-)
++ src/networkd.c                | 36 +++------------
++ src/networkd.h                |  2 +
++ src/nm.c                      |  4 +-
++ src/openvswitch.c             |  2 +-
++ src/sriov.c                   |  4 +-
++ src/util-internal.h           |  3 ++
++ src/util.c                    | 46 +++++++++++++++++++
++ tests/generator/test_auth.py  |  2 +-
++ tests/generator/test_wifis.py |  2 +-
++ tests/integration/base.py     | 85 +++++++++++++++++++++++++++++++++++
++ 10 files changed, 150 insertions(+), 36 deletions(-)
 +
-+diff --git a/Source/cmake/OptionsCommon.cmake b/Source/cmake/OptionsCommon.cmake
-+index f6cf5ee..3178674 100644
-+--- a/Source/cmake/OptionsCommon.cmake
-++++ b/Source/cmake/OptionsCommon.cmake
-+@@ -229,8 +229,22 @@ set(CXX_STDLIB_TEST_SOURCE "
-+ ")
-+ check_cxx_source_compiles("${CXX_STDLIB_TEST_SOURCE}" CXX_STDLIB_IS_LIBCPP)
-+ if (CXX_STDLIB_IS_LIBCPP)
-+-    set(CXX_STDLIB_VARIANT "LIBCPP")
-+-    set(CXX_STDLIB_ASSERTIONS_MACRO _LIBCPP_ENABLE_ASSERTIONS)
-++    set(CXX_STDLIB_TEST_SOURCE "
-++        #include <utility>
-++        #if _LIBCPP_VERSION >= 190000
-++        int main() { }
-++        #else
-++        #error libc++ is older than 19.x
-++        #endif
-++    ")
-++    check_cxx_source_compiles("${CXX_STDLIB_TEST_SOURCE}" CXX_STDLIB_IS_LIBCPP_19_OR_NEWER)
-++    if (CXX_STDLIB_IS_LIBCPP_19_OR_NEWER)
-++        set(CXX_STDLIB_VARIANT "LIBCPP 19+")
-++        set(CXX_STDLIB_ASSERTIONS_MACRO _LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE)
-++    else ()
-++        set(CXX_STDLIB_VARIANT "LIBCPP <19")
-++        set(CXX_STDLIB_ASSERTIONS_MACRO _LIBCPP_ENABLE_ASSERTIONS=1)
-++    endif ()
-+ else ()
-+     set(CXX_STDLIB_TEST_SOURCE "
-+     #include <utility>
-+@@ -239,7 +253,7 @@ else ()
-+     check_cxx_source_compiles("${CXX_STDLIB_TEST_SOURCE}" CXX_STDLIB_IS_GLIBCXX)
-+     if (CXX_STDLIB_IS_GLIBCXX)
-+         set(CXX_STDLIB_VARIANT "GLIBCXX")
-+-        set(CXX_STDLIB_ASSERTIONS_MACRO _GLIBCXX_ASSERTIONS)
-++        set(CXX_STDLIB_ASSERTIONS_MACRO _GLIBCXX_ASSERTIONS=1)
-+     endif ()
-+ endif ()
-+ message(STATUS "C++ standard library in use: ${CXX_STDLIB_VARIANT}")
-+@@ -255,8 +269,8 @@ option(USE_CXX_STDLIB_ASSERTIONS
-+ 
-+ if (USE_CXX_STDLIB_ASSERTIONS)
-+     if (CXX_STDLIB_ASSERTIONS_MACRO)
-+-        message(STATUS "  Assertions enabled, ${CXX_STDLIB_ASSERTIONS_MACRO}=1")
-+-        add_compile_definitions("${CXX_STDLIB_ASSERTIONS_MACRO}=1")
-++        message(STATUS "  Assertions enabled, ${CXX_STDLIB_ASSERTIONS_MACRO}")
-++        add_compile_definitions("${CXX_STDLIB_ASSERTIONS_MACRO}")
-+     else ()
-+         message(STATUS "  Assertions disabled, CXX_STDLIB_ASSERTIONS_MACRO undefined")
-+     endif ()
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-EnumTraits.h-error-no-matching-function-for-call-to-.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-EnumTraits.h-error-no-matching-function-for-call-to-.patch
-new file mode 100644
-index 0000000000..5b83d9e7eb
---- /dev/null
-+++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-EnumTraits.h-error-no-matching-function-for-call-to-.patch
-@@ -0,0 +1,77 @@
-+From 7d159a631ae55c10a0b7a92cf031200a11629736 Mon Sep 17 00:00:00 2001
-+From: Fujii Hironori <Hironori.Fujii@sony.com>
-+Date: Tue, 18 Mar 2025 10:25:47 +0900
-+Subject: [PATCH] EnumTraits.h: error: no matching function for call to
-+ 'enumName' with Clang 20 https://bugs.webkit.org/show_bug.cgi?id=289669
-+
-+Reviewed by NOBODY (OOPS!).
-+
-+Clang 20 couldn't compile EnumTraits.h.
-+
-+> wtf/EnumTraits.h:212:33: note: candidate template ignored: invalid explicitly-specified argument for template parameter 'V'
-+
-+An invalid enum value can't be specifed to the template parameter `V`.
-+
-+> template<auto V> constexpr std::span<const char> enumName()
-+
-+The upstream Magic Enum C++ has a template variable `is_enum_constexpr_static_cast_valid<E, V>` to check a enum value is valid.
-+<https://github.com/Neargye/magic_enum/blob/a413fcc9c46a020a746907136a384c227f3cd095/include/magic_enum/magic_enum.hpp#L624-L634>
-+
-+Imported the template variable.
-+
-+* Source/WTF/wtf/EnumTraits.h:
-+(WTF::enumName):
-+(WTF::makeEnumNames):
-+
-+Upstream-Status: Submitted [https://github.com/WebKit/WebKit/pull/42597]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ Source/WTF/wtf/EnumTraits.h | 21 ++++++++++++++++++++-
-+ 1 file changed, 20 insertions(+), 1 deletion(-)
-+
-+diff --git a/Source/WTF/wtf/EnumTraits.h b/Source/WTF/wtf/EnumTraits.h
-+index 0d33e39a..95e6318b 100644
-+--- a/Source/WTF/wtf/EnumTraits.h
-++++ b/Source/WTF/wtf/EnumTraits.h
-+@@ -152,6 +152,16 @@ constexpr bool isZeroBasedContiguousEnum()
-+ #pragma clang diagnostic ignored "-Wenum-constexpr-conversion"
-+ #endif
-+ 
-++#if COMPILER(CLANG) && __clang_major__ >= 16
-++template <typename E, auto V, typename = void>
-++inline constexpr bool isEnumConstexprStaticCastValid = false;
-++template <typename E, auto V>
-++inline constexpr bool isEnumConstexprStaticCastValid<E, V, std::void_t<std::integral_constant<E, static_cast<E>(V)>>> = true;
-++#else
-++template <typename, auto>
-++inline constexpr bool isEnumConstexprStaticCastValid = true;
-++#endif
-++
-+ template<typename E>
-+ constexpr std::span<const char> enumTypeNameImpl()
++diff --git a/src/networkd.c b/src/networkd.c
++index 25121c4..a051c6f 100644
++--- a/src/networkd.c
+++++ b/src/networkd.c
++@@ -221,7 +221,6 @@ STATIC void
++ write_link_file(const NetplanNetDefinition* def, const char* rootdir, const char* path)
 + {
-+@@ -215,6 +225,15 @@ constexpr std::span<const char> enumName()
-+     return result;
++     GString* s = NULL;
++-    mode_t orig_umask;
++ 
++     /* Don't write .link files for virtual devices; they use .netdev instead.
++      * Don't write .link files for MODEM devices, as they aren't supported by networkd.
++@@ -293,9 +292,7 @@ write_link_file(const NetplanNetDefinition* def, const char* rootdir, const char
++         g_string_append_printf(s, "LargeReceiveOffload=%s\n",
++         (def->large_receive_offload ? "true" : "false"));
++ 
++-    orig_umask = umask(022);
++-    _netplan_g_string_free_to_file(s, rootdir, path, ".link");
++-    umask(orig_umask);
+++    _netplan_g_string_free_to_file_with_permissions(s, rootdir, path, ".link", "root", "root", 0640);
 + }
 + 
-++template<typename E, auto V>
-++constexpr std::span<const char> enumName()
++ STATIC gboolean
++@@ -313,7 +310,7 @@ write_regdom(const NetplanNetDefinition* def, const char* rootdir, GError** erro
++     g_string_append(s, "\n[Service]\nType=oneshot\n");
++     g_string_append_printf(s, "ExecStart="SBINDIR"/iw reg set %s\n", def->regulatory_domain);
++ 
++-    _netplan_g_string_free_to_file(s, rootdir, path, NULL);
+++    _netplan_g_string_free_to_file_with_permissions(s, rootdir, path, NULL, "root", "root", 0640);
++     _netplan_safe_mkdir_p_dir(link);
++     if (symlink(path, link) < 0 && errno != EEXIST) {
++         // LCOV_EXCL_START
++@@ -493,7 +490,6 @@ STATIC void
++ write_netdev_file(const NetplanNetDefinition* def, const char* rootdir, const char* path)
++ {
++     GString* s = NULL;
++-    mode_t orig_umask;
++ 
++     g_assert(def->type >= NETPLAN_DEF_TYPE_VIRTUAL);
++ 
++@@ -589,11 +585,7 @@ write_netdev_file(const NetplanNetDefinition* def, const char* rootdir, const ch
++         default: g_assert_not_reached(); // LCOV_EXCL_LINE
++     }
++ 
++-    /* these do not contain secrets and need to be readable by
++-     * systemd-networkd - LP: #1736965 */
++-    orig_umask = umask(022);
++-    _netplan_g_string_free_to_file(s, rootdir, path, ".netdev");
++-    umask(orig_umask);
+++    _netplan_g_string_free_to_file_with_permissions(s, rootdir, path, ".netdev", "root", NETWORKD_GROUP, 0640);
++ }
++ 
++ STATIC void
++@@ -737,7 +729,6 @@ _netplan_netdef_write_network_file(
++     g_autoptr(GString) network = NULL;
++     g_autoptr(GString) link = NULL;
++     GString* s = NULL;
++-    mode_t orig_umask;
++     gboolean is_optional = def->optional;
++ 
++     SET_OPT_OUT_PTR(has_been_written, FALSE);
++@@ -993,11 +984,7 @@ _netplan_netdef_write_network_file(
++         if (network->len > 0)
++             g_string_append_printf(s, "\n[Network]\n%s", network->str);
++ 
++-        /* these do not contain secrets and need to be readable by
++-         * systemd-networkd - LP: #1736965 */
++-        orig_umask = umask(022);
++-        _netplan_g_string_free_to_file(s, rootdir, path, ".network");
++-        umask(orig_umask);
+++        _netplan_g_string_free_to_file_with_permissions(s, rootdir, path, ".network", "root", NETWORKD_GROUP, 0640);
++     }
++ 
++     SET_OPT_OUT_PTR(has_been_written, TRUE);
++@@ -1009,7 +996,6 @@ write_rules_file(const NetplanNetDefinition* def, const char* rootdir)
++ {
++     GString* s = NULL;
++     g_autofree char* path = g_strjoin(NULL, "run/udev/rules.d/99-netplan-", def->id, ".rules", NULL);
++-    mode_t orig_umask;
++ 
++     /* do we need to write a .rules file?
++      * It's only required for reliably setting the name of a physical device
++@@ -1043,9 +1029,7 @@ write_rules_file(const NetplanNetDefinition* def, const char* rootdir)
++ 
++     g_string_append_printf(s, "NAME=\"%s\"\n", def->set_name);
++ 
++-    orig_umask = umask(022);
++-    _netplan_g_string_free_to_file(s, rootdir, path, NULL);
++-    umask(orig_umask);
+++    _netplan_g_string_free_to_file_with_permissions(s, rootdir, path, NULL, "root", "root", 0640);
++ }
++ 
++ STATIC gboolean
++@@ -1194,7 +1178,6 @@ STATIC void
++ write_wpa_unit(const NetplanNetDefinition* def, const char* rootdir)
++ {
++     g_autofree gchar *stdouth = NULL;
++-    mode_t orig_umask;
++ 
++     stdouth = systemd_escape(def->id);
++ 
++@@ -1213,9 +1196,7 @@ write_wpa_unit(const NetplanNetDefinition* def, const char* rootdir)
++     } else {
++         g_string_append(s, " -Dnl80211,wext\n");
++     }
++-    orig_umask = umask(022);
++-    _netplan_g_string_free_to_file(s, rootdir, path, NULL);
++-    umask(orig_umask);
+++    _netplan_g_string_free_to_file_with_permissions(s, rootdir, path, NULL, "root", "root", 0640);
++ }
++ 
++ STATIC gboolean
++@@ -1224,7 +1205,6 @@ write_wpa_conf(const NetplanNetDefinition* def, const char* rootdir, GError** er
++     GHashTableIter iter;
++     GString* s = g_string_new("ctrl_interface=/run/wpa_supplicant\n\n");
++     g_autofree char* path = g_strjoin(NULL, "run/netplan/wpa-", def->id, ".conf", NULL);
++-    mode_t orig_umask;
++ 
++     g_debug("%s: Creating wpa_supplicant configuration file %s", def->id, path);
++     if (def->type == NETPLAN_DEF_TYPE_WIFI) {
++@@ -1313,9 +1293,7 @@ write_wpa_conf(const NetplanNetDefinition* def, const char* rootdir, GError** er
++     }
++ 
++     /* use tight permissions as this contains secrets */
++-    orig_umask = umask(077);
++-    _netplan_g_string_free_to_file(s, rootdir, path, NULL);
++-    umask(orig_umask);
+++    _netplan_g_string_free_to_file_with_permissions(s, rootdir, path, NULL, "root", "root", 0600);
++     return TRUE;
++ }
++ 
++diff --git a/src/networkd.h b/src/networkd.h
++index 2bd0848..36c34b3 100644
++--- a/src/networkd.h
+++++ b/src/networkd.h
++@@ -20,6 +20,8 @@
++ #include "netplan.h"
++ #include <glib.h>
++ 
+++#define NETWORKD_GROUP "systemd-network"
+++
++ NETPLAN_INTERNAL gboolean
++ _netplan_netdef_write_networkd(
++         const NetplanState* np_state,
++diff --git a/src/nm.c b/src/nm.c
++index 2b850af..8f1bf05 100644
++--- a/src/nm.c
+++++ b/src/nm.c
++@@ -1150,13 +1150,13 @@ netplan_state_finish_nm_write(
++ 
++     /* write generated NetworkManager drop-in config */
++     if (nm_conf->len > 0)
++-        _netplan_g_string_free_to_file(nm_conf, rootdir, "run/NetworkManager/conf.d/netplan.conf", NULL);
+++        _netplan_g_string_free_to_file_with_permissions(nm_conf, rootdir, "run/NetworkManager/conf.d/netplan.conf", NULL, "root", "root", 0640);
++     else
++         g_string_free(nm_conf, TRUE);
++ 
++     /* write generated udev rules */
++     if (udev_rules->len > 0)
++-        _netplan_g_string_free_to_file(udev_rules, rootdir, "run/udev/rules.d/90-netplan.rules", NULL);
+++        _netplan_g_string_free_to_file_with_permissions(udev_rules, rootdir, "run/udev/rules.d/90-netplan.rules", NULL, "root", "root", 0640);
++     else
++         g_string_free(udev_rules, TRUE);
++ 
++diff --git a/src/openvswitch.c b/src/openvswitch.c
++index 6eb0688..2ab77e7 100644
++--- a/src/openvswitch.c
+++++ b/src/openvswitch.c
++@@ -66,7 +66,7 @@ write_ovs_systemd_unit(const char* id, const GString* cmds, const char* rootdir,
++         g_string_append(s, "StartLimitBurst=0\n");
++     g_string_append(s, cmds->str);
++ 
++-    _netplan_g_string_free_to_file(s, rootdir, path, NULL);
+++    _netplan_g_string_free_to_file_with_permissions(s, rootdir, path, NULL, "root", "root", 0640);
++ 
++     _netplan_safe_mkdir_p_dir(link);
++     if (symlink(path, link) < 0 && errno != EEXIST) {
++diff --git a/src/sriov.c b/src/sriov.c
++index 1534c94..213f124 100644
++--- a/src/sriov.c
+++++ b/src/sriov.c
++@@ -54,7 +54,7 @@ write_sriov_rebind_systemd_unit(GHashTable* pfs, const char* rootdir, GError** e
++     g_string_truncate(interfaces, interfaces->len-1); /* cut trailing whitespace */
++     g_string_append_printf(s, "ExecStart=" SBINDIR "/netplan rebind --debug %s\n", interfaces->str);
++ 
++-    _netplan_g_string_free_to_file(s, rootdir, path, NULL);
+++    _netplan_g_string_free_to_file_with_permissions(s, rootdir, path, NULL, "root", "root", 0640);
++     g_string_free(interfaces, TRUE);
++ 
++     _netplan_safe_mkdir_p_dir(link);
++@@ -90,7 +90,7 @@ write_sriov_apply_systemd_unit(GHashTable* pfs, const char* rootdir, GError** er
++     g_string_append(s, "\n[Service]\nType=oneshot\n");
++     g_string_append_printf(s, "ExecStart=" SBINDIR "/netplan apply --sriov-only\n");
++ 
++-    _netplan_g_string_free_to_file(s, rootdir, path, NULL);
+++    _netplan_g_string_free_to_file_with_permissions(s, rootdir, path, NULL, "root", "root", 0640);
++ 
++     _netplan_safe_mkdir_p_dir(link);
++     if (symlink(path, link) < 0 && errno != EEXIST) {
++diff --git a/src/util-internal.h b/src/util-internal.h
++index 86bd1b7..7454e77 100644
++--- a/src/util-internal.h
+++++ b/src/util-internal.h
++@@ -40,6 +40,9 @@ _netplan_safe_mkdir_p_dir(const char* file_path);
++ NETPLAN_INTERNAL void
++ _netplan_g_string_free_to_file(GString* s, const char* rootdir, const char* path, const char* suffix);
++ 
+++void
+++_netplan_g_string_free_to_file_with_permissions(GString* s, const char* rootdir, const char* path, const char* suffix, const char* owner, const char* group, mode_t mode);
+++
++ NETPLAN_INTERNAL void
++ _netplan_unlink_glob(const char* rootdir, const char* _glob);
++ 
++diff --git a/src/util.c b/src/util.c
++index 36eb896..c2f9494 100644
++--- a/src/util.c
+++++ b/src/util.c
++@@ -23,6 +23,9 @@
++ #include <regex.h>
++ #include <string.h>
++ #include <sys/mman.h>
+++#include <sys/types.h>
+++#include <pwd.h>
+++#include <grp.h>
++ 
++ #include <glib.h>
++ #include <glib/gprintf.h>
++@@ -87,6 +90,49 @@ void _netplan_g_string_free_to_file(GString* s, const char* rootdir, const char*
++     }
++ }
++ 
+++void _netplan_g_string_free_to_file_with_permissions(GString* s, const char* rootdir, const char* path, const char* suffix, const char* owner, const char* group, mode_t mode)
 ++{
-++    if constexpr (isEnumConstexprStaticCastValid<E, V>)
-++        return enumName<static_cast<E>(V)>();
-++    else
-++        return { };
+++    g_autofree char* full_path = NULL;
+++    g_autofree char* path_suffix = NULL;
+++    g_autofree char* contents = g_string_free(s, FALSE);
+++    GError* error = NULL;
+++    struct passwd* pw = NULL;
+++    struct group* gr = NULL;
+++    int ret = 0;
+++
+++    path_suffix = g_strjoin(NULL, path, suffix, NULL);
+++    full_path = g_build_path(G_DIR_SEPARATOR_S, rootdir ?: G_DIR_SEPARATOR_S, path_suffix, NULL);
+++    _netplan_safe_mkdir_p_dir(full_path);
+++    if (!g_file_set_contents_full(full_path, contents, -1, G_FILE_SET_CONTENTS_CONSISTENT | G_FILE_SET_CONTENTS_ONLY_EXISTING, mode, &error)) {
+++        /* the mkdir() just succeeded, there is no sensible
+++         * method to test this without root privileges, bind mounts, and
+++         * simulating ENOSPC */
+++        // LCOV_EXCL_START
+++        g_fprintf(stderr, "ERROR: cannot create file %s: %s\n", path, error->message);
+++        exit(1);
+++        // LCOV_EXCL_STOP
+++    }
+++
+++    /* Here we take the owner and group names and look up for their IDs in the passwd and group files.
+++     * It's OK to fail to set the owners and mode as this code will be called from unit tests.
+++     * The autopkgtests will check if the owner/group and mode are correctly set.
+++     */
+++    pw = getpwnam(owner);
+++    if (!pw) {
+++        g_debug("Failed to determine the UID of user %s: %s", owner, strerror(errno)); // LCOV_EXCL_LINE
+++    }
+++    gr = getgrnam(group);
+++    if (!gr) {
+++        g_debug("Failed to determine the GID of group %s: %s", group, strerror(errno)); // LCOV_EXCL_LINE
+++    }
+++    if (pw && gr) {
+++        ret = chown(full_path, pw->pw_uid, gr->gr_gid);
+++        if (ret != 0) {
+++            g_debug("Failed to set owner and group for file %s: %s", full_path, strerror(errno));
+++        }
+++    }
 ++}
 ++
-+ template<typename E>
-+ constexpr std::underlying_type_t<E> enumNamesMin()
-+ {
-+@@ -264,7 +283,7 @@ constexpr auto makeEnumNames(std::index_sequence<Is...>)
-+ {
-+     constexpr auto min = enumNamesMin<E>();
-+     return std::array<std::span<const char>, sizeof...(Is)> {
-+-        enumName<static_cast<E>(static_cast<std::underlying_type_t<E>>(Is) + min)>()...
-++        enumName<E, static_cast<std::underlying_type_t<E>>(Is) + min>()...
-+     };
-+ }
++ /**
++  * Remove all files matching given glob.
++  */
++diff --git a/tests/generator/test_auth.py b/tests/generator/test_auth.py
++index de23adb..d3d886c 100644
++--- a/tests/generator/test_auth.py
+++++ b/tests/generator/test_auth.py
++@@ -226,7 +226,7 @@ network={
 + 
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-build-issues-with-latest-Clang.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-build-issues-with-latest-Clang.patch
-deleted file mode 100644
-index 6ef9835c2c..0000000000
---- a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-build-issues-with-latest-Clang.patch
-+++ /dev/null
-@@ -1,237 +0,0 @@
--From 257ed304fb3e71d412568dcbed7129c145812fdf Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Mon, 2 Sep 2024 21:38:12 -0700
--Subject: [PATCH] Fix build issues with latest Clang
-- https://bugs.webkit.org/show_bug.cgi?id=276198 rdar://130933637
--
--Reviewed by Yusuke Suzuki.
--
--The use of the template keyword to reference template members without a template argument list was deprecated in the C++ standard.
--e.g. `foo.template bar()` nows needs to be `foo.template bar<>()`. I ran into a different issue with `std::reference_wrapper` that
--blocked me from going any further, which AFAICT is a bug on the Clang side.
--
--This also fixes a few other warnings that popped up while building with the new Clang denoted inline
--
--* Source/JavaScriptCore/ftl/FTLLowerDFGToB3.cpp:
--(JSC::FTL::DFG::LowerDFGToB3::compileCompareStrictEq): Clang didn't like the implicit static_cast<int32_t>(UINT32_MAX) so make it explicit with a static_assert no data was lost.
--* Source/JavaScriptCore/jit/AssemblyHelpers.cpp:
--(JSC::AssemblyHelpers::emitNonNullDecodeZeroExtendedStructureID): Clang didn't like the implicit static_cast<int32_t>(UINT32_MAX) so make it explicit with a static_assert no data was lost.
--* Source/JavaScriptCore/llint/InPlaceInterpreter.cpp:
--* Source/JavaScriptCore/llint/LLIntData.h:
--(JSC::LLInt::getCodeFunctionPtr):
--(JSC::LLInt::getWide16CodeFunctionPtr):
--(JSC::LLInt::getWide32CodeFunctionPtr):
--* Source/JavaScriptCore/parser/Nodes.h: Missing definition of ModuleScopeData added include.
--* Source/JavaScriptCore/runtime/JSCast.h:
--(JSC::JSCastingHelpers::inherits):
--(JSC::jsDynamicCast):
--* Source/ThirdParty/libwebrtc/Source/third_party/boringssl/src/crypto/bio/connect.c:
--(conn_callback_ctrl): Had a warning about an incompatible function type. Seems like this is intentional suppressed the warning.
--* Source/WTF/wtf/cf/TypeCastsCF.h: Had a warning about extra namespace qualification. I just moved it out of the namespace. That said, it feels like this warning shouldn't apply to macro expansions...
--* Source/WebCore/PAL/ThirdParty/libavif/ThirdParty/dav1d/src/decode.c:
--(decode_b): Had a warning about different types on the middle/right of a ternary expression. I just pushed the comparison inside the ternary.
--
--Canonical link: https://commits.webkit.org/280700@main
--
--Upstream-Status: Backport [https://github.com/WebKit/WebKit/commit/62b6e2db547e#diff-136d848d7c1b400da9b486916b67592b54e5abf7c66ac247697a93ae2fb743a9]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- Source/JavaScriptCore/ftl/FTLLowerDFGToB3.cpp    |  6 ++++--
-- Source/JavaScriptCore/jit/AssemblyHelpers.cpp    |  6 ++++--
-- .../JavaScriptCore/llint/InPlaceInterpreter.cpp  | 16 ++++++++--------
-- Source/JavaScriptCore/llint/LLIntData.h          | 12 ++++++------
-- Source/JavaScriptCore/llint/LLIntThunks.cpp      |  2 +-
-- Source/JavaScriptCore/parser/Nodes.h             |  4 ++--
-- Source/JavaScriptCore/runtime/JSCast.h           |  4 ++--
-- 7 files changed, 27 insertions(+), 23 deletions(-)
--
----- a/Source/JavaScriptCore/ftl/FTLLowerDFGToB3.cpp
--+++ b/Source/JavaScriptCore/ftl/FTLLowerDFGToB3.cpp
--@@ -22930,8 +22930,10 @@ IGNORE_CLANG_WARNINGS_END
--         return m_out.shl(m_out.zeroExtPtr(structureID), m_out.constIntPtr(StructureID::encodeShiftAmount));
-- #else
--         LValue maskedStructureID = structureID;
---        if constexpr (structureHeapAddressSize < 4 * GB)
---            maskedStructureID = m_out.bitAnd(structureID, m_out.constInt32(StructureID::structureIDMask));
--+        if constexpr (structureHeapAddressSize < 4 * GB) {
--+            static_assert(static_cast<uint32_t>(StructureID::structureIDMask) == StructureID::structureIDMask);
--+            maskedStructureID = m_out.bitAnd(structureID, m_out.constInt32(static_cast<uint32_t>(StructureID::structureIDMask)));
--+        }
--         return m_out.bitOr(m_out.constIntPtr(startOfStructureHeap()), m_out.zeroExtPtr(maskedStructureID));
-- #endif
--     }
----- a/Source/JavaScriptCore/jit/AssemblyHelpers.cpp
--+++ b/Source/JavaScriptCore/jit/AssemblyHelpers.cpp
--@@ -677,8 +677,10 @@ void AssemblyHelpers::emitNonNullDecodeZ
--     if constexpr (structureHeapAddressSize >= 4 * GB) {
--         ASSERT(structureHeapAddressSize == 4 * GB);
--         move(source, dest);
---    } else
---        and32(TrustedImm32(StructureID::structureIDMask), source, dest);
--+    } else {
--+        static_assert(static_cast<uint32_t>(StructureID::structureIDMask) == StructureID::structureIDMask);
--+        and32(TrustedImm32(static_cast<uint32_t>(StructureID::structureIDMask)), source, dest);
--+    }
--     or64(TrustedImm64(startOfStructureHeap()), dest);
-- #else // not CPU(ADDRESS64)
--     move(source, dest);
----- a/Source/JavaScriptCore/llint/InPlaceInterpreter.cpp
--+++ b/Source/JavaScriptCore/llint/InPlaceInterpreter.cpp
--@@ -43,8 +43,8 @@ namespace JSC { namespace IPInt {
-- do { \
--     void* base = reinterpret_cast<void*>(ipint_unreachable_validate); \
--     void* ptr = reinterpret_cast<void*>(ipint_ ## name ## _validate); \
---    void* untaggedBase = CodePtr<CFunctionPtrTag>::fromTaggedPtr(base).template untaggedPtr(); \
---    void* untaggedPtr = CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).template untaggedPtr(); \
--+    void* untaggedBase = CodePtr<CFunctionPtrTag>::fromTaggedPtr(base).template untaggedPtr<>(); \
--+    void* untaggedPtr = CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).template untaggedPtr<>(); \
--     RELEASE_ASSERT_WITH_MESSAGE((char*)(untaggedPtr) - (char*)(untaggedBase) == opcode * 256, #name); \
-- } while (false);
-- 
--@@ -52,8 +52,8 @@ do { \
-- do { \
--     void* base = reinterpret_cast<void*>(ipint_i32_trunc_sat_f32_s_validate); \
--     void* ptr = reinterpret_cast<void*>(ipint_ ## name ## _validate); \
---    void* untaggedBase = CodePtr<CFunctionPtrTag>::fromTaggedPtr(base).template untaggedPtr(); \
---    void* untaggedPtr = CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).template untaggedPtr(); \
--+    void* untaggedBase = CodePtr<CFunctionPtrTag>::fromTaggedPtr(base).template untaggedPtr<>(); \
--+    void* untaggedPtr = CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).template untaggedPtr<>(); \
--     RELEASE_ASSERT_WITH_MESSAGE((char*)(untaggedPtr) - (char*)(untaggedBase) == opcode * 256, #name); \
-- } while (false);
-- 
--@@ -61,8 +61,8 @@ do { \
-- do { \
--     void* base = reinterpret_cast<void*>(ipint_simd_v128_load_mem_validate); \
--     void* ptr = reinterpret_cast<void*>(ipint_ ## name ## _validate); \
---    void* untaggedBase = CodePtr<CFunctionPtrTag>::fromTaggedPtr(base).template untaggedPtr(); \
---    void* untaggedPtr = CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).template untaggedPtr(); \
--+    void* untaggedBase = CodePtr<CFunctionPtrTag>::fromTaggedPtr(base).template untaggedPtr<>(); \
--+    void* untaggedPtr = CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).template untaggedPtr<>(); \
--     RELEASE_ASSERT_WITH_MESSAGE((char*)(untaggedPtr) - (char*)(untaggedBase) == opcode * 256, #name); \
-- } while (false);
-- 
--@@ -70,8 +70,8 @@ do { \
-- do { \
--     void* base = reinterpret_cast<void*>(ipint_memory_atomic_notify_validate); \
--     void* ptr = reinterpret_cast<void*>(ipint_ ## name ## _validate); \
---    void* untaggedBase = CodePtr<CFunctionPtrTag>::fromTaggedPtr(base).template untaggedPtr(); \
---    void* untaggedPtr = CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).template untaggedPtr(); \
--+    void* untaggedBase = CodePtr<CFunctionPtrTag>::fromTaggedPtr(base).template untaggedPtr<>(); \
--+    void* untaggedPtr = CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).template untaggedPtr<>(); \
--     RELEASE_ASSERT_WITH_MESSAGE((char*)(untaggedPtr) - (char*)(untaggedBase) == opcode * 256, #name); \
-- } while (false);
-- 
----- a/Source/JavaScriptCore/llint/LLIntData.h
--+++ b/Source/JavaScriptCore/llint/LLIntData.h
--@@ -217,7 +217,7 @@ ALWAYS_INLINE LLIntCode getCodeFunctionP
-- #if COMPILER(MSVC)
--     return reinterpret_cast<LLIntCode>(getCodePtr<tag>(opcodeID).taggedPtr());
-- #else
---    return reinterpret_cast<LLIntCode>(getCodePtr<tag>(opcodeID).template taggedPtr());
--+    return reinterpret_cast<LLIntCode>(getCodePtr<tag>(opcodeID).template taggedPtr<>());
-- #endif
-- }
-- 
--@@ -227,7 +227,7 @@ ALWAYS_INLINE LLIntCode getWide16CodeFun
-- #if COMPILER(MSVC)
--     return reinterpret_cast<LLIntCode>(getWide16CodePtr<tag>(opcodeID).taggedPtr());
-- #else
---    return reinterpret_cast<LLIntCode>(getWide16CodePtr<tag>(opcodeID).template taggedPtr());
--+    return reinterpret_cast<LLIntCode>(getWide16CodePtr<tag>(opcodeID).template taggedPtr<>());
-- #endif
-- }
-- 
--@@ -237,7 +237,7 @@ ALWAYS_INLINE LLIntCode getWide32CodeFun
-- #if COMPILER(MSVC)
--     return reinterpret_cast<LLIntCode>(getWide32CodePtr<tag>(opcodeID).taggedPtr());
-- #else
---    return reinterpret_cast<LLIntCode>(getWide32CodePtr<tag>(opcodeID).template taggedPtr());
--+    return reinterpret_cast<LLIntCode>(getWide32CodePtr<tag>(opcodeID).template taggedPtr<>());
-- #endif
-- }
-- #else // not ENABLE(JIT)
--@@ -361,7 +361,7 @@ ALWAYS_INLINE LLIntCode getCodeFunctionP
-- #if COMPILER(MSVC)
--     return reinterpret_cast<LLIntCode>(getCodePtr<tag>(opcodeID).taggedPtr());
-- #else
---    return reinterpret_cast<LLIntCode>(getCodePtr<tag>(opcodeID).template taggedPtr());
--+    return reinterpret_cast<LLIntCode>(getCodePtr<tag>(opcodeID).template taggedPtr<>());
-- #endif
-- }
-- 
--@@ -371,7 +371,7 @@ ALWAYS_INLINE LLIntCode getWide16CodeFun
-- #if COMPILER(MSVC)
--     return reinterpret_cast<LLIntCode>(getWide16CodePtr<tag>(opcodeID).taggedPtr());
-- #else
---    return reinterpret_cast<LLIntCode>(getWide16CodePtr<tag>(opcodeID).template taggedPtr());
--+    return reinterpret_cast<LLIntCode>(getWide16CodePtr<tag>(opcodeID).template taggedPtr<>());
-- #endif
-- }
-- 
--@@ -381,7 +381,7 @@ ALWAYS_INLINE LLIntCode getWide32CodeFun
-- #if COMPILER(MSVC)
--     return reinterpret_cast<LLIntCode>(getWide32CodePtr<tag>(opcodeID).taggedPtr());
-- #else
---    return reinterpret_cast<LLIntCode>(getWide32CodePtr<tag>(opcodeID).template taggedPtr());
--+    return reinterpret_cast<LLIntCode>(getWide32CodePtr<tag>(opcodeID).template taggedPtr<>());
-- #endif
-- }
-- #else // not ENABLE(JIT)
----- a/Source/JavaScriptCore/llint/LLIntThunks.cpp
--+++ b/Source/JavaScriptCore/llint/LLIntThunks.cpp
--@@ -227,7 +227,7 @@ ALWAYS_INLINE void* untaggedPtr(void* pt
-- #if COMPILER(MSVC)
--         return CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).untaggedPtr();
-- #else
---        return CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).template untaggedPtr();
--+        return CodePtr<CFunctionPtrTag>::fromTaggedPtr(ptr).template untaggedPtr<>();
-- #endif
-- }
-- 
----- a/Source/JavaScriptCore/parser/Nodes.h
--+++ b/Source/JavaScriptCore/parser/Nodes.h
--@@ -1,7 +1,7 @@
-- /*
--  *  Copyright (C) 1999-2000 Harri Porten (porten@kde.org)
--  *  Copyright (C) 2001 Peter Kelly (pmk@post.com)
--- *  Copyright (C) 2003-2019 Apple Inc. All rights reserved.
--+ *  Copyright (C) 2003-2024 Apple Inc. All rights reserved.
--  *  Copyright (C) 2007 Cameron Zwarich (cwzwarich@uwaterloo.ca)
--  *  Copyright (C) 2007 Maks Orlovich
--  *  Copyright (C) 2007 Eric Seidel <eric@webkit.org>
--@@ -29,6 +29,7 @@
-- #include "ImplementationVisibility.h"
-- #include "JITCode.h"
-- #include "Label.h"
--+#include "ModuleScopeData.h"
-- #include "ParserArena.h"
-- #include "ParserModes.h"
-- #include "ParserTokens.h"
--@@ -49,7 +50,6 @@ namespace JSC {
--     class FunctionMetadataNode;
--     class FunctionParameters;
--     class ModuleAnalyzer;
---    class ModuleScopeData;
--     class PropertyListNode;
--     class ReadModifyResolveNode;
--     class RegisterID;
----- a/Source/JavaScriptCore/runtime/JSCast.h
--+++ b/Source/JavaScriptCore/runtime/JSCast.h
--@@ -236,7 +236,7 @@ template<typename Target, typename From>
-- bool inherits(From* from)
-- {
--     using Dispatcher = InheritsTraits<Target>;
---    return Dispatcher::template inherits(from);
--+    return Dispatcher::template inherits<>(from);
-- }
-- 
-- } // namespace JSCastingHelpers
--@@ -245,7 +245,7 @@ template<typename To, typename From>
-- To jsDynamicCast(From* from)
-- {
--     using Dispatcher = JSCastingHelpers::InheritsTraits<typename std::remove_cv<typename std::remove_pointer<To>::type>::type>;
---    if (LIKELY(Dispatcher::template inherits(from)))
--+    if (LIKELY(Dispatcher::template inherits<>(from)))
--         return static_cast<To>(from);
--     return nullptr;
-- }
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-LowLevelInterpreter.cpp-339-21-error-t6-was-not-decl.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-LowLevelInterpreter.cpp-339-21-error-t6-was-not-decl.patch
-deleted file mode 100644
-index e6a43c2fff..0000000000
---- a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-LowLevelInterpreter.cpp-339-21-error-t6-was-not-decl.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From fb81a5de7798eb7f68e0de1c281671553e1aa19d Mon Sep 17 00:00:00 2001
--From: Michael Catanzaro <mcatanzaro@redhat.com>
--Date: Mon, 5 Feb 2024 11:00:49 -0600
--Subject: [PATCH] =?UTF-8?q?LowLevelInterpreter.cpp:339:21:=20error:=20?=
-- =?UTF-8?q?=E2=80=98t6=E2=80=99=20was=20not=20declared=20in=20this=20scope?=
-- =?UTF-8?q?=20https://bugs.webkit.org/show=5Fbug.cgi=3Fid=3D268739?=
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--Unreviewed build fix. Seems a backport went badly, and we didn't notice
--because the code is architecture-specific.
--
--* Source/JavaScriptCore/llint/LowLevelInterpreter.cpp:
--(JSC::CLoop::execute):
--
--Upstream-Status: Backport [https://github.com/WebKit/WebKit/commit/3d5373575695b293b8559155431d0079a6153aff]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- Source/JavaScriptCore/llint/LowLevelInterpreter.cpp | 2 --
-- 1 file changed, 2 deletions(-)
--
--diff --git a/Source/JavaScriptCore/llint/LowLevelInterpreter.cpp b/Source/JavaScriptCore/llint/LowLevelInterpreter.cpp
--index 75cecbbd..b1020ea4 100644
----- a/Source/JavaScriptCore/llint/LowLevelInterpreter.cpp
--+++ b/Source/JavaScriptCore/llint/LowLevelInterpreter.cpp
--@@ -336,8 +336,6 @@ JSValue CLoop::execute(OpcodeID entryOpcodeID, void* executableAddress, VM* vm,
--     UNUSED_VARIABLE(t2);
--     UNUSED_VARIABLE(t3);
--     UNUSED_VARIABLE(t5);
---    UNUSED_VARIABLE(t6);
---    UNUSED_VARIABLE(t7);
-- 
--     struct StackPointerScope {
--         StackPointerScope(CLoopStack& stack)
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Support-ICU-76.1-build.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Support-ICU-76.1-build.patch
-deleted file mode 100644
-index 31535e7ae2..0000000000
---- a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Support-ICU-76.1-build.patch
-+++ /dev/null
-@@ -1,36 +0,0 @@
--From 57b80aa00be614218552fda67b2bf8d535b4f4cf Mon Sep 17 00:00:00 2001
--From: Jason Schonberg <schonm@gmail.com>
--Date: Wed, 20 Nov 2024 11:05:52 -0500
--Subject: [PATCH]  Support ICU 76.1 build
--
--https://bugs.webkit.org/show_bug.cgi?id=282120
--
--Reviewed by Yusuke Suzuki.
--
--In ICU 76.1 an additional macro `U_SHOW_CPLUSPLUS_HEADER_API` was added to
--control visibility of the C++ API within ICU. Set this value to `0` since WebKit
--wants to only use the C API.
--
--* Source/WTF/wtf/Platform.h:
--
--Canonical link: https://commits.webkit.org/285727@main
--
--Upstream-Status: Backport [ from webkitgtk-2.47.1 https://github.com/WebKit/WebKit/commit/63f7badbada070ebaadd318b2801818ecf7e7ea0 ]
--
--Signed-off-by: Jason Schonberg <schonm@gmail.com>
-----
-- Source/WTF/wtf/Platform.h | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/Source/WTF/wtf/Platform.h b/Source/WTF/wtf/Platform.h
--index 23070df2..51a8dce9 100644
----- a/Source/WTF/wtf/Platform.h
--+++ b/Source/WTF/wtf/Platform.h
--@@ -115,6 +115,7 @@
-- /* ICU configuration. Some of these match ICU defaults on some platforms, but we would like them consistently set everywhere we build WebKit. */
-- #define U_HIDE_DEPRECATED_API 1
-- #define U_SHOW_CPLUSPLUS_API 0
--+#define U_SHOW_CPLUSPLUS_HEADER_API 0
-- #ifdef __cplusplus
-- #define UCHAR_TYPE char16_t
-- #endif
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/30e1d5e22213fdaca2a29ec3400c927d710a37a8.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/30e1d5e22213fdaca2a29ec3400c927d710a37a8.patch
-deleted file mode 100644
-index b2e40a88c8..0000000000
---- a/meta-oe/recipes-support/webkitgtk/webkitgtk3/30e1d5e22213fdaca2a29ec3400c927d710a37a8.patch
-+++ /dev/null
-@@ -1,65 +0,0 @@
--From 1523e00a2a76e285262c8aa3721b5d99f3f2d612 Mon Sep 17 00:00:00 2001
--From: Thomas Devoogdt <thomas.devoogdt@barco.com>
--Date: Mon, 16 Jan 2023 17:03:30 +0100
--Subject: [PATCH] REGRESSION(257865@main): B3Validate.cpp: fix
--
-- !ENABLE(WEBASSEMBLY_B3JIT)
--
--https://bugs.webkit.org/show_bug.cgi?id=250681
--
--Reviewed by NOBODY (OOPS!).
--
--WasmTypeDefinition.h isn't included if not ENABLE(WEBASSEMBLY_B3JIT).
--Also, toB3Type and simdScalarType are not defined if it is included.
--
--Signed-off-by: Thomas Devoogdt <thomas.devoogdt@barco.com>
--
--Upstream-Status: Inappropriate [https://bugs.launchpad.net/ubuntu/+source/webkit2gtk/+bug/2008798]
-----
-- Source/JavaScriptCore/b3/B3Validate.cpp | 12 +++++++++---
-- 1 file changed, 9 insertions(+), 3 deletions(-)
--
--diff --git a/Source/JavaScriptCore/b3/B3Validate.cpp b/Source/JavaScriptCore/b3/B3Validate.cpp
--index eaaa3749..1d089783 100644
----- a/Source/JavaScriptCore/b3/B3Validate.cpp
--+++ b/Source/JavaScriptCore/b3/B3Validate.cpp
--@@ -47,6 +47,12 @@
-- #include <wtf/StringPrintStream.h>
-- #include <wtf/text/CString.h>
-- 
--+#if ENABLE(WEBASSEMBLY) && ENABLE(WEBASSEMBLY_B3JIT)
--+#define simdScalarTypeToB3Type(type) toB3Type(Wasm::simdScalarType(type))
--+#else
--+#define simdScalarTypeToB3Type(type) B3::Type()
--+#endif
--+
-- namespace JSC { namespace B3 {
-- 
-- namespace {
--@@ -454,7 +460,7 @@ public:
--             case VectorExtractLane:
--                 VALIDATE(!value->kind().hasExtraBits(), ("At ", *value));
--                 VALIDATE(value->numChildren() == 1, ("At ", *value));
---                VALIDATE(value->type() == toB3Type(Wasm::simdScalarType(value->asSIMDValue()->simdLane())), ("At ", *value));
--+                VALIDATE(value->type() == simdScalarTypeToB3Type(value->asSIMDValue()->simdLane()), ("At ", *value));
--                 VALIDATE(value->child(0)->type() == V128, ("At ", *value));
--                 break;
--             case VectorReplaceLane:
--@@ -462,7 +468,7 @@ public:
--                 VALIDATE(value->numChildren() == 2, ("At ", *value));
--                 VALIDATE(value->type() == V128, ("At ", *value));
--                 VALIDATE(value->child(0)->type() == V128, ("At ", *value));
---                VALIDATE(value->child(1)->type() == toB3Type(Wasm::simdScalarType(value->asSIMDValue()->simdLane())), ("At ", *value));
--+                VALIDATE(value->child(1)->type() == simdScalarTypeToB3Type(value->asSIMDValue()->simdLane()), ("At ", *value));
--                 break;
--             case VectorDupElement:
--                 VALIDATE(!value->kind().hasExtraBits(), ("At ", *value));
--@@ -484,7 +490,7 @@ public:
--                 VALIDATE(!value->kind().hasExtraBits(), ("At ", *value));
--                 VALIDATE(value->numChildren() == 1, ("At ", *value));
--                 VALIDATE(value->type() == V128, ("At ", *value));
---                VALIDATE(value->child(0)->type() == toB3Type(Wasm::simdScalarType(value->asSIMDValue()->simdLane())), ("At ", *value));
--+                VALIDATE(value->child(0)->type() == simdScalarTypeToB3Type(value->asSIMDValue()->simdLane()), ("At ", *value));
--                 break;
-- 
--             case VectorPopcnt:
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/fff1b1773bff2ef7c3b867ab019d69faa36c010d.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/fff1b1773bff2ef7c3b867ab019d69faa36c010d.patch
-deleted file mode 100644
-index 3d76aa4e4d..0000000000
---- a/meta-oe/recipes-support/webkitgtk/webkitgtk3/fff1b1773bff2ef7c3b867ab019d69faa36c010d.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--From fff1b1773bff2ef7c3b867ab019d69faa36c010d Mon Sep 17 00:00:00 2001
--From: Michael Catanzaro <mcatanzaro@redhat.com>
--Date: Wed, 3 Jul 2024 13:36:54 -0700
--Subject: [PATCH] WebKitDOMEventTarget.h:95: Warning: WebKit2WebExtension:
-- invalid "scope" annotation: only valid on callback parameters
-- https://bugs.webkit.org/show_bug.cgi?id=276180
--
--Unreviewed build fix.
--
--Emmanuele recommends using (type gpointer) for the GCallback parameter
--of webkit_dom_event_target_remove_event_listener, since it won't be
--called and is therefore not functioning as a callback.
--
--* Source/WebKit/WebProcess/InjectedBundle/API/gtk/DOM/WebKitDOMEventTarget.h:
--
--Canonical link: https://commits.webkit.org/280639@main
--Upstream-Status: Backport [https://github.com/WebKit/WebKit/commit/fff1b1773bff2ef7c3b867ab019d69faa36c010d]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- .../InjectedBundle/API/gtk/DOM/WebKitDOMEventTarget.h           | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
----- a/Source/WebKit/WebProcess/InjectedBundle/API/gtk/DOM/WebKitDOMEventTarget.h
--+++ b/Source/WebKit/WebProcess/InjectedBundle/API/gtk/DOM/WebKitDOMEventTarget.h
--@@ -92,7 +92,7 @@ WEBKIT_DEPRECATED gboolean  webkit_dom_e
--  * webkit_dom_event_target_remove_event_listener:
--  * @target: A #WebKitDOMEventTarget
--  * @event_name: A #gchar
--- * @handler: (scope call): A #GCallback
--+ * @handler: (type gpointer): A #GCallback
--  * @use_capture: A #gboolean
--  *
--  * Returns: a #gboolean
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/no-musttail-arm.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/no-musttail-arm.patch
-index 37bc6538c3..367e6b8342 100644
---- a/meta-oe/recipes-support/webkitgtk/webkitgtk3/no-musttail-arm.patch
-+++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3/no-musttail-arm.patch
-@@ -1,6 +1,6 @@
--From c50f2277509f2e6f087cda2eaf323eaf569aad8d Mon Sep 17 00:00:00 2001
-+From 4602261fa44d6bbb4c3698c79e08a6a40a6edc5a Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 30 Sep 2023 12:42:06 -0700
-+Date: Fri, 12 Jan 2024 09:21:39 -0800
- Subject: [PATCH] clang/arm: Do not use MUST_TAIL_CALL
- 
- This causes clang-17 to crash see [1]
-@@ -9,22 +9,26 @@ this code is new in webkit 2.42[2] thats why we do not see the crash in older we
- [1] https://github.com/llvm/llvm-project/issues/67767
- [2] https://github.com/WebKit/WebKit/commit/4d816460b765acd8aef90ab474615850b91ecc35
- 
--Upstream-Status: Pending
-+Upstream-Status: Inappropriate [work around to avoid clang compiler crash]
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
++         with open(os.path.join(self.workdir.name, 'run/systemd/system/netplan-wpa-eth0.service')) as f:
++             self.assertEqual(f.read(), SD_WPA % {'iface': 'eth0', 'drivers': 'wired'})
++-            self.assertEqual(stat.S_IMODE(os.fstat(f.fileno()).st_mode), 0o644)
+++            self.assertEqual(stat.S_IMODE(os.fstat(f.fileno()).st_mode), 0o640)
++         self.assertTrue(os.path.islink(os.path.join(
++             self.workdir.name, 'run/systemd/system/systemd-networkd.service.wants/netplan-wpa-eth0.service')))
++ 
++diff --git a/tests/generator/test_wifis.py b/tests/generator/test_wifis.py
++index b875172..610782a 100644
++--- a/tests/generator/test_wifis.py
+++++ b/tests/generator/test_wifis.py
++@@ -140,7 +140,7 @@ network={
++             self.workdir.name, 'run/systemd/system/netplan-wpa-wl0.service')))
++         with open(os.path.join(self.workdir.name, 'run/systemd/system/netplan-wpa-wl0.service')) as f:
++             self.assertEqual(f.read(), SD_WPA % {'iface': 'wl0', 'drivers': 'nl80211,wext'})
++-            self.assertEqual(stat.S_IMODE(os.fstat(f.fileno()).st_mode), 0o644)
+++            self.assertEqual(stat.S_IMODE(os.fstat(f.fileno()).st_mode), 0o640)
++         self.assertTrue(os.path.islink(os.path.join(
++             self.workdir.name, 'run/systemd/system/systemd-networkd.service.wants/netplan-wpa-wl0.service')))
++ 
++diff --git a/tests/integration/base.py b/tests/integration/base.py
++index e9c366c..74f0682 100644
++--- a/tests/integration/base.py
+++++ b/tests/integration/base.py
++@@ -32,6 +32,8 @@ import shutil
++ import gi
++ import glob
++ import json
+++import pwd
+++import grp
++ 
++ # make sure we point to libnetplan properly.
++ os.environ.update({'LD_LIBRARY_PATH': '.:{}'.format(os.environ.get('LD_LIBRARY_PATH'))})
++@@ -367,6 +369,89 @@ class IntegrationTestsBase(unittest.TestCase):
++             if state:
++                 self.wait_output(['ip', 'addr', 'show', iface], state, 30)
++ 
+++        # Assert file permissions
+++        self.assert_file_permissions()
+++
+++    def assert_file_permissions(self):
+++        """ Check if the generated files have the expected permissions """
+++
+++        nd_expected_mode = 0o100640
+++        nd_expected_owner = 'root'
+++        nd_expected_group = 'systemd-network'
+++
+++        sd_expected_mode = 0o100640
+++        sd_expected_owner = 'root'
+++        sd_expected_group = 'root'
+++
+++        udev_expected_mode = 0o100640
+++        udev_expected_owner = 'root'
+++        udev_expected_group = 'root'
+++
+++        nm_expected_mode = 0o100600
+++        nm_expected_owner = 'root'
+++        nm_expected_group = 'root'
+++
+++        wpa_expected_mode = 0o100600
+++        wpa_expected_owner = 'root'
+++        wpa_expected_group = 'root'
+++
+++        # Check systemd-networkd files
+++        base_path = '/run/systemd/network'
+++        files = glob.glob(f'{base_path}/*.network') + glob.glob(f'{base_path}/*.netdev')
+++        for file in files:
+++            res = os.stat(file)
+++            user = pwd.getpwuid(res.st_uid)
+++            group = grp.getgrgid(res.st_gid)
+++            self.assertEqual(res.st_mode, nd_expected_mode, f'file {file}')
+++            self.assertEqual(user.pw_name, nd_expected_owner, f'file {file}')
+++            self.assertEqual(group.gr_name, nd_expected_group, f'file {file}')
+++
+++        # Check Network Manager files
+++        base_path = '/run/NetworkManager/system-connections'
+++        files = glob.glob(f'{base_path}/*.nmconnection')
+++        for file in files:
+++            res = os.stat(file)
+++            user = pwd.getpwuid(res.st_uid)
+++            group = grp.getgrgid(res.st_gid)
+++            self.assertEqual(res.st_mode, nm_expected_mode, f'file {file}')
+++            self.assertEqual(user.pw_name, nm_expected_owner, f'file {file}')
+++            self.assertEqual(group.gr_name, nm_expected_group, f'file {file}')
+++
+++        # Check wpa_supplicant configuration files
+++        base_path = '/run/netplan'
+++        files = glob.glob(f'{base_path}/wpa-*.conf')
+++        for file in files:
+++            res = os.stat(file)
+++            user = pwd.getpwuid(res.st_uid)
+++            group = grp.getgrgid(res.st_gid)
+++            self.assertEqual(res.st_mode, wpa_expected_mode, f'file {file}')
+++            self.assertEqual(user.pw_name, wpa_expected_owner, f'file {file}')
+++            self.assertEqual(group.gr_name, wpa_expected_group, f'file {file}')
+++
+++        # Check systemd service unit files
+++        base_path = '/run/systemd/system/'
+++        files = glob.glob(f'{base_path}/netplan-*.service')
+++        files += glob.glob(f'{base_path}/systemd-networkd-wait-online.service.d/*.conf')
+++        for file in files:
+++            res = os.stat(file)
+++            user = pwd.getpwuid(res.st_uid)
+++            group = grp.getgrgid(res.st_gid)
+++            self.assertEqual(res.st_mode, sd_expected_mode, f'file {file}')
+++            self.assertEqual(user.pw_name, sd_expected_owner, f'file {file}')
+++            self.assertEqual(group.gr_name, sd_expected_group, f'file {file}')
+++
+++        # Check systemd-udevd files
+++        udev_path = '/run/udev/rules.d'
+++        link_path = '/run/systemd/network'
+++        files = glob.glob(f'{udev_path}/*-netplan*.rules') + glob.glob(f'{link_path}/*.link')
+++        for file in files:
+++            res = os.stat(file)
+++            user = pwd.getpwuid(res.st_uid)
+++            group = grp.getgrgid(res.st_gid)
+++            self.assertEqual(res.st_mode, udev_expected_mode, f'file {file}')
+++            self.assertEqual(user.pw_name, udev_expected_owner, f'file {file}')
+++            self.assertEqual(group.gr_name, udev_expected_group, f'file {file}')
+++
++     def state(self, iface, state):
++         '''Tell generate_and_settle() to wait for a specific state'''
++         return iface + '/' + state
++-- 
++2.44.1
 +
-+Update context for webkitgtk 2.48.0.
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
- ---
-  Source/WTF/wtf/Compiler.h | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan_1.0.bb b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan_1.0.bb
+index cf8d6d19e7..752acc23c3 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan_1.0.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan_1.0.bb
+@@ -17,6 +17,7 @@ REQUIRED_DISTRO_FEATURES = "systemd"
+ SRC_URI = "git://github.com/CanonicalLtd/netplan.git;branch=main;protocol=https \
+            file://0001-meson.build-drop-unnecessary-build-dependencies.patch \
+            file://0002-meson.build-do-not-use-Werror.patch \
++           file://CVE-2022-4968.patch \
+           "
  
- diff --git a/Source/WTF/wtf/Compiler.h b/Source/WTF/wtf/Compiler.h
--index 449ca502..daac29d7 100644
-+index 16e416d..68dd9a0 100644
- --- a/Source/WTF/wtf/Compiler.h
- +++ b/Source/WTF/wtf/Compiler.h
--@@ -321,7 +321,7 @@
-- /* MUST_TAIL_CALL */
-- 
-+@@ -293,7 +293,7 @@
-+ #if COMPILER(CLANG)
-+ #if __SIZEOF_POINTER__ == 8
-  #if !defined(MUST_TAIL_CALL) && defined(__cplusplus) && defined(__has_cpp_attribute)
---#if __has_cpp_attribute(clang::musttail)
--+#if __has_cpp_attribute(clang::musttail) && !defined(__arm__)
-+-#if __has_cpp_attribute(clang::musttail) && !defined(__powerpc__) && !defined(_WIN32)
-++#if __has_cpp_attribute(clang::musttail) && !defined(__powerpc__) && !defined(_WIN32) && !defined(__arm__)
-  #define MUST_TAIL_CALL [[clang::musttail]]
-- #endif
-+ #define HAVE_MUST_TAIL_CALL 1
-  #endif
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.44.3.bb b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.0.bb
-similarity index 95%
-rename from meta-oe/recipes-support/webkitgtk/webkitgtk3_2.44.3.bb
-rename to meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.0.bb
-index 07fa0d06f7..9a4101c4b4 100644
---- a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.44.3.bb
-+++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.0.bb
-@@ -17,13 +17,10 @@ SRC_URI = "https://www.webkitgtk.org/releases/webkitgtk-${PV}.tar.xz \
-            file://0001-FindGObjectIntrospection.cmake-prefix-variables-obta.patch \
-            file://reproducibility.patch \
-            file://no-musttail-arm.patch \
--           file://0001-LowLevelInterpreter.cpp-339-21-error-t6-was-not-decl.patch \
--           file://30e1d5e22213fdaca2a29ec3400c927d710a37a8.patch \
--           file://0001-Fix-build-issues-with-latest-Clang.patch \
--           file://fff1b1773bff2ef7c3b867ab019d69faa36c010d.patch \
--           file://0001-Support-ICU-76.1-build.patch \
-+           file://0001-Cherry-pick-292304-main-7ffc29624258-.-https-bugs.we.patch \
-+           file://0001-EnumTraits.h-error-no-matching-function-for-call-to-.patch \
-            "
--SRC_URI[sha256sum] = "dc82d042ecaca981a4852357c06e5235743319cf10a94cd36ad41b97883a0b54"
-+SRC_URI[sha256sum] = "94904a55cf12d44a4e36ceadafff02d46da73d76be9b4769f34cbfdf0eebf88e"
- 
- inherit cmake pkgconfig gobject-introspection perlnative features_check upstream-version-is-even gi-docgen
- 
-@@ -92,6 +89,8 @@ PACKAGECONFIG[gamepad] = "-DENABLE_GAMEPAD=ON,-DENABLE_GAMEPAD=OFF,libmanette"
- PACKAGECONFIG[webrtc] = "-DENABLE_WEB_RTC=ON,-DENABLE_WEB_RTC=OFF"
- PACKAGECONFIG[bubblewrap] = "-DENABLE_BUBBLEWRAP_SANDBOX=ON -DBWRAP_EXECUTABLE=${bindir}/bwrap -DDBUS_PROXY_EXECUTABLE=${bindir}/xdg-dbus-proxy,-DENABLE_BUBBLEWRAP_SANDBOX=OFF,,bubblewrap xdg-dbus-proxy"
- PACKAGECONFIG[backtrace] = "-DUSE_LIBBACKTRACE=ON,-DUSE_LIBBACKTRACE=OFF,libbacktrace"
-+PACKAGECONFIG[sysprof-capture] = "-DUSE_SYSTEM_SYSPROF_CAPTURE=YES,-DUSE_SYSTEM_SYSPROF_CAPTURE=NO,sysprof"
-+PACKAGECONFIG[speech] = "-DENABLE_SPEECH_SYNTHESIS=ON,-DENABLE_SPEECH_SYNTHESIS=OFF,flite"
- 
- EXTRA_OECMAKE = " \
- 	-DPORT=GTK \
+ SRC_URI:append:libc-musl = " file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch"
+-- 
+2.34.1
+
 
