@@ -2,25 +2,25 @@ Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4AE7DC36002
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F5AFC35FFC
 	for <webhook@archiver.kernel.org>; Wed, 19 Mar 2025 17:41:58 +0000 (UTC)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web11.1077.1742406117011711341
+ by mx.groups.io with SMTP id smtpd.web10.1065.1742406116430692697
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Mar 2025 10:41:57 -0700
+ Wed, 19 Mar 2025 10:41:56 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BEE3C113E
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1ADED113E
 	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 10:42:04 -0700 (PDT)
 Received: from cesw-amp-gbt-1s-m12830-04.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 496EF3F673
-	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 10:41:56 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 994233F673
+	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 10:41:55 -0700 (PDT)
 From: Ross Burton <ross.burton@arm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH v2 04/12] mce-inject: don't inherit autotools
-Date: Wed, 19 Mar 2025 17:41:44 +0000
-Message-ID: <20250319174152.706861-4-ross.burton@arm.com>
+Subject: [PATCH v2 03/12] gradm: don't inherit autotools
+Date: Wed, 19 Mar 2025 17:41:43 +0000
+Message-ID: <20250319174152.706861-3-ross.burton@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250319174152.706861-1-ross.burton@arm.com>
 References: <20250319174152.706861-1-ross.burton@arm.com>
@@ -30,32 +30,30 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 17:41:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116089
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116088
 
-This upstream does not in fact use autotools, so remove the inherit and
-implement the required do_install.
+This upstream does not in fact use autotools.
 
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- meta-oe/recipes-support/mcelog/mce-inject_git.bb | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/gradm/gradm_3.1-202111052217.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/mcelog/mce-inject_git.bb b/meta-oe/r=
-ecipes-support/mcelog/mce-inject_git.bb
-index 8fc8e2b5e5..6c1255772d 100644
---- a/meta-oe/recipes-support/mcelog/mce-inject_git.bb
-+++ b/meta-oe/recipes-support/mcelog/mce-inject_git.bb
-@@ -19,6 +19,8 @@ S =3D "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-support/gradm/gradm_3.1-202111052217.bb b/me=
+ta-oe/recipes-support/gradm/gradm_3.1-202111052217.bb
+index 6238a04d96..89119389fd 100644
+--- a/meta-oe/recipes-support/gradm/gradm_3.1-202111052217.bb
++++ b/meta-oe/recipes-support/gradm/gradm_3.1-202111052217.bb
+@@ -22,8 +22,6 @@ UPSTREAM_CHECK_URI =3D "https://grsecurity.net/download=
+"
 =20
- COMPATIBLE_HOST =3D '(x86_64.*|i.86.*)-linux'
+ S =3D "${WORKDIR}/gradm"
 =20
 -inherit autotools-brokensep
-+EXTRA_OEMAKE =3D "CFLAGS=3D'${CFLAGS}'"
-=20
--EXTRA_OEMAKE =3D "destdir=3D${D} CFLAGS=3D'${CFLAGS}'"
-+do_install() {
-+    oe_runmake 'destdir=3D${D}' install
-+}
+-
+ do_compile() {
+     oe_runmake 'CC=3D${CC}'                               \
+                'LIBS=3D'                                  \
 --=20
 2.43.0
 
