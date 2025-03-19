@@ -2,85 +2,88 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F4CDC36000
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B759C35FFA
 	for <webhook@archiver.kernel.org>; Wed, 19 Mar 2025 21:04:30 +0000 (UTC)
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web10.6236.1742418267135826136
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web11.6372.1742418264171836615
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Mar 2025 14:04:27 -0700
+ Wed, 19 Mar 2025 14:04:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Iu13DT4/;
- spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-2239c066347so188915ad.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 14:04:27 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kM3Yk0JH;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-223a7065ff8so580185ad.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 14:04:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1742418266; x=1743023066; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=A4P0LCS0QEamxmVNpzN7oL40jVjTjL2GTbH2j11tcno=;
-        b=Iu13DT4/Rr+u45bKFxh/eYJgn9govsq58UG4m2pfwoUN0sB6gOzfgaFQN/ENgHjWuu
-         rVkQy8ys0dKTbqQJA69czWq1upfx+7QyQ3cVD5DMm3Aiw1zCrAYsuzlxz4nlJtlLzsRF
-         agdit5UH2x45laiuIpfp/9KBuuLSy2HV8Y3JlyVgpPmSiGIcIh7Rr9U2XWt6YVODnADz
-         MleXCdD7G8g1c6PlSsQL3YDAHpdi3pqWjce6PpL0AIdSdZomMI/IT1OBfwLbchGEoGk/
-         cIVgczH2k4oQ/einSdSNFjAPKQ7tIxyYJh91uTbP18BrZ/c5ihjSc9vkrIKpJ2e15npD
-         PBPA==
+        d=gmail.com; s=20230601; t=1742418263; x=1743023063; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=NKfNpV0K3m96Y6V0UMULMmQYWmAk8qZrI4fHQamFuWM=;
+        b=kM3Yk0JHRI4l5TKVAlzgjmV1BsxuRE9tjnJqND/R1ZDzD7nSwR+LkC/ZGwv/fLxw1F
+         P4P/Cq0xYBnShXjt7nl7Fjf3/GippBq1/HhP3MgVzwh81VaohfHOnc88FwmoEqxRrU4y
+         7kfwv+nBAUHPeYYbjRnT4f3JhmsL7E0oyQaGgkrCrymqic5S2OqQDWxoPyMRnEZRS00C
+         c+BjvaxYrNa2fnIFQqeUXMF72t2q6e9xZzF2CDJzHr5c9FkgJAQlDAAno4MsBCOspb8Y
+         QbPmKC05UsuLYuUUnvrnvK9ftXh9MwLDUaeXqKyw/P1bgR8Wl+0Qbei8cz+93miMUu78
+         hKpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742418266; x=1743023066;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=A4P0LCS0QEamxmVNpzN7oL40jVjTjL2GTbH2j11tcno=;
-        b=GU3JOJbXn+JzRyqHfE7hsHg1Uw7eo3Ik8xikJzK21abw7hucTznlUZy4ee1wXGw+1a
-         K/vFdrfqgHYWwBYAKjN9sssGZDuooDHwbGJvz0EHbkruC9RPC3wZ/d3ISf2hb7wkpLf2
-         xdRSkYyR7ytkjaruC7yZRe8MuOuVJgUixAlhSkfJ8FCVaHKDDYJwoYsgW5DPORUu23Pr
-         Ps9/Rs/Uu3YaUQKXKtpc/hGIYHj5wXhCH0eIEetEzhaXPb2lc3TVZ8W9m8NVp6LBkSZA
-         6kqibWV/BWXoxAI1wEzbxQG2Y7TgDpZiRK62zIlVCYIf40TETB2mf8WplgqkSjgTieWB
-         rxMQ==
-X-Gm-Message-State: AOJu0YzV1JpujrogaTxuN3O++N/aNrEWVYVcwwJHBFjPOfMVv1onrUj/
-	ymiaAJwln4bRD6VGVv+KWSpKjVKp8YcUxSFGAKg/Dh8USWLYpjU1WlWD5ptm
-X-Gm-Gg: ASbGncuQjq6pjnO7GDuJ2o2VS1hQR6f3OJpONgt2dyXxEFkkJpwno6YqfJlLfvkm3Q5
-	+QVGj7nv3KV0XqZ3S9UhkjdPXE8dZ7VPNdULFJUz7bd14yelsLS97XAHB9yblphgyMwcUgpjBat
-	tFRfQ1Gl6SWU6AuYKDJXAXRUktzLX/rV6BDQNdIgiF+C2vw4+hhhrgb4X1yYAz2UQHy07tKFx+H
-	2NWN8k57p7pkCttlGJFPTN7yG0eogszYd+3XcjAAdPhNOAfRV0IXY1kISR9Z4wh2NQjCZL7X1VI
-	Djhp41ZeeOdnXtK/5BDHr80SCxXTJYawI4fq
-X-Google-Smtp-Source: AGHT+IFnja56w4DKAbZW7nW/h7DSQ5sqA6OSzcDpEU57cjKDHSTBrKHj2fTrg5avuFe442OYAfPVnQ==
-X-Received: by 2002:a17:902:d54a:b0:216:6283:5a8c with SMTP id d9443c01a7336-22649c8ef31mr76403685ad.39.1742418266331;
-        Wed, 19 Mar 2025 14:04:26 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1742418263; x=1743023063;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=NKfNpV0K3m96Y6V0UMULMmQYWmAk8qZrI4fHQamFuWM=;
+        b=mBgQ3YqzX7wW8Q2SOIHwEfpMhl6EZcbk/h8cfFQrNp5yDq9tOfdrsgU/dhY00JleRn
+         OAeBgEiofwqFff3rzw4HPpalzsRq2dxihR9CfR70V02RatwzepDpozI77VqqwyyLBvKp
+         pJJyVhmWCmHBqcKOkSanck+oOTIG8w8PHo+oAXOlDS6/Gz1TkY7GD1JgrlxyGg75VHvh
+         XBQD+mOE5+ZID7RhrKzqaTEv59J3b7yxmX28bWKBsOpazqdzJcNxd5W4Rse7+0uwx4es
+         nuoUfCGTdzXO0nsALhg8dgVQMIOM2bl016w/nPJp+pureUMurqTOJEGekOmw8mwhw6Pz
+         VL8g==
+X-Gm-Message-State: AOJu0YwhSwkv4pLiNHZusnsKpZVehUkilI/LSTxs+BDUALJrQbgF5Rxo
+	Stmo3na9VwIoSbrzF3k3NyuS7g8EvF6Et+r5w/rJo9sVDpEVPg3kFlHLQgiE
+X-Gm-Gg: ASbGncvtPH2dwRZGq92vftJPSlon9FGdbjdKrVrXHtv8juAU2xkN/GNkRNsHL9qKFRf
+	ELNdy8kGHsmczx+lLRFj2P+wh0ZQCFnY8AEnESRo7laS+NSWT3cMV/WkyoJf48zW+BgoGCn3ofk
+	LRRKFTaAu/D3b87QZfuUVyupM0m4D4aZC4nDjFnUklx3ebosm8n7LsXEpXyqyN8LCeiPXguiHNv
+	eBu8uu+7wAQ9xP74P5BYFsT1Jvnha7MMSsGuOdLrSphGL2Yla+og4wFipiyPXhbjYW8Rg3lAnbb
+	Ej8wnHCzoIqd6NK9vilF3DELEuAgtHm7NKy6
+X-Google-Smtp-Source: AGHT+IE4lKKzAmTQgybpL5vV5sae6UKqKt7mGqOHsU4jgQShMOjHSUBv8SI8re99d/GejubTrKsdhg==
+X-Received: by 2002:a17:902:d2cf:b0:224:1ce1:a3f4 with SMTP id d9443c01a7336-2264981ba8cmr61560745ad.1.1742418263233;
+        Wed, 19 Mar 2025 14:04:23 -0700 (PDT)
 Received: from apollo.localdomain ([2601:646:8201:fd20::ac74])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7371152938csm12511767b3a.12.2025.03.19.14.04.25
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7371152938csm12511767b3a.12.2025.03.19.14.04.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Mar 2025 14:04:25 -0700 (PDT)
+        Wed, 19 Mar 2025 14:04:22 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 4/4] pytest-codspeed: Add missing rdeps on statistics and rich modules
-Date: Wed, 19 Mar 2025 14:04:21 -0700
-Message-ID: <20250319210421.2454856-4-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 1/4] openl2tp: Pin to C17 std
+Date: Wed, 19 Mar 2025 14:04:18 -0700
+Message-ID: <20250319210421.2454856-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250319210421.2454856-1-raj.khem@gmail.com>
-References: <20250319210421.2454856-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 21:04:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116113
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116110
+
+Does not compile with C23 with GCC-15 and the last
+release was long time ago.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-devtools/python/python3-pytest-codspeed_3.0.0.bb    | 2 +-
+ meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-codspeed_3.0.0.bb b/meta-python/recipes-devtools/python/python3-pytest-codspeed_3.0.0.bb
-index dd08c0fbfe..0789e9f548 100644
---- a/meta-python/recipes-devtools/python/python3-pytest-codspeed_3.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pytest-codspeed_3.0.0.bb
-@@ -11,4 +11,4 @@ inherit pypi python_hatchling
- PYPI_PACKAGE = "pytest_codspeed"
- UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
+index d66b7d2390..4e5b45891d 100644
+--- a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
++++ b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
+@@ -48,7 +48,7 @@ SYSTEMD_AUTO_ENABLE = "disable"
  
--RDEPENDS:${PN} = "python3-cffi python3-filelock python3-pytest"
-+RDEPENDS:${PN} = "python3-cffi python3-filelock python3-pytest python3-rich python3-statistics"
+ DEPENDS += "libtirpc"
+ CPPFLAGS += "-I${STAGING_INCDIR}/tirpc"
+-CFLAGS += "-I${STAGING_INCDIR}/tirpc"
++CFLAGS += "-I${STAGING_INCDIR}/tirpc -std=gnu17"
+ LDFLAGS += "-ltirpc"
+ 
+ PARALLEL_MAKE = ""
 
