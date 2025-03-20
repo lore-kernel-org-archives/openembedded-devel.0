@@ -1,98 +1,122 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <omri.sarig13@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 476F3C28B30
-	for <webhook@archiver.kernel.org>; Thu, 20 Mar 2025 06:42:16 +0000 (UTC)
-Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
- by mx.groups.io with SMTP id smtpd.web11.1736.1742452934379041547
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ED709C28B30
+	for <webhook@archiver.kernel.org>; Thu, 20 Mar 2025 08:06:06 +0000 (UTC)
+Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com [209.85.208.171])
+ by mx.groups.io with SMTP id smtpd.web10.2517.1742457961267940464
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Mar 2025 23:42:14 -0700
+ Thu, 20 Mar 2025 01:06:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=O1nfeURO;
- spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-6fed0620395so3542047b3.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 23:42:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=apQfxb20;
+ spf=pass (domain: gmail.com, ip: 209.85.208.171, mailfrom: omri.sarig13@gmail.com)
+Received: by mail-lj1-f171.google.com with SMTP id 38308e7fff4ca-30bfc8faef9so5437911fa.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Mar 2025 01:06:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1742452933; x=1743057733; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1742457959; x=1743062759; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=M33IErEz20jIvCrY1HeZivDhb9MDy0ADvgppHKiPyy0=;
-        b=O1nfeUROoiQvqqxC58gNodQl+Q+C94cbiHEYKrQQi1C7GY8BCKVgEtY/g4MfO0Mwio
-         /bWhNZpU8qIw0i7KFeQq7hXEbkIsNvSEHbYHcdyk5NsDOtfpY/HaDj3bc34TZv2GlHfE
-         k9ORJ/7P7guaRA4W4BXaeY2VCIIerCAO/zjtfq5M37e/ylahzUkWDgNzdDARDavfHkxL
-         blTRSmIl6mokAMqfe35/6lVan75hCeJ5zcbTWPFGW7fZRzNOcVKNr5lAZuvDcnW9P3e+
-         1UaiTllxC6m/GyTv+FrZ0ciB36qJI7r6lfFgMRYDEkjqAyR07G99JvIxkovr5AaoQijk
-         XrSw==
+        bh=pIj6nxCuEkc+ZwA61e0ZAcQtfSqy8iLA7A1yEwMasxM=;
+        b=apQfxb20d4qKHtLMThUnLUt4rz8/MCMIPbB4DYUHsTbTwchtS0ItItEtM3Lmq5XeB9
+         OZWZCDgMDZXQoW2XeaUzNR8W0siMrfu5s8h0q+38hWzLUvka9TQ/56BRMsHaOfqDKQ/9
+         KmIqoI3bKMVv4lgbTt7SMcj4p3dNEPGY22sEHDbEkftU0uvmtNll4UOUFVB1XeEZaKlh
+         MMDwyDtuyoI+TSxFgeZ93iajCsu0bkWGmPsAcSWdEuA7q2ZobsWWcolYkIWEX0JEGvRV
+         FBWRx+ALyOLwH4kzSBgGE9x2fuQkJloAoeOL8f4ROyv/a9FOKRgXxeCFHZD3n+yPaxWC
+         HYBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742452933; x=1743057733;
+        d=1e100.net; s=20230601; t=1742457959; x=1743062759;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=M33IErEz20jIvCrY1HeZivDhb9MDy0ADvgppHKiPyy0=;
-        b=W7P4+O+gYZ17qNfQaciFT+wGO0C6QWvcqq/Diz9MyZNY1/vG8Pmi8ZAasO2KYtnJ/2
-         mn+ccAZ5DthLSx2e/WykEuKWVqaNXdBm2FbdUMar5C8psX10qzGIlqWB0Ax1rLi3SbAF
-         ENFw81j6jKySTCA4kZl7z3u8eMs1EVG+hEfXiyYuJJHGEd4mfZcXVg4DsnbObek68Lb5
-         4Zwj26MZbrKs6pABiTd23OXLo8z/zc9yf6KppDfXjnOBt/FVrljcxUgFS49A2AFHmx/V
-         PRADFR59lqgeUEVCiCQGCeCVj+odS4GPJvdmgN6dDi0wrKOHoFbTrhvTrTRZYlmPvBqe
-         iPeA==
-X-Gm-Message-State: AOJu0YxBmBIkJwG/Ke+6B0RVcoEH8hxsOj203CGnvbJPcgaE03KNerMv
-	VzZWAybUMRTg7QaFF/RksrJzMY2wSj7p8tR6TWGeIq4GtadxYsNPoR5CV1ak
-X-Gm-Gg: ASbGncsImACOBUtQbTeruYBotGmV8FxXvLju6Y+hDgvnGeic1npJv2z7l7UTCWkLrt6
-	A9Gx9hdnp4ATraLl0aBbzihpQrPv25oeGom/aV7upvALI5NWvmGbkHuXsaOCQ+hkc6yFKUVHZvL
-	o0iCH1Xl5/ZQZoQz7kwBWFFAf5Mlw2fa8lACkxvcfdhnMrPuMimvu/00sGYj6eTjqqp3CabBw/c
-	NcIiI9G+pAS3Ask1MZZA395Wj3ubX9AL7zh5el94RNu17mW22XE4xrkZKT+UUnC6jQ8WrBHwFLJ
-	suDK4+3g+gUDIn5/PCVsbDDViW8yqpAN7re75VTRuO3seQteLw==
-X-Google-Smtp-Source: AGHT+IETIzsRLOScq83PUKSyGqFXFG5wic271nkcdCfcXmYVPayISC7/ICyoj5BT5oG+RET04tr5YA==
-X-Received: by 2002:a05:690c:380b:b0:6fd:a226:fb74 with SMTP id 00721157ae682-700ac58c2aemr24308187b3.4.1742452932873;
-        Wed, 19 Mar 2025 23:42:12 -0700 (PDT)
-Received: from localhost.localdomain ([71.215.9.36])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6ff3288bd3csm33678237b3.51.2025.03.19.23.42.11
+        bh=pIj6nxCuEkc+ZwA61e0ZAcQtfSqy8iLA7A1yEwMasxM=;
+        b=acEyMWr17/P9KQocIIlMUwox5XOL/VqQ9a0HY2Ruj00zXfgYqKbwAucua+w35Nhj19
+         6WvXfqxuuSh+4YmsAunlKHLn2bxay7tGdm2vLhI3L26g0Z2uChbc49ZwLEvVFzS6oOXE
+         jmKAKz0HWz92UZi1F2wj6Bp/CDu/i/VS9ZUo6O0oFQlAdXxwGSsIQiQAP+nfsd39AFlF
+         280f+cxRdOb3okOvDT7MN1XsTgDZVT1giVUijKtxG/ZojZCBcHJB0QS0e3H73YhekCKD
+         SWoCst8BWWLk5s56aY9Fbh6Q+gGnPUBKnSNnPMtZR1Lu9JoCL8k2zu4M1K7ZV5mGqA01
+         bbww==
+X-Gm-Message-State: AOJu0YxnHBuSOY5SWUudT4yWUzLMuJCwY8+nIkLnQMj3z2ey4isxEiSA
+	NrWNAEZkUvuRIfCFqSdGbRyS+JkOQpLWaOZxJqC+eMy4C39JZj9NgjPVWkzO
+X-Gm-Gg: ASbGncsqhjfuft9T3uEu8G4/8SK5S13zowWPSX4ovHXNqu/uVcXsdB8179edRuNLXgc
+	U5Q7qLxCGyfvkc3CHdGmJ8bb7DBpQQbuF8aUAmmk1O4wt96/e9swozFEOmGtAgswoZyXeIkzMS8
+	5GyqabYYFqfdIYr1ZWTr5Sd+bZHCPFORMHTaq97p3vfTnpuzHPugGHJKAIc69rOgoJPetC9wLVV
+	+LO7T3yhqvUlDba1XNmX/LKy4k6y2TuEyoOPx7W3MtIfmCWx8i8FUUXlrEGKEDvxVbZqPafI3WI
+	1w4ciKlYf7oU8naJgc5saPHmopBYhgSCnlyHCZcUvpsES8UJTNDjva0qLb72gB9xakeMkPDJKKd
+	3B1noBv8rxaKGUCm0NBNvDQFN1NE=
+X-Google-Smtp-Source: AGHT+IE2wvfObtDkvhtLXwOocc/2iD+A12BYsZ28y4LKxCqiijlal2dA6Q/2MOJ3rkrohEpq5GtR0g==
+X-Received: by 2002:a2e:6817:0:b0:30b:bf4e:f6fa with SMTP id 38308e7fff4ca-30d6a3e9b1dmr22293811fa.17.1742457958535;
+        Thu, 20 Mar 2025 01:05:58 -0700 (PDT)
+Received: from omsa-HP-EliteBook-840-14-inch-G9-Notebook-PC.prevas.se ([81.216.59.226])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-30c3f1c218csm25797651fa.84.2025.03.20.01.05.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Mar 2025 23:42:12 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+        Thu, 20 Mar 2025 01:05:58 -0700 (PDT)
+From: Omri Sarig <omri.sarig13@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-webserver][PATCH] hiawatha: upgrade 11.0 -> 11.1
-Date: Thu, 20 Mar 2025 02:41:46 -0400
-Message-ID: <20250320064146.3894-1-schonm@gmail.com>
+Cc: Omri Sarig <omri.sarig13@gmail.com>
+Subject: [meta-python][PATCH] python3-varlink: Add recipe
+Date: Thu, 20 Mar 2025 09:04:51 +0100
+Message-ID: <20250320080451.1063409-1-omri.sarig13@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 20 Mar 2025 06:42:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116120
+ <openembedded-devel@lists.openembedded.org>; Thu, 20 Mar 2025 08:06:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116121
 
-    Changelog: https://hiawatha.leisink.net/changelog
+Add a python recipe to install the python implementation for the varlink
+interface.
 
-      mbed TLS updated to 3.1.0.
-      Small bugfixes.
+The recipe is using the current master head, instead of the version from
+pypi. This is done as the pypi version is 4 years old, while the master
+is continuously maintained in GitHub.
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+The runtime dependencies were created by looking at all the import
+statement in the installed files of the repository and looking at the
+relevant packages from the python3 manifest file in meta-poky.
+
+The repository contains a test directory, however, these tests are not
+fully automated, and can be used as an example for running the package
+on target. Therefore, the package is not added to the ptest system.
+
+Signed-off-by: Omri Sarig <omri.sarig13@gmail.com>
 ---
- .../hiawatha/{hiawatha_11.0.bb => hiawatha_11.1.bb}             | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-httpd/hiawatha/{hiawatha_11.0.bb => hiawatha_11.1.bb} (97%)
+ .../python/python3-varlink_git.bb             | 26 +++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-varlink_git.bb
 
-diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_11.0.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_11.1.bb
-similarity index 97%
-rename from meta-webserver/recipes-httpd/hiawatha/hiawatha_11.0.bb
-rename to meta-webserver/recipes-httpd/hiawatha/hiawatha_11.1.bb
-index 51177185fa..b016d19ea6 100644
---- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_11.0.bb
-+++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_11.1.bb
-@@ -10,7 +10,7 @@ SRC_URI = "https://hiawatha.leisink.net/files/hiawatha-${PV}.tar.gz \
-            file://hiawatha-init \
-            file://hiawatha.service "
- 
--SRC_URI[sha256sum] = "d6fffbe6938951b62f9e02b5382a810fdb83b1e1328f5333c1c733342a890b4b"
-+SRC_URI[sha256sum] = "802d1cedcb9612fa1abba650fac7224b33e7410a17e0045c66a75413c9195e64"
- 
- INITSCRIPT_NAME = "hiawatha"
- INITSCRIPT_PARAMS = "defaults 70"
--- 
-2.43.0
-
+diff --git a/meta-python/recipes-devtools/python/python3-varlink_git.bb b/meta-python/recipes-devtools/python/python3-varlink_git.bb
+new file mode 100644
+index 0000000000..d3c89527ea
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-varlink_git.bb
+@@ -0,0 +1,26 @@
++SUMMARY = " Python implementation of the Varlink protocol"
++HOMEPAGE = "https://varlink.org/python/"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e3fc50a88d0a364313df4b21ef20c29e"
++
++SRC_URI = "git://github.com/varlink/python.git;protocol=https;branch=master"
++
++SRCREV = "6012b8805bf2ebcc981c84bd56a3e949a2141c16"
++
++S = "${WORKDIR}/git"
++
++inherit python_setuptools_build_meta
++
++DEPENDS += "python3-setuptools-scm-native"
++
++RDEPENDS:${PN} += " \
++    python3-core \
++    python3-datetime \
++    python3-io \
++    python3-json \
++    python3-netclient \
++    python3-netserver \
++    python3-shell \
++    python3-stringold \
++    python3-unittest \
++"
 
