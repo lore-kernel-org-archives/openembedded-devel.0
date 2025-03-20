@@ -1,148 +1,85 @@
-Return-Path: <omri.sarig13@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 33600C28B30
-	for <webhook@archiver.kernel.org>; Thu, 20 Mar 2025 08:30:27 +0000 (UTC)
-Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
- by mx.groups.io with SMTP id smtpd.web10.2707.1742459420314896684
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D35AC28B30
+	for <webhook@archiver.kernel.org>; Thu, 20 Mar 2025 08:57:57 +0000 (UTC)
+Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
+ by mx.groups.io with SMTP id smtpd.web10.2933.1742461074467816481
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Mar 2025 01:30:20 -0700
+ Thu, 20 Mar 2025 01:57:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mdruQXj0;
- spf=pass (domain: gmail.com, ip: 209.85.167.43, mailfrom: omri.sarig13@gmail.com)
-Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-54993c68ba0so615368e87.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Mar 2025 01:30:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1742459418; x=1743064218; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=huusUCdNBdFTYBGF4vZPooKzrjuqchOABQeZlolDB44=;
-        b=mdruQXj0PPSMIKM7RWJVV4/VK/QePKZw+6G+AdLn5GFRLS++pTH4sF7GipX1+abdoV
-         r5F+KTHMorqK5zf3rbnFMP0MzhhgNteO+mVhGdYvu3Z5QhoNV+iI5o0OjQXDWX19ErEg
-         QZu0BxNPgrCLFXK7Y7775n5Z2OJMWnH+Zk2J0Z37kVNPAMvLhLJjQkWSKa9NJzGT8qyT
-         6M5uZl1aboIMzrEKmrmizigTUzI+Oij5UIE9XIwPyQPQFHyD95YcyHx1bd5OZPqEUSUw
-         ZC6XrYlYvJhoKv4/WlTZjrDJFutjvLZKWlYX5bWrhGdHAtknwCnY7EjgqSwXPoxRGKIo
-         iKvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742459418; x=1743064218;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=huusUCdNBdFTYBGF4vZPooKzrjuqchOABQeZlolDB44=;
-        b=wJhW+RTPFg1QPIrTVxkiSEbxWNFfNcZMfBE3mlRhPmlCNTW8dMY6ctUq+S2QLp4BzQ
-         6aI61TU4c7nPly2irTQEFTbSGuzUA1SjlrFAkFjkkk5x/G+gZGpmApEzVb9o4qPVUOlU
-         o5SHuELGKqDsdl8bOsKGWrNC+gDb+aPWcXhbm1nV8rU3/o/kRtfsQ5GQGR+vVCbVk98U
-         8KE6Sltmb11ofICNSHFxHKsubkOPPp15p8CmJyTrbPURh0DwIiErO+tOJK82uLFFjnds
-         ZeJAVo9xMtjr9DidOxN6uCoHXlJ0zwk1Y3R8Np5UHvweuvy2pGfMv3lknL4wviknumyD
-         VlLw==
-X-Gm-Message-State: AOJu0YwU/GZLoHPemFA7z8SruolH1twyvXNmJI0yAzqsVzoUaZTfDh5F
-	hhAwCcAtLmAFouqFFpV3lZts25n2J+Hfpopjt59PMJa/BeyU301g
-X-Gm-Gg: ASbGncvLfPTcakv7L028zqG6KkXC8c96oS4kFYn6bRsXtfAz07tDVvO0ae0dYhXxJ9a
-	zRtk80JIa7HP2Shfadnm6Pu4NxaE3eGsjhuUw0SOG7ftQAzyIonz1Mwbd1QT10CLsTSSnpXLpdF
-	B3B+3ltSxzJMu+NcyUi/2FmmanB85uyo5TG7mSkRjF0pL8JEc27xr8o3hZWFAn/uvUsuLWXyuNg
-	GDfXxc1LZJS04vEFAXF5O+bbMXrD2RadKYmNa6pJmkp+sWlFKtJgTsLXyPqBg8IBrPUZrlD8Ros
-	sBijMVlv5/0C+AkjtJ6wS/LM9eq6vFrsAPrlNRl8OVarA8BsPw==
-X-Google-Smtp-Source: AGHT+IExjxa1t2wtXhtv94Ey3L/q2r0xkSYPGchKCjx8ky7u2VGyuglEfACOYY3DJ1oRWaGBxmTHsQ==
-X-Received: by 2002:a05:6512:1107:b0:545:9e1:e824 with SMTP id 2adb3069b0e04-54acb224216mr2294410e87.48.1742459418058;
-        Thu, 20 Mar 2025 01:30:18 -0700 (PDT)
-Received: from [172.16.6.176] ([81.216.59.226])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-549cbc2848bsm1524555e87.40.2025.03.20.01.30.17
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 20 Mar 2025 01:30:17 -0700 (PDT)
-Message-ID: <41a4b81a-5381-456a-9ef2-d507f1e1e928@gmail.com>
-Date: Thu, 20 Mar 2025 09:29:19 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-python][PATCH] python3-varlink: Add recipe
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <20250320080451.1063409-1-omri.sarig13@gmail.com>
- <CAMKF1sqej34GVnCnEM0SUcd8Z90nE_npxetmWATPXKWgA+xj4A@mail.gmail.com>
-Content-Language: en-US
-From: Omri Sarig <omri.sarig13@gmail.com>
-In-Reply-To: <CAMKF1sqej34GVnCnEM0SUcd8Z90nE_npxetmWATPXKWgA+xj4A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=U1CzTaFx;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1742461075; x=1773997075;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references;
+  bh=RGekqRCYWb+xmhrIslfSOT8XQG0QyQ3l4zWW90O9L40=;
+  b=U1CzTaFxk/MAKCcxKbPdUgukUR9qD3iDiXoJjdLRN1Lou9/jUfekLeLC
+   EmlL/mJSMFtqDSr4wc8jIrDM9VVPPZDm3T3HTc91KSVra/EO4oU5Ds4BB
+   91zL9lpreXmJSoRZtvZYR14+X91HEevWw5Qy482dRjXtfvpELKoBF+TfB
+   7KLxAMvBqrQ5QLc0PXqRGqj74sOyzwFHPLk3Fpwx3+iC22woRCd8hPJDg
+   +dF5oyTVa2NoI52gcjDhpoDa0nvcC3ExaT2atACdSIcBmkvo8G5gkkkuF
+   RFRB9+6JGbWgfdSWYqex6VwPf3NUr7vjVSLYkTbkx98cZl87761NCAq6H
+   Q==;
+X-CSE-ConnectionGUID: 2xuNd+2cQEu/ux6bDkP7BA==
+X-CSE-MsgGUID: nQKZJ/KJSqOc4jXZBdCXAA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11378"; a="193976762"
+X-IronPort-AV: E=Sophos;i="6.14,261,1736780400"; 
+   d="scan'208";a="193976762"
+Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
+  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Mar 2025 17:57:54 +0900
+Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
+	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 5AFB8D4C2B
+	for <openembedded-devel@lists.openembedded.org>; Thu, 20 Mar 2025 17:57:52 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 16635D4F60
+	for <openembedded-devel@lists.openembedded.org>; Thu, 20 Mar 2025 17:57:52 +0900 (JST)
+Received: from localhost.localdomain.localdomain (unknown [10.193.128.200])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 991701A00A0;
+	Thu, 20 Mar 2025 16:57:51 +0800 (CST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 4/5] fsverity-utils: upgrade 1.5 -> 1.6
+Date: Thu, 20 Mar 2025 16:57:42 +0800
+Message-Id: <1742461063-20828-4-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1742461063-20828-1-git-send-email-wangmy@fujitsu.com>
+References: <1742461063-20828-1-git-send-email-wangmy@fujitsu.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 20 Mar 2025 08:30:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116123
+ <openembedded-devel@lists.openembedded.org>; Thu, 20 Mar 2025 08:57:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116126
 
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-On 3/20/25 09:09, Khem Raj wrote:
-> does this package have unittests ? if so can we add ptest support as
-> well while here ?
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ .../{fsverity-utils_1.5.bb => fsverity-utils_1.6.bb}            | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-crypto/fsverity-utils/{fsverity-utils_1.5.bb => fsverity-utils_1.6.bb} (95%)
 
-I originally didn't see it, but I've looked at the examples again and 
-they also have a way to run them as unittests. I'll add it and re-submit 
-a patch.
+diff --git a/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.5.bb b/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.6.bb
+similarity index 95%
+rename from meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.5.bb
+rename to meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.6.bb
+index 49f83a67c3..b8ffa45947 100644
+--- a/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.5.bb
++++ b/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.6.bb
+@@ -9,7 +9,7 @@ SECTION = "console"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=bc974d217b525ea216a336adb73e1220"
+ 
+-SRCREV = "20e87c13075a8e5660a8d69fd6c93d4f7c5f01a5"
++SRCREV = "2543e6e5037c0b1b448282c2793f8a6ce8b12d71"
+ SRC_URI = "git://git.kernel.org/pub/scm/fs/fsverity/fsverity-utils.git;branch=master"
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.43.0
 
->
-> On Thu, Mar 20, 2025 at 1:06 AM Omri Sarig via lists.openembedded.org
-> <omri.sarig13=gmail.com@lists.openembedded.org> wrote:
->> Add a python recipe to install the python implementation for the varlink
->> interface.
->>
->> The recipe is using the current master head, instead of the version from
->> pypi. This is done as the pypi version is 4 years old, while the master
->> is continuously maintained in GitHub.
->>
->> The runtime dependencies were created by looking at all the import
->> statement in the installed files of the repository and looking at the
->> relevant packages from the python3 manifest file in meta-poky.
->>
->> The repository contains a test directory, however, these tests are not
->> fully automated, and can be used as an example for running the package
->> on target. Therefore, the package is not added to the ptest system.
->>
->> Signed-off-by: Omri Sarig <omri.sarig13@gmail.com>
->> ---
->>   .../python/python3-varlink_git.bb             | 26 +++++++++++++++++++
->>   1 file changed, 26 insertions(+)
->>   create mode 100644 meta-python/recipes-devtools/python/python3-varlink_git.bb
->>
->> diff --git a/meta-python/recipes-devtools/python/python3-varlink_git.bb b/meta-python/recipes-devtools/python/python3-varlink_git.bb
->> new file mode 100644
->> index 0000000000..d3c89527ea
->> --- /dev/null
->> +++ b/meta-python/recipes-devtools/python/python3-varlink_git.bb
->> @@ -0,0 +1,26 @@
->> +SUMMARY = " Python implementation of the Varlink protocol"
->> +HOMEPAGE = "https://varlink.org/python/"
->> +LICENSE = "Apache-2.0"
->> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e3fc50a88d0a364313df4b21ef20c29e"
->> +
->> +SRC_URI = "git://github.com/varlink/python.git;protocol=https;branch=master"
->> +
->> +SRCREV = "6012b8805bf2ebcc981c84bd56a3e949a2141c16"
->> +
->> +S = "${WORKDIR}/git"
->> +
->> +inherit python_setuptools_build_meta
->> +
->> +DEPENDS += "python3-setuptools-scm-native"
->> +
->> +RDEPENDS:${PN} += " \
->> +    python3-core \
->> +    python3-datetime \
->> +    python3-io \
->> +    python3-json \
->> +    python3-netclient \
->> +    python3-netserver \
->> +    python3-shell \
->> +    python3-stringold \
->> +    python3-unittest \
->> +"
->>
->> -=-=-=-=-=-=-=-=-=-=-=-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#116121): https://lists.openembedded.org/g/openembedded-devel/message/116121
->> Mute This Topic: https://lists.openembedded.org/mt/111804882/1997914
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
->> -=-=-=-=-=-=-=-=-=-=-=-
->>
 
