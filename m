@@ -1,166 +1,154 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C34B9C35FFF
-	for <webhook@archiver.kernel.org>; Thu, 20 Mar 2025 15:42:29 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.web11.11115.1742485345564071127
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D029C35FFF
+	for <webhook@archiver.kernel.org>; Thu, 20 Mar 2025 18:19:34 +0000 (UTC)
+Received: from mail-oi1-f169.google.com (mail-oi1-f169.google.com [209.85.167.169])
+ by mx.groups.io with SMTP id smtpd.web11.2118.1742494771554607136
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Mar 2025 08:42:25 -0700
+ Thu, 20 Mar 2025 11:19:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linuxfoundation.org header.s=google header.b=E9BSDRr2;
- spf=pass (domain: linuxfoundation.org, ip: 209.85.128.44, mailfrom: richard.purdie@linuxfoundation.org)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-43cf034d4abso10533735e9.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Mar 2025 08:42:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=gBIp49go;
+ spf=pass (domain: gmail.com, ip: 209.85.167.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f169.google.com with SMTP id 5614622812f47-3f7f7b70aebso619686b6e.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Mar 2025 11:19:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linuxfoundation.org; s=google; t=1742485343; x=1743090143; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ksna2hr54cp84vlGnJl11FOuXO88JyhfNK5M3J7Y6f8=;
-        b=E9BSDRr2bMBU2lPC+DCcOTvnZ74bj5Ns6viwOKKW/AHYm1GGoaagk96wCBnVVSaMav
-         pNTaL2RelkWj0hKCFS+deiFmkhYHm1rT/yEas36DjHsglrobv374IV/GPRvcXhNjMbpW
-         0ge+SAdmquAIvFUQMfBU1xZgHVF2kyvmKPSjQ=
+        d=gmail.com; s=20230601; t=1742494771; x=1743099571; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=gHQgfKdbywntB33f7wXhrcuXbqiT2DKo/lGI3H5ihyM=;
+        b=gBIp49goiPyDdOKKj19qlBAi5ReZITlu+MnqCVg2CGBtEp4VqKjlv296JZ+gw37a/a
+         rPUr+20Th+xbQpeJ0RHwomZeZC4+RMnU21ifiAfsl6Firuv9v8SiGPcJQ+mkUhvyZsq+
+         du4Vcm4vyZ7yyOHAZWt3J5jY7vSmaCVyJdgsv5dI/lmKjCTuzFMcCdtLMUvioyGlalEy
+         LnKFFye9MsFc+iWlgrWFpHcQvRgdpXzRkMy5+MkZtbtk5H8vCVHyTKXoG/ruIt+x/bh4
+         NIUEqykQUa3GMHIdPsw6dd6qqDXK2hLPk5kOYALa1J0UyCclRqpRZuMUfFWM0RkysSY0
+         Z6UA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742485343; x=1743090143;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ksna2hr54cp84vlGnJl11FOuXO88JyhfNK5M3J7Y6f8=;
-        b=VHroPSTDn3PtU0NT6dEZ2HQvd5nMidzEn0A01Qikqeo14mlOx8TEdaADkgK4el6udl
-         86JTL3fay+ZQFbV3tDtVMo0LDk0syxs+R42a6NoeMaZjOHgRO1uLrebNRsyuGaY+KoWR
-         SqtdrXaErGNuCmknSubXbc9Y7pSB7WJJWdQyi5zqwxOdae+oHcLLuZ68M8YBW0qDFAKv
-         VC7iHGXQ3Tzh509S+621kXqWCZd0uCjsFUEZyefsLokw8oFMfiY6YLZp1ffPIgVawBFp
-         dQuFkM4cb5+Dp+hHg2cOM186x0dww8QBt+UymZgX00x44gUiaxyf0i1DvYvYgZQ/jhXZ
-         Ca1Q==
-X-Gm-Message-State: AOJu0YxtQ+LLVxMOPhbkOefp5nzOcnNXlRo0KvaagunD7H43TrHqhGTB
-	j2RrWZNqAnCQJuS/rHHVtfWL/Fsh6Cwili2GCjEOIgIs/jzLPgg05iNH5hJ0/oeQTpThMm6SdrJ
-	o
-X-Gm-Gg: ASbGnctuvhVfp3YyGw+HinPgoXJFJjwTCAFot326dQff9KPUSFUUIKXCTCf5sgZpvqq
-	ipArJ/8SuVqfZuUe0Lb94BDbQWroyqexzgaSqQa8MMkzitc6f8P9yaY7zUe6teOIQ7r8hhidKW/
-	kYjtzm+wlxje/HlENYOSlKwfLH/y0FhyNEm+VLHZ39H/PcGkXZFmfI4QEnE1FCO7N3tkx+0bcg+
-	ETkgh18KysK753V+3u0ouYfj6nRWsNBn7w3wJ2zNvsvyZhr9VhuGfbyi6n+/f30W2j+ddrftd0C
-	cbzQt1GIRg99c4Beit5whe4hX3ymHUyel5w2vF3NGFBABBaIGWKzH0CYh9xkrJ0Yd3d0dQRntw=
-	=
-X-Google-Smtp-Source: AGHT+IEfW+NYnyP37i8uJTQoYBa7XzN4ssKuiVgabLjPG9keOz/3TdE9SrvHwHRLqDBizW+2pBz8nA==
-X-Received: by 2002:a05:600c:511f:b0:43c:e305:6d50 with SMTP id 5b1f17b1804b1-43d4ec4666emr10569745e9.24.1742485343121;
-        Thu, 20 Mar 2025 08:42:23 -0700 (PDT)
-Received: from max.int.rpsys.net ([2001:8b0:aba:5f3c:ede9:63ed:996d:ca84])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-395cb318a5fsm24517647f8f.79.2025.03.20.08.42.22
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Mar 2025 08:42:22 -0700 (PDT)
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-openembedded] [PATCH v2] gitpkgver: Update to match bitbake fetcher changes
-Date: Thu, 20 Mar 2025 15:42:21 +0000
-Message-ID: <20250320154221.968139-1-richard.purdie@linuxfoundation.org>
-X-Mailer: git-send-email 2.45.2
+        d=1e100.net; s=20230601; t=1742494771; x=1743099571;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=gHQgfKdbywntB33f7wXhrcuXbqiT2DKo/lGI3H5ihyM=;
+        b=EXG5f22XwrmAVxT/KQ6xJPZHAs2gs2kkJxQNGcYkGok212ukXz8qyJXAdCROyxpozH
+         FDS8MIFpFQBgMJsrJzLjw/uGRNaRaJ+MfkkKTDF86xRBTjr9Tzik8EJH8xrOgyoDwQkT
+         hv7Z3UGN8oea4+BrXH5ij2nwr/T+c7wMHHEV4mt/WU1w3XHrfB/DhsG9Bf5JD0gGMvIr
+         mARTCEqpB7DpOTDfnEX+oAwLW5IShz65r69nHB4I2ZGhBGx79fDjiLBYx72MiNl9FNci
+         58A+1UuErPl4Iv1xRzdaxuGv9ymJ2G17S99+CQmpzc4wujEG8H8ehU+0l1erxK1pwDx9
+         bo+Q==
+X-Gm-Message-State: AOJu0YymHjoSzewe/U0ipAGZM+DyboAWWQbkdpDSNNPImMlBA23jcbvd
+	wDU3ZKooO8MCvYh0cEQzZHAPkUbWElba3IEJiybtESYCtjXZj8vGfCXCTnaZVwkkRJJF4anqGmD
+	15nPXkbg/5yDxJSswRyayvUkOWzUMqPDG
+X-Gm-Gg: ASbGncvmjxl0Ql/UnSs7xjPPI98X+aYRUraOwevBhcG8Q+SE1ItBziAbBXYfvppc0cW
+	EINZA6UPSneIIhXArqDGg2XlL5RKL/NBVipIKf0lhHuLilp81ED0lnmXHd/ZK8Q4uUXtxc+mK0K
+	OrLIGhLMlxT0Vu8TYYXo2LIC85GhZ18EkVORaYaSOm9Bt4CmyoR7Xwhsw=
+X-Google-Smtp-Source: AGHT+IE3PTJEJVFubXb/TOKKi/zegGRLe627IYTrnwjYzd2BmZ9/7EZ2wJBEwoVkyVPDuKiU5qbDtikFCWZ55Z2q5Q0=
+X-Received: by 2002:a05:6808:2121:b0:3f6:ab0d:8dbf with SMTP id
+ 5614622812f47-3febf78813cmr108024b6e.29.1742494770796; Thu, 20 Mar 2025
+ 11:19:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250319082110.2907028-1-leon.anavi@konsulko.com>
+ <CAMKF1spq0LPZ8NN=9_2s9=6GuU9qEoGdjnLvtwYME8ejyC=dSA@mail.gmail.com> <77f6bda7-d880-4e52-8a66-de975d185a59@konsulko.com>
+In-Reply-To: <77f6bda7-d880-4e52-8a66-de975d185a59@konsulko.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 20 Mar 2025 11:19:04 -0700
+X-Gm-Features: AQ5f1JqbKETYXszksc7ytwQim4nCVdCSyIJsEWtnFkXt5DBaTH024mD1oAbsLjE
+Message-ID: <CAMKF1spub-KYytBQvNiTT0Mc0+nw6TabUckpDBfBxLO7funLYA@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 1/3] python3-multidict: Upgrade 6.1.0 -> 6.2.0
+To: Leon Anavi <leon.anavi@konsulko.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 20 Mar 2025 15:42:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116138
+ <openembedded-devel@lists.openembedded.org>; Thu, 20 Mar 2025 18:19:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116139
 
-The bitbake fetcher dropped support for multiple revisions on a single
-url. Update the gitpkgver code to match.
+On Thu, Mar 20, 2025 at 3:41=E2=80=AFAM Leon Anavi <leon.anavi@konsulko.com=
+> wrote:
+>
+> Hi Khem,
+>
+> On 19.03.25 =D0=B3. 22:43 =D1=87., Khem Raj wrote:
+> > This fails ptests due to missing dependency on python3-pytest-codspeed
+> >
+> > I would encourage to run recipe ptests when doing upgrades etc. e.g.
+> > for python3-multidict one would do
+> > bitbake meta-python-image-ptest-python3-multidict
+>
+> Thank you for the feedback. I fixed it and I sent v2 of the patch.
+> Please note that it has to be applied after the my other patch from
+> earlier today that updates the runtime dependencies of
+> python3-pytest-codspeed.
 
-Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
----
- meta-oe/classes/gitpkgv.bbclass | 68 ++++++++++++++++-----------------
- 1 file changed, 33 insertions(+), 35 deletions(-)
+Thanks for working on it.
+I was already carrying fixes for the ptest regressions so I went ahead
+with that patchset
 
-diff --git a/meta-oe/classes/gitpkgv.bbclass b/meta-oe/classes/gitpkgv.bbclass
-index 5ab507969c..af98f256ab 100644
---- a/meta-oe/classes/gitpkgv.bbclass
-+++ b/meta-oe/classes/gitpkgv.bbclass
-@@ -70,54 +70,52 @@ def get_git_pkgv(d, use_tags):
-         names = []
-         for url in ud.values():
-             if url.type == 'git' or url.type == 'gitsm':
--                names.extend(url.revisions.keys())
-+                names.extend(url.revision)
-         if len(names) > 0:
-             format = '_'.join(names)
-         else:
-             format = 'default'
--
-     found = False
-     for url in ud.values():
-         if url.type == 'git' or url.type == 'gitsm':
--            for name, rev in url.revisions.items():
--                if not os.path.exists(url.localpath):
--                    return None
-+            if not os.path.exists(url.localpath):
-+                return None
- 
--                found = True
-+            found = True
- 
--                vars = { 'repodir' : quote(url.localpath),
--                         'rev' : quote(rev) }
-+            vars = { 'repodir' : quote(url.localpath),
-+                     'rev' : quote(url.revision) }
- 
--                rev = bb.fetch2.get_srcrev(d).split('+')[1]
--                rev_file = os.path.join(url.localpath, "oe-gitpkgv_" + rev)
-+            rev = bb.fetch2.get_srcrev(d).split('+')[1]
-+            rev_file = os.path.join(url.localpath, "oe-gitpkgv_" + url.revision)
- 
--                if not os.path.exists(rev_file) or os.path.getsize(rev_file)==0:
--                    commits = bb.fetch2.runfetchcmd(
--                        "git --git-dir=%(repodir)s rev-list %(rev)s -- 2>/dev/null | wc -l"
--                        % vars, d, quiet=True).strip().lstrip('0')
-+            if not os.path.exists(rev_file) or os.path.getsize(rev_file)==0:
-+                commits = bb.fetch2.runfetchcmd(
-+                    "git --git-dir=%(repodir)s rev-list %(rev)s -- 2>/dev/null | wc -l"
-+                    % vars, d, quiet=True).strip().lstrip('0')
- 
--                    if commits != "":
--                        oe.path.remove(rev_file, recurse=False)
--                        with open(rev_file, "w") as f:
--                            f.write("%d\n" % int(commits))
--                    else:
--                        commits = "0"
--                else:
--                    with open(rev_file, "r") as f:
--                        commits = f.readline(128).strip()
--
--                if use_tags:
--                    try:
--                        output = bb.fetch2.runfetchcmd(
--                            "git --git-dir=%(repodir)s describe %(rev)s --tags --exact-match 2>/dev/null"
--                            % vars, d, quiet=True).strip()
--                        ver = gitpkgv_drop_tag_prefix(d, output)
--                    except Exception:
--                        ver = "0.0-%s-g%s" % (commits, vars['rev'][:7])
-+                if commits != "":
-+                    oe.path.remove(rev_file, recurse=False)
-+                    with open(rev_file, "w") as f:
-+                        f.write("%d\n" % int(commits))
-                 else:
--                    ver = "%s+%s" % (commits, vars['rev'][:7])
--
--                format = format.replace(name, ver)
-+                    commits = "0"
-+            else:
-+                with open(rev_file, "r") as f:
-+                    commits = f.readline(128).strip()
-+
-+            if use_tags:
-+                try:
-+                    output = bb.fetch2.runfetchcmd(
-+                        "git --git-dir=%(repodir)s describe %(rev)s --tags --exact-match 2>/dev/null"
-+                        % vars, d, quiet=True).strip()
-+                    ver = gitpkgv_drop_tag_prefix(d, output)
-+                except Exception:
-+                    ver = "0.0-%s-g%s" % (commits, vars['rev'][:7])
-+            else:
-+                ver = "%s+%s" % (commits, vars['rev'][:7])
-+
-+            format = format.replace(url.name, ver)
- 
-     if found:
-         return format
+>
+> Best regards,
+> Leon
+>
+>
+> >
+> > On Wed, Mar 19, 2025 at 1:21=E2=80=AFAM Leon Anavi via lists.openembedd=
+ed.org
+> > <leon.anavi=3Dkonsulko.com@lists.openembedded.org> wrote:
+> >> Upgrade to release 6.2.0:
+> >>
+> >> - Fixed in checks throwing an exception instead of returning
+> >>    :data:`False` when testing non-strings.
+> >> - Fix a leak when the last accessed module in PyInit__multidict
+> >>    init is not released.
+> >> - Implemented support for the free-threaded build of CPython 3.13
+> >> - Started publishing wheels made for the free-threaded build of
+> >>    CPython 3.13
+> >> - Used stricter typing across the code base, resulting in improved
+> >>    typing accuracy across multidict classes. Funded by an NLnet grant.
+> >>
+> >> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> >> ---
+> >>   .../{python3-multidict_6.1.0.bb =3D> python3-multidict_6.2.0.bb}  | =
+2 +-
+> >>   1 file changed, 1 insertion(+), 1 deletion(-)
+> >>   rename meta-python/recipes-devtools/python/{python3-multidict_6.1.0.=
+bb =3D> python3-multidict_6.2.0.bb} (90%)
+> >>
+> >> diff --git a/meta-python/recipes-devtools/python/python3-multidict_6.1=
+.0.bb b/meta-python/recipes-devtools/python/python3-multidict_6.2.0.bb
+> >> similarity index 90%
+> >> rename from meta-python/recipes-devtools/python/python3-multidict_6.1.=
+0.bb
+> >> rename to meta-python/recipes-devtools/python/python3-multidict_6.2.0.=
+bb
+> >> index ed49b8ff02..568b1b93ce 100644
+> >> --- a/meta-python/recipes-devtools/python/python3-multidict_6.1.0.bb
+> >> +++ b/meta-python/recipes-devtools/python/python3-multidict_6.2.0.bb
+> >> @@ -8,7 +8,7 @@ inherit pypi python_setuptools_build_meta ptest-python=
+-pytest
+> >>
+> >>   PV .=3D "+git"
+> >>
+> >> -SRCREV =3D "4140e63780dc6dd600a1837cb9b4c5198c3dcd68"
+> >> +SRCREV =3D "af07d5b2b18bb30e041983db2bea1fcb3e1c4b79"
+> >>   PYPI_SRC_URI =3D "git://github.com/aio-libs/multidict;branch=3Dmaste=
+r;protocol=3Dhttps"
+> >>   S =3D "${WORKDIR}/git"
+> >>
+> >> --
+> >> 2.39.5
+> >>
+> >>
+> >> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >> Links: You receive all messages sent to this group.
+> >> View/Reply Online (#116065): https://lists.openembedded.org/g/openembe=
+dded-devel/message/116065
+> >> Mute This Topic: https://lists.openembedded.org/mt/111785561/1997914
+> >> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> >> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub=
+ [raj.khem@gmail.com]
+> >> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >>
 
