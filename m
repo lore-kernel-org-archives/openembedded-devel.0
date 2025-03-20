@@ -1,372 +1,181 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <Haixiao.Yan.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44CC6C35FFC
-	for <webhook@archiver.kernel.org>; Thu, 20 Mar 2025 03:12:56 +0000 (UTC)
-Received: from mail-oo1-f50.google.com (mail-oo1-f50.google.com [209.85.161.50])
- by mx.groups.io with SMTP id smtpd.web11.282.1742440366071430438
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 05384C36003
+	for <webhook@archiver.kernel.org>; Thu, 20 Mar 2025 05:40:36 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.1091.1742449231232601757
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Mar 2025 20:12:46 -0700
+ Wed, 19 Mar 2025 22:40:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=BZyB8z5H;
- spf=pass (domain: gmail.com, ip: 209.85.161.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f50.google.com with SMTP id 006d021491bc7-60208b7a6d6so81770eaf.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Mar 2025 20:12:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1742440365; x=1743045165; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=2NQrHbeNyJtZXI/k2+YQ5Dd5tSZzY564PDTRh7HUv+k=;
-        b=BZyB8z5HFJpmZnPhuIEh2nwzoC2UgT0safQZGoQtO7xUU4qSILPisiUuJf/tput8DK
-         Vjp8XAoadXGyosizvzGKpsCJJAQLk2n7mU+TUWrRGtlH1NqBZ86NicVT2uJl6Q1KZoxh
-         pkulloVEukildBvkVSCYprPhzxLNQ2BYScmsz5yHce+3sZhyaF4KwL1x1PdtFn0l8cGy
-         5OWu0PzbhJPpu8UmFxjXxc6dLxwTuCMPllj/Om6wH7z+PznQL/jZOttNmippf0m5bVXz
-         wslYt3a3yyGydiVPmSwAl1wl8U9gDkT9kDeBo8RollkMdA02VNfMJ8YCWKYWK3/zaHcx
-         CjyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742440365; x=1743045165;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=2NQrHbeNyJtZXI/k2+YQ5Dd5tSZzY564PDTRh7HUv+k=;
-        b=GNqU0hxCiKcDFtbSycRU2y6p/nMCnMsH1sbVLXZubZimavbD5UpKIcwlz1o2vgvt75
-         XDmzc2mhfMchMdJzMiyqGaO0jTFwIZ7tost7WynIS1FfrNkae8mpKSutFQS5U9MYKr55
-         SZYkkrQFwFYt1Xyo8ZEe6erVXYs2/qQLnfdD0Zjqfa0zyRjVqbCDxlmWHLS//FiU4Ygg
-         hl4EVXID5iMueOsuFczQrkceey7Jv+A0OvbAck8ontwbwaAvncdiSu/FhvjMf4vcvg8T
-         y/T451Gr7FpmCQlCCNYn0VzH+9r5nVzGHbW8qmVSko6NcnL/ZlW8rZfybwOZZR5Snt9Z
-         74WA==
-X-Forwarded-Encrypted: i=1; AJvYcCWn2KLmw/71Y2KSPYunyDbO0yw8cbkGEuJqwa2GNGvJy1LDeS/C+f9SGxtr11HqBHI3pnJcNwyw64Lz89OjnmHaskI=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yw3wEi//cifcSgLflbT3vnFnqItJn2pkQftHMz3lDXG9A2acg5z
-	ejTKYZsOqzcFrS/DaIUD8ok85O6cXXtZ3m2xRNC5WojFlqwIQqA/g594ET4swRxI9RAu1pk78Iw
-	k1I537/Hy0oReCL1KWc1KkU7QBdQ=
-X-Gm-Gg: ASbGncuVcwUv46LMrDuJ41c88WHkdwb1bq4SchStsqRGIC9DVcHV5vQudTor+3q2ShI
-	pS4q1hBcjvaMQeIzEC3TltKuZJP7Kz2VnVVP6M0ztf/hrUaIpDYzgu2QJCvF8pvL0wthujbmFOO
-	cW12ydSo/a/ydr/0RScS1JxMav
-X-Google-Smtp-Source: AGHT+IEE+2j90sqTqtsaotreILA0JrHTSOMriD41Nh108fVc1loBzLrfWADe/PdB+nCVJJrMSKFM/+qGKQvLfoYv9iM=
-X-Received: by 2002:a05:6820:4617:b0:600:1feb:830f with SMTP id
- 006d021491bc7-6021e42bdc2mr2878148eaf.4.1742440365155; Wed, 19 Mar 2025
- 20:12:45 -0700 (PDT)
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=51749bd76b=haixiao.yan.cn@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52K5eUrb009323;
+	Thu, 20 Mar 2025 05:40:30 GMT
+Received: from nam04-mw2-obe.outbound.protection.outlook.com (mail-mw2nam04lp2171.outbound.protection.outlook.com [104.47.73.171])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45d0h95g3x-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 20 Mar 2025 05:40:30 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=cJABuVS0HMLCFuJULiOeTKjcInUHJvWwV98D5nlduFCA1++EHXg//ouW2u9KyDJe59uCtgyeB4TUBVrOMvQ+RTOjRvutOXWMh/xIoomHJ3q+ai5J/s0tryOMe94yELvH2VYoW/lqNic9CQVhposYlKf2ZGuy7nvHE8P01fyUAzbjK7EZlx5CjeOIQhc3PyJGLXHE06CMpGzlEpVdAsNqEJaQsfmm2Rw5Rqf/M4FW3ur9WDii5sG4bT071LEQSNSuq9acbMlmX4B6hcu5hqn0LvEk/tfyDSUtZyxXiMrsQu0IRjl7vQdlwpFbOY9Q1BSqaYMKWVTyGNlBjosESmRnQw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=S4BSTHhO3Ug/tI5xB0sVm7yxl/ujM4JVIBiyY/d/D+Q=;
+ b=V7zsxEhClvUZBJEb02cXazPYI68srfS1eYE0SfFhJR4vpn5kyjVIjvj20S6cSt1esVYqb61wvt1iShrQvfg2s/nDGgmDov1i916HsHEmvVgt0SUHnyCvMHzzen9sbOPs4nR0szgfrIcEefdsfhsv7/ZXc71JQBrNrNI+obRS0qM+u62IwL3rnBj3cXSyRA8C1++W4ZIv1DtCmlRPFKhfwzzw7SmGmKaRmfbcVE4j8AZU6kNUsmAkaM4Zl73OY9YGi6SpiuqiAHXPe+0kEWF7wJf2iC6TPYaGEpJz3BtaygOo2+WLLronyVoOlHW72sQXdYd8/BEi6+fMNai3IySEdQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=eng.windriver.com; dkim=pass header.d=eng.windriver.com; arc=none
+Received: from CH0PR11MB8189.namprd11.prod.outlook.com (2603:10b6:610:18d::13)
+ by SA3PR11MB7433.namprd11.prod.outlook.com (2603:10b6:806:31e::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.34; Thu, 20 Mar
+ 2025 05:40:26 +0000
+Received: from CH0PR11MB8189.namprd11.prod.outlook.com
+ ([fe80::4025:23a:33d9:30a4]) by CH0PR11MB8189.namprd11.prod.outlook.com
+ ([fe80::4025:23a:33d9:30a4%4]) with mapi id 15.20.8534.034; Thu, 20 Mar 2025
+ 05:40:26 +0000
+From: haixiao.yan.cn@eng.windriver.com
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-openembedded][kirkstone][PATCH 1/4] geoip: fix do_fetch error
+Date: Thu, 20 Mar 2025 13:40:06 +0800
+Message-Id: <20250320054009.838158-1-haixiao.yan.cn@eng.windriver.com>
+X-Mailer: git-send-email 2.34.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SG2PR04CA0191.apcprd04.prod.outlook.com
+ (2603:1096:4:14::29) To CH0PR11MB8189.namprd11.prod.outlook.com
+ (2603:10b6:610:18d::13)
 MIME-Version: 1.0
-References: <CAMKF1spcbP58H+KjOHdkWOyicPAozdtM_02Q_PXTGDBK7cq0mQ@mail.gmail.com>
- <20250317060612.4111152-1-hongxu.jia@windriver.com> <10d699be-2918-4dd3-b892-ef87b8e0a7be@windriver.com>
-In-Reply-To: <10d699be-2918-4dd3-b892-ef87b8e0a7be@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 19 Mar 2025 20:12:19 -0700
-X-Gm-Features: AQ5f1JoJTZpBMtZ0y05QX4LohfYxy6FIV-ltODkTAU6_NX3A72Ckb4PPiBeJ82Y
-Message-ID: <CAMKF1sqNMaLry1AWr0XsZRkh0Vr_qr+qcJRLSFMWUA5VP=LJCg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v4] protobuf: 4.25.5 -> 4.30.0
-To: Randy MacLeod <randy.macleod@windriver.com>
-Cc: hongxu.jia@eng.windriver.com, openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH0PR11MB8189:EE_|SA3PR11MB7433:EE_
+X-MS-Office365-Filtering-Correlation-Id: 293dfe37-8dfe-4cde-1dee-08dd6771b755
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|376014|52116014|366016|1800799024|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?x9mtUZic2MxwImUNjjyZrVH5Qll21FfgUDCBoX1drzPzzwkc/VRoqKvAi5wK?=
+ =?us-ascii?Q?J+pim3HJpHQaXIYv/VWkGfTSrvTcOoCf4RZycRG2CXoBNlFenKZ4gpaLUm23?=
+ =?us-ascii?Q?mtoTfdecWN+XmIyyPeWKGW2/hEupVwa/JT2xuxOrk/4vC/NRQvSzeeblug+E?=
+ =?us-ascii?Q?qjLJsiuvbzqzSdac3FyLQyuy4vXrev884IQoSv0m/Sgb/mA4Uf23V1vJzSYp?=
+ =?us-ascii?Q?amhWuoMEyoyeA3FCpbcRe8qcCSbxE5IcoYQ2PudchEMC9rm06KqpuDzTeVuj?=
+ =?us-ascii?Q?aLWaM12EsKuCn0rF4SusR75e+RS8buAP4tGRN91LMJYPap+hQa6qGFAfWiEv?=
+ =?us-ascii?Q?Gly0WlT1kG5FAAHrVVyB6/T4Ub+tbZsZU3SZDAmVqn3wT+UzOpy0GL8Z5jCZ?=
+ =?us-ascii?Q?t46YrET8tcWSiNiabeictcUgkk033B2YN78R3DRqO4Te/pDCdtN+JAMCmwf2?=
+ =?us-ascii?Q?U2jqNpqmtVWeKMFh/uPTREkU+An3Vx/O1T5z7qj6f3PLylI82Swbowgqb3XN?=
+ =?us-ascii?Q?0wOlFSSH85TVQLy8Ekrj7Kk62DVMOBxW884aYOEUBwe+1PmCLwGP8R7UDai6?=
+ =?us-ascii?Q?G3Hq8ZsgtQDoQ+0SvWfa+hI2heQmcGNYt3VoN6Ep4fjAbzizNS0shCVgUN8C?=
+ =?us-ascii?Q?PBcFTQxevO446r1/IDojyq7XMQ1BYphTzGe6CWR8RpcEO8oMaekH/t7iNAAC?=
+ =?us-ascii?Q?96axHbp5MxVVVLOrgUNjKIBmiMuFs9X0Gx4Zbp2AnUTMI4jLm+EMbSfKbreO?=
+ =?us-ascii?Q?IyHpaKxYZ/EzfldDYxu5pUf4exGsP+MVCYKczm0ox4C2EOleU+uNg1wPMHRJ?=
+ =?us-ascii?Q?RXDIEa0JEZ8aVcinvIzKfAOLPTpUyqvQFfDLQL5Q26M15+KSjPRde0Fp1Ku0?=
+ =?us-ascii?Q?vIlIg9Xq/DmosZGW0KFjPkXwZE+KDPcozJz+Ws9Gfn5WJ+JJnqk2BCNynmM9?=
+ =?us-ascii?Q?6R+q2zm7wkJr30en/QOYklTAuJ3uiTsmWCJPmE5YT45b3kelMUqR54sltSrc?=
+ =?us-ascii?Q?QhGT7LbyIqRJZC4NfmI9PEsQciHbhf5BiTBUVag5JRvWi1rll0yGen7E8JA4?=
+ =?us-ascii?Q?EWfDGDoXTqb1fgsnXHNPElGS1/EMfJMui1sXM65p20SEJ61kCjSUb112+/Rn?=
+ =?us-ascii?Q?6EeW+BR0ELjRD5mKLWGZxbMCeCS3Su6jHop5T6vHIxfz3IyGkoJIyp1ac2HL?=
+ =?us-ascii?Q?wXC+gTopSKLZpXY5oTbJqPpEHXibjWAbIpPs+6xK2x0VV+3PtiEfP0kXa70x?=
+ =?us-ascii?Q?V7oWY1J6w0ZVoO8ttysvDYK8cLS0xO7qb7aQ0rLS4gNDCtqMz7rrPyYk1ZW3?=
+ =?us-ascii?Q?m6Xm2A2CRTMIaUOleLgQlUDG8iTSkRVHuGAvKMsTET+8savXOodMAuxKrQQS?=
+ =?us-ascii?Q?yeO658EVBYM/ti7mm27FtHR70Cf5?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH0PR11MB8189.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(52116014)(366016)(1800799024)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?hYFitgx6gvgYn6scHpdO4cmg7kILfrR0nQKNmAB3AYQ7IhSbBbSpuR8ISiY/?=
+ =?us-ascii?Q?IePmADdAZR0TMN7z5pI96dSwSgyniXttvsE/otohs56GxoIPH41LQXb0mYFP?=
+ =?us-ascii?Q?jby1x80ZK9DyWP/KpJn7FZqwYQntW8ezQYqrS3YISrlbEgmRLrJZ+IyKnGq2?=
+ =?us-ascii?Q?S2dueLA7T351BxjCAr/s92duemnhk+0S84RrIlSiM2/BeN6SXGtkgkZgrZXx?=
+ =?us-ascii?Q?M/rMQMLoVSFJYXyNGn6hrsCy+PCCXGJspVzNLtYgwhEdxs4LQv22hg05XI+p?=
+ =?us-ascii?Q?bhsRXPS7Ent7cw9HpTTdEPbb7hhxzzYZAKKaA9X5nSoIOXdJbJZ1K18CB+2Q?=
+ =?us-ascii?Q?N7l3SMeRfGJ2S/ihkcpGRLhcHgNt5u2RdcJSPjQf5O3BqFdGzXg9M3qaplh3?=
+ =?us-ascii?Q?U4Bz36vNbrZ13tRiJGgZMnvZoey4oJOTsiHQ4hXtsPZNr5VDxxfP0xWHZ0rY?=
+ =?us-ascii?Q?hjtZk/IogPMr6wfPUY1bunKILiehk4mSaOXDPcT1M/mioIpXFdK1rX89s3PS?=
+ =?us-ascii?Q?irkQtzxnDs7iGk1lzhcyt+thRhVp+IW4yRO+F9SwZaPxu9F8dON80ureOzKj?=
+ =?us-ascii?Q?MwvuvNr/O2zW4+HECb8GB2/P3lzMY+en/S6uKUm8UwaEETtDwRfzoylOLHm5?=
+ =?us-ascii?Q?G++/JcxlL3JRpYuacT6x67bceMK10imAqW104Omu3GmaoyU6chOaMe/2K/uW?=
+ =?us-ascii?Q?KSf85U25aLBTFfGxFJcU3odjOl/C2JaUIodhCCmHXBFkUDf3EDbAASErdDoz?=
+ =?us-ascii?Q?xTPTyefCXDsvqt0ueUicwFi2NmKxZuPXCpiJikzKh/A2ymMVlGH6YDOEDF4E?=
+ =?us-ascii?Q?pdgmgZ1KTMTHben4u5dWaWyInuPc0fsRMmPeuhBv5lLzHu/Gmpxw/dLNBbUZ?=
+ =?us-ascii?Q?dUB3VHan8puX/cskt5e/QBl3b2tui4RMg8j1b6bLu69ajkeT+p0zSYpxC7SR?=
+ =?us-ascii?Q?tTbCE4GlYi30sX4E45OFGzZptGPsOdkO9BCqoNMoVzY0AWoBM90vC1dRNj2m?=
+ =?us-ascii?Q?E21Ofd1Ldm6KbXhH1P7KXK7hUqpOAZLt8bgsl19gIQV8EJ0/OGKlntKKhyuT?=
+ =?us-ascii?Q?asb0RbYbPvuhHQTQ3NtIYz+HwK1zCnoJXHI7Lps4MoU2Y4ouhT+NRwhUAzbr?=
+ =?us-ascii?Q?fKntv14JhU0X/3F94q1gOZwVxonERSHfuhyqvfz1O/79IwA9Q3q1u/pn7YW6?=
+ =?us-ascii?Q?qE88N8m/EYsEWy+boJC7cgcrkEglDGuYsnGgApuhzI/FFl8Nb3Ncr0aIT3xf?=
+ =?us-ascii?Q?JjIJrCQ5/77vXUj68GLkXOXQay/Im/CLulM6o/H1uW2KC6QvtifZB62mfuff?=
+ =?us-ascii?Q?CpSjBFzHJBU71y0NieqoQc1cY0BVclqAFGI6c/k8RpJORAFJpuDlT08r7LGe?=
+ =?us-ascii?Q?TTzJlMT93OzAJh5oJmEBugpZbhwTuxB58waBynF1bv98YBReye73mYscWSHw?=
+ =?us-ascii?Q?6iBz9NqY24/t0dCdiyPaao/ZkRwWgtb7dSxXnvaz3fj/IHlFKdoHf5tRpN+z?=
+ =?us-ascii?Q?sGSVVJSDAfKJLT2WNEBqfs1XLw/BFngmB57UyJOee1S8rYxyDjGDucvPRhuq?=
+ =?us-ascii?Q?pR2TtAhttqrjXxv+JrosZ/pLgC0KH5y2tdlQk4RzhCjyVEXaaMbh0f8nm8+I?=
+ =?us-ascii?Q?gw=3D=3D?=
+X-OriginatorOrg: eng.windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 293dfe37-8dfe-4cde-1dee-08dd6771b755
+X-MS-Exchange-CrossTenant-AuthSource: CH0PR11MB8189.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Mar 2025 05:40:26.3258
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: yz90uzOgV9crK5B00ctKXVy0gzIb9DxGoQ3EikpjZkr3hqW1VwDS23oSvLBSk+plaf8uKFF61v5YFGw8O5cO2fsnRnvKjSJBc16dxyHtw7s=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR11MB7433
+X-Proofpoint-ORIG-GUID: eA10LjVcaTTsN4MxIcN_6zrxRJeK_d1Y
+X-Authority-Analysis: v=2.4 cv=ROOzH5i+ c=1 sm=1 tr=0 ts=67dbaa4e cx=c_pps a=n5+7iF7l5R/EKaY7dbRUPA==:117 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=2MUAHTJp_KMA:10
+ a=Vs1iUdzkB0EA:10 a=H5OGdu5hBBwA:10 a=Q4-j1AaZAAAA:8 a=iGHA9ds3AAAA:8 a=omOdbC7AAAAA:8 a=pGLkceISAAAA:8 a=t7CeM3EgAAAA:8 a=NEAV23lmAAAA:8 a=dlODPEQRsXlIFgTNUeIA:9 a=9H3Qd4_ONW2Ztcrla5EB:22 a=nM-MV4yxpKKO9kiQg6Ot:22 a=FdTzh2GWekK77mhwV6Dw:22
+ a=Omh45SbU8xzqK50xPoZQ:22
+X-Proofpoint-GUID: eA10LjVcaTTsN4MxIcN_6zrxRJeK_d1Y
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-03-20_01,2025-03-19_01,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0
+ lowpriorityscore=0 spamscore=0 adultscore=0 priorityscore=1501 mlxscore=0
+ mlxlogscore=928 malwarescore=0 impostorscore=0 phishscore=0 clxscore=1015
+ bulkscore=0 classifier=spam authscore=0 authtc=n/a authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
+ definitions=main-2503200033
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 20 Mar 2025 03:12:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116115
+ <openembedded-devel@lists.openembedded.org>; Thu, 20 Mar 2025 05:40:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116116
 
-btw this breaks qtgrpc from meta-qt6
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-| /mnt/b/yoe/master/build/tmp/work/x86_64-linux/qtgrpc-native/6.9.0/git/src=
-/tools/qtprotobufgen/qprotobufgenerator.cpp:205:82:
-error: could not convert
-=E2=80=98file->google::protobuf::FileDescriptor::dependency(i)->google::pro=
-tobuf::FileDescriptor::name()=E2=80=99
-from =E2=80=98google::protobuf::internal::DescriptorStringView=E2=80=99 {ak=
-a
-=E2=80=98std::basic_string_view<char>=E2=80=99} to =E2=80=98std::string=E2=
-=80=99 {aka
-=E2=80=98std::__cxx11::basic_string<char>=E2=80=99}
-|   205 |
-internalIncludes.insert(utils::removeFileSuffix(file->dependency(i)->name()=
-)
-|       |
-~~~~~~~~~~~~~~~~~~~~~~~~~^~
-|       |
-                    |
-|       |
-                    google::protobuf::internal::DescriptorStringView
-{aka std::basic_string_view<char>}
+Change the SRC_URI to the correct value due to the following error:
+ERROR: geoip-1.6.12-r0 do_fetch: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'http://sources.openembedded.org/GeoIP.dat.20181205.gz;apply=no;name=GeoIP-dat;')
 
-On Wed, Mar 19, 2025 at 10:46=E2=80=AFAM Randy MacLeod
-<randy.macleod@windriver.com> wrote:
->
-> On 2025-03-17 2:06 a.m., hongxu via lists.openembedded.org wrote:
->
-> Refresh local patches
-> - 0001-Fix-build-on-mips-clang.patch
-> - 0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
->
-> Fix protobuf-native build failure with gcc 10
->
-> Changelog:
-> https://github.com/protocolbuffers/protobuf/releases/tag/v30.0
->
-> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> ---
->  .../0001-Fix-build-on-mips-clang.patch        | 26 +++++++----
->  ...e-respect-CXX-LDFLAGS-variables-fix-.patch | 25 +++++------
->  ...buf-native-build-failure-with-gcc-10.patch | 43 +++++++++++++++++++
->  ...{protobuf_4.25.5.bb =3D> protobuf_4.30.0.bb} |  5 ++-
->
->
-> Ping Khem:
->     Does that fix the ubu-20.04 problem?
->
-> Also, Hongxu, should the python package also be updated?
->
-> =E2=9D=AF fd protobuf_4
-> meta-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb
-> meta-python/recipes-devtools/python/python3-protobuf_4.25.3.bb
->
-> ../Randy
->
->
->  4 files changed, 76 insertions(+), 23 deletions(-)
->  create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf/0001-fix-p=
-rotobuf-native-build-failure-with-gcc-10.patch
->  rename meta-oe/recipes-devtools/protobuf/{protobuf_4.25.5.bb =3D> protob=
-uf_4.30.0.bb} (97%)
->
-> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-Fix-build-on=
--mips-clang.patch b/meta-oe/recipes-devtools/protobuf/protobuf/0001-Fix-bui=
-ld-on-mips-clang.patch
-> index 9f6116c4c4..6db22c26d3 100644
-> --- a/meta-oe/recipes-devtools/protobuf/protobuf/0001-Fix-build-on-mips-c=
-lang.patch
-> +++ b/meta-oe/recipes-devtools/protobuf/protobuf/0001-Fix-build-on-mips-c=
-lang.patch
-> @@ -1,6 +1,6 @@
-> -From 08e46feb6553af670754e65d94c3bb6fcd4e0cf9 Mon Sep 17 00:00:00 2001
-> +From fd5a966a6385165506a1b84298465cbb9f44222d Mon Sep 17 00:00:00 2001
->  From: Khem Raj <raj.khem@gmail.com>
-> -Date: Sun, 31 Oct 2021 23:39:44 -0700
-> +Date: Mon, 10 Mar 2025 19:59:19 -0700
->  Subject: [PATCH] Fix build on mips/clang
->
->  clang13 crashes on mips, until its fixed upstream disable tailcall on
-> @@ -10,17 +10,25 @@ https://bugs.llvm.org/show_bug.cgi?id=3D52367
->
->  Upstream-Status: Inappropriate [Clang workaround]
->  Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +
-> +Rebase to v4.30.0
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
->  ---
-> - src/google/protobuf/port_def.inc | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> + src/google/protobuf/port_def.inc | 1 +
-> + 1 file changed, 1 insertion(+)
->
-> +diff --git a/src/google/protobuf/port_def.inc b/src/google/protobuf/port=
-_def.inc
-> +index 35f49afb4..e9597af0d 100644
->  --- a/src/google/protobuf/port_def.inc
->  +++ b/src/google/protobuf/port_def.inc
-> -@@ -255,6 +255,7 @@
-> +@@ -222,6 +222,7 @@ static_assert(PROTOBUF_ABSL_MIN(20230125, 3),
->   #error PROTOBUF_TAILCALL was previously defined
->   #endif
-> - #if __has_cpp_attribute(clang::musttail) && !defined(__arm__) && \
-> + #if ABSL_HAVE_CPP_ATTRIBUTE(clang::musttail) && !defined(__arm__) &&  \
->  +    !defined(__mips__) && \
-> -     !defined(_ARCH_PPC) && !defined(__wasm__) &&                 \
-> -     !(defined(_MSC_VER) && defined(_M_IX86)) &&                  \
-> -     !(defined(__NDK_MAJOR__) && __NDK_MAJOR <=3D 24)
-> +     !defined(_ARCH_PPC) && !defined(__wasm__) &&                      \
-> +     !(defined(_MSC_VER) && defined(_M_IX86)) && !defined(__i386__)
-> + // Compilation fails on ARM32: b/195943306
-> +--
-> +2.25.1
-> +
-> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Mak=
-efile-respect-CXX-LDFLAGS-variables-fix-.patch b/meta-oe/recipes-devtools/p=
-rotobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.=
-patch
-> index 7c4bf260eb..1b68c24c96 100644
-> --- a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-r=
-espect-CXX-LDFLAGS-variables-fix-.patch
-> +++ b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-r=
-espect-CXX-LDFLAGS-variables-fix-.patch
-> @@ -1,13 +1,12 @@
-> -From e3fa241637ab5a7fa78c0d474802134cff75f91e Mon Sep 17 00:00:00 2001
-> +From 9d50661003d78a4debfc7eda532f0b53df51fd7c Mon Sep 17 00:00:00 2001
->  From: Martin Jansa <Martin.Jansa@gmail.com>
-> -Date: Fri, 28 Jun 2019 13:50:52 +0000
-> -Subject: [PATCH] examples/Makefile: respect CXX,LDFLAGS variables, fix b=
-uild
-> - with gold
-> +Date: Thu, 13 Mar 2025 10:54:01 +0800
-> +Subject: [PATCH] examples/Makefile: respect CXX,LDFLAGS variables
->
->  * move pkg-config call to separate variable, so that the final version
->    of the whole command so it's shown in log.do_compile_ptest_base
->  * add ../src/google/protobuf/.libs/timestamp.pb.o when linking
-> -  add_person_cpp otherwise it fails to link with gold:
-> +  add_person_cpp otherwise it fails:
->    i686-oe-linux-g++  -m32 -march=3Dcore2 -mtune=3Dcore2 -msse3 -mfpmath=
-=3Dsse --sysroot=3Dcore2-32-oe-linux/protobuf/3.8.0-r0/recipe-sysroot -Wl,-=
-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed add_person.cc addressbook.pb.cc -=
-o add_person_cpp `pkg-config --cflags --libs protobuf`
->    /tmp/cccjSJQs.o:addressbook.pb.cc:scc_info_Person_addressbook_2eproto:=
- error: undefined reference to 'scc_info_Timestamp_google_2fprotobuf_2ftime=
-stamp_2eproto'
->    /tmp/cccjSJQs.o:addressbook.pb.cc:descriptor_table_addressbook_2eproto=
-_deps: error: undefined reference to 'descriptor_table_google_2fprotobuf_2f=
-timestamp_2eproto'
-> @@ -25,12 +24,14 @@ Upstream-Status: Pending
->  Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->  Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
->
-> +Rebase to v4.30.0
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
->  ---
->   examples/Makefile | 6 ++++--
->   1 file changed, 4 insertions(+), 2 deletions(-)
->
->  diff --git a/examples/Makefile b/examples/Makefile
-> -index ef7a4ef58..7206e14e1 100644
-> +index 5290fdb03f..3b9545bf2a 100644
->  --- a/examples/Makefile
->  +++ b/examples/Makefile
->  @@ -2,6 +2,8 @@
-> @@ -42,20 +43,20 @@ index ef7a4ef58..7206e14e1 100644
->   all: cpp java python
->
->   cpp:    add_person_cpp    list_people_cpp
-> -@@ -41,11 +43,11 @@ protoc_middleman_dart: addressbook.proto
-> +@@ -46,11 +48,11 @@ protoc_middleman_ruby: addressbook.proto
->
->   add_person_cpp: add_person.cc protoc_middleman
->   pkg-config --cflags protobuf  # fails if protobuf is not installed
-> -- c++ -std=3Dc++14 add_person.cc addressbook.pb.cc -o add_person_cpp `pk=
-g-config --cflags --libs protobuf`
-> -+ $(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf/.libs/timestamp.p=
-b.o $(PROTOBUF) add_person.cc addressbook.pb.cc -o add_person_cpp #$(CXX) -=
-std=3Dc++17 $(PROTOBUF) add_person.cc addressbook.pb.cc -o add_person_cpp
-> +- c++ add_person.cc addressbook.pb.cc -o add_person_cpp `pkg-config --cf=
-lags --libs protobuf`
-> ++ $(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf/.libs/timestamp.p=
-b.o $(PROTOBUF) add_person.cc addressbook.pb.cc -o add_person_cpp
->
->   list_people_cpp: list_people.cc protoc_middleman
->   pkg-config --cflags protobuf  # fails if protobuf is not installed
-> -- c++ -std=3Dc++14 list_people.cc addressbook.pb.cc -o list_people_cpp `=
-pkg-config --cflags --libs protobuf`
-> -+ $(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf/.libs/timestamp.p=
-b.o $(PROTOBUF) list_people.cc addressbook.pb.cc -o list_people_cpp #$(CXX)=
- -std=3Dc++17 $(PROTOBUF) list_people.cc addressbook.pb.cc -o list_people_c=
-pp
-> +- c++ list_people.cc addressbook.pb.cc -o list_people_cpp `pkg-config --=
-cflags --libs protobuf`
-> ++ $(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf/.libs/timestamp.p=
-b.o $(PROTOBUF) list_people.cc addressbook.pb.cc -o list_people_cpp
->
->   add_person_dart: add_person.dart protoc_middleman_dart
->
-> ---
-> +--
->  2.34.1
->
-> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-fix-protobuf=
--native-build-failure-with-gcc-10.patch b/meta-oe/recipes-devtools/protobuf=
-/protobuf/0001-fix-protobuf-native-build-failure-with-gcc-10.patch
-> new file mode 100644
-> index 0000000000..d7c9f38eff
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/protobuf/protobuf/0001-fix-protobuf-native=
--build-failure-with-gcc-10.patch
-> @@ -0,0 +1,43 @@
-> +From 03dabf4b153071ec1bdcd2c278461984cc6f1714 Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Mon, 17 Mar 2025 13:28:13 +0800
-> +Subject: [PATCH] fix protobuf-native build failure with gcc 10
-> +
-> +Build protobuf-native failed on ubuntu 20.04 which has gcc 10
-> +
-> +protobuf-native/4.30.0/git/src/google/protobuf/port_def.inc:105:48:
-> +error: static assertion failed: Protobuf only supports C+
-> +   =E2=86=AA +17 and newer.
-> +   |   105 | #define PROTOBUF_CPLUSPLUS_MIN(x) (__cplusplus >=3D x)
-> +   |       |                                   ~~~~~~~~~~~~~^~~~~
-> +   | /home/kraj01/yoe/build/tmp/work/x86_64-linux/protobuf-native/4.30.0=
-/git/src/google/protobuf/port_def.inc:119:15:
-> +note: in expansion of macro =E2=80=98PROTOBUF_CPLUSPLUS_MIN=E2=80=99
-> +   |   119 | static_assert(PROTOBUF_CPLUSPLUS_MIN(201703L),
-> +   |       |               ^~~~~~~~~~~~~~~~~~~~~~
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + CMakeLists.txt | 4 ++++
-> + 1 file changed, 4 insertions(+)
-> +
-> +diff --git a/CMakeLists.txt b/CMakeLists.txt
-> +index ae3c324..eda19aa 100644
-> +--- a/CMakeLists.txt
-> ++++ b/CMakeLists.txt
-> +@@ -14,6 +14,10 @@ endif()
-> + # Project
-> + project(protobuf C CXX)
-> +
-> ++set(CMAKE_CXX_STANDARD 17)
-> ++set(CMAKE_CXX_STANDARD_REQUIRED ON)
-> ++set(CMAKE_CXX_EXTENSIONS OFF)
-> ++
-> + if(protobuf_DEPRECATED_CMAKE_SUBDIRECTORY_USAGE)
-> +   if(CMAKE_PROJECT_NAME STREQUAL "protobuf")
-> +     get_filename_component(CMAKE_SOURCE_DIR ${CMAKE_SOURCE_DIR} DIRECTO=
-RY)
-> +--
-> +2.34.1
-> +
-> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb b/meta-=
-oe/recipes-devtools/protobuf/protobuf_4.30.0.bb
-> similarity index 97%
-> rename from meta-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb
-> rename to meta-oe/recipes-devtools/protobuf/protobuf_4.30.0.bb
-> index a470a7c643..0d6123dfa0 100644
-> --- a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.5.bb
-> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_4.30.0.bb
-> @@ -14,11 +14,12 @@ LIC_FILES_CHKSUM =3D " \
->  DEPENDS =3D "zlib abseil-cpp jsoncpp"
->  DEPENDS:append:class-target =3D " protobuf-native"
->
-> -SRCREV =3D "9d0ec0f92b5b5fdeeda11f9dcecc1872ff378014"
-> +SRCREV =3D "d295af5c3002c08e1bfd9d7f9e175d0a4d015f1e"
->
-> -SRC_URI =3D "git://github.com/protocolbuffers/protobuf.git;branch=3D25.x=
-;protocol=3Dhttps \
-> +SRC_URI =3D "git://github.com/protocolbuffers/protobuf.git;branch=3D30.x=
-;protocol=3Dhttps \
->             file://run-ptest \
->             file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-f=
-ix-.patch \
-> +           file://0001-fix-protobuf-native-build-failure-with-gcc-10.pat=
-ch \
->             "
->  SRC_URI:append:mips:toolchain-clang =3D " file://0001-Fix-build-on-mips-=
-clang.patch "
->  SRC_URI:append:mipsel:toolchain-clang =3D " file://0001-Fix-build-on-mip=
-s-clang.patch "
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#116020): https://lists.openembedded.org/g/openembedde=
-d-devel/message/116020
-> Mute This Topic: https://lists.openembedded.org/mt/111744582/3616765
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-andy.macleod@windriver.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-> --
-> # Randy MacLeod
-> # Wind River Linux
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit aadc2ac9dc49dfb5a2066401f22e7b553b324313)
+Signed-off-by: Haixiao Yan <haixiao.yan.cn@windriver.com>
+---
+ meta-networking/recipes-support/geoip/geoip_1.6.12.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+index 429cd69d6d35..12599f97de48 100644
+--- a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
++++ b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+@@ -11,10 +11,10 @@ SECTION = "libdevel"
+ GEOIP_DATABASE_VERSION = "20181205"
+ 
+ SRC_URI = "git://github.com/maxmind/geoip-api-c.git;branch=main;protocol=https \
+-           http://sources.openembedded.org/GeoIP.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoIP-dat; \
+-           http://sources.openembedded.org/GeoIPv6.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoIPv6-dat; \
+-           http://sources.openembedded.org/GeoLiteCity.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoLiteCity-dat; \
+-           http://sources.openembedded.org/GeoLiteCityv6.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoLiteCityv6-dat; \
++           https://downloads.yoctoproject.org/mirror/sources/GeoIP.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoIP-dat; \
++           https://downloads.yoctoproject.org/mirror/sources/GeoIPv6.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoIPv6-dat; \
++           https://downloads.yoctoproject.org/mirror/sources/GeoLiteCity.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoLiteCity-dat; \
++           https://downloads.yoctoproject.org/mirror/sources/GeoLiteCityv6.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoLiteCityv6-dat; \
+            file://run-ptest \
+ "
+ SRCREV = "4b526e7331ca1d692b74a0509ddcc725622ed31a"
+-- 
+2.34.1
+
 
