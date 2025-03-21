@@ -2,150 +2,144 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D6D6C36000
-	for <webhook@archiver.kernel.org>; Fri, 21 Mar 2025 09:28:09 +0000 (UTC)
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
- by mx.groups.io with SMTP id smtpd.web11.17028.1742549285642158739
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31CA5C35FFF
+	for <webhook@archiver.kernel.org>; Fri, 21 Mar 2025 09:37:59 +0000 (UTC)
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web11.17157.1742549870693533608
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Mar 2025 02:28:05 -0700
+ Fri, 21 Mar 2025 02:37:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=aVDuWq/f;
- spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-5e61d91a087so2634925a12.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 02:28:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=e5ravSzB;
+ spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-ab7430e27b2so359290066b.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 02:37:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1742549284; x=1743154084; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1742549869; x=1743154669; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=irGZpDR2ojw1oaz51RoslrjBKVAUzTk5/x4VAgUpdFw=;
-        b=aVDuWq/fh+YnYNLatY1zmyS7YqHWtulMY1GRzEJYV8p1mK+Rztoh1dN9BBFbjUBFWQ
-         fx9mjOsjHCtxaHIux1PExQ12fiEMIyNqdrfPaysBr5hTsRoAK2yjFDi4CGjlLkNudJjb
-         8TnYs7RHC8tw+IYy+A1FHpmHYNu59Ue37MAnvV3092Aam5yX10EBOydHOK1jFKnkZgpp
-         N5MByxrw0s2UyVx73v5suPW5Z31F3r1F4cVGtC/uHWtfgUPK6v5/aXYBkMmlgsXlMS/t
-         IBAdGDSSpP9V0RZKLB09iMG8nAIeq1rrfng8qjvnoWW4VafEGQvx4JpgcV+VIt1Hn5xa
-         0H9g==
+        bh=BONXw3nTP0x4AgtW8SLcEeGVni1iBRzkT3FOQFAu2pQ=;
+        b=e5ravSzBYAygTxOkJwRR0JZdmNelJghtxTpZRzjqyngtjCdFnMXEUtVdkIHxrwMe77
+         u6iIKQ3jhMR0ud7clIHoXjQKitg8/0vK0S0Y+kPHp7JVT7T6aW+06NPptd4R5Z7PMlFO
+         yHz1tD2D0y07D6S9zi98neuDsUFmdnQA1s4IFdDJRWmmAgd+vOHxYydwsalfElOwAb5x
+         FQFjEN/4RxshIh2Id1J2mH8xv4/HZc5qKkYlcH+zLNsCkT76rhgJLfwyUfq2mY4uJofV
+         MMCIMJSXgykJVikC+2FVIo+i5RQJcnsXrZQwXGVif8ctAMxZIF+75jpjg28TfZK8ZOOd
+         VrWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742549284; x=1743154084;
+        d=1e100.net; s=20230601; t=1742549869; x=1743154669;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=irGZpDR2ojw1oaz51RoslrjBKVAUzTk5/x4VAgUpdFw=;
-        b=WzMtxKdOvzH3glvTbtHiERefxReAYG4Q7Q3ItEzKjVugjqpFHawVDKx52lkuvWML3l
-         07Mevmy52PzHFdK36vM8HRh5r3OLeakDVeKwSdRDlJW+hjdZeJzT5ZX4TugZh8PbLWfx
-         RAhxYGFFg4gVFRZzeJ8w6Kbu6IWW08uHF/I4Xjt2a1QiqMu6DONfUAKURszLFDnjf5MW
-         Z0f06saeZ/btH4ef5GiXxkDUgc4OwAdvc/vqpcwwZm7pX+jUnQN5xdMSq/iRc5ZI90lI
-         KLXbRwlKD6V13YquoYJaRo0nSSrQ/tN+uAXbA5RRroiY1x9nnUksEkfsd+Mn9WRsG5m2
-         HI8g==
-X-Gm-Message-State: AOJu0YwcelX3YLQtrK5FsCcSwjks82JHyUSoczx4aL4kT4Oy+vN+U5nJ
-	giDIRu0j5yuHYAvsSSeYCcxcIuIPylaY5JpgRPy8ZYgCiPOfN7TotnVz3w==
-X-Gm-Gg: ASbGncvtfWAxroyCqmm3CpelqH/pEbl0KXfPGq7uic0mQmz4L6lmPpgfylcoAV/YbOj
-	7Iz10bk6kfHbMXOFooF2Zn4NkFCe4oOHQVB0vhGm1EkMp6nIqftCeWvl38VaqZdzA+T0cCIDMDx
-	3+sTykBHuML/8l26b14YUcQxvFOCkQkgDms5EHLmWCalYTZeLO+EIToQBdL3YhUxIjaO+FQ+TmO
-	AomVq40bMIQyBkHxF4vgpX9wq1LGffJOSN0BxTEZtigy3SKEE4LgBvok9pXEN8NQaLPoHKdaHL9
-	JJBRJ1gIKJ7mbJKEu5S1wAltKdkQe1fK1jSVHd/8VXCxOnRmTLFJAtYjgeGKtCEgMpUwPDOJTC1
-	VCw==
-X-Google-Smtp-Source: AGHT+IHrSD42llZWRaLICvlBwWc/q8lfv4cnXU/QIl3gLTGc7tJfccntwsD1wRDCoz+otDiOITrNEw==
-X-Received: by 2002:a17:907:bd0d:b0:abf:e7c1:b3bf with SMTP id a640c23a62f3a-ac3f24163f7mr280558166b.11.1742549283482;
-        Fri, 21 Mar 2025 02:28:03 -0700 (PDT)
+        bh=BONXw3nTP0x4AgtW8SLcEeGVni1iBRzkT3FOQFAu2pQ=;
+        b=R5JhfUf1B0/+AaTx/eBvVxmH89DveYjuLuCrgvwLJo8mCG+F3J1fP/wu3N4DZTea8B
+         Z/N249cL87jm7H8VwB8CDssroT9eqKXZWcHYphP9eZ3kg3RBc0QyB7TO2Rrk/cI/PONR
+         +79cSikkFrjyzw/qTL+njuRWwHnA+2wnj0MwJX1jZa0UE7S5pAoXg3FFiumjgk18q8zW
+         602mZ00iKZinGm/sRpkZq1oc2hdX1QCalU0ktzTh/YRJJwDSUF/bGKpeaXQoz8VeUaJM
+         Bp7cYEUNC1AOePE8ck28PqS9xlY8rMlFaM93qdcfEu7D0W9DUJBWJEqV0B94k8BOCum7
+         gvyQ==
+X-Gm-Message-State: AOJu0YybizxMiyiZ2unpfOiNhK/DSx4tcqt8enKFzc1rkLxMle0rt2xP
+	zS/ldIODT4R5GZsm00hQ2vXYY1bfRqeunYd5ljc3710hAfUBm0OsbJNozg==
+X-Gm-Gg: ASbGnctGl5WnUIGuPZnntbprNRsY43warFznlGWli02bnm3B67wzhY1So+T2PABSzRd
+	kLNZldPFvs1dt+pEtJXO9mFF5qT7YJpTmNfzggOmlSY+U9FRm86nxPaxZk+dG4ZiPo1IWjy/kJP
+	CVGq1OkcY4cM4xE7aURhQ/2tWwDp07xP22dMrT9t6s1RbEUNVvaR+WIwT9Gnr7GtjX/vzgbPoQG
+	LPOfGxOCmm3OBkO8K/6/4gBhm1TDJSxlZyt5gxbz5wzlEVOIo14GB8fUfSlBzCsES05hZKTRvC2
+	pSL/ngR/X5bOZseMgCV/CNDYukfVC6ylB6qpzVpOvfMit1xmrtdG/3vvkE9xAie4F6NkJAV3Oec
+	trA==
+X-Google-Smtp-Source: AGHT+IECIQHPYCFt0e9gRc/W+eyREUFgqNaY/eHj5hT/gTj9VWsdMTmwq5N4VsOQiU/LPTRCWkaR5A==
+X-Received: by 2002:a17:907:3f20:b0:abf:59e1:ad88 with SMTP id a640c23a62f3a-ac3f229c5cdmr195951766b.29.1742549868527;
+        Fri, 21 Mar 2025 02:37:48 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with UTF8SMTPSA id a640c23a62f3a-ac3efb647f9sm116385266b.109.2025.03.21.02.28.02
+        by smtp.gmail.com with UTF8SMTPSA id a640c23a62f3a-ac3ef8e509dsm120034166b.68.2025.03.21.02.37.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Mar 2025 02:28:02 -0700 (PDT)
+        Fri, 21 Mar 2025 02:37:47 -0700 (PDT)
 From: martin.jansa@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] libconfig: fix build with gcc-15
-Date: Fri, 21 Mar 2025 10:27:11 +0100
-Message-ID: <20250321092711.449556-1-martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] iftop: fix build with gcc-15
+Date: Fri, 21 Mar 2025 10:37:42 +0100
+Message-ID: <20250321093742.634012-1-martin.jansa@gmail.com>
 X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 09:28:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116175
+ <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 09:37:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116176
 
 From: Martin Jansa <martin.jansa@gmail.com>
 
-* backport fix from:
-  https://github.com/hyperrealm/libconfig/commit/690342b9cbc8b39787a1501bd890d63ca63a003c
-  to fix:
-  http://errors.yoctoproject.org/Errors/Details/848457/
-  grammar.y:58:33: error: too many arguments to function 'libconfig_yyget_lineno'; expected 0, have 1
-
-* need to add bison-native dependency while grammar.y is modified
-  with the above patch to fix:
-  http://errors.yoctoproject.org/Errors/Details/848472/
-  ../aux-build/ylwrap: line 174: yacc: command not found
+fixes:
+http://errors.yoctoproject.org/Errors/Details/848458/
 
 Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- ...larations-to-allow-build-with-gcc-15.patch | 38 +++++++++++++++++++
- .../libconfig/libconfig_1.7.3.bb              |  7 +++-
- 2 files changed, 44 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-extended/libconfig/libconfig/0001-Fix-declarations-to-allow-build-with-gcc-15.patch
+ .../0001-cfgfile-fix-build-with-gcc-15.patch  | 46 +++++++++++++++++++
+ .../recipes-support/iftop/iftop_1.0pre4.bb    |  1 +
+ 2 files changed, 47 insertions(+)
+ create mode 100644 meta-networking/recipes-support/iftop/iftop/0001-cfgfile-fix-build-with-gcc-15.patch
 
-diff --git a/meta-oe/recipes-extended/libconfig/libconfig/0001-Fix-declarations-to-allow-build-with-gcc-15.patch b/meta-oe/recipes-extended/libconfig/libconfig/0001-Fix-declarations-to-allow-build-with-gcc-15.patch
+diff --git a/meta-networking/recipes-support/iftop/iftop/0001-cfgfile-fix-build-with-gcc-15.patch b/meta-networking/recipes-support/iftop/iftop/0001-cfgfile-fix-build-with-gcc-15.patch
 new file mode 100644
-index 0000000000..00ceadb10d
+index 0000000000..73540e18c6
 --- /dev/null
-+++ b/meta-oe/recipes-extended/libconfig/libconfig/0001-Fix-declarations-to-allow-build-with-gcc-15.patch
-@@ -0,0 +1,38 @@
-+From 0511e285f3c886a388b8e9c6a4829752d60ab44c Mon Sep 17 00:00:00 2001
-+From: Rudi Heitbaum <rudi@heitbaum.com>
-+Date: Thu, 5 Dec 2024 06:47:40 +0000
-+Subject: [PATCH] Fix declarations to allow build with gcc 15
++++ b/meta-networking/recipes-support/iftop/iftop/0001-cfgfile-fix-build-with-gcc-15.patch
+@@ -0,0 +1,46 @@
++From e579fbe1f73dc89e2bf81a5b6c949f8ae24f93b2 Mon Sep 17 00:00:00 2001
++From: Martin Jansa <martin.jansa@gmail.com>
++Date: Fri, 21 Mar 2025 09:31:05 +0000
++Subject: [PATCH] cfgfile: fix build with gcc-15
++
++* fix read_config declaration to match
++
++cfgfile.c:247:5: error: conflicting types for 'read_config'; have 'int(char *, int)'
++  247 | int read_config(char *file, int whinge_on_error) {
++      |     ^~~~~~~~~~~
++In file included from cfgfile.c:16:
++cfgfile.h:16:5: note: previous declaration of 'read_config' with type 'int(void)'
++   16 | int read_config();
++      |     ^~~~~~~~~~~
++make[2]: *** [Makefile:566: cfgfile.o] Error 1
++make[2]: *** Waiting for unfinished jobs....
++iftop.c: In function 'main':
++iftop.c:803:5: error: too many arguments to function 'read_config'; expected 0, have 2
++  803 |     read_config(options.config_file, options.config_file_specified);
++      |     ^~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~
++In file included from iftop.c:50:
++cfgfile.h:16:5: note: declared here
++   16 | int read_config();
++      |     ^~~~~~~~~~~
++
++Upstream-Status: Pending [last pre release was over 10 years ago and https://code.blinkace.com/pdw/iftop has last commit from 4 years ago]
 +
 +Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-+
-+Upstream-Status: Backport [690342b Fix declarations to allow build with gcc 15]
 +---
-+ lib/grammar.y | 8 ++++++--
-+ 1 file changed, 6 insertions(+), 2 deletions(-)
 +
-+diff --git a/lib/grammar.y b/lib/grammar.y
-+index 87dac00..0e9d0bb 100644
-+--- a/lib/grammar.y
-++++ b/lib/grammar.y
-+@@ -40,8 +40,7 @@
-+ #include "wincompat.h"
-+ 
-+ /* These declarations are provided to suppress compiler warnings. */
-+-extern int libconfig_yylex();
-+-extern int libconfig_yyget_lineno();
-++extern int libconfig_yyget_lineno(void *);
-+ 
-+ static const char *err_array_elem_type = "mismatched element type in array";
-+ static const char *err_duplicate_setting = "duplicate setting name";
-+@@ -80,6 +79,11 @@ void libconfig_yyerror(void *scanner, struct parse_context *ctx,
-+   char *sval;
-+ }
-+ 
-++%{
-++/* These declarations are provided to suppress compiler warnings. */
-++extern int libconfig_yylex(YYSTYPE *, void *);
-++%}
-++
-+ %token <ival> TOK_BOOLEAN TOK_INTEGER TOK_HEX
-+ %token <llval> TOK_INTEGER64 TOK_HEX64
-+ %token <fval> TOK_FLOAT
-diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.7.3.bb b/meta-oe/recipes-extended/libconfig/libconfig_1.7.3.bb
-index ad030b8f4a..a4df707dd7 100644
---- a/meta-oe/recipes-extended/libconfig/libconfig_1.7.3.bb
-+++ b/meta-oe/recipes-extended/libconfig/libconfig_1.7.3.bb
-@@ -7,7 +7,12 @@ SECTION = "libs"
- LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
- 
--SRC_URI = "https://hyperrealm.github.io/libconfig/dist/libconfig-${PV}.tar.gz"
-+SRC_URI = "https://hyperrealm.github.io/libconfig/dist/libconfig-${PV}.tar.gz \
-+    file://0001-Fix-declarations-to-allow-build-with-gcc-15.patch \
-+"
++ cfgfile.h | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+# needed when we modify grammar.y with above patch
-+DEPENDS += "bison-native"
++diff --git a/cfgfile.h b/cfgfile.h
++index 11ba475..a331b75 100644
++--- a/cfgfile.h
+++++ b/cfgfile.h
++@@ -13,7 +13,7 @@ typedef struct {
++     int value;
++ } config_enumeration_type;
++ 
++-int read_config();
+++int read_config(char *file, int whinge_on_error);
++ 
++ char *config_get_string(const char *directive);
++ int config_get_bool(const char *directive);
+diff --git a/meta-networking/recipes-support/iftop/iftop_1.0pre4.bb b/meta-networking/recipes-support/iftop/iftop_1.0pre4.bb
+index 517d781281..4d9fea58e0 100644
+--- a/meta-networking/recipes-support/iftop/iftop_1.0pre4.bb
++++ b/meta-networking/recipes-support/iftop/iftop_1.0pre4.bb
+@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=76498170798db0f4f0fb685a225f702f"
  
- UPSTREAM_CHECK_URI = "https://github.com/hyperrealm/libconfig/releases"
- UPSTREAM_CHECK_REGEX = "Version (?P<pver>\d+(\.\d+)+)"
+ SRC_URI = "http://www.ex-parrot.com/pdw/iftop/download/iftop-${PV}.tar.gz \
+            file://iftop-1.0-gcc10.patch \
++           file://0001-cfgfile-fix-build-with-gcc-15.patch \
+           "
+ SRC_URI[md5sum] = "7e6decb4958e8a4890cccac335239f24"
+ SRC_URI[sha256sum] = "f733eeea371a7577f8fe353d86dd88d16f5b2a2e702bd96f5ffb2c197d9b4f97"
 
