@@ -1,170 +1,134 @@
-Return-Path: <yi.zhao@eng.windriver.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 908B6C36007
-	for <webhook@archiver.kernel.org>; Fri, 21 Mar 2025 13:00:30 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.20499.1742562021489225598
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 513B9C36000
+	for <webhook@archiver.kernel.org>; Fri, 21 Mar 2025 14:30:30 +0000 (UTC)
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web10.1258.1742567428794502707
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Mar 2025 06:00:21 -0700
+ Fri, 21 Mar 2025 07:30:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=5175c14ca8=yi.zhao@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52LAo2cP015434
-	for <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 06:00:21 -0700
-Received: from nam10-bn7-obe.outbound.protection.outlook.com (mail-bn7nam10lp2049.outbound.protection.outlook.com [104.47.70.49])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45eprrd1ac-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 06:00:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=h2kVO/yb10YTeBkjqTDQfLqNDXJ2WA7S1vIa6t/rAlGb2J0aQGZexFQ1BbT4qMct4raCpUwuQfbZW7zEyB4BrtqkXr3Da5EplsGSYfKQe/aH57jJfXRqmmrpP2NjojULx4r62tRCJ2x/m5dluUhjuTA9UXAH2NiBEc/zr5uwsAXtbdsheUwYKKiCTOtkByQ9VupVFNZlpMPrZTJSHoVe1loAbAiDWBM2TqNxdbjH/tYqEkwezHCpoC20iOb3qtxBw/m0fCRswrAKJhOfrSW8KbskM+kMEr5LxB9lxdJypqL1jlJriPMkRSpAfO2oBQOnPIDLnhzgr9ZO1HtIFiAHvw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lIFkUijeJ7HYq2jKDv+Q/DapHhdswl6903o/PeLLqO8=;
- b=e2x0e9Bdnh0urPM/eU9VkOImZZF9sofPnFMqX81+jPxU2kipMik0ytGJjHeBlHp/m/9vBcRi4aRUC+DShp57N85FuWoCd0CdgCdSDQfcf8p4kiFbX1RPIwORbCVez039btd0wUfUa+4a8z0fLiY66p5JhoV1N69uhTN3Hr6wPELCa7GYf7ZkoTQwZVkjrJivGalZCfn1582LCmXNm8ybkm76YUCgMB/TQRskZs2fYsOaLF/ZhMJXbXF3WLKx5oh8dxIjk3V/cyM1vqBkNZ/sORo585XxCw09kKsWbaD1vIHncbUyjhs0Snu0SMdWV+wdWxtgtADoGUYtcZ8NcwQ84Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5) by
- PH7PR11MB6953.namprd11.prod.outlook.com (2603:10b6:510:204::6) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8534.33; Fri, 21 Mar 2025 13:00:18 +0000
-Received: from DS0PR11MB6399.namprd11.prod.outlook.com
- ([fe80::2b44:787c:e7ee:bfad]) by DS0PR11MB6399.namprd11.prod.outlook.com
- ([fe80::2b44:787c:e7ee:bfad%5]) with mapi id 15.20.8534.036; Fri, 21 Mar 2025
- 13:00:18 +0000
-From: Yi Zhao <yi.zhao@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jA6yTmZe;
+ spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-5eb92df4fcbso3328364a12.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 07:30:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1742567427; x=1743172227; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=xs2kReYfSS/1EDEkM/SWgOvBwCiSASAIoBTBzEqMNTU=;
+        b=jA6yTmZelG/Gc3neplicWaMpI//yOyqPQ4h9IVAHi10XRxAYhYb5jTDF3W8W1MLxxW
+         qAQItkgTqn18jJXEt/SJnMeWGIbs4VId0gpdNpwjMqQGP6mbIrS99UO2WHV5skirfxV9
+         F7ZVOqgy1MFaWbhLzcBwQWAOMPJUVoT31+ty8yJrXtB36aa8w0g6OzcgkBAkLt2LsV46
+         B1PqzxuNHRR8lKPgg1DXdTl3aQVLhSVj+k5xpiKdsbiYZmerYNEJ8+fSAizBlpJrm542
+         4Tt86iRezojmY7VNQYMs2gaibIaVlvIw98Il/uNEzc2EsriEDpv3xItvI7Ysgv3I8xQa
+         qbbw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1742567427; x=1743172227;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=xs2kReYfSS/1EDEkM/SWgOvBwCiSASAIoBTBzEqMNTU=;
+        b=jVnlt/AluQznFlSh2si4SCJQpvMRza1y4ZkPcMXifgSSPRMd2oy4zhfgm4yIx5KCVI
+         BeIU0dgJKKa37yfMGH1SbqEfCoLp0ZPNIcOSDQCMkpTFw742MBQPDRa5qVBdhb0AeFqy
+         6GcxVDzFeFfWJirASispEM4zMlhAvkxFshbw57LZ17tw37oziqyFrEzFXWAoFyg4FAVg
+         yjRwu0PRd0LrrLUs1sidr9+iw/oJYZaueWgPcBaA4VZYlh21Mzo6vmPDhCLFnVU+PEI3
+         metQXtrry9IOGC8D+p5pwaezdDtyM3K5h0N7hlRwFP3GURPNk46VCyyEe1L+vawRtUb5
+         uG1Q==
+X-Gm-Message-State: AOJu0Ywt3REz2qrZwHNEQuBE+WGLiRBUoo5RLQeVL9DpF/LRElih2s8V
+	SLWO0ac3W8pt8rKhWf0PAwcYbedJYWnrefAZ3JgKEsyCAmZgoSIrbrGb0g==
+X-Gm-Gg: ASbGnctmE/qT5b58hkY0G+PJqc7SGr6AUpsWwLi5sosTPmJi9sm3HxypY8nW44S+F7U
+	iohoxbR7R4T4jLfwr3+FqerDOSvbEIpvlFcSXpg/EoB9Ay48X+nc/CZBjsO5a6A9e+X4FMQqMsf
+	O6MS/kpBN8WRz0GYaD6xu8q/1MwqPdoZan4Q4L7pl0bF8+qsq165mFD+o3OpcL1Cz9x/JWVDWXC
+	VlSoqRSpEpGzid5qvgouV7mHH+PKQ5HdMFOd7M8yj+bplKkCOwbIcT/316labFlNijxokmfOQTr
+	fhJd1M2NQ9hho5nJU5EC1x6e+J/p6XE1uOPi7TtFbgyKv2Ow+poewNWO1nqKoVwOqJ99KYqODR1
+	MAQ==
+X-Google-Smtp-Source: AGHT+IFDFkRwNIhEnWn/0vFNh0frnXrvU3fGxPXr7q86l33OJz2RekkiiJ4WfwyjoFUtmpwNBPgSoA==
+X-Received: by 2002:a05:6402:27d1:b0:5e4:d229:ad3d with SMTP id 4fb4d7f45d1cf-5ebcd45caf5mr3066270a12.16.1742567426984;
+        Fri, 21 Mar 2025 07:30:26 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with UTF8SMTPSA id 4fb4d7f45d1cf-5ebcd0c74b9sm1426849a12.62.2025.03.21.07.30.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 21 Mar 2025 07:30:26 -0700 (PDT)
+From: martin.jansa@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH 1/3] strongswan: upgrade 6.0.0 -> 6.0.1
-Date: Fri, 21 Mar 2025 20:59:58 +0800
-Message-Id: <20250321130000.667251-1-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.25.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SGXP274CA0012.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:b8::24)
- To DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5)
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] googletest: fix build with gcc-15
+Date: Fri, 21 Mar 2025 15:30:22 +0100
+Message-ID: <20250321143022.2890415-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|PH7PR11MB6953:EE_
-X-MS-Office365-Filtering-Correlation-Id: cfca13e3-f078-4850-ed83-08dd6878545b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|366016|52116014|376014|38350700014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?WjJtGtLgJhRXr0P6ckKYC8JYImmR4isKqyPj/2WhpJPQdwNxmwn5Xmq2hkqy?=
- =?us-ascii?Q?cd5sC8q5pt+cjSzKJyRo1tL+lG0BHmSuyocD5Az3SL/OaESdfg38PhjSeAEF?=
- =?us-ascii?Q?RZX5+Y/PWPONXVKLXSu8DND52yHhbcEl5XGsxzT4DEqNaGls57Z6ctZvgnr4?=
- =?us-ascii?Q?nY3Xt45NjDxRpzjv89UQu5aBEt1tDfiIxqRoUXnZyZZWflRl2xry2srJi4Fh?=
- =?us-ascii?Q?HU02/ir6dq7Zyq7JggwHMksOST6VMYqAm0s6jLpkdWVbvaXzi1tul3ZahdLU?=
- =?us-ascii?Q?3MrCu6Vf4pQiVg3dzHEbD3XkfgKhMkZaVcJqBH2y1nEprspJOd2jGU9aznwg?=
- =?us-ascii?Q?8nm6tol7Ufllz3N1IXMC7HTBCyWZX2kqPL2aU9/SP5aU8OMVFpwAz0Za0hJS?=
- =?us-ascii?Q?WZ/XFBiferfGc8CEzGcfJcxxUYVSUMfRyP/34rnL7qIbVHjDo7UQ0J1z0x+8?=
- =?us-ascii?Q?bKdVOrvO7dFWkonsAg64ntaqheTpaMvjCFMnNaxuI5BV1CYxVFFDZl9iQF56?=
- =?us-ascii?Q?RFitRIJWTYrcmuV0fI+NHs352fmEXbnHI0H+lz04+hE58fXmsFzs1US5PVif?=
- =?us-ascii?Q?i0QK+jWafDfuekUMjC52OF8NrDrrrJiaDUMyX6OQhvqFha23KGEE9va+2jdV?=
- =?us-ascii?Q?uevQI50+xqq3TxQwlZVIFkoIuch5lr1KpqXcgT6/HIRgdSucmf+DwoVQL1RZ?=
- =?us-ascii?Q?05E66+AW3FGKrC/jof2CahC4Yudaw/xPj+gPEheNZhDeOZp7Jase8PHkg7HV?=
- =?us-ascii?Q?py5nx96XIGiTJBdP9wafrGtlhJgExTL4H7kCSDFrBPGi6QKl9OXAqQr5CBXY?=
- =?us-ascii?Q?lC6FFZLgQuS051UYRUsY6/hzI//QbTOB5h79i98/FgAzbNO8QKGpWuvBbqqh?=
- =?us-ascii?Q?vojSUebip8nlSuKLuQIFz5uZsBSh5TVQbL/so31WP54XfhWuQQ9wxMc/gXOG?=
- =?us-ascii?Q?pf0ehjhs4PdpKgEk1DRuWixVXUpjjWyK7ATtir2I8bPSEq9BGHVWo+8JssGz?=
- =?us-ascii?Q?ehfku7QytkShWNNbv9KfoyxXzyOwSd+9dy+biSjUCD1SQY3Z2fG2a5jlXtxR?=
- =?us-ascii?Q?/czBRf03sa6u8+5M54Lq+hE8T8ZNEW8kRmnMSbzgLOCwsEBO4mN9Y1UMS0Vp?=
- =?us-ascii?Q?LWyzjJf3MI4z0xkMAHOcGSL6ZQR9+DC9AVdhqB9z1+fJwV/s0+tDZrtMu6uE?=
- =?us-ascii?Q?joo68I/tRN15aw1szvm+cBr7NLd/TE6QcqMFz1Zh8dzO9cfZkHWwVZt6M9rY?=
- =?us-ascii?Q?eOxSTA/kpY0bl8gzd2AoSLbyjXcsMqhaFwe3kqKEBp2UEES1FwX4VysVInTX?=
- =?us-ascii?Q?Z2mbLTQzKu7a8dMR316pgGBHF5xRSJW4kXPtt6qHKeE/sk9RpEg5tKNXQ4+5?=
- =?us-ascii?Q?yKwpqoUNhUWwObX99NgLvGf+9kJ6b6Nj7rtoHO2o7kX7QrBoaw=3D=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(52116014)(376014)(38350700014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?m+kVbftJGnF1TQBTiZg4qerVdRhc3aJkgVpr91v+VE5DO+hwshyrzRNV1Q3X?=
- =?us-ascii?Q?W+lzCtwzwER2eAfBPMTuttV8r9+5JnBFQtzXBlXSlEC7ktcKmKn3bMvYpsnx?=
- =?us-ascii?Q?VLDQqCR+jcdNSpGx0tw+35eGG6ZiuapNamiow6pS1KLCMs47kVTZjGC34D3G?=
- =?us-ascii?Q?3ZB5i1KRewp58E5ULnhmLaWCTNZLo4B1oLsunLPza24nrslVNEcxF5xbVCm0?=
- =?us-ascii?Q?CwiBdD0fQgX+UqYFHYlH+FTrvDcUQmQP8m5hMbcrbWuFY/E9KkjS5WHoiC5X?=
- =?us-ascii?Q?/6dAJyH0JyCMbgjCuS4PRDILwjKtt4OH0qVJD+Xc+5NPPxZl26Y/lqEQs62Z?=
- =?us-ascii?Q?/AWP2axLtyoGZXxPSZ1F3UDsGVKpV4WzvcYH/pO+AmEgTDfR7V9mfVR34oFm?=
- =?us-ascii?Q?2SF0VSzHV3u+f6Iz86fB9ZZwOEm0Cn9LtUds0lS7cVh929waN57WUUvj+nm9?=
- =?us-ascii?Q?3SSQvz9XXXQiBNBOymcEYe6h9coHiO4VF54AAbwYa1eD60/aed1M4LnmNzOP?=
- =?us-ascii?Q?l4T9nJqrD8+I82xhRNMdbs67MbrNQMN6LnmPcRha95tbkw8uY4FmED6qOPSr?=
- =?us-ascii?Q?Tg6S/20F8z+6hFpyNTuTZrwLeJidWc/740XQFVoQDxvtZe0t0NsJFFC0gSnQ?=
- =?us-ascii?Q?y8rq+AC3J2j3f8rmyHaEvq3sq53GoIi/yDX3QhPHTzTvNDfcT7euGWSpWzrU?=
- =?us-ascii?Q?hut3l1mGQfbAEuhBFJZgIdoNNfNMflKqXPOBoA4wVAy6VR15kNCQf1mjLL+R?=
- =?us-ascii?Q?b8mOCJvm2AdyIG+3M+AzebDce1aO+Z/oJHhMjU2BPSwe+LAOfL7ypvqrI2G1?=
- =?us-ascii?Q?TZ9/XjAmlYXlRawm9P5k9mSM/5693bPfgJpJ79YwFwzx6kkcVHQhoKuhbpWG?=
- =?us-ascii?Q?RnBkpkbtUehFPfgkCGOSizmFoAA7RAEJrECrs5XkhdYvM5PqUEfVXtOJ79rq?=
- =?us-ascii?Q?oDpxnDf3bpPXfBIZHX/OllXi/tj7aUYLIWN0iit3owQCtK+Af0o4OUz+O5dB?=
- =?us-ascii?Q?jJhWDV98z8Fozzjl5dZqpQSMFHEwmBYyIYivnMhVWQC1MEvHhBuNUO3zSUON?=
- =?us-ascii?Q?PsxAN4z5YNbYJj+PSPUd2/MeuU7uVQm5/n8sydJEDf9pq+V+83J2YTAvvJZr?=
- =?us-ascii?Q?8ByGQsD9rGfxuaxrjgGLExBjUiMkzf9U+fiDlDM3xewG41ZxbUXoEEhLtfEa?=
- =?us-ascii?Q?LNmf1J9yZ6xaGMCB3r2L8ag/cVAUm7bbB9pm0alePhj/zaTqs4clGMDKH1rS?=
- =?us-ascii?Q?Y48egKeM/ZgBlf6qVlgwYeyfsFI1tfave5o0ypgYsDMkLCndZXr2e9CM0PoV?=
- =?us-ascii?Q?xaWIE1dsb58W8PxBZIu4qtLcrJHoRCSGl1zpjFwWvpwCuJlQcMgSCZrS6vs5?=
- =?us-ascii?Q?CNO0bl7Rpd4u3MWkilRXQn13Lj15jLxLH964+aFBkMe2m3ZJCmI/26P7WUNi?=
- =?us-ascii?Q?1fN9rgvXOC5vbik/PM59AWbQmWkud8kfzTt6iq+omh1pVZ4L5rPY9A3zAYoM?=
- =?us-ascii?Q?rmHm46+e/b8dr43/lfpGev1WYOQRev0bxvF1QllPcEFPEuqtrpeM2YewYY19?=
- =?us-ascii?Q?fSNVSA9WahHxCPQIwr7qvjCupCdHqOu8Od5LYzt1?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cfca13e3-f078-4850-ed83-08dd6878545b
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6399.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Mar 2025 13:00:18.0756
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: KAbD1ensBwknPJbVC3+wCexNNjlPY4alvPujbYNR/0evbA/fYxJgB0PS9s8ofRG2615bEYWtC+Id1+KE5WT85Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB6953
-X-Authority-Analysis: v=2.4 cv=LZw86ifi c=1 sm=1 tr=0 ts=67dd62e5 cx=c_pps a=YkRwJB1Lcas13D3J5+BQ6w==:117 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=Vs1iUdzkB0EA:10
- a=H5OGdu5hBBwA:10 a=NEAV23lmAAAA:8 a=KiMCiSwjAAAA:8 a=t7CeM3EgAAAA:8 a=zNXjhLrgNjjuMfKTFokA:9 a=sPCYT0qwnquSfqsKqTDE:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: cf3fS-ikRVev63bHinURfPCzSDc6w-Ws
-X-Proofpoint-ORIG-GUID: cf3fS-ikRVev63bHinURfPCzSDc6w-Ws
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-03-21_05,2025-03-20_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 mlxlogscore=999
- priorityscore=1501 impostorscore=0 lowpriorityscore=0 malwarescore=0
- bulkscore=0 clxscore=1015 adultscore=0 spamscore=0 phishscore=0
- suspectscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
- definitions=main-2503210096
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 13:00:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116184
+ <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 14:30:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116187
 
-ChangeLog:
-https://github.com/strongswan/strongswan/releases/tag/6.0.1
+From: Martin Jansa <martin.jansa@gmail.com>
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+* some recipes which use googletest fail with:
+  gtest/src/gtest_main.cc:32: recipe-sysroot/usr/include/c++/15.0.1/ciso646:46:4: error: #warning "<ciso646> is deprecated in C++17, use <version> to detect implementation-specific macros" [-Werror=cpp]
+   46 | #  warning "<ciso646> is deprecated in C++17, use <version> to detect implementation-specific macros"
+      |    ^~~~~~~
+
+  backport a fix for this.
+
+* see https://github.com/google/googletest/issues/4701
+
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- .../strongswan/{strongswan_6.0.0.bb => strongswan_6.0.1.bb}     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/strongswan/{strongswan_6.0.0.bb => strongswan_6.0.1.bb} (99%)
+ .../googletest/googletest/gtest-ciso646.patch | 26 +++++++++++++++++++
+ .../googletest/googletest_1.16.0.bb           |  4 ++-
+ 2 files changed, 29 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-test/googletest/googletest/gtest-ciso646.patch
 
-diff --git a/meta-networking/recipes-support/strongswan/strongswan_6.0.0.bb b/meta-networking/recipes-support/strongswan/strongswan_6.0.1.bb
-similarity index 99%
-rename from meta-networking/recipes-support/strongswan/strongswan_6.0.0.bb
-rename to meta-networking/recipes-support/strongswan/strongswan_6.0.1.bb
-index 5cf456990b..9baf219cea 100644
---- a/meta-networking/recipes-support/strongswan/strongswan_6.0.0.bb
-+++ b/meta-networking/recipes-support/strongswan/strongswan_6.0.1.bb
-@@ -11,7 +11,7 @@ DEPENDS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'tpm2', '  tpm2-tss',
- SRC_URI = "https://download.strongswan.org/strongswan-${PV}.tar.bz2 \
-           "
+diff --git a/meta-oe/recipes-test/googletest/googletest/gtest-ciso646.patch b/meta-oe/recipes-test/googletest/googletest/gtest-ciso646.patch
+new file mode 100644
+index 0000000000..814912650b
+--- /dev/null
++++ b/meta-oe/recipes-test/googletest/googletest/gtest-ciso646.patch
+@@ -0,0 +1,26 @@
++https://github.com/google/googletest/issues/4701
++
++taken from fedora:
++https://src.fedoraproject.org/rpms/gtest/c/b3fe6f803a1e554971f70e1c3f55aa5fcb377b1b?branch=rawhide
++
++Upstream-Status: Pending
++Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
++
++--- ./googletest/include/gtest/internal/gtest-port.h.orig	2025-01-27 03:39:18.963893931 +0000
+++++ ./googletest/include/gtest/internal/gtest-port.h	2025-01-28 13:57:51.381081952 +0000
++@@ -288,11 +288,11 @@
++ 
++ // Detect C++ feature test macros as gracefully as possible.
++ // MSVC >= 19.15, Clang >= 3.4.1, and GCC >= 4.1.2 support feature test macros.
++-#if GTEST_INTERNAL_CPLUSPLUS_LANG >= 202002L && \
++-    (!defined(__has_include) || GTEST_INTERNAL_HAS_INCLUDE(<version>))
+++#if GTEST_INTERNAL_HAS_INCLUDE(<version>) || \
+++    (GTEST_INTERNAL_CPLUSPLUS_LANG >= 202002L && !defined(__has_include))
++ #include <version>  // C++20 and later
++-#elif (!defined(__has_include) || GTEST_INTERNAL_HAS_INCLUDE(<ciso646>))
++-#include <ciso646>  // Pre-C++20
+++#else
+++#include <cerrno>  // Pre-C++20
++ #endif
++ 
++ #include <ctype.h>   // for isspace, etc
+diff --git a/meta-oe/recipes-test/googletest/googletest_1.16.0.bb b/meta-oe/recipes-test/googletest/googletest_1.16.0.bb
+index cc2e8e3c94..fe2f732a5d 100644
+--- a/meta-oe/recipes-test/googletest/googletest_1.16.0.bb
++++ b/meta-oe/recipes-test/googletest/googletest_1.16.0.bb
+@@ -8,7 +8,9 @@ PROVIDES += "gmock gtest"
  
--SRC_URI[sha256sum] = "72fe58b7523155703b65b08c3cc559c2c9a5c96da54afebd8136f6623e7dda82"
-+SRC_URI[sha256sum] = "212368cbc674fed31f3292210303fff06da8b90acad2d1387375ed855e6879c4"
+ S = "${WORKDIR}/git"
+ SRCREV = "6910c9d9165801d8827d628cb72eb7ea9dd538c5"
+-SRC_URI = "git://github.com/google/googletest.git;branch=v1.16.x;protocol=https"
++SRC_URI = "git://github.com/google/googletest.git;branch=v1.16.x;protocol=https \
++    file://gtest-ciso646.patch \
++"
  
- UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
+ inherit cmake pkgconfig
  
--- 
-2.25.1
-
 
