@@ -1,906 +1,334 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <omri.sarig13@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5ACD8C35FF3
-	for <webhook@archiver.kernel.org>; Fri, 21 Mar 2025 06:55:08 +0000 (UTC)
-Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
- by mx.groups.io with SMTP id smtpd.web10.15411.1742540100844112796
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92811C35FF3
+	for <webhook@archiver.kernel.org>; Fri, 21 Mar 2025 07:29:38 +0000 (UTC)
+Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com [209.85.167.49])
+ by mx.groups.io with SMTP id smtpd.web11.15760.1742542173220112768
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Mar 2025 23:55:01 -0700
+ Fri, 21 Mar 2025 00:29:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=INGhwo2g;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-256628-20250321065457b1df7be31144e67b77-0q2zag@rts-flowmailer.siemens.com)
-Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 20250321065457b1df7be31144e67b77
-        for <openembedded-devel@lists.openembedded.org>;
-        Fri, 21 Mar 2025 07:54:58 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=d9YXXL+vNMvR1ZlKMggEvvFpsCdeP4BBBzQ9kEnxPGg=;
- b=INGhwo2g5Yc82fa0FQo1v/xryFyO9Zwxu82vxi7M5eOfkQv81fqPgMTZDBiQz4PNaS9CTS
- nQOX3migWdNqXNyyheSZHPb7KRVwQUehV7fg2FfD/1oOsTLYbfrREzU4uH1Xk0dEf5exCGWj
- iEOgWG+LDKRGUbsIW4hU/uRiDPYpcr2plhZnRCrlCcBnUKZdpUn2rtZqGyxRSxoMhBpF9Pae
- LWOobLSxhDwbJ4OzKiaXNwjRv1zS1gsr7MVrII0NsKe0hzOYDSQCF1+r+2aESt8YZIdVnRSz
- qScZT3fjUqtuEt7YeVpdBMwNQyRGViClYVUXQDnI5oxw3Jpan8KeJKaw==;
-From: Peter Marko <peter.marko@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH v2] libmad: patch CVE-2017-8374
-Date: Fri, 21 Mar 2025 07:53:15 +0100
-Message-Id: <20250321065315.1693921-1-peter.marko@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DqsALxwv;
+ spf=pass (domain: gmail.com, ip: 209.85.167.49, mailfrom: omri.sarig13@gmail.com)
+Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-543d8badc30so1907805e87.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 00:29:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1742542171; x=1743146971; darn=lists.openembedded.org;
+        h=in-reply-to:from:content-language:references:to:subject:user-agent
+         :mime-version:date:message-id:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=iBImhA3h3j11wShWZ1Nw5aKXRwOeeIIknTXikelSiCU=;
+        b=DqsALxwvyL0jCx2qVj0Fypi775+xxWjZ9wzkeWqUZLkeMsOIgXRCmy7sg6eOkeltHi
+         9Qt1kWRfrgWShh26oTmOlRXVkpLkTzY9P9R7/4sKr7gula7XRlsz41BdEx9tITr5ajuO
+         7sH/FD+YJtZHsJvGRvSUh1j/iYE876gBia8iRNeeF3y2IqhgwJ6KNpkk2XPBAv3x2imt
+         yqXX9lXdn90R0CGw5XZCm6NYfxX4lTWxq4c03sDfmfZp6mcmPVsFg62Ty+vIvXdNVMqQ
+         b2jJE7nWId3fq8en0I88qAGrAhuF5Ualxwu0jtkWciQnO/u5s7Dakj0n/IpJ1N0NpygP
+         GhTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1742542171; x=1743146971;
+        h=in-reply-to:from:content-language:references:to:subject:user-agent
+         :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=iBImhA3h3j11wShWZ1Nw5aKXRwOeeIIknTXikelSiCU=;
+        b=Klne95W51gmnqVG7NKdUBeXXxbrfa64ubnVgrS5MPXbZlTpjMt7gCTEa7YM3nuqa7a
+         wbKMwxJ0Bhrd9P94SNJsBi1LwbPTvgvkXFoyCBMIbC21wurF9M2+UIoaujvtP+JCNf3n
+         0vucgipbcGCjOluEx7pDzRAGn+yPz1kHjR0FqOTd2dx85LCZGVgf8EZFnoG6Wit5VN55
+         8cV1Fd5w3pNMHW4yRBmH6LyA+nMUJeaqNb83m9YI+NuiNxXeaN2d/AbTrUfN5hxgLg3Q
+         nqIoXkqzZNC3JPVUvCptBqgTAWpduTPEv7+hBjYr4QLSmEviQ5WUgXee39rqYdbMBsLX
+         IVDw==
+X-Forwarded-Encrypted: i=1; AJvYcCUhEpMGA3jrKsLUqmNjKIaJyAykgC5/m5W2G/byiPEPhKNCQL/X5OAqZMgtQhuWG8MEXp8/SMZc3rzSR/TJpQHHVlM=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yx5ucxt17Fyi4VckaAlx7WW4P+vypvkMtTvRyU2Hw7t4EvFVv7y
+	4fI+P16HQcStdPNhZxZMEG0XiXLnx0kRof/IFMdQAgLXXcmSeJkm
+X-Gm-Gg: ASbGnct99zLRwbqrybtysFqZZvW0+0drvJrcAt/5qi8tmYMTNKDGJrxma2IEdQ+GBp1
+	zLB0nMSU14D2L4sem6hMJQFzoYz+VT8ud+AhyGBCNjCnBZoz1g1UahR2kO7B4cwgbKhV7ShRStK
+	096dvI3N6TtfRit2wc7ha+G2p9vUlmj7TMbl+eyGFzza1hFdQ27sGsCri2/PkL4+jnDcrf8rSvS
+	hzinS8agZiSHHQqBz8wZNxN3TJ0HEus9xU0BlWThVDx18Z1pTeOFBJbb8MnADkDQvZybzn8K3pd
+	tAR9D3jJZ/0oD67SatXwaS8auMlB7AOoVSBtEYtfsytLgCAETQ==
+X-Google-Smtp-Source: AGHT+IEY/SjAkxyZ2i7k7uB9Gy3eRWndSgawG9eykervBsxODsiNQV5iMU1Lp1DVi1B7B/5d7MaCiw==
+X-Received: by 2002:a05:6512:6cf:b0:542:213f:78fd with SMTP id 2adb3069b0e04-54ad64f5960mr587549e87.40.1742542170599;
+        Fri, 21 Mar 2025 00:29:30 -0700 (PDT)
+Received: from [172.16.6.176] ([81.216.59.226])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-54ad6512203sm118597e87.241.2025.03.21.00.29.28
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 21 Mar 2025 00:29:28 -0700 (PDT)
+Content-Type: multipart/alternative;
+ boundary="------------czlRY8TYnHmW8blcmdLMFnu0"
+Message-ID: <cbd99f9b-efd9-4bed-977d-8fc075a540a8@gmail.com>
+Date: Fri, 21 Mar 2025 08:28:31 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-python][PATCH v2] python3-varlink: Add recipe
+To: "Marko, Peter" <Peter.Marko@siemens.com>,
+ "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>
+References: <20250320113010.1428716-1-omri.sarig13@gmail.com>
+ <AS1PR10MB5697938634FFEB1D1A4B31D6FDD82@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
+Content-Language: en-US
+From: Omri Sarig <omri.sarig13@gmail.com>
+In-Reply-To: <AS1PR10MB5697938634FFEB1D1A4B31D6FDD82@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 06:55:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116169
+ <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 07:29:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116170
 
-From: Peter Marko <peter.marko@siemens.com>
+This is a multi-part message in MIME format.
+--------------czlRY8TYnHmW8blcmdLMFnu0
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Pick patch [1] from Debian based on [2].
+On 3/20/25 22:10, Marko, Peter wrote:
+> This recipe is missing version (e.g. 31.0.0+git).
+I'll add the version, I missed that.
+> Also the runtime dependencies should be split.
+> I think that at least unittests should go to ptest package, not main.
 
-[1] https://salsa.debian.org/multimedia-team/libmad/-/raw/debian/0.15.1b-11/debian/patches/length-check.patch?ref_type=tags
-[2] https://security-tracker.debian.org/tracker/CVE-2017-8374
+I was not sure what is the right thing to do here is.
+When installing the package through setuptools, it also installs the 
+tests directory as part of the package (so it ends up in the target at 
+`/usr/lib/python3.12/site-packages/varlink/tests/`).
+Following the README, running the examples of the package require 
+running some files from the tests directory, that also import unittest.
 
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+So, if we want to keep the full functionality, and allow a user on the 
+target to run the examples, we have to keep all of the current runtime 
+dependencies as part of main.
+
+So the options I can think of are:
+
+1. Leave the dependencies as-is, adding the reasoning above to the 
+commit message.
+2. Split the dependencies, and remove the tests directory from the 
+target (even though it is included through setuptools). This way, the 
+package is smaller (and have less dependencies), but it ends up being 
+significantly different than what will be available when it is usually 
+installed.
+2a. If we want, we can have it done through a flag, so a user is able to 
+explicitly decide to include the test packages in.
+3. Split the dependencies, but keep the tests directory as part of the 
+installation - this way, we have less runtime dependencies for regular 
+use of the package, but if a user is trying to run the examples on the 
+target, they will receive an import error.
+
+What do you think is the best solution here?
+
+Omri
+
+>> -----Original Message-----
+>> From:openembedded-devel@lists.openembedded.org <openembedded-
+>> devel@lists.openembedded.org> On Behalf Of Omri Sarig via
+>> lists.openembedded.org
+>> Sent: Thursday, March 20, 2025 12:30
+>> To:openembedded-devel@lists.openembedded.org
+>> Cc: Omri Sarig<omri.sarig13@gmail.com>
+>> Subject: [oe] [meta-python][PATCH v2] python3-varlink: Add recipe
+>>
+>> Add a python recipe to install the python implementation for the varlink
+>> interface.
+>>
+>> The recipe is using the current master head, instead of the version from
+>> pypi. This is done as the pypi version is 4 years old, while the master
+>> is continuously maintained in GitHub.
+>>
+>> The runtime dependencies were created by looking at all the import
+>> statement in the installed files of the repository and looking at the
+>> relevant packages from the python3 manifest file in meta-poky.
+>>
+>> Signed-off-by: Omri Sarig<omri.sarig13@gmail.com>
+>> ---
+>>   .../ptest-packagelists-meta-python.inc        |  1 +
+>>   .../python/python3-varlink_git.bb             | 28 +++++++++++++++++++
+>>   2 files changed, 29 insertions(+)
+>>   create mode 100644 meta-python/recipes-devtools/python/python3-varlink_git.bb
+>>
+>> diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-
+>> python/conf/include/ptest-packagelists-meta-python.inc
+>> index 3a1fb13ba7..40df4f08f3 100644
+>> --- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
+>> +++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+>> @@ -89,6 +89,7 @@ PTESTS_FAST_META_PYTHON = "\
+>>       python3-unidiff \
+>>       python3-uritemplate \
+>>       python3-validators \
+>> +    python3-varlink \
+>>       python3-wrapt \
+>>       python3-wsproto \
+>>       python3-xlrd \
+>> diff --git a/meta-python/recipes-devtools/python/python3-varlink_git.bb b/meta-
+>> python/recipes-devtools/python/python3-varlink_git.bb
+>> new file mode 100644
+>> index 0000000000..8b5e01cf44
+>> --- /dev/null
+>> +++ b/meta-python/recipes-devtools/python/python3-varlink_git.bb
+>> @@ -0,0 +1,28 @@
+>> +SUMMARY = " Python implementation of the Varlink protocol"
+>> +HOMEPAGE ="https://varlink.org/python/"
+>> +LICENSE = "Apache-2.0"
+>> +LIC_FILES_CHKSUM =
+>> "file://LICENSE.txt;md5=e3fc50a88d0a364313df4b21ef20c29e"
+>> +
+>> +SRC_URI ="git://github.com/varlink/python.git;protocol=https;branch=master"
+>> +
+>> +SRCREV = "6012b8805bf2ebcc981c84bd56a3e949a2141c16"
+>> +
+>> +S = "${WORKDIR}/git"
+>> +
+>> +inherit python_setuptools_build_meta ptest-python-pytest
+>> +
+>> +DEPENDS += "python3-setuptools-scm-native"
+>> +
+>> +RDEPENDS:${PN} += " \
+>> +    python3-core \
+>> +    python3-datetime \
+>> +    python3-io \
+>> +    python3-json \
+>> +    python3-netclient \
+>> +    python3-netserver \
+>> +    python3-shell \
+>> +    python3-stringold \
+>> +    python3-unittest \
+>> +"
+>> +
+>> +PTEST_PYTEST_DIR = "varlink/tests"
+--------------czlRY8TYnHmW8blcmdLMFnu0
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <div class="moz-cite-prefix">On 3/20/25 22:10, Marko, Peter wrote:<br>
+    </div>
+    <blockquote type="cite"
+cite="mid:AS1PR10MB5697938634FFEB1D1A4B31D6FDD82@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM">
+      <pre wrap="" class="moz-quote-pre">This recipe is missing version (e.g. 31.0.0+git).</pre>
+    </blockquote>
+    I'll add the version, I missed that.<br>
+    <blockquote type="cite"
+cite="mid:AS1PR10MB5697938634FFEB1D1A4B31D6FDD82@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM">
+      <pre wrap="" class="moz-quote-pre">
+Also the runtime dependencies should be split.
+I think that at least unittests should go to ptest package, not main.</pre>
+    </blockquote>
+    <p>I was not sure what is the right thing to do here is.<br>
+      When installing the package through setuptools, it also installs
+      the tests directory as part of the package (so it ends up in the
+      target at `/usr/lib/python3.12/site-packages/varlink/tests/`).<br>
+      Following the README, running the examples of the package require
+      running some files from the tests directory, that also import
+      unittest.</p>
+    <p>So, if we want to keep the full functionality, and allow a user
+      on the target to run the examples, we have to keep all of the
+      current runtime dependencies as part of main.</p>
+    <p>So the options I can think of are:</p>
+    <p>1. Leave the dependencies as-is, adding the reasoning above to
+      the commit message.<br>
+      2. Split the dependencies, and remove the tests directory from the
+      target (even though it is included through setuptools). This way,
+      the package is smaller (and have less dependencies), but it ends
+      up being significantly different than what will be available when
+      it is usually installed.<br>
+      2a. If we want, we can have it done through a flag, so a user is
+      able to explicitly decide to include the test packages in.<br>
+      3. Split the dependencies, but keep the tests directory as part of
+      the installation - this way, we have less runtime dependencies for
+      regular use of the package, but if a user is trying to run the
+      examples on the target, they will receive an import error.</p>
+    <p>What do you think is the best solution here?</p>
+    <p><span style="white-space: pre-wrap">
+</span></p>
+    <p><span style="white-space: pre-wrap">Omri
+</span></p>
+    <blockquote type="cite"
+cite="mid:AS1PR10MB5697938634FFEB1D1A4B31D6FDD82@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM">
+      <pre wrap="" class="moz-quote-pre">
+</pre>
+      <blockquote type="cite">
+        <pre wrap="" class="moz-quote-pre">-----Original Message-----
+From: <a class="moz-txt-link-abbreviated" href="mailto:openembedded-devel@lists.openembedded.org">openembedded-devel@lists.openembedded.org</a> &lt;openembedded-
+<a class="moz-txt-link-abbreviated" href="mailto:devel@lists.openembedded.org">devel@lists.openembedded.org</a>&gt; On Behalf Of Omri Sarig via
+lists.openembedded.org
+Sent: Thursday, March 20, 2025 12:30
+To: <a class="moz-txt-link-abbreviated" href="mailto:openembedded-devel@lists.openembedded.org">openembedded-devel@lists.openembedded.org</a>
+Cc: Omri Sarig <a class="moz-txt-link-rfc2396E" href="mailto:omri.sarig13@gmail.com">&lt;omri.sarig13@gmail.com&gt;</a>
+Subject: [oe] [meta-python][PATCH v2] python3-varlink: Add recipe
+
+Add a python recipe to install the python implementation for the varlink
+interface.
+
+The recipe is using the current master head, instead of the version from
+pypi. This is done as the pypi version is 4 years old, while the master
+is continuously maintained in GitHub.
+
+The runtime dependencies were created by looking at all the import
+statement in the installed files of the repository and looking at the
+relevant packages from the python3 manifest file in meta-poky.
+
+Signed-off-by: Omri Sarig <a class="moz-txt-link-rfc2396E" href="mailto:omri.sarig13@gmail.com">&lt;omri.sarig13@gmail.com&gt;</a>
 ---
-v2: correct CVE reference in commit message title
+ .../ptest-packagelists-meta-python.inc        |  1 +
+ .../python/python3-varlink_git.bb             | 28 +++++++++++++++++++
+ 2 files changed, 29 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-varlink_git.bb
 
- .../libmad/libmad/CVE-2017-8374.patch         | 830 ++++++++++++++++++
- .../libmad/libmad_0.15.1b.bb                  |   1 +
- 2 files changed, 831 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/libmad/libmad/CVE-2017-8374.patch
-
-diff --git a/meta-oe/recipes-multimedia/libmad/libmad/CVE-2017-8374.patch b/meta-oe/recipes-multimedia/libmad/libmad/CVE-2017-8374.patch
+diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-
+python/conf/include/ptest-packagelists-meta-python.inc
+index 3a1fb13ba7..40df4f08f3 100644
+--- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
++++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+@@ -89,6 +89,7 @@ PTESTS_FAST_META_PYTHON = "\
+     python3-unidiff \
+     python3-uritemplate \
+     python3-validators \
++    python3-varlink \
+     python3-wrapt \
+     python3-wsproto \
+     python3-xlrd \
+diff --git a/meta-python/recipes-devtools/python/python3-varlink_git.bb b/meta-
+python/recipes-devtools/python/python3-varlink_git.bb
 new file mode 100644
-index 0000000000..69a7153f07
+index 0000000000..8b5e01cf44
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/libmad/libmad/CVE-2017-8374.patch
-@@ -0,0 +1,830 @@
-+From 05de6e0ddc2c911b725955d2af331ffd76aa8186 Mon Sep 17 00:00:00 2001
-+From: Kurt Roeckx <kurt@roeckx.be>
-+Date: Sun, 28 Jan 2018 19:26:36 +0100
-+Subject: [PATCH] Check the size before reading with mad_bit_read
++++ b/meta-python/recipes-devtools/python/python3-varlink_git.bb
+@@ -0,0 +1,28 @@
++SUMMARY = " Python implementation of the Varlink protocol"
++HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="https://varlink.org/python/">"https://varlink.org/python/"</a>
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM =
+<a class="moz-txt-link-rfc2396E" href="file://LICENSE.txt;md5=e3fc50a88d0a364313df4b21ef20c29e">"file://LICENSE.txt;md5=e3fc50a88d0a364313df4b21ef20c29e"</a>
 +
-+There are various cases where it attemps to read past the end of the buffer
-+using mad_bit_read(). Most functions didn't even know the size of the buffer
-+they were reading from.
++SRC_URI = <a class="moz-txt-link-rfc2396E" href="git://github.com/varlink/python.git;protocol=https;branch=master">"git://github.com/varlink/python.git;protocol=https;branch=master"</a>
 +
-+Source: https://salsa.debian.org/multimedia-team/libmad/-/raw/debian/0.15.1b-11/debian/patches/length-check.patch?ref_type=tags
++SRCREV = "6012b8805bf2ebcc981c84bd56a3e949a2141c16"
 +
-+CVE: CVE-2017-8374
-+Upstream-Status: Inactive-Upstream [lastrelease: 2018]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ bit.c     |   3 +
-+ frame.c   |  20 +++++-
-+ layer12.c | 112 +++++++++++++++++++++++++++---
-+ layer3.c  | 198 ++++++++++++++++++++++++++++++++++++++----------------
-+ 4 files changed, 262 insertions(+), 71 deletions(-)
++S = "${WORKDIR}/git"
 +
-+diff --git a/bit.c b/bit.c
-+index c2bfb24..39ef50b 100644
-+--- a/bit.c
-++++ b/bit.c
-+@@ -138,6 +138,9 @@ unsigned long mad_bit_read(struct mad_bitptr *bitptr, unsigned int len)
-+ {
-+   register unsigned long value;
-+ 
-++  if (len == 0)
-++    return 0;
-++
-+   if (bitptr->left == CHAR_BIT)
-+     bitptr->cache = *bitptr->byte;
-+ 
-+diff --git a/frame.c b/frame.c
-+index 0cb3d0f..4b3aea8 100644
-+--- a/frame.c
-++++ b/frame.c
-+@@ -120,11 +120,18 @@ static
-+ int decode_header(struct mad_header *header, struct mad_stream *stream)
-+ {
-+   unsigned int index;
-++  struct mad_bitptr bufend_ptr;
-+ 
-+   header->flags        = 0;
-+   header->private_bits = 0;
-+ 
-++  mad_bit_init(&bufend_ptr, stream->bufend);
-++
-+   /* header() */
-++  if (mad_bit_length(&stream->ptr, &bufend_ptr) < 32) {
-++    stream->error = MAD_ERROR_BUFLEN;
-++    return -1;
-++  }
-+ 
-+   /* syncword */
-+   mad_bit_skip(&stream->ptr, 11);
-+@@ -225,8 +232,13 @@ int decode_header(struct mad_header *header, struct mad_stream *stream)
-+   /* error_check() */
-+ 
-+   /* crc_check */
-+-  if (header->flags & MAD_FLAG_PROTECTION)
-++  if (header->flags & MAD_FLAG_PROTECTION) {
-++    if (mad_bit_length(&stream->ptr, &bufend_ptr) < 16) {
-++      stream->error = MAD_ERROR_BUFLEN;
-++      return -1;
-++    }
-+     header->crc_target = mad_bit_read(&stream->ptr, 16);
-++  }
-+ 
-+   return 0;
-+ }
-+@@ -338,7 +350,7 @@ int mad_header_decode(struct mad_header *header, struct mad_stream *stream)
-+       stream->error = MAD_ERROR_BUFLEN;
-+       goto fail;
-+     }
-+-    else if (!(ptr[0] == 0xff && (ptr[1] & 0xe0) == 0xe0)) {
-++    else if ((end - ptr >= 2) && !(ptr[0] == 0xff && (ptr[1] & 0xe0) == 0xe0)) {
-+       /* mark point where frame sync word was expected */
-+       stream->this_frame = ptr;
-+       stream->next_frame = ptr + 1;
-+@@ -361,6 +373,8 @@ int mad_header_decode(struct mad_header *header, struct mad_stream *stream)
-+     ptr = mad_bit_nextbyte(&stream->ptr);
-+   }
-+ 
-++  stream->error = MAD_ERROR_NONE;
-++
-+   /* begin processing */
-+   stream->this_frame = ptr;
-+   stream->next_frame = ptr + 1;  /* possibly bogus sync word */
-+@@ -413,7 +427,7 @@ int mad_header_decode(struct mad_header *header, struct mad_stream *stream)
-+     /* check that a valid frame header follows this frame */
-+ 
-+     ptr = stream->next_frame;
-+-    if (!(ptr[0] == 0xff && (ptr[1] & 0xe0) == 0xe0)) {
-++    if ((end - ptr >= 2) && !(ptr[0] == 0xff && (ptr[1] & 0xe0) == 0xe0)) {
-+       ptr = stream->next_frame = stream->this_frame + 1;
-+       goto sync;
-+     }
-+diff --git a/layer12.c b/layer12.c
-+index 6981f9c..b6f4a2f 100644
-+--- a/layer12.c
-++++ b/layer12.c
-+@@ -72,10 +72,18 @@ mad_fixed_t const linear_table[14] = {
-+  * DESCRIPTION:	decode one requantized Layer I sample from a bitstream
-+  */
-+ static
-+-mad_fixed_t I_sample(struct mad_bitptr *ptr, unsigned int nb)
-++mad_fixed_t I_sample(struct mad_bitptr *ptr, unsigned int nb, struct mad_stream *stream)
-+ {
-+   mad_fixed_t sample;
-++  struct mad_bitptr frameend_ptr;
-+ 
-++  mad_bit_init(&frameend_ptr, stream->next_frame);
-++
-++  if (mad_bit_length(ptr, &frameend_ptr) < nb) {
-++    stream->error = MAD_ERROR_LOSTSYNC;
-++    stream->sync = 0;
-++    return 0;
-++  }
-+   sample = mad_bit_read(ptr, nb);
-+ 
-+   /* invert most significant bit, extend sign, then scale to fixed format */
-+@@ -106,6 +114,10 @@ int mad_layer_I(struct mad_stream *stream, struct mad_frame *frame)
-+   struct mad_header *header = &frame->header;
-+   unsigned int nch, bound, ch, s, sb, nb;
-+   unsigned char allocation[2][32], scalefactor[2][32];
-++  struct mad_bitptr bufend_ptr, frameend_ptr;
-++
-++  mad_bit_init(&bufend_ptr, stream->bufend);
-++  mad_bit_init(&frameend_ptr, stream->next_frame);
-+ 
-+   nch = MAD_NCHANNELS(header);
-+ 
-+@@ -118,6 +130,11 @@ int mad_layer_I(struct mad_stream *stream, struct mad_frame *frame)
-+   /* check CRC word */
-+ 
-+   if (header->flags & MAD_FLAG_PROTECTION) {
-++    if (mad_bit_length(&stream->ptr, &bufend_ptr)
-++		< 4 * (bound * nch + (32 - bound))) {
-++      stream->error = MAD_ERROR_BADCRC;
-++      return -1;
-++    }
-+     header->crc_check =
-+       mad_bit_crc(stream->ptr, 4 * (bound * nch + (32 - bound)),
-+ 		  header->crc_check);
-+@@ -133,6 +150,11 @@ int mad_layer_I(struct mad_stream *stream, struct mad_frame *frame)
-+ 
-+   for (sb = 0; sb < bound; ++sb) {
-+     for (ch = 0; ch < nch; ++ch) {
-++      if (mad_bit_length(&stream->ptr, &frameend_ptr) < 4) {
-++	stream->error = MAD_ERROR_LOSTSYNC;
-++	stream->sync = 0;
-++	return -1;
-++      }
-+       nb = mad_bit_read(&stream->ptr, 4);
-+ 
-+       if (nb == 15) {
-+@@ -145,6 +167,11 @@ int mad_layer_I(struct mad_stream *stream, struct mad_frame *frame)
-+   }
-+ 
-+   for (sb = bound; sb < 32; ++sb) {
-++    if (mad_bit_length(&stream->ptr, &frameend_ptr) < 4) {
-++      stream->error = MAD_ERROR_LOSTSYNC;
-++      stream->sync = 0;
-++      return -1;
-++    }
-+     nb = mad_bit_read(&stream->ptr, 4);
-+ 
-+     if (nb == 15) {
-+@@ -161,6 +188,11 @@ int mad_layer_I(struct mad_stream *stream, struct mad_frame *frame)
-+   for (sb = 0; sb < 32; ++sb) {
-+     for (ch = 0; ch < nch; ++ch) {
-+       if (allocation[ch][sb]) {
-++        if (mad_bit_length(&stream->ptr, &frameend_ptr) < 6) {
-++	  stream->error = MAD_ERROR_LOSTSYNC;
-++	  stream->sync = 0;
-++	  return -1;
-++	}
-+ 	scalefactor[ch][sb] = mad_bit_read(&stream->ptr, 6);
-+ 
-+ # if defined(OPT_STRICT)
-+@@ -185,8 +217,10 @@ int mad_layer_I(struct mad_stream *stream, struct mad_frame *frame)
-+       for (ch = 0; ch < nch; ++ch) {
-+ 	nb = allocation[ch][sb];
-+ 	frame->sbsample[ch][s][sb] = nb ?
-+-	  mad_f_mul(I_sample(&stream->ptr, nb),
-++	  mad_f_mul(I_sample(&stream->ptr, nb, stream),
-+ 		    sf_table[scalefactor[ch][sb]]) : 0;
-++	if (stream->error != 0)
-++	  return -1;
-+       }
-+     }
-+ 
-+@@ -194,7 +228,14 @@ int mad_layer_I(struct mad_stream *stream, struct mad_frame *frame)
-+       if ((nb = allocation[0][sb])) {
-+ 	mad_fixed_t sample;
-+ 
-+-	sample = I_sample(&stream->ptr, nb);
-++	if (mad_bit_length(&stream->ptr, &frameend_ptr) < nb) {
-++	  stream->error = MAD_ERROR_LOSTSYNC;
-++	  stream->sync = 0;
-++          return -1;
-++	}
-++	sample = I_sample(&stream->ptr, nb, stream);
-++        if (stream->error != 0)
-++	  return -1;
-+ 
-+ 	for (ch = 0; ch < nch; ++ch) {
-+ 	  frame->sbsample[ch][s][sb] =
-+@@ -280,13 +321,21 @@ struct quantclass {
-+ static
-+ void II_samples(struct mad_bitptr *ptr,
-+ 		struct quantclass const *quantclass,
-+-		mad_fixed_t output[3])
-++		mad_fixed_t output[3], struct mad_stream *stream)
-+ {
-+   unsigned int nb, s, sample[3];
-++  struct mad_bitptr frameend_ptr;
-++
-++  mad_bit_init(&frameend_ptr, stream->next_frame);
-+ 
-+   if ((nb = quantclass->group)) {
-+     unsigned int c, nlevels;
-+ 
-++    if (mad_bit_length(ptr, &frameend_ptr) < quantclass->bits) {
-++      stream->error = MAD_ERROR_LOSTSYNC;
-++      stream->sync = 0;
-++      return;
-++    }
-+     /* degrouping */
-+     c = mad_bit_read(ptr, quantclass->bits);
-+     nlevels = quantclass->nlevels;
-+@@ -299,8 +348,14 @@ void II_samples(struct mad_bitptr *ptr,
-+   else {
-+     nb = quantclass->bits;
-+ 
-+-    for (s = 0; s < 3; ++s)
-++    for (s = 0; s < 3; ++s) {
-++      if (mad_bit_length(ptr, &frameend_ptr) < nb) {
-++	stream->error = MAD_ERROR_LOSTSYNC;
-++	stream->sync = 0;
-++	return;
-++      }
-+       sample[s] = mad_bit_read(ptr, nb);
-++    }
-+   }
-+ 
-+   for (s = 0; s < 3; ++s) {
-+@@ -336,6 +391,9 @@ int mad_layer_II(struct mad_stream *stream, struct mad_frame *frame)
-+   unsigned char const *offsets;
-+   unsigned char allocation[2][32], scfsi[2][32], scalefactor[2][32][3];
-+   mad_fixed_t samples[3];
-++  struct mad_bitptr frameend_ptr;
-++
-++  mad_bit_init(&frameend_ptr, stream->next_frame);
-+ 
-+   nch = MAD_NCHANNELS(header);
-+ 
-+@@ -402,13 +460,24 @@ int mad_layer_II(struct mad_stream *stream, struct mad_frame *frame)
-+   for (sb = 0; sb < bound; ++sb) {
-+     nbal = bitalloc_table[offsets[sb]].nbal;
-+ 
-+-    for (ch = 0; ch < nch; ++ch)
-++    for (ch = 0; ch < nch; ++ch) {
-++      if (mad_bit_length(&stream->ptr, &frameend_ptr) < nbal) {
-++	stream->error = MAD_ERROR_LOSTSYNC;
-++	stream->sync = 0;
-++	return -1;
-++      }
-+       allocation[ch][sb] = mad_bit_read(&stream->ptr, nbal);
-++    }
-+   }
-+ 
-+   for (sb = bound; sb < sblimit; ++sb) {
-+     nbal = bitalloc_table[offsets[sb]].nbal;
-+ 
-++    if (mad_bit_length(&stream->ptr, &frameend_ptr) < nbal) {
-++      stream->error = MAD_ERROR_LOSTSYNC;
-++      stream->sync = 0;
-++      return -1;
-++    }
-+     allocation[0][sb] =
-+     allocation[1][sb] = mad_bit_read(&stream->ptr, nbal);
-+   }
-+@@ -417,8 +486,14 @@ int mad_layer_II(struct mad_stream *stream, struct mad_frame *frame)
-+ 
-+   for (sb = 0; sb < sblimit; ++sb) {
-+     for (ch = 0; ch < nch; ++ch) {
-+-      if (allocation[ch][sb])
-++      if (allocation[ch][sb]) {
-++	if (mad_bit_length(&stream->ptr, &frameend_ptr) < 2) {
-++	  stream->error = MAD_ERROR_LOSTSYNC;
-++	  stream->sync = 0;
-++	  return -1;
-++	}
-+ 	scfsi[ch][sb] = mad_bit_read(&stream->ptr, 2);
-++      }
-+     }
-+   }
-+ 
-+@@ -441,6 +516,11 @@ int mad_layer_II(struct mad_stream *stream, struct mad_frame *frame)
-+   for (sb = 0; sb < sblimit; ++sb) {
-+     for (ch = 0; ch < nch; ++ch) {
-+       if (allocation[ch][sb]) {
-++	if (mad_bit_length(&stream->ptr, &frameend_ptr) < 6) {
-++	  stream->error = MAD_ERROR_LOSTSYNC;
-++	  stream->sync = 0;
-++	  return -1;
-++	}
-+ 	scalefactor[ch][sb][0] = mad_bit_read(&stream->ptr, 6);
-+ 
-+ 	switch (scfsi[ch][sb]) {
-+@@ -451,11 +531,21 @@ int mad_layer_II(struct mad_stream *stream, struct mad_frame *frame)
-+ 	  break;
-+ 
-+ 	case 0:
-++	  if (mad_bit_length(&stream->ptr, &frameend_ptr) < 6) {
-++	    stream->error = MAD_ERROR_LOSTSYNC;
-++	    stream->sync = 0;
-++	    return -1;
-++	  }
-+ 	  scalefactor[ch][sb][1] = mad_bit_read(&stream->ptr, 6);
-+ 	  /* fall through */
-+ 
-+ 	case 1:
-+ 	case 3:
-++	  if (mad_bit_length(&stream->ptr, &frameend_ptr) < 6) {
-++	    stream->error = MAD_ERROR_LOSTSYNC;
-++	    stream->sync = 0;
-++	    return -1;
-++	  }
-+ 	  scalefactor[ch][sb][2] = mad_bit_read(&stream->ptr, 6);
-+ 	}
-+ 
-+@@ -487,7 +577,9 @@ int mad_layer_II(struct mad_stream *stream, struct mad_frame *frame)
-+ 	if ((index = allocation[ch][sb])) {
-+ 	  index = offset_table[bitalloc_table[offsets[sb]].offset][index - 1];
-+ 
-+-	  II_samples(&stream->ptr, &qc_table[index], samples);
-++	  II_samples(&stream->ptr, &qc_table[index], samples, stream);
-++	  if (stream->error != 0)
-++            return -1;
-+ 
-+ 	  for (s = 0; s < 3; ++s) {
-+ 	    frame->sbsample[ch][3 * gr + s][sb] =
-+@@ -505,7 +597,9 @@ int mad_layer_II(struct mad_stream *stream, struct mad_frame *frame)
-+       if ((index = allocation[0][sb])) {
-+ 	index = offset_table[bitalloc_table[offsets[sb]].offset][index - 1];
-+ 
-+-	II_samples(&stream->ptr, &qc_table[index], samples);
-++	II_samples(&stream->ptr, &qc_table[index], samples, stream);
-++	if (stream->error != 0)
-++          return -1;
-+ 
-+ 	for (ch = 0; ch < nch; ++ch) {
-+ 	  for (s = 0; s < 3; ++s) {
-+diff --git a/layer3.c b/layer3.c
-+index 7dc4ca6..59a81ed 100644
-+--- a/layer3.c
-++++ b/layer3.c
-+@@ -598,7 +598,8 @@ enum mad_error III_sideinfo(struct mad_bitptr *ptr, unsigned int nch,
-+ static
-+ unsigned int III_scalefactors_lsf(struct mad_bitptr *ptr,
-+ 				  struct channel *channel,
-+-				  struct channel *gr1ch, int mode_extension)
-++				  struct channel *gr1ch, int mode_extension,
-++				  unsigned int bits_left, unsigned int *part2_length)
-+ {
-+   struct mad_bitptr start;
-+   unsigned int scalefac_compress, index, slen[4], part, n, i;
-+@@ -644,8 +645,12 @@ unsigned int III_scalefactors_lsf(struct mad_bitptr *ptr,
-+ 
-+     n = 0;
-+     for (part = 0; part < 4; ++part) {
-+-      for (i = 0; i < nsfb[part]; ++i)
-++      for (i = 0; i < nsfb[part]; ++i) {
-++	if (bits_left < slen[part])
-++	  return MAD_ERROR_BADSCFSI;
-+ 	channel->scalefac[n++] = mad_bit_read(ptr, slen[part]);
-++	bits_left -= slen[part];
-++      }
-+     }
-+ 
-+     while (n < 39)
-+@@ -690,7 +695,10 @@ unsigned int III_scalefactors_lsf(struct mad_bitptr *ptr,
-+       max = (1 << slen[part]) - 1;
-+ 
-+       for (i = 0; i < nsfb[part]; ++i) {
-++	if (bits_left < slen[part])
-++	  return MAD_ERROR_BADSCFSI;
-+ 	is_pos = mad_bit_read(ptr, slen[part]);
-++	bits_left -= slen[part];
-+ 
-+ 	channel->scalefac[n] = is_pos;
-+ 	gr1ch->scalefac[n++] = (is_pos == max);
-+@@ -703,7 +711,8 @@ unsigned int III_scalefactors_lsf(struct mad_bitptr *ptr,
-+     }
-+   }
-+ 
-+-  return mad_bit_length(&start, ptr);
-++  *part2_length = mad_bit_length(&start, ptr);
-++  return MAD_ERROR_NONE;
-+ }
-+ 
-+ /*
-+@@ -712,7 +721,8 @@ unsigned int III_scalefactors_lsf(struct mad_bitptr *ptr,
-+  */
-+ static
-+ unsigned int III_scalefactors(struct mad_bitptr *ptr, struct channel *channel,
-+-			      struct channel const *gr0ch, unsigned int scfsi)
-++			      struct channel const *gr0ch, unsigned int scfsi,
-++			      unsigned int bits_left, unsigned int *part2_length)
-+ {
-+   struct mad_bitptr start;
-+   unsigned int slen1, slen2, sfbi;
-+@@ -728,12 +738,20 @@ unsigned int III_scalefactors(struct mad_bitptr *ptr, struct channel *channel,
-+     sfbi = 0;
-+ 
-+     nsfb = (channel->flags & mixed_block_flag) ? 8 + 3 * 3 : 6 * 3;
-+-    while (nsfb--)
-++    while (nsfb--) {
-++      if (bits_left < slen1)
-++	return MAD_ERROR_BADSCFSI;
-+       channel->scalefac[sfbi++] = mad_bit_read(ptr, slen1);
-++      bits_left -= slen1;
-++    }
-+ 
-+     nsfb = 6 * 3;
-+-    while (nsfb--)
-++    while (nsfb--) {
-++      if (bits_left < slen2)
-++	return MAD_ERROR_BADSCFSI;
-+       channel->scalefac[sfbi++] = mad_bit_read(ptr, slen2);
-++      bits_left -= slen2;
-++    }
-+ 
-+     nsfb = 1 * 3;
-+     while (nsfb--)
-+@@ -745,8 +763,12 @@ unsigned int III_scalefactors(struct mad_bitptr *ptr, struct channel *channel,
-+ 	channel->scalefac[sfbi] = gr0ch->scalefac[sfbi];
-+     }
-+     else {
-+-      for (sfbi = 0; sfbi < 6; ++sfbi)
-++      for (sfbi = 0; sfbi < 6; ++sfbi) {
-++	if (bits_left < slen1)
-++	  return MAD_ERROR_BADSCFSI;
-+ 	channel->scalefac[sfbi] = mad_bit_read(ptr, slen1);
-++	bits_left -= slen1;
-++      }
-+     }
-+ 
-+     if (scfsi & 0x4) {
-+@@ -754,8 +776,12 @@ unsigned int III_scalefactors(struct mad_bitptr *ptr, struct channel *channel,
-+ 	channel->scalefac[sfbi] = gr0ch->scalefac[sfbi];
-+     }
-+     else {
-+-      for (sfbi = 6; sfbi < 11; ++sfbi)
-++      for (sfbi = 6; sfbi < 11; ++sfbi) {
-++	if (bits_left < slen1)
-++	  return MAD_ERROR_BADSCFSI;
-+ 	channel->scalefac[sfbi] = mad_bit_read(ptr, slen1);
-++	bits_left -= slen1;
-++      }
-+     }
-+ 
-+     if (scfsi & 0x2) {
-+@@ -763,8 +789,12 @@ unsigned int III_scalefactors(struct mad_bitptr *ptr, struct channel *channel,
-+ 	channel->scalefac[sfbi] = gr0ch->scalefac[sfbi];
-+     }
-+     else {
-+-      for (sfbi = 11; sfbi < 16; ++sfbi)
-++      for (sfbi = 11; sfbi < 16; ++sfbi) {
-++	if (bits_left < slen2)
-++	  return MAD_ERROR_BADSCFSI;
-+ 	channel->scalefac[sfbi] = mad_bit_read(ptr, slen2);
-++	bits_left -= slen2;
-++      }
-+     }
-+ 
-+     if (scfsi & 0x1) {
-+@@ -772,14 +802,19 @@ unsigned int III_scalefactors(struct mad_bitptr *ptr, struct channel *channel,
-+ 	channel->scalefac[sfbi] = gr0ch->scalefac[sfbi];
-+     }
-+     else {
-+-      for (sfbi = 16; sfbi < 21; ++sfbi)
-++      for (sfbi = 16; sfbi < 21; ++sfbi) {
-++	if (bits_left < slen2)
-++	  return MAD_ERROR_BADSCFSI;
-+ 	channel->scalefac[sfbi] = mad_bit_read(ptr, slen2);
-++	bits_left -= slen2;
-++      }
-+     }
-+ 
-+     channel->scalefac[21] = 0;
-+   }
-+ 
-+-  return mad_bit_length(&start, ptr);
-++  *part2_length = mad_bit_length(&start, ptr);
-++  return MAD_ERROR_NONE;
-+ }
-+ 
-+ /*
-+@@ -933,19 +968,17 @@ static
-+ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
-+ 			      struct channel *channel,
-+ 			      unsigned char const *sfbwidth,
-+-			      unsigned int part2_length)
-++			      signed int part3_length)
-+ {
-+   signed int exponents[39], exp;
-+   signed int const *expptr;
-+   struct mad_bitptr peek;
-+-  signed int bits_left, cachesz;
-++  signed int bits_left, cachesz, fakebits;
-+   register mad_fixed_t *xrptr;
-+   mad_fixed_t const *sfbound;
-+   register unsigned long bitcache;
-+ 
-+-  bits_left = (signed) channel->part2_3_length - (signed) part2_length;
-+-  if (bits_left < 0)
-+-    return MAD_ERROR_BADPART3LEN;
-++  bits_left = part3_length;
-+ 
-+   III_exponents(channel, sfbwidth, exponents);
-+ 
-+@@ -956,8 +989,12 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
-+   cachesz  = mad_bit_bitsleft(&peek);
-+   cachesz += ((32 - 1 - 24) + (24 - cachesz)) & ~7;
-+ 
-++  if (bits_left < cachesz) {
-++    cachesz = bits_left;
-++  }
-+   bitcache   = mad_bit_read(&peek, cachesz);
-+   bits_left -= cachesz;
-++  fakebits = 0;
-+ 
-+   xrptr = &xr[0];
-+ 
-+@@ -986,7 +1023,7 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
-+ 
-+     big_values = channel->big_values;
-+ 
-+-    while (big_values-- && cachesz + bits_left > 0) {
-++    while (big_values-- && cachesz + bits_left - fakebits > 0) {
-+       union huffpair const *pair;
-+       unsigned int clumpsz, value;
-+       register mad_fixed_t requantized;
-+@@ -1023,10 +1060,19 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
-+ 	unsigned int bits;
-+ 
-+ 	bits       = ((32 - 1 - 21) + (21 - cachesz)) & ~7;
-++	if (bits_left < bits) {
-++	  bits = bits_left;
-++	}
-+ 	bitcache   = (bitcache << bits) | mad_bit_read(&peek, bits);
-+ 	cachesz   += bits;
-+ 	bits_left -= bits;
-+       }
-++      if (cachesz < 21) {
-++	unsigned int bits = 21 - cachesz;
-++	bitcache <<= bits;
-++	cachesz += bits;
-++	fakebits += bits;
-++      }
-+ 
-+       /* hcod (0..19) */
-+ 
-+@@ -1041,6 +1087,8 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
-+       }
-+ 
-+       cachesz -= pair->value.hlen;
-++      if (cachesz < fakebits)
-++	return MAD_ERROR_BADHUFFDATA;
-+ 
-+       if (linbits) {
-+ 	/* x (0..14) */
-+@@ -1054,10 +1102,15 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
-+ 
-+ 	case 15:
-+ 	  if (cachesz < linbits + 2) {
-+-	    bitcache   = (bitcache << 16) | mad_bit_read(&peek, 16);
-+-	    cachesz   += 16;
-+-	    bits_left -= 16;
-++	    unsigned int bits = 16;
-++	    if (bits_left < 16)
-++	      bits = bits_left;
-++	    bitcache   = (bitcache << bits) | mad_bit_read(&peek, bits);
-++	    cachesz   += bits;
-++	    bits_left -= bits;
-+ 	  }
-++	  if (cachesz - fakebits < linbits)
-++	    return MAD_ERROR_BADHUFFDATA;
-+ 
-+ 	  value += MASK(bitcache, cachesz, linbits);
-+ 	  cachesz -= linbits;
-+@@ -1074,6 +1127,8 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
-+ 	  }
-+ 
-+ 	x_final:
-++	  if (cachesz - fakebits < 1)
-++	    return MAD_ERROR_BADHUFFDATA;
-+ 	  xrptr[0] = MASK1BIT(bitcache, cachesz--) ?
-+ 	    -requantized : requantized;
-+ 	}
-+@@ -1089,10 +1144,15 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
-+ 
-+ 	case 15:
-+ 	  if (cachesz < linbits + 1) {
-+-	    bitcache   = (bitcache << 16) | mad_bit_read(&peek, 16);
-+-	    cachesz   += 16;
-+-	    bits_left -= 16;
-++	    unsigned int bits = 16;
-++	    if (bits_left < 16)
-++	      bits = bits_left;
-++	    bitcache   = (bitcache << bits) | mad_bit_read(&peek, bits);
-++	    cachesz   += bits;
-++	    bits_left -= bits;
-+ 	  }
-++	  if (cachesz - fakebits < linbits)
-++	    return MAD_ERROR_BADHUFFDATA;
-+ 
-+ 	  value += MASK(bitcache, cachesz, linbits);
-+ 	  cachesz -= linbits;
-+@@ -1109,6 +1169,8 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
-+ 	  }
-+ 
-+ 	y_final:
-++	  if (cachesz - fakebits < 1)
-++	    return MAD_ERROR_BADHUFFDATA;
-+ 	  xrptr[1] = MASK1BIT(bitcache, cachesz--) ?
-+ 	    -requantized : requantized;
-+ 	}
-+@@ -1128,6 +1190,8 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
-+ 	    requantized = reqcache[value] = III_requantize(value, exp);
-+ 	  }
-+ 
-++	  if (cachesz - fakebits < 1)
-++	    return MAD_ERROR_BADHUFFDATA;
-+ 	  xrptr[0] = MASK1BIT(bitcache, cachesz--) ?
-+ 	    -requantized : requantized;
-+ 	}
-+@@ -1146,6 +1210,8 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
-+ 	    requantized = reqcache[value] = III_requantize(value, exp);
-+ 	  }
-+ 
-++	  if (cachesz - fakebits < 1)
-++	    return MAD_ERROR_BADHUFFDATA;
-+ 	  xrptr[1] = MASK1BIT(bitcache, cachesz--) ?
-+ 	    -requantized : requantized;
-+ 	}
-+@@ -1155,9 +1221,6 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
-+     }
-+   }
-+ 
-+-  if (cachesz + bits_left < 0)
-+-    return MAD_ERROR_BADHUFFDATA;  /* big_values overrun */
-+-
-+   /* count1 */
-+   {
-+     union huffquad const *table;
-+@@ -1167,15 +1230,24 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
-+ 
-+     requantized = III_requantize(1, exp);
-+ 
-+-    while (cachesz + bits_left > 0 && xrptr <= &xr[572]) {
-++    while (cachesz + bits_left - fakebits > 0 && xrptr <= &xr[572]) {
-+       union huffquad const *quad;
-+ 
-+       /* hcod (1..6) */
-+ 
-+       if (cachesz < 10) {
-+-	bitcache   = (bitcache << 16) | mad_bit_read(&peek, 16);
-+-	cachesz   += 16;
-+-	bits_left -= 16;
-++	unsigned int bits = 16;
-++	if (bits_left < 16)
-++	  bits = bits_left;
-++	bitcache   = (bitcache << bits) | mad_bit_read(&peek, bits);
-++	cachesz   += bits;
-++	bits_left -= bits;
-++      }
-++      if (cachesz < 10) {
-++	unsigned int bits = 10 - cachesz;
-++	bitcache <<= bits;
-++	cachesz += bits;
-++	fakebits += bits;
-+       }
-+ 
-+       quad = &table[MASK(bitcache, cachesz, 4)];
-+@@ -1188,6 +1260,11 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
-+ 		      MASK(bitcache, cachesz, quad->ptr.bits)];
-+       }
-+ 
-++      if (cachesz - fakebits < quad->value.hlen + quad->value.v
-++        + quad->value.w + quad->value.x + quad->value.y)
-++	/* We don't have enough bits to read one more entry, consider them
-++	 * stuffing bits. */
-++	break;
-+       cachesz -= quad->value.hlen;
-+ 
-+       if (xrptr == sfbound) {
-+@@ -1236,22 +1313,8 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
-+ 
-+       xrptr += 2;
-+     }
-+-
-+-    if (cachesz + bits_left < 0) {
-+-# if 0 && defined(DEBUG)
-+-      fprintf(stderr, "huffman count1 overrun (%d bits)\n",
-+-	      -(cachesz + bits_left));
-+-# endif
-+-
-+-      /* technically the bitstream is misformatted, but apparently
-+-	 some encoders are just a bit sloppy with stuffing bits */
-+-
-+-      xrptr -= 4;
-+-    }
-+   }
-+ 
-+-  assert(-bits_left <= MAD_BUFFER_GUARD * CHAR_BIT);
-+-
-+ # if 0 && defined(DEBUG)
-+   if (bits_left < 0)
-+     fprintf(stderr, "read %d bits too many\n", -bits_left);
-+@@ -2348,10 +2411,11 @@ void III_freqinver(mad_fixed_t sample[18][32], unsigned int sb)
-+  */
-+ static
-+ enum mad_error III_decode(struct mad_bitptr *ptr, struct mad_frame *frame,
-+-			  struct sideinfo *si, unsigned int nch)
-++			  struct sideinfo *si, unsigned int nch, unsigned int md_len)
-+ {
-+   struct mad_header *header = &frame->header;
-+   unsigned int sfreqi, ngr, gr;
-++  int bits_left = md_len * CHAR_BIT;
-+ 
-+   {
-+     unsigned int sfreq;
-+@@ -2383,6 +2447,7 @@ enum mad_error III_decode(struct mad_bitptr *ptr, struct mad_frame *frame,
-+     for (ch = 0; ch < nch; ++ch) {
-+       struct channel *channel = &granule->ch[ch];
-+       unsigned int part2_length;
-++      unsigned int part3_length;
-+ 
-+       sfbwidth[ch] = sfbwidth_table[sfreqi].l;
-+       if (channel->block_type == 2) {
-+@@ -2391,18 +2456,30 @@ enum mad_error III_decode(struct mad_bitptr *ptr, struct mad_frame *frame,
-+       }
-+ 
-+       if (header->flags & MAD_FLAG_LSF_EXT) {
-+-	part2_length = III_scalefactors_lsf(ptr, channel,
-++	error = III_scalefactors_lsf(ptr, channel,
-+ 					    ch == 0 ? 0 : &si->gr[1].ch[1],
-+-					    header->mode_extension);
-++					    header->mode_extension, bits_left, &part2_length);
-+       }
-+       else {
-+-	part2_length = III_scalefactors(ptr, channel, &si->gr[0].ch[ch],
-+-					gr == 0 ? 0 : si->scfsi[ch]);
-++	error = III_scalefactors(ptr, channel, &si->gr[0].ch[ch],
-++					gr == 0 ? 0 : si->scfsi[ch], bits_left, &part2_length);
-+       }
-++      if (error)
-++        return error;
-+ 
-+-      error = III_huffdecode(ptr, xr[ch], channel, sfbwidth[ch], part2_length);
-++      bits_left -= part2_length;
-++
-++      if (part2_length > channel->part2_3_length)
-++        return MAD_ERROR_BADPART3LEN;
-++
-++      part3_length = channel->part2_3_length - part2_length;
-++      if (part3_length > bits_left)
-++        return MAD_ERROR_BADPART3LEN;
-++
-++      error = III_huffdecode(ptr, xr[ch], channel, sfbwidth[ch], part3_length);
-+       if (error)
-+ 	return error;
-++      bits_left -= part3_length;
-+     }
-+ 
-+     /* joint stereo processing */
-+@@ -2519,11 +2596,13 @@ int mad_layer_III(struct mad_stream *stream, struct mad_frame *frame)
-+   unsigned int nch, priv_bitlen, next_md_begin = 0;
-+   unsigned int si_len, data_bitlen, md_len;
-+   unsigned int frame_space, frame_used, frame_free;
-+-  struct mad_bitptr ptr;
-++  struct mad_bitptr ptr, bufend_ptr;
-+   struct sideinfo si;
-+   enum mad_error error;
-+   int result = 0;
-+ 
-++  mad_bit_init(&bufend_ptr, stream->bufend);
-++
-+   /* allocate Layer III dynamic structures */
-+ 
-+   if (stream->main_data == 0) {
-+@@ -2587,14 +2666,15 @@ int mad_layer_III(struct mad_stream *stream, struct mad_frame *frame)
-+     unsigned long header;
-+ 
-+     mad_bit_init(&peek, stream->next_frame);
-++    if (mad_bit_length(&peek, &bufend_ptr) >= 57) {
-++      header = mad_bit_read(&peek, 32);
-++      if ((header & 0xffe60000L) /* syncword | layer */ == 0xffe20000L) {
-++        if (!(header & 0x00010000L))  /* protection_bit */
-++	  mad_bit_skip(&peek, 16);  /* crc_check */
-+ 
-+-    header = mad_bit_read(&peek, 32);
-+-    if ((header & 0xffe60000L) /* syncword | layer */ == 0xffe20000L) {
-+-      if (!(header & 0x00010000L))  /* protection_bit */
-+-	mad_bit_skip(&peek, 16);  /* crc_check */
-+-
-+-      next_md_begin =
-+-	mad_bit_read(&peek, (header & 0x00080000L) /* ID */ ? 9 : 8);
-++        next_md_begin =
-++	  mad_bit_read(&peek, (header & 0x00080000L) /* ID */ ? 9 : 8);
-++      }
-+     }
-+ 
-+     mad_bit_finish(&peek);
-+@@ -2653,7 +2733,7 @@ int mad_layer_III(struct mad_stream *stream, struct mad_frame *frame)
-+   /* decode main_data */
-+ 
-+   if (result == 0) {
-+-    error = III_decode(&ptr, frame, &si, nch);
-++    error = III_decode(&ptr, frame, &si, nch, md_len);
-+     if (error) {
-+       stream->error = error;
-+       result = -1;
-diff --git a/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb b/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb
-index b6668980da..3f5a052906 100644
---- a/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb
-+++ b/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb
-@@ -17,6 +17,7 @@ SRC_URI = "https://downloads.sourceforge.net/mad/libmad-${PV}.tar.gz \
-     file://automake-foreign.patch \
-     file://0001-configure-Respect-the-cflags-from-environment.patch \
-     file://CVE-2017-8372_CVE-2017-8373.patch \
-+    file://CVE-2017-8374.patch \
- "
- SRC_URI:append:toolchain-clang = " file://0004-Remove-clang-unsupported-compiler-flags.patch "
- 
++inherit python_setuptools_build_meta ptest-python-pytest
++
++DEPENDS += "python3-setuptools-scm-native"
++
++RDEPENDS:${PN} += " \
++    python3-core \
++    python3-datetime \
++    python3-io \
++    python3-json \
++    python3-netclient \
++    python3-netserver \
++    python3-shell \
++    python3-stringold \
++    python3-unittest \
++"
++
++PTEST_PYTEST_DIR = "varlink/tests"
+</pre>
+      </blockquote>
+    </blockquote>
+  </body>
+</html>
+
+--------------czlRY8TYnHmW8blcmdLMFnu0--
 
