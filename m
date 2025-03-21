@@ -1,151 +1,151 @@
-Return-Path: <omri.sarig13@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 03F90C35FF3
-	for <webhook@archiver.kernel.org>; Fri, 21 Mar 2025 08:47:48 +0000 (UTC)
-Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com [209.85.208.169])
- by mx.groups.io with SMTP id smtpd.web11.16553.1742546864173012865
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D6D6C36000
+	for <webhook@archiver.kernel.org>; Fri, 21 Mar 2025 09:28:09 +0000 (UTC)
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
+ by mx.groups.io with SMTP id smtpd.web11.17028.1742549285642158739
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Mar 2025 01:47:44 -0700
+ Fri, 21 Mar 2025 02:28:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cavkXaEi;
- spf=pass (domain: gmail.com, ip: 209.85.208.169, mailfrom: omri.sarig13@gmail.com)
-Received: by mail-lj1-f169.google.com with SMTP id 38308e7fff4ca-307325f2436so17530571fa.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 01:47:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=aVDuWq/f;
+ spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-5e61d91a087so2634925a12.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 02:28:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1742546862; x=1743151662; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1742549284; x=1743154084; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=BJpC3rVwPL9URNRRPXEgntzNpUQgltXMWKeqa8Yi7DY=;
-        b=cavkXaEiwM78WL8SkOkEjNu0Wn4j0ucx3AbYkF0p4KVfyJDvr2CToo62kF+0lZhL3J
-         hvmck/HQa6Pmam+nEDkpbWx2V9YMZRcR8m/vF9kMnt7jRPTQz+ohElTjeM9RHhLfIBZ9
-         XBiSDeAy+N71PvJyG/lUoi4gEJk4nT+BaWduoWmFJzq1moVA9dreXZn+u/IKo8Hsjz7m
-         +3nsXpoD6tMOAnz1mUjxwGkw31O4hjUf52ZdnhztJgPsoxT45pyBNccmVOf+Tw/tiYZr
-         inljYvUtxLHQRDKOXPy8DamLyuEwxItViUKgZHzXd4Zij0Se3J2MjMKDpqf2EfdpMuq5
-         aM8w==
+        bh=irGZpDR2ojw1oaz51RoslrjBKVAUzTk5/x4VAgUpdFw=;
+        b=aVDuWq/fh+YnYNLatY1zmyS7YqHWtulMY1GRzEJYV8p1mK+Rztoh1dN9BBFbjUBFWQ
+         fx9mjOsjHCtxaHIux1PExQ12fiEMIyNqdrfPaysBr5hTsRoAK2yjFDi4CGjlLkNudJjb
+         8TnYs7RHC8tw+IYy+A1FHpmHYNu59Ue37MAnvV3092Aam5yX10EBOydHOK1jFKnkZgpp
+         N5MByxrw0s2UyVx73v5suPW5Z31F3r1F4cVGtC/uHWtfgUPK6v5/aXYBkMmlgsXlMS/t
+         IBAdGDSSpP9V0RZKLB09iMG8nAIeq1rrfng8qjvnoWW4VafEGQvx4JpgcV+VIt1Hn5xa
+         0H9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742546862; x=1743151662;
+        d=1e100.net; s=20230601; t=1742549284; x=1743154084;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=BJpC3rVwPL9URNRRPXEgntzNpUQgltXMWKeqa8Yi7DY=;
-        b=XXY0S9WRdgINot2OG7TFNANOOXJa9K8BR8qD8IIRh7PK7xwSCfTSfIYSVQYwTLchKX
-         IXfLYHQwgV5LGTGhiH5SnHUGcI6tr2Dti0zBCzAYAAgn6Y2tYTUEF6hKNCPEQt1024iL
-         IWWu5UMmhmgKSGa4n6UPluzp9Cf+hMdijlqKYH7zcWDmR7KnAMDafm38roHyIK8yHFDU
-         eej4AhUG8xtUXeQ2UJ1uGl73ShiTGY53fZ2l4h0kowBwy8eUDv4E3/EyqLMvsJfSd6Cn
-         o7qd3iaweGL/bGl1sIIbqnTQnltu6tjsRl/VTXrZX+v+W+9waKVZzqx3Hkl/S5ROd1nB
-         RJtA==
-X-Gm-Message-State: AOJu0YwAvwbfB53+pnJcxwe9Wq9WIonJmPoal732Qtor44o3cUDcFxh6
-	6BLYgcwYzfvFcwZASr8eqz7WidhLfq7lIo9dR3bJfOsxGogEGN8tKMhuvXM8
-X-Gm-Gg: ASbGncsArl9GbrKs9298GulmhOKAMjqezcjeAkeP3/OApoRsGuHa8XR+SQBJCkSUOZo
-	/4qBnSoEfvvI2u9wju32f7s5t1P4WKATc7jlLKEEoLbdx973RwIXP+weA1qdBsuS6xcrhYrCZQD
-	ijsRjk/KZyeQmQVgmFTl6a5Y4Nnl5zxhKvIfWqMFB9Vp2FHLBaMhKGtEEvaz8cIaiQtg9C27UfE
-	sSGKGgpQOrshw4Hvtj4KOhYXGFwNEJ1wS58YLqtnQxTkC0Fpn0NxtWB4tr+WNO4AVhOBdEto4r9
-	1vYfIaPsq5sonIAlTw3OXcBzlkv+sZzJjlczI03D81vOkPoRFkgxk1h/Fwt7hTMbf1GaveWg5Pd
-	UnYRTkSfGEjtVKdN8jzzwzHzctdc=
-X-Google-Smtp-Source: AGHT+IFx+0Q89sV07lCU2fOn0pjv+Jw1RJ4HTNd2r+UPcfViXDq6CqvCugdsfHjH/l9rdyvG0MNY+Q==
-X-Received: by 2002:a05:6512:33d6:b0:54a:c835:cc58 with SMTP id 2adb3069b0e04-54ad650d593mr846944e87.50.1742546861347;
-        Fri, 21 Mar 2025 01:47:41 -0700 (PDT)
-Received: from omsa-HP-EliteBook-840-14-inch-G9-Notebook-PC.prevas.se ([81.216.59.226])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-54ad64fbdedsm128794e87.144.2025.03.21.01.47.39
+        bh=irGZpDR2ojw1oaz51RoslrjBKVAUzTk5/x4VAgUpdFw=;
+        b=WzMtxKdOvzH3glvTbtHiERefxReAYG4Q7Q3ItEzKjVugjqpFHawVDKx52lkuvWML3l
+         07Mevmy52PzHFdK36vM8HRh5r3OLeakDVeKwSdRDlJW+hjdZeJzT5ZX4TugZh8PbLWfx
+         RAhxYGFFg4gVFRZzeJ8w6Kbu6IWW08uHF/I4Xjt2a1QiqMu6DONfUAKURszLFDnjf5MW
+         Z0f06saeZ/btH4ef5GiXxkDUgc4OwAdvc/vqpcwwZm7pX+jUnQN5xdMSq/iRc5ZI90lI
+         KLXbRwlKD6V13YquoYJaRo0nSSrQ/tN+uAXbA5RRroiY1x9nnUksEkfsd+Mn9WRsG5m2
+         HI8g==
+X-Gm-Message-State: AOJu0YwcelX3YLQtrK5FsCcSwjks82JHyUSoczx4aL4kT4Oy+vN+U5nJ
+	giDIRu0j5yuHYAvsSSeYCcxcIuIPylaY5JpgRPy8ZYgCiPOfN7TotnVz3w==
+X-Gm-Gg: ASbGncvtfWAxroyCqmm3CpelqH/pEbl0KXfPGq7uic0mQmz4L6lmPpgfylcoAV/YbOj
+	7Iz10bk6kfHbMXOFooF2Zn4NkFCe4oOHQVB0vhGm1EkMp6nIqftCeWvl38VaqZdzA+T0cCIDMDx
+	3+sTykBHuML/8l26b14YUcQxvFOCkQkgDms5EHLmWCalYTZeLO+EIToQBdL3YhUxIjaO+FQ+TmO
+	AomVq40bMIQyBkHxF4vgpX9wq1LGffJOSN0BxTEZtigy3SKEE4LgBvok9pXEN8NQaLPoHKdaHL9
+	JJBRJ1gIKJ7mbJKEu5S1wAltKdkQe1fK1jSVHd/8VXCxOnRmTLFJAtYjgeGKtCEgMpUwPDOJTC1
+	VCw==
+X-Google-Smtp-Source: AGHT+IHrSD42llZWRaLICvlBwWc/q8lfv4cnXU/QIl3gLTGc7tJfccntwsD1wRDCoz+otDiOITrNEw==
+X-Received: by 2002:a17:907:bd0d:b0:abf:e7c1:b3bf with SMTP id a640c23a62f3a-ac3f24163f7mr280558166b.11.1742549283482;
+        Fri, 21 Mar 2025 02:28:03 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with UTF8SMTPSA id a640c23a62f3a-ac3efb647f9sm116385266b.109.2025.03.21.02.28.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Mar 2025 01:47:39 -0700 (PDT)
-From: Omri Sarig <omri.sarig13@gmail.com>
+        Fri, 21 Mar 2025 02:28:02 -0700 (PDT)
+From: martin.jansa@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Omri Sarig <omri.sarig13@gmail.com>
-Subject: [meta-python][PATCH v3] python3-varlink: Add recipe
-Date: Fri, 21 Mar 2025 09:46:32 +0100
-Message-ID: <20250321084632.1889809-1-omri.sarig13@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] libconfig: fix build with gcc-15
+Date: Fri, 21 Mar 2025 10:27:11 +0100
+Message-ID: <20250321092711.449556-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 08:47:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116174
+ <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 09:28:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116175
 
-Add a python recipe to install the python implementation for the varlink
-interface.
+From: Martin Jansa <martin.jansa@gmail.com>
 
-The recipe is using the current master head, instead of the version from
-pypi or a tagged version. This is done as the pypi and tagged versions
-are quite old, while the master is continuously maintained in GitHub.
-The version set for the package is based upon the last tagged commit in
-the tree, with the addition of git.
-As the last tagged version is old, the recipe name is based over git,
-instead of adding the old tag version to the file name.
+* backport fix from:
+  https://github.com/hyperrealm/libconfig/commit/690342b9cbc8b39787a1501bd890d63ca63a003c
+  to fix:
+  http://errors.yoctoproject.org/Errors/Details/848457/
+  grammar.y:58:33: error: too many arguments to function 'libconfig_yyget_lineno'; expected 0, have 1
 
-The runtime dependencies were created by looking at all the import
-statement in the installed files of the repository and taking the
-relevant packages from the python3 manifest file in meta-poky.
-Unfortunately, python-varlink does not have different installation
-candidates for testing or example code - meaning that when the package
-is install through setuptools, the test code is part of the target
-system.
-This causes the runtime dependencies to contain some packages (like
-python3-unittest) which are not needed during regular operation of the
-system, assuming the user will not want to run test or example code.
-However, as these files are installed in the system, and are used as the
-reference example, we've decided to keep the runtime dependencies as-is.
-Future work on this package can be done to split the runtime
-dependencies to different parts (main and test for example), and modify
-the installed files on the system according to the user wishes.
+* need to add bison-native dependency while grammar.y is modified
+  with the above patch to fix:
+  http://errors.yoctoproject.org/Errors/Details/848472/
+  ../aux-build/ylwrap: line 174: yacc: command not found
 
-Signed-off-by: Omri Sarig <omri.sarig13@gmail.com>
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- .../ptest-packagelists-meta-python.inc        |  1 +
- .../python/python3-varlink_git.bb             | 30 +++++++++++++++++++
- 2 files changed, 31 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-varlink_git.bb
+ ...larations-to-allow-build-with-gcc-15.patch | 38 +++++++++++++++++++
+ .../libconfig/libconfig_1.7.3.bb              |  7 +++-
+ 2 files changed, 44 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/libconfig/libconfig/0001-Fix-declarations-to-allow-build-with-gcc-15.patch
 
-diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-index 3a1fb13ba7..40df4f08f3 100644
---- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
-+++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-@@ -89,6 +89,7 @@ PTESTS_FAST_META_PYTHON = "\
-     python3-unidiff \
-     python3-uritemplate \
-     python3-validators \
-+    python3-varlink \
-     python3-wrapt \
-     python3-wsproto \
-     python3-xlrd \
-diff --git a/meta-python/recipes-devtools/python/python3-varlink_git.bb b/meta-python/recipes-devtools/python/python3-varlink_git.bb
+diff --git a/meta-oe/recipes-extended/libconfig/libconfig/0001-Fix-declarations-to-allow-build-with-gcc-15.patch b/meta-oe/recipes-extended/libconfig/libconfig/0001-Fix-declarations-to-allow-build-with-gcc-15.patch
 new file mode 100644
-index 0000000000..b50bfac379
+index 0000000000..00ceadb10d
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-varlink_git.bb
-@@ -0,0 +1,30 @@
-+SUMMARY = " Python implementation of the Varlink protocol"
-+HOMEPAGE = "https://varlink.org/python/"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e3fc50a88d0a364313df4b21ef20c29e"
++++ b/meta-oe/recipes-extended/libconfig/libconfig/0001-Fix-declarations-to-allow-build-with-gcc-15.patch
+@@ -0,0 +1,38 @@
++From 0511e285f3c886a388b8e9c6a4829752d60ab44c Mon Sep 17 00:00:00 2001
++From: Rudi Heitbaum <rudi@heitbaum.com>
++Date: Thu, 5 Dec 2024 06:47:40 +0000
++Subject: [PATCH] Fix declarations to allow build with gcc 15
 +
-+SRC_URI = "git://github.com/varlink/python.git;protocol=https;branch=master"
++Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 +
-+SRCREV = "6012b8805bf2ebcc981c84bd56a3e949a2141c16"
++Upstream-Status: Backport [690342b Fix declarations to allow build with gcc 15]
++---
++ lib/grammar.y | 8 ++++++--
++ 1 file changed, 6 insertions(+), 2 deletions(-)
 +
-+PV = "30.3.1+git"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit python_setuptools_build_meta ptest-python-pytest
-+
-+DEPENDS += "python3-setuptools-scm-native"
-+
-+RDEPENDS:${PN} += " \
-+    python3-core \
-+    python3-datetime \
-+    python3-io \
-+    python3-json \
-+    python3-netclient \
-+    python3-netserver \
-+    python3-shell \
-+    python3-stringold \
-+    python3-unittest \
++diff --git a/lib/grammar.y b/lib/grammar.y
++index 87dac00..0e9d0bb 100644
++--- a/lib/grammar.y
+++++ b/lib/grammar.y
++@@ -40,8 +40,7 @@
++ #include "wincompat.h"
++ 
++ /* These declarations are provided to suppress compiler warnings. */
++-extern int libconfig_yylex();
++-extern int libconfig_yyget_lineno();
+++extern int libconfig_yyget_lineno(void *);
++ 
++ static const char *err_array_elem_type = "mismatched element type in array";
++ static const char *err_duplicate_setting = "duplicate setting name";
++@@ -80,6 +79,11 @@ void libconfig_yyerror(void *scanner, struct parse_context *ctx,
++   char *sval;
++ }
++ 
+++%{
+++/* These declarations are provided to suppress compiler warnings. */
+++extern int libconfig_yylex(YYSTYPE *, void *);
+++%}
+++
++ %token <ival> TOK_BOOLEAN TOK_INTEGER TOK_HEX
++ %token <llval> TOK_INTEGER64 TOK_HEX64
++ %token <fval> TOK_FLOAT
+diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.7.3.bb b/meta-oe/recipes-extended/libconfig/libconfig_1.7.3.bb
+index ad030b8f4a..a4df707dd7 100644
+--- a/meta-oe/recipes-extended/libconfig/libconfig_1.7.3.bb
++++ b/meta-oe/recipes-extended/libconfig/libconfig_1.7.3.bb
+@@ -7,7 +7,12 @@ SECTION = "libs"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
+ 
+-SRC_URI = "https://hyperrealm.github.io/libconfig/dist/libconfig-${PV}.tar.gz"
++SRC_URI = "https://hyperrealm.github.io/libconfig/dist/libconfig-${PV}.tar.gz \
++    file://0001-Fix-declarations-to-allow-build-with-gcc-15.patch \
 +"
 +
-+PTEST_PYTEST_DIR = "varlink/tests"
++# needed when we modify grammar.y with above patch
++DEPENDS += "bison-native"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/hyperrealm/libconfig/releases"
+ UPSTREAM_CHECK_REGEX = "Version (?P<pver>\d+(\.\d+)+)"
 
