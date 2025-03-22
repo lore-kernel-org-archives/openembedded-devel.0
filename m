@@ -1,123 +1,162 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <joaohf@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C8C3C36007
-	for <webhook@archiver.kernel.org>; Fri, 21 Mar 2025 18:03:17 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web10.124.1742580193344277705
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3AB17C36001
+	for <webhook@archiver.kernel.org>; Sat, 22 Mar 2025 00:09:30 +0000 (UTC)
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web10.690.1742602164380133007
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Mar 2025 11:03:13 -0700
+ Fri, 21 Mar 2025 17:09:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ARZe3wQy;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-22580c9ee0aso49078715ad.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 11:03:13 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TG56X+YA;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: joaohf@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-224172f32b3so4518065ad.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 17:09:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1742580192; x=1743184992; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1742602163; x=1743206963; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ZW9qsrz6qSRHLIs7cUSdv/qA8N1a4vGNv5Ls5RwrVDY=;
-        b=ARZe3wQy/ErIyXD3A19KzVnp9dDmR6iSBiEDMX1b/JC3hl5aPF67sptCk7uI7yXp7a
-         6h9HfmY6Jg6TEWruolwtygvhnTfaOHnaNoKFZfrdoRYbv8OMnGduPUsHa9Rd8LTHHURt
-         fAR080PyzGj0huBB5KUO+uVoM5IFglvSibW7EOlluArxHxJxE6PphXtGRA5t2ClvLBfB
-         s8Z1EI4TZbco6nsg6lFfaIaIYIpUBDczcTnxN+8crN6G5fbfbFY69TAiKKeGD0ug+bqE
-         Zfc0GZtxI9OwBa1JC5XXxzLIwsMzJl4j96lC2AhMrJEus2Vqx86Rva8SgZylI/Ky8hDd
-         rdbg==
+        bh=RFGmZ3x0IT1+MQadmdDFdrQLIqNXeTW8nCDnmH+0bmA=;
+        b=TG56X+YAFhmsocnrdJxIxIQyCupfNFjqFUbydXNWWvi56BgwCD9X4OQSqrqNJLvHcd
+         A0d2xmrxy10W7DkFOBGCTjZ2vvglX07B9xdGtrTYHFk8OihGnQ+aIA7eu1xQbKK7+L3Y
+         DdurYrlyNks1B9pJbOAcfYP0fGpUoYpre/Hs/gS8rqpYC8dxy35SKyUtIMyFAVoEH1kH
+         BWvS1rJj7Epd4+BHDtqkKb/WTldAs7Tru0BDt7yA4geX/xlLi3/HtYZ5LAGFo2d/2IqP
+         c7Q6HBoW90BLSMgFDzUqOfeYrZx1vDPSEDp/G3TmPDbZw9jmyFi6jwMaAQTBBhNkOTJj
+         PkWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742580192; x=1743184992;
+        d=1e100.net; s=20230601; t=1742602163; x=1743206963;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ZW9qsrz6qSRHLIs7cUSdv/qA8N1a4vGNv5Ls5RwrVDY=;
-        b=hD+ndPyxFQcuwwJybwmQOeE/fDDqqW5TXLRpMMygfVv6VSVORIsWHoM7y590II0BU0
-         iZqAgh0p06DaMdGlKY4REsdj0OStJ/cNdIFJsTVBFWMytOtc8hBJtY4ba53DXFQaQNrZ
-         pFu33Ena3uhh65VzAM/Wcpo5k+Ab+n1pjjAVvCIhXU+b1RwEXqWGOx5Yy/dbgqAsjkq+
-         XuAxecyvDpdbBm4IxtfbX1AQE42EjhisQmdMeHm7zVFTeyndIl5F3s2sR53qZHbIXtv5
-         757r8LsIvxoGfXKsDUnjM5pF/FJ9jMvMRY1yK76BnTlh50NxMccItB7N52UuXJEvPthH
-         iJsg==
-X-Gm-Message-State: AOJu0YxsFBs7Pn78IGCZ3lQ0MIT/Npti69VzcKoggeCA1A7sHy2FD0GM
-	55aGXGa4+QKT7ubNlrmAvje+GAj26LReIaaCEWz/k3/hYbTzHFHtfny/pmqv
-X-Gm-Gg: ASbGncu/j6EM+c117l26VNHVXJSm0N/8cU5SbhV+tiNMTecXAMo8ks4G3TumhN4P/fd
-	HIEkC7uUSnrhQAZ2SOEwZixABuVpdLJpm0x6CMLO8m1r0PVH6wyWocd//XLFqSDxutdcazdlnBU
-	OkEtM0X4/h+NAfSkFeYUg+zstKVRfTZ4smLcumQv3Ci+fGQOLl0KuECVj+8B4qXhybpfie3QEdL
-	pVRv6AJ80iIw70Me6bAA7mT47LrZSPUbt9KTP/8yr1VWmJ3O5xHtZr0OxFxV7qjRiar3tFL5gso
-	qVFe5QRfmJaPy00zH8FZLSc0otnEj/CYWaoxVjwFybuCFu8=
-X-Google-Smtp-Source: AGHT+IETaAYkXdfn+3YOs62C/cYyQehP3BhhywT3Pkek/cPT+uNsNk3HuIBVKSByL47N6k3XNNneUw==
-X-Received: by 2002:a05:6a21:339a:b0:1f5:51d5:9ef3 with SMTP id adf61e73a8af0-1fe42f995edmr6670505637.20.1742580192313;
-        Fri, 21 Mar 2025 11:03:12 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:8201:fd20::ac74])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-af8a2a4c905sm2079807a12.66.2025.03.21.11.03.11
+        bh=RFGmZ3x0IT1+MQadmdDFdrQLIqNXeTW8nCDnmH+0bmA=;
+        b=hBpK6/T3a4ot+E82TYIotZwM52SPy4PkLGfFpd0EBfG8McGscCzOYNZLTVcCnRIr+M
+         Kv1QFTlCIEgRBSLrDeq6TvsXcZYOY1U9oHO2As17Z5jcMSZtowANaqufANBZo8GeBx7/
+         mg34uHn/CO9GEwbK7FvxDFTTtax7+xyOI7wffoDC+hUBVqbwabCYYmUwnJ1/qtW1uMjj
+         Pjr+TQ11xI56zp+RId79S6/ShrPwlegcd2FITMItpr8WkCXP0LLUCZCXCOgVjIqmZLtd
+         7Z4Smt3sZZvt23P9WqXTSQ01NUtHO12uIsFrZ1Fr7wS4OOdaCbXUGggYcG/1DiFDTmQ9
+         gDqw==
+X-Gm-Message-State: AOJu0Yzl4O7b69VkQt1jrkLDOEyj9A/vudaZNhQ+lWpPWrlVaNEVPz+E
+	01emxblq19yp0uHQNW5Fa1Wg4QHa7ftbqkoxt7O7lUg5jaECKyBO5bmPIA==
+X-Gm-Gg: ASbGncvMAHEXvL5vuouVWPcFd7hBSFj6BkhqUaMCksBDd0HTzN106dcrSdSktS3Zw3E
+	9IIu9nxXHhaxG4IzM3L/Ajxn3et6D1uFU28YgnX2elwvt0g41AUxsmgj+akkofDAoUUqDNFIiVR
+	v97MuBe1Ro1QxcdoopQHK/PxPF+s27lk6jeaHjx/4948qBWPQWOj4W5s0umhfwrxMNNskeOSDkk
+	7epUnLdmdRpvMQIkmII4HrCXFOU++62DcaFR/98cVPsjkl7L5QgWSEBDq2+rl0RyuLXivclHopc
+	RfEOFfOMYGtPGkYwc2QJk4TqK/jj/DxYfOs=
+X-Google-Smtp-Source: AGHT+IHfUOPjxSSC+UPVb5Av0k1qilUIkob0AFlvY3XExkNbYyn+iSCozjuCaGHjydnZMIcuWb9i4A==
+X-Received: by 2002:a17:902:fc48:b0:21f:1365:8bcf with SMTP id d9443c01a7336-22780de63a0mr36725625ad.10.1742602163155;
+        Fri, 21 Mar 2025 17:09:23 -0700 (PDT)
+Received: from porco.. ([189.79.243.162])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-227811d968asm23816015ad.162.2025.03.21.17.09.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Mar 2025 11:03:11 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Fri, 21 Mar 2025 17:09:22 -0700 (PDT)
+From: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?= <joaohf@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/2] webkitgtk3: Fix build with clang and riscv
-Date: Fri, 21 Mar 2025 11:03:07 -0700
-Message-ID: <20250321180308.1071453-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.49.0
+Cc: =?UTF-8?q?Jo=C3=A3o=20Henrique=20Ferreira=20de=20Freitas?= <joaohf@gmail.com>
+Subject: [PATCH] iwd: add systemv-init script
+Date: Fri, 21 Mar 2025 21:07:54 -0300
+Message-ID: <20250322000754.563211-1-joaohf@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Mar 2025 18:03:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116190
+ <openembedded-devel@lists.openembedded.org>; Sat, 22 Mar 2025 00:09:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116192
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-on-RISCV-https-bugs.webkit.org-show.patch | 30 +++++++++++++++++++
- .../webkitgtk/webkitgtk3_2.48.0.bb            |  1 +
- 2 files changed, 31 insertions(+)
- create mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-build-errors-on-RISCV-https-bugs.webkit.org-show.patch
+ meta-oe/recipes-connectivity/iwd/iwd/iwd    | 42 +++++++++++++++++++++
+ meta-oe/recipes-connectivity/iwd/iwd_3.3.bb | 11 +++++-
+ 2 files changed, 52 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-connectivity/iwd/iwd/iwd
 
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-build-errors-on-RISCV-https-bugs.webkit.org-show.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-build-errors-on-RISCV-https-bugs.webkit.org-show.patch
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd/iwd b/meta-oe/recipes-connectivity/iwd/iwd/iwd
 new file mode 100644
-index 0000000000..40a7133052
+index 0000000000..89fc75c9ab
 --- /dev/null
-+++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-build-errors-on-RISCV-https-bugs.webkit.org-show.patch
-@@ -0,0 +1,30 @@
-+From 984538dcce7b184269efc1e1b0fb78e1cb932b5d Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 21 Mar 2025 01:21:22 -0700
-+Subject: [PATCH] Fix build errors on RISCV
-+ https://bugs.webkit.org/show_bug.cgi?id=290163
++++ b/meta-oe/recipes-connectivity/iwd/iwd/iwd
+@@ -0,0 +1,42 @@
++#!/bin/sh
 +
-+Reviewed by NOBODY (OOPS!).
++DAEMON=/usr/libexec/iwd
++PIDFILE=/var/run/iwd.pid
++DESC="iNet wireless daemon"
 +
-+Include c++ header <system_error> for std::error_code.
++if [ -f /etc/default/iwd ] ; then
++	. /etc/default/iwd
++fi
 +
-+* Source/WebCore/contentextensions/ContentExtensionActions.h: Include system_error
++set -e
 +
-+Upstream-Status: Submitted [https://github.com/WebKit/WebKit/pull/42802]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ Source/WebCore/contentextensions/ContentExtensionActions.h | 1 +
-+ 1 file changed, 1 insertion(+)
++do_start() {
++	start-stop-daemon --start --background --name iwd --quiet --exec $DAEMON
++}
 +
-+diff --git a/Source/WebCore/contentextensions/ContentExtensionActions.h b/Source/WebCore/contentextensions/ContentExtensionActions.h
-+index 0b75d2e1df78..61cb33c94ce8 100644
-+--- a/Source/WebCore/contentextensions/ContentExtensionActions.h
-++++ b/Source/WebCore/contentextensions/ContentExtensionActions.h
-+@@ -28,6 +28,7 @@
-+ #if ENABLE(CONTENT_EXTENSIONS)
-+ 
-+ #include "ContentExtensionStringSerialization.h"
-++#include <system_error>
-+ #include <wtf/JSONValues.h>
-+ #include <wtf/Hasher.h>
-+ 
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.0.bb b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.0.bb
-index 9a4101c4b4..10c2576407 100644
---- a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.0.bb
-+++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.0.bb
-@@ -19,6 +19,7 @@ SRC_URI = "https://www.webkitgtk.org/releases/webkitgtk-${PV}.tar.xz \
-            file://no-musttail-arm.patch \
-            file://0001-Cherry-pick-292304-main-7ffc29624258-.-https-bugs.we.patch \
-            file://0001-EnumTraits.h-error-no-matching-function-for-call-to-.patch \
-+           file://0001-Fix-build-errors-on-RISCV-https-bugs.webkit.org-show.patch \
-            "
- SRC_URI[sha256sum] = "94904a55cf12d44a4e36ceadafff02d46da73d76be9b4769f34cbfdf0eebf88e"
++do_stop() {
++	start-stop-daemon --stop --oknodo --name iwd --quiet
++}
++
++case "$1" in
++  start)
++	echo "Starting $DESC"
++	do_start
++	;;
++  stop)
++	echo "Stopping $DESC"
++	do_stop
++	;;
++  restart|force-reload)
++	echo "Restarting $DESC"
++	do_stop
++	sleep 1
++	do_start
++	;;
++  *)
++	echo "Usage: $0 {start|stop|restart|force-reload}" >&2
++	exit 1
++	;;
++esac
++
++exit 0
+\ No newline at end of file
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd_3.3.bb b/meta-oe/recipes-connectivity/iwd/iwd_3.3.bb
+index 84b1795995..9d5b3658ae 100644
+--- a/meta-oe/recipes-connectivity/iwd/iwd_3.3.bb
++++ b/meta-oe/recipes-connectivity/iwd/iwd_3.3.bb
+@@ -7,10 +7,11 @@ DEPENDS = "dbus"
  
+ SRC_URI = "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar.xz \
+            file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-for-e.patch \
++           file://iwd \ 
+            "
+ SRC_URI[sha256sum] = "8189e15e701112f871fb5f5e9351f007c9098754b4168ed43cc5422a3adc0255"
+ 
+-inherit autotools manpages pkgconfig python3native systemd
++inherit autotools manpages pkgconfig python3native systemd update-rc.d
+ 
+ PACKAGECONFIG ??= " \
+     client \
+@@ -24,6 +25,9 @@ PACKAGECONFIG[wired] = "--enable-wired,--disable-wired"
+ PACKAGECONFIG[ofono] = "--enable-ofono,--disable-ofono"
+ PACKAGECONFIG[systemd] = "--with-systemd-unitdir=${systemd_system_unitdir},--disable-systemd-service,systemd"
+ 
++INITSCRIPT_NAME = "iwd"
++INITSCRIPT_PARAMS = "start 04 5 2 3 . stop 23 0 1 6 ."
++
+ SYSTEMD_SERVICE:${PN} = " \
+     iwd.service \
+     ${@bb.utils.contains('PACKAGECONFIG', 'wired', 'ead.service', '', d)} \
+@@ -36,6 +40,11 @@ do_configure:prepend() {
+ do_install:append() {
+     # If client and monitor are disabled, bindir is empty, causing a QA error
+     rmdir --ignore-fail-on-non-empty ${D}/${bindir}
++
++    if ${@bb.utils.contains('DISTRO_FEATURES','sysvinit','true','false',d)}; then
++        install -d ${D}${sysconfdir}/init.d
++        install -m 0755 ${UNPACKDIR}/iwd ${D}${sysconfdir}/init.d/iwd
++    fi
+ }
+ 
+ FILES:${PN} += " \
 
