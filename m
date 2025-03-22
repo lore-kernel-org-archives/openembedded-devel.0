@@ -1,235 +1,152 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9661DC35FFC
-	for <webhook@archiver.kernel.org>; Sat, 22 Mar 2025 15:18:54 +0000 (UTC)
-Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
- by mx.groups.io with SMTP id smtpd.web10.11683.1742656725581939850
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E8C2C35FFC
+	for <webhook@archiver.kernel.org>; Sat, 22 Mar 2025 22:03:31 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.web10.5882.1742681000862414496
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 22 Mar 2025 08:18:45 -0700
+ Sat, 22 Mar 2025 15:03:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=O9LqLpAf;
- spf=pass (domain: gmail.com, ip: 209.85.161.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f49.google.com with SMTP id 006d021491bc7-601e049d92dso1774430eaf.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 22 Mar 2025 08:18:45 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=nnwPR/4X;
+ spf=pass (domain: smile.fr, ip: 209.85.128.49, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-43948021a45so24552065e9.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 22 Mar 2025 15:03:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1742656725; x=1743261525; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=wgDKS5RgVDa9fd4zeSLmz1/o5i1/q+GbiP4/mnQ2dTo=;
-        b=O9LqLpAfUs4hqFx0heYa9dRg1SrJTxNd4G/mG3BHUR0OtxD6IqNTPfEnvXSff8onFU
-         60qn1s3u2XjWrJ7dRME0C6US35uxQatsh2TQMvBwyKRza3jq1MiaDxDzuFLfQd/jPyHu
-         hgWADqx0uJV2K0qHGSJGDDITQ6739FMj0+d58W9+ztxz430N1RqpemSXaQkuskb/S1mo
-         fHTcQ+sF+dEvf+TX2zc+/4qOUS+Xgyxa1VKC2lptkT50VPMjmfTTrTX0lYZy9RoYwIkf
-         CfpKg3TAIpCtFjLSsi7cHe3Yq28XV/RjehFQdpCGcA1PD4LoafJiC/zJu0mew4yEqRye
-         nuAQ==
+        d=smile.fr; s=google; t=1742680998; x=1743285798; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=R/nMbPMx6yRmAHlLR1w3UCXzoKaTq06Y1o5zzxAhR0k=;
+        b=nnwPR/4XipOlE2x5jMDefbuksHqx90p739bUAhAKWcGWv3wshwduHI33uUWBskYKqi
+         eGKQkF0mEz6jdqvrp7NhEn5wV7C0QGEy8RTUsN5erovDwXiBJjemTFq5BmOoPBMY7NEV
+         S4KqDZZEyVbc2fjW/bjfDUrmonf/Td2hhwfoQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742656725; x=1743261525;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1742680998; x=1743285798;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=wgDKS5RgVDa9fd4zeSLmz1/o5i1/q+GbiP4/mnQ2dTo=;
-        b=q8/efy7EL9fYTqZz0JY29lwAAVaocVmaNq5DUupfFYcWmjgY/HpP6yC0SeuYX0d4EP
-         Fogbsn62M8hJEv630ev8P5cInX869dJ7MVE9LMDB2YT3YK3Rq/Rv9SAQgq4ehuX2DQZ4
-         d3GNlKcojN5AQvhpDpwG6qBVVSrizZk5ArOdnSO54CNRJxzNeKwH9FLfxCKQHy3+sTjL
-         03Q8RzAgPgtu2xmnN880NRjKp9k2/dbfmplfBLASRNtFwzNj5PVLifko0c+/+FICoOvq
-         STZCgn2Et5+gQcxHkEhCJV6R7EIAWSUnfhWPdAKLD7N8mD0zc/E5N01SsHyXD2e62xcH
-         H7SA==
-X-Gm-Message-State: AOJu0YxqeZ0EmCgqicPIsgI1TU1mTp8xoYlRP275rxzljrW7PwNbuane
-	e7iXIv3LHrUq9XE3xFEM/Vp+MHJK+ZtlOkbWKOFoFCVSL0CuV9KkOgYmlYMx5ScsgjXlNLEQwt2
-	n31u1SrwZ0zfApEjILzLi2/qpm/I=
-X-Gm-Gg: ASbGncu0zRfOVE8toCC1eqKx2I7XYOlNjy0nrS9i5KEiEuMkGn8NY6pwRyVytFyxTeQ
-	COTOiKA2tbxLcjIqnRJEBjnOlIRwqrjMt8zk5GcsWygtrs4lGeQ9kA8FQO+drbEA5eHFsQ+NJI4
-	YJNO40hakH0LLhTWG2PID/L5pciwWKL5OijDROZMhxm9gT7Z5d3dN0/f2QfyU=
-X-Google-Smtp-Source: AGHT+IGBsXLgDjnVc6AqHoZ6A9D4kdNF0uCB3kdz3kKKTwCcDZJwBAKWEEfdqvvtKThBq5OqTl3nLty/CK9mfPGpLIk=
-X-Received: by 2002:a05:6820:514:b0:601:bf1b:c63f with SMTP id
- 006d021491bc7-602344ff0aemr3416749eaf.1.1742656724662; Sat, 22 Mar 2025
- 08:18:44 -0700 (PDT)
+        bh=R/nMbPMx6yRmAHlLR1w3UCXzoKaTq06Y1o5zzxAhR0k=;
+        b=xF4m0u8AszpwPOu0vfwMecJkT1/4Ra6h13TM3zLRB7C6b8mQr0tmcGedG6LtJ/oHyp
+         GiccCH/CXKm8oFRQUXA47gx+0P0qmsZcnWn2GuyzZhYD2sGlPdOUxCVxJKoOR5B/lMWf
+         vSn0z4K1R8LScV7LON5fU+GD926YLNJ847eAWFhTb1s9HhHcujRwpgmn45bptZ3V4ygf
+         z7h7xD7MFhJQb1RsJm9jQJv3dXv38ciagIhaO7bXP+QoNBszl7UlTeP2+qKd02ffvTfF
+         2tMDUSVCfud3qhSCFE3+afQJHfQ/s+/qU7DMejamP1X22O9hcBP9ywFdFietT3WXMV31
+         ev0w==
+X-Gm-Message-State: AOJu0Yz1ajPTCWObuQb3hnrQ4iPr7gNJoVftBqsMmX14XMQaNBK5uNjL
+	JQfviKTDFo7dx8C6vMKrlAR3oBzgtmzWKw8/feBqvQnh8lnvsILgiF7LgYO9+R3TYbymkCBnn84
+	s
+X-Gm-Gg: ASbGncuWkn/jMjZfoZoZY/g8SC3UujwzI1yvw0fgchWcxZl4hX8xxAIO5q+i+u0+co8
+	83f5Gy9voXbNgmtd2CidtvnZTjDjg7LgR9j7NfbMPfE0fdtj3OYb5+UYPIJS5iy/3RomVmS81+T
+	cVmi+9EZd5EOvzV4oaNyyPG2Vjjrxm/07mfk8Hu5NeuAkdeay9ltcGwlreIr1KZ1XyVEA7p6+cp
+	71MUZDKxpEm5U8oq1ulI0JLd0YR+mcgVa6cPnRniE691/ZC2yRCvtPeQd2tOKfzF76912/wHqKJ
+	v+FDEmVDBfpeXTtS/2stN4Zff+4TU+CuI5dN9pwrT5SrjxEdAjYxC+8pbxU6xmV/bHF8YE+2jdi
+	6dwAfEd8nv3/o5JW/suPSf9snyGe8RPfB3ausefRfq+biX71SU5x3
+X-Google-Smtp-Source: AGHT+IHkMfuO5oNrpmPJuXYv7Q8I8CqIsc02Ii7Q1dSn6DDes7SQ5/18Az927uN+Qb17kDWHpW541A==
+X-Received: by 2002:a05:6000:2a11:b0:391:9b2:f49a with SMTP id ffacd0b85a97d-3997f941a94mr5492801f8f.55.1742680998104;
+        Sat, 22 Mar 2025 15:03:18 -0700 (PDT)
+Received: from P-ASN-ECS-830T8C3.local (2a01cb000deef000f0da383060e5e6f8.ipv6.abo.wanadoo.fr. [2a01:cb00:dee:f000:f0da:3830:60e5:e6f8])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-43d43f332adsm119789065e9.3.2025.03.22.15.03.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 22 Mar 2025 15:03:17 -0700 (PDT)
+From: Yoann Congal <yoann.congal@smile.fr>
+To: openembedded-devel@lists.openembedded.org
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-oe][PATCH] poke: Fix the reproducibility of installed scripts
+Date: Sat, 22 Mar 2025 23:01:47 +0100
+Message-Id: <20250322220146.3969535-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-References: <20250322025925.1070828-1-raj.khem@gmail.com> <CA+chaQccQAwyh4TfvFMKRkxAiBjF=zSthmyy7x5QK+zHs54uJA@mail.gmail.com>
-In-Reply-To: <CA+chaQccQAwyh4TfvFMKRkxAiBjF=zSthmyy7x5QK+zHs54uJA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 22 Mar 2025 08:18:33 -0700
-X-Gm-Features: AQ5f1JoK9NlzVP4IdnIK8FcQEqlgZW18h8Mqo3s-61QBSfpabIB24zSph2MmYT4
-Message-ID: <CAMKF1spb6DTWFTtK=6nC93vL3VOnG2T5M+WKLrWjj8RKJLKXJQ@mail.gmail.com>
-Subject: Re: [PATCH] lvgl: Upgrade to 9.2.2 release
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, Marek Vasut <marex@denx.de>, 
-	Jaeyoon Jung <jaeyoon.jung@lge.com>
-Content-Type: multipart/alternative; boundary="0000000000000a021f0630efe33a"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 22 Mar 2025 15:18:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116200
+ <openembedded-devel@lists.openembedded.org>; Sat, 22 Mar 2025 22:03:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116201
 
---0000000000000a021f0630efe33a
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Yoann Congal <yoann.congal@smile.fr>
 
-On Sat, Mar 22, 2025 at 5:22=E2=80=AFAM Martin Jansa <martin.jansa@gmail.co=
-m> wrote:
+There is a race condition between 2 actions at install around the
+installed script in $pkgdatadir:
+* Removal of existing scripts /usr/share/poke/*.pk
+* Installation of default scripts in the same directory
 
-> On Sat, Mar 22, 2025 at 3:59=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wro=
-te:
-> >
-> > Drop backported patches
-> > Enable thorvg packageconfig, build fails without it now
->
-> Did you plan to add thorvg to default PACKAGECONFIG (I don't see that
-> in the commit) or did you mean just adding those LV_USE_MATRIX,
-> LV_USE_FLOAT, LV_USE_LOTTIE to be enabled when someone enables thorvg
-> in bbappend?
->
+Sadly, those 2 actions are not ordered. Depending on the build system load,
+removal can (rarely) happen *after* the installation. In this case, no
+script in present in /usr/share/poke/ when the install process end.
 
-Initially I did but it was not needed as I could fix the builds with it
-without it. I will update the commit message accordingly
+In OE, we always install on an empty sysroot, so, no pre-existing scripts can
+exists. Remove the code that does the cleanup to avoid the
+race-condition and ensure the scripts are always present.
 
->
-> Otherwise LGTM, thanks.
->
-> >
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > Cc: Marek Vasut <marex@denx.de>
-> > Cc: Jaeyoon Jung <jaeyoon.jung@lge.com>
-> > Cc: Martin Jansa <martin.jansa@gmail.com>
-> ..
-> > diff --git a/meta-oe/recipes-graphics/lvgl/lv-conf.inc
-> b/meta-oe/recipes-graphics/lvgl/lv-conf.inc
-> > index 41133f3438..69e42af922 100644
-> > --- a/meta-oe/recipes-graphics/lvgl/lv-conf.inc
-> > +++ b/meta-oe/recipes-graphics/lvgl/lv-conf.inc
-> > @@ -33,10 +33,16 @@ LVGL_CONFIG_LV_USE_GRIDNAV =3D
-> "${@bb.utils.contains('PACKAGECONFIG', 'gridnav', '
-> >
-> >  LVGL_CONFIG_LV_THEME_DEFAULT_DARK ?=3D "0"
-> >
-> > +LVGL_CONFIG_USE_LOTTIE =3D "${@bb.utils.contains('PACKAGECONFIG',
-> 'thorvg', '1', '0', d)}"
-> > +
-> >  LVGL_CONFIG_USE_VECTOR_GRAPHICS =3D
-> "${@bb.utils.contains('PACKAGECONFIG', 'thorvg', '1', '0', d)}"
-> >
-> >  LVGL_CONFIG_USE_THORVG_INTERNAL =3D
-> "${@bb.utils.contains('PACKAGECONFIG', 'thorvg', '1', '0', d)}"
-> >
-> > +LVGL_CONFIG_USE_MATRIX =3D "${@bb.utils.contains('PACKAGECONFIG',
-> 'thorvg', '1', '0', d)}"
-> > +
-> > +LVGL_CONFIG_USE_FLOAT =3D "${@bb.utils.contains('PACKAGECONFIG',
-> 'thorvg', '1', '0', d)}"
-> > +
-> >  DEBUG_BUILD ??=3D "0"
-> >
-> >  ALLOW_EMPTY:${PN} =3D "1"
-> > @@ -84,6 +90,9 @@ do_configure:append() {
-> >          \
-> >          -e "s|^([[:space:]]*#define
-> LV_USE_VECTOR_GRAPHIC[[:space:]]).*|\1${LVGL_CONFIG_USE_VECTOR_GRAPHICS}|=
-" \
-> >          -e "s|^([[:space:]]*#define
-> LV_USE_THORVG_INTERNAL[[:space:]]).*|\1${LVGL_CONFIG_USE_THORVG_INTERNAL}=
-|"
-> \
-> > +        -e "s|^([[:space:]]*#define
-> LV_USE_MATRIX[[:space:]]).*|\1${LVGL_CONFIG_USE_MATRIX}|" \
-> > +        -e "s|^([[:space:]]*#define
-> LV_USE_FLOAT[[:space:]]).*|\1${LVGL_CONFIG_USE_FLOAT}|" \
-> >          \
-> > +        -e "s|^([[:space:]]*#define
-> LV_USE_LOTTIE[[:space:]]).*|\1${LVGL_CONFIG_USE_LOTTIE}|" \
-> >          -i "${S}/lv_conf.h"
-> >  }
-> ...
->
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+---
+FWIW, I plan to report a bug to upstream.
 
---0000000000000a021f0630efe33a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ ...bpoke-Remove-existing-script-cleanup.patch | 43 +++++++++++++++++++
+ meta-oe/recipes-devtools/poke/poke_4.2.bb     |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/poke/poke/0001-libpoke-Remove-existing-script-cleanup.patch
 
-<div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" =
-class=3D"gmail_attr">On Sat, Mar 22, 2025 at 5:22=E2=80=AFAM Martin Jansa &=
-lt;<a href=3D"mailto:martin.jansa@gmail.com">martin.jansa@gmail.com</a>&gt;=
- wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8=
-ex;border-left:1px #ccc solid;padding-left:1ex">On Sat, Mar 22, 2025 at 3:5=
-9=E2=80=AFAM Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_=
-blank">raj.khem@gmail.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; Drop backported patches<br>
-&gt; Enable thorvg packageconfig, build fails without it now<br>
-<br>
-Did you plan to add thorvg to default PACKAGECONFIG (I don&#39;t see that<b=
-r>
-in the commit) or did you mean just adding those LV_USE_MATRIX,<br>
-LV_USE_FLOAT, LV_USE_LOTTIE to be enabled when someone enables thorvg<br>
-in bbappend?<br>
-</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Initially I did =
-but it was not needed as I could fix the builds with it without it. I will =
-update the commit message accordingly=C2=A0</div><blockquote class=3D"gmail=
-_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:=
-1ex"><br>
-Otherwise LGTM, thanks.<br>
-<br>
-&gt;<br>
-&gt; Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
-&gt; Cc: Marek Vasut &lt;<a href=3D"mailto:marex@denx.de" target=3D"_blank"=
->marex@denx.de</a>&gt;<br>
-&gt; Cc: Jaeyoon Jung &lt;<a href=3D"mailto:jaeyoon.jung@lge.com" target=3D=
-"_blank">jaeyoon.jung@lge.com</a>&gt;<br>
-&gt; Cc: Martin Jansa &lt;<a href=3D"mailto:martin.jansa@gmail.com" target=
-=3D"_blank">martin.jansa@gmail.com</a>&gt;<br>
-..<br>
-&gt; diff --git a/meta-oe/recipes-graphics/lvgl/lv-conf.inc b/meta-oe/recip=
-es-graphics/lvgl/lv-conf.inc<br>
-&gt; index 41133f3438..69e42af922 100644<br>
-&gt; --- a/meta-oe/recipes-graphics/lvgl/lv-conf.inc<br>
-&gt; +++ b/meta-oe/recipes-graphics/lvgl/lv-conf.inc<br>
-&gt; @@ -33,10 +33,16 @@ LVGL_CONFIG_LV_USE_GRIDNAV =3D &quot;${@bb.utils.c=
-ontains(&#39;PACKAGECONFIG&#39;, &#39;gridnav&#39;, &#39;<br>
-&gt;<br>
-&gt;=C2=A0 LVGL_CONFIG_LV_THEME_DEFAULT_DARK ?=3D &quot;0&quot;<br>
-&gt;<br>
-&gt; +LVGL_CONFIG_USE_LOTTIE =3D &quot;${@bb.utils.contains(&#39;PACKAGECON=
-FIG&#39;, &#39;thorvg&#39;, &#39;1&#39;, &#39;0&#39;, d)}&quot;<br>
-&gt; +<br>
-&gt;=C2=A0 LVGL_CONFIG_USE_VECTOR_GRAPHICS =3D &quot;${@bb.utils.contains(&=
-#39;PACKAGECONFIG&#39;, &#39;thorvg&#39;, &#39;1&#39;, &#39;0&#39;, d)}&quo=
-t;<br>
-&gt;<br>
-&gt;=C2=A0 LVGL_CONFIG_USE_THORVG_INTERNAL =3D &quot;${@bb.utils.contains(&=
-#39;PACKAGECONFIG&#39;, &#39;thorvg&#39;, &#39;1&#39;, &#39;0&#39;, d)}&quo=
-t;<br>
-&gt;<br>
-&gt; +LVGL_CONFIG_USE_MATRIX =3D &quot;${@bb.utils.contains(&#39;PACKAGECON=
-FIG&#39;, &#39;thorvg&#39;, &#39;1&#39;, &#39;0&#39;, d)}&quot;<br>
-&gt; +<br>
-&gt; +LVGL_CONFIG_USE_FLOAT =3D &quot;${@bb.utils.contains(&#39;PACKAGECONF=
-IG&#39;, &#39;thorvg&#39;, &#39;1&#39;, &#39;0&#39;, d)}&quot;<br>
-&gt; +<br>
-&gt;=C2=A0 DEBUG_BUILD ??=3D &quot;0&quot;<br>
-&gt;<br>
-&gt;=C2=A0 ALLOW_EMPTY:${PN} =3D &quot;1&quot;<br>
-&gt; @@ -84,6 +90,9 @@ do_configure:append() {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 -e &quot;s|^([[:space:]]*#define LV_=
-USE_VECTOR_GRAPHIC[[:space:]]).*|\1${LVGL_CONFIG_USE_VECTOR_GRAPHICS}|&quot=
-; \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 -e &quot;s|^([[:space:]]*#define LV_=
-USE_THORVG_INTERNAL[[:space:]]).*|\1${LVGL_CONFIG_USE_THORVG_INTERNAL}|&quo=
-t; \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 -e &quot;s|^([[:space:]]*#define LV_USE_M=
-ATRIX[[:space:]]).*|\1${LVGL_CONFIG_USE_MATRIX}|&quot; \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 -e &quot;s|^([[:space:]]*#define LV_USE_F=
-LOAT[[:space:]]).*|\1${LVGL_CONFIG_USE_FLOAT}|&quot; \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 -e &quot;s|^([[:space:]]*#define LV_USE_L=
-OTTIE[[:space:]]).*|\1${LVGL_CONFIG_USE_LOTTIE}|&quot; \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 -i &quot;${S}/lv_conf.h&quot;<br>
-&gt;=C2=A0 }<br>
-...<br>
-</blockquote></div></div>
-
---0000000000000a021f0630efe33a--
+diff --git a/meta-oe/recipes-devtools/poke/poke/0001-libpoke-Remove-existing-script-cleanup.patch b/meta-oe/recipes-devtools/poke/poke/0001-libpoke-Remove-existing-script-cleanup.patch
+new file mode 100644
+index 0000000000..8562e36c66
+--- /dev/null
++++ b/meta-oe/recipes-devtools/poke/poke/0001-libpoke-Remove-existing-script-cleanup.patch
+@@ -0,0 +1,43 @@
++From 65d1c6146995216538b0224e5aefe5e8c0c69a0d Mon Sep 17 00:00:00 2001
++From: Yoann Congal <yoann.congal@smile.fr>
++Date: Sat, 22 Mar 2025 22:11:47 +0100
++Subject: [PATCH] libpoke: Remove existing script cleanup
++
++There is a race condition between 2 actions:
++* Removal of existing scripts $(pkgdatadir)/*.pk in "install-data-local"
++* Installation of default scripts with automake:
++  "dist_pkgdata_DATA = pkl-rt.pk pkl-config.pk std.pk std-types.pk"
++
++Sadly, "install-data-local" and the generated target from
++"dist_pkgdata_DATA" are not ordered. Depending on the build system load,
++removal can (rarely) happen *after* the installation. In this case, no
++script in present in $(pkgdatadir) when the install process end.
++
++In OE, we always install on an empty sysroot, so, no pre-existing scripts can
++exists. Remove the code that does the cleanup to avoid the race-condition.
++
++Upstream-Status: Inappropriate [OE specific]
++
++Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
++---
++ libpoke/Makefile.am | 9 ---------
++ 1 file changed, 9 deletions(-)
++
++diff --git a/libpoke/Makefile.am b/libpoke/Makefile.am
++index 6eff76b..965252b 100644
++--- a/libpoke/Makefile.am
+++++ b/libpoke/Makefile.am
++@@ -268,13 +268,4 @@ pvm-vm1.c: pvm-vm.h
++ pvm-vm2.c: pvm-vm1.c
++ 	@{ test -f $(srcdir)/pvm-vm2.c && test ! $(srcdir)/pvm-vm2.c -ot $(srcdir)/pvm-vm1.c; } || $(MAKE) generate-vm-files
++ 
++-# In order to avoid problems with older installations, we remove the
++-# Poke scripts installed in $(pkgdatadir).  Note however that other
++-# programs may install scripts in subdirectories under $(pkgdatadir),
++-# and these are not to be touched.
++-install-data-local: uninstall-sources
++-uninstall-local: uninstall-sources
++-uninstall-sources:
++-	rm -f $(DESTDIR)$(pkgdatadir)/*.pk
++-
++ # End of Makefile.am
+diff --git a/meta-oe/recipes-devtools/poke/poke_4.2.bb b/meta-oe/recipes-devtools/poke/poke_4.2.bb
+index a31b6605a2..3e12ddb11c 100644
+--- a/meta-oe/recipes-devtools/poke/poke_4.2.bb
++++ b/meta-oe/recipes-devtools/poke/poke_4.2.bb
+@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+ SRC_URI = "${GNU_MIRROR}/poke/poke-${PV}.tar.gz \
+           file://0003-configure.ac-HELP2MAN-replace-by-true-when-cross-com.patch \
++          file://0001-libpoke-Remove-existing-script-cleanup.patch \
+           "
+ 
+ DEPENDS = "flex-native bison-native bdwgc readline"
 
