@@ -2,87 +2,84 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF466C35FFC
-	for <webhook@archiver.kernel.org>; Tue, 25 Mar 2025 03:53:37 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web10.58417.1742874812149718178
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D15F5C35FFC
+	for <webhook@archiver.kernel.org>; Tue, 25 Mar 2025 03:55:47 +0000 (UTC)
+Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
+ by mx.groups.io with SMTP id smtpd.web10.58438.1742874942810640762
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Mar 2025 20:53:32 -0700
+ Mon, 24 Mar 2025 20:55:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QmeOpiaW;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-22403cbb47fso97519825ad.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Mar 2025 20:53:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YPInyG6R;
+ spf=pass (domain: gmail.com, ip: 209.85.210.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f51.google.com with SMTP id 46e09a7af769-727388e8f6cso3217163a34.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Mar 2025 20:55:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1742874811; x=1743479611; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=/G8ITAcCl0a4JhERSGFAqfVNucVAoNn769hk3nMQHPo=;
-        b=QmeOpiaWGda1ywb7UT4f/rBXhBazgro6JV9Gaq7krRzA9xWuHVznEuOpx9je/hBt/r
-         McgeoZSzC9guNhR93JIXVN5KDijpyCYpdGRuvdYVb4Kho06PU+jlCl5rKmRnRiW9Rb0D
-         hebJKqGr+x9x+08MSN39uKHQm9xo0u4JWjNz6lqejv9Vq7sZzZXsZfqnAAn7yVBhfYJf
-         55YWuMGepZmmiV+yILyU0WqBQQTpDYyJR8gb8hHI9G4zHwD1PJ0UXD3AcxnxDL2xqeWn
-         75pSqjzZd1dk0sHN1lPf3aToAW0811uUrhU2E+aL4+hIeveB9xglc+2m8lnZcFZvxaPz
-         hzxg==
+        d=gmail.com; s=20230601; t=1742874942; x=1743479742; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=DdycqC4jdaDrdpIv53NwEmmQbAnLhDU5SwtBTpomt3k=;
+        b=YPInyG6RZqXCiEFNCBaxBTnmI7SQhSIJ16diaaUxTpF1zkcwn/XaYWEGivOUqhC2VJ
+         gW91313bo2LOqCjheihgvWasiMkHAb+fcbPw6qRH+5iBCbb1sary7tNjM7DvuSZYuCJe
+         CNkjVc91lKl+EhtOJ9GMhkaNLO5R/JAaf53uTM/3DzZbL8w/Z8i8+fctj/e9qv1IY+FT
+         XWloCikKL7VffVbjYzvyzTbX8T4gtSvWojVmYyPxhHcf32xWZnwZKU+6Ufx/kotPDzk3
+         8KFVDjWl+ALZ8LkLgwJe+6MSMRVmNbre4si6B4nHFgZUoyErI28XisO7PHbyE0D/4NKM
+         QFkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742874811; x=1743479611;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=/G8ITAcCl0a4JhERSGFAqfVNucVAoNn769hk3nMQHPo=;
-        b=Uoc+wuCyZSrgnhRjzOMDffUI8bKmj/q2d4pdqJsPbLVpyW9FUFT+NYuM6T4jtcbvzc
-         EK1QrEodw4pt0hdnhyFtW1el1Kr7M0BcVg/wIko0QkVZvGtrLOmLGqoR55yArC/vxK1/
-         LbKN8HJzeJ07kjKDUxGAkeVXwqwVzgURIBe7EIKSv1qIsmjiP3f/grIvkiN59Ee/7QMi
-         at6th/Jd4we8PKYTaHaRAsHkDOTl07pdxdgZq1PebEV/q1s1BGrRNaS8YYRU7VQ03qMa
-         /65Yk8B7dArkMJf95PKl2xNxv+8nDjXn57krMOLzEb0/ySimSDxnrbm2Eb6upvULmO2S
-         jKUw==
-X-Gm-Message-State: AOJu0YzrpCNfNHVU5hcmyFdWknT/25FdpB6M+rUSjaT/1lcb4/3Ay1PT
-	wJrgIogigYYC4JGxnm7q2mkCmgVs+07nqHk7cjO3dze0eIaUcyHIpbyqyHNs
-X-Gm-Gg: ASbGncs+8Do2nymnpqp81FECDTB3xm8GE1L/uXVkvqJyqg3JCT69A6B7RJulx+ySERr
-	sjJxpk0YY3otSTBAqFyQA9sIM2zv92HGHis38L5Y9ycecnwpVxYG9xOe2fX4qwN7iuL/IKOdatF
-	xCtEh7Gtl8v41FofNI3d4qXoR4erxbuWgaNB0UCPPWtbuJdPXU7cWJgpuIjCfiwOoHoMSXMf33f
-	HQSEaBIbzO6OLZFJbDExZp8D8D2FUUQysXGu/kX39tMV88U/18LAOMDplZgdYEQALHbV5I1rKJ2
-	uSVIV4g4ugrZw9hatABAm1uFmCYsfdc6LFPS
-X-Google-Smtp-Source: AGHT+IEEZO/mfyW/mnaNMJ5bdWygQI3BSZFKEL1lwf1QrZdcq8aqOsqnELBi9jDYW8xQ2UeWk4l0Yw==
-X-Received: by 2002:a05:6a00:a90:b0:736:339b:8296 with SMTP id d2e1a72fcca58-73905a02c3cmr24851713b3a.18.1742874810941;
-        Mon, 24 Mar 2025 20:53:30 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:8201:fd20::b570])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7390614ba19sm8830079b3a.123.2025.03.24.20.53.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 24 Mar 2025 20:53:30 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH] pipewire: Deduce branch name from PV
-Date: Mon, 24 Mar 2025 20:53:28 -0700
-Message-ID: <20250325035328.1501961-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.49.0
+        d=1e100.net; s=20230601; t=1742874942; x=1743479742;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=DdycqC4jdaDrdpIv53NwEmmQbAnLhDU5SwtBTpomt3k=;
+        b=URTh6jdeYMHjsTUxrfznoC9oDdB7fMM697KhuJQTtemYCmgZpX5LIV3HiuxWnw9KzE
+         L4IAOYObX//jgHpp5m5oZD0xnzyN8iUjtVaoJrd88EACTDwXV/0YQSlkl219MpRrvKRR
+         sNWp6bbJJNrgYRBr8CJQJKX1alsyDyyUv/PlitBokNoWC6+s7jxiHxVU//l6SvQ6k6sE
+         99a80EKpmBujHL3YkpMrBRHmT4F/Ccqdtf9ZYxGkWvEpK5CO9sJgRblDBF/s2QzFFc3A
+         VdztIREEfSfU6rgtG4nBo1/6ciWRSPUwsUmKfFNeTpAhn/i8kLTW9ts/+TgxQG2ukMMy
+         S/qQ==
+X-Gm-Message-State: AOJu0YwoIFhC1ILZLNIza740Gl2S4VVybJ0ihtcKciOHwIQgGeGsY7/I
+	fqhSGv5IpHTWxYvbNI6zVnSsvqYfEKSZ2niHlInKBvSXJyI9IZAUXHfC8kXEog5t/clm3iJ42Ql
+	zZl8n8wjC6QKIdYCsCyrQaYMdBto=
+X-Gm-Gg: ASbGncsSMMggDAWGnVi5JIUW5pWtPdXVIXuvaCabkrSs3YZpMdBYjTpR1Qjx+f363P0
+	x5I5BAY+/1xjm/MINcR2zYKyacWHR67SuEnJZoBqp4F54rV1kNw7imJzSaK6kynTQlxmIYHVLBv
+	n7JlTShvnGqxItdCP3aZ7ZAZeP
+X-Google-Smtp-Source: AGHT+IEu1pfMzHvuLTiWPSiYw+VJjurrRTSplz2voT2b4evZH0kxLPFyzo8g2Lmufbb/a38qMCag6uboCay2qTR2CBg=
+X-Received: by 2002:a05:6830:6e97:b0:72b:8326:f0c7 with SMTP id
+ 46e09a7af769-72c0af1b614mr10866206a34.28.1742874941974; Mon, 24 Mar 2025
+ 20:55:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250324140353.2905738-1-f_l_k@t-online.de> <CAMKF1soDa_09QUOabb266UOLud+q9xocpTAasDKdzjEWLFKNfg@mail.gmail.com>
+ <2TUNTS.P902VCBXV8FL2@googlemail.com>
+In-Reply-To: <2TUNTS.P902VCBXV8FL2@googlemail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 24 Mar 2025 20:55:15 -0700
+X-Gm-Features: AQ5f1JrP443r_f5xEMSG0--unK6aVdLjB_mcMIOkSYNYEClBeSXrnQAsDkRc_cM
+Message-ID: <CAMKF1socK+VMbMyhZ3qgVCXiAAE6Gwo39=MrywdLjGFqX19xhw@mail.gmail.com>
+Subject: Re: [oe] [meta-multimedia][PATCH] pipewire: update 1.4.0 -> 1.4.1
+To: Markus Volk <mrksvolk@googlemail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Mar 2025 03:53:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116217
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Mar 2025 03:55:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116218
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc:Markus Volk <f_l_k@t-online.de>
----
- meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+On Mon, Mar 24, 2025 at 8:52=E2=80=AFPM Markus Volk <mrksvolk@googlemail.co=
+m> wrote:
+>
+> On Mon, Mar 24 2025 at 19:06:00 -07:00:00, Khem Raj <raj.khem@gmail.com> =
+wrote:
+>
+> This commit is not on master branch but on 1.4 branch, so please update t=
+he branch=3D value to 1.4 as well.
+>
+>
+> Sorry, I forgot to refresh the patch before sending
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb
-index 2bd7739433..122f8fc4ec 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb
-@@ -13,7 +13,8 @@ LIC_FILES_CHKSUM = " \
- DEPENDS = "dbus ncurses"
- 
- SRCREV = "2eb8cf5dc780ca22b94545f1254497a428c412f5"
--SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https"
-+BRANCH = "${@oe.utils.trim_version('${PV}', 2)}"
-+SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=${BRANCH};protocol=https"
- 
- S = "${WORKDIR}/git"
- 
+no worries, its just that round trip is long since CI here takes
+forever. I have sent another version of patch to update the branch
+from PV
+what do you think?
 
