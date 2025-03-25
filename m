@@ -2,299 +2,93 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AB8F8C36005
-	for <webhook@archiver.kernel.org>; Tue, 25 Mar 2025 03:21:27 +0000 (UTC)
-Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
- by mx.groups.io with SMTP id smtpd.web10.58001.1742872881007381102
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6208C35FFC
+	for <webhook@archiver.kernel.org>; Tue, 25 Mar 2025 03:51:07 +0000 (UTC)
+Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
+ by mx.groups.io with SMTP id smtpd.web10.58392.1742874657988244189
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Mar 2025 20:21:21 -0700
+ Mon, 24 Mar 2025 20:50:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
-Received: from fwd73.aul.t-online.de (fwd73.aul.t-online.de [10.223.144.99])
-	by mailout12.t-online.de (Postfix) with SMTP id 0A9A8E4E
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Mar 2025 04:21:19 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.32.137]) by fwd73.t-online.de
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
+Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
+	by mailout01.t-online.de (Postfix) with SMTP id F1AB6DF3
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Mar 2025 04:50:53 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.32.137]) by fwd74.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1twuqs-0TeWzh0; Tue, 25 Mar 2025 04:21:18 +0100
+	esmtp id 1twvJT-3CRXGL0; Tue, 25 Mar 2025 04:50:51 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 1/2] upower-profiles-daemon: add recipe
-Date: Tue, 25 Mar 2025 04:22:02 +0100
-Message-ID: <20250325032203.3034-1-f_l_k@t-online.de>
+Subject: [meta-multimedia][PATCHv2] pipewire: update 1.4.0 -> 1.4.1
+Date: Tue, 25 Mar 2025 04:51:41 +0100
+Message-ID: <20250325035141.3459-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1742872878-EDFFC83B-D2D4EF74/0/0 CLEAN NORMAL
-X-TOI-MSGID: b3244960-0b33-42ec-921c-37b20dd91be1
+X-TOI-EXPURGATEID: 150726::1742874652-1B7EBC15-10D72D7B/0/0 CLEAN NORMAL
+X-TOI-MSGID: c27016a4-6742-45ed-8ac1-46fb01c3181f
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Mar 2025 03:21:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116214
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Mar 2025 03:51:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116216
 
-0.30
-----
+This is a quick bugfix release that is API and ABI compatible with
+previous 1.x releases.
 
-Add support for configuring actions to be enabled or disabled over dbus:
-  - Actions can be listed via `powerprofilesctl list-actions`
-  - These can be controlled via `powerprofilesctl configure-action`
-Add support for configuring whether PPD reacts to battery/AC charger even=
-ts:
-  - It can be queried and controlled via:
-    `powerprofilesctl query-battery-aware` and
-    `powerprofilesctl configure-battery-aware`
-Add better better compatibility with kernel 6.14.
+  - Handle SplitPCM wrong channels specifications. This fixes some
+    problems with disappearing devices.
+  - Add backwards compatibility support for when the kernel does not
+    support UMP. Also fix UMP output. This restores MIDI support for
+    older kernels/ALSA.
+  - Fix a crash in audioconvert because the resampler was not using the
+    right number of channels.
+  - Some compilation fixes and small improvements.
 
-0.23
-----
+  - Don't emit events when disconnecting a stream. (#3314)
+  - Fix some compilation problems. (#4603)
 
-Bugfix release for a performance regression with users who manually
-adjusted AMD dGPU settings using other software.
+  - Bump the ROC requirement to version 0.4.0
 
-0.22
-----
+  - Handle SplitPCM too few or too many channels. Add an error string
+    to the device names when the UCM config has an error.
+  - Add backwards compatibility support for when the kernel does not
+    support UMP.
+  - Configure the channels in the resampler correctly in all
+    cases. (#4595)
+  - Fix UMP output.
+  - Use the right samplerate of the filter-graph in audioconvert in
+    all cases.
 
-Since this release power-profiles-daemon is also battery-level aware and
-some drivers use this value to be smarter at tuning their optimizations.
-In particular both the AMD panel power action now uses a progressive appr=
-oach,
-changing the the ABM based on the battery percentage.
-
-AMD p-state received various features and improvements:
- - it supports core performance boost when not in power-saver mode.
- - uses minimum frequency to lowest non-linear frequency
- - it is more impervious to faulty firmware and kernel bugs
-
-Added support for changing DPM clocks on amdgpu, to explicitly set the DP=
-M
-clocks down to "low" when in power-saver mode.
-
-The daemon command line interface now allows to disable logind and upower
-integration.
-
-Fixes handling of turbo_pct (now assumed as not present by default).
-
-The systemd service lockdown settings have been restricted even more.
-
-The systemd service starts later in the boot to avoid conflicts with
-module loading.
-
-0.21
-----
-
-Since this release power-profiles-daemon is battery-state aware and some =
-drivers
-use a more power efficient state when using the balanced profile on batte=
-ry.
-In particular both the AMD and Intel P-State drivers will use the
-balance_power EPP profile, while for Intel one we also set the energy
-performance bias to 8 (instead of 6).
-
-This release also contains various fixes for the powerprofilesctl command=
- line
-tool when using the launch or version commands.
-The tool is now better documented as we generate a manual page for it (if
-python3-argparse is installed) and bash completions. We're even generatin=
-g the
-ZSH completions, but the install path must be provided.
-
-The daemon command line interface has been improved for debugging, so use
---help-debug for further information.
-
-The systemd service lockdown settings have been restricted even more.
-
-Various code optimizations.
-
-0.20
-----
-
-The project has moved under the freedesktop 'Upower' group. The service i=
-s
-now advertised as 'org.freedesktop.UPower.PowerProfiles' in addition to t=
-he
-previous 'net.hadess.PowerProfiles' for compatibility reasons.
-
-This release adds support for:
-
-* Multiple power-profiles-daemon drivers to load simultaneously.  This no=
-tably
-  allows both CPU based control with amd-pstate or intel-pstate as well a=
-s
-  ACPI platform profile based control.
-
-* amdgpu panel power savings which uses dedicated hardware in systems wit=
-h
-  integrated Radeon graphics to decrease panel power consumption when the
-  system is on battery.
-
-This release also enables the test suite by default, so distribution vend=
-ors
-should update packaging accordingly.
-
-0.13
-----
-
-This release adds support for the AMD P-State driver that's been added to=
- the
-6.3 Linux kernel. This release also fixes mismatched profiles on some HP
-laptops and some miscellaneous bug fixes.
-
-0.12
-----
-
-This release adds support for the Intel "Energy Performance Bias" feature=
-, which
-can be used on hardware that doesn't have a platform_profile or doesn't s=
-upport
-HWP. It will also be used to eke out a bit more performance, or power, on=
- systems
-which already supported HWP.
-
-More information is available in the README.
-
-0.11.1
-------
-
-This release stops power-profiles-daemon from modifying the cpufreq drive=
-r when
-driver when the user/administrator has chosen to disable the Intel P-Stat=
-e scaling
-governor (eg. forcing a passive operation mode).
-
-More information is available in the README.
-
-0.11
-----
-
-This release fixes problems on Intel machines when the CPUs didn't suppor=
-t turbo at
-all, or the performance scaling governor was built as default in the kern=
-el.
-
-It also adds better end-user documentation, fixes in the command-line too=
-l to not
-cause bug report tools to popup on not-uncommon errors, and a bug fix for=
- running
-on some systems with controllable charge speeds.
-
-0.10.1
-------
-
-This release fixes a bug in the authorization codepath added in 0.10.0, w=
-here holding
-a profile could still succeed despite having sent a denial to the calling=
- process.
-
-This release also makes the pylint test optional. It should not be used u=
-nless the goal
-is to contribute patches to assuage it.
-
-0.10.0
-------
-
-This release adds authorization checks for the profile holds and profile =
-switching
-features of the backend daemon, through polkit. It is recommended that al=
-l
-distributions upgrade to this version as soon as possible.
-
-This release also adds support for the "quiet" kernel platform profile us=
-ed
-in some systems.
-
-0.9.0
------
-
-This release adds support for "holding" a power profile while running a t=
-ask
-or application, making it possible to switch to a performance profile dur=
-ing
-a compilation, or to a power-saver profile when low on battery, reverting=
- to
-the original profile when done.
-
-This release also removes the "inhibited" property for the performance pr=
-ofile,
-which made it impossible to switch to that profile, and replaces it with =
-the
-"degraded" property which lists why performance is degraded.
-
-Finally, the last used profile is now remembered across reboots.
-
-0.8.1
------
-
-This release works-around a cosmetic issue in gnome-shell animations when
-on battery and using the intel-pstate driver.
-
-0.8
----
-
-This release adds support for the new generic `platform_profile` kernel
-API to replace the Lenovo specific `dytc_perfmode`, meaning it should als=
-o
-support profile selection on a number of HP and Microsoft Surface devices=
-.
-
-This release also add the `powerprofilesctl` command-line application.
-
-0.1
----
-
-This is the first version of power-profiles-daemon.
+  - Fix a crash with an incomming call.
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../upower/power-profiles-daemon_0.30.bb      | 32 +++++++++++++++++++
- 1 file changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-support/upower/power-profiles-daemon_=
-0.30.bb
+ .../pipewire/{pipewire_1.4.0.bb =3D> pipewire_1.4.1.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_1.4.0.bb =3D=
+> pipewire_1.4.1.bb} (99%)
 
-diff --git a/meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb=
- b/meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb
-new file mode 100644
-index 0000000000..687e39145d
---- /dev/null
-+++ b/meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb
-@@ -0,0 +1,32 @@
-+SUMMARY =3D "Makes power profiles handling available over D-Bus"
-+HOMEPAGE =3D "https://gitlab.freedesktop.org/upower/power-profile-daemon=
-"
-+LICENSE =3D "GPL-3.0-only"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
-504"
-+
-+DEPENDS =3D " \
-+    glib-2.0 \
-+    polkit \
-+    upower \
-+    libgudev \
-+"
-+
-+inherit meson pkgconfig systemd features_check
-+
-+REQUIRED_DISTRO_FEATURES =3D "polkit"
-+
-+EXTRA_OEMESON =3D "-Dtests=3Dfalse"
-+
-+SRCREV =3D "5b4994c8a91290481bef87a5bae95391d0ec677f"
-+SRC_URI =3D "git://gitlab.freedesktop.org/upower/power-profiles-daemon;b=
-ranch=3Dmain;protocol=3Dhttps"
-+S =3D "${WORKDIR}/git"
-+
-+do_install:append() {
-+	install -d ${D}${sysconfdir}/tmpfiles.d
-+	echo "d ${localstatedir}/lib/power-profiles-daemon 700 root root - -" >=
- ${D}${sysconfdir}/tmpfiles.d/power-profiles-daemon.conf
-+}
-+
-+do_install:append() {
-+    sed -i -e 's|After=3Dmulti-user.target |After=3D|g' ${D}${systemd_sy=
-stem_unitdir}/power-profiles-daemon.service
-+}
-+
-+FILES:${PN} +=3D "${sysconfdir}/tmpfiles.d ${datadir}/dbus-1 ${datadir}/=
-polkit-1 ${systemd_system_unitdir}"
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.0.b=
+b b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb
+similarity index 99%
+rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.0.bb
+rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb
+index a57fbca229..27f2db1210 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.0.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb
+@@ -12,8 +12,8 @@ LIC_FILES_CHKSUM =3D " \
+=20
+ DEPENDS =3D "dbus ncurses"
+=20
+-SRCREV =3D "df1c36aec2aaf9e2eb1596b6b55e72c15fb2088a"
+-SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
+master;protocol=3Dhttps"
++SRCREV =3D "2eb8cf5dc780ca22b94545f1254497a428c412f5"
++SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
+1.4;protocol=3Dhttps"
+=20
+ S =3D "${WORKDIR}/git"
+=20
 --=20
 2.49.0
 
