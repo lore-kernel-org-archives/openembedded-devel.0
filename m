@@ -2,296 +2,294 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DCB6FC35FFC
-	for <webhook@archiver.kernel.org>; Tue, 25 Mar 2025 04:11:27 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web11.58161.1742875886729870165
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BCE6C35FFC
+	for <webhook@archiver.kernel.org>; Tue, 25 Mar 2025 06:02:08 +0000 (UTC)
+Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
+ by mx.groups.io with SMTP id smtpd.web10.59701.1742882523297024907
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Mar 2025 21:11:27 -0700
+ Mon, 24 Mar 2025 23:02:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
-Received: from fwd81.aul.t-online.de (fwd81.aul.t-online.de [10.223.144.107])
-	by mailout05.t-online.de (Postfix) with SMTP id 2ABC2FC2
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Mar 2025 05:11:25 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.32.137]) by fwd81.t-online.de
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
+Received: from fwd88.aul.t-online.de (fwd88.aul.t-online.de [10.223.144.114])
+	by mailout08.t-online.de (Postfix) with SMTP id 560F5108B
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Mar 2025 07:01:38 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.32.137]) by fwd88.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1twvdM-2AbzO50; Tue, 25 Mar 2025 05:11:24 +0100
+	esmtp id 1twxM0-4fksAT0; Tue, 25 Mar 2025 07:01:36 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCHv2] upower-profiles-daemon: add recipe
-Date: Tue, 25 Mar 2025 05:12:12 +0100
-Message-ID: <20250325041212.2537-1-f_l_k@t-online.de>
+Subject: [meta-oe][PATCH] libcec: update 6.0.2 -> 7.0.0
+Date: Tue, 25 Mar 2025 07:02:18 +0100
+Message-ID: <20250325060218.222815-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1742875884-72FEB5F5-A54D4498/0/0 CLEAN NORMAL
-X-TOI-MSGID: 4839f58d-91fb-4ef8-8ab4-da01fb9ba91f
+X-TOI-EXPURGATEID: 150726::1742882496-897ECB7D-79A13ADF/10/3626336762 SUSPECT URL
+X-TOI-MSGID: ff667667-777d-439b-ac71-ace3c48903df
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Mar 2025 04:11:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116222
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Mar 2025 06:02:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116223
 
-0.30
-----
+Changelog
 
-Add support for configuring actions to be enabled or disabled over dbus:
-  - Actions can be listed via `powerprofilesctl list-actions`
-  - These can be controlled via `powerprofilesctl configure-action`
-Add support for configuring whether PPD reacts to battery/AC charger even=
-ts:
-  - It can be queried and controlled via:
-    `powerprofilesctl query-battery-aware` and
-    `powerprofilesctl configure-battery-aware`
-Add better better compatibility with kernel 6.14.
-
-0.23
-----
-
-Bugfix release for a performance regression with users who manually
-adjusted AMD dGPU settings using other software.
-
-0.22
-----
-
-Since this release power-profiles-daemon is also battery-level aware and
-some drivers use this value to be smarter at tuning their optimizations.
-In particular both the AMD panel power action now uses a progressive appr=
-oach,
-changing the the ABM based on the battery percentage.
-
-AMD p-state received various features and improvements:
- - it supports core performance boost when not in power-saver mode.
- - uses minimum frequency to lowest non-linear frequency
- - it is more impervious to faulty firmware and kernel bugs
-
-Added support for changing DPM clocks on amdgpu, to explicitly set the DP=
-M
-clocks down to "low" when in power-saver mode.
-
-The daemon command line interface now allows to disable logind and upower
-integration.
-
-Fixes handling of turbo_pct (now assumed as not present by default).
-
-The systemd service lockdown settings have been restricted even more.
-
-The systemd service starts later in the boot to avoid conflicts with
-module loading.
-
-0.21
-----
-
-Since this release power-profiles-daemon is battery-state aware and some =
-drivers
-use a more power efficient state when using the balanced profile on batte=
-ry.
-In particular both the AMD and Intel P-State drivers will use the
-balance_power EPP profile, while for Intel one we also set the energy
-performance bias to 8 (instead of 6).
-
-This release also contains various fixes for the powerprofilesctl command=
- line
-tool when using the launch or version commands.
-The tool is now better documented as we generate a manual page for it (if
-python3-argparse is installed) and bash completions. We're even generatin=
-g the
-ZSH completions, but the install path must be provided.
-
-The daemon command line interface has been improved for debugging, so use
---help-debug for further information.
-
-The systemd service lockdown settings have been restricted even more.
-
-Various code optimizations.
-
-0.20
-----
-
-The project has moved under the freedesktop 'Upower' group. The service i=
-s
-now advertised as 'org.freedesktop.UPower.PowerProfiles' in addition to t=
-he
-previous 'net.hadess.PowerProfiles' for compatibility reasons.
-
-This release adds support for:
-
-* Multiple power-profiles-daemon drivers to load simultaneously.  This no=
-tably
-  allows both CPU based control with amd-pstate or intel-pstate as well a=
-s
-  ACPI platform profile based control.
-
-* amdgpu panel power savings which uses dedicated hardware in systems wit=
-h
-  integrated Radeon graphics to decrease panel power consumption when the
-  system is on battery.
-
-This release also enables the test suite by default, so distribution vend=
-ors
-should update packaging accordingly.
-
-0.13
-----
-
-This release adds support for the AMD P-State driver that's been added to=
- the
-6.3 Linux kernel. This release also fixes mismatched profiles on some HP
-laptops and some miscellaneous bug fixes.
-
-0.12
-----
-
-This release adds support for the Intel "Energy Performance Bias" feature=
-, which
-can be used on hardware that doesn't have a platform_profile or doesn't s=
-upport
-HWP. It will also be used to eke out a bit more performance, or power, on=
- systems
-which already supported HWP.
-
-More information is available in the README.
-
-0.11.1
-------
-
-This release stops power-profiles-daemon from modifying the cpufreq drive=
-r when
-driver when the user/administrator has chosen to disable the Intel P-Stat=
-e scaling
-governor (eg. forcing a passive operation mode).
-
-More information is available in the README.
-
-0.11
-----
-
-This release fixes problems on Intel machines when the CPUs didn't suppor=
-t turbo at
-all, or the performance scaling governor was built as default in the kern=
-el.
-
-It also adds better end-user documentation, fixes in the command-line too=
-l to not
-cause bug report tools to popup on not-uncommon errors, and a bug fix for=
- running
-on some systems with controllable charge speeds.
-
-0.10.1
-------
-
-This release fixes a bug in the authorization codepath added in 0.10.0, w=
-here holding
-a profile could still succeed despite having sent a denial to the calling=
- process.
-
-This release also makes the pylint test optional. It should not be used u=
-nless the goal
-is to contribute patches to assuage it.
-
-0.10.0
-------
-
-This release adds authorization checks for the profile holds and profile =
-switching
-features of the backend daemon, through polkit. It is recommended that al=
-l
-distributions upgrade to this version as soon as possible.
-
-This release also adds support for the "quiet" kernel platform profile us=
-ed
-in some systems.
-
-0.9.0
------
-
-This release adds support for "holding" a power profile while running a t=
-ask
-or application, making it possible to switch to a performance profile dur=
-ing
-a compilation, or to a power-saver profile when low on battery, reverting=
- to
-the original profile when done.
-
-This release also removes the "inhibited" property for the performance pr=
-ofile,
-which made it impossible to switch to that profile, and replaces it with =
-the
-"degraded" property which lists why performance is degraded.
-
-Finally, the last used profile is now remembered across reboots.
-
-0.8.1
------
-
-This release works-around a cosmetic issue in gnome-shell animations when
-on battery and using the intel-pstate driver.
-
-0.8
----
-
-This release adds support for the new generic `platform_profile` kernel
-API to replace the Lenovo specific `dytc_perfmode`, meaning it should als=
-o
-support profile selection on a number of HP and Microsoft Surface devices=
-.
-
-This release also add the `powerprofilesctl` command-line application.
-
-0.1
----
-
-This is the first version of power-profiles-daemon.
+    modernise CMakeLists.txt
+    Use cmake TIMESTAMP function to be more portable and to allow for rep=
+roducible builds
+    fixed: potential null deref. closes #556
+    python 3.13 compatibility
+    added: vs2022 support
+    fixed: creating (unsigned) windows installer
+    fixed: nsis installer not creating start menu icons and uninstaller
+    bump to .net framework 4.5 and .net 8.0
+    fixed: null terminate .net device language field. added CecLogicalAdd=
+resses::Unset()
+    fixed: don't call the config updated callback if nothing has changed.=
+ auto set wake devices or activate source so these values match what happ=
+ens on the tv
+    fixed: tv would power on even if the options to power on were disable=
+d in cec-tray
+    changed/fixed: windows installer, eventghost plugin, .net libraries, =
+python imports, debug builds
+    fixed: use input() for python3 and raw_input() for python2
+    changed: debian python install to match arch specific too
+    fixed: libusb0.dll wasn't included in the installer
+    fixed: remove call to PyEcal_InitThreads(). swig already includes SWI=
+G_PYTHON_INITIALIZE_THREADS in SWIG_init()
+    CheckPlatformSupport.cmake: various improvements
+    Ease copy-paste by invoking apt noninteractively
+    Rename COPYING to LICENSE.md so follow standard naming conversion
+    cecloader.h: fix null return
+    Mark all devices as inactive when new active source is unknown
+    Fix use after free in callbacks with results.
+    Add a commandHandler callback to allow external libs to handle CEC co=
+mmands themselves.
+    Remove debug printfs.
+    Attempt to fix race condition when freeing the callback wrapper.
+    Allow command handler callback to intercept broadcast messages and fi=
+x inconsistent callback wrapper deletion again.
+    Remove useless mutex.
+    Remove useless 'keepResult' parameter and make sure the CCallbackWrap=
+ is only deleted once even in case of timeout.
+    Fix Python module import
+    fix assert issue with systemd udev
+    tegra-cec support. closes #636
+    Add support for Windows ARM64.
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../upower/power-profiles-daemon_0.30.bb      | 29 +++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 meta-oe/recipes-support/upower/power-profiles-daemon_=
-0.30.bb
+ ...pport.cmake-Do-not-hardcode-lib-path.patch | 42 -------------------
+ ...buggy-test-confusing-host-and-target.patch | 33 ---------------
+ ...return-type-of-function-LibCecBootlo.patch | 41 ------------------
+ .../{libcec_6.0.2.bb =3D> libcec_7.0.0.bb}      |  7 +---
+ 4 files changed, 2 insertions(+), 121 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/libcec/libcec/0001-CheckPlat=
+formSupport.cmake-Do-not-hardcode-lib-path.patch
+ delete mode 100644 meta-oe/recipes-extended/libcec/libcec/0001-Remove-bu=
+ggy-test-confusing-host-and-target.patch
+ delete mode 100644 meta-oe/recipes-extended/libcec/libcec/0001-cecloader=
+-Match-return-type-of-function-LibCecBootlo.patch
+ rename meta-oe/recipes-extended/libcec/{libcec_6.0.2.bb =3D> libcec_7.0.=
+0.bb} (80%)
 
-diff --git a/meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb=
- b/meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb
-new file mode 100644
-index 0000000000..cc56e2ea8a
---- /dev/null
-+++ b/meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb
-@@ -0,0 +1,29 @@
-+SUMMARY =3D "Makes power profiles handling available over D-Bus"
-+HOMEPAGE =3D "https://gitlab.freedesktop.org/upower/power-profile-daemon=
-"
-+LICENSE =3D "GPL-3.0-only"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
-504"
-+
-+DEPENDS =3D " \
-+    glib-2.0 \
-+    polkit \
-+    upower \
-+    libgudev \
-+"
-+
-+inherit meson pkgconfig systemd features_check
-+
-+REQUIRED_DISTRO_FEATURES =3D "polkit"
-+
-+EXTRA_OEMESON =3D "-Dtests=3Dfalse"
-+
-+SRCREV =3D "5b4994c8a91290481bef87a5bae95391d0ec677f"
-+SRC_URI =3D "git://gitlab.freedesktop.org/upower/power-profiles-daemon;b=
-ranch=3Dmain;protocol=3Dhttps"
-+S =3D "${WORKDIR}/git"
-+
-+do_install:append() {
-+	install -d ${D}${sysconfdir}/tmpfiles.d
-+	echo "d ${localstatedir}/lib/power-profiles-daemon 700 root root - -" >=
- ${D}${sysconfdir}/tmpfiles.d/power-profiles-daemon.conf
-+	sed -i -e 's|After=3Dmulti-user.target |After=3D|g' ${D}${systemd_syste=
-m_unitdir}/power-profiles-daemon.service
-+}
-+
-+FILES:${PN} +=3D "${sysconfdir}/tmpfiles.d ${datadir}/dbus-1 ${datadir}/=
-polkit-1 ${systemd_system_unitdir}"
+diff --git a/meta-oe/recipes-extended/libcec/libcec/0001-CheckPlatformSup=
+port.cmake-Do-not-hardcode-lib-path.patch b/meta-oe/recipes-extended/libc=
+ec/libcec/0001-CheckPlatformSupport.cmake-Do-not-hardcode-lib-path.patch
+deleted file mode 100644
+index 3ecbfce250..0000000000
+--- a/meta-oe/recipes-extended/libcec/libcec/0001-CheckPlatformSupport.cm=
+ake-Do-not-hardcode-lib-path.patch
++++ /dev/null
+@@ -1,42 +0,0 @@
+-From 95d4df3b713925e2c4894a2e4d50b06df861d9ef Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 18 Dec 2019 23:37:40 -0800
+-Subject: [PATCH] CheckPlatformSupport.cmake: Do not hardcode lib path
+-
+-Using CMAKE_INSTALL_LIBDIR ensures that we can build for multilib env
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/libcec/cmake/CheckPlatformSupport.cmake | 10 +++++-----
+- 1 file changed, 5 insertions(+), 5 deletions(-)
+-
+-diff --git a/src/libcec/cmake/CheckPlatformSupport.cmake b/src/libcec/cm=
+ake/CheckPlatformSupport.cmake
+-index 2d7102f..55e78f8 100644
+---- a/src/libcec/cmake/CheckPlatformSupport.cmake
+-+++ b/src/libcec/cmake/CheckPlatformSupport.cmake
+-@@ -224,16 +224,16 @@ else()
+-=20
+-       if (${PYTHON_MAJOR_VERSION} EQUAL 2)
+-         install(TARGETS     ${SWIG_MODULE_cec_REAL_NAME}
+--                DESTINATION lib/python${PYTHON_VERSION}/${PYTHON_PKG_DI=
+R}/${PYTHON_LIB_INSTALL_PATH}/cec)
+-+                DESTINATION ${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VERS=
+ION}/${PYTHON_PKG_DIR}/${PYTHON_LIB_INSTALL_PATH}/cec)
+-         install(FILES       ${CMAKE_BINARY_DIR}/src/libcec/cec.py
+--                DESTINATION lib/python${PYTHON_VERSION}/${PYTHON_PKG_DI=
+R})
+-+                DESTINATION l${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VER=
+SION}/${PYTHON_PKG_DIR})
+-         install(FILES ${CMAKE_SOURCE_DIR}/src/libcec/cmake/__init__.py
+--                DESTINATION lib/python${PYTHON_VERSION}/${PYTHON_PKG_DI=
+R}/cec)
+-+                DESTINATION ${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VERS=
+ION}/${PYTHON_PKG_DIR}/cec)
+-       else()
+-         install(TARGETS     ${SWIG_MODULE_cec_REAL_NAME}
+--                DESTINATION lib/python${PYTHON_VERSION}/${PYTHON_PKG_DI=
+R}/${PYTHON_LIB_INSTALL_PATH})
+-+                DESTINATION ${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VERS=
+ION}/${PYTHON_PKG_DIR}/${PYTHON_LIB_INSTALL_PATH})
+-         install(FILES       ${CMAKE_BINARY_DIR}/src/libcec/cec.py
+--                DESTINATION lib/python${PYTHON_VERSION}/${PYTHON_PKG_DI=
+R})
+-+                DESTINATION ${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VERS=
+ION}/${PYTHON_PKG_DIR})
+-       endif()
+-     endif()
+-   endif()
+---=20
+-2.24.1
+-
+diff --git a/meta-oe/recipes-extended/libcec/libcec/0001-Remove-buggy-tes=
+t-confusing-host-and-target.patch b/meta-oe/recipes-extended/libcec/libce=
+c/0001-Remove-buggy-test-confusing-host-and-target.patch
+deleted file mode 100644
+index 07277f7064..0000000000
+--- a/meta-oe/recipes-extended/libcec/libcec/0001-Remove-buggy-test-confu=
+sing-host-and-target.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-From 8ce50bf569ec2d931735180079bbe507730626c8 Mon Sep 17 00:00:00 2001
+-From: Yann Dirson <yann@blade-group.com>
+-Date: Mon, 7 Sep 2020 18:17:21 +0200
+-Subject: [PATCH] Remove buggy test confusing host and target
+-
+----
+-Upstream-Status: Pending
+-
+- src/libcec/cmake/CheckPlatformSupport.cmake | 8 --------
+- 1 file changed, 8 deletions(-)
+-
+-diff --git a/src/libcec/cmake/CheckPlatformSupport.cmake b/src/libcec/cm=
+ake/CheckPlatformSupport.cmake
+-index 1d99bd8..31dac4f 100644
+---- a/src/libcec/cmake/CheckPlatformSupport.cmake
+-+++ b/src/libcec/cmake/CheckPlatformSupport.cmake
+-@@ -266,14 +266,6 @@ else()
+-                 DESTINATION python/cec)
+-       endif()
+-     else()
+--      if(EXISTS "/etc/os-release")
+--        file(READ "/etc/os-release" OS_RELEASE)
+--        string(REGEX MATCH "ID(_LIKE)?=3Ddebian" IS_DEBIAN ${OS_RELEASE=
+})
+--        if (IS_DEBIAN)
+--          SET(PYTHON_PKG_DIR "dist-packages")
+--        endif()
+--      endif()
+--
+-       if (NOT PYTHON_PKG_DIR)
+-         SET(PYTHON_PKG_DIR "site-packages")
+-       endif()
+---=20
+-2.28.0
+-
+diff --git a/meta-oe/recipes-extended/libcec/libcec/0001-cecloader-Match-=
+return-type-of-function-LibCecBootlo.patch b/meta-oe/recipes-extended/lib=
+cec/libcec/0001-cecloader-Match-return-type-of-function-LibCecBootlo.patc=
+h
+deleted file mode 100644
+index ab1ab5b8eb..0000000000
+--- a/meta-oe/recipes-extended/libcec/libcec/0001-cecloader-Match-return-=
+type-of-function-LibCecBootlo.patch
++++ /dev/null
+@@ -1,41 +0,0 @@
+-From 2241edc8b70c2a54d109ac9c0e821889ac138d40 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Thu, 27 Jan 2022 22:49:52 -0800
+-Subject: [PATCH] cecloader: Match return type of function LibCecBootload=
+er
+-
+-Fixes
+-include/cecloader.h:175:14: error: cannot initialize return object of ty=
+pe 'bool' with an rvalue of type 'nullptr_t'
+-      return NULL;
+-             ^~~~
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- include/cecloader.h | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/include/cecloader.h b/include/cecloader.h
+-index be76468f..550f598e 100644
+---- a/include/cecloader.h
+-+++ b/include/cecloader.h
+-@@ -172,7 +172,7 @@ bool LibCecBootloader(const char *strLib =3D NULL)
+-     if (!g_libCEC)
+-     {
+-       std::cout << dlerror() << std::endl;
+--      return NULL;
+-+      return false;
+-     }
+-   }
+-=20
+-@@ -181,7 +181,7 @@ bool LibCecBootloader(const char *strLib =3D NULL)
+-   if (!LibCecBootloader)
+-   {
+-     std::cout << "cannot find CECStartBootloader" << std::endl;
+--    return NULL;
+-+    return false;
+-   }
+-=20
+-   bool bReturn =3D LibCecBootloader();
+---=20
+-2.35.0
+-
+diff --git a/meta-oe/recipes-extended/libcec/libcec_6.0.2.bb b/meta-oe/re=
+cipes-extended/libcec/libcec_7.0.0.bb
+similarity index 80%
+rename from meta-oe/recipes-extended/libcec/libcec_6.0.2.bb
+rename to meta-oe/recipes-extended/libcec/libcec_7.0.0.bb
+index 22155e534c..532179a9bb 100644
+--- a/meta-oe/recipes-extended/libcec/libcec_6.0.2.bb
++++ b/meta-oe/recipes-extended/libcec/libcec_7.0.0.bb
+@@ -2,19 +2,16 @@ SUMMARY =3D "USB CEC Adaptor communication Library"
+ HOMEPAGE =3D "http://libcec.pulse-eight.com/"
+=20
+ LICENSE =3D "GPL-2.0-or-later"
+-LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db3a719e97f49e4841e90573f9b1a9=
+8ac"
++LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3Db3a719e97f49e4841e90573f9b=
+1a98ac"
+=20
+ DEPENDS =3D "p8platform udev ncurses swig-native python3"
+=20
+ DEPENDS +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libx11 lib=
+xrandr', '', d)}"
+ DEPENDS:append:rpi =3D "${@bb.utils.contains('MACHINE_FEATURES', 'vc4gra=
+phics', '', ' userland', d)}"
+=20
+-SRCREV =3D "29d82c80bcc62be2878a9ac080de7eb286c4beb9"
++SRCREV =3D "ceeec8bfd2242792b6de59ce8fb854437208dc11"
+ SRC_URI =3D "git://github.com/Pulse-Eight/libcec.git;branch=3Drelease;pr=
+otocol=3Dhttps \
+-           file://0001-CheckPlatformSupport.cmake-Do-not-hardcode-lib-pa=
+th.patch \
+            file://0001-Enhance-reproducibility.patch \
+-           file://0001-Remove-buggy-test-confusing-host-and-target.patch=
+ \
+-           file://0001-cecloader-Match-return-type-of-function-LibCecBoo=
+tlo.patch \
+           "
+=20
+ S =3D "${WORKDIR}/git"
 --=20
 2.49.0
 
