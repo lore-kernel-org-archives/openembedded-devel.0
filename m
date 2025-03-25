@@ -1,296 +1,207 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <sjolley.yp.pm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BCE6C35FFC
-	for <webhook@archiver.kernel.org>; Tue, 25 Mar 2025 06:02:08 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.web10.59701.1742882523297024907
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EF00C36008
+	for <webhook@archiver.kernel.org>; Tue, 25 Mar 2025 06:23:28 +0000 (UTC)
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+ by mx.groups.io with SMTP id smtpd.web11.59440.1742883803648622283
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Mar 2025 23:02:03 -0700
+ Mon, 24 Mar 2025 23:23:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
-Received: from fwd88.aul.t-online.de (fwd88.aul.t-online.de [10.223.144.114])
-	by mailout08.t-online.de (Postfix) with SMTP id 560F5108B
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Mar 2025 07:01:38 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.32.137]) by fwd88.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1twxM0-4fksAT0; Tue, 25 Mar 2025 07:01:36 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] libcec: update 6.0.2 -> 7.0.0
-Date: Tue, 25 Mar 2025 07:02:18 +0100
-Message-ID: <20250325060218.222815-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.49.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=UNtM2o81;
+ spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: sjolley.yp.pm@gmail.com)
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2239c066347so116045655ad.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Mar 2025 23:23:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1742883803; x=1743488603; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=hjyAjAuqATrFigR3rij4F8UdrlysvDmqVV1xkzfzBaA=;
+        b=UNtM2o81i3TbWzMPqCwy1UFEbjSICr07fE+tMZHN/drdLsxST2roqnKpG2rqfPm3V1
+         0MES4SRFok9/T+Ua1ankFtmVEtWnX7eU9gqFlFnWw9yPXIVjbUuyEpurSVbyy6o7KVMk
+         2k9ZVFQ1qsuvxBRG2cX54UlzA1Mirl+kKHuTXRwr8RZEMAikajFaoQ6/TynJM9W7vxue
+         oP8KGyTEQq7p5uxc/1dios8z05hYiKy6ZQVt8Nq+4FI9tskwW+vQst24AIW+e+QHLl7s
+         zhoazI0wa4zsmUYXqcvUgdRs1Ppby+n4CaSh46gIQQUoBTM+8lqTa57ah/dS6rJFvy0r
+         ZtZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1742883803; x=1743488603;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=hjyAjAuqATrFigR3rij4F8UdrlysvDmqVV1xkzfzBaA=;
+        b=HyadLN8uFu3NjsIBcb8TzbY4a7XBKHkDwYsVCqAVuIQAuphEOLzIAtj+SOP+0CdiSX
+         2Z7gHCUv9ulKRDJL+KoAJhWvCJwit9sEMtMVAVTdYuSvGKQ0/Gjv7gHr6NcVaYlUnAGZ
+         gQpSRq8JSc9IANnOFyYBfaODOMwdn4gCBjBm+JeTw5Je9XDtX9EjK9DZjoX8g+fxK+S4
+         uF4nqrkg/b3YfecA4IOqSftMh+fkb1AcXcOS5gt00YOyV/qAhklVBaWXPory/4MbWKuh
+         Qz+mKvtjwaGJyd6mB2Q+nGjjR0sNMBWgveyN7zwxM0crog2fDIGXP2szQjlLi0UOdz8v
+         Vv1A==
+X-Gm-Message-State: AOJu0YxpO7rquTliyGmts48YEd+v9136hCWWl8gY96Sqw7PfcXCEID8o
+	7PbAcmIi0vFLk0oR4uFm2WuGxKY1I61lLCfaMcetINZxG8YCk2lqy3hn9dfyQZ7TkG9CTRFI4dG
+	IgIRXOy/F8KF7eSD4XgbCLwNM9Jk+zt0hxhE=
+X-Gm-Gg: ASbGnctHQENBVBCRtDYX29iuHvVOx1zfTOBiohLhw1axjz+QqUqJSZG4jJzC8oicLVi
+	TGHlVhfHJ3uwI18RkgMdhOYArYvfRHturyoICYzlA2zz7HtcxMOJ0CnOpJNNTjOqB1yuFbvEL4a
+	kx8qrF2oPGKabFJ+QuutA5FqVOnk9Y9FWakMAjKEFrUTxv0IBmmwBFElWdA1XM
+X-Google-Smtp-Source: AGHT+IEZUcwQhsGjYWPFU1wb9N6RoR+APEO7wUgjKI0t7rcV1hbsm+Ms/cMkuHgH7dRJ54iCfzdhV/WJUw/uFslBQDA=
+X-Received: by 2002:a17:902:ce01:b0:223:faf5:c82 with SMTP id
+ d9443c01a7336-22780c7e05fmr207845325ad.8.1742883802567; Mon, 24 Mar 2025
+ 23:23:22 -0700 (PDT)
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1742882496-897ECB7D-79A13ADF/10/3626336762 SUSPECT URL
-X-TOI-MSGID: ff667667-777d-439b-ac71-ace3c48903df
-Content-Transfer-Encoding: quoted-printable
+From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
+Date: Mon, 24 Mar 2025 23:23:05 -0700
+X-Gm-Features: AQ5f1Jq-Cd6G3NBMldoIKuXNg3U_97ST6WqH2IMC9ls3vkGf3QeCB9HLqymHvYs
+Message-ID: <CAK5yBb-MpYroRmJ3XNvX7H_X-meb2A6bM1svJ1b5-i3TPhEd6g@mail.gmail.com>
+Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
+To: openembedded-devel@lists.openembedded.org, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="000000000000efe549063124c10a"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Mar 2025 06:02:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116223
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Mar 2025 06:23:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116224
 
-Changelog
+--000000000000efe549063124c10a
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-    modernise CMakeLists.txt
-    Use cmake TIMESTAMP function to be more portable and to allow for rep=
-roducible builds
-    fixed: potential null deref. closes #556
-    python 3.13 compatibility
-    added: vs2022 support
-    fixed: creating (unsigned) windows installer
-    fixed: nsis installer not creating start menu icons and uninstaller
-    bump to .net framework 4.5 and .net 8.0
-    fixed: null terminate .net device language field. added CecLogicalAdd=
-resses::Unset()
-    fixed: don't call the config updated callback if nothing has changed.=
- auto set wake devices or activate source so these values match what happ=
-ens on the tv
-    fixed: tv would power on even if the options to power on were disable=
-d in cec-tray
-    changed/fixed: windows installer, eventghost plugin, .net libraries, =
-python imports, debug builds
-    fixed: use input() for python3 and raw_input() for python2
-    changed: debian python install to match arch specific too
-    fixed: libusb0.dll wasn't included in the installer
-    fixed: remove call to PyEcal_InitThreads(). swig already includes SWI=
-G_PYTHON_INITIALIZE_THREADS in SWIG_init()
-    CheckPlatformSupport.cmake: various improvements
-    Ease copy-paste by invoking apt noninteractively
-    Rename COPYING to LICENSE.md so follow standard naming conversion
-    cecloader.h: fix null return
-    Mark all devices as inactive when new active source is unknown
-    Fix use after free in callbacks with results.
-    Add a commandHandler callback to allow external libs to handle CEC co=
-mmands themselves.
-    Remove debug printfs.
-    Attempt to fix race condition when freeing the callback wrapper.
-    Allow command handler callback to intercept broadcast messages and fi=
-x inconsistent callback wrapper deletion again.
-    Remove useless mutex.
-    Remove useless 'keepResult' parameter and make sure the CCallbackWrap=
- is only deleted once even in case of timeout.
-    Fix Python module import
-    fix assert issue with systemd udev
-    tegra-cec support. closes #636
-    Add support for Windows ARM64.
+All,
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- ...pport.cmake-Do-not-hardcode-lib-path.patch | 42 -------------------
- ...buggy-test-confusing-host-and-target.patch | 33 ---------------
- ...return-type-of-function-LibCecBootlo.patch | 41 ------------------
- .../{libcec_6.0.2.bb =3D> libcec_7.0.0.bb}      |  7 +---
- 4 files changed, 2 insertions(+), 121 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/libcec/libcec/0001-CheckPlat=
-formSupport.cmake-Do-not-hardcode-lib-path.patch
- delete mode 100644 meta-oe/recipes-extended/libcec/libcec/0001-Remove-bu=
-ggy-test-confusing-host-and-target.patch
- delete mode 100644 meta-oe/recipes-extended/libcec/libcec/0001-cecloader=
--Match-return-type-of-function-LibCecBootlo.patch
- rename meta-oe/recipes-extended/libcec/{libcec_6.0.2.bb =3D> libcec_7.0.=
-0.bb} (80%)
+The triage team is starting to try and collect up and classify bugs which a
+newcomer to the project would be able to work on in a way which means
+people can find them. They're being listed on the triage page under the
+appropriate heading:
+https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
+review:
+https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
+how to create a bugzilla account at:
+https://bugzilla.yoctoproject.org/createaccount.cgi
 
-diff --git a/meta-oe/recipes-extended/libcec/libcec/0001-CheckPlatformSup=
-port.cmake-Do-not-hardcode-lib-path.patch b/meta-oe/recipes-extended/libc=
-ec/libcec/0001-CheckPlatformSupport.cmake-Do-not-hardcode-lib-path.patch
-deleted file mode 100644
-index 3ecbfce250..0000000000
---- a/meta-oe/recipes-extended/libcec/libcec/0001-CheckPlatformSupport.cm=
-ake-Do-not-hardcode-lib-path.patch
-+++ /dev/null
-@@ -1,42 +0,0 @@
--From 95d4df3b713925e2c4894a2e4d50b06df861d9ef Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 18 Dec 2019 23:37:40 -0800
--Subject: [PATCH] CheckPlatformSupport.cmake: Do not hardcode lib path
--
--Using CMAKE_INSTALL_LIBDIR ensures that we can build for multilib env
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/libcec/cmake/CheckPlatformSupport.cmake | 10 +++++-----
-- 1 file changed, 5 insertions(+), 5 deletions(-)
--
--diff --git a/src/libcec/cmake/CheckPlatformSupport.cmake b/src/libcec/cm=
-ake/CheckPlatformSupport.cmake
--index 2d7102f..55e78f8 100644
----- a/src/libcec/cmake/CheckPlatformSupport.cmake
--+++ b/src/libcec/cmake/CheckPlatformSupport.cmake
--@@ -224,16 +224,16 @@ else()
--=20
--       if (${PYTHON_MAJOR_VERSION} EQUAL 2)
--         install(TARGETS     ${SWIG_MODULE_cec_REAL_NAME}
---                DESTINATION lib/python${PYTHON_VERSION}/${PYTHON_PKG_DI=
-R}/${PYTHON_LIB_INSTALL_PATH}/cec)
--+                DESTINATION ${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VERS=
-ION}/${PYTHON_PKG_DIR}/${PYTHON_LIB_INSTALL_PATH}/cec)
--         install(FILES       ${CMAKE_BINARY_DIR}/src/libcec/cec.py
---                DESTINATION lib/python${PYTHON_VERSION}/${PYTHON_PKG_DI=
-R})
--+                DESTINATION l${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VER=
-SION}/${PYTHON_PKG_DIR})
--         install(FILES ${CMAKE_SOURCE_DIR}/src/libcec/cmake/__init__.py
---                DESTINATION lib/python${PYTHON_VERSION}/${PYTHON_PKG_DI=
-R}/cec)
--+                DESTINATION ${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VERS=
-ION}/${PYTHON_PKG_DIR}/cec)
--       else()
--         install(TARGETS     ${SWIG_MODULE_cec_REAL_NAME}
---                DESTINATION lib/python${PYTHON_VERSION}/${PYTHON_PKG_DI=
-R}/${PYTHON_LIB_INSTALL_PATH})
--+                DESTINATION ${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VERS=
-ION}/${PYTHON_PKG_DIR}/${PYTHON_LIB_INSTALL_PATH})
--         install(FILES       ${CMAKE_BINARY_DIR}/src/libcec/cec.py
---                DESTINATION lib/python${PYTHON_VERSION}/${PYTHON_PKG_DI=
-R})
--+                DESTINATION ${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VERS=
-ION}/${PYTHON_PKG_DIR})
--       endif()
--     endif()
--   endif()
----=20
--2.24.1
--
-diff --git a/meta-oe/recipes-extended/libcec/libcec/0001-Remove-buggy-tes=
-t-confusing-host-and-target.patch b/meta-oe/recipes-extended/libcec/libce=
-c/0001-Remove-buggy-test-confusing-host-and-target.patch
-deleted file mode 100644
-index 07277f7064..0000000000
---- a/meta-oe/recipes-extended/libcec/libcec/0001-Remove-buggy-test-confu=
-sing-host-and-target.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--From 8ce50bf569ec2d931735180079bbe507730626c8 Mon Sep 17 00:00:00 2001
--From: Yann Dirson <yann@blade-group.com>
--Date: Mon, 7 Sep 2020 18:17:21 +0200
--Subject: [PATCH] Remove buggy test confusing host and target
--
-----
--Upstream-Status: Pending
--
-- src/libcec/cmake/CheckPlatformSupport.cmake | 8 --------
-- 1 file changed, 8 deletions(-)
--
--diff --git a/src/libcec/cmake/CheckPlatformSupport.cmake b/src/libcec/cm=
-ake/CheckPlatformSupport.cmake
--index 1d99bd8..31dac4f 100644
----- a/src/libcec/cmake/CheckPlatformSupport.cmake
--+++ b/src/libcec/cmake/CheckPlatformSupport.cmake
--@@ -266,14 +266,6 @@ else()
--                 DESTINATION python/cec)
--       endif()
--     else()
---      if(EXISTS "/etc/os-release")
---        file(READ "/etc/os-release" OS_RELEASE)
---        string(REGEX MATCH "ID(_LIKE)?=3Ddebian" IS_DEBIAN ${OS_RELEASE=
-})
---        if (IS_DEBIAN)
---          SET(PYTHON_PKG_DIR "dist-packages")
---        endif()
---      endif()
---
--       if (NOT PYTHON_PKG_DIR)
--         SET(PYTHON_PKG_DIR "site-packages")
--       endif()
----=20
--2.28.0
--
-diff --git a/meta-oe/recipes-extended/libcec/libcec/0001-cecloader-Match-=
-return-type-of-function-LibCecBootlo.patch b/meta-oe/recipes-extended/lib=
-cec/libcec/0001-cecloader-Match-return-type-of-function-LibCecBootlo.patc=
-h
-deleted file mode 100644
-index ab1ab5b8eb..0000000000
---- a/meta-oe/recipes-extended/libcec/libcec/0001-cecloader-Match-return-=
-type-of-function-LibCecBootlo.patch
-+++ /dev/null
-@@ -1,41 +0,0 @@
--From 2241edc8b70c2a54d109ac9c0e821889ac138d40 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 27 Jan 2022 22:49:52 -0800
--Subject: [PATCH] cecloader: Match return type of function LibCecBootload=
-er
--
--Fixes
--include/cecloader.h:175:14: error: cannot initialize return object of ty=
-pe 'bool' with an rvalue of type 'nullptr_t'
--      return NULL;
--             ^~~~
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- include/cecloader.h | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/include/cecloader.h b/include/cecloader.h
--index be76468f..550f598e 100644
----- a/include/cecloader.h
--+++ b/include/cecloader.h
--@@ -172,7 +172,7 @@ bool LibCecBootloader(const char *strLib =3D NULL)
--     if (!g_libCEC)
--     {
--       std::cout << dlerror() << std::endl;
---      return NULL;
--+      return false;
--     }
--   }
--=20
--@@ -181,7 +181,7 @@ bool LibCecBootloader(const char *strLib =3D NULL)
--   if (!LibCecBootloader)
--   {
--     std::cout << "cannot find CECStartBootloader" << std::endl;
---    return NULL;
--+    return false;
--   }
--=20
--   bool bReturn =3D LibCecBootloader();
----=20
--2.35.0
--
-diff --git a/meta-oe/recipes-extended/libcec/libcec_6.0.2.bb b/meta-oe/re=
-cipes-extended/libcec/libcec_7.0.0.bb
-similarity index 80%
-rename from meta-oe/recipes-extended/libcec/libcec_6.0.2.bb
-rename to meta-oe/recipes-extended/libcec/libcec_7.0.0.bb
-index 22155e534c..532179a9bb 100644
---- a/meta-oe/recipes-extended/libcec/libcec_6.0.2.bb
-+++ b/meta-oe/recipes-extended/libcec/libcec_7.0.0.bb
-@@ -2,19 +2,16 @@ SUMMARY =3D "USB CEC Adaptor communication Library"
- HOMEPAGE =3D "http://libcec.pulse-eight.com/"
-=20
- LICENSE =3D "GPL-2.0-or-later"
--LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db3a719e97f49e4841e90573f9b1a9=
-8ac"
-+LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3Db3a719e97f49e4841e90573f9b=
-1a98ac"
-=20
- DEPENDS =3D "p8platform udev ncurses swig-native python3"
-=20
- DEPENDS +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libx11 lib=
-xrandr', '', d)}"
- DEPENDS:append:rpi =3D "${@bb.utils.contains('MACHINE_FEATURES', 'vc4gra=
-phics', '', ' userland', d)}"
-=20
--SRCREV =3D "29d82c80bcc62be2878a9ac080de7eb286c4beb9"
-+SRCREV =3D "ceeec8bfd2242792b6de59ce8fb854437208dc11"
- SRC_URI =3D "git://github.com/Pulse-Eight/libcec.git;branch=3Drelease;pr=
-otocol=3Dhttps \
--           file://0001-CheckPlatformSupport.cmake-Do-not-hardcode-lib-pa=
-th.patch \
-            file://0001-Enhance-reproducibility.patch \
--           file://0001-Remove-buggy-test-confusing-host-and-target.patch=
- \
--           file://0001-cecloader-Match-return-type-of-function-LibCecBoo=
-tlo.patch \
-           "
-=20
- S =3D "${WORKDIR}/git"
---=20
-2.49.0
+The idea is these bugs should be straight forward for a person to help work
+on who doesn't have deep experience with the project. If anyone can help,
+please take ownership of the bug and send patches! If anyone needs
+help/advice there are people on irc who can likely do so, or some of the
+more experienced contributors will likely be happy to help too.
 
+Also, the triage team meets weekly and does its best to handle the bugs
+reported into the Bugzilla. The number of people attending that meeting has
+fallen, as have the number of people available to help fix bugs. One of the
+things we hear users report is they don't know how to help. We (the triage
+team) are therefore going to start reporting out the currently 437
+unassigned or newcomer bugs.
+
+We're hoping people may be able to spare some time now and again to help
+out with these. Bugs are split into two types, "true bugs" where things
+don't work as they should and "enhancements" which are features we'd want
+to add to the system. There are also roughly four different "priority"
+classes right now, =E2=80=9C5.2=E2=80=9D, =E2=80=9C5.3", "5.99" and "Future=
+", the more
+pressing/urgent issues being in "5.2" and then =E2=80=9C5.3=E2=80=9D.
+
+Please review this link and if a bug is something you would be able to help
+with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
+an e-mail with the bug number you would like and I will assign it to you
+(please make sure you have a Bugzilla account). The list is at:
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs
+
+Thanks,
+
+
+
+*Stephen K. Jolley*
+
+*Yocto Project Program Manager*
+
+(    *Cell*:                (208) 244-4460
+
+* *Email*:                 *s
+<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
+*
+
+--000000000000efe549063124c10a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><span style=3D"font-size:11pt;font-family:Calibri,Ari=
+al">All,<br><br>The triage team is starting to try and collect up and class=
+ify bugs which a newcomer to the project would be able to work on in a way =
+which means people can find them. They&#39;re being listed on the triage pa=
+ge under the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/=
+wiki/Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triag=
+e#Newcomer_Bugs</a>  Also please review: <a href=3D"https://www.openembedde=
+d.org/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.=
+org/wiki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugz=
+illa account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount=
+.cgi">https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The id=
+ea is these bugs should be straight forward for a person to help work on wh=
+o doesn&#39;t have deep experience with the project.  If anyone can help, p=
+lease take ownership of the bug and send patches!  If anyone needs help/adv=
+ice there are people on irc who can likely do so, or some of the more exper=
+ienced contributors will likely be happy to help too.<br><br>Also, the tria=
+ge team meets weekly and does its best to handle the bugs reported into the=
+ Bugzilla. The number of people attending that meeting has fallen, as have =
+the number of people available to help fix bugs. One of the things we hear =
+users report is they don&#39;t know how to help. We (the triage team) are t=
+herefore going to start reporting out the currently 437 unassigned or newco=
+mer bugs.<br><br>We&#39;re hoping people may be able to spare some time now=
+ and again to help out with these.  Bugs are split into two types, &quot;tr=
+ue bugs&quot; where things don&#39;t work as they should and &quot;enhancem=
+ents&quot; which are features we&#39;d want to add to the system.  There ar=
+e also roughly four different &quot;priority&quot; classes right now, =E2=
+=80=9C5.2=E2=80=9D, =E2=80=9C5.3&quot;, &quot;5.99&quot; and &quot;Future&q=
+uot;, the more pressing/urgent issues being in &quot;5.2&quot; and then =E2=
+=80=9C5.3=E2=80=9D.<br><br>Please review this link and if a bug is somethin=
+g you would be able to help with either take ownership of the bug, or send =
+me (<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>)=
+ an e-mail with the bug number you would like and I will assign it to you (=
+please make sure you have a Bugzilla account).  The list is at: <a href=3D"=
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or=
+_Newcomer_Bugs</a></span></div><div dir=3D"ltr" class=3D"gmail_signature" d=
+ata-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p clas=
+s=3D"MsoNormal" style=3D"background-image:initial;background-position:initi=
+al;background-repeat:initial"><span style=3D"font-size:12pt;font-family:Ari=
+al,sans-serif">Thanks,<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
+ily:Arial,sans-serif">=C2=A0<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
+lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
+ont-family:Arial,sans-serif"><span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
+amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
+an></b></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
+&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
+<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
+:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
+s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
+-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
+><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
+/span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
+t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
+=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
+color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
+uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
+ lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
+erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
+phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
+.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
+u></p></div></div></div></div>
+
+--000000000000efe549063124c10a--
 
