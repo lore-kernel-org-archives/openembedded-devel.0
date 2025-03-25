@@ -1,95 +1,88 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C6208C35FFC
-	for <webhook@archiver.kernel.org>; Tue, 25 Mar 2025 03:51:07 +0000 (UTC)
-Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
- by mx.groups.io with SMTP id smtpd.web10.58392.1742874657988244189
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BF466C35FFC
+	for <webhook@archiver.kernel.org>; Tue, 25 Mar 2025 03:53:37 +0000 (UTC)
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.web10.58417.1742874812149718178
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Mar 2025 20:50:58 -0700
+ Mon, 24 Mar 2025 20:53:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
-Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
-	by mailout01.t-online.de (Postfix) with SMTP id F1AB6DF3
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Mar 2025 04:50:53 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.32.137]) by fwd74.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1twvJT-3CRXGL0; Tue, 25 Mar 2025 04:50:51 +0100
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QmeOpiaW;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-22403cbb47fso97519825ad.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Mar 2025 20:53:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1742874811; x=1743479611; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=/G8ITAcCl0a4JhERSGFAqfVNucVAoNn769hk3nMQHPo=;
+        b=QmeOpiaWGda1ywb7UT4f/rBXhBazgro6JV9Gaq7krRzA9xWuHVznEuOpx9je/hBt/r
+         McgeoZSzC9guNhR93JIXVN5KDijpyCYpdGRuvdYVb4Kho06PU+jlCl5rKmRnRiW9Rb0D
+         hebJKqGr+x9x+08MSN39uKHQm9xo0u4JWjNz6lqejv9Vq7sZzZXsZfqnAAn7yVBhfYJf
+         55YWuMGepZmmiV+yILyU0WqBQQTpDYyJR8gb8hHI9G4zHwD1PJ0UXD3AcxnxDL2xqeWn
+         75pSqjzZd1dk0sHN1lPf3aToAW0811uUrhU2E+aL4+hIeveB9xglc+2m8lnZcFZvxaPz
+         hzxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1742874811; x=1743479611;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=/G8ITAcCl0a4JhERSGFAqfVNucVAoNn769hk3nMQHPo=;
+        b=Uoc+wuCyZSrgnhRjzOMDffUI8bKmj/q2d4pdqJsPbLVpyW9FUFT+NYuM6T4jtcbvzc
+         EK1QrEodw4pt0hdnhyFtW1el1Kr7M0BcVg/wIko0QkVZvGtrLOmLGqoR55yArC/vxK1/
+         LbKN8HJzeJ07kjKDUxGAkeVXwqwVzgURIBe7EIKSv1qIsmjiP3f/grIvkiN59Ee/7QMi
+         at6th/Jd4we8PKYTaHaRAsHkDOTl07pdxdgZq1PebEV/q1s1BGrRNaS8YYRU7VQ03qMa
+         /65Yk8B7dArkMJf95PKl2xNxv+8nDjXn57krMOLzEb0/ySimSDxnrbm2Eb6upvULmO2S
+         jKUw==
+X-Gm-Message-State: AOJu0YzrpCNfNHVU5hcmyFdWknT/25FdpB6M+rUSjaT/1lcb4/3Ay1PT
+	wJrgIogigYYC4JGxnm7q2mkCmgVs+07nqHk7cjO3dze0eIaUcyHIpbyqyHNs
+X-Gm-Gg: ASbGncs+8Do2nymnpqp81FECDTB3xm8GE1L/uXVkvqJyqg3JCT69A6B7RJulx+ySERr
+	sjJxpk0YY3otSTBAqFyQA9sIM2zv92HGHis38L5Y9ycecnwpVxYG9xOe2fX4qwN7iuL/IKOdatF
+	xCtEh7Gtl8v41FofNI3d4qXoR4erxbuWgaNB0UCPPWtbuJdPXU7cWJgpuIjCfiwOoHoMSXMf33f
+	HQSEaBIbzO6OLZFJbDExZp8D8D2FUUQysXGu/kX39tMV88U/18LAOMDplZgdYEQALHbV5I1rKJ2
+	uSVIV4g4ugrZw9hatABAm1uFmCYsfdc6LFPS
+X-Google-Smtp-Source: AGHT+IEEZO/mfyW/mnaNMJ5bdWygQI3BSZFKEL1lwf1QrZdcq8aqOsqnELBi9jDYW8xQ2UeWk4l0Yw==
+X-Received: by 2002:a05:6a00:a90:b0:736:339b:8296 with SMTP id d2e1a72fcca58-73905a02c3cmr24851713b3a.18.1742874810941;
+        Mon, 24 Mar 2025 20:53:30 -0700 (PDT)
+Received: from apollo.localdomain ([2601:646:8201:fd20::b570])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7390614ba19sm8830079b3a.123.2025.03.24.20.53.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 24 Mar 2025 20:53:30 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCHv2] pipewire: update 1.4.0 -> 1.4.1
-Date: Tue, 25 Mar 2025 04:51:41 +0100
-Message-ID: <20250325035141.3459-1-f_l_k@t-online.de>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH] pipewire: Deduce branch name from PV
+Date: Mon, 24 Mar 2025 20:53:28 -0700
+Message-ID: <20250325035328.1501961-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1742874652-1B7EBC15-10D72D7B/0/0 CLEAN NORMAL
-X-TOI-MSGID: c27016a4-6742-45ed-8ac1-46fb01c3181f
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Mar 2025 03:51:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116216
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Mar 2025 03:53:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116217
 
-This is a quick bugfix release that is API and ABI compatible with
-previous 1.x releases.
-
-  - Handle SplitPCM wrong channels specifications. This fixes some
-    problems with disappearing devices.
-  - Add backwards compatibility support for when the kernel does not
-    support UMP. Also fix UMP output. This restores MIDI support for
-    older kernels/ALSA.
-  - Fix a crash in audioconvert because the resampler was not using the
-    right number of channels.
-  - Some compilation fixes and small improvements.
-
-  - Don't emit events when disconnecting a stream. (#3314)
-  - Fix some compilation problems. (#4603)
-
-  - Bump the ROC requirement to version 0.4.0
-
-  - Handle SplitPCM too few or too many channels. Add an error string
-    to the device names when the UCM config has an error.
-  - Add backwards compatibility support for when the kernel does not
-    support UMP.
-  - Configure the channels in the resampler correctly in all
-    cases. (#4595)
-  - Fix UMP output.
-  - Use the right samplerate of the filter-graph in audioconvert in
-    all cases.
-
-  - Fix a crash with an incomming call.
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc:Markus Volk <f_l_k@t-online.de>
 ---
- .../pipewire/{pipewire_1.4.0.bb =3D> pipewire_1.4.1.bb}         | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_1.4.0.bb =3D=
-> pipewire_1.4.1.bb} (99%)
+ meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.0.b=
-b b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb
-similarity index 99%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.0.bb
-rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb
-index a57fbca229..27f2db1210 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.0.bb
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb
+index 2bd7739433..122f8fc4ec 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb
 +++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb
-@@ -12,8 +12,8 @@ LIC_FILES_CHKSUM =3D " \
-=20
- DEPENDS =3D "dbus ncurses"
-=20
--SRCREV =3D "df1c36aec2aaf9e2eb1596b6b55e72c15fb2088a"
--SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
-master;protocol=3Dhttps"
-+SRCREV =3D "2eb8cf5dc780ca22b94545f1254497a428c412f5"
-+SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
-1.4;protocol=3Dhttps"
-=20
- S =3D "${WORKDIR}/git"
-=20
---=20
-2.49.0
-
+@@ -13,7 +13,8 @@ LIC_FILES_CHKSUM = " \
+ DEPENDS = "dbus ncurses"
+ 
+ SRCREV = "2eb8cf5dc780ca22b94545f1254497a428c412f5"
+-SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https"
++BRANCH = "${@oe.utils.trim_version('${PV}', 2)}"
++SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=${BRANCH};protocol=https"
+ 
+ S = "${WORKDIR}/git"
+ 
 
