@@ -2,625 +2,813 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E6D2C36008
-	for <webhook@archiver.kernel.org>; Wed, 26 Mar 2025 14:44:30 +0000 (UTC)
-Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com [209.85.167.176])
- by mx.groups.io with SMTP id smtpd.web10.24362.1743000261132421641
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B739C36008
+	for <webhook@archiver.kernel.org>; Wed, 26 Mar 2025 14:46:30 +0000 (UTC)
+Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
+ by mx.groups.io with SMTP id smtpd.web10.24405.1743000386823612827
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Mar 2025 07:44:21 -0700
+ Wed, 26 Mar 2025 07:46:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=BoSgOj2A;
- spf=pass (domain: gmail.com, ip: 209.85.167.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f176.google.com with SMTP id 5614622812f47-3fe83c8cbdbso1916035b6e.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Mar 2025 07:44:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=EMN+Ytgh;
+ spf=pass (domain: gmail.com, ip: 209.85.161.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f49.google.com with SMTP id 006d021491bc7-601a46ee19fso3643814eaf.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Mar 2025 07:46:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1743000260; x=1743605060; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1743000386; x=1743605186; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9DjgS5QuKa38NM7lXhLd0fYYV6qt6jVQWjlmZcIIdiE=;
-        b=BoSgOj2ANmi0jCOjXxt2J31XQOQM2ZL8k/fB2mRO0Xfze3tMujyPyNw8lr37yV/anE
-         xv8f1tYKPoj4Fjh00EEYcu6eXoz9vnWsrrex8Xt9Eo071g+5Z7A2gYXRpDFY1YC3jvTo
-         HgOJLOc3OV34Q0CJhcXG3G7xEGljUct43BoO28EFTHSI6z75XMa52a2XV+vxJaeVTYGe
-         gw15rr5wIBIhCaTNWTZQjXk1+LdS0O6pEfCRMxt1IUhC5TcnqCdMyHEyOsHlKF4HvSs9
-         jn+lGpVxoBcMfpWySjzcnhAjRDB92OfEnSN8TpBkfhusE8v77YNol9zIUyJxQGPg9R/L
-         szGA==
+        bh=qMSYUhokZSumLiblINk3w0pGcpSw710m7+J3k2gZfJA=;
+        b=EMN+YtghsAukNYZ5ecdxaIDsI+PtyGvou+uJg1lXTU5dmov6y6DdqIHg1/ds3pjVEx
+         sMVd4ivATruEdNqzlFOa0vk7W20lUauCv5SC5XugLtHmUVr6W6jiqz+pgxbMNp8OV7zE
+         BbNKg9xH05K5rKw2vvgvU8933pY3zyh1YHUuXWOQVjaRuCddjPyCogkKmbVGBp41IyzP
+         06NYnJH+6fZgRKPY5efaev8iCV2BQ2fPIxLoXEGlslOKY1WDzocSxWa/bXHfaxHSSyRC
+         uNk5U11sTrLRO7tUDAK9Y1zccIdEoYXJPyk+TegNBU+Al7RkP/8Bk4Oqnf4+fWJsK7xV
+         Qfmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743000260; x=1743605060;
+        d=1e100.net; s=20230601; t=1743000386; x=1743605186;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=9DjgS5QuKa38NM7lXhLd0fYYV6qt6jVQWjlmZcIIdiE=;
-        b=Yf9v5LxT5O7sCkDI3BN2CXtJIdkbSfzYUcWieW1eRjaEGquwnX83cl1vtFdZ35iSKV
-         f/jpt5U4NPtNtotJWmhQwOiMb956ewFQ02Qrvs/9mCbUzkSrL5AeOqgy0jMPLPv37pDP
-         axRpY2oRVl3PCSMPVDpghmdEfcIO49aqWEH18+5yXbGWBSOlwwaBXtBIvRWqf4tjxfWQ
-         D70odsUzkSx/j4kKnWP9P8lNDSVL7qS4Muu+n2ODLyJLKM4PWsRC5yf1fm3e36fzKQkY
-         5hiX2CB/J+dbJaKmbFqva/Jhs/KueZ2V69e+qDYeYN8lGbQ0oZdqBra+QorNClg6nuN3
-         QEgw==
-X-Gm-Message-State: AOJu0Yx+sn8DHV5aXAgaYxuq74FE0XDqTaBKzVpXAUYuNXDiuma9qLGw
-	TcPbqc64HhKjdgO2Hy31HRis6mMhDqFvnPDlspApysXWd1Egtj3gmLdSjP8E1oIq2KzMVVOKNa6
-	maGirbKE7dBORscuyu5gDP9QcnVQGfd64
-X-Gm-Gg: ASbGncvnNj1A2szYTCd68IdLE4m46z12odMYergdyOlHrMWCmTvs9I6srItALKHd3sX
-	crKYeyIz3FjgVUDLFgNJiccaVha3ulys30M8L/b5OOFjmmAtVwpIl18Zmf4beUr4nvscUbgnbA/
-	Y5P7h9MX8iKXNLgQ+JPSJnxAG3
-X-Google-Smtp-Source: AGHT+IEdSuJDRlZm9iyIHiyLQwNKWs9SYZKob3fVZsadiz9Tq99hzP/ok0MxGN2CNSRuU3UyIcZJWAUKyVR2mypGV/g=
-X-Received: by 2002:a05:6808:1408:b0:3f6:7cd2:8187 with SMTP id
- 5614622812f47-3febf72c855mr13681282b6e.20.1743000259996; Wed, 26 Mar 2025
- 07:44:19 -0700 (PDT)
+        bh=qMSYUhokZSumLiblINk3w0pGcpSw710m7+J3k2gZfJA=;
+        b=MYXlDBFRdl9vYXdOJi6moh9RHxxt/QZ7KvvKdhU72tnGEJOMCPyXDJKEN/3mT+n6Uq
+         JrmX4TBoNZq471t7LD7cGaR+qqK8woiHVf4PgEbs5lwc6bL8HtLHktknEsjIsnvt8IoY
+         4MQWtF7EJHoj5ma/Zwe86haCbYLjrETQJ/CSokD8PzlGCSC+AvSp2hv22Csc7sOO8Hbu
+         Da5RCyuZI2Cu07pj7ErG3kIVU4ffRmywGa1w0/CS37Y4usKv3QDIyRgijP5PeJ4qXqT5
+         ePL9xVx2c3y2alQEk8302+YO8XqW6wDapVcrEVdTUnW2aV6XX59dTfY3R1OcyTGZm4Po
+         T4GA==
+X-Gm-Message-State: AOJu0YxBfpwSwtUDo+U5XYKnYt7BOnTTiLkaRXxh+Hsef3FFhF+DYciP
+	HPUFC9ov0CahQJ/zcA4ceLG13MVKHpu2ZZHEEINFlQvRjErW8/pV9zHB9BIqv7U3qtOkegQdDr3
+	PipH8jHj7mxQjFoTpbG0N4BHuU6MLVh7J
+X-Gm-Gg: ASbGncsgMIsjKEA4XR1g6Y2D+f7/xJh7I0uo6siDSshI3VlaqFAohDW28Zm57SXUJSm
+	l3a6lHFr41IVbbTGph6LN3n/BXwsHdB4cpFuSVyMNzC5aMqPadLfTmlQ2H89I5cJrci4ZsGIsHY
+	/C7sy+CCh572cdzkrGnawlz/sq
+X-Google-Smtp-Source: AGHT+IEe+qs7Nwi0QajO8kDNSMZYo8poooHf5JG6YaV8CmLO3lMvr702JOL/7dtZDUiYDwC//G/brtYOwt4m2gKn33g=
+X-Received: by 2002:a05:6820:2302:b0:602:6cb4:35a5 with SMTP id
+ 006d021491bc7-602785c3f75mr31060eaf.3.1743000385547; Wed, 26 Mar 2025
+ 07:46:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250326080348.3794227-1-mark.yang@lge.com>
-In-Reply-To: <20250326080348.3794227-1-mark.yang@lge.com>
+References: <20250325135112.2028029-1-martin.jansa@gmail.com>
+In-Reply-To: <20250325135112.2028029-1-martin.jansa@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 26 Mar 2025 07:43:53 -0700
-X-Gm-Features: AQ5f1Jr41OtRRcj4lWl1Vy9mfsTyWKqX1QxrJVb7Hk6101oLGkpcCaZ2_ZtsUH0
-Message-ID: <CAMKF1soAmVzXo8bRSpTsgJSEfe0tQk+UObrMCgSRgrKse2ehbA@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] dnsmasq: fix build with gcc-15
-To: mark.yang@lge.com
+Date: Wed, 26 Mar 2025 07:45:59 -0700
+X-Gm-Features: AQ5f1Jrd_0j1fW7Jdis1agr0vequS4eJ7q0BjhCnK40y8JwRMKH-SC0gLAHKnu4
+Message-ID: <CAMKF1srUCfLKXURsnN42AUPQiPk2w3x_Qfivm9sUp5HjQ3Ctrw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] jq: fix build with gcc-15
+To: martin.jansa@gmail.com
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Mar 2025 14:44:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116297
+ <openembedded-devel@lists.openembedded.org>; Wed, 26 Mar 2025 14:46:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116298
 
-we have 2.91 upgrade staged in master-next. If we need this patch
-still then please rebase it on 2.91 upgrade and resend
+I am seeing ptest failures with jq with this patch
 
-On Wed, Mar 26, 2025 at 1:03=E2=80=AFAM mark.yang via lists.openembedded.or=
-g
-<mark.yang=3Dlge.com@lists.openembedded.org> wrote:
+On Tue, Mar 25, 2025 at 6:51=E2=80=AFAM Martin Jansa via
+lists.openembedded.org <martin.jansa=3Dgmail.com@lists.openembedded.org>
+wrote:
 >
-> From: "mark.yang" <mark.yang@lge.com>
+> From: Martin Jansa <martin.jansa@gmail.com>
 >
-> * to fix: following errors occurred in gcc-15.0.1 environment.
-> dhcp.c:320:49: error: passing argument 3 of 'iface_enumerate' from incomp=
-atible pointer type [-Wincompatible-pointer-types]
->   320 |               !iface_enumerate(AF_INET, &match, check_listen_addr=
-s) ||
->       |                                                 ^~~~~~~~~~~~~~~~~=
-~
->       |                                                 |
->       |                                                 int (*)(struct in=
-_addr,  int,  char *, struct in_addr,  struct in_addr,  void *)
-> dnsmasq.h:1662:50: note: expected 'int (*)(void)' but argument is of type=
- 'int (*)(struct in_addr,  int,  char *, struct in_addr,  struct in_addr,  =
-void *)'
->  1662 | int iface_enumerate(int family, void *parm, int (callback)());
->       |                                             ~~~~~^~~~~~~~~~~
-> dhcp.c:33:12: note: 'check_listen_addrs' declared here
->    33 | static int check_listen_addrs(struct in_addr local, int if_index,=
- char *label,
->       |            ^~~~~~~~~~~~~~~~~~
-> dhcp.c:333:44: error: passing argument 3 of 'iface_enumerate' from incomp=
-atible pointer type [-Wincompatible-pointer-types]
->   333 |       if (!iface_enumerate(AF_INET, &parm, complete_context))
->       |                                            ^~~~~~~~~~~~~~~~
->       |                                            |
->       |                                            int (*)(struct in_addr=
-,  int,  char *, struct in_addr,  struct in_addr,  void *)
-> dnsmasq.h:1662:50: note: expected 'int (*)(void)' but argument is of type=
- 'int (*)(struct in_addr,  int,  char *, struct in_addr,  struct in_addr,  =
-void *)'
->  1662 | int iface_enumerate(int family, void *parm, int (callback)());
->       |                                             ~~~~~^~~~~~~~~~~
-> dhcp.c:31:12: note: 'complete_context' declared here
->    31 | static int complete_context(struct in_addr local, int if_index, c=
-har *label,
->       |            ^~~~~~~~~~~~~~~~
+> * backport 3 commits to fix:
+>   http://errors.yoctoproject.org/Errors/Details/848831/
 >
-> Signed-off-by: mark.yang <mark.yang@lge.com>
+> ../jq-1.7.1/src/builtin.c:1705:4: error: initialization of 'jv (*)(void)'=
+ from incompatible pointer type 'jv (*)(jq_state *, jv)' [-Wincompatible-po=
+inter-types]
+>  1705 |   {f_ ## name,  #name, 1},
+>       |    ^~
+>
+> Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 > ---
->  .../recipes-support/dnsmasq/dnsmasq_2.90.bb   |   1 +
->  ...ompatibility-and-Wincompatible-point.patch | 375 ++++++++++++++++++
->  2 files changed, 376 insertions(+)
->  create mode 100644 meta-networking/recipes-support/dnsmasq/files/0001-Fi=
-x-GCC-15-C23-compatibility-and-Wincompatible-point.patch
+>  ...c-fix-build-with-Woverlength-strings.patch | 215 +++++++++++++++
+>  ...-add-and-use-LIBM_DA-and-LIBM_DA_NO-.patch | 164 ++++++++++++
+>  ...eck-builtin-cfunctions-in-function_l.patch | 249 ++++++++++++++++++
+>  meta-oe/recipes-devtools/jq/jq_1.7.1.bb       |   3 +
+>  4 files changed, 631 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/jq/jq/0001-builtin.c-fix-bui=
+ld-with-Woverlength-strings.patch
+>  create mode 100644 meta-oe/recipes-devtools/jq/jq/0002-libm.h-builtin.c-=
+add-and-use-LIBM_DA-and-LIBM_DA_NO-.patch
+>  create mode 100644 meta-oe/recipes-devtools/jq/jq/0003-builtin.c-typeche=
+ck-builtin-cfunctions-in-function_l.patch
 >
-> diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb b/me=
-ta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
-> index ba783d03ff..5cdb24f36a 100644
-> --- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
-> +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
-> @@ -15,6 +15,7 @@ SRC_URI =3D "http://www.thekelleys.org.uk/dnsmasq/${@['=
-archive/', ''][float(d.getV
->             file://dnsmasq-resolvconf.service \
->             file://dnsmasq-noresolvconf.service \
->             file://dnsmasq-resolved.conf \
-> +           file://0001-Fix-GCC-15-C23-compatibility-and-Wincompatible-po=
-int.patch \
->  "
->  SRC_URI[sha256sum] =3D "8f6666b542403b5ee7ccce66ea73a4a51cf19dd49392aacc=
-d37231a2c51b303b"
->
-> diff --git a/meta-networking/recipes-support/dnsmasq/files/0001-Fix-GCC-1=
-5-C23-compatibility-and-Wincompatible-point.patch b/meta-networking/recipes=
--support/dnsmasq/files/0001-Fix-GCC-15-C23-compatibility-and-Wincompatible-=
-point.patch
+> diff --git a/meta-oe/recipes-devtools/jq/jq/0001-builtin.c-fix-build-with=
+-Woverlength-strings.patch b/meta-oe/recipes-devtools/jq/jq/0001-builtin.c-=
+fix-build-with-Woverlength-strings.patch
 > new file mode 100644
-> index 0000000000..9b69b8c55b
+> index 0000000000..cd7cdba00c
 > --- /dev/null
-> +++ b/meta-networking/recipes-support/dnsmasq/files/0001-Fix-GCC-15-C23-c=
-ompatibility-and-Wincompatible-point.patch
-> @@ -0,0 +1,375 @@
-> +From da2cc84854a01dd08a8bb4161428be20b83a5ec7 Mon Sep 17 00:00:00 2001
-> +From: gen2dev <gen2dev@qsr.us>
-> +Date: Sun, 1 Dec 2024 22:53:16 +0000
-> +Subject: [PATCH] Fix GCC-15, C23 compatibility and
-> + -Wincompatible-pointer-types errors
+> +++ b/meta-oe/recipes-devtools/jq/jq/0001-builtin.c-fix-build-with-Woverl=
+ength-strings.patch
+> @@ -0,0 +1,215 @@
+> +From 8707f8764dfc470d1974eb1d613f5a4bec3610ac Mon Sep 17 00:00:00 2001
+> +From: Emanuele Torre <torreemanuele6@gmail.com>
+> +Date: Fri, 26 Jan 2024 04:42:11 +0100
+> +Subject: [PATCH] builtin.c: fix build with -Woverlength-strings
 > +
-> +A bug in gentoo linux https://bugs.gentoo.org/945183 reported that dnsma=
-sq 2.90 fails to compile with GCC 15.
+> +C99 only allows string literals long at most 4095 characters.
+> +jq_builtins was a lot longer than that.
 > +
-> +The issue is that while previous versions of GCC defaulted to the C17 st=
-andard and C23 could be selected with
-> +"-std=3Dc23" or "-std=3Dgnu23", GCC 15 defaults to C23. In C23 incompati=
-ble pointer types are an error instead of
-> +a warning, so the "int (*callback)()" incomplete prototypes cause errors=
-.
+> +I rewrote all the optional libm error stubs in C so the value of
+> +jq_builtins is not build dependent.
 > +
-> +For example, compiling dnsmasq 2.90 with gcc 14.2.1 and "-std=3Dgnu23" f=
-ails with errors such as:
-> +    lease.c: In function `lease_find_interfaces':
-> +    lease.c:467:34: warning: passing argument 3 of `iface_enumerate' fro=
-m incompatible pointer type [-Wincompatible-pointer-types[https://gcc.gnu.o=
-rg/onlinedocs/gcc/Warning-Options.html#index-Wincompatible-pointer-types]]
-> +      467 |   iface_enumerate(AF_INET, &now, find_interface_v4);
-> +          |                                  ^~~~~~~~~~~~~~~~~
-> +          |                                  |
-> +          |                                  int (*)(struct in_addr,  in=
-t,  char *, struct in_addr,  struct in_addr,  void *)
-> +    In file included from lease.c:17:
-> +    dnsmasq.h:1662:50: note: expected `int (*)(void)' but argument is of=
- type `int (*)(struct in_addr,  int,  char *, struct in_addr,  struct in_ad=
-dr,  void *)'
-> +     1662 | int iface_enumerate(int family, void *parm, int (callback)()=
-);
-> +          |                                             ~~~~~^~~~~~~~~~~
+> +I replaced the command that generates builtin.inc with a POSIX compliant
+> +od|sed command that encodes builtin.jq as a comma delimited list of
+> +octal numbers (that can be embedded in C using a {} literal).
 > +
-> +This patch uses a typedef'ed union of pointer types to get type checking=
- of the pointers. If that's too complicated,
-> +another way might be to use (void *) casts to disable type checking.
+> +I also added -Woverlength-strings to AM_CFLAGS to verify that the
+> +problem is fixed.
 > +
-> +Also, some of the IPv6 callbacks had "int preferred, int valid" and some=
- had
-> +"unsigned int preferred, unsigned int valid". This patch changes them al=
-l to "unsigned int"
-> +so they're the same and to avoid casting "u32" to "int", eg:
-> +    u32 preferred =3D 0xffffffff;
-> +    callback(..., (int)preferred, ...)
-> +Even if those cast values aren't used in the callback, casting u32 to "i=
-nt" feels bad, especially if "int" is 32 bits.
-> +
-> +Signed-off-by: mark.yang <mark.yang@lge.com>
-> +
-> +Upstream-Status: Backport [da2cc84 Fix GCC-15, C23 compatibility and -Wi=
-ncompatible-pointer-types errors]
+> +Fixes #1481
+> +Upstream-Status: Backport [605836b builtin.c: fix build with -Woverlengt=
+h-strings]
+> +Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 > +---
-> + src/arp.c     |  2 +-
-> + src/bpf.c     | 14 +++++++-------
-> + src/dhcp.c    |  4 ++--
-> + src/dhcp6.c   |  8 ++++----
-> + src/dnsmasq.h |  8 +++++++-
-> + src/lease.c   |  6 +++---
-> + src/netlink.c | 12 ++++++------
-> + src/network.c |  6 +++---
-> + src/radv.c    | 14 +++++++-------
-> + 9 files changed, 40 insertions(+), 34 deletions(-)
 > +
-> +diff --git a/src/arp.c b/src/arp.c
-> +index 0a5a9bf..6ff1f01 100644
-> +--- a/src/arp.c
-> ++++ b/src/arp.c
-> +@@ -152,7 +152,7 @@ int find_mac(union mysockaddr *addr, unsigned char *=
-mac, int lazy, time_t now)
-> +        if (arp->status !=3D ARP_EMPTY)
-> +          arp->status =3D ARP_MARK;
+> + Makefile.am   | 10 ++++--
+> + src/builtin.c | 86 ++++++++++++++++++++++++---------------------------
+> + 2 files changed, 48 insertions(+), 48 deletions(-)
 > +
-> +-       iface_enumerate(AF_UNSPEC, NULL, filter_mac);
-> ++       iface_enumerate(AF_UNSPEC, NULL, (callback_t){.af_unspec=3Dfilte=
-r_mac});
+> +diff --git a/Makefile.am b/Makefile.am
+> +index 76e35df..f1f9f2e 100644
+> +--- a/Makefile.am
+> ++++ b/Makefile.am
+> +@@ -19,7 +19,8 @@ LIBJQ_SRC =3D src/builtin.c src/bytecode.c src/compile=
+.c src/execute.c    \
 > +
-> +        /* Remove all unconfirmed entries to old list. */
-> +        for (arp =3D arps, up =3D &arps; arp; arp =3D tmp)
-> +diff --git a/src/bpf.c b/src/bpf.c
-> +index 62b589c..82d0125 100644
-> +--- a/src/bpf.c
-> ++++ b/src/bpf.c
-> +@@ -47,7 +47,7 @@ static union all_addr del_addr;
+> + ### C build options
 > +
-> + #if defined(HAVE_BSD_NETWORK) && !defined(__APPLE__)
+> +-AM_CFLAGS =3D -Wextra -Wall -Wno-unused-parameter -Wno-unused-function
+> ++AM_CFLAGS =3D -Wextra -Wall -Wno-unused-parameter -Wno-unused-function =
+\
+> ++            -Woverlength-strings
 > +
-> +-int arp_enumerate(void *parm, int (*callback)())
-> ++int arp_enumerate(void *parm, callback_t callback)
-> + {
-> +   int mib[6];
-> +   size_t needed;
-> +@@ -91,7 +91,7 @@ int arp_enumerate(void *parm, int (*callback)())
-> +       rtm =3D (struct rt_msghdr *)next;
-> +       sin2 =3D (struct sockaddr_inarp *)(rtm + 1);
-> +       sdl =3D (struct sockaddr_dl *)((char *)sin2 + SA_SIZE(sin2));
-> +-      if (!(*callback)(AF_INET, &sin2->sin_addr, LLADDR(sdl), sdl->sdl_=
-alen, parm))
-> ++      if (!callback.af_unspec(AF_INET, &sin2->sin_addr, LLADDR(sdl), sd=
-l->sdl_alen, parm))
-> +       return 0;
-> +     }
+> + if WIN32
+> + AM_CFLAGS +=3D -municode
+> +@@ -119,7 +120,12 @@ src/main.c: src/version.h src/config_opts.inc
 > +
-> +@@ -107,7 +107,7 @@ int iface_enumerate(int family, void *parm, int (*ca=
-llback)())
+> + src/builtin.inc: $(srcdir)/src/builtin.jq
+> +       mkdir -p src
+> +-      $(AM_V_GEN) sed -e 's/\\/\\\\/g' -e 's/"/\\"/g' -e 's/^/"/' -e 's=
+/$$/\\n"/' $(srcdir)/src/builtin.jq > $@
+> ++      $(AM_V_GEN) od -v -A n -t o1 -- $< | \
+> ++      sed -e 's/$$/ /' \
+> ++          -e 's/\([0123456789]\) /\1, /g' \
+> ++          -e 's/ $$//' \
+> ++          -e 's/ 0/  0/g' \
+> ++          -e 's/ \([123456789]\)/ 0\1/g' > $@
+> + src/builtin.o: src/builtin.inc
 > +
-> +   if (family =3D=3D AF_UNSPEC)
-> + #if defined(HAVE_BSD_NETWORK) && !defined(__APPLE__)
-> +-    return  arp_enumerate(parm, callback);
-> ++    return  arp_enumerate(parm, callback.af_unspec);
+> + CLEANFILES =3D src/version.h .remake-version-h src/builtin.inc src/conf=
+ig_opts.inc
+> +diff --git a/src/builtin.c b/src/builtin.c
+> +index 902490d..a3ce7e4 100644
+> +--- a/src/builtin.c
+> ++++ b/src/builtin.c
+> +@@ -155,7 +155,11 @@ static jv f_ ## name(jq_state *jq, jv input) { \
+> +   jv_free(input); \
+> +   return ret; \
+> + }
+> +-#define LIBM_DD_NO(name)
+> ++#define LIBM_DD_NO(name) \
+> ++static jv f_ ## name(jq_state *jq, jv input) { \
+> ++  jv error =3D jv_string("Error: " #name "/0 not found at build time");=
+ \
+> ++  return ret_error(input, error); \
+> ++}
+> +
+> + #define LIBM_DDD(name) \
+> + static jv f_ ## name(jq_state *jq, jv input, jv a, jv b) { \
+> +@@ -173,7 +177,12 @@ static jv f_ ## name(jq_state *jq, jv input, jv a, =
+jv b) { \
+> +   jv_free(b); \
+> +   return ret; \
+> + }
+> +-#define LIBM_DDD_NO(name)
+> ++#define LIBM_DDD_NO(name) \
+> ++static jv f_ ## name(jq_state *jq, jv input, jv a, jv b) { \
+> ++  jv_free(b); \
+> ++  jv error =3D jv_string("Error: " #name "/2 not found at build time");=
+ \
+> ++  return ret_error2(input, a, error); \
+> ++}
+> +
+> + #define LIBM_DDDD(name) \
+> + static jv f_ ## name(jq_state *jq, jv input, jv a, jv b, jv c) { \
+> +@@ -199,7 +208,14 @@ static jv f_ ## name(jq_state *jq, jv input, jv a, =
+jv b, jv c) { \
+> +   jv_free(c); \
+> +   return ret; \
+> + }
+> +-#define LIBM_DDDD_NO(name)
+> ++#define LIBM_DDDD_NO(name) \
+> ++static jv f_ ## name(jq_state *jq, jv input, jv a, jv b, jv c) { \
+> ++  jv_free(c) \
+> ++  jv_free(b); \
+> ++  jv error =3D jv_string("Error: " #name "/3 not found at build time");=
+ \
+> ++  return ret_error2(input, a, error); \
+> ++}
+> ++
+> + #include "libm.h"
+> + #undef LIBM_DDDD_NO
+> + #undef LIBM_DDD_NO
+> +@@ -226,6 +242,11 @@ static jv f_frexp(jq_state *jq, jv input) {
+> +   jv_free(input);
+> +   return ret;
+> + }
+> ++#else
+> ++static jv f_frexp(jq_state *jq, jv input) {
+> ++  jv error =3D jv_string("Error: frexp/0 not found at build time");
+> ++  return ret_error(input, error);
+> ++}
+> + #endif
+> + #ifdef HAVE_MODF
+> + static jv f_modf(jq_state *jq, jv input) {
+> +@@ -237,6 +258,11 @@ static jv f_modf(jq_state *jq, jv input) {
+> +   jv_free(input);
+> +   return jv_array_append(ret, jv_number(i));
+> + }
+> ++#else
+> ++static jv f_modf(jq_state *jq, jv input) {
+> ++  jv error =3D jv_string("Error: modf/0 not found at build time");
+> ++  return ret_error(input, error);
+> ++}
+> + #endif
+> + #ifdef HAVE_LGAMMA_R
+> + static jv f_lgamma_r(jq_state *jq, jv input) {
+> +@@ -248,6 +274,11 @@ static jv f_lgamma_r(jq_state *jq, jv input) {
+> +   jv_free(input);
+> +   return jv_array_append(ret, jv_number(sign));
+> + }
+> ++#else
+> ++static jv f_lgamma_r(jq_state *jq, jv input) {
+> ++  jv error =3D jv_string("Error: lgamma_r/0 not found at build time");
+> ++  return ret_error(input, error);
+> ++}
+> + #endif
+> +
+> + static jv f_negate(jq_state *jq, jv input) {
+> +@@ -1703,27 +1734,21 @@ static jv f_current_line(jq_state *jq, jv a) {
+> +
+> + #define LIBM_DD(name) \
+> +   {f_ ## name,  #name, 1},
+> +-#define LIBM_DD_NO(name)
+> ++#define LIBM_DD_NO(name) LIBM_DD(name)
+> +
+> + #define LIBM_DDD(name) \
+> +   {f_ ## name, #name, 3},
+> +-#define LIBM_DDD_NO(name)
+> ++#define LIBM_DDD_NO(name) LIBM_DDD(name)
+> +
+> + #define LIBM_DDDD(name) \
+> +   {f_ ## name, #name, 4},
+> +-#define LIBM_DDDD_NO(name)
+> ++#define LIBM_DDDD_NO(name) LIBM_DDDD(name)
+> +
+> + static const struct cfunction function_list[] =3D {
+> + #include "libm.h"
+> +-#ifdef HAVE_FREXP
+> +   {f_frexp,"frexp", 1},
+> +-#endif
+> +-#ifdef HAVE_MODF
+> +   {f_modf,"modf", 1},
+> +-#endif
+> +-#ifdef HAVE_LGAMMA_R
+> +   {f_lgamma_r,"lgamma_r", 1},
+> +-#endif
+> +   {f_negate, "_negate", 1},
+> + #define BINOP(name) {f_ ## name, "_" #name, 3},
+> + BINOPS
+> +@@ -1838,42 +1863,11 @@ static block bind_bytecoded_builtins(block b) {
+> +   return BLOCK(builtins, b);
+> + }
+> +
+> +-static const char jq_builtins[] =3D
+> ++static const char jq_builtins[] =3D {
+> + /* Include jq-coded builtins */
+> + #include "src/builtin.inc"
+> +-
+> +-/* Include unsupported math functions next */
+> +-#define LIBM_DD(name)
+> +-#define LIBM_DDD(name)
+> +-#define LIBM_DDDD(name)
+> +-#define LIBM_DD_NO(name) "def " #name ": \"Error: " #name "/0 not found=
+ at build time\"|error;"
+> +-#define LIBM_DDD_NO(name) "def " #name "(a;b): \"Error: " #name "/2 not=
+ found at build time\"|error;"
+> +-#define LIBM_DDDD_NO(name) "def " #name "(a;b;c): \"Error: " #name "/3 =
+not found at build time\"|error;"
+> +-#include "libm.h"
+> +-#ifndef HAVE_FREXP
+> +-  "def frexp: \"Error: frexp/0 not found at build time\"|error;"
+> +-#endif
+> +-#ifndef HAVE_MODF
+> +-  "def modf: \"Error: modf/0 not found at build time\"|error;"
+> +-#endif
+> +-#ifndef HAVE_LGAMMA_R
+> +-  "def lgamma_r: \"Error: lgamma_r/0 not found at build time\"|error;"
+> +-#endif
+> +-;
+> +-
+> +-#undef LIBM_DDDD_NO
+> +-#undef LIBM_DDD_NO
+> +-#undef LIBM_DD_NO
+> +-#undef LIBM_DDDD
+> +-#undef LIBM_DDD
+> +-#undef LIBM_DD
+> +-
+> +-#ifdef __APPLE__
+> +-#undef HAVE_GAMMA
+> +-#undef HAVE_EXP10
+> +-#undef HAVE_DREM
+> +-#undef HAVE_SIGNIFICAND
+> +-#endif
+> ++  '\0',
+> ++};
+> +
+> + static block gen_builtin_list(block builtins) {
+> +   jv list =3D jv_array_append(block_list_funcs(builtins, 1), jv_string(=
+"builtins/0"));
+> diff --git a/meta-oe/recipes-devtools/jq/jq/0002-libm.h-builtin.c-add-and=
+-use-LIBM_DA-and-LIBM_DA_NO-.patch b/meta-oe/recipes-devtools/jq/jq/0002-li=
+bm.h-builtin.c-add-and-use-LIBM_DA-and-LIBM_DA_NO-.patch
+> new file mode 100644
+> index 0000000000..68b8cb4f6e
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/jq/jq/0002-libm.h-builtin.c-add-and-use-LI=
+BM_DA-and-LIBM_DA_NO-.patch
+> @@ -0,0 +1,164 @@
+> +From c65e6fa48e6da30727c87ccdd88d8fb6a7a70f20 Mon Sep 17 00:00:00 2001
+> +From: Emanuele Torre <torreemanuele6@gmail.com>
+> +Date: Fri, 26 Jan 2024 11:26:57 +0100
+> +Subject: [PATCH] libm.h+builtin.c: add and use LIBM_DA and LIBM_DA_NO ma=
+cros
+> +
+> +For functions that from one double return an array with two numbers.
+> +Upstream-Status: Backport [bd3c828 libm.h+builtin.c: add and use LIBM_DA=
+ and LIBM_DA_NO macros]
+> +Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+> +---
+> + src/builtin.c | 78 ++++++++++++++++-----------------------------------
+> + src/libm.h    | 15 ++++++++++
+> + 2 files changed, 39 insertions(+), 54 deletions(-)
+> +
+> +diff --git a/src/builtin.c b/src/builtin.c
+> +index a3ce7e4..9b71bca 100644
+> +--- a/src/builtin.c
+> ++++ b/src/builtin.c
+> +@@ -216,13 +216,32 @@ static jv f_ ## name(jq_state *jq, jv input, jv a,=
+ jv b, jv c) { \
+> +   return ret_error2(input, a, error); \
+> + }
+> +
+> ++#define LIBM_DA(name, type) \
+> ++static jv f_ ## name(jq_state *jq, jv input) { \
+> ++  if (jv_get_kind(input) !=3D JV_KIND_NUMBER) { \
+> ++    return type_error(input, "number required"); \
+> ++  } \
+> ++  type value; \
+> ++  double d =3D name(jv_number_value(input), &value); \
+> ++  jv ret =3D JV_ARRAY(jv_number(d), jv_number(value)); \
+> ++  jv_free(input); \
+> ++  return ret; \
+> ++}
+> ++#define LIBM_DA_NO(name, type) \
+> ++static jv f_ ## name(jq_state *jq, jv input) { \
+> ++  jv error =3D jv_string("Error: " #name "/0 not found at build time");=
+ \
+> ++  return ret_error(input, error); \
+> ++}
+> ++
+> + #include "libm.h"
+> + #undef LIBM_DDDD_NO
+> + #undef LIBM_DDD_NO
+> + #undef LIBM_DD_NO
+> ++#undef LIBM_DA_NO
+> + #undef LIBM_DDDD
+> + #undef LIBM_DDD
+> + #undef LIBM_DD
+> ++#undef LIBM_DA
+> +
+> + #ifdef __APPLE__
+> + #undef gamma
+> +@@ -231,56 +250,6 @@ static jv f_ ## name(jq_state *jq, jv input, jv a, =
+jv b, jv c) { \
+> + #undef exp10
+> + #endif
+> +
+> +-#ifdef HAVE_FREXP
+> +-static jv f_frexp(jq_state *jq, jv input) {
+> +-  if (jv_get_kind(input) !=3D JV_KIND_NUMBER) {
+> +-    return type_error(input, "number required");
+> +-  }
+> +-  int exp;
+> +-  double d =3D frexp(jv_number_value(input), &exp);
+> +-  jv ret =3D JV_ARRAY(jv_number(d), jv_number(exp));
+> +-  jv_free(input);
+> +-  return ret;
+> +-}
+> +-#else
+> +-static jv f_frexp(jq_state *jq, jv input) {
+> +-  jv error =3D jv_string("Error: frexp/0 not found at build time");
+> +-  return ret_error(input, error);
+> +-}
+> +-#endif
+> +-#ifdef HAVE_MODF
+> +-static jv f_modf(jq_state *jq, jv input) {
+> +-  if (jv_get_kind(input) !=3D JV_KIND_NUMBER) {
+> +-    return type_error(input, "number required");
+> +-  }
+> +-  double i;
+> +-  jv ret =3D JV_ARRAY(jv_number(modf(jv_number_value(input), &i)));
+> +-  jv_free(input);
+> +-  return jv_array_append(ret, jv_number(i));
+> +-}
+> +-#else
+> +-static jv f_modf(jq_state *jq, jv input) {
+> +-  jv error =3D jv_string("Error: modf/0 not found at build time");
+> +-  return ret_error(input, error);
+> +-}
+> +-#endif
+> +-#ifdef HAVE_LGAMMA_R
+> +-static jv f_lgamma_r(jq_state *jq, jv input) {
+> +-  if (jv_get_kind(input) !=3D JV_KIND_NUMBER) {
+> +-    return type_error(input, "number required");
+> +-  }
+> +-  int sign;
+> +-  jv ret =3D JV_ARRAY(jv_number(lgamma_r(jv_number_value(input), &sign)=
+));
+> +-  jv_free(input);
+> +-  return jv_array_append(ret, jv_number(sign));
+> +-}
+> +-#else
+> +-static jv f_lgamma_r(jq_state *jq, jv input) {
+> +-  jv error =3D jv_string("Error: lgamma_r/0 not found at build time");
+> +-  return ret_error(input, error);
+> +-}
+> +-#endif
+> +-
+> + static jv f_negate(jq_state *jq, jv input) {
+> +   if (jv_get_kind(input) !=3D JV_KIND_NUMBER) {
+> +     return type_error(input, "cannot be negated");
+> +@@ -1733,8 +1702,10 @@ static jv f_current_line(jq_state *jq, jv a) {
+> + }
+> +
+> + #define LIBM_DD(name) \
+> +-  {f_ ## name,  #name, 1},
+> ++  {f_ ## name, #name, 1},
+> + #define LIBM_DD_NO(name) LIBM_DD(name)
+> ++#define LIBM_DA(name, type) LIBM_DD(name)
+> ++#define LIBM_DA_NO(name, type) LIBM_DD(name)
+> +
+> + #define LIBM_DDD(name) \
+> +   {f_ ## name, #name, 3},
+> +@@ -1746,9 +1717,6 @@ static jv f_current_line(jq_state *jq, jv a) {
+> +
+> + static const struct cfunction function_list[] =3D {
+> + #include "libm.h"
+> +-  {f_frexp,"frexp", 1},
+> +-  {f_modf,"modf", 1},
+> +-  {f_lgamma_r,"lgamma_r", 1},
+> +   {f_negate, "_negate", 1},
+> + #define BINOP(name) {f_ ## name, "_" #name, 3},
+> + BINOPS
+> +@@ -1813,9 +1781,11 @@ BINOPS
+> + #undef LIBM_DDDD_NO
+> + #undef LIBM_DDD_NO
+> + #undef LIBM_DD_NO
+> ++#undef LIBM_DA_NO
+> + #undef LIBM_DDDD
+> + #undef LIBM_DDD
+> + #undef LIBM_DD
+> ++#undef LIBM_DA
+> +
+> + struct bytecoded_builtin { const char* name; block code; };
+> + static block bind_bytecoded_builtins(block b) {
+> +diff --git a/src/libm.h b/src/libm.h
+> +index 8efc1c5..7332bd8 100644
+> +--- a/src/libm.h
+> ++++ b/src/libm.h
+> +@@ -289,3 +289,18 @@ LIBM_DDD(ldexp)
 > + #else
-> +   return 0; /* need code for Solaris and MacOS*/
+> + LIBM_DDD_NO(ldexp)
 > + #endif
-> +@@ -147,7 +147,7 @@ int iface_enumerate(int family, void *parm, int (*ca=
-llback)())
-> +               broadcast =3D ((struct sockaddr_in *) addrs->ifa_broadadd=
-r)->sin_addr;
-> +             else
-> +               broadcast.s_addr =3D 0;
-> +-            if (!((*callback)(addr, iface_index, NULL, netmask, broadca=
-st, parm)))
-> ++            if (!callback.af_inet(addr, iface_index, NULL, netmask, bro=
-adcast, parm))
-> +               goto err;
-> +           }
-> +         else if (family =3D=3D AF_INET6)
-> +@@ -212,8 +212,8 @@ int iface_enumerate(int family, void *parm, int (*ca=
-llback)())
-> +                 addr->s6_addr[3] =3D 0;
-> +               }
+> ++#ifdef HAVE_MODF
+> ++LIBM_DA(modf, double)
+> ++#else
+> ++LIBM_DA_NO(modf, double)
+> ++#endif
+> ++#ifdef HAVE_FREXP
+> ++LIBM_DA(frexp, int)
+> ++#else
+> ++LIBM_DA_NO(frexp, int)
+> ++#endif
+> ++#ifdef HAVE_LGAMMA_R
+> ++LIBM_DA(lgamma_r, int)
+> ++#else
+> ++LIBM_DA_NO(lgamma_r, int)
+> ++#endif
+> diff --git a/meta-oe/recipes-devtools/jq/jq/0003-builtin.c-typecheck-buil=
+tin-cfunctions-in-function_l.patch b/meta-oe/recipes-devtools/jq/jq/0003-bu=
+iltin.c-typecheck-builtin-cfunctions-in-function_l.patch
+> new file mode 100644
+> index 0000000000..f8b6c5baf6
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/jq/jq/0003-builtin.c-typecheck-builtin-cfu=
+nctions-in-function_l.patch
+> @@ -0,0 +1,249 @@
+> +From 98839759a92e3ad41870bfc7415f0ecf320b5097 Mon Sep 17 00:00:00 2001
+> +From: Emanuele Torre <torreemanuele6@gmail.com>
+> +Date: Mon, 25 Nov 2024 07:47:14 +0100
+> +Subject: [PATCH] builtin.c: typecheck builtin cfunctions in function_lis=
+t
 > +
-> +-            if (!((*callback)(addr, prefix, scope_id, iface_index, flag=
-s,
-> +-                              (int) preferred, (int)valid, parm)))
-> ++            if (!callback.af_inet6(addr, prefix, scope_id, iface_index,=
- flags,
-> ++                              (unsigned int) preferred, (unsigned int)v=
-alid, parm))
-> +               goto err;
-> +           }
+> +In C23 (default C standard used by GCC 15),  jv (*fptr)();  has become
+> +equivalent to  jv (*fptr)(void);  so we can no longer assign builtin
+> +implemenations directly to the fptr member of cfunctions without
+> +generating a compile error.
 > +
-> +@@ -223,7 +223,7 @@ int iface_enumerate(int family, void *parm, int (*ca=
-llback)())
-> +             /* Assume ethernet again here */
-> +             struct sockaddr_dl *sdl =3D (struct sockaddr_dl *) addrs->i=
-fa_addr;
-> +             if (sdl->sdl_alen !=3D 0 &&
-> +-                !((*callback)(iface_index, ARPHRD_ETHER, LLADDR(sdl), s=
-dl->sdl_alen, parm)))
-> ++                !callback.af_local(iface_index, ARPHRD_ETHER, LLADDR(sd=
-l), sdl->sdl_alen, parm))
-> +               goto err;
-> +           }
-> + #endif
-> +diff --git a/src/dhcp.c b/src/dhcp.c
-> +index 2603c76..009c2a0 100644
-> +--- a/src/dhcp.c
-> ++++ b/src/dhcp.c
-> +@@ -317,7 +317,7 @@ void dhcp_packet(time_t now, int pxe_fd)
-> +         match.ind =3D iface_index;
+> +Since there does not seem to be any straight-forward way to tell
+> +autoconf to force the compiler to use C99 short of explicitly adding
+> +-std=3Dc99 to CFLAGS, it is probably a cleaner solution to just make the
+> +code C23 compatible.
 > +
-> +         if (!daemon->if_addrs ||
-> +-            !iface_enumerate(AF_INET, &match, check_listen_addrs) ||
-> ++            !iface_enumerate(AF_INET, &match, (callback_t){.af_inet=3Dc=
-heck_listen_addrs}) ||
-> +             !match.matched)
-> +           return;
+> +A possible solution could have been to just redeclare  cfunction.fptr
+> +as void*, but then the functions' return type would not have been type
+> +checked (e.g. if you tried to add a {printf, "printf", 2}, where printf
+> +is a function that does not return jv, the compiler wouldn't have
+> +complained.)
+> +We were already not typechecking the arguments of the functions, so e.g.
+> +  {binop_plus, "_plus", 3},  /* instead of {f_plus, "_plus, 3},       */
+> +  {f_setpath, "setpath", 4}, /* instead of {f_setpath, "setpath", 3}, */
+> +compile without errors despite not having the correct prototype.
 > +
-> +@@ -330,7 +330,7 @@ void dhcp_packet(time_t now, int pxe_fd)
-> +       if (relay_upstream4(iface_index, mess, (size_t)sz))
-> +       return;
+> +So I thought of instead improving the situation by redefining
+> +cfunction.fptr as a union of function pointers with the prototypes that
+> +the jq bytecode interpreter can call, and use a macro to add the builtin
+> +functions to function_list using to the arity argument to assign the
+> +implementation function to the appropriate union member.
 > +
-> +-      if (!iface_enumerate(AF_INET, &parm, complete_context))
-> ++      if (!iface_enumerate(AF_INET, &parm, (callback_t){.af_inet=3Dcomp=
-lete_context}))
-> +       return;
+> +Now the code won't compile if the wrong arity, or an arity not supported
+> +by the bytecode interpreter (>5 =3D 1input+4arguments), or a prototype n=
+ot
+> +jallable by the bytecode interpreter (e.g. binop_plus that doesn't
+> +expect a  jq_state*  argument).
 > +
-> +       /* Check for a relay again after iface_enumerate/complete_context=
- has had
-> +diff --git a/src/dhcp6.c b/src/dhcp6.c
-> +index c9d54dc..303d33c 100644
-> +--- a/src/dhcp6.c
-> ++++ b/src/dhcp6.c
-> +@@ -239,7 +239,7 @@ void dhcp6_packet(time_t now)
-> +         relay_upstream6(if_index, (size_t)sz, &from.sin6_addr, from.sin=
-6_scope_id, now))
-> +       return;
+> +Also, the code now compiles with gcc -std=3Dc23.
 > +
-> +-      if (!iface_enumerate(AF_INET6, &parm, complete_context6))
-> ++      if (!iface_enumerate(AF_INET6, &parm, (callback_t){.af_inet6=3Dco=
-mplete_context6}))
-> +       return;
+> +Fixes #3206
+> +Upstream-Status: Backport [0b82b38 builtin.c: typecheck builtin cfunctio=
+ns in function_list]
+> +Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+> +---
+> + src/builtin.c  | 126 +++++++++++++++++++++++++------------------------
+> + src/bytecode.h |  11 +++--
+> + src/execute.c  |  11 ++---
+> + 3 files changed, 78 insertions(+), 70 deletions(-)
 > +
-> +       /* Check for a relay again after iface_enumerate/complete_context=
- has had
-> +@@ -617,7 +617,7 @@ void make_duid(time_t now)
-> +       newnow =3D now - 946684800;
-> + #endif
+> +diff --git a/src/builtin.c b/src/builtin.c
+> +index 9b71bca..6ba6511 100644
+> +--- a/src/builtin.c
+> ++++ b/src/builtin.c
+> +@@ -1701,82 +1701,83 @@ static jv f_current_line(jq_state *jq, jv a) {
+> +   return jq_util_input_get_current_line(jq);
+> + }
 > +
-> +-      iface_enumerate(AF_LOCAL, &newnow, make_duid1);
-> ++      iface_enumerate(AF_LOCAL, &newnow, (callback_t){.af_local=3Dmake_=
-duid1});
+> ++#define CFUNC(func, name, arity) \
+> ++  {.fptr =3D { .a ## arity =3D func }, name, arity}
+> ++
+> + #define LIBM_DD(name) \
+> +-  {f_ ## name, #name, 1},
+> ++  CFUNC(f_ ## name, #name, 1),
+> + #define LIBM_DD_NO(name) LIBM_DD(name)
+> + #define LIBM_DA(name, type) LIBM_DD(name)
+> + #define LIBM_DA_NO(name, type) LIBM_DD(name)
 > +
-> +       if(!daemon->duid)
-> +       die("Cannot create DHCPv6 server DUID: %s", NULL, EC_MISC);
-> +@@ -667,7 +667,7 @@ struct cparam {
+> + #define LIBM_DDD(name) \
+> +-  {f_ ## name, #name, 3},
+> ++  CFUNC(f_ ## name, #name, 3),
+> + #define LIBM_DDD_NO(name) LIBM_DDD(name)
 > +
-> + static int construct_worker(struct in6_addr *local, int prefix,
-> +                           int scope, int if_index, int flags,
-> +-                          int preferred, int valid, void *vparam)
-> ++                          unsigned int preferred, unsigned int valid, v=
-oid *vparam)
-> + {
-> +   char ifrn_name[IFNAMSIZ];
-> +   struct in6_addr start6, end6;
-> +@@ -801,7 +801,7 @@ void dhcp_construct_contexts(time_t now)
-> +     if (context->flags & CONTEXT_CONSTRUCTED)
-> +       context->flags |=3D CONTEXT_GC;
+> + #define LIBM_DDDD(name) \
+> +-  {f_ ## name, #name, 4},
+> ++  CFUNC(f_ ## name, #name, 4),
+> + #define LIBM_DDDD_NO(name) LIBM_DDDD(name)
 > +
-> +-  iface_enumerate(AF_INET6, &param, construct_worker);
-> ++  iface_enumerate(AF_INET6, &param, (callback_t){.af_inet6=3Dconstruct_=
-worker});
+> + static const struct cfunction function_list[] =3D {
+> + #include "libm.h"
+> +-  {f_negate, "_negate", 1},
+> +-#define BINOP(name) {f_ ## name, "_" #name, 3},
+> ++  CFUNC(f_negate, "_negate", 1),
+> ++#define BINOP(name) CFUNC(f_ ## name, "_" #name, 3),
+> + BINOPS
+> + #undef BINOP
+> +-  {f_dump, "tojson", 1},
+> +-  {f_json_parse, "fromjson", 1},
+> +-  {f_tonumber, "tonumber", 1},
+> +-  {f_tostring, "tostring", 1},
+> +-  {f_keys, "keys", 1},
+> +-  {f_keys_unsorted, "keys_unsorted", 1},
+> +-  {f_startswith, "startswith", 2},
+> +-  {f_endswith, "endswith", 2},
+> +-  {f_ltrimstr, "ltrimstr", 2},
+> +-  {f_rtrimstr, "rtrimstr", 2},
+> +-  {f_string_split, "split", 2},
+> +-  {f_string_explode, "explode", 1},
+> +-  {f_string_implode, "implode", 1},
+> +-  {f_string_indexes, "_strindices", 2},
+> +-  {f_setpath, "setpath", 3}, // FIXME typechecking
+> +-  {f_getpath, "getpath", 2},
+> +-  {f_delpaths, "delpaths", 2},
+> +-  {f_has, "has", 2},
+> +-  {f_contains, "contains", 2},
+> +-  {f_length, "length", 1},
+> +-  {f_utf8bytelength, "utf8bytelength", 1},
+> +-  {f_type, "type", 1},
+> +-  {f_isinfinite, "isinfinite", 1},
+> +-  {f_isnan, "isnan", 1},
+> +-  {f_isnormal, "isnormal", 1},
+> +-  {f_infinite, "infinite", 1},
+> +-  {f_nan, "nan", 1},
+> +-  {f_sort, "sort", 1},
+> +-  {f_sort_by_impl, "_sort_by_impl", 2},
+> +-  {f_group_by_impl, "_group_by_impl", 2},
+> +-  {f_min, "min", 1},
+> +-  {f_max, "max", 1},
+> +-  {f_min_by_impl, "_min_by_impl", 2},
+> +-  {f_max_by_impl, "_max_by_impl", 2},
+> +-  {f_error, "error", 1},
+> +-  {f_format, "format", 2},
+> +-  {f_env, "env", 1},
+> +-  {f_halt, "halt", 1},
+> +-  {f_halt_error, "halt_error", 2},
+> +-  {f_get_search_list, "get_search_list", 1},
+> +-  {f_get_prog_origin, "get_prog_origin", 1},
+> +-  {f_get_jq_origin, "get_jq_origin", 1},
+> +-  {f_match, "_match_impl", 4},
+> +-  {f_modulemeta, "modulemeta", 1},
+> +-  {f_input, "input", 1},
+> +-  {f_debug, "debug", 1},
+> +-  {f_stderr, "stderr", 1},
+> +-  {f_strptime, "strptime", 2},
+> +-  {f_strftime, "strftime", 2},
+> +-  {f_strflocaltime, "strflocaltime", 2},
+> +-  {f_mktime, "mktime", 1},
+> +-  {f_gmtime, "gmtime", 1},
+> +-  {f_localtime, "localtime", 1},
+> +-  {f_now, "now", 1},
+> +-  {f_current_filename, "input_filename", 1},
+> +-  {f_current_line, "input_line_number", 1},
+> ++  CFUNC(f_dump, "tojson", 1),
+> ++  CFUNC(f_json_parse, "fromjson", 1),
+> ++  CFUNC(f_tonumber, "tonumber", 1),
+> ++  CFUNC(f_tostring, "tostring", 1),
+> ++  CFUNC(f_keys, "keys", 1),
+> ++  CFUNC(f_keys_unsorted, "keys_unsorted", 1),
+> ++  CFUNC(f_startswith, "startswith", 2),
+> ++  CFUNC(f_endswith, "endswith", 2),
+> ++  CFUNC(f_string_split, "split", 2),
+> ++  CFUNC(f_string_explode, "explode", 1),
+> ++  CFUNC(f_string_implode, "implode", 1),
+> ++  CFUNC(f_string_indexes, "_strindices", 2),
+> ++  CFUNC(f_setpath, "setpath", 3),
+> ++  CFUNC(f_getpath, "getpath", 2),
+> ++  CFUNC(f_delpaths, "delpaths", 2),
+> ++  CFUNC(f_has, "has", 2),
+> ++  CFUNC(f_contains, "contains", 2),
+> ++  CFUNC(f_length, "length", 1),
+> ++  CFUNC(f_utf8bytelength, "utf8bytelength", 1),
+> ++  CFUNC(f_type, "type", 1),
+> ++  CFUNC(f_isinfinite, "isinfinite", 1),
+> ++  CFUNC(f_isnan, "isnan", 1),
+> ++  CFUNC(f_isnormal, "isnormal", 1),
+> ++  CFUNC(f_infinite, "infinite", 1),
+> ++  CFUNC(f_nan, "nan", 1),
+> ++  CFUNC(f_sort, "sort", 1),
+> ++  CFUNC(f_sort_by_impl, "_sort_by_impl", 2),
+> ++  CFUNC(f_group_by_impl, "_group_by_impl", 2),
+> ++  CFUNC(f_min, "min", 1),
+> ++  CFUNC(f_max, "max", 1),
+> ++  CFUNC(f_min_by_impl, "_min_by_impl", 2),
+> ++  CFUNC(f_max_by_impl, "_max_by_impl", 2),
+> ++  CFUNC(f_error, "error", 1),
+> ++  CFUNC(f_format, "format", 2),
+> ++  CFUNC(f_env, "env", 1),
+> ++  CFUNC(f_halt, "halt", 1),
+> ++  CFUNC(f_halt_error, "halt_error", 2),
+> ++  CFUNC(f_get_search_list, "get_search_list", 1),
+> ++  CFUNC(f_get_prog_origin, "get_prog_origin", 1),
+> ++  CFUNC(f_get_jq_origin, "get_jq_origin", 1),
+> ++  CFUNC(f_match, "_match_impl", 4),
+> ++  CFUNC(f_modulemeta, "modulemeta", 1),
+> ++  CFUNC(f_input, "input", 1),
+> ++  CFUNC(f_debug, "debug", 1),
+> ++  CFUNC(f_stderr, "stderr", 1),
+> ++  CFUNC(f_strptime, "strptime", 2),
+> ++  CFUNC(f_strftime, "strftime", 2),
+> ++  CFUNC(f_strflocaltime, "strflocaltime", 2),
+> ++  CFUNC(f_mktime, "mktime", 1),
+> ++  CFUNC(f_gmtime, "gmtime", 1),
+> ++  CFUNC(f_localtime, "localtime", 1),
+> ++  CFUNC(f_now, "now", 1),
+> ++  CFUNC(f_current_filename, "input_filename", 1),
+> ++  CFUNC(f_current_line, "input_line_number", 1),
+> + };
+> + #undef LIBM_DDDD_NO
+> + #undef LIBM_DDD_NO
+> +diff --git a/src/bytecode.h b/src/bytecode.h
+> +index 1501985..a4055f5 100644
+> +--- a/src/bytecode.h
+> ++++ b/src/bytecode.h
+> +@@ -2,7 +2,7 @@
+> + #define BYTECODE_H
+> + #include <stdint.h>
 > +
-> +   for (up =3D &daemon->dhcp6, context =3D daemon->dhcp6; context; conte=
-xt =3D tmp)
-> +     {
-> +diff --git a/src/dnsmasq.h b/src/dnsmasq.h
-> +index a9019ee..abb06c8 100644
-> +--- a/src/dnsmasq.h
-> ++++ b/src/dnsmasq.h
-> +@@ -1662,7 +1662,13 @@ void route_sock(void);
-> + #endif
+> +-#include "jv.h"
+> ++#include "jq.h"
 > +
-> + /* bpf.c or netlink.c */
-> +-int iface_enumerate(int family, void *parm, int (callback)());
-> ++typedef union {
-> ++      int (*af_unspec)(int family, char *addrp, char *mac, size_t macle=
-n, void *parmv);
-> ++      int (*af_inet)(struct in_addr local, int if_index, char *label, s=
-truct in_addr netmask, struct in_addr broadcast, void *vparam);
-> ++      int (*af_inet6)(struct in6_addr *local, int prefix, int scope, in=
-t if_index, int flags, unsigned int preferred, unsigned int valid, void *vp=
-aram);
-> ++      int (*af_local)(int index, unsigned int type, char *mac, size_t m=
-aclen, void *parm);
-> ++} callback_t;
-> ++int iface_enumerate(int family, void *parm, callback_t callback);
+> + typedef enum {
+> + #define OP(name, imm, in, out) name,
+> +@@ -44,9 +44,14 @@ struct opcode_description {
+> + const struct opcode_description* opcode_describe(opcode op);
 > +
-> + /* dbus.c */
-> + #ifdef HAVE_DBUS
-> +diff --git a/src/lease.c b/src/lease.c
-> +index a133021..06a6ae4 100644
-> +--- a/src/lease.c
-> ++++ b/src/lease.c
-> +@@ -411,7 +411,7 @@ static int find_interface_v4(struct in_addr local, i=
-nt if_index, char *label,
-> + #ifdef HAVE_DHCP6
-> + static int find_interface_v6(struct in6_addr *local,  int prefix,
-> +                            int scope, int if_index, int flags,
-> +-                           int preferred, int valid, void *vparam)
-> ++                           unsigned int preferred, unsigned int valid, =
-void *vparam)
-> + {
-> +   struct dhcp_lease *lease;
 > +
-> +@@ -468,9 +468,9 @@ void lease_find_interfaces(time_t now)
-> +   for (lease =3D leases; lease; lease =3D lease->next)
-> +     lease->new_prefixlen =3D lease->new_interface =3D 0;
-> +
-> +-  iface_enumerate(AF_INET, &now, find_interface_v4);
-> ++  iface_enumerate(AF_INET, &now, (callback_t){.af_inet=3Dfind_interface=
-_v4});
-> + #ifdef HAVE_DHCP6
-> +-  iface_enumerate(AF_INET6, &now, find_interface_v6);
-> ++  iface_enumerate(AF_INET6, &now, (callback_t){.af_inet6=3Dfind_interfa=
-ce_v6});
-> + #endif
-> +
-> +   for (lease =3D leases; lease; lease =3D lease->next)
-> +diff --git a/src/netlink.c b/src/netlink.c
-> +index ef4b5fe..c706339 100644
-> +--- a/src/netlink.c
-> ++++ b/src/netlink.c
-> +@@ -151,7 +151,7 @@ static ssize_t netlink_recv(int flags)
-> +    family =3D AF_LOCAL finds MAC addresses.
-> +    returns 0 on failure, 1 on success, -1 when restart is required
-> + */
-> +-int iface_enumerate(int family, void *parm, int (*callback)())
-> ++int iface_enumerate(int family, void *parm, callback_t callback)
-> + {
-> +   struct sockaddr_nl addr;
-> +   struct nlmsghdr *h;
-> +@@ -247,7 +247,7 @@ int iface_enumerate(int family, void *parm, int (*ca=
-llback)())
-> +                     }
-> +
-> +                   if (addr.s_addr && callback_ok)
-> +-                    if (!((*callback)(addr, ifa->ifa_index, label,  net=
-mask, broadcast, parm)))
-> ++                    if (!callback.af_inet(addr, ifa->ifa_index, label, =
- netmask, broadcast, parm))
-> +                       callback_ok =3D 0;
-> +                 }
-> +               else if (ifa->ifa_family =3D=3D AF_INET6)
-> +@@ -288,9 +288,9 @@ int iface_enumerate(int family, void *parm, int (*ca=
-llback)())
-> +                     flags |=3D IFACE_PERMANENT;
-> +
-> +                   if (addrp && callback_ok)
-> +-                    if (!((*callback)(addrp, (int)(ifa->ifa_prefixlen),=
- (int)(ifa->ifa_scope),
-> ++                    if (!callback.af_inet6(addrp, (int)(ifa->ifa_prefix=
-len), (int)(ifa->ifa_scope),
-> +                                       (int)(ifa->ifa_index), flags,
-> +-                                      (int) preferred, (int)valid, parm=
-)))
-> ++                                      (unsigned int)preferred, (unsigne=
-d int)valid, parm))
-> +                       callback_ok =3D 0;
-> +                 }
-> +             }
-> +@@ -318,7 +318,7 @@ int iface_enumerate(int family, void *parm, int (*ca=
-llback)())
-> +
-> +           if (!(neigh->ndm_state & (NUD_NOARP | NUD_INCOMPLETE | NUD_FA=
-ILED)) &&
-> +               inaddr && mac && callback_ok)
-> +-            if (!((*callback)(neigh->ndm_family, inaddr, mac, maclen, p=
-arm)))
-> ++            if (!callback.af_unspec(neigh->ndm_family, inaddr, mac, mac=
-len, parm))
-> +               callback_ok =3D 0;
-> +         }
-> + #ifdef HAVE_DHCP6
-> +@@ -342,7 +342,7 @@ int iface_enumerate(int family, void *parm, int (*ca=
-llback)())
-> +             }
-> +
-> +           if (mac && callback_ok && !((link->ifi_flags & (IFF_LOOPBACK =
-| IFF_POINTOPOINT))) &&
-> +-              !((*callback)((int)link->ifi_index, (unsigned int)link->i=
-fi_type, mac, maclen, parm)))
-> ++              !callback.af_local((int)link->ifi_index, (unsigned int)li=
-nk->ifi_type, mac, maclen, parm))
-> +             callback_ok =3D 0;
-> +         }
-> + #endif
-> +diff --git a/src/network.c b/src/network.c
-> +index 0e93c4d..36d9262 100644
-> +--- a/src/network.c
-> ++++ b/src/network.c
-> +@@ -596,7 +596,7 @@ static int iface_allowed(struct iface_param *param, =
-int if_index, char *label,
-> +
-> + static int iface_allowed_v6(struct in6_addr *local, int prefix,
-> +                           int scope, int if_index, int flags,
-> +-                          int preferred, int valid, void *vparam)
-> ++                          unsigned int preferred, unsigned int valid, v=
-oid *vparam)
-> + {
-> +   union mysockaddr addr;
-> +   struct in_addr netmask; /* dummy */
-> +@@ -833,12 +833,12 @@ again:
-> +
-> +   param.spare =3D spare;
-> +
-> +-  ret =3D iface_enumerate(AF_INET6, &param, iface_allowed_v6);
-> ++  ret =3D iface_enumerate(AF_INET6, &param, (callback_t){.af_inet6=3Dif=
-ace_allowed_v6});
-> +   if (ret < 0)
-> +     goto again;
-> +   else if (ret)
-> +     {
-> +-      ret =3D iface_enumerate(AF_INET, &param, iface_allowed_v4);
-> ++      ret =3D iface_enumerate(AF_INET, &param, (callback_t){.af_inet=3D=
-iface_allowed_v4});
-> +       if (ret < 0)
-> +       goto again;
-> +     }
-> +diff --git a/src/radv.c b/src/radv.c
-> +index d2d3390..f39716c 100644
-> +--- a/src/radv.c
-> ++++ b/src/radv.c
-> +@@ -58,7 +58,7 @@ static int add_prefixes(struct in6_addr *local,  int p=
-refix,
-> +                       unsigned int preferred, unsigned int valid, void =
-*vparam);
-> + static int iface_search(struct in6_addr *local,  int prefix,
-> +                       int scope, int if_index, int flags,
-> +-                      int prefered, int valid, void *vparam);
-> ++                      unsigned int prefered, unsigned int valid, void *=
-vparam);
-> + static int add_lla(int index, unsigned int type, char *mac, size_t macl=
-en, void *parm);
-> + static void new_timeout(struct dhcp_context *context, char *iface_name,=
- time_t now);
-> + static unsigned int calc_lifetime(struct ra_interface *ra);
-> +@@ -307,7 +307,7 @@ static void send_ra_alias(time_t now, int iface, cha=
-r *iface_name, struct in6_ad
-> +
-> +   /* If no link-local address then we can't advertise since source addr=
-ess of
-> +      advertisement must be link local address: RFC 4861 para 6.1.2. */
-> +-  if (!iface_enumerate(AF_INET6, &parm, add_prefixes) ||
-> ++  if (!iface_enumerate(AF_INET6, &parm, (callback_t){.af_inet6=3Dadd_pr=
-efixes}) ||
-> +       parm.link_pref_time =3D=3D 0)
-> +     return;
-> +
-> +@@ -449,7 +449,7 @@ static void send_ra_alias(time_t now, int iface, cha=
-r *iface_name, struct in6_ad
-> +       put_opt6_long(mtu);
-> +     }
-> +
-> +-  iface_enumerate(AF_LOCAL, &send_iface, add_lla);
-> ++  iface_enumerate(AF_LOCAL, &send_iface, (callback_t){.af_local=3Dadd_l=
-la});
-> +
-> +   /* RDNSS, RFC 6106, use relevant DHCP6 options */
-> +   (void)option_filter(parm.tags, NULL, daemon->dhcp_opts6);
-> +@@ -823,7 +823,7 @@ time_t periodic_ra(time_t now)
-> +         param.iface =3D context->if_index;
-> +         new_timeout(context, param.name, now);
+> +-#define MAX_CFUNCTION_ARGS 10
+> ++#define MAX_CFUNCTION_ARGS 4
+> + struct cfunction {
+> +-  jv (*fptr)();
+> ++  union {
+> ++    jv (*a1)(jq_state *, jv);
+> ++    jv (*a2)(jq_state *, jv, jv);
+> ++    jv (*a3)(jq_state *, jv, jv, jv);
+> ++    jv (*a4)(jq_state *, jv, jv, jv, jv);
+> ++  } fptr;
+> +   const char* name;
+> +   int nargs;
+> + };
+> +diff --git a/src/execute.c b/src/execute.c
+> +index 9ef8368..62404db 100644
+> +--- a/src/execute.c
+> ++++ b/src/execute.c
+> +@@ -913,14 +913,13 @@ jv jq_next(jq_state *jq) {
 > +       }
-> +-      else if (iface_enumerate(AF_INET6, &param, iface_search))
-> ++      else if (iface_enumerate(AF_INET6, &param, (callback_t){.af_inet6=
-=3Diface_search}))
-> +       /* There's a context overdue, but we can't find an interface
-> +          associated with it, because it's for a subnet we dont
-> +          have an interface on. Probably we're doing DHCP on
-> +@@ -856,7 +856,7 @@ time_t periodic_ra(time_t now)
-> +                     aparam.iface =3D param.iface;
-> +                     aparam.alias_ifs =3D NULL;
-> +                     aparam.num_alias_ifs =3D 0;
-> +-                    iface_enumerate(AF_LOCAL, &aparam, send_ra_to_alias=
-es);
-> ++                    iface_enumerate(AF_LOCAL, &aparam, (callback_t){.af=
-_local=3Dsend_ra_to_aliases});
-> +                     my_syslog(MS_DHCP | LOG_INFO, "RTR-ADVERT(%s) %s =
-=3D> %d alias(es)",
-> +                               param.name, daemon->addrbuff, aparam.num_=
-alias_ifs);
+> +       struct cfunction* function =3D &frame_current(jq)->bc->globals->c=
+functions[*pc++];
+> +       switch (function->nargs) {
+> +-      case 1: top =3D ((jv (*)(jq_state *, jv))function->fptr)(jq, in[0=
+]); break;
+> +-      case 2: top =3D ((jv (*)(jq_state *, jv, jv))function->fptr)(jq, =
+in[0], in[1]); break;
+> +-      case 3: top =3D ((jv (*)(jq_state *, jv, jv, jv))function->fptr)(=
+jq, in[0], in[1], in[2]); break;
+> +-      case 4: top =3D ((jv (*)(jq_state *, jv, jv, jv, jv))function->fp=
+tr)(jq, in[0], in[1], in[2], in[3]); break;
+> +-      case 5: top =3D ((jv (*)(jq_state *, jv, jv, jv, jv, jv))function=
+->fptr)(jq, in[0], in[1], in[2], in[3], in[4]); break;
+> ++      case 1: top =3D function->fptr.a1(jq, in[0]); break;
+> ++      case 2: top =3D function->fptr.a2(jq, in[0], in[1]); break;
+> ++      case 3: top =3D function->fptr.a3(jq, in[0], in[1], in[2]); break=
+;
+> ++      case 4: top =3D function->fptr.a4(jq, in[0], in[1], in[2], in[3])=
+; break;
+> +       // FIXME: a) up to 7 arguments (input + 6), b) should assert
+> +       // because the compiler should not generate this error.
+> +       default: return jv_invalid_with_msg(jv_string("Function takes too=
+ many arguments"));
+> +       }
 > +
-> +@@ -871,7 +871,7 @@ time_t periodic_ra(time_t now)
-> +                            those. */
-> +                         aparam.max_alias_ifs =3D aparam.num_alias_ifs;
-> +                         aparam.num_alias_ifs =3D 0;
-> +-                        iface_enumerate(AF_LOCAL, &aparam, send_ra_to_a=
-liases);
-> ++                        iface_enumerate(AF_LOCAL, &aparam, (callback_t)=
-{.af_local=3Dsend_ra_to_aliases});
-> +                         for (; aparam.num_alias_ifs; aparam.num_alias_i=
-fs--)
-> +                           {
-> +                             my_syslog(MS_DHCP | LOG_INFO, "RTR-ADVERT(%=
-s) %s =3D> i/f %d",
-> +@@ -920,7 +920,7 @@ static int send_ra_to_aliases(int index, unsigned in=
-t type, char *mac, size_t ma
-> +
-> + static int iface_search(struct in6_addr *local,  int prefix,
-> +                       int scope, int if_index, int flags,
-> +-                      int preferred, int valid, void *vparam)
-> ++                      unsigned int preferred, unsigned int valid, void =
-*vparam)
-> + {
-> +   struct search_param *param =3D vparam;
-> +   struct dhcp_context *context;
-> --
-> 2.34.1
+> +       if (jv_is_valid(top)) {
+> diff --git a/meta-oe/recipes-devtools/jq/jq_1.7.1.bb b/meta-oe/recipes-de=
+vtools/jq/jq_1.7.1.bb
+> index 6b12335513..3f57adb910 100644
+> --- a/meta-oe/recipes-devtools/jq/jq_1.7.1.bb
+> +++ b/meta-oe/recipes-devtools/jq/jq_1.7.1.bb
+> @@ -10,6 +10,9 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D488f4e0b04c0=
+456337fb70d1ac1758ba"
 >
+>  GITHUB_BASE_URI =3D "https://github.com/jqlang/${BPN}/releases/"
+>  SRC_URI =3D "${GITHUB_BASE_URI}/download/${BPN}-${PV}/${BPN}-${PV}.tar.g=
+z \
+> +    file://0001-builtin.c-fix-build-with-Woverlength-strings.patch \
+> +    file://0002-libm.h-builtin.c-add-and-use-LIBM_DA-and-LIBM_DA_NO-.pat=
+ch \
+> +    file://0003-builtin.c-typecheck-builtin-cfunctions-in-function_l.pat=
+ch \
+>      file://run-ptest \
+>      "
+>  SRC_URI[sha256sum] =3D "478c9ca129fd2e3443fe27314b455e211e0d8c60bc8ff7df=
+703873deeee580c2"
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#116290): https://lists.openembedded.org/g/openembedde=
-d-devel/message/116290
-> Mute This Topic: https://lists.openembedded.org/mt/111913155/1997914
+> View/Reply Online (#116278): https://lists.openembedded.org/g/openembedde=
+d-devel/message/116278
+> Mute This Topic: https://lists.openembedded.org/mt/111897184/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
