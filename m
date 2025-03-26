@@ -2,131 +2,463 @@ Return-Path: <mark.yang@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B885C36008
-	for <webhook@archiver.kernel.org>; Wed, 26 Mar 2025 07:34:27 +0000 (UTC)
-Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.51])
- by mx.groups.io with SMTP id smtpd.web10.16849.1742974457727903049
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51DA1C36008
+	for <webhook@archiver.kernel.org>; Wed, 26 Mar 2025 08:03:57 +0000 (UTC)
+Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.52])
+ by mx.groups.io with SMTP id smtpd.web11.17140.1742976231515203613
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Mar 2025 00:34:18 -0700
+ Wed, 26 Mar 2025 01:03:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.51, mailfrom: mark.yang@lge.com)
-Received: from unknown (HELO lgemrelse6q.lge.com) (156.147.1.121)
-	by 156.147.23.51 with ESMTP; 26 Mar 2025 16:34:15 +0900
-X-Original-SENDERIP: 156.147.1.121
+ dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.52, mailfrom: mark.yang@lge.com)
+Received: from unknown (HELO lgeamrelo02.lge.com) (156.147.1.126)
+	by 156.147.23.52 with ESMTP; 26 Mar 2025 17:03:49 +0900
+X-Original-SENDERIP: 156.147.1.126
 X-Original-MAILFROM: mark.yang@lge.com
 Received: from unknown (HELO markyang..) (10.177.121.109)
-	by 156.147.1.121 with ESMTP; 26 Mar 2025 16:34:15 +0900
+	by 156.147.1.126 with ESMTP; 26 Mar 2025 17:03:49 +0900
 X-Original-SENDERIP: 10.177.121.109
 X-Original-MAILFROM: mark.yang@lge.com
 From: mark.yang@lge.com
 To: openembedded-devel@lists.openembedded.org
 Cc: "mark.yang" <mark.yang@lge.com>
-Subject: [meta-oe][PATCH] cpulimit: fix build with gcc-15
-Date: Wed, 26 Mar 2025 16:34:09 +0900
-Message-Id: <20250326073409.3683022-1-mark.yang@lge.com>
+Subject: [meta-networking][PATCH] dnsmasq: fix build with gcc-15
+Date: Wed, 26 Mar 2025 17:03:48 +0900
+Message-Id: <20250326080348.3794227-1-mark.yang@lge.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Mar 2025 07:34:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116289
+ <openembedded-devel@lists.openembedded.org>; Wed, 26 Mar 2025 08:03:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116290
 
 From: "mark.yang" <mark.yang@lge.com>
 
-* to fix: Error occurs in gcc 15.0.1 environment.
-busy.c: In function 'main':
-busy.c:20:58: error: passing argument 3 of 'pthread_create' from incompatible pointer type [-Wincompatible-pointer-types]
-   20 |                 if ((ret = pthread_create(&thread, NULL, loop, NULL)) != 0)
-      |                                                          ^~~~
-      |                                                          |
-      |                                                          void * (*)(void)
-In file included from busy.c:3:
-recipe-sysroot/usr/include/pthread.h:204:36: note: expected 'void * (*)(void *)' but argument is of type 'void * (*)(void)'
-  204 |                            void *(*__start_routine) (void *),
-      |                            ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
-busy.c:6:7: note: 'loop' declared here
-    6 | void *loop()
-      |       ^~~~
+* to fix: following errors occurred in gcc-15.0.1 environment.
+dhcp.c:320:49: error: passing argument 3 of 'iface_enumerate' from incompatible pointer type [-Wincompatible-pointer-types]
+  320 |               !iface_enumerate(AF_INET, &match, check_listen_addrs) ||
+      |                                                 ^~~~~~~~~~~~~~~~~~
+      |                                                 |
+      |                                                 int (*)(struct in_addr,  int,  char *, struct in_addr,  struct in_addr,  void *)
+dnsmasq.h:1662:50: note: expected 'int (*)(void)' but argument is of type 'int (*)(struct in_addr,  int,  char *, struct in_addr,  struct in_addr,  void *)'
+ 1662 | int iface_enumerate(int family, void *parm, int (callback)());
+      |                                             ~~~~~^~~~~~~~~~~
+dhcp.c:33:12: note: 'check_listen_addrs' declared here
+   33 | static int check_listen_addrs(struct in_addr local, int if_index, char *label,
+      |            ^~~~~~~~~~~~~~~~~~
+dhcp.c:333:44: error: passing argument 3 of 'iface_enumerate' from incompatible pointer type [-Wincompatible-pointer-types]
+  333 |       if (!iface_enumerate(AF_INET, &parm, complete_context))
+      |                                            ^~~~~~~~~~~~~~~~
+      |                                            |
+      |                                            int (*)(struct in_addr,  int,  char *, struct in_addr,  struct in_addr,  void *)
+dnsmasq.h:1662:50: note: expected 'int (*)(void)' but argument is of type 'int (*)(struct in_addr,  int,  char *, struct in_addr,  struct in_addr,  void *)'
+ 1662 | int iface_enumerate(int family, void *parm, int (callback)());
+      |                                             ~~~~~^~~~~~~~~~~
+dhcp.c:31:12: note: 'complete_context' declared here
+   31 | static int complete_context(struct in_addr local, int if_index, char *label,
+      |            ^~~~~~~~~~~~~~~~
 
 Signed-off-by: mark.yang <mark.yang@lge.com>
 ---
- ...-Fix-incompatible-pointer-type-error.patch | 51 +++++++++++++++++++
- .../recipes-support/cpulimit/cpulimit_0.2.bb  |  1 +
- 2 files changed, 52 insertions(+)
- create mode 100644 meta-oe/recipes-support/cpulimit/cpulimit/0002-busy.c-Fix-incompatible-pointer-type-error.patch
+ .../recipes-support/dnsmasq/dnsmasq_2.90.bb   |   1 +
+ ...ompatibility-and-Wincompatible-point.patch | 375 ++++++++++++++++++
+ 2 files changed, 376 insertions(+)
+ create mode 100644 meta-networking/recipes-support/dnsmasq/files/0001-Fix-GCC-15-C23-compatibility-and-Wincompatible-point.patch
 
-diff --git a/meta-oe/recipes-support/cpulimit/cpulimit/0002-busy.c-Fix-incompatible-pointer-type-error.patch b/meta-oe/recipes-support/cpulimit/cpulimit/0002-busy.c-Fix-incompatible-pointer-type-error.patch
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
+index ba783d03ff..5cdb24f36a 100644
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
+@@ -15,6 +15,7 @@ SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(d.getV
+            file://dnsmasq-resolvconf.service \
+            file://dnsmasq-noresolvconf.service \
+            file://dnsmasq-resolved.conf \
++           file://0001-Fix-GCC-15-C23-compatibility-and-Wincompatible-point.patch \
+ "
+ SRC_URI[sha256sum] = "8f6666b542403b5ee7ccce66ea73a4a51cf19dd49392aaccd37231a2c51b303b"
+ 
+diff --git a/meta-networking/recipes-support/dnsmasq/files/0001-Fix-GCC-15-C23-compatibility-and-Wincompatible-point.patch b/meta-networking/recipes-support/dnsmasq/files/0001-Fix-GCC-15-C23-compatibility-and-Wincompatible-point.patch
 new file mode 100644
-index 0000000000..c75cbe1950
+index 0000000000..9b69b8c55b
 --- /dev/null
-+++ b/meta-oe/recipes-support/cpulimit/cpulimit/0002-busy.c-Fix-incompatible-pointer-type-error.patch
-@@ -0,0 +1,51 @@
-+From 86b71c49a373f78920d78c0e88f530f476b4fe70 Mon Sep 17 00:00:00 2001
-+From: "mark.yang" <mark.yang@lge.com>
-+Date: Wed, 26 Mar 2025 15:57:54 +0900
-+Subject: [PATCH] busy.c: Fix incompatible pointer type error.
++++ b/meta-networking/recipes-support/dnsmasq/files/0001-Fix-GCC-15-C23-compatibility-and-Wincompatible-point.patch
+@@ -0,0 +1,375 @@
++From da2cc84854a01dd08a8bb4161428be20b83a5ec7 Mon Sep 17 00:00:00 2001
++From: gen2dev <gen2dev@qsr.us>
++Date: Sun, 1 Dec 2024 22:53:16 +0000
++Subject: [PATCH] Fix GCC-15, C23 compatibility and
++ -Wincompatible-pointer-types errors
 +
-+Error occurs in gcc 15.0.1 environment.
-+busy.c: In function 'main':
-+busy.c:20:58: error: passing argument 3 of 'pthread_create' from incompatible pointer type [-Wincompatible-pointer-types]
-+   20 |                 if ((ret = pthread_create(&thread, NULL, loop, NULL)) != 0)
-+      |                                                          ^~~~
-+      |                                                          |
-+      |                                                          void * (*)(void)
-+In file included from busy.c:3:
-+recipe-sysroot/usr/include/pthread.h:204:36: note: expected 'void * (*)(void *)' but argument is of type 'void * (*)(void)'
-+  204 |                            void *(*__start_routine) (void *),
-+      |                            ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
-+busy.c:6:7: note: 'loop' declared here
-+    6 | void *loop()
-+      |       ^~~~
++A bug in gentoo linux https://bugs.gentoo.org/945183 reported that dnsmasq 2.90 fails to compile with GCC 15.
 +
-+Set loop parameter to void* since it requires void* type argument.
++The issue is that while previous versions of GCC defaulted to the C17 standard and C23 could be selected with
++"-std=c23" or "-std=gnu23", GCC 15 defaults to C23. In C23 incompatible pointer types are an error instead of
++a warning, so the "int (*callback)()" incomplete prototypes cause errors.
++
++For example, compiling dnsmasq 2.90 with gcc 14.2.1 and "-std=gnu23" fails with errors such as:
++    lease.c: In function `lease_find_interfaces':
++    lease.c:467:34: warning: passing argument 3 of `iface_enumerate' from incompatible pointer type [-Wincompatible-pointer-types[https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wincompatible-pointer-types]]
++      467 |   iface_enumerate(AF_INET, &now, find_interface_v4);
++          |                                  ^~~~~~~~~~~~~~~~~
++          |                                  |
++          |                                  int (*)(struct in_addr,  int,  char *, struct in_addr,  struct in_addr,  void *)
++    In file included from lease.c:17:
++    dnsmasq.h:1662:50: note: expected `int (*)(void)' but argument is of type `int (*)(struct in_addr,  int,  char *, struct in_addr,  struct in_addr,  void *)'
++     1662 | int iface_enumerate(int family, void *parm, int (callback)());
++          |                                             ~~~~~^~~~~~~~~~~
++
++This patch uses a typedef'ed union of pointer types to get type checking of the pointers. If that's too complicated,
++another way might be to use (void *) casts to disable type checking.
++
++Also, some of the IPv6 callbacks had "int preferred, int valid" and some had
++"unsigned int preferred, unsigned int valid". This patch changes them all to "unsigned int"
++so they're the same and to avoid casting "u32" to "int", eg:
++    u32 preferred = 0xffffffff;
++    callback(..., (int)preferred, ...)
++Even if those cast values aren't used in the callback, casting u32 to "int" feels bad, especially if "int" is 32 bits.
 +
 +Signed-off-by: mark.yang <mark.yang@lge.com>
 +
-+Upstream-Status: Inactive-Upstream [lastcommit: 9 Years ago and lastrelease: 9 Years ago]
++Upstream-Status: Backport [da2cc84 Fix GCC-15, C23 compatibility and -Wincompatible-pointer-types errors]
 +---
-+ tests/busy.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ src/arp.c     |  2 +-
++ src/bpf.c     | 14 +++++++-------
++ src/dhcp.c    |  4 ++--
++ src/dhcp6.c   |  8 ++++----
++ src/dnsmasq.h |  8 +++++++-
++ src/lease.c   |  6 +++---
++ src/netlink.c | 12 ++++++------
++ src/network.c |  6 +++---
++ src/radv.c    | 14 +++++++-------
++ 9 files changed, 40 insertions(+), 34 deletions(-)
 +
-+diff --git a/tests/busy.c b/tests/busy.c
-+index b3afb7c..2d726eb 100644
-+--- a/tests/busy.c
-++++ b/tests/busy.c
-+@@ -3,7 +3,7 @@
-+ #include <pthread.h>
-+ #include <unistd.h>
++diff --git a/src/arp.c b/src/arp.c
++index 0a5a9bf..6ff1f01 100644
++--- a/src/arp.c
+++++ b/src/arp.c
++@@ -152,7 +152,7 @@ int find_mac(union mysockaddr *addr, unsigned char *mac, int lazy, time_t now)
++ 	 if (arp->status != ARP_EMPTY)
++ 	   arp->status = ARP_MARK;
++        
++-       iface_enumerate(AF_UNSPEC, NULL, filter_mac);
+++       iface_enumerate(AF_UNSPEC, NULL, (callback_t){.af_unspec=filter_mac});
++        
++        /* Remove all unconfirmed entries to old list. */
++        for (arp = arps, up = &arps; arp; arp = tmp)
++diff --git a/src/bpf.c b/src/bpf.c
++index 62b589c..82d0125 100644
++--- a/src/bpf.c
+++++ b/src/bpf.c
++@@ -47,7 +47,7 @@ static union all_addr del_addr;
 + 
-+-void *loop()
-++void *loop(void *arg)
++ #if defined(HAVE_BSD_NETWORK) && !defined(__APPLE__)
++ 
++-int arp_enumerate(void *parm, int (*callback)())
+++int arp_enumerate(void *parm, callback_t callback)
 + {
-+ 	while(1);
-+ }
-+@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
-+ 			exit(1);
-+ 		}
-+ 	}
-+-	loop();
-++	loop(NULL);
++   int mib[6];
++   size_t needed;
++@@ -91,7 +91,7 @@ int arp_enumerate(void *parm, int (*callback)())
++       rtm = (struct rt_msghdr *)next;
++       sin2 = (struct sockaddr_inarp *)(rtm + 1);
++       sdl = (struct sockaddr_dl *)((char *)sin2 + SA_SIZE(sin2));
++-      if (!(*callback)(AF_INET, &sin2->sin_addr, LLADDR(sdl), sdl->sdl_alen, parm))
+++      if (!callback.af_unspec(AF_INET, &sin2->sin_addr, LLADDR(sdl), sdl->sdl_alen, parm))
 + 	return 0;
-+ }
++     }
 + 
-\ No newline at end of file
-diff --git a/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb b/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
-index f88d3b6ca1..ee2f91343e 100644
---- a/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
-+++ b/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
-@@ -7,6 +7,7 @@ SRCREV ?= "f4d2682804931e7aea02a869137344bb5452a3cd"
- 
- SRC_URI = "git://github.com/opsengine/cpulimit.git;protocol=https;branch=master \
-            file://0001-Remove-sys-sysctl.h-and-add-missing-libgen.h-include.patch \
-+           file://0002-busy.c-Fix-incompatible-pointer-type-error.patch \
-            "
- 
- S = "${WORKDIR}/git"
++@@ -107,7 +107,7 @@ int iface_enumerate(int family, void *parm, int (*callback)())
++ 
++   if (family == AF_UNSPEC)
++ #if defined(HAVE_BSD_NETWORK) && !defined(__APPLE__)
++-    return  arp_enumerate(parm, callback);
+++    return  arp_enumerate(parm, callback.af_unspec);
++ #else
++   return 0; /* need code for Solaris and MacOS*/
++ #endif
++@@ -147,7 +147,7 @@ int iface_enumerate(int family, void *parm, int (*callback)())
++ 		broadcast = ((struct sockaddr_in *) addrs->ifa_broadaddr)->sin_addr; 
++ 	      else 
++ 		broadcast.s_addr = 0;	      
++-	      if (!((*callback)(addr, iface_index, NULL, netmask, broadcast, parm)))
+++	      if (!callback.af_inet(addr, iface_index, NULL, netmask, broadcast, parm))
++ 		goto err;
++ 	    }
++ 	  else if (family == AF_INET6)
++@@ -212,8 +212,8 @@ int iface_enumerate(int family, void *parm, int (*callback)())
++ 		  addr->s6_addr[3] = 0;
++ 		} 
++ 	     
++-	      if (!((*callback)(addr, prefix, scope_id, iface_index, flags,
++-				(int) preferred, (int)valid, parm)))
+++	      if (!callback.af_inet6(addr, prefix, scope_id, iface_index, flags,
+++				(unsigned int) preferred, (unsigned int)valid, parm))
++ 		goto err;	      
++ 	    }
++ 
++@@ -223,7 +223,7 @@ int iface_enumerate(int family, void *parm, int (*callback)())
++ 	      /* Assume ethernet again here */
++ 	      struct sockaddr_dl *sdl = (struct sockaddr_dl *) addrs->ifa_addr;
++ 	      if (sdl->sdl_alen != 0 && 
++-		  !((*callback)(iface_index, ARPHRD_ETHER, LLADDR(sdl), sdl->sdl_alen, parm)))
+++		  !callback.af_local(iface_index, ARPHRD_ETHER, LLADDR(sdl), sdl->sdl_alen, parm))
++ 		goto err;
++ 	    }
++ #endif 
++diff --git a/src/dhcp.c b/src/dhcp.c
++index 2603c76..009c2a0 100644
++--- a/src/dhcp.c
+++++ b/src/dhcp.c
++@@ -317,7 +317,7 @@ void dhcp_packet(time_t now, int pxe_fd)
++ 	  match.ind = iface_index;
++ 	  
++ 	  if (!daemon->if_addrs ||
++-	      !iface_enumerate(AF_INET, &match, check_listen_addrs) ||
+++	      !iface_enumerate(AF_INET, &match, (callback_t){.af_inet=check_listen_addrs}) ||
++ 	      !match.matched)
++ 	    return;
++ 	  
++@@ -330,7 +330,7 @@ void dhcp_packet(time_t now, int pxe_fd)
++       if (relay_upstream4(iface_index, mess, (size_t)sz))
++ 	return;
++       
++-      if (!iface_enumerate(AF_INET, &parm, complete_context))
+++      if (!iface_enumerate(AF_INET, &parm, (callback_t){.af_inet=complete_context}))
++ 	return;
++ 
++       /* Check for a relay again after iface_enumerate/complete_context has had
++diff --git a/src/dhcp6.c b/src/dhcp6.c
++index c9d54dc..303d33c 100644
++--- a/src/dhcp6.c
+++++ b/src/dhcp6.c
++@@ -239,7 +239,7 @@ void dhcp6_packet(time_t now)
++ 	  relay_upstream6(if_index, (size_t)sz, &from.sin6_addr, from.sin6_scope_id, now))
++ 	return;
++       
++-      if (!iface_enumerate(AF_INET6, &parm, complete_context6))
+++      if (!iface_enumerate(AF_INET6, &parm, (callback_t){.af_inet6=complete_context6}))
++ 	return;
++       
++       /* Check for a relay again after iface_enumerate/complete_context has had
++@@ -617,7 +617,7 @@ void make_duid(time_t now)
++ 	newnow = now - 946684800;
++ #endif      
++       
++-      iface_enumerate(AF_LOCAL, &newnow, make_duid1);
+++      iface_enumerate(AF_LOCAL, &newnow, (callback_t){.af_local=make_duid1});
++       
++       if(!daemon->duid)
++ 	die("Cannot create DHCPv6 server DUID: %s", NULL, EC_MISC);
++@@ -667,7 +667,7 @@ struct cparam {
++ 
++ static int construct_worker(struct in6_addr *local, int prefix, 
++ 			    int scope, int if_index, int flags, 
++-			    int preferred, int valid, void *vparam)
+++			    unsigned int preferred, unsigned int valid, void *vparam)
++ {
++   char ifrn_name[IFNAMSIZ];
++   struct in6_addr start6, end6;
++@@ -801,7 +801,7 @@ void dhcp_construct_contexts(time_t now)
++     if (context->flags & CONTEXT_CONSTRUCTED)
++       context->flags |= CONTEXT_GC;
++    
++-  iface_enumerate(AF_INET6, &param, construct_worker);
+++  iface_enumerate(AF_INET6, &param, (callback_t){.af_inet6=construct_worker});
++ 
++   for (up = &daemon->dhcp6, context = daemon->dhcp6; context; context = tmp)
++     {
++diff --git a/src/dnsmasq.h b/src/dnsmasq.h
++index a9019ee..abb06c8 100644
++--- a/src/dnsmasq.h
+++++ b/src/dnsmasq.h
++@@ -1662,7 +1662,13 @@ void route_sock(void);
++ #endif
++ 
++ /* bpf.c or netlink.c */
++-int iface_enumerate(int family, void *parm, int (callback)());
+++typedef union {
+++	int (*af_unspec)(int family, char *addrp, char *mac, size_t maclen, void *parmv);
+++	int (*af_inet)(struct in_addr local, int if_index, char *label, struct in_addr netmask, struct in_addr broadcast, void *vparam);
+++	int (*af_inet6)(struct in6_addr *local, int prefix, int scope, int if_index, int flags, unsigned int preferred, unsigned int valid, void *vparam);
+++	int (*af_local)(int index, unsigned int type, char *mac, size_t maclen, void *parm);
+++} callback_t;
+++int iface_enumerate(int family, void *parm, callback_t callback);
++ 
++ /* dbus.c */
++ #ifdef HAVE_DBUS
++diff --git a/src/lease.c b/src/lease.c
++index a133021..06a6ae4 100644
++--- a/src/lease.c
+++++ b/src/lease.c
++@@ -411,7 +411,7 @@ static int find_interface_v4(struct in_addr local, int if_index, char *label,
++ #ifdef HAVE_DHCP6
++ static int find_interface_v6(struct in6_addr *local,  int prefix,
++ 			     int scope, int if_index, int flags, 
++-			     int preferred, int valid, void *vparam)
+++			     unsigned int preferred, unsigned int valid, void *vparam)
++ {
++   struct dhcp_lease *lease;
++ 
++@@ -468,9 +468,9 @@ void lease_find_interfaces(time_t now)
++   for (lease = leases; lease; lease = lease->next)
++     lease->new_prefixlen = lease->new_interface = 0;
++ 
++-  iface_enumerate(AF_INET, &now, find_interface_v4);
+++  iface_enumerate(AF_INET, &now, (callback_t){.af_inet=find_interface_v4});
++ #ifdef HAVE_DHCP6
++-  iface_enumerate(AF_INET6, &now, find_interface_v6);
+++  iface_enumerate(AF_INET6, &now, (callback_t){.af_inet6=find_interface_v6});
++ #endif
++ 
++   for (lease = leases; lease; lease = lease->next)
++diff --git a/src/netlink.c b/src/netlink.c
++index ef4b5fe..c706339 100644
++--- a/src/netlink.c
+++++ b/src/netlink.c
++@@ -151,7 +151,7 @@ static ssize_t netlink_recv(int flags)
++    family = AF_LOCAL finds MAC addresses.
++    returns 0 on failure, 1 on success, -1 when restart is required
++ */
++-int iface_enumerate(int family, void *parm, int (*callback)())
+++int iface_enumerate(int family, void *parm, callback_t callback)
++ {
++   struct sockaddr_nl addr;
++   struct nlmsghdr *h;
++@@ -247,7 +247,7 @@ int iface_enumerate(int family, void *parm, int (*callback)())
++ 		      }
++ 		    
++ 		    if (addr.s_addr && callback_ok)
++-		      if (!((*callback)(addr, ifa->ifa_index, label,  netmask, broadcast, parm)))
+++		      if (!callback.af_inet(addr, ifa->ifa_index, label,  netmask, broadcast, parm))
++ 			callback_ok = 0;
++ 		  }
++ 		else if (ifa->ifa_family == AF_INET6)
++@@ -288,9 +288,9 @@ int iface_enumerate(int family, void *parm, int (*callback)())
++ 		      flags |= IFACE_PERMANENT;
++     		    
++ 		    if (addrp && callback_ok)
++-		      if (!((*callback)(addrp, (int)(ifa->ifa_prefixlen), (int)(ifa->ifa_scope), 
+++		      if (!callback.af_inet6(addrp, (int)(ifa->ifa_prefixlen), (int)(ifa->ifa_scope), 
++ 					(int)(ifa->ifa_index), flags, 
++-					(int) preferred, (int)valid, parm)))
+++					(unsigned int)preferred, (unsigned int)valid, parm))
++ 			callback_ok = 0;
++ 		  }
++ 	      }
++@@ -318,7 +318,7 @@ int iface_enumerate(int family, void *parm, int (*callback)())
++ 
++ 	    if (!(neigh->ndm_state & (NUD_NOARP | NUD_INCOMPLETE | NUD_FAILED)) &&
++ 		inaddr && mac && callback_ok)
++-	      if (!((*callback)(neigh->ndm_family, inaddr, mac, maclen, parm)))
+++	      if (!callback.af_unspec(neigh->ndm_family, inaddr, mac, maclen, parm))
++ 		callback_ok = 0;
++ 	  }
++ #ifdef HAVE_DHCP6
++@@ -342,7 +342,7 @@ int iface_enumerate(int family, void *parm, int (*callback)())
++ 	      }
++ 
++ 	    if (mac && callback_ok && !((link->ifi_flags & (IFF_LOOPBACK | IFF_POINTOPOINT))) && 
++-		!((*callback)((int)link->ifi_index, (unsigned int)link->ifi_type, mac, maclen, parm)))
+++		!callback.af_local((int)link->ifi_index, (unsigned int)link->ifi_type, mac, maclen, parm))
++ 	      callback_ok = 0;
++ 	  }
++ #endif
++diff --git a/src/network.c b/src/network.c
++index 0e93c4d..36d9262 100644
++--- a/src/network.c
+++++ b/src/network.c
++@@ -596,7 +596,7 @@ static int iface_allowed(struct iface_param *param, int if_index, char *label,
++ 
++ static int iface_allowed_v6(struct in6_addr *local, int prefix, 
++ 			    int scope, int if_index, int flags, 
++-			    int preferred, int valid, void *vparam)
+++			    unsigned int preferred, unsigned int valid, void *vparam)
++ {
++   union mysockaddr addr;
++   struct in_addr netmask; /* dummy */
++@@ -833,12 +833,12 @@ again:
++ 
++   param.spare = spare;
++   
++-  ret = iface_enumerate(AF_INET6, &param, iface_allowed_v6);
+++  ret = iface_enumerate(AF_INET6, &param, (callback_t){.af_inet6=iface_allowed_v6});
++   if (ret < 0)
++     goto again;
++   else if (ret)
++     {
++-      ret = iface_enumerate(AF_INET, &param, iface_allowed_v4);
+++      ret = iface_enumerate(AF_INET, &param, (callback_t){.af_inet=iface_allowed_v4});
++       if (ret < 0)
++ 	goto again;
++     }
++diff --git a/src/radv.c b/src/radv.c
++index d2d3390..f39716c 100644
++--- a/src/radv.c
+++++ b/src/radv.c
++@@ -58,7 +58,7 @@ static int add_prefixes(struct in6_addr *local,  int prefix,
++ 			unsigned int preferred, unsigned int valid, void *vparam);
++ static int iface_search(struct in6_addr *local,  int prefix,
++ 			int scope, int if_index, int flags, 
++-			int prefered, int valid, void *vparam);
+++			unsigned int prefered, unsigned int valid, void *vparam);
++ static int add_lla(int index, unsigned int type, char *mac, size_t maclen, void *parm);
++ static void new_timeout(struct dhcp_context *context, char *iface_name, time_t now);
++ static unsigned int calc_lifetime(struct ra_interface *ra);
++@@ -307,7 +307,7 @@ static void send_ra_alias(time_t now, int iface, char *iface_name, struct in6_ad
++ 
++   /* If no link-local address then we can't advertise since source address of
++      advertisement must be link local address: RFC 4861 para 6.1.2. */
++-  if (!iface_enumerate(AF_INET6, &parm, add_prefixes) ||
+++  if (!iface_enumerate(AF_INET6, &parm, (callback_t){.af_inet6=add_prefixes}) ||
++       parm.link_pref_time == 0)
++     return;
++ 
++@@ -449,7 +449,7 @@ static void send_ra_alias(time_t now, int iface, char *iface_name, struct in6_ad
++       put_opt6_long(mtu);
++     }
++      
++-  iface_enumerate(AF_LOCAL, &send_iface, add_lla);
+++  iface_enumerate(AF_LOCAL, &send_iface, (callback_t){.af_local=add_lla});
++  
++   /* RDNSS, RFC 6106, use relevant DHCP6 options */
++   (void)option_filter(parm.tags, NULL, daemon->dhcp_opts6);
++@@ -823,7 +823,7 @@ time_t periodic_ra(time_t now)
++ 	  param.iface = context->if_index;
++ 	  new_timeout(context, param.name, now);
++ 	}
++-      else if (iface_enumerate(AF_INET6, &param, iface_search))
+++      else if (iface_enumerate(AF_INET6, &param, (callback_t){.af_inet6=iface_search}))
++ 	/* There's a context overdue, but we can't find an interface
++ 	   associated with it, because it's for a subnet we dont 
++ 	   have an interface on. Probably we're doing DHCP on
++@@ -856,7 +856,7 @@ time_t periodic_ra(time_t now)
++                     aparam.iface = param.iface;
++                     aparam.alias_ifs = NULL;
++                     aparam.num_alias_ifs = 0;
++-                    iface_enumerate(AF_LOCAL, &aparam, send_ra_to_aliases);
+++                    iface_enumerate(AF_LOCAL, &aparam, (callback_t){.af_local=send_ra_to_aliases});
++                     my_syslog(MS_DHCP | LOG_INFO, "RTR-ADVERT(%s) %s => %d alias(es)",
++                               param.name, daemon->addrbuff, aparam.num_alias_ifs);
++ 
++@@ -871,7 +871,7 @@ time_t periodic_ra(time_t now)
++                            those. */
++                         aparam.max_alias_ifs = aparam.num_alias_ifs;
++                         aparam.num_alias_ifs = 0;
++-                        iface_enumerate(AF_LOCAL, &aparam, send_ra_to_aliases);
+++                        iface_enumerate(AF_LOCAL, &aparam, (callback_t){.af_local=send_ra_to_aliases});
++                         for (; aparam.num_alias_ifs; aparam.num_alias_ifs--)
++                           {
++                             my_syslog(MS_DHCP | LOG_INFO, "RTR-ADVERT(%s) %s => i/f %d",
++@@ -920,7 +920,7 @@ static int send_ra_to_aliases(int index, unsigned int type, char *mac, size_t ma
++ 
++ static int iface_search(struct in6_addr *local,  int prefix,
++ 			int scope, int if_index, int flags, 
++-			int preferred, int valid, void *vparam)
+++			unsigned int preferred, unsigned int valid, void *vparam)
++ {
++   struct search_param *param = vparam;
++   struct dhcp_context *context;
 -- 
 2.34.1
 
