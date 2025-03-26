@@ -1,464 +1,639 @@
-Return-Path: <mark.yang@lge.com>
+Return-Path: <quic_ptak@quicinc.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 51DA1C36008
-	for <webhook@archiver.kernel.org>; Wed, 26 Mar 2025 08:03:57 +0000 (UTC)
-Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.52])
- by mx.groups.io with SMTP id smtpd.web11.17140.1742976231515203613
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E29A0C36008
+	for <webhook@archiver.kernel.org>; Wed, 26 Mar 2025 09:20:47 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.web11.18016.1742980845519097208
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Mar 2025 01:03:52 -0700
+ Wed, 26 Mar 2025 02:20:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.52, mailfrom: mark.yang@lge.com)
-Received: from unknown (HELO lgeamrelo02.lge.com) (156.147.1.126)
-	by 156.147.23.52 with ESMTP; 26 Mar 2025 17:03:49 +0900
-X-Original-SENDERIP: 156.147.1.126
-X-Original-MAILFROM: mark.yang@lge.com
-Received: from unknown (HELO markyang..) (10.177.121.109)
-	by 156.147.1.126 with ESMTP; 26 Mar 2025 17:03:49 +0900
-X-Original-SENDERIP: 10.177.121.109
-X-Original-MAILFROM: mark.yang@lge.com
-From: mark.yang@lge.com
+ dkim=pass header.i=@quicinc.com header.s=qcppdkim1 header.b=hv4Dt1OS;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qualcomm.com, ip: 205.220.180.131, mailfrom: ptak@qualcomm.com)
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52Q7360x026021
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Mar 2025 09:20:44 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=Kn4E7dALx1LSidzYIM4WGOK4YCYOHNY2vOH
+	kZxMULGE=; b=hv4Dt1OSpmYUkgCnVndxCoqXYejal5XL8JvvA6+0ImpbaTE+fsS
+	ZoxLjx1RGGX48FpbielpliVhHTVC2TF13fmnrW7dfeGhW/Y4hLfqGUzD2s8Xl6NZ
+	/GPtSaFoKn7sZE7SAiLMEVGVATYjobk/VUwAgi/OuLlqxvK+BEOHjSODGP8hs2kI
+	ZplB6Im+eRgUEa61qproHabcvtvyr+tz29pNnwE6aWXfcJzghu1OOtaYtgRxfdA3
+	jHX1P68t9TbFAaALfUF21SGZPlDNupjAsZKNWKMIQpKrhASL3qKutt/jyK4KcRMd
+	ncbQYsmZurfpVB5Ys5d/52k//49fmSnr6iA==
+Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 45m0xdsww1-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Mar 2025 09:20:44 +0000 (GMT)
+Received: from pps.filterd (APBLRPPMTA01.qualcomm.com [127.0.0.1])
+	by APBLRPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTP id 52Q9KftY013895
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Mar 2025 09:20:41 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 45kk0gjt27-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Mar 2025 09:20:41 +0000
+Received: from APBLRPPMTA01.qualcomm.com (APBLRPPMTA01.qualcomm.com [127.0.0.1])
+	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 52Q9KeI0013890
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Mar 2025 09:20:40 GMT
+Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-ptak-hyd.qualcomm.com [10.213.96.58])
+	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 52Q9KeHf013889
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 26 Mar 2025 09:20:40 +0000
+Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 2387883)
+	id 07C8CB93; Wed, 26 Mar 2025 14:50:40 +0530 (+0530)
+From: Pulkit Singh Tak <quic_ptak@quicinc.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: "mark.yang" <mark.yang@lge.com>
-Subject: [meta-networking][PATCH] dnsmasq: fix build with gcc-15
-Date: Wed, 26 Mar 2025 17:03:48 +0900
-Message-Id: <20250326080348.3794227-1-mark.yang@lge.com>
+Cc: quic_sssanjee@quicinc.com, quic_ptak@quicinc.com,
+        quic_vkaruchu@quicinc.com
+Subject: [meta-oe][PATCH V2] OpenCV: Adding FastCV-HAL enablement option as packageconfig
+Date: Wed, 26 Mar 2025 14:49:29 +0530
+Message-Id: <20250326091928.1846561-1-quic_ptak@quicinc.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-ORIG-GUID: 7Lxl8XyRfTIsOTsTM921vi-zDH_e_Il4
+X-Proofpoint-GUID: 7Lxl8XyRfTIsOTsTM921vi-zDH_e_Il4
+X-Authority-Analysis: v=2.4 cv=Q43S452a c=1 sm=1 tr=0 ts=67e3c6ec cx=c_pps a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17 a=Vs1iUdzkB0EA:10 a=NEAV23lmAAAA:8 a=t8zLzUgvAAAA:20 a=COk6AnOGAAAA:8 a=yT2DQZ9hev52F85wY-AA:9 a=RVmHIydaz68A:10
+ a=TjNXssC_j7lpFel5tvFf:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-03-26_02,2025-03-26_02,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 impostorscore=0
+ lowpriorityscore=0 bulkscore=0 spamscore=0 suspectscore=0 adultscore=0
+ mlxlogscore=999 malwarescore=0 mlxscore=0 priorityscore=1501 clxscore=1015
+ classifier=spam authscore=0 authtc=n/a authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2502280000
+ definitions=main-2503260056
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Mar 2025 08:03:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116290
+ <openembedded-devel@lists.openembedded.org>; Wed, 26 Mar 2025 09:20:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116291
 
-From: "mark.yang" <mark.yang@lge.com>
+Adding patches to support fastcv static lib compilation.
+Removal of cluster ecludian tests support.
+These are temporary patches to be removed in next release.
 
-* to fix: following errors occurred in gcc-15.0.1 environment.
-dhcp.c:320:49: error: passing argument 3 of 'iface_enumerate' from incompatible pointer type [-Wincompatible-pointer-types]
-  320 |               !iface_enumerate(AF_INET, &match, check_listen_addrs) ||
-      |                                                 ^~~~~~~~~~~~~~~~~~
-      |                                                 |
-      |                                                 int (*)(struct in_addr,  int,  char *, struct in_addr,  struct in_addr,  void *)
-dnsmasq.h:1662:50: note: expected 'int (*)(void)' but argument is of type 'int (*)(struct in_addr,  int,  char *, struct in_addr,  struct in_addr,  void *)'
- 1662 | int iface_enumerate(int family, void *parm, int (callback)());
-      |                                             ~~~~~^~~~~~~~~~~
-dhcp.c:33:12: note: 'check_listen_addrs' declared here
-   33 | static int check_listen_addrs(struct in_addr local, int if_index, char *label,
-      |            ^~~~~~~~~~~~~~~~~~
-dhcp.c:333:44: error: passing argument 3 of 'iface_enumerate' from incompatible pointer type [-Wincompatible-pointer-types]
-  333 |       if (!iface_enumerate(AF_INET, &parm, complete_context))
-      |                                            ^~~~~~~~~~~~~~~~
-      |                                            |
-      |                                            int (*)(struct in_addr,  int,  char *, struct in_addr,  struct in_addr,  void *)
-dnsmasq.h:1662:50: note: expected 'int (*)(void)' but argument is of type 'int (*)(struct in_addr,  int,  char *, struct in_addr,  struct in_addr,  void *)'
- 1662 | int iface_enumerate(int family, void *parm, int (callback)());
-      |                                             ~~~~~^~~~~~~~~~~
-dhcp.c:31:12: note: 'complete_context' declared here
-   31 | static int complete_context(struct in_addr local, int if_index, char *label,
-      |            ^~~~~~~~~~~~~~~~
-
-Signed-off-by: mark.yang <mark.yang@lge.com>
+Signed-off-by: Pulkit Singh Tak <quic_ptak@quicinc.com>
 ---
- .../recipes-support/dnsmasq/dnsmasq_2.90.bb   |   1 +
- ...ompatibility-and-Wincompatible-point.patch | 375 ++++++++++++++++++
- 2 files changed, 376 insertions(+)
- create mode 100644 meta-networking/recipes-support/dnsmasq/files/0001-Fix-GCC-15-C23-compatibility-and-Wincompatible-point.patch
+ ...ng-fastcv-static-lib-for-compilation.patch |  96 +++++
+ ...oved-cluster-euclidean-in-fastcv-ext.patch | 371 ++++++++++++++++++
+ .../recipes-support/opencv/opencv_4.11.0.bb   |  15 +-
+ 3 files changed, 479 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-support/opencv/opencv/0001-FROMLIST-Using-fastcv-static-lib-for-compilation.patch
+ create mode 100644 meta-oe/recipes-support/opencv/opencv/0001-PENDING-Removed-cluster-euclidean-in-fastcv-ext.patch
 
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
-index ba783d03ff..5cdb24f36a 100644
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
-@@ -15,6 +15,7 @@ SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(d.getV
-            file://dnsmasq-resolvconf.service \
-            file://dnsmasq-noresolvconf.service \
-            file://dnsmasq-resolved.conf \
-+           file://0001-Fix-GCC-15-C23-compatibility-and-Wincompatible-point.patch \
- "
- SRC_URI[sha256sum] = "8f6666b542403b5ee7ccce66ea73a4a51cf19dd49392aaccd37231a2c51b303b"
- 
-diff --git a/meta-networking/recipes-support/dnsmasq/files/0001-Fix-GCC-15-C23-compatibility-and-Wincompatible-point.patch b/meta-networking/recipes-support/dnsmasq/files/0001-Fix-GCC-15-C23-compatibility-and-Wincompatible-point.patch
+diff --git a/meta-oe/recipes-support/opencv/opencv/0001-FROMLIST-Using-fastcv-static-lib-for-compilation.patch b/meta-oe/recipes-support/opencv/opencv/0001-FROMLIST-Using-fastcv-static-lib-for-compilation.patch
 new file mode 100644
-index 0000000000..9b69b8c55b
+index 0000000000..f822e5066b
 --- /dev/null
-+++ b/meta-networking/recipes-support/dnsmasq/files/0001-Fix-GCC-15-C23-compatibility-and-Wincompatible-point.patch
-@@ -0,0 +1,375 @@
-+From da2cc84854a01dd08a8bb4161428be20b83a5ec7 Mon Sep 17 00:00:00 2001
-+From: gen2dev <gen2dev@qsr.us>
-+Date: Sun, 1 Dec 2024 22:53:16 +0000
-+Subject: [PATCH] Fix GCC-15, C23 compatibility and
-+ -Wincompatible-pointer-types errors
++++ b/meta-oe/recipes-support/opencv/opencv/0001-FROMLIST-Using-fastcv-static-lib-for-compilation.patch
+@@ -0,0 +1,96 @@
++From 0141830e67ac7c60c474ab3c1e7d3e30c27c7943 Mon Sep 17 00:00:00 2001
++From: Pulkit Singh Tak <quic_ptak@quicinc.com>
++Date: Mon, 10 Feb 2025 15:10:26 +0530
++Subject: [PATCH] FROMLIST: Using fastcv static lib for compilation
 +
-+A bug in gentoo linux https://bugs.gentoo.org/945183 reported that dnsmasq 2.90 fails to compile with GCC 15.
-+
-+The issue is that while previous versions of GCC defaulted to the C17 standard and C23 could be selected with
-+"-std=c23" or "-std=gnu23", GCC 15 defaults to C23. In C23 incompatible pointer types are an error instead of
-+a warning, so the "int (*callback)()" incomplete prototypes cause errors.
-+
-+For example, compiling dnsmasq 2.90 with gcc 14.2.1 and "-std=gnu23" fails with errors such as:
-+    lease.c: In function `lease_find_interfaces':
-+    lease.c:467:34: warning: passing argument 3 of `iface_enumerate' from incompatible pointer type [-Wincompatible-pointer-types[https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wincompatible-pointer-types]]
-+      467 |   iface_enumerate(AF_INET, &now, find_interface_v4);
-+          |                                  ^~~~~~~~~~~~~~~~~
-+          |                                  |
-+          |                                  int (*)(struct in_addr,  int,  char *, struct in_addr,  struct in_addr,  void *)
-+    In file included from lease.c:17:
-+    dnsmasq.h:1662:50: note: expected `int (*)(void)' but argument is of type `int (*)(struct in_addr,  int,  char *, struct in_addr,  struct in_addr,  void *)'
-+     1662 | int iface_enumerate(int family, void *parm, int (callback)());
-+          |                                             ~~~~~^~~~~~~~~~~
-+
-+This patch uses a typedef'ed union of pointer types to get type checking of the pointers. If that's too complicated,
-+another way might be to use (void *) casts to disable type checking.
-+
-+Also, some of the IPv6 callbacks had "int preferred, int valid" and some had
-+"unsigned int preferred, unsigned int valid". This patch changes them all to "unsigned int"
-+so they're the same and to avoid casting "u32" to "int", eg:
-+    u32 preferred = 0xffffffff;
-+    callback(..., (int)preferred, ...)
-+Even if those cast values aren't used in the callback, casting u32 to "int" feels bad, especially if "int" is 32 bits.
-+
-+Signed-off-by: mark.yang <mark.yang@lge.com>
-+
-+Upstream-Status: Backport [da2cc84 Fix GCC-15, C23 compatibility and -Wincompatible-pointer-types errors]
++Signed-off-by: Pulkit Singh Tak <quic_ptak@quicinc.com>
++Upstream-Status: Submitted [https://github.com/opencv/opencv/pull/26917]
 +---
-+ src/arp.c     |  2 +-
-+ src/bpf.c     | 14 +++++++-------
-+ src/dhcp.c    |  4 ++--
-+ src/dhcp6.c   |  8 ++++----
-+ src/dnsmasq.h |  8 +++++++-
-+ src/lease.c   |  6 +++---
-+ src/netlink.c | 12 ++++++------
-+ src/network.c |  6 +++---
-+ src/radv.c    | 14 +++++++-------
-+ 9 files changed, 40 insertions(+), 34 deletions(-)
++ 3rdparty/fastcv/fastcv.cmake   |  9 +++++----
++ cmake/OpenCVFindLibsPerf.cmake | 23 ++++++++++++++++-------
++ 2 files changed, 21 insertions(+), 11 deletions(-)
 +
-+diff --git a/src/arp.c b/src/arp.c
-+index 0a5a9bf..6ff1f01 100644
-+--- a/src/arp.c
-++++ b/src/arp.c
-+@@ -152,7 +152,7 @@ int find_mac(union mysockaddr *addr, unsigned char *mac, int lazy, time_t now)
-+ 	 if (arp->status != ARP_EMPTY)
-+ 	   arp->status = ARP_MARK;
-+        
-+-       iface_enumerate(AF_UNSPEC, NULL, filter_mac);
-++       iface_enumerate(AF_UNSPEC, NULL, (callback_t){.af_unspec=filter_mac});
-+        
-+        /* Remove all unconfirmed entries to old list. */
-+        for (arp = arps, up = &arps; arp; arp = tmp)
-+diff --git a/src/bpf.c b/src/bpf.c
-+index 62b589c..82d0125 100644
-+--- a/src/bpf.c
-++++ b/src/bpf.c
-+@@ -47,7 +47,7 @@ static union all_addr del_addr;
++diff --git a/3rdparty/fastcv/fastcv.cmake b/3rdparty/fastcv/fastcv.cmake
++index b8172705ca..12c6616a16 100644
++--- a/3rdparty/fastcv/fastcv.cmake
+++++ b/3rdparty/fastcv/fastcv.cmake
++@@ -1,7 +1,7 @@
++ function(download_fastcv root_dir)
 + 
-+ #if defined(HAVE_BSD_NETWORK) && !defined(__APPLE__)
++   # Commit SHA in the opencv_3rdparty repo
++-  set(FASTCV_COMMIT "dc5d58018f3af915a8d209386d2c58c0501c0f2c")
+++  set(FASTCV_COMMIT "f4413cc2ab7233fdfc383a4cded402c072677fb0")
 + 
-+-int arp_enumerate(void *parm, int (*callback)())
-++int arp_enumerate(void *parm, callback_t callback)
-+ {
-+   int mib[6];
-+   size_t needed;
-+@@ -91,7 +91,7 @@ int arp_enumerate(void *parm, int (*callback)())
-+       rtm = (struct rt_msghdr *)next;
-+       sin2 = (struct sockaddr_inarp *)(rtm + 1);
-+       sdl = (struct sockaddr_dl *)((char *)sin2 + SA_SIZE(sin2));
-+-      if (!(*callback)(AF_INET, &sin2->sin_addr, LLADDR(sdl), sdl->sdl_alen, parm))
-++      if (!callback.af_unspec(AF_INET, &sin2->sin_addr, LLADDR(sdl), sdl->sdl_alen, parm))
-+ 	return 0;
-+     }
++   # Define actual FastCV versions
++   if(ANDROID)
++@@ -16,14 +16,15 @@ function(download_fastcv root_dir)
++     endif()
++   elseif(UNIX AND NOT APPLE AND NOT IOS AND NOT XROS)
++     if(AARCH64)
++-      set(FCV_PACKAGE_NAME  "fastcv_linux_aarch64_2024_12_11.tgz")
++-      set(FCV_PACKAGE_HASH  "7b33ad833e6f15ab6d4ec64fa3c17acd")
+++      set(FCV_PACKAGE_NAME  "fastcv_linux_aarch64_2025_02_12.tgz")
+++      set(FCV_PACKAGE_HASH  "33ac2a59cf3e7d6402eee2e010de1202")
++     else()
++       message("FastCV: fastcv lib for 32-bit Linux is not supported for now!")
++     endif()
++   endif(ANDROID)
 + 
-+@@ -107,7 +107,7 @@ int iface_enumerate(int family, void *parm, int (*callback)())
++   # Download Package
+++
++   set(OPENCV_FASTCV_URL "https://raw.githubusercontent.com/opencv/opencv_3rdparty/${FASTCV_COMMIT}/fastcv/")
 + 
-+   if (family == AF_UNSPEC)
-+ #if defined(HAVE_BSD_NETWORK) && !defined(__APPLE__)
-+-    return  arp_enumerate(parm, callback);
-++    return  arp_enumerate(parm, callback.af_unspec);
-+ #else
-+   return 0; /* need code for Solaris and MacOS*/
-+ #endif
-+@@ -147,7 +147,7 @@ int iface_enumerate(int family, void *parm, int (*callback)())
-+ 		broadcast = ((struct sockaddr_in *) addrs->ifa_broadaddr)->sin_addr; 
-+ 	      else 
-+ 		broadcast.s_addr = 0;	      
-+-	      if (!((*callback)(addr, iface_index, NULL, netmask, broadcast, parm)))
-++	      if (!callback.af_inet(addr, iface_index, NULL, netmask, broadcast, parm))
-+ 		goto err;
-+ 	    }
-+ 	  else if (family == AF_INET6)
-+@@ -212,8 +212,8 @@ int iface_enumerate(int family, void *parm, int (*callback)())
-+ 		  addr->s6_addr[3] = 0;
-+ 		} 
-+ 	     
-+-	      if (!((*callback)(addr, prefix, scope_id, iface_index, flags,
-+-				(int) preferred, (int)valid, parm)))
-++	      if (!callback.af_inet6(addr, prefix, scope_id, iface_index, flags,
-++				(unsigned int) preferred, (unsigned int)valid, parm))
-+ 		goto err;	      
-+ 	    }
++   ocv_download( FILENAME        ${FCV_PACKAGE_NAME}
++@@ -40,4 +41,4 @@ function(download_fastcv root_dir)
++     message(WARNING "FastCV: package download failed!")
++   endif()
 + 
-+@@ -223,7 +223,7 @@ int iface_enumerate(int family, void *parm, int (*callback)())
-+ 	      /* Assume ethernet again here */
-+ 	      struct sockaddr_dl *sdl = (struct sockaddr_dl *) addrs->ifa_addr;
-+ 	      if (sdl->sdl_alen != 0 && 
-+-		  !((*callback)(iface_index, ARPHRD_ETHER, LLADDR(sdl), sdl->sdl_alen, parm)))
-++		  !callback.af_local(iface_index, ARPHRD_ETHER, LLADDR(sdl), sdl->sdl_alen, parm))
-+ 		goto err;
-+ 	    }
-+ #endif 
-+diff --git a/src/dhcp.c b/src/dhcp.c
-+index 2603c76..009c2a0 100644
-+--- a/src/dhcp.c
-++++ b/src/dhcp.c
-+@@ -317,7 +317,7 @@ void dhcp_packet(time_t now, int pxe_fd)
-+ 	  match.ind = iface_index;
-+ 	  
-+ 	  if (!daemon->if_addrs ||
-+-	      !iface_enumerate(AF_INET, &match, check_listen_addrs) ||
-++	      !iface_enumerate(AF_INET, &match, (callback_t){.af_inet=check_listen_addrs}) ||
-+ 	      !match.matched)
-+ 	    return;
-+ 	  
-+@@ -330,7 +330,7 @@ void dhcp_packet(time_t now, int pxe_fd)
-+       if (relay_upstream4(iface_index, mess, (size_t)sz))
-+ 	return;
-+       
-+-      if (!iface_enumerate(AF_INET, &parm, complete_context))
-++      if (!iface_enumerate(AF_INET, &parm, (callback_t){.af_inet=complete_context}))
-+ 	return;
-+ 
-+       /* Check for a relay again after iface_enumerate/complete_context has had
-+diff --git a/src/dhcp6.c b/src/dhcp6.c
-+index c9d54dc..303d33c 100644
-+--- a/src/dhcp6.c
-++++ b/src/dhcp6.c
-+@@ -239,7 +239,7 @@ void dhcp6_packet(time_t now)
-+ 	  relay_upstream6(if_index, (size_t)sz, &from.sin6_addr, from.sin6_scope_id, now))
-+ 	return;
-+       
-+-      if (!iface_enumerate(AF_INET6, &parm, complete_context6))
-++      if (!iface_enumerate(AF_INET6, &parm, (callback_t){.af_inet6=complete_context6}))
-+ 	return;
-+       
-+       /* Check for a relay again after iface_enumerate/complete_context has had
-+@@ -617,7 +617,7 @@ void make_duid(time_t now)
-+ 	newnow = now - 946684800;
-+ #endif      
-+       
-+-      iface_enumerate(AF_LOCAL, &newnow, make_duid1);
-++      iface_enumerate(AF_LOCAL, &newnow, (callback_t){.af_local=make_duid1});
-+       
-+       if(!daemon->duid)
-+ 	die("Cannot create DHCPv6 server DUID: %s", NULL, EC_MISC);
-+@@ -667,7 +667,7 @@ struct cparam {
-+ 
-+ static int construct_worker(struct in6_addr *local, int prefix, 
-+ 			    int scope, int if_index, int flags, 
-+-			    int preferred, int valid, void *vparam)
-++			    unsigned int preferred, unsigned int valid, void *vparam)
-+ {
-+   char ifrn_name[IFNAMSIZ];
-+   struct in6_addr start6, end6;
-+@@ -801,7 +801,7 @@ void dhcp_construct_contexts(time_t now)
-+     if (context->flags & CONTEXT_CONSTRUCTED)
-+       context->flags |= CONTEXT_GC;
-+    
-+-  iface_enumerate(AF_INET6, &param, construct_worker);
-++  iface_enumerate(AF_INET6, &param, (callback_t){.af_inet6=construct_worker});
-+ 
-+   for (up = &daemon->dhcp6, context = daemon->dhcp6; context; context = tmp)
-+     {
-+diff --git a/src/dnsmasq.h b/src/dnsmasq.h
-+index a9019ee..abb06c8 100644
-+--- a/src/dnsmasq.h
-++++ b/src/dnsmasq.h
-+@@ -1662,7 +1662,13 @@ void route_sock(void);
-+ #endif
-+ 
-+ /* bpf.c or netlink.c */
-+-int iface_enumerate(int family, void *parm, int (callback)());
-++typedef union {
-++	int (*af_unspec)(int family, char *addrp, char *mac, size_t maclen, void *parmv);
-++	int (*af_inet)(struct in_addr local, int if_index, char *label, struct in_addr netmask, struct in_addr broadcast, void *vparam);
-++	int (*af_inet6)(struct in6_addr *local, int prefix, int scope, int if_index, int flags, unsigned int preferred, unsigned int valid, void *vparam);
-++	int (*af_local)(int index, unsigned int type, char *mac, size_t maclen, void *parm);
-++} callback_t;
-++int iface_enumerate(int family, void *parm, callback_t callback);
-+ 
-+ /* dbus.c */
-+ #ifdef HAVE_DBUS
-+diff --git a/src/lease.c b/src/lease.c
-+index a133021..06a6ae4 100644
-+--- a/src/lease.c
-++++ b/src/lease.c
-+@@ -411,7 +411,7 @@ static int find_interface_v4(struct in_addr local, int if_index, char *label,
-+ #ifdef HAVE_DHCP6
-+ static int find_interface_v6(struct in6_addr *local,  int prefix,
-+ 			     int scope, int if_index, int flags, 
-+-			     int preferred, int valid, void *vparam)
-++			     unsigned int preferred, unsigned int valid, void *vparam)
-+ {
-+   struct dhcp_lease *lease;
-+ 
-+@@ -468,9 +468,9 @@ void lease_find_interfaces(time_t now)
-+   for (lease = leases; lease; lease = lease->next)
-+     lease->new_prefixlen = lease->new_interface = 0;
-+ 
-+-  iface_enumerate(AF_INET, &now, find_interface_v4);
-++  iface_enumerate(AF_INET, &now, (callback_t){.af_inet=find_interface_v4});
-+ #ifdef HAVE_DHCP6
-+-  iface_enumerate(AF_INET6, &now, find_interface_v6);
-++  iface_enumerate(AF_INET6, &now, (callback_t){.af_inet6=find_interface_v6});
-+ #endif
-+ 
-+   for (lease = leases; lease; lease = lease->next)
-+diff --git a/src/netlink.c b/src/netlink.c
-+index ef4b5fe..c706339 100644
-+--- a/src/netlink.c
-++++ b/src/netlink.c
-+@@ -151,7 +151,7 @@ static ssize_t netlink_recv(int flags)
-+    family = AF_LOCAL finds MAC addresses.
-+    returns 0 on failure, 1 on success, -1 when restart is required
-+ */
-+-int iface_enumerate(int family, void *parm, int (*callback)())
-++int iface_enumerate(int family, void *parm, callback_t callback)
-+ {
-+   struct sockaddr_nl addr;
-+   struct nlmsghdr *h;
-+@@ -247,7 +247,7 @@ int iface_enumerate(int family, void *parm, int (*callback)())
-+ 		      }
-+ 		    
-+ 		    if (addr.s_addr && callback_ok)
-+-		      if (!((*callback)(addr, ifa->ifa_index, label,  netmask, broadcast, parm)))
-++		      if (!callback.af_inet(addr, ifa->ifa_index, label,  netmask, broadcast, parm))
-+ 			callback_ok = 0;
-+ 		  }
-+ 		else if (ifa->ifa_family == AF_INET6)
-+@@ -288,9 +288,9 @@ int iface_enumerate(int family, void *parm, int (*callback)())
-+ 		      flags |= IFACE_PERMANENT;
-+     		    
-+ 		    if (addrp && callback_ok)
-+-		      if (!((*callback)(addrp, (int)(ifa->ifa_prefixlen), (int)(ifa->ifa_scope), 
-++		      if (!callback.af_inet6(addrp, (int)(ifa->ifa_prefixlen), (int)(ifa->ifa_scope), 
-+ 					(int)(ifa->ifa_index), flags, 
-+-					(int) preferred, (int)valid, parm)))
-++					(unsigned int)preferred, (unsigned int)valid, parm))
-+ 			callback_ok = 0;
-+ 		  }
-+ 	      }
-+@@ -318,7 +318,7 @@ int iface_enumerate(int family, void *parm, int (*callback)())
-+ 
-+ 	    if (!(neigh->ndm_state & (NUD_NOARP | NUD_INCOMPLETE | NUD_FAILED)) &&
-+ 		inaddr && mac && callback_ok)
-+-	      if (!((*callback)(neigh->ndm_family, inaddr, mac, maclen, parm)))
-++	      if (!callback.af_unspec(neigh->ndm_family, inaddr, mac, maclen, parm))
-+ 		callback_ok = 0;
-+ 	  }
-+ #ifdef HAVE_DHCP6
-+@@ -342,7 +342,7 @@ int iface_enumerate(int family, void *parm, int (*callback)())
-+ 	      }
-+ 
-+ 	    if (mac && callback_ok && !((link->ifi_flags & (IFF_LOOPBACK | IFF_POINTOPOINT))) && 
-+-		!((*callback)((int)link->ifi_index, (unsigned int)link->ifi_type, mac, maclen, parm)))
-++		!callback.af_local((int)link->ifi_index, (unsigned int)link->ifi_type, mac, maclen, parm))
-+ 	      callback_ok = 0;
-+ 	  }
-+ #endif
-+diff --git a/src/network.c b/src/network.c
-+index 0e93c4d..36d9262 100644
-+--- a/src/network.c
-++++ b/src/network.c
-+@@ -596,7 +596,7 @@ static int iface_allowed(struct iface_param *param, int if_index, char *label,
-+ 
-+ static int iface_allowed_v6(struct in6_addr *local, int prefix, 
-+ 			    int scope, int if_index, int flags, 
-+-			    int preferred, int valid, void *vparam)
-++			    unsigned int preferred, unsigned int valid, void *vparam)
-+ {
-+   union mysockaddr addr;
-+   struct in_addr netmask; /* dummy */
-+@@ -833,12 +833,12 @@ again:
-+ 
-+   param.spare = spare;
-+   
-+-  ret = iface_enumerate(AF_INET6, &param, iface_allowed_v6);
-++  ret = iface_enumerate(AF_INET6, &param, (callback_t){.af_inet6=iface_allowed_v6});
-+   if (ret < 0)
-+     goto again;
-+   else if (ret)
-+     {
-+-      ret = iface_enumerate(AF_INET, &param, iface_allowed_v4);
-++      ret = iface_enumerate(AF_INET, &param, (callback_t){.af_inet=iface_allowed_v4});
-+       if (ret < 0)
-+ 	goto again;
-+     }
-+diff --git a/src/radv.c b/src/radv.c
-+index d2d3390..f39716c 100644
-+--- a/src/radv.c
-++++ b/src/radv.c
-+@@ -58,7 +58,7 @@ static int add_prefixes(struct in6_addr *local,  int prefix,
-+ 			unsigned int preferred, unsigned int valid, void *vparam);
-+ static int iface_search(struct in6_addr *local,  int prefix,
-+ 			int scope, int if_index, int flags, 
-+-			int prefered, int valid, void *vparam);
-++			unsigned int prefered, unsigned int valid, void *vparam);
-+ static int add_lla(int index, unsigned int type, char *mac, size_t maclen, void *parm);
-+ static void new_timeout(struct dhcp_context *context, char *iface_name, time_t now);
-+ static unsigned int calc_lifetime(struct ra_interface *ra);
-+@@ -307,7 +307,7 @@ static void send_ra_alias(time_t now, int iface, char *iface_name, struct in6_ad
-+ 
-+   /* If no link-local address then we can't advertise since source address of
-+      advertisement must be link local address: RFC 4861 para 6.1.2. */
-+-  if (!iface_enumerate(AF_INET6, &parm, add_prefixes) ||
-++  if (!iface_enumerate(AF_INET6, &parm, (callback_t){.af_inet6=add_prefixes}) ||
-+       parm.link_pref_time == 0)
-+     return;
-+ 
-+@@ -449,7 +449,7 @@ static void send_ra_alias(time_t now, int iface, char *iface_name, struct in6_ad
-+       put_opt6_long(mtu);
-+     }
-+      
-+-  iface_enumerate(AF_LOCAL, &send_iface, add_lla);
-++  iface_enumerate(AF_LOCAL, &send_iface, (callback_t){.af_local=add_lla});
-+  
-+   /* RDNSS, RFC 6106, use relevant DHCP6 options */
-+   (void)option_filter(parm.tags, NULL, daemon->dhcp_opts6);
-+@@ -823,7 +823,7 @@ time_t periodic_ra(time_t now)
-+ 	  param.iface = context->if_index;
-+ 	  new_timeout(context, param.name, now);
-+ 	}
-+-      else if (iface_enumerate(AF_INET6, &param, iface_search))
-++      else if (iface_enumerate(AF_INET6, &param, (callback_t){.af_inet6=iface_search}))
-+ 	/* There's a context overdue, but we can't find an interface
-+ 	   associated with it, because it's for a subnet we dont 
-+ 	   have an interface on. Probably we're doing DHCP on
-+@@ -856,7 +856,7 @@ time_t periodic_ra(time_t now)
-+                     aparam.iface = param.iface;
-+                     aparam.alias_ifs = NULL;
-+                     aparam.num_alias_ifs = 0;
-+-                    iface_enumerate(AF_LOCAL, &aparam, send_ra_to_aliases);
-++                    iface_enumerate(AF_LOCAL, &aparam, (callback_t){.af_local=send_ra_to_aliases});
-+                     my_syslog(MS_DHCP | LOG_INFO, "RTR-ADVERT(%s) %s => %d alias(es)",
-+                               param.name, daemon->addrbuff, aparam.num_alias_ifs);
-+ 
-+@@ -871,7 +871,7 @@ time_t periodic_ra(time_t now)
-+                            those. */
-+                         aparam.max_alias_ifs = aparam.num_alias_ifs;
-+                         aparam.num_alias_ifs = 0;
-+-                        iface_enumerate(AF_LOCAL, &aparam, send_ra_to_aliases);
-++                        iface_enumerate(AF_LOCAL, &aparam, (callback_t){.af_local=send_ra_to_aliases});
-+                         for (; aparam.num_alias_ifs; aparam.num_alias_ifs--)
-+                           {
-+                             my_syslog(MS_DHCP | LOG_INFO, "RTR-ADVERT(%s) %s => i/f %d",
-+@@ -920,7 +920,7 @@ static int send_ra_to_aliases(int index, unsigned int type, char *mac, size_t ma
-+ 
-+ static int iface_search(struct in6_addr *local,  int prefix,
-+ 			int scope, int if_index, int flags, 
-+-			int preferred, int valid, void *vparam)
-++			unsigned int preferred, unsigned int valid, void *vparam)
-+ {
-+   struct search_param *param = vparam;
-+   struct dhcp_context *context;
++-endfunction()
+++endfunction()
++\ No newline at end of file
++diff --git a/cmake/OpenCVFindLibsPerf.cmake b/cmake/OpenCVFindLibsPerf.cmake
++index c2380e6ce5..a31842dfbb 100644
++--- a/cmake/OpenCVFindLibsPerf.cmake
+++++ b/cmake/OpenCVFindLibsPerf.cmake
++@@ -181,7 +181,14 @@ endif(WITH_KLEIDICV)
++ if(WITH_FASTCV)
++   if((EXISTS ${FastCV_INCLUDE_PATH}) AND (EXISTS ${FastCV_LIB_PATH}))
++     message(STATUS "Use external FastCV ${FastCV_INCLUDE_PATH}, ${FastCV_LIB_PATH}")
++-    set(HAVE_FASTCV TRUE CACHE BOOL "FastCV status")
+++    find_library(FASTCV_LIBRARY NAMES "fastcv"
+++                 PATHS "${FastCV_LIB_PATH}" NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
+++    mark_as_advanced(FASTCV_LIBRARY)
+++    if (FASTCV_LIBRARY)
+++      set(HAVE_FASTCV TRUE CACHE BOOL "FastCV status")
+++    else()
+++      set(HAVE_FASTCV FALSE CACHE BOOL "FastCV status")
+++    endif()
++   else()
++     include("${OpenCV_SOURCE_DIR}/3rdparty/fastcv/fastcv.cmake")
++     set(FCV_ROOT_DIR "${OpenCV_BINARY_DIR}/3rdparty/fastcv")
++@@ -190,13 +197,15 @@ if(WITH_FASTCV)
++       set(FastCV_INCLUDE_PATH "${FCV_ROOT_DIR}/inc" CACHE PATH "FastCV includes directory")
++       set(FastCV_LIB_PATH "${FCV_ROOT_DIR}/libs" CACHE PATH "FastCV library directory")
++       ocv_install_3rdparty_licenses(FastCV "${OpenCV_BINARY_DIR}/3rdparty/fastcv/LICENSE")
++-      install(FILES "${FastCV_LIB_PATH}/libfastcvopt.so"
++-              DESTINATION "${OPENCV_LIB_INSTALL_PATH}" COMPONENT "bin")
+++      if(ANDROID)
+++        set(FASTCV_LIBRARY "${FastCV_LIB_PATH}/libfastcvopt.so" CACHE PATH "FastCV library")
+++        install(FILES "${FASTCV_LIBRARY}" DESTINATION "${OPENCV_LIB_INSTALL_PATH}" COMPONENT "bin")
+++      else()
+++        set(FASTCV_LIBRARY "${FastCV_LIB_PATH}/libfastcv.a" CACHE PATH "FastCV library")
+++        install(FILES "${FASTCV_LIBRARY}" DESTINATION "${OPENCV_LIB_INSTALL_PATH}" COMPONENT "dev")
+++      endif()
++     else()
++       set(HAVE_FASTCV FALSE CACHE BOOL "FastCV status")
++     endif()
++   endif()
++-  if(HAVE_FASTCV)
++-    set(FASTCV_LIBRARY "${FastCV_LIB_PATH}/libfastcvopt.so" CACHE PATH "FastCV library")
++-  endif()
++-endif(WITH_FASTCV)
+++endif(WITH_FASTCV)
++\ No newline at end of file
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-support/opencv/opencv/0001-PENDING-Removed-cluster-euclidean-in-fastcv-ext.patch b/meta-oe/recipes-support/opencv/opencv/0001-PENDING-Removed-cluster-euclidean-in-fastcv-ext.patch
+new file mode 100644
+index 0000000000..cb454ccf14
+--- /dev/null
++++ b/meta-oe/recipes-support/opencv/opencv/0001-PENDING-Removed-cluster-euclidean-in-fastcv-ext.patch
+@@ -0,0 +1,371 @@
++From d7db8fb8d715a86d0939797bc08073895c475989 Mon Sep 17 00:00:00 2001
++From: Pulkit Singh Tak <quic_ptak@quicinc.com>
++Date: Thu, 13 Feb 2025 17:55:08 +0530
++Subject: [PATCH] PENDING: Removed cluster euclidean in fastcv ext
++
++Signed-off-by: Pulkit Singh Tak <quic_ptak@quicinc.com>
++Upstream-Status: Pending
++---
++ modules/fastcv/include/opencv2/fastcv.hpp     |   1 -
++ .../fastcv/include/opencv2/fastcv/cluster.hpp |  43 ------
++ .../fastcv/perf/perf_cluster_euclidean.cpp    |  79 -----------
++ modules/fastcv/src/cluster_euclidean.cpp      |  66 ----------
++ .../fastcv/test/test_cluster_euclidean.cpp    | 124 ------------------
++ 5 files changed, 313 deletions(-)
++ delete mode 100644 modules/fastcv/include/opencv2/fastcv/cluster.hpp
++ delete mode 100644 modules/fastcv/perf/perf_cluster_euclidean.cpp
++ delete mode 100644 modules/fastcv/src/cluster_euclidean.cpp
++ delete mode 100644 modules/fastcv/test/test_cluster_euclidean.cpp
++
++diff --git a/modules/fastcv/include/opencv2/fastcv.hpp b/modules/fastcv/include/opencv2/fastcv.hpp
++index af188dfc..c5deb5e0 100644
++--- a/modules/fastcv/include/opencv2/fastcv.hpp
+++++ b/modules/fastcv/include/opencv2/fastcv.hpp
++@@ -11,7 +11,6 @@
++ #include "opencv2/fastcv/arithm.hpp"
++ #include "opencv2/fastcv/bilateralFilter.hpp"
++ #include "opencv2/fastcv/blur.hpp"
++-#include "opencv2/fastcv/cluster.hpp"
++ #include "opencv2/fastcv/draw.hpp"
++ #include "opencv2/fastcv/edges.hpp"
++ #include "opencv2/fastcv/fast10.hpp"
++diff --git a/modules/fastcv/include/opencv2/fastcv/cluster.hpp b/modules/fastcv/include/opencv2/fastcv/cluster.hpp
++deleted file mode 100644
++index 46ac7ad1..00000000
++--- a/modules/fastcv/include/opencv2/fastcv/cluster.hpp
+++++ /dev/null
++@@ -1,43 +0,0 @@
++-/*
++- * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
++- * SPDX-License-Identifier: Apache-2.0
++-*/
++-
++-#ifndef OPENCV_FASTCV_CLUSTER_HPP
++-#define OPENCV_FASTCV_CLUSTER_HPP
++-
++-#include <opencv2/core.hpp>
++-
++-namespace cv {
++-namespace fastcv {
++-
++-//! @addtogroup fastcv
++-//! @{
++-
++-/**
++- * @brief Clusterizes N input points in D-dimensional space into K clusters
++- *        Accepts 8-bit unsigned integer points
++- *        Provides faster execution time than cv::kmeans on Qualcomm's processors
++- * @param points            Points array of type 8u, each row represets a point.
++- *                          Size is N rows by D columns, can be non-continuous.
++- * @param clusterCenters    Initial cluster centers array of type 32f, each row represents a center.
++- *                          Size is K rows by D columns, can be non-continuous.
++- * @param newClusterCenters Resulting cluster centers array of type 32f, each row represents found center.
++- *                          Size is set to be K rows by D columns.
++- * @param clusterSizes      Resulting cluster member counts array of type uint32, size is set to be 1 row by K columns.
++- * @param clusterBindings   Resulting points indices array of type uint32, each index tells to which cluster the corresponding point belongs to.
++- *                          Size is set to be 1 row by numPointsUsed columns.
++- * @param clusterSumDists   Resulting distance sums array of type 32f, each number is a sum of distances between each cluster center to its belonging points.
++- *                          Size is set to be 1 row by K columns
++- * @param numPointsUsed     Number of points to clusterize starting from 0 to numPointsUsed-1 inclusively. Sets to N if negative.
++- */
++-CV_EXPORTS_W void clusterEuclidean(InputArray points, InputArray clusterCenters, OutputArray newClusterCenters,
++-                                   OutputArray clusterSizes, OutputArray clusterBindings, OutputArray clusterSumDists,
++-                                   int numPointsUsed = -1);
++-
++-//! @}
++-
++-} // fastcv::
++-} // cv::
++-
++-#endif // OPENCV_FASTCV_CLUSTER_HPP
++diff --git a/modules/fastcv/perf/perf_cluster_euclidean.cpp b/modules/fastcv/perf/perf_cluster_euclidean.cpp
++deleted file mode 100644
++index 20bc31a7..00000000
++--- a/modules/fastcv/perf/perf_cluster_euclidean.cpp
+++++ /dev/null
++@@ -1,79 +0,0 @@
++-/*
++- * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
++- * SPDX-License-Identifier: Apache-2.0
++-*/
++-
++-#include "perf_precomp.hpp"
++-
++-namespace opencv_test {
++-
++-typedef std::tuple<int /* nPts */, int /*nDims*/, int /*nClusters*/> ClusterEuclideanPerfParams;
++-typedef perf::TestBaseWithParam<ClusterEuclideanPerfParams> ClusterEuclideanPerfTest;
++-
++-PERF_TEST_P(ClusterEuclideanPerfTest, run,
++-            ::testing::Combine(::testing::Values(100, 1000, 10000), // nPts
++-                               ::testing::Values(2, 10, 32),        // nDims
++-                               ::testing::Values(5, 10, 16))        // nClusters
++-           )
++-{
++-    auto p = GetParam();
++-    int nPts      = std::get<0>(p);
++-    int nDims     = std::get<1>(p);
++-    int nClusters = std::get<2>(p);
++-
++-    Mat points(nPts, nDims, CV_8U);
++-    Mat clusterCenters(nClusters, nDims, CV_32F);
++-
++-    Mat trueMeans(nClusters, nDims, CV_32F);
++-    Mat stddevs(nClusters, nDims, CV_32F);
++-    std::vector<int> trueClusterSizes(nClusters, 0);
++-    std::vector<int> trueClusterBindings(nPts, 0);
++-    std::vector<float> trueSumDists(nClusters, 0);
++-
++-    cv::RNG& rng = cv::theRNG();
++-    for (int i = 0; i < nClusters; i++)
++-    {
++-        Mat mean(1, nDims, CV_64F), stdev(1, nDims, CV_64F);
++-        rng.fill(mean,  cv::RNG::UNIFORM, 0, 256);
++-        rng.fill(stdev, cv::RNG::UNIFORM, 5.f, 16);
++-        int lo =    i    * nPts / nClusters;
++-        int hi = (i + 1) * nPts / nClusters;
++-
++-        for (int d = 0; d < nDims; d++)
++-        {
++-            rng.fill(points.col(d).rowRange(lo, hi), cv::RNG::NORMAL,
++-                     mean.at<double>(d), stdev.at<double>(d));
++-        }
++-
++-        float sd = 0;
++-        for (int j = lo; j < hi; j++)
++-        {
++-            Mat pts64f;
++-            points.row(j).convertTo(pts64f, CV_64F);
++-            sd += cv::norm(mean, pts64f, NORM_L2);
++-            trueClusterBindings.at(j) = i;
++-            trueClusterSizes.at(i)++;
++-        }
++-        trueSumDists.at(i) = sd;
++-
++-        // let's shift initial cluster center a bit
++-        Mat(mean + stdev * 0.5).copyTo(clusterCenters.row(i));
++-
++-        mean.copyTo(trueMeans.row(i));
++-        stdev.copyTo(stddevs.row(i));
++-    }
++-
++-    while(next())
++-    {
++-        Mat newClusterCenters;
++-        std::vector<int> clusterSizes, clusterBindings;
++-        std::vector<float> clusterSumDists;
++-        startTimer();
++-        cv::fastcv::clusterEuclidean(points, clusterCenters, newClusterCenters, clusterSizes, clusterBindings, clusterSumDists);
++-        stopTimer();
++-    }
++-
++-    SANITY_CHECK_NOTHING();
++-}
++-
++-} // namespace
++diff --git a/modules/fastcv/src/cluster_euclidean.cpp b/modules/fastcv/src/cluster_euclidean.cpp
++deleted file mode 100644
++index a50b027c..00000000
++--- a/modules/fastcv/src/cluster_euclidean.cpp
+++++ /dev/null
++@@ -1,66 +0,0 @@
++-/*
++- * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
++- * SPDX-License-Identifier: Apache-2.0
++-*/
++-
++-#include "precomp.hpp"
++-
++-namespace cv {
++-namespace fastcv {
++-
++-void clusterEuclidean(InputArray _points, InputArray _clusterCenters, OutputArray _newClusterCenters,
++-                      OutputArray _clusterSizes, OutputArray _clusterBindings, OutputArray _clusterSumDists,
++-                      int numPointsUsed)
++-{
++-    INITIALIZATION_CHECK;
++-
++-    CV_Assert(!_points.empty() && _points.type() == CV_8UC1);
++-    int nPts      = _points.rows();
++-    int nDims     = _points.cols();
++-    int ptsStride = _points.step();
++-
++-    CV_Assert(!_clusterCenters.empty() && _clusterCenters.depth() == CV_32F);
++-    int nClusters           = _clusterCenters.rows();
++-    int clusterCenterStride = _clusterCenters.step();
++-
++-    CV_Assert(_clusterCenters.cols() == nDims);
++-
++-    CV_Assert(numPointsUsed <= nPts);
++-    if (numPointsUsed < 0)
++-    {
++-        numPointsUsed = nPts;
++-    }
++-
++-    _newClusterCenters.create(nClusters, nDims, CV_32FC1);
++-    _clusterSizes.create(1, nClusters, CV_32SC1);
++-    _clusterBindings.create(1, numPointsUsed, CV_32SC1);
++-    _clusterSumDists.create(1, nClusters, CV_32FC1);
++-
++-    Mat points            = _points.getMat();
++-    Mat clusterCenters    = _clusterCenters.getMat();
++-    Mat newClusterCenters = _newClusterCenters.getMat();
++-    Mat clusterSizes      = _clusterSizes.getMat();
++-    Mat clusterBindings   = _clusterBindings.getMat();
++-    Mat clusterSumDists   = _clusterSumDists.getMat();
++-
++-    int result = fcvClusterEuclideanu8(points.data,
++-                                       nPts,
++-                                       nDims,
++-                                       ptsStride,
++-                                       numPointsUsed,
++-                                       nClusters,
++-                                       (float32_t*)clusterCenters.data,
++-                                       clusterCenterStride,
++-                                       (float32_t*)newClusterCenters.data,
++-                                       (uint32_t*)clusterSizes.data,
++-                                       (uint32_t*)clusterBindings.data,
++-                                       (float32_t*)clusterSumDists.data);
++-
++-    if (result)
++-    {
++-        CV_Error(cv::Error::StsInternal, cv::format("Failed to clusterize, error code: %d", result));
++-    }
++-}
++-
++-} // fastcv::
++-} // cv::
++diff --git a/modules/fastcv/test/test_cluster_euclidean.cpp b/modules/fastcv/test/test_cluster_euclidean.cpp
++deleted file mode 100644
++index c108f754..00000000
++--- a/modules/fastcv/test/test_cluster_euclidean.cpp
+++++ /dev/null
++@@ -1,124 +0,0 @@
++-/*
++- * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
++- * SPDX-License-Identifier: Apache-2.0
++-*/
++-
++-#include "test_precomp.hpp"
++-
++-namespace opencv_test { namespace {
++-
++-// nPts, nDims, nClusters
++-typedef std::tuple<int, int, int> ClusterEuclideanTestParams;
++-class ClusterEuclideanTest : public ::testing::TestWithParam<ClusterEuclideanTestParams> {};
++-
++-TEST_P(ClusterEuclideanTest, accuracy)
++-{
++-    auto p = GetParam();
++-    int nPts      = std::get<0>(p);
++-    int nDims     = std::get<1>(p);
++-    int nClusters = std::get<2>(p);
++-
++-    Mat points(nPts, nDims, CV_8U);
++-    Mat clusterCenters(nClusters, nDims, CV_32F);
++-
++-    Mat trueMeans(nClusters, nDims, CV_32F);
++-    Mat stddevs(nClusters, nDims, CV_32F);
++-    std::vector<int> trueClusterSizes(nClusters, 0);
++-    std::vector<int> trueClusterBindings(nPts, 0);
++-    std::vector<float> trueSumDists(nClusters, 0);
++-
++-    cv::RNG& rng = cv::theRNG();
++-    for (int i = 0; i < nClusters; i++)
++-    {
++-        Mat mean(1, nDims, CV_64F), stdev(1, nDims, CV_64F);
++-        rng.fill(mean,  cv::RNG::UNIFORM, 0, 256);
++-        rng.fill(stdev, cv::RNG::UNIFORM, 5.f, 16);
++-        int lo =    i    * nPts / nClusters;
++-        int hi = (i + 1) * nPts / nClusters;
++-
++-        for (int d = 0; d < nDims; d++)
++-        {
++-            rng.fill(points.col(d).rowRange(lo, hi), cv::RNG::NORMAL,
++-                     mean.at<double>(d), stdev.at<double>(d));
++-        }
++-
++-        float sd = 0;
++-        for (int j = lo; j < hi; j++)
++-        {
++-            Mat pts64f;
++-            points.row(j).convertTo(pts64f, CV_64F);
++-            sd += cv::norm(mean, pts64f, NORM_L2);
++-            trueClusterBindings.at(j) = i;
++-            trueClusterSizes.at(i)++;
++-        }
++-        trueSumDists.at(i) = sd;
++-
++-        // let's shift initial cluster center a bit
++-        Mat(mean + stdev * 0.5).copyTo(clusterCenters.row(i));
++-
++-        mean.copyTo(trueMeans.row(i));
++-        stdev.copyTo(stddevs.row(i));
++-    }
++-
++-    Mat newClusterCenters;
++-    std::vector<int> clusterSizes, clusterBindings;
++-    std::vector<float> clusterSumDists;
++-    cv::fastcv::clusterEuclidean(points, clusterCenters, newClusterCenters, clusterSizes, clusterBindings, clusterSumDists);
++-
++-    if (cvtest::debugLevel > 0 && nDims == 2)
++-    {
++-        Mat draw(256, 256, CV_8UC3, Scalar(0));
++-        for (int i = 0; i < nPts; i++)
++-        {
++-            int x = std::rint(points.at<uchar>(i, 0));
++-            int y = std::rint(points.at<uchar>(i, 1));
++-            draw.at<Vec3b>(y, x) = Vec3b::all(128);
++-        }
++-        for (int i = 0; i < nClusters; i++)
++-        {
++-            float cx = trueMeans.at<double>(i, 0);
++-            float cy = trueMeans.at<double>(i, 1);
++-            draw.at<Vec3b>(cy, cx) = Vec3b(0, 255, 0);
++-
++-            float sx = stddevs.at<double>(i, 0);
++-            float sy = stddevs.at<double>(i, 1);
++-            cv::ellipse(draw, Point(cx, cy), Size(sx, sy), 0, 0, 360, Scalar(255, 0, 0));
++-
++-            float ox = clusterCenters.at<float>(i, 0);
++-            float oy = clusterCenters.at<float>(i, 1);
++-            draw.at<Vec3b>(oy, ox) = Vec3b(0, 0, 255);
++-
++-            float nx = newClusterCenters.at<float>(i, 0);
++-            float ny = newClusterCenters.at<float>(i, 1);
++-            draw.at<Vec3b>(ny, nx) = Vec3b(255, 255, 0);
++-        }
++-        cv::imwrite(cv::format("draw_%d_%d_%d.png", nPts, nDims, nClusters), draw);
++-    }
++-
++-    {
++-        std::vector<double> diffs;
++-        for (int i = 0; i < nClusters; i++)
++-        {
++-            double cs = std::abs((trueClusterSizes[i] - clusterSizes[i]) / double(trueClusterSizes[i]));
++-            diffs.push_back(cs);
++-        }
++-        double normL2  = cv::norm(diffs, NORM_L2) / nClusters;
++-
++-        EXPECT_LT(normL2, 0.392);
++-    }
++-
++-    {
++-        Mat bindings8u, trueBindings8u;
++-        Mat(clusterBindings).convertTo(bindings8u, CV_8U);
++-        Mat(trueClusterBindings).convertTo(trueBindings8u, CV_8U);
++-        double normH = cv::norm(bindings8u, trueBindings8u, NORM_HAMMING) / nPts;
++-        EXPECT_LT(normH, 0.658);
++-    }
++-}
++-
++-INSTANTIATE_TEST_CASE_P(FastCV_Extension, ClusterEuclideanTest,
++-                        ::testing::Combine(::testing::Values(100, 1000, 10000), // nPts
++-                                           ::testing::Values(2, 10, 32),        // nDims
++-                                           ::testing::Values(5, 10, 16)));      // nClusters
++-
++-}} // namespaces opencv_test, ::
++\ No newline at end of file
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.11.0.bb b/meta-oe/recipes-support/opencv/opencv_4.11.0.bb
+index 1613b6a3ed..0587599253 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.11.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.11.0.bb
+@@ -16,27 +16,35 @@ SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
+ SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
+ SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
+ SRCREV_wechat-qrcode = "a8b69ccc738421293254aec5ddb38bd523503252"
++SRCREV_fastcv = "f4413cc2ab7233fdfc383a4cded402c072677fb0"
+ 
+ 
+-SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg"
++SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg_fastcv"
+ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https \
+            git://github.com/opencv/opencv_contrib.git;destsuffix=git/contrib;name=contrib;branch=4.x;protocol=https \
+            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=git/boostdesc;name=boostdesc;protocol=https \
+            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=git/vgg;name=vgg;protocol=https \
+            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_face_alignment_20170818;destsuffix=git/face;name=face;protocol=https \
+            git://github.com/WeChatCV/opencv_3rdparty.git;branch=wechat_qrcode;destsuffix=git/wechat_qrcode;name=wechat-qrcode;protocol=https \
++           git://github.com/opencv/opencv_3rdparty.git;branch=fastcv/4.x_20250212;destsuffix=git/fastcv;name=fastcv;protocol=https \
+            file://0003-To-fix-errors-as-following.patch \
+            file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
+            file://0001-Dont-use-isystem.patch \
+            file://download.patch \
+            file://0001-Make-ts-module-external.patch \
+            file://0008-Do-not-embed-build-directory-in-binaries.patch \
+-           file://0001-core-fixed-VSX-intrinsics-implementation.patch \
+            "
+ SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
+ 
+ S = "${WORKDIR}/git"
+ 
++# Disabling cluster ecludian tests in fastcv EXTN as it causes fastcv EXTN tests to be crashed.
++# Adding support for fastcv static lib as per Upstream OpenCV.
++# These are temporary patches, will be removed in next release.
++
++SRC_URI += "file://0001-PENDING-Removed-cluster-euclidean-in-fastcv-ext.patch;patchdir=${S}/contrib/ \
++            file://0001-FROMLIST-Using-fastcv-static-lib-for-compilation.patch"
++
+ # OpenCV wants to download more files during configure.  We download these in
+ # do_fetch and construct a source cache in the format it expects
+ OPENCV_DLDIR = "${WORKDIR}/downloads"
+@@ -61,6 +69,7 @@ do_unpack_extra() {
+     cache data ${S}/face/*.dat
+     cache wechat_qrcode ${S}/wechat_qrcode/*.caffemodel
+     cache wechat_qrcode ${S}/wechat_qrcode/*.prototxt
++    cache fastcv ${S}/fastcv/fastcv/*.tgz
+ }
+ addtask unpack_extra after do_unpack before do_patch
+ 
+@@ -71,7 +80,6 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${S}/contrib/modules \
+     -DENABLE_PRECOMPILED_HEADERS=OFF \
+     -DCMAKE_SKIP_RPATH=ON \
+     -DWITH_IPP=OFF \
+-    -DWITH_FASTCV=OFF \
+     -DOPENCV_GENERATE_PKGCONFIG=ON \
+     -DOPENCV_DOWNLOAD_PATH=${OPENCV_DLDIR} \
+     -DOPENCV_ALLOW_DOWNLOADS=OFF \
+@@ -122,6 +130,7 @@ PACKAGECONFIG[tests] = "-DBUILD_TESTS=ON,-DBUILD_TESTS=OFF,,"
+ PACKAGECONFIG[text] = "-DBUILD_opencv_text=ON,-DBUILD_opencv_text=OFF,tesseract,"
+ PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
+ PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
++PACKAGECONFIG[fastcv] = "-DWITH_FASTCV=ON ,-DWITH_FASTCV=OFF,,"
+ 
+ inherit pkgconfig cmake setuptools3-base python3native
+ 
 -- 
 2.34.1
 
