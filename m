@@ -1,1488 +1,447 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <mark.yang@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36EE0C3600B
-	for <webhook@archiver.kernel.org>; Thu, 27 Mar 2025 05:15:26 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web10.43257.1743052518528119921
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE178C3600B
+	for <webhook@archiver.kernel.org>; Thu, 27 Mar 2025 06:37:36 +0000 (UTC)
+Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.52])
+ by mx.groups.io with SMTP id smtpd.web11.43955.1743057445091961692
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Mar 2025 22:15:19 -0700
+ Wed, 26 Mar 2025 23:37:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd84.aul.t-online.de (fwd84.aul.t-online.de [10.223.144.110])
-	by mailout03.t-online.de (Postfix) with SMTP id ABE58F82
-	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Mar 2025 06:15:16 +0100 (CET)
-Received: from [192.168.178.20] ([84.154.173.104]) by fwd84.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1txfaG-0tqqtE0; Thu, 27 Mar 2025 06:15:16 +0100
-Date: Thu, 27 Mar 2025 06:15:59 +0100
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-gnome][PATCHv3] gimp: update 2.10.38 - 3.0.2
+ dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.52, mailfrom: mark.yang@lge.com)
+Received: from unknown (HELO lgemrelse7q.lge.com) (156.147.1.151)
+	by 156.147.23.52 with ESMTP; 27 Mar 2025 15:37:22 +0900
+X-Original-SENDERIP: 156.147.1.151
+X-Original-MAILFROM: mark.yang@lge.com
+Received: from unknown (HELO markyang..) (10.177.121.109)
+	by 156.147.1.151 with ESMTP; 27 Mar 2025 15:37:22 +0900
+X-Original-SENDERIP: 10.177.121.109
+X-Original-MAILFROM: mark.yang@lge.com
+From: mark.yang@lge.com
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <NYNRTS.JXTJMX7HNZ1R3@t-online.de>
-In-Reply-To: <183090F746F51942.25981@lists.openembedded.org>
-References: <183090F746F51942.25981@lists.openembedded.org>
-X-Mailer: geary/46.0
+Cc: "mark.yang" <mark.yang@lge.com>
+Subject: [meta-oe][PATCH] gpm: fix build with gcc-15
+Date: Thu, 27 Mar 2025 15:37:20 +0900
+Message-Id: <20250327063720.519660-1-mark.yang@lge.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-AeADw7lk0bHIgzrPElyF"
-X-TOI-EXPURGATEID: 150726::1743052516-75FF8927-46B77AA6/10/3626336762 SUSPECT URL
-X-TOI-MSGID: c3eec6ad-ea6e-412d-9f5c-9dcedfa7566f
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Mar 2025 05:15:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116314
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Mar 2025 06:37:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116315
 
---=-AeADw7lk0bHIgzrPElyF
-Content-Type: text/plain; charset=us-ascii; format=flowed
+From: "mark.yang" <mark.yang@lge.com>
 
-v3: make vector-icons conditional:
-${@oe.utils.conditional('SITEINFO_BITS', '32', '', 'vector-icons', d)}
+* fix build with gcc-15
 
-On Thu, Mar 27 2025 at 06:14:16 +01:00:00, Markus Volk 
-<f_l_k@t-online.de> wrote:
->                    ------------------------------
->                    GNU Image Manipulation Program
->                          Development Branch
->                    ------------------------------
-> 
-> Overview of Changes from GIMP 3.0.0 to GIMP 3.0.2
-> =================================================
-> 
-> This is a bug-fix only release.
-> 
-> Core:
-> 
->   - Mark some strings translatable.
->   - Fix crash when choosing a brush in grid view.
->   - Windows: temporary revert of some Input Device handling code which
->     was breaking pressure sensitivity for some graphics tablets 
-> (though
->     this revert may make issues with the eraser tip).
->   - Fix crash when choosing a non-existing font in text tool options.
-> 
-> Tools:
-> 
->   - Reorder Line Art Detection options per design decision.
-> 
-> Graphical User Interface:
-> 
->   - Keep headerbar color consistent when out of focus.
->   - Histogram uses the luminance value of the foreground color as a
->     threshold to lighten or darken the border color for contrast with
->     the histogram itself.
->   - Improve separation between panels in dark theme.
->   - Add default response for GimpQueryBox dialogues.
->   - Spacing between toolbox widgets improved.
->   - GimpSpinScale slider colors inverted.
->   - New icons: "gimp-toggle-on" and "gimp-toggle-off" and using them 
-> in
->     the Search Action's list as icons for toggle actions.
-> 
-> Plug-ins:
-> 
->   - Python Console uses the luminance of the background color for 
-> error
->     text.
->   - Metadata Editor: fix buffer overflow.
->   - Gradient Flare: fix crash when setting the size to 0.
->   - Screenshot: X11 implementation is bypassed (in favor of portals)
->     when running on XWayland.
-> 
-> Build:
-> 
->   - Various packaging fixes and cleanup.
->   - The Windows installer now prompts (only in user installation) 
-> about
->     deleting GIMP config files when uninstalling.
->   - GEGL 0.4.58 is now our minimum requirement.
->   - Windows installer: create Restore Point on system-wide install.
-> 
-> Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
-> ---
->  ...irst-line-of-compiler-version-string.patch |  30 ----
->  ...f-load-fix-mismatching-variable-type.patch |  24 ----
->  .../0001-gimp-cross-compile-fix-for-bz2.patch |  30 ++++
->  ...1-gimptool-allow-default-CC-override.patch |  85 ------------
->  ...dd-build-time-library-paths-to-LD_LI.patch |  34 -----
->  ...001-metadata-shut-up-a-weird-warning.patch |  22 ---
->  ...0002-meson.build-reproducibility-fix.patch |  56 ++++++++
->  meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb  | 101 --------------
->  meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb    | 130 
-> ++++++++++++++++++
->  9 files changed, 216 insertions(+), 296 deletions(-)
->  delete mode 100644 
-> meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-line-of-compiler-version-string.patch
->  delete mode 100644 
-> meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mismatching-variable-type.patch
->  create mode 100644 
-> meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fix-for-bz2.patch
->  delete mode 100644 
-> meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-default-CC-override.patch
->  delete mode 100644 
-> meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch
->  delete mode 100644 
-> meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weird-warning.patch
->  create mode 100644 
-> meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reproducibility-fix.patch
->  delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
->  create mode 100644 meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb
-> 
-> diff --git 
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-line-of-compiler-version-string.patch 
-> b/meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-line-of-compiler-version-string.patch
-> deleted file mode 100644
-> index 618b4cc7a7..0000000000
-> --- 
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-line-of-compiler-version-string.patch
-> +++ /dev/null
-> @@ -1,30 +0,0 @@
-> -From 5711ccfab40e304ced7f5be39a4083e3fcecff91 Mon Sep 17 00:00:00 
-> 2001
-> -From: Khem Raj <raj.khem@gmail.com <mailto:raj.khem@gmail.com>>
-> -Date: Wed, 24 May 2023 22:22:41 -0700
-> -Subject: [PATCH] configure: Keep first line of compiler version 
-> string
-> -
-> -Full output of cc -v may contain additional information which could
-> -contain build path information, which is unnessasary
-> -
-> -Upstream-Status: Submitted 
-> [<https://gitlab.gnome.org/GNOME/gimp/-/merge_requests/926>]
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com 
-> <mailto:raj.khem@gmail.com>>
-> ----
-> - configure.ac | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/configure.ac b/configure.ac
-> -index c25415d..68707a0 100644
-> ---- a/configure.ac
-> -+++ b/configure.ac
-> -@@ -599,7 +599,7 @@ fi
-> - for CC_VERSION_OPT in $CC_VERSION_OPTS; do
-> -   # We run $CC, and escape and format its output, in a single step,
-> -   # since some shells expand escape sequences in "echo" arguments.
-> --  CC_VERSION="`$CC $CC_VERSION_OPT 2>&1 | sed -e 
-> 's/\\\\/\\\\\\\\\\\\\\\\/g;s/^/\\\\t/;s/$/\\\\n/' | tr -d '\n'`"
-> -+  CC_VERSION="`$CC $CC_VERSION_OPT 2>&1 | head -1 | sed -e 
-> 's/\\\\/\\\\\\\\\\\\\\\\/g;s/^/\\\\t/;s/$/\\\\n/' | tr -d '\n'`"
-> -   if test $? -eq 0; then
-> -     break
-> -   fi
-> ---
-> -2.40.1
-> -
-> diff --git 
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mismatching-variable-type.patch 
-> b/meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mismatching-variable-type.patch
-> deleted file mode 100644
-> index 13b3dda144..0000000000
-> --- 
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mismatching-variable-type.patch
-> +++ /dev/null
-> @@ -1,24 +0,0 @@
-> -From a2458f1528e5733574bb26ff5452b1329116e6db Mon Sep 17 00:00:00 
-> 2001
-> -From: Simon Budig <simon@budig.de <mailto:simon@budig.de>>
-> -Date: Sat, 20 May 2023 18:40:41 +0200
-> -Subject: [PATCH] file-tiff-load: fix mismatching variable type
-> -
-> -Upstream-Status: Backport 
-> [<https://gitlab.gnome.org/GNOME/gimp/-/commit/a2458f1528e5733574bb26ff5452b1329116e6db>]
-> -Signed-off-by: Khem Raj <raj.khem@gmai.com 
-> <mailto:raj.khem@gmai.com>>
-> ----
-> - plug-ins/file-tiff/file-tiff-load.c | 6 +++---
-> - 1 file changed, 3 insertions(+), 3 deletions(-)
-> -
-> ---- a/plug-ins/file-tiff/file-tiff-load.c
-> -+++ b/plug-ins/file-tiff/file-tiff-load.c
-> -@@ -1301,8 +1301,8 @@ load_image (GFile        *file,
-> -
-> -       /* any resolution info in the file? */
-> -       {
-> --        gfloat   xres = 72.0;
-> --        gfloat   yres = 72.0;
-> -+        gdouble   xres = 72.0;
-> -+        gdouble   yres = 72.0;
-> -         gushort  read_unit;
-> -         GimpUnit unit = GIMP_UNIT_PIXEL; /* invalid unit */
-> -
-> diff --git 
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fix-for-bz2.patch 
-> b/meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fix-for-bz2.patch
-> new file mode 100644
-> index 0000000000..721225c8b3
-> --- /dev/null
-> +++ 
-> b/meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fix-for-bz2.patch
-> @@ -0,0 +1,30 @@
-> +From a7e40e19d17404cf5ec4135fc1becd5a90f5e1e1 Mon Sep 17 00:00:00 
-> 2001
-> +From: Markus Volk <f_l_k@t-online.de <mailto:f_l_k@t-online.de>>
-> +Date: Wed, 25 Dec 2024 07:27:04 +0100
-> +Subject: [PATCH] gimp: cross-compile fix for bz2
-> +
-> +autotools bzip2 build does not create pkgconfig files so looking for 
-> the dependency fails.
-> +
-> +Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
-> +
-> +Upstream-Status: Inappropriate [can probably be removed once bzip2 
-> is built with meson or cmake]
-> +---
-> + meson.build | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/meson.build b/meson.build
-> +index 4e48f8c64c..d5dce47015 100644
-> +--- a/meson.build
-> ++++ b/meson.build
-> +@@ -765,7 +765,7 @@ zlib = dependency('zlib')
-> + MIMEtypes += 'image/x-psp'
-> +
-> + # Compiler-provided headers can't be found in crossroads environment
-> +-if not meson.is_cross_build()
-> ++if true
-> +   bz2 = cc.find_library('bz2')
-> + else
-> +   bz2 = dependency('bzip2')
-> +--
-> +2.47.1
-> +
-> diff --git 
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-default-CC-override.patch 
-> b/meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-default-CC-override.patch
-> deleted file mode 100644
-> index b04a16cec7..0000000000
-> --- 
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-default-CC-override.patch
-> +++ /dev/null
-> @@ -1,85 +0,0 @@
-> -From 7e5b986cb7797a6535fe2471b9a5fb7c00821f51 Mon Sep 17 00:00:00 
-> 2001
-> -From: Yoann Congal <yoann.congal@smile.fr 
-> <mailto:yoann.congal@smile.fr>>
-> -Date: Sun, 13 Oct 2024 01:00:10 +0200
-> -Subject: [PATCH] gimptool: allow default CC override
-> -
-> -From: Yoann Congal <yoann.congal@smile.fr 
-> <mailto:yoann.congal@smile.fr>>
-> -
-> -In OE, CC contains sysroot path. Storing CC in binary then leads to
-> -non-reproducibility.
-> -
-> -This commit add a new configure option "--with-default-cc='cmd'" for
-> -force the CC stored in gimptool to a reproducible value.
-> -
-> -Upstream-Status: Inappropriate [does not apply on master (upstream 
-> has moved to meson)]
-> -Signed-off-by: Yoann Congal <yoann.congal@smile.fr 
-> <mailto:yoann.congal@smile.fr>>
-> ----
-> - app-tools/Makefile.am |  2 +-
-> - configure.ac          | 13 +++++++++++++
-> - tools/Makefile.am     |  2 +-
-> - tools/gimptool.c      |  2 +-
-> - 4 files changed, 16 insertions(+), 3 deletions(-)
-> -
-> -diff --git a/app-tools/Makefile.am b/app-tools/Makefile.am
-> -index a7cd4ce..81a3a00 100644
-> ---- a/app-tools/Makefile.am
-> -+++ b/app-tools/Makefile.am
-> -@@ -67,7 +67,7 @@ AM_CPPFLAGS = \
-> - 	-DMANDIR=\""$(mandir)"\"				\
-> - 	-DGIMPPLUGINDIR=\""$(gimpplugindir)"\"			\
-> - 	-DGIMPDATADIR=\""$(gimpdatadir)"\"			\
-> --	-DCC=\""$(CC)"\"					\
-> -+	-DDEFAULT_CC=\""@DEFAULT_CC@"\"				\
-> - 	-DGIMPDIR=\""$(gimpdir)"\"				\
-> - 	-DGIMP_PLUGIN_VERSION=\""$(GIMP_PLUGIN_VERSION)"\"	\
-> - 	-I$(top_srcdir)						\
-> -diff --git a/configure.ac b/configure.ac
-> -index a88b7cc..d90b6db 100644
-> ---- a/configure.ac
-> -+++ b/configure.ac
-> -@@ -2457,6 +2457,19 @@ fi
-> - AM_CONDITIONAL(DESKTOP_DATADIR, test "x$with_desktop_dir" != xno)
-> - AC_SUBST(DESKTOP_DATADIR)
-> -
-> -+######################
-> -+# Determine default CC
-> -+######################
-> -+
-> -+AC_ARG_WITH(default-cc, [ --with-default-cc="cmd" default CC to 
-> print in gimptool (default=CC)])
-> -+
-> -+if test "x$with_default_cc" != x; then
-> -+  DEFAULT_CC=$with_default_cc
-> -+else
-> -+  DEFAULT_CC=CC
-> -+fi
-> -+
-> -+AC_SUBST(DEFAULT_CC)
-> -
-> - #####################
-> - # Check for XML tools
-> -diff --git a/tools/Makefile.am b/tools/Makefile.am
-> -index 420b9b1..ccabde8 100644
-> ---- a/tools/Makefile.am
-> -+++ b/tools/Makefile.am
-> -@@ -87,7 +87,7 @@ AM_CPPFLAGS = \
-> - 	-DMANDIR=\""$(mandir)"\"				\
-> - 	-DGIMPPLUGINDIR=\""$(gimpplugindir)"\"			\
-> - 	-DGIMPDATADIR=\""$(gimpdatadir)"\"			\
-> --	-DCC=\""$(CC)"\"					\
-> -+	-DDEFAULT_CC=\""@DEFAULT_CC@"\"				\
-> - 	-DGIMPDIR=\""$(gimpdir)"\"				\
-> - 	-DGIMP_PLUGIN_VERSION=\""$(GIMP_PLUGIN_VERSION)"\"	\
-> - 	-I$(top_srcdir)						\
-> -diff --git a/tools/gimptool.c b/tools/gimptool.c
-> -index 21fc043..bbf3fa5 100644
-> ---- a/tools/gimptool.c
-> -+++ b/tools/gimptool.c
-> -@@ -280,7 +280,7 @@ find_out_env_flags (void)
-> -   else if (msvc_syntax)
-> -     env_cc = "cl -MD";
-> -   else
-> --    env_cc = CC;
-> -+    env_cc = DEFAULT_CC;
-> -
-> -   if (g_ascii_strncasecmp (env_cc, "cl", 2)    == 0 &&
-> -       g_ascii_strncasecmp (env_cc, "clang", 5) != 0)
-> diff --git 
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch 
-> b/meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch
-> deleted file mode 100644
-> index cec0055284..0000000000
-> --- 
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch
-> +++ /dev/null
-> @@ -1,34 +0,0 @@
-> -From c720df90dfe3a3e92e34bfb36a04cc792064a501 Mon Sep 17 00:00:00 
-> 2001
-> -From: Khem Raj <raj.khem@gmail.com <mailto:raj.khem@gmail.com>>
-> -Date: Wed, 24 May 2023 22:39:02 -0700
-> -Subject: [PATCH] libtool: Do not add build time library paths to
-> - LD_LIBRARY_PATH
-> -
-> -This does not serve much purpose on cross builds as it will add build
-> -time paths which are only useful when trying to run these tools from
-> -build area but when they are cross built this is not possible to run
-> -them like this.
-> -
-> -Upstream-Status: Inappropriate [Cross-compile specific]
-> -
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com 
-> <mailto:raj.khem@gmail.com>>
-> ----
-> - ltmain.sh | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/ltmain.sh b/ltmain.sh
-> -index 134902c..068d74a 100644
-> ---- a/ltmain.sh
-> -+++ b/ltmain.sh
-> -@@ -5748,7 +5748,7 @@ func_exec_program ()
-> - 	if test yes = "$shlibpath_overrides_runpath" && test -n 
-> "$shlibpath_var" && test -n "$temp_rpath"; then
-> - 	  $ECHO "\
-> -     # Add our own library path to $shlibpath_var
-> --    $shlibpath_var=\"$temp_rpath\$$shlibpath_var\"
-> -+    $shlibpath_var=\"$shlibpath_var\"
-> -
-> -     # Some systems cannot cope with colon-terminated $shlibpath_var
-> -     # The second colon is a workaround for a bug in BeOS R4 sed
-> ---
-> -2.40.1
-> -
-> diff --git 
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weird-warning.patch 
-> b/meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weird-warning.patch
-> deleted file mode 100644
-> index 4f04ac8250..0000000000
-> --- 
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weird-warning.patch
-> +++ /dev/null
-> @@ -1,22 +0,0 @@
-> -From 51311f913d9f417d121f59b83d560c7b4b853d1c Mon Sep 17 00:00:00 
-> 2001
-> -From: Simon Budig <simon@budig.de <mailto:simon@budig.de>>
-> -Date: Sat, 20 May 2023 22:25:40 +0200
-> -Subject: [PATCH] metadata: shut up a weird warning
-> -
-> -Upstream-Status: Backport 
-> [<https://gitlab.gnome.org/GNOME/gimp/-/commit/51311f913d9f417d121f59b83d560c7b4b853d1c>]
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com 
-> <mailto:raj.khem@gmail.com>>
-> ----
-> - plug-ins/metadata/metadata-editor.c | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> ---- a/plug-ins/metadata/metadata-editor.c
-> -+++ b/plug-ins/metadata/metadata-editor.c
-> -@@ -2140,7 +2140,7 @@ metadata_dialog_editor_set_metadata (GEx
-> -                             }
-> -                           else
-> -                             {
-> --                              if (! g_strv_contains (values, 
-> equiv_values[evi]))
-> -+                              if (! g_strv_contains ((const gchar * 
-> const *) values, equiv_values[evi]))
-> -                                 {
-> -                                   gchar *tmpvalue;
-> -
-> diff --git 
-> a/meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reproducibility-fix.patch 
-> b/meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reproducibility-fix.patch
-> new file mode 100644
-> index 0000000000..532715d588
-> --- /dev/null
-> +++ 
-> b/meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reproducibility-fix.patch
-> @@ -0,0 +1,56 @@
-> +From bf19c5687703769e406a8086036d4ed6421c33cb Mon Sep 17 00:00:00 
-> 2001
-> +From: Markus Volk <f_l_k@t-online.de <mailto:f_l_k@t-online.de>>
-> +Date: Mon, 13 Jan 2025 10:04:33 +0100
-> +Subject: [PATCH] meson.build: reproducibility fix
-> +
-> +Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
-> +
-> +Upstream-Status: Inappropriate [oe-specific]
-> +---
-> + meson.build | 28 ++++++++++++++--------------
-> + 1 file changed, 14 insertions(+), 14 deletions(-)
-> +
-> +diff --git a/meson.build b/meson.build
-> +index 97cd621780..e47180db87 100644
-> +--- a/meson.build
-> ++++ b/meson.build
-> +@@ -1599,23 +1599,23 @@ conf.set('HAVE_FUNC_ATTRIBUTE_DESTRUCTOR',
-> + conf.set_quoted('CC',             cc.get_id())
-> +
-> + cc_version=''
-> +-if cc.get_id() == 'gcc' or cc.get_id() == 'clang'
-> +-  cc_cmd = run_command(cc, '-v', check: false)
-> ++#if cc.get_id() == 'gcc' or cc.get_id() == 'clang'
-> ++#  cc_cmd = run_command(cc, '-v', check: false)
-> +   # Note: the call might actually fail when using ccache.
-> +   # See: <https://github.com/mesonbuild/meson/issues/6174>
-> +-  if cc_cmd.returncode() == 0
-> +-    cc_version = cc_cmd.stdout() + cc_cmd.stderr()
-> +-  endif
-> +-else
-> ++#  if cc_cmd.returncode() == 0
-> ++#    cc_version = cc_cmd.stdout() + cc_cmd.stderr()
-> ++#  endif
-> ++#else
-> +   # Various compilers have various options. Try most common ones. 
-> This
-> +   # list of options comes from autotools checks.
-> +-  foreach arg : [ '--version', '-v', '-V', '-qversion' ]
-> +-    cc_cmd = run_command(cc, arg, check: false)
-> +-    if cc_cmd.returncode() == 0
-> +-      cc_version = cc_cmd.stdout()
-> +-    endif
-> +-  endforeach
-> +-endif
-> ++#  foreach arg : [ '--version', '-v', '-V', '-qversion' ]
-> ++#    cc_cmd = run_command(cc, arg, check: false)
-> ++#    if cc_cmd.returncode() == 0
-> ++#      cc_version = cc_cmd.stdout()
-> ++#    endif
-> ++#  endforeach
-> ++#endif
-> + if cc_version == ''
-> +   # We didn't manage to get a meaningful verbose version from the
-> +   # compiler. Just save its name and version.
-> +--
-> +2.47.1
-> +
-> diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb 
-> b/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
-> deleted file mode 100644
-> index 0272e05e96..0000000000
-> --- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
-> +++ /dev/null
-> @@ -1,101 +0,0 @@
-> -SUMMARY = "The GIMP is the GNU Image Manipulation Program"
-> -HOMEPAGE = "http://www.gimp.org <http://www.gimp.org/>"
-> -SECTION = "x11/graphics"
-> -LICENSE = "GPL-3.0-only"
-> -LIC_FILES_CHKSUM = 
-> "file://COPYING;md5=c678957b0c8e964aa6c70fd77641a71e" 
-> <file://copying;md5=c678957b0c8e964aa6c70fd77641a71e/>
-> -
-> -DEPENDS = " \
-> -    alsa-lib \
-> -    atk \
-> -    cairo \
-> -    fontconfig \
-> -    freetype \
-> -    gdk-pixbuf-native \
-> -    intltool-native \
-> -    libxslt-native \
-> -    gegl-native \
-> -    dbus-glib \
-> -    gtk+ \
-> -    babl \
-> -    gegl \
-> -    libmypaint \
-> -    mypaint-brushes-1.0 \
-> -    gexiv2 \
-> -    jpeg \
-> -    libmng \
-> -    libpng \
-> -    libexif \
-> -    tiff \
-> -    lcms \
-> -    poppler \
-> -    poppler-data \
-> -    jasper \
-> -    bzip2 \
-> -    libgudev \
-> -    libmng \
-> -    ${@bb.utils.contains 
-> <mailto:${@bb.utils.contains>('DISTRO_FEATURES', 'x11', 'libxmu 
-> libxpm', '', d)} \
-> -"
-> -DEPENDS:append:libc-musl = " libexecinfo"
-> -
-> -GNOMEBASEBUILDCLASS = "autotools"
-> -inherit features_check gnomebase gtk-icon-cache gtk-doc mime-xdg
-> -
-> -REQUIRED_DISTRO_FEATURES = "x11"
-> -
-> -SHPV = "${@gnome_verdir("${PV}")}"
-> -
-> -SRC_URI = 
-> "https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2 
-> <https://download.gimp.org/pub/$%7BBPN%7D/v$%7BSHPV%7D/$%7BBP%7D.tar.bz2> 
-> \
-> -           
-> file://0001-configure-Keep-first-line-of-compiler-version-string.patch 
-> <file://0001-configure-keep-first-line-of-compiler-version-string.patch/> 
-> \
-> -           
-> file://0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch 
-> <file://0001-libtool-do-not-add-build-time-library-paths-to-ld_li.patch/> 
-> \
-> -           
-> file://0001-file-tiff-load-fix-mismatching-variable-type.patch 
-> <file://0001-file-tiff-load-fix-mismatching-variable-type.patch/> \
-> -           file://0001-metadata-shut-up-a-weird-warning.patch 
-> <file://0001-metadata-shut-up-a-weird-warning.patch/> \
-> -           file://0001-gimptool-allow-default-CC-override.patch 
-> <file://0001-gimptool-allow-default-cc-override.patch/> \
-> -           "
-> -SRC_URI[sha256sum] = 
-> "50a845eec11c8831fe8661707950f5b8446e35f30edfb9acf98f85c1133f856e"
-> -
-> -EXTRA_OECONF = "--disable-python \
-> -                --without-webkit \
-> -                --disable-check-update \
-> -                --without-wmf"
-> -
-> -EXTRA_OECONF += "${@oe.utils.conditional 
-> <mailto:${@oe.utils.conditional>('SITEINFO_BITS', '32', ' 
-> --disable-vector-icons', '', d)}"
-> -
-> -do_configure:append() {
-> -    find ${B} -name Makefile | xargs sed -i 
-> s:'-I$(includedir)':'-I.':g
-> -    find ${B} -name Makefile | xargs sed -i 
-> s:'-I/usr/include':'-I${STAGING_INCDIR}':g
-> -}
-> -
-> -do_compile:prepend() {
-> -    # Let native babl/gegl find their plugins
-> -    export BABL_PATH=`find ${STAGING_LIBDIR_NATIVE} -maxdepth 1 
-> -name 'babl-*'`
-> -    export GEGL_PATH=`find ${STAGING_LIBDIR_NATIVE} -maxdepth 1 
-> -name 'gegl-*'`
-> -}
-> -
-> -FILES:${PN}  += "${datadir}/metainfo"
-> -
-> -RDEPENDS:${PN} += "mypaint-brushes-1.0"
-> -
-> -
-> -# gimptool
-> -
-> -# gimptool needs a CC definition, use current CC without sysroot
-> -python __anonymous() {
-> -    import shlex
-> -    CC_WITHOUT_SYSROOT = shlex.join(filter(lambda x: not 
-> x.startswith("--sysroot="), shlex.split(d.getVar("CC"))))
-> -    d.setVar("CC_WITHOUT_SYSROOT", CC_WITHOUT_SYSROOT)
-> -}
-> -EXTRA_OECONF += "--with-default-cc='${CC_WITHOUT_SYSROOT}'"
-> -
-> -# Split gimptool in its own package
-> -PACKAGE_BEFORE_PN += "${PN}-gimptool"
-> -FILES:${PN}-gimptool += "${bindir}/gimptool-2.0"
-> -
-> -# gimptool depends on gimp .pc file being installed and tools to 
-> build the plugin.
-> -RDEPENDS:${PN}-gimptool += "${PN}-dev 
-> packagegroup-core-buildessential"
-> -INSANE_SKIP:${PN}-gimptool += "dev-deps"
-> -
-> -
-> -CVE_STATUS[CVE-2007-3741] = "not-applicable-platform: This only 
-> applies for Mandriva Linux"
-> -CVE_STATUS[CVE-2009-0581] = "cpe-incorrect: The current version 
-> (2.10.38) is not affected."
-> -CVE_STATUS[CVE-2009-0723] = "cpe-incorrect: The current version 
-> (2.10.38) is not affected."
-> -CVE_STATUS[CVE-2009-0733] = "cpe-incorrect: The current version 
-> (2.10.38) is not affected."
-> diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb 
-> b/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb
-> new file mode 100644
-> index 0000000000..6aa267d050
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb
-> @@ -0,0 +1,130 @@
-> +SUMMARY = "The GIMP is the GNU Image Manipulation Program"
-> +HOMEPAGE = "http://www.gimp.org <http://www.gimp.org/>"
-> +SECTION = "graphics"
-> +LICENSE = "GPL-3.0-only"
-> +LIC_FILES_CHKSUM = 
-> "file://COPYING;md5=c678957b0c8e964aa6c70fd77641a71e" 
-> <file://copying;md5=c678957b0c8e964aa6c70fd77641a71e/>
-> +
-> +DEPENDS = " \
-> +    appstream-glib \
-> +    atk \
-> +    babl \
-> +    bzip2 \
-> +    bison-native \
-> +    cairo \
-> +    fontconfig \
-> +    freetype \
-> +    gdk-pixbuf-native \
-> +    gegl \
-> +    gexiv2 \
-> +    glib-2.0 \
-> +    glib-2.0-native \
-> +    gtk+3 \
-> +    harfbuzz \
-> +    iso-codes \
-> +    jpeg \
-> +    json-glib \
-> +    lcms \
-> +    libarchive \
-> +    libexif \
-> +    libmypaint \
-> +    libpng \
-> +    librsvg \
-> +    librsvg-native \
-> +    libxmu \
-> +    libxslt-native \
-> +    mypaint-brushes-1.0 \
-> +    pango \
-> +    poppler \
-> +    poppler-data \
-> +    python3-pygobject-native \
-> +    tiff \
-> +    xz \
-> +    zlib \
-> +"
-> +
-> +DEPENDS:append:libc-musl = " libexecinfo"
-> +
-> +inherit meson gtk-icon-cache mime-xdg pkgconfig gettext 
-> gobject-introspection vala
-> +
-> +GIR_MESON_OPTION = 'can-crosscompile-gir'
-> +VALA_MESON_OPTION = "vala"
-> +VALA_MESON_ENABLE_FLAG = "enabled"
-> +VALA_MESON_DISABLE_FLAG = "disabled"
-> +GIDOCGEN_MESON_OPTION = "gi-docgen"
-> +GIDOCGEN_MESON_ENABLE_FLAG = "enabled"
-> +GIDOCGEN_MESON_DISABLE_FLAG = "disabled"
-> +
-> +SRC_URI = 
-> "https://download.gimp.org/gimp/v${@oe.utils.trim_version('${PV 
-> <https://download.gimp.org/gimp/v$%7B@oe.utils.trim_version('$%7BPV>}', 
-> 2)}/gimp-${PV}.tar.xz"
-> +SRC_URI += "file://0001-gimp-cross-compile-fix-for-bz2.patch" 
-> <file://0001-gimp-cross-compile-fix-for-bz2.patch/>
-> +SRC_URI += "file://0002-meson.build-reproducibility-fix.patch" 
-> <file://0002-meson.build-reproducibility-fix.patch/>
-> +SRC_URI[sha256sum] = 
-> "546ddc30cb2d0e79123c7fcb4d78211e1ee7a6aace91a6a0ad8cbcbf6ea571a2"
-> +
-> +PACKAGECONFIG[aa] = "-Daa=enabled,-Daa=disabled,aalib"
-> +PACKAGECONFIG[alsa] = "-Dalsa=enabled,-Dalsa=disabled,alsa-lib"
-> +PACKAGECONFIG[appdata-test] = 
-> "-Dappdata-test=enabled,-Dappdata-test=disabled,appstream-glib-native"
-> +PACKAGECONFIG[cairo-pdf] = "-Dcairo-pdf=enabled,-Dcairo-pdf=disabled"
-> +PACKAGECONFIG[check-update] = "-Dcheck-update=yes,-Dcheck-update=no"
-> +PACKAGECONFIG[ghostscript] = 
-> "-Dghostscript=enabled,-Dghostscript=disabled,ghostscript,ghostscript"
-> +PACKAGECONFIG[gudev] = "-Dgudev=enabled,-Dgudev=disabled,libgudev"
-> +PACKAGECONFIG[heif] = "-Dheif=enabled,-Dheif=disabled,libheif"
-> +PACKAGECONFIG[javascript] = 
-> "-Djavascript=enabled,-Djavascript=disabled,,gjs"
-> +PACKAGECONFIG[jpeg2000] = 
-> "-Djpeg2000=enabled,-Djpeg2000=disabled,jasper"
-> +PACKAGECONFIG[jpeg-xl] = 
-> "-Djpeg-xl=enabled,-Djpeg-xl=disabled,libjxl"
-> +PACKAGECONFIG[libunwind] = 
-> "-Dlibunwind=true,-Dlibunwind=false,libunwind"
-> +PACKAGECONFIG[libbacktrace] = 
-> "-Dlibbacktrace=true,-Dlibbacktrace=false,libbacktrace"
-> +PACKAGECONFIG[lua] = "-Dlua=true,-Dlua=false,,luajit lua-lgi"
-> +PACKAGECONFIG[mng] = "-Dmng=enabled,-Dmng=disabled,libmng"
-> +PACKAGECONFIG[openmp] = 
-> "-Dopenmp=enabled,-Dopenmp=disabled,gcc-runtime"
-> +PACKAGECONFIG[vector-icons] = 
-> "-Dvector-icons=true,-Dvector-icons=false,librsvg shared-mime-info"
-> +PACKAGECONFIG[webp] = "-Dwebp=enabled,-Dwebp=disabled,libwebp"
-> +PACKAGECONFIG[xcursor] = 
-> "-Dxcursor=enabled,-Dxcursor=disabled,libxcursor"
-> +PACKAGECONFIG[x11] = "-Dxpm=enabled,-Dxpm=disabled,libxpm libxext 
-> libxfixes"
-> +
-> +PACKAGECONFIG ?= " \
-> +    alsa \
-> +    cairo-pdf \
-> +    ghostscript \
-> +    gudev \
-> +    javascript \
-> +    jpeg2000 \
-> +    jpeg-xl \
-> +    lua \
-> +    mng \
-> +    webp \
-> +    ${@oe.utils.conditional 
-> <mailto:${@oe.utils.conditional>('SITEINFO_BITS', '32', '', 
-> 'vector-icons', d)} \
-> +    ${@bb.utils.contains 
-> <mailto:${@bb.utils.contains>('LICENSE_FLAGS_ACCEPTED', 'commercial', 
-> 'heif', '', d)} \
-> +    ${@bb.utils.contains 
-> <mailto:${@bb.utils.contains>('DISTRO_FEATURES', 'x11', 'x11 
-> xcursor', '', d)} \
-> +"
-> +
-> +PACKAGECONFIG:remove:riscv32 = "lua"
-> +PACKAGECONFIG:remove:riscv64 = "lua"
-> +PACKAGECONFIG:remove:powerpc64 = "lua"
-> +PACKAGECONFIG:remove:powerpc64le = "lua"
-> +
-> +EXTRA_OEMESON += " \
-> +    -Dshmem-type=posix \
-> +    -Dlinux-input=enabled \
-> +    --buildtype release \
-> +    --cross-file=${WORKDIR}/meson-${PN}.cross \
-> +"
-> +
-> +do_write_config:append() {
-> +    cat >${WORKDIR}/meson-${PN}.cross <<EOF
-> +[binaries]
-> +gjs = '${bindir}/gjs'
-> +luajit = '${bindir}/luajit'
-> +EOF
-> +}
-> +
-> +do_configure:append () {
-> +    sed -i -e "s|build_by_default: true|build_by_default: false|" 
-> ${S}/gimp-data/images/meson.build
-> +}
-> +
-> +do_install:prepend() {
-> +    sed -i -e "s|${B}||" ${B}/app/widgets/gimplanguagestore-data.h
-> +    sed -i -e "s|${B}||" ${B}/plug-ins/file-bmp/huffman.h
-> +}
-> +
-> +FILES:${PN} += "${datadir}/metainfo"
-> +
-> +RDEPENDS:${PN} = "mypaint-brushes-1.0 glib-networking 
-> python3-pygobject"
-> --
-> 2.49.0
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#116313): 
-> <https://lists.openembedded.org/g/openembedded-devel/message/116313>
-> Mute This Topic: <https://lists.openembedded.org/mt/111931389/3618223>
-> Group Owner: openembedded-devel+owner@lists.openembedded.org 
-> <mailto:openembedded-devel+owner@lists.openembedded.org>
-> Unsubscribe: 
-> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
-> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
+lib/libcurses.c:46:5: error: conflicting types for 'Gpm_Wgetch'; have 'int(WINDOW *)' {aka 'int(struct _win_st *)'}
+   46 | int Gpm_Wgetch(WINDOW *win)
+      |     ^~~~~~~~~~
+In file included from gpm/1.99.7+gite82d1a653ca94aa4ed12441424da6ce780b1e530/git/src/headers/gpmInt.h:28,
+                 from lib/libcurses.c:30:
+gpm/1.99.7+gite82d1a653ca94aa4ed12441424da6ce780b1e530/git/src/headers/gpm.h:271:12: note: previous declaration of 'Gpm_Wgetch' with type 'int(void)'
+  271 | extern int Gpm_Wgetch();
+      |            ^~~~~~~~~~
 
-
---=-AeADw7lk0bHIgzrPElyF
-Content-Type: text/html; charset=us-ascii
-
-<div id="geary-body" dir="auto"><div>v3: make vector-icons conditional:</div><div>${@oe.utils.conditional('SITEINFO_BITS', '32', '', 'vector-icons', d)}</div></div><div id="geary-quote" dir="auto"><br>On Thu, Mar 27 2025 at 06:14:16 +01:00:00, Markus Volk &lt;f_l_k@t-online.de&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">                   ------------------------------
-                   GNU Image Manipulation Program
-                         Development Branch
-                   ------------------------------
-
-Overview of Changes from GIMP 3.0.0 to GIMP 3.0.2
-=================================================
-
-This is a bug-fix only release.
-
-Core:
-
-  - Mark some strings translatable.
-  - Fix crash when choosing a brush in grid view.
-  - Windows: temporary revert of some Input Device handling code which
-    was breaking pressure sensitivity for some graphics tablets (though
-    this revert may make issues with the eraser tip).
-  - Fix crash when choosing a non-existing font in text tool options.
-
-Tools:
-
-  - Reorder Line Art Detection options per design decision.
-
-Graphical User Interface:
-
-  - Keep headerbar color consistent when out of focus.
-  - Histogram uses the luminance value of the foreground color as a
-    threshold to lighten or darken the border color for contrast with
-    the histogram itself.
-  - Improve separation between panels in dark theme.
-  - Add default response for GimpQueryBox dialogues.
-  - Spacing between toolbox widgets improved.
-  - GimpSpinScale slider colors inverted.
-  - New icons: "gimp-toggle-on" and "gimp-toggle-off" and using them in
-    the Search Action's list as icons for toggle actions.
-
-Plug-ins:
-
-  - Python Console uses the luminance of the background color for error
-    text.
-  - Metadata Editor: fix buffer overflow.
-  - Gradient Flare: fix crash when setting the size to 0.
-  - Screenshot: X11 implementation is bypassed (in favor of portals)
-    when running on XWayland.
-
-Build:
-
-  - Various packaging fixes and cleanup.
-  - The Windows installer now prompts (only in user installation) about
-    deleting GIMP config files when uninstalling.
-  - GEGL 0.4.58 is now our minimum requirement.
-  - Windows installer: create Restore Point on system-wide install.
-
-Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
+Signed-off-by: mark.yang <mark.yang@lge.com>
 ---
- ...irst-line-of-compiler-version-string.patch |  30 ----
- ...f-load-fix-mismatching-variable-type.patch |  24 ----
- .../0001-gimp-cross-compile-fix-for-bz2.patch |  30 ++++
- ...1-gimptool-allow-default-CC-override.patch |  85 ------------
- ...dd-build-time-library-paths-to-LD_LI.patch |  34 -----
- ...001-metadata-shut-up-a-weird-warning.patch |  22 ---
- ...0002-meson.build-reproducibility-fix.patch |  56 ++++++++
- meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb  | 101 --------------
- meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb    | 130 ++++++++++++++++++
- 9 files changed, 216 insertions(+), 296 deletions(-)
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-line-of-compiler-version-string.patch
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mismatching-variable-type.patch
- create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fix-for-bz2.patch
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-default-CC-override.patch
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weird-warning.patch
- create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reproducibility-fix.patch
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
- create mode 100644 meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb
+ ...01-Avoid-shadowing-ncurses-functions.patch | 234 ++++++++++++++++++
+ ...inition-in-yacc-source-file-until-va.patch |  81 ++++++
+ ...ype-definition-for-WINDOW-in-Gpm_Wge.patch |  37 +++
+ meta-oe/recipes-support/gpm/gpm_git.bb        |   3 +
+ 4 files changed, 355 insertions(+)
+ create mode 100644 meta-oe/recipes-support/gpm/gpm/0001-Avoid-shadowing-ncurses-functions.patch
+ create mode 100644 meta-oe/recipes-support/gpm/gpm/0002-Fix-function-definition-in-yacc-source-file-until-va.patch
+ create mode 100644 meta-oe/recipes-support/gpm/gpm/0003-Add-incomplete-type-definition-for-WINDOW-in-Gpm_Wge.patch
 
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-line-of-compiler-version-string.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-line-of-compiler-version-string.patch
-deleted file mode 100644
-index 618b4cc7a7..0000000000
---- a/meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-line-of-compiler-version-string.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From 5711ccfab40e304ced7f5be39a4083e3fcecff91 Mon Sep 17 00:00:00 2001
--From: Khem Raj &lt;<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;
--Date: Wed, 24 May 2023 22:22:41 -0700
--Subject: [PATCH] configure: Keep first line of compiler version string
--
--Full output of cc -v may contain additional information which could
--contain build path information, which is unnessasary
--
--Upstream-Status: Submitted [<a href="https://gitlab.gnome.org/GNOME/gimp/-/merge_requests/926">https://gitlab.gnome.org/GNOME/gimp/-/merge_requests/926</a>]
--Signed-off-by: Khem Raj &lt;<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;
-----
-- configure.ac | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/configure.ac b/configure.ac
--index c25415d..68707a0 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -599,7 +599,7 @@ fi
-- for CC_VERSION_OPT in $CC_VERSION_OPTS; do
--   # We run $CC, and escape and format its output, in a single step,
--   # since some shells expand escape sequences in "echo" arguments.
---  CC_VERSION="`$CC $CC_VERSION_OPT 2&gt;&amp;1 | sed -e 's/\\\\/\\\\\\\\\\\\\\\\/g;s/^/\\\\t/;s/$/\\\\n/' | tr -d '\n'`"
--+  CC_VERSION="`$CC $CC_VERSION_OPT 2&gt;&amp;1 | head -1 | sed -e 's/\\\\/\\\\\\\\\\\\\\\\/g;s/^/\\\\t/;s/$/\\\\n/' | tr -d '\n'`"
--   if test $? -eq 0; then
--     break
--   fi
---- 
--2.40.1
--
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mismatching-variable-type.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mismatching-variable-type.patch
-deleted file mode 100644
-index 13b3dda144..0000000000
---- a/meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mismatching-variable-type.patch
-+++ /dev/null
-@@ -1,24 +0,0 @@
--From a2458f1528e5733574bb26ff5452b1329116e6db Mon Sep 17 00:00:00 2001
--From: Simon Budig &lt;<a href="mailto:simon@budig.de">simon@budig.de</a>&gt;
--Date: Sat, 20 May 2023 18:40:41 +0200
--Subject: [PATCH] file-tiff-load: fix mismatching variable type
--
--Upstream-Status: Backport [<a href="https://gitlab.gnome.org/GNOME/gimp/-/commit/a2458f1528e5733574bb26ff5452b1329116e6db">https://gitlab.gnome.org/GNOME/gimp/-/commit/a2458f1528e5733574bb26ff5452b1329116e6db</a>]
--Signed-off-by: Khem Raj &lt;<a href="mailto:raj.khem@gmai.com">raj.khem@gmai.com</a>&gt;
-----
-- plug-ins/file-tiff/file-tiff-load.c | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
--
----- a/plug-ins/file-tiff/file-tiff-load.c
--+++ b/plug-ins/file-tiff/file-tiff-load.c
--@@ -1301,8 +1301,8 @@ load_image (GFile        *file,
-- 
--       /* any resolution info in the file? */
--       {
---        gfloat   xres = 72.0;
---        gfloat   yres = 72.0;
--+        gdouble   xres = 72.0;
--+        gdouble   yres = 72.0;
--         gushort  read_unit;
--         GimpUnit unit = GIMP_UNIT_PIXEL; /* invalid unit */
-- 
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fix-for-bz2.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fix-for-bz2.patch
+diff --git a/meta-oe/recipes-support/gpm/gpm/0001-Avoid-shadowing-ncurses-functions.patch b/meta-oe/recipes-support/gpm/gpm/0001-Avoid-shadowing-ncurses-functions.patch
 new file mode 100644
-index 0000000000..721225c8b3
+index 0000000000..ad10c9848c
 --- /dev/null
-+++ b/meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fix-for-bz2.patch
-@@ -0,0 +1,30 @@
-+From a7e40e19d17404cf5ec4135fc1becd5a90f5e1e1 Mon Sep 17 00:00:00 2001
-+From: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
-+Date: Wed, 25 Dec 2024 07:27:04 +0100
-+Subject: [PATCH] gimp: cross-compile fix for bz2
++++ b/meta-oe/recipes-support/gpm/gpm/0001-Avoid-shadowing-ncurses-functions.patch
+@@ -0,0 +1,234 @@
++From 8acd38879bcdeb34700ab1989e0dd6245af04706 Mon Sep 17 00:00:00 2001
++From: NHOrus <jy6x2b32pie9@yahoo.com>
++Date: Tue, 11 Feb 2025 18:42:47 +0400
++Subject: [PATCH 1/3] Avoid shadowing ncurses functions. This fails with GCC-15
++ and other compilers implementing C23 Added prefix gpm_ to raw() and noraw()
++ used in two files because they are implemented in same two files, and are
++ static. Same with scr_dump() and src_restore() in yacc source file
 +
-+autotools bzip2 build does not create pkgconfig files so looking for the dependency fails.
-+
-+Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
-+
-+Upstream-Status: Inappropriate [can probably be removed once bzip2 is built with meson or cmake]
++Upstream-Status: Submitted [https://github.com/telmich/gpm/pull/49]
++Signed-off-by: mark.yang <mark.yang@lge.com>
 +---
-+ meson.build | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ src/prog/gpm-root.y   | 10 +++++-----
++ src/prog/hltest.c     | 11 +++++------
++ src/prog/mouse-test.c | 24 ++++++++++++------------
++ 3 files changed, 22 insertions(+), 23 deletions(-)
 +
-+diff --git a/meson.build b/meson.build
-+index 4e48f8c64c..d5dce47015 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -765,7 +765,7 @@ zlib = dependency('zlib')
-+ MIMEtypes += 'image/x-psp'
++diff --git a/src/prog/gpm-root.y b/src/prog/gpm-root.y
++index 76c896c..800e51b 100644
++--- a/src/prog/gpm-root.y
+++++ b/src/prog/gpm-root.y
++@@ -941,7 +941,7 @@ static unsigned short clear_sel_args[6]={0, 0,0, 0,0, 4};
++ static unsigned char *clear_sel_arg= (unsigned char *)clear_sel_args+1;
 + 
-+ # Compiler-provided headers can't be found in crossroads environment
-+-if not meson.is_cross_build()
-++if true
-+   bz2 = cc.find_library('bz2')
-+ else
-+   bz2 = dependency('bzip2')
-+-- 
-+2.47.1
++ /*------------*/
++-static inline void scr_dump(int fd, FILE *f, unsigned char *buffer, int vc)
+++static inline void gpm_scr_dump(int fd, FILE *f, unsigned char *buffer, int vc)
++ {
++    int dumpfd;
++    char dumpname[20];
++@@ -960,7 +960,7 @@ static inline void scr_dump(int fd, FILE *f, unsigned char *buffer, int vc)
++ }
++ 
++ /*------------*/
++-static inline void scr_restore(int fd, FILE *f, unsigned char *buffer, int vc)
+++static inline void gpm_scr_restore(int fd, FILE *f, unsigned char *buffer, int vc)
++ {
++    int dumpfd;
++    char dumpname[20];
++@@ -1002,7 +1002,7 @@ Posted *postmenu(int fd, FILE *f, Draw *draw, int x, int y, int console)
++    if (!new) return NULL;
++    new->draw=draw;
++    new->dump=dump=malloc(opt_buf);
++-   scr_dump(fd,f,dump,console);
+++   gpm_scr_dump(fd,f,dump,console);
++    lines=dump[0]; columns=dump[1];
++    i=(columns*dump[3]+dump[2])*2+1; /* where to get it */
++    if (i<0) i=1;
++@@ -1060,7 +1060,7 @@ Posted *postmenu(int fd, FILE *f, Draw *draw, int x, int y, int console)
++    for (i=0; i<draw->width; i++) PUTC(HORLINE,draw->bord,draw->back);
++    PUTC(LRCORNER,draw->bord,draw->back);
++ 
++-   scr_restore(fd,f,dump,console);
+++   gpm_scr_restore(fd,f,dump,console);
++    free(dump);
++ 
++ #undef PUTC
++@@ -1077,7 +1077,7 @@ Posted *unpostmenu(int fd, FILE *f, Posted *which, int vc)
++ {
++    Posted *prev=which->prev;
++ 
++-   scr_restore(fd,f,which->dump, vc);
+++   gpm_scr_restore(fd,f,which->dump, vc);
++    ioctl(fd,TCXONC,TCOON); /* activate the console */  
++    free(which->dump);
++    free(which);
++diff --git a/src/prog/hltest.c b/src/prog/hltest.c
++index cce0abc..a916873 100644
++--- a/src/prog/hltest.c
+++++ b/src/prog/hltest.c
++@@ -80,7 +80,6 @@ int wid,hei,vcsize;
++ unsigned short clear_sel_args[6]={0, 0,0, 0,0, 4};
++ unsigned char *clear_sel_arg= (unsigned char *)clear_sel_args+1;
++ 
++-
++ static inline int scrdump(char *buf)
++ {
++    clear_sel_arg[0]=2;  /* clear_selection */
++@@ -99,7 +98,7 @@ static inline int scrrestore(char *buf)
++ 
++ 
++ /* I don't like curses, so I'm doing low level stuff here */
++-static void raw(void)
+++static void gpm_raw(void)
++ {
++ struct termios it;
++ 
++@@ -115,7 +114,7 @@ tcsetattr(fileno(stdin),TCSANOW,&it);
++ 
++ }
++ 
++-static void noraw(void)
+++static void gpm_noraw(void)
++ {
++ struct termios it;
++ 
++@@ -136,7 +135,7 @@ void killed(int signo)
++ {
++    CLEAR;
++    fprintf(stderr,"hltest: killed by signal %i\r\n",signo);
++-   noraw();
+++   gpm_noraw();
++    exit(0);
++ }
++ 
++@@ -525,7 +524,7 @@ int main(int argc, char **argv)
++    gpm_roi_handler=xhandler;
++    gpm_roi_data=NULL;
++ 
++-   raw();
+++   gpm_raw();
++    newmsg(0,NULL); /* init data structures */
++    while((c=Gpm_Getchar())!=EOF) {
++       char s[32];
++@@ -538,6 +537,6 @@ int main(int argc, char **argv)
++    newmsg(roi ? ((WinInfo *)roi->clientdata)->number : 0,s);
++    }
++ 
++-   noraw();
+++   gpm_noraw();
++    exit(0);
++ }
++diff --git a/src/prog/mouse-test.c b/src/prog/mouse-test.c
++index d7d1027..0db3560 100644
++--- a/src/prog/mouse-test.c
+++++ b/src/prog/mouse-test.c
++@@ -106,7 +106,7 @@ return 0;
++ /*----------------------------------------------------------------------------- 
++    Place the description here.
++  -----------------------------------------------------------------------------*/
++-static void raw(void)
+++static void gpm_raw(void)
++ {
++    struct termios it;
++ 
++@@ -125,7 +125,7 @@ static void raw(void)
++ /*----------------------------------------------------------------------------- 
++    Place the description here.
++  -----------------------------------------------------------------------------*/
++-static void noraw(void)
+++static void gpm_noraw(void)
++ {
++    struct termios it;
++ 
++@@ -144,7 +144,7 @@ static void noraw(void)
++ void killed(int signo)
++ {
++    fprintf(stderr,"mouse-test: killed by signal %i\r\n",signo);
++-   noraw();
+++   gpm_noraw();
++    exit(0);
++ }
++ 
++@@ -196,7 +196,7 @@ int mousereopen(int oldfd, const char *name, Gpm_Type *type)
++ 
++ int noneofthem(void)
++ {
++-   noraw();
+++   gpm_noraw();
++    printf("\n\nSomething went wrong, I didn't manage to detect your"
++ 	 "protocol\n\nFeel free to report your problems to the author\n");
++    exit(1);
++@@ -336,7 +336,7 @@ int main(int argc, char **argv)
++    I_serial=mice->init; /* the first one has I_serial */
++ 
++    signal(SIGINT,killed);   /* control-C kills us */
++-   raw();
+++   gpm_raw();
++ 
++ /*====================================== First of all, detect the device */
++ 
++@@ -568,7 +568,7 @@ int main(int argc, char **argv)
++    /* why checking and not using return value ??? */
++    CHECKFAIL(typecount);
++    if (typecount==1) {
++-      noraw();
+++      gpm_noraw();
++       printf("\n\n\nWell, it seems like your mouse is already detected:\n"
++       "it is on the device \"%s\", and speaks the protocol \"%s\"\n",
++       mousename,list->this->name);
++@@ -587,7 +587,7 @@ int main(int argc, char **argv)
++    } while(i!='y' && i!='n');
++ 
++    if (i=='n') {
++-      noraw();
+++      gpm_noraw();
++       printf("\nThen, you should use the \"bare\" protocol on \"%s\"\n",
++ 	   mousename);
++       exit(0);
++@@ -634,7 +634,7 @@ int main(int argc, char **argv)
++    for (pending=0,i=0;i<got-16;i++)
++       if(!memcmp(buf+i,buf+i+8,8)) pending++;
++    if (pending > 3) {
++-      noraw();
+++      gpm_noraw();
++       printf("\nYour mouse seems to be a 'mman' one  on \"%s\" (%i matches)\n",
++ 	   mousename,pending);
++       exit(0);
++@@ -660,7 +660,7 @@ int main(int argc, char **argv)
++          continue;
++       }
++ 	   if (pending>3) {
++-	      noraw();
+++	      gpm_noraw();
++ 	      printf("\nYour mouse seems to be a '%s' one on \"%s\" (%i matches)\n",
++ 		   cur->this->name,mousename,pending);
++ 	      exit(0);
++@@ -695,7 +695,7 @@ int main(int argc, char **argv)
++          for (pending=0,i=0;i<got-20;i++)
++             if(!memcmp(buf+i,buf+i+10,10)) pending++;
++          if (pending>3) {
++-            noraw();
+++            gpm_noraw();
++             printf("\nYour mouse becomes a 3-buttons ('-t msc') one when\n"
++ 	         "gpm gets '-o %s' on it command line, and X gets\n"
++ 	         "%s in XF86Config\nThe device is \"%s\"",
++@@ -726,7 +726,7 @@ int main(int argc, char **argv)
++    for (pending=0,i=0;i<got-20;i++)
++       if(!memcmp(buf+i,buf+i+10,10)) pending++;
++    if (pending>3) {
++-      noraw();
+++      gpm_noraw();
++       printf("\nWorked. You should keep the button pressed every time the\n"
++ 	   "computer boots, and run gpm in '-R' mode in order to ignore\n"
++ 	   "such hassle when starting X\n\nStill better, but a better mouse\n"
++@@ -734,7 +734,7 @@ int main(int argc, char **argv)
++ 
++       exit(0);
++    }
++-   noraw();
+++   gpm_noraw();
++    printf("\nI'm lost. Can't tell you how to use your middle button\n");
++    return 0;
++ }
 +
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-default-CC-override.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-default-CC-override.patch
-deleted file mode 100644
-index b04a16cec7..0000000000
---- a/meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-default-CC-override.patch
-+++ /dev/null
-@@ -1,85 +0,0 @@
--From 7e5b986cb7797a6535fe2471b9a5fb7c00821f51 Mon Sep 17 00:00:00 2001
--From: Yoann Congal &lt;<a href="mailto:yoann.congal@smile.fr">yoann.congal@smile.fr</a>&gt;
--Date: Sun, 13 Oct 2024 01:00:10 +0200
--Subject: [PATCH] gimptool: allow default CC override
--
--From: Yoann Congal &lt;<a href="mailto:yoann.congal@smile.fr">yoann.congal@smile.fr</a>&gt;
--
--In OE, CC contains sysroot path. Storing CC in binary then leads to
--non-reproducibility.
--
--This commit add a new configure option "--with-default-cc='cmd'" for
--force the CC stored in gimptool to a reproducible value.
--
--Upstream-Status: Inappropriate [does not apply on master (upstream has moved to meson)]
--Signed-off-by: Yoann Congal &lt;<a href="mailto:yoann.congal@smile.fr">yoann.congal@smile.fr</a>&gt;
-----
-- app-tools/Makefile.am |  2 +-
-- configure.ac          | 13 +++++++++++++
-- tools/Makefile.am     |  2 +-
-- tools/gimptool.c      |  2 +-
-- 4 files changed, 16 insertions(+), 3 deletions(-)
--
--diff --git a/app-tools/Makefile.am b/app-tools/Makefile.am
--index a7cd4ce..81a3a00 100644
----- a/app-tools/Makefile.am
--+++ b/app-tools/Makefile.am
--@@ -67,7 +67,7 @@ AM_CPPFLAGS = \
-- 	-DMANDIR=\""$(mandir)"\"				\
-- 	-DGIMPPLUGINDIR=\""$(gimpplugindir)"\"			\
-- 	-DGIMPDATADIR=\""$(gimpdatadir)"\"			\
---	-DCC=\""$(CC)"\"					\
--+	-DDEFAULT_CC=\""@DEFAULT_CC@"\"				\
-- 	-DGIMPDIR=\""$(gimpdir)"\"				\
-- 	-DGIMP_PLUGIN_VERSION=\""$(GIMP_PLUGIN_VERSION)"\"	\
-- 	-I$(top_srcdir)						\
--diff --git a/configure.ac b/configure.ac
--index a88b7cc..d90b6db 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -2457,6 +2457,19 @@ fi
-- AM_CONDITIONAL(DESKTOP_DATADIR, test "x$with_desktop_dir" != xno)
-- AC_SUBST(DESKTOP_DATADIR)
-- 
--+######################
--+# Determine default CC
--+######################
--+
--+AC_ARG_WITH(default-cc, [ --with-default-cc="cmd" default CC to print in gimptool (default=CC)])
--+
--+if test "x$with_default_cc" != x; then
--+  DEFAULT_CC=$with_default_cc
--+else
--+  DEFAULT_CC=CC
--+fi
--+
--+AC_SUBST(DEFAULT_CC)
-- 
-- #####################
-- # Check for XML tools
--diff --git a/tools/Makefile.am b/tools/Makefile.am
--index 420b9b1..ccabde8 100644
----- a/tools/Makefile.am
--+++ b/tools/Makefile.am
--@@ -87,7 +87,7 @@ AM_CPPFLAGS = \
-- 	-DMANDIR=\""$(mandir)"\"				\
-- 	-DGIMPPLUGINDIR=\""$(gimpplugindir)"\"			\
-- 	-DGIMPDATADIR=\""$(gimpdatadir)"\"			\
---	-DCC=\""$(CC)"\"					\
--+	-DDEFAULT_CC=\""@DEFAULT_CC@"\"				\
-- 	-DGIMPDIR=\""$(gimpdir)"\"				\
-- 	-DGIMP_PLUGIN_VERSION=\""$(GIMP_PLUGIN_VERSION)"\"	\
-- 	-I$(top_srcdir)						\
--diff --git a/tools/gimptool.c b/tools/gimptool.c
--index 21fc043..bbf3fa5 100644
----- a/tools/gimptool.c
--+++ b/tools/gimptool.c
--@@ -280,7 +280,7 @@ find_out_env_flags (void)
--   else if (msvc_syntax)
--     env_cc = "cl -MD";
--   else
---    env_cc = CC;
--+    env_cc = DEFAULT_CC;
-- 
--   if (g_ascii_strncasecmp (env_cc, "cl", 2)    == 0 &amp;&amp;
--       g_ascii_strncasecmp (env_cc, "clang", 5) != 0)
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch
-deleted file mode 100644
-index cec0055284..0000000000
---- a/meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From c720df90dfe3a3e92e34bfb36a04cc792064a501 Mon Sep 17 00:00:00 2001
--From: Khem Raj &lt;<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;
--Date: Wed, 24 May 2023 22:39:02 -0700
--Subject: [PATCH] libtool: Do not add build time library paths to
-- LD_LIBRARY_PATH
--
--This does not serve much purpose on cross builds as it will add build
--time paths which are only useful when trying to run these tools from
--build area but when they are cross built this is not possible to run
--them like this.
--
--Upstream-Status: Inappropriate [Cross-compile specific]
--
--Signed-off-by: Khem Raj &lt;<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;
-----
-- ltmain.sh | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/ltmain.sh b/ltmain.sh
--index 134902c..068d74a 100644
----- a/ltmain.sh
--+++ b/ltmain.sh
--@@ -5748,7 +5748,7 @@ func_exec_program ()
-- 	if test yes = "$shlibpath_overrides_runpath" &amp;&amp; test -n "$shlibpath_var" &amp;&amp; test -n "$temp_rpath"; then
-- 	  $ECHO "\
--     # Add our own library path to $shlibpath_var
---    $shlibpath_var=\"$temp_rpath\$$shlibpath_var\"
--+    $shlibpath_var=\"$shlibpath_var\"
-- 
--     # Some systems cannot cope with colon-terminated $shlibpath_var
--     # The second colon is a workaround for a bug in BeOS R4 sed
---- 
--2.40.1
--
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weird-warning.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weird-warning.patch
-deleted file mode 100644
-index 4f04ac8250..0000000000
---- a/meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weird-warning.patch
-+++ /dev/null
-@@ -1,22 +0,0 @@
--From 51311f913d9f417d121f59b83d560c7b4b853d1c Mon Sep 17 00:00:00 2001
--From: Simon Budig &lt;<a href="mailto:simon@budig.de">simon@budig.de</a>&gt;
--Date: Sat, 20 May 2023 22:25:40 +0200
--Subject: [PATCH] metadata: shut up a weird warning
--
--Upstream-Status: Backport [<a href="https://gitlab.gnome.org/GNOME/gimp/-/commit/51311f913d9f417d121f59b83d560c7b4b853d1c">https://gitlab.gnome.org/GNOME/gimp/-/commit/51311f913d9f417d121f59b83d560c7b4b853d1c</a>]
--Signed-off-by: Khem Raj &lt;<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;
-----
-- plug-ins/metadata/metadata-editor.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
----- a/plug-ins/metadata/metadata-editor.c
--+++ b/plug-ins/metadata/metadata-editor.c
--@@ -2140,7 +2140,7 @@ metadata_dialog_editor_set_metadata (GEx
--                             }
--                           else
--                             {
---                              if (! g_strv_contains (values, equiv_values[evi]))
--+                              if (! g_strv_contains ((const gchar * const *) values, equiv_values[evi]))
--                                 {
--                                   gchar *tmpvalue;
-- 
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reproducibility-fix.patch b/meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reproducibility-fix.patch
+diff --git a/meta-oe/recipes-support/gpm/gpm/0002-Fix-function-definition-in-yacc-source-file-until-va.patch b/meta-oe/recipes-support/gpm/gpm/0002-Fix-function-definition-in-yacc-source-file-until-va.patch
 new file mode 100644
-index 0000000000..532715d588
+index 0000000000..4534de9be4
 --- /dev/null
-+++ b/meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reproducibility-fix.patch
-@@ -0,0 +1,56 @@
-+From bf19c5687703769e406a8086036d4ed6421c33cb Mon Sep 17 00:00:00 2001
-+From: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
-+Date: Mon, 13 Jan 2025 10:04:33 +0100
-+Subject: [PATCH] meson.build: reproducibility fix
++++ b/meta-oe/recipes-support/gpm/gpm/0002-Fix-function-definition-in-yacc-source-file-until-va.patch
+@@ -0,0 +1,81 @@
++From 155873ed357a94f06e7e7032e27acba58bba8214 Mon Sep 17 00:00:00 2001
++From: NHOrus <jy6x2b32pie9@yahoo.com>
++Date: Tue, 11 Feb 2025 19:01:48 +0400
++Subject: [PATCH 2/3] Fix function definition in yacc source file until valid
++ C23. Fill empty argument lists with values. Add 0 as third argument for
++ two-argument function, it will be ignored at call site.
 +
-+Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
-+
-+Upstream-Status: Inappropriate [oe-specific]
++Upstream-Status: Submitted [https://github.com/telmich/gpm/pull/49]
++Signed-off-by: mark.yang <mark.yang@lge.com>
 +---
-+ meson.build | 28 ++++++++++++++--------------
-+ 1 file changed, 14 insertions(+), 14 deletions(-)
++ src/prog/gpm-root.y | 14 +++++++-------
++ 1 file changed, 7 insertions(+), 7 deletions(-)
 +
-+diff --git a/meson.build b/meson.build
-+index 97cd621780..e47180db87 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -1599,23 +1599,23 @@ conf.set('HAVE_FUNC_ATTRIBUTE_DESTRUCTOR',
-+ conf.set_quoted('CC',             cc.get_id())
++diff --git a/src/prog/gpm-root.y b/src/prog/gpm-root.y
++index 800e51b..f06872c 100644
++--- a/src/prog/gpm-root.y
+++++ b/src/prog/gpm-root.y
++@@ -128,7 +128,7 @@ typedef struct DrawItem {
++    char *name;
++    char *arg;   /* a cmd string */
++    void *clientdata;  /* a (Draw *) for menus or whatever   */
++-   int (*fun)();
+++   int (*fun)(int, struct DrawItem *, int);
++    struct DrawItem *next;
++ } DrawItem;
 + 
-+ cc_version=''
-+-if cc.get_id() == 'gcc' or cc.get_id() == 'clang'
-+-  cc_cmd = run_command(cc, '-v', check: false)
-++#if cc.get_id() == 'gcc' or cc.get_id() == 'clang'
-++#  cc_cmd = run_command(cc, '-v', check: false)
-+   # Note: the call might actually fail when using ccache.
-+   # See: <a href="https://github.com/mesonbuild/meson/issues/6174">https://github.com/mesonbuild/meson/issues/6174</a>
-+-  if cc_cmd.returncode() == 0
-+-    cc_version = cc_cmd.stdout() + cc_cmd.stderr()
-+-  endif
-+-else
-++#  if cc_cmd.returncode() == 0
-++#    cc_version = cc_cmd.stdout() + cc_cmd.stderr()
-++#  endif
-++#else
-+   # Various compilers have various options. Try most common ones. This
-+   # list of options comes from autotools checks.
-+-  foreach arg : [ '--version', '-v', '-V', '-qversion' ]
-+-    cc_cmd = run_command(cc, arg, check: false)
-+-    if cc_cmd.returncode() == 0
-+-      cc_version = cc_cmd.stdout()
-+-    endif
-+-  endforeach
-+-endif
-++#  foreach arg : [ '--version', '-v', '-V', '-qversion' ]
-++#    cc_cmd = run_command(cc, arg, check: false)
-++#    if cc_cmd.returncode() == 0
-++#      cc_version = cc_cmd.stdout()
-++#    endif
-++#  endforeach
-++#endif
-+ if cc_version == ''
-+   # We didn't manage to get a meaningful verbose version from the
-+   # compiler. Just save its name and version.
-+-- 
-+2.47.1
++@@ -159,7 +159,7 @@ int yyerror(char *s);
++ int yylex(void);
++ 
++ DrawItem *cfg_cat(DrawItem *, DrawItem *);
++-DrawItem *cfg_makeitem(int mode, char *msg, int(*fun)(), void *detail);
+++DrawItem *cfg_makeitem(int mode, char *msg, int(*fun)(int,  DrawItem *, int), void *detail);
++ 
++ 
++ /*===================================================================*
++@@ -195,7 +195,7 @@ int f_pipe(int mode, DrawItem *self, int uid);
++       char *string;
++       Draw *draw;
++       DrawItem *item;
++-      int (*fun)();
+++      int (*fun)(int,  DrawItem *, int);
++       }
++ 
++ %token <string> T_STRING
++@@ -284,7 +284,7 @@ struct tokenName tokenList[] = {
++ struct funcName {
++    char *name;
++    int token;
++-   int (*fun)();
+++   int (*fun)(int,  DrawItem *, int);
++    };
++ struct funcName funcList[] = {
++    {"f.debug",T_FUNC,f_debug},
++@@ -390,7 +390,7 @@ Draw *cfg_alloc(void)
++ 
++ /*---------------------------------------------------------------------*/
++ /* malloc an empty DrawItem and fill it */
++-DrawItem *cfg_makeitem(int mode, char *msg, int(*fun)(), void *detail)
+++DrawItem *cfg_makeitem(int mode, char *msg, int(*fun)(int,  DrawItem *, int), void *detail)
++ {
++    DrawItem *new=calloc(1,sizeof(DrawItem));
++ 
++@@ -405,7 +405,7 @@ DrawItem *cfg_makeitem(int mode, char *msg, int(*fun)(), void *detail)
++ 
++       case 'F': /* a function without args */
++          new->fun=fun;
++-         if (fun) fun(F_CREATE,new);
+++         if (fun) fun(F_CREATE,new,0);
++          break;
++ 
++       case 'M':
++@@ -1047,7 +1047,7 @@ Posted *postmenu(int fd, FILE *f, Draw *draw, int x, int y, int console)
++    }
++    /* sides and items */
++    for (item=draw->menu; y++, item; item=item->next) {
++-         if (item->fun) (*(item->fun))(F_POST,item);
+++         if (item->fun) (*(item->fun))(F_POST,item,0);
++          GOTO(x,y); PUTC(VERLINE,draw->bord,draw->back);
++          for (i=0;i<item->pad;i++) PUTC(' ',draw->fore,draw->back);
++          PUTS(item->name,draw->fore,draw->back); i+=strlen(item->name);
 +
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb b/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
-deleted file mode 100644
-index 0272e05e96..0000000000
---- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
-+++ /dev/null
-@@ -1,101 +0,0 @@
--SUMMARY = "The GIMP is the GNU Image Manipulation Program"
--HOMEPAGE = "<a href="http://www.gimp.org">http://www.gimp.org</a>"
--SECTION = "x11/graphics"
--LICENSE = "GPL-3.0-only"
--LIC_FILES_CHKSUM = "<a href="file://COPYING;md5=c678957b0c8e964aa6c70fd77641a71e" "="">file://COPYING;md5=c678957b0c8e964aa6c70fd77641a71e"</a>
--
--DEPENDS = " \
--    alsa-lib \
--    atk \
--    cairo \
--    fontconfig \
--    freetype \
--    gdk-pixbuf-native \
--    intltool-native \
--    libxslt-native \
--    gegl-native \
--    dbus-glib \
--    gtk+ \
--    babl \
--    gegl \
--    libmypaint \
--    mypaint-brushes-1.0 \
--    gexiv2 \
--    jpeg \
--    libmng \
--    libpng \
--    libexif \
--    tiff \
--    lcms \
--    poppler \
--    poppler-data \
--    jasper \
--    bzip2 \
--    libgudev \
--    libmng \
--    <a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('DISTRO_FEATURES', 'x11', 'libxmu libxpm', '', d)} \
--"
--DEPENDS:append:libc-musl = " libexecinfo"
--
--GNOMEBASEBUILDCLASS = "autotools"
--inherit features_check gnomebase gtk-icon-cache gtk-doc mime-xdg
--
--REQUIRED_DISTRO_FEATURES = "x11"
--
--SHPV = "${@gnome_verdir("${PV}")}"
--
--SRC_URI = "<a href="https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2">https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2</a> \
--           <a href="file://0001-configure-Keep-first-line-of-compiler-version-string.patch">file://0001-configure-Keep-first-line-of-compiler-version-string.patch</a> \
--           <a href="file://0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch">file://0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch</a> \
--           <a href="file://0001-file-tiff-load-fix-mismatching-variable-type.patch">file://0001-file-tiff-load-fix-mismatching-variable-type.patch</a> \
--           <a href="file://0001-metadata-shut-up-a-weird-warning.patch">file://0001-metadata-shut-up-a-weird-warning.patch</a> \
--           <a href="file://0001-gimptool-allow-default-CC-override.patch">file://0001-gimptool-allow-default-CC-override.patch</a> \
--           "
--SRC_URI[sha256sum] = "50a845eec11c8831fe8661707950f5b8446e35f30edfb9acf98f85c1133f856e"
--
--EXTRA_OECONF = "--disable-python \
--                --without-webkit \
--                --disable-check-update \
--                --without-wmf"
--
--EXTRA_OECONF += "<a href="mailto:${@oe.utils.conditional">${@oe.utils.conditional</a>('SITEINFO_BITS', '32', ' --disable-vector-icons', '', d)}"
--
--do_configure:append() {
--    find ${B} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
--    find ${B} -name Makefile | xargs sed -i s:'-I/usr/include':'-I${STAGING_INCDIR}':g
--}
--
--do_compile:prepend() {
--    # Let native babl/gegl find their plugins
--    export BABL_PATH=`find ${STAGING_LIBDIR_NATIVE} -maxdepth 1 -name 'babl-*'`
--    export GEGL_PATH=`find ${STAGING_LIBDIR_NATIVE} -maxdepth 1 -name 'gegl-*'`
--}
--
--FILES:${PN}  += "${datadir}/metainfo"
--
--RDEPENDS:${PN} += "mypaint-brushes-1.0"
--
--
--# gimptool
--
--# gimptool needs a CC definition, use current CC without sysroot
--python __anonymous() {
--    import shlex
--    CC_WITHOUT_SYSROOT = shlex.join(filter(lambda x: not x.startswith("--sysroot="), shlex.split(d.getVar("CC"))))
--    d.setVar("CC_WITHOUT_SYSROOT", CC_WITHOUT_SYSROOT)
--}
--EXTRA_OECONF += "--with-default-cc='${CC_WITHOUT_SYSROOT}'"
--
--# Split gimptool in its own package
--PACKAGE_BEFORE_PN += "${PN}-gimptool"
--FILES:${PN}-gimptool += "${bindir}/gimptool-2.0"
--
--# gimptool depends on gimp .pc file being installed and tools to build the plugin.
--RDEPENDS:${PN}-gimptool += "${PN}-dev packagegroup-core-buildessential"
--INSANE_SKIP:${PN}-gimptool += "dev-deps"
--
--
--CVE_STATUS[CVE-2007-3741] = "not-applicable-platform: This only applies for Mandriva Linux"
--CVE_STATUS[CVE-2009-0581] = "cpe-incorrect: The current version (2.10.38) is not affected."
--CVE_STATUS[CVE-2009-0723] = "cpe-incorrect: The current version (2.10.38) is not affected."
--CVE_STATUS[CVE-2009-0733] = "cpe-incorrect: The current version (2.10.38) is not affected."
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb b/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb
+diff --git a/meta-oe/recipes-support/gpm/gpm/0003-Add-incomplete-type-definition-for-WINDOW-in-Gpm_Wge.patch b/meta-oe/recipes-support/gpm/gpm/0003-Add-incomplete-type-definition-for-WINDOW-in-Gpm_Wge.patch
 new file mode 100644
-index 0000000000..6aa267d050
+index 0000000000..0913c809c8
 --- /dev/null
-+++ b/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb
-@@ -0,0 +1,130 @@
-+SUMMARY = "The GIMP is the GNU Image Manipulation Program"
-+HOMEPAGE = "<a href="http://www.gimp.org">http://www.gimp.org</a>"
-+SECTION = "graphics"
-+LICENSE = "GPL-3.0-only"
-+LIC_FILES_CHKSUM = "<a href="file://COPYING;md5=c678957b0c8e964aa6c70fd77641a71e" "="">file://COPYING;md5=c678957b0c8e964aa6c70fd77641a71e"</a>
++++ b/meta-oe/recipes-support/gpm/gpm/0003-Add-incomplete-type-definition-for-WINDOW-in-Gpm_Wge.patch
+@@ -0,0 +1,37 @@
++From d8224863233ae64310a1ee91b9f4e77daf9cfd10 Mon Sep 17 00:00:00 2001
++From: NHOrus <jy6x2b32pie9@yahoo.com>
++Date: Sat, 22 Feb 2025 01:12:32 +0400
++Subject: [PATCH 3/3] Add incomplete type definition for WINDOW in Gpm_Wgetch()
 +
-+DEPENDS = " \
-+    appstream-glib \
-+    atk \
-+    babl \
-+    bzip2 \
-+    bison-native \
-+    cairo \
-+    fontconfig \
-+    freetype \
-+    gdk-pixbuf-native \
-+    gegl \
-+    gexiv2 \
-+    glib-2.0 \
-+    glib-2.0-native \
-+    gtk+3 \
-+    harfbuzz \
-+    iso-codes \
-+    jpeg \
-+    json-glib \
-+    lcms \
-+    libarchive \
-+    libexif \
-+    libmypaint \
-+    libpng \
-+    librsvg \
-+    librsvg-native \
-+    libxmu \
-+    libxslt-native \
-+    mypaint-brushes-1.0 \
-+    pango \
-+    poppler \
-+    poppler-data \
-+    python3-pygobject-native \
-+    tiff \
-+    xz \
-+    zlib \
-+"
++Window handle is an opaque pointer that Gpm_Wgetch() passes
++through straight to ncurses if it's not null and calls getch
++if it's null. Code doesn't care what's inside the handle
++as long as it agrees with curses definition.
 +
-+DEPENDS:append:libc-musl = " libexecinfo"
++Upstream-Status: Submitted [https://github.com/telmich/gpm/pull/49]
++Signed-off-by: mark.yang <mark.yang@lge.com>
++---
++ src/headers/gpm.h | 9 ++++++++-
++ 1 file changed, 8 insertions(+), 1 deletion(-)
 +
-+inherit meson gtk-icon-cache mime-xdg pkgconfig gettext gobject-introspection vala
++diff --git a/src/headers/gpm.h b/src/headers/gpm.h
++index fe52e53..b944d4b 100644
++--- a/src/headers/gpm.h
+++++ b/src/headers/gpm.h
++@@ -268,7 +268,14 @@ Gpm_Roi * Gpm_LowerRoi(Gpm_Roi *which, Gpm_Roi *after);
++ /* libcurses.c */
++ /* #include <curses.h>  Hmm... seems risky */
++ 
++-extern int Gpm_Wgetch();
+++/* Window handle is an opaque pointer that Gpm_Wgetch()
+++ * passes through to ncurses if it's not null and calls getch
+++ * if it's null. Code doesn't care what's inside the handle
+++ * as long as it agrees with curses definition.
+++*/
+++typedef struct _win_st WINDOW;
+++
+++extern int Gpm_Wgetch(WINDOW *);
++ #define Gpm_Getch() (Gpm_Wgetch(NULL))
++ 
++ /* libxtra.c */
 +
-+GIR_MESON_OPTION = 'can-crosscompile-gir'
-+VALA_MESON_OPTION = "vala"
-+VALA_MESON_ENABLE_FLAG = "enabled"
-+VALA_MESON_DISABLE_FLAG = "disabled"
-+GIDOCGEN_MESON_OPTION = "gi-docgen"
-+GIDOCGEN_MESON_ENABLE_FLAG = "enabled"
-+GIDOCGEN_MESON_DISABLE_FLAG = "disabled"
-+
-+SRC_URI = "<a href="https://download.gimp.org/gimp/v${@oe.utils.trim_version('${PV">https://download.gimp.org/gimp/v${@oe.utils.trim_version('${PV</a>}', 2)}/gimp-${PV}.tar.xz"
-+SRC_URI += "<a href="file://0001-gimp-cross-compile-fix-for-bz2.patch" "="">file://0001-gimp-cross-compile-fix-for-bz2.patch"</a>
-+SRC_URI += "<a href="file://0002-meson.build-reproducibility-fix.patch" "="">file://0002-meson.build-reproducibility-fix.patch"</a>
-+SRC_URI[sha256sum] = "546ddc30cb2d0e79123c7fcb4d78211e1ee7a6aace91a6a0ad8cbcbf6ea571a2"
-+
-+PACKAGECONFIG[aa] = "-Daa=enabled,-Daa=disabled,aalib"
-+PACKAGECONFIG[alsa] = "-Dalsa=enabled,-Dalsa=disabled,alsa-lib"
-+PACKAGECONFIG[appdata-test] = "-Dappdata-test=enabled,-Dappdata-test=disabled,appstream-glib-native"
-+PACKAGECONFIG[cairo-pdf] = "-Dcairo-pdf=enabled,-Dcairo-pdf=disabled"
-+PACKAGECONFIG[check-update] = "-Dcheck-update=yes,-Dcheck-update=no"
-+PACKAGECONFIG[ghostscript] = "-Dghostscript=enabled,-Dghostscript=disabled,ghostscript,ghostscript"
-+PACKAGECONFIG[gudev] = "-Dgudev=enabled,-Dgudev=disabled,libgudev"
-+PACKAGECONFIG[heif] = "-Dheif=enabled,-Dheif=disabled,libheif"
-+PACKAGECONFIG[javascript] = "-Djavascript=enabled,-Djavascript=disabled,,gjs"
-+PACKAGECONFIG[jpeg2000] = "-Djpeg2000=enabled,-Djpeg2000=disabled,jasper"
-+PACKAGECONFIG[jpeg-xl] = "-Djpeg-xl=enabled,-Djpeg-xl=disabled,libjxl"
-+PACKAGECONFIG[libunwind] = "-Dlibunwind=true,-Dlibunwind=false,libunwind"
-+PACKAGECONFIG[libbacktrace] = "-Dlibbacktrace=true,-Dlibbacktrace=false,libbacktrace"
-+PACKAGECONFIG[lua] = "-Dlua=true,-Dlua=false,,luajit lua-lgi"
-+PACKAGECONFIG[mng] = "-Dmng=enabled,-Dmng=disabled,libmng"
-+PACKAGECONFIG[openmp] = "-Dopenmp=enabled,-Dopenmp=disabled,gcc-runtime"
-+PACKAGECONFIG[vector-icons] = "-Dvector-icons=true,-Dvector-icons=false,librsvg shared-mime-info"
-+PACKAGECONFIG[webp] = "-Dwebp=enabled,-Dwebp=disabled,libwebp"
-+PACKAGECONFIG[xcursor] = "-Dxcursor=enabled,-Dxcursor=disabled,libxcursor"
-+PACKAGECONFIG[x11] = "-Dxpm=enabled,-Dxpm=disabled,libxpm libxext libxfixes"
-+
-+PACKAGECONFIG ?= " \
-+    alsa \
-+    cairo-pdf \
-+    ghostscript \
-+    gudev \
-+    javascript \
-+    jpeg2000 \
-+    jpeg-xl \
-+    lua \
-+    mng \
-+    webp \
-+    <a href="mailto:${@oe.utils.conditional">${@oe.utils.conditional</a>('SITEINFO_BITS', '32', '', 'vector-icons', d)} \
-+    <a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('LICENSE_FLAGS_ACCEPTED', 'commercial', 'heif', '', d)} \
-+    <a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('DISTRO_FEATURES', 'x11', 'x11 xcursor', '', d)} \
-+"
-+
-+PACKAGECONFIG:remove:riscv32 = "lua"
-+PACKAGECONFIG:remove:riscv64 = "lua"
-+PACKAGECONFIG:remove:powerpc64 = "lua"
-+PACKAGECONFIG:remove:powerpc64le = "lua"
-+
-+EXTRA_OEMESON += " \
-+    -Dshmem-type=posix \
-+    -Dlinux-input=enabled \
-+    --buildtype release \
-+    --cross-file=${WORKDIR}/meson-${PN}.cross \
-+"
-+
-+do_write_config:append() {
-+    cat &gt;${WORKDIR}/meson-${PN}.cross &lt;&lt;EOF
-+[binaries]
-+gjs = '${bindir}/gjs'
-+luajit = '${bindir}/luajit'
-+EOF
-+}
-+
-+do_configure:append () {
-+    sed -i -e "s|build_by_default: true|build_by_default: false|" ${S}/gimp-data/images/meson.build
-+}
-+
-+do_install:prepend() {
-+    sed -i -e "s|${B}||" ${B}/app/widgets/gimplanguagestore-data.h
-+    sed -i -e "s|${B}||" ${B}/plug-ins/file-bmp/huffman.h
-+}
-+
-+FILES:${PN} += "${datadir}/metainfo"
-+
-+RDEPENDS:${PN} = "mypaint-brushes-1.0 glib-networking python3-pygobject"
-<div>-- 
-</div>2.49.0
-
-</div><div class="plaintext" style="white-space: break-spaces;">
--=-=-=-=-=-=-=-=-=-=-=-
-Links: You receive all messages sent to this group.
-View/Reply Online (#116313): <a href="https://lists.openembedded.org/g/openembedded-devel/message/116313">https://lists.openembedded.org/g/openembedded-devel/message/116313</a>
-Mute This Topic: <a href="https://lists.openembedded.org/mt/111931389/3618223">https://lists.openembedded.org/mt/111931389/3618223</a>
-Group Owner: <a href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
--=-=-=-=-=-=-=-=-=-=-=-
-
-</div></blockquote></div>
---=-AeADw7lk0bHIgzrPElyF--
+diff --git a/meta-oe/recipes-support/gpm/gpm_git.bb b/meta-oe/recipes-support/gpm/gpm_git.bb
+index a066488649..a379065912 100644
+--- a/meta-oe/recipes-support/gpm/gpm_git.bb
++++ b/meta-oe/recipes-support/gpm/gpm_git.bb
+@@ -15,6 +15,9 @@ DEPENDS = "ncurses bison-native"
+ SRC_URI = "git://github.com/telmich/gpm;protocol=https;branch=master \
+            file://init \
+            file://gpm.service.in \
++           file://0001-Avoid-shadowing-ncurses-functions.patch \
++           file://0002-Fix-function-definition-in-yacc-source-file-until-va.patch \
++           file://0003-Add-incomplete-type-definition-for-WINDOW-in-Gpm_Wge.patch \
+            "
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.34.1
 
 
