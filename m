@@ -1,739 +1,762 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 13EEFC3600E
-	for <webhook@archiver.kernel.org>; Thu, 27 Mar 2025 04:50:26 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web11.42839.1743051020632875410
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3104EC3600B
+	for <webhook@archiver.kernel.org>; Thu, 27 Mar 2025 05:14:16 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web11.43053.1743052446803526843
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Mar 2025 21:50:20 -0700
+ Wed, 26 Mar 2025 22:14:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=e0XX7fwI;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2260c915749so8851315ad.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Mar 2025 21:50:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1743051020; x=1743655820; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=xmhQbG26NLNzE+gVZbiIlCU51Ohv3lBZq62tEeg0Kq8=;
-        b=e0XX7fwIzjOx1EoAOXQOSCJZHrWAHDFnmiImO9lslKR3EliFUjOGDdoQfL2Ndak9r4
-         o5CwkX1vViVmthJKnDyMP0Jz91qHU2VKlI6VFDV7gCNow6FRJNqCXp1U0ee7Huzs+G6s
-         TfWbyFNpPwFVkzK0xxjCXuT9xQ9ccqNADo2JXwmaMMwATMhwFtP1Yw6nLh9WOFF/+pFR
-         uFgww8SbyDhDgknk6kft6TM9G3dcInkSmS/BOcpjl5QdktjZlZpCimYVaQ15Hn062Y+x
-         KXVffuQrkronZYT+wbb4FFz/aaB+5rCVh/hlYyte4OC8Nyt5KNohb8hegBIX3ofIn60l
-         /vAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743051020; x=1743655820;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=xmhQbG26NLNzE+gVZbiIlCU51Ohv3lBZq62tEeg0Kq8=;
-        b=Xc0Ao32Yl8LhlD40bEkvj6PEhk2c4PoAnFeYuATBBuUNgwL/R2by9v0Hv0xrsUNox5
-         vPKcxf/Rh8K2uUdlA3N0QkWnJJE8ghAzSdFwGuxanfhs02wZ8+5kTUc7p7H1lYjXx/KX
-         NKXuqmLNnfNFJsBjCh+k6KPROhzRUomZ72z/W+LxHuV3keZ2+HCZd5bMBoeNfpPsVFDS
-         MKRc/+BfyPdH2Q1tjUdCADLiVhYZgKvpvEZyD4596w9IPanO1mKG1fiJvoKMDJSUtDtz
-         L3akpV4OJGcJrASTJv+qhuSkhS+LEFTd/gMpg9NUEj/Ois6lLMEv9K1Zvkvvv0tqFjZ8
-         8d5g==
-X-Gm-Message-State: AOJu0YyeyVBoCZH4dK9mTJrktodE9BRHJ3JOJKdyJABSIlbdQVox9tHT
-	hWnThcP/3S/59AR+5ErRXwgyZH+T4vcqUtqdMbEKB0kKbG0tU+0jXmeBwUqQ
-X-Gm-Gg: ASbGncuLkB3KiThBMuYdg1ZJnJ6ROQl55lIl7xZbWQte2ptdrNLaQfMLaWdVldFuxt+
-	jUbabT3fkey/oXA3OUGQ+Dp/6Gf5pkXyH29XC7R0DhXjNAFem8HAkYQcwUdTAkdtyngVVcrbRQE
-	J93uAQ+oZw9KEz4+iR8VpmcXXttxxi1M50elRnutHjLP72g5vQDHqQh5iB712qaTUS1XqewlxHg
-	4fNGyYL8Alhwi3ih4U5P7dngnsuHkCa+zBQAq+TikTrPU7tUb2dDniAksqYYfco8dKlPO+SPF6A
-	p7buXvlj1qXmrsXvotxesnG/U+SSLfIr5wpo
-X-Google-Smtp-Source: AGHT+IH5csPlC+QFbAwdLgzV2GbpSDDeVUAEwmXBWtt7LtRiMA0TUShKCJmO4ihwQJ32MMERs6z2OA==
-X-Received: by 2002:a05:6a21:6b01:b0:1f5:58be:b1e9 with SMTP id adf61e73a8af0-1fea2d2f26dmr4268866637.4.1743051019189;
-        Wed, 26 Mar 2025 21:50:19 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:8201:fd20::f147])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-af8a2a233a8sm11829737a12.52.2025.03.26.21.50.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Mar 2025 21:50:18 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd84.aul.t-online.de (fwd84.aul.t-online.de [10.223.144.110])
+	by mailout03.t-online.de (Postfix) with SMTP id DD64E2FA
+	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Mar 2025 06:13:36 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.173.104]) by fwd84.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1txfYd-10jLkH0; Thu, 27 Mar 2025 06:13:35 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/2] Revert "jq: fix build with gcc-15"
-Date: Wed, 26 Mar 2025 21:50:15 -0700
-Message-ID: <20250327045016.3672121-1-raj.khem@gmail.com>
+Subject: [meta-gnome][PATCHv3] gimp: update 2.10.38 - 3.0.2
+Date: Thu, 27 Mar 2025 06:14:16 +0100
+Message-ID: <20250327051416.3016143-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1743052415-B6FFA927-E1DBE9FC/10/3626336762 SUSPECT URL
+X-TOI-MSGID: e2a3df72-caa3-4492-8cfc-9e01b0e0cac3
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Mar 2025 04:50:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116311
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Mar 2025 05:14:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116313
 
-This reverts commit ec9a5598e48f1e4dad8f59e8a49bfe6657bc2284.
+                   ------------------------------
+                   GNU Image Manipulation Program
+                         Development Branch
+                   ------------------------------
+
+Overview of Changes from GIMP 3.0.0 to GIMP 3.0.2
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+This is a bug-fix only release.
+
+Core:
+
+  - Mark some strings translatable.
+  - Fix crash when choosing a brush in grid view.
+  - Windows: temporary revert of some Input Device handling code which
+    was breaking pressure sensitivity for some graphics tablets (though
+    this revert may make issues with the eraser tip).
+  - Fix crash when choosing a non-existing font in text tool options.
+
+Tools:
+
+  - Reorder Line Art Detection options per design decision.
+
+Graphical User Interface:
+
+  - Keep headerbar color consistent when out of focus.
+  - Histogram uses the luminance value of the foreground color as a
+    threshold to lighten or darken the border color for contrast with
+    the histogram itself.
+  - Improve separation between panels in dark theme.
+  - Add default response for GimpQueryBox dialogues.
+  - Spacing between toolbox widgets improved.
+  - GimpSpinScale slider colors inverted.
+  - New icons: "gimp-toggle-on" and "gimp-toggle-off" and using them in
+    the Search Action's list as icons for toggle actions.
+
+Plug-ins:
+
+  - Python Console uses the luminance of the background color for error
+    text.
+  - Metadata Editor: fix buffer overflow.
+  - Gradient Flare: fix crash when setting the size to 0.
+  - Screenshot: X11 implementation is bypassed (in favor of portals)
+    when running on XWayland.
+
+Build:
+
+  - Various packaging fixes and cleanup.
+  - The Windows installer now prompts (only in user installation) about
+    deleting GIMP config files when uninstalling.
+  - GEGL 0.4.58 is now our minimum requirement.
+  - Windows installer: create Restore Point on system-wide install.
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- ...c-fix-build-with-Woverlength-strings.patch | 215 ---------------
- ...-add-and-use-LIBM_DA-and-LIBM_DA_NO-.patch | 164 ------------
- ...eck-builtin-cfunctions-in-function_l.patch | 249 ------------------
- meta-oe/recipes-devtools/jq/jq_1.7.1.bb       |   3 -
- 4 files changed, 631 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/jq/jq/0001-builtin.c-fix-build-with-Woverlength-strings.patch
- delete mode 100644 meta-oe/recipes-devtools/jq/jq/0002-libm.h-builtin.c-add-and-use-LIBM_DA-and-LIBM_DA_NO-.patch
- delete mode 100644 meta-oe/recipes-devtools/jq/jq/0003-builtin.c-typecheck-builtin-cfunctions-in-function_l.patch
+ ...irst-line-of-compiler-version-string.patch |  30 ----
+ ...f-load-fix-mismatching-variable-type.patch |  24 ----
+ .../0001-gimp-cross-compile-fix-for-bz2.patch |  30 ++++
+ ...1-gimptool-allow-default-CC-override.patch |  85 ------------
+ ...dd-build-time-library-paths-to-LD_LI.patch |  34 -----
+ ...001-metadata-shut-up-a-weird-warning.patch |  22 ---
+ ...0002-meson.build-reproducibility-fix.patch |  56 ++++++++
+ meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb  | 101 --------------
+ meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb    | 130 ++++++++++++++++++
+ 9 files changed, 216 insertions(+), 296 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep=
+-first-line-of-compiler-version-string.patch
+ delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load=
+-fix-mismatching-variable-type.patch
+ create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-com=
+pile-fix-for-bz2.patch
+ delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow=
+-default-CC-override.patch
+ delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not=
+-add-build-time-library-paths-to-LD_LI.patch
+ delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-=
+up-a-weird-warning.patch
+ create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-re=
+producibility-fix.patch
+ delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
+ create mode 100644 meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb
 
-diff --git a/meta-oe/recipes-devtools/jq/jq/0001-builtin.c-fix-build-with-Woverlength-strings.patch b/meta-oe/recipes-devtools/jq/jq/0001-builtin.c-fix-build-with-Woverlength-strings.patch
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-=
+line-of-compiler-version-string.patch b/meta-gnome/recipes-gimp/gimp/gimp=
+/0001-configure-Keep-first-line-of-compiler-version-string.patch
 deleted file mode 100644
-index cd7cdba00c..0000000000
---- a/meta-oe/recipes-devtools/jq/jq/0001-builtin.c-fix-build-with-Woverlength-strings.patch
+index 618b4cc7a7..0000000000
+--- a/meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-line-of=
+-compiler-version-string.patch
 +++ /dev/null
-@@ -1,215 +0,0 @@
--From 8707f8764dfc470d1974eb1d613f5a4bec3610ac Mon Sep 17 00:00:00 2001
--From: Emanuele Torre <torreemanuele6@gmail.com>
--Date: Fri, 26 Jan 2024 04:42:11 +0100
--Subject: [PATCH] builtin.c: fix build with -Woverlength-strings
+@@ -1,30 +0,0 @@
+-From 5711ccfab40e304ced7f5be39a4083e3fcecff91 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 24 May 2023 22:22:41 -0700
+-Subject: [PATCH] configure: Keep first line of compiler version string
 -
--C99 only allows string literals long at most 4095 characters.
--jq_builtins was a lot longer than that.
+-Full output of cc -v may contain additional information which could
+-contain build path information, which is unnessasary
 -
--I rewrote all the optional libm error stubs in C so the value of
--jq_builtins is not build dependent.
--
--I replaced the command that generates builtin.inc with a POSIX compliant
--od|sed command that encodes builtin.jq as a comma delimited list of
--octal numbers (that can be embedded in C using a {} literal).
--
--I also added -Woverlength-strings to AM_CFLAGS to verify that the
--problem is fixed.
--
--Fixes #1481
--Upstream-Status: Backport [605836b builtin.c: fix build with -Woverlength-strings]
--Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+-Upstream-Status: Submitted [https://gitlab.gnome.org/GNOME/gimp/-/merge_=
+requests/926]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
+- configure.ac | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
 -
-- Makefile.am   | 10 ++++--
-- src/builtin.c | 86 ++++++++++++++++++++++++---------------------------
-- 2 files changed, 48 insertions(+), 48 deletions(-)
+-diff --git a/configure.ac b/configure.ac
+-index c25415d..68707a0 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -599,7 +599,7 @@ fi
+- for CC_VERSION_OPT in $CC_VERSION_OPTS; do
+-   # We run $CC, and escape and format its output, in a single step,
+-   # since some shells expand escape sequences in "echo" arguments.
+--  CC_VERSION=3D"`$CC $CC_VERSION_OPT 2>&1 | sed -e 's/\\\\/\\\\\\\\\\\\=
+\\\\/g;s/^/\\\\t/;s/$/\\\\n/' | tr -d '\n'`"
+-+  CC_VERSION=3D"`$CC $CC_VERSION_OPT 2>&1 | head -1 | sed -e 's/\\\\/\\=
+\\\\\\\\\\\\\\/g;s/^/\\\\t/;s/$/\\\\n/' | tr -d '\n'`"
+-   if test $? -eq 0; then
+-     break
+-   fi
+---=20
+-2.40.1
 -
--diff --git a/Makefile.am b/Makefile.am
--index 76e35df..f1f9f2e 100644
----- a/Makefile.am
--+++ b/Makefile.am
--@@ -19,7 +19,8 @@ LIBJQ_SRC = src/builtin.c src/bytecode.c src/compile.c src/execute.c    \
-- 
-- ### C build options
-- 
---AM_CFLAGS = -Wextra -Wall -Wno-unused-parameter -Wno-unused-function
--+AM_CFLAGS = -Wextra -Wall -Wno-unused-parameter -Wno-unused-function \
--+            -Woverlength-strings
-- 
-- if WIN32
-- AM_CFLAGS += -municode
--@@ -119,7 +120,12 @@ src/main.c: src/version.h src/config_opts.inc
-- 
-- src/builtin.inc: $(srcdir)/src/builtin.jq
-- 	mkdir -p src
---	$(AM_V_GEN) sed -e 's/\\/\\\\/g' -e 's/"/\\"/g' -e 's/^/"/' -e 's/$$/\\n"/' $(srcdir)/src/builtin.jq > $@
--+	$(AM_V_GEN) od -v -A n -t o1 -- $< | \
--+	sed -e 's/$$/ /' \
--+	    -e 's/\([0123456789]\) /\1, /g' \
--+	    -e 's/ $$//' \
--+	    -e 's/ 0/  0/g' \
--+	    -e 's/ \([123456789]\)/ 0\1/g' > $@
-- src/builtin.o: src/builtin.inc
-- 
-- CLEANFILES = src/version.h .remake-version-h src/builtin.inc src/config_opts.inc
--diff --git a/src/builtin.c b/src/builtin.c
--index 902490d..a3ce7e4 100644
----- a/src/builtin.c
--+++ b/src/builtin.c
--@@ -155,7 +155,11 @@ static jv f_ ## name(jq_state *jq, jv input) { \
--   jv_free(input); \
--   return ret; \
-- }
---#define LIBM_DD_NO(name)
--+#define LIBM_DD_NO(name) \
--+static jv f_ ## name(jq_state *jq, jv input) { \
--+  jv error = jv_string("Error: " #name "/0 not found at build time"); \
--+  return ret_error(input, error); \
--+}
-- 
-- #define LIBM_DDD(name) \
-- static jv f_ ## name(jq_state *jq, jv input, jv a, jv b) { \
--@@ -173,7 +177,12 @@ static jv f_ ## name(jq_state *jq, jv input, jv a, jv b) { \
--   jv_free(b); \
--   return ret; \
-- }
---#define LIBM_DDD_NO(name)
--+#define LIBM_DDD_NO(name) \
--+static jv f_ ## name(jq_state *jq, jv input, jv a, jv b) { \
--+  jv_free(b); \
--+  jv error = jv_string("Error: " #name "/2 not found at build time"); \
--+  return ret_error2(input, a, error); \
--+}
-- 
-- #define LIBM_DDDD(name) \
-- static jv f_ ## name(jq_state *jq, jv input, jv a, jv b, jv c) { \
--@@ -199,7 +208,14 @@ static jv f_ ## name(jq_state *jq, jv input, jv a, jv b, jv c) { \
--   jv_free(c); \
--   return ret; \
-- }
---#define LIBM_DDDD_NO(name)
--+#define LIBM_DDDD_NO(name) \
--+static jv f_ ## name(jq_state *jq, jv input, jv a, jv b, jv c) { \
--+  jv_free(c) \
--+  jv_free(b); \
--+  jv error = jv_string("Error: " #name "/3 not found at build time"); \
--+  return ret_error2(input, a, error); \
--+}
--+
-- #include "libm.h"
-- #undef LIBM_DDDD_NO
-- #undef LIBM_DDD_NO
--@@ -226,6 +242,11 @@ static jv f_frexp(jq_state *jq, jv input) {
--   jv_free(input);
--   return ret;
-- }
--+#else
--+static jv f_frexp(jq_state *jq, jv input) {
--+  jv error = jv_string("Error: frexp/0 not found at build time");
--+  return ret_error(input, error);
--+}
-- #endif
-- #ifdef HAVE_MODF
-- static jv f_modf(jq_state *jq, jv input) {
--@@ -237,6 +258,11 @@ static jv f_modf(jq_state *jq, jv input) {
--   jv_free(input);
--   return jv_array_append(ret, jv_number(i));
-- }
--+#else
--+static jv f_modf(jq_state *jq, jv input) {
--+  jv error = jv_string("Error: modf/0 not found at build time");
--+  return ret_error(input, error);
--+}
-- #endif
-- #ifdef HAVE_LGAMMA_R
-- static jv f_lgamma_r(jq_state *jq, jv input) {
--@@ -248,6 +274,11 @@ static jv f_lgamma_r(jq_state *jq, jv input) {
--   jv_free(input);
--   return jv_array_append(ret, jv_number(sign));
-- }
--+#else
--+static jv f_lgamma_r(jq_state *jq, jv input) {
--+  jv error = jv_string("Error: lgamma_r/0 not found at build time");
--+  return ret_error(input, error);
--+}
-- #endif
-- 
-- static jv f_negate(jq_state *jq, jv input) {
--@@ -1703,27 +1734,21 @@ static jv f_current_line(jq_state *jq, jv a) {
-- 
-- #define LIBM_DD(name) \
--   {f_ ## name,  #name, 1},
---#define LIBM_DD_NO(name)
--+#define LIBM_DD_NO(name) LIBM_DD(name)
-- 
-- #define LIBM_DDD(name) \
--   {f_ ## name, #name, 3},
---#define LIBM_DDD_NO(name)
--+#define LIBM_DDD_NO(name) LIBM_DDD(name)
-- 
-- #define LIBM_DDDD(name) \
--   {f_ ## name, #name, 4},
---#define LIBM_DDDD_NO(name)
--+#define LIBM_DDDD_NO(name) LIBM_DDDD(name)
-- 
-- static const struct cfunction function_list[] = {
-- #include "libm.h"
---#ifdef HAVE_FREXP
--   {f_frexp,"frexp", 1},
---#endif
---#ifdef HAVE_MODF
--   {f_modf,"modf", 1},
---#endif
---#ifdef HAVE_LGAMMA_R
--   {f_lgamma_r,"lgamma_r", 1},
---#endif
--   {f_negate, "_negate", 1},
-- #define BINOP(name) {f_ ## name, "_" #name, 3},
-- BINOPS
--@@ -1838,42 +1863,11 @@ static block bind_bytecoded_builtins(block b) {
--   return BLOCK(builtins, b);
-- }
-- 
---static const char jq_builtins[] =
--+static const char jq_builtins[] = {
-- /* Include jq-coded builtins */
-- #include "src/builtin.inc"
---
---/* Include unsupported math functions next */
---#define LIBM_DD(name)
---#define LIBM_DDD(name)
---#define LIBM_DDDD(name)
---#define LIBM_DD_NO(name) "def " #name ": \"Error: " #name "/0 not found at build time\"|error;"
---#define LIBM_DDD_NO(name) "def " #name "(a;b): \"Error: " #name "/2 not found at build time\"|error;"
---#define LIBM_DDDD_NO(name) "def " #name "(a;b;c): \"Error: " #name "/3 not found at build time\"|error;"
---#include "libm.h"
---#ifndef HAVE_FREXP
---  "def frexp: \"Error: frexp/0 not found at build time\"|error;"
---#endif
---#ifndef HAVE_MODF
---  "def modf: \"Error: modf/0 not found at build time\"|error;"
---#endif
---#ifndef HAVE_LGAMMA_R
---  "def lgamma_r: \"Error: lgamma_r/0 not found at build time\"|error;"
---#endif
---;
---
---#undef LIBM_DDDD_NO
---#undef LIBM_DDD_NO
---#undef LIBM_DD_NO
---#undef LIBM_DDDD
---#undef LIBM_DDD
---#undef LIBM_DD
---
---#ifdef __APPLE__
---#undef HAVE_GAMMA
---#undef HAVE_EXP10
---#undef HAVE_DREM
---#undef HAVE_SIGNIFICAND
---#endif
--+  '\0',
--+};
-- 
-- static block gen_builtin_list(block builtins) {
--   jv list = jv_array_append(block_list_funcs(builtins, 1), jv_string("builtins/0"));
-diff --git a/meta-oe/recipes-devtools/jq/jq/0002-libm.h-builtin.c-add-and-use-LIBM_DA-and-LIBM_DA_NO-.patch b/meta-oe/recipes-devtools/jq/jq/0002-libm.h-builtin.c-add-and-use-LIBM_DA-and-LIBM_DA_NO-.patch
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mi=
+smatching-variable-type.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-fi=
+le-tiff-load-fix-mismatching-variable-type.patch
 deleted file mode 100644
-index 68b8cb4f6e..0000000000
---- a/meta-oe/recipes-devtools/jq/jq/0002-libm.h-builtin.c-add-and-use-LIBM_DA-and-LIBM_DA_NO-.patch
+index 13b3dda144..0000000000
+--- a/meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mismatchi=
+ng-variable-type.patch
 +++ /dev/null
-@@ -1,164 +0,0 @@
--From c65e6fa48e6da30727c87ccdd88d8fb6a7a70f20 Mon Sep 17 00:00:00 2001
--From: Emanuele Torre <torreemanuele6@gmail.com>
--Date: Fri, 26 Jan 2024 11:26:57 +0100
--Subject: [PATCH] libm.h+builtin.c: add and use LIBM_DA and LIBM_DA_NO macros
+@@ -1,24 +0,0 @@
+-From a2458f1528e5733574bb26ff5452b1329116e6db Mon Sep 17 00:00:00 2001
+-From: Simon Budig <simon@budig.de>
+-Date: Sat, 20 May 2023 18:40:41 +0200
+-Subject: [PATCH] file-tiff-load: fix mismatching variable type
 -
--For functions that from one double return an array with two numbers.
--Upstream-Status: Backport [bd3c828 libm.h+builtin.c: add and use LIBM_DA and LIBM_DA_NO macros]
--Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+-Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/=
+a2458f1528e5733574bb26ff5452b1329116e6db]
+-Signed-off-by: Khem Raj <raj.khem@gmai.com>
 ----
-- src/builtin.c | 78 ++++++++++++++++-----------------------------------
-- src/libm.h    | 15 ++++++++++
-- 2 files changed, 39 insertions(+), 54 deletions(-)
+- plug-ins/file-tiff/file-tiff-load.c | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
 -
--diff --git a/src/builtin.c b/src/builtin.c
--index a3ce7e4..9b71bca 100644
----- a/src/builtin.c
--+++ b/src/builtin.c
--@@ -216,13 +216,32 @@ static jv f_ ## name(jq_state *jq, jv input, jv a, jv b, jv c) { \
--   return ret_error2(input, a, error); \
-- }
-- 
--+#define LIBM_DA(name, type) \
--+static jv f_ ## name(jq_state *jq, jv input) { \
--+  if (jv_get_kind(input) != JV_KIND_NUMBER) { \
--+    return type_error(input, "number required"); \
--+  } \
--+  type value; \
--+  double d = name(jv_number_value(input), &value); \
--+  jv ret = JV_ARRAY(jv_number(d), jv_number(value)); \
--+  jv_free(input); \
--+  return ret; \
--+}
--+#define LIBM_DA_NO(name, type) \
--+static jv f_ ## name(jq_state *jq, jv input) { \
--+  jv error = jv_string("Error: " #name "/0 not found at build time"); \
--+  return ret_error(input, error); \
--+}
--+
-- #include "libm.h"
-- #undef LIBM_DDDD_NO
-- #undef LIBM_DDD_NO
-- #undef LIBM_DD_NO
--+#undef LIBM_DA_NO
-- #undef LIBM_DDDD
-- #undef LIBM_DDD
-- #undef LIBM_DD
--+#undef LIBM_DA
-- 
-- #ifdef __APPLE__
-- #undef gamma
--@@ -231,56 +250,6 @@ static jv f_ ## name(jq_state *jq, jv input, jv a, jv b, jv c) { \
-- #undef exp10
-- #endif
-- 
---#ifdef HAVE_FREXP
---static jv f_frexp(jq_state *jq, jv input) {
---  if (jv_get_kind(input) != JV_KIND_NUMBER) {
---    return type_error(input, "number required");
---  }
---  int exp;
---  double d = frexp(jv_number_value(input), &exp);
---  jv ret = JV_ARRAY(jv_number(d), jv_number(exp));
---  jv_free(input);
---  return ret;
---}
---#else
---static jv f_frexp(jq_state *jq, jv input) {
---  jv error = jv_string("Error: frexp/0 not found at build time");
---  return ret_error(input, error);
---}
---#endif
---#ifdef HAVE_MODF
---static jv f_modf(jq_state *jq, jv input) {
---  if (jv_get_kind(input) != JV_KIND_NUMBER) {
---    return type_error(input, "number required");
---  }
---  double i;
---  jv ret = JV_ARRAY(jv_number(modf(jv_number_value(input), &i)));
---  jv_free(input);
---  return jv_array_append(ret, jv_number(i));
---}
---#else
---static jv f_modf(jq_state *jq, jv input) {
---  jv error = jv_string("Error: modf/0 not found at build time");
---  return ret_error(input, error);
---}
---#endif
---#ifdef HAVE_LGAMMA_R
---static jv f_lgamma_r(jq_state *jq, jv input) {
---  if (jv_get_kind(input) != JV_KIND_NUMBER) {
---    return type_error(input, "number required");
---  }
---  int sign;
---  jv ret = JV_ARRAY(jv_number(lgamma_r(jv_number_value(input), &sign)));
---  jv_free(input);
---  return jv_array_append(ret, jv_number(sign));
---}
---#else
---static jv f_lgamma_r(jq_state *jq, jv input) {
---  jv error = jv_string("Error: lgamma_r/0 not found at build time");
---  return ret_error(input, error);
---}
---#endif
---
-- static jv f_negate(jq_state *jq, jv input) {
--   if (jv_get_kind(input) != JV_KIND_NUMBER) {
--     return type_error(input, "cannot be negated");
--@@ -1733,8 +1702,10 @@ static jv f_current_line(jq_state *jq, jv a) {
-- }
-- 
-- #define LIBM_DD(name) \
---  {f_ ## name,  #name, 1},
--+  {f_ ## name, #name, 1},
-- #define LIBM_DD_NO(name) LIBM_DD(name)
--+#define LIBM_DA(name, type) LIBM_DD(name)
--+#define LIBM_DA_NO(name, type) LIBM_DD(name)
-- 
-- #define LIBM_DDD(name) \
--   {f_ ## name, #name, 3},
--@@ -1746,9 +1717,6 @@ static jv f_current_line(jq_state *jq, jv a) {
-- 
-- static const struct cfunction function_list[] = {
-- #include "libm.h"
---  {f_frexp,"frexp", 1},
---  {f_modf,"modf", 1},
---  {f_lgamma_r,"lgamma_r", 1},
--   {f_negate, "_negate", 1},
-- #define BINOP(name) {f_ ## name, "_" #name, 3},
-- BINOPS
--@@ -1813,9 +1781,11 @@ BINOPS
-- #undef LIBM_DDDD_NO
-- #undef LIBM_DDD_NO
-- #undef LIBM_DD_NO
--+#undef LIBM_DA_NO
-- #undef LIBM_DDDD
-- #undef LIBM_DDD
-- #undef LIBM_DD
--+#undef LIBM_DA
-- 
-- struct bytecoded_builtin { const char* name; block code; };
-- static block bind_bytecoded_builtins(block b) {
--diff --git a/src/libm.h b/src/libm.h
--index 8efc1c5..7332bd8 100644
----- a/src/libm.h
--+++ b/src/libm.h
--@@ -289,3 +289,18 @@ LIBM_DDD(ldexp)
-- #else
-- LIBM_DDD_NO(ldexp)
-- #endif
--+#ifdef HAVE_MODF
--+LIBM_DA(modf, double)
--+#else
--+LIBM_DA_NO(modf, double)
--+#endif
--+#ifdef HAVE_FREXP
--+LIBM_DA(frexp, int)
--+#else
--+LIBM_DA_NO(frexp, int)
--+#endif
--+#ifdef HAVE_LGAMMA_R
--+LIBM_DA(lgamma_r, int)
--+#else
--+LIBM_DA_NO(lgamma_r, int)
--+#endif
-diff --git a/meta-oe/recipes-devtools/jq/jq/0003-builtin.c-typecheck-builtin-cfunctions-in-function_l.patch b/meta-oe/recipes-devtools/jq/jq/0003-builtin.c-typecheck-builtin-cfunctions-in-function_l.patch
+---- a/plug-ins/file-tiff/file-tiff-load.c
+-+++ b/plug-ins/file-tiff/file-tiff-load.c
+-@@ -1301,8 +1301,8 @@ load_image (GFile        *file,
+-=20
+-       /* any resolution info in the file? */
+-       {
+--        gfloat   xres =3D 72.0;
+--        gfloat   yres =3D 72.0;
+-+        gdouble   xres =3D 72.0;
+-+        gdouble   yres =3D 72.0;
+-         gushort  read_unit;
+-         GimpUnit unit =3D GIMP_UNIT_PIXEL; /* invalid unit */
+-=20
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fi=
+x-for-bz2.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compi=
+le-fix-for-bz2.patch
+new file mode 100644
+index 0000000000..721225c8b3
+--- /dev/null
++++ b/meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fix-for-b=
+z2.patch
+@@ -0,0 +1,30 @@
++From a7e40e19d17404cf5ec4135fc1becd5a90f5e1e1 Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Wed, 25 Dec 2024 07:27:04 +0100
++Subject: [PATCH] gimp: cross-compile fix for bz2
++
++autotools bzip2 build does not create pkgconfig files so looking for the=
+ dependency fails.
++
++Signed-off-by: Markus Volk <f_l_k@t-online.de>
++
++Upstream-Status: Inappropriate [can probably be removed once bzip2 is bu=
+ilt with meson or cmake]
++---
++ meson.build | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/meson.build b/meson.build
++index 4e48f8c64c..d5dce47015 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -765,7 +765,7 @@ zlib =3D dependency('zlib')
++ MIMEtypes +=3D 'image/x-psp'
++=20
++ # Compiler-provided headers can't be found in crossroads environment
++-if not meson.is_cross_build()
+++if true
++   bz2 =3D cc.find_library('bz2')
++ else
++   bz2 =3D dependency('bzip2')
++--=20
++2.47.1
++
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-defaul=
+t-CC-override.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-all=
+ow-default-CC-override.patch
 deleted file mode 100644
-index f8b6c5baf6..0000000000
---- a/meta-oe/recipes-devtools/jq/jq/0003-builtin.c-typecheck-builtin-cfunctions-in-function_l.patch
+index b04a16cec7..0000000000
+--- a/meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-default-CC-ov=
+erride.patch
 +++ /dev/null
-@@ -1,249 +0,0 @@
--From 98839759a92e3ad41870bfc7415f0ecf320b5097 Mon Sep 17 00:00:00 2001
--From: Emanuele Torre <torreemanuele6@gmail.com>
--Date: Mon, 25 Nov 2024 07:47:14 +0100
--Subject: [PATCH] builtin.c: typecheck builtin cfunctions in function_list
+@@ -1,85 +0,0 @@
+-From 7e5b986cb7797a6535fe2471b9a5fb7c00821f51 Mon Sep 17 00:00:00 2001
+-From: Yoann Congal <yoann.congal@smile.fr>
+-Date: Sun, 13 Oct 2024 01:00:10 +0200
+-Subject: [PATCH] gimptool: allow default CC override
 -
--In C23 (default C standard used by GCC 15),  jv (*fptr)();  has become
--equivalent to  jv (*fptr)(void);  so we can no longer assign builtin
--implemenations directly to the fptr member of cfunctions without
--generating a compile error.
+-From: Yoann Congal <yoann.congal@smile.fr>
 -
--Since there does not seem to be any straight-forward way to tell
--autoconf to force the compiler to use C99 short of explicitly adding
---std=c99 to CFLAGS, it is probably a cleaner solution to just make the
--code C23 compatible.
+-In OE, CC contains sysroot path. Storing CC in binary then leads to
+-non-reproducibility.
 -
--A possible solution could have been to just redeclare  cfunction.fptr
--as void*, but then the functions' return type would not have been type
--checked (e.g. if you tried to add a {printf, "printf", 2}, where printf
--is a function that does not return jv, the compiler wouldn't have
--complained.)
--We were already not typechecking the arguments of the functions, so e.g.
--  {binop_plus, "_plus", 3},  /* instead of {f_plus, "_plus, 3},       */
--  {f_setpath, "setpath", 4}, /* instead of {f_setpath, "setpath", 3}, */
--compile without errors despite not having the correct prototype.
+-This commit add a new configure option "--with-default-cc=3D'cmd'" for
+-force the CC stored in gimptool to a reproducible value.
 -
--So I thought of instead improving the situation by redefining
--cfunction.fptr as a union of function pointers with the prototypes that
--the jq bytecode interpreter can call, and use a macro to add the builtin
--functions to function_list using to the arity argument to assign the
--implementation function to the appropriate union member.
--
--Now the code won't compile if the wrong arity, or an arity not supported
--by the bytecode interpreter (>5 = 1input+4arguments), or a prototype not
--jallable by the bytecode interpreter (e.g. binop_plus that doesn't
--expect a  jq_state*  argument).
--
--Also, the code now compiles with gcc -std=c23.
--
--Fixes #3206
--Upstream-Status: Backport [0b82b38 builtin.c: typecheck builtin cfunctions in function_list]
--Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+-Upstream-Status: Inappropriate [does not apply on master (upstream has m=
+oved to meson)]
+-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 ----
-- src/builtin.c  | 126 +++++++++++++++++++++++++------------------------
-- src/bytecode.h |  11 +++--
-- src/execute.c  |  11 ++---
-- 3 files changed, 78 insertions(+), 70 deletions(-)
+- app-tools/Makefile.am |  2 +-
+- configure.ac          | 13 +++++++++++++
+- tools/Makefile.am     |  2 +-
+- tools/gimptool.c      |  2 +-
+- 4 files changed, 16 insertions(+), 3 deletions(-)
 -
--diff --git a/src/builtin.c b/src/builtin.c
--index 9b71bca..6ba6511 100644
----- a/src/builtin.c
--+++ b/src/builtin.c
--@@ -1701,82 +1701,83 @@ static jv f_current_line(jq_state *jq, jv a) {
--   return jq_util_input_get_current_line(jq);
-- }
-- 
--+#define CFUNC(func, name, arity) \
--+  {.fptr = { .a ## arity = func }, name, arity}
+-diff --git a/app-tools/Makefile.am b/app-tools/Makefile.am
+-index a7cd4ce..81a3a00 100644
+---- a/app-tools/Makefile.am
+-+++ b/app-tools/Makefile.am
+-@@ -67,7 +67,7 @@ AM_CPPFLAGS =3D \
+- 	-DMANDIR=3D\""$(mandir)"\"				\
+- 	-DGIMPPLUGINDIR=3D\""$(gimpplugindir)"\"			\
+- 	-DGIMPDATADIR=3D\""$(gimpdatadir)"\"			\
+--	-DCC=3D\""$(CC)"\"					\
+-+	-DDEFAULT_CC=3D\""@DEFAULT_CC@"\"				\
+- 	-DGIMPDIR=3D\""$(gimpdir)"\"				\
+- 	-DGIMP_PLUGIN_VERSION=3D\""$(GIMP_PLUGIN_VERSION)"\"	\
+- 	-I$(top_srcdir)						\
+-diff --git a/configure.ac b/configure.ac
+-index a88b7cc..d90b6db 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -2457,6 +2457,19 @@ fi
+- AM_CONDITIONAL(DESKTOP_DATADIR, test "x$with_desktop_dir" !=3D xno)
+- AC_SUBST(DESKTOP_DATADIR)
+-=20
+-+######################
+-+# Determine default CC
+-+######################
 -+
-- #define LIBM_DD(name) \
---  {f_ ## name, #name, 1},
--+  CFUNC(f_ ## name, #name, 1),
-- #define LIBM_DD_NO(name) LIBM_DD(name)
-- #define LIBM_DA(name, type) LIBM_DD(name)
-- #define LIBM_DA_NO(name, type) LIBM_DD(name)
-- 
-- #define LIBM_DDD(name) \
---  {f_ ## name, #name, 3},
--+  CFUNC(f_ ## name, #name, 3),
-- #define LIBM_DDD_NO(name) LIBM_DDD(name)
-- 
-- #define LIBM_DDDD(name) \
---  {f_ ## name, #name, 4},
--+  CFUNC(f_ ## name, #name, 4),
-- #define LIBM_DDDD_NO(name) LIBM_DDDD(name)
-- 
-- static const struct cfunction function_list[] = {
-- #include "libm.h"
---  {f_negate, "_negate", 1},
---#define BINOP(name) {f_ ## name, "_" #name, 3},
--+  CFUNC(f_negate, "_negate", 1),
--+#define BINOP(name) CFUNC(f_ ## name, "_" #name, 3),
-- BINOPS
-- #undef BINOP
---  {f_dump, "tojson", 1},
---  {f_json_parse, "fromjson", 1},
---  {f_tonumber, "tonumber", 1},
---  {f_tostring, "tostring", 1},
---  {f_keys, "keys", 1},
---  {f_keys_unsorted, "keys_unsorted", 1},
---  {f_startswith, "startswith", 2},
---  {f_endswith, "endswith", 2},
---  {f_ltrimstr, "ltrimstr", 2},
---  {f_rtrimstr, "rtrimstr", 2},
---  {f_string_split, "split", 2},
---  {f_string_explode, "explode", 1},
---  {f_string_implode, "implode", 1},
---  {f_string_indexes, "_strindices", 2},
---  {f_setpath, "setpath", 3}, // FIXME typechecking
---  {f_getpath, "getpath", 2},
---  {f_delpaths, "delpaths", 2},
---  {f_has, "has", 2},
---  {f_contains, "contains", 2},
---  {f_length, "length", 1},
---  {f_utf8bytelength, "utf8bytelength", 1},
---  {f_type, "type", 1},
---  {f_isinfinite, "isinfinite", 1},
---  {f_isnan, "isnan", 1},
---  {f_isnormal, "isnormal", 1},
---  {f_infinite, "infinite", 1},
---  {f_nan, "nan", 1},
---  {f_sort, "sort", 1},
---  {f_sort_by_impl, "_sort_by_impl", 2},
---  {f_group_by_impl, "_group_by_impl", 2},
---  {f_min, "min", 1},
---  {f_max, "max", 1},
---  {f_min_by_impl, "_min_by_impl", 2},
---  {f_max_by_impl, "_max_by_impl", 2},
---  {f_error, "error", 1},
---  {f_format, "format", 2},
---  {f_env, "env", 1},
---  {f_halt, "halt", 1},
---  {f_halt_error, "halt_error", 2},
---  {f_get_search_list, "get_search_list", 1},
---  {f_get_prog_origin, "get_prog_origin", 1},
---  {f_get_jq_origin, "get_jq_origin", 1},
---  {f_match, "_match_impl", 4},
---  {f_modulemeta, "modulemeta", 1},
---  {f_input, "input", 1},
---  {f_debug, "debug", 1},
---  {f_stderr, "stderr", 1},
---  {f_strptime, "strptime", 2},
---  {f_strftime, "strftime", 2},
---  {f_strflocaltime, "strflocaltime", 2},
---  {f_mktime, "mktime", 1},
---  {f_gmtime, "gmtime", 1},
---  {f_localtime, "localtime", 1},
---  {f_now, "now", 1},
---  {f_current_filename, "input_filename", 1},
---  {f_current_line, "input_line_number", 1},
--+  CFUNC(f_dump, "tojson", 1),
--+  CFUNC(f_json_parse, "fromjson", 1),
--+  CFUNC(f_tonumber, "tonumber", 1),
--+  CFUNC(f_tostring, "tostring", 1),
--+  CFUNC(f_keys, "keys", 1),
--+  CFUNC(f_keys_unsorted, "keys_unsorted", 1),
--+  CFUNC(f_startswith, "startswith", 2),
--+  CFUNC(f_endswith, "endswith", 2),
--+  CFUNC(f_string_split, "split", 2),
--+  CFUNC(f_string_explode, "explode", 1),
--+  CFUNC(f_string_implode, "implode", 1),
--+  CFUNC(f_string_indexes, "_strindices", 2),
--+  CFUNC(f_setpath, "setpath", 3),
--+  CFUNC(f_getpath, "getpath", 2),
--+  CFUNC(f_delpaths, "delpaths", 2),
--+  CFUNC(f_has, "has", 2),
--+  CFUNC(f_contains, "contains", 2),
--+  CFUNC(f_length, "length", 1),
--+  CFUNC(f_utf8bytelength, "utf8bytelength", 1),
--+  CFUNC(f_type, "type", 1),
--+  CFUNC(f_isinfinite, "isinfinite", 1),
--+  CFUNC(f_isnan, "isnan", 1),
--+  CFUNC(f_isnormal, "isnormal", 1),
--+  CFUNC(f_infinite, "infinite", 1),
--+  CFUNC(f_nan, "nan", 1),
--+  CFUNC(f_sort, "sort", 1),
--+  CFUNC(f_sort_by_impl, "_sort_by_impl", 2),
--+  CFUNC(f_group_by_impl, "_group_by_impl", 2),
--+  CFUNC(f_min, "min", 1),
--+  CFUNC(f_max, "max", 1),
--+  CFUNC(f_min_by_impl, "_min_by_impl", 2),
--+  CFUNC(f_max_by_impl, "_max_by_impl", 2),
--+  CFUNC(f_error, "error", 1),
--+  CFUNC(f_format, "format", 2),
--+  CFUNC(f_env, "env", 1),
--+  CFUNC(f_halt, "halt", 1),
--+  CFUNC(f_halt_error, "halt_error", 2),
--+  CFUNC(f_get_search_list, "get_search_list", 1),
--+  CFUNC(f_get_prog_origin, "get_prog_origin", 1),
--+  CFUNC(f_get_jq_origin, "get_jq_origin", 1),
--+  CFUNC(f_match, "_match_impl", 4),
--+  CFUNC(f_modulemeta, "modulemeta", 1),
--+  CFUNC(f_input, "input", 1),
--+  CFUNC(f_debug, "debug", 1),
--+  CFUNC(f_stderr, "stderr", 1),
--+  CFUNC(f_strptime, "strptime", 2),
--+  CFUNC(f_strftime, "strftime", 2),
--+  CFUNC(f_strflocaltime, "strflocaltime", 2),
--+  CFUNC(f_mktime, "mktime", 1),
--+  CFUNC(f_gmtime, "gmtime", 1),
--+  CFUNC(f_localtime, "localtime", 1),
--+  CFUNC(f_now, "now", 1),
--+  CFUNC(f_current_filename, "input_filename", 1),
--+  CFUNC(f_current_line, "input_line_number", 1),
-- };
-- #undef LIBM_DDDD_NO
-- #undef LIBM_DDD_NO
--diff --git a/src/bytecode.h b/src/bytecode.h
--index 1501985..a4055f5 100644
----- a/src/bytecode.h
--+++ b/src/bytecode.h
--@@ -2,7 +2,7 @@
-- #define BYTECODE_H
-- #include <stdint.h>
-- 
---#include "jv.h"
--+#include "jq.h"
-- 
-- typedef enum {
-- #define OP(name, imm, in, out) name,
--@@ -44,9 +44,14 @@ struct opcode_description {
-- const struct opcode_description* opcode_describe(opcode op);
-- 
-- 
---#define MAX_CFUNCTION_ARGS 10
--+#define MAX_CFUNCTION_ARGS 4
-- struct cfunction {
---  jv (*fptr)();
--+  union {
--+    jv (*a1)(jq_state *, jv);
--+    jv (*a2)(jq_state *, jv, jv);
--+    jv (*a3)(jq_state *, jv, jv, jv);
--+    jv (*a4)(jq_state *, jv, jv, jv, jv);
--+  } fptr;
--   const char* name;
--   int nargs;
-- };
--diff --git a/src/execute.c b/src/execute.c
--index 9ef8368..62404db 100644
----- a/src/execute.c
--+++ b/src/execute.c
--@@ -913,14 +913,13 @@ jv jq_next(jq_state *jq) {
--       }
--       struct cfunction* function = &frame_current(jq)->bc->globals->cfunctions[*pc++];
--       switch (function->nargs) {
---      case 1: top = ((jv (*)(jq_state *, jv))function->fptr)(jq, in[0]); break;
---      case 2: top = ((jv (*)(jq_state *, jv, jv))function->fptr)(jq, in[0], in[1]); break;
---      case 3: top = ((jv (*)(jq_state *, jv, jv, jv))function->fptr)(jq, in[0], in[1], in[2]); break;
---      case 4: top = ((jv (*)(jq_state *, jv, jv, jv, jv))function->fptr)(jq, in[0], in[1], in[2], in[3]); break;
---      case 5: top = ((jv (*)(jq_state *, jv, jv, jv, jv, jv))function->fptr)(jq, in[0], in[1], in[2], in[3], in[4]); break;
--+      case 1: top = function->fptr.a1(jq, in[0]); break;
--+      case 2: top = function->fptr.a2(jq, in[0], in[1]); break;
--+      case 3: top = function->fptr.a3(jq, in[0], in[1], in[2]); break;
--+      case 4: top = function->fptr.a4(jq, in[0], in[1], in[2], in[3]); break;
--       // FIXME: a) up to 7 arguments (input + 6), b) should assert
--       // because the compiler should not generate this error.
--       default: return jv_invalid_with_msg(jv_string("Function takes too many arguments"));
--       }
-- 
--       if (jv_is_valid(top)) {
-diff --git a/meta-oe/recipes-devtools/jq/jq_1.7.1.bb b/meta-oe/recipes-devtools/jq/jq_1.7.1.bb
-index 3f57adb910..6b12335513 100644
---- a/meta-oe/recipes-devtools/jq/jq_1.7.1.bb
-+++ b/meta-oe/recipes-devtools/jq/jq_1.7.1.bb
-@@ -10,9 +10,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=488f4e0b04c0456337fb70d1ac1758ba"
- 
- GITHUB_BASE_URI = "https://github.com/jqlang/${BPN}/releases/"
- SRC_URI = "${GITHUB_BASE_URI}/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
--    file://0001-builtin.c-fix-build-with-Woverlength-strings.patch \
--    file://0002-libm.h-builtin.c-add-and-use-LIBM_DA-and-LIBM_DA_NO-.patch \
--    file://0003-builtin.c-typecheck-builtin-cfunctions-in-function_l.patch \
-     file://run-ptest \
-     "
- SRC_URI[sha256sum] = "478c9ca129fd2e3443fe27314b455e211e0d8c60bc8ff7df703873deeee580c2"
+-+AC_ARG_WITH(default-cc, [ --with-default-cc=3D"cmd" default CC to print=
+ in gimptool (default=3DCC)])
+-+
+-+if test "x$with_default_cc" !=3D x; then
+-+  DEFAULT_CC=3D$with_default_cc
+-+else
+-+  DEFAULT_CC=3DCC
+-+fi
+-+
+-+AC_SUBST(DEFAULT_CC)
+-=20
+- #####################
+- # Check for XML tools
+-diff --git a/tools/Makefile.am b/tools/Makefile.am
+-index 420b9b1..ccabde8 100644
+---- a/tools/Makefile.am
+-+++ b/tools/Makefile.am
+-@@ -87,7 +87,7 @@ AM_CPPFLAGS =3D \
+- 	-DMANDIR=3D\""$(mandir)"\"				\
+- 	-DGIMPPLUGINDIR=3D\""$(gimpplugindir)"\"			\
+- 	-DGIMPDATADIR=3D\""$(gimpdatadir)"\"			\
+--	-DCC=3D\""$(CC)"\"					\
+-+	-DDEFAULT_CC=3D\""@DEFAULT_CC@"\"				\
+- 	-DGIMPDIR=3D\""$(gimpdir)"\"				\
+- 	-DGIMP_PLUGIN_VERSION=3D\""$(GIMP_PLUGIN_VERSION)"\"	\
+- 	-I$(top_srcdir)						\
+-diff --git a/tools/gimptool.c b/tools/gimptool.c
+-index 21fc043..bbf3fa5 100644
+---- a/tools/gimptool.c
+-+++ b/tools/gimptool.c
+-@@ -280,7 +280,7 @@ find_out_env_flags (void)
+-   else if (msvc_syntax)
+-     env_cc =3D "cl -MD";
+-   else
+--    env_cc =3D CC;
+-+    env_cc =3D DEFAULT_CC;
+-=20
+-   if (g_ascii_strncasecmp (env_cc, "cl", 2)    =3D=3D 0 &&
+-       g_ascii_strncasecmp (env_cc, "clang", 5) !=3D 0)
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-bu=
+ild-time-library-paths-to-LD_LI.patch b/meta-gnome/recipes-gimp/gimp/gimp=
+/0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch
+deleted file mode 100644
+index cec0055284..0000000000
+--- a/meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-build-tim=
+e-library-paths-to-LD_LI.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From c720df90dfe3a3e92e34bfb36a04cc792064a501 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 24 May 2023 22:39:02 -0700
+-Subject: [PATCH] libtool: Do not add build time library paths to
+- LD_LIBRARY_PATH
+-
+-This does not serve much purpose on cross builds as it will add build
+-time paths which are only useful when trying to run these tools from
+-build area but when they are cross built this is not possible to run
+-them like this.
+-
+-Upstream-Status: Inappropriate [Cross-compile specific]
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- ltmain.sh | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/ltmain.sh b/ltmain.sh
+-index 134902c..068d74a 100644
+---- a/ltmain.sh
+-+++ b/ltmain.sh
+-@@ -5748,7 +5748,7 @@ func_exec_program ()
+- 	if test yes =3D "$shlibpath_overrides_runpath" && test -n "$shlibpath_=
+var" && test -n "$temp_rpath"; then
+- 	  $ECHO "\
+-     # Add our own library path to $shlibpath_var
+--    $shlibpath_var=3D\"$temp_rpath\$$shlibpath_var\"
+-+    $shlibpath_var=3D\"$shlibpath_var\"
+-=20
+-     # Some systems cannot cope with colon-terminated $shlibpath_var
+-     # The second colon is a workaround for a bug in BeOS R4 sed
+---=20
+-2.40.1
+-
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-we=
+ird-warning.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-=
+up-a-weird-warning.patch
+deleted file mode 100644
+index 4f04ac8250..0000000000
+--- a/meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weird-war=
+ning.patch
++++ /dev/null
+@@ -1,22 +0,0 @@
+-From 51311f913d9f417d121f59b83d560c7b4b853d1c Mon Sep 17 00:00:00 2001
+-From: Simon Budig <simon@budig.de>
+-Date: Sat, 20 May 2023 22:25:40 +0200
+-Subject: [PATCH] metadata: shut up a weird warning
+-
+-Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/=
+51311f913d9f417d121f59b83d560c7b4b853d1c]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- plug-ins/metadata/metadata-editor.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+---- a/plug-ins/metadata/metadata-editor.c
+-+++ b/plug-ins/metadata/metadata-editor.c
+-@@ -2140,7 +2140,7 @@ metadata_dialog_editor_set_metadata (GEx
+-                             }
+-                           else
+-                             {
+--                              if (! g_strv_contains (values, equiv_valu=
+es[evi]))
+-+                              if (! g_strv_contains ((const gchar * con=
+st *) values, equiv_values[evi]))
+-                                 {
+-                                   gchar *tmpvalue;
+-=20
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reproduci=
+bility-fix.patch b/meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-rep=
+roducibility-fix.patch
+new file mode 100644
+index 0000000000..532715d588
+--- /dev/null
++++ b/meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reproducibility-=
+fix.patch
+@@ -0,0 +1,56 @@
++From bf19c5687703769e406a8086036d4ed6421c33cb Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Mon, 13 Jan 2025 10:04:33 +0100
++Subject: [PATCH] meson.build: reproducibility fix
++
++Signed-off-by: Markus Volk <f_l_k@t-online.de>
++
++Upstream-Status: Inappropriate [oe-specific]
++---
++ meson.build | 28 ++++++++++++++--------------
++ 1 file changed, 14 insertions(+), 14 deletions(-)
++
++diff --git a/meson.build b/meson.build
++index 97cd621780..e47180db87 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -1599,23 +1599,23 @@ conf.set('HAVE_FUNC_ATTRIBUTE_DESTRUCTOR',
++ conf.set_quoted('CC',             cc.get_id())
++=20
++ cc_version=3D''
++-if cc.get_id() =3D=3D 'gcc' or cc.get_id() =3D=3D 'clang'
++-  cc_cmd =3D run_command(cc, '-v', check: false)
+++#if cc.get_id() =3D=3D 'gcc' or cc.get_id() =3D=3D 'clang'
+++#  cc_cmd =3D run_command(cc, '-v', check: false)
++   # Note: the call might actually fail when using ccache.
++   # See: https://github.com/mesonbuild/meson/issues/6174
++-  if cc_cmd.returncode() =3D=3D 0
++-    cc_version =3D cc_cmd.stdout() + cc_cmd.stderr()
++-  endif
++-else
+++#  if cc_cmd.returncode() =3D=3D 0
+++#    cc_version =3D cc_cmd.stdout() + cc_cmd.stderr()
+++#  endif
+++#else
++   # Various compilers have various options. Try most common ones. This
++   # list of options comes from autotools checks.
++-  foreach arg : [ '--version', '-v', '-V', '-qversion' ]
++-    cc_cmd =3D run_command(cc, arg, check: false)
++-    if cc_cmd.returncode() =3D=3D 0
++-      cc_version =3D cc_cmd.stdout()
++-    endif
++-  endforeach
++-endif
+++#  foreach arg : [ '--version', '-v', '-V', '-qversion' ]
+++#    cc_cmd =3D run_command(cc, arg, check: false)
+++#    if cc_cmd.returncode() =3D=3D 0
+++#      cc_version =3D cc_cmd.stdout()
+++#    endif
+++#  endforeach
+++#endif
++ if cc_version =3D=3D ''
++   # We didn't manage to get a meaningful verbose version from the
++   # compiler. Just save its name and version.
++--=20
++2.47.1
++
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb b/meta-gnome/re=
+cipes-gimp/gimp/gimp_2.10.38.bb
+deleted file mode 100644
+index 0272e05e96..0000000000
+--- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
++++ /dev/null
+@@ -1,101 +0,0 @@
+-SUMMARY =3D "The GIMP is the GNU Image Manipulation Program"
+-HOMEPAGE =3D "http://www.gimp.org"
+-SECTION =3D "x11/graphics"
+-LICENSE =3D "GPL-3.0-only"
+-LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc678957b0c8e964aa6c70fd77641a=
+71e"
+-
+-DEPENDS =3D " \
+-    alsa-lib \
+-    atk \
+-    cairo \
+-    fontconfig \
+-    freetype \
+-    gdk-pixbuf-native \
+-    intltool-native \
+-    libxslt-native \
+-    gegl-native \
+-    dbus-glib \
+-    gtk+ \
+-    babl \
+-    gegl \
+-    libmypaint \
+-    mypaint-brushes-1.0 \
+-    gexiv2 \
+-    jpeg \
+-    libmng \
+-    libpng \
+-    libexif \
+-    tiff \
+-    lcms \
+-    poppler \
+-    poppler-data \
+-    jasper \
+-    bzip2 \
+-    libgudev \
+-    libmng \
+-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxmu libxpm', '', =
+d)} \
+-"
+-DEPENDS:append:libc-musl =3D " libexecinfo"
+-
+-GNOMEBASEBUILDCLASS =3D "autotools"
+-inherit features_check gnomebase gtk-icon-cache gtk-doc mime-xdg
+-
+-REQUIRED_DISTRO_FEATURES =3D "x11"
+-
+-SHPV =3D "${@gnome_verdir("${PV}")}"
+-
+-SRC_URI =3D "https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2=
+ \
+-           file://0001-configure-Keep-first-line-of-compiler-version-str=
+ing.patch \
+-           file://0001-libtool-Do-not-add-build-time-library-paths-to-LD=
+_LI.patch \
+-           file://0001-file-tiff-load-fix-mismatching-variable-type.patc=
+h \
+-           file://0001-metadata-shut-up-a-weird-warning.patch \
+-           file://0001-gimptool-allow-default-CC-override.patch \
+-           "
+-SRC_URI[sha256sum] =3D "50a845eec11c8831fe8661707950f5b8446e35f30edfb9ac=
+f98f85c1133f856e"
+-
+-EXTRA_OECONF =3D "--disable-python \
+-                --without-webkit \
+-                --disable-check-update \
+-                --without-wmf"
+-
+-EXTRA_OECONF +=3D "${@oe.utils.conditional('SITEINFO_BITS', '32', ' --di=
+sable-vector-icons', '', d)}"
+-
+-do_configure:append() {
+-    find ${B} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
+-    find ${B} -name Makefile | xargs sed -i s:'-I/usr/include':'-I${STAG=
+ING_INCDIR}':g
+-}
+-
+-do_compile:prepend() {
+-    # Let native babl/gegl find their plugins
+-    export BABL_PATH=3D`find ${STAGING_LIBDIR_NATIVE} -maxdepth 1 -name =
+'babl-*'`
+-    export GEGL_PATH=3D`find ${STAGING_LIBDIR_NATIVE} -maxdepth 1 -name =
+'gegl-*'`
+-}
+-
+-FILES:${PN}  +=3D "${datadir}/metainfo"
+-
+-RDEPENDS:${PN} +=3D "mypaint-brushes-1.0"
+-
+-
+-# gimptool
+-
+-# gimptool needs a CC definition, use current CC without sysroot
+-python __anonymous() {
+-    import shlex
+-    CC_WITHOUT_SYSROOT =3D shlex.join(filter(lambda x: not x.startswith(=
+"--sysroot=3D"), shlex.split(d.getVar("CC"))))
+-    d.setVar("CC_WITHOUT_SYSROOT", CC_WITHOUT_SYSROOT)
+-}
+-EXTRA_OECONF +=3D "--with-default-cc=3D'${CC_WITHOUT_SYSROOT}'"
+-
+-# Split gimptool in its own package
+-PACKAGE_BEFORE_PN +=3D "${PN}-gimptool"
+-FILES:${PN}-gimptool +=3D "${bindir}/gimptool-2.0"
+-
+-# gimptool depends on gimp .pc file being installed and tools to build t=
+he plugin.
+-RDEPENDS:${PN}-gimptool +=3D "${PN}-dev packagegroup-core-buildessential=
+"
+-INSANE_SKIP:${PN}-gimptool +=3D "dev-deps"
+-
+-
+-CVE_STATUS[CVE-2007-3741] =3D "not-applicable-platform: This only applie=
+s for Mandriva Linux"
+-CVE_STATUS[CVE-2009-0581] =3D "cpe-incorrect: The current version (2.10.=
+38) is not affected."
+-CVE_STATUS[CVE-2009-0723] =3D "cpe-incorrect: The current version (2.10.=
+38) is not affected."
+-CVE_STATUS[CVE-2009-0733] =3D "cpe-incorrect: The current version (2.10.=
+38) is not affected."
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb b/meta-gnome/reci=
+pes-gimp/gimp/gimp_3.0.2.bb
+new file mode 100644
+index 0000000000..6aa267d050
+--- /dev/null
++++ b/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb
+@@ -0,0 +1,130 @@
++SUMMARY =3D "The GIMP is the GNU Image Manipulation Program"
++HOMEPAGE =3D "http://www.gimp.org"
++SECTION =3D "graphics"
++LICENSE =3D "GPL-3.0-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc678957b0c8e964aa6c70fd77641a=
+71e"
++
++DEPENDS =3D " \
++    appstream-glib \
++    atk \
++    babl \
++    bzip2 \
++    bison-native \
++    cairo \
++    fontconfig \
++    freetype \
++    gdk-pixbuf-native \
++    gegl \
++    gexiv2 \
++    glib-2.0 \
++    glib-2.0-native \
++    gtk+3 \
++    harfbuzz \
++    iso-codes \
++    jpeg \
++    json-glib \
++    lcms \
++    libarchive \
++    libexif \
++    libmypaint \
++    libpng \
++    librsvg \
++    librsvg-native \
++    libxmu \
++    libxslt-native \
++    mypaint-brushes-1.0 \
++    pango \
++    poppler \
++    poppler-data \
++    python3-pygobject-native \
++    tiff \
++    xz \
++    zlib \
++"
++
++DEPENDS:append:libc-musl =3D " libexecinfo"
++
++inherit meson gtk-icon-cache mime-xdg pkgconfig gettext gobject-introspe=
+ction vala
++
++GIR_MESON_OPTION =3D 'can-crosscompile-gir'
++VALA_MESON_OPTION =3D "vala"
++VALA_MESON_ENABLE_FLAG =3D "enabled"
++VALA_MESON_DISABLE_FLAG =3D "disabled"
++GIDOCGEN_MESON_OPTION =3D "gi-docgen"
++GIDOCGEN_MESON_ENABLE_FLAG =3D "enabled"
++GIDOCGEN_MESON_DISABLE_FLAG =3D "disabled"
++
++SRC_URI =3D "https://download.gimp.org/gimp/v${@oe.utils.trim_version('$=
+{PV}', 2)}/gimp-${PV}.tar.xz"
++SRC_URI +=3D "file://0001-gimp-cross-compile-fix-for-bz2.patch"
++SRC_URI +=3D "file://0002-meson.build-reproducibility-fix.patch"
++SRC_URI[sha256sum] =3D "546ddc30cb2d0e79123c7fcb4d78211e1ee7a6aace91a6a0=
+ad8cbcbf6ea571a2"
++
++PACKAGECONFIG[aa] =3D "-Daa=3Denabled,-Daa=3Ddisabled,aalib"
++PACKAGECONFIG[alsa] =3D "-Dalsa=3Denabled,-Dalsa=3Ddisabled,alsa-lib"
++PACKAGECONFIG[appdata-test] =3D "-Dappdata-test=3Denabled,-Dappdata-test=
+=3Ddisabled,appstream-glib-native"
++PACKAGECONFIG[cairo-pdf] =3D "-Dcairo-pdf=3Denabled,-Dcairo-pdf=3Ddisabl=
+ed"
++PACKAGECONFIG[check-update] =3D "-Dcheck-update=3Dyes,-Dcheck-update=3Dn=
+o"
++PACKAGECONFIG[ghostscript] =3D "-Dghostscript=3Denabled,-Dghostscript=3D=
+disabled,ghostscript,ghostscript"
++PACKAGECONFIG[gudev] =3D "-Dgudev=3Denabled,-Dgudev=3Ddisabled,libgudev"
++PACKAGECONFIG[heif] =3D "-Dheif=3Denabled,-Dheif=3Ddisabled,libheif"
++PACKAGECONFIG[javascript] =3D "-Djavascript=3Denabled,-Djavascript=3Ddis=
+abled,,gjs"
++PACKAGECONFIG[jpeg2000] =3D "-Djpeg2000=3Denabled,-Djpeg2000=3Ddisabled,=
+jasper"
++PACKAGECONFIG[jpeg-xl] =3D "-Djpeg-xl=3Denabled,-Djpeg-xl=3Ddisabled,lib=
+jxl"
++PACKAGECONFIG[libunwind] =3D "-Dlibunwind=3Dtrue,-Dlibunwind=3Dfalse,lib=
+unwind"
++PACKAGECONFIG[libbacktrace] =3D "-Dlibbacktrace=3Dtrue,-Dlibbacktrace=3D=
+false,libbacktrace"
++PACKAGECONFIG[lua] =3D "-Dlua=3Dtrue,-Dlua=3Dfalse,,luajit lua-lgi"
++PACKAGECONFIG[mng] =3D "-Dmng=3Denabled,-Dmng=3Ddisabled,libmng"
++PACKAGECONFIG[openmp] =3D "-Dopenmp=3Denabled,-Dopenmp=3Ddisabled,gcc-ru=
+ntime"
++PACKAGECONFIG[vector-icons] =3D "-Dvector-icons=3Dtrue,-Dvector-icons=3D=
+false,librsvg shared-mime-info"
++PACKAGECONFIG[webp] =3D "-Dwebp=3Denabled,-Dwebp=3Ddisabled,libwebp"
++PACKAGECONFIG[xcursor] =3D "-Dxcursor=3Denabled,-Dxcursor=3Ddisabled,lib=
+xcursor"
++PACKAGECONFIG[x11] =3D "-Dxpm=3Denabled,-Dxpm=3Ddisabled,libxpm libxext =
+libxfixes"
++
++PACKAGECONFIG ?=3D " \
++    alsa \
++    cairo-pdf \
++    ghostscript \
++    gudev \
++    javascript \
++    jpeg2000 \
++    jpeg-xl \
++    lua \
++    mng \
++    webp \
++    ${@oe.utils.conditional('SITEINFO_BITS', '32', '', 'vector-icons', d=
+)} \
++    ${@bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'commercial', 'heif',=
+ '', d)} \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 xcursor', '', d)=
+} \
++"
++
++PACKAGECONFIG:remove:riscv32 =3D "lua"
++PACKAGECONFIG:remove:riscv64 =3D "lua"
++PACKAGECONFIG:remove:powerpc64 =3D "lua"
++PACKAGECONFIG:remove:powerpc64le =3D "lua"
++
++EXTRA_OEMESON +=3D " \
++    -Dshmem-type=3Dposix \
++    -Dlinux-input=3Denabled \
++    --buildtype release \
++    --cross-file=3D${WORKDIR}/meson-${PN}.cross \
++"
++
++do_write_config:append() {
++    cat >${WORKDIR}/meson-${PN}.cross <<EOF
++[binaries]
++gjs =3D '${bindir}/gjs'
++luajit =3D '${bindir}/luajit'
++EOF
++}
++
++do_configure:append () {
++    sed -i -e "s|build_by_default: true|build_by_default: false|" ${S}/g=
+imp-data/images/meson.build
++}
++
++do_install:prepend() {
++    sed -i -e "s|${B}||" ${B}/app/widgets/gimplanguagestore-data.h
++    sed -i -e "s|${B}||" ${B}/plug-ins/file-bmp/huffman.h
++}
++
++FILES:${PN} +=3D "${datadir}/metainfo"
++
++RDEPENDS:${PN} =3D "mypaint-brushes-1.0 glib-networking python3-pygobjec=
+t"
+--=20
+2.49.0
+
 
