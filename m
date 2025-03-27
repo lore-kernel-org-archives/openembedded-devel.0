@@ -2,35 +2,35 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B54A2C3600E
-	for <webhook@archiver.kernel.org>; Thu, 27 Mar 2025 01:51:54 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web11.40532.1743040312368630295
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BD2D0C36008
+	for <webhook@archiver.kernel.org>; Thu, 27 Mar 2025 01:55:44 +0000 (UTC)
+Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
+ by mx.groups.io with SMTP id smtpd.web11.40599.1743040535505209651
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Mar 2025 18:51:52 -0700
+ Wed, 26 Mar 2025 18:55:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd76.aul.t-online.de (fwd76.aul.t-online.de [10.223.144.102])
-	by mailout03.t-online.de (Postfix) with SMTP id 7B39522F
-	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Mar 2025 02:51:50 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.154.173.104]) by fwd76.t-online.de
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
+Received: from fwd83.aul.t-online.de (fwd83.aul.t-online.de [10.223.144.109])
+	by mailout09.t-online.de (Postfix) with SMTP id F04C710F9
+	for <openembedded-devel@lists.openembedded.org>; Thu, 27 Mar 2025 02:55:33 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.173.104]) by fwd83.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1txcPM-0mQo4H0; Thu, 27 Mar 2025 02:51:48 +0100
+	esmtp id 1txcSz-2nYKnJ0; Thu, 27 Mar 2025 02:55:33 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 1/2] gimp: update 2.10.38 - 3.0.2
-Date: Thu, 27 Mar 2025 02:52:32 +0100
-Message-ID: <20250327015233.77104-1-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCHv2] gimp: update 2.10.38 - 3.0.2
+Date: Thu, 27 Mar 2025 02:56:21 +0100
+Message-ID: <20250327015621.77527-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1743040309-BA7FB903-2EFAE0DB/10/3626336762 SUSPECT URL
-X-TOI-MSGID: 46d81661-4a61-4ed7-bbeb-fcef7c220720
+X-TOI-EXPURGATEID: 150726::1743040533-63FFC9BA-DF5A71C1/10/3626336762 SUSPECT URL
+X-TOI-MSGID: f3f9cbfa-4e6a-4b22-9cad-922afa9af1bd
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Mar 2025 01:51:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116306
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Mar 2025 01:55:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116307
 
                    ------------------------------
                    GNU Image Manipulation Program
@@ -96,8 +96,8 @@ Signed-off-by: Markus Volk <f_l_k@t-online.de>
  ...001-metadata-shut-up-a-weird-warning.patch |  22 ---
  ...0002-meson.build-reproducibility-fix.patch |  56 ++++++++
  meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb  | 101 --------------
- meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb    | 131 ++++++++++++++++++
- 9 files changed, 217 insertions(+), 296 deletions(-)
+ meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb    | 130 ++++++++++++++++++
+ 9 files changed, 216 insertions(+), 296 deletions(-)
  delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep=
 -first-line-of-compiler-version-string.patch
  delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load=
@@ -600,10 +600,10 @@ s for Mandriva Linux"
 diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb b/meta-gnome/reci=
 pes-gimp/gimp/gimp_3.0.2.bb
 new file mode 100644
-index 0000000000..23600116bb
+index 0000000000..8e44f2ca23
 --- /dev/null
 +++ b/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb
-@@ -0,0 +1,131 @@
+@@ -0,0 +1,130 @@
 +SUMMARY =3D "The GIMP is the GNU Image Manipulation Program"
 +HOMEPAGE =3D "http://www.gimp.org"
 +SECTION =3D "graphics"
@@ -704,7 +704,6 @@ xcursor"
 libxfixes"
 +
 +PACKAGECONFIG ?=3D " \
-+    aa \
 +    alsa \
 +    cairo-pdf \
 +    ghostscript \
