@@ -1,1839 +1,1428 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <thond2009@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 158E5C3600B
-	for <webhook@archiver.kernel.org>; Fri, 28 Mar 2025 00:50:23 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web11.995.1743123014824755840
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59E74C3600B
+	for <webhook@archiver.kernel.org>; Fri, 28 Mar 2025 01:46:53 +0000 (UTC)
+Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.51])
+ by mx.groups.io with SMTP id smtpd.web10.1890.1743126404528424382
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Mar 2025 17:50:15 -0700
+ Thu, 27 Mar 2025 18:46:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd85.aul.t-online.de (fwd85.aul.t-online.de [10.223.144.111])
-	by mailout03.t-online.de (Postfix) with SMTP id D05FF3EB;
-	Fri, 28 Mar 2025 01:50:10 +0100 (CET)
-Received: from [192.168.178.20] ([84.154.173.104]) by fwd85.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1txxvD-0HehhQ0; Fri, 28 Mar 2025 01:50:07 +0100
-Date: Fri, 28 Mar 2025 01:50:51 +0100
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-gnome][PATCHv7] gimp: update 2.10.38 - 3.0.2
+ dkim=none (message not signed); spf=softfail (domain: gmail.com, ip: 156.147.23.51, mailfrom: thond2009@gmail.com)
+Received: from unknown (HELO lgeamrelo04.lge.com) (156.147.1.127)
+	by 156.147.23.51 with ESMTP; 28 Mar 2025 10:46:42 +0900
+X-Original-SENDERIP: 156.147.1.127
+X-Original-MAILFROM: thond2009@gmail.com
+Received: from unknown (HELO tho3-nguyen-weboscsm.bee-live.svc.cluster.local) (10.185.60.40)
+	by 156.147.1.127 with ESMTP; 28 Mar 2025 10:46:42 +0900
+X-Original-SENDERIP: 10.185.60.40
+X-Original-MAILFROM: thond2009@gmail.com
+From: thond2009 <thond2009@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Message-Id: <RC6TTS.LK7FHPEWHGS71@t-online.de>
-In-Reply-To: <1830D0D0AD64B908.4736@lists.openembedded.org>
-References: <1830D0D0AD64B908.4736@lists.openembedded.org>
-X-Mailer: geary/46.0
+Cc: "tho3.nguyen" <tho3.nguyen@lge.com>
+Subject: [meta-oe][PATCH] atop: upgrade 2.4.0 -> 2.11.0
+Date: Fri, 28 Mar 2025 10:46:31 +0900
+Message-Id: <20250328014631.4663-1-thond2009@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-HozQz/oeJsS0KzC6oWyp"
-X-TOI-EXPURGATEID: 150726::1743123007-437FD974-90F9F4DF/10/3626336762 SUSPECT URL
-X-TOI-MSGID: f3adb131-d30a-43cf-9078-c0c2db15382b
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 28 Mar 2025 00:50:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116338
+ <openembedded-devel@lists.openembedded.org>; Fri, 28 Mar 2025 01:46:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116339
 
---=-HozQz/oeJsS0KzC6oWyp
-Content-Type: text/plain; charset=iso-8859-13; format=flowed
-Content-Transfer-Encoding: quoted-printable
+From: "tho3.nguyen" <tho3.nguyen@lge.com>
 
-yikes, I won't get around sending this upstream. But as a quick fix
+Drop patch already merged
+Add patch to fix build with gcc-15
 
-v7: require iso-codes native to fix build without having iso-codes=20
-installed on host:
-| FAILED: app/widgets/gimplanguagestore-data.h
-|=20
-/home/flk/poky/build/tmp/work/corei7-64-poky-linux/gimp/3.0.2/build/tools/g=
-en-languages
-| gimp_language_store_parser_init: 0.001486 seconds
-| ERROR: parse_iso_codes: error parsing=20
-'/usr/share/xml/iso-codes/iso_639_3.xml': No such file or directory
-
-On Fr, M=C3=A4r 28 2025 at 01:44:46 +01:00:00, Markus Volk=20
-<f_l_k@t-online.de> wrote:
-> At long last, the first release of GIMP 3.0 is here! This is the end=20
-> result of seven years of hard work
-> by volunteer developers, designers, artists, and community members=20
-> (for reference, GIMP 2.10
-> was first published in 2018 and the initial development version of=20
-> GIMP 3.0 was released in 2020).
-> With GIMP 3.0 you can do more than ever before, more easily, more=20
-> quickly!
->=20
-> Highlights
->=20
-> - Need to tweak a filter you applied hours ago? New in GIMP 3.0 is=20
-> non-destructive editing for most commonly-used filters. See the=20
-> changes in real time with on-canvas preview.
-> - Exchange files with more applications, including BC7 DDS files as=20
-> well as better PSD export and many new formats.
-> - Don=E2=80=99t know how big to make your drawing? Simply set your paint=20
-> tool to expand layers automatically as needed.
-> - Making pro-quality text got easier, too. Style your text, apply=20
-> outlines, shadows, bevels, and more, and you can still edit your=20
-> text, change font and size, and even tweak the style settings.
-> - Organizing your layers has become much easier with the ability to=20
-> select multiple items at once, move them or transform them all=20
-> together!
-> - Color Management was again improved, as our long-term project to=20
-> make GIMP an advanced image editor for all usages.
-> - Updated graphical toolkit (GTK3) for modern desktop usage.
-> - New Wilber logo!
->=20
-> <https://gitlab.gnome.org/GNOME/gimp/-/blob/GIMP_3_0_0/NEWS?ref_type=3Dta=
-gs>
->=20
-> Signed-off-by: Markus Volk <f_l_k@t-online.de=20
-> <mailto:f_l_k@t-online.de>>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com=20
-> <mailto:raj.khem@gmail.com>>
-> ---
->  ...irst-line-of-compiler-version-string.patch |  30 ----
->  ...f-load-fix-mismatching-variable-type.patch |  24 ----
->  .../0001-gimp-cross-compile-fix-for-bz2.patch |  30 ++++
->  ...1-gimptool-allow-default-CC-override.patch |  85 -----------
->  ...dd-build-time-library-paths-to-LD_LI.patch |  34 -----
->  .../0001-meson.build-dont-check-for-lgi.patch |  35 +++++
->  ...meson.build-require-iso-codes-native.patch |  34 +++++
->  ...001-metadata-shut-up-a-weird-warning.patch |  22 ---
->  ...0002-meson.build-reproducibility-fix.patch |  56 ++++++++
->  meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb  | 101 --------------
->  meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb    | 132=20
-> ++++++++++++++++++
->  11 files changed, 287 insertions(+), 296 deletions(-)
->  delete mode 100644=20
-> meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-line-of-compi=
-ler-version-string.patch
->  delete mode 100644=20
-> meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mismatching-var=
-iable-type.patch
->  create mode 100644=20
-> meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fix-for-bz2.pat=
-ch
->  delete mode 100644=20
-> meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-default-CC-override=
-.patch
->  delete mode 100644=20
-> meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-build-time-libr=
-ary-paths-to-LD_LI.patch
->  create mode 100644=20
-> meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-dont-check-for-lgi.pat=
-ch
->  create mode 100644=20
-> meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-require-iso-codes-nati=
-ve.patch
->  delete mode 100644=20
-> meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weird-warning.p=
-atch
->  create mode 100644=20
-> meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reproducibility-fix.pa=
-tch
->  delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
->  create mode 100644 meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb
->=20
-> diff --git=20
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-line-of-com=
-piler-version-string.patch=20
-> b/meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-line-of-com=
-piler-version-string.patch
-> deleted file mode 100644
-> index 618b4cc7a7..0000000000
-> ---=20
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-line-of-com=
-piler-version-string.patch
-> +++ /dev/null
-> @@ -1,30 +0,0 @@
-> -From 5711ccfab40e304ced7f5be39a4083e3fcecff91 Mon Sep 17 00:00:00=20
-> 2001
-> -From: Khem Raj <raj.khem@gmail.com <mailto:raj.khem@gmail.com>>
-> -Date: Wed, 24 May 2023 22:22:41 -0700
-> -Subject: [PATCH] configure: Keep first line of compiler version=20
-> string
-> -
-> -Full output of cc -v may contain additional information which could
-> -contain build path information, which is unnessasary
-> -
-> -Upstream-Status: Submitted=20
-> [<https://gitlab.gnome.org/GNOME/gimp/-/merge_requests/926>]
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com=20
-> <mailto:raj.khem@gmail.com>>
-> ----
-> - configure.ac | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/configure.ac b/configure.ac
-> -index c25415d..68707a0 100644
-> ---- a/configure.ac
-> -+++ b/configure.ac
-> -@@ -599,7 +599,7 @@ fi
-> - for CC_VERSION_OPT in $CC_VERSION_OPTS; do
-> -   # We run $CC, and escape and format its output, in a single step,
-> -   # since some shells expand escape sequences in "echo" arguments.
-> --  CC_VERSION=3D"`$CC $CC_VERSION_OPT 2>&1 | sed -e=20
-> 's/\\\\/\\\\\\\\\\\\\\\\/g;s/^/\\\\t/;s/$/\\\\n/' | tr -d '\n'`"
-> -+  CC_VERSION=3D"`$CC $CC_VERSION_OPT 2>&1 | head -1 | sed -e=20
-> 's/\\\\/\\\\\\\\\\\\\\\\/g;s/^/\\\\t/;s/$/\\\\n/' | tr -d '\n'`"
-> -   if test $? -eq 0; then
-> -     break
-> -   fi
-> ---
-> -2.40.1
-> -
-> diff --git=20
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mismatching-v=
-ariable-type.patch=20
-> b/meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mismatching-v=
-ariable-type.patch
-> deleted file mode 100644
-> index 13b3dda144..0000000000
-> ---=20
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mismatching-v=
-ariable-type.patch
-> +++ /dev/null
-> @@ -1,24 +0,0 @@
-> -From a2458f1528e5733574bb26ff5452b1329116e6db Mon Sep 17 00:00:00=20
-> 2001
-> -From: Simon Budig <simon@budig.de <mailto:simon@budig.de>>
-> -Date: Sat, 20 May 2023 18:40:41 +0200
-> -Subject: [PATCH] file-tiff-load: fix mismatching variable type
-> -
-> -Upstream-Status: Backport=20
-> [<https://gitlab.gnome.org/GNOME/gimp/-/commit/a2458f1528e5733574bb26ff54=
-52b1329116e6db>]
-> -Signed-off-by: Khem Raj <raj.khem@gmai.com=20
-> <mailto:raj.khem@gmai.com>>
-> ----
-> - plug-ins/file-tiff/file-tiff-load.c | 6 +++---
-> - 1 file changed, 3 insertions(+), 3 deletions(-)
-> -
-> ---- a/plug-ins/file-tiff/file-tiff-load.c
-> -+++ b/plug-ins/file-tiff/file-tiff-load.c
-> -@@ -1301,8 +1301,8 @@ load_image (GFile        *file,
-> -
-> -       /* any resolution info in the file? */
-> -       {
-> --        gfloat   xres =3D 72.0;
-> --        gfloat   yres =3D 72.0;
-> -+        gdouble   xres =3D 72.0;
-> -+        gdouble   yres =3D 72.0;
-> -         gushort  read_unit;
-> -         GimpUnit unit =3D GIMP_UNIT_PIXEL; /* invalid unit */
-> -
-> diff --git=20
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fix-for-bz2.p=
-atch=20
-> b/meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fix-for-bz2.p=
-atch
-> new file mode 100644
-> index 0000000000..721225c8b3
-> --- /dev/null
-> +++=20
-> b/meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fix-for-bz2.p=
-atch
-> @@ -0,0 +1,30 @@
-> +From a7e40e19d17404cf5ec4135fc1becd5a90f5e1e1 Mon Sep 17 00:00:00=20
-> 2001
-> +From: Markus Volk <f_l_k@t-online.de <mailto:f_l_k@t-online.de>>
-> +Date: Wed, 25 Dec 2024 07:27:04 +0100
-> +Subject: [PATCH] gimp: cross-compile fix for bz2
-> +
-> +autotools bzip2 build does not create pkgconfig files so looking for=20
-> the dependency fails.
-> +
-> +Signed-off-by: Markus Volk <f_l_k@t-online.de=20
-> <mailto:f_l_k@t-online.de>>
-> +
-> +Upstream-Status: Inappropriate [can probably be removed once bzip2=20
-> is built with meson or cmake]
-> +---
-> + meson.build | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/meson.build b/meson.build
-> +index 4e48f8c64c..d5dce47015 100644
-> +--- a/meson.build
-> ++++ b/meson.build
-> +@@ -765,7 +765,7 @@ zlib =3D dependency('zlib')
-> + MIMEtypes +=3D 'image/x-psp'
-> +
-> + # Compiler-provided headers can't be found in crossroads environment
-> +-if not meson.is_cross_build()
-> ++if true
-> +   bz2 =3D cc.find_library('bz2')
-> + else
-> +   bz2 =3D dependency('bzip2')
-> +--
-> +2.47.1
-> +
-> diff --git=20
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-default-CC-overri=
-de.patch=20
-> b/meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-default-CC-overri=
-de.patch
-> deleted file mode 100644
-> index b04a16cec7..0000000000
-> ---=20
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-default-CC-overri=
-de.patch
-> +++ /dev/null
-> @@ -1,85 +0,0 @@
-> -From 7e5b986cb7797a6535fe2471b9a5fb7c00821f51 Mon Sep 17 00:00:00=20
-> 2001
-> -From: Yoann Congal <yoann.congal@smile.fr=20
-> <mailto:yoann.congal@smile.fr>>
-> -Date: Sun, 13 Oct 2024 01:00:10 +0200
-> -Subject: [PATCH] gimptool: allow default CC override
-> -
-> -From: Yoann Congal <yoann.congal@smile.fr=20
-> <mailto:yoann.congal@smile.fr>>
-> -
-> -In OE, CC contains sysroot path. Storing CC in binary then leads to
-> -non-reproducibility.
-> -
-> -This commit add a new configure option "--with-default-cc=3D'cmd'" for
-> -force the CC stored in gimptool to a reproducible value.
-> -
-> -Upstream-Status: Inappropriate [does not apply on master (upstream=20
-> has moved to meson)]
-> -Signed-off-by: Yoann Congal <yoann.congal@smile.fr=20
-> <mailto:yoann.congal@smile.fr>>
-> ----
-> - app-tools/Makefile.am |  2 +-
-> - configure.ac          | 13 +++++++++++++
-> - tools/Makefile.am     |  2 +-
-> - tools/gimptool.c      |  2 +-
-> - 4 files changed, 16 insertions(+), 3 deletions(-)
-> -
-> -diff --git a/app-tools/Makefile.am b/app-tools/Makefile.am
-> -index a7cd4ce..81a3a00 100644
-> ---- a/app-tools/Makefile.am
-> -+++ b/app-tools/Makefile.am
-> -@@ -67,7 +67,7 @@ AM_CPPFLAGS =3D \
-> - 	-DMANDIR=3D\""$(mandir)"\"				\
-> - 	-DGIMPPLUGINDIR=3D\""$(gimpplugindir)"\"			\
-> - 	-DGIMPDATADIR=3D\""$(gimpdatadir)"\"			\
-> --	-DCC=3D\""$(CC)"\"					\
-> -+	-DDEFAULT_CC=3D\""@DEFAULT_CC@"\"				\
-> - 	-DGIMPDIR=3D\""$(gimpdir)"\"				\
-> - 	-DGIMP_PLUGIN_VERSION=3D\""$(GIMP_PLUGIN_VERSION)"\"	\
-> - 	-I$(top_srcdir)						\
-> -diff --git a/configure.ac b/configure.ac
-> -index a88b7cc..d90b6db 100644
-> ---- a/configure.ac
-> -+++ b/configure.ac
-> -@@ -2457,6 +2457,19 @@ fi
-> - AM_CONDITIONAL(DESKTOP_DATADIR, test "x$with_desktop_dir" !=3D xno)
-> - AC_SUBST(DESKTOP_DATADIR)
-> -
-> -+######################
-> -+# Determine default CC
-> -+######################
-> -+
-> -+AC_ARG_WITH(default-cc, [ --with-default-cc=3D"cmd" default CC to=20
-> print in gimptool (default=3DCC)])
-> -+
-> -+if test "x$with_default_cc" !=3D x; then
-> -+  DEFAULT_CC=3D$with_default_cc
-> -+else
-> -+  DEFAULT_CC=3DCC
-> -+fi
-> -+
-> -+AC_SUBST(DEFAULT_CC)
-> -
-> - #####################
-> - # Check for XML tools
-> -diff --git a/tools/Makefile.am b/tools/Makefile.am
-> -index 420b9b1..ccabde8 100644
-> ---- a/tools/Makefile.am
-> -+++ b/tools/Makefile.am
-> -@@ -87,7 +87,7 @@ AM_CPPFLAGS =3D \
-> - 	-DMANDIR=3D\""$(mandir)"\"				\
-> - 	-DGIMPPLUGINDIR=3D\""$(gimpplugindir)"\"			\
-> - 	-DGIMPDATADIR=3D\""$(gimpdatadir)"\"			\
-> --	-DCC=3D\""$(CC)"\"					\
-> -+	-DDEFAULT_CC=3D\""@DEFAULT_CC@"\"				\
-> - 	-DGIMPDIR=3D\""$(gimpdir)"\"				\
-> - 	-DGIMP_PLUGIN_VERSION=3D\""$(GIMP_PLUGIN_VERSION)"\"	\
-> - 	-I$(top_srcdir)						\
-> -diff --git a/tools/gimptool.c b/tools/gimptool.c
-> -index 21fc043..bbf3fa5 100644
-> ---- a/tools/gimptool.c
-> -+++ b/tools/gimptool.c
-> -@@ -280,7 +280,7 @@ find_out_env_flags (void)
-> -   else if (msvc_syntax)
-> -     env_cc =3D "cl -MD";
-> -   else
-> --    env_cc =3D CC;
-> -+    env_cc =3D DEFAULT_CC;
-> -
-> -   if (g_ascii_strncasecmp (env_cc, "cl", 2)    =3D=3D 0 &&
-> -       g_ascii_strncasecmp (env_cc, "clang", 5) !=3D 0)
-> diff --git=20
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-build-time-li=
-brary-paths-to-LD_LI.patch=20
-> b/meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-build-time-li=
-brary-paths-to-LD_LI.patch
-> deleted file mode 100644
-> index cec0055284..0000000000
-> ---=20
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-build-time-li=
-brary-paths-to-LD_LI.patch
-> +++ /dev/null
-> @@ -1,34 +0,0 @@
-> -From c720df90dfe3a3e92e34bfb36a04cc792064a501 Mon Sep 17 00:00:00=20
-> 2001
-> -From: Khem Raj <raj.khem@gmail.com <mailto:raj.khem@gmail.com>>
-> -Date: Wed, 24 May 2023 22:39:02 -0700
-> -Subject: [PATCH] libtool: Do not add build time library paths to
-> - LD_LIBRARY_PATH
-> -
-> -This does not serve much purpose on cross builds as it will add build
-> -time paths which are only useful when trying to run these tools from
-> -build area but when they are cross built this is not possible to run
-> -them like this.
-> -
-> -Upstream-Status: Inappropriate [Cross-compile specific]
-> -
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com=20
-> <mailto:raj.khem@gmail.com>>
-> ----
-> - ltmain.sh | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/ltmain.sh b/ltmain.sh
-> -index 134902c..068d74a 100644
-> ---- a/ltmain.sh
-> -+++ b/ltmain.sh
-> -@@ -5748,7 +5748,7 @@ func_exec_program ()
-> - 	if test yes =3D "$shlibpath_overrides_runpath" && test -n=20
-> "$shlibpath_var" && test -n "$temp_rpath"; then
-> - 	  $ECHO "\
-> -     # Add our own library path to $shlibpath_var
-> --    $shlibpath_var=3D\"$temp_rpath\$$shlibpath_var\"
-> -+    $shlibpath_var=3D\"$shlibpath_var\"
-> -
-> -     # Some systems cannot cope with colon-terminated $shlibpath_var
-> -     # The second colon is a workaround for a bug in BeOS R4 sed
-> ---
-> -2.40.1
-> -
-> diff --git=20
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-dont-check-for-lgi.p=
-atch=20
-> b/meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-dont-check-for-lgi.p=
-atch
-> new file mode 100644
-> index 0000000000..63a9159a43
-> --- /dev/null
-> +++=20
-> b/meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-dont-check-for-lgi.p=
-atch
-> @@ -0,0 +1,35 @@
-> +From e56a6330f1e29e489601ea3e7cb31bfd2ebb787a Mon Sep 17 00:00:00=20
-> 2001
-> +From: Markus Volk <f_l_k@t-online.de <mailto:f_l_k@t-online.de>>
-> +Date: Thu, 27 Mar 2025 21:02:22 +0100
-> +Subject: [PATCH] meson.build: dont check for lgi
-> +
-> +Checking if host can run lgi is pointless for cross-compile
-> +Set to be always true because we ensure to install lgi via=20
-> PACKAGECONFIG
-> +
-> +Signed-off-by: Markus Volk <f_l_k@t-online.de=20
-> <mailto:f_l_k@t-online.de>>
-> +
-> +Upstream-Status: Inappropriate [oe-specific]
-> +---
-> + meson.build | 6 +-----
-> + 1 file changed, 1 insertion(+), 5 deletions(-)
-> +
-> +diff --git a/meson.build b/meson.build
-> +index c91e8fc97d..efbc2d8175 100644
-> +--- a/meson.build
-> ++++ b/meson.build
-> +@@ -1235,11 +1235,7 @@ if have_lua
-> +       endif
-> +
-> +       if is_supported_lua
-> +-        have_lua_lgi =3D run_command(lua, '-e',
-> +-                                   '''
-> +-                                   local lgi =3D require 'lgi'
-> +-                                   ''',
-> +-                                   check: false).returncode() =3D=3D 0
-> ++        have_lua_lgi =3D true
-> +       endif
-> +
-> +       if have_lua_lgi
-> +--
-> +2.49.0
-> +
-> diff --git=20
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-require-iso-codes-na=
-tive.patch=20
-> b/meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-require-iso-codes-na=
-tive.patch
-> new file mode 100644
-> index 0000000000..c91b25a914
-> --- /dev/null
-> +++=20
-> b/meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-require-iso-codes-na=
-tive.patch
-> @@ -0,0 +1,34 @@
-> +From 8ccd12d6ec3330e9646ae9db6fd491226d516dc3 Mon Sep 17 00:00:00=20
-> 2001
-> +From: Markus Volk <f_l_k@t-online.de <mailto:f_l_k@t-online.de>>
-> +Date: Fri, 28 Mar 2025 01:33:00 +0100
-> +Subject: [PATCH] meson.build: require iso-codes-native
-> +
-> +This fixes:
-> +FAILED: app/widgets/gimplanguagestore-data.h
-> +/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux-musl/gimp/3.0.2/buil=
-d/tools/gen-languages
-> +gimp_language_store_parser_init: 0.006277 seconds
-> +ERROR: parse_iso_codes: error parsing=20
-> '/usr/share/xml/iso-codes/iso_639_3.xml': No such file or directory
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Markus Volk <f_l_k@t-online.de=20
-> <mailto:f_l_k@t-online.de>>
-> +---
-> + meson.build | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/meson.build b/meson.build
-> +index efbc2d8175..fd050f4d3c 100644
-> +--- a/meson.build
-> ++++ b/meson.build
-> +@@ -1135,7 +1135,7 @@ endif
-> +=20
-> #########################################################################=
-#######
-> + # ISO codes
-> +
-> +-isocodes =3D dependency('iso-codes', required: false)
-> ++isocodes =3D dependency('iso-codes', required: false, native: true)
-> + if isocodes.found()
-> +   isocodes_prefix =3D isocodes.get_variable(pkgconfig: 'prefix')
-> +   isocodes_location =3D isocodes_prefix / 'share' / 'xml' /=20
-> 'iso-codes'
-> +--
-> +2.49.0
-> +
-> diff --git=20
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weird-warning=
-.patch=20
-> b/meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weird-warning=
-.patch
-> deleted file mode 100644
-> index 4f04ac8250..0000000000
-> ---=20
-> a/meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weird-warning=
-.patch
-> +++ /dev/null
-> @@ -1,22 +0,0 @@
-> -From 51311f913d9f417d121f59b83d560c7b4b853d1c Mon Sep 17 00:00:00=20
-> 2001
-> -From: Simon Budig <simon@budig.de <mailto:simon@budig.de>>
-> -Date: Sat, 20 May 2023 22:25:40 +0200
-> -Subject: [PATCH] metadata: shut up a weird warning
-> -
-> -Upstream-Status: Backport=20
-> [<https://gitlab.gnome.org/GNOME/gimp/-/commit/51311f913d9f417d121f59b83d=
-560c7b4b853d1c>]
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com=20
-> <mailto:raj.khem@gmail.com>>
-> ----
-> - plug-ins/metadata/metadata-editor.c | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> ---- a/plug-ins/metadata/metadata-editor.c
-> -+++ b/plug-ins/metadata/metadata-editor.c
-> -@@ -2140,7 +2140,7 @@ metadata_dialog_editor_set_metadata (GEx
-> -                             }
-> -                           else
-> -                             {
-> --                              if (! g_strv_contains (values,=20
-> equiv_values[evi]))
-> -+                              if (! g_strv_contains ((const gchar *=20
-> const *) values, equiv_values[evi]))
-> -                                 {
-> -                                   gchar *tmpvalue;
-> -
-> diff --git=20
-> a/meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reproducibility-fix.=
-patch=20
-> b/meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reproducibility-fix.=
-patch
-> new file mode 100644
-> index 0000000000..532715d588
-> --- /dev/null
-> +++=20
-> b/meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reproducibility-fix.=
-patch
-> @@ -0,0 +1,56 @@
-> +From bf19c5687703769e406a8086036d4ed6421c33cb Mon Sep 17 00:00:00=20
-> 2001
-> +From: Markus Volk <f_l_k@t-online.de <mailto:f_l_k@t-online.de>>
-> +Date: Mon, 13 Jan 2025 10:04:33 +0100
-> +Subject: [PATCH] meson.build: reproducibility fix
-> +
-> +Signed-off-by: Markus Volk <f_l_k@t-online.de=20
-> <mailto:f_l_k@t-online.de>>
-> +
-> +Upstream-Status: Inappropriate [oe-specific]
-> +---
-> + meson.build | 28 ++++++++++++++--------------
-> + 1 file changed, 14 insertions(+), 14 deletions(-)
-> +
-> +diff --git a/meson.build b/meson.build
-> +index 97cd621780..e47180db87 100644
-> +--- a/meson.build
-> ++++ b/meson.build
-> +@@ -1599,23 +1599,23 @@ conf.set('HAVE_FUNC_ATTRIBUTE_DESTRUCTOR',
-> + conf.set_quoted('CC',             cc.get_id())
-> +
-> + cc_version=3D''
-> +-if cc.get_id() =3D=3D 'gcc' or cc.get_id() =3D=3D 'clang'
-> +-  cc_cmd =3D run_command(cc, '-v', check: false)
-> ++#if cc.get_id() =3D=3D 'gcc' or cc.get_id() =3D=3D 'clang'
-> ++#  cc_cmd =3D run_command(cc, '-v', check: false)
-> +   # Note: the call might actually fail when using ccache.
-> +   # See: <https://github.com/mesonbuild/meson/issues/6174>
-> +-  if cc_cmd.returncode() =3D=3D 0
-> +-    cc_version =3D cc_cmd.stdout() + cc_cmd.stderr()
-> +-  endif
-> +-else
-> ++#  if cc_cmd.returncode() =3D=3D 0
-> ++#    cc_version =3D cc_cmd.stdout() + cc_cmd.stderr()
-> ++#  endif
-> ++#else
-> +   # Various compilers have various options. Try most common ones.=20
-> This
-> +   # list of options comes from autotools checks.
-> +-  foreach arg : [ '--version', '-v', '-V', '-qversion' ]
-> +-    cc_cmd =3D run_command(cc, arg, check: false)
-> +-    if cc_cmd.returncode() =3D=3D 0
-> +-      cc_version =3D cc_cmd.stdout()
-> +-    endif
-> +-  endforeach
-> +-endif
-> ++#  foreach arg : [ '--version', '-v', '-V', '-qversion' ]
-> ++#    cc_cmd =3D run_command(cc, arg, check: false)
-> ++#    if cc_cmd.returncode() =3D=3D 0
-> ++#      cc_version =3D cc_cmd.stdout()
-> ++#    endif
-> ++#  endforeach
-> ++#endif
-> + if cc_version =3D=3D ''
-> +   # We didn't manage to get a meaningful verbose version from the
-> +   # compiler. Just save its name and version.
-> +--
-> +2.47.1
-> +
-> diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb=20
-> b/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
-> deleted file mode 100644
-> index 0272e05e96..0000000000
-> --- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
-> +++ /dev/null
-> @@ -1,101 +0,0 @@
-> -SUMMARY =3D "The GIMP is the GNU Image Manipulation Program"
-> -HOMEPAGE =3D "http://www.gimp.org <http://www.gimp.org/>"
-> -SECTION =3D "x11/graphics"
-> -LICENSE =3D "GPL-3.0-only"
-> -LIC_FILES_CHKSUM =3D=20
-> "file://COPYING;md5=3Dc678957b0c8e964aa6c70fd77641a71e"=20
-> <file://copying;md5=3Dc678957b0c8e964aa6c70fd77641a71e/>
-> -
-> -DEPENDS =3D " \
-> -    alsa-lib \
-> -    atk \
-> -    cairo \
-> -    fontconfig \
-> -    freetype \
-> -    gdk-pixbuf-native \
-> -    intltool-native \
-> -    libxslt-native \
-> -    gegl-native \
-> -    dbus-glib \
-> -    gtk+ \
-> -    babl \
-> -    gegl \
-> -    libmypaint \
-> -    mypaint-brushes-1.0 \
-> -    gexiv2 \
-> -    jpeg \
-> -    libmng \
-> -    libpng \
-> -    libexif \
-> -    tiff \
-> -    lcms \
-> -    poppler \
-> -    poppler-data \
-> -    jasper \
-> -    bzip2 \
-> -    libgudev \
-> -    libmng \
-> -    ${@bb.utils.contains=20
-> <mailto:${@bb.utils.contains>('DISTRO_FEATURES', 'x11', 'libxmu=20
-> libxpm', '', d)} \
-> -"
-> -DEPENDS:append:libc-musl =3D " libexecinfo"
-> -
-> -GNOMEBASEBUILDCLASS =3D "autotools"
-> -inherit features_check gnomebase gtk-icon-cache gtk-doc mime-xdg
-> -
-> -REQUIRED_DISTRO_FEATURES =3D "x11"
-> -
-> -SHPV =3D "${@gnome_verdir("${PV}")}"
-> -
-> -SRC_URI =3D=20
-> "https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2=20
-> <https://download.gimp.org/pub/$%7BBPN%7D/v$%7BSHPV%7D/$%7BBP%7D.tar.bz2>=
-=20
-> \
-> -          =20
-> file://0001-configure-Keep-first-line-of-compiler-version-string.patch=20
-> <file://0001-configure-keep-first-line-of-compiler-version-string.patch/>=
-=20
-> \
-> -          =20
-> file://0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch=20
-> <file://0001-libtool-do-not-add-build-time-library-paths-to-ld_li.patch/>=
-=20
-> \
-> -          =20
-> file://0001-file-tiff-load-fix-mismatching-variable-type.patch=20
-> <file://0001-file-tiff-load-fix-mismatching-variable-type.patch/> \
-> -           file://0001-metadata-shut-up-a-weird-warning.patch=20
-> <file://0001-metadata-shut-up-a-weird-warning.patch/> \
-> -           file://0001-gimptool-allow-default-CC-override.patch=20
-> <file://0001-gimptool-allow-default-cc-override.patch/> \
-> -           "
-> -SRC_URI[sha256sum] =3D=20
-> "50a845eec11c8831fe8661707950f5b8446e35f30edfb9acf98f85c1133f856e"
-> -
-> -EXTRA_OECONF =3D "--disable-python \
-> -                --without-webkit \
-> -                --disable-check-update \
-> -                --without-wmf"
-> -
-> -EXTRA_OECONF +=3D "${@oe.utils.conditional=20
-> <mailto:${@oe.utils.conditional>('SITEINFO_BITS', '32', '=20
-> --disable-vector-icons', '', d)}"
-> -
-> -do_configure:append() {
-> -    find ${B} -name Makefile | xargs sed -i=20
-> s:'-I$(includedir)':'-I.':g
-> -    find ${B} -name Makefile | xargs sed -i=20
-> s:'-I/usr/include':'-I${STAGING_INCDIR}':g
-> -}
-> -
-> -do_compile:prepend() {
-> -    # Let native babl/gegl find their plugins
-> -    export BABL_PATH=3D`find ${STAGING_LIBDIR_NATIVE} -maxdepth 1=20
-> -name 'babl-*'`
-> -    export GEGL_PATH=3D`find ${STAGING_LIBDIR_NATIVE} -maxdepth 1=20
-> -name 'gegl-*'`
-> -}
-> -
-> -FILES:${PN}  +=3D "${datadir}/metainfo"
-> -
-> -RDEPENDS:${PN} +=3D "mypaint-brushes-1.0"
-> -
-> -
-> -# gimptool
-> -
-> -# gimptool needs a CC definition, use current CC without sysroot
-> -python __anonymous() {
-> -    import shlex
-> -    CC_WITHOUT_SYSROOT =3D shlex.join(filter(lambda x: not=20
-> x.startswith("--sysroot=3D"), shlex.split(d.getVar("CC"))))
-> -    d.setVar("CC_WITHOUT_SYSROOT", CC_WITHOUT_SYSROOT)
-> -}
-> -EXTRA_OECONF +=3D "--with-default-cc=3D'${CC_WITHOUT_SYSROOT}'"
-> -
-> -# Split gimptool in its own package
-> -PACKAGE_BEFORE_PN +=3D "${PN}-gimptool"
-> -FILES:${PN}-gimptool +=3D "${bindir}/gimptool-2.0"
-> -
-> -# gimptool depends on gimp .pc file being installed and tools to=20
-> build the plugin.
-> -RDEPENDS:${PN}-gimptool +=3D "${PN}-dev=20
-> packagegroup-core-buildessential"
-> -INSANE_SKIP:${PN}-gimptool +=3D "dev-deps"
-> -
-> -
-> -CVE_STATUS[CVE-2007-3741] =3D "not-applicable-platform: This only=20
-> applies for Mandriva Linux"
-> -CVE_STATUS[CVE-2009-0581] =3D "cpe-incorrect: The current version=20
-> (2.10.38) is not affected."
-> -CVE_STATUS[CVE-2009-0723] =3D "cpe-incorrect: The current version=20
-> (2.10.38) is not affected."
-> -CVE_STATUS[CVE-2009-0733] =3D "cpe-incorrect: The current version=20
-> (2.10.38) is not affected."
-> diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb=20
-> b/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb
-> new file mode 100644
-> index 0000000000..2018ea04c4
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb
-> @@ -0,0 +1,132 @@
-> +SUMMARY =3D "The GIMP is the GNU Image Manipulation Program"
-> +HOMEPAGE =3D "http://www.gimp.org <http://www.gimp.org/>"
-> +SECTION =3D "graphics"
-> +LICENSE =3D "GPL-3.0-only"
-> +LIC_FILES_CHKSUM =3D=20
-> "file://COPYING;md5=3Dc678957b0c8e964aa6c70fd77641a71e"=20
-> <file://copying;md5=3Dc678957b0c8e964aa6c70fd77641a71e/>
-> +
-> +DEPENDS =3D " \
-> +    appstream-glib \
-> +    atk \
-> +    babl \
-> +    bzip2 \
-> +    bison-native \
-> +    cairo \
-> +    fontconfig \
-> +    freetype \
-> +    gdk-pixbuf-native \
-> +    gegl \
-> +    gexiv2 \
-> +    glib-2.0 \
-> +    glib-2.0-native \
-> +    gtk+3 \
-> +    harfbuzz \
-> +    iso-codes-native \
-> +    jpeg \
-> +    json-glib \
-> +    lcms \
-> +    libarchive \
-> +    libexif \
-> +    libmypaint \
-> +    libpng \
-> +    librsvg \
-> +    librsvg-native \
-> +    libxmu \
-> +    libxslt-native \
-> +    mypaint-brushes-1.0 \
-> +    pango \
-> +    poppler \
-> +    poppler-data \
-> +    python3-pygobject-native \
-> +    tiff \
-> +    xz \
-> +    zlib \
-> +"
-> +
-> +DEPENDS:append:libc-musl =3D " libexecinfo"
-> +
-> +inherit meson gtk-icon-cache mime-xdg pkgconfig gettext=20
-> gobject-introspection vala
-> +
-> +GIR_MESON_OPTION =3D 'can-crosscompile-gir'
-> +VALA_MESON_OPTION =3D "vala"
-> +VALA_MESON_ENABLE_FLAG =3D "enabled"
-> +VALA_MESON_DISABLE_FLAG =3D "disabled"
-> +GIDOCGEN_MESON_OPTION =3D "gi-docgen"
-> +GIDOCGEN_MESON_ENABLE_FLAG =3D "enabled"
-> +GIDOCGEN_MESON_DISABLE_FLAG =3D "disabled"
-> +
-> +SRC_URI =3D=20
-> "https://download.gimp.org/gimp/v${@oe.utils.trim_version('${PV=20
-> <https://download.gimp.org/gimp/v$%7B@oe.utils.trim_version('$%7BPV>}',=20
-> 2)}/gimp-${PV}.tar.xz"
-> +SRC_URI +=3D "file://0001-gimp-cross-compile-fix-for-bz2.patch"=20
-> <file://0001-gimp-cross-compile-fix-for-bz2.patch/>
-> +SRC_URI +=3D "file://0002-meson.build-reproducibility-fix.patch"=20
-> <file://0002-meson.build-reproducibility-fix.patch/>
-> +SRC_URI +=3D "file://0001-meson.build-dont-check-for-lgi.patch"=20
-> <file://0001-meson.build-dont-check-for-lgi.patch/>
-> +SRC_URI +=3D "file://0001-meson.build-require-iso-codes-native.patch"=20
-> <file://0001-meson.build-require-iso-codes-native.patch/>
-> +SRC_URI[sha256sum] =3D=20
-> "546ddc30cb2d0e79123c7fcb4d78211e1ee7a6aace91a6a0ad8cbcbf6ea571a2"
-> +
-> +PACKAGECONFIG[aa] =3D "-Daa=3Denabled,-Daa=3Ddisabled,aalib"
-> +PACKAGECONFIG[alsa] =3D "-Dalsa=3Denabled,-Dalsa=3Ddisabled,alsa-lib"
-> +PACKAGECONFIG[appdata-test] =3D=20
-> "-Dappdata-test=3Denabled,-Dappdata-test=3Ddisabled,appstream-native"
-> +PACKAGECONFIG[cairo-pdf] =3D "-Dcairo-pdf=3Denabled,-Dcairo-pdf=3Ddisabl=
-ed"
-> +PACKAGECONFIG[check-update] =3D "-Dcheck-update=3Dyes,-Dcheck-update=3Dn=
-o"
-> +PACKAGECONFIG[ghostscript] =3D=20
-> "-Dghostscript=3Denabled,-Dghostscript=3Ddisabled,ghostscript,ghostscript=
-"
-> +PACKAGECONFIG[gudev] =3D "-Dgudev=3Denabled,-Dgudev=3Ddisabled,libgudev"
-> +PACKAGECONFIG[heif] =3D "-Dheif=3Denabled,-Dheif=3Ddisabled,libheif"
-> +PACKAGECONFIG[javascript] =3D=20
-> "-Djavascript=3Denabled,-Djavascript=3Ddisabled,,gjs"
-> +PACKAGECONFIG[jpeg2000] =3D=20
-> "-Djpeg2000=3Denabled,-Djpeg2000=3Ddisabled,jasper"
-> +PACKAGECONFIG[jpeg-xl] =3D=20
-> "-Djpeg-xl=3Denabled,-Djpeg-xl=3Ddisabled,libjxl"
-> +PACKAGECONFIG[libunwind] =3D=20
-> "-Dlibunwind=3Dtrue,-Dlibunwind=3Dfalse,libunwind"
-> +PACKAGECONFIG[libbacktrace] =3D=20
-> "-Dlibbacktrace=3Dtrue,-Dlibbacktrace=3Dfalse,libbacktrace"
-> +PACKAGECONFIG[lua] =3D "-Dlua=3Dtrue,-Dlua=3Dfalse,,luajit lua-lgi"
-> +PACKAGECONFIG[mng] =3D "-Dmng=3Denabled,-Dmng=3Ddisabled,libmng"
-> +PACKAGECONFIG[openmp] =3D=20
-> "-Dopenmp=3Denabled,-Dopenmp=3Ddisabled,gcc-runtime"
-> +PACKAGECONFIG[vector-icons] =3D=20
-> "-Dvector-icons=3Dtrue,-Dvector-icons=3Dfalse,librsvg shared-mime-info"
-> +PACKAGECONFIG[webp] =3D "-Dwebp=3Denabled,-Dwebp=3Ddisabled,libwebp"
-> +PACKAGECONFIG[xcursor] =3D=20
-> "-Dxcursor=3Denabled,-Dxcursor=3Ddisabled,libxcursor"
-> +PACKAGECONFIG[x11] =3D "-Dxpm=3Denabled,-Dxpm=3Ddisabled,libxpm libxext=20
-> libxfixes"
-> +
-> +PACKAGECONFIG ?=3D " \
-> +    alsa \
-> +    cairo-pdf \
-> +    ghostscript \
-> +    gudev \
-> +    javascript \
-> +    jpeg2000 \
-> +    jpeg-xl \
-> +    lua \
-> +    mng \
-> +    webp \
-> +    ${@oe.utils.conditional=20
-> <mailto:${@oe.utils.conditional>('SITEINFO_BITS', '32', '',=20
-> 'vector-icons', d)} \
-> +    ${@bb.utils.contains=20
-> <mailto:${@bb.utils.contains>('LICENSE_FLAGS_ACCEPTED', 'commercial',=20
-> 'heif', '', d)} \
-> +    ${@bb.utils.contains=20
-> <mailto:${@bb.utils.contains>('DISTRO_FEATURES', 'x11', 'x11=20
-> xcursor', '', d)} \
-> +"
-> +
-> +PACKAGECONFIG:remove:riscv32 =3D "lua"
-> +PACKAGECONFIG:remove:riscv64 =3D "lua"
-> +PACKAGECONFIG:remove:powerpc64 =3D "lua"
-> +PACKAGECONFIG:remove:powerpc64le =3D "lua"
-> +
-> +EXTRA_OEMESON +=3D " \
-> +    -Dshmem-type=3Dposix \
-> +    -Dlinux-input=3Denabled \
-> +    --buildtype release \
-> +    --cross-file=3D${WORKDIR}/meson-${PN}.cross \
-> +"
-> +
-> +do_write_config:append() {
-> +    cat >${WORKDIR}/meson-${PN}.cross <<EOF
-> +[binaries]
-> +gjs =3D '${bindir}/gjs'
-> +luajit =3D '${bindir}/luajit'
-> +EOF
-> +}
-> +
-> +do_configure:append () {
-> +    sed -i -e "s|build_by_default: true|build_by_default: false|"=20
-> ${S}/gimp-data/images/meson.build
-> +}
-> +
-> +do_install:prepend() {
-> +    sed -i -e "s|${B}||" ${B}/app/widgets/gimplanguagestore-data.h
-> +    sed -i -e "s|${B}||" ${B}/plug-ins/file-bmp/huffman.h
-> +}
-> +
-> +FILES:${PN} +=3D "${datadir}/metainfo"
-> +
-> +RDEPENDS:${PN} =3D "mypaint-brushes-1.0 glib-networking=20
-> python3-pygobject"
-> --
-> 2.49.0
->=20
->=20
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#116337):=20
-> <https://lists.openembedded.org/g/openembedded-devel/message/116337>
-> Mute This Topic: <https://lists.openembedded.org/mt/111947159/3618223>
-> Group Owner: openembedded-devel+owner@lists.openembedded.org=20
-> <mailto:openembedded-devel+owner@lists.openembedded.org>
-> Unsubscribe:=20
-> <https://lists.openembedded.org/g/openembedded-devel/unsub>=20
-> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->=20
-
-
---=-HozQz/oeJsS0KzC6oWyp
-Content-Type: text/html; charset=iso-8859-13
-Content-Transfer-Encoding: quoted-printable
-
-<div id=3D"geary-body" dir=3D"auto"><div><div>yikes, I won't get around sen=
-ding this upstream. But as a quick fix</div><div><br></div><div>v7: require=
- iso-codes native to fix build without having iso-codes installed on host:<=
-/div></div><div><div>| FAILED: app/widgets/gimplanguagestore-data.h</div><d=
-iv>| /home/flk/poky/build/tmp/work/corei7-64-poky-linux/gimp/3.0.2/build/to=
-ols/gen-languages</div><div>| gimp_language_store_parser_init: 0.001486 sec=
-onds</div><div>| ERROR: parse_iso_codes: error parsing '/usr/share/xml/iso-=
-codes/iso_639_3.xml': No such file or directory</div></div></div><div id=3D=
-"geary-quote" dir=3D"auto"><br>On Fr, M=C3=A4r 28 2025 at 01:44:46 +01:00:0=
-0, Markus Volk &lt;f_l_k@t-online.de&gt; wrote:<br><blockquote type=3D"cite=
-"><div class=3D"plaintext" style=3D"white-space: break-spaces;">At long las=
-t, the first release of GIMP 3.0 is here! This is the end result of seven y=
-ears of hard work
-by volunteer developers, designers, artists, and community members (for ref=
-erence, GIMP 2.10
-was first published in 2018 and the initial development version of GIMP 3.0=
- was released in 2020).
-With GIMP 3.0 you can do more than ever before, more easily, more quickly!
-
-Highlights
-
-- Need to tweak a filter you applied hours ago? New in GIMP 3.0 is non-dest=
-ructive editing for most commonly-used filters. See the changes in real tim=
-e with on-canvas preview.
-- Exchange files with more applications, including BC7 DDS files as well as=
- better PSD export and many new formats.
-- Don=E2=80=99t know how big to make your drawing? Simply set your paint to=
-ol to expand layers automatically as needed.
-- Making pro-quality text got easier, too. Style your text, apply outlines,=
- shadows, bevels, and more, and you can still edit your text, change font a=
-nd size, and even tweak the style settings.
-- Organizing your layers has become much easier with the ability to select =
-multiple items at once, move them or transform them all together!
-- Color Management was again improved, as our long-term project to make GIM=
-P an advanced image editor for all usages.
-- Updated graphical toolkit (GTK3) for modern desktop usage.
-- New Wilber logo!
-
-<a href=3D"https://gitlab.gnome.org/GNOME/gimp/-/blob/GIMP_3_0_0/NEWS?ref_t=
-ype=3Dtags">https://gitlab.gnome.org/GNOME/gimp/-/blob/GIMP_3_0_0/NEWS?ref_=
-type=3Dtags</a>
-
-Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@t=
--online.de</a>&gt;
-Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com">raj.khem@=
-gmail.com</a>&gt;
+Signed-off-by: tho3.nguyen <tho3.nguyen@lge.com>
 ---
- ...irst-line-of-compiler-version-string.patch |  30 ----
- ...f-load-fix-mismatching-variable-type.patch |  24 ----
- .../0001-gimp-cross-compile-fix-for-bz2.patch |  30 ++++
- ...1-gimptool-allow-default-CC-override.patch |  85 -----------
- ...dd-build-time-library-paths-to-LD_LI.patch |  34 -----
- .../0001-meson.build-dont-check-for-lgi.patch |  35 +++++
- ...meson.build-require-iso-codes-native.patch |  34 +++++
- ...001-metadata-shut-up-a-weird-warning.patch |  22 ---
- ...0002-meson.build-reproducibility-fix.patch |  56 ++++++++
- meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb  | 101 --------------
- meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb    | 132 ++++++++++++++++++
- 11 files changed, 287 insertions(+), 296 deletions(-)
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-f=
-irst-line-of-compiler-version-string.patch
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-f=
-ix-mismatching-variable-type.patch
- create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compi=
-le-fix-for-bz2.patch
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-d=
-efault-CC-override.patch
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-a=
-dd-build-time-library-paths-to-LD_LI.patch
- create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-dont=
--check-for-lgi.patch
- create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-requ=
-ire-iso-codes-native.patch
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up=
--a-weird-warning.patch
- create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-repr=
-oducibility-fix.patch
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
- create mode 100644 meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb
+ ...function-prototypes-solves-issue-322.patch | 1154 +++++++++++++++++
+ ...top.init-atop-pm.sh-Avoid-using-bash.patch |   67 -
+ .../atop/atop/fix-permissions.patch           |   54 +-
+ .../atop/{atop_2.4.0.bb => atop_2.11.0.bb}    |   15 +-
+ 4 files changed, 1197 insertions(+), 93 deletions(-)
+ create mode 100644 meta-oe/recipes-support/atop/atop/0001-Redefine-function-prototypes-solves-issue-322.patch
+ delete mode 100644 meta-oe/recipes-support/atop/atop/0001-atop.daily-atop.init-atop-pm.sh-Avoid-using-bash.patch
+ rename meta-oe/recipes-support/atop/{atop_2.4.0.bb => atop_2.11.0.bb} (83%)
 
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-li=
-ne-of-compiler-version-string.patch b/meta-gnome/recipes-gimp/gimp/gimp/000=
-1-configure-Keep-first-line-of-compiler-version-string.patch
-deleted file mode 100644
-index 618b4cc7a7..0000000000
---- a/meta-gnome/recipes-gimp/gimp/gimp/0001-configure-Keep-first-line-of-c=
-ompiler-version-string.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From 5711ccfab40e304ced7f5be39a4083e3fcecff91 Mon Sep 17 00:00:00 2001
--From: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com">raj.khem@gmail.co=
-m</a>&gt;
--Date: Wed, 24 May 2023 22:22:41 -0700
--Subject: [PATCH] configure: Keep first line of compiler version string
--
--Full output of cc -v may contain additional information which could
--contain build path information, which is unnessasary
--
--Upstream-Status: Submitted [<a href=3D"https://gitlab.gnome.org/GNOME/gimp=
-/-/merge_requests/926">https://gitlab.gnome.org/GNOME/gimp/-/merge_requests=
-/926</a>]
--Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com">raj.khem=
-@gmail.com</a>&gt;
-----
-- configure.ac | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/configure.ac b/configure.ac
--index c25415d..68707a0 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -599,7 +599,7 @@ fi
-- for CC_VERSION_OPT in $CC_VERSION_OPTS; do
--   # We run $CC, and escape and format its output, in a single step,
--   # since some shells expand escape sequences in "echo" arguments.
---  CC_VERSION=3D"`$CC $CC_VERSION_OPT 2&gt;&amp;1 | sed -e 's/\\\\/\\\\\\\=
-\\\\\\\\\/g;s/^/\\\\t/;s/$/\\\\n/' | tr -d '\n'`"
--+  CC_VERSION=3D"`$CC $CC_VERSION_OPT 2&gt;&amp;1 | head -1 | sed -e 's/\\=
-\\/\\\\\\\\\\\\\\\\/g;s/^/\\\\t/;s/$/\\\\n/' | tr -d '\n'`"
--   if test $? -eq 0; then
--     break
--   fi
----=20
--2.40.1
--
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mism=
-atching-variable-type.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-file-t=
-iff-load-fix-mismatching-variable-type.patch
-deleted file mode 100644
-index 13b3dda144..0000000000
---- a/meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mismatching=
--variable-type.patch
-+++ /dev/null
-@@ -1,24 +0,0 @@
--From a2458f1528e5733574bb26ff5452b1329116e6db Mon Sep 17 00:00:00 2001
--From: Simon Budig &lt;<a href=3D"mailto:simon@budig.de">simon@budig.de</a>=
-&gt;
--Date: Sat, 20 May 2023 18:40:41 +0200
--Subject: [PATCH] file-tiff-load: fix mismatching variable type
--
--Upstream-Status: Backport [<a href=3D"https://gitlab.gnome.org/GNOME/gimp/=
--/commit/a2458f1528e5733574bb26ff5452b1329116e6db">https://gitlab.gnome.org=
-/GNOME/gimp/-/commit/a2458f1528e5733574bb26ff5452b1329116e6db</a>]
--Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmai.com">raj.khem@=
-gmai.com</a>&gt;
-----
-- plug-ins/file-tiff/file-tiff-load.c | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
--
----- a/plug-ins/file-tiff/file-tiff-load.c
--+++ b/plug-ins/file-tiff/file-tiff-load.c
--@@ -1301,8 +1301,8 @@ load_image (GFile        *file,
--=20
--       /* any resolution info in the file? */
--       {
---        gfloat   xres =3D 72.0;
---        gfloat   yres =3D 72.0;
--+        gdouble   xres =3D 72.0;
--+        gdouble   yres =3D 72.0;
--         gushort  read_unit;
--         GimpUnit unit =3D GIMP_UNIT_PIXEL; /* invalid unit */
--=20
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fix-=
-for-bz2.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-f=
-ix-for-bz2.patch
+diff --git a/meta-oe/recipes-support/atop/atop/0001-Redefine-function-prototypes-solves-issue-322.patch b/meta-oe/recipes-support/atop/atop/0001-Redefine-function-prototypes-solves-issue-322.patch
 new file mode 100644
-index 0000000000..721225c8b3
+index 0000000000..f55ad5318a
 --- /dev/null
-+++ b/meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fix-for-bz2=
-.patch
-@@ -0,0 +1,30 @@
-+From a7e40e19d17404cf5ec4135fc1becd5a90f5e1e1 Mon Sep 17 00:00:00 2001
-+From: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@t-online.=
-de</a>&gt;
-+Date: Wed, 25 Dec 2024 07:27:04 +0100
-+Subject: [PATCH] gimp: cross-compile fix for bz2
++++ b/meta-oe/recipes-support/atop/atop/0001-Redefine-function-prototypes-solves-issue-322.patch
+@@ -0,0 +1,1154 @@
++From ece93ebc7b9ebbb73f92b2238a87b78ddbd4ca98 Mon Sep 17 00:00:00 2001
++From: Gerlof Langeveld <gerlof.langeveld@atoptool.nl>
++Date: Fri, 14 Mar 2025 15:39:30 +0100
++Subject: [PATCH] Redefine function prototypes (solves issue #322)
 +
-+autotools bzip2 build does not create pkgconfig files so looking for the d=
-ependency fails.
++Certain function prototypes did not explicitly define the
++calling argument types, specifically the prototypes for the
++convert functions defined in the 'detail_printdef' structure.
++These incomplete definitions cause a lot of errors when using
++gcc 1.15 which is based on C23.
 +
-+Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@=
-t-online.de</a>&gt;
-+
-+Upstream-Status: Inappropriate [can probably be removed once bzip2 is buil=
-t with meson or cmake]
++Upstream-Status: Backport [ece93eb Redefine function prototypes (solves issue #322)]
 +---
-+ meson.build | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ atop.c        |   5 ++
++ atopacctd.c   |   5 ++
++ atopcat.c     |   6 ++
++ atopconvert.c |   1 +
++ atophide.c    |   5 ++
++ atopsar.c     |   4 ++
++ cgroups.c     |   7 +-
++ drawbar.c     |   4 ++
++ gpucom.c      |   4 ++
++ netatopif.c   |   4 ++
++ photoproc.c   |   4 ++
++ photosyst.c   |   5 ++
++ rawlog.c      |   4 ++
++ showgeneric.c |   4 ++
++ showlinux.h   |  11 ++-
++ showprocs.c   | 188 +++++++++++++++++++++++++-------------------------
++ various.c     |   4 ++
++ 17 files changed, 168 insertions(+), 97 deletions(-)
 +
-+diff --git a/meson.build b/meson.build
-+index 4e48f8c64c..d5dce47015 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -765,7 +765,7 @@ zlib =3D dependency('zlib')
-+ MIMEtypes +=3D 'image/x-psp'
-+=20
-+ # Compiler-provided headers can't be found in crossroads environment
-+-if not meson.is_cross_build()
-++if true
-+   bz2 =3D cc.find_library('bz2')
-+ else
-+   bz2 =3D dependency('bzip2')
-+--=20
-+2.47.1
++diff --git a/atop.c b/atop.c
++index fe037fc..ac6aa6d 100644
++--- a/atop.c
+++++ b/atop.c
++@@ -118,6 +118,10 @@
++ ** can be linked with 'atop'; the one to use can eventually be chosen
++ ** at runtime. 
++ */
+++#define _POSIX_C_SOURCE	
+++#define _XOPEN_SOURCE
+++#define _GNU_SOURCE
+++#define _DEFAULT_SOURCE
++ 
++ #include <sys/types.h>
++ #include <sys/param.h>
++@@ -128,6 +132,7 @@
++ #include <errno.h>
++ #include <fcntl.h>
++ #include <unistd.h>
+++#include <getopt.h>
++ #include <stdlib.h>
++ #include <signal.h>
++ #include <sys/utsname.h>
++diff --git a/atopacctd.c b/atopacctd.c
++index b16d6a6..c8816b6 100644
++--- a/atopacctd.c
+++++ b/atopacctd.c
++@@ -36,6 +36,11 @@
++ ** it under the terms of the GNU General Public License version 2 as
++ ** published by the Free Software Foundation.
++ */
+++#define _POSIX_C_SOURCE
+++#define _XOPEN_SOURCE
+++#define _GNU_SOURCE
+++#define _DEFAULT_SOURCE
+++
++ #include <sys/types.h>
++ #include <sys/stat.h>
++ #include <stdio.h>
++diff --git a/atopcat.c b/atopcat.c
++index fb014a0..099a888 100644
++--- a/atopcat.c
+++++ b/atopcat.c
++@@ -28,9 +28,15 @@
++ ** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ ** --------------------------------------------------------------------------
++ */
+++#define _POSIX_C_SOURCE
+++#define _XOPEN_SOURCE
+++#define _GNU_SOURCE
+++#define _DEFAULT_SOURCE
+++
++ #include <sys/types.h>
++ #include <sys/param.h>
++ #include <sys/stat.h>
+++#include <getopt.h>
++ #include <fcntl.h>
++ #include <time.h>
++ #include <stdio.h>
++diff --git a/atopconvert.c b/atopconvert.c
++index fd34a85..9c083a6 100644
++--- a/atopconvert.c
+++++ b/atopconvert.c
++@@ -32,6 +32,7 @@
++ #include <sys/param.h>
++ #include <sys/mman.h>
++ #include <sys/stat.h>
+++#include <getopt.h>
++ #include <time.h>
++ #include <stdio.h>
++ #include <errno.h>
++diff --git a/atophide.c b/atophide.c
++index 0502262..313929e 100644
++--- a/atophide.c
+++++ b/atophide.c
++@@ -31,6 +31,11 @@
++ ** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ ** --------------------------------------------------------------------------
++ */
+++#define _POSIX_C_SOURCE
+++#define _XOPEN_SOURCE
+++#define _GNU_SOURCE
+++#define _DEFAULT_SOURCE
+++
++ #include <sys/types.h>
++ #include <sys/param.h>
++ #include <sys/mman.h>
++diff --git a/atopsar.c b/atopsar.c
++index a3dd121..1cf13e8 100644
++--- a/atopsar.c
+++++ b/atopsar.c
++@@ -28,6 +28,10 @@
++ ** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ ** --------------------------------------------------------------------------
++ */
+++#define _POSIX_C_SOURCE
+++#define _XOPEN_SOURCE
+++#define _GNU_SOURCE
+++#define _DEFAULT_SOURCE
++ 
++ #include <sys/types.h>
++ #include <sys/param.h>
++diff --git a/cgroups.c b/cgroups.c
++index d617b48..4f1247c 100644
++--- a/cgroups.c
+++++ b/cgroups.c
++@@ -27,6 +27,10 @@
++ ** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ ** --------------------------------------------------------------------------
++ */
+++#define _POSIX_C_SOURCE
+++#define _XOPEN_SOURCE
+++#define _GNU_SOURCE
+++#define _DEFAULT_SOURCE
++ 
++ #include <sys/types.h>
++ #include <sys/param.h>
++@@ -1189,7 +1193,8 @@ mergecgrouplist(struct cglinesel **cgroupselp, int newdepth,
++ 	//
++ 	cgroupsel = malloc(sizeof(struct cglinesel) * (ncgroups+nprocs));
++ 
++-	ptrverify(cgroupsel, "Malloc for cglinesel structs failed (%d)\n",
+++	if (cgroupsel == NULL)
+++		ptrverify(cgroupsel, "Malloc for cglinesel structs failed (%d)\n",
++ 					ncgroups + nprocs);
++ 
++ 	*cgroupselp = cgroupsel;
++diff --git a/drawbar.c b/drawbar.c
++index 0ab3b40..c8539bf 100644
++--- a/drawbar.c
+++++ b/drawbar.c
++@@ -103,6 +103,10 @@
++ // horizontally scaled by the user, atop might switch from one model to
++ // the other.
++ /////////////////////////////////////////////////////////////////////////////
+++#define _POSIX_C_SOURCE
+++#define _XOPEN_SOURCE
+++#define _GNU_SOURCE
+++#define _DEFAULT_SOURCE
++ 
++ #include <sys/types.h>
++ #include <curses.h>
++diff --git a/gpucom.c b/gpucom.c
++index 1ff3818..25e7637 100644
++--- a/gpucom.c
+++++ b/gpucom.c
++@@ -22,6 +22,10 @@
++ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
++ ** See the GNU General Public License for more details.
++ */
+++#define _POSIX_C_SOURCE
+++#define _XOPEN_SOURCE
+++#define _GNU_SOURCE
+++#define _DEFAULT_SOURCE
++ 
++ #include <sys/types.h>
++ #include <sys/socket.h>
++diff --git a/netatopif.c b/netatopif.c
++index ea67142..d0e9c29 100644
++--- a/netatopif.c
+++++ b/netatopif.c
++@@ -22,6 +22,10 @@
++ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
++ ** See the GNU General Public License for more details.
++ */
+++#define _POSIX_C_SOURCE
+++#define _XOPEN_SOURCE
+++#define _GNU_SOURCE
+++#define _DEFAULT_SOURCE
++ 
++ #include <sys/types.h>
++ #include <stdio.h>
++diff --git a/photoproc.c b/photoproc.c
++index 234007b..2b8de20 100644
++--- a/photoproc.c
+++++ b/photoproc.c
++@@ -30,6 +30,10 @@
++ ** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ ** --------------------------------------------------------------------------
++ */
+++#define _POSIX_C_SOURCE
+++#define _XOPEN_SOURCE
+++#define _GNU_SOURCE
+++#define _DEFAULT_SOURCE
++ 
++ #include <sys/types.h>
++ #include <sys/param.h>
++diff --git a/photosyst.c b/photosyst.c
++index 46fccd8..9012946 100644
++--- a/photosyst.c
+++++ b/photosyst.c
++@@ -29,6 +29,11 @@
++ ** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ ** --------------------------------------------------------------------------
++ */
+++#define _POSIX_C_SOURCE
+++#define _XOPEN_SOURCE
+++#define _GNU_SOURCE
+++#define _DEFAULT_SOURCE
+++
++ #include <sys/types.h>
++ #include <stdio.h>
++ #include <string.h>
++diff --git a/rawlog.c b/rawlog.c
++index f46430d..541b75c 100644
++--- a/rawlog.c
+++++ b/rawlog.c
++@@ -26,6 +26,10 @@
++ ** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ ** --------------------------------------------------------------------------
++ */
+++#define _POSIX_C_SOURCE
+++#define _XOPEN_SOURCE
+++#define _GNU_SOURCE
+++#define _DEFAULT_SOURCE
++ 
++ #include <sys/types.h>
++ #include <sys/param.h>
++diff --git a/showgeneric.c b/showgeneric.c
++index 0722a64..a472501 100644
++--- a/showgeneric.c
+++++ b/showgeneric.c
++@@ -29,6 +29,10 @@
++ ** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ ** --------------------------------------------------------------------------
++ */
+++#define _POSIX_C_SOURCE
+++#define _XOPEN_SOURCE
+++#define _GNU_SOURCE
+++#define _DEFAULT_SOURCE
++ 
++ #include <sys/types.h>
++ #include <sys/param.h>
++diff --git a/showlinux.h b/showlinux.h
++index e082c72..72c57b9 100644
++--- a/showlinux.h
+++++ b/showlinux.h
++@@ -102,9 +102,16 @@ typedef struct
++ {
++         char *head;                      // column header
++         char *configname;                // name as used to config print line
++-        char *(*doactiveconvert)();      // pointer to conv function
+++
+++	union {
+++        	char *(*doactiveconverts)(struct tstat *, int, int);
+++        	char *(*doactiveconvertc)(struct cgchainer *, struct tstat *,
+++                			int, int, count_t, int, int *);
+++	} ac;
+++   			                 // pointer to conv function
++                                          // for active process
++-        char *(*doexitconvert)();        // pointer to conv function
+++	char *(*doexitconvert)(struct tstat *, int, int);        
+++			                 // pointer to conv function
++                                          // for exited process
++ 	char sortcrit;                   // sort criterion similar to showorder
++         int  width;                      // required width
++diff --git a/showprocs.c b/showprocs.c
++index 0db1e31..020cc85 100644
++--- a/showprocs.c
+++++ b/showprocs.c
++@@ -510,7 +510,7 @@ showprocline(detail_printpair* elemptr, struct tstat *curstat,
++                 }
++                 else if (curstat->gen.state != 'E')  // active process
++                 {
++-                        printg("%s", curelem.pf->doactiveconvert(curstat, 
+++                        printg("%s", curelem.pf->ac.doactiveconverts(curstat, 
++                                                         avgval, nsecs));
++                 }
++                 else                                 // exited process
++@@ -622,7 +622,7 @@ procprt_TID_ae(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_TID = 
++-   { "TID", "TID", procprt_TID_ae, procprt_TID_ae, ' ', 5}; //DYNAMIC WIDTH!
+++   { "TID", "TID", .ac.doactiveconverts = procprt_TID_ae, procprt_TID_ae, ' ', 5}; //DYNAMIC WIDTH!
++ /***************************************************************/
++ char *
++ procprt_PID_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -646,7 +646,7 @@ procprt_PID_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_PID = 
++-   { "PID", "PID", procprt_PID_a, procprt_PID_e, ' ', 5}; //DYNAMIC WIDTH!
+++   { "PID", "PID", .ac.doactiveconverts = procprt_PID_a, procprt_PID_e, ' ', 5}; //DYNAMIC WIDTH!
++ /***************************************************************/
++ char *
++ procprt_PPID_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -670,7 +670,7 @@ procprt_PPID_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_PPID = 
++-   { "PPID", "PPID", procprt_PPID_a, procprt_PPID_e, ' ', 5}; //DYNAMIC WIDTH!
+++   { "PPID", "PPID", .ac.doactiveconverts = procprt_PPID_a, procprt_PPID_e, ' ', 5}; //DYNAMIC WIDTH!
++ /***************************************************************/
++ char *
++ procprt_VPID_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -691,7 +691,7 @@ procprt_VPID_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_VPID = 
++-   { "VPID", "VPID", procprt_VPID_a, procprt_VPID_e, ' ', 5}; //DYNAMIC WIDTH!
+++   { "VPID", "VPID", .ac.doactiveconverts = procprt_VPID_a, procprt_VPID_e, ' ', 5}; //DYNAMIC WIDTH!
++ /***************************************************************/
++ char *
++ procprt_CTID_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -709,7 +709,7 @@ procprt_CTID_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_CTID = 
++-   { " CTID", "CTID", procprt_CTID_a, procprt_CTID_e, ' ', 5};
+++   { " CTID", "CTID", .ac.doactiveconverts = procprt_CTID_a, procprt_CTID_e, ' ', 5};
++ /***************************************************************/
++ char *
++ procprt_CID_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -738,7 +738,7 @@ procprt_CID_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_CID = 
++-   { "CID/POD        ", "CID", procprt_CID_a, procprt_CID_e, ' ', 15};
+++   { "CID/POD        ", "CID", .ac.doactiveconverts = procprt_CID_a, procprt_CID_e, ' ', 15};
++ /***************************************************************/
++ char *
++ procprt_SYSCPU_ae(struct tstat *curstat, int avgval, int nsecs)
++@@ -750,7 +750,7 @@ procprt_SYSCPU_ae(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_SYSCPU = 
++-   { "SYSCPU", "SYSCPU", procprt_SYSCPU_ae, procprt_SYSCPU_ae, ' ', 6};
+++   { "SYSCPU", "SYSCPU", .ac.doactiveconverts = procprt_SYSCPU_ae, procprt_SYSCPU_ae, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_USRCPU_ae(struct tstat *curstat, int avgval, int nsecs)
++@@ -762,7 +762,7 @@ procprt_USRCPU_ae(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_USRCPU = 
++-   { "USRCPU", "USRCPU", procprt_USRCPU_ae, procprt_USRCPU_ae, ' ', 6};
+++   { "USRCPU", "USRCPU", .ac.doactiveconverts = procprt_USRCPU_ae, procprt_USRCPU_ae, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_VGROW_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -780,7 +780,7 @@ procprt_VGROW_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_VGROW = 
++-   { " VGROW", "VGROW", procprt_VGROW_a, procprt_VGROW_e, ' ', 6};
+++   { " VGROW", "VGROW", .ac.doactiveconverts = procprt_VGROW_a, procprt_VGROW_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_RGROW_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -798,7 +798,7 @@ procprt_RGROW_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_RGROW = 
++-   { " RGROW", "RGROW", procprt_RGROW_a, procprt_RGROW_e, ' ', 6};
+++   { " RGROW", "RGROW", .ac.doactiveconverts = procprt_RGROW_a, procprt_RGROW_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_MINFLT_ae(struct tstat *curstat, int avgval, int nsecs)
++@@ -810,7 +810,7 @@ procprt_MINFLT_ae(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_MINFLT = 
++-   { "MINFLT", "MINFLT", procprt_MINFLT_ae, procprt_MINFLT_ae, ' ', 6};
+++   { "MINFLT", "MINFLT", .ac.doactiveconverts = procprt_MINFLT_ae, procprt_MINFLT_ae, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_MAJFLT_ae(struct tstat *curstat, int avgval, int nsecs)
++@@ -822,7 +822,7 @@ procprt_MAJFLT_ae(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_MAJFLT = 
++-   { "MAJFLT", "MAJFLT", procprt_MAJFLT_ae, procprt_MAJFLT_ae, ' ', 6};
+++   { "MAJFLT", "MAJFLT", .ac.doactiveconverts = procprt_MAJFLT_ae, procprt_MAJFLT_ae, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_VSTEXT_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -840,7 +840,7 @@ procprt_VSTEXT_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_VSTEXT = 
++-   { "VSTEXT", "VSTEXT", procprt_VSTEXT_a, procprt_VSTEXT_e, ' ', 6};
+++   { "VSTEXT", "VSTEXT", .ac.doactiveconverts = procprt_VSTEXT_a, procprt_VSTEXT_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_VSIZE_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -858,7 +858,7 @@ procprt_VSIZE_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_VSIZE = 
++-   { " VSIZE", "VSIZE", procprt_VSIZE_a, procprt_VSIZE_e, ' ', 6};
+++   { " VSIZE", "VSIZE", .ac.doactiveconverts = procprt_VSIZE_a, procprt_VSIZE_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_RSIZE_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -876,7 +876,7 @@ procprt_RSIZE_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_RSIZE = 
++-   { " RSIZE", "RSIZE", procprt_RSIZE_a, procprt_RSIZE_e, ' ', 6};
+++   { " RSIZE", "RSIZE", .ac.doactiveconverts = procprt_RSIZE_a, procprt_RSIZE_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_PSIZE_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -897,7 +897,7 @@ procprt_PSIZE_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_PSIZE = 
++-   { " PSIZE", "PSIZE", procprt_PSIZE_a, procprt_PSIZE_e, ' ', 6};
+++   { " PSIZE", "PSIZE", .ac.doactiveconverts = procprt_PSIZE_a, procprt_PSIZE_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_VSLIBS_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -915,7 +915,7 @@ procprt_VSLIBS_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_VSLIBS = 
++-   { "VSLIBS", "VSLIBS", procprt_VSLIBS_a, procprt_VSLIBS_e, ' ', 6};
+++   { "VSLIBS", "VSLIBS", .ac.doactiveconverts = procprt_VSLIBS_a, procprt_VSLIBS_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_VDATA_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -933,7 +933,7 @@ procprt_VDATA_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_VDATA = 
++-   { " VDATA", "VDATA", procprt_VDATA_a, procprt_VDATA_e, ' ', 6};
+++   { " VDATA", "VDATA", .ac.doactiveconverts = procprt_VDATA_a, procprt_VDATA_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_VSTACK_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -951,7 +951,7 @@ procprt_VSTACK_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_VSTACK = 
++-   { "VSTACK", "VSTACK", procprt_VSTACK_a, procprt_VSTACK_e, ' ', 6};
+++   { "VSTACK", "VSTACK", .ac.doactiveconverts = procprt_VSTACK_a, procprt_VSTACK_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_SWAPSZ_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -969,7 +969,7 @@ procprt_SWAPSZ_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_SWAPSZ = 
++-   { "SWAPSZ", "SWAPSZ", procprt_SWAPSZ_a, procprt_SWAPSZ_e, ' ', 6};
+++   { "SWAPSZ", "SWAPSZ", .ac.doactiveconverts = procprt_SWAPSZ_a, procprt_SWAPSZ_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_LOCKSZ_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -987,7 +987,7 @@ procprt_LOCKSZ_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_LOCKSZ = 
++-   { "LOCKSZ", "LOCKSZ", procprt_LOCKSZ_a, procprt_LOCKSZ_e, ' ', 6};
+++   { "LOCKSZ", "LOCKSZ", .ac.doactiveconverts = procprt_LOCKSZ_a, procprt_LOCKSZ_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_CMD_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1010,7 +1010,7 @@ procprt_CMD_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_CMD = 
++-   { "CMD           ", "CMD", procprt_CMD_a, procprt_CMD_e, ' ', 14};
+++   { "CMD           ", "CMD", .ac.doactiveconverts = procprt_CMD_a, procprt_CMD_e, ' ', 14};
++ /***************************************************************/
++ char *
++ procprt_RUID_ae(struct tstat *curstat, int avgval, int nsecs)
++@@ -1023,7 +1023,7 @@ procprt_RUID_ae(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_RUID = 
++-   { "RUID    ", "RUID", procprt_RUID_ae, procprt_RUID_ae, ' ', 8};
+++   { "RUID    ", "RUID", .ac.doactiveconverts = procprt_RUID_ae, procprt_RUID_ae, ' ', 8};
++ /***************************************************************/
++ char *
++ procprt_EUID_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1042,7 +1042,7 @@ procprt_EUID_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_EUID = 
++-   { "EUID    ", "EUID", procprt_EUID_a, procprt_EUID_e, ' ', 8};
+++   { "EUID    ", "EUID", .ac.doactiveconverts = procprt_EUID_a, procprt_EUID_e, ' ', 8};
++ /***************************************************************/
++ char *
++ procprt_SUID_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1061,7 +1061,7 @@ procprt_SUID_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_SUID = 
++-   { "SUID    ", "SUID", procprt_SUID_a, procprt_SUID_e, ' ', 8};
+++   { "SUID    ", "SUID", .ac.doactiveconverts = procprt_SUID_a, procprt_SUID_e, ' ', 8};
++ /***************************************************************/
++ char *
++ procprt_FSUID_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1080,7 +1080,7 @@ procprt_FSUID_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_FSUID = 
++-   { "FSUID   ", "FSUID", procprt_FSUID_a, procprt_FSUID_e, ' ', 8};
+++   { "FSUID   ", "FSUID", .ac.doactiveconverts = procprt_FSUID_a, procprt_FSUID_e, ' ', 8};
++ /***************************************************************/
++ char *
++ procprt_RGID_ae(struct tstat *curstat, int avgval, int nsecs)
++@@ -1093,7 +1093,7 @@ procprt_RGID_ae(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_RGID = 
++-   { "RGID    ", "RGID", procprt_RGID_ae, procprt_RGID_ae, ' ', 8};
+++   { "RGID    ", "RGID", .ac.doactiveconverts = procprt_RGID_ae, procprt_RGID_ae, ' ', 8};
++ /***************************************************************/
++ char *
++ procprt_EGID_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1112,7 +1112,7 @@ procprt_EGID_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_EGID = 
++-   { "EGID    ", "EGID", procprt_EGID_a, procprt_EGID_e, ' ', 8};
+++   { "EGID    ", "EGID", .ac.doactiveconverts = procprt_EGID_a, procprt_EGID_e, ' ', 8};
++ /***************************************************************/
++ char *
++ procprt_SGID_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1131,7 +1131,7 @@ procprt_SGID_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_SGID = 
++-   { "SGID    ", "SGID", procprt_SGID_a, procprt_SGID_e, ' ', 8};
+++   { "SGID    ", "SGID", .ac.doactiveconverts = procprt_SGID_a, procprt_SGID_e, ' ', 8};
++ /***************************************************************/
++ char *
++ procprt_FSGID_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1150,7 +1150,7 @@ procprt_FSGID_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_FSGID = 
++-   { "FSGID   ", "FSGID", procprt_FSGID_a, procprt_FSGID_e, ' ', 8};
+++   { "FSGID   ", "FSGID", .ac.doactiveconverts = procprt_FSGID_a, procprt_FSGID_e, ' ', 8};
++ /***************************************************************/
++ char *
++ procprt_STDATE_ae(struct tstat *curstat, int avgval, int nsecs)
++@@ -1162,7 +1162,7 @@ procprt_STDATE_ae(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_STDATE = 
++-   { "  STDATE  ", "STDATE", procprt_STDATE_ae, procprt_STDATE_ae, ' ', 10};
+++   { "  STDATE  ", "STDATE", .ac.doactiveconverts = procprt_STDATE_ae, procprt_STDATE_ae, ' ', 10};
++ /***************************************************************/
++ char *
++ procprt_STTIME_ae(struct tstat *curstat, int avgval, int nsecs)
++@@ -1174,7 +1174,7 @@ procprt_STTIME_ae(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_STTIME = 
++-   { " STTIME ", "STTIME", procprt_STTIME_ae, procprt_STTIME_ae, ' ', 8};
+++   { " STTIME ", "STTIME", .ac.doactiveconverts = procprt_STTIME_ae, procprt_STTIME_ae, ' ', 8};
++ /***************************************************************/
++ char *
++ procprt_ENDATE_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1197,7 +1197,7 @@ procprt_ENDATE_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_ENDATE = 
++-   { "  ENDATE  ", "ENDATE", procprt_ENDATE_a, procprt_ENDATE_e, ' ', 10};
+++   { "  ENDATE  ", "ENDATE", .ac.doactiveconverts = procprt_ENDATE_a, procprt_ENDATE_e, ' ', 10};
++ /***************************************************************/
++ char *
++ procprt_ENTIME_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1220,7 +1220,7 @@ procprt_ENTIME_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_ENTIME = 
++-   { " ENTIME ", "ENTIME", procprt_ENTIME_a, procprt_ENTIME_e, ' ', 8};
+++   { " ENTIME ", "ENTIME", .ac.doactiveconverts = procprt_ENTIME_a, procprt_ENTIME_e, ' ', 8};
++ /***************************************************************/
++ char *
++ procprt_THR_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1238,7 +1238,7 @@ procprt_THR_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_THR = 
++-   { " THR", "THR", procprt_THR_a, procprt_THR_e, ' ', 4};
+++   { " THR", "THR", .ac.doactiveconverts = procprt_THR_a, procprt_THR_e, ' ', 4};
++ /***************************************************************/
++ char *
++ procprt_TRUN_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1256,7 +1256,7 @@ procprt_TRUN_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_TRUN = 
++-   { "TRUN", "TRUN", procprt_TRUN_a, procprt_TRUN_e, ' ', 4};
+++   { "TRUN", "TRUN", .ac.doactiveconverts = procprt_TRUN_a, procprt_TRUN_e, ' ', 4};
++ /***************************************************************/
++ char *
++ procprt_TSLPI_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1274,7 +1274,7 @@ procprt_TSLPI_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_TSLPI = 
++-   { "TSLPI", "TSLPI", procprt_TSLPI_a, procprt_TSLPI_e, ' ', 5};
+++   { "TSLPI", "TSLPI", .ac.doactiveconverts = procprt_TSLPI_a, procprt_TSLPI_e, ' ', 5};
++ /***************************************************************/
++ char *
++ procprt_TSLPU_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1292,7 +1292,7 @@ procprt_TSLPU_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_TSLPU = 
++-   { "TSLPU", "TSLPU", procprt_TSLPU_a, procprt_TSLPU_e, ' ', 5};
+++   { "TSLPU", "TSLPU", .ac.doactiveconverts = procprt_TSLPU_a, procprt_TSLPU_e, ' ', 5};
++ /***************************************************************/
++ char *
++ procprt_TIDLE_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1310,7 +1310,7 @@ procprt_TIDLE_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_TIDLE = 
++-   { "TIDLE", "TIDLE", procprt_TIDLE_a, procprt_TIDLE_e, ' ', 5};
+++   { "TIDLE", "TIDLE", .ac.doactiveconverts = procprt_TIDLE_a, procprt_TIDLE_e, ' ', 5};
++ /***************************************************************/
++ #define SCHED_NORMAL	0
++ #define SCHED_FIFO	1
++@@ -1357,7 +1357,7 @@ procprt_POLI_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_POLI = 
++-   { "POLI", "POLI", procprt_POLI_a, procprt_POLI_e, ' ', 4};
+++   { "POLI", "POLI", .ac.doactiveconverts = procprt_POLI_a, procprt_POLI_e, ' ', 4};
++ /***************************************************************/
++ char *
++ procprt_NICE_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1375,7 +1375,7 @@ procprt_NICE_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_NICE = 
++-   { "NICE", "NICE", procprt_NICE_a, procprt_NICE_e, ' ', 4};
+++   { "NICE", "NICE", .ac.doactiveconverts = procprt_NICE_a, procprt_NICE_e, ' ', 4};
++ /***************************************************************/
++ char *
++ procprt_PRI_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1393,7 +1393,7 @@ procprt_PRI_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_PRI = 
++-   { "PRI", "PRI", procprt_PRI_a, procprt_PRI_e, ' ', 3};
+++   { "PRI", "PRI", .ac.doactiveconverts = procprt_PRI_a, procprt_PRI_e, ' ', 3};
++ /***************************************************************/
++ char *
++ procprt_RTPR_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1411,7 +1411,7 @@ procprt_RTPR_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_RTPR = 
++-   { "RTPR", "RTPR", procprt_RTPR_a, procprt_RTPR_e, ' ', 4};
+++   { "RTPR", "RTPR", .ac.doactiveconverts = procprt_RTPR_a, procprt_RTPR_e, ' ', 4};
++ /***************************************************************/
++ char *
++ procprt_CURCPU_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1429,7 +1429,7 @@ procprt_CURCPU_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_CURCPU = 
++-   { "CPUNR", "CPUNR", procprt_CURCPU_a, procprt_CURCPU_e, ' ', 5};
+++   { "CPUNR", "CPUNR", .ac.doactiveconverts = procprt_CURCPU_a, procprt_CURCPU_e, ' ', 5};
++ /***************************************************************/
++ char *
++ procprt_ST_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1473,7 +1473,7 @@ procprt_ST_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_ST = 
++-   { "ST", "ST", procprt_ST_a, procprt_ST_e, ' ', 2};
+++   { "ST", "ST", .ac.doactiveconverts = procprt_ST_a, procprt_ST_e, ' ', 2};
++ /***************************************************************/
++ char *
++ procprt_EXC_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1496,7 +1496,7 @@ procprt_EXC_e(struct tstat *curstat, int avgval, int nsecs)
++ 
++ 
++ detail_printdef procprt_EXC = 
++-   { "EXC", "EXC", procprt_EXC_a, procprt_EXC_e, ' ', 3};
+++   { "EXC", "EXC", .ac.doactiveconverts = procprt_EXC_a, procprt_EXC_e, ' ', 3};
++ /***************************************************************/
++ char *
++ procprt_S_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1515,7 +1515,7 @@ procprt_S_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_S = 
++-   { "S", "S", procprt_S_a, procprt_S_e, ' ', 1};
+++   { "S", "S", .ac.doactiveconverts = procprt_S_a, procprt_S_e, ' ', 1};
++ 
++ /***************************************************************/
++ char *
++@@ -1546,7 +1546,7 @@ procprt_COMMAND_LINE_ae(struct tstat *curstat, int avgval, int nsecs)
++ detail_printdef procprt_COMMAND_LINE = 
++        { "COMMAND-LINE (horizontal scroll with <- and -> keys)",
++ 	"COMMAND-LINE", 
++-        procprt_COMMAND_LINE_ae, procprt_COMMAND_LINE_ae, ' ', 0, 1};
+++        .ac.doactiveconverts = procprt_COMMAND_LINE_ae, procprt_COMMAND_LINE_ae, ' ', 0, 1};
++ /***************************************************************/
++ char *
++ procprt_NPROCS_ae(struct tstat *curstat, int avgval, int nsecs)
++@@ -1558,7 +1558,7 @@ procprt_NPROCS_ae(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_NPROCS = 
++-   { "NPROCS", "NPROCS", procprt_NPROCS_ae, procprt_NPROCS_ae, ' ', 6};
+++   { "NPROCS", "NPROCS", .ac.doactiveconverts = procprt_NPROCS_ae, procprt_NPROCS_ae, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_RDDSK_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1580,7 +1580,7 @@ procprt_RDDSK_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_RDDSK = 
++-   { " RDDSK", "RDDSK", procprt_RDDSK_a, procprt_RDDSK_e, ' ', 6};
+++   { " RDDSK", "RDDSK", .ac.doactiveconverts = procprt_RDDSK_a, procprt_RDDSK_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_WRDSK_a(struct tstat *curstat, int avgval, int nsecs) 
++@@ -1602,7 +1602,7 @@ procprt_WRDSK_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_WRDSK = 
++-   { " WRDSK", "WRDSK", procprt_WRDSK_a, procprt_WRDSK_e, ' ', 6};
+++   { " WRDSK", "WRDSK", .ac.doactiveconverts = procprt_WRDSK_a, procprt_WRDSK_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_CWRDSK_a(struct tstat *curstat, int avgval, int nsecs) 
++@@ -1621,7 +1621,7 @@ procprt_CWRDSK_a(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_CWRDSK = 
++-   {" WRDSK", "CWRDSK", procprt_CWRDSK_a, procprt_WRDSK_e, ' ', 6};
+++   {" WRDSK", "CWRDSK", .ac.doactiveconverts = procprt_CWRDSK_a, procprt_WRDSK_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_WCANCEL_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1643,7 +1643,7 @@ procprt_WCANCEL_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_WCANCEL = 
++-   {"WCANCL", "WCANCL", procprt_WCANCEL_a, procprt_WCANCEL_e, ' ', 6};
+++   {"WCANCL", "WCANCL", .ac.doactiveconverts = procprt_WCANCEL_a, procprt_WCANCEL_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_TCPRCV_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1672,7 +1672,7 @@ procprt_TCPRCV_e(struct tstat *curstat, int avgval, int nsecs)
++ 
++ 
++ detail_printdef procprt_TCPRCV = 
++-   { "TCPRCV", "TCPRCV", procprt_TCPRCV_a, procprt_TCPRCV_e, ' ', 6};
+++   { "TCPRCV", "TCPRCV", .ac.doactiveconverts = procprt_TCPRCV_a, procprt_TCPRCV_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_TCPRASZ_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1704,7 +1704,7 @@ procprt_TCPRASZ_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_TCPRASZ = 
++-   { "TCPRASZ", "TCPRASZ", procprt_TCPRASZ_a, procprt_TCPRASZ_e, ' ', 7};
+++   { "TCPRASZ", "TCPRASZ", .ac.doactiveconverts = procprt_TCPRASZ_a, procprt_TCPRASZ_e, ' ', 7};
++ /***************************************************************/
++ char *
++ procprt_TCPSND_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1732,7 +1732,7 @@ procprt_TCPSND_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_TCPSND = 
++-   { "TCPSND", "TCPSND", procprt_TCPSND_a, procprt_TCPSND_e, ' ', 6};
+++   { "TCPSND", "TCPSND", .ac.doactiveconverts = procprt_TCPSND_a, procprt_TCPSND_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_TCPSASZ_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1764,7 +1764,7 @@ procprt_TCPSASZ_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_TCPSASZ = 
++-   { "TCPSASZ", "TCPSASZ", procprt_TCPSASZ_a, procprt_TCPSASZ_e, ' ', 7};
+++   { "TCPSASZ", "TCPSASZ", .ac.doactiveconverts = procprt_TCPSASZ_a, procprt_TCPSASZ_e, ' ', 7};
++ /***************************************************************/
++ char *
++ procprt_UDPRCV_a(struct tstat *curstat, int avgval, int nsecs)        
++@@ -1793,7 +1793,7 @@ procprt_UDPRCV_e(struct tstat *curstat, int avgval, int nsecs)
++ 
++ 
++ detail_printdef procprt_UDPRCV = 
++-   { "UDPRCV", "UDPRCV", procprt_UDPRCV_a, procprt_UDPRCV_e, ' ', 6};
+++   { "UDPRCV", "UDPRCV", .ac.doactiveconverts = procprt_UDPRCV_a, procprt_UDPRCV_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_UDPRASZ_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1826,7 +1826,7 @@ procprt_UDPRASZ_e(struct tstat *curstat, int avgval, int nsecs)
++ 
++ 
++ detail_printdef procprt_UDPRASZ = 
++-   { "UDPRASZ", "UDPRASZ", procprt_UDPRASZ_a, procprt_UDPRASZ_e, ' ', 7};
+++   { "UDPRASZ", "UDPRASZ", .ac.doactiveconverts = procprt_UDPRASZ_a, procprt_UDPRASZ_e, ' ', 7};
++ /***************************************************************/
++ char *
++ procprt_UDPSND_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1854,7 +1854,7 @@ procprt_UDPSND_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_UDPSND = 
++-   { "UDPSND", "UDPSND", procprt_UDPSND_a, procprt_UDPSND_e, ' ', 6};
+++   { "UDPSND", "UDPSND", .ac.doactiveconverts = procprt_UDPSND_a, procprt_UDPSND_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_UDPSASZ_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1887,7 +1887,7 @@ procprt_UDPSASZ_e(struct tstat *curstat, int avgval, int nsecs)
++ 
++ 
++ detail_printdef procprt_UDPSASZ = 
++-   { "UDPSASZ", "UDPSASZ", procprt_UDPSASZ_a, procprt_UDPSASZ_e, ' ', 7};
+++   { "UDPSASZ", "UDPSASZ", .ac.doactiveconverts = procprt_UDPSASZ_a, procprt_UDPSASZ_e, ' ', 7};
++ /***************************************************************/
++ char *
++ procprt_RNET_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1917,7 +1917,7 @@ procprt_RNET_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_RNET = 
++-   { " RNET", "RNET", procprt_RNET_a, procprt_RNET_e, ' ', 5};
+++   { " RNET", "RNET", .ac.doactiveconverts = procprt_RNET_a, procprt_RNET_e, ' ', 5};
++ /***************************************************************/
++ char *
++ procprt_SNET_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1945,7 +1945,7 @@ procprt_SNET_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_SNET = 
++-   { " SNET", "SNET", procprt_SNET_a, procprt_SNET_e, ' ', 5};
+++   { " SNET", "SNET", .ac.doactiveconverts = procprt_SNET_a, procprt_SNET_e, ' ', 5};
++ /***************************************************************/
++ char *
++ procprt_BANDWI_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -1974,7 +1974,7 @@ procprt_BANDWI_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_BANDWI = 
++-   { "   BANDWI", "BANDWI", procprt_BANDWI_a, procprt_BANDWI_e, ' ', 9};
+++   { "   BANDWI", "BANDWI", .ac.doactiveconverts = procprt_BANDWI_a, procprt_BANDWI_e, ' ', 9};
++ /***************************************************************/
++ char *
++ procprt_BANDWO_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -2003,7 +2003,7 @@ procprt_BANDWO_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_BANDWO = 
++-   { "   BANDWO", "BANDWO", procprt_BANDWO_a, procprt_BANDWO_e, ' ', 9};
+++   { "   BANDWO", "BANDWO", .ac.doactiveconverts = procprt_BANDWO_a, procprt_BANDWO_e, ' ', 9};
++ /***************************************************************/
++ static void
++ format_bandw(char *buf, count_t kbps)
++@@ -2069,7 +2069,7 @@ procprt_GPULIST_ae(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_GPULIST = 
++-   { " GPUNUMS", "GPULIST", procprt_GPULIST_ae, procprt_GPULIST_ae, ' ', 8};
+++   { " GPUNUMS", "GPULIST", .ac.doactiveconverts = procprt_GPULIST_ae, procprt_GPULIST_ae, ' ', 8};
++ /***************************************************************/
++ char *
++ procprt_GPUMEMNOW_ae(struct tstat *curstat, int avgval, int nsecs)
++@@ -2084,7 +2084,7 @@ procprt_GPUMEMNOW_ae(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_GPUMEMNOW = 
++-   { "MEMNOW", "GPUMEM", procprt_GPUMEMNOW_ae, procprt_GPUMEMNOW_ae, ' ', 6};
+++   { "MEMNOW", "GPUMEM", .ac.doactiveconverts = procprt_GPUMEMNOW_ae, procprt_GPUMEMNOW_ae, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_GPUMEMAVG_ae(struct tstat *curstat, int avgval, int nsecs)
++@@ -2103,7 +2103,7 @@ procprt_GPUMEMAVG_ae(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_GPUMEMAVG = 
++-   { "MEMAVG", "GPUMEMAVG", procprt_GPUMEMAVG_ae, procprt_GPUMEMAVG_ae, ' ', 6};
+++   { "MEMAVG", "GPUMEMAVG", .ac.doactiveconverts = procprt_GPUMEMAVG_ae, procprt_GPUMEMAVG_ae, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_GPUGPUBUSY_ae(struct tstat *curstat, int avgval, int nsecs)
++@@ -2121,7 +2121,7 @@ procprt_GPUGPUBUSY_ae(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_GPUGPUBUSY = 
++-   { "GPUBUSY", "GPUGPUBUSY", procprt_GPUGPUBUSY_ae, procprt_GPUGPUBUSY_ae, ' ', 7};
+++   { "GPUBUSY", "GPUGPUBUSY", .ac.doactiveconverts = procprt_GPUGPUBUSY_ae, procprt_GPUGPUBUSY_ae, ' ', 7};
++ /***************************************************************/
++ char *
++ procprt_GPUMEMBUSY_ae(struct tstat *curstat, int avgval, int nsecs)
++@@ -2139,7 +2139,7 @@ procprt_GPUMEMBUSY_ae(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_GPUMEMBUSY = 
++-   { "MEMBUSY", "GPUMEMBUSY", procprt_GPUMEMBUSY_ae, procprt_GPUMEMBUSY_ae, ' ', 7};
+++   { "MEMBUSY", "GPUMEMBUSY", .ac.doactiveconverts = procprt_GPUMEMBUSY_ae, procprt_GPUMEMBUSY_ae, ' ', 7};
++ /***************************************************************/
++ char *
++ procprt_WCHAN_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -2164,7 +2164,7 @@ procprt_WCHAN_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_WCHAN =
++-   { "WCHAN          ", "WCHAN", procprt_WCHAN_a, procprt_WCHAN_e, ' ', 15};
+++   { "WCHAN          ", "WCHAN", .ac.doactiveconverts = procprt_WCHAN_a, procprt_WCHAN_e, ' ', 15};
++ /***************************************************************/
++ char *
++ procprt_RUNDELAY_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -2185,7 +2185,7 @@ procprt_RUNDELAY_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_RUNDELAY =
++-   { "RDELAY", "RDELAY", procprt_RUNDELAY_a, procprt_RUNDELAY_e, ' ', 6};
+++   { "RDELAY", "RDELAY", .ac.doactiveconverts = procprt_RUNDELAY_a, procprt_RUNDELAY_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_BLKDELAY_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -2206,7 +2206,7 @@ procprt_BLKDELAY_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_BLKDELAY =
++-   { "BDELAY", "BDELAY", procprt_BLKDELAY_a, procprt_BLKDELAY_e, ' ', 6};
+++   { "BDELAY", "BDELAY", .ac.doactiveconverts = procprt_BLKDELAY_a, procprt_BLKDELAY_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_NVCSW_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -2224,7 +2224,7 @@ procprt_NVCSW_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_NVCSW =
++-   { " NVCSW", "NVCSW", procprt_NVCSW_a, procprt_NVCSW_e, ' ', 6};
+++   { " NVCSW", "NVCSW", .ac.doactiveconverts = procprt_NVCSW_a, procprt_NVCSW_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_NIVCSW_a(struct tstat *curstat, int avgval, int nsecs)
++@@ -2242,7 +2242,7 @@ procprt_NIVCSW_e(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_NIVCSW =
++-   { "NIVCSW", "NIVCSW", procprt_NIVCSW_a, procprt_NIVCSW_e, ' ', 6};
+++   { "NIVCSW", "NIVCSW", .ac.doactiveconverts = procprt_NIVCSW_a, procprt_NIVCSW_e, ' ', 6};
++ /***************************************************************/
++ char *
++ procprt_SORTITEM_ae(struct tstat *curstat, int avgval, int nsecs)
++@@ -2251,7 +2251,7 @@ procprt_SORTITEM_ae(struct tstat *curstat, int avgval, int nsecs)
++ }
++ 
++ detail_printdef procprt_SORTITEM =   // width is dynamically defined!
++-   { 0, "SORTITEM", procprt_SORTITEM_ae, procprt_SORTITEM_ae, ' ', 4};
+++   { 0, "SORTITEM", .ac.doactiveconverts = procprt_SORTITEM_ae, procprt_SORTITEM_ae, ' ', 4};
++ 
++ 
++ /***************************************************************/
++@@ -2382,7 +2382,7 @@ showcgroupline(detail_printpair* elemptr,
++ 
++ 		color = 0;
++ 
++-		buf = curelem.pf->doactiveconvert(cgchain, tstat,
+++		buf = curelem.pf->ac.doactiveconvertc(cgchain, tstat,
++ 				avgval, nsecs, cputicks, nrcpu, &color);
++ 
++                 if (screen)
++@@ -2513,7 +2513,7 @@ cgroup_CGROUP_PATH(struct cgchainer *cgchain, struct tstat *tstat,
++ 
++ detail_printdef cgroupprt_CGROUP_PATH = 
++        {"CGROUP (scroll: <- ->)    ", "CGRPATH", 
++-        cgroup_CGROUP_PATH, NULL, ' ', 26, 0};
+++	.ac.doactiveconvertc = cgroup_CGROUP_PATH, NULL, ' ', 26, 0};
++ /***************************************************************/
++ char *
++ cgroup_CGRNPROCS(struct cgchainer *cgchain, struct tstat *tstat,
++@@ -2530,7 +2530,7 @@ cgroup_CGRNPROCS(struct cgchainer *cgchain, struct tstat *tstat,
++ }
++ 
++ detail_printdef cgroupprt_CGRNPROCS = 
++-   { "NPROCS", "CGRNPROCS", cgroup_CGRNPROCS, NULL, ' ', 6};
+++   { "NPROCS", "CGRNPROCS", .ac.doactiveconvertc = cgroup_CGRNPROCS, NULL, ' ', 6};
++ /***************************************************************/
++ char *
++ cgroup_CGRNPROCSB(struct cgchainer *cgchain, struct tstat *tstat,
++@@ -2547,7 +2547,7 @@ cgroup_CGRNPROCSB(struct cgchainer *cgchain, struct tstat *tstat,
++ }
++ 
++ detail_printdef cgroupprt_CGRNPROCSB = 
++-   { "PBELOW", "CGRNPROCSB", cgroup_CGRNPROCSB, NULL, ' ', 6};
+++   { "PBELOW", "CGRNPROCSB", .ac.doactiveconvertc = cgroup_CGRNPROCSB, NULL, ' ', 6};
++ /***************************************************************/
++ char *
++ cgroup_CGRCPUBUSY(struct cgchainer *cgchain, struct tstat *tstat,
++@@ -2599,7 +2599,7 @@ cgroup_CGRCPUBUSY(struct cgchainer *cgchain, struct tstat *tstat,
++ }
++ 
++ detail_printdef cgroupprt_CGRCPUBUSY =
++-   { "CPUBUSY", "CGRCPUBUSY", cgroup_CGRCPUBUSY, NULL, 'C', 7};
+++   { "CPUBUSY", "CGRCPUBUSY", .ac.doactiveconvertc = cgroup_CGRCPUBUSY, NULL, 'C', 7};
++ /***************************************************************/
++ char *
++ cgroup_CGRCPUPSI(struct cgchainer *cgchain, struct tstat *tstat,
++@@ -2629,7 +2629,7 @@ cgroup_CGRCPUPSI(struct cgchainer *cgchain, struct tstat *tstat,
++ }
++ 
++ detail_printdef cgroupprt_CGRCPUPSI =
++-   { "CPUPS", "CGRCPUPSI", cgroup_CGRCPUPSI, NULL, ' ', 5};
+++   { "CPUPS", "CGRCPUPSI", .ac.doactiveconvertc = cgroup_CGRCPUPSI, NULL, ' ', 5};
++ /***************************************************************/
++ char *
++ cgroup_CGRCPUMAX(struct cgchainer *cgchain, struct tstat *tstat,
++@@ -2672,7 +2672,7 @@ cgroup_CGRCPUMAX(struct cgchainer *cgchain, struct tstat *tstat,
++ }
++ 
++ detail_printdef cgroupprt_CGRCPUMAX =
++-   { "CPUMAX", "CGRCPUMAX", cgroup_CGRCPUMAX, NULL, ' ', 6};
+++   { "CPUMAX", "CGRCPUMAX", .ac.doactiveconvertc = cgroup_CGRCPUMAX, NULL, ' ', 6};
++ /***************************************************************/
++ char *
++ cgroup_CGRCPUWGT(struct cgchainer *cgchain, struct tstat *tstat,
++@@ -2695,7 +2695,7 @@ cgroup_CGRCPUWGT(struct cgchainer *cgchain, struct tstat *tstat,
++ }
++ 
++ detail_printdef cgroupprt_CGRCPUWGT =
++-   { "CPUWGT", "CGRCPUWGT", cgroup_CGRCPUWGT, NULL, ' ', 6};
+++   { "CPUWGT", "CGRCPUWGT", .ac.doactiveconvertc = cgroup_CGRCPUWGT, NULL, ' ', 6};
++ /***************************************************************/
++ char *
++ cgroup_CGRMEMORY(struct cgchainer *cgchain, struct tstat *tstat,
++@@ -2740,7 +2740,7 @@ cgroup_CGRMEMORY(struct cgchainer *cgchain, struct tstat *tstat,
++ }
++ 
++ detail_printdef cgroupprt_CGRMEMORY =
++-   { "MEMORY", "CGRMEMORY", cgroup_CGRMEMORY, NULL, 'M', 6};
+++   { "MEMORY", "CGRMEMORY", .ac.doactiveconvertc = cgroup_CGRMEMORY, NULL, 'M', 6};
++ /***************************************************************/
++ char *
++ cgroup_CGRMEMPSI(struct cgchainer *cgchain, struct tstat *tstat,
++@@ -2770,7 +2770,7 @@ cgroup_CGRMEMPSI(struct cgchainer *cgchain, struct tstat *tstat,
++ }
++ 
++ detail_printdef cgroupprt_CGRMEMPSI =
++-   { "MEMPS", "CGRMEMPSI", cgroup_CGRMEMPSI, NULL, ' ', 5};
+++   { "MEMPS", "CGRMEMPSI", .ac.doactiveconvertc = cgroup_CGRMEMPSI, NULL, ' ', 5};
++ /***************************************************************/
++ char *
++ cgroup_CGRMEMMAX(struct cgchainer *cgchain, struct tstat *tstat,
++@@ -2810,7 +2810,7 @@ cgroup_CGRMEMMAX(struct cgchainer *cgchain, struct tstat *tstat,
++ }
++ 
++ detail_printdef cgroupprt_CGRMEMMAX =
++-   { "MEMMAX", "CGRMEMMAX", cgroup_CGRMEMMAX, NULL, ' ', 6};
+++   { "MEMMAX", "CGRMEMMAX", .ac.doactiveconvertc = cgroup_CGRMEMMAX, NULL, ' ', 6};
++ /***************************************************************/
++ char *
++ cgroup_CGRSWPMAX(struct cgchainer *cgchain, struct tstat *tstat,
++@@ -2835,7 +2835,7 @@ cgroup_CGRSWPMAX(struct cgchainer *cgchain, struct tstat *tstat,
++ }
++ 
++ detail_printdef cgroupprt_CGRSWPMAX =
++-   { "SWPMAX", "CGRSWPMAX", cgroup_CGRSWPMAX, NULL, ' ', 6};
+++   { "SWPMAX", "CGRSWPMAX", .ac.doactiveconvertc = cgroup_CGRSWPMAX, NULL, ' ', 6};
++ /***************************************************************/
++ char *
++ cgroup_CGRDISKIO(struct cgchainer *cgchain, struct tstat *tstat,
++@@ -2864,7 +2864,7 @@ cgroup_CGRDISKIO(struct cgchainer *cgchain, struct tstat *tstat,
++ }
++ 
++ detail_printdef cgroupprt_CGRDISKIO =
++-   { "DISKIO", "CGRDISKIO", cgroup_CGRDISKIO, NULL, 'D', 6};
+++   { "DISKIO", "CGRDISKIO", .ac.doactiveconvertc = cgroup_CGRDISKIO, NULL, 'D', 6};
++ /***************************************************************/
++ char *
++ cgroup_CGRDSKPSI(struct cgchainer *cgchain, struct tstat *tstat,
++@@ -2894,7 +2894,7 @@ cgroup_CGRDSKPSI(struct cgchainer *cgchain, struct tstat *tstat,
++ }
++ 
++ detail_printdef cgroupprt_CGRDSKPSI =
++-   { "DSKPS", "CGRDSKPSI", cgroup_CGRDSKPSI, NULL, ' ', 5};
+++   { "DSKPS", "CGRDSKPSI", .ac.doactiveconvertc = cgroup_CGRDSKPSI, NULL, ' ', 5};
++ /***************************************************************/
++ char *
++ cgroup_CGRDSKWGT(struct cgchainer *cgchain, struct tstat *tstat,
++@@ -2917,7 +2917,7 @@ cgroup_CGRDSKWGT(struct cgchainer *cgchain, struct tstat *tstat,
++ }
++ 
++ detail_printdef cgroupprt_CGRDSKWGT =
++-   { "IOWGT", "CGRDSKWGT", cgroup_CGRDSKWGT, NULL, ' ', 5};
+++   { "IOWGT", "CGRDSKWGT", .ac.doactiveconvertc = cgroup_CGRDSKWGT, NULL, ' ', 5};
++ /***************************************************************/
++ char *
++ cgroup_CGRPID(struct cgchainer *cgchain, struct tstat *tstat,
++@@ -2934,7 +2934,7 @@ cgroup_CGRPID(struct cgchainer *cgchain, struct tstat *tstat,
++ }
++ 
++ detail_printdef cgroupprt_CGRPID = 
++-   { "PID", "CGRPID", cgroup_CGRPID, NULL, ' ', 5}; //DYNAMIC WIDTH!
+++   { "PID", "CGRPID", .ac.doactiveconvertc = cgroup_CGRPID, NULL, ' ', 5}; //DYNAMIC WIDTH!
++ /***************************************************************/
++ char *
++ cgroup_CGRCMD(struct cgchainer *cgchain, struct tstat *tstat,
++@@ -2963,5 +2963,5 @@ cgroup_CGRCMD(struct cgchainer *cgchain, struct tstat *tstat,
++ }
++ 
++ detail_printdef cgroupprt_CGRCMD = 
++-   { "CMD           ", "CGRCMD", cgroup_CGRCMD, NULL, ' ', 14};
+++   { "CMD           ", "CGRCMD", .ac.doactiveconvertc = cgroup_CGRCMD, NULL, ' ', 14};
++ /***************************************************************/
++diff --git a/various.c b/various.c
++index c175c10..906a529 100644
++--- a/various.c
+++++ b/various.c
++@@ -29,6 +29,10 @@
++ ** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ ** --------------------------------------------------------------------------
++ */
+++#define _POSIX_C_SOURCE
+++#define _XOPEN_SOURCE
+++#define _GNU_SOURCE
+++#define _DEFAULT_SOURCE
++ 
++ #include <sys/types.h>
++ #include <sys/param.h>
++-- 
++2.34.1
 +
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-default-=
-CC-override.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-d=
-efault-CC-override.patch
+diff --git a/meta-oe/recipes-support/atop/atop/0001-atop.daily-atop.init-atop-pm.sh-Avoid-using-bash.patch b/meta-oe/recipes-support/atop/atop/0001-atop.daily-atop.init-atop-pm.sh-Avoid-using-bash.patch
 deleted file mode 100644
-index b04a16cec7..0000000000
---- a/meta-gnome/recipes-gimp/gimp/gimp/0001-gimptool-allow-default-CC-over=
-ride.patch
+index facb257be6..0000000000
+--- a/meta-oe/recipes-support/atop/atop/0001-atop.daily-atop.init-atop-pm.sh-Avoid-using-bash.patch
 +++ /dev/null
-@@ -1,85 +0,0 @@
--From 7e5b986cb7797a6535fe2471b9a5fb7c00821f51 Mon Sep 17 00:00:00 2001
--From: Yoann Congal &lt;<a href=3D"mailto:yoann.congal@smile.fr">yoann.cong=
-al@smile.fr</a>&gt;
--Date: Sun, 13 Oct 2024 01:00:10 +0200
--Subject: [PATCH] gimptool: allow default CC override
+@@ -1,67 +0,0 @@
+-From ffc8ba8d324243a923abe48e9758adecb03d24a4 Mon Sep 17 00:00:00 2001
+-From: Peter Kjellerstedt <pkj@axis.com>
+-Date: Tue, 12 Feb 2019 21:25:23 +0100
+-Subject: [PATCH] atop.daily, atop.init, atop-pm.sh: Avoid using bash
 -
--From: Yoann Congal &lt;<a href=3D"mailto:yoann.congal@smile.fr">yoann.cong=
-al@smile.fr</a>&gt;
+-Avoid using bash and bashisms when not necesary. On some systems,
+-e.g., embedded products, bash may not be available by default.
 -
--In OE, CC contains sysroot path. Storing CC in binary then leads to
--non-reproducibility.
--
--This commit add a new configure option "--with-default-cc=3D'cmd'" for
--force the CC stored in gimptool to a reproducible value.
--
--Upstream-Status: Inappropriate [does not apply on master (upstream has mov=
-ed to meson)]
--Signed-off-by: Yoann Congal &lt;<a href=3D"mailto:yoann.congal@smile.fr">y=
-oann.congal@smile.fr</a>&gt;
+-Upstream-Status: Submitted [https://github.com/Atoptool/atop/pull/50]
+-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ----
-- app-tools/Makefile.am |  2 +-
-- configure.ac          | 13 +++++++++++++
-- tools/Makefile.am     |  2 +-
-- tools/gimptool.c      |  2 +-
-- 4 files changed, 16 insertions(+), 3 deletions(-)
+- atop-pm.sh | 2 +-
+- atop.daily | 4 ++--
+- atop.init  | 4 ++--
+- 3 files changed, 5 insertions(+), 5 deletions(-)
 -
--diff --git a/app-tools/Makefile.am b/app-tools/Makefile.am
--index a7cd4ce..81a3a00 100644
----- a/app-tools/Makefile.am
--+++ b/app-tools/Makefile.am
--@@ -67,7 +67,7 @@ AM_CPPFLAGS =3D \
-- 	-DMANDIR=3D\""$(mandir)"\"				\
-- 	-DGIMPPLUGINDIR=3D\""$(gimpplugindir)"\"			\
-- 	-DGIMPDATADIR=3D\""$(gimpdatadir)"\"			\
---	-DCC=3D\""$(CC)"\"					\
--+	-DDEFAULT_CC=3D\""@DEFAULT_CC@"\"				\
-- 	-DGIMPDIR=3D\""$(gimpdir)"\"				\
-- 	-DGIMP_PLUGIN_VERSION=3D\""$(GIMP_PLUGIN_VERSION)"\"	\
-- 	-I$(top_srcdir)						\
--diff --git a/configure.ac b/configure.ac
--index a88b7cc..d90b6db 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -2457,6 +2457,19 @@ fi
-- AM_CONDITIONAL(DESKTOP_DATADIR, test "x$with_desktop_dir" !=3D xno)
-- AC_SUBST(DESKTOP_DATADIR)
--=20
--+######################
--+# Determine default CC
--+######################
--+
--+AC_ARG_WITH(default-cc, [ --with-default-cc=3D"cmd" default CC to print i=
-n gimptool (default=3DCC)])
--+
--+if test "x$with_default_cc" !=3D x; then
--+  DEFAULT_CC=3D$with_default_cc
--+else
--+  DEFAULT_CC=3DCC
--+fi
--+
--+AC_SUBST(DEFAULT_CC)
--=20
-- #####################
-- # Check for XML tools
--diff --git a/tools/Makefile.am b/tools/Makefile.am
--index 420b9b1..ccabde8 100644
----- a/tools/Makefile.am
--+++ b/tools/Makefile.am
--@@ -87,7 +87,7 @@ AM_CPPFLAGS =3D \
-- 	-DMANDIR=3D\""$(mandir)"\"				\
-- 	-DGIMPPLUGINDIR=3D\""$(gimpplugindir)"\"			\
-- 	-DGIMPDATADIR=3D\""$(gimpdatadir)"\"			\
---	-DCC=3D\""$(CC)"\"					\
--+	-DDEFAULT_CC=3D\""@DEFAULT_CC@"\"				\
-- 	-DGIMPDIR=3D\""$(gimpdir)"\"				\
-- 	-DGIMP_PLUGIN_VERSION=3D\""$(GIMP_PLUGIN_VERSION)"\"	\
-- 	-I$(top_srcdir)						\
--diff --git a/tools/gimptool.c b/tools/gimptool.c
--index 21fc043..bbf3fa5 100644
----- a/tools/gimptool.c
--+++ b/tools/gimptool.c
--@@ -280,7 +280,7 @@ find_out_env_flags (void)
--   else if (msvc_syntax)
--     env_cc =3D "cl -MD";
--   else
---    env_cc =3D CC;
--+    env_cc =3D DEFAULT_CC;
--=20
--   if (g_ascii_strncasecmp (env_cc, "cl", 2)    =3D=3D 0 &amp;&amp;
--       g_ascii_strncasecmp (env_cc, "clang", 5) !=3D 0)
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-buil=
-d-time-library-paths-to-LD_LI.patch b/meta-gnome/recipes-gimp/gimp/gimp/000=
-1-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch
-deleted file mode 100644
-index cec0055284..0000000000
---- a/meta-gnome/recipes-gimp/gimp/gimp/0001-libtool-Do-not-add-build-time-=
-library-paths-to-LD_LI.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From c720df90dfe3a3e92e34bfb36a04cc792064a501 Mon Sep 17 00:00:00 2001
--From: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com">raj.khem@gmail.co=
-m</a>&gt;
--Date: Wed, 24 May 2023 22:39:02 -0700
--Subject: [PATCH] libtool: Do not add build time library paths to
-- LD_LIBRARY_PATH
+-diff --git a/atop-pm.sh b/atop-pm.sh
+-index 7f41a86..3ff4ab5 100755
+---- a/atop-pm.sh
+-+++ b/atop-pm.sh
+-@@ -1,4 +1,4 @@
+--#!/bin/bash
+-+#!/bin/sh
+- 
+- case "$1" in
+- 	pre)	/usr/bin/systemctl stop atop
+-diff --git a/atop.daily b/atop.daily
+-index 57a9507..fe5a11b 100755
+---- a/atop.daily
+-+++ b/atop.daily
+-@@ -1,4 +1,4 @@
+--#!/bin/bash
+-+#!/bin/sh
+- 
+- LOGOPTS="-R"				# default options
+- LOGINTERVAL=600				# default interval in seconds
+-@@ -38,7 +38,7 @@ then
+- 
+- 	while ps -p `cat "$PIDFILE"` > /dev/null
+- 	do
+--		let CNT+=1
+-+		CNT=$((CNT + 1))
+- 
+- 		if [ $CNT -gt 5 ]
+- 		then
+-diff --git a/atop.init b/atop.init
+-index e6e11dc..03c3f02 100755
+---- a/atop.init
+-+++ b/atop.init
+-@@ -1,4 +1,4 @@
+--#!/bin/bash
+-+#!/bin/sh
+- #
+- # atop		Startup script for the Atop process logging in background
+- #
+-@@ -47,7 +47,7 @@ case "$1" in
+- 
+- 		while ps -p `cat $PIDFILE` > /dev/null
+- 		do
+--			let CNT+=1
+-+			CNT=$((CNT + 1))
+- 
+- 			if [ $CNT -gt 5 ]
+- 			then
+--- 
+-2.12.0
 -
--This does not serve much purpose on cross builds as it will add build
--time paths which are only useful when trying to run these tools from
--build area but when they are cross built this is not possible to run
--them like this.
--
--Upstream-Status: Inappropriate [Cross-compile specific]
--
--Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com">raj.khem=
-@gmail.com</a>&gt;
-----
-- ltmain.sh | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/ltmain.sh b/ltmain.sh
--index 134902c..068d74a 100644
----- a/ltmain.sh
--+++ b/ltmain.sh
--@@ -5748,7 +5748,7 @@ func_exec_program ()
-- 	if test yes =3D "$shlibpath_overrides_runpath" &amp;&amp; test -n "$shli=
-bpath_var" &amp;&amp; test -n "$temp_rpath"; then
-- 	  $ECHO "\
--     # Add our own library path to $shlibpath_var
---    $shlibpath_var=3D\"$temp_rpath\$$shlibpath_var\"
--+    $shlibpath_var=3D\"$shlibpath_var\"
--=20
--     # Some systems cannot cope with colon-terminated $shlibpath_var
--     # The second colon is a workaround for a bug in BeOS R4 sed
----=20
--2.40.1
--
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-dont-check-=
-for-lgi.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-dont-che=
-ck-for-lgi.patch
-new file mode 100644
-index 0000000000..63a9159a43
---- /dev/null
-+++ b/meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-dont-check-for-lgi=
-.patch
-@@ -0,0 +1,35 @@
-+From e56a6330f1e29e489601ea3e7cb31bfd2ebb787a Mon Sep 17 00:00:00 2001
-+From: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@t-online.=
-de</a>&gt;
-+Date: Thu, 27 Mar 2025 21:02:22 +0100
-+Subject: [PATCH] meson.build: dont check for lgi
+diff --git a/meta-oe/recipes-support/atop/atop/fix-permissions.patch b/meta-oe/recipes-support/atop/atop/fix-permissions.patch
+index 8488b38000..10f504b472 100644
+--- a/meta-oe/recipes-support/atop/atop/fix-permissions.patch
++++ b/meta-oe/recipes-support/atop/atop/fix-permissions.patch
+@@ -8,24 +8,32 @@ everyone could read.
+ 
+ Upstream-Status: Inappropriate [embedded specific]
+ Signed-off-by: Kai Kang <kai.kang@windriver.com>
++Signed-off-by: Tho Dat Nguyen <tho3.nguyen@lge.com>
+ ---
+- Makefile | 10 +++++-----
+- 1 file changed, 5 insertions(+), 5 deletions(-)
++ Makefile | 16 ++++++++--------
++ 1 file changed, 8 insertions(+), 8 deletions(-)
+ 
+ diff --git a/Makefile b/Makefile
+-index 3bf5929..1221ee4 100644
++index a6f196b..7786f93 100644
+ --- a/Makefile
+ +++ b/Makefile
+-@@ -72,7 +72,7 @@ systemdinstall:	genericinstall
+- 		chmod 0644            $(DESTDIR)$(SYSDPATH)/atopacct.service
+- 		cp atop.cronsystemd   $(DESTDIR)$(CRNPATH)/atop
+- 		cp atop-pm.sh         $(DESTDIR)$(PMPATHD)
+--		chmod 0711            $(DESTDIR)$(PMPATHD)/atop-pm.sh
+-+		chmod 0755            $(DESTDIR)$(PMPATHD)/atop-pm.sh
++@@ -77,7 +77,7 @@ install:	genericinstall
++ 		cp atopacct.service    $(DESTDIR)$(SYSDPATH)
++ 		chmod 0644             $(DESTDIR)$(SYSDPATH)/atopacct.service
++ 		cp atop-pm.sh          $(DESTDIR)$(PMPATHD)
++-		chmod 0711             $(DESTDIR)$(PMPATHD)/atop-pm.sh
+++		chmod 0755             $(DESTDIR)$(PMPATHD)/atop-pm.sh
+  		#
+  		# only when making on target system:
+  		#
+-@@ -97,11 +97,11 @@ sysvinstall:	genericinstall
++@@ -107,17 +107,17 @@ sysvinstall:	genericinstall
++ 		cp atopacct.init  $(DESTDIR)$(INIPATH)/atopacct
++ 		cp atop.cronsysv  $(DESTDIR)$(CRNPATH)/atop
++ 		cp atop.daily     $(DESTDIR)$(SCRPATH)
++-		chmod 0711        $(DESTDIR)$(SCRPATH)/atop.daily
+++		chmod 0755        $(DESTDIR)$(SCRPATH)/atop.daily
++ 		touch             $(DESTDIR)$(LOGPATH)/dummy_before
++ 		touch             $(DESTDIR)$(LOGPATH)/dummy_after
+  		#
+  		if [   -d $(DESTDIR)$(PMPATH1) ]; 			\
+  		then	cp 45atoppm $(DESTDIR)$(PMPATH1); 		\
+@@ -39,21 +47,27 @@ index 3bf5929..1221ee4 100644
+  		fi
+  		#
+  		#
+-@@ -145,7 +145,7 @@ genericinstall:	atop atopacctd atopconvert
++@@ -160,7 +160,7 @@ genericinstall:	atop atopacctd atopconvert atopcat atophide
++ 		chmod 644      		$(DESTDIR)$(DEFPATH)/atop
+  		#
+  		cp atop   		$(DESTDIR)$(BINPATH)/atop
+- 		chown root		$(DESTDIR)$(BINPATH)/atop
+--		chmod 04711 		$(DESTDIR)$(BINPATH)/atop
++-		chmod 0711 		$(DESTDIR)$(BINPATH)/atop
+ +		chmod 0755 		$(DESTDIR)$(BINPATH)/atop
+  		ln -sf atop             $(DESTDIR)$(BINPATH)/atopsar
+  		cp atopacctd  		$(DESTDIR)$(SBINPATH)/atopacctd
+- 		chown root		$(DESTDIR)$(SBINPATH)/atopacctd
+-@@ -159,7 +159,7 @@ genericinstall:	atop atopacctd atopconvert
+- 		chown root		$(DESTDIR)$(BINPATH)/atopconvert
+- 		chmod 0711 		$(DESTDIR)$(BINPATH)/atopconvert
+- 		cp atop.daily    	$(DESTDIR)$(SCRPATH)
+--		chmod 0711 	 	$(DESTDIR)$(SCRPATH)/atop.daily
+-+		chmod 0755 	 	$(DESTDIR)$(SCRPATH)/atop.daily
++ 		chmod 0700 		$(DESTDIR)$(SBINPATH)/atopacctd
++@@ -169,11 +169,11 @@ genericinstall:	atop atopacctd atopconvert atopcat atophide
++ 		cp atop   		$(DESTDIR)$(BINPATH)/atop-$(VERS)
++ 		ln -sf atop-$(VERS)     $(DESTDIR)$(BINPATH)/atopsar-$(VERS)
++ 		cp atopconvert 		$(DESTDIR)$(BINPATH)/atopconvert
++-		chmod 0711 		$(DESTDIR)$(BINPATH)/atopconvert
+++		chmod 0755 		$(DESTDIR)$(BINPATH)/atopconvert
++ 		cp atopcat 		$(DESTDIR)$(BINPATH)/atopcat
++-		chmod 0711 		$(DESTDIR)$(BINPATH)/atopcat
+++		chmod 0755 		$(DESTDIR)$(BINPATH)/atopcat
++ 		cp atophide 		$(DESTDIR)$(BINPATH)/atophide
++-		chmod 0711 		$(DESTDIR)$(BINPATH)/atophide
+++		chmod 0755 		$(DESTDIR)$(BINPATH)/atophide
+  		cp man/atop.1    	$(DESTDIR)$(MAN1PATH)
+  		cp man/atopsar.1 	$(DESTDIR)$(MAN1PATH)
+  		cp man/atopconvert.1 	$(DESTDIR)$(MAN1PATH)
+diff --git a/meta-oe/recipes-support/atop/atop_2.4.0.bb b/meta-oe/recipes-support/atop/atop_2.11.0.bb
+similarity index 83%
+rename from meta-oe/recipes-support/atop/atop_2.4.0.bb
+rename to meta-oe/recipes-support/atop/atop_2.11.0.bb
+index 2ff5a4d74b..8eb8cd6b06 100644
+--- a/meta-oe/recipes-support/atop/atop_2.4.0.bb
++++ b/meta-oe/recipes-support/atop/atop_2.11.0.bb
+@@ -13,20 +13,23 @@ SECTION = "console/utils"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
+ 
+-DEPENDS = "ncurses zlib"
++inherit pkgconfig
 +
-+Checking if host can run lgi is pointless for cross-compile
-+Set to be always true because we ensure to install lgi via PACKAGECONFIG
-+
-+Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@=
-t-online.de</a>&gt;
-+
-+Upstream-Status: Inappropriate [oe-specific]
-+---
-+ meson.build | 6 +-----
-+ 1 file changed, 1 insertion(+), 5 deletions(-)
-+
-+diff --git a/meson.build b/meson.build
-+index c91e8fc97d..efbc2d8175 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -1235,11 +1235,7 @@ if have_lua
-+       endif
-+=20
-+       if is_supported_lua
-+-        have_lua_lgi =3D run_command(lua, '-e',
-+-                                   '''
-+-                                   local lgi =3D require 'lgi'
-+-                                   ''',
-+-                                   check: false).returncode() =3D=3D 0
-++        have_lua_lgi =3D true
-+       endif
-+=20
-+       if have_lua_lgi
-+--=20
-+2.49.0
-+
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-require-iso=
--codes-native.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-re=
-quire-iso-codes-native.patch
-new file mode 100644
-index 0000000000..c91b25a914
---- /dev/null
-+++ b/meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-require-iso-codes-=
-native.patch
-@@ -0,0 +1,34 @@
-+From 8ccd12d6ec3330e9646ae9db6fd491226d516dc3 Mon Sep 17 00:00:00 2001
-+From: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@t-online.=
-de</a>&gt;
-+Date: Fri, 28 Mar 2025 01:33:00 +0100
-+Subject: [PATCH] meson.build: require iso-codes-native
-+
-+This fixes:
-+FAILED: app/widgets/gimplanguagestore-data.h
-+/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux-musl/gimp/3.0.2/build/=
-tools/gen-languages
-+gimp_language_store_parser_init: 0.006277 seconds
-+ERROR: parse_iso_codes: error parsing '/usr/share/xml/iso-codes/iso_639_3.=
-xml': No such file or directory
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@=
-t-online.de</a>&gt;
-+---
-+ meson.build | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/meson.build b/meson.build
-+index efbc2d8175..fd050f4d3c 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -1135,7 +1135,7 @@ endif
-+ #########################################################################=
-#######
-+ # ISO codes
-+=20
-+-isocodes =3D dependency('iso-codes', required: false)
-++isocodes =3D dependency('iso-codes', required: false, native: true)
-+ if isocodes.found()
-+   isocodes_prefix =3D isocodes.get_variable(pkgconfig: 'prefix')
-+   isocodes_location =3D isocodes_prefix / 'share' / 'xml' / 'iso-codes'
-+--=20
-+2.49.0
-+
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weir=
-d-warning.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a=
--weird-warning.patch
-deleted file mode 100644
-index 4f04ac8250..0000000000
---- a/meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weird-warni=
-ng.patch
-+++ /dev/null
-@@ -1,22 +0,0 @@
--From 51311f913d9f417d121f59b83d560c7b4b853d1c Mon Sep 17 00:00:00 2001
--From: Simon Budig &lt;<a href=3D"mailto:simon@budig.de">simon@budig.de</a>=
-&gt;
--Date: Sat, 20 May 2023 22:25:40 +0200
--Subject: [PATCH] metadata: shut up a weird warning
--
--Upstream-Status: Backport [<a href=3D"https://gitlab.gnome.org/GNOME/gimp/=
--/commit/51311f913d9f417d121f59b83d560c7b4b853d1c">https://gitlab.gnome.org=
-/GNOME/gimp/-/commit/51311f913d9f417d121f59b83d560c7b4b853d1c</a>]
--Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com">raj.khem=
-@gmail.com</a>&gt;
-----
-- plug-ins/metadata/metadata-editor.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
----- a/plug-ins/metadata/metadata-editor.c
--+++ b/plug-ins/metadata/metadata-editor.c
--@@ -2140,7 +2140,7 @@ metadata_dialog_editor_set_metadata (GEx
--                             }
--                           else
--                             {
---                              if (! g_strv_contains (values, equiv_values=
-[evi]))
--+                              if (! g_strv_contains ((const gchar * const=
- *) values, equiv_values[evi]))
--                                 {
--                                   gchar *tmpvalue;
--=20
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reproducibi=
-lity-fix.patch b/meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reprodu=
-cibility-fix.patch
-new file mode 100644
-index 0000000000..532715d588
---- /dev/null
-+++ b/meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reproducibility-fi=
-x.patch
-@@ -0,0 +1,56 @@
-+From bf19c5687703769e406a8086036d4ed6421c33cb Mon Sep 17 00:00:00 2001
-+From: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@t-online.=
-de</a>&gt;
-+Date: Mon, 13 Jan 2025 10:04:33 +0100
-+Subject: [PATCH] meson.build: reproducibility fix
-+
-+Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@=
-t-online.de</a>&gt;
-+
-+Upstream-Status: Inappropriate [oe-specific]
-+---
-+ meson.build | 28 ++++++++++++++--------------
-+ 1 file changed, 14 insertions(+), 14 deletions(-)
-+
-+diff --git a/meson.build b/meson.build
-+index 97cd621780..e47180db87 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -1599,23 +1599,23 @@ conf.set('HAVE_FUNC_ATTRIBUTE_DESTRUCTOR',
-+ conf.set_quoted('CC',             cc.get_id())
-+=20
-+ cc_version=3D''
-+-if cc.get_id() =3D=3D 'gcc' or cc.get_id() =3D=3D 'clang'
-+-  cc_cmd =3D run_command(cc, '-v', check: false)
-++#if cc.get_id() =3D=3D 'gcc' or cc.get_id() =3D=3D 'clang'
-++#  cc_cmd =3D run_command(cc, '-v', check: false)
-+   # Note: the call might actually fail when using ccache.
-+   # See: <a href=3D"https://github.com/mesonbuild/meson/issues/6174">http=
-s://github.com/mesonbuild/meson/issues/6174</a>
-+-  if cc_cmd.returncode() =3D=3D 0
-+-    cc_version =3D cc_cmd.stdout() + cc_cmd.stderr()
-+-  endif
-+-else
-++#  if cc_cmd.returncode() =3D=3D 0
-++#    cc_version =3D cc_cmd.stdout() + cc_cmd.stderr()
-++#  endif
-++#else
-+   # Various compilers have various options. Try most common ones. This
-+   # list of options comes from autotools checks.
-+-  foreach arg : [ '--version', '-v', '-V', '-qversion' ]
-+-    cc_cmd =3D run_command(cc, arg, check: false)
-+-    if cc_cmd.returncode() =3D=3D 0
-+-      cc_version =3D cc_cmd.stdout()
-+-    endif
-+-  endforeach
-+-endif
-++#  foreach arg : [ '--version', '-v', '-V', '-qversion' ]
-++#    cc_cmd =3D run_command(cc, arg, check: false)
-++#    if cc_cmd.returncode() =3D=3D 0
-++#      cc_version =3D cc_cmd.stdout()
-++#    endif
-++#  endforeach
-++#endif
-+ if cc_version =3D=3D ''
-+   # We didn't manage to get a meaningful verbose version from the
-+   # compiler. Just save its name and version.
-+--=20
-+2.47.1
-+
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb b/meta-gnome/reci=
-pes-gimp/gimp/gimp_2.10.38.bb
-deleted file mode 100644
-index 0272e05e96..0000000000
---- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
-+++ /dev/null
-@@ -1,101 +0,0 @@
--SUMMARY =3D "The GIMP is the GNU Image Manipulation Program"
--HOMEPAGE =3D "<a href=3D"http://www.gimp.org">http://www.gimp.org</a>"
--SECTION =3D "x11/graphics"
--LICENSE =3D "GPL-3.0-only"
--LIC_FILES_CHKSUM =3D "<a href=3D"file://COPYING;md5=3Dc678957b0c8e964aa6c7=
-0fd77641a71e" "=3D"">file://COPYING;md5=3Dc678957b0c8e964aa6c70fd77641a71e"=
-</a>
--
--DEPENDS =3D " \
--    alsa-lib \
--    atk \
--    cairo \
--    fontconfig \
--    freetype \
--    gdk-pixbuf-native \
--    intltool-native \
--    libxslt-native \
--    gegl-native \
--    dbus-glib \
--    gtk+ \
--    babl \
--    gegl \
--    libmypaint \
--    mypaint-brushes-1.0 \
--    gexiv2 \
--    jpeg \
--    libmng \
--    libpng \
--    libexif \
--    tiff \
--    lcms \
--    poppler \
--    poppler-data \
--    jasper \
--    bzip2 \
--    libgudev \
--    libmng \
--    <a href=3D"mailto:${@bb.utils.contains">${@bb.utils.contains</a>('DIST=
-RO_FEATURES', 'x11', 'libxmu libxpm', '', d)} \
--"
--DEPENDS:append:libc-musl =3D " libexecinfo"
--
--GNOMEBASEBUILDCLASS =3D "autotools"
--inherit features_check gnomebase gtk-icon-cache gtk-doc mime-xdg
--
--REQUIRED_DISTRO_FEATURES =3D "x11"
--
--SHPV =3D "${@gnome_verdir("${PV}")}"
--
--SRC_URI =3D "<a href=3D"https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP=
-}.tar.bz2">https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2</a> =
-\
--           <a href=3D"file://0001-configure-Keep-first-line-of-compiler-ve=
-rsion-string.patch">file://0001-configure-Keep-first-line-of-compiler-versi=
-on-string.patch</a> \
--           <a href=3D"file://0001-libtool-Do-not-add-build-time-library-pa=
-ths-to-LD_LI.patch">file://0001-libtool-Do-not-add-build-time-library-paths=
--to-LD_LI.patch</a> \
--           <a href=3D"file://0001-file-tiff-load-fix-mismatching-variable-=
-type.patch">file://0001-file-tiff-load-fix-mismatching-variable-type.patch<=
-/a> \
--           <a href=3D"file://0001-metadata-shut-up-a-weird-warning.patch">=
-file://0001-metadata-shut-up-a-weird-warning.patch</a> \
--           <a href=3D"file://0001-gimptool-allow-default-CC-override.patch=
-">file://0001-gimptool-allow-default-CC-override.patch</a> \
--           "
--SRC_URI[sha256sum] =3D "50a845eec11c8831fe8661707950f5b8446e35f30edfb9acf9=
-8f85c1133f856e"
--
--EXTRA_OECONF =3D "--disable-python \
--                --without-webkit \
--                --disable-check-update \
--                --without-wmf"
--
--EXTRA_OECONF +=3D "<a href=3D"mailto:${@oe.utils.conditional">${@oe.utils.=
-conditional</a>('SITEINFO_BITS', '32', ' --disable-vector-icons', '', d)}"
--
--do_configure:append() {
--    find ${B} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
--    find ${B} -name Makefile | xargs sed -i s:'-I/usr/include':'-I${STAGIN=
-G_INCDIR}':g
--}
--
--do_compile:prepend() {
--    # Let native babl/gegl find their plugins
--    export BABL_PATH=3D`find ${STAGING_LIBDIR_NATIVE} -maxdepth 1 -name 'b=
-abl-*'`
--    export GEGL_PATH=3D`find ${STAGING_LIBDIR_NATIVE} -maxdepth 1 -name 'g=
-egl-*'`
--}
--
--FILES:${PN}  +=3D "${datadir}/metainfo"
--
--RDEPENDS:${PN} +=3D "mypaint-brushes-1.0"
--
--
--# gimptool
--
--# gimptool needs a CC definition, use current CC without sysroot
--python __anonymous() {
--    import shlex
--    CC_WITHOUT_SYSROOT =3D shlex.join(filter(lambda x: not x.startswith("-=
--sysroot=3D"), shlex.split(d.getVar("CC"))))
--    d.setVar("CC_WITHOUT_SYSROOT", CC_WITHOUT_SYSROOT)
--}
--EXTRA_OECONF +=3D "--with-default-cc=3D'${CC_WITHOUT_SYSROOT}'"
--
--# Split gimptool in its own package
--PACKAGE_BEFORE_PN +=3D "${PN}-gimptool"
--FILES:${PN}-gimptool +=3D "${bindir}/gimptool-2.0"
--
--# gimptool depends on gimp .pc file being installed and tools to build the=
- plugin.
--RDEPENDS:${PN}-gimptool +=3D "${PN}-dev packagegroup-core-buildessential"
--INSANE_SKIP:${PN}-gimptool +=3D "dev-deps"
--
--
--CVE_STATUS[CVE-2007-3741] =3D "not-applicable-platform: This only applies =
-for Mandriva Linux"
--CVE_STATUS[CVE-2009-0581] =3D "cpe-incorrect: The current version (2.10.38=
-) is not affected."
--CVE_STATUS[CVE-2009-0723] =3D "cpe-incorrect: The current version (2.10.38=
-) is not affected."
--CVE_STATUS[CVE-2009-0733] =3D "cpe-incorrect: The current version (2.10.38=
-) is not affected."
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb b/meta-gnome/recipe=
-s-gimp/gimp/gimp_3.0.2.bb
-new file mode 100644
-index 0000000000..2018ea04c4
---- /dev/null
-+++ b/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb
-@@ -0,0 +1,132 @@
-+SUMMARY =3D "The GIMP is the GNU Image Manipulation Program"
-+HOMEPAGE =3D "<a href=3D"http://www.gimp.org">http://www.gimp.org</a>"
-+SECTION =3D "graphics"
-+LICENSE =3D "GPL-3.0-only"
-+LIC_FILES_CHKSUM =3D "<a href=3D"file://COPYING;md5=3Dc678957b0c8e964aa6c7=
-0fd77641a71e" "=3D"">file://COPYING;md5=3Dc678957b0c8e964aa6c70fd77641a71e"=
-</a>
-+
-+DEPENDS =3D " \
-+    appstream-glib \
-+    atk \
-+    babl \
-+    bzip2 \
-+    bison-native \
-+    cairo \
-+    fontconfig \
-+    freetype \
-+    gdk-pixbuf-native \
-+    gegl \
-+    gexiv2 \
-+    glib-2.0 \
-+    glib-2.0-native \
-+    gtk+3 \
-+    harfbuzz \
-+    iso-codes-native \
-+    jpeg \
-+    json-glib \
-+    lcms \
-+    libarchive \
-+    libexif \
-+    libmypaint \
-+    libpng \
-+    librsvg \
-+    librsvg-native \
-+    libxmu \
-+    libxslt-native \
-+    mypaint-brushes-1.0 \
-+    pango \
-+    poppler \
-+    poppler-data \
-+    python3-pygobject-native \
-+    tiff \
-+    xz \
-+    zlib \
-+"
-+
-+DEPENDS:append:libc-musl =3D " libexecinfo"
-+
-+inherit meson gtk-icon-cache mime-xdg pkgconfig gettext gobject-introspect=
-ion vala
-+
-+GIR_MESON_OPTION =3D 'can-crosscompile-gir'
-+VALA_MESON_OPTION =3D "vala"
-+VALA_MESON_ENABLE_FLAG =3D "enabled"
-+VALA_MESON_DISABLE_FLAG =3D "disabled"
-+GIDOCGEN_MESON_OPTION =3D "gi-docgen"
-+GIDOCGEN_MESON_ENABLE_FLAG =3D "enabled"
-+GIDOCGEN_MESON_DISABLE_FLAG =3D "disabled"
-+
-+SRC_URI =3D "<a href=3D"https://download.gimp.org/gimp/v${@oe.utils.trim_v=
-ersion('${PV">https://download.gimp.org/gimp/v${@oe.utils.trim_version('${P=
-V</a>}', 2)}/gimp-${PV}.tar.xz"
-+SRC_URI +=3D "<a href=3D"file://0001-gimp-cross-compile-fix-for-bz2.patch"=
- "=3D"">file://0001-gimp-cross-compile-fix-for-bz2.patch"</a>
-+SRC_URI +=3D "<a href=3D"file://0002-meson.build-reproducibility-fix.patch=
-" "=3D"">file://0002-meson.build-reproducibility-fix.patch"</a>
-+SRC_URI +=3D "<a href=3D"file://0001-meson.build-dont-check-for-lgi.patch"=
- "=3D"">file://0001-meson.build-dont-check-for-lgi.patch"</a>
-+SRC_URI +=3D "<a href=3D"file://0001-meson.build-require-iso-codes-native.=
-patch" "=3D"">file://0001-meson.build-require-iso-codes-native.patch"</a>
-+SRC_URI[sha256sum] =3D "546ddc30cb2d0e79123c7fcb4d78211e1ee7a6aace91a6a0ad=
-8cbcbf6ea571a2"
-+
-+PACKAGECONFIG[aa] =3D "-Daa=3Denabled,-Daa=3Ddisabled,aalib"
-+PACKAGECONFIG[alsa] =3D "-Dalsa=3Denabled,-Dalsa=3Ddisabled,alsa-lib"
-+PACKAGECONFIG[appdata-test] =3D "-Dappdata-test=3Denabled,-Dappdata-test=
-=3Ddisabled,appstream-native"
-+PACKAGECONFIG[cairo-pdf] =3D "-Dcairo-pdf=3Denabled,-Dcairo-pdf=3Ddisabled=
-"
-+PACKAGECONFIG[check-update] =3D "-Dcheck-update=3Dyes,-Dcheck-update=3Dno"
-+PACKAGECONFIG[ghostscript] =3D "-Dghostscript=3Denabled,-Dghostscript=3Ddi=
-sabled,ghostscript,ghostscript"
-+PACKAGECONFIG[gudev] =3D "-Dgudev=3Denabled,-Dgudev=3Ddisabled,libgudev"
-+PACKAGECONFIG[heif] =3D "-Dheif=3Denabled,-Dheif=3Ddisabled,libheif"
-+PACKAGECONFIG[javascript] =3D "-Djavascript=3Denabled,-Djavascript=3Ddisab=
-led,,gjs"
-+PACKAGECONFIG[jpeg2000] =3D "-Djpeg2000=3Denabled,-Djpeg2000=3Ddisabled,ja=
-sper"
-+PACKAGECONFIG[jpeg-xl] =3D "-Djpeg-xl=3Denabled,-Djpeg-xl=3Ddisabled,libjx=
-l"
-+PACKAGECONFIG[libunwind] =3D "-Dlibunwind=3Dtrue,-Dlibunwind=3Dfalse,libun=
-wind"
-+PACKAGECONFIG[libbacktrace] =3D "-Dlibbacktrace=3Dtrue,-Dlibbacktrace=3Dfa=
-lse,libbacktrace"
-+PACKAGECONFIG[lua] =3D "-Dlua=3Dtrue,-Dlua=3Dfalse,,luajit lua-lgi"
-+PACKAGECONFIG[mng] =3D "-Dmng=3Denabled,-Dmng=3Ddisabled,libmng"
-+PACKAGECONFIG[openmp] =3D "-Dopenmp=3Denabled,-Dopenmp=3Ddisabled,gcc-runt=
-ime"
-+PACKAGECONFIG[vector-icons] =3D "-Dvector-icons=3Dtrue,-Dvector-icons=3Dfa=
-lse,librsvg shared-mime-info"
-+PACKAGECONFIG[webp] =3D "-Dwebp=3Denabled,-Dwebp=3Ddisabled,libwebp"
-+PACKAGECONFIG[xcursor] =3D "-Dxcursor=3Denabled,-Dxcursor=3Ddisabled,libxc=
-ursor"
-+PACKAGECONFIG[x11] =3D "-Dxpm=3Denabled,-Dxpm=3Ddisabled,libxpm libxext li=
-bxfixes"
-+
-+PACKAGECONFIG ?=3D " \
-+    alsa \
-+    cairo-pdf \
-+    ghostscript \
-+    gudev \
-+    javascript \
-+    jpeg2000 \
-+    jpeg-xl \
-+    lua \
-+    mng \
-+    webp \
-+    <a href=3D"mailto:${@oe.utils.conditional">${@oe.utils.conditional</a>=
-('SITEINFO_BITS', '32', '', 'vector-icons', d)} \
-+    <a href=3D"mailto:${@bb.utils.contains">${@bb.utils.contains</a>('LICE=
-NSE_FLAGS_ACCEPTED', 'commercial', 'heif', '', d)} \
-+    <a href=3D"mailto:${@bb.utils.contains">${@bb.utils.contains</a>('DIST=
-RO_FEATURES', 'x11', 'x11 xcursor', '', d)} \
-+"
-+
-+PACKAGECONFIG:remove:riscv32 =3D "lua"
-+PACKAGECONFIG:remove:riscv64 =3D "lua"
-+PACKAGECONFIG:remove:powerpc64 =3D "lua"
-+PACKAGECONFIG:remove:powerpc64le =3D "lua"
-+
-+EXTRA_OEMESON +=3D " \
-+    -Dshmem-type=3Dposix \
-+    -Dlinux-input=3Denabled \
-+    --buildtype release \
-+    --cross-file=3D${WORKDIR}/meson-${PN}.cross \
-+"
-+
-+do_write_config:append() {
-+    cat &gt;${WORKDIR}/meson-${PN}.cross &lt;&lt;EOF
-+[binaries]
-+gjs =3D '${bindir}/gjs'
-+luajit =3D '${bindir}/luajit'
-+EOF
-+}
-+
-+do_configure:append () {
-+    sed -i -e "s|build_by_default: true|build_by_default: false|" ${S}/gim=
-p-data/images/meson.build
-+}
-+
-+do_install:prepend() {
-+    sed -i -e "s|${B}||" ${B}/app/widgets/gimplanguagestore-data.h
-+    sed -i -e "s|${B}||" ${B}/plug-ins/file-bmp/huffman.h
-+}
-+
-+FILES:${PN} +=3D "${datadir}/metainfo"
-+
-+RDEPENDS:${PN} =3D "mypaint-brushes-1.0 glib-networking python3-pygobject"
-<div>--=20
-</div>2.49.0
-
-</div><div class=3D"plaintext" style=3D"white-space: break-spaces;">
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-Links: You receive all messages sent to this group.
-View/Reply Online (#116337): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/116337">https://lists.openembedded.org/g/openembed=
-ded-devel/message/116337</a>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/111947159/361=
-8223">https://lists.openembedded.org/mt/111947159/3618223</a>
-Group Owner: <a href=3D"mailto:openembedded-devel+owner@lists.openembedded.=
-org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a h=
-ref=3D"mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-
-</div></blockquote></div>
---=-HozQz/oeJsS0KzC6oWyp--
++DEPENDS = "ncurses zlib glib-2.0"
+ 
+ SRC_URI = "http://www.atoptool.nl/download/${BP}.tar.gz \
+            ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'file://volatiles.atop.conf', 'file://volatiles.99_atop', d)} \
+            file://fix-permissions.patch \
+            file://sysvinit-implement-status.patch \
+-           file://0001-atop.daily-atop.init-atop-pm.sh-Avoid-using-bash.patch \
++           file://0001-Redefine-function-prototypes-solves-issue-322.patch \
+            "
+-SRC_URI[sha256sum] = "be1c010a77086b7d98376fce96514afcd73c3f20a8d1fe01520899ff69a73d69"
++SRC_URI[sha256sum] = "9b94c666602efff7bf402ecce706c347f38c39cb63498f9d39626861e5646e20"
+ 
+ UPSTREAM_CHECK_URI = "https://atoptool.nl/downloadatop.php"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+).tar"
+ 
+ CVE_STATUS[CVE-2011-3618] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
++TARGET_CC_ARCH += "${LDFLAGS}"
+ 
+ do_compile() {
+     oe_runmake all
+@@ -35,7 +38,7 @@ do_compile() {
+ do_install() {
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+         make DESTDIR=${D} VERS=${PV} SYSDPATH=${systemd_system_unitdir} \
+-            PMPATHD=${systemd_unitdir}/system-sleep systemdinstall
++            PMPATHD=${systemd_unitdir}/system-sleep install
+         install -d ${D}${sysconfdir}/tmpfiles.d
+         install -m 644 ${UNPACKDIR}/volatiles.atop.conf ${D}${sysconfdir}/tmpfiles.d/atop.conf
+         rm -f ${D}${systemd_system_unitdir}/atopacct.service
+@@ -56,9 +59,9 @@ do_install() {
+ 
+ inherit systemd
+ 
+-SYSTEMD_SERVICE:${PN} = "atop.service atopgpu.service"
++SYSTEMD_SERVICE:${PN} = "atop.service atopgpu.service atop-rotate.service"
+ SYSTEMD_AUTO_ENABLE = "disable"
+ 
+-FILES:${PN} += "${systemd_unitdir}/system-sleep"
++FILES:${PN} += "${systemd_unitdir}/system-sleep ${systemd_system_unitdir}/atop-rotate.timer"
+ 
+ RDEPENDS:${PN} = "procps"
+-- 
+2.34.1
 
 
