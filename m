@@ -1,158 +1,109 @@
-Return-Path: <randy.macleod@windriver.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 28428C28B20
-	for <webhook@archiver.kernel.org>; Fri, 28 Mar 2025 17:04:12 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.1171.1743181451179950947
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BF07DC28B20
+	for <webhook@archiver.kernel.org>; Fri, 28 Mar 2025 21:54:22 +0000 (UTC)
+Received: from mail-yb1-f169.google.com (mail-yb1-f169.google.com [209.85.219.169])
+ by mx.groups.io with SMTP id smtpd.web10.533.1743198861295400101
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 Mar 2025 10:04:11 -0700
+ Fri, 28 Mar 2025 14:54:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=6182d079f8=randy.macleod@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52SG133T026656
-	for <openembedded-devel@lists.openembedded.org>; Fri, 28 Mar 2025 10:04:10 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45hrg47cka-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 28 Mar 2025 10:04:10 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Fri, 28 Mar 2025 10:04:09 -0700
-Received: from pop-os.wrs.com (172.25.44.6) by ala-exchng01.corp.ad.wrs.com
- (147.11.82.252) with Microsoft SMTP Server id 15.1.2507.43 via Frontend
- Transport; Fri, 28 Mar 2025 10:04:09 -0700
-From: <Randy.MacLeod@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH] iperf2: upgrade 2.0.13 -> 2.2.1
-Date: Fri, 28 Mar 2025 13:04:08 -0400
-Message-ID: <20250328170408.334249-1-Randy.MacLeod@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dkauBOxQ;
+ spf=pass (domain: gmail.com, ip: 209.85.219.169, mailfrom: schonm@gmail.com)
+Received: by mail-yb1-f169.google.com with SMTP id 3f1490d57ef6-e60aef2711fso1878220276.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 28 Mar 2025 14:54:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1743198860; x=1743803660; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=+UNX2wnGtnYxtDkoZsW2gPRBawvX8oUOCUCOkvYUVsM=;
+        b=dkauBOxQBnlaFyLUon06YEdzDtwJCzv3jX461pK9EO3cH8avUNa/YXzvSplveLZi9H
+         bg7P/Fl+fKH1t1OyGIp3R9AvuqFCrwCWlP077JSO7icVTQBdjEFBmivvyZMdwThWDgyw
+         BQBnniBBNaRdWZ6rgfJLzO9PknFIIzQhkAtuhs3iyB/O4BGnyxGI1jt7Q7waAfZjB7/7
+         HIUMDKlRevwtXwUriUl2tvoQs/98ANfLDLUMQ9USGyYVzi+PdtwT0FJeWY4slxBXChsb
+         U1jIxzMCfFtZECh/BJg/uXUe/YD/FwxOh1/6+DL7wZ06kNL4RQQTxDhmp5jFgPFlqPU/
+         /XFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1743198860; x=1743803660;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=+UNX2wnGtnYxtDkoZsW2gPRBawvX8oUOCUCOkvYUVsM=;
+        b=eyXHfLYW+6jue8OJRrmKsZsEksEquUKk0+4acyiOQDh3/TL3wkMZ0hn7YB9jTccisd
+         GIoU0C2KBO6Ds5t5/lzL2myOpWnBH7PtKfPQpFbeEnmbxdR4/k3HptR76rb3dxgN6jT7
+         BpwdIi5NHCJectbD/XgecEUsvRK9//cwbVsJoL3CH52l31jKevIJ4v3lbQxFZMf0BN5h
+         qOLYWlCSZ+yIM9W4N2Q7AIsUohpN+RqwgoMiOTMzYM0LUp0PAjgpUnnp66u5wmzCk5Am
+         vRriQ3Nua/ew7hFimTH72c9NpNe2ztSR1YP+7NZ2cFtTKP/mRwDvyBM9/IbS6EusdBpp
+         zzKg==
+X-Gm-Message-State: AOJu0YyKT6mK5LP3/p8YlS4kErZW1NdM++/t02/rLrh2vBL3+BFrGwK8
+	ZmZh2YYktm4/gvNpgKlYBH6W/TRk28PzyiuEJZ91Sa/7J8MW557LSxhi7Jy2
+X-Gm-Gg: ASbGncuTiXN1lQozxmhG33tE/z8FusAFJhaFbgafJIHkbkc8yrjZba0jFEACLpRzhKw
+	oY7aRLEzNhVFtPo75oY3l0eTYFbh3fTbJwJtBlL8RWQU5ZtdXB6vG4vyrU42iUZDzKXNUQQC4h5
+	Wdx/lETcAgGZbbalzJp3fCpxN42CF/jqBrdEh2POMmcVzvVAFXPTZZOnmQTi7ik4lYJNC6BX0QE
+	/tECc8qtgiSA8jpJrwUZ7WBqZbrY8yA78EvIk8yKXkgpj9YaOuN0DFnkRq/5J46ZV/L4TSzbuWh
+	bdQL4crui2q+Y41dDQ3OUZZS8OTrF1XDk/giMVdRzZ0KiUVqCA==
+X-Google-Smtp-Source: AGHT+IHEGV9q/eNABJMInmotWosOqytvQPjPsXh3cbNdePEj6mV4B7L1UkiIQicHuPXqe61mmPux4g==
+X-Received: by 2002:a05:6902:2748:b0:e63:d36f:96c1 with SMTP id 3f1490d57ef6-e6b838f34c2mr1067040276.10.1743198859794;
+        Fri, 28 Mar 2025 14:54:19 -0700 (PDT)
+Received: from localhost.localdomain ([71.215.9.36])
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e6b7131d2b5sm737324276.38.2025.03.28.14.54.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 28 Mar 2025 14:54:19 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH] c-ares: upgrade 1.33.0 -> 1.33.1
+Date: Fri, 28 Mar 2025 17:54:04 -0400
+Message-ID: <20250328215404.240252-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=HZwUTjE8 c=1 sm=1 tr=0 ts=67e6d68a cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=Vs1iUdzkB0EA:10 a=FP58Ms26AAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8 a=ZUewT2-OccQ2_HBMdosA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: cNYEb3xJ13weWOMvSxJsxvQC8wRAvBZN
-X-Proofpoint-ORIG-GUID: cNYEb3xJ13weWOMvSxJsxvQC8wRAvBZN
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-03-28_08,2025-03-27_02,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 lowpriorityscore=0
- suspectscore=0 bulkscore=0 phishscore=0 malwarescore=0 adultscore=0
- clxscore=1015 impostorscore=0 spamscore=0 priorityscore=1501
- mlxlogscore=999 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
- definitions=main-2503280118
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 28 Mar 2025 17:04:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116357
+ <openembedded-devel@lists.openembedded.org>; Fri, 28 Mar 2025 21:54:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116358
 
-From: Randy MacLeod <Randy.MacLeod@windriver.com>
+Changelog: https://github.com/c-ares/c-ares/releases/tag/v1.33.1
 
-Release notes:
-https://sourceforge.net/p/iperf2/code/ci/2-2-1/tree/NEWS.md
+Bugfixes:
 
-Drop the stdbool patch. It seems to have been fixed upstream by:
-   ae0284e4   2020-10-22   Replace DAST_CHECK_BOOL with AC_HEADER_STDBOOL
+    Work around systemd-resolved quirk that returns unexpected codes for single
+    label names. Also adds test cases to validate the work around works and
+    will continue to work in future releases. PR #863, See Also systemd/systemd#34101
+    Fix sysconfig ndots default value, also adds containerized test case to
+    prevent future regressions. PR #862
+    Fix blank DNS name returning error code rather than valid record for
+    commands like: adig -t SOA .. Also adds test case to prevent future
+    regressions. 9e574af
+    Fix calculation of query times > 1s. 2b2eae7
+    Fix building on old Linux releases that don't have TCP_FASTOPEN_CONNECT. b7a89b9
+    Fix minor Android build warnings. PR #848
 
-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- ...nition-considering-stdbool.h-being-p.patch | 60 -------------------
- .../{iperf2_2.0.13.bb => iperf2_2.2.1.bb}     |  3 +-
- 2 files changed, 1 insertion(+), 62 deletions(-)
- delete mode 100644 meta-oe/recipes-benchmark/iperf2/iperf2/0001-Detect-bool-definition-considering-stdbool.h-being-p.patch
- rename meta-oe/recipes-benchmark/iperf2/{iperf2_2.0.13.bb => iperf2_2.2.1.bb} (79%)
+ .../c-ares/{c-ares_1.33.0.bb => c-ares_1.33.1.bb}               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/c-ares/{c-ares_1.33.0.bb => c-ares_1.33.1.bb} (91%)
 
-diff --git a/meta-oe/recipes-benchmark/iperf2/iperf2/0001-Detect-bool-definition-considering-stdbool.h-being-p.patch b/meta-oe/recipes-benchmark/iperf2/iperf2/0001-Detect-bool-definition-considering-stdbool.h-being-p.patch
-deleted file mode 100644
-index dc3b85f8ef..0000000000
---- a/meta-oe/recipes-benchmark/iperf2/iperf2/0001-Detect-bool-definition-considering-stdbool.h-being-p.patch
-+++ /dev/null
-@@ -1,60 +0,0 @@
--From 6df092a4153c6c37cfaddcabf2cd25a910a7f6e1 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Mon, 2 Sep 2019 15:40:52 -0700
--Subject: [PATCH] Detect bool definition considering stdbool.h being present
--
--This helps in defining the value correctly on different platforms e.g.
--clang/libc++ depends on the definition coming from stdbool.h
--current builds fail to compile therefore
--
--TMPDIR/work/cortexa7t2hf-neon-vfpv4-yoe-linux-gnueabi/iperf2/2.0.13-r0/recipe-sysroot/usr/include/c++/v1/type_traits:742:29: error: redefinition of '__libcpp_is_integral<int>'
--template <>          struct __libcpp_is_integral<int>                : public true_type {};
--                            ^~~~~~~~~~~~~~~~~~~~~~~~~
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
--Upstream-Status: Pending
--
-- m4/dast.m4 | 7 ++++++-
-- 1 file changed, 6 insertions(+), 1 deletion(-)
--
----- a/m4/dast.m4
--+++ b/m4/dast.m4
--@@ -11,7 +11,12 @@ AH_TEMPLATE([false])
-- 
-- AC_DEFUN(DAST_CHECK_BOOL, [
-- 
---AC_CHECK_SIZEOF(bool)
--+if test "$ac_cv_header_stdbool_h" = yes; then
--+  AC_CHECK_SIZEOF(bool,,[#include <stdbool.h>])
--+else
--+  AC_CHECK_SIZEOF(bool)
--+fi
--+
-- if test "$ac_cv_sizeof_bool" = 0 ; then
--   AC_DEFINE(bool, int)
-- fi
----- a/configure.ac
--+++ b/configure.ac
--@@ -113,7 +113,7 @@ AC_SEARCH_LIBS([socket], [socket], [],
-- 
-- dnl Checks for header files.
-- AC_HEADER_STDC
---AC_CHECK_HEADERS([arpa/inet.h libintl.h net/ethernet.h net/if.h linux/ip.h linux/udp.h linux/if_packet.h linux/filter.h netdb.h netinet/in.h stdlib.h string.h strings.h sys/socket.h sys/time.h syslog.h unistd.h signal.h ifaddrs.h])
--+AC_CHECK_HEADERS([arpa/inet.h libintl.h net/ethernet.h net/if.h linux/ip.h linux/udp.h linux/if_packet.h linux/filter.h netdb.h netinet/in.h stdbool.h stdlib.h string.h strings.h sys/socket.h sys/time.h syslog.h unistd.h signal.h ifaddrs.h])
-- 
-- dnl ===================================================================
-- dnl Checks for typedefs, structures
----- a/include/util.h
--+++ b/include/util.h
--@@ -56,7 +56,9 @@
-- #ifdef HAVE_CONFIG_H
--     #include "config.h"
-- #endif
---
--+#ifdef HAVE_STDBOOL_H
--+# include <stdbool.h>
--+#endif
-- #ifdef __cplusplus
-- extern "C" {
-- #endif
-diff --git a/meta-oe/recipes-benchmark/iperf2/iperf2_2.0.13.bb b/meta-oe/recipes-benchmark/iperf2/iperf2_2.2.1.bb
-similarity index 79%
-rename from meta-oe/recipes-benchmark/iperf2/iperf2_2.0.13.bb
-rename to meta-oe/recipes-benchmark/iperf2/iperf2_2.2.1.bb
-index 7b3d23a53f..a439616ba4 100644
---- a/meta-oe/recipes-benchmark/iperf2/iperf2_2.0.13.bb
-+++ b/meta-oe/recipes-benchmark/iperf2/iperf2_2.2.1.bb
-@@ -5,10 +5,9 @@ LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=e136a7b2560d80bcbf0d9b3e1356ecff"
+diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.33.0.bb b/meta-oe/recipes-support/c-ares/c-ares_1.33.1.bb
+similarity index 91%
+rename from meta-oe/recipes-support/c-ares/c-ares_1.33.0.bb
+rename to meta-oe/recipes-support/c-ares/c-ares_1.33.1.bb
+index 44c5834695..51b73a978b 100644
+--- a/meta-oe/recipes-support/c-ares/c-ares_1.33.0.bb
++++ b/meta-oe/recipes-support/c-ares/c-ares_1.33.1.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=d3e72a10e08191f2ca1be3f3228d78f3"
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/iperf-${PV}.tar.gz \
--           file://0001-Detect-bool-definition-considering-stdbool.h-being-p.patch \
- "
+ SRC_URI = "https://github.com/c-ares/c-ares/releases/download/v${PV}/${BPN}-${PV}.tar.gz \
+            file://run-ptest"
+-SRC_URI[sha256sum] = "3e41df2f172041eb4ecb754a464c11ccc5046b2a1c8b1d6a40dac45d3a3b2346"
++SRC_URI[sha256sum] = "06869824094745872fa26efd4c48e622b9bd82a89ef0ce693dc682a23604f415"
  
--SRC_URI[sha256sum] = "c88adec966096a81136dda91b4bd19c27aae06df4d45a7f547a8e50d723778ad"
-+SRC_URI[sha256sum] = "754ab0a7e28033dbea81308ef424bc7df4d6e2fe31b60cc536b61b51fefbd8fb"
- 
- S = "${WORKDIR}/iperf-${PV}"
- 
+ PACKAGECONFIG ?= "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
+ PACKAGECONFIG[manpages] = ""
 -- 
-2.34.1
+2.43.0
 
 
