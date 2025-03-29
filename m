@@ -1,106 +1,108 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0EE8FC28B20
-	for <webhook@archiver.kernel.org>; Sat, 29 Mar 2025 02:17:43 +0000 (UTC)
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.web11.3876.1743214655751310503
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25125C28B20
+	for <webhook@archiver.kernel.org>; Sat, 29 Mar 2025 02:35:03 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.3486.1743213071542144946
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 Mar 2025 19:17:35 -0700
+ Fri, 28 Mar 2025 18:51:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FIhoQpHD;
- spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-2ff615a114bso5979750a91.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 28 Mar 2025 19:17:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1743214654; x=1743819454; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=yLP9PQf5HP5y7v1suZAe+iugCggmHJZWW9f+cD/9uGs=;
-        b=FIhoQpHDwwUfVN+F+ZJjJWrb5LuPYKPPKw3s8sIMUDvW32GOis8bFQb5Jeb60CJzYj
-         7nRyFRYdtpKGOp++yKITWnOSpiuqgKRMn3MQ7PCQHMHowxrxiS1GWlqqHbu1JQJgyxs9
-         ok15MRETs1O0hOWpoNXWF0evQD2G9/IMp/bQEB1l5P5klOidFE40TCTbwbBO6QvmZ4p3
-         vsVDeIcqIfB4+nmbuGKocoqOC4fd9Wtw+9UzrmESSxQaQGvP7/dQxcQFabhsmcxo6t9i
-         Kvtbqr3QoUvFk5PrSAfC1+D7dSEE5RZjW657Pa9i6/EeJI+kg8ErTje0Mwa0SX0blF1B
-         dv+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743214654; x=1743819454;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=yLP9PQf5HP5y7v1suZAe+iugCggmHJZWW9f+cD/9uGs=;
-        b=ZrEdGyE6O/UJ81JDoapK2bHXciOqiCB/zuORxMUs09qn0PoyI3xPvBiOuEZETXX52H
-         xKVVFInwHlCboNgDq9UtvW8lvzMpUOrCNEm8+t8L+kvx+b9v3kMa8hR9ei+O4b3mii7u
-         QtHzjmNkeP7UsGcGnXSRFcObe6cYvsmCa0Iag4hW3FVfAKjx9bRJgG/Jnl46/M6xVO0a
-         HvokwFOBi8PyuhGBPyVzhnSBe/BfzQR3TcvbFWJJRo8bmVykoJzceA8HOq5Pf9ZSEN6S
-         YQG1WpEZzrcncxc1LvzDXWjtkBIeWoFAJZ5Kg/PpHZ3psCvLrzxd22e/GfTdchngbfs5
-         8lEg==
-X-Gm-Message-State: AOJu0Ywcs4TBnQxCvjYqcdT3ypABnrXckjf0iyTg1aFsqqhsPSgF0FRq
-	9Zcx9HC31MfiLlufNNc1C6CZP5D5Sn8LmLJMaJ+3hDAq5MpYPBnqGM3RFllQ
-X-Gm-Gg: ASbGncsDPiY3uiZ9QYpESa8SIvNe2bvTnB1K6/qJvxbCRz0xI5f0TMWZMycsFk1BYEi
-	wiXF+bm3fA6M+rSHfK+wk62n1XACzJoByYS8/tZdqJfht5s1fVGlIKTF3dEFH2Z+z4agzulnEYU
-	egJf1SbCJX4zq74Y20YN6OoFcHdIgcfEpbtI52XY7IYqHUt9ArTCjBeqSfqqe9qzzONKscL/iXW
-	LpPSZ5893RIixv4T80C5D9rCSmP8723qRq3PoiPmaiWAVK4grfAmyn5rH2FgoBpBDgMZcsiqD3t
-	nHefOZDylDi3Svy5OIjpPWE1Qt0wk0QwGSZz
-X-Google-Smtp-Source: AGHT+IEY/hUJexAG2diMu+L4Y21+AEGpySVjGRodF/MEAiZ7/SbGjllonCseNHlJfBAV43BRkBKCRA==
-X-Received: by 2002:a17:90b:2f07:b0:2fa:2268:1af4 with SMTP id 98e67ed59e1d1-3051c889b0dmr7800602a91.7.1743214654188;
-        Fri, 28 Mar 2025 19:17:34 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:8201:fd20::f147])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3039f6b633bsm4947865a91.43.2025.03.28.19.17.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 28 Mar 2025 19:17:33 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Randy MacLeod <Randy.MacLeod@windriver.com>
-Subject: [meta-oe][PATCH] iperf2: Add _GNU_SOURCE define to cflags on musl
-Date: Fri, 28 Mar 2025 19:17:31 -0700
-Message-ID: <20250329021731.2535876-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.49.0
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=6183825020=lizhi.xu@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52T1oSs4007210;
+	Sat, 29 Mar 2025 01:51:06 GMT
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45hm68qumu-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Sat, 29 Mar 2025 01:51:06 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Fri, 28 Mar 2025 18:51:05 -0700
+Received: from pek-lpd-ccm6.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Fri, 28 Mar 2025 18:51:03 -0700
+From: "Xu, Lizhi" <Lizhi.Xu@windriver.com>
+To: <raj.khem@gmail.com>
+CC: <Lizhi.Xu@windriver.com>, <Rahul.Taya@kpit.com>,
+        <openembedded-devel@lists.openembedded.org>, <ticotimo@gmail.com>
+Subject: [meta-python2][PATCH] python: the fix for CVE-2019-20907 is adjusted in the python2
+Date: Sat, 29 Mar 2025 09:51:02 +0800
+Message-ID: <20250329015102.1360744-1-lizhi.xu@windriver.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <CAMKF1spZ3j3LEkadqA4bYGfP2Ddn3zyyWDeFghdmLGBhVw2nfg@mail.gmail.com>
+References: <CAMKF1spZ3j3LEkadqA4bYGfP2Ddn3zyyWDeFghdmLGBhVw2nfg@mail.gmail.com>
 MIME-Version: 1.0
+X-Proofpoint-ORIG-GUID: -HegXOg5SGD0-PpER-Qr7yVPmVJDrlE1
+X-Authority-Analysis: v=2.4 cv=etjfzppX c=1 sm=1 tr=0 ts=67e7520a cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=Vs1iUdzkB0EA:10 a=t7CeM3EgAAAA:8 a=u7QhwD7Qvhr6_RYIU5wA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: -HegXOg5SGD0-PpER-Qr7yVPmVJDrlE1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-03-28_12,2025-03-27_02,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 phishscore=0
+ malwarescore=0 lowpriorityscore=0 mlxscore=0 adultscore=0 suspectscore=0
+ impostorscore=0 mlxlogscore=934 priorityscore=1501 spamscore=0
+ clxscore=1011 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
+ definitions=main-2503290010
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 29 Mar 2025 02:17:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116362
+ <openembedded-devel@lists.openembedded.org>; Sat, 29 Mar 2025 02:35:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116363
 
-glibc defines struct udphdr as a union where members have aliased names
+In the python2, assertRaisesRegex is not defined in Lib/unittest/case.py,
+but assertRaisesRegexp is defined, so this error is reported.
+In addition, the file recursion.tar is missing in Lib/test/, so it is added
+together.
 
-uh_sport -> source
-uh_dport -> uh_dport
-uh_dport -> len
-check -> check
+Reproducer:
+python test/test_tarfile.py | sed -u -e '/\.\.\. ok/ s/^/PASS: /g' -e '/\.\.\. [ERROR|FAIL]/ s/^/FAIL: /g' -e '/\.\.\. skipp
 
-But musl only defines the aliases if _GNU_SOURCE is defined, ideally
-iperf2 should be using uh_* names of the members so it is portable across
-musl and glibc but thats for upstream to consider.
+ERROR: test_length_zero_header (test.test_tarfile.MiscReadTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/test/test_tarfile.py", line 327, in test_length_zero_header
+    with self.assertRaisesRegex(tarfile.ReadError, "file could not be opened successfully"):
+AttributeError: 'MiscReadTest' object has no attribute 'assertRaisesRegex'
 
-Fixes
-| ../../iperf-2.2.1/src/checksums.c:175:19: error: no member named 'check' in 'struct udphdr'
-|   175 |     if (!udp_hdr->check) {
-|       |          ~~~~~~~  ^
-| 1 error generated.
-| make[2]: *** [Makefile:539: checksums.o] Error 1
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Randy MacLeod <Randy.MacLeod@windriver.com>
+Fixes: 044015255944 ("python: Add fix for CVE-2019-20907")
+Signed-off-by: Lizhi Xu <lizhi.xu@windriver.com>
 ---
- meta-oe/recipes-benchmark/iperf2/iperf2_2.2.1.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../python/python/CVE-2019-20907.patch            |   2 +-
+ recipes-devtools/python/python/recursion.tar      | Bin 0 -> 516 bytes
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+ create mode 100644 recipes-devtools/python/python/recursion.tar
 
-diff --git a/meta-oe/recipes-benchmark/iperf2/iperf2_2.2.1.bb b/meta-oe/recipes-benchmark/iperf2/iperf2_2.2.1.bb
-index a439616ba4..b31532d4ea 100644
---- a/meta-oe/recipes-benchmark/iperf2/iperf2_2.2.1.bb
-+++ b/meta-oe/recipes-benchmark/iperf2/iperf2_2.2.1.bb
-@@ -15,6 +15,8 @@ inherit autotools pkgconfig
- 
- EXTRA_OECONF = "--exec-prefix=${STAGING_DIR_HOST}${layout_exec_prefix}"
- 
-+CFLAGS:append:libc-musl = " -D_GNU_SOURCE"
-+
- PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)}"
- PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
- 
+diff --git a/recipes-devtools/python/python/CVE-2019-20907.patch b/recipes-devtools/python/python/CVE-2019-20907.patch
+index 624afd2..a2d050d 100644
+--- a/recipes-devtools/python/python/CVE-2019-20907.patch
++++ b/recipes-devtools/python/python/CVE-2019-20907.patch
+@@ -37,7 +37,7 @@ index 89bd738..c61d02b 100644
+ +    def test_length_zero_header(self):
+ +        # bpo-39017 (CVE-2019-20907): reading a zero-length header should fail
+ +        # with an exception
+-+        with self.assertRaisesRegex(tarfile.ReadError, "file could not be opened successfully"):
+++        with self.assertRaisesRegexp(tarfile.ReadError, "file could not be opened successfully"):
+ +            with tarfile.open(support.findfile('recursion.tar')) as tar:
+ +                pass
+ +
+diff --git a/recipes-devtools/python/python/recursion.tar b/recipes-devtools/python/python/recursion.tar
+new file mode 100644
+index 0000000000000000000000000000000000000000..b8237251964983f54ed1966297e887636cd0c5f4
+GIT binary patch
+literal 516
+zcmYdFPRz+kEn=W0Fn}74P8%Xw3X=l~85kIuo0>8xq$A1Gm}!7)KUsFc41m#O8A5+e
+I1_}|j06>QaCIA2c
+
+literal 0
+HcmV?d00001
+
+-- 
+2.43.0
+
 
