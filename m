@@ -1,182 +1,182 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F0F2EC36008
-	for <webhook@archiver.kernel.org>; Sat, 29 Mar 2025 18:11:27 +0000 (UTC)
-Received: from mail-yb1-f178.google.com (mail-yb1-f178.google.com [209.85.219.178])
- by mx.groups.io with SMTP id smtpd.web11.15748.1743271881529901142
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 75944C36008
+	for <webhook@archiver.kernel.org>; Sat, 29 Mar 2025 23:17:19 +0000 (UTC)
+Received: from mail-ot1-f49.google.com (mail-ot1-f49.google.com [209.85.210.49])
+ by mx.groups.io with SMTP id smtpd.web11.20749.1743290237032665052
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 29 Mar 2025 11:11:21 -0700
+ Sat, 29 Mar 2025 16:17:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=H0lCflYF;
- spf=pass (domain: gmail.com, ip: 209.85.219.178, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f178.google.com with SMTP id 3f1490d57ef6-e60ad903382so2256307276.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 29 Mar 2025 11:11:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=HUDB/d3T;
+ spf=pass (domain: gmail.com, ip: 209.85.210.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f49.google.com with SMTP id 46e09a7af769-72bb9725de1so917988a34.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 29 Mar 2025 16:17:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1743271880; x=1743876680; darn=lists.openembedded.org;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=K8IOkSEHAAA1kqSBLH/nYLSny6KNKNC2672unQAVsng=;
-        b=H0lCflYFJcXsZDPNM88jP7fxvxQSF/RTDfLHLPty7k2slzdKYAN6x+AthZXDjy1eqB
-         q3edxXV2muR9Y8aVKyjKEvyOTv9DDoq/55zI00rz2OcdlOWgVDF0B3diG+YsqH8ygo2s
-         Rw/NX0ZEcvwYv68jiQzQ3v8R2Zi7YEqsNGHvCVnsjM4d1L9SnohSkzdra+FDNLADxazG
-         U7YX14JKML94ew4/7C6BTlHQ2k8ILedVEEyzWriwH4WiE12O9pMwvhExPb8hdmC9j3GL
-         jYqjzrwqm3oLmwuWos+wI0n8hT+bUo3j5qxxiA+Ed3TtNNjnaRe6uwAgQqx152QkvCA+
-         8IvQ==
+        d=gmail.com; s=20230601; t=1743290236; x=1743895036; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=RvF0anpeFTPjenPyjARBWh8eUJdeDZTUqIhgQeyAGeo=;
+        b=HUDB/d3THDaihxvHkch6/v1qYJpAOi3Mk0IAkAJUspHqx3w+DF3f4hLN+N+vQRou0v
+         lJ+4k6jljFKAIZWkeOdAsSe2UvOGObPdjMgGpZZvh8Jiazj2koYhIEyNIthuJZncVoNy
+         VyqZjVJMTBCe8LNxpiwLl53lAtBQ0k3HazWPJfl4qIMwPRhPia42eda5aHF2+PL/8PwE
+         LyzwLkaMT9beNbWTe+RDyrZkgOuJPbeIzfFbnXViNf0ROB58KKxleVyEHoqQpGR5qKJo
+         TCx5BUDtTlqdMAQVe4L2LRSPxlwzG/ovrdY5zCRoMvDS6Gyy5n2gpwGOO3ALr/CtfUvf
+         BZWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743271880; x=1743876680;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=K8IOkSEHAAA1kqSBLH/nYLSny6KNKNC2672unQAVsng=;
-        b=Zh4GG1f7QmdaF1rbEvSEdElUaq7qJFFMZSArDhS8mMOpgrcZx6hDW87+27BSpQ85Pt
-         EQ5tsS85VCQMe9oUMjMMoixgOYz2mdmOCFhE/LEvnQfF0iPNY/yw+XIWxB0oyAWOHbaN
-         gewL5AVWEWAFOFdyC5tZHJCQGCVIrHQHvwxklxdJIsdNA6TvV12qTmD5Vb4nMA1jEPWO
-         WDA8rbc60vvL39Dd9kds406e/2V3O7BWJt2xGtC4NXio4s3PZH2pqiaFiuGgJ6rRzgZY
-         a7RbpGMqtsGVitt0+TY/sJ5C61UrDew5KqnslMZv9FLKC8cKCFFtmo/wVZvo1ZPAHKDR
-         tq3Q==
-X-Forwarded-Encrypted: i=1; AJvYcCWobzCeLGGeU1WMYU9Up3R18tnSZf3DdTMdW9ndhlGXsKAJlQibOXc0jmt4W19YkRmLAf/B4FTTcISYTmD9nrL+5z8=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yzh0s++MWcBIltCVOWgNuyHwvVCj1WJw3P7Az0VToZ8eLluyMKn
-	E5nmKyuyrayZrD4C9QEnvYzeQcBtKgQBZJTK62UdLYKH2iQsF59u
-X-Gm-Gg: ASbGnctEcfofSB2NIih2SIDhehSTUTNnxiqravXL9OKoxc+Kise1dpuylSDLhB7VOu7
-	C0QXxTGkyHnnYoqnO6hwuKIpVlW9i2lnWLD34IekkKpHFOVn6V94x13hHMRj9T4Xnqxtqx+5sXi
-	tbzarKsO2xEK/FlrexDNENZys0VUKoi/D0uF/7v/V1MxhQvGjG6NxQzfEtwGhT3lNyXsrkGFjxf
-	fzaourgmxjMPyH5o30oX69g/chgvwaSLc05KDCz7QDFEEX39cEHa0mKiWmK+3fodR3/ymA0E5uu
-	PXnxSkEcgEhTQV6GGsOtM43O1XSV1dJKU7zPrq4uAbOhfAPlmKi4/GYSK37Il+JBe00Im9+Ek+9
-	UtgfEYlGCBX3iE/tPbHMu
-X-Google-Smtp-Source: AGHT+IHtFNeul+7tGuxYFrp5ABmOpD08Zm5DzhdQlJsl8meC5kWD8rSDVHj8ih7bghpzZomowvBCgA==
-X-Received: by 2002:a05:690c:6103:b0:6f9:8605:ec98 with SMTP id 00721157ae682-702572f0bbcmr48800427b3.28.1743271880610;
-        Sat, 29 Mar 2025 11:11:20 -0700 (PDT)
-Received: from ?IPV6:2600:1700:45dd:7000:e1a8:da73:9f2c:90fb? ([2600:1700:45dd:7000:e1a8:da73:9f2c:90fb])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-7023a341c08sm13240377b3.9.2025.03.29.11.11.20
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 29 Mar 2025 11:11:20 -0700 (PDT)
-Message-ID: <a1271383-1bbb-434a-a8cf-1b34a1b32146@gmail.com>
-Date: Sat, 29 Mar 2025 14:11:19 -0400
+        d=1e100.net; s=20230601; t=1743290236; x=1743895036;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=RvF0anpeFTPjenPyjARBWh8eUJdeDZTUqIhgQeyAGeo=;
+        b=WI+TP64TdNLHT/1AS4hokhL7XC9QXQoWmHr/Cq0mRARO2Z1NEXoc7lOfSG7QVhsDUL
+         Ymcs9gCI2jtR9sOror8rCRYYgaJA8bWjWuEWkLzk1mGkT0v/eKcWlLU1B9ziWE0KWeU+
+         5U5FgmpsF26ln3EKEEs2dk6lb7Hjak2/zuLejOjFLhaRA4xyIJkkC4/wVpPfncLWQUux
+         wnMT9HOPx9+EvwvdiGtCETjYBnQ3zl4kRcr0a8DfZJ8My6DZd0WaZ1LNMMHtXjegSgqh
+         QA4LymzkhVmcqFoHAGyaiTGeM4XAA5RIwgsWX6LDgNUZgVXubJ6cWf3fcU7AU1CX7VyU
+         ArjA==
+X-Forwarded-Encrypted: i=1; AJvYcCXDkFhHYyr4vH6vqZ8l0m/RCxDYQNKehhxNnzDyu2wWMEM6PXoXDLLOOws2QtRPiBBvqWhTyCopAe0wTYTXMHNLD/E=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YwV/KUrGq1oDNRMlj8qFr7HrfsrVIH4QQFIedWjCSclEw1iHxBn
+	atR6tHNvHabrohBJ0/WdgmS74m9Z3feE1wBXftxtWA+7jQ/m/jCHkuk95YwhdaF4HWCNAfkScB0
+	0oUKaT+IPLjk05EPNC8lFcK5ZKuE=
+X-Gm-Gg: ASbGncsvUo1J3TWyVgiDF1Kbteds/h/F8DnXe6AgDkZjjAU/2nU0Lb6mqo6Mx6DEgvU
+	y7mNmZ1oQ3MaP0Hz06rbdYLCgVXfead3pON/UFkZDtRYwuwIQhwQptYeKgOBh9nQu4a/QEpNQPg
+	Z/aQszRn1TDOs6czSltB8KAIAM
+X-Google-Smtp-Source: AGHT+IHY/pn+HMpDB9iFT1sqPOxI8Wg9NcYY94IFHIO95uZ2yIc7JDEa0kQgVlvM+269MaMs2v3XtkFHeyp/XoxXAmI=
+X-Received: by 2002:a05:6830:4903:b0:72b:9de0:891 with SMTP id
+ 46e09a7af769-72c637c49d1mr2967432a34.13.1743290236229; Sat, 29 Mar 2025
+ 16:17:16 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: scarthgap merge request: March 29th
-Autocrypt: addr=akuster808@gmail.com; keydata=
- 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
- ApZ86eOP
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <952235ba-b7ee-4ba7-831f-3a679c900cf3@gmail.com>
+ <CAMKF1spz4vz10bCmMjfdXmVexFahFCC_2yhrR+O5-FRv8pAHdQ@mail.gmail.com> <CAMSfU+7vHy-t3cFUPMw__SWEacku0uOkmF0JGb0CvLifJVNoDQ@mail.gmail.com>
+In-Reply-To: <CAMSfU+7vHy-t3cFUPMw__SWEacku0uOkmF0JGb0CvLifJVNoDQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 29 Mar 2025 16:16:50 -0700
+X-Gm-Features: AQ5f1JpD2L8PEWAKbwGTjgfnvVX0GK3SNTnhCFIq0v1ASPnOlSSpPvlkAtNI9Oo
+Message-ID: <CAMKF1srnnwP4_3M04MNZddus3UwG+vadbDf+c--XAtNb1ZLzrg@mail.gmail.com>
+Subject: Re: [oe] scarthgap merge request: March 23rd
+To: Yoann Congal <yoann.congal@smile.fr>
+Cc: akuster808 <akuster808@gmail.com>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	Sofiane HAMAM <sofiane.hamam@smile.fr>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 29 Mar 2025 18:11:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116372
+ <openembedded-devel@lists.openembedded.org>; Sat, 29 Mar 2025 23:17:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116373
 
-The following changes since commit edd1a1e284fdcb80cd48d411f235d47f23bc27ae:
+merged now thanks.
 
-   mongodb: fix build with python 3.12 (2025-03-07 19:40:51 -0500)
-
-are available in the Git repository at:
-
-   https://git.openembedded.org/meta-openembedded scarthgap-next
-
-for you to fetch changes up to 67ad83dd7c2485dae0c90eac345007af6195b84d:
-
-   krb5: fix CVE-2025-24528 (2025-03-27 14:04:21 -0400)
-
-----------------------------------------------------------------
-Alexandre Truong (1):
-       lcov: include UPSTREAM_CHECK_* to fix UNKNOWN_BROKEN status
-
-Claus Stovgaard (2):
-       lcov: sort RDEPENDS alphabetical
-       lcov: Add missing RDEPENDS
-
-Divya Chellam (1):
-       krb5: fix CVE-2025-24528
-
-Jinfeng Wang (1):
-       netplan: Fix CVE-2022-4968
-
-Libo Chen (1):
-       libgpiod: fix gpiod-cxx-test failed test case
-
-Sofiane HAMAM (2):
-       Wolfssl: add ptest
-       wolfssl: Upgrade 5.7.0 -> 5.7.2
-
-Vijay Anusuri (2):
-       postgresql: upgrade 16.5 -> 16.8
-       wireshark: upgrade 4.2.7 -> 4.2.9
-
-  .../conf/include/ptest-packagelists-meta-networking.inc         | 1 +
-  meta-networking/recipes-connectivity/wolfssl/files/run-ptest    | 24 ++
-  meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.0.bb   | 22 --
-  meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb   | 41 +++
-  .../recipes-core/images/meta-networking-image-ptest.bb          | 1 +
-  .../recipes-support/wireshark/files/CVE-2024-9781.patch         | 133 
---------
-  .../wireshark/{wireshark_4.2.7.bb => wireshark_4.2.9.bb} |   3 +-
-  .../recipes-connectivity/netplan/netplan/CVE-2022-4968.patch    | 452 
-++++++++++++++++++++++++++++
-  .../meta-python/recipes-connectivity/netplan/netplan_1.0.bb     | 1 +
-  meta-oe/recipes-connectivity/krb5/krb5/CVE-2025-24528.patch     | 68 +++++
-  meta-oe/recipes-connectivity/krb5/krb5_1.21.3.bb                | 1 +
-  .../0003-configure.ac-bypass-autoconf-2.69-version-check.patch  | 2 +-
-  .../postgresql/{postgresql_16.5.bb => postgresql_16.8.bb} |   4 +-
-  meta-oe/recipes-support/lcov/lcov_1.16.bb                       | 17 +-
-  ...1-bindings-cxx-tests-set-direction-when-reconfiguring-.patch | 38 +++
-  meta-oe/recipes-support/libgpiod/libgpiod_2.1.2.bb              | 2 +
-  16 files changed, 645 insertions(+), 165 deletions(-)
-  create mode 100644 
-meta-networking/recipes-connectivity/wolfssl/files/run-ptest
-  delete mode 100644 
-meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.0.bb
-  create mode 100644 
-meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb
-  delete mode 100644 
-meta-networking/recipes-support/wireshark/files/CVE-2024-9781.patch
-  rename meta-networking/recipes-support/wireshark/{wireshark_4.2.7.bb 
-=> wireshark_4.2.9.bb} (96%)
-  create mode 100644 
-meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/CVE-2022-4968.patch
-  create mode 100644 
-meta-oe/recipes-connectivity/krb5/krb5/CVE-2025-24528.patch
-  rename meta-oe/recipes-dbs/postgresql/{postgresql_16.5.bb => 
-postgresql_16.8.bb} (75%)
-  create mode 100644 
-meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-tests-set-direction-when-reconfiguring-.patch
-
+On Thu, Mar 27, 2025 at 3:57=E2=80=AFPM Yoann Congal <yoann.congal@smile.fr=
+> wrote:
+>
+> Hello Armin,
+>
+> I feel like you lost those 2 patches for wolfssl on scarthgap:
+> [meta-networking][scarthgap][PATCH 1/2] Wolfssl: add ptest
+> https://lists.openembedded.org/g/openembedded-devel/message/115831
+> [meta-networking][scarthgap][PATCH 2/2] wolfssl: Upgrade 5.7.0 -&gt; 5.7.=
+2
+> https://lists.openembedded.org/g/openembedded-devel/message/115832
+>
+> Alternatively, we could backport
+> https://git.openembedded.org/meta-openembedded/commit/?id=3De23eaf27d8396=
+3e8d82411d96f6817fc970fd89f
+> only (just the upgrade)
+>
+> That would fix the CVE-2024-5991 from
+> https://valkyrie.yocto.io/pub/non-release/patchmetrics-meta-oe/
+>
+> Thanks!
+>
+> Le dim. 23 mars 2025 =C3=A0 20:14, Khem Raj via lists.openembedded.org
+> <raj.khem=3Dgmail.com@lists.openembedded.org> a =C3=A9crit :
+> >
+> > merged thanks Armin
+> >
+> > On Sun, Mar 23, 2025 at 12:06=E2=80=AFPM akuster808 <akuster808@gmail.c=
+om> wrote:
+> > >
+> > > The following changes since commit 6c9f1f8d4538119803bf793747b65e4d23=
+c33544:
+> > >
+> > >    nginx: fix CVE-2025-23419 (2025-03-03 08:09:03 -0500)
+> > >
+> > > are available in the Git repository at:
+> > >
+> > >    https://git.openembedded.org/meta-openembedded scarthgap-next
+> > >
+> > > for you to fetch changes up to edd1a1e284fdcb80cd48d411f235d47f23bc27=
+ae:
+> > >
+> > >    mongodb: fix build with python 3.12 (2025-03-07 19:40:51 -0500)
+> > >
+> > > ----------------------------------------------------------------
+> > > Awais Belal (1):
+> > >        mongodb: fix build with python 3.12
+> > >
+> > > Peter Marko (1):
+> > >        libmodbus: patch CVE-2024-10918
+> > >
+> > > Virendra Thakur (1):
+> > >        unbound: Fix CVE-2024-8508
+> > >
+> > >   .../recipes-support/unbound/unbound/CVE-2024-8508.patch         | 2=
+47
+> > > ++++++++++++++++++++++++++++
+> > >   meta-networking/recipes-support/unbound/unbound_1.19.3.bb       | 4=
+ +-
+> > >   .../0001-moduleconfig.py-python-3.12-compatibility.patch        | 5=
+7
+> > > +++++++
+> > >   .../meta-python/recipes-dbs/mongodb/mongodb_git.bb              | 3=
+ +-
+> > >   .../libmodbus/libmodbus/CVE-2024-10918-01.patch                 | 1=
+77
+> > > ++++++++++++++++++++
+> > >   .../libmodbus/libmodbus/CVE-2024-10918-02.patch                 | 1=
+21
+> > > ++++++++++++++
+> > >   .../libmodbus/libmodbus/CVE-2024-10918-03.patch                 | 8=
+4
+> > > ++++++++++
+> > >   .../libmodbus/libmodbus/CVE-2024-10918-04.patch                 | 2=
+39
+> > > +++++++++++++++++++++++++++
+> > >   meta-oe/recipes-extended/libmodbus/libmodbus_3.1.10.bb          | 8=
+ +-
+> > >   9 files changed, 936 insertions(+), 4 deletions(-)
+> > >   create mode 100644
+> > > meta-networking/recipes-support/unbound/unbound/CVE-2024-8508.patch
+> > >   create mode 100644
+> > > meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-m=
+oduleconfig.py-python-3.12-compatibility.patch
+> > >   create mode 100644
+> > > meta-oe/recipes-extended/libmodbus/libmodbus/CVE-2024-10918-01.patch
+> > >   create mode 100644
+> > > meta-oe/recipes-extended/libmodbus/libmodbus/CVE-2024-10918-02.patch
+> > >   create mode 100644
+> > > meta-oe/recipes-extended/libmodbus/libmodbus/CVE-2024-10918-03.patch
+> > >   create mode 100644
+> > > meta-oe/recipes-extended/libmodbus/libmodbus/CVE-2024-10918-04.patc
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#116204): https://lists.openembedded.org/g/openembed=
+ded-devel/message/116204
+> > Mute This Topic: https://lists.openembedded.org/mt/111864517/4316185
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[yoann.congal@smile.fr]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
+>
+>
+> --
+> Yoann Congal
+> Smile ECS
 
