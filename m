@@ -1,87 +1,138 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C76EC36008
-	for <webhook@archiver.kernel.org>; Sat, 29 Mar 2025 05:54:14 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web10.5788.1743227646339925291
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18FE6C36008
+	for <webhook@archiver.kernel.org>; Sat, 29 Mar 2025 08:53:15 +0000 (UTC)
+Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
+ by mx.groups.io with SMTP id smtpd.web11.7339.1743238388562150144
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 Mar 2025 22:54:06 -0700
+ Sat, 29 Mar 2025 01:53:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QDGDR3hk;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2241053582dso24274805ad.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 28 Mar 2025 22:54:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1743227645; x=1743832445; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=gaMMHK3PTMOfu20k7+/WPyGUcUpdlmGH81kGWgs7syQ=;
-        b=QDGDR3hkwk2mhTS0QUVbF/JbQbVsoJkvCjRCxZ+VvZXB3Y4BuY1MdALk1ZCLA6tCWe
-         5Th33Ufa9Dmt9LVmPiszeXTFAJj5Tt/LXQm1VIP1UT3dyYtWmxbnXcUfsNi09MVQAI+3
-         FYOJQ6XaW8jEJH2N/jphPBz7H5uiq5zkuAcnArbEy4AqRIpUs+x7i5e1YWiJVhbJO0jN
-         X/yiwAOc7NZSJGYuie6piUSpQDpkB2ptyVz5YbJgN34e3QTU7NOrkaU2M6RXbFx1tWjP
-         d+Rz/OWtebXvRnBqmWdDoHzAp+K7ZLvpO//NgZCbVueZ2h1XQa+R0AoQ6t3QvBwM/5KM
-         d24A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743227645; x=1743832445;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=gaMMHK3PTMOfu20k7+/WPyGUcUpdlmGH81kGWgs7syQ=;
-        b=JzMNW7SC7DfWIpGgb/pJ6O6WgzqyEAvgIH354ffw8ZtqQRtNun3/A6Nk2sDZO30oae
-         gs8mE3Pjx2i8tz0lWLrUrJ84XGmWq6mYUgmacfgVYPegdiPNkVLMeqyBbNcr6HvZRKXX
-         gz4OQ4blko+QMHtt2210CBugp1wHqQ2RJ5nB9s9ViymwDibrqxhBaaEZzX5fGZF2gbaO
-         VXzpbcyEfi2GA3da7XN/tYtnbNl6YkjF618mkF7D57QMK3yI1yG7b4XT0h3GZAxe0bg2
-         ssapBbCrJ6ExFCyOwCI7PW2m2gGUgpAlQV8uos4VaWiQ1SPQJZ7wMk7kH5C9HEhFwJM9
-         pMAw==
-X-Gm-Message-State: AOJu0YwK79sTkdTgKZmvL5pHcfhW3CqtewTUAnipDtYI7fBSZrMgEID/
-	f4ZOmmC9Qgq4bKMx7JUaxystvxWUPTJ7KNCfgyFJo/VOlRDAcETVb44UqxmH
-X-Gm-Gg: ASbGnctcc2wbLtMXadrTjlV7pCdQRZCP3t5PNHrtjDajSCHwnbkku4g3gaL8kvo2mFA
-	/n7u2EgFBwEGo81ySY7i3wKa7msnNLGRUFfPG9CVRj9m/qyhOr59KRvyM0Aq9Sv3pPFinNT/LjX
-	omtfd9gpNgWz8TU+1jj4cr+z0k4Blcbme59yrCLGU0kSkmhl1dYzobM4NcQ2Ikf6j76XSJLcsJ0
-	WbRKg/jhBWq4lI+zqrIyYeoGsPfk8CAJ4dVBdXYVdt1XuaeklT8QGaz7ank3tiDD3q2cttoE3ho
-	vkJJ8s0d3Dx1E/ugFuzR7CCCQxGY1gm4PJ1k3eSsMrmY56E=
-X-Google-Smtp-Source: AGHT+IEUBwESzM/ada/FzE2b+d3JRojwBbQFXLeTXfOHhanVPTK2ei4rrCkW5oMZM/fUk4896QKjQA==
-X-Received: by 2002:a05:6a00:4f89:b0:736:2a73:6756 with SMTP id d2e1a72fcca58-7398044854dmr2216775b3a.21.1743227645236;
-        Fri, 28 Mar 2025 22:54:05 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:8201:fd20::f147])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7397106ba79sm2904967b3a.104.2025.03.28.22.54.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 28 Mar 2025 22:54:04 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
+Received: from fwd84.aul.t-online.de (fwd84.aul.t-online.de [10.223.144.110])
+	by mailout08.t-online.de (Postfix) with SMTP id A2084935
+	for <openembedded-devel@lists.openembedded.org>; Sat, 29 Mar 2025 09:53:06 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.167.83]) by fwd84.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1tyRwA-0umK6z0; Sat, 29 Mar 2025 09:53:06 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] nftables: Fix build on musl when xtables enabled
-Date: Fri, 28 Mar 2025 22:54:02 -0700
-Message-ID: <20250329055402.4161631-1-raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH] gnome-remote-desktop: uodate 47.0 - 48.0
+Date: Sat, 29 Mar 2025 09:53:53 +0100
+Message-ID: <20250329085353.13993-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1743238386-D8FF6927-15794312/0/0 CLEAN NORMAL
+X-TOI-MSGID: 9cf3733d-ed5d-4603-af99-718e24310df4
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 29 Mar 2025 05:54:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116368
+ <openembedded-devel@lists.openembedded.org>; Sat, 29 Mar 2025 08:53:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116369
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+- add missing dependency for 'rdp'
+
+48.0
+=3D=3D=3D=3D
+Translators:
+  A S Alam [pa], Aurimas =C4=8Cernius [lt], Seong-ho Cho [ko],
+  Bal=C3=A1zs =C3=9Ar [hu], Daniel Mustieles [es], Ask Hjorth Larsen [da]=
+,
+  Andika Triwidada [id], Jiri Gr=C3=B6nroos [fi], Pawan Chitrakar [ne],
+
+48.rc
+=3D=3D=3D=3D=3D
+* Add support for hardware encoded AVC444
+
+Contributors:
+  Pascal Nowack
+
+Translators:
+  Rafael Fontenelle [pt_BR], Giannis Antypas [el], Daniel Rusek [cs],
+  Piotr Dr=C4=85g [pl], Anders Jonsson [sv], Ekaterine Papava [ka],
+  Alexandre Franke [fr], Yuri Chornoivan [uk], twlvnn kraftwerk [bg],
+  Scrambled 777 [hi], Quentin PAG=C3=88S [oc], Asier Sarasua Garmendia [e=
+u],
+  Hugo Carvalho [pt], Fran Dieguez [gl], Jordi Mas i Hernandez [ca]
+
+48.beta
+=3D=3D=3D=3D=3D=3D=3D
+* Add support for zero copy rendering with Vulkan and VAAPI
+  (disabled by default)
+
+Contributors:
+  Pascal Nowack, traze
+
+48.alpha
+=3D=3D=3D=3D=3D=3D=3D=3D
+* General code improvements
+* Fix gdctl crash when setting VNC password
+* Prepare for Vulkan and libva based hardware acceleration
+* Add user documentation
+* Don't hard code keyboard type
+
+Contributors:
+  Jonas =C3=85dahl, Jerry, Pascal Nowack, Bart=C5=82omiej Piotrowski, Dan=
+iel Rusek
+
+Translators:
+  Hugo Carvalho [pt], Jordi Mas i Hernandez [ca],
+  Juliano de Souza Camargo [pt_BR], R=C5=ABdolfs Mazurs [lv], Danial Behz=
+adi [fa],
+  Luming Zh [zh_CN], Martin [sl], Vasil Pupkin [be], Nathan Follens [nl],
+  Artur S0 [ru], =D0=9C=D0=B8=D0=BB=D0=BE=D1=88 =D0=9F=D0=BE=D0=BF=D0=BE=D0=
+=B2=D0=B8=D1=9B [sr], Quentin PAG=C3=88S [oc], Yaron Shahrabani [he],
+  Sabri =C3=9Cnal [tr]
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-networking/recipes-filter/nftables/nftables_1.1.1.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ ...me-remote-desktop_47.0.bb =3D> gnome-remote-desktop_48.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-remot=
+e-desktop/{gnome-remote-desktop_47.0.bb =3D> gnome-remote-desktop_48.0.bb=
+} (89%)
 
-diff --git a/meta-networking/recipes-filter/nftables/nftables_1.1.1.bb b/meta-networking/recipes-filter/nftables/nftables_1.1.1.bb
-index 17709016be..f0f51f5397 100644
---- a/meta-networking/recipes-filter/nftables/nftables_1.1.1.bb
-+++ b/meta-networking/recipes-filter/nftables/nftables_1.1.1.bb
-@@ -33,6 +33,9 @@ EXTRA_OECONF = " \
- 
- PEP517_SOURCE_PATH = "${S}/py"
- 
-+# xtables will need it on musl see iptables
-+CFLAGS:append:libc-musl = " -D__UAPI_DEF_ETHHDR=0"
-+
- inherit_defer ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python_setuptools_build_meta', '', d)}
- 
- PACKAGES =+ "${@bb.utils.contains('PACKAGECONFIG', 'python', '${PN}-python', '', d)}"
+diff --git a/meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-=
+remote-desktop/gnome-remote-desktop_47.0.bb b/meta-gnome/dynamic-layers/m=
+eta-security/recipes-gnome/gnome-remote-desktop/gnome-remote-desktop_48.0=
+.bb
+similarity index 89%
+rename from meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-r=
+emote-desktop/gnome-remote-desktop_47.0.bb
+rename to meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-rem=
+ote-desktop/gnome-remote-desktop_48.0.bb
+index 38a8cc01a3..5f8a06c5c3 100644
+--- a/meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-remote-=
+desktop/gnome-remote-desktop_47.0.bb
++++ b/meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-remote-=
+desktop/gnome-remote-desktop_48.0.bb
+@@ -8,7 +8,7 @@ inherit gnomebase gettext gsettings features_check
+=20
+ REQUIRED_DISTRO_FEATURES =3D "opengl polkit"
+=20
+-SRC_URI[archive.sha256sum] =3D "8aa55775757b299debe417e169e6e28fecbf18ce=
+611ed176fa0d650ab5344776"
++SRC_URI[archive.sha256sum] =3D "038c42e48fe1d890849bec5d567566c152bd6d7f=
+463eadeec59b1eae8fbb32a0"
+=20
+ DEPENDS =3D " \
+     asciidoc-native \
+@@ -33,7 +33,7 @@ PACKAGECONFIG ??=3D " \
+=20
+ PACKAGECONFIG[tests] =3D "-Dtests=3Dtrue,-Dtests=3Dfalse,pipewire-native=
+ wireplumber-native dbus-native"
+ PACKAGECONFIG[vnc] =3D "-Dvnc=3Dtrue,-Dvnc=3Dfalse,libvncserver"
+-PACKAGECONFIG[rdp] =3D "-Drdp=3Dtrue,-Drdp=3Dfalse,freerdp3 fuse3 libxkb=
+common"
++PACKAGECONFIG[rdp] =3D "-Drdp=3Dtrue,-Drdp=3Dfalse,freerdp3 fuse3 libxkb=
+common shaderc-native"
+ PACKAGECONFIG[systemd] =3D "-Dsystemd=3Dtrue,-Dsystemd=3Dfalse,systemd"
+=20
+ PACKAGE_DEBUG_SPLIT_STYLE =3D "debug-without-src"
+--=20
+2.49.0
+
 
