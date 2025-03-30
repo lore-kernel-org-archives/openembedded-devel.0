@@ -2,30 +2,30 @@ Return-Path: <niko.mauno@vaisala.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 365F5C36013
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 354C7C28B20
 	for <webhook@archiver.kernel.org>; Sun, 30 Mar 2025 10:28:23 +0000 (UTC)
 Received: from DUZPR83CU001.outbound.protection.outlook.com (DUZPR83CU001.outbound.protection.outlook.com [52.101.67.89])
  by mx.groups.io with SMTP id smtpd.web11.27933.1743330476550525245
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 30 Mar 2025 03:27:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=foxJjq4y;
+ dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=huGf2Kvj;
  spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 52.101.67.89, mailfrom: niko.mauno@vaisala.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ffDMvOuPtbL4Fdy+x22Tyqli/HLPcxWFQI4ZeIQ/k0XFmmiy41xUufgJOns5JINUpyN+FcNkWqZxcjouk+HpKvqDPkeEDgNzgQbyjeUWfLbU6YdGoQC9nyZGk46nP6PCkgMcO7O0k9E3f+f+6kipdQ2/jFR7lkzN11lp0nAJxQErYm8HStc8iLLMQ7iujUyvJ5s+PXCUN+GgpGkubcbTVx1mUsG6wjHkgIobuY4rCbaxjCTY10VS6jckoQtCHNnH5iSiBm8YQP3dO9DX1uEPkQsAqFV/K0rQ0c+BmreBkxn66F2lx/X4SfG5lryleDrDPCYfsPQmObz+YHmUc3R0Tw==
+ b=YU5TxZuiiuz4ZMWOca/U64LPhatbm+7UXtKmpsBKGh7Xphg9RvylRNBOQpkjhWKZV7fnbuGCce/vfZw+ZxSR5aDG126FxUOFrzuCyq4FBzmUlqeyxTrLVFUkzZ78kdtfVbbmAfWU9jTfEmId8vxYx/cyWnhrjTMS4bC7Eh95/BGXWXj/yamWDlk6d1svWhPOy+yhEBbU15bL1X5NLDpr4bwoENGA27HxSaBw9b4lOz3v4dB5WqTGBrncO45ZlCgrcU94MnGJw9IQHURCYP3t8J114gG7iS4Bne2QzkZ0WdXY3YDFdj5TUxTEdh8rD8K7YXoF6t3GdNUsHTJY0ZsXFw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZDon5z6H1lJ33u6MHbk9Yz7+VBiB2eZErrQxQcIakwU=;
- b=qw/BpQTN+pIxoW7INhLSAo/tWEShYa8tfuSGYcX+edLFHi2RrfHq3TEIAM2SA6GuoFjwMuxrZrcpbhFLvvDy1ieqA/b3IDoL7NQskawT8zyrr6k9VTzgrVJMNbmZtlyBKHXQQ7rTXZKf80JZzYDHqmCEOVav+jJXutEWlUtBmRiCyNJylQQp54tU1nRitF2Z1rNx0tartULHvyNXdru1ilIwIEqN+CuFPqIcHN4cKdi+rr9CZTkqlp+bvh90H2OohvHfNWgNK7jwJFS25pGLiRTwob3eXPw8rn52xLXXe4xwCRnk48iUVy+x8N66a9Q8I0WL3I4OryBbJJ4a5xeBdw==
+ bh=ECbBwdWcKIzNsDm5muBlARahvfjRHPrHQJmvO5G/5hI=;
+ b=sA22MBxmBKVRFwuIqpP4h5cJKhlyLn46CCudJ0ySUPlORjf9wVZiBFfH+QZ3Swe0V0P8iPmwTkdl2XV1EAzy2zXsSjvlqY+BKy8Gy7PYjjy7Vt+LO5lTMhYekspo9H3HrXU4/x/eqxq6lqZB/8XBMVq1gyzZsEO8qLjUDZqsP77NnC7oKnyA8m9hkKB5CUS+HZgtb0/VPykmc+WepT38u9iCY/csvB2/c7TEaUxz5yA3XbgBIffBBLajZUS0rY1a7WwfAU0elaArf1N5Ywh9V5AYpFVocidZ4Bwx8vMZi9IfVRuqbKjpOVVX4lcHXd6EdgAOUzuqHV0AHdl/D6SrDQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
  dkim=pass header.d=vaisala.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZDon5z6H1lJ33u6MHbk9Yz7+VBiB2eZErrQxQcIakwU=;
- b=foxJjq4y4vBIPPnCLNQG5mu6tflUcdk94vjoymhXUth1RR0gOVwmBjdm9UyIMHKZsIyBJ0TkXxDucFaRIGK5wdsee37OQPKLxerMap7twYy0fCpIlbANO5lW0OodYsFAIC+GHIKkYB1H2YRNRXOOI6b1+P2Oj0XYp7o7XPfq2C58ukhVM44sHmUi26MvDJGKNhnwE4NdelowJphJ/6mvzhBJcOXL7imnqgyyk6LcaLY6vSq1r2Yu2feuJupINR++p7RoYPCsc5+N8xx1R1trcMBusR/fJTasn+6gjZX92DDLeyZUFtl3mmFPLluwjmZUqPcBtzNXrsLnCWrGSKsFQQ==
+ bh=ECbBwdWcKIzNsDm5muBlARahvfjRHPrHQJmvO5G/5hI=;
+ b=huGf2KvjMqHQiVkgce7fU7lVcJg4b7S/Pw+Gy0jaX92d/2rn7Tp0jcECFa75zQ/V/8wcb7g1pV5wMedlwuyEvc+g/5yjyjt83+R01EoZ+EeyvSSP4tZEvuIEJaDMjadufRcsJKWe5wGEXhLPrb/LgBI27mio0ijsyFNyaJUjjbvJnNxeFn7ldQJ7Qzhar0xq/NdPBTXS5n8kfTuW9p52ilnVLErvP1Nqdhf/xxeQi42y7QAHHNxRXv+ZR23rfhXt6H6kby4dLx1I1EKCCMvHr+WGE2vtaA5wDKhFqcuZl609XUsAbgnY0xGQIWvupIbsDxwr0BHckDc1NbvESbAZfg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vaisala.com;
 Received: from AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
@@ -36,14 +36,16 @@ Received: from AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
 Received: from AS4PR06MB8447.eurprd06.prod.outlook.com
  ([fe80::af93:b150:b886:b2bc]) by AS4PR06MB8447.eurprd06.prod.outlook.com
  ([fe80::af93:b150:b886:b2bc%3]) with mapi id 15.20.8534.048; Sun, 30 Mar 2025
- 10:27:52 +0000
+ 10:27:53 +0000
 From: Niko Mauno <niko.mauno@vaisala.com>
 To: openembedded-devel@lists.openembedded.org
 CC: Niko Mauno <niko.mauno@vaisala.com>
-Subject: [meta-oe][PATCH 1/2] luajit: Remove dangling patch file
-Date: Sun, 30 Mar 2025 10:27:29 +0000
-Message-ID: <20250330102730.405005-1-niko.mauno@vaisala.com>
+Subject: [meta-oe][PATCH 2/2] mozjs: Remove dangling patch file
+Date: Sun, 30 Mar 2025 10:27:30 +0000
+Message-ID: <20250330102730.405005-2-niko.mauno@vaisala.com>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250330102730.405005-1-niko.mauno@vaisala.com>
+References: <20250330102730.405005-1-niko.mauno@vaisala.com>
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 X-ClientProxiedBy: GV2PEPF00006627.SWEP280.PROD.OUTLOOK.COM
@@ -52,123 +54,151 @@ X-ClientProxiedBy: GV2PEPF00006627.SWEP280.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|PR3PR06MB7100:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8cfab69e-6a42-4734-eac7-08dd6f758715
+X-MS-Office365-Filtering-Correlation-Id: 630e93f9-f9ce-49cb-cd5a-08dd6f75874f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
 	BCL:0;ARA:13230040|1800799024|376014|52116014|366016|38350700014;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?i08WWmFL6AMLd+qIS0PiGOMllJKTdzvN3X2zm6JEDj2GNUS8TvMhtnsJhg0S?=
- =?us-ascii?Q?FLa6mA7/FAu+MIJE4Fj4YRLeuvj5wLbwbVqrYrGbot5NQsS006DvB6Tf1U8n?=
- =?us-ascii?Q?g94EcDUM1kebttk8yybncUQ6vouQ8dnsh0SYJg1khvc4mf/JbVeOZPRyJi0G?=
- =?us-ascii?Q?dm2Fg+FXSzSiR4Ng/ZmrBxo6HHpFB5P+b4BHDcZqHRbpFZQopmCO6sG/Yy9z?=
- =?us-ascii?Q?NUvmQg6JSTYiOJRvzPOq/rqLb3Q3CXM3IyVsyG1bm4shp7pVFT30vi51luGY?=
- =?us-ascii?Q?9ZUkxSOJfJdonJgaTWC/Zvbi07qZ7SVY6B887h65YPEm6SEdNoO77fDMkxzZ?=
- =?us-ascii?Q?QaNdTuoR16KHPznRnZidSd7TcSCx/UD3LINEsWROiJbiPRW9BKPWMaj37cxm?=
- =?us-ascii?Q?CkmZ0lXBbSxbPM8DOTy+ncLMfQVfVM6xIy1355sCIIfyLC5+kSaEtBd2EHP4?=
- =?us-ascii?Q?cwd4EjzuGGP3aUfl9x/5nkoT2yl+ijA14KDV7FnoQKJ9Lqfs0QsJ/4izpqNi?=
- =?us-ascii?Q?OtT06Z9E6Au+bp/2m6UFTSHFMIwLHnsLi1nw943+jxIFG4knFKc1nTnbi8Bx?=
- =?us-ascii?Q?UxgrNb3GZQ1lhgwW8ssy/vpQ4nXq07NxfKSC2JuTK1G+kIH9SyBFT3ZKHxcv?=
- =?us-ascii?Q?vkWE52x/6b0+Wk+IQIB7XBiH7q4uImO1wfRt1XLQ/veVBkMnX1mNEoLdGKVb?=
- =?us-ascii?Q?SxOX9LH90TDYG5F7r+j6da+XQ5EvCiZgn/gqcSOdSlMbHJON9mUoIGkgwJzM?=
- =?us-ascii?Q?biOuZ7zzbGpYeeljNxPy+Pwq2kS5vvyeNJpILKf+Zt5vWytiLgSTUI5CdQ8b?=
- =?us-ascii?Q?Uc/CbK7p43BbDYK+i8sDXLgSoagJiN/7COXyJmzOIioQUUb9GNXfhcLJpboW?=
- =?us-ascii?Q?f1Z8lOR+Yf8P66TJds5d3uN/ov637XFIBJZe8Lmm4KMfMtB5HFOCTwHzQX4b?=
- =?us-ascii?Q?o/qXb+NfIBGv/X9wB7UH++VEoRsC1adrIJH4jVoR7YP9J1nAKdtPo6sOsirC?=
- =?us-ascii?Q?uIuHh4U45sB0kI3rYAA0SEudJVeIIGb9Ve6CXbpt4lnpI6o325auUmXjDCI9?=
- =?us-ascii?Q?NwWBbItecKk6OAanq3nJzp6eAmM1+/uHw6O3vb2lKCLtfmwMIrlhs1WmSnzb?=
- =?us-ascii?Q?lfoDAK1s2LYUTz80NZoLzCy7s/nlSa00KQvMnoJBrh2pU5C3Ooi3Zz0074xU?=
- =?us-ascii?Q?wfJjywOsd/XulgWZWor81DSeYh/Ffj0Ksr4V7Kz2hocOEQkKj2D5blbuEZij?=
- =?us-ascii?Q?pq4B1MhrAFvDqWDT+Q/LqtjsAuU1bsN45gyeW2h1aF/3gh+ZLbXw3Gnu1jL3?=
- =?us-ascii?Q?UPwCkXtCEWOLtkq04TkUHH41tDeXeESaKsZP1eUItBDwr8bEvDCIViGtmvzx?=
- =?us-ascii?Q?MdnySgzQl3+5JAAC2mxpZUwB7rWa99LUZ14aOeo8ltYHfasl4w=3D=3D?=
+	=?us-ascii?Q?MuFQ23OgzpmpXFzF5GX0jgFp80U5CxmWufnE/EvOxZmfd0aRn9P/LFBSNd+q?=
+ =?us-ascii?Q?Q4izODEcbUJihSgTG3WiTUEd7aWpPLwMexIa5aDL/RRoJt64E8kzGcVbSrcY?=
+ =?us-ascii?Q?d1Ypu199sYCsZYUvYZZN2VwS4IbSCBcl5VqWBLPmnbBRXQTymrsFQtHENHxT?=
+ =?us-ascii?Q?d2muPCkuNFVj9k3fcn4ASSZdoelAnwJRCJVv4xIvCG9IbDR9n44FFiRCV3ZK?=
+ =?us-ascii?Q?k/2aD+izY/74fTgz6SLT4pEjYEiy4gxt0FO64l8TWZognfejE3ucMacy85X2?=
+ =?us-ascii?Q?qEIqAkv0hdGwYN+3UjrBKVrG/SvUKvhRJe5AQqdOT7GPgr/qWHimUjc/XPzJ?=
+ =?us-ascii?Q?fc1tH0XEW2jKAje8V9WZwo6xL9dg4OQwpFPshMZjJPYnjv9stZZEg1O0vxnU?=
+ =?us-ascii?Q?azsTO4xQLGGpY54vjzQoXSz6rVVJxJ+IBVeAZNr07I2IsqPONsNIZVFSYn/I?=
+ =?us-ascii?Q?bFs+fGC365nDm/Wwiww9hUAvX7Dqt0dFrCzgNYXdmkI9chwmfJSiWkCrs801?=
+ =?us-ascii?Q?BZvM3WO1oWW9CIAZNIcU4vRLA2XC4zgAWh0h/ebpdzgD+Ix8th+rG7HWwCpO?=
+ =?us-ascii?Q?EabDcNb88YxhCtvN4vSWMzY9M7NEOGiksJRykm3opwjDHhZDyePcdHgGfItC?=
+ =?us-ascii?Q?on7kS9o6XKpEcnX9ChCtM/JilKCxBXQJf7wjdgiyhIWCbRhmgHyGmJaZdOrk?=
+ =?us-ascii?Q?GTaubTiDZgxgtG7FEXOn4HfUlzNbcPExA5ZCdidbd+VfUo1RVHqb2iJK1By9?=
+ =?us-ascii?Q?AnuuLHTsjpIqwItIWX6xJVgPQCM4I4aVAIzgz+jcC1vEEORf51y3ciu0LOk1?=
+ =?us-ascii?Q?fbuXG2FCmvo5uLP39lX4EbgxJFEfMVpoXWxNuHZ0tryKtuITDvuo0sVfcnUU?=
+ =?us-ascii?Q?NOklAmi5iGwgW3y+/MKNMbFZt+vVnhNmEClXqIz7SlrNRyg1GuzUeuTFLzB6?=
+ =?us-ascii?Q?NnPztFEbGlxwj99T/l3mUYFrCZARoYLmqr1RnWFMcEbAcDvs2nBuwRWXA/Yu?=
+ =?us-ascii?Q?GFOE44CtpRDbj/nxxeuqi9FjQIS1E3exODAnsDr1FfXg6Y0S4HyB7LpOq2rx?=
+ =?us-ascii?Q?3YEj+kj+9woan1QWIhHJf4oROTqK4PcbiTgYS7nn3RyXSOFKcy3GmysowejE?=
+ =?us-ascii?Q?A5XmTb6ryRlhPZM79E2hAx+YsiShe2tNR7nyx3zu9xvphAP3Nz3ravXck/zr?=
+ =?us-ascii?Q?8WWC6/w3aYOwFBZuUh2Dv0fA78k0JlSspjnToebVlOPiTtLu6lGtbq0SUbAn?=
+ =?us-ascii?Q?4mLOogWIomCxp6DwdAxenzAyEALhZMP6GOZ62d3QRvZzwxPRhkIHescYWS0n?=
+ =?us-ascii?Q?aNtK+pDkPI/YeXavEQe6bVwPUJ0hFRfzevpUZnB4/RPLBMXZyY2bb8BNVSow?=
+ =?us-ascii?Q?th5Ea0Qs/7siNCGyB4/JRsLbQdcsuqgg8fuDO1irylYV0EGTrWmmY04RT3xS?=
+ =?us-ascii?Q?c4FwoRApwI1DUaMrSSQ7nQhwWEjkf+je?=
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(52116014)(366016)(38350700014);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?TuXD/IVJCY6j9qn6uuZ49qqDyw8VHpYuwC3hB4K459sxpKRGsPZ5tPaPmbzj?=
- =?us-ascii?Q?aNSC9IITbu0scDT7PUVmmqV26paC9skqsqFAGmAgiRghp2MCvRcsJHamD6Ey?=
- =?us-ascii?Q?BVyKuH/7XTKiEhDE5Se7xI26uZbgC+sTHZ3o6wV8HHLZrcdJSv7SXsv5VL67?=
- =?us-ascii?Q?Ng8XHbcmsNy0mUJobL6xnscF4gzkVM1qAdDB0N7xQ390QNHP4mM1yTMWQXLl?=
- =?us-ascii?Q?4154k8Z71IIYXzqGqbCYIiIF3GnqFIjVKsvJFk2jEzmuWzBDvWqFqhij+DoK?=
- =?us-ascii?Q?vPUfIkZjn8O/EW4LzNfxjZzmsvErT8F1Aoz1MA+s1J4n5Ny3tDPwkAmYKIJJ?=
- =?us-ascii?Q?346fC/yk0Al90Mm9XRfZEuzpWPWgB1UpsKPteKUjYlAPmorWQgGsES/+32/f?=
- =?us-ascii?Q?N8x5apG/WQCosltSzhHf1vJOVVMCoH3CTNUyT0idGCPN0gpncCWTTWgbX3X8?=
- =?us-ascii?Q?41jyQ86kUDRg+RYCa/h8P/5jrUWocN9DyBwJnxKR4io++wWGhLJvOXZos8Ws?=
- =?us-ascii?Q?hEB4PK9m9frb7QUBz8J2b1W1dPC9H6NVkobm4v0tsMWUBqt3L432aWiojTH1?=
- =?us-ascii?Q?npQEgejDWxEg9Ee1f3ekm6fJRzlNCqn956upBdOxJ0P7ny64LEGfEHZhyjV8?=
- =?us-ascii?Q?tzhJy6/zcH3FRYrLnC6fRZZxV6OWQqtmZ0N26DA79VBEwqbXLDQwbD2k2fpa?=
- =?us-ascii?Q?eXTF7zVf0bJoxYgvqg9QRJDtX7pWZh6QJDIie04/P72DpVY5bfExcXtT2LGt?=
- =?us-ascii?Q?fhH7sg3glGkI3Qy1eCqcHMnnXpUwaf7AdcwzpIsVQ3dqvwXcwiCbSa/ehI4D?=
- =?us-ascii?Q?M2qspZDuvKlFDpKPLvIJoiDXw5sh9h1dIrjtbIE6o5U2V2JgaghTpRlaRwbD?=
- =?us-ascii?Q?OKLBu/uFqOWdTvXjt5cVYiM/DAwTGpHa41r9JhsNbPBoruhCWavzuh80PGdT?=
- =?us-ascii?Q?5/78MAw+frCIq+36uWT5/ISE98vN/d57QOpF3MpSNAvN0hFSfx0b0LGEdnEp?=
- =?us-ascii?Q?QCEizIOHK9ocf7RTZp92kPqkUtYwA17vDSEIdMy7o3cdbonDNHR+NFPL34IK?=
- =?us-ascii?Q?iTrhpRVO3m2Y2sFoMjOcYD6qi7FNh1riAHIcYl/RFPUPvDcBu3AvUo3Cz3W3?=
- =?us-ascii?Q?r7xkHn7oT07d5WFGryQnJm0JQbvUA6bKL+S76ka2GNtVq3IQjPtLALrLAKpQ?=
- =?us-ascii?Q?/zrdfGqPzT1ATjIC4BSl1xZkbnt7ePuo77YgDCeDXZpCfL/6mWc3pYHCvLf/?=
- =?us-ascii?Q?0lyu4z4rdQXpX9EVhKOgtazW0GwuOraTqMY75eYbdG3c6/jfA9y7Mx0yc0AA?=
- =?us-ascii?Q?8wldddzRbRozx4FbDJlQclliRWi0chnFN6Wii9P6S3mH9qwH+b6BDQtSPxqz?=
- =?us-ascii?Q?n29mieOAIFQMXWfHZNOqzU6T6afGcmKI9WHWstq/ZrrB55Xmd3TQ4rFJhbH/?=
- =?us-ascii?Q?ZVq8zZbcn7TSdA3udA/52F+1wyfZvSoDqB++YMjwpyt25+7hO2+HE8FAToK2?=
- =?us-ascii?Q?fngQkPjk5++DxraDrsu9lb6xARyNHcnZLAYYCuDkqk1XrYIO8zJpdaHRAec2?=
- =?us-ascii?Q?75cfPP8hyDKtlgoKjLRz4orgsZbBRBZS8LTRZzAPrfDcjz9gM7Fj1FByWv0R?=
- =?us-ascii?Q?xg=3D=3D?=
+	=?us-ascii?Q?CuzqIGOj4Zx4BLGvQjcdDI6mvq9A20yRcPXBTEo+gNmWs2AWGjnYGgyYJ5G/?=
+ =?us-ascii?Q?SRDDo0mC57bcnY18vHkmCxbsLCbyGEAkGxHB1/svlUJ1Tvh+S3L9WYBBSAqh?=
+ =?us-ascii?Q?kXrTUA3KvGQa8LdoD5ZN/IU7DGFKFZw3e2m7wUlFAkiU8VM9T3nrpumzg+H1?=
+ =?us-ascii?Q?+YKugAEUgcMhKbFQiw4dWrUHYxd4o7GH+wVSgTqiR0kbRKuJOpLynATxef/H?=
+ =?us-ascii?Q?3/iVPMp0Aq7qhLJX9U4LvUVpoalHhQ0VjoM48E6tqYwMM8IV8KKLteOQqioi?=
+ =?us-ascii?Q?FmR2l8LgrHwnelz7+nr0L8CMwUthDn9M+sZA9x2ZVG28h5wOBAw+KBji/arm?=
+ =?us-ascii?Q?ALylq2UiZ8TG5Zn8QeVm0SNPVrFvvF3ZdHAyjolVohiQ8jqkraXfTSoUjpDH?=
+ =?us-ascii?Q?ti+36t/dkwQClMjd162cpIJfE8siIPgpqua6c/VVsBIEHqHAapcwrZzwSWRG?=
+ =?us-ascii?Q?sxeTC78uxh3rOJsHjYPyvlDmv4ZeJlrC6oby11AFSP4eFzTj8+CWo73blO0B?=
+ =?us-ascii?Q?7Gp8rEKRWrrhzj3tL6FFfY2z3n15EDrB41qPlRMPUk29tUJEVd7eTUBseCJV?=
+ =?us-ascii?Q?aHgreV1MWI8T+9uP15IvUEXFxQJ/068RgvC7URxtfj6f0wQKMIkhV4CUi4O4?=
+ =?us-ascii?Q?h6qw6YcALcpHSxUaIL8EpPhCF7aD/UcvNvkigfHEyWbI/vVsCMYIaKnIYhgZ?=
+ =?us-ascii?Q?anb3EdFviUZymL5W64JLt1Yv0pO6eADsllpHF387LgGO54asrUveiA4X+dPc?=
+ =?us-ascii?Q?+1wsXdahd77/+uoeVseXXsXcCFQVqJwM3q89zZxippDYJh8fOGKjYRwCORu8?=
+ =?us-ascii?Q?gaNHns1Mrxhaq5ycocajsB6BINqYryo25iv7Gt863MvrqSrHZ9rgfkt7Sqzd?=
+ =?us-ascii?Q?UhymPMVuLVInTMgwcYlFoPkt8ovm7SfaPj4FZyOud04k/m0L7q06VtqjpzIn?=
+ =?us-ascii?Q?+2LWS31TxESACP20kgD+/XK0utTsHkMzqzTHy/jvMzIWQOK6BeKhZSk37YnM?=
+ =?us-ascii?Q?tNCMTyf7BLRHdzHZZDcxVR8HxdRdRFQfCPbokVTYL/ntLthGIUkmD/rvAACm?=
+ =?us-ascii?Q?mjWno1JTi9Yl0qI6wtUsZ3jAaG0clk4+uN7qRWwOTs7Jj2GW/588kwRo36SV?=
+ =?us-ascii?Q?4usFpwyR47UzWH01gMG1farOZ4JBrjjJu5wWyPU6K+NK5KyzMMkhZIxG028L?=
+ =?us-ascii?Q?OfrndXLPa1KnOoRqUhKlRg2yjylvNL5S3Bvc/1m2lLmJe6Bx5cyVdl2au8jM?=
+ =?us-ascii?Q?UvIDMMjZTWTH8BV7/MX0vOijRtYNAyl0m8GnbpSs2jPWiydrzUqVolVNz+GI?=
+ =?us-ascii?Q?ljN2Infsan7epZ65L6HPZaQ0iaMRFVPFrE715ZgQ+LDw0Wv+vWustYXjGkuU?=
+ =?us-ascii?Q?FYUOydIsi8BM8S1p+Tbl2g1xTuNBli9sSP9zlH2tYZ7MKtTC3lA398pQCxo1?=
+ =?us-ascii?Q?Ra2UQfII3lAVVhNO+tURdLEpTbY5w3wQAqYSE0Zm8GzedDDXUqN61zm8dS5l?=
+ =?us-ascii?Q?IgXOWUEDnKE3eZpaHdoGaJQ+yfyJh+Gk0P+b8bXx8MxEjczvYYgi4TubeX/r?=
+ =?us-ascii?Q?XL+Ftvv7Pb/QyetaodWw9T+WL/Ecc19PlvVMht0QG/rRT/YbajqWJgxsuxKk?=
+ =?us-ascii?Q?fw=3D=3D?=
 X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8cfab69e-6a42-4734-eac7-08dd6f758715
+X-MS-Exchange-CrossTenant-Network-Message-Id: 630e93f9-f9ce-49cb-cd5a-08dd6f75874f
 X-MS-Exchange-CrossTenant-AuthSource: AS4PR06MB8447.eurprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2025 10:27:52.6160
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2025 10:27:52.9312
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: yC+h+9OrSdqrblIM4iEkkzHrBczWyKOtX/RnYb10g18wduWQjALj1ek7/DgjOjfAQ5ju3ED/k62W+fa8TX2EPA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: SyWjbxWxZ60twZ9e9kpSdFamKmMQPzj84QZyPwEW5pObrkGuXejuZZY4L7/O+4brFtZYHL1z1MsvXkhUhEa10g==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR06MB7100
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 30 Mar 2025 10:28:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116386
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116387
 
-Not referenced since commit 1a05731de484f1f97eecaeb56296f72e76ba2b32
-("luajit: upgrade 2.1beta -> 2.1").
+Not referenced since commit 27ab1bbc95b27a72a6a8a750a7fd3e98526e2050
+("mozjs-115: remove recipe").
 
 Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
 ---
- .../luajit/luajit/clang.patch                 | 19 -------------------
- 1 file changed, 19 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/luajit/luajit/clang.patch
+ ...-autoconf-s-config.sub-to-canonicali.patch | 44 -------------------
+ 1 file changed, 44 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/mozjs/mozjs-128/0001-build-do-=
+not-use-autoconf-s-config.sub-to-canonicali.patch
 
-diff --git a/meta-oe/recipes-devtools/luajit/luajit/clang.patch b/meta-oe/r=
-ecipes-devtools/luajit/luajit/clang.patch
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-build-do-not-use=
+-autoconf-s-config.sub-to-canonicali.patch b/meta-oe/recipes-extended/mozjs=
+/mozjs-128/0001-build-do-not-use-autoconf-s-config.sub-to-canonicali.patch
 deleted file mode 100644
-index 807cc4417f..0000000000
---- a/meta-oe/recipes-devtools/luajit/luajit/clang.patch
+index 38496ea56c..0000000000
+--- a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-build-do-not-use-autoco=
+nf-s-config.sub-to-canonicali.patch
 +++ /dev/null
-@@ -1,19 +0,0 @@
--clang pretends to be gcc 4.2.0 which is a big lie when it comes
--to features, its same as latest gcc
+@@ -1,44 +0,0 @@
+-From c860dcbe63b0e393c95bfb0131238f91aaac11d3 Mon Sep 17 00:00:00 2001
+-From: Alexander Kanavin <alex@linutronix.de>
+-Date: Thu, 7 Oct 2021 12:44:18 +0200
+-Subject: [PATCH] build: do not use autoconf's config.sub to 'canonicalize'
+- names
 -
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--Upstream-Status: Pending
+-The outcome is that processed names no longer match our custom rust
+-target definitions, and the build fails.
 -
--Index: LuaJIT-2.0.5/src/lj_arch.h
--=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
----- LuaJIT-2.0.5.orig/src/lj_arch.h
--+++ LuaJIT-2.0.5/src/lj_arch.h
--@@ -436,7 +436,7 @@
-- #endif
-- #endif
-- #elif !LJ_TARGET_PS3
---#if (__GNUC__ < 4) || ((__GNUC__ =3D=3D 4) && __GNUC_MINOR__ < 3)
--+#if (__GNUC__ < 4) || ((__GNUC__ =3D=3D 4) && __GNUC_MINOR__ < 3) && !def=
-ined(__clang__)
-- #error "Need at least GCC 4.3 or newer"
-- #endif
-- #endif
+-Upstream-Status: Inappropriate [oe-core specific]
+-Signed-off-by: Alexander Kanavin <alex@linutronix.de>
+-
+----
+- build/moz.configure/init.configure | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+---- a/build/moz.configure/init.configure
+-+++ b/build/moz.configure/init.configure
+-@@ -647,24 +647,7 @@ def help_host_target(help, host, target)
+-=20
+- def config_sub(shell, triplet):
+-     config_sub =3D os.path.join(os.path.dirname(__file__), "..", "autocon=
+f", "config.sub")
+--    # Config.sub doesn't like the *-windows-msvc/*-windows-gnu triplets, =
+so
+--    # munge those before and after calling config.sub.
+--    suffix =3D None
+--    munging =3D {
+--        "-windows-msvc": "-mingw32",
+--        "-windows-gnu": "-mingw32",
+--    }
+--    for check_suffix, replacement in munging.items():
+--        if triplet.endswith(check_suffix):
+--            suffix =3D check_suffix
+--            triplet =3D triplet[: -len(suffix)] + replacement
+--            break
+--    result =3D check_cmd_output(shell, config_sub, triplet).strip()
+--    if suffix:
+--        assert result.endswith(replacement)
+--        result =3D result[: -len(replacement)] + suffix
+--    return result
+--
+-+    return triplet
+-=20
+- @depends("--host", shell)
+- @checking("for host system type", lambda h: h.alias)
 --=20
 2.39.5
 
