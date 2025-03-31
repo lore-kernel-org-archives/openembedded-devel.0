@@ -2,204 +2,149 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DAEE1C36010
-	for <webhook@archiver.kernel.org>; Mon, 31 Mar 2025 14:41:32 +0000 (UTC)
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.web11.53912.1743432090906966448
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E4547C36014
+	for <webhook@archiver.kernel.org>; Mon, 31 Mar 2025 20:09:26 +0000 (UTC)
+Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com [209.85.210.45])
+ by mx.groups.io with SMTP id smtpd.web10.2442.1743451760686280282
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 31 Mar 2025 07:41:30 -0700
+ Mon, 31 Mar 2025 13:09:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=HKVamfxS;
- spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-2260c91576aso72087455ad.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 31 Mar 2025 07:41:30 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=S2hZaUdE;
+ spf=pass (domain: gmail.com, ip: 209.85.210.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f45.google.com with SMTP id 46e09a7af769-72bbc03d436so3022003a34.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 31 Mar 2025 13:09:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1743432090; x=1744036890; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=IkZ168o9wXk4T0AZz0BcIWy02BOoh23xpMSWJonq41s=;
-        b=HKVamfxS+iOdL7SpwxeyRKQ4dNkJ3pFIghlqHiRYx3idrx4hg+HvzPPj2NHp0qXX7Z
-         F6Z6JoOX2XPXi5DMps7ZvylzQ/kPMlwGt+2TvNr42RMuAwIILFW75QWTI0j5WkBBByBR
-         NlsztGB+tKgkPgRhaBoq3FFS0jx/Oj89INb5tYqojDti7Int00cnAjJnxeORnuppTw1N
-         RLbHUFoCi26UdLBD6Uz9/PTVp9Z7bXpcjSGFkbygiXb5qr2+BTkofeb/en5fUPHKMXZg
-         vf8TtrWiTuV/YTm0gQRwqVa+g6J6CdKb3EaSYYI80UaREBzxQs9m6N8HpiH6zaTkHNT6
-         JNLw==
+        d=gmail.com; s=20230601; t=1743451760; x=1744056560; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=+akVA0EsWjb2dooLg1rbdQntj3+hOpup+mIifDn9+7M=;
+        b=S2hZaUdEJPkmQGNsTnsNrl+oiPh9XoWy9uYlzSjnS9zvI9+Uuc1EQlPyaSOVacj//+
+         TkNooh1V14YS6G7cA03ydhVxXPYP/ZfwdQbaPEA98I5UtE37lRq48wGLzCZg/UJcAE7U
+         CaNnejsgYoOerEfTKCaALJrxOFO0EvgzdfTwgFuEs9UumdGwkMtvcMFtT+DC+EcZw+ZW
+         xmz6Yu6do4CSmsT8iQ9L/4v0nqlXZgnmVr+5QJcWHFiZqesl2zqRQY+lCpxHWA+kNhoY
+         Ve3dtfTnX3kFVASIP67aLz+J0XqCnpXl1BWERPjFFsiTUj4u8gcykOdX10wAEEy4Oqna
+         G3bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743432090; x=1744036890;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=IkZ168o9wXk4T0AZz0BcIWy02BOoh23xpMSWJonq41s=;
-        b=vSDI6Uu0InowVWx36s9tU5ukfJmAiPmRx6AErWCGpZg0aHhb6EWSyTVYxKViocU9dY
-         2X3mrWapnNOtpVVwEQ0REC7fXfYmcCfBWxJCTKF2rVrve0YrkXdWY5pnHPGn6ElrEqq2
-         79iWHKs8TD9fXk8yOWo9GTe5TpKoQGF+F58g/AZrB9LrjMsY7JDkJDueQdGGYCRlipxM
-         oG5yWSrZDS0gn4bCpMzCottJzu7i3V7N7ETiTN57r8bL9mDJPhU/yaYkijZ4SusTp8bw
-         mUN9K/KZjUCdB9sm0oQr85qun9pAKKrOeMG42CYcX9x0ZepwwowQqgvRSOwldGVfAlLY
-         H3Lw==
-X-Gm-Message-State: AOJu0YzY3xIHSEdO8i550xS5i+Vo1kf0c/gBdC+dAht+fTygUG1bjhly
-	VPKLZxhnsBzgrSgEL11mbsQSaXEVcgvtEj+B0GqECqBLP2UhNvW53r8mYpMr
-X-Gm-Gg: ASbGnculjQ/TzgJgQGEHurYHtPXzsOov2VFY+A1udMAqOcxYePRPepkC4W8hrrxl91C
-	vQms8gPVyxpVB/Bh6Q2l88TWT5OAhQ13QxCFIZVhztnADZbjFd9XLO5YvVk/zLittsgE9WNS8D5
-	XojjbtdU2PCuEfWpXTyRyzOWnrEm1d7wExIAfJB277hUZhISynaHHICc7OvlKy7QwrC3DRun0NK
-	4QcbDLROo5cQFDG/AzUBP/I0+hUbNcIo7BoP+188F7jmNV+ph9Tv/ckigv59OFrPn6HopYTN0gO
-	yNi2fH1vXlcyvU7I4ulWfw6/sfm1ziliO2WBi7pXClcD57M=
-X-Google-Smtp-Source: AGHT+IF07W5C2gmrZ8pBQxtmMVVMcTSRGhGBlWHbWoNYG785O52Q/CKUr/B3++QTYayj8zPGVxAupg==
-X-Received: by 2002:a05:6a00:3ccc:b0:736:3ea8:4805 with SMTP id d2e1a72fcca58-7398037e91emr13460849b3a.7.1743432089596;
-        Mon, 31 Mar 2025 07:41:29 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:8201:fd20::b570])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-739710acd89sm7214175b3a.142.2025.03.31.07.41.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 31 Mar 2025 07:41:29 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-openembedded][PATCH] Drop styhead from LAYERSERIES_COMPAT
-Date: Mon, 31 Mar 2025 07:41:26 -0700
-Message-ID: <20250331144126.1491066-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.49.0
+        d=1e100.net; s=20230601; t=1743451760; x=1744056560;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=+akVA0EsWjb2dooLg1rbdQntj3+hOpup+mIifDn9+7M=;
+        b=kBVRPBeGZK0pNwD+NEiyjNYStZRmM1SvKYoS/R9ayEMiV0gpRgOEXL8zPau74iaiXM
+         Q8D/Yu2Z8gzuwnLsDJ3uRClKIzlCRNd/DEw5cjajseIreVG1N2lBozOCUWiT/5m8BnlO
+         l1PxBZq5YWHxX7mHEBoqccU/Pgkhv+LAPPe2yAmRf/NM4aSNeDBC2sagNmZQBr3BBqST
+         sefvKbYnnYKYbMii6qqJOHjtxWYxhNTZTrCdN3tvUg1Ujjdltc3stQSds7qPyVGVJ5xE
+         ndDfB4YL0Frjaww/0u4VEkMPMIfOrVeFumXEGFIZjZI6bKkJK7lBCNDiRZvnbIy558tg
+         ISIA==
+X-Gm-Message-State: AOJu0YxP45a5uZ7/HhswYgXPGk8Pw0yaQJMmr0i5Xm24iCb7CBd9SHfX
+	J4K9lBZVl1N7twNMjYpGcl7tgnQwSnPgOLooh+BI7D67mcoVPsLx7IND6rgzopnKKfP63rZhkmv
+	3AIlpm6mz6Y3ClFcrOB3KoGXoSwo=
+X-Gm-Gg: ASbGncsymIC+9pSBaN6msVxJfZIAEaJlClARDwCTo2tRiQM7hwJcB9qC2O/q9TaErlt
+	bcw8uJXyOq8XcPDVtEOm6z4YxwtDt4gCdi3arqIVUYQ5AKK0c1+TM5hX23aaFt7ajQSe6Kt1kKY
+	j170nqyPKDZapIqjKJ5nvJBQPz
+X-Google-Smtp-Source: AGHT+IFK0xFsWbCJ5LSj+VYJYYHzCucbvvNC+5aClHhNOyZ9nl51ri3NpKSySs3OrmJ6NAqOuDPNuFNikBYjamMF8Dg=
+X-Received: by 2002:a05:6830:620c:b0:72a:1ec6:d47b with SMTP id
+ 46e09a7af769-72dae738b82mr375448a34.22.1743451759789; Mon, 31 Mar 2025
+ 13:09:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250331094632.2373216-1-mingli.yu@eng.windriver.com>
+In-Reply-To: <20250331094632.2373216-1-mingli.yu@eng.windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 31 Mar 2025 13:08:54 -0700
+X-Gm-Features: AQ5f1JqG4dD50c4MSOIWC8VaR9zgcVILrHm3aqUGGHvifRoTsJzAJ4j7QpmaLIc
+Message-ID: <CAMKF1spGaanZEkvH550Hgxno+vspkeTO+_swQkY5PDktzYGp_Q@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v2 1/3] minizip-ng: Add new recipe
+To: mingli.yu@eng.windriver.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 31 Mar 2025 14:41:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116434
+ <openembedded-devel@lists.openembedded.org>; Mon, 31 Mar 2025 20:09:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116435
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-filesystems/conf/layer.conf | 2 +-
- meta-gnome/conf/layer.conf       | 2 +-
- meta-initramfs/conf/layer.conf   | 2 +-
- meta-multimedia/conf/layer.conf  | 2 +-
- meta-networking/conf/layer.conf  | 2 +-
- meta-oe/conf/layer.conf          | 2 +-
- meta-perl/conf/layer.conf        | 2 +-
- meta-python/conf/layer.conf      | 2 +-
- meta-webserver/conf/layer.conf   | 2 +-
- meta-xfce/conf/layer.conf        | 2 +-
- 10 files changed, 10 insertions(+), 10 deletions(-)
+fails with clang - https://errors.yoctoproject.org/Errors/Details/850095/
 
-diff --git a/meta-filesystems/conf/layer.conf b/meta-filesystems/conf/layer.conf
-index 5323913d58..007be777f4 100644
---- a/meta-filesystems/conf/layer.conf
-+++ b/meta-filesystems/conf/layer.conf
-@@ -15,7 +15,7 @@ LAYERVERSION_filesystems-layer = "1"
- 
- LAYERDEPENDS_filesystems-layer = "core openembedded-layer networking-layer"
- 
--LAYERSERIES_COMPAT_filesystems-layer = "styhead walnascar"
-+LAYERSERIES_COMPAT_filesystems-layer = "walnascar"
- 
- BBFILES_DYNAMIC += " \
-     meta-python:${LAYERDIR}/dynamic-layers/meta-python/recipes-*/*/*.bb \
-diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
-index 6adf7a405c..64ecc462a1 100644
---- a/meta-gnome/conf/layer.conf
-+++ b/meta-gnome/conf/layer.conf
-@@ -17,7 +17,7 @@ LAYERVERSION_gnome-layer = "1"
- 
- LAYERDEPENDS_gnome-layer = "core openembedded-layer networking-layer meta-python"
- 
--LAYERSERIES_COMPAT_gnome-layer = "styhead walnascar"
-+LAYERSERIES_COMPAT_gnome-layer = "walnascar"
- 
- SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += "\
-   faenza-icon-theme->gdk-pixbuf \
-diff --git a/meta-initramfs/conf/layer.conf b/meta-initramfs/conf/layer.conf
-index e8527495af..0ca5c5a369 100644
---- a/meta-initramfs/conf/layer.conf
-+++ b/meta-initramfs/conf/layer.conf
-@@ -16,7 +16,7 @@ BBFILE_PATTERN_meta-initramfs := "^${LAYERDIR}/"
- BBFILE_PRIORITY_meta-initramfs = "5"
- LAYERDEPENDS_meta-initramfs = "core"
- 
--LAYERSERIES_COMPAT_meta-initramfs = "styhead walnascar"
-+LAYERSERIES_COMPAT_meta-initramfs = "walnascar"
- 
- SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
-   dracut->virtual/kernel \
-diff --git a/meta-multimedia/conf/layer.conf b/meta-multimedia/conf/layer.conf
-index 25e8b044a2..9e351673a6 100644
---- a/meta-multimedia/conf/layer.conf
-+++ b/meta-multimedia/conf/layer.conf
-@@ -31,4 +31,4 @@ LAYERVERSION_multimedia-layer = "1"
- 
- LAYERDEPENDS_multimedia-layer = "core openembedded-layer meta-python"
- 
--LAYERSERIES_COMPAT_multimedia-layer = "styhead walnascar"
-+LAYERSERIES_COMPAT_multimedia-layer = "walnascar"
-diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
-index 19ce3fe902..85a207bc8d 100644
---- a/meta-networking/conf/layer.conf
-+++ b/meta-networking/conf/layer.conf
-@@ -15,7 +15,7 @@ LAYERVERSION_networking-layer = "1"
- 
- LAYERDEPENDS_networking-layer = "core meta-python openembedded-layer"
- 
--LAYERSERIES_COMPAT_networking-layer = "styhead walnascar"
-+LAYERSERIES_COMPAT_networking-layer = "walnascar"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
- 
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index d3fd49cf6b..2f4b9c4027 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -48,7 +48,7 @@ LAYERVERSION_openembedded-layer = "1"
- 
- LAYERDEPENDS_openembedded-layer = "core"
- 
--LAYERSERIES_COMPAT_openembedded-layer = "styhead walnascar"
-+LAYERSERIES_COMPAT_openembedded-layer = "walnascar"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
- 
-diff --git a/meta-perl/conf/layer.conf b/meta-perl/conf/layer.conf
-index 057fb05b26..0511263d22 100644
---- a/meta-perl/conf/layer.conf
-+++ b/meta-perl/conf/layer.conf
-@@ -15,4 +15,4 @@ LAYERVERSION_perl-layer = "1"
- 
- LAYERDEPENDS_perl-layer = "core openembedded-layer"
- 
--LAYERSERIES_COMPAT_perl-layer = "styhead walnascar"
-+LAYERSERIES_COMPAT_perl-layer = "walnascar"
-diff --git a/meta-python/conf/layer.conf b/meta-python/conf/layer.conf
-index cae3931b86..10a1647016 100644
---- a/meta-python/conf/layer.conf
-+++ b/meta-python/conf/layer.conf
-@@ -14,6 +14,6 @@ LAYERVERSION_meta-python = "1"
- 
- LAYERDEPENDS_meta-python = "core (>= 12) openembedded-layer"
- 
--LAYERSERIES_COMPAT_meta-python = "styhead walnascar"
-+LAYERSERIES_COMPAT_meta-python = "walnascar"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
-diff --git a/meta-webserver/conf/layer.conf b/meta-webserver/conf/layer.conf
-index 90a8792180..3a264610f1 100644
---- a/meta-webserver/conf/layer.conf
-+++ b/meta-webserver/conf/layer.conf
-@@ -17,7 +17,7 @@ LAYERVERSION_webserver = "1"
- 
- LAYERDEPENDS_webserver = "core openembedded-layer"
- 
--LAYERSERIES_COMPAT_webserver = "styhead walnascar"
-+LAYERSERIES_COMPAT_webserver = "walnascar"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
- 
-diff --git a/meta-xfce/conf/layer.conf b/meta-xfce/conf/layer.conf
-index d741d0ba94..043f290e98 100644
---- a/meta-xfce/conf/layer.conf
-+++ b/meta-xfce/conf/layer.conf
-@@ -19,7 +19,7 @@ LAYERDEPENDS_xfce-layer += "multimedia-layer"
- LAYERDEPENDS_xfce-layer += "meta-python"
- LAYERDEPENDS_xfce-layer += "networking-layer"
- 
--LAYERSERIES_COMPAT_xfce-layer = "styhead walnascar"
-+LAYERSERIES_COMPAT_xfce-layer = "walnascar"
- 
- SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += "\
-   openzone->gdk-pixbuf \
+On Mon, Mar 31, 2025 at 2:46=E2=80=AFAM Yu, Mingli via lists.openembedded.o=
+rg
+<mingli.yu=3Deng.windriver.com@lists.openembedded.org> wrote:
+>
+> From: Mingli Yu <mingli.yu@windriver.com>
+>
+> minizip-ng is a zip manipulation library written in C that is supported
+> on Windows, macOS, and Linux.
+>
+> minizip-ng has new features and bug fixes compared to the original librar=
+y
+> minizip [1] which had not been maintained for a long period of time.
+>
+> [1] https://github.com/madler/zlib/tree/master/contrib/minizip
+>
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> ---
+>  .../minizip-ng/minizip-ng_4.0.8.bb            | 34 +++++++++++++++++++
+>  1 file changed, 34 insertions(+)
+>  create mode 100644 meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.8.bb
+>
+> diff --git a/meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.8.bb b/meta-o=
+e/recipes-core/minizip-ng/minizip-ng_4.0.8.bb
+> new file mode 100644
+> index 0000000000..90882a1e58
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.8.bb
+> @@ -0,0 +1,34 @@
+> +SUMMARY =3D "Zlib manipulation Library"
+> +DESCRIPTION =3D "minizip-ng is a zip manipulation library written in C t=
+hat is supported \
+> +on Windows, macOS, and Linux."
+> +HOMEPAGE =3D "https://github.com/zlib-ng/minizip-ng"
+> +SECTION =3D "libs"
+> +LICENSE =3D "Zlib"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D36964f044224efeedd694983c34e7=
+16f"
+> +
+> +SRC_URI =3D "git://github.com/zlib-ng/minizip-ng.git;protocol=3Dhttps;br=
+anch=3Dmaster"
+> +
+> +SRCREV =3D "55db144e03027b43263e5ebcb599bf0878ba58de"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +RCONFLICTS:${PN} +=3D "minizip"
+> +
+> +DEPENDS =3D "xz openssl bzip2"
+> +
+> +inherit cmake pkgconfig
+> +
+> +EXTRA_OECMAKE =3D "-DMZ_FORCE_FETCH_LIBS=3DOFF \
+> +                 -DBUILD_SHARED_LIBS=3DON \
+> +"
+> +
+> +PACKAGECONFIG ??=3D "zlib"
+> +PACKAGECONFIG[zlib] =3D "-DMZ_ZLIB=3DON,-DMZ_ZLIB=3DOFF, zlib"
+> +PACKAGECONFIG[zlib-ng] =3D "-DMZ_ZLIB=3DON,-DMZ_ZLIB=3DOFF, zlib-ng"
+> +
+> +
+> +do_install:append () {
+> +    # remove absolute paths
+> +    sed -i -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/cmake/minizip/miniz=
+ip.cmake
+> +}
+> +
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#116428): https://lists.openembedded.org/g/openembedde=
+d-devel/message/116428
+> Mute This Topic: https://lists.openembedded.org/mt/112001051/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
