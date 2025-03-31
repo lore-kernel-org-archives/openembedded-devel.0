@@ -1,207 +1,212 @@
-Return-Path: <mingli.yu@eng.windriver.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36BA8C3600C
-	for <webhook@archiver.kernel.org>; Mon, 31 Mar 2025 09:46:51 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.48237.1743414396616022322
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CFBF8C3600B
+	for <webhook@archiver.kernel.org>; Mon, 31 Mar 2025 11:02:11 +0000 (UTC)
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
+ by mx.groups.io with SMTP id smtpd.web11.49073.1743418925664534158
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 31 Mar 2025 02:46:36 -0700
+ Mon, 31 Mar 2025 04:02:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=6185d269ee=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52V6HtPR009184
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Mar 2025 09:46:35 GMT
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45p7u8sx2d-2
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Mar 2025 09:46:35 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Mon, 31 Mar 2025 02:46:35 -0700
-Received: from pek-lpg-core4.wrs.com (128.224.153.44) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Mon, 31 Mar 2025 02:46:34 -0700
-From: <mingli.yu@eng.windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH v2 2/3] minizip-ng: Add ptest support
-Date: Mon, 31 Mar 2025 17:46:31 +0800
-Message-ID: <20250331094632.2373216-2-mingli.yu@eng.windriver.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250331094632.2373216-1-mingli.yu@eng.windriver.com>
-References: <20250331094632.2373216-1-mingli.yu@eng.windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FHkw9szL;
+ spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-ac29af3382dso677814066b.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 31 Mar 2025 04:02:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1743418924; x=1744023724; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=VtlbCqdwP8FEBtqNXS0tEUi0KKeWW4hvnGvDDgtEo2o=;
+        b=FHkw9szLbbFOyX/XnS2vtd9lRMYHSJw67Tcx9SYXWPaOYf35qbXCwkuQEn78eU+kFK
+         oFNcI7RCgQln9BcMl/q0oQTIluGaJxZz+afLrD3tooIkNoheZNwE2bHIPzen3FF//X/S
+         gS0805FgWInkEni6CaCjTwMOhWaR+xDfqL7lxtK5kIiKpOsX7UndRWN3oRxC0dsDYl5M
+         G28CoxPKkmDESScaesbsGbFo/oACgT5bH6kTQFa/EmnZOl0YuId/Mpe0DlaqR+PUOT42
+         cP2dlyt4C2OVMdbO20JlrrPL9HQZk13A5l2lAhFzqGGz4+MNW29G36gf/bpCoqoHuybI
+         1wKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1743418924; x=1744023724;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=VtlbCqdwP8FEBtqNXS0tEUi0KKeWW4hvnGvDDgtEo2o=;
+        b=V6bIkrtQGVVt8T73/s7T41/xpP2PiN/Eg/PqeoicUCCP8xo6o2fz3ZIYyt7B9Vas4d
+         ZmLhG/4gFXsLmHhcE148v6kvwlkbWwtN5JHa66jcTib6SVdX9xXTy8+pwgRVLL0KBTRt
+         blXKGESjs0Jk8poA4mBYQqRbJYBFMO6tSakRz5+K6jFFIlJ7Es9hnAMW8mQuZqga7qup
+         eHgQybfA6ru/6GMCS2ovVJD3MbZdFDx8Kl7rCDqg1E3ADQFtqUzT+EjxoYBvho6txzKG
+         fY4X4NCk8DmwpN+RgodG0nuNqFRYD9hJg91QF77o4e+S950Uptpn84b2bsacHF/QlGQq
+         dpmw==
+X-Forwarded-Encrypted: i=1; AJvYcCVFo/+tzc7Eel2qhZ4NF7zfuInK4y8fJWnXWqwy7Xv4Pm8d5wEgOp4qvgNBtVw+JFUPvRgRhKObwaxlquP6FjRleEY=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yy+z+xfd0Mge+9sxeiPTUJU4NXmPE1LviwoTHRs+logLOrTi0ke
+	EkoLECmpSDSVO1yH2BSYBMnpAFQqFWUnPWpZtRqpypAvy3bHk0AO
+X-Gm-Gg: ASbGnctNA+HwuX/ADhbErf3APiNVPRHGORxM0x9EBaTOkUuJF9+GAZDOdx0W+4fARiu
+	+tCkqJ6k4jC734L5hJEXWzkOKKLy2lInVV/ressM5ho2mJypdsHJ0H4reIc6JBf7tBuChIoKeMI
+	1Ns4ftSGjfQ1vzz4mcPJXEAcaVRbNCr68J4LIb4japauubaMNdzXYjwSdBQbOR++a66LEmCZefC
+	WEPA5gngbXAtAmV6yPK//9bCC75qG2zqGvZj7XXh74MUluMt6/npW294USLA/EvrqglGWNstHAn
+	doOUvgglSU2O7F+nmgRQPRGR1JHtQRXtHDtEdpqSj2wLMhB0fmr7
+X-Google-Smtp-Source: AGHT+IFfgoiuZdsJ6VYbWsjqCdk2VSU8V++hTLd51p1Kz/e6OTPabsa/MzNtCPNMJ1dA4ZhHNNhO+g==
+X-Received: by 2002:a17:907:7b9d:b0:ac6:e33a:31fc with SMTP id a640c23a62f3a-ac738c262demr947614966b.51.1743418923505;
+        Mon, 31 Mar 2025 04:02:03 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ac71927afcesm616266366b.55.2025.03.31.04.02.02
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 31 Mar 2025 04:02:03 -0700 (PDT)
+Message-ID: <5f8af9d4-fa0e-4574-9d83-f296ae853149@gmail.com>
+Date: Mon, 31 Mar 2025 13:02:02 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: 9ojQM77Qq6P-ZMQKHFcE8tlxzFvRLJPG
-X-Proofpoint-ORIG-GUID: 9ojQM77Qq6P-ZMQKHFcE8tlxzFvRLJPG
-X-Authority-Analysis: v=2.4 cv=RNizH5i+ c=1 sm=1 tr=0 ts=67ea647b cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=Vs1iUdzkB0EA:10 a=t7CeM3EgAAAA:8 a=NEAV23lmAAAA:8 a=uhnftKBFlUZ-jAhRdDsA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-03-31_04,2025-03-27_02,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0
- impostorscore=0 mlxscore=0 lowpriorityscore=0 priorityscore=1501
- spamscore=0 phishscore=0 clxscore=1015 bulkscore=0 mlxlogscore=999
- adultscore=0 malwarescore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
- definitions=main-2503310069
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-python] [PATCH] protobuf: upgrade 5.29.4 -> 6.30.1
+To: wangmy@fujitsu.com, openembedded-devel@lists.openembedded.org
+References: <1743412308-21887-1-git-send-email-wangmy@fujitsu.com>
+ <1743412308-21887-4-git-send-email-wangmy@fujitsu.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <1743412308-21887-4-git-send-email-wangmy@fujitsu.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 31 Mar 2025 09:46:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116429
+ <openembedded-devel@lists.openembedded.org>; Mon, 31 Mar 2025 11:02:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116431
 
-From: Mingli Yu <mingli.yu@windriver.com>
+This was just discussed a few days ago[1] that it should stay on 5.29,
+because it's LTS. Or did something change about this?
 
- # ./run-ptest
-[==========] Running 55 tests from 6 test suites.
-[----------] Global test environment set-up.
-[----------] 22 tests from crypt
-PASS:  crypt.rand
-PASS:  crypt.sha1
-PASS:  crypt.sha224
-PASS:  crypt.sha256
-PASS:  crypt.sha384
-PASS:  crypt.sha512
-PASS:  crypt.aes128
-PASS:  crypt.aes128_cbc
-PASS:  crypt.aes128_gcm
-PASS:  crypt.aes194
-PASS:  crypt.aes256
-PASS:  crypt.hmac_sha1
-PASS:  crypt.hmac_sha1_short_password
-PASS:  crypt.hmac_sha256
-PASS:  crypt.pbkdf2
-PASS:  crypt.pbkdf2_long_odd_password
-PASS:  crypt.pbkdf2_short_password
-PASS:  crypt.pbkdf2_rfc6070_v1
-PASS:  crypt.pbkdf2_rfc6070_v2
-PASS:  crypt.pbkdf2_rfc6070_v3
-PASS:  crypt.pbkdf2_rfc6070_v4
-PASS:  crypt.pbkdf2_rfc6070_v5
-[----------] 1 test from os
-PASS:  os.utf8_unicode_string
-[----------] 2 tests from encrypt
-PASS:  encrypt.pkcrypt
-PASS:  encrypt.aes
-[----------] 2 tests from stream
-bzip compressed from 877 to 505
-bzip uncompressed from 505 to 877
-PASS:  stream.bzip
-lzma compressed from 877 to 526
-lzma uncompressed from 526 to 877
-PASS:  stream.lzma
-[----------] 20 tests from os/path_resolve
-PASS:  os/path_resolve.os/0
-PASS:  os/path_resolve.os/1
-PASS:  os/path_resolve.os/2
-PASS:  os/path_resolve.os/3
-PASS:  os/path_resolve.os/4
-PASS:  os/path_resolve.os/5
-PASS:  os/path_resolve.os/6
-PASS:  os/path_resolve.os/7
-PASS:  os/path_resolve.os/8
-PASS:  os/path_resolve.os/9
-PASS:  os/path_resolve.os/10
-PASS:  os/path_resolve.os/11
-PASS:  os/path_resolve.os/12
-PASS:  os/path_resolve.os/13
-PASS:  os/path_resolve.os/14
-PASS:  os/path_resolve.os/15
-PASS:  os/path_resolve.os/16
-PASS:  os/path_resolve.os/17
-PASS:  os/path_resolve.os/18
-PASS:  os/path_resolve.os/19
-[----------] 8 tests from stream/stream_find
-PASS:  stream/stream_find.find/0
-PASS:  stream/stream_find.find/1
-PASS:  stream/stream_find.find/2
-PASS:  stream/stream_find.find/3
-PASS:  stream/stream_find.find/4
-PASS:  stream/stream_find.find/5
-PASS:  stream/stream_find.find/6
-PASS:  stream/stream_find.find/7
-[----------] Global test environment tear-down
-[==========] 55 tests from 6 test suites ran.
-[  PASSED  ] 55 tests.
+[1]:
+https://patchwork.yoctoproject.org/project/oe/patch/1742964890-10872-1-git-send-email-wangmy@fujitsu.com/
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- .../conf/include/ptest-packagelists-meta-oe.inc  |  1 +
- .../recipes-core/minizip-ng/minizip-ng/run-ptest |  3 +++
- .../recipes-core/minizip-ng/minizip-ng_4.0.8.bb  | 16 +++++++++++++---
- 3 files changed, 17 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-core/minizip-ng/minizip-ng/run-ptest
-
-diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-index 380c6dd3f6..77bf47d90c 100644
---- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-+++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-@@ -31,6 +31,7 @@ PTESTS_FAST_META_OE = "\
-     lmdb \
-     microsoft-gsl \
-     minicoredumper \
-+    minizip-ng \
-     neon \
-     nlohmann-json \
-     nodejs \
-diff --git a/meta-oe/recipes-core/minizip-ng/minizip-ng/run-ptest b/meta-oe/recipes-core/minizip-ng/minizip-ng/run-ptest
-new file mode 100644
-index 0000000000..9c2dc81e35
---- /dev/null
-+++ b/meta-oe/recipes-core/minizip-ng/minizip-ng/run-ptest
-@@ -0,0 +1,3 @@
-+#!/bin/sh
-+
-+cd tests && ./gtest_minizip --gtest_print_time=0 | sed -E  '/^\[ RUN/d ; s/\[       OK \]/PASS: / ; s/\[ DISABLED \]/SKIP: / ; s/\[ FAILED \]/FAIL: /'
-diff --git a/meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.8.bb b/meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.8.bb
-index 90882a1e58..29932f9b92 100644
---- a/meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.8.bb
-+++ b/meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.8.bb
-@@ -6,7 +6,9 @@ SECTION = "libs"
- LICENSE = "Zlib"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=36964f044224efeedd694983c34e716f"
- 
--SRC_URI = "git://github.com/zlib-ng/minizip-ng.git;protocol=https;branch=master"
-+SRC_URI = "git://github.com/zlib-ng/minizip-ng.git;protocol=https;branch=master \
-+           file://run-ptest \
-+"
- 
- SRCREV = "55db144e03027b43263e5ebcb599bf0878ba58de"
- 
-@@ -16,15 +18,16 @@ RCONFLICTS:${PN} += "minizip"
- 
- DEPENDS = "xz openssl bzip2"
- 
--inherit cmake pkgconfig
-+inherit cmake pkgconfig ptest
- 
- EXTRA_OECMAKE = "-DMZ_FORCE_FETCH_LIBS=OFF \
-                  -DBUILD_SHARED_LIBS=ON \
- "
- 
--PACKAGECONFIG ??= "zlib"
-+PACKAGECONFIG ??= "zlib ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'test', '', d)}"
- PACKAGECONFIG[zlib] = "-DMZ_ZLIB=ON,-DMZ_ZLIB=OFF, zlib"
- PACKAGECONFIG[zlib-ng] = "-DMZ_ZLIB=ON,-DMZ_ZLIB=OFF, zlib-ng"
-+PACKAGECONFIG[test] = "-DMZ_BUILD_TESTS=ON -DMZ_BUILD_UNIT_TESTS=ON, -DMZ_BUILD_TESTS=OFF -DMZ_BUILD_UNIT_TESTS=OFF, googletest"
- 
- 
- do_install:append () {
-@@ -32,3 +35,10 @@ do_install:append () {
-     sed -i -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/cmake/minizip/minizip.cmake
- }
- 
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/tests
-+    cp ${B}/test/gtest_minizip ${D}${PTEST_PATH}/tests
-+    # encrypt and stream test need the LICENSE file
-+    cp ${S}/LICENSE ${D}${PTEST_PATH}/tests
-+}
-+
--- 
-2.34.1
-
+On 3/31/25 11:11, wangmy via lists.openembedded.org wrote:
+> From: Wang Mingyu <wangmy@fujitsu.com>
+>
+> 0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+> refreshed for 6.30.1
+>
+> 0001-utf8_range-add-version-marker-to-library-19009.patch
+> removed since it's included in 6.30.1
+>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  ...e-respect-CXX-LDFLAGS-variables-fix-.patch |  8 ++--
+>  ...-add-version-marker-to-library-19009.patch | 43 -------------------
+>  ...{protobuf_5.29.4.bb => protobuf_6.30.1.bb} |  5 +--
+>  3 files changed, 6 insertions(+), 50 deletions(-)
+>  delete mode 100644 meta-oe/recipes-devtools/protobuf/protobuf/0001-utf8_range-add-version-marker-to-library-19009.patch
+>  rename meta-oe/recipes-devtools/protobuf/{protobuf_5.29.4.bb => protobuf_6.30.1.bb} (97%)
+>
+> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+> index 7a8906a9a4..77155af4ee 100644
+> --- a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+> +++ b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch
+> @@ -31,7 +31,7 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+>   1 file changed, 4 insertions(+), 2 deletions(-)
+>  
+>  diff --git a/examples/Makefile b/examples/Makefile
+> -index f7ee9b116..8cd1359e2 100644
+> +index 5290fdb..8cd1359 100644
+>  --- a/examples/Makefile
+>  +++ b/examples/Makefile
+>  @@ -4,6 +4,8 @@
+> @@ -47,16 +47,16 @@ index f7ee9b116..8cd1359e2 100644
+>   
+>   add_person_cpp: add_person.cc protoc_middleman
+>   	pkg-config --cflags protobuf  # fails if protobuf is not installed
+> --	c++ -std=c++14 add_person.cc addressbook.pb.cc -o add_person_cpp `pkg-config --cflags --libs protobuf`
+> +-	c++ add_person.cc addressbook.pb.cc -o add_person_cpp `pkg-config --cflags --libs protobuf`
+>  +	$(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF) add_person.cc addressbook.pb.cc -o add_person_cpp
+>   
+>   list_people_cpp: list_people.cc protoc_middleman
+>   	pkg-config --cflags protobuf  # fails if protobuf is not installed
+> --	c++ -std=c++14 list_people.cc addressbook.pb.cc -o list_people_cpp `pkg-config --cflags --libs protobuf`
+> +-	c++ list_people.cc addressbook.pb.cc -o list_people_cpp `pkg-config --cflags --libs protobuf`
+>  +	$(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF) list_people.cc addressbook.pb.cc -o list_people_cpp
+>   
+>   add_person_dart: add_person.dart protoc_middleman_dart
+>   
+>  -- 
+> -2.25.1
+> +2.43.0
+>  
+> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-utf8_range-add-version-marker-to-library-19009.patch b/meta-oe/recipes-devtools/protobuf/protobuf/0001-utf8_range-add-version-marker-to-library-19009.patch
+> deleted file mode 100644
+> index e58fdc1d19..0000000000
+> --- a/meta-oe/recipes-devtools/protobuf/protobuf/0001-utf8_range-add-version-marker-to-library-19009.patch
+> +++ /dev/null
+> @@ -1,43 +0,0 @@
+> -From fd020ef700dbf2d324aecd087b8fcb6ff329feb6 Mon Sep 17 00:00:00 2001
+> -From: Jan Engelhardt <jengelh@inai.de>
+> -Date: Thu, 21 Nov 2024 11:30:17 -0800
+> -Subject: [PATCH] utf8_range: add version marker to library (#19009)
+> -
+> -Unversioned libraries / libraries without due ABI indicators are not allowed in certain Linux distributions because it precludes the concurrent presence of multiple versions.
+> -
+> -If you have both /usr/lib/libprotobuf-lite.so.28.3.0 and /usr/lib/libprotobuf-lite.so.29.0.0, both of them want libutf8_validity.so, but if the ABI is different between utf8_range 28 and utf8_range 29, that's a problem.
+> -
+> -Closes #19009
+> -
+> -COPYBARA_INTEGRATE_REVIEW=https://github.com/protocolbuffers/protobuf/pull/19009 from jengelh:master 1a5f8682be2f2b84da07fcdd32474baae8088959
+> -PiperOrigin-RevId: 698855702
+> -
+> -Upstream-Status: Backport [https://github.com/protocolbuffers/protobuf/commit/ced605d0e6a7ad20985375b596b2ca6720e07737]
+> -Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> ----
+> - third_party/utf8_range/CMakeLists.txt | 9 +++++++++
+> - 1 file changed, 9 insertions(+)
+> -
+> -diff --git a/third_party/utf8_range/CMakeLists.txt b/third_party/utf8_range/CMakeLists.txt
+> -index 4276b97290..e054893c63 100644
+> ---- a/third_party/utf8_range/CMakeLists.txt
+> -+++ b/third_party/utf8_range/CMakeLists.txt
+> -@@ -19,6 +19,15 @@ add_library (utf8_range
+> - # A heavier-weight C++ wrapper that supports Abseil.
+> - add_library (utf8_validity utf8_validity.cc utf8_range.c)
+> - 
+> -+set_target_properties(utf8_range PROPERTIES
+> -+  VERSION ${protobuf_VERSION}
+> -+  OUTPUT_NAME ${LIB_PREFIX}utf8_range
+> -+)
+> -+set_target_properties(utf8_validity PROPERTIES
+> -+  VERSION ${protobuf_VERSION}
+> -+  OUTPUT_NAME ${LIB_PREFIX}utf8_validity
+> -+)
+> -+
+> - # Load Abseil dependency.
+> - if (NOT TARGET absl::strings)
+> -   if (NOT ABSL_ROOT_DIR)
+> --- 
+> -2.34.1
+> -
+> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_5.29.4.bb b/meta-oe/recipes-devtools/protobuf/protobuf_6.30.1.bb
+> similarity index 97%
+> rename from meta-oe/recipes-devtools/protobuf/protobuf_5.29.4.bb
+> rename to meta-oe/recipes-devtools/protobuf/protobuf_6.30.1.bb
+> index 30b805e6b1..c3e701b5d3 100644
+> --- a/meta-oe/recipes-devtools/protobuf/protobuf_5.29.4.bb
+> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_6.30.1.bb
+> @@ -14,13 +14,12 @@ LIC_FILES_CHKSUM = " \
+>  DEPENDS = "zlib abseil-cpp jsoncpp"
+>  DEPENDS:append:class-target = " protobuf-native"
+>  
+> -SRCREV = "1be1c9d0ea6efa2a25bd7b76186844d1669be78a"
+> +SRCREV = "0d815c5b74281f081c1ee4b431a4d5bbb1615c97"
+>  
+> -SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=29.x;protocol=https \
+> +SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=30.x;protocol=https \
+>             file://run-ptest \
+>             file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
+>             file://0001-fix-protobuf-native-build-failure-with-gcc-10.patch \
+> -           file://0001-utf8_range-add-version-marker-to-library-19009.patch \
+>             "
+>  SRC_URI:append:mipsarcho32:toolchain-clang = " file://0001-Fix-build-on-mips-clang.patch "
+>  
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#116400): https://lists.openembedded.org/g/openembedded-devel/message/116400
+> Mute This Topic: https://lists.openembedded.org/mt/112000733/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
