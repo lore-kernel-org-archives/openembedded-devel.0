@@ -2,50 +2,50 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 70526C3601E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F222C369A4
 	for <webhook@archiver.kernel.org>; Mon, 31 Mar 2025 09:12:10 +0000 (UTC)
 Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
- by mx.groups.io with SMTP id smtpd.web10.47777.1743412320556201685
+ by mx.groups.io with SMTP id smtpd.web10.47783.1743412322271866337
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 31 Mar 2025 02:12:01 -0700
+ Mon, 31 Mar 2025 02:12:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=jM63wH/p;
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=r2JKit6h;
  spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1743412322; x=1774948322;
+  t=1743412323; x=1774948323;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=Zf32YgP55AeUHRDCII9GC0fFfoy+WW6+eBIS7Bp4n78=;
-  b=jM63wH/pWoJBe8p/U3ObG8QL6C1N8M39/XIVAUIBWhO3GyL+6GMNGmIu
-   lXK1rf1e1l6YEzAzZuWkDXRc6gWCULIaCNGzXf+ebQGtu6+9wEpCdilnU
-   UVaw6uj/AcmUzUk6VsSbf/6K/vd1IyzssJFVOTaF+N+Qux746eJGt/TUy
-   yb+j3CjVt/F9fcGkK6YfJAz/yn/tHSQfZnjsltmJY9dotfIlyhdiT+Jox
-   PODKC32ZdoHbLzjnPZb31oFId2gIUhtfTwHbD5spYvT2VWyNIzNQH14ky
-   f4F+Dyqq68Y8rFXFYQVQ93ge2L4CNnqQixjG2Tzoggm8+EuRC1C+N3X2m
+  bh=NFZiw8HgSfnJbvXpGDk1bCC3V5C913ClaB3S77CCO0U=;
+  b=r2JKit6hizZAE8p+G8hB8yoI+3un3M73fTeHQsbduIAn+z6oRO9EBbAr
+   3WCcUbHKUuHy8mJ3qMq53DkJ6RG+oIEyX1ylLe8sSUg0xIc2feA5Z6bsN
+   H9MVB6LQCvT14XtnpsIJ5pSB9zKIyrL7IlYGc5NclCmu+iPptFRxqnJ38
+   HB9jOA2ylcN3gTnDVVgV3jO4HuYDgd5qQ4eysdrsRFiUlFK5thllYdwW8
+   VLyUCVjGpxS9AAQ3NuC6R1QqSTuFdIoyrtBYbVknZqaf7nAidLTZmLtY7
+   rBsfezESTWRNMBltT9YMjog4m5Aijl1NsHdmwThFxPEc/oO3+GND+nMXE
    A==;
-X-CSE-ConnectionGUID: 7k5bkhfXRWaFK6px7wabFQ==
-X-CSE-MsgGUID: rwZnEpJRQQibs1XmhF/ptQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11389"; a="194950081"
+X-CSE-ConnectionGUID: VzwVod81ShGxxSiX3ALYHQ==
+X-CSE-MsgGUID: uw+luXVIR0W2VeGqmqkimQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11389"; a="194950085"
 X-IronPort-AV: E=Sophos;i="6.14,290,1736780400"; 
-   d="scan'208";a="194950081"
-Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 31 Mar 2025 18:11:59 +0900
-Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
-	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 6948DB40FE
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Mar 2025 18:11:56 +0900 (JST)
+   d="scan'208";a="194950085"
+Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
+  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 31 Mar 2025 18:12:02 +0900
+Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
+	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id C4831D5011
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Mar 2025 18:11:58 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 2D5B5D9692
-	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Mar 2025 18:11:56 +0900 (JST)
+	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 849D2D5086
+	for <openembedded-devel@lists.openembedded.org>; Mon, 31 Mar 2025 18:11:58 +0900 (JST)
 Received: from localhost.localdomain.localdomain (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id B44111A00A1;
-	Mon, 31 Mar 2025 17:11:55 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 43F731A009B;
+	Mon, 31 Mar 2025 17:11:58 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 02/26] opencl-clhpp: upgrade 2024.05.08 -> 2024.10.24
-Date: Mon, 31 Mar 2025 17:11:24 +0800
-Message-Id: <1743412308-21887-5-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 14/26] python3-libusb1: upgrade 3.3.0 -> 3.3.1
+Date: Mon, 31 Mar 2025 17:11:36 +0800
+Message-Id: <1743412308-21887-17-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1743412308-21887-1-git-send-email-wangmy@fujitsu.com>
 References: <1743412308-21887-1-git-send-email-wangmy@fujitsu.com>
@@ -53,31 +53,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 31 Mar 2025 09:12:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116398
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116409
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{opencl-clhpp_2024.05.08.bb => opencl-clhpp_2024.10.24.bb}  | 2 +-
+ .../{python3-libusb1_3.3.0.bb => python3-libusb1_3.3.1.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-core/opencl/{opencl-clhpp_2024.05.08.bb => opencl-clhpp_2024.10.24.bb} (91%)
+ rename meta-python/recipes-devtools/python/{python3-libusb1_3.3.0.bb => python3-libusb1_3.3.1.bb} (79%)
 
-diff --git a/meta-oe/recipes-core/opencl/opencl-clhpp_2024.05.08.bb b/meta-oe/recipes-core/opencl/opencl-clhpp_2024.10.24.bb
-similarity index 91%
-rename from meta-oe/recipes-core/opencl/opencl-clhpp_2024.05.08.bb
-rename to meta-oe/recipes-core/opencl/opencl-clhpp_2024.10.24.bb
-index 25e7fd633f..b815c22eec 100644
---- a/meta-oe/recipes-core/opencl/opencl-clhpp_2024.05.08.bb
-+++ b/meta-oe/recipes-core/opencl/opencl-clhpp_2024.10.24.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-python/recipes-devtools/python/python3-libusb1_3.3.0.bb b/meta-python/recipes-devtools/python/python3-libusb1_3.3.1.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-libusb1_3.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-libusb1_3.3.1.bb
+index 78480cfa81..1c2d60e6b8 100644
+--- a/meta-python/recipes-devtools/python/python3-libusb1_3.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-libusb1_3.3.1.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
+     file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c \
+ "
  
- DEPENDS = "opencl-headers"
+-SRC_URI[sha256sum] = "b642aa518689f8e053f61955cba274e72bc8d0794c65d7990745aaae90dfc8a1"
++SRC_URI[sha256sum] = "3951d360f2daf0e0eacf839e15d2d1d2f4f5e7830231eb3188eeffef2dd17bad"
  
--SRCREV = "0bdbbfe5ecda42cff50c96cc5e33527f42fcbd45"
-+SRCREV = "c7b4aded1cab9560b226041dd962f63375a9a384"
- 
- SRC_URI = "git://github.com/KhronosGroup/OpenCL-CLHPP.git;protocol=https;branch=main"
+ RDEPENDS:${PN} = "libusb1"
  
 -- 
 2.43.0
