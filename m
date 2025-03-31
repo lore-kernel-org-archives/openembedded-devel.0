@@ -2,63 +2,62 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 23F2FC36014
-	for <webhook@archiver.kernel.org>; Mon, 31 Mar 2025 21:01:17 +0000 (UTC)
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
- by mx.groups.io with SMTP id smtpd.web10.3828.1743454876612034618
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BBAFC36016
+	for <webhook@archiver.kernel.org>; Mon, 31 Mar 2025 21:01:27 +0000 (UTC)
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+ by mx.groups.io with SMTP id smtpd.web11.3920.1743454877625909564
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 31 Mar 2025 14:01:16 -0700
+ Mon, 31 Mar 2025 14:01:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jd90Y96D;
- spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-5e6194e9d2cso9479148a12.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 31 Mar 2025 14:01:16 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DDA4Gmdt;
+ spf=pass (domain: gmail.com, ip: 209.85.208.50, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-5e5c7d6b96fso8972004a12.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 31 Mar 2025 14:01:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1743454875; x=1744059675; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1743454876; x=1744059676; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=J5vWh+ozDj35zPXkbjq1OwtKeIMVXhIc9Pp9pmsOEsQ=;
-        b=jd90Y96DdHoh7W613Sv95e/9eKLfPZpHY+MY0FHc6aq9ix2lEdEY0nwk2T5R4vLPzy
-         USkhesDZtcqpIJf0HpH5Gsx9lwI30hjzw0v4ECUhWtYbc5fD+o60RbxObb1P7ai3j0s5
-         jOk38yFICP3NRy0MOQVd1rH5zCeyoxMHyZPcHJ4xpMj5bhD5IdNHY8kcJsA+Y0qlM6UZ
-         N1QG8ct1PCx3Uh9OiYryvtlBBmOcGBBNiB36ISeA9k/F8844IJKY3Vf+zxlCXWjAoxM2
-         rf95xE8Vc5xkTmgmIrNj23sfTH4WxVPpt5XP8r1mt4oIVsWBvgKfRSXwm2G8LBsEsUQo
-         ndWQ==
+        bh=GEW6UY8COj3SCkWTxAFFJcDTw3XZQtTSMRxJlrGk3e0=;
+        b=DDA4Gmdtb+GM+CHtQNpV7Qvze4GqWvke+HTXIHK4w6BB+MBEEosSBWdCOdFl85pEwr
+         fXin2FAgybBTaYkoJBtRC94Z8DN56n0vHbFURLV4RD0pyYJCG8DNfteUlRCQjSfsDAgz
+         4VGKY/YU+VUX9xBtIeTSLixP4rN5QhhhbuiAqed+ue/hRZbUm/2hCKWBnvuAwzPhHs+l
+         8tzOfM/D6WJpS9NqE6kvJZhOzwLMqB1uP4o4YT1C1RF5v/YeFc3d3gpkONQPofZO72p/
+         wqtjxN1vJVwqHKj5oCNy+67UrjdWP2oxgbVh59vjv+1NchUg+E2E12mvgv9tc+6/xsX7
+         bGsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743454875; x=1744059675;
+        d=1e100.net; s=20230601; t=1743454876; x=1744059676;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=J5vWh+ozDj35zPXkbjq1OwtKeIMVXhIc9Pp9pmsOEsQ=;
-        b=l9smklYl5iO2GH06ZHE5KE2wWWA3dVEgrJ4nxI/3HMNvqxkGqFRTjVGTPTDBP+3afd
-         NecXQ5H2RvaszYIm5iuZDa3iS3UpDKTuxnaVHjZ09JlHkI/+2WvfS1PuM21LUYb93TtW
-         3vojJo/I/khK3U/04F8I/kNo1FwPb1BOd4xBIOugr+5CB9VnLO7nS1+PG3vlPeueFdj8
-         iF6z1iSrsuRrst9KtTJ7m6nS0ag2IAWh0MuDtWm7htAONQVNuo3tnCLowMMON3cXXcUL
-         1daYDZXu6bDDzZIphX56Xm1DJFrKiXsoXXLgSo7hOQKYZU9rkLPJ6x2DfD1C2hyTLAdO
-         YVHA==
-X-Gm-Message-State: AOJu0YwjaXdEHh/hiXTKNXLNdN/+QXMZPvdQvzifmykGmVofEb21HTtT
-	XXHG6yEAILpcCk0hPVBVZMbU//BxfB4G+4R4YthPRO2QNsnjTy+fUia65vez
-X-Gm-Gg: ASbGncs0EVrFyoou3JPgsuNswrTleRfsrNuxr4LxlDv2UZP7z+oWIg3wIzlYz+wuQaq
-	DHkOJqltnHsEDq/nRgugT19WLsf48g3fwqap/pN1QongUmpz++AJneNUaTEY87TJYtUf/Gjqwfb
-	kpgZm7af5YPI4wyqO97Wq1MK8FLdqvx9317AMzndGGEo5eaVjzt7iiLfdy2SNuB0Gs384E6clWl
-	hSUWAi0l6c7rSHa/I4Yimq+0nGQ5Wi73m+qkX7DI/GRBWvQLxi8p7XHs3zy4LNlrv/kJPWmRHnk
-	DtoKVp+zhy5cnd5oXAJUNpyuFUFYzxzOjMTRVT2c0P5XfNo=
-X-Google-Smtp-Source: AGHT+IERCHWNqhykLBemFBzzMc4ESNaMcv4ApWzBhgGaS3EUCMlxQ2ATBoUGsixpynmgWQUD45r8Lw==
-X-Received: by 2002:a17:907:1c8b:b0:ac6:b731:965c with SMTP id a640c23a62f3a-ac738ae6ce6mr789237066b.23.1743454874898;
-        Mon, 31 Mar 2025 14:01:14 -0700 (PDT)
+        bh=GEW6UY8COj3SCkWTxAFFJcDTw3XZQtTSMRxJlrGk3e0=;
+        b=Mv3VV+FOAYPXBq14uQM+ZpNW2aaaNx76Pt5RpriVwrUhbym7hp1cKF0tXBfwpFizyC
+         K6btjGKUISuqzqgh3k2M2lxVLZLe8lgl4BJqbYkMpFt919jMrN1hlFuLLoecOU6sKqjP
+         vuF2/e9dZ/hKnKU0hdG9a6nxTOK2MYHyt0aR7vm3CGOt1e30SNjtiaC+aLPHNoJ9TXDh
+         i8OE3kFO8ev60y9pO8ECkXU7wJx6R8hzj7MEt+M+aTlPnsV4iF+MEVa48v1TiIG2/oL9
+         VfbgYKGvGUDY4/EFzJSn8CHakLiDgjLFIn4TyEZzK2KBQrNmoVW4wnKFG2j2E73kJDJE
+         Q/iQ==
+X-Gm-Message-State: AOJu0YykS6veoqpIIGoYQTrU2ngyNNYA14IgwmrrkiSeQo2KALMlfwLH
+	8cYYjj+iUBsLBVKnpX7Kr2I63EVz/WEyXNGLCky0bUxP1O4JAcgEE0TbkYxw
+X-Gm-Gg: ASbGncvWglaX7tVOzHx9Z9RMycb2tfPenLuDjp/00YG8bk/+08HY2KfxVaA8Kpw6MFe
+	wCn8VPFyHElXtlYOqtzsKYiqChtHejWt7OjuT6gqLiFe5Fz3lQ5IcErOximmzu9qDTLDGjcGIAy
+	fxTBeJ/QVDnb73/S7VEkRxj3a2ekrFKtYubq7bVT5TQ2Kz3XivkLR1jviZ33S9m3GK8F8wnsY7B
+	9GxaU24GTzF34luq0DrMTi2YrBN4Pzm03d70GzYCp38uTkLdt3W311c0aBETvpNg6WM3IHNh7xY
+	NYPAB+aeAxVXd6vl1syJGJNrGcPwg448Pd+IrCcMIHHwO/g=
+X-Google-Smtp-Source: AGHT+IGP05o8ReDE7eW4p1LfI/PSXgBSmDQHNlB3dV2JUS2MdB0EDGuu3K/DKy0oMyp9G5wxaaQq+g==
+X-Received: by 2002:a17:906:bc55:b0:ac7:3916:327c with SMTP id a640c23a62f3a-ac73916336fmr817204566b.59.1743454875890;
+        Mon, 31 Mar 2025 14:01:15 -0700 (PDT)
 Received: from localhost ([109.238.218.228])
-        by smtp.gmail.com with UTF8SMTPSA id a640c23a62f3a-ac7196988edsm682353566b.145.2025.03.31.14.01.14
+        by smtp.gmail.com with UTF8SMTPSA id a640c23a62f3a-ac71922c0c5sm673024166b.9.2025.03.31.14.01.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 31 Mar 2025 14:01:14 -0700 (PDT)
+        Mon, 31 Mar 2025 14:01:15 -0700 (PDT)
 From: martin.jansa@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Armin Kuster <akuster808@gmail.com>,
-	alperak <alperyasinak1@gmail.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][scarthgap][PATCH 03/21] rdist: Fix contains reference to TMPDIR [buildpaths] warning
-Date: Mon, 31 Mar 2025 23:00:43 +0200
-Message-ID: <20250331210101.3460858-3-martin.jansa@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH 04/21] botan: Make it reproducible
+Date: Mon, 31 Mar 2025 23:00:44 +0200
+Message-ID: <20250331210101.3460858-4-martin.jansa@gmail.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250331210101.3460858-1-martin.jansa@gmail.com>
 References: <20250331210101.3460858-1-martin.jansa@gmail.com>
@@ -67,33 +66,40 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 31 Mar 2025 21:01:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116439
+ <openembedded-devel@lists.openembedded.org>; Mon, 31 Mar 2025 21:01:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116440
 
-From: alperak <alperyasinak1@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-Pass OE cflags to makefile
-
-WARNING: rdist-6.1.5-r0 do_package_qa: QA Issue: File /usr/bin/.debug/rdistd in package rdist-dbg contains reference to TMPDIR
-File /usr/bin/.debug/rdist in package rdist-dbg contains reference to TMPDIR [buildpaths]
-
-Signed-off-by: alperak <alperyasinak1@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-crypto/botan/botan_3.2.0.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb b/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb
-index d81cc9a3d1..e6d99431be 100644
---- a/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb
-+++ b/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb
-@@ -38,7 +38,7 @@ DEPENDS = "bison-native"
+diff --git a/meta-oe/recipes-crypto/botan/botan_3.2.0.bb b/meta-oe/recipes-crypto/botan/botan_3.2.0.bb
+index 5eff2d383e..1fdda65a05 100644
+--- a/meta-oe/recipes-crypto/botan/botan_3.2.0.bb
++++ b/meta-oe/recipes-crypto/botan/botan_3.2.0.bb
+@@ -18,8 +18,8 @@ CPU:armv7ve = "armv7"
  
- inherit autotools-brokensep
+ do_configure() {
+ 	python3 ${S}/configure.py \
+-	--prefix="${D}${exec_prefix}" \
+-	--libdir="${D}${libdir}" \
++	--prefix="${exec_prefix}" \
++	--libdir="${libdir}" \
+ 	--cpu="${CPU}" \
+ 	--cc-bin="${CXX}" \
+ 	--cxxflags="${CXXFLAGS}" \
+@@ -39,8 +39,8 @@ do_compile() {
+ 	oe_runmake
+ }
+ do_install() {
+-	oe_runmake install
+-	sed -i -e "s|${D}||g" ${D}${libdir}/pkgconfig/botan-3.pc
++	oe_runmake DESTDIR=${D} install
++	sed -i -e 's|${WORKDIR}|<scrubbed>|g' ${D}${includedir}/botan-3/botan/build.h
+ }
  
--EXTRA_OEMAKE = "BIN_GROUP=root MAN_GROUP=root RDIST_MODE=755 RDISTD_MODE=755 MAN_MODE=644"
-+EXTRA_OEMAKE = "CPPFLAGS='${CFLAGS}' BIN_GROUP=root MAN_GROUP=root RDIST_MODE=755 RDISTD_MODE=755 MAN_MODE=644"
- 
- # http://errors.yoctoproject.org/Errors/Details/186972/
- COMPATIBLE_HOST:libc-musl = 'null'
+ PACKAGES += "${PN}-python3"
 
