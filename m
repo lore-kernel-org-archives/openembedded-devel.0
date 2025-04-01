@@ -2,36 +2,36 @@ Return-Path: <mark.yang@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C1D7C36010
-	for <webhook@archiver.kernel.org>; Tue,  1 Apr 2025 16:13:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AC68C36010
+	for <webhook@archiver.kernel.org>; Tue,  1 Apr 2025 16:20:43 +0000 (UTC)
 Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.53])
- by mx.groups.io with SMTP id smtpd.web11.84.1743523974937409526
+ by mx.groups.io with SMTP id smtpd.web10.341.1743524437723451623
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Apr 2025 09:12:56 -0700
+ Tue, 01 Apr 2025 09:20:38 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.53, mailfrom: mark.yang@lge.com)
-Received: from unknown (HELO lgeamrelo04.lge.com) (156.147.1.127)
-	by 156.147.23.53 with ESMTP; 2 Apr 2025 01:12:49 +0900
-X-Original-SENDERIP: 156.147.1.127
+Received: from unknown (HELO lgemrelse6q.lge.com) (156.147.1.121)
+	by 156.147.23.53 with ESMTP; 2 Apr 2025 01:20:35 +0900
+X-Original-SENDERIP: 156.147.1.121
 X-Original-MAILFROM: mark.yang@lge.com
 Received: from unknown (HELO markyang..) (10.177.121.109)
-	by 156.147.1.127 with ESMTP; 2 Apr 2025 01:12:49 +0900
+	by 156.147.1.121 with ESMTP; 2 Apr 2025 01:20:35 +0900
 X-Original-SENDERIP: 10.177.121.109
 X-Original-MAILFROM: mark.yang@lge.com
 From: mark.yang@lge.com
 To: openembedded-devel@lists.openembedded.org
 Cc: "mark.yang" <mark.yang@lge.com>
-Subject: [PATCH] linpack: fix build with gcc-15.0.1
-Date: Wed,  2 Apr 2025 01:12:45 +0900
-Message-Id: <20250401161245.2560913-1-mark.yang@lge.com>
+Subject: [meta-oe][PATCH v2] linpack: fix build with gcc-15.0.1
+Date: Wed,  2 Apr 2025 01:20:32 +0900
+Message-Id: <20250401162032.2582478-1-mark.yang@lge.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 16:13:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116480
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 16:20:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116481
 
 From: "mark.yang" <mark.yang@lge.com>
 
