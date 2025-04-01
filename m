@@ -2,59 +2,59 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6EBAC36010
-	for <webhook@archiver.kernel.org>; Tue,  1 Apr 2025 14:25:07 +0000 (UTC)
-Received: from mail-oo1-f41.google.com (mail-oo1-f41.google.com [209.85.161.41])
- by mx.groups.io with SMTP id smtpd.web11.20533.1743517500055508219
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9AAE1C36010
+	for <webhook@archiver.kernel.org>; Tue,  1 Apr 2025 14:25:47 +0000 (UTC)
+Received: from mail-oo1-f44.google.com (mail-oo1-f44.google.com [209.85.161.44])
+ by mx.groups.io with SMTP id smtpd.web10.20510.1743517545983429035
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Apr 2025 07:25:00 -0700
+ Tue, 01 Apr 2025 07:25:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cuc91pJk;
- spf=pass (domain: gmail.com, ip: 209.85.161.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f41.google.com with SMTP id 006d021491bc7-60298ec60e8so1253147eaf.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 07:24:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fHO7j/jA;
+ spf=pass (domain: gmail.com, ip: 209.85.161.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f44.google.com with SMTP id 006d021491bc7-6021e3daeabso2598989eaf.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 07:25:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1743517499; x=1744122299; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1743517545; x=1744122345; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=lwLsmwgnMbJawyUJk7qjkX74cHNcxLK3wZs3qXZSGfw=;
-        b=cuc91pJkxNXkRqOH0uI42l6JNo9uRuNlEDkxMTlsBe+tE9+iBpEyGCf+6rIPNHc3V4
-         xmbNEOYep8fp1nlTCKavfXQV3aPr/wfo423r3w5wTOhDf07LCIUaxoNrZ8zYI1GvZGny
-         h88+mGwpJa3KDDAp67OIhoUy9aAZUb+mlI064kE88jatWkT/uCojdekxDpsvRFji9yXp
-         wioV5hy3TUvwNW6Ma9jeFgdt3BzRWR0TVwQpklGyIMeoblE2x8USnG8LLoTf+8TquYgF
-         PkhpLuN1HwxixsgASqSs5NUAgPDCZb7djfz3HCKCGdPjN5VA84zqzuiyQGrPwhQrBGs5
-         eIww==
+        bh=mayWIMPWV7xgon+r6FIxHAZsEEJvCuz+4NufLxb4E/w=;
+        b=fHO7j/jARYInMGvs0nLOdX3SDEBOO94B6h+uAR1bY+dEPF02jdZwKXWD75HR6yG7V7
+         41gq1b/hUiqlWLvy3YGfNally+p0TJpRRIkhkoTujAVD1y7oB2lZMVw+0+adYV3b/O61
+         QhE/wW4wgk1m981TMS7qWBwxNOCzyrXTUZpVacclL/A2/jtcU5GUArqPcnAAaH24CZyU
+         Uq2+qcrKHCsmwyDBg4PwA4o4yR4tdsj9XVBE/oc8YaQ436S0Hoffr056R9yQmo8ivICi
+         cWW/fqJumuovyrDiDA6CVrxnK17Mr4FdGvvePvrPuddHB3U8CkBiQIWeCa0uugko1dwY
+         nljg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743517499; x=1744122299;
+        d=1e100.net; s=20230601; t=1743517545; x=1744122345;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=lwLsmwgnMbJawyUJk7qjkX74cHNcxLK3wZs3qXZSGfw=;
-        b=KlalibPg7fVOK642XahyGz9k0Tg/sjfhulH+JLo7XoyGc1QHaxlXd4vVCwXQNk3WrK
-         w9hasU3YpIMr9oxFEj/L8XAy7oaP9P/OD7IpD+c0x95ZtPbuQRTilB2P7akrf0fZEu5Z
-         L54/S1tJbS92VXJR7g9dykqNZ/thNCI+97AMCqBSTmZfoDboBtT1KiEjXYXjCJCbCuPm
-         h2EynLzEEzicXlZpBjilsSocPRAVnxPauJqmeSKUQ0Y5qWjMi6l5+8y70oXgp3xHGhIs
-         ql+KuWYWAGUwu7V1KNVvP6BdGFbqV4S/5Q+g1ZKjONTws9aqfe56GhLf4PCZ440yjM5U
-         GrgA==
-X-Gm-Message-State: AOJu0YwwjvOU+y3PWrhds6CkYzVUJCOZDJ9RJ+K63uHz5m2rVkdn5wAB
-	/595/HrxWiBapdICkoeWYrUTGtaDHgmkM0Y9lgeWv8DFUb+3dhlHWsaENBqULPtWv50Df8zFqOx
-	gvCJ5eZXL0Jn3mfcpsDD+8sC+SZkw408gUcs=
-X-Gm-Gg: ASbGncta9oDU1RZ/zE2WOR/blRjFmk5LPJhChU8ClYqgclZ/chZC7ei4eAW8NFIMXfs
-	N0oH2hpgkp1rbKC+UjTb8Vbzuk1C1CUhNme9AfKPd83cTSde6U9E8F04U2OOoCmkIlWc2+XNnFk
-	dFnCe0rZcpaz/tB5VvCGOjy32+wfQqh71ogTvbxbDp
-X-Google-Smtp-Source: AGHT+IHCyBoPpr8svStwQXGyjIcMmsxVnTjvUshwjAeheioe1lCPjSL7Wi/J6JtDy68SbQUjrWBL8lKd60TVyswMfN0=
-X-Received: by 2002:a4a:ee86:0:b0:602:47ec:3df0 with SMTP id
- 006d021491bc7-60290f5ad74mr5929669eaf.5.1743517499227; Tue, 01 Apr 2025
- 07:24:59 -0700 (PDT)
+        bh=mayWIMPWV7xgon+r6FIxHAZsEEJvCuz+4NufLxb4E/w=;
+        b=qknvrVkYYxRRT2tc8dw41YCdni14Pc3BBazxuhDU2/0pk4RcLk5DgMRY3bZzJee/kI
+         R8ltRYwfFhUz19hm+4OSc3FhLpKNZ1q6PTIdYlPRo+/HhWA/YnVR210Kc/Ea9wgFzdtS
+         1O1BaP46i+G6tzn0k8du/I3jUDoV/LBVfzX7pyKzqTP6DxA2dH6VudMKT/orKDFY0It7
+         t7sW0+XZKkUV4b4UTcPobVYQu1Cihr8TbnR/KKCQd2l6mSzNSsnXVeN+4vn6MLltpb9f
+         lZgPDVizQLf0G1NqolOi8dQUQ2Yp9VxvfaTTJBF3WcsFDr2A/soSyUVWTdE5HttBrExF
+         FKbw==
+X-Gm-Message-State: AOJu0YxlsgbZAM8XjiYo/peeFcYlZtQvDjJEkxhZmrQEfLpO5YUynHsH
+	PSQF2S4sY/yVF4NYYG5wPGyp8W04Xt4gN3Zu1vofxwjHBW/oiccT84W840hRfCtgBB6PyJWZdME
+	4xi0Jdk1r1il3K2pjB4+ipPMOAWepLFdfKRI=
+X-Gm-Gg: ASbGncv8FmVV6HCu4+pyGWhfIdh8hepXIL6NP8UBRmkZrrzr9xE3igcN0Pw1ERVgD0R
+	xT//pzuq0nCuCtguOeyUpweTRxfMRqRr6mIIyc+RO0BRLiQvTjJ6+ir0BPcCMZUt7O8maFeIjB4
+	si9/tkxuTNodob2yMK/EAOATaFNViV0btKsKekDM5VkQSJEtzHgO8=
+X-Google-Smtp-Source: AGHT+IFFEYNYmsZVogwiKrxHYiI4s/9bss4/gbb8kEaPBxfgJqhsd7d7prFfAbBPdFbMPjypZzJ1FbfaIDzd+Tdwxmo=
+X-Received: by 2002:a05:6820:1c8b:b0:603:f981:5fe4 with SMTP id
+ 006d021491bc7-603f981606emr716337eaf.1.1743517545152; Tue, 01 Apr 2025
+ 07:25:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250401100832.1477718-1-mark.yang@lge.com>
-In-Reply-To: <20250401100832.1477718-1-mark.yang@lge.com>
+References: <20250401115003.1886649-1-mark.yang@lge.com>
+In-Reply-To: <20250401115003.1886649-1-mark.yang@lge.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 1 Apr 2025 07:24:33 -0700
-X-Gm-Features: AQ5f1JqV5WtaasxfuouJORfo1kVLg0MyUxSNZe97BusRkEbxmG-ea6tHzV211L8
-Message-ID: <CAMKF1srQ84kH=VtadJdfgFUdNzB9SRM5ieytVeY7Ye8Y2n8iLA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] mcpp: Stick to C17
+Date: Tue, 1 Apr 2025 07:25:18 -0700
+X-Gm-Features: AQ5f1Jpeob-X_SWLf6jT1MvvGAU7OZFoFCKKHyN5yPPiObInUSu04IZBkqabbhI
+Message-ID: <CAMKF1sr9c7OM89OZhPz6-_dgLF7najz6WBvoKWWfQSgsoJ_oiA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] xmlrpc-c: Stick to C17
 To: mark.yang@lge.com
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
@@ -62,49 +62,73 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 14:25:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116478
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 14:25:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116479
 
-On Tue, Apr 1, 2025 at 3:08=E2=80=AFAM mark.yang via lists.openembedded.org
+On Tue, Apr 1, 2025 at 4:50=E2=80=AFAM mark.yang via lists.openembedded.org
 <mark.yang=3Dlge.com@lists.openembedded.org> wrote:
 >
 > From: "mark.yang" <mark.yang@lge.com>
 >
-> * Fix build error with gcc-15 by renaming goto labels
->   see more details:
->   http://errors.yoctoproject.org/Errors/Details/850149/
->   ../../mcpp-2.7.2/src/system.c:3436:15: error: expected identifier or '*=
-' before 'true'
+> * Fix build error with gcc-15.0.1
+>   http://errors.yoctoproject.org/Errors/Details/850147/
+>     srcdir/lib/util/include/bool.h:13:5: error: cannot use keyword 'false=
+' as enumeration constant
+>     13 |     false =3D 0,
+>         |     ^~~~~
+>     srcdir/lib/util/include/bool.h:13:5: note: 'false' is a keyword with =
+'-std=3Dc23' onwards
+>     srcdir/lib/util/include/bool.h:15:3: error: expected ';', identifier =
+or '(' before 'bool'
+>     15 | } bool;
+>         |   ^~~~
+>     srcdir/lib/util/include/bool.h:15:3: warning: useless type name in em=
+pty declaration
+>     In file included from sleep.c:2:
+>     srcdir/lib/util/include/bool.h:13:5: error: cannot use keyword 'false=
+' as enumeration constant
+>     13 |     false =3D 0,
+>         |     ^~~~~
+>     srcdir/lib/util/include/bool.h:13:5: note: 'false' is a keyword with =
+'-std=3Dc23' onwards
+>     srcdir/lib/util/include/bool.h:15:3: error: expected ';', identifier =
+or '(' before 'bool'
+>     15 | } bool;
+>         |   ^~~~
 >
->   true, false are reserved keywords in gcc-15
->   Rename goto 'labels' from 'ture' to 'true_label', from 'false' 'false_l=
-abel' to avoid conflicts.
+>     In C23, bool, true, and false are added as reserved keywords, causing=
+ build errors.
+>     However, modifying the source code just for this would be risky, so w=
+e set the C standard to C17.
+>
 
-It might be worth using true/false conditionally e.g. see
+See if something like this
+
 https://git.openembedded.org/openembedded-core/tree/meta/recipes-devtools/e=
 2fsprogs/e2fsprogs/0001-libext2fs-fix-std-c23-build-failure.patch
 
->
+Can be adopted.
+
 > Signed-off-by: mark.yang <mark.yang@lge.com>
 > ---
->  meta-oe/recipes-devtools/mcpp/mcpp_2.7.2.bb | 4 ++++
->  1 file changed, 4 insertions(+)
+>  meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.64.0.bb | 5 +++++
+>  1 file changed, 5 insertions(+)
 >
-> diff --git a/meta-oe/recipes-devtools/mcpp/mcpp_2.7.2.bb b/meta-oe/recipe=
-s-devtools/mcpp/mcpp_2.7.2.bb
-> index 0c1815732f..dfa77770a7 100644
-> --- a/meta-oe/recipes-devtools/mcpp/mcpp_2.7.2.bb
-> +++ b/meta-oe/recipes-devtools/mcpp/mcpp_2.7.2.bb
-> @@ -21,3 +21,7 @@ BBCLASSEXTEND =3D "native nativesdk"
->  # http://errors.yoctoproject.org/Errors/Details/766883/
->  # mcpp-2.7.2/src/expand.c:713:21: error: assignment to 'char *' from inc=
-ompatible pointer type 'LOCATION *' {aka 'struct location *'} [-Wincompatib=
-le-pointer-types]
->  CFLAGS +=3D "-Wno-error=3Dincompatible-pointer-types"
+> diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.64.0.bb b/meta-=
+oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.64.0.bb
+> index 62ba0f53e6..cca745cd51 100644
+> --- a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.64.0.bb
+> +++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.64.0.bb
+> @@ -46,3 +46,8 @@ do_install:append:class-target() {
+>  BBCLASSEXTEND =3D "native"
+>
+>  CLEANBROKEN =3D "1"
 > +
-> +# http://errors.yoctoproject.org/Errors/Details/850149/
-> +# ../../mcpp-2.7.2/src/system.c:3436:15: error: expected identifier or '=
-*' before 'true'
+> +# http://errors.yoctoproject.org/Errors/Details/850147/
+> +# srcdir/lib/util/include/bool.h:13:5: note: 'false' is a keyword with '=
+-std=3Dc23' onwards
+> +# srcdir/lib/util/include/bool.h:15:3: error: expected ';', identifier o=
+r '(' before 'bool'
 > +CFLAGS +=3D "-std=3Dgnu17"
 > --
 > 2.34.1
@@ -112,9 +136,9 @@ le-pointer-types]
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#116470): https://lists.openembedded.org/g/openembedde=
-d-devel/message/116470
-> Mute This Topic: https://lists.openembedded.org/mt/112022139/1997914
+> View/Reply Online (#116474): https://lists.openembedded.org/g/openembedde=
+d-devel/message/116474
+> Mute This Topic: https://lists.openembedded.org/mt/112023126/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
