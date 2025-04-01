@@ -1,87 +1,81 @@
-Return-Path: <Yogita.Urade@windriver.com>
+Return-Path: <mark.yang@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 25B33C36010
-	for <webhook@archiver.kernel.org>; Tue,  1 Apr 2025 11:39:02 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.16631.1743507537216008868
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3CDBCC36010
+	for <webhook@archiver.kernel.org>; Tue,  1 Apr 2025 11:50:12 +0000 (UTC)
+Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.52])
+ by mx.groups.io with SMTP id smtpd.web10.16786.1743508207575619022
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Apr 2025 04:38:57 -0700
+ Tue, 01 Apr 2025 04:50:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=618698420d=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5319I7r8000456
-	for <openembedded-devel@lists.openembedded.org>; Tue, 1 Apr 2025 04:38:56 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45pgckavke-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 04:38:56 -0700 (PDT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Tue, 1 Apr 2025 04:38:54 -0700
-From: yurade <yogita.urade@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][scarthgap][PATCH 1/1] mbedtls: upgrade 2.28.9 -> 2.28.10
-Date: Tue, 1 Apr 2025 11:38:33 +0000
-Message-ID: <20250401113834.2912505-1-yogita.urade@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.52, mailfrom: mark.yang@lge.com)
+Received: from unknown (HELO lgeamrelo02.lge.com) (156.147.1.126)
+	by 156.147.23.52 with ESMTP; 1 Apr 2025 20:50:05 +0900
+X-Original-SENDERIP: 156.147.1.126
+X-Original-MAILFROM: mark.yang@lge.com
+Received: from unknown (HELO markyang..) (10.177.121.109)
+	by 156.147.1.126 with ESMTP; 1 Apr 2025 20:50:04 +0900
+X-Original-SENDERIP: 10.177.121.109
+X-Original-MAILFROM: mark.yang@lge.com
+From: mark.yang@lge.com
+To: openembedded-devel@lists.openembedded.org
+Cc: "mark.yang" <mark.yang@lge.com>
+Subject: [meta-oe][PATCH] xmlrpc-c: Stick to C17
+Date: Tue,  1 Apr 2025 20:50:03 +0900
+Message-Id: <20250401115003.1886649-1-mark.yang@lge.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: UcsI5vg1JUdpNzEGIqqkxKbXX-RqO9OC
-X-Authority-Analysis: v=2.4 cv=Paz/hjhd c=1 sm=1 tr=0 ts=67ebd050 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=XR8D0OoHHMoA:10 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8 a=wsF4P0GsgdUK_7hJ87YA:9
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: UcsI5vg1JUdpNzEGIqqkxKbXX-RqO9OC
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-01_04,2025-03-27_02,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=999
- suspectscore=0 impostorscore=0 phishscore=0 spamscore=0 malwarescore=0
- clxscore=1015 lowpriorityscore=0 priorityscore=1501 mlxscore=0
- adultscore=0 bulkscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
- definitions=main-2504010073
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 11:39:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116472
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 11:50:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116474
 
-From: Yi Zhao <yi.zhao@windriver.com>
+From: "mark.yang" <mark.yang@lge.com>
 
-ChangeLog
-https://github.com/Mbed-TLS/mbedtls/releases/tag/mbedtls-2.28.10
+* Fix build error with gcc-15.0.1
+  http://errors.yoctoproject.org/Errors/Details/850147/
+    srcdir/lib/util/include/bool.h:13:5: error: cannot use keyword 'false' as enumeration constant
+    13 |     false = 0,
+        |     ^~~~~
+    srcdir/lib/util/include/bool.h:13:5: note: 'false' is a keyword with '-std=c23' onwards
+    srcdir/lib/util/include/bool.h:15:3: error: expected ';', identifier or '(' before 'bool'
+    15 | } bool;
+        |   ^~~~
+    srcdir/lib/util/include/bool.h:15:3: warning: useless type name in empty declaration
+    In file included from sleep.c:2:
+    srcdir/lib/util/include/bool.h:13:5: error: cannot use keyword 'false' as enumeration constant
+    13 |     false = 0,
+        |     ^~~~~
+    srcdir/lib/util/include/bool.h:13:5: note: 'false' is a keyword with '-std=c23' onwards
+    srcdir/lib/util/include/bool.h:15:3: error: expected ';', identifier or '(' before 'bool'
+    15 | } bool;
+        |   ^~~~
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+    In C23, bool, true, and false are added as reserved keywords, causing build errors.
+    However, modifying the source code just for this would be risky, so we set the C standard to C17.
+
+Signed-off-by: mark.yang <mark.yang@lge.com>
 ---
- .../mbedtls/{mbedtls_2.28.9.bb => mbedtls_2.28.10.bb}           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_2.28.9.bb => mbedtls_2.28.10.bb} (98%)
+ meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.64.0.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.9.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb
-similarity index 98%
-rename from meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.9.bb
-rename to meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb
-index da984a3990..610fd0af5e 100644
---- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.9.bb
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb
-@@ -23,7 +23,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=379d5819937a6c2f1ef1630d341e026d"
- SECTION = "libs"
+diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.64.0.bb b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.64.0.bb
+index 62ba0f53e6..cca745cd51 100644
+--- a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.64.0.bb
++++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.64.0.bb
+@@ -46,3 +46,8 @@ do_install:append:class-target() {
+ BBCLASSEXTEND = "native"
  
- S = "${WORKDIR}/git"
--SRCREV = "5e146adef63b326b04282252639bebc2730939c6"
-+SRCREV = "2fc8413bfcb51354c8e679141b17b3f1a5942561"
- SRC_URI = "git://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=mbedtls-2.28 \
-            file://run-ptest \
-           "
+ CLEANBROKEN = "1"
++
++# http://errors.yoctoproject.org/Errors/Details/850147/
++# srcdir/lib/util/include/bool.h:13:5: note: 'false' is a keyword with '-std=c23' onwards
++# srcdir/lib/util/include/bool.h:15:3: error: expected ';', identifier or '(' before 'bool'
++CFLAGS += "-std=gnu17"
 -- 
-2.40.0
+2.34.1
 
 
