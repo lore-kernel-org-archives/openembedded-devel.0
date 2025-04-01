@@ -1,135 +1,101 @@
-Return-Path: <mark.yang@lge.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B0031C36014
-	for <webhook@archiver.kernel.org>; Tue,  1 Apr 2025 10:53:11 +0000 (UTC)
-Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.51])
- by mx.groups.io with SMTP id smtpd.web11.15948.1743504783708713018
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 304A1C36014
+	for <webhook@archiver.kernel.org>; Tue,  1 Apr 2025 11:39:02 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.16632.1743507539130491468
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Apr 2025 03:53:04 -0700
+ Tue, 01 Apr 2025 04:38:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.51, mailfrom: mark.yang@lge.com)
-Received: from unknown (HELO lgemrelse7q.lge.com) (156.147.1.151)
-	by 156.147.23.51 with ESMTP; 1 Apr 2025 19:53:01 +0900
-X-Original-SENDERIP: 156.147.1.151
-X-Original-MAILFROM: mark.yang@lge.com
-Received: from unknown (HELO markyang..) (10.177.121.109)
-	by 156.147.1.151 with ESMTP; 1 Apr 2025 19:53:01 +0900
-X-Original-SENDERIP: 10.177.121.109
-X-Original-MAILFROM: mark.yang@lge.com
-From: mark.yang@lge.com
-To: openembedded-devel@lists.openembedded.org
-Cc: "mark.yang" <mark.yang@lge.com>
-Subject: [meta-oe][PATCH] sqlite-orm: fix build with gcc-15.0.1
-Date: Tue,  1 Apr 2025 19:52:58 +0900
-Message-Id: <20250401105258.1631515-1-mark.yang@lge.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=618698420d=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5313vrv4013913
+	for <openembedded-devel@lists.openembedded.org>; Tue, 1 Apr 2025 04:38:58 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45pgckavkh-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 04:38:58 -0700 (PDT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Tue, 1 Apr 2025 04:38:56 -0700
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][scarthgap][PATCH 1/1] mbedtls: 3.6.2 -> 3.6.3
+Date: Tue, 1 Apr 2025 11:38:34 +0000
+Message-ID: <20250401113834.2912505-2-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.40.0
+In-Reply-To: <20250401113834.2912505-1-yogita.urade@windriver.com>
+References: <20250401113834.2912505-1-yogita.urade@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: 2uay91P0SR9U3QPC23K1N3_QF210v3fO
+X-Authority-Analysis: v=2.4 cv=Paz/hjhd c=1 sm=1 tr=0 ts=67ebd052 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=XR8D0OoHHMoA:10 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8 a=TBqNoLu6pQ733rAlwCcA:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: 2uay91P0SR9U3QPC23K1N3_QF210v3fO
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-04-01_04,2025-03-27_02,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=999
+ suspectscore=0 impostorscore=0 phishscore=0 spamscore=0 malwarescore=0
+ clxscore=1011 lowpriorityscore=0 priorityscore=1501 mlxscore=0
+ adultscore=0 bulkscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
+ definitions=main-2504010073
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 10:53:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116471
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 11:39:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116473
 
-From: "mark.yang" <mark.yang@lge.com>
+From: Yi Zhao <yi.zhao@windriver.com>
 
-* see more details:
-  http://errors.yoctoproject.org/Errors/Details/850148/
-    TOPDIR/tmp/work/core2-64-oe-linux/sqlite-orm/1.5/git/examples/synchronous.cpp:7:5: error: 'uint16_t' does not name a type
-        7 |     uint16_t src_port;
-        |     ^~~~~~~~
-    TOPDIR/tmp/work/core2-64-oe-linux/sqlite-orm/1.5/git/examples/synchronous.cpp:3:1: note: 'uint16_t' is defined in header '<cstdint>'; this is probably fixable by adding '#include <cstdint>'
-        2 | #include <sqlite_orm/sqlite_orm.h>
-    +++ |+#include <cstdint>
-        3 | #include <string>
+ChangeLog:
+https://github.com/Mbed-TLS/mbedtls/releases/tag/mbedtls-3.6.3
 
-While this was backported from 6a96d1cec4(Explicitly included <cstdint> in examples and unit tests),
-since it was a commit made in v1.9, only synchronous.cpp was modified as other files do not exist in the current version.
+Remove mbedtls-framework repository, as the framework is now added
+as a flat directory rather than a submodule[1][2].
 
-Signed-off-by: mark.yang <mark.yang@lge.com>
+[1] https://github.com/Mbed-TLS/mbedtls/commit/b41194ce7f2fda63bf5959588631eba73c5c621e
+[2] https://github.com/Mbed-TLS/mbedtls/commit/2c824b4fe5dab7e1526560be203bf705857e372a
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 ---
- ...01-fix-cstdint-error-with-gcc-15.0.1.patch | 52 +++++++++++++++++++
- .../sqlite-orm/sqlite-orm_1.5.bb              |  5 +-
- 2 files changed, 56 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/sqlite-orm/sqlite-orm/0001-fix-cstdint-error-with-gcc-15.0.1.patch
+ .../mbedtls/{mbedtls_3.6.2.bb => mbedtls_3.6.3.bb}         | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+ rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_3.6.2.bb => mbedtls_3.6.3.bb} (91%)
 
-diff --git a/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm/0001-fix-cstdint-error-with-gcc-15.0.1.patch b/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm/0001-fix-cstdint-error-with-gcc-15.0.1.patch
-new file mode 100644
-index 0000000000..af884808f2
---- /dev/null
-+++ b/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm/0001-fix-cstdint-error-with-gcc-15.0.1.patch
-@@ -0,0 +1,52 @@
-+From f011501e719e0042fc6ca29ac7b33e8a14562246 Mon Sep 17 00:00:00 2001
-+From: "mark.yang" <mark.yang@lge.com>
-+Date: Tue, 1 Apr 2025 19:45:01 +0900
-+Subject: [PATCH] fix cstdint error with gcc-15.0.1
-+
-+* see more details:
-+  http://errors.yoctoproject.org/Errors/Details/850148/
-+    TOPDIR/tmp/work/core2-64-oe-linux/sqlite-orm/1.5/git/examples/synchronous.cpp:7:5: error: 'uint16_t' does not name a type
-+        7 |     uint16_t src_port;
-+        |     ^~~~~~~~
-+    TOPDIR/tmp/work/core2-64-oe-linux/sqlite-orm/1.5/git/examples/synchronous.cpp:3:1: note: 'uint16_t' is defined in header '<cstdint>'; this is probably fixable by adding '#include <cstdint>'
-+        2 | #include <sqlite_orm/sqlite_orm.h>
-+    +++ |+#include <cstdint>
-+        3 | #include <string>
-+
-+While this was backported from 6a96d1cec4(Explicitly included <cstdint> in examples and unit tests),
-+since it was a commit made in v1.9, only synchronous.cpp was modified as other files do not exist in the current version.
-+
-+Signed-off-by: mark.yang <mark.yang@lge.com>
-+
-+Upstream-Status: Backport [6a96d1c Explicitly included <cstdint> in examples and unit tests]
-+---
-+ examples/synchronous.cpp | 11 ++++++-----
-+ 1 file changed, 6 insertions(+), 5 deletions(-)
-+
-+diff --git a/examples/synchronous.cpp b/examples/synchronous.cpp
-+index d10da13d..b103b48c 100644
-+--- a/examples/synchronous.cpp
-++++ b/examples/synchronous.cpp
-+@@ -1,15 +1,16 @@
-+ 
-+ #include <sqlite_orm/sqlite_orm.h>
-++#include <cstdint>
-+ #include <string>
-+ 
-+ struct Query {
-+     std::string src_ip;
-+-    uint16_t src_port;
-+-    uint16_t txn_id;
-+-    uint32_t tv_sec;
-+-    uint32_t tv_usec;
-++    std::uint16_t src_port;
-++    std::uint16_t txn_id;
-++    std::uint32_t tv_sec;
-++    std::uint32_t tv_usec;
-+     std::string name;
-+-    uint16_t type;
-++    std::uint16_t type;
-+ };
-+ 
-+ int main(int, char **) {
-+
-diff --git a/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.5.bb b/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.5.bb
-index db90bc589e..17c24d5abf 100644
---- a/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.5.bb
-+++ b/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.5.bb
-@@ -8,7 +8,10 @@ inherit cmake
- DEPENDS += "sqlite3"
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.2.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.3.bb
+similarity index 91%
+rename from meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.2.bb
+rename to meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.3.bb
+index 63c0bbfaa5..286d5c45f9 100644
+--- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.2.bb
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.3.bb
+@@ -24,12 +24,9 @@ SECTION = "libs"
  
- SRCREV = "e8a9e9416f421303f4b8970caab26dadf8bae98b"
--SRC_URI = "git://github.com/fnc12/sqlite_orm;protocol=https;branch=master"
-+SRC_URI = " \
-+    git://github.com/fnc12/sqlite_orm;protocol=https;branch=master \
-+    file://0001-fix-cstdint-error-with-gcc-15.0.1.patch \
-+"
  S = "${WORKDIR}/git"
+ SRC_URI = "git://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=mbedtls-3.6 \
+-	git://github.com/Mbed-TLS/mbedtls-framework.git;protocol=https;branch=main;destsuffix=git/framework;name=framework \
+-	file://run-ptest"
++           file://run-ptest"
  
- EXTRA_OECMAKE += "-DSqliteOrm_BuildTests=OFF -DLIB_INSTALL_DIR=${libdir} \
+-SRCREV = "107ea89daaefb9867ea9121002fbbdf926780e98"
+-SRCREV_framework = "94599c0e3b5036e086446a51a3f79640f70f22f6"
+-SRCREV_FORMAT .= "_framework"
++SRCREV = "22098d41c6620ce07cf8a0134d37302355e1e5ef"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ 
 -- 
-2.34.1
+2.40.0
 
 
