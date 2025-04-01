@@ -2,37 +2,36 @@ Return-Path: <mark.yang@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 37706C36018
-	for <webhook@archiver.kernel.org>; Tue,  1 Apr 2025 09:19:21 +0000 (UTC)
-Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.52])
- by mx.groups.io with SMTP id smtpd.web11.14718.1743499151150082561
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42556C36018
+	for <webhook@archiver.kernel.org>; Tue,  1 Apr 2025 09:33:01 +0000 (UTC)
+Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.51])
+ by mx.groups.io with SMTP id smtpd.web11.14876.1743499979400613105
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Apr 2025 02:19:12 -0700
+ Tue, 01 Apr 2025 02:32:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.52, mailfrom: mark.yang@lge.com)
-Received: from unknown (HELO lgeamrelo02.lge.com) (156.147.1.126)
-	by 156.147.23.52 with ESMTP; 1 Apr 2025 18:19:08 +0900
-X-Original-SENDERIP: 156.147.1.126
+ dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.51, mailfrom: mark.yang@lge.com)
+Received: from unknown (HELO lgeamrelo01.lge.com) (156.147.1.125)
+	by 156.147.23.51 with ESMTP; 1 Apr 2025 18:32:57 +0900
+X-Original-SENDERIP: 156.147.1.125
 X-Original-MAILFROM: mark.yang@lge.com
 Received: from unknown (HELO markyang..) (10.177.121.109)
-	by 156.147.1.126 with ESMTP; 1 Apr 2025 18:19:08 +0900
+	by 156.147.1.125 with ESMTP; 1 Apr 2025 18:32:57 +0900
 X-Original-SENDERIP: 10.177.121.109
 X-Original-MAILFROM: mark.yang@lge.com
 From: mark.yang@lge.com
 To: openembedded-devel@lists.openembedded.org
 Cc: "mark.yang" <mark.yang@lge.com>
 Subject: [meta-oe][PATCH] libmcrypt: fix build with gcc-15.0.1
-Date: Tue,  1 Apr 2025 18:19:07 +0900
-Message-Id: <20250401091907.1284320-1-mark.yang@lge.com>
+Date: Tue,  1 Apr 2025 18:32:48 +0900
+Message-Id: <20250401093248.1363822-1-mark.yang@lge.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 09:19:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116467
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 09:33:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116468
 
 From: "mark.yang" <mark.yang@lge.com>
 
@@ -70,18 +69,18 @@ From: "mark.yang" <mark.yang@lge.com>
 
 Signed-off-by: mark.yang <mark.yang@lge.com>
 ---
- ...lated-unexpected-error-in-gcc-15.0.1.patch | 122 ++++++++++++++++++
+ ...lated-unexpected-error-in-gcc-15.0.1.patch | 119 ++++++++++++++++++
  .../libmcrypt/libmcrypt_2.5.8.bb              |   5 +-
- 2 files changed, 126 insertions(+), 1 deletion(-)
+ 2 files changed, 123 insertions(+), 1 deletion(-)
  create mode 100644 meta-oe/recipes-crypto/libmcrypt/libmcrypt/0001-fix-parameter-related-unexpected-error-in-gcc-15.0.1.patch
 
 diff --git a/meta-oe/recipes-crypto/libmcrypt/libmcrypt/0001-fix-parameter-related-unexpected-error-in-gcc-15.0.1.patch b/meta-oe/recipes-crypto/libmcrypt/libmcrypt/0001-fix-parameter-related-unexpected-error-in-gcc-15.0.1.patch
 new file mode 100644
-index 0000000000..875d7fd76a
+index 0000000000..5e2afbab9d
 --- /dev/null
 +++ b/meta-oe/recipes-crypto/libmcrypt/libmcrypt/0001-fix-parameter-related-unexpected-error-in-gcc-15.0.1.patch
-@@ -0,0 +1,122 @@
-+From f107797cd8bfbc30716e2f6eac720d067e01b03d Mon Sep 17 00:00:00 2001
+@@ -0,0 +1,119 @@
++From 046d1474a9a367d4b7772233e026855f1b55d58c Mon Sep 17 00:00:00 2001
 +From: "mark.yang" <mark.yang@lge.com>
 +Date: Tue, 1 Apr 2025 17:58:49 +0900
 +Subject: [PATCH] fix parameter-related unexpected error in gcc 15.0.1
@@ -125,8 +124,8 @@ index 0000000000..875d7fd76a
 + modules/algorithms/des.c       | 5 -----
 + modules/algorithms/des.h       | 6 ++++++
 + modules/algorithms/tripledes.c | 8 ++------
-+ modules/algorithms/tripledes.h | 7 +++++++
-+ 4 files changed, 15 insertions(+), 11 deletions(-)
++ modules/algorithms/tripledes.h | 5 +++++
++ 4 files changed, 13 insertions(+), 11 deletions(-)
 +
 +diff --git a/modules/algorithms/des.c b/modules/algorithms/des.c
 +index 5810811..695e740 100644
@@ -185,21 +184,18 @@ index 0000000000..875d7fd76a
 + 
 + 	return 0;
 +diff --git a/modules/algorithms/tripledes.h b/modules/algorithms/tripledes.h
-+index dec7682..16c9415 100644
++index dec7682..10c7bc6 100644
 +--- a/modules/algorithms/tripledes.h
 ++++ b/modules/algorithms/tripledes.h
-+@@ -7,3 +7,10 @@ typedef struct triple_des_key {
++@@ -7,3 +7,8 @@ typedef struct triple_des_key {
 + 
 + } TRIPLEDES_KEY;
 + 
-++/* word32 타입 정의 추가 */
-++typedef unsigned int word32;
-++
 ++static void permute(char *inblock, char perm[16][16][8], char *outblock);
 ++static void perminit(char perm[16][16][8], char p[64]);
 ++static void spinit(TRIPLEDES_KEY * key, int pos);
 ++static word32 f(TRIPLEDES_KEY * key, int pos, register word32 r, register char *subkey);
-+\ No newline at end of file
+++
 +-- 
 +2.34.1
 +
