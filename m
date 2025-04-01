@@ -2,95 +2,98 @@ Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FE23C36010
-	for <webhook@archiver.kernel.org>; Tue,  1 Apr 2025 18:57:55 +0000 (UTC)
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.web10.1819.1743533873491508118
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F253AC36010
+	for <webhook@archiver.kernel.org>; Tue,  1 Apr 2025 18:58:04 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.web11.1850.1743533878336464707
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Apr 2025 11:57:53 -0700
+ Tue, 01 Apr 2025 11:57:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kBDe6YPB;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-43cf848528aso51244535e9.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 11:57:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZZv3Rqks;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: jan.vermaete@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-43cfb6e9031so53281285e9.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 11:57:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1743533872; x=1744138672; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=2dSINLomAAG8U19uAw3i4/QnaVkQWN3EscZ9R9JFItY=;
-        b=kBDe6YPBiQhEOX/08CJuSIOB45/iyTX/ZA5eeYTQyJoDyikeMwi4sKp34WdJHxiUBX
-         Eg7ltKXRKylGE8R/qAL76SbqkeFgZgXKQnGafd5LfXBzyWpaEcBIriGnHZ9iPldp54lB
-         Fpq+t50WXaeH8IrITilkUw76NDdvo7QfdIrJrq82ZXO2fVu/Qar/eyUyST6XdUgpUSbg
-         bfEFq7Ldb2lY2AAjP02Z6kMtoa15ki5uiyzVfpw7HqFY0QJPrC1uXXr1pYQKuIFsGg2/
-         nS6UijmIXD+NT+bFrQeyaXncnFr3HK/68pGU7zVSbmLQQBikAwF+nYHPJ/nwnKBCTR1n
-         S0Gw==
+        d=gmail.com; s=20230601; t=1743533876; x=1744138676; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Vri2qsZMhb2QDhDgX5XjwuQ8HAgmfYb+IrWR8fqhGyg=;
+        b=ZZv3RqksVA+F75Tcn936q6b/fkz3j0DAGUzdV2VQ5lB2mE81YtlaCvm8s/6A986M8B
+         sF7TMGQeTIhRfohWfi/Tpbqs2n3fjd3ZvrqBjWJYU3XDT+WhszGpQ1jqyfUOvFp2cKd5
+         iKA34v2xPQKUfEh4UpV2tGWJ1ROALgmoVIQsklZHwYgHx67SHCBkyfzSFXyM2B0R3XYc
+         26do+nRyAIayJWAJNujM/Ut1S2gl7dmsasYvM4fUUOSHDVOCBQxpfhdS64zvHYOFDP/I
+         W1itdrsh+CTZ75RjEleOIg1uK8o3jjN5PYXcZOo0wqUZLzUW9K0FXAb0mu3R5ot9VLX+
+         Jxmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743533872; x=1744138672;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=2dSINLomAAG8U19uAw3i4/QnaVkQWN3EscZ9R9JFItY=;
-        b=XWb0naBk07KtJI7W0baDSceuXGUzwd77sKq1nKI4HHUEZ1kEtOlap70IstGDJVq5B+
-         daW2At8+Ay3ecdHUC9O2t9aKenQfghKV8SK5hHjcv8CP+YHmTEwB2s4gwLMnBvUDupqa
-         IDFnWcmizfu22PmrZXQHPxqIfBqcMH9TZhQXGDWw80Ityx2Oc5VHb60drBpX5sBal4hE
-         IDlumZd5HKtvOEynWpoXGGUcYCQAzl42Ji5VVHqlB1LNMHVxtlIZK2J/wrQRuuXgps8H
-         oJ1kZHNPEhyMHVHYIaB4Q263GRQzRZ+huYB+uEbWS+aYbP60fwdPdit2dF32waq/241p
-         UF/Q==
-X-Gm-Message-State: AOJu0Yx6ibUDl6En3EBfWT7cq/RqpjM0/9tu2AFGtixtCpV3/Gla0KiS
-	3Egx7TmYWxmcbkRVlugVVqtAqfhxV6KOC4PW3V9UOe2HV7O3bnlcW0gxQA==
-X-Gm-Gg: ASbGncuU9uRNEgjGmud8dRCya0ie+EBaUxcvy3RJOrGs85RJ37OVIA8b8Tb1NR9sc9j
-	54INqxTTtDEcqHyNWOtcnp4/ta4hTj2N78VDHjq91jnRGH69yQ1oVWGt/OIavzp4bmJQIvwsL5O
-	a9nWRMRycprffs4Zrtct2jsan98ga0BgM6kv6URr+mFuHS/odCBrOynQbtHz7lFHJRVF9E8/dR6
-	/gz0NYlCBUY6pfVQrWPRmStd8zzP9v2e+tQdnn8ES3ZRaUyEISYV2hJsnvgb7wlL0pQxFULAiYX
-	3wHVDXok6lj3bF7RiftxiJV5yUWqs82Qb6VHi7HqALGmgqSVe5coVFjCj3aitekKvUU0lUcqSoo
-	K9wp5Lv3hv2A6OPk5iV0E5CXpVtbSDF36g9NCm9aNkOQc65t29ns=
-X-Google-Smtp-Source: AGHT+IHEukdlcidqNGZrwWC2PlJ4v7SJzBOoBey/VIabyzPbnJqEG0IJ5++k6MFcsEmqHJxVkPTJww==
-X-Received: by 2002:a05:600c:3d06:b0:43c:f184:2e16 with SMTP id 5b1f17b1804b1-43eaa03e0b9mr34392165e9.5.1743533871399;
-        Tue, 01 Apr 2025 11:57:51 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1743533876; x=1744138676;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Vri2qsZMhb2QDhDgX5XjwuQ8HAgmfYb+IrWR8fqhGyg=;
+        b=IOw/vBWUcd8vxVEoC+QojBT4Ya/nR4wFPp5/97C4qRslJb0mr76mUG8OdDs06e2L5d
+         WsyOCrWTICnAU26N8C7HtQ7MAW9XNYUNR0E1GX3mMhtjV1+qv7Az9RCq2AcWkDzYr6LC
+         M1NECtearf4+mtul4X1onI/oMX/UvQuEn79wz7BETYaQT0k+FNS2HXBrVf8QwRMOJmaa
+         t9lMbFvOOYppbRtqZLv7LQyMksImUWKmG4Z+RN+HkPVJIVxkdASW0/o5StddHrjVO8GC
+         pKcvRocnjQ2PZ471zsbWPNq5wCZwZMZpru/6MK3jwHm1VDhaaWPLLRJ+xnhMF9UiPlsM
+         SyWQ==
+X-Gm-Message-State: AOJu0YzIjTSvEeV7acT5ZgZcRpjQaqDZbeb2Gm+I9Nj1JVFn1ZZudT2u
+	SlDxxgj5qH1PC+8qTRTPxpxuhjA3rgh01goh2lvvb9nQ6+owvr6BGuzYPA==
+X-Gm-Gg: ASbGncvB90MPt92M0GoMk+7GJTiPa0YrE03QUoEE1qPENfdz0raoRAkvT8lwyCQtI66
+	kQNAG0pKDgyyO7Y7smLITpXDTFr/YS2vtkWlZeW65z9PkPY9y69gMxUBnBDeW/fuaQ18wRvbcI4
+	ntWvSihHz7z7LmiyVhc6SsMXUC7uzm81ZfJayhJvIsHD3n0m02BiJRbDyYQxToBOLTtehsML/CO
+	fdv54oDyI0rWJnTrtODsso/wjX9mxn7lB3M9s0cGYO+UjaTq33i/+fi98jjRy55IdfVc6k6VuYF
+	JCVH5Bv5cm8IhAn7+7FuJkqmuonGs/4BQ1FO35BDjmU9z2JnsI9zg6gKRX8G2qOmBGraqW0C+sq
+	M/obAyR+B2XfJHxCfwPStI0VyVs5cBdTuJ/lbKUJgqo8GmHNmg1xSM9UpwMXj+w==
+X-Google-Smtp-Source: AGHT+IGg+3OTAsbzHB4leotkDBWDyOAr+nNGAqGhWbzLJYlR1GyKBV6gIDENtl1aWwTT4q+K6maYZA==
+X-Received: by 2002:a05:6000:4203:b0:391:2c0c:1247 with SMTP id ffacd0b85a97d-39c120cbaf2mr11221450f8f.1.1743533876392;
+        Tue, 01 Apr 2025 11:57:56 -0700 (PDT)
 Received: from localhost.localdomain (ptr-fij45qxtdobqrxrcewr.18120a2.ip6.access.telenet.be. [2a02:1812:512:2c00:6021:e9a4:5aa0:257b])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-39c0b7a4351sm15101202f8f.98.2025.04.01.11.57.50
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-39c0b7a4351sm15101202f8f.98.2025.04.01.11.57.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Apr 2025 11:57:51 -0700 (PDT)
+        Tue, 01 Apr 2025 11:57:56 -0700 (PDT)
 From: Jan Vermaete <jan.vermaete@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-python][PATCH 1/4] python3-mdurl: new recipe version 0.1.2
-Date: Tue,  1 Apr 2025 20:57:15 +0200
-Message-Id: <20250401185718.2447415-1-jan.vermaete@gmail.com>
+Subject: [meta-python][PATCH 2/4] python3-markdown-it-py: new recipe version 3.0.0
+Date: Tue,  1 Apr 2025 20:57:16 +0200
+Message-Id: <20250401185718.2447415-2-jan.vermaete@gmail.com>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250401185718.2447415-1-jan.vermaete@gmail.com>
+References: <20250401185718.2447415-1-jan.vermaete@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 18:57:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116484
-
-* no tests are distributed in the pypi package
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 18:58:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116485
 
 Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
 ---
- .../recipes-devtools/python/python3-mdurl_0.1.2.bb  | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-mdurl_0.1.2.bb
+ .../python/python3-markdown-it-py_3.0.0.bb        | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-markdown-it-py_3.0.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-mdurl_0.1.2.bb b/meta-python/recipes-devtools/python/python3-mdurl_0.1.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-markdown-it-py_3.0.0.bb b/meta-python/recipes-devtools/python/python3-markdown-it-py_3.0.0.bb
 new file mode 100644
-index 0000000000..cc110784e3
+index 0000000000..c87bc04b0f
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-mdurl_0.1.2.bb
-@@ -0,0 +1,13 @@
-+SUMMARY = "Markdown URL utilities"
-+DESCRIPTION = "This is a Python port of the JavaScript mdurl package."
-+HOMEPAGE = "https://github.com/executablebooks/mdurl"
++++ b/meta-python/recipes-devtools/python/python3-markdown-it-py_3.0.0.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "Python port of markdown-it. Markdown parsing, done right!"
++DESCRIPTION = "Markdown parser, done right. 100% CommonMark support, extensions, syntax plugins & high speed. "
++HOMEPAGE = "https://github.com/executablebooks/markdown-it-py"
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=aca1dc6b9088f1dda81c89cad2c77ad1"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=a38a1697260a7ad7bf29f44b362db1fc"
 +
-+SRC_URI[sha256sum] = "bb413d29f5eea38f31dd4754dd7377d4465116fb207585f97bf925588687c1ba"
++SRC_URI[sha256sum] = "e3f60a94fa066dc52ec76661e37c851cb232d92f9886b15cb560aaada2df8feb"
 +
 +inherit pypi python_flit_core
 +
-+PYPI_PACKAGE = "mdurl"
++RDEPENDS:${PN} =+ "python3-mdurl"
++
++PYPI_PACKAGE = "markdown-it-py"
 +
 +BBCLASSEXTEND = "native nativesdk"
 -- 
