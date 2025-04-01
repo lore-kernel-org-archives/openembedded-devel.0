@@ -1,96 +1,148 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <mark.yang@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 85D9DC36008
-	for <webhook@archiver.kernel.org>; Tue,  1 Apr 2025 06:55:50 +0000 (UTC)
-Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
- by mx.groups.io with SMTP id smtpd.web10.13238.1743490544627370098
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 86EB8C36008
+	for <webhook@archiver.kernel.org>; Tue,  1 Apr 2025 07:18:30 +0000 (UTC)
+Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.53])
+ by mx.groups.io with SMTP id smtpd.web10.13487.1743491905507066878
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 31 Mar 2025 23:55:44 -0700
+ Tue, 01 Apr 2025 00:18:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
-Received: from fwd72.aul.t-online.de (fwd72.aul.t-online.de [10.223.144.98])
-	by mailout01.t-online.de (Postfix) with SMTP id 52762954
-	for <openembedded-devel@lists.openembedded.org>; Tue,  1 Apr 2025 08:55:42 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([79.219.237.183]) by fwd72.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1tzVX4-3rvik50; Tue, 1 Apr 2025 08:55:35 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.53, mailfrom: mark.yang@lge.com)
+Received: from unknown (HELO lgemrelse7q.lge.com) (156.147.1.151)
+	by 156.147.23.53 with ESMTP; 1 Apr 2025 16:18:23 +0900
+X-Original-SENDERIP: 156.147.1.151
+X-Original-MAILFROM: mark.yang@lge.com
+Received: from unknown (HELO markyang..) (10.177.121.109)
+	by 156.147.1.151 with ESMTP; 1 Apr 2025 16:18:23 +0900
+X-Original-SENDERIP: 10.177.121.109
+X-Original-MAILFROM: mark.yang@lge.com
+From: mark.yang@lge.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] gimp: disable lua for arm
-Date: Tue,  1 Apr 2025 08:56:22 +0200
-Message-ID: <20250401065622.1503632-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.49.0
+Cc: "mark.yang" <mark.yang@lge.com>
+Subject: [meta-oe][PATCH] linpack: fix build with gcc-15.0.1
+Date: Tue,  1 Apr 2025 16:18:20 +0900
+Message-Id: <20250401071820.872584-1-mark.yang@lge.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1743490535-6F7FDACD-2B681DC3/0/0 CLEAN NORMAL
-X-TOI-MSGID: b508e9fd-6c98-4b03-8a46-96a606b1cfdd
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 06:55:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116465
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 07:18:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116466
 
-luajit currently fails for arm:
-e -c -o lj_vmmath_dyn.o lj_vmmath.c
-| In file included from /usr/include/sys/cdefs.h:731,
-|                  from /usr/include/features.h:524,
-|                  from /usr/include/sys/types.h:25,
-|                  from host/buildvm.h:9,
-|                  from host/buildvm_asm.c:6:
-| /usr/include/bits/long-double.h:23:10: fatal error: bits/long-double-32=
-.h: No such file or directory
-|    23 | #include <bits/long-double-32.h>
-|	|          ^~~~~~~~~~~~~~~~~~~~~~~
-| compilation terminated.
-| In file included from /usr/include/sys/cdefs.h:731,
-|                  from /usr/include/features.h:524,
-|                  from /usr/include/sys/types.h:25,
-|                  from host/buildvm.h:9,
-|                  from host/buildvm_lib.c:6:
-| /usr/include/bits/long-double.h:23:10: fatal error: bits/long-double-32=
-.h: No such file or directory
-|    23 | #include <bits/long-double-32.h>
-|	|          ^~~~~~~~~~~~~~~~~~~~~~~
-| compilation terminated.
-| In file included from /usr/include/sys/cdefs.h:731,
-|                  from /usr/include/features.h:524,
-|                  from /usr/include/bits/libc-header-start.h:33,
-|                  from /usr/include/limits.h:26,
-|                  from /usr/lib/gcc/x86_64-poky-linux/14.2.0/include/lim=
-its.h:210,
-|                  from /usr/lib/gcc/x86_64-poky-linux/14.2.0/include/sys=
-limits.h:7,
-|                  from /usr/lib/gcc/x86_64-poky-linux/14.2.0/include/lim=
-its.h:34,
-|                  from host/minilua.c:33:
-| /usr/include/bits/long-double.h:23:10: fatal error: bits/long-double-32=
-.h: No such file or directory
-|    23 | #include <bits/long-double-32.h>
-|	|          ^~~~~~~~~~~~~~~~~~~~~~~
-| compilation terminated.
+From: "mark.yang" <mark.yang@lge.com>
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+* fix following error:
+    linpacknew.c: In function 'dgefa':
+    linpacknew.c:257:9: error: conflicting types for 'idamax'; have 'int(void)'
+    257 |     int idamax(),j,k,kp1,l,nm1;
+        |         ^~~~~~
+    linpacknew.c:63:13: note: previous declaration of 'idamax' with type 'int(int,  REAL *, int)' {aka 'int(int,  double *, int)'}
+    63 | static int  idamax   (int n,REAL *dx,int incx);
+        |             ^~~~~~
+    linpacknew.c:272:21: error: too many arguments to function 'idamax'; expected 0, have 3
+    272 |                 l = idamax(n-k,&a[lda*k+k],1) + k;
+        |                     ^~~~~~ ~~~
+    linpacknew.c:257:9: note: declared here
+    257 |     int idamax(),j,k,kp1,l,nm1;
+        |         ^~~~~~
+    linpacknew.c:326:21: error: too many arguments to function 'idamax'; expected 0, have 3
+    326 |                 l = idamax(n-k,&a[lda*k+k],1) + k;
+        |                     ^~~~~~ ~~~
+    linpacknew.c:257:9: note: declared here
+    257 |     int idamax(),j,k,kp1,l,nm1;
+        |         ^~~~~~
+
+    The function was already declared as static int idamax(int n, REAL *dx, int incx);
+    on line 63, but it was redeclared as int idamax() inside the dgefa function on line 257,
+    causing a conflict.
+    where functions are redeclared without parameters,
+    causing conflicts with the original function definitions.
+
+Signed-off-by: mark.yang <mark.yang@lge.com>
 ---
- meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb | 1 +
- 1 file changed, 1 insertion(+)
+ ...in-gcc-15.0.1-due-to-function-redecl.patch | 55 +++++++++++++++++++
+ .../recipes-benchmark/linpack/linpack_1.0.bb  |  1 +
+ 2 files changed, 56 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/linpack/linpack/0001-Fix-build-error-in-gcc-15.0.1-due-to-function-redecl.patch
 
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb b/meta-gnome/reci=
-pes-gimp/gimp/gimp_3.0.2.bb
-index f56c12c89b..b110e3ae02 100644
---- a/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb
-+++ b/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb
-@@ -100,6 +100,7 @@ PACKAGECONFIG ?=3D " \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 xcursor', '', d)=
-} \
- "
-=20
-+PACKAGECONFIG:remove:arm =3D "lua"
- PACKAGECONFIG:remove:riscv32 =3D "lua"
- PACKAGECONFIG:remove:riscv64 =3D "lua"
- PACKAGECONFIG:remove:powerpc64 =3D "lua"
---=20
-2.49.0
+diff --git a/meta-oe/recipes-benchmark/linpack/linpack/0001-Fix-build-error-in-gcc-15.0.1-due-to-function-redecl.patch b/meta-oe/recipes-benchmark/linpack/linpack/0001-Fix-build-error-in-gcc-15.0.1-due-to-function-redecl.patch
+new file mode 100644
+index 0000000000..783a98f114
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/linpack/linpack/0001-Fix-build-error-in-gcc-15.0.1-due-to-function-redecl.patch
+@@ -0,0 +1,55 @@
++From a1c1211fd6fc8d82053074c6dc531340f046c8d4 Mon Sep 17 00:00:00 2001
++From: "mark.yang" <mark.yang@lge.com>
++Date: Tue, 1 Apr 2025 16:06:56 +0900
++Subject: [PATCH] Fix build error in gcc 15.0.1 due to function redeclaration.
++
++Fix build error:
++linpacknew.c: In function 'dgefa':
++linpacknew.c:257:9: error: conflicting types for 'idamax'; have 'int(void)'
++  257 |     int idamax(),j,k,kp1,l,nm1;
++      |         ^~~~~~
++linpacknew.c:63:13: note: previous declaration of 'idamax' with type 'int(int,  REAL *, int)' {aka 'int(int,  double *, int)'}
++   63 | static int  idamax   (int n,REAL *dx,int incx);
++      |             ^~~~~~
++linpacknew.c:272:21: error: too many arguments to function 'idamax'; expected 0, have 3
++  272 |                 l = idamax(n-k,&a[lda*k+k],1) + k;
++      |                     ^~~~~~ ~~~
++linpacknew.c:257:9: note: declared here
++  257 |     int idamax(),j,k,kp1,l,nm1;
++      |         ^~~~~~
++linpacknew.c:326:21: error: too many arguments to function 'idamax'; expected 0, have 3
++  326 |                 l = idamax(n-k,&a[lda*k+k],1) + k;
++      |                     ^~~~~~ ~~~
++linpacknew.c:257:9: note: declared here
++  257 |     int idamax(),j,k,kp1,l,nm1;
++      |         ^~~~~~
++
++The function was already declared as static int idamax(int n, REAL *dx, int incx);
++on line 63, but it was redeclared as int idamax() inside the dgefa function on line 257,
++causing a conflict.
++where functions are redeclared without parameters,
++causing conflicts with the original function definitions.
++
++Signed-off-by: mark.yang <mark.yang@lge.com>
++
++Upstream-Status: Pending
++---
++ linpacknew.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/linpacknew.c b/linpacknew.c
++index c656082..5c8687b 100644
++--- a/linpacknew.c
+++++ b/linpacknew.c
++@@ -254,7 +254,7 @@ static void dgefa(REAL *a,int lda,int n,int *ipvt,int *info,int roll)
++ 
++     {
++     REAL t;
++-    int idamax(),j,k,kp1,l,nm1;
+++    int j,k,kp1,l,nm1;
++ 
++     /* gaussian elimination with partial pivoting */
++ 
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-benchmark/linpack/linpack_1.0.bb b/meta-oe/recipes-benchmark/linpack/linpack_1.0.bb
+index fe540749b5..735b5560e0 100644
+--- a/meta-oe/recipes-benchmark/linpack/linpack_1.0.bb
++++ b/meta-oe/recipes-benchmark/linpack/linpack_1.0.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://${UNPACKDIR}/linpacknew.c;beginline=1;endline=23;md5=
+ 
+ SRC_URI = "http://www.netlib.org/benchmark/linpackc.new;downloadfilename=linpacknew.c \
+            file://0001-linpack-Define-DP-only-when-SP-is-not-defined.patch \
++		   file://0001-Fix-build-error-in-gcc-15.0.1-due-to-function-redecl.patch \
+           "
+ SRC_URI[sha256sum] = "a63f2ec86512959f1fd926bfafb85905b2d7b7402942ffae3af374d48745e97e"
+ 
+-- 
+2.34.1
 
 
