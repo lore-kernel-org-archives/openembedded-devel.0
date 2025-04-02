@@ -1,135 +1,84 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <mingli.yu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 30F20C28B20
-	for <webhook@archiver.kernel.org>; Wed,  2 Apr 2025 07:37:48 +0000 (UTC)
-Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
- by mx.groups.io with SMTP id smtpd.web11.2451.1743579465617893178
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53879C28B20
+	for <webhook@archiver.kernel.org>; Wed,  2 Apr 2025 07:45:48 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.2620.1743579947912371778
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Apr 2025 00:37:45 -0700
+ Wed, 02 Apr 2025 00:45:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Vv6xrhHD;
- spf=pass (domain: gmail.com, ip: 209.85.167.41, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-5499614d3d2so7219715e87.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Apr 2025 00:37:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1743579463; x=1744184263; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=qKAy++eQLXQww71UjNlp2SJDw0kAcL1Bedpp29L3GA8=;
-        b=Vv6xrhHDKsVt/Ds+i/NvHo+jUMaryOXsZ4wFIn6h8dELxE3odkgFwvuGwn2/EOK7Ey
-         cL6Tho7+0YEtWqt0eH1WGY5Vq8B5YPXwPn3HO18/tsvx8oAd15RAxhmwuYpqhYoFjJKB
-         zLUBQStOiIbtcqWvPBJT6emEpqkssQhA8pJ+3C6tpzVYjxbjPoYRJgfK/cbkhXymovyr
-         +n53LpArS8l0nsVgXOmVGEU5lo5NFUThxf6XohOwbD/KsrGOMitkB6x5dTkVDw8+HNiH
-         Ap9kOkmubIs7+EVgiyd+5BTAimAvfM1scjGRJMKd7vdtq6O+KomxtQiLp3xB8KaiHc2S
-         LOfw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743579463; x=1744184263;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=qKAy++eQLXQww71UjNlp2SJDw0kAcL1Bedpp29L3GA8=;
-        b=RGZF9NmyMbKJZEurXN7nEqTbVts8sw0Bl1qfmDUfQP4lAj1+lJ3XJ7IGdhjb6/gH0T
-         AHbWVwRNgOGDSM2NZU+LRkAiho3BYlrn89hloNGG2Cs1+zE+IB66SLeLNEPTlh+JilKC
-         o4Rf05sjQ6MOFmJ7VuILuh/0FZWX01oK2rcp1V3abMUWBlofHIJcqktnThOkf7np6QMI
-         +QpDPrW6M0LpBDTVVx9vOiQV2z3F+cPbN6ct3HgHVXkzcJSL5r8LmCKmdKa4C2k49VMk
-         Ps+6jFU0E+Iuf16+ZjRaRtQBXFJUrQeHBi0xI0zPPFfEFPES662mL6j0Ww/lyH9Ms2Ap
-         t+QQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXQH0LNJoiYHkCA2NWGoVzGfz/01VbSJjeBHrNsBvAPoYnqZWdXHU/LePmc50VOAklF2raaq/w8oNIeJrnTIqlPDkA=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyqqFhl+/iZ4nC2h5QgHptgbGpaPiep/Bkn2xvVweEnqCWVWkrB
-	MdgAwUIgVN+Utc7N7eVyMFCC7aMFxcp9VnvmveGtEBB00fnKJZBv261/KZHQYABtfchq9AxaH/6
-	XiMDrWurgWeJsy6qCFhW94YUF8Xw=
-X-Gm-Gg: ASbGnctKIOYSg88gt7UoIGga7uvZMO4sdLCmYmmEpFVoHZAei2wfjeslTLn9/YcQXqd
-	5LGlbt4Vy4fN2NsqV3VAVrqP0nbyAcnQNcjI/Zi9osBwqiDTINxPVC3iH7GUR7+1IzC3IoPRfFF
-	oicjIKlni3dpVT3TVHK85vRz1k248O
-X-Google-Smtp-Source: AGHT+IHWWNrKcbmEaD5+46aJX9Fqd5lRuKsQCaz1IwU238c70VHW+BE0mrLV7+bGp+oVkB/LNFegNltCggXMTejDt9w=
-X-Received: by 2002:a05:6512:334f:b0:54b:117c:1189 with SMTP id
- 2adb3069b0e04-54b117c11ddmr3261071e87.54.1743579463298; Wed, 02 Apr 2025
- 00:37:43 -0700 (PDT)
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=6187dfc01b=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5324ZpxI009091
+	for <openembedded-devel@lists.openembedded.org>; Wed, 2 Apr 2025 07:45:47 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45rtfn0eyt-3
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 02 Apr 2025 07:45:47 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Wed, 2 Apr 2025 00:45:45 -0700
+Received: from pek-lpg-core4.wrs.com (128.224.153.44) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Wed, 2 Apr 2025 00:45:45 -0700
+From: <mingli.yu@eng.windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH v3 3/3] minizip: Make rconflicts with minizip-ng
+Date: Wed, 2 Apr 2025 15:45:42 +0800
+Message-ID: <20250402074542.2842980-3-mingli.yu@eng.windriver.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250402074542.2842980-1-mingli.yu@eng.windriver.com>
+References: <20250402074542.2842980-1-mingli.yu@eng.windriver.com>
 MIME-Version: 1.0
-References: <20250307093255.1110778-1-awais.belal@gmail.com>
- <20250307093255.1110778-2-awais.belal@gmail.com> <CAMKF1spsyTBdgD_we=X2Q9vpGFhBi-0E59ArdGyKr3KB-8g3Gg@mail.gmail.com>
- <CAM=5Amb6u5-8pmud11do97X4UAwLToizR9SiGjPD=4+Zqet6Rw@mail.gmail.com>
- <CAMKF1sroz=jLxp9PfMkZoQwtRjyvDZhK15kGLS32q5vu7dxcHA@mail.gmail.com>
- <CAM=5AmYtt81oiNVQqYMbu--Z0vTfGpQ5eHUpdJeV2KqoUdT4Ww@mail.gmail.com> <CAMKF1srDnbOc3LGOJ0YBVNGbxJ8-7bzSZMowWZ=WuONeFbvuiQ@mail.gmail.com>
-In-Reply-To: <CAMKF1srDnbOc3LGOJ0YBVNGbxJ8-7bzSZMowWZ=WuONeFbvuiQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 2 Apr 2025 09:37:30 +0200
-X-Gm-Features: AQ5f1Jok8wOHMPUKf9kTyo4v2Dwl7B1gF5p09eca9naEPbVkVTPOa9FSaWpsuCg
-Message-ID: <CA+chaQdj4iXwG1bP_ZYJVXJXU1Oq4buzc5hx=YU7DBkXk9uQ0A@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][scarthgap][PATCH 2/2] mongodb: update to 4.4.29
-To: raj.khem@gmail.com
-Cc: Awais Belal <awais.belal@gmail.com>, openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=eZo9f6EH c=1 sm=1 tr=0 ts=67eceb2b cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=XR8D0OoHHMoA:10 a=t7CeM3EgAAAA:8 a=nTNid8njqjJ2sKw7KzwA:9 a=zgiPjhLxNE0A:10 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: 6jQHqJ379NRrriy_UN57NY5OSwt-WnOO
+X-Proofpoint-ORIG-GUID: 6jQHqJ379NRrriy_UN57NY5OSwt-WnOO
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-04-02_02,2025-04-01_01,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 lowpriorityscore=0
+ mlxlogscore=821 suspectscore=0 spamscore=0 phishscore=0 malwarescore=0
+ clxscore=1015 impostorscore=0 adultscore=0 bulkscore=0 priorityscore=1501
+ classifier=spam authscore=0 authtc=n/a authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.21.0-2502280000
+ definitions=main-2504020048
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 02 Apr 2025 07:37:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116508
+ <openembedded-devel@lists.openembedded.org>; Wed, 02 Apr 2025 07:45:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116511
 
-Awais: any update on this? the 1/2 is already applied in scarthgap,
-but in walnascar and master it's still skipped with:
-SKIP_RECIPE[mongodb] ?=3D "Needs porting to python 3.12"
+From: Mingli Yu <mingli.yu@windriver.com>
 
-and there is also:
+Fixes:
+  Error: Transaction test error:
+  file /usr/bin/minizip conflicts between attempted installs of minizip-1.3.1-r0.riscv64 and minizip-ng-4.0.8-r0.riscv64
+  file /usr/lib/libminizip.so.1 conflicts between attempted installs of minizip-1.3.1-r0.riscv64 and minizip-ng-4.0.8-r0.riscv64
 
-ERROR: mongodb-4.4.24-r0 do_package_qa: QA Issue: File /usr/bin/mongod
-in package mongodb contains reference to TMPDIR
-File /usr/bin/mongos in package mongodb contains reference to TMPDIR
-[buildpaths]
-ERROR: mongodb-4.4.24-r0 do_package_qa: Fatal QA errors were found,
-failing task.
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ meta-oe/recipes-core/minizip/minizip_1.3.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-even in scarthgap (where it usually isn't fatal error, but will need
-to be fixed for walnascar - I haven't checked the new version from
-this review yet).
+diff --git a/meta-oe/recipes-core/minizip/minizip_1.3.1.bb b/meta-oe/recipes-core/minizip/minizip_1.3.1.bb
+index c9c92ad6bd..0d36ffbcf6 100644
+--- a/meta-oe/recipes-core/minizip/minizip_1.3.1.bb
++++ b/meta-oe/recipes-core/minizip/minizip_1.3.1.bb
+@@ -16,6 +16,8 @@ SRC_URI[sha256sum] = "9a93b2b7dfdac77ceba5a558a580e74667dd6fede4585b91eefb60f03b
+ PACKAGECONFIG ??= "demos"
+ PACKAGECONFIG[demos] = "--enable-demos=yes,,,"
+ 
++RCONFLICTS:${PN} += "minizip-ng"
++
+ DEPENDS = "zlib"
+ 
+ inherit autotools
+-- 
+2.34.1
 
-Regards,
-
-On Thu, Mar 13, 2025 at 4:48=E2=80=AFPM Khem Raj via lists.openembedded.org
-<raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
->
-> there still are errors see
->
-> https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/452/st=
-eps/15/logs/stdio
->
-> On Wed, Mar 12, 2025 at 11:51=E2=80=AFAM Awais Belal <awais.belal@gmail.c=
-om> wrote:
-> >>>>
-> >>>>
-> >>>
-> >>>  The changeset was intended for scarthgap and I haven't made sure if =
-master builds. Is that a requirement? The cgi module was dropped in python =
-3.13 which is what master is following at this point. I might send a separa=
-te series for master once I move on to that.
-> >>
-> >>
-> >> Patches are routed by master to release branches if they are needed in=
- master. They are done for master and then backported
-> >
-> >
-> > Hi Khem,
-> > I've just sent https://patchwork.yoctoproject.org/project/oe/list/?seri=
-es=3D32428 which coupled with the changes here fixes mongodb build for mast=
-er as well. Kindly note that the other series (https://patchwork.yoctoproje=
-ct.org/project/oe/list/?series=3D32428) is not needed for scarthgap.
-> >
-> > --
-> > Regards,
-> > Awais Belal
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#115976): https://lists.openembedded.org/g/openembedde=
-d-devel/message/115976
-> Mute This Topic: https://lists.openembedded.org/mt/111564957/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
