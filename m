@@ -2,61 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D517EC3601A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D51C6C3601E
 	for <webhook@archiver.kernel.org>; Wed,  2 Apr 2025 03:42:56 +0000 (UTC)
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web10.18.1743565372880241004
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.web10.19.1743565373929088912
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Apr 2025 20:42:52 -0700
+ Tue, 01 Apr 2025 20:42:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GEOdhl7/;
- spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-2ff85fec403so839777a91.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 20:42:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XEb6QW+k;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2243803b776so56013205ad.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Apr 2025 20:42:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1743565372; x=1744170172; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1743565373; x=1744170173; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=bJhxjcVCHQxDO3/JMN1DROs+0ujdESD53QE9jQFznxA=;
-        b=GEOdhl7/DP4fzJtW7lL8G8x6xZGSWGtQGoCma+gIYRvmJ9xt+7Y/5WpDaAmA40XIgL
-         2cMHTjLXyZ2gqn2oMFBfRL7Y+SbPHPM0p16AJWNQjs+XeRImCZ7jY3ugaXmauCGZg3No
-         skincgF8b/V1tzJn6OuNoLIwxuE8mfc7jlM98gBEDENUiiJHC+0ne0z9/JF3dh3EkOaB
-         CCtabrhD6081nAcSYWGi0+6YvrwK0zmsMSqdW+zL5UPx+IFCe5pSkIosxAw6Z7OxN/o4
-         rqnQ+eiNZFGrE6tLFeehppgRtbP2nm5BpnItvvg9E0OE6F6ZPvGUXIGWmTG04cijtjnt
-         BFWg==
+        bh=Sz6AqILqaoKLfi98vXqP/U5yo4kNT4sN84C45DJZTzo=;
+        b=XEb6QW+kTx0mh+34up+RXhO4HdEDY5e+KwsUZ81SsSSzSGzzde8EKz9KIY57JK6c9l
+         bo9Wm6m1NOs2V3NILOwJYxBQSaXSdbCWUq0obZtC/EpmLI+ZbrcZEnLTspL1CuhsUus8
+         cFnya6eKXI8lLMM8iGoq/XIn29DyKvd+1t66u0KPCXVAWIipVCMNmPa2+l9mbputCbwj
+         37Ca9GpRKdTYOYOcqpz+D+jx+vCaOK0sisyWJW4e+4S2XS2z6hPwwGRKdol9tKUIIFqG
+         m7TMWPFGBd5DfucdhtAN6Ch/KJ+GV3NDRyrbOpmRxkrMxXB/ss2IVXMckN8AeB53QFIn
+         angg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743565372; x=1744170172;
+        d=1e100.net; s=20230601; t=1743565373; x=1744170173;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=bJhxjcVCHQxDO3/JMN1DROs+0ujdESD53QE9jQFznxA=;
-        b=cmMoFuVOif4sw3CyOFL0EB+XZL3m163N2JmZDVhtpIJkreXqceGBooq2xfFtT8u3jG
-         AuYuGplGxjWUEFhMaviIYtELbeKIZm+k7vMIj4P3rjQro7t6ugmdyHcIgVL8UxQQ89+7
-         R61IntdcGA9oziypSc8aqMfsyed5Bz6aY+r//+O1k2x9/zrYzYP3uMRF/ckT6u3AKO04
-         qfazpySMm2WaF8oLBmOdhLa1P1Beq55CsfwYaT4+KAAXi8bGAavmwLJVeV6OpnB6xuA2
-         jMMMEOZxQPeIq7QxSzLalfmpG22N4CXRn/NXRPwXYFr5pkW2LVj3DSgL3xCRZ6BwXSuW
-         W67g==
-X-Gm-Message-State: AOJu0YwslIRQRSicgQxqb582ntD88BPyHyt04DeYE3WJg9Xl9Mok0Ptd
-	H1Jfm1ayc4ufXzEQpOAUM+ZT1K7p8asULFWjpTe8rS4tef5zBbx+Kgtm0xiT
-X-Gm-Gg: ASbGncstGQHSiz+ozK81RxDXXs+vyN+zUUKyz8bq2UdDrXtaICWn/y/2iGiyQmfVkHT
-	AkdYM1BRVVmVwx0DEufR5mzPTahcr6Xit4OmtgjZG67cUPdFsolpX8z9YrjNBiQ0S9XOE+5OM+m
-	FBWfUv8bjEBHR4/eJF4xZijwmgpXGZXILgstClGFNH14oYa9TMZ0lw2cR7ZUqQ2qN60sRObmsC0
-	GwmtFeAqfRBuspSS0h1tDC0Mi/2rfUdPt4G1ld67HMomHFupyjOs8d1EqxQFeNhp9eqYPcSPda0
-	5e1WlJ9YD5GtIM5JG/WHP74OGDYjwvPKSw1T
-X-Google-Smtp-Source: AGHT+IE6ZOoHBKOoq64TeaihKIxUxzUK7PRmuBDKocRmeXBvnN5EX45PGEcSPofbt2AEUCvPySTR5Q==
-X-Received: by 2002:a17:90b:528a:b0:2fa:6793:e860 with SMTP id 98e67ed59e1d1-30571a4fce3mr820998a91.0.1743565371930;
-        Tue, 01 Apr 2025 20:42:51 -0700 (PDT)
+        bh=Sz6AqILqaoKLfi98vXqP/U5yo4kNT4sN84C45DJZTzo=;
+        b=AuP/3s/zmZNaYF1SbMeMsStt9m+WO/GxdxYdf/n0EVFfB0dYFREUbSZ611jv0DHGpC
+         R9iX3SK4iiFw+8RztaqST3fuU0c8LFIk2Ld0/tu6XmsyH7P/89exzVg/fB77xQBDu+Od
+         xjTV8kjMjSs0h1xlapSvVo1rarxLobdBBOw0MYuHAR0OfnBRea+ak4y7aKO8sR3upYmX
+         BrWngzQUKWQ12IqtIHKIjLLNp6ohGKbFo+lwvq7yXlk7AwF9p43gJPRKjEUhBnYCzNaJ
+         Q/DW697SX9XXdnEm/HcrnoUTNOyQcqUWWFnVE+slmd9nhOIBtDW9f36nf5XzyKc0BzOZ
+         MdsA==
+X-Gm-Message-State: AOJu0YydoTCxuGlQCDaXa0E1/xrrn1b+98lV3R/IcJ1UQ4/FGKf84r8m
+	XkYuYbRddGxNmjoWPZkE7SXdyf/xjRhwJepzJBfVEfbijHqSOX7cK0ihOO1s
+X-Gm-Gg: ASbGncuTMOOi0rSxi8nkI2Th1a6Rk2/jBRgfc7OziOApz+PaaGd9lZVFuvD3at8eWsd
+	PAibnNVolh7DCAFdmgpkTAtA3AZgGXrMR2FW4hvNN8TWXk4Yh7vAUqboY0ZmnVU2t1gKDao4hTL
+	cZuzYR1DjAXT1b8z1OwZcbWWhbG72kCN+e54STD3oJSgT8qaBiQqUXq8pYDRaeeEnnozx6CMRZB
+	NHLhJh3XF+hDezxKziRVWuf51r6mh6L2h+KB1d0ku4792fRiHwOYexGy1bj90noeBSSpSTgDazI
+	OgQrV2WddolASLa7dzYT1byLdViEjIvYmBzy
+X-Google-Smtp-Source: AGHT+IGWT34F+oVEh+6SiT/ZqlADSakRaQ1Pib3mACxXozZ1POYV01U0L2ttfRLXGq4REWWgf9rbYA==
+X-Received: by 2002:a17:903:94e:b0:223:6455:8752 with SMTP id d9443c01a7336-2296c8785acmr13828035ad.43.1743565372896;
+        Tue, 01 Apr 2025 20:42:52 -0700 (PDT)
 Received: from apollo.localdomain ([2601:646:8201:fd20::a85b])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3056f93417bsm423010a91.37.2025.04.01.20.42.51
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3056f93417bsm423010a91.37.2025.04.01.20.42.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Apr 2025 20:42:51 -0700 (PDT)
+        Tue, 01 Apr 2025 20:42:52 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 4/6] python3-pydantic: Upgrade to 2.11.1 release
-Date: Tue,  1 Apr 2025 20:42:44 -0700
-Message-ID: <20250402034246.1488516-4-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 5/6] python3-pydantic: Add dependency on typing-inspection
+Date: Tue,  1 Apr 2025 20:42:45 -0700
+Message-ID: <20250402034246.1488516-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250402034246.1488516-1-raj.khem@gmail.com>
 References: <20250402034246.1488516-1-raj.khem@gmail.com>
@@ -66,28 +66,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 02 Apr 2025 03:42:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116495
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116496
+
+Skip running test_readonly_qualifier_warning as it results in warnings
+but Werror means it is reported as fails.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../{python3-pydantic_2.10.6.bb => python3-pydantic_2.11.1.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pydantic_2.10.6.bb => python3-pydantic_2.11.1.bb} (96%)
+ meta-python/recipes-devtools/python/python3-pydantic_2.11.1.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pydantic_2.10.6.bb b/meta-python/recipes-devtools/python/python3-pydantic_2.11.1.bb
-similarity index 96%
-rename from meta-python/recipes-devtools/python/python3-pydantic_2.10.6.bb
-rename to meta-python/recipes-devtools/python/python3-pydantic_2.11.1.bb
-index 9c2bbf5140..2770b13831 100644
---- a/meta-python/recipes-devtools/python/python3-pydantic_2.10.6.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic_2.11.1.bb b/meta-python/recipes-devtools/python/python3-pydantic_2.11.1.bb
+index 2770b13831..4a566639e3 100644
+--- a/meta-python/recipes-devtools/python/python3-pydantic_2.11.1.bb
 +++ b/meta-python/recipes-devtools/python/python3-pydantic_2.11.1.bb
-@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=09280955509d1c4ca14bae02f21d49a6"
+@@ -31,6 +31,7 @@ RDEPENDS:${PN} += "\
+     python3-profile \
+     python3-pydantic-core \
+     python3-typing-extensions \
++    python3-typing-inspection \
+     python3-tzdata \
+     python3-zoneinfo \
+ "
+@@ -65,7 +66,7 @@ do_install_ptest:append() {
+     rm -f ${D}${PTEST_PATH}/tests/test_mypy.py
+     # We are not trying to run benchmarks
+     rm -rf ${D}${PTEST_PATH}/tests/benchmarks
+-    sed -i -e "/--automake/ s/$/ -k 'not test_config_validation_error_cause and not test_dataclass_config_validate_default and not test_annotated_validator_nested and not test_use_bare and not test_use_no_fields and not test_validator_bad_fields_throws_configerror and not test_assert_raises_validation_error and not test_model_config_validate_default'/" ${D}${PTEST_PATH}/run-ptest
++    sed -i -e "/--automake/ s/$/ -k 'not test_config_validation_error_cause and not test_dataclass_config_validate_default and not test_annotated_validator_nested and not test_use_bare and not test_use_no_fields and not test_validator_bad_fields_throws_configerror and not test_assert_raises_validation_error and not test_model_config_validate_default and not test_readonly_qualifier_warning'/" ${D}${PTEST_PATH}/run-ptest
+ }
  
- inherit pypi python_hatchling ptest-python-pytest
- 
--SRC_URI[sha256sum] = "ca5daa827cce33de7a42be142548b0096bf05a7e7b365aebfa5f8eeec7128236" 
-+SRC_URI[sha256sum] = "442557d2910e75c991c39f4b4ab18963d57b9b55122c8b2a9cd176d8c29ce968"
- 
- DEPENDS += "python3-hatch-fancy-pypi-readme-native"
- 
+ BBCLASSEXTEND = "native nativesdk"
 
