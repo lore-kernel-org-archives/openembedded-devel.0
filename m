@@ -1,124 +1,110 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 28AD9C28B20
-	for <webhook@archiver.kernel.org>; Wed,  2 Apr 2025 16:19:42 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
- by mx.groups.io with SMTP id smtpd.web11.13281.1743610777320656275
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4BCABC36017
+	for <webhook@archiver.kernel.org>; Wed,  2 Apr 2025 16:27:42 +0000 (UTC)
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.web11.13504.1743611254884210082
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Apr 2025 09:19:37 -0700
+ Wed, 02 Apr 2025 09:27:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZGSADJwV;
- spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-ac28e66c0e1so1025607366b.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Apr 2025 09:19:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jA8+hvRO;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-224191d92e4so404095ad.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Apr 2025 09:27:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1743610776; x=1744215576; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1743611254; x=1744216054; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=IxQrSRsLWOfWeiSgHEMaoRDIXfdEYF91ouBu/8jM1ys=;
-        b=ZGSADJwVZTfC0Ogp/GYEFowruGu7f+QKfGwri/R1IcSELwyzYbbR5FrSJFXaOo3Qvy
-         1bIfKCvlUzIqNgt1PGAtwiESXwkvhfq4lNHAe4nM0Vag5iNLdbURcopFEQA9nSjvgeKb
-         kiXlYEFNeJuuKFds0dU4Dd73LyS/rozTlsJTUwu4BQa7Z1x7jmbvFeT5ZPhPjP3K5eTk
-         hV12w0Siqr5PTQQXRei4czsPSQNvuHncfyQj7oTsmlU9pSdU/9P+45jH+UipcfK7PjWV
-         bt8bdLs09jUPcZ7K731X4XEnRGqlR2Z/Qe+EtV2TPzIwNfaJY5JJSUejZV9mBaLC7y+8
-         sj4w==
+        bh=b9klOQ3L/fVvFXHD/aYYklKHelxjR57wyfybDDSu/Ls=;
+        b=jA8+hvROE4CGQwtnGdd89FEa5VcqzIRUXm4Rs0ihw/lD/fq0hLBXe/IrlfEdGBdndp
+         jbQr59kRSTqePLSyY13q8T7+7UUlQAaM2KEaXuEQ1CujLZaIW3ixvVoa2OmltB/H2bPq
+         NmId0hK7ppeiZdGynthFIHgt3KqfEuKhQzXG8JbgwEnBdzdBnTU2+46YgzhgygCdq6ZL
+         nVdUV0GS+wwNTYP7hV3Yif6AyhtutaAREj4Hb3jrFfHMbic8gxhoN7cd7v/s707BrLcO
+         pPc7PLeipv8wsY5A1IajPcBiptmdICCkkQ+EYL1Ywqw5xz9SEp0pS+IYqDOWN60aykzG
+         1LNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743610776; x=1744215576;
+        d=1e100.net; s=20230601; t=1743611254; x=1744216054;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=IxQrSRsLWOfWeiSgHEMaoRDIXfdEYF91ouBu/8jM1ys=;
-        b=P2fFLBz66eOUPi7XAq+/7C/EpYG/nS73bqHz+HB35dzCbT17Q8Dyw0uYp3I7wCpNU2
-         Mt6hJeu6IJJSp1EXXNf5qw0HAqr7NOtjzE2H7LINi8W8BrH31qOHw9UaGZNBQgeYgjAp
-         Z5XIfa9ZcGIbnjpbPlyruphwrQmYyuq67HfPKZ1y1BjHl0FGxmSKpXBx8zaV2xeAZXFs
-         1W1nOYWMy3ZdoiJQW+h1rlzOC512BikORypB65n4s7CxBU8f2s3N6CKwlHibdZdn3LSE
-         +M4PLsbP1qKQho05dZVHzuXRRWdSuIzY0AH4x+5KB+6rdpjVZD0YvsgxtxSdzjL+Y+UN
-         +v+A==
-X-Gm-Message-State: AOJu0Yz/kSYcWCgmIEbCYvV3rFK0vdjvlZ4I96wI6cC0xygunHh1Sn4c
-	PUw/i2NXeWWDq2cyv/tBPXfFRvHIj9EKLCFE5/A/dP/FdxyabZaBVIDk4ND1
-X-Gm-Gg: ASbGncsOWcwecc3Gi1/yMSlGfUNSfvbt1fa3sYWr/TxXO+2EB0Keif+aiP1pq34/c+B
-	SrvV8Sv85J8oGkMm8zRWdQjIj06XKOSnh1rFyx7rdofz+8/0yfb0Tp+sSU/IvNokO6GEL2MT3R+
-	aMB9tNJnJjEyvbI1SqiH9hBg3JLOqLTdDQBKADJDl/GGuN/2bZ6uFFuQxR7HmNFMsJ5jz3tmepk
-	MGbd8JIrL2SKsIVdRfIDORAyZnC1LFiwOvyWnC2amMThkzeGsgQmUjjvFxzvhEfWLpmA04tGFud
-	OeZDC+53SqSS9JaelBXRghAj6QQnmq2TvgoYW7yjHpFlB6m6skp6F+BLpA==
-X-Google-Smtp-Source: AGHT+IGcyiZkQMBKW3MzqvEQLv+CITZVqzM4KiSQnjGUJs+p1jRa7RVoHKWIpGYUkS1scdMVGZzqxg==
-X-Received: by 2002:a17:907:1c95:b0:ac7:b48f:4cd6 with SMTP id a640c23a62f3a-ac7b48f4cecmr38339866b.24.1743610775008;
-        Wed, 02 Apr 2025 09:19:35 -0700 (PDT)
-Received: from localhost ([109.238.218.228])
-        by smtp.gmail.com with UTF8SMTPSA id 4fb4d7f45d1cf-5edc17b2abesm8656342a12.60.2025.04.02.09.19.34
+        bh=b9klOQ3L/fVvFXHD/aYYklKHelxjR57wyfybDDSu/Ls=;
+        b=e7l72Ns9I+xBwlCplIrn3gdTOMHkzbOfFSHXdB3hcgs0v4M6z7uwdmXLwwTu5ocdHf
+         wlg03s3EW7cjEPLolkKQVysSL3glHKnGjNwylGIq4x01hWIzyfXg47CeiK3OS7wrQyFl
+         TsWSug+mOw96wFfWlppejNznyxf8xCoowJUQAiYlrRjI5CMH30SRnIPbg3bZ6YP7nO4q
+         ONQpzJHxrLVJLxzn/ZaEVjAsIQMv7RbldVtN40Lt8UZKtpwcgyADw1KaFcZnnZF0XFiC
+         XgTMutylZE7HcNAbxhRAww5IEcKA70EmbuHgiLfQjIQ0jgGbq5yrSYBLSG5ToQSrF3pI
+         n6uQ==
+X-Gm-Message-State: AOJu0Yx5pnW1ZW4dFF7UhjhgZ92GZmzfF7nvXwUGLqspEN2JBe6Hck6P
+	r9jhy1wyNJ083QOP8YkT5MEZGgCp/3iZcMzrJ7S6EkeBvYBReTiXUs4gu0Q/
+X-Gm-Gg: ASbGnculYlO8lriHp8HmkAfAClg8+RzTYAKbHE5Xy9wKboPHiUu5eqiUSOcv8KMyb5p
+	GnijtS0a6prr+HX+8Tdeq+SGVahQvy2btJHLIY6jTFNWmmLXHW7ru1VBrtmBNPUM6hX4MYdibrd
+	Dh9omeIX0wmWx0mBU/Ag3BoMLo7gx0aRa6Wv+9nvhpUDzKlqUywHxcEzBDm094p58wUWkiWvNqZ
+	CYb8rZUDUv5ZxUwVztNd07pOvygbWoLKXx+7GPd9ObutZEFs2jIRMReq7DR4xO/hF/Fq4Pi9lwS
+	jJeaHeLPf/oox3s2JADnME9dVikXY9mUsoDZ5QiYJOlHTJQ=
+X-Google-Smtp-Source: AGHT+IFzry7uk2aVNz0c2jP6IyUj6IwRDIf47OAb9kzOl84P5M3T4S/ZrJceBI6aFdM1NFhW1talFA==
+X-Received: by 2002:a17:902:ebc3:b0:21f:45d:21fb with SMTP id d9443c01a7336-2292f946db4mr277040355ad.3.1743611253828;
+        Wed, 02 Apr 2025 09:27:33 -0700 (PDT)
+Received: from apollo.localdomain ([2601:646:8201:fd20::c3db])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-73970def558sm11548902b3a.15.2025.04.02.09.27.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Apr 2025 09:19:34 -0700 (PDT)
-From: martin.jansa@gmail.com
+        Wed, 02 Apr 2025 09:27:33 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-filesystems][PATCH] gpiod-sysfs-proxy, smbnetfs, zfs: add whitespace around assignments
-Date: Wed,  2 Apr 2025 18:19:28 +0200
-Message-ID: <20250402161928.3620627-1-martin.jansa@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-breathe: Inherit ptest-python-pytest instead of ptest
+Date: Wed,  2 Apr 2025 09:27:31 -0700
+Message-ID: <20250402162731.2675440-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 02 Apr 2025 16:19:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116527
+ <openembedded-devel@lists.openembedded.org>; Wed, 02 Apr 2025 16:27:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116528
 
-From: Martin Jansa <martin.jansa@gmail.com>
+This eliminates more boiler plate code and add needed depednecies for
+ptest package
 
-With:
-https://lists.openembedded.org/g/bitbake-devel/message/17508
-there are WARNINGs like:
-
-WARNING: meta-oe/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb: meta-oe/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb:9 has a lack of whitespace around the assignment: 'HOMEPAGE ="http://sourceforge.net/projects/smbnetfs"'
-WARNING: meta-oe/meta-filesystems/recipes-filesystems/zfs/zfs_2.2.5.bb: meta-oe/meta-filesystems/recipes-filesystems/zfs/zfs_2.2.5.bb:5 has a lack of whitespace around the assignment: 'HOMEPAGE ="https://github.com/openzfs/zfs"'
-WARNING: meta-oe/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy_0.1.2.bb: meta-oe/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy_0.1.2.bb:27 has a lack of whitespace around the assignment: 'export MOUNTPOINT="${@bb.utils.contains('PACKAGECONFIG', 'sys-class-mount', '/sys/class/gpio', '/run/gpio', d)}"'
-
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../gpiod-sysfs-proxy/gpiod-sysfs-proxy_0.1.2.bb                | 2 +-
- meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb   | 2 +-
- meta-filesystems/recipes-filesystems/zfs/zfs_2.2.5.bb           | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ meta-python/recipes/devtool/python3-breathe/run-ptest | 3 ---
+ meta-python/recipes/devtool/python3-breathe_4.36.0.bb | 9 +--------
+ 2 files changed, 1 insertion(+), 11 deletions(-)
+ delete mode 100644 meta-python/recipes/devtool/python3-breathe/run-ptest
 
-diff --git a/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy_0.1.2.bb b/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy_0.1.2.bb
-index 07208d1b77..3e68a52b09 100644
---- a/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy_0.1.2.bb
-+++ b/meta-filesystems/dynamic-layers/meta-python/recipes-support/gpiod-sysfs-proxy/gpiod-sysfs-proxy_0.1.2.bb
-@@ -24,7 +24,7 @@ SRC_URI[sha256sum] = "4bdd4b8a7042f63a40507ae0f16b360011e67cbb2f0276289636487a54
- # non-standard behavior so make sure the user actually wants it.
- PACKAGECONFIG[sys-class-mount] = ""
+diff --git a/meta-python/recipes/devtool/python3-breathe/run-ptest b/meta-python/recipes/devtool/python3-breathe/run-ptest
+deleted file mode 100644
+index 8d2017d39c..0000000000
+--- a/meta-python/recipes/devtool/python3-breathe/run-ptest
++++ /dev/null
+@@ -1,3 +0,0 @@
+-#!/bin/sh
+-
+-pytest --automake
+diff --git a/meta-python/recipes/devtool/python3-breathe_4.36.0.bb b/meta-python/recipes/devtool/python3-breathe_4.36.0.bb
+index dc14f1ce1c..fe3d1eeb91 100644
+--- a/meta-python/recipes/devtool/python3-breathe_4.36.0.bb
++++ b/meta-python/recipes/devtool/python3-breathe_4.36.0.bb
+@@ -6,17 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9e49eecf36fc015de7c61a0247df75d6"
  
--export MOUNTPOINT="${@bb.utils.contains('PACKAGECONFIG', 'sys-class-mount', '/sys/class/gpio', '/run/gpio', d)}"
-+export MOUNTPOINT = "${@bb.utils.contains('PACKAGECONFIG', 'sys-class-mount', '/sys/class/gpio', '/run/gpio', d)}"
+ SRC_URI[sha256sum] = "14860b73118ac140b7a3f55446890c777d1b67149cb024279fe3710dad7f535c"
  
- do_install:append() {
-     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-index 2d9eab1dd5..1f8357db00 100644
---- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-+++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-@@ -6,7 +6,7 @@ DESCRIPTION = "SMBNetFS is a Linux/FreeBSD filesystem that allow you to use \
+-inherit pypi python_flit_core ptest
+-
+-SRC_URI:append = " file://run-ptest"
++inherit pypi python_flit_core ptest ptest-python-pytest
  
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
--HOMEPAGE ="http://sourceforge.net/projects/smbnetfs"
-+HOMEPAGE = "http://sourceforge.net/projects/smbnetfs"
+ RDEPENDS:${PN} = "python3-sphinx"
  
- DEPENDS = "fuse samba"
- DEPENDS:append:libc-musl = " libexecinfo"
-diff --git a/meta-filesystems/recipes-filesystems/zfs/zfs_2.2.5.bb b/meta-filesystems/recipes-filesystems/zfs/zfs_2.2.5.bb
-index b24774311d..6fa9104236 100644
---- a/meta-filesystems/recipes-filesystems/zfs/zfs_2.2.5.bb
-+++ b/meta-filesystems/recipes-filesystems/zfs/zfs_2.2.5.bb
-@@ -2,7 +2,7 @@ SUMMARY = "OpenZFS on Linux and FreeBSD"
- DESCRIPTION = "OpenZFS on Linux and FreeBSD"
- LICENSE = "CDDL-1.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=7087caaf1dc8a2856585619f4a787faa"
--HOMEPAGE ="https://github.com/openzfs/zfs"
-+HOMEPAGE = "https://github.com/openzfs/zfs"
+ PYPI_PACKAGE = "breathe"
  
- SRCREV = "33174af15112ed5c53299da2d28e763b0163f428"
- SRC_URI = "git://github.com/openzfs/zfs;protocol=https;branch=zfs-2.2-release \
+-do_install_ptest() {
+-        install -d ${D}${PTEST_PATH}/tests
+-        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+-}
+-
+ BBCLASSEXTEND =+ "native"
 
