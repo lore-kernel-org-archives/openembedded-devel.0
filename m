@@ -1,136 +1,273 @@
-Return-Path: <leimaohui@fujitsu.com>
+Return-Path: <mark.yang@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 73B38C36014
-	for <webhook@archiver.kernel.org>; Thu,  3 Apr 2025 02:57:07 +0000 (UTC)
-Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
- by mx.groups.io with SMTP id smtpd.web10.4668.1743649023181574936
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E5E94C3600C
+	for <webhook@archiver.kernel.org>; Thu,  3 Apr 2025 06:13:58 +0000 (UTC)
+Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.52])
+ by mx.groups.io with SMTP id smtpd.web10.6951.1743660836358960446
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Apr 2025 19:57:03 -0700
+ Wed, 02 Apr 2025 23:13:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=QzkUtxZX;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: leimaohui@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1743649023; x=1775185023;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=FuCN3FcipEfDYqrbKXOp+0QVq6aIa+QbmoU0DdbHXpI=;
-  b=QzkUtxZXWvfcjuW4eOmTWTnfFATD7X+dULpIzFZdbuFIohHXRnNraHTv
-   gaC/mpgLYNzCByhSPoTuQIirSN0exiIYxBixBTebzJlYu4SRXDk+8R4YH
-   8Q57s/mhFVlcVNKiz7NsHn1TfGSv2zTOvO/Y5MfBEjPDjVRbJCAgO1lqu
-   lqF0Hg5pE8rBBHeeeE/iRpNUVR6RuYbObu/p5aSATAm174SCo/krbiz4k
-   c3Ni5Rdmw2dozfzpMa3rSnZc55J5UsDqFN08tFwrjYdksiopRUoF/Xplw
-   WOcc0H8UnSp0K3S/M3o1WED0YXOayQA1LeuNjTXFqC7B8cF0Wl+PHTPlg
-   A==;
-X-CSE-ConnectionGUID: kZLRFmWaSv2q4E0rqxD0Uw==
-X-CSE-MsgGUID: oqBx9rh5R7an0d1y0ZZppQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11392"; a="183679665"
-X-IronPort-AV: E=Sophos;i="6.15,184,1739804400"; 
-   d="scan'208";a="183679665"
-Received: from unknown (HELO oym-r1.gw.nic.fujitsu.com) ([210.162.30.89])
-  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Apr 2025 11:57:00 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id CB9EAD4808
-	for <openembedded-devel@lists.openembedded.org>; Thu,  3 Apr 2025 11:56:58 +0900 (JST)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 8D480BDB63
-	for <openembedded-devel@lists.openembedded.org>; Thu,  3 Apr 2025 11:56:58 +0900 (JST)
-Received: from G08FNSTD190088.g08.fujitsu.local (unknown [10.167.135.33])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id F2DE61A009A;
-	Thu,  3 Apr 2025 10:56:57 +0800 (CST)
-From: Lei Maohui <leimaohui@fujitsu.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org,
-	Lei Maohui <leimaohui@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-pdm python3-pdm-{backend,build-locked}: move to oe-core
-Date: Thu,  3 Apr 2025 10:56:51 +0800
-Message-Id: <20250403025651.2197-1-leimaohui@fujitsu.com>
-X-Mailer: git-send-email 2.38.1.windows.1
+ dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.52, mailfrom: mark.yang@lge.com)
+Received: from unknown (HELO lgemrelse6q.lge.com) (156.147.1.121)
+	by 156.147.23.52 with ESMTP; 3 Apr 2025 15:13:53 +0900
+X-Original-SENDERIP: 156.147.1.121
+X-Original-MAILFROM: mark.yang@lge.com
+Received: from unknown (HELO markyang..) (10.177.121.109)
+	by 156.147.1.121 with ESMTP; 3 Apr 2025 15:13:53 +0900
+X-Original-SENDERIP: 10.177.121.109
+X-Original-MAILFROM: mark.yang@lge.com
+From: mark.yang@lge.com
+To: openembedded-devel@lists.openembedded.org
+Cc: "mark.yang" <mark.yang@lge.com>
+Subject: [meta-oe][PATCH] sharutils: fix build with gcc-15.0.1
+Date: Thu,  3 Apr 2025 15:13:51 +0900
+Message-Id: <20250403061351.922250-1-mark.yang@lge.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Apr 2025 02:57:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116529
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Apr 2025 06:13:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116530
 
-They are dependencies of python3-webcolors
+From: "mark.yang" <mark.yang@lge.com>
 
-Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
+* gcc-15 uses gnu23 standard for c:
+  https://gcc.gnu.org/git/?p=gcc.git;a=commitdiff;h=55e3bd376b2214e200fa76d12b67ff259b06c212
+  bool is included as a reserved word, causing an error due to duplicate declaration.
+
+  Also, when parameters are empty, an error occurs. Therefore, when using
+  functions from the standard library, modify the defines in configure.ac
+  and source code to use standard library functions.
+
+* ../../sharutils-4.15.2/lib/system.h:51:36: error: expected ';', identifier or '(' before 'bool'
+   51 | typedef enum {false = 0, true = 1} bool;
+      |                                    ^~~~
+  ../../sharutils-4.15.2/lib/system.h:79:7: error: conflicting types for 'fdopen'; have 'FILE *(void)'
+   79 | FILE *fdopen ();
+      |       ^~~~~~
+  In file included from ../lib/stdio.h:43,
+                 from ../../sharutils-4.15.2/libopts/autoopts/options.h:42,
+                 from ../../sharutils-4.15.2/src/shar-opts.h:49:
+  recipe-sysroot/usr/include/stdio.h:299:14: note: previous declaration of 'fdopen' with type 'FILE *(int,  const char *)'
+  299 | extern FILE *fdopen (int __fd, const char *__modes) __THROW
+      |              ^~~~~~
+  ../../sharutils-4.15.2/lib/system.h:82:7: error: conflicting types for 'popen'; have 'FILE *(void)'
+   82 | FILE *popen ();
+      |       ^~~~~
+  recipe-sysroot/usr/include/stdio.h:893:14: note: previous declaration of 'popen' with type 'FILE *(const char *, const char *)'
+  893 | extern FILE *popen (const char *__command, const char *__modes)
+      |              ^~~~~
+  ../../sharutils-4.15.2/src/shar.c:112:12: error: conflicting types for 'localtime'; have 'struct tm *(void)'
+  112 | struct tm *localtime ();
+      |            ^~~~~~~~~
+  In file included from ../lib/time.h:39,
+                 from ../lib/sys/stat.h:44,
+                 from ../../sharutils-4.15.2/lib/system.h:32:
+  recipe-sysroot/usr/include/time.h:136:19: note: previous declaration of 'localtime' with type 'struct tm *(const time_t *)' {aka 'struct tm *(const long int *)'}
+  136 | extern struct tm *localtime (const time_t *__timer) __THROW;
+      |                   ^~~~~~~~~
+  ../../sharutils-4.15.2/src/uudecode.c:85:16: error: conflicting types for 'getpwnam'; have 'struct passwd *(void)'
+   85 | struct passwd *getpwnam ();
+      |                ^~~~~~~~
+  In file included from ../../sharutils-4.15.2/src/uudecode.c:76:
+  recipe-sysroot/usr/include/pwd.h:116:23: note: previous declaration of 'getpwnam' with type 'struct passwd *(const char *)'
+  116 | extern struct passwd *getpwnam (const char *__name) __nonnull ((1));
+      |                       ^~~~~~~~
+      |            ^~~~~~~~~
+
+Signed-off-by: mark.yang <mark.yang@lge.com>
 ---
- .../python/python3-pdm-backend_2.4.3.bb          | 14 --------------
- .../python/python3-pdm-build-locked_0.3.5.bb     | 14 --------------
- .../python/python3-pdm_2.22.4.bb                 | 16 ----------------
- 3 files changed, 44 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-pdm-backend_2.4.3.bb
- delete mode 100644 meta-python/recipes-devtools/python/python3-pdm-build-locked_0.3.5.bb
- delete mode 100644 meta-python/recipes-devtools/python/python3-pdm_2.22.4.bb
+ ...0001-fix-build-with-gcc-15.0.1-error.patch | 166 ++++++++++++++++++
+ .../sharutils/sharutils_4.15.2.bb             |   1 +
+ 2 files changed, 167 insertions(+)
+ create mode 100644 meta-oe/recipes-support/sharutils/sharutils/0001-fix-build-with-gcc-15.0.1-error.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-pdm-backend_2.4.3.bb b/meta-python/recipes-devtools/python/python3-pdm-backend_2.4.3.bb
-deleted file mode 100644
-index 46440c9d5d..0000000000
---- a/meta-python/recipes-devtools/python/python3-pdm-backend_2.4.3.bb
-+++ /dev/null
-@@ -1,14 +0,0 @@
--SUMMARY = "The build backend used by PDM that supports latest packaging standards"
--HOMEPAGE = "https://github.com/pdm-project/pdm-backend"
--LICENSE = "MIT"
--SECTION = "devel/python"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=4a564297b3c5b629a528b92fd8ff61ea"
--
--SRC_URI[sha256sum] = "dbd9047a7ac10d11a5227e97163b617ad5d665050476ff63867d971758200728"
--
--inherit pypi python_setuptools_build_meta
--
--PYPI_PACKAGE = "pdm_backend"
--UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-pdm-build-locked_0.3.5.bb b/meta-python/recipes-devtools/python/python3-pdm-build-locked_0.3.5.bb
-deleted file mode 100644
-index c0eee4e97d..0000000000
---- a/meta-python/recipes-devtools/python/python3-pdm-build-locked_0.3.5.bb
-+++ /dev/null
-@@ -1,14 +0,0 @@
--SUMMARY = "pdm plugin to publish locked dependencies as optional-dependencies"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=19382cdf9c143df4f00b9caa0b60c75a"
--
--SRC_URI[sha256sum] = "ab2f381e00d79841d46be2e6909c265038b9fa951de2bf551ca6adb7f6844201"
--
--inherit pypi python_setuptools_build_meta
--
--DEPENDS += " python3-pdm-backend-native"
--
--PYPI_PACKAGE = "pdm_build_locked"
--UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
--
--BBCLASSEXTEND += "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-pdm_2.22.4.bb b/meta-python/recipes-devtools/python/python3-pdm_2.22.4.bb
-deleted file mode 100644
-index e6f35b3c7a..0000000000
---- a/meta-python/recipes-devtools/python/python3-pdm_2.22.4.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--SUMMARY = "A modern Python package and dependency manager supporting the latest PEP standards"
--HOMEPAGE = "https://pdm-project.org/latest/"
--LICENSE = "MIT"
--SECTION = "devel/python"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=2eb31a2cc1a758c34b499f287dd04ef2"
--
--SRC_URI[sha256sum] = "8483f3d2285039cea7e07c5ba6ac7e1fcba358129f8831fb75065a797d27b923"
--
--inherit pypi python_setuptools_build_meta
--
--DEPENDS += " \
--    python3-pdm-backend-native \
--    python3-pdm-build-locked-native \
--"
--
--BBCLASSEXTEND = "native nativesdk"
--- 
-2.43.0
-
+diff --git a/meta-oe/recipes-support/sharutils/sharutils/0001-fix-build-with-gcc-15.0.1-error.patch b/meta-oe/recipes-support/sharutils/sharutils/0001-fix-build-with-gcc-15.0.1-error.patch
+new file mode 100644
+index 0000000000..2d4d4196df
+--- /dev/null
++++ b/meta-oe/recipes-support/sharutils/sharutils/0001-fix-build-with-gcc-15.0.1-error.patch
+@@ -0,0 +1,166 @@
++From dd953cb6db70493d113dd60e47ef90307bc3062d Mon Sep 17 00:00:00 2001
++From: "mark.yang" <mark.yang@lge.com>
++Date: Thu, 3 Apr 2025 14:52:48 +0900
++Subject: [PATCH] fix build with gcc-15.0.1 error
++
++* ../../sharutils-4.15.2/lib/system.h:51:36: error: expected ';', identifier or '(' before 'bool'
++   51 | typedef enum {false = 0, true = 1} bool;
++      |                                    ^~~~
++  ../../sharutils-4.15.2/lib/system.h:79:7: error: conflicting types for 'fdopen'; have 'FILE *(void)'
++   79 | FILE *fdopen ();
++      |       ^~~~~~
++  In file included from ../lib/stdio.h:43,
++                 from ../../sharutils-4.15.2/libopts/autoopts/options.h:42,
++                 from ../../sharutils-4.15.2/src/shar-opts.h:49:
++  recipe-sysroot/usr/include/stdio.h:299:14: note: previous declaration of 'fdopen' with type 'FILE *(int,  const char *)'
++  299 | extern FILE *fdopen (int __fd, const char *__modes) __THROW
++      |              ^~~~~~
++  ../../sharutils-4.15.2/lib/system.h:82:7: error: conflicting types for 'popen'; have 'FILE *(void)'
++   82 | FILE *popen ();
++      |       ^~~~~
++  recipe-sysroot/usr/include/stdio.h:893:14: note: previous declaration of 'popen' with type 'FILE *(const char *, const char *)'
++  893 | extern FILE *popen (const char *__command, const char *__modes)
++      |              ^~~~~
++  ../../sharutils-4.15.2/src/shar.c:112:12: error: conflicting types for 'localtime'; have 'struct tm *(void)'
++  112 | struct tm *localtime ();
++      |            ^~~~~~~~~
++  In file included from ../lib/time.h:39,
++                 from ../lib/sys/stat.h:44,
++                 from ../../sharutils-4.15.2/lib/system.h:32:
++  recipe-sysroot/usr/include/time.h:136:19: note: previous declaration of 'localtime' with type 'struct tm *(const time_t *)' {aka 'struct tm *(const long int *)'}
++  136 | extern struct tm *localtime (const time_t *__timer) __THROW;
++      |                   ^~~~~~~~~
++  ../../sharutils-4.15.2/src/uudecode.c:85:16: error: conflicting types for 'getpwnam'; have 'struct passwd *(void)'
++   85 | struct passwd *getpwnam ();
++      |                ^~~~~~~~
++  In file included from ../../sharutils-4.15.2/src/uudecode.c:76:
++  recipe-sysroot/usr/include/pwd.h:116:23: note: previous declaration of 'getpwnam' with type 'struct passwd *(const char *)'
++  116 | extern struct passwd *getpwnam (const char *__name) __nonnull ((1));
++      |                       ^~~~~~~~
++      |            ^~~~~~~~~
++
++* gcc-15 uses gnu23 standard for c:
++  https://gcc.gnu.org/git/?p=gcc.git;a=commitdiff;h=55e3bd376b2214e200fa76d12b67ff259b06c212
++  bool is included as a reserved word, causing an error due to duplicate declaration.
++
++  Also, when parameters are empty, an error occurs. Therefore, when using
++  functions from the standard library, modify the defines in configure.ac
++  and source code to use standard library functions.
++
++Upstream-Status: Inactive-Upstream [lastrelease: 2015]
++Signed-off-by: mark.yang <mark.yang@lge.com>
++---
++ configure.ac               | 2 +-
++ lib/system.h               | 6 ++++++
++ libopts/autoopts/options.h | 2 ++
++ libopts/compat/compat.h    | 2 ++
++ src/shar.c                 | 2 ++
++ src/uudecode.c             | 2 ++
++ 6 files changed, 15 insertions(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index 2ccaac9..fa66368 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -73,7 +73,7 @@ AC_HEADER_STDC
++ AC_STRUCT_TIMEZONE
++ AC_TYPE_SIZE_T
++ AC_TYPE_INTMAX_T
++-AC_CHECK_FUNCS([fchmod isascii strchr])
+++AC_CHECK_FUNCS([fchmod isascii strchr fdopen popen localtime getpwnam])
++ AC_FUNC_CLOSEDIR_VOID
++ AC_FUNC_FSEEKO
++ AC_REPLACE_FUNCS([memset mktime strftime xmalloc xstrdup])
++diff --git a/lib/system.h b/lib/system.h
++index 2b9846b..05864ac 100644
++--- a/lib/system.h
+++++ b/lib/system.h
++@@ -48,7 +48,9 @@ typedef long intmax_t;
++ #ifdef HAVE_STDBOOL_H
++ #include <stdbool.h>
++ #else
+++# if defined __STDC__ && defined __STDC_VERSION__ && __STDC_VERSION__ <= 201710L
++ typedef enum {false = 0, true = 1} bool;
+++# endif
++ #endif
++ 
++ #if !HAVE_DECL_STRTOIMAX && !defined strtoimax
++@@ -75,8 +77,12 @@ intmax_t strtoimax ();
++ # include <unistd.h>
++ #endif
++ 
+++#ifndef HAVE_FDOPEN
++ FILE *fdopen ();
+++#endif
+++#ifndef HAVE_POPEN
++ FILE *popen ();
+++#endif
++ 
++ /* Global functions of the shar package.  */
++ 
++diff --git a/libopts/autoopts/options.h b/libopts/autoopts/options.h
++index 0601d0f..2f86b5e 100644
++--- a/libopts/autoopts/options.h
+++++ b/libopts/autoopts/options.h
++@@ -65,12 +65,14 @@
++ #  if defined(HAVE_STDBOOL_H)
++ #    include <stdbool.h>
++ #  else
+++#    if defined __STDC__ && defined __STDC_VERSION__ && __STDC_VERSION__ <= 201710L
++      typedef enum { false = 0, true = 1 } _Bool;
++ #    define bool _Bool
++ 
++      /* The other macros must be usable in preprocessor directives.  */
++ #    define false 0
++ #    define true 1
+++#    endif
++ #  endif /* HAVE_SYSEXITS_H */
++ #endif /* COMPAT_H_GUARD */
++ // END-CONFIGURED-HEADERS
++diff --git a/libopts/compat/compat.h b/libopts/compat/compat.h
++index 561d55d..2ffea7e 100644
++--- a/libopts/compat/compat.h
+++++ b/libopts/compat/compat.h
++@@ -185,12 +185,14 @@
++ #ifdef HAVE_STDBOOL_H
++ #  include <stdbool.h>
++ #else
+++# if defined __STDC__ && defined __STDC_VERSION__ && __STDC_VERSION__ <= 201710L
++    typedef enum { false = 0, true = 1 } _Bool;
++ #  define bool _Bool
++ 
++    /* The other macros must be usable in preprocessor directives.  */
++ #  define false 0
++ #  define true 1
+++# endif
++ #endif
++ 
++ /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
++diff --git a/src/shar.c b/src/shar.c
++index 6d7ed1d..af976ea 100644
++--- a/src/shar.c
+++++ b/src/shar.c
++@@ -109,7 +109,9 @@ static inline unsigned char to_uchar (char ch) { return ch; }
++ #define IS_GRAPH(_c) (isprint (to_uchar (_c)) && !isspace (to_uchar (_c)))
++ #endif
++ 
+++#ifndef HAVE_LOCALTIME
++ struct tm *localtime ();
+++#endif
++ 
++ #if MSDOS
++           /* 1 extra for CR.  */
++diff --git a/src/uudecode.c b/src/uudecode.c
++index 0621c99..00a6345 100644
++--- a/src/uudecode.c
+++++ b/src/uudecode.c
++@@ -82,7 +82,9 @@ static char const cright_years_z[] =
++ #define UU_CHMOD(_n, _fd, _m)   chmod ((_n), UU_MODE_BITS(_m))
++ #endif
++ 
+++#ifndef HAVE_GETPWNAM
++ struct passwd *getpwnam ();
+++#endif
++ 
++ static uudecode_exit_code_t read_stduu(
++         const char *inname, const char *outname);
+diff --git a/meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb b/meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb
+index 1bded9f6d1..d98e49c97a 100644
+--- a/meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb
++++ b/meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb
+@@ -14,6 +14,7 @@ SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+            file://0002-Do-not-include-lib-md5.c-into-src-shar.c.patch \
+            file://0001-configure.ac-Check-and-define-intmax_t-type.patch \
+            file://0001-libopts.m4-accept-POSIX_SHELL-from-the-environment-d.patch \
++           file://0001-fix-build-with-gcc-15.0.1-error.patch \
+            "
+ SRC_URI[sha256sum] = "ee336e68549664e7a19b117adf02edfdeac6307f22e5ba78baca457116914637"
+ 
 
