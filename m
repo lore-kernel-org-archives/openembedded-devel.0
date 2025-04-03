@@ -1,273 +1,119 @@
-Return-Path: <mark.yang@lge.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5E94C3600C
-	for <webhook@archiver.kernel.org>; Thu,  3 Apr 2025 06:13:58 +0000 (UTC)
-Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.52])
- by mx.groups.io with SMTP id smtpd.web10.6951.1743660836358960446
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97D2DC3600C
+	for <webhook@archiver.kernel.org>; Thu,  3 Apr 2025 07:35:19 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.web10.7852.1743665712798099950
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Apr 2025 23:13:56 -0700
+ Thu, 03 Apr 2025 00:35:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.52, mailfrom: mark.yang@lge.com)
-Received: from unknown (HELO lgemrelse6q.lge.com) (156.147.1.121)
-	by 156.147.23.52 with ESMTP; 3 Apr 2025 15:13:53 +0900
-X-Original-SENDERIP: 156.147.1.121
-X-Original-MAILFROM: mark.yang@lge.com
-Received: from unknown (HELO markyang..) (10.177.121.109)
-	by 156.147.1.121 with ESMTP; 3 Apr 2025 15:13:53 +0900
-X-Original-SENDERIP: 10.177.121.109
-X-Original-MAILFROM: mark.yang@lge.com
-From: mark.yang@lge.com
-To: openembedded-devel@lists.openembedded.org
-Cc: "mark.yang" <mark.yang@lge.com>
-Subject: [meta-oe][PATCH] sharutils: fix build with gcc-15.0.1
-Date: Thu,  3 Apr 2025 15:13:51 +0900
-Message-Id: <20250403061351.922250-1-mark.yang@lge.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cz53eP+t;
+ spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-391342fc0b5so425610f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Apr 2025 00:35:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1743665711; x=1744270511; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=TR0czk/VmoKLNWizKLAS/t0qhHN0K/Tzl7bkujdSVGo=;
+        b=cz53eP+teg6it6z4fbwhBtP9AahLyjFEyvF4oLN2byZvkSIP/bq7Iy79bQA2SCYsvK
+         TBUgN0vt0M6MOCP7PHfHs88I5wnTZ/tnNrUn0+lGlphj9sDTVFmrLDIRJuUrhLIdRSj/
+         z1j8rZm7zL7qcZ08QA6n/vPe/ltpaHwOqI9Diz8bPrHDfKPF4XLREhFWt3125Z5SI0Xj
+         BvsbwPXYYKb55LfBakwwgjHMwNYpVeOEnQWA6wtt+DVwy86mPl7Pqt19qudO2mjrQiF3
+         aokK9YLHcn++rDHssnutrCSOpj0x1Kd/dgVTpCrbhuunYAteG4tb1wPl55TaoGVjyVt+
+         7dAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1743665711; x=1744270511;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=TR0czk/VmoKLNWizKLAS/t0qhHN0K/Tzl7bkujdSVGo=;
+        b=MvO5EnMjgqR6VPn9h2sgOQITV0bdLAoduGmrmDJpnWRZ9rzW+T9sZM10PuTedsmgo9
+         rLOp9+KOckTq+onKHVpPAQ5r1i08UgqKuxQQ8qu2rtElIS6nJqfZnk/bfq6+SqU4Ln7u
+         JTk51S14iS3oPS9A2l4ih81C9fYnDnm6g6PCmk8n9xXNeE6gQX5FYfVWdbaNUTTUx7By
+         OItfo2v3bnVpU98hLNEOpMtm4QCkw5utTz6AK/LQXew1XwmjqizeHkTyhDvCmRId9ueE
+         hUneO8nJQ+Kk6k/KfFBahaSGrZ+MYSfIZODMcGWnubnmEFMxsnmWx1yJuiZzwpjow600
+         RGJg==
+X-Gm-Message-State: AOJu0Yx3jadXw9gpvGaZxMg1xvBF0fPZbtYIWXDYhu0dvDN8lQlySegL
+	yeJ+Uf2tBdasgJ+Mti0sjOoYuzdZ7oxA+Acmuys+0ShRplaVa1oi
+X-Gm-Gg: ASbGncuS6Ye+yNRCDTahoBqLUPkwKaH4918by5sgZy3/JM/Pihu7BQCttgWF3ZXvNKr
+	NogDLrZwVTQfHrpikIDFfpK1WJwVSr0DJ8JDzsn4M6nxhMBXqzgyhDhXUmJah9HemKVkMfwEorz
+	yaGkZWAU0J/uc6jEHCCoTbPY+iVzPy5kc/C7gUG5sDho83HWTEblxjsWpwilRVhvxjcT+ALunqG
+	ZufDPzn0jOY1vdPqw4dmnPgKze2vo1rZxK4udPkzCsV0YF528J7KXEShP7e0CNYl/LTTOReRtyR
+	YRbPLQkV3+ja3UboUVt6kExnvzJD6dmI+we9M1SFTMtnnt6PEQ==
+X-Google-Smtp-Source: AGHT+IGNlaJD7Ib3Inof/lF/hDnPvBKSIP2GtC6+6NXF1zc+qZKgXajdM7A9IMR1qnH93Urt0YHlUg==
+X-Received: by 2002:a5d:5f93:0:b0:39c:140b:feec with SMTP id ffacd0b85a97d-39c2f8c6640mr1054271f8f.7.1743665710750;
+        Thu, 03 Apr 2025 00:35:10 -0700 (PDT)
+Received: from [192.168.1.2] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-39c301ba2dfsm1015766f8f.60.2025.04.03.00.35.09
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 03 Apr 2025 00:35:10 -0700 (PDT)
+Message-ID: <400fa42d-4c27-4ef0-86f4-62046b0cd021@gmail.com>
+Date: Thu, 3 Apr 2025 09:35:09 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [linux-yocto] error of tiptop
+To: wangmy@fujitsu.com,
+ "linux-yocto@lists.yoctoproject.org" <linux-yocto@lists.yoctoproject.org>
+Cc: "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>
+References: <TYWPR01MB118613486A025B1F8AE633026DCAF2@TYWPR01MB11861.jpnprd01.prod.outlook.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <TYWPR01MB118613486A025B1F8AE633026DCAF2@TYWPR01MB11861.jpnprd01.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Apr 2025 06:13:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116530
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Apr 2025 07:35:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116531
 
-From: "mark.yang" <mark.yang@lge.com>
+On what machine are you trying to run it? At least in qemu I get the
+same, unless I enable kvm directly:
 
-* gcc-15 uses gnu23 standard for c:
-  https://gcc.gnu.org/git/?p=gcc.git;a=commitdiff;h=55e3bd376b2214e200fa76d12b67ff259b06c212
-  bool is included as a reserved word, causing an error due to duplicate declaration.
+runqemu qemux86-64 qemuparams=" --enable-kvm "
 
-  Also, when parameters are empty, an error occurs. Therefore, when using
-  functions from the standard library, modify the defines in configure.ac
-  and source code to use standard library functions.
+This way I don't get that error.
 
-* ../../sharutils-4.15.2/lib/system.h:51:36: error: expected ';', identifier or '(' before 'bool'
-   51 | typedef enum {false = 0, true = 1} bool;
-      |                                    ^~~~
-  ../../sharutils-4.15.2/lib/system.h:79:7: error: conflicting types for 'fdopen'; have 'FILE *(void)'
-   79 | FILE *fdopen ();
-      |       ^~~~~~
-  In file included from ../lib/stdio.h:43,
-                 from ../../sharutils-4.15.2/libopts/autoopts/options.h:42,
-                 from ../../sharutils-4.15.2/src/shar-opts.h:49:
-  recipe-sysroot/usr/include/stdio.h:299:14: note: previous declaration of 'fdopen' with type 'FILE *(int,  const char *)'
-  299 | extern FILE *fdopen (int __fd, const char *__modes) __THROW
-      |              ^~~~~~
-  ../../sharutils-4.15.2/lib/system.h:82:7: error: conflicting types for 'popen'; have 'FILE *(void)'
-   82 | FILE *popen ();
-      |       ^~~~~
-  recipe-sysroot/usr/include/stdio.h:893:14: note: previous declaration of 'popen' with type 'FILE *(const char *, const char *)'
-  893 | extern FILE *popen (const char *__command, const char *__modes)
-      |              ^~~~~
-  ../../sharutils-4.15.2/src/shar.c:112:12: error: conflicting types for 'localtime'; have 'struct tm *(void)'
-  112 | struct tm *localtime ();
-      |            ^~~~~~~~~
-  In file included from ../lib/time.h:39,
-                 from ../lib/sys/stat.h:44,
-                 from ../../sharutils-4.15.2/lib/system.h:32:
-  recipe-sysroot/usr/include/time.h:136:19: note: previous declaration of 'localtime' with type 'struct tm *(const time_t *)' {aka 'struct tm *(const long int *)'}
-  136 | extern struct tm *localtime (const time_t *__timer) __THROW;
-      |                   ^~~~~~~~~
-  ../../sharutils-4.15.2/src/uudecode.c:85:16: error: conflicting types for 'getpwnam'; have 'struct passwd *(void)'
-   85 | struct passwd *getpwnam ();
-      |                ^~~~~~~~
-  In file included from ../../sharutils-4.15.2/src/uudecode.c:76:
-  recipe-sysroot/usr/include/pwd.h:116:23: note: previous declaration of 'getpwnam' with type 'struct passwd *(const char *)'
-  116 | extern struct passwd *getpwnam (const char *__name) __nonnull ((1));
-      |                       ^~~~~~~~
-      |            ^~~~~~~~~
+On 4/2/25 10:52, wangmy via lists.openembedded.org wrote:
+> Hi,
+> 
+> When running tiptop on the image of x86-64 for the latest repository of poky and meta-oe, an error occurred.
+> 
+> root # tiptop -h
+> syscall: Operation not permitted
+> Could not perform syscall.
+> Don't know why...
+> 
+> According to preliminary investigation, the cause of this issue is related to kenerl updating of perf related code.
+> This problem has been occurring since the commit f390c2eea571945f357a2d3b9fcb1c015767132e of branch v6.6/standard/base
+> 
+> May I ask if you have any opinions or suggestions regarding this issue?
+> 
+>   --
+> Best Regards
+> ---------------------------------------------------
+> Wang Mingyu
+> FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
+> No.6 Wenzhu Road, Nanjing, 210012, China
+> TEL：+86+25-86630566--8568
+> COINS: 79988548
+> FAX: +86+25-83317685
+> MAIL: wangmy@fujitsu.com
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#116514): https://lists.openembedded.org/g/openembedded-devel/message/116514
+> Mute This Topic: https://lists.openembedded.org/mt/112043323/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
-Signed-off-by: mark.yang <mark.yang@lge.com>
----
- ...0001-fix-build-with-gcc-15.0.1-error.patch | 166 ++++++++++++++++++
- .../sharutils/sharutils_4.15.2.bb             |   1 +
- 2 files changed, 167 insertions(+)
- create mode 100644 meta-oe/recipes-support/sharutils/sharutils/0001-fix-build-with-gcc-15.0.1-error.patch
-
-diff --git a/meta-oe/recipes-support/sharutils/sharutils/0001-fix-build-with-gcc-15.0.1-error.patch b/meta-oe/recipes-support/sharutils/sharutils/0001-fix-build-with-gcc-15.0.1-error.patch
-new file mode 100644
-index 0000000000..2d4d4196df
---- /dev/null
-+++ b/meta-oe/recipes-support/sharutils/sharutils/0001-fix-build-with-gcc-15.0.1-error.patch
-@@ -0,0 +1,166 @@
-+From dd953cb6db70493d113dd60e47ef90307bc3062d Mon Sep 17 00:00:00 2001
-+From: "mark.yang" <mark.yang@lge.com>
-+Date: Thu, 3 Apr 2025 14:52:48 +0900
-+Subject: [PATCH] fix build with gcc-15.0.1 error
-+
-+* ../../sharutils-4.15.2/lib/system.h:51:36: error: expected ';', identifier or '(' before 'bool'
-+   51 | typedef enum {false = 0, true = 1} bool;
-+      |                                    ^~~~
-+  ../../sharutils-4.15.2/lib/system.h:79:7: error: conflicting types for 'fdopen'; have 'FILE *(void)'
-+   79 | FILE *fdopen ();
-+      |       ^~~~~~
-+  In file included from ../lib/stdio.h:43,
-+                 from ../../sharutils-4.15.2/libopts/autoopts/options.h:42,
-+                 from ../../sharutils-4.15.2/src/shar-opts.h:49:
-+  recipe-sysroot/usr/include/stdio.h:299:14: note: previous declaration of 'fdopen' with type 'FILE *(int,  const char *)'
-+  299 | extern FILE *fdopen (int __fd, const char *__modes) __THROW
-+      |              ^~~~~~
-+  ../../sharutils-4.15.2/lib/system.h:82:7: error: conflicting types for 'popen'; have 'FILE *(void)'
-+   82 | FILE *popen ();
-+      |       ^~~~~
-+  recipe-sysroot/usr/include/stdio.h:893:14: note: previous declaration of 'popen' with type 'FILE *(const char *, const char *)'
-+  893 | extern FILE *popen (const char *__command, const char *__modes)
-+      |              ^~~~~
-+  ../../sharutils-4.15.2/src/shar.c:112:12: error: conflicting types for 'localtime'; have 'struct tm *(void)'
-+  112 | struct tm *localtime ();
-+      |            ^~~~~~~~~
-+  In file included from ../lib/time.h:39,
-+                 from ../lib/sys/stat.h:44,
-+                 from ../../sharutils-4.15.2/lib/system.h:32:
-+  recipe-sysroot/usr/include/time.h:136:19: note: previous declaration of 'localtime' with type 'struct tm *(const time_t *)' {aka 'struct tm *(const long int *)'}
-+  136 | extern struct tm *localtime (const time_t *__timer) __THROW;
-+      |                   ^~~~~~~~~
-+  ../../sharutils-4.15.2/src/uudecode.c:85:16: error: conflicting types for 'getpwnam'; have 'struct passwd *(void)'
-+   85 | struct passwd *getpwnam ();
-+      |                ^~~~~~~~
-+  In file included from ../../sharutils-4.15.2/src/uudecode.c:76:
-+  recipe-sysroot/usr/include/pwd.h:116:23: note: previous declaration of 'getpwnam' with type 'struct passwd *(const char *)'
-+  116 | extern struct passwd *getpwnam (const char *__name) __nonnull ((1));
-+      |                       ^~~~~~~~
-+      |            ^~~~~~~~~
-+
-+* gcc-15 uses gnu23 standard for c:
-+  https://gcc.gnu.org/git/?p=gcc.git;a=commitdiff;h=55e3bd376b2214e200fa76d12b67ff259b06c212
-+  bool is included as a reserved word, causing an error due to duplicate declaration.
-+
-+  Also, when parameters are empty, an error occurs. Therefore, when using
-+  functions from the standard library, modify the defines in configure.ac
-+  and source code to use standard library functions.
-+
-+Upstream-Status: Inactive-Upstream [lastrelease: 2015]
-+Signed-off-by: mark.yang <mark.yang@lge.com>
-+---
-+ configure.ac               | 2 +-
-+ lib/system.h               | 6 ++++++
-+ libopts/autoopts/options.h | 2 ++
-+ libopts/compat/compat.h    | 2 ++
-+ src/shar.c                 | 2 ++
-+ src/uudecode.c             | 2 ++
-+ 6 files changed, 15 insertions(+), 1 deletion(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 2ccaac9..fa66368 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -73,7 +73,7 @@ AC_HEADER_STDC
-+ AC_STRUCT_TIMEZONE
-+ AC_TYPE_SIZE_T
-+ AC_TYPE_INTMAX_T
-+-AC_CHECK_FUNCS([fchmod isascii strchr])
-++AC_CHECK_FUNCS([fchmod isascii strchr fdopen popen localtime getpwnam])
-+ AC_FUNC_CLOSEDIR_VOID
-+ AC_FUNC_FSEEKO
-+ AC_REPLACE_FUNCS([memset mktime strftime xmalloc xstrdup])
-+diff --git a/lib/system.h b/lib/system.h
-+index 2b9846b..05864ac 100644
-+--- a/lib/system.h
-++++ b/lib/system.h
-+@@ -48,7 +48,9 @@ typedef long intmax_t;
-+ #ifdef HAVE_STDBOOL_H
-+ #include <stdbool.h>
-+ #else
-++# if defined __STDC__ && defined __STDC_VERSION__ && __STDC_VERSION__ <= 201710L
-+ typedef enum {false = 0, true = 1} bool;
-++# endif
-+ #endif
-+ 
-+ #if !HAVE_DECL_STRTOIMAX && !defined strtoimax
-+@@ -75,8 +77,12 @@ intmax_t strtoimax ();
-+ # include <unistd.h>
-+ #endif
-+ 
-++#ifndef HAVE_FDOPEN
-+ FILE *fdopen ();
-++#endif
-++#ifndef HAVE_POPEN
-+ FILE *popen ();
-++#endif
-+ 
-+ /* Global functions of the shar package.  */
-+ 
-+diff --git a/libopts/autoopts/options.h b/libopts/autoopts/options.h
-+index 0601d0f..2f86b5e 100644
-+--- a/libopts/autoopts/options.h
-++++ b/libopts/autoopts/options.h
-+@@ -65,12 +65,14 @@
-+ #  if defined(HAVE_STDBOOL_H)
-+ #    include <stdbool.h>
-+ #  else
-++#    if defined __STDC__ && defined __STDC_VERSION__ && __STDC_VERSION__ <= 201710L
-+      typedef enum { false = 0, true = 1 } _Bool;
-+ #    define bool _Bool
-+ 
-+      /* The other macros must be usable in preprocessor directives.  */
-+ #    define false 0
-+ #    define true 1
-++#    endif
-+ #  endif /* HAVE_SYSEXITS_H */
-+ #endif /* COMPAT_H_GUARD */
-+ // END-CONFIGURED-HEADERS
-+diff --git a/libopts/compat/compat.h b/libopts/compat/compat.h
-+index 561d55d..2ffea7e 100644
-+--- a/libopts/compat/compat.h
-++++ b/libopts/compat/compat.h
-+@@ -185,12 +185,14 @@
-+ #ifdef HAVE_STDBOOL_H
-+ #  include <stdbool.h>
-+ #else
-++# if defined __STDC__ && defined __STDC_VERSION__ && __STDC_VERSION__ <= 201710L
-+    typedef enum { false = 0, true = 1 } _Bool;
-+ #  define bool _Bool
-+ 
-+    /* The other macros must be usable in preprocessor directives.  */
-+ #  define false 0
-+ #  define true 1
-++# endif
-+ #endif
-+ 
-+ /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-+diff --git a/src/shar.c b/src/shar.c
-+index 6d7ed1d..af976ea 100644
-+--- a/src/shar.c
-++++ b/src/shar.c
-+@@ -109,7 +109,9 @@ static inline unsigned char to_uchar (char ch) { return ch; }
-+ #define IS_GRAPH(_c) (isprint (to_uchar (_c)) && !isspace (to_uchar (_c)))
-+ #endif
-+ 
-++#ifndef HAVE_LOCALTIME
-+ struct tm *localtime ();
-++#endif
-+ 
-+ #if MSDOS
-+           /* 1 extra for CR.  */
-+diff --git a/src/uudecode.c b/src/uudecode.c
-+index 0621c99..00a6345 100644
-+--- a/src/uudecode.c
-++++ b/src/uudecode.c
-+@@ -82,7 +82,9 @@ static char const cright_years_z[] =
-+ #define UU_CHMOD(_n, _fd, _m)   chmod ((_n), UU_MODE_BITS(_m))
-+ #endif
-+ 
-++#ifndef HAVE_GETPWNAM
-+ struct passwd *getpwnam ();
-++#endif
-+ 
-+ static uudecode_exit_code_t read_stduu(
-+         const char *inname, const char *outname);
-diff --git a/meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb b/meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb
-index 1bded9f6d1..d98e49c97a 100644
---- a/meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb
-+++ b/meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb
-@@ -14,6 +14,7 @@ SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-            file://0002-Do-not-include-lib-md5.c-into-src-shar.c.patch \
-            file://0001-configure.ac-Check-and-define-intmax_t-type.patch \
-            file://0001-libopts.m4-accept-POSIX_SHELL-from-the-environment-d.patch \
-+           file://0001-fix-build-with-gcc-15.0.1-error.patch \
-            "
- SRC_URI[sha256sum] = "ee336e68549664e7a19b117adf02edfdeac6307f22e5ba78baca457116914637"
- 
 
