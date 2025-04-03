@@ -1,110 +1,136 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <leimaohui@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4BCABC36017
-	for <webhook@archiver.kernel.org>; Wed,  2 Apr 2025 16:27:42 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web11.13504.1743611254884210082
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73B38C36014
+	for <webhook@archiver.kernel.org>; Thu,  3 Apr 2025 02:57:07 +0000 (UTC)
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.web10.4668.1743649023181574936
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Apr 2025 09:27:34 -0700
+ Wed, 02 Apr 2025 19:57:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jA8+hvRO;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-224191d92e4so404095ad.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Apr 2025 09:27:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1743611254; x=1744216054; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=b9klOQ3L/fVvFXHD/aYYklKHelxjR57wyfybDDSu/Ls=;
-        b=jA8+hvROE4CGQwtnGdd89FEa5VcqzIRUXm4Rs0ihw/lD/fq0hLBXe/IrlfEdGBdndp
-         jbQr59kRSTqePLSyY13q8T7+7UUlQAaM2KEaXuEQ1CujLZaIW3ixvVoa2OmltB/H2bPq
-         NmId0hK7ppeiZdGynthFIHgt3KqfEuKhQzXG8JbgwEnBdzdBnTU2+46YgzhgygCdq6ZL
-         nVdUV0GS+wwNTYP7hV3Yif6AyhtutaAREj4Hb3jrFfHMbic8gxhoN7cd7v/s707BrLcO
-         pPc7PLeipv8wsY5A1IajPcBiptmdICCkkQ+EYL1Ywqw5xz9SEp0pS+IYqDOWN60aykzG
-         1LNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743611254; x=1744216054;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=b9klOQ3L/fVvFXHD/aYYklKHelxjR57wyfybDDSu/Ls=;
-        b=e7l72Ns9I+xBwlCplIrn3gdTOMHkzbOfFSHXdB3hcgs0v4M6z7uwdmXLwwTu5ocdHf
-         wlg03s3EW7cjEPLolkKQVysSL3glHKnGjNwylGIq4x01hWIzyfXg47CeiK3OS7wrQyFl
-         TsWSug+mOw96wFfWlppejNznyxf8xCoowJUQAiYlrRjI5CMH30SRnIPbg3bZ6YP7nO4q
-         ONQpzJHxrLVJLxzn/ZaEVjAsIQMv7RbldVtN40Lt8UZKtpwcgyADw1KaFcZnnZF0XFiC
-         XgTMutylZE7HcNAbxhRAww5IEcKA70EmbuHgiLfQjIQ0jgGbq5yrSYBLSG5ToQSrF3pI
-         n6uQ==
-X-Gm-Message-State: AOJu0Yx5pnW1ZW4dFF7UhjhgZ92GZmzfF7nvXwUGLqspEN2JBe6Hck6P
-	r9jhy1wyNJ083QOP8YkT5MEZGgCp/3iZcMzrJ7S6EkeBvYBReTiXUs4gu0Q/
-X-Gm-Gg: ASbGnculYlO8lriHp8HmkAfAClg8+RzTYAKbHE5Xy9wKboPHiUu5eqiUSOcv8KMyb5p
-	GnijtS0a6prr+HX+8Tdeq+SGVahQvy2btJHLIY6jTFNWmmLXHW7ru1VBrtmBNPUM6hX4MYdibrd
-	Dh9omeIX0wmWx0mBU/Ag3BoMLo7gx0aRa6Wv+9nvhpUDzKlqUywHxcEzBDm094p58wUWkiWvNqZ
-	CYb8rZUDUv5ZxUwVztNd07pOvygbWoLKXx+7GPd9ObutZEFs2jIRMReq7DR4xO/hF/Fq4Pi9lwS
-	jJeaHeLPf/oox3s2JADnME9dVikXY9mUsoDZ5QiYJOlHTJQ=
-X-Google-Smtp-Source: AGHT+IFzry7uk2aVNz0c2jP6IyUj6IwRDIf47OAb9kzOl84P5M3T4S/ZrJceBI6aFdM1NFhW1talFA==
-X-Received: by 2002:a17:902:ebc3:b0:21f:45d:21fb with SMTP id d9443c01a7336-2292f946db4mr277040355ad.3.1743611253828;
-        Wed, 02 Apr 2025 09:27:33 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:8201:fd20::c3db])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-73970def558sm11548902b3a.15.2025.04.02.09.27.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Apr 2025 09:27:33 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH] python3-breathe: Inherit ptest-python-pytest instead of ptest
-Date: Wed,  2 Apr 2025 09:27:31 -0700
-Message-ID: <20250402162731.2675440-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.49.0
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=QzkUtxZX;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: leimaohui@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1743649023; x=1775185023;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=FuCN3FcipEfDYqrbKXOp+0QVq6aIa+QbmoU0DdbHXpI=;
+  b=QzkUtxZXWvfcjuW4eOmTWTnfFATD7X+dULpIzFZdbuFIohHXRnNraHTv
+   gaC/mpgLYNzCByhSPoTuQIirSN0exiIYxBixBTebzJlYu4SRXDk+8R4YH
+   8Q57s/mhFVlcVNKiz7NsHn1TfGSv2zTOvO/Y5MfBEjPDjVRbJCAgO1lqu
+   lqF0Hg5pE8rBBHeeeE/iRpNUVR6RuYbObu/p5aSATAm174SCo/krbiz4k
+   c3Ni5Rdmw2dozfzpMa3rSnZc55J5UsDqFN08tFwrjYdksiopRUoF/Xplw
+   WOcc0H8UnSp0K3S/M3o1WED0YXOayQA1LeuNjTXFqC7B8cF0Wl+PHTPlg
+   A==;
+X-CSE-ConnectionGUID: kZLRFmWaSv2q4E0rqxD0Uw==
+X-CSE-MsgGUID: oqBx9rh5R7an0d1y0ZZppQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11392"; a="183679665"
+X-IronPort-AV: E=Sophos;i="6.15,184,1739804400"; 
+   d="scan'208";a="183679665"
+Received: from unknown (HELO oym-r1.gw.nic.fujitsu.com) ([210.162.30.89])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Apr 2025 11:57:00 +0900
+Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
+	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id CB9EAD4808
+	for <openembedded-devel@lists.openembedded.org>; Thu,  3 Apr 2025 11:56:58 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 8D480BDB63
+	for <openembedded-devel@lists.openembedded.org>; Thu,  3 Apr 2025 11:56:58 +0900 (JST)
+Received: from G08FNSTD190088.g08.fujitsu.local (unknown [10.167.135.33])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id F2DE61A009A;
+	Thu,  3 Apr 2025 10:56:57 +0800 (CST)
+From: Lei Maohui <leimaohui@fujitsu.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org,
+	Lei Maohui <leimaohui@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-pdm python3-pdm-{backend,build-locked}: move to oe-core
+Date: Thu,  3 Apr 2025 10:56:51 +0800
+Message-Id: <20250403025651.2197-1-leimaohui@fujitsu.com>
+X-Mailer: git-send-email 2.38.1.windows.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 02 Apr 2025 16:27:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116528
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Apr 2025 02:57:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116529
 
-This eliminates more boiler plate code and add needed depednecies for
-ptest package
+They are dependencies of python3-webcolors
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
 ---
- meta-python/recipes/devtool/python3-breathe/run-ptest | 3 ---
- meta-python/recipes/devtool/python3-breathe_4.36.0.bb | 9 +--------
- 2 files changed, 1 insertion(+), 11 deletions(-)
- delete mode 100644 meta-python/recipes/devtool/python3-breathe/run-ptest
+ .../python/python3-pdm-backend_2.4.3.bb          | 14 --------------
+ .../python/python3-pdm-build-locked_0.3.5.bb     | 14 --------------
+ .../python/python3-pdm_2.22.4.bb                 | 16 ----------------
+ 3 files changed, 44 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pdm-backend_2.4.3.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pdm-build-locked_0.3.5.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pdm_2.22.4.bb
 
-diff --git a/meta-python/recipes/devtool/python3-breathe/run-ptest b/meta-python/recipes/devtool/python3-breathe/run-ptest
+diff --git a/meta-python/recipes-devtools/python/python3-pdm-backend_2.4.3.bb b/meta-python/recipes-devtools/python/python3-pdm-backend_2.4.3.bb
 deleted file mode 100644
-index 8d2017d39c..0000000000
---- a/meta-python/recipes/devtool/python3-breathe/run-ptest
+index 46440c9d5d..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pdm-backend_2.4.3.bb
 +++ /dev/null
-@@ -1,3 +0,0 @@
--#!/bin/sh
+@@ -1,14 +0,0 @@
+-SUMMARY = "The build backend used by PDM that supports latest packaging standards"
+-HOMEPAGE = "https://github.com/pdm-project/pdm-backend"
+-LICENSE = "MIT"
+-SECTION = "devel/python"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=4a564297b3c5b629a528b92fd8ff61ea"
 -
--pytest --automake
-diff --git a/meta-python/recipes/devtool/python3-breathe_4.36.0.bb b/meta-python/recipes/devtool/python3-breathe_4.36.0.bb
-index dc14f1ce1c..fe3d1eeb91 100644
---- a/meta-python/recipes/devtool/python3-breathe_4.36.0.bb
-+++ b/meta-python/recipes/devtool/python3-breathe_4.36.0.bb
-@@ -6,17 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9e49eecf36fc015de7c61a0247df75d6"
- 
- SRC_URI[sha256sum] = "14860b73118ac140b7a3f55446890c777d1b67149cb024279fe3710dad7f535c"
- 
--inherit pypi python_flit_core ptest
+-SRC_URI[sha256sum] = "dbd9047a7ac10d11a5227e97163b617ad5d665050476ff63867d971758200728"
 -
--SRC_URI:append = " file://run-ptest"
-+inherit pypi python_flit_core ptest ptest-python-pytest
- 
- RDEPENDS:${PN} = "python3-sphinx"
- 
- PYPI_PACKAGE = "breathe"
- 
--do_install_ptest() {
--        install -d ${D}${PTEST_PATH}/tests
--        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
--}
+-inherit pypi python_setuptools_build_meta
 -
- BBCLASSEXTEND =+ "native"
+-PYPI_PACKAGE = "pdm_backend"
+-UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-pdm-build-locked_0.3.5.bb b/meta-python/recipes-devtools/python/python3-pdm-build-locked_0.3.5.bb
+deleted file mode 100644
+index c0eee4e97d..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pdm-build-locked_0.3.5.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-SUMMARY = "pdm plugin to publish locked dependencies as optional-dependencies"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=19382cdf9c143df4f00b9caa0b60c75a"
+-
+-SRC_URI[sha256sum] = "ab2f381e00d79841d46be2e6909c265038b9fa951de2bf551ca6adb7f6844201"
+-
+-inherit pypi python_setuptools_build_meta
+-
+-DEPENDS += " python3-pdm-backend-native"
+-
+-PYPI_PACKAGE = "pdm_build_locked"
+-UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+-
+-BBCLASSEXTEND += "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-pdm_2.22.4.bb b/meta-python/recipes-devtools/python/python3-pdm_2.22.4.bb
+deleted file mode 100644
+index e6f35b3c7a..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pdm_2.22.4.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-SUMMARY = "A modern Python package and dependency manager supporting the latest PEP standards"
+-HOMEPAGE = "https://pdm-project.org/latest/"
+-LICENSE = "MIT"
+-SECTION = "devel/python"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=2eb31a2cc1a758c34b499f287dd04ef2"
+-
+-SRC_URI[sha256sum] = "8483f3d2285039cea7e07c5ba6ac7e1fcba358129f8831fb75065a797d27b923"
+-
+-inherit pypi python_setuptools_build_meta
+-
+-DEPENDS += " \
+-    python3-pdm-backend-native \
+-    python3-pdm-build-locked-native \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
+-- 
+2.43.0
+
 
