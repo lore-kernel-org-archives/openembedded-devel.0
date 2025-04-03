@@ -1,157 +1,373 @@
-Return-Path: <denis.osterland@diehl.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 58951C3600C
-	for <webhook@archiver.kernel.org>; Thu,  3 Apr 2025 15:28:52 +0000 (UTC)
-Received: from enterprise01.smtp.diehl.com (enterprise01.smtp.diehl.com [193.201.238.219])
- by mx.groups.io with SMTP id smtpd.web10.16450.1743694126702001354
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 71A01C3600C
+	for <webhook@archiver.kernel.org>; Thu,  3 Apr 2025 15:53:42 +0000 (UTC)
+Received: from mail-oi1-f170.google.com (mail-oi1-f170.google.com [209.85.167.170])
+ by mx.groups.io with SMTP id smtpd.web11.17060.1743695618745216377
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Apr 2025 08:28:47 -0700
+ Thu, 03 Apr 2025 08:53:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@diehl.com header.s=default header.b=YKuGl16N;
- spf=pass (domain: diehl.com, ip: 193.201.238.219, mailfrom: prvs=181565551=denis.osterland@diehl.com)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=f8+iOmlO;
+ spf=pass (domain: gmail.com, ip: 209.85.167.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f170.google.com with SMTP id 5614622812f47-3f6a92f2328so546782b6e.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Apr 2025 08:53:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=diehl.com; i=@diehl.com; q=dns/txt; s=default;
-  t=1743694126; x=1775230126;
-  h=from:to:subject:date:message-id:
-   content-transfer-encoding:mime-version;
-  bh=h1lz67VT7ti9YyvI/T/TBBCI+z25xccm9YyGnLfeDNs=;
-  b=YKuGl16NKRwkDeQ0zeKpCGI555Xd1Vk0cZ4US7X+MBxmhgD3AxFb9v1K
-   Odrm0/WUjJ2XJmva1CUa52qK/CeJhUdfil7YHs8SYXpt03DAxfrVxJHfj
-   75oOFGSDVV+5sfffN1M6hAc5NDNb3hubWHKpQaJYODYl6Ni3FBjPyEfR/
-   qmR6fjzmaYoeQO1PapxjnIM/pDHbJx32Kt0RunQNzEc+niy1P2ifMXfgG
-   1Sw2YlO8BpkGoyAEh1j/ip/eZsFZmH3EDYktoqjwkgOcws+npndKjzbzy
-   XNjZbn4IC+cpiG5zGcUnTxzyQtYkk9dlF3miljJ4kd+MtBz6blBxu3Pwg
-   Q==;
-X-CSE-ConnectionGUID: Gce79UdDS+KtmAWsA6k8UA==
-X-CSE-MsgGUID: pqBq0776SqijNlgiwiHKQw==
-X-ThreatScanner-Verdict: Negative
-IronPort-Data: A9a23:ws9l86A2bZMQMxVW/0jiw5YqxClBgxIJ4kV8jS/XYbTApGsig2RSy
- WodD2yAPv/cMzOgeN51PI639kgOsJ/cxoVhTANkpHpgcSlH+JHPbTi7wuUcHAvPdJGZHBI/h
- yk6QoOdRCzhZiaE/n9BCpC48z8kk/nOHuegYAL9EngZbRd+Tys8gg5Ulec8g4p56fC0GArlV
- ena+qUzA3f7nWcpWo4ow/jb8k434Kyp4GlwUmEWPpingnePzhH5M7pPfcldH1OgKqFIE+izQ
- fr0zb3R1gvx4xc3B9q5pa3we0sMT6S6FVDmZq1+AvXKbrBq/0Te445jXBYuQR4/Zwahxrid/
- O5wWamYEm/FCEFudNM1CHG0GwkmVUFPFSSuzXKX6aR/xGWeG5fgLmkH4Ojb8uT0984uaVyi+
- 8D0JxgiZR3c1t+67In4afVpr/s4BZfobL427yQIITHxVZ7KQLj5aInhoPpx/RNr3oZFGuzGI
- cYYZDprKh/HZnWjOH9OUNRnwbzu3T+mKGUwRFG9/MLb50DfwQpwy/7qK8bYYNiDQ8l9kkeVp
- maA9GP8av0fHIXGmWbYqSPy34cjmwvjQagLTOLnqMVzgV+1wmMSFxw2dmKk9KzRZkmWHog3x
- 1Yv0i02oK4/8UamQtXwU1i0rWCJujYYWsFMCKs98AyLx6/e7gqVC2RCSSROAOHKr+dvHXpzi
- wTPxJWwXmQHXKCpdE9xP4y89VuaURX550dYDcPYZWPpO+Xenbw=
-IronPort-HdrOrdr: A9a23:HQssBq9RpgmsRubYYAZuk+H8db1zdoMgy1knxilNoENuGfBwxv
- rFoB1E73LJYDZ4YhEdcPS7Sc69qBTnhOdICOgqTNGftWzdyR+Vxe5ZnOnfKlHbdREWldQtsZ
- uIEZIObeEYZGIS5anHCWGDf+rIq+P3k5xA692+815dCQtubb1sqx10ABqBElBnLTM2cKYRJd
- 6X48xaqn67dX4KdcSnFj0pX+bOvcCjruOUXTc2QxQj7hWCySml4qLgEwWJmigfSC9U270r9g
- H+4nLEz5TmufS81hKZzWPY849XhcukwN1FA8CHl6EuW0XRozftboFmR7DHpjw+vPqu9UZvms
- LdugpIBbUImg6hARDGnTLdnwPk1ioir2Xvw0OCgWby5cbjVCsmT9NGgIJSYnLimjYdleA52q
- dMw2/crZZcEQjBgTS46tjTXRRjlk65uhMZ4J8upk0aW44ZdLIUt4AU4FhUDYdFBy7x6JkmHO
- 5yZfusn8p+QBeRanbEsy10zNaxRXQvDlOdTk8Ottf96UkvoExE
-X-Talos-CUID: 9a23:ki4PHmHq4m+coU4iqmJI/0NLS/0pXkae72vVCnCjIDhqGIC8HAo=
-X-Talos-MUID: 9a23:ZfAcxwi8fEnBrnyYRhU3osMpLN5C+vzxVx42iJQEnc2LNDNxGxSkk2Hi
-X-IronPort-AV: E=Sophos;i="6.15,184,1739833200"; 
-   d="scan'208";a="118453961"
-From: Denis OSTERLAND-HEIM <denis.osterland@diehl.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: [PATCH] libftdi: cpp-wrapper fix cmake support
-Thread-Topic: [PATCH] libftdi: cpp-wrapper fix cmake support
-Thread-Index: AdukrQadwxN0+KlrTliHHu2rgDEPFA==
-Date: Thu, 3 Apr 2025 15:28:44 +0000
-Message-ID: <954c1fdb92cb44d6b8dc3cd56dbb2b92@diehl.com>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-disclaimerprocessed: True
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+        d=gmail.com; s=20230601; t=1743695618; x=1744300418; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=fY8wl4kjZH9VltqwgGxxMNG4dD0D4YJRfkNsWnEcYIU=;
+        b=f8+iOmlOq0mqCwRTaL9lpmxaPMJhsMreOG7YX3IUm+xGlkEVUieb7JOmE9t23zLbrO
+         +IHPQDj/p5hghQBCcjVukBobcGQJmzv9J2IZxnGY5gj7f2S6wpoVy0IzNDCZDeiv5t7D
+         a9ncVyAoVA7sCkPHoP2s8nw8VtM0ktIlP/qFM9l8qP1hxGQrXjzCWOPrLnb1eHkjSzOW
+         Lv6+IjPpzDKl5clDGjV+KBFunYDHesx1+XiNzzwtl9D6nLnLC+qIjPDsfFjdZBI11Vl3
+         YkN32QFqMotll9RcGM+1/caOty18mIE4N+f4rD/lcwRVJ91s7kuULbnaRict74axSwci
+         wAtw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1743695618; x=1744300418;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=fY8wl4kjZH9VltqwgGxxMNG4dD0D4YJRfkNsWnEcYIU=;
+        b=O5NhPyqrddWqS+MWUE0dR1e7ae7A9gkZ+Vwdq4jBqz9YJ80JFLHgB5WIspuk/mKI2f
+         4TEZlR0scmLbmhwR1j0Oli0/rwe8voSr7zMi3Sf7Enb0hwnmUim1moFl+NU+erXQrEQc
+         NEZ6wl4zJc56jNvBRYciWplSZ4StqShkZq2M0KIThp2Hb7dfMDU3WaNl9/e2px6SJMqH
+         Luu2ijGSgClA0fRa5KG5xXpMfk8mU5ZArORwAwma+PJMW5jhOGeXJQO6T8OYeDJked2h
+         e9Rf35RaX5WalJ9dPBydxNrzEVIIMa3KjBt5N9gmJpNwM6bf0LcrtR5Mr8ljhUGuDhPk
+         iorA==
+X-Gm-Message-State: AOJu0Yx3K2Z03+I4DCyrhh3pHS1Cx1E7sr0sLxt597X0P0B+r7DEyZkf
+	nOo5tuGvnRiOS35fVcpbuSIu385Z4z8JyvRq0eZt5zfT1xebmOldntC/5liv2pPiFpDGqkz0mHX
+	TIwdY3MdsNyBaoWaTjIYrQ5xQuOU=
+X-Gm-Gg: ASbGnctEwgx6Kf2C40PZ/nd+7PI7dY5vnCeQXvEpMyO80Zs/w+iXRswYTKXIb+3HMtO
+	adm74jO9aCT1YhmLWbtUH47AKGNLZtOGsNsx7H5B1GA+uUdI8Rth5RiplUqNM3UhdVBkHPD3R8r
+	L5neVTOcuMGAnc0fpISt23ewNl
+X-Google-Smtp-Source: AGHT+IHl3o6oSKAo7KGkZTGPtlMxJvcP8jQiBMEtfv5rJrJ0dxtYJXACxcM4X3IC4jx6Gpve34uSC1Rxe/pVCoL+faA=
+X-Received: by 2002:a05:6808:200a:b0:3fa:1d22:6d28 with SMTP id
+ 5614622812f47-4003d5c6b28mr2217328b6e.18.1743695617851; Thu, 03 Apr 2025
+ 08:53:37 -0700 (PDT)
 MIME-Version: 1.0
-X-GBS-PROC: JH31JkgOAVpzNaKNEwNMTVei7Pxwj1EHy8uvHHRQFlss2eZLX8QDQWMN+ck7WfIp
-X-GBS-PROCJOB: q0aT6BXn3kd8ojdzO1c6ze6TXT75XgGS6wJ4YFFsj/GF0Tud5LT3Qggg4/ed4y45
+References: <20250403061351.922250-1-mark.yang@lge.com>
+In-Reply-To: <20250403061351.922250-1-mark.yang@lge.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 3 Apr 2025 08:53:11 -0700
+X-Gm-Features: AQ5f1JqSVG_DuLLIAKQRluma2dFudQl0Ho_SeQaHL--Kd-rYT6t4lMFntJs68bc
+Message-ID: <CAMKF1sr4Q42aUneu0G=dyMSNibKvSbYkJDaQ_Ba+GdGnWqr-ig@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] sharutils: fix build with gcc-15.0.1
+To: mark.yang@lge.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Apr 2025 15:28:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116543
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Apr 2025 15:53:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116544
 
-QmFja3BvcnQgZml4IGZvciBDKysgd3JhcHBlciBjbWFrZSBzdXBwb3J0Lg0KDQpTaWduZWQtb2Zm
-LWJ5OiBEZW5pcyBPc3RlcmxhbmQtSGVpbSA8ZGVuaXMub3N0ZXJsYW5kQGRpZWhsLmNvbT4NCi0t
-LQ0KIC4uLnN0cy10eHQtZml4LXBhdGhzLXdoZW4tRlRESVBQLWlzLXNldC5wYXRjaCB8IDQ1ICsr
-KysrKysrKysrKysrKysrKysNCiAuLi4vcmVjaXBlcy1zdXBwb3J0L2xpYmZ0ZGkvbGliZnRkaV8x
-LjUuYmIgICAgfCAgNSArKy0NCiAyIGZpbGVzIGNoYW5nZWQsIDQ5IGluc2VydGlvbnMoKyksIDEg
-ZGVsZXRpb24oLSkNCiBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQv
-bGliZnRkaS9maWxlcy9DTWFrZUxpc3RzLXR4dC1maXgtcGF0aHMtd2hlbi1GVERJUFAtaXMtc2V0
-LnBhdGNoDQoNCmRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJmdGRpL2Zp
-bGVzL0NNYWtlTGlzdHMtdHh0LWZpeC1wYXRocy13aGVuLUZURElQUC1pcy1zZXQucGF0Y2ggYi9t
-ZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJmdGRpL2ZpbGVzL0NNYWtlTGlzdHMtdHh0LWZpeC1w
-YXRocy13aGVuLUZURElQUC1pcy1zZXQucGF0Y2gNCm5ldyBmaWxlIG1vZGUgMTAwNjQ0DQppbmRl
-eCAwMDAwMDAwMDAwLi4yZmEzNTg3N2E3DQotLS0gL2Rldi9udWxsDQorKysgYi9tZXRhLW9lL3Jl
-Y2lwZXMtc3VwcG9ydC9saWJmdGRpL2ZpbGVzL0NNYWtlTGlzdHMtdHh0LWZpeC1wYXRocy13aGVu
-LUZURElQUC1pcy1zZXQucGF0Y2gNCkBAIC0wLDAgKzEsNDUgQEANCitGcm9tIGNkYjI4MzgzNDAy
-ZDI0OGRiYzYwNjJmNDM5MWIwMzgzNzVjNTIzODUgTW9uIFNlcCAxNyAwMDowMDowMCAyMDAxDQor
-RnJvbTogRmFicmljZSBGb250YWluZSA8Zm9udGFpbmUuZmFicmljZUBnbWFpbC5jb20+DQorRGF0
-ZTogRnJpLCAxNyBKdWwgMjAyMCAyMToyNTowMyArMDIwMA0KK1N1YmplY3Q6IFtQQVRDSF0gQ01h
-a2VMaXN0cy50eHQ6IGZpeCBwYXRocyB3aGVuIEZURElQUCBpcyBzZXQNCisNCitVc2UgdGhlIHNh
-bWUgcHJvamVjdCBuYW1lIChpLmUuIGxpYmZ0ZGkxIGFuZCBub3QgbGliZnRkaXBwMSkgd2hlbiBG
-VERJUFANCitpcyBlbmFibGVkIGFzIHN1Z2dlc3RlZCBieSBBdXJlbGllbiBKYXJubyBpbg0KK2h0
-dHA6Ly9kZXZlbG9wZXIuaW50cmEybmV0LmNvbS9tYWlsYXJjaGl2ZS9odG1sL2xpYmZ0ZGkvMjAy
-MC9tc2cwMDA0NC5odG1sDQorDQorV2l0aG91dCB0aGlzIGNoYW5nZSwgdGhlIGxpYmZ0ZGkxLnBj
-IGNvbmZpZyBmaWxlIGRlZmluZXMgdGhlIGluY2x1ZGUNCitwYXRoIGFzIC91c3IvbG9jYWwvaW5j
-bHVkZS9saWJmdGRpcHAxIHdoaWxlIHRoZSBmdGRpLmggZmlsZSBpcyBhY3R1YWxseQ0KK2luc3Rh
-bGxlZCBpbiAvdXNyL2xvY2FsL2luY2x1ZGUvbGliZnRkaTENCisNCitUaGlzIGlzIGFuIGlzc3Vl
-IGZvciBleGFtcGxlIGZvciBsaWJzaWdyb2sgd2hpY2ggd2lsbCBmYWlsIG9uOg0KKw0KK0luIGZp
-bGUgaW5jbHVkZWQgZnJvbSBzcmMvaGFyZHdhcmUvYXNpeC1zaWdtYS9wcm90b2NvbC5jOjI3Og0K
-K3NyYy9oYXJkd2FyZS9hc2l4LXNpZ21hL3Byb3RvY29sLmg6Mjg6MTA6IGZhdGFsIGVycm9yOiBm
-dGRpLmg6IE5vIHN1Y2ggZmlsZSBvciBkaXJlY3RvcnkNCisgICAyOCB8ICNpbmNsdWRlIDxmdGRp
-Lmg+DQorICAgICAgfCAgICAgICAgICBefn5+fn5+fg0KKw0KK0ZpeGVzOg0KKyAtIGh0dHA6Ly9h
-dXRvYnVpbGQuYnVpbGRyb290Lm9yZy9yZXN1bHRzLzE0MjdmNDRlMzY3NTJjMzM3NzkxNTk3ZmFi
-NDdhMTg4OTU1MmEyZmUNCisNCitTaWduZWQtb2ZmLWJ5OiBGYWJyaWNlIEZvbnRhaW5lIDxmb250
-YWluZS5mYWJyaWNlQGdtYWlsLmNvbT4NCitVcHN0cmVhbS1TdGF0dXM6IEJhY2twb3J0IFtodHRw
-Oi8vZGV2ZWxvcGVyLmludHJhMm5ldC5jb20vZ2l0Lz9wPWxpYmZ0ZGk7YT1wYXRjaDtoPWNkYjI4
-MzgzNDAyZDI0OGRiYzYwNjJmNDM5MWIwMzgzNzVjNTIzODVdDQorLS0tDQorIENNYWtlTGlzdHMu
-dHh0IHwgICAgMiArLQ0KKyAxIGZpbGVzIGNoYW5nZWQsIDEgaW5zZXJ0aW9ucygrKSwgMSBkZWxl
-dGlvbnMoLSkNCisNCitkaWZmIC0tZ2l0IGEvQ01ha2VMaXN0cy50eHQgYi9DTWFrZUxpc3RzLnR4
-dA0KK2luZGV4IDVhZWNhZmMuLjNiMGI4N2MgMTAwNjQ0DQorLS0tIGEvQ01ha2VMaXN0cy50eHQN
-CisrKysgYi9DTWFrZUxpc3RzLnR4dA0KK0BAIC0xMzYsNyArMTM2LDcgQEAgZW5kaWYgKCkNCisN
-CisgYWRkX3N1YmRpcmVjdG9yeShzcmMpDQorIGlmICggRlRESVBQICkNCistICBwcm9qZWN0KGxp
-YmZ0ZGlwcDEgQyBDWFgpDQorKyAgcHJvamVjdChsaWJmdGRpMSBDIENYWCkNCisgICBhZGRfc3Vi
-ZGlyZWN0b3J5KGZ0ZGlwcCkNCisgZW5kaWYgKCkNCisgaWYgKCBQWVRIT05fQklORElOR1MgKQ0K
-Ky0tDQorMS43LjENCisNCmRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJm
-dGRpL2xpYmZ0ZGlfMS41LmJiIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGliZnRkaS9saWJm
-dGRpXzEuNS5iYg0KaW5kZXggMDI4NGFkN2UyMi4uMTY3OWYyMTJiMyAxMDA2NDQNCi0tLSBhL21l
-dGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpYmZ0ZGkvbGliZnRkaV8xLjUuYmINCisrKyBiL21ldGEt
-b2UvcmVjaXBlcy1zdXBwb3J0L2xpYmZ0ZGkvbGliZnRkaV8xLjUuYmINCkBAIC0xMSw3ICsxMSwx
-MCBAQCBMSUNfRklMRVNfQ0hLU1VNID0gIlwNCg0KIERFUEVORFMgPSAibGlidXNiMSBweXRob24z
-IHN3aWctbmF0aXZlIg0KDQotU1JDX1VSSSA9ICJodHRwOi8vd3d3LmludHJhMm5ldC5jb20vZW4v
-ZGV2ZWxvcGVyLyR7QlBOfS9kb3dubG9hZC8ke0JQTn0xLSR7UFZ9LnRhci5iejIiDQorU1JDX1VS
-SSA9ICJcDQorICAgIGh0dHA6Ly93d3cuaW50cmEybmV0LmNvbS9lbi9kZXZlbG9wZXIvJHtCUE59
-L2Rvd25sb2FkLyR7QlBOfTEtJHtQVn0udGFyLmJ6MiBcDQorICAgIGZpbGU6Ly9DTWFrZUxpc3Rz
-LXR4dC1maXgtcGF0aHMtd2hlbi1GVERJUFAtaXMtc2V0LnBhdGNoIFwNCisiDQogU1JDX1VSSVtz
-aGEyNTZzdW1dID0gIjdjNzA5MWU5Yzg2MTk2MTQ4YmQ0MTE3N2I0NTkwZGNjYjE1MTBiZmU2Y2Vh
-NWJmNzQwN2ZmMTk0NDgyZWIwNDkiDQoNCiBVUFNUUkVBTV9DSEVDS19VUkkgPSAiaHR0cDovL3d3
-dy5pbnRyYTJuZXQuY29tL2VuL2RldmVsb3Blci9saWJmdGRpL2Rvd25sb2FkLnBocCINCi0tDQoy
-LjQ3LjINCkRpZWhsIE1ldGVyaW5nIEdtYkgsIERvbmF1c3RyYXNzZSAxMjAsIDkwNDUxIE51ZXJu
-YmVyZw0KU2l0eiBkZXIgR2VzZWxsc2NoYWZ0OiBBbnNiYWNoLCBSZWdpc3RlcmdlcmljaHQ6IEFu
-c2JhY2ggSFJCIDY5DQpHZXNjaGFlZnRzZnVlaHJlcjogRHIuIENocmlzdG9mIEJvc2JhY2ggKFNw
-cmVjaGVyKSwgRGlwbC4tRG9sbS4gQW5uZXR0ZSBHZXV0aGVyLCBEaXBsLi1LZm0uIFJlaW5lciBF
-ZGVsLCBKZWFuLUNsYXVkZSBMdXR0cmluZ2VyDQoNCkJpdHRlIGRlbmtlbiBTaWUgYW4gZGllIFVt
-d2VsdCwgYmV2b3IgU2llIGRpZXNlIEUtTWFpbCBkcnVja2VuLiBEaWVzZSBFLU1haWwga2FubiB2
-ZXJ0cmF1bGljaGUgSW5mb3JtYXRpb25lbiBlbnRoYWx0ZW4uIFNvbGx0ZW4gZGllIGluIGRpZXNl
-ciBFLU1haWwgZW50aGFsdGVuZW4gSW5mb3JtYXRpb25lbiBuaWNodCBmw7xyIFNpZSBiZXN0aW1t
-dCBzZWluLCBpbmZvcm1pZXJlbiBTaWUgYml0dGUgdW52ZXJ6dWVnbGljaCBkZW4gQWJzZW5kZXIg
-cGVyIEUtTWFpbCB1bmQgbG9lc2NoZW4gU2llIGRpZXNlIEUtTWFpbCBpbiBJaHJlbSBTeXN0ZW0u
-IEplZGUgdW5iZXJlY2h0aWd0ZSBGb3JtIGRlciBSZXByb2R1a3Rpb24sIEJla2FubnRnYWJlLCBB
-ZW5kZXJ1bmcsIFZlcnRlaWx1bmcgdW5kL29kZXIgUHVibGlrYXRpb24gZGllc2VyIEUtTWFpbCBp
-c3Qgc3RyZW5nc3RlbnMgdW50ZXJzYWd0LiBJbmZvcm1hdGlvbmVuIHp1bSBEYXRlbnNjaHV0eiBm
-aW5kZW4gU2llIGF1ZiB1bnNlcmVyIEhvbWVwYWdlPGh0dHBzOi8vd3d3LmRpZWhsLmNvbS9tZXRl
-cmluZy9kZS9pbXByZXNzdW0tdW5kLXJlY2h0bGljaGUtaGlud2Vpc2UvPi4NCg0KQmVmb3JlIHBy
-aW50aW5nLCB0aGluayBhYm91dCBlbnZpcm9ubWVudGFsIHJlc3BvbnNpYmlsaXR5LlRoaXMgbWVz
-c2FnZSBtYXkgY29udGFpbiBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uIElmIHlvdSBhcmUgbm90
-IGF1dGhvcml6ZWQgdG8gcmVjZWl2ZSB0aGlzIGluZm9ybWF0aW9uIHBsZWFzZSBhZHZpc2UgdGhl
-IHNlbmRlciBpbW1lZGlhdGVseSBieSByZXBseSBlLW1haWwgYW5kIGRlbGV0ZSB0aGlzIG1lc3Nh
-Z2Ugd2l0aG91dCBtYWtpbmcgYW55IGNvcGllcy4gQW55IGZvcm0gb2YgdW5hdXRob3JpemVkIHVz
-ZSwgcHVibGljYXRpb24sIHJlcHJvZHVjdGlvbiwgY29weWluZyBvciBkaXNjbG9zdXJlIG9mIHRo
-ZSBlLW1haWwgaXMgbm90IHBlcm1pdHRlZC4gSW5mb3JtYXRpb24gYWJvdXQgZGF0YSBwcm90ZWN0
-aW9uIGNhbiBiZSBmb3VuZCBvbiBvdXIgaG9tZXBhZ2U8aHR0cHM6Ly93d3cuZGllaGwuY29tL21l
-dGVyaW5nL2VuL2RhdGEtcHJvdGVjdGlvbi8+Lg0K
+On Wed, Apr 2, 2025 at 11:14=E2=80=AFPM mark.yang via lists.openembedded.or=
+g
+<mark.yang=3Dlge.com@lists.openembedded.org> wrote:
+>
+> From: "mark.yang" <mark.yang@lge.com>
+>
+> * gcc-15 uses gnu23 standard for c:
+>   https://gcc.gnu.org/git/?p=3Dgcc.git;a=3Dcommitdiff;h=3D55e3bd376b2214e=
+200fa76d12b67ff259b06c212
+>   bool is included as a reserved word, causing an error due to duplicate =
+declaration.
+>
+>   Also, when parameters are empty, an error occurs. Therefore, when using
+>   functions from the standard library, modify the defines in configure.ac
+>   and source code to use standard library functions.
+>
+> * ../../sharutils-4.15.2/lib/system.h:51:36: error: expected ';', identif=
+ier or '(' before 'bool'
+>    51 | typedef enum {false =3D 0, true =3D 1} bool;
+>       |                                    ^~~~
+>   ../../sharutils-4.15.2/lib/system.h:79:7: error: conflicting types for =
+'fdopen'; have 'FILE *(void)'
+>    79 | FILE *fdopen ();
+>       |       ^~~~~~
+>   In file included from ../lib/stdio.h:43,
+>                  from ../../sharutils-4.15.2/libopts/autoopts/options.h:4=
+2,
+>                  from ../../sharutils-4.15.2/src/shar-opts.h:49:
+>   recipe-sysroot/usr/include/stdio.h:299:14: note: previous declaration o=
+f 'fdopen' with type 'FILE *(int,  const char *)'
+>   299 | extern FILE *fdopen (int __fd, const char *__modes) __THROW
+>       |              ^~~~~~
+>   ../../sharutils-4.15.2/lib/system.h:82:7: error: conflicting types for =
+'popen'; have 'FILE *(void)'
+>    82 | FILE *popen ();
+>       |       ^~~~~
+>   recipe-sysroot/usr/include/stdio.h:893:14: note: previous declaration o=
+f 'popen' with type 'FILE *(const char *, const char *)'
+>   893 | extern FILE *popen (const char *__command, const char *__modes)
+>       |              ^~~~~
+>   ../../sharutils-4.15.2/src/shar.c:112:12: error: conflicting types for =
+'localtime'; have 'struct tm *(void)'
+>   112 | struct tm *localtime ();
+>       |            ^~~~~~~~~
+>   In file included from ../lib/time.h:39,
+>                  from ../lib/sys/stat.h:44,
+>                  from ../../sharutils-4.15.2/lib/system.h:32:
+>   recipe-sysroot/usr/include/time.h:136:19: note: previous declaration of=
+ 'localtime' with type 'struct tm *(const time_t *)' {aka 'struct tm *(cons=
+t long int *)'}
+>   136 | extern struct tm *localtime (const time_t *__timer) __THROW;
+>       |                   ^~~~~~~~~
+>   ../../sharutils-4.15.2/src/uudecode.c:85:16: error: conflicting types f=
+or 'getpwnam'; have 'struct passwd *(void)'
+>    85 | struct passwd *getpwnam ();
+>       |                ^~~~~~~~
+>   In file included from ../../sharutils-4.15.2/src/uudecode.c:76:
+>   recipe-sysroot/usr/include/pwd.h:116:23: note: previous declaration of =
+'getpwnam' with type 'struct passwd *(const char *)'
+>   116 | extern struct passwd *getpwnam (const char *__name) __nonnull ((1=
+));
+>       |                       ^~~~~~~~
+>       |            ^~~~~~~~~
+>
+> Signed-off-by: mark.yang <mark.yang@lge.com>
+> ---
+>  ...0001-fix-build-with-gcc-15.0.1-error.patch | 166 ++++++++++++++++++
+>  .../sharutils/sharutils_4.15.2.bb             |   1 +
+>  2 files changed, 167 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/sharutils/sharutils/0001-fix-=
+build-with-gcc-15.0.1-error.patch
+>
+> diff --git a/meta-oe/recipes-support/sharutils/sharutils/0001-fix-build-w=
+ith-gcc-15.0.1-error.patch b/meta-oe/recipes-support/sharutils/sharutils/00=
+01-fix-build-with-gcc-15.0.1-error.patch
+> new file mode 100644
+> index 0000000000..2d4d4196df
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/sharutils/sharutils/0001-fix-build-with-gcc=
+-15.0.1-error.patch
+> @@ -0,0 +1,166 @@
+> +From dd953cb6db70493d113dd60e47ef90307bc3062d Mon Sep 17 00:00:00 2001
+> +From: "mark.yang" <mark.yang@lge.com>
+> +Date: Thu, 3 Apr 2025 14:52:48 +0900
+> +Subject: [PATCH] fix build with gcc-15.0.1 error
+> +
+> +* ../../sharutils-4.15.2/lib/system.h:51:36: error: expected ';', identi=
+fier or '(' before 'bool'
+> +   51 | typedef enum {false =3D 0, true =3D 1} bool;
+> +      |                                    ^~~~
+> +  ../../sharutils-4.15.2/lib/system.h:79:7: error: conflicting types for=
+ 'fdopen'; have 'FILE *(void)'
+> +   79 | FILE *fdopen ();
+> +      |       ^~~~~~
+> +  In file included from ../lib/stdio.h:43,
+> +                 from ../../sharutils-4.15.2/libopts/autoopts/options.h:=
+42,
+> +                 from ../../sharutils-4.15.2/src/shar-opts.h:49:
+> +  recipe-sysroot/usr/include/stdio.h:299:14: note: previous declaration =
+of 'fdopen' with type 'FILE *(int,  const char *)'
+> +  299 | extern FILE *fdopen (int __fd, const char *__modes) __THROW
+> +      |              ^~~~~~
+> +  ../../sharutils-4.15.2/lib/system.h:82:7: error: conflicting types for=
+ 'popen'; have 'FILE *(void)'
+> +   82 | FILE *popen ();
+> +      |       ^~~~~
+> +  recipe-sysroot/usr/include/stdio.h:893:14: note: previous declaration =
+of 'popen' with type 'FILE *(const char *, const char *)'
+> +  893 | extern FILE *popen (const char *__command, const char *__modes)
+> +      |              ^~~~~
+> +  ../../sharutils-4.15.2/src/shar.c:112:12: error: conflicting types for=
+ 'localtime'; have 'struct tm *(void)'
+> +  112 | struct tm *localtime ();
+> +      |            ^~~~~~~~~
+> +  In file included from ../lib/time.h:39,
+> +                 from ../lib/sys/stat.h:44,
+> +                 from ../../sharutils-4.15.2/lib/system.h:32:
+> +  recipe-sysroot/usr/include/time.h:136:19: note: previous declaration o=
+f 'localtime' with type 'struct tm *(const time_t *)' {aka 'struct tm *(con=
+st long int *)'}
+> +  136 | extern struct tm *localtime (const time_t *__timer) __THROW;
+> +      |                   ^~~~~~~~~
+> +  ../../sharutils-4.15.2/src/uudecode.c:85:16: error: conflicting types =
+for 'getpwnam'; have 'struct passwd *(void)'
+> +   85 | struct passwd *getpwnam ();
+> +      |                ^~~~~~~~
+> +  In file included from ../../sharutils-4.15.2/src/uudecode.c:76:
+> +  recipe-sysroot/usr/include/pwd.h:116:23: note: previous declaration of=
+ 'getpwnam' with type 'struct passwd *(const char *)'
+> +  116 | extern struct passwd *getpwnam (const char *__name) __nonnull ((=
+1));
+> +      |                       ^~~~~~~~
+> +      |            ^~~~~~~~~
+> +
+> +* gcc-15 uses gnu23 standard for c:
+> +  https://gcc.gnu.org/git/?p=3Dgcc.git;a=3Dcommitdiff;h=3D55e3bd376b2214=
+e200fa76d12b67ff259b06c212
+> +  bool is included as a reserved word, causing an error due to duplicate=
+ declaration.
+> +
+> +  Also, when parameters are empty, an error occurs. Therefore, when usin=
+g
+> +  functions from the standard library, modify the defines in configure.a=
+c
+> +  and source code to use standard library functions.
+> +
+> +Upstream-Status: Inactive-Upstream [lastrelease: 2015]
+> +Signed-off-by: mark.yang <mark.yang@lge.com>
+> +---
+> + configure.ac               | 2 +-
+> + lib/system.h               | 6 ++++++
+> + libopts/autoopts/options.h | 2 ++
+> + libopts/compat/compat.h    | 2 ++
+> + src/shar.c                 | 2 ++
+> + src/uudecode.c             | 2 ++
+> + 6 files changed, 15 insertions(+), 1 deletion(-)
+> +
+> +diff --git a/configure.ac b/configure.ac
+> +index 2ccaac9..fa66368 100644
+> +--- a/configure.ac
+> ++++ b/configure.ac
+> +@@ -73,7 +73,7 @@ AC_HEADER_STDC
+> + AC_STRUCT_TIMEZONE
+> + AC_TYPE_SIZE_T
+> + AC_TYPE_INTMAX_T
+> +-AC_CHECK_FUNCS([fchmod isascii strchr])
+> ++AC_CHECK_FUNCS([fchmod isascii strchr fdopen popen localtime getpwnam])
+> + AC_FUNC_CLOSEDIR_VOID
+> + AC_FUNC_FSEEKO
+> + AC_REPLACE_FUNCS([memset mktime strftime xmalloc xstrdup])
+> +diff --git a/lib/system.h b/lib/system.h
+> +index 2b9846b..05864ac 100644
+> +--- a/lib/system.h
+> ++++ b/lib/system.h
+> +@@ -48,7 +48,9 @@ typedef long intmax_t;
+> + #ifdef HAVE_STDBOOL_H
+> + #include <stdbool.h>
+> + #else
+> ++# if defined __STDC__ && defined __STDC_VERSION__ && __STDC_VERSION__ <=
+=3D 201710L
+> + typedef enum {false =3D 0, true =3D 1} bool;
+> ++# endif
+> + #endif
+> +
+> + #if !HAVE_DECL_STRTOIMAX && !defined strtoimax
+> +@@ -75,8 +77,12 @@ intmax_t strtoimax ();
+> + # include <unistd.h>
+> + #endif
+> +
+> ++#ifndef HAVE_FDOPEN
+> + FILE *fdopen ();
+
+while the checks are ok, I think they still have problem of funciton
+parameter signatures mismatch
+which compiler is pointing out. So I think it will be good to change
+them to have full prototype e.g.
+
+FILE *fdopen(int fd, const char *mode);
+
+look for the manpages of all these functions to see the correct prototype.
+
+> ++#endif
+> ++#ifndef HAVE_POPEN
+> + FILE *popen ();
+> ++#endif
+> +
+> + /* Global functions of the shar package.  */
+> +
+> +diff --git a/libopts/autoopts/options.h b/libopts/autoopts/options.h
+> +index 0601d0f..2f86b5e 100644
+> +--- a/libopts/autoopts/options.h
+> ++++ b/libopts/autoopts/options.h
+> +@@ -65,12 +65,14 @@
+> + #  if defined(HAVE_STDBOOL_H)
+> + #    include <stdbool.h>
+> + #  else
+> ++#    if defined __STDC__ && defined __STDC_VERSION__ && __STDC_VERSION_=
+_ <=3D 201710L
+> +      typedef enum { false =3D 0, true =3D 1 } _Bool;
+> + #    define bool _Bool
+> +
+> +      /* The other macros must be usable in preprocessor directives.  */
+> + #    define false 0
+> + #    define true 1
+> ++#    endif
+> + #  endif /* HAVE_SYSEXITS_H */
+> + #endif /* COMPAT_H_GUARD */
+> + // END-CONFIGURED-HEADERS
+> +diff --git a/libopts/compat/compat.h b/libopts/compat/compat.h
+> +index 561d55d..2ffea7e 100644
+> +--- a/libopts/compat/compat.h
+> ++++ b/libopts/compat/compat.h
+> +@@ -185,12 +185,14 @@
+> + #ifdef HAVE_STDBOOL_H
+> + #  include <stdbool.h>
+> + #else
+> ++# if defined __STDC__ && defined __STDC_VERSION__ && __STDC_VERSION__ <=
+=3D 201710L
+> +    typedef enum { false =3D 0, true =3D 1 } _Bool;
+> + #  define bool _Bool
+> +
+> +    /* The other macros must be usable in preprocessor directives.  */
+> + #  define false 0
+> + #  define true 1
+> ++# endif
+> + #endif
+> +
+> + /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+> +diff --git a/src/shar.c b/src/shar.c
+> +index 6d7ed1d..af976ea 100644
+> +--- a/src/shar.c
+> ++++ b/src/shar.c
+> +@@ -109,7 +109,9 @@ static inline unsigned char to_uchar (char ch) { ret=
+urn ch; }
+> + #define IS_GRAPH(_c) (isprint (to_uchar (_c)) && !isspace (to_uchar (_c=
+)))
+> + #endif
+> +
+> ++#ifndef HAVE_LOCALTIME
+> + struct tm *localtime ();
+> ++#endif
+> +
+> + #if MSDOS
+> +           /* 1 extra for CR.  */
+> +diff --git a/src/uudecode.c b/src/uudecode.c
+> +index 0621c99..00a6345 100644
+> +--- a/src/uudecode.c
+> ++++ b/src/uudecode.c
+> +@@ -82,7 +82,9 @@ static char const cright_years_z[] =3D
+> + #define UU_CHMOD(_n, _fd, _m)   chmod ((_n), UU_MODE_BITS(_m))
+> + #endif
+> +
+> ++#ifndef HAVE_GETPWNAM
+> + struct passwd *getpwnam ();
+> ++#endif
+> +
+> + static uudecode_exit_code_t read_stduu(
+> +         const char *inname, const char *outname);
+> diff --git a/meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb b/meta=
+-oe/recipes-support/sharutils/sharutils_4.15.2.bb
+> index 1bded9f6d1..d98e49c97a 100644
+> --- a/meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb
+> +++ b/meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb
+> @@ -14,6 +14,7 @@ SRC_URI =3D "${GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+>             file://0002-Do-not-include-lib-md5.c-into-src-shar.c.patch \
+>             file://0001-configure.ac-Check-and-define-intmax_t-type.patch=
+ \
+>             file://0001-libopts.m4-accept-POSIX_SHELL-from-the-environmen=
+t-d.patch \
+> +           file://0001-fix-build-with-gcc-15.0.1-error.patch \
+>             "
+>  SRC_URI[sha256sum] =3D "ee336e68549664e7a19b117adf02edfdeac6307f22e5ba78=
+baca457116914637"
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#116530): https://lists.openembedded.org/g/openembedde=
+d-devel/message/116530
+> Mute This Topic: https://lists.openembedded.org/mt/112061181/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
