@@ -1,255 +1,164 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 881EDC3600C
-	for <webhook@archiver.kernel.org>; Thu,  3 Apr 2025 21:03:25 +0000 (UTC)
-Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com [209.85.167.172])
- by mx.groups.io with SMTP id smtpd.web10.6478.1743714204821081393
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D230DC36014
+	for <webhook@archiver.kernel.org>; Thu,  3 Apr 2025 21:23:55 +0000 (UTC)
+Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.66.35])
+ by mx.groups.io with SMTP id smtpd.web11.6936.1743715432583850147
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Apr 2025 14:03:24 -0700
+ Thu, 03 Apr 2025 14:23:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=necPqrKf;
- spf=pass (domain: gmail.com, ip: 209.85.167.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f172.google.com with SMTP id 5614622812f47-3fa6c54cdb2so998374b6e.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Apr 2025 14:03:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1743714204; x=1744319004; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=PkCwGlo/Rt4lesaAosXPvsOnCXvKkFexV/8Nu7aI/MQ=;
-        b=necPqrKfLASQAH43j4iQ4k4SoEgyqDYO9NYpG5TF31GMhP5O80AtU583sFhzUlknUp
-         LOTb9tgF9T8Zh0MebtzyJHRi2K3mGu/ehgXFs3AY4ZTG47lQ5jVvXrO7eg2SrP/VsVAr
-         7x/uaC2CwzaWPt43rhqM3acphzjpw1Eox4EbIOm9zyaar35pRTNAEsZukTBLboKkOTqr
-         1VMxQeGKVZDeWqXqQZoCfgBfLbjfcebwDlC6FqsTFjlBd8bpPtfWp6LuNeth0O+KkQk/
-         fSZmDQaiwAob/xBuYVy+LxSzDtt2aqcbnRmps1qJSYUH2KrHOAXr4smsblvgPbEwts4m
-         qQxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743714204; x=1744319004;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=PkCwGlo/Rt4lesaAosXPvsOnCXvKkFexV/8Nu7aI/MQ=;
-        b=Mrb6s72KOoJ72kE+zWLOakOuIsYxS1gWJAHFMCHfGARFklYNAlV2SByjuOEB5Iika2
-         W1C0G/A5g6urWyCu6+y8zcLg9llbeesV7Uogc9/BXfq+5JFK9tqhD8qAumLo3vnKUUOs
-         wtM3KaSTr3oc+hGzEpOvvcn8iNXocre49hHSSn1/qxQ04cojgc9e8szOOl0uPgneR3I2
-         T1AZmj0NV6yTdvffVeISpQvziNtEuuJdMhbwIk7j6doeNfkjVl1OyPgyWVhVHoZXvr8F
-         DUmtqXFpCDI22fGdSNTIcuxIvrv2NFdLqbD25oqS3tu0WJcc7tm4RINRuU/KVS5rx4dK
-         R8Og==
-X-Gm-Message-State: AOJu0Yz7mWtweE8iNC3lfrWnmLfGWtorAdH+qfQN5h1fvpmeXzrrLZbN
-	XBazGSt7HXyzodcvY/gdTKBxWaJoNUDu/xovv50DRroH3sdSedeZ2Qk804L95acccG/H6O5wvNv
-	ePI3LRlYqpoWySosNHddkLj5SREc=
-X-Gm-Gg: ASbGnctCUfXTNlkG6ZYLZRn04KI6aeFK/tghiivV5CbRNj7WQcXnmr4GBkqxF2AbYSc
-	4jJE1vBsQETEsPfCcP7ofAEx6WHnqPBNajoN2E2LrxOIhepYjSQVoEur5bEVwuPwV8CMf+yfLpC
-	06EpBl5LYyvOS8Jjg4Ebs/7AqUoStzEnMMag5wHlV0FHUYuUE5HYjW5YfN+w==
-X-Google-Smtp-Source: AGHT+IGYnZVE1VF1scMo/FTgcnVseMQWsA5W2gV650FuuHIfYoH4v/Zzp2A7nySc3K+ENEpK94NQ5criEkmt6NH5AFw=
-X-Received: by 2002:a05:6808:2002:b0:3fc:4181:ad44 with SMTP id
- 5614622812f47-40046593467mr129195b6e.9.1743714203989; Thu, 03 Apr 2025
- 14:03:23 -0700 (PDT)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=jJzwY++o;
+ spf=pass (domain: axis.com, ip: 52.101.66.35, mailfrom: peter.kjellerstedt@axis.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=YPwF7HLXf66+Q3KElkCsS/POAuuwCmMhYWEpLVw1QCFFu9G3MZG0AIF+gdaVie9i02gsTE8E6ZtWQmjE6e8igtH8xiv5M4yDqsZnu1ahlDLbAmJKLM7KpvgjS0dXOZC6TCmK44N3MHz+QH0mmTgMx/yVvkLpxvDa27G7i8hevTk6Erd2RN+SPQhAmR6HQAfMpgkpWcIzd0G3YdnzdBT5zPQ+lyWCIgnJd5+XGw7UnMX2bXU1Jo279jF2QXVdjQc+AJ92Q11pwXPffjcSU6qkypExJtE19EI0+n++WbddNQbMPg7DJn4fCLzY1bf4ZA+YzOF2JawZPVCv/1sEjU0Kzg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=NhiYps+TgQtwQLHmMElt/YzPL0t4Yf/nPOBkkUr0MBs=;
+ b=agd9xtNdwIBW4I7jpcNVYgg37wMVlwWa99qYh9eCluzobwXCUcs5wH6Zb2LNFrMhhERXtTshKy9KG6NrMMUCX+8i1uGm/nbIU0Bkh6Do8pgxNAKjJLT4YKM5VywS22hrIoYxH+UCpN61E0nI8ofwiCKa3+POPSxtZ0gPTYFVAPk0T/7YkHuLpPPbRRLTSJ7n0ooE1lxOGxJEP4TQw1UD19NB6LrtrpCtjiem3yZ2hW2/fh5C+KEDSqhK/i2PBEyQRT4GzR0gM8HmwaeJuDrDszC8AjbeVAzVHwMe52rnZCnYPV+txO4o2WdW8PV2Tyj37rJsVy8Hwu+nTrHJGgkpng==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
+ header.from=axis.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NhiYps+TgQtwQLHmMElt/YzPL0t4Yf/nPOBkkUr0MBs=;
+ b=jJzwY++ow/wklzRathwGONGLBbWu6S9I0hop1Q0V1TCu9jwN/IZq+qIcGD3vofEVANzWuWfTvVnhLaHW+GzcWXE8suzGY7A+xXXn66Ij8JXKSEeP5jX3ap+R39g4MRI+WLfr0zGH0sOTj6bE+mCINlo7x3J+8mPkvCrmQ6+n8Z0=
+Received: from DUZPR01CA0126.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4bc::20) by VI1PR02MB6127.eurprd02.prod.outlook.com
+ (2603:10a6:800:178::20) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.44; Thu, 3 Apr
+ 2025 21:23:47 +0000
+Received: from DU2PEPF00028D0D.eurprd03.prod.outlook.com
+ (2603:10a6:10:4bc:cafe::43) by DUZPR01CA0126.outlook.office365.com
+ (2603:10a6:10:4bc::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8606.26 via Frontend Transport; Thu,
+ 3 Apr 2025 21:23:42 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
+ smtp.mailfrom=axis.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=axis.com;
+Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
+ 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
+ client-ip=195.60.68.100; helo=mail.axis.com; pr=C
+Received: from mail.axis.com (195.60.68.100) by
+ DU2PEPF00028D0D.mail.protection.outlook.com (10.167.242.21) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8606.22 via Frontend Transport; Thu, 3 Apr 2025 21:23:46 +0000
+Received: from se-mail01w.axis.com (10.20.40.7) by se-mail02w.axis.com
+ (10.20.40.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Thu, 3 Apr
+ 2025 23:23:45 +0200
+Received: from se-intmail01x.se.axis.com (10.4.0.28) by se-mail01w.axis.com
+ (10.20.40.7) with Microsoft SMTP Server id 15.1.2507.44 via Frontend
+ Transport; Thu, 3 Apr 2025 23:23:45 +0200
+Received: from saur (saur.se.axis.com [10.92.3.10])
+	by se-intmail01x.se.axis.com (Postfix) with ESMTP id 98168132
+	for <openembedded-devel@lists.openembedded.org>; Thu,  3 Apr 2025 23:23:45 +0200 (CEST)
+Received: from saur.se.axis.com (localhost [127.0.0.1])
+	by saur (8.17.1/8.15.2) with ESMTPS id 533LNjBn3580581
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 3 Apr 2025 23:23:45 +0200
+Received: (from pkj@localhost)
+	by saur.se.axis.com (8.17.1/8.17.1/Submit) id 533LNjeV3580580
+	for openembedded-devel@lists.openembedded.org; Thu, 3 Apr 2025 23:23:45 +0200
+From: Peter Kjellerstedt <pkj@axis.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH 1/1] ne10: Avoid requesting an executable stack
+Date: Thu, 3 Apr 2025 23:23:42 +0200
+Message-ID: <20250403212342.3580553-1-pkj@axis.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20250403204412.1686638-1-Randy.MacLeod@windriver.com>
-In-Reply-To: <20250403204412.1686638-1-Randy.MacLeod@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 3 Apr 2025 14:03:13 -0700
-X-Gm-Features: AQ5f1JrhGp-MwDgyfwkT07GFCPwwOZGQUCze6oDjYpXys--R23ylJ4UtmicJwSs
-Message-ID: <CAMKF1sqQBe535z056kEL6RSHqnaAgELjTPRghwfQo_1N+UPkmw@mail.gmail.com>
-Subject: Re: [oe] [PATCH] valkey: update from 8.0.2 -> 8.1.0
-To: randy.macleod@windriver.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000b7ff320631e619b6"
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PEPF00028D0D:EE_|VI1PR02MB6127:EE_
+X-MS-Office365-Filtering-Correlation-Id: 90e91aa7-a107-4777-9073-08dd72f5d155
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|36860700013|376014|82310400026;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?h9XsPf7RScjbVoGfhSF63kWXZjhaP6IotUJGH2Yvk+XhPQWqS3ivmJ2cHIR1?=
+ =?us-ascii?Q?fqlj+mmR2GxlwXw9Nmcix8QaJ/Gh2grAolzkoaMjX5szkwtIf1V4/e/L/jDl?=
+ =?us-ascii?Q?s88pT0QGWB647tTVyZ7J9CKLhNajGxF1q+Z/TmtEoRs9zE2HUx9YlMH57SJz?=
+ =?us-ascii?Q?sP6jVd0vRmTHlswzUxIU01xpJggre0/Hv/KItVxQUP8OdNpx/oclMiquUeQu?=
+ =?us-ascii?Q?ZzFpLewAqdePdnuNfKgrlyUvMbIMJFTpCoNFfXUIkwYdU9+bRkzIRyOB5RZZ?=
+ =?us-ascii?Q?4w84y2rrqSRS3P21U/j7CoZ8/HErtIZQ3hq4kUmtHEkLvX2NMi9tflEmYrFA?=
+ =?us-ascii?Q?SDZNmd5A5puL2QaXBVTMv7AH0fu6WQvf8ZX7qqHkNuOp/vCngQ6NDoEoLM0D?=
+ =?us-ascii?Q?FK37oukQctuC7cYDykFpJxMoqJiWL2D+tnp2BaXQDwfYVp0+lHOQTDMrxEDs?=
+ =?us-ascii?Q?uewTapZmvuIWIWTUzf4gcvuIf9f+Z0X53Dr6U4JoMGk5bGCP6x3V783suPFr?=
+ =?us-ascii?Q?TLlzGnzeATR/ihM9DnLRmnYvSVqf3+MHX2Y1JucE8TZ6qebW0V6MgOLREdKu?=
+ =?us-ascii?Q?ZavACq+0GPWlB+XkxY8iTm8/72IuDKT4z7JoipT4o/NfoB3UZ07UVHuJosEr?=
+ =?us-ascii?Q?gg3KEiVl6dc8fSOduNRM06JIYKFoTjCYrQsMXnIcgog3U06T+UjMukoOpDhY?=
+ =?us-ascii?Q?yyWW1q0/6RHC4u+sB25q3d+uDNViClfXonLg9p3id03NuHLVxGdqiJKem/wH?=
+ =?us-ascii?Q?EBYCgS6eTX+DZcw9Za3L2FKJkEFzuJaS9lFjT/MURjmRwDh0wiILGdpG+flL?=
+ =?us-ascii?Q?kSWXJo7onkeB0Op1D4058VOucbdvyzO06LcinyJ0AUasZ1U4RX7eJjZCjkQc?=
+ =?us-ascii?Q?wgwBqBALwnGyMrunJLrXucclCpAKBZYBQB5zzVlZ/qBoR2BZNdslexB/NsnE?=
+ =?us-ascii?Q?b0zvukICWcf62z0bO+y0K9bkH3dseNGR4Zb0Sno1QbQGirj5t+kNf4Jf2NTZ?=
+ =?us-ascii?Q?Uz/oS0XY0Q8BQN+fK2rfGPiAG43iajDDrrHxwiPQisXv2qcBfhF3piQ0rep9?=
+ =?us-ascii?Q?TxMSXMbs+gm9Z+DhU/QdJ/bTMLoHjIi99X+tINcn+/ivMokOo/y7SnOb5y6K?=
+ =?us-ascii?Q?c/6xsZv7okGtePzuysUxbL0D6DgAz5IpKyVZU2NbJMphKKg4FMhbJsMC7c2o?=
+ =?us-ascii?Q?RF+z8w/u8auvVxY8JJeaDSCEUrMD3RADKuESNhDaugPVcJdbphY9SbRizBIc?=
+ =?us-ascii?Q?iBQLTHm097ZghE3GxGosZrfgVbY4tgsqdArGt7AbLGtVJz/WQWiZ9QVy5cWm?=
+ =?us-ascii?Q?LvWgvN01cXYGGQTsK7sHCV7QC/t0okWHXIawUlG5JXzZEYr/xDAbpJMPTpBN?=
+ =?us-ascii?Q?VYyXdltQ7PKrOO348DW65ZPAvqLrYEGmTOp6oQxN4JkjPdTwjdEzF2qZFkVl?=
+ =?us-ascii?Q?zE1A7OAmO/5SjOIrERbzc5PrT05MGbh6fZ+fa3DBXMYXr56oFesbRTuiDUib?=
+ =?us-ascii?Q?Z4ncg2vOAmrlaDU=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026);DIR:OUT;SFP:1101;
+X-OriginatorOrg: axis.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2025 21:23:46.0296
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 90e91aa7-a107-4777-9073-08dd72f5d155
+X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DU2PEPF00028D0D.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR02MB6127
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Apr 2025 21:03:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116547
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Apr 2025 21:23:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116548
 
---000000000000b7ff320631e619b6
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+This avoids warnings like:
 
-On Thu, Apr 3, 2025 at 1:44=E2=80=AFPM Randy MacLeod via lists.openembedded=
-.org
-<randy.macleod=3Dwindriver.com@lists.openembedded.org> wrote:
+  ld: warning: NE10_physics.neon.s.o: missing .note.GNU-stack section
+  implies executable stack
+  ld: NOTE: This behaviour is deprecated and will be removed in a future
+  version of the linker
 
-> From: Randy MacLeod <Randy.MacLeod@windriver.com>
->
-> Release notes:
->    https://github.com/valkey-io/valkey/releases/tag/8.1.0
->
-> The license file checksum changed because upstream added the line:
->    SPDX-License-Identifier: BSD-3-Clause
-> Add OECONF to avoid build-time checks for strcase[str|cmp], both of
-> which have been in glibc and musl for > 10 years so it's sensible to
-> default to yes.
+With glibc 2.41, the need for an executable stack lead to errors like
+this in runtime:
 
+  [ ERR     ] foo@0[984]: [setup-script: /usr/share/foo/foo.enc] sol:
+  runtime error: libNE10.so.10: cannot enable executable stack as shared
+  object requires: Invalid argument
 
-Why do they fail I wonder
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+---
+ meta-oe/recipes-support/ne10/ne10_1.2.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
->
->
-> Adjust the patches using devtool and manually munge the Upstream-Status-e=
-s.
->
-> Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
-> ---
->  .../recipes-support/nano/{nano_8.3.bb =3D> nano_8.4.bb}    | 9 ++++++++-
->  1 file changed, 8 insertions(+), 1 deletion(-)
->  rename meta-oe/recipes-support/nano/{nano_8.3.bb =3D> nano_8.4.bb} (75%)
->
-> diff --git a/meta-oe/recipes-support/nano/nano_8.3.bb
-> b/meta-oe/recipes-support/nano/nano_8.4.bb
-> similarity index 75%
-> rename from meta-oe/recipes-support/nano/nano_8.3.bb
-> rename to meta-oe/recipes-support/nano/nano_8.4.bb
-> index d1af89ef8d..1aae49d3b6 100644
-> --- a/meta-oe/recipes-support/nano/nano_8.3.bb
-> +++ b/meta-oe/recipes-support/nano/nano_8.4.bb
-> @@ -13,10 +13,17 @@ RDEPENDS:${PN} =3D "ncurses-terminfo-base"
->  PV_MAJOR =3D "${@d.getVar('PV').split('.')[0]}"
->
->  SRC_URI =3D "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz=
-"
-> -SRC_URI[sha256sum] =3D
-> "551b717b2e28f7e90f749323686a1b5bbbd84cfa1390604d854a3ca3778f111e"
-> +SRC_URI[sha256sum] =3D
-> "5ad29222bbd55624d87ea677928b3106a743114d6c6f9b41f36c97be2a8e628d"
->
->  UPSTREAM_CHECK_URI =3D "https://ftp.gnu.org/gnu/nano"
->
->  inherit autotools gettext pkgconfig
->
-> +EXTRA_OECONF =3D " \
-> +    ac_cv_func_strcasestr=3Dyes \
-> +    gl_cv_func_strcasecmp_works=3Dyes \
-> +    ac_cv_func_strcasecmp=3Dyes \
-> +"
-> +
-> +
->  PACKAGECONFIG[tiny] =3D "--enable-tiny,"
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#116546):
-> https://lists.openembedded.org/g/openembedded-devel/message/116546
-> Mute This Topic: https://lists.openembedded.org/mt/112047294/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---000000000000b7ff320631e619b6
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote gmail_quote_container"><d=
-iv dir=3D"ltr" class=3D"gmail_attr">On Thu, Apr 3, 2025 at 1:44=E2=80=AFPM =
-Randy MacLeod via <a href=3D"http://lists.openembedded.org">lists.openembed=
-ded.org</a> &lt;randy.macleod=3D<a href=3D"mailto:windriver.com@lists.opene=
-mbedded.org">windriver.com@lists.openembedded.org</a>&gt; wrote:<br></div><=
-blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px=
- #ccc solid;padding-left:1ex">From: Randy MacLeod &lt;<a href=3D"mailto:Ran=
-dy.MacLeod@windriver.com" target=3D"_blank">Randy.MacLeod@windriver.com</a>=
-&gt;<br>
-<br>
-Release notes:<br>
-=C2=A0 =C2=A0<a href=3D"https://github.com/valkey-io/valkey/releases/tag/8.=
-1.0" rel=3D"noreferrer" target=3D"_blank">https://github.com/valkey-io/valk=
-ey/releases/tag/8.1.0</a><br>
-<br>
-The license file checksum changed because upstream added the line:<br>
-=C2=A0 =C2=A0SPDX-License-Identifier: BSD-3-Clause<br>
-Add OECONF to avoid build-time checks for strcase[str|cmp], both of<br>
-which have been in glibc and musl for &gt; 10 years so it&#39;s sensible to=
-<br>
-default to yes.</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">W=
-hy do they fail I wonder=C2=A0</div><blockquote class=3D"gmail_quote" style=
-=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex" dir=3D"a=
-uto"><br>
-<br>
-Adjust the patches using devtool and manually munge the Upstream-Status-es.=
-<br>
-<br>
-Signed-off-by: Randy MacLeod &lt;<a href=3D"mailto:Randy.MacLeod@windriver.=
-com" target=3D"_blank">Randy.MacLeod@windriver.com</a>&gt;<br>
----<br>
-=C2=A0.../recipes-support/nano/{<a href=3D"http://nano_8.3.bb" rel=3D"noref=
-errer" target=3D"_blank">nano_8.3.bb</a> =3D&gt; <a href=3D"http://nano_8.4=
-.bb" rel=3D"noreferrer" target=3D"_blank">nano_8.4.bb</a>}=C2=A0 =C2=A0 | 9=
- ++++++++-<br>
-=C2=A01 file changed, 8 insertions(+), 1 deletion(-)<br>
-=C2=A0rename meta-oe/recipes-support/nano/{<a href=3D"http://nano_8.3.bb" r=
-el=3D"noreferrer" target=3D"_blank">nano_8.3.bb</a> =3D&gt; <a href=3D"http=
-://nano_8.4.bb" rel=3D"noreferrer" target=3D"_blank">nano_8.4.bb</a>} (75%)=
-<br>
-<br>
-diff --git a/meta-oe/recipes-support/nano/<a href=3D"http://nano_8.3.bb" re=
-l=3D"noreferrer" target=3D"_blank">nano_8.3.bb</a> b/meta-oe/recipes-suppor=
-t/nano/<a href=3D"http://nano_8.4.bb" rel=3D"noreferrer" target=3D"_blank">=
-nano_8.4.bb</a><br>
-similarity index 75%<br>
-rename from meta-oe/recipes-support/nano/<a href=3D"http://nano_8.3.bb" rel=
-=3D"noreferrer" target=3D"_blank">nano_8.3.bb</a><br>
-rename to meta-oe/recipes-support/nano/<a href=3D"http://nano_8.4.bb" rel=
-=3D"noreferrer" target=3D"_blank">nano_8.4.bb</a><br>
-index d1af89ef8d..1aae49d3b6 100644<br>
---- a/meta-oe/recipes-support/nano/<a href=3D"http://nano_8.3.bb" rel=3D"no=
-referrer" target=3D"_blank">nano_8.3.bb</a><br>
-+++ b/meta-oe/recipes-support/nano/<a href=3D"http://nano_8.4.bb" rel=3D"no=
-referrer" target=3D"_blank">nano_8.4.bb</a><br>
-@@ -13,10 +13,17 @@ RDEPENDS:${PN} =3D &quot;ncurses-terminfo-base&quot;<br=
->
-=C2=A0PV_MAJOR =3D &quot;${@d.getVar(&#39;PV&#39;).split(&#39;.&#39;)[0]}&q=
-uot;<br>
-<br>
-=C2=A0SRC_URI =3D &quot;<a href=3D"https://nano-editor.org/dist/v$%7BPV_MAJ=
-OR%7D/nano-$%7BPV%7D.tar.xz" rel=3D"noreferrer" target=3D"_blank">https://n=
-ano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz</a>&quot;<br>
--SRC_URI[sha256sum] =3D &quot;551b717b2e28f7e90f749323686a1b5bbbd84cfa13906=
-04d854a3ca3778f111e&quot;<br>
-+SRC_URI[sha256sum] =3D &quot;5ad29222bbd55624d87ea677928b3106a743114d6c6f9=
-b41f36c97be2a8e628d&quot;<br>
-<br>
-=C2=A0UPSTREAM_CHECK_URI =3D &quot;<a href=3D"https://ftp.gnu.org/gnu/nano"=
- rel=3D"noreferrer" target=3D"_blank">https://ftp.gnu.org/gnu/nano</a>&quot=
-;<br>
-<br>
-=C2=A0inherit autotools gettext pkgconfig<br>
-<br>
-+EXTRA_OECONF =3D &quot; \<br>
-+=C2=A0 =C2=A0 ac_cv_func_strcasestr=3Dyes \<br>
-+=C2=A0 =C2=A0 gl_cv_func_strcasecmp_works=3Dyes \<br>
-+=C2=A0 =C2=A0 ac_cv_func_strcasecmp=3Dyes \<br>
-+&quot;<br>
-+<br>
-+<br>
-=C2=A0PACKAGECONFIG[tiny] =3D &quot;--enable-tiny,&quot;<br>
--- <br>
-2.34.1<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#116546): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/116546" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/116546</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/112047294/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/112047294/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---000000000000b7ff320631e619b6--
+diff --git a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb b/meta-oe/recipes-s=
+upport/ne10/ne10_1.2.1.bb
+index b10c23984d..39ff7ab969 100644
+--- a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
++++ b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+@@ -26,6 +26,7 @@ NE10_TARGET_ARCH:armv7a =3D "${@bb.utils.contains("TUNE_F=
+EATURES","neon","armv7","
+ NE10_TARGET_ARCH:armv7ve =3D "${@bb.utils.contains("TUNE_FEATURES","neon",=
+"armv7","",d)}"
+=20
+ EXTRA_OECMAKE =3D '-DGNULINUX_PLATFORM=3DON -DNE10_BUILD_SHARED=3DON -DNE1=
+0_LINUX_TARGET_ARCH=3D"${NE10_TARGET_ARCH}"'
++CFLAGS +=3D "-Wa,--noexecstack"
+=20
+ do_install() {
+     install -d ${D}${libdir}
 
