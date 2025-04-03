@@ -1,164 +1,260 @@
-Return-Path: <peter.kjellerstedt@axis.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D230DC36014
-	for <webhook@archiver.kernel.org>; Thu,  3 Apr 2025 21:23:55 +0000 (UTC)
-Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.66.35])
- by mx.groups.io with SMTP id smtpd.web11.6936.1743715432583850147
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E1F8FC3600C
+	for <webhook@archiver.kernel.org>; Thu,  3 Apr 2025 22:01:45 +0000 (UTC)
+Received: from mail-oo1-f52.google.com (mail-oo1-f52.google.com [209.85.161.52])
+ by mx.groups.io with SMTP id smtpd.web10.7713.1743717702466737963
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Apr 2025 14:23:53 -0700
+ Thu, 03 Apr 2025 15:01:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=jJzwY++o;
- spf=pass (domain: axis.com, ip: 52.101.66.35, mailfrom: peter.kjellerstedt@axis.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YPwF7HLXf66+Q3KElkCsS/POAuuwCmMhYWEpLVw1QCFFu9G3MZG0AIF+gdaVie9i02gsTE8E6ZtWQmjE6e8igtH8xiv5M4yDqsZnu1ahlDLbAmJKLM7KpvgjS0dXOZC6TCmK44N3MHz+QH0mmTgMx/yVvkLpxvDa27G7i8hevTk6Erd2RN+SPQhAmR6HQAfMpgkpWcIzd0G3YdnzdBT5zPQ+lyWCIgnJd5+XGw7UnMX2bXU1Jo279jF2QXVdjQc+AJ92Q11pwXPffjcSU6qkypExJtE19EI0+n++WbddNQbMPg7DJn4fCLzY1bf4ZA+YzOF2JawZPVCv/1sEjU0Kzg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NhiYps+TgQtwQLHmMElt/YzPL0t4Yf/nPOBkkUr0MBs=;
- b=agd9xtNdwIBW4I7jpcNVYgg37wMVlwWa99qYh9eCluzobwXCUcs5wH6Zb2LNFrMhhERXtTshKy9KG6NrMMUCX+8i1uGm/nbIU0Bkh6Do8pgxNAKjJLT4YKM5VywS22hrIoYxH+UCpN61E0nI8ofwiCKa3+POPSxtZ0gPTYFVAPk0T/7YkHuLpPPbRRLTSJ7n0ooE1lxOGxJEP4TQw1UD19NB6LrtrpCtjiem3yZ2hW2/fh5C+KEDSqhK/i2PBEyQRT4GzR0gM8HmwaeJuDrDszC8AjbeVAzVHwMe52rnZCnYPV+txO4o2WdW8PV2Tyj37rJsVy8Hwu+nTrHJGgkpng==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
- header.from=axis.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NhiYps+TgQtwQLHmMElt/YzPL0t4Yf/nPOBkkUr0MBs=;
- b=jJzwY++ow/wklzRathwGONGLBbWu6S9I0hop1Q0V1TCu9jwN/IZq+qIcGD3vofEVANzWuWfTvVnhLaHW+GzcWXE8suzGY7A+xXXn66Ij8JXKSEeP5jX3ap+R39g4MRI+WLfr0zGH0sOTj6bE+mCINlo7x3J+8mPkvCrmQ6+n8Z0=
-Received: from DUZPR01CA0126.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:4bc::20) by VI1PR02MB6127.eurprd02.prod.outlook.com
- (2603:10a6:800:178::20) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.44; Thu, 3 Apr
- 2025 21:23:47 +0000
-Received: from DU2PEPF00028D0D.eurprd03.prod.outlook.com
- (2603:10a6:10:4bc:cafe::43) by DUZPR01CA0126.outlook.office365.com
- (2603:10a6:10:4bc::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8606.26 via Frontend Transport; Thu,
- 3 Apr 2025 21:23:42 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
- smtp.mailfrom=axis.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=axis.com;
-Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
- 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
- client-ip=195.60.68.100; helo=mail.axis.com; pr=C
-Received: from mail.axis.com (195.60.68.100) by
- DU2PEPF00028D0D.mail.protection.outlook.com (10.167.242.21) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8606.22 via Frontend Transport; Thu, 3 Apr 2025 21:23:46 +0000
-Received: from se-mail01w.axis.com (10.20.40.7) by se-mail02w.axis.com
- (10.20.40.8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Thu, 3 Apr
- 2025 23:23:45 +0200
-Received: from se-intmail01x.se.axis.com (10.4.0.28) by se-mail01w.axis.com
- (10.20.40.7) with Microsoft SMTP Server id 15.1.2507.44 via Frontend
- Transport; Thu, 3 Apr 2025 23:23:45 +0200
-Received: from saur (saur.se.axis.com [10.92.3.10])
-	by se-intmail01x.se.axis.com (Postfix) with ESMTP id 98168132
-	for <openembedded-devel@lists.openembedded.org>; Thu,  3 Apr 2025 23:23:45 +0200 (CEST)
-Received: from saur.se.axis.com (localhost [127.0.0.1])
-	by saur (8.17.1/8.15.2) with ESMTPS id 533LNjBn3580581
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 3 Apr 2025 23:23:45 +0200
-Received: (from pkj@localhost)
-	by saur.se.axis.com (8.17.1/8.17.1/Submit) id 533LNjeV3580580
-	for openembedded-devel@lists.openembedded.org; Thu, 3 Apr 2025 23:23:45 +0200
-From: Peter Kjellerstedt <pkj@axis.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH 1/1] ne10: Avoid requesting an executable stack
-Date: Thu, 3 Apr 2025 23:23:42 +0200
-Message-ID: <20250403212342.3580553-1-pkj@axis.com>
-X-Mailer: git-send-email 2.40.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OFvfYhEt;
+ spf=pass (domain: gmail.com, ip: 209.85.161.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f52.google.com with SMTP id 006d021491bc7-60219a77334so704808eaf.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Apr 2025 15:01:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1743717702; x=1744322502; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ROhe9NxfMGIs/aCcchR1u4xSA5qSmEau+002B/PQJ7s=;
+        b=OFvfYhEtF1QzqJ5XM/1CdnAHuaoDXQLcIpV/kfnmwcIHh7GkLb3yFoiUJL3pu9owDO
+         IsxeV8j2tzcKNIG1nyGV3attWacgINL+NpAKiCcV7egPhQ/8MT2SbFRfQQb8u2D4BmN8
+         gh0pTY03vpuVBkdX5ABC4UmCZ5TrL33TMSVr9xmdnaeohh6ud+45Q+1KcGdvQRQhs6Ur
+         dekQvWT6dIfeOIuLpnPIHe9TThOKvDV9W0V146lZjm6vAru5tq9bteB7csunOrXnWUV3
+         1uKJ+rx2WADma2ZBfAOOBAuctn8HzW/sQTmSoCnSw25lDoOLnlcrOFIELdpj6HDvJ5LA
+         gU2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1743717702; x=1744322502;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ROhe9NxfMGIs/aCcchR1u4xSA5qSmEau+002B/PQJ7s=;
+        b=wFgHGNus0S7/zTrOSWRuTxDYisLakKZT7rmTM0ybpRdCjaT3EmtKNCE2xLughQkYxC
+         5ppHCK6mg82u8LLPYnbAMkvDE23+ZDweaD/onmc3p5z5n3OuwNZMjmlg0ez7iheOAZKL
+         Qb6R1HnFTbaIBiEzTPfPDmta4Fqg6+Gj0bzY/2323U97sIg4sagnBIZkWQUvRzkSejmD
+         bS38qVdQcuoffdEdGkZ/V80D2XyGXFmNH0421+476pl+0Xhyjn8zIhDF3o310odk0Zz8
+         JUldSgKpgpc8p3d550gk2bhN7wXDoyHPhEvotR2Xp8/CXU0tiztPLeUWCiNR5CR8mkCb
+         UuIQ==
+X-Gm-Message-State: AOJu0Yyn3OGDcKhLmxcX7jc3frJfYNnooJqxYjhVie8c4Hr+/46DwBVn
+	f84k+kWFDs9RgS7CTvIkrmXFFp5m1xlxNbnRPH4RlFWHN1dMjsV8MQYUGz/l8GTX1Fb57zdz/FA
+	4JfDarF0L/RHfkFTJ1jmjvJOhXRA=
+X-Gm-Gg: ASbGnctQtxMiaSgLD16Xg7WFQDqa1FVK88Trqm1l8nH5mqU0dlftx8h6NaFTNssf1tn
+	Y6e4yowIE25/Cs7hAIL7EvoRadeYXEFcV+LPYjC/XJFx/swdRv7zPS+tlM9h5jqCR0vaNoVYpYn
+	6V1yjcXVS5n1vTEQzVpT4kvZRU
+X-Google-Smtp-Source: AGHT+IEqVozw47fneWl7jvCPkHNSuCLMVML7g9j951v1y99eb0vU2v6N/63yiPw9bYlAQboq1NYXnrlMbdqTEuaS88Q=
+X-Received: by 2002:a05:6820:507:b0:600:29ec:7619 with SMTP id
+ 006d021491bc7-604164da5e5mr288798eaf.2.1743717701520; Thu, 03 Apr 2025
+ 15:01:41 -0700 (PDT)
 MIME-Version: 1.0
+References: <20250403091753.1542471-1-mark.yang@lge.com>
+In-Reply-To: <20250403091753.1542471-1-mark.yang@lge.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 3 Apr 2025 15:01:14 -0700
+X-Gm-Features: AQ5f1JpvmVtZipd35eeHVy_jlUSYmdF18isjtaxw9XTt4-g7gQBDu5drx_rSaAc
+Message-ID: <CAMKF1sqrRk=HmSyft9C4qooJSv__=gOsf8TpCaoF3QXeJwHPzw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] libiodbc: fix build with gcc-15.0.1
+To: mark.yang@lge.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PEPF00028D0D:EE_|VI1PR02MB6127:EE_
-X-MS-Office365-Filtering-Correlation-Id: 90e91aa7-a107-4777-9073-08dd72f5d155
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|36860700013|376014|82310400026;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?h9XsPf7RScjbVoGfhSF63kWXZjhaP6IotUJGH2Yvk+XhPQWqS3ivmJ2cHIR1?=
- =?us-ascii?Q?fqlj+mmR2GxlwXw9Nmcix8QaJ/Gh2grAolzkoaMjX5szkwtIf1V4/e/L/jDl?=
- =?us-ascii?Q?s88pT0QGWB647tTVyZ7J9CKLhNajGxF1q+Z/TmtEoRs9zE2HUx9YlMH57SJz?=
- =?us-ascii?Q?sP6jVd0vRmTHlswzUxIU01xpJggre0/Hv/KItVxQUP8OdNpx/oclMiquUeQu?=
- =?us-ascii?Q?ZzFpLewAqdePdnuNfKgrlyUvMbIMJFTpCoNFfXUIkwYdU9+bRkzIRyOB5RZZ?=
- =?us-ascii?Q?4w84y2rrqSRS3P21U/j7CoZ8/HErtIZQ3hq4kUmtHEkLvX2NMi9tflEmYrFA?=
- =?us-ascii?Q?SDZNmd5A5puL2QaXBVTMv7AH0fu6WQvf8ZX7qqHkNuOp/vCngQ6NDoEoLM0D?=
- =?us-ascii?Q?FK37oukQctuC7cYDykFpJxMoqJiWL2D+tnp2BaXQDwfYVp0+lHOQTDMrxEDs?=
- =?us-ascii?Q?uewTapZmvuIWIWTUzf4gcvuIf9f+Z0X53Dr6U4JoMGk5bGCP6x3V783suPFr?=
- =?us-ascii?Q?TLlzGnzeATR/ihM9DnLRmnYvSVqf3+MHX2Y1JucE8TZ6qebW0V6MgOLREdKu?=
- =?us-ascii?Q?ZavACq+0GPWlB+XkxY8iTm8/72IuDKT4z7JoipT4o/NfoB3UZ07UVHuJosEr?=
- =?us-ascii?Q?gg3KEiVl6dc8fSOduNRM06JIYKFoTjCYrQsMXnIcgog3U06T+UjMukoOpDhY?=
- =?us-ascii?Q?yyWW1q0/6RHC4u+sB25q3d+uDNViClfXonLg9p3id03NuHLVxGdqiJKem/wH?=
- =?us-ascii?Q?EBYCgS6eTX+DZcw9Za3L2FKJkEFzuJaS9lFjT/MURjmRwDh0wiILGdpG+flL?=
- =?us-ascii?Q?kSWXJo7onkeB0Op1D4058VOucbdvyzO06LcinyJ0AUasZ1U4RX7eJjZCjkQc?=
- =?us-ascii?Q?wgwBqBALwnGyMrunJLrXucclCpAKBZYBQB5zzVlZ/qBoR2BZNdslexB/NsnE?=
- =?us-ascii?Q?b0zvukICWcf62z0bO+y0K9bkH3dseNGR4Zb0Sno1QbQGirj5t+kNf4Jf2NTZ?=
- =?us-ascii?Q?Uz/oS0XY0Q8BQN+fK2rfGPiAG43iajDDrrHxwiPQisXv2qcBfhF3piQ0rep9?=
- =?us-ascii?Q?TxMSXMbs+gm9Z+DhU/QdJ/bTMLoHjIi99X+tINcn+/ivMokOo/y7SnOb5y6K?=
- =?us-ascii?Q?c/6xsZv7okGtePzuysUxbL0D6DgAz5IpKyVZU2NbJMphKKg4FMhbJsMC7c2o?=
- =?us-ascii?Q?RF+z8w/u8auvVxY8JJeaDSCEUrMD3RADKuESNhDaugPVcJdbphY9SbRizBIc?=
- =?us-ascii?Q?iBQLTHm097ZghE3GxGosZrfgVbY4tgsqdArGt7AbLGtVJz/WQWiZ9QVy5cWm?=
- =?us-ascii?Q?LvWgvN01cXYGGQTsK7sHCV7QC/t0okWHXIawUlG5JXzZEYr/xDAbpJMPTpBN?=
- =?us-ascii?Q?VYyXdltQ7PKrOO348DW65ZPAvqLrYEGmTOp6oQxN4JkjPdTwjdEzF2qZFkVl?=
- =?us-ascii?Q?zE1A7OAmO/5SjOIrERbzc5PrT05MGbh6fZ+fa3DBXMYXr56oFesbRTuiDUib?=
- =?us-ascii?Q?Z4ncg2vOAmrlaDU=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026);DIR:OUT;SFP:1101;
-X-OriginatorOrg: axis.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2025 21:23:46.0296
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 90e91aa7-a107-4777-9073-08dd72f5d155
-X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DU2PEPF00028D0D.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR02MB6127
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Apr 2025 21:23:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116548
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Apr 2025 22:01:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116549
 
-This avoids warnings like:
+This fails when building with clang
 
-  ld: warning: NE10_physics.neon.s.o: missing .note.GNU-stack section
-  implies executable stack
-  ld: NOTE: This behaviour is deprecated and will be removed in a future
-  version of the linker
+../../libiodbc-3.52.16/iodbc/hstmt.c:579:7: error: ISO C requires a
+named parameter before '...'
 
-With glibc 2.41, the need for an executable stack lead to errors like
-this in runtime:
-
-  [ ERR     ] foo@0[984]: [setup-script: /usr/share/foo/foo.enc] sol:
-  runtime error: libNE10.so.10: cannot enable executable stack as shared
-  object requires: Invalid argument
-
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
----
- meta-oe/recipes-support/ne10/ne10_1.2.1.bb | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb b/meta-oe/recipes-s=
-upport/ne10/ne10_1.2.1.bb
-index b10c23984d..39ff7ab969 100644
---- a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
-+++ b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
-@@ -26,6 +26,7 @@ NE10_TARGET_ARCH:armv7a =3D "${@bb.utils.contains("TUNE_F=
-EATURES","neon","armv7","
- NE10_TARGET_ARCH:armv7ve =3D "${@bb.utils.contains("TUNE_FEATURES","neon",=
-"armv7","",d)}"
-=20
- EXTRA_OECMAKE =3D '-DGNULINUX_PLATFORM=3DON -DNE10_BUILD_SHARED=3DON -DNE1=
-0_LINUX_TARGET_ARCH=3D"${NE10_TARGET_ARCH}"'
-+CFLAGS +=3D "-Wa,--noexecstack"
-=20
- do_install() {
-     install -d ${D}${libdir}
+On Thu, Apr 3, 2025 at 2:19=E2=80=AFAM mark.yang via lists.openembedded.org
+<mark.yang=3Dlge.com@lists.openembedded.org> wrote:
+>
+> From: "mark.yang" <mark.yang@lge.com>
+>
+> * GCC 15 considers it an error to pass arguments to a function pointer
+>   defined to take no arguments. This results in a 'too many arguments to =
+function' error.
+>
+>   At the problematic function pointer call sites, the pointer is cast to =
+a variadic function pointer type (SQLRETURN (*)(...)) to avoid the error.
+>
+> * see more details in http://errors.yoctoproject.org/Errors/Details/85031=
+7
+> ../../libiodbc-3.52.16/iodbc/hdbc.c: In function '_iodbcdm_SetConnectOpti=
+on':
+> ../../libiodbc-3.52.16/iodbc/hdbc.c:567:49: error: too many arguments to =
+function 'hproc3'; expected 0, have 4
+>   567 |               CALL_DRIVER (hdbc, pdbc, retcode, hproc3,
+>       |                                                 ^~~~~~
+>   568 |                   (pdbc->dhdbc, fOption, vParam, 0));
+>       |                    ~~~~~~~~~~~
+> ../../libiodbc-3.52.16/iodbc/itrace.h:113:15: note: in definition of macr=
+o 'CALL_DRIVER'
+>   113 |         ret =3D proc plist; \
+>       |               ^~~~
+> ../../libiodbc-3.52.16/iodbc/hdbc.c:583:49: error: too many arguments to =
+function 'hproc3'; expected 0, have 4
+>   583 |               CALL_DRIVER (hdbc, pdbc, retcode, hproc3,
+>       |                                                 ^~~~~~
+>   584 |                   (pdbc->dhdbc, fOption, vParam, SQL_NTS));
+>       |                    ~~~~~~~~~~~
+> ../../libiodbc-3.52.16/iodbc/itrace.h:113:15: note: in definition of macr=
+o 'CALL_DRIVER'
+>   113 |         ret =3D proc plist; \
+>       |               ^~~~
+> ../../libiodbc-3.52.16/iodbc/hdbc.c:597:45: error: too many arguments to =
+function 'hproc2'; expected 0, have 3
+>   597 |           CALL_DRIVER (hdbc, pdbc, retcode, hproc2,
+>       |                                             ^~~~~~
+>   598 |               (pdbc->dhdbc, fOption, vParam));
+>       |                ~~~~~~~~~~~
+> ....
+>
+> ../../libiodbc-3.52.16/iodbc/connect.c:2970:19: error: too many arguments=
+ to function 'dialproc'; expected 0, have 6
+>  2970 |         retcode =3D dialproc (hwnd,       /* window or display ha=
+ndle */
+>       |                   ^~~~~~~~  ~~~~
+> ---
+>  ...cc-15.0.1-too-many-arguments-to-func.patch | 73 +++++++++++++++++++
+>  .../libiodbc/libiodbc_3.52.16.bb              |  5 +-
+>  2 files changed, 77 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/recipes-support/libiodbc/libiodbc/0001-fix-bu=
+ild-with-gcc-15.0.1-too-many-arguments-to-func.patch
+>
+> diff --git a/meta-oe/recipes-support/libiodbc/libiodbc/0001-fix-build-wit=
+h-gcc-15.0.1-too-many-arguments-to-func.patch b/meta-oe/recipes-support/lib=
+iodbc/libiodbc/0001-fix-build-with-gcc-15.0.1-too-many-arguments-to-func.pa=
+tch
+> new file mode 100644
+> index 0000000000..54b966dca1
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/libiodbc/libiodbc/0001-fix-build-with-gcc-1=
+5.0.1-too-many-arguments-to-func.patch
+> @@ -0,0 +1,73 @@
+> +From f7529bffc8648a192bd98da0883b94ba86e7d2b6 Mon Sep 17 00:00:00 2001
+> +From: "mark.yang" <mark.yang@lge.com>
+> +Date: Thu, 3 Apr 2025 17:45:26 +0900
+> +Subject: [PATCH] fix build with gcc-15.0.1 too many arguments to functio=
+n
+> + error
+> +
+> +* GCC 15 considers it an error to pass arguments to a function pointer
+> +  defined to take no arguments. This results in a 'too many arguments to=
+ function' error.
+> +
+> +  At the problematic function pointer call sites, the pointer is cast to=
+ a variadic function pointer type (SQLRETURN (*)(...)) to avoid the error.
+> +
+> +* see more details in http://errors.yoctoproject.org/Errors/Details/8503=
+17
+> +../../libiodbc-3.52.16/iodbc/hdbc.c: In function '_iodbcdm_SetConnectOpt=
+ion':
+> +../../libiodbc-3.52.16/iodbc/hdbc.c:567:49: error: too many arguments to=
+ function 'hproc3'; expected 0, have 4
+> +  567 |               CALL_DRIVER (hdbc, pdbc, retcode, hproc3,
+> +      |                                                 ^~~~~~
+> +  568 |                   (pdbc->dhdbc, fOption, vParam, 0));
+> +      |                    ~~~~~~~~~~~
+> +../../libiodbc-3.52.16/iodbc/itrace.h:113:15: note: in definition of mac=
+ro 'CALL_DRIVER'
+> +  113 |         ret =3D proc plist; \
+> +      |               ^~~~
+> +../../libiodbc-3.52.16/iodbc/hdbc.c:583:49: error: too many arguments to=
+ function 'hproc3'; expected 0, have 4
+> +  583 |               CALL_DRIVER (hdbc, pdbc, retcode, hproc3,
+> +      |                                                 ^~~~~~
+> +  584 |                   (pdbc->dhdbc, fOption, vParam, SQL_NTS));
+> +      |                    ~~~~~~~~~~~
+> +../../libiodbc-3.52.16/iodbc/itrace.h:113:15: note: in definition of mac=
+ro 'CALL_DRIVER'
+> +  113 |         ret =3D proc plist; \
+> +      |               ^~~~
+> +../../libiodbc-3.52.16/iodbc/hdbc.c:597:45: error: too many arguments to=
+ function 'hproc2'; expected 0, have 3
+> +  597 |           CALL_DRIVER (hdbc, pdbc, retcode, hproc2,
+> +      |                                             ^~~~~~
+> +  598 |               (pdbc->dhdbc, fOption, vParam));
+> +      |                ~~~~~~~~~~~
+> +....
+> +
+> +../../libiodbc-3.52.16/iodbc/connect.c:2970:19: error: too many argument=
+s to function 'dialproc'; expected 0, have 6
+> + 2970 |         retcode =3D dialproc (hwnd,       /* window or display h=
+andle */
+> +      |                   ^~~~~~~~  ~~~~
+> +
+> +Upstream-Status: Submitted [https://github.com/openlink/iODBC/pull/111]
+> +Signed-off-by: mark.yang <mark.yang@lge.com>
+> +---
+> + iodbc/connect.c | 2 +-
+> + iodbc/itrace.h  | 2 +-
+> + 2 files changed, 2 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/iodbc/connect.c b/iodbc/connect.c
+> +index 632827f..1259516 100644
+> +--- a/iodbc/connect.c
+> ++++ b/iodbc/connect.c
+> +@@ -2967,7 +2967,7 @@ SQLDriverConnect_Internal (
+> +             prov[size/sizeof(SQLWCHAR)] =3D L'\0';
+> +           }
+> +
+> +-        retcode =3D dialproc (hwnd,     /* window or display handle */
+> ++        retcode =3D ((SQLRETURN (*)(...))dialproc) (hwnd,       /* wind=
+ow or display handle */
+> +           prov,                       /* input/output dsn buf */
+> +           sizeof (prov) / (waMode =3D=3D 'A' ? 1 : sizeof (SQLWCHAR)), =
+/* buf size */
+> +           &sqlstat,           /* error code */
+> +diff --git a/iodbc/itrace.h b/iodbc/itrace.h
+> +index 508359d..f3e6926 100644
+> +--- a/iodbc/itrace.h
+> ++++ b/iodbc/itrace.h
+> +@@ -110,7 +110,7 @@ extern int ODBCSharedTraceFlag;
+> + \
+> +       if (!t_penv->thread_safe) MUTEX_LOCK (t_penv->drv_lock); \
+> + \
+> +-      ret =3D proc plist; \
+> ++      ret =3D ((SQLRETURN (*)(...))proc) plist; \
+> +       if (errHandle) ((GENV_t *)(errHandle))->rc =3D ret; \
+> + \
+> +       if (!t_penv->thread_safe) MUTEX_UNLOCK (t_penv->drv_lock); \
+> diff --git a/meta-oe/recipes-support/libiodbc/libiodbc_3.52.16.bb b/meta-=
+oe/recipes-support/libiodbc/libiodbc_3.52.16.bb
+> index 644c3ba07b..0d2d9d5f97 100644
+> --- a/meta-oe/recipes-support/libiodbc/libiodbc_3.52.16.bb
+> +++ b/meta-oe/recipes-support/libiodbc/libiodbc_3.52.16.bb
+> @@ -12,7 +12,10 @@ LIC_FILES_CHKSUM =3D "file://LICENSE.LGPL;md5=3D8c0138=
+a8701f0e1282f5c8b2c7d39114 \
+>                      file://LICENSE.BSD;md5=3D5b36348a404e1d65b57df8d33fd=
+6e414 \
+>                      "
+>
+> -SRC_URI =3D "https://github.com/openlink/iODBC/releases/download/v${PV}/=
+${BP}.tar.gz"
+> +SRC_URI =3D " \
+> +       https://github.com/openlink/iODBC/releases/download/v${PV}/${BP}.=
+tar.gz \
+> +       file://0001-fix-build-with-gcc-15.0.1-too-many-arguments-to-func.=
+patch \
+> +"
+>  SRC_URI[sha256sum] =3D "3898b32d07961360f6f2cf36db36036b719a230e47646925=
+8a80f32243e845fa"
+>
+>  UPSTREAM_CHECK_URI =3D "https://github.com/openlink/iODBC/releases"
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#116537): https://lists.openembedded.org/g/openembedde=
+d-devel/message/116537
+> Mute This Topic: https://lists.openembedded.org/mt/112062410/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
