@@ -1,107 +1,108 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <thond2009@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 89E5DC3600C
-	for <webhook@archiver.kernel.org>; Fri,  4 Apr 2025 01:59:29 +0000 (UTC)
-Received: from mail-oo1-f51.google.com (mail-oo1-f51.google.com [209.85.161.51])
- by mx.groups.io with SMTP id smtpd.web10.2300.1743731965369462824
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0548CC3600C
+	for <webhook@archiver.kernel.org>; Fri,  4 Apr 2025 03:42:00 +0000 (UTC)
+Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.52])
+ by mx.groups.io with SMTP id smtpd.web10.3738.1743738116444121174
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Apr 2025 18:59:25 -0700
+ Thu, 03 Apr 2025 20:41:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=g/NyAUiS;
- spf=pass (domain: gmail.com, ip: 209.85.161.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f51.google.com with SMTP id 006d021491bc7-601c469cce3so399438eaf.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Apr 2025 18:59:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1743731964; x=1744336764; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=kKZ07u2cutntLJy3NgTeiwMpa91C1nhpl7xnFDuDIw8=;
-        b=g/NyAUiSR7VI87/yOpa0XwcTHg95609eMlVcUm8lmlSFB3zHHuzKhBRKmU++QCfnu8
-         HObT4muT8BBg/cAsIdGGKrC9iIArjA9WCXW7+4yoPKayr9l48LzoP9S6yTPr6vVeXWQZ
-         EuvuJocLVkvEIBRi5mPzg/4IgwBFlJEFYndY9yGQf5zm0MuVgVy6kvJeCgKdakXMPxgj
-         WwWdFjJOkzfRdwwE9szSFqkYiEOgyN6Zx1BnBJDsc2ZK0s1ngkgNlY/2slGVrBTwKCSF
-         oixh2/yv51syDRjIWKsZiV6OHHUwj2GYHxFgGYSL2TJjELwRPBMWrQG6NUWcFdwXas8Q
-         fLjQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743731964; x=1744336764;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=kKZ07u2cutntLJy3NgTeiwMpa91C1nhpl7xnFDuDIw8=;
-        b=SGqBEsj44bxJ9CMSamWB7b0ZWvIJ3XsF+uGeMH0gObF2+oRd0aE+KDf6n47eF9qkE+
-         OlyN5J6TTrrH/P6FJgryDAL4vZlOwBTqmrDbAsjXjG9HPixkOl9cqsw3TMArxuP4LjDb
-         KvV0SlCTBDoao9yZwRTB0+j9jh+P1EuFB3GfPKPKpO6WQP6xm21ed7DKT03oV0ntj4Ty
-         xnkDk/GJ1x/p6+o/TQ6KMchtBdOUDe0aIVt/5jyWOZtsv2tkcd+jZwg/fcjRchJCHX3d
-         lB+1b6OCh1ruWWov2GTXPzrGE4+uEjm2E3ptxWjhMFBW/nE4J9Q4zu7//XX5+ekBML7m
-         tAzw==
-X-Forwarded-Encrypted: i=1; AJvYcCVus0nsatBQ9YMVz+h3P4QIhMXYroj9hCgHduZsnjhdPGjlPB2tSrnv3EGQdoDlQS2xD58sTGzxgQGs+Um3s6X4QpY=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyMy7TBjTG+RuNhXajdCfxMnYuxcQHjmOkiGp2dFgiCVogEiFag
-	nQ8bXd8KBmrCoNYv2G1pXa6tm+hpAix0QilLH8+ZU7c57kPeeLeeh8EF7fhPN9RdqIDLZqh0pkM
-	4OLGpQeLiQeSHgIKhrgYnb2GVGAE=
-X-Gm-Gg: ASbGncsqItJlaCLSVxx4QcYv6zjvhluT1Sc2zd6/zaRD6EVD4sJaITLp7G6yRHeDVEK
-	kv+Sf/QVE0GfRRBaxMRoeXvTDLQ7jTh60M+S7iU/vHAoLRRDFUSlXf6sFZdbwMbcr2uLrngNtTm
-	Ab1EoxQ3oU0/FFbXH98UWyprYkzw==
-X-Google-Smtp-Source: AGHT+IH5fp6uGeM+4SwHd1ajm/yeVHTWuxF30qdxzbWOtxUYMgE3eXdad2kJ6F3AynvLv/pnF1GoS/zUKHcEZtepuvc=
-X-Received: by 2002:a05:6820:2715:b0:603:fada:ac47 with SMTP id
- 006d021491bc7-604155cfbc3mr683835eaf.1.1743731964563; Thu, 03 Apr 2025
- 18:59:24 -0700 (PDT)
+ dkim=none (message not signed); spf=softfail (domain: gmail.com, ip: 156.147.23.52, mailfrom: thond2009@gmail.com)
+Received: from unknown (HELO lgeamrelo01.lge.com) (156.147.1.125)
+	by 156.147.23.52 with ESMTP; 4 Apr 2025 12:41:53 +0900
+X-Original-SENDERIP: 156.147.1.125
+X-Original-MAILFROM: thond2009@gmail.com
+Received: from unknown (HELO tho3-nguyen-weboscsm.bee-live.svc.cluster.local) (10.185.60.118)
+	by 156.147.1.125 with ESMTP; 4 Apr 2025 12:41:53 +0900
+X-Original-SENDERIP: 10.185.60.118
+X-Original-MAILFROM: thond2009@gmail.com
+From: Nguyen Dat Tho <thond2009@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Nguyen Dat Tho <tho3.nguyen@lge.com>
+Subject: [meta-filesystems][PATCH v2] f2fs-tools: Fix build with gcc-15
+Date: Fri,  4 Apr 2025 12:41:48 +0900
+Message-Id: <20250404034148.65709-1-thond2009@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <ab95bf2efed9124921b16e39ef0086d787bf4469.camel@linuxfoundation.org>
- <20250404014746.249819-1-schonm@gmail.com>
-In-Reply-To: <20250404014746.249819-1-schonm@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 3 Apr 2025 18:58:58 -0700
-X-Gm-Features: AQ5f1JqjyPVNc9d5l9mhJRXBjqsFwN6bcxEIinooo4q9K3670dFYCr3ooWZ7Mao
-Message-ID: <CAMKF1spQo+=imoz5+gj7h0+ciY6on5nceLPZv61wp_P_pqZ0ug@mail.gmail.com>
-Subject: Re: [oe] [meta-openembedded] [PATCH] recipes: Fix variable assignment whitespace
-To: schonm@gmail.com
-Cc: richard.purdie@linuxfoundation.org, martin.jansa@gmail.com, 
-	openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 04 Apr 2025 01:59:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116558
+ <openembedded-devel@lists.openembedded.org>; Fri, 04 Apr 2025 03:42:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116559
 
-On Thu, Apr 3, 2025 at 6:47=E2=80=AFPM J. S. via lists.openembedded.org
-<schonm=3Dgmail.com@lists.openembedded.org> wrote:
->
-> I am seeing some problems with the warnings about whitespace around assig=
-nments while using master-next of poky.
->
-> In the case below, it's warning about an export statement.  But certainly=
- in bash, putting a space around the equal sign of an export statement will=
- make the export fail.
+From: Nguyen Dat Tho <tho3.nguyen@lge.com>
 
-Certainly but here its parsed through bitbake which then creates the
-shell context.
+Backport patch to fix error: https://errors.yoctoproject.org/Errors/Details/850170/
 
->
-> --
->
-> WARNING: /home/jason/yocto/meta-openembedded/meta-perl/recipes-perl/libco=
-mpress/libcompress-raw-zlib-perl_2.213.bb: /home/jason/yocto/meta-openembed=
-ded/meta-perl/recipes-perl/libcompress/libcompress-raw-zlib-perl_2.213.bb:2=
-1 has a lack of whitespace around the assignment: 'export BUILD_ZLIB=3D"0"'
->
-> --
->
-> Cheers,
-> Jason Schonberg
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#116557): https://lists.openembedded.org/g/openembedde=
-d-devel/message/116557
-> Mute This Topic: https://lists.openembedded.org/mt/111570451/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Nguyen Dat Tho <tho3.nguyen@lge.com>
+---
+ ...-tools-use-stdbool.h-instead-of-bool.patch | 40 +++++++++++++++++++
+ .../f2fs-tools/f2fs-tools_1.16.0.bb           |  1 +
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0001-f2fs-tools-use-stdbool.h-instead-of-bool.patch
+
+diff --git a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0001-f2fs-tools-use-stdbool.h-instead-of-bool.patch b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0001-f2fs-tools-use-stdbool.h-instead-of-bool.patch
+new file mode 100644
+index 0000000000..4981c2151d
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0001-f2fs-tools-use-stdbool.h-instead-of-bool.patch
+@@ -0,0 +1,40 @@
++From 6617d15a660becc23825007ab3fc2d270b5b250f Mon Sep 17 00:00:00 2001
++From: Jaegeuk Kim <jaegeuk@kernel.org>
++Date: Thu, 24 Oct 2024 20:33:38 +0000
++Subject: [PATCH] f2fs-tools: use stdbool.h instead of bool
++
++The existing bool definition is broken for c23,i where bool is now a keyword.
++
++Upstream-Status: Backport [https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git/commit/?id=6617d15a660becc23825007ab3fc2d270b5b250f]
++
++Signed-off-by: Elliott Hughes <enh@google.com>
++Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
++---
++ include/f2fs_fs.h | 4 +---
++ 1 file changed, 1 insertion(+), 3 deletions(-)
++
++diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
++index 9534da9..0cb9228 100644
++--- a/include/f2fs_fs.h
+++++ b/include/f2fs_fs.h
++@@ -28,6 +28,7 @@
++ #include <stddef.h>
++ #include <string.h>
++ #include <time.h>
+++#include <stdbool.h>
++ 
++ #ifdef HAVE_CONFIG_H
++ #include <config.h>
++@@ -119,9 +120,6 @@ typedef uint16_t	u16;
++ typedef uint8_t		u8;
++ typedef u32		block_t;
++ typedef u32		nid_t;
++-#ifndef bool
++-typedef u8		bool;
++-#endif
++ typedef unsigned long	pgoff_t;
++ typedef unsigned short	umode_t;
++ 
++-- 
++2.34.1
++
+diff --git a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.16.0.bb b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.16.0.bb
+index 997fa1240a..a51c2ef8bd 100644
+--- a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.16.0.bb
++++ b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.16.0.bb
+@@ -9,6 +9,7 @@ DEPENDS = "util-linux"
+ 
+ SRCREV = "06c027abc6153c4a97cba5317844e8dcaaee3cf7"
+ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git;branch=master \
++           file://0001-f2fs-tools-use-stdbool.h-instead-of-bool.patch \
+            file://0002-f2fs_io-Define-_FILE_OFFSET_BITS-64.patch \
+            "
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+-- 
+2.34.1
+
 
