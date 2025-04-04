@@ -2,170 +2,252 @@ Return-Path: <niko.mauno@vaisala.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19215C369A1
-	for <webhook@archiver.kernel.org>; Fri,  4 Apr 2025 10:54:53 +0000 (UTC)
-Received: from PA4PR04CU001.outbound.protection.outlook.com (PA4PR04CU001.outbound.protection.outlook.com [40.107.162.76])
- by mx.groups.io with SMTP id smtpd.web10.8468.1743764081901910353
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A41DC36010
+	for <webhook@archiver.kernel.org>; Fri,  4 Apr 2025 11:04:03 +0000 (UTC)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com (EUR02-AM0-obe.outbound.protection.outlook.com [40.107.247.139])
+ by mx.groups.io with SMTP id smtpd.web10.8824.1743764639435422930
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Apr 2025 03:54:44 -0700
+ Fri, 04 Apr 2025 04:04:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=EIP+yDbO;
- spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 40.107.162.76, mailfrom: niko.mauno@vaisala.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=fLsfMUUa;
+ spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 40.107.247.139, mailfrom: niko.mauno@vaisala.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XXn8vIA/06xUNPZNPCalNDLL7EluTj7U3WsKE2OyA++BjyeiSy9wUX6Brd4VADIrb9sLVi6clICbfSH8wh3V1jg5OE/Rln3iaxt+9IFhOhGF7mG2C+lDyx4krEty3B9cOen3yXFBiiVYd7Nc1DjPIkC1R/kfX59SoACSPF0RAPBVAJt/4lIit+/2ThD/x2aKexbhAzP0zTEEB7FTguMFXzwz64iZ7KzaapG9XjF04olcDEw6WJvGqZ4fhJZzR+ucLuUU5M4EioTyGNO4dsFgdjoEUcbtv9WLbppwuZv3CGELPumJzi04ZOx/PJD9Ri0BgFwbWJsmoLft9CIYuQ0gtA==
+ b=dG8T9wFvmeCCQj7TmMHGO8WjE3vWBP84bzmcRx7igqbmPSw52oXqYPtdJ+ev3SbqazBNfn75NuBDgEHX4WCEEH7hLpznyTFncLuSldi2DNo8CuuZJpOCU0d9c0ay8v5ckkKNsqFYz21Dq8DIYvFlymZAE3Ohv51gAfjxXVw1nu1JMXpGmRuT8nRvqqlWXCx0mmwzt9mp8VynaPTJs7HybnwxVL2mrPyVQguoPsWUglzeo107bDmeyggMyzBdVLjomsPA0+T1fJhrVCSMEwcC3x6mZLu8RNKlpnL6Q+Em/1J7xGAjEJBnZsHgABoFoui7Cuh7g/jL+CWylyCQU+JNZw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bUbrYGSTTObL1b4OHEi+9pUeCUTlAXyNf8lpr9lLi7I=;
- b=TDBWEGI6QaGc9zO25NGFzpW9JV3fteGWBjkCNYqmzkqqh61bjYSHAnpQ26DEYPfM0nQxPM6cPODFR2Wbh/7xMh7Ibki+cNq6KkbJv9ojqRgHnchK6OUgsoJ30GlRu4/rNw4wzExNplZppHMRKyXP0wNA0H8giF4p18/ZngE5vuDmmJw83q9ZMFKfY7MkG508rjcEzl+8WtYtxbq5Gc+zT4CsQTBTHjv2Wvd1SFCxfMx4SSLrBpBBWb7PgpD/4+ZTn2OCThDfy+ur8KWs5qgYL+du65s/ETCp3eZJuLLUDOGQYWNaTSaJWqO7EPVBHZd857EJ5Q/e8EpyBNY/MjAMYg==
+ bh=ZQ5a6xmxUi1DX4uYF/uKbHQmIMwAVCppkNaxHqsn9q4=;
+ b=X3T8S6LXW68NkUEIa3XCKGUmAQ2QXmm1IF1yiqlC1CBYgMKBiQ3spqHRBkwk89wcQTZXj1RlFsOtU3p+TJwg9JXcVC0CtL/efAkWuFfe4syd/Wg621ViTdt6+tKFDhG5gd1+dyIVqoVTN97h738Hc4+/zeLD0sx5De8OCo5VwEUqs38t93KIc4aw5Q8OipoNa0m1Z2FCf027E3wWalerkEnVvohC76BeziqiU4cYjzd3p2IWOL2hi+DKJXuynxW5uURdENZhfyRJ15h+rVGx9heiEQCaxCq5+k34sm26EV/H/uJThbN2dgwpFftZ0zgzwlGVBct5xfNajshzZ/XfWw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
  dkim=pass header.d=vaisala.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bUbrYGSTTObL1b4OHEi+9pUeCUTlAXyNf8lpr9lLi7I=;
- b=EIP+yDbOLdXKWvtM7BCyfFhd6NPC7PxpDNjafnaLc2MZYQDZzkHeiKfOEHD1ijH5jfnuk+HFU8PIt+gP2ZFh4ag7+KNEZshMHvv9N0vLQ5Eyc+LDdUhUuYjJ+X/ezLp3JdutBhGv9SiZnmsNvzTIsS5pm3y3i3MHb+fZlYPRWdkCjgN0/gN+GnBmGGVbbGqYazMsrmuP352PHfk+aCy7E0O916jDUH/1Misc/Eclb6G6H9xI/zSW623rMD2ebqkkf6nW7d4WDpwPF3ZIvWuTrgK/HgJdw1PdI1BTwh/0ai7e5CgytutopSQkrPnzNzEswBO12J1Hua8yCxCMd9GbOg==
+ bh=ZQ5a6xmxUi1DX4uYF/uKbHQmIMwAVCppkNaxHqsn9q4=;
+ b=fLsfMUUaHrUWI+eqzxYNLh2ZrrqkQTBduYVDPuTWFVyYvPlDu4OkyyxNMZS8Wc8XtcSp9KkkM8UXSvBn4aBFvparlU8wyF/8NeDuNYYhtVJubDT6MeoCt5s28OQZr7Ay0gzPSPDIJ88UwmY40sO2h3n+N5MJIu5yYmdV8jB6XmJ7IPAxlWrP2pzDT+QygKgAF9o/EcPmc4OQ86xcz9NvrQE58UzIrArwmJBLWVEbDdzFuw4LHAC9zw2iw6B/+OYo/moNv1hHUamRLNvLv44oACqvAMTeCgnKrdnPquOicGRyz9KEIm0+FJOOAZ3qP6IBO2FARC6JeHfCPS+cMORMCg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vaisala.com;
 Received: from AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
- by AS8PR06MB8167.eurprd06.prod.outlook.com (2603:10a6:20b:3c1::13) with
+ by PA4PR06MB7184.eurprd06.prod.outlook.com (2603:10a6:102:fc::7) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8583.42; Fri, 4 Apr
- 2025 10:54:37 +0000
+ 2025 11:03:56 +0000
 Received: from AS4PR06MB8447.eurprd06.prod.outlook.com
  ([fe80::af93:b150:b886:b2bc]) by AS4PR06MB8447.eurprd06.prod.outlook.com
  ([fe80::af93:b150:b886:b2bc%3]) with mapi id 15.20.8534.048; Fri, 4 Apr 2025
- 10:54:37 +0000
+ 11:03:55 +0000
+Message-ID: <2f4d9589-51aa-4ec4-b31f-76af3e7aae68@vaisala.com>
+Date: Fri, 4 Apr 2025 14:03:53 +0300
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH 2/2] sdbus-c++: Support using alternative
+ runtime D-Bus
+To: Khem Raj <raj.khem@gmail.com>
+CC: openembedded-devel@lists.openembedded.org
+References: <20250402112901.3804235-1-niko.mauno@vaisala.com>
+ <20250402112901.3804235-2-niko.mauno@vaisala.com>
+ <f6b6ca1f-8792-4f99-84cf-bf6f82631576@gmail.com>
+ <64506919-9b47-4e4b-84bb-e0877a5e9938@vaisala.com>
+ <CAMKF1so2jcMx7=ASs4css6dr-U=FbYf2PxjDMRYtq_G0By4=Fw@mail.gmail.com>
+Content-Language: en-US
 From: Niko Mauno <niko.mauno@vaisala.com>
-To: openembedded-devel@lists.openembedded.org
-CC: raj.khem@gmail.com,
-	Niko Mauno <niko.mauno@vaisala.com>
-Subject: [PATCH v3 11/11] xfce4-session: Update D-Bus runtime dependency declaration
-Date: Fri,  4 Apr 2025 10:51:50 +0000
-Message-ID: <20250404105150.870898-11-niko.mauno@vaisala.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250404105150.870898-1-niko.mauno@vaisala.com>
-References: <20250404105150.870898-1-niko.mauno@vaisala.com>
+In-Reply-To: <CAMKF1so2jcMx7=ASs4css6dr-U=FbYf2PxjDMRYtq_G0By4=Fw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-ClientProxiedBy: AM0PR06CA0133.eurprd06.prod.outlook.com
- (2603:10a6:208:ab::38) To AS4PR06MB8447.eurprd06.prod.outlook.com
+X-ClientProxiedBy: GV3P280CA0010.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:150:b::11) To AS4PR06MB8447.eurprd06.prod.outlook.com
  (2603:10a6:20b:4e2::11)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|AS8PR06MB8167:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0e7a0e49-eabb-4828-1f6c-08dd7367179c
+X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|PA4PR06MB7184:EE_
+X-MS-Office365-Filtering-Correlation-Id: cef5a78f-fb8c-463b-b39d-08dd7368645c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|52116014|376014|366016|38350700014;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|4022899009|376014;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?Qum+ARV4wCzTqOT0BmZQYGJxsGIIYbpJM2395ypc5EosNfZYmXTTMHYIzfoI?=
- =?us-ascii?Q?LmglXV+SeFHB5a7XGA6bYyryJnE7Ud0+GykQ5mG/uokV6Wp483i7VSYrwG9w?=
- =?us-ascii?Q?yXisCr2QIgaCqUQ6dE4Qu5vuhM+T6i125K+LM0Y8JBv6VbB1zJA0barNg17u?=
- =?us-ascii?Q?pjOiWY/fpeBvELkkRxE4ePnWAI3BJF82IzlgXeDfvcQcIjyRSKiVFKKS/AS3?=
- =?us-ascii?Q?X3NGcYX6gqju2P9nwVH3W6c7W5JZqMiT8UwNCif/O/QejtUEO/Gxyd9tAioN?=
- =?us-ascii?Q?eahSeNlcGUbpXKAsqCjCFhrF1pDWlf6UAi5DXAZWhYRfh6lxOhkoLhJEccWz?=
- =?us-ascii?Q?HwShxPuKJ3WUuJXUEv33w/0jg7inj6UpaHtA/CzWh9OIPPl/t1u+tzqZkw0O?=
- =?us-ascii?Q?G37FsVtBA2QLFQLhyPRxm3IQA82ApmZJwGcD5CXpPsD/0BC0NaV3HuzYY7mf?=
- =?us-ascii?Q?gR3jkBj6RQ88aaOZDUolEJ/wYS9VrNDCU8UIxyPRP5XvsgZS52MjJb5AhC0u?=
- =?us-ascii?Q?NY7Ch2kH85tu+INq5DK2HFy0f6mZJraZg8IypCukjVyw+4tP7NMS5grN8UHi?=
- =?us-ascii?Q?fOeE5CrXwVvYLkW5hyGtmQJDBvuMeEVgMepYvCiBCyXi8Aes4/RU1Yul8pI0?=
- =?us-ascii?Q?PRYp45aTBSJ6WdS/9VBlt/6ttUxkH84+2bnE91mBPEXa7Uvph3dVvLuPiqB4?=
- =?us-ascii?Q?d5FI/NpWLLyAjFRQ+cY/C1QYp7vb2DiUGcqjwzLOf9cwQVw3eKgtdBwzIZ9e?=
- =?us-ascii?Q?0/Trarf0vBfe/+A/Nnb5NT4n6gcp/4kZrzV8eXddnaMzdFTSotdh8+dCap0H?=
- =?us-ascii?Q?wa07smD5vebZAaWslPt/o2bMhtQxnKQz80+7X79HII4HI2NKPHn+as9SUpxa?=
- =?us-ascii?Q?lQvZbH2cIdsrGY6B3sHALSirw70AXFeMs+kA/Xes/LKNVqrwI2NzYEnEg5do?=
- =?us-ascii?Q?7mFzTDLNxWwL6Yw5QW+1HjgKOq3SLzydwW/oXMLAq+a3PuWXBMspL9lkjpMj?=
- =?us-ascii?Q?D9Iunb7e0ZDe6VV/Zpq9S2LwmEMXik2m1PDYd9JXnhD6tYRYEUBrz9iqXr2Z?=
- =?us-ascii?Q?R8Z9VZ67g/rTHtgr30wScDmDQ9q+bEmIXMZvc7+wSTAxpDKQ0SCsq2PY2fzk?=
- =?us-ascii?Q?o8wKNZpnXllqlBnq7PqoLv91u4gIUfFPndH5SaMZe+sGMe+xOQWzUACUQcmV?=
- =?us-ascii?Q?mjeed9xYIlgKoQdasJy8U+sxhXQ2IkBIIO8DchFJGwSpeqmymXteOe9n1hcO?=
- =?us-ascii?Q?kuMKrIjQHxTqCnUuM09qP+V8oQlQzYtMl5SnXpvSweaI6D6QiMjSd/9YdDCT?=
- =?us-ascii?Q?7DM9b55P0exyzy9zJi5QxJ026XUpCnDoKd2wweFrVLE6HicDMJE3SkQHhxuE?=
- =?us-ascii?Q?zqcv1xFA4ivgCIsql5aTe9udaFZm3c5a8IJmPlKW72/TDCDy1AdaLurQDsEu?=
- =?us-ascii?Q?aD33mfLeEnR8NIRCSdm63v3mYYaOQlSr?=
+	=?us-ascii?Q?wFbpql0NI5JtyIQeJm4+5wrSNgabUv9QnK/xciLIh2HNfhHdm1yw/oLSDSli?=
+ =?us-ascii?Q?LUuehFVkVSbehVlh/GiELy+uTWSWKGRPM1RBDNnHWhs4vN47xL5CXylH+SJ/?=
+ =?us-ascii?Q?AcT7BqV+wwEB0Tgldx4l3UApvioc/7r++LGVPqqwASKs0abiigrdd7hcQfyO?=
+ =?us-ascii?Q?QBh7FVP+qXvO43iEME7eHBSsVyqTqIV6geTFtV2QdfFO3HZ2NMAQ4EyHFvjA?=
+ =?us-ascii?Q?5+mSUOwefpoX7WFKGVmhrBuYUK8jtl1GAMVdn+vel2FBuQ3w9+Kj4W+LlRRd?=
+ =?us-ascii?Q?B4noqN07B9FEYY0s70SqLwzMmsdnifWOth1odLk68FhkfdoQSsMn1Xn95Kp/?=
+ =?us-ascii?Q?BdwdKUttCw+6TFhHQOeofjhpEOg/dAm5zqqeUthayHMuPO+io8CMps1bgvNA?=
+ =?us-ascii?Q?kvYShIIjtbl0+XwTOlh5jPoC5qxJDqn6pB1KrYxyn+fw/vN0SFWlt4PILHag?=
+ =?us-ascii?Q?qU6sBj5moAna8H/LDxV8FanepgCW+9hvbekPFY/Zi44rRlW5cZCeTXOoP1bW?=
+ =?us-ascii?Q?mPYlwt/WeoFyEtgz+wUrl/864cyLQBt2v3rTgJTKJOWgSymXqk0a58+QHK1x?=
+ =?us-ascii?Q?cs+tPsmjxF8gbd+6El0XCFnj5aiADQ2/hBU92od8UfXOtdJ2MCsdATLuqMgq?=
+ =?us-ascii?Q?hUT33EO9Z7Ihpdaj/gEHx2GA7Xw20nfdRiNoATmEXdi34ChI2ltVumZgyTaD?=
+ =?us-ascii?Q?Oqz4MJHs9/ZgZmMvds+zzVBWet1tDxixKnVEx9Da9SLB7HIIR35qqWfJ7a5/?=
+ =?us-ascii?Q?t6svXOHHJTWnRkjnT9a7p/QYczjTM53lKlsK71K5n72+DREMpftFwQT5gCdM?=
+ =?us-ascii?Q?R35/T5A+prwevqALV/WQtpX9VNauq9ZiHhEsGl2jPEdnyM7cgyG9TcXYrpYA?=
+ =?us-ascii?Q?EQ4BOgN1mbHq75W0MURw8zU5IAXE3pIz5HgvFQNmPMwjEBNykJrVYPNM+v/t?=
+ =?us-ascii?Q?fT5nsvbdVy6iMrUSgVQ1D4qDo65L3r6IyHP7o9yxKGwMz+VeQpf91urh6DM9?=
+ =?us-ascii?Q?/m53lGQ30qUjE0Z2xNaWKgXhvtKsTQ35899MToYyL9SVqgEaa+4l2w2B4OTY?=
+ =?us-ascii?Q?4smXhnyoVpucsEr0Fa6YUv1aGYnKkYETKCKE/BgA6Ure/NqmM6YwjlDg46i9?=
+ =?us-ascii?Q?kg9vCsxXK1aYD/lnA5ZTU3idBZzLh7NU/RqnLjcE9CgCcL+J4wDdfiK3/KGB?=
+ =?us-ascii?Q?hckJ6UEf+TS4op49xPy8bpJZQcu/tfU4b7zy5skhgjX7dAJ7r1ChQchlT3De?=
+ =?us-ascii?Q?V6RF9oyW5rVNRtJEe2OEJpN8YFOxCNWmuEFOeLYn5N6K4XgT/QUtPNqcrXXM?=
+ =?us-ascii?Q?Lo1n61kxznu8BgapQehKtPPZ?=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(52116014)(376014)(366016)(38350700014);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(4022899009)(376014);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?Vu4+S57ULgF4htFnuQunRJi98nMKIH4FQnpNSEYhiLizxsjX6Kjgn7IuzZ7M?=
- =?us-ascii?Q?3OYMWvwMn1czFRVYZoALv3TXdSQtgjgZ0eqf6nRtUJlY6Dtcz5iFATRK6ZAD?=
- =?us-ascii?Q?UOPoxKhJZTlmqsOpNT3w3X3HkdeIjBu5T0DW2FJe5FbpXoeCGt3XzrsFWv18?=
- =?us-ascii?Q?K4bfVjMhBPZ5cZVH4lDMqyZ/nIgvyv6eCG1ddVUfHNYvqXl+0CWRGX6Q4a/X?=
- =?us-ascii?Q?xCd4KxfJhqpNuseR0wsSPn96IE07/eFdQjCOmjd3QW8WBN6u0xWJ/ljD0G/w?=
- =?us-ascii?Q?uXzqsmf2652MI4jKw+5bw06k64fIsSZzG/Gcnhe5UxEFIFwXGuyJQ39rZPqt?=
- =?us-ascii?Q?0Ieshn5WjQVNwD4LO0d8TIIMMPahENVPJBa9BhQ2xtElqO4R+ofjjfjlPL0k?=
- =?us-ascii?Q?++qPhsw6u2RX3jJ2wne8cltszY+x8BMjCKvh7gxaqEU/j2rph5vVjH7wF1Mc?=
- =?us-ascii?Q?mBSREgYtxCSu82CtIw/D4ZpdBD0nsRpll2E9OYZJ7G/Fx3aHCTHQEvtdMnQL?=
- =?us-ascii?Q?NbAO391jfsedVz0fYR2q3Ftut9I0h4rvfyEoeJVSUAo2la18NqXsVD5DTBWM?=
- =?us-ascii?Q?CuVRlDTlXM/mzARgE68U12ycOPI2eK8KLR9iw5xZyEl7IP83rz9QKDDW4gXs?=
- =?us-ascii?Q?PtxG+OMqDHFfATbGnRdRKYy1/x6WIGvn9Ljp7xIZ5nqPEkL9QDKjHWRQXcP2?=
- =?us-ascii?Q?iTZy60sdTid6oq52OAPZoBG3DddmgSKz+hb3kM/7qBMVqLbrZ7tmUQ98jBQs?=
- =?us-ascii?Q?s6H35kaSus+K4ClJaP8vWeoAuPFgAtlHmV4gemXUuZPvHsIwQFNhhhYBAXua?=
- =?us-ascii?Q?husqWbwLZdTm6RtvDHQkEZTPiu0o5+fMLufBbGgxbSQJl4FnrwfiWezM/sPM?=
- =?us-ascii?Q?lEC+3U4WbAm94C+QUyVGasD6gNgUYlEgaAU327e2oU06Kx6HMRg45HbOgtcq?=
- =?us-ascii?Q?7NpYmFgITPlCgHkPAxTdGHlT8fL1Ks8/XMqQXqX9uxjVifi37C212L5+ZG44?=
- =?us-ascii?Q?rJk444CIJt3HoHM0iYHfzlZLkXmp3GnLx+Nwa1Bg+FvM+R/EoEgdpk7zcOqU?=
- =?us-ascii?Q?CdUcT1AUbUHHcZdELPmDzM9LUGPUFG5EEzlvsbhrh/AsFdn6WXetuY47QiXy?=
- =?us-ascii?Q?4vIh1t8yLd/750M2R80pTmYQkj1Q7UhnRXM7VBNw96ddBKiEeBsYDBWx/C8n?=
- =?us-ascii?Q?U3NX6rpnXewYlzL/fcgbdvye9x3sHe/8HxO79sX59Yh4remgL9WvvXPVxjEp?=
- =?us-ascii?Q?hu+asLaisDX45FJ3JJerTVWDt2s0g6JZE2U/Oej4YmenjKjGGmrcGFJaJLVR?=
- =?us-ascii?Q?u4oYta6LQWYa3Tw9qZ4tESyeKcJrKMDi7yZbJcM0jAZOIfeBNuEZbq1aCY5o?=
- =?us-ascii?Q?rLtnWWRM6QSYbb9sC8uqwryykE6raouAKMdBwN5WBv1+2Nj42J0vc7fzlnca?=
- =?us-ascii?Q?nr9ny05RV8HC3Fpu+uBlJjuhsHdI8X8DC5G4t+xmGl9KbYnrinG20NljTQVN?=
- =?us-ascii?Q?R3TO08oKiTCWj7QweJXCntD5YGz6QP5vJDePJ62XaZvxV/FDMYmMPXwYzQ6o?=
- =?us-ascii?Q?Bu+0w2Gj5GdJOwvidBbh0tCLztr7WKD2PbUKqmu0JGcMx/uUhFQQpoLZqKTh?=
- =?us-ascii?Q?+w=3D=3D?=
+	=?us-ascii?Q?NQcvAH+9Y8W/3bJGIJCPXW6higzXi2NqmEERlViS7uvJhiuKS2HFsrKK4eew?=
+ =?us-ascii?Q?hv/Iomq/AnVyqdjEEzuClX8QaZ1v7f73mDzt/IHZLy2V9moaCVvY8cuzWJiN?=
+ =?us-ascii?Q?3v/of+V5mhHLbPvbO6NSWtBZ1Db4tt1RjGeP0+ouzClImkyFjAFgiuuGh2I9?=
+ =?us-ascii?Q?aL+oey1i43iRU+d1ofuJGiklZsfN/Tm03a0pk/tMHmqUv6o6mOBB63lnE1fi?=
+ =?us-ascii?Q?GOGBCLeSVtJIcFf+Z/bVo28UKFO1bqrsFrawXIdJFf5Nv3xkzZL+8PvsbEGW?=
+ =?us-ascii?Q?ODXLXN+g7pvLt4FMahSrqO9QBZDOZVkw3zeCLYYA1QJXIDcIyGlKFDF2hU7M?=
+ =?us-ascii?Q?AMng5hi4wSc5RvGnESTbt1iayuXZ//SWqQUhn1CyoWDnAjpnRitsgAv6Bp1Z?=
+ =?us-ascii?Q?NMhZWS9yWEjTMASQDr/yelbgW1RCUUqs/eb9+dbRwbxyMu/3MAl14XTSbtmr?=
+ =?us-ascii?Q?Xx9rPoF6XIo9E/8Cabv+tN2EHqOgZyFd2jI7BJ8XmOCEA8JY/5jex7QAmJW9?=
+ =?us-ascii?Q?yGbYnN6MaOK3k+g7/hHnbzu95TX9/JYXXMewMDcJdaA8E2K+ABpoK1bFMfRn?=
+ =?us-ascii?Q?TVCw/iO+rFIVU+FuSGweYyWnPXDRTqtfVHc+D2pfirOORbh28k2ebZS/tDDq?=
+ =?us-ascii?Q?/vydPhdKzIOdEHlogkcK7e2TMaYB7JlNQ4zVARbK9pSryvjvwotHZi9A6RZU?=
+ =?us-ascii?Q?lu8yUN3LgDFHvdSb7ncMdH6f12gg6Wc3QWLcbMDSuWoO3AGCtosSHb4sQC6j?=
+ =?us-ascii?Q?SfY1YdqlB3Rs3gSLmquvciQlgbh8r9UvZTSgv/yZOq4xnd+5pKigsk5/u3/n?=
+ =?us-ascii?Q?0M28fkyqwQKBBgE1VHnjTPCTmsdrDVhLhH9qkWYYKR1nVwJfUbV4iwB78yRp?=
+ =?us-ascii?Q?6Vh+Zkf++9KzWUsBXSV6ZVtD5rKALA/cxHnahx0vHJu3m8cAU0is5j1kHSV6?=
+ =?us-ascii?Q?yVU334VrUO1uGkOahbBbNTrAI8+XY3UMqMw56IxkpWnTe0+0Djyz6zLRtCCu?=
+ =?us-ascii?Q?dgSXMmb6ILQ7b32ZCvQru5mIHI4f9NrUGv/E+zNQTKBgwpqftI8hOX/GmuVt?=
+ =?us-ascii?Q?1efjd8wY1945GEmyIIUt5LYQn0bjPFiYmpvGuoEywYCFC/IJMvVluDYiHUcG?=
+ =?us-ascii?Q?J6dYBLFcz5TZY8Ga59ne1dWuYPFzrAbMlhJnKKx5WFDE7dUs84Bsoot6XVo8?=
+ =?us-ascii?Q?+nEjWTi4T2PevYjGrexbnkXZ1SypkxCLpnL9OSiU+4pfpJ2dABe9Xlbn1hGG?=
+ =?us-ascii?Q?agfDtqWaRk1gXQVP8KZGH9BaMkzUINTDIplTe1sQTj+TBcQRYUwRCir6AYv3?=
+ =?us-ascii?Q?MvsBiYAxurHhf7PNevFkTo3g3ySsxl6hGOChhM6TPEvuzmEcmJBahRU3sGSv?=
+ =?us-ascii?Q?Z0tstsq1RAJP9cKv4hhKuz6kdHoQdveWdOFBObZiuZsSvZ+L8peML+v9REEi?=
+ =?us-ascii?Q?s2gXGGJinl7SfYGaG8qFZqWgDOYQ/FoHtkZsad8eE449J0/fP3vYk6XgCmqV?=
+ =?us-ascii?Q?z4Ohqra431rbc5jju0PsLf7D1GxpDTRewsbXsg6tz78nCJojdH2ui8UCd5bk?=
+ =?us-ascii?Q?/EpNzFSjF7CbdOQ4KJZAnv0rMnLtdHvzmLeFm14ojS7/DaDKDQD75eQVw4bN?=
+ =?us-ascii?Q?Vg=3D=3D?=
 X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0e7a0e49-eabb-4828-1f6c-08dd7367179c
+X-MS-Exchange-CrossTenant-Network-Message-Id: cef5a78f-fb8c-463b-b39d-08dd7368645c
 X-MS-Exchange-CrossTenant-AuthSource: AS4PR06MB8447.eurprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Apr 2025 10:54:37.4048
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Apr 2025 11:03:55.5659
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 4g5Mf6EwhtCnkzfJkvRhmQYF2I+L7Px3HvMQ1PoekoGkhv9jOMtcvs5lpFjvt+rgJu5qC52yDfJGffbk1/1wEA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR06MB8167
+X-MS-Exchange-CrossTenant-UserPrincipalName: Io86zG4DvQq/scXNCuIj13xHQtO7YhHwTpUlo8Uxi/XHGkSV+A+1rzkR9sRHNetFwcJXvlcIKBLIoD0PNQPIwQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR06MB7184
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 04 Apr 2025 10:54:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116582
+ <openembedded-devel@lists.openembedded.org>; Fri, 04 Apr 2025 11:04:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116584
 
-In order to facilitate users who wish to use e.g. dbus-broker as their
-runtime D-Bus implementation, change the Freedesktop.org specific D-Bus
-runtime dependency to honor oe-core's new VIRTUAL-RUNTIME_dbus
-variable.
 
-With this change we also align with oe-core commit 5dfca64b78
-("dbus-glib: depend on dbus, not dbus-x11") which mentions that
 
-  dbus-x11 hasn't existed as a package since 2012[1] and is just a
-  RPROVIDES in dbus, so depend on dbus directly instead.
+On 4/4/25 12:04, Khem Raj wrote:
+> On Fri, Apr 4, 2025 at 1:21=E2=80=AFAM Niko Mauno <niko.mauno@vaisala.com=
+> wrote:
+>>
+>> On 4/2/25 17:27, Khem Raj wrote:
+>>> On 4/2/25 4:29 AM, Niko Mauno via lists.openembedded.org wrote:
+>>>> In order to facilitate using e.g. dbus-broker as runtime D-Bus
+>>>> implementation, change the Freedesktop.org specific D-Bus runtime
+>>>> dependency declaration to honor oe-core's new VIRTUAL-RUNTIME_dbus
+>>>> variable.
+>>>>
+>>>> Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
+>>>> ---
+>>>>    meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.0.0.bb | 2 +-
+>>>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>>>
+>>>> diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.0.0.bb b/meta-
+>>>> oe/recipes-core/sdbus-c++/sdbus-c++_2.0.0.bb
+>>>> index 2b6bb1011a..a3e7c9ab54 100644
+>>>> --- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.0.0.bb
+>>>> +++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.0.0.bb
+>>>> @@ -46,6 +46,6 @@ do_install_ptest() {
+>>>>    FILES:${PN}-ptest =3D+ "${sysconfdir}/dbus-1/system.d/"
+>>>>    FILES:${PN}-dev +=3D "${bindir}/sdbus-c++-xml2cpp"
+>>>> -RDEPENDS:${PN}-ptest +=3D "dbus"
+>>>> +RDEPENDS:${PN}-ptest +=3D "${VIRTUAL-RUNTIME_dbus}"
+>>>>    # It adds -isystem which is spurious, no idea where it gets it from
+>>>>    CCACHE_DISABLE =3D "1"
+>>>>
+>>>
+>>> Thanks for these patches, as I understand they depend upon the changes
+>>> in flight for oe-core, so do me favor, consolidate all the patches
+>>> needed in meta-openembedded layer into a single series and send it
+>>> together and perhaps send a reminder once it gets merged into oe-core.
+>>>
+>>
+>> Hi Khem,
+>>
+>> the last remaining patch related to implementation of the new
+>> VIRTUAL-RUNTIME_dbus was integrated to poky master yesterday.
+>>
+>> The associated commits now in poky master branch are:
+>> https://web.git.yoctoproject.org/poky/commit/?id=3D0ecae4c6333de30802cc4=
+68d699289ddc65e7aad
+>> ("default-providers: Add VIRTUAL-RUNTIME_dbus variable")
+>> https://web.git.yoctoproject.org/poky/commit/?id=3Da39bb35ddf484fd8160dc=
+2eb1fabb6a92b07ecf0
+>> ("dbus: Allow using dbus-lib with alternative D-Bus")
+>> https://web.git.yoctoproject.org/poky/commit/?id=3Dc4b1070d55fa69821c5a2=
+74dbbcca9e23e016aa8
+>> ("systemd: Support using alternative runtime D-Bus")
+>> https://web.git.yoctoproject.org/poky/commit/?id=3D84bf6e7e430d1c61ff400=
+b817530fd54b410a85c
+>> ("glib: Support using alternative runtime D-Bus")
+>> https://web.git.yoctoproject.org/poky/commit/?id=3D9286f1e4aaa4520bc75ea=
+7764c5cbbbeb6a67d4b
+>> ("recipes-connectivity: Drop dbus from RDEPENDS:${PN}")
+>> https://web.git.yoctoproject.org/poky/commit/?id=3D340d9e28e1df2e0d4a8c3=
+51c8742064268f8ad87
+>> ("dbus-glib: Revise RDEPENDS:${PN}-tests assignment")
+>> https://web.git.yoctoproject.org/poky/commit/?id=3D34b7b0f86de95451f00ef=
+117459ec403770e3cad
+>> ("packagegroup-core-x11: Drop dbus-x11 in REDEPENDS:${PN}-utils")
+>> https://web.git.yoctoproject.org/poky/commit/?id=3D5dfca64b78375de279b6c=
+e7c9bffcaa35db5dc17
+>> ("dbus-glib: depend on dbus, not dbus-x11")
+>>
+>> As you requested, I have now submitted the related meta-oe changes in a
+>> single v2 series:
+>> https://patchwork.yoctoproject.org/project/oe/list/?series=3D33314
+>=20
+> Thank you.
+>=20
+>>
+>> Please note that there are also two individual commits to different
+>> meta-openembedded sublayers which I submitted on 2nd April and which are
+>> also needed,
+>> one is for meta-networking:
+>> https://patchwork.yoctoproject.org/project/oe/patch/20250402075935.21659=
+02-1-niko.mauno@vaisala.com/
+>> and one for meta-xfce:
+>> https://patchwork.yoctoproject.org/project/oe/patch/20250402075322.21621=
+89-1-niko.mauno@vaisala.com/
+>>
+>=20
+> Include every one needed in meta-openembedded in the pull. I will add
+> it after we have settled down a bit on
+> walnascar cur off.
+>=20
 
-Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
----
- meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.20.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Thank you, v3 series submitted:=20
+https://patchwork.yoctoproject.org/project/oe/list/?series=3D33320
+-Niko
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.20.0.bb b=
-/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.20.0.bb
-index 6ed03efeb9..fb30ba789b 100644
---- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.20.0.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.20.0.bb
-@@ -32,7 +32,7 @@ FILES:${PN} +=3D " \
- "
-=20
- RDEPENDS:${PN} =3D " \
--    dbus-x11 \
-+    ${VIRTUAL-RUNTIME_dbus} \
-     iceauth \
-     netbase \
-     upower \
---=20
-2.39.5
+>> BR, Niko
+>>
+>>
+>>>>
+>>>>
+>>>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>>> Links: You receive all messages sent to this group.
+>>>> View/Reply Online (#116523): https://lists.openembedded.org/g/
+>>>> openembedded-devel/message/116523
+>>>> Mute This Topic: https://lists.openembedded.org/mt/112044576/1997914
+>>>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>>>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub
+>>>> [raj.khem@gmail.com]
+>>>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>>>
+>>
 
 
