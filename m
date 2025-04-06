@@ -2,169 +2,100 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B794C3601A
-	for <webhook@archiver.kernel.org>; Sun,  6 Apr 2025 02:14:58 +0000 (UTC)
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.web10.18441.1743905692954084153
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BE2E3C3601E
+	for <webhook@archiver.kernel.org>; Sun,  6 Apr 2025 07:23:19 +0000 (UTC)
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.web11.20652.1743924198146823555
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Apr 2025 19:14:53 -0700
+ Sun, 06 Apr 2025 00:23:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=idD23OUs;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-22409077c06so41059545ad.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 05 Apr 2025 19:14:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=h2Z21hoi;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-301c4850194so2613967a91.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 06 Apr 2025 00:23:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1743905692; x=1744510492; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Fo5yDVv6kKZtMNxlqBEsgxhWed3M5jkgcf9bpy8EXnY=;
-        b=idD23OUsUI/VsSGpDXShMkzBTfHpt2YKCFEIe6Tye0ysif5e2m7dALWum4H1EbeBBB
-         eTYkGerZxMsddtc7RZzm9m8VXDdNhsu8pVBNOLITWiYAlpkqii7d63NUvXW+K2mZqpH7
-         KxNC/u6/4hdrBBYauYk7LTdZlWI64IXRL1oLOKlq+GNpligYMAHFO57cpoXdRHWKiCpI
-         nKH0mPrjds4E57kNetC7wi1oelj0vRXHJUWu4Gl8Iwxa2a+Oq6JTNsPPjZCUPq6x+ZwQ
-         2JxNgGYgZtlLm3pWUACqlnIq416si/MfM5EVkkxMNiwfEzGXBv6m0tiO0DUClvaRoCAY
-         l7Ow==
+        d=gmail.com; s=20230601; t=1743924197; x=1744528997; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ccNwV+Ene+3DLa3dYeupVVtTVru/atSgaQK0fVxOXm8=;
+        b=h2Z21hoiDW6E/8sM8pNu2AfjnaWG8je4AatQkDGDcmNzl1S2UX+By0LPILbGaw/Oic
+         BtXzA4pz8HdEE+jXvXxnoSJ+D5Pcpe4jsHLkhbMcQ+2AVkcYMPgfOwq/TwRPCXbYduNz
+         XkqEZZlZX1z7G26f680/yl1pOVLnu+3RFHwt1sw4V0OTkJ6TiulVBtpLWNdwgxwS8G1U
+         1bZEGhkkYMlQAao3KOPPXQuTLUmus3jMaGjrodVsmoEsxU6jxBawpebvfkjPBLp1V0Fl
+         tsRNf7RL4gYrBPgIgkLuGK1NJO3OqdxhqoQumZWIJcp2ltqesDnFoAO91isKYL3GsHYn
+         +DKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743905692; x=1744510492;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Fo5yDVv6kKZtMNxlqBEsgxhWed3M5jkgcf9bpy8EXnY=;
-        b=g0YhScosDa2oedEpgB4cmTBAnoxiNZjMBUvGyqpNRthvyGNwpWFMSOyrQDWT75qOCL
-         hCacEoLS1akImwwc1nmjuJu8Xb1SPICyNLnkj5NBrBvjgwey1ifJdE9CclfIFTrb1wov
-         XKZ7g/FyMBGYu44LfGTGnrTpZoZDWXKIGgsbEdLF0odrpQzzf4+HSA5rif6ZU6sK5VQY
-         HroS0ms5QHb5gGponoNs00CFNmfuVxvt9nyVn+JtRCXXH81vcZaZhi3MQYRZpkrjaWAh
-         a62Wk1YvrmOMQXM5vaYhgpjU66AZffxIobVDYYXWdr+eSFi0zOyk2TUL95fpYuwosmj7
-         a42w==
-X-Gm-Message-State: AOJu0Yy1f3gbNZ2kuPRqPUE+Y9ldffHwF+97/1py4dLz9ftnfNWDz075
-	qfWd4VJ5EBeYgpz2sO5LK3qj0cdb17uwKOvU2QvXx/SFHb0j+d7An8s4co6I
-X-Gm-Gg: ASbGnct+7gdlUhs2emdtpYRkc8GkhNzsIufiTXujsyfZC16tpm80mqKuepb1/kdwNk9
-	hKok1dNXi7mlPzMJIOtW9jz/FpxN7e7dOrBfjX9fB05eXiGRqtpFzRJrjt8OlYQgUB/O0wJ+Pz9
-	70UxUXTCEIVPNyVIQvAEJtpmUm5j3cLa7qs31316+VdejDZFB4U4D3+1TAYDPxbsZazcV1I71Ru
-	XacIoARvp9Xdf96QQ4Ig3i2ER4y/ZUNT9S+a3Fhv3148HXKjYVMsrHZrFtZUgmBkjOxWIcICufE
-	Dm8G0kPt32zqkJ+vip53Dh9X9EqlRIpTc9uP
-X-Google-Smtp-Source: AGHT+IHEcBgzCr/r1lM2hAYQHElRPEwYo60OyuSDXVp8yY9pun10Ri++mBocpi1qCXirKjVIEfsaKQ==
-X-Received: by 2002:a17:902:e552:b0:220:c813:dfcc with SMTP id d9443c01a7336-22a8a8b80a3mr111634395ad.40.1743905691598;
-        Sat, 05 Apr 2025 19:14:51 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1743924197; x=1744528997;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ccNwV+Ene+3DLa3dYeupVVtTVru/atSgaQK0fVxOXm8=;
+        b=EsWLppF3wQrPr78QDMwEYyVxQ6xS1c4kxBZal4S5Ml76KOYiBNAb6WhIC7F5wWSzJA
+         FW4eu8hZ0NF1EfifnvrDp2B+HuAJJHW7sViXmdw7oNoSNFfTFvpNuf5wh3Ib70kmSH3v
+         LbcR8ibr+7HymSfEG4bYxwqCKcAaRbW9uU7ORLd0HdKhf/czDnauKUIiTPc/PASEhP3s
+         1AIXAKsJcz3+SgTcjnw9EDvFm4ijIzcSXLYCnA2Lf5sB1O5Skz70njY3NKvPpzr1L7uJ
+         Lz0Q0ei0gcJ3h9lj8Qk9oLImhH8jIajjHxEkdFhes7P5w3W56ygBBFFrUIdU4koqhmFF
+         v4NQ==
+X-Gm-Message-State: AOJu0YzaabFBbvs2Ho3F7lwo7QwzjR+AKPIUp0FOo4EhstV3JK41oil4
+	GKr9wVaTV0lwET/8gBXoEH5ezj/m1GzyAhouLnCzdDtSs8DVl5RDmiCv1quY
+X-Gm-Gg: ASbGncuXIYGUu3KLHyKswkgthbHVMkRm5gQT07h2evYqC6WBX10lGdGJ9xKmvD93QCX
+	FP7cl9f9vbC6fYqTaCFkjNMWMutb8igQmjdd6zP9sJecp4k5Ib+wfeE7gAgnuJ4J0JuzqBPm9Or
+	C/B33RBSCWtEv+xThEIT5hNnM7vHuUluNXmT8Bf5bvWPN5pJLbe4iv3vJS118R+vY3QUq0I96No
+	q/ZQjxGJQ7a9xj6VkoAobdGlC9M05MAQv1oxNl/qeYoakL8jPb0S3FfX2G2qwifVd94rlbdAsXV
+	fE6zPMUht6YCUBHaEWPxOBvVAKb6/Mj44Xs+
+X-Google-Smtp-Source: AGHT+IGVOjBI/p9Tcvp9esAIhGq8k0sr4eNqI6viqqqtJIikAhq+FagOpikBKr4Ng3TWLoxiE6eTHg==
+X-Received: by 2002:a17:90b:2542:b0:2ff:702f:7172 with SMTP id 98e67ed59e1d1-306a4b86ccdmr13950717a91.33.1743924197037;
+        Sun, 06 Apr 2025 00:23:17 -0700 (PDT)
 Received: from apollo.localdomain ([2601:646:8201:fd20::f900])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-af9bc41c6desm5036749a12.77.2025.04.05.19.14.50
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-30561c98496sm11373673a91.0.2025.04.06.00.23.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 05 Apr 2025 19:14:51 -0700 (PDT)
+        Sun, 06 Apr 2025 00:23:16 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/2] thin-provisioning-tools: Fix build on riscv32
-Date: Sat,  5 Apr 2025 19:14:44 -0700
-Message-ID: <20250406021446.183928-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 5/5] unicode-ucd: Updates due to license.txt updates
+Date: Sun,  6 Apr 2025 00:23:10 -0700
+Message-ID: <20250406072310.862374-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250406072310.862374-1-raj.khem@gmail.com>
+References: <20250406072310.862374-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 06 Apr 2025 02:14:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116603
+ <openembedded-devel@lists.openembedded.org>; Sun, 06 Apr 2025 07:23:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116609
 
-Rustix crate needs to be patched
+This is downloaded and does not have version, so we have to
+update it whenever upstream update it. The copyright year
+is changed this time.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Fix-cargo-build-on-riscv32.patch     | 75 +++++++++++++++++++
- .../thin-provisioning-tools_1.1.0.bb          |  1 +
- 2 files changed, 76 insertions(+)
- create mode 100644 meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools/0001-Fix-cargo-build-on-riscv32.patch
+ meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools/0001-Fix-cargo-build-on-riscv32.patch b/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools/0001-Fix-cargo-build-on-riscv32.patch
-new file mode 100644
-index 0000000000..6a706a3e9b
---- /dev/null
-+++ b/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools/0001-Fix-cargo-build-on-riscv32.patch
-@@ -0,0 +1,75 @@
-+From b85c7b406f017589eb959cd619ba442837ada470 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 4 Apr 2025 00:29:22 -0700
-+Subject: [PATCH] Fix cargo build on riscv32
-+
-+riscv32 support is added to latest rustix already
-+therefore this patch is limited to rustix-0.38.19
-+once cargo/rust moves beyond rustix-0.38.19 as dependency
-+we can remove this patch
-+
-+Upstream-Status: Inappropriate [Specific to rustix-0.38.19]
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/fs/ioctl.rs | 10 ++++++----
-+ 1 file changed, 6 insertions(+), 4 deletions(-)
-+
-+--- a/src/fs/ioctl.rs
-++++ b/src/fs/ioctl.rs
-+@@ -11,6 +11,14 @@ use {
-+ 
-+ use bitflags::bitflags;
-+ 
-++/// The datatype used for the ioctl number
-++#[cfg(any(target_os = "android", target_env = "musl"))]
-++#[doc(hidden)]
-++pub type ioctl_num_type = c::c_int;
-++#[cfg(not(any(target_os = "android", target_env = "musl")))]
-++#[doc(hidden)]
-++pub type ioctl_num_type = c::c_ulong;
-++
-+ #[cfg(all(linux_kernel, not(any(target_arch = "sparc", target_arch = "sparc64"))))]
-+ use crate::fd::{AsRawFd, BorrowedFd};
-+ 
-+@@ -79,7 +87,8 @@ unsafe impl ioctl::Ioctl for Ficlone<'_>
-+     type Output = ();
-+ 
-+     const IS_MUTATING: bool = false;
-+-    const OPCODE: ioctl::Opcode = ioctl::Opcode::old(c::FICLONE as ioctl::RawOpcode);
-++    const OPCODE: ioctl::Opcode =
-++        ioctl::Opcode::old(linux_raw_sys::ioctl::FICLONE as ioctl::RawOpcode);
-+ 
-+     fn as_ptr(&mut self) -> *mut c::c_void {
-+         self.0.as_raw_fd() as *mut c::c_void
-+@@ -136,7 +145,12 @@ bitflags! {
-+ #[doc(alias = "FS_IOC_GETFLAGS")]
-+ pub fn ioctl_getflags<Fd: AsFd>(fd: Fd) -> io::Result<IFlags> {
-+     unsafe {
-+-        #[cfg(target_pointer_width = "32")]
-++        #[cfg(target_arch = "riscv32")]
-++        let ctl = ioctl::Getter::<
-++            ioctl::BadOpcode<{ linux_raw_sys::ioctl::FS_IOC32_GETFLAGS as ioctl_num_type }>,
-++            u32,
-++        >::new();
-++        #[cfg(all(target_pointer_width = "32", not(target_arch = "riscv32")))]
-+         let ctl = ioctl::Getter::<ioctl::BadOpcode<{ c::FS_IOC32_GETFLAGS }>, u32>::new();
-+         #[cfg(target_pointer_width = "64")]
-+         let ctl = ioctl::Getter::<ioctl::BadOpcode<{ c::FS_IOC_GETFLAGS }>, u32>::new();
-+@@ -152,8 +166,15 @@ pub fn ioctl_getflags<Fd: AsFd>(fd: Fd)
-+ #[inline]
-+ #[doc(alias = "FS_IOC_SETFLAGS")]
-+ pub fn ioctl_setflags<Fd: AsFd>(fd: Fd, flags: IFlags) -> io::Result<()> {
-++    use crate::ioctl::Ioctl;
-++
-+     unsafe {
-+-        #[cfg(target_pointer_width = "32")]
-++        #[cfg(target_arch = "riscv32")]
-++        let ctl = ioctl::Setter::<
-++            ioctl::BadOpcode<{ linux_raw_sys::ioctl::FS_IOC32_SETFLAGS as ioctl_num_type }>,
-++            u32,
-++        >::new(flags.bits());
-++        #[cfg(all(target_pointer_width = "32", not(target_arch = "riscv32")))]
-+         let ctl =
-+             ioctl::Setter::<ioctl::BadOpcode<{ c::FS_IOC32_SETFLAGS }>, u32>::new(flags.bits());
-+ 
-diff --git a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb b/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
-index 1981a35934..5f685f3749 100644
---- a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
-+++ b/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
-@@ -9,6 +9,7 @@ S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb
+index 026d4ffe02..302b86009a 100644
+--- a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb
++++ b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb
+@@ -1,14 +1,14 @@
+ SUMMARY = "Unicode Character Database"
+ HOMEPAGE = "https://unicode.org/ucd/"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://${UNPACKDIR}/license.txt;md5=4b11b5cbb0a24df9f4e7db63db98f22f"
++LIC_FILES_CHKSUM = "file://${UNPACKDIR}/license.txt;md5=ea17640caddb659394df50e5db6efd69"
  
  SRC_URI = " \
-     git://github.com/jthornber/thin-provisioning-tools;branch=main;protocol=https \
-+    file://0001-Fix-cargo-build-on-riscv32.patch;patchdir=${CARGO_VENDORING_DIRECTORY}/rustix-0.38.34 \
-     "
+     https://www.unicode.org/Public/zipped/${PV}/UCD.zip;name=ucd;subdir=ucd;downloadfilename=unicode-ucd-${PV}.zip \
+     https://www.unicode.org/license.txt;name=ucd-license \
+ "
+ SRC_URI[ucd.sha256sum] = "033a5276b5d7af8844589f8e3482f3977a8385e71d107d375055465178c23600"
+-SRC_URI[ucd-license.sha256sum] = "f7830d126f59d83842565d3dddedc79db4ca978ed52aee0ebcc040ea76a85519"
++SRC_URI[ucd-license.sha256sum] = "abf84f74dea2812799e1dbef7f0581adf7db244881e4febb8684f441568da0ad"
  
- # v1.1.0
+ inherit allarch
+ 
 
