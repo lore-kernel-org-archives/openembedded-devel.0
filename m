@@ -1,91 +1,64 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19093C36010
-	for <webhook@archiver.kernel.org>; Mon,  7 Apr 2025 12:16:01 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.45870.1744028153380173287
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BD97C36010
+	for <webhook@archiver.kernel.org>; Mon,  7 Apr 2025 12:16:21 +0000 (UTC)
+Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
+ by mx.groups.io with SMTP id smtpd.web10.45886.1744028178048801050
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Apr 2025 05:15:53 -0700
+ Mon, 07 Apr 2025 05:16:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=61924415ef=changqing.li@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5376JYka010552
-	for <openembedded-devel@lists.openembedded.org>; Mon, 7 Apr 2025 12:15:52 GMT
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45tug8j8y9-11
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 07 Apr 2025 12:15:52 +0000 (GMT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Mon, 7 Apr 2025 05:15:49 -0700
-Received: from pek-lpg-core6.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Mon, 7 Apr 2025 05:15:48 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] luajit: Update to latest on v2.1 branch
-Date: Mon, 7 Apr 2025 20:15:46 +0800
-Message-ID: <20250407121547.2516285-2-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250407121547.2516285-1-changqing.li@windriver.com>
-References: <20250407121547.2516285-1-changqing.li@windriver.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
+Received: from fwd85.aul.t-online.de (fwd85.aul.t-online.de [10.223.144.111])
+	by mailout09.t-online.de (Postfix) with SMTP id F3AE0353;
+	Mon,  7 Apr 2025 14:16:15 +0200 (CEST)
+Received: from [192.168.178.20] ([84.163.36.92]) by fwd85.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1u1lOd-1h8SLg0; Mon, 7 Apr 2025 14:16:11 +0200
+Date: Mon, 07 Apr 2025 14:16:06 +0200
+From: Markus Volk <f_l_k@t-online.de>
+Subject: Re: [oe] [meta-gnome][PATCH 2/2] celluloid: add recipe
+To: raj.khem@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Message-Id: <UQKCUS.UK2V3JNSI5EY1@t-online.de>
+In-Reply-To: <CAMKF1spzWZ6G8QqUQWz30p1X6XKp8hkBYLRBSqjpptq4=84ubA@mail.gmail.com>
+References: <20250331062237.8115-1-f_l_k@t-online.de>
+	<20250331062237.8115-2-f_l_k@t-online.de>
+	<CAMKF1srs8KfdY+9tZn33x00bUKSRvbA=YNBMPqBHEskiBV3Qqw@mail.gmail.com>
+	<S301US.K6JXZLZA1JX12@t-online.de>
+	<CAMKF1spzWZ6G8QqUQWz30p1X6XKp8hkBYLRBSqjpptq4=84ubA@mail.gmail.com>
+X-Mailer: geary/46.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: LIu7gMgqtxIKPbD1j41XORs2q6b5FUf5
-X-Authority-Analysis: v=2.4 cv=YJefyQGx c=1 sm=1 tr=0 ts=67f3c1f8 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=XR8D0OoHHMoA:10 a=nm2HxRzrAAAA:8 a=t7CeM3EgAAAA:8 a=1TvmxPd2McqRapTlOn0A:9 a=xTkba3CB784Yst2QIEaM:22
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: LIu7gMgqtxIKPbD1j41XORs2q6b5FUf5
-X-Sensitive_Customer_Information: Yes
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-07_03,2025-04-03_03,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- malwarescore=0 bulkscore=0 mlxlogscore=853 adultscore=0 lowpriorityscore=0
- mlxscore=0 clxscore=1015 impostorscore=0 phishscore=0 spamscore=0
- suspectscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
- definitions=main-2504070087
+Content-Type: multipart/alternative; boundary="=-HsUk6BAyX0k/Eu6zZ3Zf"
+X-TOI-EXPURGATEID: 150726::1744028171-DFFFB9C2-63BD7594/0/0 CLEAN NORMAL
+X-TOI-MSGID: 624e1672-0d00-47f1-a83e-2c65e10a4206
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 07 Apr 2025 12:16:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116665
+ <openembedded-devel@lists.openembedded.org>; Mon, 07 Apr 2025 12:16:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116667
 
-From: Changqing Li <changqing.li@windriver.com>
+--=-HsUk6BAyX0k/Eu6zZ3Zf
+Content-Type: text/plain; charset=us-ascii; format=flowed
 
-License-Update: copyright year updated
+On Tue, Apr 1 2025 at 07:17:58 -07:00:00, Khem Raj via 
+lists.openembedded.org <raj.khem=gmail.com@lists.openembedded.org> 
+wrote:
+> This will not work with bitbake world
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- meta-oe/recipes-devtools/luajit/luajit_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+I see. Unfortunately, I am not able to reproduce the issue, but 
+referring to the dev manual, it might help to add LICENSE_FLAGS to the 
+celluloid recipe?
+<https://docs.yoctoproject.org/dev-manual/licenses.html#enabling-commercially-licensed-recipes>
 
-diff --git a/meta-oe/recipes-devtools/luajit/luajit_git.bb b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-index 6a79ffb897..cbad79f3ae 100644
---- a/meta-oe/recipes-devtools/luajit/luajit_git.bb
-+++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Just-In-Time Compiler for Lua"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=076b97f5c7e61532f7f6f3865f04da57"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=d421a5e2a24207f5e260537399a9a38b"
- HOMEPAGE = "http://luajit.org"
- 
- SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
-@@ -9,7 +9,7 @@ SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
-            "
- 
- PV = "2.1"
--SRCREV = "19878ec05c239ccaf5f3d17af27670a963e25b8b"
-+SRCREV = "538a82133ad6fddfd0ca64de167c4aca3bc1a2da"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.34.1
+LICENSE_FLAGS = "commercial"
+
+
+--=-HsUk6BAyX0k/Eu6zZ3Zf
+Content-Type: text/html; charset=us-ascii
+
+<div id="geary-body" dir="auto">On Tue, Apr 1 2025 at 07:17:58 -07:00:00, Khem Raj via lists.openembedded.org &lt;raj.khem=gmail.com@lists.openembedded.org&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">This will not work with bitbake world</div></blockquote><div><br></div><div>I see. Unfortunately, I am not able to reproduce the issue, but referring to the dev manual, it might help to add LICENSE_FLAGS to the celluloid recipe?</div><div><a href="https://docs.yoctoproject.org/dev-manual/licenses.html#enabling-commercially-licensed-recipes">https://docs.yoctoproject.org/dev-manual/licenses.html#enabling-commercially-licensed-recipes</a></div><div><br></div><div>LICENSE_FLAGS = "commercial"</div></div>
+--=-HsUk6BAyX0k/Eu6zZ3Zf--
 
 
