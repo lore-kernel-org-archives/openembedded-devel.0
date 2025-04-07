@@ -1,156 +1,154 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <dmitry.baryshkov@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6F04C36010
-	for <webhook@archiver.kernel.org>; Mon,  7 Apr 2025 09:44:49 +0000 (UTC)
-Received: from mail-lj1-f170.google.com (mail-lj1-f170.google.com [209.85.208.170])
- by mx.groups.io with SMTP id smtpd.web11.42816.1744019083941423920
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24D1CC36010
+	for <webhook@archiver.kernel.org>; Mon,  7 Apr 2025 09:54:10 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.web10.43441.1744019646582303655
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Apr 2025 02:44:44 -0700
+ Mon, 07 Apr 2025 02:54:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ojb1TrAC;
- spf=pass (domain: gmail.com, ip: 209.85.208.170, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lj1-f170.google.com with SMTP id 38308e7fff4ca-30bfd4d4c63so36711271fa.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Apr 2025 02:44:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744019082; x=1744623882; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=+whZr53qii7Szh+100B7ZSpoNa0fM5myJxlmYsG9B18=;
-        b=Ojb1TrAChZ7IteOZx0GzMKBD59v5EB2BdakzY6ZF7/6yAukpUaNk1qmzZfUqygilMM
-         JJUYlLf6ZVvXnP3IZ/ttkfSy7t3zKXWWCHphyu2FEaWV4E1dK23/lB/pa5lXogE/GI/i
-         sLdnwXHzwdJdjdkqoo7DIGh0lBpy93KTTJfii62oTghoCrRDao+LgDuAc8CEtFnA0feN
-         F5J2tMLeRpcMREQhNp13u3ImenBBxzlfURF/7HZv8rIeU1whrRs1pbiKlcyO7c3Scn5i
-         R5OrsE+hqn9jcp0M30CQbFABh2PX+95aecuZy9bTdvSjZ5rVcG4zRuj6X81GSuZrDoF1
-         LsKA==
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=NbouCDVi;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5378dscC028188
+	for <openembedded-devel@lists.openembedded.org>; Mon, 7 Apr 2025 09:54:05 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=qcppdkim1; bh=fIUZTpqUoVb
+	tZUMqBt4vrCmITVzq8Py/DeK+n0W+oiI=; b=NbouCDViHGe+YV0A7poNZNZ8LEN
+	yTnMrUaCOI8OcITQITD3SULHfMhV0zGwyWUG+elrvhH53Tw+Yf0qMn9Gm+exGwdG
+	1rFvu7+vROzAxGaNqhOtoucLfGpOYHB/2AASTjzYd9URpkEfeufhO53SRAnFSw/f
+	8FoF/JjxFw2+jviyvsC6LmQpk8BIiptaz9esFJ5MNchq2FSCqDByd+eXoJi6ffgm
+	xcGjaFA6OcSGqz4UhTuCCsGTaQtN6xITEYERmzu2SPmh62Y6xBax7kEMcuPUtUYt
+	NzhsX4cdS1yiBup/tfjj3i435XC8uNSyO2IifYPhu9kYck1HwKb2aDQKXBQ==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 45twcyuu90-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 07 Apr 2025 09:54:05 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-7c54e7922a1so929474885a.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Apr 2025 02:54:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744019082; x=1744623882;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1744019644; x=1744624444;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=+whZr53qii7Szh+100B7ZSpoNa0fM5myJxlmYsG9B18=;
-        b=lqGtiFau3QF5NYgN0NFz3U9pMWTecDYGqLVPYMC76j3+IM0CeDeuTCOZCe3am7uMzt
-         eY3C4MWYLMDAAVRD6T9DHg14p5veD048ygd2BbH1mXziKeK48aFLbb4U00SqTQUrn8it
-         91U29g1ucm5HNnK5vSaPVpjwKNQm1El1xIVcQ79lU7rAEN2lYGFlEByUHEluykrOxvMj
-         u6oc/1FN/R7h4d8NXC2GHCdr435Z8vIYVpcrh40toYmut8WZtWM5f5luC/g1LGBJuwU9
-         L08d47nZsN/FNPQ1UFAiWfxZEwtcSrfVDEbJ9kwGcclJfQdYiV9Y66OtL3HAwtHE26ky
-         3AKA==
-X-Gm-Message-State: AOJu0YyIuVVBNS3m7cEz9fh1ElAox9k7awM3TfW6/X+kqx6nQjlIel1Q
-	MM7b4du+XKwQztvFwPbbWFJq3wgDyH0qhh5DdxNOOgHeidvVuwDietBnQL6L32LdEiXQ/aB8/qw
-	fvYOKQnNQSrnkhFCjshEeQMIxmFs=
-X-Gm-Gg: ASbGncvRKIH0pbmL7j0Z8e9D/9dgohxwhzYKHT5eDfWS97H8uHpXdzmF2dNVzV0qYY/
-	pBReaoi+WMXOZ10N86gG8d3oOD2Ao/J+x1gz+O/Q8bSqLNkdA/PXwW1coufM5+pvxH3MVS1Js3b
-	Xj9x10vaVNL3poytvq1bw9AL65iRHy
-X-Google-Smtp-Source: AGHT+IGju8TpflXcFlCaI37D5q5BfB7EzG71BQt05IUVsJNEBHRIXnCuvSTZiTFZWfpQkqJuC8FEaJYlUOyULM9UYIE=
-X-Received: by 2002:a05:651c:1478:b0:2ff:d0c4:5ffe with SMTP id
- 38308e7fff4ca-30f0a10ce25mr39438601fa.16.1744019081818; Mon, 07 Apr 2025
- 02:44:41 -0700 (PDT)
+        bh=fIUZTpqUoVbtZUMqBt4vrCmITVzq8Py/DeK+n0W+oiI=;
+        b=OEIHuW8d1kYiBVKRGGQNPhjzisQG9pqbQyaOuJY+8YLOodTSd9x3qnrAx56R+AB8/0
+         /vBf/Vji8z582t+FcHHy9sPsCsCKO61Z9yl9Is3caJQJZdz7JX8h8Vuzf+xjAdnm6zTJ
+         w8QfXeKzeINK1xzIwIc83B8NegJN5zf8Z/vOtd1tjv8wmBeB6pGePhCqInH6JrSWyBMb
+         u88zqIfcxbZ6X+2pseID8oPkGpXVFPLrMV5qTnpFKJbucFvP84ZxHzrEe9IpB+Oanz3s
+         iBGj3VwMzC0rHTTtv3k/29BOSsC93GogetDaHtwFrcuTGuawwfxV9UGbQ0CavQ6AJllF
+         RL8g==
+X-Gm-Message-State: AOJu0YzhdNCc/GWpPn3iTYTl27ZGbmDvKtlFGoMrl2FTFrUG2hMCtBmn
+	H18QCDXh0vSJmC5v5cj1v0OCTfB+ua+D5zEZMLTTJu2oIcAEq7lSlM6ZkaVYLkv3/+/Tg12RgQT
+	EXNqP7heITPyTsBFNjfYIcdqHfb/MnjoI6zP1rn1hDy//0XtycZoEiOrHtw5Eoqvvv2S0cTZje7
+	Kl6jDh/WN0Ao0Q
+X-Gm-Gg: ASbGncvfWYtnGQC2237HP0yUztUU10wjn4J2BoSkD5kGZugv23jHphU7cQIFphUXy7H
+	PS2nxwVc9IvX8tspmr0wblghu+8BxeIcdTdK/WbD6X35nGfaWchUYElqRH86f0BjuPCRgl1fiXN
+	rWyjIj5JFw8otHnoHGYRDd+kRNcU7z/8cUuE84OfCKExPzbDpmxTBRthXpi/HnblDfZve4tP0gr
+	5TIK9H6NuAHE8fn4ThReM2iCwAKprZZKTgx3d1apUd9f1rxDMrq/5GFpq98Q4SF+fX2nSfDMr+P
+	voo+JgPQ9Hgy89gPGpv9aV3kBfUKjBYO0EwqGZ3BIl7OqMipvjhYyBEhy+3D2ArNf7vXEjzLNhD
+	lnrkPz4vQnzRWisn2fvr+yQfdrvPb
+X-Received: by 2002:a05:620a:2902:b0:7c5:e2fe:f431 with SMTP id af79cd13be357-7c774e24a33mr1742530785a.52.1744019644677;
+        Mon, 07 Apr 2025 02:54:04 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFU5aymM8OmMtTBIUTgceLkQpzWTOxJ6e7A+yrRG6L6NqkUjURRLRy4+L2BsWcL5R7j7viPrQ==
+X-Received: by 2002:a05:620a:2902:b0:7c5:e2fe:f431 with SMTP id af79cd13be357-7c774e24a33mr1742528985a.52.1744019644253;
+        Mon, 07 Apr 2025 02:54:04 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a0c3-3a00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a0c3:3a00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-54c1e65cc2bsm1196659e87.167.2025.04.07.02.54.03
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 07 Apr 2025 02:54:03 -0700 (PDT)
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH 5/5] opengl-es-cts: upgrade to 3.2.12
+Date: Mon,  7 Apr 2025 12:53:55 +0300
+Message-Id: <20250407095355.3461559-5-dmitry.baryshkov@oss.qualcomm.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250407095355.3461559-1-dmitry.baryshkov@oss.qualcomm.com>
+References: <20250407095355.3461559-1-dmitry.baryshkov@oss.qualcomm.com>
 MIME-Version: 1.0
-References: <20250406072310.862374-1-raj.khem@gmail.com> <20250406072310.862374-2-raj.khem@gmail.com>
-In-Reply-To: <20250406072310.862374-2-raj.khem@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 7 Apr 2025 11:44:30 +0200
-X-Gm-Features: ATxdqUHcoXiu0eJUIfTyfEQH-b2D0ptcfpnmDjRwqiyqFsBcCl481PcyOPT1V24
-Message-ID: <CA+chaQfcWbx0-6NGXD8HZ9C6_kfj5wm=tc9-X+3HS0cyGE_AtQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 2/5] icon-slicer: Fix hotspot y coordinates
-To: raj.khem@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: ELmYl3Omswn-64Ub3UZ0A0y30JqgWtKT
+X-Authority-Analysis: v=2.4 cv=Q4vS452a c=1 sm=1 tr=0 ts=67f3a0bd cx=c_pps a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=xqWC_Br6kY4A:10 a=XR8D0OoHHMoA:10 a=JTEwExm7AAAA:20 a=EUspDBNiAAAA:8 a=NEAV23lmAAAA:8 a=Pv7GC51KzH2K4ZR8rDAA:9 a=PEH46H7Ffwr30OY-TuGO:22
+ a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-GUID: ELmYl3Omswn-64Ub3UZ0A0y30JqgWtKT
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-04-07_03,2025-04-03_03,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ impostorscore=0 lowpriorityscore=0 spamscore=0 clxscore=1015 phishscore=0
+ bulkscore=0 adultscore=0 malwarescore=0 mlxscore=0 suspectscore=0
+ mlxlogscore=999 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2502280000
+ definitions=main-2504070070
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 07 Apr 2025 09:44:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116656
+ <openembedded-devel@lists.openembedded.org>; Mon, 07 Apr 2025 09:54:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116661
 
-xcursorgen is available only with x11 in DISTRO_FEATURES, so this should ge=
-t
+Upgrade OpenGL ES CTS to the latest release.
 
-inherit features_check
-REQUIRED_DISTRO_FEATURES =3D "x11"
+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+---
+ .../vk-gl-cts/opengl-es-cts-sources.inc        | 18 ++++++++++--------
+ ...s_3.2.11.0.bb => opengl-es-cts_3.2.12.0.bb} |  2 +-
+ 2 files changed, 11 insertions(+), 9 deletions(-)
+ rename meta-oe/recipes-graphics/vk-gl-cts/{opengl-es-cts_3.2.11.0.bb => opengl-es-cts_3.2.12.0.bb} (94%)
 
-as well, do you want me to send patch with this (and
-packagegroup-meta-oe adjustment)?
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts-sources.inc b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts-sources.inc
+index 9752c2d7d734..68e8a3b0a945 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts-sources.inc
++++ b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts-sources.inc
+@@ -6,18 +6,20 @@
+ RECIPE_UPGRADE_EXTRA_TASKS += "do_refresh_srcuri"
+ 
+ python __anonymous() {
+-    if d.getVar("PV") != "3.2.11.0":
++    if d.getVar("PV") != "3.2.12.0":
+         bb.warn("-sources.inc out of date, run refresh_srcuri task")
+ }
+ 
+ SRC_URI += " \
+     https://raw.githubusercontent.com/baldurk/renderdoc/v1.1/renderdoc/api/app/renderdoc_app.h;subdir=git/external/renderdoc/src;sha256sum=e7b5f0aa5b1b0eadc63a1c624c0ca7f5af133aa857d6a4271b0ef3d0bdb6868e \
+-    git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;nobranch=1;destsuffix=git/external/spirv-tools/src;rev=148c97f6876e427efd76d2328122c3075eab4b8f \
+-    git://github.com/KhronosGroup/glslang.git;protocol=https;nobranch=1;destsuffix=git/external/glslang/src;rev=4da479aa6afa43e5a2ce4c4148c572a03123faf3 \
+-    git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;nobranch=1;destsuffix=git/external/spirv-headers/src;rev=ff2afc3afc48dff4eec2a10f0212402a80708e38 \
+-    git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;nobranch=1;destsuffix=git/external/vulkan-docs/src;rev=ed4ba0242beb89a1795d6084709fa9e713559c94 \
+-    git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;protocol=https;nobranch=1;destsuffix=git/external/vulkan-validationlayers/src;rev=f589bc456545fbab97caf49380b102b8aafe1f40 \
+-    git://github.com/google/amber.git;protocol=https;nobranch=1;destsuffix=git/external/amber/src;rev=0f003c2785489f59cd01bb2440fcf303149100f2 \
++    git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;nobranch=1;destsuffix=git/external/spirv-tools/src;rev=04b4a204aa501992ae85a207be1e200e195c98e1 \
++    git://github.com/KhronosGroup/glslang.git;protocol=https;nobranch=1;destsuffix=git/external/glslang/src;rev=0549c7127c2fbab2904892c9d6ff491fa1e93751 \
++    git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;nobranch=1;destsuffix=git/external/spirv-headers/src;rev=e7294a8ebed84f8c5bd3686c68dbe12a4e65b644 \
++    git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;nobranch=1;destsuffix=git/external/vulkan-docs/src;rev=645c59c70e826d9738b6bb103316c03d887dfed3 \
++    git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;protocol=https;nobranch=1;destsuffix=git/external/vulkan-validationlayers/src;rev=6cf616f131e9870c499a50441bca2d07ccda9733 \
++    git://github.com/google/amber.git;protocol=https;nobranch=1;destsuffix=git/external/amber/src;rev=6fa5ac1fb3b01c93eef3caa2aeb8841565e38d90 \
+     git://github.com/open-source-parsers/jsoncpp.git;protocol=https;nobranch=1;destsuffix=git/external/jsoncpp/src;rev=9059f5cad030ba11d37818847443a53918c327b1 \
+-    git://github.com/Igalia/vk_video_samples.git;protocol=https;nobranch=1;destsuffix=git/external/nvidia-video-samples/src;rev=6821adf11eb4f84a2168264b954c170d03237699 \
++    git://github.com/Igalia/vk_video_samples.git;protocol=https;nobranch=1;destsuffix=git/external/nvidia-video-samples/src;rev=45fe88b456c683120138f052ea81f0a958ff3ec4 \
++    git://github.com/KhronosGroup/Vulkan-Video-Samples.git;protocol=https;nobranch=1;destsuffix=git/external/vulkan-video-samples/src;rev=0e87744edbb84c9c56c3fc8de9ea5150af5ee4ea \
++    git://github.com/Igalia/video_generator.git;protocol=https;nobranch=1;destsuffix=git/external/video_generator/src;rev=426300e12a5cc5d4676807039a1be237a2b68187 \
+ "
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.11.0.bb b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.12.0.bb
+similarity index 94%
+rename from meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.11.0.bb
+rename to meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.12.0.bb
+index 9d070769511f..96a4ca7d497d 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.11.0.bb
++++ b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.12.0.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "OpenGL CTS"
+ 
+ require khronos-cts.inc
+ 
+-SRCREV_vk-gl-cts = "66956d195169596472e956e3aebf2df8e3bd960d"
++SRCREV_vk-gl-cts = "42e61858e862e153cd0fe36593a8c3f7c16c3275"
+ 
+ require opengl-es-cts-sources.inc
+ 
+-- 
+2.39.5
 
-On Sun, Apr 6, 2025 at 9:23=E2=80=AFAM Khem Raj via lists.openembedded.org
-<raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../icon-slicer/files/hotspotfix.patch        | 27 +++++++++++++++++++
->  .../icon-slicer/icon-slicer_0.3.bb            |  6 +++--
->  2 files changed, 31 insertions(+), 2 deletions(-)
->  create mode 100644 meta-oe/recipes-devtools/icon-slicer/files/hotspotfix=
-.patch
->
-> diff --git a/meta-oe/recipes-devtools/icon-slicer/files/hotspotfix.patch =
-b/meta-oe/recipes-devtools/icon-slicer/files/hotspotfix.patch
-> new file mode 100644
-> index 0000000000..1f8730aba0
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/icon-slicer/files/hotspotfix.patch
-> @@ -0,0 +1,27 @@
-> +Description: Fix hotspot y coordinate
-> +Author: Tim Swast <tswast@gmail.com>
-> +
-> +Upstream-Status: Pending
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +--- a/src/main.c
-> ++++ b/src/main.c
-> +@@ -103,7 +103,7 @@
-> +   if (n_channels =3D=3D 3)
-> +     {
-> +       out->x =3D start_x;
-> +-      out->y =3D start_x;
-> ++      out->y =3D start_y;
-> +       out->width =3D source->gridsize;
-> +       out->height =3D source->gridsize;
-> +
-> +@@ -137,8 +137,8 @@
-> +                   {
-> +                     min_x =3D start_x + i;
-> +                     max_x =3D start_x + i + 1;
-> +-                    min_y =3D start_y + i;
-> +-                    max_y =3D start_y + i + 1;
-> ++                    min_y =3D start_y + j;
-> ++                    max_y =3D start_y + j + 1;
-> +
-> +                     found =3D TRUE;
-> +                   }
-> diff --git a/meta-oe/recipes-devtools/icon-slicer/icon-slicer_0.3.bb b/me=
-ta-oe/recipes-devtools/icon-slicer/icon-slicer_0.3.bb
-> index 991133185f..8079f871d1 100644
-> --- a/meta-oe/recipes-devtools/icon-slicer/icon-slicer_0.3.bb
-> +++ b/meta-oe/recipes-devtools/icon-slicer/icon-slicer_0.3.bb
-> @@ -1,10 +1,12 @@
->  LICENSE =3D "GPL-2.0-only"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
->
-> -DEPENDS =3D "gdk-pixbuf popt"
-> +DEPENDS =3D "gdk-pixbuf popt xcursorgen"
->
->  SRC_URI =3D "http://freedesktop.org/software/${BPN}/releases/${BPN}-${PV=
-}.tar.gz \
-> -           file://0001-Makefile.am-no-examples.patch"
-> +           file://0001-Makefile.am-no-examples.patch \
-> +           file://hotspotfix.patch \
-> +           "
->  SRC_URI[sha256sum] =3D "05f0216dd0c25a17859de66357f64da5033375b6fbf5f31c=
-a54867311160b64d"
->
->  inherit autotools pkgconfig
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#116606): https://lists.openembedded.org/g/openembedde=
-d-devel/message/116606
-> Mute This Topic: https://lists.openembedded.org/mt/112112278/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
