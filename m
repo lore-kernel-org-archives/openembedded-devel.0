@@ -2,114 +2,155 @@ Return-Path: <leimaohui@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CE43CC3600C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD240C36002
 	for <webhook@archiver.kernel.org>; Mon,  7 Apr 2025 02:26:55 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.web10.38077.1743992806965303104
+Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
+ by mx.groups.io with SMTP id smtpd.web11.37591.1743992807681063252
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 06 Apr 2025 19:26:47 -0700
+ Sun, 06 Apr 2025 19:26:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=jd3UR0kp;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: leimaohui@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=k03I3QvG;
+ spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: leimaohui@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
   t=1743992807; x=1775528807;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=JVo7B2yOi0RBrEYzBioS0vpEn8OAkrWcoTAtlCTfnN8=;
-  b=jd3UR0kp/IFYnmJP2zRS52DFGwTZBtawU2E/cX9rAy8/Lh1/sm4Wc4EU
-   v0dE5hegBBw+De9qOCmeWFpKu2mjgixeTF2vgVeNyf8HDG0STDwWim8j6
-   knFBg+0tZFEwhx3ZodD/KZGqWzpYjWe9Xzdcw30LnqrNE9dXOEZGtPeIk
-   yc+7UxV5mr4zzaKmd3vgKdlB1N/27KE+zrUSqihtGufYTJeqdXJnNCDJ3
-   heZ2JUsY0jyp/a2B0/JZ9QqSx73KG4Cux3MjfyY9oIa10HFWI7vF+9m5z
-   9lkPwqyF8DGllhH/15Kq0m941cHNtflsDMEfGxaPhwhLCI+1yTtTWUwTD
-   A==;
-X-CSE-ConnectionGUID: e4i/jnbvQEubEEC8m9Q4/g==
-X-CSE-MsgGUID: TFJvk2OiTbGK9Bab6mM9bA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11396"; a="195937367"
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=MmoMZKbPGwbvpIattUkv85WZ2By3dT7gudiyxJETb7g=;
+  b=k03I3QvGZvEnWyG02wNbSi/Tr2yjvpE+KoH+xwhg7yF+7IZqhDfQRV69
+   R35t8ZqIn96+54KJ7H4XyK54xmHTHjhy5dX+UXpt0JYyiLKdPvofJzU/B
+   /WYLYvIZHcueY+8V09j+YS4+uFJdm5qMd2+rcMkDxSwBmD/9DYP9wtzGG
+   Vs8dQSsDCAadIyyapE9YNPAB3b4x+tt9XKyjXCzVHocXH+6qMveD0MAtb
+   eLnM/uunhfjIblcy+6JoZrCWAHyH45zqpnCIZ/U9k4NbjvjEDfpKIrVbE
+   GYDFSCr9YNjjhihhTz5685mkwQxsuKrah0+wx54JZrqvsxND9HkE+Nw5q
+   w==;
+X-CSE-ConnectionGUID: E4bFhm7uSfKJTOGDTmYgag==
+X-CSE-MsgGUID: QOSFEUlwSxqYCIgNKWQ/tQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11396"; a="174496038"
 X-IronPort-AV: E=Sophos;i="6.15,193,1739804400"; 
-   d="scan'208";a="195937367"
-Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Apr 2025 11:26:44 +0900
-Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
-	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 6875F7E488
-	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Apr 2025 11:26:42 +0900 (JST)
+   d="scan'208";a="174496038"
+Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
+  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Apr 2025 11:26:44 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 0830B13EF1
+	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Apr 2025 11:26:43 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 2B86AD88A1
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id BB86111C59
 	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Apr 2025 11:26:42 +0900 (JST)
 Received: from G08FNSTD190088.g08.fujitsu.local (unknown [10.167.135.33])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 958171A0071;
-	Mon,  7 Apr 2025 10:26:40 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 263441A009A;
+	Mon,  7 Apr 2025 10:26:41 +0800 (CST)
 From: Lei Maohui <leimaohui@fujitsu.com>
 To: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
 Cc: Richard Purdie <richard.purdie@linuxfoundation.org>,
 	Khem Raj <raj.khem@gmail.com>,
 	openembedded-devel@lists.openembedded.org,
 	Lei Maohui <leimaohui@fujitsu.com>
-Subject: [OE-core] [PATCH v3 1/2] python3-webcolors: upgrade 24.8.0 -> 24.11.1
-Date: Mon,  7 Apr 2025 10:26:01 +0800
-Message-Id: <20250407022602.2226-1-leimaohui@fujitsu.com>
+Subject: [OE-core] [PATCH v3 2/2] python3-pdm python3-pdm-{backend,build-locked}: move from meta-python
+Date: Mon,  7 Apr 2025 10:26:02 +0800
+Message-Id: <20250407022602.2226-2-leimaohui@fujitsu.com>
 X-Mailer: git-send-email 2.38.1.windows.1
+In-Reply-To: <20250407022602.2226-1-leimaohui@fujitsu.com>
+References: <20250407022602.2226-1-leimaohui@fujitsu.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 07 Apr 2025 02:26:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116614
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116615
 
-Fix the issue that:
- | Traceback (most recent call last):
- |   File "/mnt/test/build_auh/tmp/work/core2-64-poky-linux/python3-webcolors/24.11.1/recipe-sysroot-native/usr/lib/pyth on3.13/site-packages/pyproject_hooks/_impl.py", line 402, in _call_hook
- |     raise BackendUnavailable(
- |     ...<4 lines>...
- |     )
- | pyproject_hooks._impl.BackendUnavailable: Cannot import 'pdm.backend'
-
-python3-webcolors has migrated to pdm-backend
- | diff --git a/pyproject.toml b/pyproject.toml
- | index 6fcec77..9f2dfa9 100644
- | --- a/pyproject.toml
- | +++ b/pyproject.toml
- | @@ -1,65 +1,110 @@
- |  [build-system]
- | -requires = ["setuptools>=61.0"]
- | -build-backend = "setuptools.build_meta"
- | +requires = [
- | +    "pdm-backend",
- | +]
- | +build-backend = "pdm.backend"
+python3-pdm and python3-pdm-backend are dependencies of python3-webcolors
+python3-pdm itself depends on python3-pdm-build-locked
 
 Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
 ---
- ...n3-webcolors_24.8.0.bb => python3-webcolors_24.11.1.bb} | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
- rename meta/recipes-devtools/python/{python3-webcolors_24.8.0.bb => python3-webcolors_24.11.1.bb} (70%)
+ meta/conf/distro/include/maintainers.inc         |  3 +++
+ .../python/python3-pdm-backend_2.4.3.bb          | 14 ++++++++++++++
+ .../python/python3-pdm-build-locked_0.3.5.bb     | 15 +++++++++++++++
+ .../python/python3-pdm_2.22.4.bb                 | 16 ++++++++++++++++
+ 4 files changed, 48 insertions(+)
+ create mode 100644 meta/recipes-devtools/python/python3-pdm-backend_2.4.3.bb
+ create mode 100644 meta/recipes-devtools/python/python3-pdm-build-locked_0.3.5.bb
+ create mode 100644 meta/recipes-devtools/python/python3-pdm_2.22.4.bb
 
-diff --git a/meta/recipes-devtools/python/python3-webcolors_24.8.0.bb b/meta/recipes-devtools/python/python3-webcolors_24.11.1.bb
-similarity index 70%
-rename from meta/recipes-devtools/python/python3-webcolors_24.8.0.bb
-rename to meta/recipes-devtools/python/python3-webcolors_24.11.1.bb
-index c5ed4bd7d3..cda63d2a35 100644
---- a/meta/recipes-devtools/python/python3-webcolors_24.8.0.bb
-+++ b/meta/recipes-devtools/python/python3-webcolors_24.11.1.bb
-@@ -3,10 +3,15 @@ HOMEPAGE = "https://pypi.org/project/webcolors/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=cbaebec43b7d199c7fd8f5411b3b0448"
- 
--SRC_URI[sha256sum] = "08b07af286a01bcd30d583a7acadf629583d1f79bfef27dd2c2c5c263817277d"
-+SRC_URI[sha256sum] = "ecb3d768f32202af770477b8b65f318fa4f566c22948673a977b00d589dd80f6"
- 
- inherit pypi python_setuptools_build_meta ptest-python-pytest
- 
+diff --git a/meta/conf/distro/include/maintainers.inc b/meta/conf/distro/include/maintainers.inc
+index 2b47d3103c..4c02ee4961 100644
+--- a/meta/conf/distro/include/maintainers.inc
++++ b/meta/conf/distro/include/maintainers.inc
+@@ -665,6 +665,9 @@ RECIPE_MAINTAINER:pn-python3-numpy = "Trevor Gamblin <tgamblin@baylibre.com>"
+ RECIPE_MAINTAINER:pn-python3-packaging = "Tim Orling <tim.orling@konsulko.com>"
+ RECIPE_MAINTAINER:pn-python3-pathspec = "Ross Burton <ross.burton@arm.com>"
+ RECIPE_MAINTAINER:pn-python3-pbr = "Zang Ruochen <zangruochen@loongson.cn>"
++RECIPE_MAINTAINER:pn-python3-pdm = "Khem Raj <raj.khem@gmail.com>"
++RECIPE_MAINTAINER:pn-python3-pdm-backend = "Khem Raj <raj.khem@gmail.com>"
++RECIPE_MAINTAINER:pn-python3-pdm-build-locked = "Khem Raj <raj.khem@gmail.com>"
+ RECIPE_MAINTAINER:pn-python3-pefile = "Khem Raj <raj.khem@gmail.com>"
+ RECIPE_MAINTAINER:pn-python3-pip = "Zang Ruochen <zangruochen@loongson.cn>"
+ RECIPE_MAINTAINER:pn-python3-pluggy = "Tim Orling <tim.orling@konsulko.com>"
+diff --git a/meta/recipes-devtools/python/python3-pdm-backend_2.4.3.bb b/meta/recipes-devtools/python/python3-pdm-backend_2.4.3.bb
+new file mode 100644
+index 0000000000..46440c9d5d
+--- /dev/null
++++ b/meta/recipes-devtools/python/python3-pdm-backend_2.4.3.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "The build backend used by PDM that supports latest packaging standards"
++HOMEPAGE = "https://github.com/pdm-project/pdm-backend"
++LICENSE = "MIT"
++SECTION = "devel/python"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=4a564297b3c5b629a528b92fd8ff61ea"
++
++SRC_URI[sha256sum] = "dbd9047a7ac10d11a5227e97163b617ad5d665050476ff63867d971758200728"
++
++inherit pypi python_setuptools_build_meta
++
++PYPI_PACKAGE = "pdm_backend"
++UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
++
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta/recipes-devtools/python/python3-pdm-build-locked_0.3.5.bb b/meta/recipes-devtools/python/python3-pdm-build-locked_0.3.5.bb
+new file mode 100644
+index 0000000000..12afe8bcf4
+--- /dev/null
++++ b/meta/recipes-devtools/python/python3-pdm-build-locked_0.3.5.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "pdm plugin to publish locked dependencies as optional-dependencies"
++HOMEPAGE = "https://github.com/pdm-project/pdm-build-locked"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=19382cdf9c143df4f00b9caa0b60c75a"
++
++SRC_URI[sha256sum] = "ab2f381e00d79841d46be2e6909c265038b9fa951de2bf551ca6adb7f6844201"
++
++inherit pypi python_setuptools_build_meta
++
++DEPENDS += " python3-pdm-backend-native"
++
++PYPI_PACKAGE = "pdm_build_locked"
++UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
++
++BBCLASSEXTEND += "native nativesdk"
+diff --git a/meta/recipes-devtools/python/python3-pdm_2.22.4.bb b/meta/recipes-devtools/python/python3-pdm_2.22.4.bb
+new file mode 100644
+index 0000000000..e6f35b3c7a
+--- /dev/null
++++ b/meta/recipes-devtools/python/python3-pdm_2.22.4.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "A modern Python package and dependency manager supporting the latest PEP standards"
++HOMEPAGE = "https://pdm-project.org/latest/"
++LICENSE = "MIT"
++SECTION = "devel/python"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=2eb31a2cc1a758c34b499f287dd04ef2"
++
++SRC_URI[sha256sum] = "8483f3d2285039cea7e07c5ba6ac7e1fcba358129f8831fb75065a797d27b923"
++
++inherit pypi python_setuptools_build_meta
++
 +DEPENDS += " \
-+    python3-pdm-native \
 +    python3-pdm-backend-native \
++    python3-pdm-build-locked-native \
 +"
 +
- RDEPENDS:${PN}:class-target = "\
-     python3-stringold \
- "
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.43.0
 
