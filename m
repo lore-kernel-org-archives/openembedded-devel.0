@@ -1,240 +1,712 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <mark.yang@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D8DBC369A1
-	for <webhook@archiver.kernel.org>; Tue,  8 Apr 2025 07:28:58 +0000 (UTC)
-Received: from esa11.fujitsucc.c3s2.iphmx.com (esa11.fujitsucc.c3s2.iphmx.com [216.71.156.121])
- by mx.groups.io with SMTP id smtpd.web11.69175.1744097331823574500
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 74541C3600C
+	for <webhook@archiver.kernel.org>; Tue,  8 Apr 2025 07:42:18 +0000 (UTC)
+Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.51])
+ by mx.groups.io with SMTP id smtpd.web10.69848.1744098128935961889
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Apr 2025 00:28:52 -0700
+ Tue, 08 Apr 2025 00:42:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj1 header.b=EWv8Clzy;
- spf=pass (domain: fujitsu.com, ip: 216.71.156.121, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj1;
-  t=1744097331; x=1775633331;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=Cezo/oWc0u7F1VMAD241fEtX5rN5rcNbCJQPOwcDVvQ=;
-  b=EWv8Clzy1JcSMAj+hVW/icMl7xj9bSQvP1sn0zfZW/fAtANdXjW9npNy
-   rvtUY42dlEBN7gKBu3roDC3LStHR5Enmht0mOs8cR7JSPBlxn5bOqXYsf
-   JsSLW0r079ayW+oQMKcSKSWRevhIRkcWCdjJbGcUMLSIN1DyxNASXe/fA
-   9YjIMgDPBfoL4xR3g49oDOxJ5wNvSJEDic3mlMqSLZ0zCEP7iF5i5poD3
-   JyXC5I5d2Uo8auvy2N9Hg0/86olbtVbTlXhXSDs4L9pBuwYWa6+51Bmkf
-   PZZZModxd2RW0749y6jiyonTFDVTH82LpSXSigRbexd9ulctKcwGRaiiC
-   g==;
-X-CSE-ConnectionGUID: OJOHJ7ulRjKqbrd4gOtYvQ==
-X-CSE-MsgGUID: SH2aLeRZRQO07n8Exo65SA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11397"; a="153007455"
-X-IronPort-AV: E=Sophos;i="6.15,197,1739804400"; 
-   d="scan'208";a="153007455"
-Received: from mail-japanwestazlp17011029.outbound.protection.outlook.com (HELO OS0P286CU010.outbound.protection.outlook.com) ([40.93.130.29])
-  by ob1.fujitsucc.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Apr 2025 16:28:48 +0900
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Lv+KFFFxTOBbmz0240dw6Sw0GhZkG5UGCM0Bx0l/qVbrrZEMPrOGJVcB/omakVowe4TUQaB3JRntxFM2o9Egihhh9ZRpB2zmk4yvrPowx6Q3xCtg6tBPJ25E7ejSj5qwXxA/OQ2vi4eYhQtH3e0MglX3MF4TRhlHPd+u7I4eK8RPmU/B5nj7+6pIZ1Z6F4XohzFeBQMffBk0tg/EusJHmSvQlvHAsCX7SImOUq/VpzIMNlgU1TE9h5ecDg1TJYbK7Awgj9A05vDshe6myo0CHOkXZyHzCIROKmgdpsbH15SUeSqXG+3+ZrpZXXLSR66i0+nj8uUfW9gkeTQgrqouzA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Cezo/oWc0u7F1VMAD241fEtX5rN5rcNbCJQPOwcDVvQ=;
- b=g8/62jnn95Tqocy8IcAVDdfPMKtSu20wplx4rQhKGXu1QkjiLRephNDNrSB7NsleVkROPCcJSIR3/eOYY787GNRbZ2uuUSzwpibMLG03sWMM5Ad+E0439AmeFcyCRpZbwMpezDS8C0TBWS3QdohqeNeS8J0VYTGxJuVe50/g7KUR2yl7+VwXSujUCywVhzHdB9sJPzfRTC45T84tsLGjdGOy2YZAiDF3Hvq9k0K83PhIvyQDjj9wtwwvgnb4XCVf286qXHbYxZ/7VcGocl93Susl9C3o7F78FCAZXBGsRVe/FAkxs9jUWDRRksjfLz7CkLm6OyAPwjEHoexEmwBljQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=fujitsu.com; dmarc=pass action=none header.from=fujitsu.com;
- dkim=pass header.d=fujitsu.com; arc=none
-Received: from TYWPR01MB11861.jpnprd01.prod.outlook.com
- (2603:1096:400:3fb::13) by OSCPR01MB13377.jpnprd01.prod.outlook.com
- (2603:1096:604:332::11) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.35; Tue, 8 Apr
- 2025 07:28:42 +0000
-Received: from TYWPR01MB11861.jpnprd01.prod.outlook.com
- ([fe80::e0dd:28e5:6a6e:2342]) by TYWPR01MB11861.jpnprd01.prod.outlook.com
- ([fe80::e0dd:28e5:6a6e:2342%5]) with mapi id 15.20.8583.041; Tue, 8 Apr 2025
- 07:28:42 +0000
-From: "Mingyu Wang (Fujitsu)" <wangmy@fujitsu.com>
-To: Gyorgy Sarvari <skandigraun@gmail.com>,
-	"linux-yocto@lists.yoctoproject.org" <linux-yocto@lists.yoctoproject.org>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] [linux-yocto] error of tiptop
-Thread-Topic: [oe] [linux-yocto] error of tiptop
-Thread-Index: AdujrHwaXif0pN2pR32+YCy4a4R1JwAvnEOAAPrqZuA=
-Date: Tue, 8 Apr 2025 07:28:41 +0000
-Message-ID: 
- <TYWPR01MB1186183EAB588828FDA06A60BDCB52@TYWPR01MB11861.jpnprd01.prod.outlook.com>
-References: 
- <TYWPR01MB118613486A025B1F8AE633026DCAF2@TYWPR01MB11861.jpnprd01.prod.outlook.com>
- <400fa42d-4c27-4ef0-86f4-62046b0cd021@gmail.com>
-In-Reply-To: <400fa42d-4c27-4ef0-86f4-62046b0cd021@gmail.com>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
- =?utf-8?B?TVNJUF9MYWJlbF8xZTkyZWY3My0wYWQxLTQwYzUtYWQ1NS00NmRlMzM5Njgw?=
- =?utf-8?B?MmZfQWN0aW9uSWQ9MDAyNTZlYTAtZGQwMy00MzBjLTk2YTktNjZhYWFkZGRi?=
- =?utf-8?B?ZGZlO01TSVBfTGFiZWxfMWU5MmVmNzMtMGFkMS00MGM1LWFkNTUtNDZkZTMz?=
- =?utf-8?B?OTY4MDJmX0NvbnRlbnRCaXRzPTA7TVNJUF9MYWJlbF8xZTkyZWY3My0wYWQx?=
- =?utf-8?B?LTQwYzUtYWQ1NS00NmRlMzM5NjgwMmZfRW5hYmxlZD10cnVlO01TSVBfTGFi?=
- =?utf-8?B?ZWxfMWU5MmVmNzMtMGFkMS00MGM1LWFkNTUtNDZkZTMzOTY4MDJmX01ldGhv?=
- =?utf-8?B?ZD1Qcml2aWxlZ2VkO01TSVBfTGFiZWxfMWU5MmVmNzMtMGFkMS00MGM1LWFk?=
- =?utf-8?B?NTUtNDZkZTMzOTY4MDJmX05hbWU9RlVKSVRTVS1QVUJMSUPigIs7TVNJUF9M?=
- =?utf-8?B?YWJlbF8xZTkyZWY3My0wYWQxLTQwYzUtYWQ1NS00NmRlMzM5NjgwMmZfU2V0?=
- =?utf-8?B?RGF0ZT0yMDI1LTA0LTA4VDA3OjE5OjQzWjtNU0lQX0xhYmVsXzFlOTJlZjcz?=
- =?utf-8?B?LTBhZDEtNDBjNS1hZDU1LTQ2ZGUzMzk2ODAyZl9TaXRlSWQ9YTE5ZjEyMWQt?=
- =?utf-8?B?ODFlMS00ODU4LWE5ZDgtNzM2ZTI2N2ZkNGM3O01TSVBfTGFiZWxfMWU5MmVm?=
- =?utf-8?B?NzMtMGFkMS00MGM1LWFkNTUtNDZkZTMzOTY4MDJmX1RhZz0xMCwgMCwgMSwg?=
- =?utf-8?Q?1;?=
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=fujitsu.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: TYWPR01MB11861:EE_|OSCPR01MB13377:EE_
-x-ms-office365-filtering-correlation-id: 677ba261-ed18-482a-cee9-08dd766efcf7
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: 
- BCL:0;ARA:13230040|376014|366016|4022899009|1800799024|38070700018|1580799027;
-x-microsoft-antispam-message-info: 
- =?utf-8?B?ZTU2Q3BCb0VZSjhSVE1KU1doU2NsWGNaR2RLMUJMdGZJZ1BhenFxT2xvM1Q5?=
- =?utf-8?B?dWgvUWVFcHhoeUl4Nlp0ckZnZGFuWGUrdXljYzVuQ1U2Q2FWTTBiaU14TWxm?=
- =?utf-8?B?ZzlEK2o2NG1qL0R1Tjg0ZzdVYXdVT0ZYeDBOZjVNUDZQemNkS0k5NWVqY29E?=
- =?utf-8?B?RWJ1d1UrKzd6bVNXNE1NT0RpVnhPWDZlbHluUHVndFhuQ2wvUVFraGVjcU8r?=
- =?utf-8?B?NUdnbmpYSEtZYUxoM1dKOU9iRGRuby9vUkdPdUs3RXBCd25xWFErRTlZR3Fm?=
- =?utf-8?B?d0w3cmVRek9Ndjc2NTNkQW4vY01LNXQzT0dkbDVZSkV5N0Y3b1YwS1FzbWg0?=
- =?utf-8?B?aDBhWVNwZFVmOXhzZW5FRG8yY1d2ODhLQWowMUpmaVo1SktYendaNVdLbGsx?=
- =?utf-8?B?U3VNcnd6ZDgyVVZyTTUyendRY0lyWmtTajdsSk5rcG13NG9FNGVFQkVGWmR2?=
- =?utf-8?B?U1FBZS94Rjh6NmlkejVrNmNIbDdpc3VFV0xzc2xsa1dPK2xHRFgybDBhQjFL?=
- =?utf-8?B?dUpZY0syekMxR2tNU3pGeEEwSUhTNEQzZ1NkWEJ4czlGVU5CaitqaGliWC9t?=
- =?utf-8?B?T2JhNVl6OUFEYXZYTjVuelFGUEs4ZlpwV1FFWnJTd2plY2Z2OHR2aWwya3c4?=
- =?utf-8?B?eG5pMTRpbTQ4bGZTbTNZS0pBa1RQTnBtNlQvOXkvajh3d1Fjc3llR1N1KzlR?=
- =?utf-8?B?anVKN2hGVGs5S0FwbGsvcVpLbmxET3ptL3BIRHJ2QUhMeitPZHZZODRDb0dE?=
- =?utf-8?B?cUdqMEdsYklkcW9Ta2NObmE4K0JjREFzZDFNYVRQdEFYN2NPR0lXeUx6cE50?=
- =?utf-8?B?K2ZUTGpVRE05djEwY3RpMG91cVFEc2kxTVJRMVNxWTZLRVo2aXF6aGgrMitN?=
- =?utf-8?B?Rk1OSlMxSVB0MEdmNHJHMWVGRm5wMDNuZWlxYWhVRURyVXIzb0tZWW96MTZW?=
- =?utf-8?B?VG8rdFNYb3lDUm5tcHJpVHh5V2VJb0pXNTMxeDBJV2dEZVp0RnluYmxHWTNt?=
- =?utf-8?B?RFZxUkZJWWFkYnI4OHA5VVFERXR1TFI2WUZVQVgrcitmd2xURXdkSzhoM1lY?=
- =?utf-8?B?dm5hdC80bjRrNlhYODRrZjF5TnBNRTBwRUttbkQra1Y3Y3hvSjNUN0NONjQz?=
- =?utf-8?B?b0IrU2U3TzBHR2d4S2R5SCsxWk9POTIxb0lDY0tUN3RWWExCTDJ6ZWpzay92?=
- =?utf-8?B?V1N6Q1h2ZmQyc1BjWHpUeVZrUlBhQTRoQmZ2QS9ub3ZKaDVyaXRlQTZGc0tN?=
- =?utf-8?B?T3RqMjFsR0h4Yy9OUytIMlNPUUozdld2MVJ3eGpWR2Zkd0k1SllGNFpqZ3M0?=
- =?utf-8?B?M2Z2TlY3WEhvYWhOMTdyd0pXVnhCTTZMWC9rSlg3SVJNRGx4aHlFV0wwMUFo?=
- =?utf-8?B?OHViaHI5dTFENzZxMW9wTU1RM1kxTTJjd05nUFRHQ2E4SThiUFdIUm1BdzRh?=
- =?utf-8?B?L0xha3UzMDhpZW93b2haMitZQW1uNFczbWZRVHNRUkVtZzhGOEFvcG1zYTZl?=
- =?utf-8?B?S2JldkRwRzlLbFd4OXZUYndFc2tzc01RVDhPVitUSE05N1hVdTlWaDR5TjZx?=
- =?utf-8?B?L3ZmZTdpRmE0ZzVVY1hTc3lJRENYd0NNZ3M1V1BNdVdVQzJiL2ZSb1RhajNv?=
- =?utf-8?B?VThBNm4ra3hOVi9MSkJZeEdDNnZqcWZIVWQ4aFFMbGNGaUZ4eFcwQldENHBv?=
- =?utf-8?B?YXdyWUxrV0g0c1ZVdzc4cmhMRXl5QmRFOTJzcG44T1Zqc0NCK0JoNnJERU9O?=
- =?utf-8?B?b1dtclhnNEpiWjhNS0N0WXB2YitGYjU5QkV2Qi9tM3Q1SmhwZlBsSnJtWjhv?=
- =?utf-8?B?ZFBMY2tQTTRJekpKYjBEQ0MxUldJTS9pODVMRU5WRzk4QlVub05VWGRiQ1do?=
- =?utf-8?B?eVZDc0l1d2Q0NTRQNEJMQ2Y1ZnVzQXYvTXppclF5M2FoS0ptOE40bUQrSkdx?=
- =?utf-8?Q?5exlKm+2jAPHMox32osCUdr+VYJ5dKB1?=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:zh-cn;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TYWPR01MB11861.jpnprd01.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(4022899009)(1800799024)(38070700018)(1580799027);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?U3NWLzJjYWpjbVJKZGlkajd2M3cyK2VpL2ZHemZ3bUZSWmRjaldRYjBrN2JG?=
- =?utf-8?B?WERzZ3hETllNTFFWVlYyU0NMK2U4aDBWWmF1eG1UMmQvblV0NU44M2hwT3lB?=
- =?utf-8?B?bVZqSE5IZW1lKzJOakFIQkFXbmo1dHN5aGphQnJjNXR2MTU2a2VpVE9Rc3pV?=
- =?utf-8?B?SDcyaWdvMmN3cWQ1NmVWV2pLM1ZPWkJkazFTaStEMk9od25uNk0zbi9BTXp2?=
- =?utf-8?B?bmxyZDVvK2ZjdXhSanprcnBiMGJqa29jRkNxNGJwSkNndEU2YjlVY1hIcXBo?=
- =?utf-8?B?aXlZdGxWcE1DeDhUOE1rN3liSHFOOTByaFo4V2dDcFBOeXFiMzZFOVFUR2JU?=
- =?utf-8?B?OENxcGJ4WkMxUFV6QWJORkZ6Z0N4ZFNXVEYrUEhJaXhmc0NRWmMvQlY1Wjlt?=
- =?utf-8?B?V3VCTVY4N3Vlbko0OTM1bDN4RWpoYkM1RXpDUjNlcjNqSmd1TUdZKys3aUs2?=
- =?utf-8?B?RlR4cVovam9Oa1pyTG5vSjh3bnJvbXBNenA0Nnd5aTZhTjVNNFNSS2ZkdlZF?=
- =?utf-8?B?dlp2TXFsZHNaK3JiMitTYUFqVG5lVXBHVjZZdXExTUJvTmZKbTQzZVo5bTVz?=
- =?utf-8?B?R0pwclRtRk1xMGtpYktBQmh4b0lEbC8vY3BkMEVVU1JSajBOTlpoWjIveXJu?=
- =?utf-8?B?YTBsMVE3RVhtVmFHdmc4UW9YMUFPSU15Q3BvWjJ2ajJIYnVISEhxRHR1Y3RO?=
- =?utf-8?B?bGs1blZ2Y0oraFlyeWdVdTZvNFFFWURhZU4xZjVnK1RBUElVWHJndmhQcjhS?=
- =?utf-8?B?ZUdkWitPWjdpTFpkVTRSM3pmMzVFK3lvVURndDZjbTIyT1hUTnZ1TW55a05F?=
- =?utf-8?B?RFdSaGhMcytMbm5kak14a0hwdisvMlpabmE2S0wyTUVtRzI3YlVFZ2haektV?=
- =?utf-8?B?eE1FcjAydEIyTjJGOTZpOC91cDRzQmRrZFNVeXF4YlRteTVxd3NkT0NiRmlZ?=
- =?utf-8?B?NCtGUWVITTdYckVITFNwc2NYS0srQUVrTUVsVDlPbnN3N1lMeEtsdVVRRkN3?=
- =?utf-8?B?bFhJcXRWUm55d0l5a0VVVTBIMGw3MUhsY0pwRXVjMG9maE1pZ3ZiaWtpMzFo?=
- =?utf-8?B?bHM5LzRHRmhxbUdPd2lhdUFKeERZZFpuQkRMbWlTVzZwOWVIdVp3QmtXZmIx?=
- =?utf-8?B?MGg4RmVLeFhIOW1lTXNyMlRLSmtPVWpwR0J4L3drZEx2aVBFOU1oQXF6VGRP?=
- =?utf-8?B?dGNabmR6eXIwNE95bklaSFZIT05Gc3NJU3lNTVBXZG1GajY2NnpzRUZSMTdy?=
- =?utf-8?B?ay9pa0lNVjFhR3lzVVJ2blc0c0J2NmorL2pjaVZBcm9hcitzcTNUTWhJSnBp?=
- =?utf-8?B?Z2VsV1lEOFNwOUIvOS8zV3NGb3BMTE8wUWkwQzNjNGhWTmtiZXZtazk1NExj?=
- =?utf-8?B?bElaQ2p1NDVZcThXS1hxa0ZZcGtYbklmckZ6SXoxbDJ1VEVDZlpmSi95SW1N?=
- =?utf-8?B?aEU4WjB5OFVONlpyUWtZMEdFeGlkS0FaK2sxUjBHbEo0dEdYNk85bVlETm9P?=
- =?utf-8?B?bnFtYW45cUN6bEJ1dUp3L29aWGlndVNnaDVFNHBQZmRKRi9SaEthajcyU3Jr?=
- =?utf-8?B?bHFCbk02bjBBL2h1OVR6NXlmMHBZRk5aMzN6S1R3WTZONHJuTHBTK3ZFRXFS?=
- =?utf-8?B?dTRxV0k5V29BYmoxY244K3lWM0Jsanc1NzFFM0c2a3psZnFJV2s3V0drQ21V?=
- =?utf-8?B?Z2ZMOC9zdjQwUXNiWENDd1FEQmtHd3NxTmJaYXp6TVc4WmtwUExGMjhsNm9B?=
- =?utf-8?B?cHlsYkFyOVF5Z0lYU2hRbTBVREYvOS9GdlFSVi9GY20rSnhjNGhWU1pvUkM5?=
- =?utf-8?B?TmpqUDVoRDRGWDdXQ2d0L3dSdFJrUVk2bWc5bDE5L1hsMExCNDQ2NkdHYXcv?=
- =?utf-8?B?d3YvV0prSFpQNmswejlyeFBHa09qM1g3Z2dvR2puOXJnQzMwV0N3VEJnY0ZP?=
- =?utf-8?B?azJqV1ozejBvMTdnYndDMDRMY1NBamZzQVJOUlhSZENOdDFjTUJVbElDR2hX?=
- =?utf-8?B?b1hPM3ZuUzB0TXRUR0lZZjVqYktyaFJuZDZHVDFZdzNhcFhVZ2VYMlFGbzFE?=
- =?utf-8?B?N0VDSFNnNDY2NmV6aytGNWxyU25IWmdyOFhDd0lJRk1UUnBUREh2MTFzN3hC?=
- =?utf-8?Q?bcF07JIgP/k1sPEhCJc7dAf9w?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.51, mailfrom: mark.yang@lge.com)
+Received: from unknown (HELO lgemrelse6q.lge.com) (156.147.1.121)
+	by 156.147.23.51 with ESMTP; 8 Apr 2025 16:42:06 +0900
+X-Original-SENDERIP: 156.147.1.121
+X-Original-MAILFROM: mark.yang@lge.com
+Received: from unknown (HELO markyang..) (10.177.120.37)
+	by 156.147.1.121 with ESMTP; 8 Apr 2025 16:42:06 +0900
+X-Original-SENDERIP: 10.177.120.37
+X-Original-MAILFROM: mark.yang@lge.com
+From: mark.yang@lge.com
+To: openembedded-devel@lists.openembedded.org
+Cc: "mark.yang" <mark.yang@lge.com>
+Subject: [meta-oe][PATCH] bubblewrap: fix error with gcc-15
+Date: Tue,  8 Apr 2025 16:42:05 +0900
+Message-Id: <20250408074205.1294780-1-mark.yang@lge.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 
-	yxGQL9cveZl1agtTonFIlF/+fBDAp95QhkRPVV7p7EmJwasqa7yk4/fxvuH/triMxbudISBH0/bf/Rknnw9T/XqVa1irPWv8PIqbtxLLGeZ+EEf2/pVCz76mLYFnZg7X77cf40rgQi3ejpS7Gez7F/IootPpjUnAF1aMpyOHnf0muykM+HduJ7GlpuxclQMTgLmYyZUkLeb21IMYz5TjDa8H25MQgqB81sAZqeR8iRYK5NBlODAZT2BO74IujcSgbeuqJnRsd90f3AnfYqmR62ti/S06K0ZPORzoIKxikFjXi05SgpbfDRap8ZBqUenJu065zMnQDTdL6Fe/zQKBGuW7NWPvJu4qW/Nt5vd9cKbADQfIt0mT+7lt4AJGutrPCSlrTm7RiPSkWPG5iGOYi5NtHaZRNh2b9kGAAKGokXA26iZzCVGOQTzX3zJUG5Fq4mt+JPGW6Pp0hMVOaX399LtAdj5R3GEMS20VHRlseJoQxej+0unieqDxtkIcf7NTX1hs+fsm9/Z2HeWX/oyqnJP6+pfa44/I7oQhaIUY9Z3UAW6u1K4S8eX3TYxRj0gLupdJxFvcCoSbLdhTY+gt/ztFga/XMopA+OsM3aeyzViU/cc1WAC0MryFct7bJLNv
-X-OriginatorOrg: fujitsu.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TYWPR01MB11861.jpnprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 677ba261-ed18-482a-cee9-08dd766efcf7
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Apr 2025 07:28:41.8485
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a19f121d-81e1-4858-a9d8-736e267fd4c7
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: fdp6iHJeAsRmP6m7eeK5UuX49+U8MHbphV/IZNirflxVZd+5bzMyTZStec99JTTwUhBxfd1oyG8UUTmkHO7nOA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSCPR01MB13377
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 07:28:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116693
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 07:42:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116694
 
-SSB0cmllZCAiIHJ1bnFlbXUgcWVtdXg4Ni02NCBxZW11cGFyYW1zPSIgLS1lbmFibGUta3ZtICIg
-bm9ncmFwaGljIiwgYnV0IHRoZXJlIHN0aWxsIHJlcG9ydCBhbiBlcnJvcjoNCg0Kcm9vdEBxZW11
-eDg2LTY0On4jIHRpcHRvcA0Kc3lzY2FsbDogT3BlcmF0aW9uIG5vdCBwZXJtaXR0ZWQNCkNvdWxk
-IG5vdCBwZXJmb3JtIHN5c2NhbGwuDQpEb24ndCBrbm93IHdoeS4uLg0KDQpNeSByZXBvIG9mIG1l
-dGEtb3BlbmVtYmVkZGVkXSBoYXMgYmVlbiB1cGRhdGVkIHRvIDgyMDU2Yjk5MjQ1OTYwN2VhNjli
-MDEzMDMwODY4NWM0ODcyY2IxOWI3DQpSZXBvIG9mIHBva3kgaGFzIGJlZW4gdXBkYXRlZCB0byA5
-ZTQxOGM0MjY1NDUzODYwYzQ3MzZhYmI3NTIwZjFjM2MyYzNmYWVlDQogIC0tDQpCZXN0IFJlZ2Fy
-ZHMNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0K
-V2FuZyBNaW5neXUNCkZVSklUU1UgTkFOSklORyBTT0ZUV0FSRSBURUNITk9MT0dZIENPLiwgTFRE
-LiAoRk5TVCkNCk5vLjYgV2Vuemh1IFJvYWQsIE5hbmppbmcsIDIxMDAxMiwgQ2hpbmENClRFTO+8
-mis4NisyNS04NjYzMDU2Ni0tODU2OA0KQ09JTlM6IDc5OTg4NTQ4DQpGQVg6ICs4NisyNS04MzMx
-NzY4NQ0KTUFJTDogd2FuZ215QGZ1aml0c3UuY29tDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdl
-LS0tLS0NCj4gRnJvbTogR3lvcmd5IFNhcnZhcmkgPHNrYW5kaWdyYXVuQGdtYWlsLmNvbT4NCj4g
-U2VudDogVGh1cnNkYXksIEFwcmlsIDMsIDIwMjUgMzozNSBQTQ0KPiBUbzogV2FuZywgTWluZ3l1
-L+eOiyDpuKPnkZwgPHdhbmdteUBmdWppdHN1LmNvbT47DQo+IGxpbnV4LXlvY3RvQGxpc3RzLnlv
-Y3RvcHJvamVjdC5vcmcNCj4gQ2M6IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRk
-ZWQub3JnDQo+IFN1YmplY3Q6IFJlOiBbb2VdIFtsaW51eC15b2N0b10gZXJyb3Igb2YgdGlwdG9w
-DQo+IA0KPiBPbiB3aGF0IG1hY2hpbmUgYXJlIHlvdSB0cnlpbmcgdG8gcnVuIGl0PyBBdCBsZWFz
-dCBpbiBxZW11IEkgZ2V0IHRoZSBzYW1lLA0KPiB1bmxlc3MgSSBlbmFibGUga3ZtIGRpcmVjdGx5
-Og0KPiANCj4gcnVucWVtdSBxZW11eDg2LTY0IHFlbXVwYXJhbXM9IiAtLWVuYWJsZS1rdm0gIg0K
-PiANCj4gVGhpcyB3YXkgSSBkb24ndCBnZXQgdGhhdCBlcnJvci4NCj4gDQo+IE9uIDQvMi8yNSAx
-MDo1Miwgd2FuZ215IHZpYSBsaXN0cy5vcGVuZW1iZWRkZWQub3JnIHdyb3RlOg0KPiA+IEhpLA0K
-PiA+DQo+ID4gV2hlbiBydW5uaW5nIHRpcHRvcCBvbiB0aGUgaW1hZ2Ugb2YgeDg2LTY0IGZvciB0
-aGUgbGF0ZXN0IHJlcG9zaXRvcnkgb2YgcG9reQ0KPiBhbmQgbWV0YS1vZSwgYW4gZXJyb3Igb2Nj
-dXJyZWQuDQo+ID4NCj4gPiByb290ICMgdGlwdG9wIC1oDQo+ID4gc3lzY2FsbDogT3BlcmF0aW9u
-IG5vdCBwZXJtaXR0ZWQNCj4gPiBDb3VsZCBub3QgcGVyZm9ybSBzeXNjYWxsLg0KPiA+IERvbid0
-IGtub3cgd2h5Li4uDQo+ID4NCj4gPiBBY2NvcmRpbmcgdG8gcHJlbGltaW5hcnkgaW52ZXN0aWdh
-dGlvbiwgdGhlIGNhdXNlIG9mIHRoaXMgaXNzdWUgaXMgcmVsYXRlZCB0bw0KPiBrZW5lcmwgdXBk
-YXRpbmcgb2YgcGVyZiByZWxhdGVkIGNvZGUuDQo+ID4gVGhpcyBwcm9ibGVtIGhhcyBiZWVuIG9j
-Y3VycmluZyBzaW5jZSB0aGUgY29tbWl0DQo+ID4gZjM5MGMyZWVhNTcxOTQ1ZjM1N2EyZDNiOWZj
-YjFjMDE1NzY3MTMyZSBvZiBicmFuY2ggdjYuNi9zdGFuZGFyZC9iYXNlDQo+ID4NCj4gPiBNYXkg
-SSBhc2sgaWYgeW91IGhhdmUgYW55IG9waW5pb25zIG9yIHN1Z2dlc3Rpb25zIHJlZ2FyZGluZyB0
-aGlzIGlzc3VlPw0KPiA+DQo+ID4gICAtLQ0KPiA+IEJlc3QgUmVnYXJkcw0KPiA+IC0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiA+IFdhbmcgTWlu
-Z3l1DQo+ID4gRlVKSVRTVSBOQU5KSU5HIFNPRlRXQVJFIFRFQ0hOT0xPR1kgQ08uLCBMVEQuIChG
-TlNUKQ0KPiA+IE5vLjYgV2Vuemh1IFJvYWQsIE5hbmppbmcsIDIxMDAxMiwgQ2hpbmENCj4gPiBU
-RUzvvJorODYrMjUtODY2MzA1NjYtLTg1NjgNCj4gPiBDT0lOUzogNzk5ODg1NDgNCj4gPiBGQVg6
-ICs4NisyNS04MzMxNzY4NQ0KPiA+IE1BSUw6IHdhbmdteUBmdWppdHN1LmNvbQ0KPiA+DQo+ID4N
-Cj4gPg0KPiA+IC09LT0tPS09LT0tPS09LT0tPS09LT0tDQo+ID4gTGlua3M6IFlvdSByZWNlaXZl
-IGFsbCBtZXNzYWdlcyBzZW50IHRvIHRoaXMgZ3JvdXAuDQo+ID4gVmlldy9SZXBseSBPbmxpbmUg
-KCMxMTY1MTQpOg0KPiA+IGh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJl
-ZGRlZC1kZXZlbC9tZXNzYWdlLzExNjUxNA0KPiA+IE11dGUgVGhpcyBUb3BpYzogaHR0cHM6Ly9s
-aXN0cy5vcGVuZW1iZWRkZWQub3JnL210LzExMjA0MzMyMy82MDg0NDQ1DQo+ID4gR3JvdXAgT3du
-ZXI6IG9wZW5lbWJlZGRlZC1kZXZlbCtvd25lckBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+ID4g
-VW5zdWJzY3JpYmU6IGh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRl
-ZC1kZXZlbC91bnN1Yg0KPiA+IFtza2FuZGlncmF1bkBnbWFpbC5jb21dDQo+ID4gLT0tPS09LT0t
-PS09LT0tPS09LT0tPS0NCj4gPg0KDQo=
+From: "mark.yang" <mark.yang@lge.com>
+
+* backport fix from:
+  https://github.com/containers/bubblewrap/pull/660
+  But patch rework for this version.
+  In gcc 15, bool became a reserved keyword in C23, causing conflicts with our custom bool definition.
+
+  See also, https://gcc.gnu.org/git/?p=gcc.git;a=commitdiff;h=55e3bd376b2214e200fa76d12b67ff259b06c212
+
+* to fix:
+  http://errors.yoctoproject.org/Errors/Details/851183/
+  ../bubblewrap-0.10.0/utils.h:46:13: error: 'bool' cannot be defined via 'typedef'
+   46 | typedef int bool;
+      |             ^~~~
+Signed-off-by: mark.yang <mark.yang@lge.com>
+---
+ .../0001-Use-stdbool.h-for-booleans.patch     | 633 ++++++++++++++++++
+ .../bubblewrap/bubblewrap_0.10.0.bb           |   5 +-
+ 2 files changed, 637 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-security/bubblewrap/bubblewrap/0001-Use-stdbool.h-for-booleans.patch
+
+diff --git a/meta-oe/recipes-security/bubblewrap/bubblewrap/0001-Use-stdbool.h-for-booleans.patch b/meta-oe/recipes-security/bubblewrap/bubblewrap/0001-Use-stdbool.h-for-booleans.patch
+new file mode 100644
+index 0000000000..6b42635e3a
+--- /dev/null
++++ b/meta-oe/recipes-security/bubblewrap/bubblewrap/0001-Use-stdbool.h-for-booleans.patch
+@@ -0,0 +1,633 @@
++From 4572dd9378c876349e02403cf7f6031c45281f85 Mon Sep 17 00:00:00 2001
++From: "mark.yang" <mark.yang@lge.com>
++Date: Tue, 8 Apr 2025 16:29:18 +0900
++Subject: [PATCH] Use stdbool.h for booleans
++
++* backport fix from:
++  https://github.com/containers/bubblewrap/pull/660
++  But patch rework for this version.
++  In gcc 15, bool became a reserved keyword in C23, causing conflicts with our custom bool definition.
++
++  See also, https://gcc.gnu.org/git/?p=gcc.git;a=commitdiff;h=55e3bd376b2214e200fa76d12b67ff259b06c212
++
++* to fix:
++  http://errors.yoctoproject.org/Errors/Details/851183/
++  ../bubblewrap-0.10.0/utils.h:46:13: error: 'bool' cannot be defined via 'typedef'
++   46 | typedef int bool;
++      |             ^~~~
++
++Upstream-Status: Backport [https://github.com/containers/bubblewrap/pull/660]
++Signed-off-by: mark.yang <mark.yang@lge.com>
++---
++ bind-mount.c |  20 ++++----
++ bubblewrap.c | 134 +++++++++++++++++++++++++--------------------------
++ utils.c      |  16 +++---
++ utils.h      |   5 +-
++ 4 files changed, 86 insertions(+), 89 deletions(-)
++
++diff --git a/bind-mount.c b/bind-mount.c
++index 2757cae..bf7f68d 100644
++--- a/bind-mount.c
+++++ b/bind-mount.c
++@@ -76,7 +76,7 @@ match_token (const char *token, const char *token_end, const char *str)
++   if (token == token_end)
++     return *str == 0;
++ 
++-  return FALSE;
+++  return false;
++ }
++ 
++ static unsigned long
++@@ -281,12 +281,12 @@ parse_mountinfo (int  proc_fd,
++         die ("Can't parse mountinfo line");
++       rest = line + consumed;
++ 
++-      rest = skip_token (rest, TRUE); /* mountroot */
+++      rest = skip_token (rest, true); /* mountroot */
++       mountpoint = rest;
++-      rest = skip_token (rest, FALSE); /* mountpoint */
+++      rest = skip_token (rest, false); /* mountpoint */
++       mountpoint_end = rest++;
++       options = rest;
++-      rest = skip_token (rest, FALSE); /* vfs options */
+++      rest = skip_token (rest, false); /* vfs options */
++       options_end = rest;
++ 
++       *mountpoint_end = 0;
++@@ -324,7 +324,7 @@ parse_mountinfo (int  proc_fd,
++       MountInfoLine *parent = by_id[this->parent_id];
++       MountInfoLine **to_sibling;
++       MountInfoLine *sibling;
++-      bool covered = FALSE;
+++      bool covered = false;
++ 
++       if (!has_path_prefix (this->mountpoint, root_mount))
++         continue;
++@@ -333,7 +333,7 @@ parse_mountinfo (int  proc_fd,
++         continue;
++ 
++       if (strcmp (parent->mountpoint, this->mountpoint) == 0)
++-        parent->covered = TRUE;
+++        parent->covered = true;
++ 
++       to_sibling = &parent->first_child;
++       sibling = parent->first_child;
++@@ -344,7 +344,7 @@ parse_mountinfo (int  proc_fd,
++            * covered by the sibling, and we drop it. */
++           if (has_path_prefix (this->mountpoint, sibling->mountpoint))
++             {
++-              covered = TRUE;
+++              covered = true;
++               break;
++             }
++ 
++@@ -499,7 +499,7 @@ bind_mount_result_to_string (bind_mount_result res,
++                              bool *want_errno_p)
++ {
++   char *string = NULL;
++-  bool want_errno = TRUE;
+++  bool want_errno = true;
++ 
++   switch (res)
++     {
++@@ -521,7 +521,7 @@ bind_mount_result_to_string (bind_mount_result res,
++ 
++       case BIND_MOUNT_ERROR_FIND_DEST_MOUNT:
++         string = xasprintf ("Unable to find \"%s\" in mount table", failing_path);
++-        want_errno = FALSE;
+++        want_errno = false;
++         break;
++ 
++       case BIND_MOUNT_ERROR_REMOUNT_DEST:
++@@ -557,7 +557,7 @@ die_with_bind_result (bind_mount_result res,
++                       ...)
++ {
++   va_list args;
++-  bool want_errno = TRUE;
+++  bool want_errno = true;
++   char *message;
++ 
++   fprintf (stderr, "bwrap: ");
++diff --git a/bubblewrap.c b/bubblewrap.c
++index bc75da4..1504449 100644
++--- a/bubblewrap.c
+++++ b/bubblewrap.c
++@@ -74,19 +74,19 @@ static bool opt_as_pid_1;
++ 
++ static const char *opt_argv0 = NULL;
++ static const char *opt_chdir_path = NULL;
++-static bool opt_assert_userns_disabled = FALSE;
++-static bool opt_disable_userns = FALSE;
++-static bool opt_unshare_user = FALSE;
++-static bool opt_unshare_user_try = FALSE;
++-static bool opt_unshare_pid = FALSE;
++-static bool opt_unshare_ipc = FALSE;
++-static bool opt_unshare_net = FALSE;
++-static bool opt_unshare_uts = FALSE;
++-static bool opt_unshare_cgroup = FALSE;
++-static bool opt_unshare_cgroup_try = FALSE;
++-static bool opt_needs_devpts = FALSE;
++-static bool opt_new_session = FALSE;
++-static bool opt_die_with_parent = FALSE;
+++static bool opt_assert_userns_disabled = false;
+++static bool opt_disable_userns = false;
+++static bool opt_unshare_user = false;
+++static bool opt_unshare_user_try = false;
+++static bool opt_unshare_pid = false;
+++static bool opt_unshare_ipc = false;
+++static bool opt_unshare_net = false;
+++static bool opt_unshare_uts = false;
+++static bool opt_unshare_cgroup = false;
+++static bool opt_unshare_cgroup_try = false;
+++static bool opt_needs_devpts = false;
+++static bool opt_new_session = false;
+++static bool opt_die_with_parent = false;
++ static uid_t opt_sandbox_uid = -1;
++ static gid_t opt_sandbox_gid = -1;
++ static int opt_sync_fd = -1;
++@@ -476,7 +476,7 @@ report_child_exit_status (int exitc, int setup_finished_fd)
++     return;
++ 
++   output = xasprintf ("{ \"exit-code\": %i }\n", exitc);
++-  dump_info (opt_json_status_fd, output, FALSE);
+++  dump_info (opt_json_status_fd, output, false);
++   close (opt_json_status_fd);
++   opt_json_status_fd = -1;
++   close (setup_finished_fd);
++@@ -621,7 +621,7 @@ do_init (int event_fd, pid_t initial_pid)
++ 
++   seccomp_programs_apply ();
++ 
++-  while (TRUE)
+++  while (true)
++     {
++       pid_t child;
++       int status;
++@@ -765,16 +765,16 @@ prctl_caps (uint32_t *caps, bool do_cap_bounding, bool do_set_ambient)
++    */
++   for (cap = 0; cap <= CAP_LAST_CAP; cap++)
++     {
++-      bool keep = FALSE;
+++      bool keep = false;
++       if (cap < 32)
++         {
++           if (CAP_TO_MASK_0 (cap) & caps[0])
++-            keep = TRUE;
+++            keep = true;
++         }
++       else
++         {
++           if (CAP_TO_MASK_1 (cap) & caps[1])
++-            keep = TRUE;
+++            keep = true;
++         }
++ 
++       if (keep && do_set_ambient)
++@@ -803,11 +803,11 @@ static void
++ drop_cap_bounding_set (bool drop_all)
++ {
++   if (!drop_all)
++-    prctl_caps (requested_caps, TRUE, FALSE);
+++    prctl_caps (requested_caps, true, false);
++   else
++     {
++       uint32_t no_caps[2] = {0, 0};
++-      prctl_caps (no_caps, TRUE, FALSE);
+++      prctl_caps (no_caps, true, false);
++     }
++ }
++ 
++@@ -816,7 +816,7 @@ set_ambient_capabilities (void)
++ {
++   if (is_privileged)
++     return;
++-  prctl_caps (requested_caps, FALSE, TRUE);
+++  prctl_caps (requested_caps, false, true);
++ }
++ 
++ /* This acquires the privileges that the bwrap will need it to work.
++@@ -846,7 +846,7 @@ acquire_privs (void)
++       if (euid != 0)
++         die ("Unexpected setuid user %d, should be 0", euid);
++ 
++-      is_privileged = TRUE;
+++      is_privileged = true;
++       /* We want to keep running as euid=0 until at the clone()
++        * operation because doing so will make the user namespace be
++        * owned by root, which makes it not ptrace:able by the user as
++@@ -867,7 +867,7 @@ acquire_privs (void)
++         die ("Unable to set fsuid (was %d)", (int)new_fsuid);
++ 
++       /* We never need capabilities after execve(), so lets drop everything from the bounding set */
++-      drop_cap_bounding_set (TRUE);
+++      drop_cap_bounding_set (true);
++ 
++       /* Keep only the required capabilities for setup */
++       set_required_caps ();
++@@ -904,7 +904,7 @@ switch_to_user_with_privs (void)
++ {
++   /* If we're in a new user namespace, we got back the bounding set, clear it again */
++   if (opt_unshare_user || opt_userns_fd != -1)
++-    drop_cap_bounding_set (FALSE);
+++    drop_cap_bounding_set (false);
++ 
++   /* If we switched to a new user namespace it may allow other uids/gids, so switch to the target one */
++   if (opt_userns_fd != -1)
++@@ -1211,7 +1211,7 @@ setup_newroot (bool unshare_pid,
++             parent_mode &= ~0005U;
++ 
++           dest = get_newroot_path (op->dest);
++-          if (mkdir_with_parents (dest, parent_mode, FALSE) != 0)
+++          if (mkdir_with_parents (dest, parent_mode, false) != 0)
++             die_with_error ("Can't mkdir parents for %s", op->dest);
++         }
++ 
++@@ -1761,7 +1761,7 @@ parse_args_recurse (int          *argcp,
++             }
++ 
++           data_argv_copy = data_argv; /* Don't change data_argv, we need to free it */
++-          parse_args_recurse (&data_argc, &data_argv_copy, TRUE, total_parsed_argc_p);
+++          parse_args_recurse (&data_argc, &data_argv_copy, true, total_parsed_argc_p);
++ 
++           argv += 1;
++           argc -= 1;
++@@ -1786,45 +1786,45 @@ parse_args_recurse (int          *argcp,
++            */
++           opt_unshare_user_try = opt_unshare_ipc = opt_unshare_pid =
++             opt_unshare_uts = opt_unshare_cgroup_try =
++-            opt_unshare_net = TRUE;
+++            opt_unshare_net = true;
++         }
++       /* Begin here the older individual --unshare variants */
++       else if (strcmp (arg, "--unshare-user") == 0)
++         {
++-          opt_unshare_user = TRUE;
+++          opt_unshare_user = true;
++         }
++       else if (strcmp (arg, "--unshare-user-try") == 0)
++         {
++-          opt_unshare_user_try = TRUE;
+++          opt_unshare_user_try = true;
++         }
++       else if (strcmp (arg, "--unshare-ipc") == 0)
++         {
++-          opt_unshare_ipc = TRUE;
+++          opt_unshare_ipc = true;
++         }
++       else if (strcmp (arg, "--unshare-pid") == 0)
++         {
++-          opt_unshare_pid = TRUE;
+++          opt_unshare_pid = true;
++         }
++       else if (strcmp (arg, "--unshare-net") == 0)
++         {
++-          opt_unshare_net = TRUE;
+++          opt_unshare_net = true;
++         }
++       else if (strcmp (arg, "--unshare-uts") == 0)
++         {
++-          opt_unshare_uts = TRUE;
+++          opt_unshare_uts = true;
++         }
++       else if (strcmp (arg, "--unshare-cgroup") == 0)
++         {
++-          opt_unshare_cgroup = TRUE;
+++          opt_unshare_cgroup = true;
++         }
++       else if (strcmp (arg, "--unshare-cgroup-try") == 0)
++         {
++-          opt_unshare_cgroup_try = TRUE;
+++          opt_unshare_cgroup_try = true;
++         }
++       /* Begin here the newer --share variants */
++       else if (strcmp (arg, "--share-net") == 0)
++         {
++-          opt_unshare_net = FALSE;
+++          opt_unshare_net = false;
++         }
++       /* End --share variants, other arguments begin */
++       else if (strcmp (arg, "--chdir") == 0)
++@@ -1841,11 +1841,11 @@ parse_args_recurse (int          *argcp,
++         }
++       else if (strcmp (arg, "--disable-userns") == 0)
++         {
++-          opt_disable_userns = TRUE;
+++          opt_disable_userns = true;
++         }
++       else if (strcmp (arg, "--assert-userns-disabled") == 0)
++         {
++-          opt_assert_userns_disabled = TRUE;
+++          opt_assert_userns_disabled = true;
++         }
++       else if (strcmp (arg, "--remount-ro") == 0)
++         {
++@@ -1975,7 +1975,7 @@ parse_args_recurse (int          *argcp,
++ 
++           op = setup_op_new (SETUP_MOUNT_DEV);
++           op->dest = argv[1];
++-          opt_needs_devpts = TRUE;
+++          opt_needs_devpts = true;
++ 
++           argv += 1;
++           argc -= 1;
++@@ -2425,15 +2425,15 @@ parse_args_recurse (int          *argcp,
++         }
++       else if (strcmp (arg, "--new-session") == 0)
++         {
++-          opt_new_session = TRUE;
+++          opt_new_session = true;
++         }
++       else if (strcmp (arg, "--die-with-parent") == 0)
++         {
++-          opt_die_with_parent = TRUE;
+++          opt_die_with_parent = true;
++         }
++       else if (strcmp (arg, "--as-pid-1") == 0)
++         {
++-          opt_as_pid_1 = TRUE;
+++          opt_as_pid_1 = true;
++         }
++       else if (strcmp (arg, "--cap-add") == 0)
++         {
++@@ -2441,7 +2441,7 @@ parse_args_recurse (int          *argcp,
++           if (argc < 2)
++             die ("--cap-add takes an argument");
++ 
++-          opt_cap_add_or_drop_used = TRUE;
+++          opt_cap_add_or_drop_used = true;
++ 
++           if (strcasecmp (argv[1], "ALL") == 0)
++             {
++@@ -2467,7 +2467,7 @@ parse_args_recurse (int          *argcp,
++           if (argc < 2)
++             die ("--cap-drop takes an argument");
++ 
++-          opt_cap_add_or_drop_used = TRUE;
+++          opt_cap_add_or_drop_used = true;
++ 
++           if (strcasecmp (argv[1], "ALL") == 0)
++             {
++@@ -2610,7 +2610,7 @@ parse_args (int          *argcp,
++ {
++   int total_parsed_argc = *argcp;
++ 
++-  parse_args_recurse (argcp, argvp, FALSE, &total_parsed_argc);
+++  parse_args_recurse (argcp, argvp, false, &total_parsed_argc);
++ }
++ 
++ static void
++@@ -2656,7 +2656,7 @@ namespace_ids_read (pid_t  pid)
++       int r;
++ 
++       /* if we don't unshare this ns, ignore it */
++-      if (do_unshare && *do_unshare == FALSE)
+++      if (do_unshare && *do_unshare == false)
++         continue;
++ 
++       r = fstatat (ns_fd, info->name, &st, 0);
++@@ -2691,7 +2691,7 @@ namespace_ids_write (int    fd,
++       output = xasprintf (",%s\"%s-namespace\": %ju",
++                           indent, info->name, nsid);
++ 
++-      dump_info (fd, output, TRUE);
+++      dump_info (fd, output, true);
++     }
++ }
++ 
++@@ -2799,18 +2799,18 @@ main (int    argc,
++   /* We have to do this if we weren't installed setuid (and we're not
++    * root), so let's just DWIM */
++   if (!is_privileged && getuid () != 0 && opt_userns_fd == -1)
++-    opt_unshare_user = TRUE;
+++    opt_unshare_user = true;
++ 
++ #ifdef ENABLE_REQUIRE_USERNS
++   /* In this build option, we require userns. */
++   if (is_privileged && getuid () != 0 && opt_userns_fd == -1)
++-    opt_unshare_user = TRUE;
+++    opt_unshare_user = true;
++ #endif
++ 
++   if (opt_unshare_user_try &&
++       stat ("/proc/self/ns/user", &sbuf) == 0)
++     {
++-      bool disabled = FALSE;
+++      bool disabled = false;
++ 
++       /* RHEL7 has a kernel module parameter that lets you enable user namespaces */
++       if (stat ("/sys/module/user_namespace/parameters/enable", &sbuf) == 0)
++@@ -2818,7 +2818,7 @@ main (int    argc,
++           cleanup_free char *enable = NULL;
++           enable = load_file_at (AT_FDCWD, "/sys/module/user_namespace/parameters/enable");
++           if (enable != NULL && enable[0] == 'N')
++-            disabled = TRUE;
+++            disabled = true;
++         }
++ 
++       /* Check for max_user_namespaces */
++@@ -2827,7 +2827,7 @@ main (int    argc,
++           cleanup_free char *max_user_ns = NULL;
++           max_user_ns = load_file_at (AT_FDCWD, "/proc/sys/user/max_user_namespaces");
++           if (max_user_ns != NULL && strcmp(max_user_ns, "0\n") == 0)
++-            disabled = TRUE;
+++            disabled = true;
++         }
++ 
++       /* Debian lets you disable *unprivileged* user namespaces. However this is not
++@@ -2835,7 +2835,7 @@ main (int    argc,
++          already, and there is not much we can do, its just a non-working setup. */
++ 
++       if (!disabled)
++-        opt_unshare_user = TRUE;
+++        opt_unshare_user = true;
++     }
++ 
++   if (argc <= 0)
++@@ -2993,7 +2993,7 @@ main (int    argc,
++            */
++           write_uid_gid_map (ns_uid, real_uid,
++                              ns_gid, real_gid,
++-                             pid, TRUE, opt_needs_devpts);
+++                             pid, true, opt_needs_devpts);
++         }
++ 
++       /* Initial launched process, wait for pid 1 or exec:ed command to exit */
++@@ -3002,7 +3002,7 @@ main (int    argc,
++         die_with_error ("Setting userns2 failed");
++ 
++       /* We don't need any privileges in the launcher, drop them immediately. */
++-      drop_privs (FALSE, FALSE);
+++      drop_privs (false, false);
++ 
++       /* Optionally bind our lifecycle to that of the parent */
++       handle_die_with_parent ();
++@@ -3010,17 +3010,17 @@ main (int    argc,
++       if (opt_info_fd != -1)
++         {
++           cleanup_free char *output = xasprintf ("{\n    \"child-pid\": %i", pid);
++-          dump_info (opt_info_fd, output, TRUE);
++-          namespace_ids_write (opt_info_fd, FALSE);
++-          dump_info (opt_info_fd, "\n}\n", TRUE);
+++          dump_info (opt_info_fd, output, true);
+++          namespace_ids_write (opt_info_fd, false);
+++          dump_info (opt_info_fd, "\n}\n", true);
++           close (opt_info_fd);
++         }
++       if (opt_json_status_fd != -1)
++         {
++           cleanup_free char *output = xasprintf ("{ \"child-pid\": %i", pid);
++-          dump_info (opt_json_status_fd, output, TRUE);
++-          namespace_ids_write (opt_json_status_fd, TRUE);
++-          dump_info (opt_json_status_fd, " }\n", TRUE);
+++          dump_info (opt_json_status_fd, output, true);
+++          namespace_ids_write (opt_json_status_fd, true);
+++          dump_info (opt_json_status_fd, " }\n", true);
++         }
++ 
++       if (opt_userns_block_fd != -1)
++@@ -3116,7 +3116,7 @@ main (int    argc,
++ 
++       write_uid_gid_map (ns_uid, real_uid,
++                          ns_gid, real_gid,
++-                         -1, TRUE, FALSE);
+++                         -1, true, false);
++     }
++ 
++   old_umask = umask (0);
++@@ -3177,7 +3177,7 @@ main (int    argc,
++       if (child == 0)
++         {
++           /* Unprivileged setup process */
++-          drop_privs (FALSE, TRUE);
+++          drop_privs (false, true);
++           close (privsep_sockets[0]);
++           setup_newroot (opt_unshare_pid, privsep_sockets[1]);
++           exit (0);
++@@ -3289,11 +3289,11 @@ main (int    argc,
++         die_with_error ("unshare user ns");
++ 
++       /* We're in a new user namespace, we got back the bounding set, clear it again */
++-      drop_cap_bounding_set (FALSE);
+++      drop_cap_bounding_set (false);
++ 
++       write_uid_gid_map (opt_sandbox_uid, ns_uid,
++                          opt_sandbox_gid, ns_gid,
++-                         -1, FALSE, FALSE);
+++                         -1, false, false);
++     }
++ 
++   if (opt_disable_userns || opt_assert_userns_disabled)
++@@ -3306,7 +3306,7 @@ main (int    argc,
++     }
++ 
++   /* All privileged ops are done now, so drop caps we don't need */
++-  drop_privs (!is_privileged, TRUE);
+++  drop_privs (!is_privileged, true);
++ 
++   if (opt_block_fd != -1)
++     {
++@@ -3370,7 +3370,7 @@ main (int    argc,
++ 
++       if (pid != 0)
++         {
++-          drop_all_caps (FALSE);
+++          drop_all_caps (false);
++ 
++           /* Close fds in pid 1, except stdio and optionally event_fd
++              (for syncing pid 2 lifetime with monitor_child) and
++diff --git a/utils.c b/utils.c
++index 43c8d79..7c562b1 100644
++--- a/utils.c
+++++ b/utils.c
++@@ -206,7 +206,7 @@ bool
++ has_path_prefix (const char *str,
++                  const char *prefix)
++ {
++-  while (TRUE)
+++  while (true)
++     {
++       /* Skip consecutive slashes to reach next path
++          element */
++@@ -217,13 +217,13 @@ has_path_prefix (const char *str,
++ 
++       /* No more prefix path elements? Done! */
++       if (*prefix == 0)
++-        return TRUE;
+++        return true;
++ 
++       /* Compare path element */
++       while (*prefix != 0 && *prefix != '/')
++         {
++           if (*str != *prefix)
++-            return FALSE;
+++            return false;
++           str++;
++           prefix++;
++         }
++@@ -231,7 +231,7 @@ has_path_prefix (const char *str,
++       /* Matched prefix path element,
++          must be entire str path element */
++       if (*str != '/' && *str != 0)
++-        return FALSE;
+++        return false;
++     }
++ }
++ 
++@@ -239,7 +239,7 @@ bool
++ path_equal (const char *path1,
++             const char *path2)
++ {
++-  while (TRUE)
+++  while (true)
++     {
++       /* Skip consecutive slashes to reach next path
++          element */
++@@ -256,14 +256,14 @@ path_equal (const char *path1,
++       while (*path1 != 0 && *path1 != '/')
++         {
++           if (*path1 != *path2)
++-            return FALSE;
+++            return false;
++           path1++;
++           path2++;
++         }
++ 
++       /* Matched path1 path element, must be entire path element */
++       if (*path2 != '/' && *path2 != 0)
++-        return FALSE;
+++        return false;
++     }
++ }
++ 
++@@ -526,7 +526,7 @@ copy_file_data (int sfd,
++   char buffer[BUFSIZE];
++   ssize_t bytes_read;
++ 
++-  while (TRUE)
+++  while (true)
++     {
++       bytes_read = read (sfd, buffer, BUFSIZE);
++       if (bytes_read == -1)
++diff --git a/utils.h b/utils.h
++index 9f17297..2c37ccb 100644
++--- a/utils.h
+++++ b/utils.h
++@@ -24,6 +24,7 @@
++ #include <errno.h>
++ #include <fcntl.h>
++ #include <stdarg.h>
+++#include <stdbool.h>
++ #include <stdio.h>
++ #include <stdlib.h>
++ #include <string.h>
++@@ -41,10 +42,6 @@
++ 
++ #define N_ELEMENTS(arr) (sizeof (arr) / sizeof ((arr)[0]))
++ 
++-#define TRUE 1
++-#define FALSE 0
++-typedef int bool;
++-
++ #define PIPE_READ_END 0
++ #define PIPE_WRITE_END 1
++ 
+diff --git a/meta-oe/recipes-security/bubblewrap/bubblewrap_0.10.0.bb b/meta-oe/recipes-security/bubblewrap/bubblewrap_0.10.0.bb
+index 60155e035b..41ab0cfc32 100644
+--- a/meta-oe/recipes-security/bubblewrap/bubblewrap_0.10.0.bb
++++ b/meta-oe/recipes-security/bubblewrap/bubblewrap_0.10.0.bb
+@@ -5,7 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
+ 
+ DEPENDS = "libcap"
+ 
+-SRC_URI = "https://github.com/containers/${BPN}/releases/download/v${PV}/${BP}.tar.xz"
++SRC_URI = " \
++    https://github.com/containers/${BPN}/releases/download/v${PV}/${BP}.tar.xz \
++    file://0001-Use-stdbool.h-for-booleans.patch \
++"
+ SRC_URI[sha256sum] = "65d92cf44a63a51e1b7771f70c05013dce5bd6b0b2841c4b4be54b0c45565471"
+ 
+ inherit autotools bash-completion github-releases manpages pkgconfig
 
