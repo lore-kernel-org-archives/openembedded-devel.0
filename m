@@ -2,160 +2,130 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B72BC369A2
-	for <webhook@archiver.kernel.org>; Tue,  8 Apr 2025 15:29:51 +0000 (UTC)
-Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
- by mx.groups.io with SMTP id smtpd.web11.78389.1744126190109725600
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B6EA5C369A2
+	for <webhook@archiver.kernel.org>; Tue,  8 Apr 2025 16:15:33 +0000 (UTC)
+Received: from mail-oo1-f41.google.com (mail-oo1-f41.google.com [209.85.161.41])
+ by mx.groups.io with SMTP id smtpd.web10.97.1744128929121489291
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Apr 2025 08:29:50 -0700
+ Tue, 08 Apr 2025 09:15:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=EAe2v3FV;
- spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f48.google.com with SMTP id 46e09a7af769-72c40235c34so1347350a34.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 08:29:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=aC1xeim6;
+ spf=pass (domain: gmail.com, ip: 209.85.161.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f41.google.com with SMTP id 006d021491bc7-603f54a6c8aso2936458eaf.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 09:15:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744126189; x=1744730989; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1744128928; x=1744733728; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=STk8wZI5MB96MAeC59LlNo+TNiEw1Wf1Mh0toaF24/c=;
-        b=EAe2v3FVOrwbwAHHbI2/ZPUj7MSFf9mOqm3aC6lo3TVAq94AlEvijGLKasHAl/ATAp
-         oE14Q4qdwoQypORufJeQ413pt2HJ1wBU5eGvTysRJqYnMz25Ct5iN3hAgIGJnn9YplSx
-         cy+FbWUWqjA1K5NZagnSrRYXPnB6w6n0H219KG7B6NktrQ1W9g9dD0UgqsHFe8eju3xK
-         sgbfE2GwG4V2LDFuCEb/hC+IjKI7UKDEkkfSyM+HdWya6tjV7COnFeXeeTFluq7ilDhK
-         ukWhKlWxf4IIx0BvXVDIR9Ayk9/ltUARQRBBscdSmahFTJChe6roZ+hJf7fTBsQnDkhy
-         TFQg==
+        bh=6dZwDCUx9Un1bCofAMYKqoNS4VUcBGWnFPxsyAp7K8Y=;
+        b=aC1xeim6itizjz5McsvBVRAHKRE8MOd/GAlcfsHEKVd8erqiaqLR/fwKO03tSAmlZn
+         GvYFnmBRztRAm7PQ4bkwdQ6cJejaH2hDSz9GkRw9zruHEvcrHp6nA8Cxm8ufkvtEiqzH
+         3CFe0mAGBavcMXl+W8jjCPVWRD2Wwl8p1IgyEgjARAkw5F3Nwp8lakRBHMckM7gV7jut
+         qwjeIpKeYmeNt+ZSYdk8GF3hPS3L8VFfxDIkLGfb6PN7csPY/En+Iyv30UK4dn/hjksn
+         mQko2aDy3vGLJrZDzJEQVLmLvTRvpQuZGstTWpD3PrUd1UGgJES/sLHuB88nQSiELodt
+         IK0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744126189; x=1744730989;
+        d=1e100.net; s=20230601; t=1744128928; x=1744733728;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=STk8wZI5MB96MAeC59LlNo+TNiEw1Wf1Mh0toaF24/c=;
-        b=EjhczxzZbTQRUddelaKLkz1SnhmtRgffLFyV4AP7hyiBDAdNlWprRJ5dAO0KF+L8eY
-         POdSyygfNtgJ/O1AaBvWEwOJJYMLTdbmNx7PbnVS2FJue3s3XZFIStbnBcaTCiZslbpI
-         LQ5txGwu042Hw17R3SPsgf1vG52j5ghfpteybYP+/830BcjAwgnckoU6fhv8rYke30FG
-         s3ws8U8tuAPr9zM6pLlVLzjeIMWJCUjRk+26vGTh8xtXXxa+rI6wNPj/4mOMeRZvbX57
-         DqcSJRKEPP4BNxwgpyedWy+Oum7kjPXrCdlCKp2iLJ9xMPaJV/ITGimrTFYzZmSFuDq6
-         FozQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVI7RTcIbzArQVdAMXwq8ULjzrrKt1Skb8aaocvZiT0g1cuunkt5Smqv5US37lkV+CpowPA1RN+4xkfn/hZDYuq6Fw=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yz6i07ST1FXKgn3o9flokQTqXPEyginB034KYXvB/RD0XQVSgCt
-	OK7XX8zU0HgyyROo/vCdeE/l4M7Nm2kmRdTfJ/qRfn0bH1NMyUSA/xMcYjAY2/CkHIA7Ok9bQnj
-	4hSKm3hTaLrnO5nv5U5h86FvSfHc=
-X-Gm-Gg: ASbGnctby4gJ+DTtBZ6ZoYjf/3k1eZ42r8unV524A8D6Qgm5W+Dks5kwCyFu50lEdXd
-	8n+3U0mOAfQiYndU6bS8yhPijvfzXTQpk4K9RXXT6ra1KHfKR6Gbyq+LgRPD0bhbSPhZWYNg721
-	jECe4ArceiaRMaVpy5yngI14GS
-X-Google-Smtp-Source: AGHT+IGJXyp5jxeF0m88PvMlJIqmO3Ji2V7anld2lgizzU5JceC/mL0T+P0hRcw2+b+nY7h+m/VcCSLR9NfJhUmZFDE=
-X-Received: by 2002:a05:6808:320a:b0:3fe:aeaf:2d3 with SMTP id
- 5614622812f47-4004563f8e2mr10510205b6e.39.1744126189284; Tue, 08 Apr 2025
- 08:29:49 -0700 (PDT)
+        bh=6dZwDCUx9Un1bCofAMYKqoNS4VUcBGWnFPxsyAp7K8Y=;
+        b=Xv2+wwFNukDEM8ZsrnHFukjIxnm/98brV8m/HXE6+7ffEB8bay3je8rgu+M+qHByuV
+         DoBu0Of+39vHX9K3NEIlayyBQLko/qFW5L91xOCgH4SEUDNdlahQLlRxfoW058zX9oUb
+         /KM+TOobsL3/EAA5vhXNkLnsgiuBEG2perPw1QmpHHnsJioY+iWuCw5zqXFFSaRi9obu
+         TVIiN0nRFKy8wI4eQ6R90be/TskyxFA3lhTvjobgn41kb8VataJmqcgR44CR2d4Sv2tu
+         4WhMimMqjR5OmDn+8jNgMRkIRGuqEiH3LxNPUUXcgEFs+5gjRiPT5wYOGqHsvzJgXWtN
+         ggZg==
+X-Gm-Message-State: AOJu0YydmMEPo3FWutHJlDSCFRRJXxnnRaVS2Ag+qtHd+uvnwa/FGU2t
+	7j41wvkPefcSS/fmKWgJ/TxMTHWB41OY2Eg7HXvwr/LBKd4k0zMx7/GNt1sdX6FWCV577jOaBt/
+	WGAiLatFVkJPoMOHArLl38012BP4=
+X-Gm-Gg: ASbGncvEU3JU/XSwjXQnZKO1bqB6rT6rmiK1KM7DwWYOD981Pngy1btwr6cszFo7WP7
+	oFA+QQmMH3skObv9pnHpQvbrheXFVR2NZYqyLcIxfjFrN0TmyEO4qBWk9lpWXnwVsqIhx45oOcT
+	/M6lKTCp8RAe2If+XzHSFoVDV+elTYukvxzhQ=
+X-Google-Smtp-Source: AGHT+IHJAoyLbAjeHWTjGTT0sOTDAUUO+cy9OGL96i3ZplJOLy4GPsbPULKU36+G8iRpiqdsWCaNtcFECEBxYOHIwC4=
+X-Received: by 2002:a4a:e90e:0:b0:603:f526:ce1 with SMTP id
+ 006d021491bc7-604166bc7dcmr8729291eaf.8.1744128928110; Tue, 08 Apr 2025
+ 09:15:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <TYWPR01MB118613486A025B1F8AE633026DCAF2@TYWPR01MB11861.jpnprd01.prod.outlook.com>
- <400fa42d-4c27-4ef0-86f4-62046b0cd021@gmail.com> <TYWPR01MB1186183EAB588828FDA06A60BDCB52@TYWPR01MB11861.jpnprd01.prod.outlook.com>
-In-Reply-To: <TYWPR01MB1186183EAB588828FDA06A60BDCB52@TYWPR01MB11861.jpnprd01.prod.outlook.com>
+References: <1744017431-22217-1-git-send-email-wangmy@fujitsu.com> <1744017431-22217-17-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1744017431-22217-17-git-send-email-wangmy@fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 8 Apr 2025 08:29:22 -0700
-X-Gm-Features: ATxdqUGGUxJoSQz7ceLNvFhKwJTJx3VkNfCYW2WZW99DO3T0HESTB_tDOCe-MII
-Message-ID: <CAMKF1sof5d3wTtfaqmxF70MKGRXzAF1G4vS5L1mjCEsfQMFvDQ@mail.gmail.com>
-Subject: Re: [oe] [linux-yocto] error of tiptop
+Date: Tue, 8 Apr 2025 09:15:00 -0700
+X-Gm-Features: ATxdqUG5HvYtWL9M9vugZoKRT0aL1Ws4gg34hBYl2OoQXsGZZcD6erWM1-uG1UU
+Message-ID: <CAMKF1sqLef9z8tRJPoV=zYZRGyY3RqzP2d3OuqeDu7qnqYaMNg@mail.gmail.com>
+Subject: Re: [oe] [meta-python] [PATCH 17/30] python3-multidict: upgrade 6.2.0
+ -> 6.3.2
 To: wangmy@fujitsu.com
-Cc: Gyorgy Sarvari <skandigraun@gmail.com>, 
-	"linux-yocto@lists.yoctoproject.org" <linux-yocto@lists.yoctoproject.org>, 
-	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 15:29:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116710
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 16:15:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116711
 
-On Tue, Apr 8, 2025 at 12:28=E2=80=AFAM wangmy via lists.openembedded.org
+This failed ptests
+
+   Failed ptests:
+=E2=94=82   {'python3-multidict':
+['tests/test_leaks.py:test_leak[multidict_extend_dict.py]',
+=E2=94=82
+'tests/test_leaks.py:test_leak[multidict_extend_multidict.py]',
+=E2=94=82
+'tests/test_leaks.py:test_leak[multidict_extend_tuple.py]',
+=E2=94=82
+'tests/test_leaks.py:test_leak[multidict_update_multidict.py]']}
+=E2=94=82
+
+I would encourage to run ptests for recipes when doing upgrades etc. e.g.
+for python3-multidict one would do
+bitbake meta-python-image-ptest-python3-multidict
+
+using qemux86-64 target machine.
+
+On Mon, Apr 7, 2025 at 2:17=E2=80=AFAM wangmy via lists.openembedded.org
 <wangmy=3Dfujitsu.com@lists.openembedded.org> wrote:
 >
-> I tried " runqemu qemux86-64 qemuparams=3D" --enable-kvm " nographic", bu=
-t there still report an error:
+> From: Wang Mingyu <wangmy@fujitsu.com>
 >
-
-runqemu kvm nographic qemux86-64
-
-> root@qemux86-64:~# tiptop
-> syscall: Operation not permitted
-> Could not perform syscall.
-> Don't know why...
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  .../{python3-multidict_6.2.0.bb =3D> python3-multidict_6.3.2.bb}  | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-python/recipes-devtools/python/{python3-multidict_6.2.0.bb =
+=3D> python3-multidict_6.3.2.bb} (91%)
 >
-> My repo of meta-openembedded] has been updated to 82056b992459607ea69b013=
-0308685c4872cb19b7
-> Repo of poky has been updated to 9e418c4265453860c4736abb7520f1c3c2c3faee
->   --
-> Best Regards
-> ---------------------------------------------------
-> Wang Mingyu
-> FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
-> No.6 Wenzhu Road, Nanjing, 210012, China
-> TEL=EF=BC=9A+86+25-86630566--8568
-> COINS: 79988548
-> FAX: +86+25-83317685
-> MAIL: wangmy@fujitsu.com
+> diff --git a/meta-python/recipes-devtools/python/python3-multidict_6.2.0.=
+bb b/meta-python/recipes-devtools/python/python3-multidict_6.3.2.bb
+> similarity index 91%
+> rename from meta-python/recipes-devtools/python/python3-multidict_6.2.0.b=
+b
+> rename to meta-python/recipes-devtools/python/python3-multidict_6.3.2.bb
+> index 8b30574020..4e4d69bbd4 100644
+> --- a/meta-python/recipes-devtools/python/python3-multidict_6.2.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-multidict_6.3.2.bb
+> @@ -8,7 +8,7 @@ inherit pypi python_setuptools_build_meta ptest-python-py=
+test
 >
-> > -----Original Message-----
-> > From: Gyorgy Sarvari <skandigraun@gmail.com>
-> > Sent: Thursday, April 3, 2025 3:35 PM
-> > To: Wang, Mingyu/=E7=8E=8B =E9=B8=A3=E7=91=9C <wangmy@fujitsu.com>;
-> > linux-yocto@lists.yoctoproject.org
-> > Cc: openembedded-devel@lists.openembedded.org
-> > Subject: Re: [oe] [linux-yocto] error of tiptop
-> >
-> > On what machine are you trying to run it? At least in qemu I get the sa=
-me,
-> > unless I enable kvm directly:
-> >
-> > runqemu qemux86-64 qemuparams=3D" --enable-kvm "
-> >
-> > This way I don't get that error.
-> >
-> > On 4/2/25 10:52, wangmy via lists.openembedded.org wrote:
-> > > Hi,
-> > >
-> > > When running tiptop on the image of x86-64 for the latest repository =
-of poky
-> > and meta-oe, an error occurred.
-> > >
-> > > root # tiptop -h
-> > > syscall: Operation not permitted
-> > > Could not perform syscall.
-> > > Don't know why...
-> > >
-> > > According to preliminary investigation, the cause of this issue is re=
-lated to
-> > kenerl updating of perf related code.
-> > > This problem has been occurring since the commit
-> > > f390c2eea571945f357a2d3b9fcb1c015767132e of branch v6.6/standard/base
-> > >
-> > > May I ask if you have any opinions or suggestions regarding this issu=
-e?
-> > >
-> > >   --
-> > > Best Regards
-> > > ---------------------------------------------------
-> > > Wang Mingyu
-> > > FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
-> > > No.6 Wenzhu Road, Nanjing, 210012, China
-> > > TEL=EF=BC=9A+86+25-86630566--8568
-> > > COINS: 79988548
-> > > FAX: +86+25-83317685
-> > > MAIL: wangmy@fujitsu.com
-> > >
-> > >
-> > >
-> > >
-> > >
+>  PV .=3D "+git"
+>
+> -SRCREV =3D "af07d5b2b18bb30e041983db2bea1fcb3e1c4b79"
+> +SRCREV =3D "0d667589cd02c8ce8251226f8f64fd86afd7ffa3"
+>  PYPI_SRC_URI =3D "git://github.com/aio-libs/multidict;branch=3Dmaster;pr=
+otocol=3Dhttps"
+>  S =3D "${WORKDIR}/git"
+>
+> --
+> 2.43.0
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#116693): https://lists.openembedded.org/g/openembedde=
-d-devel/message/116693
-> Mute This Topic: https://lists.openembedded.org/mt/112043323/1997914
+> View/Reply Online (#116642): https://lists.openembedded.org/g/openembedde=
+d-devel/message/116642
+> Mute This Topic: https://lists.openembedded.org/mt/112129274/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
