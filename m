@@ -1,120 +1,140 @@
-Return-Path: <mark.yang@lge.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D3C2AC36010
-	for <webhook@archiver.kernel.org>; Tue,  8 Apr 2025 11:52:19 +0000 (UTC)
-Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.51])
- by mx.groups.io with SMTP id smtpd.web11.72795.1744113134919921063
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D46F6C369A4
+	for <webhook@archiver.kernel.org>; Tue,  8 Apr 2025 15:16:20 +0000 (UTC)
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
+ by mx.groups.io with SMTP id smtpd.web10.78484.1744125376346345509
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Apr 2025 04:52:15 -0700
+ Tue, 08 Apr 2025 08:16:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.51, mailfrom: mark.yang@lge.com)
-Received: from unknown (HELO lgemrelse6q.lge.com) (156.147.1.121)
-	by 156.147.23.51 with ESMTP; 8 Apr 2025 20:52:12 +0900
-X-Original-SENDERIP: 156.147.1.121
-X-Original-MAILFROM: mark.yang@lge.com
-Received: from unknown (HELO markyang..) (10.177.120.37)
-	by 156.147.1.121 with ESMTP; 8 Apr 2025 20:52:12 +0900
-X-Original-SENDERIP: 10.177.120.37
-X-Original-MAILFROM: mark.yang@lge.com
-From: mark.yang@lge.com
-To: openembedded-devel@lists.openembedded.org
-Cc: "mark.yang" <mark.yang@lge.com>
-Subject: [meta-oe][PATCH v3] freeipmi: fix error with gcc-15
-Date: Tue,  8 Apr 2025 20:52:11 +0900
-Message-Id: <20250408115211.2374580-1-mark.yang@lge.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jyuiYdwz;
+ spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f175.google.com with SMTP id 5614622812f47-3fa6c54cc1aso3719138b6e.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 08:16:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1744125375; x=1744730175; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=8OASSIQJ/UoRC1UP6nFOZe4cPeO64ctCckml5ZuC2Eg=;
+        b=jyuiYdwzIe2c1rg11BpSlQaJRYK/mV4x3SVV1DtvUvEEV0Bt2u2bt0WC7fJqhj5UOH
+         u4crZLYO0vT2K7DDFiO3P1kQdJMNE0kdAA0d6qDtkAqMnF/lX//aCjx2PKglfVOVFd8A
+         xpcS+rLmybd0y78Ehp9L56goreZowr3soMuwUZhMFjJ7jQ2fkRlX6E6U7NQHNA8Ke/fB
+         ZZpsCjq+Fv7s3T6CU9ig01lGhA07YBBcPURhc9o6n5roV/CtTYhzUPCMYbc1hmP5eRr7
+         EqAWodQIz+IEsqHUeO15oYyMzyLlQU0Kf+Y7zotwRPoIWSn7j+5V4DgFq/01kkLYWQgY
+         vUnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1744125375; x=1744730175;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=8OASSIQJ/UoRC1UP6nFOZe4cPeO64ctCckml5ZuC2Eg=;
+        b=qicp2iGD6zgpkv8lkhA+0hOOxqTK0dHZGVlrQDyxoyr6LATPFHEbA3EGApFZrXK8xK
+         FIyhldmaCt9mpZDC/hgR5AkTRIVEvhFRXERLAla1PjtBgNpq+1ZG0wFlzhABPzXNGQqo
+         FSmYUYNhC84ZvWInpaD737F3nx1d7ru6/RyQv9aGZT6vnt6hDe1Q87FKIK1FqITB5KZh
+         aDfQHpjkWtPqjpwaM3m6esE9FoBSJN0++J6pnYNLUvMU3FpsP2kGZkyKJ9DXgxvNajTi
+         YVyWR534R1RJlEk0RzerT14v1Feez2HHogIhOCXs9L26/lrAiNn6yncbyDzsQAFh1CNm
+         t4fA==
+X-Gm-Message-State: AOJu0YyXUnmmt07yKp7B6hIM0olkYsADPVzX/232Cc9KvB7ya/NXBGxM
+	JLDlFBqniXFZEaXoKsSGo5ftYBooLWATDu9Iqi4ZRrRkunC4VwsZyXyOJZyeqKP8bop/rceyKf8
+	7VzS9ZKv1TBfhyrTteKQBpHT5M3Q=
+X-Gm-Gg: ASbGncuuvEiY21d/Vm9gfctdk6f64jwZqAya+l8SXlt0s0/7QUn3AmUhkBNdUr3EIJM
+	hdqnKyYSB2xnVAFqFtOSG2/OVPRCzdIqtUWMJ4e8d/csY3D2hnzONtdHgaZbJi7uohCWWFZsQrH
+	fg1k6Qgdb5xzk9XNmSxIJ+bxED
+X-Google-Smtp-Source: AGHT+IH4oXt/HkB134V+pTHsKhdXiY8hH6461K0C/ueoph+qilFvSolhBqNFfvcl6IiKNffz9GIjSoHBadCDCRFxxXQ=
+X-Received: by 2002:a05:6808:bd0:b0:3fb:85cc:9f27 with SMTP id
+ 5614622812f47-4004d7bb26fmr7445390b6e.0.1744125375573; Tue, 08 Apr 2025
+ 08:16:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250408054724.173577-1-alistair.francis@wdc.com>
+In-Reply-To: <20250408054724.173577-1-alistair.francis@wdc.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 8 Apr 2025 08:15:49 -0700
+X-Gm-Features: ATxdqUG95kt4IDwLrTMZCkYJaoff4wVnIJhu6X_sjZbxSWxSP5sTf6yt8BWoraE
+Message-ID: <CAMKF1soB2x0JgA+W7wJQRS-VnWgcYJ=SEgBX5QFwy2dk0snSpg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v2] ktls-utils: Initial commit
+To: alistair23@gmail.com
+Cc: openembedded-devel@lists.openembedded.org, 
+	Alistair Francis <alistair.francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 11:52:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116708
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 15:16:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116709
 
-From: "mark.yang" <mark.yang@lge.com>
+fails to build on musl
 
-* Import submitted patch from:
-  https://lists.gnu.org/archive/html/freeipmi-devel/2025-02/msg00000.html
+   | config.c:145:25: error: use of undeclared identifier 'ALLPERMS'
+   |   145 |         if ((statbuf.st_mode & ALLPERMS) !=3D mode)
+   |       |                                ^
+   | 1 error generated.
+   | make[3]: *** [Makefile:481: tlshd-config.o] Error 1
 
-  to fix:
-  http://errors.yoctoproject.org/Errors/Details/851185/
-  Error occurs with gcc version 15.
-  In gcc-15, C23 is the default and 'bool' is used as a reserved keyword.
-  https://gcc.gnu.org/git/?p=gcc.git;a=commitdiff;h=55e3bd376b2214e200fa76d12b67ff259b06c212
-
-Signed-off-by: mark.yang <mark.yang@lge.com>
----
-v3: Change backport to submitted patch
-
- ...0001-Fix-for-GCC15-C23-build-failure.patch | 42 +++++++++++++++++++
- .../freeipmi/freeipmi_1.6.15.bb               |  5 ++-
- 2 files changed, 46 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/freeipmi/freeipmi/0001-Fix-for-GCC15-C23-build-failure.patch
-
-diff --git a/meta-oe/recipes-support/freeipmi/freeipmi/0001-Fix-for-GCC15-C23-build-failure.patch b/meta-oe/recipes-support/freeipmi/freeipmi/0001-Fix-for-GCC15-C23-build-failure.patch
-new file mode 100644
-index 0000000000..ee27fe7906
---- /dev/null
-+++ b/meta-oe/recipes-support/freeipmi/freeipmi/0001-Fix-for-GCC15-C23-build-failure.patch
-@@ -0,0 +1,42 @@
-+From 5afe6492735938e0053ae78817399fa433f0f8c7 Mon Sep 17 00:00:00 2001
-+From: "Pavel Cahyna" <pcahyna@redhat.com>
-+Date: Tue, 8 Apr 2025 19:05:53 +0900
-+Subject: [PATCH] Fix for GCC15 / C23 build failure
-+
-+* Import submitted patch from:
-+  https://lists.gnu.org/archive/html/freeipmi-devel/2025-02/msg00000.html
-+
-+  to fix:
-+  http://errors.yoctoproject.org/Errors/Details/851185/
-+  Error occurs with gcc version 15.
-+  In gcc-15, C23 is the default and 'bool' is used as a reserved keyword.
-+  https://gcc.gnu.org/git/?p=gcc.git;a=commitdiff;h=55e3bd376b2214e200fa76d12b67ff259b06c212
-+
-+Upstream-Status: Submitted [https://lists.gnu.org/archive/html/freeipmi-devel/2025-02/msg00000.html]
-+Signed-off-by: mark.yang <mark.yang@lge.com>
-+---
-+ common/toolcommon/tool-config-file-common.c | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/common/toolcommon/tool-config-file-common.c b/common/toolcommon/tool-config-file-common.c
-+index 609e7a3..20dfad5 100644
-+--- a/common/toolcommon/tool-config-file-common.c
-++++ b/common/toolcommon/tool-config-file-common.c
-+@@ -78,14 +78,14 @@ _config_file_bool (conffile_t cf,
-+                    void *app_ptr,
-+                    int app_data)
-+ {
-+-  int *bool;
-++  int *value;
-+ 
-+   assert (data);
-+   assert (optionname);
-+   assert (option_ptr);
-+ 
-+-  bool = (int *)option_ptr;
-+-  *bool = data->boolval;
-++  value = (int *)option_ptr;
-++  *value = data->boolval;
-+   return (0);
-+ }
-+ 
-diff --git a/meta-oe/recipes-support/freeipmi/freeipmi_1.6.15.bb b/meta-oe/recipes-support/freeipmi/freeipmi_1.6.15.bb
-index e977bbcd9e..e04ebfb0c6 100644
---- a/meta-oe/recipes-support/freeipmi/freeipmi_1.6.15.bb
-+++ b/meta-oe/recipes-support/freeipmi/freeipmi_1.6.15.bb
-@@ -13,7 +13,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
-                     file://COPYING.pstdout;md5=d32239bcb673463ab874e80d47fae504 \
-                     file://COPYING.sunbmc;md5=c03f21cd76ff5caba6b890d1213cbfbb"
- 
--SRC_URI = "${GNU_MIRROR}/freeipmi/freeipmi-${PV}.tar.gz"
-+SRC_URI = " \
-+    ${GNU_MIRROR}/freeipmi/freeipmi-${PV}.tar.gz \
-+    file://0001-Fix-for-GCC15-C23-build-failure.patch \
-+"
- SRC_URI[sha256sum] = "d6929c354639f5ce75b5b1897e8b366eb63625c23e5c4590a7aea034fe2b8caf"
- 
- DEPENDS = "libgcrypt"
+On Mon, Apr 7, 2025 at 10:47=E2=80=AFPM Alistair Francis via
+lists.openembedded.org <alistair23=3Dgmail.com@lists.openembedded.org>
+wrote:
+>
+> Package ktls-utils which includes tlsd.
+>
+> This is used when in-kernel TLS consumers need a mechanism to perform TLS
+> handshakes on a connected socket to negotiate TLS session parameters that
+> can then be programmed into the kernel's TLS record protocol engine.
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  .../ktls-utils/ktls-utils_0.11.bb             | 21 +++++++++++++++++++
+>  1 file changed, 21 insertions(+)
+>  create mode 100644 meta-oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb
+>
+> diff --git a/meta-oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb b/meta-=
+oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb
+> new file mode 100644
+> index 0000000000..b4905db640
+> --- /dev/null
+> +++ b/meta-oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb
+> @@ -0,0 +1,21 @@
+> +SUMMARY =3D "TLS handshake utilities for in-kernel TLS consumers"
+> +DESCRIPTION =3D "In-kernel TLS consumers need a mechanism to perform TLS=
+ \
+> +handshakes on a connected socket to negotiate TLS session parameters tha=
+t \
+> +can then be programmed into the kernel's TLS record protocol engine."
+> +DEPENDS =3D "gnutls keyutils glib-2.0 libnl"
+> +RDEPENDS:${PN} +=3D " gnutls"
+> +LICENSE =3D "GPL-2.0-only"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd568123389d9a12625cca2b089b17=
+28b"
+> +
+> +SRCREV =3D "5c3314b5728b272cbaf0d98f4d521cca9610b6bf"
+> +SRC_URI =3D "git://github.com/oracle/ktls-utils.git;nobranch=3D1;protoco=
+l=3Dhttps"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +inherit autotools-brokensep pkgconfig systemd
+> +
+> +PACKAGECONFIG ??=3D "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', =
+'systemd', '', d)}"
+> +
+> +PACKAGECONFIG[systemd] =3D "--with-systemd,,systemd"
+> +
+> +SYSTEMD_SERVICE:${PN} =3D "tlshd.service"
+> --
+> 2.49.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#116690): https://lists.openembedded.org/g/openembedde=
+d-devel/message/116690
+> Mute This Topic: https://lists.openembedded.org/mt/112148345/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
