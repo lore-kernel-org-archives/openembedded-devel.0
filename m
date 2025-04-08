@@ -2,170 +2,114 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 398F5C36010
-	for <webhook@archiver.kernel.org>; Mon,  7 Apr 2025 21:24:44 +0000 (UTC)
-Received: from mail-ot1-f54.google.com (mail-ot1-f54.google.com [209.85.210.54])
- by mx.groups.io with SMTP id smtpd.web11.59448.1744061082811167992
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 183A2C3DA4A
+	for <webhook@archiver.kernel.org>; Tue,  8 Apr 2025 02:52:17 +0000 (UTC)
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.web11.65705.1744080730545962444
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Apr 2025 14:24:42 -0700
+ Mon, 07 Apr 2025 19:52:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Tn/7Gesv;
- spf=pass (domain: gmail.com, ip: 209.85.210.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f54.google.com with SMTP id 46e09a7af769-72c7336ed99so1476920a34.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Apr 2025 14:24:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FmG580A7;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2264aefc45dso63715465ad.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Apr 2025 19:52:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744061082; x=1744665882; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1744080730; x=1744685530; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=McWLQ6Iqat2ejdwnrGoaf5jO2UmD1JUjtjEQC2GmOj0=;
-        b=Tn/7GesvvzDdnqbsBuW7pNa9BYettb/D5kaxN8YIFAyXpOYDeJLLKzD++obphqcTt+
-         40D1U9dcB4HXDc5p66b0XJVswFvaAaa873/YX+6evWQ99+Xm5S9Ltw4339weqDtwUTNG
-         5Xt/23vVqxRrUf7j6HwlBbo8B10V4p4XeE1HHsRmyxsoNMzQoJc/BXcEktYcNa78Cl2F
-         PPw4/G2HImPUqHVWvn4ucg4RsLWcDXlFUgDQIwfJmXFgUO/s62nvZWoctzmDhDtwVxfU
-         sA+dbcD54bB2SIDVDrvpxKYZK9FByk21xwjEXysxaYCe6IDaSray2+Y1lTDM2RTUZ6Nx
-         kscQ==
+        bh=2hirYTAxwCPJQVbcqY3z8VYiXeHES59ot7pVBmRe0Hc=;
+        b=FmG580A7/ipxqBlzp+rx5w/H5vyOhPmPDOMb7H4whsvii3pr37VHjmuBWKOpUooiM+
+         ybDCObNKmjgMGgkCJuFj3mpfw5rFVXYMLmC5liF05PJHeia1QRmCXqb+09/ap8bf8+lT
+         5inOQCnbzRdJqpbgQ2MHY6VCD+CuSrb7tkG7SanfIUzSwOPOCmZoUnW01erTpMq37tKg
+         0aaPW6n4ez7S8UtrLRe3nfMOJt+Qkg8Hiky28Om6uOUzYvDCwNGzUrOSZrKMyiClqtjp
+         +5zuDIU2S37bWGB2y1iP14mc/dsbpVACupybfsV5ecRYZ+nRHURx14qSMXqUvbJtf3hy
+         RWWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744061082; x=1744665882;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1744080730; x=1744685530;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=McWLQ6Iqat2ejdwnrGoaf5jO2UmD1JUjtjEQC2GmOj0=;
-        b=UcIQwor9sG766XGp6cawdRFJ+rzINVsj2+QDH9AfeXgpy0YFs8GuALU44GzgJUeZuI
-         viO4OuB+cqnVJLmQP6YThCXu4yVhh1Ntn7VsXInyIQICMAbVt/Do/qfoJTT5g6PCyGQQ
-         XX/jGXUJIuJmCAy++Wh75kNRR83L090XZmOnWPMcTqy9CcVr+A3M04ihSkvcl5si1XgN
-         koYAKJ+bDYIqypemEvbSOdBsNjjPIBP/729ZuT2MVj+mWX2rz2FqEJDtgqqtyaCQg7qk
-         Fugt7fKivVsb0YVnu8dEKyDLuSyVHZik0C/VzfR1bzUdrjMWjhDh2NeU2ofmwz8xZKKa
-         z1eQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWPsMKI3Hry4SCY0Rto6ZGG0DOnuEWW7ZNA7K95OADvCBiOZOqBMJ77ev+Frc86bFYyl1M7dmwrp7KIieN795RLEAI=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yz7Ch2InA7pr/ULIH6CPkzBpt7D0OiYZVq8Mca2yxsx2frBPnVn
-	bMa1ibkzMM5IJ/V8TIybtefTK5Khm0KF/ZuNXyqdTdnVMyxEneX2XkvwqOg6NunMwU9YfaCmPVq
-	AQNC/Y4kAnA+GRSpGCay1jnOZjuM=
-X-Gm-Gg: ASbGnct0iIOEbXwqZ6XqgDHFWFIYFhTLPmEE4D1eDC5QRC3lH8vNCmjvQjTUUpgTSr8
-	NzeEN/sq6dEkcu0j9HMEFlIYz6SoRJFQVq7OuxEoC+Mwnh04PYyL4zVUtR4Z/86jFm26aVfQaqD
-	o1utZGsyi5WBMKCyuQ/HgYpGInr0zDRMdGPCIH4TffqSJVZGHEhCSTObZ6
-X-Google-Smtp-Source: AGHT+IFp1N3laUxY/lfBFOkBO3XbUjMi4ACTdLfbC99FvP/Kh6Buey1nOqnW0pE7mi4K+Uh2zlb9pCf8hb6hC+PdRKE=
-X-Received: by 2002:a05:6830:280e:b0:72b:8974:e3e6 with SMTP id
- 46e09a7af769-72e369764c6mr9840087a34.28.1744061081965; Mon, 07 Apr 2025
- 14:24:41 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250407121547.2516285-1-changqing.li@windriver.com>
- <20250407121547.2516285-3-changqing.li@windriver.com> <d8e529cd-7e25-4f93-bdbb-466877ba08ca@windriver.com>
- <CAMKF1soCb36sJntEEm35wEUq2KYQn729A21+UA_qdBmsfQvnKA@mail.gmail.com>
-In-Reply-To: <CAMKF1soCb36sJntEEm35wEUq2KYQn729A21+UA_qdBmsfQvnKA@mail.gmail.com>
+        bh=2hirYTAxwCPJQVbcqY3z8VYiXeHES59ot7pVBmRe0Hc=;
+        b=Uk9HWAMiHOt83sElYBvFRZQcEONBVzK++mc32pQAqQ7GOohauhiFkZqD9+2oDPGkDM
+         wWwrXUsQ4/jm+vdsg8PcI4K+Zj6PrjbbS/KIpl6GsBgD5zNjLu6L5tFm3J6XEyEpNvOp
+         2cKTI4s8Kp8A8n6Al57uaXy/wp0WU9dAMI9vrQ2CXD++KzaUIYJBo1sgYkKsZYVE+n8k
+         pVqv8+Yk1yswx4Ktc/4s5TbkDRFQSzlXQWsLqQwz7kBJQ0MVJhEA+TZ2porTn5PlrKMg
+         QxXCnavj4OlBKIfmD9JaxsT+GN/xcBpi6IXW/XjgRr1p25fafFZlECB2yonInMrn00CP
+         2hHw==
+X-Gm-Message-State: AOJu0Yzn9mLasZ01nYUuXmTUSeU2XiyHt8JwuX4YhysZEiGhUIRvtS1x
+	O+bxN8dZ0IEF7qJh/f4mj84OZU/YNxxXcWCs3H9qrg84E2kDSl6Hqjmo0N/q
+X-Gm-Gg: ASbGncvMeeI5ymCSM7hBZR0ZD7xlpT8PH+W7zh6X/EvbyC/2wNykc5kEuxXVMr/CBnU
+	ABixIWA1jq9vxKB4WT/9T5uIHLbXl8Nkhv7ioCyC2NMgUiIlsZGhrkceKZoyWSTRtVDsftkU2oS
+	9/ajva0aidRRnG9uHl1StMwpzzHGpKIHZsCsDG27DbihM18ZKjWaJ5CqsWB4ykAfuZeF8wUkbVt
+	dhvtqOxDDajPBlp+Mx6JJuHnL1w2Jg+3lGdUk5FPNx+t75j9pHgnnRPGxvT+JjcGWupmzsJZdDf
+	pWbBi2cfikJjYyDIJ2/D8Jx8c8Rkr/55vCVk
+X-Google-Smtp-Source: AGHT+IFsHrWWluB9QC7xkYNQwTEquyQqYwRJO5zLOUMsOTL68GinHMeaWQzpvbusCeATm0r6GJ3L/w==
+X-Received: by 2002:a17:902:e78f:b0:224:26f5:9c1e with SMTP id d9443c01a7336-22a8a84add0mr200116055ad.2.1744080729614;
+        Mon, 07 Apr 2025 19:52:09 -0700 (PDT)
+Received: from apollo.localdomain ([2601:646:8201:fd20::f900])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-229787728cfsm89057245ad.228.2025.04.07.19.52.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 07 Apr 2025 19:52:09 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 7 Apr 2025 14:24:16 -0700
-X-Gm-Features: ATxdqUHO80yjk108eHDOr24gXee6hdbaiaR_mratdCK1DNRaaWBNYiffGY5ADc4
-Message-ID: <CAMKF1srPnbjPRjQCLtvcyL-0WPo65rL-xNr52Q0z=PVs-oKb5w@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] mariadb: upgrade 11.4.4 -> 11.4.5
-To: Randy MacLeod <randy.macleod@windriver.com>
-Cc: changqing.li@windriver.com, openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/3] mariadb: Fix build on riscv32
+Date: Mon,  7 Apr 2025 19:52:05 -0700
+Message-ID: <20250408025206.548418-2-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250408025206.548418-1-raj.khem@gmail.com>
+References: <20250408025206.548418-1-raj.khem@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 07 Apr 2025 21:24:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116681
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 02:52:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116683
 
-and we are no alone see
-https://jira.mariadb.org/browse/MDEV-36217
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-dbs/mysql/mariadb.inc         |  1 +
+ .../recipes-dbs/mysql/mariadb/riscv32.patch   | 19 +++++++++++++++++++
+ 2 files changed, 20 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/riscv32.patch
 
-We need to bring
-https://github.com/MariaDB/server/pull/3871
-
-along
-
-On Mon, Apr 7, 2025 at 2:21=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Mon, Apr 7, 2025 at 1:56=E2=80=AFPM Randy MacLeod
-> <randy.macleod@windriver.com> wrote:
-> >
-> > On 2025-04-07 8:15 a.m., Changqing Li via lists.openembedded.org wrote:
-> >
-> > From: Changqing Li <changqing.li@windriver.com>
-> >
-> > Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> > ---
-> >  .../{mariadb-native_11.4.4.bb =3D> mariadb-native_11.4.5.bb}      | 0
-> >  meta-oe/recipes-dbs/mysql/mariadb.inc                           | 2 +-
-> >  .../recipes-dbs/mysql/{mariadb_11.4.4.bb =3D> mariadb_11.4.5.bb}  | 0
-> >  3 files changed, 1 insertion(+), 1 deletion(-)
-> >  rename meta-oe/recipes-dbs/mysql/{mariadb-native_11.4.4.bb =3D> mariad=
-b-native_11.4.5.bb} (100%)
-> >  rename meta-oe/recipes-dbs/mysql/{mariadb_11.4.4.bb =3D> mariadb_11.4.=
-5.bb} (100%)
-> >
-> > diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_11.4.4.bb b/meta-=
-oe/recipes-dbs/mysql/mariadb-native_11.4.5.bb
-> > similarity index 100%
-> > rename from meta-oe/recipes-dbs/mysql/mariadb-native_11.4.4.bb
-> > rename to meta-oe/recipes-dbs/mysql/mariadb-native_11.4.5.bb
-> > diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-db=
-s/mysql/mariadb.inc
-> > index 66b46d2afd..f704ff6dec 100644
-> > --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-> > +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-> > @@ -25,7 +25,7 @@ SRC_URI =3D "https://archive.mariadb.org/${BP}/source=
-/${BP}.tar.gz \
-> >             file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
-> >             file://0001-Ensure-compatibility-with-ARMv9-by-updating-.ar=
-ch-di.patch \
-> >            "
-> > -SRC_URI[sha256sum] =3D "96fbd2e6e93fb7e8b373eea75d85b6fea57c0e111a0209=
-0cbbefed52599dc77b"
-> > +SRC_URI[sha256sum] =3D "ff6595f8c482f9921e39b97fa1122377a69f0dcbd92553=
-c6b9032cbf0e9b5354"
-> >
-> >  UPSTREAM_CHECK_URI =3D "https://github.com/MariaDB/server/tags"
-> >
-> > diff --git a/meta-oe/recipes-dbs/mysql/mariadb_11.4.4.bb b/meta-oe/reci=
-pes-dbs/mysql/mariadb_11.4.5.bb
-> > similarity index 100%
-> > rename from meta-oe/recipes-dbs/mysql/mariadb_11.4.4.bb
-> > rename to meta-oe/recipes-dbs/mysql/mariadb_11.4.5.bb
-> >
-> >
-> > Sandy, there's a mariadb build failure. See below.
-> >
-> >
-> > Khem said on IRC:
-> >
-> > ... Changqing Li and report this build failure -
-> >    https://errors.yoctoproject.org/Errors/Details/851668/ with mariadb =
-11.4.5 upgrade
-> >
->
-> I think this is the change causing the build failure
->
-> https://github.com/MariaDB/server/commit/d5a417b9d55ac2744b600463a1abaf06=
-5772d678
->
-> My guess is that it does not happen on gcc but does happen with clang
->
-> > I see the patch on lore.kernel.org but not in my inbox, mysterious worl=
-d of emails
-> >
-> > ../Randy
-> >
-> > --
-> > 2.34.1
-> >
-> > pLK@tY:ATbOf1"dW
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#116666): https://lists.openembedded.org/g/openembed=
-ded-devel/message/116666
-> > Mute This Topic: https://lists.openembedded.org/mt/112131137/3616765
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[randy.macleod@windriver.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
-> >
-> > --
-> > # Randy MacLeod
-> > # Wind River Linux
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index eedb6735a4..3a39d036f7 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -25,6 +25,7 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
+            file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
+            file://0001-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch \
+            file://3871.patch \
++           file://riscv32.patch \
+           "
+ SRC_URI[sha256sum] = "ff6595f8c482f9921e39b97fa1122377a69f0dcbd92553c6b9032cbf0e9b5354"
+ 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/riscv32.patch b/meta-oe/recipes-dbs/mysql/mariadb/riscv32.patch
+new file mode 100644
+index 0000000000..24b86584e3
+--- /dev/null
++++ b/meta-oe/recipes-dbs/mysql/mariadb/riscv32.patch
+@@ -0,0 +1,19 @@
++Do not use static_cast in C sources
++
++C compiler does not recognise static_cast which is a C++ keyword
++and bails out compiling mysys/my_rdtsc.c, use traditional typecast
++instead
++
++Upstream-Status: Submitted [https://github.com/MariaDB/server/pull/1981/files#r2032207090]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++--- a/include/my_rdtsc.h
+++++ b/include/my_rdtsc.h
++@@ -226,7 +226,7 @@ static inline ulonglong my_timer_cycles(
++         "sub %0, zero, %0\n"
++         "and %1, %1, %0\n"
++         : "=r"(result_hi0), "=r"(result_lo), "=r"(result_hi1));
++-    return (static_cast<ulonglong>(result_hi1) << 32) | result_lo;
+++    return ((ulonglong)result_hi1 << 32) | result_lo;
++ # else
++     ulonglong result;
++     __asm __volatile__("rdtime %0" : "=r"(result));
 
