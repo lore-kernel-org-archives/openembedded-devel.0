@@ -1,195 +1,335 @@
-Return-Path: <alistair23@gmail.com>
+Return-Path: <mark.yang@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5588BC3600C
-	for <webhook@archiver.kernel.org>; Tue,  8 Apr 2025 04:15:47 +0000 (UTC)
-Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
- by mx.groups.io with SMTP id smtpd.web11.66873.1744085737352097591
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4B29C3600C
+	for <webhook@archiver.kernel.org>; Tue,  8 Apr 2025 05:11:47 +0000 (UTC)
+Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.52])
+ by mx.groups.io with SMTP id smtpd.web11.67507.1744089102392516392
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Apr 2025 21:15:37 -0700
+ Mon, 07 Apr 2025 22:11:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kuUHgER7;
- spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: alistair23@gmail.com)
-Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-af548cb1f83so4574404a12.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Apr 2025 21:15:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744085736; x=1744690536; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=mHrIPILvoQtNzbhWqkhY2DytV6ndfS5hD/N+MwbIcA4=;
-        b=kuUHgER7IIcIMSAyDZ8LJ1khQRzt40qWaYjxciXACcCbXcqMmy97wC0ha5x4TYNSJ8
-         sWA1MQDCUYEYvEoDOFFTQj4yS6XvKelO9mXS9Bw+vhAQHNIdCQL23Ch0tdPFb8wtc8hR
-         tb079cc25m6HarA146bUF944oeyxbq0l8kHkvOmfNnvIGMj9uJPpaHNxmXuCJOfOD85o
-         R9IwHuVkHpVPRmtJy088AoRtje314Q2S54WAInEb2CDnIuebbPoiKhvH7N1Vo473SKMG
-         jggVePCBHMNrKtTJ+qLy32Dx8BptvtgSfB2AW+EoP0hoiKCoSBJg4Wp8N35TFA6iKqgY
-         GhaQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744085736; x=1744690536;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=mHrIPILvoQtNzbhWqkhY2DytV6ndfS5hD/N+MwbIcA4=;
-        b=mRnmB9Nm2ueev6Wc30NzUCdFePH6wJKbtHDTxaPttanUBnAZpqGwFPwtqB6tdqeXqT
-         GrIVNYVpqAqz1qmm3ZJq4Tu5/fJLmChORiL3BQsuSxEDAZjHB5nZjYH4x/YBvI0LxG4f
-         DBb94gBnh/mwtz5wNs3AT87v1M/wRZdemEB8uudrXlHigwt7tbKi2XnUYCOzQMySolux
-         Ul7beTBGadM2HLksNDgbvqSzoTpY/vdYuOBy4GgpUBez3Q5hItD0mJEbmEeKvfXTlU2O
-         7s5Q6rkUpULGoef/PnPlkOfQKhH0jXWN28b0agiS72ZBazAyALtxtvm39bfOOmi/DgaD
-         YVTA==
-X-Gm-Message-State: AOJu0Yzaw8/8Or2LvrtKtUnpEbQxOm4f6kC1yRpoFMNz0IGDQ0p3xXBp
-	xqj8LPM+MaYB+xBDpeZ11Pam6XeykYXNijhbPrv8BHryQnH2BznuAZMDnQ==
-X-Gm-Gg: ASbGncu4DR8IC3b5ybEQhgHWxU3oGuwSvtYKI6JjAqvYI7MiqEVzSpg0ElLo9CunlhL
-	lni9UUSDQjsamwriiNa0FdGnwfMRLd4Iuz6FC4x1sXwxOb/AYPYV2CiAuaMNLt7eoKh947isaT4
-	B7dPRaDeWcxtgbx4OODX8bJvV3s/8snR1+7epHF7KMA3QNqHTxPKfzQTyH2Fy/9xwTx85A8mMT4
-	uVxQAMI8hZjh5FwW0AovZq+4C1WjuYrOhXB8Fuc4em2O8teCCmeTXUwNDhZplx6a54blFgT3kGQ
-	dFhZkAOt4vxD9cH1aFmhpKqwjPMHAd8Mw8Hd51qsFrIFnOfKEVBn9T6KSOLdIlGRvDeCSUDYgBi
-	BDbNvTNsNaMtpYqqt/uKk17ptvQbrmdK9Tw7WOqeLZz9vZrWrSQ==
-X-Google-Smtp-Source: AGHT+IHlPgpaPZkbNtk4fbQQG4hDXqUTeEi6bBpU1TXQMiMFT5jsQ9vE2oP3jkZcm2yazdz+Kb5FZA==
-X-Received: by 2002:a17:90b:4d0c:b0:2ff:6f88:b04a with SMTP id 98e67ed59e1d1-306a47ee42cmr23034005a91.15.1744085736421;
-        Mon, 07 Apr 2025 21:15:36 -0700 (PDT)
-Received: from toolbx.alistair23.me (2403-580b-97e8-0-82ce-f179-8a79-69f4.ip6.aussiebb.net. [2403:580b:97e8:0:82ce:f179:8a79:69f4])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-30588a2f6b2sm9868212a91.24.2025.04.07.21.15.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Apr 2025 21:15:35 -0700 (PDT)
-From: Alistair Francis <alistair23@gmail.com>
-X-Google-Original-From: Alistair Francis <alistair.francis@wdc.com>
+ dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.52, mailfrom: mark.yang@lge.com)
+Received: from unknown (HELO lgemrelse7q.lge.com) (156.147.1.151)
+	by 156.147.23.52 with ESMTP; 8 Apr 2025 14:11:40 +0900
+X-Original-SENDERIP: 156.147.1.151
+X-Original-MAILFROM: mark.yang@lge.com
+Received: from unknown (HELO markyang..) (10.177.120.37)
+	by 156.147.1.151 with ESMTP; 8 Apr 2025 14:11:40 +0900
+X-Original-SENDERIP: 10.177.120.37
+X-Original-MAILFROM: mark.yang@lge.com
+From: mark.yang@lge.com
 To: openembedded-devel@lists.openembedded.org
-Cc: alistair23@gmail.com,
-	Alistair Francis <alistair.francis@wdc.com>
-Subject: [meta-oe][PATCH 2/2] nvme-cli: Update to 1.12
-Date: Tue,  8 Apr 2025 14:15:22 +1000
-Message-ID: <20250408041523.4029757-2-alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250408041523.4029757-1-alistair.francis@wdc.com>
-References: <20250408041523.4029757-1-alistair.francis@wdc.com>
+Cc: "mark.yang" <mark.yang@lge.com>
+Subject: [meta-oe][PATCH] daemontools: fix build with gcc-15
+Date: Tue,  8 Apr 2025 14:11:36 +0900
+Message-Id: <20250408051136.807648-1-mark.yang@lge.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 04:15:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116687
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 05:11:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116688
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+From: "mark.yang" <mark.yang@lge.com>
+
+* Fix prototype declaration and too many arguments function errors due to outdated style
+byte_chr.c:9:1: error: number of arguments doesn't match prototype
+    9 | {
+      | ^
+In file included from byte_chr.c:3:
+byte.h:6:21: error: prototype declaration
+    6 | extern unsigned int byte_chr();
+      |                     ^~~~~~~~
+...
+./compile buffer_get.c
+buffer_get.c: In function 'oneread':
+buffer_get.c:12:9: error: too many arguments to function 'op'; expected 0, have 3
+   12 |     r = op(fd,buf,len);
+      |         ^~ ~~
+...
+supervise.c: In function 'doit':
+supervise.c:144:11: error: too many arguments to function 'wait_nohang'; expected 0, have 1
+  144 |       r = wait_nohang(&wstat);
+      |           ^~~~~~~~~~~ ~~~~~~
+
+Signed-off-by: mark.yang <mark.yang@lge.com>
 ---
- ...allback-for-non-standard-locale-cate.patch | 39 -------------------
- ...dd-include-of-libgen.h-for-basename-.patch | 34 ----------------
- .../{nvme-cli_2.11.bb => nvme-cli_2.12.bb}    |  7 +---
- 3 files changed, 2 insertions(+), 78 deletions(-)
- delete mode 100644 meta-oe/recipes-bsp/nvme-cli/nvme-cli/0001-nvme-print-add-fallback-for-non-standard-locale-cate.patch
- delete mode 100644 meta-oe/recipes-bsp/nvme-cli/nvme-cli/0002-plugins-netapp-add-include-of-libgen.h-for-basename-.patch
- rename meta-oe/recipes-bsp/nvme-cli/{nvme-cli_2.11.bb => nvme-cli_2.12.bb} (85%)
+ ...ix-prototype-declaration-with-gcc-15.patch | 252 ++++++++++++++++++
+ .../daemontools/daemontools_0.76.bb           |   1 +
+ 2 files changed, 253 insertions(+)
+ create mode 100644 meta-oe/recipes-support/daemontools/daemontools/0001-fix-prototype-declaration-with-gcc-15.patch
 
-diff --git a/meta-oe/recipes-bsp/nvme-cli/nvme-cli/0001-nvme-print-add-fallback-for-non-standard-locale-cate.patch b/meta-oe/recipes-bsp/nvme-cli/nvme-cli/0001-nvme-print-add-fallback-for-non-standard-locale-cate.patch
-deleted file mode 100644
-index 981acb1b81..0000000000
---- a/meta-oe/recipes-bsp/nvme-cli/nvme-cli/0001-nvme-print-add-fallback-for-non-standard-locale-cate.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--From 9444ce03a27b8d423f8170cf75f56d48d8a0a659 Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Daniel=20N=C3=A9ri?= <dne+commits@rb67.eu>
--Date: Mon, 11 Nov 2024 23:06:03 +0100
--Subject: [PATCH] nvme-print: add fallback for non-standard locale category
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--LC_MEASUREMENT is a GNU (libc) extension - fall back to LC_ALL if it's
--not defined.
--
--Fixes build with musl libc
--
--Signed-off-by: Daniel Néri <dne+commits@rb67.eu>
--
--Upstream-Status: Backport [https://github.com/linux-nvme/nvme-cli/commit/9444ce03a27b8d423f8170cf75f56d48d8a0a659]
--Signed-off-by: Ryosuke Saito <ryosuke.saito@linaro.org>
-----
-- nvme-print.c | 4 ++++
-- 1 file changed, 4 insertions(+)
--
--diff --git a/nvme-print.c b/nvme-print.c
--index 170e5c12fb22..5b1f2e827aef 100644
----- a/nvme-print.c
--+++ b/nvme-print.c
--@@ -797,6 +797,10 @@ static bool is_fahrenheit_country(const char *country)
-- 	return false;
-- }
-- 
--+#ifndef LC_MEASUREMENT
--+#define LC_MEASUREMENT LC_ALL
--+#endif
--+
-- static bool is_temperature_fahrenheit(void)
-- {
-- 	const char *locale, *underscore;
---- 
--2.47.0
--
-diff --git a/meta-oe/recipes-bsp/nvme-cli/nvme-cli/0002-plugins-netapp-add-include-of-libgen.h-for-basename-.patch b/meta-oe/recipes-bsp/nvme-cli/nvme-cli/0002-plugins-netapp-add-include-of-libgen.h-for-basename-.patch
-deleted file mode 100644
-index 42ca7f5340..0000000000
---- a/meta-oe/recipes-bsp/nvme-cli/nvme-cli/0002-plugins-netapp-add-include-of-libgen.h-for-basename-.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From ac4818952c872ba465a2d0f48634f9a79aae064f Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Daniel=20N=C3=A9ri?= <dne+commits@rb67.eu>
--Date: Mon, 11 Nov 2024 22:34:57 +0100
--Subject: [PATCH] plugins/netapp: add include of libgen.h for basename(3)
-- prototype
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--Fixes build with musl libc.
--
--Signed-off-by: Daniel Néri <dne+commits@rb67.eu>
--
--Upstream-Status: Backport [https://github.com/linux-nvme/nvme-cli/commit/ac4818952c872ba465a2d0f48634f9a79aae064f]
--Signed-off-by: Ryosuke Saito <ryosuke.saito@linaro.org>
-----
-- plugins/netapp/netapp-nvme.c | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/plugins/netapp/netapp-nvme.c b/plugins/netapp/netapp-nvme.c
--index 5c2e3d4989b8..9f05ffc5d97e 100644
----- a/plugins/netapp/netapp-nvme.c
--+++ b/plugins/netapp/netapp-nvme.c
--@@ -22,6 +22,7 @@
-- #include <unistd.h>
-- #include <errno.h>
-- #include <string.h>
--+#include <libgen.h>
-- 
-- #include "common.h"
-- #include "nvme.h"
---- 
--2.47.0
--
-diff --git a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.11.bb b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.12.bb
-similarity index 85%
-rename from meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.11.bb
-rename to meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.12.bb
-index 7c030cd847..7ab244f3cc 100644
---- a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.11.bb
-+++ b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.12.bb
-@@ -6,12 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022 \
-                     file://ccan/licenses/CC0;md5=c17af43b05840255a6fedc5eda9d56cc \
-                     file://ccan/licenses/BSD-MIT;md5=838c366f69b72c5df05c96dff79b35f2"
- DEPENDS = "json-c libnvme"
--SRCREV = "9f34fcb12e3ab098e9b30e0f31e92cefb497cc42"
--
--SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https \
--           file://0001-nvme-print-add-fallback-for-non-standard-locale-cate.patch \
--           file://0002-plugins-netapp-add-include-of-libgen.h-for-basename-.patch"
-+SRCREV = "71fa5d9310d6b41a69e844593423ac91b1453472"
+diff --git a/meta-oe/recipes-support/daemontools/daemontools/0001-fix-prototype-declaration-with-gcc-15.patch b/meta-oe/recipes-support/daemontools/daemontools/0001-fix-prototype-declaration-with-gcc-15.patch
+new file mode 100644
+index 0000000000..8910b40ec5
+--- /dev/null
++++ b/meta-oe/recipes-support/daemontools/daemontools/0001-fix-prototype-declaration-with-gcc-15.patch
+@@ -0,0 +1,252 @@
++From d4e8b6638ede51dee635317baf86a43d40bc45d2 Mon Sep 17 00:00:00 2001
++From: "mark.yang" <mark.yang@lge.com>
++Date: Tue, 8 Apr 2025 14:02:04 +0900
++Subject: [PATCH] fix prototype declaration with gcc 15
++
++* Fix prototype declaration and too many arguments function errors due to outdated style
++byte_chr.c:9:1: error: number of arguments doesn't match prototype
++    9 | {
++      | ^
++In file included from byte_chr.c:3:
++byte.h:6:21: error: prototype declaration
++    6 | extern unsigned int byte_chr();
++      |                     ^~~~~~~~
++...
++./compile buffer_get.c
++buffer_get.c: In function 'oneread':
++buffer_get.c:12:9: error: too many arguments to function 'op'; expected 0, have 3
++   12 |     r = op(fd,buf,len);
++      |         ^~ ~~
++...
++supervise.c: In function 'doit':
++supervise.c:144:11: error: too many arguments to function 'wait_nohang'; expected 0, have 1
++  144 |       r = wait_nohang(&wstat);
++      |           ^~~~~~~~~~~ ~~~~~~
++
++Upstream-Status: Inactive-Upstream [lastrelease: 10 years ago]
++Signed-off-by: mark.yang <mark.yang@lge.com>
++---
++ src/alloc.c      |  6 ++----
++ src/alloc.h      |  6 +++---
++ src/alloc_re.c   |  5 +----
++ src/buffer_get.c |  2 +-
++ src/buffer_put.c |  2 +-
++ src/byte.h       | 10 +++++-----
++ src/byte_chr.c   |  5 +----
++ src/byte_copy.c  |  5 +----
++ src/byte_cr.c    |  5 +----
++ src/byte_diff.c  |  5 +----
++ src/byte_rchr.c  |  5 +----
++ src/select.h2    |  1 -
++ src/wait.h       |  4 ++--
++ 13 files changed, 20 insertions(+), 41 deletions(-)
++
++diff --git a/src/alloc.c b/src/alloc.c
++index c741aa4..5b21993 100644
++--- a/src/alloc.c
+++++ b/src/alloc.c
++@@ -12,8 +12,7 @@ static aligned realspace[SPACE / ALIGNMENT];
++ #define space ((char *) realspace)
++ static unsigned int avail = SPACE; /* multiple of ALIGNMENT; 0<=avail<=SPACE */
++ 
++-/*@null@*//*@out@*/char *alloc(n)
++-unsigned int n;
+++/*@null@*//*@out@*/char *alloc(unsigned int n)
++ {
++   char *x;
++   n = ALIGNMENT + n - (n & (ALIGNMENT - 1)); /* XXX: could overflow */
++@@ -23,8 +22,7 @@ unsigned int n;
++   return x;
++ }
++ 
++-void alloc_free(x)
++-char *x;
+++void alloc_free(char *x)
++ {
++   if (x >= space)
++     if (x < space + SPACE)
++diff --git a/src/alloc.h b/src/alloc.h
++index 21122fc..7a13178 100644
++--- a/src/alloc.h
+++++ b/src/alloc.h
++@@ -3,8 +3,8 @@
++ #ifndef ALLOC_H
++ #define ALLOC_H
++ 
++-extern /*@null@*//*@out@*/char *alloc();
++-extern void alloc_free();
++-extern int alloc_re();
+++extern /*@null@*//*@out@*/char *alloc(unsigned int n);
+++extern void alloc_free(char *x);
+++extern int alloc_re(char **x,unsigned int m,unsigned int n);
++ 
++ #endif
++diff --git a/src/alloc_re.c b/src/alloc_re.c
++index 1074609..5096fb1 100644
++--- a/src/alloc_re.c
+++++ b/src/alloc_re.c
++@@ -3,10 +3,7 @@
++ #include "alloc.h"
++ #include "byte.h"
++ 
++-int alloc_re(x,m,n)
++-char **x;
++-unsigned int m;
++-unsigned int n;
+++int alloc_re(char **x,unsigned int m,unsigned int n)
++ {
++   char *y;
++  
++diff --git a/src/buffer_get.c b/src/buffer_get.c
++index 3a6e1b6..2a38fa1 100644
++--- a/src/buffer_get.c
+++++ b/src/buffer_get.c
++@@ -4,7 +4,7 @@
++ #include "byte.h"
++ #include "error.h"
++ 
++-static int oneread(int (*op)(),int fd,char *buf,unsigned int len)
+++static int oneread(int (*op)(int, char *, unsigned int),int fd,char *buf,unsigned int len)
++ {
++   int r;
++ 
++diff --git a/src/buffer_put.c b/src/buffer_put.c
++index 23164b3..23d1d2b 100644
++--- a/src/buffer_put.c
+++++ b/src/buffer_put.c
++@@ -5,7 +5,7 @@
++ #include "byte.h"
++ #include "error.h"
++ 
++-static int allwrite(int (*op)(),int fd,const char *buf,unsigned int len)
+++static int allwrite(int (*op)(int, const char *, unsigned int),int fd,const char *buf,unsigned int len)
++ {
++   int w;
++ 
++diff --git a/src/byte.h b/src/byte.h
++index 09aab61..d5ccf83 100644
++--- a/src/byte.h
+++++ b/src/byte.h
++@@ -3,11 +3,11 @@
++ #ifndef BYTE_H
++ #define BYTE_H
++ 
++-extern unsigned int byte_chr();
++-extern unsigned int byte_rchr();
++-extern void byte_copy();
++-extern void byte_copyr();
++-extern int byte_diff();
+++extern unsigned int byte_chr(char* s,register unsigned int n,int c);
+++extern unsigned int byte_rchr(char* s,register unsigned int n,int c);
+++extern void byte_copy(register char* to,register unsigned int n,register char* from);
+++extern void byte_copyr(register char* to,register unsigned int n,register char* from);
+++extern int byte_diff(register char* s,register unsigned int n,register char* t);
++ extern void byte_zero();
++ 
++ #define byte_equal(s,n,t) (!byte_diff((s),(n),(t)))
++diff --git a/src/byte_chr.c b/src/byte_chr.c
++index fd56056..7fbcd61 100644
++--- a/src/byte_chr.c
+++++ b/src/byte_chr.c
++@@ -2,10 +2,7 @@
++ 
++ #include "byte.h"
++ 
++-unsigned int byte_chr(s,n,c)
++-char *s;
++-register unsigned int n;
++-int c;
+++unsigned int byte_chr(char* s,register unsigned int n,int c)
++ {
++   register char ch;
++   register char *t;
++diff --git a/src/byte_copy.c b/src/byte_copy.c
++index 74c9e4a..917d795 100644
++--- a/src/byte_copy.c
+++++ b/src/byte_copy.c
++@@ -2,10 +2,7 @@
++ 
++ #include "byte.h"
++ 
++-void byte_copy(to,n,from)
++-register char *to;
++-register unsigned int n;
++-register char *from;
+++void byte_copy(register char* to,register unsigned int n,register char* from)
++ {
++   for (;;) {
++     if (!n) return; *to++ = *from++; --n;
++diff --git a/src/byte_cr.c b/src/byte_cr.c
++index 52dc251..ac3ec67 100644
++--- a/src/byte_cr.c
+++++ b/src/byte_cr.c
++@@ -2,10 +2,7 @@
++ 
++ #include "byte.h"
++ 
++-void byte_copyr(to,n,from)
++-register char *to;
++-register unsigned int n;
++-register char *from;
+++void byte_copyr(register char* to,register unsigned int n,register char* from)
++ {
++   to += n;
++   from += n;
++diff --git a/src/byte_diff.c b/src/byte_diff.c
++index 0c4d17b..e1ef257 100644
++--- a/src/byte_diff.c
+++++ b/src/byte_diff.c
++@@ -2,10 +2,7 @@
++ 
++ #include "byte.h"
++ 
++-int byte_diff(s,n,t)
++-register char *s;
++-register unsigned int n;
++-register char *t;
+++int byte_diff(register char* s,register unsigned int n,register char* t)
++ {
++   for (;;) {
++     if (!n) return 0; if (*s != *t) break; ++s; ++t; --n;
++diff --git a/src/byte_rchr.c b/src/byte_rchr.c
++index 7ea9948..04391bf 100644
++--- a/src/byte_rchr.c
+++++ b/src/byte_rchr.c
++@@ -2,10 +2,7 @@
++ 
++ #include "byte.h"
++ 
++-unsigned int byte_rchr(s,n,c)
++-char *s;
++-register unsigned int n;
++-int c;
+++unsigned int byte_rchr(char* s,register unsigned int n,int c)
++ {
++   register char ch;
++   register char *t;
++diff --git a/src/select.h2 b/src/select.h2
++index 4bd4fcf..b7ac8c9 100644
++--- a/src/select.h2
+++++ b/src/select.h2
++@@ -8,6 +8,5 @@
++ #include <sys/types.h>
++ #include <sys/time.h>
++ #include <sys/select.h>
++-extern int select();
++ 
++ #endif
++diff --git a/src/wait.h b/src/wait.h
++index d294e9d..168d1bf 100644
++--- a/src/wait.h
+++++ b/src/wait.h
++@@ -3,8 +3,8 @@
++ #ifndef WAIT_H
++ #define WAIT_H
++ 
++-extern int wait_pid();
++-extern int wait_nohang();
+++extern int wait_pid(int* status, int pid);
+++extern int wait_nohang(int* status);
++ extern int wait_stop();
++ extern int wait_stopnohang();
++ 
+diff --git a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
+index 7f77390289..3738b080ff 100644
+--- a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
++++ b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
+@@ -24,6 +24,7 @@ SRC_URI = "http://cr.yp.to/daemontools/${BPN}-${PV}.tar.gz \
+     file://0001-daemontools-Fix-QA-Issue.patch \
+     file://warnings.patch \
+     file://0001-Fix-signature-of-main-function.patch \
++    file://0001-fix-prototype-declaration-with-gcc-15.patch \
+ "
  
-+SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https"
- S = "${WORKDIR}/git"
- 
- inherit bash-completion meson pkgconfig systemd
--- 
-2.49.0
-
+ SRC_URI[sha256sum] = "a55535012b2be7a52dcd9eccabb9a198b13be50d0384143bd3b32b8710df4c1f"
 
