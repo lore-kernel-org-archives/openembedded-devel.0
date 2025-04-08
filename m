@@ -1,335 +1,131 @@
-Return-Path: <mark.yang@lge.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B4B29C3600C
-	for <webhook@archiver.kernel.org>; Tue,  8 Apr 2025 05:11:47 +0000 (UTC)
-Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.52])
- by mx.groups.io with SMTP id smtpd.web11.67507.1744089102392516392
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D14D2C3600C
+	for <webhook@archiver.kernel.org>; Tue,  8 Apr 2025 05:24:07 +0000 (UTC)
+Received: from mail-oo1-f48.google.com (mail-oo1-f48.google.com [209.85.161.48])
+ by mx.groups.io with SMTP id smtpd.web10.68108.1744089838464618743
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Apr 2025 22:11:42 -0700
+ Mon, 07 Apr 2025 22:23:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.52, mailfrom: mark.yang@lge.com)
-Received: from unknown (HELO lgemrelse7q.lge.com) (156.147.1.151)
-	by 156.147.23.52 with ESMTP; 8 Apr 2025 14:11:40 +0900
-X-Original-SENDERIP: 156.147.1.151
-X-Original-MAILFROM: mark.yang@lge.com
-Received: from unknown (HELO markyang..) (10.177.120.37)
-	by 156.147.1.151 with ESMTP; 8 Apr 2025 14:11:40 +0900
-X-Original-SENDERIP: 10.177.120.37
-X-Original-MAILFROM: mark.yang@lge.com
-From: mark.yang@lge.com
-To: openembedded-devel@lists.openembedded.org
-Cc: "mark.yang" <mark.yang@lge.com>
-Subject: [meta-oe][PATCH] daemontools: fix build with gcc-15
-Date: Tue,  8 Apr 2025 14:11:36 +0900
-Message-Id: <20250408051136.807648-1-mark.yang@lge.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=LMXLpJjX;
+ spf=pass (domain: gmail.com, ip: 209.85.161.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f48.google.com with SMTP id 006d021491bc7-603be85490bso2851690eaf.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Apr 2025 22:23:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1744089837; x=1744694637; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=NQtpfrM6J1Yn55GvrX4mA2+yC0zEMT19SleL4udbhYo=;
+        b=LMXLpJjX2+7XpUB18uUdkZa0dFNiX5ZjVJyOzlm2Tw1aggJsiodKNH77Px0qW8+2xA
+         ov29O+slP+0JHqUGYOOvINXbcven6ewoDdsejbSmwqmqpG7sq0MtgOJvNE8MOb0a57Ws
+         0ledHxFDcn1qnlwjw6RKIfZ8eu9m3r7EynyqkkGPkvVZ4BlUmcgDTVV+FOWQywdZ95KS
+         6r5FjfAQtTdj1HMxT0BUiaQ5pvKT9BdIZws5yyNVMRGypahCspicesFtW9xYck/pqFhU
+         pzX6Dn2moUuZar5vARlAvxX0krcvSkOTE+jDdAdEnkAs2KeNSnNwPjOapDH73ctveSpI
+         WAAw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1744089837; x=1744694637;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=NQtpfrM6J1Yn55GvrX4mA2+yC0zEMT19SleL4udbhYo=;
+        b=nvMHDnF5rQmwM1t660jK7XnWatl2XcYpD2q0SKraGE1aCT+Cx2MmuprriPcHEUFoKQ
+         mm05/6m86eCtzNEelw9HJ28qMKBWTOdvkHzw8MI+Ew7gDCRKeyFla+NAfyYjVFO2GXOb
+         iLu9bGg4C5AJB5zs0Z/nG5465gc1F9D0tN3X8jr0vjeT301RMvg2OtlygWufIsZerWOe
+         gDcDWAo0M0NTBSlE1LGWPd7zTwrintqeQWYTrgcfotJAmU+YjFDM0LdbvAfwBZtnwkCb
+         bGnFLtvGHh7+RfTn0KH8fiWxQJroNG9drnUmQKgEcw04QMefeHarGQ59n8JREVU6W7pj
+         kljA==
+X-Gm-Message-State: AOJu0Yzu92wmeB7Aan0sSAN1PNpfpwiL7oBxGXog+b0vk0r8MDUgXTdu
+	jpdazaYNRwR/RZf2mEkA+vIeex8eZUipWHtiiVfpdIKHSAkkQHFqY6xp6gVB6jPAjnfCvuQBIVs
+	GzIhlQZt0OzCE8Syv5nnB7J+tmSs=
+X-Gm-Gg: ASbGncsRX3Y5gAf0MaGOcO/bXPM8tmilUqwqWAa/ybz8cosrTVC2YtqDNq9/7pu1lpi
+	f1V2FQFYDF+Av2be0Fv7CX9aSa/lXdtdbEEvKNEReXA8xJ7+UJ0C/lu7Nqv/4RHxJ/iyWVZN+4j
+	wW1amuLWIuiQA9Pq8Vscvl68a1vZ+A9XB+EP8=
+X-Google-Smtp-Source: AGHT+IFFjh7u59jrbEmhI4yD5RPMQmuRXwIokRUbpwU5OAAMKHIqc9Qbq+Q9XehKTElvDH5x8Ja9AYl2yomowIEanXk=
+X-Received: by 2002:a05:6820:507:b0:600:29ec:7619 with SMTP id
+ 006d021491bc7-604164da5e5mr8197312eaf.2.1744089837606; Mon, 07 Apr 2025
+ 22:23:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250408040304.4005939-1-alistair.francis@wdc.com>
+In-Reply-To: <20250408040304.4005939-1-alistair.francis@wdc.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 7 Apr 2025 22:23:31 -0700
+X-Gm-Features: ATxdqUHI_Eak9RBfhUwUYzRNT9LHoT0QJHzAL7RTh5KGS_kPrGnrBsKXWWE4P_4
+Message-ID: <CAMKF1sp9dNztH_Wy3AMKGymWdMm4ybUzosAWnHSXhJqpz6zJAg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] ktls-utils: Initial commit
+To: alistair23@gmail.com
+Cc: openembedded-devel@lists.openembedded.org, 
+	Alistair Francis <alistair.francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 05:11:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116688
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 05:24:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116689
 
-From: "mark.yang" <mark.yang@lge.com>
+On Mon, Apr 7, 2025 at 9:03=E2=80=AFPM Alistair Francis via
+lists.openembedded.org <alistair23=3Dgmail.com@lists.openembedded.org>
+wrote:
+>
+> Package ktls-utils which includes tlsd.
+>
+> This is used when in-kernel TLS consumers need a mechanism to perform TLS
+> handshakes on a connected socket to negotiate TLS session parameters that
+> can then be programmed into the kernel's TLS record protocol engine.
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  .../ktls-utils/ktls-utils_0.11.bb               | 17 +++++++++++++++++
+>  1 file changed, 17 insertions(+)
+>  create mode 100644 meta-oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb
+>
+> diff --git a/meta-oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb b/meta-=
+oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb
+> new file mode 100644
+> index 0000000000..e85dc4ac72
+> --- /dev/null
+> +++ b/meta-oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb
+> @@ -0,0 +1,17 @@
+> +SUMMARY =3D "TLS handshake utilities for in-kernel TLS consumers"
+> +DESCRIPTION =3D "In-kernel TLS consumers need a mechanism to perform TLS=
+ \
+> +handshakes on a connected socket to negotiate TLS session parameters tha=
+t \
+> +can then be programmed into the kernel's TLS record protocol engine."
+> +DEPENDS =3D "gnutls keyutils glib-2.0 libnl"
+> +RDEPENDS:${PN} +=3D " gnutls"
+> +LICENSE =3D "GPL-2.0-only"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd568123389d9a12625cca2b089b17=
+28b"
+> +
+> +SRCREV =3D "5c3314b5728b272cbaf0d98f4d521cca9610b6bf"
+> +SRC_URI =3D "git://github.com/oracle/ktls-utils.git;nobranch=3D1;protoco=
+l=3Dhttps"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +inherit autotools pkgconfig systemd
+> +
+> +PACKAGECONFIG[systemd] =3D "--with-systemd,,systemd"
 
-* Fix prototype declaration and too many arguments function errors due to outdated style
-byte_chr.c:9:1: error: number of arguments doesn't match prototype
-    9 | {
-      | ^
-In file included from byte_chr.c:3:
-byte.h:6:21: error: prototype declaration
-    6 | extern unsigned int byte_chr();
-      |                     ^~~~~~~~
-...
-./compile buffer_get.c
-buffer_get.c: In function 'oneread':
-buffer_get.c:12:9: error: too many arguments to function 'op'; expected 0, have 3
-   12 |     r = op(fd,buf,len);
-      |         ^~ ~~
-...
-supervise.c: In function 'doit':
-supervise.c:144:11: error: too many arguments to function 'wait_nohang'; expected 0, have 1
-  144 |       r = wait_nohang(&wstat);
-      |           ^~~~~~~~~~~ ~~~~~~
+I think it should inherit systemd and then conditionally enable this
+packageconfig if systemd is in DISTRO_FEATURES
 
-Signed-off-by: mark.yang <mark.yang@lge.com>
----
- ...ix-prototype-declaration-with-gcc-15.patch | 252 ++++++++++++++++++
- .../daemontools/daemontools_0.76.bb           |   1 +
- 2 files changed, 253 insertions(+)
- create mode 100644 meta-oe/recipes-support/daemontools/daemontools/0001-fix-prototype-declaration-with-gcc-15.patch
-
-diff --git a/meta-oe/recipes-support/daemontools/daemontools/0001-fix-prototype-declaration-with-gcc-15.patch b/meta-oe/recipes-support/daemontools/daemontools/0001-fix-prototype-declaration-with-gcc-15.patch
-new file mode 100644
-index 0000000000..8910b40ec5
---- /dev/null
-+++ b/meta-oe/recipes-support/daemontools/daemontools/0001-fix-prototype-declaration-with-gcc-15.patch
-@@ -0,0 +1,252 @@
-+From d4e8b6638ede51dee635317baf86a43d40bc45d2 Mon Sep 17 00:00:00 2001
-+From: "mark.yang" <mark.yang@lge.com>
-+Date: Tue, 8 Apr 2025 14:02:04 +0900
-+Subject: [PATCH] fix prototype declaration with gcc 15
-+
-+* Fix prototype declaration and too many arguments function errors due to outdated style
-+byte_chr.c:9:1: error: number of arguments doesn't match prototype
-+    9 | {
-+      | ^
-+In file included from byte_chr.c:3:
-+byte.h:6:21: error: prototype declaration
-+    6 | extern unsigned int byte_chr();
-+      |                     ^~~~~~~~
-+...
-+./compile buffer_get.c
-+buffer_get.c: In function 'oneread':
-+buffer_get.c:12:9: error: too many arguments to function 'op'; expected 0, have 3
-+   12 |     r = op(fd,buf,len);
-+      |         ^~ ~~
-+...
-+supervise.c: In function 'doit':
-+supervise.c:144:11: error: too many arguments to function 'wait_nohang'; expected 0, have 1
-+  144 |       r = wait_nohang(&wstat);
-+      |           ^~~~~~~~~~~ ~~~~~~
-+
-+Upstream-Status: Inactive-Upstream [lastrelease: 10 years ago]
-+Signed-off-by: mark.yang <mark.yang@lge.com>
-+---
-+ src/alloc.c      |  6 ++----
-+ src/alloc.h      |  6 +++---
-+ src/alloc_re.c   |  5 +----
-+ src/buffer_get.c |  2 +-
-+ src/buffer_put.c |  2 +-
-+ src/byte.h       | 10 +++++-----
-+ src/byte_chr.c   |  5 +----
-+ src/byte_copy.c  |  5 +----
-+ src/byte_cr.c    |  5 +----
-+ src/byte_diff.c  |  5 +----
-+ src/byte_rchr.c  |  5 +----
-+ src/select.h2    |  1 -
-+ src/wait.h       |  4 ++--
-+ 13 files changed, 20 insertions(+), 41 deletions(-)
-+
-+diff --git a/src/alloc.c b/src/alloc.c
-+index c741aa4..5b21993 100644
-+--- a/src/alloc.c
-++++ b/src/alloc.c
-+@@ -12,8 +12,7 @@ static aligned realspace[SPACE / ALIGNMENT];
-+ #define space ((char *) realspace)
-+ static unsigned int avail = SPACE; /* multiple of ALIGNMENT; 0<=avail<=SPACE */
-+ 
-+-/*@null@*//*@out@*/char *alloc(n)
-+-unsigned int n;
-++/*@null@*//*@out@*/char *alloc(unsigned int n)
-+ {
-+   char *x;
-+   n = ALIGNMENT + n - (n & (ALIGNMENT - 1)); /* XXX: could overflow */
-+@@ -23,8 +22,7 @@ unsigned int n;
-+   return x;
-+ }
-+ 
-+-void alloc_free(x)
-+-char *x;
-++void alloc_free(char *x)
-+ {
-+   if (x >= space)
-+     if (x < space + SPACE)
-+diff --git a/src/alloc.h b/src/alloc.h
-+index 21122fc..7a13178 100644
-+--- a/src/alloc.h
-++++ b/src/alloc.h
-+@@ -3,8 +3,8 @@
-+ #ifndef ALLOC_H
-+ #define ALLOC_H
-+ 
-+-extern /*@null@*//*@out@*/char *alloc();
-+-extern void alloc_free();
-+-extern int alloc_re();
-++extern /*@null@*//*@out@*/char *alloc(unsigned int n);
-++extern void alloc_free(char *x);
-++extern int alloc_re(char **x,unsigned int m,unsigned int n);
-+ 
-+ #endif
-+diff --git a/src/alloc_re.c b/src/alloc_re.c
-+index 1074609..5096fb1 100644
-+--- a/src/alloc_re.c
-++++ b/src/alloc_re.c
-+@@ -3,10 +3,7 @@
-+ #include "alloc.h"
-+ #include "byte.h"
-+ 
-+-int alloc_re(x,m,n)
-+-char **x;
-+-unsigned int m;
-+-unsigned int n;
-++int alloc_re(char **x,unsigned int m,unsigned int n)
-+ {
-+   char *y;
-+  
-+diff --git a/src/buffer_get.c b/src/buffer_get.c
-+index 3a6e1b6..2a38fa1 100644
-+--- a/src/buffer_get.c
-++++ b/src/buffer_get.c
-+@@ -4,7 +4,7 @@
-+ #include "byte.h"
-+ #include "error.h"
-+ 
-+-static int oneread(int (*op)(),int fd,char *buf,unsigned int len)
-++static int oneread(int (*op)(int, char *, unsigned int),int fd,char *buf,unsigned int len)
-+ {
-+   int r;
-+ 
-+diff --git a/src/buffer_put.c b/src/buffer_put.c
-+index 23164b3..23d1d2b 100644
-+--- a/src/buffer_put.c
-++++ b/src/buffer_put.c
-+@@ -5,7 +5,7 @@
-+ #include "byte.h"
-+ #include "error.h"
-+ 
-+-static int allwrite(int (*op)(),int fd,const char *buf,unsigned int len)
-++static int allwrite(int (*op)(int, const char *, unsigned int),int fd,const char *buf,unsigned int len)
-+ {
-+   int w;
-+ 
-+diff --git a/src/byte.h b/src/byte.h
-+index 09aab61..d5ccf83 100644
-+--- a/src/byte.h
-++++ b/src/byte.h
-+@@ -3,11 +3,11 @@
-+ #ifndef BYTE_H
-+ #define BYTE_H
-+ 
-+-extern unsigned int byte_chr();
-+-extern unsigned int byte_rchr();
-+-extern void byte_copy();
-+-extern void byte_copyr();
-+-extern int byte_diff();
-++extern unsigned int byte_chr(char* s,register unsigned int n,int c);
-++extern unsigned int byte_rchr(char* s,register unsigned int n,int c);
-++extern void byte_copy(register char* to,register unsigned int n,register char* from);
-++extern void byte_copyr(register char* to,register unsigned int n,register char* from);
-++extern int byte_diff(register char* s,register unsigned int n,register char* t);
-+ extern void byte_zero();
-+ 
-+ #define byte_equal(s,n,t) (!byte_diff((s),(n),(t)))
-+diff --git a/src/byte_chr.c b/src/byte_chr.c
-+index fd56056..7fbcd61 100644
-+--- a/src/byte_chr.c
-++++ b/src/byte_chr.c
-+@@ -2,10 +2,7 @@
-+ 
-+ #include "byte.h"
-+ 
-+-unsigned int byte_chr(s,n,c)
-+-char *s;
-+-register unsigned int n;
-+-int c;
-++unsigned int byte_chr(char* s,register unsigned int n,int c)
-+ {
-+   register char ch;
-+   register char *t;
-+diff --git a/src/byte_copy.c b/src/byte_copy.c
-+index 74c9e4a..917d795 100644
-+--- a/src/byte_copy.c
-++++ b/src/byte_copy.c
-+@@ -2,10 +2,7 @@
-+ 
-+ #include "byte.h"
-+ 
-+-void byte_copy(to,n,from)
-+-register char *to;
-+-register unsigned int n;
-+-register char *from;
-++void byte_copy(register char* to,register unsigned int n,register char* from)
-+ {
-+   for (;;) {
-+     if (!n) return; *to++ = *from++; --n;
-+diff --git a/src/byte_cr.c b/src/byte_cr.c
-+index 52dc251..ac3ec67 100644
-+--- a/src/byte_cr.c
-++++ b/src/byte_cr.c
-+@@ -2,10 +2,7 @@
-+ 
-+ #include "byte.h"
-+ 
-+-void byte_copyr(to,n,from)
-+-register char *to;
-+-register unsigned int n;
-+-register char *from;
-++void byte_copyr(register char* to,register unsigned int n,register char* from)
-+ {
-+   to += n;
-+   from += n;
-+diff --git a/src/byte_diff.c b/src/byte_diff.c
-+index 0c4d17b..e1ef257 100644
-+--- a/src/byte_diff.c
-++++ b/src/byte_diff.c
-+@@ -2,10 +2,7 @@
-+ 
-+ #include "byte.h"
-+ 
-+-int byte_diff(s,n,t)
-+-register char *s;
-+-register unsigned int n;
-+-register char *t;
-++int byte_diff(register char* s,register unsigned int n,register char* t)
-+ {
-+   for (;;) {
-+     if (!n) return 0; if (*s != *t) break; ++s; ++t; --n;
-+diff --git a/src/byte_rchr.c b/src/byte_rchr.c
-+index 7ea9948..04391bf 100644
-+--- a/src/byte_rchr.c
-++++ b/src/byte_rchr.c
-+@@ -2,10 +2,7 @@
-+ 
-+ #include "byte.h"
-+ 
-+-unsigned int byte_rchr(s,n,c)
-+-char *s;
-+-register unsigned int n;
-+-int c;
-++unsigned int byte_rchr(char* s,register unsigned int n,int c)
-+ {
-+   register char ch;
-+   register char *t;
-+diff --git a/src/select.h2 b/src/select.h2
-+index 4bd4fcf..b7ac8c9 100644
-+--- a/src/select.h2
-++++ b/src/select.h2
-+@@ -8,6 +8,5 @@
-+ #include <sys/types.h>
-+ #include <sys/time.h>
-+ #include <sys/select.h>
-+-extern int select();
-+ 
-+ #endif
-+diff --git a/src/wait.h b/src/wait.h
-+index d294e9d..168d1bf 100644
-+--- a/src/wait.h
-++++ b/src/wait.h
-+@@ -3,8 +3,8 @@
-+ #ifndef WAIT_H
-+ #define WAIT_H
-+ 
-+-extern int wait_pid();
-+-extern int wait_nohang();
-++extern int wait_pid(int* status, int pid);
-++extern int wait_nohang(int* status);
-+ extern int wait_stop();
-+ extern int wait_stopnohang();
-+ 
-diff --git a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
-index 7f77390289..3738b080ff 100644
---- a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
-+++ b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
-@@ -24,6 +24,7 @@ SRC_URI = "http://cr.yp.to/daemontools/${BPN}-${PV}.tar.gz \
-     file://0001-daemontools-Fix-QA-Issue.patch \
-     file://warnings.patch \
-     file://0001-Fix-signature-of-main-function.patch \
-+    file://0001-fix-prototype-declaration-with-gcc-15.patch \
- "
- 
- SRC_URI[sha256sum] = "a55535012b2be7a52dcd9eccabb9a198b13be50d0384143bd3b32b8710df4c1f"
+> --
+> 2.49.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#116685): https://lists.openembedded.org/g/openembedde=
+d-devel/message/116685
+> Mute This Topic: https://lists.openembedded.org/mt/112147500/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
