@@ -2,119 +2,121 @@ Return-Path: <mark.yang@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8EB7DC3600C
-	for <webhook@archiver.kernel.org>; Tue,  8 Apr 2025 10:57:59 +0000 (UTC)
-Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.51])
- by mx.groups.io with SMTP id smtpd.web10.72375.1744109876049522317
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EDB03C3600C
+	for <webhook@archiver.kernel.org>; Tue,  8 Apr 2025 11:45:19 +0000 (UTC)
+Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.53])
+ by mx.groups.io with SMTP id smtpd.web10.73160.1744112705214393881
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Apr 2025 03:57:56 -0700
+ Tue, 08 Apr 2025 04:45:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.51, mailfrom: mark.yang@lge.com)
-Received: from unknown (HELO lgeamrelo02.lge.com) (156.147.1.126)
-	by 156.147.23.51 with ESMTP; 8 Apr 2025 19:57:53 +0900
-X-Original-SENDERIP: 156.147.1.126
+ dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.53, mailfrom: mark.yang@lge.com)
+Received: from unknown (HELO lgeamrelo04.lge.com) (156.147.1.127)
+	by 156.147.23.53 with ESMTP; 8 Apr 2025 20:45:02 +0900
+X-Original-SENDERIP: 156.147.1.127
 X-Original-MAILFROM: mark.yang@lge.com
 Received: from unknown (HELO markyang..) (10.177.120.37)
-	by 156.147.1.126 with ESMTP; 8 Apr 2025 19:57:53 +0900
+	by 156.147.1.127 with ESMTP; 8 Apr 2025 20:45:02 +0900
 X-Original-SENDERIP: 10.177.120.37
 X-Original-MAILFROM: mark.yang@lge.com
 From: mark.yang@lge.com
 To: openembedded-devel@lists.openembedded.org
 Cc: "mark.yang" <mark.yang@lge.com>
-Subject: [meta-oe][PATCH v2] freeipmi: fix error with gcc-15
-Date: Tue,  8 Apr 2025 19:57:52 +0900
-Message-Id: <20250408105752.2090402-1-mark.yang@lge.com>
+Subject: [meta-oe][PATCH] enscript: fix error with gcc-15
+Date: Tue,  8 Apr 2025 20:45:01 +0900
+Message-Id: <20250408114501.2345068-1-mark.yang@lge.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 10:57:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116706
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 11:45:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116707
 
 From: "mark.yang" <mark.yang@lge.com>
 
-* backport fix from:
-  https://lists.gnu.org/archive/html/freeipmi-devel/2025-02/msg00000.html
-
+* Imported the submitted patch from:
+  https://savannah.gnu.org/bugs/?66845
   to fix:
-  http://errors.yoctoproject.org/Errors/Details/851185/
-  Error occurs with gcc version 15.
-  In gcc-15, C23 is the default and 'bool' is used as a reserved keyword.
-  https://gcc.gnu.org/git/?p=gcc.git;a=commitdiff;h=55e3bd376b2214e200fa76d12b67ff259b06c212
+  http://errors.yoctoproject.org/Errors/Details/851187/
+  ../../enscript-1.6.6/compat/regex.c:3565:13: error: too many arguments to function 're_match_2_internal'; expected 0, have 8
+ 3565 |       val = re_match_2_internal (bufp, string1, size1, string2, size2,
+      |             ^~~~~~~~~~~~~~~~~~~  ~~~~
 
+* Modified the Upstream-Status since the same content as
+  0001-getopt-Include-string.h-for-strcmp-stcncmp-functions.patch is already in the backport.
 Signed-off-by: mark.yang <mark.yang@lge.com>
 ---
-v2: Change patch file author
+ ...ipt-does-not-build-with-C23-standard.patch | 32 +++++++++++++++++++
+ ...tring.h-for-strcmp-stcncmp-functions.patch |  3 +-
+ .../enscript/enscript_1.6.6.bb                |  1 +
+ 3 files changed, 35 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/enscript/enscript/0001-enscript-does-not-build-with-C23-standard.patch
 
- ...0001-Fix-for-GCC15-C23-build-failure.patch | 42 +++++++++++++++++++
- .../freeipmi/freeipmi_1.6.15.bb               |  5 ++-
- 2 files changed, 46 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/freeipmi/freeipmi/0001-Fix-for-GCC15-C23-build-failure.patch
-
-diff --git a/meta-oe/recipes-support/freeipmi/freeipmi/0001-Fix-for-GCC15-C23-build-failure.patch b/meta-oe/recipes-support/freeipmi/freeipmi/0001-Fix-for-GCC15-C23-build-failure.patch
+diff --git a/meta-oe/recipes-extended/enscript/enscript/0001-enscript-does-not-build-with-C23-standard.patch b/meta-oe/recipes-extended/enscript/enscript/0001-enscript-does-not-build-with-C23-standard.patch
 new file mode 100644
-index 0000000000..1bf8f1ece2
+index 0000000000..28f6764319
 --- /dev/null
-+++ b/meta-oe/recipes-support/freeipmi/freeipmi/0001-Fix-for-GCC15-C23-build-failure.patch
-@@ -0,0 +1,42 @@
-+From 5afe6492735938e0053ae78817399fa433f0f8c7 Mon Sep 17 00:00:00 2001
-+From: "Pavel Cahyna" <pcahyna@redhat.com>
-+Date: Tue, 8 Apr 2025 19:05:53 +0900
-+Subject: [PATCH] Fix for GCC15 / C23 build failure
++++ b/meta-oe/recipes-extended/enscript/enscript/0001-enscript-does-not-build-with-C23-standard.patch
+@@ -0,0 +1,32 @@
++From 9865262d7287320eba7d2fad2d4fcb12b489fc6c Mon Sep 17 00:00:00 2001
++From: zdohnal <email-is-unavailable>
++Date: Tue, 8 Apr 2025 20:25:47 +0900
++Subject: [PATCH] enscript does not build with C23 standard
 +
-+* backport fix from:
-+  https://lists.gnu.org/archive/html/freeipmi-devel/2025-02/msg00000.html
-+
++* Imported the submitted patch from:
++  https://savannah.gnu.org/bugs/?66845
 +  to fix:
-+  http://errors.yoctoproject.org/Errors/Details/851185/
-+  Error occurs with gcc version 15.
-+  In gcc-15, C23 is the default and 'bool' is used as a reserved keyword.
-+  https://gcc.gnu.org/git/?p=gcc.git;a=commitdiff;h=55e3bd376b2214e200fa76d12b67ff259b06c212
++  http://errors.yoctoproject.org/Errors/Details/851187/
++  ../../enscript-1.6.6/compat/regex.c:3565:13: error: too many arguments to function 're_match_2_internal'; expected 0, have 8
++ 3565 |       val = re_match_2_internal (bufp, string1, size1, string2, size2,
++      |             ^~~~~~~~~~~~~~~~~~~  ~~~~
 +
-+Upstream-Status: Backport [https://lists.gnu.org/archive/html/freeipmi-devel/2025-02/msg00000.html]
++Upstream-Status: Submitted [https://savannah.gnu.org/bugs/?66845]
 +Signed-off-by: mark.yang <mark.yang@lge.com>
 +---
-+ common/toolcommon/tool-config-file-common.c | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
++ compat/regex.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/common/toolcommon/tool-config-file-common.c b/common/toolcommon/tool-config-file-common.c
-+index 609e7a3..20dfad5 100644
-+--- a/common/toolcommon/tool-config-file-common.c
-++++ b/common/toolcommon/tool-config-file-common.c
-+@@ -78,14 +78,14 @@ _config_file_bool (conffile_t cf,
-+                    void *app_ptr,
-+                    int app_data)
-+ {
-+-  int *bool;
-++  int *value;
++diff --git a/compat/regex.c b/compat/regex.c
++index c6907f3..da28664 100644
++--- a/compat/regex.c
+++++ b/compat/regex.c
++@@ -336,7 +336,7 @@ typedef char boolean;
++ #define false 0
++ #define true 1
 + 
-+   assert (data);
-+   assert (optionname);
-+   assert (option_ptr);
-+ 
-+-  bool = (int *)option_ptr;
-+-  *bool = data->boolval;
-++  value = (int *)option_ptr;
-++  *value = data->boolval;
-+   return (0);
-+ }
-+ 
-diff --git a/meta-oe/recipes-support/freeipmi/freeipmi_1.6.15.bb b/meta-oe/recipes-support/freeipmi/freeipmi_1.6.15.bb
-index e977bbcd9e..e04ebfb0c6 100644
---- a/meta-oe/recipes-support/freeipmi/freeipmi_1.6.15.bb
-+++ b/meta-oe/recipes-support/freeipmi/freeipmi_1.6.15.bb
-@@ -13,7 +13,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
-                     file://COPYING.pstdout;md5=d32239bcb673463ab874e80d47fae504 \
-                     file://COPYING.sunbmc;md5=c03f21cd76ff5caba6b890d1213cbfbb"
++-static int re_match_2_internal ();
+++static int re_match_2_internal (struct re_pattern_buffer*, const char*, int, const char*, int, int, struct re_registers*, int);
++ 
++ /* These are the command codes that appear in compiled regular
++    expressions.  Some opcodes are followed by argument bytes.  A
+diff --git a/meta-oe/recipes-extended/enscript/enscript/0001-getopt-Include-string.h-for-strcmp-stcncmp-functions.patch b/meta-oe/recipes-extended/enscript/enscript/0001-getopt-Include-string.h-for-strcmp-stcncmp-functions.patch
+index a080b3aef7..e84c2d3937 100644
+--- a/meta-oe/recipes-extended/enscript/enscript/0001-getopt-Include-string.h-for-strcmp-stcncmp-functions.patch
++++ b/meta-oe/recipes-extended/enscript/enscript/0001-getopt-Include-string.h-for-strcmp-stcncmp-functions.patch
+@@ -3,9 +3,10 @@ From: Khem Raj <raj.khem@gmail.com>
+ Date: Fri, 2 Sep 2022 21:24:27 -0700
+ Subject: [PATCH] getopt: Include string.h for strcmp/stcncmp functions
  
--SRC_URI = "${GNU_MIRROR}/freeipmi/freeipmi-${PV}.tar.gz"
-+SRC_URI = " \
-+    ${GNU_MIRROR}/freeipmi/freeipmi-${PV}.tar.gz \
-+    file://0001-Fix-for-GCC15-C23-build-failure.patch \
-+"
- SRC_URI[sha256sum] = "d6929c354639f5ce75b5b1897e8b366eb63625c23e5c4590a7aea034fe2b8caf"
+-Upstream-Status: Pending
  
- DEPENDS = "libgcrypt"
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Upstream-Status: Backport [http://git.savannah.gnu.org/gitweb/?p=enscript.git;a=commit;h=300ecf85a8fe166a39f9dd818945c7b8a970db39]
++Signed-off-by: mark.yang <mark.yang@lge.com>
+ ---
+  compat/getopt.c | 1 +
+  1 file changed, 1 insertion(+)
+diff --git a/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb b/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
+index f6400213c0..4ca7c081ea 100644
+--- a/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
++++ b/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
+@@ -14,6 +14,7 @@ SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+            file://enscript-autoconf.patch \
+            file://0001-Fix-builds-with-recent-gettext.patch \
+            file://0001-getopt-Include-string.h-for-strcmp-stcncmp-functions.patch \
++           file://0001-enscript-does-not-build-with-C23-standard.patch \
+            "
+ 
+ inherit autotools gettext
 
