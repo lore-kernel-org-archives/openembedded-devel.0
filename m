@@ -2,107 +2,94 @@ Return-Path: <alistair23@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63620C3600C
-	for <webhook@archiver.kernel.org>; Tue,  8 Apr 2025 04:03:17 +0000 (UTC)
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web10.67253.1744084994214835020
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 69EA1C3600C
+	for <webhook@archiver.kernel.org>; Tue,  8 Apr 2025 04:15:37 +0000 (UTC)
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.web10.67391.1744085734799195005
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Apr 2025 21:03:14 -0700
+ Mon, 07 Apr 2025 21:15:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PA1eL8lG;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: alistair23@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-736a7e126c7so4571788b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Apr 2025 21:03:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lIAvH4yu;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: alistair23@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-3031354f134so3798598a91.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Apr 2025 21:15:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744084993; x=1744689793; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1744085734; x=1744690534; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=RgkekoFVgef5uWDE6PvKX95Xt7MKtdu+Hl+l7MNTGss=;
-        b=PA1eL8lGEoHtOYHjHnS8iUTr1dK3FklAvZ8hTU+fwnPDaUWQ/ktcEica0nSqwQQXjJ
-         qzeP9XnkIsLh0GVxmyQyFG+oSS4z+Acw5RcutkhESQc69PBpytmQUghqC30yRSZD2RjK
-         naOJkFpa4JahC2YAv/E4NU7N0hpTRTA4cNpLm44Un4t85sd5IUjsAzrk2oBCxVeyCdnY
-         ikezGKm9UH6ZBGCgl5aRkWWDoae+UzFmywzxY63eJIuSEVqpkuYYDSm+iZx3R+MCpdz7
-         fT1RVIryyDk7uTNbps4FdWb/aQhbCvvql6/Ndnensboi/FmvB69QvIJwhCcnO3rVwekM
-         nqLQ==
+        bh=JBPxn2k75TA4ouLrOKftrdnDu0IC/s/IOmBF3PIiCq0=;
+        b=lIAvH4yuHMQGNVQAZTpaR+hC3SiKCSBO+jXZQcyy4g1t4m+zzmhqFNryP8pcjs1JbU
+         mofg4b9LtqTOyHzPQdVEuYhM9xVRz81gsH6L5ni4b/FakSBcUJQHgEvycpizjmfyKhsV
+         hfrzFrvH+HIxaLs6zryawdmt8JFRdPCWspwqzAE+yNw20actChdPCw9x8ihPIn6pIFdm
+         2JBbgsxBzHNovBF9kHbXz3wKHzakMZB37coQ0fl9bCg7VlWn1GtYGcAcISfJEnahqXkN
+         vc6an1+bVS8dkx6LMSI7Kz4L5dLcBRjwzLq3vpTP1gYFCHeQl09MuDdLOKYmB200L8RP
+         VLLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744084993; x=1744689793;
+        d=1e100.net; s=20230601; t=1744085734; x=1744690534;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=RgkekoFVgef5uWDE6PvKX95Xt7MKtdu+Hl+l7MNTGss=;
-        b=EmS2I8UUUuhGdp5RpZfvLuI6BLpIy7hXb6J0fElpj+roLS9DR+JDCsunKeYoo9gr2i
-         dUtLNzKPh94a0XaUXvYs8CsrkwoGCiBb0wcZhsRBR/QeePwkUuxWQL8xdQpnkjWeqFhu
-         PzOInaU+BfXFPgmP25bNNJR8DLQBgGyLBTUaUBkm+fEEEJ8ObY6CXozsQSlyxz1XwnMk
-         jaWaUlvZ1zWzLLttXWdk/WAcGIUg6u4lEppsR2c8G0yW2JzpEFG204GdfqIRxy6bmnzI
-         KRGSb/bM3WaV8IWepNf3sdNy+LSgFb7uGQh6QksEcqoc4XkYs406KW62gu4oY7bbhdfb
-         6PMw==
-X-Gm-Message-State: AOJu0YxZ+mH/bLmE1k4aVPsUgExx1u/HT+ELqg68r+7HaizkQ3UiZiqR
-	rcFVT4+df6kGyPOTpEN8XTxsEScTtNcGRbrKXt5VTsFRgx1mY8SiGDPinQ==
-X-Gm-Gg: ASbGncuxHZyjjcW0TEu5FMLH170dj9ijd1kiMPifC0Y0Xc9r3gvr3xn9MupYk+KkVME
-	iNlgduYyOY4wcG9szI6/JBrJQv07i3kbzqLBvQ1caUOm04wc5y2LtncVIwVoBs0y2IWk3xI5Sav
-	EM2/1Z2MR/fTB/7vTjtwD+1Gx7279Qfg8n3zIPVrO1ZT8eMm9Krg04J8335paj9k6E+02+TbXM+
-	ipiyu/2U3Bdwf2WNC95Sxv+YCV/EU26qniRiupyJqUPRQi6jwrHf3S3qReqQLYOsZXruZ0b7GF4
-	KOm0O+QMHpCai/Vcn9NYt5XyBUUk6sO5HJ8HUO6yLm5q2Zfr4qTuEDn9mTZDLHw/CEvEsEezybR
-	DdXSl8zKanBH491rVwN7j4C4uRrUjD47n74p6VuOvExotEf9AeA==
-X-Google-Smtp-Source: AGHT+IGJW+fHI4jqNjNg2tPgc1F66w2JXWnDNzphY1UgVimtVq1aee9ZNlVu04/dwQ2sDp66/8cygA==
-X-Received: by 2002:a05:6a00:2e14:b0:736:4bd3:ffab with SMTP id d2e1a72fcca58-739e4be89demr15117388b3a.17.1744084993181;
-        Mon, 07 Apr 2025 21:03:13 -0700 (PDT)
+        bh=JBPxn2k75TA4ouLrOKftrdnDu0IC/s/IOmBF3PIiCq0=;
+        b=h7/U+qSI9+4Q/1M6OkepfNGpDSzR3gWEFgMhVHXhtanOaRFHs+9ZxMeWfEVb2WUpqw
+         w/IB5r7Mr6Ydyvf4h9WIEOCMW/YiP9Jpj/zK9KXeIoMkJo7tM5t4aTCOqaNpW4lKIrQ4
+         vSfE1gILxMtHJK6xQlUaSGVR/lQB3s5wLM5skiRJNCMkh3g2lPbKT2lR0ebUNg3HtiBy
+         htopTENuwyVsqVdTgIGl9LSFh5g+D3t8x5IrruhD38BAr+cuReM/Y6ub8w64lMprTW8l
+         gc9XTGwMMBUiU14R8tspRwxPukIsqSdpfSt80lwKchytbjOwpX2z20FBKUbH0tXbTdNz
+         Pdtw==
+X-Gm-Message-State: AOJu0YxthYSjbfgiqWPDOsA5k0oAvHfQYR4Qwhx5XTK/o/vDw2U5D2/k
+	bB2hZ/Yq3CaoxzVyi/pRc+S7nLm0/UK4ZJIyY8EnSBprosW1ppw7ZbXwbg==
+X-Gm-Gg: ASbGncvmsDLkxiZD6CL9Iw0JSoubEgNrNFOHJrFHIBy5bSbXaxd1jySXiY9e1AC6wRx
+	hDhfU8FxM6GpKHi5GgrzlyPXuedxP1OvRWnVZt7nsnex62wec8fB5RdiPl1FrFCiSwELzSQ7JC+
+	QB9lohxnRQd8OUd77vLgZDhRF6Bk77ZEQjk6jvvJ5ukvj/uDyP3CkMzaj5GnRMf1d+7XtJyC5Rp
+	h8xC/fQYSpQw1CVz6f6WF6ixhRIQcmFhyAJ4y33H3cvBO+FK/gLqLw56u7GPiRP0u9vvGfyjkSF
+	YPPXDbWbj2diQVC2puYqq81HR+nZfpV2W9GBaUlXjtGPKbs+xx0KOFTdd0Js1M7wua9/VXQ5TU7
+	jOZD87TqsFX7HGkwYys1IABDeGK+uet5jAsxZjwqYrZsR5YAV1w==
+X-Google-Smtp-Source: AGHT+IFwUuIm311MWavSDBpsTS7JQAqpJdpvtHQJBMq8WEeOVyYnjv9HbeSAfbkMDuAYAWNiaLUm1w==
+X-Received: by 2002:a17:90b:5683:b0:301:1c29:a1d9 with SMTP id 98e67ed59e1d1-306a6167814mr18613111a91.21.1744085733927;
+        Mon, 07 Apr 2025 21:15:33 -0700 (PDT)
 Received: from toolbx.alistair23.me (2403-580b-97e8-0-82ce-f179-8a79-69f4.ip6.aussiebb.net. [2403:580b:97e8:0:82ce:f179:8a79:69f4])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-739d97d2f63sm9466291b3a.1.2025.04.07.21.03.11
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-30588a2f6b2sm9868212a91.24.2025.04.07.21.15.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Apr 2025 21:03:12 -0700 (PDT)
+        Mon, 07 Apr 2025 21:15:33 -0700 (PDT)
 From: Alistair Francis <alistair23@gmail.com>
 X-Google-Original-From: Alistair Francis <alistair.francis@wdc.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: alistair23@gmail.com,
 	Alistair Francis <alistair.francis@wdc.com>
-Subject: [meta-oe][PATCH] ktls-utils: Initial commit
-Date: Tue,  8 Apr 2025 14:03:04 +1000
-Message-ID: <20250408040304.4005939-1-alistair.francis@wdc.com>
+Subject: [meta-oe][PATCH 1/2] libnvme: Update to 1.12
+Date: Tue,  8 Apr 2025 14:15:21 +1000
+Message-ID: <20250408041523.4029757-1-alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 04:03:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116685
-
-Package ktls-utils which includes tlsd.
-
-This is used when in-kernel TLS consumers need a mechanism to perform TLS
-handshakes on a connected socket to negotiate TLS session parameters that
-can then be programmed into the kernel's TLS record protocol engine.
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 04:15:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116686
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- .../ktls-utils/ktls-utils_0.11.bb               | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb
+ .../libnvme/{libnvme_1.11.1.bb => libnvme_1.12.bb}              | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libnvme/{libnvme_1.11.1.bb => libnvme_1.12.bb} (94%)
 
-diff --git a/meta-oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb b/meta-oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb
-new file mode 100644
-index 0000000000..e85dc4ac72
---- /dev/null
-+++ b/meta-oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "TLS handshake utilities for in-kernel TLS consumers"
-+DESCRIPTION = "In-kernel TLS consumers need a mechanism to perform TLS \
-+handshakes on a connected socket to negotiate TLS session parameters that \
-+can then be programmed into the kernel's TLS record protocol engine."
-+DEPENDS = "gnutls keyutils glib-2.0 libnl"
-+RDEPENDS:${PN} += " gnutls"
-+LICENSE = "GPL-2.0-only"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d568123389d9a12625cca2b089b1728b"
-+
-+SRCREV = "5c3314b5728b272cbaf0d98f4d521cca9610b6bf"
-+SRC_URI = "git://github.com/oracle/ktls-utils.git;nobranch=1;protocol=https"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit autotools pkgconfig systemd
-+
-+PACKAGECONFIG[systemd] = "--with-systemd,,systemd"
+diff --git a/meta-oe/recipes-support/libnvme/libnvme_1.11.1.bb b/meta-oe/recipes-support/libnvme/libnvme_1.12.bb
+similarity index 94%
+rename from meta-oe/recipes-support/libnvme/libnvme_1.11.1.bb
+rename to meta-oe/recipes-support/libnvme/libnvme_1.12.bb
+index bf66099ddf..6b73defa56 100644
+--- a/meta-oe/recipes-support/libnvme/libnvme_1.11.1.bb
++++ b/meta-oe/recipes-support/libnvme/libnvme_1.12.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
+                     file://ccan/licenses/CC0;md5=c17af43b05840255a6fedc5eda9d56cc \
+                     file://ccan/licenses/BSD-MIT;md5=838c366f69b72c5df05c96dff79b35f2"
+ DEPENDS = "json-c"
+-SRCREV = "cec9feaeb03da8046d14bb395f592c601cf2ae5f"
++SRCREV = "5ec1f5284ecb0eda481f3d2d61236fbc5b46164f"
+ 
+ SRC_URI = "git://github.com/linux-nvme/libnvme;protocol=https;branch=master"
+ 
 -- 
 2.49.0
 
