@@ -1,221 +1,92 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <Divya.Chellam@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BAF5C369A2
-	for <webhook@archiver.kernel.org>; Wed,  9 Apr 2025 11:49:03 +0000 (UTC)
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
- by mx.groups.io with SMTP id smtpd.web11.6603.1744199342547588030
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FE16C369A1
+	for <webhook@archiver.kernel.org>; Wed,  9 Apr 2025 12:10:03 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.6946.1744200593150483965
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Apr 2025 04:49:02 -0700
+ Wed, 09 Apr 2025 05:09:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=M1pF9RW+;
- spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-3912d2c89ecso5886879f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 04:49:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744199341; x=1744804141; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=GEBu0EEtMklzYEm1ozp6HVCaFL+eWl39J7tNqEBAakM=;
-        b=M1pF9RW+iQoccIgcr02N0FNnIl5piNagW0SHQ7CbPodotp96CYEfQlZpO3g1oHclNc
-         jLYDeA9ODEN6vy5up2IiL0c6v6L8g4uV8wuMQR7xDAJ4MohXhJHJB93FmXgdlXfGK+wb
-         HLTXF3PQphywegktVVUtbswcd0ds366XypPSW2/EDJgq4EZG1YcuFfRKcZuvTgd2sQBO
-         gIUW1TCSiSfvSOuh9zJ7ppNPAk7vErIONMVI38XaAWRaDtkZutCeRAXHlPRdZs8HiC+p
-         iug3XRgXB/tA+ugd+nNuDvM1GSp6wmwU7bTFIqkmG1DEtyZv4SnP7NtXZm/qsR2JirST
-         EziQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744199341; x=1744804141;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=GEBu0EEtMklzYEm1ozp6HVCaFL+eWl39J7tNqEBAakM=;
-        b=ltaJqq43Mjv4NLSaKb0XxIMKbUA1sos5dLfPCqkgchSYoyym9efdyflsT1n2mmy4c0
-         mYTxvR5WZIibXu9J1E8OGCOGrjwtdgZDby6r+KFZ0EMmLEVXgjzpyGMxl8wG0DJG6eKT
-         3OiJfWeei7/dQABjhOLfyss+r+suDntjIaJns1sNpUQzHl7ccdukA0sFU3iNno/B6e4F
-         I2nWoOtcOFSYp/z4O5/g9+sk5xH+HkAEVra+6xw/TjDmxUL/qFt2UkTOZYp98cSvaAQF
-         lPTCrkst8W31SyzIBc3v825mERfNAjvJR1Y8AStF8g1OeDjWi5UqCO/W3tCj56OevKPZ
-         ll2w==
-X-Forwarded-Encrypted: i=1; AJvYcCUjEcCfEQ73HNM10IvXeYoys2TcvH0YHamGMKEKDMTc+8FZQGrCfk99rAdcGsnMTQutsa5HvlksmSFUkKxM2k5xa8U=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yx3EdvGCPCmnFnCLJG96h2lOZaEsgNYMZ24audt87coUi5cPMqP
-	4KpTz73DBJvs3RBiqLsIX0wmc18WrHbenTZn6IsAY/gF8EU6HW34
-X-Gm-Gg: ASbGncswFpl0AlPvZkymDpCRRK+sQLVxzcNKSMu5mM1hsCKsdtVT3OXyFCKF1/cPp7c
-	W9TeF8FeHtukNxArz+I6XzqxcU4VJvxwyxxNlVzk1we/eMNwx2dT2UEmalzQWXLaLDA63YN0irG
-	09aVp3R5Aiotyntr13BhULh6AaxraLyFvaOt11gVoSDBCeyub1bDq76V6bsMQbKlwgcmho/8Ifs
-	2cuHu3QifPmNttuCW1Ej+r8KNyR8Ed5yuRRNkawPyld49Gb5/eFrAtWQKARHTBSUcqsUW1qyYLM
-	/vWdeLNFa5+SA7Gab4b9rmBATqH3aFlNEvUnRODgSYTgKw==
-X-Google-Smtp-Source: AGHT+IE/GZAxyQJu+K36QmEUI1MpfCwnSFDXW8Fmcpz1ZMKQ3iFO9XDk1NnV01CL89oXBT/7/FDQFA==
-X-Received: by 2002:a05:6000:430a:b0:399:737f:4e02 with SMTP id ffacd0b85a97d-39d87cd0070mr2214483f8f.39.1744199340558;
-        Wed, 09 Apr 2025 04:49:00 -0700 (PDT)
-Received: from [192.168.1.2] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-39d893fff47sm1405863f8f.97.2025.04.09.04.48.59
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 09 Apr 2025 04:49:00 -0700 (PDT)
-Message-ID: <95694d0d-29af-4b8d-b675-2020e7ab7417@gmail.com>
-Date: Wed, 9 Apr 2025 13:48:59 +0200
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=6194f9973c=divya.chellam@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 539BvQgr010700
+	for <openembedded-devel@lists.openembedded.org>; Wed, 9 Apr 2025 12:09:52 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45tug8ncpc-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 12:09:52 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Wed, 9 Apr 2025 05:09:49 -0700
+From: dchellam <divya.chellam@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-networking][scarthgap][PATCH 1/1] openvpn: upgrade 2.6.12 -> 2.6.14
+Date: Wed, 9 Apr 2025 12:09:26 +0000
+Message-ID: <20250409120926.3645279-1-divya.chellam@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [linux-yocto] error of tiptop
-To: "Mingyu Wang (Fujitsu)" <wangmy@fujitsu.com>,
- Khem Raj <raj.khem@gmail.com>
-Cc: "linux-yocto@lists.yoctoproject.org"
- <linux-yocto@lists.yoctoproject.org>,
- "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-References: <TYWPR01MB118613486A025B1F8AE633026DCAF2@TYWPR01MB11861.jpnprd01.prod.outlook.com>
- <400fa42d-4c27-4ef0-86f4-62046b0cd021@gmail.com>
- <TYWPR01MB1186183EAB588828FDA06A60BDCB52@TYWPR01MB11861.jpnprd01.prod.outlook.com>
- <CAMKF1sof5d3wTtfaqmxF70MKGRXzAF1G4vS5L1mjCEsfQMFvDQ@mail.gmail.com>
- <TYWPR01MB11861CCF4F133083155F3B7C3DCB42@TYWPR01MB11861.jpnprd01.prod.outlook.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <TYWPR01MB11861CCF4F133083155F3B7C3DCB42@TYWPR01MB11861.jpnprd01.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: ejuCHd0N5TDvoRgWLeGeNlj1_ozastGw
+X-Authority-Analysis: v=2.4 cv=YJefyQGx c=1 sm=1 tr=0 ts=67f66390 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=JBbWWo_dQDwA:10 a=HCiNrPZc1L8A:10 a=XR8D0OoHHMoA:10 a=NEAV23lmAAAA:8 a=9dNbsytUAAAA:8 a=uDo-SIiEAAAA:8
+ a=t7CeM3EgAAAA:8 a=CfmGdABNzVdpvb7Fs8UA:9 a=gPpeecpFUKP6j8iU7U-x:22 a=Rkhf4GTZPwEC63LfVcCP:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: ejuCHd0N5TDvoRgWLeGeNlj1_ozastGw
+X-Sensitive_Customer_Information: Yes
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-04-09_04,2025-04-08_04,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ malwarescore=0 bulkscore=0 mlxlogscore=999 adultscore=0 lowpriorityscore=0
+ mlxscore=0 clxscore=1015 impostorscore=0 phishscore=0 spamscore=0
+ suspectscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
+ definitions=main-2504090072
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 11:49:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116737
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 12:10:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116738
 
+From: Divya Chellam <divya.chellam@windriver.com>
 
-On 4/9/25 09:27, Mingyu Wang (Fujitsu) wrote:
-> I tried " runqemu kvm nographic qemux86-64", but there still report an error: 
-> 
-> root@qemux86-64:~# uname -a
-> Linux qemux86-64 6.12.19-yocto-standard #1 SMP PREEMPT_DYNAMIC Wed Mar 19 23:04:08 UTC 2025 x86_64 GNU/Linux
-> root@qemux86-64:~# tiptop -h
-> syscall: Operation not permitted
-> Could not perform syscall.
-> Don't know why...
-> root@qemux86-64:~#
->
+This includes CVE-fix for CVE-2025-2704
 
-1. I wonder if KVM is working as it should. Is qemu fast just like your
-machine when running with KVM? Or does it have the same speed, as
-without KVM? (I assume your host machine is also x86-64)
-2. If KVM is working, then maybe it's not KVM related, my similar
-experiences are just coincidental, and you have a different problem.
-Very overshooting idea: you could install strace in your image, and try
-running "strace -s 320 -v -y -ff -o /tmp/tiptop_strace tiptop -h" - this
-will save the system calls made by tiptop in the /tmp folder. It's not
-easy to read and fairly verbose, but sometimes can show some surprising
-errors about syscalls one would expect to succeed, but failing for
-strange reasons. (Strace doesn't always show useful info... but it's
-worth a try, and at least it's quick)
+Changelog:
+==========
+https://github.com/OpenVPN/openvpn/releases
 
+For full details, refer to:
+https://github.com/OpenVPN/openvpn/compare/v2.6.12...v2.6.14
 
->   --
-> Best Regards
-> ---------------------------------------------------
-> Wang Mingyu
-> FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
-> No.6 Wenzhu Road, Nanjing, 210012, China
-> TEL：+86+25-86630566--8568
-> COINS: 79988548
-> FAX: +86+25-83317685
-> MAIL: wangmy@fujitsu.com
-> 
->> -----Original Message-----
->> From: Khem Raj <raj.khem@gmail.com>
->> Sent: Tuesday, April 8, 2025 11:29 PM
->> To: Wang, Mingyu/王 鸣瑜 <wangmy@fujitsu.com>
->> Cc: Gyorgy Sarvari <skandigraun@gmail.com>;
->> linux-yocto@lists.yoctoproject.org;
->> openembedded-devel@lists.openembedded.org
->> Subject: Re: [oe] [linux-yocto] error of tiptop
->>
->> On Tue, Apr 8, 2025 at 12:28 AM wangmy via lists.openembedded.org
->> <wangmy=fujitsu.com@lists.openembedded.org> wrote:
->>>
->>> I tried " runqemu qemux86-64 qemuparams=" --enable-kvm " nographic", but
->> there still report an error:
->>>
->>
->> runqemu kvm nographic qemux86-64
->>
->>> root@qemux86-64:~# tiptop
->>> syscall: Operation not permitted
->>> Could not perform syscall.
->>> Don't know why...
->>>
->>> My repo of meta-openembedded] has been updated to
->> 82056b992459607ea69b0130308685c4872cb19b7
->>> Repo of poky has been updated to
->> 9e418c4265453860c4736abb7520f1c3c2c3faee
->>>   --
->>> Best Regards
->>> ---------------------------------------------------
->>> Wang Mingyu
->>> FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
->>> No.6 Wenzhu Road, Nanjing, 210012, China
->>> TEL：+86+25-86630566--8568
->>> COINS: 79988548
->>> FAX: +86+25-83317685
->>> MAIL: wangmy@fujitsu.com
->>>
->>>> -----Original Message-----
->>>> From: Gyorgy Sarvari <skandigraun@gmail.com>
->>>> Sent: Thursday, April 3, 2025 3:35 PM
->>>> To: Wang, Mingyu/王 鸣瑜 <wangmy@fujitsu.com>;
->>>> linux-yocto@lists.yoctoproject.org
->>>> Cc: openembedded-devel@lists.openembedded.org
->>>> Subject: Re: [oe] [linux-yocto] error of tiptop
->>>>
->>>> On what machine are you trying to run it? At least in qemu I get the same,
->>>> unless I enable kvm directly:
->>>>
->>>> runqemu qemux86-64 qemuparams=" --enable-kvm "
->>>>
->>>> This way I don't get that error.
->>>>
->>>> On 4/2/25 10:52, wangmy via lists.openembedded.org wrote:
->>>>> Hi,
->>>>>
->>>>> When running tiptop on the image of x86-64 for the latest repository of
->> poky
->>>> and meta-oe, an error occurred.
->>>>>
->>>>> root # tiptop -h
->>>>> syscall: Operation not permitted
->>>>> Could not perform syscall.
->>>>> Don't know why...
->>>>>
->>>>> According to preliminary investigation, the cause of this issue is related to
->>>> kenerl updating of perf related code.
->>>>> This problem has been occurring since the commit
->>>>> f390c2eea571945f357a2d3b9fcb1c015767132e of branch
->> v6.6/standard/base
->>>>>
->>>>> May I ask if you have any opinions or suggestions regarding this issue?
->>>>>
->>>>>   --
->>>>> Best Regards
->>>>> ---------------------------------------------------
->>>>> Wang Mingyu
->>>>> FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
->>>>> No.6 Wenzhu Road, Nanjing, 210012, China
->>>>> TEL：+86+25-86630566--8568
->>>>> COINS: 79988548
->>>>> FAX: +86+25-83317685
->>>>> MAIL: wangmy@fujitsu.com
->>>>>
->>>>>
->>>>>
->>>>>
->>>>>
->>>
->>>
->>> -=-=-=-=-=-=-=-=-=-=-=-
->>> Links: You receive all messages sent to this group.
->>> View/Reply Online (#116693):
->> https://lists.openembedded.org/g/openembedded-devel/message/116693
->>> Mute This Topic: https://lists.openembedded.org/mt/112043323/1997914
->>> Group Owner: openembedded-devel+owner@lists.openembedded.org
->>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub
->> [raj.khem@gmail.com]
->>> -=-=-=-=-=-=-=-=-=-=-=-
->>>
+Signed-off-by: Divya Chellam <divya.chellam@windriver.com>
+---
+ .../openvpn/{openvpn_2.6.12.bb => openvpn_2.6.14.bb}            | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/openvpn/{openvpn_2.6.12.bb => openvpn_2.6.14.bb} (97%)
+
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.6.12.bb b/meta-networking/recipes-support/openvpn/openvpn_2.6.14.bb
+similarity index 97%
+rename from meta-networking/recipes-support/openvpn/openvpn_2.6.12.bb
+rename to meta-networking/recipes-support/openvpn/openvpn_2.6.14.bb
+index af237280ea..5361709f0c 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.6.12.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.6.14.bb
+@@ -14,7 +14,7 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
+ 
+ UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
+ 
+-SRC_URI[sha256sum] = "1c610fddeb686e34f1367c347e027e418e07523a10f4d8ce4a2c2af2f61a1929"
++SRC_URI[sha256sum] = "9eb6a6618352f9e7b771a9d38ae1631b5edfeed6d40233e243e602ddf2195e7a"
+ 
+ CVE_STATUS[CVE-2020-27569] = "not-applicable-config: Applies only Aviatrix OpenVPN client, not openvpn"
+ 
+-- 
+2.40.0
 
 
