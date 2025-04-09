@@ -2,112 +2,193 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CB057C369A1
-	for <webhook@archiver.kernel.org>; Wed,  9 Apr 2025 13:57:03 +0000 (UTC)
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
- by mx.groups.io with SMTP id smtpd.web10.9117.1744207020385177657
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4F4FC369A4
+	for <webhook@archiver.kernel.org>; Wed,  9 Apr 2025 14:10:53 +0000 (UTC)
+Received: from mail-oo1-f53.google.com (mail-oo1-f53.google.com [209.85.161.53])
+ by mx.groups.io with SMTP id smtpd.web11.9554.1744207853038365922
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Apr 2025 06:57:00 -0700
+ Wed, 09 Apr 2025 07:10:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=S4IezTJz;
- spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-227cf12df27so6759245ad.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 06:57:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JLV8uEpj;
+ spf=pass (domain: gmail.com, ip: 209.85.161.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f53.google.com with SMTP id 006d021491bc7-601ad30bc0cso490486eaf.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 07:10:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744207019; x=1744811819; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=p6L3OZITQAvipangUfd2VEq3OEQZbJdD76Dpkz+Jra0=;
-        b=S4IezTJzwrYKm0thyW26paeV2QHuTl5cX5SFMCU5tmgMdQeuF+l49qcuwHAiCisn7C
-         ei6qvNDJKB1Ys9QttTyA8ZUJv7+Eh/XigHwXtxkCU2NONPxzAp2srFqzXMUgYSgi2g0B
-         xz8wAgKxLpE+oYhjSX7ZybcCpuhNH3o+OmWQotRx8CdO/0Y2N+jcrPCdMboR8U0ZEa9S
-         APa5hnHRUouhACCovXtg22sltDPkIsTZyJYrxrKiB8XiVXFQlXJtIcWhH8UpW3E0E7JM
-         2/Wc+GqpdbcS+9mrrpHkiyy228nipxSnfq+fkgqti+VW4Pm4ZOM0mkSHSa7oa1O2mlgg
-         fcLA==
+        d=gmail.com; s=20230601; t=1744207852; x=1744812652; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=QlqZEFuOaa8f5lGFXj1l+o+mMLzdF/SunejI/7YjAbA=;
+        b=JLV8uEpjjvMgKXVcpcMEGA632JUz9Bhg9pTPj847HxFmPWCEHuy5a9kBJcJO2PIh56
+         oe+g7dxzphtjy+R6yXGg8hKuW8cqXZRmaWKIz37iZz5HzEc+5GYt7WuC3N3hAyRdkgC0
+         HXdob08ZmQxlwVTcMJgch5RWabrmRl233BlWSdPoGD41NFtePcrSSX0FNlXTAloBXdqz
+         Wqqtv7kMokdYWmVhWlQV/fsYQHb4jfuPBLYu6REju3Azxshc/Qt/OIEXUa+I371R/HlG
+         qp8LYNazcD6xFB/dr8xST8EHu+00wO3sKSSZZ8f96yf3MZfs3C2Cy3qvRZo5WE6w7nDo
+         wGyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744207019; x=1744811819;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=p6L3OZITQAvipangUfd2VEq3OEQZbJdD76Dpkz+Jra0=;
-        b=R62nL+LCJzmI1QI31sptyQgZzkEkaEJjMQm3o4jrZA0VNe5tsHkzpg/R0E3+U97L1X
-         wJkui4lPQYNu/3tag2vBwYHll7IoQ5EuhlOlR5g7uUYr+kdePuezdyusnnNa13CBrJ2H
-         nJ8agYjsfdkaDvZOrT07aoxAKcCK4cBZDfKpPa+mbcQFE6QWNVA8/UwWLgILexvV1T3F
-         F3lTEWUV78/aE0R4qEi1EZqu5dpMXeUEkqrQQ0C91RN6H7sAth8QFg81S6zgarS6J9i7
-         FM60uGof3wCz6a2cJskO07r34MwQDDZkBEkcox0s7peYExJpXjoBzA6rHg8W+GvN+yrs
-         8sjA==
-X-Gm-Message-State: AOJu0YwD/4Jqw5xuQEuNKIyMGLm6aBTAaJucL1K8OUi+EZfNTIc1F7A7
-	uMlj6nR7znx2HzvcFRDlDRONF0KLC1eR5Gh9BfJY7iMhRq4uwLvnQffmjfLC
-X-Gm-Gg: ASbGnctvXYpWddXAFgcar7g+CVNZeJwXMydQdALKLnxOd6oM3FW64exBwc5l1wFF/Ci
-	J0McUgdQb8HT8OrKBlQhNgEV8WVoEpSESiEr5yNzRytBwN9iPXPrcQqQRdk+xH+7WoAXqUZABdv
-	tGu1qiQ/dIEB2/YBQGB9qzlS9oY8u9NaOdaTHvuXpDLfugNFAHctUBwCMq9kPZRZxxXFG4hW6Re
-	ZommGrEkJ3mrQdi8FXVC71mgB372Ril7k1XrH1myoi0oI7m7x/scTTNkqaggI9WPPzip5hC+lCQ
-	j513hUivUDQl/t1uhu2+pgBWoLedGVLv
-X-Google-Smtp-Source: AGHT+IF2/TvqfCXhQckWQ6Np9Kk7IwP45uYHhQide4wWWVCVIyF1JcziMLAOSeWix+50M4RTlG7SsQ==
-X-Received: by 2002:a17:903:2290:b0:224:24d3:60fb with SMTP id d9443c01a7336-22ab5e24fbcmr108810815ad.10.1744207019436;
-        Wed, 09 Apr 2025 06:56:59 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:8201:fd20::f900])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22ac7cb4fa9sm11845495ad.179.2025.04.09.06.56.58
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Apr 2025 06:56:59 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] pv: Add valgrind dependency on platform where its available
-Date: Wed,  9 Apr 2025 06:56:56 -0700
-Message-ID: <20250409135656.1066846-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.49.0
+        d=1e100.net; s=20230601; t=1744207852; x=1744812652;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=QlqZEFuOaa8f5lGFXj1l+o+mMLzdF/SunejI/7YjAbA=;
+        b=Nbn/hiohXTXjqDOq6AQsckFyeZyTFD0APxwoM1O4gnY0I7hTRDp26RugHqpzCz5O5R
+         WBllVUFrg/4TiVi/FjndIDprS+CBEIwWVCtWc4EzkEZrPy/7In0MKp5uiefQqh+q2gIX
+         xoALSYjav+dAiYHgbiNF+OlP2OuV9kvIZ8WBzHbS0nhdCmvnDEuNBov81+hv7opM715b
+         TI9QCZkTm/8Jg0bTW4qQvdI6cMVusbktVtB75a30Eps626mZ2GyZ0tT7g18FmzNQJU3g
+         mbVgCi+Cwp9SEQF1NIjZtoyMbRbPVTsczybfrwT5RVlhmHHaFxARu845E8y7aJcwAJ1l
+         yp4g==
+X-Forwarded-Encrypted: i=1; AJvYcCXWsHIm/FkxgyO9u6gsa/MwNTHMTtb3ahY34bVFiZj/ulFN94ug4z67zp+xDpLwP6Y0z/W4ozTvCyYgrOGmjlsQqxY=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YxgTAKnLOI9Jox2WmFgYXf54vh2HAwpmAJ1el5g+40hQ6mKCtu0
+	z0Yq/Grln0aZXKO/haLhYFhaauTqJvXbBkwb2uqFDpAKAU8CHLBmBKvvmjy2tdubmCaGVQaFqs5
+	+zwmV58XNC+50751lRLnYUKOcUOw=
+X-Gm-Gg: ASbGncsSKc/387zPAazBOqGIsIAJ6Gzkr+5nHlzoYIcIhSsZuBYTlkXAOtTMG3/+JNf
+	l0ZRB08GMLjQ5CHVSUK3x2VisLU0StV4BpEKaOmLIubp+/fZDevk+yMSTnuTYsjBZtfBbtnzotQ
+	CFEMrK7eLqDOyQTM7SxcKRbw==
+X-Google-Smtp-Source: AGHT+IGfzga/TUl5GUuIPFIG65Adf24Yil+DmmyRvbe45T3OD3JkNf7tOH/aGCpY5jbVMgSEyu2mSwnhrvCeqiRvW0c=
+X-Received: by 2002:a4a:edc4:0:b0:600:5673:69ef with SMTP id
+ 006d021491bc7-6045cb7cea0mr1813106eaf.1.1744207851812; Wed, 09 Apr 2025
+ 07:10:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <1744017431-22217-1-git-send-email-wangmy@fujitsu.com>
+ <1744017431-22217-26-git-send-email-wangmy@fujitsu.com> <CA+chaQfPYDyFGk2sm1HhzZAN2XmX888+b-QzwyF4tK0g=UR8zA@mail.gmail.com>
+In-Reply-To: <CA+chaQfPYDyFGk2sm1HhzZAN2XmX888+b-QzwyF4tK0g=UR8zA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 9 Apr 2025 07:10:25 -0700
+X-Gm-Features: ATxdqUH70yJahcFwEjzC7mSNlzZoAPxu4v95zpJdBHlCfmWn54UbtcoPT2uSaqk
+Message-ID: <CAMKF1spK1fJ=Yp9JVib2xgGshTbGTq-30_78Liy+p9txfRvtZw@mail.gmail.com>
+Subject: Re: [oe] [meta-python] [PATCH 26/30] python3-snagboot: upgrade 2.2 -> 2.3
+To: martin.jansa@gmail.com
+Cc: wangmy@fujitsu.com, openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 13:57:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116741
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 14:10:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116742
 
-valgrind does not build for RISCV platforms yet and so are some other
-platforms ( taken from rsyslog recipe )
+On Wed, Apr 9, 2025 at 5:41=E2=80=AFAM Martin Jansa via lists.openembedded.=
+org
+<martin.jansa=3Dgmail.com@lists.openembedded.org> wrote:
+>
+> With this update applied I'm seeing build failures like:
+>
+> ValueError: invalid pyproject.toml config: `project.license`.
+> configuration error: `project.license` must be valid exactly by one
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-support/pv/pv_1.9.31.bb | 26 ++++++++++++++++++++++++-
- 1 file changed, 25 insertions(+), 1 deletion(-)
+Interestingly, I do not see this on ubuntu 20.04 + buildtools and
+debian12 based builders.
 
-diff --git a/meta-oe/recipes-support/pv/pv_1.9.31.bb b/meta-oe/recipes-support/pv/pv_1.9.31.bb
-index 2f1d38337f..578012fcfd 100644
---- a/meta-oe/recipes-support/pv/pv_1.9.31.bb
-+++ b/meta-oe/recipes-support/pv/pv_1.9.31.bb
-@@ -18,7 +18,31 @@ inherit autotools gettext ptest
- LDEMULATION:mipsarchn32 = "${@bb.utils.contains('TUNE_FEATURES', 'bigendian', 'elf32btsmipn32', 'elf32ltsmipn32', d)}"
- export LDEMULATION
- 
--RDEPENDS:${PN}-ptest += "bash coreutils tmux valgrind"
-+# for ptests
-+VALGRIND = "valgrind"
-+
-+# valgrind supports armv7 and above
-+VALGRIND:armv4 = ''
-+VALGRIND:armv5 = ''
-+VALGRIND:armv6 = ''
-+
-+# X32 isn't supported by valgrind at this time
-+VALGRIND:linux-gnux32 = ''
-+VALGRIND:linux-muslx32 = ''
-+
-+# Disable for some MIPS variants
-+VALGRIND:mipsarchr6 = ''
-+VALGRIND:linux-gnun32 = ''
-+
-+# Disable for powerpc64 with musl
-+VALGRIND:libc-musl:powerpc64 = ''
-+VALGRIND:libc-musl:powerpc64le = ''
-+
-+# RISC-V support for valgrind is not there yet
-+VALGRIND:riscv64 = ""
-+VALGRIND:riscv32 = ""
-+
-+RDEPENDS:${PN}-ptest += "bash coreutils tmux ${VALGRIND}"
- RDEPENDS:${PN}-ptest:append:libc-musl = " musl-locales"
- RDEPENDS:${PN}-ptest:append:libc-glibc = " glibc-binary-localedata-c"
- 
+> definition (2 matches found):
+>
+>     - keys:
+>         'file': {type: string}
+>       required: ['file']
+>     - keys:
+>         'text': {type: string}
+>       required: ['text']
+>
+> DESCRIPTION:
+>     `Project license <https://peps.python.org/pep-0621/#license>`_.
+>
+> GIVEN VALUE:
+>     "GPL-2.0-only"
+>
+> OFFENDING RULE: 'oneOf'
+>
+> DEFINITION:
+>     {
+>         "oneOf": [
+>             {
+>                 "properties": {
+>                     "file": {
+>                         "type": "string",
+>                         "$$description": [
+>                             "Relative path to the file (UTF-8) which
+> contains the license for the",
+>                             "project."
+>                         ]
+>                     }
+>                 },
+>                 "required": [
+>                     "file"
+>                 ]
+>             },
+>             {
+>                 "properties": {
+>                     "text": {
+>                         "type": "string",
+>                         "$$description": [
+>                             "The license of the project whose meaning
+> is that of the",
+>                             "`License field from the core metadata",
+>
+> "<https://packaging.python.org/specifications/core-metadata/#license>`_."
+>                         ]
+>                     }
+>                 },
+>                 "required": [
+>                     "text"
+>                 ]
+>             }
+>         ]
+>     }
+>
+> license was changed in
+> https://github.com/bootlin/snagboot/commit/a648d6dc554f631ba34a6cfeab8c19=
+725bb3816b
+>
+> It doesn't fail for you?
+>
+> On Mon, Apr 7, 2025 at 11:18=E2=80=AFAM wangmy via lists.openembedded.org
+> <wangmy=3Dfujitsu.com@lists.openembedded.org> wrote:
+> >
+> > From: Wang Mingyu <wangmy@fujitsu.com>
+> >
+> > Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> > ---
+> >  .../python/{python3-snagboot_2.2.bb =3D> python3-snagboot_2.3.bb} | 2 =
++-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >  rename meta-python/recipes-devtools/python/{python3-snagboot_2.2.bb =
+=3D> python3-snagboot_2.3.bb} (86%)
+> >
+> > diff --git a/meta-python/recipes-devtools/python/python3-snagboot_2.2.b=
+b b/meta-python/recipes-devtools/python/python3-snagboot_2.3.bb
+> > similarity index 86%
+> > rename from meta-python/recipes-devtools/python/python3-snagboot_2.2.bb
+> > rename to meta-python/recipes-devtools/python/python3-snagboot_2.3.bb
+> > index 07b9a5208c..dc57dfc105 100644
+> > --- a/meta-python/recipes-devtools/python/python3-snagboot_2.2.bb
+> > +++ b/meta-python/recipes-devtools/python/python3-snagboot_2.3.bb
+> > @@ -3,7 +3,7 @@ SUMMARY =3D "Snagboot intends to be an open-source repl=
+acement vendor-specific too
+> >  LICENSE =3D "GPL-2.0-only"
+> >  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Db234ee4d69f5fce4486a80fdaf4=
+a4263"
+> >
+> > -SRC_URI[sha256sum] =3D "00f4933cb52fb73dcf61a0723d77d9d6bc509affb7cd5d=
+5dcd875d2c333e8b08"
+> > +SRC_URI[sha256sum] =3D "c6a97ea0c83a2d7eea639741b2f667c75e95d50278eeb6=
+a8adbce5d1a7cf65fa"
+> >
+> >  inherit pypi python_setuptools_build_meta
+> >
+> > --
+> > 2.43.0
+> >
+> >
+> >
+> >
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#116739): https://lists.openembedded.org/g/openembedde=
+d-devel/message/116739
+> Mute This Topic: https://lists.openembedded.org/mt/112129288/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
