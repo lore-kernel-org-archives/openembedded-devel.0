@@ -1,104 +1,143 @@
-Return-Path: <brgl@bgdev.pl>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B67F2C36002
-	for <webhook@archiver.kernel.org>; Wed,  9 Apr 2025 14:11:03 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.web10.9495.1744207856724084437
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF9D0C369A1
+	for <webhook@archiver.kernel.org>; Wed,  9 Apr 2025 14:37:53 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web11.10307.1744209469344893064
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Apr 2025 07:10:57 -0700
+ Wed, 09 Apr 2025 07:37:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=I0/TZxya;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.54, mailfrom: brgl@bgdev.pl)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-43cfb6e9031so62003865e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 07:10:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1744207855; x=1744812655; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=HOooS7kH1qHmnQwsYlTDefLuvutF0iK/qoYmVnbCgeM=;
-        b=I0/TZxyavrYlzPsQyVItvDlGVQigha9lh3at3xVyikrC+fJvVyv2gwPteWTzcMhyIQ
-         MdjUibUlkCGmtkV+aFU6u5gfXhYIcKQD4yEdvV75DGNBcTcqS5Was2EqCSa6VDTfKfJs
-         6HWkiVq0jECZ1vp1hlMcsG4TFWhSAjZd7MqlaZIyTheot4TWFiOKDTYDQWGz+VfttIPO
-         kor66tj8DWxT0SFWyN1zwFGrKMocvyh4nX/jNBUTqnaVOF5TvTB954bchuWQDOANDe4a
-         ecswxM9Q730Z1/1nt8B5aZY/b5fAMvza8I5rVtpxROKAGAe9PVUVFgBDT6PWf/OW25KX
-         s3qA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744207855; x=1744812655;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=HOooS7kH1qHmnQwsYlTDefLuvutF0iK/qoYmVnbCgeM=;
-        b=Mm2MCtJQu99h7rejbF53RuOkkkKdp7Cbb8qnA1hkMM6FaydYjuzusDu9FFeWZDFt+z
-         tEmrr1QWR4/hUDxOqN/1ffPzTcPPJDrhjtxgHSNzJ00RRN7CthERSmN7sj6J1h4XfO8F
-         1B3hRaO6gwlam0cTCM/xs7VbJrPBb/8j4G6SB19GwuZ6Ex6dkQ9iRKKgkCgSsq7oQxWw
-         eiHzIiyc7PjhBDB85evE7RJLdyF9RRRJ0BRt82yrV36mhIim9SKD3iWe+Gynz+Tf1gZ0
-         Duy1m8tpU1JBHapX47Mj+ZTyaQ4v/9PbhejQ28WuRexccxo5SNI/0W99rATdAKgq8rpq
-         obCg==
-X-Forwarded-Encrypted: i=1; AJvYcCWQJB6/IsBWeiWtR9IYHlgnpZDHQheVxfzUFc1CevxvzmpcVQ3DKYYSrElQtQ5gj7p/nVrNCrWOk4E3tU9O20AEl3E=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YxmRueQk7faqIEZ/1sd69uhFYRGhYb9mfb1g7veLiA/ZqpjQw61
-	9mEuKyefWS0Qlq0k6/rQDGe37KnOSokscq1m2SPJld9L0m6aQpydz5VJzP3BMM0=
-X-Gm-Gg: ASbGncvKN0736BKwkY+keb5dsjTpeOZuKiuh9LDGRfcGDBtAGzE1Ldv5TLte8aS2/36
-	th5aDqWMWavc1G8BCB1h7gAgpow4WOnd0qTBjKVNg0XnFziE1CqZYq0f7vXCqvtVyNZtpLcpMUS
-	WveQkaJKUrUWGfxjALu1EvsE8xi63OZabXx9W1DkgDEl2PYraXZHAyp5gd9Xn9R9xemu3nYgW27
-	i+QJb82mhDiBa3y9p4mrD8NBEcI+PzE2EGntpyP1pUbOdnwvfncuDaofBiRFZPO+1owcR2Q7OY6
-	y4wGhUuJe6r+/G5FzYPLdSlew77VXZS1Z5d5/sC5NGF7O98f5/4=
-X-Google-Smtp-Source: AGHT+IEZj7ho0Evgf2+gxVhBwsfpSFaqTBgsSe3Rlwiwrnu0amSQwqNh/WlkMp4nzm783stdyt9lYw==
-X-Received: by 2002:a05:600c:19ca:b0:43c:fd72:f039 with SMTP id 5b1f17b1804b1-43f1fe16c95mr21236145e9.11.1744207854828;
-        Wed, 09 Apr 2025 07:10:54 -0700 (PDT)
-Received: from brgl-uxlite.home ([2a01:cb1d:dc:7e00:7880:1c3f:3ac3:7c62])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-43f2066d004sm21736855e9.18.2025.04.09.07.10.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Apr 2025 07:10:54 -0700 (PDT)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>,
-	Bruce Ashfield <bruce.ashfield@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Subject: [meta-oe][PATCH] b4: new package
-Date: Wed,  9 Apr 2025 16:10:51 +0200
-Message-ID: <20250409141052.61936-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.45.2
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd83.aul.t-online.de (fwd83.aul.t-online.de [10.223.144.109])
+	by mailout03.t-online.de (Postfix) with SMTP id 5DAA5EE3
+	for <openembedded-devel@lists.openembedded.org>; Wed,  9 Apr 2025 16:37:46 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.154.175.12]) by fwd83.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1u2WYj-12oajR0; Wed, 9 Apr 2025 16:37:45 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH] blueman: update 2.4.3 -> 2.4.4
+Date: Wed,  9 Apr 2025 16:37:38 +0200
+Message-ID: <20250409143738.1230981-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1744209465-A5FFE6D7-7B6941BB/10/3626336762 SUSPECT URL
+X-TOI-MSGID: 8bd896ba-599a-4940-aa38-7f15df8ee684
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 14:11:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116743
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 14:37:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116744
 
-From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+- remove patch that was merged upstream
 
-Add a recipe for b4 - a utility for working with mailing-list based
-development workflows.
+2.4.4
+Bugs fixed
 
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+    Fix Rfcom plugin dbus signature
+    Set an initial selected device in blueman-sendto
+    AutoConnect: Store bluetooth address instead of object path
+    Applet: Handle UnknownObject DBus error (@tommie)
+    Make search button available after device list becomes empty (@astcri=
+)
+    Fatal LoadException
+
+Changes
+
+    Terminate applet on manager termination if it was started by manager
+    Add Galic and Esperanto translations
+    AutoConnect: Automatically convert path to address
+    Add toggle to force symbolic statusicon
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-devtools/b4/b4_0.14.2.bb | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/b4/b4_0.14.2.bb
+ ...n-DO-not-emit-absolute-path-when-S-B.patch | 38 -------------------
+ .../{blueman_2.4.3.bb =3D> blueman_2.4.4.bb}    |  5 +--
+ 2 files changed, 2 insertions(+), 41 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/blueman/blueman/=
+0001-meson-DO-not-emit-absolute-path-when-S-B.patch
+ rename meta-networking/recipes-connectivity/blueman/{blueman_2.4.3.bb =3D=
+> blueman_2.4.4.bb} (93%)
 
-diff --git a/meta-oe/recipes-devtools/b4/b4_0.14.2.bb b/meta-oe/recipes-devtools/b4/b4_0.14.2.bb
-new file mode 100644
-index 0000000000..794e1d24dd
---- /dev/null
-+++ b/meta-oe/recipes-devtools/b4/b4_0.14.2.bb
-@@ -0,0 +1,13 @@
-+SUMMARY = "Utility to work with patches made available via a public-inbox archive like lore.kernel.org."
-+
-+LICENSE = "GPL-2.0-only"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+inherit pypi python_pep517 python_setuptools_build_meta
-+
-+SRC_URI[sha256sum] = "4f835b6e5ae30eff6004bb25c15fd8f4f6ecd1105596e86db1871fef7d18113d"
-+
-+RDEPENDS:${PN} += " \
-+    python3-mailbox \
-+    python3-requests \
-+"
--- 
-2.45.2
+diff --git a/meta-networking/recipes-connectivity/blueman/blueman/0001-me=
+son-DO-not-emit-absolute-path-when-S-B.patch b/meta-networking/recipes-co=
+nnectivity/blueman/blueman/0001-meson-DO-not-emit-absolute-path-when-S-B.=
+patch
+deleted file mode 100644
+index 6e48b70243..0000000000
+--- a/meta-networking/recipes-connectivity/blueman/blueman/0001-meson-DO-=
+not-emit-absolute-path-when-S-B.patch
++++ /dev/null
+@@ -1,38 +0,0 @@
+-From 4947abc5ede2dc356f011b7c45f6760c9c2ce9f1 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 14 Aug 2024 21:26:24 -0700
+-Subject: [PATCH] meson: Do not emit absolute path when S !=3D B
+-
+-build systems like OE build outside sourcetree in such cases it works
+-ok but cython resolves the input file to absolute path and that gets
+-emitted into genetate _blueman.c as module name, renders the build
+-non-reproducible, wish cython had a better way to handle this but there
+-is not, therefore tweak the meson build rule to account for specifying
+-workdir to cython which will search the inputs correctly, and use
+-meson's build_root to emit the output into build dir. This ensures that
+-it becomes independent of source or build directories and cython does
+-not generate the absolute paths into generate C code.
+-
+-See cython discussion on [1]
+-
+-[1] https://github.com/cython/cython/issues/5949
+-
+-Upstream-Status: Submitted [https://github.com/blueman-project/blueman/p=
+ull/2461]=20
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- module/meson.build | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/module/meson.build b/module/meson.build
+-index 096ad7c8..fddef547 100644
+---- a/module/meson.build
+-+++ b/module/meson.build
+-@@ -4,7 +4,7 @@ blueman_c =3D custom_target(
+-     'blueman_c',
+-     output: '_blueman.c',
+-     input: '_blueman.pyx',
+--    command: [cython, '--output-file', '@OUTPUT@', '@INPUT@'])
+-+    command: [cython, '-w', meson.source_root(), '--output-file', join_=
+paths(meson.build_root(), '@OUTPUT@'), join_paths(meson.build_root(), '@I=
+NPUT@')])
+-=20
+- sources =3D [
+-     blueman_c,
+diff --git a/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.b=
+b b/meta-networking/recipes-connectivity/blueman/blueman_2.4.4.bb
+similarity index 93%
+rename from meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb
+rename to meta-networking/recipes-connectivity/blueman/blueman_2.4.4.bb
+index 974c563299..629e1bc8cd 100644
+--- a/meta-networking/recipes-connectivity/blueman/blueman_2.4.3.bb
++++ b/meta-networking/recipes-connectivity/blueman/blueman_2.4.4.bb
+@@ -8,10 +8,9 @@ inherit meson gettext systemd gsettings pkgconfig python=
+3native gtk-icon-cache f
+=20
+ REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
+=20
+-SRC_URI =3D "git://github.com/blueman-project/blueman.git;protocol=3Dhtt=
+ps;branch=3D2-4-stable \
+-           file://0001-meson-DO-not-emit-absolute-path-when-S-B.patch"
++SRC_URI =3D "git://github.com/blueman-project/blueman.git;protocol=3Dhtt=
+ps;branch=3D2-4-stable"
+ S =3D "${WORKDIR}/git"
+-SRCREV =3D "7bcf919ad6ac0ee9a8c66b18b0ca98af877d4c8f"
++SRCREV =3D "bdacba8afe53066bc3a338997e26fee416af2261"
+=20
+ EXTRA_OEMESON =3D "-Druntime_deps_check=3Dfalse \
+     -Dsystemdsystemunitdir=3D${systemd_system_unitdir} \
+--=20
+2.49.0
 
 
