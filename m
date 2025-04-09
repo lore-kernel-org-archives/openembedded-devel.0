@@ -1,89 +1,113 @@
-Return-Path: <soumya.sambu@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 76BA0C36002
-	for <webhook@archiver.kernel.org>; Wed,  9 Apr 2025 12:55:53 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.7739.1744203349722457017
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CB057C369A1
+	for <webhook@archiver.kernel.org>; Wed,  9 Apr 2025 13:57:03 +0000 (UTC)
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
+ by mx.groups.io with SMTP id smtpd.web10.9117.1744207020385177657
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Apr 2025 05:55:49 -0700
+ Wed, 09 Apr 2025 06:57:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=61945d04ab=soumya.sambu@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5395jiw2011335
-	for <openembedded-devel@lists.openembedded.org>; Wed, 9 Apr 2025 05:55:49 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45u41m50w6-8
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 05:55:49 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Wed, 9 Apr 2025 05:55:47 -0700
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Wed, 9 Apr 2025 05:55:46 -0700
-From: ssambu <soumya.sambu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][scarthgap][PATCH 1/1] php: Upgrade 8.2.26 -> 8.2.28
-Date: Wed, 9 Apr 2025 12:55:42 +0000
-Message-ID: <20250409125542.1446704-1-soumya.sambu@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=S4IezTJz;
+ spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-227cf12df27so6759245ad.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 06:57:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1744207019; x=1744811819; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=p6L3OZITQAvipangUfd2VEq3OEQZbJdD76Dpkz+Jra0=;
+        b=S4IezTJzwrYKm0thyW26paeV2QHuTl5cX5SFMCU5tmgMdQeuF+l49qcuwHAiCisn7C
+         ei6qvNDJKB1Ys9QttTyA8ZUJv7+Eh/XigHwXtxkCU2NONPxzAp2srFqzXMUgYSgi2g0B
+         xz8wAgKxLpE+oYhjSX7ZybcCpuhNH3o+OmWQotRx8CdO/0Y2N+jcrPCdMboR8U0ZEa9S
+         APa5hnHRUouhACCovXtg22sltDPkIsTZyJYrxrKiB8XiVXFQlXJtIcWhH8UpW3E0E7JM
+         2/Wc+GqpdbcS+9mrrpHkiyy228nipxSnfq+fkgqti+VW4Pm4ZOM0mkSHSa7oa1O2mlgg
+         fcLA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1744207019; x=1744811819;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=p6L3OZITQAvipangUfd2VEq3OEQZbJdD76Dpkz+Jra0=;
+        b=R62nL+LCJzmI1QI31sptyQgZzkEkaEJjMQm3o4jrZA0VNe5tsHkzpg/R0E3+U97L1X
+         wJkui4lPQYNu/3tag2vBwYHll7IoQ5EuhlOlR5g7uUYr+kdePuezdyusnnNa13CBrJ2H
+         nJ8agYjsfdkaDvZOrT07aoxAKcCK4cBZDfKpPa+mbcQFE6QWNVA8/UwWLgILexvV1T3F
+         F3lTEWUV78/aE0R4qEi1EZqu5dpMXeUEkqrQQ0C91RN6H7sAth8QFg81S6zgarS6J9i7
+         FM60uGof3wCz6a2cJskO07r34MwQDDZkBEkcox0s7peYExJpXjoBzA6rHg8W+GvN+yrs
+         8sjA==
+X-Gm-Message-State: AOJu0YwD/4Jqw5xuQEuNKIyMGLm6aBTAaJucL1K8OUi+EZfNTIc1F7A7
+	uMlj6nR7znx2HzvcFRDlDRONF0KLC1eR5Gh9BfJY7iMhRq4uwLvnQffmjfLC
+X-Gm-Gg: ASbGnctvXYpWddXAFgcar7g+CVNZeJwXMydQdALKLnxOd6oM3FW64exBwc5l1wFF/Ci
+	J0McUgdQb8HT8OrKBlQhNgEV8WVoEpSESiEr5yNzRytBwN9iPXPrcQqQRdk+xH+7WoAXqUZABdv
+	tGu1qiQ/dIEB2/YBQGB9qzlS9oY8u9NaOdaTHvuXpDLfugNFAHctUBwCMq9kPZRZxxXFG4hW6Re
+	ZommGrEkJ3mrQdi8FXVC71mgB372Ril7k1XrH1myoi0oI7m7x/scTTNkqaggI9WPPzip5hC+lCQ
+	j513hUivUDQl/t1uhu2+pgBWoLedGVLv
+X-Google-Smtp-Source: AGHT+IF2/TvqfCXhQckWQ6Np9Kk7IwP45uYHhQide4wWWVCVIyF1JcziMLAOSeWix+50M4RTlG7SsQ==
+X-Received: by 2002:a17:903:2290:b0:224:24d3:60fb with SMTP id d9443c01a7336-22ab5e24fbcmr108810815ad.10.1744207019436;
+        Wed, 09 Apr 2025 06:56:59 -0700 (PDT)
+Received: from apollo.localdomain ([2601:646:8201:fd20::f900])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22ac7cb4fa9sm11845495ad.179.2025.04.09.06.56.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 09 Apr 2025 06:56:59 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] pv: Add valgrind dependency on platform where its available
+Date: Wed,  9 Apr 2025 06:56:56 -0700
+Message-ID: <20250409135656.1066846-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: 3Do5v7fyRCNFQOioA4PIcxAtMn8BK6K1
-X-Proofpoint-ORIG-GUID: 3Do5v7fyRCNFQOioA4PIcxAtMn8BK6K1
-X-Authority-Analysis: v=2.4 cv=QOZoRhLL c=1 sm=1 tr=0 ts=67f66e55 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=XR8D0OoHHMoA:10 a=67BIL_jfAAAA:8 a=t7CeM3EgAAAA:8 a=NEAV23lmAAAA:8 a=vs2GookMAJkUiJWBTIcA:9 a=zWsmoVtUA9YA:10
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Sensitive_Customer_Information: Yes
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-09_05,2025-04-08_04,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0
- mlxlogscore=999 bulkscore=0 phishscore=0 impostorscore=0
- priorityscore=1501 clxscore=1015 lowpriorityscore=0 spamscore=0 mlxscore=0
- malwarescore=0 adultscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
- definitions=main-2504090077
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 12:55:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116740
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 13:57:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116741
 
-From: Soumya Sambu <soumya.sambu@windriver.com>
+valgrind does not build for RISCV platforms yet and so are some other
+platforms ( taken from rsyslog recipe )
 
-Includes fix for - CVE-2025-1219, CVE-2025-1736, CVE-2025-1861,
-CVE-2025-1734 and CVE-2025-1217
-
-Changelog:
-https://www.php.net/ChangeLog-8.php#8.2.28
-
-Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-devtools/php/{php_8.2.26.bb => php_8.2.28.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/php/{php_8.2.26.bb => php_8.2.28.bb} (99%)
+ meta-oe/recipes-support/pv/pv_1.9.31.bb | 26 ++++++++++++++++++++++++-
+ 1 file changed, 25 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/php/php_8.2.26.bb b/meta-oe/recipes-devtools/php/php_8.2.28.bb
-similarity index 99%
-rename from meta-oe/recipes-devtools/php/php_8.2.26.bb
-rename to meta-oe/recipes-devtools/php/php_8.2.28.bb
-index 10ef2c36e7..1d5162fa6e 100644
---- a/meta-oe/recipes-devtools/php/php_8.2.26.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.2.28.bb
-@@ -34,7 +34,7 @@ SRC_URI:append:class-target = " \
-           "
+diff --git a/meta-oe/recipes-support/pv/pv_1.9.31.bb b/meta-oe/recipes-support/pv/pv_1.9.31.bb
+index 2f1d38337f..578012fcfd 100644
+--- a/meta-oe/recipes-support/pv/pv_1.9.31.bb
++++ b/meta-oe/recipes-support/pv/pv_1.9.31.bb
+@@ -18,7 +18,31 @@ inherit autotools gettext ptest
+ LDEMULATION:mipsarchn32 = "${@bb.utils.contains('TUNE_FEATURES', 'bigendian', 'elf32btsmipn32', 'elf32ltsmipn32', d)}"
+ export LDEMULATION
  
- S = "${WORKDIR}/php-${PV}"
--SRC_URI[sha256sum] = "be57c347d451c905bcb4336832a864d9928dd0e20989b872705fea0ba6476c6b"
-+SRC_URI[sha256sum] = "2919cc1b92190a58dc17904b92e626600b96ce49a4c72e77513786a4406acce5"
+-RDEPENDS:${PN}-ptest += "bash coreutils tmux valgrind"
++# for ptests
++VALGRIND = "valgrind"
++
++# valgrind supports armv7 and above
++VALGRIND:armv4 = ''
++VALGRIND:armv5 = ''
++VALGRIND:armv6 = ''
++
++# X32 isn't supported by valgrind at this time
++VALGRIND:linux-gnux32 = ''
++VALGRIND:linux-muslx32 = ''
++
++# Disable for some MIPS variants
++VALGRIND:mipsarchr6 = ''
++VALGRIND:linux-gnun32 = ''
++
++# Disable for powerpc64 with musl
++VALGRIND:libc-musl:powerpc64 = ''
++VALGRIND:libc-musl:powerpc64le = ''
++
++# RISC-V support for valgrind is not there yet
++VALGRIND:riscv64 = ""
++VALGRIND:riscv32 = ""
++
++RDEPENDS:${PN}-ptest += "bash coreutils tmux ${VALGRIND}"
+ RDEPENDS:${PN}-ptest:append:libc-musl = " musl-locales"
+ RDEPENDS:${PN}-ptest:append:libc-glibc = " glibc-binary-localedata-c"
  
- CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
- CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
--- 
-2.40.0
-
 
