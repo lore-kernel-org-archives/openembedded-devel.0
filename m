@@ -1,180 +1,89 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <soumya.sambu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E9FAC36002
-	for <webhook@archiver.kernel.org>; Wed,  9 Apr 2025 12:41:23 +0000 (UTC)
-Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
- by mx.groups.io with SMTP id smtpd.web11.7453.1744202481660001694
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76BA0C36002
+	for <webhook@archiver.kernel.org>; Wed,  9 Apr 2025 12:55:53 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.7739.1744203349722457017
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Apr 2025 05:41:22 -0700
+ Wed, 09 Apr 2025 05:55:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Oa1WBNpB;
- spf=pass (domain: gmail.com, ip: 209.85.167.52, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-549b159c84cso4818365e87.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 05:41:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744202480; x=1744807280; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=8oHjTYtBytzB3+r8fWLeucVici1DgQJzjYXBAd+7HjQ=;
-        b=Oa1WBNpBtqOaeoAu//Ua1j1QVGeOUyOT0FJ68RG3JodO0NcFR1NkqU9lZ0rnWQYMVd
-         ipclN2phfGMGUQgk9c5X7xFaaGRe+XkuDhy0ESBYTmgllN3c2yxxkRBhKpGI4gq1iAG7
-         LxYKndI6/5FSnG1BrKpwd4SHLgs8mMKnIza8sJHETKhfvhWzvKhF/PJy1TOTqq3Bj8Sr
-         dARe9rV4xT9ZT2xXt69xNV+Xdr8fndcBgXpWipxgjow1qDzpQWMW/+XeUGPpPLJ4Ic36
-         +Ksj6M5FsAMiwFQAhkCVKZG0kqlRfu+g+laWy6qrKBKkd1CuxIvJhYOg4uLyI3hLjB4Y
-         0N5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744202480; x=1744807280;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=8oHjTYtBytzB3+r8fWLeucVici1DgQJzjYXBAd+7HjQ=;
-        b=b3eX/0XYJ5yVcEH2Vaw8bRzhzf43ShS5T2Q2EgXhyBDrwKBBj4NsvI/UUV3icaPISm
-         ipgDqv/wnNcSqxIYZ3GBb5LmG9xyjsIPVoMpwwvKc8KJAK/yDIoekBJXMqO2XS+E59gs
-         /gXm6aUAdYxqPQbaNwX5Rn50/lGfG/qjJZmOUMYEfF9Xe/gzMrF+IGkGdjpF4wtyxFlG
-         9O6sYnN3UJHenG3+kvbKlU5O2eBPpsCt8RwDzMtXbEXuaw2gJE2DMCTxBBXkZAOEx//N
-         z0Ps6JOe0YQZnWnaw/thKl0AIDuNYaI/SNSgcFJsZnfmjX7qwwQiB+joquoS7VaYL/RY
-         GY1w==
-X-Gm-Message-State: AOJu0Yxu0zEcL/BUR10fbevtZSSMyTwIOi3TbiDebPyi8qOWb4woF2h4
-	XiEZVlVzTGba/lhbbXQCOi099PNqutZj0z3nY59k5BqwvvMuX9SeHJnais4QeJHJY60WDmplesI
-	JRDfitlKo9OPw/1zoSkpJjEI7sC8=
-X-Gm-Gg: ASbGncs9DTNF8jU0mqzYYZSZTng67YuEi/pMU02gL5UX33ht32k4F/2Hk1+JBlpHXGs
-	2FbDMdf+ibJbUOUkngwtjp2agdogQwcQHJ+aq723ajMJCVrEmJinhEjP44q7eX4YaDEh+ZWN/ha
-	tapB1UuglMHEHLDNwSzKa2x/S3
-X-Google-Smtp-Source: AGHT+IGt4CtmhK6d8E4fkigYU8vyzMCLrMu8RCN9ZVp6QiGtuhJfo8ycB7A/x7kvnwiYqo0jkWT8vFORYPKP9Ivhl7U=
-X-Received: by 2002:a05:6512:1386:b0:546:2fde:d2d9 with SMTP id
- 2adb3069b0e04-54c444fb77emr714023e87.28.1744202479543; Wed, 09 Apr 2025
- 05:41:19 -0700 (PDT)
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=61945d04ab=soumya.sambu@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5395jiw2011335
+	for <openembedded-devel@lists.openembedded.org>; Wed, 9 Apr 2025 05:55:49 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45u41m50w6-8
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 05:55:49 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Wed, 9 Apr 2025 05:55:47 -0700
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Wed, 9 Apr 2025 05:55:46 -0700
+From: ssambu <soumya.sambu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][scarthgap][PATCH 1/1] php: Upgrade 8.2.26 -> 8.2.28
+Date: Wed, 9 Apr 2025 12:55:42 +0000
+Message-ID: <20250409125542.1446704-1-soumya.sambu@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-References: <1744017431-22217-1-git-send-email-wangmy@fujitsu.com> <1744017431-22217-26-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1744017431-22217-26-git-send-email-wangmy@fujitsu.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 9 Apr 2025 14:41:07 +0200
-X-Gm-Features: ATxdqUHJTI6cfCrw2Irx3M-KcPOUff8iXaEddg2v0oLCc2kFWgxslxbPO43gECU
-Message-ID: <CA+chaQfPYDyFGk2sm1HhzZAN2XmX888+b-QzwyF4tK0g=UR8zA@mail.gmail.com>
-Subject: Re: [oe] [meta-python] [PATCH 26/30] python3-snagboot: upgrade 2.2 -> 2.3
-To: wangmy@fujitsu.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: 3Do5v7fyRCNFQOioA4PIcxAtMn8BK6K1
+X-Proofpoint-ORIG-GUID: 3Do5v7fyRCNFQOioA4PIcxAtMn8BK6K1
+X-Authority-Analysis: v=2.4 cv=QOZoRhLL c=1 sm=1 tr=0 ts=67f66e55 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=XR8D0OoHHMoA:10 a=67BIL_jfAAAA:8 a=t7CeM3EgAAAA:8 a=NEAV23lmAAAA:8 a=vs2GookMAJkUiJWBTIcA:9 a=zWsmoVtUA9YA:10
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Sensitive_Customer_Information: Yes
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-04-09_05,2025-04-08_04,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0
+ mlxlogscore=999 bulkscore=0 phishscore=0 impostorscore=0
+ priorityscore=1501 clxscore=1015 lowpriorityscore=0 spamscore=0 mlxscore=0
+ malwarescore=0 adultscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
+ definitions=main-2504090077
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 12:41:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116739
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 12:55:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116740
 
-With this update applied I'm seeing build failures like:
+From: Soumya Sambu <soumya.sambu@windriver.com>
 
-ValueError: invalid pyproject.toml config: `project.license`.
-configuration error: `project.license` must be valid exactly by one
-definition (2 matches found):
+Includes fix for - CVE-2025-1219, CVE-2025-1736, CVE-2025-1861,
+CVE-2025-1734 and CVE-2025-1217
 
-    - keys:
-        'file': {type: string}
-      required: ['file']
-    - keys:
-        'text': {type: string}
-      required: ['text']
+Changelog:
+https://www.php.net/ChangeLog-8.php#8.2.28
 
-DESCRIPTION:
-    `Project license <https://peps.python.org/pep-0621/#license>`_.
+Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
+---
+ meta-oe/recipes-devtools/php/{php_8.2.26.bb => php_8.2.28.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/php/{php_8.2.26.bb => php_8.2.28.bb} (99%)
 
-GIVEN VALUE:
-    "GPL-2.0-only"
+diff --git a/meta-oe/recipes-devtools/php/php_8.2.26.bb b/meta-oe/recipes-devtools/php/php_8.2.28.bb
+similarity index 99%
+rename from meta-oe/recipes-devtools/php/php_8.2.26.bb
+rename to meta-oe/recipes-devtools/php/php_8.2.28.bb
+index 10ef2c36e7..1d5162fa6e 100644
+--- a/meta-oe/recipes-devtools/php/php_8.2.26.bb
++++ b/meta-oe/recipes-devtools/php/php_8.2.28.bb
+@@ -34,7 +34,7 @@ SRC_URI:append:class-target = " \
+           "
+ 
+ S = "${WORKDIR}/php-${PV}"
+-SRC_URI[sha256sum] = "be57c347d451c905bcb4336832a864d9928dd0e20989b872705fea0ba6476c6b"
++SRC_URI[sha256sum] = "2919cc1b92190a58dc17904b92e626600b96ce49a4c72e77513786a4406acce5"
+ 
+ CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
+ CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
+-- 
+2.40.0
 
-OFFENDING RULE: 'oneOf'
-
-DEFINITION:
-    {
-        "oneOf": [
-            {
-                "properties": {
-                    "file": {
-                        "type": "string",
-                        "$$description": [
-                            "Relative path to the file (UTF-8) which
-contains the license for the",
-                            "project."
-                        ]
-                    }
-                },
-                "required": [
-                    "file"
-                ]
-            },
-            {
-                "properties": {
-                    "text": {
-                        "type": "string",
-                        "$$description": [
-                            "The license of the project whose meaning
-is that of the",
-                            "`License field from the core metadata",
-
-"<https://packaging.python.org/specifications/core-metadata/#license>`_."
-                        ]
-                    }
-                },
-                "required": [
-                    "text"
-                ]
-            }
-        ]
-    }
-
-license was changed in
-https://github.com/bootlin/snagboot/commit/a648d6dc554f631ba34a6cfeab8c1972=
-5bb3816b
-
-It doesn't fail for you?
-
-On Mon, Apr 7, 2025 at 11:18=E2=80=AFAM wangmy via lists.openembedded.org
-<wangmy=3Dfujitsu.com@lists.openembedded.org> wrote:
->
-> From: Wang Mingyu <wangmy@fujitsu.com>
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  .../python/{python3-snagboot_2.2.bb =3D> python3-snagboot_2.3.bb} | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-python/recipes-devtools/python/{python3-snagboot_2.2.bb =3D>=
- python3-snagboot_2.3.bb} (86%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-snagboot_2.2.bb =
-b/meta-python/recipes-devtools/python/python3-snagboot_2.3.bb
-> similarity index 86%
-> rename from meta-python/recipes-devtools/python/python3-snagboot_2.2.bb
-> rename to meta-python/recipes-devtools/python/python3-snagboot_2.3.bb
-> index 07b9a5208c..dc57dfc105 100644
-> --- a/meta-python/recipes-devtools/python/python3-snagboot_2.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-snagboot_2.3.bb
-> @@ -3,7 +3,7 @@ SUMMARY =3D "Snagboot intends to be an open-source replac=
-ement vendor-specific too
->  LICENSE =3D "GPL-2.0-only"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
-263"
->
-> -SRC_URI[sha256sum] =3D "00f4933cb52fb73dcf61a0723d77d9d6bc509affb7cd5d5d=
-cd875d2c333e8b08"
-> +SRC_URI[sha256sum] =3D "c6a97ea0c83a2d7eea639741b2f667c75e95d50278eeb6a8=
-adbce5d1a7cf65fa"
->
->  inherit pypi python_setuptools_build_meta
->
-> --
-> 2.43.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#116655): https://lists.openembedded.org/g/openembedde=
-d-devel/message/116655
-> Mute This Topic: https://lists.openembedded.org/mt/112129288/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
