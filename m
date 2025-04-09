@@ -1,94 +1,161 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <alistair23@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93380C369A5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 923A3C36010
 	for <webhook@archiver.kernel.org>; Wed,  9 Apr 2025 02:37:48 +0000 (UTC)
-Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
- by mx.groups.io with SMTP id smtpd.web10.13186.1744166264321920758
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
+ by mx.groups.io with SMTP id smtpd.web11.13410.1744166264775699230
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 08 Apr 2025 19:37:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=m/9xc1iy;
- spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-6f74b78df93so77849927b3.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nYDBNI0F;
+ spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: alistair23@gmail.com)
+Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-2264aefc45dso80111115ad.0
         for <openembedded-devel@lists.openembedded.org>; Tue, 08 Apr 2025 19:37:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744166263; x=1744771063; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1744166264; x=1744771064; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Gj0hQalshgEL7ybRE4Hx+8tus9d/h7T6VemM6WWmk0I=;
-        b=m/9xc1iyRqHT606xSTRHL4CG0WQ6TyvsszslZ6DK+osl7Cd7ba+IbTjeDWJfooCZV3
-         b47v7LisvR/qoPdj5C5w2iaJdxYLA4gofGmMO7uirQD0//a5jSHM4mReb68T5R8fYm1a
-         Aeb+Oa9N6Gi9CMizWDdBC5xv2E33vK/TbW7oRSswTf9G0hXkPud0qbAugzuB5EdXrd0U
-         f3q4HxMcdWF2Y8UO1o6ku1Vul1tqEJAUNkY1r41E+8DHZJOpmgzPa0058ALoxkBOpOOz
-         UtIGrhjBhZes7tBG2zKeiRkCQAaxc9G4RSHa7lvND43VKgO+jHa5yR4OvT45bcbOQBN4
-         Kvpw==
+        bh=VcCIGn3a031MfStN9WkCmkB9AXcebcqNNOVIgMxsBlI=;
+        b=nYDBNI0F2SfstP2skfB/typIyclQZjdF3C1cP3M10uy0ZZP6SeB3/d/8MOl9zyQO9p
+         AWEwkFMobd5EnWTAHTcbssMUIlFF1jhAMF7+pyBuQX2d4Hr1l/RhtbKDHjKbdQKDf0ce
+         jo+FRHX1ktLS+8ZWHe5E/CDizPzNik49lNU6iqoY+TtXwgcnVjDBlCMgSqiEjy6k2OXc
+         zsfa+wbvv5VjpnMC79C4u5fF6OdgI1Jtu7itl8LK0X9kR+99by/vlN8VMTsdTKJ9WPM8
+         mV7StuH1YhLLXtIvlTOt0cKcPUUtdUxk6McTlETut2VxPA2S4l9l3ayYev6lT5mWvDK7
+         6MTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744166263; x=1744771063;
+        d=1e100.net; s=20230601; t=1744166264; x=1744771064;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Gj0hQalshgEL7ybRE4Hx+8tus9d/h7T6VemM6WWmk0I=;
-        b=JsagTso1/UoDLgbTAvaPCOH6OPDK178tPmKvN56pRqid5pNEErKPwl40G6exD3FY60
-         EALTxhcnmM5MPAGG6hkGZ+JlUF/deaB9QH28wWvK5957fV5oqc6hShv0UheS/6BwBoQN
-         nxzEY1qy1bdhYIujlNY4sma0u1uHm4KVmpBog2QxjLzC+XqtgVerTz1r01BgXJi7iPuR
-         5HthXHvWsvmMkpuwtCjZvESg8PzgfbLL9+MbOn0lP6fsyTolmNtF09PKOE277hSRyRrj
-         la1gRbtggcH7mUEwAhRGFpNP0hC7Oq7mMmV0USe+iyefZP9itkqnCZVc1kDcpvOXyEAF
-         Bk5g==
-X-Gm-Message-State: AOJu0YxTl//utCAOrctoX1FmeehsHQOqE7he8ZfWWC4PdbwfsgNiowm1
-	731PIHWxSW/4NP1iRpMFCPkM6xvhmuj7fgcEDnLzGi8ln4IQZT5niIqtHKWC
-X-Gm-Gg: ASbGncumsSa3GJQ0mq1U8ELqDsXd4my3qSIwcXJXYRXyZ65JGOUdNHgj8ZXacZHytKl
-	K6wXSOGbnFGtTNDWO+1ZTocCiq4lw/uN4mVyxD7Qa+8/rSuSE1m9OmGXEfg1KznT+fAeLo0sQB5
-	ax01/W50asuLsUv50+fO1NXBUlV2uHMnIhxeZPRHIBjP/Sybi1h0WQPd2ggQMWvC5XWVtnhio4z
-	j+KVs2YLRPcajvmyqF1mhS2Z63O5MBx+KQAWn2HGAfV6lsHyDo9NV2oO+NW04RpamTjm4eaPw2E
-	s0c540zLNlv6FEjX4HlftR1t4x40gTO27P/pV20E5diSM6SBcw==
-X-Google-Smtp-Source: AGHT+IG1wZ7owN0z9Q8jtp34RRI388qGHcYfLL6OeQ0tInGTPo6kfQF6bKHugcIih1Li82uehG63zw==
-X-Received: by 2002:a05:690c:4a04:b0:6f9:b12b:8943 with SMTP id 00721157ae682-70538812df7mr31815187b3.19.1744166262868;
-        Tue, 08 Apr 2025 19:37:42 -0700 (PDT)
-Received: from localhost.localdomain ([71.215.9.36])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-7053e11a2e1sm497637b3.42.2025.04.08.19.37.42
+        bh=VcCIGn3a031MfStN9WkCmkB9AXcebcqNNOVIgMxsBlI=;
+        b=feBZjA5I674INPD19Q40s+VDrEy93Cp8nYowyY7M72OrRxFHFXcSlJ2vI2hClpmJPq
+         STtPJgVs8VJOQBc1PBN6W/lK635ViY91xs31+iNqOiqUK+/ExLJ4gC6DF8ecS1vrZfeX
+         FgZCwRYJTIm7EI9ZQlSfofUGS1DeYnezm//t2j+vOfGEE8vIo/l3oqT29pZzBQnZFcUR
+         I+2Ms+xRYb86rGzizzrNHW+F348bTWR0rPnbe+jf/PS1w8wEh/jvsuWy77v0c0C7OO0d
+         jq95WeF+fYchTRl0yVZgz/2Pm1FiPSOEe6AHJGhiKd3NNM9yEd4RMGCN8nzwLbXVMqa+
+         5EYA==
+X-Gm-Message-State: AOJu0YyP0Ia/nGG98iFqPN6VpgE5c+HHexOxbivDuTC/3eF4Hv0Fn/1b
+	/GFD5wKYc8kw7+zrCkHu9zYD2hABTrRkvnllzrj4S9Uwk4CzHmLdTVWC4g==
+X-Gm-Gg: ASbGnctZ7MhI7gHwuxYCirWIfSmeGjrQroDrBSsuY0Wlvg4NhxAQyxqLjPLNlrjxMOr
+	IDnSFEFqz0DME+fweNQdvDfk167vpVSXzfB/i2GLwYg+XHtS2pH7M6AdADrYI8w6EZqCUVJHR2w
+	4MRhu7XMM0dW8YcktNS5aWn/+CYmyc+b2nTqcrPxK77nSIpeFQD3RaSyOfVcTYxkv8XM+nhmQvF
+	BEkTg9aW3ONR8DzB1Eb1fNFV0kDAp04neFVQC6NvI8cUV5alklO12lx/2XplmSHX3gIAfMScn1/
+	Nl5d3R9lN1T+TTqPXY0/eROpz0AlIXJtQW7W4IxZSLdVuV7sL+KScJERQIbhlIkEbqSd3+ZDyKu
+	Sx8hxU/363hp6G6d8spJkpSgeenyfAUrAypH/y45dpOlMLD5I2w==
+X-Google-Smtp-Source: AGHT+IGvmZ8lIeOvFzzzo+0D4mAKXC3NsLRPWLlAgOzDKITfINFjmlY9377SDXIgLVpXPlE0LUrdpQ==
+X-Received: by 2002:a17:903:1a23:b0:223:26da:4b6f with SMTP id d9443c01a7336-22ac298f941mr22495355ad.14.1744166263797;
+        Tue, 08 Apr 2025 19:37:43 -0700 (PDT)
+Received: from toolbx.alistair23.me (2403-580b-97e8-0-82ce-f179-8a79-69f4.ip6.aussiebb.net. [2403:580b:97e8:0:82ce:f179:8a79:69f4])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22ac7b8b158sm636485ad.84.2025.04.08.19.37.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Tue, 08 Apr 2025 19:37:42 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+X-Google-Original-From: Alistair Francis <alistair.francis@wdc.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] usbids: upgrade 2023.01.16 -> 2025.04.01
-Date: Tue,  8 Apr 2025 22:37:09 -0400
-Message-ID: <20250409023710.1370323-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: alistair23@gmail.com,
+	Alistair Francis <alistair.francis@wdc.com>
+Subject: [meta-oe][PATCH v3] ktls-utils: Initial commit
+Date: Wed,  9 Apr 2025 12:37:36 +1000
+Message-ID: <20250409023736.4038799-1-alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 02:37:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116719
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116720
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Package ktls-utils which includes tlsd.
+
+This is used when in-kernel TLS consumers need a mechanism to perform TLS
+handshakes on a connected socket to negotiate TLS session parameters that
+can then be programmed into the kernel's TLS record protocol engine.
+
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- .../usbids/{usbids_2023.01.16.bb => usbids_2025.04.01.bb}      | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-oe/recipes-support/usbids/{usbids_2023.01.16.bb => usbids_2025.04.01.bb} (85%)
+ ...PERMS-if-it-doesn-t-exist-to-fix-mus.patch | 37 +++++++++++++++++++
+ .../ktls-utils/ktls-utils_0.11.bb             | 24 ++++++++++++
+ 2 files changed, 61 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/ktls-utils/ktls-utils/0001-tlshd-Define-ALLPERMS-if-it-doesn-t-exist-to-fix-mus.patch
+ create mode 100644 meta-oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb
 
-diff --git a/meta-oe/recipes-support/usbids/usbids_2023.01.16.bb b/meta-oe/recipes-support/usbids/usbids_2025.04.01.bb
-similarity index 85%
-rename from meta-oe/recipes-support/usbids/usbids_2023.01.16.bb
-rename to meta-oe/recipes-support/usbids/usbids_2025.04.01.bb
-index b0dd72fb25..bdb5807aa6 100644
---- a/meta-oe/recipes-support/usbids/usbids_2023.01.16.bb
-+++ b/meta-oe/recipes-support/usbids/usbids_2025.04.01.bb
-@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
- 
- SRC_URI = "git://github.com/usbids/usbids.git;branch=master;protocol=https"
- 
--SRCREV = "7963233faf69eb9c80ffca8dfc1f31940f75999f"
-+# April 1, 2025
-+SRCREV = "635738b64eb52d376c5d1756c265de67236c8934"
- 
- S = "${WORKDIR}/git"
- 
+diff --git a/meta-oe/recipes-kernel/ktls-utils/ktls-utils/0001-tlshd-Define-ALLPERMS-if-it-doesn-t-exist-to-fix-mus.patch b/meta-oe/recipes-kernel/ktls-utils/ktls-utils/0001-tlshd-Define-ALLPERMS-if-it-doesn-t-exist-to-fix-mus.patch
+new file mode 100644
+index 0000000000..d27e2aa741
+--- /dev/null
++++ b/meta-oe/recipes-kernel/ktls-utils/ktls-utils/0001-tlshd-Define-ALLPERMS-if-it-doesn-t-exist-to-fix-mus.patch
+@@ -0,0 +1,37 @@
++From ca95e956307672484e8c018263600749aa9c4f4d Mon Sep 17 00:00:00 2001
++From: Alistair Francis <alistair.francis@wdc.com>
++Date: Wed, 9 Apr 2025 11:14:52 +1000
++Subject: [PATCH] tlshd: Define ALLPERMS if it doesn't exist to fix musl build
++
++ALLPERMS exists in glibc, but not on musl, so we manually define
++it if it doesn't exist. This fixes building on musl systems.
++
++Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
++Upstream-Status: Submitted
++[https://github.com/oracle/ktls-utils/pull/88]
++---
++ src/tlshd/config.c | 8 ++++++++
++ 1 file changed, 8 insertions(+)
++
++diff --git a/src/tlshd/config.c b/src/tlshd/config.c
++index 38948e8..e653bd8 100644
++--- a/src/tlshd/config.c
+++++ b/src/tlshd/config.c
++@@ -46,6 +46,14 @@
++ 
++ static GKeyFile *tlshd_configuration;
++ 
+++/**
+++ * ALLPERMS exists in glibc, but not on musl, so we
+++ * manually define it if it doesn't exist
+++ */
+++#ifndef ALLPERMS
+++#define ALLPERMS (S_ISUID|S_ISGID|S_ISVTX|S_IRWXU|S_IRWXG|S_IRWXO)
+++#endif
+++
++ /**
++  * tlshd_config_init - Read tlshd's config file
++  * @pathname: Pathname to config file
++-- 
++2.49.0
++
+diff --git a/meta-oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb b/meta-oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb
+new file mode 100644
+index 0000000000..650b69fcd1
+--- /dev/null
++++ b/meta-oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb
+@@ -0,0 +1,24 @@
++SUMMARY = "TLS handshake utilities for in-kernel TLS consumers"
++DESCRIPTION = "In-kernel TLS consumers need a mechanism to perform TLS \
++handshakes on a connected socket to negotiate TLS session parameters that \
++can then be programmed into the kernel's TLS record protocol engine."
++DEPENDS = "gnutls keyutils glib-2.0 libnl"
++RDEPENDS:${PN} += " gnutls"
++LICENSE = "GPL-2.0-only"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d568123389d9a12625cca2b089b1728b"
++
++SRCREV = "5c3314b5728b272cbaf0d98f4d521cca9610b6bf"
++SRC_URI = " \
++	git://github.com/oracle/ktls-utils.git;nobranch=1;protocol=https \
++	file://0001-tlshd-Define-ALLPERMS-if-it-doesn-t-exist-to-fix-mus.patch \
++	"
++
++S = "${WORKDIR}/git"
++
++inherit autotools-brokensep pkgconfig systemd
++
++PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
++
++PACKAGECONFIG[systemd] = "--with-systemd,,systemd"
++
++SYSTEMD_SERVICE:${PN} = "tlshd.service"
 -- 
-2.43.0
+2.49.0
 
 
