@@ -1,802 +1,138 @@
-Return-Path: <mark.yang@lge.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B02B4C369A1
-	for <webhook@archiver.kernel.org>; Wed,  9 Apr 2025 07:10:31 +0000 (UTC)
-Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.51])
- by mx.groups.io with SMTP id smtpd.web10.2720.1744182627507598615
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D5BFC36002
+	for <webhook@archiver.kernel.org>; Wed,  9 Apr 2025 07:11:11 +0000 (UTC)
+Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com [209.85.167.49])
+ by mx.groups.io with SMTP id smtpd.web11.2757.1744182669897838346
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Apr 2025 00:10:29 -0700
+ Wed, 09 Apr 2025 00:11:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.51, mailfrom: mark.yang@lge.com)
-Received: from unknown (HELO lgeamrelo02.lge.com) (156.147.1.126)
-	by 156.147.23.51 with ESMTP; 9 Apr 2025 16:10:24 +0900
-X-Original-SENDERIP: 156.147.1.126
-X-Original-MAILFROM: mark.yang@lge.com
-Received: from unknown (HELO markyang..) (10.177.120.37)
-	by 156.147.1.126 with ESMTP; 9 Apr 2025 16:10:24 +0900
-X-Original-SENDERIP: 10.177.120.37
-X-Original-MAILFROM: mark.yang@lge.com
-From: mark.yang@lge.com
-To: openembedded-devel@lists.openembedded.org
-Cc: "mark.yang" <mark.yang@lge.com>
-Subject: [meta-oe][PATCH] cyrus-sasl: fix error with gcc-15
-Date: Wed,  9 Apr 2025 16:10:23 +0900
-Message-Id: <20250409071023.1348014-1-mark.yang@lge.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=F5UXdzB2;
+ spf=pass (domain: gmail.com, ip: 209.85.167.49, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-549b116321aso7318715e87.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 00:11:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1744182668; x=1744787468; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=yBPeAitymfUxRUaBVb5NPNfXKQ5xOq73yNrvm3Xj+zY=;
+        b=F5UXdzB2GASGrxs0T9qzmLYmXjK2KoYDroqkaDL6bYdfOT6E2HCDMQUVDgX4QcY4dX
+         WCczm+hgmRNTNjtNH7/F6EG+Sd/TRp4guhCdAmP5w/ZQfWdHMJfWVxnHww3smZK37xbG
+         nPmp49LKKJ7NHCHr+WP86yoeOYiN2gThGsHDoJ3NVSuGZl90Wcwz0cPxOTev5Z2MJg/F
+         Bc9+xWtsiqKcpoPOGDPpW1hrjd6bL1jAfa4mtrIQIyadVmk1zhZNEaMfIzUXCxX+QVXe
+         13viesOweWCtTHgT/Nv3Dux8olzLxZ4PbnK1Vvnzi+UA412vXpEuOmB+KIvpon9LWNsI
+         x2Gg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1744182668; x=1744787468;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=yBPeAitymfUxRUaBVb5NPNfXKQ5xOq73yNrvm3Xj+zY=;
+        b=HnQkMui45RJPurUocae9bbQnDTNC/iMuatcRTq3ciw2KPbS0a8BsB3Wq34PmtQy9gM
+         ILUaLuRIrCakp/e7ripam8GBd5hJug+d8MisV+jUw00PxC8yVlZlmptn2WGUvQJW5eZo
+         IUDno0w2U7PRRcq8cvyCIL6bGbrJw9wZ5xYxhQpcAcFXOsBPpb5VjBV5CgTSd2ZgwK5z
+         slH2b0GGdSvwQrM0ydPGkPO/A7jgzRwLobKmKA4iZGGI/2eLML9eZb3RSBBEYwEb4X33
+         sPXzbLiGEpFzGyez1UxtbZOXBCRldud0TBxpcBA3J+0E+xXrMoULm2uuBE4I2XWTixMk
+         8Lsw==
+X-Forwarded-Encrypted: i=1; AJvYcCUfffHs/B33L/Kbck3iO9h4YDpKzK4ND4jKexWoaacUuEXXzePrZ9pklBdJT5QmJqzPSZxZQJYhnZY7MTYgrWB2fhc=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YxboQuCiWXSnxnb8thSHA7jUmhTk5zXVWkYyuaiBRWndptlIGUR
+	P/wYboA6XWndovs3WUSsNRIP0ZLqAXGlDnhHJNuaFC8fLxAdadbMSfGeaKUcSZN9j27mpeKyTiu
+	UHbgzdJm2mAKVc+W+Ptd3MP9QHPQ=
+X-Gm-Gg: ASbGncs7MSD8UYKiNLlvxQdMboe7Fx0l1X+hw7QLfW789/PYBe68fuGErZUCxrYL1Bm
+	on2OUvnLJNhQxrfDBYJmaoc5nct9sKCoEKKLJmflAc+36n7/9rALN72sxfxMJDWbY4R03wKT6pK
+	AjyQ+dA+K8+s1Mth6nm4b8b5T/pFZf+DMduVg=
+X-Google-Smtp-Source: AGHT+IGw8C7Wi2PpZXFpGgW2PKGX96AICwGY7wBsVMmsBVSOo3AfPlkhhvmNyV8qesJfAQHCFqPD4Xx9ppf8Fj4odrI=
+X-Received: by 2002:a05:6512:1392:b0:545:2871:7cd5 with SMTP id
+ 2adb3069b0e04-54c444e0f3emr396911e87.15.1744182667887; Wed, 09 Apr 2025
+ 00:11:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250401221249.2506503-1-yoann.congal@smile.fr>
+ <CA+chaQc1_KMuC7LXyZymUEmPOTYMmOK67XqVfY7uPCFCmj8rww@mail.gmail.com>
+ <CAMSfU+6Egmdumnc5JxOoRDR_tM2nMphkbG8gNBqarhHZSG3k9g@mail.gmail.com>
+ <CAMKF1soyfmqbvo918uaTaAqPaMtv=EFtZXgXkiyRc4vAyTdQbg@mail.gmail.com> <CAMSfU+5LAe4EXgjrBj8+UYgY-C9+kqXBSUvuXEN+Zqhq4=nrSg@mail.gmail.com>
+In-Reply-To: <CAMSfU+5LAe4EXgjrBj8+UYgY-C9+kqXBSUvuXEN+Zqhq4=nrSg@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 9 Apr 2025 09:10:55 +0200
+X-Gm-Features: ATxdqUG3xhCdWI2-UMVHexYYMTJcz1ubIQo1kLmb_EGdRow-pT4-Q99aqp-BzMs
+Message-ID: <CA+chaQdfebEjz7UepPr33ZOUcj7D7VBTjxQ1c3v-_oEUOAQ_hQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] cmatrix: Fix host-based non-reproducibility
+To: Yoann Congal <yoann.congal@smile.fr>
+Cc: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 07:10:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116725
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 07:11:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116726
 
-From: "mark.yang" <mark.yang@lge.com>
+On Wed, Apr 9, 2025 at 8:56=E2=80=AFAM Yoann Congal <yoann.congal@smile.fr>=
+ wrote:
+>
+> Le mer. 9 avr. 2025 =C3=A0 03:42, Khem Raj <raj.khem@gmail.com> a =C3=A9c=
+rit :
+> >
+> > On Tue, Apr 8, 2025 at 2:03=E2=80=AFPM Yoann Congal via lists.openembed=
+ded.org
+> > <yoann.congal=3Dsmile.fr@lists.openembedded.org> wrote:
+> > >
+> > > Le mar. 8 avr. 2025 =C3=A0 18:19, Martin Jansa <martin.jansa@gmail.co=
+m> a =C3=A9crit :
+> > > >
+> > > > This seems to cause:
+> > > >
+> > > > ERROR: QA Issue: lib32-cmatrix: Files/directories were installed bu=
+t
+> > > > not shipped in any package:
+> > > >   /usr/lib
+> > > >   /usr/lib/X11
+> > > >   /usr/lib/X11/fonts
+> > > >   /usr/lib/X11/fonts/misc
+> > > >   /usr/lib/X11/fonts/misc/mtx.pcf
+> > > > Please set FILES such that these items are packaged. Alternatively =
+if
+> > > > they are unneeded, avoid installing them or delete them within
+> > > > do_install.
+> > > > lib32-cmatrix: 5 installed and not shipped files. [installed-vs-shi=
+pped]
+> >
+> > These files look arch independent, We can think of putting them into
+> > separate output packages and install them into ${datadir} and mark them=
+ allarch
+> > ideally. But I think that might require spinning it into two recipes. O=
+therwise
+> > using nonarch_libdir during install should work I guess.
+>
+> Those files are fonts for X and the console. I've looked at other
+> recipes writing such fonts and they seem to use subdirs of $libdir.
+> I've tried to find an automated way for cmatrix to find the correct
+> path to install its fonts but I did not find any obvious.
+>
+> I like the nonarch_libdir idea: My plan:
+> * change the patch to set the path to a marker @BASE_PATH@ or something
+> * in do_configure:prepend(), sed the correct path (nonarch_libdir) into t=
+he file
+> * Update FILES:${PN} to include the font files
+>
+> Sounds good?
 
-  * Submitted 2 Patches:
-    - 0001-configure-prototypes.patch
-    - 0002-Fix-incompatible-pointer-types-error-with-gcc-15.patch
-  * Backported 1 Patch:
-    - 0003-Add-compatibility-for-gcc-15-869.patch
+Sounds good to me.
 
-  * To fix the error with gcc-15.
-  http://errors.yoctoproject.org/Errors/Details/851188/
+FWIW: I don't use cmatrix it was just a new build failure shown in
+world builds now when the files got installed (before they probably
+weren't because there was no /usr/lib/X11 directory in our docker
+images used for OE builds).
 
-Signed-off-by: mark.yang <mark.yang@lge.com>
----
- .../0001-configure-prototypes.patch           |  39 ++
- ...ible-pointer-types-error-with-gcc-15.patch | 122 ++++
- ...003-Add-compatibility-for-gcc-15-869.patch | 530 ++++++++++++++++++
- .../cyrus-sasl/cyrus-sasl_2.1.28.bb           |  24 +-
- 4 files changed, 705 insertions(+), 10 deletions(-)
- create mode 100644 meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-configure-prototypes.patch
- create mode 100644 meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0002-Fix-incompatible-pointer-types-error-with-gcc-15.patch
- create mode 100644 meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0003-Add-compatibility-for-gcc-15-869.patch
+looking at
+meta-openembedded $ git grep fonts | grep FILES
 
-diff --git a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-configure-prototypes.patch b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-configure-prototypes.patch
-new file mode 100644
-index 0000000000..e1b7c6e8d5
---- /dev/null
-+++ b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-configure-prototypes.patch
-@@ -0,0 +1,39 @@
-+From 3982a8925e15ea16df49891a700e7f9d9a10541c Mon Sep 17 00:00:00 2001
-+From: "mark.yang" <mark.yang@lge.com>
-+Date: Wed, 9 Apr 2025 11:46:36 +0900
-+Subject: [PATCH 1/3] configure prototypes
-+
-+  * Set to use function prototypes for ANSI_C
-+  If PROTOTYPES is set in md5global.h, it uses PROTO_LIST(list) list instead of PROTO_LIST(list) ()
-+  to provide parameterized prototyping.
-+  Therefore, at the configure.ac stage, when using ANSI_C, PROTOTYPES should be defined.
-+
-+  * to fix the build error with gcc-15
-+    Even though I added this configuration to fix the error, the error shown in the following patch still occurs.
-+../../git/lib/md5.c:139:8: error: too many arguments to function 'MD5_memcpy'; expected 0, have 3
-+  139 |        MD5_memcpy
-+      |        ^~~~~~~~~~
-+  140 |        ((POINTER)&context->buffer[index], (POINTER)input, partLen); MD5Transform
-+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+../../git/lib/md5.c:62:13: note: declared here
-+   62 | static void MD5_memcpy PROTO_LIST ((POINTER, POINTER, unsigned int));
-+      |             ^~~~~~~~~~
-+
-+Upstream-Status: Submitted [https://github.com/cyrusimap/cyrus-sasl/pull/873]
-+Signed-off-by: mark.yang <mark.yang@lge.com>
-+---
-+ configure.ac | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 2a0cf878..657e178b 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -88,6 +88,7 @@ AC_ARG_ENABLE(obsolete_digest_attr,
-+               enable_obsolete_digest_attr=yes)
-+ 
-+ AC_PROG_CC
-++AC_C_PROTOTYPES
-+ AX_PROG_CC_FOR_BUILD
-+ AC_PROG_CPP
-+ AC_PROG_AWK
-diff --git a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0002-Fix-incompatible-pointer-types-error-with-gcc-15.patch b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0002-Fix-incompatible-pointer-types-error-with-gcc-15.patch
-new file mode 100644
-index 0000000000..d05f580a1b
---- /dev/null
-+++ b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0002-Fix-incompatible-pointer-types-error-with-gcc-15.patch
-@@ -0,0 +1,122 @@
-+From 8ad219c21914ee9815c915e075052805efff9757 Mon Sep 17 00:00:00 2001
-+From: "mark.yang" <mark.yang@lge.com>
-+Date: Wed, 9 Apr 2025 15:42:13 +0900
-+Subject: [PATCH 2/3] Fix incompatible-pointer-types error with gcc-15
-+
-+  * Fix incompatible-pointer-types error with gcc-15
-+../../git/saslauthd/md5.c:400:14: error: passing argument 1 of 'MD5_memset' from incompatible pointer type [-Wincompatible-pointer-types]
-+  400 |   MD5_memset(&k_ipad, 0, sizeof(k_ipad));
-+      |              ^~~~~~~
-+      |              |
-+      |              unsigned char (*)[65]
-+../../git/saslauthd/md5.c:335:9: note: expected 'POINTER' {aka 'unsigned char *'} but argument is of type 'unsigned char (*)[65]'
-+  335 | POINTER output;
-+      |         ^~~~~~
-+In file included from ../../git/saslauthd/md5.c:29:
-+../include/md5global.h:16:24: note: 'POINTER' declared here
-+   16 | typedef unsigned char *POINTER;
-+      |                        ^~~~~~~
-+../../git/saslauthd/md5.c:401:14: error: passing argument 1 of 'MD5_memset' from incompatible pointer type [-Wincompatible-pointer-types]
-+  401 |   MD5_memset(&k_opad, 0, sizeof(k_opad));
-+      |              ^~~~~~~
-+      |              |
-+      |              unsigned char (*)[65]
-+../../git/saslauthd/md5.c:335:9: note: expected 'POINTER' {aka 'unsigned char *'} but argument is of type 'unsigned char (*)[65]'
-+  335 | POINTER output;
-+      |         ^~~~~~
-+../include/md5global.h:16:24: note: 'POINTER' declared here
-+   16 | typedef unsigned char *POINTER;
-+      |                        ^~~~~~~
-+../../git/saslauthd/md5.c:402:14: error: passing argument 1 of 'MD5_memset' from incompatible pointer type [-Wincompatible-pointer-types]
-+  402 |   MD5_memset(&tk, 0, sizeof(tk));
-+      |              ^~~
-+      |              |
-+      |              unsigned char (*)[16]
-+../../git/saslauthd/md5.c:335:9: note: expected 'POINTER' {aka 'unsigned char *'} but argument is of type 'unsigned char (*)[16]'
-+  335 | POINTER output;
-+      |         ^~~~~~
-+../include/md5global.h:16:24: note: 'POINTER' declared here
-+   16 | typedef unsigned char *POINTER;
-+      |                        ^~~~~~~
-+../../git/saslauthd/md5.c: In function '_saslauthd_hmac_md5_precalc':
-+../../git/saslauthd/md5.c:427:14: error: passing argument 1 of 'MD5_memset' from incompatible pointer type [-Wincompatible-pointer-types]
-+  427 |   MD5_memset(&hmac, 0, sizeof(hmac));
-+      |              ^~~~~
-+      |              |
-+      |              HMAC_MD5_CTX * {aka struct HMAC_MD5_CTX_s *}
-+../../git/saslauthd/md5.c:335:9: note: expected 'POINTER' {aka 'unsigned char *'} but argument is of type 'HMAC_MD5_CTX *' {aka 'struct HMAC_MD5_CTX_s *'}
-+  335 | POINTER output;
-+      |         ^~~~~~
-+../include/md5global.h:16:24: note: 'POINTER' declared here
-+   16 | typedef unsigned char *POINTER;
-+      |                        ^~~~~~~
-+../../git/saslauthd/md5.c: In function '_saslauthd_hmac_md5_import':
-+../../git/saslauthd/md5.c:435:14: error: passing argument 1 of 'MD5_memset' from incompatible pointer type [-Wincompatible-pointer-types]
-+  435 |   MD5_memset(hmac, 0, sizeof(HMAC_MD5_CTX));
-+      |              ^~~~
-+      |              |
-+      |              HMAC_MD5_CTX * {aka struct HMAC_MD5_CTX_s *}
-+../../git/saslauthd/md5.c:335:9: note: expected 'POINTER' {aka 'unsigned char *'} but argument is of type 'HMAC_MD5_CTX *' {aka 'struct HMAC_MD5_CTX_s *'}
-+  335 | POINTER output;
-+      |         ^~~~~~
-+../include/md5global.h:16:24: note: 'POINTER' declared here
-+   16 | typedef unsigned char *POINTER;
-+      |                        ^~~~~~~
-+../../git/saslauthd/md5.c: In function '_saslauthd_hmac_md5':
-+../../git/saslauthd/md5.c:455:6: warning: old-style function definition [-Wold-style-definition]
-+  455 | void _saslauthd_hmac_md5(text, text_len, key, key_len, digest)
-+      |      ^~~~~~~~~~~~~~~~~~~
-+../../git/saslauthd/md5.c:499:23: warning: passing argument 2 of 'MD5_memcpy' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
-+  499 |   MD5_memcpy( k_ipad, key, key_len);
-+      |                       ^~~
-+../../git/saslauthd/md5.c:322:9: note: expected 'POINTER' {aka 'unsigned char *'} but argument is of type 'const unsigned char *'
-+  322 | POINTER input;
-+      |         ^~~~~
-+../../git/saslauthd/md5.c:500:23: warning: passing argument 2 of 'MD5_memcpy' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
-+  500 |   MD5_memcpy( k_opad, key, key_len);
-+      |                       ^~~
-+../../git/saslauthd/md5.c:322:9: note: expected 'POINTER' {aka 'unsigned char *'} but argument is of type 'const unsigned char *'
-+  322 | POINTER input;
-+      |         ^~~~~
-+
-+Upstream-Status: Backport [https://github.com/cyrusimap/cyrus-sasl/pull/873]
-+Signed-off-by: mark.yang <mark.yang@lge.com>
-+---
-+ saslauthd/md5.c | 10 +++++-----
-+ 1 file changed, 5 insertions(+), 5 deletions(-)
-+
-+diff --git a/saslauthd/md5.c b/saslauthd/md5.c
-+index d38425d2..c16922d8 100644
-+--- a/saslauthd/md5.c
-++++ b/saslauthd/md5.c
-+@@ -397,9 +397,9 @@ void _saslauthd_hmac_md5_init(HMAC_MD5_CTX *hmac,
-+   _saslauthd_MD5Update(&hmac->octx, k_opad, 64);     /* apply outer pad */
-+ 
-+   /* scrub the pads and key context (if used) */
-+-  MD5_memset(&k_ipad, 0, sizeof(k_ipad));
-+-  MD5_memset(&k_opad, 0, sizeof(k_opad));
-+-  MD5_memset(&tk, 0, sizeof(tk));
-++  MD5_memset(k_ipad, 0, sizeof(k_ipad));
-++  MD5_memset(k_opad, 0, sizeof(k_opad));
-++  MD5_memset(tk, 0, sizeof(tk));
-+ 
-+   /* and we're done. */
-+ }
-+@@ -424,7 +424,7 @@ void _saslauthd_hmac_md5_precalc(HMAC_MD5_STATE *state,
-+     state->istate[lupe] = htonl(hmac.ictx.state[lupe]);
-+     state->ostate[lupe] = htonl(hmac.octx.state[lupe]);
-+   }
-+-  MD5_memset(&hmac, 0, sizeof(hmac));
-++  MD5_memset((POINTER)&hmac, 0, sizeof(hmac));
-+ }
-+ 
-+ 
-+@@ -432,7 +432,7 @@ void _saslauthd_hmac_md5_import(HMAC_MD5_CTX *hmac,
-+ 				HMAC_MD5_STATE *state)
-+ {
-+   unsigned lupe;
-+-  MD5_memset(hmac, 0, sizeof(HMAC_MD5_CTX));
-++  MD5_memset((POINTER)hmac, 0, sizeof(HMAC_MD5_CTX));
-+   for (lupe = 0; lupe < 4; lupe++) {
-+     hmac->ictx.state[lupe] = ntohl(state->istate[lupe]);
-+     hmac->octx.state[lupe] = ntohl(state->ostate[lupe]);
-diff --git a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0003-Add-compatibility-for-gcc-15-869.patch b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0003-Add-compatibility-for-gcc-15-869.patch
-new file mode 100644
-index 0000000000..924d39d301
---- /dev/null
-+++ b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0003-Add-compatibility-for-gcc-15-869.patch
-@@ -0,0 +1,530 @@
-+From dcd29d8e5ee427b68f34fdede007fa4787caf464 Mon Sep 17 00:00:00 2001
-+From: Rob Crittenden <rcritten@redhat.com>
-+Date: Fri, 28 Feb 2025 12:07:25 -0500
-+Subject: [PATCH 3/3] Add compatibility for gcc 15 (#869)
-+
-+Fedora 42 is going to use gcc 15 which changes some warnings into
-+errors. Address the issues raised.
-+
-+The issues addressed include:
-+- The RETURN macro is defined differently in two places. Rename one.
-+- Both atexit and the sigint and sigterm actions call server_exit().
-+  The function arguments diff. Introduce a new generic signal handler
-+  to call server_exit() for sigint and sigterm signals.
-+
-+Signed-off-by: Rob Crittenden <rcritten@redhat.com>
-+
-+Upstream-Status: Backport [https://github.com/cyrusimap/cyrus-sasl/pull/869]
-+Signed-off-by: mark.yang <mark.yang@lge.com>
-+---
-+ lib/auxprop.c              |  2 +-
-+ lib/canonusr.c             |  6 +++---
-+ lib/client.c               |  6 +++---
-+ lib/common.c               | 40 +++++++++++++++++++-------------------
-+ lib/saslint.h              |  8 ++++----
-+ lib/server.c               | 32 +++++++++++++++---------------
-+ saslauthd/auth_sasldb.c    |  4 +---
-+ saslauthd/saslauthd-main.c | 12 ++++++++----
-+ saslauthd/saslauthd-main.h |  5 +++--
-+ 9 files changed, 59 insertions(+), 56 deletions(-)
-+
-+diff --git a/lib/auxprop.c b/lib/auxprop.c
-+index 1b0162db..0d465a2d 100644
-+--- a/lib/auxprop.c
-++++ b/lib/auxprop.c
-+@@ -780,7 +780,7 @@ int sasl_auxprop_request(sasl_conn_t *conn, const char **propnames)
-+     }
-+     
-+     result = prop_request(sconn->sparams->propctx, propnames);
-+-    RETURN(conn, result);
-++    RETURN_VAL(conn, result);
-+ }
-+ 
-+ 
-+diff --git a/lib/canonusr.c b/lib/canonusr.c
-+index 66f7e112..654a72ed 100644
-+--- a/lib/canonusr.c
-++++ b/lib/canonusr.c
-+@@ -192,7 +192,7 @@ int _sasl_canon_user(sasl_conn_t *conn,
-+ 	oparams->user = conn->user_buf;
-+     }
-+ 
-+-    RETURN(conn, result);
-++    RETURN_VAL(conn, result);
-+ }
-+ 
-+ /* Lookup all properties for authentication and/or authorization identity. */
-+@@ -256,7 +256,7 @@ static int _sasl_auxprop_lookup_user_props (sasl_conn_t *conn,
-+     }
-+ #endif
-+ 
-+-    RETURN(conn, result);
-++    RETURN_VAL(conn, result);
-+ }
-+ 
-+ /* default behavior:
-+@@ -285,7 +285,7 @@ int _sasl_canon_user_lookup (sasl_conn_t *conn,
-+ 						  oparams);
-+     }
-+ 
-+-    RETURN(conn, result);
-++    RETURN_VAL(conn, result);
-+ }
-+ 
-+ void _sasl_canonuser_free() 
-+diff --git a/lib/client.c b/lib/client.c
-+index 3784bb0e..281285b8 100644
-+--- a/lib/client.c
-++++ b/lib/client.c
-+@@ -435,7 +435,7 @@ int sasl_client_new(const char *service,
-+ 			   &client_idle, serverFQDN,
-+ 			   iplocalport, ipremoteport,
-+ 			   prompt_supp, &global_callbacks_client);
-+-  if (result != SASL_OK) RETURN(*pconn, result);
-++  if (result != SASL_OK) RETURN_VAL(*pconn, result);
-+   
-+   utils = _sasl_alloc_utils(*pconn, &global_callbacks_client);
-+   if (utils == NULL) {
-+@@ -879,7 +879,7 @@ int sasl_client_start(sasl_conn_t *conn,
-+  done:
-+     if (ordered_mechs != NULL)
-+ 	c_conn->cparams->utils->free(ordered_mechs);
-+-    RETURN(conn, result);
-++    RETURN_VAL(conn, result);
-+ }
-+ 
-+ /* do a single authentication step.
-+@@ -952,7 +952,7 @@ int sasl_client_step(sasl_conn_t *conn,
-+       }
-+   }  
-+ 
-+-  RETURN(conn,result);
-++  RETURN_VAL(conn,result);
-+ }
-+ 
-+ /* returns the length of all the mechanisms
-+diff --git a/lib/common.c b/lib/common.c
-+index d9104c89..e9d58d1b 100644
-+--- a/lib/common.c
-++++ b/lib/common.c
-+@@ -303,7 +303,7 @@ int sasl_encode(sasl_conn_t *conn, const char *input,
-+     
-+     result = sasl_encodev(conn, &tmp, 1, output, outputlen);
-+ 
-+-    RETURN(conn, result);
-++    RETURN_VAL(conn, result);
-+ }
-+ 
-+ /* Internal function that doesn't do any verification */
-+@@ -389,7 +389,7 @@ _sasl_encodev (sasl_conn_t *conn,
-+ 
-+     (*p_num_packets)++;
-+ 
-+-    RETURN(conn, result);
-++    RETURN_VAL(conn, result);
-+ }
-+ 
-+ /* security-encode an iovec */
-+@@ -434,7 +434,7 @@ int sasl_encodev(sasl_conn_t *conn,
-+ 	*output = conn->encode_buf->data;
-+ 	*outputlen = (unsigned) conn->encode_buf->curlen;
-+ 
-+-        RETURN(conn, result);
-++        RETURN_VAL(conn, result);
-+     }
-+ 
-+     /* This might be better to check on a per-plugin basis, but I think
-+@@ -592,7 +592,7 @@ cleanup:
-+         sasl_FREE(cur_invec);
-+     }
-+ 
-+-    RETURN(conn, result);
-++    RETURN_VAL(conn, result);
-+ }
-+  
-+ /* output is only valid until next call to sasl_decode */
-+@@ -609,7 +609,7 @@ int sasl_decode(sasl_conn_t *conn,
-+     if(!conn->props.maxbufsize) {
-+ 	sasl_seterror(conn, 0,
-+ 		      "called sasl_decode with application that does not support security layers");
-+-	RETURN(conn, SASL_TOOWEAK);
-++	RETURN_VAL(conn, SASL_TOOWEAK);
-+     }
-+ 
-+     if(conn->oparams.decode == NULL)
-+@@ -623,7 +623,7 @@ int sasl_decode(sasl_conn_t *conn,
-+ 	if(inputlen > conn->props.maxbufsize) {
-+ 	    sasl_seterror(conn, 0,
-+ 			  "input too large for default sasl_decode");
-+-	    RETURN(conn,SASL_BUFOVER);
-++	    RETURN_VAL(conn,SASL_BUFOVER);
-+ 	}
-+ 
-+ 	if(!conn->decode_buf)
-+@@ -644,7 +644,7 @@ int sasl_decode(sasl_conn_t *conn,
-+ 	/* NULL an empty buffer (for misbehaved applications) */
-+ 	if (*outputlen == 0) *output = NULL;
-+ 
-+-        RETURN(conn, result);
-++        RETURN_VAL(conn, result);
-+     }
-+ 
-+     INTERROR(conn, SASL_FAIL);
-+@@ -738,11 +738,11 @@ int _sasl_conn_init(sasl_conn_t *conn,
-+ 
-+   result = sasl_setprop(conn, SASL_IPLOCALPORT, iplocalport);
-+   if(result != SASL_OK)
-+-      RETURN(conn, result);
-++      RETURN_VAL(conn, result);
-+   
-+   result = sasl_setprop(conn, SASL_IPREMOTEPORT, ipremoteport);
-+   if(result != SASL_OK)
-+-      RETURN(conn, result);
-++      RETURN_VAL(conn, result);
-+   
-+   conn->encode_buf = NULL;
-+   conn->context = NULL;
-+@@ -787,7 +787,7 @@ int _sasl_conn_init(sasl_conn_t *conn,
-+ 
-+   if(result != SASL_OK) MEMERROR( conn );
-+ 
-+-  RETURN(conn, SASL_OK);
-++  RETURN_VAL(conn, SASL_OK);
-+ }
-+ 
-+ int _sasl_common_init(sasl_global_callbacks_t *global_callbacks)
-+@@ -1068,11 +1068,11 @@ int sasl_getprop(sasl_conn_t *conn, int propnum, const void **pvalue)
-+   } else if(result == SASL_NOTDONE) {
-+       sasl_seterror(conn, SASL_NOLOG,
-+ 		    "Information that was requested is not yet available.");
-+-      RETURN(conn, result);
-++      RETURN_VAL(conn, result);
-+   } else if(result != SASL_OK) {
-+       INTERROR(conn, result);
-+   } else
-+-      RETURN(conn, result); 
-++      RETURN_VAL(conn, result);
-+ }
-+ 
-+ /* set property in SASL connection state
-+@@ -1146,7 +1146,7 @@ int sasl_setprop(sasl_conn_t *conn, int propnum, const void *value)
-+       if(props->maxbufsize == 0 && props->min_ssf != 0) {
-+ 	  sasl_seterror(conn, 0,
-+ 			"Attempt to disable security layers (maxoutbuf == 0) with min_ssf > 0");
-+-	  RETURN(conn, SASL_TOOWEAK);
-++	  RETURN_VAL(conn, SASL_TOOWEAK);
-+       }
-+ 
-+       conn->props = *props;
-+@@ -1168,7 +1168,7 @@ int sasl_setprop(sasl_conn_t *conn, int propnum, const void *value)
-+       } else if (_sasl_ipfromstring(ipremoteport, NULL, 0)
-+ 		 != SASL_OK) {
-+ 	  sasl_seterror(conn, 0, "Bad IPREMOTEPORT value");
-+-	  RETURN(conn, SASL_BADPARAM);
-++	  RETURN_VAL(conn, SASL_BADPARAM);
-+       } else {
-+ 	  strcpy(conn->ipremoteport, ipremoteport);
-+ 	  conn->got_ip_remote = 1;
-+@@ -1209,7 +1209,7 @@ int sasl_setprop(sasl_conn_t *conn, int propnum, const void *value)
-+       } else if (_sasl_ipfromstring(iplocalport, NULL, 0)
-+ 		 != SASL_OK) {
-+ 	  sasl_seterror(conn, 0, "Bad IPLOCALPORT value");
-+-	  RETURN(conn, SASL_BADPARAM);
-++	  RETURN_VAL(conn, SASL_BADPARAM);
-+       } else {
-+ 	  strcpy(conn->iplocalport, iplocalport);
-+ 	  conn->got_ip_local = 1;
-+@@ -1302,7 +1302,7 @@ int sasl_setprop(sasl_conn_t *conn, int propnum, const void *value)
-+       result = SASL_BADPARAM;
-+   }
-+   
-+-  RETURN(conn, result);
-++  RETURN_VAL(conn, result);
-+ }
-+ 
-+ /* this is apparently no longer a user function */
-+@@ -1708,7 +1708,7 @@ _sasl_proxy_policy(sasl_conn_t *conn,
-+ 	(memcmp(auth_identity, requested_user, rlen) != 0)) {
-+ 	sasl_seterror(conn, 0,
-+ 		      "Requested identity not authenticated identity");
-+-	RETURN(conn, SASL_BADAUTH);
-++	RETURN_VAL(conn, SASL_BADAUTH);
-+     }
-+ 
-+     return SASL_OK;
-+@@ -1809,7 +1809,7 @@ int _sasl_getcallback(sasl_conn_t * conn,
-+   *pproc = NULL;
-+   *pcontext = NULL;
-+   sasl_seterror(conn, SASL_NOLOG, "Unable to find a callback: %d", callbackid);
-+-  RETURN(conn,SASL_FAIL);
-++  RETURN_VAL(conn,SASL_FAIL);
-+ }
-+ 
-+ 
-+@@ -2405,10 +2405,10 @@ int sasl_listmech(sasl_conn_t *conn,
-+     if(!conn) {
-+ 	return SASL_BADPARAM;
-+     } else if(conn->type == SASL_CONN_SERVER) {
-+-	RETURN(conn, _sasl_server_listmech(conn, user, prefix, sep, suffix,
-++	RETURN_VAL(conn, _sasl_server_listmech(conn, user, prefix, sep, suffix,
-+ 					   result, plen, pcount));
-+     } else if (conn->type == SASL_CONN_CLIENT) {
-+-	RETURN(conn, _sasl_client_listmech(conn, prefix, sep, suffix,
-++	RETURN_VAL(conn, _sasl_client_listmech(conn, prefix, sep, suffix,
-+ 					   result, plen, pcount));
-+     }
-+     
-+diff --git a/lib/saslint.h b/lib/saslint.h
-+index ebade78f..77fbb1b5 100644
-+--- a/lib/saslint.h
-++++ b/lib/saslint.h
-+@@ -74,22 +74,22 @@
-+  *   memory errors.
-+  *  -Only errors (error codes < SASL_OK) should be remembered
-+  */
-+-#define RETURN(conn, val) { if(conn && (val) < SASL_OK) \
-++#define RETURN_VAL(conn, val) { if(conn && (val) < SASL_OK) \
-+                                (conn)->error_code = (val); \
-+                             return (val); }
-+ #define MEMERROR(conn) {\
-+     if(conn) sasl_seterror( (conn), 0, \
-+                    "Out of Memory in " __FILE__ " near line %d", __LINE__ ); \
-+-    RETURN(conn, SASL_NOMEM) }
-++    RETURN_VAL(conn, SASL_NOMEM) }
-+ #define PARAMERROR(conn) {\
-+     if(conn) sasl_seterror( (conn), SASL_NOLOG, \
-+                   "Parameter error in " __FILE__ " near line %d", __LINE__ ); \
-+-    RETURN(conn, SASL_BADPARAM) }
-++    RETURN_VAL(conn, SASL_BADPARAM) }
-+ #define INTERROR(conn, val) {\
-+     if(conn) sasl_seterror( (conn), 0, \
-+                    "Internal Error %d in " __FILE__ " near line %d", (val),\
-+ 		   __LINE__ ); \
-+-    RETURN(conn, (val)) }
-++    RETURN_VAL(conn, (val)) }
-+ 
-+ #ifndef PATH_MAX
-+ # ifdef WIN32
-+diff --git a/lib/server.c b/lib/server.c
-+index bff461f8..4ea27643 100644
-+--- a/lib/server.c
-++++ b/lib/server.c
-+@@ -155,7 +155,7 @@ int sasl_setpass(sasl_conn_t *conn,
-+ 	 (current_mech == NULL) ) {
-+ 	sasl_seterror( conn, SASL_NOLOG,
-+                   "No current SASL mechanism available");
-+-	RETURN(conn, SASL_BADPARAM);
-++	RETURN_VAL(conn, SASL_BADPARAM);
-+     }
-+ 
-+     /* Do we want to store SASL_AUX_PASSWORD_PROP (plain text)?  and
-+@@ -297,7 +297,7 @@ int sasl_setpass(sasl_conn_t *conn,
-+ 	}
-+     }
-+ 
-+-    RETURN(conn, result);
-++    RETURN_VAL(conn, result);
-+ }
-+ 
-+ /* local mechanism which disposes of server */
-+@@ -991,7 +991,7 @@ _sasl_transition(sasl_conn_t * conn,
-+ 			      NULL, 0, SASL_SET_CREATE | flags);
-+     }
-+ 
-+-    RETURN(conn,result);
-++    RETURN_VAL(conn,result);
-+ }
-+ 
-+ 
-+@@ -1367,7 +1367,7 @@ static int do_authorization(sasl_server_conn_t *s_conn)
-+ 		   (s_conn->user_realm ? (unsigned) strlen(s_conn->user_realm) : 0),
-+ 		   s_conn->sparams->propctx);
-+ 
-+-    RETURN(&s_conn->base, ret);
-++    RETURN_VAL(&s_conn->base, ret);
-+ }
-+ 
-+ 
-+@@ -1484,7 +1484,7 @@ int sasl_server_start(sasl_conn_t *conn,
-+ 
-+ 	if (result != SASL_OK) {
-+ 	    /* The library will eventually be freed, don't sweat it */
-+-	    RETURN(conn, result);
-++	    RETURN_VAL(conn, result);
-+ 	}
-+     }
-+ 
-+@@ -1573,7 +1573,7 @@ int sasl_server_start(sasl_conn_t *conn,
-+ 	conn->oparams.doneflag = 0;
-+     }
-+     
-+-    RETURN(conn,result);
-++    RETURN_VAL(conn,result);
-+ }
-+ 
-+ 
-+@@ -1701,7 +1701,7 @@ int sasl_server_step(sasl_conn_t *conn,
-+ 	conn->oparams.doneflag = 0;
-+     }
-+ 
-+-    RETURN(conn, ret);
-++    RETURN_VAL(conn, ret);
-+ }
-+ 
-+ /* returns the length of all the mechanisms
-+@@ -1950,7 +1950,7 @@ static int _sasl_checkpass(sasl_conn_t *conn,
-+     if (result != SASL_OK)
-+ 	sasl_seterror(conn, SASL_NOLOG, "checkpass failed");
-+ 
-+-    RETURN(conn, result);
-++    RETURN_VAL(conn, result);
-+ }
-+ 
-+ /* check if a plaintext password is valid
-+@@ -1990,7 +1990,7 @@ int sasl_checkpass(sasl_conn_t *conn,
-+     result = _sasl_canon_user(conn, user, userlen,
-+ 			      SASL_CU_AUTHID | SASL_CU_AUTHZID,
-+ 			      &(conn->oparams));
-+-    if(result != SASL_OK) RETURN(conn, result);
-++    if(result != SASL_OK) RETURN_VAL(conn, result);
-+     user = conn->oparams.user;
-+ 
-+     /* Check the password and lookup additional properties */
-+@@ -2001,7 +2001,7 @@ int sasl_checkpass(sasl_conn_t *conn,
-+       result = do_authorization((sasl_server_conn_t *)conn);
-+     }
-+ 
-+-    RETURN(conn,result);
-++    RETURN_VAL(conn,result);
-+ }
-+ 
-+ /* check if a user exists on server
-+@@ -2074,7 +2074,7 @@ int sasl_user_exists(sasl_conn_t *conn,
-+ 	sasl_seterror(conn, SASL_NOLOG, "no plaintext password verifier?");
-+     }
-+ 
-+-    RETURN(conn, result);
-++    RETURN_VAL(conn, result);
-+ }
-+ 
-+ /* check if an apop exchange is valid
-+@@ -2136,7 +2136,7 @@ int sasl_checkapop(sasl_conn_t *conn,
-+     if (!user_end || strspn(user_end + 1, "0123456789abcdef") != 32) 
-+     {
-+         sasl_seterror(conn, 0, "Bad Digest");
-+-        RETURN(conn,SASL_BADPROT);
-++        RETURN_VAL(conn,SASL_BADPROT);
-+     }
-+  
-+     user_len = (size_t)(user_end - response);
-+@@ -2148,7 +2148,7 @@ int sasl_checkapop(sasl_conn_t *conn,
-+     if(result != SASL_OK) 
-+     {
-+         sasl_FREE(user);
-+-        RETURN(conn, result);
-++        RETURN_VAL(conn, result);
-+     }
-+ 
-+     /* erase the plaintext password */
-+@@ -2163,7 +2163,7 @@ int sasl_checkapop(sasl_conn_t *conn,
-+ 				      &(conn->oparams));
-+     sasl_FREE(user);
-+ 
-+-    if(result != SASL_OK) RETURN(conn, result);
-++    if(result != SASL_OK) RETURN_VAL(conn, result);
-+ 
-+     /* Do APOP verification */
-+     result = _sasl_auxprop_verify_apop(conn, conn->oparams.authid,
-+@@ -2178,11 +2178,11 @@ int sasl_checkapop(sasl_conn_t *conn,
-+ 	conn->oparams.authid = NULL;
-+     }
-+ 
-+-    RETURN(conn, result);
-++    RETURN_VAL(conn, result);
-+ #else /* sasl_checkapop was disabled at compile time */
-+     sasl_seterror(conn, SASL_NOLOG,
-+ 	"sasl_checkapop called, but was disabled at compile time");
-+-    RETURN(conn, SASL_NOMECH);
-++    RETURN_VAL(conn, SASL_NOMECH);
-+ #endif /* DO_SASL_CHECKAPOP */
-+ }
-+ 
-+diff --git a/saslauthd/auth_sasldb.c b/saslauthd/auth_sasldb.c
-+index b6aaa393..08db1892 100644
-+--- a/saslauthd/auth_sasldb.c
-++++ b/saslauthd/auth_sasldb.c
-+@@ -51,9 +51,7 @@
-+ #include "../sasldb/sasldb.h"
-+ 
-+ static int
-+-vf(void *context __attribute__((unused)),
-+-   char *file  __attribute__((unused)),
-+-   int type  __attribute__((unused)))
-++vf(void)
-+ {
-+     /* always say ok */ 
-+     return SASL_OK;
-+diff --git a/saslauthd/saslauthd-main.c b/saslauthd/saslauthd-main.c
-+index ca5b7256..68ffd02f 100644
-+--- a/saslauthd/saslauthd-main.c
-++++ b/saslauthd/saslauthd-main.c
-+@@ -593,7 +593,7 @@ void signal_setup() {
-+ 	/**************************************************************
-+ 	 * Handler for SIGTERM
-+ 	 **************************************************************/
-+-	act_sigterm.sa_handler = server_exit;
-++	act_sigterm.sa_handler = handle_exit;
-+ 	sigemptyset(&act_sigterm.sa_mask);
-+ 
-+ 	if (sigaction(SIGTERM, &act_sigterm, NULL) != 0) {
-+@@ -606,7 +606,7 @@ void signal_setup() {
-+ 	/**************************************************************
-+ 	 * Handler for SIGINT
-+ 	 **************************************************************/
-+-	act_sigint.sa_handler = server_exit;
-++	act_sigint.sa_handler = handle_exit;
-+ 	sigemptyset(&act_sigint.sa_mask);
-+ 
-+ 	if (sigaction(SIGINT, &act_sigint, NULL) != 0) {
-+@@ -876,7 +876,7 @@ pid_t have_baby() {
-+ /*************************************************************
-+  * Reap in all the dead children
-+  **************************************************************/
-+-void handle_sigchld() {
-++void handle_sigchld(__attribute__((unused)) int sig) {
-+ 	pid_t pid;
-+ 
-+ 	while ((pid = waitpid(-1, 0, WNOHANG)) > 0) {
-+@@ -888,11 +888,15 @@ void handle_sigchld() {
-+ 	return;
-+ }
-+ 
-++void handle_exit(__attribute__((unused)) int sig) {
-++	server_exit();
-++}
-++
-+ 
-+ /*************************************************************
-+  * Do some final cleanup here.
-+  **************************************************************/
-+-void server_exit() {
-++void server_exit(void) {
-+ 
-+ 	/*********************************************************
-+ 	 * If we're not the master process, don't do anything
-+diff --git a/saslauthd/saslauthd-main.h b/saslauthd/saslauthd-main.h
-+index 754626c6..29998f03 100644
-+--- a/saslauthd/saslauthd-main.h
-++++ b/saslauthd/saslauthd-main.h
-+@@ -96,8 +96,9 @@ extern void	set_mech_option(const char *);
-+ extern void	set_run_path(const char *);
-+ extern void	signal_setup();
-+ extern void	detach_tty();
-+-extern void	handle_sigchld();
-+-extern void	server_exit();
-++extern void	handle_sigchld(int sig);
-++extern void	handle_exit(int sig);
-++extern void	server_exit(void);
-+ extern pid_t	have_baby();
-+ 
-+ /* ipc api delcarations */
-diff --git a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb
-index 1f4b4bf732..40e51a6a43 100644
---- a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb
-+++ b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb
-@@ -7,16 +7,20 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3f55e0974e3d6db00ca6f57f2d206396"
- 
- SRCREV = "7a6b45b177070198fed0682bea5fa87c18abb084"
- 
--SRC_URI = "git://github.com/cyrusimap/cyrus-sasl;protocol=https;branch=cyrus-sasl-2.1 \
--           file://avoid-to-call-AC_TRY_RUN.patch \
--           file://debian_patches_0014_avoid_pic_overwrite.diff \
--           file://0001-sample-Rename-dprintf-to-cyrus_dprintf.patch \
--           file://saslauthd.service \
--           file://saslauthd.conf \
--           file://CVE-2019-19906.patch \
--	   file://CVE-2022-24407.patch \
--           file://0001-Fix-time.h-check.patch \
--           "
-+SRC_URI = " \
-+    git://github.com/cyrusimap/cyrus-sasl;protocol=https;branch=cyrus-sasl-2.1 \
-+    file://avoid-to-call-AC_TRY_RUN.patch \
-+    file://debian_patches_0014_avoid_pic_overwrite.diff \
-+    file://0001-sample-Rename-dprintf-to-cyrus_dprintf.patch \
-+    file://saslauthd.service \
-+    file://saslauthd.conf \
-+    file://CVE-2019-19906.patch \
-+    file://CVE-2022-24407.patch \
-+    file://0001-Fix-time.h-check.patch \
-+    file://0001-configure-prototypes.patch \
-+    file://0002-Fix-incompatible-pointer-types-error-with-gcc-15.patch \
-+    file://0003-Add-compatibility-for-gcc-15-869.patch \
-+"
- 
- UPSTREAM_CHECK_URI = "https://github.com/cyrusimap/cyrus-sasl/archives"
- 
+I guess using ${datadir}/fonts might be even easier option with
+-set(X_FONTS_DIRS "lib/X11/fonts/misc" "share/fonts/X11/misc")
++set(X_FONTS_DIRS "share/fonts/misc")
+in your .patch as datadir will be the same with and without multilib.
+
+Cheers,
 
