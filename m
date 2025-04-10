@@ -1,89 +1,96 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <alistair23@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93336C36002
-	for <webhook@archiver.kernel.org>; Wed,  9 Apr 2025 20:25:25 +0000 (UTC)
-Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com [209.85.128.169])
- by mx.groups.io with SMTP id smtpd.web11.18822.1744230319644761314
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B78F0C369A2
+	for <webhook@archiver.kernel.org>; Thu, 10 Apr 2025 00:29:06 +0000 (UTC)
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.web11.23461.1744244943414893930
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Apr 2025 13:25:19 -0700
+ Wed, 09 Apr 2025 17:29:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Va1L1SQG;
- spf=pass (domain: gmail.com, ip: 209.85.128.169, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-6f666c94285so1056247b3.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 13:25:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Nnlg/xtX;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: alistair23@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-303a66af07eso167536a91.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 17:29:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744230318; x=1744835118; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1744244942; x=1744849742; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=BGbacHWzaBCfqGuM/5727ytOLFHwb2vUFQqpKs8eN0s=;
-        b=Va1L1SQGKYkbs/no1tw2sStAijj8nMYqHj14A28khj3fgYaZY2f3NjYkI0hU+BUlPl
-         R+v5K6BZwb48qnswEqubSv56D8wbxRl4pw4KncRpIeNZGf5hIYqBUSmLMG+TvrIZ8jL4
-         jJMMkEHVGnn4+WuTTZUJ4Rbl03l043yTOgZsYV/oxYsaj0vNMvbljeaOos5UHl2F4vyl
-         leVG/F9u13haC35UuoBdGEkMPgRHDdSFekJROgyXjiEiXrY4cb9rtQ/c6WBkWZdppVsm
-         nl4jDQ8sUEDzEkMdhn6Mkc0LwfnhbLWisRiAGm6Vs3OauftiySbwcNCJqloXFkaYTUsp
-         UdZQ==
+        bh=aoH3pUILXIzwtJ8q902KAUkyzYLmffRCdvRnCnNLzSc=;
+        b=Nnlg/xtXYfWZbjYMWVJUDAjLVhqdFcKLFWBEo/ljJiAd7aDcBuA0RZ0EkEnuCIt73Q
+         2Krj0yDpGmxcIdmRaM/JA9z2sGlRukHtMwJueB8tucqkK6w/pMTXV1emREA92y/Zoyoq
+         KLp+0LOTpIUpun7WUEkY03YfRabNKlNvxDNygVAWEef6nROu3BzQgjjEw71V/t2mCh6C
+         vGukpw1kSL+7NnCLoIebHBmcvHpra0mB5SGyEpECEiGgR9i+7OXgwo5OIj+xlxMUxwxL
+         BCAh8LQpzZ5FlA0+z7UBQ+pOyI8cnchfjfL21WvODC1nq+IZ/S8yjG3ZiyVoaEFHV77A
+         kCkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744230318; x=1744835118;
+        d=1e100.net; s=20230601; t=1744244942; x=1744849742;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=BGbacHWzaBCfqGuM/5727ytOLFHwb2vUFQqpKs8eN0s=;
-        b=xKYhZ5C5T6NMDb96hfHeMOjld0af3nIelYdxrX1PeYWt8GLiUCUkutwSeIA0/F6GdS
-         UgwpK/r+cKhIeO6MFqFyMlP9gH0K6UHOVW1VYwBHGJViaZVTl+c1jFlWusjESlEdQ7uW
-         cWarHM1F54cVBO4KGMqsGqksv8HtvHKEQbvmnTyFs3il9BL1Fzb9rvsJT9n5xIFCmZsp
-         I71x+Pq+qks/Zfl6yJrMOIs0DSyPsgAAgCZVcOhd0XA0jnoNUzca9+Jdx99dGOOcEMfl
-         SZ3ED3QMpg2AMOZMQD26VVx8lMD45qSq9XJmzGgPhKHkZbNo2hmMQk02XqqUPtFKuhnQ
-         Ej8Q==
-X-Gm-Message-State: AOJu0YxKrxdni46cFSNt6IR+a2WiE0CbPY35Ro1d/7Uzr67Wy0RQp9mK
-	0CJh8duGt6MToyahQ+fBiJOwwcfedCimKYVfw1DE9wQqSww8kWvyX5eswAcJ
-X-Gm-Gg: ASbGncvTt9OXbeLFY/Fxm3GNJrMymWCVpAdIko7/nFhQBQsoMnNI20IczS21kPHlx7l
-	n36tQGQo1DquA+QyDze1ZzAWL5P83vqvd+XlA1B2WO/KVipxSI7fJHOt4FvXzcuiKn1fbV2Q9zf
-	G5baBYWjV44HpDXr4Px34n0prJHGymzGGiMN9EUCnFgIjvrp8pv2Ixi1JSaekp+updit0+TXYCG
-	2mniFpg8GIZyv8ck7Blcz0SlV9akAR8OCB98zzv97lm+kEhWfHVEEkDWjuDo7xjSmwusIl1a5ol
-	4Qhd/7x79XcLbnx8Ga5ePcAqVSIEplfuha8xjJ/pjr4mYw==
-X-Google-Smtp-Source: AGHT+IFBo62qrDouzoJ8oiAf2ANPCtfqoLf4o2p/B7sUGHMOpGQmcN5RX6ViVP2yEvgoR6xzNxjK0Q==
-X-Received: by 2002:a05:690c:4441:b0:6f7:56f7:239a with SMTP id 00721157ae682-70549e487femr2521327b3.5.1744230317747;
-        Wed, 09 Apr 2025 13:25:17 -0700 (PDT)
-Received: from localhost.localdomain ([71.215.9.36])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-7053e39ce35sm4277647b3.94.2025.04.09.13.25.17
+        bh=aoH3pUILXIzwtJ8q902KAUkyzYLmffRCdvRnCnNLzSc=;
+        b=a/XJPuRdEYxJP90CPVP+C5EZTLu+JpnuTVXeKJ6g8PCG67OzKWNePTOBqqwxDlHwcX
+         4k0sNfm8qoyLJVluR01YWpWkAI4S6WT+YA48G/LhgDJnXXcAp4GyRDBBxxM3W3TU1ZW3
+         qt2vKxd9WjOn56ZrYBHQAwvAigFdgTyyvP9HNnOdAuVVDYeeoFWHjIl6AUD4W+9R0AAm
+         fXlVg2MwdBpenqSxj6MBHeARAzz4T7Fz+GGvlCrcFN0bk3ybk4PYWYTubIiJGHTMehAD
+         3w6Hi8hAeNLqpgMfy7hq+2PoUjm8eKPwciG9QJ/DRujS2ebP9xjNOtUS1vhljR1MOmu8
+         3sRg==
+X-Gm-Message-State: AOJu0YzC5U/yaPotJGNjxZeGRf+505xgZ85ZSpeeMh3dOUcmhaUwQ9gy
+	Q5PaSLiC6FwW9q+5XkFy5JCdK4F9jYAd7ZTpEHnk76UUMv77PZOPRiiFlQ==
+X-Gm-Gg: ASbGncuEaf/y/rsz4JWF0CCdghRZxX3M1Yj1xtECxAfZyxo4SRzVib2Ulbebs6iaLkB
+	/XPuaCd1454Ev3Or4GVMuGnf7pTtY5RUh1t0+vBR8DQOYDz37MoMVe5rFxNn+ZEB5znBgMJIHkd
+	XAcXYN526Zhu1Pi4sA6krAicXgj601XkR6QLNgcQj9+rZ2023AnhP6H13b67hUWR2tuGtE3iEzU
+	X9XNYYIbxj7fHvAs73SqFo0fC2NI2FtH6WmYt+BcHQZKU3hTrAnJKWCS9oXCGF8+aMbyO+ZfTUj
+	GchFl6zm5uOhcXqwCFPfPN9dkhtFLdDLJUk+3O2aXjN1RdSOy21qp/zqINM7MICIDjDyh5Rq4V7
+	kidWaRQ7vSc3L3AOTuBYnBCBTn4Vm2u1p7AGlXjMuNfUu+kkl2M6eB/L1
+X-Google-Smtp-Source: AGHT+IHOuJrSMk2y4/PMEM1kDjzfkUOCYpaJuWkh2ympGqgOwcEky5EgJMNX1hm09I7nY0IiQTD//A==
+X-Received: by 2002:a17:90b:5824:b0:2ee:edae:780 with SMTP id 98e67ed59e1d1-30718b7f834mr1483665a91.15.1744244942341;
+        Wed, 09 Apr 2025 17:29:02 -0700 (PDT)
+Received: from toolbx.alistair23.me (2403-580b-97e8-0-82ce-f179-8a79-69f4.ip6.aussiebb.net. [2403:580b:97e8:0:82ce:f179:8a79:69f4])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-306dd11e666sm2340813a91.15.2025.04.09.17.29.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Apr 2025 13:25:17 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+        Wed, 09 Apr 2025 17:29:01 -0700 (PDT)
+From: Alistair Francis <alistair23@gmail.com>
+X-Google-Original-From: Alistair Francis <alistair.francis@wdc.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-gnome][PATCH] Fix warning : lack of whitespace around assignment
-Date: Wed,  9 Apr 2025 16:25:06 -0400
-Message-ID: <20250409202506.235676-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: alistair23@gmail.com,
+	Alistair Francis <alistair.francis@wdc.com>
+Subject: [meta-oe][PATCH] libnvme: Support keyutils and openssl by default
+Date: Thu, 10 Apr 2025 10:28:49 +1000
+Message-ID: <20250410002850.435537-1-alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 20:25:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116745
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 00:29:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116746
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Use PACKAGECONFIG to support keyutils and openssl by default. This
+allows NVMe-OF connections with TLS.
+
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- meta-gnome/recipes-graphics/clutter/clutter-gst-3.0.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/libnvme/libnvme_1.12.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-graphics/clutter/clutter-gst-3.0.inc b/meta-gnome/recipes-graphics/clutter/clutter-gst-3.0.inc
-index 1329f7fc50..ce6f3c521f 100644
---- a/meta-gnome/recipes-graphics/clutter/clutter-gst-3.0.inc
-+++ b/meta-gnome/recipes-graphics/clutter/clutter-gst-3.0.inc
-@@ -13,7 +13,7 @@ REQUIRED_DISTRO_FEATURES ?= "opengl"
- # Needed for introspection.m4
- EXTRA_AUTORECONF += "-I m4"
+diff --git a/meta-oe/recipes-support/libnvme/libnvme_1.12.bb b/meta-oe/recipes-support/libnvme/libnvme_1.12.bb
+index a80d34277f..1054f83487 100644
+--- a/meta-oe/recipes-support/libnvme/libnvme_1.12.bb
++++ b/meta-oe/recipes-support/libnvme/libnvme_1.12.bb
+@@ -20,4 +20,8 @@ S = "${WORKDIR}/git"
  
--export GST_PLUGIN_SCANNER_1_0="${S}/gst-plugin-scanner-dummy"
-+export GST_PLUGIN_SCANNER_1_0 = "${S}/gst-plugin-scanner-dummy"
+ inherit meson pkgconfig
  
- SRC_URI += "file://0001-Install-example-binary-needed-for-core-image-clutter.patch"
- 
+-EXTRA_OEMESON += "-Dkeyutils=disabled -Dopenssl=disabled -Dpython=disabled"
++PACKAGECONFIG ??= "keyutils openssl"
++
++PACKAGECONFIG[keyutils] = "-Dkeyutils=enabled,-Dkeyutils=disabled,keyutils"
++PACKAGECONFIG[openssl] = "-Dopenssl=enabled,-Dopenssl=disabled,openssl"
++PACKAGECONFIG[python] = "-Dpython=enabled,-Dpython=disabled,python"
 -- 
-2.43.0
+2.49.0
 
 
