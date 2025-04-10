@@ -1,291 +1,206 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86373C3601E
-	for <webhook@archiver.kernel.org>; Thu, 10 Apr 2025 06:31:38 +0000 (UTC)
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
- by mx.groups.io with SMTP id smtpd.web10.27998.1744266688128100221
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D03A1C3601E
+	for <webhook@archiver.kernel.org>; Thu, 10 Apr 2025 07:09:38 +0000 (UTC)
+Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
+ by mx.groups.io with SMTP id smtpd.web11.28758.1744268971930191766
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Apr 2025 23:31:28 -0700
+ Thu, 10 Apr 2025 00:09:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=SaoyHNaY;
- spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-abf3d64849dso97138166b.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 23:31:27 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lIF5E5eK;
+ spf=pass (domain: gmail.com, ip: 209.85.167.54, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-549963b5551so624143e87.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 00:09:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744266686; x=1744871486; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=PXe6vZbEVZqjHqCulndXOsAbM+9cVhomukzB7aUJbs4=;
-        b=SaoyHNaYOwdf23CoSOGNtcSuV2y2ctwCTPdRYMp9HAgK2AmscvfBXeEbu2+o6HwEta
-         VcZK/b4BTVYJr0ZFwSvQFyv9jC8Iz8zw1nxvvDlG2n//omga1b4dtBg+BqRceTyYAX8n
-         9RTlsP5slIcXR0QExxB++dk7CALl5Tq8Led4fqo1uf8lN0sqLjzz6cTKCoc04kiIXeZB
-         Ffn6jw0o3RJkVCfWHcjD/suJlpPa9chinKtl57Vg97rbdmpI081evsb7/NsN+zx7VedQ
-         2zTFM8W0aIx0EEvm3QjiZ6i2slvurZ3w0Ymq4knka2RkL3FPrly0T/5j9p67+V9uDBg8
-         E2rw==
+        d=gmail.com; s=20230601; t=1744268970; x=1744873770; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=YrOkq6ePB2wD00W8J4Hulf4dr0npgbzMNTpgiGd/68I=;
+        b=lIF5E5eKoT7LVjtN+b6Vbsegkxoz8x73L0WP19jA+KqXUtxRIL1i122wWxbvi6H3HE
+         SDOCX2jCI6WMajw0VhS+XgqLwBK03AjUBeFYwhXMnZwZiRAd0ZVKPU7hq2WajhG/zS27
+         A2HvbjtMPG3rNaUU6WW15MLwQnJeA8iATN45FZB+K9rpfVYwmmv0Oy2qmnIY698hazUz
+         zP/FYn9LOdW/bEcYsz9pMUXbr7/TCad11BM9DG0M8klGIWoUAgIJzHDdvE4ux70GDS00
+         6Rbh6fycmWPqEikyEl0Fv6UNQH4NnZ8VBnVrYjH2cPv439ImTI3D3mCzVuBdVglzC+hQ
+         wtCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744266686; x=1744871486;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=PXe6vZbEVZqjHqCulndXOsAbM+9cVhomukzB7aUJbs4=;
-        b=fOLygtnmDXMcihFh5ZJRQmgOqk1ZVSi614IuuyZa4BTR8ozKsZrAGo3grEPqhuV9Bn
-         XhRWIdnd7tCtCxrOJNtdwPN/1U5WlpF90emHAN1dKkvBQFXqKo73F/8TuLvWFEeYRNC1
-         yv+9IT3/NzDQoQYZ/pAFfnvts70xvLqzAJ8JzeQ8ISFbOMFy7Qj3Pth1CH4Rzn4lBkUH
-         GkGdvUMTh2fV1rsj/n/r8dhYvZwvOJ++5zyrRQig1+hQn4R1f782BE1o6qkbqZZwbHoo
-         J03b/wGRybzKqgBgQNeiSAdXn01q5ct5t131+Zzv3ljZbTzTh1WJmHSKUvDfpRB4szCl
-         ZW9A==
-X-Forwarded-Encrypted: i=1; AJvYcCWIOnr+3MhnZ0zlIzn1s3EEfCEosKsb76VeNDg74k7+8N7tETn6FqLbsCPwqnXYRyLky+01L2IhLufg72fo97YAgBA=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyKPOjweA0iCSnTtNBe4RpwCuMSYHDF/DZYZDYd2yPbVK37mOut
-	tZtlw5LzNJD+AI9/9Pu/0KmArFIfV9eBNWu/SZChkoslt3r44/Pd
-X-Gm-Gg: ASbGnctxTV2lkEHrc9tJJR2tzWenwBXCbHW/EZW3Mi3THYycfpQvrrXp/xylQbSuqXl
-	cqRvXL1umTQr6iNzLwl5FSKNVLMmxSa0cw+YrCzEUs6aWT2kdIBibmZyKmpDUSXfyEzLk2IY/xZ
-	lC+wXMPZtjYCp285tWEqPwrEqaOVoqcnruvw0bZfg89CHxTJkCoNs6jDKK4L9c7hdMcPV7aBc2a
-	zciK8T2p2cGv6uHEy3tsKerP+wplXo4INKA5k4dWymfU/w3j47nZoYhVSHJqYFRq+Y2w2N9IGtp
-	prTSonjv8kX2c7utibc9oh1yUPTu8JD54v5t5wJg8yufiA==
-X-Google-Smtp-Source: AGHT+IFqSJl/QbRGkhWnVhGMBnjS23JHXcRt7gBzj83DlK0MGKod1dLvQahsH8DSk1Up/CGoRCdAgQ==
-X-Received: by 2002:a17:907:7ea6:b0:ac7:7e3e:6d3c with SMTP id a640c23a62f3a-acabd4db548mr127188266b.55.1744266685871;
-        Wed, 09 Apr 2025 23:31:25 -0700 (PDT)
-Received: from [192.168.1.2] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-acaa1be98b6sm213987366b.52.2025.04.09.23.31.24
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 09 Apr 2025 23:31:25 -0700 (PDT)
-Message-ID: <5a52d767-9a11-4673-b62e-12734af5c750@gmail.com>
-Date: Thu, 10 Apr 2025 08:31:24 +0200
+        d=1e100.net; s=20230601; t=1744268970; x=1744873770;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=YrOkq6ePB2wD00W8J4Hulf4dr0npgbzMNTpgiGd/68I=;
+        b=iiHASgL6N/p1eQ4gXrr2efHK4EOVL+wZ0Fo+w0q3Ygjzf3j5ecU2EHC9WOhnFgBFQ/
+         Ch+XbEyHc6dpxmrfM+Y+3KwXuXV6DqSQeMkWYNDNz1vRsIxaAeX4YWn79BNqtajBn0rm
+         RvJuGMXkiFAQsLUaNihiOw/ue9q+bpIZixsQwAufdOw+Psz1xOLJscO/Oxnqw4ICcixn
+         inzst0ShcKiE0AHn4pGRLBKPzbY6wea7EXbGF8r7rUQhJogMPP7j2opOJ3bmmErgkB7z
+         foD8cpADa2Rmruq5M1LYY3ZDehfqP+XhjUklAhU9A6rj5xDV9wKJjc4pyocfVMFokzgv
+         kkow==
+X-Forwarded-Encrypted: i=1; AJvYcCXcu4tn2B4ID8+h1WCO7jSDh0KJIJs9oeZ27kbHQIJFejjDLTFdXqDibJtFp+ISr5sQa1AbylcKUfDv0+MWPs07uKo=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YwLa44olyfFwnb8K/EP0Y3gdeDQz6gWT0/wolPVzkLS2ul0wFbL
+	CV54aV09UKqXyJONMTT8aJHV/HLyJmAhDR6xTyodxle0pDg4ktNj2ISwEOGmVvxTCE//LqdedEQ
+	EcZJvzJBfRElAPlsHaR5I5Rb3qfI=
+X-Gm-Gg: ASbGncssgLexx8dXA0HqA1qZgX6MUbug+6J/+OigQWvnRL4ANYPfgn0DCfQM/osgpqQ
+	nM+K/te4nW+6Dqus+kGr0mMbSEJ7o8AlaCX5KYJjEwtP78QgXUeyYnRKW8Xz7/iLB5KUwZ7bkVz
+	7w5J/Z+f8xsREr5WOEMnLTvAv5
+X-Google-Smtp-Source: AGHT+IF234wNyy++GZF8kG0TEteFRI0Zjvzz5LOUtDHS5rl/s0GFk/42YPM92s7/sfT0akyjQLoVQTRzwIVgfXMvIT4=
+X-Received: by 2002:a05:6512:230e:b0:549:4d78:2418 with SMTP id
+ 2adb3069b0e04-54cb0bbd06cmr494325e87.27.1744268969527; Thu, 10 Apr 2025
+ 00:09:29 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [linux-yocto] error of tiptop
-To: "Mingyu Wang (Fujitsu)" <wangmy@fujitsu.com>,
- Khem Raj <raj.khem@gmail.com>
-Cc: "linux-yocto@lists.yoctoproject.org"
- <linux-yocto@lists.yoctoproject.org>,
- "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-References: <TYWPR01MB118613486A025B1F8AE633026DCAF2@TYWPR01MB11861.jpnprd01.prod.outlook.com>
- <400fa42d-4c27-4ef0-86f4-62046b0cd021@gmail.com>
- <TYWPR01MB1186183EAB588828FDA06A60BDCB52@TYWPR01MB11861.jpnprd01.prod.outlook.com>
- <CAMKF1sof5d3wTtfaqmxF70MKGRXzAF1G4vS5L1mjCEsfQMFvDQ@mail.gmail.com>
- <TYWPR01MB11861CCF4F133083155F3B7C3DCB42@TYWPR01MB11861.jpnprd01.prod.outlook.com>
- <95694d0d-29af-4b8d-b675-2020e7ab7417@gmail.com>
- <TYWPR01MB1186167B9B51001E6150791DFDCB72@TYWPR01MB11861.jpnprd01.prod.outlook.com>
- <1834DA81ADB9BE39.7383@lists.openembedded.org>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <1834DA81ADB9BE39.7383@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20241122-add-cryptopp-v2-1-19456062f791@bootlin.com>
+ <CAMKF1sq=SUX2ZUxoduOc3QLgMk8_24KGsq481ABOXOv4558XWw@mail.gmail.com> <CAMKF1sreBnjjX0GW-G9+15Y+EgFQUmKUPX_cqYE7J3WaZ9=94g@mail.gmail.com>
+In-Reply-To: <CAMKF1sreBnjjX0GW-G9+15Y+EgFQUmKUPX_cqYE7J3WaZ9=94g@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 10 Apr 2025 09:09:18 +0200
+X-Gm-Features: ATxdqUG39Vw75wge5EKSYb2vbVhkO9gvuhkxxgCyq8GlfE3eFVPPBuC5fFDHsFc
+Message-ID: <CA+chaQcyRBTjQ0sQxvv2APzYqjkCbDJhL6Y_jZ-Xy+QiSVO7pQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v2] cryptopp: add a recipe for version 8.9.0
+To: raj.khem@gmail.com
+Cc: antonin.godard@bootlin.com, openembedded-devel@lists.openembedded.org, 
+	Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 06:31:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116761
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 07:09:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116762
 
+Hi Antonin,
 
+are you going to address the failures reported by Khem? it would be
+nice to get this merged.
 
-On 4/10/25 06:26, Gyorgy Sarvari via lists.openembedded.org wrote:
-> 
-> 
-> On 4/10/25 04:16, Mingyu Wang (Fujitsu) wrote:
->>> 1. I wonder if KVM is working as it should. Is qemu fast just like your machine when running with KVM?
->> We are indeed using Yocto's kernel, and kvm works:
->> root@qemux86-64 :~#  uname -a
->> Linux qemux86-64 6.12.19-yocto-standard #1 SMP PREEMPT_DYNAMIC Wed Mar
->>
->> May I ask which poky commit you are using？
->> Because our investigation found that this problem has been occurring since the commit
->> f2909d648c461a9c7dc0dcc5fea7c6fee4f9466d 
->> In this commit, there are several commits about perf:
->>         322cb23e24c8 perf/core: Fix low freq setting via IOC_PERIOD
->>         bf6e873ad732 perf/x86: Fix low freqency setting issue
->>         a2475ccad612 perf/core: Add RCU read lock protection to perf_iterate_ctx()
->>
->> I don't know if the poky you're using includes this commit.
-> 
+Cheers,
 
-Sorry for the frequent spam... These commits you mention here are fairly
-small ones, and easy to revert locally. Did you manage to confirm that
-if you patch your kernel with reverting one (or more) of these, it works?
-
-On the same vein: if that reverting is not working, are you using a
-custom kernel config? If you do, do you still experience the issue even
-without your config changes?
-
-There is one thing that I have noticed: on my machine I did get the same
-error in qemux86-64 without KVM even with very old versions (that's what
-prompted me to write my 2nd note, thinking that maybe my KVM experiences
-are matching your problem only coincidentally)
-
-> This is what I'm at now:
-> poky: 2af52d4819aea9ca746f0671e2b2f8b5c7de2960 (2025-03-28)
-> meta-oe: 67ad83dd7c2485dae0c90eac345007af6195b84d (2025-03-25)
-> 
->>
->>   --
->> Best Regards
->> ---------------------------------------------------
->> Wang Mingyu
->> FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
->> No.6 Wenzhu Road, Nanjing, 210012, China
->> TEL：+86+25-86630566--8568
->> COINS: 79988548
->> FAX: +86+25-83317685
->> MAIL: wangmy@fujitsu.com
->>
->>> -----Original Message-----
->>> From: Gyorgy Sarvari <skandigraun@gmail.com>
->>> Sent: Wednesday, April 9, 2025 7:49 PM
->>> To: Wang, Mingyu/王 鸣瑜 <wangmy@fujitsu.com>; Khem Raj
->>> <raj.khem@gmail.com>
->>> Cc: linux-yocto@lists.yoctoproject.org;
->>> openembedded-devel@lists.openembedded.org
->>> Subject: Re: [oe] [linux-yocto] error of tiptop
->>>
->>>
->>> On 4/9/25 09:27, Mingyu Wang (Fujitsu) wrote:
->>>> I tried " runqemu kvm nographic qemux86-64", but there still report an error:
->>>>
->>>> root@qemux86-64:~# uname -a
->>>> Linux qemux86-64 6.12.19-yocto-standard #1 SMP PREEMPT_DYNAMIC Wed
->>> Mar
->>>> 19 23:04:08 UTC 2025 x86_64 GNU/Linux root@qemux86-64:~# tiptop -h
->>>> syscall: Operation not permitted
->>>> Could not perform syscall.
->>>> Don't know why...
->>>> root@qemux86-64:~#
->>>>
->>>
->>> 1. I wonder if KVM is working as it should. Is qemu fast just like your machine
->>> when running with KVM? Or does it have the same speed, as without KVM? (I
->>> assume your host machine is also x86-64) 2. If KVM is working, then maybe it's
->>> not KVM related, my similar experiences are just coincidental, and you have a
->>> different problem.
->>> Very overshooting idea: you could install strace in your image, and try running
->>> "strace -s 320 -v -y -ff -o /tmp/tiptop_strace tiptop -h" - this will save the system
->>> calls made by tiptop in the /tmp folder. It's not easy to read and fairly verbose,
->>> but sometimes can show some surprising errors about syscalls one would expect
->>> to succeed, but failing for strange reasons. (Strace doesn't always show useful
->>> info... but it's worth a try, and at least it's quick)
->>>
->>>
->>>>   --
->>>> Best Regards
->>>> ---------------------------------------------------
->>>> Wang Mingyu
->>>> FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
->>>> No.6 Wenzhu Road, Nanjing, 210012, China
->>>> TEL：+86+25-86630566--8568
->>>> COINS: 79988548
->>>> FAX: +86+25-83317685
->>>> MAIL: wangmy@fujitsu.com
->>>>
->>>>> -----Original Message-----
->>>>> From: Khem Raj <raj.khem@gmail.com>
->>>>> Sent: Tuesday, April 8, 2025 11:29 PM
->>>>> To: Wang, Mingyu/王 鸣瑜 <wangmy@fujitsu.com>
->>>>> Cc: Gyorgy Sarvari <skandigraun@gmail.com>;
->>>>> linux-yocto@lists.yoctoproject.org;
->>>>> openembedded-devel@lists.openembedded.org
->>>>> Subject: Re: [oe] [linux-yocto] error of tiptop
->>>>>
->>>>> On Tue, Apr 8, 2025 at 12:28 AM wangmy via lists.openembedded.org
->>>>> <wangmy=fujitsu.com@lists.openembedded.org> wrote:
->>>>>>
->>>>>> I tried " runqemu qemux86-64 qemuparams=" --enable-kvm " nographic",
->>>>>> but
->>>>> there still report an error:
->>>>>>
->>>>>
->>>>> runqemu kvm nographic qemux86-64
->>>>>
->>>>>> root@qemux86-64:~# tiptop
->>>>>> syscall: Operation not permitted
->>>>>> Could not perform syscall.
->>>>>> Don't know why...
->>>>>>
->>>>>> My repo of meta-openembedded] has been updated to
->>>>> 82056b992459607ea69b0130308685c4872cb19b7
->>>>>> Repo of poky has been updated to
->>>>> 9e418c4265453860c4736abb7520f1c3c2c3faee
->>>>>>   --
->>>>>> Best Regards
->>>>>> ---------------------------------------------------
->>>>>> Wang Mingyu
->>>>>> FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
->>>>>> No.6 Wenzhu Road, Nanjing, 210012, China
->>>>>> TEL：+86+25-86630566--8568
->>>>>> COINS: 79988548
->>>>>> FAX: +86+25-83317685
->>>>>> MAIL: wangmy@fujitsu.com
->>>>>>
->>>>>>> -----Original Message-----
->>>>>>> From: Gyorgy Sarvari <skandigraun@gmail.com>
->>>>>>> Sent: Thursday, April 3, 2025 3:35 PM
->>>>>>> To: Wang, Mingyu/王 鸣瑜 <wangmy@fujitsu.com>;
->>>>>>> linux-yocto@lists.yoctoproject.org
->>>>>>> Cc: openembedded-devel@lists.openembedded.org
->>>>>>> Subject: Re: [oe] [linux-yocto] error of tiptop
->>>>>>>
->>>>>>> On what machine are you trying to run it? At least in qemu I get
->>>>>>> the same, unless I enable kvm directly:
->>>>>>>
->>>>>>> runqemu qemux86-64 qemuparams=" --enable-kvm "
->>>>>>>
->>>>>>> This way I don't get that error.
->>>>>>>
->>>>>>> On 4/2/25 10:52, wangmy via lists.openembedded.org wrote:
->>>>>>>> Hi,
->>>>>>>>
->>>>>>>> When running tiptop on the image of x86-64 for the latest
->>>>>>>> repository of
->>>>> poky
->>>>>>> and meta-oe, an error occurred.
->>>>>>>>
->>>>>>>> root # tiptop -h
->>>>>>>> syscall: Operation not permitted
->>>>>>>> Could not perform syscall.
->>>>>>>> Don't know why...
->>>>>>>>
->>>>>>>> According to preliminary investigation, the cause of this issue is
->>>>>>>> related to
->>>>>>> kenerl updating of perf related code.
->>>>>>>> This problem has been occurring since the commit
->>>>>>>> f390c2eea571945f357a2d3b9fcb1c015767132e of branch
->>>>> v6.6/standard/base
->>>>>>>>
->>>>>>>> May I ask if you have any opinions or suggestions regarding this issue?
->>>>>>>>
->>>>>>>>   --
->>>>>>>> Best Regards
->>>>>>>> ---------------------------------------------------
->>>>>>>> Wang Mingyu
->>>>>>>> FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
->>>>>>>> No.6 Wenzhu Road, Nanjing, 210012, China
->>>>>>>> TEL：+86+25-86630566--8568
->>>>>>>> COINS: 79988548
->>>>>>>> FAX: +86+25-83317685
->>>>>>>> MAIL: wangmy@fujitsu.com
->>>>>>>>
->>>>>>>>
->>>>>>>>
->>>>>>>>
->>>>>>>>
->>>>>>
->>>>>>
->>>>>>
->>>>>>
->>
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
+On Sat, Nov 23, 2024 at 9:48=E2=80=AFPM Khem Raj via lists.openembedded.org
+<raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
+>
+> also fails on qemux86-64/musl
+>
+> https://0x0.st/X5_h.do_compi
+>
+> On Fri, Nov 22, 2024 at 8:32=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wro=
+te:
+> >
+> > On Fri, Nov 22, 2024 at 6:11=E2=80=AFAM Antonin Godard via
+> > lists.openembedded.org
+> > <antonin.godard=3Dbootlin.com@lists.openembedded.org> wrote:
+> > >
+> > > Cryptopp is a library of cryptographic schemes written in C++.
+> > >
+> > > Signed-off-by: Antonin Godard <antonin.godard@bootlin.com>
+> > > ---
+> > > I had issues compiling for qemuarm64, which are close to
+> > > https://github.com/weidai11/cryptopp/issues/565. One of the solution =
+is
+> > > to disable ASM, so do that for aarch64. I don't observe the issue wit=
+h
+> > > qemuarm.
+> > > ---
+> > > Changes in v2:
+> > > - WORKDIR -> UNPACKDIR in S
+> > > - remove bb.utils.contains in CXXFLAGS:append:aarch64 (forgot to remo=
+ve
+> > >   after adding aarch64 override)
+> > > - Link to v1: https://lore.kernel.org/r/20241121-add-cryptopp-v1-1-36=
+382a60cecb@bootlin.com
+> > > ---
+> > >  meta-oe/recipes-crypto/cryptopp/cryptopp_8.9.0.bb | 45 +++++++++++++=
+++++++++++
+> > >  1 file changed, 45 insertions(+)
+> > >
+> > > diff --git a/meta-oe/recipes-crypto/cryptopp/cryptopp_8.9.0.bb b/meta=
+-oe/recipes-crypto/cryptopp/cryptopp_8.9.0.bb
+> > > new file mode 100644
+> > > index 0000000000000000000000000000000000000000..a3d4fedb2f67c0111dcd2=
+62081b622cfbdd40b57
+> > > --- /dev/null
+> > > +++ b/meta-oe/recipes-crypto/cryptopp/cryptopp_8.9.0.bb
+> > > @@ -0,0 +1,45 @@
+> > > +SUMMARY =3D "A C++ class library of cryptographic schemes"
+> > > +DESCRIPTION =3D "Crypto++ Library is a C++ class library of cryptogr=
+aphic schemes"
+> > > +CVE_PRODUCT =3D "cryptopp"
+> > > +HOMEPAGE =3D "http://www.cryptopp.com/"
+> > > +SECTION =3D "libs"
+> > > +LICENSE =3D "BSL-1.0"
+> > > +LIC_FILES_CHKSUM =3D "file://License.txt;md5=3Dca6dacb7ef68b1ab5dfa3=
+bed24c12003"
+> > > +
+> > > +SRC_URI =3D "git://github.com/weidai11/cryptopp.git;protocol=3Dhttps=
+;branch=3Dmaster"
+> > > +SRCREV =3D "843d74c7c97f9e19a615b8ff3c0ca06599ca501b"
+> > > +
+> > > +S =3D "${UNPACKDIR}/git"
+> >
+> > This should be WORKDIR/git here.
+> >
+> > > +
+> > > +inherit pkgconfig
+> > > +
+> > > +CXXFLAGS:append =3D " -fPIC"
+> >
+> > maybe use +=3D here.
+> >
+> > > +# Avoid target mismatch error
+> > > +CXXFLAGS:append:aarch64 =3D " -DCRYPTOPP_DISABLE_ASM=3D1"
+> >
+> > This will build suboptimally. It would be better to fix the issue in
+> > Makefile to use compatible options.
+> >
+> > > +EXTRA_OEMAKE +=3D "HAS_SOLIB_VERSION=3D1"
+> > > +
+> > > +do_compile () {
+> > > +    oe_runmake -f GNUmakefile-cross libcryptopp.a libcryptopp.so cry=
+ptest.exe
+> > > +}
+> > > +
+> > > +do_install () {
+> > > +    DESTDIR=3D"${D}" \
+> > > +        BINDIR=3D"${bindir}" \
+> > > +        DATADIR=3D"${datadir}" \
+> > > +        INCLUDEDIR=3D"${includedir}" \
+> > > +        LIBDIR=3D"${libdir}" \
+> > > +        oe_runmake install
+> > > +
+> > > +    # Rename cryptest.exe to cryptest
+> > > +    if [ -f "${D}${bindir}/cryptest.exe" ]; then
+> > > +        mv "${D}${bindir}/cryptest.exe" "${D}${bindir}/cryptest"
+> > > +    fi
+> > > +}
+> > > +
+> > > +PACKAGE_BEFORE_PN +=3D "${PN}-cryptest ${PN}-testdata ${PN}-testvect=
+ors"
+> > > +
+> > > +FILES:${PN}-cryptest =3D "${bindir}/cryptest"
+> > > +FILES:${PN}-testdata =3D "${datadir}/cryptopp/TestData"
+> > > +FILES:${PN}-testvectors =3D "${datadir}/cryptopp/TestVectors"
+> > > +
+> > > +BBCLASSEXTEND =3D "native nativesdk"
+> > >
+> > > ---
+> > > base-commit: 71ffb63f60b233722ec9d8b50bfe0488997fbcfa
+> > > change-id: 20241121-add-cryptopp-f78794be963c
+> > >
+> > > Best regards,
+> > > --
+> > > Antonin Godard <antonin.godard@bootlin.com>
+> > >
+> > >
+> > >
+> > >
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#116753): https://lists.openembedded.org/g/openembedded-devel/message/116753
-> Mute This Topic: https://lists.openembedded.org/mt/112043323/6084445
+> View/Reply Online (#114023): https://lists.openembedded.org/g/openembedde=
+d-devel/message/114023
+> Mute This Topic: https://lists.openembedded.org/mt/109722638/3617156
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
-
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
+artin.jansa@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
