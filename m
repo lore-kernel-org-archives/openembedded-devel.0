@@ -1,271 +1,182 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <Qi.Chen@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 11993C3601E
-	for <webhook@archiver.kernel.org>; Thu, 10 Apr 2025 04:26:48 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web11.26874.1744259205815413805
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 284AAC369A2
+	for <webhook@archiver.kernel.org>; Thu, 10 Apr 2025 04:31:58 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.26931.1744259513266871049
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Apr 2025 21:26:46 -0700
+ Wed, 09 Apr 2025 21:31:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FYEH3+qP;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-ac2bb7ca40bso76462666b.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 21:26:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744259204; x=1744864004; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=FzrygNDiAGBPYtIlPr0c0bizbtMeLx9YcaivkTY5w+M=;
-        b=FYEH3+qPUJaMLR6VfvHuySDVCizEKFffM+IyiMx5+fVh3bj1wCv5Foh0FUFAIWvxBE
-         xhv1W1By33sFUjXTk6UG5D35BdeOwUQVf+YQUmDVTHkEGkndnmoU8miR1fBcbV8aHAe4
-         YtxV8s4BvPvAsYhiZOBUCVTgAggpm/DMKdc5AktjK73/vX6CUwM94ouh9kGvg20mtNs8
-         k40z7t3hmJctB5R2E5IpXEPSfsiyMakKVsig0aEIH6sDEBE3C87/p/6d67afR9fjjjuA
-         TbukPHnxrSxIkYl4MLLcgmuvS/CJgJ4pSKSWuH2BcBQIfx+UWp/ByD/M4JnOv6WhaQEZ
-         MBRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744259204; x=1744864004;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=FzrygNDiAGBPYtIlPr0c0bizbtMeLx9YcaivkTY5w+M=;
-        b=ayeA9le6ZMbLW1GhUemymRkC1MKRKSzTbLSWibZfdbl3mBIJNbiIfZct36MouEP0IN
-         3maIYJyN8b0iRiFS5KPVelE+JBW28Wh9c6pILRT+O8f4d1hd/NcKqKUPUqaEyzouM7bP
-         fGrwywromJh4224/iulLClMvgHWu9Ix4D7GuvD78qcdBUEqM9fZb1qy98K+RyPrIm3iZ
-         bqOyEG4BXGUXzX67s1Ap44sCrZkwhsmXnQzIDHnVRYvUqy+dX4mOForhqdR4pY3+qHlY
-         Uv7PupQfQgOsxGyEL3Hht3yfddJABWxWhDoMViI+no/mG7cEA6lTt7SL2jzssfREGYWA
-         J/3A==
-X-Forwarded-Encrypted: i=1; AJvYcCVKSB2e2u+/X3SlhYbKaTlZsPKJcUJb0m2SXL/ClUqAjsm8K0b3O+4hzXLMVm0a6FAd/gcq2ry+Td2O7cEt4aTv0Fs=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yxf5YTwp5Ef/r121EVmS/Ic9WXCTIququQYU0uh/WGfPVSLlXo6
-	Du4nlSX/ym9e8G0/aLWmQMn0gBNA/4dvnmZV9tfPJHj3qFe/rak9
-X-Gm-Gg: ASbGnctxR3bI9pWf1+ux9kA1cKgn6tMP5EU4RH2tY+kreHyGuDf+foMeZpZ4br0pwT6
-	NPQe6y84mryJo0YHE71vhVYd6BDE/00DxDqlMI7Sv333ueo4HpTh9J9Gs5WQPPy70/GfCQwjGpc
-	+V5gS4CGyXMv1mqbnHpdBz8pbSbq4lperpcYUUUeTzrArIeIaOhFZtZBYvnn8AYwl1oeu/vMkdf
-	xLWROBJQ/BabLPz9BcbORXdCZQ6mK4bc9B+OIcu3YJZEkbsvvohzz4p28SaIk2IMfVx+zUUPrhP
-	0TvUzxC7DoDSFyjVp2tSjqrJaDAJemgfc//RcwX9ohDV7g==
-X-Google-Smtp-Source: AGHT+IGMUmemF/cpATESkt7IXdKibFFLtfSNlKdjFB87Xw5pCL6Z7bYcecA2iJ9W9Npzx7jXVn7n5w==
-X-Received: by 2002:a17:907:7295:b0:ac2:49de:45c1 with SMTP id a640c23a62f3a-acabd4cd918mr99460766b.50.1744259203650;
-        Wed, 09 Apr 2025 21:26:43 -0700 (PDT)
-Received: from [192.168.1.2] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-acaa1cb4158sm199249966b.90.2025.04.09.21.26.42
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 09 Apr 2025 21:26:43 -0700 (PDT)
-Message-ID: <13fdf86c-1dc0-4971-9dba-ad3c940979dd@gmail.com>
-Date: Thu, 10 Apr 2025 06:26:40 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [linux-yocto] error of tiptop
-To: "Mingyu Wang (Fujitsu)" <wangmy@fujitsu.com>,
- Khem Raj <raj.khem@gmail.com>
-Cc: "linux-yocto@lists.yoctoproject.org"
- <linux-yocto@lists.yoctoproject.org>,
- "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-References: <TYWPR01MB118613486A025B1F8AE633026DCAF2@TYWPR01MB11861.jpnprd01.prod.outlook.com>
- <400fa42d-4c27-4ef0-86f4-62046b0cd021@gmail.com>
- <TYWPR01MB1186183EAB588828FDA06A60BDCB52@TYWPR01MB11861.jpnprd01.prod.outlook.com>
- <CAMKF1sof5d3wTtfaqmxF70MKGRXzAF1G4vS5L1mjCEsfQMFvDQ@mail.gmail.com>
- <TYWPR01MB11861CCF4F133083155F3B7C3DCB42@TYWPR01MB11861.jpnprd01.prod.outlook.com>
- <95694d0d-29af-4b8d-b675-2020e7ab7417@gmail.com>
- <TYWPR01MB1186167B9B51001E6150791DFDCB72@TYWPR01MB11861.jpnprd01.prod.outlook.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <TYWPR01MB1186167B9B51001E6150791DFDCB72@TYWPR01MB11861.jpnprd01.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=61957cd107=qi.chen@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53A2eWpE008530
+	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 04:31:52 GMT
+Received: from nam11-bn8-obe.outbound.protection.outlook.com (mail-bn8nam11lp2173.outbound.protection.outlook.com [104.47.58.173])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45tug8pce7-2
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 04:31:52 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EQcoN07WkMcNN0qFfiIQ/0AWlPy98F8Luxmg80rLx99+WRsfXHilKoIfY8aQF1dT9I0KYx0VLZhPUvpp9ZLtWTO7944ucanF7hfXPT4VvOFDZ0YrZHPaZ+z83fqIcskAr2VKSGiqRiXbQVZerTd4AdwuBKQbfx/pUapfa31+zXB3Tklvns7BL3+7LvXPTBogDhwzhERftnGYSB8mK6OEO7j1j/9HJZj31pIWXhxSlzEuteMqIUFkicK4RgYaY0qf4tawErKJA3cvZLA5l7gHQaL0kthFD3amLoSxxqoIM0ds885+Rfo8kOPpY8pyvBd0OjRDjWimBp5YHLGajuZWCQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=yMGINEyg9h5nfIiNuDO6FnwTH/4aH+7+RKQ2k/UccSU=;
+ b=PINcoHiHizpjM7f+M/ajFFSalBOPtUZ3l/euS5o8q3p1AP5SesYxLea30979Nths21CD38awjOyxrAxiBxI8UlDVNiMTjR/uAxEY9YaHOmOUohCfMgJFpgAyxD15ShJQdV6ptkKZYDOsU2q2DQgR7nD7KAFV+NsNk6F6Y0VHreDIjK5L1pswTa1ZYuz7FF5P9sD4qohN+j9ujOUG23zoGkfpV9OjwoW3HISnyAtrZidfWu/7krgRucPUV//bU4nAk+pasIGLSmTI+iszuvi8cY5qbXVv50fmiCAGEfEqyUm5i/5rrJtlaioeZDlHZ6qBUN+XHwumWbaCP4BmDHerVA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from CO6PR11MB5602.namprd11.prod.outlook.com (2603:10b6:303:13a::5)
+ by LV8PR11MB8724.namprd11.prod.outlook.com (2603:10b6:408:1fd::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.35; Thu, 10 Apr
+ 2025 04:31:49 +0000
+Received: from CO6PR11MB5602.namprd11.prod.outlook.com
+ ([fe80::a7e3:721d:9cec:6093]) by CO6PR11MB5602.namprd11.prod.outlook.com
+ ([fe80::a7e3:721d:9cec:6093%4]) with mapi id 15.20.8606.029; Thu, 10 Apr 2025
+ 04:31:49 +0000
+From: Qi.Chen@windriver.com
+To: openembedded-devel@lists.openembedded.org
+Subject: [oe][meta-networking][PATCH V2 2/2] waf-samba.bbclass: adapt to qemu.bbclass refactoring
+Date: Wed,  9 Apr 2025 21:31:39 -0700
+Message-ID: <20250410043139.1132665-2-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250410043139.1132665-1-Qi.Chen@windriver.com>
+References: <20250410043139.1132665-1-Qi.Chen@windriver.com>
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SJ0PR03CA0350.namprd03.prod.outlook.com
+ (2603:10b6:a03:39c::25) To CO6PR11MB5602.namprd11.prod.outlook.com
+ (2603:10b6:303:13a::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO6PR11MB5602:EE_|LV8PR11MB8724:EE_
+X-MS-Office365-Filtering-Correlation-Id: c0f99b54-7cfa-434c-40af-08dd77e89bbb
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|366016|376014|52116014|1800799024|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?MnYamK3LIvDbaxdn6UHIgMUAMpXsYTTG2FPlz0D8Gt1xi9uLA6ajFQkfTSLp?=
+ =?us-ascii?Q?gmUHCShaJ2AQCDCsi8qSTSRryyHQRVsz77ep1655hFu0wNEj16+G0BMzuerY?=
+ =?us-ascii?Q?h4PpAVYrWP3cdp9x2qgwN5EDKEITN3GVGikVPy+WfZaF5OZF7+GCu/WRSZCT?=
+ =?us-ascii?Q?z3Y38ABKAxo7PZWBicwD/cJHmtblulpvQb5iw5SWpjmClD8rzcr9brxSDzPU?=
+ =?us-ascii?Q?pXtrEaBgBR6CD0ArSY4yqbw0wCjF2cxk91abK4XhT1LVaJxRKfBhfhH1Yg2s?=
+ =?us-ascii?Q?EQzBCldXmyqDRVZvEwjZMZ6e0Y74ZVW7QUvwVPOBOocYUC6CigQLsCGA9GmE?=
+ =?us-ascii?Q?Yig0bxPqAZCh2CqpTsaQTK113aUMSc1x/HP7vYR1ZtNVjJce8vE8xvAYR072?=
+ =?us-ascii?Q?VphxrnBN6shKSnU/DorcIEAcNT14/EBnqFmmklL4nkcj7pMVW/fTTcxYJflf?=
+ =?us-ascii?Q?BL86/ZQu3X3D8VTuBsUrckruh09GcBOJdoPWeainA+OmAvmKLZiW2n+c5lxA?=
+ =?us-ascii?Q?WMQD9ZNJeXvnJi+B+aEKCMpxvvRPMHzLxqMp+xFGEl2SyySvovMzJ4aF2nCy?=
+ =?us-ascii?Q?ZZ9+RnCHUgSJm4Q3nEgmCQYfveY1Drqps56j4L+xR5G5Cf1RoAvynm1maZ85?=
+ =?us-ascii?Q?asPKNM7ClCpcPVpCixg7mgXwyCTTDTBVvKILC+VFsVrVnpZqrvpE3ohO5NOn?=
+ =?us-ascii?Q?SlDGjC1e/fvwRAjBDxUR6YeKn3GCCvuMxXbMtxXoTiK+9pJ5R14yhqzLDoh+?=
+ =?us-ascii?Q?LeAjM7oiFpUVprSyWdOPwlfwI059VlAVFEwjAGrRHwUEPC5NgROpIrLSfE/t?=
+ =?us-ascii?Q?qz2ya1rP8jEGuK2iD/t2ES7jm9rCFOvtlIBZyg9yrITMkR/tR3rD3Bw1JE1s?=
+ =?us-ascii?Q?vN/jUdh/RZazBRdJWWiJGOBxkKja1v6k4Yv7+4UC1wElA+Rdhgh1G2N6QYiE?=
+ =?us-ascii?Q?1TaE4KW0FZfYwjJ9x+uN3vKqOgrbWOExEWqwYIsW/unnSccTW+A1MOoZ6ZCo?=
+ =?us-ascii?Q?lQ94eV9fdrKlR3Xtdv4aOKJO5X8ZX7C1ylTCiVByPyyVsho6BDy4kAXW+B88?=
+ =?us-ascii?Q?bys5n5IJU+KhKiPthww3aC0uSa69E5UDdjwBH0Ww7qa0T/p1dt7KuLrBmt6n?=
+ =?us-ascii?Q?ihv9jVUXD4L9E6lxb9VkLOxvCX5RALd0sXQGUP4pAvBQQqjGkF5z1DDOwnvP?=
+ =?us-ascii?Q?VX1LLlWTWvsuhe0xdB88A7lxx6/2kk3g43xHQKjmdvTCS1nBqybRKeCRomgz?=
+ =?us-ascii?Q?JFycd4C7Y+lFNHmpOjyoCF1Ebpxfr6I2KD9a2ni+CJWX0Bg6zAbr4gThMMlJ?=
+ =?us-ascii?Q?UzSer3hwOFrWlZgJqJoncmeiNqNOFhts+YCjuKnTrRpLUU2fmGYg/AeJzqZ4?=
+ =?us-ascii?Q?67JTQDbCQvIGHetSmrqoI3vqxdET?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO6PR11MB5602.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(52116014)(1800799024)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?thXNC8T+4rVsUQsGVof5PNlXBZ+4Et56WOmDuuO+rQB2T0H7EGjdDbVpxIGS?=
+ =?us-ascii?Q?8y6U9c9gBDn+6QUX/zzoc2vtI3JO+wcTLzL0FeFQvVhNrOnzcJKe6VafqZU9?=
+ =?us-ascii?Q?PGCq9uTd+K/VeJJqpxgibHAapugUBlKJsc5TRWra77DUGg3TXUJfIc6wNs2j?=
+ =?us-ascii?Q?oyI3v//DVmbphzPh/hJX8PQORGq+mG0kVmHm43WVxP10plHmra3kzmE5p14Y?=
+ =?us-ascii?Q?FGU3UXCvAkwc6xI4MDbLLhwSO+OA7t6JREQoy/o32jY+fzlNkcJn54rXhHrS?=
+ =?us-ascii?Q?iUjCOX2rDJhfXxuc2y+V1QcGOkyihN6P+KpjAFqF85Srxd01sm4QUMWD+9A7?=
+ =?us-ascii?Q?tRJcfEI477L+XtPke/fdRfrNDhhZtDeTOwMvh1/OOj2Bot+ozxiCsZo8yior?=
+ =?us-ascii?Q?NM3fZYJ8ks5AI7Fmou/v0JjIPawvN0vM41/BRE1taqvo5+lxFwOKMGH8l959?=
+ =?us-ascii?Q?QGsprzSxyIONYwe1Rlx8Nwe4v6lwQ6jZ1WWZ8dcpEM2cayV4NN9DysSPf60j?=
+ =?us-ascii?Q?QiAJCvqVXOMRWYUERebnWS8me4Fd/NSplfNq/GfQuw3w5MMdtOLlLxasklxJ?=
+ =?us-ascii?Q?UYCtE+UCH7VVyTKUyR49Oo08AXxxGxmirVnuqlJJYX/Ppy2Big3J780Yxs0t?=
+ =?us-ascii?Q?ViWsYNsFi3MwPqsy78Fc6SyHeXTdJeHmzzwGxpCB4fKocovHDvlgbA7IWveY?=
+ =?us-ascii?Q?H64Gc8qMQmrhQpfO67DYKkNjglzOeLXbfnpDiZoE1SQrRTya1A6PKiL7JONP?=
+ =?us-ascii?Q?uaDvw58gSGjTmsgOL415ppM2Xo6WZ+GSmaGtwg0tcziF5xXiKkVxSh0kGunh?=
+ =?us-ascii?Q?DZlVYrYYp0uLugVjZMeZ4xGnTVYKSbOarN60cc0wUQh4EDkP0iHA3M4USH1q?=
+ =?us-ascii?Q?eOBk7aRR2cqRhLFEXSOOLkVrwSxR59uN9+XwvWesU8wktN6G9DZw6oh+stHg?=
+ =?us-ascii?Q?REbga4Fe4OdWUfhhzSN5Q6OH098oRzLqcIOOcSzOvPMyf9ZVa2mZT/9zR1X3?=
+ =?us-ascii?Q?ocrx34wwqDwSvx3mmcE18/cKZWzzCr0ANLWnxANp8qBg+kfToB33DOY1yHL5?=
+ =?us-ascii?Q?MoRw/pFdRX80f/uOAu+1X3Yf2ZpMsGA2fbs/nM3udbJzXj6/ZDpJZg7sNujA?=
+ =?us-ascii?Q?t2g1YJZN1REWYWoQwFe3kQgL6zt2Mk9MtwE22xyrWoS5tW5PO3KsV7Lh+CnP?=
+ =?us-ascii?Q?HR854wHU1FdFxGvEaNpA10HuETf6yOjnz/7q3BwSx9tAej97jfIvLvksEDbg?=
+ =?us-ascii?Q?d+5ynXz4GZVzCe0tXsT2ktcPFHNny4IHW8whq9BXrmiMmrlG1Ha+oS23y1YZ?=
+ =?us-ascii?Q?/vhxJdax6Dnha67tOcOg4OxF52nvCjEQLYOxoe0nLoxHBT/VqMprWKUgMVj2?=
+ =?us-ascii?Q?LNCavGjU0yRvlkEq15gJDJvVbq8v8CiUzWZt0JAFmsoWqgP+lj6d2TNyMKWK?=
+ =?us-ascii?Q?h7/v9/kvSh68XNEp2syTo9ZlxKDO/7g+eOslT9IKocGXCxYGSczeUwciWxVi?=
+ =?us-ascii?Q?u4EtPfFWIz5B3SwRLbSZUv7IZoz/VjNdxvTNwmcwplZoRXie2RBkWo54XW4Z?=
+ =?us-ascii?Q?dxZaNFIO/rsVifg9bADqBN+hnOR3qU7WEdfMwMUygfwJR1HgFC7UYcbbn+H/?=
+ =?us-ascii?Q?zw=3D=3D?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c0f99b54-7cfa-434c-40af-08dd77e89bbb
+X-MS-Exchange-CrossTenant-AuthSource: CO6PR11MB5602.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Apr 2025 04:31:48.7066
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: OsqSPoi8M0lfwqCno+l6zFkJD+FGnHCpXsY5iLsr7weJr2pXD3/IMISi8T12Iu9tIP+bDqI/dlI3U1uv7n9YFA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR11MB8724
+X-Proofpoint-GUID: 0JGA4CiKZBM0VeFtOYjfpdac2UWoTq2M
+X-Authority-Analysis: v=2.4 cv=YJefyQGx c=1 sm=1 tr=0 ts=67f749b8 cx=c_pps a=19K1aDEwnJ0RahI1emVHDw==:117 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=XR8D0OoHHMoA:10
+ a=hGzw-44bAAAA:8 a=t7CeM3EgAAAA:8 a=0cNpdDu4uiylx8giwlQA:9 a=ahtzkqAwBOYA:10 a=HvKuF1_PTVFglORKqfwH:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: 0JGA4CiKZBM0VeFtOYjfpdac2UWoTq2M
+X-Sensitive_Customer_Information: Yes
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-04-09_06,2025-04-08_04,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ malwarescore=0 bulkscore=0 mlxlogscore=929 adultscore=0 lowpriorityscore=0
+ mlxscore=0 clxscore=1015 impostorscore=0 phishscore=0 spamscore=0
+ suspectscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
+ definitions=main-2504100032
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 04:26:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116753
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 04:31:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116755
 
+From: Chen Qi <Qi.Chen@windriver.com>
 
+Avoid inheriting qemu.bbclass and use oe.qemu.xxx instead.
 
-On 4/10/25 04:16, Mingyu Wang (Fujitsu) wrote:
->> 1. I wonder if KVM is working as it should. Is qemu fast just like your machine when running with KVM?
-> We are indeed using Yocto's kernel, and kvm works:
-> root@qemux86-64 :~#  uname -a
-> Linux qemux86-64 6.12.19-yocto-standard #1 SMP PREEMPT_DYNAMIC Wed Mar
-> 
-> May I ask which poky commit you are using？
-> Because our investigation found that this problem has been occurring since the commit
-> f2909d648c461a9c7dc0dcc5fea7c6fee4f9466d 
-> In this commit, there are several commits about perf:
->         322cb23e24c8 perf/core: Fix low freq setting via IOC_PERIOD
->         bf6e873ad732 perf/x86: Fix low freqency setting issue
->         a2475ccad612 perf/core: Add RCU read lock protection to perf_iterate_ctx()
-> 
-> I don't know if the poky you're using includes this commit.
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+---
+ meta-networking/classes/waf-samba.bbclass | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-This is what I'm at now:
-poky: 2af52d4819aea9ca746f0671e2b2f8b5c7de2960 (2025-03-28)
-meta-oe: 67ad83dd7c2485dae0c90eac345007af6195b84d (2025-03-25)
-
-> 
->   --
-> Best Regards
-> ---------------------------------------------------
-> Wang Mingyu
-> FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
-> No.6 Wenzhu Road, Nanjing, 210012, China
-> TEL：+86+25-86630566--8568
-> COINS: 79988548
-> FAX: +86+25-83317685
-> MAIL: wangmy@fujitsu.com
-> 
->> -----Original Message-----
->> From: Gyorgy Sarvari <skandigraun@gmail.com>
->> Sent: Wednesday, April 9, 2025 7:49 PM
->> To: Wang, Mingyu/王 鸣瑜 <wangmy@fujitsu.com>; Khem Raj
->> <raj.khem@gmail.com>
->> Cc: linux-yocto@lists.yoctoproject.org;
->> openembedded-devel@lists.openembedded.org
->> Subject: Re: [oe] [linux-yocto] error of tiptop
->>
->>
->> On 4/9/25 09:27, Mingyu Wang (Fujitsu) wrote:
->>> I tried " runqemu kvm nographic qemux86-64", but there still report an error:
->>>
->>> root@qemux86-64:~# uname -a
->>> Linux qemux86-64 6.12.19-yocto-standard #1 SMP PREEMPT_DYNAMIC Wed
->> Mar
->>> 19 23:04:08 UTC 2025 x86_64 GNU/Linux root@qemux86-64:~# tiptop -h
->>> syscall: Operation not permitted
->>> Could not perform syscall.
->>> Don't know why...
->>> root@qemux86-64:~#
->>>
->>
->> 1. I wonder if KVM is working as it should. Is qemu fast just like your machine
->> when running with KVM? Or does it have the same speed, as without KVM? (I
->> assume your host machine is also x86-64) 2. If KVM is working, then maybe it's
->> not KVM related, my similar experiences are just coincidental, and you have a
->> different problem.
->> Very overshooting idea: you could install strace in your image, and try running
->> "strace -s 320 -v -y -ff -o /tmp/tiptop_strace tiptop -h" - this will save the system
->> calls made by tiptop in the /tmp folder. It's not easy to read and fairly verbose,
->> but sometimes can show some surprising errors about syscalls one would expect
->> to succeed, but failing for strange reasons. (Strace doesn't always show useful
->> info... but it's worth a try, and at least it's quick)
->>
->>
->>>   --
->>> Best Regards
->>> ---------------------------------------------------
->>> Wang Mingyu
->>> FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
->>> No.6 Wenzhu Road, Nanjing, 210012, China
->>> TEL：+86+25-86630566--8568
->>> COINS: 79988548
->>> FAX: +86+25-83317685
->>> MAIL: wangmy@fujitsu.com
->>>
->>>> -----Original Message-----
->>>> From: Khem Raj <raj.khem@gmail.com>
->>>> Sent: Tuesday, April 8, 2025 11:29 PM
->>>> To: Wang, Mingyu/王 鸣瑜 <wangmy@fujitsu.com>
->>>> Cc: Gyorgy Sarvari <skandigraun@gmail.com>;
->>>> linux-yocto@lists.yoctoproject.org;
->>>> openembedded-devel@lists.openembedded.org
->>>> Subject: Re: [oe] [linux-yocto] error of tiptop
->>>>
->>>> On Tue, Apr 8, 2025 at 12:28 AM wangmy via lists.openembedded.org
->>>> <wangmy=fujitsu.com@lists.openembedded.org> wrote:
->>>>>
->>>>> I tried " runqemu qemux86-64 qemuparams=" --enable-kvm " nographic",
->>>>> but
->>>> there still report an error:
->>>>>
->>>>
->>>> runqemu kvm nographic qemux86-64
->>>>
->>>>> root@qemux86-64:~# tiptop
->>>>> syscall: Operation not permitted
->>>>> Could not perform syscall.
->>>>> Don't know why...
->>>>>
->>>>> My repo of meta-openembedded] has been updated to
->>>> 82056b992459607ea69b0130308685c4872cb19b7
->>>>> Repo of poky has been updated to
->>>> 9e418c4265453860c4736abb7520f1c3c2c3faee
->>>>>   --
->>>>> Best Regards
->>>>> ---------------------------------------------------
->>>>> Wang Mingyu
->>>>> FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
->>>>> No.6 Wenzhu Road, Nanjing, 210012, China
->>>>> TEL：+86+25-86630566--8568
->>>>> COINS: 79988548
->>>>> FAX: +86+25-83317685
->>>>> MAIL: wangmy@fujitsu.com
->>>>>
->>>>>> -----Original Message-----
->>>>>> From: Gyorgy Sarvari <skandigraun@gmail.com>
->>>>>> Sent: Thursday, April 3, 2025 3:35 PM
->>>>>> To: Wang, Mingyu/王 鸣瑜 <wangmy@fujitsu.com>;
->>>>>> linux-yocto@lists.yoctoproject.org
->>>>>> Cc: openembedded-devel@lists.openembedded.org
->>>>>> Subject: Re: [oe] [linux-yocto] error of tiptop
->>>>>>
->>>>>> On what machine are you trying to run it? At least in qemu I get
->>>>>> the same, unless I enable kvm directly:
->>>>>>
->>>>>> runqemu qemux86-64 qemuparams=" --enable-kvm "
->>>>>>
->>>>>> This way I don't get that error.
->>>>>>
->>>>>> On 4/2/25 10:52, wangmy via lists.openembedded.org wrote:
->>>>>>> Hi,
->>>>>>>
->>>>>>> When running tiptop on the image of x86-64 for the latest
->>>>>>> repository of
->>>> poky
->>>>>> and meta-oe, an error occurred.
->>>>>>>
->>>>>>> root # tiptop -h
->>>>>>> syscall: Operation not permitted
->>>>>>> Could not perform syscall.
->>>>>>> Don't know why...
->>>>>>>
->>>>>>> According to preliminary investigation, the cause of this issue is
->>>>>>> related to
->>>>>> kenerl updating of perf related code.
->>>>>>> This problem has been occurring since the commit
->>>>>>> f390c2eea571945f357a2d3b9fcb1c015767132e of branch
->>>> v6.6/standard/base
->>>>>>>
->>>>>>> May I ask if you have any opinions or suggestions regarding this issue?
->>>>>>>
->>>>>>>   --
->>>>>>> Best Regards
->>>>>>> ---------------------------------------------------
->>>>>>> Wang Mingyu
->>>>>>> FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
->>>>>>> No.6 Wenzhu Road, Nanjing, 210012, China
->>>>>>> TEL：+86+25-86630566--8568
->>>>>>> COINS: 79988548
->>>>>>> FAX: +86+25-83317685
->>>>>>> MAIL: wangmy@fujitsu.com
->>>>>>>
->>>>>>>
->>>>>>>
->>>>>>>
->>>>>>>
->>>>>
->>>>>
->>>>> -=-=-=-=-=-=-=-=-=-=-=-
->>>>> Links: You receive all messages sent to this group.
->>>>> View/Reply Online (#116693):
->>>> https://lists.openembedded.org/g/openembedded-devel/message/116693
->>>>> Mute This Topic: https://lists.openembedded.org/mt/112043323/1997914
->>>>> Group Owner: openembedded-devel+owner@lists.openembedded.org
->>>>> Unsubscribe:
->>>>> https://lists.openembedded.org/g/openembedded-devel/unsub
->>>> [raj.khem@gmail.com]
->>>>> -=-=-=-=-=-=-=-=-=-=-=-
->>>>>
-> 
+diff --git a/meta-networking/classes/waf-samba.bbclass b/meta-networking/classes/waf-samba.bbclass
+index cb78ce6b0d..49d64b096f 100644
+--- a/meta-networking/classes/waf-samba.bbclass
++++ b/meta-networking/classes/waf-samba.bbclass
+@@ -1,7 +1,7 @@
+ # waf is a build system which is used by samba related project.
+ # Obtain details from https://wiki.samba.org/index.php/Waf
+ #
+-inherit qemu python3native
++inherit python3native
+ 
+ DEPENDS += "qemu-native libxslt-native docbook-xsl-stylesheets-native python3"
+ 
+@@ -77,7 +77,7 @@ do_configure() {
+     echo 'Checking uname release type: "${OLDEST_KERNEL}"' >> ${CROSS_ANSWERS}
+     cat ${WAF_CROSS_ANSWERS_PATH}/cross-answers-${TARGET_ARCH}.txt >> ${CROSS_ANSWERS}
+ 
+-    qemu_binary="${@qemu_target_binary(d)}"
++    qemu_binary="${@oe.qemu.qemu_target_binary(d)}"
+     if [ "${qemu_binary}" = "qemu-allarch" ]; then
+         qemu_binary="qemuwrapper"
+     fi
+-- 
+2.49.0
 
 
