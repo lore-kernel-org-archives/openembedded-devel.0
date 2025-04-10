@@ -1,221 +1,291 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 76DABC3601E
-	for <webhook@archiver.kernel.org>; Thu, 10 Apr 2025 06:00:08 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.27976.1744264801456138370
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 86373C3601E
+	for <webhook@archiver.kernel.org>; Thu, 10 Apr 2025 06:31:38 +0000 (UTC)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.web10.27998.1744266688128100221
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Apr 2025 23:00:01 -0700
+ Wed, 09 Apr 2025 23:31:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=6195bc5e25=changqing.li@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53A4SG1M024240
-	for <openembedded-devel@lists.openembedded.org>; Wed, 9 Apr 2025 23:00:01 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45u41m605q-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 23:00:00 -0700 (PDT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Wed, 9 Apr 2025 23:00:00 -0700
-Received: from pek-lpg-core6.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Wed, 9 Apr 2025 22:59:59 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [RFC][meta-oe][PATCH] pmtools: remove recipes
-Date: Thu, 10 Apr 2025 13:59:58 +0800
-Message-ID: <20250410055958.2998865-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SaoyHNaY;
+ spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-abf3d64849dso97138166b.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Apr 2025 23:31:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1744266686; x=1744871486; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=PXe6vZbEVZqjHqCulndXOsAbM+9cVhomukzB7aUJbs4=;
+        b=SaoyHNaYOwdf23CoSOGNtcSuV2y2ctwCTPdRYMp9HAgK2AmscvfBXeEbu2+o6HwEta
+         VcZK/b4BTVYJr0ZFwSvQFyv9jC8Iz8zw1nxvvDlG2n//omga1b4dtBg+BqRceTyYAX8n
+         9RTlsP5slIcXR0QExxB++dk7CALl5Tq8Led4fqo1uf8lN0sqLjzz6cTKCoc04kiIXeZB
+         Ffn6jw0o3RJkVCfWHcjD/suJlpPa9chinKtl57Vg97rbdmpI081evsb7/NsN+zx7VedQ
+         2zTFM8W0aIx0EEvm3QjiZ6i2slvurZ3w0Ymq4knka2RkL3FPrly0T/5j9p67+V9uDBg8
+         E2rw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1744266686; x=1744871486;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=PXe6vZbEVZqjHqCulndXOsAbM+9cVhomukzB7aUJbs4=;
+        b=fOLygtnmDXMcihFh5ZJRQmgOqk1ZVSi614IuuyZa4BTR8ozKsZrAGo3grEPqhuV9Bn
+         XhRWIdnd7tCtCxrOJNtdwPN/1U5WlpF90emHAN1dKkvBQFXqKo73F/8TuLvWFEeYRNC1
+         yv+9IT3/NzDQoQYZ/pAFfnvts70xvLqzAJ8JzeQ8ISFbOMFy7Qj3Pth1CH4Rzn4lBkUH
+         GkGdvUMTh2fV1rsj/n/r8dhYvZwvOJ++5zyrRQig1+hQn4R1f782BE1o6qkbqZZwbHoo
+         J03b/wGRybzKqgBgQNeiSAdXn01q5ct5t131+Zzv3ljZbTzTh1WJmHSKUvDfpRB4szCl
+         ZW9A==
+X-Forwarded-Encrypted: i=1; AJvYcCWIOnr+3MhnZ0zlIzn1s3EEfCEosKsb76VeNDg74k7+8N7tETn6FqLbsCPwqnXYRyLky+01L2IhLufg72fo97YAgBA=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YyKPOjweA0iCSnTtNBe4RpwCuMSYHDF/DZYZDYd2yPbVK37mOut
+	tZtlw5LzNJD+AI9/9Pu/0KmArFIfV9eBNWu/SZChkoslt3r44/Pd
+X-Gm-Gg: ASbGnctxTV2lkEHrc9tJJR2tzWenwBXCbHW/EZW3Mi3THYycfpQvrrXp/xylQbSuqXl
+	cqRvXL1umTQr6iNzLwl5FSKNVLMmxSa0cw+YrCzEUs6aWT2kdIBibmZyKmpDUSXfyEzLk2IY/xZ
+	lC+wXMPZtjYCp285tWEqPwrEqaOVoqcnruvw0bZfg89CHxTJkCoNs6jDKK4L9c7hdMcPV7aBc2a
+	zciK8T2p2cGv6uHEy3tsKerP+wplXo4INKA5k4dWymfU/w3j47nZoYhVSHJqYFRq+Y2w2N9IGtp
+	prTSonjv8kX2c7utibc9oh1yUPTu8JD54v5t5wJg8yufiA==
+X-Google-Smtp-Source: AGHT+IFqSJl/QbRGkhWnVhGMBnjS23JHXcRt7gBzj83DlK0MGKod1dLvQahsH8DSk1Up/CGoRCdAgQ==
+X-Received: by 2002:a17:907:7ea6:b0:ac7:7e3e:6d3c with SMTP id a640c23a62f3a-acabd4db548mr127188266b.55.1744266685871;
+        Wed, 09 Apr 2025 23:31:25 -0700 (PDT)
+Received: from [192.168.1.2] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-acaa1be98b6sm213987366b.52.2025.04.09.23.31.24
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 09 Apr 2025 23:31:25 -0700 (PDT)
+Message-ID: <5a52d767-9a11-4673-b62e-12734af5c750@gmail.com>
+Date: Thu, 10 Apr 2025 08:31:24 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [linux-yocto] error of tiptop
+To: "Mingyu Wang (Fujitsu)" <wangmy@fujitsu.com>,
+ Khem Raj <raj.khem@gmail.com>
+Cc: "linux-yocto@lists.yoctoproject.org"
+ <linux-yocto@lists.yoctoproject.org>,
+ "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>
+References: <TYWPR01MB118613486A025B1F8AE633026DCAF2@TYWPR01MB11861.jpnprd01.prod.outlook.com>
+ <400fa42d-4c27-4ef0-86f4-62046b0cd021@gmail.com>
+ <TYWPR01MB1186183EAB588828FDA06A60BDCB52@TYWPR01MB11861.jpnprd01.prod.outlook.com>
+ <CAMKF1sof5d3wTtfaqmxF70MKGRXzAF1G4vS5L1mjCEsfQMFvDQ@mail.gmail.com>
+ <TYWPR01MB11861CCF4F133083155F3B7C3DCB42@TYWPR01MB11861.jpnprd01.prod.outlook.com>
+ <95694d0d-29af-4b8d-b675-2020e7ab7417@gmail.com>
+ <TYWPR01MB1186167B9B51001E6150791DFDCB72@TYWPR01MB11861.jpnprd01.prod.outlook.com>
+ <1834DA81ADB9BE39.7383@lists.openembedded.org>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <1834DA81ADB9BE39.7383@lists.openembedded.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: qcQv-4VGHTbP_ul8nusw27hoy0WCEAjc
-X-Proofpoint-ORIG-GUID: qcQv-4VGHTbP_ul8nusw27hoy0WCEAjc
-X-Authority-Analysis: v=2.4 cv=QOZoRhLL c=1 sm=1 tr=0 ts=67f75e60 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=XR8D0OoHHMoA:10 a=NEAV23lmAAAA:8 a=8VcNbOb3AAAA:8 a=t7CeM3EgAAAA:8 a=Idv7_g-a3qBNtPP9LhAA:9 a=vUE3dsxbq4Gz4ul3qoxY:22
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Sensitive_Customer_Information: Yes
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-09_06,2025-04-08_04,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0
- mlxlogscore=999 bulkscore=0 phishscore=0 impostorscore=0
- priorityscore=1501 clxscore=1015 lowpriorityscore=0 spamscore=0 mlxscore=0
- malwarescore=0 adultscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
- definitions=main-2504100043
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 06:00:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116760
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 06:31:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116761
 
-From: Changqing Li <changqing.li@windriver.com>
 
-Remove this not maintained recipe. The latest commit of pmtools is 12
-years ago. And it generates 3 binaries: acpidump/acpixtract/madt, but
-there is a recipe acpica in oe-core provides acpidump/acpixtract, and
-according to README.madt, it is hacked out from Linux kernel, if someone
-requests it, mayb user can add one recipe similar like turbostat.
 
-[1] https://github.com/anyc/pmtools/tree/master
+On 4/10/25 06:26, Gyorgy Sarvari via lists.openembedded.org wrote:
+> 
+> 
+> On 4/10/25 04:16, Mingyu Wang (Fujitsu) wrote:
+>>> 1. I wonder if KVM is working as it should. Is qemu fast just like your machine when running with KVM?
+>> We are indeed using Yocto's kernel, and kvm works:
+>> root@qemux86-64 :~#  uname -a
+>> Linux qemux86-64 6.12.19-yocto-standard #1 SMP PREEMPT_DYNAMIC Wed Mar
+>>
+>> May I ask which poky commit you are using？
+>> Because our investigation found that this problem has been occurring since the commit
+>> f2909d648c461a9c7dc0dcc5fea7c6fee4f9466d 
+>> In this commit, there are several commits about perf:
+>>         322cb23e24c8 perf/core: Fix low freq setting via IOC_PERIOD
+>>         bf6e873ad732 perf/x86: Fix low freqency setting issue
+>>         a2475ccad612 perf/core: Add RCU read lock protection to perf_iterate_ctx()
+>>
+>> I don't know if the poky you're using includes this commit.
+> 
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- .../packagegroups/packagegroup-meta-oe.bb     |  4 +-
- ...o-dynamic-buffer-for-huge-ACPI-table.patch | 82 -------------------
- .../recipes-devtools/pmtools/pmtools_git.bb   | 34 --------
- 3 files changed, 2 insertions(+), 118 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/pmtools/pmtools/pmtools-switch-to-dynamic-buffer-for-huge-ACPI-table.patch
- delete mode 100644 meta-oe/recipes-devtools/pmtools/pmtools_git.bb
+Sorry for the frequent spam... These commits you mention here are fairly
+small ones, and easy to revert locally. Did you manage to confirm that
+if you patch your kernel with reverting one (or more) of these, it works?
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index ebb0f0f810..d3d2f05c47 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -294,8 +294,8 @@ RDEPENDS:packagegroup-meta-oe-devtools = "\
-     yajl \
-     yasm \
- "
--RDEPENDS:packagegroup-meta-oe-devtools:append:x86 = " cpuid msr-tools pahole pmtools"
--RDEPENDS:packagegroup-meta-oe-devtools:append:x86-64 = " cpuid msr-tools pahole pcimem pmtools"
-+RDEPENDS:packagegroup-meta-oe-devtools:append:x86 = " cpuid msr-tools pahole"
-+RDEPENDS:packagegroup-meta-oe-devtools:append:x86-64 = " cpuid msr-tools pahole pcimem"
- RDEPENDS:packagegroup-meta-oe-devtools:append:riscv64 = " pcimem"
- RDEPENDS:packagegroup-meta-oe-devtools:append:arm = " pcimem"
- RDEPENDS:packagegroup-meta-oe-devtools:append:aarch64 = " pahole pcimem"
-diff --git a/meta-oe/recipes-devtools/pmtools/pmtools/pmtools-switch-to-dynamic-buffer-for-huge-ACPI-table.patch b/meta-oe/recipes-devtools/pmtools/pmtools/pmtools-switch-to-dynamic-buffer-for-huge-ACPI-table.patch
-deleted file mode 100644
-index 3be18986fc..0000000000
---- a/meta-oe/recipes-devtools/pmtools/pmtools/pmtools-switch-to-dynamic-buffer-for-huge-ACPI-table.patch
-+++ /dev/null
-@@ -1,82 +0,0 @@
--From 03a886252f6555d6b0af76b654e76459642b89da Mon Sep 17 00:00:00 2001
--From: Yunguo Wei <yunguo.wei@windriver.com>
--Date: Tue, 3 Dec 2013 18:12:50 +0800
--Subject: [PATCH] pmtools: switch to dynamic buffer for huge ACPI tables
--
--For servers like Canoe Pass or Thunder Ridge, there are much more
--entries in ACPI table, so original 1K buffer is insufficient.
--
--We switch to dynamic buffer on this situation.
--
--Signed-off-by: Yunguo Wei <yunguo.wei@windriver.com>
--
--
--Upstream-Status: Pending
--
--Signed-off-by: Kai Kang <kai.kang@windriver.com>
-----
-- madt/madt.c | 18 +++++++++++++++++-
-- 1 file changed, 17 insertions(+), 1 deletion(-)
--
----- a/madt/madt.c
--+++ b/madt/madt.c
--@@ -34,14 +34,16 @@ typedef unsigned long long u64;
-- //#include <sys/mman.h>
-- #include <stdio.h> // fread
-- #include <stdlib.h> // malloc
--+#include <string.h> // memset/memcpy
-- 
-- #include "./tables.c"
-- 
-- int verbose = 0;
-- /*
---/* read standard input
--+ * read standard input
--  * write decoded madt to standard output
--  */
--+size_t
-- get_next_entry(acpi_table_entry_header * entry_header)
-- {
-- 	size_t retval;
--@@ -51,9 +53,11 @@ get_next_entry(acpi_table_entry_header *
-- 	return retval;
-- }
-- 
---u8	buffer[1024];
-- 
---main()
--+u8	buf[1024];
--+u8	*buffer = buf;
--+int
--+main(int argc, char *argv[])
-- {
-- 	size_t retval;
-- 	struct acpi_table_madt *madt_header;
--@@ -75,6 +79,17 @@ main()
-- 
-- 	if (verbose) printf("header.length %d\n", madt_header->header.length);
-- 
--+	/* if 1K buffer is insufficient for acpi table, switch to a larger memory buffer */
--+	if(expected_length > sizeof(buf)) {
--+		buffer = malloc(expected_length);
--+		if (!buffer) {
--+			perror("malloc");
--+			exit(1);
--+		}
--+		memset(buffer, 0, expected_length);
--+		memcpy(buffer, buf, sizeof(struct acpi_table_madt));
--+	}
--+
-- 	acpi_table_print((void*)&(buffer[bytes_read]), 0);
-- 
-- 	bytes_read = sizeof(struct acpi_table_madt);
--@@ -118,6 +133,9 @@ done:
-- 		printf("Checksum 0x%x != 0; 0x%x in header ERROR\n", csum,
-- 			 madt_header->header.checksum);
-- 
--+	if(buffer != buf)
--+		free(buffer);
--+
-- 	return 0;
-- }
-- 
-diff --git a/meta-oe/recipes-devtools/pmtools/pmtools_git.bb b/meta-oe/recipes-devtools/pmtools/pmtools_git.bb
-deleted file mode 100644
-index ad149de12c..0000000000
---- a/meta-oe/recipes-devtools/pmtools/pmtools_git.bb
-+++ /dev/null
-@@ -1,34 +0,0 @@
--DESCRIPTION = "This is a small collection of power management \
--    test and investigation tools"
--HOMEPAGE = "http://lesswatts.org/projects/acpi"
--LICENSE = "GPL-2.0-or-later"
--LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
--
--PV = "20130209+git"
--
--SRC_URI = "git://github.com/anyc/pmtools.git;branch=master;protocol=https \
--    file://pmtools-switch-to-dynamic-buffer-for-huge-ACPI-table.patch \
--"
--SRCREV = "3ebe0e54c54061b4c627236cbe35d820de2e1168"
--
--COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
--
--S = "${WORKDIR}/git"
--
--inherit update-alternatives
--
--ALTERNATIVE_PRIORITY = "90"
--ALTERNATIVE:${PN} = "acpixtract acpidump"
--
--do_configure[noexec] = "1"
--do_compile() {
--    oe_runmake
--}
--
--do_install() {
--    install -d ${D}${bindir} ${D}${docdir}
--    install -m 755 ${S}/acpidump/acpidump ${D}${bindir}
--    install -m 755 ${S}/acpixtract/acpixtract ${D}${bindir}
--    install -m 755 ${S}/madt/madt ${D}${bindir}
--    install -m 644 ${S}/README ${D}${docdir}
--}
--- 
-2.34.1
+On the same vein: if that reverting is not working, are you using a
+custom kernel config? If you do, do you still experience the issue even
+without your config changes?
+
+There is one thing that I have noticed: on my machine I did get the same
+error in qemux86-64 without KVM even with very old versions (that's what
+prompted me to write my 2nd note, thinking that maybe my KVM experiences
+are matching your problem only coincidentally)
+
+> This is what I'm at now:
+> poky: 2af52d4819aea9ca746f0671e2b2f8b5c7de2960 (2025-03-28)
+> meta-oe: 67ad83dd7c2485dae0c90eac345007af6195b84d (2025-03-25)
+> 
+>>
+>>   --
+>> Best Regards
+>> ---------------------------------------------------
+>> Wang Mingyu
+>> FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
+>> No.6 Wenzhu Road, Nanjing, 210012, China
+>> TEL：+86+25-86630566--8568
+>> COINS: 79988548
+>> FAX: +86+25-83317685
+>> MAIL: wangmy@fujitsu.com
+>>
+>>> -----Original Message-----
+>>> From: Gyorgy Sarvari <skandigraun@gmail.com>
+>>> Sent: Wednesday, April 9, 2025 7:49 PM
+>>> To: Wang, Mingyu/王 鸣瑜 <wangmy@fujitsu.com>; Khem Raj
+>>> <raj.khem@gmail.com>
+>>> Cc: linux-yocto@lists.yoctoproject.org;
+>>> openembedded-devel@lists.openembedded.org
+>>> Subject: Re: [oe] [linux-yocto] error of tiptop
+>>>
+>>>
+>>> On 4/9/25 09:27, Mingyu Wang (Fujitsu) wrote:
+>>>> I tried " runqemu kvm nographic qemux86-64", but there still report an error:
+>>>>
+>>>> root@qemux86-64:~# uname -a
+>>>> Linux qemux86-64 6.12.19-yocto-standard #1 SMP PREEMPT_DYNAMIC Wed
+>>> Mar
+>>>> 19 23:04:08 UTC 2025 x86_64 GNU/Linux root@qemux86-64:~# tiptop -h
+>>>> syscall: Operation not permitted
+>>>> Could not perform syscall.
+>>>> Don't know why...
+>>>> root@qemux86-64:~#
+>>>>
+>>>
+>>> 1. I wonder if KVM is working as it should. Is qemu fast just like your machine
+>>> when running with KVM? Or does it have the same speed, as without KVM? (I
+>>> assume your host machine is also x86-64) 2. If KVM is working, then maybe it's
+>>> not KVM related, my similar experiences are just coincidental, and you have a
+>>> different problem.
+>>> Very overshooting idea: you could install strace in your image, and try running
+>>> "strace -s 320 -v -y -ff -o /tmp/tiptop_strace tiptop -h" - this will save the system
+>>> calls made by tiptop in the /tmp folder. It's not easy to read and fairly verbose,
+>>> but sometimes can show some surprising errors about syscalls one would expect
+>>> to succeed, but failing for strange reasons. (Strace doesn't always show useful
+>>> info... but it's worth a try, and at least it's quick)
+>>>
+>>>
+>>>>   --
+>>>> Best Regards
+>>>> ---------------------------------------------------
+>>>> Wang Mingyu
+>>>> FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
+>>>> No.6 Wenzhu Road, Nanjing, 210012, China
+>>>> TEL：+86+25-86630566--8568
+>>>> COINS: 79988548
+>>>> FAX: +86+25-83317685
+>>>> MAIL: wangmy@fujitsu.com
+>>>>
+>>>>> -----Original Message-----
+>>>>> From: Khem Raj <raj.khem@gmail.com>
+>>>>> Sent: Tuesday, April 8, 2025 11:29 PM
+>>>>> To: Wang, Mingyu/王 鸣瑜 <wangmy@fujitsu.com>
+>>>>> Cc: Gyorgy Sarvari <skandigraun@gmail.com>;
+>>>>> linux-yocto@lists.yoctoproject.org;
+>>>>> openembedded-devel@lists.openembedded.org
+>>>>> Subject: Re: [oe] [linux-yocto] error of tiptop
+>>>>>
+>>>>> On Tue, Apr 8, 2025 at 12:28 AM wangmy via lists.openembedded.org
+>>>>> <wangmy=fujitsu.com@lists.openembedded.org> wrote:
+>>>>>>
+>>>>>> I tried " runqemu qemux86-64 qemuparams=" --enable-kvm " nographic",
+>>>>>> but
+>>>>> there still report an error:
+>>>>>>
+>>>>>
+>>>>> runqemu kvm nographic qemux86-64
+>>>>>
+>>>>>> root@qemux86-64:~# tiptop
+>>>>>> syscall: Operation not permitted
+>>>>>> Could not perform syscall.
+>>>>>> Don't know why...
+>>>>>>
+>>>>>> My repo of meta-openembedded] has been updated to
+>>>>> 82056b992459607ea69b0130308685c4872cb19b7
+>>>>>> Repo of poky has been updated to
+>>>>> 9e418c4265453860c4736abb7520f1c3c2c3faee
+>>>>>>   --
+>>>>>> Best Regards
+>>>>>> ---------------------------------------------------
+>>>>>> Wang Mingyu
+>>>>>> FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
+>>>>>> No.6 Wenzhu Road, Nanjing, 210012, China
+>>>>>> TEL：+86+25-86630566--8568
+>>>>>> COINS: 79988548
+>>>>>> FAX: +86+25-83317685
+>>>>>> MAIL: wangmy@fujitsu.com
+>>>>>>
+>>>>>>> -----Original Message-----
+>>>>>>> From: Gyorgy Sarvari <skandigraun@gmail.com>
+>>>>>>> Sent: Thursday, April 3, 2025 3:35 PM
+>>>>>>> To: Wang, Mingyu/王 鸣瑜 <wangmy@fujitsu.com>;
+>>>>>>> linux-yocto@lists.yoctoproject.org
+>>>>>>> Cc: openembedded-devel@lists.openembedded.org
+>>>>>>> Subject: Re: [oe] [linux-yocto] error of tiptop
+>>>>>>>
+>>>>>>> On what machine are you trying to run it? At least in qemu I get
+>>>>>>> the same, unless I enable kvm directly:
+>>>>>>>
+>>>>>>> runqemu qemux86-64 qemuparams=" --enable-kvm "
+>>>>>>>
+>>>>>>> This way I don't get that error.
+>>>>>>>
+>>>>>>> On 4/2/25 10:52, wangmy via lists.openembedded.org wrote:
+>>>>>>>> Hi,
+>>>>>>>>
+>>>>>>>> When running tiptop on the image of x86-64 for the latest
+>>>>>>>> repository of
+>>>>> poky
+>>>>>>> and meta-oe, an error occurred.
+>>>>>>>>
+>>>>>>>> root # tiptop -h
+>>>>>>>> syscall: Operation not permitted
+>>>>>>>> Could not perform syscall.
+>>>>>>>> Don't know why...
+>>>>>>>>
+>>>>>>>> According to preliminary investigation, the cause of this issue is
+>>>>>>>> related to
+>>>>>>> kenerl updating of perf related code.
+>>>>>>>> This problem has been occurring since the commit
+>>>>>>>> f390c2eea571945f357a2d3b9fcb1c015767132e of branch
+>>>>> v6.6/standard/base
+>>>>>>>>
+>>>>>>>> May I ask if you have any opinions or suggestions regarding this issue?
+>>>>>>>>
+>>>>>>>>   --
+>>>>>>>> Best Regards
+>>>>>>>> ---------------------------------------------------
+>>>>>>>> Wang Mingyu
+>>>>>>>> FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
+>>>>>>>> No.6 Wenzhu Road, Nanjing, 210012, China
+>>>>>>>> TEL：+86+25-86630566--8568
+>>>>>>>> COINS: 79988548
+>>>>>>>> FAX: +86+25-83317685
+>>>>>>>> MAIL: wangmy@fujitsu.com
+>>>>>>>>
+>>>>>>>>
+>>>>>>>>
+>>>>>>>>
+>>>>>>>>
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>>>
+>>
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#116753): https://lists.openembedded.org/g/openembedded-devel/message/116753
+> Mute This Topic: https://lists.openembedded.org/mt/112043323/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
 
