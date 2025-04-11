@@ -1,133 +1,136 @@
-Return-Path: <dmitry.baryshkov@oss.qualcomm.com>
+Return-Path: <leimaohui@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 51F2EC369A6
-	for <webhook@archiver.kernel.org>; Fri, 11 Apr 2025 01:08:47 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.web11.14651.1744333723575612716
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 709D7C3601E
+	for <webhook@archiver.kernel.org>; Fri, 11 Apr 2025 01:37:37 +0000 (UTC)
+Received: from esa11.hc1455-7.c3s2.iphmx.com (esa11.hc1455-7.c3s2.iphmx.com [207.54.90.137])
+ by mx.groups.io with SMTP id smtpd.web11.15234.1744335452372978874
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Apr 2025 18:08:43 -0700
+ Thu, 10 Apr 2025 18:37:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@qualcomm.com header.s=qcppdkim1 header.b=m3p1ZkMX;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53AG11qc013861
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Apr 2025 01:08:43 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	51A3kYFRYZKR925Jx18hPIj+2L10mcpx2w6mYdjkbaQ=; b=m3p1ZkMXVZrLPG8I
-	EZI/dPBn5umeJ2yqqpGjeossOZbX4whxnDRWzbrMWRNtYblQwBpzJbYVquPHAZMe
-	5BTP9nJ4nw6LFfkoyG/6ZuB7VWFvpcuEIcmbLZXokxT8gnGDADtFAZUg0RNUUJWi
-	SoVnX050gcFFbi30ry3QwAe/pqCwLXGhyd5JEi5lLDKoNcGeCW10vP31FEfgwR3g
-	UaAFDy9g5PU3CXsjS629IYLSY6uxkvqH0OuZHn/98fHvxgFkN+b9ycAKT8MHZyYQ
-	PQByOz1NX646xTzjyghiYsu4wFPVwyJiXkLyfM+9Ix64ZqHbeH0HPDdnGuARLfMK
-	yuxzEA==
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 45twbegswu-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Apr 2025 01:08:42 +0000 (GMT)
-Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-6ed16cc6e39so22663836d6.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 18:08:42 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744333721; x=1744938521;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=51A3kYFRYZKR925Jx18hPIj+2L10mcpx2w6mYdjkbaQ=;
-        b=v87XkBKRKP04ogU/ReJh8TrgEGvRWGWx4pp0qWAFzQsR6YQk1OMYljgUstPn6gA31I
-         VpTCK6pl+3P4j3g5n2PWi/dT99Bd3ciDlgMi1+CWwDsOLzVFi/pJwniR9KxtFYUYXrjt
-         Tr3uFaD1mBKVI2uOieY2evr8YxlDQrUTBmpWOdwxwsUpNqVGzeui5lLOar4GdH7zrkWw
-         IkgPCJVTH9rmBmHMu0M6tmAYH70VT10GCxAG6AEXtdb1B9OhYSvhecjFfQnGBpmmdjPE
-         aMyZsh+WjxAJ/KLTMsOjFwtlw28IT3jKrbEOcRhBnkKXLIZGzvFF7W+EjSePHYDwpHaF
-         zlHA==
-X-Gm-Message-State: AOJu0YxcWn2kDB4fttzm2DJitdL30fxmkUyVqqJsvHTrSEE2pBG6MQex
-	k6+w1t6Dc03ilufbX4QVMrxbO731FAog0DP4CJSibRoYJe2Qfphomj9eNs7+Rg3XWJ2uPJj2MdL
-	Hd+2zpJAfmjvf3aqHeuUqGOYNvjxUfa7T2bXVn8B8uuNiXQw1iVIJ4fm5CV/+KQVlmLmQ0VYZa8
-	ys30Qj
-X-Gm-Gg: ASbGncsJ553POT2jqjGzSbuJdlgKhlJbhT6nfFnDF3lrAbaZQUugVofzF773uKGFlUa
-	uhEXRHJzHe6JDDWGPhSta7DGLAgsXDBjuDE2f5fIqpsVRbPsUX9F2MmsuA6NeCta72wwEvSbtMJ
-	FXEmkihwxd82n9loaFQhR3JwWa13XiiTtmR2vmj9qg2TmTRg0koI8zQcJTrst0XQPfliUa+h9g4
-	elCoz8VYPzPM6+735+7Xx5sqG20+Egs77bHqEDpmbkL2yEev++HweUYSNvY7H7U+FK9HC8wjYYk
-	xU6vEmqIATgVRcB2zg5Iq/GCBVvpjoRATyo0idzVSo4TSkXwiF/qsTAVElc4Ateuq23/0/B50N0
-	=
-X-Received: by 2002:a05:6214:b62:b0:6e8:86d3:be73 with SMTP id 6a1803df08f44-6f23f14fd7bmr12323176d6.37.1744333721501;
-        Thu, 10 Apr 2025 18:08:41 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGTv/ShbuwTmO/M0Z4ySLMX1OEB4hURw/BSXPImqpRTBmup2gMmqMdtzxLNcbkNSfqW28lRIg==
-X-Received: by 2002:a05:6214:b62:b0:6e8:86d3:be73 with SMTP id 6a1803df08f44-6f23f14fd7bmr12323006d6.37.1744333721177;
-        Thu, 10 Apr 2025 18:08:41 -0700 (PDT)
-Received: from eriador.lumag.spb.ru (2001-14ba-a0c3-3a00--7a1.rev.dnainternet.fi. [2001:14ba:a0c3:3a00::7a1])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-30f46623c2bsm6539331fa.111.2025.04.10.18.08.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Apr 2025 18:08:40 -0700 (PDT)
-Date: Fri, 11 Apr 2025 04:08:38 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=VatPSAxX;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.137, mailfrom: leimaohui@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1744335453; x=1775871453;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=08f0KWWaGFPUita2Sgx4v3Ww+N9bYGQ9ukEyZ8bNKk8=;
+  b=VatPSAxXN4IkNaBEVK3iOeeDb06vq0Iic0DHHVItOF7KlBNLqZS0/b/F
+   EzFjDD9+//0KWeYldECGIDKR4L7TPLFJCitmsBKR+GJ23EEZf0PlYi6i/
+   W5c1X7EyJM6lep/yuXyKxxKklw92UCLqKVO+LsdSCVaoOHOWrToIpu090
+   qrV4OHndsAxJ40WVitdfPc/aA0a2XGPFnm/56XvfsCUJWbY6IdCjeO7va
+   ep3nfhdZFzHpo24yFiiPAMF8mSTs8Mgn3PvsfeRq0OmSl3g81gCdPK1yP
+   nhTo8wlc4LelNvcYX9CK2c0rrOmt5b0iVxj7GBnxNhztS8GujPM6sYro4
+   w==;
+X-CSE-ConnectionGUID: jPTDDQmxSOmEVWnI9BcHrQ==
+X-CSE-MsgGUID: EDvYQP+iSLKhjJht//hz7w==
+X-IronPort-AV: E=McAfee;i="6700,10204,11400"; a="175556184"
+X-IronPort-AV: E=Sophos;i="6.15,203,1739804400"; 
+   d="scan'208";a="175556184"
+Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
+  by esa11.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Apr 2025 10:37:30 +0900
+Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
+	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id A7F6AD4C2B
+	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Apr 2025 10:37:27 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 64147D4C11
+	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Apr 2025 10:37:27 +0900 (JST)
+Received: from G08FNSTD190088.g08.fujitsu.local (unknown [10.167.135.33])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id A1A8B1A0078;
+	Fri, 11 Apr 2025 09:37:26 +0800 (CST)
+From: Lei Maohui <leimaohui@fujitsu.com>
 To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-oe][PATCH v2 1/5] opencl-headers: upgrade to
- 2024.10.24
-Message-ID: <sud4ol6zbubhjvcqnkpiej26a5qgw5wr6vu7cv475ejvtd4o6v@ochwhargyqkd>
-References: <20250408102058.2769630-1-dmitry.baryshkov@oss.qualcomm.com>
- <vcqsx7hy5jlmcwwpq5vbydou6k2yehxjxv7nsnqm2iartl7kn7@tshogi7vdy5b>
- <CAMKF1so7xdVHgWo6sPZ+GwZgrAL-c+a2Ws0LO4saYT3a6c09+A@mail.gmail.com>
+Cc: openembedded-devel@lists.openembedded.org,
+	Lei Maohui <leimaohui@fujitsu.com>
+Subject: [meta-python] [PATCH] python3-pdm python3-pdm-{backend,build-locked}: move to oe-core
+Date: Fri, 11 Apr 2025 09:37:20 +0800
+Message-Id: <20250411013721.1239-1-leimaohui@fujitsu.com>
+X-Mailer: git-send-email 2.38.1.windows.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <CAMKF1so7xdVHgWo6sPZ+GwZgrAL-c+a2Ws0LO4saYT3a6c09+A@mail.gmail.com>
-X-Proofpoint-GUID: GvsY3yG4AbrHnzcemD2UKeoinpiC9Dbv
-X-Authority-Analysis: v=2.4 cv=T7OMT+KQ c=1 sm=1 tr=0 ts=67f86b9a cx=c_pps a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=XR8D0OoHHMoA:10 a=Q4-j1AaZAAAA:8 a=EUspDBNiAAAA:8 a=Oh0VQQrMb95tE7VEhDEA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=pJ04lnu7RYOZP9TFuWaZ:22 a=9H3Qd4_ONW2Ztcrla5EB:22
-X-Proofpoint-ORIG-GUID: GvsY3yG4AbrHnzcemD2UKeoinpiC9Dbv
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-10_07,2025-04-10_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
- mlxlogscore=999 lowpriorityscore=0 adultscore=0 phishscore=0 bulkscore=0
- mlxscore=0 malwarescore=0 suspectscore=0 priorityscore=1501 spamscore=0
- clxscore=1015 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2502280000
- definitions=main-2504110007
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0031df01.pphosted.com id 53AG11qc013861
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Apr 2025 01:08:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116787
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Apr 2025 01:37:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116788
 
-On Thu, Apr 10, 2025 at 05:35:38PM -0700, Khem Raj wrote:
-> On Thu, Apr 10, 2025 at 3:05=E2=80=AFPM Dmitry Baryshkov via
-> lists.openembedded.org
-> <dmitry.baryshkov=3Doss.qualcomm.com@lists.openembedded.org> wrote:
-> >
-> > On Tue, Apr 08, 2025 at 01:20:54PM +0300, Dmitry Baryshkov wrote:
-> > > Upgrade OpenCL-Headers to the latest release. Upgrade opencl-clhpp =
-with
-> > > the same commit so that they stay in sync, otherwise projects using
-> > > clhpp might fail to build.
-> > >
-> > > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> > > ---
-> > >  .../{opencl-clhpp_2024.05.08.bb =3D> opencl-clhpp_2024.10.24.bb}  =
-| 2 +-
-> > >  ...pencl-headers_2024.05.08.bb =3D> opencl-headers_2024.10.24.bb} =
-| 2 +-
-> > >  2 files changed, 2 insertions(+), 2 deletions(-)
-> > >  rename meta-oe/recipes-core/opencl/{opencl-clhpp_2024.05.08.bb =3D=
-> opencl-clhpp_2024.10.24.bb} (91%)
-> > >  rename meta-oe/recipes-core/opencl/{opencl-headers_2024.05.08.bb =3D=
-> opencl-headers_2024.10.24.bb} (89%)
-> >
-> > Khem, gracious ping for v2.
->=20
-> Thanks, it will be in master-next tonight, I was holding up some
-> patches for clearing up walnascar
+They are already added to oe-core, since they are dependencies of python3-webcolors
 
-Ack, thanks. Sorry for the noise then.
+Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
+---
+ .../python/python3-pdm-backend_2.4.3.bb          | 14 --------------
+ .../python/python3-pdm-build-locked_0.3.5.bb     | 14 --------------
+ .../python/python3-pdm_2.23.0.bb                 | 16 ----------------
+ 3 files changed, 44 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pdm-backend_2.4.3.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pdm-build-locked_0.3.5.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pdm_2.23.0.bb
 
+diff --git a/meta-python/recipes-devtools/python/python3-pdm-backend_2.4.3.bb b/meta-python/recipes-devtools/python/python3-pdm-backend_2.4.3.bb
+deleted file mode 100644
+index 46440c9d5d..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pdm-backend_2.4.3.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-SUMMARY = "The build backend used by PDM that supports latest packaging standards"
+-HOMEPAGE = "https://github.com/pdm-project/pdm-backend"
+-LICENSE = "MIT"
+-SECTION = "devel/python"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=4a564297b3c5b629a528b92fd8ff61ea"
+-
+-SRC_URI[sha256sum] = "dbd9047a7ac10d11a5227e97163b617ad5d665050476ff63867d971758200728"
+-
+-inherit pypi python_setuptools_build_meta
+-
+-PYPI_PACKAGE = "pdm_backend"
+-UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-pdm-build-locked_0.3.5.bb b/meta-python/recipes-devtools/python/python3-pdm-build-locked_0.3.5.bb
+deleted file mode 100644
+index c0eee4e97d..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pdm-build-locked_0.3.5.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-SUMMARY = "pdm plugin to publish locked dependencies as optional-dependencies"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=19382cdf9c143df4f00b9caa0b60c75a"
+-
+-SRC_URI[sha256sum] = "ab2f381e00d79841d46be2e6909c265038b9fa951de2bf551ca6adb7f6844201"
+-
+-inherit pypi python_setuptools_build_meta
+-
+-DEPENDS += " python3-pdm-backend-native"
+-
+-PYPI_PACKAGE = "pdm_build_locked"
+-UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+-
+-BBCLASSEXTEND += "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-pdm_2.23.0.bb b/meta-python/recipes-devtools/python/python3-pdm_2.23.0.bb
+deleted file mode 100644
+index f565819a9a..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pdm_2.23.0.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-SUMMARY = "A modern Python package and dependency manager supporting the latest PEP standards"
+-HOMEPAGE = "https://pdm-project.org/latest/"
+-LICENSE = "MIT"
+-SECTION = "devel/python"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=2eb31a2cc1a758c34b499f287dd04ef2"
+-
+-SRC_URI[sha256sum] = "ec5ce439648b42b928f4afa91c2b6251e6a33f40cc83779d899ca970bd9eb131"
+-
+-inherit pypi python_setuptools_build_meta
+-
+-DEPENDS += " \
+-    python3-pdm-backend-native \
+-    python3-pdm-build-locked-native \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
+-- 
+2.43.0
 
---=20
-With best wishes
-Dmitry
 
