@@ -2,107 +2,108 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7FFFC3601E
-	for <webhook@archiver.kernel.org>; Fri, 11 Apr 2025 00:36:06 +0000 (UTC)
-Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
- by mx.groups.io with SMTP id smtpd.web11.14018.1744331765887754853
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E193CC3601E
+	for <webhook@archiver.kernel.org>; Fri, 11 Apr 2025 00:42:06 +0000 (UTC)
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web10.14016.1744332126115654155
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Apr 2025 17:36:05 -0700
+ Thu, 10 Apr 2025 17:42:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=W1CSr/6N;
- spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f48.google.com with SMTP id 46e09a7af769-72c13802133so414649a34.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 17:36:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DWT+YuSN;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-736a72220edso1459091b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 17:42:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744331765; x=1744936565; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3EyNA6nD7i9UKsf+VcXHoc7xiCnAfh924xz27INqKEA=;
-        b=W1CSr/6NtYHjIudoLx75KQsHZDT57NySI70WQIFbkxUSMlyTXWYbAFnzv9xSsl1R1a
-         ZJdH5SmYQsU75DOxXQwWdRrJKYlLY19d43SJJNlbUuF2fAMsF5pvEJvRQ2FZizt+76/Q
-         P6ejNJ5WLPJdRtzL6dcf5Peqm/RlQgjgBIMJq069bTR0VOnmk6ml3IyRp99RrmPva4jp
-         x/dlxmKs8OOf9NxCRt3iSlICIlOiYMeALz1HlPFqrET9EIOlmr3EDMoVg5RC0jD+Wolc
-         fGG3OlHfLlx+mnYPFFsG8r8kzoZq7IA88XYkAkCZMz/Dur8VgFWRtV514QlToiX3ETiY
-         rguw==
+        d=gmail.com; s=20230601; t=1744332125; x=1744936925; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=uFhnIk+6g8bFvEIj2XJvSGe8Xb8FzCsiPn7wExuuQ6k=;
+        b=DWT+YuSNLylRwtpWLj/VsJNmatE9CGY6eRk7OcX8yBQGuJIc6BncjjXScuV1xaCBtp
+         Zw0xFkBZcxMQEIMfvmCFCxCvuouy4glbOu5FDqh2xK22HM+GcRirk9bzzLfQph5Pe4d7
+         cpbqmoMdhYShAZY6OKkGiufiWnaDOpSaQ/0C7aT5qn3j11UP581wqgfojj02TURafdMV
+         ihnT7yA1oCQPx7moSo/zhIxa3aN2COfTUshh+OWRKftfQk7qXjjdKZdvdXQxd2gs+Ucc
+         yglCuatcn3D8KTHg1DuRu8wWK86bZbA1z6d0a70oAJoDcXxT3Uwd4WU4cG+Y81uOctw/
+         Lflw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744331765; x=1744936565;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=3EyNA6nD7i9UKsf+VcXHoc7xiCnAfh924xz27INqKEA=;
-        b=pbaI9GRKEg10/b2w+zFQ3Ke92Hohy8wppaQChwl+eAPnxWZVbr6y8QlfRnrJtQF/Jk
-         ev6gRoNXebyMgeg81ex6fenzQi7iJKICQYkGM0ZRjJ5YQklE7Js1XwseWGxU7pCULdwN
-         aUAKWXR/tD6tbPtXj5Z7xQ/EzQyTUsjS6ZMARPBs3SR1LY9JKke7cCuqtX0aCsv76vSI
-         CL/dDyeGylj0b9LSZftM5yVbR/4rhSEO37dWFvcY3wV/8+qEI2xTxUfH05Z1QhEq0nc7
-         AVjjPvljV6bhRWUA93xUiSRde4hYYe9ddfpYThtUwrqjm5YINlJ2AJnyCbtGJpi8LUso
-         oH7w==
-X-Gm-Message-State: AOJu0YzVvuENIAQFy6M2/JMERpg3QzXlsr8U5JojU9pzkT2KaF0vAjc/
-	ZzK7kYEzk9CVY3eKw9Z17y+C/Axe0mL3Ig8BtAraG4zE09tjbjsCGEeEo6K0nHt4Rb3L1GFtzpA
-	4tMEbVYRYsjDTQlIv09nlC2WYaC0=
-X-Gm-Gg: ASbGncvOSL17B7IJ79nqR/2n/Vc5kFTKsnk8JiLOoAateMsvRQUGvM3ELP1XKBlhydr
-	jm5Hu4yWXi0jlenyHVUD3iaESposuo3eOnsKTp69CY44QZSXggRVMqqSmQuaqgauQTFyko2F9vO
-	rRoF0mBuM2+ZQKHL6gdfCkeg==
-X-Google-Smtp-Source: AGHT+IHwBBlEeF915u/SJ5cicvYO5LuYOfj2edmKno5qW5XaTFOFI0MD8g82s8ImBgury1uOuYfuvtksiNUaTPcCd0E=
-X-Received: by 2002:a05:6830:6587:b0:72b:93df:9213 with SMTP id
- 46e09a7af769-72e86307e08mr700239a34.10.1744331765008; Thu, 10 Apr 2025
- 17:36:05 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250408102058.2769630-1-dmitry.baryshkov@oss.qualcomm.com> <vcqsx7hy5jlmcwwpq5vbydou6k2yehxjxv7nsnqm2iartl7kn7@tshogi7vdy5b>
-In-Reply-To: <vcqsx7hy5jlmcwwpq5vbydou6k2yehxjxv7nsnqm2iartl7kn7@tshogi7vdy5b>
+        d=1e100.net; s=20230601; t=1744332125; x=1744936925;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=uFhnIk+6g8bFvEIj2XJvSGe8Xb8FzCsiPn7wExuuQ6k=;
+        b=E9Lrxox0SRA9FFSAM9NIVi49KipbjoqdJwl8LBE1UeWFlpRzOLL6KcUDrRqhKelLCT
+         28l+Uw2/otXz6656MuUlMaOaZIp30bu/KHOwKyA1zaOH1jbE3NeXqHnNkriyrmfuwuHW
+         3OZIchs7raSY2vXLxilDAekJugK8ywlf01WhOA75zLfaxRq/CBGtp1Vn3IpQ68sHuVkb
+         0RW1/ZQy2vQlfiOjd+yqYKtLiJsyLIyraSA9ckoSlq5u+73IwfF/5kpNYWp54On6GGmK
+         lpc/O3kEX8vcQAjwtbeIlPip1qiE2IdCsMj8DKc48GbovgViA0ypPkhMFpmjyljzse7x
+         RjbA==
+X-Gm-Message-State: AOJu0Yxr/PBrGyAg9vQMc2jfSmNc8UqKTxXIT1KG5/E3W+sSJ/pjeUah
+	t92qk8/17lECzxUxypO/C532MpRtgZLTSgx1KlwDvREKkNo3vqdk5ZIjBkyz
+X-Gm-Gg: ASbGncvB1fB7kfz30KsDuzoT+ZJ8TlrPnUPxnhRKTV86Pk9Ak2suR9TiuVTV9rx7G1B
+	3hTvZJPMjMH3M6MdocYuF996r11XONB7vjnvcaXLrk+6o5pPD6QdNYydG4XJs/wb6Sxw4IWsNve
+	UpPgMYrZTpdd7pl5ubwuSVauCVmGg+Dp6Xa7BKW2Se0x5pQv4B0NIB36Pp/XLuGMn+2HBTitvs0
+	Nn/iNNf38inBv3M1LFRBAm8lsPKb4UfLUwwFUWmgt4TUG5ayl8ylvA5lHN1sa9vIR679oz1mZhg
+	W6AoFiFTBqixiNvKHqM3DIPDq7cL+P+S
+X-Google-Smtp-Source: AGHT+IEJl27TpMrjLuv0b4eLTPJPV43vxhYY0Ns1npS0DrOERLXKxzJ5w7KmdW2fgyNxb1MDp30s8A==
+X-Received: by 2002:a05:6a20:9c97:b0:1f5:79c4:5da6 with SMTP id adf61e73a8af0-2017978093dmr1263685637.5.1744332125034;
+        Thu, 10 Apr 2025 17:42:05 -0700 (PDT)
+Received: from apollo.localdomain ([2601:646:8201:fd20::c043])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-73bd21c6464sm226987b3a.64.2025.04.10.17.42.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 10 Apr 2025 17:42:04 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 10 Apr 2025 17:35:38 -0700
-X-Gm-Features: ATxdqUHcjUbXu0Ku4mW1g9ilYy3XDblvXRxJ_upKjtWCM2pFhLXnM6lE_aFVpGg
-Message-ID: <CAMKF1so7xdVHgWo6sPZ+GwZgrAL-c+a2Ws0LO4saYT3a6c09+A@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2 1/5] opencl-headers: upgrade to 2024.10.24
-To: dmitry.baryshkov@oss.qualcomm.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Rob Woolley <rob.woolley@windriver.com>
+Subject: [meta-oe][meta-python][PATCH 01/12] qhull: Add recipe
+Date: Thu, 10 Apr 2025 17:41:50 -0700
+Message-ID: <20250411004201.3826913-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.49.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Apr 2025 00:36:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116774
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Apr 2025 00:42:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116775
 
-On Thu, Apr 10, 2025 at 3:05=E2=80=AFPM Dmitry Baryshkov via
-lists.openembedded.org
-<dmitry.baryshkov=3Doss.qualcomm.com@lists.openembedded.org> wrote:
->
-> On Tue, Apr 08, 2025 at 01:20:54PM +0300, Dmitry Baryshkov wrote:
-> > Upgrade OpenCL-Headers to the latest release. Upgrade opencl-clhpp with
-> > the same commit so that they stay in sync, otherwise projects using
-> > clhpp might fail to build.
-> >
-> > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> > ---
-> >  .../{opencl-clhpp_2024.05.08.bb =3D> opencl-clhpp_2024.10.24.bb}  | 2 =
-+-
-> >  ...pencl-headers_2024.05.08.bb =3D> opencl-headers_2024.10.24.bb} | 2 =
-+-
-> >  2 files changed, 2 insertions(+), 2 deletions(-)
-> >  rename meta-oe/recipes-core/opencl/{opencl-clhpp_2024.05.08.bb =3D> op=
-encl-clhpp_2024.10.24.bb} (91%)
-> >  rename meta-oe/recipes-core/opencl/{opencl-headers_2024.05.08.bb =3D> =
-opencl-headers_2024.10.24.bb} (89%)
->
-> Khem, gracious ping for v2.
+This recipe is needed to build latest version of matplotlib python module
+when internal vendored modules are not used which is preferred here, avoids
+complicating recipe to counter meson's wrap logic
 
-Thanks, it will be in master-next tonight, I was holding up some
-patches for clearing up walnascar
->
-> --
-> With best wishes
-> Dmitry
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#116773): https://lists.openembedded.org/g/openembedde=
-d-devel/message/116773
-> Mute This Topic: https://lists.openembedded.org/mt/112150276/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Rob Woolley <rob.woolley@windriver.com>
+---
+ .../recipes-extended/qhull/qhull_2020.2.bb    | 23 +++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/qhull/qhull_2020.2.bb
+
+diff --git a/meta-oe/recipes-extended/qhull/qhull_2020.2.bb b/meta-oe/recipes-extended/qhull/qhull_2020.2.bb
+new file mode 100644
+index 0000000000..4533b0a337
+--- /dev/null
++++ b/meta-oe/recipes-extended/qhull/qhull_2020.2.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION = "library to compute convex hulls, Delaunay triangulations and Voronoi diagrams."
++HOMEPAGE = "http://www.qhull.org/"
++SECTION = "libs"
++LICENSE = "Qhull"
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=484ee0cacf0472e8b40225b116f6296c"
++
++SRC_URI = "http://www.qhull.org/download/qhull-2020-src-8.0.2.tgz"
++SRC_URI[sha256sum] = "b5c2d7eb833278881b952c8a52d20179eab87766b00b865000469a45c1838b7e"
++
++CFLAGS += "-fPIC"
++
++EXTRA_OECMAKE += "\
++    -DCMAKE_SKIP_RPATH=ON \
++"
++
++inherit cmake
++
++# The QhullTargets-noconfig.cmake checks for the executables despite not
++# needing to execute them for the build.  Staging bindir to the sysroot
++# allows us to pass the check without building qhull natively
++SYSROOT_DIRS:append = " \
++    ${bindir} \
++"
 
