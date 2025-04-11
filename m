@@ -1,164 +1,118 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A347DC36010
-	for <webhook@archiver.kernel.org>; Fri, 11 Apr 2025 05:50:18 +0000 (UTC)
-Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com [209.85.167.46])
- by mx.groups.io with SMTP id smtpd.web11.18816.1744350615237612343
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B2351C369A2
+	for <webhook@archiver.kernel.org>; Fri, 11 Apr 2025 05:58:28 +0000 (UTC)
+Received: from mail-ot1-f44.google.com (mail-ot1-f44.google.com [209.85.210.44])
+ by mx.groups.io with SMTP id smtpd.web10.18802.1744351101818740128
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Apr 2025 22:50:15 -0700
+ Thu, 10 Apr 2025 22:58:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=llEVdHpR;
- spf=pass (domain: gmail.com, ip: 209.85.167.46, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-54954fa61c9so2065820e87.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 22:50:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=VrLXcoRd;
+ spf=pass (domain: gmail.com, ip: 209.85.210.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f44.google.com with SMTP id 46e09a7af769-72c7336ed99so509178a34.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 22:58:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744350613; x=1744955413; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1744351101; x=1744955901; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=K8tNHfPgaJhFfyhtg/W6uEEgDkIGYxiq9G2Bk6T6ITc=;
-        b=llEVdHpRDVw+nYPxAelczAZ4sliiQc6sUGB0MtrudF3nIgJVdgYJ+ve5ZroKpADb5h
-         1hoYmoLINMluOrGm8ufMyLPDiRRdNYJckRraN2BeGbo4EyWywxOzWxpm/pJ+egP//uv5
-         dgEfVxkNNJx4o0P68vbyNewi0iTmc2UrWEZO9VPFyvcaEWSzyTVC0zoZGUfk0/uPxg6y
-         Dm8ToHWwN3FiUxFAGZ230iy4SF4wewcgZUc5dxE9BOMpV3qXd5EXDr+qcNpY6QWij7NN
-         wYl61b9TeNjXI2usiRhzcOdyDJvfBHNtgllgziNdFgYKKNdQm4ePw3WdLvhauSx+dE1x
-         D5Dw==
+        bh=YT1cOi/ewHd8vKAH7c4p0tcr5SuPgTGfdhZThuhwQMI=;
+        b=VrLXcoRdfY+SRHV1zkB7uWTazqRd3rXEJeudSfl+lZrNyqmt1ApzIrtzm6DnDa6YLU
+         KkF+F7STTLL2c5Iz9ebmerAlbmP3VB5w9SJ6NaDDJUj+YGWS+2CJcYz/MgADRFQBLPJC
+         2JUvPv1YORJpC35j3/gyAcyd/ylLOiE5ABCOD6UotLi+Ei9gPu96usSclLT6BJdAVqAO
+         zqhwFO13YTo+Iy0uEcGxm/IcZtuOdTTLbSubWnOqkqCNAUioJzjuWyy/o1KynTXsIQjz
+         Bq66Y/wPka/5CifQ0D3fz+ARSsSFwIQhfQXX0j3L8yZlq5s1akPE1Bg6B0aBMuAKVyPq
+         vssQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744350613; x=1744955413;
+        d=1e100.net; s=20230601; t=1744351101; x=1744955901;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=K8tNHfPgaJhFfyhtg/W6uEEgDkIGYxiq9G2Bk6T6ITc=;
-        b=Od4/HHcuSf6P8CIqwcACnR2H21q/THFHSnko75KKtQT9zGyps0BQJ6dEtFkIdHqQbY
-         UmT+9SGBhoT3yyDyqJzcmJ2obLGWBC57QXtI7UFdrG3/r9Et7Eui9tgab+ev73Pj9xdB
-         BSnNwQNbsE7y5o8YlyRPFyOJy85a++4XKfDX92m2DmO78An3aN9sGe7Bts43mH9HJHZS
-         LBr8rPDHfFhXkZYTR5wJuh8Vd41KK7HbQ9PYuglbUXh42fDn1TrCbJO/g4LVR7htd5W6
-         iX63AcYewCAT6rcOgSTLVsJR3Am+62ypRkSk9IxKbI2IisHHocNGCHB1/MCWA8RhKS6+
-         45XA==
-X-Forwarded-Encrypted: i=1; AJvYcCWvrV/CZ229vvXXjOHHorvI1KkUzsiNl8awKHebL7dyQZCiqCnjur+fWiOBTwklza/oxED6gxSAQY4QZLrPBry5JqY=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yyud5/YbsdsNjuYV5cm1c6NScCe648qmOJeq1Zt69REnEVy3j18
-	XF7kXFSs43ql/UBCnPrUDcWkkj49jmc1ZZngzDH8VbfuLafNEzPwgueZizGFuvASVVoebzb3D7a
-	7TmnBUBb9P1bi6PrEE9ukuSzwR/k=
-X-Gm-Gg: ASbGncuqPaCaPVlsC9QxGC2FiWxdzFV0rZQABzpjwvXbZ9UQ/pVEMbOhory/vNHvsHW
-	8mZbLTRUd/ZFRaXKlgazeIp5PXshd8GcTOEt2QsYSdhKtfO8/qnkPsb1gcbvdPfEHQ5PplV2ua4
-	euHFM+Zh5+azE4gxK5lmNorWrv
-X-Google-Smtp-Source: AGHT+IH55cBDVz8R0GDpyu9ypti4+GDHbHMLSPjfPuT4AE/eObMH3Dw6WlJSBuc4V7PXLS4yd1E2uoNUF0RJ64oeNKU=
-X-Received: by 2002:a2e:bccc:0:b0:308:e54d:61b1 with SMTP id
- 38308e7fff4ca-31049aadff2mr4692261fa.34.1744350612653; Thu, 10 Apr 2025
- 22:50:12 -0700 (PDT)
+        bh=YT1cOi/ewHd8vKAH7c4p0tcr5SuPgTGfdhZThuhwQMI=;
+        b=aiAnmF+tEKtqO/tSEjIicoga8zjENDAWB8KGSvmeB7yJrmPxFob+7ZVvMyPiPtIagS
+         CP+jFHRESfoW3wx5aGLysWpx2RfUgtTJwg1tBK37lPCKe9JURqqF+MK62jc3LE4FV4Eh
+         L4pChVpilQgady2YCS80/JJiYhQ4ra2LNksMy1wXdlElJVQrS+Ix6HM0mnRsB2Qz1aUu
+         Fdj8SJrTGmrwQPklU2kBXOjCqRTjKTQRp4LqBRd3sKUFhoWe3jNE2wjpLbp8fvs43Vf3
+         agy01b93i4c1NdpmCW2ZWoSljPFEutb1jOKXSMKAUVSRcK/xVPT3OXDTrgrQM0LF2hOI
+         RO2w==
+X-Gm-Message-State: AOJu0YyBfBdutGAG4R5DMiPNegxR3JfBZSh1qmOk6pej1084DQqohWqG
+	ukwDwA9UjS/H4SqqeMRsoTBVgkCxD/uq7Xv6xgthdJekEvvKIek3zuuUAcQj3pd1MCRLdFBRBSr
+	KtNrc2H4U9U9E0uNyqDF8RACvzZM=
+X-Gm-Gg: ASbGncv3Awdv2JQOKkqZqhPGIk7xxZmm//l+2lG5hjK8ANaluP9IEqxszgEw6ptMIYa
+	gO9RsBrUIM0cReHoqUDGrMQK9Ap4XY7Bvk1GjfbgT37RpJIpEouSUYnWUpSSJ9+A+13A/CRArUk
+	0qXjLFkPiFk1xvZnPZzUz4BQ==
+X-Google-Smtp-Source: AGHT+IFHTmyzbUpGm7Y8YdkfBiQS2wGzSuun3UVP2ou2v576JE+26v8kg0HT9oarc9FUVlkBTcjym/LfcPa6sFp1aDQ=
+X-Received: by 2002:a05:6830:6b0c:b0:72b:9bb3:67cf with SMTP id
+ 46e09a7af769-72e86305cf4mr1146613a34.9.1744351100903; Thu, 10 Apr 2025
+ 22:58:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <1744189624-6858-1-git-send-email-wangmy@fujitsu.com>
- <CAMKF1soQDwGmhh=uvuL1pCTm5aZZg4QYOTPx+VX1fAi9BvFcYw@mail.gmail.com> <CAMKF1soS0p0pNX1NNYAkBNJCBpTELboR_08H9657iFb1oEyz3Q@mail.gmail.com>
-In-Reply-To: <CAMKF1soS0p0pNX1NNYAkBNJCBpTELboR_08H9657iFb1oEyz3Q@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 11 Apr 2025 07:50:00 +0200
-X-Gm-Features: ATxdqUG7MEZtgAD8OoRyR5Lvh3YeZJdW0qFi7bv6r-izoBBl4N2oWQgPdM07YxA
-Message-ID: <CA+chaQc+x7SAueERdfN8pEhJ+-BoznWaj-623L1WA=McqzdMmw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH v2] libspdm: upgrade 3.6.0 -> 3.7.0
-To: raj.khem@gmail.com
-Cc: wangmy@fujitsu.com, openembedded-devel@lists.openembedded.org
+References: <20250411052327.2144966-1-changqing.li@windriver.com>
+In-Reply-To: <20250411052327.2144966-1-changqing.li@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 10 Apr 2025 22:57:55 -0700
+X-Gm-Features: ATxdqUE4wdpYRpawDSWOsX0_nwYhlfj2aYaJJntgW1xjACGUD_Afy9Qu8HupHOc
+Message-ID: <CAMKF1sruOtHeOttcBPjBUi2_yd3C6b5Tp3wuJk1ktFf_1Sinjw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] lsscsi: update PV to the real version
+To: changqing.li@windriver.com
+Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Apr 2025 05:50:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116794
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Apr 2025 05:58:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116795
 
-I'm seeing this error as well.
+On Thu, Apr 10, 2025 at 10:23=E2=80=AFPM Changqing Li via
+lists.openembedded.org
+<changqing.li=3Dwindriver.com@lists.openembedded.org> wrote:
+>
+> From: Changqing Li <changqing.li@windriver.com>
+>
+> Update PV to the real version 0.30, this can make PV aligned with the
+> runtime version
+>
 
-https://github.com/openssl/openssl/issues/27344 looks related but was
-closed as not reproducible, not sure what's going on.
+the new version "0.30" does not sort higher than the old version "030"
+so if we have to do it we need
+to set PE as well
 
-On Fri, Apr 11, 2025 at 3:57=E2=80=AFAM Khem Raj via lists.openembedded.org
-<raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
+> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> ---
+>  meta-oe/recipes-bsp/lsscsi/{lsscsi_030.bb =3D> lsscsi_0.30.bb} | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-oe/recipes-bsp/lsscsi/{lsscsi_030.bb =3D> lsscsi_0.30.bb} (9=
+2%)
 >
-> This seems likely due to openssl upgrade in core
+> diff --git a/meta-oe/recipes-bsp/lsscsi/lsscsi_030.bb b/meta-oe/recipes-b=
+sp/lsscsi/lsscsi_0.30.bb
+> similarity index 92%
+> rename from meta-oe/recipes-bsp/lsscsi/lsscsi_030.bb
+> rename to meta-oe/recipes-bsp/lsscsi/lsscsi_0.30.bb
+> index 63b94e9d6e..ba52bdaf12 100644
+> --- a/meta-oe/recipes-bsp/lsscsi/lsscsi_030.bb
+> +++ b/meta-oe/recipes-bsp/lsscsi/lsscsi_0.30.bb
+> @@ -10,4 +10,4 @@ SRC_URI[sha256sum] =3D "619a2187405f02c5f57682f3478bffc=
+75326803cd08839e39d434250c5
 >
-> 92c32a6de92 openssl: upgrade 3.4.1 -> 3.5.0
+>  inherit autotools
 >
-> On Thu, Apr 10, 2025 at 6:51=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wro=
-te:
-> >
-> > it still fails for me.
-> >
-> >
-> > build/tmp/work/core2-64-yoe-linux/libspdm/3.7.0/git/os_stub/cryptlib_op=
-enssl/pem/pem.c
-> >    In file included from
-> > build/tmp/work/core2-64-yoe-linux/libspdm/3.7.0/git/os_stub/cryptlib_op=
-enssl/pem/pem.c:12:
-> >   build/tmp/work/core2-64-yoe-linux/libspdm/3.7.0/recipe-sysroot/usr/in=
-clude/openssl/pem.h:399:28:
-> > error: unknown type name '
-> >    =E2=86=AA OSSL_i2d_of_void_ctx'
-> >      399 | int PEM_ASN1_write_bio_ctx(OSSL_i2d_of_void_ctx *i2d, void *=
-vctx,
-> >          |                            ^
-> >    1 error generated.
-> >    [37/176] Building C object
-> > os_stub/cryptlib_openssl/CMakeFiles/cryptlib_openssl.dir/pk/x509.c.o
-> >    FAILED: os_stub/cryptlib_openssl/CMakeFiles/cryptlib_openssl.dir/pk/=
-x509.c.o
-> >
-> > On Wed, Apr 9, 2025 at 2:07=E2=80=AFAM wangmy via lists.openembedded.or=
-g
-> > <wangmy=3Dfujitsu.com@lists.openembedded.org> wrote:
-> > >
-> > > From: Wang Mingyu <wangmy@fujitsu.com>
-> > >
-> > > Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> > > ---
-> > >  .../libspdm/{libspdm_3.6.0.bb =3D> libspdm_3.7.0.bb}             | 3=
- ++-
-> > >  1 file changed, 2 insertions(+), 1 deletion(-)
-> > >  rename meta-oe/recipes-support/libspdm/{libspdm_3.6.0.bb =3D> libspd=
-m_3.7.0.bb} (95%)
-> > >
-> > > diff --git a/meta-oe/recipes-support/libspdm/libspdm_3.6.0.bb b/meta-=
-oe/recipes-support/libspdm/libspdm_3.7.0.bb
-> > > similarity index 95%
-> > > rename from meta-oe/recipes-support/libspdm/libspdm_3.6.0.bb
-> > > rename to meta-oe/recipes-support/libspdm/libspdm_3.7.0.bb
-> > > index 4c0483ebac..a3012e10bd 100644
-> > > --- a/meta-oe/recipes-support/libspdm/libspdm_3.6.0.bb
-> > > +++ b/meta-oe/recipes-support/libspdm/libspdm_3.7.0.bb
-> > > @@ -10,7 +10,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3D8f9b5=
-9a81a88da8e812af43728b72dd7"
-> > >  DEPENDS =3D "openssl"
-> > >
-> > >  SRC_URI =3D "git://github.com/DMTF/libspdm.git;branch=3Dmain;protoco=
-l=3Dhttps"
-> > > -SRCREV =3D "5ebe5e3946b9439928fa3a7548268c29cccc1b16"
-> > > +SRCREV =3D "1be116c7b7713fa9003e1bd53b53a34758549eb9"
-> > >
-> > >  S =3D "${WORKDIR}/git"
-> > >
-> > > @@ -23,6 +23,7 @@ LIBSPDM_CFLAGS =3D "\
-> > >         -DLIBSPDM_ENABLE_CAPABILITY_GET_KEY_PAIR_INFO_CAP=3D0 \
-> > >         -DLIBSPDM_ENABLE_CAPABILITY_SET_KEY_PAIR_INFO_CAP=3D0 \
-> > >         -DLIBSPDM_HAL_PASS_SPDM_CONTEXT=3D1 \
-> > > +        -DLIBSPDM_ENABLE_CAPABILITY_ENDPOINT_INFO_CAP=3D0 \
-> > >         "
-> > >
-> > >  LIBSPDM_CFLAGS:append:toolchain-gcc =3D " -fPIE"
-> > > --
-> > > 2.43.0
-> > >
-> > >
-> > >
-> > >
+> -S =3D "${WORKDIR}/lsscsi-${PV}r154"
+> +S =3D "${WORKDIR}/lsscsi-030r154"
+> --
+> 2.34.1
+>
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#116790): https://lists.openembedded.org/g/openembedde=
-d-devel/message/116790
-> Mute This Topic: https://lists.openembedded.org/mt/112168951/3617156
+> View/Reply Online (#116791): https://lists.openembedded.org/g/openembedde=
+d-devel/message/116791
+> Mute This Topic: https://lists.openembedded.org/mt/112205589/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 
