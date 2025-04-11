@@ -1,110 +1,108 @@
-Return-Path: <dmitry.baryshkov@oss.qualcomm.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 35240C3601E
-	for <webhook@archiver.kernel.org>; Thu, 10 Apr 2025 22:05:56 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.web11.11126.1744322749813049055
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E7FFFC3601E
+	for <webhook@archiver.kernel.org>; Fri, 11 Apr 2025 00:36:06 +0000 (UTC)
+Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
+ by mx.groups.io with SMTP id smtpd.web11.14018.1744331765887754853
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Apr 2025 15:05:49 -0700
+ Thu, 10 Apr 2025 17:36:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=ezCdr/VG;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53AGBw5S028891
-	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 22:05:49 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=eQe9NhJSRenAm2huGrE66EMb
-	w8H8S5gs1cjO1XvC9+I=; b=ezCdr/VG/O9dFf8UawbkpwAcItFajhQ2OBVkmPEO
-	O7vMLMfO8povaisbXgkpwMOL9GUxg896VTGlGOQ+EVYPUNdIYrS0ihGqZbx04HWf
-	GMQDskMHd6lUavKJhU0xhRW7KXXVoWreIPVbVxamEwXRlYiPi24aXV/+/CFr0/nW
-	i6DlALdB4dk5KXqwVylpRXp0khM3Gu7jg9dqs+XZ3XZ8GJXxPN9ENPrdEk6b1thg
-	N1IsuLPacsIw75LrTNVdrjVsNVRDhdBFRs/QDJeGeBIi8HMbB4X4tqt1uDT8mkWc
-	r1bf+Rojh/LWsSYDRwcddSOFu61SEOe0XKlfrM40EFtNzw==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 45twburf02-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 22:05:49 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-7c790dc38b4so229333485a.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 15:05:49 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744322748; x=1744927548;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=W1CSr/6N;
+ spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f48.google.com with SMTP id 46e09a7af769-72c13802133so414649a34.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 17:36:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1744331765; x=1744936565; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=eQe9NhJSRenAm2huGrE66EMbw8H8S5gs1cjO1XvC9+I=;
-        b=sBTu3Q06pGKmxjmBWJ2HlzPtvbG1w4BHDsVUurrpYA5bCK9RIrOel7OmsrHIOmd76e
-         zRbtUZjjdhv0FAk6cehr4Mg+XN74GAeAY+looGAT3zZLMOjP5AAzzvbxmLT31lDwG8KY
-         v+elyLY0+gPe/SYNLfqBTr70KpzjFeMtTpa55wPFY1a2L7t9pnKj1pbC9bQjNAhS606D
-         VTxAFHPcCI5YBZrEEKh5r8CmwZXN5fAeDg3D8lRvsjT5tNtYc4E1z65qPrHJG42C4PC3
-         VtvnbMDjsDdsmV8l+ENZfkjEjzRKB4SYWQXhuypiQoJTyWoolkB1+La9BLcrDPAHqveg
-         uAQg==
-X-Gm-Message-State: AOJu0YyFpQfjdqtdYtNVcyElEU/n6GnAYk2jHmYuiesDWbEc8SfvSqaD
-	2O0DO0lqtNpsyhEHYD8UD0Y/wRf9xGz+8iRC6SBMzzDjESsOk7mj3L0selJ4//ucSN2g808Iq2K
-	bzCuXdGv8frRDdA36olWMMF2Ab1UAxDpn8w/SdtIGWl5ZsHdfFlbXOtqMKtaa7QQauHTZFq4k0o
-	kvw6xWPAw1/veF
-X-Gm-Gg: ASbGncviT9C9GUSU4KfrHZyvVn54iY6AEtd1Wv1LPc/gJPpfNz71moXjqswINNwG3+0
-	k8PkMAnMvpMCO+uCEZT5LMJs9SM61NoUBRL/mljOFsbf6rH98+kt0qgziO57Q9L0GJC6MwE5uh6
-	+MsVQiTP3k8oXP7OcIiQWbO9csIGpl72pdwJ9YGNhs9VtF6rsaUHJgH0cYVfOuHmkeU6olt7Qg2
-	iN2HRXmJmy6AKq139oTwDFZOVNeZw+jdDruGHqChPSSAbh0+X45bGEt3nPhqp7ZscIzUIzJnjac
-	XqSp4GMXBKvcWTpEA8siFlDB4MIpWOjvmHYAtWPznQJLvQ03T4yFFjRLTvSMPB2On71saTCSsbE
-	=
-X-Received: by 2002:a05:620a:414b:b0:7c3:c512:9b1a with SMTP id af79cd13be357-7c7a76b96dbmr603361585a.22.1744322747597;
-        Thu, 10 Apr 2025 15:05:47 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IH+E5gHNngOZWprqKBONGNJCCuET6//fRunMqPnmdOfwnH4PE8rylUZHAgUv0ToWXszYietsw==
-X-Received: by 2002:a05:620a:414b:b0:7c3:c512:9b1a with SMTP id af79cd13be357-7c7a76b96dbmr603357985a.22.1744322747142;
-        Thu, 10 Apr 2025 15:05:47 -0700 (PDT)
-Received: from eriador.lumag.spb.ru (2001-14ba-a0c3-3a00--7a1.rev.dnainternet.fi. [2001:14ba:a0c3:3a00::7a1])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-54d3d5201b0sm254133e87.246.2025.04.10.15.05.46
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Apr 2025 15:05:46 -0700 (PDT)
-Date: Fri, 11 Apr 2025 01:05:44 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v2 1/5] opencl-headers: upgrade to 2024.10.24
-Message-ID: <vcqsx7hy5jlmcwwpq5vbydou6k2yehxjxv7nsnqm2iartl7kn7@tshogi7vdy5b>
-References: <20250408102058.2769630-1-dmitry.baryshkov@oss.qualcomm.com>
+        bh=3EyNA6nD7i9UKsf+VcXHoc7xiCnAfh924xz27INqKEA=;
+        b=W1CSr/6NtYHjIudoLx75KQsHZDT57NySI70WQIFbkxUSMlyTXWYbAFnzv9xSsl1R1a
+         ZJdH5SmYQsU75DOxXQwWdRrJKYlLY19d43SJJNlbUuF2fAMsF5pvEJvRQ2FZizt+76/Q
+         P6ejNJ5WLPJdRtzL6dcf5Peqm/RlQgjgBIMJq069bTR0VOnmk6ml3IyRp99RrmPva4jp
+         x/dlxmKs8OOf9NxCRt3iSlICIlOiYMeALz1HlPFqrET9EIOlmr3EDMoVg5RC0jD+Wolc
+         fGG3OlHfLlx+mnYPFFsG8r8kzoZq7IA88XYkAkCZMz/Dur8VgFWRtV514QlToiX3ETiY
+         rguw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1744331765; x=1744936565;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=3EyNA6nD7i9UKsf+VcXHoc7xiCnAfh924xz27INqKEA=;
+        b=pbaI9GRKEg10/b2w+zFQ3Ke92Hohy8wppaQChwl+eAPnxWZVbr6y8QlfRnrJtQF/Jk
+         ev6gRoNXebyMgeg81ex6fenzQi7iJKICQYkGM0ZRjJ5YQklE7Js1XwseWGxU7pCULdwN
+         aUAKWXR/tD6tbPtXj5Z7xQ/EzQyTUsjS6ZMARPBs3SR1LY9JKke7cCuqtX0aCsv76vSI
+         CL/dDyeGylj0b9LSZftM5yVbR/4rhSEO37dWFvcY3wV/8+qEI2xTxUfH05Z1QhEq0nc7
+         AVjjPvljV6bhRWUA93xUiSRde4hYYe9ddfpYThtUwrqjm5YINlJ2AJnyCbtGJpi8LUso
+         oH7w==
+X-Gm-Message-State: AOJu0YzVvuENIAQFy6M2/JMERpg3QzXlsr8U5JojU9pzkT2KaF0vAjc/
+	ZzK7kYEzk9CVY3eKw9Z17y+C/Axe0mL3Ig8BtAraG4zE09tjbjsCGEeEo6K0nHt4Rb3L1GFtzpA
+	4tMEbVYRYsjDTQlIv09nlC2WYaC0=
+X-Gm-Gg: ASbGncvOSL17B7IJ79nqR/2n/Vc5kFTKsnk8JiLOoAateMsvRQUGvM3ELP1XKBlhydr
+	jm5Hu4yWXi0jlenyHVUD3iaESposuo3eOnsKTp69CY44QZSXggRVMqqSmQuaqgauQTFyko2F9vO
+	rRoF0mBuM2+ZQKHL6gdfCkeg==
+X-Google-Smtp-Source: AGHT+IHwBBlEeF915u/SJ5cicvYO5LuYOfj2edmKno5qW5XaTFOFI0MD8g82s8ImBgury1uOuYfuvtksiNUaTPcCd0E=
+X-Received: by 2002:a05:6830:6587:b0:72b:93df:9213 with SMTP id
+ 46e09a7af769-72e86307e08mr700239a34.10.1744331765008; Thu, 10 Apr 2025
+ 17:36:05 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250408102058.2769630-1-dmitry.baryshkov@oss.qualcomm.com>
-X-Proofpoint-GUID: youKVCvhLEkiHZE4RK8ZDVkv_454myT3
-X-Proofpoint-ORIG-GUID: youKVCvhLEkiHZE4RK8ZDVkv_454myT3
-X-Authority-Analysis: v=2.4 cv=dbeA3WXe c=1 sm=1 tr=0 ts=67f840bd cx=c_pps a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10 a=XR8D0OoHHMoA:10 a=EUspDBNiAAAA:8 a=sCSw_Xtk_YupkP8Gdo0A:9 a=CjuIK1q_8ugA:10 a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-10_07,2025-04-10_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
- suspectscore=0 mlxlogscore=888 phishscore=0 mlxscore=0 spamscore=0
- malwarescore=0 clxscore=1015 adultscore=0 priorityscore=1501
- lowpriorityscore=0 bulkscore=0 classifier=spam authscore=0 authtc=n/a
- authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.19.0-2502280000 definitions=main-2504100160
+References: <20250408102058.2769630-1-dmitry.baryshkov@oss.qualcomm.com> <vcqsx7hy5jlmcwwpq5vbydou6k2yehxjxv7nsnqm2iartl7kn7@tshogi7vdy5b>
+In-Reply-To: <vcqsx7hy5jlmcwwpq5vbydou6k2yehxjxv7nsnqm2iartl7kn7@tshogi7vdy5b>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 10 Apr 2025 17:35:38 -0700
+X-Gm-Features: ATxdqUHcjUbXu0Ku4mW1g9ilYy3XDblvXRxJ_upKjtWCM2pFhLXnM6lE_aFVpGg
+Message-ID: <CAMKF1so7xdVHgWo6sPZ+GwZgrAL-c+a2Ws0LO4saYT3a6c09+A@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v2 1/5] opencl-headers: upgrade to 2024.10.24
+To: dmitry.baryshkov@oss.qualcomm.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 22:05:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116773
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Apr 2025 00:36:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116774
 
-On Tue, Apr 08, 2025 at 01:20:54PM +0300, Dmitry Baryshkov wrote:
-> Upgrade OpenCL-Headers to the latest release. Upgrade opencl-clhpp with
-> the same commit so that they stay in sync, otherwise projects using
-> clhpp might fail to build.
-> 
-> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> ---
->  .../{opencl-clhpp_2024.05.08.bb => opencl-clhpp_2024.10.24.bb}  | 2 +-
->  ...pencl-headers_2024.05.08.bb => opencl-headers_2024.10.24.bb} | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-core/opencl/{opencl-clhpp_2024.05.08.bb => opencl-clhpp_2024.10.24.bb} (91%)
->  rename meta-oe/recipes-core/opencl/{opencl-headers_2024.05.08.bb => opencl-headers_2024.10.24.bb} (89%)
+On Thu, Apr 10, 2025 at 3:05=E2=80=AFPM Dmitry Baryshkov via
+lists.openembedded.org
+<dmitry.baryshkov=3Doss.qualcomm.com@lists.openembedded.org> wrote:
+>
+> On Tue, Apr 08, 2025 at 01:20:54PM +0300, Dmitry Baryshkov wrote:
+> > Upgrade OpenCL-Headers to the latest release. Upgrade opencl-clhpp with
+> > the same commit so that they stay in sync, otherwise projects using
+> > clhpp might fail to build.
+> >
+> > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> > ---
+> >  .../{opencl-clhpp_2024.05.08.bb =3D> opencl-clhpp_2024.10.24.bb}  | 2 =
++-
+> >  ...pencl-headers_2024.05.08.bb =3D> opencl-headers_2024.10.24.bb} | 2 =
++-
+> >  2 files changed, 2 insertions(+), 2 deletions(-)
+> >  rename meta-oe/recipes-core/opencl/{opencl-clhpp_2024.05.08.bb =3D> op=
+encl-clhpp_2024.10.24.bb} (91%)
+> >  rename meta-oe/recipes-core/opencl/{opencl-headers_2024.05.08.bb =3D> =
+opencl-headers_2024.10.24.bb} (89%)
+>
+> Khem, gracious ping for v2.
 
-Khem, gracious ping for v2.
-
--- 
-With best wishes
-Dmitry
+Thanks, it will be in master-next tonight, I was holding up some
+patches for clearing up walnascar
+>
+> --
+> With best wishes
+> Dmitry
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#116773): https://lists.openembedded.org/g/openembedde=
+d-devel/message/116773
+> Mute This Topic: https://lists.openembedded.org/mt/112150276/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
