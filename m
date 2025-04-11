@@ -2,61 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F693C369A6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F666C3601E
 	for <webhook@archiver.kernel.org>; Fri, 11 Apr 2025 00:42:27 +0000 (UTC)
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
- by mx.groups.io with SMTP id smtpd.web10.14024.1744332137077584166
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+ by mx.groups.io with SMTP id smtpd.web11.14152.1744332138454013240
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Apr 2025 17:42:17 -0700
+ Thu, 10 Apr 2025 17:42:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gcZgOToK;
- spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-736c3e7b390so1352257b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 17:42:17 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=l6mWsZ1w;
+ spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2241053582dso19870425ad.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Apr 2025 17:42:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744332136; x=1744936936; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1744332137; x=1744936937; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=d1of0wgCXrJNJz1YWQ+slG/ZGAqySsTwInmzsa3BuMY=;
-        b=gcZgOToKtG/NhYpFO2Fg9C5yxkB5OOBPWO9gO6W1o9SUZmKS7b1fHvtploVto0ahz6
-         rzQm4H5LQpa0z8FBlSXPL+t85gnzUBJdRQbZAF2TE35zFaod1hGIbUYHxFj7tkIdOjSk
-         go5CukPJ1DZ+hi6lLlcwndXavvYxe1u73mdg6RZhtAQ21LGb+pgunvRMvYGWmvlGEMBk
-         Dn7FTfHWTjZ7qROn57n1kMbCdOpdke2KiZynHxVJlUiMhnpf0F7kfhhfbvrKT7ZRK6Yx
-         y+NBzp1fnuBr5JcOh9ubSj+0OH/iHZelgnZ5mCF8Bn4V3XVjXUA3Pb1Cn9SFkPeleNp2
-         oyRw==
+        bh=1VE5JnvSDiw0jDvbKj/Y11HOf7ETL4kkTj8RcHUlNhA=;
+        b=l6mWsZ1wPbaz399rwlMjd4xPGOIQ8VOGfK26GOYELrW14TGXr/NUms2+xB4aSDka1V
+         80ApU27+g1QuX+HVp5y7DR82qeL7k6Ly25EHPHnQL+Xq5JvjSfx915MZ5qQMavWeMgfQ
+         3GPrRLujXz3jHAUKTWPIOAxS0iV67QCqA2PwHxnEJz5vHr9u/8RqA6N+p26m9XNUzGLH
+         xebzso7r69AWPR5MkV0c2eijZzCMMj9EIUvxuGAzDSlDJRV1ReytdT9S/pW5AD0c4wWG
+         UiDSSMNrV6l1VpHMEaAdN5VjsbwFobmrRvoSi8XChHL7LovyiTq/0R80p1q4aooyVTBA
+         d0cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744332136; x=1744936936;
+        d=1e100.net; s=20230601; t=1744332137; x=1744936937;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=d1of0wgCXrJNJz1YWQ+slG/ZGAqySsTwInmzsa3BuMY=;
-        b=D0gHp+5DSxuap9NHaW2a/av5A3mMrTMD4+/JmhlyAEBCJSK32r9CQUqN3ye7HoouoQ
-         hyiqfvsKDf9iahgzwG+xFssGvyxYc+OLNJftyZ3yBBBV0ioQa3ZIQKRguZSiWLtIwiU8
-         /R5GEeBoUnTAzxDUAGr4vgWbi87e1e5uwv/QtVJkWAVgl91cTgIP2JUMVbg7Zka9ytUd
-         iN1cNZ6uce/JnuXsAIocNRyI6QbKHvLqdBqRXnWRzV78q4L09g1y1c6UtnDWncJ3tvPN
-         jG9wqvHP5n7bUNLLTDFZ5dDRr1rQfr3YXOOc8w6jQXcaNC965QtK9zzXy+jouJgZs8uT
-         dpyA==
-X-Gm-Message-State: AOJu0YzITh+P+gBtQSl92bXqAIZgOgsE6JK5dflTuBc9uMdA2OxIvup9
-	YBTdk3f23ryHB/PawtM+fXPVWp/Fyw2axz2I16Zre42G4HS95Dgsmum65Rv6
-X-Gm-Gg: ASbGncuazr90AomR35ZtLe/h1+XN3qb0tgZGcpg6kGXv66d7WE8PGpPurI4ohSRJWFL
-	5QeJuSkXA3d8jGkmnHFyXAmljhMnvRdzTPZVivpCwQPQLVSTc3c19AynTHnLBqs17Nffp/5eRmo
-	UvkxUUJdMJsFXRax1ibt+/cDhHFkT3SbfB+T47QhZ0B5LwTTo1qSJlORGGWo5sGb2VjSQQEToYq
-	IuVLdTS7bzY433AJn8qeCsWkypIi6xn/PTLVRlSGAYRhHmnirM67eO9h/AcAwqpJtKPMnmPC2uj
-	e+J25gZqDtysVm3PwnqkPShkBjNtJPsH
-X-Google-Smtp-Source: AGHT+IFIPkWKCfG85nukypr7BD18H1oec6qXarvQPQwTW5Or/ThnHSqVjGUr62NDno7yPMdW2hymTg==
-X-Received: by 2002:a05:6a21:999b:b0:1f5:86ce:126a with SMTP id adf61e73a8af0-201799906f2mr1338562637.40.1744332136171;
-        Thu, 10 Apr 2025 17:42:16 -0700 (PDT)
+        bh=1VE5JnvSDiw0jDvbKj/Y11HOf7ETL4kkTj8RcHUlNhA=;
+        b=BU/QKm7KzQ9KJHwYPzac/GSmXepeG97D6aAYWhaj7GApsa1h1EweiXeYpADW2P6/Y6
+         A+VfiR7fY4xbznQ5NdFEZzYp1VXLi+NN3wPxOV+2648J5KHHwO+SH6QlABKhYXMu8rif
+         7mQNDOObx+OCs4cxmx66Hr5FHiy2RvBnnK50ZGpohA2UDgD4nJ8VF0OO4pZ+GABUaG3J
+         xjtageuVS4cyvwqG3bo4xOzXGWfZEbVZuf0TqIXjWJ8VhHdr2qIDbxCXl8x+DEO45c+D
+         /CdumCvbYQ/SMY8I2NfZyl9D51FTburh4vQzQZ1LMipGVZ33ifnk/ia54SB68nWClfVQ
+         T2jA==
+X-Gm-Message-State: AOJu0Yy5nu4lr5o0mgSpigvv7cFc60zkjJbftOXQlcpy4XZ5diJMT1Rx
+	GKRBVjR7dgIEvQ013jV/06uyOtq3x6Nacgjc72wb2QroyP5KGtFtYvt/XpKh
+X-Gm-Gg: ASbGncslSOprs+V2ucfdNi3mT65cHRMDGEGiytJ82ygOPHP6P3sfUesrtoeRu9SWw2I
+	ZLMAq/lc9bZBUZeuoZkcjyfY5/3dO0R2bimGItfwnn6VwSMNnE9OjGTjLGWf+aqoLeohU/LVZeZ
+	BcOtfDqf+E9PSpIPDwZTJYiWQdfoFH3oPQagUE7hM790tfgwO4dNh6u4v3I52WTz2YZkyc6C0Bi
+	pEaN8QdwVJch3beYdB5sxyU27Dt4KxPeHBlPhysmKJAkZ4TjdFsVIhAZ6aBRFtQH3Z+36d6TAxN
+	DLWusNwWPqJYac0QXTqqlHio/Hrxha1z
+X-Google-Smtp-Source: AGHT+IF3Y1OdBm6Bd1+oFq5jr6guiw+KiLm3YYSyvSouH1zIcxFakqnJgnqRef2BsWDhlDIKh3UV8g==
+X-Received: by 2002:a17:903:3c68:b0:224:1001:677c with SMTP id d9443c01a7336-22bea4a19f8mr10788825ad.9.1744332137304;
+        Thu, 10 Apr 2025 17:42:17 -0700 (PDT)
 Received: from apollo.localdomain ([2601:646:8201:fd20::c043])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-73bd21c6464sm226987b3a.64.2025.04.10.17.42.15
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-73bd21c6464sm226987b3a.64.2025.04.10.17.42.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Apr 2025 17:42:15 -0700 (PDT)
+        Thu, 10 Apr 2025 17:42:16 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 11/12] pamela: Switch to using PEP-517 build backend
-Date: Thu, 10 Apr 2025 17:42:00 -0700
-Message-ID: <20250411004201.3826913-11-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 12/12] python3-twitter: Switch to use PEP-517 build backend
+Date: Thu, 10 Apr 2025 17:42:01 -0700
+Message-ID: <20250411004201.3826913-12-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250411004201.3826913-1-raj.khem@gmail.com>
 References: <20250411004201.3826913-1-raj.khem@gmail.com>
@@ -66,24 +66,24 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 11 Apr 2025 00:42:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116785
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116786
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-devtools/python/pamela_1.2.0.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-twitter_4.15.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/pamela_1.2.0.bb b/meta-python/recipes-devtools/python/pamela_1.2.0.bb
-index ff87e187ca..d343458aea 100644
---- a/meta-python/recipes-devtools/python/pamela_1.2.0.bb
-+++ b/meta-python/recipes-devtools/python/pamela_1.2.0.bb
-@@ -6,7 +6,7 @@ SRC_URI[sha256sum] = "0ea6e2a99dded8c7783a4a06f2d31f5bdcad894d79101e8f09322e387a
+diff --git a/meta-python/recipes-devtools/python/python3-twitter_4.15.0.bb b/meta-python/recipes-devtools/python/python3-twitter_4.15.0.bb
+index 19c4b8680c..c35b97a9e4 100644
+--- a/meta-python/recipes-devtools/python/python3-twitter_4.15.0.bb
++++ b/meta-python/recipes-devtools/python/python3-twitter_4.15.0.bb
+@@ -8,7 +8,7 @@ SRC_URI[sha256sum] = "1345cbcdf0a75e2d89f424c559fd49fda4d8cd7be25cd5131e3b57bad8
  
- PYPI_PACKAGE = "pamela"
+ PYPI_PACKAGE = "tweepy"
  
 -inherit pypi setuptools3
 +inherit pypi python_setuptools_build_meta
  
- RDEPENDS:${PN} = "libpam"
- 
+ RDEPENDS:${PN} += "\
+     python3-pip \
 
