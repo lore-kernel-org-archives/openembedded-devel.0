@@ -2,61 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C058C369B5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9AA13C369B4
 	for <webhook@archiver.kernel.org>; Sat, 12 Apr 2025 15:30:38 +0000 (UTC)
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web10.12849.1744471828787689296
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web11.12745.1744471832806105272
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 12 Apr 2025 08:30:28 -0700
+ Sat, 12 Apr 2025 08:30:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kbjGD6/p;
- spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2264aefc45dso43515745ad.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Apr 2025 08:30:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=RwGnkNjS;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-2ff694d2d4dso2677364a91.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Apr 2025 08:30:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744471828; x=1745076628; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1744471832; x=1745076632; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=L5eF+4mBp/8UPRpFik2WkO/2GIbSgz9QbMcKvRKv9c4=;
-        b=kbjGD6/pzOamPt3cMf4yzPU7X9/sK6rSYhnhCyfMkcwqFL+QhQp7/9Z9fPuRQAu+vD
-         gyN5i9HOJG4Kool/Ppz095iOZnv93JkUZPgbP1Lg8ARv32mhgZDMlpnL+KLKaaX2EHCH
-         JI+gMg8tC8Uvbo5L9v4P6ysBcmglD1GganugmgORjoPilJupaviOwXbRVJbkwVhB+BAy
-         Vwxuh7REhl2hUTuafA363iKGhaasLxDccU5YOyJ/r0y3WEeAg4o/ifAG0iD1x5PIXWgh
-         Hl1vZOsYtvwJcGiYNpU57J0Udg1M/Cltf8s82UISOAi1wOjr8ljHO8cVGVs5Nk8/yFym
-         NiGg==
+        bh=FMJ37BUmKq3TvBeycv5Fi0TuM9P+qpBc+QgrpOtZ4dM=;
+        b=RwGnkNjStfDqMlD1A+GaFubPy9MrMvP9Lus1Tf/8Q36RhPhODwK2zKNTinNmaVl50V
+         JEIL5+Tpvm40JWqTvCHQ+p9brmkWnr1YweHiMMwscvlOc/1JwN7y8SshUMKRWnUccweG
+         fCUmDCJUAuAGxvIcz6OdK2pNhWU+wAmaU0pqgh3QR/Xj+D0ErTEY3UvmP4MVEmrEfgjr
+         Pc2i1mnHK1bb6CSXy0/k/k7JrQ90rEeRVqGEmT8kvBX2Dmgs4lPfK3GUAtiMayVn/hWg
+         2GU3TaDJrTd/mvkwkPyw4m5HFoVbqdtShGjDa35APcN4bvW6nAYUigYqt3A3a8oxQ7Yd
+         0DCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744471828; x=1745076628;
+        d=1e100.net; s=20230601; t=1744471832; x=1745076632;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=L5eF+4mBp/8UPRpFik2WkO/2GIbSgz9QbMcKvRKv9c4=;
-        b=hkNkAPcOEGcsD2j62Ay3+kU3RgWodgUk5nTnvpXOu7FVE5amk/RimdgAFDh2yZbRTD
-         kiTcoSgXOduYsIkhMf+6QoaTxeo2+C4fgZzZLJXiDgTHQgjy1SAJA7o0jW3rEDyZkdny
-         8he+nVvZKjHTFla1twIPmxx+ubdKYhJGptN26WoBf1JbsZSzla+TALyh82el72YesMDV
-         KfHLz+SAc56HZZ/rRFE4EV/ovbpcpoUg+xiONvIW5yAraA7DU0bBDEYVGkrq2pG7FcX6
-         Hz9r0qa+lJK+UOYE1fmXV2wJc8IoPhu2s+a8GgY3lV9PiZ6poGKy+fSquIM75SDqxabC
-         bFaw==
-X-Gm-Message-State: AOJu0Yyk0FCX8gwbNamhkiBApsEwQP7J/usvc6uUY5yc4ZtAAVq0Z+J5
-	A/wH1WLwWZOVd1qZ2YRyLSSAEm5Sk4HXpBMNN3VtVNFAVO+KTy7y9M+wjJXe
-X-Gm-Gg: ASbGncs9hQjG897PzjJ5TFqJBcblJSWst+rYrDpWiCEq4GqyopXpRkLNc6bqzm6XiOQ
-	kVZwxF9TNCN6ks1yY8l+krSM6igu0qzHtz3Srlrma+u8a210uuEB5TS+CZEE9uDZByVQuEAjVBq
-	dj0/kq3utRrRQWZTB7r0noxvx7pggjy6137Y26+1DFxwc1MGRbsohebMxWGIwUYA7d+HcL6wirE
-	n/YE22pxlmVdDFHCv0wH22lDNoPH+dWWvu9SlT8HzOPunR8EidLOjzmqqAO1kfC+4QZpVkCD9bs
-	k5P0RA9o7Glu8gt3+TaZJUc690di/p6H
-X-Google-Smtp-Source: AGHT+IGann60fCJh8PxPzQQWt4gFHgqAWNK5ICquHzzDHJ2MdmguRMVUA2aX2bnSYMlzP2vDSHYVNw==
-X-Received: by 2002:a17:902:e547:b0:224:1219:934b with SMTP id d9443c01a7336-22bea4fe125mr85009115ad.50.1744471827870;
-        Sat, 12 Apr 2025 08:30:27 -0700 (PDT)
+        bh=FMJ37BUmKq3TvBeycv5Fi0TuM9P+qpBc+QgrpOtZ4dM=;
+        b=eek73eA7lIwyTDDcIgvGnHWTnoDdoZY5CDA8tE/qOyZ7gz/bs2ARuhnl+5F/bNEwvp
+         SAQ/8HdzSgba0gqWypTae/9eUamlYYAE8tynKn1bd8ZTUP2HAsC+f77UWHFttUr4BIy1
+         VYuq1wii8oKxx+10uZfABzeob4z7wJfbioP1oP2aE8vVs+0tB0ilOCY1ZQ4WNt7geKeh
+         sL0Jz8lJ7KU7kCpO7vnA8oH129JwUNHIVGfn4+w/hqeiji7RiokTGeIKV7OnFz7BWcDV
+         cJ03ucstLauFLcfjoBlYU0FDl1AeJ6J6+iwrOuzWTEztjyLw0OXY7sxpB545vFCme9mx
+         h7Xg==
+X-Gm-Message-State: AOJu0YylmQUwd85WLM94iI43PBn7q187lTnDP64U6UqMrE5pDV2x2AWb
+	PQKgyU5hVKXmW3L2ZjFkNwCCNhVbeShK+45a+yHCbWQ1KZUde0RST8BqL1xF
+X-Gm-Gg: ASbGnctm1gXZJUBLGLgs9y8rK5htkS5f/BrhnRMICgSF04app0KTWPfEBj6pCVFCl/c
+	/s1wGXDd49EQlRA3wdnt0/xWyafXH8X/MqNv3z/inYkWNenQaHv1b+0gvgAOG5NC5LdXSndMTrn
+	mbVVOytAqeS1g2gufGFOGMKrru8/OT9ylr2yqDcT+vPlGDlWOA6QL/Stncd/ABXytvOK8F1HIoH
+	a+2Y71fYkvwzAUrNGj5IpWiBbVJOEijtBOcHTvxl3ZtrYzBizaninGN1anAc7px2iH0cs7SvGvo
+	RgvsYbJvoFuYDVeZ/aKQtw8hKGMZv9C9
+X-Google-Smtp-Source: AGHT+IFV6wmJZE29lRgNfDx8BwUuOfuKcRo4fTzCL6s5iWl9/jN/pLvppVOItAADHlw+AggGPS5ktg==
+X-Received: by 2002:a17:90b:2dca:b0:305:5f32:d9f5 with SMTP id 98e67ed59e1d1-30823660b8amr10399345a91.7.1744471831774;
+        Sat, 12 Apr 2025 08:30:31 -0700 (PDT)
 Received: from apollo.localdomain ([2601:646:8201:fd20::7ceb])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-306df400ab7sm7686659a91.47.2025.04.12.08.30.27
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-306df400ab7sm7686659a91.47.2025.04.12.08.30.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 12 Apr 2025 08:30:27 -0700 (PDT)
+        Sat, 12 Apr 2025 08:30:31 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 2/8] meta-python-image-ptest-all: Do not run PTESTS_PROBLEMS_META_PYTHON
-Date: Sat, 12 Apr 2025 08:30:16 -0700
-Message-ID: <20250412153022.2343322-2-raj.khem@gmail.com>
+Subject: [meta-perl][PATCH 6/8] ptest-packagelists-meta-perl: adjust automated ptest runs
+Date: Sat, 12 Apr 2025 08:30:20 -0700
+Message-ID: <20250412153022.2343322-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250412153022.2343322-1-raj.khem@gmail.com>
 References: <20250412153022.2343322-1-raj.khem@gmail.com>
@@ -66,26 +66,69 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 12 Apr 2025 15:30:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116814
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116818
 
-PTESTS_PROBLEMS_META_PYTHON are known failures exclude then from normal runs
+Based on current pass/fail results
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-core/images/meta-python-image-ptest-all.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../conf/include/ptest-packagelists-meta-perl.inc    | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/meta-python/recipes-core/images/meta-python-image-ptest-all.bb b/meta-python/recipes-core/images/meta-python-image-ptest-all.bb
-index d6708c5fd0..56c392f036 100644
---- a/meta-python/recipes-core/images/meta-python-image-ptest-all.bb
-+++ b/meta-python/recipes-core/images/meta-python-image-ptest-all.bb
-@@ -9,7 +9,7 @@ REQUIRED_DISTRO_FEATURES = "ptest"
- require conf/include/ptest-packagelists-meta-python.inc
+diff --git a/meta-perl/conf/include/ptest-packagelists-meta-perl.inc b/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
+index d081c2fdac..e0c5707f4b 100644
+--- a/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
++++ b/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
+@@ -8,7 +8,6 @@
+ # ptests which take less than ~30s each
+ PTESTS_FAST_META_PERL = "\
+     libcapture-tiny-perl \
+-    libcgi-perl \
+     libcrypt-openssl-random-perl \
+     libdigest-hmac-perl \
+     liberror-perl \
+@@ -16,12 +15,11 @@ PTESTS_FAST_META_PERL = "\
+     libextutils-installpaths-perl \
+     libhtml-tagset-perl \
+     libmozilla-ca-perl \
+-    libmodule-build-tiny-perl \
++    libnet-ldap-perl \
+     libstrictures-perl \
+     libterm-readkey-perl \
+     libtest-nowarnings-perl \
+     libtext-diff-perl \
+-    liburi-perl \
+ "
  
- # Include the full set of ptests
--PTESTS_META_PYTHON = "${PTESTS_FAST_META_PYTHON} ${PTESTS_SLOW_META_PYTHON} ${PTESTS_PROBLEMS_META_PYTHON}"
-+PTESTS_META_PYTHON = "${PTESTS_FAST_META_PYTHON} ${PTESTS_SLOW_META_PYTHON}"
+ PTESTS_SLOW_META_PERL = "\
+@@ -30,18 +28,19 @@ PTESTS_SLOW_META_PERL = "\
  
- do_testimage[noexec] = "1"
- do_testimage[depends] = "${@' '.join(['meta-python-image-ptest-'+x+':do_testimage' for x in d.getVar('PTESTS_META_PYTHON').split()])}"
+ PTESTS_PROBLEMS_META_PERL = "\
+     libauthen-sasl-perl \
++    libcgi-perl \
+     libconfig-autoconf-perl \
+     libcrypt-openssl-guess-perl \
+     libcrypt-openssl-rsa-perl \
+     libdata-hexdump-perl \
+     libdbd-sqlite-perl \
+     libdigest-sha1-perl \
+-    libnet-dns-perl \
+-    libnet-dns-sec-perl \
+-    libnet-ldap-perl \
+     libfile-slurper-perl \
+     libhtml-parser-perl \
+     libmime-types-perl \
++    libmodule-build-tiny-perl \
++    libnet-dns-perl \
++    libnet-dns-sec-perl \
+     libnet-ssleay-perl \
+     libsub-uplevel-perl \
+     libtest-deep-perl \
+@@ -49,5 +48,6 @@ PTESTS_PROBLEMS_META_PERL = "\
+     libtest-warn-perl \
+     libunicode-linebreak-perl \
+     libunix-statgrab \
++    liburi-perl \
+     libxml-libxml-perl \
+ "
 
