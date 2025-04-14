@@ -1,90 +1,109 @@
-Return-Path: <philip@balister.org>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D9DDC3601E
-	for <webhook@archiver.kernel.org>; Mon, 14 Apr 2025 01:58:19 +0000 (UTC)
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web11.40747.1744595837416258026
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8AE80C3601E
+	for <webhook@archiver.kernel.org>; Mon, 14 Apr 2025 02:16:09 +0000 (UTC)
+Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
+ by mx.groups.io with SMTP id smtpd.web10.41191.1744596962625742737
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 13 Apr 2025 18:57:17 -0700
+ Sun, 13 Apr 2025 19:16:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ks+2DqFz;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: nguyenthaithuanalg@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-736dd9c4b40so3961828b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 13 Apr 2025 18:57:17 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dG0UAUwb;
+ spf=pass (domain: gmail.com, ip: 209.85.128.174, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-6fda22908d9so27048797b3.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 13 Apr 2025 19:16:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744595836; x=1745200636; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1744596961; x=1745201761; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=aWI3UACWtneFT/CSgh/bj6pqFMjbwvR/j+Z0U83au/w=;
-        b=Ks+2DqFzarlMCgpObSz0Pgj4TBBr+1Zi3OIwk4GU1me60fVTmkF59Gyn3Nrz/eyXr4
-         cajc8g5XziIQaZlVKHRFay44qT8RhGydHSafDDbeec74Oz+t8O4/2JBeQjfTV1SfaQ/h
-         tTpqHdjx3yqV6C69G/XsnsuZ7puojujztSaohOayVlUf1VLHJpfhcpnG4JdAU1IPMdYG
-         d5LrJiMBsuQr99t7giH1nwCHbgcPKSp5NpSsrT39hoQv5N704W+dYgOLW6PuD6ojYs9M
-         BDc044dhe6vNBEiIt9eZ7JGCsLWdQGQuPwdoGXJjpxuF5TM44QIHSm8pmqyB0m6pAOgj
-         GaYg==
+        bh=tLekrH71ppTfb7BgOFWbRq+O5lGb0VGzA48iRxv31SY=;
+        b=dG0UAUwbFLAFQH7aLozKFFrsRXsN63C89lXJ9BtdNyAwajy38+9/16MkOQ8NkCejmc
+         VpUWSQ/iqvGa5BRvbfvI+91P9aHBi3WSpVUyQ4EVSRE9FlQhgutH5fZC95kDXzR9VuRQ
+         Tw+UPGl8tm9//ec8+vRquPsI2UPOTzbwaTaeuuv6BQyz/K67ib1odGKO7cHq4fTnVDC6
+         JAdcmg2rL1zxxA0+IbvWI6+1MfXalTcimGIDqC6G7pMoXKoDi7zh+cX8VyhJ3XX0z87m
+         Hg27fLYdFIN2qwso7xbruH4dxc99cu9uxEVPIO38H/6Q7omsC6c0cJoY49MEsvgSF6PQ
+         VP8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744595836; x=1745200636;
+        d=1e100.net; s=20230601; t=1744596961; x=1745201761;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=aWI3UACWtneFT/CSgh/bj6pqFMjbwvR/j+Z0U83au/w=;
-        b=XHr/lPHuBHHEb7exzcJ7eQJs7J3nUHBky1e2yM1maAQJHEHX9L5i2PIXaYuFiMuXIE
-         lA2UnhzxXYXQxcnJTPexeUVy7oqWCMAS2eTds8gO3zHCYlQh8uiY4d3WtnsFS+vWaSL1
-         3tfpJei7cnQ5O4nyazuakZ4j6fgrGTeumaO112/tVIpVcyGHlyWDo3OigaJBc18OA8ns
-         fV0pwXg9LobQV/8qCYlmDxIknNkOCQYF40eyg0Y4I4rD3rF6g9wGhqd601maoSXeAzfT
-         Nh67n95gXoJcK2gwuvbtZ873Nssvvg1kaRBAuaKH6V+nhHM7jG8bP5qunbd+JpK3j3Wr
-         IWrg==
-X-Gm-Message-State: AOJu0YzMtY9jAC5z/XokDqYPv5wuyJNWuDPy9F8bz7g+EpN93LaSpRxO
-	+M0ButhgZtHaisD5jFVxlzHFSYKV4DA6VAS1GHp48qVudzALXgm7noGgz1CuLty2tA==
-X-Gm-Gg: ASbGnctAkCOXgj0j4ZyjQQvdu1ron8CIL+alS1TH4LCt9ivDsxO9AdJmdgkLIj0NkCK
-	Zk0QAVpAzS9wsVNNi2erFKMj4rwFiNUCTN2Rl3J5FviC1IVle9GCLka03Vvw+NfFqWoGno+FvQE
-	Oq2M9uTeg92hKcCKYVhRak9AsKFqXcCXlzbrnxzwMdB9nJyx5EPdpOyRsN33Fr/JOcqQ1r0R7UK
-	rulbRWkBajveQpjyBqTLurTB3mJAkoPdKio8NrrumT4uYW1FXobHE2q67sChV1dOx+rczaOc6Bx
-	guo87SwGN+9h1sEwSHw9z/f7g8uar8NPvk5NxLWq49aN7jo+6r6J5etqI6MA4b4XevRg
-X-Google-Smtp-Source: AGHT+IGUzGCgXowhMS1oejTcaRvYPNsYdsENFUC/Ct7sGUX1r0ejdn6loconalcyIzXAfLiFiyp5fQ==
-X-Received: by 2002:a05:6a00:230d:b0:736:476b:fccc with SMTP id d2e1a72fcca58-73bd0cd9cafmr15693320b3a.8.1744595835953;
-        Sun, 13 Apr 2025 18:57:15 -0700 (PDT)
-Received: from localhost.localdomain ([2405:4802:90d4:ea0:76d4:35ff:fe85:dd7a])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-73bd21e00e8sm5560446b3a.80.2025.04.13.18.57.14
+        bh=tLekrH71ppTfb7BgOFWbRq+O5lGb0VGzA48iRxv31SY=;
+        b=AEq12jBu1o+nc/iOYzsAdlcVGKmmqsdr4ZRW3h32G1qHKTlsm0GRpwjKxM8A39jhHJ
+         2v5Ex4m8z08ck5Vms7OrwHdBHjLZN9IpJXS7ESTBYCTr6vsUTpxPqsDlIi6Pk5I+LPwn
+         gKaZl1+iUoBXUkbMNfMt/EYRlSu4iY+vBCrHmsmlJt4veSe+mZp7zJD4LKP9S3FJn2Ki
+         3ftcZTMb7EWPbIyNW7tE/vgtDqAaTfgQIsXOrWWpzu6ni/0rO8Aew0MtWySErTjdYRhl
+         BqjsfOKGf0eIxynDaNNV2Z8JDFg81XJZ6uUb5LsgAZ/24HXagCLPfKQOMcWx3pwZ6kS4
+         PdLQ==
+X-Gm-Message-State: AOJu0YykT4xfC7Wci7RawEmWvZjpLxfGAORZ8jTN8GSUESSndf1qcP2l
+	ar7SHzck63f0/MTZ0GB6kROm1InvFfzV7YzDlO1jBLmxZ6b8iQxX8sQy61AF
+X-Gm-Gg: ASbGncvDBlqT0rGiL6AuN4gJw8LMKdh6v30DBO1GTVX1AQ30bWd9MCvIOpdskFsZyAV
+	lZnbximzJuCA0KwZbewM96UEKeTcXmcmndPhXZcDvE26js6A+d/8ktQjpGd6x3rAYONZowzyEW1
+	BkMHGduDx0QW9gjoi7nmLJ0Z1wSf8wV6S1b4oGxG9XZN5j256B2ULEyGVOCurGABtSKSMeSnEWw
+	lZxCk+5EvQsotKeoFSHn1tv9+D1w7yKPC+c+BMOAs5UjtSliuiRvyi+BqsHrgLOhKRuN0CGmbuE
+	dquTPKT6ogRUBd09PH5alEKFkiw6fZEXRmKNeyGiuz1QnQ==
+X-Google-Smtp-Source: AGHT+IF3WcSCZUWUEC/u3tJ0qwMbClBgmSQMFK3yAFR9fpulvHZspn/R2LEkYmXxmqq5cy3Zm/PUkQ==
+X-Received: by 2002:a05:690c:6809:b0:6fd:a226:fb6c with SMTP id 00721157ae682-705599e2686mr187222927b3.17.1744596961104;
+        Sun, 13 Apr 2025 19:16:01 -0700 (PDT)
+Received: from localhost.localdomain ([71.215.9.36])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-7053e11a44dsm28140567b3.33.2025.04.13.19.16.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 13 Apr 2025 18:57:15 -0700 (PDT)
-From: =?UTF-8?B?VGh14bqtbiBOZ3V54buFbi1UaMOhaQ==?= <nguyenthaithuanalg@gmail.com>
+        Sun, 13 Apr 2025 19:16:00 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
-Subject: [meta-oe][PATCH] 1. Thank for Khem Raj's advice about cleaning unnecessary data.
-Date: Mon, 14 Apr 2025 08:56:58 +0700
-Message-ID: <20250414015658.5684-1-nguyenthaithuanalg@gmail.com>
-X-Mailer: git-send-email 2.47.1
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH] c-ares: upgrade 1.34.2 -> 1.34.3
+Date: Sun, 13 Apr 2025 22:15:43 -0400
+Message-ID: <20250414021543.10067-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 14 Apr 2025 01:58:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116838
+ <openembedded-devel@lists.openembedded.org>; Mon, 14 Apr 2025 02:16:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116839
 
-Signed-off-by: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
+Changelog: https://github.com/c-ares/c-ares/releases/tag/v1.34.3
+
+Changes:
+
+    Build the release package in an automated way so we can provide provenance as per SLSA3. PR #906
+
+Bugfixes:
+
+    Some upstream servers are non-compliant with EDNS options, resend queries without EDNS. Issue #911
+    Android: <=7 needs sys/system_properties.h a70637c
+    Android: CMake needs -D_GNU_SOURCE and others. PR #915
+    TSAN warns on missing lock, but lock isn't actually necessary. PR #915
+    ares_getaddrinfo() for AF_UNSPEC should retry IPv4 if only IPv6 is received. 765d558
+    ares_send() shouldn't return ARES_EBADRESP, its ARES_EBADQUERY. 91519e7
+    Fix typos in man pages. PR #905
+
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- .../recipes-libsimplelog/libsimplelog/libsimplelog_git.bb    | 5 -----
- 1 file changed, 5 deletions(-)
+ .../c-ares/{c-ares_1.34.2.bb => c-ares_1.34.3.bb}               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/c-ares/{c-ares_1.34.2.bb => c-ares_1.34.3.bb} (91%)
 
-diff --git a/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb b/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb
-index 7a27fd302..0415bf485 100644
---- a/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb
-+++ b/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb
-@@ -1,9 +1,4 @@
--# Recipe created by recipetool
--# This is the basis of a recipe and may need further editing in order to be fully functional.
--# (Feel free to remove these comments when editing.)
+diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.34.2.bb b/meta-oe/recipes-support/c-ares/c-ares_1.34.3.bb
+similarity index 91%
+rename from meta-oe/recipes-support/c-ares/c-ares_1.34.2.bb
+rename to meta-oe/recipes-support/c-ares/c-ares_1.34.3.bb
+index 21a0e37e6c..c02bdbcc5c 100644
+--- a/meta-oe/recipes-support/c-ares/c-ares_1.34.2.bb
++++ b/meta-oe/recipes-support/c-ares/c-ares_1.34.3.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=d3e72a10e08191f2ca1be3f3228d78f3"
  
--# WARNING: the following LICENSE and LIC_FILES_CHKSUM values are best guesses - it is
--# your responsibility to verify that the values are complete and correct.
- SUMMARY = "simplelog-topc - Simple, STABLE, powerful of logging library in ANSI C/C++. Ready for billion records."
- DESCRIPTION = "Async and Fast C/C++ multi-thread logger with topics. No external dependencies."
- HOMEPAGE = "https://github.com/thuanalg/simplelog-topic"
+ SRC_URI = "https://github.com/c-ares/c-ares/releases/download/v${PV}/${BPN}-${PV}.tar.gz \
+            file://run-ptest"
+-SRC_URI[sha256sum] = "35410aa625cc9ee95b66475f54aea7c81c673fb63d75fad5eee267711503b72a"
++SRC_URI[sha256sum] = "26e1f7771da23e42a18fdf1e58912a396629e53a2ac71b130af93bbcfb90adbe"
+ 
+ PACKAGECONFIG ?= "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
+ PACKAGECONFIG[manpages] = ""
 -- 
-2.47.1
+2.43.0
 
 
