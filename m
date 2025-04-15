@@ -1,75 +1,112 @@
-Return-Path: <philip@balister.org>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FCB7C369AB
-	for <webhook@archiver.kernel.org>; Tue, 15 Apr 2025 18:38:07 +0000 (UTC)
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
- by mx.groups.io with SMTP id smtpd.web11.19324.1744721797825976386
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BC3D9C369AB
+	for <webhook@archiver.kernel.org>; Tue, 15 Apr 2025 18:47:17 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.web10.1988.1744742835231257172
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 15 Apr 2025 05:56:38 -0700
+ Tue, 15 Apr 2025 11:47:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: pengutronix.de, ip: 185.203.201.7, mailfrom: bst@pengutronix.de)
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77] helo=[127.0.0.1])
-	by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
-	(envelope-from <bst@pengutronix.de>)
-	id 1u4fq7-0006Yb-U0; Tue, 15 Apr 2025 14:56:35 +0200
-Message-ID: <502a68b9-af9f-49f7-ae82-2c6a8338c479@pengutronix.de>
-Date: Tue, 15 Apr 2025 14:56:33 +0200
+ dkim=pass header.i=@smile.fr header.s=google header.b=YPE8yfjs;
+ spf=pass (domain: smile.fr, ip: 209.85.221.53, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-3914bc3e01aso3400747f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 15 Apr 2025 11:47:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=smile.fr; s=google; t=1744742834; x=1745347634; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=p5werSmTQHProWHld9/2nOditKr04tP4lbaTZpWIFDk=;
+        b=YPE8yfjsqLVQOs5wxcVHdRUOPRyW1REZaj1ea7uZRkat45e40ka9YWejMGhR9kFt4S
+         WH87i5JRufgfGcfSTbVwBg8KoS22bXw+M9hiKSpdeHmKALkuR6f8n80tGhPTI5P7xz3G
+         G7WYtsK3M2LA7fUdVm7Sg3gTYWxjxf/L6AKmE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1744742834; x=1745347634;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=p5werSmTQHProWHld9/2nOditKr04tP4lbaTZpWIFDk=;
+        b=N8wtwJ3pR8NC2z6K5tGxvEDo5IoIElk9lCdTVzO7PtPTkDkOn6I3pBAC4Ne98AiAnC
+         EjzOhL6w08LuzqZrvFZV1+GLDQkVlvqNVyJrjVrxP9f9fBMJWg8EEYXV+/b2liKlqwNb
+         TXauCzH4L1XLQtm7LCZB9uT9ULunGK1k9bibEmpVlVidxSk7Ok7o7/5nD3pXcha9oKhD
+         5XcpL+Q6WPXjz62cWMUn8AD1YPUY80thgFToKZFzKt5Sn/ezJxRyWARBi43rIw12jC+L
+         EgThwMYZaJI+blUnQSBBmx0nfmrVcmsQ8ZD3jTg+nni5aECeo3qaYzaZCR4gJAzi7BbU
+         Utow==
+X-Gm-Message-State: AOJu0YzywTkFnTX1jfSqPWdmLSiOcpVsU62q0OqF9LZwa4QluW6/1Ehw
+	bydFhKtydvEF0lHhXOMMD4asGk1xoLrCBVrxFOAakMZi14VEOC0hFJf2MprjpyUlLJI6PJTOKG4
+	M64MZPsyqAaU1Pg/hwhCfgYPH+kDEr8NHM7tZow==
+X-Gm-Gg: ASbGncumurWEsJ7RH8ybezv9/UmLvYytPJh6hu/mTtvsbRw2+UCRZB+yjdSeB+cJmMx
+	H+VN1Va+KgsqIzIBEjO3jSBpAROKorim8xxzJWaykK8ZOmPhjtXvAJI8l6yXBzaTM/ffB09UOtR
+	2CeB9ogSQXhE4m+Om7kYFE3boO8a/TCdig419ZR18BYUfEBwFStwN+2ljTNIzczzSl5Q==
+X-Google-Smtp-Source: AGHT+IF+n5KVjuOSiRlCY1eWCZSU9MN91JdlYVX9yv2oBcZjiJVEFuQJd5hOEN32YUPpJBSRMMu+J/8AwyzNCGma5Cg=
+X-Received: by 2002:a05:6000:2586:b0:39a:ca40:7bfb with SMTP id
+ ffacd0b85a97d-39ee276a1b6mr481986f8f.54.1744742833721; Tue, 15 Apr 2025
+ 11:47:13 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: "Bastian Krause" <bst@pengutronix.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][GIT PULL] fitimage.bbclass Improvements
-Cc: Marco Felsch <m.felsch@pengutronix.de>, =?UTF-8?Q?Enrico_J=C3=B6rns?=
- <ejo@pengutronix.de>, =?UTF-8?Q?Ulrich_=C3=96lmann?=
- <u.oelmann@pengutronix.de>, John Ripple <john.ripple@keysight.com>,
- yocto@pengutronix.de
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
-X-SA-Exim-Mail-From: bst@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20250415180540.1327811-1-schonm@gmail.com>
+In-Reply-To: <20250415180540.1327811-1-schonm@gmail.com>
+From: Yoann Congal <yoann.congal@smile.fr>
+Date: Tue, 15 Apr 2025 20:46:47 +0200
+X-Gm-Features: ATxdqUG4jYsB_GLyUKvB51jiiajn478xK4lk4jsLuHz43AxXYEQ_SaaFFVKbqJc
+Message-ID: <CAMSfU+5-75-+T0XVCwSfboGggYU3qOvBXoP8VxjjCynU-_PY4Q@mail.gmail.com>
+Subject: Re: [oe] [meta-webserver][PATCH] monkey: Update project website
+To: schonm@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 15 Apr 2025 18:38:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116866
+ <openembedded-devel@lists.openembedded.org>; Tue, 15 Apr 2025 18:47:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116868
 
-Please consider these fitimage.bbclass changes for master.
+Hello,
 
-The following changes since commit 1528a1219bff594035ea3d6d18dce50e7fec8d32:
+Le mar. 15 avr. 2025 =C3=A0 20:05, J. S. via lists.openembedded.org
+<schonm=3Dgmail.com@lists.openembedded.org> a =C3=A9crit :
+>
+> Signed-off-by: Jason Schonberg <schonm@gmail.com>
+> ---
+>  meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb b/meta-w=
+ebserver/recipes-httpd/monkey/monkey_1.6.9.bb
+> index a11af8129a..cdb6fb605c 100644
+> --- a/meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb
+> +++ b/meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb
+> @@ -1,5 +1,5 @@
+>  SUMMARY =3D "Fast and Lightweight HTTP Server for Linux"
+> -HOMEPAGE =3D "http://monkey-project.com"
+> +HOMEPAGE =3D "https://github.com/monkey/monkey/issues/414"
 
-   meta-multimedia-image-ptest-all: Do not run PTESTS_PROBLEMS_META_MULTIMEDIA (2025-04-12 10:11:33 -0700)
+I would put "HOMEPAGE =3D "https://github.com/monkey/monkey" (the main
+github page, not the issue) citing the issue in the commit message.
 
-are available in the Git repository at:
+Regards,
 
-   https://github.com/Bastian-Krause/meta-openembedded.git bst/fitimage-improvements
+>  BUGTRACKER =3D "https://github.com/monkey/monkey/issues"
+>
+>  LICENSE =3D "Apache-2.0"
+> --
+> 2.43.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#116865): https://lists.openembedded.org/g/openembedde=
+d-devel/message/116865
+> Mute This Topic: https://lists.openembedded.org/mt/112281725/4316185
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [y=
+oann.congal@smile.fr]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
-for you to fetch changes up to fa09b630c44cd587d64dc68e16e3061d05934401:
 
-   fitimage.bbclass: warn if kernel is compressed, but no compression specified (2025-04-15 14:13:42 +0200)
-
-----------------------------------------------------------------
-Bastian Krause (1):
-       fitimage.bbclass: warn if kernel is compressed, but no compression specified
-
-Enrico Jörns (5):
-       fitimage.bbclass: fix error handling for missing recipe
-       fitimage.bbclass: let image type default to 'kernel'
-       fitimage.bbclass: fail early for unsupported image types
-       fitimage.bbclass: fix configurations node naming
-       fitimage.bbclass: error-out for empty configurations
-
-  meta-oe/classes/fitimage.bbclass | 17 ++++++++++++++---
-  1 file changed, 14 insertions(+), 3 deletions(-)
-
--- 
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
-
+--=20
+Yoann Congal
+Smile ECS
 
