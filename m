@@ -1,85 +1,125 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <mark.yang@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BBF8C369BA
-	for <webhook@archiver.kernel.org>; Wed, 16 Apr 2025 09:02:53 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.web11.14430.1744794163805344746
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ADCB5C369B1
+	for <webhook@archiver.kernel.org>; Wed, 16 Apr 2025 09:33:43 +0000 (UTC)
+Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.51])
+ by mx.groups.io with SMTP id smtpd.web10.14949.1744796017810671947
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Apr 2025 02:02:44 -0700
+ Wed, 16 Apr 2025 02:33:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=b2aEVGoo;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1744794164; x=1776330164;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references;
-  bh=AlzCM6U4fPAsC4NhwEEYU44ZnTlFe0QysfrX/CUEAC8=;
-  b=b2aEVGoo0NvMMAuDy6BdqRtygvVDIr8BqyHvEsqX4St0JQO8O6FUiZUf
-   XHybnJKI1tc7AQ4628PszQnwqmBULhPcKS+Lv1HeO/Glrw34gBuaH0H9N
-   +hYeT0pPC/rvnL30F3PAp3NkaII1xxNIgpl5DSP6d4RIQbz3pUuSag12m
-   oKwhJpTopZ0qccBa1bJZz1I5UzsOQSkB9rKf72iU3TuDLBDXC0zBGzeIO
-   klpb6cIRJ5yPT/axIjxlVR4WCjUBahNuiKl7N2XyfywDSja9D3jayJB4c
-   YXSju0eLnBg1AuIpkXikwM7RqG61eV/Fxi4MoypUwbMSMn7OwbNxgH8Ce
-   A==;
-X-CSE-ConnectionGUID: ajLylEKiS8ms26s6EID5Jg==
-X-CSE-MsgGUID: FQPsWq+wTDy8yDD7E9dgdw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11404"; a="199436266"
-X-IronPort-AV: E=Sophos;i="6.15,215,1739804400"; 
-   d="scan'208";a="199436266"
-Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
-  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Apr 2025 18:02:31 +0900
-Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 04ED096741
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 18:02:29 +0900 (JST)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id BB182D50F6
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 18:02:28 +0900 (JST)
-Received: from localhost.localdomain (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 7523C1A00B0;
-	Wed, 16 Apr 2025 17:02:28 +0800 (CST)
-From: wangmy@fujitsu.com
+ dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.51, mailfrom: mark.yang@lge.com)
+Received: from unknown (HELO lgemrelse7q.lge.com) (156.147.1.151)
+	by 156.147.23.51 with ESMTP; 16 Apr 2025 18:33:34 +0900
+X-Original-SENDERIP: 156.147.1.151
+X-Original-MAILFROM: mark.yang@lge.com
+Received: from unknown (HELO markyang..) (10.177.120.37)
+	by 156.147.1.151 with ESMTP; 16 Apr 2025 18:33:34 +0900
+X-Original-SENDERIP: 10.177.120.37
+X-Original-MAILFROM: mark.yang@lge.com
+From: mark.yang@lge.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 15/31] python3-asyncinotify: upgrade 4.2.0 -> 4.2.1
-Date: Wed, 16 Apr 2025 17:02:00 +0800
-Message-Id: <1744794136-908-15-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1744794136-908-1-git-send-email-wangmy@fujitsu.com>
-References: <1744794136-908-1-git-send-email-wangmy@fujitsu.com>
+Cc: "mark.yang" <mark.yang@lge.com>
+Subject: [meta-networking][PATCH] ssmtp: fix build error with gcc-15
+Date: Wed, 16 Apr 2025 18:33:33 +0900
+Message-Id: <20250416093333.3442943-1-mark.yang@lge.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 09:02:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116899
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 09:33:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116902
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: "mark.yang" <mark.yang@lge.com>
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+* fix build error with gcc-15
+../ssmtp-2.64/ssmtp.c:1454:31: error: passing argument 2 of 'signal' from incompatible pointer type [-Wincompatible-pointer-types]
+ 1454 |         (void)signal(SIGALRM, (void(*)())handler);      /* Catch SIGALRM */
+      |                               ^~~~~~~~~~~~~~~~~~
+      |                               |
+      |                               void (*)(void)
+In file included from TOPDIR/tmp/work/core2-64-oe-linux/ssmtp/2.64/recipe-sysroot/usr/include/sys/param.h:28,
+                 from ../ssmtp-2.64/ssmtp.c:18:
+TOPDIR/tmp/work/core2-64-oe-linux/ssmtp/2.64/recipe-sysroot/usr/include/signal.h:88:57: note: expected '__sighandler_t' {aka 'void (*)(int)'} but argument is of type 'void (*)(void)'
+   88 | extern __sighandler_t signal (int __sig, __sighandler_t __handler)
+      |                                          ~~~~~~~~~~~~~~~^~~~~~~~~
+../ssmtp-2.64/ssmtp.c:1393:6: note: 'handler' declared here
+ 1393 | void handler(void)
+      |      ^~~~~~~
+
+Signed-off-by: mark.yang <mark.yang@lge.com>
 ---
- ...hon3-asyncinotify_4.2.0.bb => python3-asyncinotify_4.2.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-asyncinotify_4.2.0.bb => python3-asyncinotify_4.2.1.bb} (83%)
+ ...ible-pointer-types-error-with-gcc-15.patch | 47 +++++++++++++++++++
+ .../recipes-support/ssmtp/ssmtp_2.64.bb       |  1 +
+ 2 files changed, 48 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ssmtp/ssmtp/0001-Fix-incompatible-pointer-types-error-with-gcc-15.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-asyncinotify_4.2.0.bb b/meta-python/recipes-devtools/python/python3-asyncinotify_4.2.1.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-asyncinotify_4.2.0.bb
-rename to meta-python/recipes-devtools/python/python3-asyncinotify_4.2.1.bb
-index 839d325966..f95dadff90 100644
---- a/meta-python/recipes-devtools/python/python3-asyncinotify_4.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-asyncinotify_4.2.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://gitlab.com/Taywee/asyncinotify"
- LICENSE = "MPL-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f75d2927d3c1ed2414ef72048f5ad640"
+diff --git a/meta-networking/recipes-support/ssmtp/ssmtp/0001-Fix-incompatible-pointer-types-error-with-gcc-15.patch b/meta-networking/recipes-support/ssmtp/ssmtp/0001-Fix-incompatible-pointer-types-error-with-gcc-15.patch
+new file mode 100644
+index 0000000000..920c1cd2c5
+--- /dev/null
++++ b/meta-networking/recipes-support/ssmtp/ssmtp/0001-Fix-incompatible-pointer-types-error-with-gcc-15.patch
+@@ -0,0 +1,47 @@
++From 7d3db0f63b9fa4a0deca486eccbe60c3cfa00750 Mon Sep 17 00:00:00 2001
++From: "mark.yang" <mark.yang@lge.com>
++Date: Wed, 16 Apr 2025 18:28:24 +0900
++Subject: [PATCH] Fix incompatible-pointer-types error with gcc 15
++
++../ssmtp-2.64/ssmtp.c:1454:31: error: passing argument 2 of 'signal' from incompatible pointer type [-Wincompatible-pointer-types]
++ 1454 |         (void)signal(SIGALRM, (void(*)())handler);      /* Catch SIGALRM */
++      |                               ^~~~~~~~~~~~~~~~~~
++      |                               |
++      |                               void (*)(void)
++In file included from TOPDIR/tmp/work/core2-64-oe-linux/ssmtp/2.64/recipe-sysroot/usr/include/sys/param.h:28,
++                 from ../ssmtp-2.64/ssmtp.c:18:
++TOPDIR/tmp/work/core2-64-oe-linux/ssmtp/2.64/recipe-sysroot/usr/include/signal.h:88:57: note: expected '__sighandler_t' {aka 'void (*)(int)'} but argument is of type 'void (*)(void)'
++   88 | extern __sighandler_t signal (int __sig, __sighandler_t __handler)
++      |                                          ~~~~~~~~~~~~~~~^~~~~~~~~
++../ssmtp-2.64/ssmtp.c:1393:6: note: 'handler' declared here
++ 1393 | void handler(void)
++      |      ^~~~~~~
++
++Upstream-Status: Inactive-Upstream [This package has been orphaned https://bugs.debian.org/925056]
++Signed-off-by: mark.yang <mark.yang@lge.com>
++---
++ ssmtp.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/ssmtp.c b/ssmtp.c
++index 4dedaf8..a938d14 100644
++--- a/ssmtp.c
+++++ b/ssmtp.c
++@@ -1390,7 +1390,7 @@ handler() -- A "normal" non-portable version of an alarm handler
++ 			like a socket. So we longjump instead, which is erronious on
++ 			a small number of machines and ill-defined in the language
++ */
++-void handler(void)
+++void handler(__attribute__((unused)) int sig)
++ {
++ 	extern jmp_buf TimeoutJmpBuf;
++ 
++@@ -1451,7 +1451,7 @@ int ssmtp(char *argv[])
++ 	from = from_format(uad, override_from);
++ 
++ 	/* Now to the delivery of the message */
++-	(void)signal(SIGALRM, (void(*)())handler);	/* Catch SIGALRM */
+++	(void)signal(SIGALRM, handler);	/* Catch SIGALRM */
++ 	(void)alarm((unsigned) MAXWAIT);			/* Set initial timer */
++ 	if(setjmp(TimeoutJmpBuf) != 0) {
++ 		/* Then the timer has gone off and we bail out */
+diff --git a/meta-networking/recipes-support/ssmtp/ssmtp_2.64.bb b/meta-networking/recipes-support/ssmtp/ssmtp_2.64.bb
+index 499a79d1ed..8dc2d76477 100644
+--- a/meta-networking/recipes-support/ssmtp/ssmtp_2.64.bb
++++ b/meta-networking/recipes-support/ssmtp/ssmtp_2.64.bb
+@@ -9,6 +9,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/s/${BPN}/${BPN}_${PV}.orig.tar.bz2 \
+            file://use-DESTDIR.patch \
+            file://0001-ssmtp-Correct-the-null-pointer-assignment-to-char-po.patch \
+            file://0001-include-libgen.h-for-basename.patch \
++           file://0001-Fix-incompatible-pointer-types-error-with-gcc-15.patch \
+            "
  
--SRC_URI[sha256sum] = "dac1d75e16a4919c6eab84a90ff51218db622c5524a84a5c501a0b62ea7ec7ea"
-+SRC_URI[sha256sum] = "8078b0b0d81c19043141ab0fc5654e89a4d3023dc3e4486aaa245b1ff5f5ddc9"
- 
- inherit pypi python_setuptools_build_meta
- 
--- 
-2.43.0
-
+ SRC_URI[md5sum] = "65b4e0df4934a6cd08c506cabcbe584f"
 
