@@ -2,50 +2,50 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C29F1C369B1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7F53C369BA
 	for <webhook@archiver.kernel.org>; Wed, 16 Apr 2025 09:02:42 +0000 (UTC)
-Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
- by mx.groups.io with SMTP id smtpd.web11.14429.1744794159555978773
+Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
+ by mx.groups.io with SMTP id smtpd.web10.14613.1744794152284666272
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Apr 2025 02:02:41 -0700
+ Wed, 16 Apr 2025 02:02:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=L7c05q7J;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=qL44K00E;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1744794162; x=1776330162;
+  t=1744794152; x=1776330152;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=urXWsMKRoyIs9OdfUInL18WxNCJhJDczBVh1HBUkleg=;
-  b=L7c05q7JvaESLYh3KAOMQuPfBjx1dkGalwlk1U/Z+WvWhvs5hgAg5Nv2
-   NVGcoZalajpLzTrXmeZjFhmPDCPACVziPGT5VnA5DzOTOPzFfUETIwfJL
-   kkYXlPdB1GhvrvYafs2245SNrUTCB4E9jQabinho4KHvSD/uia2rlI7w1
-   XfdFW6bCX3EhfpNBfrZTe+mFOlQYp9SFTUr+tq9ntHrUlVI4T8Mq5i33W
-   X3vMGdk+ezBfwJGFQV+D8Cp9FwEWzvI6IZgomP0Kt8+93aALmSezfSaPq
-   jKpJeQl6oDWBDs6IP6LemsJ+lvMz/9lfu534wJ9Fk1lVgPBRaf4YcPhAd
-   A==;
-X-CSE-ConnectionGUID: 1SmsiMdcRyqfh9sEbK6muw==
-X-CSE-MsgGUID: Zp3Vnk2FS4amLHY3sm5G/Q==
-X-IronPort-AV: E=McAfee;i="6700,10204,11404"; a="196625265"
+  bh=FcEGBmLRyVsDEyEzh1uMvhKlycEdLuR/UxhYzGNitOc=;
+  b=qL44K00EQ7UZFWokCEhbkuhIRwVuB5oOApMw2x1jUad0TeiPISKRIwQj
+   8qeOf9m5d9G+1zotwYyin/Nsj0cgSMnfn1MZe1UOgXK2ImFl1IwR6nAJH
+   Rgupfp9TF5hrFmCKH8pGLBdHDwxm4jKhXmtoMTO3qTKf9HbQG6dqKaZh1
+   sD8+nbd2H6WEGb77W7Bx+s1oWOVmg9r8vJ91Ilhe1LRBm3YyyXRjOhakw
+   pDCLZ8aARd+c4yu+/74nxSv/sRWSAEj/G7CuNWIi+0dPSbMwlMBp8tngJ
+   /N5oEKToRmr3wQE9+XjDslgSNPBWd6aWQvksmf+ym1/t33sSKW70ddw9k
+   w==;
+X-CSE-ConnectionGUID: 8BTX9O0CSBeyRk4p4iEilQ==
+X-CSE-MsgGUID: 2yRWjT8HQdOSHXOk62Bg1A==
+X-IronPort-AV: E=McAfee;i="6700,10204,11404"; a="196966143"
 X-IronPort-AV: E=Sophos;i="6.15,215,1739804400"; 
-   d="scan'208";a="196625265"
-Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
-  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Apr 2025 18:02:35 +0900
-Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 2E7EDD5013
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 18:02:32 +0900 (JST)
+   d="scan'208";a="196966143"
+Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
+  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Apr 2025 18:02:30 +0900
+Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
+	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 2639D112E6
+	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 18:02:28 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id E4C18D50F4
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 18:02:31 +0900 (JST)
+	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id D8291D6FE5
+	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 18:02:27 +0900 (JST)
 Received: from localhost.localdomain (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 8E9251A0078;
-	Wed, 16 Apr 2025 17:02:31 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 702651A009B;
+	Wed, 16 Apr 2025 17:02:27 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 27/31] python3-xmlschema: upgrade 3.4.5 -> 4.0.0
-Date: Wed, 16 Apr 2025 17:02:12 +0800
-Message-Id: <1744794136-908-27-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH 11/31] nbdkit: upgrade 1.40.4 -> 1.40.5
+Date: Wed, 16 Apr 2025 17:01:56 +0800
+Message-Id: <1744794136-908-11-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1744794136-908-1-git-send-email-wangmy@fujitsu.com>
 References: <1744794136-908-1-git-send-email-wangmy@fujitsu.com>
@@ -53,31 +53,34 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 09:02:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116898
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116879
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-xmlschema_3.4.5.bb => python3-xmlschema_4.0.0.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-xmlschema_3.4.5.bb => python3-xmlschema_4.0.0.bb} (81%)
+ .../nbdkit/{nbdkit_1.40.4.bb => nbdkit_1.40.5.bb}             | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/nbdkit/{nbdkit_1.40.4.bb => nbdkit_1.40.5.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-xmlschema_3.4.5.bb b/meta-python/recipes-devtools/python/python3-xmlschema_4.0.0.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-xmlschema_3.4.5.bb
-rename to meta-python/recipes-devtools/python/python3-xmlschema_4.0.0.bb
-index f4e76d7a2e..5211963f68 100644
---- a/meta-python/recipes-devtools/python/python3-xmlschema_3.4.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-xmlschema_4.0.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/xmlschema"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=26aa26eda991a3a2b61c11b62d3fda65"
+diff --git a/meta-networking/recipes-support/nbdkit/nbdkit_1.40.4.bb b/meta-networking/recipes-support/nbdkit/nbdkit_1.40.5.bb
+similarity index 93%
+rename from meta-networking/recipes-support/nbdkit/nbdkit_1.40.4.bb
+rename to meta-networking/recipes-support/nbdkit/nbdkit_1.40.5.bb
+index 0d24e96a5d..5d80d1e091 100644
+--- a/meta-networking/recipes-support/nbdkit/nbdkit_1.40.4.bb
++++ b/meta-networking/recipes-support/nbdkit/nbdkit_1.40.5.bb
+@@ -9,9 +9,9 @@ HOMEPAGE = "https://gitlab.com/nbdkit/nbdkit"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=26250adec854bc317493f6fb98efe049"
  
--SRC_URI[sha256sum] = "243244743f151ec859ec0bbf1368fa3f70e5f29e977b77f72e1c9b8f8ae670f6"
-+SRC_URI[sha256sum] = "1b6d6c3650f1e0c60d8edc9204572b5700f408953d1fbd9bb6f4eaf5f3dda70c"
+-SRC_URI = "git://gitlab.com/nbdkit/nbdkit.git;protocol=https;branch=stable-1.40 \
++SRC_URI = "git://gitlab.com/nbdkit/nbdkit.git;protocol=https;branch=stable-1.40;tag=v${PV} \
+            file://0002-plugins-Avoid-absolute-buildpaths-in-binaries.patch"
+-SRCREV = "0d111a31d9dbc473b9eb901fefe07f0ad392c75a"
++SRCREV = "900a0d2bea4b027d71cf213f385711a2bab33eef"
  
- inherit pypi python_setuptools_build_meta
+ S = "${WORKDIR}/git"
  
 -- 
 2.43.0
