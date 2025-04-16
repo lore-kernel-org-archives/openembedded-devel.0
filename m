@@ -2,50 +2,50 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F1281C369C7
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EBDDBC369C4
 	for <webhook@archiver.kernel.org>; Wed, 16 Apr 2025 09:02:42 +0000 (UTC)
-Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
- by mx.groups.io with SMTP id smtpd.web11.14422.1744794150323600937
+Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
+ by mx.groups.io with SMTP id smtpd.web11.14427.1744794157274341254
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Apr 2025 02:02:33 -0700
+ Wed, 16 Apr 2025 02:02:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=oEEF43K1;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=VN86nL11;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1744794152; x=1776330152;
+  t=1744794158; x=1776330158;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=U0FGorX4K66NAQloFGRRByPsfHzt/gRbMbF3IVSZw50=;
-  b=oEEF43K1aMpnWB7c/jessKm5JPdoQiDYfBGo8+OcP1OegQoarcJsQ3IR
-   90WMvaTefU5bbhkVZkVwlwFwSEE7mJkCzlB5RaJ61bZbhJdNJxiziv7DN
-   Y6fnLnMmhF9heW9SsRmCYnzqJ6YU2XfF8ZDWwzMSGLPvA5pqrEQ/zLsO1
-   dlycG2EkDbalPXdmcL5Jh4cnBYbcdCr0loH7MooMuzfyp5kDTBzW9lBxg
-   VfixovyWy/G8JX9daRkvJQ/BXaNjAaCgjOMg70DM22cAC1uUcNZhrVM4/
-   I9btW0v13gm6kAm+unzudeqCzWnhKVKhvyIbHxPWdLqC33sam7UoDkXhm
-   g==;
-X-CSE-ConnectionGUID: ik7Y77dXSpi/iK5bgUEfIg==
-X-CSE-MsgGUID: QE4q2KtCR7qBJFCoXplwBg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11404"; a="175509510"
+  bh=bapMnUM+azyvxAEv+7V43j079DECwDTgy6gNP0wtteA=;
+  b=VN86nL11pfw6U1o6i9ZANB7Kc1x/AOLE9/FwIbjmhe0SwVIviTbPpbX1
+   +ZAAzfX6WZIQKZUBTs32jLGv47SMUUTewHlf4r9cgUjbhaDXHxm5F/Mxw
+   LCJvpoYW7Q5IVJYGOM/JW+XBeTiLAwWVsR876baT1uAyJ744AvTFsUq1q
+   ZTaa37B0ojpvy59FANysO1wdM4AV/q5ja6F+C+36r+CBPVRyCz8lRUVou
+   1O0N62AbgCjgZglIiGT2hoBnjWIR+8Bxvkw1A5htV1hmOhngGK0+3wZ/U
+   GAHI5gVvOTbR7W+DQvoCSjt7DiqQJYOB/yA3F7OB9C90ro0UK1fHLMS3y
+   Q==;
+X-CSE-ConnectionGUID: 42mFnEv7QjC/76yrAvzVzw==
+X-CSE-MsgGUID: kUYucFzcQ4epJmGncxXnlQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11404"; a="195806413"
 X-IronPort-AV: E=Sophos;i="6.15,215,1739804400"; 
-   d="scan'208";a="175509510"
-Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
-  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Apr 2025 18:02:31 +0900
-Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id C915AD6EB3
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 18:02:29 +0900 (JST)
+   d="scan'208";a="195806413"
+Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
+  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Apr 2025 18:02:35 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id CE195E8521
+	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 18:02:32 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 87AF3D50F4
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 18:02:29 +0900 (JST)
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 8E6E915A5A
+	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 18:02:32 +0900 (JST)
 Received: from localhost.localdomain (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 4446F1A009B;
-	Wed, 16 Apr 2025 17:02:29 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 2461B1A0078;
+	Wed, 16 Apr 2025 17:02:32 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 18/31] python3-inline-snapshot: upgrade 0.22.0 -> 0.22.1
-Date: Wed, 16 Apr 2025 17:02:03 +0800
-Message-Id: <1744794136-908-18-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 29/31] qpdf: upgrade 12.0.0 -> 12.1.0
+Date: Wed, 16 Apr 2025 17:02:14 +0800
+Message-Id: <1744794136-908-29-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1744794136-908-1-git-send-email-wangmy@fujitsu.com>
 References: <1744794136-908-1-git-send-email-wangmy@fujitsu.com>
@@ -53,31 +53,33 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 09:02:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116883
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116894
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ine-snapshot_0.22.0.bb => python3-inline-snapshot_0.22.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-inline-snapshot_0.22.0.bb => python3-inline-snapshot_0.22.1.bb} (88%)
+ .../recipes-printing/qpdf/{qpdf_12.0.0.bb => qpdf_12.1.0.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-printing/qpdf/{qpdf_12.0.0.bb => qpdf_12.1.0.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-inline-snapshot_0.22.0.bb b/meta-python/recipes-devtools/python/python3-inline-snapshot_0.22.1.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-inline-snapshot_0.22.0.bb
-rename to meta-python/recipes-devtools/python/python3-inline-snapshot_0.22.1.bb
-index e6b297f81b..0d913729e4 100644
---- a/meta-python/recipes-devtools/python/python3-inline-snapshot_0.22.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-inline-snapshot_0.22.1.bb
-@@ -4,7 +4,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=7a35eb90dfdf03953dd2074d0fdba1d4"
+diff --git a/meta-oe/recipes-printing/qpdf/qpdf_12.0.0.bb b/meta-oe/recipes-printing/qpdf/qpdf_12.1.0.bb
+similarity index 92%
+rename from meta-oe/recipes-printing/qpdf/qpdf_12.0.0.bb
+rename to meta-oe/recipes-printing/qpdf/qpdf_12.1.0.bb
+index 538faafb5c..8a64ed70a7 100644
+--- a/meta-oe/recipes-printing/qpdf/qpdf_12.0.0.bb
++++ b/meta-oe/recipes-printing/qpdf/qpdf_12.1.0.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
- DEPENDS = "python3-hatchling-native"
--SRC_URI[sha256sum] = "8e7285cbc445ed91da6b27788a267648a84377737e6be8d84f704ea648fc0fdf"
-+SRC_URI[sha256sum] = "5acbc23b9a179969b449063e2a2f3c86e2a5f6f480934e24e58d82c7cd55938c"
+ DEPENDS = "zlib jpeg ${@bb.utils.contains('PACKAGECONFIG', 'gnutls', 'gnutls', 'openssl', d)}"
  
- inherit pypi python_hatchling
+-SRC_URI = "git://github.com/qpdf/qpdf.git;protocol=https;branch=main"
+-SRCREV = "f84bf9778d141f2392c810eed340ade1eda5e421"
++SRC_URI = "git://github.com/qpdf/qpdf.git;protocol=https;branch=main;tag=v${PV}"
++SRCREV = "51fa3b523837afb18d9a86560bb2fb9979db1b95"
+ 
+ inherit cmake pkgconfig gettext
  
 -- 
 2.43.0
