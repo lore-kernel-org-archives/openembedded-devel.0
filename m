@@ -1,107 +1,248 @@
-Return-Path: <Yogita.Urade@windriver.com>
+Return-Path: <mark.yang@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F0E5CC369C2
-	for <webhook@archiver.kernel.org>; Wed, 16 Apr 2025 10:33:13 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.15796.1744799586446795992
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31847C369BD
+	for <webhook@archiver.kernel.org>; Wed, 16 Apr 2025 11:14:34 +0000 (UTC)
+Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.53])
+ by mx.groups.io with SMTP id smtpd.web10.16523.1744802070803270779
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Apr 2025 03:33:06 -0700
+ Wed, 16 Apr 2025 04:14:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=6201419d70=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53G4dRNJ026324
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 10:33:05 GMT
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 461u2m8xb9-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 10:33:05 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Wed, 16 Apr 2025 03:33:02 -0700
-From: yurade <yogita.urade@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][PATCH 1/1] poppler: upgrade 25.01.0 -> 25.04.0
-Date: Wed, 16 Apr 2025 10:32:30 +0000
-Message-ID: <20250416103230.476008-1-yogita.urade@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.53, mailfrom: mark.yang@lge.com)
+Received: from unknown (HELO lgemrelse7q.lge.com) (156.147.1.151)
+	by 156.147.23.53 with ESMTP; 16 Apr 2025 20:14:28 +0900
+X-Original-SENDERIP: 156.147.1.151
+X-Original-MAILFROM: mark.yang@lge.com
+Received: from unknown (HELO markyang..) (10.177.120.37)
+	by 156.147.1.151 with ESMTP; 16 Apr 2025 20:14:28 +0900
+X-Original-SENDERIP: 10.177.120.37
+X-Original-MAILFROM: mark.yang@lge.com
+From: mark.yang@lge.com
+To: openembedded-devel@lists.openembedded.org
+Cc: "mark.yang" <mark.yang@lge.com>
+Subject: [meta-networking][PATCH] netperf: fix build error with gcc-15
+Date: Wed, 16 Apr 2025 20:14:26 +0900
+Message-Id: <20250416111426.3734037-1-mark.yang@lge.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: zI3Vc2Fxf2udQbWbOaOsM3Tvk6A_OJcK
-X-Proofpoint-GUID: zI3Vc2Fxf2udQbWbOaOsM3Tvk6A_OJcK
-X-Authority-Analysis: v=2.4 cv=BaLY0qt2 c=1 sm=1 tr=0 ts=67ff8761 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=XR8D0OoHHMoA:10 a=e5mUnYsNAAAA:8 a=t7CeM3EgAAAA:8 a=Fi7xCRcZbbY3uOdkh6oA:9 a=Vxmtnl_E_bksehYqCbjh:22
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Sensitive_Customer_Information: Yes
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-16_04,2025-04-15_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 mlxlogscore=999
- mlxscore=0 bulkscore=0 impostorscore=0 priorityscore=1501
- lowpriorityscore=0 spamscore=0 clxscore=1015 malwarescore=0 suspectscore=0
- adultscore=0 classifier=spam authscore=0 authtc=n/a authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
- definitions=main-2504160086
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 10:33:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116906
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 11:14:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116907
 
-From: Yogita Urade <yogita.urade@windriver.com>
+From: "mark.yang" <mark.yang@lge.com>
 
-Includes fix for CVE-2025-32364 and CVE-2025-32365
+* submit fix:
+  https://github.com/HewlettPackard/netperf/pull/86
+  to fix:
+  http://errors.yoctoproject.org/Errors/Details/851803/
+    ../../git/src/nettest_bsd.c:4497:19: error: too many arguments to function 'alloc_sendfile_buf_ring'; expected 0, have 4
+    4497 |       send_ring = alloc_sendfile_buf_ring(send_width,
+        |                   ^~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~
+    In file included from ../../git/src/nettest_bsd.c:175:
+    ../../git/src/netlib.h:690:26: note: declared here
+    690 | extern  struct ring_elt *alloc_sendfile_buf_ring();
+        |                          ^~~~~~~~~~~~~~~~~~~~~~~
+    In file included from ../../git/src/nettest_omni.c:184:
+    ../../git/src/hist.h:135:6: error: conflicting types for 'HIST_purge'; have 'void(struct histogram_struct *)'
+    135 | void HIST_purge(HIST h);
+        |      ^~~~~~~~~~
+  ...
 
-Changelog:
-===========
-core:
-* Properly verify adbe.pkcs7.sha1 signatures
-* Improve errors on signing failure
-* Allow empty outline titles
-* Fix error in Distinguished Name parsing
-* Fix build with Android API < 29
-* Fix parsing Level PG document string
-* Internal code improvements
-* Fix crashes in malformed documents
-
-utils:
-* pdfcairo: Fix document unit for SVG output
-
-cpp:
-* Add document::form_type
-* Add document::has_javascript
-
-build system:
-* cmake: Use modern Python3 cmake module
-
-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+Signed-off-by: mark.yang <mark.yang@lge.com>
 ---
- .../poppler/{poppler_25.01.0.bb => poppler_25.04.0.bb}          | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/poppler/{poppler_25.01.0.bb => poppler_25.04.0.bb} (96%)
+ ...-arguments-error-occurring-in-gcc-15.patch | 168 ++++++++++++++++++
+ .../recipes-support/netperf/netperf_git.bb    |   1 +
+ 2 files changed, 169 insertions(+)
+ create mode 100644 meta-networking/recipes-support/netperf/files/0001-Fix-too-many-arguments-error-occurring-in-gcc-15.patch
 
-diff --git a/meta-oe/recipes-support/poppler/poppler_25.01.0.bb b/meta-oe/recipes-support/poppler/poppler_25.04.0.bb
-similarity index 96%
-rename from meta-oe/recipes-support/poppler/poppler_25.01.0.bb
-rename to meta-oe/recipes-support/poppler/poppler_25.04.0.bb
-index f7f2ea6cc6..1cd5f28cd8 100644
---- a/meta-oe/recipes-support/poppler/poppler_25.01.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_25.04.0.bb
-@@ -8,7 +8,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            file://basename-include.patch \
-            file://0001-cmake-Do-not-use-isystem.patch \
+diff --git a/meta-networking/recipes-support/netperf/files/0001-Fix-too-many-arguments-error-occurring-in-gcc-15.patch b/meta-networking/recipes-support/netperf/files/0001-Fix-too-many-arguments-error-occurring-in-gcc-15.patch
+new file mode 100644
+index 0000000000..51313d8055
+--- /dev/null
++++ b/meta-networking/recipes-support/netperf/files/0001-Fix-too-many-arguments-error-occurring-in-gcc-15.patch
+@@ -0,0 +1,168 @@
++From fd4f2099efd378a3e00809b485ae22ebf20ab0f7 Mon Sep 17 00:00:00 2001
++From: "mark.yang" <mark.yang@lge.com>
++Date: Wed, 16 Apr 2025 20:02:36 +0900
++Subject: [PATCH] Fix too many arguments error occurring in gcc-15
++
++* See more details in http://errors.yoctoproject.org/Errors/Details/851803/
++../../git/src/nettest_bsd.c:4497:19: error: too many arguments to function 'alloc_sendfile_buf_ring'; expected 0, have 4
++ 4497 |       send_ring = alloc_sendfile_buf_ring(send_width,
++      |                   ^~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~
++In file included from ../../git/src/nettest_bsd.c:175:
++../../git/src/netlib.h:690:26: note: declared here
++  690 | extern  struct ring_elt *alloc_sendfile_buf_ring();
++      |                          ^~~~~~~~~~~~~~~~~~~~~~~
++In file included from ../../git/src/nettest_omni.c:184:
++../../git/src/hist.h:135:6: error: conflicting types for 'HIST_purge'; have 'void(struct histogram_struct *)'
++  135 | void HIST_purge(HIST h);
++      |      ^~~~~~~~~~
++In file included from ../../git/src/nettest_omni.c:166:
++../../git/src/netlib.h:651:17: note: previous declaration of 'HIST_purge' with type 'void(void)'
++  651 | extern void     HIST_purge();
++      |                 ^~~~~~~~~~
++../../git/src/nettest_bsd.c: In function 'recv_tcp_stream':
++../../git/src/nettest_bsd.c:5197:15: error: too many arguments to function 'allocate_buffer_ring'; expected 0, have 4
++ 5197 |   recv_ring = allocate_buffer_ring(recv_width,
++      |               ^~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~
++../../git/src/netlib.h:679:26: note: declared here
++  679 | extern  struct ring_elt *allocate_buffer_ring();
++      |                          ^~~~~~~~~~~~~~~~~~~~
++../../git/src/nettest_bsd.c: In function 'recv_tcp_maerts':
++../../git/src/nettest_bsd.c:5617:15: error: too many arguments to function 'allocate_buffer_ring'; expected 0, have 4
++ 5617 |   send_ring = allocate_buffer_ring(send_width,
++      |               ^~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~
++../../git/src/netlib.h:679:26: note: declared here
++  679 | extern  struct ring_elt *allocate_buffer_ring();
++      |                          ^~~~~~~~~~~~~~~~~~~~
++../../git/src/nettest_bsd.c: In function 'recv_udp_stream':
++../../git/src/nettest_bsd.c:7345:15: error: too many arguments to function 'allocate_buffer_ring'; expected 0, have 4
++ 7345 |   recv_ring = allocate_buffer_ring(recv_width,
++      |               ^~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~
++../../git/src/netlib.h:679:26: note: declared here
++  679 | extern  struct ring_elt *allocate_buffer_ring();
++      |                          ^~~~~~~~~~~~~~~~~~~~
++../../git/src/nettest_bsd.c: In function 'recv_udp_rr':
++../../git/src/nettest_bsd.c:8360:15: error: too many arguments to function 'allocate_buffer_ring'; expected 0, have 4
++ 8360 |   recv_ring = allocate_buffer_ring(recv_width,
++      |               ^~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~
++../../git/src/netlib.h:679:26: note: declared here
++  679 | extern  struct ring_elt *allocate_buffer_ring();
++      |                          ^~~~~~~~~~~~~~~~~~~~
++../../git/src/nettest_bsd.c:8365:15: error: too many arguments to function 'allocate_buffer_ring'; expected 0, have 4
++ 8365 |   send_ring = allocate_buffer_ring(send_width,
++      |               ^~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~
++../../git/src/netlib.h:679:26: note: declared here
++  679 | extern  struct ring_elt *allocate_buffer_ring();
++      |                          ^~~~~~~~~~~~~~~~~~~~
++../../git/src/nettest_bsd.c: In function 'recv_tcp_rr':
++../../git/src/nettest_bsd.c:8677:15: error: too many arguments to function 'allocate_buffer_ring'; expected 0, have 4
++ 8677 |   send_ring = allocate_buffer_ring(send_width,
++      |               ^~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~
++../../git/src/netlib.h:679:26: note: declared here
++  679 | extern  struct ring_elt *allocate_buffer_ring();
++      |                          ^~~~~~~~~~~~~~~~~~~~
++../../git/src/nettest_bsd.c:8682:15: error: too many arguments to function 'allocate_buffer_ring'; expected 0, have 4
++ 8682 |   recv_ring = allocate_buffer_ring(recv_width,
++      |               ^~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~
++../../git/src/netlib.h:679:26: note: declared here
++  679 | extern  struct ring_elt *allocate_buffer_ring();
++      |                          ^~~~~~~~~~~~~~~~~~~~
++../../git/src/nettest_omni.c: In function 'send_omni_inner':
++../../git/src/nettest_omni.c:4044:21: error: too many arguments to function 'allocate_buffer_ring'; expected 0, have 4
++ 4044 |         send_ring = allocate_buffer_ring(send_width,
++      |                     ^~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~
++../../git/src/netlib.h:679:26: note: declared here
++  679 | extern  struct ring_elt *allocate_buffer_ring();
++      |                          ^~~~~~~~~~~~~~~~~~~~
++../../git/src/nettest_omni.c:4086:21: error: too many arguments to function 'allocate_buffer_ring'; expected 0, have 4
++ 4086 |         recv_ring = allocate_buffer_ring(recv_width,
++      |                     ^~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~
++../../git/src/netlib.h:679:26: note: declared here
++  679 | extern  struct ring_elt *allocate_buffer_ring();
++      |                          ^~~~~~~~~~~~~~~~~~~~
++../../git/src/nettest_omni.c:5050:5: error: too many arguments to function 'HIST_get_stats'; expected 0, have 5
++ 5050 |     HIST_get_stats(time_hist,
++      |     ^~~~~~~~~~~~~~ ~~~~~~~~~
++../../git/src/netlib.h:650:17: note: declared here
++  650 | extern void     HIST_get_stats();
++      |                 ^~~~~~~~~~~~~~
++../../git/src/nettest_omni.c:5055:19: error: too many arguments to function 'HIST_get_percentile'; expected 0, have 2
++ 5055 |     p50_latency = HIST_get_percentile(time_hist, 0.50);
++      |                   ^~~~~~~~~~~~~~~~~~~ ~~~~~~~~~
++../../git/src/netlib.h:649:17: note: declared here
++  649 | extern int      HIST_get_percentile();
++      |                 ^~~~~~~~~~~~~~~~~~~
++../../git/src/nettest_omni.c:5056:19: error: too many arguments to function 'HIST_get_percentile'; expected 0, have 2
++ 5056 |     p90_latency = HIST_get_percentile(time_hist, 0.90);
++      |                   ^~~~~~~~~~~~~~~~~~~ ~~~~~~~~~
++../../git/src/netlib.h:649:17: note: declared here
++  649 | extern int      HIST_get_percentile();
++      |                 ^~~~~~~~~~~~~~~~~~~
++../../git/src/nettest_omni.c:5057:19: error: too many arguments to function 'HIST_get_percentile'; expected 0, have 2
++ 5057 |     p99_latency = HIST_get_percentile(time_hist, 0.99);
++      |                   ^~~~~~~~~~~~~~~~~~~ ~~~~~~~~~
++../../git/src/netlib.h:649:17: note: declared here
++  649 | extern int      HIST_get_percentile();
++      |                 ^~~~~~~~~~~~~~~~~~~
++../../git/src/nettest_omni.c: In function 'recv_omni':
++../../git/src/nettest_omni.c:5354:17: error: too many arguments to function 'allocate_buffer_ring'; expected 0, have 4
++ 5354 |     send_ring = allocate_buffer_ring(send_width,
++      |                 ^~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~
++../../git/src/netlib.h:679:26: note: declared here
++  679 | extern  struct ring_elt *allocate_buffer_ring();
++      |                          ^~~~~~~~~~~~~~~~~~~~
++../../git/src/nettest_omni.c:5396:17: error: too many arguments to function 'allocate_buffer_ring'; expected 0, have 4
++ 5396 |     recv_ring = allocate_buffer_ring(recv_width,
++      |                 ^~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~
++../../git/src/netlib.h:679:26: note: declared here
++  679 | extern  struct ring_elt *allocate_buffer_ring();
++      |                          ^~~~~~~~~~~~~~~~~~~~
++
++Upstream-Status: Submitted [https://github.com/HewlettPackard/netperf/pull/86]
++Signed-off-by: mark.yang <mark.yang@lge.com>
++---
++ src/netlib.h | 11 ++++++-----
++ 1 file changed, 6 insertions(+), 5 deletions(-)
++
++diff --git a/src/netlib.h b/src/netlib.h
++index b1f4199..8e1f6fe 100644
++--- a/src/netlib.h
+++++ b/src/netlib.h
++@@ -564,6 +564,7 @@ extern void   demo_interval_final();
++ #endif
++ #endif
++ 
+++#include "hist.h"
++ extern  void    netlib_init();
++ extern  int     netlib_get_page_size();
++ extern  void    install_signal_catchers();
++@@ -646,9 +647,9 @@ extern char     *find_interface_slot(char *interface_name);
++ extern void     find_interface_ids(char *interface_name, int *vendor, int *device, int *sub_vend, int *sub_dev);
++ extern void     find_driver_info(char *ifname, char *driver, char *version, char *firmware, char *bus, int len);
++ extern void     find_system_info(char **system_model, char **cpu_model, int *cpu_frequency);
++-extern int      HIST_get_percentile();
++-extern void     HIST_get_stats();
++-extern void     HIST_purge();
+++extern int      HIST_get_percentile(HIST h, const double percentile);
+++extern void     HIST_get_stats(HIST h, int *min, int *max, double *mean, double *stddev);
+++extern void     HIST_purge(HIST h);
++ extern void     find_security_info(int *enabled, int *type, char **specific);
++ extern void     demo_first_timestamp();
++ extern void     demo_reset();
++@@ -676,7 +677,7 @@ extern  void    catcher(int, siginfo_t *,void *);
++ #else
++ extern  void    catcher(int);
++ #endif /* __hpux */
++-extern  struct ring_elt *allocate_buffer_ring();
+++extern  struct ring_elt *allocate_buffer_ring(int recv_width, int recv_size, int local_recv_align, int local_recv_offset);
++ extern void access_buffer(char *buffer_ptr,
++ 			  int length,
++ 			  int dirty_count,
++@@ -687,7 +688,7 @@ extern  struct ring_elt *allocate_exs_buffer_ring();
++ #endif /* HAVE_ICSC_EXS */
++ 
++ #ifdef HAVE_SENDFILE
++-extern  struct ring_elt *alloc_sendfile_buf_ring();
+++extern  struct ring_elt *alloc_sendfile_buf_ring(int send_width, int send_size, int local_send_align, int local_send_offset);
++ extern  int netperf_sendfile(SOCKET send_socket, struct ring_elt *send_ring);
++ #endif /* HAVE_SENDFILE */
++ 
+diff --git a/meta-networking/recipes-support/netperf/netperf_git.bb b/meta-networking/recipes-support/netperf/netperf_git.bb
+index 3110237804..151f243c27 100644
+--- a/meta-networking/recipes-support/netperf/netperf_git.bb
++++ b/meta-networking/recipes-support/netperf/netperf_git.bb
+@@ -16,6 +16,7 @@ SRC_URI = "git://github.com/HewlettPackard/netperf.git;branch=master;protocol=ht
+            file://0001-nettest_omni-Remove-duplicate-variable-definitions.patch \
+            file://netserver_permissions.patch \
+            file://0001-Makefile.am-add-ACLOCAL_AMFLAGS.patch \
++           file://0001-Fix-too-many-arguments-error-occurring-in-gcc-15.patch \
             "
--SRC_URI[sha256sum] = "7eefc122207bbbd72a303c5e0743f4941e8ae861e24dcf0501e18ce1d1414112"
-+SRC_URI[sha256sum] = "b010c596dce127fba88532fd2f1043e55ea30601767952d0f2c0a80e7dc0da3d"
  
- DEPENDS = "fontconfig zlib cairo lcms glib-2.0 glib-2.0-native"
- 
--- 
-2.40.0
-
+ SRCREV = "3bc455b23f901dae377ca0a558e1e32aa56b31c4"
 
