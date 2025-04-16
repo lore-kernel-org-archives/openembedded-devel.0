@@ -2,83 +2,90 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 71F96C369D6
-	for <webhook@archiver.kernel.org>; Wed, 16 Apr 2025 09:02:43 +0000 (UTC)
-Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
- by mx.groups.io with SMTP id smtpd.web11.14423.1744794151467423540
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BE3FC3DA4A
+	for <webhook@archiver.kernel.org>; Wed, 16 Apr 2025 09:02:53 +0000 (UTC)
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.web11.14435.1744794166585269245
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Apr 2025 02:02:33 -0700
+ Wed, 16 Apr 2025 02:02:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Af88s4Tz;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=VpdKthLX;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1744794152; x=1776330152;
+  t=1744794166; x=1776330166;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=X+gJE8v5+DlyKkgpNlC9kT37ApP1jaEuM+3xUSrFXO8=;
-  b=Af88s4TzdPxiB9GZL1Qyy+9hReje2xaw0WTfwHt7Phd+r9X098RAgIG9
-   14KGAK96t/lIZOnG94AmgmE+eFGF1sXRE6Ft9CdLEzyRCxwekqgF00AUS
-   Qvzc2RJ++U2eJx/Myr5Y/HlCHbLP9idix+JM3sVpeUWqNsSglSGvuQrZb
-   K0SKEr0C4XMIinSmTCur0kOsaBhK8QEQvd6oA/EhwNUfcg6sBn3YleurG
-   q6cC/swaWWLcBPV/B2ZeGEYH+p2c8IOd8fvjKuG1nu5H5e8RApuqkIitp
-   LKLNC6PFrmFSYvUhP3DE/Tc5Zt6/P51i3zRykYCZz/DgC5T8J9HWgRizu
+  bh=BpH+MovbMP3Zg+s0XLpxPeuylSaRI5YA5/inWt7QMTM=;
+  b=VpdKthLX20g2kC4ICJMWYvvP2kMl42oDbcuf5j8JyZySq66N0/zL4JTp
+   5uAZIJye7mKVI9qoWWa/uHo9ehUy26z+W4vizfAkZcsFUSTdhjGAEUFAj
+   6Z80n9g8OUZ9tS0ZpsevcB7xUXp/qygmDLmhdXsZ2uBLQ1YOi183RORVA
+   autDzQ8FFkzDaSLYUWjn0Y75jJUJqeLdY92WqxeEheEV1jZXAmoFyVMZB
+   M7ktHRZFUvNS9WJb3o5vYjD/8h9s2h/CBavA7sh0cOdzLF1yXTPd9qzi3
+   je9uCi/n7c/b9V6iv6Grq3V4tY2UnlDDvjSIUWtEQMM4qJ+fewfZVe4eL
    w==;
-X-CSE-ConnectionGUID: kslPTNEJQc+0C3wOO5DZhQ==
-X-CSE-MsgGUID: z/wSXpMURfq7sWJ3aEFt3Q==
-X-IronPort-AV: E=McAfee;i="6700,10204,11404"; a="183962642"
+X-CSE-ConnectionGUID: hB6Ub6p1TbeHIrmiSP4xgw==
+X-CSE-MsgGUID: BEAQ9xF3SoSTwZCBj7Peeg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11404"; a="185014442"
 X-IronPort-AV: E=Sophos;i="6.15,215,1739804400"; 
-   d="scan'208";a="183962642"
-Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
-  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Apr 2025 18:02:31 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id B2705E9EE5
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 18:02:29 +0900 (JST)
+   d="scan'208";a="185014442"
+Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Apr 2025 18:02:32 +0900
+Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
+	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id C95C1E8523
+	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 18:02:30 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 6D6E6BDB60
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 18:02:29 +0900 (JST)
+	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 8952AD50F5
+	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 18:02:30 +0900 (JST)
 Received: from localhost.localdomain (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 04CF51A0078;
-	Wed, 16 Apr 2025 17:02:28 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 444931A00A0;
+	Wed, 16 Apr 2025 17:02:30 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 17/31] python3-httpcore: upgrade 1.0.7 -> 1.0.8
-Date: Wed, 16 Apr 2025 17:02:02 +0800
-Message-Id: <1744794136-908-17-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 22/31] python3-pykickstart: upgrade 3.62 -> 3.63
+Date: Wed, 16 Apr 2025 17:02:07 +0800
+Message-Id: <1744794136-908-22-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1744794136-908-1-git-send-email-wangmy@fujitsu.com>
 References: <1744794136-908-1-git-send-email-wangmy@fujitsu.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 09:02:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116882
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 09:02:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116901
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-httpcore_1.0.7.bb => python3-httpcore_1.0.8.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-httpcore_1.0.7.bb => python3-httpcore_1.0.8.bb} (88%)
+ ...ython3-pykickstart_3.62.bb => python3-pykickstart_3.63.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-extended/python-pykickstart/{python3-pykickstart_3.62.bb => python3-pykickstart_3.63.bb} (90%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-httpcore_1.0.7.bb b/meta-python/recipes-devtools/python/python3-httpcore_1.0.8.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-httpcore_1.0.7.bb
-rename to meta-python/recipes-devtools/python/python3-httpcore_1.0.8.bb
-index d0ee834b2d..a4c9166639 100644
---- a/meta-python/recipes-devtools/python/python3-httpcore_1.0.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-httpcore_1.0.8.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=1c1f23b073da202e1f4f9e426490210c"
+diff --git a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.62.bb b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.63.bb
+similarity index 90%
+rename from meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.62.bb
+rename to meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.63.bb
+index 9b15f957de..bd20c69980 100644
+--- a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.62.bb
++++ b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.63.bb
+@@ -11,13 +11,13 @@ RDEPENDS:${PN} = "python3 \
+                   python3-six \
+ "
  
- inherit pypi python_hatchling
+-SRC_URI = "git://github.com/rhinstaller/pykickstart.git;protocol=https;branch=master \
++SRC_URI = "git://github.com/rhinstaller/pykickstart.git;protocol=https;branch=master;tag=r${PV} \
+            file://0001-support-authentication-for-kickstart.patch \
+            file://0002-pykickstart-parser.py-add-lock-for-readKickstart-and.patch \
+            file://0003-comment-out-sections-shutdown-and-environment-in-gen.patch \
+            file://0004-load.py-retry-to-invoke-request-with-timeout.patch \
+            "
+-SRCREV = "27f1bd96d1be83da5bea0159f785753ae393ee2d"
++SRCREV = "6e0d1238cb4696a9040072a5a28a706e5775c552"
  
--SRC_URI[sha256sum] = "8551cb62a169ec7162ac7be8d4817d561f60e08eaa485234898414bb5a8a0b4c"
-+SRC_URI[sha256sum] = "86e94505ed24ea06514883fd44d2bc02d90e77e7979c8eb71b90f41d364a1bad"
+ UPSTREAM_CHECK_GITTAGREGEX = "r(?P<pver>\d+(\.\d+)+(-\d+)*)"
  
- DEPENDS += "\
-     python3-hatch-fancy-pypi-readme-native \
 -- 
 2.43.0
 
