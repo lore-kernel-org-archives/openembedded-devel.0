@@ -2,59 +2,59 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AC641C369B2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD9B8C369C2
 	for <webhook@archiver.kernel.org>; Thu, 17 Apr 2025 12:32:47 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web10.7639.1744893157451753685
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.web11.7706.1744893160748959460
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Apr 2025 05:32:37 -0700
+ Thu, 17 Apr 2025 05:32:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=B6OE55NB;
- spf=pass (domain: konsulko.com, ip: 209.85.128.48, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-43ede096d73so4868205e9.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 05:32:37 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=SDAeYJEC;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.49, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-43d04dc73b7so6449095e9.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 05:32:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1744893156; x=1745497956; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1744893159; x=1745497959; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=szVvhj40F8s/aSbQNRkW3J3JAoEiN4tkofnvHfyy06Q=;
-        b=B6OE55NBkmLXE049FzryiJ3VScSH0FE0HDaoOmuoISVa68U03zhHR+dPZxRZXcFlFS
-         JRVMCMbz1BCtOqYsOUeCAyvNwkxzSxSuPAlIHB1X5z/UD6dolUR/Odg0T1O6Qs4mqjg9
-         /L/rfme2P4hIGeyToSizECk8aHAqT98I1Fvag=
+        bh=j1fGHYv9bkPZvFDter0GCmcO9J7vAr8iCYGS6zOWJOg=;
+        b=SDAeYJECjtY+3YB07PIKZGkqCz/1ItU4wvubQeQbY0fHIHsKYd9/HdKtmpSrQXrLzZ
+         w+Fcv7NdaH7yW7a5RWEsYVHgIRGKkBrJMyuUvBKNAN3CicU6kZJvMnsPl3X4G//1KKEv
+         rFow0v4g3O1qB0ps+fQtv3O9YHF1q4/vORZQk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744893156; x=1745497956;
+        d=1e100.net; s=20230601; t=1744893159; x=1745497959;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=szVvhj40F8s/aSbQNRkW3J3JAoEiN4tkofnvHfyy06Q=;
-        b=jpbZRHCORF6JvThKaHO6SZ2R2OpNAyzj7VgCXRkFAkSlPux9n8/X2WvZIfkxPqijva
-         4v0RYwlh7YWrkgrrE6S5szcFEo4ZKm5rmG+kW5x4AryUnod1cCcweaNi7J1TiaEHjWFj
-         DeYj+YuP4QNdPonTkF4C18NK9lk4IPiC7kqjk7To23WU5mO80dmIg5jIEXse0h8EEppw
-         mDbV4GA4oDnLbgOAK7PVqdC6J1VzGrCxoCuQYpOPRfG6ItVJItLtEyDeQ6exkHVMohN3
-         BZ3oSgRGddO/auGahj+ZKGuOtSLj4SyT/mat0MhtB5N681eBRhccJS+b4kMPFFLaQZmy
-         JXGg==
-X-Gm-Message-State: AOJu0Yz7fxQk8xTSmdtKZQ+r1Mmn7cX2mxZi6EIwTnUYtw4B35NaO79S
-	95ai0+fiNfwciwhi3kSgoyQCyWpmY40K1zF+PaFJWrMvQsW8EGC90CodJaM1pPjjkOrQZnJeamN
-	3
-X-Gm-Gg: ASbGncurzTpoI2Ych+dHqqzLOFCp6GiezWt0Okc33uYFx7ddzRNXCgwN5J7Ow1dOi0E
-	biPG0i2a5aIopKnuVK3Qn9Z1sE5qI4K8nKi7/nJrlZ3k09WtkBYxC17r2Jk6e1ralffcoP6xO09
-	6H4tGm5rA5Uem/dbzPfB8z3Ffly22TY/jfRup3tLjuZ3+s0u+A+x4VbRllRc++1/QHG8s/OJdM/
-	aSJaRcw340XmQ8jjzizTyCRhRycfi/QC2nj3cKHmHZ2qdgUMsjpvQMqDoHgaD+WZ0n/57GiFUGy
-	dmEwm3enR21Pfo93FGHvcV0tt2yuD2G3xxK8gCNtaXkWrryk3w8QGr9SOhbPHXuzxA==
-X-Google-Smtp-Source: AGHT+IElKLs7638hWcrrxSoyhetxk10pJeSjwc2WA7tMkTizTxMJyV7gpXPqG89wzixNM+AgjjoQug==
-X-Received: by 2002:a05:600c:1da5:b0:43d:77c5:9c1a with SMTP id 5b1f17b1804b1-4405d5fae34mr54836315e9.4.1744893155142;
-        Thu, 17 Apr 2025 05:32:35 -0700 (PDT)
+        bh=j1fGHYv9bkPZvFDter0GCmcO9J7vAr8iCYGS6zOWJOg=;
+        b=LxYqfg5Vp+0Jnek6iKi0eJOlyRPjTUr1YiRWHdP3vMh3bHyVw8Q/T6hIirfMeXUM6H
+         6NWY6qOX7QPO+IfABkyMEGBBA2qLNG+6ok5xj86mbAH3iWav1KrVJpdhLj7IzPy/DtM+
+         9HgioUpPz6T0VFAbkDxdtQybyWd0r9ANx9MNNIBYMyfLzrnQwJsJiAPPzj/R/aYVYI63
+         u/lTA69rzXSQLX1Ahv/Zown538o81m20u1hBgUlkBTaT1dUCRsLmguaw4r9Mun59WcK/
+         XVVlBnpJ+cbFw8Tm6RQbdK2WQN9CHLryRl8eQk4vm2+UCFkqUISuLJ6WYBIr9F1ioSwS
+         1ePA==
+X-Gm-Message-State: AOJu0YxMI+yc9PZZpEoZiP6VBS36hQfEUY1gRy4ax/XK9yJt+mD2vlMY
+	OxGNGzi84sD4z9vy9yIJiTxlpe7AJObj75B1HogZhg7J9Z6pm9kmrL2xxv7pKG+v/q93KTfXjn/
+	1
+X-Gm-Gg: ASbGnctJZK79JtcdhppJPQCUugI74drCJeExi8b4BdnTHLsd6f6jPTezVmvDO8D42jJ
+	Vbwh75Baq9GwnUNnbwKs0HGhUgeOulJE9H/ZdVSlCTRbulVXIvxC2N7Q6jFRGb7qphEeuZDvxXb
+	9E4c2CCAamOVFP+mI8DaBh1MMKteOxzQhdVKyeU3/1hs9/XsFg5lAFC62KUuh6rlteAYEnB4OHr
+	dGPbHcnRDoPt7TmjZlh3c+3n/HSNkrnKy0zD6XLVHM83/nf8SRBpp4rdnL0Ob/CmLEKeQRE9lzt
+	y45NbOO/ikef4I8DH7C06v6WaewXHYtQDnjSPoj99kpRQn3Pm+/rixY=
+X-Google-Smtp-Source: AGHT+IERBP2mzV/Pp8y5dFHw+nxysYlc0BNiCboNUcEdX8fCtLabfPBwGPFB8ZbTkazhlbg4fguMKg==
+X-Received: by 2002:a05:600c:4f8f:b0:43d:1b95:6d0e with SMTP id 5b1f17b1804b1-440600e06c5mr36558765e9.23.1744893158881;
+        Thu, 17 Apr 2025 05:32:38 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-39eae96407esm20208804f8f.17.2025.04.17.05.32.34
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-39eae96407esm20208804f8f.17.2025.04.17.05.32.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 17 Apr 2025 05:32:34 -0700 (PDT)
+        Thu, 17 Apr 2025 05:32:38 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/6] python3-lazy-object-proxy: Upgrade 1.10.0 -> 1.11.0
-Date: Thu, 17 Apr 2025 15:32:27 +0300
-Message-Id: <20250417123231.3063208-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 6/6] python3-eth-utils: Upgrade 5.2.0 -> 5.3.0
+Date: Thu, 17 Apr 2025 15:32:31 +0300
+Message-Id: <20250417123231.3063208-6-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250417123231.3063208-1-leon.anavi@konsulko.com>
 References: <20250417123231.3063208-1-leon.anavi@konsulko.com>
@@ -64,44 +64,46 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 12:32:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116932
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116936
 
-Upgrade to release 1.11.0:
+Upgrade to release 5.3.0:
 
-- Added Python 3.13 wheels.
-- Added support for __format__.
-- Dropped support for Python 3.8.
-
-License-Update: Updated copyright years
+- Replace arg["name"] with arg.get("name") to correctly handle
+  optional names
+- Add new methods: to_wei_decimals, and from_wei_decimals which
+  take a number instead of a string
+- Add CamelModel pydantic model for validating objects and
+  serializing to camelCase when used with by_alias=True, with
+  the general expectation of a well-formed JSON-RPC object.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...-proxy_1.10.0.bb => python3-lazy-object-proxy_1.11.0.bb} | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-lazy-object-proxy_1.10.0.bb => python3-lazy-object-proxy_1.11.0.bb} (55%)
+ .../{python3-eth-utils_5.2.0.bb => python3-eth-utils_5.3.0.bb} | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-eth-utils_5.2.0.bb => python3-eth-utils_5.3.0.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.10.0.bb b/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.11.0.bb
-similarity index 55%
-rename from meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.10.0.bb
-rename to meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.11.0.bb
-index 195f94705b..ebf9f84951 100644
---- a/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.10.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.11.0.bb
-@@ -2,10 +2,12 @@ SUMMARY = "A fast and thorough lazy object proxy"
- HOMEPAGE = "https://python-lazy-object-proxy.readthedocs.io/"
- LICENSE = "BSD-2-Clause"
- SECTION = "devel/python"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=d606e94f56c21c8e0cdde0b622dcdf57"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b44e35194fc96f303ff4302a2a5759dd"
+diff --git a/meta-python/recipes-devtools/python/python3-eth-utils_5.2.0.bb b/meta-python/recipes-devtools/python/python3-eth-utils_5.3.0.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-eth-utils_5.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-eth-utils_5.3.0.bb
+index 435d032a84..84db8b32b3 100644
+--- a/meta-python/recipes-devtools/python/python3-eth-utils_5.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-eth-utils_5.3.0.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d3f53e7cc5bf80b16eff1f4a38c73182"
  
- DEPENDS += "python3-setuptools-scm-native"
+-SRC_URI[sha256sum] = "17e474eb654df6e18f20797b22c6caabb77415a996b3ba0f3cc8df3437463134"
++SRC_URI[sha256sum] = "1f096867ac6be895f456fa3acb26e9573ae66e753abad9208f316d24d6178156"
  
--SRC_URI[sha256sum] = "78247b6d45f43a52ef35c25b5581459e85117225408a4128a3daf8bf9648ac69"
-+SRC_URI[sha256sum] = "18874411864c9fbbbaa47f9fc1dd7aea754c86cfde21278ef427639d1dd78e9c"
-+
-+PYPI_PACKAGE = "lazy_object_proxy"
- 
- inherit pypi python_setuptools_build_meta
+ PYPI_PACKAGE = "eth_utils"
+ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+@@ -16,4 +16,5 @@ RDEPENDS:${PN} += " \
+     python3-eth-typing \
+     python3-setuptools \
+     python3-toolz \
++    python3-pydantic \
+ "
 -- 
 2.39.5
 
