@@ -1,176 +1,521 @@
-Return-Path: <Qi.Chen@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2ED74C369CD
-	for <webhook@archiver.kernel.org>; Thu, 17 Apr 2025 08:05:36 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.3642.1744877132357787029
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59D2BC369B2
+	for <webhook@archiver.kernel.org>; Thu, 17 Apr 2025 08:13:36 +0000 (UTC)
+Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com [209.85.167.179])
+ by mx.groups.io with SMTP id smtpd.web10.3756.1744877606921500633
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Apr 2025 01:05:32 -0700
+ Thu, 17 Apr 2025 01:13:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=62023c0ecd=qi.chen@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53H60XU4002201
-	for <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 08:05:31 GMT
-Received: from nam10-dm6-obe.outbound.protection.outlook.com (mail-dm6nam10lp2043.outbound.protection.outlook.com [104.47.58.43])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 461u2ma8hp-3
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 08:05:31 +0000 (GMT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=J1MIYCP8llpHIpJk7TYcWvS2GveHrUpp+KcaIgk2tc5BRnVHycHWfhRCvYS3XYIlcCDQryVwQhbf7HwPSblxyQQLix+9aCM8IyxrLT1GWK5msUqf43fWvkVBrJes4BavP4zkDL8k9+pUR3bhTHDPRZ3V6JgrYo7qKzEUsPhqAFahh7FzxyoeiE+gwuefKrVtUm/vtGZ6JB3LlWQfU9Qasv/c8jkZUVgIqokAwpw7rfHYtOojv+cHvJRip3oOgKe5v9gs9DVnjF7Y/g6GD1KKqnWRxtfKHKw3JwMiCLyk7xRVrNX0Lz79SMnaNRZQkTeVpIMe9wymBXEpnT2wmEdTpQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rM9CgVhTTbtbc2kjB0txmfX3lv1bf8xvG3+erutYwrE=;
- b=qwHc9AfIRs+d4IEb1n6dC4rOdbP4qWjrf08ZbPrlvuM1hBC95VxN3iRisCcaIkK0uOjAj+JNffwAzkb7ln40MOrj0YELarnekEA7+mpG0GArY5J8ZKTPseS7UrnYKWp/rxg4IEjpP6yvulSiVfVQGcJi3UfT6b2nO9uXw1OJSL0xIXaGDTkBQWVRNYYkIpTKFrY3S8pfOzZM7eoi4wpIOFpu6jEEvF2+NPbouYo5Qmi7owO2fbFtN+X+i3t4iMWaRBti0U0u5vsiSdFaLjBeNZOO31b4nuW6luBvuHzr4TOH3/s5kLkW5EXHoVbHcRrO2xaz8tOcZf3TNrjaw4iaGA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from CO6PR11MB5602.namprd11.prod.outlook.com (2603:10b6:303:13a::5)
- by SA2PR11MB5163.namprd11.prod.outlook.com (2603:10b6:806:113::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.35; Thu, 17 Apr
- 2025 08:05:29 +0000
-Received: from CO6PR11MB5602.namprd11.prod.outlook.com
- ([fe80::a7e3:721d:9cec:6093]) by CO6PR11MB5602.namprd11.prod.outlook.com
- ([fe80::a7e3:721d:9cec:6093%5]) with mapi id 15.20.8655.021; Thu, 17 Apr 2025
- 08:05:29 +0000
-From: Qi.Chen@windriver.com
-To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][PATCH 3/7] conf/version-check.conf: skip piglit
-Date: Thu, 17 Apr 2025 01:05:12 -0700
-Message-ID: <20250417080516.3158818-3-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250417080516.3158818-1-Qi.Chen@windriver.com>
-References: <20250417080516.3158818-1-Qi.Chen@windriver.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: PH3PEPF000040A4.namprd05.prod.outlook.com
- (2603:10b6:518:1::53) To CO6PR11MB5602.namprd11.prod.outlook.com
- (2603:10b6:303:13a::5)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GvkW97V3;
+ spf=pass (domain: gmail.com, ip: 209.85.167.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f179.google.com with SMTP id 5614622812f47-3f6ab1b8fc1so271457b6e.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 01:13:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1744877606; x=1745482406; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=1YAdHKRXiCNrF53jMq1576uvV3AvNlk1VlIpafyAgrU=;
+        b=GvkW97V3D7PJjUWlxrq1Tr58N+s0GhLOT3zp5ji7+U5MdIAAyTBLsHzZNzjBilGdTF
+         KgzsrlsOjWIKHy6U7k9zaxpdgY/7pYiV+6xqecm5xcnYmPSw3D4Aeo332LzdtXr3LXYD
+         IZ2gKFTepmC1IiMjPGa+yUchE0uE6fGe5EPlWR4mL6p19q5IO0X4PPFq7DwFIZgF1YVK
+         PAoFGRZK+nW6FTntfPu8gU+rLQFg1rxnXUQOGLZv+sjNL7Thvlz5zBhcYH8SraTah5HC
+         MFEd6w8iOtV59GnhXmM74nwpZZku+BckMgJ5ghRI6qJz+i/x7Rjb+qRwbu1HJZFDAgI7
+         KD0w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1744877606; x=1745482406;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=1YAdHKRXiCNrF53jMq1576uvV3AvNlk1VlIpafyAgrU=;
+        b=lDoSySW5FLRSXg75eoKdY83aTcAEThUcOmoy8/5dvSh9CN65JhS2Aomoy5W6lh/HWz
+         RZyl0x4U5MpDQou4Z07YKVGljGYpPmfppbTCPvDgdDoEQ7EVDZMYTqMI2yxQwhH0BAoh
+         Py0ul5WLyVdA1pXmPdjZGLeHO8q/r90rQitlbGpxBdCc/NS1sXDC+d+CgSWZ4siIZDcH
+         vmPgXctzySRpN24WNMnf9YbxCQ+xo6Pr46tKKa5Kqnxswl/VfCg3qQfEKBIXDtaBnlRc
+         xkmbcQttfNjwHz2ZcptdjBD0jLSJyx7OeEB9mPJpX5bLoqbrUV5dhB6Me8AP7sP0hasA
+         8VIA==
+X-Forwarded-Encrypted: i=1; AJvYcCUXnJLVCwvhG8zoTaJWdFJBNo9CINk5FTD29fpH5HVTX3jVopMP4lF+XVu/JyTxQwGu/FAZx2N4XqN3qhRkxKTAJnw=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yxh7MLFYRpS0DU4qWDvaMbjHXfMEUi9mBVyIaoA8nVIwi5Fi7CT
+	GTq+rhS0GZdhQJ4VVUST7xigUTEaAC3c/+cDDTwkhnwXgd/gER7WDS36v1C4O/YTFiGZ+UCwcAJ
+	NgYyKwsyuTniTu0yCDEGEoGGMfMw=
+X-Gm-Gg: ASbGncvWXnPIlD6ODT+1Hxold/sF9jtcQp1f6KH7og81dqYulFyM9VgRjrs4gPuRTTz
+	j7Vp9M+hlgQkUayVbsoRe6rTBIT5z6jAVJ+tGq27PjeCg1QoIdoEh21BXhMiseH4hQc6JONfa7/
+	gT3yH1dRahRHuwhPQcLOpR
+X-Google-Smtp-Source: AGHT+IFdtm7nwPxPT+YKDwsLwslrnu9r+khMc/krQPI6gcGpsk+PlztcXKK71mn4wonyqVwi0waSyF0/4n723nxML64=
+X-Received: by 2002:a05:6808:1a09:b0:3f9:a187:1f5d with SMTP id
+ 5614622812f47-400b044c997mr3005473b6e.35.1744877606006; Thu, 17 Apr 2025
+ 01:13:26 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO6PR11MB5602:EE_|SA2PR11MB5163:EE_
-X-MS-Office365-Filtering-Correlation-Id: 47ea1f02-9127-42a7-6222-08dd7d869df7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|1800799024|376014|52116014|38350700014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?3qo7/SwEYdlhZJIseFYXdIwQloviORsRq1E9G1wNQPpF1kIqnRZV6kXXdPuf?=
- =?us-ascii?Q?5M+PCjTFuXt5rL7omPlk4U0jWIi+6nNEbFIwK7U0Rtnw7Ue7qQkPFwLL/hiS?=
- =?us-ascii?Q?8bQSz67207xoQACB9gcHEDQzKhjPwEB843flAQVPiZMX6n8K7Kj8xW6WtRyD?=
- =?us-ascii?Q?Mv5DzeA/YNNZbbSzo/2xG9M96c1RThhQz+D/T1aKK23zARMV8KW/j8oKaZM2?=
- =?us-ascii?Q?RdVSoS+jWp1I/gNcbw1KXXV9k9GImJnjJ6qcjZnx2uy9da7/sIG3h8VPX6OC?=
- =?us-ascii?Q?Af+EOq4p0iMO81lcpSc65OthJozKVowvUHJ09jOthJ4GK1m8GYXiyb6Vu3w1?=
- =?us-ascii?Q?kzXY3bTmf2/b7LqVYqW+uK+HCOovKyA2aLgk7AWo4+sFg10VThSlH8mePhaY?=
- =?us-ascii?Q?CR6aAV4ybVGofEqO0txkpfK3Gf5aYIZ9Htiz/6xlO1ckIXnDlns0a0CKHs2I?=
- =?us-ascii?Q?1Aw1XY04FSk4MHqQTVnu4YiKjZhwKOsHyW1XVcrPX8Ivpk4yjCn4VjrQHUzV?=
- =?us-ascii?Q?YeQIjbr/I776LcqHn0wmD2ZWt6Zqr344tj+nHhh1f55OWPLVYHgKG65dt74d?=
- =?us-ascii?Q?cLCQgmcIxMYf/Hvu8cP71G2Gi5SEYH7sAxH46lsyJ4+8VaNoOmaGG+R5U8tA?=
- =?us-ascii?Q?RgzWqTJnyhhZUqukpf88XoImTCzIj9HNj8ggySr+RIhIeHIu04qI5deKaVQW?=
- =?us-ascii?Q?F5K/zX3S8CrAnzWJzkfbtF2e3y7iCzHZP2GvMeicPzHC1E2LBH2kJ2ZZFD63?=
- =?us-ascii?Q?BXEv7X+3N4t6bFLG8t2Cf/weSPUJcrRa+JGliTv3E5WvigIDdOD+upvebs20?=
- =?us-ascii?Q?GdV33EnMRUdm2+ZSBrgHcyf5BRTDjv9M6dMwT2U0pcOEGSBHBe4L47eajgCc?=
- =?us-ascii?Q?KXC6RfxEtYynIq4M2CrRMoDSq0tErKU9cA0W5ExcRbS6a6bgHGvl3CE3tZfh?=
- =?us-ascii?Q?Hb2gyMwERzpCSfLRZrpwHB8xweomkskmYBZ7bXd2Ya84xpdJkDJ2TiMUxWs6?=
- =?us-ascii?Q?AKjPBwfjcQZMtLUx75l4UndvrBXsDvtX8hla+ssblwJ4ePiVfiNfWv31mA81?=
- =?us-ascii?Q?I1q95dVuVu3KTBDhiaAe8RfCwDzhVNhrFjF2HquqVY2Ju2jy1OTk1uC36Tah?=
- =?us-ascii?Q?5VJYXldx96C+QrVnfwN56OlFhKrlN1u1E7IKzuP20eJMhRjnxbtj+6rmTSIE?=
- =?us-ascii?Q?W+Og8axZclXFBAYVcWThepM2HmSTCCjrjOYjTCGADq4k9AQ7sxH6dU2RtkVN?=
- =?us-ascii?Q?PBgozAQsLYKv65PeSqdmqgruxuYtihNoR19eKY6LUr0CRpn+c6OFZJaM5yHs?=
- =?us-ascii?Q?Xq43k/A+lxyFElF/Q9/fX7KATAIhcBMGwDEG5Th+q12juUxMqGOPHJ0VNukj?=
- =?us-ascii?Q?0co2TIoXURwMNj16h5ak9jMILqdFrTEPR0YPKXQEL+VN/L+oYLfmRtexDTnW?=
- =?us-ascii?Q?Qh4Cr6RXRWcHqySL6j6wICevanzF3zSOESVrwplMh01CNTbegXEv4w=3D=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO6PR11MB5602.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(52116014)(38350700014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?z9MzhL+lB+Sn1hKVI2kgcP+3nw6YjxRY/cqXNK7la6C9jtKyxjX6NF5WPLcH?=
- =?us-ascii?Q?ZPbi63uaTuyyuzzk5hly+3SKoTz5vDsPysaB1hMvMZMjbYJ4GSJakucpvGm5?=
- =?us-ascii?Q?d7jnmYsdRP/yGU+ucBqzENEQkiUR7FlH+CpSDVxtruG5Q4ZL54CwYmd8thCC?=
- =?us-ascii?Q?xgrJ8KI4BwzwWtq45o5pV2Y2BpvcKX+yzpbo/0yEzkCRC7g8cYkdiepbVhmg?=
- =?us-ascii?Q?dDw941tkB4tjhfgJ3QvTsJYllAKeFmCMrXJvjHDLkLDIKT07CxVTCcETf9jG?=
- =?us-ascii?Q?afvasqGe4gIExIq815kBR3zmKJAlJe/tLgNdMPiovPFBvGcOvLg3fwaLmwIt?=
- =?us-ascii?Q?inbXaLeyEo9pRX86nB1zQZE/MEyLHGv3PPfxjxaReyAA6XEPnpWDNCzkb0To?=
- =?us-ascii?Q?Go7447Z9sDTuFvZzR5chVYCpvy2RVlR+OpjFutvyGbQ8PfF2mTcnLmzubm04?=
- =?us-ascii?Q?o4ImN3Kr/3XyDZpsUJzmu3O4WpIfRa8IztKL4mVFU1UvlxkOZYG8ugiYQxnF?=
- =?us-ascii?Q?WuVqgYv15jTATCgNuKxrXI/LjJhZVeNMrNWJVNCJ2tQhtJX4IEEojvM8+VFY?=
- =?us-ascii?Q?Ki0kjZzZ8p+zAy/RroUpO5nR39BtljlH1TxczGNSCKPNPpOXbslOZswPVYuP?=
- =?us-ascii?Q?DRg5wbm3C9KzWfSUf3Ok1ZLNiwYUXvnh35LhPXkBse/xaKCxQWS1x/kNqSt7?=
- =?us-ascii?Q?J6U02qHefZkA23SfRccConIlUpWplliJBNBn4N3sjH+TbulWsgfSnVh14cYN?=
- =?us-ascii?Q?0hzs0A6On+db7ybWODFeWB4S9W0G5QaEreUz7BacKhMdLL2ZRcVff5kdSxDd?=
- =?us-ascii?Q?o+FsDWtXuxZb09OVMp2rXeP23otjHX+TMS5o0gWYy9S6Gc1yLp9dhF5W6Sjc?=
- =?us-ascii?Q?QsYw3iLbZSlUWpz5+Lxmm7Naa1q+kdXmisFE3MzD5ppJy2iHM2siNw2412xR?=
- =?us-ascii?Q?0XJEDFo2EmazSM80NT7yxcHr1hMJDgz8+goZ4llmf4yQ5ajEYvDFW5l03hkw?=
- =?us-ascii?Q?RfV8scDwNamZpPAFWHtW/lmSxYRqv+/YofkoYsSE+bTyziBftho8sPXWC4gV?=
- =?us-ascii?Q?wZ6BxMHh0HNbm6eHR0w8TbhfAuCMLtTgmLbo1kPRvew3VIP7L9CUoOI8KNVY?=
- =?us-ascii?Q?85OjzrNGWVozdYvj8EW8rOmrUf9Bt1ChE57NtPR7XsWeEHlgrX04avZ5EpZv?=
- =?us-ascii?Q?ObNIidtp6FzvdHS5JYK4jFwlKxaG9krjmYRTdkRG5Y8T9HnjGB07B+jZK/v8?=
- =?us-ascii?Q?2pE0iLGPxPoWfquPDb+gEQqUVsjz2LPk5PKeQVLh7fBOSct4pdWvBc0YAzdG?=
- =?us-ascii?Q?4ETrGXC8j730ZHwnH7pgLklLEj8cwt8AHzke/vYx0fkinYzKXV0qD9Cg45z7?=
- =?us-ascii?Q?M0VFlhF5v0Eq+4IUn6Us1wFAqI3ZmwlJr6Dar+1b1i06cUhnJO/MsKjjOEhl?=
- =?us-ascii?Q?pSu3z2oYA+zaobfk763f08dzwapuO/VDperzCvPvo7sIM9IUYiyanxH7qJNJ?=
- =?us-ascii?Q?68gWtFmfMiHwRnASP6unpuvEbO9ZKNR1tdvime95Ltawbuzx2ES1QuE2oBj4?=
- =?us-ascii?Q?saxlDNy47PWZ78ceJtf41QbN60jaFsTY5DD/NpwYzLAQRkIU1GgfBK9lrVHR?=
- =?us-ascii?Q?Jw=3D=3D?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 47ea1f02-9127-42a7-6222-08dd7d869df7
-X-MS-Exchange-CrossTenant-AuthSource: CO6PR11MB5602.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Apr 2025 08:05:28.7713
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8Up7V/+48gBbaZfjjy7ao1oRmMVXDpXNU3sg05PYoYyKmWp51XM6BQsd84gd4iaxHehsh9eADem26asocOY8pw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR11MB5163
-X-Proofpoint-ORIG-GUID: myoQredtywAmEMRP4TqctpNmj0YTHYhP
-X-Proofpoint-GUID: myoQredtywAmEMRP4TqctpNmj0YTHYhP
-X-Authority-Analysis: v=2.4 cv=BaLY0qt2 c=1 sm=1 tr=0 ts=6800b64b cx=c_pps a=S2IcI55zTQM2EKrhu3zyRw==:117 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=XR8D0OoHHMoA:10
- a=t7CeM3EgAAAA:8 a=hSw8icBvHKLkroCVF4YA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Sensitive_Customer_Information: Yes
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-17_01,2025-04-15_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 mlxlogscore=999
- mlxscore=0 bulkscore=0 impostorscore=0 priorityscore=1501
- lowpriorityscore=0 spamscore=0 clxscore=1015 malwarescore=0 suspectscore=0
- adultscore=0 classifier=spam authscore=0 authtc=n/a authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
- definitions=main-2504170062
+References: <20250417010511.592579-1-akuster808@gmail.com> <CA+chaQdk24dJdXGAbE5znWnhVkmk+=YuLEfqmSBQX_6V3_EyaQ@mail.gmail.com>
+In-Reply-To: <CA+chaQdk24dJdXGAbE5znWnhVkmk+=YuLEfqmSBQX_6V3_EyaQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 17 Apr 2025 01:12:59 -0700
+X-Gm-Features: ATxdqUG_Vy4NyeK3j5sWQeJqHevh9bOJKsTRO4g2BZVKmrMR1ML2KC7jvlvbK6M
+Message-ID: <CAMKF1sqP6ETG8QD6vRkHWtxroRV7_spfBBW4kfYwH5B=MqNHLQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][v2][walnascar][PATCH] meta-openemnedded: Add
+ myself as walnascar maintainer
+To: martin.jansa@gmail.com
+Cc: akuster808@gmail.com, openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 08:05:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116922
+ <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 08:13:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116927
 
-From: Chen Qi <Qi.Chen@windriver.com>
+On Wed, Apr 16, 2025 at 10:05=E2=80=AFPM Martin Jansa via
+lists.openembedded.org <martin.jansa=3Dgmail.com@lists.openembedded.org>
+wrote:
+>
+> there is still a typo in the subject, "embedded"
+>
 
-piglit is an open-source test suite for OpenGL implementations. It
-contains a whole lot of programs which all do not give out any version
-information. Running version check for piglit is a waste of time (~1h),
-so setting a '%' to skip it.
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- meta-oe/conf/version-check.conf | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/meta-oe/conf/version-check.conf b/meta-oe/conf/version-check.conf
-index c41df0d496..5ab9a1d665 100644
---- a/meta-oe/conf/version-check.conf
-+++ b/meta-oe/conf/version-check.conf
-@@ -13,6 +13,7 @@ CHECK_VERSION_PV:pn-vim-tiny = "${@'.'.join(d.getVar('PV').split('.')[:-1])}"
- CHECK_VERSION_PV:pn-ncurses = "${PV}.%"
- CHECK_VERSION_PV:pn-alsa-tools = "%"
- CHECK_VERSION_PV:pn-gst-examples = "%"
-+CHECK_VERSION_PV:pn-piglit = "%"
- CHECK_VERSION_PV:pn-libedit = "${@d.getVar('PV').split('-')[1]}"
- 
- # meta-oe
--- 
-2.49.0
-
+you eyes are still sharp :) sadly I did not notice it and its installed.
+>
+> On Thu, 17 Apr 2025, 03:05 Armin Kuster via lists.openembedded.org, <akus=
+ter808=3Dgmail.com@lists.openembedded.org> wrote:
+>>
+>> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+>>
+>> ---
+>> V2]
+>> Fix branch name typos
+>> ---
+>>  README.md                   |  2 +-
+>>  meta-filesystems/README.md  | 10 +++++-----
+>>  meta-gnome/README.md        | 10 +++++-----
+>>  meta-initramfs/README.md    |  8 ++++----
+>>  meta-multimedia/README.md   | 10 +++++-----
+>>  meta-networking/MAINTAINERS | 11 +++--------
+>>  meta-networking/README.md   |  8 ++++----
+>>  meta-oe/README.md           |  8 ++++----
+>>  meta-perl/README.md         | 11 +++++------
+>>  meta-python/README.md       | 12 +++++-------
+>>  meta-webserver/README.md    | 11 +++++++----
+>>  meta-xfce/README.md         | 11 +++++------
+>>  12 files changed, 53 insertions(+), 59 deletions(-)
+>>
+>> diff --git a/README.md b/README.md
+>> index 7318f09cdb..82f2e9699a 100644
+>> --- a/README.md
+>> +++ b/README.md
+>> @@ -1,6 +1,6 @@
+>>  Collection of layers for the OE-core universe
+>>
+>> -Main layer maintainer: Khem Raj <raj.khem@gmail.com>
+>> +Main layer maintainer: Armin Kuster <akuster808@gmail.com>
+>>
+>>  This repository is a collection of layers to suppliment OE-Core
+>>  with additional packages, Each layer have designated maintainer
+>> diff --git a/meta-filesystems/README.md b/meta-filesystems/README.md
+>> index 78a4429ce2..e31b29c493 100644
+>> --- a/meta-filesystems/README.md
+>> +++ b/meta-filesystems/README.md
+>> @@ -11,26 +11,26 @@ This layer depends on:
+>>
+>>    URI: git://git.openembedded.org/openembedded-core
+>>    layers: meta
+>> -  branch: master
+>> +  branch: walnascar
+>>
+>>    URI: git://git.openembedded.org/meta-openembedded
+>>    layers: meta-oe
+>> -  branch: master
+>> +  branch: walnascar
+>>
+>>  Patches
+>>  =3D=3D=3D=3D=3D=3D=3D
+>>
+>>  Please submit any patches against the filesystems layer to the
+>>  OpenEmbedded development mailing list (openembedded-devel@lists.openemb=
+edded.org)
+>> -with '[meta-filesystems]' in the subject.
+>> +with '[meta-filesystems][walnascar]' in the subject.
+>>
+>> -Layer maintainer: Khem Raj <raj.khem@gmail.com>
+>> +Layer maintainer: Armin Kuster <akuster808@gmail.com>
+>>
+>>  When sending single patches, please use something like:
+>>
+>>     git send-email -1 -M \
+>>          --to openembedded-devel@lists.openembedded.org \
+>> -        --subject-prefix=3D'meta-filesystems][PATCH'
+>> +        --subject-prefix=3D'meta-filesystems][walnascar][PATCH'
+>>
+>>
+>>  Table of Contents
+>> diff --git a/meta-gnome/README.md b/meta-gnome/README.md
+>> index fbb0d72476..eacf40e94b 100644
+>> --- a/meta-gnome/README.md
+>> +++ b/meta-gnome/README.md
+>> @@ -3,14 +3,14 @@ Dependencies
+>>  This layer depends on:
+>>
+>>  URI: git://git.openembedded.org/openembedded-core
+>> -branch: master
+>> +branch: walnascar
+>>
+>>  URI: git://git.openembedded.org/meta-openembedded
+>> -branch: master
+>> +branch: walnascar
+>>
+>> -Send pull requests to openembedded-devel@lists.openembedded.org with '[=
+meta-gnome]' in the subject'
+>> +Send pull requests to openembedded-devel@lists.openembedded.org with '[=
+meta-gnome][walnascar]' in the subject'
+>>
+>>  When sending single patches, please using something like:
+>> -git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3D'meta-gnome][PATCH'
+>> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3D'meta-gnome][walnascar][PATCH'
+>>
+>> -Layer maintainer: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+>> +Layer maintainer: Armin Kuster <akuster808@gmail.com>
+>> diff --git a/meta-initramfs/README.md b/meta-initramfs/README.md
+>> index 119293a741..cfde7a3ae9 100644
+>> --- a/meta-initramfs/README.md
+>> +++ b/meta-initramfs/README.md
+>> @@ -12,19 +12,19 @@ Dependencies
+>>  This layer depends on:
+>>
+>>  URI: git://git.openembedded.org/meta-openembedded
+>> -branch: master
+>> +branch: walnascar
+>>
+>>
+>>  Maintenance
+>>  -----------
+>>
+>>  Send patches / pull requests to openembedded-devel@lists.openembedded.o=
+rg
+>> -with '[meta-initramfs]' in the subject.
+>> +with '[meta-initramfs][walnascar]' in the subject.
+>>
+>>  When sending single patches, please using something like:
+>> -git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3D'meta-initramfs][PATCH'
+>> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3D'meta-initramfs][walnascar][PATCH'
+>>
+>> -Interm layer maintainer: Khem Raj <raj.khem@gmail.com>
+>> +Interm layer maintainer: Armin Kuster <akuster808@gmail.com>
+>>
+>>
+>>  License
+>> diff --git a/meta-multimedia/README.md b/meta-multimedia/README.md
+>> index 235c34331b..b8e98d15c8 100644
+>> --- a/meta-multimedia/README.md
+>> +++ b/meta-multimedia/README.md
+>> @@ -1,17 +1,17 @@
+>>  This layer depends on:
+>>
+>>  URI: git://git.openembedded.org/openembedded-core
+>> -branch: master
+>> +branch: walnascar
+>>
+>>  URI: git://git.openembedded.org/meta-openembedded
+>>  layers: meta-oe
+>> -branch: master
+>> +branch: walnascar
+>>
+>> -Send pull requests to openembedded-devel@lists.openembedded.org with '[=
+meta-multimedia]' in the subject
+>> +Send pull requests to openembedded-devel@lists.openembedded.org with '[=
+meta-multimedia][walnascar]' in the subject
+>>
+>>  When sending single patches, please use something like:
+>> -git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3D'meta-multimedia][PATCH'
+>> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3D'meta-multimedia][walnascar][PATCH'
+>>
+>>  You are encouraged to fork the mirror on github https://github.com/open=
+embedded/meta-openembedded to share your patches, this is preferred for pat=
+ch sets consisting of more than one patch. Other services like GitLab, repo=
+.or.cz or self hosted setups are of course accepted as well, 'git fetch <re=
+mote>' works the same on all of them. We recommend github because it is fre=
+e, easy to use, has been proven to be reliable and has a really good web GU=
+I.
+>>
+>> -Layer maintainer: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+>> +Layer maintainer: Armin Kuster <akuster808@gmail.com>
+>> diff --git a/meta-networking/MAINTAINERS b/meta-networking/MAINTAINERS
+>> index dc549d7582..41c37b58d0 100644
+>> --- a/meta-networking/MAINTAINERS
+>> +++ b/meta-networking/MAINTAINERS
+>> @@ -2,13 +2,13 @@ This file contains a list of maintainers for the meta-=
+networking layer.
+>>
+>>  Please submit any patches against meta-networking to the OpenEmbedded
+>>  development mailing list (openembedded-devel@lists.openembedded.org) wi=
+th
+>> -'[meta-networking]' in the subject.
+>> +'[meta-networking][walnascar]' in the subject.
+>>
+>>  When sending single patches, please use something like:
+>>
+>>     git send-email -1 -M \
+>>          --to openembedded-devel@lists.openembedded.org \
+>> -        --subject-prefix=3D'meta-networking][PATCH'
+>> +        --subject-prefix=3D'meta-networking][walnascar][PATCH'
+>>
+>>  You may also contact the maintainers directly.
+>>
+>> @@ -26,14 +26,9 @@ Please keep this list in alphabetical order.
+>>  Maintainers List (try to look for most precise areas first)
+>>
+>>  COMMON
+>> -M:      Khem Raj <raj.khem@gmail.com>
+>> -M:      "Joe MacDonald (backup)" <joe@deserted.net>
+>> +M:      Armin Kuster <akuster808@gmail.com>
+>>  L:      openembedded-devel@lists.openembedded.org
+>>  Q:      https://patchwork.openembedded.org/project/oe/
+>>  S:      Maintained
+>>  F:      conf
+>>  F:      recipes-*
+>> -
+>> -OPENTHREAD
+>> -M:      Stefan Schmidt <stefan@datenfreihafen.org>
+>> -F:      recipes-connectivity/openthread/
+>> diff --git a/meta-networking/README.md b/meta-networking/README.md
+>> index ab2640618f..ef7933e319 100644
+>> --- a/meta-networking/README.md
+>> +++ b/meta-networking/README.md
+>> @@ -18,21 +18,21 @@ Dependencies
+>>  This layer depends on:
+>>
+>>  URI: git://git.openembedded.org/openembedded-core
+>> -branch: master
+>> +branch: Scarthgap
+>>
+>>  For some recipes, the meta-oe layer is required:
+>>
+>>  URI: git://git.openembedded.org/meta-openembedded
+>>  subdirectory: meta-oe
+>> -branch: master
+>> +branch: Scarthgap
+>>
+>>  URI: git://git.openembedded.org/meta-openembedded
+>>  subdirectory: meta-python
+>> -branch: master
+>> +branch: Scarthgap
+>>
+>>  Maintenance
+>>  -----------
+>> -Layer maintainers: Khem Raj <raj.khem@gmail.com>
+>> +Stable Layer maintainer: Armin Kuster <akuster808@gmail.com>
+>>
+>>
+>>  Please see the MAINTAINERS file for information on contacting the
+>> diff --git a/meta-oe/README.md b/meta-oe/README.md
+>> index c7c14a4507..6bb7e06119 100644
+>> --- a/meta-oe/README.md
+>> +++ b/meta-oe/README.md
+>> @@ -4,7 +4,7 @@ meta-oe
+>>  This layer depends on:
+>>
+>>  URI: git://github.com/openembedded/openembedded-core.git
+>> -branch: master
+>> +branch: walnascar
+>>
+>>  luajit recipe requires host compiler to be able to generate 32bit code =
+when target is 32bit
+>>  e.g. arm, so ensure that $CC -m32 is functional on build host, if build=
+ing this recipe, needed
+>> @@ -16,10 +16,10 @@ pacman -S lib32-gcc-libs lib32-glibc
+>>  Ubuntu
+>>  sudo apt-get install gcc-multilib linux-libc-dev:i386
+>>
+>> -Send pull requests to openembedded-devel@lists.openembedded.org with '[=
+meta-oe]' in the subject'
+>> +Send pull requests to openembedded-devel@lists.openembedded.org with '[=
+meta-oe][walnascar]' in the subject'
+>>
+>>  When sending single patches, please use something like:
+>> -'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --=
+subject-prefix=3D"meta-oe][PATCH"'
+>> +'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --=
+subject-prefix=3D"meta-oe][walnascar][PATCH"'
+>>
+>>  You are encouraged to fork the mirror on GitHub https://github.com/open=
+embedded/meta-openembedded
+>>  to share your patches, this is preferred for patch sets consisting of m=
+ore than one patch.
+>> @@ -33,4 +33,4 @@ Other services like GitLab, repo.or.cz or self-hosted =
+setups are of course accep
+>>  'git fetch <remote>' works the same on all of them. We recommend GitHub=
+ because it is free, easy
+>>  to use, has been proven to be reliable and has a really good web GUI.
+>>
+>> -layer maintainer: Khem Raj <raj.khem@gmail.com>
+>> +layer maintainer: Armin Kuster <akuster808@gmail.com>
+>> diff --git a/meta-perl/README.md b/meta-perl/README.md
+>> index 13014b0ff3..80e5c84bb7 100644
+>> --- a/meta-perl/README.md
+>> +++ b/meta-perl/README.md
+>> @@ -52,7 +52,7 @@ Dependencies
+>>  This layer depends on:
+>>
+>>    URI: git://git.openembedded.org/openembedded-core
+>> -  branch: master
+>> +  branch: walnascar
+>>
+>>  Adding the meta-perl layer to your build
+>>  ---------------------------------------
+>> @@ -73,14 +73,13 @@ Maintenance
+>>  -----------
+>>
+>>  Send patches / pull requests to openembedded-devel@lists.openembedded.o=
+rg with
+>> -'[meta-perl]' in the subject.
+>> +'[meta-perl][walnascar]' in the subject.
+>>
+>>  When sending single patches, please using something like:
+>> -git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3D'meta-perl][PATCH'
+>> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3D'meta-perl][walnascar][PATCH'
+>>
+>> -Layer maintainers:
+>> -    Hongxu Jia <hongxu.jia@windriver.com>
+>> -    Tim "moto-timo" Orling <ticotimo@gmail.com>
+>> +Layer maintainers: Armin Kuster <akuster808@gmail.com>
+>> +
+>>
+>>  License
+>>  -------
+>> diff --git a/meta-python/README.md b/meta-python/README.md
+>> index 36c193957c..bf1ad0874d 100644
+>> --- a/meta-python/README.md
+>> +++ b/meta-python/README.md
+>> @@ -13,11 +13,11 @@ The meta-python layer depends on:
+>>
+>>         URI: git://git.openembedded.org/openembedded-core
+>>         layers: meta
+>> -       branch: master
+>> +       branch: walnascar
+>>
+>>         URI: git://git.openembedded.org/meta-openembedded
+>>         layers: meta-oe
+>> -       branch: master
+>> +       branch: walnascar
+>>
+>>  Contributing
+>>  -------------------------
+>> @@ -28,14 +28,12 @@ comments and patch review. It is subscriber only, so=
+ please register
+>>  before posting.
+>>
+>>  Send pull requests to openembedded-devel@lists.openembedded.org with
+>> -'[meta-python]' in the subject.
+>> +'[meta-python][walnascar]' in the subject.
+>>
+>>  When sending single patches, please use something like:
+>> -git send-email -M -1 --to=3Dopenembedded-devel@lists.openembedded.org -=
+-subject-prefix=3D'meta-python][PATCH'
+>> +git send-email -M -1 --to=3Dopenembedded-devel@lists.openembedded.org -=
+-subject-prefix=3D'meta-python][walnascar][PATCH'
+>>
+>>  Maintenance
+>>  -------------------------
+>>
+>> -Layer maintainers:
+>> -        Tim "moto-timo" Orling <TicoTimo@gmail.com>
+>> -        Derek Straka <derek@asterius.io>
+>> +Layer maintainers: Armin Kuster <akuster808@gmail.com>
+>> diff --git a/meta-webserver/README.md b/meta-webserver/README.md
+>> index d1b743887c..3c7fd7f827 100644
+>> --- a/meta-webserver/README.md
+>> +++ b/meta-webserver/README.md
+>> @@ -13,13 +13,13 @@ This layer depends on:
+>>
+>>  URI: git://git.openembedded.org/openembedded-core
+>>  subdirectory: meta
+>> -branch: master
+>> +branch: walnascar
+>>
+>>  For some recipes, the meta-oe layer is required:
+>>
+>>  URI: git://git.openembedded.org/meta-openembedded
+>>  subdirectory: meta-oe
+>> -branch: master
+>> +branch: walnascar
+>>
+>>
+>>
+>> @@ -50,9 +50,12 @@ Maintenance
+>>  -----------
+>>
+>>  Send patches / pull requests to openembedded-devel@lists.openembedded.o=
+rg
+>> -with '[meta-webserver]' in the subject.
+>> +with '[meta-webserver][walnascar]' in the subject.
+>>
+>> -Layer maintainer: Derek Straka <derek@asterius.io>
+>> +When sending single patches, please using something like:
+>> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3D'meta-webserver][walnascar][PATCH'
+>> +
+>> +Layer maintainer: Armin Kuster <akuster808@gmail.com>
+>>
+>>
+>>  License
+>> diff --git a/meta-xfce/README.md b/meta-xfce/README.md
+>> index 3d6158628f..fb577a48fb 100644
+>> --- a/meta-xfce/README.md
+>> +++ b/meta-xfce/README.md
+>> @@ -1,10 +1,10 @@
+>>  This layer depends on:
+>>
+>>  URI: git://git.openembedded.org/openembedded-core
+>> -branch: master
+>> +branch: walnascar
+>>
+>>  URI: git://git.openembedded.org/meta-openembedded
+>> -branch: master
+>> +branch: walnascar
+>>
+>>  meta-xfce depends on meta-oe, meta-gnome and meta-multimedia in this re=
+pository.
+>>
+>> @@ -13,10 +13,9 @@ this to local.conf:
+>>
+>>  BBMASK =3D "meta-xfce/recipes-multimedia"
+>>
+>> -Send pull requests to openembedded-devel@lists.openembedded.org with '[=
+meta-xfce]' in the subject'
+>> +Send pull requests to openembedded-devel@lists.openembedded.org with '[=
+meta-xfce][walnascar]' in the subject'
+>>
+>>  When sending single patches, please using something like:
+>> -git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3D'meta-xfce][PATCH'
+>> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3D'meta-xfce][walnascar][PATCH'
+>>
+>> -Layer maintainer: Kai Kang <kai.kang@windriver.com>
+>> -Layer maintainer: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+>> +Layer maintainer: Armin Kuster <akuster808@gmail.com>
+>> --
+>> 2.43.0
+>>
+>>
+>>
+>>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#116917): https://lists.openembedded.org/g/openembedde=
+d-devel/message/116917
+> Mute This Topic: https://lists.openembedded.org/mt/112306341/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
