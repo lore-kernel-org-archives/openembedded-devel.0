@@ -1,327 +1,182 @@
-Return-Path: <mark.yang@lge.com>
+Return-Path: <Qi.Chen@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D5E7CC369B2
-	for <webhook@archiver.kernel.org>; Thu, 17 Apr 2025 07:44:05 +0000 (UTC)
-Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.51])
- by mx.groups.io with SMTP id smtpd.web10.3398.1744875837844469581
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 12CBAC369B2
+	for <webhook@archiver.kernel.org>; Thu, 17 Apr 2025 08:05:36 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.3718.1744877131864061486
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Apr 2025 00:43:58 -0700
+ Thu, 17 Apr 2025 01:05:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.51, mailfrom: mark.yang@lge.com)
-Received: from unknown (HELO lgeamrelo04.lge.com) (156.147.1.127)
-	by 156.147.23.51 with ESMTP; 17 Apr 2025 16:43:55 +0900
-X-Original-SENDERIP: 156.147.1.127
-X-Original-MAILFROM: mark.yang@lge.com
-Received: from unknown (HELO markyang..) (10.177.120.37)
-	by 156.147.1.127 with ESMTP; 17 Apr 2025 16:43:55 +0900
-X-Original-SENDERIP: 10.177.120.37
-X-Original-MAILFROM: mark.yang@lge.com
-From: mark.yang@lge.com
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=62023c0ecd=qi.chen@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53H60XU3002201
+	for <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 08:05:31 GMT
+Received: from nam10-dm6-obe.outbound.protection.outlook.com (mail-dm6nam10lp2043.outbound.protection.outlook.com [104.47.58.43])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 461u2ma8hp-2
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 08:05:30 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EQwMJ4N18brp5uUoIT/CEcbTBxYee9DOVrxi6DA5itMhCJM4MzmcjnBH987rEOJoebTnI9INW4KSqDTOiHegjgIp0HnVG0dImxDN1lWgs+KyfjyMCHKToWOslD7MzNsNc2AW8AD0yAwlLJXLXv661Rmxc+my1egvn0wZ5JnK2tsuuDMx3zmDMenqpHKVm5Lw3/8ZasNeN/G1cHvc/zqQ9RS0g9mT4FuDtOiCky1Uk2prSQBQWH9h/QL9relMPU6tp2dJnFvo34NB35+Vbik1dsKZ6Cp7ZDYFw0S17J6MnsnK4XxNqHuJhdcrO2GOmn9ylliV6u8yxez7PoMBkNuUGQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7hjPDwb54j1brogoiuscuPoa/gv5Z0/RmdQpg04SXfg=;
+ b=ovh/gpeE7a7lCQglsYSFRhM+2qvkCqK5NYzhDkK2zzurO+CXaa7RTJuvjWqeqbiEhVbng1FKO900frYd22pE/X2rkm25HVwTNrDqdliR1zez4lN95IaAsXgPSFAXl3sZdeX5IE2LcBO3HBGL4sQv1RgZCWZkhpdQ51iCWPQbZF/Mmd6cjt5z75/Xv7lZ62dA/ok8n/3HYtPbRKcMEtnoM/jyjCut9tTJuoc5jW3ppwwT2TnPKKoS7ESx9iDU08Uc7uQsNh0qRFJTc5xdw8JAw33KoQaMEKY0ipSJVIGUQu0t1VUOJd15GxZWH6ndrRD69x3d0TaL2NsUsVgkM4GaMA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from CO6PR11MB5602.namprd11.prod.outlook.com (2603:10b6:303:13a::5)
+ by SA2PR11MB5163.namprd11.prod.outlook.com (2603:10b6:806:113::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.35; Thu, 17 Apr
+ 2025 08:05:28 +0000
+Received: from CO6PR11MB5602.namprd11.prod.outlook.com
+ ([fe80::a7e3:721d:9cec:6093]) by CO6PR11MB5602.namprd11.prod.outlook.com
+ ([fe80::a7e3:721d:9cec:6093%5]) with mapi id 15.20.8655.021; Thu, 17 Apr 2025
+ 08:05:28 +0000
+From: Qi.Chen@windriver.com
 To: openembedded-devel@lists.openembedded.org
-Cc: "mark.yang" <mark.yang@lge.com>
-Subject: [meta-networking][PATCH] strongswan: fix error with gcc-15
-Date: Thu, 17 Apr 2025 16:43:54 +0900
-Message-Id: <20250417074354.1302975-1-mark.yang@lge.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
+Subject: [oe][meta-oe][PATCH 2/7] check-version-mismatch.bbclass: avoid meaningless checking
+Date: Thu, 17 Apr 2025 01:05:11 -0700
+Message-ID: <20250417080516.3158818-2-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250417080516.3158818-1-Qi.Chen@windriver.com>
+References: <20250417080516.3158818-1-Qi.Chen@windriver.com>
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: PH3PEPF000040A4.namprd05.prod.outlook.com
+ (2603:10b6:518:1::53) To CO6PR11MB5602.namprd11.prod.outlook.com
+ (2603:10b6:303:13a::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO6PR11MB5602:EE_|SA2PR11MB5163:EE_
+X-MS-Office365-Filtering-Correlation-Id: 191c4339-9c24-43c7-d77d-08dd7d869daf
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|366016|1800799024|376014|52116014|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?gwbGIKaGjQ1umYmti7xPMsUZo0HVmaHQb6hTQwivlYGUmoIVGcNCUZaT6Qs7?=
+ =?us-ascii?Q?zpTfg56AE1yobDlMoTgPqdbeQ4nhG5YYlalxiLlUg6WzjfrSzLRORqYsM1je?=
+ =?us-ascii?Q?27FSDkzgFtk9xJvJlWJk0dvbsZBpoaFvJzz54j2rzkMSEDhmZOlD8u+TtBG/?=
+ =?us-ascii?Q?gFiKduBQerRbMZhyIgMSORj4UVU1qHiIcuHaoBMVgezwX4dIF84S2No0bc9G?=
+ =?us-ascii?Q?JP1Kvx9quBIHdJlnXeur6isAhUt3QOhvNvbwuqYmg++4QA5NGvgzqf3yq6ak?=
+ =?us-ascii?Q?aLUPiWOCxTvI4+yArD+SGUQ62is2xujakuvrBWGsi2Nop9DxOh127e5zaQ9b?=
+ =?us-ascii?Q?f3II2ceiKslchMls3TV/uoG0VBoxGnd3z13DlwLWBA1+eUOPsBSXZFBnCOqg?=
+ =?us-ascii?Q?wlFIRfhpIBb06GpIvFQc34sgPCpMZt98JY68GJkccQJHFLp+LIdfwZkFREuA?=
+ =?us-ascii?Q?nXdcrBHqCasCD+qXa/opUO4RyDXBTn8TpHxin595sWGGoyPWP9EACDh8KqwB?=
+ =?us-ascii?Q?D5ZnUPuaGuwlof4GguAZoqBpgLdD+me3QwUxQvQZuYqhjYojshr3EslPex5R?=
+ =?us-ascii?Q?0pfvJR4TUqUi2p7YAA1mF+JurBsXK5Yv/dK59G4cDzwq/6V0ET9R6ur1Cmnh?=
+ =?us-ascii?Q?0KAhl4uuoVQhbzKaOQ8cnloTD+u8sCJ/Ijl3kXPC1CPLoo1f0ZUG3MTGm43o?=
+ =?us-ascii?Q?B+31WEErg0AK7tUYfVViKPTyWJDOfYcljs/xp59MAla19cByXEbjFXvMGXzS?=
+ =?us-ascii?Q?+SfG7CVxWBlKI1FigqFYhZDKw+tEUyb87n0Qe+vUhs1x87p9B2DnKDgpWwUI?=
+ =?us-ascii?Q?WoLilXA8YoldG14ZTolkuHofrT8yd1dGX/0UmYzV0lKiaCbbYURKSKE5qgYT?=
+ =?us-ascii?Q?yODuseh4n1TsuyN5hOum8IDfo2iuNPXOtTyjFdLKWv7PsoJxTdBKOkyFyF66?=
+ =?us-ascii?Q?mDpWABqbbNhPVm/WOmnP7HWSayz7oBKy+dgEKflwPfI2u0QvVISt4mhHYCyv?=
+ =?us-ascii?Q?/SxEQYq7hs4aLluGDBLimSO35n7E2bw/uGNkMc6gHJN9UzlWK3VjB6hWdSnz?=
+ =?us-ascii?Q?hfx3Dh3Z/lEZoBqAunVMHBDNkJVZWWIwy8MjZUqoNcjbufiYNhDXyj1WU798?=
+ =?us-ascii?Q?ccQURqvpafv23mIPOXAmifDTN2+IMAMHWVXq+t6PxBNUhnDRnK+8AfVh6QCe?=
+ =?us-ascii?Q?U5RLHgj6fffkVzag7EJvbetiHjzE/DnWPmiXzVR6GsOGq2VqA/PKI80REoTp?=
+ =?us-ascii?Q?F8kDUVC4rKKosOfLVlzfDQtkPkZpjUZ6cM0p63B5A8P+8ZlHmVNwBcJn7nsL?=
+ =?us-ascii?Q?lGaB0vitKnBks28SnsFgzM0BwCzLkHxNvFqlf6ijsoKVFsARcyiOIU+7NMXh?=
+ =?us-ascii?Q?IflkYnCiCX7tC+o80NarTbcvDDizpUDB5KPQ+mVIzK6JLkmEh7onFiPYXHOK?=
+ =?us-ascii?Q?kVQgkFJny1mGfqw5etgz26kVKCLSBIOUt3ceI4/UpQspPl7oxePGMA=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO6PR11MB5602.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(52116014)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?xtbyytyaOqBolSsC4l/38exQ09u4+2chJBqY+0NjVSv73ZAKqO1iTyFUViNk?=
+ =?us-ascii?Q?xOn67fTREkdr+LnBlm64iau2sYYUiDWZULaENA2G93ERuRPy5pNEMkI3KnfG?=
+ =?us-ascii?Q?PaMRGADWCrUuPPEXWHd9NHuogrMVLtbDL5cfHraZzUr1LJ+gYXD0L4QRk6M0?=
+ =?us-ascii?Q?QW1q4OzstdatrDznGytFGetjz95G/n096qqZ4pOs7ly/0Hx7kWVFpFZargVh?=
+ =?us-ascii?Q?6Bb00lmT9BCqyh5kMJUsHPfWGiDMew5eH3gvuHfroAcKD2hGeFXOsUDfyI7z?=
+ =?us-ascii?Q?8nkLqqyhmsn5/x7fLfMpYOiGQMnUJQwHwf7Btw06vp5Zbe7bcbIjzQI3FHC4?=
+ =?us-ascii?Q?6F0caToVUiW4Uv5Gqg6Qi6l7hv0PU3rJ0s17gi+XTFqCrT4+0FOKR1AGvy5+?=
+ =?us-ascii?Q?ctlROWGhwnPrFBOY8cTf9RxbgHq9CxZTSEtfcEBXA5xvzM0VsR+K2iBRw7Hg?=
+ =?us-ascii?Q?OaYAdK1o8ZBz9meOitkifMlbH1TUquNfe5Jl34lqMY+Dnp/yoa1/FfP80dc4?=
+ =?us-ascii?Q?M+w2mlE4m5e9sEPcPaUpqN3ZhcIVYYCFGqXHPROeMO2QVGczx8ABt3bXyOIQ?=
+ =?us-ascii?Q?mUn78ta5dsrJNxh8uWUsIoRBuYbL4EpnQaSHQWljiP3z5kzhlTQXHXC4LL5S?=
+ =?us-ascii?Q?3tX9NZeUSvdQL7keZhFG0zwflZ3Eg1cYzgI9+UMy2IO+JlQQN40zh4aH5B61?=
+ =?us-ascii?Q?jS9XQLAJ4JxG7n3aQMML6LDBOuZQUrs+1+4gurw8QAvmbjDBN1Bnj+W9Dqsl?=
+ =?us-ascii?Q?USyOBeqQnso0fjXYpMk0GqfmJr2Q9fPihSFX9WPXw6yrm3iiZEwCAA/uY3ph?=
+ =?us-ascii?Q?7TjGNMsdRazgzfLJspYJ/iR3mMhELmABsYocQ6gt6NW/d6i+0JxOCnr/CQOO?=
+ =?us-ascii?Q?QjVNBg8Kj6yOZ9FH8tMTxsSiRKXq63r8T7lCPUNwlaFhUiM4eR/RpXJEzhWz?=
+ =?us-ascii?Q?o1QJ/kbsVrMVyN1lGmL6HE7YKcOgUBf1evT9YS8lXp0coNIpjPFSyluNXkaQ?=
+ =?us-ascii?Q?yeeNyk5zMRyOt2HNBgHiCxOpZ1K1mA4x7slU5hC9k5Jrw2212+BZ/Jp/UF7B?=
+ =?us-ascii?Q?fYmilyHsc1zIv6Dd0UifnnVmSyjhMr3gF9mdWaBf/zuBZibX4Q2BBdz2niQw?=
+ =?us-ascii?Q?no4Bp2PxTzWxMxTn2todkexBDsfa+XeSZd+b4Ef3rsaaYyINnqH434JnjLl9?=
+ =?us-ascii?Q?yvFn6GQFS65eW0Ghet7g4yZphDRyj1oWDQu/9CvtEOCMlgt8EQboCK9JwVvn?=
+ =?us-ascii?Q?15q9av5d6We+ICWSPRq+Mb8EaFIRxzniTFMsQjhbkW779oTqn4C6ucc/+aTL?=
+ =?us-ascii?Q?pLSHutSomiFbf39Sw665kJ5F018nfurJ/0y7V3QK3zcPCm3uNx5BIhCevhu9?=
+ =?us-ascii?Q?4GfD4zK1VXgmCdxnOigkg8JugzlgSeyJpl91r7YQdVlUF2VIsiEn6y0HH6uq?=
+ =?us-ascii?Q?pqTqdWEsMBcTAurhHaaBg1ssC3UZpMjZT9J5kl1XN68cqN4kMZZU79x+T942?=
+ =?us-ascii?Q?bXCSE6dhCKr1oXa6k+rfSzuQ/GOO6Lq5+R65ervn+HA5tr8ZsMEfsgu4kCiz?=
+ =?us-ascii?Q?46OWvZLXUsHO3dvR0xXW+Di2nKY34RWNr4Gtz2lKL/O8NRxJHb80WjnjPbKH?=
+ =?us-ascii?Q?Yg=3D=3D?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 191c4339-9c24-43c7-d77d-08dd7d869daf
+X-MS-Exchange-CrossTenant-AuthSource: CO6PR11MB5602.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Apr 2025 08:05:28.2808
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6eERKq5nqvPx62XyuCMLvuTrRpp4cnRqz19H0O4yoTm4C6a0gIs8c+5eR3x8vU0qASeoB+sWWXMB+1KB8SzHYA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR11MB5163
+X-Proofpoint-ORIG-GUID: JOCg4-ntTH4TaczzXZXFWHDQK-Zc-fNu
+X-Proofpoint-GUID: JOCg4-ntTH4TaczzXZXFWHDQK-Zc-fNu
+X-Authority-Analysis: v=2.4 cv=BaLY0qt2 c=1 sm=1 tr=0 ts=6800b64a cx=c_pps a=S2IcI55zTQM2EKrhu3zyRw==:117 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=XR8D0OoHHMoA:10
+ a=t7CeM3EgAAAA:8 a=DeIZd99nhQelyWH27ioA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Sensitive_Customer_Information: Yes
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-04-17_01,2025-04-15_01,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 mlxlogscore=999
+ mlxscore=0 bulkscore=0 impostorscore=0 priorityscore=1501
+ lowpriorityscore=0 spamscore=0 clxscore=1015 malwarescore=0 suspectscore=0
+ adultscore=0 classifier=spam authscore=0 authtc=n/a authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
+ definitions=main-2504170062
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 07:44:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116919
+ <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 08:05:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116921
 
-From: "mark.yang" <mark.yang@lge.com>
+From: Chen Qi <Qi.Chen@windriver.com>
 
-* Backport 3 Patch:
-  - 0001-pki-Fix-signature-of-help-to-match-that-of-a-callbac.patch
-  - 0002-callback-job-Replace-return_false-in-constructors-wi.patch
-  - 0003-Cast-uses-of-return_-nop-and-enumerator_create_empty.patch
+If users set CHECK_VERSION_PN for a recipe and its value is a single
+'%', then it matches anything. So there's no point doing any further
+check.
 
-* To fix the error with gcc-15.
-  - See more details: http://errors.yoctoproject.org/Errors/Details/851801
-
-Signed-off-by: mark.yang <mark.yang@lge.com>
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- ...e-of-help-to-match-that-of-a-callbac.patch |  25 ++++
- ...lace-return_false-in-constructors-wi.patch |  90 +++++++++++++
- ...urn_-nop-and-enumerator_create_empty.patch | 118 ++++++++++++++++++
- .../strongswan/strongswan_6.0.1.bb            |   8 +-
- 4 files changed, 239 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-support/strongswan/strongswan/0001-pki-Fix-signature-of-help-to-match-that-of-a-callbac.patch
- create mode 100644 meta-networking/recipes-support/strongswan/strongswan/0002-callback-job-Replace-return_false-in-constructors-wi.patch
- create mode 100644 meta-networking/recipes-support/strongswan/strongswan/0003-Cast-uses-of-return_-nop-and-enumerator_create_empty.patch
+ meta-oe/classes/check-version-mismatch.bbclass | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/meta-networking/recipes-support/strongswan/strongswan/0001-pki-Fix-signature-of-help-to-match-that-of-a-callbac.patch b/meta-networking/recipes-support/strongswan/strongswan/0001-pki-Fix-signature-of-help-to-match-that-of-a-callbac.patch
-new file mode 100644
-index 0000000000..92c848f095
---- /dev/null
-+++ b/meta-networking/recipes-support/strongswan/strongswan/0001-pki-Fix-signature-of-help-to-match-that-of-a-callbac.patch
-@@ -0,0 +1,25 @@
-+From a7b5de569082398a14b7e571498e55d005903aaf Mon Sep 17 00:00:00 2001
-+From: Tobias Brunner <tobias@strongswan.org>
-+Date: Fri, 21 Feb 2025 17:18:35 +0100
-+Subject: [PATCH] pki: Fix signature of help() to match that of a callback in
-+ command_t
-+
-+Upstream-Status: Backport [a7b5de5 pki: Fix signature of help() to match that of a callback in command_t]
-+Signed-off-by: mark.yang <mark.yang@lge.com>
-+---
-+ src/pki/command.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/pki/command.c b/src/pki/command.c
-+index accec5fe5..6e6bf041e 100644
-+--- a/src/pki/command.c
-++++ b/src/pki/command.c
-+@@ -265,7 +265,7 @@ int command_usage(char *error)
-+ /**
-+  * Show usage information
-+  */
-+-static int help(int c, char *v[])
-++static int help()
-+ {
-+ 	return command_usage(NULL);
-+ }
-diff --git a/meta-networking/recipes-support/strongswan/strongswan/0002-callback-job-Replace-return_false-in-constructors-wi.patch b/meta-networking/recipes-support/strongswan/strongswan/0002-callback-job-Replace-return_false-in-constructors-wi.patch
-new file mode 100644
-index 0000000000..09451206ca
---- /dev/null
-+++ b/meta-networking/recipes-support/strongswan/strongswan/0002-callback-job-Replace-return_false-in-constructors-wi.patch
-@@ -0,0 +1,90 @@
-+From d5d2568ff0e88d364dadf50b67bf17050763cf98 Mon Sep 17 00:00:00 2001
-+From: Tobias Brunner <tobias@strongswan.org>
-+Date: Fri, 21 Feb 2025 16:45:57 +0100
-+Subject: [PATCH] callback-job: Replace return_false() in constructors with
-+ dedicated function
-+
-+Besides being clearer, this fixes issues with GCC 15.  The latter uses
-+C23 by default, which changes the meaning of function declarations
-+without parameters such as
-+
-+	bool return false();
-+
-+Instead of "this function takes an unknown number of arguments", this
-+now equals (void), that is, "this function takes no arguments".  So we
-+run into incompatible pointer type warnings all over when using such
-+functions.  They could be cast to (void*) but this seems the cleaner
-+solution for this use case.
-+
-+Upstream-Status: Backport [d5d2568 callback-job: Replace return_false() in constructors with dedicated function]
-+Signed-off-by: mark.yang <mark.yang@lge.com>
-+---
-+ src/libstrongswan/processing/jobs/callback_job.c      | 10 +++++++++-
-+ src/libstrongswan/processing/jobs/callback_job.h      | 11 ++++++++++-
-+ src/libstrongswan/processing/scheduler.c              |  3 ++-
-+ 3 files changed, 21 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/libstrongswan/processing/jobs/callback_job.c b/src/libstrongswan/processing/jobs/callback_job.c
-+index cb2a0aba5..3ab40b947 100644
-+--- a/src/libstrongswan/processing/jobs/callback_job.c
-++++ b/src/libstrongswan/processing/jobs/callback_job.c
-+@@ -1,5 +1,5 @@
-+ /*
-+- * Copyright (C) 2009-2012 Tobias Brunner
-++ * Copyright (C) 2009-2025 Tobias Brunner
-+  * Copyright (C) 2007-2011 Martin Willi
-+  *
-+  * Copyright (C) secunet Security Networks AG
-+@@ -131,3 +131,11 @@ callback_job_t *callback_job_create(callback_job_cb_t cb, void *data,
-+ 	return callback_job_create_with_prio(cb, data, cleanup, cancel,
-+ 										 JOB_PRIO_MEDIUM);
-+ }
-++
-++/*
-++ * Described in header
-++ */
-++bool callback_job_cancel_thread(void *data)
-++{
-++	return FALSE;
-++}
-+diff --git a/src/libstrongswan/processing/jobs/callback_job.h b/src/libstrongswan/processing/jobs/callback_job.h
-+index 0f1ae212d..fda868879 100644
-+--- a/src/libstrongswan/processing/jobs/callback_job.h
-++++ b/src/libstrongswan/processing/jobs/callback_job.h
-+@@ -1,5 +1,5 @@
-+ /*
-+- * Copyright (C) 2012 Tobias Brunner
-++ * Copyright (C) 2012-2025 Tobias Brunner
-+  * Copyright (C) 2007-2011 Martin Willi
-+  *
-+  * Copyright (C) secunet Security Networks AG
-+@@ -62,6 +62,15 @@ typedef void (*callback_job_cleanup_t)(void *data);
-+  */
-+ typedef bool (*callback_job_cancel_t)(void *data);
-+ 
-++/**
-++ * Default implementation of callback_job_cancel_t that simply returns FALSE
-++ * to force cancellation of the thread by the processor.
-++ *
-++ * @param data			ignored argument
-++ * @return				always returns FALSE
-++ */
-++bool callback_job_cancel_thread(void *data);
-++
-+ /**
-+  * Class representing an callback Job.
-+  *
-+diff --git a/src/libstrongswan/processing/scheduler.c b/src/libstrongswan/processing/scheduler.c
-+index c5e5dd83e..76d98ddff 100644
-+--- a/src/libstrongswan/processing/scheduler.c
-++++ b/src/libstrongswan/processing/scheduler.c
-+@@ -329,7 +329,8 @@ scheduler_t * scheduler_create()
-+ 	this->heap = (event_t**)calloc(this->heap_size + 1, sizeof(event_t*));
-+ 
-+ 	job = callback_job_create_with_prio((callback_job_cb_t)schedule, this,
-+-										NULL, return_false, JOB_PRIO_CRITICAL);
-++										NULL, callback_job_cancel_thread,
-++										JOB_PRIO_CRITICAL);
-+ 	lib->processor->queue_job(lib->processor, (job_t*)job);
-+ 
-+ 	return &this->public;
-diff --git a/meta-networking/recipes-support/strongswan/strongswan/0003-Cast-uses-of-return_-nop-and-enumerator_create_empty.patch b/meta-networking/recipes-support/strongswan/strongswan/0003-Cast-uses-of-return_-nop-and-enumerator_create_empty.patch
-new file mode 100644
-index 0000000000..6c2a77105a
---- /dev/null
-+++ b/meta-networking/recipes-support/strongswan/strongswan/0003-Cast-uses-of-return_-nop-and-enumerator_create_empty.patch
-@@ -0,0 +1,118 @@
-+From 11978ddd39e800b5f35f721d726e8a4cb7e4ec0f Mon Sep 17 00:00:00 2001
-+From: Tobias Brunner <tobias@strongswan.org>
-+Date: Fri, 21 Feb 2025 17:00:44 +0100
-+Subject: [PATCH] Cast uses of return_*(), nop() and enumerator_create_empty()
-+
-+As described in the previous commit, GCC 15 uses C23 by default and that
-+changes the meaning of such argument-less function declarations.  So
-+whenever we assign such a function to a pointer that expects a function
-+with arguments it causes an incompatible pointer type warning.  We
-+could define dedicated functions/callbacks whenever necessary, but this
-+seems like the simpler approach for now (especially since most uses of
-+these functions have already been cast).
-+
-+Upstream-Status: Backport [11978dd Cast uses of return_*(), nop() and enumerator_create_empty()]
-+Signed-off-by: mark.yang <mark.yang@lge.com>
-+---
-+ src/charon-nm/nm/nm_handler.c                           | 2 +-
-+ src/libcharon/encoding/payloads/encrypted_payload.c     | 2 +-
-+ src/libcharon/plugins/android_dns/android_dns_handler.c | 2 +-
-+ src/libcharon/plugins/ha/ha_attribute.c                 | 2 +-
-+ src/libcharon/plugins/updown/updown_handler.c           | 2 +-
-+ src/libstrongswan/utils/identification.c                | 6 +++---
-+ 6 files changed, 8 insertions(+), 8 deletions(-)
-+
-+diff --git a/src/charon-nm/nm/nm_handler.c b/src/charon-nm/nm/nm_handler.c
-+index d7331ad72..39d0190ac 100644
-+--- a/src/charon-nm/nm/nm_handler.c
-++++ b/src/charon-nm/nm/nm_handler.c
-+@@ -195,7 +195,7 @@ nm_handler_t *nm_handler_create()
-+ 		.public = {
-+ 			.handler = {
-+ 				.handle = _handle,
-+-				.release = nop,
-++				.release = (void*)nop,
-+ 				.create_attribute_enumerator = _create_attribute_enumerator,
-+ 			},
-+ 			.create_enumerator = _create_enumerator,
-+diff --git a/src/libcharon/encoding/payloads/encrypted_payload.c b/src/libcharon/encoding/payloads/encrypted_payload.c
-+index 676d00b7a..4821c6108 100644
-+--- a/src/libcharon/encoding/payloads/encrypted_payload.c
-++++ b/src/libcharon/encoding/payloads/encrypted_payload.c
-+@@ -1023,7 +1023,7 @@ encrypted_fragment_payload_t *encrypted_fragment_payload_create()
-+ 				.get_length = _frag_get_length,
-+ 				.add_payload = _frag_add_payload,
-+ 				.remove_payload = (void*)return_null,
-+-				.generate_payloads = nop,
-++				.generate_payloads = (void*)nop,
-+ 				.set_transform = _frag_set_transform,
-+ 				.get_transform = _frag_get_transform,
-+ 				.encrypt = _frag_encrypt,
-+diff --git a/src/libcharon/plugins/android_dns/android_dns_handler.c b/src/libcharon/plugins/android_dns/android_dns_handler.c
-+index 78f4f702a..14d2ff99a 100644
-+--- a/src/libcharon/plugins/android_dns/android_dns_handler.c
-++++ b/src/libcharon/plugins/android_dns/android_dns_handler.c
-+@@ -191,7 +191,7 @@ METHOD(enumerator_t, enumerate_dns, bool,
-+ 	VA_ARGS_VGET(args, type, data);
-+ 	*type = INTERNAL_IP4_DNS;
-+ 	*data = chunk_empty;
-+-	this->venumerate = return_false;
-++	this->venumerate = (void*)return_false;
-+ 	return TRUE;
-+ }
-+ 
-+diff --git a/src/libcharon/plugins/ha/ha_attribute.c b/src/libcharon/plugins/ha/ha_attribute.c
-+index b865a4b82..103d1a937 100644
-+--- a/src/libcharon/plugins/ha/ha_attribute.c
-++++ b/src/libcharon/plugins/ha/ha_attribute.c
-+@@ -381,7 +381,7 @@ ha_attribute_t *ha_attribute_create(ha_kernel_t *kernel, ha_segments_t *segments
-+ 			.provider = {
-+ 				.acquire_address = _acquire_address,
-+ 				.release_address = _release_address,
-+-				.create_attribute_enumerator = enumerator_create_empty,
-++				.create_attribute_enumerator = (void*)enumerator_create_empty,
-+ 			},
-+ 			.reserve = _reserve,
-+ 			.destroy = _destroy,
-+diff --git a/src/libcharon/plugins/updown/updown_handler.c b/src/libcharon/plugins/updown/updown_handler.c
-+index 36eb15615..3707e1e65 100644
-+--- a/src/libcharon/plugins/updown/updown_handler.c
-++++ b/src/libcharon/plugins/updown/updown_handler.c
-+@@ -220,7 +220,7 @@ updown_handler_t *updown_handler_create()
-+ 			.handler = {
-+ 				.handle = _handle,
-+ 				.release = _release,
-+-				.create_attribute_enumerator = enumerator_create_empty,
-++				.create_attribute_enumerator = (void*)enumerator_create_empty,
-+ 			},
-+ 			.create_dns_enumerator = _create_dns_enumerator,
-+ 			.destroy = _destroy,
-+diff --git a/src/libstrongswan/utils/identification.c b/src/libstrongswan/utils/identification.c
-+index d31955b38..58a05052d 100644
-+--- a/src/libstrongswan/utils/identification.c
-++++ b/src/libstrongswan/utils/identification.c
-+@@ -1625,7 +1625,7 @@ static private_identification_t *identification_create(id_type_t type)
-+ 			this->public.hash = _hash_binary;
-+ 			this->public.equals = _equals_binary;
-+ 			this->public.matches = _matches_any;
-+-			this->public.contains_wildcards = return_true;
-++			this->public.contains_wildcards = (void*)return_true;
-+ 			break;
-+ 		case ID_FQDN:
-+ 		case ID_RFC822_ADDR:
-+@@ -1660,13 +1660,13 @@ static private_identification_t *identification_create(id_type_t type)
-+ 			this->public.hash = _hash_binary;
-+ 			this->public.equals = _equals_binary;
-+ 			this->public.matches = _matches_range;
-+-			this->public.contains_wildcards = return_false;
-++			this->public.contains_wildcards = (void*)return_false;
-+ 			break;
-+ 		default:
-+ 			this->public.hash = _hash_binary;
-+ 			this->public.equals = _equals_binary;
-+ 			this->public.matches = _matches_binary;
-+-			this->public.contains_wildcards = return_false;
-++			this->public.contains_wildcards = (void*)return_false;
-+ 			break;
-+ 	}
-+ 	return this;
-diff --git a/meta-networking/recipes-support/strongswan/strongswan_6.0.1.bb b/meta-networking/recipes-support/strongswan/strongswan_6.0.1.bb
-index 9baf219cea..771470f695 100644
---- a/meta-networking/recipes-support/strongswan/strongswan_6.0.1.bb
-+++ b/meta-networking/recipes-support/strongswan/strongswan_6.0.1.bb
-@@ -8,8 +8,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- DEPENDS = "flex-native flex bison-native"
- DEPENDS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'tpm2', '  tpm2-tss', '', d)}"
+diff --git a/meta-oe/classes/check-version-mismatch.bbclass b/meta-oe/classes/check-version-mismatch.bbclass
+index 100cf09ac2..676f7fe755 100644
+--- a/meta-oe/classes/check-version-mismatch.bbclass
++++ b/meta-oe/classes/check-version-mismatch.bbclass
+@@ -205,6 +205,14 @@ python do_package_check_version_mismatch() {
+         os.makedirs(debug_directory, exist_ok=True)
+         data_lines.append("pv: %s\n" % pv)
  
--SRC_URI = "https://download.strongswan.org/strongswan-${PV}.tar.bz2 \
--          "
-+SRC_URI = " \
-+    https://download.strongswan.org/strongswan-${PV}.tar.bz2 \
-+    file://0001-pki-Fix-signature-of-help-to-match-that-of-a-callbac.patch \
-+    file://0002-callback-job-Replace-return_false-in-constructors-wi.patch \
-+    file://0003-Cast-uses-of-return_-nop-and-enumerator_create_empty.patch \
-+    "
- 
- SRC_URI[sha256sum] = "212368cbc674fed31f3292210303fff06da8b90acad2d1387375ed855e6879c4"
- 
++    # handle a special case: a pure % means matching all, no point in further checking
++    if pv == "%":
++        if enable_debug:
++            data_lines.append("FINAL RESULT: MATCH (%s matches all, skipped)\n\n" % pv)
++            with open(debug_data_file, "w") as f:
++                f.writelines(data_lines)
++        return
++
+     got_quick_match_result = False
+     # handle python3-xxx recipes quickly
+     __regex_python_module_version__ = re.compile(r"(?:^|.*:)Version: (?P<version>.*)$")
+-- 
+2.49.0
+
 
