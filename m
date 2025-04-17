@@ -1,139 +1,96 @@
-Return-Path: <Yogita.Urade@windriver.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 541D7C369B2
-	for <webhook@archiver.kernel.org>; Thu, 17 Apr 2025 11:24:27 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.6288.1744889058043627244
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3B2DC369C9
+	for <webhook@archiver.kernel.org>; Thu, 17 Apr 2025 12:32:37 +0000 (UTC)
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.web11.7703.1744893156402212836
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Apr 2025 04:24:18 -0700
+ Thu, 17 Apr 2025 05:32:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=6202619fc1=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53H4Z7n3025099
-	for <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 04:24:17 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45ykf3p31y-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 04:24:17 -0700 (PDT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Thu, 17 Apr 2025 04:24:15 -0700
-From: yurade <yogita.urade@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][scarthgap][PATCH 2/2] poppler: fix CVE-2025-32365
-Date: Thu, 17 Apr 2025 11:23:53 +0000
-Message-ID: <20250417112353.2332836-2-yogita.urade@windriver.com>
-X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20250417112353.2332836-1-yogita.urade@windriver.com>
-References: <20250417112353.2332836-1-yogita.urade@windriver.com>
+ dkim=pass header.i=@konsulko.com header.s=google header.b=UtJ4E6WX;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.42, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-43cfdc2c8c9so3810375e9.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 05:32:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1744893154; x=1745497954; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=R0S9WO6W0Kr6doTVMoY3xl1pBoCbUSVJCOVDfG3zcdQ=;
+        b=UtJ4E6WXwkO3HOCb5BQXluYv5+BE5ockFlzKVeWqnK7MnQgnUCczaoxy2xaIUUfcQI
+         leTo3qibCUv+/BUC5Kx+ocLmzpIp+m2xPMZwZzioC1s++eLEQM6i+o2h9gqTry/+Iha4
+         bOeY9hdDxNl7HFVW6AQeuFce9CPx7kivsH8WI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1744893154; x=1745497954;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=R0S9WO6W0Kr6doTVMoY3xl1pBoCbUSVJCOVDfG3zcdQ=;
+        b=sSsdlYjgdW00o4k6huBEXRszsgP6f9Y1J8lIaPgDK6Fq6QlmUceGwFsL9J3TsjidJ+
+         MEyMBmm0xdFlQAIUAStHi/wNuEknPrIaSlXua6dVgYQWWo3ZIWRRLpCeuj35WQuZ6jTH
+         MgF/nZptep6dN4cCmJ8KWz5hWJuqsY6ktUsHbE4+pHBVy3Prnx6jzG1Ky8FOp8qRmtCR
+         4zYTuDm8OiUjHD6qKSSvrLq9nnQrAyx1UIf9RjeWBmCFw99RQlctjrGRKuT6KeqC+eDu
+         3ez2Bx9Um9i4cqLW4aeEhB6C6+8OcZYKG9FAvHoUzW4dx1L32Csg9CPtHcYxtrEbzQ31
+         8h3A==
+X-Gm-Message-State: AOJu0YxZiIKoPdy3jAxnKwFWeCUNTwnTJiQ797NBph5bLa3u6O9kgfyE
+	GTFJzrJTTCEksemsYvhWtoYN+YChGqWz2kQsG6PQq2udg+JCI5B7jsg45nABu9W+TZUCFP9dnbh
+	d
+X-Gm-Gg: ASbGncug144BHoNMitUeZbCs9eMGY8aRJz50AIRDaQCqFFE6cVJJtB7G5JAix+1nJt2
+	jd/LZQXIEQt6fm+hld44XcjJz9yANLlLoZVHqLRjcC+5ahF6UsMna59/4Gfb9L1VCP3LfbwHch6
+	72Q5f+Daxn80nbqf4W50aNbXpL4qFQkB8vjZd+M18wse3g378RuGm+eXtrLPOvZaBVwcpOu2mso
+	U3bPNWQRf+AffW11W9HIfVrNY2URvkUInV8iqyHCJwvwdBztGdmuYaDoGpu6ubA0o8LkUZo3W3C
+	fVHX6Mc5q+qSp8SxacMPrvHGs5rH89YMwSvAQI37jWvhiCtsZ+aLkWM=
+X-Google-Smtp-Source: AGHT+IFGVjuh0Lpxk/8SnjR38+Re8Q0TLHYv0T2oPNPdQsjoIk6a+UOT8lJkkrMuUxQm7ujfwLbk9w==
+X-Received: by 2002:a5d:64ae:0:b0:390:e48a:3869 with SMTP id ffacd0b85a97d-39ee5b11205mr5494957f8f.11.1744893154234;
+        Thu, 17 Apr 2025 05:32:34 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-39eae96407esm20208804f8f.17.2025.04.17.05.32.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 17 Apr 2025 05:32:33 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/6] python3-yarl: Upgrade 1.19.0 -> 1.20.0
+Date: Thu, 17 Apr 2025 15:32:26 +0300
+Message-Id: <20250417123231.3063208-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: -FAEpQG98JnPJ_jJ9LiKHL1Z5FBKKD9X
-X-Authority-Analysis: v=2.4 cv=Wd0Ma1hX c=1 sm=1 tr=0 ts=6800e4e1 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=XR8D0OoHHMoA:10 a=PYnjg3YJAAAA:8 a=e5mUnYsNAAAA:8 a=t7CeM3EgAAAA:8 a=3fyaaF4VAAAA:8
- a=MqtIDRdRqMlizm5S7zgA:9 a=Vxmtnl_E_bksehYqCbjh:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: -FAEpQG98JnPJ_jJ9LiKHL1Z5FBKKD9X
-X-Sensitive_Customer_Information: Yes
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-17_03,2025-04-15_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0
- lowpriorityscore=0 priorityscore=1501 spamscore=0 clxscore=1015
- impostorscore=0 suspectscore=0 malwarescore=0 adultscore=0 phishscore=0
- mlxlogscore=999 mlxscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2502280000
- definitions=main-2504170085
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 11:24:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116930
+ <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 12:32:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116931
 
-From: Yogita Urade <yogita.urade@windriver.com>
+Upgrade to release 1.20.0:
 
-Poppler before 25.04.0 allows crafted input files to trigger
-out-of-bounds reads in the JBIG2Bitmap::combine function in
-JBIG2Stream.cc because of a misplaced isOk check.
+- Implemented support for the free-threaded build of CPython 3.13
+- Started building wheels for the free-threaded build of CPython 3.13
 
-Reference:
-https://nvd.nist.gov/vuln/detail/CVE-2025-32365
-
-Upstream patch:
-https://gitlab.freedesktop.org/poppler/poppler/-/commit/1f151565bbca5be7449ba8eea6833051cc1baa41
-
-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../poppler/poppler/CVE-2025-32365.patch      | 41 +++++++++++++++++++
- .../poppler/poppler_23.04.0.bb                |  1 +
- 2 files changed, 42 insertions(+)
- create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-32365.patch
+ .../python/{python3-yarl_1.19.0.bb => python3-yarl_1.20.0.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-yarl_1.19.0.bb => python3-yarl_1.20.0.bb} (88%)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2025-32365.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2025-32365.patch
-new file mode 100644
-index 0000000000..703a69fc95
---- /dev/null
-+++ b/meta-oe/recipes-support/poppler/poppler/CVE-2025-32365.patch
-@@ -0,0 +1,41 @@
-+From 1f151565bbca5be7449ba8eea6833051cc1baa41 Mon Sep 17 00:00:00 2001
-+From: Albert Astals Cid <aacid@kde.org>
-+Date: Mon, 31 Mar 2025 14:35:49 +0200
-+Subject: [PATCH] Move isOk check to inside JBIG2Bitmap::combine
-+
-+CVE: CVE-2025-32365
-+Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/1f151565bbca5be7449ba8eea6833051cc1baa41]
-+
-+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
-+---
-+ poppler/JBIG2Stream.cc | 8 +++++---
-+ 1 file changed, 5 insertions(+), 3 deletions(-)
-+
-+diff --git a/poppler/JBIG2Stream.cc b/poppler/JBIG2Stream.cc
-+index bdc51d0..2974493 100644
-+--- a/poppler/JBIG2Stream.cc
-++++ b/poppler/JBIG2Stream.cc
-+@@ -770,6 +770,10 @@ void JBIG2Bitmap::combine(JBIG2Bitmap *bitmap, int x, int y, unsigned int combOp
-+     unsigned int src0, src1, src, dest, s1, s2, m1, m2, m3;
-+     bool oneByte;
-+
-++    if (unlikely(!isOk())) {
-++        return;
-++    }
-++
-+     // check for the pathological case where y = -2^31
-+     if (y < -0x7fffffff) {
-+         return;
-+@@ -2200,9 +2204,7 @@ void JBIG2Stream::readTextRegionSeg(unsigned int segNum, bool imm, bool lossless
-+             if (pageH == 0xffffffff && y + h > curPageH) {
-+                 pageBitmap->expand(y + h, pageDefPixel);
-+             }
-+-            if (pageBitmap->isOk()) {
-+-                pageBitmap->combine(bitmap.get(), x, y, extCombOp);
-+-            }
-++            pageBitmap->combine(bitmap.get(), x, y, extCombOp);
-+
-+             // store the region bitmap
-+         } else {
-+--
-+2.40.0
-diff --git a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
-index e68fe151e9..8760a0e17e 100644
---- a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
-@@ -13,6 +13,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            file://CVE-2024-6239-0002.patch \
-            file://CVE-2024-56378.patch \
-            file://CVE-2025-32364.patch \
-+           file://CVE-2025-32365.patch \
-            "
- SRC_URI[sha256sum] = "b6d893dc7dcd4138b9e9df59a13c59695e50e80dc5c2cacee0674670693951a1"
+diff --git a/meta-python/recipes-devtools/python/python3-yarl_1.19.0.bb b/meta-python/recipes-devtools/python/python3-yarl_1.20.0.bb
+similarity index 88%
+rename from meta-python/recipes-devtools/python/python3-yarl_1.19.0.bb
+rename to meta-python/recipes-devtools/python/python3-yarl_1.20.0.bb
+index 22203d335b..04e150e164 100644
+--- a/meta-python/recipes-devtools/python/python3-yarl_1.19.0.bb
++++ b/meta-python/recipes-devtools/python/python3-yarl_1.20.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/aio-libs/yarl/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+-SRC_URI[sha256sum] = "01e02bb80ae0dbed44273c304095295106e1d9470460e773268a27d11e594892"
++SRC_URI[sha256sum] = "686d51e51ee5dfe62dec86e4866ee0e9ed66df700d55c828a615640adc885307"
+ 
+ PYPI_PACKAGE = "yarl"
  
 -- 
-2.40.0
+2.39.5
 
 
