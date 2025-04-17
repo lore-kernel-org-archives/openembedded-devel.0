@@ -1,1116 +1,804 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <mark.yang@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41690C369B2
-	for <webhook@archiver.kernel.org>; Thu, 17 Apr 2025 05:05:25 +0000 (UTC)
-Received: from mail-lj1-f170.google.com (mail-lj1-f170.google.com [209.85.208.170])
- by mx.groups.io with SMTP id smtpd.web10.1821.1744866315650048371
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 514CBC369B2
+	for <webhook@archiver.kernel.org>; Thu, 17 Apr 2025 05:22:25 +0000 (UTC)
+Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.53])
+ by mx.groups.io with SMTP id smtpd.web10.2001.1744867337975625001
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Apr 2025 22:05:16 -0700
+ Wed, 16 Apr 2025 22:22:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=bGVPcZlt;
- spf=pass (domain: gmail.com, ip: 209.85.208.170, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lj1-f170.google.com with SMTP id 38308e7fff4ca-30bfb6ab47cso3358261fa.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 16 Apr 2025 22:05:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744866313; x=1745471113; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=jDXn6ep9Fs4/AiIETe1mqBVFkhKtW63aFvW5Oik2TBo=;
-        b=bGVPcZltXt4le1aPg2IlZAzVS9kKOJztTZZs5PGlQ4aqVFvfIB9x6f3JopkdU4GW9/
-         u0AAe6m9+aitKXmzg1Ca2aoeGCekTRy44gbZVU/1GOtnaVBIYpnQw5bK3d7v4iJFLn07
-         fIkzoIlOw6jbtB9k0YU3oRI4A8qSLWwdjR4WVAQrjmo2qzfNkwkDXnwUYrpz+fio55WL
-         6qJZCHG0zWmb2USfZABcrNiOriHikdTzxsWg3xXJPRzn3SDyvYJzMclOANVFNCDPqfER
-         WpYiktHxinVAQXeMVFar9RHKrTK+g3ht4L6FQYcO24shwxD8Qp0FUcYpQpp+WYk5AIul
-         NXRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744866313; x=1745471113;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=jDXn6ep9Fs4/AiIETe1mqBVFkhKtW63aFvW5Oik2TBo=;
-        b=hi9seN02KyjahNWBmahUiauNxUxjqOyy8UxZbyiPV1db4anaiphHwUvMmKNsBchkqV
-         Ky51Sespjuow+piW4zNNJRAKymOF5aII3IKZERDFcrif7u5dAgAirVJkxgmPuVG2mSjJ
-         pQnwV5w/QRruueEdwEe9C5hQELZUAt1Cv9GmNJ7ivVvtose8wMpvJ/qYZY9C+i9l1I6D
-         IPf6cREK2RanrCHho9Jwxd6wNEeE/miYsqEfW/sus8jOBKl/wI6EbO8gSOBnzkx0jRHL
-         g1/uQnV3pfE1u+XGu3NEKVsPZzMBgijSG+8S1Cn9sTt8EmQiUSMsFK4+ntqL/xQTJLjI
-         7jkQ==
-X-Gm-Message-State: AOJu0YzxrUPDmz9aonQ+5ZALsNaXXayzC2GQJPn9ceFivu7a0TFw7uVa
-	RzUIo2JFj/7eGFEJcI6t57uSeTN1EeqkxTJA4t911LNm+ZXGsoZbq0OX5UqgvFCZrpLajGOFUwY
-	Q9HWEne2QdlLWlres3Bf0Mrnmf00=
-X-Gm-Gg: ASbGncvE5L28BbmdV1b3wCQlniQP80VQQQQaY4Rja6bO6z+qcusIO4Hi9Do4MbPxUrL
-	tAnLKPJdnmEFaSM+ZYHMs/o3C4Xs8UQ54LIuRzyrojgMW93n28OIJtF1stB0sbrXBdwgIwWs/WX
-	2QXoG5sg9SVAnLIBLiuO7J5Bid1KV4Ss6poFguZ5KpzdmnT2YLst/+K6o=
-X-Google-Smtp-Source: AGHT+IFa8lHY3JvaNSCteCt0zqzOebjzcESo2a24bS8VgCjydINBneO7KenVcrXqILd1EHvwUBU+gvQiaN3UP6u6vqU=
-X-Received: by 2002:a05:651c:12c1:b0:30b:ed5a:6f3c with SMTP id
- 38308e7fff4ca-3107f6bcf91mr14000071fa.10.1744866313006; Wed, 16 Apr 2025
- 22:05:13 -0700 (PDT)
+ dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.53, mailfrom: mark.yang@lge.com)
+Received: from unknown (HELO lgeamrelo02.lge.com) (156.147.1.126)
+	by 156.147.23.53 with ESMTP; 17 Apr 2025 14:22:15 +0900
+X-Original-SENDERIP: 156.147.1.126
+X-Original-MAILFROM: mark.yang@lge.com
+Received: from unknown (HELO markyang..) (10.177.120.37)
+	by 156.147.1.126 with ESMTP; 17 Apr 2025 14:22:15 +0900
+X-Original-SENDERIP: 10.177.120.37
+X-Original-MAILFROM: mark.yang@lge.com
+From: mark.yang@lge.com
+To: openembedded-devel@lists.openembedded.org
+Cc: "mark.yang" <mark.yang@lge.com>
+Subject: [meta-oe][PATCH v2] cyrus-sasl: fix error with gcc-15
+Date: Thu, 17 Apr 2025 14:22:14 +0900
+Message-Id: <20250417052214.716500-1-mark.yang@lge.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250417010511.592579-1-akuster808@gmail.com>
-In-Reply-To: <20250417010511.592579-1-akuster808@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 17 Apr 2025 07:05:01 +0200
-X-Gm-Features: ATxdqUGOlZBwQGy_NIABYlNrrEQFEqk0Fbz_ngnQyTno9QDrlN0fX43gJqrDHtU
-Message-ID: <CA+chaQdk24dJdXGAbE5znWnhVkmk+=YuLEfqmSBQX_6V3_EyaQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][v2][walnascar][PATCH] meta-openemnedded: Add
- myself as walnascar maintainer
-To: akuster808@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000c4833a0632f25832"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 05:05:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116917
+ <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 05:22:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116918
 
---000000000000c4833a0632f25832
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: "mark.yang" <mark.yang@lge.com>
 
-there is still a typo in the subject, "embedded"
+  * Submitted 2 Patches:
+    - 0001-configure-prototypes.patch
+    - 0002-Fix-incompatible-pointer-types-error-with-gcc-15.patch
+  * Backported 1 Patch:
+    - 0003-Add-compatibility-for-gcc-15-869.patch
 
-On Thu, 17 Apr 2025, 03:05 Armin Kuster via lists.openembedded.org,
-<akuster808=3Dgmail.com@lists.openembedded.org> wrote:
+  * To fix the error with gcc-15.
+  http://errors.yoctoproject.org/Errors/Details/851188/
 
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
->
-> ---
-> V2]
-> Fix branch name typos
-> ---
->  README.md                   |  2 +-
->  meta-filesystems/README.md  | 10 +++++-----
->  meta-gnome/README.md        | 10 +++++-----
->  meta-initramfs/README.md    |  8 ++++----
->  meta-multimedia/README.md   | 10 +++++-----
->  meta-networking/MAINTAINERS | 11 +++--------
->  meta-networking/README.md   |  8 ++++----
->  meta-oe/README.md           |  8 ++++----
->  meta-perl/README.md         | 11 +++++------
->  meta-python/README.md       | 12 +++++-------
->  meta-webserver/README.md    | 11 +++++++----
->  meta-xfce/README.md         | 11 +++++------
->  12 files changed, 53 insertions(+), 59 deletions(-)
->
-> diff --git a/README.md b/README.md
-> index 7318f09cdb..82f2e9699a 100644
-> --- a/README.md
-> +++ b/README.md
-> @@ -1,6 +1,6 @@
->  Collection of layers for the OE-core universe
->
-> -Main layer maintainer: Khem Raj <raj.khem@gmail.com>
-> +Main layer maintainer: Armin Kuster <akuster808@gmail.com>
->
->  This repository is a collection of layers to suppliment OE-Core
->  with additional packages, Each layer have designated maintainer
-> diff --git a/meta-filesystems/README.md b/meta-filesystems/README.md
-> index 78a4429ce2..e31b29c493 100644
-> --- a/meta-filesystems/README.md
-> +++ b/meta-filesystems/README.md
-> @@ -11,26 +11,26 @@ This layer depends on:
->
->    URI: git://git.openembedded.org/openembedded-core
->    layers: meta
-> -  branch: master
-> +  branch: walnascar
->
->    URI: git://git.openembedded.org/meta-openembedded
->    layers: meta-oe
-> -  branch: master
-> +  branch: walnascar
->
->  Patches
->  =3D=3D=3D=3D=3D=3D=3D
->
->  Please submit any patches against the filesystems layer to the
->  OpenEmbedded development mailing list (
-> openembedded-devel@lists.openembedded.org)
-> -with '[meta-filesystems]' in the subject.
-> +with '[meta-filesystems][walnascar]' in the subject.
->
-> -Layer maintainer: Khem Raj <raj.khem@gmail.com>
-> +Layer maintainer: Armin Kuster <akuster808@gmail.com>
->
->  When sending single patches, please use something like:
->
->     git send-email -1 -M \
->          --to openembedded-devel@lists.openembedded.org \
-> -        --subject-prefix=3D'meta-filesystems][PATCH'
-> +        --subject-prefix=3D'meta-filesystems][walnascar][PATCH'
->
->
->  Table of Contents
-> diff --git a/meta-gnome/README.md b/meta-gnome/README.md
-> index fbb0d72476..eacf40e94b 100644
-> --- a/meta-gnome/README.md
-> +++ b/meta-gnome/README.md
-> @@ -3,14 +3,14 @@ Dependencies
->  This layer depends on:
->
->  URI: git://git.openembedded.org/openembedded-core
-> -branch: master
-> +branch: walnascar
->
->  URI: git://git.openembedded.org/meta-openembedded
-> -branch: master
-> +branch: walnascar
->
-> -Send pull requests to openembedded-devel@lists.openembedded.org with
-> '[meta-gnome]' in the subject'
-> +Send pull requests to openembedded-devel@lists.openembedded.org with
-> '[meta-gnome][walnascar]' in the subject'
->
->  When sending single patches, please using something like:
-> -git send-email -M -1 --to openembedded-devel@lists.openembedded.org
-> --subject-prefix=3D'meta-gnome][PATCH'
-> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org
-> --subject-prefix=3D'meta-gnome][walnascar][PATCH'
->
-> -Layer maintainer: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> +Layer maintainer: Armin Kuster <akuster808@gmail.com>
-> diff --git a/meta-initramfs/README.md b/meta-initramfs/README.md
-> index 119293a741..cfde7a3ae9 100644
-> --- a/meta-initramfs/README.md
-> +++ b/meta-initramfs/README.md
-> @@ -12,19 +12,19 @@ Dependencies
->  This layer depends on:
->
->  URI: git://git.openembedded.org/meta-openembedded
-> -branch: master
-> +branch: walnascar
->
->
->  Maintenance
->  -----------
->
->  Send patches / pull requests to openembedded-devel@lists.openembedded.or=
-g
-> -with '[meta-initramfs]' in the subject.
-> +with '[meta-initramfs][walnascar]' in the subject.
->
->  When sending single patches, please using something like:
-> -git send-email -M -1 --to openembedded-devel@lists.openembedded.org
-> --subject-prefix=3D'meta-initramfs][PATCH'
-> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org
-> --subject-prefix=3D'meta-initramfs][walnascar][PATCH'
->
-> -Interm layer maintainer: Khem Raj <raj.khem@gmail.com>
-> +Interm layer maintainer: Armin Kuster <akuster808@gmail.com>
->
->
->  License
-> diff --git a/meta-multimedia/README.md b/meta-multimedia/README.md
-> index 235c34331b..b8e98d15c8 100644
-> --- a/meta-multimedia/README.md
-> +++ b/meta-multimedia/README.md
-> @@ -1,17 +1,17 @@
->  This layer depends on:
->
->  URI: git://git.openembedded.org/openembedded-core
-> -branch: master
-> +branch: walnascar
->
->  URI: git://git.openembedded.org/meta-openembedded
->  layers: meta-oe
-> -branch: master
-> +branch: walnascar
->
-> -Send pull requests to openembedded-devel@lists.openembedded.org with
-> '[meta-multimedia]' in the subject
-> +Send pull requests to openembedded-devel@lists.openembedded.org with
-> '[meta-multimedia][walnascar]' in the subject
->
->  When sending single patches, please use something like:
-> -git send-email -M -1 --to openembedded-devel@lists.openembedded.org
-> --subject-prefix=3D'meta-multimedia][PATCH'
-> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org
-> --subject-prefix=3D'meta-multimedia][walnascar][PATCH'
->
->  You are encouraged to fork the mirror on github
-> https://github.com/openembedded/meta-openembedded to share your patches,
-> this is preferred for patch sets consisting of more than one patch. Other
-> services like GitLab, repo.or.cz or self hosted setups are of course
-> accepted as well, 'git fetch <remote>' works the same on all of them. We
-> recommend github because it is free, easy to use, has been proven to be
-> reliable and has a really good web GUI.
->
-> -Layer maintainer: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> +Layer maintainer: Armin Kuster <akuster808@gmail.com>
-> diff --git a/meta-networking/MAINTAINERS b/meta-networking/MAINTAINERS
-> index dc549d7582..41c37b58d0 100644
-> --- a/meta-networking/MAINTAINERS
-> +++ b/meta-networking/MAINTAINERS
-> @@ -2,13 +2,13 @@ This file contains a list of maintainers for the
-> meta-networking layer.
->
->  Please submit any patches against meta-networking to the OpenEmbedded
->  development mailing list (openembedded-devel@lists.openembedded.org) wit=
-h
-> -'[meta-networking]' in the subject.
-> +'[meta-networking][walnascar]' in the subject.
->
->  When sending single patches, please use something like:
->
->     git send-email -1 -M \
->          --to openembedded-devel@lists.openembedded.org \
-> -        --subject-prefix=3D'meta-networking][PATCH'
-> +        --subject-prefix=3D'meta-networking][walnascar][PATCH'
->
->  You may also contact the maintainers directly.
->
-> @@ -26,14 +26,9 @@ Please keep this list in alphabetical order.
->  Maintainers List (try to look for most precise areas first)
->
->  COMMON
-> -M:      Khem Raj <raj.khem@gmail.com>
-> -M:      "Joe MacDonald (backup)" <joe@deserted.net>
-> +M:      Armin Kuster <akuster808@gmail.com>
->  L:      openembedded-devel@lists.openembedded.org
->  Q:      https://patchwork.openembedded.org/project/oe/
->  S:      Maintained
->  F:      conf
->  F:      recipes-*
-> -
-> -OPENTHREAD
-> -M:      Stefan Schmidt <stefan@datenfreihafen.org>
-> -F:      recipes-connectivity/openthread/
-> diff --git a/meta-networking/README.md b/meta-networking/README.md
-> index ab2640618f..ef7933e319 100644
-> --- a/meta-networking/README.md
-> +++ b/meta-networking/README.md
-> @@ -18,21 +18,21 @@ Dependencies
->  This layer depends on:
->
->  URI: git://git.openembedded.org/openembedded-core
-> -branch: master
-> +branch: Scarthgap
->
->  For some recipes, the meta-oe layer is required:
->
->  URI: git://git.openembedded.org/meta-openembedded
->  subdirectory: meta-oe
-> -branch: master
-> +branch: Scarthgap
->
->  URI: git://git.openembedded.org/meta-openembedded
->  subdirectory: meta-python
-> -branch: master
-> +branch: Scarthgap
->
->  Maintenance
->  -----------
-> -Layer maintainers: Khem Raj <raj.khem@gmail.com>
-> +Stable Layer maintainer: Armin Kuster <akuster808@gmail.com>
->
->
->  Please see the MAINTAINERS file for information on contacting the
-> diff --git a/meta-oe/README.md b/meta-oe/README.md
-> index c7c14a4507..6bb7e06119 100644
-> --- a/meta-oe/README.md
-> +++ b/meta-oe/README.md
-> @@ -4,7 +4,7 @@ meta-oe
->  This layer depends on:
->
->  URI: git://github.com/openembedded/openembedded-core.git
-> -branch: master
-> +branch: walnascar
->
->  luajit recipe requires host compiler to be able to generate 32bit code
-> when target is 32bit
->  e.g. arm, so ensure that $CC -m32 is functional on build host, if
-> building this recipe, needed
-> @@ -16,10 +16,10 @@ pacman -S lib32-gcc-libs lib32-glibc
->  Ubuntu
->  sudo apt-get install gcc-multilib linux-libc-dev:i386
->
-> -Send pull requests to openembedded-devel@lists.openembedded.org with
-> '[meta-oe]' in the subject'
-> +Send pull requests to openembedded-devel@lists.openembedded.org with
-> '[meta-oe][walnascar]' in the subject'
->
->  When sending single patches, please use something like:
-> -'git send-email -M -1 --to openembedded-devel@lists.openembedded.org
-> --subject-prefix=3D"meta-oe][PATCH"'
-> +'git send-email -M -1 --to openembedded-devel@lists.openembedded.org
-> --subject-prefix=3D"meta-oe][walnascar][PATCH"'
->
->  You are encouraged to fork the mirror on GitHub
-> https://github.com/openembedded/meta-openembedded
->  to share your patches, this is preferred for patch sets consisting of
-> more than one patch.
-> @@ -33,4 +33,4 @@ Other services like GitLab, repo.or.cz or self-hosted
-> setups are of course accep
->  'git fetch <remote>' works the same on all of them. We recommend GitHub
-> because it is free, easy
->  to use, has been proven to be reliable and has a really good web GUI.
->
-> -layer maintainer: Khem Raj <raj.khem@gmail.com>
-> +layer maintainer: Armin Kuster <akuster808@gmail.com>
-> diff --git a/meta-perl/README.md b/meta-perl/README.md
-> index 13014b0ff3..80e5c84bb7 100644
-> --- a/meta-perl/README.md
-> +++ b/meta-perl/README.md
-> @@ -52,7 +52,7 @@ Dependencies
->  This layer depends on:
->
->    URI: git://git.openembedded.org/openembedded-core
-> -  branch: master
-> +  branch: walnascar
->
->  Adding the meta-perl layer to your build
->  ---------------------------------------
-> @@ -73,14 +73,13 @@ Maintenance
->  -----------
->
->  Send patches / pull requests to openembedded-devel@lists.openembedded.or=
-g
-> with
-> -'[meta-perl]' in the subject.
-> +'[meta-perl][walnascar]' in the subject.
->
->  When sending single patches, please using something like:
-> -git send-email -M -1 --to openembedded-devel@lists.openembedded.org
-> --subject-prefix=3D'meta-perl][PATCH'
-> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org
-> --subject-prefix=3D'meta-perl][walnascar][PATCH'
->
-> -Layer maintainers:
-> -    Hongxu Jia <hongxu.jia@windriver.com>
-> -    Tim "moto-timo" Orling <ticotimo@gmail.com>
-> +Layer maintainers: Armin Kuster <akuster808@gmail.com>
-> +
->
->  License
->  -------
-> diff --git a/meta-python/README.md b/meta-python/README.md
-> index 36c193957c..bf1ad0874d 100644
-> --- a/meta-python/README.md
-> +++ b/meta-python/README.md
-> @@ -13,11 +13,11 @@ The meta-python layer depends on:
->
->         URI: git://git.openembedded.org/openembedded-core
->         layers: meta
-> -       branch: master
-> +       branch: walnascar
->
->         URI: git://git.openembedded.org/meta-openembedded
->         layers: meta-oe
-> -       branch: master
-> +       branch: walnascar
->
->  Contributing
->  -------------------------
-> @@ -28,14 +28,12 @@ comments and patch review. It is subscriber only, so
-> please register
->  before posting.
->
->  Send pull requests to openembedded-devel@lists.openembedded.org with
-> -'[meta-python]' in the subject.
-> +'[meta-python][walnascar]' in the subject.
->
->  When sending single patches, please use something like:
-> -git send-email -M -1 --to=3Dopenembedded-devel@lists.openembedded.org
-> --subject-prefix=3D'meta-python][PATCH'
-> +git send-email -M -1 --to=3Dopenembedded-devel@lists.openembedded.org
-> --subject-prefix=3D'meta-python][walnascar][PATCH'
->
->  Maintenance
->  -------------------------
->
-> -Layer maintainers:
-> -        Tim "moto-timo" Orling <TicoTimo@gmail.com>
-> -        Derek Straka <derek@asterius.io>
-> +Layer maintainers: Armin Kuster <akuster808@gmail.com>
-> diff --git a/meta-webserver/README.md b/meta-webserver/README.md
-> index d1b743887c..3c7fd7f827 100644
-> --- a/meta-webserver/README.md
-> +++ b/meta-webserver/README.md
-> @@ -13,13 +13,13 @@ This layer depends on:
->
->  URI: git://git.openembedded.org/openembedded-core
->  subdirectory: meta
-> -branch: master
-> +branch: walnascar
->
->  For some recipes, the meta-oe layer is required:
->
->  URI: git://git.openembedded.org/meta-openembedded
->  subdirectory: meta-oe
-> -branch: master
-> +branch: walnascar
->
->
->
-> @@ -50,9 +50,12 @@ Maintenance
->  -----------
->
->  Send patches / pull requests to openembedded-devel@lists.openembedded.or=
-g
-> -with '[meta-webserver]' in the subject.
-> +with '[meta-webserver][walnascar]' in the subject.
->
-> -Layer maintainer: Derek Straka <derek@asterius.io>
-> +When sending single patches, please using something like:
-> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org
-> --subject-prefix=3D'meta-webserver][walnascar][PATCH'
-> +
-> +Layer maintainer: Armin Kuster <akuster808@gmail.com>
->
->
->  License
-> diff --git a/meta-xfce/README.md b/meta-xfce/README.md
-> index 3d6158628f..fb577a48fb 100644
-> --- a/meta-xfce/README.md
-> +++ b/meta-xfce/README.md
-> @@ -1,10 +1,10 @@
->  This layer depends on:
->
->  URI: git://git.openembedded.org/openembedded-core
-> -branch: master
-> +branch: walnascar
->
->  URI: git://git.openembedded.org/meta-openembedded
-> -branch: master
-> +branch: walnascar
->
->  meta-xfce depends on meta-oe, meta-gnome and meta-multimedia in this
-> repository.
->
-> @@ -13,10 +13,9 @@ this to local.conf:
->
->  BBMASK =3D "meta-xfce/recipes-multimedia"
->
-> -Send pull requests to openembedded-devel@lists.openembedded.org with
-> '[meta-xfce]' in the subject'
-> +Send pull requests to openembedded-devel@lists.openembedded.org with
-> '[meta-xfce][walnascar]' in the subject'
->
->  When sending single patches, please using something like:
-> -git send-email -M -1 --to openembedded-devel@lists.openembedded.org
-> --subject-prefix=3D'meta-xfce][PATCH'
-> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org
-> --subject-prefix=3D'meta-xfce][walnascar][PATCH'
->
-> -Layer maintainer: Kai Kang <kai.kang@windriver.com>
-> -Layer maintainer: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> +Layer maintainer: Armin Kuster <akuster808@gmail.com>
-> --
-> 2.43.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#116915):
-> https://lists.openembedded.org/g/openembedded-devel/message/116915
-> Mute This Topic: https://lists.openembedded.org/mt/112306341/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> martin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+Signed-off-by: mark.yang <mark.yang@lge.com>
+---
+v2: Change one of the patches status from backport to submitted
 
---000000000000c4833a0632f25832
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ .../0001-configure-prototypes.patch           |  39 ++
+ ...ible-pointer-types-error-with-gcc-15.patch | 122 ++++
+ ...003-Add-compatibility-for-gcc-15-869.patch | 530 ++++++++++++++++++
+ .../cyrus-sasl/cyrus-sasl_2.1.28.bb           |  24 +-
+ 4 files changed, 705 insertions(+), 10 deletions(-)
+ create mode 100644 meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-configure-prototypes.patch
+ create mode 100644 meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0002-Fix-incompatible-pointer-types-error-with-gcc-15.patch
+ create mode 100644 meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0003-Add-compatibility-for-gcc-15-869.patch
 
-<p dir=3D"ltr">there is still a typo in the subject, &quot;embedded&quot;</=
-p>
-<br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Thu, 17 Apr 2025, 03:05 Armin Kuster via <a href=3D"http=
-://lists.openembedded.org">lists.openembedded.org</a>, &lt;akuster808=3D<a =
-href=3D"mailto:gmail.com@lists.openembedded.org">gmail.com@lists.openembedd=
-ed.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"m=
-argin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">Signed-off-by=
-: Armin Kuster &lt;<a href=3D"mailto:akuster808@gmail.com" target=3D"_blank=
-" rel=3D"noreferrer">akuster808@gmail.com</a>&gt;<br>
-<br>
----<br>
-V2]<br>
-Fix branch name typos<br>
----<br>
-=C2=A0README.md=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0|=C2=A0 2 +-<br>
-=C2=A0meta-filesystems/README.md=C2=A0 | 10 +++++-----<br>
-=C2=A0meta-gnome/README.md=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 10 +++++-----<br>
-=C2=A0meta-initramfs/README.md=C2=A0 =C2=A0 |=C2=A0 8 ++++----<br>
-=C2=A0meta-multimedia/README.md=C2=A0 =C2=A0| 10 +++++-----<br>
-=C2=A0meta-networking/MAINTAINERS | 11 +++--------<br>
-=C2=A0meta-networking/README.md=C2=A0 =C2=A0|=C2=A0 8 ++++----<br>
-=C2=A0meta-oe/README.md=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 8 +=
-+++----<br>
-=C2=A0meta-perl/README.md=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 11 +++++------=
-<br>
-=C2=A0meta-python/README.md=C2=A0 =C2=A0 =C2=A0 =C2=A0| 12 +++++-------<br>
-=C2=A0meta-webserver/README.md=C2=A0 =C2=A0 | 11 +++++++----<br>
-=C2=A0meta-xfce/README.md=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 11 +++++------=
-<br>
-=C2=A012 files changed, 53 insertions(+), 59 deletions(-)<br>
-<br>
-diff --git a/README.md b/README.md<br>
-index 7318f09cdb..82f2e9699a 100644<br>
---- a/README.md<br>
-+++ b/README.md<br>
-@@ -1,6 +1,6 @@<br>
-=C2=A0Collection of layers for the OE-core universe<br>
-<br>
--Main layer maintainer: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" =
-target=3D"_blank" rel=3D"noreferrer">raj.khem@gmail.com</a>&gt;<br>
-+Main layer maintainer: Armin Kuster &lt;<a href=3D"mailto:akuster808@gmail=
-.com" target=3D"_blank" rel=3D"noreferrer">akuster808@gmail.com</a>&gt;<br>
-<br>
-=C2=A0This repository is a collection of layers to suppliment OE-Core<br>
-=C2=A0with additional packages, Each layer have designated maintainer<br>
-diff --git a/meta-filesystems/README.md b/meta-filesystems/README.md<br>
-index 78a4429ce2..e31b29c493 100644<br>
---- a/meta-filesystems/README.md<br>
-+++ b/meta-filesystems/README.md<br>
-@@ -11,26 +11,26 @@ This layer depends on:<br>
-<br>
-=C2=A0 =C2=A0URI: git://<a href=3D"http://git.openembedded.org/openembedded=
--core" rel=3D"noreferrer noreferrer" target=3D"_blank">git.openembedded.org=
-/openembedded-core</a><br>
-=C2=A0 =C2=A0layers: meta<br>
--=C2=A0 branch: master<br>
-+=C2=A0 branch: walnascar<br>
-<br>
-=C2=A0 =C2=A0URI: git://<a href=3D"http://git.openembedded.org/meta-openemb=
-edded" rel=3D"noreferrer noreferrer" target=3D"_blank">git.openembedded.org=
-/meta-openembedded</a><br>
-=C2=A0 =C2=A0layers: meta-oe<br>
--=C2=A0 branch: master<br>
-+=C2=A0 branch: walnascar<br>
-<br>
-=C2=A0Patches<br>
-=C2=A0=3D=3D=3D=3D=3D=3D=3D<br>
-<br>
-=C2=A0Please submit any patches against the filesystems layer to the<br>
-=C2=A0OpenEmbedded development mailing list (<a href=3D"mailto:openembedded=
--devel@lists.openembedded.org" target=3D"_blank" rel=3D"noreferrer">openemb=
-edded-devel@lists.openembedded.org</a>)<br>
--with &#39;[meta-filesystems]&#39; in the subject.<br>
-+with &#39;[meta-filesystems][walnascar]&#39; in the subject.<br>
-<br>
--Layer maintainer: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" targe=
-t=3D"_blank" rel=3D"noreferrer">raj.khem@gmail.com</a>&gt;<br>
-+Layer maintainer: Armin Kuster &lt;<a href=3D"mailto:akuster808@gmail.com"=
- target=3D"_blank" rel=3D"noreferrer">akuster808@gmail.com</a>&gt;<br>
-<br>
-=C2=A0When sending single patches, please use something like:<br>
-<br>
-=C2=A0 =C2=A0 git send-email -1 -M \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0--to <a href=3D"mailto:openembedded-devel=
-@lists.openembedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-=
-devel@lists.openembedded.org</a> \<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 --subject-prefix=3D&#39;meta-filesystems][PATC=
-H&#39;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 --subject-prefix=3D&#39;meta-filesystems][waln=
-ascar][PATCH&#39;<br>
-<br>
-<br>
-=C2=A0Table of Contents<br>
-diff --git a/meta-gnome/README.md b/meta-gnome/README.md<br>
-index fbb0d72476..eacf40e94b 100644<br>
---- a/meta-gnome/README.md<br>
-+++ b/meta-gnome/README.md<br>
-@@ -3,14 +3,14 @@ Dependencies<br>
-=C2=A0This layer depends on:<br>
-<br>
-=C2=A0URI: git://<a href=3D"http://git.openembedded.org/openembedded-core" =
-rel=3D"noreferrer noreferrer" target=3D"_blank">git.openembedded.org/openem=
-bedded-core</a><br>
--branch: master<br>
-+branch: walnascar<br>
-<br>
-=C2=A0URI: git://<a href=3D"http://git.openembedded.org/meta-openembedded" =
-rel=3D"noreferrer noreferrer" target=3D"_blank">git.openembedded.org/meta-o=
-penembedded</a><br>
--branch: master<br>
-+branch: walnascar<br>
-<br>
--Send pull requests to <a href=3D"mailto:openembedded-devel@lists.openembed=
-ded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.open=
-embedded.org</a> with &#39;[meta-gnome]&#39; in the subject&#39;<br>
-+Send pull requests to <a href=3D"mailto:openembedded-devel@lists.openembed=
-ded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.open=
-embedded.org</a> with &#39;[meta-gnome][walnascar]&#39; in the subject&#39;=
-<br>
-<br>
-=C2=A0When sending single patches, please using something like:<br>
--git send-email -M -1 --to <a href=3D"mailto:openembedded-devel@lists.opene=
-mbedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.=
-openembedded.org</a> --subject-prefix=3D&#39;meta-gnome][PATCH&#39;<br>
-+git send-email -M -1 --to <a href=3D"mailto:openembedded-devel@lists.opene=
-mbedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.=
-openembedded.org</a> --subject-prefix=3D&#39;meta-gnome][walnascar][PATCH&#=
-39;<br>
-<br>
--Layer maintainer: Andreas M=C3=BCller &lt;<a href=3D"mailto:schnitzeltony@=
-gmail.com" target=3D"_blank" rel=3D"noreferrer">schnitzeltony@gmail.com</a>=
-&gt;<br>
-+Layer maintainer: Armin Kuster &lt;<a href=3D"mailto:akuster808@gmail.com"=
- target=3D"_blank" rel=3D"noreferrer">akuster808@gmail.com</a>&gt;<br>
-diff --git a/meta-initramfs/README.md b/meta-initramfs/README.md<br>
-index 119293a741..cfde7a3ae9 100644<br>
---- a/meta-initramfs/README.md<br>
-+++ b/meta-initramfs/README.md<br>
-@@ -12,19 +12,19 @@ Dependencies<br>
-=C2=A0This layer depends on:<br>
-<br>
-=C2=A0URI: git://<a href=3D"http://git.openembedded.org/meta-openembedded" =
-rel=3D"noreferrer noreferrer" target=3D"_blank">git.openembedded.org/meta-o=
-penembedded</a><br>
--branch: master<br>
-+branch: walnascar<br>
-<br>
-<br>
-=C2=A0Maintenance<br>
-=C2=A0-----------<br>
-<br>
-=C2=A0Send patches / pull requests to <a href=3D"mailto:openembedded-devel@=
-lists.openembedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-d=
-evel@lists.openembedded.org</a><br>
--with &#39;[meta-initramfs]&#39; in the subject.<br>
-+with &#39;[meta-initramfs][walnascar]&#39; in the subject.<br>
-<br>
-=C2=A0When sending single patches, please using something like:<br>
--git send-email -M -1 --to <a href=3D"mailto:openembedded-devel@lists.opene=
-mbedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.=
-openembedded.org</a> --subject-prefix=3D&#39;meta-initramfs][PATCH&#39;<br>
-+git send-email -M -1 --to <a href=3D"mailto:openembedded-devel@lists.opene=
-mbedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.=
-openembedded.org</a> --subject-prefix=3D&#39;meta-initramfs][walnascar][PAT=
-CH&#39;<br>
-<br>
--Interm layer maintainer: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com=
-" target=3D"_blank" rel=3D"noreferrer">raj.khem@gmail.com</a>&gt;<br>
-+Interm layer maintainer: Armin Kuster &lt;<a href=3D"mailto:akuster808@gma=
-il.com" target=3D"_blank" rel=3D"noreferrer">akuster808@gmail.com</a>&gt;<b=
-r>
-<br>
-<br>
-=C2=A0License<br>
-diff --git a/meta-multimedia/README.md b/meta-multimedia/README.md<br>
-index 235c34331b..b8e98d15c8 100644<br>
---- a/meta-multimedia/README.md<br>
-+++ b/meta-multimedia/README.md<br>
-@@ -1,17 +1,17 @@<br>
-=C2=A0This layer depends on:<br>
-<br>
-=C2=A0URI: git://<a href=3D"http://git.openembedded.org/openembedded-core" =
-rel=3D"noreferrer noreferrer" target=3D"_blank">git.openembedded.org/openem=
-bedded-core</a><br>
--branch: master<br>
-+branch: walnascar<br>
-<br>
-=C2=A0URI: git://<a href=3D"http://git.openembedded.org/meta-openembedded" =
-rel=3D"noreferrer noreferrer" target=3D"_blank">git.openembedded.org/meta-o=
-penembedded</a><br>
-=C2=A0layers: meta-oe<br>
--branch: master<br>
-+branch: walnascar<br>
-<br>
--Send pull requests to <a href=3D"mailto:openembedded-devel@lists.openembed=
-ded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.open=
-embedded.org</a> with &#39;[meta-multimedia]&#39; in the subject<br>
-+Send pull requests to <a href=3D"mailto:openembedded-devel@lists.openembed=
-ded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.open=
-embedded.org</a> with &#39;[meta-multimedia][walnascar]&#39; in the subject=
-<br>
-<br>
-=C2=A0When sending single patches, please use something like:<br>
--git send-email -M -1 --to <a href=3D"mailto:openembedded-devel@lists.opene=
-mbedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.=
-openembedded.org</a> --subject-prefix=3D&#39;meta-multimedia][PATCH&#39;<br=
->
-+git send-email -M -1 --to <a href=3D"mailto:openembedded-devel@lists.opene=
-mbedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.=
-openembedded.org</a> --subject-prefix=3D&#39;meta-multimedia][walnascar][PA=
-TCH&#39;<br>
-<br>
-=C2=A0You are encouraged to fork the mirror on github <a href=3D"https://gi=
-thub.com/openembedded/meta-openembedded" rel=3D"noreferrer noreferrer" targ=
-et=3D"_blank">https://github.com/openembedded/meta-openembedded</a> to shar=
-e your patches, this is preferred for patch sets consisting of more than on=
-e patch. Other services like GitLab, <a href=3D"http://repo.or.cz" rel=3D"n=
-oreferrer noreferrer" target=3D"_blank">repo.or.cz</a> or self hosted setup=
-s are of course accepted as well, &#39;git fetch &lt;remote&gt;&#39; works =
-the same on all of them. We recommend github because it is free, easy to us=
-e, has been proven to be reliable and has a really good web GUI.<br>
-<br>
--Layer maintainer: Andreas M=C3=BCller &lt;<a href=3D"mailto:schnitzeltony@=
-gmail.com" target=3D"_blank" rel=3D"noreferrer">schnitzeltony@gmail.com</a>=
-&gt;<br>
-+Layer maintainer: Armin Kuster &lt;<a href=3D"mailto:akuster808@gmail.com"=
- target=3D"_blank" rel=3D"noreferrer">akuster808@gmail.com</a>&gt;<br>
-diff --git a/meta-networking/MAINTAINERS b/meta-networking/MAINTAINERS<br>
-index dc549d7582..41c37b58d0 100644<br>
---- a/meta-networking/MAINTAINERS<br>
-+++ b/meta-networking/MAINTAINERS<br>
-@@ -2,13 +2,13 @@ This file contains a list of maintainers for the meta-net=
-working layer.<br>
-<br>
-=C2=A0Please submit any patches against meta-networking to the OpenEmbedded=
-<br>
-=C2=A0development mailing list (<a href=3D"mailto:openembedded-devel@lists.=
-openembedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@l=
-ists.openembedded.org</a>) with<br>
--&#39;[meta-networking]&#39; in the subject.<br>
-+&#39;[meta-networking][walnascar]&#39; in the subject.<br>
-<br>
-=C2=A0When sending single patches, please use something like:<br>
-<br>
-=C2=A0 =C2=A0 git send-email -1 -M \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0--to <a href=3D"mailto:openembedded-devel=
-@lists.openembedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-=
-devel@lists.openembedded.org</a> \<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 --subject-prefix=3D&#39;meta-networking][PATCH=
-&#39;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 --subject-prefix=3D&#39;meta-networking][walna=
-scar][PATCH&#39;<br>
-<br>
-=C2=A0You may also contact the maintainers directly.<br>
-<br>
-@@ -26,14 +26,9 @@ Please keep this list in alphabetical order.<br>
-=C2=A0Maintainers List (try to look for most precise areas first)<br>
-<br>
-=C2=A0COMMON<br>
--M:=C2=A0 =C2=A0 =C2=A0 Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" =
-target=3D"_blank" rel=3D"noreferrer">raj.khem@gmail.com</a>&gt;<br>
--M:=C2=A0 =C2=A0 =C2=A0 &quot;Joe MacDonald (backup)&quot; &lt;<a href=3D"m=
-ailto:joe@deserted.net" target=3D"_blank" rel=3D"noreferrer">joe@deserted.n=
-et</a>&gt;<br>
-+M:=C2=A0 =C2=A0 =C2=A0 Armin Kuster &lt;<a href=3D"mailto:akuster808@gmail=
-.com" target=3D"_blank" rel=3D"noreferrer">akuster808@gmail.com</a>&gt;<br>
-=C2=A0L:=C2=A0 =C2=A0 =C2=A0 <a href=3D"mailto:openembedded-devel@lists.ope=
-nembedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@list=
-s.openembedded.org</a><br>
-=C2=A0Q:=C2=A0 =C2=A0 =C2=A0 <a href=3D"https://patchwork.openembedded.org/=
-project/oe/" rel=3D"noreferrer noreferrer" target=3D"_blank">https://patchw=
-ork.openembedded.org/project/oe/</a><br>
-=C2=A0S:=C2=A0 =C2=A0 =C2=A0 Maintained<br>
-=C2=A0F:=C2=A0 =C2=A0 =C2=A0 conf<br>
-=C2=A0F:=C2=A0 =C2=A0 =C2=A0 recipes-*<br>
--<br>
--OPENTHREAD<br>
--M:=C2=A0 =C2=A0 =C2=A0 Stefan Schmidt &lt;<a href=3D"mailto:stefan@datenfr=
-eihafen.org" target=3D"_blank" rel=3D"noreferrer">stefan@datenfreihafen.org=
-</a>&gt;<br>
--F:=C2=A0 =C2=A0 =C2=A0 recipes-connectivity/openthread/<br>
-diff --git a/meta-networking/README.md b/meta-networking/README.md<br>
-index ab2640618f..ef7933e319 100644<br>
---- a/meta-networking/README.md<br>
-+++ b/meta-networking/README.md<br>
-@@ -18,21 +18,21 @@ Dependencies<br>
-=C2=A0This layer depends on:<br>
-<br>
-=C2=A0URI: git://<a href=3D"http://git.openembedded.org/openembedded-core" =
-rel=3D"noreferrer noreferrer" target=3D"_blank">git.openembedded.org/openem=
-bedded-core</a><br>
--branch: master<br>
-+branch: Scarthgap<br>
-<br>
-=C2=A0For some recipes, the meta-oe layer is required:<br>
-<br>
-=C2=A0URI: git://<a href=3D"http://git.openembedded.org/meta-openembedded" =
-rel=3D"noreferrer noreferrer" target=3D"_blank">git.openembedded.org/meta-o=
-penembedded</a><br>
-=C2=A0subdirectory: meta-oe<br>
--branch: master<br>
-+branch: Scarthgap<br>
-<br>
-=C2=A0URI: git://<a href=3D"http://git.openembedded.org/meta-openembedded" =
-rel=3D"noreferrer noreferrer" target=3D"_blank">git.openembedded.org/meta-o=
-penembedded</a><br>
-=C2=A0subdirectory: meta-python<br>
--branch: master<br>
-+branch: Scarthgap<br>
-<br>
-=C2=A0Maintenance<br>
-=C2=A0-----------<br>
--Layer maintainers: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank" rel=3D"noreferrer">raj.khem@gmail.com</a>&gt;<br>
-+Stable Layer maintainer: Armin Kuster &lt;<a href=3D"mailto:akuster808@gma=
-il.com" target=3D"_blank" rel=3D"noreferrer">akuster808@gmail.com</a>&gt;<b=
-r>
-<br>
-<br>
-=C2=A0Please see the MAINTAINERS file for information on contacting the<br>
-diff --git a/meta-oe/README.md b/meta-oe/README.md<br>
-index c7c14a4507..6bb7e06119 100644<br>
---- a/meta-oe/README.md<br>
-+++ b/meta-oe/README.md<br>
-@@ -4,7 +4,7 @@ meta-oe<br>
-=C2=A0This layer depends on:<br>
-<br>
-=C2=A0URI: git://<a href=3D"http://github.com/openembedded/openembedded-cor=
-e.git" rel=3D"noreferrer noreferrer" target=3D"_blank">github.com/openembed=
-ded/openembedded-core.git</a><br>
--branch: master<br>
-+branch: walnascar <br>
-<br>
-=C2=A0luajit recipe requires host compiler to be able to generate 32bit cod=
-e when target is 32bit<br>
-=C2=A0e.g. arm, so ensure that $CC -m32 is functional on build host, if bui=
-lding this recipe, needed<br>
-@@ -16,10 +16,10 @@ pacman -S lib32-gcc-libs lib32-glibc<br>
-=C2=A0Ubuntu<br>
-=C2=A0sudo apt-get install gcc-multilib linux-libc-dev:i386<br>
-<br>
--Send pull requests to <a href=3D"mailto:openembedded-devel@lists.openembed=
-ded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.open=
-embedded.org</a> with &#39;[meta-oe]&#39; in the subject&#39;<br>
-+Send pull requests to <a href=3D"mailto:openembedded-devel@lists.openembed=
-ded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.open=
-embedded.org</a> with &#39;[meta-oe][walnascar]&#39; in the subject&#39;<br=
->
-<br>
-=C2=A0When sending single patches, please use something like:<br>
--&#39;git send-email -M -1 --to <a href=3D"mailto:openembedded-devel@lists.=
-openembedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@l=
-ists.openembedded.org</a> --subject-prefix=3D&quot;meta-oe][PATCH&quot;&#39=
-;<br>
-+&#39;git send-email -M -1 --to <a href=3D"mailto:openembedded-devel@lists.=
-openembedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@l=
-ists.openembedded.org</a> --subject-prefix=3D&quot;meta-oe][walnascar][PATC=
-H&quot;&#39;<br>
-<br>
-=C2=A0You are encouraged to fork the mirror on GitHub <a href=3D"https://gi=
-thub.com/openembedded/meta-openembedded" rel=3D"noreferrer noreferrer" targ=
-et=3D"_blank">https://github.com/openembedded/meta-openembedded</a><br>
-=C2=A0to share your patches, this is preferred for patch sets consisting of=
- more than one patch.<br>
-@@ -33,4 +33,4 @@ Other services like GitLab, <a href=3D"http://repo.or.cz"=
- rel=3D"noreferrer noreferrer" target=3D"_blank">repo.or.cz</a> or self-hos=
-ted setups are of course accep<br>
-=C2=A0&#39;git fetch &lt;remote&gt;&#39; works the same on all of them. We =
-recommend GitHub because it is free, easy<br>
-=C2=A0to use, has been proven to be reliable and has a really good web GUI.=
-<br>
-<br>
--layer maintainer: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" targe=
-t=3D"_blank" rel=3D"noreferrer">raj.khem@gmail.com</a>&gt;<br>
-+layer maintainer: Armin Kuster &lt;<a href=3D"mailto:akuster808@gmail.com"=
- target=3D"_blank" rel=3D"noreferrer">akuster808@gmail.com</a>&gt;<br>
-diff --git a/meta-perl/README.md b/meta-perl/README.md<br>
-index 13014b0ff3..80e5c84bb7 100644<br>
---- a/meta-perl/README.md<br>
-+++ b/meta-perl/README.md<br>
-@@ -52,7 +52,7 @@ Dependencies<br>
-=C2=A0This layer depends on:<br>
-<br>
-=C2=A0 =C2=A0URI: git://<a href=3D"http://git.openembedded.org/openembedded=
--core" rel=3D"noreferrer noreferrer" target=3D"_blank">git.openembedded.org=
-/openembedded-core</a><br>
--=C2=A0 branch: master<br>
-+=C2=A0 branch: walnascar <br>
-<br>
-=C2=A0Adding the meta-perl layer to your build<br>
-=C2=A0---------------------------------------<br>
-@@ -73,14 +73,13 @@ Maintenance<br>
-=C2=A0-----------<br>
-<br>
-=C2=A0Send patches / pull requests to <a href=3D"mailto:openembedded-devel@=
-lists.openembedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-d=
-evel@lists.openembedded.org</a> with<br>
--&#39;[meta-perl]&#39; in the subject.<br>
-+&#39;[meta-perl][walnascar]&#39; in the subject.<br>
-<br>
-=C2=A0When sending single patches, please using something like:<br>
--git send-email -M -1 --to <a href=3D"mailto:openembedded-devel@lists.opene=
-mbedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.=
-openembedded.org</a> --subject-prefix=3D&#39;meta-perl][PATCH&#39;<br>
-+git send-email -M -1 --to <a href=3D"mailto:openembedded-devel@lists.opene=
-mbedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.=
-openembedded.org</a> --subject-prefix=3D&#39;meta-perl][walnascar][PATCH&#3=
-9;<br>
-<br>
--Layer maintainers:<br>
--=C2=A0 =C2=A0 Hongxu Jia &lt;<a href=3D"mailto:hongxu.jia@windriver.com" t=
-arget=3D"_blank" rel=3D"noreferrer">hongxu.jia@windriver.com</a>&gt;<br>
--=C2=A0 =C2=A0 Tim &quot;moto-timo&quot; Orling &lt;<a href=3D"mailto:ticot=
-imo@gmail.com" target=3D"_blank" rel=3D"noreferrer">ticotimo@gmail.com</a>&=
-gt;<br>
-+Layer maintainers: Armin Kuster &lt;<a href=3D"mailto:akuster808@gmail.com=
-" target=3D"_blank" rel=3D"noreferrer">akuster808@gmail.com</a>&gt;<br>
-+=C2=A0 =C2=A0 <br>
-<br>
-=C2=A0License<br>
-=C2=A0-------<br>
-diff --git a/meta-python/README.md b/meta-python/README.md<br>
-index 36c193957c..bf1ad0874d 100644<br>
---- a/meta-python/README.md<br>
-+++ b/meta-python/README.md<br>
-@@ -13,11 +13,11 @@ The meta-python layer depends on:<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 URI: git://<a href=3D"http://git.openembedded.o=
-rg/openembedded-core" rel=3D"noreferrer noreferrer" target=3D"_blank">git.o=
-penembedded.org/openembedded-core</a><br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 layers: meta<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0branch: master<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0branch: walnascar<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 URI: git://<a href=3D"http://git.openembedded.o=
-rg/meta-openembedded" rel=3D"noreferrer noreferrer" target=3D"_blank">git.o=
-penembedded.org/meta-openembedded</a><br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 layers: meta-oe<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0branch: master<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0branch: walnascar<br>
-<br>
-=C2=A0Contributing<br>
-=C2=A0-------------------------<br>
-@@ -28,14 +28,12 @@ comments and patch review. It is subscriber only, so pl=
-ease register<br>
-=C2=A0before posting.<br>
-<br>
-=C2=A0Send pull requests to <a href=3D"mailto:openembedded-devel@lists.open=
-embedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists=
-.openembedded.org</a> with<br>
--&#39;[meta-python]&#39; in the subject.<br>
-+&#39;[meta-python][walnascar]&#39; in the subject.<br>
-<br>
-=C2=A0When sending single patches, please use something like:<br>
--git send-email -M -1 --to=3D<a href=3D"mailto:openembedded-devel@lists.ope=
-nembedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@list=
-s.openembedded.org</a> --subject-prefix=3D&#39;meta-python][PATCH&#39;<br>
-+git send-email -M -1 --to=3D<a href=3D"mailto:openembedded-devel@lists.ope=
-nembedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@list=
-s.openembedded.org</a> --subject-prefix=3D&#39;meta-python][walnascar][PATC=
-H&#39;<br>
-<br>
-=C2=A0Maintenance<br>
-=C2=A0-------------------------<br>
-<br>
--Layer maintainers:<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 Tim &quot;moto-timo&quot; Orling &lt;<a href=
-=3D"mailto:TicoTimo@gmail.com" target=3D"_blank" rel=3D"noreferrer">TicoTim=
-o@gmail.com</a>&gt;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 Derek Straka &lt;<a href=3D"mailto:derek@aster=
-ius.io" target=3D"_blank" rel=3D"noreferrer">derek@asterius.io</a>&gt;<br>
-+Layer maintainers: Armin Kuster &lt;<a href=3D"mailto:akuster808@gmail.com=
-" target=3D"_blank" rel=3D"noreferrer">akuster808@gmail.com</a>&gt;<br>
-diff --git a/meta-webserver/README.md b/meta-webserver/README.md<br>
-index d1b743887c..3c7fd7f827 100644<br>
---- a/meta-webserver/README.md<br>
-+++ b/meta-webserver/README.md<br>
-@@ -13,13 +13,13 @@ This layer depends on:<br>
-<br>
-=C2=A0URI: git://<a href=3D"http://git.openembedded.org/openembedded-core" =
-rel=3D"noreferrer noreferrer" target=3D"_blank">git.openembedded.org/openem=
-bedded-core</a><br>
-=C2=A0subdirectory: meta<br>
--branch: master<br>
-+branch: walnascar<br>
-<br>
-=C2=A0For some recipes, the meta-oe layer is required:<br>
-<br>
-=C2=A0URI: git://<a href=3D"http://git.openembedded.org/meta-openembedded" =
-rel=3D"noreferrer noreferrer" target=3D"_blank">git.openembedded.org/meta-o=
-penembedded</a><br>
-=C2=A0subdirectory: meta-oe<br>
--branch: master<br>
-+branch: walnascar<br>
-<br>
-<br>
-<br>
-@@ -50,9 +50,12 @@ Maintenance<br>
-=C2=A0-----------<br>
-<br>
-=C2=A0Send patches / pull requests to <a href=3D"mailto:openembedded-devel@=
-lists.openembedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-d=
-evel@lists.openembedded.org</a><br>
--with &#39;[meta-webserver]&#39; in the subject.<br>
-+with &#39;[meta-webserver][walnascar]&#39; in the subject.<br>
-<br>
--Layer maintainer: Derek Straka &lt;<a href=3D"mailto:derek@asterius.io" ta=
-rget=3D"_blank" rel=3D"noreferrer">derek@asterius.io</a>&gt;<br>
-+When sending single patches, please using something like:<br>
-+git send-email -M -1 --to <a href=3D"mailto:openembedded-devel@lists.opene=
-mbedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.=
-openembedded.org</a> --subject-prefix=3D&#39;meta-webserver][walnascar][PAT=
-CH&#39;<br>
-+<br>
-+Layer maintainer: Armin Kuster &lt;<a href=3D"mailto:akuster808@gmail.com"=
- target=3D"_blank" rel=3D"noreferrer">akuster808@gmail.com</a>&gt;<br>
-<br>
-<br>
-=C2=A0License<br>
-diff --git a/meta-xfce/README.md b/meta-xfce/README.md<br>
-index 3d6158628f..fb577a48fb 100644<br>
---- a/meta-xfce/README.md<br>
-+++ b/meta-xfce/README.md<br>
-@@ -1,10 +1,10 @@<br>
-=C2=A0This layer depends on:<br>
-<br>
-=C2=A0URI: git://<a href=3D"http://git.openembedded.org/openembedded-core" =
-rel=3D"noreferrer noreferrer" target=3D"_blank">git.openembedded.org/openem=
-bedded-core</a><br>
--branch: master<br>
-+branch: walnascar<br>
-<br>
-=C2=A0URI: git://<a href=3D"http://git.openembedded.org/meta-openembedded" =
-rel=3D"noreferrer noreferrer" target=3D"_blank">git.openembedded.org/meta-o=
-penembedded</a><br>
--branch: master<br>
-+branch: walnascar<br>
-<br>
-=C2=A0meta-xfce depends on meta-oe, meta-gnome and meta-multimedia in this =
-repository.<br>
-<br>
-@@ -13,10 +13,9 @@ this to local.conf:<br>
-<br>
-=C2=A0BBMASK =3D &quot;meta-xfce/recipes-multimedia&quot;<br>
-<br>
--Send pull requests to <a href=3D"mailto:openembedded-devel@lists.openembed=
-ded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.open=
-embedded.org</a> with &#39;[meta-xfce]&#39; in the subject&#39;<br>
-+Send pull requests to <a href=3D"mailto:openembedded-devel@lists.openembed=
-ded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.open=
-embedded.org</a> with &#39;[meta-xfce][walnascar]&#39; in the subject&#39;<=
-br>
-<br>
-=C2=A0When sending single patches, please using something like:<br>
--git send-email -M -1 --to <a href=3D"mailto:openembedded-devel@lists.opene=
-mbedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.=
-openembedded.org</a> --subject-prefix=3D&#39;meta-xfce][PATCH&#39;<br>
-+git send-email -M -1 --to <a href=3D"mailto:openembedded-devel@lists.opene=
-mbedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.=
-openembedded.org</a> --subject-prefix=3D&#39;meta-xfce][walnascar][PATCH&#3=
-9;<br>
-<br>
--Layer maintainer: Kai Kang &lt;<a href=3D"mailto:kai.kang@windriver.com" t=
-arget=3D"_blank" rel=3D"noreferrer">kai.kang@windriver.com</a>&gt;<br>
--Layer maintainer: Andreas M=C3=BCller &lt;<a href=3D"mailto:schnitzeltony@=
-gmail.com" target=3D"_blank" rel=3D"noreferrer">schnitzeltony@gmail.com</a>=
-&gt;<br>
-+Layer maintainer: Armin Kuster &lt;<a href=3D"mailto:akuster808@gmail.com"=
- target=3D"_blank" rel=3D"noreferrer">akuster808@gmail.com</a>&gt;<br>
--- <br>
-2.43.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#116915): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/116915" rel=3D"noreferrer noreferrer" target=3D"_b=
-lank">https://lists.openembedded.org/g/openembedded-devel/message/116915</a=
-><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/112306341/361=
-7156" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.openemb=
-edded.org/mt/112306341/3617156</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel+owner@lists.=
-openembedded.org</a><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.opene=
-mbedded.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:martin.jansa@=
-gmail.com" target=3D"_blank" rel=3D"noreferrer">martin.jansa@gmail.com</a>]=
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---000000000000c4833a0632f25832--
+diff --git a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-configure-prototypes.patch b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-configure-prototypes.patch
+new file mode 100644
+index 0000000000..e1b7c6e8d5
+--- /dev/null
++++ b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-configure-prototypes.patch
+@@ -0,0 +1,39 @@
++From 3982a8925e15ea16df49891a700e7f9d9a10541c Mon Sep 17 00:00:00 2001
++From: "mark.yang" <mark.yang@lge.com>
++Date: Wed, 9 Apr 2025 11:46:36 +0900
++Subject: [PATCH 1/3] configure prototypes
++
++  * Set to use function prototypes for ANSI_C
++  If PROTOTYPES is set in md5global.h, it uses PROTO_LIST(list) list instead of PROTO_LIST(list) ()
++  to provide parameterized prototyping.
++  Therefore, at the configure.ac stage, when using ANSI_C, PROTOTYPES should be defined.
++
++  * to fix the build error with gcc-15
++    Even though I added this configuration to fix the error, the error shown in the following patch still occurs.
++../../git/lib/md5.c:139:8: error: too many arguments to function 'MD5_memcpy'; expected 0, have 3
++  139 |        MD5_memcpy
++      |        ^~~~~~~~~~
++  140 |        ((POINTER)&context->buffer[index], (POINTER)input, partLen); MD5Transform
++      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++../../git/lib/md5.c:62:13: note: declared here
++   62 | static void MD5_memcpy PROTO_LIST ((POINTER, POINTER, unsigned int));
++      |             ^~~~~~~~~~
++
++Upstream-Status: Submitted [https://github.com/cyrusimap/cyrus-sasl/pull/873]
++Signed-off-by: mark.yang <mark.yang@lge.com>
++---
++ configure.ac | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/configure.ac b/configure.ac
++index 2a0cf878..657e178b 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -88,6 +88,7 @@ AC_ARG_ENABLE(obsolete_digest_attr,
++               enable_obsolete_digest_attr=yes)
++ 
++ AC_PROG_CC
+++AC_C_PROTOTYPES
++ AX_PROG_CC_FOR_BUILD
++ AC_PROG_CPP
++ AC_PROG_AWK
+diff --git a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0002-Fix-incompatible-pointer-types-error-with-gcc-15.patch b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0002-Fix-incompatible-pointer-types-error-with-gcc-15.patch
+new file mode 100644
+index 0000000000..df66ab86d1
+--- /dev/null
++++ b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0002-Fix-incompatible-pointer-types-error-with-gcc-15.patch
+@@ -0,0 +1,122 @@
++From 8ad219c21914ee9815c915e075052805efff9757 Mon Sep 17 00:00:00 2001
++From: "mark.yang" <mark.yang@lge.com>
++Date: Wed, 9 Apr 2025 15:42:13 +0900
++Subject: [PATCH 2/3] Fix incompatible-pointer-types error with gcc-15
++
++  * Fix incompatible-pointer-types error with gcc-15
++../../git/saslauthd/md5.c:400:14: error: passing argument 1 of 'MD5_memset' from incompatible pointer type [-Wincompatible-pointer-types]
++  400 |   MD5_memset(&k_ipad, 0, sizeof(k_ipad));
++      |              ^~~~~~~
++      |              |
++      |              unsigned char (*)[65]
++../../git/saslauthd/md5.c:335:9: note: expected 'POINTER' {aka 'unsigned char *'} but argument is of type 'unsigned char (*)[65]'
++  335 | POINTER output;
++      |         ^~~~~~
++In file included from ../../git/saslauthd/md5.c:29:
++../include/md5global.h:16:24: note: 'POINTER' declared here
++   16 | typedef unsigned char *POINTER;
++      |                        ^~~~~~~
++../../git/saslauthd/md5.c:401:14: error: passing argument 1 of 'MD5_memset' from incompatible pointer type [-Wincompatible-pointer-types]
++  401 |   MD5_memset(&k_opad, 0, sizeof(k_opad));
++      |              ^~~~~~~
++      |              |
++      |              unsigned char (*)[65]
++../../git/saslauthd/md5.c:335:9: note: expected 'POINTER' {aka 'unsigned char *'} but argument is of type 'unsigned char (*)[65]'
++  335 | POINTER output;
++      |         ^~~~~~
++../include/md5global.h:16:24: note: 'POINTER' declared here
++   16 | typedef unsigned char *POINTER;
++      |                        ^~~~~~~
++../../git/saslauthd/md5.c:402:14: error: passing argument 1 of 'MD5_memset' from incompatible pointer type [-Wincompatible-pointer-types]
++  402 |   MD5_memset(&tk, 0, sizeof(tk));
++      |              ^~~
++      |              |
++      |              unsigned char (*)[16]
++../../git/saslauthd/md5.c:335:9: note: expected 'POINTER' {aka 'unsigned char *'} but argument is of type 'unsigned char (*)[16]'
++  335 | POINTER output;
++      |         ^~~~~~
++../include/md5global.h:16:24: note: 'POINTER' declared here
++   16 | typedef unsigned char *POINTER;
++      |                        ^~~~~~~
++../../git/saslauthd/md5.c: In function '_saslauthd_hmac_md5_precalc':
++../../git/saslauthd/md5.c:427:14: error: passing argument 1 of 'MD5_memset' from incompatible pointer type [-Wincompatible-pointer-types]
++  427 |   MD5_memset(&hmac, 0, sizeof(hmac));
++      |              ^~~~~
++      |              |
++      |              HMAC_MD5_CTX * {aka struct HMAC_MD5_CTX_s *}
++../../git/saslauthd/md5.c:335:9: note: expected 'POINTER' {aka 'unsigned char *'} but argument is of type 'HMAC_MD5_CTX *' {aka 'struct HMAC_MD5_CTX_s *'}
++  335 | POINTER output;
++      |         ^~~~~~
++../include/md5global.h:16:24: note: 'POINTER' declared here
++   16 | typedef unsigned char *POINTER;
++      |                        ^~~~~~~
++../../git/saslauthd/md5.c: In function '_saslauthd_hmac_md5_import':
++../../git/saslauthd/md5.c:435:14: error: passing argument 1 of 'MD5_memset' from incompatible pointer type [-Wincompatible-pointer-types]
++  435 |   MD5_memset(hmac, 0, sizeof(HMAC_MD5_CTX));
++      |              ^~~~
++      |              |
++      |              HMAC_MD5_CTX * {aka struct HMAC_MD5_CTX_s *}
++../../git/saslauthd/md5.c:335:9: note: expected 'POINTER' {aka 'unsigned char *'} but argument is of type 'HMAC_MD5_CTX *' {aka 'struct HMAC_MD5_CTX_s *'}
++  335 | POINTER output;
++      |         ^~~~~~
++../include/md5global.h:16:24: note: 'POINTER' declared here
++   16 | typedef unsigned char *POINTER;
++      |                        ^~~~~~~
++../../git/saslauthd/md5.c: In function '_saslauthd_hmac_md5':
++../../git/saslauthd/md5.c:455:6: warning: old-style function definition [-Wold-style-definition]
++  455 | void _saslauthd_hmac_md5(text, text_len, key, key_len, digest)
++      |      ^~~~~~~~~~~~~~~~~~~
++../../git/saslauthd/md5.c:499:23: warning: passing argument 2 of 'MD5_memcpy' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
++  499 |   MD5_memcpy( k_ipad, key, key_len);
++      |                       ^~~
++../../git/saslauthd/md5.c:322:9: note: expected 'POINTER' {aka 'unsigned char *'} but argument is of type 'const unsigned char *'
++  322 | POINTER input;
++      |         ^~~~~
++../../git/saslauthd/md5.c:500:23: warning: passing argument 2 of 'MD5_memcpy' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
++  500 |   MD5_memcpy( k_opad, key, key_len);
++      |                       ^~~
++../../git/saslauthd/md5.c:322:9: note: expected 'POINTER' {aka 'unsigned char *'} but argument is of type 'const unsigned char *'
++  322 | POINTER input;
++      |         ^~~~~
++
++Upstream-Status: Submitted [https://github.com/cyrusimap/cyrus-sasl/pull/873]
++Signed-off-by: mark.yang <mark.yang@lge.com>
++---
++ saslauthd/md5.c | 10 +++++-----
++ 1 file changed, 5 insertions(+), 5 deletions(-)
++
++diff --git a/saslauthd/md5.c b/saslauthd/md5.c
++index d38425d2..c16922d8 100644
++--- a/saslauthd/md5.c
+++++ b/saslauthd/md5.c
++@@ -397,9 +397,9 @@ void _saslauthd_hmac_md5_init(HMAC_MD5_CTX *hmac,
++   _saslauthd_MD5Update(&hmac->octx, k_opad, 64);     /* apply outer pad */
++ 
++   /* scrub the pads and key context (if used) */
++-  MD5_memset(&k_ipad, 0, sizeof(k_ipad));
++-  MD5_memset(&k_opad, 0, sizeof(k_opad));
++-  MD5_memset(&tk, 0, sizeof(tk));
+++  MD5_memset(k_ipad, 0, sizeof(k_ipad));
+++  MD5_memset(k_opad, 0, sizeof(k_opad));
+++  MD5_memset(tk, 0, sizeof(tk));
++ 
++   /* and we're done. */
++ }
++@@ -424,7 +424,7 @@ void _saslauthd_hmac_md5_precalc(HMAC_MD5_STATE *state,
++     state->istate[lupe] = htonl(hmac.ictx.state[lupe]);
++     state->ostate[lupe] = htonl(hmac.octx.state[lupe]);
++   }
++-  MD5_memset(&hmac, 0, sizeof(hmac));
+++  MD5_memset((POINTER)&hmac, 0, sizeof(hmac));
++ }
++ 
++ 
++@@ -432,7 +432,7 @@ void _saslauthd_hmac_md5_import(HMAC_MD5_CTX *hmac,
++ 				HMAC_MD5_STATE *state)
++ {
++   unsigned lupe;
++-  MD5_memset(hmac, 0, sizeof(HMAC_MD5_CTX));
+++  MD5_memset((POINTER)hmac, 0, sizeof(HMAC_MD5_CTX));
++   for (lupe = 0; lupe < 4; lupe++) {
++     hmac->ictx.state[lupe] = ntohl(state->istate[lupe]);
++     hmac->octx.state[lupe] = ntohl(state->ostate[lupe]);
+diff --git a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0003-Add-compatibility-for-gcc-15-869.patch b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0003-Add-compatibility-for-gcc-15-869.patch
+new file mode 100644
+index 0000000000..924d39d301
+--- /dev/null
++++ b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0003-Add-compatibility-for-gcc-15-869.patch
+@@ -0,0 +1,530 @@
++From dcd29d8e5ee427b68f34fdede007fa4787caf464 Mon Sep 17 00:00:00 2001
++From: Rob Crittenden <rcritten@redhat.com>
++Date: Fri, 28 Feb 2025 12:07:25 -0500
++Subject: [PATCH 3/3] Add compatibility for gcc 15 (#869)
++
++Fedora 42 is going to use gcc 15 which changes some warnings into
++errors. Address the issues raised.
++
++The issues addressed include:
++- The RETURN macro is defined differently in two places. Rename one.
++- Both atexit and the sigint and sigterm actions call server_exit().
++  The function arguments diff. Introduce a new generic signal handler
++  to call server_exit() for sigint and sigterm signals.
++
++Signed-off-by: Rob Crittenden <rcritten@redhat.com>
++
++Upstream-Status: Backport [https://github.com/cyrusimap/cyrus-sasl/pull/869]
++Signed-off-by: mark.yang <mark.yang@lge.com>
++---
++ lib/auxprop.c              |  2 +-
++ lib/canonusr.c             |  6 +++---
++ lib/client.c               |  6 +++---
++ lib/common.c               | 40 +++++++++++++++++++-------------------
++ lib/saslint.h              |  8 ++++----
++ lib/server.c               | 32 +++++++++++++++---------------
++ saslauthd/auth_sasldb.c    |  4 +---
++ saslauthd/saslauthd-main.c | 12 ++++++++----
++ saslauthd/saslauthd-main.h |  5 +++--
++ 9 files changed, 59 insertions(+), 56 deletions(-)
++
++diff --git a/lib/auxprop.c b/lib/auxprop.c
++index 1b0162db..0d465a2d 100644
++--- a/lib/auxprop.c
+++++ b/lib/auxprop.c
++@@ -780,7 +780,7 @@ int sasl_auxprop_request(sasl_conn_t *conn, const char **propnames)
++     }
++     
++     result = prop_request(sconn->sparams->propctx, propnames);
++-    RETURN(conn, result);
+++    RETURN_VAL(conn, result);
++ }
++ 
++ 
++diff --git a/lib/canonusr.c b/lib/canonusr.c
++index 66f7e112..654a72ed 100644
++--- a/lib/canonusr.c
+++++ b/lib/canonusr.c
++@@ -192,7 +192,7 @@ int _sasl_canon_user(sasl_conn_t *conn,
++ 	oparams->user = conn->user_buf;
++     }
++ 
++-    RETURN(conn, result);
+++    RETURN_VAL(conn, result);
++ }
++ 
++ /* Lookup all properties for authentication and/or authorization identity. */
++@@ -256,7 +256,7 @@ static int _sasl_auxprop_lookup_user_props (sasl_conn_t *conn,
++     }
++ #endif
++ 
++-    RETURN(conn, result);
+++    RETURN_VAL(conn, result);
++ }
++ 
++ /* default behavior:
++@@ -285,7 +285,7 @@ int _sasl_canon_user_lookup (sasl_conn_t *conn,
++ 						  oparams);
++     }
++ 
++-    RETURN(conn, result);
+++    RETURN_VAL(conn, result);
++ }
++ 
++ void _sasl_canonuser_free() 
++diff --git a/lib/client.c b/lib/client.c
++index 3784bb0e..281285b8 100644
++--- a/lib/client.c
+++++ b/lib/client.c
++@@ -435,7 +435,7 @@ int sasl_client_new(const char *service,
++ 			   &client_idle, serverFQDN,
++ 			   iplocalport, ipremoteport,
++ 			   prompt_supp, &global_callbacks_client);
++-  if (result != SASL_OK) RETURN(*pconn, result);
+++  if (result != SASL_OK) RETURN_VAL(*pconn, result);
++   
++   utils = _sasl_alloc_utils(*pconn, &global_callbacks_client);
++   if (utils == NULL) {
++@@ -879,7 +879,7 @@ int sasl_client_start(sasl_conn_t *conn,
++  done:
++     if (ordered_mechs != NULL)
++ 	c_conn->cparams->utils->free(ordered_mechs);
++-    RETURN(conn, result);
+++    RETURN_VAL(conn, result);
++ }
++ 
++ /* do a single authentication step.
++@@ -952,7 +952,7 @@ int sasl_client_step(sasl_conn_t *conn,
++       }
++   }  
++ 
++-  RETURN(conn,result);
+++  RETURN_VAL(conn,result);
++ }
++ 
++ /* returns the length of all the mechanisms
++diff --git a/lib/common.c b/lib/common.c
++index d9104c89..e9d58d1b 100644
++--- a/lib/common.c
+++++ b/lib/common.c
++@@ -303,7 +303,7 @@ int sasl_encode(sasl_conn_t *conn, const char *input,
++     
++     result = sasl_encodev(conn, &tmp, 1, output, outputlen);
++ 
++-    RETURN(conn, result);
+++    RETURN_VAL(conn, result);
++ }
++ 
++ /* Internal function that doesn't do any verification */
++@@ -389,7 +389,7 @@ _sasl_encodev (sasl_conn_t *conn,
++ 
++     (*p_num_packets)++;
++ 
++-    RETURN(conn, result);
+++    RETURN_VAL(conn, result);
++ }
++ 
++ /* security-encode an iovec */
++@@ -434,7 +434,7 @@ int sasl_encodev(sasl_conn_t *conn,
++ 	*output = conn->encode_buf->data;
++ 	*outputlen = (unsigned) conn->encode_buf->curlen;
++ 
++-        RETURN(conn, result);
+++        RETURN_VAL(conn, result);
++     }
++ 
++     /* This might be better to check on a per-plugin basis, but I think
++@@ -592,7 +592,7 @@ cleanup:
++         sasl_FREE(cur_invec);
++     }
++ 
++-    RETURN(conn, result);
+++    RETURN_VAL(conn, result);
++ }
++  
++ /* output is only valid until next call to sasl_decode */
++@@ -609,7 +609,7 @@ int sasl_decode(sasl_conn_t *conn,
++     if(!conn->props.maxbufsize) {
++ 	sasl_seterror(conn, 0,
++ 		      "called sasl_decode with application that does not support security layers");
++-	RETURN(conn, SASL_TOOWEAK);
+++	RETURN_VAL(conn, SASL_TOOWEAK);
++     }
++ 
++     if(conn->oparams.decode == NULL)
++@@ -623,7 +623,7 @@ int sasl_decode(sasl_conn_t *conn,
++ 	if(inputlen > conn->props.maxbufsize) {
++ 	    sasl_seterror(conn, 0,
++ 			  "input too large for default sasl_decode");
++-	    RETURN(conn,SASL_BUFOVER);
+++	    RETURN_VAL(conn,SASL_BUFOVER);
++ 	}
++ 
++ 	if(!conn->decode_buf)
++@@ -644,7 +644,7 @@ int sasl_decode(sasl_conn_t *conn,
++ 	/* NULL an empty buffer (for misbehaved applications) */
++ 	if (*outputlen == 0) *output = NULL;
++ 
++-        RETURN(conn, result);
+++        RETURN_VAL(conn, result);
++     }
++ 
++     INTERROR(conn, SASL_FAIL);
++@@ -738,11 +738,11 @@ int _sasl_conn_init(sasl_conn_t *conn,
++ 
++   result = sasl_setprop(conn, SASL_IPLOCALPORT, iplocalport);
++   if(result != SASL_OK)
++-      RETURN(conn, result);
+++      RETURN_VAL(conn, result);
++   
++   result = sasl_setprop(conn, SASL_IPREMOTEPORT, ipremoteport);
++   if(result != SASL_OK)
++-      RETURN(conn, result);
+++      RETURN_VAL(conn, result);
++   
++   conn->encode_buf = NULL;
++   conn->context = NULL;
++@@ -787,7 +787,7 @@ int _sasl_conn_init(sasl_conn_t *conn,
++ 
++   if(result != SASL_OK) MEMERROR( conn );
++ 
++-  RETURN(conn, SASL_OK);
+++  RETURN_VAL(conn, SASL_OK);
++ }
++ 
++ int _sasl_common_init(sasl_global_callbacks_t *global_callbacks)
++@@ -1068,11 +1068,11 @@ int sasl_getprop(sasl_conn_t *conn, int propnum, const void **pvalue)
++   } else if(result == SASL_NOTDONE) {
++       sasl_seterror(conn, SASL_NOLOG,
++ 		    "Information that was requested is not yet available.");
++-      RETURN(conn, result);
+++      RETURN_VAL(conn, result);
++   } else if(result != SASL_OK) {
++       INTERROR(conn, result);
++   } else
++-      RETURN(conn, result); 
+++      RETURN_VAL(conn, result);
++ }
++ 
++ /* set property in SASL connection state
++@@ -1146,7 +1146,7 @@ int sasl_setprop(sasl_conn_t *conn, int propnum, const void *value)
++       if(props->maxbufsize == 0 && props->min_ssf != 0) {
++ 	  sasl_seterror(conn, 0,
++ 			"Attempt to disable security layers (maxoutbuf == 0) with min_ssf > 0");
++-	  RETURN(conn, SASL_TOOWEAK);
+++	  RETURN_VAL(conn, SASL_TOOWEAK);
++       }
++ 
++       conn->props = *props;
++@@ -1168,7 +1168,7 @@ int sasl_setprop(sasl_conn_t *conn, int propnum, const void *value)
++       } else if (_sasl_ipfromstring(ipremoteport, NULL, 0)
++ 		 != SASL_OK) {
++ 	  sasl_seterror(conn, 0, "Bad IPREMOTEPORT value");
++-	  RETURN(conn, SASL_BADPARAM);
+++	  RETURN_VAL(conn, SASL_BADPARAM);
++       } else {
++ 	  strcpy(conn->ipremoteport, ipremoteport);
++ 	  conn->got_ip_remote = 1;
++@@ -1209,7 +1209,7 @@ int sasl_setprop(sasl_conn_t *conn, int propnum, const void *value)
++       } else if (_sasl_ipfromstring(iplocalport, NULL, 0)
++ 		 != SASL_OK) {
++ 	  sasl_seterror(conn, 0, "Bad IPLOCALPORT value");
++-	  RETURN(conn, SASL_BADPARAM);
+++	  RETURN_VAL(conn, SASL_BADPARAM);
++       } else {
++ 	  strcpy(conn->iplocalport, iplocalport);
++ 	  conn->got_ip_local = 1;
++@@ -1302,7 +1302,7 @@ int sasl_setprop(sasl_conn_t *conn, int propnum, const void *value)
++       result = SASL_BADPARAM;
++   }
++   
++-  RETURN(conn, result);
+++  RETURN_VAL(conn, result);
++ }
++ 
++ /* this is apparently no longer a user function */
++@@ -1708,7 +1708,7 @@ _sasl_proxy_policy(sasl_conn_t *conn,
++ 	(memcmp(auth_identity, requested_user, rlen) != 0)) {
++ 	sasl_seterror(conn, 0,
++ 		      "Requested identity not authenticated identity");
++-	RETURN(conn, SASL_BADAUTH);
+++	RETURN_VAL(conn, SASL_BADAUTH);
++     }
++ 
++     return SASL_OK;
++@@ -1809,7 +1809,7 @@ int _sasl_getcallback(sasl_conn_t * conn,
++   *pproc = NULL;
++   *pcontext = NULL;
++   sasl_seterror(conn, SASL_NOLOG, "Unable to find a callback: %d", callbackid);
++-  RETURN(conn,SASL_FAIL);
+++  RETURN_VAL(conn,SASL_FAIL);
++ }
++ 
++ 
++@@ -2405,10 +2405,10 @@ int sasl_listmech(sasl_conn_t *conn,
++     if(!conn) {
++ 	return SASL_BADPARAM;
++     } else if(conn->type == SASL_CONN_SERVER) {
++-	RETURN(conn, _sasl_server_listmech(conn, user, prefix, sep, suffix,
+++	RETURN_VAL(conn, _sasl_server_listmech(conn, user, prefix, sep, suffix,
++ 					   result, plen, pcount));
++     } else if (conn->type == SASL_CONN_CLIENT) {
++-	RETURN(conn, _sasl_client_listmech(conn, prefix, sep, suffix,
+++	RETURN_VAL(conn, _sasl_client_listmech(conn, prefix, sep, suffix,
++ 					   result, plen, pcount));
++     }
++     
++diff --git a/lib/saslint.h b/lib/saslint.h
++index ebade78f..77fbb1b5 100644
++--- a/lib/saslint.h
+++++ b/lib/saslint.h
++@@ -74,22 +74,22 @@
++  *   memory errors.
++  *  -Only errors (error codes < SASL_OK) should be remembered
++  */
++-#define RETURN(conn, val) { if(conn && (val) < SASL_OK) \
+++#define RETURN_VAL(conn, val) { if(conn && (val) < SASL_OK) \
++                                (conn)->error_code = (val); \
++                             return (val); }
++ #define MEMERROR(conn) {\
++     if(conn) sasl_seterror( (conn), 0, \
++                    "Out of Memory in " __FILE__ " near line %d", __LINE__ ); \
++-    RETURN(conn, SASL_NOMEM) }
+++    RETURN_VAL(conn, SASL_NOMEM) }
++ #define PARAMERROR(conn) {\
++     if(conn) sasl_seterror( (conn), SASL_NOLOG, \
++                   "Parameter error in " __FILE__ " near line %d", __LINE__ ); \
++-    RETURN(conn, SASL_BADPARAM) }
+++    RETURN_VAL(conn, SASL_BADPARAM) }
++ #define INTERROR(conn, val) {\
++     if(conn) sasl_seterror( (conn), 0, \
++                    "Internal Error %d in " __FILE__ " near line %d", (val),\
++ 		   __LINE__ ); \
++-    RETURN(conn, (val)) }
+++    RETURN_VAL(conn, (val)) }
++ 
++ #ifndef PATH_MAX
++ # ifdef WIN32
++diff --git a/lib/server.c b/lib/server.c
++index bff461f8..4ea27643 100644
++--- a/lib/server.c
+++++ b/lib/server.c
++@@ -155,7 +155,7 @@ int sasl_setpass(sasl_conn_t *conn,
++ 	 (current_mech == NULL) ) {
++ 	sasl_seterror( conn, SASL_NOLOG,
++                   "No current SASL mechanism available");
++-	RETURN(conn, SASL_BADPARAM);
+++	RETURN_VAL(conn, SASL_BADPARAM);
++     }
++ 
++     /* Do we want to store SASL_AUX_PASSWORD_PROP (plain text)?  and
++@@ -297,7 +297,7 @@ int sasl_setpass(sasl_conn_t *conn,
++ 	}
++     }
++ 
++-    RETURN(conn, result);
+++    RETURN_VAL(conn, result);
++ }
++ 
++ /* local mechanism which disposes of server */
++@@ -991,7 +991,7 @@ _sasl_transition(sasl_conn_t * conn,
++ 			      NULL, 0, SASL_SET_CREATE | flags);
++     }
++ 
++-    RETURN(conn,result);
+++    RETURN_VAL(conn,result);
++ }
++ 
++ 
++@@ -1367,7 +1367,7 @@ static int do_authorization(sasl_server_conn_t *s_conn)
++ 		   (s_conn->user_realm ? (unsigned) strlen(s_conn->user_realm) : 0),
++ 		   s_conn->sparams->propctx);
++ 
++-    RETURN(&s_conn->base, ret);
+++    RETURN_VAL(&s_conn->base, ret);
++ }
++ 
++ 
++@@ -1484,7 +1484,7 @@ int sasl_server_start(sasl_conn_t *conn,
++ 
++ 	if (result != SASL_OK) {
++ 	    /* The library will eventually be freed, don't sweat it */
++-	    RETURN(conn, result);
+++	    RETURN_VAL(conn, result);
++ 	}
++     }
++ 
++@@ -1573,7 +1573,7 @@ int sasl_server_start(sasl_conn_t *conn,
++ 	conn->oparams.doneflag = 0;
++     }
++     
++-    RETURN(conn,result);
+++    RETURN_VAL(conn,result);
++ }
++ 
++ 
++@@ -1701,7 +1701,7 @@ int sasl_server_step(sasl_conn_t *conn,
++ 	conn->oparams.doneflag = 0;
++     }
++ 
++-    RETURN(conn, ret);
+++    RETURN_VAL(conn, ret);
++ }
++ 
++ /* returns the length of all the mechanisms
++@@ -1950,7 +1950,7 @@ static int _sasl_checkpass(sasl_conn_t *conn,
++     if (result != SASL_OK)
++ 	sasl_seterror(conn, SASL_NOLOG, "checkpass failed");
++ 
++-    RETURN(conn, result);
+++    RETURN_VAL(conn, result);
++ }
++ 
++ /* check if a plaintext password is valid
++@@ -1990,7 +1990,7 @@ int sasl_checkpass(sasl_conn_t *conn,
++     result = _sasl_canon_user(conn, user, userlen,
++ 			      SASL_CU_AUTHID | SASL_CU_AUTHZID,
++ 			      &(conn->oparams));
++-    if(result != SASL_OK) RETURN(conn, result);
+++    if(result != SASL_OK) RETURN_VAL(conn, result);
++     user = conn->oparams.user;
++ 
++     /* Check the password and lookup additional properties */
++@@ -2001,7 +2001,7 @@ int sasl_checkpass(sasl_conn_t *conn,
++       result = do_authorization((sasl_server_conn_t *)conn);
++     }
++ 
++-    RETURN(conn,result);
+++    RETURN_VAL(conn,result);
++ }
++ 
++ /* check if a user exists on server
++@@ -2074,7 +2074,7 @@ int sasl_user_exists(sasl_conn_t *conn,
++ 	sasl_seterror(conn, SASL_NOLOG, "no plaintext password verifier?");
++     }
++ 
++-    RETURN(conn, result);
+++    RETURN_VAL(conn, result);
++ }
++ 
++ /* check if an apop exchange is valid
++@@ -2136,7 +2136,7 @@ int sasl_checkapop(sasl_conn_t *conn,
++     if (!user_end || strspn(user_end + 1, "0123456789abcdef") != 32) 
++     {
++         sasl_seterror(conn, 0, "Bad Digest");
++-        RETURN(conn,SASL_BADPROT);
+++        RETURN_VAL(conn,SASL_BADPROT);
++     }
++  
++     user_len = (size_t)(user_end - response);
++@@ -2148,7 +2148,7 @@ int sasl_checkapop(sasl_conn_t *conn,
++     if(result != SASL_OK) 
++     {
++         sasl_FREE(user);
++-        RETURN(conn, result);
+++        RETURN_VAL(conn, result);
++     }
++ 
++     /* erase the plaintext password */
++@@ -2163,7 +2163,7 @@ int sasl_checkapop(sasl_conn_t *conn,
++ 				      &(conn->oparams));
++     sasl_FREE(user);
++ 
++-    if(result != SASL_OK) RETURN(conn, result);
+++    if(result != SASL_OK) RETURN_VAL(conn, result);
++ 
++     /* Do APOP verification */
++     result = _sasl_auxprop_verify_apop(conn, conn->oparams.authid,
++@@ -2178,11 +2178,11 @@ int sasl_checkapop(sasl_conn_t *conn,
++ 	conn->oparams.authid = NULL;
++     }
++ 
++-    RETURN(conn, result);
+++    RETURN_VAL(conn, result);
++ #else /* sasl_checkapop was disabled at compile time */
++     sasl_seterror(conn, SASL_NOLOG,
++ 	"sasl_checkapop called, but was disabled at compile time");
++-    RETURN(conn, SASL_NOMECH);
+++    RETURN_VAL(conn, SASL_NOMECH);
++ #endif /* DO_SASL_CHECKAPOP */
++ }
++ 
++diff --git a/saslauthd/auth_sasldb.c b/saslauthd/auth_sasldb.c
++index b6aaa393..08db1892 100644
++--- a/saslauthd/auth_sasldb.c
+++++ b/saslauthd/auth_sasldb.c
++@@ -51,9 +51,7 @@
++ #include "../sasldb/sasldb.h"
++ 
++ static int
++-vf(void *context __attribute__((unused)),
++-   char *file  __attribute__((unused)),
++-   int type  __attribute__((unused)))
+++vf(void)
++ {
++     /* always say ok */ 
++     return SASL_OK;
++diff --git a/saslauthd/saslauthd-main.c b/saslauthd/saslauthd-main.c
++index ca5b7256..68ffd02f 100644
++--- a/saslauthd/saslauthd-main.c
+++++ b/saslauthd/saslauthd-main.c
++@@ -593,7 +593,7 @@ void signal_setup() {
++ 	/**************************************************************
++ 	 * Handler for SIGTERM
++ 	 **************************************************************/
++-	act_sigterm.sa_handler = server_exit;
+++	act_sigterm.sa_handler = handle_exit;
++ 	sigemptyset(&act_sigterm.sa_mask);
++ 
++ 	if (sigaction(SIGTERM, &act_sigterm, NULL) != 0) {
++@@ -606,7 +606,7 @@ void signal_setup() {
++ 	/**************************************************************
++ 	 * Handler for SIGINT
++ 	 **************************************************************/
++-	act_sigint.sa_handler = server_exit;
+++	act_sigint.sa_handler = handle_exit;
++ 	sigemptyset(&act_sigint.sa_mask);
++ 
++ 	if (sigaction(SIGINT, &act_sigint, NULL) != 0) {
++@@ -876,7 +876,7 @@ pid_t have_baby() {
++ /*************************************************************
++  * Reap in all the dead children
++  **************************************************************/
++-void handle_sigchld() {
+++void handle_sigchld(__attribute__((unused)) int sig) {
++ 	pid_t pid;
++ 
++ 	while ((pid = waitpid(-1, 0, WNOHANG)) > 0) {
++@@ -888,11 +888,15 @@ void handle_sigchld() {
++ 	return;
++ }
++ 
+++void handle_exit(__attribute__((unused)) int sig) {
+++	server_exit();
+++}
+++
++ 
++ /*************************************************************
++  * Do some final cleanup here.
++  **************************************************************/
++-void server_exit() {
+++void server_exit(void) {
++ 
++ 	/*********************************************************
++ 	 * If we're not the master process, don't do anything
++diff --git a/saslauthd/saslauthd-main.h b/saslauthd/saslauthd-main.h
++index 754626c6..29998f03 100644
++--- a/saslauthd/saslauthd-main.h
+++++ b/saslauthd/saslauthd-main.h
++@@ -96,8 +96,9 @@ extern void	set_mech_option(const char *);
++ extern void	set_run_path(const char *);
++ extern void	signal_setup();
++ extern void	detach_tty();
++-extern void	handle_sigchld();
++-extern void	server_exit();
+++extern void	handle_sigchld(int sig);
+++extern void	handle_exit(int sig);
+++extern void	server_exit(void);
++ extern pid_t	have_baby();
++ 
++ /* ipc api delcarations */
+diff --git a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb
+index 1f4b4bf732..40e51a6a43 100644
+--- a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb
++++ b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb
+@@ -7,16 +7,20 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3f55e0974e3d6db00ca6f57f2d206396"
+ 
+ SRCREV = "7a6b45b177070198fed0682bea5fa87c18abb084"
+ 
+-SRC_URI = "git://github.com/cyrusimap/cyrus-sasl;protocol=https;branch=cyrus-sasl-2.1 \
+-           file://avoid-to-call-AC_TRY_RUN.patch \
+-           file://debian_patches_0014_avoid_pic_overwrite.diff \
+-           file://0001-sample-Rename-dprintf-to-cyrus_dprintf.patch \
+-           file://saslauthd.service \
+-           file://saslauthd.conf \
+-           file://CVE-2019-19906.patch \
+-	   file://CVE-2022-24407.patch \
+-           file://0001-Fix-time.h-check.patch \
+-           "
++SRC_URI = " \
++    git://github.com/cyrusimap/cyrus-sasl;protocol=https;branch=cyrus-sasl-2.1 \
++    file://avoid-to-call-AC_TRY_RUN.patch \
++    file://debian_patches_0014_avoid_pic_overwrite.diff \
++    file://0001-sample-Rename-dprintf-to-cyrus_dprintf.patch \
++    file://saslauthd.service \
++    file://saslauthd.conf \
++    file://CVE-2019-19906.patch \
++    file://CVE-2022-24407.patch \
++    file://0001-Fix-time.h-check.patch \
++    file://0001-configure-prototypes.patch \
++    file://0002-Fix-incompatible-pointer-types-error-with-gcc-15.patch \
++    file://0003-Add-compatibility-for-gcc-15-869.patch \
++"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/cyrusimap/cyrus-sasl/archives"
+ 
 
