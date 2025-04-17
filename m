@@ -1,106 +1,124 @@
-Return-Path: <philip@balister.org>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E11F3C369B2
-	for <webhook@archiver.kernel.org>; Thu, 17 Apr 2025 10:06:16 +0000 (UTC)
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web11.3586.1744876435136532671
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 724E0C369CB
+	for <webhook@archiver.kernel.org>; Thu, 17 Apr 2025 11:24:17 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.6287.1744889056793659683
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Apr 2025 00:53:55 -0700
+ Thu, 17 Apr 2025 04:24:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gX1+TZeW;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: nguyenthaithuanalg@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-226185948ffso5069075ad.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 00:53:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744876434; x=1745481234; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=eDkRBCjFbKAvpY+TfxKq/WhFfxQtW+Q93EsFx1ZkF0I=;
-        b=gX1+TZeWRAMLvRYMO2HtENS2hdWBKG+Y5QJ597RVudEMnC5HQjNygJx97H33KfCTc2
-         Wx6SpNm7sbgQG0Dy6aoNZxEKFB9JQIOLip6/a+rsHM/9N2jHoxFwNbtVyhgHPvym7XNw
-         CncYYJnxSot+GKg4YfrtvcKYH+E12LmFHGbT8tqcbi9d0Z4OsELLqrx56WHOv5J9zJmC
-         5X7MDLQwE9XzXM3mpnblt8P94X6aURcYvZuzZ09yyoWdIe+2oUX1knvAEXCp9zoHXg3C
-         OnnSShJHh2tSJSyuR/LZvUBkag+EwnDRw9afBDMGBMISbi1aQ9IJlBtQCMQkRH9xPKF1
-         jMjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744876434; x=1745481234;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=eDkRBCjFbKAvpY+TfxKq/WhFfxQtW+Q93EsFx1ZkF0I=;
-        b=jkjMiMkNydLXrNx8+dMy+jNJHEms4O/A4SCt0cazBeCBdlEvauIEMP23f83zOnjTv3
-         q5bTNaxnA0ciN7wBq4uNjwzE4sdLNXEU7bojEwc3mWw7pm1Q40K6U7yzwXfUKOBOjAp7
-         ZoRNn38cERPlduC988bmurGQwgUNDCWarpy8MoUqfvIUoiQ4/WNjBJ4wnxQ/MbX+urJ2
-         WgwY6JJwNN8Zm97gH863Uq3CqNo2TFZBfwuzXJwTULYRN9eklwpSkypgRLjRMLzRkQkJ
-         76c/1QeLyY8Dm562F6/evJ8mTvWM+B39x75+GeqtP+QO2tuiw+SJmYhw3WGZgJ8jI3UJ
-         TbMg==
-X-Gm-Message-State: AOJu0Yw4/RcXvmr2L6JVx/Wlfs8+AA48ovoV0oJPwJdmtJhZfSav4XyW
-	20oik4rvaABV3UGeqpHHeWs23wGZ+xfHLIA9WCC9UvVnEOsoJ9NOlWWWjO4n
-X-Gm-Gg: ASbGncucBOZrl45qvIv4ns9zSCbzPeGBhQ67NyJuH3uZQm02Vew66j+1ip+sYEyQEOO
-	dAYH9DsATaWs5JWe46U4RXcUNzpuq4OnvtSFTNaWBIyaMuHfFOrjw+4IZdndf7KpNJwkSzeGAxl
-	S2CNf2Vall4Azj4L8GzRTWFjrkYjqo6lZeCx1HWlyUeKuu6YaTgO3hYPmTkNdQJAVu9v3GZTUhA
-	1qEYFqinq7awlEdIkT+3OjXxOmbeDIpBk4xZr77IuRNFDR6ffshKfd6TMKI/a8BCoNX66WuYaDj
-	nfYGbXK8ZHsx+9hcTVxwgxbrckgExLch16f+eZT6gFJsy7FSAyFYZ/AEVHFF8opOoBin
-X-Google-Smtp-Source: AGHT+IEf6XN5f1+qn110Vhbz/9vXaEER01h0h8zoK8UBwHOsuoOzU+V/pjiPp/PKUz9bBWjv1oDhDw==
-X-Received: by 2002:a17:903:46cf:b0:22c:33e4:fa5a with SMTP id d9443c01a7336-22c358c2a2cmr73690335ad.9.1744876433932;
-        Thu, 17 Apr 2025 00:53:53 -0700 (PDT)
-Received: from localhost.localdomain ([2405:4802:90d4:ea0:76d4:35ff:fe85:dd7a])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22c33f1d16bsm27217905ad.58.2025.04.17.00.53.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 17 Apr 2025 00:53:53 -0700 (PDT)
-From: =?UTF-8?B?VGh14bqtbiBOZ3V54buFbi1UaMOhaQ==?= <nguyenthaithuanalg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
-Subject: [meta-oe][PATCH] libsimplelog: Add C89-C++20 logger for cross-OS.
-Date: Thu, 17 Apr 2025 14:53:42 +0700
-Message-ID: <20250417075342.7405-1-nguyenthaithuanalg@gmail.com>
-X-Mailer: git-send-email 2.47.1
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=6202619fc1=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53H4aJnM026986
+	for <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 04:24:16 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 45yqpknwtq-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 04:24:16 -0700 (PDT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Thu, 17 Apr 2025 04:24:13 -0700
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][scarthgap][PATCH 1/2] poppler: fix CVE-2025-32364
+Date: Thu, 17 Apr 2025 11:23:52 +0000
+Message-ID: <20250417112353.2332836-1-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-ORIG-GUID: DcSoY83kcQfSgkdQS7CQFUAeuiQeXTaF
+X-Proofpoint-GUID: DcSoY83kcQfSgkdQS7CQFUAeuiQeXTaF
+X-Authority-Analysis: v=2.4 cv=UZBRSLSN c=1 sm=1 tr=0 ts=6800e4e0 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=XR8D0OoHHMoA:10 a=PYnjg3YJAAAA:8 a=e5mUnYsNAAAA:8 a=t7CeM3EgAAAA:8 a=3fyaaF4VAAAA:8
+ a=tW0ZLbnoa10BR6g73WMA:9 a=Vxmtnl_E_bksehYqCbjh:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Sensitive_Customer_Information: Yes
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-04-17_03,2025-04-15_01,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 clxscore=1015
+ priorityscore=1501 mlxscore=0 impostorscore=0 phishscore=0 malwarescore=0
+ spamscore=0 adultscore=0 mlxlogscore=803 lowpriorityscore=0 bulkscore=0
+ classifier=spam authscore=0 authtc=n/a authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.21.0-2502280000
+ definitions=main-2504170085
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 10:06:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116928
+ <openembedded-devel@lists.openembedded.org>; Thu, 17 Apr 2025 11:24:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116929
 
-- Edit CMake
-- Re-test Windows, Linux, MAC OSX.
+From: Yogita Urade <yogita.urade@windriver.com>
 
-Signed-off-by: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
+A floating-point exception in the PSStack::roll function of
+Poppler before 25.04.0 can cause an application to crash when
+handling malformed inputs associated with INT_MIN.
+
+Reference:
+https://nvd.nist.gov/vuln/detail/CVE-2025-32364
+
+Upstream patch:
+https://gitlab.freedesktop.org/poppler/poppler/-/commit/d87bc726c7cc98f8c26b60ece5f20236e9de1bc3
+
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 ---
- .../libsimplelog/libsimplelog_git.bb          | 20 +++++++++++++++++++
- 1 file changed, 20 insertions(+)
- create mode 100644 meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb
+ .../poppler/poppler/CVE-2025-32364.patch      | 28 +++++++++++++++++++
+ .../poppler/poppler_23.04.0.bb                |  1 +
+ 2 files changed, 29 insertions(+)
+ create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-32364.patch
 
-diff --git a/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb b/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb
+diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2025-32364.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2025-32364.patch
 new file mode 100644
-index 000000000..461b96035
+index 0000000000..04af0278ce
 --- /dev/null
-+++ b/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb
-@@ -0,0 +1,20 @@
++++ b/meta-oe/recipes-support/poppler/poppler/CVE-2025-32364.patch
+@@ -0,0 +1,28 @@
++From d87bc726c7cc98f8c26b60ece5f20236e9de1bc3 Mon Sep 17 00:00:00 2001
++From: Albert Astals Cid <aacid@kde.org>
++Date: Mon, 24 Mar 2025 00:44:54 +0100
++Subject: [PATCH] PSStack::roll: Protect against doing int = -INT_MIN
 +
-+SUMMARY = "simplelog-topc - Simple, STABLE, powerful of logging library in ANSI C/C++. Ready for billion records."
-+DESCRIPTION = "Async and Fast C/C++ multi-thread logger with topics. No external dependencies."
-+HOMEPAGE = "https://github.com/thuanalg/simplelog-topic"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=22cdd382a6275cb4c2e75c517952ac7c"
++CVE: CVE-2025-32364
++Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/d87bc726c7cc98f8c26b60ece5f20236e9de1bc3]
 +
-+SRC_URI = "git://github.com/thuanalg/simplelog-topic.git;branch=main;protocol=https"
++Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
++---
++ poppler/Function.cc | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+PV = "1.0.4+git"
-+SRCREV = "781f5eaa1713e7f60e9ee79ab5143c0bacfcccef"
++diff --git a/poppler/Function.cc b/poppler/Function.cc
++index 043ae8e..65888a0 100644
++--- a/poppler/Function.cc
+++++ b/poppler/Function.cc
++@@ -1066,7 +1066,7 @@ void PSStack::roll(int n, int j)
++     PSObject obj;
++     int i, k;
 +
-+S = "${WORKDIR}/git"
-+
-+inherit cmake
-+
-+# Specify any options you want to pass to cmake using EXTRA_OECMAKE:
-+EXTRA_OECMAKE += "-DUNIX_LINUX=1"
-+
-+
++-    if (unlikely(n == 0)) {
+++    if (unlikely(n == 0 || j == INT_MIN)) {
++         return;
++     }
++     if (j >= 0) {
++--
++2.40.0
+diff --git a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
+index e76692bbee..e68fe151e9 100644
+--- a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
+@@ -12,6 +12,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://CVE-2024-6239-0001.patch \
+            file://CVE-2024-6239-0002.patch \
+            file://CVE-2024-56378.patch \
++           file://CVE-2025-32364.patch \
+            "
+ SRC_URI[sha256sum] = "b6d893dc7dcd4138b9e9df59a13c59695e50e80dc5c2cacee0674670693951a1"
+ 
 -- 
-2.47.1
+2.40.0
 
 
