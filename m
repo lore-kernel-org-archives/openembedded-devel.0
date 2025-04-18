@@ -2,130 +2,101 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A3544C369CF
-	for <webhook@archiver.kernel.org>; Fri, 18 Apr 2025 15:26:41 +0000 (UTC)
-Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com [209.85.210.47])
- by mx.groups.io with SMTP id smtpd.web10.14289.1744990001119167429
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AC740C369AB
+	for <webhook@archiver.kernel.org>; Fri, 18 Apr 2025 15:31:31 +0000 (UTC)
+Received: from mail-oo1-f50.google.com (mail-oo1-f50.google.com [209.85.161.50])
+ by mx.groups.io with SMTP id smtpd.web10.14407.1744990286289890242
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Apr 2025 08:26:41 -0700
+ Fri, 18 Apr 2025 08:31:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=iAADCZGc;
- spf=pass (domain: gmail.com, ip: 209.85.210.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f47.google.com with SMTP id 46e09a7af769-7272f9b4132so1513680a34.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Apr 2025 08:26:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dhyh18mi;
+ spf=pass (domain: gmail.com, ip: 209.85.161.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f50.google.com with SMTP id 006d021491bc7-603f54a6c8aso1202922eaf.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Apr 2025 08:31:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744990000; x=1745594800; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1744990285; x=1745595085; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=skHHwzNrpJ/HuqjB78qpy0myhJ1JW/TNqTAElYMkf34=;
-        b=iAADCZGcPzYmrLxsLKUn+5i04FCNKxf7YfUqJjwm9vPwZkkfgzdvi1iir0TNIIQEB/
-         AeTO45hjINjsdMT4LftFuVfCukZxvJYbN3jo+4kSi8fu3e0NuLWAxS2XObYATjApVC35
-         oOK5+7yEid+VVJs+OEC1y98CxgKgCFeGThzmKvWGpsPjOMPr4GoruAdQZk/qqXtLenJT
-         SzZuTCAChEU/NNK3JTZ6uYrgq3oH8E/NzR8XB/mWg2Ubmhtvh6sBnGOwstcXRd3HnbI8
-         P+HSyUORhdMMudKTX7beQ99TYXxxkmTLg3bj81WEcs2EfvGk5z/Ndr4W/J8g2+vGmout
-         1T+A==
+        bh=PuCM9nLH4QSdgIPpwjDTRgVtcM+mmiRRO6H3Fks2u3Q=;
+        b=dhyh18miR3FBEcntHv3Fq6zEuuojDeIbwp5olNvlf8CuiytxbRifVnlvOLgBZ7aaJE
+         k1uV7WEynhmiK03K1cjFhVMMwjeSlB57vLEr5xHwG+rjsvokifH0B0Q2esfVhfe6ePRT
+         9ifsDUxRG5t2AvjTuGJV2f/OW5A8zmEkEiYaIk+WRQ2LHE5mQkSzQ6QCl2iGj8RNi3UP
+         wT6/G6SqDzUe8BHLBByP13isIS4tlCj2E3Wi3jsKV8pB/JN43oAdAk5BjyCTF/D5moxT
+         yDJBwzjDkSDLbRktlNv9wkSQBYs0aPbAep8gfCjGncONYG/diGbejRjhSb7LOkrFVM/3
+         GiTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744990000; x=1745594800;
+        d=1e100.net; s=20230601; t=1744990285; x=1745595085;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=skHHwzNrpJ/HuqjB78qpy0myhJ1JW/TNqTAElYMkf34=;
-        b=eyaZG0wDNWiyZ01rMQAsjO0q58tZTtvu7E0i+djVicdjK1lkLFV53YiXErqvWVPB9V
-         hdQwtFNi8BGZa0DF+n3+kc1kcUdwrtW92SoUMNXjROrDXHR1mNoxCfxYIDQ/zBVvNW2x
-         CQxc8NcsCJkSb0VVqsjSK61Fz+4HC6EHy+nOPALt7kz4NrNIUAHN6O6Oo3p7tSodv1eQ
-         eiRwWE1KlhPVEiNr9hsBYcTRbRfHDFa9Aj7/xLLJw5OgBkjEUFGtQov4V76JzX6hvWFk
-         qudJyh71J5dz888rnAAFa8tM1NBGydwiTv3YrDNXzHrdPTKmtZ3PshwP3f7wknthl+sz
-         tqpA==
-X-Gm-Message-State: AOJu0YwEBb7L6wPYief10fIFFaMBVwgzGvxaGi/RTffYt/HjYPpeMVzq
-	4iun6JCvlz/xfJvuSwKt+SCB8rAHouhIr569cbwumzxUU1T3VylT40GmS6JJSFfTL+u4YD0mEGR
-	vk46yogKuqEi/MYbapLk7th6L6bn1Cqa2
-X-Gm-Gg: ASbGncu7SlKG6nbGKt2PXHlQRpSvUAme3jDUCViiaDcNUTDs6fn8T99CdyOYp12Y/jo
-	Lm60Q8tbv5u782EcJdTbUrnorsHBRHO6z6ygeYI/YHBgi0NHYiyFfUsu2I62XpEQ3rOJn8MejuC
-	OY6k0PxGra1KxoOe2FD6Is
-X-Google-Smtp-Source: AGHT+IEJ2pIorPuiOgGe+ww4+iHS9Mxit5dk06QQfpydXAraAHd1u9+66jTA5mw8qug7c5XSe5D0QHyjr1sa7NbpEIE=
-X-Received: by 2002:a05:6808:320a:b0:3f9:8092:14be with SMTP id
- 5614622812f47-401c0a7b4fbmr1726972b6e.13.1744990000260; Fri, 18 Apr 2025
- 08:26:40 -0700 (PDT)
+        bh=PuCM9nLH4QSdgIPpwjDTRgVtcM+mmiRRO6H3Fks2u3Q=;
+        b=Qxi2VQAfu9v3vY/VKnyZVyzjQNAARpCQW/oXNkvnWs3xs9YMMW3H0U85Yiqca4ATjZ
+         pTHGlUVRnWsNNxBCNR6w7FrA43ndlD/8k1rzfVcEEsWDQROEmTYpZ9Kq4rS9gAhFxJLn
+         I5tlV499sNIr2MLNkIE29tBuib4Dt7+Q5iVnCx8LP5r6Ltc5FGMis6iQuRjgVPHfubAs
+         kIVgWHtAqPH3WDRQQ5ydzfkkJemuBEx0PnYH06tJXQbq+LEPJNcoY0AX8YPxf6N1ccW4
+         DIB7N+xupVlZZAb6CE3e+2qSybBTVUN6EG7ZIXRI/UKHCHqQ2UmBKe5uq1emZTl0YW5I
+         G/lg==
+X-Gm-Message-State: AOJu0YwUAjxtaOwMO6T55iqOfkyNzR9kHo70RKTlCFUUbQs/IIfrEyMq
+	luAUL8AvqM76CTH9TjFJs18w+poHeMpUBrIayA8ch3QgX0zHgheRE0NHcz4YbGDAysbdCjm42bk
+	fJ7p74ih/lyIEvhBrxrRmVadk1vQ=
+X-Gm-Gg: ASbGncsHp8U7F1GN8FxQpaPrhfbtmSAVNhSU1m1nhGaeiwuEhMQU6r/xUBXc3mfhrEV
+	2NsTJS3M7IKXXsqEgKPSqGb2z2YGimhPHEUn1PQcM75sth6stlbeMGEd3KFKf5K4FQZSZuiPwhh
+	XUkMZRFR4pLD1kUSvfyPW3
+X-Google-Smtp-Source: AGHT+IHh++mHvEe+RAZCSwo/uBgJl/MT1SGRXogyTo9mfH5x8dRl5drDU4pj90pLUygEIrph8+MdDlEWUi0jGiEA75g=
+X-Received: by 2002:a05:6820:2229:b0:603:ff3c:7d5e with SMTP id
+ 006d021491bc7-6060055cec8mr1661649eaf.5.1744990285521; Fri, 18 Apr 2025
+ 08:31:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250418105119.3211549-1-leon.anavi@konsulko.com>
-In-Reply-To: <20250418105119.3211549-1-leon.anavi@konsulko.com>
+References: <20250418124322.171293-1-f_l_k@t-online.de>
+In-Reply-To: <20250418124322.171293-1-f_l_k@t-online.de>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 18 Apr 2025 08:26:13 -0700
-X-Gm-Features: ATxdqUFm9KVQ2jkT3eoXcyysa2eFqbwSugwOHMxg8Vq1WLmkgfHuzzAZfg2cxVU
-Message-ID: <CAMKF1sqhR5FRsw3cfM1J1V4qhbdo4YYgf+NQ3CODAk9O9nD4iA@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCHv2] python3-eth-utils: Upgrade 5.2.0 -> 5.3.0
-To: leon.anavi@konsulko.com
+Date: Fri, 18 Apr 2025 08:30:59 -0700
+X-Gm-Features: ATxdqUHkzdG2gtiqwMYzMB8ZuJmggOw-9Nm_DHkd5_859VwLiyD4z35Bmz5OZQI
+Message-ID: <CAMKF1sryPn8w8dvAYO9ppj-9oF1r9ArJQK-ikhgRMFs7-eZNQg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCHv2] static-passwd-meta-oe: add flatpak user
+To: f_l_k@t-online.de
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 18 Apr 2025 15:26:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116971
+ <openembedded-devel@lists.openembedded.org>; Fri, 18 Apr 2025 15:31:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116972
 
-On Fri, Apr 18, 2025 at 3:51=E2=80=AFAM Leon Anavi via lists.openembedded.o=
-rg
-<leon.anavi=3Dkonsulko.com@lists.openembedded.org> wrote:
+On Fri, Apr 18, 2025 at 5:43=E2=80=AFAM Markus Volk via lists.openembedded.=
+org
+<f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
 >
-> Upgrade to release 5.3.0:
->
-> - Replace arg["name"] with arg.get("name") to correctly handle
->   optional names
-> - Add new methods: to_wei_decimals, and from_wei_decimals which
->   take a number instead of a string
-> - Add CamelModel pydantic model for validating objects and
->   serializing to camelCase when used with by_alias=3DTrue, with
->   the general expectation of a well-formed JSON-RPC object.
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
 > ---
->  ...python3-eth-utils_5.2.0.bb =3D> python3-eth-utils_5.3.0.bb} | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
->  rename meta-python/recipes-devtools/python/{python3-eth-utils_5.2.0.bb =
-=3D> python3-eth-utils_5.3.0.bb} (76%)
+>  meta-oe/files/static-passwd-meta-oe | 2 ++
+>  1 file changed, 2 insertions(+)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-eth-utils_5.2.0.=
-bb b/meta-python/recipes-devtools/python/python3-eth-utils_5.3.0.bb
-> similarity index 76%
-> rename from meta-python/recipes-devtools/python/python3-eth-utils_5.2.0.b=
-b
-> rename to meta-python/recipes-devtools/python/python3-eth-utils_5.3.0.bb
-> index 435d032a84..3b71684820 100644
-> --- a/meta-python/recipes-devtools/python/python3-eth-utils_5.2.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-eth-utils_5.3.0.bb
-> @@ -4,7 +4,7 @@ SECTION =3D "devel/python"
->  LICENSE =3D "MIT"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dd3f53e7cc5bf80b16eff1f4a38c73=
-182"
->
-> -SRC_URI[sha256sum] =3D "17e474eb654df6e18f20797b22c6caabb77415a996b3ba0f=
-3cc8df3437463134"
-> +SRC_URI[sha256sum] =3D "1f096867ac6be895f456fa3acb26e9573ae66e753abad920=
-8f316d24d6178156"
->
->  PYPI_PACKAGE =3D "eth_utils"
->  UPSTREAM_CHECK_PYPI_PACKAGE =3D "${PYPI_PACKAGE}"
-> @@ -16,4 +16,7 @@ RDEPENDS:${PN} +=3D " \
->      python3-eth-typing \
->      python3-setuptools \
->      python3-toolz \
-> +    python3-pydantic \
->  "
-> +
-> +COMPATIBLE_HOST:riscv32 =3D "null"
+> diff --git a/meta-oe/files/static-passwd-meta-oe b/meta-oe/files/static-p=
+asswd-meta-oe
+> index 1aba2e8d62..47380b8d00 100644
+> --- a/meta-oe/files/static-passwd-meta-oe
+> +++ b/meta-oe/files/static-passwd-meta-oe
+> @@ -10,3 +10,5 @@ pcpqa:x:621:nogroup::/:/bin/nologin
+>  influxdb:x:622:influxdb::/var/lib/influxdb:/bin/nologin
+>  mongodb:x:623:nogroup::/:/bin/nologin
+>  gpio-manager:x:624:gpio::/:/bin/nologin
+> +flatpak:x:625:625:Flatpak system helper:/:/sbin/nologin
 
-this should also be applied to recipes which depend upon python3-eth-utils
+Is the uppercase F in Flatpak expected or a typo ?
+
+> +
 > --
-> 2.39.5
+> 2.49.0
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#116947): https://lists.openembedded.org/g/openembedde=
-d-devel/message/116947
-> Mute This Topic: https://lists.openembedded.org/mt/112328943/1997914
+> View/Reply Online (#116966): https://lists.openembedded.org/g/openembedde=
+d-devel/message/116966
+> Mute This Topic: https://lists.openembedded.org/mt/112330187/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
