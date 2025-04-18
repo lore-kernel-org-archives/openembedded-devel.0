@@ -2,65 +2,63 @@ Return-Path: <alb3rt0.m3rciai@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B48E8C369D0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2AF1C369AB
 	for <webhook@archiver.kernel.org>; Fri, 18 Apr 2025 11:32:56 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web11.9981.1744975971083171494
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
+ by mx.groups.io with SMTP id smtpd.web10.9669.1744975972698721739
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Apr 2025 04:32:51 -0700
+ Fri, 18 Apr 2025 04:32:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=HUpjF/GR;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: alb3rt0.m3rciai@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-acb415dd8faso286351866b.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Apr 2025 04:32:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ICu4/Ubt;
+ spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: alb3rt0.m3rciai@gmail.com)
+Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-5e5deb6482cso5359354a12.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Apr 2025 04:32:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744975969; x=1745580769; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1744975971; x=1745580771; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=8R9W0DxN+Ocvu0a7aTSOU8XhyIhiwL+o1oSHI6YRBJ0=;
-        b=HUpjF/GR+OT2n4fkiC5NuOjk1ouem0WFW58pPszinyLnWXjSQwjM/5Jkrhpoi2QPxN
-         fcxFREIhy0D6l1xVFF4g9kVta/bab0AkCdM7hT6dWWCZ0bmO+bTUAFRXuP8F6rcq5giF
-         pZWpauROApUnZV1CtFw9pjPidBGKxmyJYckI7a6xIptmpQUFaZtCOctW+IxFlARTyaLO
-         nfwuSRyrslVKs1gzNHwQEfTGFOeYDIiKR+OWBudYNFLE4QRmWzCurx18e4qu/PcF5Lec
-         UOcLNQL5ZHIrIiZtxg6EuYqWmkzw3uSbtHlxaj1SD+qHvWtkIZUfHW0u4sKn3zlH9YZk
-         hcSg==
+        bh=0dPFKPIMcXMPWLxnx74uryrWdzAarj8Qzu/lwf9H2dk=;
+        b=ICu4/UbtHgDv6AjyJFcS++M+fI8/BHGtt1QD9z/bIj56KwvQmdmygskTjCFn1LiCRr
+         IVUMNA0blk2ldQkh+lE8dhZXFhwTy9jrAEa5VYAoyuTr5i7xMHwH3eQAZQtIZwKPGQBT
+         y/IQUy5ZLDgtVIJWRe6xjL8b+SgxRlYz9yoO+e3pmVJur9KUEyPzlE+EpyylcTECbr4R
+         WhzYM8X+sD0bhtxuAn1ETbT5Ts+YdWlQgcqQ6H48GmJap7W2b7jAXN0zs810K4pOUjKe
+         PrjN8IjocMsC/d91cZYo7CJJzz1TCUyunwr4rtAFPpGnC0U2ZB77h2lIXpVBbaWm7jVQ
+         go4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744975969; x=1745580769;
+        d=1e100.net; s=20230601; t=1744975971; x=1745580771;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=8R9W0DxN+Ocvu0a7aTSOU8XhyIhiwL+o1oSHI6YRBJ0=;
-        b=A+YCYx9Y0jISvjvt/+MfzHD1szm3eohc9kjzf3CoiZRkn1LDxByFzJWW8zNMxhrPMs
-         yfwslmNj3+yyZeydDrIPMcWtsEBGYk6UBLgCRK5I+1Dlq1ymVzLVyGM1CpGChwhcNhpS
-         YbzYZ9enfJPRzo7AJkgXcsZHL12htfrMGAViK1841NRo5alilgsP++7fIbGGCJzrIBHL
-         mdtPxHSCuO2jVEZuOumoMzwQDlCozNh4YE157cIeq2EVcVBNqekB547qNTYHOQOogmYg
-         rZ2FOCyhcjLBjd9BsTg32mtIzHobE5EJqfjWCEGVmXUjnbBI4gddPnLZFLJUZw6JD2JP
-         MmMw==
-X-Gm-Message-State: AOJu0YyBIo2tspZlbssWe5P0mZF08azo2ixUranPIjV3V4VCd1NfCLAf
-	HofCjMcVp4+nUr6Gv4PLXD83pH2cXeJnpjnkwCO0il4q93YXd16n
-X-Gm-Gg: ASbGncv6xB79Ebp6u3uaE4FhN5pNnJfcwFkTaWa+Uk4LW7i9mIpPLRHXC7nSwno51PE
-	qfQrD2kbwKR81gGHh26wVgjARDwgfkt9A2JQ17We+nCVC5XOkCmuyJrYXZlVwrMO2/Ucjgg0J0c
-	q0uUuvb8Tig8kr5XY0USFd1qGaI9m8qODomXzPV3BDIV0UcCS/EYoOh2pKdrM/uSfiKAtw03h1r
-	kkx5/Ccw5Cfe3HtsbHgZmYrdqFg+iPflrkhhqaVstOlib87sV6vz5amRgKepb1xiGnJgcJ0Nj9D
-	QpchQr6VnhkaPxYw2ibkt25Y2EeVuVDCdqlXNOEC9EAN6mah412wlBpH2Ys0zuFhyRpXyBA/mG+
-	QRgOpk5dQFET9nnM03MrwLSJtkaZjaZrhKa8gWzOBc8kcyfqa8XPd
-X-Google-Smtp-Source: AGHT+IF4A1ldifmqJqwlO1rfCzIE5uX+kpInkW1i3mdP9XGYkusnkK/Qay9pOJtVcN6TDAYJnCTg2A==
-X-Received: by 2002:a17:907:3fa7:b0:ac2:912d:5a80 with SMTP id a640c23a62f3a-acb74ad3825mr207716966b.5.1744975969274;
-        Fri, 18 Apr 2025 04:32:49 -0700 (PDT)
+        bh=0dPFKPIMcXMPWLxnx74uryrWdzAarj8Qzu/lwf9H2dk=;
+        b=alWyJogDW/a5Pw/jsRH/c8X/a/xqjP5iZpUL/b2v2wwyE0xrQUmvMioXNQ9QM7Fsy+
+         rzRK8RheF/+ngPuXq4nL//HYaXMaLb3fvRaU5nCSRDNk/PWuoYyhI9J/eP4+K8JM0kXT
+         5F1HEmpbbw9UKZNUz8alqXoylrQsiagN5jiVRzOXzOcQyqpmNoX+1rm1Fh+Q8CDJ3J1o
+         pdFydZ/wxly6/falwbAeF90g9S+xhK9eR0DL3qpEXNd7E/7w/gHyTVj/8dcP75tYVDj8
+         fhYVMDXNbh0qzMb8knpJfVKtVnr50n+mKwfPwS+VnkXRlZduFUuOJfWTGuMeSGwaLtJo
+         jEgA==
+X-Gm-Message-State: AOJu0YwXiTMBlTZceXez+uV4XKszt324sYrOjHq8BX0MK5VCb0XVuwo4
+	6ui5GLXIP7TA6XzVyCfK40n/Z6dAPRXeSe3pU+l/rX5QwHLTsmKU
+X-Gm-Gg: ASbGnctj1NWvTi3PM9JzIhRBM3n6i1mzyZfkEkwmurOpj1B/K+IswnORiVcy96VN5Uc
+	qYXyd0d04Ay9HyOvN8Oj/xpKpcUQbYjIMc24KyhXsV9DScRv7mrln7ZkEHiZ4IXg/J/nHlb8TG4
+	43oHNmtEv2KhgmzFRIAymaIFtak++q88XNXw6VD8X5Sn5xNxVe5dbXxsMrTa7yKhggKVTHjiLGk
+	GQy0b7A1n0nyPokuc2vSN5DqMMJF+2doOOMOhSQRs7ObOyDtB+sYKzUYCDJg+tFYI3L+k0/6fyI
+	xiPIi/8O5cmPb/1qe1RH2XBkLcNXR3SVe4nzqQntzUPyMBOqM8gcNesSLRxnxfU1bX+uWgox4oo
+	QQR0gLEek4awNFF3Eio4RX6zW+bsTO4OGgT83V9nHseue5S3kqfm+sssmjMP6BJ4=
+X-Google-Smtp-Source: AGHT+IHnOO0/wKn6jh9qmTakvawAin/QXv7g1mtqwxkZuEbBlxTASKWVfbMZQ03fUDeUlycv4Ruy7A==
+X-Received: by 2002:a17:906:db06:b0:ac7:7d3e:7336 with SMTP id a640c23a62f3a-acb7534a375mr193780966b.22.1744975970779;
+        Fri, 18 Apr 2025 04:32:50 -0700 (PDT)
 Received: from alb3rt0-ThinkPad-P15-Gen-1.fritz.box (host-79-22-125-209.retail.telecomitalia.it. [79.22.125.209])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-acb6ec42af6sm108313566b.43.2025.04.18.04.32.48
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-acb6ec42af6sm108313566b.43.2025.04.18.04.32.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Apr 2025 04:32:49 -0700 (PDT)
+        Fri, 18 Apr 2025 04:32:50 -0700 (PDT)
 From: alb3rt0.m3rciai@gmail.com
 To: akuster808@gmail.com
 Cc: openembedded-devel@lists.openembedded.org,
-	Khem Raj <raj.khem@gmail.com>,
-	Ricardo Simoes <ricardo.simoes@pt.bosch.com>,
-	Mark Jonas <mark.jonas@de.bosch.com>
-Subject: [meta-oe][scarthgap][PATCH 4/5] can-utils: Fix build regression on musl
-Date: Fri, 18 Apr 2025 13:31:47 +0200
-Message-Id: <20250418113148.142480-5-alb3rt0.m3rciai@gmail.com>
+	amerciai <alb3rt0.m3rciai@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH 5/5] Remove can-utils_2023.03
+Date: Fri, 18 Apr 2025 13:31:48 +0200
+Message-Id: <20250418113148.142480-6-alb3rt0.m3rciai@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250418113148.142480-1-alb3rt0.m3rciai@gmail.com>
 References: <20250418113148.142480-1-alb3rt0.m3rciai@gmail.com>
@@ -70,54 +68,72 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 18 Apr 2025 11:32:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116955
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116956
 
-From: Khem Raj <raj.khem@gmail.com>
+From: amerciai <alb3rt0.m3rciai@gmail.com>
 
-This got introduced with 2025.01 upgrade on musl systems
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
-Cc: Mark Jonas <mark.jonas@de.bosch.com>
+Signed-off-by: amerciai <alb3rt0.m3rciai@gmail.com>
 ---
- ...ime.h-for-timespec-struct-definition.patch | 28 +++++++++++++++++++
- 1 file changed, 28 insertions(+)
- create mode 100644 meta-oe/recipes-extended/socketcan/can-utils/0001-Include-time.h-for-timespec-struct-definition.patch
+ .../socketcan/can-utils_2023.03.bb            | 50 -------------------
+ 1 file changed, 50 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/socketcan/can-utils_2023.03.bb
 
-diff --git a/meta-oe/recipes-extended/socketcan/can-utils/0001-Include-time.h-for-timespec-struct-definition.patch b/meta-oe/recipes-extended/socketcan/can-utils/0001-Include-time.h-for-timespec-struct-definition.patch
-new file mode 100644
-index 0000000000..91b9dd3c4e
---- /dev/null
-+++ b/meta-oe/recipes-extended/socketcan/can-utils/0001-Include-time.h-for-timespec-struct-definition.patch
-@@ -0,0 +1,28 @@
-+From 4363ef59cc9f2169455f56453759d4a4d9b89a5f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 13 Feb 2025 22:14:47 -0800
-+Subject: [PATCH] Include time.h for timespec struct definition
-+
-+Fixes
-+git/isobusfs/../libj1939.h:33:18: error: field has incomplete type 'struct timespec'
-+   33 |         struct timespec next_send_time;
-+      |                         ^
-+
-+Upstream-Status: Submitted [https://github.com/linux-can/can-utils/pull/579]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ libj1939.h | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/libj1939.h b/libj1939.h
-+index 44393a2..7c19f43 100644
-+--- a/libj1939.h
-++++ b/libj1939.h
-+@@ -17,6 +17,7 @@
-+ #include <linux/can/j1939.h>
-+ #include <stdbool.h>
-+ #include <stdint.h>
-++#include <time.h>
-+ #include <sys/socket.h>
-+ 
-+ #ifndef J1939_LIB_H
+diff --git a/meta-oe/recipes-extended/socketcan/can-utils_2023.03.bb b/meta-oe/recipes-extended/socketcan/can-utils_2023.03.bb
+deleted file mode 100644
+index ca6cb7db58..0000000000
+--- a/meta-oe/recipes-extended/socketcan/can-utils_2023.03.bb
++++ /dev/null
+@@ -1,50 +0,0 @@
+-SUMMARY = "Linux CAN network development utilities"
+-LICENSE = "GPL-2.0-only & BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://include/linux/can.h;endline=44;md5=a9e1169c6c9a114a61329e99f86fdd31"
+-
+-DEPENDS = "libsocketcan"
+-
+-SRC_URI = "git://github.com/linux-can/${BPN}.git;protocol=https;branch=master"
+-
+-SRCREV = "cfe41963f3425e9adb01a70cfaddedf5e5982720"
+-
+-S = "${WORKDIR}/git"
+-
+-inherit autotools pkgconfig update-alternatives
+-
+-PACKAGES =+ "${PN}-access ${PN}-isotp ${PN}-j1939 ${PN}-cantest ${PN}-slcan ${PN}-log"
+-
+-FILES:${PN}-access = " \
+-    ${bindir}/cangw \
+-    ${bindir}/canlogserver \
+-    ${bindir}/bcmserver \
+-    ${bindir}/socketcand \
+-    ${bindir}/cannelloni \
+-"
+-
+-FILES:${PN}-isotp = "${bindir}/isotp*"
+-
+-FILES:${PN}-j1939 = " \
+-    ${bindir}/j* \
+-    ${bindir}/testj1939 \
+-"
+-
+-FILES:${PN}-cantest = " \
+-    ${bindir}/canbusload \
+-    ${bindir}/can-calc-bit-timing \
+-    ${bindir}/canfdtest \
+-"
+-
+-FILES:${PN}-slcan = "${bindir}/slcan*"
+-
+-FILES:${PN}-log = "${bindir}/*log*"
+-
+-ALTERNATIVE:${PN} = "candump cansend cansequence"
+-ALTERNATIVE_LINK_NAME[candump] = "${bindir}/candump"
+-ALTERNATIVE_LINK_NAME[cansend] = "${bindir}/cansend"
+-ALTERNATIVE_LINK_NAME[cansequence] = "${bindir}/cansequence"
+-
+-# busybox ip fails to configure can interfaces, so we need iproute2 to do so.
+-# See details in http://www.armadeus.com/wiki/index.php?title=CAN_bus_Linux_driver.
+-RRECOMMENDS:${PN} += "iproute2"
+-
 -- 
 2.34.1
 
