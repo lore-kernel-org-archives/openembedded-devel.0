@@ -1,172 +1,109 @@
-Return-Path: <mark.yang@lge.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EEB20C369AB
-	for <webhook@archiver.kernel.org>; Fri, 18 Apr 2025 09:04:35 +0000 (UTC)
-Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.52])
- by mx.groups.io with SMTP id smtpd.web10.7682.1744967068549873225
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B79FC369C9
+	for <webhook@archiver.kernel.org>; Fri, 18 Apr 2025 10:51:36 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.web10.8840.1744973486321403052
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Apr 2025 02:04:28 -0700
+ Fri, 18 Apr 2025 03:51:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.52, mailfrom: mark.yang@lge.com)
-Received: from unknown (HELO lgemrelse6q.lge.com) (156.147.1.121)
-	by 156.147.23.52 with ESMTP; 18 Apr 2025 18:04:25 +0900
-X-Original-SENDERIP: 156.147.1.121
-X-Original-MAILFROM: mark.yang@lge.com
-Received: from unknown (HELO markyang..) (10.177.120.37)
-	by 156.147.1.121 with ESMTP; 18 Apr 2025 18:04:25 +0900
-X-Original-SENDERIP: 10.177.120.37
-X-Original-MAILFROM: mark.yang@lge.com
-From: mark.yang@lge.com
+ dkim=pass header.i=@konsulko.com header.s=google header.b=I8++ldMA;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.54, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-43cfe574976so12445345e9.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Apr 2025 03:51:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1744973484; x=1745578284; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=obsgWbN3uuJs5MVB8CRWBiPG5C4O0atFWNREqMklAHw=;
+        b=I8++ldMA/hN1f+19FjUhaAlKP6flvo2EOSmTd6KOF1eDlMHBUO334yGsjdhD05VGx0
+         tbkXMODObg/ko9aGH43dTYcTsrioG4a6SJ/8pZn6lmO3RV2V8oHSFT0sStUO5PFibjAa
+         udkMa/tAGNzWJ38/saSW2WICLQBIOxdoZ4cws=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1744973484; x=1745578284;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=obsgWbN3uuJs5MVB8CRWBiPG5C4O0atFWNREqMklAHw=;
+        b=tC54AQA4GIS4U50peB+Vq/IsTB+jw2hF0lotQ/FCXbEGmN6P172Tw8s5+M9NuOaMHS
+         UX2pSRR/IrPR0v8kj5f8xXUf9S266IQSCg1VxwS8eVCo+jwUy+pOym7iFGmdX3xn6dqf
+         UTH72565BWnVADLieXywV+8frIRllAQLRZyoYQ0wY5gUX0TzeDbgTxZxFohgcMvvjr53
+         umldm/wGmhjsp2ElX+PVAY1Hhwg/mmWQai8kStZa7Gule+peaSrUpeyaeRzLCp609gmn
+         Kk9hUNQKkgriFchrqxjo/S0LnMM4eXTpUYRT6RSKV4WmkV3SsS+8geW2lSRIbBCnfwsh
+         hCPQ==
+X-Gm-Message-State: AOJu0Yy0wbqIAbeSrlu9i9cjQkKzpUpPv6As+HoGPVObjV67ABQErfRB
+	m9nOqdxC+LBNegN1alDbBvus6A/wBjcjZppOhay7QXhF/d2TU1zh4DjKVelUjZpysqNb0H8BX99
+	I
+X-Gm-Gg: ASbGnctSv8YaIDOw1ccRsb4XLVWUO7AK6uMTeSKeBMr1HYS/Tkv8RssSKePF7CCNQ2W
+	mOt8I1THdTDZZSP4Spz2UUR/v46TNOMShgZvDfNNd3uXZeCoKZx8FlX01U77zoPESJ1eQIPhaYF
+	SOp4/gqHGjJkiH0ES7lWotHFFLdlkQ7I7q34nV9KJ4RLE3tugAzmkMs0b3ZnfXp66KjkeP2Y3hB
+	KxFXMEbBx5SD/eqwFL8Os1Keu8R1ixmye5GMLief3gCdqVflv5BMaszE9uv9Ue2CtkbYDJwaPRM
+	tH95WygSASsWgwH0Us2hwYHDwtEFOa54Jgfs9+ZDdQpGS7iIEMFH+t8=
+X-Google-Smtp-Source: AGHT+IGseOh+taHYusU5cdgDUqfAU+Udxq7CRGBs6dr9OzlEp+/KopIFHmg7HlJ/xIH0mBL9k6a4pQ==
+X-Received: by 2002:a05:600c:54c1:b0:43b:b756:f0a9 with SMTP id 5b1f17b1804b1-440711cce0emr2604655e9.11.1744973484394;
+        Fri, 18 Apr 2025 03:51:24 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-39efa43beb4sm2361401f8f.42.2025.04.18.03.51.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 18 Apr 2025 03:51:24 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: "mark.yang" <mark.yang@lge.com>
-Subject: [meta-networking][PATCH] libowfat: fix error with gcc-15
-Date: Fri, 18 Apr 2025 18:04:24 +0900
-Message-Id: <20250418090424.2656673-1-mark.yang@lge.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCHv2] python3-eth-utils: Upgrade 5.2.0 -> 5.3.0
+Date: Fri, 18 Apr 2025 13:51:19 +0300
+Message-Id: <20250418105119.3211549-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 18 Apr 2025 09:04:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116946
+ <openembedded-devel@lists.openembedded.org>; Fri, 18 Apr 2025 10:51:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116947
 
-From: "mark.yang" <mark.yang@lge.com>
+Upgrade to release 5.3.0:
 
-  * fix following errors:
-  ./select.h:13:12: error: conflicting types for 'select'; have 'int(void)'
-   13 | extern int select();
-      |            ^~~~~~
-   In file included from TOPDIR/tmp/work/core2-64-oe-linux/libowfat/0.32/recipe-sysroot/usr/include/sys/types.h:179,
-                 from ./select.h:6:
-   ./buffer.h:40:65: error: initialization of 'ssize_t (*)(void)' {aka 'long int (*)(void)'} from incompatible pointer type 'ssize_t (*)(int,  char *, size_t)' {aka 'long int (*)(int,  char *, long unsigned int)'} [-Wincompatible-pointer-types]
-   40 | #define BUFFER_INIT(op,fd,buf,len) { (char*)(buf), 0, 0, (len), (op), NULL, NULL, (fd) }
+- Replace arg["name"] with arg.get("name") to correctly handle
+  optional names
+- Add new methods: to_wei_decimals, and from_wei_decimals which
+  take a number instead of a string
+- Add CamelModel pydantic model for validating objects and
+  serializing to camelCase when used with by_alias=True, with
+  the general expectation of a well-formed JSON-RPC object.
 
-Signed-off-by: mark.yang <mark.yang@lge.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...-incompatible-type-error-with-gcc-15.patch | 100 ++++++++++++++++++
- .../recipes-support/ncp/libowfat_0.32.bb      |   1 +
- 2 files changed, 101 insertions(+)
- create mode 100644 meta-networking/recipes-support/ncp/libowfat/0001-fix-incompatible-type-error-with-gcc-15.patch
+ ...python3-eth-utils_5.2.0.bb => python3-eth-utils_5.3.0.bb} | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-eth-utils_5.2.0.bb => python3-eth-utils_5.3.0.bb} (76%)
 
-diff --git a/meta-networking/recipes-support/ncp/libowfat/0001-fix-incompatible-type-error-with-gcc-15.patch b/meta-networking/recipes-support/ncp/libowfat/0001-fix-incompatible-type-error-with-gcc-15.patch
-new file mode 100644
-index 0000000000..6f5f3e712e
---- /dev/null
-+++ b/meta-networking/recipes-support/ncp/libowfat/0001-fix-incompatible-type-error-with-gcc-15.patch
-@@ -0,0 +1,100 @@
-+From 397d00cfd672f3782196e927d0a878ab1d800112 Mon Sep 17 00:00:00 2001
-+From: "mark.yang" <mark.yang@lge.com>
-+Date: Fri, 18 Apr 2025 17:30:48 +0900
-+Subject: [PATCH] fix incompatible type error with gcc 15
+diff --git a/meta-python/recipes-devtools/python/python3-eth-utils_5.2.0.bb b/meta-python/recipes-devtools/python/python3-eth-utils_5.3.0.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-eth-utils_5.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-eth-utils_5.3.0.bb
+index 435d032a84..3b71684820 100644
+--- a/meta-python/recipes-devtools/python/python3-eth-utils_5.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-eth-utils_5.3.0.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d3f53e7cc5bf80b16eff1f4a38c73182"
+ 
+-SRC_URI[sha256sum] = "17e474eb654df6e18f20797b22c6caabb77415a996b3ba0f3cc8df3437463134"
++SRC_URI[sha256sum] = "1f096867ac6be895f456fa3acb26e9573ae66e753abad9208f316d24d6178156"
+ 
+ PYPI_PACKAGE = "eth_utils"
+ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+@@ -16,4 +16,7 @@ RDEPENDS:${PN} += " \
+     python3-eth-typing \
+     python3-setuptools \
+     python3-toolz \
++    python3-pydantic \
+ "
 +
-+  * fix following errors:
-+  ./select.h:13:12: error: conflicting types for 'select'; have 'int(void)'
-+   13 | extern int select();
-+      |            ^~~~~~
-+   In file included from TOPDIR/tmp/work/core2-64-oe-linux/libowfat/0.32/recipe-sysroot/usr/include/sys/types.h:179,
-+                 from ./select.h:6:
-+   ./buffer.h:40:65: error: initialization of 'ssize_t (*)(void)' {aka 'long int (*)(void)'} from incompatible pointer type 'ssize_t (*)(int,  char *, size_t)' {aka 'long int (*)(int,  char *, long unsigned int)'} [-Wincompatible-pointer-types]
-+   40 | #define BUFFER_INIT(op,fd,buf,len) { (char*)(buf), 0, 0, (len), (op), NULL, NULL, (fd) }
-+      |                                                                 ^
-+Upstream-Status: Submitted [felix-libowfat@fefe.de]
-+Signed-off-by: mark.yang <mark.yang@lge.com>
-+---
-+ buffer.h                  | 2 +-
-+ buffer/buffer_frombuf.c   | 2 +-
-+ buffer/buffer_stubborn.c  | 2 +-
-+ buffer/buffer_stubborn2.c | 2 +-
-+ buffer/buffer_tosa.c      | 2 +-
-+ select.h2                 | 2 --
-+ 6 files changed, 5 insertions(+), 7 deletions(-)
-+
-+diff --git a/buffer.h b/buffer.h
-+index 54bed5c..eaf7acb 100644
-+--- a/buffer.h
-++++ b/buffer.h
-+@@ -24,7 +24,7 @@ typedef struct buffer {
-+   int fd;		/* passed as first argument to op */
-+ } buffer;
-+ 
-+-#define BUFFER_INIT(op,fd,buf,len) { (buf), 0, 0, (len), (op), NULL, NULL, (fd) }
-++#define BUFFER_INIT(op,fd,buf,len) { (buf), 0, 0, (len), (void*)(op), NULL, NULL, (fd) }
-+ #define BUFFER_INIT_FREE(op,fd,buf,len) { (buf), 0, 0, (len), (op), NULL, buffer_free, (fd) }
-+ #define BUFFER_INIT_READ(op,fd,buf,len) BUFFER_INIT(op,fd,buf,len) /*obsolete*/
-+ #define BUFFER_INSIZE 8192
-+diff --git a/buffer/buffer_frombuf.c b/buffer/buffer_frombuf.c
-+index 0c9d931..2aa27ca 100644
-+--- a/buffer/buffer_frombuf.c
-++++ b/buffer/buffer_frombuf.c
-+@@ -14,6 +14,6 @@ void buffer_frombuf(buffer* b,const char* x,size_t l) {
-+   b->n=l;
-+   b->a=l;
-+   b->fd=0;
-+-  b->op=dummyreadwrite;
-++  b->op=(void*)dummyreadwrite;
-+   b->deinit=0;
-+ }
-+diff --git a/buffer/buffer_stubborn.c b/buffer/buffer_stubborn.c
-+index 2e00418..8079000 100644
-+--- a/buffer/buffer_stubborn.c
-++++ b/buffer/buffer_stubborn.c
-+@@ -1,7 +1,7 @@
-+ #include <errno.h>
-+ #include "buffer.h"
-+ 
-+-int buffer_stubborn(ssize_t (*op)(),int fd,const char* buf, size_t len,void* cookie) {
-++int buffer_stubborn(ssize_t (*op)(int,char*,size_t,void*),int fd,const char* buf, size_t len,void* cookie) {
-+   ssize_t w;
-+   errno=0;
-+   while (len) {
-+diff --git a/buffer/buffer_stubborn2.c b/buffer/buffer_stubborn2.c
-+index b9146e2..b47a245 100644
-+--- a/buffer/buffer_stubborn2.c
-++++ b/buffer/buffer_stubborn2.c
-+@@ -1,7 +1,7 @@
-+ #include <errno.h>
-+ #include "buffer.h"
-+ 
-+-ssize_t buffer_stubborn_read(ssize_t (*op)(),int fd,const char* buf, size_t len,void* cookie) {
-++ssize_t buffer_stubborn_read(ssize_t (*op)(int,char*,size_t,void*),int fd,const char* buf, size_t len,void* cookie) {
-+   ssize_t w;
-+   for (;;) {
-+     if ((w=op(fd,buf,len,cookie))<0)
-+diff --git a/buffer/buffer_tosa.c b/buffer/buffer_tosa.c
-+index a10be4f..99111a9 100644
-+--- a/buffer/buffer_tosa.c
-++++ b/buffer/buffer_tosa.c
-+@@ -21,7 +21,7 @@ int buffer_tosa(buffer* b,stralloc* sa) {
-+   b->n=0;
-+   b->a=1024;
-+   b->fd=0;
-+-  b->op=strallocwrite;
-++  b->op=(void*)strallocwrite;
-+   b->cookie=sa;
-+   b->deinit=0;
-+   return 0;
-+diff --git a/select.h2 b/select.h2
-+index 961c380..2a22543 100644
-+--- a/select.h2
-++++ b/select.h2
-+@@ -10,6 +10,4 @@
-+ /* braindead BSD uses bzero in FD_ZERO but doesn't #include string.h */
-+ #include <string.h>
-+ 
-+-extern int select();
-+-
-+ #endif
-diff --git a/meta-networking/recipes-support/ncp/libowfat_0.32.bb b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
-index 94f36f904a..cc67d9aefa 100644
---- a/meta-networking/recipes-support/ncp/libowfat_0.32.bb
-+++ b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
-@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
- SRC_URI = "https://www.fefe.de/${BPN}/${BP}.tar.xz \
-            file://0001-Depend-on-haveuint128.h-for-umult64.c.patch \
-            file://0001-replace-__pure__-with-compiler-attribute-pure.patch \
-+           file://0001-fix-incompatible-type-error-with-gcc-15.patch \
-           "
- SRC_URI[md5sum] = "ee015ccf45cb2bc61c942642038c2bdc"
- SRC_URI[sha256sum] = "f4b9b3d9922dc25bc93adedf9e9ff8ddbebaf623f14c8e7a5f2301bfef7998c1"
++COMPATIBLE_HOST:riscv32 = "null"
+-- 
+2.39.5
+
 
