@@ -1,86 +1,172 @@
-Return-Path: <alb3rt0.m3rciai@gmail.com>
+Return-Path: <mark.yang@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E138DC369AB
-	for <webhook@archiver.kernel.org>; Fri, 18 Apr 2025 08:51:15 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
- by mx.groups.io with SMTP id smtpd.web11.8028.1744966268574451518
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EEB20C369AB
+	for <webhook@archiver.kernel.org>; Fri, 18 Apr 2025 09:04:35 +0000 (UTC)
+Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.52])
+ by mx.groups.io with SMTP id smtpd.web10.7682.1744967068549873225
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Apr 2025 01:51:08 -0700
+ Fri, 18 Apr 2025 02:04:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Kj6rk+so;
- spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: alb3rt0.m3rciai@gmail.com)
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-ac2bdea5a38so252376866b.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Apr 2025 01:51:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744966267; x=1745571067; darn=lists.openembedded.org;
-        h=content-disposition:mime-version:message-id:subject:cc:to:from:date
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=JnOxoiP8tN1ddXpMr0mOSxjjlKV1fnHGgBWvbLuwPZM=;
-        b=Kj6rk+so2eaShxN8yu9ZHDLDitnk1vO5auUwJuhNOgqAnVJh5ByOhmpNaxVZsL8ZZc
-         tFZgbym4R2P3+5/AEM+8T79quK0OVBvtW/7Ru677QD60ZXUIKus35uff7TeE0kUUsuvs
-         xzkX+UDUS1iqcmEecF9v4awhItL+swkho/drsUnn/V8N3Cvn6LzUvAExkVGlSyftHiwa
-         iDjTVww3k6tRUfl1zW+ErMbq28qPgo1V5VA5+oaacXo8eHKhqy46shJOtT6zqKgVuCGY
-         tc6/Cz4VI/eA7lQ/W0K+XZFzjaxBt7wjK4H1O8lJJrv3JihI7kHQHAkihlIr93Yxv0HQ
-         sZHQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744966267; x=1745571067;
-        h=content-disposition:mime-version:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=JnOxoiP8tN1ddXpMr0mOSxjjlKV1fnHGgBWvbLuwPZM=;
-        b=aGmW4CeLHzV9ns0F576ap1L0cHlkFAwShdO8E/T3/liAvznWMALj6jWGCTcCdKvVrM
-         pNjou38q72GynbK/hGP6nXNYM47BgQSY0UHQqJztjfw/xuQeSlSBfBUC/9zsd8cjb5eK
-         IjEJvdAOfPNCBayxNZ5dFAdBCR9SkcIwHZi0zjn+6E9N3Gtl0s1T9+vpd+rK8IwseKMn
-         6xFwigKN83s1LaHGELN3rWHsMXaRxoO6gul1r6NJPhuBW/VyFVv90xghpiqbaccrvgOA
-         PGqh0oAynoHeJHO3mzSBwwfrvp+KDU4a5rG9UAV2YT3yLYa/Qs7p4xQevnrHHkEpeP2d
-         Qf0A==
-X-Gm-Message-State: AOJu0YwWkdNeuaWQSr2sKYNlz/h5qZFw3aGmt1zor1Z9aBiFOmFsV6JX
-	CxAa5mexUoo/s6CwTbVVoQjlNgkMlPEfmN08t5rw/k4Bh5WbEXPA
-X-Gm-Gg: ASbGncsILmJJQ8tUbAyeljQKqzlm62LK4yE2n7Vdxar2Mbjta7Ujk2gk8gD3NK6ADr2
-	JffJbPNg2LbilUqn4QweIgutoZWeddOUbpcm+whFWZ50MWzgJru4dEbGGMM1KiPEt1MhdRNThvO
-	tpKhk6DDUl13I0FrJvvX4WCU71L+pnK+wwUXxw6RPBE0Ipjnp+1Hfg0Nz5bLJSvYsB3vSqBYXgO
-	r+HU/Y/Pz1oiL+5zwqyqOu/8btMFDUZvuzjrRKtADF9i2Hr3Fb91GjTJOk4x/Q6pyFMuzTp5XxN
-	skz70MeSSKpratBS1SNGgubmHncQb07z1RDlX1LmNjPQI5ZkY9ouoyRu+9DInC3m4WXk0BlFFlb
-	X81k3N8mFMLp30rLDwRYO/jAWdK8544SkmYrxNP5YCeXrs13aag==
-X-Google-Smtp-Source: AGHT+IH0Ed3/vHmzAgQGtM6yXGFKp7pRC79abIZQ/VheWKvDRInqtBR1gC4I4vltj9mKB0X/0wnX0g==
-X-Received: by 2002:a17:906:7949:b0:acb:6746:8769 with SMTP id a640c23a62f3a-acb74b0d460mr164768366b.18.1744966266631;
-        Fri, 18 Apr 2025 01:51:06 -0700 (PDT)
-Received: from alb3rt0-ThinkPad-P15-Gen-1 (host-79-22-125-209.retail.telecomitalia.it. [79.22.125.209])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-acb6ef49ff9sm93736966b.158.2025.04.18.01.51.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Apr 2025 01:51:06 -0700 (PDT)
-Date: Fri, 18 Apr 2025 10:51:03 +0200
-From: Alberto Merciai <alb3rt0.m3rciai@gmail.com>
-To: akuster808@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap] can-utils: Upgrade 2023.03 -> 2025.01
-Message-ID: <aAISd7n7umT8UHQ9@alb3rt0-ThinkPad-P15-Gen-1>
+ dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.52, mailfrom: mark.yang@lge.com)
+Received: from unknown (HELO lgemrelse6q.lge.com) (156.147.1.121)
+	by 156.147.23.52 with ESMTP; 18 Apr 2025 18:04:25 +0900
+X-Original-SENDERIP: 156.147.1.121
+X-Original-MAILFROM: mark.yang@lge.com
+Received: from unknown (HELO markyang..) (10.177.120.37)
+	by 156.147.1.121 with ESMTP; 18 Apr 2025 18:04:25 +0900
+X-Original-SENDERIP: 10.177.120.37
+X-Original-MAILFROM: mark.yang@lge.com
+From: mark.yang@lge.com
+To: openembedded-devel@lists.openembedded.org
+Cc: "mark.yang" <mark.yang@lge.com>
+Subject: [meta-networking][PATCH] libowfat: fix error with gcc-15
+Date: Fri, 18 Apr 2025 18:04:24 +0900
+Message-Id: <20250418090424.2656673-1-mark.yang@lge.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 18 Apr 2025 08:51:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116945
+ <openembedded-devel@lists.openembedded.org>; Fri, 18 Apr 2025 09:04:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116946
 
-Hello,
+From: "mark.yang" <mark.yang@lge.com>
 
-I notice that master already include can-utils_2025.01 however scarthgap
-is not.
+  * fix following errors:
+  ./select.h:13:12: error: conflicting types for 'select'; have 'int(void)'
+   13 | extern int select();
+      |            ^~~~~~
+   In file included from TOPDIR/tmp/work/core2-64-oe-linux/libowfat/0.32/recipe-sysroot/usr/include/sys/types.h:179,
+                 from ./select.h:6:
+   ./buffer.h:40:65: error: initialization of 'ssize_t (*)(void)' {aka 'long int (*)(void)'} from incompatible pointer type 'ssize_t (*)(int,  char *, size_t)' {aka 'long int (*)(int,  char *, long unsigned int)'} [-Wincompatible-pointer-types]
+   40 | #define BUFFER_INIT(op,fd,buf,len) { (char*)(buf), 0, 0, (len), (op), NULL, NULL, (fd) }
 
-Is there any specific reason why we don't update to can-utils_2025.01 in
-scarthgap branch?
+Signed-off-by: mark.yang <mark.yang@lge.com>
+---
+ ...-incompatible-type-error-with-gcc-15.patch | 100 ++++++++++++++++++
+ .../recipes-support/ncp/libowfat_0.32.bb      |   1 +
+ 2 files changed, 101 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ncp/libowfat/0001-fix-incompatible-type-error-with-gcc-15.patch
 
-I found that using 2023.03 on scarthgap the following command will always show the
-same msec:
-candump -tA can0
-due to that cast:
-https://github.com/linux-can/can-utils/blob/cfe41963f3425e9adb01a70cfaddedf5e5982720/candump.c#L237
-
-Let me know, If not I can share you changes for that.
-
-Regards,
-Alberto
+diff --git a/meta-networking/recipes-support/ncp/libowfat/0001-fix-incompatible-type-error-with-gcc-15.patch b/meta-networking/recipes-support/ncp/libowfat/0001-fix-incompatible-type-error-with-gcc-15.patch
+new file mode 100644
+index 0000000000..6f5f3e712e
+--- /dev/null
++++ b/meta-networking/recipes-support/ncp/libowfat/0001-fix-incompatible-type-error-with-gcc-15.patch
+@@ -0,0 +1,100 @@
++From 397d00cfd672f3782196e927d0a878ab1d800112 Mon Sep 17 00:00:00 2001
++From: "mark.yang" <mark.yang@lge.com>
++Date: Fri, 18 Apr 2025 17:30:48 +0900
++Subject: [PATCH] fix incompatible type error with gcc 15
++
++  * fix following errors:
++  ./select.h:13:12: error: conflicting types for 'select'; have 'int(void)'
++   13 | extern int select();
++      |            ^~~~~~
++   In file included from TOPDIR/tmp/work/core2-64-oe-linux/libowfat/0.32/recipe-sysroot/usr/include/sys/types.h:179,
++                 from ./select.h:6:
++   ./buffer.h:40:65: error: initialization of 'ssize_t (*)(void)' {aka 'long int (*)(void)'} from incompatible pointer type 'ssize_t (*)(int,  char *, size_t)' {aka 'long int (*)(int,  char *, long unsigned int)'} [-Wincompatible-pointer-types]
++   40 | #define BUFFER_INIT(op,fd,buf,len) { (char*)(buf), 0, 0, (len), (op), NULL, NULL, (fd) }
++      |                                                                 ^
++Upstream-Status: Submitted [felix-libowfat@fefe.de]
++Signed-off-by: mark.yang <mark.yang@lge.com>
++---
++ buffer.h                  | 2 +-
++ buffer/buffer_frombuf.c   | 2 +-
++ buffer/buffer_stubborn.c  | 2 +-
++ buffer/buffer_stubborn2.c | 2 +-
++ buffer/buffer_tosa.c      | 2 +-
++ select.h2                 | 2 --
++ 6 files changed, 5 insertions(+), 7 deletions(-)
++
++diff --git a/buffer.h b/buffer.h
++index 54bed5c..eaf7acb 100644
++--- a/buffer.h
+++++ b/buffer.h
++@@ -24,7 +24,7 @@ typedef struct buffer {
++   int fd;		/* passed as first argument to op */
++ } buffer;
++ 
++-#define BUFFER_INIT(op,fd,buf,len) { (buf), 0, 0, (len), (op), NULL, NULL, (fd) }
+++#define BUFFER_INIT(op,fd,buf,len) { (buf), 0, 0, (len), (void*)(op), NULL, NULL, (fd) }
++ #define BUFFER_INIT_FREE(op,fd,buf,len) { (buf), 0, 0, (len), (op), NULL, buffer_free, (fd) }
++ #define BUFFER_INIT_READ(op,fd,buf,len) BUFFER_INIT(op,fd,buf,len) /*obsolete*/
++ #define BUFFER_INSIZE 8192
++diff --git a/buffer/buffer_frombuf.c b/buffer/buffer_frombuf.c
++index 0c9d931..2aa27ca 100644
++--- a/buffer/buffer_frombuf.c
+++++ b/buffer/buffer_frombuf.c
++@@ -14,6 +14,6 @@ void buffer_frombuf(buffer* b,const char* x,size_t l) {
++   b->n=l;
++   b->a=l;
++   b->fd=0;
++-  b->op=dummyreadwrite;
+++  b->op=(void*)dummyreadwrite;
++   b->deinit=0;
++ }
++diff --git a/buffer/buffer_stubborn.c b/buffer/buffer_stubborn.c
++index 2e00418..8079000 100644
++--- a/buffer/buffer_stubborn.c
+++++ b/buffer/buffer_stubborn.c
++@@ -1,7 +1,7 @@
++ #include <errno.h>
++ #include "buffer.h"
++ 
++-int buffer_stubborn(ssize_t (*op)(),int fd,const char* buf, size_t len,void* cookie) {
+++int buffer_stubborn(ssize_t (*op)(int,char*,size_t,void*),int fd,const char* buf, size_t len,void* cookie) {
++   ssize_t w;
++   errno=0;
++   while (len) {
++diff --git a/buffer/buffer_stubborn2.c b/buffer/buffer_stubborn2.c
++index b9146e2..b47a245 100644
++--- a/buffer/buffer_stubborn2.c
+++++ b/buffer/buffer_stubborn2.c
++@@ -1,7 +1,7 @@
++ #include <errno.h>
++ #include "buffer.h"
++ 
++-ssize_t buffer_stubborn_read(ssize_t (*op)(),int fd,const char* buf, size_t len,void* cookie) {
+++ssize_t buffer_stubborn_read(ssize_t (*op)(int,char*,size_t,void*),int fd,const char* buf, size_t len,void* cookie) {
++   ssize_t w;
++   for (;;) {
++     if ((w=op(fd,buf,len,cookie))<0)
++diff --git a/buffer/buffer_tosa.c b/buffer/buffer_tosa.c
++index a10be4f..99111a9 100644
++--- a/buffer/buffer_tosa.c
+++++ b/buffer/buffer_tosa.c
++@@ -21,7 +21,7 @@ int buffer_tosa(buffer* b,stralloc* sa) {
++   b->n=0;
++   b->a=1024;
++   b->fd=0;
++-  b->op=strallocwrite;
+++  b->op=(void*)strallocwrite;
++   b->cookie=sa;
++   b->deinit=0;
++   return 0;
++diff --git a/select.h2 b/select.h2
++index 961c380..2a22543 100644
++--- a/select.h2
+++++ b/select.h2
++@@ -10,6 +10,4 @@
++ /* braindead BSD uses bzero in FD_ZERO but doesn't #include string.h */
++ #include <string.h>
++ 
++-extern int select();
++-
++ #endif
+diff --git a/meta-networking/recipes-support/ncp/libowfat_0.32.bb b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
+index 94f36f904a..cc67d9aefa 100644
+--- a/meta-networking/recipes-support/ncp/libowfat_0.32.bb
++++ b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
+@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+ SRC_URI = "https://www.fefe.de/${BPN}/${BP}.tar.xz \
+            file://0001-Depend-on-haveuint128.h-for-umult64.c.patch \
+            file://0001-replace-__pure__-with-compiler-attribute-pure.patch \
++           file://0001-fix-incompatible-type-error-with-gcc-15.patch \
+           "
+ SRC_URI[md5sum] = "ee015ccf45cb2bc61c942642038c2bdc"
+ SRC_URI[sha256sum] = "f4b9b3d9922dc25bc93adedf9e9ff8ddbebaf623f14c8e7a5f2301bfef7998c1"
 
