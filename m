@@ -1,206 +1,109 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DA68CC369C2
-	for <webhook@archiver.kernel.org>; Sun, 20 Apr 2025 18:58:11 +0000 (UTC)
-Received: from mail-oi1-f170.google.com (mail-oi1-f170.google.com [209.85.167.170])
- by mx.groups.io with SMTP id smtpd.web11.2047.1745175482698572976
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 64C07C369C2
+	for <webhook@archiver.kernel.org>; Sun, 20 Apr 2025 20:59:02 +0000 (UTC)
+Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
+ by mx.groups.io with SMTP id smtpd.web11.3772.1745182739189596942
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Apr 2025 11:58:02 -0700
+ Sun, 20 Apr 2025 13:58:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kP0rWkV9;
- spf=pass (domain: gmail.com, ip: 209.85.167.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f170.google.com with SMTP id 5614622812f47-4003b22c2f4so2217044b6e.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 20 Apr 2025 11:58:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ddzVw+aO;
+ spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-6ff37565232so27900167b3.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 20 Apr 2025 13:58:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745175482; x=1745780282; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=nVvG/1U65Lq6NYxtmphXNT1pw22InhlN3BjW6DigzA0=;
-        b=kP0rWkV90czVp6jvKCuEbFbiZzCdqhJMI3cdeMeii162m3jLGcl+jAYQWgvcVW+JJv
-         5pu+jSMrfao+Oi5q8pZe4a0ulQoNbGsFqfCTxJ2jD8sBQUeqQKPdqT/pACxekcL/PN7G
-         7AYy+okfC/HT6Mqtlj5nmREr8/oafpD5apsk7tpZzJxtFXMOYhwVKpWzB3+K4imdlyPT
-         2QPCM73ECabDuqplxGTK9drb7qO+kiInmCVGii3AFwGzKBCddfKgyNA1qM46rabI2nxV
-         OKqoZpnCGR8iuYIfrK/EQS+E3niLr5dYlZx1ltv2p64NAjDSKk3Pd5zsVsmsb695rKlg
-         EUBA==
+        d=gmail.com; s=20230601; t=1745182738; x=1745787538; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=CkQoNGPc9+uP7HsQjT8zVh7GeCBB3FonuxBbtatXBAk=;
+        b=ddzVw+aOrcggc4dGusCO3etVw8CFNdHHkQSyE8fkSJIHlDBP2GdT4gWOGVbyIzZrTd
+         wbSOQtlieVz9ow1l6AC9JwacVIk4sFwA1aNPR5ivc3B2k5eJpmESdtjiXLSjKBcL+UVw
+         M1o6uIXJv2WCRIos5YhBjob8i+OXYUJb0DPaYMZDFBUPpT89MjF+qJ9auREGofsuos0v
+         G0piaOx9Qw9Ilb/TXdTUW+7UMApA5xWGWRRFmD6EOkxYBQLFl9h+vaEKLrtF5QMavfNx
+         2aLICvGVB5SgLkMcjMSSsAwGY3nmBoVmAwDdgRQpWBi72kcvcaVUt6VPj5Umhmc7TDw4
+         7yeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745175482; x=1745780282;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=nVvG/1U65Lq6NYxtmphXNT1pw22InhlN3BjW6DigzA0=;
-        b=Rs0CoYQJCI+lyBVPAQrq9qDPzOnqoVEtZMUwdh8mMRBu44pRM7Rc3OHzVi2dwg0GRS
-         6N2b85B7X0EAN641fbmMqo2EJR2mMevvvc6wI5+qFaziQ02lmub3v3eN1usTP4F7M/8a
-         lqE0PuqXenhhiEoz29UDYdOuTCQLfZp4eFExe0dYjv62QNRRfy4v9XiNqGletTotbFVP
-         8zopmzrelJI7+Nrbs75n07oE5w98tXpVr0JxxWWEsdQEqHVUkwY5/q6M7Q9X7ez/ylkp
-         aNazg3Oc90xNkFRqAd3CYsSbxo89/DUQ5UFpAJSrNeo1tWfh1Zghlu1Q4Sp8QPSGxIPI
-         Ia4A==
-X-Gm-Message-State: AOJu0YwQCNhDhlYWqcGFQ542rCvHIz497+9nPqj+zdm/w/A3DFhecRvI
-	wYJxvyMXhVfF4imXYhAjpstndy8tjyNDfRKruD3R6mIatoTu2xKTpmJr5NZiIUmjewTfVYJOGR0
-	lnjdAj1hA7eXzNoT+2NErCAeDOZI=
-X-Gm-Gg: ASbGncvnQ9PLkcpw4/4IsevFTDu25ObcBQtk+l5/1CsdDtVGo+D0MJ5Z8U8m5az58v3
-	+kzqZkOfHwdqF3mjY+fs9CnT0gYJjObRK3QRS5yF8fmedS9t17Gb1K+glS6ArhJVr9EUoGa0QI1
-	yqfzg/WJBl9Sm+xENkGGXpJUTgHesk4f26UGmhXCfehqNG21Y=
-X-Google-Smtp-Source: AGHT+IE/NvK4T7B2zvu2rBag50MxvblquMMGXqUCg/tTHjeAFDeWJ95gfXv85yAOfvtplO3mgKzAJHXlSxM+fJlwfcU=
-X-Received: by 2002:a05:6808:4c08:b0:3fc:1f7b:c39f with SMTP id
- 5614622812f47-401c0a9bf48mr4266948b6e.18.1745175481798; Sun, 20 Apr 2025
- 11:58:01 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1745182738; x=1745787538;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=CkQoNGPc9+uP7HsQjT8zVh7GeCBB3FonuxBbtatXBAk=;
+        b=Z48FDrBM+513TfoETJww/se244QQzW/PSb/C0noBkVfyQEpxERg4ytMG/qwJvTLFdj
+         Xcx4+Doa9a0LctYTXLHjYwH198vq/jO+51T8gtJJRqosjhCo20/Xz0I1igo0GsS9/nsg
+         0OGb1Sx7c2djpA1CwnKoMHpCLqWaJNMutaJDoqAj+5JfeKGJYuQndkWxKv/I4h33cyOg
+         vh7oLOSBxDtfyryFEoa7VEdG694IJEl7zyx32+q0IQ0LEeMjCcaTo6Hdg0fRJfv+Xt00
+         JzTJISRUNsq08OHbqPOEgQ5ZuCklB41VkavL8/LVO4SJBJFvPTiCcmd77OhJqHSY5xgp
+         XolQ==
+X-Gm-Message-State: AOJu0YzAjXwo6Ddbk8DtV8TuVD0PacnNHvWPJNhPduAq9bk8hSUhv0gd
+	5F5NvDSMLIhC3VSgpa5dcqcwciPwYTi6N6DHWYO3wAfWwsguyWFS1cNk1BDL
+X-Gm-Gg: ASbGnctxS0xLi+ruXSAxsVO+nPWZY5UOVELPVPdvpk7ID7NAHcXWJWDQABX4KQnvG+K
+	nD9xGdlrGLRcpzW7F6LNqtNm6sjgUznYQtzN7gM7foT/KZOle0bgKm10SNr2tk2xpdrBtGBa02W
+	YStABcb/QKWIp8RkQXgX588zXVqysELngzzQHmwfZtPkQHTlPJWxXi84orkrpp039G+b110gt47
+	6PZMa6L20Rgdjm/aJefb6REF+50h+e30nLmQHUttz4z7CiSbM9YPcecoHopkteMEARW0z+8Ft2R
+	19dqf4jbDr6cIuYkI6QoA8OJNjhsLr88R2NgEeIX58k+3w==
+X-Google-Smtp-Source: AGHT+IGAAYmwddiLNaYJAJi5nKyrwpc8640GeT3Rbh1TCVbvjkP3U04y0jmBaTTI0qAe5LSQmHjryw==
+X-Received: by 2002:a05:690c:6b83:b0:6f9:97f7:a5c4 with SMTP id 00721157ae682-706ccde345cmr132519957b3.29.1745182737843;
+        Sun, 20 Apr 2025 13:58:57 -0700 (PDT)
+Received: from localhost.localdomain ([71.215.9.36])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-706ca556025sm15954567b3.94.2025.04.20.13.58.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 20 Apr 2025 13:58:57 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH] c-ares: update 1.34.4 -> 1.34.5
+Date: Sun, 20 Apr 2025 16:58:41 -0400
+Message-ID: <20250420205841.21305-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <f5a909bd-6758-4488-957d-22dd872ae45b@gmail.com>
-In-Reply-To: <f5a909bd-6758-4488-957d-22dd872ae45b@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 20 Apr 2025 11:57:35 -0700
-X-Gm-Features: ATxdqUFGSmMPOeNDIoWSZUJkUUYgawgn-ZoFUiOFsMHbWpU6SQcg6iksWwmW2_0
-Message-ID: <CAMKF1sq1gB65aqSh0yBp5TaFqJp0YoOdakt2J2VW7QFi7NC_+w@mail.gmail.com>
-Subject: Re: scarthgap merge request: April 20th
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 20 Apr 2025 18:58:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116989
+ <openembedded-devel@lists.openembedded.org>; Sun, 20 Apr 2025 20:59:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116990
 
-merged now thanks Armin
+Changelog: https://github.com/c-ares/c-ares/releases/tag/v1.34.5
 
-On Sun, Apr 20, 2025 at 10:29=E2=80=AFAM akuster808 <akuster808@gmail.com> =
-wrote:
->
-> The following changes since commit 67ad83dd7c2485dae0c90eac345007af6195b8=
-4d:
->
->    krb5: fix CVE-2025-24528 (2025-03-27 14:04:21 -0400)
->
-> are available in the Git repository at:
->
->    https://git.openembedded.org/meta-openembedded scarthgap-next
->
-> for you to fetch changes up to e92d0173a80ea7592c866618ef5293203c50544c:
->
->    lmsensors: Clean stale files for sensord to avoid incorrect GCC
-> header dependencies (2025-04-16 20:33:56 -0400)
->
-> ----------------------------------------------------------------
-> Awais Belal (1):
->        mongodb: update to 4.4.29
->
-> Divya Chellam (1):
->        openvpn: upgrade 2.6.12 -> 2.6.14
->
-> Haixiao Yan (1):
->        lmsensors: Clean stale files for sensord to avoid incorrect GCC
-> header dependencies
->
-> Khem Raj (13):
->        wolfssl: Add packageconfig for reproducible build
->        blueman: Fix buildpathe issue with cython generated code
->        botan: Make it reproducible
->        keepalived: Make build reproducible
->        ldns: Fix buildpaths QA issues
->        python3-kivy: Remove buildpaths from comments in generated C sourc=
-es
->        python3-pyproj: Fix buildpaths QA Error
->        python3-pyproj: Remove absolute paths from cython generated .c fil=
-es
->        python3-pycocotools: Remove absolute paths from comments
->        lprng: Specify target paths for needed utilities
->        fwknop: Specify target locations of gpg and wget
->        e2tools: Fix buildpaths QA warning in config.status in ptest
->        sharutils: Let POSIX_SHELL be overridable from environment
->
-> Martin Jansa (1):
->        gcab: fix buildpaths QA issue
->
-> Soumya Sambu (1):
->        php: Upgrade 8.2.26 -> 8.2.28
->
-> Wang Mingyu (3):
->        nana: Fix buildpaths warning.
->        fetchmail: Fix buildpaths warning.
->        fetchmail: disable rpath to fix buildpaths warning.
->
-> Yi Zhao (2):
->        mbedtls: upgrade 2.28.9 -> 2.28.10
->        mbedtls: 3.6.2 -> 3.6.3
->
-> alperak (4):
->        rdist: Fix contains reference to TMPDIR [buildpaths] warning
->        perfetto: Fix contains reference to TMPDIR [buildpaths] warning
->        hplip: Fix contains reference to TMPDIR [buildpaths] warning
->        boinc-client: Fix contains reference to TMPDIR [buildpaths] warnin=
-g
->
->   meta-filesystems/recipes-utils/e2tools/e2tools_git.bb           | 2 +-
->   .../blueman/0001-meson-DO-not-emit-absolute-path-when-S-B.patch | 38
-> +++++++++++++++++++++++
->   meta-networking/recipes-connectivity/blueman/blueman_2.3.5.bb   | 1 +
->   .../mbedtls/{mbedtls_2.28.9.bb =3D> mbedtls_2.28.10.bb} |  2 +-
->   .../mbedtls/{mbedtls_3.6.2.bb =3D> mbedtls_3.6.3.bb} |  7 ++---
->   meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb       | 2 +-
->   meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb   | 3 ++
->   ...1-configure.ac-Do-not-emit-compiler-flags-into-object-.patch | 29
-> ++++++++++++++++++
->   meta-networking/recipes-daemons/keepalived/keepalived_2.2.8.bb  | 5 +++
->   meta-networking/recipes-support/fetchmail/fetchmail_6.4.38.bb   | 2 +-
->   meta-networking/recipes-support/fwknop/fwknop_2.6.10.bb         | 4 ++-
->   .../openvpn/{openvpn_2.6.12.bb =3D> openvpn_2.6.14.bb} |  2 +-
->   .../mongodb/mongodb/0001-free_mon-Include-missing-cstdint.patch | 28
-> -----------------
->   .../meta-python/recipes-dbs/mongodb/mongodb_git.bb              | 7 ++-=
---
->   meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb               | 5 ++-
->   meta-oe/recipes-crypto/botan/botan_3.2.0.bb                     | 8 ++-=
---
->   meta-oe/recipes-devtools/ldns/ldns_1.8.3.bb                     | 3 +-
->   meta-oe/recipes-devtools/perfetto/perfetto.bb                   | 4 +--
->   meta-oe/recipes-devtools/php/{php_8.2.26.bb =3D> php_8.2.28.bb} |  2 +-
->   meta-oe/recipes-extended/boinc/boinc-client_7.20.5.bb           | 4 +++
->   meta-oe/recipes-extended/hplip/hplip_3.22.10.bb                 | 2 +-
->   meta-oe/recipes-extended/lprng/lprng_3.8.C.bb                   | 4 ++-
->   meta-oe/recipes-extended/nana/nana_git.bb                       | 6 +++=
-+
->   ...1-gcab-enums.c.etemplate-include-basename-instead-of-f.patch | 37
-> +++++++++++++++++++++++
->   meta-oe/recipes-gnome/gcab/gcab_1.6.bb                          | 1 +
->   ...1-libopts.m4-accept-POSIX_SHELL-from-the-environment-d.patch | 47
-> +++++++++++++++++++++++++++++
->   meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb           | 3 ++
->   meta-python/recipes-devtools/python/python3-kivy_2.3.0.bb       | 7 +++=
-++
->   .../recipes-devtools/python/python3-pycocotools_2.0.7.bb        | 4 +++
->   meta-python/recipes-devtools/python/python3-pyproj/rpath.patch  | 18
-> +++++++++++
->   meta-python/recipes-devtools/python/python3-pyproj_3.6.1.bb     | 10
-> ++++++
->   31 files changed, 243 insertions(+), 54 deletions(-)
->   create mode 100644
-> meta-networking/recipes-connectivity/blueman/blueman/0001-meson-DO-not-em=
-it-absolute-path-when-S-B.patch
->   rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_2.28.9.bb
-> =3D> mbedtls_2.28.10.bb} (98%)
->   rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_3.6.2.bb
-> =3D> mbedtls_3.6.3.bb} (91%)
->   create mode 100644
-> meta-networking/recipes-daemons/keepalived/keepalived/0001-configure.ac-D=
-o-not-emit-compiler-flags-into-object-.patch
->   rename meta-networking/recipes-support/openvpn/{openvpn_2.6.12.bb =3D>
-> openvpn_2.6.14.bb} (97%)
->   delete mode 100644
-> meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-free_=
-mon-Include-missing-cstdint.patch
->   rename meta-oe/recipes-devtools/php/{php_8.2.26.bb =3D> php_8.2.28.bb} =
-(99%)
->   create mode 100644
-> meta-oe/recipes-gnome/gcab/gcab/0001-gcab-enums.c.etemplate-include-basen=
-ame-instead-of-f.patch
->   create mode 100644
-> meta-oe/recipes-support/sharutils/sharutils/0001-libopts.m4-accept-POSIX_=
-SHELL-from-the-environment-d.patch
->   create mode 100644
-> meta-python/recipes-devtools/python/python3-pyproj/rpath.patch
->
+Security:
+
+    CVE-2025-31498. A use-after-free bug has been uncovered in read_answers() that was introduced in v1.32.3. Please see GHSA-6hxc-62jh-p29v
+
+Changes:
+
+    Restore Windows XP support. PR #958
+
+Bugfixes:
+
+    A missing mutex initialization would make busy polling for configuration changes (platforms other than Windows, Linux, MacOS) eat too much CPU PR #974
+    Pkgconfig may be generated wrong for static builds in relation to -pthread PR #965
+    Localhost resolution can fail if only one address family is in /etc/hosts PR #947
+
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
+---
+ .../c-ares/{c-ares_1.34.4.bb => c-ares_1.34.5.bb}               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/c-ares/{c-ares_1.34.4.bb => c-ares_1.34.5.bb} (91%)
+
+diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.34.4.bb b/meta-oe/recipes-support/c-ares/c-ares_1.34.5.bb
+similarity index 91%
+rename from meta-oe/recipes-support/c-ares/c-ares_1.34.4.bb
+rename to meta-oe/recipes-support/c-ares/c-ares_1.34.5.bb
+index 1fee769f25..b6945f221d 100644
+--- a/meta-oe/recipes-support/c-ares/c-ares_1.34.4.bb
++++ b/meta-oe/recipes-support/c-ares/c-ares_1.34.5.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=d3e72a10e08191f2ca1be3f3228d78f3"
+ 
+ SRC_URI = "https://github.com/c-ares/c-ares/releases/download/v${PV}/${BPN}-${PV}.tar.gz \
+            file://run-ptest"
+-SRC_URI[sha256sum] = "fa38dbed659ee4cc5a32df5e27deda575fa6852c79a72ba1af85de35a6ae222f"
++SRC_URI[sha256sum] = "7d935790e9af081c25c495fd13c2cfcda4792983418e96358ef6e7320ee06346"
+ 
+ PACKAGECONFIG ?= "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
+ PACKAGECONFIG[manpages] = ""
+-- 
+2.43.0
+
 
