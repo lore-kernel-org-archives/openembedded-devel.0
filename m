@@ -1,112 +1,79 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B914C3DA4A
-	for <webhook@archiver.kernel.org>; Mon, 21 Apr 2025 09:49:06 +0000 (UTC)
-Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
- by mx.groups.io with SMTP id smtpd.web11.11909.1745228945587827951
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 79625C369AB
+	for <webhook@archiver.kernel.org>; Mon, 21 Apr 2025 10:02:06 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.web10.12224.1745229717561702042
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Apr 2025 02:49:05 -0700
+ Mon, 21 Apr 2025 03:01:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
-Received: from fwd76.aul.t-online.de (fwd76.aul.t-online.de [10.223.144.102])
-	by mailout01.t-online.de (Postfix) with SMTP id 063EEF7
-	for <openembedded-devel@lists.openembedded.org>; Mon, 21 Apr 2025 11:48:40 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.163.37.191]) by fwd76.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1u6nlX-0UaYJZ0; Mon, 21 Apr 2025 11:48:39 +0200
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 5/9] libsdl2-net: update anb build with cmake
-Date: Mon, 21 Apr 2025 11:48:28 +0200
-Message-ID: <20250421094832.67450-5-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250421094832.67450-1-f_l_k@t-online.de>
-References: <20250421094832.67450-1-f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NvBm52mS;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-43cec5cd73bso25151705e9.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 21 Apr 2025 03:01:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1745229716; x=1745834516; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=sypEUrlfh0fT0BFDZ3EW0BnA+f3YuD2jsgS9ex0f3K8=;
+        b=NvBm52mSLtC8FpZqBhVIRhv7xinVciYQiACSofTLInjanVDnOH8XlK7ziSdBZv1PZx
+         xMumVfCQjJwvBKwCO2SXt6omigg/fSBdg697zdsq3mSW8f0qJ7FUB2bc9T7yu1RtIxzX
+         i5BkKUGSTWzNUdvjyp6uHRZ76bO/iD3zXcEXW9L9E1ovy+AUfdVq15db/F9SoqheGSTX
+         hj9bQSs+ueOzV3JPMe4M8ygUEJsCoMoMyS+o4VxnIZKry+tyurkvSL04bIo6UHGNk/Bj
+         vURyhnQIB2erhERwERXlCvb9sthEpBYZmuQnOpZ+NgJRwweQ4QzXGRNRmSDzi6U6KWD0
+         ouYA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1745229716; x=1745834516;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=sypEUrlfh0fT0BFDZ3EW0BnA+f3YuD2jsgS9ex0f3K8=;
+        b=DouzHXHT6EwZQ3CMEBwh69ZCduEI7kuWa2AUYc9PIXksFaulQOoRQwPY4KAaa0ttbI
+         vyEyT1GPPxw3gcTRWfYc5IxhN8w41KLk6I5Wv2/VQwXo0yIp+/fBS3QWl2PqevySr/86
+         51xNtIEKKYDEVcKEYbZABiqphKNjVPca8XoJk42FZSJWqrulQ2lNUCWAjTBUbuXOoOD1
+         iWNPsosQzf2mPEsUSp5ffnd71+xVKoZUfXSKr932l187N72hwrfo4Dy+ms8e1zzsozjR
+         KvVb3RB6BHk2KhBCmJAcLuaSdDpxu6lsW62UkXJpfjFOzLxx+R1bL4dOcdxiW5p0poM6
+         8CgQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWNKbj/EHY5W3Zl64b0BwkMNeExksJ9H5S1dGpHtQIfQ9yWov7HnoS4i1uqIX9omfYBwpynxTvV+R/Qh/fzwIoXbEs=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YzeBr0RMCzFDn75RiZPbQNyfH1eGeqUll4LyGNjBY9J4I7K9kZv
+	ZivKqQAtLXJvL1tvjvlfkXl42CjcSRya5zDNq2Z2F7+7JDy1VVLV
+X-Gm-Gg: ASbGncuqldsQiYivMejMhLt6b1TUg83ByhHt90XXCD30S/wwLY4Oe7wnybb+xfhKK/v
+	OXRtMLojLfG30wKdyJDHoO7PTcCPtMLtqpP81B6z7l7GshVkWoZyQHnY43Gyx++jrpALTJN401L
+	cj96v8eW+/VIQ+AviRSbMhWpNWXZbyDTYXwj1ZIWrjh6WRfKToo030pSlSUA+v7N0+tUoitnl1/
+	L/nFVSQHcA4Sq1KzKe/aMuXd4KJELD1KuBwJyt3SVVkh35krcq64JwhxNcWyWY2Ymmp4AEcAVDB
+	on2+g3yGRgbEY4xZZyngD8YGlEo2kCycbzDPklGBW2sE0uhP
+X-Google-Smtp-Source: AGHT+IGozdh9SA/dK8ZB/1onQi11AWphxDSqsrVUMEWEh1K9UgM65PNU8lTXq484FEnWHOWbWJ2/5Q==
+X-Received: by 2002:a05:600c:54f0:b0:43d:42b:e186 with SMTP id 5b1f17b1804b1-4406d84755emr65072705e9.8.1745229715686;
+        Mon, 21 Apr 2025 03:01:55 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4406d5bbc07sm129962165e9.17.2025.04.21.03.01.54
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 21 Apr 2025 03:01:54 -0700 (PDT)
+Message-ID: <d6ec3752-cf25-4851-83c1-631de9c4ea15@gmail.com>
+Date: Mon, 21 Apr 2025 12:01:54 +0200
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1745228919-48FF694A-8F915CBC/0/0 CLEAN NORMAL
-X-TOI-MSGID: 9ef9a120-873b-4499-ab25-adeef39e52ad
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH 1/9] libxmp: add recipe
+To: f_l_k@t-online.de, openembedded-devel@lists.openembedded.org
+References: <20250421094832.67450-1-f_l_k@t-online.de>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20250421094832.67450-1-f_l_k@t-online.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Apr 2025 09:49:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116999
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Apr 2025 10:02:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117000
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../libsdl/libsdl2-net_2.0.1.bb               | 26 -------------------
- .../libsdl/libsdl2-net_2.2.0.bb               | 17 ++++++++++++
- 2 files changed, 17 insertions(+), 26 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/libsdl/libsdl2-net_2.0.1.bb
- create mode 100644 meta-oe/recipes-graphics/libsdl/libsdl2-net_2.2.0.bb
 
-diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-net_2.0.1.bb b/meta-=
-oe/recipes-graphics/libsdl/libsdl2-net_2.0.1.bb
-deleted file mode 100644
-index d1f8905769..0000000000
---- a/meta-oe/recipes-graphics/libsdl/libsdl2-net_2.0.1.bb
-+++ /dev/null
-@@ -1,26 +0,0 @@
--DESCRIPTION =3D "Simple DirectMedia Layer networking library."
--SECTION =3D "libs/network"
--LICENSE =3D "Zlib"
--LIC_FILES_CHKSUM =3D "file://COPYING.txt;md5=3Dfe9d52a78585a652247768755=
-10ed127"
--
--SRC_URI =3D " \
--  https://www.libsdl.org/projects/SDL_net/release/SDL2_net-${PV}.tar.gz =
-\
--"
--S =3D "${WORKDIR}/SDL2_net-${PV}"
--
--inherit autotools pkgconfig
--
--DEPENDS =3D "libsdl2"
--
--SRC_URI[sha256sum] =3D "15ce8a7e5a23dafe8177c8df6e6c79b6749a03fff1e81967=
-42d3571657609d21"
--
--do_configure:prepend() {
--    # create dummy files which autotools consider as mandatory
--    touch ${S}/NEWS ${S}/README ${S}/AUTHORS ${S}/ChangeLog =20
--
--    # Remove old libtool macros.
--    for macro in libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 ltver=
-sion.m4; do
--        echo ${S}/acinclude/macro
--        rm -f ${S}/acinclude/$macro
--    done
--}
-diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-net_2.2.0.bb b/meta-=
-oe/recipes-graphics/libsdl/libsdl2-net_2.2.0.bb
-new file mode 100644
-index 0000000000..25a7dad86b
---- /dev/null
-+++ b/meta-oe/recipes-graphics/libsdl/libsdl2-net_2.2.0.bb
-@@ -0,0 +1,17 @@
-+DESCRIPTION =3D "Simple DirectMedia Layer networking library."
-+SECTION =3D "libs/network"
-+LICENSE =3D "Zlib"
-+LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D68a088513da90254b2fbe664f=
-42af315"
-+
-+SRC_URI =3D " \
-+  https://www.libsdl.org/projects/SDL_net/release/SDL2_net-${PV}.tar.gz =
-\
-+"
-+S =3D "${WORKDIR}/SDL2_net-${PV}"
-+
-+inherit cmake pkgconfig
-+
-+DEPENDS =3D "libsdl2"
-+
-+SRC_URI[sha256sum] =3D "4e4a891988316271974ff4e9585ed1ef729a123d22c08bd4=
-73129179dc857feb"
-+
-+FILES:${PN} +=3D "${datadir}/licenses"
---=20
-2.49.0
-
+On 4/21/25 11:48, Markus Volk via lists.openembedded.org wrote:
+> +LICENSE = "LGPL-2.1-only"
+> +LIC_FILES_CHKSUM = "file://README;beginline=59;md5=ea030bd80f99071b0d3f9a9f752d1ca8"
+Is that correct as it is? That README;beginline=59 seems to be a
+standard MIT license.
 
