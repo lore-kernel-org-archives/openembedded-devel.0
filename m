@@ -1,135 +1,96 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <ariel.dalessandro@collabora.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2066C369C2
-	for <webhook@archiver.kernel.org>; Mon, 21 Apr 2025 11:13:56 +0000 (UTC)
-Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
- by mx.groups.io with SMTP id smtpd.web11.12891.1745234028829100558
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5A57C369AB
+	for <webhook@archiver.kernel.org>; Mon, 21 Apr 2025 14:21:57 +0000 (UTC)
+Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com [136.143.188.12])
+ by mx.groups.io with SMTP id smtpd.web11.16133.1745245313158502297
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Apr 2025 04:13:49 -0700
+ Mon, 21 Apr 2025 07:21:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
-Received: from fwd84.aul.t-online.de (fwd84.aul.t-online.de [10.223.144.110])
-	by mailout04.t-online.de (Postfix) with SMTP id 906C62F3
-	for <openembedded-devel@lists.openembedded.org>; Mon, 21 Apr 2025 13:13:39 +0200 (CEST)
-Received: from [192.168.178.20] ([84.163.37.191]) by fwd84.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1u6p5m-0wgqBs0; Mon, 21 Apr 2025 13:13:38 +0200
-Date: Mon, 21 Apr 2025 13:13:33 +0200
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-oe][PATCHv2] libxmp: add recipe
-To: openembedded-devel@lists.openembedded.org
-Message-Id: <L6F2VS.N31U5SFWBN7A1@t-online.de>
-In-Reply-To: <183850994EF46D4A.21966@lists.openembedded.org>
-References: <183850994EF46D4A.21966@lists.openembedded.org>
-X-Mailer: geary/46.0
+ dkim=fail reason="dkim: signature did not verify: crypto/rsa: verification error" header.i=ariel.dalessandro@collabora.com header.s=zohomail header.b=I/PB3KYB;
+ spf=pass (domain: collabora.com, ip: 136.143.188.12, mailfrom: ariel.dalessandro@collabora.com)
+ARC-Seal: i=1; a=rsa-sha256; t=1745245310; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=n0nod2lGNQJj6sf6NPGU+f9YuDlhA2C4DyFZYYGbA9BW/mAH2vq3517vFsDAyb5TZu577L5wFjq0CUTNUwWdibovfZn/gVKTxofYW97dXWOGQVoLb9FUC+L9bQvNfeF5rK+PZT33X145ea6eIJRZvT0e3mveotntFD5Bva9adtQ=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1745245310; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=J1jFgfog2DUROX7/o8Xv7KTnS0bkbGP3Onhc+d2cuyQ=; 
+	b=D74Z4gUV71HZyGcrscW1gL17E2O7Qnzqmk5UGW96kpDbNIH4GFbexhK9rQpnyN1EONj1ole72Q1hq/aNIlHccROLO7fcqKZ4BXsOz70n7KBj/MEwPWfy+zE3pidNwLflc5CA8yT8CsNy6a9zD4wSGFEwD52CMISx4ZtLP2Z8QMw=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=collabora.com;
+	spf=pass  smtp.mailfrom=ariel.dalessandro@collabora.com;
+	dmarc=pass header.from=<ariel.dalessandro@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1745245310;
+	s=zohomail; d=collabora.com; i=ariel.dalessandro@collabora.com;
+	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=J1jFgfog2DUROX7/o8Xv7KTnS0bkbGP3Onhc+d2cuyQ=;
+	b=I/PB3KYBNOKph3DKMApiCuncgwBFzZkvhBZgIV9xE9JTyJK7Yi9VbtuVqwvC52iM
+	R4iD03hm697gHum644nR8NVutk2N1MCqbR/jgjJRxV8B8N97mAr+gAJBBT6SZU3+A8i
+	kwUS0Sq9pP2xi41/OOcBI12WByAyQ+mOd3Ia0RPc=
+Received: by mx.zohomail.com with SMTPS id 174524530795852.86719163603959;
+	Mon, 21 Apr 2025 07:21:47 -0700 (PDT)
+Message-ID: <ad394b95-4f2d-46e9-9a09-fd8837f2fefc@collabora.com>
+Date: Mon, 21 Apr 2025 11:21:44 -0300
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-1KgP+c44Ax7/KgxFEqCq"
-X-TOI-EXPURGATEID: 150726::1745234018-A9FF8A64-1097CD9B/10/3626336762 SUSPECT URL
-X-TOI-MSGID: 9d3ccd89-735f-4e73-ad96-761cdd4cd345
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-multimedia] pipewire: Install missing ALSA config
+ files
+To: openembedded-devel@lists.openembedded.org, akuster808@gmail.com
+Cc: raj.khem@gmail.com, schnitzeltony@gmail.com
+References: <1831E745EF300249.1841@lists.openembedded.org>
+Content-Language: en-US
+From: Ariel D'Alessandro <ariel.dalessandro@collabora.com>
+In-Reply-To: <1831E745EF300249.1841@lists.openembedded.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ZohoMailClient: External
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Apr 2025 11:13:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117006
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Apr 2025 14:21:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117007
 
---=-1KgP+c44Ax7/KgxFEqCq
-Content-Type: text/plain; charset=us-ascii; format=flowed
+Armin,
 
-v2: fix license
+Could you take a look at this?
 
-On Mon, Apr 21 2025 at 13:04:21 +02:00:00, Markus Volk 
-<f_l_k@t-online.de> wrote:
-> libxmp is a requirement for libsdl2-mixer
+Thanks,
+
+On 3/31/25 10:46 AM, Ariel D'Alessandro via lists.openembedded.org wrote:
+> Hi,
 > 
-> Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
-> ---
->  meta-oe/recipes-multimedia/libxmp/libxmp_4.6.2.bb | 11 +++++++++++
->  1 file changed, 11 insertions(+)
->  create mode 100644 meta-oe/recipes-multimedia/libxmp/libxmp_4.6.2.bb
+> This is a request to backport commit [0] to previous releases, mainly to 
+> scarthgap.
 > 
-> diff --git a/meta-oe/recipes-multimedia/libxmp/libxmp_4.6.2.bb 
-> b/meta-oe/recipes-multimedia/libxmp/libxmp_4.6.2.bb
-> new file mode 100644
-> index 0000000000..e4cc5c93b9
-> --- /dev/null
-> +++ b/meta-oe/recipes-multimedia/libxmp/libxmp_4.6.2.bb
-> @@ -0,0 +1,11 @@
-> +SUMMARY = "Extended Module Player Library"
-> +HOMEPAGE = "<http://xmp.sourceforge.net/>"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = 
-> "file://README;beginline=59;md5=ea030bd80f99071b0d3f9a9f752d1ca8" 
-> <file://readme;beginline=59;md5=ea030bd80f99071b0d3f9a9f752d1ca8/>
-> +
-> +inherit cmake pkgconfig
-> +
-> +SRC_URI = 
-> "git://github.com/libxmp/libxmp.git;protocol=https;branch=master"
-> +SRCREV = "828ef357943e1fbb13910e7a6fca21987c5c5827"
-> +
-> +S = "${WORKDIR}/git"
-> --
-> 2.49.0
+> Details can be found in the related commit log and pull request [1]. 
+> This fixes issue [2].
+> 
+> Thanks in advance!
+> 
+> [0] https://github.com/openembedded/meta-openembedded/ 
+> commit/134978803ec5f4e4ae5c1d3311896ccd52827851
+> [1] https://github.com/openembedded/meta-openembedded/pull/949
+> [2] https://github.com/openembedded/meta-openembedded/issues/704
+> 
 > 
 > 
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#117005): 
-> <https://lists.openembedded.org/g/openembedded-devel/message/117005>
-> Mute This Topic: <https://lists.openembedded.org/mt/112373119/3618223>
-> Group Owner: openembedded-devel+owner@lists.openembedded.org 
-> <mailto:openembedded-devel+owner@lists.openembedded.org>
-> Unsubscribe: 
-> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
-> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
+> View/Reply Online (#116432): https://lists.openembedded.org/g/openembedded-devel/message/116432
+> Mute This Topic: https://lists.openembedded.org/mt/112004143/9033375
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [ariel.dalessandro@collabora.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
 > 
 
+-- 
+Ariel D'Alessandro
+Software Engineer
 
---=-1KgP+c44Ax7/KgxFEqCq
-Content-Type: text/html; charset=us-ascii
-
-<div id="geary-body" dir="auto"><div>v2: fix license&nbsp;</div></div><div id="geary-quote" dir="auto"><br>On Mon, Apr 21 2025 at 13:04:21 +02:00:00, Markus Volk &lt;f_l_k@t-online.de&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">libxmp is a requirement for libsdl2-mixer
-
-Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
----
- meta-oe/recipes-multimedia/libxmp/libxmp_4.6.2.bb | 11 +++++++++++
- 1 file changed, 11 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/libxmp/libxmp_4.6.2.bb
-
-diff --git a/meta-oe/recipes-multimedia/libxmp/libxmp_4.6.2.bb b/meta-oe/recipes-multimedia/libxmp/libxmp_4.6.2.bb
-new file mode 100644
-index 0000000000..e4cc5c93b9
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/libxmp/libxmp_4.6.2.bb
-@@ -0,0 +1,11 @@
-+SUMMARY = "Extended Module Player Library"
-+HOMEPAGE = "<a href="http://xmp.sourceforge.net/">http://xmp.sourceforge.net/</a>"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "<a href="file://README;beginline=59;md5=ea030bd80f99071b0d3f9a9f752d1ca8" "="">file://README;beginline=59;md5=ea030bd80f99071b0d3f9a9f752d1ca8"</a>
-+
-+inherit cmake pkgconfig
-+
-+SRC_URI = "git://github.com/libxmp/libxmp.git;protocol=https;branch=master"
-+SRCREV = "828ef357943e1fbb13910e7a6fca21987c5c5827"
-+
-+S = "${WORKDIR}/git"
-<div>-- 
-</div>2.49.0
-
-</div><div class="plaintext" style="white-space: break-spaces;">
--=-=-=-=-=-=-=-=-=-=-=-
-Links: You receive all messages sent to this group.
-View/Reply Online (#117005): <a href="https://lists.openembedded.org/g/openembedded-devel/message/117005">https://lists.openembedded.org/g/openembedded-devel/message/117005</a>
-Mute This Topic: <a href="https://lists.openembedded.org/mt/112373119/3618223">https://lists.openembedded.org/mt/112373119/3618223</a>
-Group Owner: <a href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
--=-=-=-=-=-=-=-=-=-=-=-
-
-</div></blockquote></div>
---=-1KgP+c44Ax7/KgxFEqCq--
+Collabora Ltd.
+Platinum Building, St John's Innovation Park, Cambridge CB4 0DS, UK 
+Registered in England & Wales, no. 5513718
 
 
