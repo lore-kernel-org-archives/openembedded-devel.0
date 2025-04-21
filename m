@@ -1,109 +1,67 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 64C07C369C2
-	for <webhook@archiver.kernel.org>; Sun, 20 Apr 2025 20:59:02 +0000 (UTC)
-Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
- by mx.groups.io with SMTP id smtpd.web11.3772.1745182739189596942
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 35E86C369D3
+	for <webhook@archiver.kernel.org>; Mon, 21 Apr 2025 09:48:46 +0000 (UTC)
+Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
+ by mx.groups.io with SMTP id smtpd.web10.12039.1745228922201832749
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Apr 2025 13:58:59 -0700
+ Mon, 21 Apr 2025 02:48:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ddzVw+aO;
- spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-6ff37565232so27900167b3.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 20 Apr 2025 13:58:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745182738; x=1745787538; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=CkQoNGPc9+uP7HsQjT8zVh7GeCBB3FonuxBbtatXBAk=;
-        b=ddzVw+aOrcggc4dGusCO3etVw8CFNdHHkQSyE8fkSJIHlDBP2GdT4gWOGVbyIzZrTd
-         wbSOQtlieVz9ow1l6AC9JwacVIk4sFwA1aNPR5ivc3B2k5eJpmESdtjiXLSjKBcL+UVw
-         M1o6uIXJv2WCRIos5YhBjob8i+OXYUJb0DPaYMZDFBUPpT89MjF+qJ9auREGofsuos0v
-         G0piaOx9Qw9Ilb/TXdTUW+7UMApA5xWGWRRFmD6EOkxYBQLFl9h+vaEKLrtF5QMavfNx
-         2aLICvGVB5SgLkMcjMSSsAwGY3nmBoVmAwDdgRQpWBi72kcvcaVUt6VPj5Umhmc7TDw4
-         7yeg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745182738; x=1745787538;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=CkQoNGPc9+uP7HsQjT8zVh7GeCBB3FonuxBbtatXBAk=;
-        b=Z48FDrBM+513TfoETJww/se244QQzW/PSb/C0noBkVfyQEpxERg4ytMG/qwJvTLFdj
-         Xcx4+Doa9a0LctYTXLHjYwH198vq/jO+51T8gtJJRqosjhCo20/Xz0I1igo0GsS9/nsg
-         0OGb1Sx7c2djpA1CwnKoMHpCLqWaJNMutaJDoqAj+5JfeKGJYuQndkWxKv/I4h33cyOg
-         vh7oLOSBxDtfyryFEoa7VEdG694IJEl7zyx32+q0IQ0LEeMjCcaTo6Hdg0fRJfv+Xt00
-         JzTJISRUNsq08OHbqPOEgQ5ZuCklB41VkavL8/LVO4SJBJFvPTiCcmd77OhJqHSY5xgp
-         XolQ==
-X-Gm-Message-State: AOJu0YzAjXwo6Ddbk8DtV8TuVD0PacnNHvWPJNhPduAq9bk8hSUhv0gd
-	5F5NvDSMLIhC3VSgpa5dcqcwciPwYTi6N6DHWYO3wAfWwsguyWFS1cNk1BDL
-X-Gm-Gg: ASbGnctxS0xLi+ruXSAxsVO+nPWZY5UOVELPVPdvpk7ID7NAHcXWJWDQABX4KQnvG+K
-	nD9xGdlrGLRcpzW7F6LNqtNm6sjgUznYQtzN7gM7foT/KZOle0bgKm10SNr2tk2xpdrBtGBa02W
-	YStABcb/QKWIp8RkQXgX588zXVqysELngzzQHmwfZtPkQHTlPJWxXi84orkrpp039G+b110gt47
-	6PZMa6L20Rgdjm/aJefb6REF+50h+e30nLmQHUttz4z7CiSbM9YPcecoHopkteMEARW0z+8Ft2R
-	19dqf4jbDr6cIuYkI6QoA8OJNjhsLr88R2NgEeIX58k+3w==
-X-Google-Smtp-Source: AGHT+IGAAYmwddiLNaYJAJi5nKyrwpc8640GeT3Rbh1TCVbvjkP3U04y0jmBaTTI0qAe5LSQmHjryw==
-X-Received: by 2002:a05:690c:6b83:b0:6f9:97f7:a5c4 with SMTP id 00721157ae682-706ccde345cmr132519957b3.29.1745182737843;
-        Sun, 20 Apr 2025 13:58:57 -0700 (PDT)
-Received: from localhost.localdomain ([71.215.9.36])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-706ca556025sm15954567b3.94.2025.04.20.13.58.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 20 Apr 2025 13:58:57 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
+Received: from fwd76.aul.t-online.de (fwd76.aul.t-online.de [10.223.144.102])
+	by mailout06.t-online.de (Postfix) with SMTP id 8F0ED565
+	for <openembedded-devel@lists.openembedded.org>; Mon, 21 Apr 2025 11:48:40 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.163.37.191]) by fwd76.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1u6nlX-0UaYJc0; Mon, 21 Apr 2025 11:48:40 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] c-ares: update 1.34.4 -> 1.34.5
-Date: Sun, 20 Apr 2025 16:58:41 -0400
-Message-ID: <20250420205841.21305-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Subject: [meta-oe][PATCH 8/9] libsdl2-compat: make mutually exclusive with libsdl2
+Date: Mon, 21 Apr 2025 11:48:31 +0200
+Message-ID: <20250421094832.67450-8-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250421094832.67450-1-f_l_k@t-online.de>
+References: <20250421094832.67450-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1745228920-E7FFC94A-02E533CD/0/0 CLEAN NORMAL
+X-TOI-MSGID: 6d05991e-a4b0-4e04-ba7c-8cd53854818e
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 20 Apr 2025 20:59:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116990
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Apr 2025 09:48:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/116995
 
-Changelog: https://github.com/c-ares/c-ares/releases/tag/v1.34.5
+libsdl2 and libsdl2-compat share the same headers.
+Therefore, using one or the other is an either-or decision
 
-Security:
-
-    CVE-2025-31498. A use-after-free bug has been uncovered in read_answers() that was introduced in v1.32.3. Please see GHSA-6hxc-62jh-p29v
-
-Changes:
-
-    Restore Windows XP support. PR #958
-
-Bugfixes:
-
-    A missing mutex initialization would make busy polling for configuration changes (platforms other than Windows, Linux, MacOS) eat too much CPU PR #974
-    Pkgconfig may be generated wrong for static builds in relation to -pthread PR #965
-    Localhost resolution can fail if only one address family is in /etc/hosts PR #947
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../c-ares/{c-ares_1.34.4.bb => c-ares_1.34.5.bb}               | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/c-ares/{c-ares_1.34.4.bb => c-ares_1.34.5.bb} (91%)
+ meta-oe/recipes-graphics/libsdl3/libsdl2-compat_2.32.52.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.34.4.bb b/meta-oe/recipes-support/c-ares/c-ares_1.34.5.bb
-similarity index 91%
-rename from meta-oe/recipes-support/c-ares/c-ares_1.34.4.bb
-rename to meta-oe/recipes-support/c-ares/c-ares_1.34.5.bb
-index 1fee769f25..b6945f221d 100644
---- a/meta-oe/recipes-support/c-ares/c-ares_1.34.4.bb
-+++ b/meta-oe/recipes-support/c-ares/c-ares_1.34.5.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=d3e72a10e08191f2ca1be3f3228d78f3"
- 
- SRC_URI = "https://github.com/c-ares/c-ares/releases/download/v${PV}/${BPN}-${PV}.tar.gz \
-            file://run-ptest"
--SRC_URI[sha256sum] = "fa38dbed659ee4cc5a32df5e27deda575fa6852c79a72ba1af85de35a6ae222f"
-+SRC_URI[sha256sum] = "7d935790e9af081c25c495fd13c2cfcda4792983418e96358ef6e7320ee06346"
- 
- PACKAGECONFIG ?= "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
- PACKAGECONFIG[manpages] = ""
--- 
-2.43.0
+diff --git a/meta-oe/recipes-graphics/libsdl3/libsdl2-compat_2.32.52.bb b=
+/meta-oe/recipes-graphics/libsdl3/libsdl2-compat_2.32.52.bb
+index de47f174b1..80334e9ad8 100644
+--- a/meta-oe/recipes-graphics/libsdl3/libsdl2-compat_2.32.52.bb
++++ b/meta-oe/recipes-graphics/libsdl3/libsdl2-compat_2.32.52.bb
+@@ -16,8 +16,13 @@ S =3D "${WORKDIR}/sdl2-compat-${PV}"
+=20
+ DEPENDS +=3D "libsdl3"
+=20
++PROVIDES =3D "libsdl2"
++
+ inherit cmake pkgconfig upstream-version-is-even features_check
+=20
+ REQUIRED_DISTRO_FEATURES =3D "opengl x11"
+=20
+ FILES:${PN} +=3D "${datadir}/licenses"
++
++RCONFLICTS:${PN} =3D "libsdl2"
++RPROVIDES:${PN} =3D "libsdl2"
+--=20
+2.49.0
 
 
