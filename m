@@ -2,62 +2,62 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 21BB9C369D7
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22BBFC369DC
 	for <webhook@archiver.kernel.org>; Tue, 22 Apr 2025 17:57:58 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.web11.46957.1745344674427217517
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.web11.46956.1745344673556845601
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Apr 2025 10:57:54 -0700
+ Tue, 22 Apr 2025 10:57:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=J0F89MCm;
- spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-43ede096d73so40626215e9.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 22 Apr 2025 10:57:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=KVZSwtsN;
+ spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-39c1ef4acf2so3523038f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 22 Apr 2025 10:57:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745344673; x=1745949473; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1745344672; x=1745949472; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=cXKAqkqnSHTX73OC5Uo1hceRrxC8w7OQiev8FNWPFwc=;
-        b=J0F89MCmAhesziv0woQA31vdadddxNwjwVpR81bRHLfsSuDshRo54QJmeJMHwCXm3n
-         gTTH35luVw0VCYCpujMsltLoIiYBohFhFcWBkGtaZcp+E+FLHkvaa1DTSbDSJaTz6oVT
-         cQBK97qA/R3b76Kxm3lwLhKhYcJZ/i6R80ziLvFZYY04fQ+rq+xO5G1cJZCULoChMpsI
-         e/15DdMV/371dU3WsUpsgqrUf0Ch9Oey6M/MimX70KSXaV76vN+VLESBbP3g+znxFZmJ
-         Eb3Cp7VGeKp0Mfw2DlyuvC6wfbegfhSneuXwSDoLjXE+il1hFSRHDCVv7hdWqFY0my0M
-         a8ew==
+        bh=RE/0MC/RMznhA0WUbIReppo7WMHpOEobxfOtP0pSwQ0=;
+        b=KVZSwtsNBxUzKYkXY4i1/0B/2MNpolKti1/nKpBQ4g8n91n+Fi6YorE9KrEwpjtiYD
+         6rdvH9fUZD8HecNQ83BuySi1o9zbehlQXtbOqm2YL0VRECKDzc6cYIrP+C+p2ygRsyGx
+         riL3tnpyOCubZy5BB0/0ofxD5dQ3z/jJUijgTqFdS0LEZ07T3o9feBqxo1uMGThR5aio
+         zCaafQtuk33mDFhR2ogkKgqLuAf+HqVWEdprDVGlNG9FeoXqrBgWXx0DdL9kpxrph5bG
+         lsiSTDdu299Y9nKsDONxWM80t2BQp9E+2yERAcsuDux37LENkUna2ONufJXG3RZJZNLv
+         slcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745344673; x=1745949473;
+        d=1e100.net; s=20230601; t=1745344672; x=1745949472;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=cXKAqkqnSHTX73OC5Uo1hceRrxC8w7OQiev8FNWPFwc=;
-        b=ENn4fl8wUPH0khpIsLW8itMSJLkIkc7eM5OxAm4cZruyl8jJx0LSgavNqzHAbU+m7M
-         5aKJJ7xUvZtJDdSMENeLRHtxMz00m48LMhCXydIAb7DFEEyLwXBflrDX9c6epWxcWx3H
-         43mRGNx9GI0ebyi1WWa59Qh0miJAVdcZh/+pOFqWZrSqy/Hlq3lqMtULD3Z5DnGAG1Sr
-         ReuBNpXB1KSs97Ye1HSJxY9fdeaczD4eqEQFGU1s1iYTu+gWHDBgRL/pYPLPz0DgD/UF
-         Gsdj6OSrY4KfDvNepqJdz8QrToKLAM0iuU2lcnHi5cKFRxdVOaLGWJc1FOFzVC8zWitM
-         lBwQ==
-X-Gm-Message-State: AOJu0YxTamPmgqXhSPioqG4P9MKKM/IPcMM7WnTziP1rJdNAYnZKPB+L
-	f66k4MOeUN6VNtL6SFW6ylPaUP7E6eC1au577rDACxcikN9Djl7dblL9h0JD
-X-Gm-Gg: ASbGncvQFpR0Q0088v2yVRKaxpe6b68rdtlwGTWmvDEMSlqWEFziNVEEcj6O/ppPuDE
-	q25ZIwpV5Zg6liQLZurRyzKqQIhGyTl7I1xog1uJ4829Mk23/Te6EEFWMeV3iw7AvsoRTYngxKH
-	RejOiyK7ZOj9GixxvJCKJgJVivMaRltVXoS7Ox5ynRUcvxoF7X3gcbyzs79OQxBK0gxV8Lox3oR
-	oG7iJVodA/Ce51AdwRiqs2pSAj+0LgeDuNAzO7lKZkSiTwItArBN9Q4cSo/gRKUJJ58gXh3gzf6
-	KNWz25hCnDTobwTHDUFoG8Q/gYGlIJCvd261o7QLAwYfQOniHN5bjpJ7shAICbHMDl1DTYu5zg=
+        bh=RE/0MC/RMznhA0WUbIReppo7WMHpOEobxfOtP0pSwQ0=;
+        b=IooejKw2lXNGCI5k3R4cvdTpnKqII2hkbNM4ZyOzLBkxfASwOSG70eEHe+4L+/+dTi
+         HlNKXtb+ngu1vi257p4ByP5QCr22XnzjeCHXlxn3ougAOGWV9TWCVz4jp27mrjFVsl0N
+         BoI1oiy+2nzdJQfShVWw5vRRlHOmb4+4aEFdV2holFXZRj+1IGz3C0hFVq5UwaVzDf9V
+         rnLyonVXNkLpgLnu6ZUZ1Y1aM8/J9ZJQQYSwEpWQ70RtFDCL2Qp64MzVQRQ3g0+/7Boj
+         XTAKrN9xpdNBQUmYUYRGCuEkAGpcCdtYc7nT0P5//KbyH7tgJUkRnfKxR1GAKgG4V6d5
+         T5zQ==
+X-Gm-Message-State: AOJu0Yz0hinatFdG1HiZNIHLO8+Y3hFC7MAtDz0WMspjZxyrslCGyjC+
+	mA6kbaabyZq1k8Hw/nRzYZjzXr+Fbpf3AFbkNNLqqBz9c5FStoLpIybILDJd
+X-Gm-Gg: ASbGncseEABXugu5mCESaS8gfaQ0olQ7ClY4cwWivDoN26pKqPy3DuZyJbgAxabx8uh
+	HzxOAwzU4RkazgnT3A6+JpnIjqQ0xNGLDhQOT8cZFDCllrpT4TaVAY3drrgfySEOjLT8YPtdgDY
+	PfjX30A+s0iYW5S7MpNFmA+QIZw8HILCogkKe0ZtJ4ZEpdlkdsh+hFj41r5i+nwvFjVsOXe8KfM
+	L+ufmg6tXoRi7wURHZuW60mmRG0eHhTVSvZbazNVZgO/N0XBirzDQENuUOgq2sg0hC8QsCZr8Wz
+	hvxegqgc/hT0k+EAigKFSMNYuzVAzY77VAHTnr/Sp6XVoHjxZKB9Hx7rSFH/61mV4pQRR20q8A=
 	=
-X-Google-Smtp-Source: AGHT+IEJwE7XeSP7gIX+Nwf7BfhXyoN+Hv/96PDDPe/tEjJeZRABidm4arX2gzZzWDwfZKeS70Pa7Q==
-X-Received: by 2002:a05:600c:54c2:b0:43d:77c5:9c1a with SMTP id 5b1f17b1804b1-4406b928b57mr118223175e9.4.1745344672604;
-        Tue, 22 Apr 2025 10:57:52 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE4+klFwbxDtSATI5AKGsvJOkRBtQ+B83lVuvZtlR+Mx26eR55nTVBYGxs8HDjWUbLBYaHTRQ==
+X-Received: by 2002:a05:6000:2510:b0:391:2306:5131 with SMTP id ffacd0b85a97d-39efbace660mr12887603f8f.45.1745344671751;
+        Tue, 22 Apr 2025 10:57:51 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4406d5a9dbesm183081515e9.7.2025.04.22.10.57.52
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-39efa43be53sm15740293f8f.41.2025.04.22.10.57.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Apr 2025 10:57:52 -0700 (PDT)
+        Tue, 22 Apr 2025 10:57:51 -0700 (PDT)
 From: martin.jansa@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH 6/6] psqlodbc: fix build with gcc-15
-Date: Tue, 22 Apr 2025 19:57:42 +0200
-Message-ID: <20250422175742.786560-6-martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH 5/6] cups-filters: use 4 spaces for indentation
+Date: Tue, 22 Apr 2025 19:57:41 +0200
+Message-ID: <20250422175742.786560-5-martin.jansa@gmail.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250422175742.786560-1-martin.jansa@gmail.com>
 References: <20250422175742.786560-1-martin.jansa@gmail.com>
@@ -67,102 +67,45 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 22 Apr 2025 17:57:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117066
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117065
 
 From: Martin Jansa <martin.jansa@gmail.com>
 
-configure: make sure to call AC_CHECK_HEADER_STDBOOL before using ac_cv_sizeof_bool
-
-It was called after this conditional, so PG_USE_STDBOOL wasn't set
-even when it should be as shown in at the end of config.log:
-
-  ac_cv_header_stdbool_h=yes
-  ac_cv_sizeof_bool=1
-  ac_cv_type__Bool=yes
-  #define SIZEOF_BOOL 1
-  #define HAVE__BOOL 1
-  #define HAVE_STDBOOL_H 1
-
-* fixes:
-  https://github.com/postgresql-interfaces/psqlodbc/issues/110
-  https://github.com/postgresql-interfaces/psqlodbc/issues/94
-
-http://errors.yoctoproject.org/Errors/Details/852841/
-
-In file included from ../psqlodbc-16.00.0000/environ.h:16,
-                 from ../psqlodbc-16.00.0000/environ.c:16:
-../psqlodbc-16.00.0000/psqlodbc.h:264:23: error: 'bool' cannot be defined via 'typedef'
-  264 | typedef unsigned char bool;
-      |                       ^~~~
-
 Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- ...sure-to-call-AC_CHECK_HEADER_STDBOOL.patch | 45 +++++++++++++++++++
- .../psqlodbc/psqlodbc_16.00.0000.bb           |  1 +
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/psqlodbc/files/0001-configure-make-sure-to-call-AC_CHECK_HEADER_STDBOOL.patch
+ .../recipes-printing/cups/cups-filters_2.0.0.bb    | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/meta-oe/recipes-dbs/psqlodbc/files/0001-configure-make-sure-to-call-AC_CHECK_HEADER_STDBOOL.patch b/meta-oe/recipes-dbs/psqlodbc/files/0001-configure-make-sure-to-call-AC_CHECK_HEADER_STDBOOL.patch
-new file mode 100644
-index 0000000000..9cc5ad9b86
---- /dev/null
-+++ b/meta-oe/recipes-dbs/psqlodbc/files/0001-configure-make-sure-to-call-AC_CHECK_HEADER_STDBOOL.patch
-@@ -0,0 +1,45 @@
-+From 5bfa9f1cd0523a0cad70cacf5ecf8c1aeb06c4d0 Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <martin.jansa@gmail.com>
-+Date: Tue, 22 Apr 2025 17:47:02 +0000
-+Subject: [PATCH] configure: make sure to call AC_CHECK_HEADER_STDBOOL
-+
-+before using ac_cv_sizeof_bool
-+
-+It was called after this conditional, so PG_USE_STDBOOL wasn't set
-+even when it should be as shown in at the end of config.log:
-+
-+  ac_cv_header_stdbool_h=yes
-+  ac_cv_sizeof_bool=1
-+  ac_cv_type__Bool=yes
-+  #define SIZEOF_BOOL 1
-+  #define HAVE__BOOL 1
-+  #define HAVE_STDBOOL_H 1
-+
-+* fixes:
-+  https://github.com/postgresql-interfaces/psqlodbc/issues/110
-+  https://github.com/postgresql-interfaces/psqlodbc/issues/94
-+
-+Upstream-Status: Submitted [https://github.com/postgresql-interfaces/psqlodbc/pull/112]
-+
-+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-+---
-+ configure.ac | 4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index f35c825..ea363ca 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -28,9 +28,11 @@ AC_CHECK_SIZEOF([bool], [],
-+ #include <stdbool.h>
-+ #endif])
-+ 
-++AC_CHECK_HEADER_STDBOOL()
-++
-+ dnl We use <stdbool.h> if we have it and it declares type bool as having
-+ dnl size 1.  Otherwise, c.h will fall back to declaring bool as unsigned char.
-+-if test "$ac_cv_header_stdbool_h" = yes -a "$ac_cv_sizeof_bool" = 1; then
-++if test "$ac_cv_header_stdbool_h" = yes && test "$ac_cv_sizeof_bool" = 1; then
-+   AC_DEFINE([PG_USE_STDBOOL], 1,
-+             [Define to 1 to use <stdbool.h> to define type bool.])
-+ fi
-diff --git a/meta-oe/recipes-dbs/psqlodbc/psqlodbc_16.00.0000.bb b/meta-oe/recipes-dbs/psqlodbc/psqlodbc_16.00.0000.bb
-index d3b3ea5109..dfd7f6a1e6 100644
---- a/meta-oe/recipes-dbs/psqlodbc/psqlodbc_16.00.0000.bb
-+++ b/meta-oe/recipes-dbs/psqlodbc/psqlodbc_16.00.0000.bb
-@@ -23,6 +23,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/odbc/versions.old/src/${BPN}-${PV}.tar.
-     file://psqlodbc-remove-some-checks-for-cross-compiling.patch \
-     file://psqlodbc-donot-use-the-hardcode-libdir.patch \
-     file://psqlodbc-fix-for-ptest-support.patch \
-+    file://0001-configure-make-sure-to-call-AC_CHECK_HEADER_STDBOOL.patch \
-     file://run-ptest \
+diff --git a/meta-oe/recipes-printing/cups/cups-filters_2.0.0.bb b/meta-oe/recipes-printing/cups/cups-filters_2.0.0.bb
+index 0886e7061b..2f1a772dde 100644
+--- a/meta-oe/recipes-printing/cups/cups-filters_2.0.0.bb
++++ b/meta-oe/recipes-printing/cups/cups-filters_2.0.0.bb
+@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6d5b952b53dbe7752199903d082e5f07"
+ DEPENDS = "libcupsfilters libppd glib-2.0 poppler"
+ 
+ SRC_URI = " \
+-	https://github.com/OpenPrinting/${BPN}/releases/download/${PV}/${BP}.tar.xz \
+-	file://fix-make-race.patch \
+-        file://0001-Fix-build-failure-with-GCC-15-and-std-c23.patch \
++    https://github.com/OpenPrinting/${BPN}/releases/download/${PV}/${BP}.tar.xz \
++    file://fix-make-race.patch \
++    file://0001-Fix-build-failure-with-GCC-15-and-std-c23.patch \
+ "
+ SRC_URI[sha256sum] = "b5152e3dd148ed73835827ac2f219df7cf5808dbf9dbaec2aa0127b44de800d8"
+ 
+@@ -17,10 +17,10 @@ UPSTREAM_CHECK_URI = "https://github.com/OpenPrinting/cups-filters/releases"
+ inherit autotools gettext pkgconfig github-releases
+ 
+ EXTRA_OECONF += " \
+-	--enable-imagefilters \
+-	--enable-ghostscript --with-gs-path=${bindir}/gs \
+-	--with-fontdir=${datadir}/fonts \
+-	--localstatedir=${localstatedir} \
++    --enable-imagefilters \
++    --enable-ghostscript --with-gs-path=${bindir}/gs \
++    --with-fontdir=${datadir}/fonts \
++    --localstatedir=${localstatedir} \
  "
  
+ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)}"
 
