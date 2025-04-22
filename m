@@ -1,88 +1,89 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <liuyd.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 955AFC3DA4A
-	for <webhook@archiver.kernel.org>; Mon, 21 Apr 2025 23:48:40 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web10.28509.1745279317484533309
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C9293C369D1
+	for <webhook@archiver.kernel.org>; Tue, 22 Apr 2025 03:28:31 +0000 (UTC)
+Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
+ by mx.groups.io with SMTP id smtpd.web11.31977.1745292508505476495
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Apr 2025 16:48:37 -0700
+ Mon, 21 Apr 2025 20:28:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jYmQu43A;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2241053582dso63117525ad.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 21 Apr 2025 16:48:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745279317; x=1745884117; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=pw9zj7Aa6Mn1Cs/uzNK7vNkrUXAKnBNi9MORtA1o8Y8=;
-        b=jYmQu43Afo2tUxc6Uxr8B0j6EyU8ekCOzw4zysm/ZUdii5T1QPvzGFYJspyh6U/Kyz
-         BHVuqmiXk9U+rXzyvKIO9jeBQzMsJcd0ytnvyWBzEtciZNyX7QJOtMUphFL43TToJICT
-         bWBBAhSOIkzQEnWkmNgduZcJehPdfW7DQDjsMt4GlNVKz5x12jN2lhB1TYYRy4qGWtjB
-         8gwo12OWLgicLW1OxMEVLbG6IFz3nh0Lni9Na3iCug8W/fy7IPSjCDan6RLb/vJcLme3
-         2BSfGdfzM+fxJ9vwtH/zgxCLYaLHm9ZlRKOBLNhvGxUnTtAOq9EfdM4xuPCqOJ6Xx0r3
-         tgcw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745279317; x=1745884117;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=pw9zj7Aa6Mn1Cs/uzNK7vNkrUXAKnBNi9MORtA1o8Y8=;
-        b=wz7zITi0v3iAkPw/p0QH6ETQPb5i14F1JPLFqL4Lr5GZLwdHN3SZwpAFGZx5EzfSWS
-         m9eiIfmBGovKckbIeY/Ku1CguO4ZZo7B6GcbopSGO/UQDTEqueFABmZLaQC5j0DF3QSo
-         ML5UYj0+NoBBiTpYCoxHiux828KW1wEjPzgobPFADjwiJQheAiuKIX0D8ROzmrqd9e51
-         EJYEf8Np0X4cuuFp4jXliZYyMkkngXf1HJUOumQn+QVTIIBDisnqYgW7IEpZIK+n081L
-         45l3GK5l2WV8kxBTTRnosnqjdhAhVMYggRK76VP2qKqtv8148gWHJqQGmAP3ZMG/4uwl
-         zHCw==
-X-Gm-Message-State: AOJu0Yy5aJBPLHiddAvz/4VoeYoOo40WsiSN8USULALiufiSY/rGN98h
-	VeRqg6eqVD0ujtuJX6r8j6qEKT3nPmSeMcyVjILJgTRBoGq+tJsdtxymJtCT
-X-Gm-Gg: ASbGncunINP0n/Hj6tC4fVWX/LDWd6jtTl7sTgKmA3AOQQcVEY1nixM2HpiYTWNJyVl
-	vGgqpp4aywfKvcedlNb/t2O8zs3vrJ5DfHMsIUW7VNhF64gnkh31G1C/knCeu8ZQoOQFMg794N3
-	UaGaB+XIapofUv9Um5puMestiPdgPANwt+J0+lWR8qu90K1DA8QYXw2f3UYdAvzgDCLSMwgSXLr
-	nqTTT4G7bbEtbjY4h5i/OQkl6QpQqqTErANvOydyasKYhWL89hQ5CJy7G26tQw=
-X-Google-Smtp-Source: AGHT+IEg7gitdnJvylozz9aV5jvCZQR0P0+XV0vFljqYO6GIKx51w0wNVhwIME/FUUY0n+2gNPayGg==
-X-Received: by 2002:a17:902:ce01:b0:21f:7082:1137 with SMTP id d9443c01a7336-22c5357d158mr236465295ad.22.1745279316600;
-        Mon, 21 Apr 2025 16:48:36 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:8201:fd20::a1f1])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22c50fde986sm71683175ad.244.2025.04.21.16.48.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 21 Apr 2025 16:48:35 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 4/4] vboxguestdrivers: Use -ffile-prefix-map in place of -fdebug-prefix-map
-Date: Mon, 21 Apr 2025 16:48:30 -0700
-Message-ID: <20250421234830.1217875-4-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250421234830.1217875-1-raj.khem@gmail.com>
-References: <20250421234830.1217875-1-raj.khem@gmail.com>
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=NRfcegdY;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: liuyd.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1745292508; x=1776828508;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=gpEFSsSoylrDE0IVUVXcJLi4ErFu6kAfLvu9WK2PsjA=;
+  b=NRfcegdY+DC8nVJ7seE1MUHkFueD61LSGGVsX2qQVJt8iJHSMmGte4GR
+   kG27Dzdm2qYoFmCpPusnd/Z6tuu9yyG7Bm7UZey96LasCIOs0zRSKPEoC
+   tuF8elR9BALB6UfDUOMdjnxk90k1lHtBVmhvsf6LIkY+KHZ19sz5OIgRW
+   3gmQbr/ASiy9po2/JU67Gftz9AYrgpeVRU7zQf3pYZdoDhmXoIa/p30gK
+   7AMe06dDNjuvYrCl/Z1ScwH1i7sGlr7eXknYmF6QynEJls3leZEYH7N7G
+   gw83p/oOhDj5CEZO9BPC/tq3Z5xsbvMFBtXs3FieDEVTZxhC106hCbvCQ
+   w==;
+X-CSE-ConnectionGUID: 5VEzcFFATEWZgej9p/MAWA==
+X-CSE-MsgGUID: qldK/QMySVW67ggup03+WA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11410"; a="197238883"
+X-IronPort-AV: E=Sophos;i="6.15,229,1739804400"; 
+   d="scan'208";a="197238883"
+Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
+  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Apr 2025 12:28:26 +0900
+Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
+	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 0E610D6EA5
+	for <openembedded-devel@lists.openembedded.org>; Tue, 22 Apr 2025 12:28:24 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id C2422D3F1C
+	for <openembedded-devel@lists.openembedded.org>; Tue, 22 Apr 2025 12:28:23 +0900 (JST)
+Received: from G08FNSTD190088.g08.fujitsu.local (unknown [10.167.135.33])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id B5B031A009A;
+	Tue, 22 Apr 2025 11:28:22 +0800 (CST)
+From: Liu Yiding <liuyd.fnst@fujitsu.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org,
+	Liu Yiding <liuyd.fnst@fujitsu.com>
+Subject: [meta-oe] [PATCH] mozjs-128: INSANE_SKIP 32bit-time QA issue
+Date: Tue, 22 Apr 2025 11:28:15 +0800
+Message-Id: <20250422032816.785-1-liuyd.fnst@fujitsu.com>
+X-Mailer: git-send-email 2.38.1.windows.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Apr 2025 23:48:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117014
+ <openembedded-devel@lists.openembedded.org>; Tue, 22 Apr 2025 03:28:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117015
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+|WARNING: lib32-mozjs-128-128.5.2-r0 do_package_qa: QA Issue: /usr/lib/libmozjs-128.so uses 32-bit api 'stat64' [32bit-time]
+|WARNING: lib32-mozjs-128-128.5.2-r0 do_package_qa: QA Issue: /usr/lib/libmozjs-128.so uses 32-bit api 'fstat64' [32bit-time]
+|WARNING: lib32-mozjs-128-128.5.2-r0 do_package_qa: QA Issue: Suppress with INSANE_SKIP = "32bit-time" [32bit-time]
+|WARNING: lib32-mozjs-128-128.5.2-r0 do_package_qa: QA Issue: /usr/bin/js128 uses 32-bit api 'stat64' [32bit-time]
+|WARNING: lib32-mozjs-128-128.5.2-r0 do_package_qa: QA Issue: /usr/bin/js128 uses 32-bit api 'fstat64' [32bit-time]
+|WARNING: lib32-mozjs-128-128.5.2-r0 do_package_qa: QA Issue: Suppress with INSANE_SKIP = "32bit-time" [32bit-time]
+
+It's a false positive warning that I have checked the compiling log,
+"-D_TIME_BITS=64 -D_FILE_OFFSET_BITS=64" are really being passed to compiler
+
+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
 ---
- .../recipes-support/vboxguestdrivers/vboxguestdrivers_7.1.4.bb  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.1.4.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.1.4.bb
-index f4f3abd81b..e8e6c3998b 100644
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.1.4.bb
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.1.4.bb
-@@ -24,7 +24,7 @@ S:task-patch = "${WORKDIR}/${VBOX_NAME}"
- export VBOX_KBUILD_TARGET_ARCH = "${ARCH}"
- export VBOX_KBUILD_TARGET_ARCH:x86-64 = "amd64"
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb b/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
+index 4b56a17f84..488bb0eccc 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
+@@ -99,6 +99,7 @@ do_install:append() {
+     rm -f ${D}${libdir}/libjs_static.ajs
+ }
  
--EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build' KBUILD_VERBOSE=1 CC='${CC} ${DEBUG_PREFIX_MAP} -fdebug-prefix-map=${STAGING_KERNEL_DIR}=${KERNEL_SRC_PATH} -fdebug-prefix-map=${STAGING_KERNEL_BUILDDIR}=${KERNEL_SRC_PATH}'"
-+EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build' KBUILD_VERBOSE=1 CC='${CC} ${DEBUG_PREFIX_MAP} -ffile-prefix-map=${STAGING_KERNEL_DIR}=${KERNEL_SRC_PATH} -ffile-prefix-map=${STAGING_KERNEL_BUILDDIR}=${KERNEL_SRC_PATH}'"
- 
- # otherwise 5.2.22 builds just vboxguest
- MAKE_TARGETS = "all"
++INSANE_SKIP = "32bit-time"
+ PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
+ PACKAGES =+ "lib${BPN}"
+ FILES:lib${BPN} += "${libdir}/lib*"
+-- 
+2.43.0
+
 
