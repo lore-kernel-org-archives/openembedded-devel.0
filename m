@@ -1,370 +1,207 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <sjolley.yp.pm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C7C0C369C2
-	for <webhook@archiver.kernel.org>; Tue, 22 Apr 2025 05:30:42 +0000 (UTC)
-Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
- by mx.groups.io with SMTP id smtpd.web11.33339.1745299836980029767
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BBB1CC369C2
+	for <webhook@archiver.kernel.org>; Tue, 22 Apr 2025 06:48:42 +0000 (UTC)
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
+ by mx.groups.io with SMTP id smtpd.web10.34164.1745304520019829774
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Apr 2025 22:30:37 -0700
+ Mon, 21 Apr 2025 23:48:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
-Received: from fwd88.aul.t-online.de (fwd88.aul.t-online.de [10.223.144.114])
-	by mailout04.t-online.de (Postfix) with SMTP id C6F407F6;
-	Tue, 22 Apr 2025 07:30:34 +0200 (CEST)
-Received: from [192.168.178.20] ([84.163.42.91]) by fwd88.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1u76DF-1W5kZM0; Tue, 22 Apr 2025 07:30:29 +0200
-Date: Tue, 22 Apr 2025 07:30:23 +0200
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-oe][PATCHv2] libsdl2-mixer: update and build with
- cmake
-To: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
-Message-Id: <NYT3VS.0QWRDWHGHFW32@t-online.de>
-In-Reply-To: <18388CC518336062.2510@lists.openembedded.org>
-References: <18388CC518336062.2510@lists.openembedded.org>
-X-Mailer: geary/46.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=KzRfxQi4;
+ spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: sjolley.yp.pm@gmail.com)
+Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-227d6b530d8so48061905ad.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 21 Apr 2025 23:48:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1745304519; x=1745909319; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=ienkZAMHwNwaJEMVePQQmUzgOl+2/Zrfd5mvgGkvUvY=;
+        b=KzRfxQi4ssmYzCFyxdyIcbWevEgVCVv7zvQ5P1Woy8ghrH8nntg9AzPMflGgwgMq8R
+         Yngc/ao+YRq9ik4D6rIhHCG1QUKtd1uzxopRivaoJ03tKxg8nWHv0jSLVuyNxTIeuY0a
+         aBRov/1HENHJpfA3Q+GESn9syE0nO5W+y4DDrlkh9dw0jGqcCK6rNxbtF2Y4QJWO4AzF
+         B5IKkWbA4mWpn0UtQFL3uli1MO6RJNUp3lUTPZ6FhlT24ThDJb6p6UyRvqA7YY7Tm6RE
+         sYMSWfMvdc/SZc8Jne/B3DkFjg8Zaf5oaAoZL264qBx6HsGmxINeocZbTekvSD5EZ8F2
+         HM5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1745304519; x=1745909319;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=ienkZAMHwNwaJEMVePQQmUzgOl+2/Zrfd5mvgGkvUvY=;
+        b=nyqDe0se6YxPjCV2qYCtBBl9nBTKdaFH8HZak/SoKUzJ7p8bc9E7fddSCr16872sXN
+         NzOrAv+cAM4m6AtfXXs+A6J4ArSwFPXyHIQ2XLovH47BlvPRGJJVjgTszLo5ej0uD9W7
+         T+ccd4KbvzxNYxfNg7PwDFXa3PmEy6aU6mluJOMryNQX3nWjFCPCu7ofomvmhUMixcBX
+         y9b3aITs9kWHCPQ1thMrF1+P/8IQajMvam6BpFq/cQwU2S0A5feW53+VaaVy8jL/KMio
+         g0kFeCtd7GIAOWg8XrbgUriPfOeULlTzYGMHVcLdxY2h8C9Ej2ymJLciQQtVbB3I7dSG
+         kToA==
+X-Gm-Message-State: AOJu0Yxu4JuzdvopePrML4P3rxckeK36h5LrFB48OimBIbcyq4Stkhkp
+	HjUxDf0bnzagW3WbwOgSVlfqypAQ4RLs9Djc3iNRpZDo9GyIxIOFQ99Ei27WWD5l4gcsTVh1ipi
+	cYS9v6lbkN8tAJu9qWXNxoLI45renfEHs
+X-Gm-Gg: ASbGncv89lvpGAyoigZ3NZ/U5e2JFHw+LpChuLMlySpHsYcVU7cYrTutQdMNsoV5RDr
+	WNclj/AQNNRfR3BUEPZpjgIEmZ2pQP/2wKq9Wizy1jwGSXDc9FQDHBTSM5nFbCiu2PDOeF9oZvz
+	gmiVe7k9vj5zmO6C8YqX4TZf/LkLkXjBBacJYskYhE3eR/XkI2oY+HZvw=
+X-Google-Smtp-Source: AGHT+IEFnozBu5sZ+J0TpZUTswAbA7L9XDChzo/sGztAhgPwXl/lcFiHGfjgSLZF6+1qWOAXnXb/s2VfjtivGTYTZzM=
+X-Received: by 2002:a17:90b:586f:b0:2fe:955d:cdb1 with SMTP id
+ 98e67ed59e1d1-3087bba2748mr17666751a91.23.1745304518807; Mon, 21 Apr 2025
+ 23:48:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-PE/cxDK32wRFl7upKVrQ"
-X-TOI-EXPURGATEID: 150726::1745299829-1B7FD92D-B4887799/0/0 CLEAN NORMAL
-X-TOI-MSGID: 8eb4dc47-be7a-46c3-b423-0a1648790293
+From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
+Date: Mon, 21 Apr 2025 23:48:27 -0700
+X-Gm-Features: ATxdqUHtSD-iYvcCh8AfVU3DS72jdCRzbcNLOFxoHpDrI2IC1xnawpJTD7expzw
+Message-ID: <CAK5yBb_88dXHaHFAEYN2RNYj7S2EwJ0BQdM2uK5NG6Rw=QZrCw@mail.gmail.com>
+Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
+To: openembedded-devel@lists.openembedded.org, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="000000000000de56fb0633585ff2"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 22 Apr 2025 05:30:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117018
+ <openembedded-devel@lists.openembedded.org>; Tue, 22 Apr 2025 06:48:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117019
 
---=-PE/cxDK32wRFl7upKVrQ
-Content-Type: text/plain; charset=us-ascii; format=flowed
+--000000000000de56fb0633585ff2
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-v2: Add PACKAGECONFIGS for the options, make sure that libsdl2-mixer 
-can be compiled without these options and add 'flac wave vorbis' as 
-default
+All,
 
-On Tue, Apr 22 2025 at 07:26:59 +02:00:00, Markus Volk 
-<f_l_k@t-online.de> wrote:
-> ---
->  ...figure.in-Undefine-AC_CONFIG_AUX_DIR.patch | 34 ------------------
->  .../libsdl/libsdl2-mixer_2.0.4.bb             | 27 --------------
->  .../libsdl/libsdl2-mixer_2.8.1.bb             | 36 
-> +++++++++++++++++++
->  3 files changed, 36 insertions(+), 61 deletions(-)
->  delete mode 100644 
-> meta-oe/recipes-graphics/libsdl/libsdl2-mixer/0001-configure.in-Undefine-AC_CONFIG_AUX_DIR.patch
->  delete mode 100644 
-> meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb
->  create mode 100644 
-> meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.8.1.bb
-> 
-> diff --git 
-> a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer/0001-configure.in-Undefine-AC_CONFIG_AUX_DIR.patch 
-> b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer/0001-configure.in-Undefine-AC_CONFIG_AUX_DIR.patch
-> deleted file mode 100644
-> index 0605b32e30..0000000000
-> --- 
-> a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer/0001-configure.in-Undefine-AC_CONFIG_AUX_DIR.patch
-> +++ /dev/null
-> @@ -1,34 +0,0 @@
-> -From 9363c98528ef850235852e44f678df6b5c011ee1 Mon Sep 17 00:00:00 
-> 2001
-> -From: Khem Raj <raj.khem@gmail.com <mailto:raj.khem@gmail.com>>
-> -Date: Sun, 7 Feb 2021 18:08:36 -0800
-> -Subject: [PATCH] configure.in: Undefine AC_CONFIG_AUX_DIR
-> -
-> -This helps reconfiguring with autotools 2.70+
-> -
-> -Upstream-Status: Pending
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com 
-> <mailto:raj.khem@gmail.com>>
-> ----
-> - configure.in | 5 -----
-> - 1 file changed, 5 deletions(-)
-> -
-> ---- a/configure.in
-> -+++ b/configure.in
-> -@@ -1,7 +1,6 @@
-> - dnl Process this file with autoconf to produce a configure script.
-> - AC_INIT(README.txt)
-> - AC_CONFIG_AUX_DIR(build-scripts)
-> --
-> - dnl Set various version strings - taken gratefully from the GTk 
-> sources
-> -
-> - # Making releases:
-> -@@ -40,10 +39,6 @@ AC_SUBST(LT_CURRENT)
-> - AC_SUBST(LT_REVISION)
-> - AC_SUBST(LT_AGE)
-> -
-> --dnl Detect the canonical build and host environments
-> --AC_CONFIG_AUX_DIRS($srcdir/build-scripts)
-> --dnl AC_CANONICAL_HOST
-> --
-> - dnl Check for tools
-> - AC_PROG_LIBTOOL
-> - AC_PROG_CC
-> diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb 
-> b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb
-> deleted file mode 100644
-> index dbcb2a193b..0000000000
-> --- a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb
-> +++ /dev/null
-> @@ -1,27 +0,0 @@
-> -SUMMARY = "Simple DirectMedia Layer mixer library V2"
-> -SECTION = "libs"
-> -DEPENDS = "libsdl2 flac libmikmod libvorbis"
-> -LICENSE = "Zlib"
-> -LIC_FILES_CHKSUM = 
-> "file://COPYING.txt;md5=516daf7a177ad4c8874bb9efa1a69c1f" 
-> <file://copying.txt;md5=516daf7a177ad4c8874bb9efa1a69c1f/>
-> -
-> -SRC_URI = 
-> "http://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-${PV}.tar.gz 
-> <http://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-$%7BPV%7D.tar.gz> 
-> \
-> -           file://0001-configure.in-Undefine-AC_CONFIG_AUX_DIR.patch 
-> <file://0001-configure.in-undefine-ac_config_aux_dir.patch/> \
-> -          "
-> -SRC_URI[sha256sum] = 
-> "b4cf5a382c061cd75081cf246c2aa2f9df8db04bdda8dcdc6b6cca55bede2419"
-> -
-> -S = "${WORKDIR}/SDL2_mixer-${PV}"
-> -
-> -inherit autotools-brokensep pkgconfig
-> -
-> -EXTRA_OECONF = "--disable-music-mp3 --enable-music-ogg 
-> --disable-music-ogg-shared LIBS=-L${STAGING_LIBDIR}"
-> -
-> -PACKAGECONFIG ??= ""
-> -PACKAGECONFIG[mad] = 
-> "--enable-music-mp3-mad-gpl,--disable-music-mp3-mad-gpl,libmad"
-> -
-> -do_configure:prepend () {
-> -    # Remove old libtool macros.
-> -    MACROS="libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 
-> ltversion.m4"
-> -    for i in ${MACROS}; do
-> -        rm -f acinclude/$i
-> -    done
-> -}
-> diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.8.1.bb 
-> b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.8.1.bb
-> new file mode 100644
-> index 0000000000..3eff30f825
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.8.1.bb
-> @@ -0,0 +1,36 @@
-> +SUMMARY = "Simple DirectMedia Layer mixer library V2"
-> +SECTION = "libs"
-> +DEPENDS = "libsdl2"
-> +LICENSE = "Zlib"
-> +LIC_FILES_CHKSUM = 
-> "file://LICENSE.txt;md5=fbb0010b2f7cf6e8a13bcac1ef4d2455" 
-> <file://license.txt;md5=fbb0010b2f7cf6e8a13bcac1ef4d2455/>
-> +
-> +SRC_URI = 
-> "http://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-${PV}.tar.gz 
-> <http://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-$%7BPV%7D.tar.gz>"
-> +SRC_URI[sha256sum] = 
-> "cb760211b056bfe44f4a1e180cc7cb201137e4d1572f2002cc1be728efd22660"
-> +
-> +S = "${WORKDIR}/SDL2_mixer-${PV}"
-> +
-> +inherit cmake pkgconfig
-> +
-> +do_configure:prepend() {
-> +	# cmake checks for these binaries. Touch them to pass the tests and 
-> add RDEPENDS
-> +	touch ${STAGING_BINDIR}/fluidsynth
-> +	touch ${STAGING_BINDIR}/wavpack
-> +	touch ${STAGING_BINDIR}/wvunpack
-> +	touch ${STAGING_BINDIR}/wvgain
-> +	touch ${STAGING_BINDIR}/wvtag
-> +}
-> +
-> +EXTRA_OECMAKE += "${@bb.utils.contains 
-> <mailto:${@bb.utils.contains>_any('PACKAGECONFIG', 'xmp modplug', 
-> '-DSDL2MIXER_MOD=ON', '-DSDL2MIXER_MOD=OFF', d)}"
-> +
-> +PACKAGECONFIG ?= "flac wave vorbis"
-> +PACKAGECONFIG[opusfile] = "-DSDL2MIXER_OPUS=ON 
-> -DSDL2MIXER_OPUS_ENABLED=ON, -DSDL2MIXER_OPUS=OFF,opusfile"
-> +PACKAGECONFIG[vorbis] = "-DSDL2MIXER_VORBIS=VORBISFILE 
-> -DSDL2MIXER_VORBIS_VORBISFILE=ON, -DSDL2MIXER_VORBIS=OFF,libvorbis"
-> +PACKAGECONFIG[flac] = "-DSDL2MIXER_FLAC=ON, 
-> -DSDL2MIXER_FLAC=OFF,flac"
-> +PACKAGECONFIG[xmp] = "-DSDL2MIXER_MOD_XMP=ON, 
-> -DSDL2MIXER_MOD_XMP=OFF,libxmp,libxmp"
-> +PACKAGECONFIG[modplug] = "-DSDL2MIXER_MOD_MODPLUG=ON, 
-> -DSDL2MIXER_MOD_MODPLUG=OFF,libmodplug"
-> +PACKAGECONFIG[fluidsynth] = "-DSDL2MIXER_MIDI=ON 
-> -DSDL2MIXER_MIDI_FLUIDSYNTH_ENABLED=ON, 
-> -DSDL2MIXER_MIDI=OFF,fluidsynth,fluidsynth-bin"
-> +PACKAGECONFIG[wave] = "-DSDL2MIXER_WAVE=ON -DSDL2MIXER_WAVPACK=ON, 
-> -DSDL2MIXER_WAVE=OFF,wavpack,wavpack wavpack-bin"
-> +PACKAGECONFIG[mpg123] = "-DSDL2MIXER_MP3=ON 
-> -DSDL2MIXER_MP3_MPG123=ON, -DSDL2MIXER_MP3=OFF,mpg123"
-> +
-> +FILES:${PN} += "${datadir}/licenses"
-> +
-> --
-> 2.49.0
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#117017): 
-> <https://lists.openembedded.org/g/openembedded-devel/message/117017>
-> Mute This Topic: <https://lists.openembedded.org/mt/112390055/3618223>
-> Group Owner: openembedded-devel+owner@lists.openembedded.org 
-> <mailto:openembedded-devel+owner@lists.openembedded.org>
-> Unsubscribe: 
-> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
-> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
+The triage team is starting to try and collect up and classify bugs which a
+newcomer to the project would be able to work on in a way which means
+people can find them. They're being listed on the triage page under the
+appropriate heading:
+https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
+review:
+https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
+how to create a bugzilla account at:
+https://bugzilla.yoctoproject.org/createaccount.cgi
+
+The idea is these bugs should be straight forward for a person to help work
+on who doesn't have deep experience with the project. If anyone can help,
+please take ownership of the bug and send patches! If anyone needs
+help/advice there are people on irc who can likely do so, or some of the
+more experienced contributors will likely be happy to help too.
+
+Also, the triage team meets weekly and does its best to handle the bugs
+reported into the Bugzilla. The number of people attending that meeting has
+fallen, as have the number of people available to help fix bugs. One of the
+things we hear users report is they don't know how to help. We (the triage
+team) are therefore going to start reporting out the currently 438
+unassigned or newcomer bugs.
+
+We're hoping people may be able to spare some time now and again to help
+out with these. Bugs are split into two types, "true bugs" where things
+don't work as they should and "enhancements" which are features we'd want
+to add to the system. There are also roughly four different "priority"
+classes right now, =E2=80=9C5.2=E2=80=9D, =E2=80=9C5.3", "5.99" and "Future=
+", the more
+pressing/urgent issues being in "5.2" and then =E2=80=9C5.3=E2=80=9D.
+
+Please review this link and if a bug is something you would be able to help
+with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
+an e-mail with the bug number you would like and I will assign it to you
+(please make sure you have a Bugzilla account). The list is at:
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs
+
+Thanks,
 
 
---=-PE/cxDK32wRFl7upKVrQ
-Content-Type: text/html; charset=us-ascii
 
-<div id="geary-body" dir="auto"><div>v2: Add PACKAGECONFIGS for the options, make sure that libsdl2-mixer can be compiled without these options and add 'flac wave vorbis' as default</div></div><div id="geary-quote" dir="auto"><br>On Tue, Apr 22 2025 at 07:26:59 +02:00:00, Markus Volk &lt;f_l_k@t-online.de&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">---
- ...figure.in-Undefine-AC_CONFIG_AUX_DIR.patch | 34 ------------------
- .../libsdl/libsdl2-mixer_2.0.4.bb             | 27 --------------
- .../libsdl/libsdl2-mixer_2.8.1.bb             | 36 +++++++++++++++++++
- 3 files changed, 36 insertions(+), 61 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/libsdl/libsdl2-mixer/0001-configure.in-Undefine-AC_CONFIG_AUX_DIR.patch
- delete mode 100644 meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb
- create mode 100644 meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.8.1.bb
+*Stephen K. Jolley*
 
-diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer/0001-configure.in-Undefine-AC_CONFIG_AUX_DIR.patch b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer/0001-configure.in-Undefine-AC_CONFIG_AUX_DIR.patch
-deleted file mode 100644
-index 0605b32e30..0000000000
---- a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer/0001-configure.in-Undefine-AC_CONFIG_AUX_DIR.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From 9363c98528ef850235852e44f678df6b5c011ee1 Mon Sep 17 00:00:00 2001
--From: Khem Raj &lt;<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;
--Date: Sun, 7 Feb 2021 18:08:36 -0800
--Subject: [PATCH] configure.in: Undefine AC_CONFIG_AUX_DIR
--
--This helps reconfiguring with autotools 2.70+
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj &lt;<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;
-----
-- configure.in | 5 -----
-- 1 file changed, 5 deletions(-)
--
----- a/configure.in
--+++ b/configure.in
--@@ -1,7 +1,6 @@
-- dnl Process this file with autoconf to produce a configure script.
-- AC_INIT(README.txt)
-- AC_CONFIG_AUX_DIR(build-scripts)
---
-- dnl Set various version strings - taken gratefully from the GTk sources
-- 
-- # Making releases:
--@@ -40,10 +39,6 @@ AC_SUBST(LT_CURRENT)
-- AC_SUBST(LT_REVISION)
-- AC_SUBST(LT_AGE)
-- 
---dnl Detect the canonical build and host environments
---AC_CONFIG_AUX_DIRS($srcdir/build-scripts)
---dnl AC_CANONICAL_HOST
---
-- dnl Check for tools
-- AC_PROG_LIBTOOL
-- AC_PROG_CC
-diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb
-deleted file mode 100644
-index dbcb2a193b..0000000000
---- a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb
-+++ /dev/null
-@@ -1,27 +0,0 @@
--SUMMARY = "Simple DirectMedia Layer mixer library V2"
--SECTION = "libs"
--DEPENDS = "libsdl2 flac libmikmod libvorbis"
--LICENSE = "Zlib"
--LIC_FILES_CHKSUM = "<a href="file://COPYING.txt;md5=516daf7a177ad4c8874bb9efa1a69c1f" "="">file://COPYING.txt;md5=516daf7a177ad4c8874bb9efa1a69c1f"</a>
--
--SRC_URI = "<a href="http://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-${PV}.tar.gz">http://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-${PV}.tar.gz</a> \
--           <a href="file://0001-configure.in-Undefine-AC_CONFIG_AUX_DIR.patch">file://0001-configure.in-Undefine-AC_CONFIG_AUX_DIR.patch</a> \
--          "
--SRC_URI[sha256sum] = "b4cf5a382c061cd75081cf246c2aa2f9df8db04bdda8dcdc6b6cca55bede2419"
--
--S = "${WORKDIR}/SDL2_mixer-${PV}"
--
--inherit autotools-brokensep pkgconfig
--
--EXTRA_OECONF = "--disable-music-mp3 --enable-music-ogg --disable-music-ogg-shared LIBS=-L${STAGING_LIBDIR}"
--
--PACKAGECONFIG ??= ""
--PACKAGECONFIG[mad] = "--enable-music-mp3-mad-gpl,--disable-music-mp3-mad-gpl,libmad"
--
--do_configure:prepend () {
--    # Remove old libtool macros.
--    MACROS="libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 ltversion.m4"
--    for i in ${MACROS}; do
--        rm -f acinclude/$i
--    done
--}
-diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.8.1.bb b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.8.1.bb
-new file mode 100644
-index 0000000000..3eff30f825
---- /dev/null
-+++ b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.8.1.bb
-@@ -0,0 +1,36 @@
-+SUMMARY = "Simple DirectMedia Layer mixer library V2"
-+SECTION = "libs"
-+DEPENDS = "libsdl2"
-+LICENSE = "Zlib"
-+LIC_FILES_CHKSUM = "<a href="file://LICENSE.txt;md5=fbb0010b2f7cf6e8a13bcac1ef4d2455" "="">file://LICENSE.txt;md5=fbb0010b2f7cf6e8a13bcac1ef4d2455"</a>
-+
-+SRC_URI = "<a href="http://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-${PV}.tar.gz">http://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-${PV}.tar.gz</a>"
-+SRC_URI[sha256sum] = "cb760211b056bfe44f4a1e180cc7cb201137e4d1572f2002cc1be728efd22660"
-+
-+S = "${WORKDIR}/SDL2_mixer-${PV}"
-+
-+inherit cmake pkgconfig
-+
-+do_configure:prepend() {
-+	# cmake checks for these binaries. Touch them to pass the tests and add RDEPENDS
-+	touch ${STAGING_BINDIR}/fluidsynth
-+	touch ${STAGING_BINDIR}/wavpack
-+	touch ${STAGING_BINDIR}/wvunpack
-+	touch ${STAGING_BINDIR}/wvgain
-+	touch ${STAGING_BINDIR}/wvtag
-+}
-+
-+EXTRA_OECMAKE += "<a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>_any('PACKAGECONFIG', 'xmp modplug', '-DSDL2MIXER_MOD=ON', '-DSDL2MIXER_MOD=OFF', d)}"
-+
-+PACKAGECONFIG ?= "flac wave vorbis"
-+PACKAGECONFIG[opusfile] = "-DSDL2MIXER_OPUS=ON -DSDL2MIXER_OPUS_ENABLED=ON, -DSDL2MIXER_OPUS=OFF,opusfile"
-+PACKAGECONFIG[vorbis] = "-DSDL2MIXER_VORBIS=VORBISFILE -DSDL2MIXER_VORBIS_VORBISFILE=ON, -DSDL2MIXER_VORBIS=OFF,libvorbis"
-+PACKAGECONFIG[flac] = "-DSDL2MIXER_FLAC=ON, -DSDL2MIXER_FLAC=OFF,flac"
-+PACKAGECONFIG[xmp] = "-DSDL2MIXER_MOD_XMP=ON, -DSDL2MIXER_MOD_XMP=OFF,libxmp,libxmp"
-+PACKAGECONFIG[modplug] = "-DSDL2MIXER_MOD_MODPLUG=ON, -DSDL2MIXER_MOD_MODPLUG=OFF,libmodplug"
-+PACKAGECONFIG[fluidsynth] = "-DSDL2MIXER_MIDI=ON -DSDL2MIXER_MIDI_FLUIDSYNTH_ENABLED=ON, -DSDL2MIXER_MIDI=OFF,fluidsynth,fluidsynth-bin"
-+PACKAGECONFIG[wave] = "-DSDL2MIXER_WAVE=ON -DSDL2MIXER_WAVPACK=ON, -DSDL2MIXER_WAVE=OFF,wavpack,wavpack wavpack-bin"
-+PACKAGECONFIG[mpg123] = "-DSDL2MIXER_MP3=ON -DSDL2MIXER_MP3_MPG123=ON, -DSDL2MIXER_MP3=OFF,mpg123"
-+
-+FILES:${PN} += "${datadir}/licenses"
-+
-<div>-- 
-</div>2.49.0
+*Yocto Project Program Manager*
 
-</div><div class="plaintext" style="white-space: break-spaces;">
--=-=-=-=-=-=-=-=-=-=-=-
-Links: You receive all messages sent to this group.
-View/Reply Online (#117017): <a href="https://lists.openembedded.org/g/openembedded-devel/message/117017">https://lists.openembedded.org/g/openembedded-devel/message/117017</a>
-Mute This Topic: <a href="https://lists.openembedded.org/mt/112390055/3618223">https://lists.openembedded.org/mt/112390055/3618223</a>
-Group Owner: <a href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
--=-=-=-=-=-=-=-=-=-=-=-
+(    *Cell*:                (208) 244-4460
 
-</div></blockquote></div>
---=-PE/cxDK32wRFl7upKVrQ--
+* *Email*:                 *s
+<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
+*
 
+--000000000000de56fb0633585ff2
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><span style=3D"font-size:11pt;font-family:Calibri,Ari=
+al">All,<br><br>The triage team is starting to try and collect up and class=
+ify bugs which a newcomer to the project would be able to work on in a way =
+which means people can find them. They&#39;re being listed on the triage pa=
+ge under the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/=
+wiki/Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triag=
+e#Newcomer_Bugs</a>  Also please review: <a href=3D"https://www.openembedde=
+d.org/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.=
+org/wiki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugz=
+illa account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount=
+.cgi">https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The id=
+ea is these bugs should be straight forward for a person to help work on wh=
+o doesn&#39;t have deep experience with the project.  If anyone can help, p=
+lease take ownership of the bug and send patches!  If anyone needs help/adv=
+ice there are people on irc who can likely do so, or some of the more exper=
+ienced contributors will likely be happy to help too.<br><br>Also, the tria=
+ge team meets weekly and does its best to handle the bugs reported into the=
+ Bugzilla. The number of people attending that meeting has fallen, as have =
+the number of people available to help fix bugs. One of the things we hear =
+users report is they don&#39;t know how to help. We (the triage team) are t=
+herefore going to start reporting out the currently 438 unassigned or newco=
+mer bugs.<br><br>We&#39;re hoping people may be able to spare some time now=
+ and again to help out with these.  Bugs are split into two types, &quot;tr=
+ue bugs&quot; where things don&#39;t work as they should and &quot;enhancem=
+ents&quot; which are features we&#39;d want to add to the system.  There ar=
+e also roughly four different &quot;priority&quot; classes right now, =E2=
+=80=9C5.2=E2=80=9D, =E2=80=9C5.3&quot;, &quot;5.99&quot; and &quot;Future&q=
+uot;, the more pressing/urgent issues being in &quot;5.2&quot; and then =E2=
+=80=9C5.3=E2=80=9D.<br><br>Please review this link and if a bug is somethin=
+g you would be able to help with either take ownership of the bug, or send =
+me (<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>)=
+ an e-mail with the bug number you would like and I will assign it to you (=
+please make sure you have a Bugzilla account).  The list is at: <a href=3D"=
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or=
+_Newcomer_Bugs</a></span></div><div dir=3D"ltr" class=3D"gmail_signature" d=
+ata-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p clas=
+s=3D"MsoNormal" style=3D"background-image:initial;background-position:initi=
+al;background-repeat:initial"><span style=3D"font-size:12pt;font-family:Ari=
+al,sans-serif">Thanks,<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
+ily:Arial,sans-serif">=C2=A0<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
+lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
+ont-family:Arial,sans-serif"><span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
+amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
+an></b></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
+&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
+<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
+:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
+s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
+-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
+><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
+/span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
+t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
+=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
+color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
+uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
+ lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
+erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
+phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
+.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
+u></p></div></div></div></div>
+
+--000000000000de56fb0633585ff2--
 
