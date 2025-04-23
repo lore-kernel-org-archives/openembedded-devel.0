@@ -1,112 +1,96 @@
-Return-Path: <fleuryhugo7@gmail.com>
+Return-Path: <kelefa.sane@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75A03C369D1
-	for <webhook@archiver.kernel.org>; Wed, 23 Apr 2025 14:36:17 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.web11.10369.1745418972142596677
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 84427C369D1
+	for <webhook@archiver.kernel.org>; Wed, 23 Apr 2025 14:46:37 +0000 (UTC)
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+ by mx.groups.io with SMTP id smtpd.web11.10624.1745419588925874888
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Apr 2025 07:36:12 -0700
+ Wed, 23 Apr 2025 07:46:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=JAmvTXdB;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: fleuryhugo7@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-43ce70f9afbso56507695e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Apr 2025 07:36:11 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=grtLxjpV;
+ spf=pass (domain: smile.fr, ip: 209.85.221.46, mailfrom: kelefa.sane@smile.fr)
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-391342fc0b5so5394698f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Apr 2025 07:46:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745418970; x=1746023770; darn=lists.openembedded.org;
+        d=smile.fr; s=google; t=1745419587; x=1746024387; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=oCP4Cyz/tSnKI6hv9dfwz20Xa6KzqNIDLSzvSN7/LH0=;
-        b=JAmvTXdBeN3IQhQSmXsS5sAVGvwn7kOC1aTBF62PK59pwhUXA2l8Hc09zdGKBAT2Y4
-         cx1fGa9vaAsCihVVs0t/cLbSBx8GmOxDkCM5JUZJfLE+npg4cSBN9FqZylWNfpmZdruD
-         oljxRp/A/bGIUJqQioVVr7mzCkVoktXwKBtM7fkjBvKKtYuf9n6904c0s+SrX2iQpb6j
-         JbmOV9itWt4JFaM8iHhX7rR68b8evSMs3xTxKzSAhCKghrV5k/BY1DykmgnxVrJZ5Uzp
-         r/9F1M3+3LGoB6buI/KLfN2m1ZRI1/3dkgn224j+5uV6q0A0i2A/KBW+sBQ27Wo74QFS
-         Sd3A==
+        bh=Oh+AdI648kn21nqsFCzNQ2bS+IhzOPMCDb0qlgQ5BSs=;
+        b=grtLxjpVd2aHiHQ2FdiCdswdfvbdfZXXWV2VpIxuvPS7G7qe+13NaAfOmynitLp6xj
+         F7rUrB4XY7wQOGVExKyFtgbS5LMbJdkHPzmWLHdpJgEGV5gglhUCX5CLO/9ePju3xCK5
+         SQFj0EwpsSNc4LX3kTQCAy6azbF09Bpk5aokE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745418970; x=1746023770;
+        d=1e100.net; s=20230601; t=1745419587; x=1746024387;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=oCP4Cyz/tSnKI6hv9dfwz20Xa6KzqNIDLSzvSN7/LH0=;
-        b=DM9egE2ES0GshqgDZvC8rvTfp7JrPd7grEO7sMTkJMVsj3h/TS6xgK1KtVyQgUP+g0
-         JBYF6AllE8axZalbbdqoRVeluFnkvnwnWeiHUrHReDFA6aAvFQ4sEHrbILLTejB1Q6Sf
-         42F4lVjJKwfQCaPvOa1gDxeW/+jiEI4H3gXbGgS2IvLEZiODuPcRtqEAno9BTwprQGWW
-         BLvAPwBgvs0t8yruuTVkjYIsIvtTXdI+bsJE1XdIyZSKk3fb48Hqp8cQvt9onNMkgNW9
-         8R7Yui9vDVVpHTDsPnCkJSgJLS5EFfrv1x6cjrxIFjyLIchoJFLgf+8PgYHSehYBWLgI
-         NW8A==
-X-Gm-Message-State: AOJu0YxMJJBKp2ka+SGO6hLcIJNS0WopGZ9wExUxTViLKgFD0CYGMasT
-	VtoHSkYbVLa6FPVI0O5fHqfbdqBiG72I8oiUxDHgG8L7J4KmAW0CRGtDR4em
-X-Gm-Gg: ASbGncsh0PEPVJWKy8RxeJ01VYNdtZRDhwdcjq0r4NXZ5DHjmfoo7PzpKRAAR0Hojm6
-	D7AV/dCQWzjVdGaoEmOHQ1ORv9s+fp6fBUQYLUP9X5zfKjWktfXR9zlqnHKsUgrJYTPrCz4JGXr
-	n9Dmlhs5toQmzKzdEmPRMHB/Y2BXbBOfqDczubwQCnYn10gzZCxOnABeOGdBLaTJJ2Sag2N3PuX
-	T9KChlfLy8KM6l8P2wDzyhBvei5loel1t7pZLhFLhBQ6HPNmiPze8ByQSMcvX1QEQbBkU8BFXiV
-	bQnbHQlPuoWZwFAWv6yH+cFvX3W1ORaq2NTjpugrjmA=
-X-Google-Smtp-Source: AGHT+IGpNFt5l+ow1WSIP8s1pP8kthXJ71VS5O6b5/UZ5sEyyKf32wdZsXJCKwzbCoPld7N/mv6jdg==
-X-Received: by 2002:a5d:5985:0:b0:39c:e28:5f0d with SMTP id ffacd0b85a97d-39efba5b065mr15966440f8f.25.1745418970081;
-        Wed, 23 Apr 2025 07:36:10 -0700 (PDT)
-Received: from ixpehess.. ([2a01:e0a:c13:c5e0:56fc:ca67:b1be:cc71])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-44092d233c2sm27820455e9.14.2025.04.23.07.36.09
+        bh=Oh+AdI648kn21nqsFCzNQ2bS+IhzOPMCDb0qlgQ5BSs=;
+        b=ND52ibDSIAOpoT1o3MVczqzHCvOrzIwNcgv2D3b8RCnqOt3beHqeAYpzbIGr5LFPcP
+         eqFGRrqn7yWwis9XLWVhALbj2mctGfwS6ZHZx5sLtSB64OhFXxKqYsf1eRtJGjOlskkH
+         2srcQ9o5Tnbm63skXGzmOBuffdScs1zhOMF2ETjAjjduoQCVyQAkos6jKg1HBnMX8ydc
+         5rXMIhfiZE1xgX/oFe5gueu2GvjkYbvaCPVQErckKJBzJ4mbDQg5TeDfrIXMcs/D/uzE
+         mP3n4EX9gj7E2xzqQEc3pNAqdXYTJj9EQO52Oo4uexYGh6YqeQdYPA/7F8Njsy/xHQCb
+         kDMg==
+X-Gm-Message-State: AOJu0Ywe2aEu5jQqxgH1A8uAJuMJFPCbaInKLAIdnqe5u+gCUPQBx/+F
+	QPPnjiQoLe3iijWerH5kL3cxwxgHSBUJuzYu0hMHkVxZRTvZVtJAJYFuvmmHwLHJixOJyLRZY6l
+	8
+X-Gm-Gg: ASbGnctMm3AIzUZwlbOJbAEspDupXjca+LBoA7nS789R+sRrTEm8leO45dbi4MsyPFa
+	6oE38X1SE26XoALvkEDe+YT3DgaOKxWKeg7K1kdGU9xPFcvqk+YMTBej8xCTBLhfSKvNXHcpyhu
+	pf/ArdkK8ZZzWI+NZ9KFHUED+Gs8yamK0tBV6ycgG8MLKQAcuSnQYnS8lTP2gc0ZuN+ygCTSxXH
+	XyG6lULJKPXi4gXSz03h+TYUcNxTZs5bOszoHOtjmF8EFFVucyzFpmPlF9LhnJplip+GORr+nrH
+	wi//A8h6eu7Doh3QTd7V4d3dc0MbchqJlL1gDDk77BkpamE0TZpFJbiQbLlz1jCWvqD+Ou3rNzD
+	gOorE7Xn4/yCN0UjWIW3w2Bt8F8tSU/tLBGWEFWeCpe4=
+X-Google-Smtp-Source: AGHT+IGACVzKcc/CWqn8ebiPa0Lg4jyb8Fod1LXSVkdTcvNC407dhTGnKhjoFcgaT1sQHm30IbxNrA==
+X-Received: by 2002:a05:6000:402b:b0:39c:e0e:bb46 with SMTP id ffacd0b85a97d-39efba383d1mr15175622f8f.4.1745419586899;
+        Wed, 23 Apr 2025 07:46:26 -0700 (PDT)
+Received: from FRSMI24-OUB.idf.intranet (static-css-ccs-204145.business.bouyguestelecom.com. [176.157.204.145])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-39efa4207c5sm18764249f8f.6.2025.04.23.07.46.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Apr 2025 07:36:09 -0700 (PDT)
-From: Hugo FLEURY <fleuryhugo7@gmail.com>
+        Wed, 23 Apr 2025 07:46:26 -0700 (PDT)
+From: kelefa.sane@smile.fr
 To: openembedded-devel@lists.openembedded.org
-Cc: Tim Orling <TicoTimo@gmail.com>,
-	Derek Straka <derek@asterius.io>,
-	Hugo FLEURY <fleuryhugo7@gmail.com>
-Subject: [meta-python][PATCH] python3-fastapi: add FastAPI (0.115.2)
-Date: Wed, 23 Apr 2025 16:36:06 +0200
-Message-ID: <20250423143607.453363-1-fleuryhugo7@gmail.com>
+Cc: =?UTF-8?q?K=C3=A9l=C3=A9fa=20San=C3=A9?= <kelefa.sane@smile.fr>
+Subject: [meta-oe][PATCH] reproducilibility: remove cjson-ptest package from non reproducible list
+Date: Wed, 23 Apr 2025 16:45:45 +0200
+Message-ID: <20250423144546.1737495-1-kelefa.sane@smile.fr>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Apr 2025 14:36:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117080
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Apr 2025 14:46:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117081
 
-FastAPI is a modern, high-performance web framework for building APIs with Python 3.7+ based on standard Python type hints.
+From: Kéléfa Sané <kelefa.sane@smile.fr>
 
-This adds the FastAPI recipe to meta-python, along with its dependencies.
+The reproducibility issue has been fixed by the commit "cjson: fix
+buildpath warnings (0cc731540808d848c03c2e345c36904b83529266)"
+which replace the build path present in files:
+- CTestTestfile.cmake
+- tests/CTestTestfile.cmake
+- fuzzing/CTestTestfile.cmake
 
-Signed-off-by: Hugo FLEURY <fleuryhugo7@gmail.com>
+by PTEST_PATH (/usr/lib/cjson/ptest).
+
+Signed-off-by: Kéléfa Sané <kelefa.sane@smile.fr>
 ---
- .../python/python3-fastapi_0.115.12.bb        | 23 +++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-fastapi_0.115.12.bb
+ meta-oe/conf/include/non-repro-meta-oe.inc | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-fastapi_0.115.12.bb b/meta-python/recipes-devtools/python/python3-fastapi_0.115.12.bb
-new file mode 100644
-index 0000000000..e03aa08c5d
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-fastapi_0.115.12.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "FastAPI - high performance API framework"
-+HOMEPAGE = "https://fastapi.tiangolo.com/"
-+LICENSE = "MIT"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=95792ff3fe8e11aa49ceb247e66e4810"
-+
-+SRC_URI[sha256sum] = "1e2c2a2646905f9e83d32f04a3f86aff4a286669c6c950ca95b5fd68c2602681"
-+
-+inherit pypi python_setuptools_build_meta
-+
-+DEPENDS += " \
-+    ${PYTHON_PN}-pdm-native \
-+    ${PYTHON_PN}-pdm-backend-native \
-+"
-+
-+RDEPENDS:${PN} += " \
-+    ${PYTHON_PN}-pydantic \
-+    ${PYTHON_PN}-pydantic-core \
-+    ${PYTHON_PN}-starlette \
-+    ${PYTHON_PN}-typing-extensions \
-+"
-+
-+PYPI_PACKAGE = "fastapi"
--- 
-2.43.0
-
+diff --git a/meta-oe/conf/include/non-repro-meta-oe.inc b/meta-oe/conf/include/non-repro-meta-oe.inc
+index b8b5adf45..ba0874941 100755
+--- a/meta-oe/conf/include/non-repro-meta-oe.inc
++++ b/meta-oe/conf/include/non-repro-meta-oe.inc
+@@ -4,7 +4,6 @@ KNOWN_NON_REPRO_META_OE = " \
+     asio-dbg \
+     asio-ptest \
+     asio-src \
+-    cjson-ptest \
+     cpuid-doc \
+     crash \
+     crash-dbg \
 
