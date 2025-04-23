@@ -1,118 +1,107 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <fleuryhugo7@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F2A5C369CB
-	for <webhook@archiver.kernel.org>; Wed, 23 Apr 2025 14:04:27 +0000 (UTC)
-Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
- by mx.groups.io with SMTP id smtpd.web10.9391.1745417059462918053
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 91A4EC369CB
+	for <webhook@archiver.kernel.org>; Wed, 23 Apr 2025 14:35:57 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.web11.10362.1745418949176957896
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Apr 2025 07:04:19 -0700
+ Wed, 23 Apr 2025 07:35:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mXetSK9W;
- spf=pass (domain: gmail.com, ip: 209.85.128.170, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-70565ccf3bcso61043057b3.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Apr 2025 07:04:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QU3meXTN;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: fleuryhugo7@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-39efc1365e4so2473186f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 23 Apr 2025 07:35:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745417058; x=1746021858; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1745418947; x=1746023747; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Qh4EN6QXBD1TmsWPVjdOk1YUPWkWGhD1/OyWoe2zthc=;
-        b=mXetSK9W+aILe41FriuMKgSpYRGLWtwM0LJB2ruYwJn+ktrJLeYkAWmXcXB1wl+2tN
-         ywMK6r/xKGVhF6iHw5Gu9Z9FiWHGkh9QbPDVT+E8E/aqrVuGQk6WQzmYfgzXNyW9XlhM
-         GJwu5JmTr067rr/bhXoMbgkvM3/zrXBAQy5qaPBxY55u8H8qnLeoVYr5h776vvaT8PJu
-         Gp0q2fksUWdB1hCDAtkytO1z414z4LM3ktNNeZFGqbZlJCGlxFqCsgRXrPRHN4H51am2
-         4t+pKDKQc8k+M5hqTVhkgz9BbqPARvLGbICbf2FzjDoTx4BF1ip56emROfzq0hDv9lj3
-         /4tA==
+        bh=fS2s9xe7rS5zX6sN29LfjgZ0VB3W268JW2a19XUX3Gk=;
+        b=QU3meXTNWHzljyH1X547AXKM2lA4hEJnFZ6zRqh2krGTV9ZQgvekHDzZKn/6ZoAe0p
+         RUfJThAQwHxmnh4r10n84vibQZbjoQbd6l8/XgcYpKPZyBKn9EX3SRXDv7EgQO5qp27S
+         jnzqV1LGy81jDZP3bYz3J24ygBFjxjsx0/vPXXNdrHecRx7POIj+8OoCCGDbPhDyX4WH
+         NJHdNKtnL4uCJ/3hotsLT68VaDdhZvwmaLEhWIORIf1yA0+mkDuiq1VhBKPXsIzJmxJG
+         yVMbZ3cq25DhkK3czdx4vOqWlBnwPsqDPDavpw51P2wZneu5D27iiUkzDc4fvUDgphvX
+         L4Lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745417058; x=1746021858;
+        d=1e100.net; s=20230601; t=1745418947; x=1746023747;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Qh4EN6QXBD1TmsWPVjdOk1YUPWkWGhD1/OyWoe2zthc=;
-        b=QjL/6AL4PKkX9PXdxOjkTRee8VOcv8MLfW/joIAMKI5/Pc9sAHbJB7WFi7V1pIV9Kn
-         4CuVeQY9VqXUZ+spBoZuNr5qtSj7euF1yzO/ge9XtERc+LsAEnr1FHkAvuvgCcmmO4Sn
-         DR/yY39YVsh/xqasFfL2ji3wnLFzZLnARZLH8OMEpJFIEyanglWLfREsNb88xo/b6M0c
-         qvcep0LXdXCf1eHoVy87CXS5dIHgijIANfQeTQ6//ixx1hB3U6pmbSrZOdGe9H6yvArF
-         tnZQABZGOs2iuZKwiQcVTUEYqvmmrz7xk1vjPsZBUkQhCuLVggPb+5hL1wWZuJwKLNtm
-         ilNw==
-X-Gm-Message-State: AOJu0Ywen63mgXuc4sveP4TY01V6ODsysCFyQs8OdBxVGYQsBfXaNmaY
-	KruH2SV1tbwrLwbdL1MWboZMNGnAfOznjWFebhbWrGlTP+eYGP5ZOx43QJXT
-X-Gm-Gg: ASbGncs8n6YNtfEg6P5UaaFezv3zG2dqxMBQySa9NJAY8+aoRnCrp9FWpBZL7VWvYWl
-	s8s+X79JGcRUKWtI0KUfyCSVzluNt4xfrnIS0z/xLmqB5R1BzeTnW5ifmA5kddUpbDJygMpjqQR
-	rDk6Xy7kOPk42/xFoFlaV7ksw1i0ce1L4mQPM5Mpwh4sb2nTHPLkk0l7UL/YpBqHrkgwNo07qcy
-	P8BnVmlj23sSd0nOG3vK/sePpcuSebqOXnpmufP8t3ejZk7VdB79o+8KIy5l9v2tWEfltj2rRPa
-	e31qztii8H5nH/Kozd4TslB8/QSWj+irSzBgKwEuaABIkn98T0I66off
-X-Google-Smtp-Source: AGHT+IGfxoLQ/VHJ4b1w2I0e33ODCMw3XQBUiAIRGh1G+klas4KbOF3v/RiMNkjxyRC5NvXM68UUtw==
-X-Received: by 2002:a05:690c:f03:b0:708:1bf1:cc4b with SMTP id 00721157ae682-7081bf1cce0mr71365047b3.7.1745417057978;
-        Wed, 23 Apr 2025 07:04:17 -0700 (PDT)
-Received: from localhost.localdomain ([71.215.9.36])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-706ca44fe08sm29494917b3.13.2025.04.23.07.04.16
+        bh=fS2s9xe7rS5zX6sN29LfjgZ0VB3W268JW2a19XUX3Gk=;
+        b=PntjsIO28k2KmTA2PTP1fPC2fBPENyB8hH3/5q1KPnTwNW1toA/d8zSSznASjJ1OF/
+         apJYH9EjI9iMcOhM6FPg1shRvyk9jOb0rzE1MJHvH8vzw+kHGtLsELbmFBF+OK77jlYm
+         UEJG76QXajKyulP3TKj/MHsm3g/aHzINscfj8mXf5DWnM4dLrgYRyL5pPvZGJ1vSXY8k
+         nNOTsJ+MSHCL07IW7hSkHf3KOIIj+Z/U2KTaVAEnpH7muAki0U8DPlFcyU/d17sjSCcR
+         sXSm/3zNRuCgJQRp6StzutzMkyyTOC17Eobg/jgNph8qqCCFzGUDNwCKh1p0iPMAINDE
+         aeWw==
+X-Gm-Message-State: AOJu0YzaRn39YjR7KkJ/nX1FFtyr/gDJpf2fVSPLBVBoRga9TV+qvrqM
+	W/dcr5l8hKegM0QUdS7712gRY3Ywm+4vjs2cM0BsLMjHKJZ0RBDnyhRh3Qcz
+X-Gm-Gg: ASbGncu/2sN38lzIV27CpVugeJ4j15VLZAm3gctGD/SK701GAsfzG7Q6Z2C8CptoI2B
+	mcv3zmQPlNFk0dt3Wppjh2pP9GMc60TNAAqH5rpI9qhkvuCE8Il1Z13N9FF08V9Bw/Z1Sw0gALQ
+	9M2JCuEH/Ac4UIgR7+Nq98H7ZMgrVJvM0rzUkxj9w/AGi6/wfm0lvXHKax1RBqqkKiuuf66PVZ4
+	B9pVuPcM/6BV1iCza5LPdAhxlvw346+o2KDFZesIxob1V1Cic99cb8GuyVqWJjs6dWSCuH9CgQf
+	gkOR785Njr2HK8KrHINn49u1y1g9b9BQEr5L6v6LMWk=
+X-Google-Smtp-Source: AGHT+IFBWyiV6PW2kAiAX8GOZPjqQfK4mS1KsJPbPga9c2qAbE94SSyD2nZezS9C+t5lJix/5g3idw==
+X-Received: by 2002:adf:e6cc:0:b0:3a0:6ac1:93a1 with SMTP id ffacd0b85a97d-3a06ac193d4mr523364f8f.7.1745418947350;
+        Wed, 23 Apr 2025 07:35:47 -0700 (PDT)
+Received: from ixpehess.. ([2a01:e0a:c13:c5e0:56fc:ca67:b1be:cc71])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-44092d18197sm28290105e9.7.2025.04.23.07.35.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Apr 2025 07:04:17 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+        Wed, 23 Apr 2025 07:35:47 -0700 (PDT)
+From: Hugo FLEURY <fleuryhugo7@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] nodejs: upgrade 22.14.0 -> 22.15.0
-Date: Wed, 23 Apr 2025 10:04:00 -0400
-Message-ID: <20250423140401.368400-1-schonm@gmail.com>
+Cc: Tim Orling <TicoTimo@gmail.com>,
+	Derek Straka <derek@asterius.io>,
+	Hugo FLEURY <fleuryhugo7@gmail.com>
+Subject: [meta-python][PATCH] python3-uvicorn: add Uvicorn (0.34.2)
+Date: Wed, 23 Apr 2025 16:35:39 +0200
+Message-ID: <20250423143540.453271-1-fleuryhugo7@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Apr 2025 14:04:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117078
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Apr 2025 14:35:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117079
 
-    License-Update: Whitespace changes.  Update copyright years.  Add zstd under BSD license.
-      https://github.com/nodejs/node/pull/57840/files#diff-c693279643b8cd5d248172d9c22cb7cf4ed163a3c98c8a3f69c2717edd3eacb7
+This patch introduces version 0.34.2 of Uvicorn to the OpenEmbedded build system.
 
-    Changelog: https://github.com/nodejs/node/releases/tag/v22.15.0
+The addition includes the necessary recipe to build Uvicorn from PyPI.
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Hugo FLEURY <fleuryhugo7@gmail.com>
 ---
- .../oe-npm-cache                                              | 0
- ...-cache-native_22.14.bb => nodejs-oe-cache-native_22.15.bb} | 0
- .../nodejs/{nodejs_22.14.0.bb => nodejs_22.15.0.bb}           | 4 ++--
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-22.14 => nodejs-oe-cache-22.15}/oe-npm-cache (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_22.14.bb => nodejs-oe-cache-native_22.15.bb} (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_22.14.0.bb => nodejs_22.15.0.bb} (98%)
+ .../python/python3-uvicorn_0.34.2.bb          | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-uvicorn_0.34.2.bb
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.14/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.15/oe-npm-cache
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.14/oe-npm-cache
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.15/oe-npm-cache
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.14.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.15.bb
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.14.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.15.bb
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.14.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.15.0.bb
-similarity index 98%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_22.14.0.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_22.15.0.bb
-index dee4c9df4f..07ea8c083d 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_22.14.0.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.15.0.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
- HOMEPAGE = "http://nodejs.org"
- LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=da350b022352bee62fe22feb6ad681c8"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b4f41dcacabc8f07b9ca7dee2f188a00"
- 
- CVE_PRODUCT = "nodejs node.js"
- 
-@@ -37,7 +37,7 @@ SRC_URI:append:class-target = " \
- SRC_URI:append:toolchain-clang:powerpc64le = " \
-            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
-            "
--SRC_URI[sha256sum] = "c609946bf793b55c7954c26582760808d54c16185d79cb2fb88065e52de21914"
-+SRC_URI[sha256sum] = "e7c4226d1d92f33ad854d6da4f7e519e77690b8e73f93496881f8c539174d9df"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
+diff --git a/meta-python/recipes-devtools/python/python3-uvicorn_0.34.2.bb b/meta-python/recipes-devtools/python/python3-uvicorn_0.34.2.bb
+new file mode 100644
+index 0000000000..2b3c362463
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-uvicorn_0.34.2.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "Lightning-fast ASGI server implementation."
++HOMEPAGE = "https://www.uvicorn.org/"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5c778842f66a649636561c423c0eec2e"
++
++SRC_URI[sha256sum] = "0e929828f6186353a80b58ea719861d2629d766293b6d19baf086ba31d4f3328"
++
++inherit pypi python_hatchling python_setuptools_build_meta
++
++PYPI_PACKAGE = "uvicorn"
++
++RDEPENDS:${PN} += " \
++    ${PYTHON_PN}-typing-extensions \
++    ${PYTHON_PN}-click \
++    ${PYTHON_PN}-h11 \
++    ${PYTHON_PN}-anyio \
++"
++
++S = "${WORKDIR}/uvicorn-${PV}"
 -- 
 2.43.0
 
