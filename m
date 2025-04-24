@@ -2,36 +2,36 @@ Return-Path: <mark.yang@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0AE5C369AB
-	for <webhook@archiver.kernel.org>; Thu, 24 Apr 2025 07:29:32 +0000 (UTC)
-Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.53])
- by mx.groups.io with SMTP id smtpd.web10.9748.1745479761438085412
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1773C369AB
+	for <webhook@archiver.kernel.org>; Thu, 24 Apr 2025 08:10:32 +0000 (UTC)
+Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.51])
+ by mx.groups.io with SMTP id smtpd.web11.10310.1745482230650746520
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Apr 2025 00:29:22 -0700
+ Thu, 24 Apr 2025 01:10:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.53, mailfrom: mark.yang@lge.com)
-Received: from unknown (HELO lgeamrelo01.lge.com) (156.147.1.125)
-	by 156.147.23.53 with ESMTP; 24 Apr 2025 16:29:18 +0900
-X-Original-SENDERIP: 156.147.1.125
+ dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.51, mailfrom: mark.yang@lge.com)
+Received: from unknown (HELO lgeamrelo04.lge.com) (156.147.1.127)
+	by 156.147.23.51 with ESMTP; 24 Apr 2025 17:10:28 +0900
+X-Original-SENDERIP: 156.147.1.127
 X-Original-MAILFROM: mark.yang@lge.com
 Received: from unknown (HELO markyang..) (10.177.122.205)
-	by 156.147.1.125 with ESMTP; 24 Apr 2025 16:29:18 +0900
+	by 156.147.1.127 with ESMTP; 24 Apr 2025 17:10:28 +0900
 X-Original-SENDERIP: 10.177.122.205
 X-Original-MAILFROM: mark.yang@lge.com
 From: mark.yang@lge.com
 To: openembedded-devel@lists.openembedded.org
 Cc: "mark.yang" <mark.yang@lge.com>
-Subject: [meta-initramfs][PATCH] kexecboot: fix build error with gcc-15
-Date: Thu, 24 Apr 2025 16:29:17 +0900
-Message-Id: <20250424072917.2263300-1-mark.yang@lge.com>
+Subject: [meta-initramfs][PATCH v2] kexecboot: fix build error with gcc-15
+Date: Thu, 24 Apr 2025 17:10:25 +0900
+Message-Id: <20250424081025.2393088-1-mark.yang@lge.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Apr 2025 07:29:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117088
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Apr 2025 08:10:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117089
 
 From: "mark.yang" <mark.yang@lge.com>
 
@@ -53,18 +53,18 @@ In file included from ../../git/src/tui.c:40:
 
 Signed-off-by: mark.yang <mark.yang@lge.com>
 ---
- .../0001-Fix-argument-errors-in-gcc-15.patch  | 77 +++++++++++++++++++
- .../recipes-bsp/kexecboot/kexecboot_git.bb    |  1 +
- 2 files changed, 78 insertions(+)
+ .../0001-Fix-argument-errors-in-gcc-15.patch  | 90 +++++++++++++++++++
+ .../recipes-bsp/kexecboot/kexecboot_git.bb    |  5 +-
+ 2 files changed, 94 insertions(+), 1 deletion(-)
  create mode 100644 meta-initramfs/recipes-bsp/kexecboot/files/0001-Fix-argument-errors-in-gcc-15.patch
 
 diff --git a/meta-initramfs/recipes-bsp/kexecboot/files/0001-Fix-argument-errors-in-gcc-15.patch b/meta-initramfs/recipes-bsp/kexecboot/files/0001-Fix-argument-errors-in-gcc-15.patch
 new file mode 100644
-index 0000000000..3fcdd1b297
+index 0000000000..3f2aac9469
 --- /dev/null
 +++ b/meta-initramfs/recipes-bsp/kexecboot/files/0001-Fix-argument-errors-in-gcc-15.patch
-@@ -0,0 +1,77 @@
-+From b33918173e51aa39e65c64b94f0a736b51d6795f Mon Sep 17 00:00:00 2001
+@@ -0,0 +1,90 @@
++From d18d3fb700540646f4b79f6c6788614ffff735f6 Mon Sep 17 00:00:00 2001
 +From: "mark.yang" <mark.yang@lge.com>
 +Date: Thu, 24 Apr 2025 16:17:49 +0900
 +Subject: [PATCH] Fix argument errors in gcc 15
@@ -84,14 +84,14 @@ index 0000000000..3fcdd1b297
 +../../git/src/tui.h:36:9: note: previous declaration of 'tui_init' with type 'kx_tui *(void)'
 +   36 | kx_tui *tui_init();
 +...
-+
 +Upstream-Status: Submitted [https://github.com/kexecboot/kexecboot/pull/30]
 +Signed-off-by: mark.yang <mark.yang@lge.com>
 +---
 + src/fb.c  | 4 ++--
 + src/fb.h  | 2 +-
++ src/gui.c | 2 +-
 + src/tui.h | 2 +-
-+ 3 files changed, 4 insertions(+), 4 deletions(-)
++ 4 files changed, 5 insertions(+), 5 deletions(-)
 +
 +diff --git a/src/fb.c b/src/fb.c
 +index c68009f..6acd9f2 100644
@@ -128,6 +128,19 @@ index 0000000000..3fcdd1b297
 + 
 + int fb_new(int angle);
 + 
++diff --git a/src/gui.c b/src/gui.c
++index bf4230a..a140c9b 100644
++--- a/src/gui.c
+++++ b/src/gui.c
++@@ -157,7 +157,7 @@ void gui_destroy(struct gui_t *gui)
++ 	free(gui->icons);
++ #endif
++ 
++-	fb_destroy();
+++	fb_destroy(fb);
++ 	free(gui);
++ }
++ 
 +diff --git a/src/tui.h b/src/tui.h
 +index feed233..79faac0 100644
 +--- a/src/tui.h
@@ -142,15 +155,19 @@ index 0000000000..3fcdd1b297
 + void tui_show_menu(kx_tui *tui, kx_menu *menu);
 + 
 diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
-index a92c0e8966..f9d4e24892 100644
+index a92c0e8966..2be9076726 100644
 --- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
 +++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
-@@ -9,6 +9,7 @@ SRC_URI = "git://github.com/kexecboot/kexecboot.git;branch=master;protocol=https
+@@ -5,7 +5,10 @@ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ PV = "0.6+git"
+ S = "${WORKDIR}/git"
+-SRC_URI = "git://github.com/kexecboot/kexecboot.git;branch=master;protocol=https"
++SRC_URI = " \
++    git://github.com/kexecboot/kexecboot.git;branch=master;protocol=https \
++    file://0001-Fix-argument-errors-in-gcc-15.patch \
++"
  SRC_URI:append:libc-klibc = "\
      file://0001-kexecboot-Use-new-reboot-API-with-klibc.patch \
      file://0001-make-Add-compiler-includes-in-cflags.patch \
-+    file://0001-Fix-argument-errors-in-gcc-15.patch \
- "
- SRCREV = "5a5e04be206140059f42ac786d424da1afaa04b6"
- inherit autotools
 
