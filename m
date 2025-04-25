@@ -1,110 +1,168 @@
-Return-Path: <erik@riscstar.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B939C369C2
-	for <webhook@archiver.kernel.org>; Fri, 25 Apr 2025 18:51:33 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web11.13775.1745607086380317732
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5F53C369C2
+	for <webhook@archiver.kernel.org>; Fri, 25 Apr 2025 21:53:11 +0000 (UTC)
+Received: from mail-oo1-f51.google.com (mail-oo1-f51.google.com [209.85.161.51])
+ by mx.groups.io with SMTP id smtpd.web11.111.1745617987681840398
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Apr 2025 11:51:26 -0700
+ Fri, 25 Apr 2025 14:53:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@riscstar-com.20230601.gappssmtp.com header.s=20230601 header.b=0fVJKLBP;
- spf=pass (domain: riscstar.com, ip: 209.85.128.48, mailfrom: erik@riscstar.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-43edb40f357so18311475e9.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Apr 2025 11:51:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=egFl9bCj;
+ spf=pass (domain: gmail.com, ip: 209.85.161.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f51.google.com with SMTP id 006d021491bc7-6063462098eso1760445eaf.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Apr 2025 14:53:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20230601.gappssmtp.com; s=20230601; t=1745607084; x=1746211884; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=uYMzm8gPEno2o5EgRSn1waaqYfTqOnsH4IIX3wcgmE4=;
-        b=0fVJKLBPhr79Q+Ca8zJDbKyWfauG1qe+0cvEcE8up/s8giDcU9AYrlPEFLIimKJiN5
-         XROaZha3yq0LIqkj/f3RrMtucDRw2hAnU7byIbMO30xm5A6yqY3UJiST/Z/+t7YiIWpL
-         hKVjoeCE4vO1CmdBsNAZVsky/jf62OldAXy9XGcFj00ku1SaVFcUWqc1y4ojW+V20tgB
-         VGVL0POfhf0aMnN2ZylX5R8VvuPc/FatAx+BCrPXS0uWNQZVn7SDoPkwdoZl2gXNfV71
-         G17CrakB/dVfOOjMtCoQCTpjyY9lVGi8C0t01p632CrLYNLVnVbDpHCGHXsFAvN3+ey/
-         j/Yw==
+        d=gmail.com; s=20230601; t=1745617987; x=1746222787; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=xCiXwt6M/+28cCOx95m0queZFahXq5gnIexEjIdlHSk=;
+        b=egFl9bCj732DLRG1rAGQfuKN0nJHkecMHHGlUUKq22BVUF7fl5NG/6i1+Jepz5cJwW
+         FJqZGSuBdIquWl2WDea2tEVEaCWHq/Qe05Fe+QJff9tp1vSsT0sdJ0ub89bmKdsjO/1G
+         G53EwFecl4lU0LeKKhIf4mBJW2rdPjl5Vn3cOwxQZmx/3gA01IsmvdpRbI4HmcvC56Oo
+         bUSJQinefFplWsdbPJjcaT5dUF8gQqxyiYHS3gZdxifOf/eEwhrea5NJfLqUmtlmL1zm
+         qjmFRzyyRphvX9/F9ZhiwxqeCcwaZI/KO9nfDFCVd6qwfBhaMgFJ84KBj3sM4Pglpf1t
+         905A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745607084; x=1746211884;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=uYMzm8gPEno2o5EgRSn1waaqYfTqOnsH4IIX3wcgmE4=;
-        b=XljOzxnzJl2bwaQ49qCXZOIKpP5O2/fkFclM94PlS8cpZ5watTmyl3SkXcN6IoDxUy
-         w6jnZPFKhnuiTou6c9pGUAtLKwpb6CWYTnV1NRe65ukTZyyRquvGVg1b8icn6nUSNfo3
-         Y3viKoWRrI0FEhu0bzHDTFTHKdSilKK47ThvP2ffteSLwGYmGE17HJgkuza0OZNjngEm
-         g09am0+oZ2rOmgX45oDLd6oOA/vDP1HExAXBoZHfWagaLjLSSdFoqqVG7aY2yK1f1Afe
-         ySpQsTrrVswqcQMz0n5onUtqw0C6QIQ4ISjZ1jj+0qoRMMb2ouH8eV6yUaMrJoE6RbBF
-         D1Jw==
-X-Gm-Message-State: AOJu0YySP4LiN6OOUTWf2xIoU5GwQMiNMuwaglCGdsXRpvKUNHCmOOIu
-	xweVThxqxY2m0IbDi6LBZlRHO+r7drZ3y3a7J4rtatW1t4cvg9uQsAaVRo+ssfbVlaqOYvBlJZ0
-	5Kio=
-X-Gm-Gg: ASbGncs8E3LBP/faJBSa+S6rFqNXM7rd5IHdvV+8D6d8rAeto6mDGewz1CgSg37ViGa
-	ktnT/6JwezCrq7/8utII+TNTRtJExhj6kS/eZfU+U+o48ffYg/X9Y5saOmhw+oDYE8H0h+9ilbD
-	Z5CKyirdKFRMJ7AZJnDfU1VOWelFYO14OHmDJSdH9PnP1Pmro+ueJpYmMqPCGIhFTIoSXIKGcff
-	qNXk9oG3vBTJZeDY+G77O1r5Li9pKWF4NjLYN5VByGkJII9TULFD79q5DP4CZoBnYPJL+SfXQod
-	CZZsCzV4AshGUwa2fY9wVw==
-X-Google-Smtp-Source: AGHT+IFsFBQ+ZRmwsiWu4Ekkov0JOP98vEkjp3FW3sGZAFkSytxiyIRxGJZDasSi4kMCbY2UYSo85Q==
-X-Received: by 2002:a05:600c:5029:b0:43c:f0ae:da7 with SMTP id 5b1f17b1804b1-440a65cdbafmr30391745e9.7.1745607084489;
-        Fri, 25 Apr 2025 11:51:24 -0700 (PDT)
-Received: from ablu-work.lan ([2001:9e8:d596:8d00::35e])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4409d2ac26dsm65255475e9.21.2025.04.25.11.51.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Apr 2025 11:51:24 -0700 (PDT)
-From: Erik Schilling <erik@riscstar.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Stefan Agner <stefan.agner@toradex.com>,
-	Erik Schilling <erik@riscstar.com>
-Subject: [meta-oe][PATCH] zram: fix RDEPENDS for systemd service
-Date: Fri, 25 Apr 2025 20:49:37 +0200
-Message-ID: <20250425185118.1118692-1-erik@riscstar.com>
-X-Mailer: git-send-email 2.49.0
+        d=1e100.net; s=20230601; t=1745617987; x=1746222787;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=xCiXwt6M/+28cCOx95m0queZFahXq5gnIexEjIdlHSk=;
+        b=a9ev/27VjzehJRWC6h/OnZ6E+iaBX/06656gw3uXzGCILAcy9oDb4T7z15nFqAG3lF
+         zyJn1ZwwdjDTpgvcyEFUB+xrwuU5c8adAmow5HfOev86eqEbp1FEtPGRYMxAPbDuPHtP
+         3D1LfyGUuccVNHMuGYdIvvWnVaftZkBDeZZCpqGOLy3dv6fSW5f7JaqH532C7PUWEo/x
+         BJQdtffqA0a5HSEVg3Wi2SryN66fXKfEqSOUVTsh5SDhR82YwKH13T1gGmG4RMtTiK4Q
+         kB82dqqoHstY1lCDscvYatOPbU08iCXzy5/+aUywy4NmpIth8bSfqgZvWgJyNQRkvonX
+         nTFQ==
+X-Gm-Message-State: AOJu0Yy7yB2r8a6x1GFqtLyKyWKpcVRZr3jy6Ex2IBa6h0rAvp0AieCX
+	QBWn2aFRh6fYX4uYiNBIdLuZjE2Xvpzk7U7GlxJgSqEw0f8PRDJdWJUSm7719xVqw4l4jvhMxkF
+	voQwBraLsah8QHzmrOvBdIKIKK7KafF4KIiM=
+X-Gm-Gg: ASbGncvpiU7VcWQYOBbr/UYJfBxvsMXgfgT6YvJcIXJo8C+PEfZHlInG86JhU/MXqGg
+	O9Z94RCsykM0opv1nYwnfWS2dvsJtRs9BKjOBLSWJ4rKTOv5+oReejzWPN4g7BVBEfmsZv3nkBQ
+	JnU+Z49QABULzocCsOPMRPQw==
+X-Google-Smtp-Source: AGHT+IHdmm2wRGcPiR7KAQ8ixb0NThZ5O+0M+8MFZ4Ccw/9Pzr7G6seJ5NSVVv4YH+Yle+hVcjwGNXhdpQScJPskgbc=
+X-Received: by 2002:a05:6870:2045:b0:2a7:d856:94a with SMTP id
+ 586e51a60fabf-2d99d86712cmr2219215fac.22.1745617598926; Fri, 25 Apr 2025
+ 14:46:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <87f53b1d-2646-4bf9-87db-34a4d0bc275a@gmail.com> <6525.1745594031172178467@lists.openembedded.org>
+In-Reply-To: <6525.1745594031172178467@lists.openembedded.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 25 Apr 2025 14:46:13 -0700
+X-Gm-Features: ATxdqUFplPjMqAcWfd2vcK4PhyE_oSpIdCF4D2qzD_xODnmJ-ENRpDfZjIP_n1I
+Message-ID: <CAMKF1sr_MwfC=dgu5MObrB1S=Xm_kZbWVvO2YooKCNd5qzu+-Q@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-fastapi: add FastAPI (0.115.2)
+To: fleuryhugo7@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 25 Apr 2025 18:51:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117136
+ <openembedded-devel@lists.openembedded.org>; Fri, 25 Apr 2025 21:53:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117137
 
-This attempted to pull in the entirety of util-linux when systemd is
-selected. That falls apart when building with `NO_RECOMMENDATIONS = "1"`
-as util-linux only weakly recommends util-linux-zramctl.
+On Fri, Apr 25, 2025 at 8:13=E2=80=AFAM Hugo via lists.openembedded.org
+<fleuryhugo7=3Dgmail.com@lists.openembedded.org> wrote:
+>
+> Added tests and fixed the issue related to ${PYTHON_PN}.
+>
+> Signed-off-by: Hugo FLEURY <fleuryhugo7@gmail.com>
+> ---
+>  .../python/python3-uvicorn/run-ptest          |  6 +++
+>  .../python/python3-uvicorn_0.34.2.bb          | 37 +++++++++++++++++++
+>  2 files changed, 43 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-uvicorn/r=
+un-ptest
+>  create mode 100644 meta-python/recipes-devtools/python/python3-uvicorn_0=
+.34.2.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-uvicorn/run-ptes=
+t b/meta-python/recipes-devtools/python/python3-uvicorn/run-ptest
+> new file mode 100644
+> index 0000000000..d75b4cd4c9
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-uvicorn/run-ptest
+> @@ -0,0 +1,6 @@
+> +#!/bin/sh
+> +
+> +# based on the gunicorn ptest
+> +echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+> +
+> +pytest
+> diff --git a/meta-python/recipes-devtools/python/python3-uvicorn_0.34.2.b=
+b b/meta-python/recipes-devtools/python/python3-uvicorn_0.34.2.bb
+> new file mode 100644
+> index 0000000000..cd2691a5ee
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-uvicorn_0.34.2.bb
+> @@ -0,0 +1,37 @@
+> +SUMMARY =3D "Lightning-fast ASGI server implementation."
+> +HOMEPAGE =3D "https://www.uvicorn.org/"
+> +LICENSE =3D "BSD-3-Clause"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3D5c778842f66a649636561c423c=
+0eec2e"
+> +
+> +SRC_URI[sha256sum] =3D "0e929828f6186353a80b58ea719861d2629d766293b6d19b=
+af086ba31d4f3328"
+> +
+> +inherit pypi python_hatchling python_setuptools_build_meta ptest
+> +
+> +SRC_URI +=3D "file://run-ptest"
+> +
+> +RDEPENDS:${PN}-ptest +=3D " \
+> +    python3-pytest \
+> +    python3-httptools \
+> +    python3-dotenv \
 
-Hence, we want to pull that in explicitly.
 
-Signed-off-by: Erik Schilling <erik@riscstar.com>
----
-Hopefully this now does not go through twice... I forgot that I was not
-subscribed to this list yet and on first send it looks like non-subscriber post
-are not allowed.
+I am seeing
 
- meta-oe/recipes-extended/zram/zram_0.2.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ERROR: Nothing RPROVIDES 'python3-dotenv' (but
+/mnt/jenkins/workspace/Yocto-world-clang/sources/meta-openembedded/meta-pyt=
+hon/recipes-devtools/python/python3-uvicorn_0.34.2.bb
+RDEPENDS on or otherwise requires it)
 
-diff --git a/meta-oe/recipes-extended/zram/zram_0.2.bb b/meta-oe/recipes-extended/zram/zram_0.2.bb
-index 89292118d0..e4522f89a1 100644
---- a/meta-oe/recipes-extended/zram/zram_0.2.bb
-+++ b/meta-oe/recipes-extended/zram/zram_0.2.bb
-@@ -1,15 +1,15 @@
- SUMMARY = "Linux zram compressed in-memory swap"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
- 
- inherit update-rc.d systemd
- 
--RDEPENDS:${PN} = "kmod \
--    ${@bb.utils.contains('DISTRO_FEATURES','systemd','util-linux','util-linux-swaponoff',d)}"
-+RDEPENDS:${PN} = "kmod util-linux-swaponoff \
-+    ${@bb.utils.contains('DISTRO_FEATURES','systemd','util-linux-zramctl','',d)}"
- RRECOMMENDS:${PN} = "kernel-module-zram"
- 
- 
- SRC_URI = " \
-            file://init \
-            file://zram-swap-init \
-            file://zram-swap-deinit \
--- 
-2.49.0
+dotenv module is built via meta-virtualization, so perhaps its better
+to bring it to meta-python perhaps since meta-python does not depend
+on meta-virtualization.
 
+
+> +    python3-httpx \
+> +    python3-pyyaml \
+> +    python3-websockets \
+> +    python3-a2wsgi \
+> +    python3-pytest-mock \
+> +"
+> +
+> +do_install_ptest() {
+> +        install -d ${D}${PTEST_PATH}/tests
+> +        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+> +}
+> +
+> +PYPI_PACKAGE =3D "uvicorn"
+> +
+> +RDEPENDS:${PN} +=3D " \
+> +    python3-typing-extensions \
+> +    python3-click \
+> +    python3-h11 \
+> +    python3-anyio \
+> +"
+> +
+> +S =3D "${WORKDIR}/uvicorn-${PV}"
+> --
+> 2.43.0
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#117129): https://lists.openembedded.org/g/openembedde=
+d-devel/message/117129
+> Mute This Topic: https://lists.openembedded.org/mt/112415221/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
