@@ -1,130 +1,159 @@
-Return-Path: <mingli.yu@eng.windriver.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9DCA6C369D7
-	for <webhook@archiver.kernel.org>; Fri, 25 Apr 2025 09:49:37 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.3287.1745574570124261725
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BCCFC369C2
+	for <webhook@archiver.kernel.org>; Fri, 25 Apr 2025 10:57:48 +0000 (UTC)
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
+ by mx.groups.io with SMTP id smtpd.web11.4056.1745578659657205602
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Apr 2025 02:49:30 -0700
+ Fri, 25 Apr 2025 03:57:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=621007b6a8=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53P4AVVw021935
-	for <openembedded-devel@lists.openembedded.org>; Fri, 25 Apr 2025 09:49:29 GMT
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 466jh63jfp-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 25 Apr 2025 09:49:28 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Fri, 25 Apr 2025 02:49:27 -0700
-Received: from pek-lpg-core4.wrs.com (128.224.153.44) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Fri, 25 Apr 2025 02:49:27 -0700
-From: <mingli.yu@eng.windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH 1/2] python3-pykickstart: Add ptest support
-Date: Fri, 25 Apr 2025 17:49:25 +0800
-Message-ID: <20250425094926.151102-1-mingli.yu@eng.windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cDMrKbRA;
+ spf=pass (domain: gmail.com, ip: 209.85.208.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-5f6214f189bso4012135a12.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Apr 2025 03:57:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1745578658; x=1746183458; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=wDSzWWsWbZ1q3EL8W/+ZzUrgyd+4dKpv8pNTO6dfeT8=;
+        b=cDMrKbRAd5+qekkWJqcItgOYierZ/tywYjYP6ZcTcluED//md+Ye9Mf6kAdcu1x9CS
+         kFmcR8NXMrq0dKZ7A5WO5hb5OeEPKFPpB0i2MHBGl8rqWHkcxvepynI1iDoOUVXZdZkv
+         SYEnjydzcdM/EIYYLU6ebYNSSEfSs6JbwwkpBS5j+4rqc0T8fvU7zunDAshahr4HZtAj
+         aZcKNcs+taay1yz9HII9n5bXX+DX99KU0PjfSJlnAvmt9xX0Tgg8+aQodBF/F+jGZfIF
+         z1jdwU50lLwLclIA8St+1Lzs78C2CCyjIIWPHh6yy7TkzdFRilxuyMmcirZ6L3puGm/Y
+         1kMA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1745578658; x=1746183458;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=wDSzWWsWbZ1q3EL8W/+ZzUrgyd+4dKpv8pNTO6dfeT8=;
+        b=LbyQn4O2XUKuRd/GMgS1nOqX7WvC3qegcbWvzVoRxXpgttYPyIVXQFXOLVHn0Jylr/
+         rFyhXeWK40MvicvlFO8V9IhgDZ6Fc/xz/SghnxZSDlK3kMTmvI3s6bvlilASmLvNcBF5
+         LvqFDvaqJrFyXZNRQ3uJjs0lHw0SWKv+Qy4A4ejGrSL4TJLxmrkeCkQvbdK0I8MZErNa
+         V/s89Ic52HkDVGzrnGNmn/YJDcd5jDRChYyxfI4BzXddW1L4nBdOLm322RsvW0nyzhq3
+         dpIYe/HZP4FzRHlXWQml06cLxb0pU6jbzjiet1au+87+f+1gwyRuxXbnPIxk7repeH1/
+         UGZw==
+X-Forwarded-Encrypted: i=1; AJvYcCWCx6h7RRVOn2KK+PoJHW2TcMg9RBfhNyRo+2ObA0Cx+aOl+kYAeznez4QgCSBpTGIA5UOvsMdfeKhzfAD/fxlsyJI=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YyxBf6QB1CZGj254uOeuAtGM/xad+sZ6MwyxgKjm1htm84lwJBG
+	Q9gO5BUQro1Qii2BQ4mdZV9NkJ6Dys5uQFmYX8sgDS/ncYitDV7+3w7LXXn7
+X-Gm-Gg: ASbGncvxpDfCfEbBSYp1ba4USUAbKIqf6OOvMf4LPbWPRVgK8IVtQD/q2qwicqnJypl
+	9U5MYN9Gp4ViXs2NIum+ZKz00Y9cYG5UvEi2PmOdgUThN1NHPwleNVX8f311fIbJtB/tG8v54KP
+	z55uENVfXO97x50bFVRkEh9qvK3uu58Z57V2Ep8rNfEe48uji6y53waUlpRYmkZwPHAU/LFXYBz
+	q0sQAhe2KX66RRLcvNl4M5za1pu12D9nnRj3PEj3ZLDsECc8jW/zBF3emHymEXTHPxWZRFL/V06
+	tWrOEDpLHJikHsA7YgJVXsBJx5MjVNnFnnh+0/SjZZp+f8AU
+X-Google-Smtp-Source: AGHT+IFtshQFN32I1mIUd9964fiuO6oD69TzJ+FYcE9eNNgSNwonFrmUgMlObEl8JYiY1abNCnOYWg==
+X-Received: by 2002:a05:6402:2349:b0:5ed:c09c:10f with SMTP id 4fb4d7f45d1cf-5f722b69477mr1291299a12.15.1745578657663;
+        Fri, 25 Apr 2025 03:57:37 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5f703831dc3sm1087495a12.67.2025.04.25.03.57.36
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 25 Apr 2025 03:57:37 -0700 (PDT)
+Message-ID: <23321af9-a794-493b-b665-8b3f971aaf5e@gmail.com>
+Date: Fri, 25 Apr 2025 12:57:36 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: C-2CSLYq93_eWrVD6fE9FkUcw3MoDc23
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNDI1MDA3MSBTYWx0ZWRfXyUHYKZyFywIM 0PXNEi0HAW+YaEMs0Zr7cGBrY6xR5HzbsC+JxVYjpIT+RAStVKwfd5yEBmBBby1CdyM5Yc0mWEl TIv7nyvhz39RTUQ7jkqsjiGFym285K+QI1EEJAIO+OE599A4PZjRE0IYjEEG/DIxkyiVbEcgY+g
- ckYkA3YYLttBUuglquDHwF4xdfWRzDObeKo1gBOvqQUbLh6hSa3bw1CLX7P0IVJkCiPVa/oW5P4 3hclkW2l3WfzCvg3hjxXj9W++WIRGvVgIw+vkiaVd1xNeQKUIWh/pOPBKXRVNXNH0Frwv3xBmCj Zo2VddWPRUb0KKmWuxFTzeKF5vFeTo0LU6GtF2r9Gjom7llawTgC1/keCA/JCHiOtoG5QpqRNVb
- 9rHnsKwMLgl2DbinwQJqX7Zo2CtlG1qEhFP/uo1YmfNAnOCideMnvzerhXn0Gd1bpnENkHR0
-X-Authority-Analysis: v=2.4 cv=Lu+Symdc c=1 sm=1 tr=0 ts=680b5aa9 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=XR8D0OoHHMoA:10 a=t7CeM3EgAAAA:8 a=NEAV23lmAAAA:8 a=fbIkDqpODqI0fdU288kA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: C-2CSLYq93_eWrVD6fE9FkUcw3MoDc23
-X-Sensitive_Customer_Information: Yes
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-04-25_02,2025-04-24_02,2025-02-21_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 mlxscore=0
- clxscore=1015 phishscore=0 bulkscore=0 lowpriorityscore=0 adultscore=0
- mlxlogscore=999 impostorscore=0 malwarescore=0 suspectscore=0
- priorityscore=1501 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2504070000
- definitions=main-2504250071
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-python][PATCH 1/2] python3-pykickstart: Add ptest
+ support
+To: mingli.yu@eng.windriver.com, openembedded-devel@lists.openembedded.org
+References: <20250425094926.151102-1-mingli.yu@eng.windriver.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20250425094926.151102-1-mingli.yu@eng.windriver.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 25 Apr 2025 09:49:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117123
+ <openembedded-devel@lists.openembedded.org>; Fri, 25 Apr 2025 10:57:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117125
 
-From: Mingli Yu <mingli.yu@windriver.com>
 
- # ./run-ptest
-PASS: tests/commands/test_authconfig.py:FC3_TestCase.runTest
-PASS: tests/commands/test_authconfig.py:F28_TestCase.runTest
-PASS: tests/commands/test_authconfig.py:F35_TestCase.runTest
-PASS: tests/commands/test_authselect.py:F28_TestCase.runTest
-PASS: tests/commands/test_autopart.py:AutoPart_TestCase.runTest
-PASS: tests/commands/test_autopart.py:FC3_TestCase.runTest
-PASS: tests/commands/test_autopart.py:F9_TestCase.runTest
-PASS: tests/commands/test_autopart.py:F12_TestCase.runTest
-[snip]
+On 4/25/25 11:49, Yu, Mingli via lists.openembedded.org wrote:
+> From: Mingli Yu <mingli.yu@windriver.com>
+>
+>  # ./run-ptest
+> PASS: tests/commands/test_authconfig.py:FC3_TestCase.runTest
+> PASS: tests/commands/test_authconfig.py:F28_TestCase.runTest
+> PASS: tests/commands/test_authconfig.py:F35_TestCase.runTest
+> PASS: tests/commands/test_authselect.py:F28_TestCase.runTest
+> PASS: tests/commands/test_autopart.py:AutoPart_TestCase.runTest
+> PASS: tests/commands/test_autopart.py:FC3_TestCase.runTest
+> PASS: tests/commands/test_autopart.py:F9_TestCase.runTest
+> PASS: tests/commands/test_autopart.py:F12_TestCase.runTest
+> [snip]
+>
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> ---
+>  .../python-pykickstart/files/run-ptest         |  3 +++
+>  .../python3-pykickstart_3.63.bb                | 18 +++++++++++++++++-
+>  2 files changed, 20 insertions(+), 1 deletion(-)
+>  create mode 100755 meta-python/recipes-extended/python-pykickstart/files/run-ptest
+>
+> diff --git a/meta-python/recipes-extended/python-pykickstart/files/run-ptest b/meta-python/recipes-extended/python-pykickstart/files/run-ptest
+> new file mode 100755
+> index 0000000000..289e68b054
+> --- /dev/null
+> +++ b/meta-python/recipes-extended/python-pykickstart/files/run-ptest
+> @@ -0,0 +1,3 @@
+> +#!/bin/sh
+> +
+> +pytest --automake --deselect tests/test_packages.py::AddGroupsAndEnvironment_TestCase --deselect tests/commands/test_reboot.py::Reboot_TestCase
+> diff --git a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.63.bb b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.63.bb
+> index bd20c69980..200e8838fb 100644
+> --- a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.63.bb
+> +++ b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.63.bb
+> @@ -4,18 +4,34 @@ LICENSE = "GPL-2.0-or-later"
+>  
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=81bcece21748c91ba9992349a91ec11d"
+>  
+> -inherit python_setuptools_build_meta
+> +inherit python_setuptools_build_meta ptest
+>  
+>  RDEPENDS:${PN} = "python3 \
+>                    python3-requests \
+>                    python3-six \
+>  "
+>  
+> +RDEPENDS:${PN}-ptest += " \
+> +    python3-pytest \
+> +    python3-unittest-automake-output \
+> +"
+> +
+> +do_install_ptest() {
+> +    install -d ${D}${PTEST_PATH}/tests
+> +    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests
+> +    for file in `grep -Rn unittest.main ${D}${PTEST_PATH}/tests/* |  awk -F":" '{print $1}'`; do
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- .../python-pykickstart/files/run-ptest         |  3 +++
- .../python3-pykickstart_3.63.bb                | 18 +++++++++++++++++-
- 2 files changed, 20 insertions(+), 1 deletion(-)
- create mode 100755 meta-python/recipes-extended/python-pykickstart/files/run-ptest
-
-diff --git a/meta-python/recipes-extended/python-pykickstart/files/run-ptest b/meta-python/recipes-extended/python-pykickstart/files/run-ptest
-new file mode 100755
-index 0000000000..289e68b054
---- /dev/null
-+++ b/meta-python/recipes-extended/python-pykickstart/files/run-ptest
-@@ -0,0 +1,3 @@
-+#!/bin/sh
-+
-+pytest --automake --deselect tests/test_packages.py::AddGroupsAndEnvironment_TestCase --deselect tests/commands/test_reboot.py::Reboot_TestCase
-diff --git a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.63.bb b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.63.bb
-index bd20c69980..200e8838fb 100644
---- a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.63.bb
-+++ b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.63.bb
-@@ -4,18 +4,34 @@ LICENSE = "GPL-2.0-or-later"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=81bcece21748c91ba9992349a91ec11d"
- 
--inherit python_setuptools_build_meta
-+inherit python_setuptools_build_meta ptest
- 
- RDEPENDS:${PN} = "python3 \
-                   python3-requests \
-                   python3-six \
- "
- 
-+RDEPENDS:${PN}-ptest += " \
-+    python3-pytest \
-+    python3-unittest-automake-output \
-+"
-+
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/tests
-+    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests
-+    for file in `grep -Rn unittest.main ${D}${PTEST_PATH}/tests/* |  awk -F":" '{print $1}'`; do
-+        dirname=`dirname $file`
-+        basename=`basename $file`
-+        [ $basename != "__init__.py" ] && mv $file ${dirname}/test_${basename}
-+    done
-+}
-+
- SRC_URI = "git://github.com/rhinstaller/pykickstart.git;protocol=https;branch=master;tag=r${PV} \
-            file://0001-support-authentication-for-kickstart.patch \
-            file://0002-pykickstart-parser.py-add-lock-for-readKickstart-and.patch \
-            file://0003-comment-out-sections-shutdown-and-environment-in-gen.patch \
-            file://0004-load.py-retry-to-invoke-request-with-timeout.patch \
-+           file://run-ptest \
-            "
- SRCREV = "6e0d1238cb4696a9040072a5a28a706e5775c552"
- 
--- 
-2.34.1
+Isn't this whole grep+awk chain equivalent to
+grep -Rl unittest.main ${D}${PTEST_PATH}/tests/ ? If yes, wouldn't this
+be more readable?
+> +        dirname=`dirname $file`
+> +        basename=`basename $file`
+> +        [ $basename != "__init__.py" ] && mv $file ${dirname}/test_${basename}
+> +    done
+> +}
+> +
+>  SRC_URI = "git://github.com/rhinstaller/pykickstart.git;protocol=https;branch=master;tag=r${PV} \
+>             file://0001-support-authentication-for-kickstart.patch \
+>             file://0002-pykickstart-parser.py-add-lock-for-readKickstart-and.patch \
+>             file://0003-comment-out-sections-shutdown-and-environment-in-gen.patch \
+>             file://0004-load.py-retry-to-invoke-request-with-timeout.patch \
+> +           file://run-ptest \
+>             "
+>  SRCREV = "6e0d1238cb4696a9040072a5a28a706e5775c552"
+>  
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#117123): https://lists.openembedded.org/g/openembedded-devel/message/117123
+> Mute This Topic: https://lists.openembedded.org/mt/112448367/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
