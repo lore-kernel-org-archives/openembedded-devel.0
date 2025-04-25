@@ -2,53 +2,55 @@ Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 421BCC369C2
-	for <webhook@archiver.kernel.org>; Fri, 25 Apr 2025 12:17:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 40EAAC369C2
+	for <webhook@archiver.kernel.org>; Fri, 25 Apr 2025 12:17:39 +0000 (UTC)
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.5172.1745583421385288061
+ by mx.groups.io with SMTP id smtpd.web11.5184.1745583449486395702
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Apr 2025 05:17:01 -0700
+ Fri, 25 Apr 2025 05:17:29 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=6210385b2d=archana.polampalli@windriver.com)
 Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53P4o3vp027570
-	for <openembedded-devel@lists.openembedded.org>; Fri, 25 Apr 2025 05:17:01 -0700
-Received: from nam11-co1-obe.outbound.protection.outlook.com (mail-co1nam11lp2169.outbound.protection.outlook.com [104.47.56.169])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 466jhauqqh-1
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53PBGAvd018199
+	for <openembedded-devel@lists.openembedded.org>; Fri, 25 Apr 2025 05:17:29 -0700
+Received: from nam11-co1-obe.outbound.protection.outlook.com (mail-co1nam11lp2176.outbound.protection.outlook.com [104.47.56.176])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 466jhauqqy-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 25 Apr 2025 05:17:00 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 25 Apr 2025 05:17:28 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TprPwpGWBi3C8eY415BOM81B1XKx1uU8G2zijozfKtxFRyczuiTH8DLbCQe2ujQfm0elc2uq39V/YPsHK5xqK0IkkeuovKma4XlACeJegUbgQSVF76WQ/fMRGwN+45ZXRcsfWlCiO5WGK4VrsMrQbwzyQ2UwTfJDabgOWBbCXi7bCx8I0dZItW3wujut+JBoyhw5Xge17941skbYHrSGWVLi/Kk8RblT+lEPSLon2831a6NeaZtp2kxCtLqqKbHxmDDt1MPua+w5ZgmYwAEfzIBppQ6/U7+vOQjsTZbcBgGfAYzKsGsa/yrhi2WIOUgIidqFPaizPU9gcv2yWxRz4w==
+ b=QIJty81EelXlMQWuQ47OL/tHfRqMwc9oWFy8SIEn+9ogvnotePl6bUznkyixxxfUGKxTQ5cpN4jWXCOyeDZei2I4zZZM3mmXPP5u8St2AbeNaJwRjXI8FN0XD2oRAzXJh6Z1GmbNqWToV4zFYA0xYWHa6tace5ifwWy7OPWnJ/oWgafgTm6tF+ImBjWIN1dc4eqjqPdRCTVYRUWfzgtNussJWPUEWjG8GrPRuX7c7VKHNc4r5ol5e1GYYxRj1ZHeaZ3oQy3WdTNBUOJXFGgzOmtFnIajmjiws/BVwPZb926WPEHBSDDzsO89NwPJfmGdZRAkVdNmg6gY7+ssJisNMQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ImwAsJJlldjYbaAyg/fqn6lcC2BJznVVsPMpQ0naPCU=;
- b=J3+MZVkzHooNateQ6r6sVY+4F9+1GCZyEJEtmk/ZqtY4Pqp1RNS0XWmj1Wde8LKkvf5Rq18igNWHFLWZ6gLZ38ZuOi1+Xb+qNpSQamTJZDdwFW6bdkrRJSGSSqcJYoeDoM6PeguyattsL9KfqMmnV38HiDeooKYex4xnuu47eCZyW46srpL6wjlHS2mvsPZ7dcSm3sCzR1XRDd/UIR+j5fa1Epltx1f4d0Wxe9+oJLNzUWTfvrz7cWAgS4RyPF4KsIHuESlKneFNf2VpbY0hFfbifpHeNddH8BRGPfI/9MDKkvtAFJhoFD1uxNwhdY8TvVthuMwuP5UUDQ39X+BPIQ==
+ bh=EY8o+yfStBKfCXeVRoYHZxRn2OVrUuOCGKEX3uR0ESM=;
+ b=QyP2/EP1a4IRVPZjLEhtUUAkyUF7HMJKbuiY9k5Z8Nb9E/+fFfnw4XJIIaoenceL7g3z9sz6WEMm4sRbrkXT70JkFO4zEcVOPq0tVrlAL+4llvhaAGUyuhmr08dSRU6son5CiLYQUy8ravOa6hr1jvEseMuLQS5waA9vZOlXpabM2OsC1gNCXo20omDbHxVEf/PtWDChrqqhESF2akra4w5KjJqA4qCoKGeAMkcBt9x364IpCSdBVSOzwi7s68adocy/78xf2a0ZMMcLTHIeTMDVPHX+xtX9ojcqr8B22S+ncF4eEqoMTlxKAabwJiSdXCtiDlJiEkA9eezFePuipQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 Received: from DM8PR11MB5703.namprd11.prod.outlook.com (2603:10b6:8:22::5) by
  MW5PR11MB5931.namprd11.prod.outlook.com (2603:10b6:303:198::9) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8678.26; Fri, 25 Apr 2025 12:16:59 +0000
+ 15.20.8678.26; Fri, 25 Apr 2025 12:17:26 +0000
 Received: from DM8PR11MB5703.namprd11.prod.outlook.com
  ([fe80::f734:e507:3083:e454]) by DM8PR11MB5703.namprd11.prod.outlook.com
  ([fe80::f734:e507:3083:e454%4]) with mapi id 15.20.8678.025; Fri, 25 Apr 2025
- 12:16:59 +0000
+ 12:17:26 +0000
 From: "Polampalli, Archana" <Archana.Polampalli@windriver.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>,
         "Polampalli, Archana"
 	<Archana.Polampalli@windriver.com>
-Subject: Re: [oe] [oe-core][scarthgap][PATCH 2/3] perlcross: 1.6.1 -> 1.6.2
-Thread-Topic: [oe] [oe-core][scarthgap][PATCH 2/3] perlcross: 1.6.1 -> 1.6.2
-Thread-Index: AQHbtS0n4mqOncksf0eDx/T5TYEOd7O0TX8f
-Date: Fri, 25 Apr 2025 12:16:59 +0000
+Subject: Re: [oe] [oe-core][scarthgap][PATCH 3/3] perl: upgrade 5.38.2 ->
+ 5.38.4
+Thread-Topic: [oe] [oe-core][scarthgap][PATCH 3/3] perl: upgrade 5.38.2 ->
+ 5.38.4
+Thread-Index: AQHbtS0uoUImaoFnxEek00ddales17O0TZvw
+Date: Fri, 25 Apr 2025 12:17:26 +0000
 Message-ID: 
- <DM8PR11MB57038E2152456A1525471F6184842@DM8PR11MB5703.namprd11.prod.outlook.com>
+ <DM8PR11MB5703EF84D51958D72EB4F98884842@DM8PR11MB5703.namprd11.prod.outlook.com>
 References: <20250424152453.2431217-1-archana.polampalli@windriver.com>
- <18394A8D008B9476.15875@lists.openembedded.org>
-In-Reply-To: <18394A8D008B9476.15875@lists.openembedded.org>
+ <18394A8DBEED35CC.24164@lists.openembedded.org>
+In-Reply-To: <18394A8DBEED35CC.24164@lists.openembedded.org>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -56,91 +58,91 @@ X-MS-TNEF-Correlator:
 msip_labels: 
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: DM8PR11MB5703:EE_|MW5PR11MB5931:EE_
-x-ms-office365-filtering-correlation-id: f649893e-c1ba-43c7-4a15-08dd83f313e8
+x-ms-office365-filtering-correlation-id: 0a5decb4-71f0-4719-ba1c-08dd83f3246b
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: 
  BCL:0;ARA:13230040|1800799024|366016|376014|38070700018|8096899003|13003099007|7053199007;
 x-microsoft-antispam-message-info: 
- =?us-ascii?Q?U+SLjawDaRicEs81ZToDKVCSnCAI8sqZjNp3lLEETr/8+qKT0NYTPpsu9q2t?=
- =?us-ascii?Q?1S8Ayud5wqPme79yBlLJeVt8y6ophqf2o3DeJOQyc5llwunSkP1wtYyNk+oY?=
- =?us-ascii?Q?426J/ga2E2Uxna/exlx+ZSV1lljxXFgNeNoorRqGSOZ9j5a+ZWYWeOZu+Nrr?=
- =?us-ascii?Q?6YuYCEtDwAh8+0AF4gobrzl7ftHmSs2aCt6Sa7SIMw5btaX7uEBlX0xBwrze?=
- =?us-ascii?Q?DCfEJMMUmpnHsefsWlp+k0Ulrdgktl2viuPgTXONK2LR4j5QM9dcUw1TsxDg?=
- =?us-ascii?Q?cHlmgPC1pLvIWeWWu1A3d0blQp1UUgWkbrq5OtgbvMrVV0H3xydaN6hFWnDp?=
- =?us-ascii?Q?pW015kUXf9Bpuf8ubVUrq5BzQoUlYzLJHlA2wS68cRJ2wdbwZ2dprD5/32UY?=
- =?us-ascii?Q?PTg2/KdKlcPt0ysDXW7ewVEZz27TX/7CpdaaL7yswZBSzMeUrA5watMxPfnc?=
- =?us-ascii?Q?DmqXgXFbO9tIoQrKOwmzbnbFkTe0IzJBkhFzegwVnaW9Z09t7gTIey7L4jG4?=
- =?us-ascii?Q?yRWtjjfSU188d6Li0/9na53AKKFL6gH+x+uR7ioB6LIvCUCLvKheEz68yY1T?=
- =?us-ascii?Q?mQ8jZHbxJbUqeAal9QdhPUFnejAcw5+Rjw2xFMvW6pF+LEKaTTTsH7vEMzlQ?=
- =?us-ascii?Q?ioV8ujDH3Qo035gc7dBTV7qFb/Unc85JuofQTkHiChfnRTi33wlkWIp6Ci6X?=
- =?us-ascii?Q?FMsFytBhhFWt2VUxj0XWN5tRBtMuXI1KQnuVaGBOT1GB1iWCoi98tvzSHIi0?=
- =?us-ascii?Q?nSAuANEtmKTz1uLBQ25L9Yh2l97RY57yvELF0iEE53jWQmmDoVo5m84gWcCh?=
- =?us-ascii?Q?CSlv0K3k5xu0pGu3fVJ8ZqNZj2GQtItz3H+PijpDgP4TaMT8KhzfckqhHFvS?=
- =?us-ascii?Q?9TN2VARn6o5GTvaBef1gadaBbwwiIOgMAb5gj9iVNIljPZTQMJypeqhJhQou?=
- =?us-ascii?Q?XQ+xG7dAUyerWsv+UWhT2I2nlR6V4bAAXxwZzw5t/LrytIHJCXaf29KnszY8?=
- =?us-ascii?Q?iTpe3tq8MkFNiGF/FsMC+nzPIsmDq9C3Ij7LrMCOZYFcHvNWnilHYrA5+PAs?=
- =?us-ascii?Q?MkXXdpg5PDPX83IRiTbEFUipC8Fx+AYzDNyjmzdydQXWcc2PPP7rbwODST1h?=
- =?us-ascii?Q?kGlqfjdkiS1PiN2ncimyFqJdj0a5bWdeupDlXSIqlXj+QKLRAW7QZOeONgjP?=
- =?us-ascii?Q?cjkqA2xTwZSUYeGoaJE3EkqV5ibliF6FdzDWvTa+AQJWVeNbXUrHKT+bvCAn?=
- =?us-ascii?Q?aYfsErnEPjCGN+EE8vyYE+sFa80xXyqWWTw2ioBtcasRUIg6hCsBcdz75wqo?=
- =?us-ascii?Q?5jbU93NDhmCGP3qe+mUpJQBjOf9ObnNVpq0Q/63sBRAijDaKz8eoRc916wtw?=
- =?us-ascii?Q?GbPTzTaMdaCh85gDdky4h1aaruEIFQPlaTI6nQabZkTqv6Bt27TDWVWtCqrv?=
- =?us-ascii?Q?2LA0ziRPg2pw8MBGIny/UakkxWmkcB/4wM0H1jTQyRsg5tWNS8X8+OWfeCjf?=
- =?us-ascii?Q?YxbtWUHgngLNJB0=3D?=
+ =?us-ascii?Q?GjFuBsK2uhux4V+gy0r5XdGO0LP2uSyFSESCL8HWguNFeVCl0y7i9A31D2r+?=
+ =?us-ascii?Q?5IDiWCmB03Ywy+X8Kl+5aMnIwKzBMNSMUYIlqa4Qx+lW04JhhyRBbCntwAQX?=
+ =?us-ascii?Q?IdvzUl41QsTureqjy5ex771bnpM2bc/x6SugzU03WYHL9dZ+bpP5jLpL+fuO?=
+ =?us-ascii?Q?CrFbeTIZVQGVbwZI64rmXBV3grOhL4oRPiMfz0M7OyKy7Ck0gnKa819vLvTP?=
+ =?us-ascii?Q?FPHDAnXg4KJOwm6tSgRmv7H4bDlJ2C6bs7yvdjE236GLR5b2FfRfAxD/bjt0?=
+ =?us-ascii?Q?39/zBBxcbu+EKztGwNqytqQmomhDv3y2i/G9MImC55RlqvH5z6tOeNZBdbOn?=
+ =?us-ascii?Q?PIc82Mvo3FJXa4ev9BSBB2sqOVS8TkupaOErIHpM5ViT/Vt2YW/2FiQqP0vi?=
+ =?us-ascii?Q?ahYAByhPnHb3A/4t3bsYy4PMhZoGXGncp1rFet9StmRsP3LyTdkUpFWFiBQE?=
+ =?us-ascii?Q?6wqbcYfRENy/8/OZ6SrrRR8VtFSAOl2faoFtj2Thh/ojQKmMjGr5ch/9yjZI?=
+ =?us-ascii?Q?/zzs6SfBoVC55hwiqtg5fAYr4NwIgFDm8ecTgozUdsiSbjRjOsOLlH5ML8JH?=
+ =?us-ascii?Q?Z+jpuswA4g+DiiQtt9TpPM4j8z0byWtN2OtZ+ZhWrtwjksjYDSm3ib0tjobO?=
+ =?us-ascii?Q?ksplhGEA5+p9Wygym+K064xWaIbNc78euoNx2faM42oZz+b5kqnpTARi++sy?=
+ =?us-ascii?Q?CQUUkWsf5gSMAll9irwNFL+MpYOSqAZQBz9FN64kkUJkiFpI2ysPeH3223Kt?=
+ =?us-ascii?Q?TLPP/vyQIeNF2sufu2xlenFtm8DgMayzKw0D0HvLpXTvo7KjS8AGwAeBHJ5p?=
+ =?us-ascii?Q?nrQa0u2Eb0yLm/6OA4EXQdwc06pg0cG59adA5tdEqFKI+WyTc9hLqgaHof3u?=
+ =?us-ascii?Q?JrDM/5soq1n+h2XDdS02bEM+L2t4c+TJdvbTbf9gDYzmONYQLz4LBiksOFcV?=
+ =?us-ascii?Q?M6xKFBYaG49LIJ5J2G51rAaS9gpDrPpPYjmpiGQt1fGeOaHRrGOc3uUu0q/X?=
+ =?us-ascii?Q?dhXjg6Vt3/wMir5Il3qrlJI2+uFD2C7YOVZ59r3Y8kfNVgrcS1XFu5uTfIK1?=
+ =?us-ascii?Q?EOtoNJ/86oyOqRkWziitScbd3PzGFLxdCLUhISU9NEbYFlqC14o2rOjtgGqh?=
+ =?us-ascii?Q?Mh1CQ71DUhFiWxAECXTEaQZP4Aa3moJASXdiXvydLsrVqvTfvmdFDz18y1Qa?=
+ =?us-ascii?Q?t3lT7vNAngoee2Xc6igUMWegTAZqgx3Cc5xryQO+Vj8tboXgfeY6ThzGoBvX?=
+ =?us-ascii?Q?fxVbZfZsgbikEo25Hl4lCbvgHGXhXmdQbxDgsP7ODG96AaYhHYYiR2bRStZ6?=
+ =?us-ascii?Q?N8eIMyThU81+Uy1pIRlyN4amGd8NfYImqbe5T+Rra9GMW+Yvihs/D8ErunjU?=
+ =?us-ascii?Q?l1adr27V15mbwmpncGlHSeWhT4IjPevThYFvhUiO/6VSgX44EkjJfBaQmW6t?=
+ =?us-ascii?Q?P7mKhzD47HI=3D?=
 x-forefront-antispam-report: 
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM8PR11MB5703.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(38070700018)(8096899003)(13003099007)(7053199007);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0: 
- =?us-ascii?Q?Lmj+vnytUsXev2wREA36p4dzoist/q/qHECE7wuxRpmgRdcnJ1dQedKp15CD?=
- =?us-ascii?Q?boADoL9AlptUwf3IP8euKal/P5nNHiLxi9N35cArVz5NS5EzSyV8ZecaXF4U?=
- =?us-ascii?Q?IXCiy+ItTQsvFNaaaSaqcxiFMAuHqXQbOYXOFx4F89MGWzGtIc+kXez8Y8mw?=
- =?us-ascii?Q?ps+jjumDI6yHGmjmS6jY+qB+9nNwffP/3xsctlWHMwBrnMRbhTJutS8mnghD?=
- =?us-ascii?Q?pJrnZ8khyQrBYiFf84R4ka5PeTQJWpCAToyovnmQltNUgaLk0DuwRGL/FP6/?=
- =?us-ascii?Q?mr5Xhyrwpd63k8kYV9fh61YhldbI1IAZKHK9quWX3ZlTMuqs5ZZJl06gi/HU?=
- =?us-ascii?Q?ZROTI830rjjEJY1KZM6kOVcb9fPrKULgwkEEZWO0Ps+/opEj40OA85piGltc?=
- =?us-ascii?Q?n7YmJ5Y95wm1MQB5lORNBM3wzYTTKnmw6bGLXjHw4iSV1azhW33esmXKHRT+?=
- =?us-ascii?Q?ZMmdUfQ+IDLKHvv2MlzRESFEzpN7Ri+HxKXHq2sOKsWgBWvYPfcM2eSgKOho?=
- =?us-ascii?Q?Q5zG32kZh57b1nEI7XRsATRD3ftVNsvit2iIBHacgH1+bDn1jkW/x+mNU4pR?=
- =?us-ascii?Q?GK3kaK6zNSOI7edBs8oa24zNyq8GULe55f6/evXx9X5Nz1bAwAnu42LUitNI?=
- =?us-ascii?Q?vP2gwF1m7Rsf46tJL1fKK9ZQ9JrIs0aIeyNhh0O1Zh5RKVb7R1IdP9uIk/4T?=
- =?us-ascii?Q?bKwZqcoznwG9iyzBmAPD4lHhEyRz9umSLXcn2NLcf5Ma7cOO+OUDCapL5tjZ?=
- =?us-ascii?Q?NZRQqD5ygbEvlovzVyvLYT+GNi9JAFbuBd1tWsGm8AYwcc7/BEgSYwqrDMPl?=
- =?us-ascii?Q?EMGZkbpr3+UAgfBQu8h0flvZJPH9UHSowbu77Gq0fRh69O3/ty1fGSTOA8UP?=
- =?us-ascii?Q?EeyRbeuUdyb2HRiGY66qx64lJju9ieh/sX7+NiCaxgt++nylLqdhDVtFpTzx?=
- =?us-ascii?Q?sbFWBLreOSfr+yngZzALRM19zk8t4had0aJdrrfnKZjRbV5PLdfb+wJVr3Wy?=
- =?us-ascii?Q?rG5B+aOGFfugU+SjPd3j4fehZsSDJj/CAqrDUKLdzLIibyWjAbWUGQYiJ5Im?=
- =?us-ascii?Q?NvD8uY2uIhWlf+avjmlvMD/EXSjTk/2rWzC8AUqOcqwNTfuuVv0vktJ4kl0L?=
- =?us-ascii?Q?ByTunzJiAGSPoFmLuC7vvZsfd0h3jbKe2EJTTa7MRDcMGmxjZoiNt9eOaMoa?=
- =?us-ascii?Q?ugpTwStyaLRvwRSFYVcfBvtFRbmKYoUHqCzEucErFA8uAomTnO439I6rlasq?=
- =?us-ascii?Q?TrL0hNinyktp4jDVijdJl3FimvVQQF3UPuo/Y9R/SuwjTfQ2eU5LuVsCOikG?=
- =?us-ascii?Q?fJkjWpdJY7iBdPb0Y+9+52XrPMuhZ1wzqKj8YfWtAt5YmdKCRJKN7PEscUpQ?=
- =?us-ascii?Q?okB8BBNIXILxnrFVCLxv/TERVgVTQl/sHNsIn6hjUcI5lXBzDlgqZekZiKht?=
- =?us-ascii?Q?JXv8ZmsPwY5QDfGDP5pXeEVZbw7flA0I+1UxuyWSFAvPZnZ+bOu5h59BPC3I?=
- =?us-ascii?Q?tbYjFD32+q7+f6tM7h4q+9crGYRg0xP8o+ukJvzcT98f9uRE04/5nnlbaA+3?=
- =?us-ascii?Q?c2hV07xiGYY32K6ZxUfTJAatxHH0nCC6b6EZdMD/v3hd4TiZCzreuWkbB4B9?=
- =?us-ascii?Q?5Q=3D=3D?=
+ =?us-ascii?Q?Zfg2+uAyCH4fkefv9IiRqtdtSc4JrHg1MuTFWci0qF2Z8DIB6n5c/7HvW8vQ?=
+ =?us-ascii?Q?nbKxORNnhd18t/+Er0gLyFg4KXXYWrcxoj8jL090zTVN92ORIUbdU+lijl1j?=
+ =?us-ascii?Q?FnYOWb/L0oXAxA45pPS+3+xLi7gvAH0/W3Vvd5AoC8DVyUGkVTZv/xLVT89E?=
+ =?us-ascii?Q?1ezGcIW1mZte4rqxXXXH8xsDRm/enjpCei1JC/kYaA/oxOTZ4Syj2WeOoIzn?=
+ =?us-ascii?Q?lHG+lw0kSgs50SRd9kJREVzMFqC0vPgsZixb7dGskW6r2zvw4XRmtqSuLXLC?=
+ =?us-ascii?Q?7xaFW43P2sczKE5z3tIFIxwWfC2R8OnPsA9I+nqeX1zoJNs0QriD5cXD5hSY?=
+ =?us-ascii?Q?QM1xvZ+KtvOpSjQ5PF/SrYcFBW/+ZV9YJFRS0QL60C2iOkFpVbLU4mZAW8Rz?=
+ =?us-ascii?Q?LPKvkfZGEicUNNRPbH1v5PjWOS8RuYuK5Btbi3/KmcGh7IK2WG4bXT06exqy?=
+ =?us-ascii?Q?TJOfW17Y43liGKkBO6Uidcjsz7qdMU9MPffXYzYyXjMsliJuVzjYB3MqAxvP?=
+ =?us-ascii?Q?9iZPjXeXDXS1cSlGL5cRx5fqeKjTqfIuXCVSkn4EObp3zDt6UMbEeS+TMXsB?=
+ =?us-ascii?Q?YnXAk3fBn1vUiIfzso+QGTrKKFXhfJ+r/eq//kYFy7qNJa70bnHTiiSz9gTF?=
+ =?us-ascii?Q?lRpU71D1RM8uOGbXcKiHhA5SpN9XTDpgQxWw6ht6FhVX5gglNxeoPqEhP/S7?=
+ =?us-ascii?Q?yv6UjOIqRJMpdrgLgXyC+NKJ41W6qbUwjf77I8EAyJ+3f8fKSAgIs2giz8tP?=
+ =?us-ascii?Q?t6S1cv5k+O02XlDkPeYx+2Jw4rbWXl311dhtg9oppeAFzeb0+ZuiWcnDq8H+?=
+ =?us-ascii?Q?wGeoSHVRKVWROb42rBjrj+TPBlWGcQQstcr77dxhO4+BZL1A2m709hWVPCZB?=
+ =?us-ascii?Q?Gjthdc0syvpkbT8b78VVvNmEK9BB4GI3NtqG0D2//buZCJsj9hrR/tdtu2KH?=
+ =?us-ascii?Q?F3TZceXjSmeiKvFUfoieFopxjnAJyby2Jifl1TcgE8ULSuWrq4j/DlYtWLMX?=
+ =?us-ascii?Q?f5aAyP9ldnwNHwW7D9joZfIOar9hpuwQ0nohc5mXVs3ry/Mma2T3lI280hca?=
+ =?us-ascii?Q?IwyDFM1RLhecIlbVdZMfK7uy1iVD99/dgbRAjg0iOpmnDmyCKvQtz00C+WLp?=
+ =?us-ascii?Q?whKv4po7GOWWd/S6pS1Bs7m224Pmtal3Ljbfup+ngVQCb8/FbT0Iq/pvNGWF?=
+ =?us-ascii?Q?VjOHags6Iu/rFew8qHDZu9TNwkHuAPLEHsC1p8Yk1UFpmT+Nk4OZ97ouoyAB?=
+ =?us-ascii?Q?4ag1JlGaEPCVcetV00SExQXKXo0tx0oTo1M9NhRmwzgas2R1uSqNbZVVeBpr?=
+ =?us-ascii?Q?uwGGnpyHURFnLVtcCM8wZENU9nqR/EFSxL7DdGuif19LfJ77iUMy7BRSuiHI?=
+ =?us-ascii?Q?+RNxvdlatsZ4kmMfteH/AXOyS3VLL7gUdaIXf1qKGw9Wg7LsiSBRKOIkbSm2?=
+ =?us-ascii?Q?Ok03jbhc5sPnBqgkO0SfH/4yGjJIqpitO5jl0OTSI3brh02S16KhrovuwaKi?=
+ =?us-ascii?Q?ic/IUPL092DktXXnhB1c/HCucrOucP6Z8+rn8H7+alObdcpSwGXfRqSx2dwJ?=
+ =?us-ascii?Q?Jh2uvczvl8dh4s/nmyKkEtlTEQiV1dWOpbdNZgJUclbq1GEOO+7RYJqd2biX?=
+ =?us-ascii?Q?pw=3D=3D?=
 Content-Type: multipart/alternative;
-	boundary="_000_DM8PR11MB57038E2152456A1525471F6184842DM8PR11MB5703namp_"
+	boundary="_000_DM8PR11MB5703EF84D51958D72EB4F98884842DM8PR11MB5703namp_"
 MIME-Version: 1.0
 X-OriginatorOrg: windriver.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: DM8PR11MB5703.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f649893e-c1ba-43c7-4a15-08dd83f313e8
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Apr 2025 12:16:59.0544
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0a5decb4-71f0-4719-ba1c-08dd83f3246b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Apr 2025 12:17:26.7730
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Xh1aOhR9rNN909j+MiNGOcK9fidDpVnH4PJnW20B9OeTxUX5ER+qqDn7FMxdywS0Vk/+fDs75xFB3/1Fo9eQSeesatguWW+YjNAKfe7H+KS3cI/ICO0e3kwF0lD66pIO
+X-MS-Exchange-CrossTenant-userprincipalname: GuEQS8x2pyOggjVnboxGRns+YHg/m+0gVf4ftAz3ROmq0WbSUFw5UzrXVCo8d+blFZHte1PtLRoLRV/xZreGSMA1afKtQIFOh+pm1x5zB15sCD5AILT/R03RYsWETK0C
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW5PR11MB5931
-X-Proofpoint-GUID: wEeFUhEgz7Lzb3vr4A-358OTJePYCpDr
-X-Proofpoint-ORIG-GUID: wEeFUhEgz7Lzb3vr4A-358OTJePYCpDr
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNDI1MDA4OCBTYWx0ZWRfX2FaPjfuY0ezF JypQWR5ogJokxvZaAEVewsGu/3YnORAUxc/psLUcd+QfilgCe7PEpWuHxqwRuFjfFMRLZD69Vg7 qy/W8hIglwEtgbTbUSnQfOkuw5yUl3ICHbXIHKm1MqEpp6iW0djptXV2jLm7A46mvZpBj3Hzt87
- 1fzL/2bviI2sC7lNb+mbMA/p0CfNzoyJHOcghYx5h8+YvCqSRHILEjRIpmMru0u69rRXTvns3OE mnCiG+BW41jXL2TztJOZ1rKs1smnTmkSWol2M604I88D/s0arpUJhInMA9dvjsQrOw9+SSiazCj r+AR6ogtTLi4MIljBuWpwuQsto9DCK64LO5oHfH5Yi/kXqEkcqAd6Y1f09bTL2nvhHfw0XAfrBY
- qMfQDoPzXIhNHA202GGAYZQs1on/BJ+XxVjFa96bBqIBZhyA3qehLd5/6YHx1TC+LdwNx+9F
-X-Authority-Analysis: v=2.4 cv=Sa33duRu c=1 sm=1 tr=0 ts=680b7d3c cx=c_pps a=MPHjzrODTC1L994aNYq1fw==:117 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=XR8D0OoHHMoA:10
- a=NEAV23lmAAAA:8 a=Q4-j1AaZAAAA:8 a=t7CeM3EgAAAA:8 a=YiLq546vFVBZOcSZ4AIA:9 a=CjuIK1q_8ugA:10 a=fEGJki5vP9p_wmuK:21 a=frz4AuCg-hUA:10 a=_W_S_7VecoQA:10 a=9H3Qd4_ONW2Ztcrla5EB:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: 5TngxF3kuNuf2GOBNfgHOA5sQDyIDR6m
+X-Proofpoint-ORIG-GUID: 5TngxF3kuNuf2GOBNfgHOA5sQDyIDR6m
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNDI1MDA4OCBTYWx0ZWRfX6LAuitEXd81p u9dezJfJ5Xn5Fn4ihm9HokKmsRsr+qt0CLBlG/eJ/8/60duMoE3lPgfa2T4Lcc9hWvDNqeC9AgL lcvC/B9sl24GEqgS65Ezy4+7qgOrPQlsBO0Bj4lnDR9g+YO74ObpEH4uEzx3Zdsx2bMITFShtXW
+ s335vkOqRbQ0jzy7VsUReVd/Oqe3kxco9Ehby+zfmVL6rNJMF7yITJ7y14qz0uaOBDv5FcV3Yvx AfrHcsMOd8ExSjk88lD0sJT0bzwyYx/FNqN0BeRIwA7glnl+fcWCRhGGDmZTtLGeNYfj9vQf0hd BnrXw/oHmAoZeX9PcDAjxYNAkBcOcs8SksSmPYeppqKohQ5ap0I7ZAkTOC8FfJShzK4bLK3pCKt
+ JROksQ0/M3D1fGELGYwJSY42manvVdRnpSuSCRWyS+a0fgA1pcqsl4VAQ3BGyTKz/82yV0mg
+X-Authority-Analysis: v=2.4 cv=Sa33duRu c=1 sm=1 tr=0 ts=680b7d59 cx=c_pps a=/1KN1z/xraQh0Fnb7pnMZA==:117 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=XR8D0OoHHMoA:10
+ a=_IEhM8lNAAAA:8 a=Q4-j1AaZAAAA:8 a=t7CeM3EgAAAA:8 a=W--2V7L1KeMcrOQ6b88A:9 a=CjuIK1q_8ugA:10 a=Grrnp93B5iH2oQg1:21 a=frz4AuCg-hUA:10 a=_W_S_7VecoQA:10 a=lqcHg5cX4UMA:10 a=ImwWUX5h3JJ3gRE9moBe:22 a=WN5SZLvFwbRUu1hQBHWk:22 a=9H3Qd4_ONW2Ztcrla5EB:22
+ a=FdTzh2GWekK77mhwV6Dw:22
 X-Sensitive_Customer_Information: Yes
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
@@ -154,10 +156,10 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspect
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 25 Apr 2025 12:17:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117127
+ <openembedded-devel@lists.openembedded.org>; Fri, 25 Apr 2025 12:17:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117128
 
---_000_DM8PR11MB57038E2152456A1525471F6184842DM8PR11MB5703namp_
+--_000_DM8PR11MB5703EF84D51958D72EB4F98884842DM8PR11MB5703namp_
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
@@ -169,47 +171,47 @@ g <archana.polampalli=3Dwindriver.com@lists.openembedded.org>
 Sent: Thursday, April 24, 2025 20:54
 To: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.ope=
 nembedded.org>
-Subject: [oe] [oe-core][scarthgap][PATCH 2/3] perlcross: 1.6.1 -> 1.6.2
+Subject: [oe] [oe-core][scarthgap][PATCH 3/3] perl: upgrade 5.38.2 -> 5.38.=
+4
 
 From: Archana Polampalli <archana.polampalli@windriver.com>
 
-https://github.com/arsv/perl-cross/releases/tag/1.6.2
+update include fix for CVE-2024-56406
 
-Provide support for Perl 5.38.4
+https://perldoc.perl.org/5.38.4/perl5384delta
 
 Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 ---
- .../perl-cross/{perlcross_1.6.bb =3D> perlcross_1.6.2.bb}         | 2 +-
+ meta/recipes-devtools/perl/{perl_5.38.2.bb =3D> perl_5.38.4.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta/recipes-devtools/perl-cross/{perlcross_1.6.bb =3D> perlcross_1=
-.6.2.bb} (92%)
+ rename meta/recipes-devtools/perl/{perl_5.38.2.bb =3D> perl_5.38.4.bb} (99=
+%)
 
-diff --git a/meta/recipes-devtools/perl-cross/perlcross_1.6.bb b/meta/recip=
-es-devtools/perl-cross/perlcross_1.6.2.bb
-similarity index 92%
-rename from meta/recipes-devtools/perl-cross/perlcross_1.6.bb
-rename to meta/recipes-devtools/perl-cross/perlcross_1.6.2.bb
-index 295dd0cfc1..e4bd90c572 100644
---- a/meta/recipes-devtools/perl-cross/perlcross_1.6.bb
-+++ b/meta/recipes-devtools/perl-cross/perlcross_1.6.2.bb
-@@ -18,7 +18,7 @@ SRC_URI =3D "${GITHUB_BASE_URI}/download/${PV}/perl-cross=
--${PV}.tar.gz;name=3Dperl-c
-            "
- GITHUB_BASE_URI =3D "https://github.com/arsv/perl-cross/releases/"
+diff --git a/meta/recipes-devtools/perl/perl_5.38.2.bb b/meta/recipes-devto=
+ols/perl/perl_5.38.4.bb
+similarity index 99%
+rename from meta/recipes-devtools/perl/perl_5.38.2.bb
+rename to meta/recipes-devtools/perl/perl_5.38.4.bb
+index b6c9cda7ae..e59022e2bd 100644
+--- a/meta/recipes-devtools/perl/perl_5.38.2.bb
++++ b/meta/recipes-devtools/perl/perl_5.38.4.bb
+@@ -26,7 +26,7 @@ SRC_URI:append:class-target =3D " \
+            file://encodefix.patch \
+ "
 
--SRC_URI[perl-cross.sha256sum] =3D "5abf198ee50ce9e69eb68fede68c87f65241caa=
-744e4203e97490fa59b45ed69"
-+SRC_URI[perl-cross.sha256sum] =3D "131f7496152ee32067dbac2bc9b44b2f582fc77=
-8140e545701b3b2faee782f1d"
+-SRC_URI[perl.sha256sum] =3D "a0a31534451eb7b83c7d6594a497543a54d488bc90ca0=
+0f5e34762577f40655e"
++SRC_URI[perl.sha256sum] =3D "fb888accf8b50b5180e91166e5153608be294c57c1987=
+8e95f7659c1f1f12758"
 
- S =3D "${WORKDIR}/perl-cross-${PV}"
+ B =3D "${WORKDIR}/perl-${PV}-build"
 
 --
 2.40.0
 
 pLK@tY:ATbOf1"dW
 
---_000_DM8PR11MB57038E2152456A1525471F6184842DM8PR11MB5703namp_
+--_000_DM8PR11MB5703EF84D51958D72EB4F98884842DM8PR11MB5703namp_
 Content-Type: text/html; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
@@ -235,8 +237,8 @@ ehalf of Polampalli, Archana via lists.openembedded.org
 <b>Sent:</b> Thursday, April 24, 2025 20:54<br>
 <b>To:</b> openembedded-devel@lists.openembedded.org &lt;openembedded-devel=
 @lists.openembedded.org&gt;<br>
-<b>Subject:</b> [oe] [oe-core][scarthgap][PATCH 2/3] perlcross: 1.6.1 -&gt;=
- 1.6.2</font>
+<b>Subject:</b> [oe] [oe-core][scarthgap][PATCH 3/3] perl: upgrade 5.38.2 -=
+&gt; 5.38.4</font>
 <div>&nbsp;</div>
 </div>
 <div class=3D"BodyFragment"><font size=3D"2"><span style=3D"font-size:11pt;=
@@ -244,41 +246,39 @@ ehalf of Polampalli, Archana via lists.openembedded.org
 <div class=3D"PlainText">From: Archana Polampalli &lt;archana.polampalli@wi=
 ndriver.com&gt;<br>
 <br>
-<a href=3D"https://github.com/arsv/perl-cross/releases/tag/1.6.2">https://g=
-ithub.com/arsv/perl-cross/releases/tag/1.6.2</a><br>
+update include fix for CVE-2024-56406<br>
 <br>
-Provide support for Perl 5.38.4<br>
+<a href=3D"https://perldoc.perl.org/5.38.4/perl5384delta">https://perldoc.p=
+erl.org/5.38.4/perl5384delta</a><br>
 <br>
 Signed-off-by: Archana Polampalli &lt;archana.polampalli@windriver.com&gt;<=
 br>
 ---<br>
-&nbsp;.../perl-cross/{perlcross_1.6.bb =3D&gt; perlcross_1.6.2.bb}&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 2 +-<br>
+&nbsp;meta/recipes-devtools/perl/{perl_5.38.2.bb =3D&gt; perl_5.38.4.bb} | =
+2 +-<br>
 &nbsp;1 file changed, 1 insertion(+), 1 deletion(-)<br>
-&nbsp;rename meta/recipes-devtools/perl-cross/{perlcross_1.6.bb =3D&gt; per=
-lcross_1.6.2.bb} (92%)<br>
+&nbsp;rename meta/recipes-devtools/perl/{perl_5.38.2.bb =3D&gt; perl_5.38.4=
+.bb} (99%)<br>
 <br>
-diff --git a/meta/recipes-devtools/perl-cross/perlcross_1.6.bb b/meta/recip=
-es-devtools/perl-cross/perlcross_1.6.2.bb<br>
-similarity index 92%<br>
-rename from meta/recipes-devtools/perl-cross/perlcross_1.6.bb<br>
-rename to meta/recipes-devtools/perl-cross/perlcross_1.6.2.bb<br>
-index 295dd0cfc1..e4bd90c572 100644<br>
---- a/meta/recipes-devtools/perl-cross/perlcross_1.6.bb<br>
-+++ b/meta/recipes-devtools/perl-cross/perlcross_1.6.2.bb<br>
-@@ -18,7 +18,7 @@ SRC_URI =3D &quot;${GITHUB_BASE_URI}/download/${PV}/perl-=
-cross-${PV}.tar.gz;name=3Dperl-c<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;<b=
-r>
-&nbsp;GITHUB_BASE_URI =3D &quot;<a href=3D"https://github.com/arsv/perl-cro=
-ss/releases/">https://github.com/arsv/perl-cross/releases/</a>&quot;<br>
+diff --git a/meta/recipes-devtools/perl/perl_5.38.2.bb b/meta/recipes-devto=
+ols/perl/perl_5.38.4.bb<br>
+similarity index 99%<br>
+rename from meta/recipes-devtools/perl/perl_5.38.2.bb<br>
+rename to meta/recipes-devtools/perl/perl_5.38.4.bb<br>
+index b6c9cda7ae..e59022e2bd 100644<br>
+--- a/meta/recipes-devtools/perl/perl_5.38.2.bb<br>
++++ b/meta/recipes-devtools/perl/perl_5.38.4.bb<br>
+@@ -26,7 +26,7 @@ SRC_URI:append:class-target =3D &quot; \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=
+=3D"file://encodefix.patch">file://encodefix.patch</a> \<br>
+&nbsp;&quot;<br>
 <br>
--SRC_URI[perl-cross.sha256sum] =3D &quot;5abf198ee50ce9e69eb68fede68c87f652=
-41caa744e4203e97490fa59b45ed69&quot;<br>
-+SRC_URI[perl-cross.sha256sum] =3D &quot;131f7496152ee32067dbac2bc9b44b2f58=
-2fc778140e545701b3b2faee782f1d&quot;<br>
+-SRC_URI[perl.sha256sum] =3D &quot;a0a31534451eb7b83c7d6594a497543a54d488bc=
+90ca00f5e34762577f40655e&quot;<br>
++SRC_URI[perl.sha256sum] =3D &quot;fb888accf8b50b5180e91166e5153608be294c57=
+c19878e95f7659c1f1f12758&quot;<br>
 <br>
-&nbsp;S =3D &quot;${WORKDIR}/perl-cross-${PV}&quot;<br>
+&nbsp;B =3D &quot;${WORKDIR}/perl-${PV}-build&quot;<br>
 <br>
 --<br>
 2.40.0<br>
@@ -289,5 +289,5 @@ pLK@tY:ATbOf1&quot;dW<br>
 </body>
 </html>
 
---_000_DM8PR11MB57038E2152456A1525471F6184842DM8PR11MB5703namp_--
+--_000_DM8PR11MB5703EF84D51958D72EB4F98884842DM8PR11MB5703namp_--
 
