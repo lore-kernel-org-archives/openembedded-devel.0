@@ -2,62 +2,62 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1932CC369D8
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3157DC3ABA0
 	for <webhook@archiver.kernel.org>; Sat, 26 Apr 2025 11:56:51 +0000 (UTC)
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
- by mx.groups.io with SMTP id smtpd.web10.7362.1745668606121793167
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
+ by mx.groups.io with SMTP id smtpd.web10.7360.1745668603700226357
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 26 Apr 2025 04:56:46 -0700
+ Sat, 26 Apr 2025 04:56:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=IPt62RDM;
- spf=pass (domain: gmail.com, ip: 209.85.208.43, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-5f62ef3c383so5923032a12.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Apr 2025 04:56:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=STHx8stC;
+ spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-ace94273f0dso34542666b.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Apr 2025 04:56:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745668604; x=1746273404; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1745668602; x=1746273402; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4tB16WhQHVo2Bib9ys098uuY3phYscS1zBdXJDR3ejY=;
-        b=IPt62RDMCgqn7sy2QWJ1N76ym9zKCxAa8fJZHF52VSgsfXzPyjHM2oHkIjOByMWqzo
-         Ae+DHFVOeOMZb64H50i1eVXbSRmwmZiTcSDLQSeOlvUudWFMp5Ek0jXijetNIXty17Nj
-         AI9l4E2xExi5oP8Y+afKIEGkixT+31RjHvrYYtL00oWRriS/Rd3ZxqIPN0WDK4/Ch/Uo
-         WoCEElo/ijAEwVboWZ7Sb5sV6dcZ13gkufkd2mRkFdBKEOtZ+ZFTJ8RGVUYWYN8BTHM2
-         mFGg6H+83vccUR5+gx2AcAwcECjYfItm/naDpjYMygUGfaot4zEtLiR21S1ItVzUtHsJ
-         s84g==
+        bh=y6YP68k+IC52T4EoZW81Iz3vLQI76GMasbh9OlJIkwQ=;
+        b=STHx8stCnbSJsu9jrCKn8ypTQ3GC57wfvVOyn+wif52Unw/h/t3e64OPxydZEXZpqF
+         BIKMgW7dVfHXZhHHykAOQvNlOUGonXzznTshvdGk8Qi0BZ/KoI0gfKHAPL0ngiNQU57y
+         JqlztHcRpE3w9oORAevE0sR2ToFquDXrSelIk9exANdXJwh/UefGmRiURtuCYGi3WRza
+         +K3vrCtIqbgi5Tf7BIOckH8stDUqg00pxSrWZV3u3Q8fqZG3OCqAktIGqLuR+7KCbpY4
+         /rt/rwk9TvvRlBItvdQLudMt8RFKu8vil7Qmm9wgGQmt58A7JRFTuqpnWjT44LBa+ocS
+         Z8DA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745668604; x=1746273404;
+        d=1e100.net; s=20230601; t=1745668602; x=1746273402;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=4tB16WhQHVo2Bib9ys098uuY3phYscS1zBdXJDR3ejY=;
-        b=FBNBECsgtK9GMBns172LaJDf/CCkuIvB8oWrui8YYJNoLjir/s/aBNwjZgTS/YRBcy
-         rWnnJ+8JXDpliDQLpiN9pVJ8lTVoMVFBjdrtKy5a64dq3JYm7izGDJqWRk+Sq8BC78YA
-         eTOGDQCby1kJIQfV/lzSAmNx+uMP5Y6iVemLYgmLbiafvIXL+QzjpApM11dCU/MDDR5B
-         MktWS9M1Qolik8PP7Hy5KzcAt5fdaWMB6+i/12QUmP3xt9aB+Of3WJHEutUCnAoSup4g
-         lthIHR9zf1tUv4fl+X0PbbTp5DY8tJBEB0cJPqCQusgaqmNGmVufpKvHxPtwkqN/nMlK
-         lV0g==
-X-Gm-Message-State: AOJu0YzYMbqDqNwucORCv6GcMsu0pASNafaWZNtxUpkoI4QKa2UgSWQK
-	nbRdFam/JlC4gk4TX5vWPDGt8GaSOwrX6F0JmaU9R4PvMB39pX4oxx5TPrjd
-X-Gm-Gg: ASbGnctXsffw2Czhv1Q8pPevqpV+qQg6oM7ynqW6Ekz2Q561oSRHzf/XSty2E5psjgm
-	lDscvrwLNz9dTt7f4njkyksA1oW1M68TI7RlI0lcUDPCIu8yWMMuU4e13VImk+md7cpR2tBvjvC
-	SteKW/xCyaiG7ArFHHPr1bDU4r3qccvrXAkG6vbdQLCF48NxMTTZ+c3sO3dPHWBXMwSCJE37CWQ
-	4/NSdz8K773Rz/BNbAT5nvzgbbLPLYqoTkWo0ARYnM8c7AkpwbxYsUz8VQF22lG5UDNjqpMwS9P
-	O9m8ASwQ/sf+4XVkGOn/n8eayjD153vVzgcrDPuWnvS6H863BBPD9kK24nQqQfg2tIoyMPnS5A=
-	=
-X-Google-Smtp-Source: AGHT+IGxE1UIeYulC5W7YXECMyPtf/mwNnSxqYxGM3b0LeTpN/FwfsHIeShFNPEwoW2SSYLoZYBhaQ==
-X-Received: by 2002:a05:6402:26c5:b0:5e5:b572:a6d6 with SMTP id 4fb4d7f45d1cf-5f7395f1f3fmr1895188a12.10.1745668604237;
-        Sat, 26 Apr 2025 04:56:44 -0700 (PDT)
+        bh=y6YP68k+IC52T4EoZW81Iz3vLQI76GMasbh9OlJIkwQ=;
+        b=c0ahtbOnE6Yv5SnRmJj2Eu7zKuvCbBptsmIqf7JTWRMpCW00HzbECoa7aHm8Le94l6
+         u4/2eBNAaZ8qkMB0Cry5mSywXu+XLZ8Nbx0KW+RMUKNM1df+frw8TjAl9Ptb5TvlSTxY
+         SwqRaZj+M4/cDVXwIVMGVQz7qHnsN5HsaglHy9AAyAxRtyVnFjpavpWvxzJHKANPYyCZ
+         GOEkFQkDhzCQR6kPIzCKLhDv23IJeTawHZtR5WR/w1IzRbOby3P8onh8Db35vkRBh4kV
+         giBuaPHTln8C0KEctD98Y/vbVnyQWp/A1q6yEKfBrb6ZsN7uMOTqX71+qXoLHzIv+Biy
+         tmKA==
+X-Gm-Message-State: AOJu0Yxgsg6sgc0RoweNKgsrx7zQCjDfvvAqXGsYVvDRidJ3XqRcwfvd
+	cngjt0JxsbZArMy+VkwAOjAQyofp+/bM/oXluigc/Mv+9QqNqEAKyL9lUXFj
+X-Gm-Gg: ASbGncup0mWeTuoD4SgfJIjZ5VM/779+m8tU+VCuEt71wRG7BhHf0Arqv1Tkqb+QPVQ
+	6atQD+orSI7AlfweD04lXlY3Z2Di1NzQrPoh55USOuiWpc58qN7soX/h3izs3PdIM3AFdGM3FOH
+	Azl96bK43njfhKiR2Wyfi3p8OvipfDA8BGIq97VKo/8KCKJykb714ivRNYBugYczTBuJr19o5Bj
+	KHM4+AYv/VQDxApNxmie+9lBD8umaGdXM/tPJQH2J00Pv64PNfVDnMfR6drqp8mkRXk7Xsjs8ps
+	sQ6ZMUQmiFwLJpEfJqrNqjmKTsCZzunuI3T1hCzegdP2iN/7DnhS2ommeiw3Pj9ow38wmIum/ey
+	mQ41f/+R/
+X-Google-Smtp-Source: AGHT+IEBAFBbeq3uw//oo7j+zE0iUCzSTObXOe7xV8Mu+tDUX5GFi7nGiW2jO+p5pEoNycJUEvI6gA==
+X-Received: by 2002:a17:907:3c96:b0:aca:a204:5df2 with SMTP id a640c23a62f3a-ace713ab71amr492680466b.49.1745668601942;
+        Sat, 26 Apr 2025 04:56:41 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with UTF8SMTPSA id 4fb4d7f45d1cf-5f7016f658csm2621437a12.41.2025.04.26.04.56.43
+        by smtp.gmail.com with UTF8SMTPSA id a640c23a62f3a-ace6ecf8496sm283058166b.95.2025.04.26.04.56.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 26 Apr 2025 04:56:43 -0700 (PDT)
+        Sat, 26 Apr 2025 04:56:41 -0700 (PDT)
 From: martin.jansa@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH 6/8] linux-atm: Fix build with gcc-15
-Date: Sat, 26 Apr 2025 13:56:21 +0200
-Message-ID: <20250426115623.2732743-6-martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH 4/8] postfix: use gnu17 for now
+Date: Sat, 26 Apr 2025 13:56:19 +0200
+Message-ID: <20250426115623.2732743-4-martin.jansa@gmail.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250426115623.2732743-1-martin.jansa@gmail.com>
 References: <20250426115623.2732743-1-martin.jansa@gmail.com>
@@ -67,217 +67,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 26 Apr 2025 11:56:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117147
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117145
 
 From: Martin Jansa <martin.jansa@gmail.com>
 
-* taken from:
-  https://github.com/sbwml/package_network_utils_linux-atm/blob/1d1c3f884daf9ee4bce077f3db9d990617683669/patches/901-linux-atm-dont-use-bool-keyword.patch
-
-* fixes:
-  http://errors.yoctoproject.org/Errors/Details/852979/
-
-In file included from load_lex.l:11:
-../../../linux-atm-2.5.2/src/lane/load_lex.h:27:10: error: two or more data types in declaration specifiers
-   27 |   Bool_t bool;
-      |          ^~~~
-../../../linux-atm-2.5.2/src/lane/load_lex.h:27:14: warning: declaration does not declare anything
-   27 |   Bool_t bool;
-      |              ^
-In file included from ../../../linux-atm-2.5.2/src/lane/load.c:29:
-../../../linux-atm-2.5.2/src/lane/load_lex.h:27:10: error: two or more data types in declaration specifiers
-   27 |   Bool_t bool;
-      |          ^~~~
-../../../linux-atm-2.5.2/src/lane/load_lex.h:27:14: warning: declaration does not declare anything
-   27 |   Bool_t bool;
-      |              ^
-load_lex.l: In function 'yylex':
-load_lex.l:47:11: error: expected identifier before 'bool'
-load_lex.l:51:11: error: expected identifier before 'bool'
-../../../linux-atm-2.5.2/src/lane/load.c: In function 'load_vars':
-../../../linux-atm-2.5.2/src/lane/load.c:501:29: error: expected identifier before 'bool'
-  501 |                    g_return.bool==BL_TRUE?"True":"False");
-      |                             ^~~~
-../../../linux-atm-2.5.2/src/lane/load.c:502:51: error: expected identifier before 'bool'
-  502 |         set_var_bool(curr_unit, varname, g_return.bool);
-      |                                                   ^~~~
-make[3]: *** [Makefile:513: load.o] Error 1
+* as recommended by postfix author in:
+  https://marc.info/?l=postfix-users&m=173542420611213
 
 Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- .../0001-Fix-implicit-declaration-error.patch | 44 +++++++++
- .../0002-Fix-build-with-gcc-15.patch          | 91 +++++++++++++++++++
- .../linux-atm/linux-atm_2.5.2.bb              |  6 +-
- 3 files changed, 137 insertions(+), 4 deletions(-)
- create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/0001-Fix-implicit-declaration-error.patch
- create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/0002-Fix-build-with-gcc-15.patch
+ meta-networking/recipes-daemons/postfix/postfix_3.10.1.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/0001-Fix-implicit-declaration-error.patch b/meta-networking/recipes-support/linux-atm/linux-atm/0001-Fix-implicit-declaration-error.patch
-new file mode 100644
-index 0000000000..1c5f79c9d8
---- /dev/null
-+++ b/meta-networking/recipes-support/linux-atm/linux-atm/0001-Fix-implicit-declaration-error.patch
-@@ -0,0 +1,44 @@
-+From 1435d613ee632bd7a2aa15180acf06ff3723da41 Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <martin.jansa@gmail.com>
-+Date: Sat, 26 Apr 2025 13:03:35 +0200
-+Subject: [PATCH] Fix implicit-declaration error
-+
-+* taken from:
-+  https://github.com/sbwml/package_network_utils_linux-atm/blob/main/patches/900-fix-implicit-declaration-error.patch
-+
-+* fixes:
-+  http://errors.yoctoproject.org/Errors/Details/766901/
-+  linux-atm-2.5.2/src/led/conn.c:414:57: error: passing argument 3 of 'accept' from incompatible pointer type [-Wincompatible-pointer-types]
-+
-+Upstream-Status: Inappropriate [Upstream is dead]
-+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-+---
-+ src/led/conn.c     | 2 +-
-+ src/maint/hediag.c | 1 +
-+ 2 files changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/led/conn.c b/src/led/conn.c
-+index 99da5e4..89639e1 100644
-+--- a/src/led/conn.c
-++++ b/src/led/conn.c
-+@@ -405,7 +405,7 @@ Conn_t *accept_conn(Conn_t *conn)
-+ {
-+         Conn_t *new;
-+         struct sockaddr_atmsvc addr;
-+-        size_t len;
-++        socklen_t len;
-+         int fd;
-+         char buff[MAX_ATM_ADDR_LEN+1];
-+ 
-+diff --git a/src/maint/hediag.c b/src/maint/hediag.c
-+index a4f792f..3b1b7fb 100644
-+--- a/src/maint/hediag.c
-++++ b/src/maint/hediag.c
-+@@ -9,6 +9,7 @@
-+ #include <linux/atmdev.h>
-+ #include <linux/sonet.h>
-+ #include <linux/atm_he.h>
-++#include <string.h>
-+ 
-+ struct reg_table {
-+ 	unsigned addr;
-diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/0002-Fix-build-with-gcc-15.patch b/meta-networking/recipes-support/linux-atm/linux-atm/0002-Fix-build-with-gcc-15.patch
-new file mode 100644
-index 0000000000..1cbd6a5831
---- /dev/null
-+++ b/meta-networking/recipes-support/linux-atm/linux-atm/0002-Fix-build-with-gcc-15.patch
-@@ -0,0 +1,91 @@
-+From 2a9d42b2b190d533cf126a93bcad842cea825bbe Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <martin.jansa@gmail.com>
-+Date: Sat, 26 Apr 2025 13:04:56 +0200
-+Subject: [PATCH] Fix build with gcc-15
-+
-+* taken from:
-+  https://github.com/sbwml/package_network_utils_linux-atm/blob/1d1c3f884daf9ee4bce077f3db9d990617683669/patches/901-linux-atm-dont-use-bool-keyword.patch
-+
-+* fixes:
-+  http://errors.yoctoproject.org/Errors/Details/852979/
-+
-+In file included from load_lex.l:11:
-+../../../linux-atm-2.5.2/src/lane/load_lex.h:27:10: error: two or more data types in declaration specifiers
-+   27 |   Bool_t bool;
-+      |          ^~~~
-+../../../linux-atm-2.5.2/src/lane/load_lex.h:27:14: warning: declaration does not declare anything
-+   27 |   Bool_t bool;
-+      |              ^
-+In file included from ../../../linux-atm-2.5.2/src/lane/load.c:29:
-+../../../linux-atm-2.5.2/src/lane/load_lex.h:27:10: error: two or more data types in declaration specifiers
-+   27 |   Bool_t bool;
-+      |          ^~~~
-+../../../linux-atm-2.5.2/src/lane/load_lex.h:27:14: warning: declaration does not declare anything
-+   27 |   Bool_t bool;
-+      |              ^
-+load_lex.l: In function 'yylex':
-+load_lex.l:47:11: error: expected identifier before 'bool'
-+load_lex.l:51:11: error: expected identifier before 'bool'
-+../../../linux-atm-2.5.2/src/lane/load.c: In function 'load_vars':
-+../../../linux-atm-2.5.2/src/lane/load.c:501:29: error: expected identifier before 'bool'
-+  501 |                    g_return.bool==BL_TRUE?"True":"False");
-+      |                             ^~~~
-+../../../linux-atm-2.5.2/src/lane/load.c:502:51: error: expected identifier before 'bool'
-+  502 |         set_var_bool(curr_unit, varname, g_return.bool);
-+      |                                                   ^~~~
-+make[3]: *** [Makefile:513: load.o] Error 1
-+
-+Upstream-Status: Inappropriate [Upstream is dead]
-+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-+---
-+ src/lane/load.c     | 4 ++--
-+ src/lane/load_lex.h | 2 +-
-+ src/lane/load_lex.l | 4 ++--
-+ 3 files changed, 5 insertions(+), 5 deletions(-)
-+
-+diff --git a/src/lane/load.c b/src/lane/load.c
-+index 39d4672..1cc2202 100644
-+--- a/src/lane/load.c
-++++ b/src/lane/load.c
-+@@ -498,8 +498,8 @@ load_vars(const char *file)
-+ 	break;
-+       case BOOLEAN:
-+ 	Debug_unit(&load_unit, "Variable is boolean: %s", 
-+-		   g_return.bool==BL_TRUE?"True":"False");
-+-	set_var_bool(curr_unit, varname, g_return.bool);
-++		   g_return.b==BL_TRUE?"True":"False");
-++	set_var_bool(curr_unit, varname, g_return.b);
-+ 	break;
-+       case INTEGER:
-+ 	Debug_unit(&load_unit, "Variable is integer: %d", g_return.intti);
-+diff --git a/src/lane/load_lex.h b/src/lane/load_lex.h
-+index 2384e70..72b8f9b 100644
-+--- a/src/lane/load_lex.h
-++++ b/src/lane/load_lex.h
-+@@ -24,7 +24,7 @@
-+ #define END 0
-+ 
-+ typedef struct {
-+-  Bool_t bool;
-++  Bool_t b;
-+   int intti;
-+   AtmAddr_t *atmaddress;
-+   LaneDestination_t *destaddr;
-+diff --git a/src/lane/load_lex.l b/src/lane/load_lex.l
-+index c184795..1d412e3 100644
-+--- a/src/lane/load_lex.l
-++++ b/src/lane/load_lex.l
-+@@ -44,11 +44,11 @@ H [0-9a-fA-F]
-+ 		 return ATMADDRESS;
-+ 	        }
-+ True	|
-+-true		{g_return.bool = BL_TRUE;
-++true		{g_return.b = BL_TRUE;
-+ 		 return BOOLEAN;
-+ 		}	
-+ False	|
-+-false		{g_return.bool = BL_FALSE;
-++false		{g_return.b = BL_FALSE;
-+ 		 return BOOLEAN;
-+ 		}
-+ \#.*		{}
-diff --git a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-index 391e0e4ab6..3d679d7dc7 100644
---- a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-+++ b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-@@ -16,6 +16,8 @@ SRC_URI = "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BPN}-${P
-            file://0001-make-Add-PREFIX-knob.patch \
-            file://0001-include-string-h-from-memcpy-and-strcpy-function-pro.patch \
-            file://0001-configure-Check-for-symbol-from-libresolv-instead-of.patch \
-+           file://0001-Fix-implicit-declaration-error.patch \
-+           file://0002-Fix-build-with-gcc-15.patch \
-            "
+diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.10.1.bb b/meta-networking/recipes-daemons/postfix/postfix_3.10.1.bb
+index 89502d5044..a9a2163a2f 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix_3.10.1.bb
++++ b/meta-networking/recipes-daemons/postfix/postfix_3.10.1.bb
+@@ -87,6 +87,10 @@ export POSTCONF = "${STAGING_DIR_NATIVE}${sbindir_native}/postconf"
+ # ignore the OPTS="CC=$CC" in Makefile it will not use the CC=$CC $CCARGS
+ EXTRA_OEMAKE += "OPT= DEBUG= OPTS= "
  
- SRC_URI:append:libc-musl = " file://musl-no-on_exit.patch"
-@@ -32,7 +34,3 @@ inherit autotools pkgconfig
- EXTRA_OEMAKE += "ROOTPREFIX=${root_prefix}"
- 
- FILES:${PN} += "${nonarch_base_libdir}/firmware"
--
--# http://errors.yoctoproject.org/Errors/Details/766901/
--# linux-atm-2.5.2/src/led/conn.c:414:57: error: passing argument 3 of 'accept' from incompatible pointer type [-Wincompatible-pointer-types]
--CFLAGS += "-Wno-error=incompatible-pointer-types"
++# use gnu17 for now as recommended in:
++# https://marc.info/?l=postfix-users&m=173542420611213
++CFLAGS += "-std=gnu17"
++
+ do_compile () {
+     unset CFLAGS CPPFLAGS CXXFLAGS
+     local native_build
 
