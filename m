@@ -1,79 +1,85 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A48AC369CB
-	for <webhook@archiver.kernel.org>; Sat, 26 Apr 2025 18:36:33 +0000 (UTC)
-Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
- by mx.groups.io with SMTP id smtpd.web11.14089.1745692590659745356
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 229D7C369CB
+	for <webhook@archiver.kernel.org>; Sat, 26 Apr 2025 18:44:03 +0000 (UTC)
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com [209.85.167.47])
+ by mx.groups.io with SMTP id smtpd.web11.14190.1745693038063111235
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 26 Apr 2025 11:36:30 -0700
+ Sat, 26 Apr 2025 11:43:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=TiabdDpI;
- spf=pass (domain: gmail.com, ip: 209.85.128.181, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-7082ad1355bso30009767b3.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Apr 2025 11:36:30 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=HwepyiiU;
+ spf=pass (domain: gmail.com, ip: 209.85.167.47, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-549963b5551so3398278e87.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Apr 2025 11:43:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745692590; x=1746297390; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1745693036; x=1746297836; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=F1mByLN67eN0T1Z+525yMHdDW/yKNR09T8Mj68iUsbQ=;
-        b=TiabdDpI515OsGvAFW01c0KKVWsRbEmmecV4wnoNWHlsBsxTKj+KJ+A4LnorgVY56x
-         H2fwWyfsdXzAyxGej1GGRwx5yiPCx4SjAcPHlcTA7kiLWSUVDBl623Z/7zLNiw5FckpH
-         ZcrXpHx3PwKRzAU4rKKC6LcUfl1Poh0pEkZ8Dgii7XBqt3wx9WNV+OGRvhEL+t0/1GXJ
-         I6fx3jSu82ncxdRnK0AWIAQyqfBN7DHcAh8n06ukUBXjIXEvem7pKihHBT+OlvJ5ninr
-         7VWSo2mHW5XFwa88gVv2JX0ZABY6wgVgqEcT7sleYawfRPEwwhLSaDXeSgsbiPtxv5Ti
-         VbiA==
+        bh=IQ+wsw7e3RVhZ3Hp7fJTH7FLMO93ghN2OKSlZWMXe4c=;
+        b=HwepyiiUkM2lTY9JCDUJdkCRdqoJSCT4MAbfVx2hFWxRasuTlIrKz+mq4ck2/r2lgy
+         Mq8PXhBDJAN5lSGossZY1PYVdteCN6FZpiT+XnAm6mpAoudKWpvm2S0jCcRtlosqTOy8
+         ZHJF1f7tw6bpNsfq0eOtUOmWHtW6vOOl6WftCU3JBa+oXeUPwuvB6LrMTWemRBLRwit4
+         juZYMheoGVspOl3wXSSU+IBNfwjnyxy2tepTaTSVw4B2IFOVNpfrVTc+Sjde7DlR5008
+         xdgbhiVlHpAryJ38oFrHjqCLpcgxe43RrCc+AQVzKVoU74ZKigSr/X4l6jRtTQG++JCD
+         SI6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745692590; x=1746297390;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1745693036; x=1746297836;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=F1mByLN67eN0T1Z+525yMHdDW/yKNR09T8Mj68iUsbQ=;
-        b=fUj2+uWk4Bo03C6SXG8ByBGotvA5lOxP60bqMJ6tW90x7qpQBiLANg6pEAXpqrOCtd
-         ADAHHJAyjFRy2thmaW2cwcwB7CeKuDGJqdODbtrlwRTEn3FUQlUF2GGbugmkvXpcjr7O
-         2D+6ELd/MHXRg2KAJvmXb3ZrfDilquc9zg17pZ0N74FN6bk/Uit8rusfb4HV0Dqim/6l
-         ZWoCEqDNT9GoCwquKydwjlpWbFXVyGn9bRoxfvPMbBQJFo7moZ/LNKY7ErfFtQ0KPZZu
-         cbsbWktYIYr1gtW14XIVtbcSzqCYhoGt1BsCOBDJ8Er5citUEZHPx/Jm8LS1mbE510Ko
-         D3rQ==
-X-Gm-Message-State: AOJu0YzARSRE1W2amhdpF91/CVbBbz+n7zbXU0UsBqol4OM45vN2LIAl
-	MSdfDMzAUx2mbdwvKQDVgkGNzxmAsGm10wxk9x+yl2TXXjQCMown
-X-Gm-Gg: ASbGncsU15N/o7GhZnfpQdRCSDAIt+MwQ5PyvLIVXRS/VMc3+tMc1CfrA/gWL8SCbgb
-	zyZi+6mDZMK1zu3a5YUVDIrCt6R2gsnY18MLy044AetzlGkstiCbfPaL4EvVF7MsXWOGh5TKmZ0
-	nrbqx/tAAdiODJmz2fzRLIqhVh3wqpvJVesolkd0ZHIQcoF1NJPxcFTwE+nGsxT9pS/JIEQdx3O
-	LgQYzPWgU/1Nr+kCQZDUs4A/D3kFlt38fsZmN1XHv2vO8XLe6p9xqT6G3nLOzZucecFxhlSU6S+
-	rP2veH0tdHpJ+eJB59XrOL5KHbRhkqfI9yFbO3ozaApXXg==
-X-Google-Smtp-Source: AGHT+IE2De6+pPD0fGMzpwxBZeXGI8sUy+siuk5eWX9qWD8ioO+g/Sa5orJsh0Sr5b4/5iN8uLmVpg==
-X-Received: by 2002:a05:690c:b92:b0:708:100a:5797 with SMTP id 00721157ae682-708540e7924mr101882927b3.11.1745692589329;
-        Sat, 26 Apr 2025 11:36:29 -0700 (PDT)
-Received: from localhost.localdomain ([71.215.9.36])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-70841aea976sm15311907b3.95.2025.04.26.11.36.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 26 Apr 2025 11:36:28 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
-To: martin.jansa@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Subject: RE: [meta-oe][PATCH] pgpool2: use gnu17 to avoid build failure with gcc-15
-Date: Sat, 26 Apr 2025 14:36:26 -0400
-Message-ID: <20250426183626.7502-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250426170358.2557974-1-martin.jansa@gmail.com>
-References: <20250426170358.2557974-1-martin.jansa@gmail.com>
+        bh=IQ+wsw7e3RVhZ3Hp7fJTH7FLMO93ghN2OKSlZWMXe4c=;
+        b=i7TrvFs4idZJkLs/aSARfBrd1JPxOLcxcPHesBaDbhZWjDvZBpIj72eX6k5QoDso+J
+         XNeWBS/8QNVRUddKmT6faY2atlL2p0uepTQrNPbixPm+vkfIy09DnuWh3mkQWVvxhEV4
+         kOt4wQ8CnKbt/xobabKrtS+pgEO072fM8ydGs5+KTsQ/5DdUWMmWEUaWxxxsyPIUb1Ia
+         IjU66NQsdKulwsASOu88iptcmd3CpGYSg/iGJOpDRzU4zUJ+Bn70y/6Qh9VqyZ23+yHw
+         glQ9alKERv55RBobbqcarkn5jYbaRipMdbIikeG6nDTIQnf1muWrCdga4nWlIP/98nYF
+         3Bdg==
+X-Gm-Message-State: AOJu0YxqZMIvnrtuPgdoI0CzwU6a/xXdz8fAn0a7TUg5IsamLiH2KJTO
+	W191MeWGWTSo1odLAAuTCLRUWOKW8ZcKzpoQSi8xPjoGN9x4B+8oFatAwE/Ijecmg2TYyhSTCYt
+	f14745u2mJTD3/k0JFB9nEUZ7QbY=
+X-Gm-Gg: ASbGncsqWkiA3OCSnNMrIgbqlgNqe1qxsMrJnkMfkUWnPEqdKzg/GK1IhPs1pLIn62j
+	qwFngCZhEqKmMrvJrr1pHJOgJFHJMcnjF4Xh4J/8h6P7/g99P1jNCcV39+82wloqyWVyOkwr1TL
+	f4KWQ06eBZ/xFlp63IUiC+gHtm
+X-Google-Smtp-Source: AGHT+IFSsdEcY/w5lGpBHJ8teeFMVZVQlPfDg3MAvDYekJ42gulR7pyXYQEWcpDgfUO0GoFKCYIiYr4W6GnaMmLcvAU=
+X-Received: by 2002:a05:6512:3d11:b0:54e:86f3:5e5d with SMTP id
+ 2adb3069b0e04-54e8cbcda59mr1841560e87.7.1745693035967; Sat, 26 Apr 2025
+ 11:43:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250426170358.2557974-1-martin.jansa@gmail.com> <20250426183626.7502-1-schonm@gmail.com>
+In-Reply-To: <20250426183626.7502-1-schonm@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Sat, 26 Apr 2025 20:43:44 +0200
+X-Gm-Features: ATxdqUEDUlveoZiGW5NyLJLN8Nxa_rIeMgNPtDVci3dVxFGZERnMpZQoj0MEuR0
+Message-ID: <CA+chaQcOee0MWzewTARyJgLjXJ=F1vo00OouZg2gCZB0pGriCA@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH] pgpool2: use gnu17 to avoid build failure with gcc-15
+To: Jason Schonberg <schonm@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 26 Apr 2025 18:36:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117151
+ <openembedded-devel@lists.openembedded.org>; Sat, 26 Apr 2025 18:44:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117152
 
-Martin,
+Feel free to do that, I don't even use pgpool2 I was just helping with
+last few remaining build failures with gcc-15 shown in world build and
+this is the amount of time I'm willing to spend on pgpool2.
 
-While I understand the desire to follow what gentoo is doing, would protecting the typdef in question be a better solution?
-
-i.e. something like this : https://github.com/mirror/xmlrpc-c/pull/4/files
-
-Thanks,
-Jason Schonberg
+On Sat, Apr 26, 2025 at 8:36=E2=80=AFPM Jason Schonberg <schonm@gmail.com> =
+wrote:
+>
+> Martin,
+>
+> While I understand the desire to follow what gentoo is doing, would prote=
+cting the typdef in question be a better solution?
+>
+> i.e. something like this : https://github.com/mirror/xmlrpc-c/pull/4/file=
+s
+>
+> Thanks,
+> Jason Schonberg
 
