@@ -1,85 +1,79 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 229D7C369CB
-	for <webhook@archiver.kernel.org>; Sat, 26 Apr 2025 18:44:03 +0000 (UTC)
-Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com [209.85.167.47])
- by mx.groups.io with SMTP id smtpd.web11.14190.1745693038063111235
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 57BF2C369CB
+	for <webhook@archiver.kernel.org>; Sat, 26 Apr 2025 19:35:13 +0000 (UTC)
+Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
+ by mx.groups.io with SMTP id smtpd.web11.14976.1745696109576780073
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 26 Apr 2025 11:43:58 -0700
+ Sat, 26 Apr 2025 12:35:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=HwepyiiU;
- spf=pass (domain: gmail.com, ip: 209.85.167.47, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-549963b5551so3398278e87.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Apr 2025 11:43:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745693036; x=1746297836; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=IQ+wsw7e3RVhZ3Hp7fJTH7FLMO93ghN2OKSlZWMXe4c=;
-        b=HwepyiiUkM2lTY9JCDUJdkCRdqoJSCT4MAbfVx2hFWxRasuTlIrKz+mq4ck2/r2lgy
-         Mq8PXhBDJAN5lSGossZY1PYVdteCN6FZpiT+XnAm6mpAoudKWpvm2S0jCcRtlosqTOy8
-         ZHJF1f7tw6bpNsfq0eOtUOmWHtW6vOOl6WftCU3JBa+oXeUPwuvB6LrMTWemRBLRwit4
-         juZYMheoGVspOl3wXSSU+IBNfwjnyxy2tepTaTSVw4B2IFOVNpfrVTc+Sjde7DlR5008
-         xdgbhiVlHpAryJ38oFrHjqCLpcgxe43RrCc+AQVzKVoU74ZKigSr/X4l6jRtTQG++JCD
-         SI6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745693036; x=1746297836;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=IQ+wsw7e3RVhZ3Hp7fJTH7FLMO93ghN2OKSlZWMXe4c=;
-        b=i7TrvFs4idZJkLs/aSARfBrd1JPxOLcxcPHesBaDbhZWjDvZBpIj72eX6k5QoDso+J
-         XNeWBS/8QNVRUddKmT6faY2atlL2p0uepTQrNPbixPm+vkfIy09DnuWh3mkQWVvxhEV4
-         kOt4wQ8CnKbt/xobabKrtS+pgEO072fM8ydGs5+KTsQ/5DdUWMmWEUaWxxxsyPIUb1Ia
-         IjU66NQsdKulwsASOu88iptcmd3CpGYSg/iGJOpDRzU4zUJ+Bn70y/6Qh9VqyZ23+yHw
-         glQ9alKERv55RBobbqcarkn5jYbaRipMdbIikeG6nDTIQnf1muWrCdga4nWlIP/98nYF
-         3Bdg==
-X-Gm-Message-State: AOJu0YxqZMIvnrtuPgdoI0CzwU6a/xXdz8fAn0a7TUg5IsamLiH2KJTO
-	W191MeWGWTSo1odLAAuTCLRUWOKW8ZcKzpoQSi8xPjoGN9x4B+8oFatAwE/Ijecmg2TYyhSTCYt
-	f14745u2mJTD3/k0JFB9nEUZ7QbY=
-X-Gm-Gg: ASbGncsqWkiA3OCSnNMrIgbqlgNqe1qxsMrJnkMfkUWnPEqdKzg/GK1IhPs1pLIn62j
-	qwFngCZhEqKmMrvJrr1pHJOgJFHJMcnjF4Xh4J/8h6P7/g99P1jNCcV39+82wloqyWVyOkwr1TL
-	f4KWQ06eBZ/xFlp63IUiC+gHtm
-X-Google-Smtp-Source: AGHT+IFSsdEcY/w5lGpBHJ8teeFMVZVQlPfDg3MAvDYekJ42gulR7pyXYQEWcpDgfUO0GoFKCYIiYr4W6GnaMmLcvAU=
-X-Received: by 2002:a05:6512:3d11:b0:54e:86f3:5e5d with SMTP id
- 2adb3069b0e04-54e8cbcda59mr1841560e87.7.1745693035967; Sat, 26 Apr 2025
- 11:43:55 -0700 (PDT)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
+Received: from fwd71.aul.t-online.de (fwd71.aul.t-online.de [10.223.144.97])
+	by mailout02.t-online.de (Postfix) with SMTP id A9F4B9C4
+	for <openembedded-devel@lists.openembedded.org>; Sat, 26 Apr 2025 21:35:07 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.154.164.126]) by fwd71.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1u8lIo-4UolYv0; Sat, 26 Apr 2025 21:35:06 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] libsdl2-mixer: drop deprecated modplug PACKAGECONFIG
+Date: Sat, 26 Apr 2025 21:34:56 +0200
+Message-ID: <20250426193456.8303-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-References: <20250426170358.2557974-1-martin.jansa@gmail.com> <20250426183626.7502-1-schonm@gmail.com>
-In-Reply-To: <20250426183626.7502-1-schonm@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 26 Apr 2025 20:43:44 +0200
-X-Gm-Features: ATxdqUEDUlveoZiGW5NyLJLN8Nxa_rIeMgNPtDVci3dVxFGZERnMpZQoj0MEuR0
-Message-ID: <CA+chaQcOee0MWzewTARyJgLjXJ=F1vo00OouZg2gCZB0pGriCA@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH] pgpool2: use gnu17 to avoid build failure with gcc-15
-To: Jason Schonberg <schonm@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+X-TOI-EXPURGATEID: 150726::1745696106-35FF899B-A81115FF/10/3626336762 SUSPECT URL
+X-TOI-MSGID: c67f18a7-8eff-4de9-a072-50a3ed16ede2
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 26 Apr 2025 18:44:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117152
+ <openembedded-devel@lists.openembedded.org>; Sat, 26 Apr 2025 19:35:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117153
 
-Feel free to do that, I don't even use pgpool2 I was just helping with
-last few remaining build failures with gcc-15 shown in world build and
-this is the amount of time I'm willing to spend on pgpool2.
+libmodplug support has been removed in master branch
+https://github.com/libsdl-org/SDL_mixer/pull/673
 
-On Sat, Apr 26, 2025 at 8:36=E2=80=AFPM Jason Schonberg <schonm@gmail.com> =
-wrote:
->
-> Martin,
->
-> While I understand the desire to follow what gentoo is doing, would prote=
-cting the typdef in question be a better solution?
->
-> i.e. something like this : https://github.com/mirror/xmlrpc-c/pull/4/file=
-s
->
-> Thanks,
-> Jason Schonberg
+Remove the option as we still provide libxmp to handle .mod
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.8.1.bb | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.8.1.bb b/met=
+a-oe/recipes-graphics/libsdl/libsdl2-mixer_2.8.1.bb
+index ecfc0b147a..b24c8782cf 100644
+--- a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.8.1.bb
++++ b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.8.1.bb
+@@ -20,14 +20,11 @@ do_configure:prepend() {
+ 	touch ${STAGING_BINDIR}/wvtag
+ }
+=20
+-EXTRA_OECMAKE +=3D "${@bb.utils.contains_any('PACKAGECONFIG', 'xmp modpl=
+ug', '-DSDL2MIXER_MOD=3DON', '-DSDL2MIXER_MOD=3DOFF', d)}"
+-
+ PACKAGECONFIG ?=3D "flac wave vorbis"
+ PACKAGECONFIG[opusfile] =3D "-DSDL2MIXER_OPUS=3DON -DSDL2MIXER_OPUS_ENAB=
+LED=3DON, -DSDL2MIXER_OPUS=3DOFF,opusfile"
+ PACKAGECONFIG[vorbis] =3D "-DSDL2MIXER_VORBIS=3DVORBISFILE -DSDL2MIXER_V=
+ORBIS_VORBISFILE=3DON, -DSDL2MIXER_VORBIS=3DOFF,libvorbis"
+ PACKAGECONFIG[flac] =3D "-DSDL2MIXER_FLAC=3DON, -DSDL2MIXER_FLAC=3DOFF,f=
+lac"
+-PACKAGECONFIG[xmp] =3D "-DSDL2MIXER_MOD_XMP=3DON, -DSDL2MIXER_MOD_XMP=3D=
+OFF,libxmp,libxmp"
+-PACKAGECONFIG[modplug] =3D "-DSDL2MIXER_MOD_MODPLUG=3DON, -DSDL2MIXER_MO=
+D_MODPLUG=3DOFF,libmodplug"
++PACKAGECONFIG[xmp] =3D "-DSDL2MIXER_MOD=3DON -DSDL2MIXER_MOD_XMP=3DON, -=
+DSDL2MIXER_MOD=3DOFF,libxmp,libxmp"
+ PACKAGECONFIG[fluidsynth] =3D "-DSDL2MIXER_MIDI=3DON -DSDL2MIXER_MIDI_FL=
+UIDSYNTH_ENABLED=3DON, -DSDL2MIXER_MIDI=3DOFF,fluidsynth,fluidsynth-bin"
+ PACKAGECONFIG[wave] =3D "-DSDL2MIXER_WAVE=3DON -DSDL2MIXER_WAVPACK=3DON,=
+ -DSDL2MIXER_WAVE=3DOFF,wavpack,wavpack wavpack-bin"
+ PACKAGECONFIG[mpg123] =3D "-DSDL2MIXER_MP3=3DON -DSDL2MIXER_MP3_MPG123=3D=
+ON, -DSDL2MIXER_MP3=3DOFF,mpg123"
+--=20
+2.49.0
+
 
