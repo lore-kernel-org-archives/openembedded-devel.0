@@ -1,126 +1,136 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 61324C369D1
-	for <webhook@archiver.kernel.org>; Sun, 27 Apr 2025 16:44:20 +0000 (UTC)
-Received: from mail-ot1-f41.google.com (mail-ot1-f41.google.com [209.85.210.41])
- by mx.groups.io with SMTP id smtpd.web10.29496.1745772233278774776
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EA526C369D1
+	for <webhook@archiver.kernel.org>; Sun, 27 Apr 2025 18:53:20 +0000 (UTC)
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
+ by mx.groups.io with SMTP id smtpd.web11.31740.1745779994909430728
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Apr 2025 09:43:53 -0700
+ Sun, 27 Apr 2025 11:53:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=H/or8a8Q;
- spf=pass (domain: gmail.com, ip: 209.85.210.41, mailfrom: schonm@gmail.com)
-Received: by mail-ot1-f41.google.com with SMTP id 46e09a7af769-72c14138668so1076217a34.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Apr 2025 09:43:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ADQYnzNH;
+ spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-5f4ca707e31so6425201a12.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Apr 2025 11:53:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745772232; x=1746377032; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=FVk/FeIZXatU84jRvjvJ64i1dEomDrdcxTX4cYa+VDk=;
-        b=H/or8a8Q6ipHuM7g5SKslt7jKQHayZ5CxxBGVTQPV1pNP4Crr/ru7IKCljJMDfMTX+
-         cz16fvUwiYfpIpVKEPFRc22kWJVD3n9aZ3/BtjiT4FUBiAECv0FYz+381HV7mnw0eDvA
-         xLVp/su6HZtvgAOBtkWYM5lPkVwaDQTmgHjBanYBnslQCSMUhIreBmvl9GLASXJmfged
-         3Ibjaq0LDNxf8qpALpGiNs962eMe+n95cGhvuXcgLxl+VXICtrzXp+qs0fgrlBSDEPra
-         RsfQDOJYETrDDXUW4fJor8PGA6H9h2DLureLG2nSfacVcD3PZh0KdQcEIH/CmhErLoe/
-         VNqA==
+        d=gmail.com; s=20230601; t=1745779993; x=1746384793; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=xb6jWCtF2FRksEjj3i7i/dQpot9oV5I3eyX9qmhlYPc=;
+        b=ADQYnzNHWTrnB2a5wMOVC7zUXx349OCDdGPn7WlfIzNgnhvBZeY6Sk+FSmHETLRtku
+         Ep3c01zMt4/BX82yCClRRT49UE9Vw2ljZHmIH9vRHNPC1kiy2pyXSG3/UY972DlZePTP
+         rNSbB6L9dI3vD0juKg4906khnQ/ciaITDkwm1/+1v0cHGzb1MiZPiAi8ceNv/dKyW3yL
+         ElH9niT3tlq5SP7Tg+z2UnpTSoqreBD4DwSNtbeniUHwMAiIe4XJppsEBv4acHzrPqL8
+         jiLrCrIoaksWQWwv3c3OiMJ9rEpbfMIYnhLJ8bCeeJE+dgkEZpSmgvjNy5x/dMymSS1p
+         7PpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745772232; x=1746377032;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=FVk/FeIZXatU84jRvjvJ64i1dEomDrdcxTX4cYa+VDk=;
-        b=cluQUw4UcJJ8YiIAxSAW72Ib5QiI1xWSWPX76Bt9QmKTGJEWQvecYMj3SjsQ7ecNxV
-         NzO4CGTaAsw/2XzG7Q6DeEiQO8PfNgWERFJBOHKrNb69T0JCJliaCFLVDCVxuvNIsUVd
-         WoPAyuzwAKHppldshZxEdCPyHHTtQRwse5H+7nMsavTs02HZCbv+IzoA2HJlh+TakUUh
-         CEKQuKNSgXjYzfo+uAgeSmdXkB8cTRIMAhh2sn4Vn1wJbJ6p/MzDP/pA2cmuQlkT4qKM
-         hL+ur0j+72HOMd2F5Cf8dU1UgiFwfY4V0T5Eh2rJpUra7VQfsXzX9RIKZ+7xz/GS/HJZ
-         kwPg==
-X-Gm-Message-State: AOJu0Ywg7Yh2xKPOz9cCZKzahe7mTEjQbi8OCn7Lotx7hYQlTivqAvy+
-	OQfBFEbpr4qGGtL23mKIdQggCHMNZfZXj+LS2leId3dbwWmhR7xfG2y8N2iul+V8j/2lGhXOZRo
-	zafXkz4zNyQzqKQyi82dljOVNRG0=
-X-Gm-Gg: ASbGnct+LW2r5xixUdDCMayVGeyQYk2yFieHISWiypgUFxqHFdlHaFuXG9HTbJzRLwI
-	cFEBgAGpk/GNFLl+qsbgt8nGuet6NtAtPq4pQd4PCRlaQFHJDKmHD+B9JsnbIjZxV6RHKkAHRoz
-	QgsPtlnninTSCwKXUUBvjmN3hU58nP3w==
-X-Google-Smtp-Source: AGHT+IFNUrmo6vVQzuxDxztsi4RN5jQSt1dc9Na5OZzz6IM0cZYIXxsuqnS0S+ac9Ald4SAcoR3i0NqGiFg9ka+sCgU=
-X-Received: by 2002:a05:6870:4595:b0:29e:503a:7ea3 with SMTP id
- 586e51a60fabf-2d9be8f1b56mr2902113fac.36.1745772232091; Sun, 27 Apr 2025
- 09:43:52 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1745779993; x=1746384793;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=xb6jWCtF2FRksEjj3i7i/dQpot9oV5I3eyX9qmhlYPc=;
+        b=llAwxW+VU+7TMBYm0E7QOS0KGTpWy8l8Oxrla6nmTIoFTQK/o2g/giX0xOjuPiFBoS
+         JkRX0Bu5X1i4sUQ641Yf8B3sf7tgtaMHu6U4KfAVW3ZOnhzKkmp8vICiKXiV/XaJ88FR
+         tgTgay2E97MalPbyp3FjHfa47+mGYTh3rz22WQOdZ4u783f4bSU9zWs4+OurLtsg7HYo
+         eF2lVB8Ezbj6eWYI9mSVcKX9XlfkJlw9UDtbh6RUfhZ6I40VmxiEXHWh3erMXxQfCOj/
+         1pSbue8DEXS0r1l1hDC9qGPpRHV3Kza8j3NS8MjjIRQv4RtT1UnS0cF1nc7tAB5EmNvG
+         FhCA==
+X-Gm-Message-State: AOJu0YwFisfgdvqcarSuyNTPAmD3puZKCpiDkHzQIAcATepsCTYcbA0z
+	P9lRXcpoTYPbDLuzfzEshqFsHsXUZrBdwgrAx2SmPFmFojO8yn+H7bL9IDuu
+X-Gm-Gg: ASbGncvqIoLbqUESATS2ENyKDUcpNiBReXl2bqv/Hs+ENcQ81RgpqSxtcx7tFjgaOw0
+	ntHa410klr8cMf+bzSN0oCA+36aIEtD2Wribk9gX3JD3iQKUdRlOjJmf/5ntOxUupCfUFgMw2tj
+	b8Wz7hY/chpAkPnTGhWIa4s7AEWzdzYjkCvz5I6fhW9xgdCwp9q3uMSEoDrK5hBl+npDzCJfq/Q
+	hTon/1NwxRGQpkjY4QK+cjK+xED2WdRufnh0W4pv925Tv5adA/HrS9hIcAyxkUA378/0qD3wWlZ
+	6EcuDXj0E8MTSq3XIOXPHYs0+JwAsYrvNpPaMn5n1jQ=
+X-Google-Smtp-Source: AGHT+IFZT3a8S643Zs4IRcLs7Ndf2q9/PNyRW6kWEvCcxVY1rs409AGMv+5AORTxrd72BCetIM1nUQ==
+X-Received: by 2002:a17:907:9625:b0:ac7:805f:905a with SMTP id a640c23a62f3a-ace8493b526mr554978866b.28.1745779992942;
+        Sun, 27 Apr 2025 11:53:12 -0700 (PDT)
+Received: from localhost ([109.238.218.228])
+        by smtp.gmail.com with UTF8SMTPSA id a640c23a62f3a-ace6ecf8304sm482396266b.111.2025.04.27.11.53.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 27 Apr 2025 11:53:12 -0700 (PDT)
+From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] xfstests: bstat: use uint32_t instead of __uint32_t to fix build with musl
+Date: Sun, 27 Apr 2025 20:53:04 +0200
+Message-ID: <20250427185304.337603-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-References: <20250427163710.14826-1-schonm@gmail.com> <CAMKF1so_ceGimH+ySHK4QQamSFdVTGgH7mvgo=yo3RK49-WX0g@mail.gmail.com>
-In-Reply-To: <CAMKF1so_ceGimH+ySHK4QQamSFdVTGgH7mvgo=yo3RK49-WX0g@mail.gmail.com>
-From: "J. S." <schonm@gmail.com>
-Date: Sun, 27 Apr 2025 12:43:41 -0400
-X-Gm-Features: ATxdqUFqOkU7StvndqQPmccPrIgN-kzFOuf6vfuo8XGauCUvT5RPyrTA5BuGnZc
-Message-ID: <CABTo8gBOgNioAAK6fG=TomMdkOJeY2JSz2tNBWusA1BWOdO12Q@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] pgpool2: upgrade 4.5.1 -> 4.5.2
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 27 Apr 2025 16:44:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117171
+ <openembedded-devel@lists.openembedded.org>; Sun, 27 Apr 2025 18:53:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117172
 
-Stay with c17 for the time being.
+From: Martin Jansa <martin.jansa@gmail.com>
 
-On Sun, Apr 27, 2025 at 12:40=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrot=
-e:
->
-> Does this fix build with gcc15 as well or do we still need to stick to c1=
-7
->
-> On Sun, Apr 27, 2025 at 9:37=E2=80=AFAM J. S. via lists.openembedded.org =
-<schonm=3Dgmail.com@lists.openembedded.org> wrote:
->>
->> Fixes for memory leaks, uninitialized memory, segmentation faults and ot=
-her fixes.
->>
->> Changelog: https://www.pgpool.net/docs/latest/en/html/release-4-5-2.html
->>
->> Signed-off-by: Jason Schonberg <schonm@gmail.com>
->> ---
->>  .../pgpool2/{pgpool2_4.5.1.bb =3D> pgpool2_4.5.2.bb}              | 2 +=
--
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>  rename meta-networking/recipes-support/pgpool2/{pgpool2_4.5.1.bb =3D> p=
-gpool2_4.5.2.bb} (95%)
->>
->> diff --git a/meta-networking/recipes-support/pgpool2/pgpool2_4.5.1.bb b/=
-meta-networking/recipes-support/pgpool2/pgpool2_4.5.2.bb
->> similarity index 95%
->> rename from meta-networking/recipes-support/pgpool2/pgpool2_4.5.1.bb
->> rename to meta-networking/recipes-support/pgpool2/pgpool2_4.5.2.bb
->> index a2f7665df1..d3dadfc6d0 100644
->> --- a/meta-networking/recipes-support/pgpool2/pgpool2_4.5.1.bb
->> +++ b/meta-networking/recipes-support/pgpool2/pgpool2_4.5.2.bb
->> @@ -16,7 +16,7 @@ SRC_URI =3D "http://www.pgpool.net/mediawiki/images/pg=
-pool-II-${PV}.tar.gz \
->>            file://pgpool.sysconfig \
->>            file://pgpool.service \
->>             "
->> -SRC_URI[sha256sum] =3D "8e14b0558a15dae8767c8e1acee3f2f6c7c08ebfffda66a=
-359367eaaa56c3936"
->> +SRC_URI[sha256sum] =3D "480ac23f01cd7d6c856b29386bf17a848712fb4b4057d4c=
-8abd5c8bf819bdf06"
->>
->>  S =3D "${WORKDIR}/pgpool-II-${PV}"
->>
->> --
->> 2.43.0
->>
->>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#117169): https://lists.openembedded.org/g/openembedd=
-ed-devel/message/117169
->> Mute This Topic: https://lists.openembedded.org/mt/112485538/1997914
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [=
-raj.khem@gmail.com]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
+* with musl this fails with:
+  http://errors.yoctoproject.org/Errors/Details/853041/
+
+bstat.c:65:33: error: unknown type name '__uint32_t'; did you mean 'uint32_t'?
+   65 | static inline int xfs_highbit32(__uint32_t v)
+      |                                 ^~~~~~~~~~
+      |                                 uint32_t
+
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+---
+ ..._t-instead-of-__uint32_t-to-fix-buil.patch | 33 +++++++++++++++++++
+ .../xfstests/xfstests_2025.03.30.bb           |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-filesystems/recipes-utils/xfstests/xfstests/0001-bstat-use-uint32_t-instead-of-__uint32_t-to-fix-buil.patch
+
+diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests/0001-bstat-use-uint32_t-instead-of-__uint32_t-to-fix-buil.patch b/meta-filesystems/recipes-utils/xfstests/xfstests/0001-bstat-use-uint32_t-instead-of-__uint32_t-to-fix-buil.patch
+new file mode 100644
+index 0000000000..6ac2dd92b4
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/xfstests/xfstests/0001-bstat-use-uint32_t-instead-of-__uint32_t-to-fix-buil.patch
+@@ -0,0 +1,33 @@
++From c3cc5c68a297a98adb9a7046c7563d0678245243 Mon Sep 17 00:00:00 2001
++From: Martin Jansa <martin.jansa@gmail.com>
++Date: Sun, 27 Apr 2025 20:29:09 +0200
++Subject: [PATCH] bstat: use uint32_t instead of __uint32_t to fix build with
++ musl
++
++* with musl this fails with:
++  http://errors.yoctoproject.org/Errors/Details/853041/
++
++bstat.c:65:33: error: unknown type name '__uint32_t'; did you mean 'uint32_t'?
++   65 | static inline int xfs_highbit32(__uint32_t v)
++      |                                 ^~~~~~~~~~
++      |                                 uint32_t
++
++Upstream-Status: Pending
++Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
++---
++ src/bstat.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/bstat.c b/src/bstat.c
++index 9a028a0d..a833af59 100644
++--- a/src/bstat.c
+++++ b/src/bstat.c
++@@ -62,7 +62,7 @@ static inline int fls(int x)
++ 	return r;
++ }
++ 
++-static inline int xfs_highbit32(__uint32_t v)
+++static inline int xfs_highbit32(uint32_t v)
++ {
++ 	return fls(v) - 1;
++ }
+diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests_2025.03.30.bb b/meta-filesystems/recipes-utils/xfstests/xfstests_2025.03.30.bb
+index 94d37c03a9..b300fdb88c 100644
+--- a/meta-filesystems/recipes-utils/xfstests/xfstests_2025.03.30.bb
++++ b/meta-filesystems/recipes-utils/xfstests/xfstests_2025.03.30.bb
+@@ -12,6 +12,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master;ta
+            file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
+            file://0001-include-libgen.h-for-basename-API-prototype.patch \
+            file://0002-Add-missing-STATX_ATTR_-defines-from-musl-sys-stat.h.patch \
++           file://0001-bstat-use-uint32_t-instead-of-__uint32_t-to-fix-buil.patch \
+            "
+ 
+ S = "${WORKDIR}/git"
 
