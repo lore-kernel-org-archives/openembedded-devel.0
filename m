@@ -1,253 +1,79 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CDC8C369D1
-	for <webhook@archiver.kernel.org>; Sun, 27 Apr 2025 20:51:42 +0000 (UTC)
-Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
- by mx.groups.io with SMTP id smtpd.web10.33560.1745787094236229870
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6ADFAC369D5
+	for <webhook@archiver.kernel.org>; Sun, 27 Apr 2025 21:30:02 +0000 (UTC)
+Received: from mta-65-227.siemens.flowmailer.net (mta-65-227.siemens.flowmailer.net [185.136.65.227])
+ by mx.groups.io with SMTP id smtpd.web11.34309.1745789376621160640
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Apr 2025 13:51:34 -0700
+ Sun, 27 Apr 2025 14:29:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
-Received: from fwd70.aul.t-online.de (fwd70.aul.t-online.de [10.223.144.96])
-	by mailout10.t-online.de (Postfix) with SMTP id 71B9AA43
-	for <openembedded-devel@lists.openembedded.org>; Sun, 27 Apr 2025 22:51:30 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.169.99]) by fwd70.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1u98yI-48V3Sb0; Sun, 27 Apr 2025 22:51:30 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=CEnPZppz;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.227, mailfrom: fm-256628-202504272129334384b9c345012ec12e-hryddw@rts-flowmailer.siemens.com)
+Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id 202504272129334384b9c345012ec12e
+        for <openembedded-devel@lists.openembedded.org>;
+        Sun, 27 Apr 2025 23:29:33 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=C3EKcwTqkNunfTSnnMiZrrA5b7ATxX3JhDh9uVv1DqE=;
+ b=CEnPZppzKuNKcICa53YThN1kVd2Jal3yYS4Qhorao9XNeLsR0b+AWWYuUpMG9fNV2kEwD9
+ nnVCN7fNMG0j+Ck/LJkvgZN5nYAvzLtfXiBdJP18TrEJJHrjabp99AGQk2N55MiPbtRRftiC
+ OuZK8/mZrp4mZsQ7P2jjtP0b3xkVD3i0QqeQ2jrv+OUsngkIfRtHkj/97iYwhwUHz8KjjgXn
+ l8e7K0yZU9hKdlluKPEw7T2EoPeyWfcHLL1qqGAjOzWI9+YNZTwYk64S3awhlLWEHytnA9Gx
+ GoA8e0jQQJbTx6FV35K/Qo9bkCq8WHvYdWhitba6PKgSmF4IVs89gnmg==;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] libosinfo: update 1.11.0 -> 1.12.0
-Date: Sun, 27 Apr 2025 22:51:23 +0200
-Message-ID: <20250427205123.2533427-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.49.0
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-networking][PATCH 1/3] corosync: fix upstream version check
+Date: Sun, 27 Apr 2025 23:28:42 +0200
+Message-Id: <20250427212844.1992660-1-peter.marko@siemens.com>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1745787090-927FB92C-F7C1C27B/0/0 CLEAN NORMAL
-X-TOI-MSGID: 08910ac5-6ef9-48de-93b1-cf6ba4251a16
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 27 Apr 2025 20:51:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117177
+ <openembedded-devel@lists.openembedded.org>; Sun, 27 Apr 2025 21:30:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117178
 
-- remove backported patch
-- add a patch to fix:
-| ../git/osinfo/osinfo_loader.c:357:5: error: 'content' is deprecated [-W=
-error=3Ddeprecated-declarations]
-|   357 |     ret =3D g_strdup((char *)buf->content);
-|       |     ^~~
-| In file included from /home/flk/poky/build/tmp/work/corei7-64-poky-linu=
-x/libosinfo/1.12.0/recipe-sysroot/usr/include/libxml2/libxml/parser.h:16,
-|                  from ../git/osinfo/osinfo_loader.c:29:
-| /home/flk/poky/build/tmp/work/corei7-64-poky-linux/libosinfo/1.12.0/rec=
-ipe-sysroot/usr/include/libxml2/libxml/tree.h:103:14: note: declared here
-|   103 |     xmlChar *content XML_DEPRECATED_MEMBER;
-|       |              ^~~~~~~
-| ../git/osinfo/osinfo_loader.c: At top level:
-| ../git/osinfo/osinfo_loader.c:1905:42: error: expected ';', ',' or ')' =
-before 'ATTRIBUTE_UNUSED'
-|  1905 | catchXMLError(void *ctx, const char *msg ATTRIBUTE_UNUSED, ...)
-|       |                                          ^~~~~~~~~~~~~~~~
-| ../git/osinfo/osinfo_loader.c: In function 'osinfo_loader_process_xml':
-| ../git/osinfo/osinfo_loader.c:1948:25: error: 'catchXMLError' undeclare=
-d (first use in this function)
-|  1948 |     pctxt->sax->error =3D catchXMLError;
-|       |                         ^~~~~~~~~~~~~
-| ../git/osinfo/osinfo_loader.c:1948:25: note: each undeclared identifier=
- is reported only once for each function it appears in
-| cc1: all warnings being treated as errors
+From: Peter Marko <peter.marko@siemens.com>
 
-1.12.0 - Oct 23, 2023
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+github-releases is needed that it work at all:
+ERROR: Automatic discovery of latest version/revision failed - you must provide a version using the --version/-V option, or for recipes that fetch from an SCM such as git, the --srcrev/-S option.
 
-- Some memory leak fixes #156
-- Adapt to change in libxml2 #155
-- Several CI improvements
-- Several translations improvements
+UPSTREAM_CHECK_GITTAGREGEX is needed to get correct version, otherwise:
+$ devtool latest-version corosync
+...
+INFO: Current version: 3.1.6
+INFO: Latest version: 414.336.75.75.75
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- ...rror-struct-constant-in-propagate_li.patch | 32 -------
- ...38535637ec668e658d43f04f60f11f51574f.patch | 86 +++++++++++++++++++
- ...ibosinfo_1.11.0.bb =3D> libosinfo_1.12.0.bb} |  4 +-
- 3 files changed, 88 insertions(+), 34 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libosinfo/libosinfo/0001-osin=
-fo-Make-xmlError-struct-constant-in-propagate_li.patch
- create mode 100644 meta-oe/recipes-support/libosinfo/libosinfo/0adf38535=
-637ec668e658d43f04f60f11f51574f.patch
- rename meta-oe/recipes-support/libosinfo/{libosinfo_1.11.0.bb =3D> libos=
-info_1.12.0.bb} (89%)
+ meta-networking/recipes-extended/corosync/corosync_3.1.6.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libosinfo/libosinfo/0001-osinfo-Make=
--xmlError-struct-constant-in-propagate_li.patch b/meta-oe/recipes-support=
-/libosinfo/libosinfo/0001-osinfo-Make-xmlError-struct-constant-in-propaga=
-te_li.patch
-deleted file mode 100644
-index 467c6b4baf..0000000000
---- a/meta-oe/recipes-support/libosinfo/libosinfo/0001-osinfo-Make-xmlErr=
-or-struct-constant-in-propagate_li.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From 5bbdd06503456784c5ffa22409e8bab50470d673 Mon Sep 17 00:00:00 2001
--From: Michal Privoznik <mprivozn@redhat.com>
--Date: Mon, 27 Nov 2023 15:11:45 +0100
--Subject: [PATCH] osinfo: Make xmlError struct constant in
-- propagate_libxml_error()
--
--In libxml2 commit v2.12.0~14 the API changed so that
--xmlGetLastError() returns pointer to a constant xmlError struct.
--Reflect this change in our code.
--
--Upstream-Status: Backport [https://gitlab.com/libosinfo/libosinfo/-/merg=
-e_requests/155]
--Signed-off-by: Michal Privoznik <mprivozn@redhat.com>
-----
-- osinfo/osinfo_install_script.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/osinfo/osinfo_install_script.c b/osinfo/osinfo_install_scri=
-pt.c
--index 5800f37..303245a 100644
----- a/osinfo/osinfo_install_script.c
--+++ b/osinfo/osinfo_install_script.c
--@@ -769,7 +769,7 @@ static void propagate_libxml_error(GError **error, c=
-onst char *format, ...) G_GN
--=20
-- static void propagate_libxml_error(GError **error, const char *format, =
-...)
-- {
---    xmlErrorPtr err =3D xmlGetLastError();
--+    const xmlError *err =3D xmlGetLastError();
--     char *prefix;
--     va_list ap;
--=20
----=20
--2.44.0
--
-diff --git a/meta-oe/recipes-support/libosinfo/libosinfo/0adf38535637ec66=
-8e658d43f04f60f11f51574f.patch b/meta-oe/recipes-support/libosinfo/libosi=
-nfo/0adf38535637ec668e658d43f04f60f11f51574f.patch
-new file mode 100644
-index 0000000000..f76aef8b25
---- /dev/null
-+++ b/meta-oe/recipes-support/libosinfo/libosinfo/0adf38535637ec668e658d4=
-3f04f60f11f51574f.patch
-@@ -0,0 +1,86 @@
-+From 0adf38535637ec668e658d43f04f60f11f51574f Mon Sep 17 00:00:00 2001
-+From: Roman Bogorodskiy <bogorodskiy@gmail.com>
-+Date: Thu, 10 Apr 2025 13:54:02 +0200
-+Subject: [PATCH] loader: don't use libxml2 deprecated APIs
-+
-+Address the following items:
-+
-+ - Deprecated direct access to buf's content
-+ - Mismatching error function signature
-+ - Deprecated direct access to ctxt's lastError
-+
-+Signed-off-by: Roman Bogorodskiy <bogorodskiy@gmail.com>
-+Signed-off-by: Markus Volk <f_l_k@t-online.de>
-+
-+Upstream-Status: Backport [https://gitlab.com/libosinfo/libosinfo/-/comm=
-it/0adf38535637ec668e658d43f04f60f11f51574f.patch]
-+---
-+ osinfo/osinfo_loader.c | 42 +++++++++++++++++++++++-------------------
-+ 1 file changed, 23 insertions(+), 19 deletions(-)
-+
-+diff --git a/osinfo/osinfo_loader.c b/osinfo/osinfo_loader.c
-+index 0a9004af..b3fd4535 100644
-+--- a/osinfo/osinfo_loader.c
-++++ b/osinfo/osinfo_loader.c
-+@@ -354,7 +354,7 @@ osinfo_loader_doc(const char *xpath,
-+         xmlXPathFreeObject(obj);
-+         OSINFO_LOADER_SET_ERROR(err, "Cannot format stylesheet");
-+     }
-+-    ret =3D g_strdup((char *)buf->content);
-++    ret =3D g_strdup((char *)xmlBufferContent(buf));
-+=20
-+     xmlBufferFree(buf);
-+     xmlXPathFreeObject(obj);
-+@@ -1902,28 +1902,32 @@ static void osinfo_loader_root(OsinfoLoader *loa=
-der,
-+ }
-+=20
-+ static void
-+-catchXMLError(void *ctx, const char *msg ATTRIBUTE_UNUSED, ...)
-++catchXMLError(void *ctx, const char *msg, ...)
-+ {
-+     xmlParserCtxtPtr ctxt =3D (xmlParserCtxtPtr) ctx;
-++    const xmlError *xmlErr =3D NULL;
-++    g_autofree gchar *xmlmsg =3D NULL;
-+=20
-+-    if (ctxt && ctxt->_private) {
-+-        GError **err =3D ctxt->_private;
-+-        if (!error_is_set(err)) {
-+-            gchar *xmlmsg;
-+-            if (ctxt->lastError.file) {
-+-                xmlmsg =3D g_strdup_printf("%s:%d: %s",
-+-                                         ctxt->lastError.file,
-+-                                         ctxt->lastError.line,
-+-                                         ctxt->lastError.message);
-+-            } else {
-+-                xmlmsg =3D g_strdup_printf("at line %d: %s",
-+-                                         ctxt->lastError.line,
-+-                                         ctxt->lastError.message);
-+-            }
-+-            OSINFO_LOADER_SET_ERROR(ctxt->_private, xmlmsg);
-+-            g_free(xmlmsg);
-+-        }
-++    if (!ctxt || !ctxt->_private)
-++        return;
-++
-++    if (error_is_set(ctxt->_private))
-++        return;
-++
-++    if (!(xmlErr =3D xmlCtxtGetLastError(ctx)))
-++        return;
-++
-++    if (xmlErr->file) {
-++        xmlmsg =3D g_strdup_printf("%s:%d: %s",
-++                                 xmlErr->file,
-++                                 xmlErr->line,
-++                                 xmlErr->message);
-++    } else {
-++        xmlmsg =3D g_strdup_printf("at line %d: %s",
-++                                 xmlErr->line,
-++                                 xmlErr->message);
-+     }
-++    OSINFO_LOADER_SET_ERROR(ctxt->_private, xmlmsg);
-+ }
-+=20
-+ static void osinfo_loader_process_xml(OsinfoLoader *loader,
-+--=20
-+GitLab
-+
-diff --git a/meta-oe/recipes-support/libosinfo/libosinfo_1.11.0.bb b/meta=
--oe/recipes-support/libosinfo/libosinfo_1.12.0.bb
-similarity index 89%
-rename from meta-oe/recipes-support/libosinfo/libosinfo_1.11.0.bb
-rename to meta-oe/recipes-support/libosinfo/libosinfo_1.12.0.bb
-index 727d5ecf89..edcebf522a 100644
---- a/meta-oe/recipes-support/libosinfo/libosinfo_1.11.0.bb
-+++ b/meta-oe/recipes-support/libosinfo/libosinfo_1.12.0.bb
-@@ -8,10 +8,10 @@ LIC_FILES_CHKSUM =3D "file://COPYING.LIB;md5=3D4fbd6538=
-0cdd255951079008b364516c"
- SRC_URI =3D " \
- 	git://gitlab.com/libosinfo/libosinfo.git;branch=3Dmain;protocol=3Dhttps=
- \
- 	file://0001-meson.build-allow-crosscompiling-gir.patch \
--	file://0001-osinfo-Make-xmlError-struct-constant-in-propagate_li.patch =
-\
-+	file://0adf38535637ec668e658d43f04f60f11f51574f.patch \
- "
-=20
--SRCREV =3D "ca9dd5b810dc04ea38048ae9be491654c8596ef9"
-+SRCREV =3D "b505ef5161d2552102a743acd4ad83298d3d8f99"
-=20
- S =3D "${WORKDIR}/git"
-=20
---=20
-2.49.0
-
+diff --git a/meta-networking/recipes-extended/corosync/corosync_3.1.6.bb b/meta-networking/recipes-extended/corosync/corosync_3.1.6.bb
+index cbbbbc70cd..e8e4540a21 100644
+--- a/meta-networking/recipes-extended/corosync/corosync_3.1.6.bb
++++ b/meta-networking/recipes-extended/corosync/corosync_3.1.6.bb
+@@ -5,13 +5,13 @@ HOMEPAGE = "http://corosync.github.io/corosync/"
+ 
+ SECTION = "base"
+ 
+-inherit autotools pkgconfig systemd
++inherit autotools pkgconfig systemd github-releases
+ 
+-SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.gz \
++SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/${BP}.tar.gz \
+            file://corosync.conf \
+           "
+ SRC_URI[sha256sum] = "ca6ed32b4d7f33ed614afce8760fe58d0de92c68b575d4969ebacd892f3d1e27"
+-UPSTREAM_CHECK_REGEX = "(?P<pver>\d+\.(?!99)\d+(\.\d+)+)"
++UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ 
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a85eb4ce24033adb6088dd1d6ffc5e5d"
 
