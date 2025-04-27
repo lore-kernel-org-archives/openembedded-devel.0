@@ -2,105 +2,66 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 40383C369D9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56138C369D5
 	for <webhook@archiver.kernel.org>; Sun, 27 Apr 2025 20:49:42 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.web10.13578.1745606526450314808
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.23857.1745747362814304960
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Apr 2025 11:42:06 -0700
+ Sun, 27 Apr 2025 02:49:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@riscstar-com.20230601.gappssmtp.com header.s=20230601 header.b=fa1tooU8;
- spf=pass (domain: riscstar.com, ip: 209.85.128.54, mailfrom: erik@riscstar.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-43cf3192f3bso23034175e9.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Apr 2025 11:42:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20230601.gappssmtp.com; s=20230601; t=1745606524; x=1746211324; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ZXRHcPR06oNpeUiExQUfQt0naxffnTBSxVMfHLM7nRQ=;
-        b=fa1tooU8S42xALd60a6GLXtBzVXI/4FzC3uoG9PV36UskazPCbcyR3co7sXUqb4+T9
-         eufKoxDABU9Q45+y4FMA8ml51YN/dk2SHf2ue4QSVwjmHzuc3a51jvdzv8hlThjhtbwd
-         9uuVWozTwCAxZeYUnHD3VMCLEsSjqCyDWqqtUwlEoa0O3xz0nvtpxtbyePQ5Ad3M82Pk
-         wU6T9mz7ZNaG7Gnqlhvh2uFK4h2SG74ko+DihppNhiX2DVSO+fK0759TUQHz9Fj11K9E
-         iUeIzVZUgvvwqh+KWZB6Wy6q+naHRte6VCrhVW1wK5ZBlJcil/5NjLeD6Wrh4JpuTbmy
-         hOUw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745606524; x=1746211324;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ZXRHcPR06oNpeUiExQUfQt0naxffnTBSxVMfHLM7nRQ=;
-        b=MJz9dK7B15Ycnwk01G/6LP4uGjecRwYUdkei+wZe+Bch//HGVZSxL9gm591kNBQdWd
-         vxMwbGfp3yxQjBythh0W5q0siROwr/w9QFi4ACOLk1P+F/gVupsr+AQNuSvwkGwPrBGT
-         kK6P7SjtZ9jsjdCY4BYgq4ghSAHY+D5dK3VoFlRwWMe4Qq42fDaBnFL6XghLIixUxF3C
-         T5NzDwMCE29sB9iQBtazG+nAPDqU6pkMkoU9AhCqfgouWbVrJNBAqtqgoaGLFBCNkqLI
-         3D6bSMD8hLCz8ItD8DJKTmnO4M0BO8ebQglvZPpqLCQ9+B8gvJuN1+HEZbE7BtSr+lLS
-         AvVg==
-X-Gm-Message-State: AOJu0Yymc3HprhWoSlk6Y95kmMgYHq3S5cqNPPOQw8yzSsI6lSBXxv/y
-	1hIs+ogV5bMjHTp5/uanPDY6wU0auphtXMo+jPv2+zsIYkSICvyanJqNYOuWPlemWYBDSkaqXeS
-	/q38=
-X-Gm-Gg: ASbGncvT7LADngT8HsQajaQWLYXSyreR1hagM66Xl1QCPUd4JRjSD6V8t06MaWpwQGQ
-	Dc/q8yutRrJys1/1ngiXIWfuoE8z4bFvyDyGajBD+6q/vxzScdo4DzgYlj29KBTwV/eKYMtzWBw
-	w435J8eVEiUvpTW7GtKslkjQ8FUjx9Lj/mKT22WEuXP2E0bH65UV7MC0XAWdb07TluDpD3dLqAY
-	4l3/F/zIFdL+Gi6yyqe3PxfhktV5663jL7KYpPhp2fFuT8iBUkz3Z6G4fHRKTkeqpZFrHxtJmP3
-	LuXqiy3E9EkFTtWheMms/LR4CVBNJSt8
-X-Google-Smtp-Source: AGHT+IHO0rf5GweSMfNKA2PdOGdR6iSsgsKHtgE3VocDaC4LypEpGOvsIlZYtHUYJLcXW9Q2w+HpFA==
-X-Received: by 2002:a05:600c:4f06:b0:43c:fdbe:4398 with SMTP id 5b1f17b1804b1-440a65b64a9mr26718645e9.6.1745606524026;
-        Fri, 25 Apr 2025 11:42:04 -0700 (PDT)
-Received: from ablu-work.lan ([2001:9e8:d596:8d00::35e])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-440a52f89b2sm34045675e9.8.2025.04.25.11.42.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Apr 2025 11:42:03 -0700 (PDT)
-From: Erik Schilling <erik@riscstar.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Stefan Agner <stefan.agner@toradex.com>,
-	Erik Schilling <erik@riscstar.com>
-Subject: [meta-oe][PATCH] zram: fix RDEPENDS for systemd service
-Date: Fri, 25 Apr 2025 20:41:39 +0200
-Message-ID: <20250425184139.1117690-1-erik@riscstar.com>
-X-Mailer: git-send-email 2.49.0
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=621208ffe7=lizhi.xu@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53R5w4l0012047;
+	Sun, 27 Apr 2025 09:49:18 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 468mq19keh-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Sun, 27 Apr 2025 09:49:18 +0000 (GMT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Sun, 27 Apr 2025 02:49:17 -0700
+Received: from pek-lpd-ccm6.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Sun, 27 Apr 2025 02:49:15 -0700
+From: "Xu, Lizhi" <Lizhi.Xu@windriver.com>
+To: <rishi_devan@mail.com>
+CC: <raj.khem@gmail.com>, <Lizhi.Xu@windriver.com>, <Rahul.Taya@kpit.com>,
+        <openembedded-devel@lists.openembedded.org>, <ticotimo@gmail.com>
+Subject: Re: [meta-python2][PATCH] python: the fix for CVE-2019-20907 is adjusted in the python2
+Date: Sun, 27 Apr 2025 17:49:14 +0800
+Message-ID: <20250427094914.4018276-1-lizhi.xu@windriver.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250329015102.1360744-1-lizhi.xu@windriver.com>
+References: <20250329015102.1360744-1-lizhi.xu@windriver.com>
 MIME-Version: 1.0
+X-Authority-Analysis: v=2.4 cv=KsNN2XWN c=1 sm=1 tr=0 ts=680dfd9e cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=XR8D0OoHHMoA:10 a=tWSnqiNYWvcfZm9rFm8A:9
+X-Proofpoint-ORIG-GUID: g_ICw-M_uPO2qHPPLKUKVph9i3XAXurv
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNDI3MDA3OSBTYWx0ZWRfX16F3vbq0zahO 68Vk+HyxGNPjChOIftKUBU2+mU2s6qcUNpIMsjHJKyRubJLpeobnO/nGI5pvP7CwcScIRW9bWoZ burhIp9tZ8v9xnEE05UpvH5eBAFEZ7lGCmC0WrToIRg2WkpXY4zFIyqEr0nyN3DjBUbZwyO2IAI
+ 011XwQEHp/+GG+RV8x5ET0huWnkGVeuEFHcdD6xK0jzu4wZ/SHfkxf9++GJFgAKR+mEnDnCkcnp nr+n87za5EzSa0qMLjV5k3bAhBY/8TjxcGe8ZsGURgf7woWwVliG6lvYvXFb8mChhNG4SQNa+rL 6thVhe6IaHXyaGbGbHTLg/Z4ZGm5PH6mOaI32/QTmFdMYS1jkSDBVhwxTx7Lq+okoCRD5UrIBpD
+ QsiXCkG0W0iFsnhyMqHkyfhb9hMF1YzeleO+HUtgN+45mVRV6AFTJNmQDSoNdcFQkCKITpVs
+X-Proofpoint-GUID: g_ICw-M_uPO2qHPPLKUKVph9i3XAXurv
+X-Sensitive_Customer_Information: Yes
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-04-27_03,2025-04-24_02,2025-02-21_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ mlxlogscore=601 spamscore=0 bulkscore=0 lowpriorityscore=0 adultscore=0
+ mlxscore=0 phishscore=0 malwarescore=0 clxscore=1011 suspectscore=0
+ impostorscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2504070000
+ definitions=main-2504270079
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 27 Apr 2025 20:49:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117174
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117175
 
-This attempted to pull in the entirety of util-linux when systemd is
-selected. That falls apart when building with `NO_RECOMMENDATIONS = "1"`
-as util-linux only weakly recommends util-linux-zramctl.
+Hi Rishi, 
+Have you seen the patch I sent?
 
-Hence, we want to pull that in explicitly.
-
-Signed-off-by: Erik Schilling <erik@riscstar.com>
----
- meta-oe/recipes-extended/zram/zram_0.2.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-extended/zram/zram_0.2.bb b/meta-oe/recipes-extended/zram/zram_0.2.bb
-index 89292118d0..e4522f89a1 100644
---- a/meta-oe/recipes-extended/zram/zram_0.2.bb
-+++ b/meta-oe/recipes-extended/zram/zram_0.2.bb
-@@ -1,15 +1,15 @@
- SUMMARY = "Linux zram compressed in-memory swap"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
- 
- inherit update-rc.d systemd
- 
--RDEPENDS:${PN} = "kmod \
--    ${@bb.utils.contains('DISTRO_FEATURES','systemd','util-linux','util-linux-swaponoff',d)}"
-+RDEPENDS:${PN} = "kmod util-linux-swaponoff \
-+    ${@bb.utils.contains('DISTRO_FEATURES','systemd','util-linux-zramctl','',d)}"
- RRECOMMENDS:${PN} = "kernel-module-zram"
- 
- 
- SRC_URI = " \
-            file://init \
-            file://zram-swap-init \
-            file://zram-swap-deinit \
--- 
-2.49.0
-
+BR,
+Lizhi
 
