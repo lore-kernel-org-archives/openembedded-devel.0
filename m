@@ -1,98 +1,236 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4314AC369D5
-	for <webhook@archiver.kernel.org>; Mon, 28 Apr 2025 12:17:09 +0000 (UTC)
-Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
- by mx.groups.io with SMTP id smtpd.web10.46710.1745842625204142646
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 782FBC369D5
+	for <webhook@archiver.kernel.org>; Mon, 28 Apr 2025 12:53:19 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.47402.1745844790733667392
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Apr 2025 05:17:05 -0700
+ Mon, 28 Apr 2025 05:53:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=GQjdhoLJ;
- spf=pass (domain: konsulko.com, ip: 209.85.218.52, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-abec8b750ebso785207266b.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 05:17:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1745842623; x=1746447423; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=avPiURClsz1yMMr9jYChswD9V7vw4qZR5y+sVGWIKuk=;
-        b=GQjdhoLJPhgrsLj+a/S8oW1xrZJdkvvXsMNvWvvn5CWQqm1Smn/pCEmehCaJZDcZLA
-         +aZvSPD06ZTc+QymNYdBLd8WP+Y6P7Ab0B57m6FyWwUt4xIV49j7hFHTrSVk0gG3hgwJ
-         LzedAeKiQoRVN8TzcRZIKMORNah4ZvIFIWeaQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745842623; x=1746447423;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=avPiURClsz1yMMr9jYChswD9V7vw4qZR5y+sVGWIKuk=;
-        b=GdcKwOgvOX/vR9/bv5GIm2H2p4x70/l5e3SzQ8HRe4xFAxRMt8scdv9jujRfLgWWDq
-         FgpHqQoGWd/POSgkYo7R0LiTviRYkdKdUsLKKTVRwKUAzoRakTwIu8Yw/2D5r3GUdc8f
-         w8C/IbYX2yUmHPIshlrBuNTD+4Si0LH3xu90E4cgAQ7wE4tc6eoZgqPkfB0Md8e9zhCm
-         v4IPCC+wJSJUHeCyvaX0hKbC2wn2eUTOeiE5bSVE88SZCBkigi+A9JWgjZEo8fHg5KmH
-         gP4lAB3YErb6P2cwg5orSZujoqs2/RdphZ/wy2/iOKDXcmsvsoeS77+fL/4GGYzTGUnV
-         SNgw==
-X-Gm-Message-State: AOJu0YxSVRPZSy+zakEVSQI8EKfx1i84f0QM8uOyUafe24E/KyhnsJUI
-	zTTyTWTe8T8OwFIDykPgllWe6oOFEHdi+GdI6eqslMCdk6u1Rf5YkhdkntImUgsxjvR/+CYjOiq
-	J
-X-Gm-Gg: ASbGncv04Z8E4uwDgNbMAGnHEGnoI4tYo81xyOU+xNaWaIcnmdtU1fTsgDuSfTg3kvY
-	NeGW0zNQadBJ3LWbCxfPxLxGxC7tm1psUpwnfxvb4AOWM/02FCIKbAXKi1YVcbAXMw7H0sKzt6R
-	bYxJZxTtsv2StENQRRxkeeM1n3pq6udaHkIIqSmhRwohOhfS64lfxHZxK5+jo5byGORYheEOD4b
-	hhooRZuTjOZFFdkkiSqZPz2LGer2L4gcghsfL1UXxpsB5zMTsvir2g+mOI4j/jbvuXQFxAurIVA
-	rBkAeB2bLNc26uPsDUc/eHIOxHKC9JkGRgN7ubGxxRhn4NgVp8z07WHYX0O9IYKI3A==
-X-Google-Smtp-Source: AGHT+IGLbGRKoUewUIx7HraHQ9nKNWQAMHANV9jBa4xxZs2fSNpQpB2zoLPNhKTsJqtMUo1cGTvhoA==
-X-Received: by 2002:a17:906:6a13:b0:aca:b720:f158 with SMTP id a640c23a62f3a-ace7108a282mr1025004666b.13.1745842623386;
-        Mon, 28 Apr 2025 05:17:03 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ace6ed705fbsm620584666b.149.2025.04.28.05.17.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Apr 2025 05:17:02 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-httpcore: Upgrade 1.0.8 -> 1.0.9
-Date: Mon, 28 Apr 2025 15:16:58 +0300
-Message-Id: <20250428121658.2368361-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250428121658.2368361-1-leon.anavi@konsulko.com>
-References: <20250428121658.2368361-1-leon.anavi@konsulko.com>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=7213e41726=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53SA1ULd023843
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 12:53:10 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 468pf92x92-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 12:53:09 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Mon, 28 Apr 2025 05:53:07 -0700
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][scarthgap][PATCH 1/1] poppler: fix CVE-2025-43903
+Date: Mon, 28 Apr 2025 12:52:48 +0000
+Message-ID: <20250428125248.3188657-1-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: ToeDOz_7ZXAAr6RcJ5YqvJ8Xhdq77tmJ
+X-Authority-Analysis: v=2.4 cv=EavIQOmC c=1 sm=1 tr=0 ts=680f7a35 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=XR8D0OoHHMoA:10 a=PYnjg3YJAAAA:8 a=e5mUnYsNAAAA:8 a=t7CeM3EgAAAA:8 a=dldsdqVgAAAA:8
+ a=WjO9WWqw1KPLFoUtmP8A:9 a=Vxmtnl_E_bksehYqCbjh:22 a=FdTzh2GWekK77mhwV6Dw:22 a=dvvn15oi174MAja8qEYz:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNDI4MDEwNiBTYWx0ZWRfX2bpiiQQ62Mz5 V/rQjsOcnVDvTcr4fN9qEzkfmVT3FuDjIr282k6tXFki6G5GUggbzI/ahNC/8rIIlV1tm8yjDlx qJsCUdu7wEglq1LEGD2SPmnXY4u1UZTBFhkILps2aT/982xTQtZ21chTeBX1UoBFXO60lFt7B70
+ ZIlHUY/DoI10l47lAdmoFaBBr1vZCo7KjjMJ4i8eg71hGQfL0il5i3o4bVryXNaQlUZZxlvD6rl CujGVE5U+Pgh574JsjjN7jMzMTUyuJdigRxqgIPdYSFHwbZjvP53LY7onj5S/o7YP+76sV+CK1T 0D/d5qCdT1WrZIUTzK+swYlH2hIgU5+rOGqIonR1HMo5dfHBqYOYwxzQTEyiQtb6dGxR0snQto5
+ nApg+nd2gkZzrpRml5qJ1zeTZg4a+XI4iJydjoylfr7yTC6A4SkUvGbdaU45ORodHDgd0dyn
+X-Proofpoint-ORIG-GUID: ToeDOz_7ZXAAr6RcJ5YqvJ8Xhdq77tmJ
+X-Sensitive_Customer_Information: Yes
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-04-28_05,2025-04-24_02,2025-02-21_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ impostorscore=0 malwarescore=0 lowpriorityscore=0 spamscore=0 bulkscore=0
+ adultscore=0 suspectscore=0 phishscore=0 mlxscore=0 clxscore=1015
+ mlxlogscore=999 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2504070000
+ definitions=main-2504280106
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 12:17:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117193
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 12:53:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117194
 
-Upgrade to release 1.0.9:
+From: Yogita Urade <yogita.urade@windriver.com>
 
-- Resolve GHSA-vqfr-h8mv-ghfj with h11 dependency update
+NSSCryptoSignBackend.cc in Poppler before 25.04.0 does not verify
+the adbe.pkcs7.sha1 signatures on documents, resulting in potential
+signature forgeries.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+CVE-2025-43903-0001 is the dependent commit and
+CVE-2025-43903-0002 is the actual CVE fix.
+
+Reference:
+https://nvd.nist.gov/vuln/detail/CVE-2025-43903
+
+Upstream patches:
+https://gitlab.freedesktop.org/poppler/poppler/-/commit/33672ca1b6670f7378e24f6d475438f7f5d86b05
+https://gitlab.freedesktop.org/poppler/poppler/-/commit/f1b9c830f145a0042e853d6462b2f9ca4016c669
+
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 ---
- .../{python3-httpcore_1.0.8.bb => python3-httpcore_1.0.9.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-httpcore_1.0.8.bb => python3-httpcore_1.0.9.bb} (88%)
+ .../poppler/poppler/CVE-2025-43903-0001.patch | 75 +++++++++++++++++++
+ .../poppler/poppler/CVE-2025-43903-0002.patch | 49 ++++++++++++
+ .../poppler/poppler_23.04.0.bb                |  2 +
+ 3 files changed, 126 insertions(+)
+ create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-43903-0001.patch
+ create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-43903-0002.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-httpcore_1.0.8.bb b/meta-python/recipes-devtools/python/python3-httpcore_1.0.9.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-httpcore_1.0.8.bb
-rename to meta-python/recipes-devtools/python/python3-httpcore_1.0.9.bb
-index a4c9166639..d8f8400006 100644
---- a/meta-python/recipes-devtools/python/python3-httpcore_1.0.8.bb
-+++ b/meta-python/recipes-devtools/python/python3-httpcore_1.0.9.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=1c1f23b073da202e1f4f9e426490210c"
+diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2025-43903-0001.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2025-43903-0001.patch
+new file mode 100644
+index 0000000000..d18ff08ea0
+--- /dev/null
++++ b/meta-oe/recipes-support/poppler/poppler/CVE-2025-43903-0001.patch
+@@ -0,0 +1,75 @@
++From 33672ca1b6670f7378e24f6d475438f7f5d86b05 Mon Sep 17 00:00:00 2001
++From: Sune Vuorela <sune@vuorela.dk>
++Date: Mon, 22 May 2023 19:53:08 +0000
++Subject: [PATCH] Fix crash with weird hashing used for signatures
++
++CVE: CVE-2025-43903
++Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/33672ca1b6670f7378e24f6d475438f7f5d86b05]
++
++Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
++---
++ poppler/SignatureHandler.cc | 15 ++++++++++++---
++ poppler/SignatureHandler.h  |  7 ++++++-
++ 2 files changed, 18 insertions(+), 4 deletions(-)
++
++diff --git a/poppler/SignatureHandler.cc b/poppler/SignatureHandler.cc
++index 9916300..f0b7006 100644
++--- a/poppler/SignatureHandler.cc
+++++ b/poppler/SignatureHandler.cc
++@@ -768,11 +768,11 @@ SignatureVerificationHandler::SignatureVerificationHandler(std::vector<unsigned
++         SECItem usedAlgorithm = NSS_CMSSignedData_GetDigestAlgs(CMSSignedData)[0]->algorithm;
++         auto hashAlgorithm = SECOID_FindOIDTag(&usedAlgorithm);
++         HASH_HashType hashType = HASH_GetHashTypeByOidTag(hashAlgorithm);
++-        hashContext = std::make_unique<HashContext>(ConvertHashTypeFromNss(hashType));
+++        hashContext = HashContext::create(ConvertHashTypeFromNss(hashType));
++     }
++ }
++
++-SignatureSignHandler::SignatureSignHandler(const std::string &certNickname, HashAlgorithm digestAlgTag) : hashContext(std::make_unique<HashContext>(digestAlgTag)), signing_cert(nullptr)
+++SignatureSignHandler::SignatureSignHandler(const std::string &certNickname, HashAlgorithm digestAlgTag) : hashContext(HashContext::create(digestAlgTag)), signing_cert(nullptr)
++ {
++     SignatureHandler::setNSSDir({});
++     signing_cert = CERT_FindCertByNickname(CERT_GetDefaultCertDB(), certNickname.c_str());
++@@ -1232,7 +1232,16 @@ std::vector<unsigned char> HashContext::endHash()
++     return digestBuffer;
++ }
++
++-HashContext::HashContext(HashAlgorithm algorithm) : hash_context { HASH_Create(HASH_GetHashTypeByOidTag(ConvertHashAlgorithmToNss(algorithm))) }, digest_alg_tag(algorithm) { }
+++HashContext::HashContext(HashAlgorithm algorithm, private_tag) : hash_context { HASH_Create(HASH_GetHashTypeByOidTag(ConvertHashAlgorithmToNss(algorithm))) }, digest_alg_tag(algorithm) { }
+++
+++std::unique_ptr<HashContext> HashContext::create(HashAlgorithm algorithm)
+++{
+++    auto ctx = std::make_unique<HashContext>(algorithm, private_tag {});
+++    if (ctx->hash_context) {
+++        return ctx;
+++    }
+++    return {};
+++}
++
++ HashAlgorithm HashContext::getHashAlgorithm() const
++ {
++diff --git a/poppler/SignatureHandler.h b/poppler/SignatureHandler.h
++index c9fb575..f1b319f 100644
++--- a/poppler/SignatureHandler.h
+++++ b/poppler/SignatureHandler.h
++@@ -51,12 +51,17 @@ static const int maxSupportedSignatureSize = 10000;
++
++ class HashContext
++ {
+++    class private_tag
+++    {
+++    };
+++
++ public:
++-    explicit HashContext(HashAlgorithm algorithm);
+++    HashContext(HashAlgorithm algorithm, private_tag);
++     void updateHash(unsigned char *data_block, int data_len);
++     std::vector<unsigned char> endHash();
++     HashAlgorithm getHashAlgorithm() const;
++     ~HashContext() = default;
+++    static std::unique_ptr<HashContext> create(HashAlgorithm algorithm);
++
++ private:
++     struct HashDestroyer
++--
++2.40.0
+diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2025-43903-0002.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2025-43903-0002.patch
+new file mode 100644
+index 0000000000..dc2d1e7e6d
+--- /dev/null
++++ b/meta-oe/recipes-support/poppler/poppler/CVE-2025-43903-0002.patch
+@@ -0,0 +1,49 @@
++From f1b9c830f145a0042e853d6462b2f9ca4016c669 Mon Sep 17 00:00:00 2001
++From: Juraj sarinay <juraj@sarinay.com>
++Date: Thu, 6 Mar 2025 02:02:56 +0100
++Subject: [PATCH] Properly verify adbe.pkcs7.sha1 signatures.
++
++For signatures with non-empty encapsulated content
++(typically adbe.pkcs7.sha1), we only compared hash values and
++never actually checked SignatureValue within SignerInfo.
++The bug introduced by c7c0207b1cfe49a4353d6cda93dbebef4508138f
++made trivial signature forgeries possible. Fix this by calling
++NSS_CMSSignerInfo_Verify() after the hash values compare equal.
++
++CVE: CVE-2025-43903
++Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/f1b9c830f145a0042e853d6462b2f9ca4016c669]
++
++Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
++---
++ poppler/SignatureHandler.cc | 11 +++++++++--
++ 1 file changed, 9 insertions(+), 2 deletions(-)
++
++diff --git a/poppler/SignatureHandler.cc b/poppler/SignatureHandler.cc
++index 9916300..5c478bc 100644
++--- a/poppler/SignatureHandler.cc
+++++ b/poppler/SignatureHandler.cc
++@@ -934,13 +934,20 @@ SignatureValidationStatus SignatureVerificationHandler::validateSignature()
++           This means it's not a detached type signature
++           so the digest is contained in SignedData->contentInfo
++         */
++-        if (digest.len == content_info_data->len && memcmp(digest.data, content_info_data->data, digest.len) == 0) {
+++        if (digest.len != content_info_data->len || memcmp(digest.data, content_info_data->data, digest.len) != 0) {
++             return SIGNATURE_VALID;
++         } else {
++             return SIGNATURE_DIGEST_MISMATCH;
++         }
++
++-    } else if (NSS_CMSSignerInfo_Verify(CMSSignerInfo, &digest, nullptr) != SECSuccess) {
+++        auto innerHashContext = HashContext::create(hashContext->getHashAlgorithm());
+++        innerHashContext->updateHash(content_info_data->data, content_info_data->len);
+++        digest_buffer = innerHashContext->endHash();
+++        digest.data = digest_buffer.data();
+++        digest.len = digest_buffer.size();
+++    }
+++
+++    if (NSS_CMSSignerInfo_Verify(CMSSignerInfo, &digest, nullptr) != SECSuccess) {
++         return NSS_SigTranslate(CMSSignerInfo->verificationStatus);
++     } else {
++         return SIGNATURE_VALID;
++--
++2.40.0
+diff --git a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
+index 8760a0e17e..a8ab19064d 100644
+--- a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
+@@ -14,6 +14,8 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://CVE-2024-56378.patch \
+            file://CVE-2025-32364.patch \
+            file://CVE-2025-32365.patch \
++           file://CVE-2025-43903-0001.patch \
++           file://CVE-2025-43903-0002.patch \
+            "
+ SRC_URI[sha256sum] = "b6d893dc7dcd4138b9e9df59a13c59695e50e80dc5c2cacee0674670693951a1"
  
- inherit pypi python_hatchling
- 
--SRC_URI[sha256sum] = "86e94505ed24ea06514883fd44d2bc02d90e77e7979c8eb71b90f41d364a1bad"
-+SRC_URI[sha256sum] = "6e34463af53fd2ab5d807f399a9b45ea31c3dfa2276f15a2c3f00afff6e176e8"
- 
- DEPENDS += "\
-     python3-hatch-fancy-pypi-readme-native \
 -- 
-2.39.5
+2.40.0
 
 
