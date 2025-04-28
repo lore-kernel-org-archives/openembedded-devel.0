@@ -1,103 +1,132 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5954BC369D3
-	for <webhook@archiver.kernel.org>; Mon, 28 Apr 2025 07:11:36 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.42342.1745824167648192925
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7BDB6C369D3
+	for <webhook@archiver.kernel.org>; Mon, 28 Apr 2025 07:59:47 +0000 (UTC)
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
+ by mx.groups.io with SMTP id smtpd.web11.42810.1745826983672194502
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Apr 2025 00:09:27 -0700
+ Mon, 28 Apr 2025 00:56:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=62139e711a=changqing.li@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S0uCaJ030750
-	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 07:09:27 GMT
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 468mq1akqy-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 07:09:26 +0000 (GMT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Mon, 28 Apr 2025 00:09:25 -0700
-Received: from pek-lpg-core6.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Mon, 28 Apr 2025 00:09:24 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [walnascar][PATCH 2/6] python3-pyyaml-include: update SRCREV
-Date: Mon, 28 Apr 2025 15:09:18 +0800
-Message-ID: <20250428070922.3944580-3-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250428070922.3944580-1-changqing.li@windriver.com>
-References: <20250428070922.3944580-1-changqing.li@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=RY7HL82A;
+ spf=pass (domain: gmail.com, ip: 209.85.208.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-5ed43460d6bso6321108a12.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 00:56:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1745826982; x=1746431782; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=EFewrUDSmlHxcjUy/8dck005MPg9ASN+NvvCN2kin90=;
+        b=RY7HL82A0eRXjxgOOzml9xpmdfpjo/KM4hokrLS0FdUyxdedRywEY2jQu9Kz+PGoSb
+         3PsoEvdNCWmbyOao1cp+5e4pcOXQE9VO8zzzUuwHFZrRh1kaCtiNnoAss4assp3L7UQS
+         YoWuBJJGnKgGRb4J4PywVN7dFGzhPnQd7dMsdlAf+diE9LPuTXn1P6cMgO/brITqraA5
+         OKDR31bmaDk8O8vgZpkZARbvX55Ar9/uU7latskjxGICTOv3d3tqcgMx0665K9yPfAg4
+         G5HaL/veg3f2WOPy9Bs1vwaDCYvE4rYFJ6l/Mx9bTl6VA4b/+eEAXVfo0yfbeGxlOcTg
+         ev3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1745826982; x=1746431782;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=EFewrUDSmlHxcjUy/8dck005MPg9ASN+NvvCN2kin90=;
+        b=HocmUXYXA/g3rCJZB/YCGxOMWNw8GfhPcKtz6WY46OEUVlHFxYMFm7kKumYHXOfITL
+         yU0oy6BF3m46nVRzkuqI5WPvxPUBcXO7TmQLZO7Rx9mkXXXuLn/6YLQgiUoraeScHsv+
+         qZk5OsfnZPhW8qyLks8RUUa2VTT6Vuskbk7EfOoDNB4A+e1aI3wPj8eOLwNlYcsJJW7X
+         H0CddKtwURo+1bHhiHw9K/djLjIyutSIByrZ31pSkdVxOwuLhIeVfWA19xgIKbM8/1Kw
+         3nDVvp5q/JapX1pPhS3qYbbcQT2eeN1mFqyIW/bvMoQupzVMGLJjO5On5yf8R9dRmYfM
+         t5vg==
+X-Forwarded-Encrypted: i=1; AJvYcCWtW9XM07ivXWCfPJz+HKFZ04PKlV/0nZrWqUg9F6UZbaz3Rz+y68QZr8KCox0JSe+GXE3kcj4PXnpYiVtvyg3E6NU=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yzng02aMs9aWSGDyOH7ijm8BeUAfx9k3g+C7N2PDmvmPobJooSa
+	C6+9mic4TtLTRRcMk7w7kZ9k6th4VSIiRAtzgHrs/b+EHrtOuEqr
+X-Gm-Gg: ASbGncuI2OMxAF2/DvyYNQEwTrIjgzA8gX+VgmQZ1k8d3it2Nk2oeHjKrqEtZzYxM3R
+	neeAn/lmXc9xZoWKHOCK+NQ+MRIpiw8MWX+qvuVCxYzY1lmn2PHiHxAhDqF0mVKAiHVvtNj54wm
+	aOJm+k9sv/deEwOU9klazz0cMpNjnqJ0EfwmwrNQHvG4/EhQy6Kj4p4iBZXXUAlsIi+Fr9qmhHF
+	/V9nJTsdFc+ZJ2Wmv8N+ZSa4zG05u+XIILtVLy/LpJ6nGkz7a02Lfn+67R6w06VxqCFxwk4FNez
+	tJh1S27MLI+DB/LH9jjFtdVwgxu7B6C9ZJtrJWfEyLt911VC
+X-Google-Smtp-Source: AGHT+IGXTmjMM96QpfhUL8ucMuHjblS/B5GCD+CYeRZi42MvkbXcMiYtV+zMS0K4xjjSxk3cm4WuPg==
+X-Received: by 2002:a17:907:1c96:b0:ac7:391a:e2d3 with SMTP id a640c23a62f3a-ace713fe0fbmr976574666b.58.1745826981609;
+        Mon, 28 Apr 2025 00:56:21 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5f7035464f1sm5401590a12.62.2025.04.28.00.56.18
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 28 Apr 2025 00:56:20 -0700 (PDT)
+Message-ID: <570e3112-1eb8-443e-9a96-97dab147c8dd@gmail.com>
+Date: Mon, 28 Apr 2025 09:56:18 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=KsNN2XWN c=1 sm=1 tr=0 ts=680f29a6 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=XR8D0OoHHMoA:10 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8 a=ct6YQbgXttWGSB3o_PYA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: loSvrTLNYTrI7PAGT8ndNnP6jyJvr5HE
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNDI4MDA1OCBTYWx0ZWRfX/kUkyH718Lz7 acBbzh6kB+1XB81j2AM0vNw1ZvIXqyfRC32Z4YjLxK4oXVZa3mIbAc5T0I7/lUQVX8px0diQ/q9 67e72nefvk3kNEfPKQ+Jadzb4K640pMRShRQ9TmEivFQY/LyRffhhoPUwNABo2/fTPuGEgfnX8t
- go2f60NXK3A5aU77wiixi8jdaZq4RTgsn+JcDFqT+FiLPQvJUKiqOlweunPRfFj7PKilr1gB0RX Y9E7ZAWDOQJhJe/z3zzirgFU6hXMJQ/PmL3/wONiKxEQ3m9KPdWeHAOUcp/pbN9/lozwrqwSAZn Kks0XAczIIdbJh/m6oAb19gBJRI1aveBLtr8HGUyXg54p7frrwa4bjTetAYZ0bPv3ijYhKcV2lK
- l6BHrl+es7pj8J1w7KN7uiBAQDlmZolq1YKxK+lOY3wlsn4DXLmUpI9o5t387AtIKaEgY9u1
-X-Proofpoint-GUID: loSvrTLNYTrI7PAGT8ndNnP6jyJvr5HE
-X-Sensitive_Customer_Information: Yes
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-04-28_02,2025-04-24_02,2025-02-21_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- mlxlogscore=999 spamscore=0 bulkscore=0 lowpriorityscore=0 adultscore=0
- mlxscore=0 phishscore=0 malwarescore=0 clxscore=1015 suspectscore=0
- impostorscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2504070000
- definitions=main-2504280058
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH] testdisk: add recipe
+To: wen.yang@linux.dev, openembedded-devel@lists.openembedded.org
+References: <20250427152746.8099-1-wen.yang@linux.dev>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20250427152746.8099-1-wen.yang@linux.dev>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 07:11:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117184
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 07:59:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117189
 
-From: Changqing Li <changqing.li@windriver.com>
+It looks like this recipe was created with/for an old version of Yocto.
+Could you please prepare it for master branch?
+I have added some comments inline.
 
-* Current SRCREV is v2.2a1, update to v2.2
-* pyyaml-include use setuptools_scm to get package version, but it not
-  works well with git shallow clone, and will return a invalid version
-  like 0.1.dev1+gc5be2b7, make pyyaml-include is installed to a wrong
-  path: /usr/lib/python3.13/site-packages/pyyaml_include-0.1.dev1+gc5be2b7.dist-info,
-  and also version in PKG-INFO is wrong.
-  export SETUPTOOLS_SCM_PRETEND_VERSION to get correct package version.
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../recipes-devtools/python/python3-pyyaml-include_2.2.bb   | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
-
-diff --git a/meta-python/recipes-devtools/python/python3-pyyaml-include_2.2.bb b/meta-python/recipes-devtools/python/python3-pyyaml-include_2.2.bb
-index 49e643c710..5a3b2f0ab2 100644
---- a/meta-python/recipes-devtools/python/python3-pyyaml-include_2.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyyaml-include_2.2.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/tanbro/pyyaml-include"
- LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
- DEPENDS += "python3-setuptools-scm-native"
--SRCREV = "c5be2b7dfc4aaa91e44dbeb6fa42adc80936ef9d"
-+SRCREV = "3e0db562a7b03fa1bf5cbe392c47658042596dd0"
- 
- SRC_URI = " \
-             git://github.com/tanbro/pyyaml-include;protocol=https;branch=main \
-@@ -13,6 +13,10 @@ S = "${WORKDIR}/git"
- 
- inherit python_setuptools_build_meta ptest-python-pytest
- 
-+do_compile:prepend() {
-+    export SETUPTOOLS_SCM_PRETEND_VERSION=${PV}
-+}
-+
- RDEPENDS:${PN} += " \
-     python3-pyyaml \
-     python3-fsspec \
--- 
-2.34.1
+On 4/27/25 17:27, Wen Yang via lists.openembedded.org wrote:
+> testdisk is a free data recovery software primarily designed to help
+> recover lost partitions and/or make non-booting disks bootable again
+> when these symptoms are caused by faulty software.
+>
+> Signed-off-by: Wen Yang <wen.yang@linux.dev>
+> ---
+>  .../recipes-support/testdisk/testdisk_7.2.bb  | 19 +++++++++++++++++++
+>  1 file changed, 19 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/testdisk/testdisk_7.2.bb
+>
+> diff --git a/meta-oe/recipes-support/testdisk/testdisk_7.2.bb b/meta-oe/recipes-support/testdisk/testdisk_7.2.bb
+> new file mode 100644
+> index 0000000000..64e3d612c1
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/testdisk/testdisk_7.2.bb
+> @@ -0,0 +1,19 @@
+> +DESCRIPTION = "TestDisk is a free data recovery software primarily designed to help recover lost partitions and/or make non-booting disks bootable again when these symptoms are caused by faulty software, certain types of viruses or human error (such as accidentally deleting your Partition Table)."
+> +LICENSE = "GPLv2"
+This LICENSE value is deprecated. Please use spdx identifiers if
+possible/applicable, like GPL-2.0-only or GPL-2.0-or-later
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+> +PR = "r1"
+Is PR needed in this recipe?
+> +
+> +DEPENDS = "jpeg ncurses e2fsprogs"
+> +
+> +SRC_URI = "https://github.com/cgsecurity/testdisk/archive/refs/tags/v7.2.tar.gz"
+Archived tags in Github are unfortunately not immutable, so their use is
+discouraged (and it also throws a fatal QA check). It is preferred to
+use the direct commit ID.
+> +S = "${WORKDIR}/testdisk-7.2"
+> +
+> +inherit autotools pkgconfig
+> +
+> +PACKAGES =+ "photorec"
+It is recommended to prepend the extra packages' names with the main
+recipe name, like ${PN}-photorec
+> +
+> +DESCRIPTION_photorec = "Photorec is file data recovery software designed to recover lost files including video, documents and archives from Hard Disks and CDRom and lost pictures (Photo Recovery) from digital camera memory."
+> +FILES_photorec = "${sbindir}/photorec"
+The underscore override syntax has changed to ":".
+> +
+> +SRC_URI[md5sum] = "c47d69e2c950b6b2f0dadb2a2921d6c6"
+> +SRC_URI[sha256sum] = "f3fe7ec02cafcbe792a4c783976de3a6312963b0ce8a613d38adbcd8bdca0517"
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#117176): https://lists.openembedded.org/g/openembedded-devel/message/117176
+> Mute This Topic: https://lists.openembedded.org/mt/112489401/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
