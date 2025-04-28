@@ -2,166 +2,96 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F1D1BC369D5
-	for <webhook@archiver.kernel.org>; Mon, 28 Apr 2025 17:39:10 +0000 (UTC)
-Received: from outbound11.mail.transip.nl (outbound11.mail.transip.nl [136.144.136.18])
- by mx.groups.io with SMTP id smtpd.web11.53348.1745859114055161983
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C845C369D5
+	for <webhook@archiver.kernel.org>; Mon, 28 Apr 2025 18:06:21 +0000 (UTC)
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web11.54457.1745861981568874684
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Apr 2025 09:51:56 -0700
+ Mon, 28 Apr 2025 10:39:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@myspectrum.nl header.s=transip-a header.b=huUCBv4Q;
- spf=pass (domain: myspectrum.nl, ip: 136.144.136.18, mailfrom: jeroen@myspectrum.nl)
-Received: from submission10.mail.transip.nl (unknown [10.103.8.161])
-	by outbound11.mail.transip.nl (Postfix) with ESMTP id 4ZmTxg5MmGzkQNKq;
-	Mon, 28 Apr 2025 18:51:51 +0200 (CEST)
-Received: from yellow.myspectrum.nl (yellow.myspectrum.nl [136.144.146.76])
-	by submission10.mail.transip.nl (Postfix) with ESMTPSA id 4ZmTxf3tTZz2nC0ck;
-	Mon, 28 Apr 2025 18:51:50 +0200 (CEST)
-Received: from yellow.myspectrum.nl (84-27-20-154.cable.dynamic.v4.ziggo.nl [84.27.20.154])
-	(Authenticated sender: sendmail@myspectrum.nl)
-	by yellow.myspectrum.nl (Postfix) with ESMTPSA id 866F6200DB;
-	Mon, 28 Apr 2025 16:51:47 +0000 (UTC)
-Authentication-Results: yellow.myspectrum.nl;
-	auth=pass smtp.auth=sendmail@myspectrum.nl smtp.mailfrom=jeroen@myspectrum.nl
-Received: by yellow.myspectrum.nl (sSMTP sendmail emulation); Mon, 28 Apr 2025 18:51:46 +0200
-From: jeroen@myspectrum.nl
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=d4BTj/IS;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: nguyenthaithuanalg@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-227c7e57da2so43743195ad.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 10:39:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1745861980; x=1746466780; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=9bkjBIzuyxSZrG3I6BfSAX90UNNgDn8ERkI1p7Nqoz4=;
+        b=d4BTj/IS0e9jLmT24QHjflm8yj0wKtrQZmNs/mkd7r6rvhRqkGGYiIP0V+gdOD3Ayt
+         RZAU2/id5TdglmY2fxajqBZ8OIbJ4yzyPOT3Hc0hZoUJRCTmuUPGH1UqD9j6L4Oq9huH
+         vAv5OZ3rJowHsoNIGbbnM/NMuOvusyz1bGcjy3ibB/uHVzqByP5a8vpd3vpA9o6u9Nrs
+         x4qeVr8SB8VInDn04X+p1y0bPF8upsKh+J6UmYqFcSZVxWEThpvw9o6UlJxR66D/8HEK
+         yfZAhCrTI1h3s5C8ahyYFQdc1SW5x9TlImWoPhqA8ioomMJ5mnVQCC0EOebgzHlSBz3g
+         lQAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1745861980; x=1746466780;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=9bkjBIzuyxSZrG3I6BfSAX90UNNgDn8ERkI1p7Nqoz4=;
+        b=B53stjMag7mmJMgtBb9K0g4z97zYBexoVs07V3zkgkoaOtIoDGkiCCWYP5926jly8f
+         uoUlNIXP1VYevhrThXFNeCxM7HW/+4UhuhVbd8pcA/JA8VaezHQmDzoGWZes0wtV3Apk
+         UqXb/R5BcFdbgVdpcDEJ29h9BVHVyaeUlpAhkGq45k6rryZOikDQIAbCV1yh4b4JpNRP
+         lFODWmIE1VHsUdH4BZnqyNLMtczNvbAqxnZBbwpnlvJpZkPV8WTjICKddhpsObphSqjp
+         IdlgaaZdWpou4bf/X5/Dld7T75c1JUFXsHXhDDJ5M6A53AFJc9ZcraRcDGrwhF5IW2tR
+         Ht+Q==
+X-Gm-Message-State: AOJu0YwyK1cOaOjpAQiELa2rAwVmPSdaVEvR62guKyvaXJ0f1zw69ssZ
+	pnL1ugABABcMw2/wfyC/pebr0+K26Zv8l7JO7c9kR66PUtNvKn2oIQjAsQ==
+X-Gm-Gg: ASbGncuIUe2HyA3mu4yHZ3wIfwjUv9eGIqQURcD9UfEEyE8gA7dTI1TVnS+ZCDiNFBJ
+	v+4rEVIezNmEklXTNO76y47xGGy0F/K516KrgoBqjKgpDJhapjHU/npQaozty0KTEtcGeQyc30A
+	giPcNH5LLpA9emkVgyDpTPFooHBP5zchbNgWdH8/CWRypqRk0uIL+R1RFOOLXdQN9YKvnC9BewE
+	2LJ9HoVdpEwKM2SXn/J/Sg9r20CCZPqzRZwehyaNGIfvJXd7iiShGjDQ5iv/81KWZUWGoZO0mI5
+	Yq7FywN5FEWA8E0ZaL6gVpg7lCrmNCqmPHVkGqACLnQ/DsFYx3Wrprso8eLFPFAAxCBhlA==
+X-Google-Smtp-Source: AGHT+IEiHHupUQcD8QHP7dVNr4p5ausrbjPqfu1LMnc/EEIGAbBLdHc2Qt+sk8uWTN9mrjIBeS1n+w==
+X-Received: by 2002:a17:90b:274d:b0:2ff:7ad4:77b1 with SMTP id 98e67ed59e1d1-30a012fd061mr13487675a91.2.1745861980408;
+        Mon, 28 Apr 2025 10:39:40 -0700 (PDT)
+Received: from localhost.localdomain ([2405:4802:90fa:f3a0:76d4:35ff:fe85:dd7a])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-309d5d61f7asm14493383a91.0.2025.04.28.10.39.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 28 Apr 2025 10:39:39 -0700 (PDT)
+From: =?UTF-8?B?VGh14bqtbiBOZ3V54buFbi1UaMOhaQ==?= <nguyenthaithuanalg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Steve Sakoman <steve@sakoman.com>,
-	Jeroen Hofstee <jhofstee@victronenergy.com>
-Subject: [meta-oe][scarthgap][PATCH] nodejs: backport a patch to prevent brotli crashing nodejs
-Date: Mon, 28 Apr 2025 18:51:36 +0200
-Message-ID: <20250428165138.328991-1-jeroen@myspectrum.nl>
-X-Mailer: git-send-email 2.43.0
+Cc: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
+Subject: [meta-oe][PATCH] libsimplelog: Clean up code
+Date: Tue, 29 Apr 2025 00:39:22 +0700
+Message-ID: <20250428173922.43331-1-nguyenthaithuanalg@gmail.com>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-X-Scanned-By: ClueGetter at submission10.mail.transip.nl
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- s=transip-a; d=myspectrum.nl; t=1745859110; h=from:subject:to:cc:date:
- mime-version:content-type;
- bh=ZgTHKDLUEdv8MJwcqJqHmjMtBSHCb9ZxwkiQoIXuiy4=;
- b=huUCBv4Qx+25lXKUGD3NpkcvAME7LJN0cxwSufmct6qxrzPfsFkAy8ktkvSJzweJxvRt0W
- qJEdBvR1kvEgqsRg/Bm0Y6UlfefrLlGMzAobFbMuQbTHB33JnNDYgEGFNncwCd0Uh/ZKem
- 8i6URGKCs03PjGVpELI8WyeivxCjun6K58hSITgDoFGhGEPeXTyAZJn1AMsMac8qCnDgjz
- i0nJl139/T5MKJxpWZwZtRCzOHGDi66r+zufRnNIq6i1X8Wu7Z+HHzDPl9P3uchTZGhrau
- y/hKF8mP0Z/0PN+jE1RK1uchtGpVjncpoRwEvXkJ9CLFGttIoVASowDwJkUfhg==
-X-Report-Abuse-To: abuse@transip.nl
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 17:39:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117199
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 18:06:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117200
 
-From: Jeroen Hofstee <jhofstee@victronenergy.com>
+1. Add "simplelog-topic.md" designation.
 
-Brotli can crash nodejs (on ARM), because the memory allocated for
-brotli wasn't properly aligned.
+2. Fix warning in building.
 
-https://github.com/google/brotli/issues/1159
-https://github.com/nodejs/node/commit/dc035bbc9b310ff8067bc0dad2223097848=
-9c061
+3. "-Werror=format".
 
-Signed-off-by: Jeroen Hofstee <jhofstee@victronenergy.com>
+Signed-off-by: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
 ---
- .../nodejs/zlib-fix-pointer-alignment.patch   | 64 +++++++++++++++++++
- .../recipes-devtools/nodejs/nodejs_20.18.2.bb |  1 +
- 2 files changed, 65 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/zlib-fix-point=
-er-alignment.patch
+ meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/zlib-fix-pointer-alig=
-nment.patch b/meta-oe/recipes-devtools/nodejs/nodejs/zlib-fix-pointer-ali=
-gnment.patch
-new file mode 100644
-index 0000000000..824ff678c6
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/zlib-fix-pointer-alignment.p=
-atch
-@@ -0,0 +1,64 @@
-+From bbcd1f33161fd9874e8a61999d2739b177f99723 Mon Sep 17 00:00:00 2001
-+From: Jeroen Hofstee <jhofstee@victronenergy.com>
-+Date: Mon, 28 Apr 2025 14:21:44 +0000
-+Subject: [PATCH] zlib: fix pointer alignment
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=3DUTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+The function AllocForBrotli prefixes the allocated memory with its
-+size, and returns a pointer to the region after it. This pointer can
-+however no longer be suitably aligned. Correct this by allocating
-+the maximum of the the size of the size_t and the max alignment.
-+
-+On Arm 32bits the size_t is 4 bytes long, but the alignment is 8 for
-+some NEON instructions. When Brotli is compiled with optimizations
-+enabled newer GCC versions will use the NEON instructions and trigger
-+a bus error killing node.
-+
-+see https://github.com/google/brotli/issues/1159
-+
-+PR-URL: https://github.com/nodejs/node/pull/57727
-+Reviewed-By: Shelley Vohr <shelley.vohr@gmail.com>
-+Reviewed-By: Tobias Nie=C3=9Fen <tniessen@tnie.de>
-+Reviewed-By: Daniel Lemire <daniel@lemire.me>
-+Reviewed-By: Gerhard St=C3=B6bich <deb2001-github@yahoo.de>
-+
-+Upstream-Status: Backport [https://github.com/nodejs/node/commit/dc035bb=
-c9b310ff8067bc0dad22230978489c061]
-+---
-+ src/node_zlib.cc | 8 +++++---
-+ 1 file changed, 5 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/node_zlib.cc b/src/node_zlib.cc
-+index 66370e41..a537e766 100644
-+--- a/src/node_zlib.cc
-++++ b/src/node_zlib.cc
-+@@ -493,20 +493,22 @@ class CompressionStream : public AsyncWrap, public=
- ThreadPoolWork {
-+   }
-+=20
-+   static void* AllocForBrotli(void* data, size_t size) {
-+-    size +=3D sizeof(size_t);
-++    constexpr size_t offset =3D std::max(sizeof(size_t), alignof(max_al=
-ign_t));
-++    size +=3D offset;
-+     CompressionStream* ctx =3D static_cast<CompressionStream*>(data);
-+     char* memory =3D UncheckedMalloc(size);
-+     if (UNLIKELY(memory =3D=3D nullptr)) return nullptr;
-+     *reinterpret_cast<size_t*>(memory) =3D size;
-+     ctx->unreported_allocations_.fetch_add(size,
-+                                            std::memory_order_relaxed);
-+-    return memory + sizeof(size_t);
-++    return memory + offset;
-+   }
-+=20
-+   static void FreeForZlib(void* data, void* pointer) {
-+     if (UNLIKELY(pointer =3D=3D nullptr)) return;
-+     CompressionStream* ctx =3D static_cast<CompressionStream*>(data);
-+-    char* real_pointer =3D static_cast<char*>(pointer) - sizeof(size_t)=
-;
-++    constexpr size_t offset =3D std::max(sizeof(size_t), alignof(max_al=
-ign_t));
-++    char* real_pointer =3D static_cast<char*>(pointer) - offset;
-+     size_t real_size =3D *reinterpret_cast<size_t*>(real_pointer);
-+     ctx->unreported_allocations_.fetch_sub(real_size,
-+                                            std::memory_order_relaxed);
-+--=20
-+2.43.0
-+
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb b/meta-oe/=
-recipes-devtools/nodejs/nodejs_20.18.2.bb
-index 1f45c3ec66..bef62f88eb 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb
-@@ -26,6 +26,7 @@ SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.=
-tar.xz \
-            file://0001-liftoff-Correct-function-signatures.patch \
-            file://libatomic.patch \
-            file://182d9c05e78.patch \
-+           file://zlib-fix-pointer-alignment.patch \
-            file://run-ptest \
-            "
- SRC_URI:append:class-target =3D " \
---=20
-2.43.0
+diff --git a/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb b/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb
+index 764425dbc..8acf50fe8 100644
+--- a/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb
++++ b/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=22cdd382a6275cb4c2e75c517952ac7c"
+ 
+ SRC_URI = "git://github.com/thuanalg/simplelog-topic.git;branch=main;protocol=https"
+ 
+-PV = "1.0.5+git"
+-SRCREV = "fa8c68f8dfcf72adb346f1f4d6dfad02829052b5"
++PV = "1.0.6+git"
++SRCREV = "7676b9cf871bedd8648d2cf68ebf43dc2c79b94d"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.47.1
 
 
