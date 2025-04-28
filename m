@@ -2,154 +2,304 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2136C369D5
-	for <webhook@archiver.kernel.org>; Mon, 28 Apr 2025 13:54:39 +0000 (UTC)
-Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com [209.85.167.180])
- by mx.groups.io with SMTP id smtpd.web10.48974.1745848473610857558
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DAADBC369DC
+	for <webhook@archiver.kernel.org>; Mon, 28 Apr 2025 14:01:19 +0000 (UTC)
+Received: from mail-oo1-f46.google.com (mail-oo1-f46.google.com [209.85.161.46])
+ by mx.groups.io with SMTP id smtpd.web10.49128.1745848877691992618
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Apr 2025 06:54:33 -0700
+ Mon, 28 Apr 2025 07:01:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=nIEjguSx;
- spf=pass (domain: gmail.com, ip: 209.85.167.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f180.google.com with SMTP id 5614622812f47-3fcfc85f1f5so1198563b6e.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 06:54:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ugbkhaet;
+ spf=pass (domain: gmail.com, ip: 209.85.161.46, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f46.google.com with SMTP id 006d021491bc7-605fda00c30so2579157eaf.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 07:01:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745848473; x=1746453273; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1745848877; x=1746453677; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=3K792/z5FTrwUQfJT49sRCxnNufXe9RxpO9TlbrTATs=;
-        b=nIEjguSxdV02g0suVJrkOWfHaMogovBvgr8tYHpxIQc3XOsY7S6n9VvwjcVxH4eK9m
-         PNH9cKvehYmgsi7A6iFk4qYBvMChLqhzVMh8+3EDtj5DVcUrNgy7C0OoSccui2zhPLMV
-         u52xVkL4X6ax6S6jUsY5LYUyglQ/Lbv/EXijd8tI22Wyl9X/oPyhEChSQ26xix3ATuty
-         d44cllZFyHV+HuZJ5ApR6IE9pB+pJhVr/qgdpBr/KjCWVV53ID1dXvlSprieUQ7kFIne
-         2IID24iXbWh5VwMpTt6s8gnmdsS0jWvf3iLM7rXRh4u+yfHDOEqOF2h+8YrQ7xeRjUsv
-         xPsg==
+        bh=75Y6TneDyNbbvkZlBRAj8rYXCd6CKfnEITy2/ACrzRY=;
+        b=Ugbkhaet3QkPxrUzkCKh5w3+HroEBBoKf1ZFydgUrTyries4mozmVF3lpRXG6l3U4r
+         N9t/gzEsQZ9DtGaBtRMiv2QV8u6b1dS2NgDTYsqiDjFBkAs9fuk1AO/lg6+NgZbQmh+E
+         0tWNbSz5GHavYsTndJlmjdVss/PGAhRRyTcFGOR4DRXR8btKr/IMwS7YL3GyvML/Cgw/
+         C6EqGlL5M2tH1S8iD2IETQcuPf4rNKE9m2Q8jFStmacABgcewJ/OXuajD64OaTB0kU/L
+         wwxKfZfJthY/sv3K7T50I7rFA+BcQENv9UV+lGCOv9YBhMI4+Q6n1xBo57ZbjQHjDE9f
+         uZUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745848473; x=1746453273;
+        d=1e100.net; s=20230601; t=1745848877; x=1746453677;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=3K792/z5FTrwUQfJT49sRCxnNufXe9RxpO9TlbrTATs=;
-        b=VzqOCnhUarhY3ANRN2ZM2Hc0ECd4sUhMdSk/4FbOP7+KoTtupbpDds3wby9mdXbXQw
-         kZnEakhPFzTMfzpC1JlkXPNbNnnRG1LrJfTyiCkrTLIfFO19MSSlPJokUWU1dkp5u+HJ
-         dBiFio2umMuytCfFTp9WITPdkWWkm2y5IwXowBx6pa7TTKwdsVaXLJns+vOQqT/vGXiV
-         DmJhLC04AaqJ+YLL0hjbQgkZZfggN2jxJ/hDpBUANfJf62KgHie1PgFI9jnt1eJypjC0
-         T+foJIw1HyvsHCkb3Qq3dTbPGaYAOFKzXfZdK6GuklIJMQ1dazmknZRQ45HqCSXPJtzo
-         8yZw==
-X-Forwarded-Encrypted: i=1; AJvYcCUywY7kg4NGcCccd2cwK/BcbaAn9FT+3tsd4FL5nvLgbgF3fH5xxy+VQt6/W8U2ab/5q7za/aVFeL7D8VfpdwrfDYQ=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yz7emnAIY5uK8zVByT2ZwSoZqhyOYj+VVjVugCwKGoa3QtKLnHx
-	Ih/9TI2F31BmkLtGBSFoG0kYdwNMbWQ3Brt6Lpyf1Q5V7CQWQm3C7S96y3/CyGPWKiJzNFgpxhe
-	RyPwaswNuA5PKZ0huRTmKJM3JIfSEgdPMSW8=
-X-Gm-Gg: ASbGnctojah6Yxb5s+e10NX7r+FKo0BktJdm1E9Che/l6bFrJEFt6hFg9TQt5d8KGlO
-	70iW+7UvHcHWdLZwuJ9xNxe4YlKlzqbDew8+IUzHnuzgG7mpFnpMqWS3mXxg63z3M48umCmn6Xk
-	eZdgsCywjO7KmjLEkSIh35
-X-Google-Smtp-Source: AGHT+IGpxJc4SlkkvddM9QKDAbvJWTsLCnnvT3jtTK0zyv+DGc7GmNnbWg0sIJu6YC7XzgXeWDgiiH61ktdqube3+Vo=
-X-Received: by 2002:a05:6808:6a8c:b0:401:cd6d:25e2 with SMTP id
- 5614622812f47-401fd6e2cd9mr7012273b6e.4.1745848472665; Mon, 28 Apr 2025
- 06:54:32 -0700 (PDT)
+        bh=75Y6TneDyNbbvkZlBRAj8rYXCd6CKfnEITy2/ACrzRY=;
+        b=S4FBk76/zlLANtZ4gRhqpF+bptnY/hkhZr1krM3wBmc4Z9E7zARyPvqMMUqlWecgz7
+         TzYzKmack+ThqNpVy/bMg4xVGlQIDiQEwZqF8arSPYSME2nfB728NXD+5R5ygOLij02y
+         BjEfJfYZue0QqTfFVNhiK6+zuvigvbyg9xeOFwdPYZETLQnKuYlIiRR6/UZxFtC7p2KS
+         HMp7XN2A9TFRLoDX5DYTIRoWnQ7hexqbfpztnGrCvtm+jYHckfrRy7uZUuTBHMMB1/b5
+         ILhJTz6O3+SkimDrHAjsjk2tC7daSkUGQShCk2AsxUspyGCsgd6jJ4cqC+BHEUexXyoP
+         ehDQ==
+X-Gm-Message-State: AOJu0YzW5+asXBuK+Ff5Qfs++J/vDopaAlAw2/Z8yH3AK720ixzZp8qb
+	rd+SEz31rKPvUW054GS6+k7EfZ35d5svOw6oDIdOKrzbIt0UTY/S3wwCdi4rjrjVbsmuL1b1lQt
+	DcufgQwgNgFkCVAFiP2pdFymmVnhkUB3g
+X-Gm-Gg: ASbGncu/m1ge77WnIzRO0MabAA3OH7bYQ1yWcf+1QtNWAo+vtF+uCjuNFPkrM1m/CfJ
+	hfL1j4qIQhy8e10cfw/nvGHus3DZgsaq2D42RJL86cPAS+WqHn5I/mAHCodjJ26ed9mWls/qU8P
+	k2PSaT4tf+fiTKG7YeBEF2Jg==
+X-Google-Smtp-Source: AGHT+IEI/aXNaTRDmJX2PKpbui79TAZsgQUHESQ7/yvgr9ARqd39asEeV6VaQ6gaITcdtqp4Isxj484MaBZfUjx72n8=
+X-Received: by 2002:a05:6820:4d04:b0:606:42b7:2b02 with SMTP id
+ 006d021491bc7-60652badbc0mr6640090eaf.3.1745848874940; Mon, 28 Apr 2025
+ 07:01:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250427152746.8099-1-wen.yang@linux.dev> <570e3112-1eb8-443e-9a96-97dab147c8dd@gmail.com>
-In-Reply-To: <570e3112-1eb8-443e-9a96-97dab147c8dd@gmail.com>
+References: <20250316212656.3179516-1-raj.khem@gmail.com> <20250316212656.3179516-4-raj.khem@gmail.com>
+ <TYWPR01MB11861ED8AE1726DF04016BD12DC812@TYWPR01MB11861.jpnprd01.prod.outlook.com>
+In-Reply-To: <TYWPR01MB11861ED8AE1726DF04016BD12DC812@TYWPR01MB11861.jpnprd01.prod.outlook.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 28 Apr 2025 06:54:06 -0700
-X-Gm-Features: ATxdqUFAJ-SsuwftLNsQ-Lf7ehIoZ19Bn9bhDgOTUMqDd2PSPBrcG-2qSI7R_sY
-Message-ID: <CAMKF1spBjiBt_KjFM+XqDiP5LFrHwTu4706OBiV7WsBMZeNz5g@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] testdisk: add recipe
-To: skandigraun@gmail.com
-Cc: wen.yang@linux.dev, openembedded-devel@lists.openembedded.org
+Date: Mon, 28 Apr 2025 07:00:48 -0700
+X-Gm-Features: ATxdqUGqFLsdLJUTIOMlLEojQjypOeR2tbLWqzbTpoKkIM7NZ0IMGktv9PYYmvc
+Message-ID: <CAMKF1spjySkFhHvVSru1p+SsNHEDyagL4_P9B7=W0X5uM+9FDA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 4/4] procmail: Fix build with GCC-14
+To: "Mingyu Wang (Fujitsu)" <wangmy@fujitsu.com>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 13:54:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117196
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 14:01:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117197
 
-On Mon, Apr 28, 2025 at 12:56=E2=80=AFAM Gyorgy Sarvari via
-lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
-wrote:
+On Mon, Apr 28, 2025 at 2:02=E2=80=AFAM Mingyu Wang (Fujitsu)
+<wangmy@fujitsu.com> wrote:
 >
-> It looks like this recipe was created with/for an old version of Yocto.
-> Could you please prepare it for master branch?
-> I have added some comments inline.
+> >  do_compile() {
+> > -    oe_runmake -i CFLAGS=3D"$TARGET_CFLAGS -Wno-comments
+> > -Wno-implicit-int -Wno-implicit-function-declaration -D_LARGEFILE_SOURC=
+E
+> > -D_FILE_OFFSET_BITS=3D64" LDFLAGS0=3D"${LDFLAGS}"
+> > +    oe_runmake -i CFLAGS=3D"$TARGET_CFLAGS -Wno-comments
+> > -Wno-implicit-function-declaration -D_LARGEFILE_SOURCE
+> > -D_FILE_OFFSET_BITS=3D64" LDFLAGS0=3D"${LDFLAGS}"
 >
-> On 4/27/25 17:27, Wen Yang via lists.openembedded.org wrote:
-> > testdisk is a free data recovery software primarily designed to help
-> > recover lost partitions and/or make non-booting disks bootable again
-> > when these symptoms are caused by faulty software.
+> -Wno-implicit-int cannot be deleted.
+> Because although bitbake did not exit, if this option is removed, do_comp=
+ile will reveal an error that caused procmail to not generate.
+> You can check log.do.compile to confirm this issue.
+
+interesting. Please send a patch to reinstate it.?
+
+>
+>   --
+> Best Regards
+> ---------------------------------------------------
+> Wang Mingyu
+> FUJITSU NANJING SOFTWARE TECHNOLOGY CO., LTD. (FNST)
+> No.6 Wenzhu Road, Nanjing, 210012, China
+> TEL=EF=BC=9A+86+25-86630566--8568
+> COINS: 79988548
+> FAX: +86+25-83317685
+> MAIL: wangmy@fujitsu.com
+>
+> > -----Original Message-----
+> > From: openembedded-devel@lists.openembedded.org
+> > <openembedded-devel@lists.openembedded.org> On Behalf Of Khem Raj via
+> > lists.openembedded.org
+> > Sent: Monday, March 17, 2025 5:27 AM
+> > To: openembedded-devel@lists.openembedded.org
+> > Cc: Khem Raj <raj.khem@gmail.com>
+> > Subject: [oe] [meta-oe][PATCH 4/4] procmail: Fix build with GCC-14
 > >
-> > Signed-off-by: Wen Yang <wen.yang@linux.dev>
+> > aids building on newer build hosts which now have moved to gcc-14 as we=
+ll, so
+> > using cmdline option just for target compile is not enough as it runs t=
+ests using
+> > host compiler as well
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > > ---
-> >  .../recipes-support/testdisk/testdisk_7.2.bb  | 19 +++++++++++++++++++
-> >  1 file changed, 19 insertions(+)
-> >  create mode 100644 meta-oe/recipes-support/testdisk/testdisk_7.2.bb
+> >  .../procmail/procmail/gcc14.patch             | 127
+> > ++++++++++++++++++
+> >  .../recipes-support/procmail/procmail_3.22.bb |   4 +-
+> >  2 files changed, 130 insertions(+), 1 deletion(-)  create mode 100644
+> > meta-oe/recipes-support/procmail/procmail/gcc14.patch
 > >
-> > diff --git a/meta-oe/recipes-support/testdisk/testdisk_7.2.bb b/meta-oe=
-/recipes-support/testdisk/testdisk_7.2.bb
+> > diff --git a/meta-oe/recipes-support/procmail/procmail/gcc14.patch
+> > b/meta-oe/recipes-support/procmail/procmail/gcc14.patch
 > > new file mode 100644
-> > index 0000000000..64e3d612c1
+> > index 0000000000..5ca56fa006
 > > --- /dev/null
-> > +++ b/meta-oe/recipes-support/testdisk/testdisk_7.2.bb
-> > @@ -0,0 +1,19 @@
-> > +DESCRIPTION =3D "TestDisk is a free data recovery software primarily d=
-esigned to help recover lost partitions and/or make non-booting disks boota=
-ble again when these symptoms are caused by faulty software, certain types =
-of viruses or human error (such as accidentally deleting your Partition Tab=
-le)."
-> > +LICENSE =3D "GPLv2"
-> This LICENSE value is deprecated. Please use spdx identifiers if
-> possible/applicable, like GPL-2.0-only or GPL-2.0-or-later
-> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa8=
-82bbe"
-> > +PR =3D "r1"
-> Is PR needed in this recipe?
+> > +++ b/meta-oe/recipes-support/procmail/procmail/gcc14.patch
+> > @@ -0,0 +1,127 @@
+> > +From: Santiago Vila <sanvila@debian.org>
+> > +Subject: Fix build with gcc-14
+> > +Bug-Debian: https://bugs.debian.org/1075398
 > > +
-> > +DEPENDS =3D "jpeg ncurses e2fsprogs"
+> > +Upstream-Status: Pending
+> > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > +--- a/initmake
+> > ++++ b/initmake
+> > +@@ -124,7 +124,7 @@ else
+> > + fi
 > > +
-> > +SRC_URI =3D "https://github.com/cgsecurity/testdisk/archive/refs/tags/=
-v7.2.tar.gz"
-> Archived tags in Github are unfortunately not immutable, so their use is
-> discouraged (and it also throws a fatal QA check). It is preferred to
-> use the direct commit ID.
-
-it should be flagged by build too
-ERROR: testdisk-7.2-r1 do_recipe_qa: QA Issue: testdisk: SRC_URI uses
-unstable GitHub/GitLab archives, convert recipe to use git protocol
-[src-uri-bad]
-
-
-> > +S =3D "${WORKDIR}/testdisk-7.2"
+> > + cat >_autotst.c <<HERE
+> > +-main()
+> > ++int main()
+> > + { return 0;
+> > + }
+> > + HERE
+> > +@@ -200,7 +200,7 @@ cat >_autotst.c <<HERE  #include <sys/types.h>
+> > +#include <stdio.h>  #include <sys/stat.h>
+> > +-main()
+> > ++int main()
+> > + { struct stat buf;return!&buf;
+> > + }
+> > + HERE
+> > +--- a/src/autoconf
+> > ++++ b/src/autoconf
+> > +@@ -414,6 +414,12 @@ cat >_autotst.c <<HERE  int
+> > +dolock,child[NR_of_forks],timeout,fdcollect;
+> > + char dirlocktest[]=3D"_locktest";
 > > +
-> > +inherit autotools pkgconfig
+> > ++#include <stdlib.h>
+> > ++int killchildren();
+> > ++int fdlock(int fd);
+> > ++int sfdlock(int fd);
+> > ++int fdunlock();
+> > ++
+> > + void stimeout()
+> > + { timeout=3D1;close(fdcollect);killchildren();
+> > + }
+> > +@@ -435,7 +441,7 @@ unsigned sfork()
+> > +   return pid;
+> > + }
 > > +
-> > +PACKAGES =3D+ "photorec"
-> It is recommended to prepend the extra packages' names with the main
-> recipe name, like ${PN}-photorec
+> > +-int main(argc,argv)char*argv[];
+> > ++int main(int argc,char*argv[])
+> > + { int goodlock,testlock,i,pip[2],pipw[2];time_t otimet;unsigned dtime=
+t;
+> > +   static char filename[]=3D"_locktst.l0";
+> > +   close(0);goodlock=3D0;testlock=3DFIRST_lock;signal(SIGPIPE,SIG_DFL)=
+;
+> > +@@ -585,13 +591,13 @@ int killchildren()
+> > +   return 0;
+> > + }
 > > +
-> > +DESCRIPTION_photorec =3D "Photorec is file data recovery software desi=
-gned to recover lost files including video, documents and archives from Har=
-d Disks and CDRom and lost pictures (Photo Recovery) from digital camera me=
-mory."
-> > +FILES_photorec =3D "${sbindir}/photorec"
-> The underscore override syntax has changed to ":".
+> > +-int sfdlock(fd)
+> > ++int sfdlock(int fd)
+> > + { int i;unsigned gobble[GOBBLE>>2];
+> > +   for(i=3DGOBBLE>>2;i;gobble[--i]=3D~(unsigned)0);               /* S=
+unOS crash
+> > test */
+> > +   return fdlock(fd);
+> > + }
 > > +
-> > +SRC_URI[md5sum] =3D "c47d69e2c950b6b2f0dadb2a2921d6c6"
-> > +SRC_URI[sha256sum] =3D "f3fe7ec02cafcbe792a4c783976de3a6312963b0ce8a61=
-3d38adbcd8bdca0517"
+> > +-static oldfdlock;
+> > ++static int oldfdlock;
+> > + #ifdef F_SETLKW
+> > + static struct flock flck;           /* why can't it be a local variab=
+le? */
+> > + #endif
+> > +@@ -599,7 +605,7 @@ static struct flock flck;                /* why ca=
+n't
+> > + static off_t oldlockoffset;
+> > + #endif
+> > +
+> > +-int fdlock(fd)
+> > ++int fdlock(int fd)
+> > + { int i;unsigned gobble[GOBBLE>>2];
+> > +   for(i=3DGOBBLE>>2;i;gobble[--i]=3D~(unsigned)0);               /* S=
+unOS crash
+> > test */
+> > +   oldfdlock=3Dfd;fd=3D0;
+> > +@@ -993,11 +999,11 @@ int main(){int i;i=3D1;
+> > +  i+=3DWIFEXITED(i);
+> > +  i+=3DWIFSTOPPED(i);
+> > +  i+=3DWEXITSTATUS(i);
+> > +- i+=3DWSIGTERM(i);
+> > ++ i+=3DWTERMSIG(i);
+> > +  return i;}
+> > + HERE
+> > +
+> > +-echo 'Testing for WIFEXITED(), WIFSTOPPED(), WEXITSTATUS() & WSIGTERM=
+()'
+> > ++echo 'Testing for WIFEXITED(), WIFSTOPPED(), WEXITSTATUS() &
+> > WTERMSIG()'
+> > + if $MAKE _autotst.$O >_autotst.rrr 2>&1  then
+> > +    $FGREP -v include/ <_autotst.rrr >_autotst.$O @@ -1029,6 +1035,8 @=
+@
+> > +cat >_autotst.c <<HERE  #ifndef NO_COMSAT  #include "network.h"
+> > + #endif
+> > ++int setrgid();
+> > ++int setresgid();
+> > + int main(){char a[2];
+> > +  endpwent();endgrent();memmove(a,"0",1);bcopy("0",a,1);strcspn(a,"0")=
+;
+> > +
+> > +strtol("0",(char**)0,10);strchr("0",'0');strpbrk(a,"0");rename(a,"0");
+> > +@@ -1059,7 +1067,7 @@ echo 'Testing for memmove, strchr, strpb
+> > + echo '      rename, setrgid, setegid, pow, opendir, mkdir, waitpid, f=
+sync,'
+> > + echo '      ftruncate, strtod, strncasecmp, strerror, strlcat,'
+> > + echo '      memset, bzero, and _exit'
+> > +-if $MAKE _autotst.$O >$DEVNULL 2>&1
+> > ++if $MAKE _autotst.$O >_autotst.rrr 2>&1
+> > + then
+> > + :
+> > + else
+> > +@@ -1196,7 +1204,7 @@ unsigned long dobench(strstr,iter,haysta
+> > +   return (unsigned long)clock()-to;
+> > + }
+> > + #endif
+> > +-int main(argc,argv)int argc;const char*argv[];
+> > ++int main(int argc,const char*argv[])
+> > + { if(argc=3D=3D1)
+> > +    { char*haystack;
+> > + #ifdef BENCHSIZE
+> > +--- a/src/mailfold.c
+> > ++++ b/src/mailfold.c
+> > +@@ -378,7 +378,7 @@ void concon(ch)const int ch;   /* flip b
+> > +    }
+> > + }
+> > +
+> > +-void readmail(rhead,tobesent)const long tobesent;
+> > ++void readmail(int rhead,const long tobesent)
+> > + { char*chp,*pastend;static size_t contlengthoffset;
+> > +   ;{ long dfilled;
+> > +      if(rhead=3D=3D2)             /* already read, just examine what =
+we have */
+> > diff --git a/meta-oe/recipes-support/procmail/procmail_3.22.bb
+> > b/meta-oe/recipes-support/procmail/procmail_3.22.bb
+> > index 59b78c0a6a..32fc12c7da 100644
+> > --- a/meta-oe/recipes-support/procmail/procmail_3.22.bb
+> > +++ b/meta-oe/recipes-support/procmail/procmail_3.22.bb
+> > @@ -15,6 +15,7 @@ SRC_URI =3D
+> > "http://www.ring.gr.jp/archives/net/mail/${BPN}/${BP}.tar.gz \
+> >      file://man-file-mailstat.1-from-debian.patch \
+> >      file://CVE-2014-3618.patch \
+> >      file://CVE-2017-16844.patch \
+> > +    file://gcc14.patch \
+> >  "
+> >  SRC_URI[sha256sum] =3D
+> > "087c75b34dd33d8b9df5afe9e42801c9395f4bf373a784d9bc97153b0062e117"
 > >
+> > @@ -24,6 +25,7 @@ LIC_FILES_CHKSUM =3D
+> > "file://COPYING;md5=3Da71e50e197a992c862379e576e669757 \
 > >
+> >  DEPENDS =3D "libnet"
+> >  inherit autotools-brokensep
+> > +
+> >  do_configure() {
+> >      find examples -type f | xargs chmod 644
+> >      export CC=3D"${BUILD_CC}"
+> > @@ -35,7 +37,7 @@ do_configure() {
+> >  }
 > >
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#117189): https://lists.openembedded.org/g/openembedde=
-d-devel/message/117189
-> Mute This Topic: https://lists.openembedded.org/mt/112489401/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+> >  do_compile() {
+> > -    oe_runmake -i CFLAGS=3D"$TARGET_CFLAGS -Wno-comments
+> > -Wno-implicit-int -Wno-implicit-function-declaration -D_LARGEFILE_SOURC=
+E
+> > -D_FILE_OFFSET_BITS=3D64" LDFLAGS0=3D"${LDFLAGS}"
+> > +    oe_runmake -i CFLAGS=3D"$TARGET_CFLAGS -Wno-comments
+> > -Wno-implicit-function-declaration -D_LARGEFILE_SOURCE
+> > -D_FILE_OFFSET_BITS=3D64" LDFLAGS0=3D"${LDFLAGS}"
+> >  }
+> >
+> >  do_install() {
 
