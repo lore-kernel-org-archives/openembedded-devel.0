@@ -1,132 +1,154 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <mingli.yu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7BDB6C369D3
-	for <webhook@archiver.kernel.org>; Mon, 28 Apr 2025 07:59:47 +0000 (UTC)
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
- by mx.groups.io with SMTP id smtpd.web11.42810.1745826983672194502
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FF50C36005
+	for <webhook@archiver.kernel.org>; Mon, 28 Apr 2025 08:00:17 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.42816.1745827042314841147
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Apr 2025 00:56:23 -0700
+ Mon, 28 Apr 2025 00:57:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=RY7HL82A;
- spf=pass (domain: gmail.com, ip: 209.85.208.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-5ed43460d6bso6321108a12.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 00:56:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745826982; x=1746431782; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=EFewrUDSmlHxcjUy/8dck005MPg9ASN+NvvCN2kin90=;
-        b=RY7HL82A0eRXjxgOOzml9xpmdfpjo/KM4hokrLS0FdUyxdedRywEY2jQu9Kz+PGoSb
-         3PsoEvdNCWmbyOao1cp+5e4pcOXQE9VO8zzzUuwHFZrRh1kaCtiNnoAss4assp3L7UQS
-         YoWuBJJGnKgGRb4J4PywVN7dFGzhPnQd7dMsdlAf+diE9LPuTXn1P6cMgO/brITqraA5
-         OKDR31bmaDk8O8vgZpkZARbvX55Ar9/uU7latskjxGICTOv3d3tqcgMx0665K9yPfAg4
-         G5HaL/veg3f2WOPy9Bs1vwaDCYvE4rYFJ6l/Mx9bTl6VA4b/+eEAXVfo0yfbeGxlOcTg
-         ev3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745826982; x=1746431782;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=EFewrUDSmlHxcjUy/8dck005MPg9ASN+NvvCN2kin90=;
-        b=HocmUXYXA/g3rCJZB/YCGxOMWNw8GfhPcKtz6WY46OEUVlHFxYMFm7kKumYHXOfITL
-         yU0oy6BF3m46nVRzkuqI5WPvxPUBcXO7TmQLZO7Rx9mkXXXuLn/6YLQgiUoraeScHsv+
-         qZk5OsfnZPhW8qyLks8RUUa2VTT6Vuskbk7EfOoDNB4A+e1aI3wPj8eOLwNlYcsJJW7X
-         H0CddKtwURo+1bHhiHw9K/djLjIyutSIByrZ31pSkdVxOwuLhIeVfWA19xgIKbM8/1Kw
-         3nDVvp5q/JapX1pPhS3qYbbcQT2eeN1mFqyIW/bvMoQupzVMGLJjO5On5yf8R9dRmYfM
-         t5vg==
-X-Forwarded-Encrypted: i=1; AJvYcCWtW9XM07ivXWCfPJz+HKFZ04PKlV/0nZrWqUg9F6UZbaz3Rz+y68QZr8KCox0JSe+GXE3kcj4PXnpYiVtvyg3E6NU=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yzng02aMs9aWSGDyOH7ijm8BeUAfx9k3g+C7N2PDmvmPobJooSa
-	C6+9mic4TtLTRRcMk7w7kZ9k6th4VSIiRAtzgHrs/b+EHrtOuEqr
-X-Gm-Gg: ASbGncuI2OMxAF2/DvyYNQEwTrIjgzA8gX+VgmQZ1k8d3it2Nk2oeHjKrqEtZzYxM3R
-	neeAn/lmXc9xZoWKHOCK+NQ+MRIpiw8MWX+qvuVCxYzY1lmn2PHiHxAhDqF0mVKAiHVvtNj54wm
-	aOJm+k9sv/deEwOU9klazz0cMpNjnqJ0EfwmwrNQHvG4/EhQy6Kj4p4iBZXXUAlsIi+Fr9qmhHF
-	/V9nJTsdFc+ZJ2Wmv8N+ZSa4zG05u+XIILtVLy/LpJ6nGkz7a02Lfn+67R6w06VxqCFxwk4FNez
-	tJh1S27MLI+DB/LH9jjFtdVwgxu7B6C9ZJtrJWfEyLt911VC
-X-Google-Smtp-Source: AGHT+IGXTmjMM96QpfhUL8ucMuHjblS/B5GCD+CYeRZi42MvkbXcMiYtV+zMS0K4xjjSxk3cm4WuPg==
-X-Received: by 2002:a17:907:1c96:b0:ac7:391a:e2d3 with SMTP id a640c23a62f3a-ace713fe0fbmr976574666b.58.1745826981609;
-        Mon, 28 Apr 2025 00:56:21 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5f7035464f1sm5401590a12.62.2025.04.28.00.56.18
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 28 Apr 2025 00:56:20 -0700 (PDT)
-Message-ID: <570e3112-1eb8-443e-9a96-97dab147c8dd@gmail.com>
-Date: Mon, 28 Apr 2025 09:56:18 +0200
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=621356262f=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S5kAPW015836
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 07:57:21 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 468mq1apdc-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 07:57:21 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Mon, 28 Apr 2025 00:57:20 -0700
+Received: from pek-lpg-core4.wrs.com (128.224.153.44) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Mon, 28 Apr 2025 00:57:19 -0700
+From: <mingli.yu@eng.windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH v2] nlohmann-json: Upgrade 3.11.3 -> 3.12.0
+Date: Mon, 28 Apr 2025 15:57:18 +0800
+Message-ID: <20250428075718.1066078-1-mingli.yu@eng.windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH] testdisk: add recipe
-To: wen.yang@linux.dev, openembedded-devel@lists.openembedded.org
-References: <20250427152746.8099-1-wen.yang@linux.dev>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20250427152746.8099-1-wen.yang@linux.dev>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=KsNN2XWN c=1 sm=1 tr=0 ts=680f34e1 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=XR8D0OoHHMoA:10 a=NEAV23lmAAAA:8 a=bbPXFDumAAAA:8 a=t7CeM3EgAAAA:8 a=_C9ktzeRd-OSxzL0VEoA:9 a=IHPS2YvyXuyKKQCJkhva:22
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: VotYL-XBP1BIyck03_9EyOLrTnq3Ur5K
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNDI4MDA2NSBTYWx0ZWRfX2LBqlcvKwHVK 3Y7J5SDtyKqgcQbrNgvaEBmeiF4k+zyYa8wbIyGLrFjIUubfYdlm3zG3TYS5umeBR+mYaEVFIrF +P8qezm9Kncn8Vjhb0F3aQ9QMtmBXgFRUYtTmaZmGFRSm4PBx/z91Qarr1OsIPI0FMV4f55xJEn
+ 2G8qxqIprEGCd5T6B0QkEaR2YEXcQa7GEhR4wa1C2ctQ3RQZvea0U/Hf/rGZ5qLale/DDyH+e8s 2Bib93eZpoGH7jsd0iDslDa/5qkXeCzc5ve9xDlXw/XtyvWQTuN+z2GlOeglQ3U8DtCIG8tJc93 pZTojn2rllB253z8VnbQ2QxYVirOr9PeK/9e+CEI0WdliZx6RIr3VF1IP6hhShlWIf9Zdrd3Th2
+ f2hEdOUTBouuC3yJraMjAMn0PWni8yJHKoWeQMb/njUYW09dIlTxaEXm6kVtASD/+N9+1OaG
+X-Proofpoint-GUID: VotYL-XBP1BIyck03_9EyOLrTnq3Ur5K
+X-Sensitive_Customer_Information: Yes
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-04-28_03,2025-04-24_02,2025-02-21_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ mlxlogscore=999 spamscore=0 bulkscore=0 lowpriorityscore=0 adultscore=0
+ mlxscore=0 phishscore=0 malwarescore=0 clxscore=1015 suspectscore=0
+ impostorscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2504070000
+ definitions=main-2504280065
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 07:59:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117189
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 08:00:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117190
 
-It looks like this recipe was created with/for an old version of Yocto.
-Could you please prepare it for master branch?
-I have added some comments inline.
+From: Mingli Yu <mingli.yu@windriver.com>
 
-On 4/27/25 17:27, Wen Yang via lists.openembedded.org wrote:
-> testdisk is a free data recovery software primarily designed to help
-> recover lost partitions and/or make non-booting disks bootable again
-> when these symptoms are caused by faulty software.
->
-> Signed-off-by: Wen Yang <wen.yang@linux.dev>
-> ---
->  .../recipes-support/testdisk/testdisk_7.2.bb  | 19 +++++++++++++++++++
->  1 file changed, 19 insertions(+)
->  create mode 100644 meta-oe/recipes-support/testdisk/testdisk_7.2.bb
->
-> diff --git a/meta-oe/recipes-support/testdisk/testdisk_7.2.bb b/meta-oe/recipes-support/testdisk/testdisk_7.2.bb
-> new file mode 100644
-> index 0000000000..64e3d612c1
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/testdisk/testdisk_7.2.bb
-> @@ -0,0 +1,19 @@
-> +DESCRIPTION = "TestDisk is a free data recovery software primarily designed to help recover lost partitions and/or make non-booting disks bootable again when these symptoms are caused by faulty software, certain types of viruses or human error (such as accidentally deleting your Partition Table)."
-> +LICENSE = "GPLv2"
-This LICENSE value is deprecated. Please use spdx identifiers if
-possible/applicable, like GPL-2.0-only or GPL-2.0-or-later
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-> +PR = "r1"
-Is PR needed in this recipe?
-> +
-> +DEPENDS = "jpeg ncurses e2fsprogs"
-> +
-> +SRC_URI = "https://github.com/cgsecurity/testdisk/archive/refs/tags/v7.2.tar.gz"
-Archived tags in Github are unfortunately not immutable, so their use is
-discouraged (and it also throws a fatal QA check). It is preferred to
-use the direct commit ID.
-> +S = "${WORKDIR}/testdisk-7.2"
-> +
-> +inherit autotools pkgconfig
-> +
-> +PACKAGES =+ "photorec"
-It is recommended to prepend the extra packages' names with the main
-recipe name, like ${PN}-photorec
-> +
-> +DESCRIPTION_photorec = "Photorec is file data recovery software designed to recover lost files including video, documents and archives from Hard Disks and CDRom and lost pictures (Photo Recovery) from digital camera memory."
-> +FILES_photorec = "${sbindir}/photorec"
-The underscore override syntax has changed to ":".
-> +
-> +SRC_URI[md5sum] = "c47d69e2c950b6b2f0dadb2a2921d6c6"
-> +SRC_URI[sha256sum] = "f3fe7ec02cafcbe792a4c783976de3a6312963b0ce8a613d38adbcd8bdca0517"
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#117176): https://lists.openembedded.org/g/openembedded-devel/message/117176
-> Mute This Topic: https://lists.openembedded.org/mt/112489401/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+* License-Update:
+Copyright year updated to 2025
+
+* It seems snprintf in glibc is locale-aware. And it will format
+floating-point numbers according to the locale when the numeric
+locale is set (e.g., de_DE).
+  But in musl, snprintf does not respect locale settings for number
+formatting. It will always use a period as the decimal separator
+regardless of the locale set.
+ So exclude TEST CASE "locale-dependent test (LC_NUMERIC=de_DE)" [1]
+right now and add the case back once the issue resolved by upstream.
+ # ./run-ptest
+PASS: test-algorithms_cpp11
+PASS: test-allocator_cpp11
+PASS: test-alt-string_cpp11
+PASS: test-assert_macro_cpp11
+PASS: test-binary_formats_cpp11
+PASS: test-bjdata_cpp11
+PASS: test-bson_cpp11
+PASS: test-byte_container_with_subtype_cpp11
+PASS: test-capacity_cpp11
+PASS: test-cbor_cpp11
+PASS: test-class_const_iterator_cpp11
+PASS: test-class_iterator_cpp11
+PASS: test-class_lexer_cpp11
+PASS: test-class_parser_cpp11
+[snip]
+
+[1] https://github.com/nlohmann/json/issues/4767
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ meta-oe/recipes-devtools/nlohmann-json/files/run-ptest    | 6 +++++-
+ .../{nlohmann-json_3.11.3.bb => nlohmann-json_3.12.0.bb}  | 8 ++++----
+ 2 files changed, 9 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-devtools/nlohmann-json/{nlohmann-json_3.11.3.bb => nlohmann-json_3.12.0.bb} (82%)
+
+diff --git a/meta-oe/recipes-devtools/nlohmann-json/files/run-ptest b/meta-oe/recipes-devtools/nlohmann-json/files/run-ptest
+index 2f00267d50..d39ee6df8f 100755
+--- a/meta-oe/recipes-devtools/nlohmann-json/files/run-ptest
++++ b/meta-oe/recipes-devtools/nlohmann-json/files/run-ptest
+@@ -3,7 +3,11 @@
+ cd tests
+ for atest in test-* ; do
+     rm -rf tests.log
+-    ./${atest} > tests.log 2>&1
++    if [ ${atest} = "test-locale-cpp_cpp11" ]; then
++        ./${atest} --test-case-exclude="locale-dependent test (LC_NUMERIC=de_DE)" > tests.log 2>&1
++    else
++        ./${atest} > tests.log 2>&1
++    fi
+     if [ $? = 0 ] ; then
+         echo "PASS: ${atest}"
+     else
+diff --git a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.3.bb b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.12.0.bb
+similarity index 82%
+rename from meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.3.bb
+rename to meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.12.0.bb
+index 194e80546e..58567a781e 100644
+--- a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.3.bb
++++ b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.12.0.bb
+@@ -2,16 +2,16 @@ SUMMARY = "JSON for modern C++"
+ HOMEPAGE = "https://nlohmann.github.io/json/"
+ SECTION = "libs"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=f969127d7b7ed0a8a63c2bbeae002588"
++LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=3b489645de9825cca5beeb9a7e18b6eb"
+ 
+ CVE_PRODUCT = "json-for-modern-cpp"
+ 
+-SRC_URI = "git://github.com/nlohmann/json.git;branch=develop;protocol=https \
++SRC_URI = "git://github.com/nlohmann/json.git;branch=master;protocol=https \
+            git://github.com/nlohmann/json_test_data.git;destsuffix=git/json_test_data;name=json-test-data;branch=master;protocol=https \
+            file://run-ptest \
+ "
+ 
+-SRCREV = "9cca280a4d0ccf0c08f47a99aa71d1b0e52f8d03"
++SRCREV = "55f93686c01528224f448c19128836e7df245f72"
+ SRCREV_json-test-data = "a1375cea09d27cc1c4cadb8d00470375b421ac37"
+ 
+ SRCREV_FORMAT .= "_json-test-data"
+@@ -25,7 +25,7 @@ EXTRA_OECMAKE += "${@bb.utils.contains('PTEST_ENABLED', '1', '-DJSON_BuildTests=
+ # nlohmann-json is a header only C++ library, so the main package will be empty.
+ ALLOW_EMPTY:${PN} = "1"
+ RDEPENDS:${PN}-dev = ""
+-RDEPENDS:${PN}-ptest = "perl"
++RDEPENDS:${PN}-ptest = "perl locale-base-de-de"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+ 
+-- 
+2.34.1
 
 
