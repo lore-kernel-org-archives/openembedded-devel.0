@@ -2,118 +2,89 @@ Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4224CC36005
-	for <webhook@archiver.kernel.org>; Mon, 28 Apr 2025 07:11:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F7D7C36005
+	for <webhook@archiver.kernel.org>; Mon, 28 Apr 2025 07:11:26 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.42346.1745824171703034789
+ by mx.groups.io with SMTP id smtpd.web10.42340.1745824166112145511
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Apr 2025 00:09:31 -0700
+ Mon, 28 Apr 2025 00:09:26 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=62139e711a=changqing.li@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S5kAJN015836
-	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 07:09:31 GMT
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53RMuJ17016452
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 07:09:25 GMT
 Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 468mq1akr8-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 468pf92h9r-2
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 07:09:30 +0000 (GMT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 07:09:25 +0000 (GMT)
 Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Mon, 28 Apr 2025 00:09:29 -0700
+ 15.1.2507.43; Mon, 28 Apr 2025 00:09:24 -0700
 Received: from pek-lpg-core6.wrs.com (147.11.136.210) by
  ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Mon, 28 Apr 2025 00:09:28 -0700
+ 15.1.2507.43 via Frontend Transport; Mon, 28 Apr 2025 00:09:23 -0700
 From: <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [walnascar][PATCH 6/6] lvm2: correct PKGV for package libdevmapper
-Date: Mon, 28 Apr 2025 15:09:22 +0800
-Message-ID: <20250428070922.3944580-7-changqing.li@windriver.com>
+Subject: [walnascar][PATCH 1/6] version-check.conf: add CHECK_VERSION_PV for pn-netperf
+Date: Mon, 28 Apr 2025 15:09:17 +0800
+Message-ID: <20250428070922.3944580-2-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250428070922.3944580-1-changqing.li@windriver.com>
 References: <20250428070922.3944580-1-changqing.li@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=KsNN2XWN c=1 sm=1 tr=0 ts=680f29aa cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=XR8D0OoHHMoA:10 a=Q4-j1AaZAAAA:8 a=CCpqsmhAAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8 a=wGNeQ4HnD9I3d3-Oa4wA:9
- a=9H3Qd4_ONW2Ztcrla5EB:22 a=ul9cdbp4aOFLsgKbc677:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: ZaptTJIDrWFIdse-_KweAqXIdfRM9M4k
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNDI4MDA1OCBTYWx0ZWRfXyk1UrLAQbL1+ s43n60gCN4ywYCMC+zsSz4I9H9Y5O4DGBmS9ieYc/+lcOB+SaZcdP8uLWPdEznV6OlkclEiFdje ncCAsgfy10RFzi6hmJEwWufRXi9MsRZU8pnNm5jMRBNBuujEbWz+jbCfPD9/Bvzvhu41dwUGSQw
- mFrw+irZ5TaeMbxyLKD9MiDaEoacjY7hNP+NLzV4S6OxfjjU9fNKd2QGKDG3Sk7koljUG3D0nbI rMcagEKnqJceEg+aZRqgXnlGUXe1k9bk4DKzb35xwjt6Prapf7fwDEuv2L1wSCKLHjtyS3/VLfj wPDs50dOmeunZQCzoc0Qzba/9QP5ZJsNU+Abyy/pdbiGnb69594P2U2Jk+y1sXzR1+JYAIOU27a
- LdWLCnSgW2TTCm19+cFBTfCNsCzOGWIEH8PnCzWQ7Jailacb5dtOpZJfLMXQL6Cuj+KQOiBe
-X-Proofpoint-GUID: ZaptTJIDrWFIdse-_KweAqXIdfRM9M4k
+X-Proofpoint-GUID: 1ujUtDWwLcUliEgs2f1DSzNjOsP7buqO
+X-Authority-Analysis: v=2.4 cv=EavIQOmC c=1 sm=1 tr=0 ts=680f29a5 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=XR8D0OoHHMoA:10 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8 a=-3FKbztzYzKHKuWGU0sA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNDI4MDA1OCBTYWx0ZWRfX/mF3Ov6X5Mrf 4eqrFdy+YWO5u32+fu1emByUG0SY6r80li8KrmIeU0MIWbDA6yTPfrvlyPJEifgqazeg86H0e4k 0chLUOnHGtZ+qy+g9zsk78y9U/ddzpvCV3pEUwX27mEaelaVXqpJyct5sbq2bBO4ZbhTYhsVGgx
+ fa2CfnFZBGeA01lSsviBxk/cA5GDObpL9xybdegThTqn57bFRbYnWr3NfMdCvlfACdCPC9hiMBs qa8TIrE/YgUqh66iE2eMUTxbLQkp/suXi5LFmCxmoDlDt5RV8sfY6PItQfwvurelAtRo7irJIAk sdq+BuNtLwyhVP5nz8yPl1WMfnET084FrfbP52UsGA/XV/miuleMhTDtFH8aTFnw303HOtzKa6p
+ 9BKlxyGZE1vb1M/No9EwBUGK92ziUWiGLb+QMxjbAUg00bFqcBeWoQWxD3vpGMJIU/3/nRBp
+X-Proofpoint-ORIG-GUID: 1ujUtDWwLcUliEgs2f1DSzNjOsP7buqO
 X-Sensitive_Customer_Information: Yes
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
  definitions=2025-04-28_02,2025-04-24_02,2025-02-21_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- mlxlogscore=999 spamscore=0 bulkscore=0 lowpriorityscore=0 adultscore=0
- mlxscore=0 phishscore=0 malwarescore=0 clxscore=1015 suspectscore=0
- impostorscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ impostorscore=0 malwarescore=0 lowpriorityscore=0 spamscore=0 bulkscore=0
+ adultscore=0 suspectscore=0 phishscore=0 mlxscore=0 clxscore=1015
+ mlxlogscore=999 classifier=spam authscore=0 authtc=n/a authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2504070000
  definitions=main-2504280058
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 07:11:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117188
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 07:11:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117183
 
 From: Changqing Li <changqing.li@windriver.com>
 
-Refer [1] about relations about recipe lvm2 and libdevmapper,
-package libdevmapper is generated by recipe lvm2. And lvm2 and
-libdevmapper has different release version, refer [2], VERSION is
-for lvm2, and VERSION_DM is for libdevmapper. Refer following way in
-configure.ac to get PKGV of libdevmapper:
-[snip of configure.ac]
-DM_LIB_PATCHLEVEL=$($AWK -F '[[-. ]]' '{printf "%s.%s.%s",$1,$2,$3}' "$srcdir"/VERSION_DM)
-[snip]
+For netperf, current PV is 2.7.0+git, and the SRCREV is newer than 2.7.0,
+and there is no tag 2.7.1, the latest tag is in 2015, refer [1], so it
+is not possile for us to make PV align with the runtime version below
+by update SRCREV now, add CHECK_VERSION_PV for pn-netperf to mute the
+version mismatch waring
 
-Other distros like ubuntu, suse also use VERSION_DM as version of libdevmapper
+$netserver -V
+Netperf version 2.7.1
 
-[1] https://git.openembedded.org/meta-openembedded/commit/?h=master-next&id=3f64779eae2d8312f569bee863f90ec4f8176e6c
-[2] https://sourceware.org/git/?p=lvm2.git;a=tree
+[1] https://github.com/HewlettPackard/netperf
 
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/lvm2/lvm2.inc | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
+ meta-oe/conf/version-check.conf | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index ffa6a9a15d..bff075d400 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -26,6 +26,29 @@ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\_\d+)+)"
- 
- inherit autotools-brokensep pkgconfig systemd
- 
-+def get_dm_version(p):
-+    import re
-+
-+    fn = p + '/VERSION_DM'
-+    try:
-+        f = open(fn, 'r')
-+    except IOError:
-+        return None
-+
-+    lines = f.readlines()
-+    f.close()
-+    for line in lines:
-+        m = re.match(r'(\w+)[-. ](\w+)[-. ](\w+)', line.strip())
-+        if m:
-+            return ".".join([m.group(1), m.group(2), m.group(3)])
-+
-+    return None
-+
-+DM_VERSION = '${@get_dm_version("${S}")}'
-+python do_package:prepend() {
-+    d.setVar('PKGV:libdevmapper', d.getVar("DM_VERSION"))
-+}
-+
- LVM2_PACKAGECONFIG = "dmeventd"
- LVM2_PACKAGECONFIG:append:class-target = " \
-     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)} \
+diff --git a/meta-oe/conf/version-check.conf b/meta-oe/conf/version-check.conf
+index c41df0d496..130f2f6058 100644
+--- a/meta-oe/conf/version-check.conf
++++ b/meta-oe/conf/version-check.conf
+@@ -20,3 +20,4 @@ CHECK_VERSION_PV:pn-iozone3 = "3.${PV}"
+ CHECK_VERSION_PV:pn-can-utils = "%"
+ CHECK_VERSION_PV:pn-luajit = "${PV}.%"
+ CHECK_VERSION_PV:pn-sg3-utils = "%"
++CHECK_VERSION_PV:pn-netperf = "2.7.%"
 -- 
 2.34.1
 
