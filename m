@@ -1,79 +1,84 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F3D9BC369DC
-	for <webhook@archiver.kernel.org>; Tue, 29 Apr 2025 09:01:35 +0000 (UTC)
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
- by mx.groups.io with SMTP id smtpd.web10.14118.1745917286598858016
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 13B61C369DC
+	for <webhook@archiver.kernel.org>; Tue, 29 Apr 2025 09:04:36 +0000 (UTC)
+Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
+ by mx.groups.io with SMTP id smtpd.web10.14199.1745917471356904193
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Apr 2025 02:01:26 -0700
+ Tue, 29 Apr 2025 02:04:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=UsSlMAcQ;
- spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-ac2a81e41e3so1027483966b.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Apr 2025 02:01:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745917285; x=1746522085; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=zsL/Vjp/ETGdB17gTOEiJwFe4RjW024GWLyUo7f11rU=;
-        b=UsSlMAcQlYp9E0kLnv2H3twx+TJYUVyQehnqNg/t/JwscEgmDkSNZneBfQbw3uRUdH
-         2Rgp2nWUqVq4uq5V/XHrI/i6CKq79UgxUOehIP3FhcfVMgFX6Pn+qJMc4BZP9VVOZkci
-         LWmuFu+JeAZgPHSukgJscsDi+GQKKjSHPgshQ+VIYGXYXujxCYuNeZqC2A5I7TunMv5G
-         JMM7V5nzllFA2MYvxDRATaB3ZSEJi6n+WcEexSFiv/rqBILnnJoDU7gGvq6wfQfF8XzP
-         0QE72p9Uu/L/vxScaKZphI6Jk9O4XUhKvp0KPYqtgWqPA2EHREuyWJFw2getSlSsNOBb
-         Ae7Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745917285; x=1746522085;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=zsL/Vjp/ETGdB17gTOEiJwFe4RjW024GWLyUo7f11rU=;
-        b=UncKjkcisCZ2nlGnaJa2H0u77c+rhowIWz8GD0YSlMq6AHqQYoFxwmaAWVvouVdCOv
-         VtrzmbmyQQtIMMJO9jMiCYOXNIJsnCZQ8tiorLr/vOgKbyYDPy71QAVGHbNkw0MKpoxB
-         +TbIXoo1jr/fH7KprKL4oY+SsD/3gtlanyZuFjvlLTr2Fu5V35frbkxYNpFXmIojO2q8
-         BaFgj7ya9+3woyzTVWUweIDfj3YYtZ4FpgaCxw/gzlWfFOLdu6mZKKWXhYlmeqTf6dO2
-         +293KGqJ27QtFQn+kRI6QCH6ZOW3ExV2ze/YZOO+Olkb2jXCEd6NoL2i3/ML94DaoOzB
-         YnXw==
-X-Forwarded-Encrypted: i=1; AJvYcCWD7Zh+50qVdOz7UAqhYGmU6YuYf7xZyYw7vDZ2Rpz7xMV+6gL79gJci10ZOypHUSC6ensmRnm6yVGGofeANz4nOrc=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yyki6LRcq2xBUgNKsEcyVgqbNXpQE5vgC7bqH4gKs1aBHJlqJyi
-	+RDIsPUR7m36VNI5HZ74LYBufleHzPGdYypv9dVl2+q+sesKjMTQ
-X-Gm-Gg: ASbGncs+X9SCd/AG3jTZ9XiRpzEHDxdsMOCn29BkcegcO0TxCm8glxjeJs1t8UjnQ7u
-	TARxUZI+yS8uBz8Lfd9mwyxGzucf5IdkxFkPfh/VWRIpzW+dY9nvFXA7KFe42FPSKivAybGWXtT
-	bGgC/KQn0f4CIffRa0xTaziU7ydmy7+28D96U/gv8Z2wX7Fz1efFk2a8ipSuibqJv9VkgatRpkf
-	9k8mjiFMBX9ugdo8mw4eSnhuYccNsxrn1y8cq9QBfLdP5lvqSwHfSEMtvLIhtg1XZK3GKCwodLs
-	+6p8+4E/y0h51UBubzb0RDiyO8Dd7RadH4XyFp9SoVU7nA2/
-X-Google-Smtp-Source: AGHT+IHpq/hrdngK1vJzrQ6QD64kilNUgRMYXfm4sHLPDUzCqE6iX2duAZlgyBoYQ+F/nBt5DfvHpg==
-X-Received: by 2002:a17:907:7d9f:b0:aca:a161:f113 with SMTP id a640c23a62f3a-acec8525e67mr199849366b.33.1745917284696;
-        Tue, 29 Apr 2025 02:01:24 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-acec0530c37sm149990866b.136.2025.04.29.02.01.24
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 29 Apr 2025 02:01:24 -0700 (PDT)
-Message-ID: <8141f838-4736-4f8f-86d4-b8caa0ec56c4@gmail.com>
-Date: Tue, 29 Apr 2025 11:01:23 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe] [PATCH] procmail: Add -Wno-implicit-int to fix
- error of do_compile
-To: wangmy@fujitsu.com, openembedded-devel@lists.openembedded.org
-References: <1745911273-27541-1-git-send-email-wangmy@fujitsu.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <1745911273-27541-1-git-send-email-wangmy@fujitsu.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=SqYSNl01;
+ spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1745917471; x=1777453471;
+  h=from:to:cc:subject:date:message-id;
+  bh=Rm4rNonfuqlZ57s+EbUjkqovc/vAGBo00xbk1SUK9D4=;
+  b=SqYSNl01nnO66lkUSzXVlYRAJPyltTTp9uV2VAivrcT1zHxzTHINLDrE
+   XOw8a5VZ4UMgXMQ+esmxrFkySYrKq0yUQ6qBO2xUKeoVHYcqUCDRcXz/X
+   fJ4RzJsDG2eS0alVlacB/pIcsboWDxS86XEx49sdtxufJToBpnBmlAMy+
+   zqQEt/zs5re+m7meZETRUQDGsTunvbK152BxKcFlwOS5Ajh0LPWQphgxV
+   8QNmzBCRovek2omlvf/mwfe1KwBe5puRzYNCohbLgRbJ61eW8TWWQdw/J
+   ZzfQwlKhMVjIbNg62DMMoDBTOejQ5uvo7B1LqulAB7AWia7lx2+vpsmPe
+   w==;
+X-CSE-ConnectionGUID: 97+qr3BpSYO9tEfLuKd04Q==
+X-CSE-MsgGUID: oO7YVCibQ0y62y872bgZdg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11417"; a="176897071"
+X-IronPort-AV: E=Sophos;i="6.15,248,1739804400"; 
+   d="scan'208";a="176897071"
+Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
+  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Apr 2025 18:04:29 +0900
+Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
+	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id E414AD4C39
+	for <openembedded-devel@lists.openembedded.org>; Tue, 29 Apr 2025 18:04:26 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 9ACDCBF49B
+	for <openembedded-devel@lists.openembedded.org>; Tue, 29 Apr 2025 18:04:26 +0900 (JST)
+Received: from localhost.localdomain (unknown [10.193.128.200])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id EB0881A0071;
+	Tue, 29 Apr 2025 17:04:25 +0800 (CST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH v2] procmail: Add -Wno-implicit-int to fix error of do_compile
+Date: Tue, 29 Apr 2025 17:04:19 +0800
+Message-Id: <1745917459-28198-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 29 Apr 2025 09:01:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117234
+ <openembedded-devel@lists.openembedded.org>; Tue, 29 Apr 2025 09:04:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117235
 
-> -    oe_runmake -i CFLAGS="$TARGET_CFLAGS -Wno-comments -Wno-implicit-function-declaration -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64" LDFLAGS0="${LDFLAGS}"
-> +    oe_runmake -i CFLAGS="$TARGET_CFLAGS -Wno-comments -Wno-implicit-int -Wno-implicit-function-declaration -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64" LDFLAGS0="${LDFLAGS}"
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Could you please add some note in the commit message, why is this change
-needed?
+Without the option -Wno-implicit-int , the following error will occur and the command  procmail will not be installed to target.
+lmtp.c:54:8: error: type defaults to 'int' in declaration of 'ctopfd' [-Wimplicit-int]
+   54 | static ctopfd;
+      |        ^~~~~~
+make[1]: [Makefile:239: lmtp.o] Error 1 (ignored)
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ meta-oe/recipes-support/procmail/procmail_3.22.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-support/procmail/procmail_3.22.bb b/meta-oe/recipes-support/procmail/procmail_3.22.bb
+index 32fc12c7da..86d75e8c7c 100644
+--- a/meta-oe/recipes-support/procmail/procmail_3.22.bb
++++ b/meta-oe/recipes-support/procmail/procmail_3.22.bb
+@@ -37,7 +37,7 @@ do_configure() {
+ }
+ 
+ do_compile() {
+-    oe_runmake -i CFLAGS="$TARGET_CFLAGS -Wno-comments -Wno-implicit-function-declaration -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64" LDFLAGS0="${LDFLAGS}"
++    oe_runmake -i CFLAGS="$TARGET_CFLAGS -Wno-comments -Wno-implicit-int -Wno-implicit-function-declaration -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64" LDFLAGS0="${LDFLAGS}"
+ }
+ 
+ do_install() {
+-- 
+2.43.0
+
 
