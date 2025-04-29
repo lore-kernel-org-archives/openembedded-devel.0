@@ -1,115 +1,131 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B526C3ABAA
-	for <webhook@archiver.kernel.org>; Tue, 29 Apr 2025 12:24:07 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
- by mx.groups.io with SMTP id smtpd.web10.18448.1745929440960828691
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 05F74C369DC
+	for <webhook@archiver.kernel.org>; Tue, 29 Apr 2025 16:55:55 +0000 (UTC)
+Received: from mail-oo1-f52.google.com (mail-oo1-f52.google.com [209.85.161.52])
+ by mx.groups.io with SMTP id smtpd.web10.3448.1745945747434568985
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Apr 2025 05:24:01 -0700
+ Tue, 29 Apr 2025 09:55:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ne10gXT9;
- spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-5ed43460d6bso8843580a12.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Apr 2025 05:24:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WOhKsifr;
+ spf=pass (domain: gmail.com, ip: 209.85.161.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f52.google.com with SMTP id 006d021491bc7-6021e3daeabso3255882eaf.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Apr 2025 09:55:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745929439; x=1746534239; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=6mv2S6lc35GYvr3gcNnmr2lA+RU2/G2wcGm5TjMSNu4=;
-        b=ne10gXT91uAgHYwcV3yFkEpa3mQsXbhABoyede+78eNPtAQUu1xR2ooysjfgcNYM7G
-         8kj5MB6HIFrdw1tK2soa3uBS6HDS3iTI2p5D9LpkbGi79tMOfBjzp7cRHvAGJFMbCqd+
-         6TRmNjo32nTTiFs5XERmCuRfuCOH6Ki1ikG5jFzWLNO+ZRg1al1cxk8cwNPwYJumjppv
-         X8/DwzJX3UDYacdZsZma+F6bsjpjMy6NW7gTnlwLOvt1xpw7v1zQ8+hcqoqtgS8hfjpO
-         oXbX6z8uCiBSH0FhWnwQw5ugqgNtD+pY+fCgUCcTKlEI2zgf7SsrLO6thJKE9zMdiamq
-         OH5Q==
+        d=gmail.com; s=20230601; t=1745945746; x=1746550546; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=j4rpdCTDF5JFxp+sNetL1Z56vgeUiD/l4R7YbyaD+Gg=;
+        b=WOhKsifrhi97QMirMOF4ed/kIMuOhgVhZYDRSpBSzvFQeqJ0lpRzar8j4oJd9VZpeL
+         yZ2hAaTk301QiVDKmV2+6aM85bCuhrbpvZQt4ZIxUbhfuAIiQIRhISxDv4ZTdq6GnE0D
+         JAGH/SLST/+T+a//m1fEI67tgn+69aCu7LAs0KUWM4cdfBqAPbPGbdkxY6wWgIiZye1G
+         OEd9N7kJqep6yu4glMF+iwcT3u+MrfwIjK2fijHJwQDnmwf9dwfBfzoD+iRUOqwNfHGQ
+         gHs3uDetfvReSNMHI5t01nAT2oyqTftxMXHQTFIM224eCtBIrv1eHYVxjQ6+bsmJWgnO
+         UNvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745929439; x=1746534239;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1745945746; x=1746550546;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=6mv2S6lc35GYvr3gcNnmr2lA+RU2/G2wcGm5TjMSNu4=;
-        b=BU7dssT2pIMbNeK/As95tH11MAyKUIuVkljayfE9vLXGppVI2zjO+ShKc9BP3qA64C
-         nmCsf7U3nowCw/I7SnSa7eZna0nerEk3Awd7dbx51UhKHxoGYnzWQrdx4HDzY0VGP/HF
-         x0nHl3twBAcoEkTgRFMLNrglM3M9ZIhtuB3YI1DapvNQE42G7+ynoxPvapAObIl5jvS/
-         tn4L5mTl+Tybm1y15UnWrj9uTvNil+ozwT34b3Qfh6wVVgiHGpN6rQ0SDEon8Z2qRKum
-         aKVFdfgpllj+tfBC2+htXNJf1GfcfCqOTCWOBwDRPjx2t8hNbJz5uzj/u3H7uLZyAM4g
-         6llA==
-X-Gm-Message-State: AOJu0YzSEqbClHjd2OOBXl0ZXyZ1VsNlwbROcdOsdJN0EDdFhMRqQ/5p
-	BmL5XTLHbleSY/rZIJL3RgG3/g7My7kjNIyMRTtrdcePgmNOAcF8Q6sjgPL/
-X-Gm-Gg: ASbGncs6ryX3XcA+HuOD24j9wdA7Li5O7yTNhxJzkHLTma5rHpo9hZ3uB/ch6pyLx+F
-	KqgP8OxQ2WjT26fCdTv871m51VyvrOC+RvTLDv0TcjP3mAwl9XuME9juuSPyE1OBdUi/Zmbvgo3
-	VPRSb1sUbC8wN2ApQ/T/JQ4OZWeNn0IaY3ZNCPACfk+SNgMgvbBYAUrtxXrcP2xY2OOexo6mBzU
-	olVyoRJUTp8lWMm7vO2MzRjHXWoUVC85WXpMc7PKGr5+rYIdeSqP5iCHZTWZ6BfzUfhsCnbcaQS
-	3Gwwq2uiIKQigjnNUcfO/PeRsCwHqWK9FGI3+yDBQ/nUagHCehkFHdSJ
-X-Google-Smtp-Source: AGHT+IGqfrBwT86+A+CQl0RIxOu+11DOtObMK4kQNKrECVv7R3oGhrkTjKZOcQu31DqHz2r2MP6Vwg==
-X-Received: by 2002:a05:6402:4307:b0:5f7:eb38:c06f with SMTP id 4fb4d7f45d1cf-5f83885f451mr3079472a12.18.1745929439130;
-        Tue, 29 Apr 2025 05:23:59 -0700 (PDT)
-Received: from localhost.localdomain ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5f72ce7ba0csm6767873a12.6.2025.04.29.05.23.58
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Apr 2025 05:23:58 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] licenses/X11: remove license
-Date: Tue, 29 Apr 2025 14:23:56 +0200
-Message-ID: <20250429122356.577431-2-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250429122356.577431-1-skandigraun@gmail.com>
-References: <20250429122356.577431-1-skandigraun@gmail.com>
+        bh=j4rpdCTDF5JFxp+sNetL1Z56vgeUiD/l4R7YbyaD+Gg=;
+        b=s18NMvccaoQqaBxcw2WfS+8E+3cmNEfK1lmjBZu2IqNPS+3pCta4dPMkpmBqnGIHuQ
+         nvc9/27CNlmkE2RSDVM+dKtCHarIcxKQKnwR+YGng88sjnMTa5SV89HdbfDXnI1ys38K
+         SncxClqyWMjkZSryQmvcaTRn1yirBfk0OhYFJTCmqJr/qKfF2wY6krtm5Re074pV1z6x
+         tlhplS+BIpv4Ni9iu8BCGNNF8fBXWYKDDgEIn8bSGciqtCBu3eC3vyR0SYeVfjv1rCXR
+         aXj+izUE4/SnVXdS6rFmzNYx4TPKAh/X7kdRp6swiJdCgHrpn3AHWC9K6ogTtoEPBgLG
+         6wTw==
+X-Gm-Message-State: AOJu0Yw2azH1PS0vInnS/Tag5MADky0qUDPr25ZYyNrXJ1YavxIOVcBu
+	jcrUMGSCsLYlLjQvIjgpSKbmtJZgfDnUTfMs4KJjYG4zUA1744I5IG853gtozqmdPd7MG/Ne2th
+	CbWACsFT5eTMh2C3E50GOXXpvlbYydN3K
+X-Gm-Gg: ASbGncubw2ewlBUaWkIvRhu01Qhvl3BPOhsn1hEjlhcc+f0vnsp8ybqfPP+jFk3r1pQ
+	T68Y5HAx+aNCG5lOgugcfHed5egi0jyGZeJKRED37UfbQVtJHT2xujZpdC39SLGdHge6W2jHmSf
+	Kqy8+fyWcoyXBkFHsIzPyo
+X-Google-Smtp-Source: AGHT+IGJk998s6Rc2IzR+NltA0zBzoiQxzLIkBM/fywNaxww6ttsuoc3TFarFpQ8qGOUi3ten852MsuuW/C2DFpuWC8=
+X-Received: by 2002:a05:6820:1986:b0:606:361b:52a6 with SMTP id
+ 006d021491bc7-60685e949e5mr1781292eaf.4.1745945746567; Tue, 29 Apr 2025
+ 09:55:46 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250429041052.11681-1-nguyenthaithuanalg@gmail.com>
+In-Reply-To: <20250429041052.11681-1-nguyenthaithuanalg@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 29 Apr 2025 09:55:20 -0700
+X-Gm-Features: ATxdqUGdWWn-CBZSkma5CGN8ssE9dLYk3K08GOiYob9uO-3-_lvXChI9ZEaOwr8
+Message-ID: <CAMKF1srzu=C_Mi5YUacP3p70mb3wPbtcfcTA_Qeq97eFeOyQMA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] libsimplelog: Add a versatile C/C++ logger.
+To: nguyenthaithuanalg@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 29 Apr 2025 12:24:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117241
+ <openembedded-devel@lists.openembedded.org>; Tue, 29 Apr 2025 16:55:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117242
 
-This file had only one user, the keybinder recipe, which has been updated
-with the correct license value.
+On Tue, Apr 29, 2025 at 4:16=E2=80=AFAM Thu=E1=BA=ADn Nguy=E1=BB=85n-Th=C3=
+=A1i via
+lists.openembedded.org
+<nguyenthaithuanalg=3Dgmail.com@lists.openembedded.org> wrote:
+>
+>     - Simple, stable, powerful.
+>     - Apply for embedded devices to PC, server.
+>
+> Signed-off-by: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
+> ---
+>  .../libsimplelog/libsimplelog_git.bb          | 20 +++++++++++++++++++
+>  1 file changed, 20 insertions(+)
+>  create mode 100644 meta-oe/recipes-libsimplelog/libsimplelog/libsimplelo=
+g_git.bb
+>
+> diff --git a/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.b=
+b b/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb
 
-This file actually contained MIT license text, with keybinder copyright
-information.
+move it into recipes-support please.
 
-Beside this, oe-core has the actual X11 license also available with the
-same name, which shouldn't be shadowed by this.
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- meta-oe/licenses/X11 | 23 -----------------------
- 1 file changed, 23 deletions(-)
- delete mode 100644 meta-oe/licenses/X11
-
-diff --git a/meta-oe/licenses/X11 b/meta-oe/licenses/X11
-deleted file mode 100644
-index da3e406240..0000000000
---- a/meta-oe/licenses/X11
-+++ /dev/null
-@@ -1,23 +0,0 @@
--/*
-- * Copyright (C) 2008 Alex Graveley
-- * Copyright (C) 2010 Ulrik Sverdrup <ulrik.sverdrup@gmail.com>
-- *
-- * Permission is hereby granted, free of charge, to any person obtaining
-- * a copy of this software and associated documentation files (the
-- * "Software"), to deal in the Software without restriction, including
-- * without limitation the rights to use, copy, modify, merge, publish,
-- * distribute, sublicense, and/or sell copies of the Software, and to
-- * permit persons to whom the Software is furnished to do so, subject to
-- * the following conditions:
-- *
-- * The above copyright notice and this permission notice shall be
-- * included in all copies or substantial portions of the Software.
-- *
-- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-- * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-- * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-- * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-- * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-- */
+> new file mode 100644
+> index 000000000..8acf50fe8
+> --- /dev/null
+> +++ b/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb
+> @@ -0,0 +1,20 @@
+> +
+> +SUMMARY =3D "simplelog-topc - Simple, STABLE, powerful of logging librar=
+y in ANSI C/C++. Ready for billion records."
+> +DESCRIPTION =3D "Async and Fast C/C++ multi-thread logger with topics. N=
+o external dependencies."
+> +HOMEPAGE =3D "https://github.com/thuanalg/simplelog-topic"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D22cdd382a6275cb4c2e75c517=
+952ac7c"
+> +
+> +SRC_URI =3D "git://github.com/thuanalg/simplelog-topic.git;branch=3Dmain=
+;protocol=3Dhttps"
+> +
+> +PV =3D "1.0.6+git"
+> +SRCREV =3D "7676b9cf871bedd8648d2cf68ebf43dc2c79b94d"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +inherit cmake
+> +
+> +# Specify any options you want to pass to cmake using EXTRA_OECMAKE:
+> +EXTRA_OECMAKE +=3D "-DUNIX_LINUX=3D1"
+> +
+> +
+> --
+> 2.47.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#117238): https://lists.openembedded.org/g/openembedde=
+d-devel/message/117238
+> Mute This Topic: https://lists.openembedded.org/mt/112517962/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
