@@ -1,232 +1,87 @@
-Return-Path: <philip@balister.org>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B69D7C369DC
-	for <webhook@archiver.kernel.org>; Tue, 29 Apr 2025 11:16:36 +0000 (UTC)
-Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com [209.85.208.174])
- by mx.groups.io with SMTP id smtpd.web11.16303.1745922206168327874
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A495C369DC
+	for <webhook@archiver.kernel.org>; Tue, 29 Apr 2025 12:24:07 +0000 (UTC)
+Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
+ by mx.groups.io with SMTP id smtpd.web11.18405.1745929440396296913
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Apr 2025 03:23:26 -0700
+ Tue, 29 Apr 2025 05:24:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LA1gJ4kh;
- spf=pass (domain: gmail.com, ip: 209.85.208.174, mailfrom: nguyenthaithuanalg@gmail.com)
-Received: by mail-lj1-f174.google.com with SMTP id 38308e7fff4ca-31062172698so61069861fa.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Apr 2025 03:23:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=AoIxhSOc;
+ spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-5e5bc066283so10564250a12.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Apr 2025 05:24:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745922204; x=1746527004; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=1Gl4vNLo2vBGdJBg8fA6zPUXvWnc0fuEwDR2cM/5AVs=;
-        b=LA1gJ4khxDI58oKcYhnkRz3n9oRDmdk711g2t85bAVDp+6I+x1c+M15zC+d1YKrwQv
-         yTMcsq4XGdgCyYL77wfFY57SPekyLdNKpFZ8IN0W0MRIjMF2B2JmMZj3gEqlbiisXn72
-         0krE109anONlPdzP3xExoBqVSJEqapZ00TjESE/3qy4Ogz6wShizh2oryyXp+z7I76KC
-         pr9STbQpGDn/609LgQGz7lfq/IYVjVLQUbDcAbCBfu+K23lZhCgxeuJgmXLzRaa38bYM
-         URu1lRKRTer+On35Sl/piH/6O/1lr+fl3QL2LTO5Wcl0zUTxSZh511HEwSQFNjIsAsuV
-         z5ew==
+        d=gmail.com; s=20230601; t=1745929439; x=1746534239; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=2onrVflwTecSrmMIpYxQqYnYYrK7wXon17PWq9uIk2U=;
+        b=AoIxhSOcjrgRh8dy0Z/5mmeUDqsKf52WBf9U2tZUy1+rTmkEKWpuTnkW6Dh1orDbi5
+         Cm7i9HM6mHzrMnfZZDZEHn9N82G4P1g+h/p/jZR+dm2dedBmG9GStXDNKXeeBkEPJXbz
+         xPzhoS89m+7773vqcG6yiwZ7K/kvdfT7rDQrBMJZbEic8iewBc6k/i5NTfrB08dHqFkp
+         RxrcUMBATTiBdTq+mS60RqnuRZ56ZwQcFp6rCB3b+3Mz1wuvtbJI3VfpUqHby8u+h6UV
+         8+tEZU8aA6ayywlZ0daLm/MXBFKY0rLqNrgPo+XA8oygAejqAk81BMYzQgWz0YYe2tlK
+         OPog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745922204; x=1746527004;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=1Gl4vNLo2vBGdJBg8fA6zPUXvWnc0fuEwDR2cM/5AVs=;
-        b=JDF9SOB9bqYjP9QkBiyjRw4BnhKMhzD9TnYP4MUDrU8wShStodiEeELwDwF6d8Mv4A
-         xkHDtPHHs6YjFkUBq1PhF451ztjVJY7aTRsuEC3SH8bvivea6ah73QOPt21nIhNewNrf
-         L+qRVFufXvibbSdLpw37pEn8qfqn+VNEHVmrIXNZPR3gSSVchbquj4hbn2khzIBdexPZ
-         5r3ULBR/ooDCFXqgSiSYjI3xKeIrFt8JLNem2Md7SXTojT5OmAUYsNLdircyYS3KFYQ8
-         +l+nCsi+8Jpo9DfkDz0LNrQRHaGVkpyeFfT+lsW7krizuMIvxvcXZPCPB+DL1sol2Gy6
-         GMnQ==
-X-Forwarded-Encrypted: i=1; AJvYcCViXH+95pFFsIvyQGKWftvWacrlveBQXS4SoF7lmah3S5wWGxmn1Jg1kx7niCWDNm+Y/Mi1oxpHBqtBjZMcbTAebJU=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzKVoudEZbVcrKNzrqNoLM6YQRMNsy/oftl2sDWMfjBIMgH3gAJ
-	4C0TlmFs3HTqUegnQewCZ79IGwizZvtVJkimX4nteWzsX3EUgT3XdQ/Yvc8c9memtkWQduv9OUN
-	M/xd6K+xZnVw1O3njh309tfAH4yk=
-X-Gm-Gg: ASbGncuGgvbe+LH2e/IGe6ykZm8pxW8SNXF2tOcucbfiDwuR6pIozyprLR3M+mgabJ0
-	Bg4O81M3+0KlIhHMoL6xqQAtI3Vw1LZDGUYHsmKsFZikJF+eKcC9mtWe9Sm0MuyDrjgwaMm/9av
-	I6rzdSTSE/8inTJGTr2xTF0NNK6p500xjeep8RdyX9fwFrgjnFK84TyLYq
-X-Google-Smtp-Source: AGHT+IFiNc3EMMy89fgR5b62HMmR5WiiILB6yxs/vOjnhPuq3Pr8Euhy+ljBqb8Cx/VbEIPmDc5V4uBD2rSlayEVVcg=
-X-Received: by 2002:a2e:be1b:0:b0:30b:badf:75f0 with SMTP id
- 38308e7fff4ca-31d341a5190mr8699541fa.2.1745922203789; Tue, 29 Apr 2025
- 03:23:23 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1745929439; x=1746534239;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=2onrVflwTecSrmMIpYxQqYnYYrK7wXon17PWq9uIk2U=;
+        b=CH34lhvokhbroaMrgh92DIYnf8zUxqZN0UBcvgnw33A6QidZGXw3zVcgxvyVQB0yl7
+         KGtxMxiawX6ZN5mAmPZHcZncju9vC33mYn+3qkTr/4vMPaPETSOq9DRDEDEFmumxLCOQ
+         GV3er82ZEFRFz+Ran3Ucd+DxEkXycxFRlZdoUZ2AGV0NwiiOIBIxsAURiw2XW/qBW349
+         CY/9zCPd9Pg8YCd2IDFXfQnqdRNLZBCgHHoqrcnvs+3hrOJRLVPUDj7XLetPS4bswYBg
+         Nh2KdsdGfl9iOKL6BeKjcPMvL62XuAO6ZiIUPmm+NdsfASch2gUxO3YoljbKVgWBOYHW
+         KlLA==
+X-Gm-Message-State: AOJu0YymkDzFG5tGSJUAaynLqRoA7aEHkq4MkUHyXUcRQCr1ooMJqzuJ
+	QPo2zAvzvVW7vVtXPP9TIbz450H31sonvaWchXa7XbZ6zfdj4rN4/ZyDINnT
+X-Gm-Gg: ASbGncsisfMTgL6Izq55KC7/LbFg+wl6tz7H4/n3evAjMef415rHZ31Fc7yDK51DTXe
+	Eyeddxkn7wJpNqDe7Ge9ytVr+97uKI5l/69AsirqPzs434H948z6mOYmWmDCmIRs0+I7vX7RsV/
+	xE0PpGRXhV6Yx7NqKszVWbk5bTjCyPVQq4xaCN231fxykPZ1FZiPzhJms2UctF9PVrWm6fNIpTE
+	K1PnjSCACvSWoyH7PF2t4vQPVTgmwwM18SKWaVz0KTqQpJ4+mbuPSycYXtiURxg72PYdl+Tsf1M
+	w8kNQwyZrXhB8npsI1TZCgKN6W/xvpUA9hGHKhhIZa7uGg3YdDLhghiO
+X-Google-Smtp-Source: AGHT+IGHkwZao1ziVhkr519NrnQkAc5fyct906cG26Wg/xF/+dNuYpn7fOUwoHKnptnVffGmeTHPOw==
+X-Received: by 2002:a05:6402:518c:b0:5f4:d46b:c021 with SMTP id 4fb4d7f45d1cf-5f83889e2b2mr3176877a12.34.1745929438440;
+        Tue, 29 Apr 2025 05:23:58 -0700 (PDT)
+Received: from localhost.localdomain ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5f72ce7ba0csm6767873a12.6.2025.04.29.05.23.56
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 29 Apr 2025 05:23:57 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-gnome][PATCH 1/2] keybinder: set correct license
+Date: Tue, 29 Apr 2025 14:23:55 +0200
+Message-ID: <20250429122356.577431-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-References: <20250428173922.43331-1-nguyenthaithuanalg@gmail.com>
- <CAMKF1soLcrA7eGKfQ4JHBc+hvBEd5XE=7M+5x3OqhnEMB7FxAA@mail.gmail.com> <CA+chaQfkmMKBwwTcUH+xSR7iZ=iJmA_OibELmV6mK35DDYCQzg@mail.gmail.com>
-In-Reply-To: <CA+chaQfkmMKBwwTcUH+xSR7iZ=iJmA_OibELmV6mK35DDYCQzg@mail.gmail.com>
-From: =?UTF-8?B?VGh14bqtbiBOZ3V54buFbi1UaMOhaQ==?= <nguyenthaithuanalg@gmail.com>
-Date: Tue, 29 Apr 2025 17:23:12 +0700
-X-Gm-Features: ATxdqUHkfXxWfLFJgFtNqAPHB5q7gevsTA_SGTHbzzLnJnLVbF4Wz9U-0BHCScs
-Message-ID: <CANBtAgdxLSM6NUvPKkNMoV03B3UG6FhXaBQi0dydBZWGxpwFeg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] libsimplelog: Clean up code
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: raj.khem@gmail.com, openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000c3302e0633e83036"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 29 Apr 2025 11:16:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117239
+ <openembedded-devel@lists.openembedded.org>; Tue, 29 Apr 2025 12:24:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117240
 
---000000000000c3302e0633e83036
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+This package uses MIT license, which is very similar to X11, except that
+X11 license has an advertisement clause, which is missing from the MIT.
 
-Hi Martin,
-Thank you for the hint. I noted.
-Best regards,
-Thuan
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ meta-gnome/recipes-support/keybinder/keybinder_3.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Tue, Apr 29, 2025 at 4:01=E2=80=AFPM Martin Jansa <martin.jansa@gmail.co=
-m> wrote:
-
-> It's correctly updated in
-> https://lists.openembedded.org/g/openembedded-devel/message/117210
->
-> but maybe next time move it to one of existing recipes-* directories
-> instead of recipes-libsimplelog which is used only for this.
->
-> On Mon, Apr 28, 2025 at 11:16=E2=80=AFPM Khem Raj via lists.openembedded.=
-org
-> <raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
-> >
-> > Please rebase and squash the code on master branch or master-next branc=
-h
-> >
-> > On Mon, Apr 28, 2025 at 11:06=E2=80=AFAM Thu=E1=BA=ADn Nguy=E1=BB=85n-T=
-h=C3=A1i via
-> > lists.openembedded.org
-> > <nguyenthaithuanalg=3Dgmail.com@lists.openembedded.org> wrote:
-> > >
-> > > 1. Add "simplelog-topic.md" designation.
-> > >
-> > > 2. Fix warning in building.
-> > >
-> > > 3. "-Werror=3Dformat".
-> > >
-> > > Signed-off-by: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
-> > > ---
-> > >  meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb | 4
-> ++--
-> > >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > >
-> > > diff --git a/meta-oe/recipes-libsimplelog/libsimplelog/
-> libsimplelog_git.bb b/meta-oe/recipes-libsimplelog/libsimplelog/
-> libsimplelog_git.bb
-> > > index 764425dbc..8acf50fe8 100644
-> > > --- a/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb
-> > > +++ b/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb
-> > > @@ -7,8 +7,8 @@ LIC_FILES_CHKSUM =3D
-> "file://LICENSE.txt;md5=3D22cdd382a6275cb4c2e75c517952ac7c"
-> > >
-> > >  SRC_URI =3D "git://
-> github.com/thuanalg/simplelog-topic.git;branch=3Dmain;protocol=3Dhttps"
-> > >
-> > > -PV =3D "1.0.5+git"
-> > > -SRCREV =3D "fa8c68f8dfcf72adb346f1f4d6dfad02829052b5"
-> > > +PV =3D "1.0.6+git"
-> > > +SRCREV =3D "7676b9cf871bedd8648d2cf68ebf43dc2c79b94d"
-> > >
-> > >  S =3D "${WORKDIR}/git"
-> > >
-> > > --
-> > > 2.47.1
-> > >
-> > >
-> > >
-> > >
-> >
-> >=20
-> >
->
-
---000000000000c3302e0633e83036
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hi Martin,</div><div>Thank you for the hint. I noted.=
-</div><div>Best regards,</div><div>Thuan<br></div></div><br><div class=3D"g=
-mail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On =
-Tue, Apr 29, 2025 at 4:01=E2=80=AFPM Martin Jansa &lt;<a href=3D"mailto:mar=
-tin.jansa@gmail.com">martin.jansa@gmail.com</a>&gt; wrote:<br></div><blockq=
-uote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1p=
-x solid rgb(204,204,204);padding-left:1ex">It&#39;s correctly updated in<br=
->
-<a href=3D"https://lists.openembedded.org/g/openembedded-devel/message/1172=
-10" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/g/o=
-penembedded-devel/message/117210</a><br>
-<br>
-but maybe next time move it to one of existing recipes-* directories<br>
-instead of recipes-libsimplelog which is used only for this.<br>
-<br>
-On Mon, Apr 28, 2025 at 11:16=E2=80=AFPM Khem Raj via <a href=3D"http://lis=
-ts.openembedded.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedde=
-d.org</a><br>
-&lt;raj.khem=3D<a href=3D"mailto:gmail.com@lists.openembedded.org" target=
-=3D"_blank">gmail.com@lists.openembedded.org</a>&gt; wrote:<br>
-&gt;<br>
-&gt; Please rebase and squash the code on master branch or master-next bran=
-ch<br>
-&gt;<br>
-&gt; On Mon, Apr 28, 2025 at 11:06=E2=80=AFAM Thu=E1=BA=ADn Nguy=E1=BB=85n-=
-Th=C3=A1i via<br>
-&gt; <a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" target=3D=
-"_blank">lists.openembedded.org</a><br>
-&gt; &lt;nguyenthaithuanalg=3D<a href=3D"mailto:gmail.com@lists.openembedde=
-d.org" target=3D"_blank">gmail.com@lists.openembedded.org</a>&gt; wrote:<br=
->
-&gt; &gt;<br>
-&gt; &gt; 1. Add &quot;simplelog-topic.md&quot; designation.<br>
-&gt; &gt;<br>
-&gt; &gt; 2. Fix warning in building.<br>
-&gt; &gt;<br>
-&gt; &gt; 3. &quot;-Werror=3Dformat&quot;.<br>
-&gt; &gt;<br>
-&gt; &gt; Signed-off-by: Thuan Nguyen Thai &lt;<a href=3D"mailto:nguyenthai=
-thuanalg@gmail.com" target=3D"_blank">nguyenthaithuanalg@gmail.com</a>&gt;<=
-br>
-&gt; &gt; ---<br>
-&gt; &gt;=C2=A0 meta-oe/recipes-libsimplelog/libsimplelog/<a href=3D"http:/=
-/libsimplelog_git.bb" rel=3D"noreferrer" target=3D"_blank">libsimplelog_git=
-.bb</a> | 4 ++--<br>
-&gt; &gt;=C2=A0 1 file changed, 2 insertions(+), 2 deletions(-)<br>
-&gt; &gt;<br>
-&gt; &gt; diff --git a/meta-oe/recipes-libsimplelog/libsimplelog/<a href=3D=
-"http://libsimplelog_git.bb" rel=3D"noreferrer" target=3D"_blank">libsimple=
-log_git.bb</a> b/meta-oe/recipes-libsimplelog/libsimplelog/<a href=3D"http:=
-//libsimplelog_git.bb" rel=3D"noreferrer" target=3D"_blank">libsimplelog_gi=
-t.bb</a><br>
-&gt; &gt; index 764425dbc..8acf50fe8 100644<br>
-&gt; &gt; --- a/meta-oe/recipes-libsimplelog/libsimplelog/<a href=3D"http:/=
-/libsimplelog_git.bb" rel=3D"noreferrer" target=3D"_blank">libsimplelog_git=
-.bb</a><br>
-&gt; &gt; +++ b/meta-oe/recipes-libsimplelog/libsimplelog/<a href=3D"http:/=
-/libsimplelog_git.bb" rel=3D"noreferrer" target=3D"_blank">libsimplelog_git=
-.bb</a><br>
-&gt; &gt; @@ -7,8 +7,8 @@ LIC_FILES_CHKSUM =3D &quot;file://LICENSE.txt;md5=
-=3D22cdd382a6275cb4c2e75c517952ac7c&quot;<br>
-&gt; &gt;<br>
-&gt; &gt;=C2=A0 SRC_URI =3D &quot;git://<a href=3D"http://github.com/thuana=
-lg/simplelog-topic.git;branch=3Dmain;protocol=3Dhttps" rel=3D"noreferrer" t=
-arget=3D"_blank">github.com/thuanalg/simplelog-topic.git;branch=3Dmain;prot=
-ocol=3Dhttps</a>&quot;<br>
-&gt; &gt;<br>
-&gt; &gt; -PV =3D &quot;1.0.5+git&quot;<br>
-&gt; &gt; -SRCREV =3D &quot;fa8c68f8dfcf72adb346f1f4d6dfad02829052b5&quot;<=
-br>
-&gt; &gt; +PV =3D &quot;1.0.6+git&quot;<br>
-&gt; &gt; +SRCREV =3D &quot;7676b9cf871bedd8648d2cf68ebf43dc2c79b94d&quot;<=
-br>
-&gt; &gt;<br>
-&gt; &gt;=C2=A0 S =3D &quot;${WORKDIR}/git&quot;<br>
-&gt; &gt;<br>
-&gt; &gt; --<br>
-&gt; &gt; 2.47.1<br>
-&gt; &gt;<br>
-&gt; &gt;<br>
-&gt; &gt;<br>
-&gt; &gt;<br>
-&gt;<br>
-&gt; <br>
-&gt;<br>
-</blockquote></div>
-
---000000000000c3302e0633e83036--
+diff --git a/meta-gnome/recipes-support/keybinder/keybinder_3.0.bb b/meta-gnome/recipes-support/keybinder/keybinder_3.0.bb
+index 7960009078..5365db270e 100644
+--- a/meta-gnome/recipes-support/keybinder/keybinder_3.0.bb
++++ b/meta-gnome/recipes-support/keybinder/keybinder_3.0.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "keybinder is a library for registering global key bindings, for gtk-based applications."
+ HOMEPAGE = "https://github.com/engla/keybinder"
+-LICENSE = "X11"
++LICENSE = "MIT"
+ SECTION = "devel/lib"
+ DEPENDS = "gtk+3 gobject-introspection-native \
+            gtk+ \
 
