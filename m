@@ -1,113 +1,106 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 957D6C369DC
-	for <webhook@archiver.kernel.org>; Tue, 29 Apr 2025 10:52:36 +0000 (UTC)
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
- by mx.groups.io with SMTP id smtpd.web10.16992.1745923955667790862
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7F37C3ABAA
+	for <webhook@archiver.kernel.org>; Tue, 29 Apr 2025 11:16:36 +0000 (UTC)
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.web11.7497.1745899866715645816
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Apr 2025 03:52:36 -0700
+ Mon, 28 Apr 2025 21:11:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=UAqYE2Mt;
- spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-39c1efc457bso4180284f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Apr 2025 03:52:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=N5mztisr;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: nguyenthaithuanalg@gmail.com)
+Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2264aefc45dso83734635ad.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Apr 2025 21:11:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745923954; x=1746528754; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Fl0339R3k3UTWvczlqjBb0kNdb8xe99r64YMH4M61iM=;
-        b=UAqYE2MtC02fyb9BxwUDY7RxUopA8IPOmBo5HVM+lPwuhiO5LkGZt5unsrpg0PQaB1
-         uh5c9A8X5Dr/3dTnHfHNjQr1L/ncMABoTsJukuIasarMBGpH7xLnKyEKSduIkNHdHUs4
-         Proimfd7mNNBrNX2o6gQgQm5LFBs69ds/ObslUcjMxOaJgQbwCEFPcPEpCLW1MKgChBD
-         HWoXv7zvTr2Ns0glOzEGiOyaegy7J14lSRulF4h7YGYHBLzVYpx3LicJJ+3SoeCi0xKE
-         xaKGnQxOllx7WorB/Sy00n0dtZqHl7/6QmDQYcAdayhP2XQUJ4AHHQU8rtEuJxhZaYqp
-         pS3w==
+        d=gmail.com; s=20230601; t=1745899865; x=1746504665; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=A8KN1wFBSJdcIx+UPpeGte/QLvfS2qdptJX5Bekv7ng=;
+        b=N5mztisrIq+kB8eJR6GoShMNLUY/tIj7GQ37CCSqf1cTE+l+kvnVAh2P2RfsvE7578
+         fjHwQplQn42F0ZPSBSKrSdWt7KX4/Xn+P8bKFxLnnYIsXyVM02OwE2NBRbTW1vqN4yBM
+         NxBDvzJ2cRbdDPMj9umvSZn5gjoqdsyckeH82PX/fsk+NQsZ4QVShcr6F3yHJbn4UpO+
+         PEgpgw17qfiJhzJqWYgXt4cEVNAMkH3gc0MPcEjA2AWtjzVO/BXtlMdtGVPtB5GK7rAZ
+         Tc4ocSsOSDH52QzqtSbxKd4w5vQfVA/AM//Y4w54tJ+OFpfPisXwENplaFbksyCHwNoZ
+         DhlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745923954; x=1746528754;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Fl0339R3k3UTWvczlqjBb0kNdb8xe99r64YMH4M61iM=;
-        b=P/QdKx3xgKXwtkNGQi4+4zuN8squlUfv60ghSIy0Xw7aOEXB8V2LJsCDFjetdc4tbT
-         Lfh9fJCq2uNcMsIBAKj/lBj4izXyYd37JKev9mmcDLSQ8ttqpHCBRq782MgQyO/tDEso
-         +VQHT1KT3bpw03u/zbWa/BJjTRoA2NsXsfI0hEuh25uhFVvauvWxY424J8973LeRABKH
-         k9MWcw+MXeDy5FawyrTPkTZm7QJ80YKTZYDjQ70HXhIjBdbTbQrJGniA8iYvwH0Gw9vE
-         2Xpurp+e0ak8F5vfVDHgbwd2pdbsd0WoEpCStDCbrLfE8g2W5ljneqcd/iISQRBXltvJ
-         PReA==
-X-Gm-Message-State: AOJu0YzFrxYaO0kxd+cECZcuV05Szfw66fStvBqhrigbXhZxiCeDXH4s
-	qJtBxggei1R/o+LNq2mCe25diNtQeFnDzaYQEv66G5dEFT9Q6spaNMS7MkBv
-X-Gm-Gg: ASbGncv1nXfy0V2OG6YS5jMdSd/RdtxQPHHggXpPSlHxr7fwa9UqK843GqDHTbqycEw
-	zm4R2Km+3PpbcVsLrO+vgfpoAlUUDyHTZOaxHRjrFZ/cauUknbnRv84EIdrhuTW6FXeB7vzNiGL
-	SHONYxkXx6GtUlRTc1lsGYwtySwc9s4kxF/psSg7paEDv5bTXPs/+mEIolaeq6EeEWJ17lhOfFh
-	JC8faaPnghbIUJud5KEO4v+1bHLzwynlHYHNhi6kOJBHGxvxmlc8k5eVM6PoqCq4tgOqk9cRt3T
-	0NBoSATvwppQsQHdZ20aXY2qCLREqcEBdQN8P+oJGOo=
-X-Google-Smtp-Source: AGHT+IEubjhnJmma4F+TcUzp4pR1Qjk2ohe9+MSp+4EtiyTM42OZjxIkRJnDiu3eG1g/h9T1JcBxQg==
-X-Received: by 2002:a05:6000:2905:b0:3a0:88f7:b49d with SMTP id ffacd0b85a97d-3a088f7b4ddmr2612309f8f.57.1745923954020;
-        Tue, 29 Apr 2025 03:52:34 -0700 (PDT)
-Received: from localhost ([109.238.218.228])
-        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-3a073c8c7fesm13607584f8f.6.2025.04.29.03.52.33
+        d=1e100.net; s=20230601; t=1745899865; x=1746504665;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=A8KN1wFBSJdcIx+UPpeGte/QLvfS2qdptJX5Bekv7ng=;
+        b=kUJZtQq+zhLFFd60/h6MiJWLRS+EId0A8Ei+tkkjdSZfQSOIG+XP9HWVfaMlId2DgY
+         9oI1/yhNKNAK4d0NL0DxPaXznZsoc4qAIF1cWm0n3GH7LuTxNv4GIE2GWm4NgPANfdf4
+         Zyff4wcn2QmF/wzG4eGG89gMwN4pJD+yR29dy6bp9j9Huoe46oxZB1S5AzGdTg16RpUa
+         xnAcfF0QgWjeeBZGdAZkprRrrC+0PbBOc3rFoLe1evBxqWg2Bi8FWslkhuw0QgtdRvSg
+         i+z8sX5Dp3lDY0L8pyr7yrI9y4ZjxNQ9u4uJE9C3Je4lfwVS1reu0RQM/NeTX1ZPv3YE
+         2ZEA==
+X-Gm-Message-State: AOJu0YyQwVFdXk9SW5aXxf/zjOvNMsipXOD/Czt4Vp6Tw7blAZkisGcM
+	mJ8fxfnqsSvTyWPMk/lkRWnTcp4nDK/OnPoKnK8ZZMVFqAInfwpdtkDnzw==
+X-Gm-Gg: ASbGncuKtJ8hrmsOykQ39z9rn/3ojZTFvlfHvtHcKtp4qwxwFZ3uiilBNGszTwItJiE
+	Or7V2Z2ilVdyhcKK7aTXASB8xuGyFQl5FjvfH/pq/P3EzcASO/8XiK5eD/G+qf0Z0xsdmvPfnIQ
+	sVFiZjOVx3IOQ7hIB7roCCde4oB/+yADMNMJ7ytWaAYxx6/GJZ9kb/IWVj3nwVjcuyBA94wIi37
+	TaRah3IlMuRhdhaR8Xe6qogi/8ytBUDauV3Kz/2QqvBfALM8a9r4PMOLXZ23FfO+m+vPU3hzmJh
+	O8YZD0czUw8aRFazajAblbifoq3jw0xO8qoL4gu2wl0kpV6s8h6S/TJBVeioj5NkA1i9Wg==
+X-Google-Smtp-Source: AGHT+IFrcjTnDkBmAV/hbfEeFImk00vBxWCrHq+CudVu/kppE4f3jXGj9hwenA93SDg7bXirfVxSmg==
+X-Received: by 2002:a17:902:d58c:b0:224:376:7a21 with SMTP id d9443c01a7336-22de6058dd2mr30784215ad.42.1745899865104;
+        Mon, 28 Apr 2025 21:11:05 -0700 (PDT)
+Received: from localhost.localdomain ([2405:4802:90fa:f3a0:76d4:35ff:fe85:dd7a])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22db50ea7b4sm92230725ad.152.2025.04.28.21.11.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Apr 2025 03:52:33 -0700 (PDT)
-From: martin.jansa@gmail.com
+        Mon, 28 Apr 2025 21:11:04 -0700 (PDT)
+From: =?UTF-8?B?VGh14bqtbiBOZ3V54buFbi1UaMOhaQ==?= <nguyenthaithuanalg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/2] libiodbc: use gnu17 and ignore incompatible-pointer-types to allow building with gcc-15
-Date: Tue, 29 Apr 2025 12:52:24 +0200
-Message-ID: <20250429105224.1462276-2-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250429105224.1462276-1-martin.jansa@gmail.com>
-References: <20250429105224.1462276-1-martin.jansa@gmail.com>
+Cc: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
+Subject: [meta-oe][PATCH] libsimplelog: Add a versatile C/C++ logger.
+Date: Tue, 29 Apr 2025 11:10:52 +0700
+Message-ID: <20250429041052.11681-1-nguyenthaithuanalg@gmail.com>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 29 Apr 2025 10:52:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117237
+ <openembedded-devel@lists.openembedded.org>; Tue, 29 Apr 2025 11:16:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117238
 
-From: Martin Jansa <martin.jansa@gmail.com>
+    - Simple, stable, powerful.
+    - Apply for embedded devices to PC, server.
 
-A fix was sent in:
-https://lists.openembedded.org/g/openembedded-devel/message/116537
-but it causes issues with clang as well as older gcc as reported on
-ML and also in upstream PR:
-https://github.com/openlink/iODBC/pull/111
-
-Use gnu17 until this is properly resolved to avoid:
-http://errors.yoctoproject.org/Errors/Details/852861/
-
-In file included from ../../libiodbc-3.52.16/iodbc/execute.c:94:
-../../libiodbc-3.52.16/iodbc/execute.c: In function '_ReBindParam':
-../../libiodbc-3.52.16/iodbc/execute.c:643:49: error: too many arguments to function 'hproc3'; expected 0, have 8
-  643 |       CALL_DRIVER (pstmt->hdbc, pstmt, retcode, hproc3,
-      |                                                 ^~~~~~
-
-http://errors.yoctoproject.org/Errors/Details/853276/
-../../libiodbc-3.52.16/iodbcinst/unicode.c: In function 'dm_AtoUW':
-../../libiodbc-3.52.16/iodbcinst/unicode.c:1565:16: error: initialization of 'ucs4_t *' {aka 'unsigned int *'} from incompatible pointer type 'wchar_t *' {aka 'long int *'} [-Wincompatible-pointer-types]
- 1565 |   ucs4_t *us = dest;
-      |                ^~~~
-
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+Signed-off-by: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
 ---
- meta-oe/recipes-support/libiodbc/libiodbc_3.52.16.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+ .../libsimplelog/libsimplelog_git.bb          | 20 +++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb
 
-diff --git a/meta-oe/recipes-support/libiodbc/libiodbc_3.52.16.bb b/meta-oe/recipes-support/libiodbc/libiodbc_3.52.16.bb
-index 644c3ba07b..0478ef3403 100644
---- a/meta-oe/recipes-support/libiodbc/libiodbc_3.52.16.bb
-+++ b/meta-oe/recipes-support/libiodbc/libiodbc_3.52.16.bb
-@@ -31,3 +31,9 @@ EXTRA_OECONF += " --prefix=/usr/local \
- 
- inherit multilib_script
- MULTILIB_SCRIPTS = "${PN}:${bindir}/iodbc-config"
+diff --git a/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb b/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb
+new file mode 100644
+index 000000000..8acf50fe8
+--- /dev/null
++++ b/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_git.bb
+@@ -0,0 +1,20 @@
 +
-+# avoid http://errors.yoctoproject.org/Errors/Details/852861/
-+CFLAGS += "-std=gnu17"
-+# http://errors.yoctoproject.org/Errors/Details/853276/
-+# libiodbc-3.52.16/iodbcinst/unicode.c:1565:16: error: initialization of 'ucs4_t *' {aka 'unsigned int *'} from incompatible pointer type 'wchar_t *' {aka 'long int *'} [-Wincompatible-pointer-types]
-+CFLAGS += "-Wno-error=incompatible-pointer-types"
++SUMMARY = "simplelog-topc - Simple, STABLE, powerful of logging library in ANSI C/C++. Ready for billion records."
++DESCRIPTION = "Async and Fast C/C++ multi-thread logger with topics. No external dependencies."
++HOMEPAGE = "https://github.com/thuanalg/simplelog-topic"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=22cdd382a6275cb4c2e75c517952ac7c"
++
++SRC_URI = "git://github.com/thuanalg/simplelog-topic.git;branch=main;protocol=https"
++
++PV = "1.0.6+git"
++SRCREV = "7676b9cf871bedd8648d2cf68ebf43dc2c79b94d"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
++
++# Specify any options you want to pass to cmake using EXTRA_OECMAKE:
++EXTRA_OECMAKE += "-DUNIX_LINUX=1"
++
++
+-- 
+2.47.1
+
 
