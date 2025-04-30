@@ -1,132 +1,111 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <hongxu.jia@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C67D1C369DC
-	for <webhook@archiver.kernel.org>; Wed, 30 Apr 2025 01:54:26 +0000 (UTC)
-Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
- by mx.groups.io with SMTP id smtpd.web10.7312.1745978057232764394
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A432C369D9
+	for <webhook@archiver.kernel.org>; Wed, 30 Apr 2025 08:37:49 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.12261.1746002263512840346
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Apr 2025 18:54:17 -0700
+ Wed, 30 Apr 2025 01:37:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=IYw/fMsa;
- spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f175.google.com with SMTP id 5614622812f47-3fe83c8cbdbso2106198b6e.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 29 Apr 2025 18:54:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1745978056; x=1746582856; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=O6z4FFjrMliHZbBaU8zhSXy22l0f5CTVrv9IfzMfQqE=;
-        b=IYw/fMsatIX+gSBSogS/6hG89JV/FCJdK1MZz/9l68cgmLmSnlKs6WKE9b5jVFhIsd
-         iDPhecxpYCk9q34uJMfvlSMMo/I8j/CMGgNafteFA3dZMjD3yn5784ILNNVPUmP4+Xk1
-         UIz5jPvTjyT3/hq5BqxsT6d1D4bopOYfpv//9IgkoQZyy24UVySM+c7VHztwGnyAe2Zv
-         LLI5OTRh3+wQ8XYSeZMW6HQ/AVEty1uugaT9JYIVJSbWAQmCXveKmXC/J9kcmJ8puoGg
-         oahlce9oAoR3+SxAf+z13Un5J4T3lBNLEW9v1dGnJT+3M2oINHJk9D7szGKvWzQHkYvA
-         uvBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745978056; x=1746582856;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=O6z4FFjrMliHZbBaU8zhSXy22l0f5CTVrv9IfzMfQqE=;
-        b=cF4WA6ZC1fnq0vGUJTe+WvDRHk0pHt6zAcBJPmrBmZpXgfGpCqOv8TN+wPJHMc4bUt
-         hSW2PkOlsG6RFEgIYG4tclDds3iUG5Y/tmqEE5KhHdULDfn6Or9J9LbTPd/Lvn1vnyrx
-         e0kvizLFx8G/pkt3/vA8uta7Xqzw/G6IebvQUWs4aLLDvJqS0VtUn5/MGAEgDfz2uHRd
-         bhFoaCvlJjzpdiSCKOjnnAhIYDA3z0t7u7clqSs71Y1KVv09wErL8ouIDunIKynw4NH9
-         0fqI3vxHQTOh0t02n/CgJNTyxSIsClRlm8N5Gk8x1vE5A8PqtABFoWG6mSTIX8T9UPZA
-         VyYw==
-X-Gm-Message-State: AOJu0Yw0UCWR+ruX7fctnzVnzg2WF+GcZWalpQSeoFgSvFQWR25UwZ0R
-	pqoLKDMrtEfG0PCaDFVtI9752OBDsjFDzMH726aghfwd0MATRXfbFQnrG6oBGjw0OrPPyTvXMD/
-	tWFVB+QDooDB8/PM0RVsnZdp5eMg=
-X-Gm-Gg: ASbGnctPh8CGs0Cm7jv5I4KfOL6RnV0P6uI4vBed2UdxJSzqqjXnGryRicGapbLBGkL
-	MyRFSwE/ga3cfej8Lwdn/VgtlvIsfzJ4SP39iWwQRiegQHj1In9TbeEk7IqVpGpeF7fm5uVw10N
-	StAxi09wVhljluZVaU2GJ4
-X-Google-Smtp-Source: AGHT+IG0OxGBNaYP8DjmHvWI1qsVy+8/kBwmBVPODAG6ntsnlMyBqKRYZ4C+FMyyag/uK/TTfs9AGOzwsrSpnFbMObQ=
-X-Received: by 2002:a05:6808:338b:b0:403:290c:74a with SMTP id
- 5614622812f47-403290c099bmr75096b6e.20.1745978056398; Tue, 29 Apr 2025
- 18:54:16 -0700 (PDT)
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=72153bdf48=hongxu.jia@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53U4oWxH032126
+	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Apr 2025 01:37:43 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 46b6ugghhk-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Apr 2025 01:37:43 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Wed, 30 Apr 2025 01:37:42 -0700
+Received: from pek-lpg-core5.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Wed, 30 Apr 2025 01:37:41 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] thin-provisioning-tools: use to llvm-native instead of clang-native
+Date: Wed, 30 Apr 2025 16:37:41 +0800
+Message-ID: <20250430083741.3950667-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250429172122.50669-1-nguyenthaithuanalg@gmail.com>
-In-Reply-To: <20250429172122.50669-1-nguyenthaithuanalg@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 29 Apr 2025 18:53:49 -0700
-X-Gm-Features: ATxdqUFp5j__pDBNve4Gby720rmGC0DWJUlndkobb2REaNM_i9gPeZvdgcCc3Q4
-Message-ID: <CAMKF1srzC2aNuBgLVVfR1nOHC=mphjfj30_a55NNNp0bMQvXqw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] libsimplelog: Add a versatile C/C++ logger.
-To: nguyenthaithuanalg@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNDMwMDA2MCBTYWx0ZWRfXyV03ZW7uBn/V CRXrjD0cDuYxf2+1lgWnTguMvUq5Gll/F+vd/b3wERJu+EelXjCDEIzvSH/kUv9HtK3HlTZskMB dM2xsMUqeglavxYeV3pKxbEbb+7GtyTj/mINK1wmN1I3jCcSC+X9NJyrqKI76kSawNjdZfPHGjH
+ QalmJPXn5a4X+EZeJsEa4A7nuNZVjqyJe/pt9qeoBcD4rcpqHhX0y4NThGA4uqXUmjc4mHmo+uM rI33OX3UmR+eCGHClzfV6fgMBDf+9DldKxJiIEPQnvRcCBwvbBQeb06dag6ajwL6rLXw975cmEH Nok7M1GbdsCu3DvZHf3+RjGaQTS0y0khPZN8ui8MfRqiLaeKSSTLdP/Y/bQxRwLWWlhuqE44vhl
+ VQQV2HBucLptMFkrkL4KwGK5zetvEVlrTM2CUpXn1ufCBLlc04iQzzL+EHTTYWphP6bUg+ZH
+X-Proofpoint-GUID: mTdYSiivqSPv9lgMDtEvVSmrQupogXHi
+X-Authority-Analysis: v=2.4 cv=MKNgmNZl c=1 sm=1 tr=0 ts=6811e157 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=XR8D0OoHHMoA:10 a=t7CeM3EgAAAA:8 a=vrM600SA4Z-HSsl95TsA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: mTdYSiivqSPv9lgMDtEvVSmrQupogXHi
+X-Sensitive_Customer_Information: Yes
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-04-30_02,2025-04-24_02,2025-02-21_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 mlxscore=0
+ spamscore=0 suspectscore=0 clxscore=1015 priorityscore=1501 malwarescore=0
+ mlxlogscore=941 lowpriorityscore=0 bulkscore=0 adultscore=0 phishscore=0
+ classifier=spam authscore=0 authtc=n/a authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.21.0-2504070000
+ definitions=main-2504300060
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 30 Apr 2025 01:54:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117246
+ <openembedded-devel@lists.openembedded.org>; Wed, 30 Apr 2025 08:37:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117247
 
-This recipe is already part of the repository. So you need to do git
-mv to move it to a new location ( recipes-support ) . Commit, test and
-send the patch.
+The llvm-native in oe-core is compatible with the one being built
+by Clang, use llvm-native to instead of clang-native and move
+out of dynamic-layers of clang-layer
 
-On Tue, Apr 29, 2025 at 2:59=E2=80=AFPM Thu=E1=BA=ADn Nguy=E1=BB=85n-Th=C3=
-=A1i via
-lists.openembedded.org
-<nguyenthaithuanalg=3Dgmail.com@lists.openembedded.org> wrote:
->
-> - Simple, stable, powerful.
-> - Apply for embedded devices to PC, server.
->
-> Signed-off-by: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
-> ---
->  .../libsimplelog/libsimplelog_1.0.6.bb        | 20 +++++++++++++++++++
->  1 file changed, 20 insertions(+)
->  create mode 100644 meta-oe/recipes-support/libsimplelog/libsimplelog_1.0=
-.6.bb
->
-> diff --git a/meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.6.bb b=
-/meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.6.bb
-> new file mode 100644
-> index 000000000..dedc07668
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.6.bb
-> @@ -0,0 +1,20 @@
-> +
-> +SUMMARY =3D "simplelog-topc - Simple, STABLE, powerful of logging librar=
-y in ANSI C/C++. Ready for billion records."
-> +DESCRIPTION =3D "Async and Fast C/C++ multi-thread logger with topics. N=
-o external dependencies."
-> +HOMEPAGE =3D "https://github.com/thuanalg/simplelog-topic"
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D22cdd382a6275cb4c2e75c517=
-952ac7c"
-> +
-> +SRC_URI =3D "git://github.com/thuanalg/simplelog-topic.git;branch=3Dmain=
-;protocol=3Dhttps;tag=3Dv${PV}"
-> +
-> +PV =3D "1.0.6+git"
-> +SRCREV =3D "7676b9cf871bedd8648d2cf68ebf43dc2c79b94d"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit cmake
-> +
-> +# Specify any options you want to pass to cmake using EXTRA_OECMAKE:
-> +EXTRA_OECMAKE +=3D "-DUNIX_LINUX=3D1"
-> +
-> +
-> --
-> 2.47.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#117244): https://lists.openembedded.org/g/openembedde=
-d-devel/message/117244
-> Mute This Topic: https://lists.openembedded.org/mt/112517962/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ .../thin-provisioning-tools/thin-provisioning-tools-crates.inc  | 0
+ .../thin-provisioning-tools-git-crates.inc                      | 0
+ ...1-Define-more-ioctl-codes-on-riscv32gc-unknown-linux-g.patch | 0
+ .../0001-Use-portable-atomics-crate.patch                       | 0
+ .../thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb    | 2 +-
+ 5 files changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/{dynamic-layers/clang-layer => }/recipes-support/thin-provisioning-tools/thin-provisioning-tools-crates.inc (100%)
+ rename meta-oe/{dynamic-layers/clang-layer => }/recipes-support/thin-provisioning-tools/thin-provisioning-tools-git-crates.inc (100%)
+ rename meta-oe/{dynamic-layers/clang-layer => }/recipes-support/thin-provisioning-tools/thin-provisioning-tools/0001-Define-more-ioctl-codes-on-riscv32gc-unknown-linux-g.patch (100%)
+ rename meta-oe/{dynamic-layers/clang-layer => }/recipes-support/thin-provisioning-tools/thin-provisioning-tools/0001-Use-portable-atomics-crate.patch (100%)
+ rename meta-oe/{dynamic-layers/clang-layer => }/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb (96%)
+
+diff --git a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools-crates.inc b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools-crates.inc
+similarity index 100%
+rename from meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools-crates.inc
+rename to meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools-crates.inc
+diff --git a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools-git-crates.inc b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools-git-crates.inc
+similarity index 100%
+rename from meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools-git-crates.inc
+rename to meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools-git-crates.inc
+diff --git a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools/0001-Define-more-ioctl-codes-on-riscv32gc-unknown-linux-g.patch b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools/0001-Define-more-ioctl-codes-on-riscv32gc-unknown-linux-g.patch
+similarity index 100%
+rename from meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools/0001-Define-more-ioctl-codes-on-riscv32gc-unknown-linux-g.patch
+rename to meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools/0001-Define-more-ioctl-codes-on-riscv32gc-unknown-linux-g.patch
+diff --git a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools/0001-Use-portable-atomics-crate.patch b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools/0001-Use-portable-atomics-crate.patch
+similarity index 100%
+rename from meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools/0001-Use-portable-atomics-crate.patch
+rename to meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools/0001-Use-portable-atomics-crate.patch
+diff --git a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
+similarity index 96%
+rename from meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
+rename to meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
+index a60ca11244..8f5c8c7b93 100644
+--- a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
++++ b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
+@@ -20,7 +20,7 @@ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ inherit cargo cargo-update-recipe-crates
+ inherit pkgconfig
+ 
+-DEPENDS += "udev libdevmapper libdevmapper-native clang-native"
++DEPENDS += "udev libdevmapper libdevmapper-native llvm-native"
+ 
+ export LIBCLANG_PATH = "${STAGING_LIBDIR_NATIVE}"
+ export BINDGEN_EXTRA_CLANG_ARGS = "${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS} --target=${TARGET_SYS}"
+-- 
+2.34.1
+
 
