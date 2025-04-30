@@ -1,96 +1,115 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <alistair23@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1DC3CC369DC
-	for <webhook@archiver.kernel.org>; Wed, 30 Apr 2025 22:04:46 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web10.7100.1746050678569512969
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 57B9BC369D9
+	for <webhook@archiver.kernel.org>; Wed, 30 Apr 2025 22:55:16 +0000 (UTC)
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.web11.7898.1746053714479315555
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Apr 2025 15:04:38 -0700
+ Wed, 30 Apr 2025 15:55:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=HBKaPvZs;
- spf=pass (domain: smile.fr, ip: 209.85.128.48, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-43d04ea9d9aso1392095e9.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Apr 2025 15:04:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=LZ/H2ubv;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: alistair23@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-739b3fe7ce8so481094b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Apr 2025 15:55:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1746050677; x=1746655477; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=z3wuRnXFBDstuSlAYMXBsBQCm/a61ENwrlIKQFDa6Bw=;
-        b=HBKaPvZscf5GLJoNw+0K5tJrUqPumN1BXul9ZVu2LkYvGOd6+dXifodPKTTURRn+Tl
-         BYnsImSnIKYs8KIdYXRt1GnDsrbsr6MgzupyD51RkACXONo0hwc/d72ao6VCs/NbcFFP
-         6VTc58BKwxL0dLx/EUsO47v52nuYVcTbDIIP0=
+        d=gmail.com; s=20230601; t=1746053712; x=1746658512; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=awn8qM6fZArLBLBtebP3dKZeOJ/gbFWCysquETFoLFs=;
+        b=LZ/H2ubvxB6oFVFuAHKlPztly48Ng5qYvEUps/vZiJ4tMF1bwxZ49rZE8IuIMvRqmG
+         3aqWaUj6slJm3cOfr8AwYq/eQC/mpVN0ZhyaafXY3Sb44FvhATJ1sgBJaCBUAtuZKxd7
+         cxf+RfNoQHbsUr4X2ioQkxuFvNYnamcLOzNgcFV410J8xrwgJ5Tw3/TU/Oy7xz4Dvy3l
+         Z8uySr1jljC1VLJsT5O4eoCvQuvHkgCdcke0skDS691y6fbhtVfiwpkJPxUHwmZC3riF
+         CE1FAn320I6IEcTaZ8eCiM0YyPJFT2a/e2eAufxcfgz1yassUhc3eSK430vnaKzdMOh+
+         Ps3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746050677; x=1746655477;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=z3wuRnXFBDstuSlAYMXBsBQCm/a61ENwrlIKQFDa6Bw=;
-        b=LML6yIIkN+hJ8nt42QQqddFOHlC2VS1auIppz4Yys+aKJifjP3/qgkYcfkiysn71hc
-         QEN/bZa1oVj6owZKHqdXONpEOXzrmav8YkRSId4Dp5kYWuNmUypk6faSIa4JZ7O3NG9q
-         KITeFE/GZEUDpIngc2rQZG7SEkDNTncsP8kI9EbE9PRj8hsKLAEpHZDX4JGuDCxvyRDD
-         rrzHj2X1PQzS0xkg/o7h9jpJ9XyJS25JoDJKk4X8E3PhyP35Xax/AzLX8vCVF3nfWItL
-         +becqAmPrjk173UrrVhCOLiljEir+Ku8xwcCAqhOLB3nzOk9yGmVKd5gpELoiJ05W6VU
-         ekEQ==
-X-Gm-Message-State: AOJu0YxpvymuicOHXxWLG5UobHWLsuW0HApgQWA8enBGqxo3vB2yTw2e
-	NReMWFji5eYyCrkLq+7YmJN8CnuXeOeZpiFW73W/JJzwiOdWyiY0YbGFPzWtVMsI4E/NNWL9mTM
-	P
-X-Gm-Gg: ASbGnct0mWc1Et+D0dFJd+AL6p7c2jraU6PoAZNBN9Oa8mjRvPbPNu5kFXoc6XD74Kf
-	mkWcLtih6IPU+jqh60eGiYyN/A0l8A4trn5YITO5ne9H5xxMebMij4NEkj8hpgSNMrk+yeevgbt
-	w4q7KS47nfiwEswCO5/CskJK47X5fw7nq56q04NG8vrgG9EQMhquMmVHIUAHc9sXEvFrP/RFNEi
-	n7A55RkP3YPYedBY/I91a63vWEUQs1mhoB/PwR3OHXn/qPHzu8rq4KR38RDkMSGa8D2bVigEt2n
-	aBTm3MHlC8Uowu52njE102ecmaeoWPSSikJqSvjULCzy6iQPVNiKEiEQBrE30esJP2kFaUTmcQX
-	TJrMdHaWNWFlxaFIQnp58XzZ839gS3GWIyt8zdJf2yhjFi08M
-X-Google-Smtp-Source: AGHT+IGB26WVT4q08XTopOJ6+NBM6W4vwZ3GG9/lRTINHveLe80CPqWLdSwrwxoywpz2NOYovntGjw==
-X-Received: by 2002:a05:600c:a4c:b0:43d:8ea:8d80 with SMTP id 5b1f17b1804b1-441b64edb23mr7123515e9.5.1746050676676;
-        Wed, 30 Apr 2025 15:04:36 -0700 (PDT)
-Received: from P-ASN-ECS-830T8C3.home (2a01cb001331aa0017b58d8bf04048c3.ipv6.abo.wanadoo.fr. [2a01:cb00:1331:aa00:17b5:8d8b:f040:48c3])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-441b61c4db2sm6172175e9.36.2025.04.30.15.04.35
+        d=1e100.net; s=20230601; t=1746053712; x=1746658512;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=awn8qM6fZArLBLBtebP3dKZeOJ/gbFWCysquETFoLFs=;
+        b=bWWW+cWxgl//GkW6ZdaXZBWo8oIcDKFcfrAI2Y6bTvaDDK311PDH5lMEFcQagBbZ/R
+         7pIHGepm1hf8BsSAlKTZjdPX9MwITdwsPy57aAJfyezbYJX2hqI0zmfIkPEZDJCrq0cx
+         OByNmQX6QxRXxgx/9twuU8JSvu/H9dGpTJ8t43XRxGJ9Rw8kVnNwlV3+600laTt+HGVs
+         6uirMWnWiaeyDWKiEgEHNPI9e/6UPol+eFUqvtfTgH5amihBpXoi/qNVQt6gV2DNiM8g
+         ww4o5l1uNzlUZpGzJMR/LvDSJA05KYLafDdu6NmGVnT72MCW02GnP6+LMzTvdnw4Fu2d
+         9wXg==
+X-Gm-Message-State: AOJu0Yz/idevpb4dlJD7KixY2P9HprkVz1jZp6s4s3dJgtx/RMo6V7dt
+	6kV9VSrrcKtUkYmsGG/Zrvhr+LuSjLfStNwaJwMGWDvBO/Qfe5ELQzqocA==
+X-Gm-Gg: ASbGncvKYvyXv5AldwXwdksz0YK0talCTnm6fRTrT9gGegic1cOAgG8yCZyBx84p2IM
+	6mQIEfVrOZFQ3l/t34ilrFrEskFce7sglS2I+oH4mSKF0KQl5Fo1GOIgGiXjglyTzJ1xmC4XRee
+	IijKGs4FL2WoifblXH68IVA/E0ORVLTrv2tVyaq98nYuCKi98oIySoxXIF8EIi5yEV4FMv8lLYJ
+	5rt2mjUFdXLswE6GNkN1KBL3z/vmkLqiKkVWiPVa54oY8ucYyYWhvVPzSQ9Qs3cLK08J/AEm7bO
+	/QzHMe0CF0PG/bTGgs03AdTmMCJ1Dgn7mToAzSBRnBu8TzsL5awImOkYCxXhEmq+s4x1LJaEQIZ
+	5bSreN5YDHVVfo8wNT9irGJSfpINL6feHn1fryU0wsstpVw==
+X-Google-Smtp-Source: AGHT+IGz9wnDezVSNNzvU7q1OGxSqGUIPVn01/mV0UE9ZWVlLLhxdIDgHtStN+A8HocMdpoewgBGWg==
+X-Received: by 2002:a05:6a21:8ccb:b0:1f5:591b:4f73 with SMTP id adf61e73a8af0-20a89325382mr8021956637.34.1746053712260;
+        Wed, 30 Apr 2025 15:55:12 -0700 (PDT)
+Received: from toolbx.alistair23.me (2403-580b-97e8-0-82ce-f179-8a79-69f4.ip6.aussiebb.net. [2403:580b:97e8:0:82ce:f179:8a79:69f4])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b15faded634sm11404372a12.73.2025.04.30.15.55.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Apr 2025 15:04:35 -0700 (PDT)
-From: Yoann Congal <yoann.congal@smile.fr>
+        Wed, 30 Apr 2025 15:55:10 -0700 (PDT)
+From: Alistair Francis <alistair23@gmail.com>
+X-Google-Original-From: Alistair Francis <alistair.francis@wdc.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-oe][PATCH 3/4] reproducibility: mark apitrace as known non-reproducible
-Date: Thu,  1 May 2025 00:04:00 +0200
-Message-Id: <20250430220401.4149372-3-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250430220401.4149372-1-yoann.congal@smile.fr>
-References: <20250430220401.4149372-1-yoann.congal@smile.fr>
+Cc: alistair23@gmail.com,
+	Alistair Francis <alistair.francis@wdc.com>
+Subject: [meta-oe][PATCH] blktests: Initial commit
+Date: Thu,  1 May 2025 08:54:49 +1000
+Message-ID: <20250430225449.194437-1-alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 30 Apr 2025 22:04:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117264
+ <openembedded-devel@lists.openembedded.org>; Wed, 30 Apr 2025 22:55:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117266
 
-From: Yoann Congal <yoann.congal@smile.fr>
+Add support for building the Linux blktests [1] into a guest image.
 
-apitrace packages are not reproducilble.
+Once booted the tests can be run with commands like this:
 
-Relevant logs:
-- https://autobuilder.yoctoproject.org/valkyrie/#/builders/87/builds/42/steps/32/logs/stdio
-- https://valkyrie.yocto.io/pub/repro-fail-openembedded/meta-oe/oe-reproducible-20250426-pazz3nt5/packages/diff-html/#reproducibleA-tmp---reproducibleA-tmp-deploy---reproducibleA-tmp-deploy-deb---reproducibleA-tmp-deploy-deb-core-------reproducibleA-tmp-deploy-deb-core-----apitrace_--.----.--git------fc--bb-r-_amd--.deb
+```shell
+cd /usr/blktests/; NVMET_TRTYPES=tcp ./check nvme/062
+```
 
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+1: https://github.com/osandov/blktests
+
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- meta-oe/conf/include/non-repro-meta-oe.inc | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-kernel/blktests/blktests.bb | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/blktests/blktests.bb
 
-diff --git a/meta-oe/conf/include/non-repro-meta-oe.inc b/meta-oe/conf/include/non-repro-meta-oe.inc
-index 5c8fc30052..ff93db3a21 100755
---- a/meta-oe/conf/include/non-repro-meta-oe.inc
-+++ b/meta-oe/conf/include/non-repro-meta-oe.inc
-@@ -1,6 +1,8 @@
- # List of known non-reproducible package of the meta-oe layer
- # Please keep this list sorted
- KNOWN_NON_REPRO_META_OE = " \
-+    apitrace \
-+    apitrace-dbg \
-     asio-dbg \
-     asio-ptest \
-     asio-src \
+diff --git a/meta-oe/recipes-kernel/blktests/blktests.bb b/meta-oe/recipes-kernel/blktests/blktests.bb
+new file mode 100644
+index 0000000000..2fb6db9184
+--- /dev/null
++++ b/meta-oe/recipes-kernel/blktests/blktests.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "Linux kernel block layer testing framework"
++DESCRIPTION = "blktests is a test framework for the Linux kernel block layer and storage stack. It is inspired by the xfstests filesystem testing framework."
++DEPENDS = "gnutls keyutils glib-2.0 libnl"
++RDEPENDS:${PN} += " bash coreutils gawk util-linux fio"
++LICENSE = "GPL-3.0-or-later"
++LIC_FILES_CHKSUM = "file://LICENSES/GPL-3.0;md5=d32239bcb673463ab874e80d47fae504"
++
++SRCREV = "9aa2023312bfcdd6b31c24b6e4a4a5c2d4f870d2"
++SRC_URI = " \
++	git://github.com/osandov/blktests.git;nobranch=1;protocol=https \
++	"
++
++S = "${WORKDIR}/git"
++
++inherit autotools-brokensep
++
++do_configure[noexec] = "1"
++
++FILES:${PN} = "/usr/blktests/*"
+-- 
+2.49.0
+
 
