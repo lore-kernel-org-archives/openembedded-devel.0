@@ -1,177 +1,93 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C769C369DC
-	for <webhook@archiver.kernel.org>; Wed, 30 Apr 2025 13:11:21 +0000 (UTC)
-Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com [209.85.167.47])
- by mx.groups.io with SMTP id smtpd.web10.16552.1746018678117620597
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E9DFC369D9
+	for <webhook@archiver.kernel.org>; Wed, 30 Apr 2025 13:30:41 +0000 (UTC)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.web10.17024.1746019752259878147
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Apr 2025 06:11:18 -0700
+ Wed, 30 Apr 2025 06:29:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Va7cQ2XB;
- spf=pass (domain: gmail.com, ip: 209.85.167.47, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-54c090fc7adso7654128e87.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Apr 2025 06:11:17 -0700 (PDT)
+ dkim=pass header.i=@amarulasolutions.com header.s=google header.b=MISxe3e6;
+ spf=pass (domain: amarulasolutions.com, ip: 209.85.218.44, mailfrom: dario.binacchi@amarulasolutions.com)
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-ace3b03c043so1157587266b.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Apr 2025 06:29:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1746018676; x=1746623476; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=S5PXiIU09iqGvyeNVwSaU/r/mew6pXLT/Vrk/PUJI6Q=;
-        b=Va7cQ2XB3N5qA74If/jxvezC6qcTzkvpCn1XYU1Cvui3KXQ6wmD6XubJQH757CGtwl
-         lN6uE2FQJ24DkrLPn2YFtQv62HDotC+5ppITfa7iL//HwniLkCfO2zCAw9rfUWrviLIq
-         /0B3S1Id0M28cvKz7CwYFNi4foCxFoyrWt6bqgt2NgH9Zp6LUwrQQbkB1PdzQN3PY4FT
-         k0kaqQy/ZY0YDj/5l5DsZhMPM1OwsFyRVQ/ld4g+Pxrpwt97mdGUteV9f59VKFsOXpho
-         BjgOwtntmXLFdxIhiElRJgjT5ewrQvkYFDyYN0oCmU0fjTAJewYqehac9I+ARGrfHtfv
-         wpxQ==
+        d=amarulasolutions.com; s=google; t=1746019750; x=1746624550; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=c9IhtD7dQmCzuGb7gaDEnp9+NM2iipJ4aQyqEk0Oh0g=;
+        b=MISxe3e6g/o7CZgC3EcPAKjDP0MmozbcUks4Ng9Z93TqbOMHFySzkceZPKdkihVlk7
+         6+kc+2TUXeny5YRXcY+Ng0hU6mVxsqY7UeB+PStyW8WBuwbtE1wAaX/liNMz/0tjIQHw
+         9jbyu+hd2px6utcWgJKlmqOer6i267RZcxnaA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746018676; x=1746623476;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=S5PXiIU09iqGvyeNVwSaU/r/mew6pXLT/Vrk/PUJI6Q=;
-        b=S57lm49WyqydhpMNON6HISmS3iTqY/LySNsS6tySZQzXtKAmoIqPWqKKz9u70ntr1v
-         246XsMTNcLVQHSvChuKYcp43rrr+tlDFwFS09lHeWhUdLoGzgCH99IAM05KvOiKv2Dmw
-         P2nFsIVNCACV2iCpF7z4hKBdzm2Fwp25h+6MynYUlsY41YZH7vVko09NPuLGzs3Orx64
-         jCrkXn1QX3W3Cou9tQJLwuLSQdQxvJorgGE0V4qgKhMWWjF5of5HZtUQzQ02Ay/U5FP6
-         Ao8xhl0L1u4byYhhDCd931AbY73NpJr/ShM0cKwLgNRTriRXVNY35TpEXUWkO0OxY80x
-         BfuA==
-X-Gm-Message-State: AOJu0YxeN+BuGMEE0w5rdnU2YXpkunnF9VzeYuiT+FZMQWf8dNs9vLCN
-	GX7WUzL7sXThXN5tgRedtmPa9KONJN0CUM4K3r7Hy00UlLL0wMG4eUkxejGUfPkTzw1kTBX2NV3
-	Fe/oXcqXYcHaStOMoRgMo0zaZpfg=
-X-Gm-Gg: ASbGncvvUfS53+YeOmB7P1JlFDax740/uyVSifBjGKNH9AvIHwHoChMkcbLvQ+pZZn3
-	rklVhU94HEi07jHYq0CZjIasWazm6iWbviRvc92I8zp25TO6eXje6PNDKPfmbqg6BkDTUhQZNXL
-	rGHIHwqrR4t4fCqPmHTy/Uy3aw
-X-Google-Smtp-Source: AGHT+IH8OeNtbmXRgfWVxarrsgD0z03PbLKKMQoT5/b1mr6YjxinDIuWnSU0M9abJt2Uh8aO7OJy6SKJUlzc9CXgpLs=
-X-Received: by 2002:ac2:4c48:0:b0:54e:a262:c960 with SMTP id
- 2adb3069b0e04-54ea3355b32mr1062677e87.20.1746018675538; Wed, 30 Apr 2025
- 06:11:15 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1746019750; x=1746624550;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=c9IhtD7dQmCzuGb7gaDEnp9+NM2iipJ4aQyqEk0Oh0g=;
+        b=KHzqXtn4VzChFpF5F3f+rUuyYLNzXicZUi8181GWt7JtOxh8dPcQM1xzrK51AUj2tO
+         zuUtgOf/XKcozkAPTxYH9oZJ0a4XWAJlXd6dgkzX6M2UYM9/gUtxH2bVzRoXmfLrSMjK
+         m120GiMPYn1LCzUOTDaTBHCQDVRoHaQ+wSvLGzXo2KeOQW1e3VN+RwbSkhwm5qy87k75
+         Pceucz0VtdE6aCGXQl5p9LDDW90kwbCpmCdYq1w9me4LLH4geJBwfRWo7BB4uR3bDOnR
+         Hp1QGiQzieb9a1HeLN23mwCJ9nFZAr4C3+KNo45O24/fx2WDjw/fcNE+4pAkuzroodLs
+         rdpg==
+X-Gm-Message-State: AOJu0YzF5EBGHyD75nPtLsJx/x1WiLU0+XFETHaKVEUnGBl6FBJGuTXI
+	B2NhB/rD2qhJLaMkN6MmicVrR+u+nh45b5tHQWUJwiyEVwItmDbFXuYvNPMZrAtBJk0mzZH5g2b
+	I
+X-Gm-Gg: ASbGnctKGHUwkECe3WjRqQcHYytKHwbmDEeawsWCTHpz8tei5aK/oDipCRMhDJ/sVpV
+	Wo4apvXk4iXOdLPBcE7qG5m3710+Sfb0BBxluEmKhSuXCSh8QXP8pHBtKBz5HbFl/uzcaR70tbV
+	5Gjt6NmgWO2DAuzei8bF2cogGE9o56NIZQclSKCZBsBvyJ7zyhOaDjMSF1/w4HvdxvW5jX81waj
+	VsK/Hc2rzY9Zb3bpw7BEtNNPAN8ik1VdQE01Nn7LIPS/gtBBl5jaCgqGka03g8ygjfJnCzVNZan
+	Q0GJou8PsKb28Gq+8d7ez+9uIWzrP/RPWcBuwg40dXnVRjbdkca8vSTWXjkzYPYdfm9YP4rAl4a
+	BgnSx
+X-Google-Smtp-Source: AGHT+IENpfoRzAxsb9GgYb+xa22Qo4bBzlrI9kQry7pc9CauGxldjt4FwEE+9AViVEv+iHnqbijpQQ==
+X-Received: by 2002:a17:907:268d:b0:aca:cde4:fac1 with SMTP id a640c23a62f3a-acedc613a62mr372390166b.31.1746019750214;
+        Wed, 30 Apr 2025 06:29:10 -0700 (PDT)
+Received: from dario-ThinkPad-T14s-Gen-2i.. ([2.196.42.66])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-acecf27a79esm224710066b.24.2025.04.30.06.29.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 30 Apr 2025 06:29:09 -0700 (PDT)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: linux-amarula@amarulasolutions.com,
+	Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Subject: [meta-filesystems][PATCH] ufs-utils: upgrade 4.13.5 -> 6.13.11
+Date: Wed, 30 Apr 2025 15:29:06 +0200
+Message-ID: <20250430132906.2800391-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250425002624.1552609-1-raj.khem@gmail.com>
-In-Reply-To: <20250425002624.1552609-1-raj.khem@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 30 Apr 2025 15:10:58 +0200
-X-Gm-Features: ATxdqUGqNEi-b1h2gYll5mPlUmE_QGUDk6dz0oJ3uDGDySRba1SpmymAOamsPQI
-Message-ID: <CA+chaQdNRDgj_tBjuHwQz_zO1Vw9zDdVGyT4Kb_9OLxWkR5okg@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-posix-ipc: switch to PEP-517
- build backend
-To: raj.khem@gmail.com, "gudni.m.g@gmail.com" <gudni.m.g@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 30 Apr 2025 13:11:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117255
+ <openembedded-devel@lists.openembedded.org>; Wed, 30 Apr 2025 13:30:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117256
 
-Did anyone see build failure with this like:
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+---
+ .../ufs-utils/{ufs-utils_4.13.5.bb => ufs-utils_6.13.11.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-filesystems/recipes-utils/ufs-utils/{ufs-utils_4.13.5.bb => ufs-utils_6.13.11.bb} (93%)
 
-DEBUG: Executing shell function do_compile
-* Getting build dependencies for wheel...
-/usr/lib/ld-linux-aarch64.so.1: No such file or directory
-Traceback (most recent call last):
-  File "TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2=
-.0/recipe-sysroot-native/usr/lib/python3.13/site-packages/pyproject_hooks/_=
-in_process/_in_process.py",
-line 389, in <module>
-    main()
-    ~~~~^^
-  File "TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2=
-.0/recipe-sysroot-native/usr/lib/python3.13/site-packages/pyproject_hooks/_=
-in_process/_in_process.py",
-line 373, in main
-    json_out["return_val"] =3D hook(**hook_input["kwargs"])
-                             ~~~~^^^^^^^^^^^^^^^^^^^^^^^^
-  File "TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2=
-.0/recipe-sysroot-native/usr/lib/python3.13/site-packages/pyproject_hooks/_=
-in_process/_in_process.py",
-line 143, in get_requires_for_build_wheel
-    return hook(config_settings)
-  File "TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2=
-.0/recipe-sysroot-native/usr/lib/python3.13/site-packages/setuptools/build_=
-meta.py",
-line 334, in get_requires_for_build_wheel
-    return self._get_build_requires(config_settings, requirements=3D[])
-           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2=
-.0/recipe-sysroot-native/usr/lib/python3.13/site-packages/setuptools/build_=
-meta.py",
-line 304, in _get_build_requires
-    self.run_setup()
-    ~~~~~~~~~~~~~~^^
-  File "TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2=
-.0/recipe-sysroot-native/usr/lib/python3.13/site-packages/setuptools/build_=
-meta.py",
-line 320, in run_setup
-    exec(code, locals())
-    ~~~~^^^^^^^^^^^^^^^^
-  File "<string>", line 23, in <module>
-  File "TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2=
-.0/posix_ipc-1.2.0/build_support/discover_system_info.py",
-line 409, in discover
-    d["QUEUE_PRIORITY_MAX"] =3D sniff_mq_prio_max()
-                              ~~~~~~~~~~~~~~~~~^^
-  File "TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2=
-.0/posix_ipc-1.2.0/build_support/discover_system_info.py",
-line 238, in sniff_mq_prio_max
-    if max_priority < 0:
-       ^^^^^^^^^^^^^^^^
-TypeError: '<' not supported between instances of 'str' and 'int'
+diff --git a/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_4.13.5.bb b/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_6.13.11.bb
+similarity index 93%
+rename from meta-filesystems/recipes-utils/ufs-utils/ufs-utils_4.13.5.bb
+rename to meta-filesystems/recipes-utils/ufs-utils/ufs-utils_6.13.11.bb
+index 7126684e6126..a6cacdc3c082 100644
+--- a/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_4.13.5.bb
++++ b/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_6.13.11.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ 
+ BRANCH ?= "dev"
+ 
+-SRCREV = "18c0a8454ca1cf8969170049f8c628d88627beec"
++SRCREV = "538b147481ee0995afa3dc57443efd4366acdeab"
+ 
+ SRC_URI = "git://github.com/westerndigitalcorporation/ufs-utils.git;protocol=https;branch=${BRANCH} \
+           "
+-- 
+2.43.0
 
-ERROR Backend subprocess exited when trying to invoke
-get_requires_for_build_wheel
-WARNING: TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.=
-2.0/temp/run.do_compile.2736023:168
-exit 1 from 'nativepython3 -m build --no-isolation --wheel --outdir
-TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2.0/dist
-TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2.0/posix=
-_ipc-1.2.0'
-WARNING: Backtrace (BB generated script):
-
-I get it reliably on ubuntu-22.04 jenkins builders, but cannot
-reproduce it locally (with ubuntu 25.04, 22.04 nor gentoo), so I'm
-wondering what's going on before this gets backported to walnascar,
-styhead, scarthgap as requested by Gudni.
-
-I'll try to get access to jenkins workspace to see what was trying to
-use /usr/lib/ld-linux-aarch64.so.1 there.
-
-Regards,
-
-
-
-
-On Fri, Apr 25, 2025 at 2:26=E2=80=AFAM Khem Raj via lists.openembedded.org
-<raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.=
-bb b/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb
-> index 29e1b35122..b3da09c35b 100644
-> --- a/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb
-> @@ -9,4 +9,4 @@ UPSTREAM_CHECK_PYPI_PACKAGE =3D "${PYPI_PACKAGE}"
->
->  SRC_URI[sha256sum] =3D "b7444e2703c156b3cb9fcb568e85d716232f3e78f04529eb=
-c881cfb2aedb3838"
->
-> -inherit setuptools3 pypi
-> +inherit pypi python_setuptools_build_meta
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#117120): https://lists.openembedded.org/g/openembedde=
-d-devel/message/117120
-> Mute This Topic: https://lists.openembedded.org/mt/112443744/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
