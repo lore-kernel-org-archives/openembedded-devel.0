@@ -1,170 +1,185 @@
-Return-Path: <peter.kjellerstedt@axis.com>
+Return-Path: <thomas.noack@iris-sensing.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 60166C369D9
-	for <webhook@archiver.kernel.org>; Wed, 30 Apr 2025 11:47:50 +0000 (UTC)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com (EUR05-AM6-obe.outbound.protection.outlook.com [40.107.22.84])
- by mx.groups.io with SMTP id smtpd.web11.14983.1746013661501354858
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90133C369D9
+	for <webhook@archiver.kernel.org>; Wed, 30 Apr 2025 12:11:00 +0000 (UTC)
+Received: from FR6P281CU001.outbound.protection.outlook.com (FR6P281CU001.outbound.protection.outlook.com [52.101.171.107])
+ by mx.groups.io with SMTP id smtpd.web10.15358.1746015052303788884
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Apr 2025 04:47:41 -0700
+ Wed, 30 Apr 2025 05:10:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=a0tu0n9G;
- spf=pass (domain: axis.com, ip: 40.107.22.84, mailfrom: peter.kjellerstedt@axis.com)
+ dkim=pass header.i=@iris-sensing.com header.s=selector1 header.b=mHTBtOh5;
+ spf=pass (domain: iris-sensing.com, ip: 52.101.171.107, mailfrom: thomas.noack@iris-sensing.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=EK/MEXcwgZnByx1FKmIG+gAQKuMmOGVLyPIMifGBSspFQB0FuY4wHVDaRADYmYUNEtZ7+MEcGQdK3K0vHwjoa8lfR7QIbWenrBe+Nk8RHSa5gqXyEn4zx/EtLXsCggxdlmGQ3o9D2uzgZB17/Di/+Nc9T5BsbkQxSvqYwlwg7YzGgM3X/aigkBP+xPMLGAIEoWHy2BAK+PdzqnpjLcdZTQFglL0nnjisM/jdiD12CHc5YBk6pNGmZg9Wh5DTm4mHqMzZkoh29b6GuuTtc+aGo6Z0QuVSl4oqg4IsHbLM74l+aILEJcyeXF0vn40lshKISQLwPZMyzQzle4AUxywctw==
+ b=ZPANqR6g+rI7JwjIMk+V8vMhuzAqhDaqMwsxT86wt5pQFTpHqOYszwKC1RqpQ9dsfBM6wMNF2UYh4lzWTBTZ1oUKdN5eEMxydBSyhn8tf9kp1dORMUx9i+2bIlNAusRr+ZmXA3jTxDyh8YpntxRdpVli+efz86SUtgY8uE/I81qk2lxMg4NeS8LnYAvd3PCPgzP8icpnIqjuhevB+rsOPBoUBMafEAzYFIT9MmfUoWdA4sZaKS4EXWl0s8HdEezMO6iuAG4cuak+kbR7FHW8aqP2wgVWuSYoLvuAEldEYpVmmOXjQ4ftSTIWCNvankUcecZ/dzA/WnoRRrQ7H0t49w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yHzQQE7le00np605cadYyV4ueAr1vCfQsWtb6hb6wTQ=;
- b=yE5Hi6mLbRmOVvAsZeF3mOzyCFyTD78NeX9tVf4h7tb/nkn5X1sbStpHpIXVUGq0CkmIJ7KTf1hO0XUZrpTuZ6HBNC/MIvDQJIyDd3GGGlczy+ugPsuK7yVFmpQn3IonZuEbbqeb0NLr1sV8CmGSSOAK+R4yuj6MmDAcXxQAGjcop1CmyrB8lAse10/RzgE8cPY41UDMT1uV0mpdCS/Auv0IFEGK0PaLH/3tCSrvdLloYw75bkCEePnLRvd92GAKsESNPxnem9gF6XJMI62QaaKYfZBSRqsST5yeqS7pRHd49k5qL3rqeAA4pMSWWt0XCvaqzxtu3olbn/csupyD4A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
- header.from=axis.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
+ bh=Sp1q+GvVIWYHab3VvgsiZlmNV2uR3mUvFHztltJxRTE=;
+ b=DS2Ga/8WS4XsFzD8U+yggHKin22K7z4CbetskD4JZxOgQn7sCP+0IaoUkq6FmiIFlVGw7RoDuJ4gTkBCx/7N8eQurUbUSqbbbXuHfTK0GwXRtpdF2RyZn8ZEp9YHf+4sE9Lc9gNiQoT/648A4FDy+a8e5MK2BXCf9qkZbFhbX8P2coosrS0nVNBA1hai7+0MvC56zaiY62QJp80JgoV6D/VtSSzp6+ZGoRL5bjzHRb5dhVaGmGLLdCXeub7UEWaoW3ybVO4Z044Ktci+Q+uZUNAbBhHZk2xFeHn9ZD6poMLqgmxk/EMgdC90mLYYMKYPUs2CA347IucxB6qoT5Fa2Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=iris-sensing.com; dmarc=pass action=none
+ header.from=iris-sensing.com; dkim=pass header.d=iris-sensing.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iris-sensing.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yHzQQE7le00np605cadYyV4ueAr1vCfQsWtb6hb6wTQ=;
- b=a0tu0n9GutIgOzf2onOMX55ZR8JQl+3gEMwwYMxoAVPuBsD2ZGafOcnzMvkHMxllEJ58v+Ace/XKNWV59GAqgrCwUvF1iYJvBcUkYwjOiF8Z+6fwqEZv8GC9DRfiL2yvs9yXRBtrbfwLyNfwHUg33CsG9uV7/oZ5zj2N3dWLVLs=
-Received: from AS4P191CA0005.EURP191.PROD.OUTLOOK.COM (2603:10a6:20b:5d5::15)
- by AS4PR02MB8407.eurprd02.prod.outlook.com (2603:10a6:20b:51a::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8699.18; Wed, 30 Apr
- 2025 11:47:34 +0000
-Received: from AM3PEPF0000A791.eurprd04.prod.outlook.com
- (2603:10a6:20b:5d5:cafe::11) by AS4P191CA0005.outlook.office365.com
- (2603:10a6:20b:5d5::15) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.41 via Frontend Transport; Wed,
- 30 Apr 2025 11:47:34 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
- smtp.mailfrom=axis.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=axis.com;
-Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
- 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
- client-ip=195.60.68.100; helo=mail.axis.com; pr=C
-Received: from mail.axis.com (195.60.68.100) by
- AM3PEPF0000A791.mail.protection.outlook.com (10.167.16.120) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8699.20 via Frontend Transport; Wed, 30 Apr 2025 11:47:33 +0000
-Received: from SE-MAILARCH01W.axis.com (10.20.40.15) by se-mail02w.axis.com
- (10.20.40.8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Wed, 30 Apr
- 2025 13:47:32 +0200
-Received: from se-mail01w.axis.com (10.20.40.7) by SE-MAILARCH01W.axis.com
- (10.20.40.15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Wed, 30 Apr
- 2025 13:47:32 +0200
-Received: from se-intmail02x.se.axis.com (10.4.0.28) by se-mail01w.axis.com
- (10.20.40.7) with Microsoft SMTP Server id 15.1.2507.44 via Frontend
- Transport; Wed, 30 Apr 2025 13:47:32 +0200
-Received: from saur (saur.se.axis.com [10.92.3.10])
-	by se-intmail02x.se.axis.com (Postfix) with ESMTP id A923D98B
-	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Apr 2025 13:47:32 +0200 (CEST)
-Received: from saur.se.axis.com (localhost [127.0.0.1])
-	by saur (8.17.1/8.15.2) with ESMTPS id 53UBlWsW3001358
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Apr 2025 13:47:32 +0200
-Received: (from pkj@localhost)
-	by saur.se.axis.com (8.17.1/8.17.1/Submit) id 53UBlWlW3001357
-	for openembedded-devel@lists.openembedded.org; Wed, 30 Apr 2025 13:47:32 +0200
-From: Peter Kjellerstedt <pkj@axis.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-multimedia][walnascar][PATCHv2] meta-networking/README.md: Correct the branch for dependent layers
-Date: Wed, 30 Apr 2025 13:47:27 +0200
-Message-ID: <20250430114727.3001336-1-pkj@axis.com>
-X-Mailer: git-send-email 2.40.1
-MIME-Version: 1.0
+ bh=Sp1q+GvVIWYHab3VvgsiZlmNV2uR3mUvFHztltJxRTE=;
+ b=mHTBtOh5NVA3YTRKfxQjcJDAynZ1KFlK8JbNbrcUATJkgCF1u0TqxhtWTtt+vnIPh8QPzeyrCWk9DR1tZrnJ8NA9C0L0QJEcfZlL1ruo8VpaG7k1sC3jIq6Lt4bnEBEhr+y7BfPRIxij6lHGASDpqJxEA2GopghxVeFQczn89wlAZR+9xINC2lCMhhs/Fe6SH1oFZ08w1DO+oqWpN7zcCvvK4CyZVkXacn3aWm7MqXFzp5nvo7Q2mnLMUkn90asbiMM72M+3kRe5wBdfIBtkIX9604up2Nqhoge0ySw0N7dxHIO0dA2T8Cl6cdE5uGZf6YYNSZ/qywvoCdaOZ7I6BA==
+Received: from FR2P281MB0121.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10:11::7) by
+ FR5P281MB4927.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10:152::5) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8699.19; Wed, 30 Apr 2025 12:10:48 +0000
+Received: from FR2P281MB0121.DEUP281.PROD.OUTLOOK.COM
+ ([fe80::be21:ed94:e834:92d9]) by FR2P281MB0121.DEUP281.PROD.OUTLOOK.COM
+ ([fe80::be21:ed94:e834:92d9%5]) with mapi id 15.20.8699.019; Wed, 30 Apr 2025
+ 12:10:48 +0000
+From: Thomas Noack <Thomas.Noack@iris-sensing.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] sdbus-c++: Upgrade to 2.1.0 release
+Thread-Topic: [meta-oe][PATCH] sdbus-c++: Upgrade to 2.1.0 release
+Thread-Index: Adu5yILqKIvrVlGiQf2TAGRvkxgivQ==
+Date: Wed, 30 Apr 2025 12:10:48 +0000
+Message-ID: 
+ <FR2P281MB0121CBAFBE8CD25844976884B8832@FR2P281MB0121.DEUP281.PROD.OUTLOOK.COM>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iris-sensing.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: FR2P281MB0121:EE_|FR5P281MB4927:EE_
+x-ms-office365-filtering-correlation-id: 375146f3-d05e-4067-8c8e-08dd87e00b52
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|366016|376014|38070700018;
+x-microsoft-antispam-message-info: 
+ =?us-ascii?Q?paZhlCleBTEBEIApjMCx7Wcv9P1aX7YWGoC5Uz2PK86ngWdBmhFI3KpI0nh6?=
+ =?us-ascii?Q?hXqyE2mhsIDj+uqZqSpr/SrLp5V5z9F8q7pcJ1Ym1rZvscKFTGH8GljY3MHR?=
+ =?us-ascii?Q?G2mX9HY1snPrvU2z8qQWnL8PDVWWoqjc4eiY1qA0D+XUOOBQfIgonrvYlvZU?=
+ =?us-ascii?Q?F5Lug+b83BJx25FhABkLlEQbBHiW95LIehaFqHBkgCS1r40CDaNxUwmCy6W/?=
+ =?us-ascii?Q?3a7alf7N9gfCFTMo0NzJAj+BrmIkLSQXu2SSn+zagpAtP9e5oU9to97GwOFF?=
+ =?us-ascii?Q?p+ubIK/GY0jcIr0Tu6MuMTCAY7SBiM09Z/RzcKOiaKbLRcK/MAY2whEfecn5?=
+ =?us-ascii?Q?fWu3K3hQ0ZeIe05jhWbEikjhTdWR1quNm8299imwmkX9CTCCcu2M/mCOvpVS?=
+ =?us-ascii?Q?7AE0lGoS2OjptEd535hs/yOxnB85TUnJeGx6Sb3NAoVZh1hHsGhEeIGtKmTv?=
+ =?us-ascii?Q?Z8g/ijegNj75M0CgICiGf/5eXhnqknTGxwVaabBTbrh4ODB7eAZrH19qXRdz?=
+ =?us-ascii?Q?W7w7PUZRlhsQwICCZcweJkXLfDADZ4COmMAehorWpotRlCD+jmU7h7crkWHN?=
+ =?us-ascii?Q?1RW1vj/eK+SwJ0Ac5a3Gt6MJhU6aKia8fvALtX7cATEr8q5d+mIpdjtL/TkY?=
+ =?us-ascii?Q?W5uV43CvpET9dBlqwIPu9UTEyoMWvtQpglp5zw/lyLNqK5TmGO3cA/trME7e?=
+ =?us-ascii?Q?248gSAKgtNKo07qHND4sJgBTpoehEIYWMev2JXTZ20MvijxzlgQR6IpK7mhf?=
+ =?us-ascii?Q?CiMHjUanwfVYZxsWlH0wLr5p1NDSnmtJlemkMtmzCrXXEVE/rIMnyEpMK2cA?=
+ =?us-ascii?Q?8lA7lXQaCySiPBLWw5EnO1SahPsBQ0hS0Yj+0puU6A+KY0l08CP1dZAawqCs?=
+ =?us-ascii?Q?vxHZW3zZ+SIs6GqH12Lk+iq7nBdRjClJG/6n4EQGvcIHiu6riKCAd1kF2DfI?=
+ =?us-ascii?Q?w5J6TcG8pPhlZd/7+MUUI3D2Xo21FqxdrVvq9cL38Px6O2cQakkeh4UNgPX9?=
+ =?us-ascii?Q?g0EFIPoLBDd47HCG9V2tuqivhg25FWtx7nxzsp6Pylwhf8Am3i4EXrxT2kXo?=
+ =?us-ascii?Q?QsjNJcZZNb0rR866yDko6DIFsbSGMHYhWg3RYOFfvdku0h9oN/FnvovljdzQ?=
+ =?us-ascii?Q?IdlxHph2dkvseZHlFNawsRsdCp9VHNRTPOCY+eVZuDSH5rnj1WL0I+nhpaOv?=
+ =?us-ascii?Q?1zXujKJZxPJ6jouDsxKzzzGBXe00QjjvPZiCINAU7jg20HFo7ri9Fz8gYwJZ?=
+ =?us-ascii?Q?30Sx/SBIMqN//mY8SZPVjzTdquTsEaIv2hzxYzopADCK1G7XARbLu4Za5/Hy?=
+ =?us-ascii?Q?QeQCEnZfDcbJ+MzDaJRTA4Lotbfn0L4Q0XXDYHkj6W8nrDK13Mk5mWgovzij?=
+ =?us-ascii?Q?Fp3Tei0zsZSmLbzAPyIrV9hiJb93kxNs8XvQPY9ugUnJS5DG5wSfGim/1VIY?=
+ =?us-ascii?Q?gF5nnaQFHEZH7TIyZ+diyuR38w7DJ3r59fhmNBTgdtbjF0/PFdwRmg=3D=3D?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:FR2P281MB0121.DEUP281.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(38070700018);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?us-ascii?Q?naq8V8n7ZErJDMK57oVwwftwJj9ndZMsiWsOlG5zroE/SKUEdSeZTbFMID3S?=
+ =?us-ascii?Q?xcPyej1DvMxVLhSU9oVQhv2M35Je9e/b3aDNfHMR4KBP16C37efKcOL0Uojm?=
+ =?us-ascii?Q?VbaTvWsOEsPnjee9IWr2tHVHts8nNirjaqmIyQqHbpAQ6hCZ9FCqaRiP6Ofd?=
+ =?us-ascii?Q?QcJkF/7QL86fgYRYUwfOaykf9zC2StdUuwhqlSGeZdSjTPJz6ft46ba5DQNn?=
+ =?us-ascii?Q?L5H7MRKkEAehhSgxxxvIC5XqiPd5EcI7xgs4ha3IbnzYL3LQX4wFouENh6ro?=
+ =?us-ascii?Q?hi16mFmdMlTrMHBA0VwRWZRQ8HhXcA1TkDbipVk/pnw4BrY2A8lgBjgUEeKm?=
+ =?us-ascii?Q?wgaWmIuXCjdWRZEEXqjf9JXcYNrRzrGBrI/NkzWWjSzkzDWBzK3aNAjB7GKj?=
+ =?us-ascii?Q?37f4+0G6CNlzazmCpR0gXV3QNzoZktWDFK2PddqRqD6fbYeAo4S1LJ2qFbj4?=
+ =?us-ascii?Q?7RlZf+AYcefoRBHHJ45GqNE+cLh0EA7ECgZ0Uqvi0kDgp0ahCSfyVlpIdRkc?=
+ =?us-ascii?Q?Am5SDdWbdsuBWn/B22o221ouktVlRY/yMCvE4NdMxRPLrRIdjnkEFpN1y/qH?=
+ =?us-ascii?Q?1ngt9Yx7Dmoh8kxtz9wAN8NML38q88EcDDsC3WxKmet0r3J1zmP8R28t0u70?=
+ =?us-ascii?Q?5EZSKDyYf9jkBlI1G8U0f+6NDSIc3i/TDNjtlrYwuHHlVYvA9k/RJhBEcK2c?=
+ =?us-ascii?Q?Zmit8AgTiM0FV0Glt1uuuzexVbwZsyp7668GinqajXOYjXI4IS8DXJdN2qt3?=
+ =?us-ascii?Q?KYmQnubm9DzOUZiZT6xmFqbgJSDkiHtMS9WN44UyP0nj1/qhBotjAxsSoNbJ?=
+ =?us-ascii?Q?ElyG6vWK/BOa0U3akIfFvID651QPrd6g+bG8DFL9aBKl0Gcz6Son8icCMk1F?=
+ =?us-ascii?Q?wj6oZWk+Flg/gcjvwHisrZQUh4WLUI/9eapMmQWVsKbU0innN/h6YENd4CfS?=
+ =?us-ascii?Q?zouZKACTkaW6ooLk3VjI0Gj9Ur3nGBKpCeukdzVlv04cI655x/3LVNlUKOJj?=
+ =?us-ascii?Q?d8OqyTH30ZbAuObFEqn4pbF5WAY4EGGO2W8e1hhnvWIMsJltlc5kdrfQ6cZP?=
+ =?us-ascii?Q?D69P494t5wsnXZz3GBQZlHYNWgfOmZMbRC9sBET2xC+bwjKglus0CDT5ZfeA?=
+ =?us-ascii?Q?jlavaanHgNEwF0M8tfzM5aXl2BcCx1lcH2jQH25Leriodu/Gdzj+oXLdO3lF?=
+ =?us-ascii?Q?uOQU40oOiGRhhaZfnUKX6+VQWdO5tFPXw/xY4m3kGiFX0mwlUyDKmYeMq+FB?=
+ =?us-ascii?Q?Hi+OXTmNKScZKawswLhUMcKkFNDkk4oA2cLIn+S65TxWyU171xrBhifM4EO5?=
+ =?us-ascii?Q?hznxF6xuPe8FkvS5TtUVMzmS2LyLqjMQSbZymzJ/5ffVmdeKlbbngqbwPs+K?=
+ =?us-ascii?Q?DskcAY0wIKrGS7YPTi6nKUOtFDmEYJhp0I1rbcfueYg0cMIoeRTwT+xAFEJB?=
+ =?us-ascii?Q?yQbYHWZv4q+Vgo0N+pjL80lX4YetPqjGRar9gOqnHqnNK2TKrhn4qDhHB8C2?=
+ =?us-ascii?Q?dFarm2kYhmWo0OqGfawChqV2dgWTopvY0CqyqlqhFue3bcKJ2gjDj1r0z9bu?=
+ =?us-ascii?Q?pqy83EAIJ4YKI2UMnWnA7KoT4coifTcyGOXiYY11KVmuRdmMZY46JevK/J4c?=
+ =?us-ascii?Q?zg=3D=3D?=
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM3PEPF0000A791:EE_|AS4PR02MB8407:EE_
-X-MS-Office365-Filtering-Correlation-Id: c8e7c937-3e0c-484c-1bed-08dd87dccb73
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700013;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?qab3CGmRLMXM0lN9h9KedsYR9gpazobNN4iaIs6PlBaZSw+PDBxeq96xP9BD?=
- =?us-ascii?Q?XDUjZuygtBd2Fm7I4jDIgcSeo11VWVP6kOtfLBrLF6oCH/4H6A5GiZw6wuuP?=
- =?us-ascii?Q?JrnoOwxnCdy+5lyjdREwMEaMcBZYVTnDOjwBGJjj+QXIFNv2I0KYRyhc5uJB?=
- =?us-ascii?Q?A+aMTLsy6PDUSfjhgnC4fL+0vB3l9x9dIagTcR3QudCnvF8vHizTAA9nyQEx?=
- =?us-ascii?Q?LnIQoORdgONoYHDehAYqwygbU6cuO8ls8cJJURg5c8NvY1Q/DtOwn5srkdnF?=
- =?us-ascii?Q?hD5G4BUPLuBgdoCifN3G7exKdzdAc8QCEl0DcbcTyblMu16str6A4DFe8CsI?=
- =?us-ascii?Q?g9MA6JADzKV2v+PPBwEFVAmzX67LmqL1unbLAUXXZk5Fl7cxj0BaskPgbCxV?=
- =?us-ascii?Q?mYnh7kaT6pcWR8C3SkjS3AmWj6nSAQzW28eJISn350q/5KjG9mtyEwodB5lp?=
- =?us-ascii?Q?zV80GGyw4fPpkQcqvOgcdy8jKnplzOEcRzVbCuR0gLJ2NKvgKDWjAGT/ub+r?=
- =?us-ascii?Q?t83Kunl3l3yS9uBU2sXhjRmXLe4cvZ2bCd2X06NYnJqVG3YAB3MUAc23R06d?=
- =?us-ascii?Q?3HamsUnWJ9F/ZaomGx+cZ8tcSEeFRtFirJ3dl3bpM6XT4M1Kq+rVtVX5qCIj?=
- =?us-ascii?Q?HbPLXQNAoQgfUCN/Ta4R/11h3wFCIAfIHiX8wE/WdlHVfnxH33BWkyLssFiU?=
- =?us-ascii?Q?xlJTGCeCr+YYvalYftEBpq5b7mJau5s5nyf0AnhwZSPH/jAw9AunY/MHbyFf?=
- =?us-ascii?Q?nXG6Jjs2U1zTCTfbKh8jHaPJmMzMghJ+09Xd4x/RW6t9v6v0aouXTKJOckAV?=
- =?us-ascii?Q?xizIFJOIi81sLMAXck69TU8AWSzWeLgP6Z42AyIzUN/JvI0mZoP/pQStWTcb?=
- =?us-ascii?Q?FQ2dDMZY1BnHBN4C5LITFeEAiGY6xUCR73APFvzSWrgpYC2fTgcUtdmu1Lxn?=
- =?us-ascii?Q?I4kKAVjFPita91TDP01ao2/pfO1kDN1Id9ImzNg3L/N0C4Anl+FXy0lxXdIn?=
- =?us-ascii?Q?Y1ewfFsvgUf5YOcipnYso2P03W8CefZBaRd2REXCqSIR8IPjhhO18/cM69CK?=
- =?us-ascii?Q?qXG+To4h3IZmPEFwuHG3YzH2DAMiIMx8Gro8bcVPnnUMwZ4obI/6KKtVdv5a?=
- =?us-ascii?Q?WeHZgm0uz2EmDr4lrY0Bxw+Do5f7cZKzFRBPxNOy9dl2Z+5JHCBSD83UiIEq?=
- =?us-ascii?Q?c4ElfMM0U8gM1ZHuS4+Nu3+3/5QOlBKoa8kDhhC7SL++o+Qp9GsGFxhJ9k4e?=
- =?us-ascii?Q?XtYYR515oJPWj9QPclhizqvhXMkDPv7HSWT8jRJ5lCF6HyXRb34/b4sfpjhi?=
- =?us-ascii?Q?/Iyd83z3y0zTmMIYYi7aajjE1FNAPLxQ/e6LlpUfF/uTXGO5TOWJGy/kPoRx?=
- =?us-ascii?Q?TCnf9P6S0YXaJy1LPBDCDWw8qN/88tq12Lj+kpWmeNbJje9LOTP4nEd6hlJp?=
- =?us-ascii?Q?4+3u6hNe8jwX8pz8AgS9dqQiQ2FwfW++fmGKcHOetZUqpMEfu+LJJwgLk1TO?=
- =?us-ascii?Q?uE89LXKuC+ThSRLg0+e3EcInMVuLK8J94+Md?=
-X-Forefront-Antispam-Report: 
-	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013);DIR:OUT;SFP:1101;
-X-OriginatorOrg: axis.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Apr 2025 11:47:33.1936
+MIME-Version: 1.0
+X-OriginatorOrg: iris-sensing.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: FR2P281MB0121.DEUP281.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 375146f3-d05e-4067-8c8e-08dd87e00b52
+X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Apr 2025 12:10:48.8721
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c8e7c937-3e0c-484c-1bed-08dd87dccb73
-X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AM3PEPF0000A791.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR02MB8407
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 963f3913-ffae-43fd-856b-2dfd3f6604e3
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: KTbhl09kE/S9Lr4Wt7YHgyUyuL7nu9zAyBEHvyTlNBn+zIG0j+lFEo9PCL9qvs6cgKarYheu6h32L87yUDz+w8shuTTsuJ0Zme24SzrWIPc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: FR5P281MB4927
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 30 Apr 2025 11:47:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117251
+ <openembedded-devel@lists.openembedded.org>; Wed, 30 Apr 2025 12:11:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117252
 
-This was missed in commit 0d2d2d193a1619b6dbebaf335f1ef785478049e3.
 
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Signed-off-by: Thomas Noack <thomas.noack@iris-sensing.com>
 ---
+ .../{sdbus-c++-tools_2.0.0.bb =3D> sdbus-c++-tools_2.1.0.bb}      | 2 +-
+ .../sdbus-c++/{sdbus-c++_2.0.0.bb =3D> sdbus-c++_2.1.0.bb}        | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-core/sdbus-c++/{sdbus-c++-tools_2.0.0.bb =3D> sdbus=
+-c++-tools_2.1.0.bb} (88%)
+ rename meta-oe/recipes-core/sdbus-c++/{sdbus-c++_2.0.0.bb =3D> sdbus-c++_2=
+.1.0.bb} (97%)
 
-PATCHv2:
-* Added my Signed-off-by.
-* Removed unintentional Change-Id.
+diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_2.0.0.bb b/meta=
+-oe/recipes-core/sdbus-c++/sdbus-c++-tools_2.1.0.bb
+similarity index 88%
+rename from meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_2.0.0.bb
+rename to meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_2.1.0.bb
+index af112ced88..10704a6cd3 100644
+--- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_2.0.0.bb
++++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_2.1.0.bb
+@@ -8,7 +8,7 @@ inherit cmake
+=20
+ DEPENDS +=3D "expat"
+=20
+-SRCREV =3D "e62472b210d9e7f06a5e611c23471d414c99a99c"
++SRCREV =3D "0261d0ec60b68c1f0a6ec9acf63d1379f7d569f8"
+ SRC_URI =3D "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=3Dhttps=
+;branch=3Dmaster;subpath=3Dtools"
+=20
+ S =3D "${WORKDIR}/tools"
+diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.0.0.bb b/meta-oe/re=
+cipes-core/sdbus-c++/sdbus-c++_2.1.0.bb
+similarity index 97%
+rename from meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.0.0.bb
+rename to meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.1.0.bb
+index a3e7c9ab54..a81d94d2aa 100644
+--- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.0.0.bb
++++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.1.0.bb
+@@ -17,7 +17,7 @@ PACKAGECONFIG[with-tests] =3D "-DSDBUSCPP_BUILD_TESTS=3DO=
+N -DSDBUSCPP_INSTALL_TESTS=3D
+ DEPENDS +=3D "expat"
+=20
+ PV .=3D "+git"
+-SRCREV =3D "e62472b210d9e7f06a5e611c23471d414c99a99c"
++SRCREV =3D "0261d0ec60b68c1f0a6ec9acf63d1379f7d569f8"
+ SRC_URI =3D "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=3Dhttps=
+;branch=3Dmaster \
+            file://run-ptest"
 
- meta-networking/README.md | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/meta-networking/README.md b/meta-networking/README.md
-index ef7933e319..4f9a14b8ce 100644
---- a/meta-networking/README.md
-+++ b/meta-networking/README.md
-@@ -18,17 +18,17 @@ Dependencies
- This layer depends on:
-=20
- URI: git://git.openembedded.org/openembedded-core
--branch: Scarthgap
-+branch: walnascar
-=20
- For some recipes, the meta-oe layer is required:
-=20
- URI: git://git.openembedded.org/meta-openembedded
- subdirectory: meta-oe
--branch: Scarthgap
-+branch: walnascar
-=20
- URI: git://git.openembedded.org/meta-openembedded
- subdirectory: meta-python
--branch: Scarthgap
-+branch: walnascar
-=20
- Maintenance
- -----------
 
